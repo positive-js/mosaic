@@ -1,0 +1,41 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "es2015",
+        "allowUnreachableCode": false,
+        "declaration": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "importHelpers": true,
+        "lib": [
+            "dom",
+            "es6"
+        ],
+        "moduleResolution": "node",
+        "skipLibCheck": true,
+        "noImplicitAny": true,
+        "removeComments": false,
+        "sourceMap": true,
+        "typeRoots": [
+            "node_modules/@types"
+        ],
+        "types": [
+            "jasmine",
+            "node",
+            "uglify-js",
+            "webpack"
+        ]
+    },
+    "angularCompilerOptions": {
+        "genDir": "./compiled"
+    },
+    "exclude": [
+        "node_modules",
+        "dist"
+    ],
+    "include": [
+        "src/**/*.ts"
+    ],
+    "compileOnSave": false,
+    "buildOnSave": false
+}

@@ -1,5 +1,10 @@
-# dependencies
+# folders
 /node_modules
+coverage/
+dist/
+dist-dll/
+tmp/
+temp/
 
 # IDEs
 /.idea
@@ -7,4 +12,10 @@
 
 # misc
 .DS_Store
+Thumbs.db
 npm-debug.log
+*~
+*.sw[mnpcod]
+*.log
+*.tmp
+*.tmp.*

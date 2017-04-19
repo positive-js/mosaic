@@ -1,0 +1,86 @@
+{
+    "name": "@ptsecurity/mosaic",
+    "version": "0.0.1",
+    "description": "Components for Angular",
+    "homepage": "https://github.com/positive-js/mosaic",
+    "bugs": "https://github.com/positive-js/mosaic/issues",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/positive-js/mosaic.git"
+    },
+    "engines": {
+        "node": ">= 6 < 7",
+        "npm": ">3 <4"
+    },
+    "dependencies": {
+        "@angular/animations": "4.0.2",
+        "@angular/common": "4.0.2",
+        "@angular/compiler": "4.0.2",
+        "@angular/core": "4.0.2",
+        "@angular/platform-browser": "4.0.2",
+        "core-js": "2.4.1",
+        "rxjs": "5.3.0",
+        "reflect-metadata": "0.1.10",
+        "zone.js": "0.8.5"
+    },
+    "devDependencies": {
+        "@types/node": "7.0.13",
+        "@types/jasmine": "2.5.47",
+        "@types/source-map": "0.5.0",
+        "@types/uglify-js": "2.6.28",
+        "@types/webpack": "2.2.15",
+        "@types/rx": "4.1.1",
+        "@types/reflect-metadata": "0.0.5",
+
+        "conventional-changelog": "1.1.3",
+        "husky": "0.13.3",
+
+        "jasmine-core": "2.5.2",
+        "karma": "1.6.0",
+        "karma-chrome-launcher": "2.0.0",
+        "karma-firefox-launcher": "1.0.1",
+        "karma-sauce-launcher": "1.1.0",
+        "karma-coverage": "1.1.1",
+        "karma-jasmine": "1.1.0",
+        "karma-sourcemap-loader": "0.3.7",
+
+        "protractor": "5.1.1",
+
+        "less": "2.7.2",
+        "stylelint": "7.10.1",
+        "stylelint-config-standard": "16.0.0",
+
+        "ts-node": "3.0.2",
+        "tslint": "5.1.0",
+        "tslint-no-unused-var": "0.0.6",
+        "tslint-eslint-rules": "4.0.0",
+        "typescript": "2.2.2",
+
+        "awesome-typescript-loader": "3.1.2",
+        "style-loader": "0.16.1",
+        "css-loader": "0.28.0",
+        "less-loader": "4.0.3",
+        "file-loader": "0.11.1",
+        "url-loader": "0.5.8",
+
+        "html-webpack-plugin": "2.28.0",
+        "nyan-progress-webpack-plugin": "1.2.0",
+        "add-asset-html-webpack-plugin": "1.0.2",
+
+        "webpack": "2.4.1",
+        "webpack-dev-server": "2.4.2",
+        "webpack-merge": "4.1.0"
+    },
+    "scripts": {
+
+        "linter:styles": "stylelint --syntax less \"./**/*.less\"",
+
+        "build:dll": "webpack --config config/webpack/webpack.dll.js",
+
+        "server:dev": "webpack-dev-server --config config/webpack/webpack.dev.js",
+        "server:dev:comp-button": "npm run server:dev -- --env.component button",
+
+        "precommit": "npm run linter:styles"
+    }
+}

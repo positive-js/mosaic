@@ -1,0 +1,10 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: node:6
+    steps:
+      - checkout
+      - run:
+          name: Install node modules
+          command: npm i

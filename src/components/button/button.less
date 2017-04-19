@@ -1,0 +1,23 @@
+@button-min-width: 50px;
+@button-min-height: 28px;
+@button-radius: 2px;
+
+.mc-button {
+    min-width: @button-min-width;
+    min-height: @button-min-height;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    outline: none;
+    border: 0;
+    border-radius: @button-radius;
+    color: cadetblue;
+    text-decoration: none;
+    text-align: center;
+    white-space: nowrap;
+
+    &:focus {
+        outline: none;
+    }
+}

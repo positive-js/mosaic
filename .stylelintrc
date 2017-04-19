@@ -1,0 +1,21 @@
+{
+    "extends": "stylelint-config-standard",
+    "rules": {
+        "indentation": [4, {
+            "message": "4 spaces must use! :P"
+        }],
+        "max-empty-lines": 3,
+        "max-line-length": 120,
+        "no-duplicate-selectors": true,
+        "no-descending-specificity": true,
+        "rule-empty-line-before": ["always", {
+            "ignore": ["after-comment"]
+        }],
+        "selector-type-case": "lower",
+        "selector-pseudo-element-colon-notation": "single",
+        "max-nesting-depth": 4,
+        "number-leading-zero": ["always", {
+            "message": "zero before dot"
+        }]
+    }
+}

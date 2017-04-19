@@ -1,0 +1,48 @@
+{
+    "Chrome_1024x768": {
+        "base": "Chrome",
+        "flags": [
+            "--window-size=1024,768"
+        ]
+    },
+    "SL_CHROME": {
+        "base": "SauceLabs",
+        "browserName": "chrome",
+        "version": "latest"
+    },
+    "SL_FIREFOX": {
+        "base": "SauceLabs",
+        "browserName": "firefox",
+        "version": "latest"
+    },
+    "SL_SAFARI9": {
+        "base": "SauceLabs",
+        "browserName": "safari",
+        "platform": "OS X 10.11",
+        "version": "9.0"
+    },
+    "SL_SAFARI10": {
+        "base": "SauceLabs",
+        "browserName": "safari",
+        "platform": "OS X 10.12",
+        "version": "10.0"
+    },
+    "SL_IE10": {
+        "base": "SauceLabs",
+        "browserName": "internet explorer",
+        "platform": "Windows 2012",
+        "version": "10"
+    },
+    "SL_IE11": {
+        "base": "SauceLabs",
+        "browserName": "internet explorer",
+        "platform": "Windows 8.1",
+        "version": "11"
+    },
+    "SL_EDGE": {
+        "base": "SauceLabs",
+        "browserName": "microsoftedge",
+        "platform": "Windows 10",
+        "version": "14"
+    }
+}
