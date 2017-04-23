@@ -6,6 +6,7 @@ import 'zone.js/dist/zone';
 
 if ('production' === ENV) {
 
+    /* tslint:disable:no-var-requires */
     require('zone.js/dist/zone');
 
 } else {

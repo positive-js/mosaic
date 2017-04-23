@@ -1,0 +1,14 @@
+
+$breakpoints: (
+    xsmall: 600,
+    small: 960,
+    medium: 1280,
+    large: 1920,
+) !default;
+
+$body-font-size-base: 13px !default;
+
+$font-family: (
+    base: #{-apple-system, 'San Francisco', 'Roboto', 'Segoe UI', 'Helvetica Neue', sans-serif},
+    monospace: #{Monaco, Consolas, 'Lucida Console', monospace}
+);

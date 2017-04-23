@@ -2,6 +2,7 @@
 /node_modules
 coverage/
 dist/
+build/
 dist-dll/
 tmp/
 temp/

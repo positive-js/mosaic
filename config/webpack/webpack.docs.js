@@ -33,31 +33,12 @@ try {
 
 module.exports = function (options) {
 
-    let entryObj = {} ;
-    let htmlTemplatePath = '';
-
-    if (options.component) {
-
-        const COMPONENT_NAME = options.component;
-
-        entryObj[COMPONENT_NAME] = [
-            'components',
-            COMPONENT_NAME,
-            'index.ts'
-        ].join('/');
-
-        htmlTemplatePath = [
-            'src/components',
-            COMPONENT_NAME,
-            'demo/index.html'
-        ].join('/');
-    }
 
     return webpackMerge(commonConfig, {
 
         devtool: 'source-map',
 
-        entry: entryObj,
+        entry: '',
 
         output: {
 
@@ -71,7 +52,7 @@ module.exports = function (options) {
                 {
                     test: /\.scss$/,
                     use: ['to-string-loader', 'css-loader', 'sass-loader']
-                }
+                },
             ]
         },
 
@@ -123,14 +104,14 @@ module.exports = function (options) {
             ]),
 
             new HtmlWebpackPlugin({
-                template: htmlTemplatePath,
+                template: './docs/index.html',
                 chunksSortMode: 'dependency',
                 inject: 'body'
             })
         ],
 
         devServer: {
-            hot: true,
+            hot: false,
             contentBase: './src',
             port: METADATA.port,
             host: METADATA.host,

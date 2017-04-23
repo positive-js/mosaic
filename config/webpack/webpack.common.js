@@ -22,7 +22,7 @@ module.exports = {
                     configFileName: 'tsconfig.json'
                 },
                 exclude: [
-                    /\.(spec|e2e)\.ts$/
+                    helpers.root('node_modules')
                 ]
             },
 

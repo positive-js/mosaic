@@ -7,17 +7,20 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "importHelpers": true,
+        "inlineSources": true,
+        "noEmit": false,
+        "skipLibCheck": true,
+        "outDir": "./build",
         "lib": [
             "dom",
-            "es6"
+            "es2015"
         ],
         "moduleResolution": "node",
-        "skipLibCheck": true,
-        "noImplicitAny": true,
+        "noImplicitAny": false,
         "removeComments": false,
         "sourceMap": true,
         "typeRoots": [
-            "node_modules/@types"
+            "./node_modules/@types"
         ],
         "types": [
             "jasmine",
@@ -26,15 +29,17 @@
             "webpack"
         ]
     },
+    "awesomeTypescriptLoaderOptions": {
+        "forkChecker": true,
+        "useWebpackText": true
+    },
     "angularCompilerOptions": {
         "genDir": "./compiled"
     },
     "exclude": [
         "node_modules",
-        "dist"
-    ],
-    "include": [
-        "src/**/*.ts"
+        "dist",
+        "src/polyfills.ts"
     ],
     "compileOnSave": false,
     "buildOnSave": false
