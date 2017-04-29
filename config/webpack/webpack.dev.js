@@ -141,7 +141,6 @@ module.exports = function (options) {
         ],
 
         devServer: {
-            hot: true,
             contentBase: './src',
             port: METADATA.port,
             host: METADATA.host,

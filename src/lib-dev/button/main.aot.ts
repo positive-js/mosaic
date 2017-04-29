@@ -4,6 +4,7 @@ import {Component, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { ButtonModule } from '../../lib/components/button/button.module';
+import { bootloader } from '../helpers';
 
 @Component({
     selector: 'button-demo',
@@ -25,6 +26,11 @@ export class ButtonDemoComponent {}
 })
 export class ButtonDemoModule {}
 
-platformBrowserDynamic()
-    .bootstrapModule(ButtonDemoModule)
-    .catch((error) => console.error(error));
+function main() {
+    return platformBrowserDynamic()
+            .bootstrapModule(ButtonDemoModule)
+            .catch((error) => console.error(error));
+}
+
+bootloader(main);
+

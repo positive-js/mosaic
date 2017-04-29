@@ -86,7 +86,7 @@
 
         "build:dll": "webpack --config config/webpack/webpack.dll.js",
 
-        "server:dev": "webpack-dev-server --config config/webpack/webpack.dev.js",
+        "server:dev": "webpack-dev-server --config config/webpack/webpack.dev.js --inline --hot",
         "server:dev:comp-button": "npm run server:dev -- --env.component button",
 
         "precommit": "npm run linter:styles"
