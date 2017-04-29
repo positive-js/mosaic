@@ -9,7 +9,7 @@ module.exports = {
     context: helpers.root(),
 
     resolve: {
-        extensions: [ '.ts', '.js', '.json' ],
+        extensions: [ '.ts', '.js' ],
         modules: [ helpers.root('node_modules'), helpers.root('src') ],
     },
 

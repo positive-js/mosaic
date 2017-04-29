@@ -39,7 +39,7 @@
     "exclude": [
         "node_modules",
         "dist",
-        "src/polyfills.ts"
+        "src/lib/polyfills.ts"
     ],
     "compileOnSave": false,
     "buildOnSave": false

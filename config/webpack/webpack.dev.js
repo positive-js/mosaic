@@ -47,7 +47,7 @@ module.exports = function (options) {
         ].join('/');
 
         htmlTemplatePath = [
-            'src/components',
+            'src/lib/components',
             COMPONENT_NAME,
             'demo/index.html'
         ].join('/');
@@ -112,7 +112,7 @@ module.exports = function (options) {
                     tslint: {
                         emitErrors: true,
                         failOnHint: false,
-                        resourcePath: helpers.root('src')
+                        resourcePath: helpers.root('src/lib')
                     }
                 }
             }),
