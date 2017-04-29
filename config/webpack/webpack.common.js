@@ -1,5 +1,6 @@
 const NyanProgressPlugin = require('nyan-progress-webpack-plugin');
 const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin');
+const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
 
 const helpers = require('./helpers');
 
@@ -17,13 +18,27 @@ module.exports = {
         rules: [
             {
                 test: /\.ts$/,
-                loader: 'awesome-typescript-loader',
-                options: {
-                    configFileName: 'tsconfig.json'
-                },
+                use: [
+                    {
+                        loader: 'awesome-typescript-loader',
+                        options: {
+                            configFileName: 'tsconfig.json'
+                        }
+                    },
+                    {
+                        loader: 'angular2-template-loader'
+                    }
+                ],
+
                 exclude: [
                     helpers.root('node_modules')
                 ]
+            },
+
+            {
+                test: /\.(html)$/,
+                loader: 'raw-loader',
+                exclude: /\.async\.(html)$/
             },
 
             { test: /\.(otf|ttf|woff|woff2)$/, use: 'url-loader?limit=10000' },
@@ -31,6 +46,8 @@ module.exports = {
     },
 
     plugins: [
+
+        new DuplicatePackageCheckerPlugin(),
 
         new NyanProgressPlugin(),
 

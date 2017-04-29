@@ -21,8 +21,8 @@ module.exports = {
     devtool: 'sourcemap',
 
     entry: {
-        'polyfills': ['./src/polyfills.ts'],
-        'vendors': ['./src/vendors.ts'],
+        'polyfills': ['./src/lib/polyfills.ts'],
+        'vendors': ['./src/lib/vendors.ts'],
     },
 
     resolve: {

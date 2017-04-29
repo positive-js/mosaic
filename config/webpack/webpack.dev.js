@@ -8,6 +8,7 @@ const DllReferencePlugin = require('webpack/lib/DllReferencePlugin');
 const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const HotModuleReplacementPlugin = require('webpack/lib/HotModuleReplacementPlugin');
+const autoprefixer = require('autoprefixer');
 
 const helpers = require('./helpers');
 const commonConfig = require('./webpack.common.js');
@@ -41,15 +42,15 @@ module.exports = function (options) {
         const COMPONENT_NAME = options.component;
 
         entryObj[COMPONENT_NAME] = [
-            'components',
+            'lib-dev',
             COMPONENT_NAME,
-            'index.ts'
+            'main.aot.ts'
         ].join('/');
 
         htmlTemplatePath = [
-            'src/lib/components',
+            'src/lib-dev/',
             COMPONENT_NAME,
-            'demo/index.html'
+            'index.html'
         ].join('/');
     }
 
@@ -70,7 +71,12 @@ module.exports = function (options) {
             rules: [
                 {
                     test: /\.scss$/,
-                    use: ['to-string-loader', 'css-loader', 'sass-loader']
+                    use: [
+                        'to-string-loader',
+                        'css-loader',
+                        'postcss-loader?sourceMap',
+                        'sass-loader?sourceMap'
+                    ]
                 }
             ]
         },
@@ -112,7 +118,12 @@ module.exports = function (options) {
                     tslint: {
                         emitErrors: true,
                         failOnHint: false,
-                        resourcePath: helpers.root('src/lib')
+                        resourcePath: helpers.root('src')
+                    },
+                    postcss: function() {
+                        return [
+                            autoprefixer({ browsers: ['last 2 versions'] })
+                        ];
                     }
                 }
             }),

@@ -34,7 +34,8 @@
         "useWebpackText": true
     },
     "angularCompilerOptions": {
-        "genDir": "./compiled"
+        "genDir": "./compiled",
+        "skipMetadataEmit": true
     },
     "exclude": [
         "node_modules",
