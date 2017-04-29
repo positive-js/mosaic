@@ -1,7 +1,5 @@
-import '../../lib/polyfills';
-
-import {Component, NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
+import { Component, NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { ButtonModule } from '../../lib/components/button/button.module';
 import { bootloader } from '../helpers';

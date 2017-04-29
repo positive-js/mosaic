@@ -1,13 +1,13 @@
 const webpackMerge = require('webpack-merge');
+const webpackMergeDll = webpackMerge.strategy({plugins: 'replace'});
 
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 const DllReferencePlugin = require('webpack/lib/DllReferencePlugin');
-const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const HotModuleReplacementPlugin = require('webpack/lib/HotModuleReplacementPlugin');
+const DllBundlesPlugin = require('webpack-dll-bundles-plugin').DllBundlesPlugin;
 const autoprefixer = require('autoprefixer');
 
 const helpers = require('./helpers');
@@ -22,49 +22,19 @@ const METADATA = {
     ENV: ENV
 };
 
-let polyfillsManifest;
-let vendorManifest;
-
-try {
-    polyfillsManifest = require(helpers.root('dist-dll', 'polyfills-manifest.json'));
-    vendorManifest = require(helpers.root('dist-dll', 'vendors-manifest.json'));
-} catch (e) {
-    throw 'Please rebuild DLL first by running `npm run build:dll`';
-}
-
 module.exports = function (options) {
 
-    let entryObj = {} ;
-    let htmlTemplatePath = '';
-
-    if (options.component) {
-
-        const COMPONENT_NAME = options.component;
-
-        entryObj[COMPONENT_NAME] = [
-            'lib-dev',
-            COMPONENT_NAME,
-            'main.aot.ts'
-        ].join('/');
-
-        htmlTemplatePath = [
-            'src/lib-dev/',
-            COMPONENT_NAME,
-            'index.html'
-        ].join('/');
-    }
-
-    return webpackMerge(commonConfig, {
+    return webpackMerge(commonConfig(options), {
 
         devtool: 'source-map',
 
-        entry: entryObj,
-
         output: {
-
+            path: helpers.root('dist'),
             filename: '[name].bundle.js',
-
-            chunkFilename: '[name].chunk.js'
+            sourceMapFilename: '[name].map',
+            chunkFilename: '[id].chunk.js',
+            library: 'ac_[name]',
+            libraryTarget: 'var'
         },
 
         module: {
@@ -84,7 +54,7 @@ module.exports = function (options) {
         plugins: [
 
             new CleanWebpackPlugin(
-                ['dist', 'build'],
+                ['build'],
                 {
                     root: helpers.root(),
                     verbose: true,
@@ -95,26 +65,48 @@ module.exports = function (options) {
             new HotModuleReplacementPlugin(),
 
             new DefinePlugin({
-                'ENV': JSON.stringify(METADATA.ENV)
+                'ENV': JSON.stringify(METADATA.ENV),
+                'process.env': {
+                    'ENV': JSON.stringify(METADATA.ENV),
+                    'NODE_ENV': JSON.stringify(METADATA.ENV)
+                }
             }),
 
-            new UglifyJsPlugin({
-                sourceMap: true
-            }),
-
-            new DllReferencePlugin({
-                context: '.',
-                manifest: polyfillsManifest
-            }),
-
-            new DllReferencePlugin({
-                context: '.',
-                manifest: vendorManifest
+            new DllBundlesPlugin({
+                bundles: {
+                    polyfills: [
+                        "core-js",
+                        {
+                            "name": "zone.js",
+                            "path": "zone.js/dist/zone.js"
+                        },
+                        {
+                            "name": "zone.js",
+                            "path": "zone.js/dist/long-stack-trace-zone.js"
+                        }
+                    ],
+                    vendors: [
+                        "@angular/animations",
+                        "@angular/common",
+                        "@angular/compiler",
+                        "@angular/core",
+                        "@angular/platform-browser",
+                        "@angular/platform-browser-dynamic",
+                        "rxjs"
+                    ]
+                },
+                dllDir: helpers.root('dist-dll'),
+                webpackConfig: webpackMergeDll(commonConfig({env: ENV}),
+                    {
+                        devtool: 'source-map',
+                        plugins: []
+                    })
             }),
 
             new LoaderOptionsPlugin({
                 debug: true,
                 options: {
+                    context: helpers.root('src'),
                     tslint: {
                         emitErrors: true,
                         failOnHint: false,
@@ -129,18 +121,14 @@ module.exports = function (options) {
             }),
 
             new AddAssetHtmlPlugin([
-                { filepath: 'dist-dll' + '/polyfills.dll.js', includeSourcemap: false },
-                { filepath: 'dist-dll' + '/vendors.dll.js',   includeSourcemap: false }
-            ]),
-
-            new HtmlWebpackPlugin({
-                template: htmlTemplatePath,
-                chunksSortMode: 'dependency',
-                inject: 'body'
-            })
+                { filepath: `dist-dll/${DllBundlesPlugin.resolveFile('polyfills')}` },
+                { filepath: `dist-dll/${DllBundlesPlugin.resolveFile('vendors')}` }
+            ])
         ],
 
         devServer: {
+            hot: true,
+            inline: true,
             contentBase: './src',
             port: METADATA.port,
             host: METADATA.host,
