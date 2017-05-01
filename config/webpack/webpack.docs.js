@@ -9,7 +9,7 @@ const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const HotModuleReplacementPlugin = require('webpack/lib/HotModuleReplacementPlugin');
 
-const helpers = require('./helpers');
+const helpers = require('../helpers');
 const commonConfig = require('./webpack.common.js');
 
 const ENV = 'development';

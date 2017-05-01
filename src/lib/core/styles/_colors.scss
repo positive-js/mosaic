@@ -1,0 +1,34 @@
+$BLACK: #000000;
+$WHITE: #FFFFFF;
+$TRANSPARENT: rgba(0, 0, 0, 0);
+
+$PURPLE-BASE: hsl(284, 0.00001, 0.00001);
+$PURPLE-40: lighten(saturate($PURPLE-BASE, 67%), 98%);
+$PURPLE-60: lighten(saturate($PURPLE-BASE, 65%), 95%);
+$PURPLE-100: lighten(saturate($PURPLE-BASE, 64%), 91%);
+$PURPLE-200: lighten(saturate($PURPLE-BASE, 62%), 80%);
+$PURPLE-300: lighten(saturate($PURPLE-BASE, 61%), 70%);
+$PURPLE-400: lighten(saturate($PURPLE-BASE, 60%), 61%);
+$PURPLE-500: lighten(saturate($PURPLE-BASE, 58%), 52%);
+$PURPLE-560: lighten(saturate($PURPLE-BASE, 58%), 44%);
+$PURPLE-600: lighten(saturate($PURPLE-BASE, 62%), 39%);
+$PURPLE-700: lighten(saturate($PURPLE-BASE, 70%), 27%);
+$PURPLE-800: lighten(saturate($PURPLE-BASE, 79%), 17%);
+$A-PURPLE-BASE: hsl(284, 100%, 50%);
+$A-PURPLE-100: fade($A-PURPLE-BASE, 15);
+
+$BLUE-BASE: hsl(204, 0.00001, 0.00001);
+$BLUE-40: lighten(saturate($BLUE-BASE, 67%), 98%);
+$BLUE-60: lighten(saturate($BLUE-BASE, 67%), 95%);
+$BLUE-100: lighten(saturate($BLUE-BASE, 66%), 91%);
+$BLUE-200: lighten(saturate($BLUE-BASE, 63%), 80%);
+$BLUE-300: lighten(saturate($BLUE-BASE, 62%), 69%);
+$BLUE-400: lighten(saturate($BLUE-BASE, 62%), 59%);
+$BLUE-500: lighten(saturate($BLUE-BASE, 60%), 50%);
+$BLUE-560: lighten(saturate($BLUE-BASE, 64%), 43%);
+$BLUE-600: lighten(saturate($BLUE-BASE, 67%), 38%);
+$BLUE-700: lighten(saturate($BLUE-BASE, 75%), 27%);
+$BLUE-800: lighten(saturate($BLUE-BASE, 83%), 16%);
+$A-BLUE-BASE: hsl(204, 100%, 50%);
+$A-BLUE-100: fade($A-BLUE-BASE, 15);
+$A-BLUE-200: fade($A-BLUE-BASE, 30);

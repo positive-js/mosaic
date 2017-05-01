@@ -10,6 +10,7 @@ temp/
 # IDEs
 /.idea
 /.vscode
+/.awcache
 
 # misc
 .DS_Store

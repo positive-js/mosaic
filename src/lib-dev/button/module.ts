@@ -6,7 +6,7 @@ import { bootloader } from '../helpers';
 
 @Component({
     selector: 'button-demo',
-    template: `<div><mc-button></mc-button></div>`
+    template: `<button mc-button></button>`
 })
 export class ButtonDemoComponent {}
 

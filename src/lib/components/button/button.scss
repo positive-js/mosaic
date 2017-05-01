@@ -1,7 +1,10 @@
+$mc-button__margin: 0 !default;
+$mc-button__border-radius: 3px !default;
+
 
 .mc-button {
-    display: inline-block;
     position: relative;
+    display: inline-block;
     overflow: hidden;
     cursor: pointer;
     outline: none;
@@ -10,6 +13,10 @@
     text-decoration: none;
     text-align: center;
     white-space: nowrap;
+
+    &::-moz-focus-inner {
+        border:0;
+    }
 
     &:focus {
         outline: none;

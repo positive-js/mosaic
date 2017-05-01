@@ -6,7 +6,7 @@ const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const helpers = require('./helpers');
+const helpers = require('../helpers');
 
 
 module.exports = function (options) {

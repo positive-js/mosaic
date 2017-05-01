@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "noImplicitAny": true,
+        "pretty": true,
+        "removeComments": false,
+        "skipLibCheck": true,
+        "sourceMap": true,
+        "strictNullChecks": false,
+        "suppressImplicitAnyIndexErrors": true,
+        "target": "es5",
+        "typeRoots": [
+            "node_modules/@types"
+        ]
+    },
+    "exclude": [
+        "dist",
+        "build",
+        "node_modules"
+    ],
+    "buildOnSave": false,
+    "compileOnSave": false
+}

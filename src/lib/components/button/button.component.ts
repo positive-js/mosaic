@@ -1,18 +1,31 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+    Attribute,
+    ChangeDetectionStrategy,
+    Component, ElementRef, Input, Renderer2, ViewEncapsulation
+} from '@angular/core';
+import { toBoolean } from '../../core/utils/utils';
 
 
 @Component({
-    selector: 'mc-button',
-    template: require('./button.component.html')
+    selector: 'mc-button, button[mc-button]',
+    template: require('./button.component.html'),
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class ButtonComponent {
 
-    @Input() label: string = 'Default text 2';
+    @Input()
+    public label: string = 'Default text 2';
 
-    @Output() onClick: EventEmitter<any> = new EventEmitter();
+    @Input()
+    get disabled(): boolean { return this._disabled; }
+    set disabled(value) { this._disabled = toBoolean(value); }
 
-    public onClickEvent(event: any): void {
-        this.onClick.emit(event);
+    private _elementRef: ElementRef;
+    private _renderer: Renderer2;
+    private _disabled: boolean = false;
+
+    constructor(@Attribute('mc-button') mcButton: string) {
+
     }
-
 }
