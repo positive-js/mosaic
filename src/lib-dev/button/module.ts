@@ -4,8 +4,9 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { ButtonModule } from '../../lib/components/button/button.module';
 import { bootloader } from '../helpers';
 
+
 @Component({
-    selector: 'button-demo',
+    selector: 'app',
     template: `<button mc-button></button>`
 })
 export class ButtonDemoComponent {}

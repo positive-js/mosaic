@@ -11,13 +11,13 @@ const helpers = require('../helpers');
 
 module.exports = function (options) {
 
+    const COMPONENT_NAME = options.component;
+
+    let htmlTemplatePath = '';
     let entryObj = {
         polyfills: './src/lib/polyfills.ts',
         vendors: './src/lib/vendors.ts',
     };
-    let htmlTemplatePath = '';
-
-    const COMPONENT_NAME = options.component;
 
     if (COMPONENT_NAME) {
 
@@ -118,7 +118,7 @@ module.exports = function (options) {
             new ContextReplacementPlugin(
                 // The (\\|\/) piece accounts for path separators in *nix and Windows
                 /angular(\\|\/)core(\\|\/)@angular/,
-                helpers.root('./src')
+                helpers.root('src')
             )
         ]
     }

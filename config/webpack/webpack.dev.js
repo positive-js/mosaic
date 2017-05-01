@@ -42,11 +42,12 @@ module.exports = function (options) {
                 {
                     test: /\.scss$/,
                     use: [
-                        'to-string-loader',
+                        'style-loader',
                         'css-loader',
                         'postcss-loader?sourceMap',
                         'sass-loader?sourceMap'
-                    ]
+                    ],
+                    include: [ helpers.root('src') ]
                 }
             ]
         },
