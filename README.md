@@ -7,7 +7,7 @@
 
 ## Getting started
 
-Before you start, make sure you have a recent version of [NodeJS](http://nodejs.org/) environment *>=6.0* with NPM 3 or Yarn.
+Before you start, make sure you have a recent version of [NodeJS](http://nodejs.org/) environment *>=6.0* with NPM or Yarn.
 
 From the project folder, execute the following commands:
 
@@ -17,6 +17,11 @@ npm install
 or 
 ```shell
 yarn install
+```
+
+## Running The Component
+```shell
+server:dev:comp-button
 ```
 
 ## Running The Tests
