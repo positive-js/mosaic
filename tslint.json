@@ -1,6 +1,7 @@
 {
     "extends": [
-        "tslint:recommended"
+        "tslint:recommended",
+        "tslint-eslint-rules"
     ],
     "rulesDirectory": [
         "node_modules/codelyzer",
@@ -34,6 +35,11 @@
 
         "trailing-comma": [false, {"multiline": "always", "singleline": "never"}],
         "object-literal-sort-keys": false,
+
+        "object-curly-spacing": [
+            true,
+            "always"
+        ],
 
         "no-use-before-declare": true,
         "no-consecutive-blank-lines": [true, 2],
