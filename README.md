@@ -1,3 +1,5 @@
+[![Dependency Status](https://david-dm.org/positive-js/mosaic.svg)](https://david-dm.org/positive-js/mosaic)
+
 # Mosaic components for Angular
 
 <p align="center"></p>
