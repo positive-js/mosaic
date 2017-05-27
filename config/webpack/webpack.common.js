@@ -1,4 +1,4 @@
-const NyanProgressPlugin = require('nyan-progress-webpack-plugin');
+const SimpleProgressWebpackPlugin = require('simple-progress-webpack-plugin');
 const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin');
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
@@ -80,7 +80,7 @@ module.exports = function (options) {
 
             new DuplicatePackageCheckerPlugin(),
 
-            new NyanProgressPlugin(),
+            new SimpleProgressWebpackPlugin(),
 
             new ScriptExtHtmlWebpackPlugin({
                 defaultAttribute: 'defer'
