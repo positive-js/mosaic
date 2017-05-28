@@ -1,0 +1,26 @@
+$font-path: 'assets/fonts' !default;
+
+$fonts-list: (
+    ('Roboto', 'Roboto',        'Regular',              400, normal),
+    ('Roboto', 'Roboto Italic', 'Roboto-RegularItalic', 400, italic),
+    ('Roboto', 'Roboto Bold',   'Roboto-Bold',          700, normal)
+);
+
+
+@each $font in $fonts-list {
+
+    $font-folder: nth($font, 1);
+    $name:        nth($font, 2);
+    $type:        nth($font, 3);
+
+    @font-face {
+        font-family: 'Roboto';
+        font-weight:  nth($font, 4);
+        font-style:   nth($font, 5);
+        src: local('#{$name}'),
+            local('#{$name}-#{$type}'),
+            url('#{$font-path}/#{$font-folder}/#{$name}-#{$type}.woff2') format('woff2'),
+            url('#{$font-path}/#{$font-folder}/#{$name}-#{$type}.woff') format('woff'),
+            url('#{$font-path}/#{$font-folder}/#{$name}-#{$type}.ttf')  format('truetype');
+    }
+}

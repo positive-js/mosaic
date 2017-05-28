@@ -6,9 +6,13 @@ $breakpoints: (
     large: 1920,
 ) !default;
 
-$body-font-size-base: 13px !default;
+$body-font-size-base: 15px !default;
 
 $font-family: (
-    base: #{-apple-system, 'San Francisco', 'Roboto', 'Segoe UI', 'Helvetica Neue', sans-serif},
+    base: #{-apple-system, 'San Francisco', 'Roboto', 'Helvetica Neue', sans-serif},
     monospace: #{Monaco, Consolas, 'Lucida Console', monospace}
 );
+
+$swift-ease-in-out-duration: 0.5s !default;
+$swift-ease-in-out-timing-function: cubic-bezier(0.35, 0, 0.25, 1) !default;
+$swift-ease-in-out: all $swift-ease-in-out-duration $swift-ease-in-out-timing-function !default;

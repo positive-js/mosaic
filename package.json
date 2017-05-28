@@ -95,6 +95,7 @@
         "server-dev": "webpack-dev-server --config config/webpack/webpack.dev.js",
         "server-dev:comp-button": "npm run server-dev -- --env.component button",
         "server-dev:comp-layout": "npm run server-dev -- --env.component layout",
+        "server-dev:comp-typography": "npm run server-dev -- --env.component typography",
 
         "precommit": "npm run linter:styles && npm run linter:ts:lib"
     }

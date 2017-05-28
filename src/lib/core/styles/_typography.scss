@@ -1,0 +1,28 @@
+
+
+@mixin mc-typography-level($selector, $font-size, $line-height: $font-size, $font-weight: 400, $letter-spacing: 0) {
+
+    .mc-#{$selector} {
+        font-size: $font-size;
+        line-height: $line-height;
+        font-weight: $font-weight;
+        letter-spacing: $letter-spacing;
+    }
+}
+
+// Defaults come from https://material.io/guidelines/style/typography.html
+
+@include mc-typography-level('display-1', 34px, 40px, 400, 0);
+@include mc-typography-level('display-2', 45px, 48px, 400, 0);
+@include mc-typography-level('display-3', 56px, 56px, 400, -0.005em);
+@include mc-typography-level('display-4', 112px, 112px, 300, -0.01em);
+
+@include mc-typography-level('body-1', 14px, 20px, 400);
+@include mc-typography-level('body-2', 14px, 24px, 500);
+
+@include mc-typography-level('title', 20px, 20px, 500);
+@include mc-typography-level('headline', 24px, 32px, 400);
+@include mc-typography-level('subheading', 16px, 28px, 400);
+
+
+

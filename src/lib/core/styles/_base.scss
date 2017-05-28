@@ -14,4 +14,11 @@ body {
     min-height: 100%;
     margin: 0;
     position: relative;
+    font-family: map-get($font-family, 'base');
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
 }

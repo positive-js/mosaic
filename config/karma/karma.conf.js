@@ -26,7 +26,6 @@ module.exports = function (config) {
             maxLogLines: 5
         },
 
-        //reporters: ['dots', 'coverage-istanbul'],
         reporters: ['dots', 'coverage', 'remap-coverage'],
 
         coverageIstanbulReporter: {
