@@ -44,7 +44,17 @@ module.exports = function (options) {
                     use: [
                         'style-loader',
                         'css-loader',
-                        'postcss-loader?sourceMap',
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                sourceMap: true,
+                                plugins: () => [
+                                    require('autoprefixer')({
+                                        browsers: ['last 2 versions']
+                                    })
+                                ]
+                            }
+                        },
                         'sass-loader?sourceMap'
                     ],
                     include: [ helpers.root('src') ]
@@ -112,11 +122,6 @@ module.exports = function (options) {
                         emitErrors: true,
                         failOnHint: false,
                         resourcePath: helpers.root('src')
-                    },
-                    postcss: function() {
-                        return [
-                            autoprefixer({ browsers: ['last 2 versions'] })
-                        ];
                     }
                 }
             }),
