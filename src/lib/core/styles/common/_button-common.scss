@@ -1,0 +1,9 @@
+@import '../vendor-prefixes';
+
+
+@mixin mc-button-reset {
+    @include user-select(none);
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
