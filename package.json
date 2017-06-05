@@ -14,29 +14,27 @@
         "npm": ">3 <4"
     },
     "dependencies": {
-        "@angular/animations": "4.2.0-rc.1",
-        "@angular/common": "4.2.0-rc.1",
-        "@angular/compiler": "4.2.0-rc.1",
-        "@angular/core": "4.2.0-rc.1",
-        "@angular/platform-browser": "4.2.0-rc.1",
-        "@angular/platform-browser-dynamic": "4.2.0-rc.1",
+        "@angular/animations": "4.2.0-rc.2",
+        "@angular/common": "4.2.0-rc.2",
+        "@angular/compiler": "4.2.0-rc.2",
+        "@angular/core": "4.2.0-rc.2",
+        "@angular/platform-browser": "4.2.0-rc.2",
+        "@angular/platform-browser-dynamic": "4.2.0-rc.2",
         "rxjs": "5.4.0",
         "core-js": "2.4.1",
         "zone.js": "0.8.11"
     },
     "devDependencies": {
-        "@types/node": "7.0.22",
-        "@types/jasmine": "2.5.47",
+        "@types/node": "7.0.27",
+        "@types/jasmine": "2.5.51",
         "@types/source-map": "0.5.0",
-        "@types/uglify-js": "2.6.28",
+        "@types/uglify-js": "2.6.29",
         "@types/webpack": "2.2.15",
         "@types/rx": "4.1.1",
-
         "codelyzer": "3.0.1",
         "conventional-changelog": "1.1.3",
-        "husky": "0.13.3",
+        "husky": "0.13.4",
         "jasmine-core": "2.6.2",
-
         "karma": "1.7.0",
         "karma-jasmine": "1.1.0",
         "karma-sauce-launcher": "1.1.0",
@@ -47,30 +45,26 @@
         "karma-webpack": "2.0.3",
         "phantomjs-prebuilt": "2.1.14",
         "node-sass": "4.5.3",
-
         "stylelint-scss": "1.4.4",
         "stylelint": "7.10.1",
         "stylelint-config-standard": "16.0.0",
-
         "ts-node": "3.0.4",
-        "tslint": "5.3.2",
+        "tslint": "5.4.2",
         "tslint-no-unused-var": "0.0.6",
         "tslint-eslint-rules": "4.1.1",
-        "typescript": "2.3.3",
-
+        "typescript": "2.3.4",
         "awesome-typescript-loader": "3.1.3",
         "angular2-template-loader": "0.6.2",
         "istanbul-instrumenter-loader": "2.0.0",
         "raw-loader": "0.5.1",
         "to-string-loader": "1.1.5",
-        "css-loader": "0.28.3",
-        "style-loader": "0.18.1",
+        "css-loader": "0.28.4",
+        "style-loader": "0.18.2",
         "sass-loader": "6.0.5",
         "postcss-loader": "2.0.5",
-        "file-loader": "0.11.1",
+        "file-loader": "0.11.2",
         "url-loader": "0.5.8",
         "source-map-loader": "0.2.1",
-
         "html-webpack-plugin": "2.28.0",
         "extract-text-webpack-plugin": "2.1.0",
         "simple-progress-webpack-plugin": "1.0.4",
@@ -79,7 +73,6 @@
         "clean-webpack-plugin": "0.1.16",
         "karma-sourcemap-loader": "0.3.7",
         "duplicate-package-checker-webpack-plugin": "1.2.4",
-
         "webpack-dll-bundles-plugin": "1.0.0-beta.5",
         "webpack-bundle-analyzer": "2.8.2",
         "webpack": "2.6.1",
@@ -88,15 +81,12 @@
     },
     "scripts": {
         "test:unit": "karma start config/karma/karma.conf.js",
-
         "linter:ts:lib": "tslint './src/lib'",
         "linter:styles": "stylelint --syntax scss \"./**/*.scss\"",
-
         "server-dev": "webpack-dev-server --config config/webpack/webpack.dev.js",
         "server-dev:comp-button": "npm run server-dev -- --env.component button",
         "server-dev:comp-layout": "npm run server-dev -- --env.component layout",
         "server-dev:comp-typography": "npm run server-dev -- --env.component typography",
-
         "precommit": "npm run linter:styles && npm run linter:ts:lib"
     }
 }
