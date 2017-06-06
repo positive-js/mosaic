@@ -3,7 +3,9 @@
 coverage/
 dist/
 build/
+build-docs/
 dist-dll/
+dist-dll-docs/
 tmp/
 temp/
 

@@ -11,15 +11,20 @@ const helpers = require('../helpers');
 
 module.exports = function (options) {
 
-    const COMPONENT_NAME = options.component;
-
+    let root_entry = '';
     let htmlTemplatePath = '';
-    let entryObj = {
-        polyfills: './src/lib/polyfills.ts',
-        vendors: './src/lib/vendors.ts',
-    };
+    let entryObj = {};
 
-    if (COMPONENT_NAME) {
+    if (options.component) {
+
+        let COMPONENT_NAME = options.component;
+
+        root_entry = 'src';
+
+        entryObj = {
+            polyfills: './src/lib/polyfills.ts',
+            vendors: './src/lib/vendors.ts',
+        };
 
         entryObj[COMPONENT_NAME] = [
             'lib-dev',
@@ -34,36 +39,29 @@ module.exports = function (options) {
         ].join('/');
     }
 
+    if (options.docs) {
+        entryObj = {
+            polyfills: './docs/polyfills.ts',
+            vendors: './docs/vendors.ts',
+        };
+
+        root_entry = 'docs';
+        entryObj['docs'] = 'main.ts';
+
+        htmlTemplatePath = 'docs/index.html';
+    }
+
     return {
 
         entry: entryObj,
 
         resolve: {
             extensions: [ '.ts', '.js' ],
-            modules: [ helpers.root('node_modules'), helpers.root('src') ],
+            modules: [ helpers.root('node_modules'), helpers.root(root_entry) ],
         },
 
         module: {
             rules: [
-                {
-                    test: /\.ts$/,
-                    use: [
-                        {
-                            loader: 'awesome-typescript-loader',
-                            options: {
-                                configFileName: 'tsconfig.json'
-                            }
-                        },
-                        {
-                            loader: 'angular2-template-loader'
-                        }
-                    ],
-
-                    exclude: [
-                        helpers.root('node_modules')
-                    ]
-                },
-
                 {
                     test: /\.(html)$/,
                     loader: 'raw-loader',
@@ -118,7 +116,7 @@ module.exports = function (options) {
             new ContextReplacementPlugin(
                 // The (\\|\/) piece accounts for path separators in *nix and Windows
                 /angular(\\|\/)core(\\|\/)@angular/,
-                helpers.root('src')
+                helpers.root(root_entry)
             )
         ]
     }

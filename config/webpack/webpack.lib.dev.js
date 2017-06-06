@@ -40,6 +40,24 @@ module.exports = function (options) {
         module: {
             rules: [
                 {
+                    test: /\.ts$/,
+                    use: [
+                        {
+                            loader: 'awesome-typescript-loader',
+                            options: {
+                                configFileName: 'tsconfig.json'
+                            }
+                        },
+                        {
+                            loader: 'angular2-template-loader'
+                        }
+                    ],
+
+                    exclude: [
+                        helpers.root('node_modules')
+                    ]
+                },
+                {
                     test: /\.scss$/,
                     use: [
                         'style-loader',

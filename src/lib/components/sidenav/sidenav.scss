@@ -1,0 +1,31 @@
+.mс-sidenav {
+
+    .mс-sidenav-content {
+        width: 304px;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        z-index: 100;
+        pointer-events: none;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        transition: $swift-ease-out;
+        transition-property: transform;
+        will-change: transform;
+    }
+
+    .mс-backdrop {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 99;
+        pointer-events: none;
+        background-color: rgba(map_get($mc-grey, 1000), 0.54);
+        opacity: 0;
+        transition: $swift-ease-in-out;
+        transition-property: opacity;
+        will-change: opacity;
+    }
+}

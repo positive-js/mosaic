@@ -3,17 +3,18 @@
         "target": "es5",
         "module": "es2015",
         "allowUnreachableCode": false,
-        "declaration": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "importHelpers": true,
         "inlineSources": true,
         "noEmit": false,
         "skipLibCheck": true,
-        "outDir": "./build",
+        "baseUrl": "",
+        "rootDir": "./docs",
+        "outDir": "./build-docs",
         "lib": [
             "dom",
-            "es2015"
+            "es2016"
         ],
         "moduleResolution": "node",
         "noImplicitAny": false,
@@ -21,12 +22,12 @@
         "sourceMap": true,
         "typeRoots": [
             "./node_modules/@types",
-            "./src/lib/custom-typings.d.ts"
+            "./docs/custom-typings.d.ts"
         ],
         "types": [
-            "jasmine",
             "node",
-            "webpack"
+            "jasmine",
+            "node"
         ]
     },
     "awesomeTypescriptLoaderOptions": {
@@ -40,7 +41,8 @@
     "exclude": [
         "node_modules",
         "dist",
-        "docs/polyfills.ts"
+        "src/**/*",
+        "docs/polyfill.ts"
     ],
     "compileOnSave": false,
     "buildOnSave": false

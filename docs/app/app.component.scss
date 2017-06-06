@@ -1,0 +1,12 @@
+$sizebar-size: 280px !default;
+
+.container {
+    min-height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    flex: 1;
+
+    @media (min-width: 1281px) {
+        padding-left: $sizebar-size;
+    }
+}
