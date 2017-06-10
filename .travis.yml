@@ -1,15 +1,26 @@
+sudo: false
 language: node_js
 node_js:
-- '6.10.2'
+  - '6.10.2'
+
+env:
+  global:
+    - LOGS_DIR=/tmp/mosaic-build/logs
+
 
 before_install:
-  - npm i -g npm@^5.0.2
-  
+  - ./scripts/ci/install.sh
+
 install:
   - npm install
 
+
+before_script:
+  - mkdir -p $LOGS_DIR
+
 script:
-- npm run lint
+  - ./scripts/ci/build-entry.sh
+
 
 cache:
   directories:
