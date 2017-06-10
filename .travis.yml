@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+- '6.10.2'
+
+before_install:
+  - npm i -g npm@^5.0.2
+  
+install:
+  - npm install
+
+script:
+- npm run lint
+
+cache:
+  directories:
+    - $HOME/.npm
