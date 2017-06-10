@@ -9,6 +9,7 @@ env:
 
 
 before_install:
+  - source ./scripts/ci/config.sh
   - ./scripts/ci/install.sh
 
 install:
