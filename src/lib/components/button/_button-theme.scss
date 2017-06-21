@@ -1,0 +1,58 @@
+@import '../../core/styles/palette';
+@import '../../core/styles/theming/theming';
+
+
+@mixin _mc-hovered-mixin($color, $border, $shadow, $bg) {
+
+    &:hover:not([disabled]):not(.mc-disabled) {
+        color: $color;
+        background: $bg;
+        border-color: $border;
+        box-shadow: $shadow;
+    }
+}
+
+@mixin _mc-button-colors($foreground, $colorMap) {
+    color: mc-color($foreground, button-text);
+    border-color: mc-color($colorMap, 800);
+    background: linear-gradient(to bottom, mc-color($colorMap, 500), mc-color($colorMap, 600));
+
+    $bg-hover: linear-gradient(to bottom, mc-color($colorMap, 600), mc-color($colorMap, 700));
+    @include _mc-hovered-mixin(mc-color($foreground, button-text), transparent, none, $bg-hover);
+
+    &:active {
+        $bg-active: linear-gradient(to bottom, mc-color($colorMap, 800), mc-color($colorMap, 800));
+        @include _mc-hovered-mixin(mc-color($foreground, button-text), transparent, none, $bg-active);
+    }
+}
+
+@mixin _mc-button-theme-color($theme, $color: 'default') {
+    $primary:    map-get($theme, primary);
+    $accent:     map-get($theme, accent);
+    $warn:       map-get($theme, warn);
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
+    &.mc-primary {
+        @include _mc-button-colors($foreground, $primary);
+    }
+
+    &.mc-accent {
+        @include _mc-button-colors($foreground, $accent);
+    }
+
+    &.mc-warn {
+
+    }
+}
+
+
+@mixin mc-button-theme($theme) {
+
+    .mc-button {
+
+        @include _mc-button-theme-color($theme);
+    }
+}
+
+

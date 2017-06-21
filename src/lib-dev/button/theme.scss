@@ -1,0 +1,10 @@
+@import '../../lib/core/styles/theming/all-theme';
+
+
+// Define the default theme (same as the example above).
+$candy-app-primary: mc-palette($mc-blue);
+$candy-app-accent:  mc-palette($mc-red, A200, A100, A400);
+$candy-app-theme:   mc-light-theme($candy-app-primary, $candy-app-accent);
+
+// Include the default theme styles.
+@include mosaic-theme($candy-app-theme);

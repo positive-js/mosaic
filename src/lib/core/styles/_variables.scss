@@ -13,6 +13,8 @@ $font-family: (
     monospace: #{Monaco, Consolas, 'Lucida Console', monospace}
 );
 
+$base-grid-size: 8;
+
 /* Transitions - Based on Material */
 
 $swift-ease-out-duration: 0.4s !default;

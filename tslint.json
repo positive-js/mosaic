@@ -9,7 +9,7 @@
     ],
     "rules": {
         // Angular
-        "component-class-suffix": true,
+        "component-class-suffix": false,
 
         "arrow-return-shorthand": true,
 

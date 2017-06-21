@@ -60,8 +60,7 @@ module.exports = function (options) {
                 {
                     test: /\.scss$/,
                     use: [
-                        'style-loader',
-                        'css-loader',
+                        'raw-loader',
                         {
                             loader: 'postcss-loader',
                             options: {
