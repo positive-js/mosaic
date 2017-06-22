@@ -1,0 +1,18 @@
+engines:
+  duplication:
+    enabled: true
+    config:
+      languages:
+      -
+  stylelint:
+      enabled: true
+      config:
+          config: .stylelintrc
+          ignore_warnings: true
+ratings:
+  paths:
+  - "**.css"
+  - "**.js"
+  - "**.ts"
+exclude_paths:
+- node_modules/**/*
