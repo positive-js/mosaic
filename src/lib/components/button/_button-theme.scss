@@ -1,5 +1,5 @@
-@import '../../core/styles/palette';
-@import '../../core/styles/theming/theming';
+@import '../../styles/palette';
+@import '../../styles/theming/theming';
 
 
 @mixin _mc-hovered-mixin($color, $border, $shadow, $bg) {
