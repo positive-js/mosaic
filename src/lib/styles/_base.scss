@@ -1,3 +1,5 @@
+@import './variables';
+
 
 html {
     height: 100%;
@@ -14,7 +16,7 @@ body {
     min-height: 100%;
     margin: 0;
     position: relative;
-    font-family: map-get($font-family, 'base');
+    font-family: map-get(map-get($fonts, 'base'), font-family);
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
     -webkit-text-size-adjust: 100%;

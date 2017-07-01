@@ -25,7 +25,7 @@ $mc-button-focus-transition:
     vertical-align: baseline;
 
     // Typography.
-    font-size: $body-font-size-base;
+    font-size: inherit;
     font-family: map_get($font-family, 'base');
     font-weight: 500;
     text-align: center;

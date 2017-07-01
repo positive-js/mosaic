@@ -1,0 +1,6 @@
+@import './typography';
+
+
+@mixin mosaic-typography($config: mc-typography-config()) {
+    @include mc-base-typography($config);
+}

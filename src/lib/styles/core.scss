@@ -1,6 +1,9 @@
 @import 'variables';
+@import 'reset';
 @import 'palette';
-@import 'typography';
+@import 'typography/all-typography';
 @import 'layout';
 @import 'base';
 @import 'layout';
+
+@include mosaic-typography();

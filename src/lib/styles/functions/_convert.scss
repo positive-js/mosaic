@@ -1,0 +1,22 @@
+@import '../variables';
+@import './number';
+
+
+/// @link https://github.com/zurb/foundation-sites/blob/develop/scss/util/_unit.scss
+@function strip-unit($n) {
+    @return $n / ($n * 0 + 1);
+}
+
+@function convert($unit, $value, $base-font-size:null) {
+    $value: strip-unit($value) / strip-unit($base-font-size) * number(1 + $unit);
+
+    @if ($value == (0 + $unit)){
+        $value: 0;
+    }
+
+    @return $value;
+}
+
+@function px2Rem($value, $root: $base-font-size) {
+    @return convert("rem", $value, $root);
+}

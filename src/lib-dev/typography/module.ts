@@ -8,6 +8,8 @@ import { bootloader } from '../helpers';
     selector: 'app',
     template: `
         <div class="demo-typography">
+            <span class="mc-h1">Lorem ipsum dolor sit&nbsp;amet</span>
+            <p class="caption">Labore reprehenderit corporis ullam distinctio&nbsp;ex.</p>
             <span class="mc-display-4">Display 4</span>
             <span class="mc-display-3">Display 3</span>
             <span class="mc-display-2">Display 2</span>
