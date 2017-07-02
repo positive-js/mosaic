@@ -4,6 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { ROUTING } from './app.routes';
 
+import '../styles/main.scss';
+
 
 @NgModule({
     imports: [

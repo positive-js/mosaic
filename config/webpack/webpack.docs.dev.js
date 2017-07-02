@@ -40,6 +40,7 @@ module.exports = function (options) {
 
         module: {
             rules: [
+
                 {
                     test: /\.scss$/,
                     use: [
@@ -58,7 +59,13 @@ module.exports = function (options) {
                         },
                         'sass-loader?sourceMap'
                     ],
-                    include: [ helpers.root('docs') ]
+                    include: [ helpers.root('docs/app') ]
+                },
+
+                {
+                    test: /\.scss$/,
+                    use: ['style-loader', 'css-loader', 'sass-loader'],
+                    include: [helpers.root('docs/styles')]
                 },
 
                 {
