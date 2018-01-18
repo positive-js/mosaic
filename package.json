@@ -10,7 +10,7 @@
         "url": "https://github.com/positive-js/mosaic.git"
     },
     "engines": {
-        "node": ">= 6 < 7",
+        "node": ">= 8",
         "npm": ">=5"
     },
     "dependencies": {
@@ -20,8 +20,10 @@
         "@angular/core": "5.2.1",
         "@angular/forms": "5.2.1",
         "@angular/platform-browser": "5.2.1",
-        "rxjs": "5.5.6",
         "core-js": "2.5.3",
+        "rxjs": "5.5.6",
+        "systemjs": "0.20.19",
+        "tslib": "1.9.0",
         "zone.js": "0.8.20"
     },
     "devDependencies": {
@@ -32,6 +34,7 @@
         "@angular/router": "5.2.1",
         "@types/node": "9.3.0",
         "@types/jasmine": "2.8.4",
+        "@types/hammerjs": "2.0.35",
         "@types/source-map": "0.5.7",
         "@types/uglify-js": "2.6.30",
         "@types/webpack": "3.8.3",

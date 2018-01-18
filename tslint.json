@@ -4,7 +4,6 @@
         "tslint-eslint-rules"
     ],
     "rulesDirectory": [
-        "node_modules/codelyzer",
         "node_modules/tslint-no-unused-var"
     ],
     "rules": {
