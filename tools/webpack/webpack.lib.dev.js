@@ -10,7 +10,7 @@ const HotModuleReplacementPlugin = require('webpack/lib/HotModuleReplacementPlug
 const DllBundlesPlugin = require('webpack-dll-bundles-plugin').DllBundlesPlugin;
 const autoprefixer = require('autoprefixer');
 
-const helpers = require('../helpers');
+const helpers = require('./helpers');
 const commonConfig = require('./webpack.common.js');
 
 const ENV = 'development';

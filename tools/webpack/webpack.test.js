@@ -4,7 +4,7 @@ const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
-const helpers = require('../helpers');
+const helpers = require('./helpers');
 
 const ENV = process.env.ENV = process.env.NODE_ENV = 'test';
 

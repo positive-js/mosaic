@@ -1,5 +1,5 @@
-const webpack = require('../../config/webpack/webpack.test.js');
-const helpers = require('../../config/helpers');
+const webpack = require('../../tools/webpack/webpack.test.js');
+const helpers = require('../../tools/webpack/helpers');
 
 module.exports = function (config) {
 

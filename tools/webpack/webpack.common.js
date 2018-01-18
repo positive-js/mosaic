@@ -6,7 +6,7 @@ const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const helpers = require('../helpers');
+const helpers = require('./helpers');
 
 
 module.exports = function (options) {
@@ -37,18 +37,6 @@ module.exports = function (options) {
             COMPONENT_NAME,
             'index.html'
         ].join('/');
-    }
-
-    if (options.docs) {
-        entryObj = {
-            polyfills: './docs/polyfills.ts',
-            vendors: './docs/vendors.ts',
-        };
-
-        root_entry = 'docs';
-        entryObj['docs'] = 'main.ts';
-
-        htmlTemplatePath = 'docs/index.html';
     }
 
     return {
