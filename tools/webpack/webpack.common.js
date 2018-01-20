@@ -10,7 +10,6 @@ const helpers = require('./helpers');
 
 module.exports = function (options) {
 
-    let root_entry = '';
     let htmlTemplatePath = '';
     let entryObj = {};
 
@@ -18,11 +17,22 @@ module.exports = function (options) {
 
         let COMPONENT_NAME = options.component;
 
-        root_entry = 'src';
-
         entryObj = {
-            polyfills: './src/lib/polyfills.ts',
-            vendors: './src/lib/vendors.ts',
+            polyfills: [
+                'core-js/es6/reflect',
+                'core-js/es7/reflect',
+                "zone.js/dist/zone",
+                "zone.js/dist/long-stack-trace-zone"
+            ],
+            vendors: [
+                "@angular/animations",
+                "@angular/common",
+                "@angular/compiler",
+                "@angular/core",
+                "@angular/platform-browser",
+                "@angular/platform-browser-dynamic",
+                "rxjs"
+            ],
         };
 
         entryObj[COMPONENT_NAME] = [
@@ -44,7 +54,7 @@ module.exports = function (options) {
 
         resolve: {
             extensions: [ '.ts', '.js' ],
-            modules: [ helpers.root('node_modules'), helpers.root(root_entry) ],
+            modules: [ helpers.root('node_modules'), helpers.root('src') ],
         },
 
         module: {
@@ -97,11 +107,14 @@ module.exports = function (options) {
              *
              * See: https://webpack.github.io/docs/list-of-plugins.html#contextreplacementplugin
              * See: https://github.com/angular/angular/issues/11580
+             *
+             * for Angular 5
+             * See: https://github.com/angular/angular/issues/14898
              */
             new ContextReplacementPlugin(
                 // The (\\|\/) piece accounts for path separators in *nix and Windows
-                /angular(\\|\/)core(\\|\/)@angular/,
-                helpers.root(root_entry)
+                /angular(\\|\/)core(\\|\/)(@angular|esm5)/,
+                helpers.root('src')
             )
         ]
     }

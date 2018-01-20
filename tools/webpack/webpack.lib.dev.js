@@ -1,14 +1,9 @@
 const webpackMerge = require('webpack-merge');
-const webpackMergeDll = webpackMerge.strategy({plugins: 'replace'});
 
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
-const DllReferencePlugin = require('webpack/lib/DllReferencePlugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const HotModuleReplacementPlugin = require('webpack/lib/HotModuleReplacementPlugin');
-const DllBundlesPlugin = require('webpack-dll-bundles-plugin').DllBundlesPlugin;
-const autoprefixer = require('autoprefixer');
 
 const helpers = require('./helpers');
 const commonConfig = require('./webpack.common.js');
@@ -100,53 +95,9 @@ module.exports = function (options) {
                 }
             }),
 
-            new DllBundlesPlugin({
-                bundles: {
-                    polyfills: [
-                        "core-js",
-                        {
-                            "name": "zone.js",
-                            "path": "zone.js/dist/zone.js"
-                        },
-                        {
-                            "name": "zone.js",
-                            "path": "zone.js/dist/long-stack-trace-zone.js"
-                        }
-                    ],
-                    vendors: [
-                        "@angular/animations",
-                        "@angular/common",
-                        "@angular/compiler",
-                        "@angular/core",
-                        "@angular/platform-browser",
-                        "@angular/platform-browser-dynamic",
-                        "rxjs"
-                    ]
-                },
-                dllDir: helpers.root('dist-dll'),
-                webpackConfig: webpackMergeDll(commonConfig({env: ENV}),
-                    {
-                        devtool: 'source-map',
-                        plugins: []
-                    })
-            }),
-
             new LoaderOptionsPlugin({
-                debug: true,
-                options: {
-                    context: helpers.root('src'),
-                    tslint: {
-                        emitErrors: true,
-                        failOnHint: false,
-                        resourcePath: helpers.root('src')
-                    }
-                }
-            }),
-
-            new AddAssetHtmlPlugin([
-                { filepath: `dist-dll/${DllBundlesPlugin.resolveFile('polyfills')}` },
-                { filepath: `dist-dll/${DllBundlesPlugin.resolveFile('vendors')}` }
-            ])
+                debug: true
+            })
         ],
 
         devServer: {
