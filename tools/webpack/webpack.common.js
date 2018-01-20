@@ -1,4 +1,3 @@
-const SimpleProgressWebpackPlugin = require('simple-progress-webpack-plugin');
 const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin');
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
@@ -65,8 +64,6 @@ module.exports = function (options) {
             new CheckerPlugin(),
 
             new DuplicatePackageCheckerPlugin(),
-
-            new SimpleProgressWebpackPlugin(),
 
             new ScriptExtHtmlWebpackPlugin({
                 defaultAttribute: 'defer'

@@ -21,7 +21,7 @@
         "sourceMap": true,
         "typeRoots": [
             "./node_modules/@types",
-            "./src/lib/custom-typings.d.ts"
+            "./src/lib/typings.d.ts"
         ],
         "types": [
             "jasmine",
@@ -39,8 +39,7 @@
     },
     "exclude": [
         "node_modules",
-        "dist",
-        "docs/polyfills.ts"
+        "dist"
     ],
     "compileOnSave": false,
     "buildOnSave": false
