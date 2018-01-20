@@ -10,43 +10,38 @@ const helpers = require('./helpers');
 
 module.exports = function (options) {
 
-    let htmlTemplatePath = '';
-    let entryObj = {};
+    const COMPONENT_NAME = options.component;
 
-    if (options.component) {
+    const entryObj = {
+        polyfills: [
+            'core-js/es6/reflect',
+            'core-js/es7/reflect',
+            "zone.js/dist/zone",
+            "zone.js/dist/long-stack-trace-zone"
+        ],
+        vendors: [
+            "@angular/animations",
+            "@angular/common",
+            "@angular/compiler",
+            "@angular/core",
+            "@angular/platform-browser",
+            "@angular/platform-browser-dynamic",
+            "rxjs"
+        ],
+    };
 
-        let COMPONENT_NAME = options.component;
+    entryObj[COMPONENT_NAME] = [
+        'lib-dev',
+        COMPONENT_NAME,
+        'module.ts'
+    ].join('/');
 
-        entryObj = {
-            polyfills: [
-                'core-js/es6/reflect',
-                'core-js/es7/reflect',
-                "zone.js/dist/zone",
-                "zone.js/dist/long-stack-trace-zone"
-            ],
-            vendors: [
-                "@angular/animations",
-                "@angular/common",
-                "@angular/compiler",
-                "@angular/core",
-                "@angular/platform-browser",
-                "@angular/platform-browser-dynamic",
-                "rxjs"
-            ],
-        };
+    const htmlTemplatePath = [
+        'src/lib-dev',
+        COMPONENT_NAME,
+        'index.html'
+    ].join('/');
 
-        entryObj[COMPONENT_NAME] = [
-            'lib-dev',
-            COMPONENT_NAME,
-            'module.ts'
-        ].join('/');
-
-        htmlTemplatePath = [
-            'src/lib-dev',
-            COMPONENT_NAME,
-            'index.html'
-        ].join('/');
-    }
 
     return {
 

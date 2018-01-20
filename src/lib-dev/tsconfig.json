@@ -1,0 +1,46 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "es2015",
+        "allowUnreachableCode": false,
+        "declaration": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "importHelpers": true,
+        "inlineSources": true,
+        "noEmit": false,
+        "skipLibCheck": true,
+        "outDir": "./build/lib-dev",
+        "lib": [
+            "dom",
+            "es2015"
+        ],
+        "moduleResolution": "node",
+        "noImplicitAny": false,
+        "removeComments": false,
+        "sourceMap": true,
+        "typeRoots": [
+            "./node_modules/@types",
+            "./src/lib-dev/typings.d.ts"
+        ],
+        "types": [
+            "jasmine",
+            "node",
+            "webpack"
+        ]
+    },
+    "awesomeTypescriptLoaderOptions": {
+        "forkChecker": true,
+        "useWebpackText": true
+    },
+    "angularCompilerOptions": {
+        "genDir": "./compiled",
+        "skipMetadataEmit": true
+    },
+    "exclude": [
+        "node_modules",
+        "dist"
+    ],
+    "compileOnSave": false,
+    "buildOnSave": false
+}

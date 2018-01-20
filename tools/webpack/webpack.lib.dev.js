@@ -39,7 +39,7 @@ module.exports = function (options) {
                         {
                             loader: 'awesome-typescript-loader',
                             options: {
-                                configFileName: 'tsconfig.json'
+                                configFileName: 'src/lib-dev/tsconfig.json'
                             }
                         },
                         {
