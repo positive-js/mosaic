@@ -1,11 +1,17 @@
-@import '../variables';
+@import 'variables';
 
 
-@function mc-typography-level($font-size, $line-height: $font-size, $font-weight: 400) {
+@function mc-typography-level(
+    $font-size,
+    $line-height: $font-size,
+    $font-weight: 400,
+    $font-family: null) {
+
     @return (
         font-size: $font-size,
         line-height: $line-height,
-        font-weight: $font-weight
+        font-weight: $font-weight,
+        font-family: $font-family
     );
 }
 
@@ -25,72 +31,72 @@
     @return _mc-get-type-value($config, $level, font-weight);
 }
 
-@function mc-font-family($config) {
-    @return unquote(map-get($config, font-family));
-}
+// Gets the font-family from a typography config and removes the quotes around it.
+@function mc-font-family($config, $level: null) {
+    $font-family: map-get($config, font-family);
 
+    @if $level != null {
+        $font-family: _mc-get-type-value($config, $level, font-family);
+    }
+
+
+    @return unquote($font-family);
+}
 
 @mixin mc-typography-level-to-styles($config, $level) {
     $font-size: mc-font-size($config, $level);
     $font-weight: mc-font-weight($config, $level);
     $line-height: mc-line-height($config, $level);
-    $font-family: mc-font-family($config);
+    $font-family: mc-font-family($config, $level);
 
     font: $font-weight #{$font-size}/#{$line-height} $font-family;
 }
 
 // OpenType ligatures, discretionary ligatures and lining figures enabled if available.
-@mixin mc-base-typography($config, $selector: '.mc-typography') {
+// TODO: mb need add $selector: '.mc-typography' ?
+@mixin mc-base-typography($config) {
 
-    .mc-h1, .mc-headline, #{$selector} h1 {
+    .mc-headline {
         @include mc-typography-level-to-styles($config, headline);
     }
 
-    .mc-h2, .mc-title, #{$selector} h2 {
+    .mc-title {
         @include mc-typography-level-to-styles($config, title);
     }
 
-    .mc-h3, .mc-subheading-2, #{$selector} h3 {
+    .mc-subheading-2 {
         @include mc-typography-level-to-styles($config, subheading-2);
     }
 
-    .mc-h4, .mc-subheading-1, #{$selector} h4 {
+    .mc-subheading-1 {
         @include mc-typography-level-to-styles($config, subheading-1);
     }
 
-    .mc-body-strong, .mc-body-2 {
+    .mc-body-strong {
         @include mc-typography-level-to-styles($config, body-2);
     }
 
-    .mc-body, .mc-body-1 {
+    .mc-body {
         @include mc-typography-level-to-styles($config, body-1);
     }
 
-    /* stylelint-disable */
-    .mc-display-4, #{$selector} .mc-display-4 {
+    .mc-display-4 {
         @include mc-typography-level-to-styles($config, display-4);
         font-feature-settings: 'dlig', 'liga', 'lnum', 'kern';
     }
 
-    .mc-display-3, #{$selector} .mc-display-3 {
+    .mc-display-3 {
         @include mc-typography-level-to-styles($config, display-3);
         font-feature-settings: 'dlig', 'liga', 'lnum', 'kern';
     }
 
-    .mc-display-2, #{$selector} .mc-display-2 {
+    .mc-display-2 {
         @include mc-typography-level-to-styles($config, display-2);
         font-feature-settings: 'dlig', 'liga', 'lnum', 'kern';
     }
 
-    .mc-display-1, #{$selector} .mc-display-1 {
+    .mc-display-1 {
         @include mc-typography-level-to-styles($config, display-1);
         font-feature-settings: 'dlig', 'liga', 'lnum', 'kern';
     }
-
-    // Paragraphs. OpenType ligatures and oldstyle figures enabled if available.
-    p {
-        font-feature-settings: 'kern', 'onum', 'liga';
-    }
-
-    /* stylelint-enable */
 }

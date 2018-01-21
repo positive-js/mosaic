@@ -1,0 +1,16 @@
+@import '../all-theme';
+
+
+// Include all typography for the components.
+@include mosaic-typography();
+
+
+// Define a theme.
+$primary: mc-palette($mc-blue, 600, 500, 560, 700);
+$secondary: mc-palette($mc-grey, 300, 60, 100, 400);
+
+
+$theme: mc-light-theme($primary, $secondary);
+
+// Include all theme styles for the components.
+@include mosaic-theme($theme);

@@ -1,5 +1,7 @@
-@import '../../styles/palette';
 @import '../../styles/theming/theming';
+@import '../../styles/typography/typography-utils';
+// TODO: Its only for testing colors
+@import '../../styles/theming/palette';
 
 
 @mixin _mc-hovered-mixin($color, $border, $shadow, $bg) {
@@ -34,11 +36,10 @@
     $foreground: map-get($theme, foreground);
 
     &.mc-primary {
-        @include _mc-button-colors($foreground, $primary);
     }
 
     &.mc-accent {
-        @include _mc-button-colors($foreground, $accent);
+
     }
 
     &.mc-warn {
@@ -53,6 +54,20 @@
 
         @include _mc-button-theme-color($theme);
     }
+
+    .mc-icon-button {
+
+    }
 }
 
+@mixin mc-button-typography($config) {
+
+    .mc-button {
+        font: {
+            size:   mc-font-size($config, button);
+            family: mc-font-family($config, button);
+            weight: mc-font-weight($config, button);
+        }
+    }
+}
 

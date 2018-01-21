@@ -12,17 +12,17 @@
 
 ## Getting started
 
-Before you start, make sure you have a recent version of [NodeJS](http://nodejs.org/) environment *>=6.0* with NPM *>=5.0*.
+Before you start, make sure you have a recent version of [NodeJS](http://nodejs.org/) environment *>=8.0* with NPM *>=5.0*.
 
 From the project folder, execute the following commands:
 
 ```shell
-npm install
+$ npm install
 ```
 
 ## Running The Component
 ```shell
-server:dev:comp-button
+$ server-dev:button
 ```
 
 ## Running The Tests

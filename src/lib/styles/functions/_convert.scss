@@ -1,4 +1,4 @@
-@import '../variables';
+@import '../typography/variables';
 @import './number';
 
 
@@ -10,7 +10,7 @@
 @function convert($unit, $value, $base-font-size:null) {
     $value: strip-unit($value) / strip-unit($base-font-size) * number(1 + $unit);
 
-    @if ($value == (0 + $unit)){
+    @if ($value == (0 + $unit)) {
         $value: 0;
     }
 
@@ -18,5 +18,5 @@
 }
 
 @function px2Rem($value, $root: $base-font-size) {
-    @return convert("rem", $value, $root);
+    @return convert('rem', $value, $root);
 }

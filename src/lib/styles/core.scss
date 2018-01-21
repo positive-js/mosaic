@@ -1,9 +1,6 @@
-@import 'variables';
-@import 'reset';
-@import 'palette';
-@import 'typography/all-typography';
-@import 'layout';
+@import 'normalize';
 @import 'base';
-@import 'layout';
+@import 'typography/all-typography';
 
-@include mosaic-typography();
+// TODO: Create flex layout classes
+// @import 'grid/grid';

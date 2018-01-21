@@ -1,26 +1,25 @@
-@import '../variables';
-@import './typography-utils';
+@import 'variables';
 @import '../functions/convert';
+@import './typography-utils';
 
 
 @function mc-typography-config(
     $font-family:   map-get(map-get($fonts, base), font-family),
     $display-4:     mc-typography-level(px2Rem(112px), px2Rem(112px), 300),
-    $display-3:     mc-typography-level(px2Rem(56px),  px2Rem(56px), 400),
-    $display-2:     mc-typography-level(px2Rem(45px),  px2Rem(48px), 400),
-    $display-1:     mc-typography-level(px2Rem(34px),  px2Rem(40px), 400),
+    $display-3:     mc-typography-level(px2Rem(56px),  px2Rem(76px), 400),
+    $display-2:     mc-typography-level(px2Rem(45px),  px2Rem(56px), 400),
+    $display-1:     mc-typography-level(px2Rem(34px),  px2Rem(44px), 400),
     $headline:      mc-typography-level(px2Rem(24px),  px2Rem(32px), 400),
-    $title:         mc-typography-level(px2Rem(20px),  px2Rem(32px), 500),
+    $title:         mc-typography-level(px2Rem(20px),  px2Rem(28px), 500),
     $subheading-2:  mc-typography-level(px2Rem(16px),  px2Rem(28px), 400),
-    $subheading-1:  mc-typography-level(px2Rem(15px),  px2Rem(24px), 400),
+    $subheading-1:  mc-typography-level(px2Rem(15px),  px2Rem(20px), 400),
     $body-2:        mc-typography-level(px2Rem(14px),  px2Rem(24px), 500),
-    $body-1:        mc-typography-level(px2Rem(13px),  px2Rem(20px), 400),
-    $caption:       mc-typography-level(px2Rem(12px),  px2Rem(20px), 400),
-    $button:        mc-typography-level(px2Rem(13px),  px2Rem(13px), 500),
-    $input:         mc-typography-level(inherit, 1.125, 400)
+    $body-1:        mc-typography-level(px2Rem(15px),  px2Rem(20px), 400),
+    $caption:       mc-typography-level(px2Rem(13px),  px2Rem(16px), 400),
+    $button:        mc-typography-level(px2Rem(15px),  px2Rem(20px), 400)
 ) {
-    @return (
-        font-family:    $font-family,
+
+    $config: (
         display-4:      $display-4,
         display-3:      $display-3,
         display-2:      $display-2,
@@ -32,8 +31,16 @@
         body-2:         $body-2,
         body-1:         $body-1,
         caption:        $caption,
-        button:         $button,
-        input:          $input,
+        button:         $button
     );
-}
 
+    @each $key, $level in $config {
+        @if map-get($level, font-family) == null {
+            $new-level: map-merge($level, (font-family: $font-family));
+            $config: map-merge($config, ($key: $new-level));
+        }
+    }
+
+    // Add the base font family to the config.
+    @return map-merge($config, (font-family: $font-family));
+}

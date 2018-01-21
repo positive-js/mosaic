@@ -1,17 +1,4 @@
 
-$breakpoints: (
-    xsmall: 0,
-    small: 600,   // ~ Small tablet
-    medium: 960,
-    large: 1280,  // ~ Desktop
-    xlarge: 1920, // ~ Large desktop
-) !default;
-
-// TODO for breakpoints
-$root-sizes: (
-
-) !default;
-
 $typography-font-weight-values: (
     thin: 100,
     light: 300,
@@ -32,6 +19,4 @@ $fonts: (
     )
 );
 
-$base-font-size: 16px !default;
-
-$base-grid-size: 8 !default;
+$base-font-size: 15px !default;
