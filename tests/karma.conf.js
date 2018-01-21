@@ -1,5 +1,6 @@
 const path = require('path');
-const { customLaunchers, platformMap } = require('./browser-providers');
+const { customLaunchers } = require('./browser-providers');
+
 
 module.exports = (config) => {
 
@@ -8,10 +9,7 @@ module.exports = (config) => {
         frameworks: ['jasmine'],
         plugins: [
             require('karma-jasmine'),
-            require('karma-browserstack-launcher'),
-            require('karma-sauce-launcher'),
             require('karma-chrome-launcher'),
-            require('karma-firefox-launcher'),
             require('karma-sourcemap-loader'),
             require('karma-coverage')
         ],
@@ -53,23 +51,11 @@ module.exports = (config) => {
             subdir: '.'
         },
 
-        sauceLabs: {
-            testName: 'mosaic',
-            startConnect: false,
-            recordVideo: false,
-            recordScreenshots: false,
-            options: {
-                'selenium-version': '2.48.2',
-                'command-timeout': 600,
-                'idle-timeout': 600,
-                'max-duration': 5400
-            }
-        },
 
         browserDisconnectTimeout: 20000,
         browserNoActivityTimeout: 240000,
         captureTimeout: 120000,
-        browsers: ['Chrome_1024x768'],
+        browsers: ['ChromeHeadless'],
 
         singleRun: false,
 

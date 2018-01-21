@@ -1,4 +1,14 @@
 {
+    "ChromeHeadlessLocal": {
+        "base": "ChromeHeadless",
+        "flags": [
+            "--window-size=1024,768",
+            "--headless",
+            "--disable-gpu",
+            "--remote-debugging-port=9222"
+        ],
+        "debug": true
+    },
     "Chrome_1024x768": {
         "base": "Chrome",
         "flags": [
