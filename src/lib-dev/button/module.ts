@@ -1,14 +1,16 @@
 import { Component, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+
 import { McButtonModule } from '../../lib/components/button/';
+
 
 @Component({
     selector: 'app',
     template: `
         <button mc-button color="primary"></button>
         <button mc-button color="accent"></button>`,
-    styleUrls: ['./theme.scss'],
+    styleUrls: ['./theme.scss']
 })
 export class ButtonDemoComponent {}
 

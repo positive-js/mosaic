@@ -4,6 +4,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const HotModuleReplacementPlugin = require('webpack/lib/HotModuleReplacementPlugin');
+
 const helpers = require('./helpers');
 const commonConfig = require('./webpack.common.js');
 
