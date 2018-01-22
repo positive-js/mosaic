@@ -1,5 +1,5 @@
 const webpack = require('../../tools/webpack/webpack.test.js');
-const helpers = require('../../tools/webpack/helpers');
+const { customLaunchers } = require('../browser-providers');
 
 module.exports = function (config) {
 
@@ -7,26 +7,37 @@ module.exports = function (config) {
         basePath: '../../',
 
         frameworks: ['jasmine'],
-        browsers: ['PhantomJS'],
+
+        plugins: [
+            require('karma-jasmine'),
+            require('karma-chrome-launcher'),
+            require('karma-sourcemap-loader'),
+            require('karma-coverage'),
+            require('karma-webpack')
+        ],
 
         exclude: [],
 
         files: [
-            { pattern: './config/karma/spec-bundle.js', watched: false }
+            { pattern: './tests/karma/spec-bundle.js', watched: false }
         ],
 
         logLevel: config.LOG_INFO,
 
-        phantomJsLauncher: {
-            exitOnResourceError: true
-        },
-        preprocessors: { './config/karma/spec-bundle.js': ['coverage', 'webpack', 'sourcemap'] },
+        customLaunchers: customLaunchers,
+
+        preprocessors: { './tests/karma/spec-bundle.js': ['coverage', 'webpack', 'sourcemap'] },
+
+        browserDisconnectTimeout: 20000,
+        browserNoActivityTimeout: 240000,
+        captureTimeout: 120000,
+        browsers: ['ChromeHeadless'],
 
         specReporter: {
             maxLogLines: 5
         },
 
-        reporters: ['dots', 'coverage', 'remap-coverage'],
+        reporters: ['dots', 'coverage'],
 
         coverageIstanbulReporter: {
             reports: [ 'html', 'lcovonly' ],
