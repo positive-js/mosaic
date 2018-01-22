@@ -75,7 +75,7 @@ module.exports = function (options) {
 
         plugins: [
             new CleanWebpackPlugin(
-                ['build'],
+                ['dist'],
                 {
                     root: helpers.root(),
                     verbose: true,

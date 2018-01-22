@@ -10,7 +10,7 @@
         "inlineSources": true,
         "noEmit": false,
         "skipLibCheck": true,
-        "outDir": "../../build/lib-dev",
+        "outDir": "../../dist/lib-dev",
         "lib": [
             "dom",
             "es2015"
@@ -21,7 +21,7 @@
         "sourceMap": true,
         "typeRoots": [
             "./node_modules/@types",
-            "./lib-dev/typings.d.ts"
+            "./typings.d.ts"
         ],
         "types": [
             "jasmine",

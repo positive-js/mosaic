@@ -13,13 +13,13 @@
             "es2015",
             "dom"
         ],
-        "types": ["jasmine"]
+        "types": ["node","jasmine"]
     },
-    "exclude": [
-        "node_modules",
-        "dist",
-        "build"
+    "include": [
+        "src/**/*.ts",
+        "tools/**/*.ts"
     ],
-    "compileOnSave": false,
-    "buildOnSave": false
+    "exclude": [
+        "node_modules/"
+    ]
 }
