@@ -2,12 +2,12 @@ import { src, dest } from 'gulp';
 import { join } from 'path';
 
 
-// These imports lack of type definitions.
+/* tslint:disable:no-var-requires */
 const gulpSass = require('gulp-sass');
 const gulpIf = require('gulp-if');
 const gulpCleanCss = require('gulp-clean-css');
+/* tslint:enable:no-var-requires */
 
-// Create a gulp task that builds SCSS files.
 export function buildScssTask(outputDir: string, sourceDir: string, minifyOutput = false) {
   return () => {
     return src(join(sourceDir, '**/*.scss'))

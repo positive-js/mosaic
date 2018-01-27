@@ -4,6 +4,7 @@ import { spawn } from 'child_process';
 import { resolve as resolvePath } from 'path';
 
 
+/* tslint:disable:no-console */
 /**
  * Spawns a child process that compiles using ngc.
  * @param flags Command-line flags to be passed to ngc.
@@ -21,3 +22,4 @@ export function ngcCompile(flags: string[]) {
     childProcess.on('exit', (exitCode: number) => exitCode === 0 ? resolve() : reject());
   });
 }
+/* tslint:enable:no-console */

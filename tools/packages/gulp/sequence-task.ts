@@ -1,8 +1,8 @@
-// This import does not have any type definitions.
+/* tslint:disable:no-var-requires */
 const gulpRunSequence = require('run-sequence');
+/* tslint:enable:no-var-requires */
 
 
-// Create a task that's a sequence of other tasks.
 export function sequenceTask(...args: any[]) {
   return (done: any) => {
     gulpRunSequence(
