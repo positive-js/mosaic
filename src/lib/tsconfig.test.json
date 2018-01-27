@@ -1,26 +1,22 @@
 {
+    "extends": "./tsconfig.build",
     "compilerOptions": {
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
+        "importHelpers": false,
         "module": "commonjs",
-        "moduleResolution": "node",
-        "noImplicitAny": true,
-        "pretty": true,
-        "removeComments": false,
-        "skipLibCheck": true,
-        "sourceMap": true,
-        "strictNullChecks": false,
-        "suppressImplicitAnyIndexErrors": true,
         "target": "es5",
-        "typeRoots": [
-            "node_modules/@types"
-        ]
+        "types": ["jasmine"],
+        "paths": {
+            "@ptsecurity/mosaic/*": ["./*"]
+        }
     },
-    "exclude": [
-        "dist",
-        "build",
-        "node_modules"
-    ],
-    "buildOnSave": false,
-    "compileOnSave": false
+    "angularCompilerOptions": {
+        "strictMetadataEmit": true,
+        "skipTemplateCodegen": true,
+        "emitDecoratorMetadata": true,
+        "fullTemplateTypeCheck": true
+    },
+    "include": [
+        "**/*.spec.ts",
+        "index.ts"
+    ]
 }
