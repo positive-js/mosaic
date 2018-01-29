@@ -2,13 +2,14 @@ import { join } from 'path';
 
 import { PackageBundler } from './build-bundles';
 import { buildConfig } from './build-config';
-import {getSecondaryEntryPointsForPackage} from './secondary-entry-points';
+import { compileEntryPoint, renamePrivateReExportsToBeUnique } from './compile-entry-point';
+import { getSecondaryEntryPointsForPackage } from './secondary-entry-points';
 
 
 const { packagesDir, outputDir } = buildConfig;
 
 // Name of the tsconfig file that is responsible for building an ES2015 package.
-const buildTsconfigName = 'tsconfig-build.json';
+const buildTsConfigName = 'tsconfig-build.json';
 
 export class BuildPackage {
 
@@ -77,9 +78,22 @@ export class BuildPackage {
         this.outputDir = join(outputDir, 'packages', name);
         this.esm5OutputDir = join(outputDir, 'packages', name, 'esm5');
 
-        this.tsconfigBuild = join(this.sourceDir, buildTsconfigName);
+        this.tsconfigBuild = join(this.sourceDir, buildTsConfigName);
 
         this.entryFilePath = join(this.outputDir, 'index.js');
+    }
+
+    async compile() {
+
+    }
+
+    /**
+     * Compiles TS into both ES2015 and ES5, then updates exports.
+     */
+    private async _compileBothTargets(p = '') {
+        return compileEntryPoint(this, buildTsConfigName, p)
+            .then(() => compileEntryPoint(this, buildTsConfigName, p, this.esm5OutputDir))
+            .then(() => renamePrivateReExportsToBeUnique(this, p));
     }
 
     /**

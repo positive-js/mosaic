@@ -26,7 +26,9 @@ export interface IBuildConfig {
 import { join } from 'path';
 
 
+/* tslint:disable:no-var-requires */
 const _package = require('../../package.json');
+/* tslint:enable:no-var-requires */
 
 const buildVersion = _package.version;
 
