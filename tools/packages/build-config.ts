@@ -23,7 +23,7 @@ export interface IBuildConfig {
   licenseBanner: string;
 }
 
-import { join } from 'path';
+import { join, resolve } from 'path';
 
 
 /* tslint:disable:no-var-requires */
@@ -42,14 +42,15 @@ const buildLicense = `/**
  * Use of this source code is governed by an MIT-style license.
  */`;
 
+const rootDir = resolve(__dirname, '../..');
+
 const buildConfig: IBuildConfig = {
     projectVersion: buildVersion,
     angularVersion,
-    projectDir: __dirname,
-    packagesDir: join(__dirname, 'src'),
-    outputDir: join(__dirname, 'dist'),
+    projectDir: rootDir,
+    packagesDir: join(rootDir, 'src'),
+    outputDir: join(rootDir, 'dist'),
     licenseBanner: buildLicense
 };
 
-// Load the config file using a basic CommonJS import.
 export { buildConfig };

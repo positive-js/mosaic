@@ -1,6 +1,6 @@
 import { join } from 'path';
 
-import { PackageBundler } from './build-bundles';
+// import { PackageBundler } from './build-bundles';
 import { buildConfig } from './build-config';
 import { compileEntryPoint, renamePrivateReExportsToBeUnique } from './compile-entry-point';
 import { getSecondaryEntryPointsForPackage } from './secondary-entry-points';
@@ -9,7 +9,7 @@ import { getSecondaryEntryPointsForPackage } from './secondary-entry-points';
 const { packagesDir, outputDir } = buildConfig;
 
 // Name of the tsconfig file that is responsible for building an ES2015 package.
-const buildTsConfigName = 'tsconfig-build.json';
+const buildTsConfigName = 'tsconfig.build.json';
 
 export class BuildPackage {
 
@@ -51,7 +51,7 @@ export class BuildPackage {
     /**
      * Package bundler instance.
      */
-    private bundler = new PackageBundler(this);
+    // private bundler = new PackageBundler(this);
 
     /**
      * Secondary entry-points partitioned by their build depth.
@@ -85,6 +85,12 @@ export class BuildPackage {
 
     async compile() {
 
+        for (const entryPointGroup of this.secondaryEntryPointsByDepth) {
+            await Promise.all(entryPointGroup.map((p) => this._compileBothTargets(p)));
+        }
+
+        // Compile the primary entry-point.
+        await this._compileBothTargets();
     }
 
     /**
