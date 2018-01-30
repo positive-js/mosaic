@@ -3,7 +3,7 @@ import {
     Component, Directive, ElementRef, Input, Renderer2, ViewEncapsulation
 } from '@angular/core';
 
-import { toBoolean } from '../../core/utils/utils';
+import { toBoolean } from '../core/utils/utils';
 
 
 @Directive({
@@ -15,7 +15,7 @@ export class McButtonStyler {}
 /* tslint:disable:max-classes-per-file */
 @Component({
     selector: 'button[mc-button]',
-    template: require('./button.component.html'),
+    templateUrl: './button.component.html',
     styleUrls: ['./button.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,

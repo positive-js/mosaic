@@ -2,7 +2,7 @@ import { Component, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import { McButtonModule } from '../../lib/components/button/';
+import { McButtonModule } from '../../lib/button/';
 
 
 @Component({
