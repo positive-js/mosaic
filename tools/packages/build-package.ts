@@ -1,6 +1,6 @@
 import { join } from 'path';
 
-// import { PackageBundler } from './build-bundles';
+import { PackageBundler } from './build-bundles';
 import { buildConfig } from './build-config';
 import { compileEntryPoint, renamePrivateReExportsToBeUnique } from './compile-entry-point';
 import { getSecondaryEntryPointsForPackage } from './secondary-entry-points';
@@ -51,7 +51,7 @@ export class BuildPackage {
     /**
      * Package bundler instance.
      */
-    // private bundler = new PackageBundler(this);
+    private bundler = new PackageBundler(this);
 
     /**
      * Secondary entry-points partitioned by their build depth.
@@ -91,6 +91,10 @@ export class BuildPackage {
 
         // Compile the primary entry-point.
         await this._compileBothTargets();
+    }
+
+    async createBundles() {
+        await this.bundler.createBundles();
     }
 
     /**

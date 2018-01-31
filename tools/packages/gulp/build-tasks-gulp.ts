@@ -44,6 +44,8 @@ export function createPackageBuildTasks(buildPackage: BuildPackage, preBuildTask
 
     task(`${taskName}:build:esm`, () => buildPackage.compile());
 
+    task(`${taskName}:build:bundles`, () => buildPackage.createBundles());
+
     task(`${taskName}:assets`, [
         `${taskName}:assets:scss`,
         `${taskName}:assets:es5-scss`,
