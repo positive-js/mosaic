@@ -1,6 +1,6 @@
-import {mkdirpSync, copySync} from 'fs-extra';
-import {sync as glob} from 'glob';
-import {join, dirname} from 'path';
+import { mkdirpSync, copySync } from 'fs-extra';
+import { sync as glob } from 'glob';
+import { join, dirname } from 'path';
 
 
 /**
