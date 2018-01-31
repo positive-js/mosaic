@@ -16,7 +16,7 @@ export class McButtonStyler {}
 @Component({
     selector: 'button[mc-button]',
     templateUrl: './button.component.html',
-    styleUrls: ['./button.scss'],
+    styleUrls: ['./button.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {

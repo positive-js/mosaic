@@ -5,6 +5,7 @@ const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const HotModuleReplacementPlugin = require('webpack/lib/HotModuleReplacementPlugin');
 
+const path = require('path');
 const helpers = require('./helpers');
 const commonConfig = require('./webpack.common.js');
 
@@ -34,6 +35,14 @@ module.exports = function (options) {
 
         module: {
             rules: [
+                {
+                    test: /\.ts$/,
+                    use: [
+                        {
+                            loader: path.resolve('./tools/webpack/ng2-sass-loader.js')
+                        }
+                    ]
+                },
                 {
                     test: /\.ts$/,
                     use: [

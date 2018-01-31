@@ -5,6 +5,7 @@ import { BuildPackage } from '../build-package';
 
 import { buildScssTask } from './build-scss-task';
 import { sequenceTask } from './sequence-task';
+import { inlineResourcesForDirectory } from '../inline-resources';
 
 
 /* tslint:disable:no-var-requires */
@@ -36,7 +37,9 @@ export function createPackageBuildTasks(buildPackage: BuildPackage, preBuildTask
         ...preBuildTasks,
         ...dependencyNames.map((pkgName) => `${pkgName}:build`),
         `${taskName}:assets`,
-        `${taskName}:build:esm`
+        `${taskName}:build:esm`,
+        // Inline assets into ESM output.
+        `${taskName}:assets:inline`
     ));
 
     task(`${taskName}:build:esm`, () => buildPackage.compile());
@@ -66,4 +69,6 @@ export function createPackageBuildTasks(buildPackage: BuildPackage, preBuildTask
             .pipe(dest(buildPackage.outputDir))
             .pipe(dest(buildPackage.esm5OutputDir));
     });
+
+    task(`${taskName}:assets:inline`, () => inlineResourcesForDirectory(buildPackage.outputDir));
 }
