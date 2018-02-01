@@ -2,10 +2,10 @@ import { dest, src, task } from 'gulp';
 import { join } from 'path';
 
 import { BuildPackage } from '../build-package';
+import { inlineResourcesForDirectory } from '../inline-resources';
 
 import { buildScssTask } from './build-scss-task';
 import { sequenceTask } from './sequence-task';
-import { inlineResourcesForDirectory } from '../inline-resources';
 
 
 /* tslint:disable:no-var-requires */
@@ -39,7 +39,9 @@ export function createPackageBuildTasks(buildPackage: BuildPackage, preBuildTask
         `${taskName}:assets`,
         `${taskName}:build:esm`,
         // Inline assets into ESM output.
-        `${taskName}:assets:inline`
+        `${taskName}:assets:inline`,
+        // Build bundles on top of inlined ESM output.
+        `${taskName}:build:bundles`
     ));
 
     task(`${taskName}:build:esm`, () => buildPackage.compile());

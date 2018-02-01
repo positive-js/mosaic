@@ -1,17 +1,20 @@
-import { join } from 'path';
+import {dirname, join} from 'path';
 
-import {rollupGlobals, dashCaseToCamelCase} from './rollup-globals';
+import { rollupGlobals } from './rollup-globals';
 
 import { buildConfig } from './build-config';
 import { BuildPackage } from './build-package';
+import { uglifyJsFile } from './minify-sources';
+import { rollupRemoveLicensesPlugin } from './rollup-remove-licenses';
+import { remapSourcemap } from './sourcemap-remap';
 import { dashCaseToCamelCase } from './utils';
-import {rollupRemoveLicensesPlugin} from "./rollup-remove-licenses";
 
 
-// There are no type definitions available for these imports.
+/* tslint:disable:no-var-requires */
 const rollup = require('rollup');
 const rollupNodeResolutionPlugin = require('rollup-plugin-node-resolve');
 const rollupAlias = require('rollup-plugin-alias');
+/* tslint:enable:no-var-requires */
 
 /**
  * Directory where all bundles will be created in.
@@ -45,7 +48,7 @@ export class PackageBundler {
             esm2015Dest: join(bundlesDir, `${packageName}.js`),
             esm5Dest: join(bundlesDir, `${packageName}.es5.js`),
             umdDest: join(bundlesDir, `${packageName}.umd.js`),
-            umdMinDest: join(bundlesDir, `${packageName}.umd.min.js`),
+            umdMinDest: join(bundlesDir, `${packageName}.umd.min.js`)
         });
     }
 
@@ -64,7 +67,7 @@ export class PackageBundler {
             esm2015Dest: join(bundlesDir, `${packageName}`, `${entryPoint}.js`),
             esm5Dest: join(bundlesDir, `${packageName}`, `${entryPoint}.es5.js`),
             umdDest: join(bundlesDir, `${packageName}-${entryPoint}.umd.js`),
-            umdMinDest: join(bundlesDir, `${packageName}-${entryPoint}.umd.min.js`),
+            umdMinDest: join(bundlesDir, `${packageName}-${entryPoint}.umd.min.js`)
         });
     }
 
@@ -80,7 +83,7 @@ export class PackageBundler {
             moduleName: config.moduleName,
             entry: config.entryFile,
             dest: config.esm2015Dest,
-            format: 'es',
+            format: 'es'
         });
 
         // Build FESM-5 bundle file.
@@ -88,7 +91,7 @@ export class PackageBundler {
             moduleName: config.moduleName,
             entry: config.esm5EntryFile,
             dest: config.esm5Dest,
-            format: 'es',
+            format: 'es'
         });
 
         // Create UMD bundle of ES5 output.
@@ -116,8 +119,6 @@ export class PackageBundler {
             external: Object.keys(rollupGlobals),
             entry: config.entry,
             onwarn: (message: string) => {
-                // TODO(jelbourn): figure out *why* rollup warns about certain symbols not being found
-                // when those symbols don't appear to be in the input file in the first place.
                 if (/but never used/.test(message)) {
                     return false;
                 }
@@ -132,7 +133,7 @@ export class PackageBundler {
         const writeOptions = {
             // Keep the moduleId empty because we don't want to force developers to a specific moduleId.
             moduleId: '',
-            moduleName: config.moduleName || 'ng.mosaic',
+            moduleName: config.moduleName || 'ng.material',
             banner: buildConfig.licenseBanner,
             format: config.format,
             dest: config.dest,
@@ -156,8 +157,8 @@ export class PackageBundler {
             if (this.buildPackage.exportsSecondaryEntryPointsAtRoot &&
                 config.moduleName === `ng.${this.buildPackage.name}`) {
 
-                const importRegex = new RegExp(`@angular/${this.buildPackage.name}/.+`);
-                external = external.filter(e => !importRegex.test(e));
+                const importRegex = new RegExp(`@ptsecurity/${this.buildPackage.name}/.+`);
+                external = external.filter((e) => !importRegex.test(e));
 
                 // Use the rollup-alias plugin to map imports of the form `@angular/material/button`
                 // to the actual file location so that rollup can resolve the imports (otherwise they
@@ -170,6 +171,15 @@ export class PackageBundler {
         }
 
         return rollup.rollup(bundleOptions).then((bundle: any) => bundle.write(writeOptions));
+    }
+
+    private getResolvedSecondaryEntryPointImportPaths(bundleOutputDir: string) {
+        return this.buildPackage.secondaryEntryPoints.reduce((map, p) => {
+            map[`@ptsecurity/${this.buildPackage.name}/${p}`] =
+                join(dirname(bundleOutputDir), this.buildPackage.name, `${p}.es5.js`);
+
+            return map;
+        }, {} as {[key: string]: string});
     }
 }
 
