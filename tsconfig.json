@@ -13,7 +13,13 @@
             "es2015",
             "dom"
         ],
-        "types": ["node","jasmine"]
+        "typeRoots": [
+            "./node_modules/@types"
+        ],
+        "types": [
+            "node",
+            "jasmine"
+        ]
     },
     "include": [
         "src/**/*.ts",

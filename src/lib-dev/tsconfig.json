@@ -1,46 +1,12 @@
+
 {
+    "extends": "../../tsconfig.json",
     "compilerOptions": {
-        "target": "es5",
-        "module": "es2015",
-        "allowUnreachableCode": false,
-        "declaration": true,
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "importHelpers": true,
-        "inlineSources": true,
-        "noEmit": false,
-        "skipLibCheck": true,
-        "outDir": "../../dist/lib-dev",
-        "lib": [
-            "dom",
-            "es2015"
-        ],
-        "moduleResolution": "node",
-        "noImplicitAny": false,
-        "removeComments": false,
-        "sourceMap": true,
-        "typeRoots": [
-            "./node_modules/@types",
-            "./typings.d.ts"
-        ],
-        "types": [
-            "jasmine",
-            "node",
-            "webpack"
-        ]
+        "rootDir": "..",
+        "baseUrl": ".",
+        "paths": {
+            "@ptsecurity/mosaic/*": ["./*"]
+        }
     },
-    "awesomeTypescriptLoaderOptions": {
-        "forkChecker": true,
-        "useWebpackText": true
-    },
-    "angularCompilerOptions": {
-        "genDir": "./compiled",
-        "skipMetadataEmit": true
-    },
-    "exclude": [
-        "node_modules",
-        "dist"
-    ],
-    "compileOnSave": false,
-    "buildOnSave": false
+    "include": ["./**/*.ts"]
 }
