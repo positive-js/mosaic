@@ -37,6 +37,7 @@ module.exports = function (options) {
             rules: [
                 {
                     test: /\.ts$/,
+                    enforce: 'post',
                     use: [
                         {
                             loader: path.resolve('./tools/webpack/ng2-sass-loader.js')
@@ -49,7 +50,7 @@ module.exports = function (options) {
                         {
                             loader: 'awesome-typescript-loader',
                             options: {
-                                configFileName: 'src/lib-dev/tsconfig.json'
+                                configFileName: './tsconfig.webpack.json'
                             }
                         },
                         {

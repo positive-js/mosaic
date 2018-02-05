@@ -1,0 +1,44 @@
+
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "es2015",
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "allowSyntheticDefaultImports": true,
+        "sourceMap": true,
+        "noEmitHelpers": true,
+        "importHelpers": true,
+        "strictNullChecks": false,
+        "lib": [
+            "es5",
+            "es2015",
+            "dom"
+        ],
+        "baseUrl": "./src",
+        "paths": {
+            "@angular/*": ["node_modules/@angular/*"]
+        },
+        "typeRoots": [
+            "node_modules/@types"
+        ],
+        "types": [
+            "jasmine",
+            "node"
+        ]
+    },
+    "include": [
+        "./src/lib/**/*.ts",
+        "./src/lib-dev/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist",
+        "src/**/*.spec.ts",
+        "src/**/*.e2e.ts"
+    ],
+    "angularCompilerOptions": {
+        "skipMetadataEmit": true
+    }
+}
