@@ -11,7 +11,7 @@ const commonConfig = require('./webpack.common.js');
 
 const ENV = 'development';
 const HOST = 'localhost';
-const PORT = 3000;
+const PORT = 3003;
 const METADATA = {
     host: HOST,
     port: PORT,

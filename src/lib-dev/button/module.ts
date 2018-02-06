@@ -8,8 +8,9 @@ import { McButtonModule } from '../../lib/button/';
 @Component({
     selector: 'app',
     template: `
-        <button mc-button color="primary"></button>
-        <button mc-button color="accent"></button>`,
+        <button mc-button>Default</button>
+        <button mc-button color="primary">primary</button>
+        <button mc-button color="accent">accent</button>`,
     styleUrls: ['./theme.scss']
 })
 export class ButtonDemoComponent {}
