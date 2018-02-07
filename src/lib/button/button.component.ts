@@ -3,46 +3,17 @@ import {
     Component, Directive, ElementRef, OnDestroy, ViewEncapsulation
 } from '@angular/core';
 
-import { mixinColor, mixinDisabled } from '../core/common-behaviors/index';
-import { ThemePalette, CanColor, CanDisable } from '../core/common-behaviors/index';
+import { mixinColor, mixinDisabled, CanColor, CanDisable } from '../core/common-behaviors/index';
+import { FocusMonitor } from '../../cdk/a11y';
 
-class CSSClass {
-    prefix: string;
-    _name: string;
-    _modificator: string = '';
-
-    constructor(prefix: string, name: string) {
-        this.prefix = prefix;
-        this._name = name;
-    }
-
-    set modificator(name: string) {
-        this._modificator = name;
-    }
-
-    get modificator(): string {
-        return this._modificator;
-    }
-
-    set name(name: string) {
-        this._name = name;
-    }
-
-    get name(): string {
-        return this._name;
-    }
-}
 
 @Directive({
     selector: 'button[mc-button], a[mc-button]',
     host: { class: 'mc-button' }
 })
-export class McButtonStyler {}
+export class McButtonCSSStyler {}
 
-/** @docs-private */
 export class McButtonBase {
-    CSSClass: CSSClass = new CSSClass('mc', 'button');
-
     constructor(public _elementRef: ElementRef) {}
 }
 
@@ -59,9 +30,15 @@ export const _McButtonMixinBase = mixinColor(mixinDisabled(McButtonBase));
         '[disabled]': 'disabled || null',
     }
 })
-export class McButton extends _McButtonMixinBase implements CanDisable, CanColor {
-    constructor(elementRef: ElementRef) {
+export class McButton extends _McButtonMixinBase implements OnDestroy, CanDisable, CanColor {
+    constructor(elementRef: ElementRef, private _focusMonitor: FocusMonitor) {
         super(elementRef);
+
+        this._focusMonitor.monitor(this._elementRef.nativeElement, true);
+    }
+
+    ngOnDestroy() {
+        this._focusMonitor.stopMonitoring(this._elementRef.nativeElement);
     }
 
     focus(): void {

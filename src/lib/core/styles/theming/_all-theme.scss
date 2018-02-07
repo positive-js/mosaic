@@ -5,6 +5,5 @@
 
 
 @mixin mosaic-theme($theme) {
-
     @include mc-button-theme($theme);
 }

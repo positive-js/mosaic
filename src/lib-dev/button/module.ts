@@ -8,7 +8,8 @@ import { McButtonModule } from '../../lib/button/';
 @Component({
     selector: 'app',
     template: `
-        <button mc-button>Default</button>
+        <button mc-button></button>
+        <button mc-button disabled>Default</button>
         <button mc-button color="primary">primary</button>
         <button mc-button color="accent">accent</button>`,
     styleUrls: ['./theme.scss']
@@ -33,6 +34,5 @@ export class ButtonDemoModule {}
 
 platformBrowserDynamic()
     .bootstrapModule(ButtonDemoModule)
-    /* tslint:disable:no-console */
     .catch((error) => console.error(error));
 

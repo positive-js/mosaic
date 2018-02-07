@@ -26,7 +26,6 @@ export enum ThemePalette {
     Warn = 'warn',
     Default = ''
 }
-// export type ThemePalette = ButtonColors;
 
 /** Mixin to augment a directive with a `color` property. */
 export function mixinColor<T extends Constructor<HasElementRef>>(base: T, defaultColor: ThemePalette = ThemePalette.Default): Constructor<CanColor> & T {

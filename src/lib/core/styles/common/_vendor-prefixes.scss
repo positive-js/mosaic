@@ -6,7 +6,6 @@
 }
 
 @mixin input-placeholder {
-
     &::placeholder {
         @content;
     }
