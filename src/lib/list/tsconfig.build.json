@@ -1,0 +1,14 @@
+{
+  "extends": "../tsconfig.build",
+  "files": [
+    "public-api.ts",
+    "../typings.d.ts"
+  ],
+  "angularCompilerOptions": {
+    "strictMetadataEmit": true,
+    "flatModuleOutFile": "index.js",
+    "flatModuleId": "@ptsecurity/mosaic/button",
+    "skipTemplateCodegen": true,
+    "fullTemplateTypeCheck": true
+  }
+}

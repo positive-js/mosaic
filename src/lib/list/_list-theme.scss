@@ -1,0 +1,51 @@
+@import '../core/styles/theming/theming';
+@import '../core/styles/typography/typography-utils';
+
+// TODO: Its only for testing colors
+@import '../core/styles/theming/palette';
+
+
+@mixin _mc-list-theme-color($theme, $color: 'default') {
+    $primary: map-get($theme, primary);
+    $second: map-get($theme, second);
+    $warn: map-get($theme, warn);
+
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    &.mc-primary {
+        //@include _mc-button-primary-color($primary);
+    }
+
+    &.mc-second {
+        //@include _mc-button-second-color($second);
+    }
+
+    //&.mc-warn {
+    //    @include _mc-button-color($foreground, mc-color($warn, $color));
+    //}
+
+    &.mc-primary, &.mc-second, &.mc-warn {
+        &[disabled] {
+            color: mc-color($foreground, disabled-button);
+        }
+    }
+}
+
+
+@mixin mc-list-theme($theme) {
+    .mc-list {
+        @include _mc-list-theme-color($theme);
+    }
+}
+
+@mixin mc-list-typography($config) {
+    .mc-list {
+        font: {
+            size:   mc-font-size($config, button);
+            family: mc-font-family($config, button);
+            weight: mc-font-weight($config, button);
+        }
+    }
+}
+

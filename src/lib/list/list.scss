@@ -1,0 +1,9 @@
+@import 'list-base';
+@import 'list-theme';
+
+
+.mc-button {
+    @extend %mc-list-base;
+
+    @include mc-list-size($mc-button-padding, $mc-button-line-height, $mc-button-font);
+}
