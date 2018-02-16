@@ -14,32 +14,95 @@
     }
 }
 
-@mixin _mc-button-colors($foreground, $colorMap) {
-    color: mc-color($foreground, button-text);
-    border-color: mc-color($colorMap, 800);
-    background: linear-gradient(to bottom, mc-color($colorMap, 500), mc-color($colorMap, 600));
+@mixin _mc-button-primary-color($palette) {
+    border-color: mc-color($palette, darker);
+    color: mc-contrast($palette, 500);
+    background-image: linear-gradient(to bottom, mc-color($palette, lighter), mc-color($palette));
 
-    $bg-hover: linear-gradient(to bottom, mc-color($colorMap, 600), mc-color($colorMap, 700));
-    @include _mc-hovered-mixin(mc-color($foreground, button-text), transparent, none, $bg-hover);
+    &:hover {
+        background-image: linear-gradient(to bottom, mc-color($palette), mc-color($palette, darker));
+    }
 
     &:active {
-        $bg-active: linear-gradient(to bottom, mc-color($colorMap, 800), mc-color($colorMap, 800));
-        @include _mc-hovered-mixin(mc-color($foreground, button-text), transparent, none, $bg-active);
+        background-image: linear-gradient(to top, mc-color($palette), mc-color($palette, darker));
+    }
+}
+
+@mixin _mc-button-second-color($palette) {
+    border-color: mc-color($palette, darker);
+    color: mc-contrast($palette, 500);
+    background-image: linear-gradient(to bottom, mc-color($palette, lighter), mc-color($palette));
+
+    &:hover {
+        background-image: linear-gradient(to bottom, mc-color($palette), mc-color($palette, darker));
+    }
+
+    &:active {
+        background-image: linear-gradient(to top, mc-color($palette), mc-color($palette, darker));
     }
 }
 
 @mixin _mc-button-theme-color($theme, $color: 'default') {
-    $primary:    map-get($theme, primary);
-    $accent:     map-get($theme, accent);
-    $warn:       map-get($theme, warn);
-    $background: map-get($theme, background);
+    $primary: map-get($theme, primary);
+    $second: map-get($theme, second);
+    $warn: map-get($theme, warn);
+
     $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    &.mc-primary {
+        @include _mc-button-primary-color($primary);
+    }
+
+    &.mc-second {
+        @include _mc-button-second-color($second);
+    }
+
+    //&.mc-warn {
+    //    @include _mc-button-color($foreground, mc-color($warn, $color));
+    //}
+
+    &.mc-primary, &.mc-second, &.mc-warn {
+        &[disabled] {
+            color: mc-color($foreground, disabled-button);
+        }
+    }
+}
+
+@mixin _mc-button-theme-focus-color($theme, $color: 'default') {
+    $primary:    map-get($theme, primary);
+    $second:     map-get($theme, second);
+    $warn:       map-get($theme, warn);
+
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
 
     &.mc-primary {
 
     }
 
-    &.mc-accent {
+    &.mc-second {
+
+    }
+
+    &.mc-warn {
+
+    }
+}
+
+@mixin _mc-button-theme-hover-color($theme, $color: 'default') {
+    $primary:    map-get($theme, primary);
+    $second:     map-get($theme, second);
+    $warn:       map-get($theme, warn);
+
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    &.mc-primary {
+
+    }
+
+    &.mc-second {
 
     }
 
@@ -50,8 +113,14 @@
 
 
 @mixin mc-button-theme($theme) {
-    .mc-button {
+    .mc-button,
+    .mc-xs-button,
+    .mc-sm-button,
+    .mc-lg-button,
+    .mc-xl-button{
         @include _mc-button-theme-color($theme);
+        //@include _mc-button-theme-focus-color($theme);
+        //@include _mc-button-theme-hover-color($theme);
     }
 
     .mc-icon-button {

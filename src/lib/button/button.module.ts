@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { McButton, McButtonCSSStyler } from './button.component';
+import {
+    McButton, McButtonCSSStyler, McXSButtonCSSStyler, McSMButtonCSSStyler, McLGButtonCSSStyler, McXLButtonCSSStyler
+} from './button.component';
 import { A11yModule } from '../../cdk/a11y';
 import { PlatformModule } from '../../cdk/platform';
 
@@ -13,11 +15,19 @@ import { PlatformModule } from '../../cdk/platform';
     ],
     exports: [
         McButton,
-        McButtonCSSStyler
+        McButtonCSSStyler,
+        McXSButtonCSSStyler,
+        McSMButtonCSSStyler,
+        McLGButtonCSSStyler,
+        McXLButtonCSSStyler
     ],
     declarations: [
         McButton,
-        McButtonCSSStyler
+        McButtonCSSStyler,
+        McXSButtonCSSStyler,
+        McSMButtonCSSStyler,
+        McLGButtonCSSStyler,
+        McXLButtonCSSStyler
     ]
 })
 export class McButtonModule {}

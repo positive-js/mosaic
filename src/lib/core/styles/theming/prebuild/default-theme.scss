@@ -6,11 +6,10 @@
 
 
 // Define a theme.
-$primary: mc-palette($mc-blue, 600, 500, 560, 700);
-$secondary: mc-palette($mc-grey, 300, 60, 100, 400);
+$primary: mc-palette($mc-blue, 500, 600, 600);
+$second: mc-palette($mc-grey, 40, 60, 100);
 
-
-$theme: mc-light-theme($primary, $secondary);
+$theme: mc-light-theme($primary, $second);
 
 // Include all theme styles for the components.
 @include mosaic-theme($theme);

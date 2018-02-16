@@ -95,7 +95,7 @@ $mc-red: (
 );
 
 $mc-grey: (
-    40: #f5f5f5,
+    40: #ffffff,
     60: #f0f0f0,
     100: #e6e6e6,
     200: #cccccc,
@@ -123,7 +123,7 @@ $mc-grey: (
 $mc-light-theme-foreground: (
     base:              black,
     disabled:          rgba(black, 0.38),
-    disabled-button:   rgba(black, 0.38),
+    disabled-button:   rgba(black, 0.26),
     disabled-text:     rgba(black, 0.38),
     hint-text:         rgba(black, 0.38),
     icon:              rgba(black, 0.54),

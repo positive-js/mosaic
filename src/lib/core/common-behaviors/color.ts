@@ -22,7 +22,7 @@ export interface HasElementRef {
 /** Possible color palette values. */
 export enum ThemePalette {
     Primary = 'primary',
-    Accent = 'accent',
+    Second = 'second',
     Warn = 'warn',
     Default = ''
 }

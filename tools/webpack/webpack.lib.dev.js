@@ -38,29 +38,21 @@ module.exports = function (options) {
                 {
                     test: /\.ts$/,
                     enforce: 'post',
-                    use: [
-                        {
-                            loader: path.resolve('./tools/webpack/ng2-sass-loader.js')
-                        }
-                    ]
+                    use: [{ loader: path.resolve('./tools/webpack/ng2-sass-loader.js') }]
                 },
                 {
                     test: /\.ts$/,
                     use: [
                         {
                             loader: 'awesome-typescript-loader',
-                            options: {
-                                configFileName: './tsconfig.webpack.json'
-                            }
+                            options: { configFileName: './tsconfig.webpack.json' }
                         },
                         {
                             loader: 'angular2-template-loader'
                         }
                     ],
 
-                    exclude: [
-                        helpers.root('node_modules')
-                    ]
+                    exclude: [ helpers.root('node_modules') ]
                 },
                 {
                     test: /\.scss$/,
