@@ -1,28 +1,26 @@
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-
-import { Constructor } from './constructor';
 import { toBoolean } from '../utils/index';
+import { Constructor } from './constructor';
 
-/** @docs-private */
+
 export interface CanDisable {
-  disabled: boolean;
+    disabled: boolean;
 }
 
-/** Mixin to augment a directive with a `disabled` property. */
+// Mixin to augment a directive with a `disabled` property.
 export function mixinDisabled<T extends Constructor<{}>>(base: T): Constructor<CanDisable> & T {
-  return class extends base {
-    private _disabled: boolean = false;
+    return class extends base {
+        private _disabled: boolean = false;
 
-    get disabled() { return this._disabled; }
+        get disabled() {
+            return this._disabled;
+        }
 
-    set disabled(value: any) { this._disabled = toBoolean(value); }
+        set disabled(value: any) {
+            this._disabled = toBoolean(value);
+        }
 
-    constructor(...args: any[]) { super(...args); }
-  };
+        constructor(...args: any[]) {
+            super(...args);
+        }
+    };
 }

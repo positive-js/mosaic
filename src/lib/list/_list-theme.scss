@@ -1,51 +1,97 @@
 @import '../core/styles/theming/theming';
+@import '../core/styles/theming/palette';
 @import '../core/styles/typography/typography-utils';
 
 // TODO: Its only for testing colors
 @import '../core/styles/theming/palette';
+@import '../core/styles/common/list';
 
 
-@mixin _mc-list-theme-color($theme, $color: 'default') {
-    $primary: map-get($theme, primary);
-    $second: map-get($theme, second);
-    $warn: map-get($theme, warn);
-
-    $foreground: map-get($theme, foreground);
+@mixin mat-list-theme($theme) {
     $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
 
-    &.mc-primary {
-        //@include _mc-button-primary-color($primary);
+    .mat-list, .mat-nav-list, .mat-selection-list {
+        .mat-list-item {
+            color: mat-color($foreground, text);
+        }
+
+        .mat-list-option {
+            color: mat-color($foreground, text);
+        }
+
+        .mat-subheader {
+            color: mat-color($foreground, secondary-text);
+        }
     }
 
-    &.mc-second {
-        //@include _mc-button-second-color($second);
+    .mat-list-item-disabled {
+        background-color: mat-color($background, disabled-list-option);
     }
 
-    //&.mc-warn {
-    //    @include _mc-button-color($foreground, mc-color($warn, $color));
-    //}
+    .mat-nav-list .mat-list-item {
+        outline: none;
 
-    &.mc-primary, &.mc-second, &.mc-warn {
-        &[disabled] {
-            color: mc-color($foreground, disabled-button);
+        &:hover, &.mat-list-item-focus {
+            background: mat-color($background, 'hover');
+        }
+    }
+
+    .mat-list-option {
+        outline: none;
+
+        &:hover, &.mat-list-item-focus {
+            background: mat-color($background, 'hover');
         }
     }
 }
 
+@mixin mat-list-typography($config) {
+    $font-family: mat-font-family($config);
 
-@mixin mc-list-theme($theme) {
-    .mc-list {
-        @include _mc-list-theme-color($theme);
+    .mat-list-item {
+        font-family: $font-family;
     }
-}
 
-@mixin mc-list-typography($config) {
-    .mc-list {
-        font: {
-            size:   mc-font-size($config, button);
-            family: mc-font-family($config, button);
-            weight: mc-font-weight($config, button);
+    .mat-list-option {
+        font-family: $font-family;
+    }
+
+    // Default list
+    .mat-list, .mat-nav-list, .mat-selection-list {
+        .mat-list-item {
+            font-size: mat-font-size($config, subheading-2);
+            @include mat-line-base(mat-font-size($config, body-1));
+        }
+
+        .mat-list-option {
+            font-size: mat-font-size($config, subheading-2);
+            @include mat-line-base(mat-font-size($config, body-1));
+        }
+
+        .mat-subheader {
+            font-family: mat-font-family($config, body-2);
+            font-size: mat-font-size($config, body-2);
+            font-weight: mat-font-weight($config, body-2);
+        }
+    }
+
+    // Dense list
+    .mat-list[dense], .mat-nav-list[dense], .mat-selection-list[dense] {
+        .mat-list-item {
+            font-size: mat-font-size($config, caption);
+            @include mat-line-base(mat-font-size($config, caption));
+        }
+
+        .mat-list-option {
+            font-size: mat-font-size($config, caption);
+            @include mat-line-base(mat-font-size($config, caption));
+        }
+
+        .mat-subheader {
+            font-family: $font-family;
+            font-size: mat-font-size($config, caption);
+            font-weight: mat-font-weight($config, body-2);
         }
     }
 }
-

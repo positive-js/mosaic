@@ -3,9 +3,9 @@ import {
     Component, Directive, ElementRef, OnDestroy, ViewEncapsulation
 } from '@angular/core';
 
-import { mixinColor, mixinDisabled, CanColor, CanDisable } from '../core/common-behaviors/index';
 import { FocusMonitor } from '../../cdk/a11y';
 import { Platform } from '../../cdk/platform';
+import { mixinColor, mixinDisabled, CanColor, CanDisable } from '../core/common-behaviors/index';
 
 
 @Directive({
@@ -51,7 +51,9 @@ export const _McButtonMixinBase = mixinColor(mixinDisabled(McButtonBase));
 
 
 @Component({
-    selector: 'button[mc-button], button[mc-xs-button], button[mc-sm-button], button[mc-lg-button], button[mc-xl-button]',
+    selector: `
+        button[mc-button], button[mc-xs-button], button[mc-sm-button], button[mc-lg-button], button[mc-xl-button]
+    `,
     templateUrl: './button.component.html',
     styleUrls: ['./button.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -59,6 +61,7 @@ export const _McButtonMixinBase = mixinColor(mixinDisabled(McButtonBase));
     inputs: ['disabled', 'color'],
     host: {
         '[disabled]': 'disabled || null',
+        '[tabIndex]': 'tabIndex'
     }
 })
 export class McButton extends _McButtonMixinBase implements OnDestroy, CanDisable, CanColor {
@@ -92,8 +95,7 @@ export class McButton extends _McButtonMixinBase implements OnDestroy, CanDisabl
     host: {
         '[attr.tabindex]': 'disabled ? -1 : 0',
         '[attr.disabled]': 'disabled || null',
-        '[attr.aria-disabled]': 'disabled.toString()',
-        '(click)': '_haltDisabledEvents($event)',
+        '(click)': '_haltDisabledEvents($event)'
     }
 })
 export class McAnchor extends McButton {
@@ -102,7 +104,6 @@ export class McAnchor extends McButton {
     }
 
     _haltDisabledEvents(event: Event) {
-        // A disabled button shouldn't apply any actions
         if (this.disabled) {
             event.preventDefault();
             event.stopImmediatePropagation();

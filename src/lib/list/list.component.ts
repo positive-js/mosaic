@@ -1,54 +1,74 @@
+// todo пока не делаем, перенесено из материала, но у нас в доках таких простых списков нет.
 import {
-    ChangeDetectionStrategy,
-    Component, Directive, ElementRef, OnDestroy, ViewEncapsulation
+    AfterContentInit, ChangeDetectionStrategy, Component, ContentChildren, Directive, ElementRef, QueryList,
+    ViewEncapsulation
 } from '@angular/core';
 
-import { mixinColor, mixinDisabled, CanColor, CanDisable } from '../core/common-behaviors/index';
-import { FocusMonitor } from '../../cdk/a11y';
-import { Platform } from '../../cdk/platform';
+import { McLine, McLineSetter } from '../core/line/line';
 
 
-@Directive({
-    selector: '[mc-list]',
-    host: { class: 'mc-list' }
-})
-export class McListCSSStyler {}
-
-
-export class McListBase {
-    constructor(public _elementRef: ElementRef) {}
-}
-
-export const _McListMixinBase = mixinColor(mixinDisabled(McListBase));
-
+export class McListBase {}
 
 @Component({
-    selector: '[mc-list]',
-    templateUrl: './list.component.html',
+    selector: 'mc-list',
+    host: { class: 'mc-list' },
+    template: '<ng-content></ng-content>',
     styleUrls: ['./list.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None,
-    inputs: ['disabled', 'color'],
-    host: {
-        '[disabled]': 'disabled || null',
-    }
+    encapsulation: ViewEncapsulation.None
 })
-export class McList extends _McListMixinBase implements OnDestroy, CanDisable, CanColor {
-    constructor(elementRef: ElementRef, private _platform: Platform, private _focusMonitor: FocusMonitor) {
-        super(elementRef);
+export class McList extends McListBase {}
 
-        this._focusMonitor.monitor(this._elementRef.nativeElement, true);
+
+/**
+ * Directive whose purpose is to add the mat- CSS styling to this selector.
+ * @docs-private
+ */
+@Directive({
+    selector: '[mc-subheader], [mcSubheader]',
+    host: { class: 'mc-subheader' }
+})
+export class McListSubheaderCssStyler {}
+
+
+// Boilerplate for applying mixins to McListItem.
+export class McListItemBase {}
+
+// An item within a Material Design list.
+@Component({
+    selector: 'mc-list-item, a[mc-list-item]',
+    host: {
+        class: 'mc-list-item',
+        '(focus)': '_handleFocus()',
+        '(blur)': '_handleBlur()'
+    },
+    templateUrl: './list-item.html',
+    encapsulation: ViewEncapsulation.None,
+    preserveWhitespaces: false,
+    changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class McListItem extends McListItemBase implements AfterContentInit {
+    @ContentChildren(McLine) _lines: QueryList<McLine>;
+
+    private _lineSetter: McLineSetter;
+
+    constructor(private _element: ElementRef) {
+        super();
     }
 
-    ngOnDestroy() {
-        this._focusMonitor.stopMonitoring(this._elementRef.nativeElement);
+    ngAfterContentInit() {
+        this._lineSetter = new McLineSetter(this._lines, this._element);
     }
 
-    focus(): void {
-        this._getHostElement().focus();
+    _handleFocus() {
+        this._element.nativeElement.classList.add('mc-list-item-focus');
     }
 
-    _getHostElement() {
-        return this._elementRef.nativeElement;
+    _handleBlur() {
+        this._element.nativeElement.classList.remove('mc-list-item-focus');
+    }
+
+    _getHostElement(): HTMLElement {
+        return this._element.nativeElement;
     }
 }

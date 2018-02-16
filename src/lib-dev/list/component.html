@@ -1,1 +1,7 @@
-ololo
+<mc-list-selection>
+    <h3 mc-subheader>Folders</h3>
+    <mc-list-item *ngFor="let folder of folders">
+        <div mc-line>{{ folder.name }}</div>
+        <!--<p mc-line>{{ folder.updated | date }}</p>-->
+    </mc-list-item>
+</mc-list-selection>

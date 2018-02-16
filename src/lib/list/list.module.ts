@@ -1,23 +1,33 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { McList, McListCSSStyler } from './list.component';
+
 import { A11yModule } from '../../cdk/a11y';
 import { PlatformModule } from '../../cdk/platform';
+
+import { McLineModule } from '../core';
+
+import { McListSelection } from './list-selection.component';
+import { McList, McListItem, McListSubheaderCssStyler} from './list.component';
 
 
 @NgModule({
     imports: [
         CommonModule,
+        PlatformModule,
         A11yModule,
-        PlatformModule
+        McLineModule
     ],
     exports: [
         McList,
-        McListCSSStyler
+        McListSelection,
+        McListItem,
+        McListSubheaderCssStyler
     ],
     declarations: [
         McList,
-        McListCSSStyler
+        McListSelection,
+        McListItem,
+        McListSubheaderCssStyler
     ]
 })
 export class McListModule {}

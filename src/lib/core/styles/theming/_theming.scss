@@ -50,7 +50,7 @@
     );
 }
 
-@function mat-dark-theme($primary, $second, $warn: mc-palette($mc-red)) {
+@function mc-dark-theme($primary, $second, $warn: mc-palette($mc-red)) {
     @return (
         primary: $primary,
         second: $second,

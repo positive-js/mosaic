@@ -1,9 +1,257 @@
+@import '../core/styles/variables';
+@import '../core/styles/common/list';
+@import '../core/styles/common/layout';
+@import '../divider/divider';
+
 @import 'list-base';
 @import 'list-theme';
 
 
-.mc-button {
+.mc-list {
     @extend %mc-list-base;
+}
 
-    @include mc-list-size($mc-button-padding, $mc-button-line-height, $mc-button-font);
+.mc-list-selection {
+    @extend %mc-list-base;
+}
+
+
+
+
+$mc-list-side-padding: 16px;
+$mc-list-icon-padding: 4px;
+$mc-list-avatar-size: 40px;
+
+// Normal list variables
+$mc-list-top-padding: 8px;
+// height for single-line lists
+$mc-list-base-height: 48px;
+// height for single-line lists with avatars
+$mc-list-avatar-height: 56px;
+// spec requires two- and three-line lists be taller
+$mc-list-two-line-height: 72px;
+$mc-list-three-line-height: 88px;
+$mc-list-multi-line-padding: 16px;
+$mc-list-icon-size: 24px;
+
+// Dense list variables
+$mc-dense-top-padding: 4px;
+$mc-dense-base-height: 40px;
+$mc-dense-avatar-height: 48px;
+$mc-dense-two-line-height: 60px;
+$mc-dense-three-line-height: 76px;
+$mc-dense-multi-line-padding: 16px;
+$mc-dense-list-icon-size: 20px;
+
+$mc-list-item-inset-divider-offset: 72px;
+
+// This mixin provides all list-item styles, changing font size and height
+// based on whether the list is in dense mode.
+@mixin mc-list-item-base(
+    $base-height, $avatar-height, $two-line-height, $three-line-height, $multi-line-padding, $icon-size
+) {
+    // Prevents the wrapper `mc-list-item-content` from collapsing due to it
+    // being `inline` by default.
+    display: block;
+    height: $base-height;
+
+    .mc-list-item-content {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        box-sizing: border-box;
+        padding: 0 $mc-list-side-padding;
+        position: relative;
+        height: inherit;
+    }
+
+    .mc-list-item-content-reverse {
+        display: flex;
+        align-items: center;
+        padding: 0 $mc-list-side-padding;
+        flex-direction: row-reverse;
+        justify-content: space-around;
+    }
+
+    .mc-list-item-ripple {
+        @include mc-fill;
+
+        // Disable pointer events for the ripple container because the container will overlay the
+        // user content and we don't want to disable mouse events on the user content.
+        // Pointer events can be safely disabled because the ripple trigger element is the host element.
+        pointer-events: none;
+    }
+
+    &.mc-list-item-avatar {
+        height: $avatar-height;
+    }
+
+    &.mc-2-line {
+        height: $two-line-height;
+    }
+
+
+    &.mc-3-line {
+        height: $three-line-height;
+    }
+
+    // list items with more than 3 lines should expand to match
+    // the height of its contained text
+    &.mc-multi-line {
+        height: auto;
+
+        .mc-list-item-content {
+            padding-top: $multi-line-padding;
+            padding-bottom: $multi-line-padding;
+        }
+    }
+
+    .mc-list-text {
+        @include mc-line-wrapper-base();
+
+        // By default, there will be no padding for the list item text because the padding is already
+        // set on the `mc-list-item-content` element. Later, if the list-item detects that there are
+        // secondary items (avatar, checkbox), a padding on the proper side will be added.
+        padding: 0;
+    }
+
+    // There can be a secondary item (e.g. avatar-icon, checkbox) at the start of the
+    // list-item. This means that there should be a padding for the mc-list-text on the start-side.
+    .mc-list-item-content .mc-list-text:not(:nth-child(2)) {
+        padding-right: 0;
+        padding-left: $mc-list-side-padding;
+
+        [dir='rtl'] & {
+            padding-right: $mc-list-side-padding;
+            padding-left: 0;
+        }
+    }
+
+    // Reversed content is mainly used by the MatSelectionList for displaying the checkbox at the
+    // end of the list option. Since there is a secondary item (checkbox) at the end of the
+    // option, there needs to be a padding for the mc-list-text on the end-side.
+    .mc-list-item-content-reverse .mc-list-text:not(:nth-child(2)) {
+        padding-left: 0;
+        padding-right: $mc-list-side-padding;
+
+        [dir='rtl'] & {
+            padding-right: 0;
+            padding-left: $mc-list-side-padding;
+        }
+    }
+
+    .mc-list-avatar {
+        flex-shrink: 0;
+        width: $mc-list-avatar-size;
+        height: $mc-list-avatar-size;
+        border-radius: 50%;
+
+        ~ .mc-divider-inset {
+            @include mc-inset-divider-offset($mc-list-avatar-size, $mc-list-side-padding);
+        }
+    }
+
+    .mc-list-icon {
+        flex-shrink: 0;
+        width: $icon-size;
+        height: $icon-size;
+        font-size: $icon-size;
+        box-sizing: content-box;
+        border-radius: 50%;
+        padding: $mc-list-icon-padding;
+
+        ~ .mc-divider-inset {
+            @include mc-inset-divider-offset($icon-size + (2 * $mc-list-icon-padding),
+                $mc-list-side-padding);
+        }
+    }
+
+    .mc-divider {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        margin: 0;
+
+        [dir='rtl'] & {
+            margin-left: auto;
+            margin-right: 0;
+        }
+
+        &.mc-divider-inset {
+            position: absolute; // necessary to override card styles
+        }
+    }
+}
+
+.mc-subheader {
+    display: flex;
+    box-sizing: border-box;
+    padding: $mc-list-side-padding;
+    align-items: center;
+
+    // This needs slightly more specificity, because it
+    // can be overwritten by the typography styles.
+    .mc-list &,
+    .mc-selection-list & {
+        margin: 0;
+    }
+}
+
+// This mixin adjusts the heights and padding based on whether the list is in dense mode.
+@mixin mc-subheader-spacing($top-padding, $base-height) {
+    height: $base-height;
+    line-height: $base-height - $mc-list-side-padding * 2;
+
+    &:first-child {
+        margin-top: -$top-padding;
+    }
+}
+
+.mc-list, .mc-selection-list {
+    padding-top: $mc-list-top-padding;
+    display: block;
+
+    .mc-subheader {
+        @include mc-subheader-spacing($mc-list-top-padding, $mc-list-base-height);
+    }
+
+    .mc-list-item, .mc-list-option {
+        @include mc-list-item-base(
+                $mc-list-base-height,
+                $mc-list-avatar-height,
+                $mc-list-two-line-height,
+                $mc-list-three-line-height,
+                $mc-list-multi-line-padding,
+                $mc-list-icon-size
+        );
+    }
+}
+
+
+.mc-list[dense], .mc-selection-list[dense] {
+    padding-top: $mc-dense-top-padding;
+    display: block;
+
+    .mc-subheader {
+        @include mc-subheader-spacing($mc-dense-top-padding, $mc-dense-base-height);
+    }
+
+    .mc-list-item, .mc-list-option {
+        @include mc-list-item-base(
+                $mc-dense-base-height,
+                $mc-dense-avatar-height,
+                $mc-dense-two-line-height,
+                $mc-dense-three-line-height,
+                $mc-dense-multi-line-padding,
+                $mc-dense-list-icon-size
+        );
+    }
+}
+
+
+.mc-list-option {
+    &:not([disabled]) {
+        cursor: pointer;
+    }
 }
