@@ -1,4 +1,4 @@
-import { TAB } from '@angular/cdk/keycodes';
+import { TAB } from '../../keycodes';
 import {
     dispatchFakeEvent,
     dispatchKeyboardEvent,

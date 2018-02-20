@@ -1,67 +1,157 @@
-//@import '../core/styles/common/list-common';
+@import '../core/styles/common/list';
 
-$mc-button-margin: 0 !default;
-$mc-button-border-radius: 3px;
+$mc-list-side-padding: 15px;
+$mc-list-icon-padding: 4px;
+$mc-list-avatar-size: 40px;
 
+// height for single-line lists
+$mc-list-base-height: 28px;
 
-$mc-button-padding_xs: 3px 7px;
-$mc-button-line-height_xs: 16px;
-$mc-button-font_xs: 12px;
+// height for single-line lists with avatars
+$mc-list-avatar-height: 56px;
 
-$mc-button-padding_sm: 3px 15px;
-$mc-button-line-height_sm: 16px;
-$mc-button-font_sm: 12px;
+// spec requires two- and three-line lists be taller
+$mc-list-two-line-height: 72px;
+$mc-list-three-line-height: 88px;
+$mc-list-multi-line-padding: 16px;
+$mc-list-icon-size: 24px;
 
-$mc-button-padding: 5px 15px;
-$mc-button-line-height: 20px;
-$mc-button-font: 14px;
+$mc-list-item-inset-divider-offset: 72px;
 
-$mc-button-padding_lg: 9px 15px;
-$mc-button-line-height_lg: 20px;
-$mc-button-font_lg: 14px;
+// This mixin provides all list-item styles, changing font size and height
+// based on whether the list is in dense mode.
+@mixin mc-list-item-base(
+    $base-height, $avatar-height, $two-line-height, $three-line-height, $multi-line-padding, $icon-size
+) {
+    // Prevents the wrapper `mc-list-item-content` from collapsing due to it
+    // being `inline` by default.
+    display: block;
+    height: $base-height;
 
-$mc-button-padding_xl: 9px 59px;
-$mc-button-line-height_xl: 28px;
-$mc-button-font_xl: 18px;
-
-
-%mc-list-base {
-    //@include mc-list-reset();
-
-    position: relative;
-
-    box-sizing: border-box;
-
-    display: inline-block;
-    white-space: nowrap;
-    text-decoration: none;
-    vertical-align: baseline;
-
-    margin: $mc-button-margin;
-
-    border-radius: $mc-button-border-radius;
-
-    font-size: inherit;
-    font-weight: 500;
-    text-align: center;
-
-    border: 1px solid transparent;
-
-    &::-moz-focus-inner {
-        border: 0;
+    .mc-list-item-content {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        box-sizing: border-box;
+        padding: 0 $mc-list-side-padding;
+        position: relative;
+        height: inherit;
     }
 
-    &:focus {
-        outline: none;
+    .mc-list-item-content-reverse {
+        display: flex;
+        align-items: center;
+        padding: 0 $mc-list-side-padding;
+        flex-direction: row-reverse;
+        justify-content: space-around;
     }
 
-    &[disabled] {
-        cursor: default;
+    &.mc-list-item-avatar {
+        height: $avatar-height;
+    }
+
+    &.mc-2-line {
+        height: $two-line-height;
+    }
+
+    &.mc-3-line {
+        height: $three-line-height;
+    }
+
+    // list items with more than 3 lines should expand to match the height of its contained text
+    &.mc-multi-line {
+        height: auto;
+
+        .mc-list-item-content {
+            padding-top: $multi-line-padding;
+            padding-bottom: $multi-line-padding;
+        }
+    }
+
+    .mc-list-text {
+        @include mc-line-wrapper-base();
+
+        // By default, there will be no padding for the list item text because the padding is already
+        // set on the `mc-list-item-content` element. Later, if the list-item detects that there are
+        // secondary items (avatar, checkbox), a padding on the proper side will be added.
+        padding: 0;
+    }
+
+    // There can be a secondary item (e.g. avatar-icon, checkbox) at the start of the
+    // list-item. This means that there should be a padding for the mc-list-text on the start-side.
+    .mc-list-item-content .mc-list-text:not(:nth-child(2)) {
+        padding-right: 0;
+        padding-left: $mc-list-side-padding;
+
+        [dir='rtl'] & {
+            padding-right: $mc-list-side-padding;
+            padding-left: 0;
+        }
+    }
+
+    // Reversed content is mainly used by the MatSelectionList for displaying the checkbox at the
+    // end of the list option. Since there is a secondary item (checkbox) at the end of the
+    // option, there needs to be a padding for the mc-list-text on the end-side.
+    .mc-list-item-content-reverse .mc-list-text:not(:nth-child(2)) {
+        padding-left: 0;
+        padding-right: $mc-list-side-padding;
+
+        [dir='rtl'] & {
+            padding-right: 0;
+            padding-left: $mc-list-side-padding;
+        }
+    }
+
+    .mc-list-avatar {
+        flex-shrink: 0;
+        width: $mc-list-avatar-size;
+        height: $mc-list-avatar-size;
+        border-radius: 50%;
+
+        ~ .mc-divider-inset {
+            @include mc-inset-divider-offset($mc-list-avatar-size, $mc-list-side-padding);
+        }
+    }
+
+    .mc-list-icon {
+        flex-shrink: 0;
+        width: $icon-size;
+        height: $icon-size;
+        font-size: $icon-size;
+        box-sizing: content-box;
+        border-radius: 50%;
+        padding: $mc-list-icon-padding;
+
+        ~ .mc-divider-inset {
+            @include mc-inset-divider-offset($icon-size + (2 * $mc-list-icon-padding),
+                $mc-list-side-padding);
+        }
+    }
+
+    .mc-divider {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        margin: 0;
+
+        [dir='rtl'] & {
+            margin-left: auto;
+            margin-right: 0;
+        }
+
+        &.mc-divider-inset {
+            position: absolute; // necessary to override card styles
+        }
     }
 }
 
-@mixin mc-list-size($padding, $line-height, $font-size) {
-    padding: $padding;
-    line-height: $line-height;
-    font-size: $font-size;
+// This mixin adjusts the heights and padding based on whether the list is in dense mode.
+@mixin mc-subheader-spacing($top-padding, $base-height) {
+    height: $base-height;
+    line-height: $base-height - $mc-list-side-padding * 2;
+
+    &:first-child {
+        margin-top: -$top-padding;
+    }
 }

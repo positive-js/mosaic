@@ -28,14 +28,14 @@ describe('MixinColor', () => {
         instance.color = 'primary';
 
         expect(instance.testElement.classList)
-            .toContain('mat-primary', 'Expected the element to have the "mat-primary" class set');
+            .toContain('mc-primary', 'Expected the element to have the "mc-primary" class set');
 
         instance.color = 'accent';
 
         expect(instance.testElement.classList)
-            .not.toContain('mat-primary', 'Expected the element to no longer have "mat-primary" set.');
+            .not.toContain('mc-primary', 'Expected the element to no longer have "mc-primary" set.');
         expect(instance.testElement.classList)
-            .toContain('mat-accent', 'Expected the element to have the "mat-accent" class set');
+            .toContain('mc-accent', 'Expected the element to have the "mc-accent" class set');
     });
 
     it('should allow having no color set', () => {
@@ -48,7 +48,7 @@ describe('MixinColor', () => {
         instance.color = 'primary';
 
         expect(instance.testElement.classList)
-            .toContain('mat-primary', 'Expected the element to have the "mat-primary" class set');
+            .toContain('mc-primary', 'Expected the element to have the "mc-primary" class set');
 
         instance.color = undefined;
 
@@ -61,12 +61,12 @@ describe('MixinColor', () => {
         const instance = new classWithColor();
 
         expect(instance.testElement.classList)
-            .toContain('mat-accent', 'Expected the element to have the "mat-accent" class by default.');
+            .toContain('mc-accent', 'Expected the element to have the "mc-accent" class by default.');
 
         instance.color = undefined;
 
         expect(instance.testElement.classList)
-            .toContain('mat-accent', 'Expected the default color "mat-accent" to be set.');
+            .toContain('mc-accent', 'Expected the default color "mc-accent" to be set.');
     });
 
 });

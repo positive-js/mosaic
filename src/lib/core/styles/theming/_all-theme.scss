@@ -2,8 +2,10 @@
 @import '../core';
 @import 'theming';
 @import '../../../button/button-theme';
+@import '../../../list/list-theme';
 
 
 @mixin mosaic-theme($theme) {
     @include mc-button-theme($theme);
+    @include mc-list-theme($theme);
 }

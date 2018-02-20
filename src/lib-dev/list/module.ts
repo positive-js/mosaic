@@ -11,6 +11,8 @@ import { McListModule } from '../../lib/list';
     styleUrls: ['./theme.scss']
 })
 export class DemoComponent {
+    typesOfShoes = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
+
     folders = [
         {
             name: 'Photos',

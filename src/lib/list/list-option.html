@@ -1,0 +1,9 @@
+<div class="mc-list-item-content"
+     [class.mc-list-item-content-reverse]="checkboxPosition == 'after'">
+
+    <!--<mc-pseudo-checkbox [state]="selected ? 'checked' : 'unchecked'" [disabled]="disabled"></mc-pseudo-checkbox>-->
+
+    <div class="mc-list-text" #text>
+        <ng-content></ng-content>
+    </div>
+</div>

@@ -62,7 +62,7 @@ export class McCommonModule {
         if (this._document && typeof getComputedStyle === 'function') {
             const testElement = this._document.createElement('div');
 
-            testElement.classList.add('mat-theme-loaded-marker');
+            testElement.classList.add('mc-theme-loaded-marker');
             this._document.body.appendChild(testElement);
 
             const computedStyle = getComputedStyle(testElement);

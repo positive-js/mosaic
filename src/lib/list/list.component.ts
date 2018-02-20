@@ -21,7 +21,7 @@ export class McList extends McListBase {}
 
 
 /**
- * Directive whose purpose is to add the mat- CSS styling to this selector.
+ * Directive whose purpose is to add the mc- CSS styling to this selector.
  * @docs-private
  */
 @Directive({
@@ -61,11 +61,11 @@ export class McListItem extends McListItemBase implements AfterContentInit {
     }
 
     _handleFocus() {
-        this._element.nativeElement.classList.add('mc-list-item-focus');
+        this._element.nativeElement.classList.add('mc-focus');
     }
 
     _handleBlur() {
-        this._element.nativeElement.classList.remove('mc-list-item-focus');
+        this._element.nativeElement.classList.remove('mc-focus');
     }
 
     _getHostElement(): HTMLElement {

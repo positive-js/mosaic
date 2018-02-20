@@ -1,5 +1,6 @@
 @import './typography';
 @import '../../../button/button-theme';
+@import '../../../list/list-theme';
 
 
 @mixin mosaic-typography($config: null) {
@@ -8,10 +9,7 @@
     }
 
     @include mc-base-typography($config);
+
     @include mc-button-typography($config);
-
-    // include other component styles
-
-    // mc-button-toggle-typography($config);
-    // etc...
+    @include mc-list-typography($config);
 }

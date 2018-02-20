@@ -24,18 +24,18 @@ describe('MatDivider', () => {
     fixture.componentInstance.vertical = true;
     fixture.detectChanges();
 
-    const divider = fixture.debugElement.query(By.css('mat-divider'));
-    expect(divider.nativeElement.className).toContain('mat-divider');
-    expect(divider.nativeElement.className).toContain('mat-divider-vertical');
+    const divider = fixture.debugElement.query(By.css('mc-divider'));
+    expect(divider.nativeElement.className).toContain('mc-divider');
+    expect(divider.nativeElement.className).toContain('mc-divider-vertical');
   });
 
   it('should apply inset class to inset divider', () => {
     fixture.componentInstance.inset = true;
     fixture.detectChanges();
 
-    const divider = fixture.debugElement.query(By.css('mat-divider'));
-    expect(divider.nativeElement.className).toContain('mat-divider');
-    expect(divider.nativeElement.className).toContain('mat-divider-inset');
+    const divider = fixture.debugElement.query(By.css('mc-divider'));
+    expect(divider.nativeElement.className).toContain('mc-divider');
+    expect(divider.nativeElement.className).toContain('mc-divider-inset');
   });
 
   it('should apply inset and vertical classes to vertical inset divider', () => {
@@ -43,22 +43,22 @@ describe('MatDivider', () => {
     fixture.componentInstance.inset = true;
     fixture.detectChanges();
 
-    const divider = fixture.debugElement.query(By.css('mat-divider'));
-    expect(divider.nativeElement.className).toContain('mat-divider');
-    expect(divider.nativeElement.className).toContain('mat-divider-inset');
-    expect(divider.nativeElement.className).toContain('mat-divider-vertical');
+    const divider = fixture.debugElement.query(By.css('mc-divider'));
+    expect(divider.nativeElement.className).toContain('mc-divider');
+    expect(divider.nativeElement.className).toContain('mc-divider-inset');
+    expect(divider.nativeElement.className).toContain('mc-divider-vertical');
   });
 
   it('should add aria roles properly', () => {
     fixture.detectChanges();
 
-    const divider = fixture.debugElement.query(By.css('mat-divider'));
+    const divider = fixture.debugElement.query(By.css('mc-divider'));
     expect(divider.nativeElement.getAttribute('role')).toBe('separator');
   });
 });
 
 @Component({
-  template: `<mat-divider [vertical]="vertical" [inset]="inset"></mat-divider>`
+  template: `<mc-divider [vertical]="vertical" [inset]="inset"></mc-divider>`
 })
 class MatDividerTestComponent {
   vertical: boolean;

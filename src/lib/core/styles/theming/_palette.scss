@@ -124,17 +124,20 @@ $mc-light-theme-foreground: (
     base:              black,
     disabled:          rgba(black, 0.38),
     disabled-button:   rgba(black, 0.26),
-    disabled-text:     rgba(black, 0.38),
+    disabled-text:     rgba(black, 0.3),
     hint-text:         rgba(black, 0.38),
     icon:              rgba(black, 0.54),
-    text:              rgba(black, 0.87)
+    text:              rgba(black, 0.87),
+    secondary-text:    rgba(black, 0.54),
 );
 
 // Background palette for light themes.
 $mc-light-theme-background: (
+    hover: rgba(black, 0.04), // TODO(kara): check style with Material Design UX
     background: #808080,
     disabled-button: $black-12-opacity,
-    focused-button: $black-6-opacity
+    focused-button: $black-6-opacity,
+    disabled-list-option: #CCC
 );
 
 // Foreground palette for dark themes.

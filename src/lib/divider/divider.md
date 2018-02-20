@@ -1,14 +1,14 @@
-`<mat-divider>` is a component that allows for Material styling of a line separator with various orientation options.
+`<mc-divider>` is a component that allows for Material styling of a line separator with various orientation options.
 
 <!-- example(divider-overview) -->
 
 
 ### Simple divider
 
-A `<mat-divider>` element can be used on its own to create a horizontal or vertical line styled with a Material theme
+A `<mc-divider>` element can be used on its own to create a horizontal or vertical line styled with a Material theme
 
 ```html
-<mat-divider></mat-divider>
+<mc-divider></mc-divider>
 ```
 
 ### Inset divider
@@ -16,7 +16,7 @@ A `<mat-divider>` element can be used on its own to create a horizontal or verti
 Add the `inset` attribute in order to set whether or not the divider is an inset divider.
 
 ```html
-<mat-divider [inset]="true"></mat-divider>
+<mc-divider [inset]="true"></mc-divider>
 ```
 
 ### Vertical divider
@@ -24,7 +24,7 @@ Add the `inset` attribute in order to set whether or not the divider is an inset
 Add the `vertical` attribute in order to set whether or not the divider is vertically-oriented.
 
 ```html
-<mat-divider [vertical]="true"></mat-divider>
+<mc-divider [vertical]="true"></mc-divider>
 ```
 
 
@@ -36,20 +36,20 @@ like avatar images or icons. Make sure to avoid adding an inset divider to the l
 in a list, because it will overlap with the section divider.
 
 ```html
-<mat-list>
-   <h3 mat-subheader>Folders</h3>
-   <mat-list-item *ngFor="let folder of folders; last as last">
-      <mat-icon mat-list-icon>folder</mat-icon>
-      <h4 mat-line>{{folder.name}}</h4>
-      <p mat-line class="demo-2"> {{folder.updated}} </p>
-      <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
-   </mat-list-item>
-   <mat-divider></mat-divider>
+<mc-list>
+   <h3 mc-subheader>Folders</h3>
+   <mc-list-item *ngFor="let folder of folders; last as last">
+      <mc-icon mc-list-icon>folder</mc-icon>
+      <h4 mc-line>{{folder.name}}</h4>
+      <p mc-line class="demo-2"> {{folder.updated}} </p>
+      <mc-divider [inset]="true" *ngIf="!last"></mc-divider>
+   </mc-list-item>
+   <mc-divider></mc-divider>
    <h3 md-subheader>Notes</h3>
-   <mat-list-item *ngFor="let note of notes">
-      <mat-icon md-list-icon>note</mat-icon>
+   <mc-list-item *ngFor="let note of notes">
+      <mc-icon md-list-icon>note</mc-icon>
       <h4 md-line>{{note.name}}</h4>
       <p md-line class="demo-2"> {{note.updated}} </p>
-   </mat-list-item>
-</mat-list>
+   </mc-list-item>
+</mc-list>
 ```

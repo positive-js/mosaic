@@ -1,97 +1,84 @@
 @import '../core/styles/theming/theming';
 @import '../core/styles/theming/palette';
 @import '../core/styles/typography/typography-utils';
-
 // TODO: Its only for testing colors
 @import '../core/styles/theming/palette';
 @import '../core/styles/common/list';
 
+@mixin mc-list-theme($theme) {
+    $primary: map-get($theme, primary);
 
-@mixin mat-list-theme($theme) {
-    $background: map-get($theme, background);
     $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
 
-    .mat-list, .mat-nav-list, .mat-selection-list {
-        .mat-list-item {
-            color: mat-color($foreground, text);
+    .mc-list,
+    .mc-list-selection {
+        .mc-list-item {
+            color: mc-color($foreground, text);
         }
 
-        .mat-list-option {
-            color: mat-color($foreground, text);
+        .mc-list-option {
+            outline: none;
+            border: 1px solid transparent;
+
+            color: mc-color($foreground, text);
+
+            &:hover,
+            &.mc-hover {
+                background: mc-color($background, 'hover');
+            }
+
+            &.mc-focus {
+                border: 1px solid mc-color($primary, 400);
+            }
+
+            &.mc-select {
+                background-color: mc-color($primary, 100);
+            }
+
+            &.mc-disabled {
+                background-color: transparent;
+
+                color: mc-color($foreground, disabled-text);
+            }
         }
 
-        .mat-subheader {
-            color: mat-color($foreground, secondary-text);
-        }
-    }
-
-    .mat-list-item-disabled {
-        background-color: mat-color($background, disabled-list-option);
-    }
-
-    .mat-nav-list .mat-list-item {
-        outline: none;
-
-        &:hover, &.mat-list-item-focus {
-            background: mat-color($background, 'hover');
-        }
-    }
-
-    .mat-list-option {
-        outline: none;
-
-        &:hover, &.mat-list-item-focus {
-            background: mat-color($background, 'hover');
+        .mc-subheader {
+            color: mc-color($foreground, secondary-text);
         }
     }
 }
 
-@mixin mat-list-typography($config) {
-    $font-family: mat-font-family($config);
+@mixin mc-list-typography($config) {
+    $font-family: mc-font-family($config);
 
-    .mat-list-item {
+    .mc-list-item {
         font-family: $font-family;
     }
 
-    .mat-list-option {
+    .mc-list-option {
         font-family: $font-family;
     }
 
     // Default list
-    .mat-list, .mat-nav-list, .mat-selection-list {
-        .mat-list-item {
-            font-size: mat-font-size($config, subheading-2);
-            @include mat-line-base(mat-font-size($config, body-1));
+    .mc-list,
+    .mc-list-selection {
+        .mc-list-item {
+            font-size: mc-font-size($config, subheading-2);
+
+            @include mc-line-base(mc-font-size($config, body-1));
         }
 
-        .mat-list-option {
-            font-size: mat-font-size($config, subheading-2);
-            @include mat-line-base(mat-font-size($config, body-1));
+        .mc-list-option {
+            font-size: mc-font-size($config, subheading-2);
+
+            @include mc-line-base(mc-font-size($config, body-1));
         }
 
-        .mat-subheader {
-            font-family: mat-font-family($config, body-2);
-            font-size: mat-font-size($config, body-2);
-            font-weight: mat-font-weight($config, body-2);
-        }
-    }
-
-    // Dense list
-    .mat-list[dense], .mat-nav-list[dense], .mat-selection-list[dense] {
-        .mat-list-item {
-            font-size: mat-font-size($config, caption);
-            @include mat-line-base(mat-font-size($config, caption));
-        }
-
-        .mat-list-option {
-            font-size: mat-font-size($config, caption);
-            @include mat-line-base(mat-font-size($config, caption));
-        }
-
-        .mat-subheader {
-            font-family: $font-family;
-            font-size: mat-font-size($config, caption);
-            font-weight: mat-font-weight($config, body-2);
+        .mc-subheader {
+            font-family: mc-font-family($config, body-2);
+            font-size: mc-font-size($config, body-2);
+            font-weight: mc-font-weight($config, body-2);
         }
     }
 }

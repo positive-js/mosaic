@@ -12,7 +12,7 @@ $typography-font-weight-values: (
 // TODO add caption-height
 $fonts: (
     base: (
-        font-family: #{-apple-system, 'San Francisco', 'Roboto', 'Helvetica Neue', sans-serif}
+        font-family: #{Roboto, 'Helvetica Neue', sans-serif}
     ),
     monospace: (
         font-family: #{Monaco, Consolas, 'Lucida Console', monospace}

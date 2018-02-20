@@ -5,8 +5,9 @@ import { A11yModule } from '../../cdk/a11y';
 import { PlatformModule } from '../../cdk/platform';
 
 import { McLineModule } from '../core';
+import { McPseudoCheckboxModule } from '../core/selection';
 
-import { McListSelection } from './list-selection.component';
+import { McListSelection, McListOption } from './list-selection.component';
 import { McList, McListItem, McListSubheaderCssStyler} from './list.component';
 
 
@@ -15,18 +16,21 @@ import { McList, McListItem, McListSubheaderCssStyler} from './list.component';
         CommonModule,
         PlatformModule,
         A11yModule,
+        McPseudoCheckboxModule,
         McLineModule
     ],
     exports: [
         McList,
         McListSelection,
         McListItem,
+        McListOption,
         McListSubheaderCssStyler
     ],
     declarations: [
         McList,
         McListSelection,
         McListItem,
+        McListOption,
         McListSubheaderCssStyler
     ]
 })
