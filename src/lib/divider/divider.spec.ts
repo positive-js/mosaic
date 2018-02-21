@@ -1,23 +1,23 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {Component} from '@angular/core';
 import {By} from '@angular/platform-browser';
-import {MatDividerModule} from './divider-module';
+import { McDividerModule } from './divider-module';
 
 
-describe('MatDivider', () => {
+describe('McDivider', () => {
 
-  let fixture: ComponentFixture<MatDividerTestComponent>;
+  let fixture: ComponentFixture<McDividerTestComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [MatDividerModule],
+      imports: [McDividerModule],
       declarations: [
-        MatDividerTestComponent
+          McDividerTestComponent
       ],
     });
 
     TestBed.compileComponents();
-    fixture = TestBed.createComponent(MatDividerTestComponent);
+    fixture = TestBed.createComponent(McDividerTestComponent);
   }));
 
   it('should apply vertical class to vertical divider', () => {
@@ -60,7 +60,7 @@ describe('MatDivider', () => {
 @Component({
   template: `<mc-divider [vertical]="vertical" [inset]="inset"></mc-divider>`
 })
-class MatDividerTestComponent {
+class McDividerTestComponent {
   vertical: boolean;
   inset: boolean;
 }

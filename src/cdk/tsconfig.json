@@ -5,10 +5,7 @@
         "rootDir": "..",
         "baseUrl": ".",
         "paths": {
-            "@ptsecurity/cdk/*": [
-                "../cdk/*"
-            ],
-            "@ptsecurity/mosaic/*": [
+            "@angular/cdk/*": [
                 "./*"
             ]
         }

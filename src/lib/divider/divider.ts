@@ -18,7 +18,7 @@ import { toBoolean } from '../core';
     changeDetection: ChangeDetectionStrategy.OnPush,
     preserveWhitespaces: false
 })
-export class MatDivider {
+export class McDivider {
     // Whether the divider is vertically aligned.
     @Input()
     get vertical(): boolean {

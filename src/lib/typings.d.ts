@@ -1,3 +1,5 @@
+declare var module: {id: string};
+
 declare var ENV: string;
 declare var HMR: boolean;
 

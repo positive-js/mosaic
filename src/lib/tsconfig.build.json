@@ -15,8 +15,6 @@
       ".",
       "../../dist/packages/mosaic"
     ],
-    "__sourceMap": true,
-    "__inlineSources": true,
     "target": "es2015",
     "lib": ["es2015", "dom"],
     "skipLibCheck": true,
