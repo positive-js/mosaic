@@ -1,9 +1,9 @@
 const webpackMerge = require('webpack-merge');
 
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const HotModuleReplacementPlugin = require('webpack/lib/HotModuleReplacementPlugin');
+const { TsConfigPathsPlugin } = require('awesome-typescript-loader');
 
 const path = require('path');
 const helpers = require('./helpers');
@@ -23,6 +23,14 @@ module.exports = function (options) {
     return webpackMerge(commonConfig(options), {
 
         devtool: 'source-map',
+
+        resolve: {
+            plugins: [
+                new TsConfigPathsPlugin({
+                    configFileName: './tsconfig.webpack.json'
+                })
+            ]
+        },
 
         output: {
             path: helpers.root('dist'),
@@ -45,7 +53,10 @@ module.exports = function (options) {
                     use: [
                         {
                             loader: 'awesome-typescript-loader',
-                            options: { configFileName: './tsconfig.webpack.json' }
+                            options: {
+                                configFileName: './tsconfig.webpack.json'
+                            }
+
                         },
                         {
                             loader: 'angular2-template-loader'
@@ -77,14 +88,6 @@ module.exports = function (options) {
         },
 
         plugins: [
-            new CleanWebpackPlugin(
-                ['dist'],
-                {
-                    root: helpers.root(),
-                    verbose: true,
-                    dry: false
-                }
-            ),
 
             new HotModuleReplacementPlugin(),
 

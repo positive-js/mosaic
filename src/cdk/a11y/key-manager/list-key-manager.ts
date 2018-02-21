@@ -18,7 +18,7 @@ import {
     Z,
     ZERO,
     NINE
-} from '../../keycodes';
+} from '@ptsecurity/cdk/keycodes';
 
 
 // This interface is for items that can be passed to a ListKeyManager.

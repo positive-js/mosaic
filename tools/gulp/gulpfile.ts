@@ -1,8 +1,9 @@
 import { createPackageBuildTasks } from '../packages';
 
-import { mosaicPackage } from './packages';
+import { cdkPackage, mosaicPackage } from './packages';
 
 
+createPackageBuildTasks(cdkPackage);
 createPackageBuildTasks(mosaicPackage);
 
 /* tslint:disable:no-import-side-effect */

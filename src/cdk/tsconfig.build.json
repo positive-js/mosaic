@@ -29,7 +29,7 @@
             "tslib"
         ],
         "paths": {
-            "@angular/cdk/*": [
+            "@ptsecurity/cdk/*": [
                 "../../dist/packages/cdk/*"
             ]
         }

@@ -1,13 +1,12 @@
 {
-    "extends": "../tsconfig-build",
+    "extends": "../tsconfig.build",
     "files": [
         "public-api.ts"
     ],
     "angularCompilerOptions": {
-        "annotateForClosureCompiler": true,
         "strictMetadataEmit": true,
         "flatModuleOutFile": "index.js",
-        "flatModuleId": "@ptsecurity/mosaic/cdk/a11y",
+        "flatModuleId": "@ptsecurity/cdk/a11y",
         "skipTemplateCodegen": true,
         "fullTemplateTypeCheck": true
     }

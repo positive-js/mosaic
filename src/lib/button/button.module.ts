@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { A11yModule } from '../../cdk/a11y';
-import { PlatformModule } from '../../cdk/platform';
+import { A11yModule } from '@ptsecurity/cdk/a11y';
+import { PlatformModule } from '@ptsecurity/cdk/platform';
 
 import {
     McButton, McButtonCSSStyler, McXSButtonCSSStyler, McSMButtonCSSStyler, McLGButtonCSSStyler, McXLButtonCSSStyler

@@ -18,19 +18,13 @@
         ],
         "baseUrl": "./src",
         "paths": {
-            "@angular/*": ["node_modules/@angular/*"]
-        },
-        "typeRoots": [
-            "node_modules/@types"
-        ],
-        "types": [
-            "jasmine",
-            "node"
-        ]
+            "@ptsecurity/cdk/*": [
+                "./cdk/*"
+            ]
+        }
     },
     "include": [
-        "./src/lib/**/*.ts",
-        "./src/lib-dev/**/*.ts"
+        "./src/**/*"
     ],
     "exclude": [
         "node_modules",

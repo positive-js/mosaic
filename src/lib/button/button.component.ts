@@ -3,8 +3,9 @@ import {
     Component, Directive, ElementRef, OnDestroy, ViewEncapsulation
 } from '@angular/core';
 
-import { FocusMonitor } from '../../cdk/a11y';
-import { Platform } from '../../cdk/platform';
+import { FocusMonitor } from '@ptsecurity/cdk/a11y';
+import { Platform } from '@ptsecurity/cdk/platform';
+
 import { mixinColor, mixinDisabled, CanColor, CanDisable } from '../core/common-behaviors/index';
 
 

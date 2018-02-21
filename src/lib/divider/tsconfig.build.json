@@ -1,13 +1,14 @@
 {
-  "extends": "../tsconfig-build",
+  "extends": "../tsconfig.build",
   "files": [
-    "public-api.ts"
+    "public-api.ts",
+    "../typings.d.ts"
   ],
   "angularCompilerOptions": {
     "annotateForClosureCompiler": true,
     "strictMetadataEmit": true,
     "flatModuleOutFile": "index.js",
-    "flatModuleId": "@ptsecurity/mosaic/cdk/platform",
+    "flatModuleId": "@ptsecurity/mosaic/divider",
     "skipTemplateCodegen": true,
     "fullTemplateTypeCheck": true
   }

@@ -1,4 +1,4 @@
-import { Platform, supportsPassiveEventListeners } from '../../platform';
+import { Platform, supportsPassiveEventListeners } from '@ptsecurity/cdk/platform';
 import {
     Directive,
     ElementRef,

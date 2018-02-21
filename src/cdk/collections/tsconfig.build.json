@@ -1,5 +1,5 @@
 {
-  "extends": "../tsconfig-build",
+  "extends": "../tsconfig.build",
   "files": [
     "public-api.ts"
   ],
@@ -7,7 +7,7 @@
     "annotateForClosureCompiler": true,
     "strictMetadataEmit": true,
     "flatModuleOutFile": "index.js",
-    "flatModuleId": "@angular/cdk/keycodes",
+    "flatModuleId": "@ptsecurity/cdk/collections",
     "skipTemplateCodegen": true,
     "fullTemplateTypeCheck": true
   }

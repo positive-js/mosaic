@@ -4,12 +4,20 @@ import { buildConfig } from './build-config';
 import { getSubdirectoryNames } from './secondary-entry-points';
 import { dashCaseToCamelCase } from './utils';
 
+/** List of potential secondary entry-points for the cdk package. */
+const cdkSecondaryEntryPoints = getSubdirectoryNames(join(buildConfig.packagesDir, 'cdk'));
+
+/** Object with all cdk entry points in the format of Rollup globals. */
+const rollupCdkEntryPoints = cdkSecondaryEntryPoints.reduce((globals: any, entryPoint: string) => {
+    globals[`@ptsecurity/cdk/${entryPoint}`] = `ng.cdk.${dashCaseToCamelCase(entryPoint)}`;
+    return globals;
+}, {});
 
 /** List of potential secondary entry-points for the material package. */
 const mcSecondaryEntryPoints = getSubdirectoryNames(join(buildConfig.packagesDir, 'lib'));
 
 const rollupMcEntryPoints = mcSecondaryEntryPoints.reduce((globals: any, entryPoint: string) => {
-    globals[`@angular/material/${entryPoint}`] = `ng.material.${dashCaseToCamelCase(entryPoint)}`;
+    globals[`@ptsecurity/mosaic/${entryPoint}`] = `ng.mosaic.${dashCaseToCamelCase(entryPoint)}`;
 
     return globals;
 }, {});
@@ -33,6 +41,9 @@ export const rollupGlobals = {
     '@angular/common/http/testing': 'ng.common.http.testing',
 
     '@ptsecurity/mosaic': 'ng.mosaic',
+    '@ptsecurity/cdk': 'ng.cdk',
+
+    ...rollupCdkEntryPoints,
     ...rollupMcEntryPoints,
 
     'rxjs/BehaviorSubject': 'Rx',

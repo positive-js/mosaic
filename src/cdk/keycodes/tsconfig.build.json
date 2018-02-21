@@ -1,14 +1,13 @@
 {
-  "extends": "../tsconfig-build",
+  "extends": "../tsconfig.build",
   "files": [
-    "public-api.ts",
-    "../typings.d.ts"
+    "public-api.ts"
   ],
   "angularCompilerOptions": {
     "annotateForClosureCompiler": true,
     "strictMetadataEmit": true,
     "flatModuleOutFile": "index.js",
-    "flatModuleId": "@angular/material/divider",
+    "flatModuleId": "@ptsecurity/cdk/keycodes",
     "skipTemplateCodegen": true,
     "fullTemplateTypeCheck": true
   }
