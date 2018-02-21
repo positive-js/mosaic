@@ -90,6 +90,12 @@ interface IBuildNode {
     depth: number;
 }
 
+/**
+ * `Partitions nodes into groups by depth. For example,
+ * [{name: a11y, depth: 1}, {name: bidi, depth: 0}, {name: platform, depth: 0}]
+ * =>
+ * [ [{name: bidi, depth: 0}, {name: platform, depth: 0}], [{name: a11y, depth: 1}] ]`
+ */
 function partitionNodesByDepth(nodes: IBuildNode[]): IBuildNode[][] {
     const result: IBuildNode[][] = [[]];
     let lastDepth = 0;
@@ -113,12 +119,12 @@ function buildPackageImportStatementFindCommand(searchDirectory: string, package
     if (platform() === 'win32') {
         return {
             binary: 'findstr',
-            args: ['/r', `from.'@angular/${packageName}/.*'`, `${searchDirectory}\\*.ts`]
+            args: ['/r', `from.'@ptsecurity/${packageName}/.*'`, `${searchDirectory}\\*.ts`]
         };
     } else {
         return {
             binary: 'grep',
-            args: ['-Eroh', '--include', '*.ts', `from '@angular/${packageName}/.+';`, searchDirectory]
+            args: ['-Eroh', '--include', '*.ts', `from '@ptsecurity/${packageName}/.+';`, searchDirectory]
         };
     }
 }
