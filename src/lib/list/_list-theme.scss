@@ -1,6 +1,7 @@
 @import '../core/styles/theming/theming';
 @import '../core/styles/theming/palette';
 @import '../core/styles/typography/typography-utils';
+
 // TODO: Its only for testing colors
 @import '../core/styles/theming/palette';
 @import '../core/styles/common/list';
@@ -24,15 +25,15 @@
             color: mc-color($foreground, text);
 
             &:hover,
-            &.mc-hover {
+            &.mc-hovered {
                 background: mc-color($background, 'hover');
             }
 
-            &.mc-focus {
+            &.mc-focused {
                 border: 1px solid mc-color($primary, 400);
             }
 
-            &.mc-select {
+            &.mc-selected {
                 background-color: mc-color($primary, 100);
             }
 
@@ -52,10 +53,7 @@
 @mixin mc-list-typography($config) {
     $font-family: mc-font-family($config);
 
-    .mc-list-item {
-        font-family: $font-family;
-    }
-
+    .mc-list-item,
     .mc-list-option {
         font-family: $font-family;
     }

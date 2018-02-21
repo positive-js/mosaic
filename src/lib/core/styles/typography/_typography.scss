@@ -1,36 +1,42 @@
 @import 'variables';
-@import '../functions/convert';
 @import './typography-utils';
 
 
 @function mc-typography-config(
     $font-family:   map-get(map-get($fonts, base), font-family),
-    $display-4:     mc-typography-level(px2Rem(112px), px2Rem(112px), 300),
-    $display-3:     mc-typography-level(px2Rem(56px),  px2Rem(76px), 400),
-    $display-2:     mc-typography-level(px2Rem(45px),  px2Rem(56px), 400),
-    $display-1:     mc-typography-level(px2Rem(34px),  px2Rem(44px), 400),
-    $headline:      mc-typography-level(px2Rem(24px),  px2Rem(32px), 400),
-    $title:         mc-typography-level(px2Rem(20px),  px2Rem(28px), 500),
-    $subheading-2:  mc-typography-level(px2Rem(16px),  px2Rem(28px), 400),
-    $subheading-1:  mc-typography-level(px2Rem(15px),  px2Rem(20px), 400),
-    $body-2:        mc-typography-level(px2Rem(14px),  px2Rem(24px), 500),
-    $body-1:        mc-typography-level(px2Rem(15px),  px2Rem(20px), 400),
-    $caption:       mc-typography-level(px2Rem(13px),  px2Rem(16px), 400),
-    $button:        mc-typography-level(px2Rem(15px),  px2Rem(20px), 400)
+
+    $display-1:     mc-typography-level(34px, 44px),
+    $display-2:     mc-typography-level(45px, 56px),
+    $display-3:     mc-typography-level(56px, 76px),
+    $display-4:     mc-typography-level(56px, 76px, 300),
+
+    $headline:      mc-typography-level(24px, 32px),
+    $title:         mc-typography-level(20px, 28px, 500),
+    $subheading-1:  mc-typography-level(16px, 20px),
+    $subheading-2:  mc-typography-level(15px, 28px),
+
+    $body-1:        mc-typography-level(15px, 20px),
+    $body-2:        mc-typography-level(15px, 20px, 500),
+    $caption:       mc-typography-level(13px, 16px),
+
+    $button:        mc-typography-level(15px, 20px)
 ) {
 
     $config: (
-        display-4:      $display-4,
-        display-3:      $display-3,
-        display-2:      $display-2,
         display-1:      $display-1,
+        display-2:      $display-2,
+        display-3:      $display-3,
+        display-4:      $display-4,
+
+        body-1:         $body-1,
+        body-2:         $body-2,
+        caption:        $caption,
+
         headline:       $headline,
         title:          $title,
-        subheading-2:   $subheading-2,
         subheading-1:   $subheading-1,
-        body-2:         $body-2,
-        body-1:         $body-1,
-        caption:        $caption,
+        subheading-2:   $subheading-2,
+
         button:         $button
     );
 

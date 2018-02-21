@@ -10,6 +10,7 @@
 @mixin mc-line-base($secondary-font-size) {
     .mc-line {
         @include mc-truncate-line();
+
         display: block;
         box-sizing: border-box;
 

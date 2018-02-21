@@ -64,10 +64,11 @@ export class McListSelectionChange {
         '(blur)': '_handleBlur()',
         '(click)': '_handleClick()',
 
-        class: 'mc-list-item mc-list-option',
+        class: 'mc-list-option',
         '[class.mc-disabled]': 'disabled',
-        '[attr.disabled]': 'disabled',
-        '[class.mc-focus]': '_hasFocus'
+        '[class.mc-selected]': '_selected',
+        '[class.mc-focused]': '_hasFocus',
+        '[attr.disabled]': 'disabled'
     },
     templateUrl: 'list-option.html',
     encapsulation: ViewEncapsulation.None,

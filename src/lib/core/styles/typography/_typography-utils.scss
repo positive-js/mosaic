@@ -5,8 +5,8 @@
     $font-size,
     $line-height: $font-size,
     $font-weight: 400,
-    $font-family: null) {
-
+    $font-family: null
+) {
     @return (
         font-size: $font-size,
         line-height: $line-height,

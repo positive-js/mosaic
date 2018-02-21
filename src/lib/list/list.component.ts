@@ -61,11 +61,11 @@ export class McListItem extends McListItemBase implements AfterContentInit {
     }
 
     _handleFocus() {
-        this._element.nativeElement.classList.add('mc-focus');
+        this._element.nativeElement.classList.add('mc-focused');
     }
 
     _handleBlur() {
-        this._element.nativeElement.classList.remove('mc-focus');
+        this._element.nativeElement.classList.remove('mc-focused');
     }
 
     _getHostElement(): HTMLElement {

@@ -57,14 +57,13 @@
     display: block;
 
     .mc-subheader {
-        //@include mc-subheader-spacing($mc-list-top-padding, $mc-list-base-height);
+        @include mc-subheader-spacing($mc-list-top-padding, $mc-list-base-height);
     }
 
     .mc-list-item,
     .mc-list-option {
         @include mc-list-item-base(
             $mc-list-base-height,
-            $mc-list-avatar-height,
             $mc-list-two-line-height,
             $mc-list-three-line-height,
             $mc-list-multi-line-padding,
