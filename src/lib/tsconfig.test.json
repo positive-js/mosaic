@@ -10,7 +10,7 @@
         }
     },
     "angularCompilerOptions": {
-        "strictMetadataEmit": true,
+        "strictMetadataEmit": false,
         "skipTemplateCodegen": true,
         "emitDecoratorMetadata": true,
         "fullTemplateTypeCheck": true

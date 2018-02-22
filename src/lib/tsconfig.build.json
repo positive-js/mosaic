@@ -33,7 +33,7 @@
     ],
     "angularCompilerOptions": {
         "annotateForClosureCompiler": true,
-        "strictMetadataEmit": true,
+        "strictMetadataEmit": false,
         "flatModuleOutFile": "index.js",
         "flatModuleId": "@ptsecurity/mosaic",
         "skipTemplateCodegen": true,
