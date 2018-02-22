@@ -2,7 +2,7 @@ import { NgModule, InjectionToken, Optional, Inject, isDevMode } from '@angular/
 
 
 // Injection token that configures whether the Material sanity checks are enabled.
-export const MATERIAL_SANITY_CHECKS = new InjectionToken<boolean>('mc-sanity-checks');
+export const MС_SANITY_CHECKS = new InjectionToken<boolean>('mc-sanity-checks');
 
 
 /**
@@ -15,7 +15,7 @@ export const MATERIAL_SANITY_CHECKS = new InjectionToken<boolean>('mc-sanity-che
     imports: [],
     exports: [],
     providers: [{
-        provide: MATERIAL_SANITY_CHECKS, useValue: true
+        provide: MС_SANITY_CHECKS, useValue: true
     }]
 })
 export class McCommonModule {
@@ -31,7 +31,7 @@ export class McCommonModule {
     // Reference to the global 'window' object.
     private _window = typeof window === 'object' && window ? window : null;
 
-    constructor(@Optional() @Inject(MATERIAL_SANITY_CHECKS) private _sanityChecksEnabled: boolean) {
+    constructor(@Optional() @Inject(MС_SANITY_CHECKS) private _sanityChecksEnabled: boolean) {
         if (this._areChecksEnabled() && !this._hasDoneGlobalChecks) {
             this._checkDoctypeIsDefined();
             this._checkThemeIsPresent();
