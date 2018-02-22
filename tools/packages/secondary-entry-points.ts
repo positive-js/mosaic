@@ -119,7 +119,7 @@ function buildPackageImportStatementFindCommand(searchDirectory: string, package
     if (platform() === 'win32') {
         return {
             binary: 'findstr',
-            args: ['/r', `from.'@ptsecurity/${packageName}/.*'`, `${searchDirectory}\\*.ts`]
+            args: ['/spin', `from.'@ptsecurity/${packageName}/.*'`, `${searchDirectory}\\*.ts`]
         };
     } else {
         return {
