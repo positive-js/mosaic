@@ -21,7 +21,14 @@
             "@ptsecurity/cdk/*": [
                 "./cdk/*"
             ]
-        }
+        },
+        "typeRoots": [
+            "node_modules/@types"
+        ],
+        "types": [
+            "node",
+            "jasmine"
+        ]
     },
     "include": [
         "./src/**/*"
