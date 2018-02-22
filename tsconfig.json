@@ -14,8 +14,11 @@
             "dom"
         ],
         "types": [
-            "node",
             "jasmine"
+        ],
+        "typeRoots": [
+            "node_modules/@types",
+            "src/lib/typings.d.ts"
         ]
     },
     "include": [

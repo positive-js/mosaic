@@ -20,6 +20,9 @@
         "paths": {
             "@ptsecurity/cdk/*": [
                 "./cdk/*"
+            ],
+            "@ptsecurity/mosaic/*": [
+                "./lib/*"
             ]
         },
         "typeRoots": [

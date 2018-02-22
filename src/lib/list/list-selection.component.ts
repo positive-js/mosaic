@@ -10,12 +10,12 @@ import {
 
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { FocusKeyManager, IFocusableOption } from '../../cdk/a11y';
-import { SelectionModel } from '../../cdk/collections';
-import { END, ENTER, HOME, SPACE } from '../../cdk/keycodes';
+import { FocusKeyManager, IFocusableOption } from '@ptsecurity/cdk/a11y';
+import { SelectionModel } from '@ptsecurity/cdk/collections';
+import { END, ENTER, HOME, SPACE } from '@ptsecurity/cdk/keycodes';
 
-import { CanDisable, mixinDisabled } from '../core/common-behaviors/index';
-import { HasTabIndex, mixinTabIndex, McLine, McLineSetter, toBoolean } from '../core/index';
+import { CanDisable, mixinDisabled, HasTabIndex,
+    mixinTabIndex, McLine, McLineSetter, toBoolean } from '@ptsecurity/mosaic/core';
 
 
 export class McListOptionBase {}

@@ -4,8 +4,7 @@ import { NgModule } from '@angular/core';
 import { A11yModule } from '@ptsecurity/cdk/a11y';
 import { PlatformModule } from '@ptsecurity/cdk/platform';
 
-import { McLineModule } from '../core';
-import { McPseudoCheckboxModule } from '../core/selection';
+import { McLineModule, McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
 
 import { McListSelection, McListOption } from './list-selection.component';
 import { McList, McListItem, McListSubheaderCssStyler} from './list.component';

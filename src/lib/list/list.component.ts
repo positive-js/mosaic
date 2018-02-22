@@ -4,7 +4,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { McLine, McLineSetter } from '../core/line/line';
+import { McLine, McLineSetter } from '@ptsecurity/mosaic/core';
 
 
 export class McListBase {}

@@ -6,7 +6,7 @@ import {
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { Platform } from '@ptsecurity/cdk/platform';
 
-import { mixinColor, mixinDisabled, CanColor, CanDisable } from '../core/common-behaviors/index';
+import { mixinColor, mixinDisabled, CanColor, CanDisable } from '@ptsecurity/mosaic/core';
 
 
 @Directive({
