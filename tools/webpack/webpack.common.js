@@ -1,8 +1,6 @@
+
 const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin');
-const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
-const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
-const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
-const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const helpers = require('./helpers');
@@ -64,31 +62,15 @@ module.exports = function (options) {
             ]
         },
 
+        optimization: {
+            noEmitOnErrors: true,
+            runtimeChunk: 'single',
+            splitChunks: {
+                chunks: 'initial'
+            }
+        },
+
         plugins: [
-
-            new CheckerPlugin(),
-
-            new DuplicatePackageCheckerPlugin(),
-
-            new ScriptExtHtmlWebpackPlugin({
-                defaultAttribute: 'defer'
-            }),
-
-            new CommonsChunkPlugin({
-                name: 'polyfills',
-                chunks: ['polyfills']
-            }),
-
-            // This enables tree shaking of the vendor modules
-            new CommonsChunkPlugin({
-                name: 'vendors',
-                chunks: [options.component],
-                minChunks: module => /node_modules/.test(module.resource)
-            }),
-
-            new CommonsChunkPlugin({
-                name: ['polyfills', 'vendors'].reverse()
-            }),
 
             new HtmlWebpackPlugin({
                 template: htmlTemplatePath,

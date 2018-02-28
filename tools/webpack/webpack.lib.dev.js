@@ -1,7 +1,5 @@
 const webpackMerge = require('webpack-merge');
 
-const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
-const DefinePlugin = require('webpack/lib/DefinePlugin');
 const HotModuleReplacementPlugin = require('webpack/lib/HotModuleReplacementPlugin');
 const { TsConfigPathsPlugin } = require('awesome-typescript-loader');
 
@@ -22,6 +20,8 @@ module.exports = function (options) {
 
     return webpackMerge(commonConfig(options), {
 
+        mode: 'development',
+
         devtool: 'source-map',
 
         resolve: {
@@ -35,10 +35,7 @@ module.exports = function (options) {
         output: {
             path: helpers.root('dist'),
             filename: '[name].bundle.js',
-            sourceMapFilename: '[name].map',
-            chunkFilename: '[id].chunk.js',
-            library: 'ac_[name]',
-            libraryTarget: 'var'
+            sourceMapFilename: '[name].map'
         },
 
         module: {
@@ -89,19 +86,8 @@ module.exports = function (options) {
 
         plugins: [
 
-            new HotModuleReplacementPlugin(),
+            new HotModuleReplacementPlugin()
 
-            new DefinePlugin({
-                'ENV': JSON.stringify(METADATA.ENV),
-                'process.env': {
-                    'ENV': JSON.stringify(METADATA.ENV),
-                    'NODE_ENV': JSON.stringify(METADATA.ENV)
-                }
-            }),
-
-            new LoaderOptionsPlugin({
-                debug: true
-            })
         ],
 
         devServer: {
@@ -110,6 +96,8 @@ module.exports = function (options) {
             contentBase: './src',
             port: METADATA.port,
             host: METADATA.host,
+            open: true,
+            compress: true,
             historyApiFallback: true,
             watchOptions: {
                 ignored: /node_modules/
