@@ -65,6 +65,7 @@ module.exports = function (options) {
         optimization: {
             noEmitOnErrors: true,
             runtimeChunk: 'single',
+            namedChunks: true,
             splitChunks: {
                 chunks: 'initial'
             }

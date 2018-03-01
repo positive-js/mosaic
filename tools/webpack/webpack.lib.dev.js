@@ -22,6 +22,8 @@ module.exports = function (options) {
 
         mode: 'development',
 
+        cache: true,
+
         devtool: 'source-map',
 
         resolve: {
@@ -91,9 +93,10 @@ module.exports = function (options) {
         ],
 
         devServer: {
+            headers: { 'Access-Control-Allow-Origin': '*' },
             hot: true,
             inline: true,
-            contentBase: './src',
+            contentBase: false,
             port: METADATA.port,
             host: METADATA.host,
             open: true,
@@ -104,16 +107,19 @@ module.exports = function (options) {
             },
             stats: {
                 colors: true,
-                hash: true,
-                timings: true,
-                chunks: true,
+                hash: true, // required by custom stat output
+                timings: true, // required by custom stat output
+                chunks: false, // required by custom stat output
                 chunkModules: false,
                 children: false, // listing all children is very noisy in AOT and hides warnings/errors
                 modules: false,
                 reasons: false,
                 warnings: true,
-                assets: false, // listing all assets is very noisy when using assets directories
-                version: false
+                errors: true,
+                assets: true, // required by custom stat output
+                version: false,
+                errorDetails: false,
+                moduleTrace: false,
             }
         }
     })

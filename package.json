@@ -108,7 +108,8 @@
         "webpack": "^4.0.1",
         "webpack-cli": "^2.0.9",
         "webpack-dev-server": "^3.1.0",
-        "webpack-merge": "4.1.2"
+        "webpack-merge": "4.1.2",
+        "webpack-serve": "^0.1.5"
     },
     "scripts": {
         "precommit": "npm run linter:styles && npm run linter:lib",
