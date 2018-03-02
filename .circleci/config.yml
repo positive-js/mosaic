@@ -1,37 +1,36 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
+
+anchor_job_defaults: &job_defaults
+  working_directory: ~/mosaic
+  docker:
+    - image: ptsecurity/node-container:0.0.4
+
 version: 2
 jobs:
   build:
-    docker:
-      # specify the version you desire here
-      - image: ptsecurity/node-container:0.0.4
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
-
-    working_directory: ~/repo
-
+    <<: *job_defaults
+    resource_class: large
     steps:
       - checkout
 
       # Download and cache dependencies
       - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
-      - run: yarn install
-
+          key: mosaic-{{ checksum "package.json" }}
+      - run:
+          name: System information
+          command: |
+            echo "Node.js $(node -v)"
+            echo "npm $(npm -v)"
+            echo "Yarn v$(yarn --version)"
+      - run:
+          name: Install npm packages
+          command: npm install
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+          key: mosaic-{{ checksum "package.json" }}
+      - run:
+          name: Run build
+          command: npm run mosaic:build
 
 
 workflows:
