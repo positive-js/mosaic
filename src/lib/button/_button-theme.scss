@@ -1,0 +1,140 @@
+@import '../core/styles/theming/theming';
+@import '../core/styles/typography/typography-utils';
+
+// TODO: Its only for testing colors
+@import '../core/styles/theming/palette';
+
+
+@mixin _mc-hovered-mixin($color, $border, $shadow, $bg) {
+    &:hover:not([disabled]):not(.mc-disabled) {
+        color: $color;
+        border-color: $border;
+        box-shadow: $shadow;
+        background: $bg;
+    }
+}
+
+@mixin _mc-button-primary-color($palette) {
+    border-color: mc-color($palette, darker);
+    color: mc-contrast($palette, 500);
+    background-image: linear-gradient(to bottom, mc-color($palette, lighter), mc-color($palette));
+
+    &:hover {
+        background-image: linear-gradient(to bottom, mc-color($palette), mc-color($palette, darker));
+    }
+
+    &:active {
+        background-image: linear-gradient(to top, mc-color($palette), mc-color($palette, darker));
+    }
+}
+
+@mixin _mc-button-second-color($palette) {
+    border-color: mc-color($palette, darker);
+    color: mc-contrast($palette, 500);
+    background-image: linear-gradient(to bottom, mc-color($palette, lighter), mc-color($palette));
+
+    &:hover {
+        background-image: linear-gradient(to bottom, mc-color($palette), mc-color($palette, darker));
+    }
+
+    &:active {
+        background-image: linear-gradient(to top, mc-color($palette), mc-color($palette, darker));
+    }
+}
+
+@mixin _mc-button-theme-color($theme, $color: 'default') {
+    $primary: map-get($theme, primary);
+    $second: map-get($theme, second);
+    $warn: map-get($theme, warn);
+
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    &.mc-primary {
+        @include _mc-button-primary-color($primary);
+    }
+
+    &.mc-second {
+        @include _mc-button-second-color($second);
+    }
+
+    //&.mc-warn {
+    //    @include _mc-button-color($foreground, mc-color($warn, $color));
+    //}
+
+    &.mc-primary, &.mc-second, &.mc-warn {
+        &[disabled] {
+            color: mc-color($foreground, disabled-button);
+        }
+    }
+}
+
+@mixin _mc-button-theme-focus-color($theme, $color: 'default') {
+    $primary:    map-get($theme, primary);
+    $second:     map-get($theme, second);
+    $warn:       map-get($theme, warn);
+
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    &.mc-primary {
+
+    }
+
+    &.mc-second {
+
+    }
+
+    &.mc-warn {
+
+    }
+}
+
+@mixin _mc-button-theme-hover-color($theme, $color: 'default') {
+    $primary:    map-get($theme, primary);
+    $second:     map-get($theme, second);
+    $warn:       map-get($theme, warn);
+
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    &.mc-primary {
+
+    }
+
+    &.mc-second {
+
+    }
+
+    &.mc-warn {
+
+    }
+}
+
+
+@mixin mc-button-theme($theme) {
+    .mc-button,
+    .mc-xs-button,
+    .mc-sm-button,
+    .mc-lg-button,
+    .mc-xl-button{
+        @include _mc-button-theme-color($theme);
+        //@include _mc-button-theme-focus-color($theme);
+        //@include _mc-button-theme-hover-color($theme);
+    }
+
+    .mc-icon-button {
+
+    }
+}
+
+@mixin mc-button-typography($config) {
+    .mc-button {
+        font: {
+            size:   mc-font-size($config, button);
+            family: mc-font-family($config, button);
+            weight: mc-font-weight($config, button);
+        }
+    }
+}
+

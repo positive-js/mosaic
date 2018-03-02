@@ -1,7 +1,6 @@
 import { Component, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { bootloader } from '../helpers';
 
 
 @Component({
@@ -41,12 +40,7 @@ export class DemoComponent {}
 })
 export class DemoModule {}
 
-function main() {
-    return platformBrowserDynamic()
-        .bootstrapModule(DemoModule)
-        /* tslint:disable:no-console */
-        .catch((error) => console.error(error));
-}
-
-bootloader(main);
-
+platformBrowserDynamic()
+    .bootstrapModule(DemoModule)
+    /* tslint:disable:no-console */
+    .catch((error) => console.error(error));

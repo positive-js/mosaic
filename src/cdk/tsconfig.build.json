@@ -1,0 +1,49 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "declaration": true,
+        "stripInternal": false,
+        "experimentalDecorators": true,
+        "noUnusedParameters": true,
+        "strictNullChecks": true,
+        "importHelpers": true,
+        "newLine": "lf",
+        "module": "es2015",
+        "moduleResolution": "node",
+        "outDir": "../../dist/packages/cdk",
+        "rootDir": ".",
+        "rootDirs": [
+            ".",
+            "../../dist/packages/cdk"
+        ],
+        "sourceMap": true,
+        "inlineSources": true,
+        "target": "es2015",
+        "lib": [
+            "es2015",
+            "dom"
+        ],
+        "skipLibCheck": true,
+        "types": [
+            "jasmine",
+            "tslib"
+        ],
+        "paths": {
+            "@ptsecurity/cdk/*": [
+                "../../dist/packages/cdk/*"
+            ]
+        }
+    },
+    "files": [
+        "public-api.ts",
+        "typings.d.ts"
+    ],
+    "angularCompilerOptions": {
+        "annotateForClosureCompiler": true,
+        "strictMetadataEmit": false,
+        "flatModuleOutFile": "index.js",
+        "flatModuleId": "@ptsecurity/cdk",
+        "skipTemplateCodegen": true,
+        "fullTemplateTypeCheck": true
+    }
+}

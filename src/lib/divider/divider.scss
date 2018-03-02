@@ -1,0 +1,36 @@
+$mc-divider-width: 1px;
+$mc-divider-inset-margin: 80px;
+
+// This mixin provides the correct offset for an inset divider based on the
+// size of the parent class (e.g. avatar vs icon)
+@mixin mc-inset-divider-offset($offset, $padding) {
+  $mc-inset-divider-offset: #{(2 * $padding) + $offset};
+  margin-left: $mc-inset-divider-offset;
+  width: calc(100% - #{$mc-inset-divider-offset});
+
+  [dir='rtl'] & {
+    margin-left: auto;
+    margin-right: $mc-inset-divider-offset;
+  }
+}
+
+.mc-divider {
+  display: block;
+  margin: 0;
+  border-top-width: $mc-divider-width;
+  border-top-style: solid;
+
+  &.mc-divider-vertical {
+    border-top: 0;
+    border-right-width: $mc-divider-width;
+    border-right-style: solid;
+  }
+
+  &.mc-divider-inset {
+    margin-left: $mc-divider-inset-margin;
+    [dir='rtl'] & {
+      margin-left: auto;
+      margin-right: $mc-divider-inset-margin;
+    }
+  }
+}

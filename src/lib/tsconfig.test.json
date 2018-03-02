@@ -1,0 +1,22 @@
+{
+    "extends": "./tsconfig.build",
+    "compilerOptions": {
+        "importHelpers": false,
+        "module": "commonjs",
+        "target": "es5",
+        "types": ["jasmine"],
+        "paths": {
+            "@ptsecurity/mosaic/*": ["./*"]
+        }
+    },
+    "angularCompilerOptions": {
+        "strictMetadataEmit": false,
+        "skipTemplateCodegen": true,
+        "emitDecoratorMetadata": true,
+        "fullTemplateTypeCheck": true
+    },
+    "include": [
+        "**/*.spec.ts",
+        "index.ts"
+    ]
+}

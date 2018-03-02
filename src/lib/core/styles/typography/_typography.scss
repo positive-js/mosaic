@@ -1,0 +1,52 @@
+@import 'variables';
+@import './typography-utils';
+
+
+@function mc-typography-config(
+    $font-family:   map-get(map-get($fonts, base), font-family),
+
+    $display-1:     mc-typography-level(34px, 44px),
+    $display-2:     mc-typography-level(45px, 56px),
+    $display-3:     mc-typography-level(56px, 76px),
+    $display-4:     mc-typography-level(56px, 76px, 300),
+
+    $headline:      mc-typography-level(24px, 32px),
+    $title:         mc-typography-level(20px, 28px, 500),
+    $subheading-1:  mc-typography-level(16px, 20px),
+    $subheading-2:  mc-typography-level(15px, 28px),
+
+    $body-1:        mc-typography-level(15px, 20px),
+    $body-2:        mc-typography-level(15px, 20px, 500),
+    $caption:       mc-typography-level(13px, 16px),
+
+    $button:        mc-typography-level(15px, 20px)
+) {
+
+    $config: (
+        display-1:      $display-1,
+        display-2:      $display-2,
+        display-3:      $display-3,
+        display-4:      $display-4,
+
+        body-1:         $body-1,
+        body-2:         $body-2,
+        caption:        $caption,
+
+        headline:       $headline,
+        title:          $title,
+        subheading-1:   $subheading-1,
+        subheading-2:   $subheading-2,
+
+        button:         $button
+    );
+
+    @each $key, $level in $config {
+        @if map-get($level, font-family) == null {
+            $new-level: map-merge($level, (font-family: $font-family));
+            $config: map-merge($config, ($key: $new-level));
+        }
+    }
+
+    // Add the base font family to the config.
+    @return map-merge($config, (font-family: $font-family));
+}

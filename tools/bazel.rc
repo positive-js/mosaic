@@ -1,0 +1,17 @@
+# Directory structure
+###############################
+
+build --symlink_prefix=/
+
+# Output
+###############################
+
+# Don't print every dependency in :node_modules, for example
+query --noimplicit_deps
+
+
+# By default, failing tests don't print any output, it goes to the log file
+test --test_output=errors
+
+build --experimental_ui
+test --experimental_ui

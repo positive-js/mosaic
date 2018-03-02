@@ -1,0 +1,82 @@
+@import '../core/styles/theming/theming';
+@import '../core/styles/theming/palette';
+@import '../core/styles/typography/typography-utils';
+
+// TODO: Its only for testing colors
+@import '../core/styles/theming/palette';
+@import '../core/styles/common/list';
+
+@mixin mc-list-theme($theme) {
+    $primary: map-get($theme, primary);
+
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    .mc-list,
+    .mc-list-selection {
+        .mc-list-item {
+            color: mc-color($foreground, text);
+        }
+
+        .mc-list-option {
+            outline: none;
+            border: 1px solid transparent;
+
+            color: mc-color($foreground, text);
+
+            &:hover,
+            &.mc-hovered {
+                background: mc-color($background, 'hover');
+            }
+
+            &.mc-focused {
+                border: 1px solid mc-color($primary, 400);
+            }
+
+            &.mc-selected {
+                background-color: mc-color($primary, 100);
+            }
+
+            &.mc-disabled {
+                background-color: transparent;
+
+                color: mc-color($foreground, disabled-text);
+            }
+        }
+
+        .mc-subheader {
+            color: mc-color($foreground, secondary-text);
+        }
+    }
+}
+
+@mixin mc-list-typography($config) {
+    $font-family: mc-font-family($config);
+
+    .mc-list-item,
+    .mc-list-option {
+        font-family: $font-family;
+    }
+
+    // Default list
+    .mc-list,
+    .mc-list-selection {
+        .mc-list-item {
+            font-size: mc-font-size($config, subheading-2);
+
+            @include mc-line-base(mc-font-size($config, body-1));
+        }
+
+        .mc-list-option {
+            font-size: mc-font-size($config, subheading-2);
+
+            @include mc-line-base(mc-font-size($config, body-1));
+        }
+
+        .mc-subheader {
+            font-family: mc-font-family($config, body-2);
+            font-size: mc-font-size($config, body-2);
+            font-weight: mc-font-weight($config, body-2);
+        }
+    }
+}

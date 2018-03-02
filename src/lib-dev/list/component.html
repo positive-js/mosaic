@@ -1,0 +1,18 @@
+<!--<mc-list-selection>-->
+    <!--<h3 mc-subheader>Folders</h3>-->
+    <!--<mc-list-item *ngFor="let folder of folders">-->
+        <!--<div mc-line>{{ folder.name }}</div>-->
+        <!--<p mc-line>{{ folder.updated | date }}</p>-->
+    <!--</mc-list-item>-->
+<!--</mc-list-selection>-->
+
+<mc-list-selection>
+    <mc-list-option disabled>Disabled</mc-list-option>
+    <mc-list-option>Normal</mc-list-option>
+    <mc-list-option class="mc-hovered">Hovered</mc-list-option>
+    <mc-list-option class="mc-focused">Focused</mc-list-option>
+    <mc-list-option class="mc-selected">Selected</mc-list-option>
+    <mc-list-option class="mc-progress">In Progress</mc-list-option>
+
+    <!--<mc-list-option *ngFor="let shoe of typesOfShoes">{{ shoe }}</mc-list-option>-->
+</mc-list-selection>

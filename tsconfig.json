@@ -1,47 +1,31 @@
 {
     "compilerOptions": {
-        "target": "es5",
-        "module": "es2015",
-        "allowUnreachableCode": false,
-        "declaration": true,
-        "emitDecoratorMetadata": true,
+        "outDir": "./dist/packages/all",
         "experimentalDecorators": true,
-        "importHelpers": true,
-        "inlineSources": true,
-        "noEmit": false,
-        "skipLibCheck": true,
-        "outDir": "./build",
-        "lib": [
-            "dom",
-            "es2015"
-        ],
+        "module": "es2015",
         "moduleResolution": "node",
-        "noImplicitAny": false,
-        "removeComments": false,
-        "sourceMap": true,
-        "typeRoots": [
-            "./node_modules/@types",
-            "./src/lib/custom-typings.d.ts"
+        "noUnusedParameters": true,
+        "strictNullChecks": true,
+        "skipLibCheck": true,
+        "target": "es2015",
+        "lib": [
+            "es5",
+            "es2015",
+            "dom"
         ],
         "types": [
-            "jasmine",
-            "node",
-            "webpack"
+            "jasmine"
+        ],
+        "typeRoots": [
+            "node_modules/@types",
+            "src/lib/typings.d.ts"
         ]
     },
-    "awesomeTypescriptLoaderOptions": {
-        "forkChecker": true,
-        "useWebpackText": true
-    },
-    "angularCompilerOptions": {
-        "genDir": "./compiled",
-        "skipMetadataEmit": true
-    },
-    "exclude": [
-        "node_modules",
-        "dist",
-        "docs/polyfills.ts"
+    "include": [
+        "src/**/*.ts",
+        "tools/**/*.ts"
     ],
-    "compileOnSave": false,
-    "buildOnSave": false
+    "exclude": [
+        "node_modules/"
+    ]
 }

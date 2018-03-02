@@ -1,0 +1,38 @@
+.mc-scrollbar {
+    &::-webkit-scrollbar,
+    ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+        box-shadow: inset 1px 1px 0 rgba(#000, 0.12);
+        transition: $swift-ease-in-out;
+        background-color: rgba(#000, 0.05);
+
+        &:hover {
+            box-shadow:
+                inset 1px 1px 0 rgba(#000, 0.054),
+                inset 0 -1px 0 rgba(#000, 0.038);
+            background-color: rgba(#000, 0.087);
+        }
+    }
+
+    /* stylelint-disable */
+    &::-webkit-scrollbar-button,
+    ::-webkit-scrollbar-button {
+        display: none;
+    }
+
+    &::-webkit-scrollbar-corner,
+    ::-webkit-scrollbar-corner {
+        background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb,
+    ::-webkit-scrollbar-thumb {
+        background-color: rgba(#000, 0.26);
+        box-shadow:
+            inset 1px 1px 0 rgba(#000, 0.054),
+            inset 0 -1px 0 rgba(#000, 0.087);
+        transition: $swift-ease-in-out;
+    }
+    /* stylelint-enable */
+}

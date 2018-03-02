@@ -1,0 +1,62 @@
+@import 'palette';
+
+
+@function mc-contrast($palette, $hue) {
+    @return map-get(map-get($palette, contrast), $hue);
+}
+
+@function mc-palette($base-palette, $lighter: 100, $default: 500, $darker: 700) {
+    $result: map_merge($base-palette, (
+        default: map-get($base-palette, $default),
+        lighter: map-get($base-palette, $lighter),
+        darker:  map-get($base-palette, $darker),
+
+        default-contrast: mc-contrast($base-palette, $default),
+        lighter-contrast: mc-contrast($base-palette, $lighter),
+        darker-contrast:  mc-contrast($base-palette, $darker)
+    ));
+
+    // For each hue in the palette, add a "-contrast" color to the map.
+    @each $hue, $color in $base-palette {
+        $result: map_merge($result, (
+            '#{$hue}-contrast': mc-contrast($base-palette, $hue)
+        ));
+    }
+
+    @return $result;
+}
+
+@function mc-color($palette, $hue: default, $opacity: null) {
+    // If hueKey is a number between zero and one, then it actually contains an
+    // opacity value, so recall this function with the default hue and that given opacity.
+    @if type-of($hue) == number and $hue >= 0 and $hue <= 1 {
+        @return mc-color($palette, default, $hue);
+    }
+
+    $color: map-get($palette, $hue);
+    $opacity: if($opacity == null, opacity($color), $opacity);
+
+    @return rgba($color, $opacity);
+}
+
+@function mc-light-theme($primary, $second, $warn: mc-palette($mc-red)) {
+    @return (
+        primary: $primary,
+        second: $second,
+        warn: $warn,
+        is-dark: false,
+        foreground: $mc-light-theme-foreground,
+        background: $mc-light-theme-background,
+    );
+}
+
+@function mc-dark-theme($primary, $second, $warn: mc-palette($mc-red)) {
+    @return (
+        primary: $primary,
+        second: $second,
+        warn: $warn,
+        is-dark: true,
+        foreground: $mc-dark-theme-foreground,
+        background: $mc-dark-theme-background
+    );
+}

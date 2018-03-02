@@ -1,0 +1,15 @@
+@import './typography';
+@import '../../../button/button-theme';
+@import '../../../list/list-theme';
+
+
+@mixin mosaic-typography($config: null) {
+    @if $config == null {
+        $config: mc-typography-config();
+    }
+
+    @include mc-base-typography($config);
+
+    @include mc-button-typography($config);
+    @include mc-list-typography($config);
+}

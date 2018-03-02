@@ -1,0 +1,41 @@
+
+anchor_job_defaults: &job_defaults
+  working_directory: ~/mosaic
+  docker:
+    - image: ptsecurity/node-container:0.0.4
+
+version: 2
+jobs:
+  build:
+    <<: *job_defaults
+    resource_class: large
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          key: mosaic-{{ checksum "package.json" }}
+      - run:
+          name: System information
+          command: |
+            echo "Node.js $(node -v)"
+            echo "npm $(npm -v)"
+            echo "Yarn v$(yarn --version)"
+      - run:
+          name: Install npm packages
+          command: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: mosaic-{{ checksum "package.json" }}
+      - run:
+          name: Run build
+          command: npm run mosaic:build
+
+
+workflows:
+  version: 2
+  default_workflow:
+    jobs:
+      - build
+

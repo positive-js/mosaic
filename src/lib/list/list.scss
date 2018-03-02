@@ -1,0 +1,79 @@
+@import '../core/styles/variables';
+@import '../core/styles/common/list';
+@import '../core/styles/common/layout';
+@import '../divider/divider';
+
+@import 'list-base';
+@import 'list-theme';
+
+
+// WebKit
+@-webkit-keyframes mc-progress {
+    from  { background-position: 0 0; }
+    to    { background-position: 60px 0; }
+}
+
+// Spec and IE10+
+@keyframes mc-progress {
+    from  { background-position: 40px 0; }
+    to    { background-position: 0 0; }
+}
+
+.mc-progress {
+    position: relative;
+
+    &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        width: 100%; height: 100%;
+        animation: mc-progress 2s linear infinite;
+        background: repeating-linear-gradient(
+                135deg,
+                rgba(0, 0, 0, .05), rgba(0, 0, 0, .05) 15px,
+                transparent 0, transparent 30px
+        );
+    }
+}
+
+.mc-subheader {
+    display: flex;
+    box-sizing: border-box;
+    padding: $mc-list-side-padding;
+    align-items: center;
+
+    // This needs slightly more specificity, because it
+    // can be overwritten by the typography styles.
+    .mc-list &,
+    .mc-list-selection & {
+        margin: 0;
+    }
+}
+
+.mc-list,
+.mc-list-selection {
+    display: block;
+
+    .mc-subheader {
+        @include mc-subheader-spacing($mc-list-top-padding, $mc-list-base-height);
+    }
+
+    .mc-list-item,
+    .mc-list-option {
+        @include mc-list-item-base(
+            $mc-list-base-height,
+            $mc-list-two-line-height,
+            $mc-list-three-line-height,
+            $mc-list-multi-line-padding,
+            $mc-list-icon-size
+        );
+    }
+}
+
+.mc-list-option {
+    &:not([disabled]) {
+        cursor: pointer;
+    }
+}

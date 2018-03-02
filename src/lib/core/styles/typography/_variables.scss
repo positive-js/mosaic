@@ -1,0 +1,22 @@
+
+$typography-font-weight-values: (
+    thin: 100,
+    light: 300,
+    regular: 400,
+    medium: 500,
+    bold: 700,
+    black: 900
+) !default;
+
+
+// TODO add caption-height
+$fonts: (
+    base: (
+        font-family: #{Roboto, 'Helvetica Neue', sans-serif}
+    ),
+    monospace: (
+        font-family: #{Monaco, Consolas, 'Lucida Console', monospace}
+    )
+);
+
+$base-font-size: 15px !default;

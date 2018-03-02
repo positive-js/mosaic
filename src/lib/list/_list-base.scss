@@ -1,0 +1,127 @@
+@import '../core/styles/common/list';
+
+$mc-list-top-padding: 0;
+
+$mc-list-side-padding: 15px;
+$mc-list-icon-padding: 4px;
+
+// height for single-line lists
+$mc-list-base-height: 28px;
+
+// spec requires two- and three-line lists be taller
+$mc-list-two-line-height: 72px;
+$mc-list-three-line-height: 88px;
+$mc-list-multi-line-padding: 16px;
+
+$mc-list-icon-size: 24px;
+
+$mc-list-item-inset-divider-offset: 72px;
+
+// This mixin provides all list-item styles, changing font size and height
+// based on whether the list is in dense mode.
+@mixin mc-list-item-base($base-height, $two-line-height, $three-line-height, $multi-line-padding, $icon-size) {
+    // Prevents the wrapper `mc-list-item-content` from collapsing due to it being `inline` by default.
+    display: block;
+    height: $base-height;
+
+    .mc-list-item-content {
+        position: relative;
+
+        box-sizing: border-box;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        height: inherit;
+
+        padding: 0 $mc-list-side-padding;
+    }
+
+    &.mc-2-line {
+        height: $two-line-height;
+    }
+
+    &.mc-3-line {
+        height: $three-line-height;
+    }
+
+    // list items with more than 3 lines should expand to match the height of its contained text
+    &.mc-multi-line {
+        height: auto;
+
+        .mc-list-item-content {
+            padding-top: $multi-line-padding;
+            padding-bottom: $multi-line-padding;
+        }
+    }
+
+    .mc-list-text {
+        @include mc-line-wrapper-base();
+
+        // By default, there will be no padding for the list item text because the padding is already
+        // set on the `mc-list-item-content` element. Later, if the list-item detects that there are
+        // secondary items (avatar, checkbox), a padding on the proper side will be added.
+        padding: 0;
+    }
+
+    // There can be a secondary item (e.g. avatar-icon, checkbox) at the start of the
+    // list-item. This means that there should be a padding for the mc-list-text on the start-side.
+    .mc-list-item-content .mc-list-text:not(:nth-child(2)) {
+        padding-right: 0;
+        padding-left: $mc-list-side-padding;
+
+        [dir='rtl'] & {
+            padding-right: $mc-list-side-padding;
+            padding-left: 0;
+        }
+    }
+
+    .mc-list-icon {
+        box-sizing: content-box;
+
+        flex-shrink: 0;
+
+        width: $icon-size; height: $icon-size;
+
+        border-radius: 50%;
+
+        padding: $mc-list-icon-padding;
+
+        font-size: $icon-size;
+
+        ~ .mc-divider-inset {
+            @include mc-inset-divider-offset($icon-size + (2 * $mc-list-icon-padding), $mc-list-side-padding);
+        }
+    }
+
+    .mc-divider {
+        position: absolute;
+
+        bottom: 0;
+        left: 0;
+
+        width: 100%;
+
+        margin: 0;
+
+        [dir='rtl'] & {
+            margin-left: auto;
+            margin-right: 0;
+        }
+
+        &.mc-divider-inset {
+            position: absolute; // necessary to override card styles
+        }
+    }
+}
+
+// This mixin adjusts the heights and padding based on whether the list is in dense mode.
+@mixin mc-subheader-spacing($top-padding, $base-height) {
+    height: $base-height;
+    line-height: $base-height - $mc-list-side-padding * 2;
+
+    &:first-child {
+        margin-top: -$top-padding;
+    }
+}
