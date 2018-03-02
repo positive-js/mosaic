@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/positive-js/mosaic.svg?branch=master)](https://travis-ci.org/positive-js/mosaic)
+[![CircleCI](https://circleci.com/gh/positive-js/mosaic/tree/ng-feature.svg?style=shield)](https://circleci.com/gh/positive-js/tslint-config/tree/master)
 [![Dependency Status](https://david-dm.org/positive-js/mosaic.svg)](https://david-dm.org/positive-js/mosaic)
 [![Known Vulnerabilities](https://snyk.io/test/github/positive-js/mosaic/badge.svg)](https://snyk.io/test/github/positive-js/mosaic)
 [![Code Climate](https://codeclimate.com/github/positive-js/mosaic/badges/gpa.svg)](https://codeclimate.com/github/positive-js/mosaic)
