@@ -31,11 +31,15 @@ jobs:
   deploy:
     <<: *job_defaults
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "8a:0b:f1:40:5a:0e:b5:41:34:b9:48:0d:80:b8:6b:d6"
       - checkout
       - restore_cache:
           key: *cache_key
       - run: npm install
       - run: npm run mosaic:build
+      - run: npm run publish-repo
 
 
 workflows:

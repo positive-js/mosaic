@@ -108,14 +108,14 @@
         "webpack": "^4.0.1",
         "webpack-cli": "^2.0.9",
         "webpack-dev-server": "^3.1.0",
-        "webpack-merge": "4.1.2",
-        "webpack-serve": "^0.1.5"
+        "webpack-merge": "4.1.2"
     },
     "scripts": {
         "precommit": "npm run linter:styles && npm run linter:lib",
         "prettier": "lint-staged",
         "test:unit": "karma start config/karma/karma.conf.js",
         "mosaic:build": "gulp mosaic:build",
+        "publish-repo": "ts-node --project ./scripts/tsconfig.deploy.json ./scripts/deploy/publish-artifacts.ts",
         "linter:lib": "tslint './src/lib'",
         "linter:styles": "stylelint --syntax scss \"./**/*.scss\"",
         "server-dev": "webpack-dev-server --config tools/webpack/webpack.lib.dev.js",

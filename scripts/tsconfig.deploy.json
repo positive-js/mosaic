@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "noStrictGenericChecks": true,
+    "lib": [
+      "es2016",
+      "dom"
+    ],
+    "outDir": "../out-tsc/app",
+    "target": "es5",
+    "module": "commonjs",
+    "baseUrl": "",
+    "rootDir": "./",
+    "strict": true
+  },
+  "exclude": [
+    "dist",
+    "node_modules"
+  ]
+}
