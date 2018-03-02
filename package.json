@@ -115,6 +115,7 @@
         "precommit": "npm run linter:styles && npm run linter:lib",
         "prettier": "lint-staged",
         "test:unit": "karma start config/karma/karma.conf.js",
+        "mosaic:build": "gulp mosaic:build",
         "linter:lib": "tslint './src/lib'",
         "linter:styles": "stylelint --syntax scss \"./**/*.scss\"",
         "server-dev": "webpack-dev-server --config tools/webpack/webpack.lib.dev.js",
