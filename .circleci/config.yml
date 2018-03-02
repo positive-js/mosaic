@@ -30,7 +30,7 @@ jobs:
           key: mosaic-{{ checksum "package.json" }}
       - run:
           name: Run build
-          command: npm run mosaic:build
+          command: gulp mosaic:build
 
 
 workflows:
