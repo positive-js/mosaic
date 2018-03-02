@@ -5,7 +5,13 @@ import { A11yModule } from '@ptsecurity/cdk/a11y';
 import { PlatformModule } from '@ptsecurity/cdk/platform';
 
 import {
-    McButton, McButtonCSSStyler, McXSButtonCSSStyler, McSMButtonCSSStyler, McLGButtonCSSStyler, McXLButtonCSSStyler
+    McButton,
+    McButtonCSSStyler,
+    McXSButtonCSSStyler,
+    McSMButtonCSSStyler,
+    McLGButtonCSSStyler,
+    McXLButtonCSSStyler,
+    McAnchor
 } from './button.component';
 
 
@@ -17,6 +23,7 @@ import {
     ],
     exports: [
         McButton,
+        McAnchor,
         McButtonCSSStyler,
         McXSButtonCSSStyler,
         McSMButtonCSSStyler,
@@ -25,6 +32,7 @@ import {
     ],
     declarations: [
         McButton,
+        McAnchor,
         McButtonCSSStyler,
         McXSButtonCSSStyler,
         McSMButtonCSSStyler,

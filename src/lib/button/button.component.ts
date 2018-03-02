@@ -61,8 +61,7 @@ export const _McButtonMixinBase = mixinColor(mixinDisabled(McButtonBase));
     encapsulation: ViewEncapsulation.None,
     inputs: ['disabled', 'color'],
     host: {
-        '[disabled]': 'disabled || null',
-        '[tabIndex]': 'tabIndex'
+        '[disabled]': 'disabled || null'
     }
 })
 export class McButton extends _McButtonMixinBase implements OnDestroy, CanDisable, CanColor {

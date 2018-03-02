@@ -130,8 +130,9 @@ export class McListOption extends McListOptionBase
     @Output() readonly selectionChange: EventEmitter<McListOptionChange> =
         new EventEmitter<McListOptionChange>();
 
+    _selected: boolean = false;
+
     private _lineSetter: McLineSetter;
-    private _selected: boolean = false;
     private _disabled: boolean = false;
 
     constructor(
