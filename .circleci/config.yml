@@ -28,15 +28,14 @@ jobs:
             - node_modules
       - run: npm run mosaic:build
 
-   deploy:
-     <<: *job_defaults
-     steps:
-       - checkout
-       - restore_cache:
-           key: *cache_key
-       - run: npm install
-       - run: npm run mosaic:build
-
+  deploy:
+    <<: *job_defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: *cache_key
+      - run: npm install
+      - run: npm run mosaic:build
 
 
 workflows:
