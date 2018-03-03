@@ -50,5 +50,5 @@ workflows:
       - deploy:
           filters:
              branches:
-               only: master
+               only: ng-feature
 
