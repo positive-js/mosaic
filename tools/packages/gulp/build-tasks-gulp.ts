@@ -6,6 +6,7 @@ import { inlineResourcesForDirectory } from '../inline-resources';
 
 import { buildScssTask } from './build-scss-task';
 import { sequenceTask } from './sequence-task';
+import {composeRelease} from '../build-release';
 
 
 /* tslint:disable:no-var-requires */
@@ -43,6 +44,10 @@ export function createPackageBuildTasks(buildPackage: BuildPackage, preBuildTask
         // Build bundles on top of inlined ESM output.
         `${taskName}:build:bundles`
     ));
+
+    task(`${taskName}:build-release:clean`, sequenceTask('clean', `${taskName}:build-release`));
+    task(`${taskName}:build-release`, [`${taskName}:build`], () => composeRelease(buildPackage));
+
 
     task(`${taskName}:build:esm`, () => buildPackage.compile());
 
