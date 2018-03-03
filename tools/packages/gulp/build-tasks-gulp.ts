@@ -34,6 +34,8 @@ export function createPackageBuildTasks(buildPackage: BuildPackage, preBuildTask
     // Glob that matches every HTML file in the current package.
     const htmlGlob = join(buildPackage.sourceDir, '**/*.html');
 
+    task(`${taskName}:clean-build`, sequenceTask('clean', `${taskName}:build`));
+
     task(`${taskName}:build`, sequenceTask(
         ...preBuildTasks,
         ...dependencyNames.map((pkgName) => `${pkgName}:build`),

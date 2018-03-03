@@ -14,7 +14,8 @@
             "dom"
         ],
         "types": [
-            "jasmine"
+            "jasmine",
+            "node"
         ],
         "typeRoots": [
             "node_modules/@types",
