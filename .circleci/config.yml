@@ -38,7 +38,8 @@ jobs:
       - restore_cache:
           key: *cache_key
       - run: npm install
-      - run: npm run mosaic:build
+      - run: npm run mosaic:build-release
+      - run: npm run cdk:build-release
       - run: npm run publish-repo
 
 

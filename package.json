@@ -118,6 +118,8 @@
         "test:unit": "karma start config/karma/karma.conf.js",
         "valid:lic": "ts-node --project ./scripts/tsconfig.deploy.json ./scripts/validate-licenses.ts",
         "mosaic:build": "gulp mosaic:build",
+        "mosaic:build-release": "gulp mosaic:build-release",
+        "cdk:build-release": "gulp cdk:build-release",
         "publish-repo": "ts-node --project ./scripts/tsconfig.deploy.json ./scripts/deploy/publish-artifacts.ts",
         "linter:lib": "tslint './src/lib'",
         "linter:styles": "stylelint --syntax scss \"./**/*.scss\"",
