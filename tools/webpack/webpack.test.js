@@ -1,4 +1,3 @@
-const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin');
@@ -48,18 +47,7 @@ module.exports = {
                     'angular2-template-loader'
                 ],
                 exclude: [/\.e2e\.ts$/, /(node_modules)/]
-            },
-            {
-                enforce: 'post',
-                test: /\.(js|ts)$/,
-                loader: 'istanbul-instrumenter-loader',
-                include: helpers.root('src'),
-                exclude: [
-                    /\.(e2e|spec)\.ts$/,
-                    /node_modules/
-                ]
             }
-
         ]
     },
     plugins: [
@@ -85,9 +73,6 @@ module.exports = {
             {
                 // your Angular Async Route paths relative to this root directory
             }
-        ),
-        new LoaderOptionsPlugin({
-            debug: false
-        })
+        )
     ]
 };
