@@ -1,8 +1,7 @@
 // Import all the theming
 @import '../core';
-@import 'theming';
-@import '../../../button/button-theme';
-@import '../../../list/list-theme';
+@import '../../button/button-theme';
+@import '../../list/list-theme';
 
 
 @mixin mosaic-theme($theme) {

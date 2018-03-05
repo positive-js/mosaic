@@ -1,8 +1,8 @@
-@import '../core/styles/theming/theming';
+@import '../core/theming/theming';
 @import '../core/styles/typography/typography-utils';
 
 // TODO: Its only for testing colors
-@import '../core/styles/theming/palette';
+@import '../core/theming/palette';
 
 
 @mixin _mc-hovered-mixin($color, $border, $shadow, $bg) {
