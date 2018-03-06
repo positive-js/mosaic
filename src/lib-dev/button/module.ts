@@ -34,12 +34,32 @@ import { McButtonModule } from '../../lib/button/';
         <br>
         <br>
 
+        <button class="mc-progress" mc-button color="primary" disabled>disabled</button>&nbsp;
+        <button class="mc-progress" mc-button color="primary">normal</button>&nbsp;
+        <button class="mc-hover mc-progress" mc-button color="primary">hover</button>&nbsp;
+        <button class="cdk-focused mc-progress" mc-button color="primary">focus</button>&nbsp;
+        <button class="mc-active mc-progress" mc-button color="primary">pressed</button>&nbsp;
+        <button class="mc-active mc-hover mc-progress" mc-button color="primary">pressed-hover</button>
+
+        <br>
+        <br>
+
         <button mc-button color="second" disabled>disabled</button>&nbsp;
         <button mc-button color="second">normal</button>&nbsp;
         <button class="mc-hover" mc-button color="second">hover</button>&nbsp;
         <button class="cdk-focused" mc-button color="second">focus</button>&nbsp;
         <button class="mc-active" mc-button color="second">pressed</button>&nbsp;
         <button class="mc-active mc-hover" mc-button color="second">pressed-hover</button>
+        
+        <br>
+        <br>
+
+        <button class="mc-progress" mc-button color="second" disabled>disabled</button>&nbsp;
+        <button class="mc-progress" mc-button color="second">normal</button>&nbsp;
+        <button class="mc-hover mc-progress" mc-button color="second">hover</button>&nbsp;
+        <button class="cdk-focused mc-progress" mc-button color="second">focus</button>&nbsp;
+        <button class="mc-active mc-progress" mc-button color="second">pressed</button>&nbsp;
+        <button class="mc-active mc-hover mc-progress" mc-button color="second">pressed-hover</button>
         
         <br><br>
 
