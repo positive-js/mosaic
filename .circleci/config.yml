@@ -26,7 +26,7 @@ jobs:
           key: *cache_key
           paths:
             - node_modules
-      - run: npm run mosaic:build
+      - run: npm run mosaic:build-release
 
   deploy:
     <<: *job_defaults
