@@ -16,6 +16,7 @@
 
 @mixin _mc-button-primary-color($palette) {
     $hover-opacity: 0.8;
+    $hover-lighten: 5%;
 
     color: mc-contrast($palette, 500);
 
@@ -25,7 +26,7 @@
     &:hover,
     &.mc-hover {
         background-image: linear-gradient(
-                to bottom, mc-color($palette, 500, $hover-opacity), mc-color($palette, 560, $hover-opacity)
+                to bottom, lighten(mc-color($palette, 500), $hover-lighten), lighten(mc-color($palette, 560), $hover-lighten)
         );
     }
 
@@ -37,7 +38,7 @@
         &:hover,
         &.mc-hover {
             background-image: linear-gradient(
-                    to bottom, mc-color($palette, 600, $hover-opacity), mc-color($palette, 560, $hover-opacity)
+                    to bottom, lighten(mc-color($palette, 600), $hover-lighten), lighten(mc-color($palette, 560),$hover-lighten)
             );
         }
     }
@@ -52,6 +53,7 @@
 
 @mixin _mc-button-second-color($palette) {
     $hover-opacity: 0.5;
+    $hover-darken: 5%;
 
     color: mc-contrast($palette, 500);
 
@@ -61,7 +63,7 @@
     &:hover,
     &.mc-hover {
         background-image: linear-gradient(
-                to bottom, mc-color($palette, 40, $hover-opacity), mc-color($palette, 100, $hover-opacity)
+                to bottom, darken(mc-color($palette, 40), $hover-darken), darken(mc-color($palette, 100), $hover-darken)
         );
     }
 
@@ -73,7 +75,7 @@
         &:hover,
         &.mc-hover {
             background-image: linear-gradient(
-                    to bottom, mc-color($palette, 200, $hover-opacity), mc-color($palette, 100, $hover-opacity)
+                    to bottom, darken(mc-color($palette, 200), $hover-darken), darken(mc-color($palette, 100), $hover-darken )
             );
         }
     }
@@ -112,7 +114,7 @@
     &.mc-warn {
         &.cdk-focused {
             border-color: mc-color($primary, 500);
-            box-shadow: 0 0 0 2px mc-color($primary, A200);
+            box-shadow: 0 0 0 1px mc-color($primary, 500);
         }
     }
 
@@ -140,7 +142,7 @@
             ) repeat;
             background-size: 29px 29px;
 
-            animation: progress-bar-stripes 2s linear infinite;
+            animation: progress-bar-stripes 1s linear infinite;
         }
     }
 }
