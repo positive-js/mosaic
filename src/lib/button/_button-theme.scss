@@ -1,18 +1,11 @@
 @import '../core/theming/theming';
 @import '../core/styles/typography/typography-utils';
 
+@import '../core/styles/common/animation';
+
 // TODO: Its only for testing colors
 @import '../core/theming/palette';
 
-
-@keyframes progress-bar-stripes {
-    from {
-        background-position: 0 0;
-    }
-    to {
-        background-position: 29px 0;
-    }
-}
 
 @mixin _mc-button-primary-color($palette) {
     $hover-opacity: 0.8;
@@ -113,34 +106,6 @@
         &.cdk-focused {
             border-color: mc-color($primary, 500);
             box-shadow: 0 0 0 2px mc-color($primary, A200);
-        }
-    }
-
-    &.mc-progress {
-        &:after {
-            content: '';
-
-            position: absolute;
-
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-
-            width: 100%;
-            height: 100%;
-
-            $lighter: transparent;
-            $darker: rgba(0, 0, 0, .05);
-            background: linear-gradient(
-                135deg,
-                $darker 10px, $lighter 10px,
-                $lighter 20px, $darker 20px,
-                $darker 30px, $lighter 30px
-            ) repeat;
-            background-size: 29px 29px;
-
-            animation: progress-bar-stripes 2s linear infinite;
         }
     }
 }

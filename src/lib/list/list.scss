@@ -7,37 +7,6 @@
 @import 'list-theme';
 
 
-// WebKit
-@-webkit-keyframes mc-progress {
-    from  { background-position: 0 0; }
-    to    { background-position: 60px 0; }
-}
-
-// Spec and IE10+
-@keyframes mc-progress {
-    from  { background-position: 40px 0; }
-    to    { background-position: 0 0; }
-}
-
-.mc-progress {
-    position: relative;
-
-    &:after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-
-        width: 100%; height: 100%;
-        animation: mc-progress 2s linear infinite;
-        background: repeating-linear-gradient(
-                135deg,
-                rgba(0, 0, 0, .05), rgba(0, 0, 0, .05) 15px,
-                transparent 0, transparent 30px
-        );
-    }
-}
-
 .mc-subheader {
     display: flex;
     box-sizing: border-box;

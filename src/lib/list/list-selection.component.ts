@@ -20,7 +20,7 @@ import { CanDisable, mixinDisabled, HasTabIndex,
 
 export class McListOptionBase {}
 
-export const MAT_SELECTION_LIST_VALUE_ACCESSOR: any = {
+export const MC_SELECTION_LIST_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => McListSelection),
     multi: true
@@ -60,15 +60,14 @@ export class McListSelectionChange {
     host: {
         role: 'option',
         tabindex: '-1',
+
+        class: 'mc-list-option',
+        '[class.mc-selected]': '_selected',
+        '[class.mc-focused]': '_hasFocus',
+
         '(focus)': '_handleFocus()',
         '(blur)': '_handleBlur()',
         '(click)': '_handleClick()',
-
-        class: 'mc-list-option',
-        '[class.mc-disabled]': 'disabled',
-        '[class.mc-selected]': '_selected',
-        '[class.mc-focused]': '_hasFocus',
-        '[attr.disabled]': 'disabled'
     },
     templateUrl: 'list-option.html',
     encapsulation: ViewEncapsulation.None,
@@ -78,21 +77,17 @@ export class McListSelectionChange {
 export class McListOption extends McListOptionBase
     implements AfterContentInit, OnDestroy, OnInit, IFocusableOption {
 
-    // Whether the option has focus.
     _hasFocus: boolean = false;
 
     @ContentChildren(McLine) _lines: QueryList<McLine>;
 
-    // DOM element containing the item's text.
     @ViewChild('text') _text: ElementRef;
 
     // Whether the label should appear before or after the checkbox. Defaults to 'after'
     @Input() checkboxPosition: 'before' | 'after' = 'after';
 
-    // Value of the option
     @Input() value: any;
 
-    // Whether the option is disabled.
     @Input()
     get disabled() {
         return this._disabled || (this.selectionList && this.selectionList.disabled);
@@ -107,7 +102,6 @@ export class McListOption extends McListOptionBase
         }
     }
 
-    // Whether the option is selected.
     @Input()
     get selected(): boolean {
         return this.selectionList.selectedOptions.isSelected(this);
@@ -179,10 +173,6 @@ export class McListOption extends McListOptionBase
         this._element.nativeElement.focus();
     }
 
-    /**
-     * Returns the list item's text label. Implemented as a part of the FocusKeyManager.
-     * @docs-private
-     */
     getLabel() {
         return this._text ? this._text.nativeElement.textContent : '';
     }
@@ -218,9 +208,7 @@ export class McListOption extends McListOptionBase
 
     // Sets the selected state of the option.
     _setSelected(selected: boolean) {
-        if (selected === this._selected) {
-            return;
-        }
+        if (selected === this._selected) { return; }
 
         this._selected = selected;
 
@@ -259,7 +247,7 @@ export const _McListSelectionMixinBase = mixinTabIndex(mixinDisabled(McListSelec
         '(blur)': '_onTouched()',
         '(keydown)': '_keydown($event)'
     },
-    providers: [MAT_SELECTION_LIST_VALUE_ACCESSOR],
+    providers: [MC_SELECTION_LIST_VALUE_ACCESSOR],
     preserveWhitespaces: false
 })
 export class McListSelection extends _McListSelectionMixinBase implements

@@ -6,13 +6,15 @@
     <!--</mc-list-item>-->
 <!--</mc-list-selection>-->
 
-<mc-list-selection>
-    <mc-list-option disabled>Disabled</mc-list-option>
-    <mc-list-option>Normal</mc-list-option>
-    <mc-list-option class="mc-hovered">Hovered</mc-list-option>
-    <mc-list-option class="mc-focused">Focused</mc-list-option>
-    <mc-list-option class="mc-selected">Selected</mc-list-option>
-    <mc-list-option class="mc-progress">In Progress</mc-list-option>
+<mc-list-selection [(ngModel)]="selectedd">
+    <mc-list-option value="Disabled" disabled>Disabled</mc-list-option>
+    <mc-list-option value="Normal">Normal</mc-list-option>
+    <mc-list-option value="Hovered" class="mc-hovered">Hovered</mc-list-option>
+    <mc-list-option value="Focused" class="mc-focused">Focused</mc-list-option>
+    <mc-list-option value="Selected" class="mc-selected">Selected</mc-list-option>
+    <mc-list-option value="In Progress" class="mc-progress">In Progress</mc-list-option>
 
     <!--<mc-list-option *ngFor="let shoe of typesOfShoes">{{ shoe }}</mc-list-option>-->
 </mc-list-selection>
+
+<div>selected: {{ selectedd }}</div>

@@ -4,7 +4,10 @@
 
 // TODO: Its only for testing colors
 @import '../core/theming/palette';
+
+@import '../core/styles/common/animation';
 @import '../core/styles/common/list';
+
 
 @mixin mc-list-theme($theme) {
     $primary: map-get($theme, primary);
@@ -37,7 +40,7 @@
                 background-color: mc-color($primary, 100);
             }
 
-            &.mc-disabled {
+            &[disabled] {
                 background-color: transparent;
 
                 color: mc-color($foreground, disabled-text);

@@ -1,0 +1,33 @@
+@keyframes mc-progress {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 29px 0;
+    }
+}
+
+.mc-progress {
+    position: relative;
+
+    &:after {
+        content: '';
+        position: absolute;
+
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+        $lighter: transparent;
+        $darker: rgba(0, 0, 0, .05);
+        background: linear-gradient(
+                135deg,
+                $darker 10px, $lighter 10px,
+                $lighter 20px, $darker 20px,
+                $darker 30px, $lighter 30px
+        ) repeat;
+        background-size: 29px 29px;
+        animation: mc-progress 2s linear infinite;
+    }
+}
