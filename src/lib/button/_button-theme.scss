@@ -8,7 +8,7 @@
 
 
 @mixin _mc-button-primary-color($palette) {
-    $hover-opacity: 0.8;
+    $hover-lighten: 5%;
 
     color: mc-contrast($palette, 500);
 
@@ -18,19 +18,18 @@
     &:hover,
     &.mc-hover {
         background-image: linear-gradient(
-                to bottom, mc-color($palette, 500, $hover-opacity), mc-color($palette, 560, $hover-opacity)
+            to bottom, lighten(mc-color($palette, 500), $hover-lighten), lighten(mc-color($palette, 560), $hover-lighten)
         );
     }
 
     &:not([disabled]):active,
     &:not([disabled]).mc-active {
-        border-color: mc-color($palette, 700);
         background-image: linear-gradient(to top, mc-color($palette, 600), mc-color($palette, 560));
 
         &:hover,
         &.mc-hover {
             background-image: linear-gradient(
-                    to bottom, mc-color($palette, 600, $hover-opacity), mc-color($palette, 560, $hover-opacity)
+                to bottom, lighten(mc-color($palette, 600), $hover-lighten), lighten(mc-color($palette, 560),$hover-lighten)
             );
         }
     }
@@ -44,7 +43,7 @@
 }
 
 @mixin _mc-button-second-color($palette) {
-    $hover-opacity: 0.5;
+    $hover-darken: 5%;
 
     color: mc-contrast($palette, 500);
 
@@ -54,19 +53,18 @@
     &:hover,
     &.mc-hover {
         background-image: linear-gradient(
-                to bottom, mc-color($palette, 40, $hover-opacity), mc-color($palette, 100, $hover-opacity)
+            to bottom, darken(mc-color($palette, 40), $hover-darken), darken(mc-color($palette, 100), $hover-darken)
         );
     }
 
     &:not([disabled]):active,
     &:not([disabled]).mc-active {
-        border-color: mc-color($palette, 400);
         background-image: linear-gradient(to top, mc-color($palette, 200), mc-color($palette, 100));
 
         &:hover,
         &.mc-hover {
             background-image: linear-gradient(
-                    to bottom, mc-color($palette, 200, $hover-opacity), mc-color($palette, 100, $hover-opacity)
+                to bottom, darken(mc-color($palette, 200), $hover-darken), darken(mc-color($palette, 100), $hover-darken )
             );
         }
     }
@@ -76,6 +74,41 @@
 
         border-color: mc-color($palette, 200);
         background-image: linear-gradient(to bottom, mc-color($palette, 40, 1), mc-color($palette, 60));
+    }
+}
+
+@mixin _mc-button-warn-color($secondPalette, $warnPalette) {
+    $hover-darken: 5%;
+
+    color: mc-color($warnPalette, 500);
+
+    border-color: mc-color($secondPalette, 300);
+    background-image: linear-gradient(to bottom, mc-color($secondPalette, 40, 1), mc-color($secondPalette, 100));
+
+    &:hover,
+    &.mc-hover {
+        background-image: linear-gradient(
+            to bottom, darken(mc-color($secondPalette, 40), $hover-darken), darken(mc-color($secondPalette, 100), $hover-darken)
+        );
+    }
+
+    &:not([disabled]):active,
+    &:not([disabled]).mc-active {
+        background-image: linear-gradient(to top, mc-color($secondPalette, 200), mc-color($secondPalette, 100));
+
+        &:hover,
+        &.mc-hover {
+            background-image: linear-gradient(
+                to bottom, darken(mc-color($secondPalette, 200), $hover-darken), darken(mc-color($secondPalette, 100), $hover-darken )
+            );
+        }
+    }
+
+    &[disabled] {
+        color: mc-color($secondPalette, 200);
+
+        border-color: mc-color($secondPalette, 200);
+        background-image: linear-gradient(to bottom, mc-color($secondPalette, 40, 1), mc-color($secondPalette, 60));
     }
 }
 
@@ -96,16 +129,16 @@
         @include _mc-button-second-color($second);
     }
 
-    //&.mc-warn {
-    //    @include _mc-button-primary-color($warn);
-    //}
+    &.mc-warn {
+        @include _mc-button-warn-color($second, $warn);
+    }
 
     &.mc-primary,
     &.mc-second,
     &.mc-warn {
         &.cdk-focused {
             border-color: mc-color($primary, 500);
-            box-shadow: 0 0 0 2px mc-color($primary, A200);
+            box-shadow: 0 0 0 1px mc-color($primary, 500);
         }
     }
 }
