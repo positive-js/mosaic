@@ -14,8 +14,10 @@ import { FocusKeyManager, IFocusableOption } from '@ptsecurity/cdk/a11y';
 import { SelectionModel } from '@ptsecurity/cdk/collections';
 import { END, ENTER, HOME, SPACE } from '@ptsecurity/cdk/keycodes';
 
-import { CanDisable, mixinDisabled, HasTabIndex,
-    mixinTabIndex, McLine, McLineSetter, toBoolean } from '@ptsecurity/mosaic/core';
+import {
+    CanDisable, mixinDisabled, HasTabIndex, mixinTabIndex, McLine, McLineSetter, toBoolean
+} from '@ptsecurity/mosaic/core';
+import { Subscription } from 'rxjs/Subscription';
 
 
 export class McListOptionBase {}
@@ -25,20 +27,6 @@ export const MC_SELECTION_LIST_VALUE_ACCESSOR: any = {
     useExisting: forwardRef(() => McListSelection),
     multi: true
 };
-
-/**
- * Change event object emitted by McListOption whenever the selected state changes.
- * @deprecated Use the `McListSelectionChange` event on the selection list instead.
- * @deletion-target 6.0.0
- */
-export class McListOptionChange {
-    constructor(
-        // Reference to the list option that changed.
-        public source: McListOption,
-        // The new selected state of the option.
-        public selected: boolean
-    ) {}
-}
 
 // Change event that is being fired whenever the selected state of an option changes. */
 export class McListSelectionChange {
@@ -56,9 +44,9 @@ export class McListSelectionChange {
  * if the current item is selected.
  */
 @Component({
+    exportAs: 'mcListOption',
     selector: 'mc-list-option',
     host: {
-        role: 'option',
         tabindex: '-1',
 
         class: 'mc-list-option',
@@ -90,7 +78,7 @@ export class McListOption extends McListOptionBase
 
     @Input()
     get disabled() {
-        return this._disabled || (this.selectionList && this.selectionList.disabled);
+        return this._disabled || (this.listSelection && this.listSelection.disabled);
     }
 
     set disabled(value: any) {
@@ -104,7 +92,7 @@ export class McListOption extends McListOptionBase
 
     @Input()
     get selected(): boolean {
-        return this.selectionList.selectedOptions.isSelected(this);
+        return this.listSelection.selectedOptions.isSelected(this);
     }
 
     set selected(value: boolean) {
@@ -112,28 +100,20 @@ export class McListOption extends McListOptionBase
 
         if (isSelected !== this._selected) {
             this._setSelected(isSelected);
-            this.selectionList._reportValueChange();
+            this.listSelection._reportValueChange();
         }
     }
 
-    /**
-     * Emits a change event whenever the selected state of an option changes.
-     * @deprecated Use the `selectionChange` event on the `<mc-selection-list>` instead.
-     * @deletion-target 6.0.0
-     */
-    @Output() readonly selectionChange: EventEmitter<McListOptionChange> =
-        new EventEmitter<McListOptionChange>();
-
-    _selected: boolean = false;
 
     private _lineSetter: McLineSetter;
-    private _disabled: boolean = false;
+    private _selected = false;
+    private _disabled = false;
 
     constructor(
         private _element: ElementRef,
         private _changeDetector: ChangeDetectorRef,
-        @Optional() @Inject(forwardRef(() => McListSelection))
-        public selectionList: McListSelection
+        @Inject(forwardRef(() => McListSelection))
+        public listSelection: McListSelection
     ) {
         super();
     }
@@ -145,7 +125,14 @@ export class McListOption extends McListOptionBase
             // available options. Also it can happen that the ControlValueAccessor has an initial value
             // that should be used instead. Deferring the value change report to the next tick ensures
             // that the form control value is not being overwritten.
-            Promise.resolve().then(() => this.selected = true);
+            const wasSelected = this._selected;
+
+            Promise.resolve().then(() => {
+                if (this._selected || wasSelected) {
+                    this.selected = true;
+                    this._changeDetector.markForCheck();
+                }
+            });
         }
     }
 
@@ -160,15 +147,13 @@ export class McListOption extends McListOptionBase
             Promise.resolve().then(() => this.selected = false);
         }
 
-        this.selectionList._removeOptionFromList(this);
+        this.listSelection._removeOptionFromList(this);
     }
 
-    // Toggles the selection state of the option.
     toggle(): void {
         this.selected = !this.selected;
     }
 
-    // Allows for programmatic focusing of the option.
     focus(): void {
         this._element.nativeElement.focus();
     }
@@ -182,10 +167,7 @@ export class McListOption extends McListOptionBase
             this.toggle();
 
             // Emit a change event if the selected state of the option changed through user interaction.
-            this.selectionList._emitChangeEvent(this);
-
-            // TODO: the `selectionChange` event on the option is deprecated. Remove that in the future.
-            this._emitDeprecatedChangeEvent();
+            this.listSelection._emitChangeEvent(this);
         }
     }
 
@@ -193,12 +175,12 @@ export class McListOption extends McListOptionBase
         if (this.disabled) { return; }
 
         this._hasFocus = true;
-        this.selectionList._setFocusedOption(this);
+        this.listSelection._setFocusedOption(this);
     }
 
     _handleBlur() {
         this._hasFocus = false;
-        this.selectionList._onTouched();
+        this.listSelection._onTouched();
     }
 
     // Retrieves the DOM element of the component host.
@@ -208,23 +190,17 @@ export class McListOption extends McListOptionBase
 
     // Sets the selected state of the option.
     _setSelected(selected: boolean) {
-        if (selected === this._selected) { return; }
+        if (this._selected === selected) { return; }
 
         this._selected = selected;
 
         if (selected) {
-            this.selectionList.selectedOptions.select(this);
+            this.listSelection.selectedOptions.select(this);
         } else {
-            this.selectionList.selectedOptions.deselect(this);
+            this.listSelection.selectedOptions.deselect(this);
         }
 
         this._changeDetector.markForCheck();
-    }
-
-    // Emits a selectionChange event for this option.
-    _emitDeprecatedChangeEvent() {
-        // TODO: the `selectionChange` event on the option is deprecated. Remove that in the future.
-        this.selectionChange.emit(new McListOptionChange(this, this.selected));
     }
 }
 
@@ -234,6 +210,7 @@ export class McListSelectionBase {}
 export const _McListSelectionMixinBase = mixinTabIndex(mixinDisabled(McListSelectionBase));
 
 @Component({
+    exportAs: 'mcListSelection',
     selector: 'mc-list-selection',
     template: '<ng-content></ng-content>',
     styleUrls: ['list.css'],
@@ -264,10 +241,12 @@ export class McListSelection extends _McListSelectionMixinBase implements
         new EventEmitter<McListSelectionChange>();
 
     // The currently selected options.
-    selectedOptions: SelectionModel<McListOption> = new SelectionModel<McListOption>(true);
+    selectedOptions: SelectionModel<McListOption> = new SelectionModel<McListOption>();
 
     // Used for storing the values that were assigned before the options were initialized.
-    private _tempValues: string[]|null;
+    private _tempValues: string[] | null;
+
+    private _modelChanges = Subscription.EMPTY;
 
     constructor(private _element: ElementRef, @Attribute('tabindex') tabIndex: string) {
         super();
@@ -282,6 +261,16 @@ export class McListSelection extends _McListSelectionMixinBase implements
             this._setOptionsFromValues(this._tempValues);
             this._tempValues = null;
         }
+
+        // Sync external changes to the model back to the options.
+        this._modelChanges = this.selectedOptions.onChange!.subscribe((event) => {
+            event.added.forEach((item) => { item.selected = true; });
+            event.removed.forEach((item) => { item.selected = false; });
+        });
+    }
+
+    ngOnDestroy() {
+        this._modelChanges.unsubscribe();
     }
 
     // Focus the selection-list.
@@ -363,13 +352,6 @@ export class McListSelection extends _McListSelectionMixinBase implements
         }
     }
 
-    // Implemented as a part of ControlValueAccessor.
-    setDisabledState(isDisabled: boolean): void {
-        if (this.options) {
-            this.options.forEach((option) => option.disabled = isDisabled);
-        }
-    }
-
     // Implemented as part of ControlValueAccessor.
     registerOnChange(fn: (value: any) => void): void {
         this._onChange = fn;
@@ -378,6 +360,13 @@ export class McListSelection extends _McListSelectionMixinBase implements
     // Implemented as part of ControlValueAccessor.
     registerOnTouched(fn: () => void): void {
         this._onTouched = fn;
+    }
+
+    // Implemented as a part of ControlValueAccessor.
+    setDisabledState(isDisabled: boolean): void {
+        if (this.options) {
+            this.options.forEach((option) => option.disabled = isDisabled);
+        }
     }
 
     // Returns the option with the specified value.
@@ -395,7 +384,6 @@ export class McListSelection extends _McListSelectionMixinBase implements
             .forEach((option) => option!._setSelected(true));
     }
 
-    // Returns the values of the selected options.
     private _getSelectedOptionValues(): string[] {
         return this.options.filter((option) => option.selected).map((option) => option.value);
     }
@@ -410,12 +398,8 @@ export class McListSelection extends _McListSelectionMixinBase implements
             if (focusedOption) {
                 focusedOption.toggle();
 
-                // Emit a change event because the focused option changed its state through user
-                // interaction.
+                // Emit a change event because the focused option changed its state through user interaction.
                 this._emitChangeEvent(focusedOption);
-
-                // TODO: the `selectionChange` event on the option is deprecated. Remove that in the future.
-                focusedOption._emitDeprecatedChangeEvent();
             }
         }
     }
@@ -436,5 +420,4 @@ export class McListSelection extends _McListSelectionMixinBase implements
 
     // View to model callback that should be called whenever the selected options change.
     private _onChange: (value: any) => void = (_: any) => {};
-
 }

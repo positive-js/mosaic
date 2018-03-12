@@ -1,4 +1,3 @@
-
 import { Subject } from 'rxjs/Subject';
 
 /**
@@ -29,10 +28,7 @@ export class SelectionModel<T> {
     /** Event emitted when the value has changed. */
     onChange: Subject<SelectionChange<T>> | null = this._emitChanges ? new Subject() : null;
 
-    constructor(private _multiple = false,
-                initiallySelectedValues?: T[],
-                private _emitChanges = true) {
-
+    constructor(private _multiple = false, initiallySelectedValues?: T[], private _emitChanges = true) {
         if (initiallySelectedValues && initiallySelectedValues.length) {
             if (_multiple) {
                 initiallySelectedValues.forEach(value => this._markSelected(value));
@@ -103,9 +99,7 @@ export class SelectionModel<T> {
      * Sorts the selected values based on a predicate function.
      */
     sort(predicate?: (a: T, b: T) => number): void {
-        if (this._multiple && this._selected) {
-            this._selected.sort(predicate);
-        }
+        if (this._multiple && this._selected) { this._selected.sort(predicate); }
     }
 
     /** Emits a change event and clears the records of selected and deselected values. */
@@ -116,9 +110,7 @@ export class SelectionModel<T> {
         if (this._selectedToEmit.length || this._deselectedToEmit.length) {
             const eventData = new SelectionChange<T>(this, this._selectedToEmit, this._deselectedToEmit);
 
-            if (this.onChange) {
-                this.onChange.next(eventData);
-            }
+            if (this.onChange) { this.onChange.next(eventData); }
 
             this._deselectedToEmit = [];
             this._selectedToEmit = [];
@@ -128,15 +120,11 @@ export class SelectionModel<T> {
     /** Selects a value. */
     private _markSelected(value: T) {
         if (!this.isSelected(value)) {
-            if (!this._multiple) {
-                this._unmarkAll();
-            }
+            if (!this._multiple) { this._unmarkAll(); }
 
             this._selection.add(value);
 
-            if (this._emitChanges) {
-                this._selectedToEmit.push(value);
-            }
+            if (this._emitChanges) { this._selectedToEmit.push(value); }
         }
     }
 
@@ -145,9 +133,7 @@ export class SelectionModel<T> {
         if (this.isSelected(value)) {
             this._selection.delete(value);
 
-            if (this._emitChanges) {
-                this._deselectedToEmit.push(value);
-            }
+            if (this._emitChanges) { this._deselectedToEmit.push(value); }
         }
     }
 
@@ -174,12 +160,13 @@ export class SelectionModel<T> {
  * @docs-private
  */
 export class SelectionChange<T> {
-    constructor(/** Model that dispatched the event. */
-                public source: SelectionModel<T>,
-                /** Options that were added to the model. */
-                public added?: T[],
-                /** Options that were removed from the model. */
-                public removed?: T[]) {
+    constructor(
+        /** Model that dispatched the event. */
+        public source: SelectionModel<T>,
+        /** Options that were added to the model. */
+        public added: T[],
+        /** Options that were removed from the model. */
+        public removed: T[]) {
     }
 }
 
