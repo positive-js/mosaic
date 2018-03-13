@@ -1,23 +1,19 @@
-
 import { Constructor } from './constructor';
 import { ElementRef } from '@angular/core';
 
-/** @docs-private */
 export interface CanColor {
     color: ThemePalette;
 }
 
-/** @docs-private */
 export interface HasElementRef {
     _elementRef: ElementRef;
 }
 
-/** Possible color palette values. */
 export enum ThemePalette {
     Primary = 'primary',
     Second = 'second',
     Warn = 'warn',
-    Default = ''
+    Default = 'second'
 }
 
 /** Mixin to augment a directive with a `color` property. */

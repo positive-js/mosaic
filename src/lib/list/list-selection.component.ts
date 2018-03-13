@@ -230,18 +230,19 @@ export const _McListSelectionMixinBase = mixinTabIndex(mixinDisabled(McListSelec
 export class McListSelection extends _McListSelectionMixinBase implements
     IFocusableOption, CanDisable, HasTabIndex, AfterContentInit, ControlValueAccessor {
 
-    // The FocusKeyManager which handles focus.
     _keyManager: FocusKeyManager<McListOption>;
 
     // The option components contained within this selection-list.
     @ContentChildren(McListOption) options: QueryList<McListOption>;
 
+    @Input() horizontal: boolean = false;
+    @Input() multiple: boolean = false;
+
     // Emits a change event whenever the selected state of an option changes.
     @Output() readonly selectionChange: EventEmitter<McListSelectionChange> =
         new EventEmitter<McListSelectionChange>();
 
-    // The currently selected options.
-    selectedOptions: SelectionModel<McListOption> = new SelectionModel<McListOption>();
+    selectedOptions: SelectionModel<McListOption>;
 
     // Used for storing the values that were assigned before the options were initialized.
     private _tempValues: string[] | null;
@@ -255,12 +256,21 @@ export class McListSelection extends _McListSelectionMixinBase implements
     }
 
     ngAfterContentInit(): void {
-        this._keyManager = new FocusKeyManager<McListOption>(this.options).withWrap().withTypeAhead();
+        this.horizontal = toBoolean(this.horizontal);
+        this.multiple = toBoolean(this.multiple);
+
+        this._keyManager = new FocusKeyManager<McListOption>(this.options)
+            .withWrap()
+            .withTypeAhead()
+            .withHorizontalOrientation(this.horizontal ? 'ltr' : null)
+            .withVerticalOrientation(!this.horizontal);
 
         if (this._tempValues) {
             this._setOptionsFromValues(this._tempValues);
             this._tempValues = null;
         }
+
+        this.selectedOptions = new SelectionModel<McListOption>(this.multiple);
 
         // Sync external changes to the model back to the options.
         this._modelChanges = this.selectedOptions.onChange!.subscribe((event) => {
@@ -312,18 +322,19 @@ export class McListSelection extends _McListSelectionMixinBase implements
         }
     }
 
-    // Passes relevant key presses to our key manager.
     _keydown(event: KeyboardEvent) {
         switch (event.keyCode) {
             case SPACE:
             case ENTER:
                 this._toggleSelectOnFocusedOption();
-                // Always prevent space from scrolling the page since the list has focus
                 event.preventDefault();
                 break;
             case HOME:
+                this._keyManager.setFirstItemActive();
+                event.preventDefault();
+                break;
             case END:
-                event.keyCode === HOME ? this._keyManager.setFirstItemActive() : this._keyManager.setLastItemActive();
+                this._keyManager.setLastItemActive();
                 event.preventDefault();
                 break;
             default:

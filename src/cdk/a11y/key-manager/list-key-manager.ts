@@ -1,4 +1,3 @@
-
 import { QueryList } from '@angular/core';
 
 import { debounceTime } from 'rxjs/operators/debounceTime';
@@ -74,6 +73,7 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
      */
     withWrap(): this {
         this._wrap = true;
+
         return this;
     }
 
@@ -109,9 +109,8 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
 
         this._typeaheadSubscription.unsubscribe();
 
-        // Debounce the presses of non-navigational keys, collect the ones that correspond to letters
-        // and convert those letters back into a string. Afterwards find the first item that starts
-        // with that string and select it.
+        // Debounce the presses of non-navigational keys, collect the ones that correspond to letters and convert those
+        // letters back into a string. Afterwards find the first item that starts with that string and select it.
         this._typeaheadSubscription = this._letterKeyStream.pipe(
             tap((keyCode) => this._pressedLetters.push(keyCode)),
             debounceTime(debounceInterval),
@@ -163,19 +162,22 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
         switch (keyCode) {
             case TAB:
                 this.tabOut.next();
-
                 return;
 
             case DOWN_ARROW:
                 if (this._vertical) {
                     this.setNextItemActive();
                     break;
+                } else {
+                    return;
                 }
 
             case UP_ARROW:
                 if (this._vertical) {
                     this.setPreviousItemActive();
                     break;
+                } else {
+                    return;
                 }
 
             case RIGHT_ARROW:
@@ -185,6 +187,8 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
                 } else if (this._horizontal === 'rtl') {
                     this.setPreviousItemActive();
                     break;
+                } else {
+                    return;
                 }
 
             case LEFT_ARROW:
@@ -194,6 +198,8 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
                 } else if (this._horizontal === 'rtl') {
                     this.setNextItemActive();
                     break;
+                } else {
+                    return;
                 }
 
             default:
