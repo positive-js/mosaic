@@ -1,4 +1,4 @@
-import { FocusOrigin } from '@ptsecurity/cdk/a11y';
+import { FocusOrigin } from '../focus-monitor/focus-monitor';
 
 import { ListKeyManager, IListKeyManagerOption } from './list-key-manager';
 
