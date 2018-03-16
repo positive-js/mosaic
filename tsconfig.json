@@ -7,19 +7,27 @@
         "noUnusedParameters": true,
         "strictNullChecks": true,
         "skipLibCheck": true,
-        "target": "es2015",
+        "target": "es5",
         "lib": [
             "es5",
             "es2015",
             "dom"
         ],
+        "baseUrl": "./src",
+        "paths": {
+            "@ptsecurity/cdk/*": [
+                "./cdk/*"
+            ],
+            "@ptsecurity/mosaic/*": [
+                "./lib/*"
+            ]
+        },
+        "typeRoots": [
+            "node_modules/@types"
+        ],
         "types": [
             "jasmine",
-            "node"
-        ],
-        "typeRoots": [
-            "node_modules/@types",
-            "src/lib/typings.d.ts"
+            "tslib"
         ]
     },
     "include": [

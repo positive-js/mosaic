@@ -50,7 +50,7 @@ export class McListSelectionChange {
         tabindex: '-1',
 
         class: 'mc-list-option',
-        '[class.mc-selected]': '_selected',
+        '[class.mc-selected]': 'selected',
         '[class.mc-focused]': '_hasFocus',
 
         '(focus)': '_handleFocus()',
