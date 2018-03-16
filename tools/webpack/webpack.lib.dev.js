@@ -1,5 +1,6 @@
 const webpackMerge = require('webpack-merge');
 
+const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 const HotModuleReplacementPlugin = require('webpack/lib/HotModuleReplacementPlugin');
 const { TsConfigPathsPlugin } = require('awesome-typescript-loader');
 
@@ -20,8 +21,6 @@ module.exports = function (options) {
 
     return webpackMerge(commonConfig(options), {
 
-        mode: 'development',
-
         cache: true,
 
         devtool: 'source-map',
@@ -37,7 +36,11 @@ module.exports = function (options) {
         output: {
             path: helpers.root('dist'),
             filename: '[name].bundle.js',
-            sourceMapFilename: '[name].map'
+            sourceMapFilename: '[name].map',
+            chunkFilename: '[id].chunk.js',
+            library: 'ac_[name]',
+            libraryTarget: 'var'
+
         },
 
         module: {
@@ -88,19 +91,21 @@ module.exports = function (options) {
 
         plugins: [
 
-            new HotModuleReplacementPlugin()
+            new HotModuleReplacementPlugin(),
+
+            new LoaderOptionsPlugin({
+                debug: true
+            })
 
         ],
 
         devServer: {
-            headers: { 'Access-Control-Allow-Origin': '*' },
             hot: true,
             inline: true,
             contentBase: false,
             port: METADATA.port,
             host: METADATA.host,
             open: true,
-            compress: true,
             historyApiFallback: true,
             watchOptions: {
                 ignored: /node_modules/
@@ -116,10 +121,6 @@ module.exports = function (options) {
                 reasons: false,
                 warnings: true,
                 errors: true,
-                assets: true, // required by custom stat output
-                version: false,
-                errorDetails: false,
-                moduleTrace: false,
             }
         }
     })
