@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {async, TestBed} from '@angular/core/testing';
+import {async, fakeAsync, TestBed} from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
 
 import { McButtonModule } from './index';
@@ -7,7 +7,7 @@ import { McButtonModule } from './index';
 
 describe('MatButton', () => {
 
-    beforeEach(async(() => {
+    beforeEach(fakeAsync(() => {
         TestBed.configureTestingModule({
             imports: [McButtonModule],
             declarations: [TestApp]

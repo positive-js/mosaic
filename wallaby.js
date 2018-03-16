@@ -3,7 +3,6 @@ const wallabyWebpack = require('wallaby-webpack');
 const { TsConfigPathsPlugin } = require('awesome-typescript-loader');
 
 const path = require('path');
-const helpers = require('./tools/webpack/helpers');
 
 const compilerOptions = Object.assign(
     require('./tsconfig.webpack.json').compilerOptions,
@@ -23,12 +22,14 @@ module.exports = function (wallaby) {
         module: {
             rules: [
                 {
-                    test: /\.ts$/,
+                    test: /\.js$/,
                     enforce: 'post',
                     use: [{ loader: path.resolve('./tools/webpack/ng2-sass-loader.js') }]
                 },
+
                 { test: /\.css$/, loader: 'raw-loader' },
                 { test: /\.html$/, loader: 'raw-loader' },
+                {test: /\.js$/, loader: 'angular2-template-loader', exclude: /node_modules/},
                 {
                     test: /\.ts$/,
                     use: [
@@ -38,31 +39,10 @@ module.exports = function (wallaby) {
                                 configFileName: './tsconfig.webpack.json'
                             }
 
-                        },
-                        {
-                            loader: 'angular2-template-loader'
                         }
                     ],
                 },
-                {
-                    test: /\.scss$/,
-                    use: [
-                        'raw-loader',
-                        {
-                            loader: 'postcss-loader',
-                            options: {
-                                sourceMap: true,
-                                plugins: () => [
-                                    require('autoprefixer')({
-                                        browsers: ['last 2 versions']
-                                    })
-                                ]
-                            }
-                        },
-                        'sass-loader?sourceMap'
-                    ],
-                    include: [ helpers.root('src') ]
-                }
+                {test: /\.scss$|\.sass$/, loaders: ['raw-loader', 'sass-loader']},
             ]
         },
 
