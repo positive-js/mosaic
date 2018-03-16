@@ -9,12 +9,14 @@ const compilerOptions = Object.assign(
     require('./tsconfig.webpack.json').compilerOptions,
 );
 
+compilerOptions.module = 'CommonJs';
+
 
 module.exports = function (wallaby) {
 
     const webpackPostprocessor = wallabyWebpack({
         entryPatterns: [
-            'spec-bundle-wallaby.js',
+            'src/wallabyTest.js',
             'src/**/*spec.js'
         ],
 
@@ -67,7 +69,8 @@ module.exports = function (wallaby) {
         resolve: {
             extensions: ['.js', '.ts'],
             modules: [
-                path.join(wallaby.projectCacheDir, 'src')
+                path.join(wallaby.projectCacheDir, 'src'),
+                'node_modules'
             ],
             plugins: [
                 new TsConfigPathsPlugin({
@@ -79,13 +82,8 @@ module.exports = function (wallaby) {
 
     return {
         files: [
-            { pattern: 'src/**/*.ts', load: false },
-            { pattern: 'spec-bundle-wallaby.js', load: false, instrument: false },
+            { pattern: 'src/**/*.+(ts|css|scss|sass|html|json|svg)', load: false },
             { pattern: 'src/**/*.d.ts', ignore: true },
-            { pattern: 'src/**/*.css', load: false },
-            { pattern: 'src/**/*.scss', load: false },
-            { pattern: 'src/**/*.html', load: false },
-            { pattern: 'src/**/*.json', load: false },
             { pattern: 'src/**/*spec.ts', ignore: true }
         ],
 
