@@ -1,41 +1,66 @@
-var wallabyWebpack = require('wallaby-webpack');
-var path = require('path');
+const wallabyWebpack = require('wallaby-webpack');
+
+const { TsConfigPathsPlugin } = require('awesome-typescript-loader');
+
+const path = require('path');
+const helpers = require('./tools/webpack/helpers');
+
+const compilerOptions = Object.assign(
+    require('./tsconfig.webpack.json').compilerOptions,
+);
+
 
 module.exports = function (wallaby) {
 
-    var webpackPostprocessor = wallabyWebpack({
+    const webpackPostprocessor = wallabyWebpack({
         entryPatterns: [
             'spec-bundle-wallaby.js',
             'src/**/*spec.js'
         ],
 
         module: {
-            loaders: [
+            rules: [
+                {
+                    test: /\.ts$/,
+                    enforce: 'post',
+                    use: [{ loader: path.resolve('./tools/webpack/ng2-sass-loader.js') }]
+                },
                 { test: /\.css$/, loader: 'raw-loader' },
                 { test: /\.html$/, loader: 'raw-loader' },
                 {
                     test: /\.ts$/,
-                    include: /node_modules/,
                     use: [
                         {
                             loader: 'awesome-typescript-loader',
-                            query: {
+                            options: {
+                                configFileName: './tsconfig.webpack.json'
+                            }
+
+                        },
+                        {
+                            loader: 'angular2-template-loader'
+                        }
+                    ],
+                },
+                {
+                    test: /\.scss$/,
+                    use: [
+                        'raw-loader',
+                        {
+                            loader: 'postcss-loader',
+                            options: {
                                 sourceMap: true,
-                                inlineSourceMap: true,
-                                compilerOptions: {
-                                    removeComments: true
-                                }
+                                plugins: () => [
+                                    require('autoprefixer')({
+                                        browsers: ['last 2 versions']
+                                    })
+                                ]
                             }
                         },
-                        'angular2-template-loader'
-                    ]
-                },
-                { test: /\.js$/, loader: 'angular2-template-loader', exclude: /node_modules/ },
-                { test: /\.json$/, loader: 'json-loader' },
-                { test: /\.styl$/, loaders: ['raw-loader', 'stylus-loader'] },
-                { test: /\.less$/, loaders: ['raw-loader', 'less-loader'] },
-                { test: /\.scss$|\.sass$/, loaders: ['raw-loader', 'sass-loader'] },
-                { test: /\.(jpg|png)$/, loader: 'url-loader?limit=128000' }
+                        'sass-loader?sourceMap'
+                    ],
+                    include: [ helpers.root('src') ]
+                }
             ]
         },
 
@@ -43,6 +68,11 @@ module.exports = function (wallaby) {
             extensions: ['.js', '.ts'],
             modules: [
                 path.join(wallaby.projectCacheDir, 'src')
+            ],
+            plugins: [
+                new TsConfigPathsPlugin({
+                    configFileName: './tsconfig.webpack.json'
+                })
             ]
         }
     });
@@ -65,11 +95,9 @@ module.exports = function (wallaby) {
 
         testFramework: 'jasmine',
 
-        // middleware: function (app, express) {
-        //     var path = require('path');
-        //     app.use('/favicon.ico', express.static(path.join(__dirname, 'src/favicon.ico')));
-        //     app.use('/assets', express.static(path.join(__dirname, 'src/assets')));
-        // },
+        compilers: {
+            '**/*.ts': wallaby.compilers.typeScript(compilerOptions),
+        },
 
         env: {
             kind: 'chrome'
