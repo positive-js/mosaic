@@ -4,24 +4,21 @@ const EVENT = process.env.npm_lifecycle_event || '';
 // Helper functions
 const ROOT = path.resolve(__dirname, '../..');
 
-function hasProcessFlag(flag) {
-    return process.argv.join('').indexOf(flag) > -1;
-}
-
-function hasNpmFlag(flag) {
-    return EVENT.includes(flag);
-}
-
-function isWebpackDevServer() {
-    return process.argv[1] && !! (/webpack-dev-server/.exec(process.argv[1]));
-}
 
 function root(args) {
     args = Array.prototype.slice.call(arguments, 0);
     return path.join.apply(path, [ROOT].concat(args));
 }
 
-exports.hasProcessFlag = hasProcessFlag;
-exports.hasNpmFlag = hasNpmFlag;
-exports.isWebpackDevServer = isWebpackDevServer;
-exports.root = root;
+function isExternalLib(module, check = /node_modules/) {
+    const req = module.userRequest;
+    if (typeof req !== 'string') {
+        return false;
+    }
+    return req.search(check) >= 0;
+}
+
+module.exports = {
+    root,
+    isExternalLib
+};

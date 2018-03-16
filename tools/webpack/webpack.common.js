@@ -94,9 +94,9 @@ module.exports = function (options) {
 
             // This enables tree shaking of the vendor modules
             new CommonsChunkPlugin({
-                name: 'vendors',
-                chunks: [options.component],
-                minChunks: module => /node_modules/.test(module.resource)
+                name: 'vendor',
+                chunks: ['main'],
+                minChunks: module => helpers.isExternalLib(module)
             }),
 
 
@@ -115,6 +115,14 @@ module.exports = function (options) {
                 /angular(\\|\/)core(\\|\/)(@angular|esm5)/,
                 helpers.root('src')
             )
-        ]
+        ],
+        node: {
+            global: true,
+            crypto: 'empty',
+            process: true,
+            module: false,
+            clearImmediate: false,
+            setImmediate: false
+        }
     }
 };
