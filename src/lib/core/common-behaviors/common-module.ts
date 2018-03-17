@@ -1,12 +1,12 @@
 import { NgModule, InjectionToken, Optional, Inject, isDevMode } from '@angular/core';
 
 
-// Injection token that configures whether the Material sanity checks are enabled.
+// Injection token that configures whether the Mosaic sanity checks are enabled.
 export const MС_SANITY_CHECKS = new InjectionToken<boolean>('mc-sanity-checks');
 
 
 /**
- * Module that captures anything that should be loaded and/or run for *all* Angular Material
+ * Module that captures anything that should be loaded and/or run for *all* Mosaic
  * components. This includes Bidi, etc.
  *
  * This module should be imported to each top-level component module (e.g., MatTabsModule).
@@ -53,7 +53,7 @@ export class McCommonModule {
         if (this._document && !this._document.doctype) {
             console.warn(
                 'Current document does not have a doctype. This may cause ' +
-                'some Angular Material components not to behave as expected.'
+                'some Mosaic components not to behave as expected.'
             );
         }
     }
@@ -72,9 +72,9 @@ export class McCommonModule {
             // See: https://bugzilla.mozilla.org/show_bug.cgi?id=548397
             if (computedStyle && computedStyle.display !== 'none') {
                 console.warn(
-                    'Could not find Angular Material core theme. Most Material ' +
+                    'Could not find Mosaic core theme. Most Mosaic ' +
                     'components may not work as expected. For more info refer ' +
-                    'to the theming guide: https://material.angular.io/guide/theming'
+                    'to the theming guide: link there'
                 );
             }
 
@@ -90,7 +90,7 @@ export class McCommonModule {
 
         if (this._areChecksEnabled() && !this._window['Hammer']) {
             console.warn(
-                'Could not find HammerJS. Certain Angular Material components may not work correctly.');
+                'Could not find HammerJS. Certain Mosaic components may not work correctly.');
         }
         this._hasCheckedHammer = true;
     }

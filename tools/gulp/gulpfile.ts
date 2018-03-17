@@ -12,4 +12,5 @@ import './tasks/ci';
 import './tasks/lint';
 import './tasks/mosaic-release';
 import './tasks/unit';
+import './tasks/docs';
 /* tslint:enable:no-import-side-effect */

@@ -1,11 +1,11 @@
-`<mc-divider>` is a component that allows for Material styling of a line separator with various orientation options.
+`<mc-divider>` is a component that allows for Mosaic styling of a line separator with various orientation options.
 
 <!-- example(divider-overview) -->
 
 
 ### Simple divider
 
-A `<mc-divider>` element can be used on its own to create a horizontal or vertical line styled with a Material theme
+A `<mc-divider>` element can be used on its own to create a horizontal or vertical line styled with a Mosaic theme
 
 ```html
 <mc-divider></mc-divider>

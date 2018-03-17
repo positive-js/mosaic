@@ -50,6 +50,8 @@
         "clean-webpack-plugin": "0.1.18",
         "conventional-changelog": "^1.1.18",
         "css-loader": "^0.28.10",
+        "dgeni": "^0.4.9",
+        "dgeni-packages": "^0.26.0",
         "duplicate-package-checker-webpack-plugin": "^2.1.0",
         "file-loader": "^1.1.11",
         "fs-extra": "^5.0.0",
