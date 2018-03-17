@@ -15,6 +15,7 @@ module.exports = (config) => {
         ],
         files: [
             {pattern: 'node_modules/core-js/client/core.js', included: true, watched: false},
+            {pattern: 'node_modules/tslib/tslib.js', included: true, watched: false},
             {pattern: 'node_modules/systemjs/dist/system.src.js', included: true, watched: false},
             {pattern: 'node_modules/zone.js/dist/zone.js', included: true, watched: false},
             {pattern: 'node_modules/zone.js/dist/proxy.js', included: true, watched: false},
@@ -27,15 +28,16 @@ module.exports = (config) => {
             {pattern: 'node_modules/@angular/**/*', included: false, watched: false},
             {pattern: 'node_modules/rxjs/**/*.js', included: false, watched: false},
 
+            {pattern: 'tests/karma-test-shim.js', included: true, watched: false},
+
             // Paths to support debugging with source maps in dev tools
-            {pattern: 'dist/**/*.ts', included: false, watched: false},
-            {pattern: 'dist/**/*.js.map', included: false, watched: false}
+            {pattern: 'dist/packages/**/*', included: false, watched: true},
         ],
 
         customLaunchers: customLaunchers,
 
         preprocessors: {
-            'dist/**/*.js': ['sourcemap']
+            'dist/packages/**/*.js': ['sourcemap']
         },
 
         reporters: ['dots'],
@@ -55,14 +57,23 @@ module.exports = (config) => {
         browserDisconnectTimeout: 20000,
         browserNoActivityTimeout: 240000,
         captureTimeout: 120000,
-        browsers: ['ChromeHeadless'],
+        browsers: ['ChromeHeadlessLocal'],
 
         singleRun: false,
 
         browserConsoleLogOptions: {
             terminal: true,
             level: 'log'
-        }
+        },
 
+        client: {
+            jasmine: {
+                // TODO(jelbourn): re-enable random test order once we can de-flake existing issues.
+                random: false
+            }
+        }
     });
+
+    config.preprocessors['dist/packages/**/!(*+(.|-)spec).js'] = ['coverage'];
+    config.reporters.push('coverage');
 };

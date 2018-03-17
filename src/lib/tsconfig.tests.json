@@ -6,11 +6,12 @@
         "target": "es5",
         "types": ["jasmine"],
         "paths": {
-            "@ptsecurity/mosaic/*": ["./*"]
+            "@ptsecurity/mosaic/*": ["./*"],
+            "@ptsecurity/cdk/*": ["../../dist/packages/cdk/*/public-api"]
         }
     },
     "angularCompilerOptions": {
-        "strictMetadataEmit": false,
+        "strictMetadataEmit": false, // Workaround for Angular #22210
         "skipTemplateCodegen": true,
         "emitDecoratorMetadata": true,
         "fullTemplateTypeCheck": true

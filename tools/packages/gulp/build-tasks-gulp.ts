@@ -47,11 +47,19 @@ export function createPackageBuildTasks(buildPackage: BuildPackage, preBuildTask
         `${taskName}:build:bundles`
     ));
 
+    task(`${taskName}:build-no-bundles`, sequenceTask(
+        // Build the ESM output that includes all test files. Also build assets for the package.
+        [`${taskName}:build:esm:tests`, `${taskName}:assets`],
+        // Inline assets into ESM output.
+        `${taskName}:assets:inline`
+    ));
+
     task(`${taskName}:build-release:clean`, sequenceTask('clean', `${taskName}:build-release`));
     task(`${taskName}:build-release`, [`${taskName}:build`], () => composeRelease(buildPackage));
 
 
     task(`${taskName}:build:esm`, () => buildPackage.compile());
+    task(`${taskName}:build:esm:tests`, () => buildPackage.compileTests());
 
     task(`${taskName}:build:bundles`, () => buildPackage.createBundles());
 

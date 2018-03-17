@@ -1,15 +1,19 @@
 import { join } from 'path';
+import chalk from 'chalk';
 
 import { PackageBundler } from './build-bundles';
 import { buildConfig } from './build-config';
 import { compileEntryPoint, renamePrivateReExportsToBeUnique } from './compile-entry-point';
 import { getSecondaryEntryPointsForPackage } from './secondary-entry-points';
+import { ngcCompile } from './ngc-compile';
 
 
 const { packagesDir, outputDir } = buildConfig;
 
 // Name of the tsconfig file that is responsible for building an ES2015 package.
 const buildTsConfigName = 'tsconfig.build.json';
+
+const testsTsconfigName = 'tsconfig.tests.json';
 
 export class BuildPackage {
 
@@ -93,6 +97,11 @@ export class BuildPackage {
         await this._compileBothTargets();
     }
 
+    /** Compiles the TypeScript test source files for the package. */
+    async compileTests() {
+        await this._compileTestEntryPoint(testsTsconfigName);
+    }
+
     async createBundles() {
         await this.bundler.createBundles();
     }
@@ -104,6 +113,18 @@ export class BuildPackage {
         return compileEntryPoint(this, buildTsConfigName, p)
             .then(() => compileEntryPoint(this, buildTsConfigName, p, this.esm5OutputDir))
             .then(() => renamePrivateReExportsToBeUnique(this, p));
+    }
+
+    /** Compiles the TypeScript sources of a primary or secondary entry point. */
+    private _compileTestEntryPoint(tsconfigName: string, secondaryEntryPoint = ''): Promise<any> {
+        const entryPointPath = join(this.sourceDir, secondaryEntryPoint);
+        const entryPointTsconfigPath = join(entryPointPath, tsconfigName);
+
+        return ngcCompile(['-p', entryPointTsconfigPath]).catch(() => {
+            const error = chalk.red(`Failed to compile ${secondaryEntryPoint} using ${entryPointTsconfigPath}`);
+            console.error(error);
+            return Promise.reject(error);
+        });
     }
 
     /**

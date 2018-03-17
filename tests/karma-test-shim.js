@@ -1,3 +1,5 @@
+'use strict';
+
 /*global jasmine, __karma__, window*/
 Error.stackTraceLimit = Infinity;
 
@@ -8,8 +10,8 @@ jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
 
 __karma__.loaded = function () {};
 
-var baseDir = '/base';
-var specFiles = Object.keys(window.__karma__.files).filter(isMaterialSpecFile);
+const baseDir = '/base';
+const specFiles = Object.keys(window.__karma__.files).filter(isMosaicSpecFile);
 
 // Configure the base path and map the different node packages.
 System.config({
@@ -44,7 +46,17 @@ System.config({
     '@angular/platform-browser-dynamic':
       'node:@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
     '@angular/platform-browser-dynamic/testing':
-      'node:@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js'
+      'node:@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
+
+      '@ptsecurity/cdk': 'dist/packages/cdk/index.js',
+      '@ptsecurity/cdk/a11y': 'dist/packages/cdk/a11y/index.js',
+      '@ptsecurity/cdk/collections': 'dist/packages/cdk/collections/index.js',
+      '@ptsecurity/cdk/keycodes': 'dist/packages/cdk/keycodes/index.js',
+      '@ptsecurity/cdk/platform': 'dist/packages/cdk/platform/index.js',
+
+      '@ptsecurity/mosaic/button': 'dist/packages/mosaic/button/index.js',
+      '@ptsecurity/mosaic/core': 'dist/packages/mosaic/core/index.js',
+      '@ptsecurity/mosaic/list': 'dist/packages/mosaic/list/index.js',
   },
   packages: {
     // Thirdparty barrels.
@@ -60,20 +72,20 @@ System.config({
 
 // Configure the Angular test bed and run all specs once configured.
  configureTestBed()
-  .then(runMaterialSpecs)
+  .then(runMosaicSpecs)
   .then(__karma__.start, __karma__.error);
 
 
-/** Runs the Angular Material specs in Karma. */
-function runMaterialSpecs() {
+/** Runs the library specs in Karma. */
+function runMosaicSpecs() {
   // By importing all spec files, Karma will run the tests directly.
   return Promise.all(specFiles.map(function(fileName) {
     return System.import(fileName);
   }));
 }
 
-/** Whether the specified file is part of Angular Material. */
-function isMaterialSpecFile(path) {
+/** Whether the specified file is part of library. */
+function isMosaicSpecFile(path) {
   return path.slice(-8) === '.spec.js' && path.indexOf('node_modules') === -1;
 }
 
@@ -83,10 +95,10 @@ function configureTestBed() {
     System.import('@angular/core/testing'),
     System.import('@angular/platform-browser-dynamic/testing')
   ]).then(function (providers) {
-    var testing = providers[0];
-    var testingBrowser = providers[1];
+    const testing = providers[0];
+    const testingBrowser = providers[1];
 
-    var testBed = testing.TestBed.initTestEnvironment(
+    const testBed = testing.TestBed.initTestEnvironment(
       testingBrowser.BrowserDynamicTestingModule,
       testingBrowser.platformBrowserDynamicTesting()
     );
@@ -100,7 +112,7 @@ function configureTestBed() {
  * destruction are thrown instead of silently logged. Also runs TestBed.resetTestingModule after
  * each unit test.
  *
- * Without this patch, the combination of two behaviors is problematic for Angular Material:
+ * Without this patch, the combination of two behaviors is problematic for library:
  * - TestBed.resetTestingModule catches errors thrown on fixture destruction and logs them without
  *     the errors ever being thrown. This means that any component errors that occur in ngOnDestroy
  *     can encounter errors silently and still pass unit tests.
@@ -110,7 +122,7 @@ function configureTestBed() {
  */
 function patchTestBedToDestroyFixturesAfterEveryTest(testBed) {
   // Original resetTestingModule function of the TestBed.
-  var _resetTestingModule = testBed.resetTestingModule;
+  const _resetTestingModule = testBed.resetTestingModule;
 
   // Monkey-patch the resetTestingModule to destroy fixtures outside of a try/catch block.
   // With https://github.com/angular/angular/commit/2c5a67134198a090a24f6671dcdb7b102fea6eba
