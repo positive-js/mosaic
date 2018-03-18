@@ -1,0 +1,29 @@
+
+<label [attr.for]="inputId" class="mc-radio-label" #label>
+
+    <div class="mc-radio-container">
+        <div class="mc-radio-outer-circle"></div>
+        <div class="mc-radio-inner-circle"></div>
+    </div>
+
+    <input #input class="mc-radio-input cdk-visually-hidden" type="radio"
+           [id]="inputId"
+           [checked]="checked"
+           [disabled]="disabled"
+           [tabIndex]="tabIndex"
+           [attr.name]="name"
+           [required]="required"
+           [attr.aria-label]="ariaLabel"
+           [attr.aria-labelledby]="ariaLabelledby"
+           [attr.aria-describedby]="ariaDescribedby"
+           (change)="onInputChange($event)"
+           (click)="onInputClick($event)"
+    >
+
+    <!-- The label content for radio control. -->
+    <div class="mc-radio-label-content" [class.mc-radio-label-before]="labelPosition == 'before'">
+        <!-- Add an invisible span so JAWS can read the label -->
+        <span style="display:none">&nbsp;</span>
+        <ng-content></ng-content>
+    </div>
+</label>

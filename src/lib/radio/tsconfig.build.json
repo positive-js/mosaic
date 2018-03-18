@@ -1,0 +1,13 @@
+{
+  "extends": "../tsconfig.build",
+  "files": [
+    "public-api.ts"
+  ],
+  "angularCompilerOptions": {
+    "strictMetadataEmit": false, // Workaround for Angular #22210
+    "flatModuleOutFile": "index.js",
+    "flatModuleId": "@ptsecurity/mosaic/radio",
+    "skipTemplateCodegen": true,
+    "fullTemplateTypeCheck": true
+  }
+}

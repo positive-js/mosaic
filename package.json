@@ -129,7 +129,8 @@
         "linter:styles": "stylelint --syntax scss \"./**/*.scss\"",
         "server-dev": "webpack-dev-server --config tools/webpack/webpack.lib.dev.js",
         "server-dev:button": "npm run server-dev -- --env.component button",
-        "server-dev:list": "npm run server-dev -- --env.component list"
+        "server-dev:list": "npm run server-dev -- --env.component list",
+        "server-dev:radio": "npm run server-dev -- --env.component radio"
     },
     "lint-staged": {
         "linters": {

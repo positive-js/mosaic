@@ -1,0 +1,43 @@
+
+$mc-radio-size: 20px !default;
+// Padding between input toggles and their labels
+$mc-toggle-padding: 8px !default;
+
+// Top-level host container.
+.mat-radio-button {
+    display: inline-block;
+}
+
+.mc-radio-label {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+// Container for radio circles and ripple.
+.mc-radio-container {
+    box-sizing: border-box;
+    display: inline-block;
+    position: relative;
+    width: $mc-radio-size;
+    height: $mc-radio-size;
+    // The radio container is inside of a inline-flex element and may shrink if the label
+    // is wide and text-wrapping is enabled.
+    flex-shrink: 0;
+}
+
+// Text label next to radio.
+.mc-radio-label-content {
+    display: inline-block;
+    order: 0;
+    line-height: inherit;
+    padding-left: $mc-toggle-padding;
+    padding-right: 0;
+
+    [dir='rtl'] & {
+        padding-right: $mc-toggle-padding;
+        padding-left: 0;
+    }
+}

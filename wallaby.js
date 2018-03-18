@@ -36,7 +36,7 @@ module.exports = function (wallaby) {
                         {
                             loader: 'awesome-typescript-loader',
                             options: {
-                                configFileName: './tsconfig.webpack.json'
+                                configFileName: './tsconfig.wallaby.json'
                             }
 
                         }
