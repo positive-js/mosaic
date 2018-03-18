@@ -1,0 +1,13 @@
+@import '../core/styles/typography/typography-utils';
+
+
+@mixin mc-radio-theme($theme) {
+
+}
+
+@mixin mc-radio-typography($config) {
+
+    .mc-radio-button {
+        font-family: mc-font-family($config);
+    }
+}

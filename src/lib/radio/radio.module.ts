@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import {UNIQUE_SELECTION_DISPATCHER_PROVIDER} from '@ptsecurity/cdk/collections';
 import {A11yModule} from '@ptsecurity/cdk/a11y';
+import {UNIQUE_SELECTION_DISPATCHER_PROVIDER} from '@ptsecurity/cdk/collections';
 import {McCommonModule} from '@ptsecurity/mosaic/core';
 
 import {McRadioButton, McRadioGroup} from './radio.component';

@@ -325,6 +325,18 @@ export class McRadioButton extends _McRadioButtonMixinBase
         if (this._checked !== newCheckedState) {
             this._checked = newCheckedState;
 
+            if (newCheckedState && this.radioGroup && this.radioGroup.value !== this.value) {
+                this.radioGroup.selected = this;
+            } else if (!newCheckedState && this.radioGroup && this.radioGroup.value === this.value) {
+                // When unchecking the selected radio button, update the selected radio
+                // property on the group.
+                this.radioGroup.selected = null;
+            }
+
+            if (newCheckedState) {
+                // Notify all radio buttons with the same name to un-check.
+                this._radioDispatcher.notify(this.id, this.name);
+            }
             this._changeDetector.markForCheck();
         }
     }
@@ -335,13 +347,22 @@ export class McRadioButton extends _McRadioButtonMixinBase
     set value(value: any) {
         if (this._value !== value) {
             this._value = value;
+            if (this.radioGroup != null) {
+                if (!this.checked) {
+                    // Update checked when the value changed to match the radio group's value
+                    this.checked = this.radioGroup.value === value;
+                }
+                if (this.checked) {
+                    this.radioGroup.selected = this;
+                }
+            }
         }
     }
 
     /** Whether the radio button is disabled. */
     @Input()
     get disabled(): boolean {
-        return this._disabled;
+        return this._disabled || (this.radioGroup != null && this.radioGroup.disabled);
     }
     set disabled(value: boolean) {
         this._disabled = toBoolean(value);
@@ -460,8 +481,8 @@ export class McRadioButton extends _McRadioButtonMixinBase
         // emit its event object to the `change` output.
         event.stopPropagation();
 
-        this.checked = true;
         const groupValueChanged = this.radioGroup && this.value !== this.radioGroup.value;
+        this.checked = true;
         this.emitChangeEvent();
 
         if (this.radioGroup) {
