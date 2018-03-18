@@ -7,7 +7,7 @@
         "annotateForClosureCompiler": true,
         "strictMetadataEmit": false,
         "flatModuleOutFile": "index.js",
-        "flatModuleId": "@ptsecurity/mosaic/button",
+        "flatModuleId": "@ptsecurity/mosaic/list",
         "skipTemplateCodegen": true,
         "fullTemplateTypeCheck": true
     }

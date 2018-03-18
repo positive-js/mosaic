@@ -12,7 +12,15 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {FocusMonitor, FocusOrigin} from '@ptsecurity/cdk/a11y';
 import {UniqueSelectionDispatcher} from '@ptsecurity/cdk/collections';
 
-import {CanDisable, HasTabIndex, mixinColor, mixinDisabled, mixinTabIndex, toBoolean} from '@ptsecurity/mosaic/core';
+import {
+    CanColor,
+    CanDisable,
+    HasTabIndex,
+    mixinColor,
+    mixinDisabled,
+    mixinTabIndex,
+    toBoolean
+} from '@ptsecurity/mosaic/core';
 
 
 // Increasing integer for generating unique ids for radio components.
@@ -295,7 +303,7 @@ export const _McRadioButtonMixinBase =
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class McRadioButton extends _McRadioButtonMixinBase
-    implements OnInit, AfterViewInit, OnDestroy, HasTabIndex {
+    implements OnInit, AfterViewInit, OnDestroy, CanColor, HasTabIndex {
 
     private _uniqueId: string = `mc-radio-${++nextUniqueId}`;
 
@@ -376,6 +384,16 @@ export class McRadioButton extends _McRadioButtonMixinBase
     set required(value: boolean) {
         this._required = toBoolean(value);
     }
+
+    /** Whether the label should appear after or before the radio button. Defaults to 'after' */
+    @Input()
+    get labelPosition(): 'before' | 'after' {
+        return this._labelPosition || (this.radioGroup && this.radioGroup.labelPosition) || 'after';
+    }
+    set labelPosition(value) {
+        this._labelPosition = value;
+    }
+    private _labelPosition: 'before' | 'after';
 
     /** The native `<input type=radio>` element */
     @ViewChild('input') _inputElement: ElementRef;

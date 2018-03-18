@@ -1,6 +1,20 @@
+@import '../../cdk/a11y/a11y';
+
 @import 'styles/normalize';
 @import 'styles/base';
 @import 'styles/typography/all-typography';
 
 // TODO: Create flex layout classes
 // @import 'grid/grid';
+
+// Mixin that renders all of the core styles that are not theme-dependent.
+@mixin mat-core($typography-config: null) {
+
+    @include mosaic-typography($typography-config);
+    @include cdk-a11y();
+}
+
+// Mixin that renders all of the core styles that depend on the theme.
+@mixin mat-core-theme($theme) {
+
+}

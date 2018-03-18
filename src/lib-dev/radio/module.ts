@@ -6,8 +6,23 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { McRadioModule } from '../../lib/radio';
 
 
+/* tslint:disable:no-trailing-whitespace */
 @Component({
     selector: 'app',
+    styles: [`
+        .example-radio-group {
+            display: inline-flex;
+            flex-direction: column;
+        }
+        
+        .example-radio-button {
+            margin-bottom: 10px;
+        }
+        
+        .example-selected-value {
+            margin: 15px 0;
+        }
+    `],
     template: `
         <mc-radio-group>
             <mc-radio-button value="1">Option 1</mc-radio-button>
