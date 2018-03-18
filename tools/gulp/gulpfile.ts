@@ -13,4 +13,5 @@ import './tasks/lint';
 import './tasks/mosaic-release';
 import './tasks/unit';
 import './tasks/docs';
+import './tasks/payload';
 /* tslint:enable:no-import-side-effect */
