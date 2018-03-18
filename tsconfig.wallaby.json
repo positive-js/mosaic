@@ -29,7 +29,6 @@
             "node_modules/@types"
         ],
         "types": [
-            "node",
             "jasmine",
             "tslib"
         ]
