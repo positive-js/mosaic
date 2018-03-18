@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { A11yModule } from '@ptsecurity/cdk/a11y';
-import { PlatformModule } from '@ptsecurity/cdk/platform';
 
 import { McLineModule, McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
 
@@ -13,7 +12,6 @@ import { McList, McListItem, McListSubheaderCssStyler} from './list.component';
 @NgModule({
     imports: [
         CommonModule,
-        PlatformModule,
         A11yModule,
         McPseudoCheckboxModule,
         McLineModule
