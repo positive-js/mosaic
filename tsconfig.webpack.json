@@ -30,8 +30,7 @@
         ],
         "types": [
             "node",
-            "jasmine",
-            "tslib"
+            "jasmine"
         ]
     },
     "include": [
