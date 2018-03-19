@@ -17,19 +17,20 @@ module.exports = function (options) {
 
     const entryObj = {
         polyfills: [
-            'core-js/es6/reflect',
+            'core-js/es5',
+            'core-js/es6',
             'core-js/es7/reflect',
-            "zone.js/dist/zone",
-            "zone.js/dist/long-stack-trace-zone"
+            'zone.js/dist/zone',
+            'zone.js/dist/long-stack-trace-zone'
         ],
         vendors: [
-            "@angular/animations",
-            "@angular/common",
-            "@angular/compiler",
-            "@angular/core",
-            "@angular/platform-browser",
-            "@angular/platform-browser-dynamic",
-            "rxjs"
+            '@angular/animations',
+            '@angular/common',
+            '@angular/compiler',
+            '@angular/core',
+            '@angular/platform-browser',
+            '@angular/platform-browser-dynamic',
+            'rxjs'
         ],
     };
 
