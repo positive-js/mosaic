@@ -1,4 +1,4 @@
-import { Component, NgModule } from '@angular/core';
+import {Component, NgModule, ViewEncapsulation} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
@@ -9,25 +9,9 @@ import { McRadioModule } from '../../lib/radio';
 /* tslint:disable:no-trailing-whitespace */
 @Component({
     selector: 'app',
-    styles: [`
-        .example-radio-group {
-            display: inline-flex;
-            flex-direction: column;
-        }
-        
-        .example-radio-button {
-            margin-bottom: 10px;
-        }
-        
-        .example-selected-value {
-            margin: 15px 0;
-        }
-    `],
+    styleUrls: ['theme.css'],
+    encapsulation: ViewEncapsulation.None,
     template: `
-        <mc-radio-group>
-            <mc-radio-button value="1">Option 1</mc-radio-button>
-            <mc-radio-button value="2">Option 2</mc-radio-button>
-        </mc-radio-group>
 
         <br/><br/>
 
@@ -48,7 +32,7 @@ export class DemoComponent {
         'Apple',
         'Banana',
         'Tomato',
-        'Blackberry'
+        'Крякать как уточка'
     ];
 }
 

@@ -1,10 +1,10 @@
 
-$mc-radio-size: 20px !default;
+$mc-radio-size: 16px !default;
 // Padding between input toggles and their labels
 $mc-toggle-padding: 8px !default;
 
 // Top-level host container.
-.mat-radio-button {
+.mc-radio-button {
     display: inline-block;
 }
 
@@ -28,6 +28,46 @@ $mc-toggle-padding: 8px !default;
     flex-shrink: 0;
 }
 
+// The outer circle for the radio, always present.
+.mc-radio-outer-circle {
+    box-sizing: border-box;
+    height: $mc-radio-size;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: $mc-radio-size;
+    border: {
+        width: 1px;
+        style: solid;
+        radius: 50%;
+    }
+}
+
+// The inner circle for the radio, shown when checked.
+.mc-radio-inner-circle {
+    border-radius: 50%;
+    box-sizing: border-box;
+    height: $mc-radio-size;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: $mc-radio-size;
+
+    .mc-radio-checked & {
+
+        &:before {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            margin-left: 5px;
+            margin-top: 5px;
+            border-radius: 50%;
+        }
+    }
+}
+
 // Text label next to radio.
 .mc-radio-label-content {
     display: inline-block;
@@ -40,4 +80,8 @@ $mc-toggle-padding: 8px !default;
         padding-right: $mc-toggle-padding;
         padding-left: 0;
     }
+}
+
+.mc-radio-disabled, .mc-radio-disabled .mc-radio-label {
+    cursor: default;
 }

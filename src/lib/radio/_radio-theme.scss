@@ -1,8 +1,47 @@
+@import '../core/theming/theming';
 @import '../core/styles/typography/typography-utils';
 
 
+@mixin _mc-radio-color($palette) {
+
+    .mc-radio-outer-circle {
+        border-color: mc-color($palette, 300);
+    }
+}
+
 @mixin mc-radio-theme($theme) {
 
+    $primary: map-get($theme, primary);
+    $second: map-get($theme, second);
+    $warn: map-get($theme, warn);
+
+    .mc-radio-button {
+
+        &.mc-primary {
+            @include _mc-radio-color($primary);
+        }
+
+        &.mc-second {
+            @include _mc-radio-color($second);
+
+            &.mc-radio-checked .mc-radio-outer-circle {
+                border-color: mc-color($primary, 600);
+            }
+
+            &.mc-radio-checked .mc-radio-inner-circle {
+                background-color: mc-color($primary, 500);
+
+                &:before {
+                    background-color: white;
+                }
+            }
+
+        }
+
+        &.mc-warn {
+            @include _mc-radio-color($warn);
+        }
+    }
 }
 
 @mixin mc-radio-typography($config) {

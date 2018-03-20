@@ -8,7 +8,7 @@
 // @import 'grid/grid';
 
 // Mixin that renders all of the core styles that are not theme-dependent.
-@mixin mat-core($typography-config: null) {
+@mixin mc-core($typography-config: null) {
 
     @include mosaic-typography($typography-config);
     @include cdk-a11y();

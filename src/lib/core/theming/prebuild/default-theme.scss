@@ -2,8 +2,7 @@
 
 
 // Include all typography for the components.
-@include mosaic-typography();
-
+@include mc-core();
 
 // Define a theme.
 $primary: mc-palette($mc-blue, 500, 600, 600);

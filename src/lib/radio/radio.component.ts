@@ -291,6 +291,7 @@ export const _McRadioButtonMixinBase =
     selector: 'mc-radio-button',
     templateUrl: 'radio.component.html',
     styleUrls: ['radio.css'],
+    inputs: ['color', 'tabIndex'],
     encapsulation: ViewEncapsulation.None,
     exportAs: 'mcRadioButton',
     host: {
@@ -300,7 +301,7 @@ export const _McRadioButtonMixinBase =
         '[class.mc-radio-disabled]': 'disabled',
         '(focus)': '_inputElement.nativeElement.focus()'
     },
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class McRadioButton extends _McRadioButtonMixinBase
     implements OnInit, AfterViewInit, OnDestroy, CanColor, HasTabIndex {
