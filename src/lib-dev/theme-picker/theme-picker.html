@@ -1,0 +1,11 @@
+
+<div class="theme-picker">
+    <div *ngFor="let theme of themes">
+        <div class="theme-picker--item" (click)="installTheme(theme)">
+            <div>
+                <div class="theme-picker-element" [style.background]="theme.primary"></div>
+                <div *ngIf="currentTheme === theme" class="is-active">v</div>
+            </div>
+        </div>
+    </div>
+</div>

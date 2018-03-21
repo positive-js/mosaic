@@ -1,0 +1,38 @@
+
+.theme-picker {
+    height: 40px;
+    width: 100px;
+
+    padding: 0;
+    margin: 0;
+
+    display: flex;
+
+    -webkit-flex-flow: row wrap;
+    justify-content: space-around;
+
+
+    .theme-picker--item {
+        width: 25px;
+        height: 25px;
+
+        .theme-picker-element {
+            box-sizing: border-box;
+            position: absolute;
+            border: {
+                width: 1px;
+                style: solid;
+                radius: 50%;
+            }
+            width: 24px;
+            height: 24px;
+        }
+
+        .is-active {
+            position: absolute;
+            color: white;
+            margin-left: 8px;
+
+        }
+    }
+}

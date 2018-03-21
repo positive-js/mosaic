@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { McRadioModule } from '../../lib/radio';
+import {ThemePickerModule} from '../theme-picker';
 
 
 /* tslint:disable:no-trailing-whitespace */
@@ -13,6 +14,7 @@ import { McRadioModule } from '../../lib/radio';
     encapsulation: ViewEncapsulation.None,
     template: `
 
+        <theme-picker></theme-picker>
         <br/><br/>
 
         <mc-radio-group class="example-radio-group" [(ngModel)]="favoriteFruit">
@@ -43,7 +45,8 @@ export class DemoComponent {
     imports: [
         BrowserModule,
         FormsModule,
-        McRadioModule
+        McRadioModule,
+        ThemePickerModule
     ],
     bootstrap: [
         DemoComponent

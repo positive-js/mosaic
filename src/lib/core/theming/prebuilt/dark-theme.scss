@@ -1,0 +1,15 @@
+@import '../all-theme';
+
+// TODO Its fake Dark theme!!!
+
+// Include all typography for the components.
+@include mc-core();
+
+// Define a theme.
+$primary: mc-palette($mc-green, 500, 600, 600);
+$second: mc-palette($mc-grey, 40, 60, 100);
+
+$theme: mc-light-theme($primary, $second);
+
+// Include all theme styles for the components.
+@include mosaic-theme($theme);
