@@ -14,7 +14,7 @@ import {ThemePickerModule} from '../theme-picker';
     encapsulation: ViewEncapsulation.None,
     template: `
 
-        <theme-picker></theme-picker>
+        <!--<theme-picker></theme-picker>-->
         <br/><br/>
 
         <mc-radio-group class="example-radio-group" [(ngModel)]="favoriteFruit">
