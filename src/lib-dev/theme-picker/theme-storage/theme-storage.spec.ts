@@ -7,9 +7,11 @@ const testTheme = {
     accent: '#ffffff',
     href: 'test/path/to/theme'
 };
+
 const createTestData = () => {
     window.localStorage[testStorageKey] = JSON.stringify(testTheme);
 };
+
 const clearTestData = () => {
     window.localStorage.clear();
 };

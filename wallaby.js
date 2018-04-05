@@ -5,7 +5,7 @@ const { TsConfigPathsPlugin } = require('awesome-typescript-loader');
 const path = require('path');
 
 const compilerOptions = Object.assign(
-    require('./tsconfig.webpack.json').compilerOptions,
+    require('./tsconfig.webpack.json').compilerOptions
 );
 
 compilerOptions.module = 'CommonJs';
@@ -40,9 +40,9 @@ module.exports = function (wallaby) {
                             }
 
                         }
-                    ],
+                    ]
                 },
-                {test: /\.scss$|\.sass$/, loaders: ['raw-loader', 'sass-loader']},
+                {test: /\.scss$|\.sass$/, loaders: ['raw-loader', 'sass-loader']}
             ]
         },
 
@@ -74,7 +74,7 @@ module.exports = function (wallaby) {
         testFramework: 'jasmine',
 
         compilers: {
-            '**/*.ts': wallaby.compilers.typeScript(compilerOptions),
+            '**/*.ts': wallaby.compilers.typeScript(compilerOptions)
         },
 
         env: {
