@@ -1,0 +1,22 @@
+@import '../core/theming/theming';
+@import '../core/styles/typography/typography-utils';
+
+@import '../core/theming/palette';
+
+
+@mixin mc-icon-theme($theme) {
+    .mc-button {
+        @include _mc-button-theme-color($theme);
+    }
+}
+
+@mixin mc-icon-typography($config) {
+    .mc-icon {
+        font: {
+            size:   mc-font-size($config, button);
+            family: mc-font-family($config, button);
+            weight: mc-font-weight($config, button);
+        }
+    }
+}
+
