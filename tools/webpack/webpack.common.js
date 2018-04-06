@@ -43,7 +43,7 @@ module.exports = function (options) {
     const htmlTemplatePath = [
         'src/lib-dev',
         COMPONENT_NAME,
-        'index.html'
+        '../index.html'
     ].join('/');
 
 

@@ -12,20 +12,7 @@ import {ThemePickerModule} from '../theme-picker';
     selector: 'app',
     styleUrls: ['theme.css'],
     encapsulation: ViewEncapsulation.None,
-    template: `
-
-        <!--<theme-picker></theme-picker>-->
-        <br/><br/>
-
-        <mc-radio-group class="example-radio-group" [(ngModel)]="favoriteFruit">
-            <mc-radio-button class="example-radio-button" *ngFor="let season of fruits" [value]="season">
-                {{season}}
-            </mc-radio-button>
-        </mc-radio-group>
-
-        <br/><br/>
-        <div class="example-selected-value">Your favorite fruit is: {{favoriteFruit}}</div>
-    `
+    template: require('./template.html')
 })
 export class DemoComponent {
     favoriteFruit: string;

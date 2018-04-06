@@ -8,7 +8,7 @@ import { McListModule } from '../../lib/list';
 
 @Component({
     selector: 'app',
-    templateUrl: './component.html',
+    templateUrl: require('./template.html'),
     styleUrls: ['./theme.scss']
 })
 export class DemoComponent {
