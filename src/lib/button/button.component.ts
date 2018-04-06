@@ -18,28 +18,28 @@ export class McButtonCSSStyler {}
 
 @Directive({
     selector: 'button[mc-xs-button], a[mc-xs-button]',
-    host: { class: 'mc-xs-button' }
+    host: { class: 'mc-button mc-xs-button' }
 })
 export class McXSButtonCSSStyler {}
 
 
 @Directive({
     selector: 'button[mc-sm-button], a[mc-sm-button]',
-    host: { class: 'mc-sm-button' }
+    host: { class: 'mc-button mc-sm-button' }
 })
 export class McSMButtonCSSStyler {}
 
 
 @Directive({
     selector: 'button[mc-lg-button], a[mc-lg-button]',
-    host: { class: 'mc-lg-button' }
+    host: { class: 'mc-button mc-lg-button' }
 })
 export class McLGButtonCSSStyler {}
 
 
 @Directive({
     selector: 'button[mc-xl-button], a[mc-xl-button]',
-    host: { class: 'mc-xl-button' }
+    host: { class: 'mc-button mc-xl-button' }
 })
 export class McXLButtonCSSStyler {}
 
@@ -53,7 +53,11 @@ export const _McButtonMixinBase = mixinColor(mixinDisabled(McButtonBase));
 
 @Component({
     selector: `
-        button[mc-button], button[mc-xs-button], button[mc-sm-button], button[mc-lg-button], button[mc-xl-button]
+        button[mc-button],
+        button[mc-xs-button],
+        button[mc-sm-button],
+        button[mc-lg-button],
+        button[mc-xl-button]
     `,
     templateUrl: './button.component.html',
     styleUrls: ['./button.css'],
