@@ -21,6 +21,7 @@
         "@angular/forms": ">=6.0.0-beta.0 <7.0.0",
         "@angular/platform-browser": ">=6.0.0-beta.0 <7.0.0",
         "core-js": "2.5.3",
+        "mc-icons": "2.3.3",
         "rxjs": "5.5.6",
         "systemjs": "0.19.43",
         "tslib": "1.9.0",
@@ -90,6 +91,7 @@
         "prettier": "^1.11.1",
         "raw-loader": "0.5.1",
         "resolve-bin": "^0.4.0",
+        "resolve-url-loader": "^2.3.0",
         "rollup": "^0.56.4",
         "rollup-plugin-alias": "^1.4.0",
         "rollup-plugin-node-resolve": "^3.0.3",
@@ -130,7 +132,8 @@
         "server-dev": "webpack-dev-server --config tools/webpack/webpack.lib.dev.js",
         "server-dev:button": "npm run server-dev -- --env.component button",
         "server-dev:list": "npm run server-dev -- --env.component list",
-        "server-dev:radio": "npm run server-dev -- --env.component radio"
+        "server-dev:radio": "npm run server-dev -- --env.component radio",
+        "server-dev:theme-picker": "npm run server-dev -- --env.component theme-picker"
     },
     "lint-staged": {
         "linters": {

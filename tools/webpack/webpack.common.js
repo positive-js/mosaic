@@ -48,7 +48,6 @@ module.exports = function (options) {
 
 
     return {
-
         entry: entryObj,
 
         resolve: {
@@ -64,12 +63,11 @@ module.exports = function (options) {
                     exclude: /\.async\.(html)$/
                 },
 
-                { test: /\.(otf|ttf|woff|woff2)$/, use: 'url-loader?limit=10000' },
+                { test: /\.(otf|ttf|woff|woff2)$/, use: 'url-loader?limit=10000' }
             ]
         },
 
         plugins: [
-
             new HtmlWebpackPlugin({
                 template: htmlTemplatePath,
                 chunksSortMode: 'dependency',

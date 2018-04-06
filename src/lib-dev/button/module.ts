@@ -8,6 +8,15 @@ import { McButtonModule } from '../../lib/button/';
 @Component({
     selector: 'app',
     template: `
+        <button mc-xs-button><i class="mc mc-angle-L_16"></i>mc-xs-button</button>&nbsp;
+        <button mc-sm-button>mc-sm-button</button>&nbsp;
+        <button mc-button>default</button>&nbsp;
+        <button mc-lg-button>mc-lg-button</button>&nbsp;
+        <button mc-xl-button>mc-xl-button</button>&nbsp;
+
+        <br>
+        <br>
+
         <button mc-xs-button>mc-xs-button</button>&nbsp;
         <button mc-sm-button>mc-sm-button</button>&nbsp;
         <button mc-button>default</button>&nbsp;
@@ -33,12 +42,14 @@ import { McButtonModule } from '../../lib/button/';
 
         <br>
         <br>
+        <br>
 
         <button class="mc-progress" mc-button color="primary" disabled>disabled</button>&nbsp;
         <button class="mc-progress" mc-button color="primary">normal</button>&nbsp;
         <button class="mc-hover mc-progress" mc-button color="primary">hover</button>&nbsp;
         <button class="cdk-focused mc-progress" mc-button color="primary">focus</button>&nbsp;
 
+        <br>
         <br>
         <br>
 
@@ -55,6 +66,7 @@ import { McButtonModule } from '../../lib/button/';
         <button class="mc-hover mc-progress" mc-button color="second">hover</button>&nbsp;
         <button class="cdk-focused mc-progress" mc-button color="second">focus</button>&nbsp;
         
+        <br>
         <br>
         <br>
 

@@ -8,12 +8,9 @@ const path = require('path');
 const helpers = require('./helpers');
 const commonConfig = require('./webpack.common.js');
 
+
 const ENV = 'development';
-const HOST = 'localhost';
-const PORT = 3003;
 const METADATA = {
-    host: HOST,
-    port: PORT,
     ENV: ENV
 };
 
@@ -51,14 +48,9 @@ module.exports = function (options) {
                     use: [
                         {
                             loader: 'awesome-typescript-loader',
-                            options: {
-                                configFileName: './tsconfig.webpack.json'
-                            }
-
+                            options: { configFileName: './tsconfig.webpack.json' }
                         },
-                        {
-                            loader: 'angular2-template-loader'
-                        }
+                        { loader: 'angular2-template-loader' }
                     ],
 
                     exclude: [ helpers.root('node_modules') ]
@@ -71,13 +63,10 @@ module.exports = function (options) {
                             loader: 'postcss-loader',
                             options: {
                                 sourceMap: true,
-                                plugins: () => [
-                                    require('autoprefixer')({
-                                        browsers: ['last 2 versions']
-                                    })
-                                ]
+                                plugins: () => [require('autoprefixer')({ browsers: ['last 2 versions'] })]
                             }
                         },
+                        'resolve-url-loader',
                         'sass-loader?sourceMap'
                     ],
                     include: [ helpers.root('src') ]
@@ -86,26 +75,18 @@ module.exports = function (options) {
         },
 
         plugins: [
-
             new HotModuleReplacementPlugin(),
 
-            new LoaderOptionsPlugin({
-                debug: true
-            })
-
+            new LoaderOptionsPlugin({ debug: true })
         ],
 
         devServer: {
-            hot: true,
-            inline: true,
-            contentBase: false,
-            port: METADATA.port,
-            host: METADATA.host,
-            open: true,
+            hotOnly: true,
+            inline: false,
+            host: 'localhost',
+            port: 3003,
             historyApiFallback: true,
-            watchOptions: {
-                ignored: /node_modules/
-            },
+            watchOptions: { ignored: /node_modules/ },
             stats: {
                 colors: true,
                 hash: true, // required by custom stat output
