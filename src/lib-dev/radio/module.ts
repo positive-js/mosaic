@@ -10,7 +10,7 @@ import {ThemePickerModule} from '../theme-picker';
 /* tslint:disable:no-trailing-whitespace */
 @Component({
     selector: 'app',
-    styleUrls: ['theme.css'],
+    styleUrls: ['./styles.css'],
     encapsulation: ViewEncapsulation.None,
     template: require('./template.html')
 })

@@ -9,7 +9,7 @@ import { McListModule } from '../../lib/list';
 @Component({
     selector: 'app',
     templateUrl: require('./template.html'),
-    styleUrls: ['./theme.scss']
+    styleUrls: ['./styles.scss']
 })
 export class DemoComponent {
     typesOfShoes = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];

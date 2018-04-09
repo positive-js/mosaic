@@ -3,7 +3,6 @@
 $mc-button-margin: 0 !default;
 $mc-button-border-radius: 3px;
 
-
 $mc-button-padding_xs: 3px 7px;
 $mc-button-line-height_xs: 16px;
 $mc-button-font_xs: 12px;
@@ -23,6 +22,13 @@ $mc-button-font_lg: 14px;
 $mc-button-padding_xl: 9px 59px;
 $mc-button-line-height_xl: 28px;
 $mc-button-font_xl: 18px;
+
+
+$mc-icon-button-padding: 5px 7px;
+$mc-icon-button-text-padding: 15px;
+$mc-icon-button-icon-padding: 7px;
+$mc-icon-button-line-height: 20px;
+$mc-icon-button-font: 14px;
 
 
 %mc-button-base {

@@ -12,7 +12,7 @@ import { mixinColor, CanColor } from '@ptsecurity/mosaic/core';
 
 @Directive({
     selector: '[mc-icon]',
-    host: { class: 'mc' }
+    host: { class: 'mc-icon mc' }
 })
 export class McIconCSSStyler {}
 

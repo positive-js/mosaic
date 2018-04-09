@@ -8,7 +8,7 @@ import { McIconModule } from '../../lib/icon/';
 @Component({
     selector: 'app',
     template: require('./template.html'),
-    styleUrls: ['./theme.scss']
+    styleUrls: ['./styles.scss']
 })
 export class DemoComponent {}
 

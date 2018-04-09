@@ -3,12 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { McButtonModule } from '../../lib/button/';
+import { McIconModule } from '../../lib/icon';
 
 
 @Component({
     selector: 'app',
     template: require('./template.html'),
-    styleUrls: ['./theme.scss']
+    styleUrls: ['./styles.scss']
 })
 export class ButtonDemoComponent {}
 
@@ -19,7 +20,8 @@ export class ButtonDemoComponent {}
     ],
     imports: [
         BrowserModule,
-        McButtonModule
+        McButtonModule,
+        McIconModule
     ],
     bootstrap: [
         ButtonDemoComponent

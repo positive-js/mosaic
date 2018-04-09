@@ -6,7 +6,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 @Component({
     selector: 'app',
     template: require('./template.html'),
-    styleUrls: ['./main.scss']
+    styleUrls: ['./styles.scss']
 })
 export class DemoComponent {}
 

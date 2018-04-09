@@ -6,12 +6,14 @@ import { PlatformModule } from '@ptsecurity/cdk/platform';
 
 import {
     McButton,
+    McAnchor,
+    McIconButton,
     McButtonCSSStyler,
     McXSButtonCSSStyler,
     McSMButtonCSSStyler,
     McLGButtonCSSStyler,
     McXLButtonCSSStyler,
-    McAnchor
+    McIconButtonCSSStyler
 } from './button.component';
 
 
@@ -24,20 +26,24 @@ import {
     exports: [
         McButton,
         McAnchor,
+        McIconButton,
         McButtonCSSStyler,
         McXSButtonCSSStyler,
         McSMButtonCSSStyler,
         McLGButtonCSSStyler,
-        McXLButtonCSSStyler
+        McXLButtonCSSStyler,
+        McIconButtonCSSStyler
     ],
     declarations: [
         McButton,
         McAnchor,
+        McIconButton,
         McButtonCSSStyler,
         McXSButtonCSSStyler,
         McSMButtonCSSStyler,
         McLGButtonCSSStyler,
-        McXLButtonCSSStyler
+        McXLButtonCSSStyler,
+        McIconButtonCSSStyler
     ]
 })
 export class McButtonModule {}

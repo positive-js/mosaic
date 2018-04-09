@@ -9,25 +9,25 @@
 }
 
 // sizes
-.mc-xs-button {
+.mc-button_xs {
     @extend %mc-button-base;
 
     @include mc-button-size($mc-button-padding_xs, $mc-button-line-height_xs, $mc-button-font_xs);
 }
 
-.mc-sm-button {
+.mc-button_sm {
     @extend %mc-button-base;
 
     @include mc-button-size($mc-button-padding_sm, $mc-button-line-height_sm, $mc-button-font_sm);
 }
 
-.mc-lg-button {
+.mc-button_lg {
     @extend %mc-button-base;
 
     @include mc-button-size($mc-button-padding_lg, $mc-button-line-height_lg, $mc-button-font_lg);
 }
 
-.mc-xl-button {
+.mc-button_xl {
     @extend %mc-button-base;
 
     @include mc-button-size($mc-button-padding_xl, $mc-button-line-height_xl, $mc-button-font_xl);
@@ -39,4 +39,25 @@
 
 .mc-icon-button {
     @extend %mc-button-base;
+
+    @include mc-button-size($mc-icon-button-padding, $mc-icon-button-line-height, $mc-icon-button-font);
+
+    &.mc-icon-button_left {
+        padding-right: $mc-icon-button-text-padding;
+    }
+
+    &.mc-icon-button_right {
+        padding-left: $mc-icon-button-text-padding;
+    }
+
+    & .mc-button-wrapper {
+
+        & .mc-icon_left {
+            margin-right: $mc-icon-button-icon-padding;
+        }
+
+        & .mc-icon_right {
+            margin-left: $mc-icon-button-icon-padding;
+        }
+    }
 }

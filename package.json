@@ -122,13 +122,19 @@
     "scripts": {
         "precommit": "npm run linter:styles && npm run linter:lib",
         "prettier": "lint-staged",
+
         "test:unit": "karma start config/karma/karma.conf.js",
+
         "valid:lic": "ts-node --project ./scripts/tsconfig.deploy.json ./scripts/validate-licenses.ts",
+
         "mosaic:build-release": "gulp mosaic:build-release",
         "cdk:build-release": "gulp cdk:build-release",
+
         "publish-repo": "ts-node --project ./scripts/tsconfig.deploy.json ./scripts/deploy/publish-artifacts.ts",
+
         "linter:lib": "tslint './src/lib'",
         "linter:styles": "stylelint --syntax scss \"./**/*.scss\"",
+
         "server-dev": "webpack-dev-server --config tools/webpack/webpack.lib.dev.js",
         "server-dev:button": "npm run server-dev -- --env.component button",
         "server-dev:list": "npm run server-dev -- --env.component list",

@@ -148,12 +148,9 @@
     .mc-xs-button,
     .mc-sm-button,
     .mc-lg-button,
-    .mc-xl-button {
-        @include _mc-button-theme-color($theme);
-    }
-
+    .mc-xl-button,
     .mc-icon-button {
-
+        @include _mc-button-theme-color($theme);
     }
 }
 
