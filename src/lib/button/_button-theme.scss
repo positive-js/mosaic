@@ -24,12 +24,12 @@
 
     &:not([disabled]):active,
     &:not([disabled]).mc-active {
-        background-image: linear-gradient(to top, mc-color($palette, 600), mc-color($palette, 560));
+        background-image: linear-gradient(to bottom, mc-color($palette, 600), mc-color($palette, 560));
 
         &:hover,
         &.mc-hover {
             background-image: linear-gradient(
-                to bottom, lighten(mc-color($palette, 600), $hover-lighten), lighten(mc-color($palette, 560),$hover-lighten)
+                to bottom, lighten(mc-color($palette, 600), $hover-lighten), lighten(mc-color($palette, 560), $hover-lighten)
             );
         }
     }
@@ -59,7 +59,7 @@
 
     &:not([disabled]):active,
     &:not([disabled]).mc-active {
-        background-image: linear-gradient(to top, mc-color($palette, 200), mc-color($palette, 100));
+        background-image: linear-gradient(to bottom, mc-color($palette, 200), mc-color($palette, 100));
 
         &:hover,
         &.mc-hover {
@@ -94,7 +94,7 @@
 
     &:not([disabled]):active,
     &:not([disabled]).mc-active {
-        background-image: linear-gradient(to top, mc-color($secondPalette, 200), mc-color($secondPalette, 100));
+        background-image: linear-gradient(to bottom, mc-color($secondPalette, 200), mc-color($secondPalette, 100));
 
         &:hover,
         &.mc-hover {
