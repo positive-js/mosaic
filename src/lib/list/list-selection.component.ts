@@ -3,8 +3,8 @@ import {
     Attribute,
     ChangeDetectionStrategy, ChangeDetectorRef,
     Component, ContentChildren,
-    ElementRef, EventEmitter, forwardRef, Inject, Input,
-    OnDestroy, OnInit, Optional, Output, QueryList, ViewChild,
+    ElementRef, EventEmitter, forwardRef, HostListener, Inject, Input,
+    OnDestroy, OnInit, Output, QueryList, ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 
@@ -12,12 +12,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { FocusKeyManager, IFocusableOption } from '@ptsecurity/cdk/a11y';
 import { SelectionModel } from '@ptsecurity/cdk/collections';
-import { END, ENTER, HOME, SPACE } from '@ptsecurity/cdk/keycodes';
+import { END, ENTER, HOME, PAGE_DOWN, PAGE_UP, SPACE } from '@ptsecurity/cdk/keycodes';
 
 import {
     CanDisable, mixinDisabled, HasTabIndex, mixinTabIndex, McLine, McLineSetter, toBoolean
 } from '@ptsecurity/mosaic/core';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 
 export class McListOptionBase {}
@@ -149,6 +149,10 @@ export class McListOption extends McListOptionBase
         this.listSelection._removeOptionFromList(this);
     }
 
+    _getHeight(): number {
+        return this._element.nativeElement.getClientRects()[0].height;
+    }
+
     toggle(): void {
         this.selected = !this.selected;
     }
@@ -241,6 +245,11 @@ export class McListSelection extends _McListSelectionMixinBase implements
 
     selectedOptions: SelectionModel<McListOption>;
 
+    @HostListener('window:resize')
+    onResize() {
+        this._updateScrollSize();
+    }
+
     // Used for storing the values that were assigned before the options were initialized.
     private _tempValues: string[] | null;
 
@@ -257,7 +266,6 @@ export class McListSelection extends _McListSelectionMixinBase implements
         this.multiple = toBoolean(this.multiple);
 
         this._keyManager = new FocusKeyManager<McListOption>(this.options)
-            .withWrap()
             .withTypeAhead()
             .withHorizontalOrientation(this.horizontal ? 'ltr' : null)
             .withVerticalOrientation(!this.horizontal);
@@ -274,6 +282,8 @@ export class McListSelection extends _McListSelectionMixinBase implements
             event.added.forEach((item) => { item.selected = true; });
             event.removed.forEach((item) => { item.selected = false; });
         });
+
+        this._updateScrollSize();
     }
 
     ngOnDestroy() {
@@ -295,6 +305,18 @@ export class McListSelection extends _McListSelectionMixinBase implements
     deselectAll() {
         this.options.forEach((option) => option._setSelected(false));
         this._reportValueChange();
+    }
+
+    _updateScrollSize(): void {
+        if (this.horizontal) { return; }
+
+        const scrollSize = Math.floor(this._getHeight() / this.options.first._getHeight());
+
+        this._keyManager.setScrollSize(scrollSize);
+    }
+
+    _getHeight(): number {
+        return this._element.nativeElement.getClientRects()[0].height;
     }
 
     // View to model callback that should be called if the list or its options lost focus.
@@ -325,14 +347,27 @@ export class McListSelection extends _McListSelectionMixinBase implements
             case ENTER:
                 this._toggleSelectOnFocusedOption();
                 event.preventDefault();
+
                 break;
             case HOME:
                 this._keyManager.setFirstItemActive();
                 event.preventDefault();
+
                 break;
             case END:
                 this._keyManager.setLastItemActive();
                 event.preventDefault();
+
+                break;
+            case PAGE_UP:
+                if (!this.horizontal) { this._keyManager.setPreviousPageItemActive(); }
+                event.preventDefault();
+
+                break;
+            case PAGE_DOWN:
+                if (!this.horizontal) { this._keyManager.setNextPageItemActive(); }
+                event.preventDefault();
+
                 break;
             default:
                 this._keyManager.onKeydown(event);

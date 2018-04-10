@@ -11,10 +11,7 @@ import {
     SkipSelf
 } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
-import { of as observableOf } from 'rxjs/observable/of';
-import { Subject } from 'rxjs/Subject';
-import { Subscription } from 'rxjs/Subscription';
+import { Observable, Subject, Subscription, of as observableOf } from 'rxjs';
 
 import { Platform, supportsPassiveEventListeners } from '@ptsecurity/cdk/platform';
 

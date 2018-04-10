@@ -10,6 +10,7 @@ const cdkSecondaryEntryPoints = getSubdirectoryNames(join(buildConfig.packagesDi
 /** Object with all cdk entry points in the format of Rollup globals. */
 const rollupCdkEntryPoints = cdkSecondaryEntryPoints.reduce((globals: any, entryPoint: string) => {
     globals[`@ptsecurity/cdk/${entryPoint}`] = `ng.cdk.${dashCaseToCamelCase(entryPoint)}`;
+
     return globals;
 }, {});
 
@@ -24,7 +25,7 @@ const rollupMcEntryPoints = mcSecondaryEntryPoints.reduce((globals: any, entryPo
 
 /** Map of globals that are used inside of the different packages. */
 export const rollupGlobals = {
-    'tslib': 'tslib',
+    tslib: 'tslib',
 
     '@angular/animations': 'ng.animations',
     '@angular/core': 'ng.core',
@@ -46,37 +47,5 @@ export const rollupGlobals = {
     ...rollupCdkEntryPoints,
     ...rollupMcEntryPoints,
 
-    'rxjs/BehaviorSubject': 'Rx',
-    'rxjs/Observable': 'Rx',
-    'rxjs/Subject': 'Rx',
-    'rxjs/Subscription': 'Rx',
-    'rxjs/Observer': 'Rx',
-    'rxjs/Subscriber': 'Rx',
-    'rxjs/Scheduler': 'Rx',
-
-    'rxjs/observable/combineLatest': 'Rx.Observable',
-    'rxjs/observable/forkJoin': 'Rx.Observable',
-    'rxjs/observable/fromEvent': 'Rx.Observable',
-    'rxjs/observable/merge': 'Rx.Observable',
-    'rxjs/observable/of': 'Rx.Observable',
-    'rxjs/observable/throw': 'Rx.Observable',
-    'rxjs/observable/defer': 'Rx.Observable',
-    'rxjs/observable/fromEventPattern': 'Rx.Observable',
-    'rxjs/observable/empty': 'Rx.Observable',
-
-    'rxjs/operators/debounceTime': 'Rx.operators',
-    'rxjs/operators/takeUntil': 'Rx.operators',
-    'rxjs/operators/take': 'Rx.operators',
-    'rxjs/operators/first': 'Rx.operators',
-    'rxjs/operators/filter': 'Rx.operators',
-    'rxjs/operators/map': 'Rx.operators',
-    'rxjs/operators/tap': 'Rx.operators',
-    'rxjs/operators/startWith': 'Rx.operators',
-    'rxjs/operators/auditTime': 'Rx.operators',
-    'rxjs/operators/switchMap': 'Rx.operators',
-    'rxjs/operators/finalize': 'Rx.operators',
-    'rxjs/operators/catchError': 'Rx.operators',
-    'rxjs/operators/share': 'Rx.operators',
-    'rxjs/operators/delay': 'Rx.operators',
-    'rxjs/operators/combineLatest': 'Rx.operators'
+    rxjs: 'Rx'
 };

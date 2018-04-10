@@ -1,11 +1,7 @@
 import { QueryList } from '@angular/core';
 
-import { debounceTime } from 'rxjs/operators/debounceTime';
-import { filter } from 'rxjs/operators/filter';
-import { map } from 'rxjs/operators/map';
-import { tap } from 'rxjs/operators/tap';
-import { Subject } from 'rxjs/Subject';
-import { Subscription } from 'rxjs/Subscription';
+import { Subject, Subscription } from 'rxjs';
+import { debounceTime, filter, map, tap } from 'rxjs/operators';
 
 import {
     UP_ARROW,
@@ -34,9 +30,19 @@ export interface IListKeyManagerOption {
  * of items, it will set the active item correctly when arrow events occur.
  */
 export class ListKeyManager<T extends IListKeyManagerOption> {
+    /**
+     * Stream that emits any time the TAB key is pressed, so components can react
+     * when focus is shifted off of the list.
+     */
+    tabOut: Subject<void> = new Subject<void>();
+
+    /** Stream that emits whenever the active item of the list manager changes. */
+    change = new Subject<number>();
+
     private _activeItemIndex = -1;
     private _activeItem: T;
-    private _wrap = false;
+    private _wrap: boolean = false;
+    private _scrollSize: number = 0;
     private _letterKeyStream = new Subject<string>();
     private _typeaheadSubscription = Subscription.EMPTY;
     private _vertical = true;
@@ -59,20 +65,17 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
     }
 
     /**
-     * Stream that emits any time the TAB key is pressed, so components can react
-     * when focus is shifted off of the list.
-     */
-    tabOut: Subject<void> = new Subject<void>();
-
-    /** Stream that emits whenever the active item of the list manager changes. */
-    change = new Subject<number>();
-
-    /**
      * Turns on wrapping mode, which ensures that the active item will wrap to
      * the other end of list when there are no more items in the given direction.
      */
     withWrap(): this {
         this._wrap = true;
+
+        return this;
+    }
+
+    setScrollSize(size: number): this {
+        this._scrollSize = size;
 
         return this;
     }
@@ -162,6 +165,7 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
         switch (keyCode) {
             case TAB:
                 this.tabOut.next();
+
                 return;
 
             case DOWN_ARROW:
@@ -251,6 +255,26 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
             : this._setActiveItemByDelta(-1);
     }
 
+    setNextPageItemActive(): void {
+        const nextItemIndex = this._activeItemIndex + this._scrollSize;
+
+        if (nextItemIndex >= this._items.length) {
+            this.setLastItemActive();
+        } else {
+            this._setActiveItemByDelta(this._scrollSize);
+        }
+    }
+
+    setPreviousPageItemActive(): void {
+        const nextItemIndex = this._activeItemIndex - this._scrollSize;
+
+        if (nextItemIndex <= 0) {
+            this.setFirstItemActive();
+        } else {
+            this._setActiveItemByDelta(-this._scrollSize);
+        }
+    }
+
     /**
      * Allows setting of the activeItemIndex without any other effects.
      * @param index The new activeItemIndex.
@@ -301,7 +325,9 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
      * item is disabled, it will move in the fallbackDelta direction until it either
      * finds an enabled item or encounters the end of the list.
      */
-    private _setActiveItemByIndex(index: number, fallbackDelta: number, items = this._items.toArray()): void {
+    private _setActiveItemByIndex(_index: number, fallbackDelta: number, items = this._items.toArray()): void {
+        let index = _index;
+
         if (!items[index]) { return; }
 
         while (items[index].disabled) {

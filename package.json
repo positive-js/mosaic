@@ -14,25 +14,25 @@
         "npm": ">=5"
     },
     "dependencies": {
-        "@angular/animations": ">=6.0.0-beta.0 <7.0.0",
-        "@angular/common": ">=6.0.0-beta.0 <7.0.0",
-        "@angular/compiler": ">=6.0.0-beta.0 <7.0.0",
-        "@angular/core": ">=6.0.0-beta.0 <7.0.0",
-        "@angular/forms": ">=6.0.0-beta.0 <7.0.0",
-        "@angular/platform-browser": ">=6.0.0-beta.0 <7.0.0",
+        "@angular/animations": ">=6.0.0-rc.3 <7.0.0",
+        "@angular/common": ">=6.0.0-rc.3 <7.0.0",
+        "@angular/compiler": ">=6.0.0-rc.3 <7.0.0",
+        "@angular/core": ">=6.0.0-rc.3 <7.0.0",
+        "@angular/forms": ">=6.0.0-rc.3 <7.0.0",
+        "@angular/platform-browser": ">=6.0.0-rc.3 <7.0.0",
         "core-js": "2.5.3",
         "mc-icons": "2.3.3",
-        "rxjs": "5.5.6",
+        "rxjs": "6.0.0-rc.1",
         "systemjs": "0.19.43",
         "tslib": "1.9.0",
         "zone.js": "0.8.20"
     },
     "devDependencies": {
-        "@angular/compiler-cli": "^6.0.0-beta.6",
-        "@angular/http": "^6.0.0-beta.6",
-        "@angular/platform-browser-dynamic": "^6.0.0-beta.6",
-        "@angular/platform-server": "^6.0.0-beta.6",
-        "@angular/router": "^6.0.0-beta.6",
+        "@angular/compiler-cli": "^6.0.0-rc.3",
+        "@angular/http": "^6.0.0-rc.3",
+        "@angular/platform-browser-dynamic": "^6.0.0-rc.3",
+        "@angular/platform-server": "^6.0.0-rc.3",
+        "@angular/router": "^6.0.0-rc.3",
         "@ptsecurity/prettier-config": "0.1.0",
         "@ptsecurity/tslint-config": "0.5.0",
         "@types/chalk": "^2.2.0",
@@ -111,7 +111,7 @@
         "tsconfig-paths": "^3.1.1",
         "tsconfig-paths-webpack-plugin": "^2.0.0",
         "tslint": "5.9.1",
-        "typescript": "~2.6.0",
+        "typescript": "2.7.2",
         "uglify-js": "^2.8.29",
         "url-loader": "^1.0.1",
         "wallaby-webpack": "^3.9.5",
@@ -122,19 +122,13 @@
     "scripts": {
         "precommit": "npm run linter:styles && npm run linter:lib",
         "prettier": "lint-staged",
-
         "test:unit": "karma start config/karma/karma.conf.js",
-
         "valid:lic": "ts-node --project ./scripts/tsconfig.deploy.json ./scripts/validate-licenses.ts",
-
         "mosaic:build-release": "gulp mosaic:build-release",
         "cdk:build-release": "gulp cdk:build-release",
-
         "publish-repo": "ts-node --project ./scripts/tsconfig.deploy.json ./scripts/deploy/publish-artifacts.ts",
-
         "linter:lib": "tslint './src/lib'",
         "linter:styles": "stylelint --syntax scss \"./**/*.scss\"",
-
         "server-dev": "webpack-dev-server --config tools/webpack/webpack.lib.dev.js",
         "server-dev:button": "npm run server-dev -- --env.component button",
         "server-dev:list": "npm run server-dev -- --env.component list",

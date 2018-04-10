@@ -32,7 +32,7 @@ const _package = require('../../package.json');
 
 const buildVersion = _package.version;
 
-const angularVersion = '^5.0.0';
+const angularVersion = '^6.0.0';
 
 // License that will be placed inside of all created bundles.
 const buildLicense = `/**
