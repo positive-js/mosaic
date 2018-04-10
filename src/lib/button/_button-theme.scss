@@ -18,7 +18,9 @@
     &:hover,
     &.mc-hover {
         background-image: linear-gradient(
-            to bottom, lighten(mc-color($palette, 500), $hover-lighten), lighten(mc-color($palette, 560), $hover-lighten)
+            to bottom,
+            lighten(mc-color($palette, 500), $hover-lighten),
+            lighten(mc-color($palette, 560), $hover-lighten)
         );
     }
 
@@ -29,7 +31,9 @@
         &:hover,
         &.mc-hover {
             background-image: linear-gradient(
-                to bottom, lighten(mc-color($palette, 600), $hover-lighten), lighten(mc-color($palette, 560), $hover-lighten)
+                to bottom,
+                lighten(mc-color($palette, 600), $hover-lighten),
+                lighten(mc-color($palette, 560), $hover-lighten)
             );
         }
     }
@@ -64,7 +68,9 @@
         &:hover,
         &.mc-hover {
             background-image: linear-gradient(
-                to bottom, darken(mc-color($palette, 200), $hover-darken), darken(mc-color($palette, 100), $hover-darken )
+                to bottom,
+                darken(mc-color($palette, 200), $hover-darken),
+                darken(mc-color($palette, 100), $hover-darken)
             );
         }
     }
@@ -88,7 +94,9 @@
     &:hover,
     &.mc-hover {
         background-image: linear-gradient(
-            to bottom, darken(mc-color($secondPalette, 40), $hover-darken), darken(mc-color($secondPalette, 100), $hover-darken)
+            to bottom,
+            darken(mc-color($secondPalette, 40), $hover-darken),
+            darken(mc-color($secondPalette, 100), $hover-darken)
         );
     }
 
@@ -99,7 +107,9 @@
         &:hover,
         &.mc-hover {
             background-image: linear-gradient(
-                to bottom, darken(mc-color($secondPalette, 200), $hover-darken), darken(mc-color($secondPalette, 100), $hover-darken )
+                to bottom,
+                darken(mc-color($secondPalette, 200), $hover-darken),
+                darken(mc-color($secondPalette, 100), $hover-darken)
             );
         }
     }
@@ -136,6 +146,7 @@
     &.mc-primary,
     &.mc-second,
     &.mc-warn {
+
         &.cdk-focused {
             border-color: mc-color($primary, 500);
             box-shadow: 0 0 0 1px mc-color($primary, 500);
@@ -144,6 +155,7 @@
 }
 
 @mixin mc-button-theme($theme) {
+
     .mc-button,
     .mc-xs-button,
     .mc-sm-button,
@@ -155,6 +167,7 @@
 }
 
 @mixin mc-button-typography($config) {
+
     .mc-button {
         font: {
             size:   mc-font-size($config, button);
