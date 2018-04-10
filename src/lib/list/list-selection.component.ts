@@ -55,7 +55,7 @@ export class McListSelectionChange {
 
         '(focus)': '_handleFocus()',
         '(blur)': '_handleBlur()',
-        '(click)': '_handleClick()',
+        '(click)': '_handleClick()'
     },
     templateUrl: 'list-option.html',
     encapsulation: ViewEncapsulation.None,
@@ -92,7 +92,7 @@ export class McListOption extends McListOptionBase
 
     @Input()
     get selected(): boolean {
-        return this.listSelection.selectedOptions.isSelected(this);
+        return this.listSelection.selectedOptions && this.listSelection.selectedOptions.isSelected(this) || false;
     }
 
     set selected(value: boolean) {
@@ -103,7 +103,6 @@ export class McListOption extends McListOptionBase
             this.listSelection._reportValueChange();
         }
     }
-
 
     private _lineSetter: McLineSetter;
     private _selected = false;
@@ -183,12 +182,10 @@ export class McListOption extends McListOptionBase
         this.listSelection._onTouched();
     }
 
-    // Retrieves the DOM element of the component host.
     _getHostElement(): HTMLElement {
         return this._element.nativeElement;
     }
 
-    // Sets the selected state of the option.
     _setSelected(selected: boolean) {
         if (this._selected === selected) { return; }
 

@@ -1,14 +1,14 @@
 import { Component, NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import { McListModule } from '../../lib/list';
+import { McListModule } from '@ptsecurity/mosaic/list';
 
 
 @Component({
     selector: 'app',
-    templateUrl: require('./template.html'),
+    template: require('./template.html'),
     styleUrls: ['./styles.scss']
 })
 export class DemoComponent {

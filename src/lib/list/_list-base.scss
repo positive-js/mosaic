@@ -69,10 +69,8 @@ $mc-list-item-inset-divider-offset: 72px;
     // list-item. This means that there should be a padding for the mc-list-text on the start-side.
     .mc-list-item-content .mc-list-text:not(:nth-child(2)) {
         padding-right: 0;
-        padding-left: $mc-list-side-padding;
 
         [dir='rtl'] & {
-            padding-right: $mc-list-side-padding;
             padding-left: 0;
         }
     }
