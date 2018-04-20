@@ -5,10 +5,13 @@
 
 # Mosaic components for Angular
 
-<p align="center"></p>
+<p align="center">
+    <img width="300" src="https://preview.ibb.co/fZha7S/POSITIVE_JS_LOGO_WHITE_ed2_05.png" alt="positive_js_logo" border="0">
+</p>
+
 
 ## Demo and Documentation
-<a href="#" target="_blank">Demo</a>
+Soon
 
 ## Getting started
 
@@ -22,7 +25,7 @@ $ npm install
 
 ## Running The Component
 ```shell
-$ server-dev:button
+$ npm run server-dev:button
 ```
 
 ## Running The Tests
