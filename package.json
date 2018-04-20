@@ -21,7 +21,7 @@
         "@angular/forms": ">=6.0.0-rc.3 <7.0.0",
         "@angular/platform-browser": ">=6.0.0-rc.3 <7.0.0",
         "core-js": "2.5.3",
-        "mc-icons": "2.3.3",
+        "@ptsecurity/mosaic-icons": "2.5.0",
         "rxjs": "6.0.0-rc.1",
         "systemjs": "0.19.43",
         "tslib": "1.9.0",
