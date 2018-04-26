@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/positive-js/mosaic/tree/ng-feature.svg?style=shield)](https://circleci.com/gh/positive-js/mosaic/tree/ng-feature)
+[![CircleCI](https://circleci.com/gh/positive-js/mosaic/tree/master.svg?style=shield)](https://circleci.com/gh/positive-js/mosaic/tree/master)
 [![Dependency Status](https://david-dm.org/positive-js/mosaic.svg)](https://david-dm.org/positive-js/mosaic)
 [![Known Vulnerabilities](https://snyk.io/test/github/positive-js/mosaic/badge.svg)](https://snyk.io/test/github/positive-js/mosaic)
 
