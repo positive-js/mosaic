@@ -42,7 +42,6 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
     private _activeItemIndex = -1;
     private _activeItem: T;
     private _wrap: boolean = false;
-    private _scrollSize: number = 0;
     private _letterKeyStream = new Subject<string>();
     private _typeaheadSubscription = Subscription.EMPTY;
     private _vertical = true;
@@ -70,12 +69,6 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
      */
     withWrap(): this {
         this._wrap = true;
-
-        return this;
-    }
-
-    setScrollSize(size: number): this {
-        this._scrollSize = size;
 
         return this;
     }
@@ -255,23 +248,23 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
             : this._setActiveItemByDelta(-1);
     }
 
-    setNextPageItemActive(): void {
-        const nextItemIndex = this._activeItemIndex + this._scrollSize;
+    setNextPageItemActive(delta: number): void {
+        const nextItemIndex = this._activeItemIndex + delta;
 
         if (nextItemIndex >= this._items.length) {
             this.setLastItemActive();
         } else {
-            this._setActiveItemByDelta(this._scrollSize);
+            this._setActiveItemByDelta(delta);
         }
     }
 
-    setPreviousPageItemActive(): void {
-        const nextItemIndex = this._activeItemIndex - this._scrollSize;
+    setPreviousPageItemActive(delta: number): void {
+        const nextItemIndex = this._activeItemIndex - delta;
 
         if (nextItemIndex <= 0) {
             this.setFirstItemActive();
         } else {
-            this._setActiveItemByDelta(-this._scrollSize);
+            this._setActiveItemByDelta(-delta);
         }
     }
 
@@ -300,8 +293,7 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
      */
     private _setActiveInWrapMode(delta: number, items: T[]): void {
         // when active item would leave menu, wrap to beginning or end
-        this._activeItemIndex =
-            (this._activeItemIndex + delta + items.length) % items.length;
+        this._activeItemIndex = (this._activeItemIndex + delta + items.length) % items.length;
 
         // skip all disabled menu items recursively until an enabled one is reached
         if (items[this._activeItemIndex].disabled) {

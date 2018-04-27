@@ -5,6 +5,9 @@ import { Subject } from 'rxjs';
  * Class to be used to power selecting one or more options from a list.
  */
 export class SelectionModel<T> {
+    /** Event emitted when the value has changed. */
+    onChange: Subject<SelectionChange<T>> | null = this._emitChanges ? new Subject() : null;
+
     /** Currently-selected values. */
     private _selection: Set<T> = new Set();
 
@@ -17,22 +20,10 @@ export class SelectionModel<T> {
     /** Cache for the array value of the selected items. */
     private _selected: T[] | null;
 
-    /** Selected values. */
-    get selected(): T[] {
-        if (!this._selected) {
-            this._selected = Array.from(this._selection.values());
-        }
-
-        return this._selected;
-    }
-
-    /** Event emitted when the value has changed. */
-    onChange: Subject<SelectionChange<T>> | null = this._emitChanges ? new Subject() : null;
-
     constructor(private _multiple = false, initiallySelectedValues?: T[], private _emitChanges = true) {
         if (initiallySelectedValues && initiallySelectedValues.length) {
             if (_multiple) {
-                initiallySelectedValues.forEach(value => this._markSelected(value));
+                initiallySelectedValues.forEach((value) => this._markSelected(value));
             } else {
                 this._markSelected(initiallySelectedValues[0]);
             }
@@ -42,12 +33,23 @@ export class SelectionModel<T> {
         }
     }
 
+    /** Selected values. */
+    get selected(): T[] {
+        if (!this._selected) {
+            this._selected = Array.from(this._selection.values());
+        }
+
+        return this._selected;
+    }
+
     /**
      * Selects a value or an array of values.
      */
     select(...values: T[]): void {
         this._verifyValueAssignment(values);
-        values.forEach(value => this._markSelected(value));
+
+        values.forEach((value) => this._markSelected(value));
+
         this._emitChangeEvent();
     }
 
@@ -56,7 +58,7 @@ export class SelectionModel<T> {
      */
     deselect(...values: T[]): void {
         this._verifyValueAssignment(values);
-        values.forEach(value => this._unmarkSelected(value));
+        values.forEach((value) => this._unmarkSelected(value));
         this._emitChangeEvent();
     }
 
@@ -141,7 +143,7 @@ export class SelectionModel<T> {
     /** Clears out the selected values. */
     private _unmarkAll() {
         if (!this.isEmpty()) {
-            this._selection.forEach(value => this._unmarkSelected(value));
+            this._selection.forEach((value) => this._unmarkSelected(value));
         }
     }
 

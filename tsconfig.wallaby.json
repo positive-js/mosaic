@@ -29,7 +29,8 @@
             "node_modules/@types"
         ],
         "types": [
-            "jasmine"
+            "jasmine",
+            "node"
         ]
     },
     "include": [

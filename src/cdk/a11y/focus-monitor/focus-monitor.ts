@@ -83,9 +83,7 @@ export class FocusMonitor implements OnDestroy {
 
     monitor(element: HTMLElement, renderer?: Renderer2 | boolean, checkChildren?: boolean): Observable<FocusOrigin> {
         // TODO(mmalerba): clean up after deprecated signature is removed.
-        if (!(renderer instanceof Renderer2)) {
-            checkChildren = renderer;
-        }
+        if (!(renderer instanceof Renderer2)) { checkChildren = renderer; }
 
         checkChildren = !!checkChildren;
 
@@ -100,8 +98,7 @@ export class FocusMonitor implements OnDestroy {
 
         // Create monitored element info.
         let info: MonitoredElementInfo = {
-            unlisten: () => {
-            },
+            unlisten: () => {},
             checkChildren: checkChildren,
             subject: new Subject<FocusOrigin>()
         };
@@ -162,14 +159,14 @@ export class FocusMonitor implements OnDestroy {
         if (!this._platform.isBrowser) { return; }
 
         // On keydown record the origin and clear any touch event that may be in progress.
-        let documentKeydownListener = () => {
+        const documentKeydownListener = () => {
             this._lastTouchTarget = null;
             this._setOriginForCurrentEventQueue('keyboard');
         };
 
         // On mousedown record the origin only if there is not touch target, since a mousedown can
         // happen as a result of a touch event.
-        let documentMousedownListener = () => {
+        const documentMousedownListener = () => {
             if (!this._lastTouchTarget) {
                 this._setOriginForCurrentEventQueue('mouse');
             }
@@ -178,17 +175,16 @@ export class FocusMonitor implements OnDestroy {
         // When the touchstart event fires the focus event is not yet in the event queue. This means
         // we can't rely on the trick used above (setting timeout of 0ms). Instead we wait 650ms to
         // see if a focus happens.
-        let documentTouchstartListener = (event: TouchEvent) => {
-            if (this._touchTimeoutId != null) {
-                clearTimeout(this._touchTimeoutId);
-            }
+        const documentTouchstartListener = (event: TouchEvent) => {
+            if (this._touchTimeoutId != null) { clearTimeout(this._touchTimeoutId); }
+
             this._lastTouchTarget = event.target;
             this._touchTimeoutId = setTimeout(() => this._lastTouchTarget = null, TOUCH_BUFFER_MS);
         };
 
         // Make a note of when the window regains focus, so we can restore the origin info for the
         // focused element.
-        let windowFocusListener = () => {
+        const windowFocusListener = () => {
             this._windowFocused = true;
             this._windowFocusTimeoutId = setTimeout(() => this._windowFocused = false, 0);
         };
@@ -274,7 +270,8 @@ export class FocusMonitor implements OnDestroy {
         // for the first focus event after the touchstart, and then the first blur event after that
         // focus event. When that blur event fires we know that whatever follows is not a result of the
         // touchstart.
-        let focusTarget = event.target;
+        const focusTarget = event.target;
+
         return this._lastTouchTarget instanceof Node && focusTarget instanceof Node &&
             (focusTarget === this._lastTouchTarget || focusTarget.contains(this._lastTouchTarget));
     }

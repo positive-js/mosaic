@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { McListModule } from '@ptsecurity/mosaic/list';
+import { McListSelectionChange } from '@ptsecurity/mosaic/list/list-selection.component';
 
 
 @Component({
@@ -13,6 +14,7 @@ import { McListModule } from '@ptsecurity/mosaic/list';
 })
 export class DemoComponent {
     typesOfShoes = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
+    multipleSelected = ['Boots', 'Clogs'];
 
     folders = [
         {
@@ -38,6 +40,10 @@ export class DemoComponent {
             updated: new Date('1/18/16')
         }
     ];
+
+    onSelectionChange($event: McListSelectionChange) {
+        // console.log('onSelectionChange');
+    }
 }
 
 
