@@ -1,5 +1,4 @@
 /* tslint:disable:no-magic-numbers */
-
 import { Component, DebugElement, ChangeDetectionStrategy } from '@angular/core';
 import { async, ComponentFixture, fakeAsync, TestBed, tick, flush } from '@angular/core/testing';
 import { FormControl, FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';

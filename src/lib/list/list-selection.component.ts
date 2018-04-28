@@ -52,7 +52,7 @@ import {
         '[class.mc-list-option-disabled]': 'disabled',
         '(focus)': '_handleFocus()',
         '(blur)': '_handleBlur()',
-        '(click)': '_handleClick($event)'
+        '(click)': '_handleClick()'
     },
     templateUrl: 'list-option.html',
     encapsulation: ViewEncapsulation.None,
