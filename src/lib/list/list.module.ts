@@ -13,7 +13,6 @@ import { McList, McListItem, McListSubheaderCssStyler} from './list.component';
     imports: [
         CommonModule,
         A11yModule,
-        McPseudoCheckboxModule,
         McLineModule
     ],
     exports: [
