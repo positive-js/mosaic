@@ -23,7 +23,7 @@ const licensesWhitelist = [
     // Combinations.
     '(AFL-2.1 OR BSD-2-Clause)',
     '(MIT OR CC-BY-3.0)',
-    '(MIT OR Apache-2.0)',
+    '(MIT OR Apache-2.0)'
 ];
 
 // Licenses not included in SPDX but accepted will be converted to MIT.
@@ -33,21 +33,22 @@ const licenseReplacements: { [key: string]: string } = {
     'Apache2': 'Apache-2.0',
     'AFLv2.1': 'AFL-2.1',
     // BSD is BSD-2-clause by default.
-    'BSD': 'BSD-2-Clause',
+    'BSD': 'BSD-2-Clause'
 };
 
 const ignoredPackages = [
     'spdx-license-ids@2.0.1',
     'bitsyntax@0.0.4',
     'pako@1.0.6', // (MIT AND Zlib)
-    'jsonify@0.0.0',
+    'jsonify@0.0.0'
 ];
 
 const path = require('path');
 const spdxSatisfies = require('spdx-satisfies');
 const checker = require('license-checker');
 
-export default function validateLicense () {
+
+export default function validateLicense() {
 
     checker.init({start: path.join(__dirname, '..')}, (err: Error, json: any) => {
         if (err) {
@@ -61,18 +62,20 @@ export default function validateLicense () {
                     licenses: ([] as string[])
                         .concat((json[key] !).licenses as string[])
                         // `*` is used when the license is guessed.
-                        .map(x => x.replace(/\*$/, ''))
-                        .map(x => x in licenseReplacements ? licenseReplacements[x] : x),
+                        .map((x) => x.replace(/\*$/, ''))
+                        .map((x) => x in licenseReplacements ? licenseReplacements[x] : x)
                 }))
-                .filter(pkg => !passesSpdx(pkg.licenses, licensesWhitelist))
-                .filter(pkg => !ignoredPackages.find(ignored => ignored === pkg.id));
+                .filter((pkg) => !passesSpdx(pkg.licenses, licensesWhitelist))
+                .filter((pkg) => !ignoredPackages.find((ignored) => ignored === pkg.id));
 
             // Report packages with bad licenses
             if (badLicensePackages.length > 0) {
                 console.error('Invalid package licences found:');
-                badLicensePackages.forEach(pkg => {
+
+                badLicensePackages.forEach((pkg) => {
                     console.error(`${pkg.id}: ${JSON.stringify(pkg.licenses)}`);
                 });
+
                 console.error(`\n${badLicensePackages.length} total packages with invalid licenses.`);
             } else {
                 console.log('All package licenses are valid.');
@@ -82,7 +85,7 @@ export default function validateLicense () {
 
     // Check if a license is accepted by an array of accepted licenses
     function passesSpdx(licenses: string[], accepted: string[]) {
-        return accepted.some(l => {
+        return accepted.some((l) => {
             try {
                 return spdxSatisfies(licenses.join(' AND '), l);
             } catch (_) {

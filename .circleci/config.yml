@@ -40,7 +40,7 @@ jobs:
       - run: npm install
       - run: npm run mosaic:build-release
       - run: npm run cdk:build-release
-      - run: npm run publish-repo
+      - run: ./scripts/deploy/publish-artifacts.sh
 
 
 workflows:
@@ -51,5 +51,5 @@ workflows:
       - deploy:
           filters:
              branches:
-               only: master
-
+               only:
+                 - master
