@@ -39,7 +39,7 @@
     ],
     "angularCompilerOptions": {
         "annotateForClosureCompiler": true,
-        "strictMetadataEmit": false,
+        "strictMetadataEmit": true,
         "flatModuleOutFile": "index.js",
         "flatModuleId": "@ptsecurity/cdk",
         "skipTemplateCodegen": true,

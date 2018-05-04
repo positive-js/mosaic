@@ -4,7 +4,7 @@
     "public-api.ts"
   ],
   "angularCompilerOptions": {
-    "strictMetadataEmit": false, // Workaround for Angular #22210
+    "strictMetadataEmit": true,
     "flatModuleOutFile": "index.js",
     "flatModuleId": "@ptsecurity/mosaic/radio",
     "skipTemplateCodegen": true,

@@ -4,7 +4,7 @@
         "public-api.ts"
     ],
     "angularCompilerOptions": {
-        "strictMetadataEmit": false,
+        "strictMetadataEmit": true,
         "flatModuleOutFile": "index.js",
         "flatModuleId": "@ptsecurity/cdk/a11y",
         "skipTemplateCodegen": true,
