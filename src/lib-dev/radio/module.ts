@@ -17,6 +17,8 @@ import {ThemePickerModule} from '../theme-picker';
 export class DemoComponent {
     favoriteFruit: string;
 
+    isDisabled: boolean = true;
+
     fruits = [
         'Apple',
         'Banana',

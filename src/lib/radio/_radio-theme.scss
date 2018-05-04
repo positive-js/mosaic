@@ -14,6 +14,42 @@
     $primary: map-get($theme, primary);
     $second: map-get($theme, second);
     $warn: map-get($theme, warn);
+    $foreground: map-get($theme, foreground);
+
+    .mc-radio-label {
+
+        &:hover {
+
+            .mc-radio-inner-circle {
+                background-color: rgba(0, 0, 0, 0.06);
+            }
+        }
+    }
+
+    .mc-radio-disabled {
+
+        .mc-radio-inner-circle {
+            background-color: mc-color($second, 40);
+        }
+
+        .mc-radio-outer-circle {
+            border-color: mc-color($second, 100);
+        }
+
+        .mc-radio-label-content {
+            color: mc-color($foreground, disabled);
+        }
+    }
+
+    .mc-radio-disabled .mc-radio-label {
+
+        &:hover {
+
+            .mc-radio-inner-circle {
+                background-color: mc-color($second, 40);
+            }
+        }
+    }
 
     .mc-radio-button {
 
@@ -35,7 +71,6 @@
                     background-color: white;
                 }
             }
-
         }
 
         &.mc-warn {

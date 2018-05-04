@@ -14,12 +14,6 @@ $mc-toggle-padding: 8px !default;
     align-items: center;
     white-space: nowrap;
     vertical-align: middle;
-
-    &:hover {
-        .mc-radio-outer-circle {
-            background-color: rgba(0, 0, 0, 0.06);
-        }
-    }
 }
 
 // Container for radio circles and ripple.
