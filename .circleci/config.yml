@@ -28,6 +28,26 @@ jobs:
             - node_modules
       - run: npm run mosaic:build-release
 
+  test:
+    <<: *job_defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: *cache_key
+      - run:
+          name: System information
+          command: |
+            echo "Node.js $(node -v)"
+            echo "npm $(npm -v)"
+            echo "Yarn v$(yarn --version)"
+      - run: npm install
+      - save_cache:
+          key: *cache_key
+          paths:
+            - node_modules
+      - run: npm run test:unit
+      - run: ./node_modules/.bin/codecov --token=$CODECOV_TOKEN
+
   deploy:
     <<: *job_defaults
     steps:
@@ -48,7 +68,10 @@ workflows:
   build-deploy:
     jobs:
       - build
+      - test
       - deploy:
+          requires:
+            - test
           filters:
              branches:
                only:

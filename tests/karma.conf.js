@@ -48,9 +48,11 @@ module.exports = (config) => {
         autoWatch: false,
 
         coverageReporter: {
-            type : 'json-summary',
             dir : 'dist/coverage/',
-            subdir: '.'
+            subdir: '.',
+            reporters: [
+                { type: 'lcov' }
+            ]
         },
 
 
