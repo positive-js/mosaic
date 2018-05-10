@@ -46,7 +46,6 @@ jobs:
           paths:
             - node_modules
       - run: npm run test:unit
-      - run: ./node_modules/.bin/codecov --token=$CODECOV_TOKEN
 
   deploy:
     <<: *job_defaults
@@ -70,6 +69,8 @@ workflows:
       - build
       - test
       - deploy:
+          requires:
+            - test
           filters:
              branches:
                only:
