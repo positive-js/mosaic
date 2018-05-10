@@ -1,77 +1,83 @@
+version: 2
 
-var_1: &cache_key mosaic-cache-{{ checksum "package.json" }}
+package_lock_key: &package_lock_key
+  key: mosaic-cache-{{ checksum "package.json" }}
 
-anchor_job_defaults: &job_defaults
+post_checkout: &post_checkout
+  post: git pull --ff-only origin "refs/pull/${CI_PULL_REQUEST//*pull\//}/merge"
+
+defaults: &defaults
   working_directory: ~/mosaic
   docker:
     - image: ptsecurity/node-container:0.0.4
 
-version: 2
 jobs:
-
-  build:
-    <<: *job_defaults
+  install:
+    <<: *defaults
     steps:
-      - checkout
-      - restore_cache:
-          key: *cache_key
-      - run:
-          name: System information
-          command: |
-            echo "Node.js $(node -v)"
-            echo "npm $(npm -v)"
-            echo "Yarn v$(yarn --version)"
-      - run: npm install
+      - checkout: *post_checkout
+      - restore_cache: *package_lock_key
+      - run: npm install --no-save
       - save_cache:
-          key: *cache_key
+          <<: *package_lock_key
           paths:
             - node_modules
+
+  build_mosaic:
+    <<: *defaults
+    steps:
+      - checkout: *post_checkout
+      - restore_cache: *package_lock_key
       - run: npm run mosaic:build-release
 
-  test:
-    <<: *job_defaults
+  build_cdk:
+      <<: *defaults
+      steps:
+        - checkout: *post_checkout
+        - restore_cache: *package_lock_key
+        - run: npm run cdk:build-release
+
+  test_unit:
+    <<: *defaults
     steps:
-      - checkout
-      - restore_cache:
-          key: *cache_key
-      - run:
-          name: System information
-          command: |
-            echo "Node.js $(node -v)"
-            echo "npm $(npm -v)"
-            echo "Yarn v$(yarn --version)"
-      - run: npm install
-      - save_cache:
-          key: *cache_key
-          paths:
-            - node_modules
+      - checkout: *post_checkout
+      - restore_cache: *package_lock_key
       - run: npm run test:unit
 
-  deploy:
-    <<: *job_defaults
+  snapshot_publish:
+    <<: *defaults
     steps:
       - add_ssh_keys:
           fingerprints:
             - "c3:de:eb:9c:82:70:a8:23:f3:4e:92:b8:07:d2:22:df"
-      - checkout
-      - restore_cache:
-          key: *cache_key
-      - run: npm install
-      - run: npm run mosaic:build-release
+      - checkout: *post_checkout
+      - restore_cache: *package_lock_key
       - run: npm run cdk:build-release
+      - run: npm run mosaic:build-release
       - run: ./scripts/deploy/publish-artifacts.sh
 
 
 workflows:
   version: 2
-  build-deploy:
+  default_workflow:
     jobs:
-      - build
-      - test
-      - deploy:
+      - install
+      - build_cdk:
           requires:
-            - test
+            - install
+      - build_mosaic:
+          requires:
+            - install
+      - test_unit:
+          requires:
+            - build_cdk
+            - build_mosaic
+      - snapshot_publish:
+          requires:
+            - test_unit
+            - build_cdk
+            - build_mosaic
           filters:
-             branches:
-               only:
-                 - master
+              branches:
+                only:
+                  - master
