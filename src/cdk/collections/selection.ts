@@ -123,11 +123,15 @@ export class SelectionModel<T> {
     /** Selects a value. */
     private _markSelected(value: T) {
         if (!this.isSelected(value)) {
-            if (!this._multiple) { this._unmarkAll(); }
+            if (!this._multiple) {
+                this._unmarkAll();
+            }
 
             this._selection.add(value);
 
-            if (this._emitChanges) { this._selectedToEmit.push(value); }
+            if (this._emitChanges) {
+                this._selectedToEmit.push(value);
+            }
         }
     }
 
@@ -136,7 +140,9 @@ export class SelectionModel<T> {
         if (this.isSelected(value)) {
             this._selection.delete(value);
 
-            if (this._emitChanges) { this._deselectedToEmit.push(value); }
+            if (this._emitChanges) {
+                this._deselectedToEmit.push(value);
+            }
         }
     }
 

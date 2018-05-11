@@ -1,19 +1,25 @@
-
-import { Injectable } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Inject, Injectable, Optional, PLATFORM_ID } from '@angular/core';
 
 
 // Whether the current platform supports the V8 Break Iterator. The V8 check
 // is necessary to detect all Blink based browsers.
-const hasV8BreakIterator = (typeof(Intl) !== 'undefined' && (Intl as any).v8BreakIterator);
+const hasV8BreakIterator = (typeof Intl !== 'undefined' && (Intl as any).v8BreakIterator);
 
 /**
  * Service to detect the current platform by comparing the userAgent strings and
  * checking browser-specific global properties.
  */
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class Platform {
-    /** Whether the Angular application is being rendered in the browser. */
-    isBrowser: boolean = typeof document === 'object' && !!document;
+    /**
+     * Whether the Angular application is being rendered in the browser.
+     * We want to use the Angular platform check because if the Document is shimmed
+     * without the navigator, the following checks will fail. This is preferred because
+     * sometimes the Document may be shimmed without the user's knowledge or intention
+     */
+    isBrowser: boolean = this._platformId ?
+        isPlatformBrowser(this._platformId) : typeof document === 'object' && !!document;
 
     /** Whether the current browser is Microsoft Edge. */
     EDGE: boolean = this.isBrowser && /(edge)/i.test(navigator.userAgent);
@@ -23,8 +29,8 @@ export class Platform {
 
     /** Whether the current rendering engine is Blink. */
         // EdgeHTML and Trident mock Blink specific things and need to be excluded from this check.
-    BLINK: boolean = this.isBrowser &&
-        (!!((window as any).chrome || hasV8BreakIterator) && !!CSS && !this.EDGE && !this.TRIDENT);
+    BLINK: boolean = this.isBrowser && (!!((window as any).chrome || hasV8BreakIterator) &&
+        typeof CSS !== 'undefined' && !this.EDGE && !this.TRIDENT);
 
     /** Whether the current rendering engine is WebKit. */
         // Webkit is part of the userAgent in EdgeHTML, Blink and Trident. Therefore we need to
@@ -52,4 +58,6 @@ export class Platform {
         // this and just place the Safari keyword in the userAgent. To be more safe about Safari every
         // Safari browser should also use Webkit as its layout engine.
     SAFARI: boolean = this.isBrowser && /safari/i.test(navigator.userAgent) && this.WEBKIT;
+
+    constructor(@Optional() @Inject(PLATFORM_ID) private _platformId?: Object) {}
 }

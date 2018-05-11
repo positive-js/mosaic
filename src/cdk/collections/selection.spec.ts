@@ -86,8 +86,8 @@ describe('SelectionModel', () => {
 
     describe('onChange event', () => {
         it('should return the model that dispatched the event', () => {
-            let model = new SelectionModel();
-            let spy = jasmine.createSpy('SelectionModel change event');
+            const model = new SelectionModel();
+            const spy = jasmine.createSpy('SelectionModel change event');
 
             model.onChange!.subscribe(spy);
             model.select(1);
@@ -99,8 +99,8 @@ describe('SelectionModel', () => {
         });
 
         it('should return both the added and removed values', () => {
-            let model = new SelectionModel();
-            let spy = jasmine.createSpy('SelectionModel change event');
+            const model = new SelectionModel();
+            const spy = jasmine.createSpy('SelectionModel change event');
 
             model.select(1);
 
@@ -108,7 +108,7 @@ describe('SelectionModel', () => {
 
             model.select(2);
 
-            let event = spy.calls.mostRecent().args[0];
+            const event = spy.calls.mostRecent().args[0];
 
             expect(spy).toHaveBeenCalled();
             expect(event.removed).toEqual([1]);
@@ -116,8 +116,8 @@ describe('SelectionModel', () => {
         });
 
         it('should have updated the selected value before emitting the change event', () => {
-            let model = new SelectionModel(true);
-            let spy = jasmine.createSpy('SelectionModel change event');
+            const model = new SelectionModel(true);
+            const spy = jasmine.createSpy('SelectionModel change event');
 
             // Note: this assertion is only here to run the getter.
             expect(model.selected).toEqual([]);
@@ -142,7 +142,7 @@ describe('SelectionModel', () => {
             it('should emit an event when a value is selected', () => {
                 model.select(1);
 
-                let event = spy.calls.mostRecent().args[0];
+                const event = spy.calls.mostRecent().args[0];
 
                 expect(spy).toHaveBeenCalled();
                 expect(event.added).toEqual([1]);
@@ -193,7 +193,7 @@ describe('SelectionModel', () => {
             it('should emit a single event when clearing all of the selected options', () => {
                 model.clear();
 
-                let event = spy.calls.mostRecent().args[0];
+                const event = spy.calls.mostRecent().args[0];
 
                 expect(spy).toHaveBeenCalledTimes(1);
                 expect(event.removed).toEqual([1, 2, 3]);
@@ -223,7 +223,7 @@ describe('SelectionModel', () => {
     });
 
     it('should be able to determine whether it is empty', () => {
-        let model = new SelectionModel();
+        const model = new SelectionModel();
 
         expect(model.isEmpty()).toBe(true);
 
@@ -233,7 +233,7 @@ describe('SelectionModel', () => {
     });
 
     it('should be able to determine whether it has a value', () => {
-        let model = new SelectionModel();
+        const model = new SelectionModel();
 
         expect(model.hasValue()).toBe(false);
 
@@ -243,7 +243,7 @@ describe('SelectionModel', () => {
     });
 
     it('should be able to toggle an option', () => {
-        let model = new SelectionModel();
+        const model = new SelectionModel();
 
         model.toggle(1);
         expect(model.isSelected(1)).toBe(true);
@@ -253,7 +253,7 @@ describe('SelectionModel', () => {
     });
 
     it('should be able to clear the selected options', () => {
-        let model = new SelectionModel(true);
+        const model = new SelectionModel(true);
 
         model.select(1);
         model.select(2);
