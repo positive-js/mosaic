@@ -10,7 +10,7 @@
 
 
 ## Demo and Documentation
-Soon
+* [Getting Started Guide][getting-started]
 
 ## Getting started
 
@@ -32,3 +32,5 @@ $ npm run server-dev:button
 
 
 **Inspired by AngularMaterial**
+
+[getting-started]: docs/README.md
