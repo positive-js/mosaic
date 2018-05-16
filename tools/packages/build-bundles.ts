@@ -166,7 +166,7 @@ export class PackageBundler {
                 const importRegex = new RegExp(`@ptsecurity/${this.buildPackage.name}/.+`);
                 external = external.filter((e) => !importRegex.test(e));
 
-                // Use the rollup-alias plugin to map imports of the form `@angular/material/button`
+                // Use the rollup-alias plugin to map imports of the form `@ptsecurity/mosaic/button`
                 // to the actual file location so that rollup can resolve the imports (otherwise they
                 // will be treated as external dependencies and not included in the bundle).
                 bundleOptions.plugins.push(

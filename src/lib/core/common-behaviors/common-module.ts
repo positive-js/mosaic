@@ -1,9 +1,16 @@
 import { NgModule, InjectionToken, Optional, Inject, isDevMode } from '@angular/core';
+import { BidiModule } from '@ptsecurity/cdk/bidi';
 
 
 // Injection token that configures whether the Mosaic sanity checks are enabled.
-export const MС_SANITY_CHECKS = new InjectionToken<boolean>('mc-sanity-checks');
+export const MС_SANITY_CHECKS = new InjectionToken<boolean>('mc-sanity-checks', {
+    providedIn: 'root',
+    factory: MC_SANITY_CHECKS_FACTORY
+});
 
+export function MC_SANITY_CHECKS_FACTORY(): boolean {
+    return true;
+}
 
 /**
  * Module that captures anything that should be loaded and/or run for *all* Mosaic
@@ -12,18 +19,12 @@ export const MС_SANITY_CHECKS = new InjectionToken<boolean>('mc-sanity-checks')
  * This module should be imported to each top-level component module (e.g., MatTabsModule).
  */
 @NgModule({
-    imports: [],
-    exports: [],
-    providers: [{
-        provide: MС_SANITY_CHECKS, useValue: true
-    }]
+    imports: [ BidiModule ],
+    exports: [ BidiModule ]
 })
 export class McCommonModule {
     // Whether we've done the global sanity checks (e.g. a theme is loaded, there is a doctype).
     private _hasDoneGlobalChecks = false;
-
-    // Whether we've already checked for HammerJs availability.
-    private _hasCheckedHammer = false;
 
     // Reference to the global `document` object.
     private _document = typeof document === 'object' && document ? document : null;
@@ -80,18 +81,5 @@ export class McCommonModule {
 
             this._document.body.removeChild(testElement);
         }
-    }
-
-    // Checks whether HammerJS is available.
-    _checkHammerIsAvailable(): void {
-        if (this._hasCheckedHammer || !this._window) {
-            return;
-        }
-
-        if (this._areChecksEnabled() && !this._window['Hammer']) {
-            console.warn(
-                'Could not find HammerJS. Certain Mosaic components may not work correctly.');
-        }
-        this._hasCheckedHammer = true;
     }
 }

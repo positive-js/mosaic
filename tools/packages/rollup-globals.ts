@@ -14,7 +14,7 @@ const rollupCdkEntryPoints = cdkSecondaryEntryPoints.reduce((globals: any, entry
     return globals;
 }, {});
 
-/** List of potential secondary entry-points for the material package. */
+/** List of potential secondary entry-points for the package. */
 const mcSecondaryEntryPoints = getSubdirectoryNames(join(buildConfig.packagesDir, 'lib'));
 
 const rollupMcEntryPoints = mcSecondaryEntryPoints.reduce((globals: any, entryPoint: string) => {

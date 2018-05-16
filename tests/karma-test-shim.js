@@ -51,6 +51,7 @@ System.config({
 
         '@ptsecurity/cdk': 'dist/packages/cdk/index.js',
         '@ptsecurity/cdk/a11y': 'dist/packages/cdk/a11y/index.js',
+        '@ptsecurity/cdk/bidi': 'dist/packages/cdk/bidi/index.js',
         '@ptsecurity/cdk/collections': 'dist/packages/cdk/collections/index.js',
         '@ptsecurity/cdk/keycodes': 'dist/packages/cdk/keycodes/index.js',
         '@ptsecurity/cdk/platform': 'dist/packages/cdk/platform/index.js',

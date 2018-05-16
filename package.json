@@ -39,7 +39,6 @@
         "@types/chalk": "^2.2.0",
         "@types/fs-extra": "^5.0.2",
         "@types/glob": "^5.0.35",
-        "@types/hammerjs": "2.0.35",
         "@types/jasmine": "^2.8.7",
         "@types/node": "9.4.6",
         "@types/rx": "4.1.1",

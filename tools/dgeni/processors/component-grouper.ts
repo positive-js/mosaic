@@ -21,7 +21,7 @@ export class ComponentGroup {
     /** Module import path for the component group. */
     moduleImportPath: string;
 
-    /** Name of the package, either material or cdk */
+    /** Name of the package, either mosaic or cdk */
     packageName: string;
 
     /** Display name of the package. */
@@ -55,7 +55,7 @@ export class ComponentGroup {
 }
 
 /**
- * Processor to group docs into top-level "Components" WRT material design, e.g., "Button", "Tabs",
+ * Processor to group docs into top-level "Components", e.g., "Button", "Tabs",
  * where each group may conists of several directives and services.
  */
 export class ComponentGrouper implements Processor {
