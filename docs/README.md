@@ -16,12 +16,12 @@ yarn add @ptsecurity/mosaic @ptsecurity/cdk
 
 #### NPM
 ```bash
-npm install --save @ptsecurity/mosaic-builds @ptsecurity/cdk-builds
+npm install --save positive-js/mosaic-builds positive-js/cdk-builds
 ```
 
 #### Yarn
 ```bash
-yarn add @ptsecurity/mosaic-builds @ptsecurity/cdk-builds
+yarn add positive-js/mosaic-builds positive-js/cdk-builds
 ```
 
 ### Step 2: Animations
