@@ -34,6 +34,9 @@
         "@angular/platform-browser-dynamic": "6.0.0",
         "@angular/platform-server": "6.0.0",
         "@angular/router": "6.0.0",
+        "@commitlint/cli": "^6.2.0",
+        "@commitlint/config-conventional": "^6.1.3",
+        "@ptsecurity/commitlint-config": "^0.1.3",
         "@ptsecurity/prettier-config": "0.1.0",
         "@ptsecurity/tslint-config": "0.5.0",
         "@types/chalk": "^2.2.0",
@@ -73,6 +76,7 @@
         "highlight.js": "^9.12.0",
         "html-loader": "0.5.5",
         "html-webpack-plugin": "^2.3.10",
+        "husky": "^0.14.3",
         "jasmine-core": "2.9.1",
         "karma": "^2.0.2",
         "karma-chrome-launcher": "2.2.0",
@@ -120,6 +124,7 @@
         "webpack-merge": "4.1.2"
     },
     "scripts": {
+        "commitmsg": "commitlint -x=./commitlint.config.js -e $GIT_PARAMS",
         "precommit": "npm run linter:styles && npm run linter:lib",
         "prettier": "lint-staged",
         "test:unit": "gulp ci:test",
