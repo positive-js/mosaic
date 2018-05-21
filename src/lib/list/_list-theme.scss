@@ -17,13 +17,14 @@
 
     .mc-list,
     .mc-list-selection {
+
         .mc-list-item {
             color: mc-color($foreground, text);
         }
 
         .mc-list-option {
             outline: none;
-            border: 1px solid transparent;
+            border: 2px solid transparent;
 
             color: mc-color($foreground, text);
 
@@ -33,7 +34,7 @@
             }
 
             &.mc-focused {
-                border: 1px solid mc-color($primary, 400);
+                border: 2px solid mc-color($primary, 500);
             }
 
             &.mc-selected {
@@ -61,9 +62,9 @@
         font-family: $font-family;
     }
 
-    // Default list
     .mc-list,
     .mc-list-selection {
+
         .mc-list-item {
             font-size: mc-font-size($config, subheading-2);
 
