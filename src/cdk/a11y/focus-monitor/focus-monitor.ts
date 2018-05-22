@@ -174,14 +174,16 @@ export class FocusMonitor implements OnDestroy {
             if (this._touchTimeoutId != null) { clearTimeout(this._touchTimeoutId); }
 
             this._lastTouchTarget = event.target;
-            this._touchTimeoutId = setTimeout(() => this._lastTouchTarget = null, TOUCH_BUFFER_MS);
+
+            this._touchTimeoutId = window.setTimeout(() => this._lastTouchTarget = null, TOUCH_BUFFER_MS);
         };
 
         // Make a note of when the window regains focus, so we can restore the origin info for the
         // focused element.
         const windowFocusListener = () => {
             this._windowFocused = true;
-            this._windowFocusTimeoutId = setTimeout(() => this._windowFocused = false, 0);
+
+            this._windowFocusTimeoutId = window.setTimeout(() => this._windowFocused = false, 0);
         };
 
         // Note: we listen to events in the capture phase so we can detect them even if the user stops
@@ -240,7 +242,8 @@ export class FocusMonitor implements OnDestroy {
     private _setOriginForCurrentEventQueue(origin: FocusOrigin): void {
         this._ngZone.runOutsideAngular(() => {
             this._origin = origin;
-            this._originTimeoutId = setTimeout(() => this._origin = null);
+
+            this._originTimeoutId = window.setTimeout(() => this._origin = null);
         });
     }
 
