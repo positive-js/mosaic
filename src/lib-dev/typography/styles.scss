@@ -1,6 +1,3 @@
 @import '../../lib/core/core';
 
-
-.demo-typography span {
-    display: block;
-}
+@include mc-core();
