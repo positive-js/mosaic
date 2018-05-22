@@ -11,7 +11,7 @@
         "no-duplicate-selectors": true,
         "no-descending-specificity": true,
         "rule-empty-line-before": ["always", {
-            "ignore": ["after-comment"]
+            "ignore": ["after-comment", "first-nested"]
         }],
         "selector-type-case": "lower",
         "selector-pseudo-element-colon-notation": "single",
