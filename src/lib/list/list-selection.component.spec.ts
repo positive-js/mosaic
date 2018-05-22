@@ -818,7 +818,10 @@ describe('McListSelection with forms', () => {
 
 @Component({
     template: `
-        <mc-list-selection id="selection-list-1" (selectionChange)="onValueChange($event)">
+        <mc-list-selection id="selection-list-1"
+                           auto-select="false"
+                           no-unselect="false"
+                           (selectionChange)="onValueChange($event)">
             <mc-list-option checkboxPosition="before" disabled="true" value="inbox">
                 Inbox (disabled selection-option)
             </mc-list-option>
@@ -929,7 +932,7 @@ class SelectionListWithTabindexBinding {
 
 @Component({
     template: `
-        <mc-list-selection [(ngModel)]="selectedOptions">
+        <mc-list-selection [(ngModel)]="selectedOptions" auto-select="false">
             <mc-list-option value="opt1">Option 1</mc-list-option>
             <mc-list-option value="opt2">Option 2</mc-list-option>
             <mc-list-option value="opt3" *ngIf="renderLastOption">Option 3</mc-list-option>

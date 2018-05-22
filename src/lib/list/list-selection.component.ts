@@ -176,7 +176,7 @@ export class McListOption implements AfterContentInit, OnDestroy, OnInit, IFocus
     }
 
     _handleClick() {
-        if (this.disabled || this.listSelection.selectOnFocus) { return; }
+        if (this.disabled || this.listSelection.autoSelect) { return; }
 
         this.toggle();
         // Emit a change event if the selected state of the option changed through user interaction.
@@ -250,11 +250,13 @@ export class McListSelection extends _McListSelectionMixinBase implements
     // The option components contained within this selection-list.
     @ContentChildren(McListOption) options: QueryList<McListOption>;
 
-    @Input() horizontal: boolean = false;
-    @Input() multiple: boolean = false;
-    @Input() selectOnFocus: boolean = false;
+    tabIndex: number;
 
-    @Input() tabIndex: number = 0;
+    autoSelect: boolean;
+    noUnselect: boolean;
+    multiple: boolean;
+
+    @Input() horizontal: boolean = false;
 
     // Emits a change event whenever the selected state of an option changes.
     @Output() readonly selectionChange: EventEmitter<McListSelectionChange> =
@@ -270,16 +272,24 @@ export class McListSelection extends _McListSelectionMixinBase implements
     // непонятна целесообразность сего
     private _modelChanges = Subscription.EMPTY;
 
-    constructor(private _element: ElementRef, @Attribute('tabindex') tabIndex: string) {
+    constructor(
+        private _element: ElementRef,
+        @Attribute('tabindex') tabIndex: string,
+        @Attribute('auto-select') autoSelect: string,
+        @Attribute('no-unselect') noUnselect: string,
+        @Attribute('multiple') multiple: string
+    ) {
         super();
+
+        this.autoSelect = autoSelect === null ? true : toBoolean(autoSelect);
+        this.multiple = multiple === null ? true : toBoolean(multiple);
+        this.noUnselect = noUnselect === null ? true : toBoolean(noUnselect);
 
         this.tabIndex = parseInt(tabIndex) || 0;
     }
 
     ngAfterContentInit(): void {
         this.horizontal = toBoolean(this.horizontal);
-        this.multiple = toBoolean(this.multiple);
-        this.selectOnFocus = toBoolean(this.selectOnFocus);
 
         this._keyManager = new FocusKeyManager<McListOption>(this.options)
             .withTypeAhead()
@@ -331,11 +341,11 @@ export class McListSelection extends _McListSelectionMixinBase implements
     }
 
     // Sets the focused option of the selection-list.
-    setFocusedOption(option: McListOption) {
+    setFocusedOption(option: McListOption): void {
         this._keyManager.updateActiveItemIndex(this._getOptionIndex(option));
 
-        if (this.selectOnFocus) {
-            if (!this.multiple) { this.options.forEach((item) => item.setSelected(false)); }
+        if (this.autoSelect) {
+            this.options.forEach((item) => item.setSelected(false));
 
             option.setSelected(true);
 
@@ -376,6 +386,8 @@ export class McListSelection extends _McListSelectionMixinBase implements
 
     // Toggles the selected state of the currently focused option.
     toggleFocusedOption(): void {
+        if (this.noUnselect && this.selectedOptions.selected.length === 1) { return; }
+
         const focusedIndex = this._keyManager.activeItemIndex;
 
         if (focusedIndex != null && this._isValidIndex(focusedIndex)) {
