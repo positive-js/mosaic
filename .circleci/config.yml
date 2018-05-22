@@ -28,14 +28,14 @@ jobs:
     steps:
       - checkout: *post_checkout
       - restore_cache: *package_lock_key
-      - run: npm run mosaic:build-release
+      - run: npm run build:lib
 
   build_cdk:
       <<: *defaults
       steps:
         - checkout: *post_checkout
         - restore_cache: *package_lock_key
-        - run: npm run cdk:build-release
+        - run: npm run build:cdk
 
   test_unit:
     <<: *defaults
@@ -52,8 +52,8 @@ jobs:
             - "c3:de:eb:9c:82:70:a8:23:f3:4e:92:b8:07:d2:22:df"
       - checkout: *post_checkout
       - restore_cache: *package_lock_key
-      - run: npm run cdk:build-release
-      - run: npm run mosaic:build-release
+      - run: npm run build:cdk
+      - run: npm run build:lib
       - run: ./scripts/deploy/publish-artifacts.sh
 
 
