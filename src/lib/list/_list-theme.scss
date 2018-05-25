@@ -63,18 +63,14 @@
 
     .mc-list,
     .mc-list-selection {
-        .mc-list-item {
-            font-size: mc-font-size($config, subheading);
-
-            @include mc-line-base(mc-font-size($config, body));
-        }
-
+        .mc-list-item,
         .mc-list-option {
             font-size: mc-font-size($config, subheading);
 
             @include mc-line-base(mc-font-size($config, body));
         }
 
+        // todo now we are not use it
         .mc-subheader {
             font-family: mc-font-family($config, subheading);
             font-size: mc-font-size($config, subheading);
