@@ -142,7 +142,8 @@
         "server-dev:list": "npm run server-dev -- --env.component list",
         "server-dev:radio": "npm run server-dev -- --env.component radio",
         "server-dev:icon": "npm run server-dev -- --env.component icon",
-        "server-dev:theme-picker": "npm run server-dev -- --env.component theme-picker"
+        "server-dev:theme-picker": "npm run server-dev -- --env.component theme-picker",
+        "server-dev:typography": "npm run server-dev -- --env.component typography"
     },
     "lint-staged": {
         "linters": {
