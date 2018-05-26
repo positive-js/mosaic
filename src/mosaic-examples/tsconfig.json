@@ -1,0 +1,22 @@
+// Configuration for IDEs only.
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "rootDir": "..",
+        "baseUrl": ".",
+        "paths": {
+            "@ptsecurity/cdk/*": [
+                "../cdk/*"
+            ],
+            "@ptsecurity/mosaic/*": [
+                "../lib/*"
+            ],
+            "@ptsecurity/mosaic": [
+                "../lib/public-api.ts"
+            ]
+        }
+    },
+    "include": [
+        "./**/*.ts"
+    ]
+}

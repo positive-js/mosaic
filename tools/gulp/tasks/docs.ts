@@ -1,18 +1,24 @@
 import * as path from 'path';
 
-import { task, src, dest } from 'gulp';
 import { Dgeni } from 'dgeni';
+import { task, src, dest } from 'gulp';
 
 import { apiDocsPackage } from '../../dgeni';
-import { sequenceTask } from '../../packages';
+import { buildConfig, sequenceTask } from '../../packages';
 
 
 const markdown = require('gulp-markdown');
 const transform = require('gulp-transform');
+const highlight = require('gulp-highlight-files');
 const htmlmin = require('gulp-htmlmin');
 const rename = require('gulp-rename');
+const flatten = require('gulp-flatten');
 const hljs = require('highlight.js');
 const dom  = require('gulp-dom');
+
+const { outputDir, packagesDir } = buildConfig;
+
+const DIST_DOCS = path.join(outputDir, 'docs');
 
 const EXAMPLE_PATTERN = /<!--\W*example\(([^)]+)\)\W*-->/g;
 
@@ -40,7 +46,7 @@ const MARKDOWN_TAGS_TO_CLASS_ALIAS = [
     'tr',
     'ul',
     'pre',
-    'code',
+    'code'
 ];
 
 // Options for the html-minifier that minifies the generated HTML files.
@@ -56,7 +62,8 @@ const markdownOptions = {
     highlight: (code: string, language: string): string => {
         if (language) {
             // highlight.js expects "typescript" written out, while Github supports "ts".
-            let lang = language.toLowerCase() === 'ts' ? 'typescript' : language;
+            const lang = language.toLowerCase() === 'ts' ? 'typescript' : language;
+
             return hljs.highlight(lang, code).value;
         }
 
@@ -68,13 +75,17 @@ task('docs', sequenceTask(
     [
         'markdown-docs-mosaic',
         'markdown-docs-cdk',
-        'api-docs'
+        'build-highlighted-examples',
+        'build-examples-module',
+        'api-docs',
+        'copy-stackblitz-examples'
     ],
     'minify-html-files'
 ));
 
 task('api-docs', () => {
     const docs = new Dgeni([apiDocsPackage]);
+
     return docs.generate();
 });
 
@@ -83,6 +94,7 @@ task('markdown-docs-mosaic', () => {
     markdown.marked.Renderer.prototype.heading = (text: string, level: number): string => {
         if (level === 3 || level === 4) {
             const escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
+
             return `
         <h${level} id="${escapedText}" class="docs-header-link">
           <span header-link="${escapedText}"></span>
@@ -112,6 +124,24 @@ task('markdown-docs-cdk', () => {
 });
 
 /**
+ * Creates syntax-highlighted html files from the examples to be used for the source view of
+ * live examples on the docs site.
+ */
+task('build-highlighted-examples', () => {
+    // rename files to fit format: [filename]-[filetype].html
+    const renameFile = (filePath: any) => {
+        const extension = filePath.extname.slice(1);
+        filePath.basename = `${filePath.basename}-${extension}`;
+    };
+
+    return src('src/mosaic-examples/**/*.+(html|css|ts)')
+        .pipe(flatten())
+        .pipe(rename(renameFile))
+        .pipe(highlight())
+        .pipe(dest('dist/docs/examples'));
+});
+
+/**
  * Minifies all HTML files that have been generated. The HTML files for the
  * highlighted examples can be skipped, because it won't have any effect.
  */
@@ -121,6 +151,11 @@ task('minify-html-files', () => {
         .pipe(dest('dist/docs'));
 });
 
+/** Copies example sources to be used as stackblitz assets for the docs site. */
+task('copy-stackblitz-examples', () => {
+    src(path.join(packagesDir, 'mosaic-examples', '**/*'))
+        .pipe(dest(path.join(DIST_DOCS, 'stackblitz', 'examples')));
+});
 
 /** Updates the markdown file's content to work inside of the docs app. */
 function transformMarkdownFiles(buffer: Buffer, file: any): string {
@@ -151,7 +186,7 @@ function fixMarkdownDocLinks(link: string, filePath: string): string {
         return link;
     }
 
-    let baseName = path.basename(link, path.extname(link));
+    const baseName = path.basename(link, path.extname(link));
 
     // Temporary link the file to the /guide URL because that's the route where the
     // guides can be loaded in the Mosaic docs.
@@ -165,8 +200,8 @@ function fixMarkdownDocLinks(link: string, filePath: string): string {
  */
 function createTagNameAliaser(classPrefix: string) {
     return function() {
-        MARKDOWN_TAGS_TO_CLASS_ALIAS.forEach(tag => {
-            for (let el of this.querySelectorAll(tag)) {
+        MARKDOWN_TAGS_TO_CLASS_ALIAS.forEach((tag) => {
+            for (const el of this.querySelectorAll(tag)) {
                 el.classList.add(`${classPrefix}-${tag}`);
             }
         });

@@ -56,6 +56,16 @@ jobs:
       - run: npm run build:lib
       - run: ./scripts/deploy/publish-artifacts.sh
 
+  docs_publish:
+    <<: *defaults
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "c3:de:eb:9c:82:70:a8:23:f3:4e:92:b8:07:d2:22:df"
+      - checkout: *post_checkout
+      - restore_cache: *package_lock_key
+      - run: ./scripts/deploy/publish-docs.sh
+
 
 workflows:
   version: 2
@@ -76,6 +86,14 @@ workflows:
           requires:
             - test_unit
             - build_cdk
+            - build_mosaic
+          filters:
+              branches:
+                only:
+                  - master
+      - docs_publish:
+          requires:
+            - test_unit
             - build_mosaic
           filters:
               branches:

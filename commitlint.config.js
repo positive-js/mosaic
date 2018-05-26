@@ -5,6 +5,9 @@ module.exports = {
             2,
             'always',
             [
+                'build',
+                'docs',
+                'chore',
                 'cdk', 
                 'common',
                 'typography',
