@@ -1,13 +1,12 @@
 # folders
-/node_modules
+node_modules/
 coverage/
 dist/
-build/
-build-docs/
-dist-dll/
-dist-dll-docs/
 tmp/
 temp/
+
+# Example module file will be auto-generated.
+/src/mosaic-examples/example-module.ts
 
 # IDEs
 /.idea
