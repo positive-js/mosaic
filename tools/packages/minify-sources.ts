@@ -1,6 +1,5 @@
 import { writeFileSync } from 'fs';
 import { basename } from 'path';
-import { MinifyOptions } from 'uglify-js';
 
 
 /* tslint:disable:no-var-requires */
@@ -14,12 +13,13 @@ const uglify = require('uglify-js');
 export function uglifyJsFile(inputPath: string, outputPath: string) {
     const sourceMapPath = `${outputPath}.map`;
 
-    const minifyOptions: MinifyOptions = {
+    const result = uglify.minify(inputPath, {
         inSourceMap: `${inputPath}.map`,
-        outSourceMap: basename(sourceMapPath)
-    };
-
-    const result = uglify.minify(inputPath, minifyOptions);
+        outSourceMap: basename(sourceMapPath),
+        output: {
+            comments: 'some'
+        }
+    });
 
     writeFileSync(outputPath, result.code);
     writeFileSync(sourceMapPath, result.map);

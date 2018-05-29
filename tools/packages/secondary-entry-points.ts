@@ -1,6 +1,6 @@
 import { spawnSync } from 'child_process';
 import { existsSync, lstatSync, readdirSync } from 'fs';
-import {platform} from 'os';
+import { platform } from 'os';
 import { join } from 'path';
 
 import { BuildPackage } from './build-package';
