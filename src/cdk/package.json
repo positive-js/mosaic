@@ -1,31 +1,32 @@
 {
-  "name": "@ptsecurity/cdk",
-  "version": "0.0.0-PLACEHOLDER",
-  "description": "Mosaic Component Development Kit",
-  "main": "./bundles/cdk.umd.js",
-  "module": "./esm5/cdk.es5.js",
-  "es2015": "./esm2015/cdk.js",
-  "typings": "./cdk.d.ts",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/positive-js/mosaic.git"
-  },
-  "keywords": [
-    "cdk",
-    "component",
-    "development",
-    "kit"
-  ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/positive-js/mosaic/issues"
-  },
-  "homepage": "https://github.com/positive-js/mosaic#readme",
-  "peerDependencies": {
-    "@angular/core": "0.0.0-NG",
-    "@angular/common": "0.0.0-NG"
-  },
-  "dependencies": {
-    "tslib": "^1.7.1"
-  }
+    "name": "@ptsecurity/cdk",
+    "version": "0.0.0-PLACEHOLDER",
+    "description": "Mosaic Component Development Kit",
+    "main": "./bundles/cdk.umd.js",
+    "module": "./esm5/cdk.es5.js",
+    "es2015": "./esm2015/cdk.js",
+    "typings": "./cdk.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/positive-js/mosaic.git"
+    },
+    "keywords": [
+        "cdk",
+        "component",
+        "development",
+        "kit"
+    ],
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/positive-js/mosaic/issues"
+    },
+    "homepage": "https://github.com/positive-js/mosaic#readme",
+    "peerDependencies": {
+        "@angular/core": "0.0.0-NG",
+        "@angular/common": "0.0.0-NG"
+    },
+    "dependencies": {
+        "tslib": "^1.7.1"
+    },
+    "sideEffects": false
 }

@@ -306,8 +306,17 @@ export class McListSelection extends _McListSelectionMixinBase implements
         // непонятна целесообразность сего
         // Sync external changes to the model back to the options.
         this._modelChanges = this.selectedOptions.onChange!.subscribe((event) => {
-            event.added.forEach((item) => { item.selected = true; });
-            event.removed.forEach((item) => { item.selected = false; });
+            if (event.added) {
+                for (const item of event.added) {
+                    item.selected = true;
+                }
+            }
+
+            if (event.removed) {
+                for (const item of event.removed) {
+                    item.selected = false;
+                }
+            }
         });
 
         this.updateScrollSize();

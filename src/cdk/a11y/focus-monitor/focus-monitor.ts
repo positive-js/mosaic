@@ -7,7 +7,6 @@ import {
     OnDestroy,
     Optional,
     Output,
-    Renderer2,
     SkipSelf
 } from '@angular/core';
 

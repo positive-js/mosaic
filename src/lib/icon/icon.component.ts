@@ -3,7 +3,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     Directive,
-    ElementRef, Input,
+    ElementRef,
     ViewEncapsulation
 } from '@angular/core';
 

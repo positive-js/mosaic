@@ -1,4 +1,4 @@
-import { Injectable, Optional, SkipSelf, OnDestroy } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 
 
 // Users of the Dispatcher never need to see this type, but TypeScript requires it to be exported.

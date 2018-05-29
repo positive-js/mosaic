@@ -4,45 +4,55 @@ import { buildConfig } from './build-config';
 import { getSubdirectoryNames } from './secondary-entry-points';
 import { dashCaseToCamelCase } from './utils';
 
+
+/** Generates rollup entry point mappings for the given package and entry points. */
+function generateRollupEntryPoints(packageName: string, entryPoints: string[]):
+    {[k: string]: string} {
+    return entryPoints.reduce((globals: {[k: string]: string}, entryPoint: string) => {
+        globals[`@ptsecurity/${packageName}/${entryPoint}`] =
+            `ng.${dashCaseToCamelCase(packageName)}.${dashCaseToCamelCase(entryPoint)}`;
+
+        return globals;
+    }, {});
+}
+
 /** List of potential secondary entry-points for the cdk package. */
 const cdkSecondaryEntryPoints = getSubdirectoryNames(join(buildConfig.packagesDir, 'cdk'));
 
-/** Object with all cdk entry points in the format of Rollup globals. */
-const rollupCdkEntryPoints = cdkSecondaryEntryPoints.reduce((globals: any, entryPoint: string) => {
-    globals[`@ptsecurity/cdk/${entryPoint}`] = `ng.cdk.${dashCaseToCamelCase(entryPoint)}`;
-
-    return globals;
-}, {});
 
 /** List of potential secondary entry-points for the package. */
 const mcSecondaryEntryPoints = getSubdirectoryNames(join(buildConfig.packagesDir, 'lib'));
 
-const rollupMcEntryPoints = mcSecondaryEntryPoints.reduce((globals: any, entryPoint: string) => {
-    globals[`@ptsecurity/mosaic/${entryPoint}`] = `ng.mosaic.${dashCaseToCamelCase(entryPoint)}`;
 
-    return globals;
-}, {});
+/** Object with all cdk entry points in the format of Rollup globals. */
+const rollupCdkEntryPoints = generateRollupEntryPoints('cdk', cdkSecondaryEntryPoints);
+
+/** Object with all mosaic entry points in the format of Rollup globals. */
+const rollupMcEntryPoints = generateRollupEntryPoints('mosaic', mcSecondaryEntryPoints);
+
 
 /** Map of globals that are used inside of the different packages. */
 export const rollupGlobals = {
-    tslib: 'tslib',
+    'tslib': 'tslib',
 
     '@angular/animations': 'ng.animations',
-    '@angular/core': 'ng.core',
     '@angular/common': 'ng.common',
-    '@angular/forms': 'ng.forms',
     '@angular/common/http': 'ng.common.http',
-    '@angular/router': 'ng.router',
-    '@angular/platform-browser': 'ng.platformBrowser',
-    '@angular/platform-server': 'ng.platformServer',
-    '@angular/platform-browser-dynamic': 'ng.platformBrowserDynamic',
-    '@angular/platform-browser/animations': 'ng.platformBrowser.animations',
-    '@angular/core/testing': 'ng.core.testing',
-    '@angular/common/testing': 'ng.common.testing',
     '@angular/common/http/testing': 'ng.common.http.testing',
+    '@angular/common/testing': 'ng.common.testing',
+    '@angular/core': 'ng.core',
+    '@angular/core/testing': 'ng.core.testing',
+    '@angular/forms': 'ng.forms',
+    '@angular/platform-browser': 'ng.platformBrowser',
+    '@angular/platform-browser-dynamic': 'ng.platformBrowserDynamic',
+    '@angular/platform-browser-dynamic/testing': 'ng.platformBrowserDynamic.testing',
+    '@angular/platform-browser/animations': 'ng.platformBrowser.animations',
+    '@angular/platform-server': 'ng.platformServer',
+    '@angular/router': 'ng.router',
 
-    '@ptsecurity/mosaic': 'ng.mosaic',
     '@ptsecurity/cdk': 'ng.cdk',
+    '@ptsecurity/mosaic': 'ng.mosaic',
+    '@ptsecurity/mosaic-examples': 'ng.mosaicExamples',
 
     ...rollupCdkEntryPoints,
     ...rollupMcEntryPoints,
