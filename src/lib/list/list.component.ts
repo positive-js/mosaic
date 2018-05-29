@@ -10,6 +10,7 @@ import { McLine, McLineSetter } from '@ptsecurity/mosaic/core';
 export class McListBase {}
 
 @Component({
+    moduleId: module.id,
     selector: 'mc-list',
     host: { class: 'mc-list' },
     template: '<ng-content></ng-content>',
@@ -34,8 +35,8 @@ export class McListSubheaderCssStyler {}
 // Boilerplate for applying mixins to McListItem.
 export class McListItemBase {}
 
-// An item within a Material Design list.
 @Component({
+    moduleId: module.id,
     selector: 'mc-list-item, a[mc-list-item]',
     host: {
         class: 'mc-list-item',

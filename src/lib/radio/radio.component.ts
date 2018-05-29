@@ -288,6 +288,7 @@ export const _McRadioButtonMixinBase =
 
 
 @Component({
+    moduleId: module.id,
     selector: 'mc-radio-button',
     templateUrl: 'radio.component.html',
     styleUrls: ['radio.css'],

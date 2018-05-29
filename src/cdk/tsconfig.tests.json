@@ -14,7 +14,8 @@
         }
     },
     "files": [
-        "./testing/index.ts"
+        "./testing/index.ts",
+        "typings.d.ts"
     ],
     "angularCompilerOptions": {
         "strictMetadataEmit": true,

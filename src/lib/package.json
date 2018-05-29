@@ -1,10 +1,16 @@
 {
     "name": "@ptsecurity/mosaic",
     "version": "0.0.0-PLACEHOLDER",
+    "description": "Mosaic",
     "main": "./bundles/mosaic.umd.js",
     "module": "./esm5/mosaic.es5.js",
     "es2015": "./esm2015/mosaic.js",
     "typings": "./mosaic.d.ts",
+    "keywords": [
+        "angular",
+        "mosaic",
+        "components"
+    ],
     "license": "MIT",
     "peerDependencies": {
         "@ptsecurity/cdk": "0.0.0-PLACEHOLDER",
@@ -13,5 +19,6 @@
     },
     "dependencies": {
         "tslib": "^1.7.1"
-    }
+    },
+    "sideEffects": false
 }

@@ -108,6 +108,7 @@ export const _McButtonMixinBase = mixinColor(mixinDisabled(McButtonBase));
 
 
 @Component({
+    moduleId: module.id,
     selector: `
         button[mc-button],
         button[mc-xs-button],

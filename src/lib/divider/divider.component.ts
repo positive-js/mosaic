@@ -4,6 +4,7 @@ import { toBoolean } from '@ptsecurity/mosaic/core';
 
 
 @Component({
+    moduleId: module.id,
     selector: 'mc-divider',
     host: {
         class: 'mc-divider',
