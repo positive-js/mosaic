@@ -137,7 +137,6 @@ export class PackageBundler {
         };
 
         const writeOptions = {
-            // Keep the moduleId empty because we don't want to force developers to a specific moduleId.
             name: config.moduleName || 'ng.mosaic',
             amd: { id: config.importName },
             banner: buildConfig.licenseBanner,
