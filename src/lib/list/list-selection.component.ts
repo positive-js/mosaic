@@ -41,7 +41,6 @@ import {
  * if the current item is selected.
  */
 @Component({
-    moduleId: module.id,
     exportAs: 'mcListOption',
     selector: 'mc-list-option',
     host: {
@@ -225,7 +224,6 @@ export class McListSelectionBase {}
 export const _McListSelectionMixinBase = mixinDisabled(McListSelectionBase);
 
 @Component({
-    moduleId: module.id,
     exportAs: 'mcListSelection',
     selector: 'mc-list-selection',
     template: '<ng-content></ng-content>',

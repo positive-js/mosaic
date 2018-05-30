@@ -25,7 +25,6 @@ export const _McIconMixinBase = mixinColor(McIconBase);
 
 
 @Component({
-    moduleId: module.id,
     selector: `[mc-icon]`,
     template: '<ng-content></ng-content>',
     styleUrls: ['./icon.css'],
