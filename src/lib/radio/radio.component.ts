@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
-import {FocusMonitor, FocusOrigin} from '@ptsecurity/cdk/a11y';
 import {UniqueSelectionDispatcher} from '@ptsecurity/cdk/collections';
 
 import {
@@ -440,7 +439,6 @@ export class McRadioButton extends _McRadioButtonMixinBase
         @Optional() radioGroup: McRadioGroup,
         elementRef: ElementRef,
         private _changeDetector: ChangeDetectorRef,
-        private _focusMonitor: FocusMonitor,
         private _radioDispatcher: UniqueSelectionDispatcher
     ) {
 
@@ -465,21 +463,14 @@ export class McRadioButton extends _McRadioButtonMixinBase
         }
     }
 
-    ngAfterViewInit() {
-        this._focusMonitor
-            .monitor(this._inputElement.nativeElement)
-            .subscribe((focusOrigin) => this.onInputFocusChange(focusOrigin));
-    }
+    ngAfterViewInit() {}
 
     ngOnDestroy() {
-        this._focusMonitor.stopMonitoring(this._inputElement.nativeElement);
         this.removeUniqueSelectionListener();
     }
 
     /** Focuses the radio button. */
-    focus(): void {
-        this._focusMonitor.focusVia(this._inputElement.nativeElement, 'keyboard');
-    }
+    focus(): void {}
 
     /**
      * Marks the radio button as needing checking for change detection.
@@ -525,23 +516,5 @@ export class McRadioButton extends _McRadioButtonMixinBase
     /** Dispatch change event with current value. */
     private emitChangeEvent(): void {
         this.change.emit(new McRadioChange(this, this._value));
-    }
-
-    /** Function is called whenever the focus changes for the input element. */
-    private onInputFocusChange(focusOrigin: FocusOrigin) {
-
-        // if (!this.isFocused && focusOrigin === 'keyboard') {
-        //     console.log("Must be true");
-        //     this.isFocused = true;
-        // } else if (!focusOrigin) {
-        //     if (this.radioGroup) {
-        //         this.radioGroup.touch();
-        //     }
-        //
-        //     if (this.isFocused) {
-        //         console.log("Must be false");
-        //         this.isFocused = false;
-        //     }
-        // }
     }
 }
