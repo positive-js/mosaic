@@ -13,6 +13,7 @@ $mc-toggle-padding: 26px !default;
     display: inline-flex;
     align-items: center;
     white-space: nowrap;
+    vertical-align: middle;
 }
 
 // Text label next to radio.
@@ -47,6 +48,7 @@ $mc-toggle-padding: 26px !default;
             width: $mc-radio-size;
             height: $mc-radio-size;
             display: block;
+            box-shadow: inset 1px 1px 1px 0 rgba(0, 0, 0, 0.2);
             border: {
                 width: 1px;
                 style: solid;
@@ -74,7 +76,6 @@ $mc-toggle-padding: 26px !default;
 
             &:before {
                 background-color: rgba(0, 0, 0, 0.06);
-                box-shadow: inset 1px 1px 1px 0 rgba(0, 0, 0, 0.2);
             }
         }
     }
@@ -87,6 +88,7 @@ $mc-toggle-padding: 26px !default;
             }
 
             &:before {
+                box-shadow: unset;
                 background: #338fcc; // BLUE-500
                 border-color: #206ea2; // BLUE-600
             }
@@ -112,6 +114,13 @@ $mc-toggle-padding: 26px !default;
 
             &:before {
                 background: #f5f5f5; // GRAY-40
+                border: {
+                    color: #e6e6e6; //GRAY-100
+                }
+            }
+
+            &:after {
+                background: #cccccc; // GRAY-200
             }
         }
     }

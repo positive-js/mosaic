@@ -1,9 +1,9 @@
 import {Component, NgModule, ViewEncapsulation} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import {BrowserModule} from '@angular/platform-browser';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
-import { McRadioModule } from '../../lib/radio';
+import {McRadioModule} from '../../lib/radio';
 import {ThemePickerModule} from '../theme-picker';
 
 
@@ -25,6 +25,11 @@ export class DemoComponent {
         'Tomato',
         'Крякать как уточка'
     ];
+
+    selectionList = [
+        {name: 'Yes', value: 'true', selected: false},
+        {name: 'No', value: 'false', selected: true}
+    ];
 }
 
 @NgModule({
@@ -41,7 +46,8 @@ export class DemoComponent {
         DemoComponent
     ]
 })
-export class DemoModule {}
+export class DemoModule {
+}
 
 platformBrowserDynamic()
     .bootstrapModule(DemoModule)

@@ -17,7 +17,7 @@
 
 <br/>
 <b>Disabled buttons:</b>
-<br/>
+<br/><br/>
 <mc-radio-group
     class="example-radio-group"
     name="my_options"
@@ -29,3 +29,15 @@
 
 <br />
 <button>click</button>
+<br/><br/>
+<b>Disabled selected buttons:</b>
+<br/><br/>
+<mc-radio-group class="example-radio-group">
+    <mc-radio-button class="example-radio-button" *ngFor="let data of selectionList"
+                     name="data.value"
+                     [disabled]="true"
+                     [checked]="data.selected"
+                     [value]="data.value">
+        {{data.name}}
+    </mc-radio-button>
+</mc-radio-group>
