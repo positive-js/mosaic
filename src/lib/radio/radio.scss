@@ -1,7 +1,7 @@
-
 $mc-radio-size: 16px !default;
+$mc-on-focus-size: 18px !default;
 // Padding between input toggles and their labels
-$mc-toggle-padding: 8px !default;
+$mc-toggle-padding: 26px !default;
 
 // Top-level host container.
 .mc-radio-button {
@@ -13,59 +13,6 @@ $mc-toggle-padding: 8px !default;
     display: inline-flex;
     align-items: center;
     white-space: nowrap;
-    vertical-align: middle;
-}
-
-// Container for radio circles.
-.mc-radio-container {
-    box-sizing: border-box;
-    display: inline-block;
-    position: relative;
-    width: $mc-radio-size;
-    height: $mc-radio-size;
-    // The radio container is inside of a inline-flex element and may shrink if the label
-    // is wide and text-wrapping is enabled.
-    flex-shrink: 0;
-}
-
-// The outer circle for the radio, always present.
-.mc-radio-outer-circle {
-    box-sizing: border-box;
-    height: $mc-radio-size;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: $mc-radio-size;
-    border: {
-        width: 1px;
-        style: solid;
-        radius: 50%;
-    }
-}
-
-// The inner circle for the radio, shown when checked.
-.mc-radio-inner-circle {
-    border-radius: 50%;
-    box-sizing: border-box;
-    height: $mc-radio-size;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: $mc-radio-size;
-
-    .mc-radio-checked & {
-
-        &:before {
-            content: '';
-            display: block;
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            margin-left: 5px;
-            margin-top: 5px;
-            border-radius: 50%;
-        }
-    }
 }
 
 // Text label next to radio.
@@ -73,7 +20,6 @@ $mc-toggle-padding: 8px !default;
     display: inline-block;
     order: 0;
     line-height: inherit;
-    padding-left: $mc-toggle-padding;
     padding-right: 0;
 
     [dir='rtl'] & {
@@ -82,6 +28,91 @@ $mc-toggle-padding: 8px !default;
     }
 }
 
-.mc-radio-disabled, .mc-radio-disabled .mc-radio-label {
-    cursor: default;
+.mc-radio-input {
+    position: absolute;
+    outline: none;
+    opacity: 0;
+
+    + .mc-radio-label-content {
+        position: relative;
+        cursor: pointer;
+        padding-left: $mc-toggle-padding;
+
+        &:before {
+            position: absolute;
+            left: 0;
+            top: -1px;
+            content: '';
+            background: white;
+            width: $mc-radio-size;
+            height: $mc-radio-size;
+            display: block;
+            border: {
+                width: 1px;
+                style: solid;
+                radius: 50%;
+                color: #b3b3b3; //GRAY-300
+            }
+        }
+
+        &:after {
+            background: #333333;
+            content: '';
+            top: 5px;
+            left: 6px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            position: absolute;
+            color: #333333;
+            opacity: 0;
+        }
+    }
+
+    &:hover {
+        + .mc-radio-label-content {
+
+            &:before {
+                background-color: rgba(0, 0, 0, 0.06);
+                box-shadow: inset 1px 1px 1px 0 rgba(0, 0, 0, 0.2);
+            }
+        }
+    }
+
+    &:checked {
+        + .mc-radio-label-content {
+            &:after {
+                opacity: 1;
+                background: white;
+            }
+
+            &:before {
+                background: #338fcc; // BLUE-500
+                border-color: #206ea2; // BLUE-600
+            }
+        }
+    }
+
+    &:focus {
+        + .mc-radio-label-content:before {
+            top: -2px;
+            left: -1px;
+            border: {
+                width: 2px;
+                color: green; // BLUE-500
+            }
+        }
+    }
+
+    &[disabled] {
+        cursor: default;
+
+        + .mc-radio-label-content {
+            cursor: default;
+
+            &:before {
+                background: #f5f5f5; // GRAY-40
+            }
+        }
+    }
 }

@@ -293,6 +293,7 @@ export const _McRadioButtonMixinBase =
     styleUrls: ['radio.css'],
     inputs: ['color', 'tabIndex'],
     encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     exportAs: 'mcRadioButton',
     host: {
         'class': 'mc-radio-button',
@@ -300,8 +301,7 @@ export const _McRadioButtonMixinBase =
         '[class.mc-radio-checked]': 'checked',
         '[class.mc-radio-disabled]': 'disabled',
         '(focus)': '_inputElement.nativeElement.focus()'
-    },
-    changeDetection: ChangeDetectionStrategy.OnPush
+    }
 })
 export class McRadioButton extends _McRadioButtonMixinBase
     implements OnInit, AfterViewInit, OnDestroy, CanColor, HasTabIndex {
@@ -415,6 +415,9 @@ export class McRadioButton extends _McRadioButtonMixinBase
     /** The parent radio group. May or may not be present. */
     radioGroup: McRadioGroup;
 
+    @Input()
+    isFocused: boolean = false;
+
     /** ID of the native input element inside `<mc-radio-button>` */
     get inputId(): string { return `${this.id || this._uniqueId}-input`; }
 
@@ -526,8 +529,19 @@ export class McRadioButton extends _McRadioButtonMixinBase
 
     /** Function is called whenever the focus changes for the input element. */
     private onInputFocusChange(focusOrigin: FocusOrigin) {
-        if (!focusOrigin && this.radioGroup) {
-            this.radioGroup.touch();
-        }
+
+        // if (!this.isFocused && focusOrigin === 'keyboard') {
+        //     console.log("Must be true");
+        //     this.isFocused = true;
+        // } else if (!focusOrigin) {
+        //     if (this.radioGroup) {
+        //         this.radioGroup.touch();
+        //     }
+        //
+        //     if (this.isFocused) {
+        //         console.log("Must be false");
+        //         this.isFocused = false;
+        //     }
+        // }
     }
 }
