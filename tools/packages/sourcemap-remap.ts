@@ -6,8 +6,8 @@ const sorcery = require('sorcery');
  * This is useful when multiple transformation happen (e.g `TSC -> Rollup -> Uglify`)
  */
 export async function remapSourcemap(sourceFile: string) {
-  // Once sorcery loaded the chain of sourcemaps, the new sourcemap will be written asynchronously.
-  return (await sorcery.load(sourceFile)).write();
+    // Once sorcery loaded the chain of sourcemaps, the new sourcemap will be written asynchronously.
+    return (await sorcery.load(sourceFile)).write();
 }
 
 

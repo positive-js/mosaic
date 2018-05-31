@@ -4,14 +4,14 @@ import { join } from 'path';
 import { BuildPackage } from '../build-package';
 import { inlineResourcesForDirectory } from '../inline-resources';
 
+import { composeRelease } from '../build-release';
+
 import { buildScssTask } from './build-scss-task';
 import { sequenceTask } from './sequence-task';
-import {composeRelease} from '../build-release';
 
 
-/* tslint:disable:no-var-requires */
+/* tslint:disable-next-line:no-var-requires */
 const htmlmin = require('gulp-htmlmin');
-/* tslint:enable:no-var-requires */
 
 const htmlMinifierOptions = {
     collapseWhitespace: true,

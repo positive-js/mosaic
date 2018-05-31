@@ -1,8 +1,8 @@
-import { red } from 'chalk';
+import * as chalk from 'chalk';
+
 import { readFileSync, writeFileSync } from 'fs';
 import { sync as glob } from 'glob';
 import { join } from 'path';
-
 
 import { BuildPackage } from './build-package';
 import { ngcCompile } from './ngc-compile';
@@ -25,10 +25,9 @@ export async function compileEntryPoint(buildPackage: BuildPackage, tsConfigName
     }
 
     return ngcCompile(ngcFlags).catch(() => {
-        const error = red(`Failed to compile ${secondaryEntryPoint} using ${entryPointTSConfigPath}`);
-        /* tslint:disable:no-console */
+        const error = chalk.default.red(`Failed to compile ${secondaryEntryPoint} using ${entryPointTSConfigPath}`);
+        /* tslint:disable-next-line:no-console */
         console.error(error);
-        /* tslint:enable:no-console */
 
         return Promise.reject(error);
     });

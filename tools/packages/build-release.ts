@@ -1,14 +1,15 @@
-import { BuildPackage } from './build-package';
+import { appendFileSync } from 'fs';
+import { mkdirpSync } from 'fs-extra';
 import { join } from 'path';
-import {buildConfig} from './build-config';
-import {inlinePackageMetadataFiles} from './metadata-inlining';
-import {copyFiles} from './copy-files';
-import {replaceVersionPlaceholders} from './version-placeholders';
-import {createTypingsReexportFile} from './typings-reexport';
-import {createMetadataReexportFile} from './metadata-reexport';
-import {mkdirpSync} from 'fs-extra';
-import {createEntryPointPackageJson} from './entry-point-package-json';
-import {appendFileSync} from "fs";
+
+import { buildConfig } from './build-config';
+import { BuildPackage } from './build-package';
+import { copyFiles } from './copy-files';
+import { createEntryPointPackageJson } from './entry-point-package-json';
+import { inlinePackageMetadataFiles } from './metadata-inlining';
+import { createMetadataReexportFile } from './metadata-reexport';
+import { createTypingsReexportFile } from './typings-reexport';
+import { replaceVersionPlaceholders } from './version-placeholders';
 
 
 const {packagesDir, outputDir, projectDir} = buildConfig;
@@ -57,14 +58,14 @@ export function composeRelease(buildPackage: BuildPackage) {
 
     if (buildPackage.exportsSecondaryEntryPointsAtRoot) {
         const es2015Exports = buildPackage.secondaryEntryPoints
-            .map(p => `export * from './${p}';`).join('\n');
+            .map((p) => `export * from './${p}';`).join('\n');
         appendFileSync(join(releasePath, `${name}.d.ts`), es2015Exports, 'utf-8');
 
         // When re-exporting secondary entry-points, we need to manually create a metadata file that
         // re-exports everything.
         createMetadataReexportFile(
             releasePath,
-            buildPackage.secondaryEntryPoints.concat(['typings/index']).map(p => `./${p}`),
+            buildPackage.secondaryEntryPoints.concat(['typings/index']).map((p) => `./${p}`),
             name,
             importAsName);
     }
@@ -74,7 +75,7 @@ function createFilesForSecondaryEntryPoint(buildPackage: BuildPackage, releasePa
     const {name} = buildPackage;
     const packageOut = buildPackage.outputDir;
 
-    buildPackage.secondaryEntryPoints.forEach(entryPointName => {
+    buildPackage.secondaryEntryPoints.forEach((entryPointName) => {
         // Create a directory in the root of the package for this entry point that contains
         // * A package.json that lists the different bundle locations
         // * An index.d.ts file that re-exports the index.d.ts from the typings/ directory
@@ -105,7 +106,7 @@ function createFilesForSecondaryEntryPoint(buildPackage: BuildPackage, releasePa
 }
 
 function copySecondaryEntryPointStylesheets(buildPackage: BuildPackage, releasePath: string) {
-    buildPackage.secondaryEntryPoints.forEach(entryPointName => {
+    buildPackage.secondaryEntryPoints.forEach((entryPointName) => {
         const entryPointDir = join(buildPackage.outputDir, entryPointName);
 
         copyFiles(entryPointDir, `_${entryPointName}.scss`, releasePath);

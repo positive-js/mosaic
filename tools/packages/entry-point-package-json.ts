@@ -11,8 +11,8 @@ export function createEntryPointPackageJson(destDir: string, packageName: string
         main: `../bundles/${packageName}-${entryPointName}.umd.js`,
         module: `../esm5/${entryPointName}.es5.js`,
         es2015: `../esm2015/${entryPointName}.js`,
-        sideEffects: false,
+        sideEffects: false
     };
-
+    /* tslint:disable-next-line:no-magic-numbers */
     writeFileSync(join(destDir, 'package.json'), JSON.stringify(content, null, 2), 'utf-8');
 }

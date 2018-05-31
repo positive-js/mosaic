@@ -33,6 +33,7 @@ const rollupMcEntryPoints = generateRollupEntryPoints('mosaic', mcSecondaryEntry
 
 /** Map of globals that are used inside of the different packages. */
 export const rollupGlobals = {
+    /* tslint:disable-next-line:object-literal-key-quotes */
     'tslib': 'tslib',
 
     '@angular/animations': 'ng.animations',
@@ -56,7 +57,7 @@ export const rollupGlobals = {
 
     ...rollupCdkEntryPoints,
     ...rollupMcEntryPoints,
-
+    /* tslint:disable-next-line:object-literal-key-quotes */
     'rxjs': 'rxjs',
     'rxjs/operators': 'rxjs.operators'
 };

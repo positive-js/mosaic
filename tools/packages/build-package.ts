@@ -1,11 +1,11 @@
+import * as chalk from 'chalk';
 import { join } from 'path';
-import chalk from 'chalk';
 
 import { PackageBundler } from './build-bundles';
 import { buildConfig } from './build-config';
 import { compileEntryPoint, renamePrivateReExportsToBeUnique } from './compile-entry-point';
-import { getSecondaryEntryPointsForPackage } from './secondary-entry-points';
 import { ngcCompile } from './ngc-compile';
+import { getSecondaryEntryPointsForPackage } from './secondary-entry-points';
 
 
 const { packagesDir, outputDir } = buildConfig;
@@ -121,8 +121,10 @@ export class BuildPackage {
         const entryPointTsconfigPath = join(entryPointPath, tsconfigName);
 
         return ngcCompile(['-p', entryPointTsconfigPath]).catch(() => {
-            const error = chalk.red(`Failed to compile ${secondaryEntryPoint} using ${entryPointTsconfigPath}`);
+            const error = chalk.default.red(`Failed to compile ${secondaryEntryPoint} using ${entryPointTsconfigPath}`);
+            /* tslint:disable-next-line:no-console */
             console.error(error);
+
             return Promise.reject(error);
         });
     }
