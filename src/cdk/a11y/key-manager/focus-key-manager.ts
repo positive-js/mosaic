@@ -27,17 +27,10 @@ export class FocusKeyManager<T> extends ListKeyManager<IFocusableOption & T> {
     }
 
     /**
-     * Sets the active item to the item at the specified
-     * index and focuses the newly active item.
-     * @param index Index of the item to be set as active.
-     */
-    setActiveItem(index: number): void;
-
-    /**
-     * Sets the active item to the item that is specified and focuses it.
+     * Sets the active item or index to the item that is specified and focuses it.
      * @param item Item to be set as active.
      */
-    setActiveItem(item: T): void;
+    setActiveItem(item: number | T): void;
 
     setActiveItem(item: any): void {
         super.setActiveItem(item);

@@ -13,7 +13,10 @@
 <!--<br><br><br>-->
 
 <h5>multiple selection</h5>
-<mc-list-selection [(ngModel)]="multipleSelected" (selectionChange)="onSelectionChange($event)">
+<mc-list-selection
+    class="mc-no-select"
+    [(ngModel)]="multipleSelected"
+    (selectionChange)="onSelectionChange($event)">
     <mc-list-option value="Disabled" disabled>Disabled</mc-list-option>
     <mc-list-option value="Normal">Normal</mc-list-option>
     <mc-list-option value="Hovered" class="mc-hovered">Hovered</mc-list-option>

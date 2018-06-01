@@ -42,7 +42,7 @@ export class DemoComponent {
     ];
 
     onSelectionChange($event: McListSelectionChange) {
-        // console.log('onSelectionChange');
+        console.log(`onSelectionChange: ${$event.option.value}`);
     }
 }
 

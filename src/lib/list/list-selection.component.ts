@@ -71,6 +71,8 @@ export class McListOption implements AfterContentInit, OnDestroy, OnInit, IFocus
 
     @Input() value: any;
 
+    private _focusHandlerInProgress: boolean;
+
     @Input()
     get disabled() {
         return this._disabled || (this.listSelection && this.listSelection.disabled);
@@ -149,6 +151,8 @@ export class McListOption implements AfterContentInit, OnDestroy, OnInit, IFocus
 
     focus(): void {
         this._element.nativeElement.focus();
+
+        this.listSelection.setFocusedOption(this);
     }
 
     getLabel() {
@@ -156,11 +160,9 @@ export class McListOption implements AfterContentInit, OnDestroy, OnInit, IFocus
     }
 
     setSelected(selected: boolean) {
-        if (this._selected === selected) { return; }
+        if (this._selected === selected || !this.listSelection.selectedOptions) { return; }
 
         this._selected = selected;
-
-        if (!this.listSelection.selectedOptions) { return; }
 
         if (selected) {
             this.listSelection.selectedOptions.select(this);
@@ -176,18 +178,15 @@ export class McListOption implements AfterContentInit, OnDestroy, OnInit, IFocus
     }
 
     _handleClick() {
-        if (this.disabled || this.listSelection.autoSelect) { return; }
+        if (this.disabled) { return; }
 
-        this.toggle();
-        // Emit a change event if the selected state of the option changed through user interaction.
-        this.listSelection._emitChangeEvent(this);
+        this.listSelection.setFocusedOption(this);
     }
 
     _handleFocus() {
-        if (this.disabled) { return; }
+        if (this.disabled || this._hasFocus) { return; }
 
         this._hasFocus = true;
-        this.listSelection.setFocusedOption(this);
     }
 
     _handleBlur() {
@@ -256,20 +255,20 @@ export class McListSelection extends _McListSelectionMixinBase implements
     noUnselect: boolean;
     multiple: boolean;
 
+    // todo temporary solution
+    withShift: boolean;
+    withCtrl: boolean;
+
     @Input() horizontal: boolean = false;
 
     // Emits a change event whenever the selected state of an option changes.
-    @Output() readonly selectionChange: EventEmitter<McListSelectionChange> =
-        new EventEmitter<McListSelectionChange>();
+    @Output() readonly selectionChange: EventEmitter<McListSelectionChange> = new EventEmitter<McListSelectionChange>();
 
-    selectedOptions: SelectionModel<McListOption> = new SelectionModel<McListOption>(true);
-
-    private _scrollSize: number = 0;
+    selectedOptions: SelectionModel<McListOption>;
 
     // Used for storing the values that were assigned before the options were initialized.
     private _tempValues: string[] | null;
 
-    // непонятна целесообразность сего
     private _modelChanges = Subscription.EMPTY;
 
     constructor(
@@ -286,6 +285,8 @@ export class McListSelection extends _McListSelectionMixinBase implements
         this.noUnselect = noUnselect === null ? true : toBoolean(noUnselect);
 
         this.tabIndex = parseInt(tabIndex) || 0;
+
+        this.selectedOptions = new SelectionModel<McListOption>(this.multiple);
     }
 
     ngAfterContentInit(): void {
@@ -293,29 +294,22 @@ export class McListSelection extends _McListSelectionMixinBase implements
 
         this._keyManager = new FocusKeyManager<McListOption>(this.options)
             .withTypeAhead()
-            .withHorizontalOrientation(this.horizontal ? 'ltr' : null)
-            .withVerticalOrientation(!this.horizontal);
+            .withVerticalOrientation(!this.horizontal)
+            .withHorizontalOrientation(this.horizontal ? 'ltr' : null);
 
         if (this._tempValues) {
             this._setOptionsFromValues(this._tempValues);
             this._tempValues = null;
         }
 
-        // this.selectedOptions = new SelectionModel<McListOption>(this.multiple);
-
-        // непонятна целесообразность сего
         // Sync external changes to the model back to the options.
         this._modelChanges = this.selectedOptions.onChange!.subscribe((event) => {
-            if (event.added) {
-                for (const item of event.added) {
-                    item.selected = true;
-                }
+            for (const item of event.added) {
+                item.selected = true;
             }
 
-            if (event.removed) {
-                for (const item of event.removed) {
-                    item.selected = false;
-                }
+            for (const item of event.removed) {
+                item.selected = false;
             }
         });
 
@@ -323,7 +317,6 @@ export class McListSelection extends _McListSelectionMixinBase implements
     }
 
     ngOnDestroy() {
-        // непонятна целесообразность сего
         this._modelChanges.unsubscribe();
     }
 
@@ -346,21 +339,42 @@ export class McListSelection extends _McListSelectionMixinBase implements
     updateScrollSize(): void {
         if (this.horizontal || !this.options.first) { return; }
 
-        this._scrollSize = Math.floor(this._getHeight() / this.options.first._getHeight());
+        this._keyManager.withScrollSize(Math.floor(this._getHeight() / this.options.first._getHeight()));
     }
 
     // Sets the focused option of the selection-list.
     setFocusedOption(option: McListOption): void {
-        this._keyManager.updateActiveItemIndex(this._getOptionIndex(option));
+        this._keyManager.updateActiveItem(option);
 
-        if (this.autoSelect) {
-            this.options.forEach((item) => item.setSelected(false));
+        if (this.withShift && this.multiple) {
+            const previousIndex = this._keyManager.previousActiveItemIndex;
+            const activeIndex = this._keyManager.activeItemIndex;
+
+            if (previousIndex < activeIndex) {
+                this.options.forEach((item, index) => {
+                    if (index >= previousIndex && index <= activeIndex) { item.setSelected(true); }
+                });
+            } else {
+                this.options.forEach((item, index) => {
+                    if (index >= activeIndex && index <= previousIndex) { item.setSelected(true); }
+                });
+            }
+
+            this.withShift = false;
+        } else if (this.withCtrl) {
+            this.withCtrl = false;
+
+            if (!this._canUnselectLast(option)) { return; }
+
+            option.toggle();
+        } else {
+            if (this.autoSelect) { this.options.forEach((item) => item.setSelected(false)); }
 
             option.setSelected(true);
-
-            this._emitChangeEvent(option);
-            this._reportValueChange();
         }
+
+        this._emitChangeEvent(option);
+        this._reportValueChange();
     }
 
     // Implemented as part of ControlValueAccessor.
@@ -395,20 +409,22 @@ export class McListSelection extends _McListSelectionMixinBase implements
 
     // Toggles the selected state of the currently focused option.
     toggleFocusedOption(): void {
-        if (this.noUnselect && this.selectedOptions.selected.length === 1) { return; }
-
         const focusedIndex = this._keyManager.activeItemIndex;
 
         if (focusedIndex != null && this._isValidIndex(focusedIndex)) {
             const focusedOption: McListOption = this.options.toArray()[focusedIndex];
 
-            if (focusedOption) {
+            if (focusedOption && this._canUnselectLast(focusedOption)) {
                 focusedOption.toggle();
 
                 // Emit a change event because the focused option changed its state through user interaction.
                 this._emitChangeEvent(focusedOption);
             }
         }
+    }
+
+    _canUnselectLast(listOption: McListOption): boolean {
+        return !(this.noUnselect && this.selectedOptions.selected.length === 1 && listOption.selected);
     }
 
     _getHeight(): number {
@@ -434,10 +450,10 @@ export class McListSelection extends _McListSelectionMixinBase implements
 
     _onKeyDown(event: KeyboardEvent) {
         const keyCode = event.keyCode;
-        const manager = this._keyManager;
-        const previousFocusIndex = manager.activeItemIndex;
+        this.withShift = event.shiftKey;
+        this.withCtrl = event.ctrlKey;
 
-        switch (event.keyCode) {
+        switch (keyCode) {
             case SPACE:
             case ENTER:
                 this.toggleFocusedOption();
@@ -455,24 +471,19 @@ export class McListSelection extends _McListSelectionMixinBase implements
 
                 break;
             case PAGE_UP:
-                if (!this.horizontal) { this._keyManager.setPreviousPageItemActive(this._scrollSize); }
+                if (!this.horizontal) { this._keyManager.setPreviousPageItemActive(); }
+
                 event.preventDefault();
 
                 break;
             case PAGE_DOWN:
-                if (!this.horizontal) { this._keyManager.setNextPageItemActive(this._scrollSize); }
+                if (!this.horizontal) { this._keyManager.setNextPageItemActive(); }
+
                 event.preventDefault();
 
                 break;
             default:
                 this._keyManager.onKeydown(event);
-        }
-
-        if ((keyCode === UP_ARROW || keyCode === DOWN_ARROW) &&
-            event.shiftKey &&
-            manager.activeItemIndex !== previousFocusIndex
-        ) {
-            this.toggleFocusedOption();
         }
     }
 

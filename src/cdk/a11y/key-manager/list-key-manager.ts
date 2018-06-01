@@ -40,6 +40,7 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
     /** Stream that emits whenever the active item of the list manager changes. */
     change = new Subject<number>();
 
+    previousActiveItemIndex = -1;
     private _activeItemIndex = -1;
     private _activeItem: T;
     private _wrap: boolean = false;
@@ -48,6 +49,7 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
     private _vertical = true;
     private _horizontal: 'ltr' | 'rtl' | null;
 
+    private _scrollSize: number = 0;
     /**
      * Predicate function that can be used to check whether an item should be skipped
      * by the key manager. By default, disabled items are skipped.
@@ -72,10 +74,17 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
         }
     }
 
+    withScrollSize(scrollSize: number): this {
+        this._scrollSize = scrollSize;
+
+        return this;
+    }
+
     /**
      * Turns on wrapping mode, which ensures that the active item will wrap to
      * the other end of list when there are no more items in the given direction.
      */
+
     withWrap(): this {
         this._wrap = true;
 
@@ -144,27 +153,21 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
 
     /**
      * Sets the active item to the item at the index specified.
-     * @param index The index of the item to be set as active.
+     * @param index The index of the item to be set as active or item The item to be set as active.
      */
-    setActiveItem(index: number): void;
-
-    /**
-     * Sets the active item to the specified item.
-     * @param item The item to be set as active.
-     */
-    setActiveItem(item: T): void;
+    setActiveItem(index: number | T): void;
 
     /**
      * Sets the active item to the item at the index specified.
      * @param index The index of the item to be set as active.
      */
     setActiveItem(index: any): void {
-        const previousIndex = this._activeItemIndex;
+        this.previousActiveItemIndex = this._activeItemIndex;
 
         this._activeItemIndex = index;
         this._activeItem = this._items.toArray()[index];
 
-        if (this._activeItemIndex !== previousIndex) {
+        if (this._activeItemIndex !== this.previousActiveItemIndex) {
             this.change.next(index);
         }
     }
@@ -239,7 +242,7 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
     }
 
     // Index of the currently active item.
-    get activeItemIndex(): number | null {
+    get activeItemIndex(): number {
         return this._activeItemIndex;
     }
 
@@ -269,7 +272,7 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
             : this._setActiveItemByDelta(-1);
     }
 
-    setNextPageItemActive(delta: number): void {
+    setNextPageItemActive(delta: number = this._scrollSize): void {
         const nextItemIndex = this._activeItemIndex + delta;
 
         if (nextItemIndex >= this._items.length) {
@@ -279,7 +282,7 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
         }
     }
 
-    setPreviousPageItemActive(delta: number): void {
+    setPreviousPageItemActive(delta: number = this._scrollSize): void {
         const nextItemIndex = this._activeItemIndex - delta;
 
         if (nextItemIndex <= 0) {
@@ -290,31 +293,19 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
     }
 
     /**
-     * Allows setting the active without any other effects.
-     * @param index Index of the item to be set as active.
-     */
-    updateActiveItem(index: number): void;
-
-    /**
      * Allows setting the active item without any other effects.
-     * @param item Item to be set as active.
+     * @param item Item to be set as active or index Index of the item to be set as active..
      */
-    updateActiveItem(item: T): void;
+    updateActiveItem(item: number | T): void;
 
     updateActiveItem(item: any): void {
         const itemArray = this._getItemsArray();
         const index = typeof item === 'number' ? item : itemArray.indexOf(item);
 
+        this.previousActiveItemIndex = this._activeItemIndex;
+
         this._activeItemIndex = index;
         this._activeItem = itemArray[index];
-    }
-
-    /**
-     * Allows setting of the activeItemIndex without any other effects.
-     * @param index The new activeItemIndex.
-     */
-    updateActiveItemIndex(index: number) {
-        this.updateActiveItem(index);
     }
 
     /**
@@ -322,7 +313,7 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
      * currently active item and the new active item. It will calculate differently
      * depending on whether wrap mode is turned on.
      */
-    private _setActiveItemByDelta(delta: -1 | 1): void {
+    private _setActiveItemByDelta(delta: number): void {
         this._wrap ? this._setActiveInWrapMode(delta) : this._setActiveInDefaultMode(delta);
     }
 
@@ -331,7 +322,7 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
      * down the list until it finds an item that is not disabled, and it will wrap if it
      * encounters either end of the list.
      */
-    private _setActiveInWrapMode(delta: -1 | 1): void {
+    private _setActiveInWrapMode(delta: number): void {
         const items = this._getItemsArray();
 
         for (let i = 1; i <= items.length; i++) {
@@ -351,7 +342,7 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
      * continue to move down the list until it finds an item that is not disabled. If
      * it encounters either end of the list, it will stop and not wrap.
      */
-    private _setActiveInDefaultMode(delta: -1 | 1): void {
+    private _setActiveInDefaultMode(delta: number): void {
         this._setActiveItemByIndex(this._activeItemIndex + delta, delta);
     }
 
@@ -360,19 +351,15 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
      * item is disabled, it will move in the fallbackDelta direction until it either
      * finds an enabled item or encounters the end of the list.
      */
-    private _setActiveItemByIndex(index: number, fallbackDelta: -1 | 1): void {
+    private _setActiveItemByIndex(index: number, fallbackDelta: number): void {
         const items = this._getItemsArray();
 
-        if (!items[index]) {
-            return;
-        }
+        if (!items[index]) { return; }
 
         while (this._skipPredicateFn(items[index])) {
             index += fallbackDelta;
 
-            if (!items[index]) {
-                return;
-            }
+            if (!items[index]) { return; }
         }
 
         this.setActiveItem(index);

@@ -235,11 +235,11 @@ describe('SelectionModel', () => {
     it('should be able to determine whether it has a value', () => {
         const model = new SelectionModel();
 
-        expect(model.hasValue()).toBe(false);
+        expect(model.isEmpty()).toBe(true);
 
         model.select(1);
 
-        expect(model.hasValue()).toBe(true);
+        expect(model.isEmpty()).toBe(false);
     });
 
     it('should be able to toggle an option', () => {

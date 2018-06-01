@@ -20,7 +20,11 @@ export class SelectionModel<T> {
     /** Cache for the array value of the selected items. */
     private _selected: T[] | null;
 
-    constructor(private _multiple = false, initiallySelectedValues?: T[], private _emitChanges = true) {
+    constructor(
+        private _multiple = false,
+        initiallySelectedValues?: T[],
+        private _emitChanges = true
+    ) {
         if (initiallySelectedValues && initiallySelectedValues.length) {
             if (_multiple) {
                 initiallySelectedValues.forEach((value) => this._markSelected(value));
@@ -58,7 +62,9 @@ export class SelectionModel<T> {
      */
     deselect(...values: T[]): void {
         this._verifyValueAssignment(values);
+
         values.forEach((value) => this._unmarkSelected(value));
+
         this._emitChangeEvent();
     }
 
@@ -92,13 +98,6 @@ export class SelectionModel<T> {
     }
 
     /**
-     * Determines whether the model has a value.
-     */
-    hasValue(): boolean {
-        return !this.isEmpty();
-    }
-
-    /**
      * Sorts the selected values based on a predicate function.
      */
     sort(predicate?: (a: T, b: T) => number): void {
@@ -106,7 +105,7 @@ export class SelectionModel<T> {
     }
 
     /** Emits a change event and clears the records of selected and deselected values. */
-    private _emitChangeEvent() {
+    private _emitChangeEvent(): void {
         // Clear the selected values so they can be re-cached.
         this._selected = null;
 
@@ -121,11 +120,9 @@ export class SelectionModel<T> {
     }
 
     /** Selects a value. */
-    private _markSelected(value: T) {
+    private _markSelected(value: T): void {
         if (!this.isSelected(value)) {
-            if (!this._multiple) {
-                this._unmarkAll();
-            }
+            if (!this._multiple) { this._unmarkAll(); }
 
             this._selection.add(value);
 
@@ -136,7 +133,7 @@ export class SelectionModel<T> {
     }
 
     /** Deselects a value. */
-    private _unmarkSelected(value: T) {
+    private _unmarkSelected(value: T): void {
         if (this.isSelected(value)) {
             this._selection.delete(value);
 
@@ -147,7 +144,7 @@ export class SelectionModel<T> {
     }
 
     /** Clears out the selected values. */
-    private _unmarkAll() {
+    private _unmarkAll(): void {
         if (!this.isEmpty()) {
             this._selection.forEach((value) => this._unmarkSelected(value));
         }
