@@ -84,5 +84,6 @@
     .mc-radio-button {
         font-family: mc-font-family($config);
         font-size: mc-font-size($config, subheading);
+        line-height: mc-line-height($config, caption);
     }
 }

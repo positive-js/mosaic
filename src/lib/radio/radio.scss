@@ -1,6 +1,6 @@
-$mc-radio-size: 16px !default;
-$mc-on-focus-size: 18px !default;
-// Padding between input toggles and their labels
+$mc-radio-size: 14px !default;
+
+// Padding between radio inputs and their labels
 $mc-toggle-padding: 26px !default;
 
 // Top-level host container.
@@ -59,8 +59,8 @@ $mc-toggle-padding: 26px !default;
 
         &:after {
             content: '';
-            top: 5px;
-            left: 6px;
+            top: 4px;
+            left: 5px;
             width: 6px;
             height: 6px;
             border-radius: 50%;
@@ -73,7 +73,7 @@ $mc-toggle-padding: 26px !default;
         + .mc-radio-label-content {
 
             &:before {
-                background-color: rgba(0, 0, 0, 0.06);
+                background-color: darken(white, 5%);
             }
         }
     }
@@ -97,7 +97,7 @@ $mc-toggle-padding: 26px !default;
         + .mc-radio-label-content {
             &:after {
                 opacity: 1;
-                background: #b3b3b3; //GRAY-300
+                background: darken(white, 5%);
             }
         }
     }
