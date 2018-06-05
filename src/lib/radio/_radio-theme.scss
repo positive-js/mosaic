@@ -16,65 +16,71 @@
     $warn: map-get($theme, warn);
     $foreground: map-get($theme, foreground);
 
-    .mc-radio-label {
+    .mc-radio-input {
+        + .mc-radio-label-content {
+            &:before {
+                border-color: mc-color($second, 300);
+            }
+        }
 
         &:hover {
-
-            .mc-radio-inner-circle {
-                background-color: rgba(0, 0, 0, 0.06);
-            }
-        }
-    }
-
-    .mc-radio-disabled {
-
-        .mc-radio-inner-circle {
-            background-color: mc-color($second, 40);
-        }
-
-        .mc-radio-outer-circle {
-            border-color: mc-color($second, 100);
-        }
-
-        .mc-radio-label-content {
-            color: mc-color($foreground, disabled);
-        }
-    }
-
-    .mc-radio-disabled .mc-radio-label {
-
-        &:hover {
-
-            .mc-radio-inner-circle {
-                background-color: mc-color($second, 40);
-            }
-        }
-    }
-
-    .mc-radio-button {
-
-        &.mc-primary {
-            @include _mc-radio-color($primary);
-        }
-
-        &.mc-second {
-            @include _mc-radio-color($second);
-
-            &.mc-radio-checked .mc-radio-outer-circle {
-                border-color: mc-color($primary, 600);
-            }
-
-            &.mc-radio-checked .mc-radio-inner-circle {
-                background-color: mc-color($primary, 500);
+            + .mc-radio-label-content {
 
                 &:before {
-                    background-color: white;
+                    background-color: darken(white, 5%);
                 }
             }
         }
 
-        &.mc-warn {
-            @include _mc-radio-color($warn);
+        &:checked {
+            + .mc-radio-label-content {
+
+                &:after {
+                    opacity: 1;
+                    background: white;
+                }
+
+                &:before {
+                    background: mc-color($primary, 500);
+                    border-color: mc-color($primary, 600);
+                }
+            }
+        }
+
+        &:checked:hover {
+            + .mc-radio-label-content {
+
+                &:before {
+                    background: lighten(mc-color($primary, 500), 5%);
+                    border-color: lighten(mc-color($primary, 600), 5%);
+                }
+            }
+        }
+
+        &:focus {
+            + .mc-radio-label-content:before {
+                border-color: mc-color($primary, 500);
+            }
+        }
+
+        &[disabled] {
+
+            + .mc-radio-label-content {
+
+                opacity: 0.5;
+                color: mc-color($second, 700);
+
+                &:before {
+                    background: mc-color($second, 40); // GRAY-40
+                    border: {
+                        color: mc-color($second, 100); //GRAY-100
+                    }
+                }
+
+                &:after {
+                    background: mc-color($second, 200); // GRAY-200
+                }
+            }
         }
     }
 }
