@@ -1,4 +1,5 @@
 @import './typography';
+@import '../badges';
 @import '../../../button/button-theme';
 @import '../../../list/list-theme';
 @import '../../../radio/radio-theme';
@@ -11,6 +12,7 @@
 
     @include mc-base-typography($config);
 
+    @include mc-badge-typography($config);
     @include mc-button-typography($config);
     @include mc-list-typography($config);
     @include mc-radio-typography($config);

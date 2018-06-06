@@ -76,7 +76,7 @@ $mc-red: (
     300: #ec9183,
     400: #e66d5b,
     500: #e04f38,
-    560: #277bb3,
+    560: #e04f38,
     600: #b43622,
     700: #822112,
     800: #541208,
@@ -120,6 +120,36 @@ $mc-grey: (
         700: $white-87-opacity,
         800: $white-87-opacity
     )
+);
+
+$mc-yellow: (
+    40: #fdf9f2,
+    60: #fcf6e8,
+    100: #f8ecd3,
+    200: #f0d399,
+    300: #e8bd69,
+    400: #dfa83a,
+    500: #d9950d,
+    560: #f57f17,
+    600: #aa7408,
+    700: #7c5404,
+    800: #503602,
+    A100: rgba(255, 170, 0, 0.15),
+    contrast: (
+        40: $black-87-opacity,
+        60: $black-87-opacity,
+        100: $black-87-opacity,
+        200: $black-87-opacity,
+        300: $black-87-opacity,
+        400: $black-87-opacity,
+        500: $black-87-opacity,
+        560: $black-87-opacity,
+        600: $black-87-opacity,
+        700: $black-87-opacity,
+        800: $black-87-opacity,
+        A100: $black-87-opacity
+    )
+
 );
 
 // Foreground palette for light themes.
