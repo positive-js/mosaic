@@ -79,7 +79,7 @@ publishPackage() {
     # Replace the version in every file recursively with a more specific version that also includes
     # the SHA of the current build job. Normally this "sed" call would just replace the version
     # placeholder, but the version placeholders have been replaced by the release task already.
-    sed -i "s/${buildVersion}/${buildVersionName}/g" $(find . -type f -not -path '*\/.*')
+    sed -i "s/${buildVersion}/${buildVersionName}/g" $(find . -type f -not -path '*\/.*' ! -iname '*.css')
 
     echo "Updated the build version in every file to include the SHA of the latest commit."
 
