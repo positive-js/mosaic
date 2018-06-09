@@ -5,8 +5,7 @@
         "annotateForClosureCompiler": true,
         "strictMetadataEmit": true,
         "flatModuleOutFile": "index.js",
-        "flatModuleId": "@ptsecurity/mosaic/list",
-        "skipTemplateCodegen": true,
-        "fullTemplateTypeCheck": true
+        "flatModuleId": "@ptsecurity/cdk/tree",
+        "skipTemplateCodegen": true
     }
 }

@@ -1,0 +1,55 @@
+@import 'tree-base';
+@import 'tree-theme';
+
+
+$mc-node-height: 32px;
+
+$mc-tree-node-padding: 16px;
+$mc-tree-leaf-padding: 16px;
+
+
+.mc-tree {
+    display: block;
+
+    border: 1px solid bisque;
+}
+
+.mc-tree-nested-node {
+    display: block;
+}
+
+.mc-tree-node {
+    display: flex;
+    align-items: center;
+
+    height: $mc-node-height;
+
+    word-wrap: break-word;
+
+    & > .mc-icon {
+        margin-right: 4px;
+
+        cursor: pointer;
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
+
+
+.tree-invisible {
+    display: none;
+}
+
+.mc-icon-rotate_90 {
+    transform: rotate(90deg);
+}
+
+.mc-icon-rotate_180 {
+    transform: rotate(180deg);
+}
+
+.mc-icon-rotate_270 {
+    transform: rotate(270deg);
+}

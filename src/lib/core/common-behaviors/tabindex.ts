@@ -1,3 +1,5 @@
+import { toBoolean } from '@ptsecurity/mosaic/core';
+
 import { Constructor } from './constructor';
 import { CanDisable } from './disabled';
 

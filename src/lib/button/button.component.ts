@@ -17,8 +17,8 @@ import { McIcon } from '@ptsecurity/mosaic/icon';
 
 
 @Directive({
-    selector: 'button[mc-button], a[mc-button]',
-    host: { class: 'mc-button' }
+    selector: 'button, a[mc-button]',
+    host: { class: 'mc-button mc-olololo' }
 })
 export class McButtonCSSStyler {}
 

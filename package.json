@@ -37,6 +37,7 @@
         "@commitlint/cli": "^7.0.0",
         "@commitlint/config-conventional": "^7.0.1",
         "@ptsecurity/commitlint-config": "^0.1.3",
+        "@ptsecurity/mosaic-icons": "2.5.0",
         "@ptsecurity/prettier-config": "0.1.0",
         "@ptsecurity/tslint-config": "^0.7.1",
         "@types/chalk": "^2.2.0",
@@ -150,6 +151,7 @@
         "server-dev:typography": "npm run server-dev -- --env.component typography",
         "server-dev:badge": "npm run server-dev -- --env.component badge",
         "server-dev:checkbox": "npm run server-dev -- --env.component checkbox",
+        "server-dev:tree": "npm run server-dev -- --env.component tree",
         "server-dev:navbar": "npm run server-dev -- --env.component navbar",
         "server-dev:layout": "npm run server-dev -- --env.component layout",
         "server-dev:modal": "npm run server-dev -- --env.component modal"

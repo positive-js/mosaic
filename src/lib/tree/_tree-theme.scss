@@ -1,0 +1,50 @@
+@import '../core/theming/palette';
+@import '../core/theming/theming';
+@import '../core/styles/typography/typography-utils';
+
+
+@mixin mc-tree-theme($theme) {
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
+    //.mc-tree {
+    //    background: mc-color($background, text);
+    //}
+
+    .mc-tree-node {
+        color: mc-color($foreground, text);
+
+        border: 1px solid transparent;
+
+        &.mc-focused {
+            border-color: mc-color($primary, 500);
+            box-shadow: 0 0 0 1px mc-color($primary, 500);
+        }
+
+        &:hover,
+        &.mc-hovered {
+            background-color: mc-color($background, 'hover');
+        }
+
+        &.mc-selected {
+            background-color: mc-color($primary, 100);
+        }
+
+        &[disabled] {
+            background-color: transparent;
+
+            color: mc-color($foreground, disabled-text);
+        }
+    }
+}
+
+@mixin mc-tree-typography($config) {
+    .mc-tree {
+        font-family: mc-font-family($config);
+    }
+
+    .mc-tree-node {
+        font-weight: mc-font-weight($config, body);
+        font-size: mc-font-size($config, body);
+    }
+}

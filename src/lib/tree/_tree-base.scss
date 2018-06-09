@@ -1,0 +1,56 @@
+$mc-list-side-padding: 15px;
+$mc-list-icon-padding: 4px;
+
+// height for single-line lists
+$mc-list-base-height: 32px;
+
+// spec requires two- and three-line lists be taller
+$mc-list-two-line-height: 72px;
+$mc-list-three-line-height: 88px;
+$mc-list-multi-line-padding: 16px;
+
+$mc-list-icon-size: 24px;
+
+$mc-list-item-inset-divider-offset: 72px;
+
+
+// This mixin provides all list-item styles, changing font size and height
+// based on whether the list is in dense mode.
+@mixin mc-tree-item($base-height, $multi-line-padding, $icon-size) {
+    // Prevents the wrapper `mc-list-item-content` from collapsing due to it being `inline` by default.
+    display: block;
+    height: $base-height;
+
+    .mc-list-item-content {
+        position: relative;
+
+        box-sizing: border-box;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        height: 100%;
+
+        padding: 0 $mc-list-side-padding;
+    }
+
+    .mc-list-text {
+        @include mc-line-wrapper-base();
+
+        // By default, there will be no padding for the list item text because the padding is already
+        // set on the `mc-list-item-content` element. Later, if the list-item detects that there are
+        // secondary items (avatar, checkbox), a padding on the proper side will be added.
+        padding: 0;
+    }
+
+    // There can be a secondary item (e.g. avatar-icon, checkbox) at the start of the
+    // list-item. This means that there should be a padding for the mc-list-text on the start-side.
+    .mc-list-item-content .mc-list-text:not(:nth-child(2)) {
+        padding-right: 0;
+
+        [dir='rtl'] & {
+            padding-left: 0;
+        }
+    }
+}
