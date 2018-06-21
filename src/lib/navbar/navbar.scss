@@ -34,7 +34,7 @@ mc-navbar-brand, .mc-navbar-brand {
     @extend %mc-navbar-brand-base;
 }
 
-.mc-navbar-item {
+.mc-navbar-item:not(.mc-navbar-item-disabled) {
     cursor: pointer;
 }
 
@@ -42,11 +42,11 @@ mc-navbar-item, mc-navbar-item:first-child, mc-navbar-brand, .mc-navbar-item .mc
     padding: 0;
 }
 
-mc-navbar-item.mc-progress {
+mc-navbar-item.mc-progress:not(.mc-navbar-item-disabled) {
     cursor: pointer;
 }
 
-mc-navbar-item.mc-navbar-item-disabled {
+mc-navbar-item.mc-navbar-item-disabled .mc-navbar-item, .mc-navbar-item.mc-navbar-item-disabled {
     /*It is controversially. Works fine but cannot be tested*/
     /*pointer-events: none;*/
     cursor: default;
