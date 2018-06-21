@@ -1,0 +1,130 @@
+<h3>Common example</h3>
+<div>
+    <mc-navbar>
+        <mc-navbar-container position="left">
+            <mc-navbar-item (click)="onItemClick($event)">
+                <i mc-icon="mc-hamburger_16"></i>
+            </mc-navbar-item>
+            <mc-navbar-brand>
+                <mc-navbar-logo>
+                    <img style="vertical-align: middle;" width="32" height="32" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAS1JREFUWAljPMUh/J9hAAHTANoNtnrUAaMhMBoCoyEw4CHAgq0k5Hd3YVCY0sfAJiOFTZrh369fDJ+PHGd4kJHH8OvxUwbT72+wqkMXPM0pgi7EgDUE8FkOMoGJjY2B38meQWH6RAwDSRVgxFYZqa5dCjbnXmoOw9937zHMZBYSZDB6ehscEmf5MUMJFiLYfIxuGNYouB0cja6OZnysDmCTlQYHL6+tFTi4cdn++fAxXFJEi2N1AChu+Z0dcBoCToRAyx9k5uNUQ6wEVgeAfA4C56RUGP6+/0CsWWSpw5oLQKkcBMi1HBRCIMAsKACm8RFYHYBPAzFyoDICBJTmTCWonCYOABVQH/cdZPj3ExIS+FyBtRzAp4HacjQJAVIcOeqA0RAYDYHREBjwEAAApR1LyfgAzUMAAAAASUVORK5CYII=" />
+                </mc-navbar-logo>
+                <mc-navbar-title>Brand</mc-navbar-title>
+            </mc-navbar-brand>
+            <mc-navbar-item class="mc-navbar-item-active" (click)="onItemClick($event)">
+                <i mc-icon="mc-info_16"></i>
+                <mc-navbar-title>Left icon</mc-navbar-title>
+            </mc-navbar-item>
+            <mc-navbar-item (click)="onItemClick($event)">
+                <mc-navbar-title>No icon</mc-navbar-title>
+            </mc-navbar-item>
+            <mc-navbar-item class="mc-progress" (click)="onItemClick($event)">
+                <mc-navbar-title>In-progress</mc-navbar-title>
+            </mc-navbar-item>
+            <mc-navbar-item class="mc-progress mc-navbar-item-disabled" (click)="onItemClick($event)">
+                <mc-navbar-title>Disabled in-progress</mc-navbar-title>
+            </mc-navbar-item>
+            <mc-navbar-item class="mc-navbar-item-disabled" (click)="onItemClick($event)">
+                <mc-navbar-title>Right Icon</mc-navbar-title>
+                <i mc-icon="mc-search_16"></i>
+            </mc-navbar-item>
+            <mc-navbar-item (click)="onItemClick($event)">
+                <div mc-dropdown>mc-dropdown</div>
+            </mc-navbar-item>
+
+            <mc-navbar-item (click)="onItemClick($event)">
+                <i mc-icon="mc-gear_16"></i>
+            </mc-navbar-item>
+
+            <mc-navbar-title>Title after</mc-navbar-title>
+        </mc-navbar-container>
+
+        <mc-navbar-container position="right">
+            <mc-navbar-item (click)="onItemClick($event)" [collapsedTitle]="'custom title'">
+                <mc-navbar-title>Right Icon</mc-navbar-title>
+                <i mc-icon="mc-search_16"></i>
+            </mc-navbar-item>
+            <mc-navbar-item class="cdk-focused" (click)="onItemClick($event)">
+                <div mc-dropdown>focused</div>
+            </mc-navbar-item>
+
+            <mc-navbar-item (click)="onItemClick($event)">
+                <i mc-icon="mc-gear_16"></i>
+            </mc-navbar-item>
+        </mc-navbar-container>
+    </mc-navbar>
+</div>
+
+<h3>Collapse example</h3>
+<div style="margin-bottom: 20px;">
+    <label>Navbar width (min = 915; please use arrow up and arrow down in Chrome for comfortable testing):</label>
+    <br>
+    <input [(ngModel)]="collapsedNavbarWidth" type="number" [min]="minNavbarWidth" (ngModelChange)="collapsedNavbarWidthChange()" />
+</div>
+<div [style.width.px]="collapsedNavbarWidth">
+    <mc-navbar class="small-navbar" #navbar>
+        <mc-navbar-container position="left">
+            <mc-navbar-item>
+                <i mc-icon="mc-info_16"></i>
+                <mc-navbar-title>Left icon</mc-navbar-title>
+            </mc-navbar-item>
+            <mc-navbar-item>
+                <mc-navbar-title>Right icon</mc-navbar-title>
+                <i mc-icon="mc-play_16"></i>
+            </mc-navbar-item>
+            <mc-navbar-brand>
+                <mc-navbar-logo>
+                    <img style="vertical-align: middle;" width="32" height="32" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAS1JREFUWAljPMUh/J9hAAHTANoNtnrUAaMhMBoCoyEw4CHAgq0k5Hd3YVCY0sfAJiOFTZrh369fDJ+PHGd4kJHH8OvxUwbT72+wqkMXPM0pgi7EgDUE8FkOMoGJjY2B38meQWH6RAwDSRVgxFYZqa5dCjbnXmoOw9937zHMZBYSZDB6ehscEmf5MUMJFiLYfIxuGNYouB0cja6OZnysDmCTlQYHL6+tFTi4cdn++fAxXFJEi2N1AChu+Z0dcBoCToRAyx9k5uNUQ6wEVgeAfA4C56RUGP6+/0CsWWSpw5oLQKkcBMi1HBRCIMAsKACm8RFYHYBPAzFyoDICBJTmTCWonCYOABVQH/cdZPj3ExIS+FyBtRzAp4HacjQJAVIcOeqA0RAYDYHREBjwEAAApR1LyfgAzUMAAAAASUVORK5CYII=" />
+                </mc-navbar-logo>
+                <mc-navbar-title>Brand</mc-navbar-title>
+            </mc-navbar-brand>
+            <mc-navbar-title>Title before</mc-navbar-title>
+            <mc-navbar-item>
+                <i mc-icon="mc-pause_16"></i>
+                <mc-navbar-title>Left icon</mc-navbar-title>
+            </mc-navbar-item>
+            <mc-navbar-item>
+                <i mc-icon="mc-clock_16"></i>
+            </mc-navbar-item>
+            <mc-navbar-item>
+                <mc-navbar-title>Right icon</mc-navbar-title>
+                <i mc-icon="mc-search_16"></i>
+            </mc-navbar-item>
+            <mc-navbar-title>Title after</mc-navbar-title>
+            <mc-navbar-item>
+                <mc-navbar-title>Custom title</mc-navbar-title>
+                <i mc-icon="mc-gear_16"></i>
+            </mc-navbar-item>
+            <mc-navbar-item>
+                <mc-navbar-title>Right icon</mc-navbar-title>
+                <i mc-icon="mc-calendar_16"></i>
+            </mc-navbar-item>
+            <mc-navbar-item>
+                <i mc-icon="mc-circle-8_16"></i>
+                <mc-navbar-title>Left icon</mc-navbar-title>
+            </mc-navbar-item>
+            <mc-navbar-item>
+                <mc-navbar-title>Right icon</mc-navbar-title>
+                <i mc-icon="mc-close-L_16"></i>
+            </mc-navbar-item>
+            <mc-navbar-item>
+                <i mc-icon="mc-error_16"></i>
+                <mc-navbar-title>Left icon</mc-navbar-title>
+            </mc-navbar-item>
+        </mc-navbar-container>
+
+        <mc-navbar-container position="right">
+            <mc-navbar-item>
+                <i mc-icon="mc-triangle_16"></i>
+                <mc-navbar-title>Left icon</mc-navbar-title>
+            </mc-navbar-item>
+            <mc-navbar-item>
+                <i mc-icon="mc-download_16"></i>
+            </mc-navbar-item>
+            <mc-navbar-item>
+                <mc-navbar-title>Right icon</mc-navbar-title>
+                <i mc-icon="mc-copy_16"></i>
+            </mc-navbar-item>
+        </mc-navbar-container>
+    </mc-navbar>
+</div>
