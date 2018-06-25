@@ -12,7 +12,7 @@
         background-color: mc-color($palette, 800);
     }
 
-    mc-navbar-item.mc-navbar-item-disabled {
+    mc-navbar-item[disabled] {
         > mc-navbar-title, .mc-navbar-title, [mc-icon] {
             opacity: 0.3;
         }
@@ -34,11 +34,11 @@
         }
     }
 
-    mc-navbar-item:hover:not(.mc-navbar-item-disabled):not(.mc-progress) {
+    mc-navbar-item:hover:not([disabled]):not(.mc-progress) {
         background-color: mc-color($palette, 800);
     }
 
-    mc-navbar-item.mc-progress:hover:not(.mc-navbar-item-disabled) {
+    mc-navbar-item.mc-progress:hover:not([disabled]) {
         $bg-lighten: 15%;
         background-color: lighten(mc-color($palette, 800), $bg-lighten);
     }

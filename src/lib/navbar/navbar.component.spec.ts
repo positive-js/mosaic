@@ -23,7 +23,7 @@ describe('McNavbar', () => {
 
         const collapsedElements = fixture.debugElement.queryAll(By.css('.mc-navbar-collapsed-title'));
 
-        expect(collapsedElements.length).toBe(4);
+        expect(collapsedElements.length).toBe(9);
     });
 
     it('collapsed elements should have title', () => {
@@ -61,7 +61,7 @@ describe('McNavbar', () => {
 
         fixture.detectChanges();
 
-        const notDisabledItem = fixture.debugElement.query(By.css('mc-navbar-item:not(.mc-navbar-item-disabled)'));
+        const notDisabledItem = fixture.debugElement.query(By.css('mc-navbar-item:not([disabled])'));
 
         notDisabledItem.nativeElement.click();
 
@@ -76,7 +76,7 @@ describe('McNavbar', () => {
 
         fixture.detectChanges();
 
-        const notDisabledItem = fixture.debugElement.query(By.css('mc-navbar-item.mc-navbar-item-disabled'));
+        const notDisabledItem = fixture.debugElement.query(By.css('mc-navbar-item[disabled]'));
 
         notDisabledItem.nativeElement.click();
 

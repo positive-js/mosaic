@@ -1,6 +1,6 @@
 import {
     AfterViewInit,
-    Component,
+    Component, Directive,
     ElementRef,
     HostBinding,
     Input,
@@ -10,7 +10,9 @@ import {
 } from '@angular/core';
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 
-const MC_NAVBAR_ITEM_DISABLE_CLASS = 'mc-navbar-item-disabled';
+import { CanDisable, mixinDisabled } from '@ptsecurity/mosaic/core';
+
+
 const MC_DROPDOWN = 'mc-dropdown';
 const MC_ICON = 'mc-icon';
 const MC_NAVBAR = 'mc-navbar';
@@ -22,12 +24,8 @@ const MC_NAVBAR_LOGO = 'mc-navbar-logo';
 
 export type McNavbarContainerPositionType = 'left' | 'right';
 
-@Component({
+@Directive({
     selector: MC_NAVBAR_LOGO,
-    template: `
-        <ng-content></ng-content>
-    `,
-    encapsulation: ViewEncapsulation.None,
     host: {
         class: MC_NAVBAR_LOGO
     }
@@ -46,42 +44,53 @@ export class McNavbarLogo {}
 })
 export class McNavbarBrand {}
 
-@Component({
+@Directive({
     selector: MC_NAVBAR_TITLE,
-    template: `
-        <ng-content></ng-content>
-    `,
-    encapsulation: ViewEncapsulation.None,
     host: {
         class: MC_NAVBAR_TITLE
     }
 })
 export class McNavbarTitle {}
 
+export class McNavbarItemBase {
+    constructor(public _elementRef: ElementRef) {}
+}
+
+export const _McNavbarMixinBase = mixinDisabled(McNavbarItemBase);
+
 @Component({
     selector: MC_NAVBAR_ITEM,
     template: `
-        <a tabindex="0" class="mc-navbar-item">
+        <a [attr.tabindex]="disabled ? -1 : tabIndex" class="mc-navbar-item">
             <ng-content select="[${MC_ICON}],[${MC_NAVBAR_TITLE}],${MC_NAVBAR_TITLE},[${MC_DROPDOWN}]">
             </ng-content>
         </a>
     `,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    inputs: ['disabled'],
+    host: {
+        '[attr.disabled]': 'disabled || null'
+    }
 })
-export class McNavbarItem implements OnInit, OnDestroy {
+export class McNavbarItem extends _McNavbarMixinBase implements OnInit, OnDestroy, CanDisable {
+
+    @Input()
+    tabIndex: number = 0;
 
     @Input()
     set collapsedTitle(value: string) {
-        this.elementRef.nativeElement.setAttribute('calculatedTitle', value);
+        this.elementRef.nativeElement.setAttribute('calculatedTitle', encodeURI(value));
     }
 
     constructor(
         public  elementRef: ElementRef,
         private _focusMonitor: FocusMonitor
-    ) {}
+    ) {
+        super(elementRef);
+    }
 
     ngOnInit() {
-        this._denyClickIfDesabled();
+        this._denyClickIfDisabled();
 
         this._focusMonitor.monitor(this.elementRef.nativeElement, true);
     }
@@ -91,14 +100,14 @@ export class McNavbarItem implements OnInit, OnDestroy {
     }
 
     // This method is required due to angular 2 issue https://github.com/angular/angular/issues/11200
-    private _denyClickIfDesabled() {
+    private _denyClickIfDisabled() {
         const events: Event[] = this.elementRef.nativeElement.eventListeners('click');
         for (const event of events) {
             this.elementRef.nativeElement.removeEventListener('click', event);
         }
 
         this.elementRef.nativeElement.addEventListener('click', (event: MouseEvent) => {
-            if (this.elementRef.nativeElement.classList.contains(MC_NAVBAR_ITEM_DISABLE_CLASS)) {
+            if (this.elementRef.nativeElement.hasAttribute('disabled')) {
                 event.stopImmediatePropagation();
             }
         }, true);
@@ -132,9 +141,7 @@ export class McNavbarContainer {
     selector: MC_NAVBAR,
     template: `
         <nav class="mc-navbar">
-            <div class="mc-navbar-container">
-                <ng-content select="[${MC_NAVBAR_CONTAINER}],${MC_NAVBAR_CONTAINER}"></ng-content>
-            </div>
+            <ng-content select="[${MC_NAVBAR_CONTAINER}],${MC_NAVBAR_CONTAINER}"></ng-content>
         </nav>
     `,
     styleUrls: ['./navbar.css'],
@@ -158,9 +165,7 @@ export class McNavbar implements AfterViewInit {
     ) {}
 
     collapse() {
-        const containerClass: string = 'mc-navbar-container';
-
-        const maxWidth = this._elementRef.nativeElement.querySelector(`.${containerClass}`).getBoundingClientRect().width;
+        const maxWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
 
         this._uncollapseAll();
 

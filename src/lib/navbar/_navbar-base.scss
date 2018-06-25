@@ -23,6 +23,11 @@ $mc-navbar-title-icon-space: 5px;
 
     padding: 0 8px;
 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
     [mc-icon] + mc-navbar-title {
         margin-left: $mc-navbar-title-icon-space;
     }

@@ -21,10 +21,10 @@
             <mc-navbar-item class="mc-progress" (click)="onItemClick($event)">
                 <mc-navbar-title>In-progress</mc-navbar-title>
             </mc-navbar-item>
-            <mc-navbar-item class="mc-progress mc-navbar-item-disabled" (click)="onItemClick($event)">
+            <mc-navbar-item class="mc-progress" disabled (click)="onItemClick($event)">
                 <mc-navbar-title>Disabled in-progress</mc-navbar-title>
             </mc-navbar-item>
-            <mc-navbar-item class="mc-navbar-item-disabled" (click)="onItemClick($event)">
+            <mc-navbar-item disabled (click)="onItemClick($event)">
                 <mc-navbar-title>Right Icon</mc-navbar-title>
                 <i mc-icon="mc-search_16"></i>
             </mc-navbar-item>
