@@ -52,7 +52,8 @@ $mc-navbar-title-icon-space: 5px;
     padding-right: $mc-navbar-brand-h-padding;
 }
 
-%mc-navbar-title {
+%mc-navbar-title-base {
+    white-space: nowrap;
     + [mc-icon] {
         margin-left: $mc-navbar-title-icon-space;
     }

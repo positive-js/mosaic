@@ -15,7 +15,7 @@ mc-navbar-item, .mc-navbar-item, .mc-navbar-title, mc-navbar-item:first-child {
 }
 
 .mc-navbar-title {
-    @extend %mc-navbar-title;
+    @extend %mc-navbar-title-base;
 }
 
 mc-navbar-item:first-child > .mc-navbar-item:first-child {

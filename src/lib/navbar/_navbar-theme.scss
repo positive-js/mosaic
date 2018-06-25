@@ -23,7 +23,7 @@
     }
 
     mc-navbar-item, .mc-navbar-item {
-        & .cdk-focused {
+        &.cdk-focused {
             border-color: mc-color($palette, 500);
             box-shadow: 0 0 0 1px mc-color($palette, 500);
             z-index: 1;

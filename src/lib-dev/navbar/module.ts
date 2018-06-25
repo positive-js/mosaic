@@ -18,7 +18,7 @@ export class NavbarDemoComponent {
     @ViewChild('navbar')
     navbar: McNavbar;
 
-    readonly minNavbarWidth: number = 915;
+    readonly minNavbarWidth: number = 940;
 
     private _collapsedNavbarWidth: number = 1280;
 
