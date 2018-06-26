@@ -12,3 +12,7 @@
 mc-navbar.small-navbar > .mc-navbar {
     min-width: 300px;
 }
+
+[mc-dropdown] > [mc-icon^='mc-angle'] {
+    margin-left: 8px;
+}

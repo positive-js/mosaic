@@ -1,5 +1,6 @@
 
 $mc-navbar-min-width: 1280px;
+$mc-navbar-h-padding: 0px;
 $mc-navbar-height: 48px;
 $mc-navbar-item-h-padding: 16px;
 $mc-navbar-brand-h-padding: 12px;
@@ -20,7 +21,7 @@ $mc-navbar-title-icon-space: 8px;
     position: relative;
     height: $mc-navbar-height;
 
-    padding: 0 8px;
+    padding: 0 $mc-navbar-h-padding;
 
     display: flex;
     flex-direction: row;
