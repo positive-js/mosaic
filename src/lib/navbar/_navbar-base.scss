@@ -3,7 +3,6 @@ $mc-navbar-min-width: 1280px;
 $mc-navbar-height: 48px;
 $mc-navbar-item-h-padding: 16px;
 $mc-navbar-brand-h-padding: 12px;
-$mc-navbar-item-first-child-h-padding: 10px;
 $mc-navbar-title-icon-space: 8px;
 
 %mc-navbar-container-base {
@@ -31,6 +30,10 @@ $mc-navbar-title-icon-space: 8px;
     [mc-icon] + mc-navbar-title {
         margin-left: $mc-navbar-title-icon-space;
     }
+
+    mc-navbar-title:not(.mc-navbar-collapsed-title) + [mc-icon] {
+        margin-left: $mc-navbar-title-icon-space;
+    }
 }
 
 %mc-navbar-item-base {
@@ -42,10 +45,6 @@ $mc-navbar-title-icon-space: 8px;
     padding-right: $mc-navbar-item-h-padding;
 }
 
-%mc-navbar-item-first-base {
-    padding-left: $mc-navbar-item-first-child-h-padding;
-}
-
 %mc-navbar-brand-base {
     @extend %mc-navbar-item-base;
     padding-left: $mc-navbar-brand-h-padding;
@@ -54,7 +53,4 @@ $mc-navbar-title-icon-space: 8px;
 
 %mc-navbar-title-base {
     white-space: nowrap;
-    + [mc-icon] {
-        margin-left: $mc-navbar-title-icon-space;
-    }
 }

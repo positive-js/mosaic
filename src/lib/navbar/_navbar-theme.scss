@@ -23,6 +23,8 @@
     }
 
     mc-navbar-item, .mc-navbar-item {
+        border: 1px solid transparent;
+
         &.cdk-focused {
             border-color: mc-color($palette, 500);
             box-shadow: 0 0 0 1px mc-color($palette, 500);

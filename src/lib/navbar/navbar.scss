@@ -18,10 +18,6 @@ mc-navbar-item, .mc-navbar-item, .mc-navbar-title, mc-navbar-item:first-child {
     @extend %mc-navbar-title-base;
 }
 
-mc-navbar-item:first-child > .mc-navbar-item:first-child {
-    @extend %mc-navbar-item-first-base;
-}
-
 mc-navbar-brand, .mc-navbar-brand {
     @extend %mc-navbar-brand-base;
 }

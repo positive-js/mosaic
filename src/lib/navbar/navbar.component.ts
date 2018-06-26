@@ -32,12 +32,8 @@ export type McNavbarContainerPositionType = 'left' | 'right';
 })
 export class McNavbarLogo {}
 
-@Component({
+@Directive({
     selector: MC_NAVBAR_BRAND,
-    template: `
-        <ng-content select="${MC_NAVBAR_TITLE},[${MC_NAVBAR_TITLE}],${MC_NAVBAR_LOGO},[${MC_NAVBAR_LOGO}]"></ng-content>
-    `,
-    encapsulation: ViewEncapsulation.None,
     host: {
         class: MC_NAVBAR_BRAND
     }
@@ -62,7 +58,7 @@ export const _McNavbarMixinBase = mixinDisabled(McNavbarItemBase);
     selector: MC_NAVBAR_ITEM,
     template: `
         <a [attr.tabindex]="disabled ? -1 : tabIndex" class="mc-navbar-item">
-            <ng-content select="[${MC_ICON}],[${MC_NAVBAR_TITLE}],${MC_NAVBAR_TITLE},[${MC_DROPDOWN}]">
+            <ng-content>
             </ng-content>
         </a>
     `,
@@ -118,14 +114,8 @@ export class McNavbarItem extends _McNavbarMixinBase implements OnInit, OnDestro
     }
 }
 
-@Component({
-    selector: MC_NAVBAR_CONTAINER,
-    // tslint:disable max-line-length
-    template: `
-        <ng-content select="[${MC_NAVBAR_ITEM}],${MC_NAVBAR_ITEM},[${MC_NAVBAR_TITLE}],${MC_NAVBAR_TITLE},${MC_NAVBAR_BRAND},[${MC_NAVBAR_BRAND}]">
-        </ng-content>
-    `,
-    encapsulation: ViewEncapsulation.None
+@Directive({
+    selector: MC_NAVBAR_CONTAINER
 })
 export class McNavbarContainer {
     @Input()
@@ -165,7 +155,7 @@ export class McNavbar implements AfterViewInit {
     ) {}
 
     collapse() {
-        const maxWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
+        const maxWidth = this._elementRef.nativeElement.querySelector('nav').getBoundingClientRect().width;
 
         this._uncollapseAll();
 
@@ -179,7 +169,8 @@ export class McNavbar implements AfterViewInit {
 
         let collapseDelta = itemsWidth - maxWidth;
 
-        const firstLevelItems: NodeListOf<HTMLElement> = this._elementRef.nativeElement.querySelectorAll(`${MC_NAVBAR_ITEM},${MC_NAVBAR_BRAND}`);
+        const firstLevelItems: NodeListOf<HTMLElement> =
+            this._elementRef.nativeElement.querySelectorAll(`${MC_NAVBAR_ITEM},${MC_NAVBAR_BRAND}`);
 
         for (let i = firstLevelItems.length - 1; i >= 0; i--) {
             const item: HTMLElement = firstLevelItems[i];
@@ -191,7 +182,12 @@ export class McNavbar implements AfterViewInit {
 
             const restElements: HTMLElement[] = Array.from(item.querySelectorAll(MC_NAVBAR_TITLE));
 
-            const title = item.getAttribute('calculatedTitle') || (restElements.length > 0 ? restElements[0].innerText : '');
+            const calculatedTitle = item.getAttribute('calculatedTitle');
+
+            const title = calculatedTitle
+                ? decodeURI(calculatedTitle)
+                : (restElements.length > 0 ? restElements[0].innerText : '');
+
             item.setAttribute('title', title);
 
             for (const element of restElements) {
@@ -211,7 +207,9 @@ export class McNavbar implements AfterViewInit {
     }
 
     private _uncollapseAll() {
-        const titles: HTMLElement[] = Array.from(this._elementRef.nativeElement.querySelectorAll(`${MC_NAVBAR_TITLE}.${this.collapsedClass}`));
+        const titles: HTMLElement[] = Array.from(
+            this._elementRef.nativeElement.querySelectorAll(`${MC_NAVBAR_TITLE}.${this.collapsedClass}`)
+        );
         for (const title of titles) {
             title.classList.remove(this.collapsedClass);
         }
