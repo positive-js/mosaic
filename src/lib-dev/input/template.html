@@ -1,0 +1,51 @@
+<div>Without placeholder:</div>
+
+<mc-input [(ngModel)]="value"></mc-input>
+
+<br><br>
+
+<div>With placeholder:</div>
+
+<mc-input [(ngModel)]="value" placeholder="Hello world"></mc-input>
+
+<br><br>
+
+<div>With placeholder and cleaner:</div>
+
+<mc-input [(ngModel)]="value" placeholder="Hello world" cleaner="true"></mc-input>
+
+<br><br>
+
+<div>Disabled:</div>
+
+<mc-input [(ngModel)]="value" placeholder="Hello world" disabled="true"></mc-input>
+
+<br><br>
+
+<div>Disabled and with cleaner:</div>
+
+<mc-input [(ngModel)]="value" placeholder="Hello world" cleaner="true" disabled="true"></mc-input>
+
+<br><br>
+
+<div>Monospace: </div>
+
+<mc-input mc-input-mono [(ngModel)]="value" placeholder="Hello world" cleaner="true"></mc-input>
+
+<br><br>
+
+<div>Field with validation (min-length="4"):</div>
+
+<br>
+
+<form>
+    <fieldset>
+        <mc-input [(ngModel)]="invalidValue" placeholder="Hello world" name="invalidField" minlength="4"></mc-input>
+        <br><br>
+
+        <div>With cleaner:</div>
+        <mc-input [(ngModel)]="invalidValue" placeholder="Hello world" name="invalidField2" minlength="4" cleaner="true"></mc-input>
+    </fieldset>
+</form>
+
+

@@ -1,0 +1,16 @@
+@import '../core/styles/common/input';
+
+$mc-input-height: 32px;
+$mc-input-width: 200px;
+$mc-input-border-radius: 3px;
+$mc-input-border-size: 1px;
+$mc-input-icon-width: 32px;
+
+
+%mc-input-field-base {
+    @include mc-reset-input();
+
+    padding-left: 16px;
+    padding-right: 16px;
+    width: 100%;
+}

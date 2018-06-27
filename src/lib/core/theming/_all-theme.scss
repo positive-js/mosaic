@@ -6,6 +6,7 @@
 @import '../../radio/radio-theme';
 @import '../../checkbox/checkbox-theme';
 @import '../../navbar/navbar-theme';
+@import '../../input/input-theme';
 
 
 @mixin mosaic-theme($theme) {
@@ -16,5 +17,5 @@
     @include mc-radio-theme($theme);
     @include mc-checkbox-theme($theme);
     @include mc-navbar-theme($theme);
-
+    @include mc-input-theme($theme);
 }
