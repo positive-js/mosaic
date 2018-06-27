@@ -143,7 +143,8 @@
         "server-dev:icon": "npm run server-dev -- --env.component icon",
         "server-dev:theme-picker": "npm run server-dev -- --env.component theme-picker",
         "server-dev:typography": "npm run server-dev -- --env.component typography",
-        "server-dev:badge": "npm run server-dev -- --env.component badge"
+        "server-dev:badge": "npm run server-dev -- --env.component badge",
+        "server-dev:navbar": "npm run server-dev -- --env.component navbar"
     },
     "lint-staged": {
         "linters": {
