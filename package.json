@@ -21,8 +21,8 @@
         "@angular/elements": "6.0.0",
         "@angular/forms": "6.0.0",
         "@angular/platform-browser": "6.0.0",
+        "@ptsecurity/mosaic-icons": "2.5.1",
         "core-js": "^2.5.5",
-        "@ptsecurity/mosaic-icons": "2.5.0",
         "rxjs": "6.0.0",
         "systemjs": "0.19.43",
         "tslib": "^1.9.1",
@@ -144,6 +144,7 @@
         "server-dev:theme-picker": "npm run server-dev -- --env.component theme-picker",
         "server-dev:typography": "npm run server-dev -- --env.component typography",
         "server-dev:badge": "npm run server-dev -- --env.component badge",
+        "server-dev:checkbox": "npm run server-dev -- --env.component checkbox",
         "server-dev:navbar": "npm run server-dev -- --env.component navbar"
     },
     "lint-staged": {

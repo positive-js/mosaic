@@ -1,0 +1,32 @@
+<div class="mc-body">
+    <p>
+        <mc-checkbox> Default</mc-checkbox>
+    </p>
+
+    <p>
+        <mc-checkbox [(ngModel)]="checked[0]"> Checked</mc-checkbox>
+
+    </p>
+
+    <p>
+        <mc-checkbox [(ngModel)]="checked[2]" [indeterminate]="true"> Indeterminate
+        </mc-checkbox>
+    </p>
+
+    <p>
+        <mc-checkbox [disabled]="true"> Default disabled</mc-checkbox>
+    </p>
+
+
+    <p>
+        <mc-checkbox [(ngModel)]="checked" disabled="disabled"> Checked disabled
+        </mc-checkbox>
+    </p>
+
+    <p>
+        <mc-checkbox [(ngModel)]="checked[2]" [indeterminate]="true" disabled="disabled"> Indeterminate disabled
+        </mc-checkbox>
+    </p>
+
+
+</div>
