@@ -166,8 +166,8 @@ $mc-light-theme-foreground: (
 
 // Background palette for light themes.
 $mc-light-theme-background: (
-    hover: rgba(black, 0.04), // TODO(kara): check style with Material Design UX
-    background: #808080,
+    hover: rgba(black, 0.05),
+    background: white,
     disabled-button: $black-12-opacity,
     focused-button: $black-6-opacity,
     disabled-list-option: #CCC

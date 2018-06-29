@@ -1,0 +1,29 @@
+<label [attr.for]="inputId" class="mc-checkbox-layout" #label>
+    <div class="mc-checkbox-inner-container"
+         [class.mc-checkbox-inner-container-no-side-margin]="!checkboxLabel.textContent || !checkboxLabel.textContent.trim()">
+        <input #input
+               class="mc-checkbox-input cdk-visually-hidden" type="checkbox"
+               [id]="inputId"
+               [required]="required"
+               [checked]="checked"
+               [attr.value]="value"
+               [disabled]="disabled"
+               [attr.name]="name"
+               [tabIndex]="tabIndex"
+               [indeterminate]="indeterminate"
+               [attr.aria-label]="ariaLabel || null"
+               [attr.aria-labelledby]="ariaLabelledby"
+               [attr.aria-checked]="_getAriaChecked()"
+               (change)="_onInteractionEvent($event)"
+               (click)="_onInputClick($event)">
+        <div class="mc-checkbox-frame"></div>
+        <div class="mc-checkbox-background">
+            <i class="mc-checkbox-checkmark mc mc-check_16"></i>
+            <i class="mc-checkbox-mixedmark mc mc-minus_16"></i>
+        </div>
+    </div>
+    <span class="mc-checkbox-label" #checkboxLabel (cdkObserveContent)="_onLabelTextChange()">
+    <span style="display:none">&nbsp;</span>
+    <ng-content></ng-content>
+  </span>
+</label>

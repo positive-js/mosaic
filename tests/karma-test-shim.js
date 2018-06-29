@@ -68,6 +68,7 @@ System.config({
         '@ptsecurity/mosaic/list': 'dist/packages/mosaic/list/index.js',
         '@ptsecurity/mosaic/icon': 'dist/packages/mosaic/icon/index.js',
         '@ptsecurity/mosaic/radio': 'dist/packages/mosaic/radio/index.js',
+        '@ptsecurity/mosaic/checkbox': 'dist/packages/mosaic/checkbox/index.js'
     },
     packages: {
         // Thirdparty barrels.
