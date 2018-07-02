@@ -21,7 +21,7 @@
         "@angular/elements": "6.0.0",
         "@angular/forms": "6.0.0",
         "@angular/platform-browser": "6.0.0",
-        "@ptsecurity/mosaic-icons": "2.5.1",
+        "@ptsecurity/mosaic-icons": "2.5.2",
         "core-js": "^2.5.5",
         "rxjs": "6.0.0",
         "systemjs": "0.19.43",

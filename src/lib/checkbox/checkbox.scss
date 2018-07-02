@@ -55,7 +55,6 @@ $_mc-checkbox-mark-stroke-size: 2 / 15 * $mc-checkbox-size !default;
     white-space: nowrap;
     width: $mc-checkbox-size;
     flex-shrink: 0;
-    font-size: $mc-checkbox-size;
     [dir='rtl'] & {
         margin: {
             left: $_mc-checkbox-item-spacing;
