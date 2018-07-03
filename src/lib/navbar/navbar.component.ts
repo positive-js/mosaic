@@ -1,5 +1,5 @@
 import {
-    AfterViewInit,
+AfterViewInit,
     Component, Directive,
     ElementRef,
     HostBinding,
@@ -10,9 +10,10 @@ import {
 } from '@angular/core';
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 
-import { CanDisable, mixinDisabled } from '@ptsecurity/mosaic/core';
+import { CanDisable, debounce, mixinDisabled } from '@ptsecurity/mosaic/core';
 
 
+const COLLAPSED_CLASS: string = 'mc-navbar-collapsed-title';
 const MC_DROPDOWN = 'mc-dropdown';
 const MC_ICON = 'mc-icon';
 const MC_NAVBAR = 'mc-navbar';
@@ -57,7 +58,7 @@ export const _McNavbarMixinBase = mixinDisabled(McNavbarItemBase);
 @Component({
     selector: MC_NAVBAR_ITEM,
     template: `
-        <a [attr.tabindex]="disabled ? -1 : tabIndex" class="mc-navbar-item">
+        <a [attr.tabindex]='disabled ? -1 : tabIndex' class='mc-navbar-item'>
             <ng-content>
             </ng-content>
         </a>
@@ -127,22 +128,79 @@ export class McNavbarContainer {
     }
 }
 
+class CachedCollapsedItemWidth {
+    collapsed: boolean = false;
+
+    constructor(
+        public element: HTMLElement,
+        public width: number
+    ) {}
+}
+
+class CachedItemWidth {
+    get canCollapse(): boolean {
+        return this.itemsForCollapse.length > 0;
+    }
+
+    private get title(): string {
+        const calculatedTitle = this.element.getAttribute('calculatedTitle');
+
+        return calculatedTitle
+            ? decodeURI(calculatedTitle)
+            : (this.itemsForCollapse.length > 0 ? this.itemsForCollapse[0].element.innerText : '');
+    }
+
+    constructor(
+        public element: HTMLElement,
+        public width: number,
+        public itemsForCollapse: CachedCollapsedItemWidth[] = []
+    ) {}
+
+    setCollapsed(collapsed: boolean): number {
+        if (this.itemsForCollapse.length > 0) {
+            if (collapsed) {
+                this.element.setAttribute('title', this.title);
+            } else {
+                this.element.removeAttribute('title');
+            }
+        }
+
+        let res = 0;
+
+        for (const subItem of this.itemsForCollapse) {
+            res += subItem.width;
+
+            if (collapsed) {
+                subItem.element.classList.add(COLLAPSED_CLASS);
+            } else {
+                subItem.element.classList.remove(COLLAPSED_CLASS);
+            }
+
+            subItem.collapsed = collapsed;
+        }
+
+        return res;
+    }
+}
+
+
 @Component({
     selector: MC_NAVBAR,
     template: `
-        <nav class="mc-navbar">
-            <ng-content select="[${MC_NAVBAR_CONTAINER}],${MC_NAVBAR_CONTAINER}"></ng-content>
+        <nav class='mc-navbar'>
+            <ng-content select='[${MC_NAVBAR_CONTAINER}],${MC_NAVBAR_CONTAINER}'></ng-content>
         </nav>
     `,
     styleUrls: ['./navbar.css'],
     encapsulation: ViewEncapsulation.None,
     host: {
-        '(window:resize)': 'collapse()'
+        '(window:resize)': 'updateCollapsedDebounce()'
     }
 })
 export class McNavbar implements AfterViewInit {
 
-    private readonly collapsedClass: string = 'mc-navbar-collapsed-title';
+    private readonly forceRecalculateItemsWidth: boolean = false;
+    private readonly resizeDebounceInterval: number = 200;
     private readonly firstLevelElement: string = MC_NAVBAR_CONTAINER;
     private readonly secondLevelElements: string[] = [
         MC_NAVBAR_ITEM,
@@ -150,68 +208,73 @@ export class McNavbar implements AfterViewInit {
         MC_NAVBAR_TITLE
     ];
 
-    constructor(
-        private _elementRef: ElementRef
-    ) {}
+    private _totalItemsWidths: number | null = null;
+    private _itemsWidths: CachedItemWidth[] | null = null;
 
-    collapse() {
-        const maxWidth = this._elementRef.nativeElement.querySelector('nav').getBoundingClientRect().width;
+    private get _maxAllowedWidth(): number {
+        return this._elementRef.nativeElement.querySelector('nav').getBoundingClientRect().width;
+    }
 
-        this._uncollapseAll();
+    private get itemsWidths(): CachedItemWidth[] {
+        if (this._itemsWidths !== null && !this.forceRecalculateItemsWidth) {
+            return this._itemsWidths;
+        }
 
         const allItemsSelector = this.secondLevelElements.map((e: string) => `${this.firstLevelElement}>${e}`);
         const allItems: HTMLElement[] = Array.from(this._elementRef.nativeElement.querySelectorAll(allItemsSelector));
 
-        const itemsWidth = allItems.reduce((acc, el) => acc + el.getBoundingClientRect().width, 0);
-        if (itemsWidth <= maxWidth) {
-            return;
+        this._itemsWidths = allItems.map((el) =>
+            new CachedItemWidth(el, el.getBoundingClientRect().width, this._getItemsForCollapse(el))
+        );
+
+        return this._itemsWidths;
+    }
+
+    private get totalItemsWidth(): number {
+        if (this._totalItemsWidths !== null && !this.forceRecalculateItemsWidth) {
+            return this._totalItemsWidths;
         }
 
-        let collapseDelta = itemsWidth - maxWidth;
+        this._totalItemsWidths = this.itemsWidths
+            .reduce((acc, item) => acc + item.width, 0);
 
-        const firstLevelItems: NodeListOf<HTMLElement> =
-            this._elementRef.nativeElement.querySelectorAll(`${MC_NAVBAR_ITEM},${MC_NAVBAR_BRAND}`);
+        return this._totalItemsWidths;
+    }
 
-        for (let i = firstLevelItems.length - 1; i >= 0; i--) {
-            const item: HTMLElement = firstLevelItems[i];
+    constructor(
+        private _elementRef: ElementRef
+    ) {}
 
-            const icon = item.querySelector(`[${MC_ICON}],${MC_NAVBAR_LOGO},[${MC_NAVBAR_LOGO}]`);
-            if (!icon) {
+    updateCollapsedDebounce() {
+        debounce(this.updateCollapsed.bind(this), this.resizeDebounceInterval)();
+    }
+
+    updateCollapsed() {
+        let collapseDelta = this.totalItemsWidth - this._maxAllowedWidth;
+        for (let i = this.itemsWidths.length - 1; i >= 0; i--) {
+            const item = this.itemsWidths[i];
+
+            if (!item.canCollapse) {
                 continue;
             }
 
-            const restElements: HTMLElement[] = Array.from(item.querySelectorAll(MC_NAVBAR_TITLE));
-
-            const calculatedTitle = item.getAttribute('calculatedTitle');
-
-            const title = calculatedTitle
-                ? decodeURI(calculatedTitle)
-                : (restElements.length > 0 ? restElements[0].innerText : '');
-
-            item.setAttribute('title', title);
-
-            for (const element of restElements) {
-                collapseDelta -= element.getBoundingClientRect().width;
-
-                element.classList.add(this.collapsedClass);
-            }
-
-            if (collapseDelta < 0) {
-                return;
-            }
+            collapseDelta -= item.setCollapsed(collapseDelta > 0);
         }
     }
 
     ngAfterViewInit(): void {
-        this.collapse();
+        // Note: this wait is required for loading and rendering fonts for icons;
+        // unfortunately we cannot control font rendering
+        setTimeout(() => this.updateCollapsed(), 0);
     }
 
-    private _uncollapseAll() {
-        const titles: HTMLElement[] = Array.from(
-            this._elementRef.nativeElement.querySelectorAll(`${MC_NAVBAR_TITLE}.${this.collapsedClass}`)
-        );
-        for (const title of titles) {
-            title.classList.remove(this.collapsedClass);
+    private _getItemsForCollapse(element: HTMLElement): CachedCollapsedItemWidth[] {
+        const icon = element.querySelector(`[${MC_ICON}],${MC_NAVBAR_LOGO},[${MC_NAVBAR_LOGO}]`);
+        if (!icon) {
+            return [];
         }
+
+        return Array.from(element.querySelectorAll(MC_NAVBAR_TITLE))
+            .map((el) => new CachedCollapsedItemWidth(<HTMLElement> el, el.getBoundingClientRect().width));
     }
 }

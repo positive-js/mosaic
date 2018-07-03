@@ -5,6 +5,7 @@ $mc-navbar-height: 48px;
 $mc-navbar-item-h-padding: 16px;
 $mc-navbar-brand-h-padding: 12px;
 $mc-navbar-title-icon-space: 8px;
+$mc-navbar-icon-min-width: 15px;
 
 %mc-navbar-container-base {
     height: 100%;
@@ -30,6 +31,10 @@ $mc-navbar-title-icon-space: 8px;
 
     [mc-icon] + mc-navbar-title {
         margin-left: $mc-navbar-title-icon-space;
+    }
+
+    [mc-icon] {
+        min-width: 15px;
     }
 
     mc-navbar-title:not(.mc-navbar-collapsed-title) + [mc-icon] {
