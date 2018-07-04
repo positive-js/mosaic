@@ -16,14 +16,18 @@ describe('McNavbar', () => {
         TestBed.compileComponents();
     }));
 
-    it('should be collapsed on init stage', () => {
+    it('should be collapsed on init stage', (done) => {
         const fixture = TestBed.createComponent(TestApp);
-
         fixture.detectChanges();
 
-        const collapsedElements = fixture.debugElement.queryAll(By.css('.mc-navbar-collapsed-title'));
+        // Note: setTimeout - please see the issue about font rendering time
+        setTimeout(() => {
+            fixture.detectChanges();
 
-        expect(collapsedElements.length).toBeGreaterThan(0);
+            const collapsedElements = fixture.debugElement.queryAll(By.css('.mc-navbar-collapsed-title'));
+            expect(collapsedElements.length).toBeGreaterThan(0);
+            done();
+        }, 10);
     });
 
     it('collapsed elements should have title', () => {
