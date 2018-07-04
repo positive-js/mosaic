@@ -315,7 +315,7 @@ export class McNavbar implements AfterViewInit {
             .reduce((acc, item) => acc + item.width, 0);
     }
 
-    private readonly resizeDebounceInterval: number = 300;
+    private readonly resizeDebounceInterval: number = 200;
 
     updateCollapsedDebounce() {
         debounce(this.updateCollapsed.bind(this), this.resizeDebounceInterval)();
