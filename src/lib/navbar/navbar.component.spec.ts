@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { fakeAsync, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
+import { McIconModule } from './../icon/icon.module';
 import { McNavbarModule, McNavbar } from './index';
 
 
@@ -9,7 +10,7 @@ describe('McNavbar', () => {
 
     beforeEach(fakeAsync(() => {
         TestBed.configureTestingModule({
-            imports: [McNavbarModule],
+            imports: [McNavbarModule, McIconModule],
             declarations: [TestApp]
         });
 
@@ -25,6 +26,7 @@ describe('McNavbar', () => {
             fixture.detectChanges();
 
             const collapsedElements = fixture.debugElement.queryAll(By.css('.mc-navbar-collapsed-title'));
+
             expect(collapsedElements.length).toBeGreaterThan(0);
             done();
         }, 10);
@@ -44,17 +46,24 @@ describe('McNavbar', () => {
         expect(hasTitle).toBeTruthy();
     });
 
-    it('collapsed elements should have specific title if defined', () => {
+    it('collapsed elements should have specific title if defined', (done) => {
         const fixture = TestBed.createComponent(TestApp);
         fixture.detectChanges();
 
-        const items = fixture.debugElement.queryAll(By.css('mc-navbar-item'));
-        const collapsedElements = items.filter((item) =>
-            item.nativeElement.querySelectorAll('.mc-navbar-collapsed-title').length > 0);
+        // Note: setTimeout - please see the issue about font rendering time
+        setTimeout(() => {
+            fixture.detectChanges();
 
-        const elementWithCustomTitle = collapsedElements[collapsedElements.length - 1];
+            const items = fixture.debugElement.queryAll(By.css('mc-navbar-item'));
+            const collapsedElements = items.filter((item) =>
+                item.nativeElement.querySelectorAll('.mc-navbar-collapsed-title').length > 0);
 
-        expect(elementWithCustomTitle.nativeElement.getAttribute('title')).toBe('customTitle');
+            const elementWithCustomTitle = collapsedElements[collapsedElements.length - 1];
+
+            expect(elementWithCustomTitle.nativeElement.getAttribute('title')).toBe('customTitle');
+
+            done();
+        }, 10);
     });
 
     it('items should allow click if not disable', () => {
