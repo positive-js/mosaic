@@ -148,7 +148,8 @@ export const _McNavbarMixinBase = mixinDisabled(McNavbarItemBase);
     encapsulation: ViewEncapsulation.None,
     inputs: ['disabled'],
     host: {
-        '[attr.disabled]': 'disabled || null'
+        '[attr.disabled]': 'disabled || null',
+        '[attr.title]': 'title'
     }
 })
 export class McNavbarItem extends _McNavbarMixinBase implements OnInit, OnDestroy, CanDisable, ISecondLevel {
@@ -171,9 +172,9 @@ export class McNavbarItem extends _McNavbarMixinBase implements OnInit, OnDestro
     tabIndex: number = 0;
 
     @Input()
-    set collapsedTitle(value: string) {
-        this.elementRef.nativeElement.setAttribute('calculatedTitle', encodeURI(value));
-    }
+    collapsedTitle: string;
+
+    title: string;
 
     constructor(
         public  elementRef: ElementRef,
@@ -184,6 +185,10 @@ export class McNavbarItem extends _McNavbarMixinBase implements OnInit, OnDestro
 
     setCollapsed(collapse: boolean) {
         this.titles.forEach((t) => t.setCollapsed(collapse));
+
+        this.title = collapse && this.canCollapse
+            ? this.collapsedTitle || this.titles.first.elementRef.nativeElement.innerText
+            : '';
     }
 
     ngOnInit() {
@@ -337,6 +342,6 @@ export class McNavbar implements AfterViewInit {
     ngAfterViewInit(): void {
         // Note: this wait is required for loading and rendering fonts for icons;
         // unfortunately we cannot control font rendering
-        setTimeout(() => this.updateCollapsed(), 10);
+        setTimeout(() => this.updateCollapsed(), 0);
     }
 }
