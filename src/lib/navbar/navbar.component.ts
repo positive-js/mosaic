@@ -335,6 +335,8 @@ export class McNavbar implements AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        setTimeout(() => this.updateCollapsed(), 0);
+        // Note: this wait is required for loading and rendering fonts for icons;
+        // unfortunately we cannot control font rendering
+        setTimeout(() => this.updateCollapsed(), 10);
     }
 }
