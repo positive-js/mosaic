@@ -6,6 +6,8 @@ import { McIconModule } from './../icon/icon.module';
 import { McNavbarModule, McNavbar } from './index';
 
 
+const FONT_RENDER_TIMEOUT_MS = 10;
+
 describe('McNavbar', () => {
 
     beforeEach(fakeAsync(() => {
@@ -29,21 +31,27 @@ describe('McNavbar', () => {
 
             expect(collapsedElements.length).toBeGreaterThan(0);
             done();
-        }, 10);
+        }, FONT_RENDER_TIMEOUT_MS);
     });
 
-    it('collapsed elements should have title', () => {
+    it('collapsed elements should have title', (done) => {
         const fixture = TestBed.createComponent(TestApp);
 
         fixture.detectChanges();
 
-        const items = fixture.debugElement.queryAll(By.css('mc-navbar-item'));
-        const collapsedElements = items.filter((item) =>
-            item.nativeElement.querySelectorAll('.mc-navbar-collapsed-title').length > 0);
+        // Note: setTimeout - please see the issue about font rendering time
+        setTimeout(() => {
+            fixture.detectChanges();
 
-        const hasTitle = collapsedElements.reduce((acc, el) => acc && el.nativeElement.hasAttribute('title'), true);
+            const items = fixture.debugElement.queryAll(By.css('mc-navbar-item'));
+            const collapsedElements = items.filter((item) =>
+                item.nativeElement.querySelectorAll('.mc-navbar-collapsed-title').length > 0);
 
-        expect(hasTitle).toBeTruthy();
+            const hasTitle = collapsedElements.reduce((acc, el) => acc && el.nativeElement.hasAttribute('title'), true);
+
+            expect(hasTitle).toBeTruthy();
+            done();
+        }, FONT_RENDER_TIMEOUT_MS);
     });
 
     it('collapsed elements should have specific title if defined', (done) => {
@@ -63,7 +71,7 @@ describe('McNavbar', () => {
             expect(elementWithCustomTitle.nativeElement.getAttribute('title')).toBe('customTitle');
 
             done();
-        }, 10);
+        }, FONT_RENDER_TIMEOUT_MS);
     });
 
     it('items should allow click if not disable', () => {
