@@ -42,7 +42,16 @@ jobs:
     steps:
       - checkout: *post_checkout
       - restore_cache: *package_lock_key
-      - run: npm run test:unit
+      - run:
+          command: npm run test:unit
+          environment:
+            JUNIT_REPORT_PATH: ./junit/
+            JUNIT_REPORT_NAME: test-results.xml
+          when: always
+      - store_test_results:
+          path: ./junit
+      - store_artifacts:
+          path: ./junit
 
   snapshot_publish:
     <<: *defaults

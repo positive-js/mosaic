@@ -3,7 +3,11 @@ import { join } from 'path';
 
 import { PackageBundler } from './build-bundles';
 import { buildConfig } from './build-config';
-import { compileEntryPoint, renamePrivateReExportsToBeUnique } from './compile-entry-point';
+import {
+    addImportAsToAllMetadata,
+    compileEntryPoint,
+    renamePrivateReExportsToBeUnique
+} from './compile-entry-point';
 import { ngcCompile } from './ngc-compile';
 import { getSecondaryEntryPointsForPackage } from './secondary-entry-points';
 
@@ -118,15 +122,17 @@ export class BuildPackage {
     /** Compiles the TypeScript sources of a primary or secondary entry point. */
     private _compileTestEntryPoint(tsconfigName: string, secondaryEntryPoint = ''): Promise<any> {
         const entryPointPath = join(this.sourceDir, secondaryEntryPoint);
-        const entryPointTsconfigPath = join(entryPointPath, tsconfigName);
+        const tsconfigPath = join(entryPointPath, tsconfigName);
 
-        return ngcCompile(['-p', entryPointTsconfigPath]).catch(() => {
-            const error = chalk.default.red(`Failed to compile ${secondaryEntryPoint} using ${entryPointTsconfigPath}`);
-            /* tslint:disable-next-line:no-console */
-            console.error(error);
+        return ngcCompile(['-p', tsconfigPath])
+            .then(() => addImportAsToAllMetadata(this))
+            .catch(() => {
+                const error = chalk.default.red(`Failed to compile ${secondaryEntryPoint} using ${tsconfigPath}`);
+                /* tslint:disable-next-line:no-console */
+                console.error(error);
 
-            return Promise.reject(error);
-        });
+                return Promise.reject(error);
+            });
     }
 
     /**

@@ -3,6 +3,8 @@
 @import '../../../button/button-theme';
 @import '../../../list/list-theme';
 @import '../../../radio/radio-theme';
+@import '../../../checkbox/checkbox-theme';
+@import '../../../navbar/navbar-theme';
 
 
 @mixin mosaic-typography($config: null) {
@@ -16,4 +18,6 @@
     @include mc-button-typography($config);
     @include mc-list-typography($config);
     @include mc-radio-typography($config);
+    @include mc-checkbox-typography($config);
+    @include mc-navbar-typography($config);
 }

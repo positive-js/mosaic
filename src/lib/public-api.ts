@@ -7,3 +7,4 @@ export * from '@ptsecurity/mosaic/icon';
 export * from '@ptsecurity/mosaic/divider';
 export * from '@ptsecurity/mosaic/radio';
 export * from '@ptsecurity/mosaic/list';
+export * from '@ptsecurity/mosaic/checkbox';

@@ -1,0 +1,163 @@
+@import '../core/theming/theming';
+@import '../core/styles/common/layout';
+@import '../core/styles/variables';
+
+$mc-toggle-padding: 24px !default;
+$mc-checkbox-border-width: 1px;
+$mc-checkbox-size: 16px !default;
+$toggle-box-shadow: inset 0 0 1px 0 rgba(0, 0, 0, 0.2);
+// The amount of spacing between the checkbox and its label.
+$_mc-checkbox-item-spacing: $mc-toggle-padding - $mc-checkbox-size;
+
+// The width of the line used to draw the checkmark / mixedmark.
+$_mc-checkbox-mark-stroke-size: 2 / 15 * $mc-checkbox-size !default;
+
+// Applied to elements that are considered "marks" within the checkbox, e.g. the checkmark and
+// the mixedmark.
+%mc-checkbox-mark {
+    $width-padding-inset: 2 * $mc-checkbox-border-width;
+    width: calc(100% - #{$width-padding-inset});
+}
+
+// Applied to elements that appear to make up the outer box of the checkmark, such as the frame
+// that contains the border and the actual background element that contains the marks.
+%mc-checkbox-outer-box {
+    @include mc-fill;
+    border-radius: 3px;
+    box-sizing: border-box;
+    pointer-events: none;
+}
+
+.mc-checkbox {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.mc-checkbox-layout {
+    // `cursor: inherit` ensures that the wrapper element gets the same cursor as the mc-checkbox
+    // (e.g. pointer by default, regular when disabled), instead of the browser default.
+    cursor: inherit;
+    align-items: baseline;
+    vertical-align: middle;
+    display: inline-flex;
+    white-space: nowrap;
+}
+
+.mc-checkbox-inner-container {
+    display: inline-block;
+    height: $mc-checkbox-size;
+    line-height: 0;
+    margin: auto;
+    margin-right: $_mc-checkbox-item-spacing;
+    order: 0;
+    position: relative;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: $mc-checkbox-size;
+    flex-shrink: 0;
+    [dir='rtl'] & {
+        margin: {
+            left: $_mc-checkbox-item-spacing;
+            right: auto;
+        }
+    }
+}
+
+.mc-checkbox-inner-container-no-side-margin {
+    margin: {
+        left: 0;
+        right: 0;
+    }
+}
+
+.mc-checkbox-frame {
+    @extend %mc-checkbox-outer-box;
+
+    background-color: transparent;
+    border: {
+        width: $mc-checkbox-border-width;
+        style: solid;
+    }
+    box-shadow: $toggle-box-shadow;
+}
+
+.mc-checkbox-background {
+    @extend %mc-checkbox-outer-box;
+
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+}
+
+.mc-checkbox-checkmark, .mc-checkbox-mixedmark {
+    @include mc-fill;
+    @extend %mc-checkbox-mark;
+
+    width: 100%;
+    opacity: 0;
+}
+
+.mc-checkbox-label-before {
+    .mc-checkbox-inner-container {
+        order: 1;
+        margin: {
+            left: $_mc-checkbox-item-spacing;
+            right: auto;
+        }
+
+        [dir='rtl'] & {
+            margin: {
+                left: auto;
+                right: $_mc-checkbox-item-spacing;
+            }
+        }
+    }
+}
+
+.mc-checkbox-checked {
+    .mc-checkbox-checkmark {
+        opacity: 1;
+    }
+    .mc-checkbox-mixedmark {
+        opacity: 0;
+    }
+}
+
+.mc-checkbox-indeterminate {
+    .mc-checkbox-checkmark {
+        opacity: 0;
+    }
+    .mc-checkbox-mixedmark {
+        opacity: 1;
+    }
+
+}
+
+.mc-checkbox-unchecked {
+    .mc-checkbox-background {
+        background-color: transparent;
+    }
+}
+
+.mc-checkbox-disabled {
+    cursor: default;
+    .mc-checkbox-frame {
+        box-shadow: none;
+    }
+}
+
+.mc-checkbox-input {
+    // Move the input to the bottom and in the middle.
+    // Visual improvement to properly show browser popups when being required.
+    bottom: 0;
+    left: 50%;
+    &:focus {
+        + .mc-checkbox-frame {
+            top: -1px;
+            left: -1px;
+            border-width: 2px;
+            width: 18px;
+            height: 18px;
+        }
+    }
+}

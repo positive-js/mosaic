@@ -1,6 +1,7 @@
 [![CircleCI](https://circleci.com/gh/positive-js/mosaic/tree/master.svg?style=shield)](https://circleci.com/gh/positive-js/mosaic/tree/master)
 [![Dependency Status](https://david-dm.org/positive-js/mosaic.svg)](https://david-dm.org/positive-js/mosaic)
 [![Known Vulnerabilities](https://snyk.io/test/github/positive-js/mosaic/badge.svg)](https://snyk.io/test/github/positive-js/mosaic)
+[![Wallaby.js](https://img.shields.io/badge/wallaby.js-configured-green.svg)](https://wallabyjs.com)
 
 # Mosaic components for Angular
 
@@ -11,6 +12,7 @@
 
 ## Demo and Documentation
 * [Getting Started Guide][getting-started]
+* [Storybook](https://positive-js.github.io/mosaic-storybook/) 
 
 ## Getting started
 

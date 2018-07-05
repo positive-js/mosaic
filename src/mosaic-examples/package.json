@@ -9,7 +9,7 @@
   "private": true,
   "repository": {
     "type": "git",
-      "homepage": "https://github.com/positive-js/mosaic"
+    "homepage": "https://github.com/positive-js/mosaic"
   },
   "keywords": [
     "angular",

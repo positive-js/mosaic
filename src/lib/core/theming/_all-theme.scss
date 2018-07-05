@@ -4,6 +4,8 @@
 @import '../../button/button-theme';
 @import '../../list/list-theme';
 @import '../../radio/radio-theme';
+@import '../../checkbox/checkbox-theme';
+@import '../../navbar/navbar-theme';
 
 
 @mixin mosaic-theme($theme) {
@@ -12,4 +14,7 @@
     @include mc-button-theme($theme);
     @include mc-list-theme($theme);
     @include mc-radio-theme($theme);
+    @include mc-checkbox-theme($theme);
+    @include mc-navbar-theme($theme);
+
 }

@@ -11,7 +11,8 @@ module.exports = (config) => {
             require('karma-jasmine'),
             require('karma-chrome-launcher'),
             require('karma-sourcemap-loader'),
-            require('karma-coverage')
+            require('karma-coverage'),
+            require('karma-junit-reporter')
         ],
         files: [
             {pattern: 'node_modules/core-js/client/core.js', included: true, watched: false},
@@ -40,7 +41,7 @@ module.exports = (config) => {
             'dist/packages/**/*.js': ['sourcemap']
         },
 
-        reporters: ['dots'],
+        reporters: ['dots', 'junit'],
 
         port: 9876,
         colors: true,
@@ -55,6 +56,11 @@ module.exports = (config) => {
             ]
         },
 
+        junitReporter: {
+            outputDir: process.env.JUNIT_REPORT_PATH || 'dist/reports/junit',
+            outputFile: process.env.JUNIT_REPORT_NAME || 'test-results.xml',
+            useBrowserName: false
+        },
 
         browserDisconnectTimeout: 20000,
         browserNoActivityTimeout: 240000,

@@ -1,0 +1,45 @@
+@import 'navbar-base';
+@import 'navbar-theme';
+
+
+.mc-navbar {
+    @extend %mc-nav-bar-base;
+}
+
+mc-navbar-container, .mc-navbar-left, .mc-navbar-right {
+    @extend %mc-navbar-container-base;
+}
+
+mc-navbar-item, .mc-navbar-item, .mc-navbar-title, mc-navbar-item:first-child {
+    @extend %mc-navbar-item-base;
+}
+
+.mc-navbar-title {
+    @extend %mc-navbar-title-base;
+}
+
+mc-navbar-brand, .mc-navbar-brand {
+    @extend %mc-navbar-brand-base;
+}
+
+.mc-navbar-item:not([disabled]) {
+    cursor: pointer;
+}
+
+mc-navbar-item, mc-navbar-item:first-child, mc-navbar-brand, .mc-navbar-item .mc-navbar-title {
+    padding: 0;
+}
+
+mc-navbar-item.mc-progress:not([disabled]) {
+    cursor: pointer;
+}
+
+mc-navbar-item[disabled] .mc-navbar-item, .mc-navbar-item[disabled] {
+    /*It is controversially. Works fine but cannot be tested*/
+    /*pointer-events: none;*/
+    cursor: default;
+}
+
+mc-navbar-title.mc-navbar-collapsed-title {
+    display: none;
+}
