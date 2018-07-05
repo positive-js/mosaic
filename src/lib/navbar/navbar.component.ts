@@ -1,3 +1,6 @@
+import { fromEvent } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
+
 import {
 AfterViewInit,
     Component, Directive,
@@ -10,7 +13,7 @@ AfterViewInit,
 } from '@angular/core';
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 
-import { CanDisable, debounce, mixinDisabled } from '@ptsecurity/mosaic/core';
+import { CanDisable, mixinDisabled } from '@ptsecurity/mosaic/core';
 
 
 const COLLAPSED_CLASS: string = 'mc-navbar-collapsed-title';
@@ -192,10 +195,7 @@ class CachedItemWidth {
         </nav>
     `,
     styleUrls: ['./navbar.css'],
-    encapsulation: ViewEncapsulation.None,
-    host: {
-        '(window:resize)': 'updateCollapsedDebounce()'
-    }
+    encapsulation: ViewEncapsulation.None
 })
 export class McNavbar implements AfterViewInit {
 
@@ -243,10 +243,13 @@ export class McNavbar implements AfterViewInit {
 
     constructor(
         private _elementRef: ElementRef
-    ) {}
+    ) {
+        const obs = fromEvent(window, 'resize')
+            .pipe (
+                debounceTime(this.resizeDebounceInterval)
+            );
 
-    updateCollapsedDebounce() {
-        debounce(this.updateCollapsed.bind(this), this.resizeDebounceInterval)();
+        obs.subscribe(this.updateCollapsed.bind(this));
     }
 
     updateCollapsed() {
