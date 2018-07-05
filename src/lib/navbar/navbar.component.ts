@@ -26,18 +26,18 @@ const MC_NAVBAR_LOGO = 'mc-navbar-logo';
 
 export type McNavbarContainerPositionType = 'left' | 'right';
 
-interface IMeasure {
+export interface IMeasure {
     width: number;
 }
 
-interface ISecondLevel extends IMeasure {
+export interface ISecondLevel extends IMeasure {
     canCollapse: boolean;
     order: number;
     collapsedWidth: number;
     setCollapsed(collapse: boolean);
 }
 
-abstract class AbstractMeasure implements IMeasure {
+export abstract class AbstractMeasure implements IMeasure {
     private _width: number | null = null;
 
     get width(): number {
