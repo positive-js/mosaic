@@ -188,7 +188,7 @@ class CachedItemWidth {
     selector: MC_NAVBAR,
     template: `
         <nav class="mc-navbar">
-            <ng-content select=""[${MC_NAVBAR_CONTAINER}],${MC_NAVBAR_CONTAINER}"></ng-content>
+            <ng-content select="[${MC_NAVBAR_CONTAINER}],${MC_NAVBAR_CONTAINER}"></ng-content>
         </nav>
     `,
     styleUrls: ['./navbar.css'],
