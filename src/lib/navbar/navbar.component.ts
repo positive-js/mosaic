@@ -78,6 +78,8 @@ export class McNavbarTitle extends AbstractMeasure implements ISecondLevel, Afte
 
     collapsedWidth: number = 0;
 
+    private readonly allowSetClassNative: boolean = false;
+
     constructor(
         private _elementRef: ElementRef
     ) {
@@ -85,9 +87,17 @@ export class McNavbarTitle extends AbstractMeasure implements ISecondLevel, Afte
     }
 
     setCollapsed(collapse: boolean) {
-        this.klass = collapse
-            ? `${COLLAPSED_CLASS} ${MC_NAVBAR_TITLE}`
-            : MC_NAVBAR_TITLE;
+        if (!this.allowSetClassNative) {
+            this.klass = collapse
+                ? `${COLLAPSED_CLASS} ${MC_NAVBAR_TITLE}`
+                : MC_NAVBAR_TITLE;
+        } else {
+            if (collapse) {
+                this._elementRef.nativeElement.classList.add(COLLAPSED_CLASS);
+            } else {
+                this._elementRef.nativeElement.classList.remove(COLLAPSED_CLASS);
+            }
+        }
     }
 
     ngAfterViewInit(): void {
