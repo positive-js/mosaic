@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { A11yModule } from '@ptsecurity/cdk/a11y';
 import { PlatformModule } from '@ptsecurity/cdk/platform';
 
+import { McIconModule } from '../icon/icon.module';
+
 import {
     McNavbar,
     McNavbarContainer,
@@ -18,7 +20,9 @@ import {
     imports: [
         CommonModule,
         A11yModule,
-        PlatformModule
+        PlatformModule,
+
+        McIconModule
     ],
     exports: [
         McNavbar,
