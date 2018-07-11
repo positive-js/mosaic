@@ -15,13 +15,13 @@ module.exports = (config) => {
             require('karma-junit-reporter')
         ],
         files: [
-            {pattern: 'node_modules/core-js/client/core.js', included: true, watched: false},
+            {pattern: 'node_modules/core-js/client/core.min.js', included: true, watched: false},
             {pattern: 'node_modules/tslib/tslib.js', included: true, watched: false},
-            {pattern: 'node_modules/systemjs/dist/system.src.js', included: true, watched: false},
-            {pattern: 'node_modules/zone.js/dist/zone.js', included: true, watched: false},
-            {pattern: 'node_modules/zone.js/dist/proxy.js', included: true, watched: false},
+            {pattern: 'node_modules/systemjs/dist/system.js', included: true, watched: false},
+            {pattern: 'node_modules/zone.js/dist/zone.min.js', included: true, watched: false},
+            {pattern: 'node_modules/zone.js/dist/proxy.min.js', included: true, watched: false},
             {pattern: 'node_modules/zone.js/dist/sync-test.js', included: true, watched: false},
-            {pattern: 'node_modules/zone.js/dist/jasmine-patch.js', included: true, watched: false},
+            {pattern: 'node_modules/zone.js/dist/jasmine-patch.min.js', included: true, watched: false},
             {pattern: 'node_modules/zone.js/dist/async-test.js', included: true, watched: false},
             {pattern: 'node_modules/zone.js/dist/fake-async-test.js', included: true, watched: false},
 
@@ -29,6 +29,7 @@ module.exports = (config) => {
             {pattern: 'node_modules/@angular/**/*', included: false, watched: false},
             {pattern: 'node_modules/rxjs/**/*', included: false, watched: false},
 
+            {pattern: 'tests/karma-system-config.js', included: true, watched: false},
             {pattern: 'tests/karma-test-shim.js', included: true, watched: false},
 
             // Paths to support debugging with source maps in dev tools
@@ -68,6 +69,8 @@ module.exports = (config) => {
         browsers: ['ChromeHeadlessLocal'],
 
         singleRun: false,
+
+        transports: ['websocket', 'polling'],
 
         browserConsoleLogOptions: {
             terminal: true,
