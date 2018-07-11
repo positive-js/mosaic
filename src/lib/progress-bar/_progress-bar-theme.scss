@@ -1,0 +1,24 @@
+@import '../core/theming/theming';
+@import '../core/theming/palette';
+
+@mixin mc-progress-bar-theme($theme) {
+    $primary: map-get($theme, primary);
+    $second: map-get($theme, second);
+    $warn: map-get($theme, warn);
+
+    .mc-progress-bar {
+        background-color: mc-color($mc-grey, 60);
+
+        &.mc-primary &__line {
+            background-color: mc-color($primary, 500);
+        }
+
+        &.mc-second &__line {
+            background-color: mc-color($second, 500);
+        }
+
+        &.mc-warn &__line {
+            background-color: mc-color($warn, 500);
+        }
+    }
+}
