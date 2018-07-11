@@ -1,0 +1,25 @@
+<h1>Progress bar</h1>
+<div>
+    Mode:
+    <select [(ngModel)]="mode">
+        <option [ngValue]="'determinate'">Determinate</option>
+        <option [ngValue]="'indeterminate'">Indeterminate</option>
+    </select>
+</div>
+<div class="container">
+    <div class="percent">{{ mode === 'indeterminate' ? '--' : percent }}%</div>
+    <div class="lines">
+        <div class="line-container">
+            <mc-progress-bar [value]="percent" [mode]="mode"></mc-progress-bar>
+        </div>
+        <div class="line-container">
+            <mc-progress-bar [value]="percent" [mode]="mode" color="primary"></mc-progress-bar>
+        </div>
+        <div class="line-container">
+            <mc-progress-bar [value]="percent" [mode]="mode" color="second"></mc-progress-bar>
+        </div>
+        <div class="line-container">
+            <mc-progress-bar [value]="percent" [mode]="mode" color="warn"></mc-progress-bar>
+        </div>
+    </div>
+</div>
