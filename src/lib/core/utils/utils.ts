@@ -6,5 +6,5 @@ export function toBoolean(value: any): boolean {
 }
 
 export function isNotNil(value: any): boolean {
-    return value !== 'undefined' && value !== null;
+    return value !== undefined && value !== null;
 }
