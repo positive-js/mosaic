@@ -41,7 +41,8 @@
         "dist",
         "wallabyTest.ts",
         "src/**/*.spec.ts",
-        "src/**/*.e2e.ts"
+        "src/**/*.e2e.ts",
+        "src/mosaic-examples/**/*.*"
     ],
     "angularCompilerOptions": {
         "skipMetadataEmit": true
