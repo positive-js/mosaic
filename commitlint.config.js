@@ -27,7 +27,7 @@ module.exports = {
                 'progress-bar',
                 'datepicker',
                 'timepicker',
-                'layout'
+                'visual'
             ]
         ]
     }

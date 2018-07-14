@@ -1,0 +1,36 @@
+@import '../../lib/core/visual/prebuilt/default-visual';
+
+@include mosaic-visual();
+
+.colorNested > div div  {
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
+    opacity: 0.9;
+    color: white;
+    text-align: center;
+}
+
+.colorNested > div div:nth-child(1) {
+    background-color: #009688;
+}
+.colorNested > div div:nth-child(2) {
+    background-color: #3949ab;
+}
+.colorNested > div div:nth-child(3) {
+    background-color: #9c27b0;
+}
+
+.colorNested > div div:nth-child(4) {
+    background-color: #8bc34a;
+}
+
+.colorNested > div div:nth-child(5)  {
+    background-color: #deb867;
+}
+
+.colorNested > div div:nth-child(6) {
+    background-color: #FF5722;
+}
+
+.colorNested > div div:nth-child(7)  {
+    background-color: #03A9F4;
+}
