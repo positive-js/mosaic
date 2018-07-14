@@ -12,7 +12,7 @@ export class ExampleData {
   /** Description of the example. */
   description: string;
 
-  /** Path to the example. This is based on the structure of the material.angular.io repo. */
+  /** Path to the example. This is based on the structure of the repo. */
   examplePath: string;
 
   /** List of files that are part of this example. */

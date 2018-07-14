@@ -1,0 +1,30 @@
+// mixin definition ; sets LTR and RTL within the same style call
+// @see https://css-tricks.com/almanac/properties/d/direction/
+
+@mixin rtl($prop, $ltr-value, $rtl-value) {
+    #{$prop}: $ltr-value;
+
+    [dir=rtl] & {
+        #{$prop}: $rtl-value;
+    }
+}
+
+@mixin rtl-prop($ltr-prop, $rtl-prop, $value, $reset-value) {
+    #{$ltr-prop}: $value;
+
+    [dir=rtl] & {
+        #{$ltr-prop}: $reset-value;
+        #{$rtl-prop}: $value;
+    }
+}
+
+// To reverse padding (top left bottom right) -> (top right bottom left)
+@function rtl-value($list) {
+    @if length($list) == 4 {
+        @return nth($list, 1) nth($list, 4) nth($list, 3) nth($list, 2)
+    }
+    @if length($list) == 5 {
+        @return nth($list, 1) nth($list, 4) nth($list, 3) nth($list, 2) nth($list, 5)
+    }
+    @return $list;
+}

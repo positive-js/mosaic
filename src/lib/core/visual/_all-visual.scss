@@ -1,6 +1,14 @@
 @import './body';
+@import './layout';
+@import './layout-media';
+
 
 @mixin mosaic-visual() {
 
     // include specific mixins
+
+    @include layouts_for_breakpoint();
+    @include layout-padding-margin();
+
+    @include media-print();
 }
