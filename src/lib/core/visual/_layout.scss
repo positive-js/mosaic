@@ -112,7 +112,9 @@
         display: -ms-flexbox;
         display: flex;
     }
+
     .layout#{$name}-column {  flex-direction: column;     }
+
     .layout#{$name}-row    {  flex-direction: row;        }
 }
 

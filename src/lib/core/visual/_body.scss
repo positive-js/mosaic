@@ -2,45 +2,48 @@
 @import '../styles/common/size';
 
 
-// HTML & Body reset
-html, body {
-    @include square(100%);
-}
+@mixin body_html() {
 
-// Document
-//
-// 1. Change from `box-sizing: content-box` so that `width` is not affected by `padding` or `border`.
-// 2. Prevent adjustments of font size after orientation changes in IE on Windows Phone and in iOS.
-// 3. Setting @viewport causes scrollbars to overlap content in IE11 and Edge, so
-//    we force a non-overlapping, non-auto-hiding scrollbar to counteract.
-// 4. Change the default tap highlight to be completely transparent in iOS.
+    // HTML & Body reset
+    html, body {
+        @include square(100%);
+    }
 
-*,
-*::before,
-*::after {
-    box-sizing: border-box; // 1
-}
+    // Document
+    //
+    // 1. Change from `box-sizing: content-box` so that `width` is not affected by `padding` or `border`.
+    // 2. Prevent adjustments of font size after orientation changes in IE on Windows Phone and in iOS.
+    // 3. Setting @viewport causes scrollbars to overlap content in IE11 and Edge, so
+    //    we force a non-overlapping, non-auto-hiding scrollbar to counteract.
+    // 4. Change the default tap highlight to be completely transparent in iOS.
 
-html {
-    -webkit-text-size-adjust: 100%; // 2
-    -ms-text-size-adjust: 100%; // 2
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box; // 1
+    }
 
-    -ms-overflow-style: scrollbar; // 3
+    html {
+        -webkit-text-size-adjust: 100%; // 2
+        -ms-text-size-adjust: 100%; // 2
 
-    -moz-osx-font-smoothing: grayscale;
+        -ms-overflow-style: scrollbar; // 3
 
-    // Helps fonts on OSX looks more consistent with other systems
-    // Isn't currently in button styles due to performance concerns
-    -webkit-font-smoothing: antialiased;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0); // 4
-    -webkit-touch-callout: none;
-}
+        -moz-osx-font-smoothing: grayscale;
 
-// Body
-//
-// 1. remove the margin in all browsers.
+        // Helps fonts on OSX looks more consistent with other systems
+        // Isn't currently in button styles due to performance concerns
+        -webkit-font-smoothing: antialiased;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0); // 4
+        -webkit-touch-callout: none;
+    }
 
-body {
-    font-family: map-get(map-get($fonts, 'base'), font-family);
-    margin: 0; // 1
+    // Body
+    //
+    // 1. remove the margin in all browsers.
+
+    body {
+        font-family: map-get(map-get($fonts, 'base'), font-family);
+        margin: 0; // 1
+    }
 }
