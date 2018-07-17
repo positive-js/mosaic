@@ -26,6 +26,19 @@
     mc-navbar-item, .mc-navbar-item {
         border: 1px solid transparent;
 
+        outline: 0;
+
+        &.cdk-focused {
+            > .mc-navbar-item {
+                outline: 0;
+            }
+        }
+    }
+
+    mc-navbar-item:not([disabled]), .mc-navbar-item:not([disabled]) {
+
+        outline: 0;
+
         &.cdk-focused {
             border-color: mc-color($palette, 500);
             box-shadow: 0 0 0 1px mc-color($palette, 500);

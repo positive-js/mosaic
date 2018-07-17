@@ -123,7 +123,7 @@ export class McNavbarContainer {
     position: McNavbarContainerPositionType = 'left';
 
     @HostBinding('class')
-    get сssClasses(): string {
+    get cssClasses(): string {
         return this.position === 'left' ? 'mc-navbar-left' : 'mc-navbar-right';
     }
 }
@@ -165,7 +165,7 @@ class CachedItemWidth {
             return this._collapsedItemsWidth;
         }
 
-        this.cacheCollapsedItemsWidth();
+        this.calculateAndCacheCollapsedItemsWidth();
 
         return this._collapsedItemsWidth;
     }
@@ -184,7 +184,7 @@ class CachedItemWidth {
         this.itemsForCollapse.forEach((item) => item.processCollapsed(collapsed));
     }
 
-    private cacheCollapsedItemsWidth() {
+    private calculateAndCacheCollapsedItemsWidth() {
         this._collapsedItemsWidth = this.itemsForCollapse
             .reduce((acc, item) => acc + item.width, 0);
     }
@@ -240,17 +240,17 @@ export class McNavbar implements AfterViewInit, OnDestroy {
             return this._itemsWidths;
         }
 
-        this.cacheItemsWidth();
+        this.calculateAndCacheItemsWidth();
 
         return this._itemsWidths;
     }
 
     private get totalItemsWidth(): number {
-        if (this._totalItemsWidths !== null && !this.forceRecalculateItemsWidth) {
+        if (this._totalItemsWidths !== undefined && !this.forceRecalculateItemsWidth) {
             return this._totalItemsWidths;
         }
 
-        this.cacheTotalItemsWidth();
+        this.calculateAndCacheTotalItemsWidth();
 
         return this._totalItemsWidths;
     }
@@ -291,23 +291,31 @@ export class McNavbar implements AfterViewInit, OnDestroy {
         this._resizeSubscription.unsubscribe();
     }
 
-    private cacheTotalItemsWidth() {
+    private calculateAndCacheTotalItemsWidth() {
         this._totalItemsWidths = this.itemsWidths
             .reduce((acc, item) => acc + item.width, 0);
     }
 
-    private cacheItemsWidth() {
+    private getOuterElementWidth(element: HTMLElement): number {
+        const baseWidth  = element.getBoundingClientRect().width;
+        const marginRight = parseInt(getComputedStyle(element).getPropertyValue('margin-right'));
+        const marginLeft = parseInt(getComputedStyle(element).getPropertyValue('margin-left'));
+
+        return baseWidth + marginRight + marginLeft;
+    }
+
+    private calculateAndCacheItemsWidth() {
         const allItemsSelector = this.secondLevelElements
             .map((e: string) => `${this.firstLevelElement}>${e}`);
         const allItems: HTMLElement[] = Array.from(this._elementRef.nativeElement.querySelectorAll(allItemsSelector));
 
-        this._itemsWidths = allItems.map((el) =>
-            new CachedItemWidth(el, el.getBoundingClientRect().width, this.getItemsForCollapse(el))
-        );
+        this._itemsWidths = allItems
+            .map((el) => new CachedItemWidth(el, this.getOuterElementWidth(el), this.getItemsForCollapse(el)));
     }
 
     private getItemsForCollapse(element: HTMLElement): CollapsibleItem[] {
         const icon = element.querySelector(`[${MC_ICON}],${MC_NAVBAR_LOGO},[${MC_NAVBAR_LOGO}]`);
+
         if (!icon) {
             return [];
         }
