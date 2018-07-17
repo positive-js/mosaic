@@ -10,8 +10,5 @@
         "flatModuleId": "@ptsecurity/mosaic/navbar",
         "skipTemplateCodegen": true,
         "fullTemplateTypeCheck": true
-    },
-    "compilerOptions": {
-        "strictNullChecks": true
     }
 }
