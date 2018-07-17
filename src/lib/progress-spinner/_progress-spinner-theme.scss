@@ -1,0 +1,22 @@
+@import '../core/theming/theming';
+@import '../core/theming/palette';
+
+@mixin mc-progress-spinner-theme($theme) {
+    $primary: map-get($theme, primary);
+    $second: map-get($theme, second);
+    $warn: map-get($theme, warn);
+
+    .mc-progress-spinner {
+        &.mc-primary &__circle {
+            stroke: mc-color($primary, 500);
+        }
+
+        &.mc-second &__circle {
+            stroke: mc-color($second, 500);
+        }
+
+        &.mc-warn &__circle {
+            stroke: mc-color($warn, 500);
+        }
+    }
+}
