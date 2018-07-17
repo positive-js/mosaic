@@ -1,0 +1,12 @@
+
+<div class="mc-progress-bar__inner" [ngSwitch]="mode" [id]="id">
+    <div
+        *ngSwitchCase="'indeterminate'"
+        class="mc-progress-bar__line mc-progress-bar__line--indeterminate">
+    </div>
+    <div
+        *ngSwitchDefault
+        class="mc-progress-bar__line mc-progress-bar__line--determinate"
+        [ngStyle]="{transform: 'scaleX(' + percentage + ')'}">
+    </div>
+</div>

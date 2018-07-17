@@ -140,6 +140,7 @@
         "server-dev": "webpack-dev-server --config tools/webpack/webpack.lib.dev.js",
         "server-dev:button": "npm run server-dev -- --env.component button",
         "server-dev:list": "npm run server-dev -- --env.component list",
+        "server-dev:progress-bar": "npm run server-dev -- --env.component progress-bar",
         "server-dev:radio": "npm run server-dev -- --env.component radio",
         "server-dev:input": "npm run server-dev -- --env.component input",
         "server-dev:icon": "npm run server-dev -- --env.component icon",
@@ -147,7 +148,8 @@
         "server-dev:typography": "npm run server-dev -- --env.component typography",
         "server-dev:badge": "npm run server-dev -- --env.component badge",
         "server-dev:checkbox": "npm run server-dev -- --env.component checkbox",
-        "server-dev:navbar": "npm run server-dev -- --env.component navbar"
+        "server-dev:navbar": "npm run server-dev -- --env.component navbar",
+        "server-dev:layout": "npm run server-dev -- --env.component layout"
     },
     "lint-staged": {
         "linters": {

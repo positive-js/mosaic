@@ -7,7 +7,7 @@
         "types": ["jasmine"],
         "paths": {
             "@ptsecurity/mosaic/*": ["./*"],
-            "@ptsecurity/cdk/*": ["../../dist/packages/cdk/*/public-api"]
+            "@ptsecurity/cdk/*": ["../../dist/packages/cdk/*"]
         }
     },
     "angularCompilerOptions": {

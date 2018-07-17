@@ -14,7 +14,6 @@
             "ignore": ["after-comment", "first-nested"]
         }],
         "selector-type-case": "lower",
-        "selector-pseudo-element-colon-notation": "single",
         "max-nesting-depth": 4,
         "number-leading-zero": ["always", {
             "message": "zero before dot"
