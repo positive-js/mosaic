@@ -55,7 +55,7 @@ $mc-navbar-icon-min-width: 15px;
     padding-right: $mc-navbar-brand-h-padding;
     margin-right: $mc-navbar-brand-margin-right;
 
-    > mc-navbar-title > .mc-navbar-title, > .mc-navbar-title {
+    .mc-navbar-title {
         padding-left: $mc-navbar-brand-h-padding;
         padding-right: 0;
     }
