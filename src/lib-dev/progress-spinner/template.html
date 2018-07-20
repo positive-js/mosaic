@@ -1,0 +1,52 @@
+<h1>Progress Spinner</h1>
+<div>
+    Mode:
+    <select [(ngModel)]="mode">
+        <option [ngValue]="'determinate'">Determinate</option>
+        <option [ngValue]="'indeterminate'">Indeterminate</option>
+    </select>
+</div>
+<div class="container">
+    <div class="percent">{{ mode === 'indeterminate' ? '--' : percent }}%</div>
+    <div class="spinners-container">
+        <ul class="spinners">
+            <li class="spinner-container">
+                <mc-progress-spinner [value]="percent" [mode]="mode" color="primary"></mc-progress-spinner>
+            </li>
+            <li class="spinner-container">
+                <mc-progress-spinner [value]="percent" [mode]="mode" color="second"></mc-progress-spinner>
+            </li>
+            <li class="spinner-container">
+                <mc-progress-spinner [value]="percent" [mode]="mode" color="warn"></mc-progress-spinner>
+            </li>
+        </ul>
+        <ul class="spinners">
+            <li class="spinner-container">
+                <mc-progress-spinner [value]="percent" [mode]="mode" color="primary" class="big-spinner"></mc-progress-spinner>
+            </li>
+            <li class="spinner-container">
+                <mc-progress-spinner [value]="percent" [mode]="mode" color="second" class="big-spinner"></mc-progress-spinner>
+            </li>
+            <li class="spinner-container">
+                <mc-progress-spinner [value]="percent" [mode]="mode" color="warn" class="big-spinner"></mc-progress-spinner>
+            </li>
+        </ul>
+        <ul class="spinners">
+            <li class="spinner-container">
+                <mc-progress-spinner [value]="percent" [mode]="mode" color="primary" class="huge-spinner"></mc-progress-spinner>
+            </li>
+            <li class="spinner-container">
+                <mc-progress-spinner [value]="percent" [mode]="mode" color="second" class="huge-spinner"></mc-progress-spinner>
+            </li>
+            <li class="spinner-container">
+                <mc-progress-spinner [value]="percent" [mode]="mode" color="warn" class="huge-spinner"></mc-progress-spinner>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="container">
+    <span class="percent">100%</span> <mc-progress-spinner [value]="100" class="huge-spinner"></mc-progress-spinner>
+</div>
+<div class="container">
+    <span class="percent">0%</span> <mc-progress-spinner [value]="0" class="huge-spinner"></mc-progress-spinner>
+</div>

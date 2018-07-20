@@ -1,0 +1,39 @@
+@import '../../lib/core/theming/prebuilt/default-theme';
+
+.container {
+    display: flex;
+    align-items: center;
+
+    .percent {
+        margin-right: 8px;
+        width: 60px;
+        text-align: center;
+        flex-shrink: 0;
+    }
+
+    .spinners {
+        display: flex;
+        flex-grow: 1;
+        margin-top: 8px;
+        list-style: none;
+        padding: 0px;
+    }
+
+    .spinner-container {
+        margin-left: 16px;
+    }
+
+    .line-container:not(:first-child) {
+        margin-top: 16px;
+    }
+
+    .big-spinner {
+        width: 50px;
+        height: 50px;
+    }
+
+    .huge-spinner {
+        width: 100px;
+        height: 100px;
+    }
+}

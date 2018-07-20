@@ -54,6 +54,7 @@ System.config({
         '@ptsecurity/mosaic/divider': 'dist/packages/mosaic/divider/index.js',
         '@ptsecurity/mosaic/list': 'dist/packages/mosaic/list/index.js',
         '@ptsecurity/mosaic/progress-bar': 'dist/packages/mosaic/progress-bar/index.js',
+        '@ptsecurity/mosaic/progress-spinner': 'dist/packages/mosaic/progress-spinner/index.js',
         '@ptsecurity/mosaic/icon': 'dist/packages/mosaic/icon/index.js',
         '@ptsecurity/mosaic/radio': 'dist/packages/mosaic/radio/index.js',
         '@ptsecurity/mosaic/checkbox': 'dist/packages/mosaic/checkbox/index.js'
