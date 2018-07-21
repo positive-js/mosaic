@@ -4,10 +4,10 @@ export interface IClickPosition {
 }
 
 export class ModalUtil {
-
     private lastPosition: IClickPosition;
 
     constructor(private document: Document) {
+        this.lastPosition = {x: -1, y: -1};
         this.listenDocumentClick();
     }
 
@@ -17,7 +17,7 @@ export class ModalUtil {
 
     listenDocumentClick(): void {
         this.document.addEventListener('click', (event: MouseEvent) => {
-            this.lastPosition = { x: event.clientX, y: event.clientY };
+            this.lastPosition = {x: event.clientX, y: event.clientY};
         });
     }
 }

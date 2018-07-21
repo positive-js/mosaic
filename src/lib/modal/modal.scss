@@ -1,0 +1,115 @@
+@import '../core/styles/variables';
+@import './modal-animation';
+@import './modal-confirm';
+
+
+.mc-modal {
+    box-sizing: border-box;
+    list-style: none;
+    position: relative;
+    width: auto;
+    margin: 0 auto;
+    top: 100px;
+    padding: 0 0 24px 0;
+
+    &-wrap {
+        position: fixed;
+        overflow: auto;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: $zindex-modal;
+        -webkit-overflow-scrolling: touch;
+        outline: 0;
+    }
+
+    &-title {
+        margin: 0;
+    }
+
+    &-content {
+        position: relative;
+        border: 0;
+        border-radius: 4px;
+        background-clip: padding-box;
+
+        background-color: white;
+        box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.5);
+    }
+
+    &-close {
+        cursor: pointer;
+        border: 0;
+        background: transparent;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 10;
+        outline: 0;
+        padding: 0;
+
+        &-x {
+            display: block;
+            vertical-align: baseline;
+            text-align: center;
+            width: 56px;
+            height: 56px;
+            line-height: 56px;
+        }
+    }
+
+    &-header {
+        padding: 14px 16px;
+        border-radius: 4px 4px 0 0;
+
+        background: white;
+    }
+
+    &-body {
+        padding: 16px 24px 24px 24px;
+        word-wrap: break-word;
+
+        overflow-y: auto;
+        max-height: calc(100vh - 350px);
+    }
+
+    &-footer {
+        padding: 16px 16px;
+        text-align: right;
+        border-radius: 0 0 4px 4px;
+
+        button + button {
+            margin-left: 16px;
+            margin-bottom: 0;
+        }
+    }
+
+    &.zoom-enter,
+    &.zoom-appear {
+        animation-duration: 0.3s;
+        // reset scale avoid mousePosition bug
+        transform: none;
+        opacity: 0;
+    }
+
+    &-mask {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.65);
+        height: 100%;
+        z-index: $zindex-modal-mask;
+        filter: alpha(opacity=50);
+
+        &-hidden {
+            display: none;
+        }
+    }
+
+    &-open {
+        overflow: hidden;
+    }
+};

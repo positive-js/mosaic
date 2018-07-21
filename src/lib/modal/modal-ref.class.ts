@@ -3,6 +3,10 @@ import { Observable } from 'rxjs';
 import { McModalComponent } from './modal.component';
 
 
+/**
+ * API class that public to users to handle the modal instance.
+ * McModalRef is aim to avoid accessing to the modal instance directly by users.
+ */
 export abstract class McModalRef<T = any, R = any> {
     abstract afterOpen: Observable<void>;
     abstract afterClose: Observable<R>;
@@ -14,20 +18,23 @@ export abstract class McModalRef<T = any, R = any> {
     abstract destroy(result?: R): void;
 
     /**
-     * Trigger the mcOnOk/mcOnCancel by manual
+     * Trigger the nzOnOk/nzOnCancel by manual
      */
     abstract triggerOk(): void;
 
     abstract triggerCancel(): void;
 
     // /**
-    //  * Return the ComponentRef of mcContent when specify mcContent as a Component
-    //  * Note: this method may return undefined if the Component has not ready yet. (it only available after Modal's ngOnInit)
+    //  * Return the ComponentRef of nzContent when specify nzContent as a Component
+    //  * Note: this method may return undefined if the Component has not ready yet.
+    //    (it only available after Modal's ngOnInit)
     //  */
     // abstract getContentComponentRef(): ComponentRef<{}>;
+
     /**
-     * Return the component instance of mcContent when specify mcContent as a Component
-     * Note: this method may return undefined if the Component has not ready yet. (it only available after Modal's ngOnInit)
+     * Return the component instance of nzContent when specify nzContent as a Component
+     * Note: this method may return undefined if the Component has not ready yet.
+     * (it only available after Modal's ngOnInit)
      */
     abstract getContentComponent(): T;
 

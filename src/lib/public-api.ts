@@ -9,6 +9,7 @@ export * from '@ptsecurity/mosaic/icon';
 export * from '@ptsecurity/mosaic/input';
 export * from '@ptsecurity/mosaic/list';
 export * from '@ptsecurity/mosaic/link';
+export * from '@ptsecurity/mosaic/modal';
 export * from '@ptsecurity/mosaic/navbar';
 export * from '@ptsecurity/mosaic/progress-bar';
 export * from '@ptsecurity/mosaic/progress-spinner';

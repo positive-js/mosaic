@@ -1,7 +1,7 @@
-import { Injectable, Optional, SkipSelf} from '@angular/core';
+import { Injectable, Optional, SkipSelf } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 
-import { McModalRef } from './modal-abstr-ref.class';
+import { McModalRef } from './modal-ref.class';
 
 
 interface IRegisteredMeta {
@@ -27,11 +27,11 @@ export class McModalControlService {
     private rootOpenModals: McModalRef[] = this.parentService ? null : [];
     // @ts-ignore
     private rootAfterAllClose: Subject<void> = this.parentService ? null : new Subject<void>();
-
     // @ts-ignore
     private rootRegisteredMetaMap: Map<McModalRef, IRegisteredMeta> = this.parentService ? null : new Map();
 
-    private get registeredMetaMap(): Map<McModalRef, IRegisteredMeta> { // Registered modal for later usage
+    // Registered modal for later usage
+    private get registeredMetaMap(): Map<McModalRef, IRegisteredMeta> {
         return this.parentService ? this.parentService.registeredMetaMap : this.rootRegisteredMetaMap;
     }
 
@@ -45,12 +45,10 @@ export class McModalControlService {
             const afterOpenSubscription = modalRef.afterOpen.subscribe(() => this.openModals.push(modalRef));
             const afterCloseSubscription = modalRef.afterClose.subscribe(() => this.removeOpenModal(modalRef));
 
-            this.registeredMetaMap.set(modalRef, { modalRef, afterOpenSubscription, afterCloseSubscription });
+            this.registeredMetaMap.set(modalRef, {modalRef, afterOpenSubscription, afterCloseSubscription});
         }
     }
 
-    // TODO: allow deregister modals
-    // deregisterModal(modalRef: McModalRef): void {}
     hasRegistered(modalRef: McModalRef): boolean {
         return this.registeredMetaMap.has(modalRef);
     }
@@ -60,7 +58,7 @@ export class McModalControlService {
         let i = this.openModals.length;
 
         while (i--) {
-            this.openModals[ i ].close();
+            this.openModals[i].close();
         }
     }
 

@@ -9,6 +9,7 @@
 @import '../../../navbar/navbar-theme';
 @import '../../../input/input-theme';
 @import '../../../form-field/form-field-theme';
+@import '../../../modal/modal-theme';
 
 
 @mixin mosaic-typography($config: null) {
@@ -28,4 +29,5 @@
     @include mc-navbar-typography($config);
     @include mc-input-typography($config);
     @include mc-form-field-typography($config);
+    @include mc-modal-typography($config);
 }

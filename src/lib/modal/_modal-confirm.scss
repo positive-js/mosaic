@@ -1,0 +1,46 @@
+
+.mc-confirm {
+    .mc-modal-header {
+        display: none;
+    }
+
+    .mc-modal-close {
+        display: none;
+    }
+
+    .mc-modal-body {
+        padding: 16px 24px 24px 24px;
+    }
+
+    // TODO
+    &-body-wrapper {
+        //.clearfix()
+        zoom: 1;
+
+        &:before,
+        &:after {
+            content: "";
+            display: table;
+        }
+
+        &:after {
+            clear: both;
+        }
+    }
+
+    &-body {
+        .mc-confirm-title {
+            display: block;
+            overflow: auto;
+        }
+    }
+
+    .mc-confirm-btns {
+        border-radius: 0 0 4px 4px;
+        text-align: right;
+
+        button + button {
+            margin: 16px 16px 16px;
+        }
+    }
+}

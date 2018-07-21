@@ -1,0 +1,114 @@
+@import '../core/styles/functions/timing';
+
+
+$animation-duration-base: 0.2s;
+
+@mixin _motion-common($duration: $animation-duration-base) {
+    animation-duration: $duration;
+    animation-fill-mode: both;
+}
+
+@mixin _motion-common-leave($duration: $animation-duration-base) {
+    animation-duration: $duration;
+    animation-fill-mode: both;
+}
+
+@mixin _make-motion($className, $keyframeName, $duration: $animation-duration-base) {
+    .#{$className}-enter,
+    .#{$className}-appear {
+        @include _motion-common($duration);
+        animation-play-state: paused;
+    }
+
+    .#{$className}-leave {
+        @include _motion-common-leave($duration);
+        animation-play-state: paused;
+    }
+
+    .#{$className}-enter.#{$className}-enter-active,
+    .#{$className}-appear.#{$className}-appear-active {
+        animation-name: #{$keyframeName}In;
+        animation-play-state: running;
+    }
+
+    .#{$className}-leave.#{$className}-leave-active {
+        animation-name: #{$keyframeName}Out;
+        animation-play-state: running;
+        pointer-events: none;
+    }
+}
+
+@mixin zoom-motion($className, $keyframeName, $duration: $animation-duration-base) {
+    @include _make-motion($className, $keyframeName, $duration);
+
+    .#{className}-enter,
+    .#{className}-appear {
+        transform: translate(0, -25%);
+        animation-timing-function: $ease-out-circ;
+    }
+
+    .#{className}-leave {
+        transform: translate(0, 0);
+        animation-timing-function: $ease-in-out-circ;
+    }
+}
+
+@mixin fade-motion($className, $keyframeName) {
+    @include _make-motion($className, $keyframeName);
+
+    .#{className}-enter,
+    .#{className}-appear {
+        opacity: 0;
+        animation-timing-function: linear;
+    }
+
+    .#{className}-leave {
+        animation-timing-function: linear;
+    }
+}
+
+@keyframes mcFadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes mcFadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes mcZoomIn {
+    0% {
+        opacity: 0;
+        transform: translate(0, -25%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes mcZoomOut {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(0, 0);
+    }
+}
+
+@include fade-motion(fade, mcFade);
+@include zoom-motion(zoom, mcZoom);
