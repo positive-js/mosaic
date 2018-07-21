@@ -1,7 +1,7 @@
-import { Injectable, Optional, SkipSelf} from '@angular/core';
+import { Injectable, Optional, SkipSelf } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 
-import { McModalRef } from './modal-abstr-ref.class';
+import { McModalRef } from './modal-ref.class';
 
 
 interface IRegisteredMeta {
@@ -12,7 +12,6 @@ interface IRegisteredMeta {
 
 @Injectable()
 export class McModalControlService {
-
     // Track singleton afterAllClose through over the injection tree
     get afterAllClose(): Subject<void> {
         return this.parentService ? this.parentService.afterAllClose : this.rootAfterAllClose;
@@ -45,12 +44,10 @@ export class McModalControlService {
             const afterOpenSubscription = modalRef.afterOpen.subscribe(() => this.openModals.push(modalRef));
             const afterCloseSubscription = modalRef.afterClose.subscribe(() => this.removeOpenModal(modalRef));
 
-            this.registeredMetaMap.set(modalRef, { modalRef, afterOpenSubscription, afterCloseSubscription });
+            this.registeredMetaMap.set(modalRef, {modalRef, afterOpenSubscription, afterCloseSubscription});
         }
     }
 
-    // TODO: allow deregister modals
-    // deregisterModal(modalRef: McModalRef): void {}
     hasRegistered(modalRef: McModalRef): boolean {
         return this.registeredMetaMap.has(modalRef);
     }
@@ -60,7 +57,7 @@ export class McModalControlService {
         let i = this.openModals.length;
 
         while (i--) {
-            this.openModals[ i ].close();
+            this.openModals[i].close();
         }
     }
 
