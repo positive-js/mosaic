@@ -1,0 +1,32 @@
+<h2>Base</h2>
+
+<button (click)="showModal()">Show Modal</button>
+<mc-modal [(mcVisible)]="isVisible" mcTitle="The first Modal" (mcOnCancel)="handleCancel()" (mcOnOk)="handleOk()">
+    <p>Content one</p>
+    <p>Content two</p>
+    <p>Content three</p>
+</mc-modal>
+
+<h2>Confirm</h2>
+
+<button (click)="showConfirm()">Confirm</button>
+<button (click)="showDeleteConfirm()">Delete</button>
+
+
+<h3>Modal from service</h3>
+<button mc-button color="primary" (click)="createTplModal(tplTitle, tplContent, tplFooter)">
+    <span>Template</span>
+</button>
+<ng-template #tplTitle>
+    <span>Title Template</span>
+</ng-template>
+<ng-template #tplContent>
+    <p>some contents...</p>
+    <p>some contents...</p>
+    <p>some contents...</p>
+    <p>some contents...</p>
+    <p>some contents...</p>
+</ng-template>
+<ng-template #tplFooter>
+    <button mc-button color="primary" (click)="destroyTplModal()">Close after submit</button>
+</ng-template>
