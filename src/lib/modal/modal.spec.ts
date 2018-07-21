@@ -50,13 +50,6 @@ describe('modal testing (legacy)', () => {
             fixture.detectChanges();
             flush();
             expectModalHidden(modalElement, false);
-
-            const buttonOk = getButtonOk(modalElement);
-            buttonOk.click(); // Click Ok button
-            fixture.detectChanges();
-            flush();
-            fixture.detectChanges(); // In order to trigger ModalInstance's UI updating after finished hiding
-            expectModalHidden(modalElement, true);
         }));
     }); // /async
 
