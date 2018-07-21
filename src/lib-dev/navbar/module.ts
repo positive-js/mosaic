@@ -34,7 +34,7 @@ export class NavbarDemoComponent {
     }
 
     collapsedNavbarWidthChange() {
-        this.navbar.collapse();
+        this.navbar.updateCollapsed();
     }
 
     onItemClick(event: MouseEvent) {
