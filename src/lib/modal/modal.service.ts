@@ -88,7 +88,7 @@ export class McModalService {
         }
         if (!('mcWidth' in options)) {
             // tslint:disable-next-line
-            options.mcWidth = 416;
+            options.mcWidth = 320;
         }
         if (typeof options.mcOnOk !== 'function') { // NOTE: only support function currently by calling confirm()
             // tslint:disable-next-line

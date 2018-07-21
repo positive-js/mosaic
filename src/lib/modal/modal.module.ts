@@ -10,10 +10,10 @@ import { McModalService } from './modal.service';
 
 
 @NgModule({
-  imports: [ CommonModule, OverlayModule ],
-  exports: [ McModalComponent ],
-  declarations: [ McModalComponent, CssUnitPipe ],
-  entryComponents: [ McModalComponent ],
-  providers: [ McModalControlService, McModalService ]
+    imports: [ CommonModule, OverlayModule ],
+    exports: [ McModalComponent ],
+    declarations: [ McModalComponent, CssUnitPipe ],
+    entryComponents: [ McModalComponent ],
+    providers: [ McModalControlService, McModalService ]
 })
 export class McModalModule { }

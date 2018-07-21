@@ -72,7 +72,7 @@
           <button *ngIf="mcCancelText!==null" mc-button (click)="onClickOkCancel('cancel')">
               {{ cancelText }}
           </button>
-          <button *ngIf="mcOkText!==null" mc-button [mcType]="mcOkType" (click)="onClickOkCancel('ok')">
+          <button *ngIf="mcOkText!==null" mc-button (click)="onClickOkCancel('ok')">
               {{ okText }}
           </button>
       </ng-container>

@@ -12,7 +12,7 @@ import { McModalModule, McModalRef, McModalService } from '../../lib/modal';
     template: require('./template.html'),
     styleUrls: ['./styles.scss']
 })
-export class ButtonDemoComponent {
+export class ModalDemoComponent {
     isVisible = false;
     tplModal: McModalRef;
 
@@ -74,7 +74,7 @@ export class ButtonDemoComponent {
 
 @NgModule({
     declarations: [
-        ButtonDemoComponent
+        ModalDemoComponent
     ],
     imports: [
         BrowserModule,
@@ -83,12 +83,12 @@ export class ButtonDemoComponent {
         McModalModule
     ],
     bootstrap: [
-        ButtonDemoComponent
+        ModalDemoComponent
     ]
 })
-export class ButtonDemoModule {}
+export class DemoModule {}
 
 platformBrowserDynamic()
-    .bootstrapModule(ButtonDemoModule)
+    .bootstrapModule(DemoModule)
     .catch((error) => console.error(error));
 
