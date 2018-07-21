@@ -24,8 +24,6 @@
 
     &-title {
         margin: 0;
-        line-height: 22px;
-        font-weight: 500;
     }
 
     &-content {
@@ -35,6 +33,7 @@
         background-clip: padding-box;
 
         background-color: white;
+        box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.5);
     }
 
     &-close {
@@ -73,9 +72,10 @@
     }
 
     &-header {
-        padding: 16px 24px;
+        padding: 14px 24px;
         border-radius: 4px 4px 0 0;
-        border-bottom: 1px solid gray;
+        // GRAY-600
+        border-bottom: 1px solid #f0f0f0;
 
         background: white;
     }

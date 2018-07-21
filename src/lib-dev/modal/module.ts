@@ -1,4 +1,4 @@
-import { Component, NgModule, TemplateRef } from '@angular/core';
+import {Component, NgModule, TemplateRef, ViewEncapsulation} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
@@ -10,7 +10,8 @@ import { McModalModule, McModalRef, McModalService } from '../../lib/modal';
 @Component({
     selector: 'app',
     template: require('./template.html'),
-    styleUrls: ['./styles.scss']
+    styleUrls: ['./styles.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class ModalDemoComponent {
     isVisible = false;
@@ -48,6 +49,7 @@ export class ModalDemoComponent {
             mcFooter: tplFooter,
             mcMaskClosable: false,
             mcClosable: false,
+            mcMaskStyle: {opacity: 0.4},
             mcOnOk: () => console.log('Click ok')
         });
     }
