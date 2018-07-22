@@ -15,6 +15,21 @@
     &__inner {
         width: 100%;
         height: 100%;
+        transform: rotateZ(-90deg);
+
+        &--indeterminate {
+            animation: mc-progress-spinner-indeterminate 1.5s $ease-in-out-quad infinite;
+
+            // TODO: rework this place
+            .mc-progress-spinner__circle {
+                stroke-dashoffset: 80%;
+            }
+        }
+    }
+
+    &__svg {
+        width: 100%;
+        height: 100%;
     }
 
     &__circle {
@@ -24,11 +39,5 @@
         stroke-width: 13%;
         transition: stroke-dashoffset 0.3s;
         transform-origin: center center;
-        transform: rotateZ(-90deg);
-
-        &--indeterminate {
-            stroke-dashoffset: 80%;
-            animation: mc-progress-spinner-indeterminate 1.5s $ease-in-out-quad infinite;
-        }
     }
 }

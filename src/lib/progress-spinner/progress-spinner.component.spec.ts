@@ -82,7 +82,7 @@ describe('McProgressSpinner', () => {
         testComponent.mode = 'indeterminate';
         fixture.detectChanges();
 
-        expect(progressSpinnerDebugElement.query(By.css('.mc-progress-spinner__circle--indeterminate'))).not.toBeNull();
+        expect(progressSpinnerDebugElement.query(By.css('.mc-progress-spinner__inner--indeterminate'))).not.toBeNull();
     });
 
     it('should show determinate circle by default', () => {
