@@ -1,3 +1,7 @@
+import { fromEvent } from 'rxjs';
+import { Subscription } from 'rxjs/internal/Subscription';
+import { debounceTime } from 'rxjs/operators';
+
 import {
 AfterViewInit,
     Component, Directive,
@@ -10,11 +14,10 @@ AfterViewInit,
 } from '@angular/core';
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 
-import { CanDisable, debounce, mixinDisabled } from '@ptsecurity/mosaic/core';
+import { CanDisable, mixinDisabled } from '@ptsecurity/mosaic/core';
 
 
 const COLLAPSED_CLASS: string = 'mc-navbar-collapsed-title';
-const MC_DROPDOWN = 'mc-dropdown';
 const MC_ICON = 'mc-icon';
 const MC_NAVBAR = 'mc-navbar';
 const MC_NAVBAR_CONTAINER = 'mc-navbar-container';
@@ -76,7 +79,7 @@ export class McNavbarItem extends _McNavbarMixinBase implements OnInit, OnDestro
 
     @Input()
     set collapsedTitle(value: string) {
-        this.elementRef.nativeElement.setAttribute('calculatedTitle', encodeURI(value));
+        this.elementRef.nativeElement.setAttribute('computedTitle', encodeURI(value));
     }
 
     constructor(
@@ -87,7 +90,7 @@ export class McNavbarItem extends _McNavbarMixinBase implements OnInit, OnDestro
     }
 
     ngOnInit() {
-        this._denyClickIfDisabled();
+        this.denyClickIfDisabled();
 
         this._focusMonitor.monitor(this.elementRef.nativeElement, true);
     }
@@ -97,11 +100,10 @@ export class McNavbarItem extends _McNavbarMixinBase implements OnInit, OnDestro
     }
 
     // This method is required due to angular 2 issue https://github.com/angular/angular/issues/11200
-    private _denyClickIfDisabled() {
+    private denyClickIfDisabled() {
         const events: Event[] = this.elementRef.nativeElement.eventListeners('click');
-        for (const event of events) {
-            this.elementRef.nativeElement.removeEventListener('click', event);
-        }
+
+        events.forEach((event) => this.elementRef.nativeElement.removeEventListener('click', event));
 
         this.elementRef.nativeElement.addEventListener('click', (event: MouseEvent) => {
             if (this.elementRef.nativeElement.hasAttribute('disabled')) {
@@ -109,9 +111,7 @@ export class McNavbarItem extends _McNavbarMixinBase implements OnInit, OnDestro
             }
         }, true);
 
-        for (const event of events) {
-            this.elementRef.nativeElement.addEventListener('click', event);
-        }
+        events.forEach((event) => this.elementRef.nativeElement.addEventListener('click', event));
     }
 }
 
@@ -123,63 +123,86 @@ export class McNavbarContainer {
     position: McNavbarContainerPositionType = 'left';
 
     @HostBinding('class')
-    get getCssClasses(): string {
+    get cssClasses(): string {
         return this.position === 'left' ? 'mc-navbar-left' : 'mc-navbar-right';
     }
 }
 
-class CachedCollapsedItemWidth {
-    collapsed: boolean = false;
+class CollapsibleItem {
+    private _collapsed: boolean = false;
 
     constructor(
         public element: HTMLElement,
         public width: number
     ) {}
+
+    processCollapsed(collapsed: boolean) {
+        this._collapsed = collapsed;
+
+        this.updateCollapsedClass();
+    }
+
+    private updateCollapsedClass() {
+        if (this._collapsed) {
+            this.element.classList.add(COLLAPSED_CLASS);
+        } else {
+            this.element.classList.remove(COLLAPSED_CLASS);
+        }
+
+    }
 }
 
 class CachedItemWidth {
+
     get canCollapse(): boolean {
         return this.itemsForCollapse.length > 0;
     }
 
-    private get title(): string {
-        const calculatedTitle = this.element.getAttribute('calculatedTitle');
+    private _collapsedItemsWidth: number;
 
-        return calculatedTitle
-            ? decodeURI(calculatedTitle)
-            : (this.itemsForCollapse.length > 0 ? this.itemsForCollapse[0].element.innerText : '');
+    get collapsedItemsWidth(): number {
+        if (this._collapsedItemsWidth !== undefined) {
+            return this._collapsedItemsWidth;
+        }
+
+        this.calculateAndCacheCollapsedItemsWidth();
+
+        return this._collapsedItemsWidth;
     }
 
     constructor(
         public element: HTMLElement,
         public width: number,
-        public itemsForCollapse: CachedCollapsedItemWidth[] = []
+        public itemsForCollapse: CollapsibleItem[] = []
     ) {}
 
-    setCollapsed(collapsed: boolean): number {
+    processCollapsed(collapsed: boolean) {
         if (this.itemsForCollapse.length > 0) {
-            if (collapsed) {
-                this.element.setAttribute('title', this.title);
-            } else {
-                this.element.removeAttribute('title');
-            }
+            this.updateTitle(collapsed);
         }
 
-        let res = 0;
+        this.itemsForCollapse.forEach((item) => item.processCollapsed(collapsed));
+    }
 
-        for (const subItem of this.itemsForCollapse) {
-            res += subItem.width;
+    private calculateAndCacheCollapsedItemsWidth() {
+        this._collapsedItemsWidth = this.itemsForCollapse
+            .reduce((acc, item) => acc + item.width, 0);
+    }
 
-            if (collapsed) {
-                subItem.element.classList.add(COLLAPSED_CLASS);
-            } else {
-                subItem.element.classList.remove(COLLAPSED_CLASS);
-            }
+    private getTitle(): string {
+        const computedTitle = this.element.getAttribute('computedTitle');
 
-            subItem.collapsed = collapsed;
+        return computedTitle
+            ? decodeURI(computedTitle)
+            : (this.itemsForCollapse.length > 0 ? this.itemsForCollapse[0].element.innerText : '');
+    }
+
+    private updateTitle(collapsed: boolean) {
+        if (collapsed) {
+            this.element.setAttribute('title', this.getTitle());
+        } else {
+            this.element.removeAttribute('title');
         }
-
-        return res;
     }
 }
 
@@ -188,19 +211,16 @@ class CachedItemWidth {
     selector: MC_NAVBAR,
     template: `
         <nav class="mc-navbar">
-            <ng-content select=""[${MC_NAVBAR_CONTAINER}],${MC_NAVBAR_CONTAINER}"></ng-content>
+            <ng-content select="[${MC_NAVBAR_CONTAINER}],${MC_NAVBAR_CONTAINER}"></ng-content>
         </nav>
     `,
     styleUrls: ['./navbar.css'],
-    encapsulation: ViewEncapsulation.None,
-    host: {
-        '(window:resize)': 'updateCollapsedDebounce()'
-    }
+    encapsulation: ViewEncapsulation.None
 })
-export class McNavbar implements AfterViewInit {
+export class McNavbar implements AfterViewInit, OnDestroy {
 
     private readonly forceRecalculateItemsWidth: boolean = false;
-    private readonly resizeDebounceInterval: number = 200;
+    private readonly resizeDebounceInterval: number = 100;
     private readonly firstLevelElement: string = MC_NAVBAR_CONTAINER;
     private readonly secondLevelElements: string[] = [
         MC_NAVBAR_ITEM,
@@ -208,49 +228,47 @@ export class McNavbar implements AfterViewInit {
         MC_NAVBAR_TITLE
     ];
 
-    private _totalItemsWidths: number | null = null;
-    private _itemsWidths: CachedItemWidth[] | null = null;
+    private _totalItemsWidths: number;
+    private _itemsWidths: CachedItemWidth[];
 
-    private get _maxAllowedWidth(): number {
+    private get maxAllowedWidth(): number {
         return this._elementRef.nativeElement.querySelector('nav').getBoundingClientRect().width;
     }
 
     private get itemsWidths(): CachedItemWidth[] {
-        if (this._itemsWidths !== null && !this.forceRecalculateItemsWidth) {
+        if (this._itemsWidths !== undefined && !this.forceRecalculateItemsWidth) {
             return this._itemsWidths;
         }
 
-        const allItemsSelector = this.secondLevelElements.map((e: string) => `${this.firstLevelElement}>${e}`);
-        const allItems: HTMLElement[] = Array.from(this._elementRef.nativeElement.querySelectorAll(allItemsSelector));
-
-        this._itemsWidths = allItems.map((el) =>
-            new CachedItemWidth(el, el.getBoundingClientRect().width, this._getItemsForCollapse(el))
-        );
+        this.calculateAndCacheItemsWidth();
 
         return this._itemsWidths;
     }
 
     private get totalItemsWidth(): number {
-        if (this._totalItemsWidths !== null && !this.forceRecalculateItemsWidth) {
+        if (this._totalItemsWidths !== undefined && !this.forceRecalculateItemsWidth) {
             return this._totalItemsWidths;
         }
 
-        this._totalItemsWidths = this.itemsWidths
-            .reduce((acc, item) => acc + item.width, 0);
+        this.calculateAndCacheTotalItemsWidth();
 
         return this._totalItemsWidths;
     }
 
+    private _resizeSubscription: Subscription;
+
     constructor(
         private _elementRef: ElementRef
-    ) {}
+    ) {
+        const resizeObserver = fromEvent(window, 'resize')
+            .pipe(debounceTime(this.resizeDebounceInterval));
 
-    updateCollapsedDebounce() {
-        debounce(this.updateCollapsed.bind(this), this.resizeDebounceInterval)();
+        this._resizeSubscription = resizeObserver.subscribe(this.updateCollapsed.bind(this));
     }
 
-    updateCollapsed() {
-        let collapseDelta = this.totalItemsWidth - this._maxAllowedWidth;
+    updateCollapsed(): void {
+        let collapseDelta = this.totalItemsWidth - this.maxAllowedWidth;
+
         for (let i = this.itemsWidths.length - 1; i >= 0; i--) {
             const item = this.itemsWidths[i];
 
@@ -258,7 +276,8 @@ export class McNavbar implements AfterViewInit {
                 continue;
             }
 
-            collapseDelta -= item.setCollapsed(collapseDelta > 0);
+            item.processCollapsed(collapseDelta > 0);
+            collapseDelta -= item.collapsedItemsWidth;
         }
     }
 
@@ -268,13 +287,40 @@ export class McNavbar implements AfterViewInit {
         setTimeout(() => this.updateCollapsed(), 0);
     }
 
-    private _getItemsForCollapse(element: HTMLElement): CachedCollapsedItemWidth[] {
+    ngOnDestroy() {
+        this._resizeSubscription.unsubscribe();
+    }
+
+    private calculateAndCacheTotalItemsWidth() {
+        this._totalItemsWidths = this.itemsWidths
+            .reduce((acc, item) => acc + item.width, 0);
+    }
+
+    private getOuterElementWidth(element: HTMLElement): number {
+        const baseWidth  = element.getBoundingClientRect().width;
+        const marginRight = parseInt(getComputedStyle(element).getPropertyValue('margin-right'));
+        const marginLeft = parseInt(getComputedStyle(element).getPropertyValue('margin-left'));
+
+        return baseWidth + marginRight + marginLeft;
+    }
+
+    private calculateAndCacheItemsWidth() {
+        const allItemsSelector = this.secondLevelElements
+            .map((e: string) => `${this.firstLevelElement}>${e}`);
+        const allItems: HTMLElement[] = Array.from(this._elementRef.nativeElement.querySelectorAll(allItemsSelector));
+
+        this._itemsWidths = allItems
+            .map((el) => new CachedItemWidth(el, this.getOuterElementWidth(el), this.getItemsForCollapse(el)));
+    }
+
+    private getItemsForCollapse(element: HTMLElement): CollapsibleItem[] {
         const icon = element.querySelector(`[${MC_ICON}],${MC_NAVBAR_LOGO},[${MC_NAVBAR_LOGO}]`);
+
         if (!icon) {
             return [];
         }
 
         return Array.from(element.querySelectorAll(MC_NAVBAR_TITLE))
-            .map((el) => new CachedCollapsedItemWidth(<HTMLElement> el, el.getBoundingClientRect().width));
+            .map((el) => new CollapsibleItem(<HTMLElement> el, el.getBoundingClientRect().width));
     }
 }

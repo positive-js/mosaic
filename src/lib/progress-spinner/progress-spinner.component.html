@@ -1,0 +1,15 @@
+<div class="mc-progress-spinner__inner"
+     [ngClass]="{'mc-progress-spinner__inner--indeterminate': mode === 'indeterminate'}">
+    <svg focusable="false"
+         preserveAspectRatio="xMidYMid meet"
+         viewBox="0 0 100 100"
+         class="mc-progress-spinner__svg">
+        <circle cx="50%"
+                cy="50%"
+                r="42.5%"
+                class="mc-progress-spinner__circle"
+                [ngStyle]="{'stroke-dashoffset': mode === 'determinate' ? dashOffsetPercent : null}">
+        </circle>
+    </svg>
+</div>
+
