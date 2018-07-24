@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { debounceTime } from 'rxjs/operators';
 
 import {
-AfterViewInit,
+    AfterViewInit,
     Component, Directive,
     ElementRef,
     HostBinding,
