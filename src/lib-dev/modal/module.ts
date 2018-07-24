@@ -48,8 +48,7 @@ export class ModalDemoComponent {
             mcContent: tplContent,
             mcFooter: tplFooter,
             mcMaskClosable: false,
-            mcClosable: false,
-            mcMaskStyle: {opacity: 0.4},
+            mcClosable: true,
             mcOnOk: () => console.log('Click ok')
         });
     }

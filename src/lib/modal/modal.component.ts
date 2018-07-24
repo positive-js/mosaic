@@ -350,7 +350,8 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
                 [`zoom-${state}-active`]: true
             };
         } else {
-            this.maskAnimationClassMap = this.modalAnimationClassMap = {};
+            // @ts-ignore
+            this.maskAnimationClassMap = this.modalAnimationClassMap = null;
         }
     }
 

@@ -27,7 +27,9 @@
     >
       <div class="mc-modal-content">
         <button *ngIf="mcClosable" (click)="onClickCloseBtn()" class="mc-modal-close" aria-label="Close">
-          <span class="mc-modal-close-x"></span>
+          <span class="mc-modal-close-x">
+              <i class="mc mc-close-L_16"></i>
+          </span>
         </button>
         <ng-container [ngSwitch]="true">
           <ng-container *ngSwitchCase="isModalType('default')" [ngTemplateOutlet]="tplContentDefault"></ng-container>
