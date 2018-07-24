@@ -1,7 +1,11 @@
 <h2>Base</h2>
 
 <button (click)="showModal()">Show Modal</button>
-<mc-modal [(mcVisible)]="isVisible" mcTitle="The first Modal" (mcOnCancel)="handleCancel()" (mcOnOk)="handleOk()">
+<mc-modal [(mcVisible)]="isVisible"
+          mcTitle="The first Modal"
+          (mcOnCancel)="handleCancel()" (mcOnOk)="handleOk()"
+          mcCancelText="Cancel"
+          mcOkText="Accept">
     <p>Content one</p>
     <p>Content two</p>
     <p>Content three</p>
