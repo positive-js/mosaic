@@ -106,10 +106,10 @@
         </div>
       </div>
       <div class="mc-confirm-btns">
-          <button *ngIf="mcCancelText!==''" (click)="onClickOkCancel('cancel')">
+          <button mc-button color="second" *ngIf="mcCancelText!==''" (click)="onClickOkCancel('cancel')">
               {{ cancelText }}
           </button>
-          <button *ngIf="mcOkText !== ''" (click)="onClickOkCancel('ok')">
+          <button mc-button color="second" *ngIf="mcOkText !== ''" (click)="onClickOkCancel('ok')">
               {{ okText }}
           </button>
       </div>
