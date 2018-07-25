@@ -1,15 +1,21 @@
 import { EventEmitter, TemplateRef, Type } from '@angular/core';
+
 import { OverlayRef } from '@ptsecurity/cdk/overlay';
 
 
 export type OnClickCallback<T> = ((instance: T) => (false | void | {}) | Promise<false | void | {}>);
 
-export type ModalType = 'default' | 'confirm'; // Different modal styles we have supported
+// Different modal styles we have supported
+export enum ModalType {
+    DEFAULT = 'default',
+    CONFIRM = 'confirm'
+}
 
-export type ConfirmType = 'confirm' | 'info' | 'success' | 'error' | 'warning'; // Subtypes of Confirm Modal
+// Subtypes of Confirm Modal
+export type ConfirmType = 'confirm' | 'info' | 'success' | 'error' | 'warning';
 
 // Public options for using by service
-export interface IModalOptions<T = any, R = any> { // tslint:disable-line:no-any
+export interface IModalOptions<T = any, R = any> {
     mcModalType?: ModalType;
     mcVisible?: boolean;
     mcZIndex?: number;
@@ -17,7 +23,6 @@ export interface IModalOptions<T = any, R = any> { // tslint:disable-line:no-any
     mcWrapClassName?: string;
     mcClassName?: string;
     mcStyle?: object;
-    mcIconType?: string; // Confirm Modal ONLY
     mcTitle?: string | TemplateRef<{}>;
     mcContent?: string | TemplateRef<{}> | Type<T>;
     mcComponentParams?: object;
@@ -42,12 +47,12 @@ export interface IModalOptions<T = any, R = any> { // tslint:disable-line:no-any
 }
 
 // tslint:disable-next-line:no-any
-export interface IModalOptionsForService<T = any> extends IModalOptions<T> { // Limitations for using by service
+export interface IModalOptionsForService<T = any> extends IModalOptions<T> {
     mcOnOk?: OnClickCallback<T>;
     mcOnCancel?: OnClickCallback<T>;
 }
 
-export interface IModalButtonOptions<T = any> { // tslint:disable-line:no-any
+export interface IModalButtonOptions<T = any> {
     label: string;
     // tslint:disable-next-line
     type?: string;

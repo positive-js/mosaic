@@ -22,7 +22,7 @@ export class ModalDemoComponent {
 
     showConfirm(): void {
         this.modalService.confirm({
-            mcTitle  : '<i>Do you Want to delete these items?</i>',
+            mcTitle  : 'Do you Want to delete these items?',
             mcOkText: 'okey',
             mcCancelText: 'nooo!',
             mcContent: '<b>Some descriptions</b>',
@@ -33,7 +33,8 @@ export class ModalDemoComponent {
     showDeleteConfirm(): void {
         this.modalService.confirm({
             mcTitle     : 'Are you sure delete this task?',
-            mcContent   : '<b style="color: red;">Some descriptions</b>',
+//            mcContent   : '<b style="color: red;">Some descriptions</b>',
+            mcContent   : 'Some descriptions',
             mcOkText    : 'Yes',
             mcOkType    : 'danger',
             mcOnOk      : () => console.log('OK'),

@@ -1,12 +1,12 @@
-import { ComponentRef, Injectable } from '@angular/core';
-import { Overlay, OverlayRef } from '@ptsecurity/cdk/overlay';
+import { ComponentRef, Injectable} from '@angular/core';
+import { Overlay, OverlayRef} from '@ptsecurity/cdk/overlay';
 import { ComponentPortal } from '@ptsecurity/cdk/portal';
 import { Observable } from 'rxjs';
 
 import { McModalControlService } from './modal-control.service';
 import { McModalRef } from './modal-ref.class';
 import { McModalComponent } from './modal.component';
-import { ConfirmType, IModalOptions, IModalOptionsForService } from './modal.type';
+import { ConfirmType, IModalOptions, IModalOptionsForService, ModalType } from './modal.type';
 
 
 // A builder used for managing service creating modals
@@ -96,7 +96,7 @@ export class McModalService {
             }; // Leave a empty function to close this modal by default
         }
 
-        options.mcModalType = 'confirm';
+        options.mcModalType = ModalType.CONFIRM;
         options.mcClassName = `mc-confirm mc-confirm-${confirmType} ${options.mcClassName || ''}`;
         options.mcMaskClosable = false;
 
@@ -120,14 +120,6 @@ export class McModalService {
     }
 
     private simpleConfirm<T>(options: IModalOptionsForService<T> = {}, confirmType: ConfirmType): McModalRef<T> {
-        if (!('mcIconType' in options)) {
-            options.mcIconType = {
-                info: 'info-circle',
-                success: 'check-circle',
-                error: 'cross-circle',
-                warning: 'exclamation-circle'
-            }[confirmType];
-        }
         if (!('mcCancelText' in options)) { // Remove the Cancel button if the user not specify a Cancel button
             // @ts-ignore
             options.mcCancelText = null;
