@@ -46,11 +46,13 @@ type AnimationState = 'enter' | 'leave' | null;
 export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     implements OnInit, OnChanges, AfterViewInit, OnDestroy, IModalOptions {
 
-    get afterOpen(): Observable<void> { // Observable alias for mcAfterOpen
+    // Observable alias for mcAfterOpen
+    get afterOpen(): Observable<void> {
         return this.mcAfterOpen.asObservable();
     }
 
-    get afterClose(): Observable<R> { // Observable alias for mcAfterClose
+    // Observable alias for mcAfterClose
+    get afterClose(): Observable<R> {
         return this.mcAfterClose.asObservable();
     }
 
@@ -62,15 +64,19 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
         return this.mcCancelText;
     }
 
+    // Indicate whether this dialog should hidden
     get hidden(): boolean {
         return !this.mcVisible && !this.animationState;
-    } // Indicate whether this dialog should hidden
+    }
 
     // tslint:disable-next-line:no-any
-    @Input() mcModalType: ModalType = 'default';
-    @Input() mcContent: string | TemplateRef<{}> | Type<T>; // [STATIC] If not specified, will use <ng-content>
-    @Input() mcComponentParams: object; // [STATIC] ONLY avaliable when mcContent is a component
-    @Input() mcFooter: string | TemplateRef<{}> | IModalButtonOptions<T>[]; // [STATIC] Default Modal ONLY
+    @Input() mcModalType: ModalType = ModalType.DEFAULT;
+    // If not specified, will use <ng-content>
+    @Input() mcContent: string | TemplateRef<{}> | Type<T>;
+    // avaliable when mcContent is a component
+    @Input() mcComponentParams: object;
+    // Default Modal ONLY
+    @Input() mcFooter: string | TemplateRef<{}> | IModalButtonOptions<T>[];
 
     @Input() @InputBoolean() mcVisible: boolean = false;
     @Output() mcVisibleChange = new EventEmitter<boolean>();
@@ -80,7 +86,6 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     @Input() mcWrapClassName: string;
     @Input() mcClassName: string;
     @Input() mcStyle: object;
-    @Input() mcIconType: string = 'question-circle'; // Confirm Modal ONLY
     @Input() mcTitle: string | TemplateRef<{}>;
     @Input() @InputBoolean() mcClosable: boolean = true;
     @Input() @InputBoolean() mcMask: boolean = true;

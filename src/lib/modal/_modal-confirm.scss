@@ -1,0 +1,49 @@
+
+.mc-confirm {
+    .mc-modal-header {
+        display: none;
+    }
+
+    .mc-modal-close {
+        display: none;
+    }
+
+    .mc-modal-body {
+        padding: 32px 32px 16px;
+    }
+
+    // TODO
+    &-body-wrapper {
+        //.clearfix()
+        zoom: 1;
+        &:before,
+        &:after {
+            content: "";
+            display: table;
+        }
+        &:after {
+            clear: both;
+        }
+    }
+
+    &-body {
+        .mc-confirm-title {
+            display: block;
+            overflow: auto;
+        }
+
+        .mc-confirm-content {
+            margin-top: 8px;
+        }
+    }
+
+    .mc-confirm-btns {
+        text-align: right;
+        // GRAY-600
+        border-top: 1px solid #f0f0f0;
+
+        button + button {
+            margin: 16px 16px 16px;
+        }
+    }
+}
