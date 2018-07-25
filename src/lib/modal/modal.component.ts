@@ -70,7 +70,7 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     }
 
     // tslint:disable-next-line:no-any
-    @Input() mcModalType: ModalType = ModalType.DEFAULT;
+    @Input() mcModalType: ModalType = 'default';
     // If not specified, will use <ng-content>
     @Input() mcContent: string | TemplateRef<{}> | Type<T>;
     // avaliable when mcContent is a component
@@ -126,7 +126,7 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
         private viewContainer: ViewContainerRef,
         private mcMeasureScrollbarService: McMeasureScrollbarService,
         private modalControl: McModalControlService,
-        @Inject(DOCUMENT) private document: any) { // tslint:disable-line:no-any
+        @Inject(DOCUMENT) private document: any) {
 
         super();
     }

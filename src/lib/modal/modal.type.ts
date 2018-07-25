@@ -6,10 +6,7 @@ import { OverlayRef } from '@ptsecurity/cdk/overlay';
 export type OnClickCallback<T> = ((instance: T) => (false | void | {}) | Promise<false | void | {}>);
 
 // Different modal styles we have supported
-export enum ModalType {
-    DEFAULT = 'default',
-    CONFIRM = 'confirm'
-}
+export type ModalType = 'default' | 'confirm';
 
 // Subtypes of Confirm Modal
 export type ConfirmType = 'confirm' | 'info' | 'success' | 'error' | 'warning';
