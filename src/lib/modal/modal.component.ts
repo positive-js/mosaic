@@ -24,7 +24,7 @@ import { Overlay, OverlayRef } from '@ptsecurity/cdk/overlay';
 import { InputBoolean } from '@ptsecurity/mosaic/core';
 import { Observable } from 'rxjs';
 
-import { McMeasureScrollbarService } from '../core/services/measure-scrollbar.service';
+import { McMeasureScrollbarService } from '@ptsecurity/mosaic/core';
 
 import { McModalControlService } from './modal-control.service';
 import { McModalRef } from './modal-ref.class';
