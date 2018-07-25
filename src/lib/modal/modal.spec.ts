@@ -1,22 +1,14 @@
-import { Component, ElementRef, EventEmitter, Input } from '@angular/core';
-import { async, fakeAsync, flush, inject, tick, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component } from '@angular/core';
+import { async, fakeAsync, flush, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
-import { OverlayContainer } from '@ptsecurity/cdk/overlay';
-import { CssUnitPipe } from '@ptsecurity/mosaic/core/pipes/css-unit.pipe';
 
-import { McButton, McButtonModule } from '../button';
+import { McButton, McButtonModule } from '@ptsecurity/mosaic/button';
+
 import { McMeasureScrollbarService } from '../core/services/measure-scrollbar.service';
 
-import { McModalControlService } from './modal-control.service';
-import { McModalRef } from './modal-ref.class';
-import { MODAL_ANIMATE_DURATION, McModalComponent } from './modal.component';
+import { McModalComponent } from './modal.component';
 import { McModalModule } from './modal.module';
-import { McModalService } from './modal.service';
 
-
-// tslint:disable-next-line
-const WAIT_ANIMATE_TIME = MODAL_ANIMATE_DURATION + 50;
 
 // tslint:disable:no-magic-numbers
 // tslint:disable:max-line-length
@@ -32,10 +24,12 @@ describe('modal testing (legacy)', () => {
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                imports: [McButtonModule, McModalModule],
-                declarations: [McDemoModalAsyncComponent, TestVaryServiceCustomComponent],
-                providers: [McMeasureScrollbarService]
-            }).compileComponents();
+                imports: [ McModalModule, McButtonModule ],
+                declarations: [ McDemoModalAsyncComponent ],
+                providers   : [ McMeasureScrollbarService ]
+            }).compileComponents()
+                .then(result => console.log('Result:', result))
+                .catch( (error) => console.error('Error: ', error));
         }));
 
         beforeEach(() => {
@@ -94,172 +88,6 @@ class McDemoModalAsyncComponent {
     }
 }
 
-@Component({
-    selector: 'mc-demo-modal-confirm-promise',
-    template: `
-        <button mc-button mcType="info" (click)="showConfirm()">Confirm</button>
-    `,
-    styles: []
-})
-class McDemoModalConfirmPromiseComponent {
-    confirmModal: McModalRef; // For testing by now
-
-    constructor(private modal: McModalService) {
-    }
-
-    showConfirm(): void {
-        this.confirmModal = this.modal.confirm({
-            mcTitle: 'Do you Want to delete these items?',
-            mcContent: 'When clicked the OK button, this dialog will be closed after 1 second',
-            // tslint:disable-next-line
-            mcOnOk: () => new Promise((resolve, reject) => {
-                // tslint:disable-next-line
-                setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
-            }).catch(() => console.log('Oops errors!'))
-        });
-    }
-}
-
-@Component({
-    template: ``
-})
-class TestBasicServiceComponent {
-    basicModal: McModalRef;
-
-    constructor(private modalService: McModalService) {
-        this.modalService.create(); // [Testing Required] Only for coverage temporarily
-
-        // Testing for creating modal immediately
-        this.basicModal = this.modalService.create({
-            mcGetContainer: () => document.body,
-            mcZIndex: 1888,
-            mcWidth: 250,
-            mcWrapClassName: 'test-wrap-class-name',
-            mcClassName: 'test-class-name',
-            mcStyle: {left: '10px', top: '20pt', border: '2px solid red'},
-            mcTitle: '<b>TEST BOLD TITLE</b>',
-            mcContent: '<p>test html content</p>',
-            mcClosable: false,
-            mcMask: false,
-            mcMaskClosable: false,
-            mcMaskStyle: {opacity: 0.4},
-            mcBodyStyle: {background: 'gray'},
-            // mcFooter: '<div>custom html footer: <i>OK</i></div>',
-            mcOkText: 'custom ok',
-            mcOkType: 'success',
-            mcOkLoading: false,
-            mcOnOk: () => {
-                console.log('click ok');
-
-                return false;
-            },
-            mcCancelText: 'custom cancel',
-            mcCancelLoading: true,
-            mcOnCancel: () => console.log('click cancel')
-        });
-    }
-}
-
-@Component({
-    template: ``
-})
-class TestVaryServiceComponent {
-    constructor(private modalService: McModalService) {
-    }
-
-    createWithVary(): McModalRef<TestVaryServiceCustomComponent> {
-
-        return this.modalService.create({
-            mcContent: TestVaryServiceCustomComponent,
-            mcComponentParams: {title: 'internal title', subtitle: 'subtitle'},
-            mcFooter: [
-                {
-                    label: 'change title from outside',
-                    onClick: (componentInstance: any) => {
-                        componentInstance.title = 'internal title changed';
-
-                        return Promise.resolve();
-                    }
-                },
-                {
-                    label: 'show loading',
-                    onClick: () => Promise.reject(null)
-                }
-            ]
-        });
-    }
-}
-
-@Component({
-    template: `
-        <h2>{{ title }}</h2><h4>{{ subtitle }}</h4>
-        <button (click)="destroyModal()">destroy</button>
-    `
-})
-export class TestVaryServiceCustomComponent {
-    @Input() title: string;
-    @Input() subtitle: string;
-
-    constructor(private modal: McModalRef, public elementRef: ElementRef) {
-    }
-
-    destroyModal(): void {
-        this.modal.destroy();
-    }
-}
-
-@Component({
-    template: ``
-})
-export class TestConfirmModalComponent {
-    constructor(public modalService: McModalService) {
-    }
-
-    createConfirm(): McModalRef {
-        this.modalService.confirm(); // [Testing Required] Only for coverage temporarily
-        this.modalService.confirm({mcWidth: 100}); // [Testing Required] Only for coverage temporarily
-
-        // Boundary detection for options: mcFooter, mcOnOk
-        return this.modalService.confirm({
-            mcFooter: 'should warning',
-            mcOkText: 'close'
-        });
-    }
-
-    createOtherModals(): string[] {
-        // tslint:disable-next-line
-        return ['info', 'success', 'error', 'warning'].map((type) => {
-            const modalId = generateUniqueId();
-            this.modalService[type]({mcClassName: modalId});
-            this.modalService[type]();  // [Testing Required] Only for coverage temporarily
-
-            return modalId;
-        });
-    }
-}
-
-@Component({
-    template: `
-        <div [style.width]="100 | toCssUnit" [style.height]="'100px' | toCssUnit"
-             [style.top]="100 | toCssUnit:'pt'"></div>`
-})
-class TestCssUnitPipeComponent {
-}
-
-@Component({
-    selector: 'mc-modal-by-service',
-    template: `
-        <mc-modal [(mcVisible)]="nonServiceModalVisible" mcWrapClassName="__NON_SERVICE_ID_SUFFIX__"></mc-modal>
-    `,
-    providers: [McModalControlService] // Testing for service with parent service
-})
-export class ModalByServiceComponent {
-    nonServiceModalVisible = false;
-
-    // @ts-ignore
-    // tslint:disable-next-line
-    constructor(modalControlService: McModalControlService) {}
-}
 
 // -------------------------------------------
 // | Local tool functions
@@ -294,7 +122,7 @@ function generateUniqueId(): string {
 }
 
 function getButtonOk(modalElement: HTMLElement): HTMLButtonElement {
-    return isConfirmModal(modalElement) ? modalElement.querySelector('.mc-confirm-btns button:last-child') as HTMLButtonElement : modalElement.querySelector('.mc-modal-footer button:last-child') as HTMLButtonElement;
+    return isConfirmModal(modalElement) ? modalElement.querySelector('.mc-confirm-btns button:first-child') as HTMLButtonElement : modalElement.querySelector('.mc-modal-footer button:first-child') as HTMLButtonElement;
 }
 
 function getButtonCancel(modalElement: HTMLElement): HTMLButtonElement {
