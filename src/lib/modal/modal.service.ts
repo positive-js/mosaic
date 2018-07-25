@@ -96,7 +96,7 @@ export class McModalService {
             }; // Leave a empty function to close this modal by default
         }
 
-        options.mcModalType = ModalType.CONFIRM;
+        options.mcModalType = 'confirm';
         options.mcClassName = `mc-confirm mc-confirm-${confirmType} ${options.mcClassName || ''}`;
         options.mcMaskClosable = false;
 
