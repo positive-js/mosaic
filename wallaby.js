@@ -29,7 +29,7 @@ module.exports = function (wallaby) {
 
                 { test: /\.css$/, loader: 'raw-loader' },
                 { test: /\.html$/, loader: 'raw-loader' },
-                {test: /\.js$/, loader: 'angular2-template-loader', exclude: /node_modules/},
+                { test: /\.js$/, loader: 'angular2-template-loader', exclude: /node_modules/ },
                 {
                     test: /\.ts$/,
                     use: [
@@ -57,11 +57,18 @@ module.exports = function (wallaby) {
                     configFileName: './tsconfig.webpack.json'
                 })
             ]
+        },
+        node: {
+            fs: 'empty',
+            net: 'empty',
+            tls: 'empty',
+            dns: 'empty'
         }
     });
 
     return {
         files: [
+            { pattern: 'src/wallabyTest.ts', load: false },
             { pattern: 'src/**/*.+(ts|css|scss|sass|html|json|svg)', load: false },
             { pattern: 'src/**/*.d.ts', ignore: true },
             { pattern: 'src/**/*spec.ts', ignore: true }
@@ -78,7 +85,10 @@ module.exports = function (wallaby) {
         },
 
         env: {
-            kind: 'chrome'
+            kind: 'chrome',
+            params: {
+                runner: '--headless --disable-gpu'
+            }
         },
 
         postprocessor: webpackPostprocessor,
