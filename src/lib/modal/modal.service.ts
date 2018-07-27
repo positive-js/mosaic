@@ -1,17 +1,19 @@
-import { ComponentRef, Injectable} from '@angular/core';
-import { Overlay, OverlayRef} from '@ptsecurity/cdk/overlay';
+import { ComponentRef, Injectable } from '@angular/core';
+import { Overlay, OverlayRef } from '@ptsecurity/cdk/overlay';
 import { ComponentPortal } from '@ptsecurity/cdk/portal';
 import { Observable } from 'rxjs';
 
 import { McModalControlService } from './modal-control.service';
 import { McModalRef } from './modal-ref.class';
 import { McModalComponent } from './modal.component';
-import { ConfirmType, IModalOptions, IModalOptionsForService, ModalType } from './modal.type';
+import { ConfirmType, IModalOptions, IModalOptionsForService } from './modal.type';
 
 
 // A builder used for managing service creating modals
 export class ModalBuilderForService {
-    private modalRef: ComponentRef<McModalComponent>; // Modal ComponentRef, "null" means it has been destroyed
+
+    // Modal ComponentRef, "null" means it has been destroyed
+    private modalRef: ComponentRef<McModalComponent>;
     private overlayRef: OverlayRef;
 
     constructor(private overlay: Overlay, options: IModalOptionsForService = {}) {
@@ -40,7 +42,8 @@ export class ModalBuilderForService {
 
     private changeProps(options: IModalOptions): void {
         if (this.modalRef) {
-            Object.assign(this.modalRef.instance, options); // DANGER: here not limit user's inputs at runtime
+            // here not limit user's inputs at runtime
+            Object.assign(this.modalRef.instance, options);
         }
     }
 
@@ -120,7 +123,8 @@ export class McModalService {
     }
 
     private simpleConfirm<T>(options: IModalOptionsForService<T> = {}, confirmType: ConfirmType): McModalRef<T> {
-        if (!('mcCancelText' in options)) { // Remove the Cancel button if the user not specify a Cancel button
+        // Remove the Cancel button if the user not specify a Cancel button
+        if (!('mcCancelText' in options)) {
             // @ts-ignore
             options.mcCancelText = null;
         }

@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs';
+
 import { DOCUMENT } from '@angular/common';
 import {
     AfterViewInit,
@@ -20,21 +22,19 @@ import {
     ViewChild,
     ViewContainerRef
 } from '@angular/core';
+
 import { Overlay, OverlayRef } from '@ptsecurity/cdk/overlay';
 import { InputBoolean } from '@ptsecurity/mosaic/core';
-import { Observable } from 'rxjs';
-
 import { McMeasureScrollbarService } from '@ptsecurity/mosaic/core';
 
 import { McModalControlService } from './modal-control.service';
 import { McModalRef } from './modal-ref.class';
+import { IModalButtonOptions, IModalOptions, ModalType, OnClickCallback } from './modal.type';
 // tslint:disable-next-line
 import ModalUtil from './modal-util';
-import { IModalButtonOptions, IModalOptions, ModalType, OnClickCallback } from './modal.type';
 
-
-export const MODAL_ANIMATE_DURATION = 200; // Duration when perform animations (ms)
-
+// Duration when perform animations (ms)
+export const MODAL_ANIMATE_DURATION = 200;
 
 type AnimationState = 'enter' | 'leave' | null;
 
@@ -73,7 +73,7 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     @Input() mcModalType: ModalType = 'default';
     // If not specified, will use <ng-content>
     @Input() mcContent: string | TemplateRef<{}> | Type<T>;
-    // avaliable when mcContent is a component
+    // available when mcContent is a component
     @Input() mcComponentParams: object;
     // Default Modal ONLY
     @Input() mcFooter: string | TemplateRef<{}> | IModalButtonOptions<T>[];
@@ -112,10 +112,13 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     @ViewChild('bodyContainer', {read: ViewContainerRef}) bodyContainer: ViewContainerRef;
     maskAnimationClassMap: object;
     modalAnimationClassMap: object;
-    transformOrigin = '0px 0px 0px'; // The origin point that animation based on
+    // The origin point that animation based on
+    transformOrigin = '0px 0px 0px';
 
-    private contentComponentRef: ComponentRef<T>; // Handle the reference when using mcContent as Component
-    private animationState: AnimationState; // Current animation state
+    // Handle the reference when using mcContent as Component
+    private contentComponentRef: ComponentRef<T>;
+    // Current animation state
+    private animationState: AnimationState;
     private container: HTMLElement | OverlayRef;
 
     constructor(
@@ -193,7 +196,8 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
         this.changeVisibleFromInside(false, result);
     }
 
-    destroy(result?: R): void { // Destroy equals Close
+    // Destroy equals Close
+    destroy(result?: R): void {
         this.close(result);
     }
 
@@ -296,12 +300,14 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
 
         return Promise
             .resolve(animation && this.animateTo(visible))
-            .then(() => { // Emit open/close event after animations over
+            // Emit open/close event after animations over
+            .then(() => {
                 if (visible) {
                     this.mcAfterOpen.emit();
                 } else {
                     this.mcAfterClose.emit(closeResult);
-                    this.changeBodyOverflow(); // Show/hide scrollbar when animation is over
+                    // Show/hide scrollbar when animation is over
+                    this.changeBodyOverflow();
                 }
             });
     }
@@ -323,7 +329,8 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     // AoT
     // tslint:disable-next-line
     onButtonClick(button: IModalButtonOptions<T>): void {
-        const result = this.getButtonCallableProp(button, 'onClick'); // Call onClick directly
+        // Call onClick directly
+        const result = this.getButtonCallableProp(button, 'onClick');
         if (isPromise(result)) {
             button.loading = true;
             (result as Promise<{}>).then(() => button.loading = false).catch(() => button.loading = false);
@@ -361,7 +368,8 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     }
 
     private animateTo(isVisible: boolean): Promise<any> {
-        if (isVisible) { // Figure out the lastest click position when shows up
+        // Figure out the lastest click position when shows up
+        if (isVisible) {
             // [NOTE] Using timeout due to the document.click event is fired later than visible change,
             // so if not postponed to next event-loop, we can't get the lastest click position
             window.setTimeout(() => this.updateTransformOrigin());
@@ -369,7 +377,8 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
 
         this.changeAnimationState(isVisible ? 'enter' : 'leave');
 
-        return new Promise((resolve) => window.setTimeout(() => { // Return when animation is over
+        // Return when animation is over
+        return new Promise((resolve) => window.setTimeout(() => {
             this.changeAnimationState(null);
             resolve();
         }, MODAL_ANIMATE_DURATION));
@@ -403,10 +412,13 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
             providers: [{provide: McModalRef, useValue: this}],
             parent: this.viewContainer.parentInjector
         });
+
         this.contentComponentRef = factory.create(childInjector);
+
         if (this.mcComponentParams) {
             Object.assign(this.contentComponentRef.instance, this.mcComponentParams);
         }
+
         // Do the first change detection immediately
         // (or we do detection at ngAfterViewInit, multi-changes error will be thrown)
         this.contentComponentRef.changeDetectorRef.detectChanges();
@@ -416,6 +428,7 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     private updateTransformOrigin(): void {
         const modalElement = this.modalContainer.nativeElement as HTMLElement;
         const lastPosition = ModalUtil.getLastClickPosition();
+
         if (lastPosition) {
             // tslint:disable-next-line
             this.transformOrigin = `${lastPosition.x - modalElement.offsetLeft}px ${lastPosition.y - modalElement.offsetTop}px 0px`;
