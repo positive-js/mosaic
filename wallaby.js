@@ -1,7 +1,5 @@
 const wallabyWebpack = require('wallaby-webpack');
 
-const { TsConfigPathsPlugin } = require('awesome-typescript-loader');
-
 const path = require('path');
 
 const compilerOptions = Object.assign(
@@ -30,18 +28,6 @@ module.exports = function (wallaby) {
                 { test: /\.css$/, loader: 'raw-loader' },
                 { test: /\.html$/, loader: 'raw-loader' },
                 { test: /\.js$/, loader: 'angular2-template-loader', exclude: /node_modules/ },
-                {
-                    test: /\.ts$/,
-                    use: [
-                        {
-                            loader: 'awesome-typescript-loader',
-                            options: {
-                                configFileName: './tsconfig.wallaby.json'
-                            }
-
-                        }
-                    ]
-                },
                 {test: /\.scss$|\.sass$/, loaders: ['raw-loader', 'sass-loader']}
             ]
         },
@@ -52,11 +38,10 @@ module.exports = function (wallaby) {
                 path.join(wallaby.projectCacheDir, 'src'),
                 'node_modules'
             ],
-            plugins: [
-                new TsConfigPathsPlugin({
-                    configFileName: './tsconfig.webpack.json'
-                })
-            ]
+            alias: {
+                '@ptsecurity/cdk': path.join(wallaby.projectCacheDir, 'src/cdk'),
+                '@ptsecurity/mosaic': path.join(wallaby.projectCacheDir, 'src/lib')
+            }
         },
         node: {
             fs: 'empty',
