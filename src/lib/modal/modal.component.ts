@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 
 import { DOCUMENT } from '@angular/common';
 import {
-    AfterViewInit,
+    AfterViewInit, ChangeDetectionStrategy,
     Component,
     ComponentFactoryResolver,
     ComponentRef,
@@ -24,7 +24,6 @@ import {
 } from '@angular/core';
 
 import { Overlay, OverlayRef } from '@ptsecurity/cdk/overlay';
-import { InputBoolean } from '@ptsecurity/mosaic/core';
 import { McMeasureScrollbarService } from '@ptsecurity/mosaic/core';
 
 import { McModalControlService } from './modal-control.service';
@@ -41,10 +40,83 @@ type AnimationState = 'enter' | 'leave' | null;
 @Component({
     selector: 'mc-modal',
     templateUrl: './modal.component.html',
-    styleUrls: ['./modal.css']
+    styleUrls: ['./modal.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     implements OnInit, OnChanges, AfterViewInit, OnDestroy, IModalOptions {
+
+    // tslint:disable-next-line:no-any
+    @Input() mcModalType: ModalType = 'default';
+    // If not specified, will use <ng-content>
+    @Input() mcContent: string | TemplateRef<{}> | Type<T>;
+    // available when mcContent is a component
+    @Input() mcComponentParams: object;
+    // Default Modal ONLY
+    @Input() mcFooter: string | TemplateRef<{}> | IModalButtonOptions<T>[];
+
+    @Input()
+    get mcVisible() { return this._mcVisible; }
+    set mcVisible(value) { this._mcVisible = value; }
+  _mcVisible = false;
+
+    @Output() mcVisibleChange = new EventEmitter<boolean>();
+
+    @Input() mcZIndex: number = 1000;
+    @Input() mcWidth: number | string = 520;
+    @Input() mcWrapClassName: string;
+    @Input() mcClassName: string;
+    @Input() mcStyle: object;
+    @Input() mcTitle: string | TemplateRef<{}>;
+
+    @Input()
+    get mcClosable() { return this._mcClosable; }
+    set mcClosable(value) { this._mcClosable = value; }
+    _mcClosable = true;
+
+    @Input()
+    get mcMask() { return this._mcMask; }
+    set mcMask(value) { this._mcMask = value; }
+    _mcMask = true;
+
+    @Input()
+    get mcMaskClosable() { return this._mcMaskClosable; }
+    set mcMaskClosable(value) { this._mcMaskClosable = value; }
+    _mcMaskClosable = true;
+
+    @Input() mcMaskStyle: object;
+    @Input() mcBodyStyle: object;
+
+    @Output() mcAfterOpen = new EventEmitter<void>(); // Trigger when modal open(visible) after animations
+    @Output() mcAfterClose = new EventEmitter<R>(); // Trigger when modal leave-animation over
+
+    // --- Predefined OK & Cancel buttons
+    @Input() mcOkText: string;
+
+    @Input() mcOkType = 'primary';
+
+    @Input()
+    get mcOkLoading() { return this._mcOkLoading; }
+    set mcOkLoading(value) { this._mcOkLoading = value; }
+    _mcOkLoading = false;
+
+    @Input() @Output() mcOnOk: EventEmitter<T> | OnClickCallback<T> = new EventEmitter<T>();
+    // Only aim to focus the ok button that needs to be auto focused
+    @ViewChild('autoFocusButtonOk', {read: ElementRef}) autoFocusButtonOk: ElementRef;
+    @Input() mcCancelText: string;
+
+    @Input()
+    get mcCancelLoading() { return this._mcCancelLoading; }
+    set mcCancelLoading(value) { this._mcCancelLoading = value; }
+    _mcCancelLoading = false;
+
+    @Input() @Output() mcOnCancel: EventEmitter<T> | OnClickCallback<T> = new EventEmitter<T>();
+    @ViewChild('modalContainer') modalContainer: ElementRef;
+    @ViewChild('bodyContainer', {read: ViewContainerRef}) bodyContainer: ViewContainerRef;
+    maskAnimationClassMap: object;
+    modalAnimationClassMap: object;
+    // The origin point that animation based on
+    transformOrigin = '0px 0px 0px';
 
     // Observable alias for mcAfterOpen
     get afterOpen(): Observable<void> {
@@ -68,52 +140,6 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     get hidden(): boolean {
         return !this.mcVisible && !this.animationState;
     }
-
-    // tslint:disable-next-line:no-any
-    @Input() mcModalType: ModalType = 'default';
-    // If not specified, will use <ng-content>
-    @Input() mcContent: string | TemplateRef<{}> | Type<T>;
-    // available when mcContent is a component
-    @Input() mcComponentParams: object;
-    // Default Modal ONLY
-    @Input() mcFooter: string | TemplateRef<{}> | IModalButtonOptions<T>[];
-
-    @Input() @InputBoolean() mcVisible: boolean = false;
-    @Output() mcVisibleChange = new EventEmitter<boolean>();
-
-    @Input() mcZIndex: number = 1000;
-    @Input() mcWidth: number | string = 520;
-    @Input() mcWrapClassName: string;
-    @Input() mcClassName: string;
-    @Input() mcStyle: object;
-    @Input() mcTitle: string | TemplateRef<{}>;
-    @Input() @InputBoolean() mcClosable: boolean = true;
-    @Input() @InputBoolean() mcMask: boolean = true;
-    @Input() @InputBoolean() mcMaskClosable: boolean = true;
-    @Input() mcMaskStyle: object;
-    @Input() mcBodyStyle: object;
-
-    @Output() mcAfterOpen = new EventEmitter<void>(); // Trigger when modal open(visible) after animations
-    @Output() mcAfterClose = new EventEmitter<R>(); // Trigger when modal leave-animation over
-
-    // --- Predefined OK & Cancel buttons
-    @Input() mcOkText: string;
-
-    @Input() mcOkType = 'primary';
-    @Input() @InputBoolean() mcOkLoading: boolean = false;
-    @Input() @Output() mcOnOk: EventEmitter<T> | OnClickCallback<T> = new EventEmitter<T>();
-    // Only aim to focus the ok button that needs to be auto focused
-    @ViewChild('autoFocusButtonOk', {read: ElementRef}) autoFocusButtonOk: ElementRef;
-    @Input() mcCancelText: string;
-
-    @Input() @InputBoolean() mcCancelLoading: boolean = false;
-    @Input() @Output() mcOnCancel: EventEmitter<T> | OnClickCallback<T> = new EventEmitter<T>();
-    @ViewChild('modalContainer') modalContainer: ElementRef;
-    @ViewChild('bodyContainer', {read: ViewContainerRef}) bodyContainer: ViewContainerRef;
-    maskAnimationClassMap: object;
-    modalAnimationClassMap: object;
-    // The origin point that animation based on
-    transformOrigin = '0px 0px 0px';
 
     // Handle the reference when using mcContent as Component
     private contentComponentRef: ComponentRef<T>;

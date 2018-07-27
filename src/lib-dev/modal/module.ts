@@ -16,6 +16,7 @@ import { McModalModule, McModalRef, McModalService } from '../../lib/modal';
 export class ModalDemoComponent {
     isVisible = false;
     tplModal: McModalRef;
+    htmlModalVisible = false;
 
     constructor(private modalService: McModalService) {
     }
@@ -80,6 +81,23 @@ export class ModalDemoComponent {
             const instance = modal.getContentComponent();
             instance.subtitle = 'sub title is changed';
         }, 2000);
+    }
+
+    openAndCloseAll(): void {
+        let pos = 0;
+
+        [ 'create', 'info', 'success', 'error' ].forEach((method) => this.modalService[method]({
+            mcMask: false,
+            mcTitle: `Test ${method} title`,
+            mcContent: `Test content: <b>${method}</b>`,
+            mcStyle: { position: 'absolute', top: `${pos * 70}px`, left: `${(pos++) * 300}px` }
+        }));
+
+        this.htmlModalVisible = true;
+
+        this.modalService.afterAllClose.subscribe(() => console.log('afterAllClose emitted!'));
+
+        window.setTimeout(() => this.modalService.closeAll(), 10000);
     }
 
     destroyTplModal(): void {

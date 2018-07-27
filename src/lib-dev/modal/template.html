@@ -2,6 +2,7 @@
 
 <button (click)="showModal()">Show Modal</button>
 <mc-modal [(mcVisible)]="isVisible"
+          mcClosable="false"
           mcTitle="The first Modal"
           (mcOnCancel)="handleCancel()" (mcOnOk)="handleOk()"
           mcCancelText="Cancel"
@@ -39,3 +40,11 @@
 <button mc-button color="primary" (click)="createComponentModal()">
    Open
 </button>
+
+
+<h3>Many many modals</h3>
+<button mc-button color="primary" (click)="openAndCloseAll()">Open more modals then close all after 2s</button>
+<mc-modal [(mcVisible)]="htmlModalVisible"
+          [mcMask]="true"
+          [mcZIndex]="1001"
+          mcTitle="Non-service html modal">This is a non-service html modal</mc-modal>
