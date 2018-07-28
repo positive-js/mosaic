@@ -38,7 +38,7 @@
         "@commitlint/config-conventional": "^7.0.1",
         "@ptsecurity/commitlint-config": "^0.1.3",
         "@ptsecurity/prettier-config": "0.1.0",
-        "@ptsecurity/tslint-config": "^0.6.8",
+        "@ptsecurity/tslint-config": "^0.7.0",
         "@types/chalk": "^2.2.0",
         "@types/fs-extra": "^5.0.4",
         "@types/glob": "^5.0.35",
