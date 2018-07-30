@@ -7,8 +7,8 @@ import { AutofillMonitor } from '@ptsecurity/cdk/text-field';
 import { MC_INPUT_VALUE_ACCESSOR } from '@ptsecurity/mosaic/input/input-value-accessor';
 import { Subject } from 'rxjs/internal/Subject';
 
-import { coerceBooleanProperty } from '../../cdk/coercion';
-import { getSupportedInputTypes, Platform } from '../../cdk/platform';
+import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
+import { getSupportedInputTypes, Platform } from '@ptsecurity/cdk/platform';
 import { CanUpdateErrorState, ErrorStateMatcher, mixinErrorState } from '../core';
 import { McFormFieldControl } from '../form-field';
 
