@@ -8,6 +8,7 @@
 @import '../../checkbox/checkbox-theme';
 @import '../../navbar/navbar-theme';
 @import '../../input/input-theme';
+@import '../../form-field/form-field-theme';
 
 
 @mixin mosaic-theme($theme) {
@@ -20,4 +21,5 @@
     @include mc-checkbox-theme($theme);
     @include mc-navbar-theme($theme);
     @include mc-input-theme($theme);
+    @include mc-form-field-theme($theme);
 }

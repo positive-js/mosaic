@@ -2,35 +2,7 @@
 
 
 .mc-input {
-    display: inline-block;
-    box-sizing: border-box;
-    height: $mc-input-height;
-    width: $mc-input-width;
-
-    border: {
-        width: $mc-input-border-size;
-        style: solid;
-        color: initial;
-        radius: $mc-input-border-radius;
-    }
-}
-
-.mc-input__inner {
-    display: flex;
-    align-items: stretch;
-    justify-content: space-between;
-    height: 100%;
-}
-
-.mc-input__cleaner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: $mc-input-icon-width;
-    cursor: pointer;
-}
-
-.mc-input__field {
     @extend %mc-input-field-base;
-}
 
+    display: inline-block;
+}

@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { A11yModule } from '@ptsecurity/cdk/a11y';
 import { McCommonModule } from '@ptsecurity/mosaic/core';
 
-import { McInput, McInputMono } from './input.component';
+import { McInput, McInputMono } from './input';
 
 
 @NgModule({

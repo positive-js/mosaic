@@ -1,0 +1,28 @@
+<div class="mc-form-field__wrapper">
+
+    <div class="mc-form-field__container"
+         (click)="onContainerClick($event)">
+
+        <div class="mc-form-field__prefix" *ngIf="hasPrefix">
+            <ng-content select="[mcPrefix]"></ng-content>
+        </div>
+
+        <div class="mc-form-field__infix">
+            <ng-content></ng-content>
+        </div>
+
+        <div class="mc-form-field__suffix" *ngIf="hasSuffix">
+            <ng-content select="[mcSuffix]"></ng-content>
+        </div>
+
+        <div class="mc-form-field__cleaner"
+             *ngIf="canShowCleaner && !hasSuffix"
+             (click)="clearValue($event)">
+            <ng-content select="mc-cleaner"></ng-content>
+        </div>
+    </div>
+
+    <div class="mc-form-field__hint" *ngIf="hasHint">
+        <ng-content select="mc-hint"></ng-content>
+    </div>
+</div>

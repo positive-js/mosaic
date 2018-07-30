@@ -1,51 +1,113 @@
 <div>Without placeholder:</div>
 
-<mc-input [(ngModel)]="value"></mc-input>
+<mc-form-field>
+    <input mcInput [(ngModel)]="value">
+</mc-form-field>
 
 <br><br>
 
 <div>With placeholder:</div>
 
-<mc-input [(ngModel)]="value" placeholder="Hello world"></mc-input>
+<mc-form-field>
+    <input mcInput [(ngModel)]="value" placeholder="Placeholder">
+</mc-form-field>
 
 <br><br>
 
-<div>With placeholder and cleaner:</div>
+<div>With placeholder and monotype:</div>
 
-<mc-input [(ngModel)]="value" placeholder="Hello world" cleaner="true"></mc-input>
-
-<br><br>
-
-<div>Disabled:</div>
-
-<mc-input [(ngModel)]="value" placeholder="Hello world" disabled="true"></mc-input>
+<mc-form-field>
+    <input mcInput mcInputMono [(ngModel)]="value" placeholder="Placeholder">
+</mc-form-field>
 
 <br><br>
 
-<div>Disabled and with cleaner:</div>
+<div>With placeholder and hint:</div>
 
-<mc-input [(ngModel)]="value" placeholder="Hello world" cleaner="true" disabled="true"></mc-input>
+<mc-form-field>
+    <input mcInput [(ngModel)]="value" placeholder="Placeholder">
 
-<br><br>
-
-<div>Monospace: </div>
-
-<mc-input mc-input-mono [(ngModel)]="value" placeholder="Hello world" cleaner="true"></mc-input>
+    <mc-hint>Hint under field</mc-hint>
+</mc-form-field>
 
 <br><br>
 
-<div>Field with validation (min-length="4"):</div>
+<div>With placeholder, hint and disabled:</div>
 
-<br>
+<mc-form-field>
+    <input mcInput [(ngModel)]="value" placeholder="Placeholder" [disabled]="true">
 
-<form>
-    <fieldset>
-        <mc-input [(ngModel)]="invalidValue" placeholder="Hello world" name="invalidField" minlength="4"></mc-input>
-        <br><br>
+    <mc-hint>Hint under field</mc-hint>
+</mc-form-field>
 
-        <div>With cleaner:</div>
-        <mc-input [(ngModel)]="invalidValue" placeholder="Hello world" name="invalidField2" minlength="4" cleaner="true"></mc-input>
-    </fieldset>
-</form>
+<br><br>
 
+<div>With clear-button:</div>
 
+<mc-form-field>
+    <input mcInput [(ngModel)]="value" placeholder="Placeholder">
+
+    <mc-cleaner></mc-cleaner>
+</mc-form-field>
+
+<br><br>
+
+<div>With prefix:</div>
+
+<mc-form-field>
+    <i mcPrefix mc-icon="mc-search_16"></i>
+
+    <input mcInput [(ngModel)]="value" placeholder="Placeholder">
+</mc-form-field>
+
+<br><br>
+
+<div>With suffix:</div>
+
+<mc-form-field>
+    <input mcInput [(ngModel)]="value" placeholder="Placeholder">
+
+    <i mcSuffix mc-icon="mc-calendar_16"></i>
+</mc-form-field>
+
+<br><br>
+
+<div>Invalid:</div>
+
+<mc-form-field>
+    <input mcInput [(ngModel)]="value" placeholder="Placeholder" required minlength="4">
+</mc-form-field>
+
+<br><br>
+
+<div>Invalid with clear-button:</div>
+
+<mc-form-field>
+    <input mcInput [(ngModel)]="value" placeholder="Placeholder" required minlength="4">
+
+    <mc-cleaner></mc-cleaner>
+</mc-form-field>
+
+<br><br>
+
+<div>With placeholder, hint, prefix, cleaner and disabled:</div>
+
+<mc-form-field>
+    <i mcPrefix mc-icon="mc-search_16"></i>
+
+    <input mcInput [(ngModel)]="value" placeholder="Placeholder" [disabled]="true">
+
+    <mc-cleaner></mc-cleaner>
+</mc-form-field>
+
+<br><br>
+
+<div>With placeholder, hint, prefix, cleaner and disabled:</div>
+
+<mc-form-field class="mc-form-field_without-borders">
+    <i mcPrefix mc-icon="mc-search_16"></i>
+
+    <input mcInput [(ngModel)]="value" placeholder="Placeholder">
+
+    <mc-cleaner></mc-cleaner>
+</mc-form-field>

@@ -1,9 +1,11 @@
-import { Component, NgModule, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
+import { McFormFieldModule } from '../../lib/form-field';
 import { McInputModule } from '../../lib/input/';
+import { McIconModule } from '../../lib/icon';
 
 
 @Component({
@@ -25,7 +27,9 @@ export class InputDemoComponent {
     imports: [
         BrowserModule,
         McInputModule,
-        FormsModule
+        McFormFieldModule,
+        FormsModule,
+        McIconModule
     ],
     bootstrap: [
         InputDemoComponent
