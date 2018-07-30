@@ -54,9 +54,6 @@ $mc-icon-button-font: 14px;
     border: $mc-button-border-size solid transparent;
     border-radius: $mc-button-border-radius;
 
-    font-size: inherit;
-    font-weight: 500;
-
     &::-moz-focus-inner {
         border: 0;
     }

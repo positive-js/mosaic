@@ -12,7 +12,9 @@ npm install --save @ptsecurity/mosaic @ptsecurity/cdk
 yarn add @ptsecurity/mosaic @ptsecurity/cdk
 ```
 
-#### Nightly (Snapshots) builds
+#### Snapshots builds
+A snapshot build with the latest changes from master is also available.
+Note that this snapshot build should not be considered stable and may break between releases.
 
 #### NPM
 ```bash
@@ -50,17 +52,22 @@ export class AppModule { }
 
 ### Step 3: Import the component modules
 
+You can create a separate NgModule that imports all of the components that you will use in your application.
+You can then include this module wherever you'd like to use the components.
+
 ```ts
 import { McButtonModule, McCheckboxModule } from '@ptsecurity/mosaic';
 
 @NgModule({
-  imports: [ McButtonModule, McCheckboxModule ],
-  exports: [ McButtonModule, McCheckboxModule ]
+    imports: [ McButtonModule, McCheckboxModule ],
+    exports: [ McButtonModule, McCheckboxModule ]
 })
 export class CoreCustomModule { }
 ```
 
 ### Step 4: Include a theme
+
+Including a theme is **required** to apply all of the core and theme styles to your application.
 
 ```css
 @import "~@ptsecurity/mosaic/prebuilt-themes/default-theme.css";
