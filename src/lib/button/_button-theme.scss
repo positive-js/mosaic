@@ -11,6 +11,7 @@
     $hover-lighten: 5%;
 
     color: mc-contrast($palette, 500);
+    font-weight: 500;
 
     border-color: mc-color($palette, 600);
     background-image: linear-gradient(to bottom, mc-color($palette, 500), mc-color($palette, 560));
@@ -50,6 +51,7 @@
     $hover-darken: 5%;
 
     color: mc-contrast($palette, 500);
+    font-weight: 400;
 
     border-color: mc-color($palette, 300);
     background-image: linear-gradient(to bottom, mc-color($palette, 40, 1), mc-color($palette, 100));
