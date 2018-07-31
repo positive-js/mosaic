@@ -1,10 +1,12 @@
 
-$mc-navbar-min-width: 1280px;
 $mc-navbar-h-padding: 0px;
 $mc-navbar-height: 48px;
 $mc-navbar-item-h-padding: 16px;
 $mc-navbar-brand-h-padding: 12px;
+$mc-navbar-brand-margin-right: 24px;
 $mc-navbar-title-icon-space: 8px;
+$mc-navbar-icon-min-width: 15px;
+
 
 %mc-navbar-container-base {
     height: 100%;
@@ -16,8 +18,6 @@ $mc-navbar-title-icon-space: 8px;
 }
 
 %mc-nav-bar-base {
-    min-width: $mc-navbar-min-width;
-
     position: relative;
     height: $mc-navbar-height;
 
@@ -48,8 +48,14 @@ $mc-navbar-title-icon-space: 8px;
 
 %mc-navbar-brand-base {
     @extend %mc-navbar-item-base;
-    padding-left: $mc-navbar-brand-h-padding;
+    padding-left: 0;
     padding-right: $mc-navbar-brand-h-padding;
+    margin-right: $mc-navbar-brand-margin-right;
+
+    .mc-navbar-title {
+        padding-left: $mc-navbar-brand-h-padding;
+        padding-right: 0;
+    }
 }
 
 %mc-navbar-title-base {
