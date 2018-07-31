@@ -16,13 +16,11 @@ import { startWith } from 'rxjs/operators';
 
 
 import { McFormFieldControl } from './form-field-control';
-import {
-    getMcFormFieldMissingControlError
-} from './form-field-errors';
+import { getMcFormFieldMissingControlError } from './form-field-errors';
 import { McHint } from './hint';
-import { McSuffix } from '@ptsecurity/mosaic/form-field/suffix';
-import { McPrefix } from '@ptsecurity/mosaic/form-field/prefix';
-import { McCleaner } from '@ptsecurity/mosaic/form-field/cleaner';
+import { McSuffix } from './suffix';
+import { McPrefix } from './prefix';
+import { McCleaner } from './cleaner';
 
 
 export class McFormFieldBase {
@@ -144,8 +142,8 @@ export class McFormField extends McFormFieldBase
 
     get canShowCleaner() {
         return this._cleaner && this._cleaner.length > 0 &&
-            this._control && this._control.ngControl
-                ? this._control.ngControl.value && !this._control.disabled
-                : false;
+        this._control && this._control.ngControl
+            ? this._control.ngControl.value && !this._control.disabled
+            : false;
     }
 }

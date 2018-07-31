@@ -1,10 +1,9 @@
 {
-    "extends": "../tsconfig-build",
+    "extends": "../tsconfig.build",
     "files": [
         "public-api.ts"
     ],
     "angularCompilerOptions": {
-        "annotateForClosureCompiler": true,
         "strictMetadataEmit": true,
         "flatModuleOutFile": "index.js",
         "flatModuleId": "@ptsecurity/mosaic/form-field",

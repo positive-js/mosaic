@@ -2,16 +2,15 @@ import {
     Directive, DoCheck, ElementRef, Inject, Input, OnChanges,
     OnDestroy, OnInit, Optional, Self
 } from '@angular/core';
-import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
-import { AutofillMonitor } from '@ptsecurity/cdk/text-field';
-import { MC_INPUT_VALUE_ACCESSOR } from '@ptsecurity/mosaic/input/input-value-accessor';
-import { Subject } from 'rxjs/internal/Subject';
+import { Subject } from 'rxjs';
 
+import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import { getSupportedInputTypes, Platform } from '@ptsecurity/cdk/platform';
-import { CanUpdateErrorState, ErrorStateMatcher, mixinErrorState } from '../core';
-import { McFormFieldControl } from '../form-field';
+import { CanUpdateErrorState, ErrorStateMatcher, mixinErrorState } from '@ptsecurity/mosaic/core';
+import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 
+import { MC_INPUT_VALUE_ACCESSOR } from './input-value-accessor';
 import { getMcInputUnsupportedTypeError } from './input-errors';
 
 
@@ -194,8 +193,7 @@ export class McInput extends _McInputMixinBase implements McFormFieldControl<any
                 @Optional() _parentForm: NgForm,
                 @Optional() _parentFormGroup: FormGroupDirective,
                 _defaultErrorStateMatcher: ErrorStateMatcher,
-                @Optional() @Self() @Inject(MC_INPUT_VALUE_ACCESSOR) inputValueAccessor: any,
-                private _autofillMonitor: AutofillMonitor) {
+                @Optional() @Self() @Inject(MC_INPUT_VALUE_ACCESSOR) inputValueAccessor: any) {
         super(_defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl);
         // If no input value accessor was explicitly specified, use the element as the input value
         // accessor.
@@ -217,7 +215,6 @@ export class McInput extends _McInputMixinBase implements McFormFieldControl<any
 
     ngOnDestroy() {
         this.stateChanges.complete();
-        this._autofillMonitor.stopMonitoring(this._elementRef.nativeElement);
     }
 
     ngDoCheck() {
