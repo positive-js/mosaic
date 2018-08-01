@@ -15,12 +15,12 @@ import { EMPTY, merge } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 
 
+import { McCleaner } from './cleaner';
 import { McFormFieldControl } from './form-field-control';
 import { getMcFormFieldMissingControlError } from './form-field-errors';
 import { McHint } from './hint';
-import { McSuffix } from './suffix';
 import { McPrefix } from './prefix';
-import { McCleaner } from './cleaner';
+import { McSuffix } from './suffix';
 
 
 export class McFormFieldBase {
@@ -83,7 +83,7 @@ export class McFormField extends McFormFieldBase
         }
 
         // Subscribe to changes in the child control state in order to update the form field UI.
-        this._control.stateChanges.pipe(startWith(null!)).subscribe(() => {
+        this._control.stateChanges.pipe(startWith()).subscribe(() => {
             this._changeDetectorRef.markForCheck();
         });
 

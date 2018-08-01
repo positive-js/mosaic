@@ -1,3 +1,3 @@
-export function getMcInputUnsupportedTypeError(type: string): Error {
-    return Error(`Input type "${type}" isn't supported by mcInput.`);
+export function getMcInputUnsupportedTypeError(inputType: string): Error {
+    return Error(`Input type "${inputType}" isn't supported by mcInput.`);
 }

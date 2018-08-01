@@ -3,7 +3,6 @@ import { Directive, Input } from '@angular/core';
 
 let nextUniqueId = 0;
 
-
 @Directive({
     selector: 'mc-hint',
     host: {

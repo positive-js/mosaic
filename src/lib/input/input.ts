@@ -10,11 +10,11 @@ import { getSupportedInputTypes, Platform } from '@ptsecurity/cdk/platform';
 import { CanUpdateErrorState, ErrorStateMatcher, mixinErrorState } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 
-import { MC_INPUT_VALUE_ACCESSOR } from './input-value-accessor';
 import { getMcInputUnsupportedTypeError } from './input-errors';
+import { MC_INPUT_VALUE_ACCESSOR } from './input-value-accessor';
 
 
-const MAT_INPUT_INVALID_TYPES = [
+const MC_INPUT_INVALID_TYPES = [
     'button',
     'checkbox',
     'file',
@@ -57,7 +57,7 @@ export const _McInputMixinBase = mixinErrorState(McInputBase);
     providers: [{ provide: McFormFieldControl, useExisting: McInput }]
 })
 export class McInput extends _McInputMixinBase implements McFormFieldControl<any>, OnChanges,
-    OnDestroy, OnInit, DoCheck, CanUpdateErrorState {
+    OnDestroy, DoCheck, CanUpdateErrorState {
 
     /** An object used to control when error messages are shown. */
     @Input() errorStateMatcher: ErrorStateMatcher;
@@ -79,23 +79,6 @@ export class McInput extends _McInputMixinBase implements McFormFieldControl<any
      * @docs-private
      */
     controlType: string = 'mc-input';
-
-    protected _uid = `mc-input-${nextUniqueId++}`;
-    protected _previousNativeValue: any;
-    protected _disabled = false;
-    protected _id: string;
-    protected _required = false;
-    protected _type = 'text';
-    protected _neverEmptyInputTypes = [
-        'date',
-        'datetime',
-        'datetime-local',
-        'month',
-        'time',
-        'week'
-    ].filter((t) => getSupportedInputTypes().has(t));
-
-    private _inputValueAccessor: { value: any };
 
     /**
      * Implemented as part of McFormFieldControl.
@@ -153,6 +136,7 @@ export class McInput extends _McInputMixinBase implements McFormFieldControl<any
         this._required = coerceBooleanProperty(value);
     }
 
+    // tslint:disable no-reserved-keywords
     /** Input type of the element. */
     @Input()
     get type(): string {
@@ -170,6 +154,7 @@ export class McInput extends _McInputMixinBase implements McFormFieldControl<any
             this._elementRef.nativeElement.type = this._type;
         }
     }
+    // tslint:enable no-reserved-keywords
 
     /**
      * Implemented as part of McFormFieldControl.
@@ -187,6 +172,23 @@ export class McInput extends _McInputMixinBase implements McFormFieldControl<any
         }
     }
 
+    protected _uid = `mc-input-${nextUniqueId++}`;
+    protected _previousNativeValue: any;
+    protected _disabled = false;
+    protected _id: string;
+    protected _required = false;
+    protected _type = 'text';
+    protected _neverEmptyInputTypes = [
+        'date',
+        'datetime',
+        'datetime-local',
+        'month',
+        'time',
+        'week'
+    ].filter((t) => getSupportedInputTypes().has(t));
+
+    private _inputValueAccessor: { value: any };
+
     constructor(protected _elementRef: ElementRef,
                 protected _platform: Platform,
                 @Optional() @Self() public ngControl: NgControl,
@@ -203,10 +205,6 @@ export class McInput extends _McInputMixinBase implements McFormFieldControl<any
 
         // Force setter to be called in case id was not specified.
         this.id = this.id;
-    }
-
-    ngOnInit() {
-
     }
 
     ngOnChanges() {
@@ -282,7 +280,7 @@ export class McInput extends _McInputMixinBase implements McFormFieldControl<any
 
     /** Make sure the input is a supported type. */
     protected _validateType() {
-        if (MAT_INPUT_INVALID_TYPES.indexOf(this._type) > -1) {
+        if (MC_INPUT_INVALID_TYPES.indexOf(this._type) > -1) {
             throw getMcInputUnsupportedTypeError(this._type);
         }
     }
@@ -302,9 +300,9 @@ export class McInput extends _McInputMixinBase implements McFormFieldControl<any
 }
 
 @Directive({
-    selector: 'input[mcInputMono]',
-    exportAs: 'McInputMono',
-    host: { class: 'mc-input_mono' }
+    selector: 'input[mcInputMonospace]',
+    exportAs: 'McInputMonospace',
+    host: { class: 'mc-input_monospace' }
 })
 export class McInputMono {
 }

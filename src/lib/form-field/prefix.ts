@@ -1,7 +1,8 @@
-import {Directive} from '@angular/core';
+import { Directive } from '@angular/core';
 
 
 @Directive({
-    selector: '[mcPrefix]',
+    selector: '[mcPrefix]'
 })
-export class McPrefix {}
+export class McPrefix {
+}
