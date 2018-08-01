@@ -6,7 +6,7 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChild,
-    ContentChildren,
+    ContentChildren, Directive,
     ElementRef,
     QueryList,
     ViewEncapsulation
@@ -146,4 +146,12 @@ export class McFormField extends McFormFieldBase
             ? this._control.ngControl.value && !this._control.disabled
             : false;
     }
+}
+
+@Directive({
+    selector: 'mc-form-field[mcFormFieldWithoutBorders]',
+    exportAs: 'mcFormFieldWithoutBorders',
+    host: { class: 'mc-form-field_without-borders' }
+})
+export class McFormFieldWithoutBorders {
 }

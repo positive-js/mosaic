@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 
 import { McCleaner } from './cleaner';
-import { McFormField } from './form-field';
+import { McFormField, McFormFieldWithoutBorders } from './form-field';
 import { McHint } from './hint';
 import { McPrefix } from './prefix';
 import { McSuffix } from './suffix';
@@ -13,6 +13,7 @@ import { McSuffix } from './suffix';
 @NgModule({
     declarations: [
         McFormField,
+        McFormFieldWithoutBorders,
         McHint,
         McPrefix,
         McSuffix,
@@ -21,6 +22,7 @@ import { McSuffix } from './suffix';
     imports: [CommonModule, McIconModule],
     exports: [
         McFormField,
+        McFormFieldWithoutBorders,
         McHint,
         McPrefix,
         McSuffix,
