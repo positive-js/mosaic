@@ -4,8 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { McFormFieldModule } from '../../lib/form-field';
-import { McInputModule } from '../../lib/input/';
 import { McIconModule } from '../../lib/icon';
+import { McInputModule } from '../../lib/input/';
 
 
 @Component({
@@ -16,7 +16,6 @@ import { McIconModule } from '../../lib/icon';
 })
 export class InputDemoComponent {
     value: string = '';
-    invalidValue: string = '';
 }
 
 
