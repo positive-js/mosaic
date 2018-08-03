@@ -1,10 +1,10 @@
-import {ElementRef} from '@angular/core';
-import {Direction} from '@ptsecurity/cdk/bidi';
-import {Platform} from '@ptsecurity/cdk/platform';
-import {CdkScrollable, ViewportRuler} from '@ptsecurity/cdk/scrolling';
-import {Observable} from 'rxjs';
+import { ElementRef } from '@angular/core';
+import { Direction } from '@ptsecurity/cdk/bidi';
+import { Platform } from '@ptsecurity/cdk/platform';
+import { CdkScrollable, ViewportRuler } from '@ptsecurity/cdk/scrolling';
+import { Observable } from 'rxjs';
 
-import {IOverlayReference} from '../overlay-reference';
+import { IOverlayReference } from '../overlay-reference';
 
 import {
     ConnectedOverlayPositionChange,
@@ -12,8 +12,8 @@ import {
     IOriginConnectionPosition,
     IOverlayConnectionPosition,
 } from './connected-position';
-import {FlexibleConnectedPositionStrategy} from './flexible-connected-position-strategy';
-import {IPositionStrategy} from './position-strategy';
+import { FlexibleConnectedPositionStrategy } from './flexible-connected-position-strategy';
+import { IPositionStrategy } from './position-strategy';
 
 
 /**

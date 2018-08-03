@@ -1,0 +1,33 @@
+@import '../core/theming/palette';
+@import '../core/theming/theming';
+@import '../core/styles/typography/typography-utils';
+
+$mc-tooltip-target-height: 22px;
+$mc-tooltip-font-size: 10px;
+$mc-tooltip-vertical-padding: ($mc-tooltip-target-height - $mc-tooltip-font-size) / 2;
+
+$mc-tooltip-handset-target-height: 32px;
+$mc-tooltip-handset-font-size: 14px;
+$mc-tooltip-handset-vertical-padding:
+    ($mc-tooltip-handset-target-height - $mc-tooltip-handset-font-size) / 2;
+
+@mixin mc-tooltip-theme($theme) {
+    .mc-tooltip {
+        background: mc-color($mc-grey, 700, 0.9);
+    }
+}
+
+@mixin mc-tooltip-typography($config) {
+    .mc-tooltip {
+        font-family: mc-font-family($config);
+        font-size: $mat-tooltip-font-size;
+        padding-top: $mat-tooltip-vertical-padding;
+        padding-bottom: $mat-tooltip-vertical-padding;
+    }
+
+    .mc-tooltip-handset {
+        font-size: $mat-tooltip-handset-font-size;
+        padding-top: $mat-tooltip-handset-vertical-padding;
+        padding-bottom: $mat-tooltip-handset-vertical-padding;
+    }
+}

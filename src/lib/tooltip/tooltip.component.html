@@ -1,0 +1,25 @@
+<ng-template
+    #overlay="cdkConnectedOverlay"
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="overlayOrigin"
+    [cdkConnectedOverlayHasBackdrop]="_hasBackdrop"
+    (backdropClick)="hide()"
+    (detach)="hide()"
+    (positionChange)="onPositionChange($event)"
+    [cdkConnectedOverlayPositions]="_positions"
+    [cdkConnectedOverlayOpen]="$visible | async">
+    <div class="mc-tooltip"
+         [ngClass]="_classMap"
+         [@fadeAnimation]="''+($visible | async)"
+         (@fadeAnimation.done)="_afterVisibilityAnimation($event)">
+        <div class="mc-tooltip-content">
+            <div class="mc-tooltip-arrow"></div>
+            <div class="mc-tooltip-inner">
+                <ng-container *ngIf="isTitleString; else titleTemplate">{{ mcTitle }}</ng-container>
+                <ng-template #titleTemplate>
+                    <ng-template [ngTemplateOutlet]="mcTitle"></ng-template>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</ng-template>

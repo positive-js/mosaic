@@ -1,4 +1,4 @@
-import {Optional} from '@angular/core';
+import { Optional } from '@angular/core';
 
 
 export type HorizontalConnectionPos = 'start' | 'center' | 'end';

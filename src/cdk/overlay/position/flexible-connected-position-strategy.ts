@@ -1,10 +1,10 @@
-import {ElementRef} from '@angular/core';
-import {coerceCssPixelValue} from '@ptsecurity/cdk/coercion';
-import {Platform} from '@ptsecurity/cdk/platform';
-import {ViewportRuler, CdkScrollable} from '@ptsecurity/cdk/scrolling';
-import {Observable, Subscription, Subject} from 'rxjs';
+import { ElementRef } from '@angular/core';
+// import { coerceCssPixelValue } from '@ptsecurity/cdk/coercion';
+import { Platform } from '@ptsecurity/cdk/platform';
+import { ViewportRuler, CdkScrollable } from '@ptsecurity/cdk/scrolling';
+import { Observable, Subscription, Subject } from 'rxjs';
 
-import {IOverlayReference} from '../overlay-reference';
+import { IOverlayReference } from '../overlay-reference';
 
 import {
     ConnectedOverlayPositionChange,
@@ -13,8 +13,17 @@ import {
     validateHorizontalPosition,
     validateVerticalPosition
 } from './connected-position';
-import {IPositionStrategy} from './position-strategy';
-import {isElementScrolledOutsideView, isElementClippedByScrolling} from './scroll-clip';
+import { IPositionStrategy } from './position-strategy';
+import { isElementScrolledOutsideView, isElementClippedByScrolling } from './scroll-clip';
+
+
+export function coerceCssPixelValue(value: any): string {
+    if (value == null) {
+        return '';
+    }
+
+    return typeof value === 'string' ? value : `${value}px`;
+}
 
 
 /**
