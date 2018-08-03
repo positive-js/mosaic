@@ -5,3 +5,4 @@ export * from './form-field-errors';
 export * from './hint';
 export * from './suffix';
 export * from './prefix';
+export * from './cleaner';

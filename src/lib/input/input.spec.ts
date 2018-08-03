@@ -3,12 +3,16 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { McFormField, McFormFieldModule } from '@ptsecurity/mosaic/form-field';
-import { McInput, McInputModule } from '@ptsecurity/mosaic/input';
+import { McIconModule } from '@ptsecurity/mosaic/icon';
+
+import { McInput, McInputModule } from './index';
 
 
 function createComponent<T>(component: Type<T>,
                             imports: any[] = [],
                             providers: Provider[] = []): ComponentFixture<T> {
+    TestBed.resetTestingModule();
+
     TestBed.configureTestingModule({
         imports: [
             FormsModule,
@@ -149,6 +153,97 @@ describe('McInput', () => {
                     .toBe(true);
             });
         });
+
+        it('should has hint', () => {
+            fixture = createComponent(McFormFieldWithHint);
+            fixture.detectChanges();
+
+            mcFormFieldDebug = fixture.debugElement.query(By.directive(McFormField));
+            formFieldElement = mcFormFieldDebug.nativeElement;
+
+            expect(formFieldElement.querySelectorAll('.mc-form-field__hint').length)
+                .toBe(1);
+            expect(formFieldElement.querySelectorAll('.mc-form-field__hint')[0].textContent)
+                .toBe('Hint');
+        });
+
+        it('should has prefix', () => {
+            fixture = createComponent(McFormFieldWithPrefix, [
+                McIconModule
+            ]);
+            fixture.detectChanges();
+
+            mcFormFieldDebug = fixture.debugElement.query(By.directive(McFormField));
+            formFieldElement = mcFormFieldDebug.nativeElement;
+
+            expect(formFieldElement.querySelectorAll('.mc-form-field__prefix').length)
+                .toBe(1);
+            expect(formFieldElement.querySelectorAll('[mc-icon]').length)
+                .toBe(1);
+        });
+
+        it('should has suffix', () => {
+            fixture = createComponent(McFormFieldWithSuffix, [
+                McIconModule
+            ]);
+            fixture.detectChanges();
+
+            mcFormFieldDebug = fixture.debugElement.query(By.directive(McFormField));
+            formFieldElement = mcFormFieldDebug.nativeElement;
+
+            expect(formFieldElement.querySelectorAll('.mc-form-field__suffix').length)
+                .toBe(1);
+            expect(formFieldElement.querySelectorAll('[mc-icon]').length)
+                .toBe(1);
+        });
+
+        it('should has cleaner', () => {
+            fixture = createComponent(McFormFieldWithCleaner, [
+                McIconModule
+            ]);
+            fixture.detectChanges();
+
+            testComponent = fixture.debugElement.componentInstance;
+
+            mcFormFieldDebug = fixture.debugElement.query(By.directive(McFormField));
+            formFieldElement = mcFormFieldDebug.nativeElement;
+
+            expect(formFieldElement.querySelectorAll('.mc-form-field__cleaner').length)
+                .toBe(0);
+
+            testComponent.value = 'test';
+            fixture.detectChanges();
+
+            fixture.whenStable().then(() => {
+                expect(formFieldElement.querySelectorAll('.mc-form-field__cleaner').length)
+                    .toBe(1);
+
+                const mcCleaner = fixture.debugElement.query(By.css('.mc-form-field__cleaner'));
+                mcCleaner.triggerEventHandler('click', {targer: mcCleaner.nativeElement});
+            });
+
+
+            fixture.whenStable().then(() => {
+                expect(formFieldElement.querySelectorAll('.mc-form-field__cleaner').length)
+                    .toBe(0);
+                expect(testComponent.value).toBe('');
+            });
+        });
+
+        it('should be without borders', () => {
+            fixture = createComponent(McFormFieldWithoutBorders, [
+                McIconModule
+            ]);
+            fixture.detectChanges();
+
+            testComponent = fixture.debugElement.componentInstance;
+
+            mcFormFieldDebug = fixture.debugElement.query(By.directive(McFormField));
+            formFieldElement = mcFormFieldDebug.nativeElement;
+
+            expect(formFieldElement.classList.contains('mc-form-field_without-borders'))
+                .toBe(true);
+        });
     });
 });
 
@@ -184,3 +279,47 @@ class McInputForBehaviors {
     disabled: boolean = false;
 }
 
+@Component({
+    template: `<mc-form-field>
+        <input mcInput/>
+        <mc-hint>Hint</mc-hint>
+    </mc-form-field>`
+})
+class McFormFieldWithHint {
+}
+
+@Component({
+    template: `<mc-form-field>
+        <i mcPrefix mc-icon="mc-search_16"></i>
+        <input mcInput/>
+    </mc-form-field>`
+})
+class McFormFieldWithPrefix {
+}
+
+@Component({
+    template: `<mc-form-field>
+        <input mcInput/>
+        <i mcSuffix mc-icon="mc-search_16"></i>
+    </mc-form-field>`
+})
+class McFormFieldWithSuffix {
+}
+
+@Component({
+    template: `<mc-form-field>
+        <input mcInput [(ngModel)]="value"/>
+        <mc-cleaner></mc-cleaner>
+    </mc-form-field>`
+})
+class McFormFieldWithCleaner {
+    value: string;
+}
+
+@Component({
+    template: `<mc-form-field mcFormFieldWithoutBorders>
+        <input mcInput/>
+    </mc-form-field>`
+})
+class McFormFieldWithoutBorders {
+}
