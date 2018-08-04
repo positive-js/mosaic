@@ -1,0 +1,8 @@
+@import 'input-base';
+
+
+.mc-input {
+    @extend %mc-input-field-base;
+
+    display: inline-block;
+}

@@ -5,6 +5,8 @@
 @import '../../../radio/radio-theme';
 @import '../../../checkbox/checkbox-theme';
 @import '../../../navbar/navbar-theme';
+@import '../../../input/input-theme';
+@import '../../../form-field/form-field-theme';
 
 
 @mixin mosaic-typography($config: null) {
@@ -20,4 +22,6 @@
     @include mc-radio-typography($config);
     @include mc-checkbox-typography($config);
     @include mc-navbar-typography($config);
+    @include mc-input-typography($config);
+    @include mc-form-field-typography($config);
 }

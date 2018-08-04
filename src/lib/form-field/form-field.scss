@@ -1,0 +1,76 @@
+@import 'form-field-base';
+
+
+.mc-form-field {
+    display: inline-block;
+    position: relative;
+}
+
+.mc-form-field__hint {
+    margin-top: 4px;
+}
+
+.mc-form-field__container {
+    position: relative;
+
+    border: {
+        width: $mc-form-field-border-size;
+        style: solid;
+        color: initial;
+        radius: $mc-form-field-border-radius;
+    }
+}
+
+.mc-form-field_without-borders .mc-form-field__container {
+    border: {
+        color: transparent;
+    }
+}
+
+.mc-form-field__prefix,
+.mc-form-field__suffix {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 32px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.mc-form-field__prefix {
+    left: 0;
+}
+
+.mc-form-field__suffix {
+    right: 0;
+}
+
+.mc-form-field_has-suffix,
+.mc-form-field_has-cleaner{
+    .mc-input {
+        padding-right: 32px;
+    }
+}
+
+.mc-form-field_has-prefix {
+    .mc-input {
+        padding-left: 32px;
+    }
+}
+
+mc-cleaner {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 32px;
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
