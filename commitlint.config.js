@@ -1,17 +1,18 @@
 module.exports = {
     extends: ['@ptsecurity/commitlint-config'],
     rules: {
-        'scope-enum': [ 
+        'scope-enum': [
             2,
             'always',
             [
                 'build',
                 'docs',
                 'chore',
-                'cdk', 
+                'cdk',
                 'common',
                 'typography',
                 'button',
+                'panel',
                 'list',
                 'checkbox',
                 'radio',

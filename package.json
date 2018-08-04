@@ -140,6 +140,7 @@
         "server-dev": "webpack-dev-server --config tools/webpack/webpack.lib.dev.js",
         "server-dev:button": "npm run server-dev -- --env.component button",
         "server-dev:list": "npm run server-dev -- --env.component list",
+        "server-dev:panel": "npm run server-dev -- --env.component panel",
         "server-dev:progress-bar": "npm run server-dev -- --env.component progress-bar",
         "server-dev:progress-spinner": "npm run server-dev -- --env.component progress-spinner",
         "server-dev:radio": "npm run server-dev -- --env.component radio",
