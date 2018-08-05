@@ -3,9 +3,6 @@
         "@ptsecurity/tslint-config"
     ],
     "rules": {
-        // Angular
-        "component-class-suffix": false,
-
         // Bans jasmine helper functions that will prevent the CI from properly running tests.
         "ban": [true, ["fit"], ["fdescribe"], ["xit"], ["xdescribe"]],
 
