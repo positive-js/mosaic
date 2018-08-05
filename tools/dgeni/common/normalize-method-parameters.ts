@@ -1,4 +1,4 @@
-import {MethodMemberDoc} from 'dgeni-packages/typescript/api-doc-types/MethodMemberDoc';
+import { MethodMemberDoc } from 'dgeni-packages/typescript/api-doc-types/MethodMemberDoc';
 
 
 export class NormalizedMethodMemberDoc extends MethodMemberDoc {
@@ -23,7 +23,7 @@ export interface MethodParameterInfo {
  */
 export function normalizeMethodParameters(method: NormalizedMethodMemberDoc) {
     if (method.parameters) {
-        method.parameters.forEach(parameter => {
+        method.parameters.forEach((parameter) => {
             let [parameterName, parameterType] = parameter.split(':');
 
             // If the parameter is optional, the name here will contain a '?'. We store whether the
@@ -41,16 +41,17 @@ export function normalizeMethodParameters(method: NormalizedMethodMemberDoc) {
             if (!parameterType) {
                 console.warn(`Missing parameter type information (${parameterName}) in ` +
                     `${method.fileInfo.relativePath}:${method.startingLine}`);
+
                 return;
             }
 
-            const existingParameterInfo = method.params.find(p => p.name == parameterName);
+            const existingParameterInfo = method.params.find((p) => p.name === parameterName);
 
             if (!existingParameterInfo) {
                 method.params.push({
                     name: parameterName,
                     type: parameterType.trim(),
-                    isOptional: isOptional
+                    isOptional
                 });
             } else {
                 existingParameterInfo.type = parameterType.trim();

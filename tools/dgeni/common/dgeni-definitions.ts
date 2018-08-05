@@ -1,9 +1,10 @@
-import {ApiDoc} from 'dgeni-packages/typescript/api-doc-types/ApiDoc';
-import {ClassExportDoc} from 'dgeni-packages/typescript/api-doc-types/ClassExportDoc';
-import {ClassLikeExportDoc} from 'dgeni-packages/typescript/api-doc-types/ClassLikeExportDoc';
-import {PropertyMemberDoc} from 'dgeni-packages/typescript/api-doc-types/PropertyMemberDoc';
-import {ParsedDecorator} from 'dgeni-packages/typescript/services/TsParser/getDecorators';
-import {NormalizedMethodMemberDoc} from './normalize-method-parameters';
+import { ApiDoc } from 'dgeni-packages/typescript/api-doc-types/ApiDoc';
+import { ClassExportDoc } from 'dgeni-packages/typescript/api-doc-types/ClassExportDoc';
+import { ClassLikeExportDoc } from 'dgeni-packages/typescript/api-doc-types/ClassLikeExportDoc';
+import { PropertyMemberDoc } from 'dgeni-packages/typescript/api-doc-types/PropertyMemberDoc';
+import { ParsedDecorator } from 'dgeni-packages/typescript/services/TsParser/getDecorators';
+
+import { NormalizedMethodMemberDoc } from './normalize-method-parameters';
 
 
 /** Interface that describes categorized docs that can be deprecated. */

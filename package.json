@@ -136,7 +136,7 @@
         "build:docs": "gulp docs",
         "changelog": "ts-node --project ./scripts/tsconfig.deploy.json ./scripts/changelog.ts",
         "publish": "ts-node --project ./scripts/tsconfig.deploy.json ./scripts/deploy/publish-artifacts.ts",
-        "linter:lib": "tslint './src/lib'",
+        "linter:lib": "tslint --config 'tslint.json' --project '.'",
         "linter:styles": "stylelint --syntax scss \"./**/*.scss\"",
         "server-dev": "webpack-dev-server --config tools/webpack/webpack.lib.dev.js",
         "server-dev:button": "npm run server-dev -- --env.component button",

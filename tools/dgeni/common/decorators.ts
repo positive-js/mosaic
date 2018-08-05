@@ -1,7 +1,9 @@
-import {ClassExportDoc} from 'dgeni-packages/typescript/api-doc-types/ClassExportDoc';
-import {PropertyMemberDoc} from 'dgeni-packages/typescript/api-doc-types/PropertyMemberDoc';
-import {MemberDoc} from 'dgeni-packages/typescript/api-doc-types/MemberDoc';
-import {CategorizedClassDoc, DeprecationDoc, HasDecoratorsDoc} from './dgeni-definitions';
+import { ClassExportDoc } from 'dgeni-packages/typescript/api-doc-types/ClassExportDoc';
+import { MemberDoc } from 'dgeni-packages/typescript/api-doc-types/MemberDoc';
+import { PropertyMemberDoc } from 'dgeni-packages/typescript/api-doc-types/PropertyMemberDoc';
+
+import { CategorizedClassDoc, DeprecationDoc, HasDecoratorsDoc } from './dgeni-definitions';
+
 
 /**
  * We want to avoid emitting selectors that are deprecated but don't have a way to mark
@@ -13,7 +15,7 @@ const SELECTOR_BLACKLIST = new Set([
     '[portalHost]',
     'textarea[mat-autosize]',
     '[overlay-origin]',
-    '[connected-overlay]',
+    '[connected-overlay]'
 ]);
 
 export function isMethod(doc: MemberDoc) {
@@ -24,6 +26,7 @@ export function isGenericTypeParameter(doc: MemberDoc) {
     if (doc.containerDoc instanceof ClassExportDoc) {
         return doc.containerDoc.typeParams && `<${doc.name}>` === doc.containerDoc.typeParams;
     }
+
     return false;
 }
 
@@ -35,6 +38,7 @@ export function isProperty(doc: MemberDoc) {
         (!isMethod(doc) && (doc.isGetAccessor || doc.isSetAccessor))) {
         return !isGenericTypeParameter(doc);
     }
+
     return false;
 }
 
@@ -64,22 +68,22 @@ export function getDirectiveSelectors(classDoc: CategorizedClassDoc) {
     if (directiveSelectors) {
         // Filter blacklisted selectors and remove line-breaks in resolved selectors.
         return directiveSelectors.replace(/[\r\n]/g, '').split(/\s*,\s*/)
-            .filter(s => s !== '' && !s.includes('md') && !SELECTOR_BLACKLIST.has(s));
+            .filter((s) => s !== '' && !s.includes('md') && !SELECTOR_BLACKLIST.has(s));
     }
 }
 
 export function hasMemberDecorator(doc: MemberDoc, decoratorName: string) {
-    return doc.docType == 'member' && hasDecorator(doc, decoratorName);
+    return doc.docType === 'member' && hasDecorator(doc, decoratorName);
 }
 
 export function hasClassDecorator(doc: ClassExportDoc, decoratorName: string) {
-    return doc.docType == 'class' && hasDecorator(doc, decoratorName);
+    return doc.docType === 'class' && hasDecorator(doc, decoratorName);
 }
 
 export function hasDecorator(doc: HasDecoratorsDoc, decoratorName: string) {
     return !!doc.decorators &&
         doc.decorators.length > 0 &&
-        doc.decorators.some(d => d.name == decoratorName);
+        doc.decorators.some((d) => d.name === decoratorName);
 }
 
 export function getDeletionTarget(doc: any): string | null {
