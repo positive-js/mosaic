@@ -95,6 +95,64 @@ describe('McInput', () => {
 
             expect(inputElement.getAttribute('placeholder')).toBe('');
         });
+
+        it('should has cleaner', () => {
+            fixture = createComponent(McFormFieldWithCleaner, [
+                McIconModule
+            ]);
+            fixture.detectChanges();
+
+            testComponent = fixture.debugElement.componentInstance;
+
+            mcFormFieldDebug = fixture.debugElement.query(By.directive(McFormField));
+            formFieldElement = mcFormFieldDebug.nativeElement;
+
+            expect(formFieldElement.querySelectorAll('.mc-form-field__cleaner').length)
+                .toBe(0);
+
+            testComponent.value = 'test';
+            fixture.detectChanges();
+
+            fixture.whenStable().then(() => {
+                expect(formFieldElement.querySelectorAll('.mc-form-field__cleaner').length)
+                    .toBe(1);
+
+                const mcCleaner = fixture.debugElement.query(By.css('.mc-form-field__cleaner'));
+                mcCleaner.triggerEventHandler('click', {target: mcCleaner.nativeElement});
+            });
+
+
+            fixture.whenStable().then(() => {
+                expect(formFieldElement.querySelectorAll('.mc-form-field__cleaner').length)
+                    .toBe(0);
+                expect(testComponent.value).toBe('');
+            });
+        });
+
+        it('with cleaner on keydown "ESC" should clear field', () => {
+            fixture = createComponent(McFormFieldWithCleaner, [
+                McIconModule
+            ]);
+            fixture.detectChanges();
+
+            testComponent = fixture.debugElement.componentInstance;
+
+            testComponent.value = 'test';
+            fixture.detectChanges();
+
+            mcFormFieldDebug.triggerEventHandler('keydown', {
+                target: formFieldElement,
+                keyCode: McFormField.KEY_CODE_ESC
+            });
+
+            fixture.detectChanges();
+
+            fixture.whenStable().then(() => {
+                expect(formFieldElement.querySelectorAll('.mc-form-field__cleaner').length)
+                    .toBe(0);
+                expect(testComponent.value).toBe('');
+            });
+        });
     });
 
     describe('apperance', () => {
@@ -195,39 +253,6 @@ describe('McInput', () => {
                 .toBe(1);
             expect(formFieldElement.querySelectorAll('[mc-icon]').length)
                 .toBe(1);
-        });
-
-        it('should has cleaner', () => {
-            fixture = createComponent(McFormFieldWithCleaner, [
-                McIconModule
-            ]);
-            fixture.detectChanges();
-
-            testComponent = fixture.debugElement.componentInstance;
-
-            mcFormFieldDebug = fixture.debugElement.query(By.directive(McFormField));
-            formFieldElement = mcFormFieldDebug.nativeElement;
-
-            expect(formFieldElement.querySelectorAll('.mc-form-field__cleaner').length)
-                .toBe(0);
-
-            testComponent.value = 'test';
-            fixture.detectChanges();
-
-            fixture.whenStable().then(() => {
-                expect(formFieldElement.querySelectorAll('.mc-form-field__cleaner').length)
-                    .toBe(1);
-
-                const mcCleaner = fixture.debugElement.query(By.css('.mc-form-field__cleaner'));
-                mcCleaner.triggerEventHandler('click', {targer: mcCleaner.nativeElement});
-            });
-
-
-            fixture.whenStable().then(() => {
-                expect(formFieldElement.querySelectorAll('.mc-form-field__cleaner').length)
-                    .toBe(0);
-                expect(testComponent.value).toBe('');
-            });
         });
 
         it('should be without borders', () => {
