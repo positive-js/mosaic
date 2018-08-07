@@ -16,6 +16,7 @@ module.exports = {
                 'checkbox',
                 'radio',
                 'input',
+                'form-field',
                 'select',
                 'tooltip',
                 'dropdown',

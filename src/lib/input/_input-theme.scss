@@ -2,19 +2,21 @@
 @import '../core/styles/typography/typography-utils';
 
 @mixin mc-input-theme($theme) {
+    $second: map-get($theme, second);
+
     .mc-input {
-        color: mc-color($mc-grey, 700);
+        color: mc-color($second, 700);
 
         &::placeholder {
-            color: mc-color($mc-grey, 300);
+            color: mc-color($second, 300);
         }
 
         &::-ms-input-placeholder {
-            color: mc-color($mc-grey, 300);
+            color: mc-color($second, 300);
         }
 
         &::-webkit-input-placeholder {
-            color: mc-color($mc-grey, 300);
+            color: mc-color($second, 300);
         }
     }
 }

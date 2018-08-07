@@ -1,5 +1,5 @@
 import { Component, DebugElement, Provider, Type } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, ComponentFixtureAutoDetect } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
@@ -22,7 +22,10 @@ function createComponent<T>(component: Type<T>,
             ...imports
         ],
         declarations: [component],
-        providers
+        providers: [
+            { provide: ComponentFixtureAutoDetect, useValue: true },
+            ...providers
+        ]
     }).compileComponents();
 
     return TestBed.createComponent<T>(component);
@@ -32,58 +35,37 @@ function createComponent<T>(component: Type<T>,
 describe('McInput', () => {
 
     describe('basic behaviors', () => {
-        let fixture: ComponentFixture<any>;
 
-        let inputElement: HTMLElement;
-        let mcInputDebug: DebugElement;
-        let mcInputComponent: McInput;
-
-        let formFieldElement: HTMLElement;
-        let mcFormFieldDebug: DebugElement;
-        let mcFormFieldComponent: McFormField;
-
-        let testComponent: McInputForBehaviors;
-
-        beforeEach(() => {
-            fixture = createComponent(McInputForBehaviors);
+        it('should change state "disable"', fakeAsync(() => {
+            const fixture = createComponent(McInputForBehaviors);
             fixture.detectChanges();
 
-            testComponent = fixture.debugElement.componentInstance;
+            const formFieldElement =
+                fixture.debugElement.query(By.directive(McFormField)).nativeElement;
+            const inputElement = fixture.debugElement.query(By.directive(McInput)).nativeElement;
 
-            mcInputDebug = fixture.debugElement.query(By.directive(McInput));
-            mcInputComponent = mcInputDebug.componentInstance;
-            inputElement = mcInputDebug.nativeElement;
-
-            mcFormFieldDebug = fixture.debugElement.query(By.directive(McFormField));
-            mcFormFieldComponent = mcFormFieldDebug.componentInstance;
-            formFieldElement = mcFormFieldDebug.nativeElement;
-        });
-
-        it('should change state "disable"', () => {
             expect(formFieldElement.classList.contains('mc-form-field_disabled'))
                 .toBe(false);
-            expect(mcInputComponent.disabled).toBe(false);
+            expect(inputElement.disabled).toBe(false);
 
-            testComponent.disabled = true;
+            fixture.componentInstance.disabled = true;
             fixture.detectChanges();
 
             fixture.whenStable().then(() => {
                 expect(formFieldElement.classList.contains('mc-form-field_disabled'))
                     .toBe(true);
-                expect(mcInputComponent.disabled).toBe(true);
+                expect(inputElement.disabled).toBe(true);
             });
+        }));
 
-            testComponent.disabled = false;
+        it('should has placeholder', fakeAsync(() => {
+            const fixture = createComponent(McInputForBehaviors);
             fixture.detectChanges();
 
-            fixture.whenStable().then(() => {
-                expect(formFieldElement.classList.contains('mc-form-field_disabled'))
-                    .toBe(false);
-                expect(mcInputComponent.disabled).toBe(false);
-            });
-        });
+            const testComponent = fixture.debugElement.componentInstance;
 
-        it('should has placeholder', () => {
+            const inputElement = fixture.debugElement.query(By.directive(McInput)).nativeElement;
+
             expect(inputElement.getAttribute('placeholder')).toBe(null);
 
             testComponent.placeholder = 'placeholder';
@@ -95,145 +77,106 @@ describe('McInput', () => {
             fixture.detectChanges();
 
             expect(inputElement.getAttribute('placeholder')).toBe('');
-        });
+
+        }));
 
         it('should has cleaner', () => {
-            fixture = createComponent(McFormFieldWithCleaner, [
+            const fixture = createComponent(McFormFieldWithCleaner, [
                 McIconModule
             ]);
             fixture.detectChanges();
 
-            testComponent = fixture.debugElement.componentInstance;
+            const testComponent = fixture.debugElement.componentInstance;
 
-            mcFormFieldDebug = fixture.debugElement.query(By.directive(McFormField));
-            formFieldElement = mcFormFieldDebug.nativeElement;
+            const formFieldElement =
+                fixture.debugElement.query(By.directive(McFormField)).nativeElement;
+            const inputElementDebug = fixture.debugElement.query(By.directive(McInput));
+            const inputElement = inputElementDebug.nativeElement;
+
 
             expect(formFieldElement.querySelectorAll('.mc-form-field__cleaner').length)
                 .toBe(0);
 
-            testComponent.value = 'test';
-            fixture.detectChanges();
-
-            fixture.whenStable().then(() => {
-                expect(formFieldElement.querySelectorAll('.mc-form-field__cleaner').length)
-                    .toBe(1);
-
-                const mcCleaner = fixture.debugElement.query(By.css('.mc-form-field__cleaner'));
-                mcCleaner.triggerEventHandler('click', {target: mcCleaner.nativeElement});
-            });
-
-
-            fixture.whenStable().then(() => {
-                expect(formFieldElement.querySelectorAll('.mc-form-field__cleaner').length)
-                    .toBe(0);
-                expect(testComponent.value).toBe('');
-            });
-        });
-
-        it('with cleaner on keydown "ESC" should clear field', () => {
-            fixture = createComponent(McFormFieldWithCleaner, [
-                McIconModule
-            ]);
-            fixture.detectChanges();
-
-            testComponent = fixture.debugElement.componentInstance;
-
-            testComponent.value = 'test';
-            fixture.detectChanges();
-
-            mcFormFieldDebug.triggerEventHandler('keydown', {
-                target: formFieldElement,
-                keyCode: ESCAPE
-            });
+            inputElement.value = 'test';
+            inputElementDebug.triggerEventHandler('input', {target: inputElementDebug.nativeElement});
 
             fixture.detectChanges();
 
-            fixture.whenStable().then(() => {
-                expect(formFieldElement.querySelectorAll('.mc-form-field__cleaner').length)
-                    .toBe(0);
-                expect(testComponent.value).toBe('');
-            });
+            expect(formFieldElement.querySelectorAll('.mc-form-field__cleaner').length)
+                .toBe(1);
+
+            const mcCleaner = fixture.debugElement.query(By.css('.mc-form-field__cleaner'));
+            const mcCleanerElement = mcCleaner.nativeElement;
+            mcCleanerElement.click();
+
+            fixture.detectChanges();
+
+            expect(formFieldElement.querySelectorAll('.mc-form-field__cleaner').length)
+                .toBe(0);
+            expect(testComponent.value).toBe(null);
         });
     });
 
     describe('apperance', () => {
-        let fixture: ComponentFixture<any>;
-
-        let inputElement: HTMLElement;
-        let mcInputDebug: DebugElement;
-        let mcInputComponent: McInput;
-
-        let formFieldElement: HTMLElement;
-        let mcFormFieldDebug: DebugElement;
-        let mcFormFieldComponent: McFormField;
-
-        let testComponent: McInputForBehaviors;
 
         it('should change font to monospace', () => {
-            fixture = createComponent(McInputWithMcInputMonospace);
+            const fixture = createComponent(McInputWithMcInputMonospace);
             fixture.detectChanges();
 
-            mcInputDebug = fixture.debugElement.query(By.directive(McInput));
-            inputElement = mcInputDebug.nativeElement;
+            const mcInputDebug = fixture.debugElement.query(By.directive(McInput));
+            const inputElement = mcInputDebug.nativeElement;
 
             expect(inputElement.classList).toContain('mc-input_monospace');
         });
 
-        it('should be invalid', () => {
-            fixture = createComponent(McInputInvalid);
+        it('should has invalid state', fakeAsync(() => {
+            const fixture = createComponent(McInputInvalid);
             fixture.detectChanges();
 
-            testComponent = fixture.debugElement.componentInstance;
-
-            mcInputDebug = fixture.debugElement.query(By.directive(McInput));
-            mcInputComponent = mcInputDebug.componentInstance;
-            inputElement = mcInputDebug.nativeElement;
-
-            mcFormFieldDebug = fixture.debugElement.query(By.directive(McFormField));
-            mcFormFieldComponent = mcFormFieldDebug.componentInstance;
-            formFieldElement = mcFormFieldDebug.nativeElement;
+            const formFieldElement =
+                fixture.debugElement.query(By.directive(McFormField)).nativeElement;
+            const inputElementDebug = fixture.debugElement.query(By.directive(McInput));
+            const inputElement = inputElementDebug.nativeElement;
 
             expect(formFieldElement.classList.contains('ng-invalid'))
                 .toBe(true);
 
-            testComponent.value = 'four';
+            inputElement.value = 'four';
+            inputElementDebug.triggerEventHandler('input', {target: inputElementDebug.nativeElement});
+
             fixture.detectChanges();
 
-            fixture.whenStable().then(() => {
-                expect(formFieldElement.classList.contains('ng-invalid'))
-                    .toBe(false);
-            });
+            expect(formFieldElement.classList.contains('ng-invalid')).toBe(false);
 
-            testComponent.value = '';
+            inputElement.value = '';
+            inputElementDebug.triggerEventHandler('input', {target: inputElementDebug.nativeElement});
+
             fixture.detectChanges();
 
-            fixture.whenStable().then(() => {
-                expect(formFieldElement.classList.contains('ng-invalid'))
-                    .toBe(true);
-            });
-        });
+            expect(formFieldElement.classList.contains('ng-invalid')).toBe(true);
+        }));
 
-        it('should has hint', () => {
-            fixture = createComponent(McFormFieldWithHint);
+        it('should has hint', fakeAsync(() => {
+            const fixture = createComponent(McFormFieldWithHint);
             fixture.detectChanges();
 
-            mcFormFieldDebug = fixture.debugElement.query(By.directive(McFormField));
-            formFieldElement = mcFormFieldDebug.nativeElement;
+            const mcFormFieldDebug = fixture.debugElement.query(By.directive(McFormField));
+            const formFieldElement = mcFormFieldDebug.nativeElement;
 
             expect(formFieldElement.querySelectorAll('.mc-form-field__hint').length)
                 .toBe(1);
             expect(formFieldElement.querySelectorAll('.mc-form-field__hint')[0].textContent)
                 .toBe('Hint');
-        });
+        }));
 
         it('should has prefix', () => {
-            fixture = createComponent(McFormFieldWithPrefix, [
+            const fixture = createComponent(McFormFieldWithPrefix, [
                 McIconModule
             ]);
             fixture.detectChanges();
 
-            mcFormFieldDebug = fixture.debugElement.query(By.directive(McFormField));
-            formFieldElement = mcFormFieldDebug.nativeElement;
+            const mcFormFieldDebug = fixture.debugElement.query(By.directive(McFormField));
+            const formFieldElement = mcFormFieldDebug.nativeElement;
 
             expect(formFieldElement.querySelectorAll('.mc-form-field__prefix').length)
                 .toBe(1);
@@ -242,13 +185,13 @@ describe('McInput', () => {
         });
 
         it('should has suffix', () => {
-            fixture = createComponent(McFormFieldWithSuffix, [
+            const fixture = createComponent(McFormFieldWithSuffix, [
                 McIconModule
             ]);
             fixture.detectChanges();
 
-            mcFormFieldDebug = fixture.debugElement.query(By.directive(McFormField));
-            formFieldElement = mcFormFieldDebug.nativeElement;
+            const mcFormFieldDebug = fixture.debugElement.query(By.directive(McFormField));
+            const formFieldElement = mcFormFieldDebug.nativeElement;
 
             expect(formFieldElement.querySelectorAll('.mc-form-field__suffix').length)
                 .toBe(1);
@@ -257,15 +200,13 @@ describe('McInput', () => {
         });
 
         it('should be without borders', () => {
-            fixture = createComponent(McFormFieldWithoutBorders, [
+            const fixture = createComponent(McFormFieldWithoutBorders, [
                 McIconModule
             ]);
             fixture.detectChanges();
 
-            testComponent = fixture.debugElement.componentInstance;
-
-            mcFormFieldDebug = fixture.debugElement.query(By.directive(McFormField));
-            formFieldElement = mcFormFieldDebug.nativeElement;
+            const mcFormFieldDebug = fixture.debugElement.query(By.directive(McFormField));
+            const formFieldElement = mcFormFieldDebug.nativeElement;
 
             expect(formFieldElement.classList.contains('mc-form-field_without-borders'))
                 .toBe(true);
@@ -273,7 +214,7 @@ describe('McInput', () => {
     });
 });
 
-
+// tslint:disable no-unnecessary-class
 @Component({
     template: `
         <mc-form-field>
@@ -282,7 +223,7 @@ describe('McInput', () => {
     `
 })
 class McInputInvalid {
-    value: string = 'two';
+    value: string = '';
 }
 
 @Component({
@@ -349,3 +290,4 @@ class McFormFieldWithCleaner {
 })
 class McFormFieldWithoutBorders {
 }
+// tslint:enable no-unnecessary-class

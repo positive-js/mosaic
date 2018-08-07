@@ -71,10 +71,12 @@
             color: mc-color($second, 400);
         }
 
-        mc-cleaner .mc-cleaner__icon {
-            color: mc-color($second, 200);
+        mc-cleaner  {
+            .mc-cleaner__icon {
+                color: mc-color($second, 200);
+            }
 
-            &:hover {
+            &:hover .mc-cleaner__icon {
                 color: darken(mc-color($second, 200), $hover-darken);
             }
         }
