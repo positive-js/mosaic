@@ -2,6 +2,7 @@ import { Component, DebugElement, Provider, Type } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { ESCAPE } from '@ptsecurity/cdk/keycodes';
 import { McFormField, McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 
@@ -142,7 +143,7 @@ describe('McInput', () => {
 
             mcFormFieldDebug.triggerEventHandler('keydown', {
                 target: formFieldElement,
-                keyCode: McFormField.KEY_CODE_ESC
+                keyCode: ESCAPE
             });
 
             fixture.detectChanges();

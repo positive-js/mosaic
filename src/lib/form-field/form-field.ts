@@ -11,6 +11,7 @@ import {
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
+import { ESCAPE } from '@ptsecurity/cdk/keycodes';
 import { EMPTY, merge } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 
@@ -62,8 +63,6 @@ export class McFormFieldBase {
 
 export class McFormField extends McFormFieldBase
     implements AfterContentInit, AfterContentChecked, AfterViewInit {
-
-    static KEY_CODE_ESC: number = 27;
 
     @ContentChild(McFormFieldControl) _control: McFormFieldControl<any>;
     @ContentChildren(McHint) _hint: QueryList<McHint>;
@@ -118,7 +117,7 @@ export class McFormField extends McFormFieldBase
     }
 
     onKeyDown(e: KeyboardEvent): void {
-        if (e.keyCode === McFormField.KEY_CODE_ESC &&
+        if (e.keyCode === ESCAPE &&
             this._control.focused &&
             this.hasCleaner) {
             if (this._control && this._control.ngControl) {
