@@ -11,6 +11,7 @@ import {
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
+import { ESCAPE } from '@ptsecurity/cdk/keycodes';
 import { EMPTY, merge } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 
@@ -53,7 +54,8 @@ export class McFormFieldBase {
         '[class.ng-dirty]': '_shouldForward("dirty")',
         '[class.ng-valid]': '_shouldForward("valid")',
         '[class.ng-invalid]': '_shouldForward("invalid")',
-        '[class.ng-pending]': '_shouldForward("pending")'
+        '[class.ng-pending]': '_shouldForward("pending")',
+        '(keydown)': 'onKeyDown($event)'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -114,6 +116,17 @@ export class McFormField extends McFormFieldBase
         return this._control.onContainerClick && this._control.onContainerClick($event);
     }
 
+    onKeyDown(e: KeyboardEvent): void {
+        if (e.keyCode === ESCAPE &&
+            this._control.focused &&
+            this.hasCleaner) {
+            if (this._control && this._control.ngControl) {
+                this._control.ngControl.reset();
+            }
+            e.preventDefault();
+        }
+    }
+
     /** Determines whether a class from the NgControl should be forwarded to the host element. */
     _shouldForward(prop: string): boolean {
         const ngControl = this._control ? this._control.ngControl : null;
@@ -140,8 +153,12 @@ export class McFormField extends McFormFieldBase
         return this._prefix && this._prefix.length > 0;
     }
 
+    get hasCleaner() {
+        return this._cleaner && this._cleaner.length > 0;
+    }
+
     get canShowCleaner() {
-        return this._cleaner && this._cleaner.length > 0 &&
+        return  this.hasCleaner &&
         this._control && this._control.ngControl
             ? this._control.ngControl.value && !this._control.disabled
             : false;

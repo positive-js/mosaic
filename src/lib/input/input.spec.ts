@@ -2,6 +2,7 @@ import { Component, DebugElement, Provider, Type } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, ComponentFixtureAutoDetect } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { ESCAPE } from '@ptsecurity/cdk/keycodes';
 import { McFormField, McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 
@@ -76,6 +77,7 @@ describe('McInput', () => {
             fixture.detectChanges();
 
             expect(inputElement.getAttribute('placeholder')).toBe('');
+
         }));
 
         it('should has cleaner', () => {
@@ -106,6 +108,40 @@ describe('McInput', () => {
             const mcCleaner = fixture.debugElement.query(By.css('.mc-form-field__cleaner'));
             const mcCleanerElement = mcCleaner.nativeElement;
             mcCleanerElement.click();
+
+            fixture.detectChanges();
+
+            expect(formFieldElement.querySelectorAll('.mc-form-field__cleaner').length)
+                .toBe(0);
+            expect(testComponent.value).toBe(null);
+        });
+
+        it('with cleaner on keydown "ESC" should clear field', () => {
+            const fixture = createComponent(McFormFieldWithCleaner, [
+                McIconModule
+            ]);
+            const mcFormFieldDebug = fixture.debugElement.query(By.directive(McFormField));
+            const formFieldElement = mcFormFieldDebug.nativeElement;
+            const inputElementDebug = fixture.debugElement.query(By.directive(McInput));
+            const inputElement = inputElementDebug.nativeElement;
+
+            fixture.detectChanges();
+
+            const testComponent = fixture.debugElement.componentInstance;
+
+            inputElement.value = 'test';
+            inputElementDebug.triggerEventHandler('input', {target: inputElementDebug.nativeElement});
+            inputElementDebug.triggerEventHandler('focus', {target: inputElementDebug.nativeElement});
+
+            fixture.detectChanges();
+
+            expect(formFieldElement.querySelectorAll('.mc-form-field__cleaner').length)
+                .toBe(1);
+
+            mcFormFieldDebug.triggerEventHandler('keydown', {
+                target: formFieldElement,
+                keyCode: ESCAPE
+            });
 
             fixture.detectChanges();
 
