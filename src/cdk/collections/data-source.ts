@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-import { CollectionViewer } from './collection-viewer';
+import { ICollectionViewer } from './collection-viewer';
 
 
 export abstract class DataSource<T> {
@@ -12,7 +12,7 @@ export abstract class DataSource<T> {
      *     data source.
      * @returns Observable that emits a new value when the data changes.
      */
-    abstract connect(collectionViewer: CollectionViewer): Observable<T[]>;
+    abstract connect(collectionViewer: ICollectionViewer): Observable<T[]>;
 
     /**
      * Disconnects a collection viewer (such as a data-table) from this data source. Can be used
@@ -21,5 +21,5 @@ export abstract class DataSource<T> {
      * @param collectionViewer The component that exposes a view over the data provided by this
      *     data source.
      */
-    abstract disconnect(collectionViewer: CollectionViewer): void;
+    abstract disconnect(collectionViewer: ICollectionViewer): void;
 }

@@ -16,11 +16,11 @@ import {
     ViewChild,
     ViewContainerRef,
     ViewEncapsulation,
-    TrackByFunction
+    TrackByFunction, Inject, forwardRef
 } from '@angular/core';
 
 import { IFocusableOption } from '@ptsecurity/cdk/a11y';
-import { CollectionViewer, DataSource } from '@ptsecurity/cdk/collections';
+import { ICollectionViewer, DataSource } from '@ptsecurity/cdk/collections';
 
 import { BehaviorSubject, Observable, of as observableOf, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -86,7 +86,11 @@ export class CdkTreeNode<T> implements IFocusableOption, OnDestroy {
         return this._tree.treeControl.getLevel ? this._tree.treeControl.getLevel(this._data) : 0;
     }
 
-    constructor(protected _elementRef: ElementRef, protected _tree: CdkTree<T>) {
+    constructor(
+        protected _elementRef: ElementRef,
+        @Inject(forwardRef(() => CdkTree))
+        protected _tree: CdkTree<T>
+    ) {
         CdkTreeNode.mostRecentTreeNode = this as CdkTreeNode<T>;
     }
 
@@ -132,7 +136,7 @@ export class CdkTreeNode<T> implements IFocusableOption, OnDestroy {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CdkTree<T> implements AfterContentChecked, CollectionViewer, OnDestroy, OnInit {
+export class CdkTree<T> implements AfterContentChecked, ICollectionViewer, OnDestroy, OnInit {
 
     /** The tree controller */
     @Input() treeControl: ITreeControl<T>;

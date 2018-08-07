@@ -5,7 +5,7 @@ import { SelectionModel } from './selection';
  * Interface for a class that can flatten hierarchical structured data and re-expand the flattened
  * data back into its original structure. Should be used in conjunction with the cdk-tree.
  */
-export interface TreeDataNodeFlattener<T> {
+export interface ITreeDataNodeFlattener<T> {
     /** Transforms a set of hierarchical structured data into a flattened data array. */
     flattenNodes(structuredData: any[]): T[];
 

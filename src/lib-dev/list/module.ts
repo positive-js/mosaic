@@ -3,8 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import { McListModule } from '@ptsecurity/mosaic/list';
-import { McListSelectionChange } from '@ptsecurity/mosaic/list/list-selection.component';
+import { McListModule, McListSelectionChange } from '@ptsecurity/mosaic/list';
 
 
 @Component({

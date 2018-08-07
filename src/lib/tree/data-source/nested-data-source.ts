@@ -1,4 +1,4 @@
-import { CollectionViewer, DataSource } from '@ptsecurity/cdk/collections';
+import { ICollectionViewer, DataSource } from '@ptsecurity/cdk/collections';
 import { BehaviorSubject, merge, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -23,7 +23,7 @@ export class MatTreeNestedDataSource<T> extends DataSource<T> {
         this._data.next(value);
     }
 
-    connect(collectionViewer: CollectionViewer): Observable<T[]> {
+    connect(collectionViewer: ICollectionViewer): Observable<T[]> {
         return merge(...[collectionViewer.viewChange, this._data])
             .pipe(map(() => this.data));
     }

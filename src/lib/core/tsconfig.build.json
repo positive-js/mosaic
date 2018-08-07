@@ -1,8 +1,6 @@
 {
     "extends": "../tsconfig.build",
-    "files": [
-        "public-api.ts"
-    ],
+    "files": ["public-api.ts"],
     "angularCompilerOptions": {
         "annotateForClosureCompiler": true,
         "strictMetadataEmit": true,

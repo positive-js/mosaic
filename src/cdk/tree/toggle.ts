@@ -2,7 +2,6 @@ import {
     Directive,
     Input
 } from '@angular/core';
-// import { toBoolean } from '@ptsecurity/mosaic/core';
 
 import { CdkTree, CdkTreeNode } from './tree';
 

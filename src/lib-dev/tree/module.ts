@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import { FlatTreeControl, NestedTreeControl } from '@ptsecurity/cdk/tree';
+import { CdkTreeModule, FlatTreeControl, NestedTreeControl } from '@ptsecurity/cdk/tree';
 import {
     MatTreeFlatDataSource,
     MatTreeFlattener,
@@ -193,7 +193,8 @@ export class DemoComponent {
         BrowserModule,
         FormsModule,
         McTreeModule,
-        McIconModule
+        McIconModule,
+        CdkTreeModule
     ],
     bootstrap: [
         DemoComponent

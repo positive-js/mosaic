@@ -1,7 +1,3 @@
-import { NodeDef, ViewData } from '@angular/core/src/view';
-import { SelectionModel } from '@ptsecurity/cdk/collections';
-import { CanDisable, HasTabIndex, mixinDisabled, mixinTabIndex, toBoolean } from '@ptsecurity/mosaic/core';
-
 import {
     AfterContentInit,
     Attribute,
@@ -10,16 +6,128 @@ import {
     Component, ContentChildren, EventEmitter, forwardRef, Input, IterableDiffer,
     IterableDiffers, Output, QueryList,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    Directive, ElementRef, Inject
 } from '@angular/core';
+import { NodeDef, ViewData } from '@angular/core/src/view';
+
+import { SelectionModel } from '@ptsecurity/cdk/collections';
+import { CdkTreeNode, CdkTree, CdkTreeNodeOutlet } from '@ptsecurity/cdk/tree';
+
+import { CanDisable, HasTabIndex, mixinDisabled, mixinTabIndex, toBoolean } from '@ptsecurity/mosaic/core';
 
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
-import { CdkTree, CdkTreeNodeOutlet } from '@ptsecurity/cdk/tree';
 
 import { END, ENTER, HOME, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, SPACE } from '@ptsecurity/cdk/keycodes';
 
-import { McTreeNodeOption } from './node-option';
 
+/**
+ * Wrapper for the CdkTree node with Material design styles.
+ */
+@Directive({
+    exportAs: 'mcTreeNodeOption',
+    selector: 'mc-tree-node-option',
+    host: {
+        tabindex: '-1',
+        '[class.mc-selected]': 'selected',
+        '[class.mc-focused]': '_hasFocus',
+        '[attr.aria-expanded]': 'isExpanded',
+        '[attr.aria-level]': 'role === "treeitem" ? level : null',
+        class: 'mc-tree-node',
+
+        '(focus)': '_handleFocus()',
+        '(blur)': '_handleBlur()',
+
+        '(click)': '_handleClick()'
+    },
+    providers: [
+        { provide: CdkTreeNode, useExisting: McTreeNodeOption }
+    ]
+})
+export class McTreeNodeOption<T> extends CdkTreeNode<T> implements CanDisable {
+    @Input() role: 'treeitem' | 'group' = 'treeitem';
+
+    @Input()
+    get disabled() {
+        return this._disabled;
+    }
+
+    set disabled(value: any) {
+        const newValue = toBoolean(value);
+
+        if (newValue !== this._disabled) {
+            this._disabled = newValue;
+        }
+    }
+
+    @Input()
+    get selected(): boolean {
+        return this.treeSelection.selectedOptions && this.treeSelection.selectedOptions.isSelected(this) || false;
+    }
+
+    set selected(value: boolean) {
+        const isSelected = toBoolean(value);
+
+        if (isSelected !== this._selected) {
+            this.setSelected(isSelected);
+
+            // this.treeSelection._reportValueChange();
+        }
+    }
+
+    private _hasFocus: boolean = false;
+
+    private _disabled: boolean = false;
+    private _selected: boolean = false;
+
+    constructor(
+        protected _elementRef: ElementRef,
+        @Inject(forwardRef(() => McTreeSelection))
+        protected treeSelection: McTreeSelection<T>
+    ) {
+        super(_elementRef, treeSelection);
+    }
+
+    focus(): void {
+        this._elementRef.nativeElement.focus();
+
+        this.treeSelection.setFocusedOption(this);
+    }
+
+    toggle(): void {
+        this.selected = !this.selected;
+    }
+
+    setSelected(selected: boolean) {
+        if (this._selected === selected || !this.treeSelection.selectedOptions) { return; }
+
+        this._selected = selected;
+
+        if (selected) {
+            this.treeSelection.selectedOptions.select(this);
+        } else {
+            this.treeSelection.selectedOptions.deselect(this);
+        }
+
+        // this._changeDetector.markForCheck();
+    }
+
+    _handleFocus(): void {
+        if (this.disabled || this._hasFocus) { return; }
+
+        this._hasFocus = true;
+    }
+
+    _handleBlur(): void {
+        this._hasFocus = false;
+    }
+
+    _handleClick(): void {
+        if (this.disabled) { return; }
+
+        this.treeSelection.setFocusedOption(this);
+    }
+}
 
 export const _McTreeSelectionBase = mixinTabIndex(mixinDisabled(CdkTree));
 
@@ -37,9 +145,6 @@ export class McTreeSelectionChange {
     ) {}
 }
 
-/**
- * Wrapper for the CdkTable with Material design styles.
- */
 @Component({
     exportAs: 'mcTreeSelection',
     selector: 'mc-tree-selection',
@@ -116,12 +221,17 @@ export class McTreeSelection<T> extends _McTreeSelectionBase<T>
 
         switch (keyCode) {
             case LEFT_ARROW:
-                this.treeControl.collapse(this._keyManager.activeItem.data);
+                if (this._keyManager.activeItem) {
+                    this.treeControl.collapse(this._keyManager.activeItem.data);
+                }
+
                 event.preventDefault();
 
                 break;
             case RIGHT_ARROW:
-                this.treeControl.expand(this._keyManager.activeItem.data);
+                if (this._keyManager.activeItem) {
+                    this.treeControl.expand(this._keyManager.activeItem.data);
+                }
                 event.preventDefault();
 
                 break;
@@ -166,7 +276,7 @@ export class McTreeSelection<T> extends _McTreeSelectionBase<T>
             .withHorizontalOrientation(null);
     }
 
-    setFocusedOption(option: McTreeNodeOption<T>) {
+    setFocusedOption(option: McTreeNodeOption<T>): void {
         this._keyManager.updateActiveItem(option);
 
         if (this.autoSelect) {
@@ -208,9 +318,9 @@ export class McTreeSelection<T> extends _McTreeSelectionBase<T>
 
             viewDef.nodes.forEach((node: NodeDef) => {
                 if (viewDef.nodeMatchedQueries === node.matchedQueryIds) {
-                    const nodeData = view.nodes[node.nodeIndex] as any;
+                    const nodeData: any = view.nodes[node.nodeIndex];
 
-                    arrayOfInstances.push(nodeData.instance);
+                    arrayOfInstances.push(nodeData.instance as never);
                 }
             });
         });
@@ -238,7 +348,7 @@ export class McTreeSelection<T> extends _McTreeSelectionBase<T>
         return index >= 0 && index < this.options.length;
     }
 
-    private _canUnselectLast(option: McTreeNodeOption<T>): boolean {
+    private _canUnselectLast(_option: McTreeNodeOption<T>): boolean {
         return true;
         // return !(this.noUnselect && this.selectedOptions.selected.length === 1 && listOption.selected);
     }

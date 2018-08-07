@@ -21,7 +21,7 @@ describe('McTree', () => {
     function configureMatTreeTestingModule(declarations) {
         TestBed.configureTestingModule({
             imports: [McTreeModule],
-            declarations: declarations,
+            declarations: declarations
         }).compileComponents();
     }
 
