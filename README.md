@@ -35,4 +35,4 @@ $ npm run server-dev:button
 
 **Inspired by AngularMaterial**
 
-[getting-started]: docs/README.md
+[getting-started]: docs/getting-started.md
