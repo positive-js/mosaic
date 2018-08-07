@@ -23,6 +23,13 @@ jobs:
           paths:
             - node_modules
 
+  validate_licenses:
+    <<: *defaults
+    steps:
+      - checkout: *post_checkout
+      - restore_cache: *package_lock_key
+      - run: npm run valid:lic
+
   build_mosaic:
     <<: *defaults
     steps:
@@ -81,6 +88,9 @@ workflows:
   default_workflow:
     jobs:
       - install
+      - validate_licenses:
+          requires:
+            - install
       - build_cdk:
           requires:
             - install

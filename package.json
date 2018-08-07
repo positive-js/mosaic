@@ -130,7 +130,7 @@
     "scripts": {
         "commitmsg": "commitlint -x=./commitlint.config.js -e $GIT_PARAMS",
         "test:unit": "gulp ci:test",
-        "valid:lic": "ts-node --project ./scripts/tsconfig.deploy.json ./scripts/validate-licenses.ts",
+        "valid:lic": "gulp validate-licenses",
         "build:cdk": "gulp cdk:build-release",
         "build:lib": "gulp mosaic:build-release",
         "build:docs": "gulp docs",
