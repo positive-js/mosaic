@@ -1,9 +1,9 @@
-import { FlatTreeControl, NestedTreeControl, ITreeControl } from '@ptsecurity/cdk/tree';
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FlatTreeControl, NestedTreeControl, ITreeControl } from '@ptsecurity/cdk/tree';
 import { BehaviorSubject, Observable } from 'rxjs';
+
 import {
-    McTree,
     MatTreeFlatDataSource,
     MatTreeFlattener,
     McTreeModule,
@@ -11,6 +11,10 @@ import {
 } from './index';
 
 
+/* tslint:disable:no-parameter-reassignment */
+/* tslint:disable:no-non-null-assertion */
+/* tslint:disable:member-ordering */
+/* tslint:disable:no-magic-numbers */
 describe('McTree', () => {
     /** Represents an indent for expectNestedTreeToMatch */
     const _ = {};
@@ -21,7 +25,7 @@ describe('McTree', () => {
     function configureMatTreeTestingModule(declarations) {
         TestBed.configureTestingModule({
             imports: [McTreeModule],
-            declarations: declarations
+            declarations
         }).compileComponents();
     }
 
@@ -52,7 +56,7 @@ describe('McTree', () => {
             it('with the right accessibility roles', () => {
                 expect(treeElement.getAttribute('role')).toBe('tree');
 
-                getNodes(treeElement).forEach(node => {
+                getNodes(treeElement).forEach((node) => {
                     expect(node.getAttribute('role')).toBe('treeitem');
                 });
             });
@@ -60,7 +64,7 @@ describe('McTree', () => {
             it('with the right data', () => {
                 expect(underlyingDataSource.data.length).toBe(3);
 
-                let data = underlyingDataSource.data;
+                const data = underlyingDataSource.data;
                 expectFlatTreeToMatch(treeElement, 28,
                     [`topping_1 - cheese_1 + base_1`],
                     [`topping_2 - cheese_2 + base_2`],
@@ -235,7 +239,7 @@ describe('McTree', () => {
             it('with the right accessibility roles', () => {
                 expect(treeElement.getAttribute('role')).toBe('tree');
 
-                getNodes(treeElement).forEach(node => {
+                getNodes(treeElement).forEach((node) => {
                     expect(node.getAttribute('role')).toBe('treeitem');
                 });
             });
@@ -265,7 +269,7 @@ describe('McTree', () => {
             it('with nested child data', () => {
                 expect(underlyingDataSource.data.length).toBe(3);
 
-                let data = underlyingDataSource.data;
+                const data = underlyingDataSource.data;
                 const child = underlyingDataSource.addChild(data[1]);
                 underlyingDataSource.addChild(child);
                 fixture.detectChanges();
@@ -333,7 +337,7 @@ describe('McTree', () => {
 
             it('should expand/collapse the node', () => {
                 component.toggleRecursively = false;
-                let data = underlyingDataSource.data;
+                const data = underlyingDataSource.data;
                 const child = underlyingDataSource.addChild(data[1]);
                 underlyingDataSource.addChild(child);
 
@@ -369,7 +373,7 @@ describe('McTree', () => {
             });
 
             it('should expand/collapse the node recursively', () => {
-                let data = underlyingDataSource.data;
+                const data = underlyingDataSource.data;
                 const child = underlyingDataSource.addChild(data[1]);
                 underlyingDataSource.addChild(child);
                 fixture.detectChanges();
@@ -426,8 +430,6 @@ export class TestData {
 }
 
 class FakeDataSource {
-    dataIndex = 0;
-    _dataChange = new BehaviorSubject<TestData[]>([]);
 
     get data() {
         return this._dataChange.getValue();
@@ -436,13 +438,8 @@ class FakeDataSource {
     set data(data: TestData[]) {
         this._dataChange.next(data);
     }
-
-    connect(): Observable<TestData[]> {
-        return this._dataChange;
-    }
-
-    disconnect() {
-    }
+    dataIndex = 0;
+    _dataChange = new BehaviorSubject<TestData[]>([]);
 
     constructor() {
         for (let i = 0; i < 3; i++) {
@@ -450,11 +447,20 @@ class FakeDataSource {
         }
     }
 
+    connect(): Observable<TestData[]> {
+        return this._dataChange;
+    }
+
     addChild(parent: TestData, isSpecial: boolean = false) {
         const nextIndex = ++this.dataIndex;
-        const child = new TestData(`topping_${nextIndex}`, `cheese_${nextIndex}`, `base_${nextIndex}`);
+        const child = new TestData(
+            `topping_${nextIndex}`,
+            `cheese_${nextIndex}`,
+            `base_${nextIndex}`
+        );
 
         const index = this.data.indexOf(parent);
+
         if (index > -1) {
             parent = new TestData(
                 parent.pizzaTopping, parent.pizzaCheese, parent.pizzaBase, parent.children, isSpecial);
@@ -462,17 +468,18 @@ class FakeDataSource {
         parent.children.push(child);
         parent.observableChildren.next(parent.children);
 
-        let copiedData = this.data.slice();
+        const copiedData = this.data.slice();
         if (index > -1) {
             copiedData.splice(index, 1, parent);
         }
         this.data = copiedData;
+
         return child;
     }
 
     addData(isSpecial: boolean = false) {
         const nextIndex = ++this.dataIndex;
-        let copiedData = this.data.slice();
+        const copiedData = this.data.slice();
         copiedData.push(new TestData(
             `topping_${nextIndex}`, `cheese_${nextIndex}`, `base_${nextIndex}`, [], isSpecial));
 
@@ -491,6 +498,7 @@ function expectFlatTreeToMatch(treeElement: Element, expectedPaddingIndent: numb
     function checkNode(node: Element, expectedNode: any[]) {
         const actualTextContent = node.textContent!.trim();
         const expectedTextContent = expectedNode[expectedNode.length - 1];
+
         if (actualTextContent !== expectedTextContent) {
             missedExpectations.push(
                 `Expected node contents to be ${expectedTextContent} but was ${actualTextContent}`);
@@ -500,6 +508,7 @@ function expectFlatTreeToMatch(treeElement: Element, expectedPaddingIndent: numb
     function checkLevel(node: Element, expectedNode: any[]) {
 
         const actualLevel = (node as HTMLElement).style.paddingLeft;
+
         if (expectedNode.length === 1) {
             if (actualLevel !== ``) {
                 missedExpectations.push(
@@ -507,7 +516,7 @@ function expectFlatTreeToMatch(treeElement: Element, expectedPaddingIndent: numb
             }
         } else {
             const expectedLevel = `${(expectedNode.length - 1) * expectedPaddingIndent}px`;
-            if (actualLevel != expectedLevel) {
+            if (actualLevel !== expectedLevel) {
                 missedExpectations.push(
                     `Expected node level to be ${expectedLevel} but was ${actualLevel}`);
             }
@@ -534,6 +543,7 @@ function expectNestedTreeToMatch(treeElement: Element, ...expectedTree: any[]) {
     function checkNodeContent(node: Element, expectedNode: any[]) {
         const expectedTextContent = expectedNode[expectedNode.length - 1];
         const actualTextContent = node.childNodes.item(0).textContent!.trim();
+
         if (actualTextContent !== expectedTextContent) {
             missedExpectations.push(
                 `Expected node contents to be ${expectedTextContent} but was ${actualTextContent}`);
@@ -552,6 +562,7 @@ function expectNestedTreeToMatch(treeElement: Element, ...expectedTree: any[]) {
         }
 
         const actualDescendant = getNodes(node).length;
+
         if (actualDescendant !== expectedDescendant) {
             missedExpectations.push(
                 `Expected node descendant num to be ${expectedDescendant} but was ${actualDescendant}`);
@@ -585,13 +596,15 @@ function expectNestedTreeToMatch(treeElement: Element, ...expectedTree: any[]) {
     `
 })
 class SimpleMatTreeApp {
+
     getLevel = (node: TestData) => node.level;
     isExpandable = (node: TestData) => node.children.length > 0;
     getChildren = (node: TestData) => node.observableChildren;
     transformer = (node: TestData, level: number) => {
         node.level = level;
+
         return node;
-    }
+    };
 
     treeFlattener = new MatTreeFlattener<TestData, TestData>(
         this.transformer, this.getLevel, this.isExpandable, this.getChildren);
@@ -605,7 +618,7 @@ class SimpleMatTreeApp {
     @ViewChild(McTree) tree: McTree<TestData>;
 
     constructor() {
-        this.underlyingDataSource.connect().subscribe(data => {
+        this.underlyingDataSource.connect().subscribe((data) => {
             this.dataSource.data = data;
         });
     }
@@ -622,6 +635,7 @@ class SimpleMatTreeApp {
     `
 })
 class NestedMatTreeApp {
+
     getChildren = (node: TestData) => node.observableChildren;
 
     treeControl = new NestedTreeControl(this.getChildren);
@@ -632,7 +646,7 @@ class NestedMatTreeApp {
     @ViewChild(McTree) tree: McTree<TestData>;
 
     constructor() {
-        this.underlyingDataSource.connect().subscribe(data => {
+        this.underlyingDataSource.connect().subscribe((data) => {
             this.dataSource.data = data;
         });
     }
@@ -656,7 +670,6 @@ class NestedMatTreeApp {
     `
 })
 class WhenNodeNestedMatTreeApp {
-    isSpecial = (_: number, node: TestData) => node.isSpecial;
 
     getChildren = (node: TestData) => node.observableChildren;
 
@@ -668,10 +681,12 @@ class WhenNodeNestedMatTreeApp {
     @ViewChild(McTree) tree: McTree<TestData>;
 
     constructor() {
-        this.underlyingDataSource.connect().subscribe(data => {
+        this.underlyingDataSource.connect().subscribe((data) => {
             this.dataSource.data = data;
         });
     }
+
+    isSpecial = (_: number, node: TestData) => node.isSpecial;
 }
 
 
@@ -694,8 +709,9 @@ class MatTreeAppWithToggle {
     getChildren = (node: TestData) => node.observableChildren;
     transformer = (node: TestData, level: number) => {
         node.level = level;
+
         return node;
-    };
+    }
 
     treeFlattener = new MatTreeFlattener<TestData, TestData>(
         this.transformer, this.getLevel, this.isExpandable, this.getChildren);
@@ -708,7 +724,7 @@ class MatTreeAppWithToggle {
     @ViewChild(McTree) tree: McTree<TestData>;
 
     constructor() {
-        this.underlyingDataSource.connect().subscribe(data => {
+        this.underlyingDataSource.connect().subscribe((data) => {
             this.dataSource.data = data;
         });
     }
@@ -739,7 +755,7 @@ class NestedMatTreeAppWithToggle {
     @ViewChild(McTree) tree: McTree<TestData>;
 
     constructor() {
-        this.underlyingDataSource.connect().subscribe(data => {
+        this.underlyingDataSource.connect().subscribe((data) => {
             this.dataSource.data = data;
         });
     }
@@ -762,13 +778,13 @@ class NestedMatTreeAppWithToggle {
     `
 })
 class WhenNodeMatTreeApp {
-    isSpecial = (_: number, node: TestData) => node.isSpecial;
 
     getLevel = (node: TestData) => node.level;
     isExpandable = (node: TestData) => node.children.length > 0;
     getChildren = (node: TestData) => node.observableChildren;
     transformer = (node: TestData, level: number) => {
         node.level = level;
+
         return node;
     }
 
@@ -783,8 +799,9 @@ class WhenNodeMatTreeApp {
     @ViewChild(McTree) tree: McTree<TestData>;
 
     constructor() {
-        this.underlyingDataSource.connect().subscribe(data => {
+        this.underlyingDataSource.connect().subscribe((data) => {
             this.dataSource.data = data;
         });
     }
+    isSpecial = (_: number, node: TestData) => node.isSpecial;
 }

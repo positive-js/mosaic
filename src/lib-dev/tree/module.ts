@@ -11,8 +11,8 @@ import {
     McTreeModule
 } from '@ptsecurity/mosaic/tree';
 
-import { BehaviorSubject, Observable, of as observableOf } from 'rxjs';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
+import { BehaviorSubject, Observable, of as observableOf } from 'rxjs';
 
 
 class FileNode {
@@ -167,20 +167,20 @@ export class DemoComponent {
         return !(nodeData.type);
     }
 
-    private _getLevel(node: FileFlatNode) { return node.level; }
-
-    private _isExpandable(node: FileFlatNode) { return node.expandable; }
-
-    private _getChildren = (node: FileNode): Observable<FileNode[]> => {
-        return observableOf(node.children);
-    }
-
     onNavigationChange($event) {
         console.log('onNavigationChange');
     }
 
     onSelectionChange($event) {
         console.log('onSelectionChange');
+    }
+
+    private _getLevel(node: FileFlatNode) { return node.level; }
+
+    private _isExpandable(node: FileFlatNode) { return node.expandable; }
+
+    private _getChildren = (node: FileNode): Observable<FileNode[]> => {
+        return observableOf(node.children);
     }
 }
 
