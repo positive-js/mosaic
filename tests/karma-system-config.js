@@ -48,6 +48,7 @@ System.config({
         '@ptsecurity/cdk/portal': 'dist/packages/cdk/portal/index.js',
         '@ptsecurity/cdk/scrolling': 'dist/packages/cdk/scrolling/index.js',
         '@ptsecurity/cdk/testing': 'dist/packages/cdk/testing/index.js',
+        '@ptsecurity/cdk/tree': 'dist/packages/cdk/tree/index.js',
 
         '@ptsecurity/mosaic/button': 'dist/packages/mosaic/button/index.js',
         '@ptsecurity/mosaic/core': 'dist/packages/mosaic/core/index.js',
@@ -59,7 +60,8 @@ System.config({
         '@ptsecurity/mosaic/radio': 'dist/packages/mosaic/radio/index.js',
         '@ptsecurity/mosaic/checkbox': 'dist/packages/mosaic/checkbox/index.js',
         '@ptsecurity/mosaic/input': 'dist/packages/mosaic/input/index.js',
-        '@ptsecurity/mosaic/form-field': 'dist/packages/mosaic/form-field/index.js'
+        '@ptsecurity/mosaic/form-field': 'dist/packages/mosaic/form-field/index.js',
+        '@ptsecurity/mosaic/tree': 'dist/packages/mosaic/tree/index.js'
     },
     packages: {
         // Thirdparty barrels.

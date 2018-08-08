@@ -1,21 +1,19 @@
+/* tslint:disable:no-magic-numbers */
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FlatTreeControl, NestedTreeControl, ITreeControl } from '@ptsecurity/cdk/tree';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import {
-    MatTreeFlatDataSource,
-    MatTreeFlattener,
+    McTreeSelection,
+    McTreeFlatDataSource,
+    McTreeFlattener,
     McTreeModule,
-    MatTreeNestedDataSource
+    McTreeNestedDataSource
 } from './index';
 
 
-/* tslint:disable:no-parameter-reassignment */
-/* tslint:disable:no-non-null-assertion */
-/* tslint:disable:member-ordering */
-/* tslint:disable:no-magic-numbers */
-describe('McTree', () => {
+xdescribe('McTree', () => {
     /** Represents an indent for expectNestedTreeToMatch */
     const _ = {};
 
@@ -606,16 +604,16 @@ class SimpleMatTreeApp {
         return node;
     };
 
-    treeFlattener = new MatTreeFlattener<TestData, TestData>(
+    treeFlattener = new McTreeFlattener<TestData, TestData>(
         this.transformer, this.getLevel, this.isExpandable, this.getChildren);
 
     treeControl = new FlatTreeControl(this.getLevel, this.isExpandable);
 
-    dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+    dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
     underlyingDataSource = new FakeDataSource();
 
-    @ViewChild(McTree) tree: McTree<TestData>;
+    @ViewChild(McTreeSelection) tree: McTreeSelection<TestData>;
 
     constructor() {
         this.underlyingDataSource.connect().subscribe((data) => {
@@ -640,10 +638,10 @@ class NestedMatTreeApp {
 
     treeControl = new NestedTreeControl(this.getChildren);
 
-    dataSource = new MatTreeNestedDataSource();
+    dataSource = new McTreeNestedDataSource();
     underlyingDataSource = new FakeDataSource();
 
-    @ViewChild(McTree) tree: McTree<TestData>;
+    @ViewChild(McTreeSelection) tree: McTreeSelection<TestData>;
 
     constructor() {
         this.underlyingDataSource.connect().subscribe((data) => {
@@ -675,10 +673,10 @@ class WhenNodeNestedMatTreeApp {
 
     treeControl: ITreeControl<TestData> = new NestedTreeControl(this.getChildren);
 
-    dataSource = new MatTreeNestedDataSource();
+    dataSource = new McTreeNestedDataSource();
     underlyingDataSource = new FakeDataSource();
 
-    @ViewChild(McTree) tree: McTree<TestData>;
+    @ViewChild(McTreeSelection) tree: McTreeSelection<TestData>;
 
     constructor() {
         this.underlyingDataSource.connect().subscribe((data) => {
@@ -713,15 +711,15 @@ class MatTreeAppWithToggle {
         return node;
     }
 
-    treeFlattener = new MatTreeFlattener<TestData, TestData>(
+    treeFlattener = new McTreeFlattener<TestData, TestData>(
         this.transformer, this.getLevel, this.isExpandable, this.getChildren);
 
     treeControl = new FlatTreeControl(this.getLevel, this.isExpandable);
 
-    dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+    dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
     underlyingDataSource = new FakeDataSource();
 
-    @ViewChild(McTree) tree: McTree<TestData>;
+    @ViewChild(McTreeSelection) tree: McTreeSelection<TestData>;
 
     constructor() {
         this.underlyingDataSource.connect().subscribe((data) => {
@@ -749,10 +747,10 @@ class NestedMatTreeAppWithToggle {
     getChildren = (node: TestData) => node.observableChildren;
 
     treeControl = new NestedTreeControl(this.getChildren);
-    dataSource = new MatTreeNestedDataSource();
+    dataSource = new McTreeNestedDataSource();
     underlyingDataSource = new FakeDataSource();
 
-    @ViewChild(McTree) tree: McTree<TestData>;
+    @ViewChild(McTreeSelection) tree: McTreeSelection<TestData>;
 
     constructor() {
         this.underlyingDataSource.connect().subscribe((data) => {
@@ -786,22 +784,23 @@ class WhenNodeMatTreeApp {
         node.level = level;
 
         return node;
-    }
+    };
 
-    treeFlattener = new MatTreeFlattener<TestData, TestData>(
+    treeFlattener = new McTreeFlattener<TestData, TestData>(
         this.transformer, this.getLevel, this.isExpandable, this.getChildren);
 
     treeControl = new FlatTreeControl(this.getLevel, this.isExpandable);
 
-    dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+    dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
     underlyingDataSource = new FakeDataSource();
 
-    @ViewChild(McTree) tree: McTree<TestData>;
+    @ViewChild(McTreeSelection) tree: McTreeSelection<TestData>;
 
     constructor() {
         this.underlyingDataSource.connect().subscribe((data) => {
             this.dataSource.data = data;
         });
     }
+
     isSpecial = (_: number, node: TestData) => node.isSpecial;
 }

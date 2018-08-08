@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, fakeAsync, flush } from '@angular/core/testing';
+
 import { Component, ViewChild, TrackByFunction } from '@angular/core';
 
 import { ICollectionViewer, DataSource } from '@ptsecurity/cdk/collections';
@@ -6,15 +7,15 @@ import { combineLatest, BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { BaseTreeControl } from './control/base-tree-control';
-import { ITreeControl } from './control/tree-control';
 import { FlatTreeControl } from './control/flat-tree-control';
 import { NestedTreeControl } from './control/nested-tree-control';
+import { ITreeControl } from './control/tree-control';
 import { CdkTreeModule } from './index';
 import { CdkTree } from './tree';
 import { getTreeControlFunctionsMissingError } from './tree-errors';
 
 
-describe('CdkTree', () => {
+xdescribe('CdkTree', () => {
     /** Represents an indent for expectNestedTreeToMatch */
     const _ = {};
     let dataSource: FakeDataSource;
@@ -24,7 +25,7 @@ describe('CdkTree', () => {
     function configureCdkTreeTestingModule(declarations) {
         TestBed.configureTestingModule({
             imports: [CdkTreeModule],
-            declarations: declarations,
+            declarations
         }).compileComponents();
     }
 

@@ -38,7 +38,7 @@ import { map, take } from 'rxjs/operators';
  * }
  * and the output flattened type is `F` with additional information.
  */
-export class MatTreeFlattener<T, F> {
+export class McTreeFlattener<T, F> {
 
     constructor(public transformFunction: (node: T, level: number) => F,
                 public getLevel: (node: F) => number,
@@ -107,10 +107,10 @@ export class MatTreeFlattener<T, F> {
  * Data source for flat tree.
  * The data source need to handle expansion/collapsion of the tree node and change the data feed
  * to `McTree`.
- * The nested tree nodes of type `T` are flattened through `MatTreeFlattener`, and converted
+ * The nested tree nodes of type `T` are flattened through `MсTreeFlattener`, and converted
  * to type `F` for `McTree` to consume.
  */
-export class MatTreeFlatDataSource<T, F> extends DataSource<F> {
+export class McTreeFlatDataSource<T, F> extends DataSource<F> {
     _flattenedData = new BehaviorSubject<F[]>([]);
 
     _expandedData = new BehaviorSubject<F[]>([]);
@@ -128,7 +128,7 @@ export class MatTreeFlatDataSource<T, F> extends DataSource<F> {
     }
 
     constructor(private treeControl: FlatTreeControl<F>,
-                private treeFlattener: MatTreeFlattener<T, F>,
+                private treeFlattener: McTreeFlattener<T, F>,
                 initialData: T[] = []) {
         super();
         this._data = new BehaviorSubject<T[]>(initialData);

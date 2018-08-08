@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
  * The data source for nested tree doesn't have to consider node flattener, or the way to expand
  * or collapse. The expansion/collapsion will be handled by ITreeControl and each non-leaf node.
  */
-export class MatTreeNestedDataSource<T> extends DataSource<T> {
+export class McTreeNestedDataSource<T> extends DataSource<T> {
     _data = new BehaviorSubject<T[]>([]);
 
     /**

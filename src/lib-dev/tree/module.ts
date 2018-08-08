@@ -5,9 +5,9 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { CdkTreeModule, FlatTreeControl, NestedTreeControl } from '@ptsecurity/cdk/tree';
 import {
-    MatTreeFlatDataSource,
-    MatTreeFlattener,
-    MatTreeNestedDataSource,
+    McTreeFlatDataSource,
+    MсTreeFlattener,
+    McTreeNestedDataSource,
     McTreeModule
 } from '@ptsecurity/mosaic/tree';
 
@@ -127,22 +127,22 @@ class FileDatabase {
 })
 export class DemoComponent {
     treeControl: FlatTreeControl<FileFlatNode>;
-    dataSource: MatTreeFlatDataSource<FileNode, FileFlatNode>;
-    treeFlattener: MatTreeFlattener<FileNode, FileFlatNode>;
+    dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
+    treeFlattener: MсTreeFlattener<FileNode, FileFlatNode>;
 
     nestedTreeControl: NestedTreeControl<FileNode>;
-    nestedDataSource: MatTreeNestedDataSource<FileNode>;
+    nestedDataSource: McTreeNestedDataSource<FileNode>;
 
     constructor(database: FileDatabase) {
-        this.treeFlattener = new MatTreeFlattener(
+        this.treeFlattener = new MсTreeFlattener(
             this.transformer, this._getLevel, this._isExpandable, this._getChildren
         );
 
         this.treeControl = new FlatTreeControl<FileFlatNode>(this._getLevel, this._isExpandable);
-        this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+        this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
         this.nestedTreeControl = new NestedTreeControl<FileNode>(this._getChildren);
-        this.nestedDataSource = new MatTreeNestedDataSource();
+        this.nestedDataSource = new McTreeNestedDataSource();
 
         database.dataChange.subscribe((data) => {
             this.dataSource.data = data;

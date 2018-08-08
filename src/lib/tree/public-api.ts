@@ -1,4 +1,4 @@
-export * from './tree-module';
+export * from './tree.module';
 export * from './node';
 export * from './padding';
 export * from './tree';

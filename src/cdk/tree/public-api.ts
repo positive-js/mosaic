@@ -8,5 +8,5 @@ export * from './padding';
 export * from './outlet';
 export * from './tree';
 export * from './tree-errors';
-export * from './tree-module';
+export * from './tree.module';
 export * from './toggle';
