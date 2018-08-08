@@ -37,6 +37,14 @@
         color: mc-color($link, 700);
     }
 
+    &:hover:focus,
+    &.mc-hovered:focus,
+    &:hover.mc-focused {
+        color: mc-color($link, 700);
+        border-color: mc-color($link, 700);
+        box-shadow: 0 0 0 2px mc-color($link, 700);
+    }
+
     &.mc-focused,
     &:focus {
         color: mc-color($link, 500);
@@ -64,8 +72,6 @@
 
         &.mc-visited,
         &:visited {
-            color: mc-color($link, 500);
-
             & > .mc-link__text {
                 @include mc-link-dashes_mixin(mc-color($link, 500), 100%, 0.32);
             }
@@ -75,8 +81,6 @@
         &.mc-hovered,
         &:active,
         &:hover {
-            color: mc-color($link, 700);
-
             & > .mc-link__text {
                 @include mc-link-dashes_mixin(mc-color($link, 700), 100%, 0.24);
             }
@@ -84,8 +88,6 @@
 
         &.mc-focused,
         &:focus {
-            color: mc-color($link, 500);
-
             & > .mc-link__text {
                 @include mc-link-dashes_mixin(mc-color($link, 700), 100%, 0.24);
             }
@@ -93,8 +95,6 @@
 
         &.mc-disabled,
         &[disabled] {
-            color: $link-disabled !important;
-
             & > .mc-link__text {
                 @include mc-link-dashes_mixin($link-disabled, 100%, 0.32);
             }
@@ -116,8 +116,6 @@
 
         &.mc-visited,
         &:visited {
-            color: mc-color($link, 500);
-
             & > .mc-link__text {
                 @include mc-link-dashes_mixin(mc-color($link, 500));
             }
@@ -127,8 +125,6 @@
         &.mc-hovered,
         &:active,
         &:hover {
-            color: mc-color($link, 700);
-
             & > .mc-link__text {
                 @include mc-link-dashes_mixin(mc-color($link, 700));
             }
@@ -136,8 +132,6 @@
 
         &.mc-focused,
         &:focus {
-            color: mc-color($link, 500);
-
             & > .mc-link__text {
                 @include mc-link-dashes_mixin(mc-color($link, 700));
             }
