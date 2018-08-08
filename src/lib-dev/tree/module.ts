@@ -6,7 +6,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { CdkTreeModule, FlatTreeControl, NestedTreeControl } from '@ptsecurity/cdk/tree';
 import {
     McTreeFlatDataSource,
-    MсTreeFlattener,
+    McTreeFlattener,
     McTreeNestedDataSource,
     McTreeModule
 } from '@ptsecurity/mosaic/tree';
@@ -128,13 +128,13 @@ class FileDatabase {
 export class DemoComponent {
     treeControl: FlatTreeControl<FileFlatNode>;
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
-    treeFlattener: MсTreeFlattener<FileNode, FileFlatNode>;
+    treeFlattener: McTreeFlattener<FileNode, FileFlatNode>;
 
     nestedTreeControl: NestedTreeControl<FileNode>;
     nestedDataSource: McTreeNestedDataSource<FileNode>;
 
     constructor(database: FileDatabase) {
-        this.treeFlattener = new MсTreeFlattener(
+        this.treeFlattener = new McTreeFlattener(
             this.transformer, this._getLevel, this._isExpandable, this._getChildren
         );
 
