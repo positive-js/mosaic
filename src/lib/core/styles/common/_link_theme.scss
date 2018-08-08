@@ -18,7 +18,8 @@
 
 @mixin mc-link-theme($theme) {
     $link: map-get($theme, link);
-    $second: map-get($theme, second);
+    $foreground: map-get($theme, foreground);
+    $link-disabled: mc-color($foreground, disabled-text);
 
     .mc-link {
         color: mc-color($link, 500);
@@ -45,7 +46,13 @@
 
     &.mc-disabled,
     &[disabled] {
-        color: mc-color($second, 300) !important;
+        color: $link-disabled !important;
+
+        &.mc-focused,
+        &:focus {
+            border-color:$link-disabled;
+            box-shadow: 0 0 0 2px $link-disabled;
+        }
     }
 
     &.mc-link_underlined {
@@ -86,10 +93,16 @@
 
         &.mc-disabled,
         &[disabled] {
-            color: mc-color($second, 300) !important;
+            color: $link-disabled !important;
 
             & > .mc-link__text {
-                @include mc-link-dashes_mixin(mc-color($second, 400), 100%, 0.32);
+                @include mc-link-dashes_mixin($link-disabled, 100%, 0.32);
+            }
+
+            &.mc-focused,
+            &:focus {
+                border-color:$link-disabled;
+                box-shadow: 0 0 0 2px $link-disabled;
             }
         }
     }
@@ -132,10 +145,16 @@
 
         &.mc-disabled,
         &[disabled] {
-            color: mc-color($second, 300) !important;
+            color: $link-disabled !important;
 
             & > .mc-link__text {
-                @include mc-link-dashes_mixin(mc-color($second, 400));
+                @include mc-link-dashes_mixin($link-disabled, 66%, 0.32);
+            }
+
+            &.mc-focused,
+            &:focus {
+                border-color:$link-disabled;
+                box-shadow: 0 0 0 2px $link-disabled;
             }
         }
     }
