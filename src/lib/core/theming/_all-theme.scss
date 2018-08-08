@@ -1,6 +1,7 @@
 // Import all the theming
 @import '../core';
 @import '../styles/badges';
+@import '../styles/common/link_theme';
 @import '../visual/panel-theme';
 @import '../../button/button-theme';
 @import '../../list/list-theme';
@@ -16,6 +17,7 @@
 
 @mixin mosaic-theme($theme) {
 
+    @include mc-link-theme($theme);
     @include mc-badge-theme($theme);
     @include mc-button-theme($theme);
     @include mc-list-theme($theme);

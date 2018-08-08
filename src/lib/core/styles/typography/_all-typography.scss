@@ -1,5 +1,6 @@
 @import './typography';
 @import '../badges';
+@import '../common/link_theme';
 @import '../../../button/button-theme';
 @import '../../../list/list-theme';
 @import '../../../tree/tree-theme';
@@ -17,6 +18,7 @@
 
     @include mc-base-typography($config);
 
+    @include mc-link-typography($config);
     @include mc-badge-typography($config);
     @include mc-button-typography($config);
     @include mc-list-typography($config);

@@ -1,0 +1,55 @@
+@import 'link_base';
+@import '../../../core/theming/theming';
+@import '../typography/typography-utils';
+
+
+.mc-link {
+    @extend %link-base;
+
+    @include focus-transition(color);
+    @include hover-transition(color);
+
+    &.mc-focused,
+    &:focus {
+        outline: none;
+        border-radius: $link-border-radius;
+    }
+
+    &.mc-disabled,
+    &[disabled] {
+        pointer-events: none;
+        cursor: default;
+    }
+
+    & > .mc-link__text {
+        line-height: 1.4;
+    }
+
+    & > .mc-link__icon {
+        color: inherit;
+    }
+
+    & > .mc-link__text:not(:first-child) {
+        margin-left: 4px;
+    }
+
+    & > .mc-link__text:not(:last-child) {
+        margin-right: 4px;
+    }
+
+    &.mc-link_underlined,.mc-link_dashed {
+        @include focus-transition(background, color);
+        @include hover-transition(background, color);
+
+        &.mc-disabled,
+        &[disabled] {
+            pointer-events: none;
+            cursor: $link-cursor-disabled !important;
+        }
+
+        &.mc-focused,
+        &:focus {
+            outline: none;
+        }
+    }
+}
