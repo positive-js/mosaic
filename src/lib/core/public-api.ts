@@ -6,3 +6,6 @@ export * from './selection/index';
 export * from './services/measure-scrollbar.service';
 export * from './option/index';
 export * from './label/label-options';
+export * from './animation/index';
+export * from './overlay/overlay-position-map';
+

@@ -155,6 +155,7 @@
         "server-dev:tag": "npm run server-dev -- --env.component tag",
         "server-dev:theme-picker": "npm run server-dev -- --env.component theme-picker",
         "server-dev:tree": "npm run server-dev -- --env.component tree",
-        "server-dev:typography": "npm run server-dev -- --env.component typography"
+        "server-dev:typography": "npm run server-dev -- --env.component typography",
+        "server-dev:tooltip": "npm run server-dev -- --env.component tooltip"
     }
 }

@@ -17,6 +17,7 @@
 @import '../../select/select-theme';
 @import '../option/option-theme';
 @import '../../tag/tag-theme';
+@import '../../tooltip/tooltip-theme';
 
 
 @mixin mosaic-theme($theme) {
@@ -40,4 +41,5 @@
     @include mc-select-theme($theme);
     @include mc-option-theme($theme);
     @include mc-tag-theme($theme);
+    @include mc-tooltip-theme($theme);
 }

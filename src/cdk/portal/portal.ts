@@ -153,7 +153,7 @@ export class TemplatePortal<C = any> extends Portal<C> {
     detach(): void {
         this.context = undefined;
 
-        return super.detach();
+        return super.detach(); //tslint:disable-line
     }
 }
 

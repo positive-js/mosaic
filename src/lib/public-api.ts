@@ -18,3 +18,5 @@ export * from '@ptsecurity/mosaic/radio';
 export * from '@ptsecurity/mosaic/tree';
 export * from '@ptsecurity/mosaic/tag';
 export * from '@ptsecurity/mosaic/select';
+export * from '@ptsecurity/mosaic/tooltip';
+
