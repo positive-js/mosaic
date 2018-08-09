@@ -23,6 +23,8 @@ task('lint', ['tslint', 'madge']);
 
 task('tslint', execNodeTask('tslint', tsLintBaseFlags));
 
+task('tslint:fix', execNodeTask('tslint', [...tsLintBaseFlags, '--fix']));
+
 task('madge', ['mosaic:clean-build'], () => {
     madge([mosaicOutPath, cdkOutPath]).then((res: any) => {
         const circularModules = res.circular();

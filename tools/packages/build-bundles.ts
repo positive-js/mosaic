@@ -124,12 +124,17 @@ export class PackageBundler {
             context: 'this',
             external: Object.keys(rollupGlobals),
             input: config.entry,
-            onwarn: (message: string) => {
-                if (/but never used/.test(message)) {
+            onwarn: (warning: any) => {
+                if (/but never used/.test(warning.message)) {
                     return false;
                 }
 
-                console.warn(message);
+                if (warning.code === 'CIRCULAR_DEPENDENCY') {
+                    throw Error(warning.message);
+                }
+
+                console.warn(warning.message);
+
             },
             plugins: [
                 rollupRemoveLicensesPlugin
