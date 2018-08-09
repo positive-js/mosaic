@@ -76,7 +76,7 @@ export class ModalDemoComponent {
                 subtitle: 'component sub title，will be changed after 2 sec'
             },
             mcFooter: [{
-                label: 'change component tilte from outside',
+                label: 'change component title from outside',
                 type: 'primary',
                 onClick: (componentInstance: any) => {
                     componentInstance.title = 'title in inner component is changed';

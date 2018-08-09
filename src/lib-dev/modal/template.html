@@ -1,4 +1,4 @@
-<h2>As component (not use in prod)</h2>
+<p class="mc-headline">As component (not use in prod)</p>
 
 <button mc-button (click)="showModal()">Show Modal</button>
 <mc-modal [(mcVisible)]="isVisible"
@@ -11,13 +11,13 @@
     <p>Content three</p>
 </mc-modal>
 
-<h2>Confirm</h2>
+<p class="mc-headline">Confirm</p>
 
-<button mc-button (click)="showConfirm()">Confirm</button>
+<button mc-button (click)="showConfirm()" style="margin-right: 18px;">Confirm</button>
 <button mc-button (click)="showDeleteConfirm()">Delete</button>
 
 
-<h3>Modal from service</h3>
+<p class="mc-headline">Modal from service</p>
 <button mc-button color="primary" (click)="createTplModal(tplTitle, tplContent, tplFooter)">
     <span>Template</span>
 </button>
@@ -35,19 +35,19 @@
     <button mc-button color="primary" (click)="destroyTplModal()">Close after submit</button>
 </ng-template>
 
-<h3>Modal with custom component</h3>
+<p class="mc-headline">Modal with custom component</p>
 <button mc-button color="primary" (click)="createComponentModal()">
    Open
 </button>
 
 
-<h3>Modal with looong component</h3>
+<p class="mc-headline">Modal with looong component</p>
 <button mc-button color="primary" (click)="createLongModal()">
     Open
 </button>
 
 
-<h3>Many many modals</h3>
+<p class="mc-headline">Many many modals</p>
 <button mc-button color="primary" (click)="openAndCloseAll()">Open more modals then close all after 10s</button>
 <mc-modal [(mcVisible)]="htmlModalVisible"
           [mcMask]="true"
