@@ -10,7 +10,10 @@ import {
     Input,
     OnDestroy,
     OnInit,
-    ViewEncapsulation
+    ViewEncapsulation,
+    ContentChild,
+    TemplateRef,
+    ChangeDetectorRef
 } from '@angular/core';
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 
@@ -27,6 +30,11 @@ const MC_NAVBAR_TITLE = 'mc-navbar-title';
 const MC_NAVBAR_LOGO = 'mc-navbar-logo';
 
 export type McNavbarContainerPositionType = 'left' | 'right';
+
+export interface IMcNavbarDropdownItem {
+    link?: string;
+    text: string;
+}
 
 @Directive({
     selector: MC_NAVBAR_LOGO,
@@ -61,10 +69,27 @@ export const _McNavbarMixinBase = mixinDisabled(McNavbarItemBase);
 @Component({
     selector: MC_NAVBAR_ITEM,
     template: `
-        <a [attr.tabindex]="disabled ? -1 : tabIndex" class="mc-navbar-item">
-            <ng-content>
-            </ng-content>
+        <a
+            [attr.tabindex]=\"disabled ? -1 : tabIndex\" class="mc-navbar-item"
+            (click)="handleClickByItem($event)"
+        >
+            <ng-content></ng-content>
         </a>
+        <ul
+            *ngIf="hasDropdownContent"
+            [ngClass]="{ 'is-collapsed': isCollapsed }"
+            class="mc-navbar-dropdown"
+        >
+            <li *ngFor="let item of dropdownItems" class="mc-navbar-dropdown-item">
+                <ng-container *ngIf="dropdownItemTmpl">
+                    <ng-container *ngTemplateOutlet="dropdownItemTmpl; context: { $implicit: item }"></ng-container>
+                </ng-container>
+                <a *ngIf="!dropdownItemTmpl" [attr.href]="item.link" class="mc-navbar-dropdown-link">{{ item.text }}</a>
+            </li>
+        </ul>
+        <ng-template #dropdownLinkTmpl let-item>
+            <a [attr.href]="item.link">{{ item.text }}</a>
+        </ng-template>
     `,
     encapsulation: ViewEncapsulation.None,
     inputs: ['disabled'],
@@ -78,13 +103,28 @@ export class McNavbarItem extends _McNavbarMixinBase implements OnInit, OnDestro
     tabIndex: number = 0;
 
     @Input()
+    dropdownItems: IMcNavbarDropdownItem[] = [];
+
+    @Input()
     set collapsedTitle(value: string) {
         this.elementRef.nativeElement.setAttribute('computedTitle', encodeURI(value));
     }
 
+    @ContentChild('dropdownItemTmpl', { read: TemplateRef })
+    dropdownItemTmpl: TemplateRef<IMcNavbarDropdownItem>;
+
+    get hasDropdownContent() {
+        return this.dropdownItems.length > 0;
+    }
+
+    isCollapsed: boolean = true;
+
+    private _subscription: Subscription = new Subscription();
+
     constructor(
         public  elementRef: ElementRef,
-        private _focusMonitor: FocusMonitor
+        private _focusMonitor: FocusMonitor,
+        private _cdRef: ChangeDetectorRef
     ) {
         super(elementRef);
     }
@@ -92,11 +132,35 @@ export class McNavbarItem extends _McNavbarMixinBase implements OnInit, OnDestro
     ngOnInit() {
         this.denyClickIfDisabled();
 
-        this._focusMonitor.monitor(this.elementRef.nativeElement, true);
+        const focusMonitor$ = this._focusMonitor.monitor(this.elementRef.nativeElement, true);
+
+        if (this.hasDropdownContent) {
+            this._subscription.add(
+                focusMonitor$.subscribe((origin) => {
+                    if (origin === null) {
+                        this.forceCloseDropdown();
+                    }
+                })
+            );
+        }
     }
 
     ngOnDestroy() {
+        this._subscription.unsubscribe();
         this._focusMonitor.stopMonitoring(this.elementRef.nativeElement);
+    }
+
+    handleClickByItem() {
+        this.toggleDropdown();
+    }
+
+    private toggleDropdown() {
+        this.isCollapsed = !this.isCollapsed;
+    }
+
+    private forceCloseDropdown() {
+        this.isCollapsed = true;
+        this._cdRef.detectChanges();
     }
 
     // This method is required due to angular 2 issue https://github.com/angular/angular/issues/11200

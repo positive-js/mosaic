@@ -1,10 +1,11 @@
-import { FormsModule } from '@angular/forms';
 import { Component, NgModule, ViewChild, ViewEncapsulation } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import { McNavbarModule, McNavbar } from '../../lib/navbar/';
+import { McButtonModule } from '../../lib/button';
 import { McIconModule } from '../../lib/icon';
+import { McNavbarModule, McNavbar } from '../../lib/navbar/';
 
 
 @Component({
@@ -50,6 +51,7 @@ export class NavbarDemoComponent {
     imports: [
         BrowserModule,
         McNavbarModule,
+        McButtonModule,
         McIconModule,
         FormsModule
     ],

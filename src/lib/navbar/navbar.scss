@@ -43,3 +43,33 @@ mc-navbar-item[disabled] .mc-navbar-item, .mc-navbar-item[disabled] {
 mc-navbar-title.mc-navbar-collapsed-title {
     display: none;
 }
+
+.mc-navbar-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    box-sizing: border-box;
+    min-width: 100%;
+    height: auto;
+    margin: 0;
+    list-style: none;
+    padding-top: $mc-navbar-dropdown-v-padding;
+    padding-right: 0;
+    padding-bottom: $mc-navbar-dropdown-v-padding;
+    padding-left: 0;
+    z-index: 1;
+
+    .mc-navbar-dropdown-link {
+        display: block;
+        box-sizing: border-box;
+        padding-top: $mc-navbar-dropdown-link-v-padding;
+        padding-right: $mc-navbar-dropdown-link-h-padding;
+        padding-bottom: $mc-navbar-dropdown-link-v-padding;
+        padding-left: $mc-navbar-dropdown-link-h-padding;
+    }
+
+    &.is-collapsed {
+        top: -99999px;
+        left: -99999px;
+    }
+}
