@@ -79,7 +79,6 @@ export const _McNavbarMixinBase = mixinDisabled(McNavbarItemBase);
         <ul
             *ngIf="hasDropdownContent"
             [ngClass]="{ 'is-collapsed': isCollapsed }"
-            [attr.tabindex]=\"isCollapsed ? -1 : null\"
             class="mc-navbar-dropdown"
         >
             <li
