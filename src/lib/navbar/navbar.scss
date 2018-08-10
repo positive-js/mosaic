@@ -57,6 +57,8 @@ mc-navbar-title.mc-navbar-collapsed-title {
     padding-right: 0;
     padding-bottom: $mc-navbar-dropdown-v-padding;
     padding-left: 0;
+    border: 1px solid;
+    border-top: none;
     z-index: 1;
 
     .mc-navbar-dropdown-link {
@@ -66,6 +68,9 @@ mc-navbar-title.mc-navbar-collapsed-title {
         padding-right: $mc-navbar-dropdown-link-h-padding;
         padding-bottom: $mc-navbar-dropdown-link-v-padding;
         padding-left: $mc-navbar-dropdown-link-h-padding;
+        border: 2px solid transparent;
+        text-decoration: none;
+        white-space: nowrap;
     }
 
     &.is-collapsed {

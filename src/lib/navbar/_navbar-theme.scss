@@ -66,19 +66,15 @@
 
     .mc-navbar-dropdown {
         background-color: #fff;
-        border: 1px solid mc-color($mc-grey, 300);
-        border-top: none;
+        border-color: mc-color($mc-grey, 300);
         box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
 
         .mc-navbar-dropdown-link {
             color: mc-color($mc-grey, 700);
-            border: 2px solid transparent;
-            text-decoration: none;
-            white-space: nowrap;
 
             &:hover {
                 background-color: mc-color($palette, 100);
-                border: solid 2px mc-color($palette, 500);
+                border-color: mc-color($palette, 500);
             }
         }
     }
