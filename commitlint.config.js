@@ -1,14 +1,14 @@
 module.exports = {
     extends: ['@ptsecurity/commitlint-config'],
     rules: {
-        'scope-enum': [ 
+        'scope-enum': [
             2,
             'always',
             [
                 'build',
                 'docs',
                 'chore',
-                'cdk', 
+                'cdk',
                 'common',
                 'typography',
                 'button',
@@ -28,7 +28,8 @@ module.exports = {
                 'progress-bar',
                 'datepicker',
                 'timepicker',
-                'visual'
+                'visual',
+                'navbar'
             ]
         ]
     }
