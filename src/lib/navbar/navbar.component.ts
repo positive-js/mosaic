@@ -1,5 +1,4 @@
-import { fromEvent, Observable } from 'rxjs';
-import { Subscription } from 'rxjs/internal/Subscription';
+import { fromEvent, Observable, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
 import {
@@ -72,7 +71,7 @@ export const _McNavbarMixinBase = mixinDisabled(McNavbarItemBase);
     template: `
         <a
             [attr.tabindex]=\"disabled ? -1 : tabIndex\"
-            (click)="handleClickByItem($event)"
+            (click)="handleClickByItem()"
             class="mc-navbar-item"
         >
             <ng-content></ng-content>
