@@ -61,7 +61,7 @@ mc-navbar-title.mc-navbar-collapsed-title {
     border-top: none;
     z-index: 1;
 
-    .mc-navbar-dropdown-link {
+    &-link {
         display: block;
         box-sizing: border-box;
         padding-top: $mc-navbar-dropdown-link-v-padding;
