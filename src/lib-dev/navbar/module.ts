@@ -5,7 +5,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { McButtonModule } from '../../lib/button';
 import { McIconModule } from '../../lib/icon';
-import { McNavbarModule, McNavbar } from '../../lib/navbar/';
+import { McNavbarModule, McNavbar, IMcNavbarDropdownItem } from '../../lib/navbar/';
 
 
 @Component({
@@ -20,6 +20,18 @@ export class NavbarDemoComponent {
     navbar: McNavbar;
 
     readonly minNavbarWidth: number = 940;
+
+    dropdownItems: IMcNavbarDropdownItem[] = [
+        { link: '#', text: 'Очень длинный список для проверки ширины' },
+        { link: '#', text: 'Общие сведения' },
+        { link: '#', text: 'Еще один пункт' }
+    ];
+
+    buttonDropdownItems: IMcNavbarDropdownItem[] = [
+        { text: 'Кнопка 1' },
+        { text: 'Кнопка 2' },
+        { text: 'Кнопка 3' }
+    ];
 
     private _collapsedNavbarWidth: number = 1280;
 

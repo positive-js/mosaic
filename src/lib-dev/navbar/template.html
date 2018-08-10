@@ -28,11 +28,11 @@
                 <mc-navbar-title>Right Icon</mc-navbar-title>
                 <i mc-icon="mc-search_16"></i>
             </mc-navbar-item>
-            <mc-navbar-item [dropdownItems]="[{link: '#', text: 'Очень длинный список для проверки ширины'}, {link: '#', text: 'Общие сведения'}, {link: '#', text: 'Общие сведения'}]">
+            <mc-navbar-item [dropdownItems]="dropdownItems">
                 <span class="dropdown-text">Dropdown item</span>
                 <i mc-icon="mc-angle-M_16"></i>
             </mc-navbar-item>
-            <mc-navbar-item [dropdownItems]="[{link: '#', text: 'One'}, {link: '#', text: 'Two'}, {link: '#', text: 'Three'}]">
+            <mc-navbar-item [dropdownItems]="buttonDropdownItems">
                 <span class="dropdown-text">Dropdown item</span>
                 <i mc-icon="mc-angle-M_16"></i>
                 <ng-template #dropdownItemTmpl let-item>
