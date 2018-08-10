@@ -1,4 +1,4 @@
-import { fromEvent } from 'rxjs';
+import { fromEvent, Observable } from 'rxjs';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { debounceTime } from 'rxjs/operators';
 
@@ -16,7 +16,7 @@ import {
     ChangeDetectorRef,
     ChangeDetectionStrategy
 } from '@angular/core';
-import { FocusMonitor } from '@ptsecurity/cdk/a11y';
+import { FocusMonitor, FocusOrigin } from '@ptsecurity/cdk/a11y';
 
 import { CanDisable, mixinDisabled } from '@ptsecurity/mosaic/core';
 
@@ -71,32 +71,40 @@ export const _McNavbarMixinBase = mixinDisabled(McNavbarItemBase);
     selector: MC_NAVBAR_ITEM,
     template: `
         <a
-            [attr.tabindex]=\"disabled ? -1 : tabIndex\" class="mc-navbar-item"
+            [attr.tabindex]=\"disabled ? -1 : tabIndex\"
             (click)="handleClickByItem($event)"
+            class="mc-navbar-item"
         >
             <ng-content></ng-content>
         </a>
         <ul
             *ngIf="hasDropdownContent"
             [ngClass]="{ 'is-collapsed': isCollapsed }"
+            [attr.tabindex]=\"isCollapsed ? -1 : null\"
             class="mc-navbar-dropdown"
         >
-            <li *ngFor="let item of dropdownItems" class="mc-navbar-dropdown-item">
+            <li
+                *ngFor="let item of dropdownItems"
+                (click)="handleClickByDropdownItem()"
+                class="mc-navbar-dropdown-item"
+            >
                 <ng-container *ngIf="dropdownItemTmpl">
                     <ng-container *ngTemplateOutlet="dropdownItemTmpl; context: { $implicit: item }"></ng-container>
                 </ng-container>
-                <a *ngIf="!dropdownItemTmpl" [attr.href]="item.link" class="mc-navbar-dropdown-link">{{ item.text }}</a>
+                <a
+                    *ngIf="!dropdownItemTmpl"
+                    [attr.href]="item.link"
+                    class="mc-navbar-dropdown-link"
+                >{{ item.text }}</a>
             </li>
         </ul>
-        <ng-template #dropdownLinkTmpl let-item>
-            <a [attr.href]="item.link">{{ item.text }}</a>
-        </ng-template>
     `,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     inputs: ['disabled'],
     host: {
-        '[attr.disabled]': 'disabled || null'
+        '[attr.disabled]': 'disabled || null',
+        '[attr.tabindex]': '-1'
     }
 })
 export class McNavbarItem extends _McNavbarMixinBase implements OnInit, OnDestroy, CanDisable {
@@ -122,6 +130,7 @@ export class McNavbarItem extends _McNavbarMixinBase implements OnInit, OnDestro
     isCollapsed: boolean = true;
 
     private _subscription: Subscription = new Subscription();
+    private _focusMonitor$: Observable<FocusOrigin>;
 
     constructor(
         public  elementRef: ElementRef,
@@ -134,16 +143,10 @@ export class McNavbarItem extends _McNavbarMixinBase implements OnInit, OnDestro
     ngOnInit() {
         this.denyClickIfDisabled();
 
-        const focusMonitor$ = this._focusMonitor.monitor(this.elementRef.nativeElement, true);
+        this._focusMonitor$ = this._focusMonitor.monitor(this.elementRef.nativeElement, true);
 
         if (this.hasDropdownContent) {
-            this._subscription.add(
-                focusMonitor$.subscribe((origin) => {
-                    if (origin === null) {
-                        this.forceCloseDropdown();
-                    }
-                })
-            );
+            this.listenClickOutside();
         }
     }
 
@@ -154,6 +157,20 @@ export class McNavbarItem extends _McNavbarMixinBase implements OnInit, OnDestro
 
     handleClickByItem() {
         this.toggleDropdown();
+    }
+
+    handleClickByDropdownItem() {
+        this.forceCloseDropdown();
+    }
+
+    private listenClickOutside() {
+        this._subscription.add(
+            this._focusMonitor$.subscribe((origin) => {
+                if (origin === null) {
+                    this.forceCloseDropdown();
+                }
+            })
+        );
     }
 
     private toggleDropdown() {
