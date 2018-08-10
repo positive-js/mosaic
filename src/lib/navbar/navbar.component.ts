@@ -13,7 +13,8 @@ import {
     ViewEncapsulation,
     ContentChild,
     TemplateRef,
-    ChangeDetectorRef
+    ChangeDetectorRef,
+    ChangeDetectionStrategy
 } from '@angular/core';
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 
@@ -92,6 +93,7 @@ export const _McNavbarMixinBase = mixinDisabled(McNavbarItemBase);
         </ng-template>
     `,
     encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     inputs: ['disabled'],
     host: {
         '[attr.disabled]': 'disabled || null'
@@ -273,6 +275,7 @@ class CachedItemWidth {
 
 @Component({
     selector: MC_NAVBAR,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <nav class="mc-navbar">
             <ng-content select="[${MC_NAVBAR_CONTAINER}],${MC_NAVBAR_CONTAINER}"></ng-content>
