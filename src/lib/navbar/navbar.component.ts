@@ -13,10 +13,12 @@ import {
     ContentChild,
     TemplateRef,
     ChangeDetectorRef,
-    ChangeDetectionStrategy
+    ChangeDetectionStrategy,
+    ViewChildren,
+    QueryList
 } from '@angular/core';
 import { FocusMonitor, FocusOrigin } from '@ptsecurity/cdk/a11y';
-
+import { SPACE } from '@ptsecurity/cdk/keycodes';
 import { CanDisable, mixinDisabled } from '@ptsecurity/mosaic/core';
 
 
@@ -72,6 +74,7 @@ export const _McNavbarMixinBase = mixinDisabled(McNavbarItemBase);
         <a
             [attr.tabindex]=\"disabled ? -1 : tabIndex\"
             (click)="handleClickByItem()"
+            (keydown)="handleKeydown($event)"
             class="mc-navbar-item"
         >
             <ng-content></ng-content>
@@ -90,6 +93,7 @@ export const _McNavbarMixinBase = mixinDisabled(McNavbarItemBase);
                     <ng-container *ngTemplateOutlet="dropdownItemTmpl; context: { $implicit: item }"></ng-container>
                 </ng-container>
                 <a
+                    #dropdownLink
                     *ngIf="!dropdownItemTmpl"
                     [attr.href]="item.link"
                     class="mc-navbar-dropdown-link"
@@ -105,7 +109,7 @@ export const _McNavbarMixinBase = mixinDisabled(McNavbarItemBase);
         '[attr.tabindex]': '-1'
     }
 })
-export class McNavbarItem extends _McNavbarMixinBase implements OnInit, OnDestroy, CanDisable {
+export class McNavbarItem extends _McNavbarMixinBase implements OnInit, AfterViewInit, OnDestroy, CanDisable {
 
     @Input()
     tabIndex: number = 0;
@@ -120,6 +124,9 @@ export class McNavbarItem extends _McNavbarMixinBase implements OnInit, OnDestro
 
     @ContentChild('dropdownItemTmpl', { read: TemplateRef })
     dropdownItemTmpl: TemplateRef<IMcNavbarDropdownItem>;
+
+    @ViewChildren('dropdownLink', { read: ElementRef })
+    dropdownLinks: QueryList<ElementRef>;
 
     get hasDropdownContent() {
         return this.dropdownItems.length > 0;
@@ -148,13 +155,26 @@ export class McNavbarItem extends _McNavbarMixinBase implements OnInit, OnDestro
         }
     }
 
+    ngAfterViewInit() {
+        this.startListenFocusOnLinks();
+    }
+
     ngOnDestroy() {
         this._subscription.unsubscribe();
         this._focusMonitor.stopMonitoring(this.elementRef.nativeElement);
+        this.stopListenFocusOnLinks();
     }
 
     handleClickByItem() {
         this.toggleDropdown();
+    }
+
+    handleKeydown($event: KeyboardEvent) {
+        const isNavbarItem = ($event.target as HTMLElement).classList.contains(MC_NAVBAR_ITEM);
+
+        if (this.hasDropdownContent && $event.keyCode === SPACE && isNavbarItem) {
+            this.toggleDropdown();
+        }
     }
 
     handleClickByDropdownItem() {
@@ -169,6 +189,18 @@ export class McNavbarItem extends _McNavbarMixinBase implements OnInit, OnDestro
                 }
             })
         );
+    }
+
+    private startListenFocusOnLinks() {
+        this.dropdownLinks.forEach((link) => {
+            this._focusMonitor.monitor(link.nativeElement, true);
+        });
+    }
+
+    private stopListenFocusOnLinks() {
+        this.dropdownLinks.forEach((link) => {
+            this._focusMonitor.stopMonitoring(link.nativeElement);
+        });
     }
 
     private toggleDropdown() {
