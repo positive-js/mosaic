@@ -28,9 +28,14 @@ export class NavbarDemoComponent {
     ];
 
     buttonDropdownItems: IMcNavbarDropdownItem[] = [
-        { text: 'Кнопка 1' },
-        { text: 'Кнопка 2' },
-        { text: 'Кнопка 3' }
+        { text: 'Пример кастомного компонента 1' },
+        { text: 'Пример кастомного компонента 2' },
+        { text: 'Пример кастомного компонента 3' }
+    ];
+
+    rightDropdownItems: IMcNavbarDropdownItem[] = [
+        { link: '#', text: 'Пункт в правой части navbar 1' },
+        { link: '#', text: 'Пункт в правой части navbar 2' },
     ];
 
     private _collapsedNavbarWidth: number = 1280;

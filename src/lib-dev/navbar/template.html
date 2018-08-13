@@ -28,20 +28,6 @@
                 <mc-navbar-title>Right Icon</mc-navbar-title>
                 <i mc-icon="mc-search_16"></i>
             </mc-navbar-item>
-            <mc-navbar-item [dropdownItems]="dropdownItems">
-                <span class="dropdown-text">Dropdown item</span>
-                <i mc-icon="mc-angle-M_16"></i>
-            </mc-navbar-item>
-            <mc-navbar-item [dropdownItems]="buttonDropdownItems">
-                <span class="dropdown-text">Custom dropdown items</span>
-                <i mc-icon="mc-angle-M_16"></i>
-                <ng-template #dropdownItemTmpl let-item>
-                    <button mc-icon-button>
-                        {{ item.text }}
-                        <i mc-icon="mc-check_16"></i>
-                    </button>
-                </ng-template>
-            </mc-navbar-item>
             <mc-navbar-item (click)="onItemClick($event)">
                 <i mc-icon="mc-gear_16"></i>
             </mc-navbar-item>
@@ -65,6 +51,36 @@
         </mc-navbar-container>
     </mc-navbar>
 </div>
+
+<h3>Dropdowns exmaple</h3>
+<div>
+    <mc-navbar>
+        <mc-navbar-container position="left">
+            <mc-navbar-item [dropdownItems]="dropdownItems">
+                <span class="dropdown-text">Dropdown item</span>
+                <i mc-icon="mc-angle-M_16"></i>
+            </mc-navbar-item>
+            <mc-navbar-item [dropdownItems]="buttonDropdownItems">
+                <span class="dropdown-text">Custom dropdown items</span>
+                <i mc-icon="mc-angle-M_16"></i>
+                <ng-template #dropdownItemTmpl let-item>
+                    <button mc-icon-button>
+                        {{ item.text }}
+                        <i mc-icon="mc-check_16"></i>
+                    </button>
+                </ng-template>
+            </mc-navbar-item>
+        </mc-navbar-container>
+
+        <mc-navbar-container position="right">
+            <mc-navbar-item [dropdownItems]="rightDropdownItems">
+                <span class="dropdown-text">Right dropdown item</span>
+                <i mc-icon="mc-angle-M_16"></i>
+            </mc-navbar-item>
+        </mc-navbar-container>
+    </mc-navbar>
+</div>
+
 
 <h3>Collapse example</h3>
 <div style="margin-bottom: 20px;">
