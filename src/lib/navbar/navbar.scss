@@ -61,6 +61,11 @@ mc-navbar-title.mc-navbar-collapsed-title {
     border-top: none;
     z-index: 1;
 
+    .mc-navbar-right & {
+        left: auto;
+        right: 0;
+    }
+
     &-link {
         display: block;
         box-sizing: border-box;
