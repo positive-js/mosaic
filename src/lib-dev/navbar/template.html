@@ -33,12 +33,12 @@
                 <i mc-icon="mc-angle-M_16"></i>
             </mc-navbar-item>
             <mc-navbar-item [dropdownItems]="buttonDropdownItems">
-                <span class="dropdown-text">Dropdown item</span>
+                <span class="dropdown-text">Custom dropdown items</span>
                 <i mc-icon="mc-angle-M_16"></i>
                 <ng-template #dropdownItemTmpl let-item>
                     <button mc-icon-button>
                         {{ item.text }}
-                        <i mc-icon="mc-angle-L_16"></i>
+                        <i mc-icon="mc-check_16"></i>
                     </button>
                 </ng-template>
             </mc-navbar-item>
