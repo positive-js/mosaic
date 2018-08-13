@@ -71,8 +71,13 @@
 
         &-link {
             color: mc-color($mc-grey, 700);
+            outline: none;
 
             &:hover {
+                background-color: $black-6-opacity;
+            }
+
+            &.cdk-focused {
                 background-color: mc-color($palette, 100);
                 border-color: mc-color($palette, 500);
             }

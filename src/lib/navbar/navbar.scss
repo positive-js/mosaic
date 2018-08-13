@@ -74,7 +74,6 @@ mc-navbar-title.mc-navbar-collapsed-title {
     }
 
     &.is-collapsed {
-        top: -99999px;
-        left: -99999px;
+        display: none;
     }
 }
