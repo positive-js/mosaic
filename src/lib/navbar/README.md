@@ -19,8 +19,9 @@ We strongly recommend adhere to use our child components until it is possible bu
 	- menu item container **mc-navbar-item**
 	  - icon **[mc-icon]** (another PT Mosaic component, out of the scope of this)
 	  - title **mc-navbar-title**
-    - dropdown **[mc-dropdown]** (another PT Mosaic component, out of the scope of this)
-	  - any markup
+    - menu item dropdown container **mc-navbar-item** with property **[dropdownItems]**
+      - any markup for title dropdown container
+	  - **ng-temaplate** with custom component for dropdown item
 	- any markup
 - any markup
 
