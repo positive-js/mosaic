@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { A11yModule } from '@ptsecurity/cdk/a11y';
 import { PlatformModule } from '@ptsecurity/cdk/platform';
 
-import { McIconModule } from '../icon';
+import { McIconModule } from '../icon/icon.module';
 
 import {
     McNavbar,
