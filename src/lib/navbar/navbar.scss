@@ -67,6 +67,7 @@ mc-navbar-title.mc-navbar-collapsed-title {
     }
 
     &-link {
+        position: relative;
         display: block;
         box-sizing: border-box;
         padding-top: $mc-navbar-dropdown-link-v-padding;
@@ -76,6 +77,17 @@ mc-navbar-title.mc-navbar-collapsed-title {
         border: 2px solid transparent;
         text-decoration: none;
         white-space: nowrap;
+
+        &.is-active {
+            &:hover::before {
+                position: absolute;
+                top: -2px;
+                right: -2px;
+                bottom: -2px;
+                left: -2px;
+                content: "";
+            }
+        }
     }
 
     &.is-collapsed {

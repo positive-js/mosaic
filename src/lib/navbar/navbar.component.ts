@@ -18,6 +18,7 @@ import {
 } from '@angular/core';
 import { FocusMonitor, FocusOrigin } from '@ptsecurity/cdk/a11y';
 import { SPACE } from '@ptsecurity/cdk/keycodes';
+import { Platform } from '@ptsecurity/cdk/platform';
 import { CanDisable, mixinDisabled } from '@ptsecurity/mosaic/core';
 
 
@@ -96,6 +97,7 @@ export const _McNavbarMixinBase = mixinDisabled(McNavbarItemBase);
                 <a
                     *ngIf="!dropdownItemTmpl"
                     [attr.href]="item.link"
+                    [ngClass]="{ 'is-active': isActiveDropdownLink(item.link) }"
                     class="mc-navbar-dropdown-link"
                 >{{ item.text }}</a>
             </li>
@@ -145,6 +147,7 @@ export class McNavbarItem extends _McNavbarMixinBase implements OnInit, AfterVie
     constructor(
         public  elementRef: ElementRef,
         private _focusMonitor: FocusMonitor,
+        private _platform: Platform,
         private _cdRef: ChangeDetectorRef
     ) {
         super(elementRef);
@@ -174,6 +177,14 @@ export class McNavbarItem extends _McNavbarMixinBase implements OnInit, AfterVie
         this.stopListenFocusDropdownItems();
     }
 
+    isActiveDropdownLink(link: string): boolean {
+        if (!this._platform.isBrowser) {
+            return false;
+        }
+
+        return window.location.href.indexOf(link) >= 0;
+    }
+
     handleClickByItem() {
         this.toggleDropdown();
     }
@@ -200,30 +211,8 @@ export class McNavbarItem extends _McNavbarMixinBase implements OnInit, AfterVie
         );
     }
 
-    private startListenFocusDropdownItems() {
-        this._dropdownElements.forEach((el) => {
-            this._subscription.add(
-                this._focusMonitor.monitor(el, true).subscribe(() => {
-                    if (!el.classList.contains('cdk-focused')) {
-                        this._lastFocusedElement = el;
-                    }
-                })
-            );
-        });
-    }
-
-    private stopListenFocusDropdownItems() {
-        this._dropdownElements.forEach((el) => {
-            this._focusMonitor.stopMonitoring(el);
-        });
-    }
-
     private toggleDropdown() {
         this.isCollapsed = !this.isCollapsed;
-
-        if (!this.isCollapsed && this._lastFocusedElement) {
-            this.focusLastFocusedElement();
-        }
     }
 
     private forceCloseDropdown() {
@@ -231,10 +220,16 @@ export class McNavbarItem extends _McNavbarMixinBase implements OnInit, AfterVie
         this._cdRef.detectChanges();
     }
 
-    private focusLastFocusedElement() {
-        setTimeout(() => {
-            this._focusMonitor.focusVia(this._lastFocusedElement, 'keyboard');
-        }, 0);
+    private startListenFocusDropdownItems() {
+        this._dropdownElements.forEach((el) => {
+            this._focusMonitor.monitor(el, true);
+        });
+    }
+
+    private stopListenFocusDropdownItems() {
+        this._dropdownElements.forEach((el) => {
+            this._focusMonitor.stopMonitoring(el);
+        });
     }
 
     // This method is required due to angular 2 issue https://github.com/angular/angular/issues/11200

@@ -22,9 +22,9 @@ export class NavbarDemoComponent {
     readonly minNavbarWidth: number = 940;
 
     dropdownItems: IMcNavbarDropdownItem[] = [
-        { link: '#', text: 'Очень длинный список для проверки ширины' },
-        { link: '#', text: 'Общие сведения' },
-        { link: '#', text: 'Еще один пункт' }
+        { link: '#1', text: 'Очень длинный список для проверки ширины' },
+        { link: '#2', text: 'Общие сведения' },
+        { link: '#3', text: 'Еще один пункт' }
     ];
 
     buttonDropdownItems: IMcNavbarDropdownItem[] = [
@@ -34,8 +34,8 @@ export class NavbarDemoComponent {
     ];
 
     rightDropdownItems: IMcNavbarDropdownItem[] = [
-        { link: '#', text: 'Пункт в правой части navbar 1' },
-        { link: '#', text: 'Пункт в правой части navbar 2' },
+        { link: '#4', text: 'Пункт в правой части navbar 1' },
+        { link: '#5', text: 'Пункт в правой части navbar 2' }
     ];
 
     private _collapsedNavbarWidth: number = 1280;

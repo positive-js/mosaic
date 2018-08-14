@@ -78,8 +78,16 @@
             }
 
             &.cdk-focused {
-                background-color: mc-color($palette, 100);
                 border-color: mc-color($palette, 500);
+            }
+
+            &:active,
+            &.is-active {
+                background-color: mc-color($palette, 100);
+
+                &:hover::before {
+                    background-color: $black-6-opacity;
+                }
             }
         }
     }
