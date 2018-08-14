@@ -14,8 +14,7 @@ import {
     TemplateRef,
     ChangeDetectorRef,
     ChangeDetectionStrategy,
-    ViewChildren,
-    QueryList
+    ViewChild
 } from '@angular/core';
 import { FocusMonitor, FocusOrigin } from '@ptsecurity/cdk/a11y';
 import { SPACE } from '@ptsecurity/cdk/keycodes';
@@ -81,6 +80,7 @@ export const _McNavbarMixinBase = mixinDisabled(McNavbarItemBase);
             <i *ngIf="hasDropdownContent" mc-icon="mc-angle-M_16"></i>
         </a>
         <ul
+            #dropdownContent
             *ngIf="hasDropdownContent"
             [ngClass]="{ 'is-collapsed': isCollapsed }"
             class="mc-navbar-dropdown"
@@ -94,7 +94,6 @@ export const _McNavbarMixinBase = mixinDisabled(McNavbarItemBase);
                     <ng-container *ngTemplateOutlet="dropdownItemTmpl; context: { $implicit: item }"></ng-container>
                 </ng-container>
                 <a
-                    #dropdownLink
                     *ngIf="!dropdownItemTmpl"
                     [attr.href]="item.link"
                     class="mc-navbar-dropdown-link"
@@ -126,8 +125,8 @@ export class McNavbarItem extends _McNavbarMixinBase implements OnInit, AfterVie
     @ContentChild('dropdownItemTmpl', { read: TemplateRef })
     dropdownItemTmpl: TemplateRef<IMcNavbarDropdownItem>;
 
-    @ViewChildren('dropdownLink', { read: ElementRef })
-    dropdownLinks: QueryList<ElementRef>;
+    @ViewChild('dropdownContent', { read: ElementRef })
+    dropdownContent: ElementRef;
 
     get hasDropdownContent() {
         return this.dropdownItems.length > 0;
@@ -138,6 +137,10 @@ export class McNavbarItem extends _McNavbarMixinBase implements OnInit, AfterVie
     private _subscription: Subscription = new Subscription();
     private _focusMonitor$: Observable<FocusOrigin>;
     private _lastFocusedElement: HTMLElement;
+
+    private get _dropdownElements(): HTMLElement[] {
+        return this.dropdownContent.nativeElement.querySelectorAll('li > *');
+    }
 
     constructor(
         public  elementRef: ElementRef,
@@ -158,13 +161,17 @@ export class McNavbarItem extends _McNavbarMixinBase implements OnInit, AfterVie
     }
 
     ngAfterViewInit() {
-        this.startListenFocusOnLinks();
+        if (!this.hasDropdownContent) {
+            return;
+        }
+
+        this.startListenFocusDropdownItems();
     }
 
     ngOnDestroy() {
         this._subscription.unsubscribe();
         this._focusMonitor.stopMonitoring(this.elementRef.nativeElement);
-        this.stopListenFocusOnLinks();
+        this.stopListenFocusDropdownItems();
     }
 
     handleClickByItem() {
@@ -193,23 +200,21 @@ export class McNavbarItem extends _McNavbarMixinBase implements OnInit, AfterVie
         );
     }
 
-    private startListenFocusOnLinks() {
-        this.dropdownLinks.forEach((link) => {
-            const linkElement = link.nativeElement as HTMLElement;
-
+    private startListenFocusDropdownItems() {
+        this._dropdownElements.forEach((el) => {
             this._subscription.add(
-                this._focusMonitor.monitor(linkElement, true).subscribe(() => {
-                    if (!linkElement.classList.contains('cdk-focused')) {
-                        this._lastFocusedElement = linkElement;
+                this._focusMonitor.monitor(el, true).subscribe(() => {
+                    if (!el.classList.contains('cdk-focused')) {
+                        this._lastFocusedElement = el;
                     }
                 })
             );
         });
     }
 
-    private stopListenFocusOnLinks() {
-        this.dropdownLinks.forEach((link) => {
-            this._focusMonitor.stopMonitoring(link.nativeElement);
+    private stopListenFocusDropdownItems() {
+        this._dropdownElements.forEach((el) => {
+            this._focusMonitor.stopMonitoring(el);
         });
     }
 
