@@ -78,6 +78,7 @@ export const _McNavbarMixinBase = mixinDisabled(McNavbarItemBase);
             class="mc-navbar-item"
         >
             <ng-content></ng-content>
+            <i *ngIf="hasDropdownContent" mc-icon="mc-angle-M_16"></i>
         </a>
         <ul
             *ngIf="hasDropdownContent"
