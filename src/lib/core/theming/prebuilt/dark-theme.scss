@@ -8,9 +8,8 @@
 // Define a theme.
 $primary: mc-palette($mc-green, 500, 600, 600);
 $second: mc-palette($mc-grey, 40, 60, 100);
-$link: $primary;
 
-$theme: mc-light-theme($primary, $second, $link);
+$theme: mc-light-theme($primary, $second);
 
 // Include all theme styles for the components.
 @include mosaic-theme($theme);

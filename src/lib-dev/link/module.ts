@@ -2,7 +2,7 @@ import { Component, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { McIconModule } from '../../lib/icon';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-
+import { McLinkModule } from '../../lib/link/';
 
 @Component({
     selector: 'app',
@@ -19,6 +19,7 @@ export class DemoComponent {}
     ],
     imports: [
         BrowserModule,
+        McLinkModule,
         McIconModule
     ],
     bootstrap: [

@@ -36,6 +36,7 @@ $link-padding: 2px 4px;
     padding: $link-padding;
     line-height: $link-line-height-base;
     text-decoration: none !important;
+    cursor: pointer;
 }
 
 .mc-link {
@@ -95,7 +96,7 @@ $link-padding: 2px 4px;
 }
 
 @mixin mc-link-theme($theme) {
-    $link: map-get($theme, link);
+    $link: map-get($theme, primary);
     $foreground: map-get($theme, foreground);
     $link-disabled: mc-color($foreground, disabled-text);
 
@@ -115,16 +116,16 @@ $link-padding: 2px 4px;
         color: mc-color($link, 700);
     }
 
-    &:hover:focus,
-    &.mc-hovered:focus,
+    &:hover.cdk-keyboard-focused,
+    &.mc-hovered.cdk-keyboard-focused,
     &:hover.mc-focused {
         outline: none;
-        box-shadow: none;
+        box-shadow: 0 0 0 2px mc-color($link, 500);
         color: mc-color($link, 700);
     }
 
     &.mc-focused,
-    &:focus {
+    &.cdk-keyboard-focused {
         color: mc-color($link, 500);
         border-color: mc-color($link, 500);
         box-shadow: 0 0 0 2px mc-color($link, 500);
@@ -143,7 +144,6 @@ $link-padding: 2px 4px;
     }
 
     &.mc-link_underlined {
-        text-shadow: 0.05em 0 white, 0.05em 0 white;
 
         & > .mc-link__text {
             @include mc-link-dashes_mixin(mc-color($link, 500), 100%, 0.32);
@@ -181,7 +181,6 @@ $link-padding: 2px 4px;
     }
 
     &.mc-link_dashed {
-        text-shadow: 0.05em 0 white, 0.05em 0 white;
 
         & > .mc-link__text {
             @include mc-link-dashes_mixin(mc-color($link, 500));

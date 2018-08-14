@@ -39,26 +39,24 @@
     @return rgba($color, $opacity);
 }
 
-@function mc-light-theme($primary, $second, $link, $warn: mc-palette($mc-red)) {
+@function mc-light-theme($primary, $second, $warn: mc-palette($mc-red)) {
     @return (
         primary: $primary,
         second: $second,
         warn: $warn,
         is-dark: false,
         foreground: $mc-light-theme-foreground,
-        background: $mc-light-theme-background,
-        link: $link
+        background: $mc-light-theme-background
     );
 }
 
-@function mc-dark-theme($primary, $second, $link, $warn: mc-palette($mc-red)) {
+@function mc-dark-theme($primary, $second, $warn: mc-palette($mc-red)) {
     @return (
         primary: $primary,
         second: $second,
         warn: $warn,
         is-dark: true,
         foreground: $mc-dark-theme-foreground,
-        background: $mc-dark-theme-background,
-        link: $link
+        background: $mc-dark-theme-background
     );
 }
