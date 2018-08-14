@@ -486,7 +486,7 @@ class FakeDataSource {
 }
 
 function getNodes(treeElement: Element): Element[] {
-    return [].slice.call(treeElement.querySelectorAll('.mc-tree-node, .mc-tree-nested-node'))!;
+    return [].slice.call(treeElement.querySelectorAll('.mc-tree-node'))!;
 }
 
 function expectFlatTreeToMatch(treeElement: Element, expectedPaddingIndent: number = 28,

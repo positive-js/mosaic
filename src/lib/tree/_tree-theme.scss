@@ -7,18 +7,11 @@
     $background: map-get($theme, background);
     $foreground: map-get($theme, foreground);
 
-    //.mc-tree {
-    //    background: mc-color($background, text);
-    //}
-
     .mc-tree-node {
         color: mc-color($foreground, text);
 
-        border: 1px solid transparent;
-
         &.mc-focused {
             border-color: mc-color($primary, 500);
-            box-shadow: 0 0 0 1px mc-color($primary, 500);
         }
 
         &:hover,
