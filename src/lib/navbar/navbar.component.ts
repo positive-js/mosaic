@@ -139,7 +139,7 @@ export class McNavbarItem extends _McNavbarMixinBase implements OnInit, AfterVie
     private _lastFocusedElement: HTMLElement;
 
     private get _dropdownElements(): HTMLElement[] {
-        return this.dropdownContent.nativeElement.querySelectorAll('li > *');
+        return this.dropdownContent ? this.dropdownContent.nativeElement.querySelectorAll('li > *') : [];
     }
 
     constructor(
