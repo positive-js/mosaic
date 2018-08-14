@@ -136,6 +136,7 @@ export class McNavbarItem extends _McNavbarMixinBase implements OnInit, AfterVie
 
     private _subscription: Subscription = new Subscription();
     private _focusMonitor$: Observable<FocusOrigin>;
+    private _lastFocusedElement: HTMLElement;
 
     constructor(
         public  elementRef: ElementRef,
@@ -193,7 +194,15 @@ export class McNavbarItem extends _McNavbarMixinBase implements OnInit, AfterVie
 
     private startListenFocusOnLinks() {
         this.dropdownLinks.forEach((link) => {
-            this._focusMonitor.monitor(link.nativeElement, true);
+            const linkElement = link.nativeElement as HTMLElement;
+
+            this._subscription.add(
+                this._focusMonitor.monitor(linkElement, true).subscribe(() => {
+                    if (!linkElement.classList.contains('cdk-focused')) {
+                        this._lastFocusedElement = linkElement;
+                    }
+                })
+            );
         });
     }
 
@@ -205,11 +214,21 @@ export class McNavbarItem extends _McNavbarMixinBase implements OnInit, AfterVie
 
     private toggleDropdown() {
         this.isCollapsed = !this.isCollapsed;
+
+        if (!this.isCollapsed && this._lastFocusedElement) {
+            this.focusLastFocusedElement();
+        }
     }
 
     private forceCloseDropdown() {
         this.isCollapsed = true;
         this._cdRef.detectChanges();
+    }
+
+    private focusLastFocusedElement() {
+        setTimeout(() => {
+            this._focusMonitor.focusVia(this._lastFocusedElement, 'keyboard');
+        }, 0);
     }
 
     // This method is required due to angular 2 issue https://github.com/angular/angular/issues/11200
