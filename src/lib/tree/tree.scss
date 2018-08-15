@@ -9,7 +9,7 @@ $mc-tree-node-height: 28px;
 $mc-tree-node-padding: 16px;
 
 
-.mc-tree {
+.mc-tree-selection {
     display: block;
 
     border: 1px solid red;
@@ -34,9 +34,7 @@ $mc-tree-node-padding: 16px;
     &:focus {
         outline: none;
     }
-}
 
-.mc-tree-node {
     &:not([disabled]) {
         cursor: pointer;
     }

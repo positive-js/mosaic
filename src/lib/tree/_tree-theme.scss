@@ -32,7 +32,7 @@
 }
 
 @mixin mc-tree-typography($config) {
-    .mc-tree {
+    .mc-tree-selection {
         font-family: mc-font-family($config);
     }
 

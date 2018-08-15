@@ -278,7 +278,7 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
         if (nextItemIndex >= this._items.length) {
             this.setLastItemActive();
         } else {
-            this._setActiveItemByDelta(1);
+            this._setActiveItemByDelta(delta);
         }
     }
 
@@ -288,7 +288,7 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
         if (nextItemIndex <= 0) {
             this.setFirstItemActive();
         } else {
-            this._setActiveItemByDelta(-1);
+            this._setActiveItemByDelta(-delta);
         }
     }
 

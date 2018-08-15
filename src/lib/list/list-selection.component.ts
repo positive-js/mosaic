@@ -363,7 +363,7 @@ export class McListSelection extends _McListSelectionMixinBase implements
         } else if (this.withCtrl) {
             this.withCtrl = false;
 
-            if (!this._canUnselectLast(option)) { return; }
+            if (!this._canDeselectLast(option)) { return; }
 
             option.toggle();
         } else {
@@ -414,7 +414,7 @@ export class McListSelection extends _McListSelectionMixinBase implements
         if (focusedIndex != null && this._isValidIndex(focusedIndex)) {
             const focusedOption: McListOption = this.options.toArray()[focusedIndex];
 
-            if (focusedOption && this._canUnselectLast(focusedOption)) {
+            if (focusedOption && this._canDeselectLast(focusedOption)) {
                 focusedOption.toggle();
 
                 // Emit a change event because the focused option changed its state through user interaction.
@@ -423,7 +423,7 @@ export class McListSelection extends _McListSelectionMixinBase implements
         }
     }
 
-    _canUnselectLast(listOption: McListOption): boolean {
+    _canDeselectLast(listOption: McListOption): boolean {
         return !(this.noUnselect && this.selectedOptions.selected.length === 1 && listOption.selected);
     }
 

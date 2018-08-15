@@ -1,6 +1,5 @@
-import { AfterContentInit, Directive, Input, OnInit, ViewChild } from '@angular/core';
+import { Directive, Input, OnInit } from '@angular/core';
 import { CdkTreeNodePadding } from '@ptsecurity/cdk/tree';
-import { McIcon } from '@ptsecurity/mosaic/icon';
 
 
 @Directive({
