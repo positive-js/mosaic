@@ -1,31 +1,26 @@
-import { AfterViewInit, Directive, Input, ViewChild } from '@angular/core';
+import { AfterContentInit, Directive, Input, OnInit, ViewChild } from '@angular/core';
 import { CdkTreeNodePadding } from '@ptsecurity/cdk/tree';
 import { McIcon } from '@ptsecurity/mosaic/icon';
 
 
-/**
- * Wrapper for the CdkTree padding with Material design styles.
- */
 @Directive({
     selector: '[mcTreeNodePadding]',
     providers: [{ provide: CdkTreeNodePadding, useExisting: McTreeNodePadding }]
 })
-export class McTreeNodePadding<T> extends CdkTreeNodePadding<T> implements AfterViewInit {
+export class McTreeNodePadding<T> extends CdkTreeNodePadding<T> implements OnInit {
     get leftPadding(): number {
-        return (this._innerIcon ? 0 : this._iconWidth) + this._baseLeftPadding;
+        return (this._withIcon ? 0 : this._iconWidth) + this._baseLeftPadding;
     }
 
     _baseLeftPadding: number = 6;
     _iconWidth: number = 20;
     _indent: number = 16;
 
-    /** The level of depth of the tree node. The padding will be `level * indent` pixels. */
     @Input('mcTreeNodePadding') level: number;
 
-    /** The indent for each level. Default number 40px from material design menu sub-menu spec. */
-    @Input('matTreeNodePaddingIndent') indent: number;
+    @Input('mcTreeNodePaddingIndent') indent: number;
 
-    @ViewChild(McIcon) _innerIcon: McIcon;
+    _withIcon: boolean;
 
     _paddingIndent(): string | null {
         const nodeLevel = (this._treeNode.data && this._tree.treeControl.getLevel)
@@ -37,7 +32,8 @@ export class McTreeNodePadding<T> extends CdkTreeNodePadding<T> implements After
         return level ? `${(level * this._indent) + this.leftPadding}px` : `${this._baseLeftPadding}px`;
     }
 
-    ngAfterViewInit(): void {
+    ngOnInit(): void {
+        this._withIcon = this._tree.treeControl.isExpandable(this._treeNode.data);
         this._setPadding();
     }
 }
