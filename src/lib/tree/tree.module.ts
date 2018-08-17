@@ -5,7 +5,7 @@ import { CdkTreeModule } from '@ptsecurity/cdk/tree';
 
 import { McTreeNodeDef } from './node';
 import { McTreeNodePadding } from './padding';
-import { McTreeSelection, McTreeNodeOption } from './tree';
+import { McTreeSelection, McTreeNodeOption } from './tree-selection';
 
 
 const MC_TREE_DIRECTIVES = [

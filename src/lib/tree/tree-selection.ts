@@ -112,6 +112,10 @@ export class McTreeNodeOption<T> extends CdkTreeNode<T> implements CanDisable {
         // this._changeDetector.markForCheck();
     }
 
+    _getHeight(): number {
+        return this._elementRef.nativeElement.getClientRects()[0].height;
+    }
+
     _handleFocus(): void {
         if (this.disabled || this._hasFocus) { return; }
 
@@ -151,9 +155,10 @@ export class McTreeSelectionChange {
     template: `<ng-container cdkTreeNodeOutlet></ng-container>`,
     host: {
         '[tabIndex]': 'tabIndex',
-        class: 'mc-tree',
+        class: 'mc-tree-selection',
         role: 'tree-selection',
-        '(keydown)': '_onKeyDown($event)'
+        '(keydown)': '_onKeyDown($event)',
+        '(window:resize)': 'updateScrollSize()'
     },
     styleUrls: ['./tree.css'],
     encapsulation: ViewEncapsulation.None,
@@ -175,6 +180,11 @@ export class McTreeSelection<T> extends _McTreeSelectionBase<T>
     tabIndex: number;
     multiple: boolean;
     autoSelect: boolean;
+    noUnselect: boolean;
+
+    // todo temporary solution
+    withShift: boolean;
+    withCtrl: boolean;
 
     @Input()
     get disabled(): boolean {
@@ -200,11 +210,13 @@ export class McTreeSelection<T> extends _McTreeSelectionBase<T>
     @Output() readonly selectionChange = new EventEmitter<McTreeSelectionChange>();
 
     constructor(
+        private _elementRef: ElementRef,
         _differs: IterableDiffers,
         _changeDetectorRef: ChangeDetectorRef,
         @Attribute('tabindex') tabIndex: string,
         @Attribute('multiple') multiple: string,
-        @Attribute('auto-select') autoSelect: string
+        @Attribute('auto-select') autoSelect: string,
+        @Attribute('no-unselect') noUnselect: string
     ) {
         super(_differs, _changeDetectorRef);
 
@@ -212,12 +224,15 @@ export class McTreeSelection<T> extends _McTreeSelectionBase<T>
 
         this.multiple = multiple === null ? true : toBoolean(multiple);
         this.autoSelect = autoSelect === null ? true : toBoolean(autoSelect);
+        this.noUnselect = noUnselect === null ? true : toBoolean(noUnselect);
 
         this.selectedOptions = new SelectionModel<McTreeNodeOption<T>>(this.multiple);
     }
 
     _onKeyDown(event: KeyboardEvent) {
         const keyCode = event.keyCode;
+        this.withShift = event.shiftKey;
+        this.withCtrl = event.ctrlKey;
 
         switch (keyCode) {
             case LEFT_ARROW:
@@ -232,35 +247,33 @@ export class McTreeSelection<T> extends _McTreeSelectionBase<T>
                 if (this._keyManager.activeItem) {
                     this.treeControl.expand(this._keyManager.activeItem.data);
                 }
+
                 event.preventDefault();
 
                 break;
             case SPACE:
             case ENTER:
                 this.toggleFocusedOption();
-
                 event.preventDefault();
 
                 break;
             case HOME:
-                console.log('need set focus on first node');
+                this._keyManager.setFirstItemActive();
                 event.preventDefault();
 
                 break;
             case END:
-                console.log('need set focus on last node');
+                this._keyManager.setLastItemActive();
                 event.preventDefault();
 
                 break;
             case PAGE_UP:
-                console.log('need do scroll page and set focus on first in viewport');
-
+                this._keyManager.setPreviousPageItemActive();
                 event.preventDefault();
 
                 break;
             case PAGE_DOWN:
-                console.log('need do scroll page and set focus on last in viewport');
-
+                this._keyManager.setNextPageItemActive();
                 event.preventDefault();
 
                 break;
@@ -276,12 +289,41 @@ export class McTreeSelection<T> extends _McTreeSelectionBase<T>
             .withHorizontalOrientation(null);
     }
 
+    updateScrollSize(): void {
+        if (!this.options.first) { return; }
+
+        this._keyManager.withScrollSize(Math.floor(this._getHeight() / this.options.first._getHeight()));
+    }
+
     setFocusedOption(option: McTreeNodeOption<T>): void {
         this._keyManager.updateActiveItem(option);
 
-        if (this.autoSelect) {
-            this.options.forEach((item) => item.setSelected(false));
-            option.setSelected(true);
+        if (this.withShift && this.multiple) {
+            const previousIndex = this._keyManager.previousActiveItemIndex;
+            const activeIndex = this._keyManager.activeItemIndex;
+
+            if (previousIndex < activeIndex) {
+                this.options.forEach((item, index) => {
+                    if (index >= previousIndex && index <= activeIndex) { item.setSelected(true); }
+                });
+            } else {
+                this.options.forEach((item, index) => {
+                    if (index >= activeIndex && index <= previousIndex) { item.setSelected(true); }
+                });
+            }
+
+            this.withShift = false;
+        } else if (this.withCtrl) {
+            this.withCtrl = false;
+
+            if (!this._canDeselectLast(option)) { return; }
+
+            option.toggle();
+        } else {
+            if (this.autoSelect) {
+                this.options.forEach((item) => item.setSelected(false));
+                option.setSelected(true);
+            }
         }
 
         this._emitNavigationEvent(option);
@@ -294,7 +336,7 @@ export class McTreeSelection<T> extends _McTreeSelectionBase<T>
         if (focusedIndex != null && this._isValidIndex(focusedIndex)) {
             const focusedOption: McTreeNodeOption<T> = this.options.toArray()[focusedIndex];
 
-            if (focusedOption && this._canUnselectLast(focusedOption)) {
+            if (focusedOption && this._canDeselectLast(focusedOption)) {
                 focusedOption.toggle();
 
                 // Emit a change event because the focused option changed its state through user interaction.
@@ -329,6 +371,12 @@ export class McTreeSelection<T> extends _McTreeSelectionBase<T>
             this.options.reset(arrayOfInstances);
             this.options.notifyOnChanges();
         }
+
+        this.updateScrollSize();
+    }
+
+    _getHeight(): number {
+        return this._elementRef.nativeElement.getClientRects()[0].height;
     }
 
     _emitNavigationEvent(option: McTreeNodeOption<T>): void {
@@ -348,9 +396,8 @@ export class McTreeSelection<T> extends _McTreeSelectionBase<T>
         return index >= 0 && index < this.options.length;
     }
 
-    private _canUnselectLast(_option: McTreeNodeOption<T>): boolean {
-        return true;
-        // return !(this.noUnselect && this.selectedOptions.selected.length === 1 && listOption.selected);
+    private _canDeselectLast(option: McTreeNodeOption<T>): boolean {
+        return !(this.noUnselect && this.selectedOptions.selected.length === 1 && option.selected);
     }
 }
 

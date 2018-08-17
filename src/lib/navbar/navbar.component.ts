@@ -1,5 +1,4 @@
-import { fromEvent } from 'rxjs';
-import { Subscription } from 'rxjs/internal/Subscription';
+import { fromEvent, Observable, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
 import {
@@ -10,10 +9,16 @@ import {
     Input,
     OnDestroy,
     OnInit,
-    ViewEncapsulation
+    ViewEncapsulation,
+    ContentChild,
+    TemplateRef,
+    ChangeDetectorRef,
+    ChangeDetectionStrategy,
+    ViewChild
 } from '@angular/core';
-import { FocusMonitor } from '@ptsecurity/cdk/a11y';
-
+import { FocusMonitor, FocusOrigin } from '@ptsecurity/cdk/a11y';
+import { SPACE } from '@ptsecurity/cdk/keycodes';
+import { Platform } from '@ptsecurity/cdk/platform';
 import { CanDisable, mixinDisabled } from '@ptsecurity/mosaic/core';
 
 
@@ -27,6 +32,11 @@ const MC_NAVBAR_TITLE = 'mc-navbar-title';
 const MC_NAVBAR_LOGO = 'mc-navbar-logo';
 
 export type McNavbarContainerPositionType = 'left' | 'right';
+
+export interface IMcNavbarDropdownItem {
+    link?: string;
+    text: string;
+}
 
 @Directive({
     selector: MC_NAVBAR_LOGO,
@@ -61,30 +71,84 @@ export const _McNavbarMixinBase = mixinDisabled(McNavbarItemBase);
 @Component({
     selector: MC_NAVBAR_ITEM,
     template: `
-        <a [attr.tabindex]="disabled ? -1 : tabIndex" class="mc-navbar-item">
-            <ng-content>
-            </ng-content>
+        <a
+            [attr.tabindex]=\"disabled ? -1 : tabIndex\"
+            (click)="handleClickByItem()"
+            (keydown)="handleKeydown($event)"
+            class="mc-navbar-item"
+        >
+            <ng-content></ng-content>
+            <i *ngIf="hasDropdownContent" mc-icon="mc-angle-M_16"></i>
         </a>
+        <ul
+            #dropdownContent
+            *ngIf="hasDropdownContent"
+            [ngClass]="{ 'is-collapsed': isCollapsed }"
+            class="mc-navbar-dropdown"
+        >
+            <li
+                *ngFor="let item of dropdownItems"
+                (click)="handleClickByDropdownItem()"
+                class="mc-navbar-dropdown-item"
+            >
+                <ng-container *ngIf="dropdownItemTmpl">
+                    <ng-container *ngTemplateOutlet="dropdownItemTmpl; context: { $implicit: item }"></ng-container>
+                </ng-container>
+                <a
+                    *ngIf="!dropdownItemTmpl"
+                    [attr.href]="item.link"
+                    [ngClass]="{ 'is-active': isActiveDropdownLink(item.link) }"
+                    class="mc-navbar-dropdown-link"
+                >{{ item.text }}</a>
+            </li>
+        </ul>
     `,
     encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     inputs: ['disabled'],
     host: {
-        '[attr.disabled]': 'disabled || null'
+        '[attr.disabled]': 'disabled || null',
+        '[attr.tabindex]': '-1'
     }
 })
-export class McNavbarItem extends _McNavbarMixinBase implements OnInit, OnDestroy, CanDisable {
+export class McNavbarItem extends _McNavbarMixinBase implements OnInit, AfterViewInit, OnDestroy, CanDisable {
 
     @Input()
     tabIndex: number = 0;
+
+    @Input()
+    dropdownItems: IMcNavbarDropdownItem[] = [];
 
     @Input()
     set collapsedTitle(value: string) {
         this.elementRef.nativeElement.setAttribute('computedTitle', encodeURI(value));
     }
 
+    @ContentChild('dropdownItemTmpl', { read: TemplateRef })
+    dropdownItemTmpl: TemplateRef<IMcNavbarDropdownItem>;
+
+    @ViewChild('dropdownContent', { read: ElementRef })
+    dropdownContent: ElementRef;
+
+    get hasDropdownContent() {
+        return this.dropdownItems.length > 0;
+    }
+
+    isCollapsed: boolean = true;
+
+    private _subscription: Subscription = new Subscription();
+    private _focusMonitor$: Observable<FocusOrigin>;
+    private _lastFocusedElement: HTMLElement;
+
+    private get _dropdownElements(): HTMLElement[] {
+        return this.dropdownContent ? this.dropdownContent.nativeElement.querySelectorAll('li > *') : [];
+    }
+
     constructor(
         public  elementRef: ElementRef,
-        private _focusMonitor: FocusMonitor
+        private _focusMonitor: FocusMonitor,
+        private _platform: Platform,
+        private _cdRef: ChangeDetectorRef
     ) {
         super(elementRef);
     }
@@ -92,11 +156,80 @@ export class McNavbarItem extends _McNavbarMixinBase implements OnInit, OnDestro
     ngOnInit() {
         this.denyClickIfDisabled();
 
-        this._focusMonitor.monitor(this.elementRef.nativeElement, true);
+        this._focusMonitor$ = this._focusMonitor.monitor(this.elementRef.nativeElement, true);
+
+        if (this.hasDropdownContent) {
+            this.listenClickOutside();
+        }
+    }
+
+    ngAfterViewInit() {
+        if (!this.hasDropdownContent) {
+            return;
+        }
+
+        this.startListenFocusDropdownItems();
     }
 
     ngOnDestroy() {
+        this._subscription.unsubscribe();
         this._focusMonitor.stopMonitoring(this.elementRef.nativeElement);
+        this.stopListenFocusDropdownItems();
+    }
+
+    isActiveDropdownLink(link: string): boolean {
+        if (!this._platform.isBrowser) {
+            return false;
+        }
+
+        return window.location.href.indexOf(link) >= 0;
+    }
+
+    handleClickByItem() {
+        this.toggleDropdown();
+    }
+
+    handleKeydown($event: KeyboardEvent) {
+        const isNavbarItem = ($event.target as HTMLElement).classList.contains(MC_NAVBAR_ITEM);
+
+        if (this.hasDropdownContent && $event.keyCode === SPACE && isNavbarItem) {
+            this.toggleDropdown();
+        }
+    }
+
+    handleClickByDropdownItem() {
+        this.forceCloseDropdown();
+    }
+
+    private listenClickOutside() {
+        this._subscription.add(
+            this._focusMonitor$.subscribe((origin) => {
+                if (origin === null) {
+                    this.forceCloseDropdown();
+                }
+            })
+        );
+    }
+
+    private toggleDropdown() {
+        this.isCollapsed = !this.isCollapsed;
+    }
+
+    private forceCloseDropdown() {
+        this.isCollapsed = true;
+        this._cdRef.detectChanges();
+    }
+
+    private startListenFocusDropdownItems() {
+        this._dropdownElements.forEach((el) => {
+            this._focusMonitor.monitor(el, true);
+        });
+    }
+
+    private stopListenFocusDropdownItems() {
+        this._dropdownElements.forEach((el) => {
+            this._focusMonitor.stopMonitoring(el);
+        });
     }
 
     // This method is required due to angular 2 issue https://github.com/angular/angular/issues/11200
@@ -209,6 +342,7 @@ class CachedItemWidth {
 
 @Component({
     selector: MC_NAVBAR,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <nav class="mc-navbar">
             <ng-content select="[${MC_NAVBAR_CONTAINER}],${MC_NAVBAR_CONTAINER}"></ng-content>

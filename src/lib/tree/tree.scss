@@ -2,29 +2,28 @@
 @import 'tree-theme';
 
 
-$mc-node-height: 32px;
+$mc-tree-node-border-height: 2px;
+
+$mc-tree-node-height: 28px;
 
 $mc-tree-node-padding: 16px;
-$mc-tree-leaf-padding: 16px;
 
 
-.mc-tree {
+.mc-tree-selection {
     display: block;
 
-    border: 1px solid bisque;
-}
-
-.mc-tree-nested-node {
-    display: block;
+    border: 1px solid red;
 }
 
 .mc-tree-node {
     display: flex;
     align-items: center;
 
-    height: $mc-node-height;
+    height: $mc-tree-node-height;
 
     word-wrap: break-word;
+
+    border: $mc-tree-node-border-height solid transparent;
 
     & > .mc-icon {
         margin-right: 4px;
@@ -35,11 +34,10 @@ $mc-tree-leaf-padding: 16px;
     &:focus {
         outline: none;
     }
-}
 
-
-.tree-invisible {
-    display: none;
+    &:not([disabled]) {
+        cursor: pointer;
+    }
 }
 
 .mc-icon-rotate_90 {

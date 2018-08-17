@@ -1,7 +1,15 @@
+<style>
+    mc-tree-selection {
+        overflow-y: scroll;
+        height: 164px;
+    }
+</style>
 <h5>multiple selection</h5>
 
+<!--auto-select="true"-->
 <mc-tree-selection
-    auto-select="false"
+    multiple
+    no-unselect="false"
     [dataSource]="dataSource"
     [treeControl]="treeControl"
     (navigationChange)="onNavigationChange($event)"

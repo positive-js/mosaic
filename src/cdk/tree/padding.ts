@@ -20,7 +20,7 @@ export class CdkTreeNodePadding<T> implements OnDestroy {
     /** Subject that emits when the component has been destroyed. */
 
     _level: number;
-    _indent: number = 19;
+    _indent: number;
 
     private _destroyed = new Subject<void>();
 
@@ -56,7 +56,6 @@ export class CdkTreeNodePadding<T> implements OnDestroy {
         private _element: ElementRef,
         @Optional() private _dir: Directionality
     ) {
-        this._setPadding();
 
         if (this._dir) {
             this._dir.change
