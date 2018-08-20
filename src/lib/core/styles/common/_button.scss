@@ -8,17 +8,6 @@
     border: none;
 }
 
-@keyframes mc-progress {
-
-    from {
-        background-position: 0 0;
-    }
-
-    to {
-        background-position: 29px 0;
-    }
-}
-
 @mixin border-top-radius($radius) {
     border-top: {
         right-radius: $radius;

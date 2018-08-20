@@ -1,11 +1,6 @@
 @import '../core/theming/theming';
 @import '../core/styles/typography/typography-utils';
 
-@import '../core/styles/common/animation';
-
-// TODO: Its only for testing colors
-@import '../core/theming/palette';
-
 
 @mixin _mc-button-primary-color($palette) {
     $hover-lighten: 5%;

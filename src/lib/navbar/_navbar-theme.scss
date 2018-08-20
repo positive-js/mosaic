@@ -1,8 +1,6 @@
 @import '../core/theming/theming';
 @import '../core/styles/typography/typography-utils';
 
-@import '../core/styles/common/animation';
-
 @mixin _mc-navbar-theme-color($theme) {
     $palette: map-get($theme, primary);
 
