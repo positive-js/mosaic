@@ -10,26 +10,18 @@
 
 // sizes
 .mc-button_xs {
-    @extend %mc-button-base;
-
     @include mc-button-size($mc-button-padding_xs, $mc-button-line-height_xs, $mc-button-font_xs);
 }
 
 .mc-button_sm {
-    @extend %mc-button-base;
-
     @include mc-button-size($mc-button-padding_sm, $mc-button-line-height_sm, $mc-button-font_sm);
 }
 
 .mc-button_lg {
-    @extend %mc-button-base;
-
     @include mc-button-size($mc-button-padding_lg, $mc-button-line-height_lg, $mc-button-font_lg);
 }
 
 .mc-button_xl {
-    @extend %mc-button-base;
-
     @include mc-button-size($mc-button-padding_xl, $mc-button-line-height_xl, $mc-button-font_xl);
 }
 
@@ -51,6 +43,12 @@
     }
 
     .mc-button-wrapper {
+        display: flex;
+
+        .mc-icon {
+            margin: auto;
+            line-height: 20px;
+        }
 
         .mc-icon_left {
             margin-right: $mc-icon-button-icon-padding;
