@@ -20,6 +20,12 @@
             border-bottom: 1px solid mc-color($second, 60);
         }
 
+        &-content {
+            box-shadow:
+                0 0 0 1px mc-color($second, 300),
+                0 6px 12px 0 rgba(0, 0, 0, 0.5);
+        }
+
         &-footer {
             background-color: mc-color($second, 60);
         }
