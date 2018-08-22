@@ -32,7 +32,7 @@
             }
 
             &.mc-focused {
-                border: 2px solid mc-color($primary, 500);
+                border-color: mc-color($primary, 500);
             }
 
             &.mc-selected {

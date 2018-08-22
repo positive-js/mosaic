@@ -1,11 +1,11 @@
-import {NgZone} from '@angular/core';
-import {ScrollDispatcher, ViewportRuler} from '@ptsecurity/cdk/scrolling';
-import {Subscription} from 'rxjs';
+import { NgZone } from '@angular/core';
+import { ScrollDispatcher, ViewportRuler } from '@ptsecurity/cdk/scrolling';
+import { Subscription } from 'rxjs';
 
-import {IOverlayReference} from '../overlay-reference';
-import {isElementScrolledOutsideView} from '../position/scroll-clip';
+import { IOverlayReference } from '../overlay-reference';
+import { isElementScrolledOutsideView } from '../position/scroll-clip';
 
-import {IScrollStrategy, getMatScrollStrategyAlreadyAttachedError} from './scroll-strategy';
+import { IScrollStrategy, getMatScrollStrategyAlreadyAttachedError } from './scroll-strategy';
 
 
 /**
@@ -23,14 +23,15 @@ export interface IRepositionScrollStrategyConfig {
  * Strategy that will update the element position as the user is scrolling.
  */
 export class RepositionScrollStrategy implements IScrollStrategy {
-    private _scrollSubscription: Subscription|null = null;
+    private _scrollSubscription: Subscription | null = null;
     private _overlayRef: IOverlayReference;
 
     constructor(
         private _scrollDispatcher: ScrollDispatcher,
         private _viewportRuler: ViewportRuler,
         private _ngZone: NgZone,
-        private _config?: IRepositionScrollStrategyConfig) { }
+        private _config?: IRepositionScrollStrategyConfig) {
+    }
 
     /** Attaches this scroll strategy to an overlay. */
     attach(overlayRef: IOverlayReference) {
@@ -52,11 +53,11 @@ export class RepositionScrollStrategy implements IScrollStrategy {
                 // TODO(crisbeto): make `close` on by default once all components can handle it.
                 if (this._config && this._config.autoClose) {
                     const overlayRect = this._overlayRef.overlayElement.getBoundingClientRect();
-                    const {width, height} = this._viewportRuler.getViewportSize();
+                    const { width, height } = this._viewportRuler.getViewportSize();
 
                     // TODO(crisbeto): include all ancestor scroll containers here once
                     // we have a way of exposing the trigger element to the scroll strategy.
-                    const parentRects = [{width, height, bottom: height, right: width, top: 0, left: 0}];
+                    const parentRects = [{ width, height, bottom: height, right: width, top: 0, left: 0 }];
 
                     if (isElementScrolledOutsideView(overlayRect, parentRects)) {
                         this.disable();

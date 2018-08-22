@@ -11,11 +11,7 @@ import { McLink } from './link.component';
         CommonModule,
         A11yModule
     ],
-    declarations: [
-        McLink
-    ],
-    exports: [
-        McLink
-    ]
+    declarations: [McLink],
+    exports: [McLink]
 })
 export class McLinkModule {}

@@ -1,4 +1,4 @@
-import {IOverlayReference} from '../overlay-reference';
+import { IOverlayReference } from '../overlay-reference';
 
 
 /** Strategy for setting the position on an overlay. */

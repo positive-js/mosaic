@@ -1,0 +1,51 @@
+@import '../styles/common/vendor-prefixes';
+@import '../../../cdk/a11y/a11y';
+
+$mc-option-padding: 0 16px;
+
+
+.mc-option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    box-sizing: border-box;
+
+    position: relative;
+
+    max-width: 100%;
+
+    border: 2px solid transparent;
+
+    cursor: pointer;
+
+    outline: none;
+
+    padding: $mc-option-padding;
+
+    -webkit-tap-highlight-color: transparent;
+
+    //.mc-optgroup &:not(.mc-option-multiple) {
+        //padding-left: $mc-menu-side-padding * 2;
+
+        //[dir='rtl'] & {
+            //padding-left: $mc-menu-side-padding;
+            //padding-right: $mc-menu-side-padding * 2;
+        //}
+    //}
+
+    &.mc-disabled {
+        cursor: default;
+    }
+
+    .mc-pseudo-checkbox {
+        margin-right: 8px;
+    }
+}
+
+.mc-option-text {
+    display: inline-block;
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

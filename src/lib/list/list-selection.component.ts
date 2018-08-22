@@ -70,8 +70,6 @@ export class McListOption implements AfterContentInit, OnDestroy, OnInit, IFocus
 
     @Input() value: any;
 
-    private _focusHandlerInProgress: boolean;
-
     @Input()
     get disabled() {
         return this._disabled || (this.listSelection && this.listSelection.disabled);

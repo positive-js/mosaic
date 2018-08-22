@@ -8,8 +8,9 @@ import { McInput, McInputMono } from './input';
 
 
 @NgModule({
-    imports: [ CommonModule, A11yModule, McCommonModule, FormsModule ],
-    exports: [ McInput, McInputMono ],
-    declarations: [ McInput, McInputMono ]
+    imports: [CommonModule, A11yModule, McCommonModule, FormsModule],
+    exports: [McInput, McInputMono],
+    declarations: [McInput, McInputMono]
 })
-export class McInputModule {}
+export class McInputModule {
+}

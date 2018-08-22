@@ -1,22 +1,23 @@
-import {DOCUMENT} from '@angular/common';
-import {ElementRef, Inject, Injectable, Optional} from '@angular/core';
-import {Platform} from '@ptsecurity/cdk/platform';
-import {ViewportRuler} from '@ptsecurity/cdk/scrolling';
+import { DOCUMENT } from '@angular/common';
+import { ElementRef, Inject, Injectable, Optional } from '@angular/core';
+import { Platform } from '@ptsecurity/cdk/platform';
+import { ViewportRuler } from '@ptsecurity/cdk/scrolling';
 
-import {IOriginConnectionPosition, IOverlayConnectionPosition} from './connected-position';
-import {ConnectedPositionStrategy} from './connected-position-strategy';
-import {FlexibleConnectedPositionStrategy} from './flexible-connected-position-strategy';
-import {GlobalPositionStrategy} from './global-position-strategy';
+import { IOriginConnectionPosition, IOverlayConnectionPosition } from './connected-position';
+import { ConnectedPositionStrategy } from './connected-position-strategy';
+import { FlexibleConnectedPositionStrategy } from './flexible-connected-position-strategy';
+import { GlobalPositionStrategy } from './global-position-strategy';
 
 
 /** Builder for overlay position strategy. */
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class OverlayPositionBuilder {
     constructor(
         private _viewportRuler: ViewportRuler,
         @Inject(DOCUMENT) private _document: any,
         // @deletion-target 7.0.0 `_platform` parameter to be made required.
-        @Optional() private _platform?: Platform) { }
+        @Optional() private _platform?: Platform) {
+    }
 
     /**
      * Creates a global position strategy.

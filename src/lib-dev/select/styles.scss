@@ -1,0 +1,13 @@
+@import '~@ptsecurity/mosaic-icons/dist/styles/mc-icons';
+
+@import '../../lib/core/theming/prebuilt/default-theme';
+
+
+.dev-container {
+    width: 300px;
+    height: 140px;
+
+    border: 1px solid red;
+
+    padding: 24px;
+}

@@ -10,6 +10,8 @@
 @import '../../../input/input-theme';
 @import '../../../form-field/form-field-theme';
 @import '../../../modal/modal-theme';
+@import '../../../tag/tag-theme';
+@import '../../option/option-theme';
 
 
 @mixin mosaic-typography($config: null) {
@@ -30,4 +32,6 @@
     @include mc-input-typography($config);
     @include mc-form-field-typography($config);
     @include mc-modal-typography($config);
+    @include mc-option-typography($config);
+    @include mc-tag-typography($config);
 }

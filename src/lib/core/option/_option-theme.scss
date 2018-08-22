@@ -1,0 +1,44 @@
+@import '../theming/palette';
+@import '../theming/theming';
+
+
+@mixin mc-option-theme($theme) {
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+
+    .mc-option {
+        color: mc-color($foreground, text);
+
+        &:hover,
+        &.mc-hovered {
+            background: mc-color($background, 'hover');
+        }
+
+        &.mc-active {
+            border-color: mc-color($primary, 500);
+        }
+
+        &.mc-selected {
+            background-color: mc-color($primary, 100);
+        }
+
+        &.mc-disabled {
+            background-color: transparent;
+
+            color: mc-color($foreground, disabled-text);
+        }
+    }
+}
+
+@mixin mc-option-typography($config) {
+    .mc-option {
+        font: {
+            family: mc-font-family($config, body);
+            size: mc-font-size($config, body);
+        }
+    }
+}

@@ -1,0 +1,7 @@
+@import '../styles/common/vendor-prefixes';
+
+
+.mc-optgroup-label {
+    @include user-select(none);
+    cursor: default;
+}

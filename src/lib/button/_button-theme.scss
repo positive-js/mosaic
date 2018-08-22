@@ -17,8 +17,8 @@
         );
     }
 
-    &:not([disabled]):active,
-    &:not([disabled]).mc-active {
+    &:active,
+    &.mc-active {
         background-image: linear-gradient(to bottom, mc-color($palette, 600), mc-color($palette, 560));
 
         &:hover,
@@ -54,8 +54,8 @@
         );
     }
 
-    &:not([disabled]):active,
-    &:not([disabled]).mc-active {
+    &:active,
+    &.mc-active {
         background-image: linear-gradient(to bottom, mc-color($palette, 200), mc-color($palette, 100));
 
         &:hover,
@@ -93,8 +93,8 @@
         );
     }
 
-    &:not([disabled]):active,
-    &:not([disabled]).mc-active {
+    &:active,
+    &.mc-active {
         background-image: linear-gradient(to bottom, mc-color($secondPalette, 200), mc-color($secondPalette, 100));
 
         &:hover,

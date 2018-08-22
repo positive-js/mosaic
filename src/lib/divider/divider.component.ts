@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
-
-import { toBoolean } from '@ptsecurity/mosaic/core';
+import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 
 
 @Component({
@@ -26,7 +25,7 @@ export class McDivider {
     }
 
     set vertical(value: boolean) {
-        this._vertical = toBoolean(value);
+        this._vertical = coerceBooleanProperty(value);
     }
 
     private _vertical: boolean = false;
@@ -38,7 +37,7 @@ export class McDivider {
     }
 
     set inset(value: boolean) {
-        this._inset = toBoolean(value);
+        this._inset = coerceBooleanProperty(value);
     }
 
     private _inset: boolean = false;

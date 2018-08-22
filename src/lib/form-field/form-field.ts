@@ -12,6 +12,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
+import { CanColor, mixinColor, ThemePalette } from '@ptsecurity/mosaic/core';
 import { EMPTY, merge } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 
@@ -24,10 +25,13 @@ import { McPrefix } from './prefix';
 import { McSuffix } from './suffix';
 
 
+let nextUniqueId = 0;
+
 export class McFormFieldBase {
-    constructor(public _elementRef: ElementRef) {
-    }
+    constructor(public _elementRef: ElementRef) {}
 }
+
+export const _McFormFieldMixinBase = mixinColor(McFormFieldBase, ThemePalette.Primary);
 
 @Component({
     selector: 'mc-form-field',
@@ -57,12 +61,13 @@ export class McFormFieldBase {
         '[class.ng-pending]': '_shouldForward("pending")',
         '(keydown)': 'onKeyDown($event)'
     },
+    inputs: ['color'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class McFormField extends McFormFieldBase
-    implements AfterContentInit, AfterContentChecked, AfterViewInit {
+export class McFormField extends _McFormFieldMixinBase implements
+    AfterContentInit, AfterContentChecked, AfterViewInit, CanColor {
 
     @ContentChild(McFormFieldControl) _control: McFormFieldControl<any>;
     @ContentChildren(McHint) _hint: QueryList<McHint>;
@@ -70,10 +75,10 @@ export class McFormField extends McFormFieldBase
     @ContentChildren(McPrefix) _prefix: QueryList<McPrefix>;
     @ContentChildren(McCleaner) _cleaner: QueryList<McCleaner>;
 
+    // Unique id for the internal form field label.
+    _labelId = `mc-form-field-label-${nextUniqueId++}`;
 
-    constructor(
-        public _elementRef: ElementRef,
-        private _changeDetectorRef: ChangeDetectorRef) {
+    constructor(public _elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) {
         super(_elementRef);
     }
 
@@ -85,12 +90,14 @@ export class McFormField extends McFormFieldBase
         }
 
         // Subscribe to changes in the child control state in order to update the form field UI.
-        this._control.stateChanges.pipe(startWith()).subscribe(() => {
-            this._changeDetectorRef.markForCheck();
-        });
+        this._control.stateChanges.pipe(startWith())
+            .subscribe(() => {
+                this._changeDetectorRef.markForCheck();
+            });
 
         // Run change detection if the value changes.
         const valueChanges = this._control.ngControl && this._control.ngControl.valueChanges || EMPTY;
+
         merge(valueChanges)
             .subscribe(() => this._changeDetectorRef.markForCheck());
     }
@@ -120,9 +127,11 @@ export class McFormField extends McFormFieldBase
         if (e.keyCode === ESCAPE &&
             this._control.focused &&
             this.hasCleaner) {
+
             if (this._control && this._control.ngControl) {
                 this._control.ngControl.reset();
             }
+
             e.preventDefault();
         }
     }
@@ -158,7 +167,7 @@ export class McFormField extends McFormFieldBase
     }
 
     get canShowCleaner() {
-        return  this.hasCleaner &&
+        return this.hasCleaner &&
         this._control && this._control.ngControl
             ? this._control.ngControl.value && !this._control.disabled
             : false;

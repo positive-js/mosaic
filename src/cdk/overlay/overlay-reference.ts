@@ -1,5 +1,5 @@
-import {Direction, Directionality} from '@ptsecurity/cdk/bidi';
-import {Portal} from '@ptsecurity/cdk/portal';
+import { Direction, Directionality } from '@ptsecurity/cdk/bidi';
+import { Portal } from '@ptsecurity/cdk/portal';
 
 
 /**
@@ -10,13 +10,22 @@ import {Portal} from '@ptsecurity/cdk/portal';
 export interface IOverlayReference {
     overlayElement: HTMLElement;
     hostElement: HTMLElement;
+
     attach(portal: Portal<any>): any;
+
     detach(): any;
+
     dispose(): void;
+
     getConfig(): any;
+
     hasAttached(): boolean;
+
     updateSize(config: any): void;
+
     updatePosition(): void;
+
     getDirection(): Direction;
+
     setDirection(dir: Direction | Directionality): void;
 }

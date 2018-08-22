@@ -1,15 +1,18 @@
 import { FormControl, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 import { Subject } from 'rxjs';
+
 import { ErrorStateMatcher } from '../error/error-options';
+
 import { Constructor } from './constructor';
+
 
 /** @docs-private */
 export interface CanUpdateErrorState {
+    updateErrorState();
+
     readonly stateChanges: Subject<void>;
     errorState: boolean;
     errorStateMatcher: ErrorStateMatcher;
-
-    updateErrorState();
 }
 
 /** @docs-private */
@@ -32,7 +35,7 @@ export function mixinErrorState<T extends Constructor<HasErrorState>>(base: T)
 
         /**
          * Stream that emits whenever the state of the input changes such that the wrapping
-         * `MсFormField` needs to run change detection.
+         * `MatFormField` needs to run change detection.
          */
         readonly stateChanges = new Subject<void>();
 

@@ -1,6 +1,6 @@
-import {IOverlayReference} from '../overlay-reference';
+import { IOverlayReference } from '../overlay-reference';
 
-import {IPositionStrategy} from './position-strategy';
+import { IPositionStrategy } from './position-strategy';
 
 
 /**
@@ -28,11 +28,11 @@ export class GlobalPositionStrategy implements IPositionStrategy {
         this._overlayRef = overlayRef;
 
         if (this._width && !config.width) {
-            overlayRef.updateSize({width: this._width});
+            overlayRef.updateSize({ width: this._width });
         }
 
         if (this._height && !config.height) {
-            overlayRef.updateSize({height: this._height});
+            overlayRef.updateSize({ height: this._height });
         }
 
         overlayRef.hostElement.classList.add('cdk-global-overlay-wrapper');
@@ -94,7 +94,7 @@ export class GlobalPositionStrategy implements IPositionStrategy {
      */
     width(value: string = ''): this {
         if (this._overlayRef) {
-            this._overlayRef.updateSize({width: value});
+            this._overlayRef.updateSize({ width: value });
         } else {
             this._width = value;
         }
@@ -110,7 +110,7 @@ export class GlobalPositionStrategy implements IPositionStrategy {
      */
     height(value: string = ''): this {
         if (this._overlayRef) {
-            this._overlayRef.updateSize({height: value});
+            this._overlayRef.updateSize({ height: value });
         } else {
             this._height = value;
         }
@@ -188,5 +188,6 @@ export class GlobalPositionStrategy implements IPositionStrategy {
      * Noop implemented as a part of the IPositionStrategy interface.
      * @docs-private
      */
-    dispose(): void { } //tslint:disable-line
+    dispose(): void {
+    } //tslint:disable-line
 }

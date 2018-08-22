@@ -1,18 +1,21 @@
 @import 'styles/common/animation';
 
 @import '../../cdk/a11y/a11y';
+@import '../../cdk/overlay/overlay';
+
+@import './selection/pseudo-checkbox/pseudo-checkbox-theme';
 
 @import 'styles/typography/all-typography';
 
 
 // Mixin that renders all of the core styles that are not theme-dependent.
 @mixin mc-core($typography-config: null) {
-
     @include mosaic-typography($typography-config);
     @include cdk-a11y();
+    @include cdk-overlay();
 }
 
 // Mixin that renders all of the core styles that depend on the theme.
 @mixin mc-core-theme($theme) {
-
+    @include mc-pseudo-checkbox-theme($theme);
 }

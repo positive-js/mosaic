@@ -1,9 +1,11 @@
-@import 'form-field-base';
+$mc-form-field-border-radius: 3px;
+$mc-form-field-border-size: 1px;
 
 
 .mc-form-field {
-    display: inline-block;
     position: relative;
+
+    display: inline-block;
 }
 
 .mc-form-field__hint {
@@ -49,7 +51,7 @@
 }
 
 .mc-form-field_has-suffix,
-.mc-form-field_has-cleaner{
+.mc-form-field_has-cleaner {
     .mc-input {
         padding-right: 32px;
     }
@@ -63,14 +65,18 @@
 
 mc-cleaner {
     position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    width: 32px;
-    cursor: pointer;
 
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+
+    top: 0;
+    bottom: 0;
+    right: 0;
+
+    width: 32px;
+
+    cursor: pointer;
+
 }

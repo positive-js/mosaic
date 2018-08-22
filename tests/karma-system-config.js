@@ -62,7 +62,9 @@ System.config({
         '@ptsecurity/mosaic/input': 'dist/packages/mosaic/input/index.js',
         '@ptsecurity/mosaic/form-field': 'dist/packages/mosaic/form-field/index.js',
         '@ptsecurity/mosaic/tree': 'dist/packages/mosaic/tree/index.js',
-        '@ptsecurity/mosaic/modal': 'dist/packages/mosaic/modal/index.js'
+        '@ptsecurity/mosaic/modal': 'dist/packages/mosaic/modal/index.js',
+        '@ptsecurity/mosaic/tag': 'dist/packages/mosaic/tag/index.js',
+        '@ptsecurity/mosaic/select': 'dist/packages/mosaic/select/index.js'
     },
     packages: {
         // Thirdparty barrels.

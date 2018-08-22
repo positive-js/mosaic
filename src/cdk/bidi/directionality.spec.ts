@@ -1,20 +1,20 @@
-import {Component} from '@angular/core';
-import {async, fakeAsync, TestBed} from '@angular/core/testing';
-import {By} from '@angular/platform-browser';
+import { Component } from '@angular/core';
+import { async, fakeAsync, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
-import {BidiModule, Directionality, Direction, DIR_DOCUMENT} from './index';
+import { BidiModule, Directionality, Direction, DIR_DOCUMENT } from './index';
 
 
 describe('Directionality', () => {
     let fakeDocument: IFakeDocument;
 
     beforeEach(async(() => {
-        fakeDocument = {body: {}, documentElement: {}};
+        fakeDocument = { body: {}, documentElement: {} };
 
         TestBed.configureTestingModule({
             imports: [BidiModule],
             declarations: [ElementWithDir, InjectsDirectionality],
-            providers: [{provide: DIR_DOCUMENT, useFactory: () => fakeDocument}],
+            providers: [{ provide: DIR_DOCUMENT, useFactory: () => fakeDocument }],
         }).compileComponents();
     }));
 
