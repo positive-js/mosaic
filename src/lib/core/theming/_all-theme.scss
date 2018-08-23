@@ -1,6 +1,7 @@
 // Import all the theming
 @import '../core';
 @import '../styles/badges';
+@import '../visual/panel-theme';
 @import '../../button/button-theme';
 @import '../../list/list-theme';
 @import '../../progress-bar/progress-bar-theme';
@@ -18,6 +19,7 @@
     @include mc-badge-theme($theme);
     @include mc-button-theme($theme);
     @include mc-list-theme($theme);
+    @include mc-panel-theme($theme);
     @include mc-progress-bar-theme($theme);
     @include mc-progress-spinner-theme($theme);
     @include mc-radio-theme($theme);

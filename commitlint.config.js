@@ -12,6 +12,7 @@ module.exports = {
                 'common',
                 'typography',
                 'button',
+                'panel',
                 'list',
                 'checkbox',
                 'radio',
