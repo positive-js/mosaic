@@ -1,8 +1,12 @@
-import { Component, DebugElement, Provider, Type } from '@angular/core';
+import { Component, Provider, Type } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, ComponentFixtureAutoDetect } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
+import {
+    dispatchFakeEvent,
+    dispatchKeyboardEvent
+} from '@ptsecurity/cdk/testing';
 import { McFormField, McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 
@@ -30,6 +34,93 @@ function createComponent<T>(component: Type<T>,
 
     return TestBed.createComponent<T>(component);
 }
+
+
+// tslint:disable no-unnecessary-class
+@Component({
+    template: `
+        <mc-form-field>
+            <input mcInput [(ngModel)]="value" required minlength="4">
+        </mc-form-field>
+    `
+})
+class McInputInvalid {
+    value: string = '';
+}
+
+@Component({
+    template: `
+        <mc-form-field>
+            <input mcInput mcInputMonospace [(ngModel)]="value"/>
+        </mc-form-field>`
+})
+class McInputWithMcInputMonospace {
+    value: string = 'test';
+}
+
+@Component({
+    template: `
+        <mc-form-field>
+            <input mcInput [(ngModel)]="value" [placeholder]="placeholder" [disabled]="disabled"/>
+        </mc-form-field>`
+})
+class McInputForBehaviors {
+    value: string = 'test';
+    placeholder: string;
+    disabled: boolean = false;
+}
+
+@Component({
+    template: `
+        <mc-form-field>
+            <input mcInput/>
+            <mc-hint>Hint</mc-hint>
+        </mc-form-field>`
+})
+class McFormFieldWithHint {
+}
+
+@Component({
+    template: `
+        <mc-form-field>
+            <i mcPrefix mc-icon="mc-search_16"></i>
+            <input mcInput/>
+        </mc-form-field>`
+})
+class McFormFieldWithPrefix {
+}
+
+@Component({
+    template: `
+        <mc-form-field>
+            <input mcInput/>
+            <i mcSuffix mc-icon="mc-search_16"></i>
+        </mc-form-field>`
+})
+class McFormFieldWithSuffix {
+}
+
+@Component({
+    template: `
+        <mc-form-field>
+            <input mcInput [(ngModel)]="value"/>
+            <mc-cleaner></mc-cleaner>
+        </mc-form-field>`
+})
+class McFormFieldWithCleaner {
+    value: string;
+}
+
+@Component({
+    template: `
+        <mc-form-field mcFormFieldWithoutBorders>
+            <input mcInput/>
+        </mc-form-field>`
+})
+class McFormFieldWithoutBorders {
+}
+
+// tslint:enable no-unnecessary-class
 
 
 describe('McInput', () => {
@@ -98,7 +189,7 @@ describe('McInput', () => {
                 .toBe(0);
 
             inputElement.value = 'test';
-            inputElementDebug.triggerEventHandler('input', {target: inputElementDebug.nativeElement});
+            dispatchFakeEvent(inputElement, 'input');
 
             fixture.detectChanges();
 
@@ -130,18 +221,15 @@ describe('McInput', () => {
             const testComponent = fixture.debugElement.componentInstance;
 
             inputElement.value = 'test';
-            inputElementDebug.triggerEventHandler('input', {target: inputElementDebug.nativeElement});
-            inputElementDebug.triggerEventHandler('focus', {target: inputElementDebug.nativeElement});
+            dispatchFakeEvent(inputElement, 'input');
+            dispatchFakeEvent(inputElement, 'focus');
 
             fixture.detectChanges();
 
             expect(formFieldElement.querySelectorAll('.mc-form-field__cleaner').length)
                 .toBe(1);
 
-            mcFormFieldDebug.triggerEventHandler('keydown', {
-                target: formFieldElement,
-                keyCode: ESCAPE
-            });
+            dispatchKeyboardEvent(mcFormFieldDebug.nativeElement, 'keydown', ESCAPE);
 
             fixture.detectChanges();
 
@@ -176,14 +264,14 @@ describe('McInput', () => {
                 .toBe(true);
 
             inputElement.value = 'four';
-            inputElementDebug.triggerEventHandler('input', {target: inputElementDebug.nativeElement});
+            dispatchFakeEvent(inputElement, 'input');
 
             fixture.detectChanges();
 
             expect(formFieldElement.classList.contains('ng-invalid')).toBe(false);
 
             inputElement.value = '';
-            inputElementDebug.triggerEventHandler('input', {target: inputElementDebug.nativeElement});
+            dispatchFakeEvent(inputElement, 'input');
 
             fixture.detectChanges();
 
@@ -247,81 +335,3 @@ describe('McInput', () => {
         });
     });
 });
-
-// tslint:disable no-unnecessary-class
-@Component({
-    template: `
-        <mc-form-field>
-            <input mcInput [(ngModel)]="value" required minlength="4">
-        </mc-form-field>
-    `
-})
-class McInputInvalid {
-    value: string = '';
-}
-
-@Component({
-    template: `<mc-form-field>
-        <input mcInput mcInputMonospace [(ngModel)]="value"/>
-    </mc-form-field>`
-})
-class McInputWithMcInputMonospace {
-    value: string = 'test';
-}
-
-@Component({
-    template: `<mc-form-field>
-        <input mcInput [(ngModel)]="value" [placeholder]="placeholder" [disabled]="disabled"/>
-    </mc-form-field>`
-})
-class McInputForBehaviors {
-    value: string = 'test';
-    placeholder: string;
-    disabled: boolean = false;
-}
-
-@Component({
-    template: `<mc-form-field>
-        <input mcInput/>
-        <mc-hint>Hint</mc-hint>
-    </mc-form-field>`
-})
-class McFormFieldWithHint {
-}
-
-@Component({
-    template: `<mc-form-field>
-        <i mcPrefix mc-icon="mc-search_16"></i>
-        <input mcInput/>
-    </mc-form-field>`
-})
-class McFormFieldWithPrefix {
-}
-
-@Component({
-    template: `<mc-form-field>
-        <input mcInput/>
-        <i mcSuffix mc-icon="mc-search_16"></i>
-    </mc-form-field>`
-})
-class McFormFieldWithSuffix {
-}
-
-@Component({
-    template: `<mc-form-field>
-        <input mcInput [(ngModel)]="value"/>
-        <mc-cleaner></mc-cleaner>
-    </mc-form-field>`
-})
-class McFormFieldWithCleaner {
-    value: string;
-}
-
-@Component({
-    template: `<mc-form-field mcFormFieldWithoutBorders>
-        <input mcInput/>
-    </mc-form-field>`
-})
-class McFormFieldWithoutBorders {
-}
-// tslint:enable no-unnecessary-class
