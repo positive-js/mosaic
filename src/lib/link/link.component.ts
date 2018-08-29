@@ -1,15 +1,17 @@
-import { Directive, ElementRef, OnDestroy } from '@angular/core';
+import { Component, ElementRef, OnDestroy, ViewEncapsulation } from '@angular/core';
 
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
-import { Platform } from '@ptsecurity/cdk/platform';
 
 
-@Directive({
-    selector: `.mc-link`
+@Component({
+    selector: 'a.mc-link',
+    template: `<ng-content></ng-content>`,
+    encapsulation: ViewEncapsulation.None,
+    styleUrls: ['./link.css']
 })
 
 export class McLink implements OnDestroy {
-    constructor(private elementRef: ElementRef, private _platform: Platform, private _focusMonitor: FocusMonitor) {
+    constructor(private elementRef: ElementRef, private _focusMonitor: FocusMonitor) {
 
         this._focusMonitor.monitor(elementRef.nativeElement, true);
     }

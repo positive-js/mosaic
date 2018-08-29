@@ -1,0 +1,14 @@
+$link-cursor-disabled: default;
+$link-line-height-base: 1.3334;
+$link-border-radius: 3px;
+$link-padding: 2px 4px;
+
+%link-base {
+    display: inline-flex;
+    align-items: center;
+    padding: $link-padding;
+    line-height: $link-line-height-base;
+    text-decoration: none !important;
+    cursor: pointer;
+    outline: none;
+}
