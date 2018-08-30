@@ -1,6 +1,7 @@
 export * from './version';
 
 export * from '@ptsecurity/mosaic/button';
+export * from '@ptsecurity/mosaic/link';
 export * from '@ptsecurity/mosaic/checkbox';
 export * from '@ptsecurity/mosaic/core';
 export * from '@ptsecurity/mosaic/divider';
