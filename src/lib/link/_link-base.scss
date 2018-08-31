@@ -1,0 +1,12 @@
+$link-cursor-disabled: default;
+$link-border-radius: 3px;
+$link-padding: 2px 4px;
+
+%link-base {
+    display: inline-flex;
+    align-items: center;
+    padding: $link-padding;
+    text-decoration: none !important;
+    cursor: pointer;
+    outline: none;
+}
