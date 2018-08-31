@@ -1,54 +1,62 @@
-version: 2
+# To validate changes, use an online parser, eg.
+# http://yaml-online-parser.appspot.com/
 
-package_lock_key: &package_lock_key
-  key: mosaic-cache-{{ checksum "package.json" }}
+defaults: &defaults
+    working_directory: ~/mosaic
+    docker:
+      - image: ptsecurity/node-container:0.0.4
 
+package_lock_key: &root_package_lock_key
+  key: mosaic-cache-{{ checksum "package-lock.json" }}
+
+# After checkout, rebase on top of master.
+# Similar to travis behavior, but not quite the same.
+# See https://discuss.circleci.com/t/1662
 post_checkout: &post_checkout
   post: git pull --ff-only origin "refs/pull/${CI_PULL_REQUEST//*pull\//}/merge"
 
-defaults: &defaults
-  working_directory: ~/mosaic
-  docker:
-    - image: ptsecurity/node-container:0.0.4
+attach_options: &attach_options
+    at: .
 
+version: 2
 jobs:
   install:
     <<: *defaults
     steps:
       - checkout: *post_checkout
-      - restore_cache: *package_lock_key
+      - restore_cache: *root_package_lock_key
       - run: npm install --no-save
+      - persist_to_workspace:
+          root: .
+          paths:
+            - ./*
       - save_cache:
-          <<: *package_lock_key
+          <<: *root_package_lock_key
           paths:
             - node_modules
 
   validate_licenses:
     <<: *defaults
     steps:
-      - checkout: *post_checkout
-      - restore_cache: *package_lock_key
+      - attach_workspace: *attach_options
       - run: npm run valid:lic
 
   build_mosaic:
     <<: *defaults
     steps:
-      - checkout: *post_checkout
-      - restore_cache: *package_lock_key
+      - attach_workspace: *attach_options
       - run: npm run build:lib
 
   build_cdk:
       <<: *defaults
       steps:
-        - checkout: *post_checkout
-        - restore_cache: *package_lock_key
+        - attach_workspace: *attach_options
         - run: npm run build:cdk
 
   test_unit:
     <<: *defaults
     steps:
-      - checkout: *post_checkout
-      - restore_cache: *package_lock_key
+      - attach_workspace: *attach_options
       - run:
           command: npm run test:unit
           environment:
@@ -66,8 +74,7 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - "c3:de:eb:9c:82:70:a8:23:f3:4e:92:b8:07:d2:22:df"
-      - checkout: *post_checkout
-      - restore_cache: *package_lock_key
+      - attach_workspace: *attach_options
       - run: npm run build:cdk
       - run: npm run build:lib
       - run: ./scripts/deploy/publish-artifacts.sh
@@ -78,8 +85,7 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - "c3:de:eb:9c:82:70:a8:23:f3:4e:92:b8:07:d2:22:df"
-      - checkout: *post_checkout
-      - restore_cache: *package_lock_key
+      - attach_workspace: *attach_options
       - run: ./scripts/deploy/publish-docs.sh
 
 
