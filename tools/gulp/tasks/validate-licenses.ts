@@ -81,7 +81,7 @@ const enum ReturnCode {
     INVALID_LIC = 2
 }
 
-export function validateLicense(): Promise<number> {
+export default function validateLicense(): Promise<number> {
 
     return new Promise<number>((resolve) => {
         checker.init({start: path.join(__dirname, '../../../')}, (err: Error, json: any) => {
@@ -124,4 +124,7 @@ export function validateLicense(): Promise<number> {
 
 }
 
-task('validate-licenses', [], validateLicense);
+task('validate-licenses', [], async () => {
+
+    await validateLicense();
+});
