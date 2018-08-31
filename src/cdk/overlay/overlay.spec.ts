@@ -7,8 +7,8 @@ import {
     Injectable,
     EventEmitter
 } from '@angular/core';
-import {async, fakeAsync, tick, ComponentFixture, inject, TestBed} from '@angular/core/testing';
-import {Direction, Directionality} from '@ptsecurity/cdk/bidi';
+import { async, fakeAsync, tick, ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { Direction, Directionality } from '@ptsecurity/cdk/bidi';
 import {
   ComponentPortal,
   PortalModule,
@@ -322,7 +322,7 @@ describe('Overlay', () => {
   });
 
   it('should keep the direction in sync with the passed in Directionality', () => {
-    const customDirectionality = {value: 'rtl', change: new EventEmitter()};
+    const customDirectionality = {value: 'rtl', change: new EventEmitter<Direction>()};
     const overlayRef = overlay.create({direction: customDirectionality as Directionality});
 
     expect(overlayRef.getDirection()).toBe('rtl');

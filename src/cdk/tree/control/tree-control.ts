@@ -15,18 +15,6 @@ export interface ITreeControl<T> {
     /** The expansion model */
     expansionModel: SelectionModel<T>;
 
-    /** Get depth of a given data node, return the level number. This is for flat tree node. */
-    getLevel(dataNode: T): number;
-
-    /**
-     * Whether the data node is expandable. Returns true if expandable.
-     * This is for flat tree node.
-     */
-    isExpandable(dataNode: T): boolean;
-
-    /** Gets a stream that emits whenever the given data node's children change. */
-    getChildren(dataNode: T): Observable<T[]>;
-
     /** Whether the data node is expanded or collapsed. Return true if it's expanded. */
     isExpanded(dataNode: T): boolean;
 
@@ -56,4 +44,16 @@ export interface ITreeControl<T> {
 
     /** Collapse a data node and all its descendants */
     collapseDescendants(dataNode: T): void;
+
+    /** Get depth of a given data node, return the level number. This is for flat tree node. */
+    readonly getLevel: (dataNode: T) => number;
+
+    /**
+     * Whether the data node is expandable. Returns true if expandable.
+     * This is for flat tree node.
+     */
+    readonly isExpandable: (dataNode: T) => boolean;
+
+    /** Gets a stream that emits whenever the given data node's children change. */
+    readonly getChildren: (dataNode: T) => Observable<T[]>;
 }

@@ -55,7 +55,7 @@ export class CdkTreeNode<T> implements IFocusableOption, OnDestroy {
      * The most recently created `CdkTreeNode`. We save it in static variable so we can retrieve it
      * in `CdkTree` and set the data to it.
      */
-    static mostRecentTreeNode: CdkTreeNode<{}> | null = null;
+    static mostRecentTreeNode: CdkTreeNode<any> | null = null;
 
     /**
      * The role of the node should be 'group' if it's an internal node,
@@ -198,7 +198,10 @@ export class CdkTree<T> implements AfterContentChecked, ICollectionViewer, OnDes
 
     private _dataSource: DataSource<T> | Observable<T[]> | T[];
 
-    constructor(private _differs: IterableDiffers, private _changeDetectorRef: ChangeDetectorRef) {}
+    constructor(
+        private _differs: IterableDiffers,
+        private _changeDetectorRef: ChangeDetectorRef
+    ) {}
 
     ngOnInit() {
         this._dataDiffer = this._differs.find([]).create(this.trackBy);
@@ -236,9 +239,6 @@ export class CdkTree<T> implements AfterContentChecked, ICollectionViewer, OnDes
         }
     }
 
-    // TODO(tinayuangao): Work on keyboard traversal and actions, make sure it's working for RTL
-    // and nested trees.
-
     /** Check for changes made in the data and render each change (node added/removed/moved). */
     renderNodeChanges(
         data: T[],
@@ -250,20 +250,19 @@ export class CdkTree<T> implements AfterContentChecked, ICollectionViewer, OnDes
 
         if (!changes) { return; }
 
-        changes.forEachOperation(
-        (item: IterableChangeRecord<T>, adjustedPreviousIndex: number, currentIndex: number) => {
-                if (item.previousIndex == null) {
-                    this.insertNode(data[currentIndex], currentIndex, viewContainer, parentData);
-                } else if (currentIndex == null) {
-                    viewContainer.remove(adjustedPreviousIndex);
-
-                    this._levels.delete(item.item);
-                } else {
-                    const view = viewContainer.get(adjustedPreviousIndex);
-                    viewContainer.move(view!, currentIndex);
-                }
+        changes.forEachOperation((item: IterableChangeRecord<T>,
+                                  adjustedPreviousIndex: number | null,
+                                  currentIndex: number | null) => {
+            if (item.previousIndex == null) {
+                this.insertNode(data[currentIndex!], currentIndex!, viewContainer, parentData);
+            } else if (currentIndex == null) {
+                viewContainer.remove(adjustedPreviousIndex!);
+                this._levels.delete(item.item);
+            } else {
+                const view = viewContainer.get(adjustedPreviousIndex!);
+                viewContainer.move(view!, currentIndex);
             }
-        );
+        });
 
         this._changeDetectorRef.detectChanges();
     }

@@ -53,7 +53,7 @@ export class CdkTreeNodePadding<T> implements OnDestroy {
         protected _treeNode: CdkTreeNode<T>,
         protected _tree: CdkTree<T>,
         private _renderer: Renderer2,
-        private _element: ElementRef,
+        private _element: ElementRef<HTMLElement>,
         @Optional() private _dir: Directionality
     ) {
 

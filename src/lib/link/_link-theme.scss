@@ -23,107 +23,107 @@
 
     .mc-link {
         color: mc-color($link, 500);
-    }
-
-    &.mc-visited,
-    &:visited {
-        color: mc-color($link, 500);
-    }
-
-    &.mc-active,
-    &.mc-hovered,
-    &:active,
-    &:hover {
-        color: mc-color($link, 700);
-    }
-
-    &:hover.cdk-keyboard-focused,
-    &.mc-hovered.cdk-keyboard-focused,
-    &:hover.mc-focused {
-        outline: none;
-        box-shadow: 0 0 0 2px mc-color($link, 500);
-        color: mc-color($link, 700);
-    }
-
-    &.mc-focused,
-    &.cdk-keyboard-focused {
-        color: mc-color($link, 500);
-        border-color: mc-color($link, 500);
-        box-shadow: 0 0 0 2px mc-color($link, 500);
-    }
-
-    &.mc-disabled,
-    &[disabled] {
-        color: $link-disabled !important;
-        box-shadow: none;
-
-        &.mc-focused,
-        &:focus {
-            border-color: $link-disabled;
-            box-shadow: none;
-        }
-    }
-
-    &.mc-link_underlined {
-
-        & > .mc-link__text {
-            @include _mc-link-dashes_mixin(mc-color($link, 500), 100%, 0.32);
-        }
 
         &.mc-visited,
         &:visited {
+            color: mc-color($link, 500);
+        }
+
+        &.mc-active,
+        &.mc-hovered,
+        &:active,
+        &:hover {
+            color: mc-color($link, 700);
+        }
+
+        &:hover.cdk-keyboard-focused,
+        &.mc-hovered.cdk-keyboard-focused,
+        &:hover.mc-focused {
+            outline: none;
+            box-shadow: 0 0 0 2px mc-color($link, 500);
+            color: mc-color($link, 700);
+        }
+
+        &.mc-focused,
+        &.cdk-keyboard-focused {
+            color: mc-color($link, 500);
+            border-color: mc-color($link, 500);
+            box-shadow: 0 0 0 2px mc-color($link, 500);
+        }
+
+        &.mc-disabled,
+        &[disabled] {
+            color: $link-disabled !important;
+            box-shadow: none;
+
+            &.mc-focused,
+            &:focus {
+                border-color: $link-disabled;
+                box-shadow: none;
+            }
+        }
+
+        &.mc-link_underlined {
+
             & > .mc-link__text {
                 @include _mc-link-dashes_mixin(mc-color($link, 500), 100%, 0.32);
             }
-        }
 
-        &.mc-active,
-        &.mc-hovered,
-        &.mc-focused,
-        &:active,
-        &:hover,
-        &:focus {
-            & > .mc-link__text {
-                @include _mc-link-dashes_mixin(mc-color($link, 700), 100%, 0.32);
+            &.mc-visited,
+            &:visited {
+                & > .mc-link__text {
+                    @include _mc-link-dashes_mixin(mc-color($link, 500), 100%, 0.32);
+                }
+            }
+
+            &.mc-active,
+            &.mc-hovered,
+            &.mc-focused,
+            &:active,
+            &:hover,
+            &:focus {
+                & > .mc-link__text {
+                    @include _mc-link-dashes_mixin(mc-color($link, 700), 100%, 0.32);
+                }
+            }
+
+            &.mc-disabled,
+            &[disabled] {
+                & > .mc-link__text {
+                    @include _mc-link-dashes_mixin($link-disabled, 100%, 0.32*0.3);
+                }
             }
         }
 
-        &.mc-disabled,
-        &[disabled] {
-            & > .mc-link__text {
-                @include _mc-link-dashes_mixin($link-disabled, 100%, 0.32*0.3);
-            }
-        }
-    }
+        &.mc-link_dashed {
 
-    &.mc-link_dashed {
-
-        & > .mc-link__text {
-            @include _mc-link-dashes_mixin(mc-color($link, 500));
-        }
-
-        &.mc-visited,
-        &:visited {
             & > .mc-link__text {
                 @include _mc-link-dashes_mixin(mc-color($link, 500));
             }
-        }
 
-        &.mc-active,
-        &.mc-hovered,
-        &.mc-focused,
-        &:active,
-        &:hover,
-        &:focus {
-            & > .mc-link__text {
-                @include _mc-link-dashes_mixin(mc-color($link, 700));
+            &.mc-visited,
+            &:visited {
+                & > .mc-link__text {
+                    @include _mc-link-dashes_mixin(mc-color($link, 500));
+                }
             }
-        }
 
-        &.mc-disabled,
-        &[disabled] {
-            & > .mc-link__text {
-                @include _mc-link-dashes_mixin($link-disabled, 66%, 0.32*0.3);
+            &.mc-active,
+            &.mc-hovered,
+            &.mc-focused,
+            &:active,
+            &:hover,
+            &:focus {
+                & > .mc-link__text {
+                    @include _mc-link-dashes_mixin(mc-color($link, 700));
+                }
+            }
+
+            &.mc-disabled,
+            &[disabled] {
+                & > .mc-link__text {
+                    @include _mc-link-dashes_mixin($link-disabled, 66%, 0.32*0.3);
+                }
             }
         }
     }

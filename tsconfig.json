@@ -7,8 +7,9 @@
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "strictNullChecks": true,
+        "strictFunctionTypes": true,
         "skipLibCheck": true,
-        "target": "es5",
+        "target": "es2015",
         "lib": [
             "es5",
             "es2015",
