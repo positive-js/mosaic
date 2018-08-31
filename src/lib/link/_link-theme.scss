@@ -3,7 +3,7 @@
 @import '../core/styles/typography/typography-utils';
 
 
-@mixin mc-link-dashes_mixin($color, $percentage: 66%, $opacity: 0.5) {
+@mixin _mc-link-dashes_mixin($color, $percentage: 66%, $opacity: 0.5) {
     background: linear-gradient(90deg, rgba($color, $opacity) $percentage, transparent 0) repeat-x;
     background-size: 5px 1px;
     // 1.29em это меньше line-height что бы было видно подчеркивание
@@ -67,13 +67,13 @@
     &.mc-link_underlined {
 
         & > .mc-link__text {
-            @include mc-link-dashes_mixin(mc-color($link, 500), 100%, 0.32);
+            @include _mc-link-dashes_mixin(mc-color($link, 500), 100%, 0.32);
         }
 
         &.mc-visited,
         &:visited {
             & > .mc-link__text {
-                @include mc-link-dashes_mixin(mc-color($link, 500), 100%, 0.32);
+                @include _mc-link-dashes_mixin(mc-color($link, 500), 100%, 0.32);
             }
         }
 
@@ -84,14 +84,14 @@
         &:hover,
         &:focus {
             & > .mc-link__text {
-                @include mc-link-dashes_mixin(mc-color($link, 700), 100%, 0.32);
+                @include _mc-link-dashes_mixin(mc-color($link, 700), 100%, 0.32);
             }
         }
 
         &.mc-disabled,
         &[disabled] {
             & > .mc-link__text {
-                @include mc-link-dashes_mixin($link-disabled, 100%, 0.32*0.3);
+                @include _mc-link-dashes_mixin($link-disabled, 100%, 0.32*0.3);
             }
         }
     }
@@ -99,13 +99,13 @@
     &.mc-link_dashed {
 
         & > .mc-link__text {
-            @include mc-link-dashes_mixin(mc-color($link, 500));
+            @include _mc-link-dashes_mixin(mc-color($link, 500));
         }
 
         &.mc-visited,
         &:visited {
             & > .mc-link__text {
-                @include mc-link-dashes_mixin(mc-color($link, 500));
+                @include _mc-link-dashes_mixin(mc-color($link, 500));
             }
         }
 
@@ -116,14 +116,14 @@
         &:hover,
         &:focus {
             & > .mc-link__text {
-                @include mc-link-dashes_mixin(mc-color($link, 700));
+                @include _mc-link-dashes_mixin(mc-color($link, 700));
             }
         }
 
         &.mc-disabled,
         &[disabled] {
             & > .mc-link__text {
-                @include mc-link-dashes_mixin($link-disabled, 66%, 0.32*0.3);
+                @include _mc-link-dashes_mixin($link-disabled, 66%, 0.32*0.3);
             }
         }
     }
