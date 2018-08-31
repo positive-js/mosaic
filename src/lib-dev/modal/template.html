@@ -1,16 +1,3 @@
-<p class="mc-headline">As component (not use in prod)</p>
-
-<button mc-button (click)="showModal()">Show Modal</button>
-<mc-modal [(mcVisible)]="isVisible"
-          mcTitle="The first Modal"
-          (mcOnCancel)="handleCancel()" (mcOnOk)="handleOk()"
-          mcCancelText="Cancel"
-          mcOkText="Accept">
-    <p>Content one</p>
-    <p>Content two</p>
-    <p>Content three</p>
-</mc-modal>
-
 <p class="mc-headline">Confirm</p>
 
 <button mc-button (click)="showConfirm()" style="margin-right: 18px;">Confirm</button>

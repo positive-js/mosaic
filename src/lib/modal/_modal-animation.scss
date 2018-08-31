@@ -1,7 +1,7 @@
 @import '../core/styles/functions/timing';
 
 
-$animation-duration-base: 0.2s;
+$animation-duration-base: 0.3s;
 
 @mixin _motion-common($duration: $animation-duration-base) {
     animation-duration: $duration;
@@ -106,7 +106,7 @@ $animation-duration-base: 0.2s;
 
     100% {
         opacity: 0;
-        transform: translate(0, 0);
+        transform: translate(0, -30%);
     }
 }
 

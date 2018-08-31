@@ -116,20 +116,6 @@ export class ModalDemoComponent {
     destroyTplModal() {
         this.tplModal.destroy();
     }
-
-    showModal() {
-        this.isVisible = true;
-    }
-
-    handleOk() {
-        console.log('Button ok clicked!');
-        this.isVisible = false;
-    }
-
-    handleCancel() {
-        console.log('Button cancel clicked!');
-        this.isVisible = false;
-    }
 }
 
 
