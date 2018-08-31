@@ -150,6 +150,7 @@
         "server-dev:tree": "npm run server-dev -- --env.component tree",
         "server-dev:navbar": "npm run server-dev -- --env.component navbar",
         "server-dev:layout": "npm run server-dev -- --env.component layout",
+        "server-dev:link": "npm run server-dev -- --env.component link",
         "server-dev:modal": "npm run server-dev -- --env.component modal"
     }
 }
