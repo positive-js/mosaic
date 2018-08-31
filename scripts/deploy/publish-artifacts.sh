@@ -86,7 +86,11 @@ publishPackage() {
     git config user.name "${commitAuthorName}"
     git config user.email "${commitAuthorEmail}"
 
+    echo "Publish by user: ${commitAuthorName}"
     echo "Git configuration has been updated to match the last commit author. Publishing now.."
+
+    echo "Commit message: ${buildCommitMessage}"
+    echo "Build Tag: ${buildTagName}"
 
     git add -A
     git commit --allow-empty -m "${buildCommitMessage}"
