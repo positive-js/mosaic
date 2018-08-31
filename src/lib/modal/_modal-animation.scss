@@ -59,11 +59,11 @@ $animation-duration-base: 0.3s;
     .#{className}-enter,
     .#{className}-appear {
         opacity: 0;
-        animation-timing-function: linear;
+        animation-timing-function: ease-out;
     }
 
     .#{className}-leave {
-        animation-timing-function: linear;
+        animation-timing-function: ease-out;
     }
 }
 
