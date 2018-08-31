@@ -2,6 +2,7 @@
 @import '../core';
 @import '../styles/badges';
 @import '../visual/panel-theme';
+@import '../../link/link-theme';
 @import '../../button/button-theme';
 @import '../../list/list-theme';
 @import '../../progress-bar/progress-bar-theme';
@@ -16,6 +17,7 @@
 
 @mixin mosaic-theme($theme) {
 
+    @include mc-link-theme($theme);
     @include mc-badge-theme($theme);
     @include mc-button-theme($theme);
     @include mc-list-theme($theme);
