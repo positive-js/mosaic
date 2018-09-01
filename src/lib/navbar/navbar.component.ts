@@ -138,7 +138,6 @@ export class McNavbarItem extends _McNavbarMixinBase implements OnInit, AfterVie
 
     private _subscription: Subscription = new Subscription();
     private _focusMonitor$: Observable<FocusOrigin>;
-    private _lastFocusedElement: HTMLElement;
 
     private get _dropdownElements(): HTMLElement[] {
         return this.dropdownContent ? this.dropdownContent.nativeElement.querySelectorAll('li > *') : [];
@@ -192,6 +191,7 @@ export class McNavbarItem extends _McNavbarMixinBase implements OnInit, AfterVie
     handleKeydown($event: KeyboardEvent) {
         const isNavbarItem = ($event.target as HTMLElement).classList.contains(MC_NAVBAR_ITEM);
 
+        // tslint:disable-next-line
         if (this.hasDropdownContent && $event.keyCode === SPACE && isNavbarItem) {
             this.toggleDropdown();
         }

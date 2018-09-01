@@ -10,9 +10,12 @@
         "import-blacklist": [true],
 
         "no-implicit-dependencies": false,
+        "no-single-line-block-comment": false,
 
-        "no-stateless-class": false,
-        "no-single-line-block-comment": false
+        "prefer-readonly": false,
 
+        // need only for this project
+        "no-non-null-assertion": false,
+        "strict-type-predicates": false
     }
 }
