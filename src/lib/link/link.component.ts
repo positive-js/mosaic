@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, OnDestroy, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 
@@ -6,6 +6,7 @@ import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 @Component({
     selector: 'a.mc-link',
     template: `<ng-content></ng-content>`,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['./link.css'],
     inputs: ['disabled', 'tabindex'],
@@ -16,6 +17,9 @@ import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 })
 
 export class McLink implements OnDestroy {
+    disabled: boolean;
+    tabindex: number;
+
     constructor(private elementRef: ElementRef, private _focusMonitor: FocusMonitor) {
 
         this._focusMonitor.monitor(elementRef.nativeElement, true);
