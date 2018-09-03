@@ -36,7 +36,7 @@ export class ModalBuilderForService {
             .pipe(filter((event: KeyboardEvent) => {
                 return event.keyCode === ESCAPE && options.mcCloseByESC;
             }))
-            .subscribe(() => this.destroyModal());
+            .subscribe(() => this.modalRef.instance.close());
     }
 
     getInstance(): McModalComponent {
