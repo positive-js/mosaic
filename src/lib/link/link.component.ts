@@ -7,7 +7,12 @@ import { FocusMonitor } from '@ptsecurity/cdk/a11y';
     selector: 'a.mc-link',
     template: `<ng-content></ng-content>`,
     encapsulation: ViewEncapsulation.None,
-    styleUrls: ['./link.css']
+    styleUrls: ['./link.css'],
+    inputs: ['disabled', 'tabindex'],
+    host: {
+        '[attr.disabled]': 'disabled || null',
+        '[attr.tabindex]': 'disabled ? -1 : tabindex ? tabindex : 0'
+    }
 })
 
 export class McLink implements OnDestroy {
