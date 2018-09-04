@@ -1,0 +1,127 @@
+<!-- Compatible: the <ng-content> can appear only once -->
+<ng-template #tplOriginContent>
+    <ng-content></ng-content>
+</ng-template>
+
+<div>
+    <div *ngIf="mcMask"
+         class="mc-modal-mask"
+         [ngClass]="maskAnimationClassMap"
+         [class.mc-modal-mask-hidden]="hidden"
+         [ngStyle]="mcMaskStyle"
+         [style.zIndex]="mcZIndex"
+    ></div>
+    <div
+        (click)="onClickMask($event)"
+        class="mc-modal-wrap {{ mcWrapClassName }}"
+        [style.zIndex]="mcZIndex"
+        [style.display]="hidden ? 'none' : ''"
+        tabindex="-1"
+        role="dialog"
+    >
+        <div #modalContainer
+             class="mc-modal {{ mcClassName }}"
+             [ngClass]="modalAnimationClassMap"
+             [ngStyle]="mcStyle"
+             [style.width]="mcWidth | toCssUnit"
+             [style.transform-origin]="transformOrigin"
+             role="document"
+        >
+            <div class="mc-modal-content">
+                <button *ngIf="mcClosable" (click)="onClickCloseBtn()" class="mc-modal-close" aria-label="Close">
+                  <span class="mc-modal-close-x">
+                      <i mc-icon="mc-close-L_16" class="mc-closer__icon"></i>
+                  </span>
+                </button>
+                <ng-container [ngSwitch]="true">
+                    <ng-container *ngSwitchCase="isModalType('default')"
+                                  [ngTemplateOutlet]="tplContentDefault"></ng-container>
+                    <ng-container *ngSwitchCase="isModalType('confirm')"
+                                  [ngTemplateOutlet]="tplContentConfirm"></ng-container>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- [Predefined] Default Modal Content -->
+<ng-template #tplContentDefault>
+    <div *ngIf="mcTitle" class="mc-modal-header">
+        <div class="mc-modal-title">
+            <ng-container [ngSwitch]="true">
+                <ng-container *ngSwitchCase="isTemplateRef(mcTitle)" [ngTemplateOutlet]="mcTitle"></ng-container>
+                <ng-container *ngSwitchCase="isNonEmptyString(mcTitle)">
+                    <div [innerHTML]="mcTitle"></div>
+                </ng-container>
+            </ng-container>
+        </div>
+    </div>
+    <div class="mc-modal-body" [ngStyle]="mcBodyStyle">
+        <ng-container #bodyContainer>
+            <ng-container *ngIf="!isComponent(mcContent)" [ngSwitch]="true">
+                <ng-container *ngSwitchCase="isTemplateRef(mcContent)" [ngTemplateOutlet]="mcContent"></ng-container>
+                <ng-container *ngSwitchCase="isNonEmptyString(mcContent)">
+                    <div [innerHTML]="mcContent"></div>
+                </ng-container>
+                <ng-container *ngSwitchDefault [ngTemplateOutlet]="tplOriginContent"></ng-container>
+            </ng-container>
+        </ng-container>
+    </div>
+    <div *ngIf="mcFooter !== null" class="mc-modal-footer">
+        <ng-container [ngSwitch]="true">
+            <ng-container *ngSwitchCase="isTemplateRef(mcFooter)" [ngTemplateOutlet]="mcFooter"></ng-container>
+            <ng-container *ngSwitchCase="isNonEmptyString(mcFooter)">
+                <div [innerHTML]="mcFooter"></div>
+            </ng-container>
+            <ng-container *ngSwitchCase="isModalButtons(mcFooter)">
+                <button *ngFor="let button of mcFooter"
+                        mc-button
+                        [hidden]="!getButtonCallableProp(button, 'show')"
+                        [disabled]="getButtonCallableProp(button, 'disabled')"
+                        [color]="button.type"
+                >{{ button.label }}
+                </button>
+            </ng-container>
+            <ng-container *ngSwitchDefault>
+                <button *ngIf="mcOkText!==null" mc-button color="primary" (click)="onClickOkCancel('ok')">
+                    {{ okText }}
+                </button>
+                <button *ngIf="mcCancelText!==null" mc-button (click)="onClickOkCancel('cancel')">
+                    {{ cancelText }}
+                </button>
+            </ng-container>
+        </ng-container>
+    </div>
+</ng-template>
+<!-- /[Predefined] Default Modal Content -->
+
+<!-- [Predefined] Confirm Modal Content -->
+<ng-template #tplContentConfirm>
+    <div class="mc-modal-body" [ngStyle]="mcBodyStyle">
+        <div class="mc-confirm-body-wrapper">
+            <div class="mc-confirm-body">
+                <div class="mc-confirm-content">
+                    <ng-container #bodyContainer>
+                        <ng-container *ngIf="!isComponent(mcContent)" [ngSwitch]="true">
+                            <ng-container *ngSwitchCase="isTemplateRef(mcContent)"
+                                          [ngTemplateOutlet]="mcContent"></ng-container>
+                            <ng-container *ngSwitchCase="isNonEmptyString(mcContent)">
+                                <div [innerHTML]="mcContent"></div>
+                            </ng-container>
+                            <ng-container *ngSwitchDefault [ngTemplateOutlet]="tplOriginContent"></ng-container>
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </div>
+        </div> <!-- /.mc-confirm-body-wrapper -->
+    </div>
+    <div class="mc-confirm-btns">
+        <button mc-button [color]="mcOkType" #autoFocusButtonOk *ngIf="mcOkText !== ''" (click)="onClickOkCancel('ok')">
+            {{ okText }}
+        </button>
+        <button mc-button color="second" *ngIf="mcCancelText!==''" (click)="onClickOkCancel('cancel')">
+            {{ cancelText }}
+        </button>
+    </div>
+</ng-template>
+<!-- /[Predefined] Confirm Modal Content -->
