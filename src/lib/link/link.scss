@@ -35,7 +35,6 @@
         border-radius: $link-border-radius;
     }
 
-    &.mc-disabled,
     &[disabled] {
         pointer-events: none;
         cursor: $link-cursor-disabled;

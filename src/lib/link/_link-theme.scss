@@ -51,7 +51,6 @@
             box-shadow: 0 0 0 2px mc-color($link, 500);
         }
 
-        &.mc-disabled,
         &[disabled] {
             color: $link-disabled !important;
             box-shadow: none;
@@ -87,7 +86,6 @@
                 }
             }
 
-            &.mc-disabled,
             &[disabled] {
                 & > .mc-link__text {
                     @include _mc-link-dashes_mixin($link-disabled, 100%, 0.32*0.3);
@@ -119,7 +117,6 @@
                 }
             }
 
-            &.mc-disabled,
             &[disabled] {
                 & > .mc-link__text {
                     @include _mc-link-dashes_mixin($link-disabled, 66%, 0.32*0.3);
