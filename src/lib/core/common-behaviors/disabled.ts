@@ -1,4 +1,4 @@
-import { toBoolean } from '../utils/index';
+import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 
 import { Constructor } from './constructor';
 
@@ -7,8 +7,11 @@ export interface CanDisable {
     disabled: boolean;
 }
 
+/** @docs-private */
+export type CanDisableCtor = Constructor<CanDisable>;
+
 // Mixin to augment a directive with a `disabled` property.
-export function mixinDisabled<T extends Constructor<{}>>(base: T): Constructor<CanDisable> & T {
+export function mixinDisabled<T extends Constructor<{}>>(base: T): CanDisableCtor & T {
     return class extends base {
         private _disabled: boolean = false;
 
@@ -17,7 +20,7 @@ export function mixinDisabled<T extends Constructor<{}>>(base: T): Constructor<C
         }
 
         set disabled(value: any) {
-            this._disabled = toBoolean(value);
+            this._disabled = coerceBooleanProperty(value);
         }
 
         constructor(...args: any[]) {
