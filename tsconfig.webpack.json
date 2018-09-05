@@ -41,6 +41,7 @@
         "dist",
         "wallabyTest.ts",
         "src/**/*.spec.ts",
+        "src/**/*._spec.ts",
         "src/**/*.e2e.ts",
         "src/mosaic-examples/**/*.*"
     ],
