@@ -3,6 +3,7 @@
 @import '../../../button/button-theme';
 @import '../../../link/link-theme';
 @import '../../../list/list-theme';
+@import '../../../tabs/tabs-theme';
 @import '../../../tree/tree-theme';
 @import '../../../radio/radio-theme';
 @import '../../../checkbox/checkbox-theme';
@@ -25,6 +26,7 @@
     @include mc-list-typography($config);
     @include mc-radio-typography($config);
     @include mc-checkbox-typography($config);
+    @include mc-tabs-typography($config);
     @include mc-tree-typography($config);
     @include mc-navbar-typography($config);
     @include mc-input-typography($config);

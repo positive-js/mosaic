@@ -1,0 +1,23 @@
+%mc-tabs-base {
+    display: block;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    text-align: center;
+    white-space: nowrap;
+
+    &::-moz-focus-inner {
+        border: 0;
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    &[disabled] {
+        cursor: default;
+    }
+
+    .mc-tab {
+        display: inline-block;
+    }
+}

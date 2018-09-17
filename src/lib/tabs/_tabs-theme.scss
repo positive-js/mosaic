@@ -1,0 +1,72 @@
+$mc-tab-horizontal-padding: 16px;
+$mc-tab-vertival-padding: 12px;
+
+@mixin mc-tabs-theme($theme) {
+    $primary: map-get($theme, primary);
+
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    .mc-tab {
+        padding: $mc-tab-vertival-padding $mc-tab-horizontal-padding;
+        border-top: 1px solid transparent;
+        border-bottom: 1px solid #d9d9d9;
+
+        outline: none;
+
+        color: mc-color($foreground, text);
+
+        &:hover,
+        &.mc-hovered {
+            background: mc-color($background, 'hover');
+        }
+
+        &.mc-selected {
+            padding-right: $mc-tab-horizontal-padding - 1px;
+            padding-left: $mc-tab-horizontal-padding - 1px;
+            border: 1px solid #d9d9d9;
+            border-bottom-color: transparent;
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+
+            &:focus,
+            &.mc-focused {
+                &:before {
+                    right: -3px;
+                    left: -3px;
+                }
+            }
+        }
+
+        &:focus,
+        &.mc-focused {
+            position: relative;
+
+            &:before {
+                display: block;
+                position: absolute;
+                top: -2px;
+                right: -2px;
+                bottom: -1px;
+                left: -2px;
+                border: 2px solid mc-color($primary, 500);
+                border-bottom: none;
+                border-top-left-radius: 3px;
+                border-top-right-radius: 3px;
+                content: "";
+            }
+        }
+
+        &[disabled] {
+            color: mc-color($foreground, disabled-text);
+            background-color: transparent;
+        }
+    }
+}
+
+@mixin mc-tabs-typography($config) {
+    .mc-tab {
+        font-family: mc-font-family($config);
+        font-size: mc-font-size($config, subheading);
+    }
+}

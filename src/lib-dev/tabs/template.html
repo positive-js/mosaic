@@ -1,0 +1,22 @@
+<div>
+    <mc-tabs-group (selectionChange)="onSelectionChanged($event)">
+        <mc-tab>Вкладка 1</mc-tab>
+        <mc-tab>Вкладка 2</mc-tab>
+        <mc-tab>Вкладка 3</mc-tab>
+        <mc-tab>Вкладка 4</mc-tab>
+    </mc-tabs-group>
+
+    <mc-tabs-group [disabled]="true">
+        <mc-tab>Вкладка 1</mc-tab>
+        <mc-tab>Вкладка 2</mc-tab>
+        <mc-tab>Вкладка 3</mc-tab>
+        <mc-tab>Вкладка 4</mc-tab>
+    </mc-tabs-group>
+
+    <mc-tabs-group>
+        <mc-tab>Вкладка 1</mc-tab>
+        <mc-tab [disabled]="true">Вкладка 2</mc-tab>
+        <mc-tab>Вкладка 3</mc-tab>
+        <mc-tab>Вкладка 4</mc-tab>
+    </mc-tabs-group>
+</div>
