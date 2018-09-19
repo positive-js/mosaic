@@ -1,7 +1,7 @@
 import * as chalk from 'chalk';
-import {spawn} from 'child_process';
+import { spawn } from 'child_process';
 
-import {resolve as resolvePath} from 'path';
+import {resolve as resolvePath } from 'path';
 
 
 /* tslint:disable:no-console */

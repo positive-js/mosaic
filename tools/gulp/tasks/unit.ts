@@ -1,5 +1,5 @@
-import { join } from 'path';
 import { task } from 'gulp';
+import { join } from 'path';
 
 import { buildConfig, sequenceTask } from '../../packages';
 

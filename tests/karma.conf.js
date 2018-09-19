@@ -32,6 +32,9 @@ module.exports = (config) => {
             {pattern: 'tests/karma-system-config.js', included: true, watched: false},
             {pattern: 'tests/karma-test-shim.js', included: true, watched: false},
 
+            // Include theme in the test suite.
+            {pattern: 'dist/packages/**/core/theming/prebuilt/default-theme.css', included: true, watched: true},
+
             // Paths to support debugging with source maps in dev tools
             {pattern: 'dist/packages/**/*', included: false, watched: true},
         ],
@@ -79,7 +82,6 @@ module.exports = (config) => {
 
         client: {
             jasmine: {
-                // TODO(jelbourn): re-enable random test order once we can de-flake existing issues.
                 random: false
             }
         }

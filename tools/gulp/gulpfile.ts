@@ -16,4 +16,6 @@ import './tasks/unit';
 import './tasks/example-module';
 import './tasks/docs';
 import './tasks/payload';
+import './tasks/changelog';
+import './tasks/validate-licenses';
 /* tslint:enable:no-import-side-effect */

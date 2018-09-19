@@ -13,16 +13,16 @@ import {
     TemplateRef,
     ViewContainerRef
 } from '@angular/core';
-import {Direction, Directionality} from '@ptsecurity/cdk/bidi';
-import {coerceBooleanProperty} from '@ptsecurity/cdk/coercion';
-import {ESCAPE} from '@ptsecurity/cdk/keycodes';
-import {TemplatePortal} from '@ptsecurity/cdk/portal';
-import {Subscription} from 'rxjs';
+import { Direction, Directionality } from '@ptsecurity/cdk/bidi';
+import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
+import { ESCAPE } from '@ptsecurity/cdk/keycodes';
+import { TemplatePortal } from '@ptsecurity/cdk/portal';
+import { Subscription } from 'rxjs';
 
-import {Overlay} from './overlay';
-import {OverlayConfig} from './overlay-config';
-import {OverlayRef} from './overlay-ref';
-import {ConnectedOverlayPositionChange} from './position/connected-position';
+import { Overlay } from './overlay';
+import { OverlayConfig } from './overlay-config';
+import { OverlayRef } from './overlay-ref';
+import { ConnectedOverlayPositionChange } from './position/connected-position';
 import {
     IConnectedPosition,
     FlexibleConnectedPositionStrategy
@@ -83,7 +83,8 @@ export function CDK_CONNECTED_OVERLAY_SCROLL_STRATEGY_FACTORY(overlay: Overlay):
 export class CdkOverlayOrigin {
     constructor(
         /** Reference to the element on which the directive is applied. */
-        public elementRef: ElementRef) { }
+        public elementRef: ElementRef) {
+    }
 }
 
 
@@ -104,7 +105,10 @@ export class CdkConnectedOverlay implements OnDestroy, OnChanges {
 
     /** The offset in pixels for the overlay connection point on the x-axis */
     @Input('cdkConnectedOverlayOffsetX')
-    get offsetX(): number { return this._offsetX; }
+    get offsetX(): number {
+        return this._offsetX;
+    }
+
     set offsetX(offsetX: number) {
         this._offsetX = offsetX;
 
@@ -115,7 +119,10 @@ export class CdkConnectedOverlay implements OnDestroy, OnChanges {
 
     /** The offset in pixels for the overlay connection point on the y-axis */
     @Input('cdkConnectedOverlayOffsetY')
-    get offsetY() { return this._offsetY; }
+    get offsetY() {
+        return this._offsetY;
+    }
+
     set offsetY(offsetY: number) {
         this._offsetY = offsetY;
 
@@ -151,28 +158,53 @@ export class CdkConnectedOverlay implements OnDestroy, OnChanges {
 
     /** Whether or not the overlay should attach a backdrop. */
     @Input('cdkConnectedOverlayHasBackdrop')
-    get hasBackdrop() { return this._hasBackdrop; }
-    set hasBackdrop(value: any) { this._hasBackdrop = coerceBooleanProperty(value); }
+    get hasBackdrop() {
+        return this._hasBackdrop;
+    }
+
+    set hasBackdrop(value: any) {
+        this._hasBackdrop = coerceBooleanProperty(value);
+    }
 
     /** Whether or not the overlay should be locked when scrolling. */
     @Input('cdkConnectedOverlayLockPosition')
-    get lockPosition() { return this._lockPosition; }
-    set lockPosition(value: any) { this._lockPosition = coerceBooleanProperty(value); }
+    get lockPosition() {
+        return this._lockPosition;
+    }
+
+    set lockPosition(value: any) {
+        this._lockPosition = coerceBooleanProperty(value);
+    }
 
     /** Whether the overlay's width and height can be constrained to fit within the viewport. */
     @Input('cdkConnectedOverlayFlexibleDimensions')
-    get flexibleDiemsions() { return this._flexibleDimensions; }
-    set flexibleDiemsions(value: boolean) { this._flexibleDimensions = coerceBooleanProperty(value); }
+    get flexibleDiemsions() {
+        return this._flexibleDimensions;
+    }
+
+    set flexibleDiemsions(value: boolean) {
+        this._flexibleDimensions = coerceBooleanProperty(value);
+    }
 
     /** Whether the overlay can grow after the initial open when flexible positioning is turned on. */
     @Input('cdkConnectedOverlayGrowAfterOpen')
-    get growAfterOpen() { return this._growAfterOpen; }
-    set growAfterOpen(value: boolean) { this._growAfterOpen = coerceBooleanProperty(value); }
+    get growAfterOpen() {
+        return this._growAfterOpen;
+    }
+
+    set growAfterOpen(value: boolean) {
+        this._growAfterOpen = coerceBooleanProperty(value);
+    }
 
     /** Whether the overlay can be pushed on-screen if none of the provided positions fit. */
     @Input('cdkConnectedOverlayPush')
-    get push() { return this._push; }
-    set push(value: boolean) { this._push = coerceBooleanProperty(value); }
+    get push() {
+        return this._push;
+    }
+
+    set push(value: boolean) {
+        this._push = coerceBooleanProperty(value);
+    }
 
     /** Event emitted when the backdrop is clicked. */
     @Output() backdropClick = new EventEmitter<MouseEvent>();

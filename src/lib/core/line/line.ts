@@ -1,7 +1,5 @@
 import { NgModule, Directive, ElementRef, QueryList } from '@angular/core';
 
-import { McCommonModule } from '../common-behaviors/common-module';
-
 
 /**
  * Shared directive to count lines inside a text area, such as a list item.
@@ -52,8 +50,8 @@ export class McLineSetter {
 }
 
 @NgModule({
-    imports: [McCommonModule],
-    exports: [McLine, McCommonModule],
+    imports: [],
+    exports: [McLine],
     declarations: [McLine]
 })
 export class McLineModule {}

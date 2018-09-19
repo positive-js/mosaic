@@ -16,8 +16,9 @@ const {sourceDir, outputDir} = mosaicPackage;
 /** Path to the directory where all releases are created. */
 const releasesDir = join(distDir, 'releases');
 
-// Matches all SCSS files in the different packages.
-const allScssGlob = join(buildConfig.packagesDir, '**/*.scss');
+// Matches all SCSS files in the different packages. Note that this glob is not used to build
+// the bundle. It's used to identify Sass files that shouldn't be included multiple times.
+const allScssDedupeGlob = join(buildConfig.packagesDir, '**/*.scss');
 
 
 // Path to the release output of mosaic.
@@ -55,7 +56,7 @@ task('mosaic:bundle-theming-scss', () => {
     // Instantiates the SCSS bundler and bundles all imports of the specified entry point SCSS file.
     // A glob of all SCSS files in the library will be passed to the bundler. The bundler takes an
     // array of globs, which will match SCSS files that will be only included once in the bundle.
-    return new Bundler().Bundle(themingEntryPointPath, [allScssGlob]).then((result) => {
+    return new Bundler().Bundle(themingEntryPointPath, [allScssDedupeGlob]).then((result) => {
         // The release directory is not created yet because the composing of the release happens when
         // this task finishes.
         mkdirpSync(releasePath);
@@ -74,7 +75,7 @@ task('mosaic:bundle-visual-scss', () => {
     // Instantiates the SCSS bundler and bundles all imports of the specified entry point SCSS file.
     // A glob of all SCSS files in the library will be passed to the bundler. The bundler takes an
     // array of globs, which will match SCSS files that will be only included once in the bundle.
-    return new Bundler().Bundle(visualEntryPointPath, [allScssGlob]).then((result) => {
+    return new Bundler().Bundle(visualEntryPointPath, [allScssDedupeGlob]).then((result) => {
         // The release directory is not created yet because the composing of the release happens when
         // this task finishes.
         mkdirpSync(releasePath);

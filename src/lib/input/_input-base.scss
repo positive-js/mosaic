@@ -1,0 +1,11 @@
+@import '../core/styles/common/input';
+
+$mc-input-width: 100%;
+
+%mc-input-field-base {
+    @include mc-reset-input();
+
+    box-sizing: border-box;
+    padding: 5px 16px;
+    width: $mc-input-width;
+}

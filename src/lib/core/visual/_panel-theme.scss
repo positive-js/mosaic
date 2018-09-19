@@ -1,0 +1,12 @@
+@import '../theming/theming';
+@import '../theming/palette';
+
+@mixin mc-panel-theme($theme) {
+    $backgroundColor: map-get(map-get($theme, background), background);
+    $borderColor: map-get($mc-grey, 60);
+
+    .mc-panel {
+        background-color: $backgroundColor;
+        border: 1px solid $borderColor;
+    }
+}

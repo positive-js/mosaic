@@ -1,0 +1,47 @@
+@import '../../theming/theming';
+
+
+@mixin mc-pseudo-checkbox-theme($theme) {
+    $hover-lighten: 5%;
+
+    $primary: map-get($theme, primary);
+    $second: map-get($theme, second);
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
+    $background-checked: map-get($primary, 500);
+    $background-unchecked: map-get($background, background);
+    $background-disabled: map-get($second, 40);
+
+    $border-color-checked: map-get($primary, 600);
+    $border-color-unchecked: map-get($second, 300);
+    $border-color-disabled: map-get($second, 100);
+
+    $icon-color-checked: map-get($background, background);
+    $icon-color-disabled: map-get($second, 200);
+
+    .mc-pseudo-checkbox {
+        border-color: $border-color-unchecked;
+        background-color: $background-unchecked;
+    }
+
+    .mc-checkbox-checkmark,
+    .mc-checkbox-mixedmark {
+        color: $icon-color-checked;
+    }
+
+    .mc-pseudo-checkbox.mc-pseudo-checkbox_checked {
+        background: $background-checked;
+        border-color: $border-color-checked;
+    }
+
+    .mc-pseudo-checkbox.mc-disabled {
+        border-color: $border-color-disabled;
+        background-color: $background-disabled;
+
+        .mc-checkbox-checkmark,
+        .mc-checkbox-mixedmark {
+            color: $icon-color-disabled;
+        }
+    }
+}

@@ -42,7 +42,9 @@ export class ActiveDescendantKeyManager<T> extends ListKeyManager<IHighlightable
         if (this.activeItem) {
             this.activeItem.setInactiveStyles();
         }
+
         super.setActiveItem(index);
+
         if (this.activeItem) {
             this.activeItem.setActiveStyles();
         }

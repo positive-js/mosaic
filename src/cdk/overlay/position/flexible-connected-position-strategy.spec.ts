@@ -1,10 +1,10 @@
-import {Component, ElementRef, NgModule, NgZone} from '@angular/core';
-import {inject, TestBed} from '@angular/core/testing';
-import {ComponentPortal, PortalModule} from '@ptsecurity/cdk/portal';
-import {CdkScrollable, ScrollDispatchModule} from '@ptsecurity/cdk/scrolling';
-import {MockNgZone} from '@ptsecurity/cdk/testing';
-import {Subscription} from 'rxjs';
-import {map} from 'rxjs/operators';
+import { Component, ElementRef, NgModule, NgZone } from '@angular/core';
+import { inject, TestBed } from '@angular/core/testing';
+import { ComponentPortal, PortalModule } from '@ptsecurity/cdk/portal';
+import { CdkScrollable, ScrollDispatchModule } from '@ptsecurity/cdk/scrolling';
+import { MockNgZone } from '@ptsecurity/cdk/testing';
+import { Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import {
     ConnectedOverlayPositionChange,
@@ -32,7 +32,7 @@ describe('FlexibleConnectedPositionStrategy', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [ScrollDispatchModule, OverlayModule, OverlayTestModule],
-            providers: [{provide: NgZone, useFactory: () => zone = new MockNgZone()}]
+            providers: [{ provide: NgZone, useFactory: () => zone = new MockNgZone() }]
         });
 
         inject([Overlay, OverlayContainer, ViewportRuler],
@@ -70,9 +70,9 @@ describe('FlexibleConnectedPositionStrategy', () => {
 
         // Needs to be in the DOM for IE not to throw an "Unspecified error".
         document.body.appendChild(origin);
-        attachOverlay({positionStrategy});
+        attachOverlay({ positionStrategy });
 
-        expect(() => attachOverlay({positionStrategy})).toThrow();
+        expect(() => attachOverlay({ positionStrategy })).toThrow();
 
         document.body.removeChild(origin);
     });
@@ -90,7 +90,7 @@ describe('FlexibleConnectedPositionStrategy', () => {
 
         // Needs to be in the DOM for IE not to throw an "Unspecified error".
         document.body.appendChild(origin);
-        attachOverlay({positionStrategy});
+        attachOverlay({ positionStrategy });
         overlayRef.dispose();
 
         expect(() => positionStrategy.apply()).not.toThrow();
@@ -111,7 +111,7 @@ describe('FlexibleConnectedPositionStrategy', () => {
 
         // Needs to be in the DOM for IE not to throw an "Unspecified error".
         document.body.appendChild(origin);
-        attachOverlay({positionStrategy});
+        attachOverlay({ positionStrategy });
         overlayRef.dispose();
 
         expect(() => positionStrategy.reapplyLastPosition()).not.toThrow();
@@ -181,7 +181,7 @@ describe('FlexibleConnectedPositionStrategy', () => {
                     offsetX: 10
                 }]);
 
-                attachOverlay({positionStrategy});
+                attachOverlay({ positionStrategy });
 
                 const overlayRect = overlayRef.overlayElement.getBoundingClientRect();
                 expect(Math.floor(overlayRect.top)).toBe(Math.floor(originRect.top));
@@ -198,7 +198,7 @@ describe('FlexibleConnectedPositionStrategy', () => {
                     overlayY: 'top'
                 }]);
 
-                attachOverlay({positionStrategy});
+                attachOverlay({ positionStrategy });
 
                 const overlayRect = overlayRef.overlayElement.getBoundingClientRect();
                 expect(Math.floor(overlayRect.top)).toBe(Math.floor(originRect.top));
@@ -216,7 +216,7 @@ describe('FlexibleConnectedPositionStrategy', () => {
                     offsetX: 10
                 }]);
 
-                attachOverlay({positionStrategy});
+                attachOverlay({ positionStrategy });
 
                 const overlayRect = overlayRef.overlayElement.getBoundingClientRect();
                 expect(Math.floor(overlayRect.top)).toBe(Math.floor(originRect.top));
@@ -234,7 +234,7 @@ describe('FlexibleConnectedPositionStrategy', () => {
                     offsetY: 50
                 }]);
 
-                attachOverlay({positionStrategy});
+                attachOverlay({ positionStrategy });
 
                 const overlayRect = overlayRef.overlayElement.getBoundingClientRect();
                 expect(Math.floor(overlayRect.top)).toBe(Math.floor(originRect.top + 50)); //tslint:disable-line
@@ -251,7 +251,7 @@ describe('FlexibleConnectedPositionStrategy', () => {
                     overlayY: 'top'
                 }]);
 
-                attachOverlay({positionStrategy});
+                attachOverlay({ positionStrategy });
 
                 const overlayRect = overlayRef.overlayElement.getBoundingClientRect();
                 expect(Math.floor(overlayRect.top)).toBe(Math.floor(originRect.top + 60)); //tslint:disable-line
@@ -269,7 +269,7 @@ describe('FlexibleConnectedPositionStrategy', () => {
                     offsetY: 50
                 }]);
 
-                attachOverlay({positionStrategy});
+                attachOverlay({ positionStrategy });
 
                 const overlayRect = overlayRef.overlayElement.getBoundingClientRect();
                 expect(Math.floor(overlayRect.top)).toBe(Math.floor(originRect.top + 50)); //tslint:disable-line
@@ -287,7 +287,7 @@ describe('FlexibleConnectedPositionStrategy', () => {
                     overlayY: 'top'
                 }]);
 
-                attachOverlay({positionStrategy});
+                attachOverlay({ positionStrategy });
 
                 const target = overlayRef.overlayElement.querySelector('.transform-origin')! as HTMLElement; //tslint:disable-line
 
@@ -302,7 +302,7 @@ describe('FlexibleConnectedPositionStrategy', () => {
                     overlayY: 'top'
                 }]);
 
-                attachOverlay({positionStrategy});
+                attachOverlay({ positionStrategy });
 
                 const target = overlayRef.overlayElement.querySelector('.transform-origin')! as HTMLElement; //tslint:disable-line
 
@@ -317,7 +317,7 @@ describe('FlexibleConnectedPositionStrategy', () => {
                     overlayY: 'center'
                 }]);
 
-                attachOverlay({positionStrategy});
+                attachOverlay({ positionStrategy });
 
                 const target = overlayRef.overlayElement.querySelector('.transform-origin')! as HTMLElement; //tslint:disable-line
 
@@ -332,7 +332,7 @@ describe('FlexibleConnectedPositionStrategy', () => {
                     overlayY: 'top'
                 }]);
 
-                attachOverlay({positionStrategy});
+                attachOverlay({ positionStrategy });
 
                 const target = overlayRef.overlayElement.querySelector('.transform-origin')! as HTMLElement; //tslint:disable-line
 
@@ -347,7 +347,7 @@ describe('FlexibleConnectedPositionStrategy', () => {
                     overlayY: 'bottom'
                 }]);
 
-                attachOverlay({positionStrategy});
+                attachOverlay({ positionStrategy });
 
                 const target = overlayRef.overlayElement.querySelector('.transform-origin')! as HTMLElement; //tslint:disable-line
 
@@ -362,7 +362,7 @@ describe('FlexibleConnectedPositionStrategy', () => {
                     overlayY: 'top'
                 }]);
 
-                attachOverlay({positionStrategy, direction: 'rtl'});
+                attachOverlay({ positionStrategy, direction: 'rtl' });
 
                 const target = overlayRef.overlayElement.querySelector('.transform-origin')! as HTMLElement; //tslint:disable-line
 
@@ -377,7 +377,7 @@ describe('FlexibleConnectedPositionStrategy', () => {
                     overlayY: 'top'
                 }]);
 
-                attachOverlay({positionStrategy, direction: 'rtl'});
+                attachOverlay({ positionStrategy, direction: 'rtl' });
 
                 const target = overlayRef.overlayElement.querySelector('.transform-origin')! as HTMLElement; //tslint:disable-line
 
@@ -408,7 +408,7 @@ describe('FlexibleConnectedPositionStrategy', () => {
             const positionChangeHandler = jasmine.createSpy('positionChangeHandler');
             const subscription = positionStrategy.positionChanges.subscribe(positionChangeHandler);
 
-            attachOverlay({positionStrategy});
+            attachOverlay({ positionStrategy });
 
             const latestCall = positionChangeHandler.calls.mostRecent();
 
@@ -450,7 +450,7 @@ describe('FlexibleConnectedPositionStrategy', () => {
             const positionChangeHandler = jasmine.createSpy('positionChangeHandler');
             const subscription = positionStrategy.positionChanges.subscribe(positionChangeHandler);
 
-            attachOverlay({positionStrategy});
+            attachOverlay({ positionStrategy });
 
             expect(positionChangeHandler).toHaveBeenCalled();
 
@@ -476,7 +476,7 @@ describe('FlexibleConnectedPositionStrategy', () => {
 
             const recalcSpy = spyOn(positionStrategy, 'reapplyLastPosition');
 
-            attachOverlay({positionStrategy});
+            attachOverlay({ positionStrategy });
 
             expect(recalcSpy).not.toHaveBeenCalled();
 
@@ -536,7 +536,7 @@ describe('FlexibleConnectedPositionStrategy', () => {
                     originX: 'start'
                 }]);
 
-            attachOverlay({positionStrategy});
+            attachOverlay({ positionStrategy });
 
             expect(overlayRef.hostElement.style.alignItems).toBe('flex-start');
         });
@@ -552,7 +552,7 @@ describe('FlexibleConnectedPositionStrategy', () => {
                     originX: 'end'
                 }]);
 
-            attachOverlay({positionStrategy});
+            attachOverlay({ positionStrategy });
 
             expect(overlayRef.hostElement.style.alignItems).toBe('flex-end');
         });
@@ -568,7 +568,7 @@ describe('FlexibleConnectedPositionStrategy', () => {
                     originX: 'center'
                 }]);
 
-            attachOverlay({positionStrategy});
+            attachOverlay({ positionStrategy });
 
             expect(overlayRef.hostElement.style.alignItems).toBe('center');
         });
@@ -587,7 +587,7 @@ describe('FlexibleConnectedPositionStrategy', () => {
                     originX: 'start'
                 }]);
 
-            attachOverlay({positionStrategy});
+            attachOverlay({ positionStrategy });
 
             const overlayRect = overlayRef.overlayElement.getBoundingClientRect();
             expect(Math.floor(overlayRect.width)).toBe(OVERLAY_WIDTH - 20); //tslint:disable-line
@@ -630,7 +630,7 @@ describe('FlexibleConnectedPositionStrategy', () => {
                     originX: 'start'
                 }]);
 
-            attachOverlay({positionStrategy});
+            attachOverlay({ positionStrategy });
 
             let overlayRect = overlayRef.overlayElement.getBoundingClientRect();
 
@@ -657,7 +657,7 @@ describe('FlexibleConnectedPositionStrategy', () => {
                     originX: 'start'
                 }]);
 
-            attachOverlay({positionStrategy});
+            attachOverlay({ positionStrategy });
 
             const boundingBox = overlayContainer
                 .getContainerElement()
@@ -683,7 +683,7 @@ describe('FlexibleConnectedPositionStrategy', () => {
                     originX: 'start'
                 }]);
 
-            attachOverlay({positionStrategy});
+            attachOverlay({ positionStrategy });
 
             const boundingBox = overlayContainer
                 .getContainerElement()
@@ -709,7 +709,7 @@ describe('FlexibleConnectedPositionStrategy', () => {
                     originX: 'start'
                 }]);
 
-            attachOverlay({positionStrategy});
+            attachOverlay({ positionStrategy });
 
             const boundingBox = overlayContainer
                 .getContainerElement()
@@ -735,7 +735,7 @@ describe('FlexibleConnectedPositionStrategy', () => {
                     originX: 'end'
                 }]);
 
-            attachOverlay({positionStrategy});
+            attachOverlay({ positionStrategy });
 
             const boundingBox = overlayContainer
                 .getContainerElement()
@@ -782,7 +782,7 @@ describe('FlexibleConnectedPositionStrategy', () => {
                 .pipe(map((event) => event.scrollableViewProperties))
                 .subscribe(positionChangeHandler);
 
-            attachOverlay({positionStrategy: strategy});
+            attachOverlay({ positionStrategy: strategy });
         });
 
         afterEach(() => {
@@ -826,7 +826,7 @@ describe('FlexibleConnectedPositionStrategy', () => {
                     overlayY: 'top'
                 }]);
 
-                attachOverlay({positionStrategy});
+                attachOverlay({ positionStrategy });
 
                 expect(overlayRef.hostElement.style.left).toBeTruthy();
                 expect(overlayRef.hostElement.style.right).toBeFalsy();
@@ -842,7 +842,7 @@ describe('FlexibleConnectedPositionStrategy', () => {
                     overlayY: 'top'
                 }]);
 
-                attachOverlay({positionStrategy, direction: 'rtl'});
+                attachOverlay({ positionStrategy, direction: 'rtl' });
 
                 expect(overlayRef.hostElement.style.left).toBeTruthy();
                 expect(overlayRef.hostElement.style.right).toBeFalsy();
@@ -858,7 +858,7 @@ describe('FlexibleConnectedPositionStrategy', () => {
                     overlayY: 'top'
                 }]);
 
-                attachOverlay({positionStrategy});
+                attachOverlay({ positionStrategy });
 
                 expect(overlayRef.hostElement.style.top).toBeTruthy();
                 expect(overlayRef.hostElement.style.bottom).toBeFalsy();
@@ -872,7 +872,7 @@ describe('FlexibleConnectedPositionStrategy', () => {
                     overlayY: 'bottom'
                 }]);
 
-                attachOverlay({positionStrategy});
+                attachOverlay({ positionStrategy });
 
                 expect(overlayRef.hostElement.style.bottom).toBeTruthy();
                 expect(overlayRef.hostElement.style.top).toBeFalsy();
@@ -974,7 +974,8 @@ function createOverflowContainerElement() {
             style="width: 60px; height: 30px;"></div>
     `
 })
-class TestOverlay { }
+class TestOverlay {
+}
 
 
 @NgModule({
@@ -983,4 +984,5 @@ class TestOverlay { }
     declarations: [TestOverlay],
     entryComponents: [TestOverlay]
 })
-class OverlayTestModule { }
+class OverlayTestModule {
+}

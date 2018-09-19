@@ -159,16 +159,15 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
 
     /**
      * Sets the active item to the item at the index specified.
-     * @param index The index of the item to be set as active.
+     * @param item The index of the item to be set as active.
      */
-    setActiveItem(index: any): void {
+    setActiveItem(item: any): void {
         this.previousActiveItemIndex = this._activeItemIndex;
 
-        this._activeItemIndex = index;
-        this._activeItem = this._items.toArray()[index];
+        this.updateActiveItem(item);
 
         if (this._activeItemIndex !== this.previousActiveItemIndex) {
-            this.change.next(index);
+            this.change.next(this._activeItemIndex);
         }
     }
 
@@ -278,7 +277,7 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
         if (nextItemIndex >= this._items.length) {
             this.setLastItemActive();
         } else {
-            this._setActiveItemByDelta(1);
+            this._setActiveItemByDelta(delta);
         }
     }
 
@@ -288,9 +287,15 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
         if (nextItemIndex <= 0) {
             this.setFirstItemActive();
         } else {
-            this._setActiveItemByDelta(-1);
+            this._setActiveItemByDelta(-delta);
         }
     }
+
+    /**
+     * Allows setting the active without any other effects.
+     * @param index Index of the item to be set as active.
+     */
+    updateActiveItem(index: number): void;
 
     /**
      * Allows setting the active item without any other effects.
@@ -299,10 +304,8 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
     updateActiveItem(item: number | T): void;
 
     updateActiveItem(item: any): void {
-        const itemArray = this._getItemsArray();
+        const itemArray = this._items.toArray();
         const index = typeof item === 'number' ? item : itemArray.indexOf(item);
-
-        this.previousActiveItemIndex = this._activeItemIndex;
 
         this._activeItemIndex = index;
         this._activeItem = itemArray[index];

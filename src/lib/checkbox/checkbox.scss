@@ -1,10 +1,10 @@
 @import '../core/theming/theming';
 @import '../core/styles/common/layout';
+@import '../core/styles/common/checkbox';
 @import '../core/styles/variables';
 
 $mc-toggle-padding: 24px !default;
 $mc-checkbox-border-width: 1px;
-$mc-checkbox-size: 16px !default;
 $toggle-box-shadow: inset 0 0 1px 0 rgba(0, 0, 0, 0.2);
 // The amount of spacing between the checkbox and its label.
 $_mc-checkbox-item-spacing: $mc-toggle-padding - $mc-checkbox-size;
@@ -151,6 +151,7 @@ $_mc-checkbox-mark-stroke-size: 2 / 15 * $mc-checkbox-size !default;
     // Visual improvement to properly show browser popups when being required.
     bottom: 0;
     left: 50%;
+
     &:focus {
         + .mc-checkbox-frame {
             top: -1px;

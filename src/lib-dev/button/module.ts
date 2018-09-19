@@ -2,8 +2,8 @@ import { Component, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import { McButtonModule } from '../../lib/button/';
-import { McIconModule } from '../../lib/icon';
+import { McButtonModule } from '../../lib/button';
+import { McIconModule } from '@ptsecurity/mosaic/icon';
 
 
 @Component({

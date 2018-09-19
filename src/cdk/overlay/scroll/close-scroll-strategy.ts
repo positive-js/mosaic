@@ -1,10 +1,10 @@
-import {NgZone} from '@angular/core';
-import {ScrollDispatcher, ViewportRuler} from '@ptsecurity/cdk/scrolling';
-import {Subscription} from 'rxjs';
+import { NgZone } from '@angular/core';
+import { ScrollDispatcher, ViewportRuler } from '@ptsecurity/cdk/scrolling';
+import { Subscription } from 'rxjs';
 
-import {IOverlayReference} from '../overlay-reference';
+import { IOverlayReference } from '../overlay-reference';
 
-import {IScrollStrategy, getMatScrollStrategyAlreadyAttachedError} from './scroll-strategy';
+import { IScrollStrategy, getMatScrollStrategyAlreadyAttachedError } from './scroll-strategy';
 
 
 /**
@@ -19,7 +19,7 @@ export interface ICloseScrollStrategyConfig {
  * Strategy that will close the overlay as soon as the user starts scrolling.
  */
 export class CloseScrollStrategy implements IScrollStrategy {
-    private _scrollSubscription: Subscription|null = null;
+    private _scrollSubscription: Subscription | null = null;
     private _overlayRef: IOverlayReference;
     private _initialScrollPosition: number;
 
@@ -27,7 +27,8 @@ export class CloseScrollStrategy implements IScrollStrategy {
         private _scrollDispatcher: ScrollDispatcher,
         private _ngZone: NgZone,
         private _viewportRuler: ViewportRuler,
-        private _config?: ICloseScrollStrategyConfig) {}
+        private _config?: ICloseScrollStrategyConfig) {
+    }
 
     /** Attaches this scroll strategy to an overlay. */
     attach(overlayRef: IOverlayReference) {

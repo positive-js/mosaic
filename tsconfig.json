@@ -4,10 +4,12 @@
         "experimentalDecorators": true,
         "module": "es2015",
         "moduleResolution": "node",
+        "noUnusedLocals": true,
         "noUnusedParameters": true,
         "strictNullChecks": true,
+        "strictFunctionTypes": true,
         "skipLibCheck": true,
-        "target": "es5",
+        "target": "es2015",
         "lib": [
             "es5",
             "es2015",
@@ -28,6 +30,11 @@
         "types": [
             "jasmine",
             "tslib"
+        ],
+        "plugins": [
+            {
+                "name": "tslint-language-service"
+            }
         ]
     },
     "include": [

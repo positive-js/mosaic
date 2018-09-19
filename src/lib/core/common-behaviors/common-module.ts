@@ -3,7 +3,7 @@ import { BidiModule } from '@ptsecurity/cdk/bidi';
 
 
 // Injection token that configures whether the Mosaic sanity checks are enabled.
-export const MС_SANITY_CHECKS = new InjectionToken<boolean>('mc-sanity-checks', {
+export const MC_SANITY_CHECKS = new InjectionToken<boolean>('mc-sanity-checks', {
     providedIn: 'root',
     factory: MC_SANITY_CHECKS_FACTORY
 });
@@ -32,7 +32,7 @@ export class McCommonModule {
     // Reference to the global 'window' object.
     private _window = typeof window === 'object' && window ? window : null;
 
-    constructor(@Optional() @Inject(MС_SANITY_CHECKS) private _sanityChecksEnabled: boolean) {
+    constructor(@Optional() @Inject(MC_SANITY_CHECKS) private _sanityChecksEnabled: boolean) {
         if (this._areChecksEnabled() && !this._hasDoneGlobalChecks) {
             this._checkDoctypeIsDefined();
             this._checkThemeIsPresent();

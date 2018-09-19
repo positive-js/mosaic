@@ -6,7 +6,7 @@ import { inlineResourcesForDirectory } from '../inline-resources';
 
 import { composeRelease } from '../build-release';
 
-import { buildScssTask } from './build-scss-task';
+import { buildScssPipeline } from './build-scss-pipeline';
 import { sequenceTask } from './sequence-task';
 
 
@@ -29,7 +29,7 @@ export function createPackageBuildTasks(buildPackage: BuildPackage, preBuildTask
     const dependencyNames = buildPackage.dependencies.map((p) => p.name);
 
     // Glob that matches all style files that need to be copied to the package output.
-    const stylesGlob = join(buildPackage.sourceDir, '**/*.+(scss|css)');
+    const stylesGlob = join(buildPackage.sourceDir, '**/*.css');
 
     // Glob that matches every HTML file in the current package.
     const htmlGlob = join(buildPackage.sourceDir, '**/*.html');
@@ -68,17 +68,15 @@ export function createPackageBuildTasks(buildPackage: BuildPackage, preBuildTask
 
     task(`${taskName}:assets`, [
         `${taskName}:assets:scss`,
-        `${taskName}:assets:es5-scss`,
         `${taskName}:assets:copy-styles`,
         `${taskName}:assets:html`
     ]);
 
-    task(`${taskName}:assets:scss`, buildScssTask(
-        buildPackage.outputDir, buildPackage.sourceDir, true)
-    );
-
-    task(`${taskName}:assets:es5-scss`, buildScssTask(
-        buildPackage.esm5OutputDir, buildPackage.sourceDir, true)
+    task(`${taskName}:assets:scss`, () => {
+        buildScssPipeline(buildPackage.sourceDir, true)
+            .pipe(dest(buildPackage.outputDir))
+            .pipe(dest(buildPackage.esm5OutputDir));
+        }
     );
 
     task(`${taskName}:assets:copy-styles`, () => {

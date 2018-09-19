@@ -1,6 +1,6 @@
+export { McCommonModule, MC_SANITY_CHECKS } from './common-module';
 
-export { McCommonModule, MС_SANITY_CHECKS } from './common-module';
-
-export { CanDisable, mixinDisabled } from './disabled';
-export { CanColor, mixinColor, ThemePalette } from './color';
-export { HasTabIndex, mixinTabIndex } from './tabindex';
+export { CanDisable, CanDisableCtor, mixinDisabled } from './disabled';
+export { CanColor, CanColorCtor, mixinColor, ThemePalette } from './color';
+export { HasTabIndex, HasTabIndexCtor, mixinTabIndex } from './tabindex';
+export { HasErrorState, CanUpdateErrorState, mixinErrorState } from './error-state';

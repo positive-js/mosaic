@@ -43,3 +43,54 @@ mc-navbar-item[disabled] .mc-navbar-item, .mc-navbar-item[disabled] {
 mc-navbar-title.mc-navbar-collapsed-title {
     display: none;
 }
+
+.mc-navbar-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    box-sizing: border-box;
+    min-width: 100%;
+    height: auto;
+    margin: 0;
+    list-style: none;
+    padding-top: $mc-navbar-dropdown-v-padding;
+    padding-right: 0;
+    padding-bottom: $mc-navbar-dropdown-v-padding;
+    padding-left: 0;
+    border: 1px solid;
+    border-top: none;
+    z-index: 1;
+
+    .mc-navbar-right & {
+        left: auto;
+        right: 0;
+    }
+
+    &-link {
+        position: relative;
+        display: block;
+        box-sizing: border-box;
+        padding-top: $mc-navbar-dropdown-link-v-padding;
+        padding-right: $mc-navbar-dropdown-link-h-padding;
+        padding-bottom: $mc-navbar-dropdown-link-v-padding;
+        padding-left: $mc-navbar-dropdown-link-h-padding;
+        border: 2px solid transparent;
+        text-decoration: none;
+        white-space: nowrap;
+
+        &.is-active {
+            &:hover::before {
+                position: absolute;
+                top: -2px;
+                right: -2px;
+                bottom: -2px;
+                left: -2px;
+                content: "";
+            }
+        }
+    }
+
+    &.is-collapsed {
+        display: none;
+    }
+}

@@ -1,0 +1,37 @@
+$vertical-padding: 12px;
+$horizontal-padding: 24px;
+
+@mixin mc-panel-element-padding() {
+    padding: $vertical-padding $horizontal-padding;
+}
+
+.mc-panel {
+    display: flex;
+    flex-direction: column;
+    border-radius: 3px;
+
+    &__header {
+        @include mc-panel-element-padding();
+        display: flex;
+    }
+
+    &__title {
+        display: block;
+        flex-grow: 1;
+    }
+
+    &__actions {
+        display: block;
+        flex-shrink: 0;
+    }
+
+    &__content {
+        @include mc-panel-element-padding();
+        display: block;
+    }
+
+    &__footer {
+        @include mc-panel-element-padding();
+        display: flex;
+    }
+}

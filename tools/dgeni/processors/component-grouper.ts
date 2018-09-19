@@ -1,11 +1,12 @@
 import * as path from 'path';
 
-import {DocCollection, Document, Processor} from 'dgeni';
-import {InterfaceExportDoc} from 'dgeni-packages/typescript/api-doc-types/InterfaceExportDoc';
+import { DocCollection, Document, Processor } from 'dgeni';
+import { InterfaceExportDoc } from 'dgeni-packages/typescript/api-doc-types/InterfaceExportDoc';
 
-import {CategorizedClassDoc} from '../common/dgeni-definitions';
+import { CategorizedClassDoc } from '../common/dgeni-definitions';
 
 
+/* tslint:disable:no-non-null-assertion */
 /** Component group data structure. */
 export class ComponentGroup {
 
@@ -66,14 +67,14 @@ export class ComponentGrouper implements Processor {
         // Map of group name to group instance.
         const groups = new Map<string, ComponentGroup>();
 
-        docs.forEach(doc => {
+        docs.forEach((doc) => {
             const documentInfo = getDocumentPackageInfo(doc);
 
             const packageName = documentInfo.packageName;
             const packageDisplayName = documentInfo.packageName === 'cdk' ? 'CDK' : 'Mosaic';
 
             const moduleImportPath = `@ptsecurity/${packageName}/${documentInfo.entryPointName}`;
-            const groupName = packageName + '-' + documentInfo.name;
+            const groupName = `${packageName}-${documentInfo.name}`;
 
             // Get the group for this doc, or, if one does not exist, create it.
             let group;
@@ -96,9 +97,9 @@ export class ComponentGrouper implements Processor {
                 group.services.push(doc);
             } else if (doc.isNgModule) {
                 group.ngModule = doc;
-            } else if (doc.docType == 'class') {
+            } else if (doc.docType === 'class') {
                 group.additionalClasses.push(doc);
-            } else if (doc.docType == 'interface') {
+            } else if (doc.docType === 'interface') {
                 group.additionalInterfaces.push(doc);
             }
         });
@@ -116,11 +117,11 @@ function getDocumentPackageInfo(doc: Document) {
     // All of the component documentation is under either `src/lib` or `src/cdk`.
     // We group the docs up by the directory immediately under that root.
     const pathSegments = path.relative(basePath, filePath).split(path.sep);
-    let groupName = pathSegments[1];
+    const groupName = pathSegments[1];
 
     return {
         name: groupName,
         packageName: pathSegments[0] === 'lib' ? 'mosaic' : pathSegments[0],
-        entryPointName: pathSegments[1],
+        entryPointName: pathSegments[1]
     };
 }

@@ -1,4 +1,4 @@
-import {CategorizedMethodMemberDoc, CategorizedPropertyMemberDoc} from './dgeni-definitions';
+import { CategorizedMethodMemberDoc, CategorizedPropertyMemberDoc } from './dgeni-definitions';
 
 
 /** Combined type for a categorized method member document. */

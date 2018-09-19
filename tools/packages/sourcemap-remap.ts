@@ -1,3 +1,4 @@
+/* tslint:disable:no-var-requires */
 // There are no type definitions available for these imports.
 const sorcery = require('sorcery');
 
