@@ -21,6 +21,8 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
 
     display: inline-block;
 
+    width: 100%;
+
     outline: none;
 
     &.mc-disabled {
