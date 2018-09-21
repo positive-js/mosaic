@@ -1,0 +1,13 @@
+<ng-container [ngTemplateOutlet]="mcTooltipDefaultTemplate"></ng-container>
+<ng-template #mcTooltipDefaultTemplate>
+    <div class="mc-tooltip"
+         [ngClass]="_classMap"
+         [@fadeAnimation]="''+($visible | async)">
+        <div class="mc-tooltip-content">
+            <div class="mc-tooltip-arrow"></div>
+            <div class="mc-tooltip-inner">
+                <ng-container>{{ mcTitle }}</ng-container>
+            </div>
+        </div>
+    </div>
+</ng-template>

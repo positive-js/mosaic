@@ -12,6 +12,7 @@
 @import '../../../modal/modal-theme';
 @import '../../../tag/tag-theme';
 @import '../../option/option-theme';
+@import '../../../tooltip/tooltip-theme';
 
 
 @mixin mosaic-typography($config: null) {
@@ -31,6 +32,7 @@
     @include mc-navbar-typography($config);
     @include mc-input-typography($config);
     @include mc-form-field-typography($config);
+    @include mc-tooltip-typography($config);
     @include mc-modal-typography($config);
     @include mc-option-typography($config);
     @include mc-tag-typography($config);

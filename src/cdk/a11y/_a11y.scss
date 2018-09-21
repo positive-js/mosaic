@@ -18,3 +18,9 @@
         -moz-appearance: none;
     }
 }
+
+@mixin cdk-high-contrast($target: active) {
+    @media screen and (-ms-high-contrast: $target) {
+        @content;
+    }
+}
