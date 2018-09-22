@@ -56,9 +56,11 @@ import {
     _countGroupLabelsBeforeOption,
     _getOptionScrollPosition,
     CanDisable,
+    CanDisableCtor,
     CanUpdateErrorState,
+    CanUpdateErrorStateCtor,
     ErrorStateMatcher,
-    HasTabIndex,
+    HasTabIndex, HasTabIndexCtor,
     MC_OPTION_PARENT_COMPONENT,
     McOptgroup,
     McOption,
@@ -158,7 +160,11 @@ export class McSelectBase {
     ) {}
 }
 
-export const _McSelectMixinBase = mixinTabIndex(mixinDisabled(mixinErrorState(McSelectBase)));
+export const _McSelectMixinBase:
+    CanDisableCtor &
+    HasTabIndexCtor &
+    CanUpdateErrorStateCtor & typeof McSelectBase
+    = mixinTabIndex(mixinDisabled(mixinErrorState(McSelectBase)));
 
 
 /**
