@@ -26,11 +26,6 @@
 
             color: mc-color($foreground, text);
 
-            &:hover,
-            &.mc-hovered {
-                background: mc-color($background, 'hover');
-            }
-
             &.mc-focused {
                 border: 2px solid mc-color($primary, 500);
             }

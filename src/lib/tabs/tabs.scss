@@ -1,7 +1,91 @@
-@import 'tabs-base';
 @import 'tabs-theme';
 
-
 .mc-tabs {
-    @extend %mc-tabs-base;
+    $mc-tab-horizontal-padding: 16px;
+    $mc-tab-vertival-padding: 12px;
+    $border-radius: 2px;
+    $border-width: 1px;
+    $border-radius-focus: 3px;
+    $border-width-focus: 2px;
+
+    display: block;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    text-align: center;
+    white-space: nowrap;
+
+    &::-moz-focus-inner {
+        border: 0;
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    &[disabled] {
+        cursor: default;
+    }
+
+    .mc-tab {
+        display: inline-block;
+        padding: $mc-tab-vertival-padding $mc-tab-horizontal-padding;
+
+        outline: none;
+        border: {
+            top: {
+                width: $border-width;
+                style: solid;
+            }
+
+            bottom: {
+                width: $border-width;
+                style: solid;
+            }
+        }
+
+        &.mc-selected {
+            padding-right: $mc-tab-horizontal-padding - $border-width;
+            padding-left: $mc-tab-horizontal-padding - $border-width;
+            border: {
+                width: $border-width;
+                style: solid;
+                top: {
+                    left-radius: $border-radius;
+                    right-radius: $border-radius;
+                }
+            }
+
+            &:focus,
+            &.mc-focused {
+                &:before {
+                    right: - $border-width-focus;
+                    left: - $border-width-focus;
+                }
+            }
+        }
+
+        &:focus,
+        &.mc-focused {
+            position: relative;
+
+            &:before {
+                display: block;
+                position: absolute;
+                top: - $border-width-focus;
+                right: - $border-width;
+                bottom: - $border-width;
+                left: - $border-width;
+                content: "";
+                border: {
+                    width: $border-width-focus;
+                    style: solid;
+                    top: {
+                        left-radius: $border-radius-focus;
+                        right-radius: $border-radius-focus;
+                    }
+                    bottom: none;
+                }
+            }
+        }
+    }
 }
