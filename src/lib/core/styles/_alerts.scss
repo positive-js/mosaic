@@ -10,7 +10,6 @@ $hover-darken: 5%;
     align-items: baseline;
     min-width: 10px;
     min-height: 1rem;
-    padding: 14px 16px;
     vertical-align: top;
     text-align: left;
     border-radius: 3px;
@@ -28,8 +27,7 @@ $hover-darken: 5%;
             outline: 0;
             padding: 0;
             margin: 0;
-            top: 16px;
-            right: 12px;
+            right: 16px;
 
             text-align: center;
 
@@ -45,21 +43,34 @@ $hover-darken: 5%;
         }
     }
 
+    &__dismissible:not(.mc-alert__small) {
+        .mc-alert__close {
+            top: 16px;
+        }
+    }
+
+    &__dismissible.mc-alert__small {
+        .mc-alert__close {
+            top: 12px;
+        }
+    }
+
     // Improve alignment and spacing of inner content
     * {
         margin: 0;
         padding: 0;
     }
-
-    > p,
-    > ul {
-        margin-bottom: 0;
-    }
-
-    > p + p {
-        margin-top: 5px;
-    }
 }
+
+.mc-alert:not(.mc-alert__small) {
+    padding: 16px 16px;
+}
+
+.mc-alert.mc-alert__small {
+    padding: 12px 16px;
+}
+
+
 
 $mc-alert-error-border-color: mc-color($mc-red, 200);
 $mc-alert-error-bg-color: mc-color($mc-red, 60);

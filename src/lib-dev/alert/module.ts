@@ -1,7 +1,18 @@
+// tslint:disable:no-console
+import {
+    animate,
+    state,
+    style,
+    transition,
+    trigger
+} from '@angular/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
+import { McButtonModule } from '../../lib/button';
 import { McIconModule } from '../../lib/icon';
 
 
@@ -9,9 +20,29 @@ import { McIconModule } from '../../lib/icon';
     selector: 'app',
     template: require('./template.html'),
     styleUrls: ['./styles.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    animations: [
+        trigger('hideShowAnimator', [
+            state('true' , style({ opacity: 1, display: '' })),
+            state('false', style({ opacity: 0, display: 'none' })),
+            transition('false => true', animate('.9s')),
+            transition('true => false', animate('.5s'))
+        ])
+    ]
 })
-export class DemoComponent {}
+export class DemoComponent {
+    // tslint:disable-next-line:no-magic-numbers
+    readonly shownAlerts: number[]  = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
+    isAlertShown(id: number) {
+        return this.shownAlerts.indexOf(id) !== -1;
+    }
+
+    hideAlert(id: number) {
+        const index = this.shownAlerts.findIndex((alertId) => alertId === id);
+        this.shownAlerts.splice(index, 1);
+    }
+}
 
 
 @NgModule({
@@ -20,7 +51,9 @@ export class DemoComponent {}
     ],
     imports: [
         BrowserModule,
-        McIconModule
+        BrowserAnimationsModule,
+        McIconModule,
+        McButtonModule
     ],
     bootstrap: [
         DemoComponent
