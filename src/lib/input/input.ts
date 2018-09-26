@@ -7,7 +7,12 @@ import { Subject } from 'rxjs';
 import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import { getSupportedInputTypes, Platform } from '@ptsecurity/cdk/platform';
-import { CanUpdateErrorState, ErrorStateMatcher, mixinErrorState } from '@ptsecurity/mosaic/core';
+import {
+    CanUpdateErrorState,
+    CanUpdateErrorStateCtor,
+    ErrorStateMatcher,
+    mixinErrorState
+} from '@ptsecurity/mosaic/core';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 
 import { getMcInputUnsupportedTypeError } from './input-errors';
@@ -36,7 +41,8 @@ export class McInputBase {
     }
 }
 
-export const _McInputMixinBase = mixinErrorState(McInputBase);
+export const _McInputMixinBase: CanUpdateErrorStateCtor & typeof McInputBase =
+    mixinErrorState(McInputBase);
 
 
 @Directive({
