@@ -13,7 +13,7 @@ import { UniqueSelectionDispatcher } from '@ptsecurity/cdk/collections';
 
 import {
     CanColor, CanColorCtor,
-    CanDisable,
+    CanDisable, CanDisableCtor,
     HasTabIndex, HasTabIndexCtor,
     mixinColor,
     mixinDisabled,
@@ -37,7 +37,7 @@ export class McRadioChange {
 // Boilerplate for applying mixins to McRadioGroup.
 /** @docs-private */
 export class McRadioGroupBase {}
-export const _McRadioGroupMixinBase = mixinDisabled(McRadioGroupBase);
+export const _McRadioGroupMixinBase: CanDisableCtor & typeof McRadioGroupBase = mixinDisabled(McRadioGroupBase);
 
 /**
  * Provider Expression that allows mc-radio-group to register as a ControlValueAccessor. This

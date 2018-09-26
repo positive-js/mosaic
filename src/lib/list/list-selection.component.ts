@@ -31,7 +31,7 @@ import {
     McLineSetter,
     CanDisable,
     mixinDisabled,
-    toBoolean
+    toBoolean, CanDisableCtor
 } from '@ptsecurity/mosaic/core';
 
 
@@ -217,7 +217,8 @@ export class McListSelectionChange {
 
 export class McListSelectionBase {}
 
-export const _McListSelectionMixinBase = mixinDisabled(McListSelectionBase);
+export const _McListSelectionMixinBase: CanDisableCtor & typeof McListSelectionBase
+    = mixinDisabled(McListSelectionBase);
 
 @Component({
     exportAs: 'mcListSelection',
