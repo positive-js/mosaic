@@ -1,0 +1,99 @@
+@import '../core/theming/theming';
+@import '../core/theming/palette';
+
+@mixin left-marker($color) {
+    $gray100: mc-color($mc-grey, 100);
+    box-shadow: inset -1px 0 0 0 $gray100, inset 0 1px 0 0 $gray100, inset 0 -1px 0 0 $gray100, inset 4px 0 0 0 mc-color($color, 400);
+}
+
+@mixin left-marker-dark($color) {
+    $gray600: mc-color($mc-grey, 600);
+    box-shadow: inset -1px 0 0 0 $gray600, inset 0 1px 0 0 $gray600, inset 0 -1px 0 0 $gray600, inset 4px 0 0 0 mc-color($color, 600);
+}
+
+@mixin normal-state($color, $isDark) {
+    @if $isDark == true {
+        background-color: mc-color($color, 700);
+        @include left-marker-dark($color);
+    } @else {
+        background-color: mc-color($color, 60);
+        @include left-marker($color);
+    }
+}
+
+@mixin selected-state($border-color, $back-color, $isDark) {
+    @if $isDark == true {
+        background-color: mc-color($back-color, 700);
+        box-shadow: inset 4px 0 0 0 mc-color($border-color, 600);
+    } @else {
+        background-color: mc-color($back-color, 100);
+        box-shadow: inset 4px 0 0 0 mc-color($border-color, 400);
+    }
+}
+
+@mixin mc-cards-theme($theme) {
+    $isDark: map-get($theme, is-dark);
+    $info: map-get($theme, primary);
+    $error: map-get($theme, warn);
+    $warning: $mc-yellow;
+    $success: $mc-green;
+    $background-info: map-get($theme, background);
+    $foreground-info: map-get($theme, foreground);
+    $background-color: map-get($background-info, background);
+    $foreground-color: map-get($foreground-info, base);
+    
+    $hover-color: map-get($background-info, hover);
+    $focus-color: mc-color($mc-blue, 400);
+    
+    .mc-card {
+        background-color: mc-color($mc-grey, 60);
+        color: $foreground-color;
+        
+        &__info {
+            @include normal-state($info, $isDark);
+            
+            &.mc-card__selected {
+                @include selected-state($info, $info, $isDark);
+            }
+        }
+        
+        &__warning {
+            @include normal-state($warning, $isDark);
+            
+            &.mc-card__selected {
+                @include selected-state($warning, $info, $isDark);
+            }
+        }
+        
+        &__success {
+            @include normal-state($success, $isDark);
+            
+            &.mc-card__selected {
+                @include selected-state($success, $info, $isDark);
+            }
+        }
+        
+        &__error {
+            @include normal-state($error, $isDark);
+            
+            &.mc-card__selected {
+                @include selected-state($error, $info, $isDark);
+            }
+        }
+        
+        &__white {
+            background-color: $background-color;
+        }
+        
+        .mc-cards-hover-overlay {
+            background: $hover-color;
+        }
+        
+        &:focus,
+        &.cdk-focused {
+            .mc-cards-focus-overlay {
+                border: solid 1px $focus-color;
+            }
+        }
+    }
+}

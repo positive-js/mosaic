@@ -1,10 +1,10 @@
 $black-87-opacity: rgba(black, 0.87);
 $black-12-opacity: rgba(black, 0.12);
-$black-6-opacity:  rgba(black, 0.06);
+$black-6-opacity: rgba(black, 0.06);
 
 $white-87-opacity: rgba(white, 0.87);
 $white-12-opacity: rgba(white, 0.12);
-$white-6-opacity:  rgba(white, 0.06);
+$white-6-opacity: rgba(white, 0.06);
 
 $dark-disabled-text: rgba(black, 0.5);
 
@@ -149,19 +149,18 @@ $mc-yellow: (
         800: $black-87-opacity,
         A100: $black-87-opacity
     )
-
 );
 
 // Foreground palette for light themes.
 $mc-light-theme-foreground: (
-    base:              black,
-    disabled:          $dark-disabled-text,
-    disabled-button:   rgba(black, 0.26),
-    disabled-text:     rgba(black, 0.3),
-    hint-text:         rgba(black, 0.38),
-    icon:              rgba(black, 0.54),
-    text:              rgba(black, 0.87),
-    secondary-text:    rgba(black, 0.54),
+    base: black,
+    disabled: $dark-disabled-text,
+    disabled-button: rgba(black, 0.26),
+    disabled-text: rgba(black, 0.3),
+    hint-text: rgba(black, 0.38),
+    icon: rgba(black, 0.54),
+    text: rgba(black, 0.87),
+    secondary-text: rgba(black, 0.54),
 );
 
 // Background palette for light themes.
@@ -175,21 +174,22 @@ $mc-light-theme-background: (
 
 // Foreground palette for dark themes.
 $mc-dark-theme-foreground: (
-    base:              white,
-    disabled:          rgba(white, 0.3),
-    disabled-button:   rgba(white, 0.3),
-    disabled-text:     rgba(white, 0.3),
-    hint-text:         rgba(white, 0.3),
-    secondary-text:    rgba(white, 0.7),
-    icon:              white,
-    icons:             white,
-    text:              white
+    base: white,
+    disabled: rgba(white, 0.3),
+    disabled-button: rgba(white, 0.3),
+    disabled-text: rgba(white, 0.3),
+    hint-text: rgba(white, 0.3),
+    secondary-text: rgba(white, 0.7),
+    icon: white,
+    icons: white,
+    text: white
 );
 
 // Background palette for dark themes.
 $mc-dark-theme-background: (
-    background: #303030,
+    hover: mc-color($mc-grey, 800, 0.12),
+    background: mc-color($mc-grey, 700),
     disabled-button: $white-12-opacity,
     selected-button: grey,
-    selected-disabled-button: grey
+    selected-disabled-button: grey,
 );

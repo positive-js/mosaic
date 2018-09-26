@@ -1,0 +1,80 @@
+@import 'cards-theme';
+@import '../core/styles/common/layout';
+
+.mc-card {
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+
+    .mc-cards-wrapper {
+        flex: auto;
+        display: flex;
+        flex-direction: row;
+        
+        %content-base {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+    
+        .content-left {
+            @extend %content-base;
+            
+            flex: none;
+            margin: 16px 12px;
+    
+            &.has-content {
+                margin-left: 20px;
+            }
+        }
+        
+        .main-content {
+            @extend %content-base;
+            flex: auto;
+            margin: 12px 0;
+        }
+        
+        .content-right {
+            @extend %content-base;
+            flex: none;
+            margin: 8px 16px 8px 8px;
+    
+            &.has-content {
+                margin-right: 8px;
+            }
+        }
+    }
+    
+    &:focus {
+        outline: none;
+    }
+
+    &.cdk-focused {
+        z-index: 1;
+    }
+    
+    .mc-cards-focus-overlay {
+        @include mc-fill;
+        pointer-events:none;
+    }
+    
+    .mc-cards-hover-overlay {
+        @include mc-fill;
+        display: none !important;
+        pointer-events:none;
+    }
+    
+    &.mc-card__hover {
+        .mc-cards-hover-overlay {
+            display: block !important;
+        }
+    }
+    
+    &.mc-readonly {
+        cursor: auto;
+    }
+}
+
+
