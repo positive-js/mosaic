@@ -4,9 +4,33 @@
 @import '../core/theming/palette';
 
 
+@mixin _mc-icon-color($palette) {
+    $hover-darken: 5%;
+
+    color: mc-color($palette, 400);
+
+    &:hover {
+        color: darken(mc-color($palette, 400), $hover-darken);
+    }
+}
+
 @mixin mc-icon-theme($theme) {
-    .mc-button {
-        @include _mc-button-theme-color($theme);
+    .mc-icon {
+        $primary: map-get($theme, primary);
+        $second: map-get($theme, second);
+        $warn: map-get($theme, warn);
+
+        &.mc-primary {
+            @include _mc-icon-color($primary);
+        }
+
+        &.mc-second {
+            @include _mc-icon-color($second);
+        }
+
+        &.mc-warn {
+            @include _mc-icon-color($warn);
+        }
     }
 }
 

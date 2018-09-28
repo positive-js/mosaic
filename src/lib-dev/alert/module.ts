@@ -32,7 +32,7 @@ import { McIconModule } from '../../lib/icon';
 })
 export class DemoComponent {
     // tslint:disable-next-line:no-magic-numbers
-    readonly shownAlerts: number[]  = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+    readonly shownAlerts: number[]  = Array.from(Array(13).keys());
 
     isAlertShown(id: number) {
         return this.shownAlerts.indexOf(id) !== -1;
