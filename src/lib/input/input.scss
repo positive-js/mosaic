@@ -6,3 +6,12 @@
 
     display: inline-block;
 }
+
+input.mc-input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+input.mc-input[type="number"]::-webkit-inner-spin-button,
+input.mc-input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}

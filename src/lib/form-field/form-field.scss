@@ -51,7 +51,8 @@ $mc-form-field-border-size: 1px;
 }
 
 .mc-form-field_has-suffix,
-.mc-form-field_has-cleaner {
+.mc-form-field_has-cleaner,
+.mc-form-field_has-stepper {
     .mc-input {
         padding-right: 32px;
     }
@@ -78,5 +79,23 @@ mc-cleaner {
     width: 32px;
 
     cursor: pointer;
+}
 
+mc-stepper {
+    position: absolute;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    top: 0;
+    bottom: 0;
+    right: 8px;
+
+    width: 16px;
+
+    .mc-icon {
+        cursor: pointer;
+    }
 }

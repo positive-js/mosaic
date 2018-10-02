@@ -2,7 +2,7 @@ import { Component, Provider, Type } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, ComponentFixtureAutoDetect } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { ESCAPE } from '@ptsecurity/cdk/keycodes';
+import { DOWN_ARROW, ESCAPE, UP_ARROW } from '@ptsecurity/cdk/keycodes';
 import {
     dispatchFakeEvent,
     dispatchKeyboardEvent
@@ -335,3 +335,319 @@ describe('McInput', () => {
         });
     });
 });
+
+
+// tslint:disable no-unnecessary-class
+@Component({
+    template: `
+        <mc-form-field>
+            <input mcInput [(ngModel)]="value" type="number">
+            <mc-stepper></mc-stepper>
+        </mc-form-field>
+    `
+})
+class McNumberInput {
+    value: number | null = null;
+}
+
+@Component({
+    template: `
+        <mc-form-field>
+            <input mcInput [(ngModel)]="value" type="number" max="10" min="3" step="0.5" big-step="2">
+            <mc-stepper></mc-stepper>
+        </mc-form-field>
+    `
+})
+class McNumberInputMaxMinStep {
+    value: number | null = null;
+}
+// tslint:enable no-unnecessary-class
+
+// tslint:disable no-magic-numbers
+describe('McNumberInput', () => {
+    it('should has stepper', fakeAsync(() => {
+        const fixture = createComponent(McNumberInput);
+        fixture.detectChanges();
+
+        const mcStepper = fixture.debugElement.query(By.css('mc-stepper'));
+        const icons = mcStepper.queryAll(By.css('.mc-icon'));
+
+        expect(mcStepper).not.toBeNull();
+        expect(icons.length).toBe(2);
+    }));
+
+    describe('empty value', () => {
+        it('should not step up when no max', fakeAsync(() => {
+            const fixture = createComponent(McNumberInput);
+            fixture.detectChanges();
+
+            const mcStepper = fixture.debugElement.query(By.css('mc-stepper'));
+            const icons = mcStepper.queryAll(By.css('.mc-icon'));
+            const iconUp = icons[0];
+
+            iconUp.nativeElement.click();
+
+            fixture.detectChanges();
+
+            expect(fixture.componentInstance.value).toBeNull();
+        }));
+
+        it('should not step down when no min', fakeAsync(() => {
+            const fixture = createComponent(McNumberInput);
+            fixture.detectChanges();
+
+            const mcStepper = fixture.debugElement.query(By.css('mc-stepper'));
+            const icons = mcStepper.queryAll(By.css('.mc-icon'));
+            const iconDown = icons[0];
+
+            iconDown.nativeElement.click();
+
+            fixture.detectChanges();
+
+            expect(fixture.componentInstance.value).toBeNull();
+        }));
+
+
+        it('should step up when max is set', fakeAsync(() => {
+            const fixture = createComponent(McNumberInputMaxMinStep);
+            fixture.detectChanges();
+
+            const mcStepper = fixture.debugElement.query(By.css('mc-stepper'));
+            const icons = mcStepper.queryAll(By.css('.mc-icon'));
+            const iconUp = icons[0];
+
+            iconUp.nativeElement.click();
+
+            fixture.detectChanges();
+
+            expect(fixture.componentInstance.value).toBe(3.5);
+        }));
+
+        it('should step down when min is set', fakeAsync(() => {
+            const fixture = createComponent(McNumberInputMaxMinStep);
+            fixture.detectChanges();
+
+            const mcStepper = fixture.debugElement.query(By.css('mc-stepper'));
+            const icons = mcStepper.queryAll(By.css('.mc-icon'));
+            const iconDown = icons[1];
+
+            iconDown.nativeElement.click();
+
+            fixture.detectChanges();
+
+            expect(fixture.componentInstance.value).toBe(9.5);
+        }));
+    });
+
+    describe('not empty value', () => {
+        it('should step up when no min', fakeAsync(() => {
+            const fixture = createComponent(McNumberInput);
+            fixture.detectChanges();
+
+            const mcStepper = fixture.debugElement.query(By.css('mc-stepper'));
+            const icons = mcStepper.queryAll(By.css('.mc-icon'));
+            const iconUp = icons[0];
+
+            const inputElementDebug = fixture.debugElement.query(By.directive(McInput));
+            const inputElement = inputElementDebug.nativeElement;
+
+            inputElement.value = 1;
+            dispatchFakeEvent(inputElement, 'input');
+
+            iconUp.nativeElement.click();
+
+            fixture.detectChanges();
+
+            expect(fixture.componentInstance.value).toBe(2);
+        }));
+
+        it('should step down when no max', fakeAsync(() => {
+            const fixture = createComponent(McNumberInput);
+            fixture.detectChanges();
+
+            const mcStepper = fixture.debugElement.query(By.css('mc-stepper'));
+            const icons = mcStepper.queryAll(By.css('.mc-icon'));
+            const iconDown = icons[1];
+
+            const inputElementDebug = fixture.debugElement.query(By.directive(McInput));
+            const inputElement = inputElementDebug.nativeElement;
+
+            inputElement.value = 1;
+            dispatchFakeEvent(inputElement, 'input');
+
+            iconDown.nativeElement.click();
+
+            fixture.detectChanges();
+
+            expect(fixture.componentInstance.value).toBe(0);
+        }));
+    });
+
+    describe('keys', () => {
+        it('should step up on up arrow key', fakeAsync(() => {
+            const fixture = createComponent(McNumberInput);
+            fixture.detectChanges();
+
+            const inputElementDebug = fixture.debugElement.query(By.directive(McInput));
+            const inputElement = inputElementDebug.nativeElement;
+
+            inputElement.value = 1;
+            dispatchFakeEvent(inputElement, 'input');
+
+            dispatchKeyboardEvent(inputElementDebug.nativeElement, 'keydown', UP_ARROW);
+
+            fixture.detectChanges();
+
+            expect(fixture.componentInstance.value).toBe(2);
+        }));
+
+        it('should step down on down arrow key', fakeAsync(() => {
+            const fixture = createComponent(McNumberInput);
+            fixture.detectChanges();
+
+            const inputElementDebug = fixture.debugElement.query(By.directive(McInput));
+            const inputElement = inputElementDebug.nativeElement;
+
+            inputElement.value = 1;
+            dispatchFakeEvent(inputElement, 'input');
+
+            dispatchKeyboardEvent(inputElementDebug.nativeElement, 'keydown', DOWN_ARROW);
+
+            fixture.detectChanges();
+
+            expect(fixture.componentInstance.value).toBe(0);
+        }));
+
+        it('should step up with bug step on shift and up arrow key', fakeAsync(() => {
+            const fixture = createComponent(McNumberInputMaxMinStep);
+            fixture.detectChanges();
+
+            const inputElementDebug = fixture.debugElement.query(By.directive(McInput));
+            const inputElement = inputElementDebug.nativeElement;
+
+            inputElement.value = 5;
+            dispatchFakeEvent(inputElement, 'input');
+
+            dispatchKeyboardEvent(inputElementDebug.nativeElement, 'keydown', UP_ARROW, undefined, true);
+
+            fixture.detectChanges();
+
+            expect(fixture.componentInstance.value).toBe(7);
+        }));
+
+        it('should step down with bug step on shift and down arrow key', fakeAsync(() => {
+            const fixture = createComponent(McNumberInputMaxMinStep);
+            fixture.detectChanges();
+
+            const inputElementDebug = fixture.debugElement.query(By.directive(McInput));
+            const inputElement = inputElementDebug.nativeElement;
+
+            inputElement.value = 6;
+            dispatchFakeEvent(inputElement, 'input');
+
+            dispatchKeyboardEvent(inputElementDebug.nativeElement, 'keydown', DOWN_ARROW, undefined, true);
+
+            fixture.detectChanges();
+
+            expect(fixture.componentInstance.value).toBe(4);
+        }));
+
+        it('should ignore wrong chars', fakeAsync(() => {
+            const fixture = createComponent(McNumberInputMaxMinStep);
+            fixture.detectChanges();
+
+            const inputElementDebug = fixture.debugElement.query(By.directive(McInput));
+            const inputElement = inputElementDebug.nativeElement;
+
+            inputElement.value = 123;
+            dispatchFakeEvent(inputElement, 'input');
+            fixture.detectChanges();
+            expect(fixture.componentInstance.value).toBe(123);
+
+            inputElement.value = 'blahblah';
+            dispatchFakeEvent(inputElement, 'input');
+            fixture.detectChanges();
+            expect(fixture.componentInstance.value).toBeNull();
+
+            inputElement.value = '1.2';
+            dispatchFakeEvent(inputElement, 'input');
+            fixture.detectChanges();
+            expect(fixture.componentInstance.value).toBe(1.2);
+
+            inputElement.value = '1..2';
+            dispatchFakeEvent(inputElement, 'input');
+            fixture.detectChanges();
+            expect(fixture.componentInstance.value).toBeNull();
+
+            inputElement.value = '1..';
+            dispatchFakeEvent(inputElement, 'input');
+            fixture.detectChanges();
+            expect(fixture.componentInstance.value).toBeNull();
+
+            inputElement.value = '--1';
+            dispatchFakeEvent(inputElement, 'input');
+            fixture.detectChanges();
+            expect(fixture.componentInstance.value).toBeNull();
+
+            inputElement.value = '-1-';
+            dispatchFakeEvent(inputElement, 'input');
+            fixture.detectChanges();
+            expect(fixture.componentInstance.value).toBeNull();
+
+            inputElement.value = '.';
+            dispatchFakeEvent(inputElement, 'input');
+            fixture.detectChanges();
+            expect(fixture.componentInstance.value).toBeNull();
+
+            inputElement.value = '-';
+            dispatchFakeEvent(inputElement, 'input');
+            fixture.detectChanges();
+            expect(fixture.componentInstance.value).toBeNull();
+        }));
+    });
+
+    describe('truncate to bounds', () => {
+        it('should set max when value > max on step up', fakeAsync(() => {
+            const fixture = createComponent(McNumberInputMaxMinStep);
+            fixture.detectChanges();
+
+            const mcStepper = fixture.debugElement.query(By.css('mc-stepper'));
+            const icons = mcStepper.queryAll(By.css('.mc-icon'));
+            const iconUp = icons[0];
+
+            const inputElementDebug = fixture.debugElement.query(By.directive(McInput));
+            const inputElement = inputElementDebug.nativeElement;
+
+            inputElement.value = 20;
+            dispatchFakeEvent(inputElement, 'input');
+
+            iconUp.nativeElement.click();
+
+            fixture.detectChanges();
+
+            expect(fixture.componentInstance.value).toBe(10);
+        }));
+
+        it('should set min when value < min on step down', fakeAsync(() => {
+            const fixture = createComponent(McNumberInputMaxMinStep);
+            fixture.detectChanges();
+
+            const mcStepper = fixture.debugElement.query(By.css('mc-stepper'));
+            const icons = mcStepper.queryAll(By.css('.mc-icon'));
+            const iconDown = icons[1];
+
+            const inputElementDebug = fixture.debugElement.query(By.directive(McInput));
+            const inputElement = inputElementDebug.nativeElement;
+
+            inputElement.value = 1;
+            dispatchFakeEvent(inputElement, 'input');
+
+            iconDown.nativeElement.click();
+
+            fixture.detectChanges();
+
+            expect(fixture.componentInstance.value).toBe(3);
+        }));
+    });
+});
+// tslint:enable no-magic-numbers
