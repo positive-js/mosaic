@@ -26,7 +26,6 @@ import {
 import { McFormFieldControl, McFormFieldNumberControl } from '@ptsecurity/mosaic/form-field';
 import { Subject } from 'rxjs';
 
-import { BIG_STEP, SMALL_STEP } from './../form-field/stepper';
 import { getMcInputUnsupportedTypeError } from './input-errors';
 import { MC_INPUT_VALUE_ACCESSOR } from './input-value-accessor';
 
