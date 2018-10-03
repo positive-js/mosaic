@@ -1,0 +1,50 @@
+
+.mc-layout {
+    display: flex;
+    flex-direction: column;
+    flex: auto;
+
+    &,
+    * {
+        box-sizing: border-box;
+    }
+
+    &-content {
+        flex: auto;
+    }
+
+    &-has-sidebar {
+        flex-direction: row;
+
+        > .mc-layout,
+        > .mc-layout-content {
+            overflow-x: hidden;
+        }
+    }
+
+    &-header,
+    &-footer {
+        flex: 0 0 auto;
+        padding: 0 0;
+    }
+
+    &-sider {
+        transition: all 0.2s;
+        position: relative;
+
+        min-width: 0;
+
+        &-children {
+            height: 100%;
+            // Hack for fixing margin bug
+            // from https://stackoverflow.com/a/33132624/3040605
+            padding-top: 0.1px;
+            margin-top: -0.1px;
+        }
+
+        &-right {
+            order: 1;
+        }
+
+    }
+}

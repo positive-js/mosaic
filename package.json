@@ -141,6 +141,7 @@
         "server-dev:checkbox": "npm run server-dev -- --env.component checkbox",
         "server-dev:icon": "npm run server-dev -- --env.component icon",
         "server-dev:input": "npm run server-dev -- --env.component input",
+        "server-dev:flex-layout": "npm run server-dev -- --env.component flex-layout",
         "server-dev:layout": "npm run server-dev -- --env.component layout",
         "server-dev:link": "npm run server-dev -- --env.component link",
         "server-dev:list": "npm run server-dev -- --env.component list",

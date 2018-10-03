@@ -2,10 +2,6 @@ import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import { McIconModule } from '../../lib/icon';
-import { McLayoutModule } from '../../lib/layout';
-import { McNavbarModule } from '../../lib/navbar/';
-
 
 @Component({
     selector: 'app',
@@ -21,10 +17,7 @@ export class DemoComponent {}
         DemoComponent
     ],
     imports: [
-        BrowserModule,
-        McLayoutModule,
-        McNavbarModule,
-        McIconModule
+        BrowserModule
     ],
     bootstrap: [
         DemoComponent
