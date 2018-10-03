@@ -12,7 +12,7 @@ import {
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { Platform } from '@ptsecurity/cdk/platform';
 
-import { mixinColor, mixinDisabled, CanColor, CanDisable } from '@ptsecurity/mosaic/core';
+import { mixinColor, mixinDisabled, CanColor, CanDisable, CanDisableCtor, CanColorCtor } from '@ptsecurity/mosaic/core';
 import { McIcon } from '@ptsecurity/mosaic/icon';
 
 
@@ -104,7 +104,11 @@ export class McButtonBase {
     constructor(public _elementRef: ElementRef) {}
 }
 
-export const _McButtonMixinBase = mixinColor(mixinDisabled(McButtonBase));
+export const _McButtonMixinBase:
+    CanDisableCtor &
+    CanColorCtor &
+    typeof McButtonBase =
+        mixinColor(mixinDisabled(McButtonBase));
 
 
 @Component({

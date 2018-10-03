@@ -18,9 +18,9 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FocusMonitor, FocusOrigin } from '@ptsecurity/cdk/a11y';
 import {
-    CanColor,
-    CanDisable,
-    HasTabIndex,
+    CanColor, CanColorCtor,
+    CanDisable, CanDisableCtor,
+    HasTabIndex, HasTabIndexCtor,
     mixinColor,
     mixinDisabled,
     mixinTabIndex,
@@ -74,8 +74,12 @@ export class McCheckboxBase {
     }
 }
 
-export const _McCheckboxMixinBase =
-    mixinTabIndex(mixinColor(mixinDisabled(McCheckboxBase)));
+export const _McCheckboxMixinBase:
+    HasTabIndexCtor &
+    CanColorCtor &
+    CanDisableCtor &
+    typeof McCheckboxBase =
+        mixinTabIndex(mixinColor(mixinDisabled(McCheckboxBase)));
 
 
 /**

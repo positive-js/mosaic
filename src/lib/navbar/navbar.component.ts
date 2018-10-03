@@ -19,7 +19,7 @@ import {
 import { FocusMonitor, FocusOrigin } from '@ptsecurity/cdk/a11y';
 import { SPACE } from '@ptsecurity/cdk/keycodes';
 import { Platform } from '@ptsecurity/cdk/platform';
-import { CanDisable, mixinDisabled } from '@ptsecurity/mosaic/core';
+import {CanDisable, CanDisableCtor, mixinDisabled} from '@ptsecurity/mosaic/core';
 
 
 const COLLAPSED_CLASS: string = 'mc-navbar-collapsed-title';
@@ -66,7 +66,7 @@ export class McNavbarItemBase {
     constructor(public _elementRef: ElementRef) {}
 }
 
-export const _McNavbarMixinBase = mixinDisabled(McNavbarItemBase);
+export const _McNavbarMixinBase: CanDisableCtor & typeof McNavbarItemBase = mixinDisabled(McNavbarItemBase);
 
 @Component({
     selector: MC_NAVBAR_ITEM,

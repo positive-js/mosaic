@@ -12,9 +12,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { UniqueSelectionDispatcher } from '@ptsecurity/cdk/collections';
 
 import {
-    CanColor,
-    CanDisable,
-    HasTabIndex,
+    CanColor, CanColorCtor,
+    CanDisable, CanDisableCtor,
+    HasTabIndex, HasTabIndexCtor,
     mixinColor,
     mixinDisabled,
     mixinTabIndex,
@@ -37,7 +37,7 @@ export class McRadioChange {
 // Boilerplate for applying mixins to McRadioGroup.
 /** @docs-private */
 export class McRadioGroupBase {}
-export const _McRadioGroupMixinBase = mixinDisabled(McRadioGroupBase);
+export const _McRadioGroupMixinBase: CanDisableCtor & typeof McRadioGroupBase = mixinDisabled(McRadioGroupBase);
 
 /**
  * Provider Expression that allows mc-radio-group to register as a ControlValueAccessor. This
@@ -215,7 +215,6 @@ export class McRadioGroup extends _McRadioGroupMixinBase
 
     /**
      * Sets the model value. Implemented as part of ControlValueAccessor.
-     * @param value
      */
     writeValue(value: any) {
         this.value = value;
@@ -286,8 +285,11 @@ export class McRadioButtonBase {
     constructor(public _elementRef: ElementRef) {}
 }
 
-export const _McRadioButtonMixinBase =
-    mixinColor(mixinTabIndex(McRadioButtonBase));
+export const _McRadioButtonMixinBase:
+    CanColorCtor &
+    HasTabIndexCtor &
+    typeof McRadioButtonBase =
+        mixinColor(mixinTabIndex(McRadioButtonBase));
 
 
 @Component({

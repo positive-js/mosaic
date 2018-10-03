@@ -12,7 +12,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
-import { CanColor, mixinColor, ThemePalette } from '@ptsecurity/mosaic/core';
+import { CanColor, CanColorCtor, mixinColor, ThemePalette } from '@ptsecurity/mosaic/core';
 import { EMPTY, merge } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 
@@ -33,7 +33,8 @@ export class McFormFieldBase {
     constructor(public _elementRef: ElementRef) {}
 }
 
-export const _McFormFieldMixinBase = mixinColor(McFormFieldBase, ThemePalette.Primary);
+export const _McFormFieldMixinBase: CanColorCtor & typeof McFormFieldBase
+    = mixinColor(McFormFieldBase, ThemePalette.Primary);
 
 @Component({
     selector: 'mc-form-field',

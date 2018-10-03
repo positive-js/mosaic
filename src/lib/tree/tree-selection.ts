@@ -14,7 +14,14 @@ import { NodeDef, ViewData } from '@angular/core/src/view';
 import { SelectionModel } from '@ptsecurity/cdk/collections';
 import { CdkTreeNode, CdkTree, CdkTreeNodeOutlet } from '@ptsecurity/cdk/tree';
 
-import { CanDisable, HasTabIndex, mixinDisabled, mixinTabIndex, toBoolean } from '@ptsecurity/mosaic/core';
+import {
+    CanDisable, CanDisableCtor,
+    HasTabIndex,
+    HasTabIndexCtor,
+    mixinDisabled,
+    mixinTabIndex,
+    toBoolean
+} from '@ptsecurity/mosaic/core';
 
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 
@@ -133,7 +140,11 @@ export class McTreeNodeOption<T> extends CdkTreeNode<T> implements CanDisable {
     }
 }
 
-export const _McTreeSelectionBase = mixinTabIndex(mixinDisabled(CdkTree));
+export const _McTreeSelectionBase:
+    HasTabIndexCtor &
+    CanDisableCtor &
+    typeof CdkTree
+    = mixinTabIndex(mixinDisabled(CdkTree));
 
 export class McTreeNavigationChange {
     constructor(

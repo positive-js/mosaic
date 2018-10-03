@@ -1,7 +1,9 @@
+import { spawnSync } from 'child_process';
 import { readFileSync, writeFileSync } from 'fs';
 import { platform } from 'os';
+
 import { buildConfig } from './build-config';
-import { spawnSync } from 'child_process';
+
 
 /** Variable that is set to the string for version placeholders. */
 const versionPlaceholderText = '0.0.0-PLACEHOLDER';
@@ -26,7 +28,7 @@ export function replaceVersionPlaceholders(packageDir: string) {
 
     // Walk through every file that contains version placeholders and replace those with the current
     // version of the root package.json file.
-    files.forEach(filePath => {
+    files.forEach((filePath) => {
         const fileContent = readFileSync(filePath, 'utf-8')
             .replace(ngVersionPlaceholderRegex, buildConfig.angularVersion)
             .replace(versionPlaceholderRegex, buildConfig.projectVersion);
@@ -38,6 +40,7 @@ export function replaceVersionPlaceholders(packageDir: string) {
 /** Finds all files in the specified package dir where version placeholders are included. */
 function findFilesWithPlaceholders(packageDir: string): string[] {
     const findCommand = buildPlaceholderFindCommand(packageDir);
+
     return spawnSync(findCommand.binary, findCommand.args).stdout
         .toString()
         .split(/[\n\r]/)

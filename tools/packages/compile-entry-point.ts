@@ -5,7 +5,7 @@ import { sync as glob } from 'glob';
 import { join } from 'path';
 
 import { BuildPackage } from './build-package';
-import { ngcCompile } from './ngc-compile';
+import { tsCompile } from './ts-compile';
 
 
 let nextId = 0;
@@ -24,7 +24,7 @@ export async function compileEntryPoint(buildPackage: BuildPackage, tsConfigName
         ngcFlags.push('--outDir', es5OutputPath, '--target', 'ES5');
     }
 
-    return ngcCompile(ngcFlags).catch(() => {
+    return tsCompile('ngc', ngcFlags).catch(() => {
         const error = chalk.default.red(`Failed to compile ${secondaryEntryPoint} using ${entryPointTSConfigPath}`);
         /* tslint:disable-next-line:no-console */
         console.error(error);
@@ -73,6 +73,7 @@ function addImportAs(packageName: string, outputPath: string, secondaryEntryPoin
     glob(join(path, '**/*.+(metadata.json)')).forEach((metadataPath) => {
         const metadata = JSON.parse(readFileSync(metadataPath, 'utf-8'));
 
+        // tslint:disable-next-line
         metadata[0]['importAs'] = `@ptsecurity/${packageName}/${secondaryEntryPoint}`;
 
         writeFileSync(metadataPath, JSON.stringify(metadata), 'utf-8');

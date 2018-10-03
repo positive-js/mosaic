@@ -15,7 +15,14 @@ import {
     FF_MINUS, LEFT_ARROW, RIGHT_ARROW, HOME, UP_ARROW, DOWN_ARROW, F1, F12
 } from '@ptsecurity/cdk/keycodes';
 import { getSupportedInputTypes, Platform } from '@ptsecurity/cdk/platform';
-import { CanUpdateErrorState, ErrorStateMatcher, mixinErrorState, stepDown, stepUp } from '@ptsecurity/mosaic/core';
+import {
+    CanUpdateErrorState,
+    CanUpdateErrorStateCtor,
+    ErrorStateMatcher,
+    mixinErrorState,
+    stepDown,
+    stepUp
+} from '@ptsecurity/mosaic/core';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { McFormFieldNumberControl } from '@ptsecurity/mosaic/form-field/form-field-number-control';
 import { Subject } from 'rxjs';
@@ -47,7 +54,8 @@ export class McInputBase {
     }
 }
 
-export const _McInputMixinBase = mixinErrorState(McInputBase);
+export const _McInputMixinBase: CanUpdateErrorStateCtor & typeof McInputBase =
+    mixinErrorState(McInputBase);
 
 
 @Directive({

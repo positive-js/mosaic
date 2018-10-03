@@ -1,0 +1,13 @@
+@import '../core/theming/theming';
+@import '../core/styles/typography/typography-utils';
+@import '../core/styles/common/animation';
+@import '../core/styles/common/overlay';
+
+
+$zindex-tooltip: 1060;
+$tooltip-max-width: 240px;
+$border-radius-base: 3px;
+//** Tooltip arrow width
+$tooltip-arrow-width: 8px;
+//** Tooltip distance with trigger
+$tooltip-distance: $tooltip-arrow-width + 3px;
