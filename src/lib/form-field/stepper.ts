@@ -1,9 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
 
-export const BIG_STEP = 10;
-export const SMALL_STEP = 1;
-
 @Component({
     selector: 'mc-stepper',
     template: `

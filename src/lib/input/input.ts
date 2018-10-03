@@ -23,11 +23,9 @@ import {
     stepDown,
     stepUp
 } from '@ptsecurity/mosaic/core';
-import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
-import { McFormFieldNumberControl } from '@ptsecurity/mosaic/form-field/form-field-number-control';
+import { McFormFieldControl, McFormFieldNumberControl } from '@ptsecurity/mosaic/form-field';
 import { Subject } from 'rxjs';
 
-import { BIG_STEP, SMALL_STEP } from './../form-field/stepper';
 import { getMcInputUnsupportedTypeError } from './input-errors';
 import { MC_INPUT_VALUE_ACCESSOR } from './input-value-accessor';
 
@@ -43,6 +41,9 @@ const MC_INPUT_INVALID_TYPES = [
     'reset',
     'submit'
 ];
+
+export const BIG_STEP = 10;
+export const SMALL_STEP = 1;
 
 let nextUniqueId = 0;
 
