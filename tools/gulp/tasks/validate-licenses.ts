@@ -19,6 +19,8 @@ const licensesWhitelist = [
     'BSD-3-Clause',
     'BSD-4-Clause',
 
+    'CC0-1.0',
+
     // All CC-BY licenses have a full copyright grant and attribution section.
     'CC-BY-3.0',
     'CC-BY-4.0',

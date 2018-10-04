@@ -1,19 +1,35 @@
-import {Injectable, NgZone, OnDestroy} from '@angular/core';
-import {coerceArray} from '@ptsecurity/cdk/coercion';
-import {combineLatest, fromEventPattern, Observable, Subject} from 'rxjs';
-import {map, startWith, takeUntil} from 'rxjs/operators';
+import { Injectable, NgZone, OnDestroy } from '@angular/core';
+import { coerceArray } from '@ptsecurity/cdk/coercion';
+import {asapScheduler, combineLatest, fromEventPattern, Observable, Subject} from 'rxjs';
+import {debounceTime, map, startWith, takeUntil} from 'rxjs/operators';
 
-import {MediaMatcher} from './media-matcher';
+import { MediaMatcher } from './media-matcher';
 
 
 /** The current state of a layout breakpoint. */
 export interface IBreakpointState {
     /** Whether the breakpoint is currently matching. */
     matches: boolean;
+
+    /**
+     * A key boolean pair for each query provided to the observe method,
+     * with its current matched state.
+     */
+    breakpoints: {
+        [key: string]: boolean;
+    };
+}
+
+/** The current state of a layout breakpoint. */
+interface InternalBreakpointState {
+    /** Whether the breakpoint is currently matching. */
+    matches: boolean;
+    /** The media query being to be matched */
+    query: string;
 }
 
 interface IQuery {
-    observable: Observable<IBreakpointState>;
+    observable: Observable<InternalBreakpointState>;
     mql: MediaQueryList;
 }
 
@@ -23,7 +39,7 @@ export class BreakpointObserver implements OnDestroy {
     /**  A map of all media queries currently being listened for. */
     private _queries: Map<string, IQuery> = new Map();
     /** A subject for all other observables to takeUntil based on. */
-    private _destroySubject: Subject<{}> = new Subject();
+    private _destroySubject = new Subject<void>();
 
     constructor(private mediaMatcher: MediaMatcher, private zone: NgZone) {
     }
@@ -55,10 +71,20 @@ export class BreakpointObserver implements OnDestroy {
         const queries = splitQueries(coerceArray(value));
         const observables = queries.map((query) => this._registerQuery(query).observable);
 
-        return combineLatest(observables).pipe(map((breakpointStates: IBreakpointState[]) => {
-            return {
-                matches: breakpointStates.some((state) => state && state.matches)
-            };
+        return combineLatest(observables).pipe(
+            debounceTime(0, asapScheduler),
+            map((breakpointStates: InternalBreakpointState[]) => {
+                const response: IBreakpointState = {
+                    matches: false,
+                    breakpoints: {},
+                };
+
+                breakpointStates.forEach((state: InternalBreakpointState) => {
+                    response.matches = response.matches || state.matches;
+                    response.breakpoints[state.query] = state.matches;
+                });
+
+                return response;
         }));
     }
 
@@ -70,6 +96,8 @@ export class BreakpointObserver implements OnDestroy {
         }
 
         const mql: MediaQueryList = this.mediaMatcher.matchMedia(query);
+        let queryListener;
+
         // Create callback for match changes and add it is as a listener.
         const queryObservable = fromEventPattern<MediaQueryList>(
             // Listener callback methods are wrapped to be placed back in ngZone. Callbacks must be placed
@@ -78,11 +106,10 @@ export class BreakpointObserver implements OnDestroy {
             // have MediaQueryList inherit from EventTarget, which causes inconsistencies in how Zone.js
             // patches it.
             (listener: Function) => {
-                mql.addListener((e: MediaQueryList) => this.zone.run(() => listener(e)));
+                queryListener = (e: any) => this.zone.run(() => listener(e));
+                mql.addListener(queryListener);
             },
-            (listener: Function) => {
-                mql.removeListener((e: MediaQueryList) => this.zone.run(() => listener(e)));
-            })
+            () => mql.removeListener(queryListener))
             .pipe(
                 takeUntil(this._destroySubject),
                 startWith(mql),
