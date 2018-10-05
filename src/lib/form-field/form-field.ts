@@ -63,7 +63,9 @@ export const _McFormFieldMixinBase: CanColorCtor & typeof McFormFieldBase
         '[class.ng-valid]': '_shouldForward("valid")',
         '[class.ng-invalid]': '_shouldForward("invalid")',
         '[class.ng-pending]': '_shouldForward("pending")',
-        '(keydown)': 'onKeyDown($event)'
+        '(keydown)': 'onKeyDown($event)',
+        '(mouseenter)': 'onHoverChanged(true)',
+        '(mouseleave)': 'onHoverChanged(false)'
     },
     inputs: ['color'],
     encapsulation: ViewEncapsulation.None,
@@ -83,6 +85,8 @@ export class McFormField extends _McFormFieldMixinBase implements
 
     // Unique id for the internal form field label.
     _labelId = `mc-form-field-label-${nextUniqueId++}`;
+
+    hovered: boolean = false;
 
     constructor(public _elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) {
         super(_elementRef);
@@ -106,9 +110,15 @@ export class McFormField extends _McFormFieldMixinBase implements
                 this._changeDetectorRef.markForCheck();
             });
 
+        if (this._numberControl) {
+            this._numberControl.stateChanges.pipe(startWith())
+                .subscribe(() => {
+                    this._changeDetectorRef.markForCheck();
+                });
+        }
+
         // Run change detection if the value changes.
         const valueChanges = this._control.ngControl && this._control.ngControl.valueChanges || EMPTY;
-
         merge(valueChanges)
             .subscribe(() => this._changeDetectorRef.markForCheck());
     }
@@ -147,6 +157,13 @@ export class McFormField extends _McFormFieldMixinBase implements
             }
 
             e.preventDefault();
+        }
+    }
+
+    onHoverChanged(isHovered: boolean) {
+        if (isHovered !== this.hovered) {
+            this.hovered  = isHovered;
+            this._changeDetectorRef.markForCheck();
         }
     }
 
@@ -204,8 +221,18 @@ export class McFormField extends _McFormFieldMixinBase implements
                 : false;
     }
 
+
+    get disabled(): boolean {
+        return this._control && this._control.disabled;
+    }
+
     get canShowStepper(): boolean {
-        return this._numberControl && this.hasStepper;
+        return this._numberControl &&
+            !this.disabled &&
+            (
+                this._numberControl.focused ||
+                this.hovered
+            );
     }
 }
 

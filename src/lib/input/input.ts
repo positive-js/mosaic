@@ -1,6 +1,6 @@
 import {
     Attribute,
-    Directive, DoCheck, ElementRef, HostListener, Inject, Input, OnChanges,
+    Directive, DoCheck, ElementRef, Inject, Input, OnChanges,
     OnDestroy, Optional, Self
 } from '@angular/core';
 import {
@@ -62,15 +62,48 @@ export const _McInputMixinBase: CanUpdateErrorStateCtor & typeof McInputBase =
 @Directive({
     selector: `input[mcInput][type="number"]`,
     exportAs: 'mcNumericalInput',
-    providers: [NgModel, { provide: McFormFieldNumberControl, useExisting: McNumberInput }]
+    providers: [NgModel, { provide: McFormFieldNumberControl, useExisting: McNumberInput }],
+    host: {
+        '(blur)': '_focusChanged(false)',
+        '(focus)': '_focusChanged(true)',
+        '(paste)': 'onPaste($event)',
+        '(keydown)': 'onKeyDown($event)'
+    }
 })
-export class McNumberInput {
+export class McNumberInput implements McFormFieldNumberControl<any> {
+    /**
+     * Implemented as part of McFormFieldNumberControl.
+     * @docs-private
+     */
+    value: any;
+
+    /**
+     * Implemented as part of McFormFieldNumberControl.
+     * @docs-private
+     */
+    focused: boolean = false;
+
+    /**
+     * Implemented as part of McFormFieldNumberControl.
+     * @docs-private
+     */
+    readonly stateChanges: Subject<void> = new Subject<void>();
 
     private readonly _host: HTMLInputElement;
+
+    /**
+     * Implemented as part of McFormFieldNumberControl.
+     * @docs-private
+     */
     private readonly _step: number;
     get step() {
         return this._step;
     }
+
+    /**
+     * Implemented as part of McFormFieldNumberControl.
+     * @docs-private
+     */
     private readonly _bigStep: number;
     get bigStep() {
         return this._bigStep;
@@ -109,7 +142,13 @@ export class McNumberInput {
         }
     }
 
-    @HostListener('keydown', ['$event'])
+    _focusChanged(isFocused: boolean) {
+        if (isFocused !== this.focused) {
+            this.focused = isFocused;
+            this.stateChanges.next();
+        }
+    }
+
     onKeyDown(event: KeyboardEvent) {
         // tslint:disable-next-line:deprecation
         const keyCode = event.keyCode;
@@ -129,10 +168,13 @@ export class McNumberInput {
         const arrows = [LEFT_ARROW, RIGHT_ARROW];
         const allowedKeys =  [HOME, END].concat(arrows).concat(serviceKeys).concat(minuses);
 
+        const isIEPeriod = (e) => e.key === '.' || e.key === 'Decimal';
+        const isNotIEPeriod = (e) => e.key === '.' || e.key === ',';
+
         // Decimal is for IE
         const isPeriod = (e) => this._platform.EDGE || this._platform.TRIDENT
-            ? e.key === '.' || e.key === 'Decimal'
-            : e.key === '.' || e.key === ',';
+            ? isIEPeriod(e)
+            : isNotIEPeriod(e);
 
         if (allowedKeys.indexOf(keyCode) !== -1 ||
             isCtrlA(event) ||
@@ -162,7 +204,6 @@ export class McNumberInput {
         }
     }
 
-    @HostListener('paste', ['$event'])
     onPaste(event) {
         let value = event.clipboardData.getData('text');
         value = this.normalizeSplitter(value);
@@ -173,12 +214,14 @@ export class McNumberInput {
     }
 
     stepUp(step: number) {
+        this._elementRef.nativeElement.focus();
         const res = stepUp(this._host.valueAsNumber, this._max, this._min, step);
         this._host.value = res === null ? '' : res.toString();
         this._model.update.emit(this._host.valueAsNumber);
     }
 
     stepDown(step: number) {
+        this._elementRef.nativeElement.focus();
         const res = stepDown(this._host.valueAsNumber, this._max, this._min, step);
         this._host.value = res === null ? '' : res.toString();
         this._model.update.emit(this._host.valueAsNumber);
@@ -352,7 +395,6 @@ export class McInput extends _McInputMixinBase implements McFormFieldControl<any
     private _inputValueAccessor: { value: any };
 
     constructor(protected _elementRef: ElementRef,
-                protected _platform: Platform,
                 @Optional() @Self() public ngControl: NgControl,
                 @Optional() _parentForm: NgForm,
                 @Optional() _parentFormGroup: FormGroupDirective,
