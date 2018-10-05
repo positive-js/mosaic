@@ -9,7 +9,7 @@ module.exports = {
                 'build',
                 'button',
                 'cdk',
-                'cards',
+                'card',
                 'checkbox',
                 'chore',
                 'common',

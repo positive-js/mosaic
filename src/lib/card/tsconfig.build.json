@@ -6,7 +6,7 @@
     "angularCompilerOptions": {
         "strictMetadataEmit": true,
         "flatModuleOutFile": "index.js",
-        "flatModuleId": "@ptsecurity/mosaic/cards",
+        "flatModuleId": "@ptsecurity/mosaic/card",
         "skipTemplateCodegen": true,
         "fullTemplateTypeCheck": true
     }

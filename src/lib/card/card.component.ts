@@ -33,13 +33,14 @@ const name = 'mc-card';
 
 @Component({
     selector: name,
-    templateUrl: './cards.component.html',
-    styleUrls: ['./cards.component.css'],
+    templateUrl: './card.component.html',
+    styleUrls: ['./card.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     inputs: ['color'],
     host: {
-        class: name
+        class: name,
+        '[class.mc-card_readonly]': 'readonly'
     }
 })
 export class McCard implements OnDestroy {
@@ -53,7 +54,6 @@ export class McCard implements OnDestroy {
         this._tabIndex = value;
     }
 
-    @HostBinding('class.mc-readonly')
     @Input()
     readonly = false;
 
@@ -68,9 +68,6 @@ export class McCard implements OnDestroy {
 
     @Input()
     status: Status = Status.Info;
-
-    @HostBinding('class.mc-card__hover')
-    hover  = false;
 
     @ContentChild(ContentLeft)
     contentLeft: any;
@@ -87,13 +84,13 @@ export class McCard implements OnDestroy {
     get statusClass() {
         switch (this.status) {
             case Status.Error:
-                return `${name}__error`;
+                return `${name}_error`;
             case Status.Info:
-                return `${name}__info`;
+                return `${name}_info`;
             case Status.Success:
-                return `${name}__success`;
+                return `${name}_success`;
             case Status.Warning:
-                return `${name}__warning`;
+                return `${name}_warning`;
             default:
                 return '';
         }
@@ -116,10 +113,6 @@ export class McCard implements OnDestroy {
             $event.stopPropagation();
             this.selectedChange.emit(!this.selected);
         }
-    }
-
-    mouseEnter() {
-        this.hover = !this.readonly ? true : false;
     }
 
     private get hostElement() {

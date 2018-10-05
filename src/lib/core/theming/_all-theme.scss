@@ -4,7 +4,7 @@
 @import '../visual/panel-theme';
 @import '../../link/link-theme';
 @import '../../button/button-theme';
-@import '../../cards/cards-theme';
+@import '../../card/card-theme';
 @import '../../list/list-theme';
 @import '../../progress-bar/progress-bar-theme';
 @import '../../progress-spinner/progress-spinner-theme';
@@ -27,7 +27,7 @@
     @include mc-link-theme($theme);
     @include mc-badge-theme($theme);
     @include mc-button-theme($theme);
-    @include mc-cards-theme($theme);
+    @include mc-card-theme($theme);
     @include mc-list-theme($theme);
     @include mc-panel-theme($theme);
     @include mc-progress-bar-theme($theme);

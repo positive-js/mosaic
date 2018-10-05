@@ -2,7 +2,7 @@ import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import { McCardsModule, Status } from '../../lib/cards';
+import { McCardModule, Status } from '../../lib/card';
 
 
 @Component({
@@ -27,7 +27,7 @@ export class CardsDemoComponent {
     ],
     imports: [
         BrowserModule,
-        McCardsModule
+        McCardModule
     ],
     bootstrap: [
         CardsDemoComponent

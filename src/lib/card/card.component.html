@@ -1,0 +1,15 @@
+<div class="mc-card__wrapper" [ngClass]="statusClass"
+     [class.mc-card_white]="isWhiteMode" [class.mc-card_selected]="selected"
+     (click)="clicked($event)">
+    <div class="mc-card__content-left" [class.mc-card_has-content]="contentLeft">
+        <ng-content select="[content-left]"></ng-content>
+    </div>
+    <div class="mc-card__main-content" >
+        <ng-content></ng-content>
+    </div>
+    <div class="mc-card__content-right"[class.mc-card_has-content]="contentRight">
+        <ng-content select="[content-right]"></ng-content>
+    </div>
+</div>
+<div class="mc-card__hover-overlay"></div>
+<div class="mc-card__focus-overlay"></div>

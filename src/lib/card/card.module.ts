@@ -7,7 +7,7 @@ import { PlatformModule } from '@ptsecurity/cdk/platform';
 import {
     ContentLeft, ContentRight,
     McCard
-} from './cards.component';
+} from './card.component';
 
 
 @NgModule({
@@ -27,4 +27,4 @@ import {
         ContentRight
     ]
 })
-export class McCardsModule {}
+export class McCardModule {}

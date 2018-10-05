@@ -1,4 +1,4 @@
-@import 'cards-theme';
+@import 'card-theme';
 @import '../core/styles/common/layout';
 
 .mc-card {
@@ -8,7 +8,7 @@
     flex-direction: column;
     cursor: pointer;
 
-    .mc-cards-wrapper {
+    &__wrapper {
         flex: auto;
         display: flex;
         flex-direction: row;
@@ -19,29 +19,29 @@
             position: relative;
         }
     
-        .content-left {
+        .mc-card__content-left {
             @extend %content-base;
             
             flex: none;
             margin: 16px 12px;
     
-            &.has-content {
+            &.mc-card_has-content {
                 margin-left: 20px;
             }
         }
         
-        .main-content {
+        .mc-card__main-content {
             @extend %content-base;
             flex: auto;
             margin: 12px 0;
         }
         
-        .content-right {
+        .mc-card__content-right {
             @extend %content-base;
             flex: none;
             margin: 8px 16px 8px 8px;
     
-            &.has-content {
+            &.mc-card_has-content {
                 margin-right: 8px;
             }
         }
@@ -55,26 +55,24 @@
         z-index: 1;
     }
     
-    .mc-cards-focus-overlay {
+    &__focus-overlay {
         @include mc-fill;
         pointer-events:none;
     }
     
-    .mc-cards-hover-overlay {
+    &__hover-overlay {
         @include mc-fill;
         display: none !important;
         pointer-events:none;
     }
     
-    &.mc-card__hover {
-        .mc-cards-hover-overlay {
+    &:not(.mc-card_readonly):hover {
+        .mc-card__hover-overlay {
             display: block !important;
         }
     }
     
-    &.mc-readonly {
+    &.mc-card_readonly {
         cursor: auto;
     }
 }
-
-

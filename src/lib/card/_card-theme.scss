@@ -31,7 +31,7 @@
     }
 }
 
-@mixin mc-cards-theme($theme) {
+@mixin mc-card-theme($theme) {
     $isDark: map-get($theme, is-dark);
     $info: map-get($theme, primary);
     $error: map-get($theme, warn);
@@ -49,49 +49,49 @@
         background-color: mc-color($mc-grey, 60);
         color: $foreground-color;
         
-        &__info {
+        &_info {
             @include normal-state($info, $isDark);
             
-            &.mc-card__selected {
+            &.mc-card_selected {
                 @include selected-state($info, $info, $isDark);
             }
         }
         
-        &__warning {
+        &_warning {
             @include normal-state($warning, $isDark);
             
-            &.mc-card__selected {
+            &.mc-card_selected {
                 @include selected-state($warning, $info, $isDark);
             }
         }
         
-        &__success {
+        &_success {
             @include normal-state($success, $isDark);
             
-            &.mc-card__selected {
+            &.mc-card_selected {
                 @include selected-state($success, $info, $isDark);
             }
         }
         
-        &__error {
+        &_error {
             @include normal-state($error, $isDark);
             
-            &.mc-card__selected {
+            &.mc-card_selected {
                 @include selected-state($error, $info, $isDark);
             }
         }
         
-        &__white {
+        &_white {
             background-color: $background-color;
         }
         
-        .mc-cards-hover-overlay {
+        .mc-card__hover-overlay {
             background: $hover-color;
         }
         
         &:focus,
         &.cdk-focused {
-            .mc-cards-focus-overlay {
+            .mc-card__focus-overlay {
                 border: solid 1px $focus-color;
             }
         }
