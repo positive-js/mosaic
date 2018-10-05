@@ -3,6 +3,7 @@ export * from './version';
 export * from '@ptsecurity/mosaic/core';
 
 export * from '@ptsecurity/mosaic/button';
+export * from '@ptsecurity/mosaic/card';
 export * from '@ptsecurity/mosaic/checkbox';
 export * from '@ptsecurity/mosaic/divider';
 export * from '@ptsecurity/mosaic/form-field';
