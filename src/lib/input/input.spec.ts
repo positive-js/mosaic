@@ -365,8 +365,14 @@ class McNumberInputMaxMinStep {
 
 // tslint:disable no-magic-numbers
 describe('McNumberInput', () => {
-    it('should has stepper', fakeAsync(() => {
+    it('should have stepper on focus', fakeAsync(() => {
         const fixture = createComponent(McNumberInput);
+        fixture.detectChanges();
+
+        const inputElementDebug = fixture.debugElement.query(By.directive(McInput));
+        const inputElement = inputElementDebug.nativeElement;
+
+        dispatchFakeEvent(inputElement, 'focus');
         fixture.detectChanges();
 
         const mcStepper = fixture.debugElement.query(By.css('mc-stepper'));
@@ -376,16 +382,31 @@ describe('McNumberInput', () => {
         expect(icons.length).toBe(2);
     }));
 
+    it('should not have stepper initially', fakeAsync(() => {
+        const fixture = createComponent(McNumberInput);
+        fixture.detectChanges();
+
+        const mcStepper = fixture.debugElement.query(By.css('mc-stepper'));
+
+        expect(mcStepper).toBeNull();
+    }));
+
     describe('empty value', () => {
         it('should not step up when no max', fakeAsync(() => {
             const fixture = createComponent(McNumberInput);
+            fixture.detectChanges();
+
+            const inputElementDebug = fixture.debugElement.query(By.directive(McInput));
+            const inputElement = inputElementDebug.nativeElement;
+
+            dispatchFakeEvent(inputElement, 'focus');
             fixture.detectChanges();
 
             const mcStepper = fixture.debugElement.query(By.css('mc-stepper'));
             const icons = mcStepper.queryAll(By.css('.mc-icon'));
             const iconUp = icons[0];
 
-            iconUp.nativeElement.click();
+            dispatchFakeEvent(iconUp.nativeElement, 'mousedown');
 
             fixture.detectChanges();
 
@@ -396,11 +417,17 @@ describe('McNumberInput', () => {
             const fixture = createComponent(McNumberInput);
             fixture.detectChanges();
 
+            const inputElementDebug = fixture.debugElement.query(By.directive(McInput));
+            const inputElement = inputElementDebug.nativeElement;
+
+            dispatchFakeEvent(inputElement, 'focus');
+            fixture.detectChanges();
+
             const mcStepper = fixture.debugElement.query(By.css('mc-stepper'));
             const icons = mcStepper.queryAll(By.css('.mc-icon'));
             const iconDown = icons[0];
 
-            iconDown.nativeElement.click();
+            dispatchFakeEvent(iconDown.nativeElement, 'mousedown');
 
             fixture.detectChanges();
 
@@ -412,11 +439,17 @@ describe('McNumberInput', () => {
             const fixture = createComponent(McNumberInputMaxMinStep);
             fixture.detectChanges();
 
+            const inputElementDebug = fixture.debugElement.query(By.directive(McInput));
+            const inputElement = inputElementDebug.nativeElement;
+
+            dispatchFakeEvent(inputElement, 'focus');
+            fixture.detectChanges();
+
             const mcStepper = fixture.debugElement.query(By.css('mc-stepper'));
             const icons = mcStepper.queryAll(By.css('.mc-icon'));
             const iconUp = icons[0];
 
-            iconUp.nativeElement.click();
+            dispatchFakeEvent(iconUp.nativeElement, 'mousedown');
 
             fixture.detectChanges();
 
@@ -427,11 +460,18 @@ describe('McNumberInput', () => {
             const fixture = createComponent(McNumberInputMaxMinStep);
             fixture.detectChanges();
 
+            const inputElementDebug = fixture.debugElement.query(By.directive(McInput));
+            const inputElement = inputElementDebug.nativeElement;
+
+            dispatchFakeEvent(inputElement, 'focus');
+
+            fixture.detectChanges();
+
             const mcStepper = fixture.debugElement.query(By.css('mc-stepper'));
             const icons = mcStepper.queryAll(By.css('.mc-icon'));
             const iconDown = icons[1];
 
-            iconDown.nativeElement.click();
+            dispatchFakeEvent(iconDown.nativeElement, 'mousedown');
 
             fixture.detectChanges();
 
@@ -444,17 +484,20 @@ describe('McNumberInput', () => {
             const fixture = createComponent(McNumberInput);
             fixture.detectChanges();
 
-            const mcStepper = fixture.debugElement.query(By.css('mc-stepper'));
-            const icons = mcStepper.queryAll(By.css('.mc-icon'));
-            const iconUp = icons[0];
-
             const inputElementDebug = fixture.debugElement.query(By.directive(McInput));
             const inputElement = inputElementDebug.nativeElement;
 
             inputElement.value = 1;
             dispatchFakeEvent(inputElement, 'input');
+            dispatchFakeEvent(inputElement, 'focus');
 
-            iconUp.nativeElement.click();
+            fixture.detectChanges();
+
+            const mcStepper = fixture.debugElement.query(By.css('mc-stepper'));
+            const icons = mcStepper.queryAll(By.css('.mc-icon'));
+            const iconUp = icons[0];
+
+            dispatchFakeEvent(iconUp.nativeElement, 'mousedown');
 
             fixture.detectChanges();
 
@@ -465,17 +508,20 @@ describe('McNumberInput', () => {
             const fixture = createComponent(McNumberInput);
             fixture.detectChanges();
 
-            const mcStepper = fixture.debugElement.query(By.css('mc-stepper'));
-            const icons = mcStepper.queryAll(By.css('.mc-icon'));
-            const iconDown = icons[1];
-
             const inputElementDebug = fixture.debugElement.query(By.directive(McInput));
             const inputElement = inputElementDebug.nativeElement;
 
             inputElement.value = 1;
             dispatchFakeEvent(inputElement, 'input');
+            dispatchFakeEvent(inputElement, 'focus');
 
-            iconDown.nativeElement.click();
+            fixture.detectChanges();
+
+            const mcStepper = fixture.debugElement.query(By.css('mc-stepper'));
+            const icons = mcStepper.queryAll(By.css('.mc-icon'));
+            const iconDown = icons[1];
+
+            dispatchFakeEvent(iconDown.nativeElement, 'mousedown');
 
             fixture.detectChanges();
 
@@ -611,17 +657,20 @@ describe('McNumberInput', () => {
             const fixture = createComponent(McNumberInputMaxMinStep);
             fixture.detectChanges();
 
-            const mcStepper = fixture.debugElement.query(By.css('mc-stepper'));
-            const icons = mcStepper.queryAll(By.css('.mc-icon'));
-            const iconUp = icons[0];
-
             const inputElementDebug = fixture.debugElement.query(By.directive(McInput));
             const inputElement = inputElementDebug.nativeElement;
 
             inputElement.value = 20;
             dispatchFakeEvent(inputElement, 'input');
+            dispatchFakeEvent(inputElement, 'focus');
 
-            iconUp.nativeElement.click();
+            fixture.detectChanges();
+
+            const mcStepper = fixture.debugElement.query(By.css('mc-stepper'));
+            const icons = mcStepper.queryAll(By.css('.mc-icon'));
+            const iconUp = icons[0];
+
+            dispatchFakeEvent(iconUp.nativeElement, 'mousedown');
 
             fixture.detectChanges();
 
@@ -632,17 +681,20 @@ describe('McNumberInput', () => {
             const fixture = createComponent(McNumberInputMaxMinStep);
             fixture.detectChanges();
 
-            const mcStepper = fixture.debugElement.query(By.css('mc-stepper'));
-            const icons = mcStepper.queryAll(By.css('.mc-icon'));
-            const iconDown = icons[1];
-
             const inputElementDebug = fixture.debugElement.query(By.directive(McInput));
             const inputElement = inputElementDebug.nativeElement;
 
             inputElement.value = 1;
             dispatchFakeEvent(inputElement, 'input');
+            dispatchFakeEvent(inputElement, 'focus');
 
-            iconDown.nativeElement.click();
+            fixture.detectChanges();
+
+            const mcStepper = fixture.debugElement.query(By.css('mc-stepper'));
+            const icons = mcStepper.queryAll(By.css('.mc-icon'));
+            const iconDown = icons[1];
+
+            dispatchFakeEvent(iconDown.nativeElement, 'mousedown');
 
             fixture.detectChanges();
 
