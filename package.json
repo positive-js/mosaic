@@ -133,7 +133,7 @@
         "changelog": "gulp changelog",
         "publish": "ts-node --project ./scripts/tsconfig.deploy.json ./scripts/deploy/publish-artifacts.ts",
         "linter:lib": "gulp tslint",
-        "linter:styles": "stylelint --syntax scss \"./**/*.scss\"",
+        "linter:styles": "gulp stylelint",
         "server-dev": "webpack-dev-server --config tools/webpack/webpack.config.js",
         "server-dev:badge": "npm run server-dev -- --env.component badge",
         "server-dev:button": "npm run server-dev -- --env.component button",
