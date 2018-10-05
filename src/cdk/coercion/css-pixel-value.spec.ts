@@ -1,4 +1,4 @@
-import {coerceCssPixelValue} from './css-pixel-value';
+import { coerceCssPixelValue } from './css-pixel-value';
 
 
 describe('coerceCssPixelValue', () => {

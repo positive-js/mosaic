@@ -1,8 +1,8 @@
-import {TestBed, inject, fakeAsync, tick} from '@angular/core/testing';
-import {dispatchFakeEvent} from '@ptsecurity/cdk/testing';
+import { TestBed, inject, fakeAsync, tick } from '@angular/core/testing';
+import { dispatchFakeEvent } from '@ptsecurity/cdk/testing';
 
-import {ScrollDispatchModule} from './public-api';
-import {ViewportRuler} from './viewport-ruler';
+import { ScrollDispatchModule } from './public-api';
+import { ViewportRuler } from './viewport-ruler';
 
 
 // For all tests, we assume the browser window is 1024x786 (outerWidth x outerHeight).

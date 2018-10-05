@@ -24,6 +24,7 @@ export function mixinDisabled<T extends Constructor<{}>>(base: T): CanDisableCto
         }
 
         constructor(...args: any[]) {
+            // tslint:disable-next-line
             super(...args);
         }
     };

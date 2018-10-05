@@ -14,7 +14,8 @@ import { A11yModule } from '../index';
 import { FocusMonitor, FocusOrigin, TOUCH_BUFFER_MS } from './focus-monitor';
 
 
-/* tslint:disable:no-magic-numbers */
+// tslint:disable:no-magic-numbers
+// tslint:disable no-unbound-method
 describe('FocusMonitor', () => {
     let fixture: ComponentFixture<PlainButton>;
     let buttonElement: HTMLElement;
@@ -226,7 +227,7 @@ describe('cdkMonitorFocus', () => {
                 ButtonWithFocusClasses,
                 ComplexComponentWithMonitorElementFocus,
                 ComplexComponentWithMonitorSubtreeFocus,
-                ComplexComponentWithMonitorSubtreeFocusAndMonitorElementFocus,
+                ComplexComponentWithMonitorSubtreeFocusAndMonitorElementFocus
             ]
         }).compileComponents();
     });
@@ -474,8 +475,8 @@ class PlainButton {
         <button cdkMonitorElementFocus (cdkFocusChange)="focusChanged($event)"></button>`
 })
 class ButtonWithFocusClasses {
-    focusChanged(_origin: FocusOrigin) {
-    }
+    // tslint:disable-next-line
+    focusChanged(_origin: FocusOrigin) {}
 }
 
 

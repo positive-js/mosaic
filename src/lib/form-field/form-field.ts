@@ -53,6 +53,7 @@ export const _McFormFieldMixinBase: CanColorCtor & typeof McFormFieldBase
         '[class.mc-form-field_disabled]': '_control.disabled',
         '[class.mc-form-field_has-prefix]': 'hasPrefix',
         '[class.mc-form-field_has-suffix]': 'hasSuffix',
+        '[class.mc-form-field_has-cleaner]': 'hasCleaner',
         '[class.mc-form-field_has-cleaner]': 'canShowCleaner',
         '[class.mc-form-field_has-stepper]': 'canShowStepper',
         '[class.mc-focused]': '_control.focused',

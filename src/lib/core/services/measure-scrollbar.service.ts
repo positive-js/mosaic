@@ -34,6 +34,7 @@ export class McMeasureScrollbarService {
     initScrollBarWidth() {
         const scrollDiv = this.document.createElement('div');
 
+        // tslint:disable-next-line
         for (const scrollProp in this.scrollbarMeasure) {
             if (this.scrollbarMeasure.hasOwnProperty(scrollProp)) {
                 scrollDiv.style[scrollProp] = this.scrollbarMeasure[scrollProp];

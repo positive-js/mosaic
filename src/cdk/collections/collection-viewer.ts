@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 
 
 /** Represents a range of numbers with a specified start and end. */
+// tslint:disable-next-line
 export type ListRange = { start: number, end: number };
 
 

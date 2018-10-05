@@ -30,7 +30,7 @@ export function dispatchKeyboardEvent(node: Node, type: string, keyCode: number,
 }
 
 /** Shorthand to dispatch a mouse event on the specified coordinates. */
-// tslint:disable-next-line:no-reserved-keywords
+// tslint:disable-next-line
 export function dispatchMouseEvent(node: Node, type: string, x = 0, y = 0,
                                    event = createMouseEvent(type, x, y)): MouseEvent {
     return dispatchEvent(node, event) as MouseEvent;

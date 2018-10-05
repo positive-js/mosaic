@@ -6,13 +6,14 @@ import { join } from 'path';
 /* tslint:disable-next-line:no-reserved-keywords */
 export function createMetadataReexportFile(destDir: string, from: string | string[],
                                            entryPointName: string, importAsName: string) {
+    // tslint:disable-next-line
     from = Array.isArray(from) ? from : [from];
 
     const metadataJsonContent = JSON.stringify({
         __symbolic: 'module',
         version: 3,
         metadata: {},
-        exports: from.map(f => ({from: f})),
+        exports: from.map((f) => ({from: f})),
         flatModuleIndexRedirect: true,
         importAs: importAsName
         /* tslint:disable-next-line:no-magic-numbers */

@@ -1,6 +1,8 @@
 import { getMultipleValuesInSingleSelectionError, SelectionModel } from './selection';
 
 
+// tslint:disable:no-magic-numbers
+// tslint:disable no-unbound-method
 describe('SelectionModel', () => {
     describe('single selection', () => {
         let model: SelectionModel<any>;

@@ -5,6 +5,8 @@ import { join } from 'path';
 import { buildConfig } from '../../packages';
 
 
+/* tslint:disable:no-var-requires */
+/* tslint:disable:no-magic-numbers */
 // This imports lack of type definitions.
 const gulpChangelog = require('gulp-conventional-changelog');
 const gitSemverTags = require('git-semver-tags');
@@ -71,13 +73,14 @@ const writerOpts = {
 
 /** Task that generates a new changelog section from the latest tag to HEAD. */
 task('changelog', async () => {
-    //TODO: Show the instructions for the changelog generation.
+    // TODO: Show the instructions for the changelog generation.
     showChangelogInstructions();
 
     // Cancel the generation when the latest tag is the same as the version from the "package.json".
     if (await getLatestSemverTag() === buildConfig.projectVersion) {
-        console.error(chalk.default.red('Warning: Changelog won\'t change because the "package.json" version is ' +
-            'equal to the latest Git tag.\n'));
+        // tslint:disable-next-line
+        console.error(chalk.default.red(`Warning: Changelog won\'t change because the "package.json"
+                                         version is equal to the latest Git tag.\n`));
 
         return;
     }

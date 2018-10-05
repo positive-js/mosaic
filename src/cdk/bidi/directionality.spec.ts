@@ -14,7 +14,7 @@ describe('Directionality', () => {
         TestBed.configureTestingModule({
             imports: [BidiModule],
             declarations: [ElementWithDir, InjectsDirectionality],
-            providers: [{ provide: DIR_DOCUMENT, useFactory: () => fakeDocument }],
+            providers: [{ provide: DIR_DOCUMENT, useFactory: () => fakeDocument }]
         }).compileComponents();
     }));
 
