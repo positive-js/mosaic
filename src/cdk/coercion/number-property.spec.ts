@@ -1,6 +1,7 @@
-import {coerceNumberProperty} from './number-property';
-//tslint:disable
+import { coerceNumberProperty } from './number-property';
 
+
+//tslint:disable
 describe('coerceNumberProperty', () => {
 
   it('should coerce undefined to 0 or default', () => {

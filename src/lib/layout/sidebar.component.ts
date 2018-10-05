@@ -3,7 +3,6 @@ import {
     Component,
     EventEmitter,
     Host,
-    HostBinding,
     Input,
     OnInit,
     Optional,
@@ -51,6 +50,7 @@ export class McSidebarComponent implements OnInit {
         return this.collapsed;
     }
 
+    // tslint:disable-next-line
     @Output() mcCollapsedChange = new EventEmitter();
 
     private collapsed = false;

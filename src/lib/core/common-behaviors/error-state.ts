@@ -8,11 +8,13 @@ import { Constructor } from './constructor';
 
 /** @docs-private */
 export interface CanUpdateErrorState {
-    updateErrorState();
 
     readonly stateChanges: Subject<void>;
+
     errorState: boolean;
     errorStateMatcher: ErrorStateMatcher;
+
+    updateErrorState();
 }
 
 /** @docs-private */

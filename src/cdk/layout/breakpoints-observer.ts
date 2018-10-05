@@ -1,7 +1,7 @@
 import { Injectable, NgZone, OnDestroy } from '@angular/core';
 import { coerceArray } from '@ptsecurity/cdk/coercion';
-import {asapScheduler, combineLatest, fromEventPattern, Observable, Subject} from 'rxjs';
-import {debounceTime, map, startWith, takeUntil} from 'rxjs/operators';
+import { asapScheduler, combineLatest, fromEventPattern, Observable, Subject } from 'rxjs';
+import { debounceTime, map, startWith, takeUntil } from 'rxjs/operators';
 
 import { MediaMatcher } from './media-matcher';
 
@@ -76,7 +76,7 @@ export class BreakpointObserver implements OnDestroy {
             map((breakpointStates: InternalBreakpointState[]) => {
                 const response: IBreakpointState = {
                     matches: false,
-                    breakpoints: {},
+                    breakpoints: {}
                 };
 
                 breakpointStates.forEach((state: InternalBreakpointState) => {

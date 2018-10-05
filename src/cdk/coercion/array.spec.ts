@@ -1,4 +1,4 @@
-import {coerceArray} from './array';
+import { coerceArray } from './array';
 
 
 describe('coerceArray', () => {
