@@ -15,7 +15,7 @@ export function tsCompile(binary: 'tsc' | 'ngc', flags: string[]) {
 
     // tslint:disable-next-line
     return new Promise((resolve, reject) => {
-        const binaryPath = resolvePath('./node_modules/.bin/ngc');
+        const binaryPath = resolvePath(`./node_modules/.bin/${binary}`);
         const childProcess = spawn(binaryPath, flags, {shell: true});
 
         // Pipe stdout and stderr from the child process.

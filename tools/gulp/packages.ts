@@ -11,3 +11,5 @@ mosaicPackage.exportsSecondaryEntryPointsAtRoot = true;
 mosaicPackage.sourceDir = join(buildConfig.packagesDir, 'lib');
 
 cdkPackage.copySecondaryEntryPointStylesToRoot = true;
+
+cdkPackage.hasSchematics = true;
