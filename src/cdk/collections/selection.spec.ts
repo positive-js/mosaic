@@ -84,6 +84,14 @@ describe('SelectionModel', () => {
 
             expect(model.selected).toEqual([1, 2, 3]);
         });
+
+        it('should sort values if `selected` has not been accessed before', () => {
+            model = new SelectionModel(true, [2, 3, 1]);
+
+            // Important: don't assert `selected` before sorting so the getter isn't invoked
+            model.sort();
+            expect(model.selected).toEqual([1, 2, 3]);
+        });
     });
 
     describe('onChange event', () => {
@@ -91,10 +99,10 @@ describe('SelectionModel', () => {
             const model = new SelectionModel();
             const spy = jasmine.createSpy('SelectionModel change event');
 
-            model.onChange!.subscribe(spy);
+            model.onChange.subscribe(spy);
             model.select(1);
 
-            let event = spy.calls.mostRecent().args[0];
+            const event = spy.calls.mostRecent().args[0];
 
             expect(spy).toHaveBeenCalled();
             expect(event.source).toBe(model);
@@ -211,10 +219,6 @@ describe('SelectionModel', () => {
             model = new SelectionModel(true, undefined, false);
         });
 
-        it('should not have an onChange stream if change events are disabled', () => {
-            expect(model.onChange).toBeFalsy();
-        });
-
         it('should still update the select value', () => {
             model.select(1);
             expect(model.selected).toEqual([1]);
@@ -237,11 +241,11 @@ describe('SelectionModel', () => {
     it('should be able to determine whether it has a value', () => {
         const model = new SelectionModel();
 
-        expect(model.isEmpty()).toBe(true);
+        expect(model.hasValue()).toBe(false);
 
         model.select(1);
 
-        expect(model.isEmpty()).toBe(false);
+        expect(model.hasValue()).toBe(true);
     });
 
     it('should be able to toggle an option', () => {
@@ -270,5 +274,13 @@ describe('SelectionModel', () => {
 
     it('should be empty if an empty array is passed for the preselected values', () => {
         expect(new SelectionModel(false, []).selected).toEqual([]);
+    });
+
+    it('should be able to determine whether multiple values can be selected', () => {
+        const multipleSelectionModel = new SelectionModel(true);
+        expect(multipleSelectionModel.isMultipleSelection()).toBe(true);
+
+        const singleSelectionModel = new SelectionModel();
+        expect(singleSelectionModel.isMultipleSelection()).toBe(false);
     });
 });
