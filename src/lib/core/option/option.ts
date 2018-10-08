@@ -206,6 +206,7 @@ export class McOption implements AfterViewChecked, OnDestroy {
 
     /** Ensures the option is selected when activated from the keyboard. */
     _handleKeydown(event: KeyboardEvent): void {
+        // tslint:disable-next-line
         if (event.keyCode === ENTER || event.keyCode === SPACE) {
             this._selectViaInteraction();
 

@@ -1,5 +1,5 @@
-import { inject, TestBed } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
+import { inject, TestBed } from '@angular/core/testing';
 
 import { StyleManager } from './style-manager';
 
@@ -17,25 +17,25 @@ describe('StyleManager', () => {
     }));
 
     afterEach(() => {
-        const links = document.head.querySelectorAll('link');
+        const links = document.head!.querySelectorAll('link');
 
         for (const link of Array.prototype.slice.call(links)) {
             if (link.className.includes('style-manager-')) {
-                document.head.removeChild(link);
+                document.head!.removeChild(link);
             }
         }
     });
 
     it('should add stylesheet to head', () => {
         styleManager.setStyle('test', 'test.css');
-        const styleEl = document.head.querySelector('.style-manager-test') as HTMLLinkElement;
+        const styleEl = document.head!.querySelector('.style-manager-test') as HTMLLinkElement;
         expect(styleEl).not.toBeNull();
         expect(styleEl.href.endsWith('test.css')).toBe(true);
     });
 
     it('should change existing stylesheet', () => {
         styleManager.setStyle('test', 'test.css');
-        const styleEl = document.head.querySelector('.style-manager-test') as HTMLLinkElement;
+        const styleEl = document.head!.querySelector('.style-manager-test') as HTMLLinkElement;
         expect(styleEl).not.toBeNull();
         expect(styleEl.href.endsWith('test.css')).toBe(true);
 
@@ -45,12 +45,12 @@ describe('StyleManager', () => {
 
     it('should remove existing stylesheet', () => {
         styleManager.setStyle('test', 'test.css');
-        let styleEl = document.head.querySelector('.style-manager-test') as HTMLLinkElement;
+        let styleEl = document.head!.querySelector('.style-manager-test') as HTMLLinkElement;
         expect(styleEl).not.toBeNull();
         expect(styleEl.href.endsWith('test.css')).toBe(true);
 
         styleManager.removeStyle('test');
-        styleEl = document.head.querySelector('.style-manager-test') as HTMLLinkElement;
+        styleEl = document.head!.querySelector('.style-manager-test') as HTMLLinkElement;
         expect(styleEl).toBeNull();
     });
 });

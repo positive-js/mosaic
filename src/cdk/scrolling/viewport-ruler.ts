@@ -1,7 +1,7 @@
-import {Injectable, NgZone, OnDestroy, Optional, SkipSelf} from '@angular/core';
-import {Platform} from '@ptsecurity/cdk/platform';
-import {merge, of as observableOf, fromEvent, Observable, Subscription} from 'rxjs';
-import {auditTime} from 'rxjs/operators';
+import { Injectable, NgZone, OnDestroy, Optional, SkipSelf } from '@angular/core';
+import { Platform } from '@ptsecurity/cdk/platform';
+import { merge, of as observableOf, fromEvent, Observable, Subscription } from 'rxjs';
+import { auditTime } from 'rxjs/operators';
 
 
 /** Time in ms to throttle the resize events by default. */
@@ -88,13 +88,13 @@ export class ViewportRuler implements OnDestroy {
         // `scrollTop` and `scrollLeft` is inconsistent. However, using the bounding rect of
         // `document.documentElement` works consistently, where the `top` and `left` values will
         // equal negative the scroll position.
-        const documentRect = document.documentElement.getBoundingClientRect();
+        const documentRect = document.documentElement!.getBoundingClientRect();
 
         const top = -documentRect.top || document.body.scrollTop || window.scrollY ||
-            document.documentElement.scrollTop || 0;
+            document.documentElement!.scrollTop || 0;
 
         const left = -documentRect.left || document.body.scrollLeft || window.scrollX ||
-            document.documentElement.scrollLeft || 0;
+            document.documentElement!.scrollLeft || 0;
 
         return {top, left};
     }

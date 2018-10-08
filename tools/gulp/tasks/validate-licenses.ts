@@ -19,6 +19,8 @@ const licensesWhitelist = [
     'BSD-3-Clause',
     'BSD-4-Clause',
 
+    'CC0-1.0',
+
     // All CC-BY licenses have a full copyright grant and attribution section.
     'CC-BY-3.0',
     'CC-BY-4.0',
@@ -81,7 +83,7 @@ const enum ReturnCode {
     INVALID_LIC = 2
 }
 
-export default function validateLicense(): Promise<number> {
+export function validateLicense(): Promise<number> {
 
     return new Promise<number>((resolve) => {
         checker.init({start: path.join(__dirname, '../../../')}, (err: Error, json: any) => {

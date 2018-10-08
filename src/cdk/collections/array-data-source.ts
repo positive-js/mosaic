@@ -13,5 +13,6 @@ export class ArrayDataSource<T> extends DataSource<T> {
         return this._data instanceof Observable ? this._data : observableOf(this._data);
     }
 
+    // tslint:disable-next-line
     disconnect() {}
 }

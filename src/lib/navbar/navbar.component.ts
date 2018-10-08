@@ -19,7 +19,7 @@ import {
 import { FocusMonitor, FocusOrigin } from '@ptsecurity/cdk/a11y';
 import { SPACE } from '@ptsecurity/cdk/keycodes';
 import { Platform } from '@ptsecurity/cdk/platform';
-import {CanDisable, CanDisableCtor, mixinDisabled} from '@ptsecurity/mosaic/core';
+import { CanDisable, CanDisableCtor, mixinDisabled } from '@ptsecurity/mosaic/core';
 
 
 const COLLAPSED_CLASS: string = 'mc-navbar-collapsed-title';

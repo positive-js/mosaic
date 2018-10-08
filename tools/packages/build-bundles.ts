@@ -1,4 +1,4 @@
-import {dirname, join} from 'path';
+import { dirname, join } from 'path';
 
 import { rollupGlobals } from './rollup-globals';
 
@@ -189,6 +189,7 @@ export class PackageBundler {
                 join(dirname(bundleOutputDir), this.buildPackage.name, `${p}.es5.js`);
 
             return map;
+            // tslint:disable-next-line
         }, {} as {[key: string]: string});
     }
 }
