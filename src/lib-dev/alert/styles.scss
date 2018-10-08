@@ -6,9 +6,12 @@
 
 @include mosaic-visual();
 
-.mc-alert {
+.mc-column-container {
     margin-left: 15px;
     margin-right: 15px;
+}
+
+.mc-alert {
     margin-bottom: 15px;
 }
 

@@ -5,13 +5,7 @@
 
 
 @mixin _mc-icon-color($palette) {
-    $hover-darken: 5%;
-
     color: mc-color($palette, 400);
-
-    &:hover {
-        color: darken(mc-color($palette, 400), $hover-darken);
-    }
 }
 
 @mixin mc-icon-theme($theme) {

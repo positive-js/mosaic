@@ -14,6 +14,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { McButtonModule } from '../../lib/button';
 import { McIconModule } from '../../lib/icon';
+import { McLinkModule } from '../../lib/link';
 
 
 @Component({
@@ -25,14 +26,14 @@ import { McIconModule } from '../../lib/icon';
         trigger('hideShowAnimator', [
             state('true' , style({ opacity: 1, display: '' })),
             state('false', style({ opacity: 0, display: 'none' })),
-            transition('false => true', animate('.9s')),
-            transition('true => false', animate('.5s'))
+            transition('false => true', animate('.5s')),
+            transition('true => false', animate('.2s'))
         ])
     ]
 })
 export class DemoComponent {
     // tslint:disable-next-line:no-magic-numbers
-    readonly shownAlerts: number[]  = Array.from(Array(13).keys());
+    readonly shownAlerts: number[]  = Array.from(Array(16).keys());
 
     isAlertShown(id: number) {
         return this.shownAlerts.indexOf(id) !== -1;
@@ -53,7 +54,8 @@ export class DemoComponent {
         BrowserModule,
         BrowserAnimationsModule,
         McIconModule,
-        McButtonModule
+        McButtonModule,
+        McLinkModule
     ],
     bootstrap: [
         DemoComponent
