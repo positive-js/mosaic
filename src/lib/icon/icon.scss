@@ -12,3 +12,15 @@
 .mc-icon-rotate_270 {
     transform: rotate(270deg);
 }
+
+.mc-icon-flip-h {
+    transform: scaleY(-1);
+}
+
+.mc-icon-flip-v {
+    transform: scaleX(-1);
+}
+
+.mc-icon-flip-vh {
+    transform: scale(-1);
+}

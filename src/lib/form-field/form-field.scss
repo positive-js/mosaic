@@ -91,11 +91,13 @@ mc-stepper {
 
     top: 0;
     bottom: 0;
-    right: 8px;
+    right: 0;
 
-    width: 16px;
+    width: 32px;
 
-    .mc-icon {
+    .mc-stepper-step-up, .mc-stepper-step-down {
         cursor: pointer;
+        width: 32px;
+        text-align: center;
     }
 }
