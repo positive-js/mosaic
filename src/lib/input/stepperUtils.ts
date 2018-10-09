@@ -1,4 +1,3 @@
-
 function sanitizeNumber(value: number): number | null {
     return !isFinite(value) || isNaN(value)
         ? null
