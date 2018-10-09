@@ -19,15 +19,14 @@ import {
     CanUpdateErrorState,
     CanUpdateErrorStateCtor,
     ErrorStateMatcher,
-    mixinErrorState,
-    stepDown,
-    stepUp
+    mixinErrorState
 } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl, McFormFieldNumberControl } from '@ptsecurity/mosaic/form-field';
 import { Subject } from 'rxjs';
 
 import { getMcInputUnsupportedTypeError } from './input-errors';
 import { MC_INPUT_VALUE_ACCESSOR } from './input-value-accessor';
+import { stepDown, stepUp } from './stepperUtils';
 
 
 const MC_INPUT_INVALID_TYPES = [
