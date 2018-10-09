@@ -2220,8 +2220,8 @@ describe('McSelect', () => {
                 dispatchKeyboardEvent(host, 'keydown', END);
                 fixture.detectChanges();
 
-                // <option amount> * <option height> - <panel height> = 30 * 32 - 224 = 736
-                expect(panel.scrollTop).toBe(736, 'Expected panel to be scrolled to the bottom');
+                // <option amount> * <option height> - <panel height> = 30 * 32 - 228 = 736
+                expect(panel.scrollTop).toBe(732, 'Expected panel to be scrolled to the bottom');
             }));
 
             it('should scroll to the active option when typing', fakeAsync(() => {
@@ -3629,7 +3629,7 @@ describe('McSelect', () => {
             // both Chrome and Firefox.
             function setScrollTop(num: number) {
                 document.body.scrollTop = num;
-                document.documentElement.scrollTop = num;
+                document.documentElement!.scrollTop = num;
             }
 
             beforeEach(fakeAsync(() => {

@@ -7,7 +7,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { mixinColor, CanColor } from '@ptsecurity/mosaic/core';
+import { mixinColor, CanColor, CanColorCtor } from '@ptsecurity/mosaic/core';
 import { McIcon } from '@ptsecurity/mosaic/icon';
 
 
@@ -15,7 +15,8 @@ export class McTagBase {
     constructor(public _elementRef: ElementRef) {}
 }
 
-export const _McTagMixinBase = mixinColor(McTagBase);
+export const _McTagMixinBase: CanColorCtor & typeof McTagBase
+    = mixinColor(McTagBase);
 
 
 @Component({

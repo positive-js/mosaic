@@ -28,24 +28,24 @@ export class OverlayPositionBuilder {
 
     /**
      * Creates a relative position strategy.
-     * @param elementRef
-     * @param originPos
-     * @param overlayPos
+     * @param elementRef //tslint:disable-line
+     * @param originPos //tslint:disable-line
+     * @param overlayPos //tslint:disable-line
      * @deprecated Use `flexibleConnectedTo` instead.
      * @deletion-target 7.0.0
      */
     connectedTo(
         elementRef: ElementRef,
         originPos: IOriginConnectionPosition,
-        overlayPos: IOverlayConnectionPosition): ConnectedPositionStrategy {
+        overlayPos: IOverlayConnectionPosition): ConnectedPositionStrategy { //tslint:disable-line
 
-        return new ConnectedPositionStrategy(originPos, overlayPos, elementRef, this._viewportRuler,
+        return new ConnectedPositionStrategy(originPos, overlayPos, elementRef, this._viewportRuler, //tslint:disable-line
             this._document);
     }
 
     /**
      * Creates a flexible position strategy.
-     * @param elementRef
+     * @param elementRef //tslint:disable-line
      */
     flexibleConnectedTo(elementRef: ElementRef | HTMLElement): FlexibleConnectedPositionStrategy {
         return new FlexibleConnectedPositionStrategy(elementRef, this._viewportRuler, this._document,

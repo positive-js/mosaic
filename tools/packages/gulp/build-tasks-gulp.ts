@@ -2,9 +2,9 @@ import { dest, src, task } from 'gulp';
 import { join } from 'path';
 
 import { BuildPackage } from '../build-package';
-import { inlineResourcesForDirectory } from '../inline-resources';
-
 import { composeRelease } from '../build-release';
+import { inlineResourcesForDirectory } from '../inline-resources';
+import { tsCompile } from '../ts-compile';
 
 import { buildScssPipeline } from './build-scss-pipeline';
 import { sequenceTask } from './sequence-task';
@@ -33,6 +33,14 @@ export function createPackageBuildTasks(buildPackage: BuildPackage, preBuildTask
 
     // Glob that matches every HTML file in the current package.
     const htmlGlob = join(buildPackage.sourceDir, '**/*.html');
+
+    const schematicsDir = join(buildPackage.sourceDir, 'schematics');
+
+    // Pattern matching schematics files to be copied into the output directory.
+    const schematicsGlobs = [
+        join(schematicsDir, '**/+(data|files)/**/*'),
+        join(schematicsDir, '**/+(schema|collection|migration).json')
+    ];
 
     task(`${taskName}:clean-build`, sequenceTask('clean', `${taskName}:build`));
 
@@ -66,11 +74,22 @@ export function createPackageBuildTasks(buildPackage: BuildPackage, preBuildTask
 
     task(`${taskName}:build:bundles`, () => buildPackage.createBundles());
 
-    task(`${taskName}:assets`, [
+    /**
+     * Asset tasks. Building Sass files and inlining CSS, HTML files into the ESM output.
+     */
+    const assetTasks = [
         `${taskName}:assets:scss`,
         `${taskName}:assets:copy-styles`,
         `${taskName}:assets:html`
-    ]);
+    ];
+
+    // In case the build package has schematics, we need to build them like assets because
+    // those are not intended to be entry-points.
+    if (buildPackage.hasSchematics) {
+        assetTasks.push(`${taskName}:assets:schematics`);
+    }
+
+    task(`${taskName}:assets`, assetTasks);
 
     task(`${taskName}:assets:scss`, () => {
         buildScssPipeline(buildPackage.sourceDir, true)
@@ -91,4 +110,12 @@ export function createPackageBuildTasks(buildPackage: BuildPackage, preBuildTask
     });
 
     task(`${taskName}:assets:inline`, () => inlineResourcesForDirectory(buildPackage.outputDir));
+
+    task(`${taskName}:assets:schematics-ts`, () => {
+        return tsCompile('tsc', ['-p', join(schematicsDir, 'tsconfig.json')]);
+    });
+
+    task(`${taskName}:assets:schematics`, [`${taskName}:assets:schematics-ts`], () => {
+        return src(schematicsGlobs).pipe(dest(join(buildPackage.outputDir, 'schematics')));
+    });
 }

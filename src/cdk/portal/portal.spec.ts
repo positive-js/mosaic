@@ -1,4 +1,4 @@
-import {CommonModule} from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
     NgModule,
     Component,
@@ -13,11 +13,11 @@ import {
     TemplateRef,
     ComponentRef
 } from '@angular/core';
-import {inject, ComponentFixture, TestBed} from '@angular/core/testing';
+import { inject, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {DomPortalOutlet} from './dom-portal-outlet';
-import {Portal, ComponentPortal, TemplatePortal} from './portal';
-import {CdkPortal, CdkPortalOutlet, PortalModule} from './portal-directives';
+import { DomPortalOutlet } from './dom-portal-outlet';
+import { Portal, ComponentPortal, TemplatePortal } from './portal';
+import { CdkPortal, CdkPortalOutlet, PortalModule } from './portal-directives';
 
 
 describe('Portals', () => {
@@ -533,7 +533,7 @@ class PortalTestApp {
   @ViewChild(CdkPortalOutlet) portalOutlet: CdkPortalOutlet;
   @ViewChild('templateRef', { read: TemplateRef }) templateRef: TemplateRef<any>;
 
-  selectedPortal: Portal<any>|undefined;
+  selectedPortal: Portal<any> | undefined;
   fruit: string = 'Banana';
   fruits = ['Apple', 'Pineapple', 'Durian'];
   attachedSpy = jasmine.createSpy('attached spy');

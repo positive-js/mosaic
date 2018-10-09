@@ -20,7 +20,7 @@ export class StyleManager {
     removeStyle(key: string) {
         const existingLinkElement = getExistingLinkElementByKey(key);
         if (existingLinkElement) {
-            document.head.removeChild(existingLinkElement);
+            document.head!.removeChild(existingLinkElement);
         }
     }
 }
@@ -30,14 +30,14 @@ function getLinkElementForKey(key: string) {
 }
 
 function getExistingLinkElementByKey(key: string) {
-    return document.head.querySelector(`link[rel="stylesheet"].${getClassNameForKey(key)}`);
+    return document.head!.querySelector(`link[rel="stylesheet"].${getClassNameForKey(key)}`);
 }
 
 function createLinkElementWithKey(key: string) {
     const linkEl = document.createElement('link');
     linkEl.setAttribute('rel', 'stylesheet');
     linkEl.classList.add(getClassNameForKey(key));
-    document.head.appendChild(linkEl);
+    document.head!.appendChild(linkEl);
 
     return linkEl;
 }

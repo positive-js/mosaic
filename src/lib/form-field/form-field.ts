@@ -12,7 +12,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
-import { CanColor, mixinColor, ThemePalette } from '@ptsecurity/mosaic/core';
+import { CanColor, CanColorCtor, mixinColor, ThemePalette } from '@ptsecurity/mosaic/core';
 import { EMPTY, merge } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 
@@ -31,7 +31,8 @@ export class McFormFieldBase {
     constructor(public _elementRef: ElementRef) {}
 }
 
-export const _McFormFieldMixinBase = mixinColor(McFormFieldBase, ThemePalette.Primary);
+export const _McFormFieldMixinBase: CanColorCtor & typeof McFormFieldBase
+    = mixinColor(McFormFieldBase, ThemePalette.Primary);
 
 @Component({
     selector: 'mc-form-field',
@@ -50,7 +51,7 @@ export const _McFormFieldMixinBase = mixinColor(McFormFieldBase, ThemePalette.Pr
         '[class.mc-form-field_disabled]': '_control.disabled',
         '[class.mc-form-field_has-prefix]': 'hasPrefix',
         '[class.mc-form-field_has-suffix]': 'hasSuffix',
-        '[class.mc-form-field_has-cleaner]': 'canShowCleaner',
+        '[class.mc-form-field_has-cleaner]': 'hasCleaner',
         '[class.mc-focused]': '_control.focused',
         '[class.ng-untouched]': '_shouldForward("untouched")',
         '[class.ng-touched]': '_shouldForward("touched")',

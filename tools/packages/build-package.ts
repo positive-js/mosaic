@@ -44,6 +44,9 @@ export class BuildPackage {
      */
     copySecondaryEntryPointStylesToRoot = false;
 
+    /** Whether the build package has schematics or not. */
+    hasSchematics = false;
+
     /**
      * Path to the entry file of the package in the output directory.
      */

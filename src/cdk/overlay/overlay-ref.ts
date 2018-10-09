@@ -365,7 +365,7 @@ export class OverlayRef implements IPortalOutlet {
 
         coerceArray(cssClasses).forEach((cssClass) => {
             // We can't do a spread here, because IE doesn't support setting multiple classes.
-            isAdd ? classList.add(cssClass) : classList.remove(cssClass);
+            isAdd ? classList.add(cssClass) : classList.remove(cssClass); // tslint:disable-line
         });
     }
 }

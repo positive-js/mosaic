@@ -56,9 +56,11 @@ import {
     _countGroupLabelsBeforeOption,
     _getOptionScrollPosition,
     CanDisable,
+    CanDisableCtor,
     CanUpdateErrorState,
+    CanUpdateErrorStateCtor,
     ErrorStateMatcher,
-    HasTabIndex,
+    HasTabIndex, HasTabIndexCtor,
     MC_OPTION_PARENT_COMPONENT,
     McOptgroup,
     McOption,
@@ -158,7 +160,11 @@ export class McSelectBase {
     ) {}
 }
 
-export const _McSelectMixinBase = mixinTabIndex(mixinDisabled(mixinErrorState(McSelectBase)));
+export const _McSelectMixinBase:
+    CanDisableCtor &
+    HasTabIndexCtor &
+    CanUpdateErrorStateCtor & typeof McSelectBase
+    = mixinTabIndex(mixinDisabled(mixinErrorState(McSelectBase)));
 
 
 /**
@@ -859,6 +865,7 @@ export class McSelect extends _McSelectMixinBase implements
 
     /** Handles keyboard events while the select is closed. */
     private _handleClosedKeydown(event: KeyboardEvent): void {
+        /* tslint:disable-next-line */
         const keyCode = event.keyCode;
         const isArrowKey = keyCode === DOWN_ARROW || keyCode === UP_ARROW ||
             keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW;
@@ -875,6 +882,7 @@ export class McSelect extends _McSelectMixinBase implements
 
     /** Handles keyboard events when the selected is open. */
     private _handleOpenKeydown(event: KeyboardEvent): void {
+        /* tslint:disable-next-line */
         const keyCode = event.keyCode;
         const isArrowKey = keyCode === DOWN_ARROW || keyCode === UP_ARROW;
         const manager = this._keyManager;
@@ -1135,6 +1143,7 @@ export class McSelect extends _McSelectMixinBase implements
 
     /** Gets the index of the provided option in the option list. */
     private _getOptionIndex(option: McOption): number | undefined {
+        /* tslint:disable-next-line */
         return this.options.reduce((result: number, current: McOption, index: number) => {
             /* tslint:disable-next-line:strict-type-predicates */
             return result === undefined ? (option === current ? index : undefined) : result;

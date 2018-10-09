@@ -5,7 +5,7 @@ import {
     ElementRef,
     Input
 } from '@angular/core';
-import { CanColor, mixinColor, ThemePalette } from '@ptsecurity/mosaic/core';
+import { CanColor, CanColorCtor, mixinColor, ThemePalette } from '@ptsecurity/mosaic/core';
 
 
 export type ProgressBarMode = 'determinate' | 'indeterminate';
@@ -19,7 +19,10 @@ export class McProgressBarBase {
     constructor(public _elementRef: ElementRef) {}
 }
 
-export const _McProgressBarMixinBase = mixinColor(McProgressBarBase);
+export const _McProgressBarMixinBase:
+    CanColorCtor &
+    typeof McProgressBarBase =
+        mixinColor(McProgressBarBase);
 
 @Component({
     selector: 'mc-progress-bar',

@@ -1,7 +1,7 @@
-import {NgModule} from '@angular/core';
-import {PlatformModule} from '@ptsecurity/cdk/platform';
+import { NgModule } from '@angular/core';
+import { PlatformModule } from '@ptsecurity/cdk/platform';
 
-import {CdkScrollable} from './scrollable';
+import { CdkScrollable } from './scrollable';
 
 
 @NgModule({

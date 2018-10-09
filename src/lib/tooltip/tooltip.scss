@@ -1,0 +1,83 @@
+@import 'tooltip-base';
+@import 'tooltip-theme';
+
+// Base class
+.mc-tooltip {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: relative;
+    z-index: $zindex-tooltip;
+    display: block;
+    visibility: visible;
+    max-width: $tooltip-max-width;
+    white-space: pre-line;
+
+    mc-tooltip_hidden {
+        display: none;
+    }
+}
+
+.mc-tooltip_placement-top {
+    padding-bottom: $tooltip-distance;
+}
+
+.mc-tooltip_placement-right {
+    padding-left: $tooltip-distance;
+}
+
+.mc-tooltip_placement-bottom {
+    padding-top: $tooltip-distance;
+}
+
+.mc-tooltip_placement-left {
+    padding-right: $tooltip-distance;
+}
+// Wrapper for the tooltip content
+.mc-tooltip-inner {
+    padding: 8px 16px;
+    text-align: left;
+    text-decoration: none;
+    border-radius: $border-radius-base;
+    box-shadow: $box-shadow-base;
+    min-height: 16px; // 16px for font + 16px for padding = total 32px
+    height: fit-content;
+    vertical-align: center;
+}
+// Arrows
+.mc-tooltip-arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+}
+
+.mc-tooltip_placement-top .mc-tooltip-arrow {
+    bottom: $tooltip-distance - $tooltip-arrow-width;
+    border-width: $tooltip-arrow-width $tooltip-arrow-width 0;
+    left: 50%;
+    margin-left: -$tooltip-arrow-width;
+}
+
+.mc-tooltip_placement-right .mc-tooltip-arrow {
+    left: $tooltip-distance - $tooltip-arrow-width;
+    border-width: $tooltip-arrow-width $tooltip-arrow-width $tooltip-arrow-width 0;
+    top: 16px;
+    margin-top: -$tooltip-arrow-width;
+}
+
+.mc-tooltip_placement-left .mc-tooltip-arrow {
+    right: $tooltip-distance - $tooltip-arrow-width;
+    border-width: $tooltip-arrow-width 0 $tooltip-arrow-width $tooltip-arrow-width;
+    top: 16px;
+    margin-top: -$tooltip-arrow-width;
+}
+
+.mc-tooltip_placement-bottom .mc-tooltip-arrow {
+    top: $tooltip-distance - $tooltip-arrow-width;
+    border-width: 0 $tooltip-arrow-width $tooltip-arrow-width;
+    left: 50%;
+    margin-left: -$tooltip-arrow-width;
+}

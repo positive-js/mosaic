@@ -1,18 +1,10 @@
 /**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-
-/**
  * Returns an exception to be thrown when attempting to change a select's `multiple` option
  * after initialization.
  * @docs-private
  */
 export function getMcSelectDynamicMultipleError(): Error {
-  return Error('Cannot change `multiple` mode of select after initialization.');
+    return Error('Cannot change `multiple` mode of select after initialization.');
 }
 
 /**
@@ -22,7 +14,7 @@ export function getMcSelectDynamicMultipleError(): Error {
  * @docs-private
  */
 export function getMcSelectNonArrayValueError(): Error {
-  return Error('Value must be an array in multiple-selection mode.');
+    return Error('Value must be an array in multiple-selection mode.');
 }
 
 /**
@@ -31,5 +23,5 @@ export function getMcSelectNonArrayValueError(): Error {
  * actually takes two values and returns a boolean is not checked.
  */
 export function getMcSelectNonFunctionValueError(): Error {
-  return Error('`compareWith` must be a function.');
+    return Error('`compareWith` must be a function.');
 }

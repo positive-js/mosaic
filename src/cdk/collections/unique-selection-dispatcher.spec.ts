@@ -1,4 +1,4 @@
-import {UniqueSelectionDispatcher} from './unique-selection-dispatcher';
+import { UniqueSelectionDispatcher } from './unique-selection-dispatcher';
 
 
 describe('Unique selection dispatcher', () => {

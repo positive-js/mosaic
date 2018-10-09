@@ -273,7 +273,7 @@ export class CdkConnectedOverlay implements OnDestroy, OnChanges {
         }
 
         if (changes['open']) { //tslint:disable-line
-            this.open ? this._attachOverlay() : this._detachOverlay();
+            this.open ? this._attachOverlay() : this._detachOverlay(); //tslint:disable-line
         }
     }
 
@@ -358,7 +358,7 @@ export class CdkConnectedOverlay implements OnDestroy, OnChanges {
             this._createOverlay();
 
             this._overlayRef!.keydownEvents().subscribe((event: KeyboardEvent) => { //tslint:disable-line
-                if (event.keyCode === ESCAPE) {
+                if (event.keyCode === ESCAPE) { //tslint:disable-line
                     this._detachOverlay();
                 }
             });

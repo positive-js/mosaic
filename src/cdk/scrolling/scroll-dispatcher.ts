@@ -4,11 +4,11 @@ import {
     NgZone,
     OnDestroy
 } from '@angular/core';
-import {Platform} from '@ptsecurity/cdk/platform';
-import {fromEvent, of as observableOf, Subject, Subscription, Observable} from 'rxjs';
-import {auditTime, filter} from 'rxjs/operators';
+import { Platform } from '@ptsecurity/cdk/platform';
+import { fromEvent, of as observableOf, Subject, Subscription, Observable } from 'rxjs';
+import { auditTime, filter } from 'rxjs/operators';
 
-import {CdkScrollable} from './scrollable';
+import { CdkScrollable } from './scrollable';
 
 
 /** Time in ms to throttle the scrolling events by default. */
@@ -31,7 +31,7 @@ export class ScrollDispatcher implements OnDestroy {
     _globalSubscription: Subscription | null = null;
 
     /** Subject for notifying that a registered scrollable reference element has been scrolled. */
-    private _scrolled = new Subject<CdkScrollable|{}|void>();
+    private _scrolled = new Subject<CdkScrollable | {} | void>();
 
     /** Keeps track of the amount of subscriptions to `scrolled`. Used for cleaning up afterwards. */
     private _scrolledCount = 0;
@@ -73,7 +73,7 @@ export class ScrollDispatcher implements OnDestroy {
      * If you need to update any data bindings as a result of a scroll event, you have
      * to run the callback using `NgZone.run`.
      */
-    scrolled(auditTimeInMs: number = DEFAULT_SCROLL_TIME): Observable<CdkScrollable|void> {
+    scrolled(auditTimeInMs: number = DEFAULT_SCROLL_TIME): Observable<CdkScrollable | void> {
         return this._platform.isBrowser ? Observable.create((observer) => {
             if (!this._globalSubscription) {
                 this._addGlobalListener();
@@ -110,7 +110,7 @@ export class ScrollDispatcher implements OnDestroy {
      * @param elementRef Element whose ancestors to listen for.
      * @param auditTimeInMs Time to throttle the scroll events.
      */
-    ancestorScrolled(elementRef: ElementRef, auditTimeInMs?: number): Observable<CdkScrollable|void> {
+    ancestorScrolled(elementRef: ElementRef, auditTimeInMs?: number): Observable<CdkScrollable | void> {
         const ancestors = this.getAncestorScrollContainers(elementRef);
 
         return this.scrolled(auditTimeInMs).pipe(filter((target: any) => {

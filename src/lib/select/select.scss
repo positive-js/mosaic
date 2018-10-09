@@ -22,6 +22,7 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
     display: inline-block;
 
     width: 100%;
+
     outline: none;
 
     &.mc-disabled {
@@ -55,7 +56,6 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
     vertical-align: middle;
 
     width: 100%;
-    max-width: 0;
 
     overflow: hidden;
     text-overflow: ellipsis;
