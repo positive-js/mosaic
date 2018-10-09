@@ -156,6 +156,7 @@
         "server-dev:progress-spinner": "npm run server-dev -- --env.component progress-spinner",
         "server-dev:radio": "npm run server-dev -- --env.component radio",
         "server-dev:select": "npm run server-dev -- --env.component select",
+        "server-dev:splitter": "npm run server-dev -- --env.component splitter",
         "server-dev:tag": "npm run server-dev -- --env.component tag",
         "server-dev:theme-picker": "npm run server-dev -- --env.component theme-picker",
         "server-dev:tree": "npm run server-dev -- --env.component tree",
