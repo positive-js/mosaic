@@ -16,6 +16,7 @@ import { McInputModule } from '../../lib/input/';
 })
 export class InputDemoComponent {
     value: string = '';
+    numberValue: number | null = null;
 }
 
 
@@ -36,6 +37,7 @@ export class InputDemoComponent {
 })
 export class InputDemoModule {}
 
+// tslint:disable:no-console
 platformBrowserDynamic()
     .bootstrapModule(InputDemoModule)
     .catch((error) => console.error(error));
