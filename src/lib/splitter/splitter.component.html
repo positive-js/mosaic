@@ -2,6 +2,7 @@
 <ng-template ngFor let-area [ngForOf]="areas" let-index="index" let-last="last">
     <mc-gutter *ngIf="last === false"
                [direction]="direction"
+               [disabled]="disabled"
                [order]="index * 2 + 1"
                size=16
     >

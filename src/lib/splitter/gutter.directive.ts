@@ -33,7 +33,18 @@ export class McGutterDirective {
 
     @Input()
     set disabled(disabled: boolean) {
-        this._disabled = disabled;
+        /*
+         * disable gutter if:
+         * <... disabled>
+         * <... disabled='true'>
+         *
+         * enable gutter if:
+         * <... >
+         * <... disabled='false'>
+         *
+         * any other value keep gutter enabled
+         */
+        this._disabled = `${disabled}` === 'true' || `${disabled}` === '';
         this.refresh();
     }
 

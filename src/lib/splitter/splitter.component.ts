@@ -21,7 +21,8 @@ import { Direction } from "@ptsecurity/mosaic/splitter/splitter.constants";
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class McSplitterComponent implements OnDestroy {
-    private _direction: Direction = Direction.Horizontal
+    private _direction: Direction = Direction.Horizontal;
+    private _disabled: boolean = false;
 
     private readonly areas: IArea[] = [];
     private readonly areaPositionDivider: number = 2;
@@ -33,6 +34,15 @@ export class McSplitterComponent implements OnDestroy {
 
     get direction(): Direction {
         return this._direction;
+    }
+
+    @Input()
+    set disabled(disabled: boolean) {
+        this._disabled = disabled;
+    }
+
+    get disabled(): boolean {
+        return this._disabled;
     }
 
     constructor() {
