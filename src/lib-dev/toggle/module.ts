@@ -3,6 +3,8 @@ import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
+import { McToggleModule } from '../../lib/toggle/';
+
 
 @Component({
     selector: 'app',
@@ -18,7 +20,8 @@ export class DemoComponent {}
         DemoComponent
     ],
     imports: [
-        BrowserModule
+        BrowserModule,
+        McToggleModule
     ],
     bootstrap: [
         DemoComponent
