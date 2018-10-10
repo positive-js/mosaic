@@ -36,14 +36,16 @@
 
         text-align: center;
 
-        $hover-darken: 5%;
-
         [mc-icon], .mc-icon {
             padding: 0;
             margin: 0;
             outline: 0;
+        }
 
-            &.mc-alert_close:hover {
+        $hover-darken: 5%;
+
+        &:hover {
+            [mc-icon], .mc-icon {
                 color: darken(mc-color($mc-grey, 400), $hover-darken);
             }
         }
@@ -87,20 +89,21 @@
         color: mc-color($color, 400);
         margin-right: 8px;
     }
-
-    .mc-alert_close:focus {
-        border-color: mc-color($color, 500);
-        box-shadow: 0 0 0 1px mc-color($color, 500);
-        z-index: 1;
-    }
 }
 
 @mixin mc-alert-theme($theme) {
+    $primary:  map-get($theme, primary);
     $error-palette:  map-get($theme, error);
     $warning-palette: map-get($theme, warning);
     $success-palette: map-get($theme, success);
     $info-palette: map-get($theme, info);
     $default-color-palette: map-get($theme, default);
+
+    .mc-alert_close:focus {
+        border-color: mc-color($primary, 500);
+        box-shadow: 0 0 0 1px mc-color($primary, 500);
+        z-index: 1;
+    }
 
     .mc-alert {
         background-color: white;
