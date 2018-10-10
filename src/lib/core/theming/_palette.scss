@@ -170,10 +170,11 @@ $mc-light-theme-foreground: (
 
 // Background palette for light themes.
 $mc-light-theme-background: (
-    hover: rgba(black, 0.05),
-    background: white,
-    disabled-button: $black-12-opacity,
-    focused-button: $black-6-opacity,
+    background:           white,
+    hover:                rgba(black, 0.05),
+    disabled-button:      $black-12-opacity,
+    selected-button:      grey,
+    focused-button:       $black-6-opacity,
     disabled-list-option: #CCC
 );
 
@@ -184,16 +185,17 @@ $mc-dark-theme-foreground: (
     disabled-button:   rgba(white, 0.3),
     disabled-text:     rgba(white, 0.3),
     hint-text:         rgba(white, 0.3),
-    secondary-text:    rgba(white, 0.7),
     icon:              white,
-    icons:             white,
-    text:              white
+    text:              white,
+    secondary-text:    rgba(white, 0.7),
 );
 
 // Background palette for dark themes.
 $mc-dark-theme-background: (
-    background: #303030,
-    disabled-button: $white-12-opacity,
-    selected-button: grey,
-    selected-disabled-button: grey
+    background:           #333333,
+    hover:                rgba(black, 0.05),
+    disabled-button:      $white-12-opacity,
+    selected-button:      grey,
+    focused-button:       $black-6-opacity,
+    disabled-list-option: #CCC
 );
