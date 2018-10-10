@@ -13,7 +13,6 @@
 
     $primary: map-get($theme, primary);
     $second: map-get($theme, second);
-    $warn: map-get($theme, error);
     $foreground: map-get($theme, foreground);
 
     .mc-radio-input {

@@ -12,7 +12,7 @@
     .mc-icon {
         $primary: map-get($theme, primary);
         $second: map-get($theme, second);
-        $warn: map-get($theme, error);
+        $error: map-get($theme, error);
 
         &.mc-primary {
             @include _mc-icon-color($primary);
@@ -22,8 +22,8 @@
             @include _mc-icon-color($second);
         }
 
-        &.mc-warn {
-            @include _mc-icon-color($warn);
+        &.mc-error {
+            @include _mc-icon-color($error);
         }
     }
 }
