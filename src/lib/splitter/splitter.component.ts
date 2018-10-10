@@ -8,6 +8,7 @@ import {
 import { McSplitterAreaDirective } from './splitter-area.directive';
 
 import { IArea } from './splitter.interfaces';
+import { Direction } from "@ptsecurity/mosaic/splitter/splitter.constants";
 
 
 @Component({
@@ -22,6 +23,8 @@ export class McSplitterComponent implements OnDestroy {
     readonly areas: IArea[] = [];
 
     private readonly areaPositionDivider: number = 2;
+
+    private _direction: Direction = Direction.Horizontal
 
     constructor() {
         return;
