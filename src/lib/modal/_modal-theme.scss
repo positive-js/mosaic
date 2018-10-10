@@ -8,7 +8,6 @@
 
     $primary: map-get($theme, primary);
     $second: map-get($theme, second);
-    $warn: map-get($theme, error);
     $hover-darken: 5%;
 
     .mc-modal {

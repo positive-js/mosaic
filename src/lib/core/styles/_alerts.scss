@@ -92,12 +92,12 @@
 }
 
 @mixin mc-alert-theme($theme) {
-    $primary:  map-get($theme, primary);
-    $error-palette:  map-get($theme, error);
-    $warning-palette: map-get($theme, warning);
-    $success-palette: map-get($theme, success);
-    $info-palette: map-get($theme, info);
-    $default-color-palette: map-get($theme, default);
+    $primary: map-get($theme, primary);
+    $error: map-get($theme, error);
+    $warning: map-get($theme, warning);
+    $success: map-get($theme, success);
+    $info: map-get($theme, info);
+    $default: map-get($theme, default);
 
     .mc-alert_close:focus {
         border-color: mc-color($primary, 500);
@@ -110,23 +110,23 @@
     }
 
     .mc-alert_error {
-        @include alert-base($error-palette);
+        @include alert-base($error);
     }
 
     .mc-alert_warning {
-        @include alert-base($warning-palette);
+        @include alert-base($warning);
     }
 
     .mc-alert_success {
-        @include alert-base($success-palette);
+        @include alert-base($success);
     }
 
     .mc-alert_info {
-        @include alert-base($info-palette);
+        @include alert-base($info);
     }
 
     .mc-alert_default {
-        @include alert-base($default-color-palette);
+        @include alert-base($default);
     }
 }
 
