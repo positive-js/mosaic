@@ -1,14 +1,13 @@
 @import '../all-theme';
 
 
-// Include all typography for the components.
-
 // Define a theme.
 $primary: mc-palette($mc-blue, 500, 600, 600);
 $second: mc-palette($mc-grey, 40, 60, 100);
 
 $theme: mc-light-theme($primary, $second);
 
+// Include all typography for the components.
 @include mc-core();
 
 // Include all theme styles for the components.
