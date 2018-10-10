@@ -118,7 +118,7 @@
 @mixin _mc-button-theme-color($theme, $color: 'default') {
     $primary: map-get($theme, primary);
     $second: map-get($theme, second);
-    $warn: map-get($theme, warn);
+    $warn: map-get($theme, error);
 
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);

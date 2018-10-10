@@ -12,7 +12,7 @@
     .mc-icon {
         $primary: map-get($theme, primary);
         $second: map-get($theme, second);
-        $warn: map-get($theme, warn);
+        $warn: map-get($theme, error);
 
         &.mc-primary {
             @include _mc-icon-color($primary);

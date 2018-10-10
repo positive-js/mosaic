@@ -16,7 +16,7 @@
 @mixin mc-badge-theme($theme) {
     $primary: map-get($theme, primary);
     $second: map-get($theme, second);
-    $warn: map-get($theme, warn);
+    $warn: map-get($theme, error);
 
     .mc-badge {
         color: white;

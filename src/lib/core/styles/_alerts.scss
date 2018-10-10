@@ -79,8 +79,6 @@
 }
 
 @mixin alert-base ($color) {
-    $palette: map-get($theme, primary);
-
     background-color: mc-color($color, 60);
     border: 1px solid mc-color($color, 200);
 
@@ -91,13 +89,19 @@
     }
 
     .mc-alert_close:focus {
-        border-color: mc-color($palette, 500);
-        box-shadow: 0 0 0 1px mc-color($palette, 500);
+        border-color: mc-color($color, 500);
+        box-shadow: 0 0 0 1px mc-color($color, 500);
         z-index: 1;
     }
 }
 
 @mixin mc-alert-theme($theme) {
+    $error-palette:  map-get($theme, error);
+    $warning-palette: map-get($theme, warning);
+    $success-palette: map-get($theme, success);
+    $info-palette: map-get($theme, info);
+    $default-color-palette: map-get($theme, default);
+
     .mc-alert {
         background-color: white;
     }
