@@ -17,7 +17,7 @@ export interface HasElementRef {
 export enum ThemePalette {
     Primary = 'primary',
     Second = 'second',
-    Warn = 'warn',
+    Error = 'error',
     Default = 'second'
 }
 

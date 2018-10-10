@@ -8,7 +8,7 @@
 
     $primary: map-get($theme, primary);
     $accent: map-get($theme, accent);
-    $warn: map-get($theme, warn);
+    $warn: map-get($theme, error);
 
     .mc-option {
         color: mc-color($foreground, text);
