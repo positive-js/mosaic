@@ -1,9 +1,9 @@
 <ng-content></ng-content>
 <ng-template ngFor let-area [ngForOf]="areas" let-index="index" let-last="last">
     <mc-gutter *ngIf="last === false"
-               direction="horizontal"
+               [direction]="direction"
                [order]="index * 2 + 1"
-               size=8
+               size=16
     >
     </mc-gutter>
 </ng-template>

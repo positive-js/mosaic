@@ -1,6 +1,7 @@
 import {
     ChangeDetectionStrategy,
     Component,
+    Input,
     OnDestroy,
     ViewEncapsulation
 } from '@angular/core';
@@ -20,11 +21,19 @@ import { Direction } from "@ptsecurity/mosaic/splitter/splitter.constants";
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class McSplitterComponent implements OnDestroy {
-    readonly areas: IArea[] = [];
+    private _direction: Direction = Direction.Horizontal
 
+    private readonly areas: IArea[] = [];
     private readonly areaPositionDivider: number = 2;
 
-    private _direction: Direction = Direction.Horizontal
+    @Input()
+    set direction(direction: Direction) {
+        this._direction = direction;
+    }
+
+    get direction(): Direction {
+        return this._direction;
+    }
 
     constructor() {
         return;
