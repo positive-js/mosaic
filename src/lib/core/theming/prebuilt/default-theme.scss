@@ -7,12 +7,6 @@
 $primary: mc-palette($mc-blue, 500, 600, 600);
 $second: mc-palette($mc-grey, 40, 60, 100);
 
-$error-palette: $mc-red;
-$warning-palette: $mc-yellow;
-$success-palette: $mc-green;
-$info-palette: $mc-blue;
-$default-color-palette: $mc-grey;
-
 $theme: mc-light-theme($primary, $second);
 
 @include mc-core();

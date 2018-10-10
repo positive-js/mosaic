@@ -2522,13 +2522,13 @@ describe('McSelect', () => {
         }));
 
         it('should transfer the theme to the select panel', fakeAsync(() => {
-            fixture.componentInstance.theme = 'warn';
+            fixture.componentInstance.theme = 'error';
             fixture.componentInstance.select.open();
             fixture.detectChanges();
             flush();
 
             const panel = overlayContainerElement.querySelector('.mc-select__panel') as HTMLElement;
-            expect(panel.classList).toContain('mc-warn');
+            expect(panel.classList).toContain('mc-error');
         }));
     });
 

@@ -53,7 +53,7 @@ This matches the behavior of native `<input type="checkbox">`.
 
 ### Theming
 The color of a `<mc-checkbox>` can be changed by using the `color` property. By default, checkboxes
-use the theme's accent color. This can be changed to `'primary'` or `'warn'`.  
+use the theme's accent color. This can be changed to `'primary'` or `'error'`.  
 
 ### Accessibility
 The `<mc-checkbox>` uses an internal `<input type="checkbox">` to provide an accessible experience.
