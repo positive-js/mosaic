@@ -39,24 +39,51 @@
     @return rgba($color, $opacity);
 }
 
-@function mc-light-theme($primary, $second, $warn: mc-palette($mc-red)) {
+// todo additional palette should be refactored asap (possibly to separated palette)
+@function mc-light-theme(
+    $primary,
+    $second,
+    $error: mc-palette($mc-red),
+    $warning: mc-palette($mc-yellow),
+    $success: mc-palette($mc-green),
+    $info: mc-palette($mc-blue),
+    $default: mc-palette($mc-grey)
+) {
     @return (
         primary: $primary,
         second: $second,
-        warn: $warn,
         is-dark: false,
         foreground: $mc-light-theme-foreground,
-        background: $mc-light-theme-background
+        background: $mc-light-theme-background,
+        // additional palette
+        error: $error,
+        warning: $warning,
+        success: $success,
+        info: $info,
+        default: $default,
     );
 }
 
-@function mc-dark-theme($primary, $second, $warn: mc-palette($mc-red)) {
+@function mc-dark-theme(
+    $primary,
+    $second,
+    $error: mc-palette($mc-red),
+    $warning: mc-palette($mc-yellow),
+    $success: mc-palette($mc-green),
+    $info: mc-palette($mc-blue),
+    $default: mc-palette($mc-grey)
+) {
     @return (
         primary: $primary,
         second: $second,
-        warn: $warn,
         is-dark: true,
         foreground: $mc-dark-theme-foreground,
-        background: $mc-dark-theme-background
+        background: $mc-dark-theme-background,
+        // additional palette
+        error: $error,
+        warning: $warning,
+        success: $success,
+        info: $info,
+        default: $default,
     );
 }
