@@ -1,0 +1,11 @@
+
+@mixin _mc-toggle-color($palette) {
+
+    .mc-radio-outer-circle {
+        border-color: mc-color($palette, 300);
+    }
+}
+
+@mixin mc-toggle-theme($theme) {
+
+}
