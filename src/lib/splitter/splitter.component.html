@@ -4,7 +4,8 @@
                [direction]="direction"
                [disabled]="disabled"
                [order]="index * 2 + 1"
-               size=16
+               [size]="gutterSize"
+               (mousedown)="onMouseDown($event, index, index + 1)"
     >
     </mc-gutter>
 </ng-template>

@@ -6,3 +6,8 @@ export interface IArea {
     index: number;
     order: number;
 }
+
+export interface IPoint {
+    x: number;
+    y: number;
+}

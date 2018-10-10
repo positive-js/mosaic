@@ -14,3 +14,10 @@ export const enum Cursor {
     ResizeRow = 'row-resize',
     Default = 'default'
 }
+
+export const enum SizeProperty {
+    OffsetWidth = 'offsetWidth',
+    OffsetHeight = 'offsetHeight',
+    Width = 'width',
+    Height = 'height'
+}
