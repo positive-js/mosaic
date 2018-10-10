@@ -1,6 +1,11 @@
 $black-87-opacity: rgba(black, 0.87);
+$black-50-opacity: rgba(black, 0.5);
+$black-30-opacity: rgba(black, 0.3);
+$black-20-opacity: rgba(black, 0.2);
 $black-12-opacity: rgba(black, 0.12);
 $black-6-opacity:  rgba(black, 0.06);
+$black-4-opacity:  rgba(black, 0.04);
+$black-1-opacity:  rgba(black, 0.01);
 
 $white-87-opacity: rgba(white, 0.87);
 $white-12-opacity: rgba(white, 0.12);
@@ -9,17 +14,17 @@ $white-6-opacity:  rgba(white, 0.06);
 $dark-disabled-text: rgba(black, 0.5);
 
 $mc-blue: (
-    40: #f6fbfd,
-    60: #eaf4fb,
-    100: #d9ebf7,
-    200: #acd2ec,
+    40: #f5fafd,
+    60: #ebf4fb,
+    100: #d8eaf7,
+    200: #aad1ec,
     300: #7fbae1,
-    400: #56a3d7,
+    400: #57a4d7,
     500: #338fcc,
-    560: #277cb4,
+    560: #277bb3,
     600: #206ea2,
-    700: #114f78,
-    800: #07304b,
+    700: #114e77,
+    800: #07314d,
     A100: rgba(0, 153, 255, 0.15),
     A200: rgba(0, 153, 255, 0.3),
     contrast: (
@@ -41,16 +46,16 @@ $mc-blue: (
 
 $mc-green: (
     40: #f6fbf4,
-    60: #ecf8e8,
-    100: #dcf1d5,
-    200: #b4dfa5,
-    300: #90cd7a,
-    400: #6fbb54,
-    500: #52a932,
-    560: #439127,
-    600: #3a8320,
-    700: #276412,
-    800: #164007,
+    60: #edf8e9,
+    100: #dcf1d4,
+    200: #b4dea4,
+    300: #8fcc79,
+    400: #6fba53,
+    500: #52a832,
+    560: #449327,
+    600: #3b8520,
+    700: #276211,
+    800: #163f07,
     A100: rgba(68, 255, 0, 0.15),
     contrast: (
         40: $black-87-opacity,
@@ -70,15 +75,15 @@ $mc-green: (
 
 $mc-red: (
     40: #fef7f6,
-    60: #fcefed,
-    100: #fadfdb,
-    200: #f4b8ae,
-    300: #ec9183,
-    400: #e66d5b,
-    500: #e04f38,
-    560: #e04f38,
-    600: #b43622,
-    700: #822112,
+    60: #fcefec,
+    100: #fadeda,
+    200: #f4b7ae,
+    300: #ed9284,
+    400: #e76e5c,
+    500: #e04d36,
+    560: #c43e29,
+    600: #b23522,
+    700: #832112,
     800: #541208,
     A100: rgba(224, 79, 56, 0.15),
     contrast: (
@@ -104,7 +109,7 @@ $mc-grey: (
     300: #b3b3b3,
     400: #999999,
     500: #808080,
-    560: #808080,
+    560: #707070,
     600: #666666,
     700: #4d4d4d,
     800: #333333,
@@ -123,16 +128,16 @@ $mc-grey: (
 );
 
 $mc-yellow: (
-    40: #fdf9f2,
-    60: #fcf6e8,
-    100: #f8ecd3,
-    200: #f0d399,
-    300: #e8bd69,
-    400: #dfa83a,
-    500: #d9950d,
+    40: #fdfaf3,
+    60: #fcf5e8,
+    100: #f8ebd1,
+    200: #f0d49b,
+    300: #e7bd68,
+    400: #dfa739,
+    500: #d6930d,
     560: #bb800a,
     600: #aa7408,
-    700: #7c5404,
+    700: #7d5504,
     800: #503602,
     A100: rgba(255, 170, 0, 0.15),
     contrast: (
@@ -149,7 +154,6 @@ $mc-yellow: (
         800: $black-87-opacity,
         A100: $black-87-opacity
     )
-
 );
 
 // Foreground palette for light themes.
