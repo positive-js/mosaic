@@ -1,12 +1,13 @@
+@import '~@ptsecurity/mosaic-icons/dist/styles/mc-icons';
 
 .mc-splitter {
     &-area,
     &-gutter {
         border: 1px solid black;
     }
+}
 
-    &-gutter {
-        background-position: center center;
-        background-repeat: no-repeat;
-    }
+.mc-splitter-icon {
+    position: relative;
+    left: -2px;
 }

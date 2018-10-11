@@ -12,14 +12,7 @@ import { Cursor, Direction, State } from './splitter.constants';
 export class McGutterDirective {
     private _direction: Direction = Direction.Vertical;
     private _disabled: boolean = false;
-    private _horizontalImage: string = 'url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==")';
-    private _verticalImage: string = 'url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFCAMAAABl/6zIAAAABlBMVEUAAADMzMzIT8AyAAAAAXRSTlMAQObYZgAAABRJREFUeAFjYGRkwIMJSeMHlBkOABP7AEGzSuPKAAAAAElFTkSuQmCC")';
     private _withAnimation: boolean = false;
-
-    @Input()
-    set color(color: string) {
-        this.renderer.setStyle(this.elementRef.nativeElement, 'background-color', color ? color : '#eeeeee');
-    }
 
     @Input()
     set direction(direction: Direction) {
@@ -117,19 +110,6 @@ export class McGutterDirective {
         }
     }
 
-    private  getImage(state: State): string {
-        switch (state) {
-            case State.Disabled:
-                return '';
-            case State.Vertical:
-                return this.verticalImage;
-            case State.Horizontal:
-                return this.horizontalImage;
-            default:
-                throw Error(`Unknown gutter state for image: ${state}`);
-        }
-    }
-
     private getState(): State {
         return this.disabled
             ? State.Disabled
@@ -140,6 +120,5 @@ export class McGutterDirective {
 
     private refresh(): void {
         this.renderer.setStyle(this.elementRef.nativeElement, 'cursor', this.getCursor(this.getState()));
-        this.renderer.setStyle(this.elementRef.nativeElement, 'background-image', this.getImage((this.getState())));
     }
 }
