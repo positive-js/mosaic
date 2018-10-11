@@ -6,9 +6,9 @@
     $font-family:   map-get(map-get($fonts, base), font-family),
     $font-family-mono:   map-get(map-get($fonts, monospace), font-family),
 
-    $display-1:     mc-typography-level(34px, 44px, 0.25px),
+    $display-1:     mc-typography-level(56px, 76px, -0.4px),
     $display-2:     mc-typography-level(45px, 56px),
-    $display-3:     mc-typography-level(56px, 76px, -0.4px),
+    $display-3:     mc-typography-level(34px, 44px, 0.25px),
 
     $headline:      mc-typography-level(24px, 32px),
     $title:         mc-typography-level(20px, 28px, 0.15px, 500),
