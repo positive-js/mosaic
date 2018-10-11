@@ -6,12 +6,12 @@ import {
     OnDestroy,
     Renderer2,
     ViewEncapsulation
-} from "@angular/core";
+} from '@angular/core';
 
-import { McSplitterAreaDirective } from "./splitter-area.directive";
+import { McSplitterAreaDirective } from './splitter-area.directive';
 
-import { Direction } from "./splitter.constants";
-import { IArea, IPoint } from "./splitter.interfaces";
+import { Direction } from './splitter.constants';
+import { IArea, IPoint } from './splitter.interfaces';
 
 
 @Component({
@@ -31,7 +31,7 @@ export class McSplitterComponent implements OnDestroy {
 
     private readonly areaPositionDivider: number = 2;
     private readonly areas: IArea[] = [];
-    private readonly dragListeners: (() => void)[] = [];
+    private readonly listeners: (() => void)[] = [];
 
     @Input()
     set direction(direction: Direction) {
@@ -85,8 +85,6 @@ export class McSplitterComponent implements OnDestroy {
         this.areas.forEach((item, index) => {
             item.order = index * this.areaPositionDivider; // save space for gutters
             item.area.setOrder(item.order);
-
-            console.log(item.area.getSize(this.direction));
         });
     }
 
@@ -95,29 +93,7 @@ export class McSplitterComponent implements OnDestroy {
         this.areas.splice(foundArea.index, 1);
     }
 
-    dragStart() {
-        console.log('dragstart');
-
-        const sizeStep: number = 50;
-        const areaSize0 = this.areas[0].area.getSize(this.direction) - sizeStep;
-        const areaSize1 = this.areas[1].area.getSize(this.direction) + sizeStep;
-
-        this.areas[0].area.setSize(areaSize0, this.direction);
-        this.areas[1].area.setSize(areaSize1, this.direction);
-
-        this.areas.forEach((item) => {
-            console.log(item.area.getSize(this.direction));
-        })
-    }
-
-    dragEnd() {
-        console.log('dragend');
-
-    }
-
     onMouseDown(event: MouseEvent, leftAreaIndex: number, rightAreaIndex: number) {
-        console.log('mousedown');
-
         const leftItem = this.areas[leftAreaIndex];
         const rightArea = this.areas[rightAreaIndex];
 
@@ -127,7 +103,7 @@ export class McSplitterComponent implements OnDestroy {
         };
 
         this.ngZone.runOutsideAngular(() => {
-           this.dragListeners.push(
+           this.listeners.push(
                this.renderer.listen(
                    'document',
                    'mouseup',
@@ -141,46 +117,9 @@ export class McSplitterComponent implements OnDestroy {
         }
 
         this.isDragging = true;
-
-        this.ngZone.runOutsideAngular((() => {
-            this.dragListeners.push(
-                this.renderer.listen(
-                    'document',
-                    'mousemove',
-                    (e: MouseEvent) => this.onMouseMove(e, startPoint, leftItem, rightArea)
-                )
-            );
-        }))
-    }
-
-    onMouseMove(event: MouseEvent, startPoint: IPoint, leftArea: IArea, rightArea: IArea) {
-        if (!this.isDragging) {
-            return;
-        }
-
-        return;
-
-        const endPoint: IPoint = {
-            x: event.screenX,
-            y: event.screenY
-        }
-
-        const offset = this.direction === Direction.Vertical
-            ? startPoint.y - endPoint.y
-            : startPoint.x - endPoint.x;
-
-        const leftAreaSize = leftArea.area.getSize(this.direction);
-        const rightAreaSize = rightArea.area.getSize(this.direction);
-
-        leftArea.area.setSize(leftAreaSize - offset, this.direction);
-        rightArea.area.setSize(rightAreaSize - offset, this.direction);
-
-        console.log('mousemove');
     }
 
     onMouseUp(event: MouseEvent, startPoint: IPoint, leftArea: IArea, rightArea: IArea) {
-        console.log('mouseup');
-
         if (!this.isDragging) {
             return;
         }
@@ -188,10 +127,7 @@ export class McSplitterComponent implements OnDestroy {
         const endPoint: IPoint = {
             x: event.screenX,
             y: event.screenY
-        }
-
-        console.log(startPoint);
-        console.log(endPoint);
+        };
 
         const offset = this.direction === Direction.Vertical
             ? startPoint.y - endPoint.y
@@ -204,12 +140,11 @@ export class McSplitterComponent implements OnDestroy {
         rightArea.area.setSize(rightAreaSize + offset, this.direction);
 
         this.isDragging = false;
+
+        this.listeners.forEach((unlistener: () => void) => {
+            if (unlistener) {
+                unlistener();
+            }
+        });
     }
-
-    // private funcs
-    private getGuttersCount(): number {
-        return this.areas.length - 1;
-    }
-
-
 }
