@@ -5,6 +5,9 @@
 @mixin mc-form-field-theme($theme) {
     $primary: map-get($theme, primary);
     $second: map-get($theme, second);
+
+    $foreground: map-get($theme, foreground);
+
     $hover-darken: 5%;
 
     .mc-form-field {
@@ -28,6 +31,10 @@
                 }
                 background: {
                     color: mc-color($second, 40);
+                }
+
+                .mc-input {
+                    color: mc-color($foreground, disabled-text);
                 }
             }
 
