@@ -1,11 +1,19 @@
 import {
+    Attribute,
     Directive, DoCheck, ElementRef, Inject, Input, OnChanges,
-    OnDestroy, OnInit, Optional, Self
+    OnDestroy, Optional, Self
 } from '@angular/core';
-import { Subject } from 'rxjs';
-
-import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
+import {
+    FormGroupDirective,
+    NgControl,
+    NgForm, NgModel
+} from '@angular/forms';
 import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
+import {
+    END, C, V, X, A, DELETE, BACKSPACE, TAB, ENTER,
+    ESCAPE, ZERO, NINE, NUMPAD_ZERO, NUMPAD_NINE, NUMPAD_MINUS, DASH,
+    FF_MINUS, LEFT_ARROW, RIGHT_ARROW, HOME, UP_ARROW, DOWN_ARROW, F1, F12
+} from '@ptsecurity/cdk/keycodes';
 import { getSupportedInputTypes, Platform } from '@ptsecurity/cdk/platform';
 import {
     CanUpdateErrorState,
@@ -13,10 +21,12 @@ import {
     ErrorStateMatcher,
     mixinErrorState
 } from '@ptsecurity/mosaic/core';
-import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
+import { McFormFieldControl, McFormFieldNumberControl } from '@ptsecurity/mosaic/form-field';
+import { Subject } from 'rxjs';
 
 import { getMcInputUnsupportedTypeError } from './input-errors';
 import { MC_INPUT_VALUE_ACCESSOR } from './input-value-accessor';
+import { stepDown, stepUp } from './stepperUtils';
 
 
 const MC_INPUT_INVALID_TYPES = [
@@ -30,6 +40,9 @@ const MC_INPUT_INVALID_TYPES = [
     'reset',
     'submit'
 ];
+
+export const BIG_STEP = 10;
+export const SMALL_STEP = 1;
 
 let nextUniqueId = 0;
 
@@ -46,10 +59,195 @@ export const _McInputMixinBase: CanUpdateErrorStateCtor & typeof McInputBase =
 
 
 @Directive({
+    selector: `input[mcInput][type="number"]`,
+    exportAs: 'mcNumericalInput',
+    providers: [NgModel, { provide: McFormFieldNumberControl, useExisting: McNumberInput }],
+    host: {
+        '(blur)': '_focusChanged(false)',
+        '(focus)': '_focusChanged(true)',
+        '(paste)': 'onPaste($event)',
+        '(keydown)': 'onKeyDown($event)'
+    }
+})
+export class McNumberInput implements McFormFieldNumberControl<any> {
+    /**
+     * Implemented as part of McFormFieldNumberControl.
+     * @docs-private
+     */
+    value: any;
+
+    /**
+     * Implemented as part of McFormFieldNumberControl.
+     * @docs-private
+     */
+    focused: boolean = false;
+
+    /**
+     * Implemented as part of McFormFieldNumberControl.
+     * @docs-private
+     */
+    readonly stateChanges: Subject<void> = new Subject<void>();
+
+    private readonly _host: HTMLInputElement;
+
+    /**
+     * Implemented as part of McFormFieldNumberControl.
+     * @docs-private
+     */
+    private readonly _step: number;
+    get step() {
+        return this._step;
+    }
+
+    /**
+     * Implemented as part of McFormFieldNumberControl.
+     * @docs-private
+     */
+    private readonly _bigStep: number;
+    get bigStep() {
+        return this._bigStep;
+    }
+
+    private readonly _min: number;
+    private readonly _max: number;
+
+    constructor(
+        private _platform: Platform ,
+        private _elementRef: ElementRef,
+        private _model: NgModel,
+        @Attribute('step') step: string,
+        @Attribute('big-step') bigStep: string,
+        @Attribute('min') min: string,
+        @Attribute('max') max: string
+    ) {
+        this._step = this.isDigit(step) ? parseFloat(step) : SMALL_STEP;
+        this._bigStep = this.isDigit(bigStep) ? parseFloat(bigStep) : BIG_STEP;
+        this._min = this.isDigit(min) ? parseFloat(min) : -Infinity;
+        this._max = this.isDigit(max) ? parseFloat(max) : Infinity;
+
+        this._host = this._elementRef.nativeElement;
+
+        const self = this;
+
+        if ('valueAsNumber' in this._host) {
+            Object.defineProperty(Object.getPrototypeOf(this._host), 'valueAsNumber', {
+                // tslint:disable-next-line:no-reserved-keywords
+                get() {
+                    const res = parseFloat(self.normalizeSplitter(this.value));
+
+                    return isNaN(res) ? null : res;
+                }
+            });
+        }
+    }
+
+    _focusChanged(isFocused: boolean) {
+        if (isFocused !== this.focused) {
+            this.focused = isFocused;
+            this.stateChanges.next();
+        }
+    }
+
+    onKeyDown(event: KeyboardEvent) {
+        // tslint:disable-next-line:deprecation
+        const keyCode = event.keyCode;
+
+        const isCtrlA = (e) => e.keyCode === A && (e.ctrlKey || e.metaKey);
+        const isCtrlC = (e) => e.keyCode === C && (e.ctrlKey || e.metaKey);
+        const isCtrlV = (e) => e.keyCode === V && (e.ctrlKey || e.metaKey);
+        const isCtrlX = (e) => e.keyCode === X && (e.ctrlKey || e.metaKey);
+
+        const isFKey = (e) => e.keyCode >= F1 && e.keyCode <= F12;
+
+        const isNumber = (e) => (e.keyCode >= ZERO && e.keyCode <= NINE) ||
+            (e.keyCode >= NUMPAD_ZERO && e.keyCode <= NUMPAD_NINE);
+
+        const minuses = [NUMPAD_MINUS, DASH, FF_MINUS];
+        const serviceKeys = [DELETE, BACKSPACE, TAB, ESCAPE, ENTER];
+        const arrows = [LEFT_ARROW, RIGHT_ARROW];
+        const allowedKeys =  [HOME, END].concat(arrows).concat(serviceKeys).concat(minuses);
+
+        const isIEPeriod = (e) => e.key === '.' || e.key === 'Decimal';
+        const isNotIEPeriod = (e) => e.key === '.' || e.key === ',';
+
+        // Decimal is for IE
+        const isPeriod = (e) => this._platform.EDGE || this._platform.TRIDENT
+            ? isIEPeriod(e)
+            : isNotIEPeriod(e);
+
+        if (allowedKeys.indexOf(keyCode) !== -1 ||
+            isCtrlA(event) ||
+            isCtrlC(event) ||
+            isCtrlV(event) ||
+            isCtrlX(event) ||
+            isFKey(event) ||
+            isPeriod(event)
+        ) {
+            // let it happen, don't do anything
+            return;
+        }
+        // Ensure that it is not a number and stop the keypress
+        if (event.shiftKey || !isNumber(event)) {
+            event.preventDefault();
+
+            // process steps
+            const step = event.shiftKey ? this._bigStep : this._step;
+
+            if (keyCode === UP_ARROW) {
+                this.stepUp(step);
+            }
+
+            if (keyCode === DOWN_ARROW) {
+                this.stepDown(step);
+            }
+        }
+    }
+
+    onPaste(event) {
+        let value = event.clipboardData.getData('text');
+        value = this.normalizeSplitter(value);
+
+        if (!this.isDigit(value)) {
+            event.preventDefault();
+        }
+    }
+
+    stepUp(step: number) {
+        this._elementRef.nativeElement.focus();
+        const res = stepUp(this._host.valueAsNumber, this._max, this._min, step);
+        this._host.value = res === null ? '' : res.toString();
+        this._model.update.emit(this._host.valueAsNumber);
+    }
+
+    stepDown(step: number) {
+        this._elementRef.nativeElement.focus();
+        const res = stepDown(this._host.valueAsNumber, this._max, this._min, step);
+        this._host.value = res === null ? '' : res.toString();
+        this._model.update.emit(this._host.valueAsNumber);
+    }
+
+    private normalizeSplitter(value: string): string {
+        return value ? value.replace(/,/g, '.') : value;
+    }
+
+    private isDigit(value: string): boolean {
+        return this.isFloat(value) || this.isInt(value);
+    }
+
+    private isFloat(value: string): boolean {
+        return /^-?\d+\.\d+$/.test(value);
+    }
+
+    private isInt(value: string): boolean {
+        return /^-?\d+$/.test(value);
+    }
+}
+
+@Directive({
     selector: `input[mcInput]`,
     exportAs: 'mcInput',
     host: {
-        'class': 'mc-input',
+        class: 'mc-input',
         // Native input properties that are overwritten by Angular inputs need to be synced with
         // the native input element. Otherwise property bindings for those don't work.
         '[attr.id]': 'id',
@@ -196,7 +394,6 @@ export class McInput extends _McInputMixinBase implements McFormFieldControl<any
     private _inputValueAccessor: { value: any };
 
     constructor(protected _elementRef: ElementRef,
-                protected _platform: Platform,
                 @Optional() @Self() public ngControl: NgControl,
                 @Optional() _parentForm: NgForm,
                 @Optional() _parentFormGroup: FormGroupDirective,

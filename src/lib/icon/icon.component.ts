@@ -30,7 +30,8 @@ export const _McIconMixinBase: CanColorCtor & typeof McIconBase
     template: '<ng-content></ng-content>',
     styleUrls: ['./icon.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    inputs: ['color']
 })
 export class McIcon extends _McIconMixinBase implements CanColor {
     constructor(elementRef: ElementRef, @Attribute('mc-icon') iconName: string) {

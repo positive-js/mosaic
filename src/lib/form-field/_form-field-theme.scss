@@ -70,13 +70,23 @@
             color: mc-color($second, 400);
         }
 
-        mc-cleaner  {
+        mc-cleaner {
             .mc-cleaner__icon {
                 color: mc-color($second, 200);
             }
 
             &:hover .mc-cleaner__icon {
                 color: darken(mc-color($second, 200), $hover-darken);
+            }
+        }
+
+        mc-stepper {
+            .mc-stepper-step-up, .mc-stepper-step-down {
+                color: mc-color($second, 200);
+
+                &:hover {
+                    color: darken(mc-color($second, 200), $hover-darken);
+                }
             }
         }
     }

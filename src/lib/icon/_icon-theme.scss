@@ -4,9 +4,27 @@
 @import '../core/theming/palette';
 
 
+@mixin _mc-icon-color($palette) {
+    color: mc-color($palette, 400);
+}
+
 @mixin mc-icon-theme($theme) {
-    .mc-button {
-        @include _mc-button-theme-color($theme);
+    .mc-icon {
+        $primary: map-get($theme, primary);
+        $second: map-get($theme, second);
+        $error: map-get($theme, error);
+
+        &.mc-primary {
+            @include _mc-icon-color($primary);
+        }
+
+        &.mc-second {
+            @include _mc-icon-color($second);
+        }
+
+        &.mc-error {
+            @include _mc-icon-color($error);
+        }
     }
 }
 
