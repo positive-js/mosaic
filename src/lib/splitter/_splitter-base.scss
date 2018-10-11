@@ -1,13 +1,19 @@
-@import '~@ptsecurity/mosaic-icons/dist/styles/mc-icons';
-
 .mc-splitter {
     &-area,
     &-gutter {
         border: 1px solid black;
+    }
+
+    &-area-flex {
+        @extend .flex
     }
 }
 
 .mc-splitter-icon {
     position: relative;
     left: -2px;
+}
+
+.mc-splitter-icon-vertical {
+    transform: rotate(90deg);
 }
