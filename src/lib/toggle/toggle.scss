@@ -1,22 +1,67 @@
 @import 'toggle-theme';
 
 mc-toggle {
-    display: block;
-    height: 16px;
-    width: 28px;
+    display: inline-block;
+    cursor: pointer;
+
+    .mc-toggle-layout {
+        cursor: inherit;
+        align-items: baseline;
+        vertical-align: middle;
+        display: inline-flex;
+        white-space: nowrap;
+    }
+
+    .mc-toggle__container {
+        display: flex;
+        align-items: flex-end;
+        position: relative;
+    }
+
+    .mc-toggle__content-container {
+        margin-left: 8px;
+    }
 
     .mc-toggle__capsule {
         position: relative;
-        border-radius: 9px;
-        width: 100%;
-        height: 100%;
+    }
+
+    .mc-toggle__focus-container {
+        position: absolute;
     }
 
     .mc-toggle__circle {
         position: absolute;
         border-radius: 100%;
+        margin-top: -1px; // due to border
+        margin-left: -1px; // due to border
+    }
+}
+
+mc-toggle:not(.mc-toggle-small) {
+
+    .mc-toggle__capsule, .mc-toggle__focus-container {
+        border-radius: 9px;
+        height: 16px;
+        width: 28px;
+    }
+
+    .mc-toggle__circle {
         height: 16px;
         width: 16px;
-        margin-top: -1px; // due to border
+    }
+}
+
+mc-toggle.mc-toggle-small {
+
+    .mc-toggle__capsule, .mc-toggle__focus-container {
+        border-radius: 8px;
+        height: 14px;
+        width: 24px;
+    }
+
+    .mc-toggle__circle {
+        height: 14px;
+        width: 14px;
     }
 }
