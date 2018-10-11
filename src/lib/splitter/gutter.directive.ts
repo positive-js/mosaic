@@ -46,15 +46,6 @@ export class McGutterDirective {
     }
 
     @Input()
-    set horizontalImage(image: string) {
-        this._horizontalImage = image;
-    }
-
-    get horizontalImage(): string {
-        return this._horizontalImage;
-    }
-
-    @Input()
     set size(size: number) {
         this.renderer.setStyle(
             this.elementRef.nativeElement,
@@ -63,15 +54,6 @@ export class McGutterDirective {
         );
 
         this.refresh();
-    }
-
-    @Input()
-    set verticalImage(image: string) {
-        this._verticalImage = image;
-    }
-
-    get verticalImage(): string {
-        return this._verticalImage;
     }
 
     @Input()
