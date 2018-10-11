@@ -2,9 +2,9 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import {
     Attribute,
-    ChangeDetectionStrategy,
+    ChangeDetectionStrategy, ChangeDetectorRef,
     Component,
-    ElementRef,
+    ElementRef, forwardRef,
     Input,
     ViewEncapsulation
 } from '@angular/core';
@@ -23,6 +23,8 @@ import {
 
 let nextUniqueId = 0;
 
+type ToggleLabelPositionType = 'left' | 'right';
+
 export class McToggleBase {
     constructor(public _elementRef: ElementRef) {}
 }
@@ -38,7 +40,7 @@ export const _McToggleMixinBase:
     exportAs: 'mcToggle',
     template: `
         <label [attr.for]="inputId" class="mc-toggle-layout" #label>
-            <div class="mc-toggle__container">
+            <div class="mc-toggle__container" [class.mc-toggle__container-left]="labelPosition === 'left'">
                 <input type="checkbox"
                        class="mc-toggle-input cdk-visually-hidden"
                        [id]="inputId"
@@ -53,12 +55,17 @@ export const _McToggleMixinBase:
                        [attr.aria-label]="ariaLabel || null"
                        [attr.aria-labelledby]="ariaLabelledby"
                        [attr.aria-checked]="_getAriaChecked()"
-                       (click)="updateModelValue()" />
-                <!--<div class="mc-toggle__focus-container"></div>-->
-                <div class="mc-toggle__capsule">
-                    <div class="mc-toggle__circle" [@switch]="modelValue"></div>
+                       (click)="updateModelValue()"
+                       (change)="_onInteractionEvent($event)" />
+                <div class="mc-toggle__capsule-container">
+                    <div class="mc-toggle__focus-container"></div>
+                    <div class="mc-toggle__capsule">
+                        <div class="mc-toggle__circle" [@switch]="modelValue"></div>
+                    </div>
                 </div>
-                <div class="mc-toggle__content-container">
+                <div class="mc-toggle__content-container"
+                     [class.mc-toggle__content-container-left]="labelPosition === 'left'"
+                     [class.mc-toggle__content-container-right]="labelPosition === 'right'">
                     <ng-content></ng-content>
                 </div>
             </div>
@@ -66,12 +73,15 @@ export const _McToggleMixinBase:
     `,
     styleUrls: ['./toggle.css'],
     providers: [
-        {provide: NG_VALUE_ACCESSOR, useExisting: McToggleComponent, multi: true}
+        {provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => McToggleComponent), multi: true}
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     inputs: ['disabled', 'color'],
     host: {
+        '[id]': 'id',
+        '[attr.id]': 'id',
+        '[class.mc-toggle-disabled]': 'disabled',
         '[class.mc-toggle-off]': '!modelValue'
     },
     animations: [
@@ -85,7 +95,7 @@ export const _McToggleMixinBase:
 export class McToggleComponent extends _McToggleMixinBase
     implements ControlValueAccessor, CanColor, CanDisable, HasTabIndex {
 
-    modelValue: boolean = false;
+    @Input('label-position') labelPosition: ToggleLabelPositionType = 'right';
 
     @Input('aria-label') ariaLabel: string = '';
     @Input('aria-labelledby') ariaLabelledby: string | null = null;
@@ -105,8 +115,36 @@ export class McToggleComponent extends _McToggleMixinBase
 
     @Input() name: string | null = null;
 
+    private _disabled: boolean = false;
+
+    @Input()
+    get disabled() {
+        return this._disabled;
+    }
+
+    set disabled(value: any) {
+        if (value !== this._disabled) {
+            this._disabled = value;
+            this._changeDetectorRef.markForCheck();
+        }
+    }
+
+    private _modelValue: boolean = false;
+
+    get modelValue() {
+        return this._modelValue;
+    }
+
+    set modelValue(value: any) {
+        if (value !== this._modelValue) {
+            this._modelValue = value;
+            this._changeDetectorRef.markForCheck();
+        }
+    }
+
     constructor(public _elementRef: ElementRef,
                 private _focusMonitor: FocusMonitor,
+                private _changeDetectorRef: ChangeDetectorRef,
                 @Attribute('tabindex') tabIndex: string
             ) {
         super(_elementRef);
@@ -126,6 +164,10 @@ export class McToggleComponent extends _McToggleMixinBase
 
     _getHostElement() {
         return this._elementRef.nativeElement;
+    }
+
+    _onInteractionEvent(event: Event) {
+        event.stopPropagation();
     }
 
     updateModelValue() {

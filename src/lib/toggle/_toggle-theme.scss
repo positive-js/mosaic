@@ -34,19 +34,46 @@ $hover-darken: 10%;
 }
 
 @mixin mc-toggle-theme($theme) {
-    mc-toggle {
-        $primary: map-get($theme, primary);
-        $second: map-get($theme, second);
-        $error: map-get($theme, error);
-        $background: map-get($theme, background);
+    $primary: map-get($theme, primary);
+    $second: map-get($theme, second);
+    $error: map-get($theme, error);
+    $background: map-get($theme, background);
 
+    $toggle-off-color-1: mc-color($second, 100);
+    $toggle-off-color-2: mc-color($second, 60);
+
+    mc-toggle {
         .mc-toggle__circle {
             @include _mc-toggle__circle-color(0);
         }
 
+        .mc-toggle__capsule {
+            border: 1px solid mc-color($mc-grey, 300);
+        }
+
+        &.mc-toggle-off {
+            .mc-toggle-input {
+                ~ .mc-toggle__capsule-container .mc-toggle__capsule {
+                    @include _mc-toggle-off-color(0)
+                }
+            }
+        }
+
+        &.mc-primary:not(.mc-toggle-off) {
+            @include _mc-toggle-color($primary);
+            @include _mc-toggle-border-color($primary);
+        }
+
+        &.mc-error:not(.mc-toggle-off) {
+            @include _mc-toggle-color($error);
+            @include _mc-toggle-border-color($error);
+        }
+    }
+
+    mc-toggle:not(.mc-toggle-disabled) {
         .mc-toggle-input {
             &:hover {
-                + .mc-toggle__capsule {
+                ~ .mc-toggle__capsule-container .mc-toggle__capsule {
                     .mc-toggle__circle {
                         @include _mc-toggle__circle-color($hover-darken);
                     }
@@ -56,7 +83,7 @@ $hover-darken: 10%;
 
         &.cdk-focused {
             .mc-toggle-input {
-                + .mc-toggle__capsule {
+                + .mc-toggle__capsule-container .mc-toggle__focus-container {
                     border: 2px solid map-get($primary, 500);
                     box-shadow: inset 0 0 0 1px map-get($background, background);
                 }
@@ -64,43 +91,18 @@ $hover-darken: 10%;
         }
 
         &.mc-toggle-off {
-            $toggle-off-color-1: mc-color($second, 100);
-            $toggle-off-color-2: mc-color($second, 60);
-
-            &:not(.cdk-focused) {
-                .mc-toggle__capsule {
-                    border: 1px solid mc-color($mc-grey, 300);
-                }
-            }
-
             .mc-toggle-input {
-                + .mc-toggle__capsule {
-                    @include _mc-toggle-off-color(0)
-                }
-
                 &:hover {
-                    + .mc-toggle__capsule {
+                    ~ .mc-toggle__capsule-container .mc-toggle__capsule {
                         @include _mc-toggle-off-color($hover-darken)
                     }
                 }
             }
         }
+    }
 
-        &.mc-primary:not(.mc-toggle-off) {
-            @include _mc-toggle-color($primary);
-        }
-
-        &.mc-error:not(.mc-toggle-off) {
-            @include _mc-toggle-color($error);
-        }
-
-        &.mc-primary:not(.mc-toggle-off):not(.cdk-focused) {
-            @include _mc-toggle-border-color($primary);
-        }
-
-        &.mc-error:not(.mc-toggle-off):not(.cdk-focused) {
-            @include _mc-toggle-border-color($error);
-        }
+    mc-toggle.mc-toggle-disabled {
+        opacity: 0.5;
     }
 }
 

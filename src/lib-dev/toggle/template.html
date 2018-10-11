@@ -1,11 +1,32 @@
 <h1>Toggles</h1>
 
-<input>
+<button mc-button (click)="disabled = false">Set Enabled</button>
+<button mc-button (click)="disabled = true">Set Disabled</button>
+
+<br>
 
 <div class="toggle-demo-container">
-    <mc-toggle class="cdk-focused" color="primary">Quack like a duck</mc-toggle>
+    <mc-toggle class="cdk-focused" color="primary" [(ngModel)]="value1" [disabled]="disabled">
+        Quack like a duck
+    </mc-toggle>
 </div>
 
 <div class="toggle-demo-container">
-    <mc-toggle class="mc-toggle-small" color="error">Quack like a duck</mc-toggle>
+    <mc-toggle class="mc-toggle-small cdk-focused" color="error" [(ngModel)]="value1" [disabled]="disabled">
+        Quack like a duck
+    </mc-toggle>
+</div>
+
+
+
+<div class="toggle-demo-container">
+    <mc-toggle color="primary" label-position="left" [(ngModel)]="value2" [disabled]="disabled">
+        Quack like a duck
+    </mc-toggle>
+</div>
+
+<div class="toggle-demo-container">
+    <mc-toggle class="mc-toggle-small" label-position="left" color="error" [(ngModel)]="value2"  [disabled]="disabled">
+        Quack like a duck
+    </mc-toggle>
 </div>

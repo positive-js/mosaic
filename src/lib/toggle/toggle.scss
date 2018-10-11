@@ -2,7 +2,6 @@
 
 mc-toggle {
     display: inline-block;
-    cursor: pointer;
 
     .mc-toggle-layout {
         cursor: inherit;
@@ -16,18 +15,39 @@ mc-toggle {
         display: flex;
         align-items: flex-end;
         position: relative;
+
+        &.mc-toggle__container-left {
+            flex-direction: row-reverse;
+        }
     }
 
     .mc-toggle__content-container {
-        margin-left: 8px;
+        &.mc-toggle__content-container-left {
+            margin-right: 8px;
+        }
+
+        &.mc-toggle__content-container-right {
+            margin-left: 8px;
+        }
     }
 
     .mc-toggle__capsule {
+        position: relative;
+
+        &.mc-toggle-label-position-left {
+            order: 1;
+        }
+    }
+
+    .mc-toggle__capsule-container {
         position: relative;
     }
 
     .mc-toggle__focus-container {
         position: absolute;
+        left: -1px;
+        margin-top: -1px; // due to border
+        z-index: 1;
     }
 
     .mc-toggle__circle {
@@ -41,9 +61,16 @@ mc-toggle {
 mc-toggle:not(.mc-toggle-small) {
 
     .mc-toggle__capsule, .mc-toggle__focus-container {
-        border-radius: 9px;
         height: 16px;
         width: 28px;
+    }
+
+    .mc-toggle__capsule {
+        border-radius: 9px;
+    }
+
+    .mc-toggle__focus-container {
+        border-radius: 10px;
     }
 
     .mc-toggle__circle {
@@ -55,13 +82,24 @@ mc-toggle:not(.mc-toggle-small) {
 mc-toggle.mc-toggle-small {
 
     .mc-toggle__capsule, .mc-toggle__focus-container {
-        border-radius: 8px;
         height: 14px;
         width: 24px;
+    }
+
+    .mc-toggle__capsule {
+        border-radius: 8px;
+    }
+
+    .mc-toggle__focus-container {
+        border-radius: 9px;
     }
 
     .mc-toggle__circle {
         height: 14px;
         width: 14px;
     }
+}
+
+mc-toggle:not([disabled]) {
+    cursor: pointer;
 }
