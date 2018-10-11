@@ -1,3 +1,11 @@
-mc-splitter {
-    height: 300px
+@import '../../lib/core/theming/prebuilt/default-theme';
+
+.mc-splitter-horizontal {
+    height: 100px;
+    border: 1px solid black;
+}
+
+.mc-splitter-vertical {
+    height: 300px;
+    border: 1px solid black;
 }
