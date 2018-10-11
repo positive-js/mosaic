@@ -11,3 +11,8 @@ export interface IPoint {
     x: number;
     y: number;
 }
+
+export interface IInitialSizes {
+    leftArea: number;
+    rightArea: number;
+}

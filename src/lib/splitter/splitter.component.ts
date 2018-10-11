@@ -11,7 +11,7 @@ import {
 import { McSplitterAreaDirective } from './splitter-area.directive';
 
 import { Direction } from './splitter.constants';
-import { IArea, IPoint } from './splitter.interfaces';
+import { IArea, IPoint, IInitialSizes } from './splitter.interfaces';
 
 
 @Component({
@@ -20,7 +20,7 @@ import { IArea, IPoint } from './splitter.interfaces';
     styleUrls: ['splitter.css'],
     templateUrl: './splitter.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class McSplitterComponent implements OnDestroy {
     private _direction: Direction = Direction.Horizontal;
@@ -32,6 +32,10 @@ export class McSplitterComponent implements OnDestroy {
     private readonly areaPositionDivider: number = 2;
     private readonly areas: IArea[] = [];
     private readonly listeners: (() => void)[] = [];
+    private readonly initialSizes: IInitialSizes = {
+        leftArea: 0,
+        rightArea: 0
+    }
 
     @Input()
     set direction(direction: Direction) {
@@ -94,7 +98,7 @@ export class McSplitterComponent implements OnDestroy {
     }
 
     onMouseDown(event: MouseEvent, leftAreaIndex: number, rightAreaIndex: number) {
-        const leftItem = this.areas[leftAreaIndex];
+        const leftArea = this.areas[leftAreaIndex];
         const rightArea = this.areas[rightAreaIndex];
 
         const startPoint: IPoint = {
@@ -102,12 +106,15 @@ export class McSplitterComponent implements OnDestroy {
             y: event.screenY
         };
 
+        this.initialSizes.leftArea = leftArea.area.getSize(this.direction);
+        this.initialSizes.rightArea = rightArea.area.getSize(this.direction);
+
         this.ngZone.runOutsideAngular(() => {
            this.listeners.push(
                this.renderer.listen(
                    'document',
                    'mouseup',
-                   (e: MouseEvent) => this.onMouseUp(e, startPoint, leftItem, rightArea)
+                   () => this.onMouseUp()
                )
            );
         });
@@ -116,10 +123,20 @@ export class McSplitterComponent implements OnDestroy {
             return;
         }
 
+        this.ngZone.runOutsideAngular(() => {
+            this.listeners.push(
+                this.renderer.listen(
+                    'document',
+                    'mousemove',
+                    (e: MouseEvent) => this.onMouseMove(e, startPoint, leftArea, rightArea)
+                )
+            );
+        });
+
         this.isDragging = true;
     }
 
-    onMouseUp(event: MouseEvent, startPoint: IPoint, leftArea: IArea, rightArea: IArea) {
+    onMouseMove(event: MouseEvent, startPoint: IPoint, leftArea: IArea, rightArea: IArea) {
         if (!this.isDragging) {
             return;
         }
@@ -133,18 +150,26 @@ export class McSplitterComponent implements OnDestroy {
             ? startPoint.y - endPoint.y
             : startPoint.x - endPoint.x;
 
-        const leftAreaSize = leftArea.area.getSize(this.direction);
-        const rightAreaSize = rightArea.area.getSize(this.direction);
+        const leftAreaSize = this.initialSizes.leftArea;
+        const rightAreaSize = this.initialSizes.rightArea;
 
         leftArea.area.setSize(leftAreaSize - offset, this.direction);
         rightArea.area.setSize(rightAreaSize + offset, this.direction);
+    }
+
+    onMouseUp() {
+        while(this.listeners.length > 0) {
+            const unsubscribe = this.listeners.pop();
+
+            if (unsubscribe) {
+                unsubscribe();
+            }
+        }
+
+        if (!this.isDragging) {
+            return;
+        }
 
         this.isDragging = false;
-
-        this.listeners.forEach((unlistener: () => void) => {
-            if (unlistener) {
-                unlistener();
-            }
-        });
     }
 }
