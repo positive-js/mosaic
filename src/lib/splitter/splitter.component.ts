@@ -1,6 +1,7 @@
 import {
     ChangeDetectionStrategy,
     Component,
+    ElementRef,
     Input,
     NgZone,
     OnDestroy,
@@ -36,6 +37,17 @@ export class McSplitterComponent implements OnDestroy {
     @Input()
     set direction(direction: Direction) {
         this._direction = direction;
+
+        const mainLayoutDirection = this.direction === Direction.Vertical
+            ? 'layout-column'
+            : 'layout-row';
+
+        const crossLayoutDirection = this.direction === Direction.Vertical
+            ? 'layout-row'
+            : 'layout-column';
+
+        this.renderer.removeClass(this.elementRef.nativeElement, crossLayoutDirection);
+        this.renderer.addClass(this.elementRef.nativeElement, mainLayoutDirection);
     }
 
     get direction(): Direction {
@@ -61,7 +73,8 @@ export class McSplitterComponent implements OnDestroy {
         return this._gutterSize;
     }
 
-    constructor(private ngZone: NgZone,
+    constructor(private elementRef: ElementRef,
+                private ngZone: NgZone,
                 private renderer: Renderer2) {}
 
     ngOnDestroy(): void {
