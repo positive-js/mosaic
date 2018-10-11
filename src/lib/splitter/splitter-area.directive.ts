@@ -1,7 +1,7 @@
-import { Directive, ElementRef, Input, OnDestroy, OnInit, Renderer2 } from "@angular/core";
+import { Directive, ElementRef, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 
-import { McSplitterComponent } from "./splitter.component";
-import { Direction, SizeProperty } from "./splitter.constants";
+import { McSplitterComponent } from './splitter.component';
+import { Direction, SizeProperty } from './splitter.constants';
 
 
 @Directive({
@@ -36,16 +36,12 @@ export class McSplitterAreaDirective implements OnInit, OnDestroy {
     }
 
     setOrder(order: number) {
-        // this.renderer.setStyle(this.elementRef.nativeElement, 'order', order)
-        this.renderer.addClass(this.elementRef.nativeElement, `flex-offset-${order}`);
+        this.renderer.addClass(this.elementRef.nativeElement, `flex-order-${order}`);
     }
 
     setSize(size: number, direction: Direction) {
         const sz = Number(size);
-        // this.elementRef.nativeElement[this.getSizeProperty(direction)] = (!isNaN(sz) && sz > 0) ? sz : 0;
-        // this.renderer.setStyle(this.elementRef.nativeElement, this.getSizeProperty(direction), `${sz}px`);
-        this.renderer.removeClass(this.elementRef.nativeElement, 'flex');
-        this.renderer.setStyle(this.elementRef.nativeElement, 'width', `${sz}px`);
+        this.renderer.setStyle(this.elementRef.nativeElement, this.getSizeProperty(direction), `${sz}px`);
     }
 
     getSize(direction: Direction): number {
