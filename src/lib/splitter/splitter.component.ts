@@ -68,35 +68,21 @@ export class McSplitterComponent implements OnDestroy {
         return;
     }
 
-    // public funcs
     addArea(area: McSplitterAreaDirective): void {
         const index: number = this.areas.length;
+        const order: number = index * this.areaPositionDivider;
+        const size: number = area.getSize();
+
+        area.setOrder(order);
+        area.setSize(size);
 
         this.areas.push({
             area,
             index,
-            order: index * this.areaPositionDivider,
-            initialSize: area.getSize()
-        });
-
-        this.refresh();
-    }
-
-    refresh() {
-        this.areas.forEach((item, index) => {
-            item.order = index * this.areaPositionDivider; // save space for gutters
-            item.area.setOrder(item.order);
-            item.initialSize = item.area.getSize();
-            item.area.setSize(item.initialSize);
+            order,
+            initialSize: size
         });
     }
-
-    removeArea(area: McSplitterAreaDirective): void {
-        const foundArea: IArea = <IArea> this.areas.find((a) => a.area === area);
-        this.areas.splice(foundArea.index, 1);
-    }
-
-
 
     onMouseDown(event: MouseEvent, leftAreaIndex: number, rightAreaIndex: number) {
         const leftArea = this.areas[leftAreaIndex];
@@ -110,20 +96,20 @@ export class McSplitterComponent implements OnDestroy {
         leftArea.initialSize = leftArea.area.getSize();
         rightArea.initialSize = rightArea.area.getSize();
 
-        this.areas.forEach(item => {
+        this.areas.forEach((item) => {
             const size = item.area.getSize();
             item.area.disableFlex();
             item.area.setSize(size);
-        })
+        });
 
         this.ngZone.runOutsideAngular(() => {
-           this.listeners.push(
-               this.renderer.listen(
-                   'document',
-                   'mouseup',
-                   () => this.onMouseUp()
-               )
-           );
+            this.listeners.push(
+                this.renderer.listen(
+                    'document',
+                    'mouseup',
+                    () => this.onMouseUp()
+                )
+            );
         });
 
         if (this.disabled) {
@@ -175,5 +161,10 @@ export class McSplitterComponent implements OnDestroy {
         }
 
         this.isDragging = false;
+    }
+
+    removeArea(area: McSplitterAreaDirective): void {
+        const foundArea: IArea = <IArea> this.areas.find((a) => a.area === area);
+        this.areas.splice(foundArea.index, 1);
     }
 }
