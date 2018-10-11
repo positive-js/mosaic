@@ -1,6 +1,6 @@
-import { Directive, ElementRef, Input, Renderer2 } from "@angular/core";
+import { Directive, ElementRef, Input, Renderer2 } from '@angular/core';
 
-import { Cursor, Direction, State } from "./splitter.constants";
+import { Cursor, Direction, State } from './splitter.constants';
 
 
 @Directive({
@@ -59,11 +59,6 @@ export class McGutterDirective {
 
     get horizontalImage(): string {
         return this._horizontalImage;
-    }
-
-    @Input()
-    set order(order: number) {
-        this.renderer.addClass(this.elementRef.nativeElement, `flex-order-${order}`);
     }
 
     @Input()

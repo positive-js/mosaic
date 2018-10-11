@@ -3,9 +3,9 @@
     <mc-gutter *ngIf="last === false"
                [direction]="direction"
                [disabled]="disabled"
-               [order]="index * 2 + 1"
                [size]="gutterSize"
                (mousedown)="onMouseDown($event, index, index + 1)"
+               class="flex-none flex-order-{{index * 2 + 1}}"
     >
     </mc-gutter>
 </ng-template>
