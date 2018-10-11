@@ -74,7 +74,6 @@ export class McSplitterComponent implements OnDestroy {
         const size: number = area.getSize();
 
         area.setOrder(order);
-        area.setSize(size);
 
         this.areas.push({
             area,
@@ -85,6 +84,10 @@ export class McSplitterComponent implements OnDestroy {
     }
 
     onMouseDown(event: MouseEvent, leftAreaIndex: number, rightAreaIndex: number) {
+        if (this.disabled) {
+            return;
+        }
+
         const leftArea = this.areas[leftAreaIndex];
         const rightArea = this.areas[rightAreaIndex];
 
@@ -112,10 +115,6 @@ export class McSplitterComponent implements OnDestroy {
             );
         });
 
-        if (this.disabled) {
-            return;
-        }
-
         this.ngZone.runOutsideAngular(() => {
             this.listeners.push(
                 this.renderer.listen(
@@ -142,6 +141,10 @@ export class McSplitterComponent implements OnDestroy {
         const offset = this.direction === Direction.Vertical
             ? startPoint.y - endPoint.y
             : startPoint.x - endPoint.x;
+
+        if (this.disabled) {
+            return;
+        }
 
         leftArea.area.setSize(leftArea.initialSize - offset);
         rightArea.area.setSize(rightArea.initialSize + offset);
