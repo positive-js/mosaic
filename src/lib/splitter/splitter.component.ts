@@ -172,7 +172,7 @@ export class McSplitterComponent implements OnInit {
         if (leftArea.area.getSize() === prevLeftAreaSize) {
             rightArea.area.setSize(prevRightAreaSize);
         } else if (rightArea.area.getSize() === prevRightAreaSize) {
-            leftArea.area.setSize(prevLeftAreaSize)
+            leftArea.area.setSize(prevLeftAreaSize);
         }
     }
 
