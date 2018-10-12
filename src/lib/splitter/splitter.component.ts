@@ -162,8 +162,18 @@ export class McSplitterComponent implements OnInit {
             return;
         }
 
+        const prevLeftAreaSize = leftArea.area.getSize();
+        const prevRightAreaSize = rightArea.area.getSize();
+
         leftArea.area.setSize(leftArea.initialSize - offset);
         rightArea.area.setSize(rightArea.initialSize + offset);
+
+        // to prevent other area size change if the first is fixed with min-width or min-height
+        if (leftArea.area.getSize() === prevLeftAreaSize) {
+            rightArea.area.setSize(prevRightAreaSize);
+        } else if (rightArea.area.getSize() === prevRightAreaSize) {
+            leftArea.area.setSize(prevLeftAreaSize)
+        }
     }
 
     onMouseUp() {
