@@ -32,7 +32,8 @@ module.exports = {
                 'tooltip',
                 'tree',
                 'typography',
-                'visual'
+                'visual',
+                'splitter'
             ]
         ]
     }
