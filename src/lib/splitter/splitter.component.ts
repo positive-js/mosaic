@@ -183,7 +183,22 @@ export class McSplitterComponent implements OnInit {
     }
 
     removeArea(area: McSplitterAreaDirective): void {
-        const foundArea: IArea = <IArea> this.areas.find((a) => a.area === area);
-        this.areas.splice(foundArea.index, 1);
+        let indexToRemove: number = -1;
+
+        this.areas.some((item, index) => {
+           if (item.area === area) {
+               indexToRemove = index;
+
+               return true;
+           }
+
+           return false;
+        });
+
+        if (indexToRemove === -1) {
+            return;
+        }
+
+        this.areas.splice(indexToRemove, 1);
     }
 }
