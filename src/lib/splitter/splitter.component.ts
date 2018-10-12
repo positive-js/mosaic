@@ -4,7 +4,7 @@ import {
     ElementRef,
     Input,
     NgZone,
-    OnDestroy,
+    OnInit,
     Renderer2,
     ViewEncapsulation
 } from '@angular/core';
@@ -23,10 +23,10 @@ import { IArea, IPoint } from './splitter.interfaces';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class McSplitterComponent implements OnDestroy {
+export class McSplitterComponent implements OnInit {
     readonly areas: IArea[] = [];
 
-    private _direction: Direction = Direction.Horizontal;
+    private _direction: Direction;
     private _disabled: boolean = false;
     private _gutterSize: number = 12;
 
@@ -78,10 +78,6 @@ export class McSplitterComponent implements OnDestroy {
                 private ngZone: NgZone,
                 private renderer: Renderer2) {}
 
-    ngOnDestroy(): void {
-        return;
-    }
-
     addArea(area: McSplitterAreaDirective): void {
         const index: number = this.areas.length;
         const order: number = index * this.areaPositionDivider;
@@ -95,6 +91,12 @@ export class McSplitterComponent implements OnDestroy {
             order,
             initialSize: size
         });
+    }
+
+    ngOnInit(): void {
+        if (!this.direction) {
+            this.direction = Direction.Horizontal;
+        }
     }
 
     onMouseDown(event: MouseEvent, leftAreaIndex: number, rightAreaIndex: number) {

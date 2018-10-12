@@ -1,6 +1,22 @@
-<h1 class="mc-h1">With default flex</h1>
+<h1 class="mc-h1">Splitter examples</h1>
+
+<p>
+    Splitter is designer to use with Mosaic icons and Mosaic flex layout so import VISUAL and ICONS to use it.
+</p>
+
+<h2 class="mc-h2">Horizontal</h2>
 
 <mc-splitter class="horizontal-block" direction="horizontal">
+    <mc-splitter-area class="layout-padding">first</mc-splitter-area>
+    <mc-splitter-area class="flex-20 layout-padding">second</mc-splitter-area>
+    <mc-splitter-area class="layout-padding">third</mc-splitter-area>
+</mc-splitter>
+
+<br>
+
+<h2 class="mc-h2">Vertical</h2>
+
+<mc-splitter class="vertical-block" direction="vertical">
     <mc-splitter-area class="layout-padding">first</mc-splitter-area>
     <mc-splitter-area class="layout-padding">second</mc-splitter-area>
     <mc-splitter-area class="layout-padding">third</mc-splitter-area>
@@ -8,30 +24,20 @@
 
 <br>
 
-<h1 class="mc-h1">With custom flex</h1>
+<h2 class="mc-h2">Default direction</h2>
 
-<mc-splitter class="horizontal-block" direction="horizontal">
-    <mc-splitter-area class="flex layout-padding">first</mc-splitter-area>
-    <mc-splitter-area class="flex-20 layout-padding">second</mc-splitter-area>
-    <mc-splitter-area class="flex layout-padding">third</mc-splitter-area>
+<mc-splitter class="horizontal-block">
+    <mc-splitter-area class="flex-33 layout-padding">first</mc-splitter-area>
+    <mc-splitter-area class="flex layout-padding">second</mc-splitter-area>
+    <mc-splitter-area class="flex-33 layout-padding">third</mc-splitter-area>
 </mc-splitter>
 
 <br>
 
-<h1 class="mc-h1">Vertical</h1>
+<h2 class="mc-h2">Disabled</h2>
 
-<mc-splitter class="vertical-block" direction="vertical">
-    <mc-splitter-area class="flex layout-padding">first</mc-splitter-area>
-    <mc-splitter-area class="flex-20 layout-padding">second</mc-splitter-area>
-    <mc-splitter-area class="flex layout-padding">third</mc-splitter-area>
-</mc-splitter>
-
-<br>
-
-<h1 class="mc-h1">Disabled</h1>
-
-<mc-splitter class="layout-row horizontal-block" disabled>
-    <mc-splitter-area class="flex layout-padding">first</mc-splitter-area>
+<mc-splitter class="horizontal-block" direction="horizontal" disabled>
+    <mc-splitter-area class="flex-33 layout-padding">first</mc-splitter-area>
     <mc-splitter-area class="flex-20 layout-padding">second</mc-splitter-area>
     <mc-splitter-area class="flex layout-padding">third</mc-splitter-area>
 </mc-splitter>
