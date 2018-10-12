@@ -1,11 +1,12 @@
+@import '~@ptsecurity/mosaic-icons/dist/styles/mc-icons';
 @import '../../lib/core/theming/prebuilt/default-theme';
 
-.mc-splitter-horizontal {
+.horizontal-block {
     height: 100px;
     border: 1px solid black;
 }
 
-.mc-splitter-vertical {
+.vertical-block {
     height: 300px;
     border: 1px solid black;
 }

@@ -24,6 +24,8 @@ import { IArea, IPoint } from './splitter.interfaces';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class McSplitterComponent implements OnDestroy {
+    readonly areas: IArea[] = [];
+
     private _direction: Direction = Direction.Horizontal;
     private _disabled: boolean = false;
     private _gutterSize: number = 12;
@@ -31,7 +33,6 @@ export class McSplitterComponent implements OnDestroy {
     private isDragging: boolean = false;
 
     private readonly areaPositionDivider: number = 2;
-    private readonly areas: IArea[] = [];
     private readonly listeners: (() => void)[] = [];
 
     @Input()
