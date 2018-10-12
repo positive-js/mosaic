@@ -64,6 +64,7 @@ $mc-icon-button-font: 16px;
     }
 
     &[disabled] {
+        pointer-events: none;
         cursor: default;
     }
 
