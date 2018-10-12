@@ -1,0 +1,7 @@
+@mixin mc-splitter-theme($theme) {
+    $primary: map-get($theme, primary);
+
+    .mc-gutter {
+        background-color: mc-color($primary, 60);
+    }
+}

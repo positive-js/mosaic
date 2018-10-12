@@ -1,13 +1,3 @@
-.mc-splitter {
-    &-area,
-    &-gutter {
-    }
-
-    &-area-flex {
-        @extend .flex
-    }
-}
-
 .mc-splitter-icon {
     position: relative;
     left: -2px;

@@ -4,7 +4,7 @@ import { McSplitterComponent } from './splitter.component';
 import { Direction, SizeProperty } from './splitter.constants';
 
 
-const SPLITTER_AREA_FLEX_STYLE = 'mc-splitter-area-flex';
+const SPLITTER_AREA_FLEX_STYLE = 'flex';
 
 
 @Directive({
