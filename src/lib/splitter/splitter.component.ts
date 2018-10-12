@@ -28,7 +28,7 @@ export class McSplitterComponent implements OnInit {
 
     private _direction: Direction;
     private _disabled: boolean = false;
-    private _gutterSize: number = 12;
+    private _gutterSize: number = 6;
 
     private isDragging: boolean = false;
 
