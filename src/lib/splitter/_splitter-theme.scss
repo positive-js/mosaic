@@ -1,8 +1,9 @@
 @mixin mc-splitter-theme($theme) {
     $primary: map-get($theme, primary);
+    $second: map-get($theme, second);
 
     .mc-gutter {
-        background-color: mc-color($primary, 60);
-        color: mc-color($primary, 600);
+        background-color: mc-color($second, 60);
+        color: mc-color($second, 600);
     }
 }
