@@ -1,11 +1,13 @@
-import { Component, DebugElement, Type } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
+import { Component, Type } from "@angular/core";
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { By } from "@angular/platform-browser";
 
-import { Direction } from './splitter.constants';
+import { Direction } from "./splitter.constants";
 
-import { McSplitterComponent } from './splitter.component';
-import { McSplitterModule } from './splitter.module';
+import { McGutterDirective } from "./gutter.directive";
+import { McSplitterAreaDirective } from "./splitter-area.directive";
+import { McSplitterComponent } from "./splitter.component";
+import { McSplitterModule } from "./splitter.module";
 
 
 function createTestComponent<T>(component: Type<T>) {
@@ -21,28 +23,35 @@ function createTestComponent<T>(component: Type<T>) {
     return TestBed.createComponent<T>(component);
 }
 
-function checkDirection(splitter: DebugElement, direction: Direction, guttersCount: number, gutterSize: number) {
-    const gutters = splitter.nativeElement.querySelectorAll('mc-gutter');
+function checkDirection<T>(fixture: ComponentFixture<T>,
+                           direction: Direction,
+                           guttersCount: number,
+                           gutterSize: number) {
 
-    if (direction === Direction.Vertical) {
-        expect(splitter.nativeElement.classList.contains('layout-column')).toBe(true);
-        expect(splitter.nativeElement.classList.contains('layout-row')).toBe(false);
-    } else {
-        expect(splitter.nativeElement.classList.contains('layout-column')).toBe(false);
-        expect(splitter.nativeElement.classList.contains('layout-row')).toBe(true);
-    }
+    const splitter = fixture.debugElement.query(By.directive(McSplitterComponent));
+    const gutters = fixture.debugElement.queryAll(By.directive(McGutterDirective));
 
+    const mainAxisClass = direction === Direction.Vertical
+        ? 'layout-column'
+        : 'layout-row';
+
+    const crossAxisClass = direction === Direction.Vertical
+        ? 'layout-row'
+        : 'layout-column';
+
+    const expectedWidth = (direction === Direction.Vertical)
+        ? ''
+        : `${gutterSize}px`;
+
+    const expectedHeight = (direction === Direction.Vertical)
+        ? `${gutterSize}px`
+        : '';
+
+    expect(splitter.nativeElement.classList.contains(mainAxisClass)).toBe(true);
+    expect(splitter.nativeElement.classList.contains(crossAxisClass)).toBe(false);
     expect(gutters.length).toBe(guttersCount);
-
-    gutters.forEach((gutter) => {
-        if (direction === Direction.Vertical) {
-            expect(gutter.style.width).toBe('');
-            expect(gutter.style.height).toBe(`${gutterSize}px`);
-        } else {
-            expect(gutter.style.width).toBe(`${gutterSize}px`);
-            expect(gutter.style.height).toBe('');
-        }
-    });
+    expect(gutters.every((gutter) => gutter.nativeElement.style.width === expectedWidth)).toBe(true);
+    expect(gutters.every((gutter) => gutter.nativeElement.style.height === expectedHeight)).toBe(true);
 }
 
 
@@ -74,45 +83,42 @@ class McSplitterDirection {
 
 describe('McSplitter', () => {
     describe('direction', () => {
-        it('default', () => {
+        it('should be default', () => {
             const fixture = createTestComponent(McSplitterDefaultDirection);
-            const splitter = fixture.debugElement.query(By.directive(McSplitterComponent));
 
             fixture.detectChanges();
 
-            const areas = splitter.nativeElement.querySelectorAll('mc-splitter-area');
+            const areas = fixture.debugElement.queryAll(By.directive(McSplitterAreaDirective));
             const expectedAreasCount = 3;
             const expectedGuttersCount = expectedAreasCount - 1;
             const expectedGutterSize = 6;
 
-            checkDirection(splitter, Direction.Horizontal, expectedGuttersCount, expectedGutterSize);
+            checkDirection(fixture, Direction.Horizontal, expectedGuttersCount, expectedGutterSize);
 
             expect(areas.length).toBe(expectedAreasCount);
         });
 
 
-        it('horizontal', () => {
+        it('should be horizontal', () => {
             const fixture = createTestComponent(McSplitterDirection);
-            const splitter = fixture.debugElement.query(By.directive(McSplitterComponent));
             const expectedGuttersCount = 2;
             const expectedGutterSize = 6;
 
             fixture.componentInstance.direction = Direction.Horizontal;
             fixture.detectChanges();
 
-            checkDirection(splitter, Direction.Horizontal, expectedGuttersCount, expectedGutterSize);
+            checkDirection(fixture, Direction.Horizontal, expectedGuttersCount, expectedGutterSize);
         });
 
-        it('vertical', () => {
+        it('should be vertical', () => {
             const fixture = createTestComponent(McSplitterDirection);
-            const splitter = fixture.debugElement.query(By.directive(McSplitterComponent));
             const expectedGuttersCount = 2;
             const expectedGutterSize = 6;
 
             fixture.componentInstance.direction = Direction.Vertical;
             fixture.detectChanges();
 
-            checkDirection(splitter, Direction.Vertical, expectedGuttersCount, expectedGutterSize);
+            checkDirection(fixture, Direction.Vertical, expectedGuttersCount, expectedGutterSize);
         });
     });
 });
