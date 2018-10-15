@@ -1,6 +1,6 @@
-import { Directive, ElementRef, Input, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
 
-import { Cursor, Direction, State } from './splitter.constants';
+import { Cursor, Direction, SizeProperty, State } from './splitter.constants';
 
 
 @Directive({
@@ -9,7 +9,7 @@ import { Cursor, Direction, State } from './splitter.constants';
         '[class.mc-splitter-gutter]': 'true'
     }
 })
-export class McGutterDirective {
+export class McGutterDirective implements OnInit {
     private _direction: Direction = Direction.Vertical;
     private _disabled: boolean = false;
     private _withAnimation: boolean = false;
@@ -17,7 +17,6 @@ export class McGutterDirective {
     @Input()
     set direction(direction: Direction) {
         this._direction = direction;
-        this.refresh();
     }
 
     get direction(): Direction {
@@ -38,7 +37,6 @@ export class McGutterDirective {
          * any other value keep gutter enabled
          */
         this._disabled = `${disabled}` === 'true' || `${disabled}` === '';
-        this.refresh();
     }
 
     get disabled(): boolean {
@@ -49,11 +47,9 @@ export class McGutterDirective {
     set size(size: number) {
         this.renderer.setStyle(
             this.elementRef.nativeElement,
-            this.isVertical() ? 'height' : 'width',
+            this.isVertical() ? SizeProperty.Height : SizeProperty.Width,
             `${size}px`
         );
-
-        this.refresh();
     }
 
     @Input()
@@ -73,6 +69,10 @@ export class McGutterDirective {
 
     constructor(private renderer: Renderer2,
                 private elementRef: ElementRef) {
+    }
+
+    ngOnInit(): void {
+        this.renderer.setStyle(this.elementRef.nativeElement, 'cursor', this.getCursor(this.getState()));
     }
 
     private isVertical(): boolean {
@@ -98,9 +98,5 @@ export class McGutterDirective {
             : this.direction === Direction.Vertical
                 ? State.Vertical
                 : State.Horizontal;
-    }
-
-    private refresh(): void {
-        this.renderer.setStyle(this.elementRef.nativeElement, 'cursor', this.getCursor(this.getState()));
     }
 }
