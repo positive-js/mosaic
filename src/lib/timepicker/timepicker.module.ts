@@ -6,7 +6,6 @@ import { A11yModule } from '@ptsecurity/cdk/a11y';
 import { PlatformModule } from '@ptsecurity/cdk/platform';
 
 import { McTimepicker } from './timepicker';
-import { McTimepickerValidator } from './timepicker-validator';
 
 
 @NgModule({
@@ -17,12 +16,10 @@ import { McTimepickerValidator } from './timepicker-validator';
         FormsModule
     ],
     declarations: [
-        McTimepicker,
-        McTimepickerValidator
+        McTimepicker
     ],
     exports: [
-        McTimepicker,
-        McTimepickerValidator
+        McTimepicker
     ]
 })
 export class McTimepickerModule {}
