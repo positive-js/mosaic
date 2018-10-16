@@ -85,10 +85,6 @@ export class McToggleComponent extends _McToggleMixinBase
     // tslint:disable:member-ordering
     @Input() id: string = this._uniqueId;
 
-    _getAriaChecked(): boolean {
-        return this.checked;
-    }
-
     get inputId(): string {
         return `${this.id || this._uniqueId}-input`;
     }
@@ -146,6 +142,10 @@ export class McToggleComponent extends _McToggleMixinBase
 
     focus(): void {
         this._focusMonitor.focusVia(this._inputElement.nativeElement, 'keyboard');
+    }
+
+    _getAriaChecked(): boolean {
+        return this.checked;
     }
 
     _onInteractionEvent(event: Event) {
