@@ -42,6 +42,13 @@ import {
     ARROW_RIGHT_KEYCODE,
     ARROW_UP_KEYCODE,
     DEFAULT_TIME_FORMAT,
+    HOURS_PER_DAY,
+    HOURS_MINUTES_REGEXP,
+    HOURS_MINUTES_SECONDS_REGEXP,
+    HOURS_ONLY_REGEXP,
+    MINUTES_PER_HOUR,
+    SECONDS_PER_MINUTE,
+    TIMEFORMAT_PLACEHOLDERS,
     TimeFormats,
     TimeParts
 } from './timepicker.constants';
@@ -88,12 +95,8 @@ export const McTimepickerMixinBase = mixinErrorState(McTimepickerBase);
         {
             provide: NG_VALIDATORS,
             useValue: {
-                validate(c) {
-                    return _validator ? _validator(c) : null;
-                },
-                registerOnValidatorChange(fn: () => void): void {
-                    _validatorOnChange = fn;
-                }
+                validate(c) { return _validator ? _validator(c) : null; },
+                registerOnValidatorChange(fn: () => void): void { _validatorOnChange = fn; }
             },
             multi: true
         },
@@ -111,23 +114,6 @@ export class McTimepicker extends McTimepickerMixinBase
         DoCheck,
         CanUpdateErrorState,
         ControlValueAccessor {
-
-    static readonly TIMEFORMAT_PLACEHOLDERS: { [timeFormat: string]: string } = {
-        'hh:mm:ss': '  :  :  ',
-        'hh:mm': '  :  '
-    };
-
-    static readonly SECONDS_PER_MINUTE: number = 59;
-    static readonly MINUTES_PER_HOUR: number = 59;
-    static readonly HOURS_PER_DAY: number = 23;
-
-    static readonly hoursMinutesSecondsRegExp =
-        new RegExp(/^([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]|[0-9]):([0-5][0-9]|[0-9])?$/);
-    static readonly hoursAndMinutesRegExp =
-        /^([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]|[0-9])?$/;
-    static readonly hoursOnlyRegExp =
-        /^([0-9]|0[0-9]|1[0-9]|2[0-3]):?$/;
-
 
     /** An object used to control when error messages are shown. */
     @Input() errorStateMatcher: ErrorStateMatcher;
@@ -152,9 +138,7 @@ export class McTimepicker extends McTimepickerMixinBase
 
     @Input()
     get disabled(): boolean {
-        if (this.ngControl && this.ngControl.disabled !== null) {
-            return this.ngControl.disabled;
-        }
+        if (this.ngControl && this.ngControl.disabled !== null) { return this.ngControl.disabled; }
 
         return this._disabled;
     }
@@ -215,15 +199,15 @@ export class McTimepicker extends McTimepickerMixinBase
             .indexOf(formatValue) > -1 ? formatValue : DEFAULT_TIME_FORMAT;
 
         _validatorOnChange();
-        this.placeholder = McTimepicker.TIMEFORMAT_PLACEHOLDERS[this._timeFormat.toLowerCase()];
+        this.placeholder = TIMEFORMAT_PLACEHOLDERS[this._timeFormat.toLowerCase()];
     }
 
     @Input('min-time')
     get minTime(): string | null { return this._minTime; }
 
     set minTime(minValue: string | null) {
-        this._minDTime = minValue !== null ? this._getDateFromTimeString(minValue) : undefined;
         this._minTime = minValue;
+        this._minDTime = minValue !== null ? this._getDateFromTimeString(minValue) : undefined;
         _validatorOnChange();
     }
 
@@ -231,8 +215,8 @@ export class McTimepicker extends McTimepickerMixinBase
     get maxTime(): string | null { return this._maxTime; }
 
     set maxTime(maxValue: string | null) {
-        this._maxDTime = maxValue !== null ? this._getDateFromTimeString(maxValue) : undefined;
         this._maxTime = maxValue;
+        this._maxDTime = maxValue !== null ? this._getDateFromTimeString(maxValue) : undefined;
         _validatorOnChange();
     }
 
@@ -273,6 +257,7 @@ export class McTimepicker extends McTimepickerMixinBase
         // Instead of NG_VALUE_ACCESSOR (https://github.com/angular/material2/issues/8158#issuecomment-344618103)
         if (this.ngControl) { this.ngControl.valueAccessor = this; }
 
+        // Substitute initial empty validator with validator linked to directive object instance (workaround)
         _validator = Validators.compose([
             () => this._parseValidator(),
             () => this._minTimeValidator(),
@@ -357,7 +342,6 @@ export class McTimepicker extends McTimepickerMixinBase
         if (isAutocompleteTriggered && this.ngControl.errors === null) {
             this._createSelectionOfTimeComponentInInput(initialCursorStart + 1);
         }
-
     }
 
     /**
@@ -454,7 +438,7 @@ export class McTimepicker extends McTimepickerMixinBase
         if (changedTime !== undefined) {
             const cursorPos = this._elementRef.nativeElement.selectionStart;
 
-            const modifiedTimePart = this._getTimeEditState(cursorPos, this._elementRef.nativeElement.value)
+            const modifiedTimePart = this._getTimeEditMetrics(cursorPos)
                 .modifiedTimePart;
             const keyCode: string = this._getKeyCode(event);
             if (keyCode === ARROW_UP_KEYCODE) { changedTime = this._incrementTime(changedTime, modifiedTimePart); }
@@ -488,7 +472,7 @@ export class McTimepicker extends McTimepickerMixinBase
 
     private _createSelectionOfTimeComponentInInput(cursorPos: number): void {
         setTimeout(() => {
-            const newEditParams = this._getTimeEditState(cursorPos, this._elementRef.nativeElement.value);
+            const newEditParams = this._getTimeEditMetrics(cursorPos);
             this._elementRef.nativeElement.selectionStart = newEditParams.cursorStartPosition;
             this._elementRef.nativeElement.selectionEnd = newEditParams.cursorEndPosition;
         });
@@ -511,11 +495,11 @@ export class McTimepicker extends McTimepickerMixinBase
             default:
         }
 
-        if (seconds > McTimepicker.SECONDS_PER_MINUTE) { seconds = 0; }
+        if (seconds > SECONDS_PER_MINUTE) { seconds = 0; }
 
-        if (minutes > McTimepicker.MINUTES_PER_HOUR) { minutes = 0; }
+        if (minutes > MINUTES_PER_HOUR) { minutes = 0; }
 
-        if (hours > McTimepicker.HOURS_PER_DAY) { hours = 0; }
+        if (hours > HOURS_PER_DAY) { hours = 0; }
 
         return <Date> this._getDateFromTimeDigits(hours, minutes, seconds);
     }
@@ -540,11 +524,11 @@ export class McTimepicker extends McTimepickerMixinBase
             default:
         }
 
-        if (seconds < 0) { seconds = McTimepicker.SECONDS_PER_MINUTE; }
+        if (seconds < 0) { seconds = SECONDS_PER_MINUTE; }
 
-        if (minutes < 0) { minutes = McTimepicker.MINUTES_PER_HOUR; }
+        if (minutes < 0) { minutes = MINUTES_PER_HOUR; }
 
-        if (hours < 0) { hours = McTimepicker.HOURS_PER_DAY; }
+        if (hours < 0) { hours = HOURS_PER_DAY; }
 
         return <Date> this._getDateFromTimeDigits(hours, minutes, seconds);
     }
@@ -564,13 +548,13 @@ export class McTimepicker extends McTimepickerMixinBase
     /**
      * @description Get params for arrow-keys (up/down) time valie edit.
      * @param cursorPosition Current cursor position in timeString
-     * @param timeString Time string to parse
      */
-    private _getTimeEditState(cursorPosition: number, timeString: string): {
+    private _getTimeEditMetrics(cursorPosition: number): {
         modifiedTimePart: TimeParts;
         cursorStartPosition: number;
         cursorEndPosition: number;
     } {
+        const timeString: string = this._elementRef.nativeElement.value;
         let modifiedTimePart: TimeParts;
         let cursorStartPosition: number;
         let cursorEndPosition: number;
@@ -621,9 +605,9 @@ export class McTimepicker extends McTimepickerMixinBase
         hoursAndMinutes: any;
         hoursAndMinutesAndSeconds: any;
     } {
-        const hoursAndMinutesAndSeconds = timeString.match(McTimepicker.hoursMinutesSecondsRegExp);
-        const hoursAndMinutes = timeString.match(McTimepicker.hoursAndMinutesRegExp);
-        const hoursOnly = timeString.match(McTimepicker.hoursOnlyRegExp);
+        const hoursAndMinutesAndSeconds = timeString.match(HOURS_MINUTES_SECONDS_REGEXP);
+        const hoursAndMinutes = timeString.match(HOURS_MINUTES_REGEXP);
+        const hoursOnly = timeString.match(HOURS_ONLY_REGEXP);
 
         return {
             hoursOnly,
