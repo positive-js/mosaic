@@ -222,9 +222,8 @@ export class McTimepicker extends McTimepickerMixinBase
     get minTime(): string | null { return this._minTime; }
 
     set minTime(minValue: string | null) {
-        this._minTime = minValue !== null && this._getDateFromTimeString(minValue) !== undefined ?
-            minValue :
-            null;
+        this._minDTime = minValue !== null ? this._getDateFromTimeString(minValue) : undefined;
+        this._minTime = minValue;
         _validatorOnChange();
     }
 
@@ -232,9 +231,8 @@ export class McTimepicker extends McTimepickerMixinBase
     get maxTime(): string | null { return this._maxTime; }
 
     set maxTime(maxValue: string | null) {
-        this._maxTime = maxValue !== null && this._getDateFromTimeString(maxValue) !== undefined ?
-            maxValue :
-            null;
+        this._maxDTime = maxValue !== null ? this._getDateFromTimeString(maxValue) : undefined;
+        this._maxTime = maxValue;
         _validatorOnChange();
     }
 
@@ -248,7 +246,10 @@ export class McTimepicker extends McTimepickerMixinBase
     private _onTouched: () => void;
     private _timeFormat: TimeFormats;
     private _minTime: string | null = null;
+    private _minDTime: Date | undefined;
     private _maxTime: string | null = null;
+    private _maxDTime: Date | undefined;
+    private _tempTimeForValidation: Date | undefined;
 
     constructor(private readonly _elementRef: ElementRef,
                 @Optional() @Self() public ngControl: NgControl,
@@ -429,7 +430,8 @@ export class McTimepicker extends McTimepickerMixinBase
     } = {}): void {
         const { changedTime, doTimestringReformat = true } = applyParams;
 
-        const timeToApply = changedTime || this._getDateFromTimeString(this._elementRef.nativeElement.value);
+        const timeToApply: Date | undefined = changedTime ||
+            this._getDateFromTimeString(this._elementRef.nativeElement.value);
 
         if (doTimestringReformat && timeToApply !== undefined) {
             this._renderer.setProperty(
@@ -438,10 +440,12 @@ export class McTimepicker extends McTimepickerMixinBase
                 this._getTimeStringFromDate(timeToApply, this.timeFormat));
         }
 
+        this._tempTimeForValidation = timeToApply;
         (<FormControl> this.ngControl.control).updateValueAndValidity();
         const result = this.ngControl.errors === null && timeToApply !== undefined ? timeToApply : null;
         this._onChange(result);
         this.stateChanges.next();
+        this._tempTimeForValidation = undefined;
     }
 
     private _upDownTimeByArrowKeys(event: KeyboardEvent): void {
@@ -688,45 +692,30 @@ export class McTimepicker extends McTimepickerMixinBase
     }
 
     private _parseValidator(): ValidationErrors | null {
-        const dateRepresentationOfCurrentInputValue: Date | undefined =
-            this._getDateFromTimeString(this._elementRef.nativeElement.value);
-
-        return dateRepresentationOfCurrentInputValue === undefined ?
+        return this._tempTimeForValidation === undefined ?
             { mcTimepickerParse: { text: this._elementRef.nativeElement.value } } :
             null;
     }
 
     private _minTimeValidator(): ValidationErrors | null {
-        const dateRepresentationOfCurrentInputValue: Date | undefined =
-            this._getDateFromTimeString(this._elementRef.nativeElement.value);
-
-        return (dateRepresentationOfCurrentInputValue !== undefined && this.minTime !== null &&
-            this._isTimeLowerThenMin(dateRepresentationOfCurrentInputValue, this.minTime)) ?
+        return (this._tempTimeForValidation !== undefined && this._minDTime !== undefined &&
+            this._isTimeLowerThenMin(this._tempTimeForValidation)) ?
             { mcTimepickerLowerThenMintime: { text: this._elementRef.nativeElement.value } } :
             null;
     }
 
     private _maxTimeValidator(): ValidationErrors | null {
-        const dateRepresentationOfCurrentInputValue: Date | undefined =
-            this._getDateFromTimeString(this._elementRef.nativeElement.value);
-
-        return (dateRepresentationOfCurrentInputValue !== undefined && this.maxTime !== null &&
-            this._isTimeGreaterThenMax(dateRepresentationOfCurrentInputValue, this.maxTime)) ?
+        return (this._tempTimeForValidation !== undefined && this.maxTime !== null &&
+            this._isTimeGreaterThenMax(this._tempTimeForValidation)) ?
             { mcTimepickerHigherThenMaxtime: { text: this._elementRef.nativeElement.value } } :
             null;
     }
 
-    private _isTimeLowerThenMin(timeToCompare: Date, minTime: string): boolean {
-        const minTimeForCompare: Date | undefined = this._getDateFromTimeString(minTime);
-        const timeDelta: number = timeToCompare.getTime() - (<Date> minTimeForCompare).getTime();
-
-        return timeDelta < 0;
+    private _isTimeLowerThenMin(timeToCompare: Date): boolean {
+        return timeToCompare.getTime() - (<Date> this._minDTime).getTime() < 0;
     }
 
-    private _isTimeGreaterThenMax(compareWithTime: Date, maxTime: string): boolean {
-        const maxTimeForCompare: Date | undefined = this._getDateFromTimeString(maxTime);
-        const timeDelta: number = compareWithTime.getTime() - (<Date> maxTimeForCompare).getTime();
-
-        return timeDelta >= 0;
+    private _isTimeGreaterThenMax(compareWithTime: Date): boolean {
+        return compareWithTime.getTime() - (<Date> this._maxDTime).getTime() >= 0;
     }
 }
