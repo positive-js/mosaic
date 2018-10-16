@@ -1,1 +1,8 @@
-@import 'splitter-base';
+.mc-splitter-icon {
+    position: relative;
+    left: -4px;
+}
+
+.mc-splitter-icon-vertical {
+    transform: rotate(90deg);
+}
