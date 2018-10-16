@@ -2,8 +2,20 @@ import { Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
 
 import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 
-import { Cursor, Direction, SizeProperty, State } from './splitter.constants';
+import { Direction, SizeProperty } from './splitter.constants';
 
+
+const enum Cursor {
+    ResizeColumn = 'col-resize',
+    ResizeRow = 'row-resize',
+    Default = 'default'
+}
+
+const enum State {
+    Horizontal = 'horizontal',
+    Vertical = 'vertical',
+    Disabled = 'disabled'
+}
 
 @Directive({
     selector: 'mc-gutter',

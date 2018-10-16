@@ -14,7 +14,19 @@ import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import { McSplitterAreaDirective } from './splitter-area.directive';
 
 import { Direction } from './splitter.constants';
-import { IArea, IPoint } from './splitter.interfaces';
+
+
+export interface IArea {
+    area: McSplitterAreaDirective;
+    index: number;
+    order: number;
+    initialSize: number;
+}
+
+export interface IPoint {
+    x: number;
+    y: number;
+}
 
 
 @Component({

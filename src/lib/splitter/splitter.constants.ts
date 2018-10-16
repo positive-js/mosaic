@@ -3,18 +3,6 @@ export const enum Direction {
     Vertical = 'vertical'
 }
 
-export const enum State {
-    Horizontal = 'horizontal',
-    Vertical = 'vertical',
-    Disabled = 'disabled'
-}
-
-export const enum Cursor {
-    ResizeColumn = 'col-resize',
-    ResizeRow = 'row-resize',
-    Default = 'default'
-}
-
 export const enum SizeProperty {
     OffsetWidth = 'offsetWidth',
     OffsetHeight = 'offsetHeight',
