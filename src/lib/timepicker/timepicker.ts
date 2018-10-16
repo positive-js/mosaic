@@ -249,7 +249,7 @@ export class McTimepicker extends McTimepickerMixinBase
     private _minDTime: Date | undefined;
     private _maxTime: string | null = null;
     private _maxDTime: Date | undefined;
-    private _tempTimeForValidation: Date | undefined;
+    private _currentDTimeInput: Date | undefined;
 
     constructor(private readonly _elementRef: ElementRef,
                 @Optional() @Self() public ngControl: NgControl,
@@ -432,6 +432,7 @@ export class McTimepicker extends McTimepickerMixinBase
 
         const timeToApply: Date | undefined = changedTime ||
             this._getDateFromTimeString(this._elementRef.nativeElement.value);
+        this._currentDTimeInput = timeToApply;
 
         if (doTimestringReformat && timeToApply !== undefined) {
             this._renderer.setProperty(
@@ -440,18 +441,16 @@ export class McTimepicker extends McTimepickerMixinBase
                 this._getTimeStringFromDate(timeToApply, this.timeFormat));
         }
 
-        this._tempTimeForValidation = timeToApply;
         (<FormControl> this.ngControl.control).updateValueAndValidity();
         const result = this.ngControl.errors === null && timeToApply !== undefined ? timeToApply : null;
         this._onChange(result);
         this.stateChanges.next();
-        this._tempTimeForValidation = undefined;
     }
 
     private _upDownTimeByArrowKeys(event: KeyboardEvent): void {
         event.preventDefault();
 
-        let changedTime: Date | undefined = this._getDateFromTimeString(this._elementRef.nativeElement.value);
+        let changedTime: Date | undefined = this._currentDTimeInput;
         if (changedTime !== undefined) {
             const cursorPos = this._elementRef.nativeElement.selectionStart;
 
@@ -466,7 +465,7 @@ export class McTimepicker extends McTimepickerMixinBase
     }
 
     private _switchSelectionBetweenTimeparts(event: KeyboardEvent): void {
-        const changedTime: Date | undefined = this._getDateFromTimeString(this._elementRef.nativeElement.value);
+        const changedTime: Date | undefined = this._currentDTimeInput;
         const keyCode: string = this._getKeyCode(event);
 
         if (changedTime !== undefined) {
@@ -692,21 +691,21 @@ export class McTimepicker extends McTimepickerMixinBase
     }
 
     private _parseValidator(): ValidationErrors | null {
-        return this._tempTimeForValidation === undefined ?
+        return this._currentDTimeInput === undefined ?
             { mcTimepickerParse: { text: this._elementRef.nativeElement.value } } :
             null;
     }
 
     private _minTimeValidator(): ValidationErrors | null {
-        return (this._tempTimeForValidation !== undefined && this._minDTime !== undefined &&
-            this._isTimeLowerThenMin(this._tempTimeForValidation)) ?
+        return (this._currentDTimeInput !== undefined && this._minDTime !== undefined &&
+            this._isTimeLowerThenMin(this._currentDTimeInput)) ?
             { mcTimepickerLowerThenMintime: { text: this._elementRef.nativeElement.value } } :
             null;
     }
 
     private _maxTimeValidator(): ValidationErrors | null {
-        return (this._tempTimeForValidation !== undefined && this.maxTime !== null &&
-            this._isTimeGreaterThenMax(this._tempTimeForValidation)) ?
+        return (this._currentDTimeInput !== undefined && this.maxTime !== null &&
+            this._isTimeGreaterThenMax(this._currentDTimeInput)) ?
             { mcTimepickerHigherThenMaxtime: { text: this._elementRef.nativeElement.value } } :
             null;
     }
