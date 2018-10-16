@@ -1,13 +1,8 @@
-import { Component, Type } from "@angular/core";
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { By } from "@angular/platform-browser";
+import { Component, Type } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
-import { Direction } from "./splitter.constants";
-
-import { McGutterDirective } from "./gutter.directive";
-import { McSplitterAreaDirective } from "./splitter-area.directive";
-import { McSplitterComponent } from "./splitter.component";
-import { McSplitterModule } from "./splitter.module";
+import { Direction, McGutterDirective, McSplitterAreaDirective, McSplitterComponent, McSplitterModule } from './index';
 
 
 function createTestComponent<T>(component: Type<T>) {

@@ -3,9 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 
-import { McGutterDirective } from '../splitter/gutter.directive';
-import { McSplitterAreaDirective } from '../splitter/splitter-area.directive';
-import { McSplitterComponent } from '../splitter/splitter.component';
+import { McGutterDirective, McSplitterAreaDirective, McSplitterComponent } from './splitter.component';
 
 
 @NgModule({
@@ -14,6 +12,7 @@ import { McSplitterComponent } from '../splitter/splitter.component';
         McIconModule
     ],
     exports: [
+        McGutterDirective,
         McSplitterAreaDirective,
         McSplitterComponent
     ],
