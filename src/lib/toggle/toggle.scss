@@ -45,8 +45,6 @@ mc-toggle {
 
     .mc-toggle__focus-container {
         position: absolute;
-        left: -1px;
-        margin-top: -1px; // due to border
         z-index: 1;
     }
 

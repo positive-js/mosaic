@@ -1,4 +1,4 @@
-$hover-darken: 10%;
+$hover-darken: 5%;
 
 @mixin _mc-toggle-color($palette) {
     $color: mc-color($palette, 500);

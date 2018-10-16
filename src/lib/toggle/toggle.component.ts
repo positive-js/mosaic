@@ -4,8 +4,8 @@ import {
     Attribute,
     ChangeDetectionStrategy, ChangeDetectorRef,
     Component,
-    ElementRef, forwardRef,
-    Input,
+    ElementRef, EventEmitter, forwardRef,
+    Input, Output, ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -15,10 +15,13 @@ import {
     CanColorCtor,
     CanDisable,
     CanDisableCtor,
-    HasTabIndex, HasTabIndexCtor,
+    HasTabIndex,
+    HasTabIndexCtor,
     mixinColor,
-    mixinDisabled, mixinTabIndex
+    mixinDisabled,
+    mixinTabIndex
 } from '@ptsecurity/mosaic/core';
+import { ThemePalette } from '@ptsecurity/mosaic/core/common-behaviors/color';
 
 
 let nextUniqueId = 0;
@@ -35,67 +38,44 @@ export const _McToggleMixinBase:
     CanColorCtor &
     typeof McToggleBase = mixinTabIndex(mixinColor(mixinDisabled(McToggleBase)));
 
+export class McToggleChange {
+    source: McToggleComponent;
+    checked: boolean;
+}
+
 @Component({
     selector: 'mc-toggle',
     exportAs: 'mcToggle',
-    template: `
-        <label [attr.for]="inputId" class="mc-toggle-layout" #label>
-            <div class="mc-toggle__container" [class.mc-toggle__container-left]="labelPosition === 'left'">
-                <input type="checkbox"
-                       class="mc-toggle-input cdk-visually-hidden"
-                       [id]="inputId"
-                       [value]="modelValue"
-                       [required]="required"
-                       [checked]="checked"
-                       [attr.value]="value"
-                       [disabled]="disabled"
-                       [attr.name]="name"
-                       [tabIndex]="tabIndex"
-                       [indeterminate]="indeterminate"
-                       [attr.aria-label]="ariaLabel || null"
-                       [attr.aria-labelledby]="ariaLabelledby"
-                       [attr.aria-checked]="_getAriaChecked()"
-                       (click)="updateModelValue()"
-                       (change)="_onInteractionEvent($event)" />
-                <div class="mc-toggle__capsule-container">
-                    <div class="mc-toggle__focus-container"></div>
-                    <div class="mc-toggle__capsule">
-                        <div class="mc-toggle__circle" [@switch]="modelValue"></div>
-                    </div>
-                </div>
-                <div class="mc-toggle__content-container"
-                     [class.mc-toggle__content-container-left]="labelPosition === 'left'"
-                     [class.mc-toggle__content-container-right]="labelPosition === 'right'">
-                    <ng-content></ng-content>
-                </div>
-            </div>
-        </label>
-    `,
+    templateUrl: './toggle.component.html',
     styleUrls: ['./toggle.css'],
     providers: [
         {provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => McToggleComponent), multi: true}
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    inputs: ['disabled', 'color'],
+    inputs: ['disabled', 'color', 'tabIndex'],
     host: {
         '[id]': 'id',
         '[attr.id]': 'id',
         '[class.mc-toggle-disabled]': 'disabled',
-        '[class.mc-toggle-off]': '!modelValue'
+        '[class.mc-toggle-off]': '!checked'
     },
     animations: [
         trigger('switch', [
             state('true' , style({ right: '-1px' })),
             state('false', style({ right: '*' })),
-            transition('* => *', animate('300ms'))
+            transition('* => *', animate('150ms'))
         ])
     ]
 })
 export class McToggleComponent extends _McToggleMixinBase
     implements ControlValueAccessor, CanColor, CanDisable, HasTabIndex {
 
-    @Input('label-position') labelPosition: ToggleLabelPositionType = 'right';
+    color: ThemePalette = ThemePalette.Primary;
+
+    @ViewChild('input') _inputElement: ElementRef;
+
+    @Input() labelPosition: ToggleLabelPositionType = 'right';
 
     @Input('aria-label') ariaLabel: string = '';
     @Input('aria-labelledby') ariaLabelledby: string | null = null;
@@ -105,8 +85,8 @@ export class McToggleComponent extends _McToggleMixinBase
     // tslint:disable:member-ordering
     @Input() id: string = this._uniqueId;
 
-    _getAriaChecked(): 'true' | 'false' {
-        return this.modelValue ? 'true' : 'false';
+    _getAriaChecked(): boolean {
+        return this.checked;
     }
 
     get inputId(): string {
@@ -114,6 +94,8 @@ export class McToggleComponent extends _McToggleMixinBase
     }
 
     @Input() name: string | null = null;
+
+    @Input() value: string;
 
     private _disabled: boolean = false;
 
@@ -129,24 +111,28 @@ export class McToggleComponent extends _McToggleMixinBase
         }
     }
 
-    private _modelValue: boolean = false;
+    private _checked: boolean = false;
 
-    get modelValue() {
-        return this._modelValue;
+    get checked() {
+        return this._checked;
     }
 
-    set modelValue(value: any) {
-        if (value !== this._modelValue) {
-            this._modelValue = value;
+    @Input()
+    set checked(value: boolean) {
+        if (value !== this._checked) {
+            this._checked = value;
             this._changeDetectorRef.markForCheck();
         }
     }
+
+    @Output() readonly change: EventEmitter<McToggleChange> =
+        new EventEmitter<McToggleChange>();
 
     constructor(public _elementRef: ElementRef,
                 private _focusMonitor: FocusMonitor,
                 private _changeDetectorRef: ChangeDetectorRef,
                 @Attribute('tabindex') tabIndex: string
-            ) {
+    ) {
         super(_elementRef);
 
         this.tabIndex = parseInt(tabIndex) || 0;
@@ -159,38 +145,55 @@ export class McToggleComponent extends _McToggleMixinBase
     }
 
     focus(): void {
-        this._getHostElement().focus();
-    }
-
-    _getHostElement() {
-        return this._elementRef.nativeElement;
+        this._focusMonitor.focusVia(this._inputElement.nativeElement, 'keyboard');
     }
 
     _onInteractionEvent(event: Event) {
         event.stopPropagation();
     }
 
-    updateModelValue() {
-        this.modelValue = !this.modelValue;
-        this.onChangeCallback(this.modelValue);
-        this.onTouchedCallback();
+    _onLabelTextChange() {
+        this._changeDetectorRef.markForCheck();
     }
 
-    writeValue(value: boolean) {
-        if (value !== this.modelValue) {
-            this.modelValue = value;
-        }
+    _onInputClick(event: MouseEvent) {
+        event.stopPropagation();
+        this._updateModelValue();
+        this._emitChangeEvent();
+    }
+
+    writeValue(value: any) {
+        this.checked = !!value;
     }
 
     registerOnChange(fn: any) {
-        this.onChangeCallback = fn;
+        this._onChangeCallback = fn;
     }
 
     registerOnTouched(fn: any) {
-        this.onTouchedCallback = fn;
+        this._onTouchedCallback = fn;
     }
 
-    private onTouchedCallback = () => {};
+    setDisabledState(isDisabled: boolean) {
+        this.disabled = isDisabled;
+    }
 
-    private onChangeCallback = (_: any) => {};
+    private _onTouchedCallback = () => {};
+
+    private _onChangeCallback = (_: any) => {};
+
+    private _updateModelValue() {
+        this._checked = !this.checked;
+        this._onChangeCallback(this.checked);
+        this._onTouchedCallback();
+    }
+
+    private _emitChangeEvent() {
+        const event = new McToggleChange();
+        event.source = this;
+        event.checked = this.checked;
+
+        this._onChangeCallback(this.checked);
+        this.change.emit(event);
+    }
 }

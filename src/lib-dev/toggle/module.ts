@@ -14,7 +14,15 @@ import { McToggleModule } from '../../lib/toggle/';
     styleUrls: ['./styles.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class DemoComponent {}
+export class DemoComponent {
+    valueSmallOff: boolean = false;
+    valueSmallOn: boolean = true;
+
+    valueBigOff: boolean = false;
+    valueBigOn: boolean = true;
+
+    disabled: boolean = false;
+}
 
 
 @NgModule({
@@ -31,12 +39,7 @@ export class DemoComponent {}
         DemoComponent
     ]
 })
-export class DemoModule {
-    value1: boolean = false;
-    value2: boolean = false;
-
-    disabled: boolean = false;
-}
+export class DemoModule {}
 
 platformBrowserDynamic()
     .bootstrapModule(DemoModule)
