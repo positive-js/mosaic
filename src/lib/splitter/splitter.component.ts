@@ -9,6 +9,8 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
+import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
+
 import { McSplitterAreaDirective } from './splitter-area.directive';
 
 import { Direction } from './splitter.constants';
@@ -57,7 +59,7 @@ export class McSplitterComponent implements OnInit {
 
     @Input()
     set disabled(disabled: boolean) {
-        this._disabled = `${disabled}` === 'true' || `${disabled}` === '';
+        this._disabled = coerceBooleanProperty(disabled);
     }
 
     get disabled(): boolean {

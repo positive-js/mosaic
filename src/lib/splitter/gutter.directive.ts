@@ -1,5 +1,7 @@
 import { Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
 
+import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
+
 import { Cursor, Direction, SizeProperty, State } from './splitter.constants';
 
 
@@ -25,18 +27,7 @@ export class McGutterDirective implements OnInit {
 
     @Input()
     set disabled(disabled: boolean) {
-        /*
-         * disable gutter if:
-         * <... disabled>
-         * <... disabled='true'>
-         *
-         * enable gutter if:
-         * <... >
-         * <... disabled='false'>
-         *
-         * any other value keep gutter enabled
-         */
-        this._disabled = `${disabled}` === 'true' || `${disabled}` === '';
+        this._disabled = coerceBooleanProperty(disabled);
     }
 
     get disabled(): boolean {
