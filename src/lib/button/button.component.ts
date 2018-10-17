@@ -129,7 +129,7 @@ export const _McButtonMixinBase:
     }
 })
 export class McButton extends _McButtonMixinBase implements OnDestroy, CanDisable, CanColor {
-    constructor(elementRef: ElementRef, private _platform: Platform, private _focusMonitor: FocusMonitor) {
+    constructor(elementRef: ElementRef, private _focusMonitor: FocusMonitor) {
         super(elementRef);
 
         this._focusMonitor.monitor(this._elementRef.nativeElement, true);
@@ -163,8 +163,8 @@ export class McButton extends _McButtonMixinBase implements OnDestroy, CanDisabl
     }
 })
 export class McAnchor extends McButton {
-    constructor(platform: Platform, focusMonitor: FocusMonitor, elementRef: ElementRef) {
-        super(elementRef, platform, focusMonitor);
+    constructor(focusMonitor: FocusMonitor, elementRef: ElementRef) {
+        super(elementRef, focusMonitor);
     }
 
     _haltDisabledEvents(event: Event) {
@@ -189,8 +189,8 @@ export class McAnchor extends McButton {
     }
 })
 export class McIconButton extends McButton {
-    constructor(platform: Platform, focusMonitor: FocusMonitor, elementRef: ElementRef) {
-        super(elementRef, platform, focusMonitor);
+    constructor(focusMonitor: FocusMonitor, elementRef: ElementRef) {
+        super(elementRef, focusMonitor);
     }
 
     _haltDisabledEvents(event: Event) {
