@@ -11,17 +11,14 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import {
-    CanColor,
-    CanColorCtor,
-    CanDisable,
-    CanDisableCtor,
-    HasTabIndex,
-    HasTabIndexCtor,
+    ThemePalette,
+    CanColor, CanColorCtor,
+    CanDisable, CanDisableCtor,
+    HasTabIndex, HasTabIndexCtor,
     mixinColor,
     mixinDisabled,
     mixinTabIndex
 } from '@ptsecurity/mosaic/core';
-import { ThemePalette } from '@ptsecurity/mosaic/core/common-behaviors/color';
 
 
 let nextUniqueId = 0;
