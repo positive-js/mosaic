@@ -5,7 +5,6 @@ module.exports = {
             2,
             'always',
             [
-                'app',
                 'alert',
                 'badge',
                 'build',
