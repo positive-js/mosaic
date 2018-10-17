@@ -13,40 +13,40 @@ import {
 import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 
 
-export interface IArea {
+interface IArea {
     area: McSplitterAreaDirective;
     index: number;
     order: number;
     initialSize: number;
 }
 
-export interface IPoint {
+interface IPoint {
     x: number;
     y: number;
 }
 
-export const enum Cursor {
+const enum Cursor {
     ResizeColumn = 'col-resize',
     ResizeRow = 'row-resize',
     Default = 'default'
 }
 
-export const enum Direction {
-    Horizontal = 'horizontal',
-    Vertical = 'vertical'
-}
-
-export const enum SizeProperty {
+const enum SizeProperty {
     OffsetWidth = 'offsetWidth',
     OffsetHeight = 'offsetHeight',
     Width = 'width',
     Height = 'height'
 }
 
-export const enum State {
+const enum State {
     Horizontal = 'horizontal',
     Vertical = 'vertical',
     Disabled = 'disabled'
+}
+
+export const enum Direction {
+    Horizontal = 'horizontal',
+    Vertical = 'vertical'
 }
 
 @Component({
