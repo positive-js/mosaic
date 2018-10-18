@@ -39,7 +39,7 @@ mc-toggle {
         }
     }
 
-    .mc-toggle__capsule {
+    .mc-toggle-bar {
         position: relative;
 
         &.mc-toggle-label-position-left {
@@ -47,7 +47,7 @@ mc-toggle {
         }
     }
 
-    .mc-toggle__capsule-container {
+    .mc-toggle-bar-container {
         position: relative;
     }
 
@@ -68,7 +68,7 @@ mc-toggle {
 
 mc-toggle:not(.mc-toggle_small) {
 
-    .mc-toggle__capsule {
+    .mc-toggle-bar {
         height: $toggle-height;
         width: $toggle-width;
         border-radius: $toggle-border-radius;
@@ -88,7 +88,7 @@ mc-toggle:not(.mc-toggle_small) {
 
 mc-toggle.mc-toggle_small {
 
-    .mc-toggle__capsule {
+    .mc-toggle-bar {
         height: $small-toggle-height;
         width: $small-toggle-width;
         border-radius: $small-toggle-border-radius;

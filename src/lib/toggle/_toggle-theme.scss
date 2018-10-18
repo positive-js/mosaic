@@ -3,7 +3,7 @@ $hover-darken: 5%;
 @mixin _mc-toggle-color($palette) {
     $color: mc-color($palette, 500);
 
-    .mc-toggle__capsule {
+    .mc-toggle-bar {
         background: $color;
     }
 }
@@ -11,7 +11,7 @@ $hover-darken: 5%;
 @mixin _mc-toggle-border-color($palette) {
     $color: mc-color($palette, 500);
 
-    .mc-toggle__capsule {
+    .mc-toggle-bar {
         border: 1px solid $color;
     }
 }
@@ -47,13 +47,13 @@ $hover-darken: 5%;
             @include _mc-toggle-circle-color(0);
         }
 
-        .mc-toggle__capsule {
+        .mc-toggle-bar {
             border: 1px solid mc-color($mc-grey, 300);
         }
 
         &.mc-toggle-off {
             .mc-toggle-input {
-                ~ .mc-toggle__capsule-container .mc-toggle__capsule {
+                ~ .mc-toggle-bar-container .mc-toggle-bar {
                     @include _mc-toggle-off-color(0)
                 }
             }
@@ -73,7 +73,7 @@ $hover-darken: 5%;
     mc-toggle:not(.mc-disabled) {
         .mc-toggle-input {
             &:hover {
-                ~ .mc-toggle__capsule-container .mc-toggle__capsule {
+                ~ .mc-toggle-bar-container .mc-toggle-bar {
                     .mc-toggle__circle {
                         @include _mc-toggle-circle-color($hover-darken);
                     }
@@ -83,7 +83,7 @@ $hover-darken: 5%;
 
         &.cdk-keyboard-focused {
             .mc-toggle-input {
-                + .mc-toggle__capsule-container .mc-toggle__focus-frame {
+                + .mc-toggle-bar-container .mc-toggle__focus-frame {
                     border: 2px solid map-get($primary, 500);
                     box-shadow: inset 0 0 0 1px map-get($background, background);
                 }
@@ -93,7 +93,7 @@ $hover-darken: 5%;
         &.mc-toggle-off {
             .mc-toggle-input {
                 &:hover {
-                    ~ .mc-toggle__capsule-container .mc-toggle__capsule {
+                    ~ .mc-toggle-bar-container .mc-toggle-bar {
                         @include _mc-toggle-off-color($hover-darken)
                     }
                 }
