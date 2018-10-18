@@ -20,6 +20,7 @@
 @import '../option/option-theme';
 @import '../../tag/tag-theme';
 @import '../../tooltip/tooltip-theme';
+@import '../../splitter/splitter-theme';
 
 
 @mixin mosaic-theme($theme) {
@@ -46,4 +47,5 @@
     @include mc-option-theme($theme);
     @include mc-tag-theme($theme);
     @include mc-tooltip-theme($theme);
+    @include mc-splitter-theme($theme);
 }
