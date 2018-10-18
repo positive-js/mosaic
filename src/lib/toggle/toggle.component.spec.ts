@@ -95,7 +95,7 @@ describe('McToggle', () => {
 
         it('should add and remove disabled state', () => {
             expect(toggleInstance.disabled).toBe(false);
-            expect(toggleNativeElement.classList).not.toContain('mc-toggle-disabled');
+            expect(toggleNativeElement.classList).not.toContain('mc-disabled');
             expect(inputElement.tabIndex).toBe(0);
             expect(inputElement.disabled).toBe(false);
 
@@ -103,14 +103,14 @@ describe('McToggle', () => {
             fixture.detectChanges();
 
             expect(toggleInstance.disabled).toBe(true);
-            expect(toggleNativeElement.classList).toContain('mc-toggle-disabled');
+            expect(toggleNativeElement.classList).toContain('mc-disabled');
             expect(inputElement.disabled).toBe(true);
 
             testComponent.isDisabled = false;
             fixture.detectChanges();
 
             expect(toggleInstance.disabled).toBe(false);
-            expect(toggleNativeElement.classList).not.toContain('mc-toggle-disabled');
+            expect(toggleNativeElement.classList).not.toContain('mc-disabled');
             expect(inputElement.tabIndex).toBe(0);
             expect(inputElement.disabled).toBe(false);
         });
@@ -149,7 +149,7 @@ describe('McToggle', () => {
             testComponent.labelPos = 'left';
             fixture.detectChanges();
 
-            expect(toggleNativeElement.querySelector('.mc-toggle__content-container-left')).not.toBeNull();
+            expect(toggleNativeElement.querySelector('.left')).not.toBeNull();
         });
 
         it('should not trigger the click event multiple times', () => {
@@ -354,7 +354,7 @@ describe('McToggle', () => {
             const toggleInstance = toggleDebugElement.componentInstance;
             const inputElement = <HTMLInputElement> toggleNativeElement.querySelector('input');
             expect(toggleInstance.disabled).toBe(false);
-            expect(toggleNativeElement.classList).not.toContain('mc-toggle-disabled');
+            expect(toggleNativeElement.classList).not.toContain('mc-disabled');
             expect(inputElement.tabIndex).toBe(0);
             expect(inputElement.disabled).toBe(false);
 
@@ -362,14 +362,14 @@ describe('McToggle', () => {
             fixture.detectChanges();
 
             expect(toggleInstance.disabled).toBe(true);
-            expect(toggleNativeElement.classList).toContain('mc-toggle-disabled');
+            expect(toggleNativeElement.classList).toContain('mc-disabled');
             expect(inputElement.disabled).toBe(true);
 
             testComponent.isDisabled = false;
             fixture.detectChanges();
 
             expect(toggleInstance.disabled).toBe(false);
-            expect(toggleNativeElement.classList).not.toContain('mc-toggle-disabled');
+            expect(toggleNativeElement.classList).not.toContain('mc-disabled');
             expect(inputElement.tabIndex).toBe(0);
             expect(inputElement.disabled).toBe(false);
         });

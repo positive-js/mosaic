@@ -1,5 +1,5 @@
 <label [attr.for]="inputId" class="mc-toggle-layout" #label>
-    <div class="mc-toggle__container" [class.mc-toggle__container-left]="labelPosition === 'left'">
+    <div class="mc-toggle__container" [class.left]="labelPosition === 'left'">
         <input #input
                type="checkbox"
                class="mc-toggle-input cdk-visually-hidden"
@@ -15,14 +15,14 @@
                (click)="_onInputClick($event)"
                (change)="_onInteractionEvent($event)"/>
         <div class="mc-toggle__capsule-container">
-            <div class="mc-toggle__focus-container"></div>
+            <div class="mc-toggle__focus-frame"></div>
             <div class="mc-toggle__capsule">
                 <div class="mc-toggle__circle" [@switch]="checked"></div>
             </div>
         </div>
-        <div class="mc-toggle__content-container"
-             [class.mc-toggle__content-container-left]="labelPosition === 'left'"
-             [class.mc-toggle__content-container-right]="labelPosition === 'right'">
+        <div class="mc-toggle__content"
+             [class.left]="labelPosition === 'left'"
+             [class.right]="labelPosition === 'right'">
             <span class="mc-toggle-label" (cdkObserveContent)="_onLabelTextChange()">
                 <ng-content></ng-content>
             </span>

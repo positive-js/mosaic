@@ -54,7 +54,7 @@ export class McToggleChange {
     host: {
         '[id]': 'id',
         '[attr.id]': 'id',
-        '[class.mc-toggle-disabled]': 'disabled',
+        '[class.mc-disabled]': 'disabled',
         '[class.mc-toggle-off]': '!checked'
     },
     animations: [

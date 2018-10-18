@@ -1,10 +1,12 @@
-@import 'toggle-theme';
-
-$big-toggle-height: 16px;
-$big-toggle-width: 28px;
+$toggle-height: 16px;
+$toggle-width: 28px;
+$toggle-border-radius: 9px;
 
 $small-toggle-height: 14px;
 $small-toggle-width: 24px;
+$small-toggle-border-radius: 8px;
+
+$label-margin: 8px;
 
 mc-toggle {
     display: inline-block;
@@ -22,18 +24,18 @@ mc-toggle {
         align-items: center;
         position: relative;
 
-        &.mc-toggle__container-left {
+        &.left {
             flex-direction: row-reverse;
         }
     }
 
-    .mc-toggle__content-container {
-        &.mc-toggle__content-container-left {
-            margin-right: 8px;
+    .mc-toggle__content {
+        &.left {
+            margin-right: $label-margin;
         }
 
-        &.mc-toggle__content-container-right {
-            margin-left: 8px;
+        &.right {
+            margin-left: $label-margin;
         }
     }
 
@@ -49,7 +51,7 @@ mc-toggle {
         position: relative;
     }
 
-    .mc-toggle__focus-container {
+    .mc-toggle__focus-frame {
         position: absolute;
         z-index: 1;
         top: -1px; // due to border
@@ -64,36 +66,36 @@ mc-toggle {
     }
 }
 
-mc-toggle:not(.mc-toggle-small) {
+mc-toggle:not(.mc-toggle_small) {
 
     .mc-toggle__capsule {
-        height: $big-toggle-height;
-        width: $big-toggle-width;
-        border-radius: 9px;
+        height: $toggle-height;
+        width: $toggle-width;
+        border-radius: $toggle-border-radius;
     }
 
-    .mc-toggle__focus-container {
-        border-radius: 10px;
-        height: $big-toggle-height + 2;
-        width: $big-toggle-width + 2;
+    .mc-toggle__focus-frame {
+        border-radius: $toggle-border-radius + 1;
+        height: $toggle-height + 2;
+        width: $toggle-width + 2;
     }
 
     .mc-toggle__circle {
-        height: $big-toggle-height;
-        width: $big-toggle-height;
+        height: $toggle-height;
+        width: $toggle-height;
     }
 }
 
-mc-toggle.mc-toggle-small {
+mc-toggle.mc-toggle_small {
 
     .mc-toggle__capsule {
         height: $small-toggle-height;
         width: $small-toggle-width;
-        border-radius: 8px;
+        border-radius: $small-toggle-border-radius;
     }
 
-    .mc-toggle__focus-container {
-        border-radius: 9px;
+    .mc-toggle__focus-frame {
+        border-radius: $small-toggle-border-radius + 1;
         height: $small-toggle-height + 2;
         width: $small-toggle-width + 2;
     }
@@ -104,6 +106,6 @@ mc-toggle.mc-toggle-small {
     }
 }
 
-mc-toggle:not(.mc-toggle-disabled) {
+mc-toggle:not(.mc-disabled) {
     cursor: pointer;
 }
