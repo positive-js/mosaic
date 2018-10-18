@@ -26,13 +26,9 @@ function checkDirection<T>(fixture: ComponentFixture<T>,
     const splitter = fixture.debugElement.query(By.directive(McSplitterComponent));
     const gutters = fixture.debugElement.queryAll(By.directive(McGutterDirective));
 
-    const mainAxisClass = direction === Direction.Vertical
-        ? 'layout-column'
-        : 'layout-row';
-
-    const crossAxisClass = direction === Direction.Vertical
-        ? 'layout-row'
-        : 'layout-column';
+    const expectedDirection = direction === Direction.Vertical
+        ? 'column'
+        : 'row';
 
     const expectedWidth = (direction === Direction.Vertical)
         ? ''
@@ -40,10 +36,10 @@ function checkDirection<T>(fixture: ComponentFixture<T>,
 
     const expectedHeight = (direction === Direction.Vertical)
         ? `${gutterSize}px`
-        : '';
+        : '100%';
 
-    expect(splitter.nativeElement.classList.contains(mainAxisClass)).toBe(true);
-    expect(splitter.nativeElement.classList.contains(crossAxisClass)).toBe(false);
+    expect(splitter.nativeElement.style.flexDirection).toBe(expectedDirection);
+
     expect(gutters.length).toBe(guttersCount);
     expect(gutters.every((gutter) => gutter.nativeElement.style.width === expectedWidth)).toBe(true);
     expect(gutters.every((gutter) => gutter.nativeElement.style.height === expectedHeight)).toBe(true);
