@@ -2,8 +2,18 @@
     $primary: map-get($theme, primary);
     $second: map-get($theme, second);
 
-    .mc-gutter {
+    mc-gutter {
         background-color: mc-color($second, 60);
         color: mc-color($second, 600);
+
+        &:hover {
+            background-color: mc-color($second, 100);
+            color: mc-color($second, 800);
+        }
+
+        &[disabled] {
+            background-color: mc-color($second, 60);
+            color: mc-color($second, 600);
+        }
     }
 }

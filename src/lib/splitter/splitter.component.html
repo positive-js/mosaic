@@ -4,9 +4,9 @@
                [direction]="direction"
                [disabled]="disabled"
                [size]="gutterSize"
+               [order]="index * 2 + 1"
                (mousedown)="onMouseDown($event, index, index + 1)"
-               class="mc-gutter flex-none layout-row layout-align-center-center flex-order-{{index * 2 + 1}}"
     >
-        <i class="mc-splitter-icon" mc-icon="mc-ellipsis_16" [class.mc-splitter-icon-vertical]="direction === 'vertical'" *ngIf="!disabled"></i>
+        <i mc-icon="mc-ellipsis_16" [class.icon-vertical]="direction === 'vertical'" *ngIf="!disabled"></i>
     </mc-gutter>
 </ng-template>

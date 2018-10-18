@@ -1,8 +1,23 @@
-.mc-splitter-icon {
-    position: relative;
-    left: -4px;
+mc-splitter {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    overflow: hidden;
 }
 
-.mc-splitter-icon-vertical {
+mc-splitter-area {
+    overflow: hidden;
+}
+
+mc-gutter {
+    display: flex;
+    flex-grow: 0;
+    flex-shrink: 0;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-vertical {
     transform: rotate(90deg);
 }
