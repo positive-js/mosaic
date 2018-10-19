@@ -249,7 +249,7 @@ describe('McTimepicker', () => {
 
     });
 
-    describe('', () => {
+    describe('Keyboard value control', () => {
         beforeEach(() => {
             fixture = TestBed.createComponent(TestApp);
             testComponent = fixture.debugElement.componentInstance;
