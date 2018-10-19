@@ -322,6 +322,9 @@ export class McGutterDirective implements OnInit {
         if (this.disabled) {
             this.setAttr(AttributeProperty.Disabled, 'true');
         }
+
+        // fix IE issue with gutter icon. flex-direction is requied for flex alignment options
+        this.setStyle(StyleProperty.FlexDirection, this.isVertical() ? 'row' : 'column');
     }
 
     private isVertical(): boolean {
