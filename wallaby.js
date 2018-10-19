@@ -60,9 +60,8 @@ module.exports = function (wallaby) {
         ],
 
         tests: [
-            { pattern: 'src/**/*spec.ts', load: false },
-            { pattern: '!src/cdk/schematics/**/*spec.ts', load: false }
-
+            { pattern: 'src/**/*.spec.ts', load: false },
+            { pattern: '!src/cdk/schematics/**/*.spec.ts', load: false }
         ],
 
         testFramework: 'jasmine',
