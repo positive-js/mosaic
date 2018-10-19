@@ -1,4 +1,4 @@
-import { Component, NgModule } from '@angular/core';
+import {Component, NgModule, ViewEncapsulation} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
@@ -9,7 +9,8 @@ import { McIconModule } from '@ptsecurity/mosaic/icon';
 @Component({
     selector: 'app',
     template: require('./template.html'),
-    styleUrls: ['./styles.scss']
+    styleUrls: ['./styles.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class ButtonDemoComponent {}
 

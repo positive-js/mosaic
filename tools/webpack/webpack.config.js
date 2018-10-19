@@ -40,13 +40,6 @@ module.exports = function (options) {
         'module.ts'
     ].join('/');
 
-    const htmlTemplatePath = [
-        'src/lib-dev',
-        COMPONENT_NAME,
-        '../index.html'
-    ].join('/');
-
-
     return {
         entry: entryObj,
 
@@ -142,7 +135,8 @@ module.exports = function (options) {
             new HotModuleReplacementPlugin(),
 
             new HtmlWebpackPlugin({
-                template: htmlTemplatePath,
+                template: 'tools/webpack/default_index.ejs',
+                filename: 'index.html',
                 chunksSortMode: 'dependency',
                 inject: 'body'
             }),

@@ -5,6 +5,9 @@
 @mixin mc-form-field-theme($theme) {
     $primary: map-get($theme, primary);
     $second: map-get($theme, second);
+
+    $foreground: map-get($theme, foreground);
+
     $hover-darken: 5%;
 
     .mc-form-field {
@@ -28,6 +31,10 @@
                 }
                 background: {
                     color: mc-color($second, 40);
+                }
+
+                .mc-icon, .mc-input {
+                    color: mc-color($foreground, disabled-text);
                 }
             }
 
@@ -70,13 +77,23 @@
             color: mc-color($second, 400);
         }
 
-        mc-cleaner  {
+        mc-cleaner {
             .mc-cleaner__icon {
                 color: mc-color($second, 200);
             }
 
             &:hover .mc-cleaner__icon {
                 color: darken(mc-color($second, 200), $hover-darken);
+            }
+        }
+
+        mc-stepper {
+            .mc-stepper-step-up, .mc-stepper-step-down {
+                color: mc-color($second, 200);
+
+                &:hover {
+                    color: darken(mc-color($second, 200), $hover-darken);
+                }
             }
         }
     }

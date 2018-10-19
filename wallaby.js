@@ -28,7 +28,7 @@ module.exports = function (wallaby) {
                 { test: /\.css$/, loader: 'raw-loader' },
                 { test: /\.html$/, loader: 'raw-loader' },
                 { test: /\.js$/, loader: 'angular2-template-loader', exclude: /node_modules/ },
-                {test: /\.scss$|\.sass$/, loaders: ['raw-loader', 'sass-loader']}
+                { test: /\.scss$|\.sass$/, loaders: ['raw-loader', 'sass-loader'] }
             ]
         },
 
@@ -60,7 +60,9 @@ module.exports = function (wallaby) {
         ],
 
         tests: [
-            { pattern: 'src/**/*spec.ts', load: false }
+            { pattern: 'src/**/*spec.ts', load: false },
+            { pattern: '!src/cdk/schematics/**/*spec.ts', load: false }
+
         ],
 
         testFramework: 'jasmine',

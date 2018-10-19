@@ -32,16 +32,16 @@ Or for determinate progress
 ```
 
 #### `color`
-Enum ('primary', 'second', 'warn')  
-Default: 'primary'  
+Enum ('primary', 'second', 'error')
+Default: 'primary'
 Set theming of element
 
 ```html
 <mc-progress-spinner color="primary"></mc-progress-spinner>
 <mc-progress-spinner color="second"></mc-progress-spinner>
-<mc-progress-spinner color="warn"></mc-progress-spinner>
+<mc-progress-spinner color="error"></mc-progress-spinner>
 ```
 
 ### Theming
 The color of a `<mc-progress-spinner>` can be changed by using the `color` property. By default, it
-use the theme's `primary` color. This can be changed to `'second'` or `'warn'`.
+use the theme's `primary` color. This can be changed to `'second'` or `'error'`.
