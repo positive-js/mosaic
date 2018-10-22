@@ -1,0 +1,16 @@
+@import '~@ptsecurity/mosaic-icons/dist/styles/mc-icons';
+@import '../../lib/core/theming/prebuilt/default-theme';
+
+.demo-timepicker_full {
+    width: 150px;
+}
+
+.demo-timepicker_short {
+    width: 120px;
+}
+
+header {
+    $config: mc-typography-config();
+
+    @include mc-typography-level-to-styles($config, caption);
+}

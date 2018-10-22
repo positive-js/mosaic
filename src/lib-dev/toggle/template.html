@@ -1,0 +1,67 @@
+<div class="container">
+    <h1>Toggles</h1>
+
+    <div class="control-buttons-container">
+        <button mc-button (click)="disabled = false">Set Enabled</button>
+    </div>
+    <div class="control-buttons-container">
+        <button mc-button (click)="disabled = true">Set Disabled</button>
+    </div>
+
+    <div class="layout-row flex-100 toggles-container">
+        <div class="flex-50">
+            <h3>Small Toggles</h3>
+            <div class="layout-row flex-100 toggle-demo-container">
+                <div class="flex-33">
+                    <mc-toggle class="mc-toggle_small" [(ngModel)]="valueSmallOff"  [disabled]="disabled">
+                    </mc-toggle>
+                </div>
+                <div class="flex-33">
+                    <mc-toggle class="mc-toggle_small" color="primary" [(ngModel)]="valueSmallOn"  [disabled]="disabled">
+                    </mc-toggle>
+                </div>
+                <div class="flex-33">
+                    <mc-toggle class="mc-toggle_small" color="error" [(ngModel)]="valueSmallOn"  [disabled]="disabled">
+                    </mc-toggle>
+                </div>
+            </div>
+            <div class="toggle-demo-container">
+                <mc-toggle class="mc-toggle_small" [(ngModel)]="valueSmallOff"  [disabled]="disabled">
+                    Quack like a duck
+                </mc-toggle>
+            </div>
+            <div class="toggle-demo-container">
+                <mc-toggle class="mc-toggle_small cdk-keyboard-focused" labelPosition="left" [(ngModel)]="valueSmallOff"  [disabled]="disabled">
+                    Quack like a duck
+                </mc-toggle>
+            </div>
+        </div>
+        <div class="flex-50">
+            <h3>Big Toggles</h3>
+            <div class="layout-row flex-100 toggle-demo-container">
+                <div class="flex-33">
+                    <mc-toggle [(ngModel)]="valueBigOff"  [disabled]="disabled">
+                    </mc-toggle>
+                </div>
+                <div class="flex-33">
+                    <mc-toggle color="primary" [(ngModel)]="valueBigOn"  [disabled]="disabled">
+                    </mc-toggle>
+                </div>
+                <div class="flex-33">
+                    <mc-toggle color="error" [(ngModel)]="valueBigOn"  [disabled]="disabled">
+                    </mc-toggle>
+                </div>
+            </div>
+            <div class="toggle-demo-container">
+                <mc-toggle [(ngModel)]="valueBigOff"  [disabled]="disabled">
+                    Quack like a duck
+                </mc-toggle>
+            </div>
+            <div class="toggle-demo-container">
+                <mc-toggle class="cdk-keyboard-focused" labelPosition="left" [(ngModel)]="valueBigOff"  [disabled]="disabled">
+                    Quack like a duck
+                </mc-toggle>
+            </div>
+        </div>
+    </div>
+</div>
