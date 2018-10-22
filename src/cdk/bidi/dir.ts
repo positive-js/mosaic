@@ -25,8 +25,12 @@ import { Direction, Directionality } from './directionality';
 export class Dir implements Directionality, AfterContentInit, OnDestroy {
     _dir: Direction = 'ltr';
 
+    /** Whether the `value` has been set to its initial value. */
+    private _isInitialized: boolean = false;
+
     /** Event emitted when the direction changes. */
-    @Output('dirChange') change = new EventEmitter<Direction>();
+    @Output('dirChange')
+    change = new EventEmitter<Direction>();
 
     /** @docs-private */
     @Input()
@@ -34,9 +38,9 @@ export class Dir implements Directionality, AfterContentInit, OnDestroy {
         return this._dir;
     }
 
-    set dir(v: Direction) {
+    set dir(value: Direction) {
         const old = this._dir;
-        this._dir = v;
+        this._dir = (value === 'ltr' || value === 'rtl') ? value : 'ltr';
 
         if (old !== this._dir && this._isInitialized) {
             this.change.emit(this._dir);
@@ -44,12 +48,7 @@ export class Dir implements Directionality, AfterContentInit, OnDestroy {
     }
 
     /** Current layout direction of the element. */
-    get value(): Direction {
-        return this.dir;
-    }
-
-    /** Whether the `value` has been set to its initial value. */
-    private _isInitialized: boolean = false;
+    get value(): Direction { return this.dir; }
 
     /** Initialize once default value has been set. */
     ngAfterContentInit() {
