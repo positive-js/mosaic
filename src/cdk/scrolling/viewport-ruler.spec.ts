@@ -1,29 +1,32 @@
+import { NgZone } from '@angular/core';
 import { TestBed, inject, fakeAsync, tick } from '@angular/core/testing';
 import { dispatchFakeEvent } from '@ptsecurity/cdk/testing';
 
-import { ScrollDispatchModule } from './public-api';
+import { ScrollingModule } from './public-api';
 import { ViewportRuler } from './viewport-ruler';
 
 
 // For all tests, we assume the browser window is 1024x786 (outerWidth x outerHeight).
 // The karma config has been set to this for local tests, and it is the default size
 // for tests on CI (both SauceLabs and Browserstack).
+
 // While we know the *outer* window width/height, the innerWidth and innerHeight depend on the
 // the size of the individual browser's chrome, so we have to use window.innerWidth and
 // window.innerHeight in the unit test instead of hard-coded values.
+
 describe('ViewportRuler', () => {
     let ruler: ViewportRuler;
 
-    let startingWindowWidth = window.innerWidth; //tslint:disable-line
-    let startingWindowHeight = window.innerHeight; //tslint:disable-line
+    const startingWindowWidth = window.innerWidth;
+    const startingWindowHeight = window.innerHeight;
 
     // Create a very large element that will make the page scrollable.
-    let veryLargeElement: HTMLElement = document.createElement('div'); //tslint:disable-line
+    const veryLargeElement: HTMLElement = document.createElement('div');
     veryLargeElement.style.width = '6000px';
     veryLargeElement.style.height = '6000px';
 
     beforeEach(() => TestBed.configureTestingModule({
-        imports: [ScrollDispatchModule],
+        imports: [ScrollingModule],
         providers: [ViewportRuler]
     }));
 
@@ -37,13 +40,13 @@ describe('ViewportRuler', () => {
     });
 
     it('should get the viewport size', () => {
-        let size = ruler.getViewportSize(); //tslint:disable-line
+        const size = ruler.getViewportSize();
         expect(size.width).toBe(window.innerWidth);
         expect(size.height).toBe(window.innerHeight);
     });
 
     it('should get the viewport bounds when the page is not scrolled', () => {
-        let bounds = ruler.getViewportRect(); //tslint:disable-line
+        const bounds = ruler.getViewportRect();
         expect(bounds.top).toBe(0);
         expect(bounds.left).toBe(0);
         expect(bounds.bottom).toBe(window.innerHeight);
@@ -53,25 +56,24 @@ describe('ViewportRuler', () => {
     it('should get the viewport bounds when the page is scrolled', () => {
         document.body.appendChild(veryLargeElement);
 
-        scrollTo(1500, 2000); //tslint:disable-line
+        scrollTo(1500, 2000);
 
-        let bounds = ruler.getViewportRect(); //tslint:disable-line
+        const bounds = ruler.getViewportRect();
 
         // In the iOS simulator (BrowserStack & SauceLabs), adding the content to the
         // body causes karma's iframe for the test to stretch to fit that content once we attempt to
         // scroll the page. Setting width / height / maxWidth / maxHeight on the iframe does not
         // successfully constrain its size. As such, skip assertions in environments where the
         // window size has changed since the start of the test.
-        if (window.innerWidth > startingWindowWidth || window.innerHeight > startingWindowHeight) { //tslint:disable-line
+        if (window.innerWidth > startingWindowWidth || window.innerHeight > startingWindowHeight) {
             document.body.removeChild(veryLargeElement);
-
             return;
         }
 
-        expect(bounds.top).toBe(2000); //tslint:disable-line
-        expect(bounds.left).toBe(1500); //tslint:disable-line
-        expect(bounds.bottom).toBe(2000 + window.innerHeight); //tslint:disable-line
-        expect(bounds.right).toBe(1500 + window.innerWidth); //tslint:disable-line
+        expect(bounds.top).toBe(2000);
+        expect(bounds.left).toBe(1500);
+        expect(bounds.bottom).toBe(2000 + window.innerHeight);
+        expect(bounds.right).toBe(1500 + window.innerWidth);
 
         document.body.removeChild(veryLargeElement);
     });
@@ -82,7 +84,7 @@ describe('ViewportRuler', () => {
     });
 
     it('should get the scroll position when the page is not scrolled', () => {
-        let scrollPos = ruler.getViewportScrollPosition(); //tslint:disable-line
+        const scrollPos = ruler.getViewportScrollPosition();
         expect(scrollPos.top).toBe(0);
         expect(scrollPos.left).toBe(0);
     });
@@ -90,17 +92,21 @@ describe('ViewportRuler', () => {
     it('should get the scroll position when the page is scrolled', () => {
         document.body.appendChild(veryLargeElement);
 
-        scrollTo(1500, 2000); //tslint:disable-line
+        scrollTo(1500, 2000);
 
-        if (window.innerWidth > startingWindowWidth || window.innerHeight > startingWindowHeight) { //tslint:disable-line
+        // In the iOS simulator (BrowserStack & SauceLabs), adding the content to the
+        // body causes karma's iframe for the test to stretch to fit that content once we attempt to
+        // scroll the page. Setting width / height / maxWidth / maxHeight on the iframe does not
+        // successfully constrain its size. As such, skip assertions in environments where the
+        // window size has changed since the start of the test.
+        if (window.innerWidth > startingWindowWidth || window.innerHeight > startingWindowHeight) {
             document.body.removeChild(veryLargeElement);
-
             return;
         }
 
-        let scrollPos = ruler.getViewportScrollPosition(); //tslint:disable-line
-        expect(scrollPos.top).toBe(2000); //tslint:disable-line
-        expect(scrollPos.left).toBe(1500); //tslint:disable-line
+        const scrollPos = ruler.getViewportScrollPosition();
+        expect(scrollPos.top).toBe(2000);
+        expect(scrollPos.left).toBe(1500);
 
         document.body.removeChild(veryLargeElement);
     });
@@ -126,15 +132,25 @@ describe('ViewportRuler', () => {
 
         it('should be able to throttle the callback', fakeAsync(() => {
             const spy = jasmine.createSpy('viewport changed spy');
-            const subscription = ruler.change(1337).subscribe(spy); //tslint:disable-line
+            const subscription = ruler.change(1337).subscribe(spy);
 
             dispatchFakeEvent(window, 'resize');
             expect(spy).not.toHaveBeenCalled();
 
-            tick(1337); //tslint:disable-line
+            tick(1337);
 
             expect(spy).toHaveBeenCalledTimes(1);
             subscription.unsubscribe();
         }));
+
+        it('should run the resize event outside the NgZone', () => {
+            const spy = jasmine.createSpy('viewport changed spy');
+            const subscription = ruler.change(0).subscribe(() => spy(NgZone.isInAngularZone()));
+
+            dispatchFakeEvent(window, 'resize');
+            expect(spy).toHaveBeenCalledWith(false);
+            subscription.unsubscribe();
+        });
+
     });
 });

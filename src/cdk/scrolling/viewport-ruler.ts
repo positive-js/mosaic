@@ -7,6 +7,11 @@ import { auditTime } from 'rxjs/operators';
 /** Time in ms to throttle the resize events by default. */
 export const DEFAULT_RESIZE_TIME = 20;
 
+export interface ViewportScrollPosition {
+    top: number;
+    left: number;
+}
+
 /**
  * Simple utility for getting the bounds of the browser viewport.
  * @docs-private
@@ -23,11 +28,15 @@ export class ViewportRuler implements OnDestroy {
     private _invalidateCache: Subscription;
 
     constructor(private _platform: Platform, ngZone: NgZone) {
-        this._change = _platform.isBrowser ? ngZone.runOutsideAngular(() => {
-            return merge<Event>(fromEvent(window, 'resize'), fromEvent(window, 'orientationchange'));
-        }) : observableOf();
+        ngZone.runOutsideAngular(() => {
+            this._change = _platform.isBrowser ?
+                merge<Event>(fromEvent(window, 'resize'), fromEvent(window, 'orientationchange')) :
+                observableOf();
 
-        this._invalidateCache = this.change().subscribe(() => this._updateViewportSize());
+            // Note that we need to do the subscription inside `runOutsideAngular`
+            // since subscribing is what causes the event listener to be added.
+            this._invalidateCache = this.change().subscribe(() => this._updateViewportSize());
+        });
     }
 
     ngOnDestroy() {
@@ -75,7 +84,7 @@ export class ViewportRuler implements OnDestroy {
     }
 
     /** Gets the (top, left) scroll position of the viewport. */
-    getViewportScrollPosition() {
+    getViewportScrollPosition(): ViewportScrollPosition {
         // While we can get a reference to the fake document
         // during SSR, it doesn't have getBoundingClientRect.
         if (!this._platform.isBrowser) {
@@ -88,7 +97,8 @@ export class ViewportRuler implements OnDestroy {
         // `scrollTop` and `scrollLeft` is inconsistent. However, using the bounding rect of
         // `document.documentElement` works consistently, where the `top` and `left` values will
         // equal negative the scroll position.
-        const documentRect = document.documentElement!.getBoundingClientRect();
+        const documentElement = document.documentElement!;
+        const documentRect = documentElement.getBoundingClientRect();
 
         const top = -documentRect.top || document.body.scrollTop || window.scrollY ||
             document.documentElement!.scrollTop || 0;
@@ -96,7 +106,7 @@ export class ViewportRuler implements OnDestroy {
         const left = -documentRect.left || document.body.scrollLeft || window.scrollX ||
             document.documentElement!.scrollLeft || 0;
 
-        return {top, left};
+        return { top, left };
     }
 
     /**
@@ -116,7 +126,9 @@ export class ViewportRuler implements OnDestroy {
 }
 
 
-/** @docs-private @deprecated @deletion-target 7.0.0 */
+/** @docs-private
+ * @deprecated
+ */
 export function VIEWPORT_RULER_PROVIDER_FACTORY(parentRuler: ViewportRuler,
                                                 platform: Platform,
                                                 ngZone: NgZone) {
