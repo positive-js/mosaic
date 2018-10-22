@@ -157,6 +157,6 @@
     }
 
     .mc-icon {
-        letter-spacing: mc-letter-spacing($config, body);
+        letter-spacing: unset;
     }
 }
