@@ -29,7 +29,7 @@
 
     .mc-alert_close {
         cursor: pointer;
-        border: 0;
+        border: 1px solid transparent;
         background: transparent;
         position: absolute;
         z-index: 10;
@@ -58,13 +58,13 @@
 
 .mc-alert_dismissible:not(.mc-alert_small) {
     .mc-alert_close {
-        top: 15px;
+        top: 14px;
     }
 }
 
 .mc-alert_dismissible.mc-alert_small {
     .mc-alert_close {
-        top: 11px;
+        top: 10px;
     }
 }
 
@@ -157,7 +157,6 @@
     }
 
     .mc-icon {
-        line-height: mc-line-height($config, body);
-        letter-spacing: mc-letter-spacing($config, body);
+        letter-spacing: unset;
     }
 }
