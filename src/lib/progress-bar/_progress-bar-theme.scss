@@ -4,10 +4,10 @@
 @mixin mc-progress-bar-theme($theme) {
     $primary: map-get($theme, primary);
     $second: map-get($theme, second);
-    $warn: map-get($theme, warn);
+    $error: map-get($theme, error);
 
     .mc-progress-bar {
-        background-color: mc-color($mc-grey, 60);
+        background-color: mc-color($second, 60);
 
         &.mc-primary &__line {
             background-color: mc-color($primary, 500);
@@ -17,8 +17,8 @@
             background-color: mc-color($second, 500);
         }
 
-        &.mc-warn &__line {
-            background-color: mc-color($warn, 500);
+        &.mc-error &__line {
+            background-color: mc-color($error, 500);
         }
     }
 }

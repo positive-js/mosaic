@@ -5,6 +5,7 @@ module.exports = {
             2,
             'always',
             [
+                'alert',
                 'badge',
                 'build',
                 'button',
@@ -27,6 +28,7 @@ module.exports = {
                 'progress-spinner',
                 'radio',
                 'select',
+                'splitter',
                 'tabs',
                 'timepicker',
                 'tooltip',

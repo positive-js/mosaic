@@ -1,4 +1,4 @@
-import {Optional} from '@angular/core';
+import { Optional } from '@angular/core';
 
 
 export type HorizontalConnectionPos = 'start' | 'center' | 'end';
@@ -81,7 +81,8 @@ export class ConnectedOverlayPositionChange {
         /** The position used as a result of this change. */
         public connectionPair: ConnectionPositionPair,
         /** @docs-private */
-        @Optional() public scrollableViewProperties: ScrollingVisibility) {}
+        @Optional() public scrollableViewProperties: ScrollingVisibility) {
+    }
 }
 
 /**

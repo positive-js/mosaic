@@ -12,6 +12,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
+import { CanColor, CanColorCtor, mixinColor, ThemePalette } from '@ptsecurity/mosaic/core';
 import { EMPTY, merge } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 
@@ -19,15 +20,21 @@ import { startWith } from 'rxjs/operators';
 import { McCleaner } from './cleaner';
 import { McFormFieldControl } from './form-field-control';
 import { getMcFormFieldMissingControlError } from './form-field-errors';
+import { McFormFieldNumberControl } from './form-field-number-control';
 import { McHint } from './hint';
 import { McPrefix } from './prefix';
+import { McStepper } from './stepper';
 import { McSuffix } from './suffix';
 
 
+let nextUniqueId = 0;
+
 export class McFormFieldBase {
-    constructor(public _elementRef: ElementRef) {
-    }
+    constructor(public _elementRef: ElementRef) {}
 }
+
+export const _McFormFieldMixinBase: CanColorCtor & typeof McFormFieldBase
+    = mixinColor(McFormFieldBase, ThemePalette.Primary);
 
 @Component({
     selector: 'mc-form-field',
@@ -47,6 +54,7 @@ export class McFormFieldBase {
         '[class.mc-form-field_has-prefix]': 'hasPrefix',
         '[class.mc-form-field_has-suffix]': 'hasSuffix',
         '[class.mc-form-field_has-cleaner]': 'canShowCleaner',
+        '[class.mc-form-field_has-stepper]': 'canShowStepper',
         '[class.mc-focused]': '_control.focused',
         '[class.ng-untouched]': '_shouldForward("untouched")',
         '[class.ng-touched]': '_shouldForward("touched")',
@@ -55,25 +63,32 @@ export class McFormFieldBase {
         '[class.ng-valid]': '_shouldForward("valid")',
         '[class.ng-invalid]': '_shouldForward("invalid")',
         '[class.ng-pending]': '_shouldForward("pending")',
-        '(keydown)': 'onKeyDown($event)'
+        '(keydown)': 'onKeyDown($event)',
+        '(mouseenter)': 'onHoverChanged(true)',
+        '(mouseleave)': 'onHoverChanged(false)'
     },
+    inputs: ['color'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class McFormField extends McFormFieldBase
-    implements AfterContentInit, AfterContentChecked, AfterViewInit {
+export class McFormField extends _McFormFieldMixinBase implements
+    AfterContentInit, AfterContentChecked, AfterViewInit, CanColor {
 
     @ContentChild(McFormFieldControl) _control: McFormFieldControl<any>;
+    @ContentChild(McFormFieldNumberControl) _numberControl: McFormFieldNumberControl<any>;
     @ContentChildren(McHint) _hint: QueryList<McHint>;
     @ContentChildren(McSuffix) _suffix: QueryList<McSuffix>;
     @ContentChildren(McPrefix) _prefix: QueryList<McPrefix>;
     @ContentChildren(McCleaner) _cleaner: QueryList<McCleaner>;
+    @ContentChild(McStepper) _stepper: McStepper;
 
+    // Unique id for the internal form field label.
+    _labelId = `mc-form-field-label-${nextUniqueId++}`;
 
-    constructor(
-        public _elementRef: ElementRef,
-        private _changeDetectorRef: ChangeDetectorRef) {
+    hovered: boolean = false;
+
+    constructor(public _elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) {
         super(_elementRef);
     }
 
@@ -82,12 +97,25 @@ export class McFormField extends McFormFieldBase
         if (this._control.controlType) {
             this._elementRef.nativeElement.classList
                 .add(`mc-form-field-type-${this._control.controlType}`);
+
+            if (this._numberControl && this.hasStepper) {
+                this._stepper.stepUp.subscribe(this.onStepUp.bind(this));
+                this._stepper.stepDown.subscribe(this.onStepDown.bind(this));
+            }
         }
 
         // Subscribe to changes in the child control state in order to update the form field UI.
-        this._control.stateChanges.pipe(startWith()).subscribe(() => {
-            this._changeDetectorRef.markForCheck();
-        });
+        this._control.stateChanges.pipe(startWith())
+            .subscribe(() => {
+                this._changeDetectorRef.markForCheck();
+            });
+
+        if (this._numberControl) {
+            this._numberControl.stateChanges.pipe(startWith())
+                .subscribe(() => {
+                    this._changeDetectorRef.markForCheck();
+                });
+        }
 
         // Run change detection if the value changes.
         const valueChanges = this._control.ngControl && this._control.ngControl.valueChanges || EMPTY;
@@ -113,17 +141,41 @@ export class McFormField extends McFormFieldBase
     }
 
     onContainerClick($event) {
-        return this._control.onContainerClick && this._control.onContainerClick($event);
+        if (this._control.onContainerClick) {
+            this._control.onContainerClick($event);
+        }
     }
 
     onKeyDown(e: KeyboardEvent): void {
+        // tslint:disable-next-line:deprecation
         if (e.keyCode === ESCAPE &&
             this._control.focused &&
             this.hasCleaner) {
+
             if (this._control && this._control.ngControl) {
                 this._control.ngControl.reset();
             }
+
             e.preventDefault();
+        }
+    }
+
+    onHoverChanged(isHovered: boolean) {
+        if (isHovered !== this.hovered) {
+            this.hovered  = isHovered;
+            this._changeDetectorRef.markForCheck();
+        }
+    }
+
+    onStepUp() {
+        if (this._numberControl) {
+            this._numberControl.stepUp(this._numberControl.step);
+        }
+    }
+
+    onStepDown() {
+        if (this._numberControl) {
+            this._numberControl.stepDown(this._numberControl.step);
         }
     }
 
@@ -141,27 +193,46 @@ export class McFormField extends McFormFieldBase
         }
     }
 
-    get hasHint() {
+    get hasHint(): boolean {
         return this._hint && this._hint.length > 0;
     }
 
-    get hasSuffix() {
+    get hasSuffix(): boolean {
         return this._suffix && this._suffix.length > 0;
     }
 
-    get hasPrefix() {
+    get hasPrefix(): boolean {
         return this._prefix && this._prefix.length > 0;
     }
 
-    get hasCleaner() {
+    get hasCleaner(): boolean {
         return this._cleaner && this._cleaner.length > 0;
     }
 
-    get canShowCleaner() {
-        return  this.hasCleaner &&
-        this._control && this._control.ngControl
-            ? this._control.ngControl.value && !this._control.disabled
-            : false;
+    get hasStepper(): boolean {
+        return !!this._stepper;
+    }
+
+    get canShowCleaner(): boolean {
+        return this.hasCleaner &&
+            this._control &&
+            this._control.ngControl
+                ? this._control.ngControl.value && !this._control.disabled
+                : false;
+    }
+
+
+    get disabled(): boolean {
+        return this._control && this._control.disabled;
+    }
+
+    get canShowStepper(): boolean {
+        return this._numberControl &&
+            !this.disabled &&
+            (
+                this._numberControl.focused ||
+                this.hovered
+            );
     }
 }
 

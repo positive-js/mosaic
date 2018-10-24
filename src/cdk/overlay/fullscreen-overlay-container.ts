@@ -1,7 +1,7 @@
-import {DOCUMENT} from '@angular/common';
-import {Injectable, Inject, OnDestroy} from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Injectable, Inject, OnDestroy } from '@angular/core';
 
-import {OverlayContainer} from './overlay-container';
+import { OverlayContainer } from './overlay-container';
 
 
 /**
@@ -13,20 +13,20 @@ import {OverlayContainer} from './overlay-container';
  */
 @Injectable()
 export class FullscreenOverlayContainer extends OverlayContainer implements OnDestroy {
-  private _fullScreenEventName: string | undefined;
-  private _fullScreenListener: () => void;
+    private _fullScreenEventName: string | undefined;
+    private _fullScreenListener: () => void;
 
-  constructor(@Inject(DOCUMENT) _document: any) {
-    super(_document);
-  }
-
-  ngOnDestroy() {
-    super.ngOnDestroy();
-
-    if (this._fullScreenEventName && this._fullScreenListener) {
-      this._document.removeEventListener(this._fullScreenEventName, this._fullScreenListener);
+    constructor(@Inject(DOCUMENT) _document: any) {
+        super(_document);
     }
-  }
+
+    ngOnDestroy() {
+        super.ngOnDestroy();
+
+        if (this._fullScreenEventName && this._fullScreenListener) {
+            this._document.removeEventListener(this._fullScreenEventName, this._fullScreenListener);
+        }
+    }
 
     /**
      * When the page is put into fullscreen mode, a specific element is specified.
@@ -40,48 +40,48 @@ export class FullscreenOverlayContainer extends OverlayContainer implements OnDe
             null;
     }
 
-  protected _createContainer(): void {
-    super._createContainer();
-    this._adjustParentForFullscreenChange();
-    this._addFullscreenChangeListener(() => this._adjustParentForFullscreenChange());
-  }
-
-  private _adjustParentForFullscreenChange(): void {
-    if (!this._containerElement) {
-      return;
+    protected _createContainer(): void {
+        super._createContainer();
+        this._adjustParentForFullscreenChange();
+        this._addFullscreenChangeListener(() => this._adjustParentForFullscreenChange());
     }
 
-    const fullscreenElement = this.getFullscreenElement();
-    const parent = fullscreenElement || this._document.body;
-    parent.appendChild(this._containerElement);
-  }
+    private _adjustParentForFullscreenChange(): void {
+        if (!this._containerElement) {
+            return;
+        }
 
-  private _addFullscreenChangeListener(fn: () => void) {
-    const eventName = this._getEventName();
-
-    if (eventName) {
-      if (this._fullScreenListener) {
-        this._document.removeEventListener(eventName, this._fullScreenListener);
-      }
-
-      this._document.addEventListener(eventName, fn);
-      this._fullScreenListener = fn;
-    }
-  }
-
-  private _getEventName(): string | undefined {
-    if (!this._fullScreenEventName) {
-      if (this._document.fullscreenEnabled) {
-        this._fullScreenEventName = 'fullscreenchange';
-      } else if (this._document.webkitFullscreenEnabled) {
-        this._fullScreenEventName = 'webkitfullscreenchange';
-      } else if ((this._document as any).mozFullScreenEnabled) {
-        this._fullScreenEventName = 'mozfullscreenchange';
-      } else if ((this._document as any).msFullscreenEnabled) {
-        this._fullScreenEventName = 'MSFullscreenChange';
-      }
+        const fullscreenElement = this.getFullscreenElement();
+        const parent = fullscreenElement || this._document.body;
+        parent.appendChild(this._containerElement);
     }
 
-    return this._fullScreenEventName;
-  }
+    private _addFullscreenChangeListener(fn: () => void) {
+        const eventName = this._getEventName();
+
+        if (eventName) {
+            if (this._fullScreenListener) {
+                this._document.removeEventListener(eventName, this._fullScreenListener);
+            }
+
+            this._document.addEventListener(eventName, fn);
+            this._fullScreenListener = fn;
+        }
+    }
+
+    private _getEventName(): string | undefined {
+        if (!this._fullScreenEventName) {
+            if (this._document.fullscreenEnabled) {
+                this._fullScreenEventName = 'fullscreenchange';
+            } else if (this._document.webkitFullscreenEnabled) {
+                this._fullScreenEventName = 'webkitfullscreenchange';
+            } else if ((this._document as any).mozFullScreenEnabled) {
+                this._fullScreenEventName = 'mozfullscreenchange';
+            } else if ((this._document as any).msFullscreenEnabled) {
+                this._fullScreenEventName = 'MSFullscreenChange';
+            }
+        }
+
+        return this._fullScreenEventName;
+    }
 }

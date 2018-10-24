@@ -2,13 +2,13 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as ts from 'typescript';
 
-import {sync as glob} from 'glob';
-import {task} from 'gulp';
+import { sync as glob } from 'glob';
+import { task } from 'gulp';
 
-import {buildConfig} from '../../packages';
+import { buildConfig } from '../../packages';
 
 
-const {packagesDir} = buildConfig;
+const { packagesDir } = buildConfig;
 
 interface IExampleMetadata {
     component: string;
@@ -20,16 +20,16 @@ interface IExampleMetadata {
     selectorName: string[];
 }
 
-interface ParsedMetadata {
+interface IParsedMetadata {
     primary: boolean;
     component: string;
     title: string;
     templateUrl: string;
 }
 
-interface ParsedMetadataResults {
-    primaryComponent: ParsedMetadata;
-    secondaryComponents: ParsedMetadata[];
+interface IParsedMetadataResults {
+    primaryComponent: IParsedMetadata;
+    secondaryComponents: IParsedMetadata[];
 }
 
 /** Path to find the examples */
@@ -59,7 +59,7 @@ function buildImportsTemplate(metadata: IExampleMetadata): string {
 function buildExamplesTemplate(metadata: IExampleMetadata): string {
     const fields = [
         `title: '${metadata.title.trim()}'`,
-        `component: ${metadata.component}`,
+        `component: ${metadata.component}`
     ];
 
     // if no additional files or selectors were provided,
@@ -72,6 +72,7 @@ function buildExamplesTemplate(metadata: IExampleMetadata): string {
         fields.push(`selectorName: '${metadata.selectorName.join(', ')}'`);
     }
 
+    // tslint:disable-next-line
     const data = '\n' + fields.map((field) => '    ' + field).join(',\n');
 
     return `'${metadata.id}': {${data}
@@ -100,7 +101,7 @@ import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {ExampleMosaicModule} from './mosaic-module';
-${extractedMetadata.map(r => buildImportsTemplate(r)).join('').trim()}
+${extractedMetadata.map(buildImportsTemplate).join('').trim()}
 
 export interface LiveExample {
   title: string;
@@ -110,11 +111,11 @@ export interface LiveExample {
 }
 
 export const EXAMPLE_COMPONENTS: {[key: string]: LiveExample} = {
-  ${extractedMetadata.map((r) => buildExamplesTemplate(r)).join('').trim()}
+  ${extractedMetadata.map(buildExamplesTemplate).join('').trim()}
 };
 
 export const EXAMPLE_LIST = [
-  ${extractedMetadata.map((r) => buildListTemplate(r)).join('').trim()}
+  ${extractedMetadata.map(buildListTemplate).join('').trim()}
 ];
 
 @NgModule({
@@ -136,7 +137,9 @@ export class ExampleModule { }
  * this function will convert to dash case.
  */
 function convertToDashCase(name: string): string {
+    // tslint:disable-next-line
     name = name.replace(/[A-Z]/g, ' $&');
+    // tslint:disable-next-line
     name = name.toLowerCase().trim();
 
     return name.split(' ').join('-');
@@ -145,7 +148,7 @@ function convertToDashCase(name: string): string {
 /**
  * Parse the AST of a file and get metadata about it
  */
-function parseExampleMetadata(fileName: string, sourceContent: string): ParsedMetadataResults {
+function parseExampleMetadata(fileName: string, sourceContent: string): IParsedMetadataResults {
     const sourceFile = ts.createSourceFile(
         fileName, sourceContent, ts.ScriptTarget.Latest, false, ts.ScriptKind.TS);
 

@@ -22,18 +22,16 @@ export type McPseudoCheckboxState = 'unchecked' | 'checked' | 'indeterminate';
     changeDetection: ChangeDetectionStrategy.OnPush,
     selector: 'mc-pseudo-checkbox',
     styleUrls: ['pseudo-checkbox.css'],
-    template: '',
+    templateUrl: 'pseudo-checkbox.partial.html',
     host: {
         class: 'mc-pseudo-checkbox',
-        '[class.mc-pseudo-checkbox-indeterminate]': 'state === "indeterminate"',
-        '[class.mc-pseudo-checkbox-checked]': 'state === "checked"',
-        '[class.mc-pseudo-checkbox-disabled]': 'disabled'
+        '[class.mc-pseudo-checkbox_indeterminate]': 'state === "indeterminate"',
+        '[class.mc-pseudo-checkbox_checked]': 'state === "checked"',
+        '[class.mc-disabled]': 'disabled'
     }
 })
 export class McPseudoCheckbox {
-    // Display state of the checkbox.
     @Input() state: McPseudoCheckboxState = 'unchecked';
 
-    // Whether the checkbox is disabled.
     @Input() disabled: boolean = false;
 }

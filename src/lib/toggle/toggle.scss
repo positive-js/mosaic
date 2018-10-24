@@ -1,0 +1,111 @@
+$toggle-height: 16px;
+$toggle-width: 28px;
+$toggle-border-radius: 9px;
+
+$small-toggle-height: 14px;
+$small-toggle-width: 24px;
+$small-toggle-border-radius: 8px;
+
+$label-margin: 8px;
+
+mc-toggle {
+    display: inline-block;
+
+    .mc-toggle-layout {
+        cursor: inherit;
+        align-items: baseline;
+        vertical-align: middle;
+        display: inline-flex;
+        white-space: nowrap;
+    }
+
+    .mc-toggle__container {
+        display: flex;
+        align-items: center;
+        position: relative;
+
+        &.left {
+            flex-direction: row-reverse;
+        }
+    }
+
+    .mc-toggle__content {
+        &.left {
+            margin-right: $label-margin;
+        }
+
+        &.right {
+            margin-left: $label-margin;
+        }
+    }
+
+    .mc-toggle-bar {
+        position: relative;
+
+        &.mc-toggle-label-position-left {
+            order: 1;
+        }
+    }
+
+    .mc-toggle-bar-container {
+        position: relative;
+    }
+
+    .mc-toggle__focus-frame {
+        position: absolute;
+        z-index: 1;
+        top: -1px; // due to border
+        left: -1px; // due to border
+    }
+
+    .mc-toggle__circle {
+        position: absolute;
+        border-radius: 100%;
+        margin-top: -1px; // due to border
+        margin-left: -1px; // due to border
+    }
+}
+
+mc-toggle:not(.mc-toggle_small) {
+
+    .mc-toggle-bar {
+        height: $toggle-height;
+        width: $toggle-width;
+        border-radius: $toggle-border-radius;
+    }
+
+    .mc-toggle__focus-frame {
+        border-radius: $toggle-border-radius + 1;
+        height: $toggle-height + 2;
+        width: $toggle-width + 2;
+    }
+
+    .mc-toggle__circle {
+        height: $toggle-height;
+        width: $toggle-height;
+    }
+}
+
+mc-toggle.mc-toggle_small {
+
+    .mc-toggle-bar {
+        height: $small-toggle-height;
+        width: $small-toggle-width;
+        border-radius: $small-toggle-border-radius;
+    }
+
+    .mc-toggle__focus-frame {
+        border-radius: $small-toggle-border-radius + 1;
+        height: $small-toggle-height + 2;
+        width: $small-toggle-width + 2;
+    }
+
+    .mc-toggle__circle {
+        height: $small-toggle-height;
+        width: $small-toggle-height;
+    }
+}
+
+mc-toggle:not(.mc-disabled) {
+    cursor: pointer;
+}

@@ -1,14 +1,12 @@
+import { ComponentRef, EmbeddedViewRef, NgZone } from '@angular/core';
+import { Direction, Directionality } from '@ptsecurity/cdk/bidi';
+import { coerceCssPixelValue, coerceArray } from '@ptsecurity/cdk/coercion';
+import { ComponentPortal, Portal, IPortalOutlet, TemplatePortal } from '@ptsecurity/cdk/portal';
+import { Observable, Subject } from 'rxjs';
+import { take } from 'rxjs/operators';
 
-
-import {ComponentRef, EmbeddedViewRef, NgZone} from '@angular/core';
-import {Direction, Directionality} from '@ptsecurity/cdk/bidi';
-import {coerceCssPixelValue, coerceArray} from '@ptsecurity/cdk/coercion';
-import {ComponentPortal, Portal, IPortalOutlet, TemplatePortal} from '@ptsecurity/cdk/portal';
-import {Observable, Subject} from 'rxjs';
-import {take} from 'rxjs/operators';
-
-import {OverlayKeyboardDispatcher} from './keyboard/overlay-keyboard-dispatcher';
-import {OverlayConfig} from './overlay-config';
+import { OverlayKeyboardDispatcher } from './keyboard/overlay-keyboard-dispatcher';
+import { OverlayConfig } from './overlay-config';
 
 
 /** An object where all of its properties cannot be written. */
@@ -231,13 +229,13 @@ export class OverlayRef implements IPortalOutlet {
 
     /** Update the size properties of the overlay. */
     updateSize(sizeConfig: IOverlaySizeConfig) {
-        this._config = {...this._config, ...sizeConfig};
+        this._config = { ...this._config, ...sizeConfig };
         this._updateElementSize();
     }
 
     /** Sets the LTR/RTL direction for the overlay. */
     setDirection(dir: Direction | Directionality) {
-        this._config = {...this._config, direction: dir};
+        this._config = { ...this._config, direction: dir };
         this._updateElementDirection();
     }
 
@@ -367,7 +365,7 @@ export class OverlayRef implements IPortalOutlet {
 
         coerceArray(cssClasses).forEach((cssClass) => {
             // We can't do a spread here, because IE doesn't support setting multiple classes.
-            isAdd ? classList.add(cssClass) : classList.remove(cssClass);
+            isAdd ? classList.add(cssClass) : classList.remove(cssClass); // tslint:disable-line
         });
     }
 }

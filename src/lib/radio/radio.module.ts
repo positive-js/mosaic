@@ -8,8 +8,9 @@ import { McRadioButton, McRadioGroup } from './radio.component';
 
 
 @NgModule({
-    imports: [ CommonModule, A11yModule, McCommonModule ],
-    exports: [ McRadioGroup, McRadioButton, McCommonModule ],
-    declarations: [ McRadioGroup, McRadioButton ]
+    imports: [CommonModule, A11yModule, McCommonModule],
+    exports: [McRadioGroup, McRadioButton],
+    declarations: [McRadioGroup, McRadioButton]
 })
-export class McRadioModule {}
+export class McRadioModule {
+}

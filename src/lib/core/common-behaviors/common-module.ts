@@ -47,6 +47,7 @@ export class McCommonModule {
 
     // Whether the code is running in tests.
     private _isTestEnv() {
+        // tslint:disable-next-line
         return this._window && (this._window['__karma__'] || this._window['jasmine']);
     }
 

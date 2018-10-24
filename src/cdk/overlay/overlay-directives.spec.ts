@@ -1,30 +1,30 @@
-import {Component, ViewChild} from '@angular/core';
-import {ComponentFixture, TestBed, async, inject} from '@angular/core/testing';
-import {By} from '@angular/platform-browser';
-import {Directionality} from '@ptsecurity/cdk/bidi';
-import {ESCAPE} from '@ptsecurity/cdk/keycodes';
-import {dispatchKeyboardEvent} from '@ptsecurity/cdk/testing';
+import { Component, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, async, inject } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { Directionality } from '@ptsecurity/cdk/bidi';
+import { ESCAPE } from '@ptsecurity/cdk/keycodes';
+import { dispatchKeyboardEvent } from '@ptsecurity/cdk/testing';
 
-import {CdkConnectedOverlay, OverlayModule, CdkOverlayOrigin} from './index';
-import {OverlayContainer} from './overlay-container';
+import { CdkConnectedOverlay, OverlayModule, CdkOverlayOrigin } from './index';
+import { OverlayContainer } from './overlay-container';
 import {
     ConnectedOverlayPositionChange,
     ConnectionPositionPair
 } from './position/connected-position';
-import {FlexibleConnectedPositionStrategy} from './position/flexible-connected-position-strategy';
+import { FlexibleConnectedPositionStrategy } from './position/flexible-connected-position-strategy';
 
 
 describe('Overlay directives', () => {
     let overlayContainer: OverlayContainer;
     let overlayContainerElement: HTMLElement;
     let fixture: ComponentFixture<ConnectedOverlayDirectiveTest>;
-    let dir: {value: string};
+    let dir: { value: string };
 
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [OverlayModule],
             declarations: [ConnectedOverlayDirectiveTest, ConnectedOverlayPropertyInitOrder],
-            providers: [{provide: Directionality, useFactory: () => dir = {value: 'ltr'}}]
+            providers: [{ provide: Directionality, useFactory: () => dir = { value: 'ltr' } }]
         });
     });
 

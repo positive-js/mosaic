@@ -1,25 +1,3 @@
-
-/** Cached result of whether the user's browser supports passive event listeners. */
-let supportsPassiveEvents: boolean;
-
-/**
- * Checks whether the user's browser supports passive event listeners.
- * See: https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md
- */
-export function supportsPassiveEventListeners(): boolean {
-    if (supportsPassiveEvents == null && typeof window !== 'undefined') {
-        try {
-            window.addEventListener('test', null!, Object.defineProperty({}, 'passive', {
-                get: () => supportsPassiveEvents = true
-            }));
-        } finally {
-            supportsPassiveEvents = supportsPassiveEvents || false;
-        }
-    }
-
-    return supportsPassiveEvents;
-}
-
 /** Cached result Set of input types support by the current browser. */
 let supportedInputTypes: Set<string>;
 
@@ -50,7 +28,7 @@ const candidateInputTypes = [
     'text',
     'time',
     'url',
-    'week',
+    'week'
 ];
 
 /** @returns The input types supported by this browser. */
@@ -65,12 +43,15 @@ export function getSupportedInputTypes(): Set<string> {
     // just a helper function and can't inject it.
     if (typeof document !== 'object' || !document) {
         supportedInputTypes = new Set(candidateInputTypes);
+
         return supportedInputTypes;
     }
 
-    let featureTestInput = document.createElement('input');
-    supportedInputTypes = new Set(candidateInputTypes.filter(value => {
+    const featureTestInput = document.createElement('input');
+
+    supportedInputTypes = new Set(candidateInputTypes.filter((value) => {
         featureTestInput.setAttribute('type', value);
+
         return featureTestInput.type === value;
     }));
 

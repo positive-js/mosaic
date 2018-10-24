@@ -1,0 +1,31 @@
+<label [attr.for]="inputId" class="mc-toggle-layout" #label>
+    <div class="mc-toggle__container" [class.left]="labelPosition === 'left'">
+        <input #input
+               type="checkbox"
+               class="mc-toggle-input cdk-visually-hidden"
+               [id]="inputId"
+               [checked]="checked"
+               [attr.value]="value"
+               [disabled]="disabled"
+               [attr.name]="name"
+               [tabIndex]="tabIndex"
+               [attr.aria-label]="ariaLabel || null"
+               [attr.aria-labelledby]="ariaLabelledby"
+               [attr.aria-checked]="_getAriaChecked()"
+               (click)="_onInputClick($event)"
+               (change)="_onInteractionEvent($event)"/>
+        <div class="mc-toggle-bar-container">
+            <div class="mc-toggle__focus-frame"></div>
+            <div class="mc-toggle-bar">
+                <div class="mc-toggle__circle" [@switch]="checked"></div>
+            </div>
+        </div>
+        <div class="mc-toggle__content"
+             [class.left]="labelPosition === 'left'"
+             [class.right]="labelPosition === 'right'">
+            <span class="mc-toggle-label" (cdkObserveContent)="_onLabelTextChange()">
+                <ng-content></ng-content>
+            </span>
+        </div>
+    </div>
+</label>

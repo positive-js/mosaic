@@ -1,5 +1,6 @@
 @import './typography';
 @import '../badges';
+@import '../alerts';
 @import '../../../button/button-theme';
 @import '../../../link/link-theme';
 @import '../../../list/list-theme';
@@ -11,6 +12,10 @@
 @import '../../../input/input-theme';
 @import '../../../form-field/form-field-theme';
 @import '../../../modal/modal-theme';
+@import '../../../tag/tag-theme';
+@import '../../option/option-theme';
+@import '../../../tooltip/tooltip-theme';
+@import '../../../toggle/toggle-theme';
 
 
 @mixin mosaic-typography($config: null) {
@@ -21,6 +26,7 @@
     @include mc-base-typography($config);
 
     @include mc-link-typography($config);
+    @include mc-alert-typography($config);
     @include mc-badge-typography($config);
     @include mc-button-typography($config);
     @include mc-list-typography($config);
@@ -31,5 +37,9 @@
     @include mc-navbar-typography($config);
     @include mc-input-typography($config);
     @include mc-form-field-typography($config);
+    @include mc-tooltip-typography($config);
     @include mc-modal-typography($config);
+    @include mc-option-typography($config);
+    @include mc-tag-typography($config);
+    @include mc-toggle-typography($config);
 }

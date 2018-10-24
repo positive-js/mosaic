@@ -17,8 +17,8 @@
         );
     }
 
-    &:not([disabled]):active,
-    &:not([disabled]).mc-active {
+    &:active,
+    &.mc-active {
         background-image: linear-gradient(to bottom, mc-color($palette, 600), mc-color($palette, 560));
 
         &:hover,
@@ -31,6 +31,7 @@
         }
     }
 
+    &.disabled,
     &[disabled] {
         color: mc-color($palette, 200);
 
@@ -54,8 +55,8 @@
         );
     }
 
-    &:not([disabled]):active,
-    &:not([disabled]).mc-active {
+    &:active,
+    &.mc-active {
         background-image: linear-gradient(to bottom, mc-color($palette, 200), mc-color($palette, 100));
 
         &:hover,
@@ -76,10 +77,10 @@
     }
 }
 
-@mixin _mc-button-warn-color($secondPalette, $warnPalette) {
+@mixin _mc-button-error-color($secondPalette, $errorPalette) {
     $hover-darken: 5%;
 
-    color: mc-color($warnPalette, 500);
+    color: mc-color($errorPalette, 500);
 
     border-color: mc-color($secondPalette, 300);
     background-image: linear-gradient(to bottom, mc-color($secondPalette, 40, 1), mc-color($secondPalette, 100));
@@ -93,8 +94,8 @@
         );
     }
 
-    &:not([disabled]):active,
-    &:not([disabled]).mc-active {
+    &:active,
+    &.mc-active {
         background-image: linear-gradient(to bottom, mc-color($secondPalette, 200), mc-color($secondPalette, 100));
 
         &:hover,
@@ -115,10 +116,10 @@
     }
 }
 
-@mixin _mc-button-theme-color($theme, $color: 'default') {
+@mixin _mc-button-theme-color($theme) {
     $primary: map-get($theme, primary);
     $second: map-get($theme, second);
-    $warn: map-get($theme, warn);
+    $error: map-get($theme, error);
 
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
@@ -131,13 +132,13 @@
         @include _mc-button-second-color($second);
     }
 
-    &.mc-warn {
-        @include _mc-button-warn-color($second, $warn);
+    &.mc-error {
+        @include _mc-button-error-color($second, $error);
     }
 
     &.mc-primary,
     &.mc-second,
-    &.mc-warn {
+    &.mc-error {
         &.cdk-focused {
             border-color: mc-color($primary, 500);
             box-shadow: 0 0 0 1px mc-color($primary, 500);

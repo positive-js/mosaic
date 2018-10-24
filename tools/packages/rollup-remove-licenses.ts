@@ -1,3 +1,4 @@
+// tslint:disable-next-line
 import MagicString from 'magic-string';
 
 import { buildConfig } from './build-config';
@@ -15,6 +16,7 @@ export const rollupRemoveLicensesPlugin = {
         const newContent = new MagicString(code);
 
         // Walks through every occurrence of a license comment and overwrites it with an empty string.
+        // tslint:disable-next-line
         for (let pos = -1; (pos = code.indexOf(licenseBanner, pos + 1)) !== -1; null) {
             newContent.overwrite(pos, pos + licenseBanner.length, '');
         }

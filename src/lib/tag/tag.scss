@@ -1,0 +1,67 @@
+@import 'tag-base';
+@import 'tag-theme';
+
+
+$mc-tag-border-width: 1px;
+$mc-tag-border-radius: 4px;
+
+$mc-tag-height: 24px - ($mc-tag-border-width * 2);
+
+$mc-tag-icon-padding: 3px;
+
+
+.mc-tag {
+    display: inline-block;
+    overflow: hidden;
+
+    height: $mc-tag-height;
+
+    border: {
+        width: $mc-tag-border-width;
+        style: solid;
+        radius: $mc-tag-border-radius;
+    }
+
+    cursor: default;
+
+    &.mc-left-icon {
+        padding-left: $mc-tag-icon-padding;
+    }
+
+    &.mc-right-icon {
+        padding-right: $mc-tag-icon-padding;
+    }
+}
+
+.mc-tag__wrapper {
+    display: flex;
+    align-items: center;
+
+    flex: 1 1 100%;
+
+    .mc-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        flex-shrink: 0;
+
+        width: $mc-tag-height;
+        height: $mc-tag-height;
+    }
+
+    .mc-icon_left {
+        margin-right: $mc-tag-icon-padding;
+    }
+
+    .mc-icon_right {
+        margin-left: $mc-tag-icon-padding;
+    }
+}
+
+.mc-tag__text {
+    margin-left: 7px;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+}

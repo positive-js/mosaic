@@ -4,6 +4,8 @@
 
 
 @mixin mc-tree-theme($theme) {
+    $primary: map-get($theme, primary);
+
     $background: map-get($theme, background);
     $foreground: map-get($theme, foreground);
 

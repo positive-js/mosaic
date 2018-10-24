@@ -17,14 +17,15 @@ export interface HasElementRef {
 export enum ThemePalette {
     Primary = 'primary',
     Second = 'second',
-    Warn = 'warn',
+    Error = 'error',
     Default = 'second'
 }
 
 /** Mixin to augment a directive with a `color` property. */
 export function mixinColor<T extends Constructor<HasElementRef>>(
-    base: T, defaultColor: ThemePalette = ThemePalette.Default): CanColorCtor & T {
-
+    base: T,
+    defaultColor: ThemePalette = ThemePalette.Default
+): CanColorCtor & T {
     return class extends base {
 
         private _color: ThemePalette;
@@ -52,7 +53,6 @@ export function mixinColor<T extends Constructor<HasElementRef>>(
         constructor(...args: any[]) {
             super(...args);
 
-            // Set the default color that can be specified from the mixin.
             this.color = defaultColor;
         }
     };

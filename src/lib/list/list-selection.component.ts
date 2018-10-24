@@ -31,7 +31,7 @@ import {
     McLineSetter,
     CanDisable,
     mixinDisabled,
-    toBoolean
+    toBoolean, CanDisableCtor
 } from '@ptsecurity/mosaic/core';
 
 
@@ -69,8 +69,6 @@ export class McListOption implements AfterContentInit, OnDestroy, OnInit, IFocus
     @Input() checkboxPosition: 'before' | 'after' = 'after';
 
     @Input() value: any;
-
-    private _focusHandlerInProgress: boolean;
 
     @Input()
     get disabled() {
@@ -219,7 +217,8 @@ export class McListSelectionChange {
 
 export class McListSelectionBase {}
 
-export const _McListSelectionMixinBase = mixinDisabled(McListSelectionBase);
+export const _McListSelectionMixinBase: CanDisableCtor & typeof McListSelectionBase
+    = mixinDisabled(McListSelectionBase);
 
 @Component({
     exportAs: 'mcListSelection',

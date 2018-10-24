@@ -7,7 +7,7 @@ import {
     Injector
 } from '@angular/core';
 
-import {BasePortalOutlet, ComponentPortal, TemplatePortal} from './portal';
+import { BasePortalOutlet, ComponentPortal, TemplatePortal } from './portal';
 
 
 /**
@@ -41,7 +41,7 @@ export class DomPortalOutlet extends BasePortalOutlet {
             componentRef = portal.viewContainerRef.createComponent(
                 componentFactory,
                 portal.viewContainerRef.length,
-                portal.injector || portal.viewContainerRef.parentInjector);
+                portal.injector || portal.viewContainerRef.parentInjector); //tslint:disable-line
 
             this.setDisposeFn(() => componentRef.destroy());
         } else {
@@ -76,13 +76,12 @@ export class DomPortalOutlet extends BasePortalOutlet {
         viewRef.rootNodes.forEach((rootNode) => this.outletElement.appendChild(rootNode));
 
         this.setDisposeFn((() => {
-            let index = viewContainer.indexOf(viewRef);
+            let index = viewContainer.indexOf(viewRef); //tslint:disable-line
             if (index !== -1) {
                 viewContainer.remove(index);
             }
         }));
 
-        // TODO(jelbourn): Return locals from view.
         return viewRef;
     }
 
