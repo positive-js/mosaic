@@ -16,7 +16,10 @@
 @mixin mc-badge-theme($theme) {
     $primary: map-get($theme, primary);
     $second: map-get($theme, second);
-    $warn: map-get($theme, warn);
+    $error: map-get($theme, error);
+    $warning: map-get($theme, warning);
+    $success: map-get($theme, success);
+    $info: map-get($theme, info);
 
     .mc-badge {
         color: white;
@@ -29,21 +32,24 @@
             }
         }
 
-        &__info,
+        &__info {
+            background-color: mc-color($info, 500);
+        }
+
         &__primary {
             background-color: mc-color($primary, 500);
         }
 
-        &__error {
-            background-color: mc-color($mc-yellow, 500);
+        &__warning {
+            background-color: mc-color($warning, 500);
         }
 
-        &__warning {
-            background-color: mc-color($warn, 500);
+        &__error {
+            background-color: mc-color($error, 500);
         }
 
         &__success {
-            background-color: mc-color($mc-green, 500);
+            background-color: mc-color($success, 500);
         }
 
         &__transparent {

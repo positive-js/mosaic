@@ -1,20 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { async, fakeAsync, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { BidiModule, Directionality, Direction, DIR_DOCUMENT } from './index';
+import { BidiModule, Directionality, Dir, Direction, DIR_DOCUMENT } from './index';
 
 
 describe('Directionality', () => {
     let fakeDocument: IFakeDocument;
 
     beforeEach(async(() => {
-        fakeDocument = { body: {}, documentElement: {} };
+        fakeDocument = {body: {}, documentElement: {}};
 
         TestBed.configureTestingModule({
             imports: [BidiModule],
             declarations: [ElementWithDir, InjectsDirectionality],
-            providers: [{ provide: DIR_DOCUMENT, useFactory: () => fakeDocument }],
+            providers: [{provide: DIR_DOCUMENT, useFactory: () => fakeDocument}]
         }).compileComponents();
     }));
 
@@ -57,6 +57,15 @@ describe('Directionality', () => {
             subscription.unsubscribe();
         });
 
+        it('should default to ltr if an invalid direction is set on the body', () => {
+            fakeDocument.body.dir = 'not-valid';
+
+            const fixture = TestBed.createComponent(InjectsDirectionality);
+            const testComponent = fixture.debugElement.componentInstance;
+
+            expect(testComponent.dir.value).toBe('ltr');
+        });
+
     });
 
     describe('Dir directive', () => {
@@ -78,9 +87,7 @@ describe('Directionality', () => {
             fixture.detectChanges();
 
             let direction = injectedDirectionality.value;
-            injectedDirectionality.change.subscribe((dir: Direction) => {
-                direction = dir;
-            });
+            injectedDirectionality.change.subscribe((dir: Direction) => { direction = dir; });
 
             expect(direction).toBe('rtl');
             expect(injectedDirectionality.value).toBe('rtl');
@@ -107,6 +114,17 @@ describe('Directionality', () => {
             subscription.unsubscribe();
         }));
 
+        it('should default to ltr if an invalid value is passed in', () => {
+            const fixture = TestBed.createComponent(ElementWithDir);
+
+            fixture.detectChanges();
+            expect(fixture.componentInstance.dir.value).toBe('rtl');
+
+            fixture.componentInstance.direction = 'not-valid';
+            fixture.detectChanges();
+            expect(fixture.componentInstance.dir.value).toBe('ltr');
+        });
+
     });
 });
 
@@ -119,6 +137,7 @@ describe('Directionality', () => {
     `
 })
 class ElementWithDir {
+    @ViewChild(Dir) dir: Dir;
     direction = 'rtl';
     changeCount = 0;
 }
@@ -126,15 +145,13 @@ class ElementWithDir {
 /** Test component with Dir directive. */
 @Component({
     selector: 'injects-directionality',
-    template: `
-        <div></div>`
+    template: `<div></div>`
 })
 class InjectsDirectionality {
-    constructor(public dir: Directionality) {
-    }
+    constructor(public dir: Directionality) { }
 }
 
 interface IFakeDocument {
-    documentElement: { dir?: string };
-    body: { dir?: string };
+    documentElement: {dir?: string};
+    body: {dir?: string};
 }

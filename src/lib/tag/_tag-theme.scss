@@ -44,7 +44,7 @@
 @mixin mc-tag-theme($theme) {
     $primary: map-get($theme, primary);
     $second: map-get($theme, second);
-    $warn: map-get($theme, warn);
+    $error: map-get($theme, error);
 
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
@@ -62,8 +62,8 @@
             @include _mc-tag-color($second, $primary);
         }
 
-        &.mc-warn {
-            @include _mc-tag-color($warn, $warn);
+        &.mc-error {
+            @include _mc-tag-color($error, $error);
         }
     }
 }

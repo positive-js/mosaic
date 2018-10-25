@@ -7,6 +7,7 @@ import { McCleaner } from './cleaner';
 import { McFormField, McFormFieldWithoutBorders } from './form-field';
 import { McHint } from './hint';
 import { McPrefix } from './prefix';
+import { McStepper } from './stepper';
 import { McSuffix } from './suffix';
 
 
@@ -17,7 +18,8 @@ import { McSuffix } from './suffix';
         McHint,
         McPrefix,
         McSuffix,
-        McCleaner
+        McCleaner,
+        McStepper
     ],
     imports: [CommonModule, McIconModule],
     exports: [
@@ -26,7 +28,8 @@ import { McSuffix } from './suffix';
         McHint,
         McPrefix,
         McSuffix,
-        McCleaner
+        McCleaner,
+        McStepper
     ]
 })
 export class McFormFieldModule {

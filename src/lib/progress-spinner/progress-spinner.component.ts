@@ -5,7 +5,7 @@ import {
     ElementRef,
     Input
 } from '@angular/core';
-import { CanColor, mixinColor, ThemePalette } from '@ptsecurity/mosaic/core';
+import { CanColor, CanColorCtor, mixinColor, ThemePalette } from '@ptsecurity/mosaic/core';
 
 
 export type ProgressSpinnerMode = 'determinate' | 'indeterminate';
@@ -19,7 +19,10 @@ export class McProgressSpinnerBase {
     constructor(public _elementRef: ElementRef) {}
 }
 
-export const _McProgressPinnerMixinBase = mixinColor(McProgressSpinnerBase);
+export const _McProgressSpinnerMixinBase:
+    CanColorCtor &
+    typeof McProgressSpinnerBase =
+        mixinColor(McProgressSpinnerBase);
 
 const MAX_DASH_ARRAY = 273;
 
@@ -34,7 +37,7 @@ const MAX_DASH_ARRAY = 273;
         '[attr.id]': 'id'
     }
 })
-export class McProgressSpinner extends _McProgressPinnerMixinBase implements CanColor {
+export class McProgressSpinner extends _McProgressSpinnerMixinBase implements CanColor {
     @Input() id: string = `mc-progress-spinner-${idIterator++}`;
     @Input() value: number = 0;
     @Input() mode: ProgressSpinnerMode = 'determinate';

@@ -11,8 +11,8 @@ import {
 
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import {
-    CanDisable,
-    HasTabIndex,
+    CanDisable, CanDisableCtor,
+    HasTabIndex, HasTabIndexCtor,
     mixinDisabled,
     mixinTabIndex,
     toBoolean
@@ -24,7 +24,8 @@ export class McLinkBase {
     }
 }
 
-export const _McLinkBase = mixinTabIndex(mixinDisabled(McLinkBase));
+export const _McLinkBase: HasTabIndexCtor & CanDisableCtor & typeof McLinkBase
+    = mixinTabIndex(mixinDisabled(McLinkBase));
 
 @Component({
     selector: 'a.mc-link',

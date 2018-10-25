@@ -34,7 +34,7 @@
 @mixin mc-card-theme($theme) {
     $isDark: map-get($theme, is-dark);
     $info: map-get($theme, primary);
-    $error: map-get($theme, warn);
+    $error: map-get($theme, error);
     $warning: $mc-yellow;
     $success: $mc-green;
     $background-info: map-get($theme, background);

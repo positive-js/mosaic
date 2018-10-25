@@ -18,4 +18,13 @@
 // Mixin that renders all of the core styles that depend on the theme.
 @mixin mc-core-theme($theme) {
     @include mc-pseudo-checkbox-theme($theme);
+
+
+    .mc-app-background {
+        $background: map-get($theme, background);
+        $foreground: map-get($theme, foreground);
+
+        background-color: mc-color($background, background);
+        color: mc-color($foreground, text);
+    }
 }

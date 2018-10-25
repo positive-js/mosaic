@@ -1,0 +1,95 @@
+<div class="layout-margin">
+    <h1 class="mc-h1">Splitter examples</h1>
+
+    <p>
+        Import mosaic-icons to use default gutter icon.
+    </p>
+
+    <br>
+
+    <h2 class="mc-h2">Horizontal</h2>
+
+    <mc-splitter class="horizontal-block" direction="horizontal">
+        <mc-splitter-area>first</mc-splitter-area>
+        <mc-splitter-area>second</mc-splitter-area>
+        <mc-splitter-area>third</mc-splitter-area>
+    </mc-splitter>
+
+    <br>
+
+    <h2 class="mc-h2">Vertical</h2>
+
+    <mc-splitter class="vertical-block" direction="vertical">
+        <mc-splitter-area>first</mc-splitter-area>
+        <mc-splitter-area>second</mc-splitter-area>
+        <mc-splitter-area>third</mc-splitter-area>
+    </mc-splitter>
+
+    <br>
+
+    <h2 class="mc-h2">Default direction</h2>
+
+    <mc-splitter class="horizontal-block">
+        <mc-splitter-area>first</mc-splitter-area>
+        <mc-splitter-area>second</mc-splitter-area>
+        <mc-splitter-area>third</mc-splitter-area>
+    </mc-splitter>
+
+    <br>
+
+    <h2 class="mc-h2">Disabled</h2>
+
+    <mc-splitter class="horizontal-block" direction="horizontal" disabled>
+        <mc-splitter-area>first</mc-splitter-area>
+        <mc-splitter-area>second</mc-splitter-area>
+        <mc-splitter-area>third</mc-splitter-area>
+    </mc-splitter>
+
+    <br>
+
+    <h2 class="mc-h2">min-width for the first area</h2>
+
+    <mc-splitter class="horizontal-block">
+        <mc-splitter-area class="min-width-enabled">first (with min-width)</mc-splitter-area>
+        <mc-splitter-area>second</mc-splitter-area>
+        <mc-splitter-area class="min-width-enabled">third (with min-width)</mc-splitter-area>
+    </mc-splitter>
+
+    <br>
+
+    <h2 class="mc-h2">Nested</h2>
+
+    <mc-splitter class="horizontal-block">
+        <mc-splitter-area>first</mc-splitter-area>
+        <mc-splitter-area>
+            <mc-splitter direction="vertical">
+                <mc-splitter-area>top</mc-splitter-area>
+                <mc-splitter-area>center</mc-splitter-area>
+                <mc-splitter-area>bottom</mc-splitter-area>
+            </mc-splitter>
+        </mc-splitter-area>
+        <mc-splitter-area>third</mc-splitter-area>
+    </mc-splitter>
+
+    <br>
+
+    <h2 class="mc-h2">With custom color</h2>
+
+    <mc-splitter class="horizontal-block custom-color">
+        <mc-splitter-area>first</mc-splitter-area>
+        <mc-splitter-area>second</mc-splitter-area>
+        <mc-splitter-area>third</mc-splitter-area>
+    </mc-splitter>
+
+    <br>
+
+    <h2 class="mc-h2">With custom gutter image</h2>
+
+    <mc-splitter class="horizontal-block custom-gutter">
+        <mc-splitter-area>first</mc-splitter-area>
+        <mc-splitter-area>second</mc-splitter-area>
+        <mc-splitter-area>third</mc-splitter-area>
+    </mc-splitter>
+
+    <br>
+</div>

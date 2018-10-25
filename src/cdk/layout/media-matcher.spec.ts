@@ -1,9 +1,8 @@
+import { async, TestBed, inject } from '@angular/core/testing';
+import { Platform } from '@ptsecurity/cdk/platform';
 
-import {async, TestBed, inject} from '@angular/core/testing';
-import {Platform} from '@ptsecurity/cdk/platform';
-
-import {LayoutModule} from './index';
-import {MediaMatcher} from './media-matcher';
+import { LayoutModule } from './index';
+import { MediaMatcher } from './media-matcher';
 
 
 describe('MediaMatcher', () => {
@@ -38,7 +37,7 @@ describe('MediaMatcher', () => {
       }
 
       function getStyleTagByString(str: string): HTMLStyleElement | undefined {
-        return Array.from(document.head.querySelectorAll('style')).find((tag) => {
+        return Array.from(document.head!.querySelectorAll('style')).find((tag) => {
           const rules = tag.sheet ? Array.from((tag.sheet as CSSStyleSheet).cssRules) : [];
 
           return !!rules.find((rule) => rule.cssText.includes(str));

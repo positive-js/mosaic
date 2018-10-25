@@ -12,7 +12,7 @@ import {
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { Platform } from '@ptsecurity/cdk/platform';
 
-import { mixinColor, mixinDisabled, CanColor, CanDisable } from '@ptsecurity/mosaic/core';
+import { mixinColor, mixinDisabled, CanColor, CanDisable, CanDisableCtor, CanColorCtor } from '@ptsecurity/mosaic/core';
 import { McIcon } from '@ptsecurity/mosaic/icon';
 
 
@@ -104,7 +104,11 @@ export class McButtonBase {
     constructor(public _elementRef: ElementRef) {}
 }
 
-export const _McButtonMixinBase = mixinColor(mixinDisabled(McButtonBase));
+export const _McButtonMixinBase:
+    CanDisableCtor &
+    CanColorCtor &
+    typeof McButtonBase =
+        mixinColor(mixinDisabled(McButtonBase));
 
 
 @Component({
@@ -125,7 +129,7 @@ export const _McButtonMixinBase = mixinColor(mixinDisabled(McButtonBase));
     }
 })
 export class McButton extends _McButtonMixinBase implements OnDestroy, CanDisable, CanColor {
-    constructor(elementRef: ElementRef, private _platform: Platform, private _focusMonitor: FocusMonitor) {
+    constructor(elementRef: ElementRef, private _focusMonitor: FocusMonitor) {
         super(elementRef);
 
         this._focusMonitor.monitor(this._elementRef.nativeElement, true);
@@ -159,8 +163,8 @@ export class McButton extends _McButtonMixinBase implements OnDestroy, CanDisabl
     }
 })
 export class McAnchor extends McButton {
-    constructor(platform: Platform, focusMonitor: FocusMonitor, elementRef: ElementRef) {
-        super(elementRef, platform, focusMonitor);
+    constructor(focusMonitor: FocusMonitor, elementRef: ElementRef) {
+        super(elementRef, focusMonitor);
     }
 
     _haltDisabledEvents(event: Event) {
@@ -185,8 +189,8 @@ export class McAnchor extends McButton {
     }
 })
 export class McIconButton extends McButton {
-    constructor(platform: Platform, focusMonitor: FocusMonitor, elementRef: ElementRef) {
-        super(elementRef, platform, focusMonitor);
+    constructor(focusMonitor: FocusMonitor, elementRef: ElementRef) {
+        super(elementRef, focusMonitor);
     }
 
     _haltDisabledEvents(event: Event) {

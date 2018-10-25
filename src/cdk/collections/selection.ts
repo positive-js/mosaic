@@ -5,11 +5,27 @@ import { Subject } from 'rxjs';
  * Class to be used to power selecting one or more options from a list.
  */
 export class SelectionModel<T> {
-    /** Event emitted when the value has changed. */
-    onChange: Subject<SelectionChange<T>> | null = this._emitChanges ? new Subject() : null;
 
+    /** Selected values. */
+    get selected(): T[] {
+        if (!this._selected) {
+            this._selected = Array.from(this._selection.values());
+        }
+
+        return this._selected;
+    }
+
+    /** Event emitted when the value has changed. */
+    changed: Subject<SelectionChange<T>> = new Subject();
+
+    /**
+     * Event emitted when the value has changed.
+     * @deprecated Use `changed` instead.
+     * @breaking-change 8.0.0 To be changed to `changed`
+     */
+    onChange: Subject<SelectionChange<T>> = this.changed;
     /** Currently-selected values. */
-    private _selection: Set<T> = new Set();
+    private _selection = new Set<T>();
 
     /** Keeps track of the deselected options that haven't been emitted by the change event. */
     private _deselectedToEmit: T[] = [];
@@ -23,8 +39,8 @@ export class SelectionModel<T> {
     constructor(
         private _multiple = false,
         initiallySelectedValues?: T[],
-        private _emitChanges = true
-    ) {
+        private _emitChanges = true) {
+
         if (initiallySelectedValues && initiallySelectedValues.length) {
             if (_multiple) {
                 initiallySelectedValues.forEach((value) => this._markSelected(value));
@@ -37,23 +53,12 @@ export class SelectionModel<T> {
         }
     }
 
-    /** Selected values. */
-    get selected(): T[] {
-        if (!this._selected) {
-            this._selected = Array.from(this._selection.values());
-        }
-
-        return this._selected;
-    }
-
     /**
      * Selects a value or an array of values.
      */
     select(...values: T[]): void {
         this._verifyValueAssignment(values);
-
         values.forEach((value) => this._markSelected(value));
-
         this._emitChangeEvent();
     }
 
@@ -62,9 +67,7 @@ export class SelectionModel<T> {
      */
     deselect(...values: T[]): void {
         this._verifyValueAssignment(values);
-
         values.forEach((value) => this._unmarkSelected(value));
-
         this._emitChangeEvent();
     }
 
@@ -98,21 +101,39 @@ export class SelectionModel<T> {
     }
 
     /**
+     * Determines whether the model has a value.
+     */
+    hasValue(): boolean {
+        return !this.isEmpty();
+    }
+
+    /**
      * Sorts the selected values based on a predicate function.
      */
     sort(predicate?: (a: T, b: T) => number): void {
-        if (this._multiple && this._selected) { this._selected.sort(predicate); }
+        if (this._multiple && this.selected) {
+            this._selected!.sort(predicate);
+        }
+    }
+
+    /**
+     * Gets whether multiple values can be selected.
+     */
+    isMultipleSelection() {
+        return this._multiple;
     }
 
     /** Emits a change event and clears the records of selected and deselected values. */
-    private _emitChangeEvent(): void {
+    private _emitChangeEvent() {
         // Clear the selected values so they can be re-cached.
         this._selected = null;
 
         if (this._selectedToEmit.length || this._deselectedToEmit.length) {
-            const eventData = new SelectionChange<T>(this, this._selectedToEmit, this._deselectedToEmit);
-
-            if (this.onChange) { this.onChange.next(eventData); }
+            this.changed.next({
+                source: this,
+                added: this._selectedToEmit,
+                removed: this._deselectedToEmit
+            });
 
             this._deselectedToEmit = [];
             this._selectedToEmit = [];
@@ -120,9 +141,11 @@ export class SelectionModel<T> {
     }
 
     /** Selects a value. */
-    private _markSelected(value: T): void {
+    private _markSelected(value: T) {
         if (!this.isSelected(value)) {
-            if (!this._multiple) { this._unmarkAll(); }
+            if (!this._multiple) {
+                this._unmarkAll();
+            }
 
             this._selection.add(value);
 
@@ -133,7 +156,7 @@ export class SelectionModel<T> {
     }
 
     /** Deselects a value. */
-    private _unmarkSelected(value: T): void {
+    private _unmarkSelected(value: T) {
         if (this.isSelected(value)) {
             this._selection.delete(value);
 
@@ -144,7 +167,7 @@ export class SelectionModel<T> {
     }
 
     /** Clears out the selected values. */
-    private _unmarkAll(): void {
+    private _unmarkAll() {
         if (!this.isEmpty()) {
             this._selection.forEach((value) => this._unmarkSelected(value));
         }
@@ -165,20 +188,19 @@ export class SelectionModel<T> {
  * Event emitted when the value of a MatSelectionModel has changed.
  * @docs-private
  */
-export class SelectionChange<T> {
-    constructor(
-        /** Model that dispatched the event. */
-        public source: SelectionModel<T>,
-        /** Options that were added to the model. */
-        public added: T[],
-        /** Options that were removed from the model. */
-        public removed: T[]) {
-    }
+export interface SelectionChange<T> {
+    /** Model that dispatched the event. */
+    source: SelectionModel<T>;
+    /** Options that were added to the model. */
+    added: T[];
+    /** Options that were removed from the model. */
+    removed: T[];
 }
 
 /**
  * Returns an error that reports that multiple values are passed into a selection model
  * with a single value.
+ * @docs-private
  */
 export function getMultipleValuesInSingleSelectionError() {
     return Error('Cannot pass multiple values into SelectionModel with single-value mode.');
