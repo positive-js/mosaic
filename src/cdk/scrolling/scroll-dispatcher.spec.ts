@@ -2,7 +2,7 @@ import { NgModule, Component, ViewChild, ElementRef } from '@angular/core';
 import { inject, TestBed, async, fakeAsync, ComponentFixture, tick } from '@angular/core/testing';
 import { dispatchFakeEvent } from '@ptsecurity/cdk/testing';
 
-import { CdkScrollable, ScrollDispatcher, ScrollDispatchModule } from './public-api';
+import { CdkScrollable, ScrollDispatcher, ScrollingModule } from './public-api';
 
 
 describe('ScrollDispatcher', () => {
@@ -69,16 +69,15 @@ describe('ScrollDispatcher', () => {
             }));
 
         it('should not execute the global events in the Angular zone', () => {
-            scroll.scrolled(0).subscribe(() => {
-            }); // tslint:disable-line
+            scroll.scrolled(0).subscribe(() => {});
             dispatchFakeEvent(document, 'scroll', false);
 
-            expect(fixture.ngZone!.isStable).toBe(true); // tslint:disable-line
+            expect(fixture.ngZone!.isStable).toBe(true);
         });
 
         it('should not execute the scrollable events in the Angular zone', () => {
             dispatchFakeEvent(fixture.componentInstance.scrollingElement.nativeElement, 'scroll');
-            expect(fixture.ngZone!.isStable).toBe(true); // tslint:disable-line
+            expect(fixture.ngZone!.isStable).toBe(true);
         });
 
         it('should be able to unsubscribe from the global scrollable', () => {
@@ -114,12 +113,13 @@ describe('ScrollDispatcher', () => {
             expect(spy).toHaveBeenCalled();
             subscription.unsubscribe();
         });
+
     });
 
     describe('Nested scrollables', () => {
         let scroll: ScrollDispatcher;
         let fixture: ComponentFixture<NestedScrollingComponent>;
-        let element: ElementRef;
+        let element: ElementRef<HTMLElement>;
 
         beforeEach(inject([ScrollDispatcher], (s: ScrollDispatcher) => {
             scroll = s;
@@ -146,7 +146,7 @@ describe('ScrollDispatcher', () => {
             expect(spy).toHaveBeenCalledTimes(1);
 
             dispatchFakeEvent(window.document, 'scroll', false);
-            expect(spy).toHaveBeenCalledTimes(2); // tslint:disable-line
+            expect(spy).toHaveBeenCalledTimes(2);
 
             subscription.unsubscribe();
         });
@@ -173,8 +173,7 @@ describe('ScrollDispatcher', () => {
         it('should lazily add global listeners as service subscriptions are added and removed', () => {
             expect(scroll._globalSubscription).toBeNull('Expected no global listeners on init.');
 
-            const subscription = scroll.scrolled(0).subscribe(() => {
-            }); // tslint:disable-line
+            const subscription = scroll.scrolled(0).subscribe(() => {});
 
             expect(scroll._globalSubscription).toBeTruthy(
                 'Expected global listeners after a subscription has been added.');
@@ -190,10 +189,9 @@ describe('ScrollDispatcher', () => {
             fixture.detectChanges();
 
             expect(scroll._globalSubscription).toBeNull('Expected no global listeners on init.');
-            expect(scroll.scrollContainers.size).toBe(4, 'Expected multiple scrollables'); // tslint:disable-line
+            expect(scroll.scrollContainers.size).toBe(4, 'Expected multiple scrollables');
 
-            const subscription = scroll.scrolled(0).subscribe(() => {
-            }); // tslint:disable-line
+            const subscription = scroll.scrolled(0).subscribe(() => {});
 
             expect(scroll._globalSubscription).toBeTruthy(
                 'Expected global listeners after a subscription has been added.');
@@ -203,14 +201,13 @@ describe('ScrollDispatcher', () => {
             expect(scroll._globalSubscription).toBeNull(
                 'Expected global listeners to have been removed after the subscription has stopped.');
             expect(scroll.scrollContainers.size)
-                .toBe(4, 'Expected scrollable count to stay the same'); // tslint:disable-line
+                .toBe(4, 'Expected scrollable count to stay the same');
         });
 
         it('should remove the global subscription on destroy', () => {
             expect(scroll._globalSubscription).toBeNull('Expected no global listeners on init.');
 
-            const subscription = scroll.scrolled(0).subscribe(() => {
-            }); // tslint:disable-line
+            const subscription = scroll.scrolled(0).subscribe(() => {});
 
             expect(scroll._globalSubscription).toBeTruthy(
                 'Expected global listeners after a subscription has been added.');
@@ -229,12 +226,11 @@ describe('ScrollDispatcher', () => {
 
 /** Simple component that contains a large div and can be scrolled. */
 @Component({
-    template: `
-        <div #scrollingElement cdk-scrollable style="height: 9999px"></div>`
+    template: `<div #scrollingElement cdk-scrollable style="height: 9999px"></div>`
 })
 class ScrollingComponent {
     @ViewChild(CdkScrollable) scrollable: CdkScrollable;
-    @ViewChild('scrollingElement') scrollingElement: ElementRef;
+    @ViewChild('scrollingElement') scrollingElement: ElementRef<HTMLElement>;
 }
 
 
@@ -251,17 +247,15 @@ class ScrollingComponent {
     `
 })
 class NestedScrollingComponent {
-    @ViewChild('interestingElement') interestingElement: ElementRef;
+    @ViewChild('interestingElement') interestingElement: ElementRef<HTMLElement>;
 }
 
 const TEST_COMPONENTS = [ScrollingComponent, NestedScrollingComponent];
-
 @NgModule({
-    imports: [ScrollDispatchModule],
+    imports: [ScrollingModule],
     providers: [ScrollDispatcher],
     exports: TEST_COMPONENTS,
     declarations: TEST_COMPONENTS,
     entryComponents: TEST_COMPONENTS
 })
-class ScrollTestModule {
-}
+class ScrollTestModule { }

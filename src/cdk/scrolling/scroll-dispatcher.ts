@@ -5,7 +5,7 @@ import {
     OnDestroy
 } from '@angular/core';
 import { Platform } from '@ptsecurity/cdk/platform';
-import { fromEvent, of as observableOf, Subject, Subscription, Observable } from 'rxjs';
+import { fromEvent, of as observableOf, Subject, Subscription, Observable, Observer } from 'rxjs';
 import { auditTime, filter } from 'rxjs/operators';
 
 import { CdkScrollable } from './scrollable';
@@ -31,12 +31,12 @@ export class ScrollDispatcher implements OnDestroy {
     _globalSubscription: Subscription | null = null;
 
     /** Subject for notifying that a registered scrollable reference element has been scrolled. */
-    private _scrolled = new Subject<CdkScrollable | {} | void>();
+    private _scrolled = new Subject<CdkScrollable | void>();
 
     /** Keeps track of the amount of subscriptions to `scrolled`. Used for cleaning up afterwards. */
-    private _scrolledCount = 0;
+    private scrolledCount = 0;
 
-    constructor(private _ngZone: NgZone, private _platform: Platform) { }
+    constructor(private ngZone: NgZone, private platform: Platform) { }
 
     /**
      * Registers a scrollable instance with the service and listens for its scrolled events. When the
@@ -74,9 +74,14 @@ export class ScrollDispatcher implements OnDestroy {
      * to run the callback using `NgZone.run`.
      */
     scrolled(auditTimeInMs: number = DEFAULT_SCROLL_TIME): Observable<CdkScrollable | void> {
-        return this._platform.isBrowser ? Observable.create((observer) => {
+
+        if (!this.platform.isBrowser) {
+            return observableOf<void>();
+        }
+
+        return Observable.create((observer: Observer<CdkScrollable | void>) => {
             if (!this._globalSubscription) {
-                this._addGlobalListener();
+                this.addGlobalListener();
             }
 
             // In the case of a 0ms delay, use an observable without auditTime
@@ -85,21 +90,21 @@ export class ScrollDispatcher implements OnDestroy {
                 this._scrolled.pipe(auditTime(auditTimeInMs)).subscribe(observer) :
                 this._scrolled.subscribe(observer);
 
-            this._scrolledCount++;
+            this.scrolledCount++;
 
             return () => {
                 subscription.unsubscribe();
-                this._scrolledCount--;
+                this.scrolledCount--;
 
-                if (!this._scrolledCount) {
-                    this._removeGlobalListener();
+                if (!this.scrolledCount) {
+                    this.removeGlobalListener();
                 }
             };
-        }) : observableOf<void>();
+        });
     }
 
     ngOnDestroy() {
-        this._removeGlobalListener();
+        this.removeGlobalListener();
         this.scrollContainers.forEach((_, container) => this.deregister(container));
         this._scrolled.complete();
     }
@@ -113,8 +118,7 @@ export class ScrollDispatcher implements OnDestroy {
     ancestorScrolled(elementRef: ElementRef, auditTimeInMs?: number): Observable<CdkScrollable | void> {
         const ancestors = this.getAncestorScrollContainers(elementRef);
 
-        return this.scrolled(auditTimeInMs).pipe(filter((target: any) => {
-
+        return this.scrolled(auditTimeInMs).pipe(filter((target) => {
             return !target || ancestors.indexOf(target) > -1;
         }));
     }
@@ -124,7 +128,7 @@ export class ScrollDispatcher implements OnDestroy {
         const scrollingContainers: CdkScrollable[] = [];
 
         this.scrollContainers.forEach((_subscription: Subscription, scrollable: CdkScrollable) => {
-            if (this._scrollableContainsElement(scrollable, elementRef)) {
+            if (this.scrollableContainsElement(scrollable, elementRef)) {
                 scrollingContainers.push(scrollable);
             }
         });
@@ -133,7 +137,7 @@ export class ScrollDispatcher implements OnDestroy {
     }
 
     /** Returns true if the element is contained within the provided Scrollable. */
-    private _scrollableContainsElement(scrollable: CdkScrollable, elementRef: ElementRef): boolean {
+    private scrollableContainsElement(scrollable: CdkScrollable, elementRef: ElementRef): boolean {
         let element = elementRef.nativeElement;
         let scrollableElement = scrollable.getElementRef().nativeElement; //tslint:disable-line
 
@@ -147,14 +151,14 @@ export class ScrollDispatcher implements OnDestroy {
     }
 
     /** Sets up the global scroll listeners. */
-    private _addGlobalListener() {
-        this._globalSubscription = this._ngZone.runOutsideAngular(() => {
+    private addGlobalListener() {
+        this._globalSubscription = this.ngZone.runOutsideAngular(() => {
             return fromEvent(window.document, 'scroll').subscribe(() => this._scrolled.next());
         });
     }
 
     /** Cleans up the global scroll listener. */
-    private _removeGlobalListener() {
+    private removeGlobalListener() {
         if (this._globalSubscription) {
             this._globalSubscription.unsubscribe();
             this._globalSubscription = null;
