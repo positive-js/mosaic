@@ -30,7 +30,7 @@ import {
 
 import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import {
-    CanUpdateErrorState,
+    CanUpdateErrorState, CanUpdateErrorStateCtor,
     ErrorStateMatcher,
     mixinErrorState
 } from '@ptsecurity/mosaic/core';
@@ -69,7 +69,9 @@ export class McTimepickerBase {
         public ngControl: NgControl) { }
 }
 
-export const McTimepickerMixinBase = mixinErrorState(McTimepickerBase);
+export const McTimepickerMixinBase:
+    CanUpdateErrorStateCtor &
+    typeof McTimepickerBase = mixinErrorState(McTimepickerBase);
 
 @Directive({
     selector: 'input[mcTimepicker]',
