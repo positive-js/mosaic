@@ -144,6 +144,7 @@
         "server-dev:badge": "npm run server-dev -- --env.component badge",
         "server-dev:button": "npm run server-dev -- --env.component button",
         "server-dev:checkbox": "npm run server-dev -- --env.component checkbox",
+        "server-dev:dropdown": "npm run server-dev -- --env.component dropdown",
         "server-dev:icon": "npm run server-dev -- --env.component icon",
         "server-dev:input": "npm run server-dev -- --env.component input",
         "server-dev:flex-layout": "npm run server-dev -- --env.component flex-layout",

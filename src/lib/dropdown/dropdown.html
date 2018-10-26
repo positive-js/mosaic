@@ -1,0 +1,16 @@
+<ng-template>
+    <div
+        class="mc-dropdown__panel"
+        [ngClass]="_classList"
+        (keydown)="_handleKeydown($event)"
+        (click)="closed.emit('click')"
+        [@transformMenu]="_panelAnimationState"
+        (@transformMenu.start)="_isAnimating = true"
+        (@transformMenu.done)="_onAnimationDone($event)"
+        tabindex="-1"
+        role="menu">
+        <div class="mc-dropdown__content">
+            <ng-content></ng-content>
+        </div>
+    </div>
+</ng-template>

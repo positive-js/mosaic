@@ -26,11 +26,11 @@ $mc-option-padding: 0 16px;
     -webkit-tap-highlight-color: transparent;
 
     //.mc-optgroup &:not(.mc-option-multiple) {
-        //padding-left: $mc-menu-side-padding * 2;
+        //padding-left: $mc-dropdown-side-padding * 2;
 
         //[dir='rtl'] & {
-            //padding-left: $mc-menu-side-padding;
-            //padding-right: $mc-menu-side-padding * 2;
+            //padding-left: $mc-dropdown-side-padding;
+            //padding-right: $mc-dropdown-side-padding * 2;
         //}
     //}
 
