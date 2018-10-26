@@ -17,6 +17,7 @@ import { McInputModule } from '../../lib/input/';
 export class InputDemoComponent {
     value: string = '';
     numberValue: number | null = null;
+    min = -5;
 }
 
 
