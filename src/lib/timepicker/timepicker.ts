@@ -421,10 +421,14 @@ export class McTimepicker extends McTimepickerMixinBase
         this._currentDTimeInput = timeToApply;
 
         if (doTimestringReformat && timeToApply !== undefined) {
+            const selectionStart: number = this._elementRef.nativeElement.selectionStart;
+            const selectionEnd: number = this._elementRef.nativeElement.selectionEnd;
             this._renderer.setProperty(
                 this._elementRef.nativeElement,
                 'value',
                 this._getTimeStringFromDate(timeToApply, this.timeFormat));
+            this._elementRef.nativeElement.selectionStart = selectionStart;
+            this._elementRef.nativeElement.selectionEnd = selectionEnd;
         }
 
         (<FormControl> this.ngControl.control).updateValueAndValidity();
