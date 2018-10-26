@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
+import { ENTER, SPACE } from '@ptsecurity/cdk/keycodes';
 
 
 export enum Status {
@@ -40,7 +41,8 @@ const name = 'mc-card';
     inputs: ['color'],
     host: {
         class: name,
-        '[class.mc-card_readonly]': 'readonly'
+        '[class.mc-card_readonly]': 'readonly',
+        '(keydown)': 'onKeyDown($event)'
     }
 })
 export class McCard implements OnDestroy {
@@ -117,5 +119,18 @@ export class McCard implements OnDestroy {
 
     private get hostElement() {
         return this._elementRef.nativeElement;
+    }
+
+    onKeyDown($event: KeyboardEvent) {
+        const keyCode = $event.keyCode;
+        switch (keyCode) {
+            case SPACE:
+                if (!this.readonly) {
+                    $event.preventDefault();
+                    this.selectedChange.emit(!this.selected);
+                }
+                break;
+            default:
+        }
     }
 }

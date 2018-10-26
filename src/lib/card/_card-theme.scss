@@ -3,21 +3,24 @@
 
 @mixin left-marker($color) {
     $gray100: mc-color($mc-grey, 100);
-    box-shadow: inset -1px 0 0 0 $gray100, inset 0 1px 0 0 $gray100, inset 0 -1px 0 0 $gray100, inset 4px 0 0 0 mc-color($color, 400);
+    box-shadow: inset 4px 0 0 0 mc-color($color, 400), inset -1px 0 0 0 $gray100, inset 0 1px 0 0 $gray100, inset 0 -1px 0 0 $gray100;
 }
 
 @mixin left-marker-dark($color) {
     $gray600: mc-color($mc-grey, 600);
-    box-shadow: inset -1px 0 0 0 $gray600, inset 0 1px 0 0 $gray600, inset 0 -1px 0 0 $gray600, inset 4px 0 0 0 mc-color($color, 600);
+    box-shadow: inset 4px 0 0 0 mc-color($color, 600), inset -1px 0 0 0 $gray600, inset 0 1px 0 0 $gray600, inset 0 -1px 0 0 $gray600;
 }
 
-@mixin normal-state($color, $isDark) {
+@mixin set-state($background, $marker, $border-color) {
+    background-color: $background;
+    box-shadow: inset 4px 0 0 0 $marker, inset -1px 0 0 0 $border-color, inset 0 1px 0 0 $border-color, inset 0 -1px 0 0 $border-color;
+}
+
+@mixin normal-state($color, $border-color, $isDark) {
     @if $isDark == true {
-        background-color: mc-color($color, 700);
-        @include left-marker-dark($color);
+        @include set-state(mc-color($color, 700), mc-color($color, 600), mc-color($border-color, 600));
     } @else {
-        background-color: mc-color($color, 60);
-        @include left-marker($color);
+        @include set-state(mc-color($color, 60), mc-color($color, 400), mc-color($border-color, 100));
     }
 }
 
@@ -33,56 +36,59 @@
 
 @mixin mc-card-theme($theme) {
     $isDark: map-get($theme, is-dark);
+    $default: map-get($theme, default);
+    $primary: map-get($theme, primary);
+    $second: map-get($theme, second);
     $info: map-get($theme, primary);
     $error: map-get($theme, error);
-    $warning: $mc-yellow;
-    $success: $mc-green;
+    $warning: map-get($theme, warning);
+    $success: map-get($theme, success);
     $background-info: map-get($theme, background);
     $foreground-info: map-get($theme, foreground);
-    $background-color: map-get($background-info, background);
+    $white-background-color: if($isDark, mc-color($second, 700), map-get($background-info, background));
     $foreground-color: map-get($foreground-info, base);
     
     $hover-color: map-get($background-info, hover);
-    $focus-color: mc-color($mc-blue, 400);
+    $focus-color: mc-color($primary, 400);
     
     .mc-card {
-        background-color: mc-color($mc-grey, 60);
+        background-color: mc-color($default, 60);
         color: $foreground-color;
         
         &_info {
-            @include normal-state($info, $isDark);
+            @include normal-state($info, $second, $isDark);
             
             &.mc-card_selected {
-                @include selected-state($info, $info, $isDark);
+                @include selected-state($info, $primary, $isDark);
             }
         }
         
         &_warning {
-            @include normal-state($warning, $isDark);
+            @include normal-state($warning, $second, $isDark);
             
             &.mc-card_selected {
-                @include selected-state($warning, $info, $isDark);
+                @include selected-state($warning, $primary, $isDark);
             }
         }
         
         &_success {
-            @include normal-state($success, $isDark);
+            @include normal-state($success, $second, $isDark);
             
             &.mc-card_selected {
-                @include selected-state($success, $info, $isDark);
+                @include selected-state($success, $primary, $isDark);
             }
         }
         
         &_error {
-            @include normal-state($error, $isDark);
+            @include normal-state($error, $second, $isDark);
             
             &.mc-card_selected {
-                @include selected-state($error, $info, $isDark);
+                @include selected-state($error, $primary, $isDark);
             }
         }
         
         &_white {
-            background-color: $background-color;
+            background-color: $white-background-color;
         }
         
         .mc-card__hover-overlay {
@@ -93,6 +99,7 @@
         &.cdk-focused {
             .mc-card__focus-overlay {
                 border: solid 1px $focus-color;
+                box-shadow: 0 0 0 1px $focus-color;
             }
         }
     }
