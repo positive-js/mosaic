@@ -62,7 +62,7 @@ export const MENU_PANEL_TOP_PADDING = 8;
     selector: `[mcDropdownTriggerFor]`,
     host: {
         'aria-haspopup': 'true',
-        '[attr.aria-expanded]': 'menuOpen || null',
+        '[attr.aria-expanded]': 'opened || null',
         '(touchstart)': '_openedBy = "touch"',
         '(keydown)': '_handleKeydown($event)',
         '(click)': '_handleClick($event)'
@@ -72,8 +72,8 @@ export const MENU_PANEL_TOP_PADDING = 8;
 export class McDropdownTrigger implements AfterContentInit, OnDestroy {
 
     /** Whether the dropdown is open. */
-    get menuOpen(): boolean {
-        return this._menuOpen;
+    get opened(): boolean {
+        return this._opened;
     }
 
     /** The text direction of the containing app. */
@@ -89,7 +89,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
     @Input('mcDropdownTriggerFor') dropdown: McDropdownPanel;
 
     /** Data to be passed along to any lazily-rendered content. */
-    @Input('mcDropdownTriggerData') dropdownData: any;
+    @Input('mcDropdownTriggerData') data: any;
 
     /** Event emitted when the associated dropdown is opened. */
     @Output() readonly dropdownOpened: EventEmitter<void> = new EventEmitter<void>();
@@ -97,20 +97,11 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
     /** Event emitted when the associated dropdown is closed. */
     @Output() readonly dropdownClosed: EventEmitter<void> = new EventEmitter<void>();
 
-    /**
-     * Event emitted when the associated dropdown is closed.
-     * @deprecated Switch to `dropdownClosed` instead
-     * @breaking-change 8.0.0
-     */
-        // tslint:disable-next-line:no-output-on-prefix
-    @Output() readonly onMenuClose: EventEmitter<void> = this.dropdownClosed;
     private _portal: TemplatePortal;
     private _overlayRef: OverlayRef | null = null;
-    private _menuOpen: boolean = false;
+    private _opened: boolean = false;
     private _closeSubscription = Subscription.EMPTY;
     private _hoverSubscription = Subscription.EMPTY;
-    private _scrollStrategy: () => IScrollStrategy;
-
 
     get parentMenu() {
         return this._parentMenu;
@@ -119,18 +110,11 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
     constructor(private _overlay: Overlay,
                 private _element: ElementRef<HTMLElement>,
                 private _viewContainerRef: ViewContainerRef,
-                @Inject(MC_DROPDOWN_SCROLL_STRATEGY) scrollStrategy: any,
+                @Inject(MC_DROPDOWN_SCROLL_STRATEGY) private _scrollStrategy: any,
                 @Optional() private _parentMenu: McDropdown,
                 @Optional() @Self() private _menuItemInstance: McDropdownItem,
                 @Optional() private _dir: Directionality,
-                private _focusMonitor?: FocusMonitor) {
-
-        if (_menuItemInstance) {
-            _menuItemInstance._triggersSubmenu = this.triggersSubmenu();
-        }
-
-        this._scrollStrategy = scrollStrategy;
-    }
+                private _focusMonitor?: FocusMonitor) {}
 
     ngAfterContentInit() {
         this._checkMenu();
@@ -164,12 +148,12 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
     /** Toggles the dropdown between the open and closed states. */
     toggleMenu(): void {
         // tslint:disable-next-line:no-void-expression
-        return this._menuOpen ? this.closeMenu() : this.openMenu();
+        return this._opened ? this.closeMenu() : this.openMenu();
     }
 
     /** Opens the dropdown. */
     openMenu(): void {
-        if (this._menuOpen) {
+        if (this._opened) {
             return;
         }
 
@@ -180,7 +164,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
         overlayRef.attach(this._portal);
 
         if (this.dropdown.lazyContent) {
-            this.dropdown.lazyContent.attach(this.dropdownData);
+            this.dropdown.lazyContent.attach(this.data);
         }
 
         this._closeSubscription = this._menuClosingActions().subscribe(() => this.closeMenu());
@@ -233,7 +217,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
 
     /** Closes the dropdown and does the necessary cleanup. */
     private _destroyMenu() {
-        if (!this._overlayRef || !this.menuOpen) {
+        if (!this._overlayRef || !this.opened) {
             return;
         }
 
@@ -321,9 +305,9 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
 
     // set state rather than toggle to support triggers sharing a dropdown
     private _setIsMenuOpen(isOpen: boolean): void {
-        this._menuOpen = isOpen;
+        this._opened = isOpen;
         // tslint:disable-next-line:no-void-expression
-        this._menuOpen ? this.dropdownOpened.emit() : this.dropdownClosed.emit();
+        this._opened ? this.dropdownOpened.emit() : this.dropdownClosed.emit();
 
         if (this.triggersSubmenu()) {
             this._menuItemInstance._highlighted = isOpen;
@@ -453,7 +437,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
         const parentClose = this._parentMenu ? this._parentMenu.closed : observableOf();
         const hover = this._parentMenu ? this._parentMenu._hovered().pipe(
             filter((active) => active !== this._menuItemInstance),
-            filter(() => this._menuOpen)
+            filter(() => this._opened)
         ) : observableOf();
 
         return merge(backdrop, parentClose, hover, detachments);
