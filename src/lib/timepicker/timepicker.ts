@@ -30,7 +30,8 @@ import {
 
 import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import {
-    CanUpdateErrorState, CanUpdateErrorStateCtor,
+    CanUpdateErrorState,
+    CanUpdateErrorStateCtor,
     ErrorStateMatcher,
     mixinErrorState
 } from '@ptsecurity/mosaic/core';
@@ -91,6 +92,7 @@ export const McTimepickerMixinBase:
         '(blur)': 'onBlur()',
         '(focus)': 'focusChanged(true)',
         '(input)': 'onInput()',
+        '(paste)': 'onPaste($event)',
         '(keydown)': 'onKeyDown($event)'
     },
     providers: [
@@ -304,6 +306,16 @@ export class McTimepicker extends McTimepickerMixinBase
     onBlur() {
         this._applyInputChanges();
         this.focusChanged(false);
+    }
+
+    onPaste($event) {
+        $event.preventDefault();
+        const clipboardUserInput: string = $event.clipboardData.getData('text');
+
+        if (this._getDateFromTimeString(clipboardUserInput) === undefined) { return; }
+
+        this._elementRef.nativeElement.value = clipboardUserInput;
+        this.onInput();
     }
 
     onInput() {
