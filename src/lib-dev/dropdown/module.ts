@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McDropdownModule } from '@ptsecurity/mosaic/dropdown';
 
 
@@ -26,6 +27,7 @@ export class DemoComponent {
         BrowserAnimationsModule,
         BrowserModule,
         FormsModule,
+        McButtonModule,
         McDropdownModule
     ],
     bootstrap: [

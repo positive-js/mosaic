@@ -30,14 +30,13 @@ export const _McDropdownItemMixinBase: CanDisableCtor & typeof McDropdownItemBas
  */
 @Component({
     // moduleId: module.id,
-    selector: '[mc-dropdown-item]',
+    selector: 'mc-dropdown-item, [mc-dropdown-item]',
     exportAs: 'mcDropdownItem',
-    inputs: ['disabled', 'disableRipple'],
+    inputs: ['disabled'],
     host: {
-        role: 'menuitem',
-        class: 'mc-dropdown-item',
-        '[class.mc-dropdown-item-highlighted]': '_highlighted',
-        '[class.mc-dropdown-item-submenu-trigger]': '_triggersSubmenu',
+        role: 'dropdown-item',
+        class: 'mc-dropdown__item',
+        '[class.mc-dropdown__item-highlighted]': '_highlighted',
         '[attr.tabindex]': '_getTabIndex()',
         '[attr.aria-disabled]': 'disabled.toString()',
         '[attr.disabled]': 'disabled || null',
@@ -57,18 +56,13 @@ export class McDropdownItem extends _McDropdownItemMixinBase
     /** Whether the dropdown item is highlighted. */
     _highlighted: boolean = false;
 
-    /** Whether the dropdown item acts as a trigger for a sub-dropdown. */
-    _triggersSubmenu: boolean = false;
-
     private _document: Document;
 
     constructor(
         private _elementRef: ElementRef<HTMLElement>,
-        @Inject(DOCUMENT) document?: any,
-        private _focusMonitor?: FocusMonitor,
-        @Inject(MC_DROPDOWN_PANEL) @Optional() private _parentMenu?: McDropdownPanel<McDropdownItem>) {
-
-        // @breaking-change 8.0.0 make `_focusMonitor` and `document` required params.
+        @Inject(DOCUMENT) document: any,
+        private _focusMonitor: FocusMonitor,
+        @Inject(MC_DROPDOWN_PANEL) @Optional() private _parentDropdownPanel?: McDropdownPanel<McDropdownItem>) {
         super();
 
         if (_focusMonitor) {
@@ -78,8 +72,8 @@ export class McDropdownItem extends _McDropdownItemMixinBase
             _focusMonitor.monitor(this._elementRef.nativeElement, false);
         }
 
-        if (_parentMenu && _parentMenu.addItem) {
-            _parentMenu.addItem(this);
+        if (_parentDropdownPanel && _parentDropdownPanel.addItem) {
+            _parentDropdownPanel.addItem(this);
         }
 
         this._document = document;
@@ -99,8 +93,8 @@ export class McDropdownItem extends _McDropdownItemMixinBase
             this._focusMonitor.stopMonitoring(this._elementRef.nativeElement);
         }
 
-        if (this._parentMenu && this._parentMenu.removeItem) {
-            this._parentMenu.removeItem(this);
+        if (this._parentDropdownPanel && this._parentDropdownPanel.removeItem) {
+            this._parentDropdownPanel.removeItem(this);
         }
 
         this._hovered.complete();

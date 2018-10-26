@@ -69,12 +69,6 @@ export function MC_DROPDOWN_DEFAULT_OPTIONS_FACTORY(): McDropdownDefaultOptions 
         backdropClass: 'cdk-overlay-transparent-backdrop'
     };
 }
-/**
- * Start elevation for the dropdown panel.
- * @docs-private
- */
-const MC_DROPDOWN_BASE_ELEVATION = 4;
-
 
 @Component({
     // moduleId: module.id,
@@ -149,17 +143,6 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
         }
     }
 
-    /**
-     * This method takes classes set on the host mat-dropdown element and applies them on the
-     * dropdown template that displays in the overlay container.  Otherwise, it's difficult
-     * to style the containing dropdown from outside the component.
-     * @deprecated Use `panelClass` instead.
-     * @breaking-change 8.0.0
-     */
-    @Input()
-    get classList(): string { return this.panelClass; }
-    set classList(classes: string) { this.panelClass = classes; }
-
     /** Config object to be passed into the dropdown's ngClass */
     _classList: {[key: string]: boolean} = {};
 
@@ -186,8 +169,6 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
 
     /**
      * List of the items inside of a dropdown.
-     * @deprecated
-     * @breaking-change 8.0.0
      */
     @ContentChildren(McDropdownItem) items: QueryList<McDropdownItem>;
 
@@ -201,16 +182,9 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
     @Output() readonly closed: EventEmitter<void | 'click' | 'keydown' | 'tab'> =
         new EventEmitter<void | 'click' | 'keydown' | 'tab'>();
 
-    /**
-     * Event emitted when the dropdown is closed.
-     * @deprecated Switch to `closed` instead
-     * @breaking-change 8.0.0
-     */
-    @Output() close = this.closed;
     private _keyManager: FocusKeyManager<McDropdownItem>;
     private _xPosition: DropdownPositionX = this._defaultOptions.xPosition;
     private _yPosition: DropdownPositionY = this._defaultOptions.yPosition;
-    private _previousElevation: string;
 
     /** Menu items inside the current dropdown. */
     private _items: McDropdownItem[] = [];
@@ -233,9 +207,7 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
     }
 
     ngAfterContentInit() {
-        // this._keyManager = new FocusKeyManager<McDropdownItem>(this._items[0]).withWrap().withTypeAhead();
-        this._keyManager = new FocusKeyManager<McDropdownItem>(new QueryList<McDropdownItem>())
-            .withWrap().withTypeAhead();
+        this._keyManager = new FocusKeyManager<McDropdownItem>(this.items).withWrap().withTypeAhead();
         this._tabSubscription = this._keyManager.tabOut.subscribe(() => this.closed.emit('tab'));
     }
 
@@ -304,34 +276,15 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
     }
 
     /**
-     * Sets the dropdown panel elevation.
-     * @param depth Number of parent menus that come before the dropdown.
-     */
-    setElevation(depth: number): void {
-        // The elevation starts at the base and increases by one for each level.
-        const newElevation = `mat-elevation-z${MC_DROPDOWN_BASE_ELEVATION + depth}`;
-        const customElevation = Object.keys(this._classList).find((c) => c.startsWith('mat-elevation-z'));
-
-        if (!customElevation || customElevation === this._previousElevation) {
-            if (this._previousElevation) {
-                this._classList[this._previousElevation] = false;
-            }
-
-            this._classList[newElevation] = true;
-            this._previousElevation = newElevation;
-        }
-    }
-
-    /**
      * Registers a dropdown item with the dropdown.
      * @docs-private
      */
     addItem(item: McDropdownItem) {
         // We register the items through this method, rather than picking them up through
         // `ContentChildren`, because we need the items to be picked up by their closest
-        // `mat-dropdown` ancestor. If we used `@ContentChildren(McDropdownItem, {descendants: true})`,
+        // `mc-dropdown` ancestor. If we used `@ContentChildren(McDropdownItem, {descendants: true})`,
         // all descendant items will bleed into the top-level dropdown in the case where the consumer
-        // has `mat-dropdown` instances nested inside each other.
+        // has `mc-dropdown` instances nested inside each other.
         if (this._items.indexOf(item) === -1) {
             this._items.push(item);
             this._itemChanges.next(this._items);
@@ -360,21 +313,19 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
      */
     setPositionClasses(posX: DropdownPositionX = this.xPosition, posY: DropdownPositionY = this.yPosition) {
         const classes = this._classList;
-        classes['mat-menu-before'] = posX === 'before';
-        classes['mat-menu-after'] = posX === 'after';
-        classes['mat-menu-above'] = posY === 'above';
-        classes['mat-menu-below'] = posY === 'below';
+        classes['mc-dropdown-before'] = posX === 'before';
+        classes['mc-dropdown-after'] = posX === 'after';
+        classes['mc-dropdown-above'] = posY === 'above';
+        classes['mc-dropdown-below'] = posY === 'below';
     }
 
     /** Starts the enter animation. */
     _startAnimation() {
-        // @breaking-change 8.0.0 Combine with _resetAnimation.
         this._panelAnimationState = 'enter';
     }
 
     /** Resets the panel animation to its initial state. */
     _resetAnimation() {
-        // @breaking-change 8.0.0 Combine with _startAnimation.
         this._panelAnimationState = 'void';
     }
 

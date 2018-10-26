@@ -22,7 +22,7 @@ export interface McDropdownPanel<T = any> {
     yPosition: DropdownPositionY;
     overlapTrigger: boolean;
     templateRef: TemplateRef<any>;
-    close: EventEmitter<void | 'click' | 'keydown' | 'tab'>;
+    closed: EventEmitter<void | 'click' | 'keydown' | 'tab'>;
     direction?: Direction;
     lazyContent?: McDropdownContent;
     backdropClass?: string;
@@ -32,5 +32,4 @@ export interface McDropdownPanel<T = any> {
     setPositionClasses?(x: DropdownPositionX, y: DropdownPositionY): void;
     addItem?(item: T): void;
     removeItem?(item: T): void;
-    setElevation?(depth: number): void;
 }
