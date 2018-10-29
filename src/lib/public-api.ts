@@ -17,6 +17,7 @@ export * from '@ptsecurity/mosaic/progress-bar';
 export * from '@ptsecurity/mosaic/progress-spinner';
 export * from '@ptsecurity/mosaic/radio';
 export * from '@ptsecurity/mosaic/tree';
+export * from '@ptsecurity/mosaic/tabs';
 export * from '@ptsecurity/mosaic/tag';
 export * from '@ptsecurity/mosaic/timepicker';
 export * from '@ptsecurity/mosaic/select';

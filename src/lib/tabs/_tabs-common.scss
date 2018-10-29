@@ -1,0 +1,115 @@
+$mc-tab-horizontal-padding: 16px;
+$mc-tab-vertival-padding: 12px;
+
+$mc-tab-border-radius: 2px;
+$mc-tab-border-width: 1px;
+$mc-tab-border-radius-focus: 3px;
+$mc-tab-border-width-focus: 2px;
+
+@mixin tab-label-common {
+    display: inline-block;
+    cursor: pointer;
+    padding: $mc-tab-vertival-padding $mc-tab-horizontal-padding;
+
+    outline: none;
+    border: {
+        bottom: {
+            width: $mc-tab-border-width;
+            style: solid;
+        }
+    }
+
+    &.cdk-focused {
+        position: relative;
+
+        &:after {
+            display: block;
+            position: absolute;
+            top: - $mc-tab-border-width-focus;
+            right: - $mc-tab-border-width;
+            bottom: - $mc-tab-border-width;
+            left: - $mc-tab-border-width;
+            content: "";
+            border: {
+                width: $mc-tab-border-width-focus;
+                style: solid;
+                top: {
+                    left-radius: $mc-tab-border-radius-focus;
+                    right-radius: $mc-tab-border-radius-focus;
+                }
+                bottom: none;
+            }
+        }
+    }
+
+    &.mc-tab-disabled {
+        pointer-events: none;
+        cursor: auto;
+    }
+}
+
+@mixin tab-label {
+    border: {
+        top: {
+            width: $mc-tab-border-width;
+            style: solid;
+        }
+    }
+
+    &.mc-tab-label-active {
+        padding-right: $mc-tab-horizontal-padding - $mc-tab-border-width;
+        padding-left: $mc-tab-horizontal-padding - $mc-tab-border-width;
+        border: {
+            width: $mc-tab-border-width;
+            style: solid;
+            top: {
+                left-radius: $mc-tab-border-radius;
+                right-radius: $mc-tab-border-radius;
+            }
+        }
+
+        &.cdk-focused {
+            &:after {
+                right: - $mc-tab-border-width-focus;
+                left: - $mc-tab-border-width-focus;
+            }
+        }
+    }
+
+    @include tab-label-common();
+}
+
+@mixin tab-label-light {
+    $mc-tab-border-width-highlight: 4px;
+
+    &.mc-tab-label-active {
+        position: relative;
+
+        &:before {
+            display: block;
+            position: absolute;
+            bottom: - $mc-tab-border-width;
+            left: - $mc-tab-border-width;
+            height: $mc-tab-border-width-highlight;
+            right: - $mc-tab-border-width;
+            content: "";
+            border-bottom: {
+                width: $mc-tab-border-width-highlight;
+                style: solid;
+            }
+        }
+    }
+
+    &.mc-tab-disabled {
+        border-bottom-width: $mc-tab-border-width-highlight;
+        padding-bottom: $mc-tab-horizontal-padding - $mc-tab-border-width-highlight + $mc-tab-border-width;
+    }
+
+    @include tab-label-common();
+
+    &.cdk-focused {
+        &:after {
+            top: - $mc-tab-border-width;
+        }
+    }
+}

@@ -1,0 +1,44 @@
+@import '../tabs-common';
+@import '../tabs-theme';
+
+// Wraps the bar containing the anchors
+.mc-tab-nav-bar {
+    display: flex;
+
+    &:not(.mc-tab-group-light) {
+        .mc-tab-link {
+            @include tab-label;
+        }
+    }
+
+    &.mc-tab-group-light {
+        .mc-tab-link {
+            @include tab-label-light;
+        }
+    }
+}
+
+.mc-tab-links {
+    position: relative;
+    display: flex;
+    padding: 1px 1px 0 1px; // Prevent focus border overflow
+}
+
+.mc-tab-link {
+    vertical-align: top;
+    text-decoration: none;  // Removes anchor underline styling
+    -webkit-tap-highlight-color: transparent;
+
+    [mc-stretch-tabs] & {
+        flex-basis: 0;
+        flex-grow: 1;
+    }
+
+    &.mc-tab-disabled {
+        // We use `pointer-events` to make the element unclickable when it's disabled, rather than
+        // preventing the default action through JS, because we can't prevent the action reliably
+        // due to other directives potentially registering their events earlier. This shouldn't cause
+        // the user to click through, because we always have a `.mc-tab-links` behind the link.
+        pointer-events: none;
+    }
+}

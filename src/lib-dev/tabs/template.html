@@ -1,22 +1,79 @@
 <div>
-    <mc-tabs-group (selectionChange)="onSelectionChanged($event)">
-        <mc-tab>Вкладка 1</mc-tab>
-        <mc-tab>Вкладка 2</mc-tab>
-        <mc-tab>Вкладка 3</mc-tab>
-        <mc-tab>Вкладка 4</mc-tab>
-    </mc-tabs-group>
+    <mc-tab-group mc-light-tabs
+                  mc-align-tabs="start">
+        <mc-tab label="First">Content 1</mc-tab>
+        <mc-tab label="Second">Content 2</mc-tab>
+        <mc-tab disabled
+                label="Third">Content 3</mc-tab>
+        <mc-tab label="4">Content 4</mc-tab>
+        <mc-tab label="5">Content 5</mc-tab>
+    </mc-tab-group>
 
-    <mc-tabs-group [disabled]="true">
-        <mc-tab>Вкладка 1</mc-tab>
-        <mc-tab>Вкладка 2</mc-tab>
-        <mc-tab>Вкладка 3</mc-tab>
-        <mc-tab>Вкладка 4</mc-tab>
-    </mc-tabs-group>
+    <mc-tab-group mc-align-tabs="center">
+        <mc-tab label="First">Content 1</mc-tab>
+        <mc-tab disabled
+                label="Second">Content 2</mc-tab>
+        <mc-tab label="Third">Content 3</mc-tab>
+        <mc-tab label="4">Content 4</mc-tab>
+        <mc-tab label="5">Content 5</mc-tab>
+    </mc-tab-group>
 
-    <mc-tabs-group>
-        <mc-tab>Вкладка 1</mc-tab>
-        <mc-tab [disabled]="true">Вкладка 2</mc-tab>
-        <mc-tab>Вкладка 3</mc-tab>
-        <mc-tab>Вкладка 4</mc-tab>
-    </mc-tabs-group>
+    <h3>Navigation</h3>
+
+    <nav mc-tab-nav-bar
+         mc-light-tabs>
+        <a mc-tab-link
+           *ngFor="let link of links"
+           (click)="activeLink = link"
+           [active]="activeLink == link"> {{link}} </a>
+        <a mc-tab-link
+           disabled>Disabled Link</a>
+    </nav>
+
+    <nav mc-tab-nav-bar
+         mc-light-tabs>
+        <a mc-tab-link
+           *ngFor="let link of links"
+           (click)="activeLink = link"
+           [active]="activeLink == link"> {{link}} </a>
+        <a mc-tab-link>Link 2</a>
+        <a mc-tab-link
+           disabled>Link 3</a>
+        <a mc-tab-link>Link 4</a>
+        <a mc-tab-link>Link 5</a>
+    </nav>
+
+    <h3>Very slow animation</h3>
+    <mc-tab-group animationDuration="2000ms">
+        <mc-tab label="First">Content 1</mc-tab>
+        <mc-tab label="Second">Content 2</mc-tab>
+        <mc-tab label="Third">Content 3</mc-tab>
+    </mc-tab-group>
+
+    <mc-tab-group>
+        <mc-tab>
+            <ng-template mc-tab-label>
+                <i mcPreffix
+                   mc-icon="mc-search_16"></i>
+                First
+            </ng-template>
+            Content 1
+        </mc-tab>
+
+        <mc-tab>
+            <ng-template mc-tab-label>
+                Second
+                <i mcPreffix
+                   mc-icon="mc-search_16"></i>
+            </ng-template>
+            Content 2
+        </mc-tab>
+
+        <mc-tab>
+            <ng-template mc-tab-label>
+                Third
+            </ng-template>
+            Content 3
+        </mc-tab>
+    </mc-tab-group>
 </div>

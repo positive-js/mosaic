@@ -1,28 +1,51 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { A11yModule } from '@ptsecurity/cdk/a11y';
-import { PlatformModule } from '@ptsecurity/cdk/platform';
+import { PortalModule } from '@ptsecurity/cdk/portal';
+import { McCommonModule } from '@ptsecurity/mosaic/core';
 
-import {
-    McTabs,
-    McTab
-} from '@ptsecurity/mosaic/tabs/tabs.component';
+import { McTab } from './tab';
+import { McTabBody, McTabBodyPortal } from './tab-body';
+import { McTabContent } from './tab-content';
+import { McTabGroup, McLightTabsCSSStyler } from './tab-group';
+import { McTabHeader } from './tab-header';
+import { McTabLabel } from './tab-label';
+import { McTabLabelWrapper } from './tab-label-wrapper';
+import { McTabLink, McTabNav } from './tab-nav-bar/tab-nav-bar';
 
 
 @NgModule({
-    imports: [
-        CommonModule,
-        A11yModule,
-        PlatformModule
-    ],
-    exports: [
-        McTabs,
-        McTab
-    ],
-    declarations: [
-        McTabs,
-        McTab
-    ]
+  imports: [
+    CommonModule,
+    McCommonModule,
+    PortalModule,
+    A11yModule,
+    BrowserAnimationsModule
+  ],
+  // Don't export all components because some are only to be used internally.
+  exports: [
+    McCommonModule,
+    McTabGroup,
+    McTabLabel,
+    McTab,
+    McTabNav,
+    McTabLink,
+    McTabContent,
+    McLightTabsCSSStyler
+  ],
+  declarations: [
+    McTabGroup,
+    McTabLabel,
+    McTab,
+    McTabLabelWrapper,
+    McTabNav,
+    McTabLink,
+    McTabBody,
+    McTabBodyPortal,
+    McTabHeader,
+    McTabContent,
+    McLightTabsCSSStyler
+  ]
 })
-export class McTabsModule {}
+export class McTabsModule { }
