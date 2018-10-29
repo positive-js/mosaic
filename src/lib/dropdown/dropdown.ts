@@ -71,7 +71,6 @@ export function MC_DROPDOWN_DEFAULT_OPTIONS_FACTORY(): McDropdownDefaultOptions 
 }
 
 @Component({
-    // moduleId: module.id,
     selector: 'mc-dropdown',
     templateUrl: 'dropdown.html',
     styleUrls: ['dropdown.css'],

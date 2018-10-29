@@ -29,7 +29,6 @@ export const _McDropdownItemMixinBase: CanDisableCtor & typeof McDropdownItemBas
  * It exists mostly to set the role attribute.
  */
 @Component({
-    // moduleId: module.id,
     selector: 'mc-dropdown-item, [mc-dropdown-item]',
     exportAs: 'mcDropdownItem',
     inputs: ['disabled'],
