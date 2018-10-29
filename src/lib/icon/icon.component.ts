@@ -21,8 +21,7 @@ export class McIconBase {
     constructor(public _elementRef: ElementRef) {}
 }
 
-export const _McIconMixinBase: CanColorCtor & typeof McIconBase
-    = mixinColor(McIconBase);
+export const _McIconMixinBase: CanColorCtor & typeof McIconBase = mixinColor(McIconBase);
 
 
 @Component({

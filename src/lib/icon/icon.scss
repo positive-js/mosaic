@@ -1,5 +1,12 @@
-@import 'icon-base';
 @import 'icon-theme';
+
+
+@mixin mc-icon-size($padding, $line-height, $font-size) {
+    padding: $padding;
+    line-height: $line-height;
+    font-size: $font-size;
+}
+
 
 .mc-icon-rotate_90 {
     transform: rotate(90deg);

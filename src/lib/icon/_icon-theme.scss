@@ -4,26 +4,31 @@
 @import '../core/theming/palette';
 
 
-@mixin _mc-icon-color($palette) {
-    color: mc-color($palette, 400);
-}
-
 @mixin mc-icon-theme($theme) {
     .mc-icon {
         $primary: map-get($theme, primary);
         $second: map-get($theme, second);
         $error: map-get($theme, error);
 
+        $foreground: map-get($theme, foreground);
+        $background: map-get($theme, background);
+
+        background: map-get($background, background);;
+
         &.mc-primary {
-            @include _mc-icon-color($primary);
+            color: mc-color($primary, 400);
         }
 
         &.mc-second {
-            @include _mc-icon-color($second);
+            color: mc-color($second, 400);
         }
 
         &.mc-error {
-            @include _mc-icon-color($error);
+            color: mc-color($error);
+        }
+
+        &:not(.mc-primary):not(.mc-second):not(.mc-error) {
+            color: map-get($foreground, default-icon);
         }
     }
 }
