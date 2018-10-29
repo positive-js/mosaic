@@ -1,59 +1,31 @@
 <div class="container">
 
-    <header>Number Value: {{numberValue}}</header>
+    <header>Number Value: {{ numberValue }}</header>
     <br>
 
-    <header>Without placeholder:</header>
-    <mc-form-field>
-        <input mcInput [(ngModel)]="numberValue" type="number">
-        <mc-stepper></mc-stepper>
-    </mc-form-field>
+    <button mc-icon-button>
+        <i mc-icon="mc-angle-L_16"></i>
+    </button>
 
-    <br><br>
+    <br>
+    <br>
 
-    <header>With placeholder:</header>
-    <mc-form-field>
-        <input mcInput [(ngModel)]="numberValue" type="number" placeholder="Number Value">
-        <mc-stepper></mc-stepper>
-    </mc-form-field>
-
-    <br><br>
-
-    <header>Min = -5 Max = 7 Step = 0.5 Big step = 1.5 </header>
     <mc-form-field>
         <input mcInput [(ngModel)]="numberValue" type="number" placeholder="Number MaxMin Step"
                [min]="min" max="7" step="0.5" big-step="1.5">
         <mc-stepper></mc-stepper>
     </mc-form-field>
 
-    <br><br>
+    <br>
+    <br>
 
-    <header>Min = -5 </header>
-    <mc-form-field>
-        <input mcInput [(ngModel)]="numberValue" type="number" placeholder="Min only" min="-5">
-        <mc-stepper></mc-stepper>
+    <mc-form-field class="mc-focused">
+        <input mcInput [(ngModel)]="value" placeholder="Placeholder">
+
+        <i mcSuffix mc-icon="mc-calendar_16"></i>
     </mc-form-field>
 
-    <br><br>
-
-    <header>Step = 0.5 </header>
-    <mc-form-field>
-        <input mcInput [(ngModel)]="numberValue" type="number" placeholder="Step only" step="0.5">
-        <mc-stepper></mc-stepper>
-    </mc-form-field>
-
-    <br><br>
-
-    <header>Without placeholder:</header>
-    <mc-form-field>
-        <input mcInput [(ngModel)]="numberValue" type="number" disabled>
-        <mc-stepper></mc-stepper>
-    </mc-form-field>
-
-    <br><br>
-
-
-    <header>Value: {{value}}</header>
+    <br>
     <br>
 
     <header>Without placeholder:</header>

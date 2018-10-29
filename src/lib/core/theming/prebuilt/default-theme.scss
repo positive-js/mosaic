@@ -2,8 +2,9 @@
 
 
 // Define a theme.
-$primary: mc-palette($mc-blue, 500, 600, 600);
-$second: mc-palette($mc-grey, 40, 60, 100);
+$primary: mc-palette($mc-blue, 400, 500, 600);
+$second: mc-palette($mc-grey, 100, 300, 400);
+$error: mc-palette($mc-red, 40, 500, 700);
 
 $theme: mc-light-theme($primary, $second);
 

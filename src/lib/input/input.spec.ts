@@ -135,7 +135,7 @@ describe('McInput', () => {
                 fixture.debugElement.query(By.directive(McFormField)).nativeElement;
             const inputElement = fixture.debugElement.query(By.directive(McInput)).nativeElement;
 
-            expect(formFieldElement.classList.contains('mc-form-field_disabled'))
+            expect(formFieldElement.classList.contains('mc-disabled'))
                 .toBe(false);
             expect(inputElement.disabled).toBe(false);
 
@@ -143,7 +143,7 @@ describe('McInput', () => {
             fixture.detectChanges();
 
             fixture.whenStable().then(() => {
-                expect(formFieldElement.classList.contains('mc-form-field_disabled'))
+                expect(formFieldElement.classList.contains('mc-disabled'))
                     .toBe(true);
                 expect(inputElement.disabled).toBe(true);
             });

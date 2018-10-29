@@ -9,10 +9,6 @@ import {
     McAnchor,
     McIconButton,
     McButtonCSSStyler,
-    McXSButtonCSSStyler,
-    McSMButtonCSSStyler,
-    McLGButtonCSSStyler,
-    McXLButtonCSSStyler,
     McIconButtonCSSStyler
 } from './button.component';
 
@@ -28,10 +24,6 @@ import {
         McAnchor,
         McIconButton,
         McButtonCSSStyler,
-        McXSButtonCSSStyler,
-        McSMButtonCSSStyler,
-        McLGButtonCSSStyler,
-        McXLButtonCSSStyler,
         McIconButtonCSSStyler
     ],
     declarations: [
@@ -39,10 +31,6 @@ import {
         McAnchor,
         McIconButton,
         McButtonCSSStyler,
-        McXSButtonCSSStyler,
-        McSMButtonCSSStyler,
-        McLGButtonCSSStyler,
-        McXLButtonCSSStyler,
         McIconButtonCSSStyler
     ]
 })
