@@ -39,17 +39,17 @@
     $default: map-get($theme, default);
     $primary: map-get($theme, primary);
     $second: map-get($theme, second);
-    $info: map-get($theme, primary);
+    $info: map-get($theme, info);
     $error: map-get($theme, error);
     $warning: map-get($theme, warning);
     $success: map-get($theme, success);
-    $background-info: map-get($theme, background);
-    $foreground-info: map-get($theme, foreground);
-    $white-background-color: if($isDark, mc-color($second, 700), map-get($background-info, background));
-    $foreground-color: map-get($foreground-info, base);
+    $theme-background: map-get($theme, background);
+    $theme-foreground: map-get($theme, foreground);
+    $white-background-color: if($isDark, mc-color($second, 700), map-get($theme-background, background));
+    $foreground-color: map-get($theme-foreground, base);
     
-    $hover-color: map-get($background-info, hover);
-    $focus-color: mc-color($primary, 500);
+    $hover-color: map-get($theme-background, hover);
+    $focus-color: mc-color($primary, lighter);
     
     .mc-card {
         background-color: mc-color($default, 60);

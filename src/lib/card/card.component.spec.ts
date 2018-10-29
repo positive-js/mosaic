@@ -26,7 +26,7 @@ describe('MсCard', () => {
         cardDebugElement = fixture.debugElement.query(By.directive(McCard));
         cardNativeElement = cardDebugElement.nativeElement;
         testComponent = fixture.debugElement.componentInstance;
-        wraperElement = <HTMLInputElement> cardNativeElement.querySelector('.mc-card-wrapper');
+        wraperElement = <HTMLInputElement> cardNativeElement.querySelector('.mc-card__wrapper');
     }));
 
     it('should apply class based on status', () => {
