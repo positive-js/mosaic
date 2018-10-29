@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
-import { ENTER, SPACE } from '@ptsecurity/cdk/keycodes';
+import { SPACE } from '@ptsecurity/cdk/keycodes';
 
 
 export enum Status {
@@ -16,18 +16,6 @@ export enum Status {
     Success,
     Warning,
     Error
-}
-
-@Directive({
-    selector: '[content-left]'
-})
-export class ContentLeft {
-}
-
-@Directive({
-    selector: '[content-right]'
-})
-export class ContentRight {
 }
 
 const name = 'mc-card';
@@ -70,12 +58,6 @@ export class McCard implements OnDestroy {
 
     @Input()
     status: Status = Status.Info;
-
-    @ContentChild(ContentLeft)
-    contentLeft: any;
-
-    @ContentChild(ContentRight)
-    contentRight: any;
 
     private _tabIndex: number | null = 0;
 

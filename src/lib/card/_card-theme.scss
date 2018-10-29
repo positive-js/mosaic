@@ -49,7 +49,7 @@
     $foreground-color: map-get($foreground-info, base);
     
     $hover-color: map-get($background-info, hover);
-    $focus-color: mc-color($primary, 400);
+    $focus-color: mc-color($primary, 500);
     
     .mc-card {
         background-color: mc-color($default, 60);

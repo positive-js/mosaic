@@ -2,77 +2,79 @@
     <h3>Обычные</h3>
     <div class="line">
         <mc-card [status]="state.Info" [selected]="s1" (selectedChange)="s1 = !s1">
-            Content
+            <div class="simple-content">
+                Content
+            </div>
         </mc-card>
 
         <mc-card [status]="state.Warning" [selected]="s2" (selectedChange)="s2 = !s2">
-            <!--<div style="width: 100px; height: 100px; background: cyan"></div>-->
-            Content 2
+            <div class="simple-content">
+                Content 2
+            </div>
         </mc-card>
 
         <mc-card [status]="state.Success" [selected]="s3" (selectedChange)="s3 = !s3">
-            Content 3
+            <div class="simple-content">
+                Content 3
+            </div>
         </mc-card>
 
         <mc-card [status]="state.Error" [selected]="s4" (selectedChange)="s4 = !s4">
-            Content 4
+            <div class="simple-content">
+                Content 4
+            </div>
         </mc-card>
     </div>
     <h3>Белые</h3>
     <div class="line">
         <mc-card [status]="state.Info" mode="white" [selected]="s1" (selectedChange)="s1 = !s1">
-            Content
+            <div class="simple-content">
+                Content
+            </div>
         </mc-card>
 
         <mc-card [status]="state.Warning" mode="white" [selected]="s2" (selectedChange)="s2 = !s2">
-            <!--<div style="width: 100px; height: 100px; background: cyan"></div>-->
-            Content 2
+            <div class="simple-content">
+                Content 2
+            </div>
         </mc-card>
 
         <mc-card [status]="state.Success" mode="white" [selected]="s3" (selectedChange)="s3 = !s3">
-            Content 3
+            <div class="simple-content">
+                Content 3
+            </div>
         </mc-card>
 
         <mc-card [status]="state.Error" mode="white" [selected]="s4" (selectedChange)="s4 = !s4">
-            Content 4
+            <div class="simple-content">
+                Content 4
+            </div>
         </mc-card>
     </div>
     <h3>Неинтерактивные</h3>
     <div class="line">
         <mc-card [status]="state.Info" [selected]="s1" (selectedChange)="s1 = !s1" [readonly]="true">
-            Content
+            <div class="simple-content">
+                Content
+            </div>
         </mc-card>
 
         <mc-card [status]="state.Warning" [selected]="s2" (selectedChange)="s2 = !s2" [readonly]="true">
-            <!--<div style="width: 100px; height: 100px; background: cyan"></div>-->
-            Content 2
+            <div class="simple-content">
+                Content 2
+            </div>
         </mc-card>
 
         <mc-card [status]="state.Success" [selected]="s3" (selectedChange)="s3 = !s3" [readonly]="true">
-            Content 3
+            <div class="simple-content">
+                Content 3
+            </div>
         </mc-card>
 
         <mc-card [status]="state.Error" [selected]="s4" (selectedChange)="s4 = !s4" [readonly]="true">
-            Content 4
-        </mc-card>
-    </div>
-    <h3>Дополнительный контент</h3>
-    <div class="line">
-        <mc-card [status]="state.Info" [selected]="s1" (selectedChange)="s1 = !s1" >
-            <i class="mc mc-upload-to-cloud_24" content-left></i>
-            Content
-            <i class="mc mc-close-L_16" content-right></i>
-        </mc-card>
-        <mc-card [status]="state.Info" [selected]="s2" (selectedChange)="s1 = !s1" >
-            Content
-            <i class="mc mc-close-L_16" content-right></i>
-        </mc-card>
-        <mc-card [status]="state.Info" [selected]="s3" (selectedChange)="s1 = !s1" >
-            <i class="mc mc-upload-to-cloud_24" content-left></i>
-            Content
-        </mc-card>
-        <mc-card [status]="state.Info" [selected]="s4" (selectedChange)="s1 = !s1" >
-            Content
+            <div class="simple-content">
+                Content 4
+            </div>
         </mc-card>
     </div>
 </div>

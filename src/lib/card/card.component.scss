@@ -10,41 +10,8 @@
 
     &__wrapper {
         flex: auto;
-        display: flex;
-        flex-direction: row;
-        
-        %content-base {
-            display: flex;
-            flex-direction: column;
-            position: relative;
-        }
-    
-        .mc-card__content-left {
-            @extend %content-base;
-            
-            flex: none;
-            margin: 16px 12px;
-    
-            &.mc-card_has-content {
-                margin-left: 20px;
-            }
-        }
-        
-        .mc-card__main-content {
-            @extend %content-base;
-            flex: auto;
-            margin: 12px 0;
-        }
-        
-        .mc-card__content-right {
-            @extend %content-base;
-            flex: none;
-            margin: 8px 16px 8px 8px;
-    
-            &.mc-card_has-content {
-                margin-right: 8px;
-            }
-        }
+        display: block;
+        padding-left: 4px;
     }
     
     &:focus {

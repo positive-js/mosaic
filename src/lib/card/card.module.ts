@@ -5,7 +5,6 @@ import { A11yModule } from '@ptsecurity/cdk/a11y';
 import { PlatformModule } from '@ptsecurity/cdk/platform';
 
 import {
-    ContentLeft, ContentRight,
     McCard
 } from './card.component';
 
@@ -17,14 +16,10 @@ import {
         PlatformModule
     ],
     exports: [
-        McCard,
-        ContentLeft,
-        ContentRight
+        McCard
     ],
     declarations: [
-        McCard,
-        ContentLeft,
-        ContentRight
+        McCard
     ]
 })
 export class McCardModule {}
