@@ -6,7 +6,7 @@ import {
     Inject,
     InjectionToken,
     Input,
-    OnDestroy,
+    OnDestroy, OnInit,
     Optional,
     Output,
     ViewContainerRef
@@ -26,10 +26,9 @@ import { TemplatePortal } from '@ptsecurity/cdk/portal';
 import { merge, Subscription } from 'rxjs';
 import { filter, take, takeUntil } from 'rxjs/operators';
 
-import { McDropdown } from './dropdown';
 import { throwMcDropdownMissingError } from './dropdown-errors';
 import { McDropdownPanel } from './dropdown-panel';
-import { DropdownPositionX, DropdownPositionY } from './dropdown-positions';
+import { McDropdown } from './dropdown.component';
 
 
 /** Injection token that determines the scroll handling while the dropdown is open. */
@@ -62,7 +61,7 @@ export const MC_DROPDOWN_SCROLL_STRATEGY_FACTORY_PROVIDER = {
     },
     exportAs: 'mcDropdownTrigger'
 })
-export class McDropdownTrigger implements AfterContentInit, OnDestroy {
+export class McDropdownTrigger implements OnInit, AfterContentInit, OnDestroy {
 
     /** Whether the dropdown is open. */
     get opened(): boolean {
@@ -102,6 +101,10 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
                 @Inject(MC_DROPDOWN_SCROLL_STRATEGY) private _scrollStrategy: any,
                 @Optional() private _dir: Directionality,
                 private _focusMonitor?: FocusMonitor) {}
+
+    ngOnInit(): void {
+        this.dropdown.closed = this.dropdown.closed || new EventEmitter<void | 'click' | 'keydown' | 'tab'>();
+    }
 
     ngAfterContentInit() {
         this._check();
@@ -300,11 +303,15 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
      */
     private _subscribeToPositions(position: FlexibleConnectedPositionStrategy): void {
         if (this.dropdown.setPositionClasses) {
-            position.positionChanges.subscribe((change) => {
+            // todo possibly we should not recompute positions there
+            /*position.positionChanges.subscribe((change) => {
                 const posX: DropdownPositionX = change.connectionPair.overlayX === 'start' ? 'after' : 'before';
                 const posY: DropdownPositionY = change.connectionPair.overlayY === 'top' ? 'below' : 'above';
 
                 this.dropdown.setPositionClasses!(posX, posY);
+            });*/
+            position.positionChanges.subscribe(() => {
+                this.dropdown.setPositionClasses!(this.dropdown.xPosition, this.dropdown.yPosition);
             });
         }
     }

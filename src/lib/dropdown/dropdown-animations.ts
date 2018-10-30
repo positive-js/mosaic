@@ -17,7 +17,7 @@ import {
  * @docs-private
  */
 export const mcDropdownAnimations: {
-    readonly transformMenu: AnimationTriggerMetadata;
+    readonly transformDropdown: AnimationTriggerMetadata;
     readonly fadeInItems: AnimationTriggerMetadata;
 } = {
     /**
@@ -28,7 +28,7 @@ export const mcDropdownAnimations: {
      * When the dropdown panel is removed from the DOM, it simply fades out after a brief
      * delay to display the ripple.
      */
-    transformMenu: trigger('transformMenu', [
+    transformDropdown: trigger('transformDropdown', [
         state('void', style({
             opacity: 0,
             transform: 'scale(0.8)'
@@ -57,4 +57,4 @@ export const mcDropdownAnimations: {
 
 export const fadeInItems = mcDropdownAnimations.fadeInItems;
 
-export const transformMenu = mcDropdownAnimations.transformMenu;
+export const transformDropdown = mcDropdownAnimations.transformDropdown;

@@ -3,10 +3,10 @@ import { NgModule } from '@angular/core';
 import { OverlayModule } from '@ptsecurity/cdk/overlay';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 
-import { McDropdown } from './dropdown';
 import { McDropdownContent } from './dropdown-content';
 import { McDropdownItem } from './dropdown-item';
 import { MC_DROPDOWN_SCROLL_STRATEGY_FACTORY_PROVIDER, McDropdownTrigger } from './dropdown-trigger';
+import { McDropdown } from './dropdown.component';
 
 
 @NgModule({

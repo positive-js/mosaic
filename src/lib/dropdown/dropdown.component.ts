@@ -22,7 +22,7 @@ import {
 import { FocusKeyManager, FocusOrigin } from '@ptsecurity/cdk/a11y';
 import { Direction } from '@ptsecurity/cdk/bidi';
 import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
-import { ESCAPE, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, UP_ARROW } from '@ptsecurity/cdk/keycodes';
+import { ESCAPE, DOWN_ARROW, UP_ARROW } from '@ptsecurity/cdk/keycodes';
 import { merge, Observable, Subject, Subscription } from 'rxjs';
 import { startWith, switchMap, take } from 'rxjs/operators';
 
@@ -34,7 +34,7 @@ import { MC_DROPDOWN_PANEL, McDropdownPanel } from './dropdown-panel';
 import { DropdownPositionX, DropdownPositionY } from './dropdown-positions';
 
 
-/** Default `mat-dropdown` options that can be overridden. */
+/** Default `mc-dropdown` options that can be overridden. */
 // tslint:disable-next-line:interface-name
 export interface McDropdownDefaultOptions {
     /** The x-axis position of the dropdown. */
@@ -53,9 +53,9 @@ export interface McDropdownDefaultOptions {
     hasBackdrop?: boolean;
 }
 
-/** Injection token to be used to override the default options for `mat-dropdown`. */
+/** Injection token to be used to override the default options for `mc-dropdown`. */
 export const MC_DROPDOWN_DEFAULT_OPTIONS =
-    new InjectionToken<McDropdownDefaultOptions>('mat-dropdown-default-options', {
+    new InjectionToken<McDropdownDefaultOptions>('mc-dropdown-default-options', {
         providedIn: 'root',
         factory: MC_DROPDOWN_DEFAULT_OPTIONS_FACTORY
     });
@@ -78,7 +78,7 @@ export function MC_DROPDOWN_DEFAULT_OPTIONS_FACTORY(): McDropdownDefaultOptions 
     encapsulation: ViewEncapsulation.None,
     exportAs: 'mcDropdown',
     animations: [
-        mcDropdownAnimations.transformMenu,
+        mcDropdownAnimations.transformDropdown,
         mcDropdownAnimations.fadeInItems
     ],
     providers: [
@@ -124,7 +124,7 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
     }
 
     /**
-     * This method takes classes set on the host mat-dropdown element and applies them on the
+     * This method takes classes set on the host mc-dropdown element and applies them on the
      * dropdown template that displays in the overlay container.  Otherwise, it's difficult
      * to style the containing dropdown from outside the component.
      * @param classes list of class names
@@ -154,9 +154,6 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
     /** Whether the dropdown is animating. */
     _isAnimating: boolean;
 
-    /** Parent dropdown of the current dropdown panel. */
-    parentMenu: McDropdownPanel | undefined;
-
     /** Layout direction of the dropdown. */
     direction: Direction;
 
@@ -172,7 +169,7 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
     @ContentChildren(McDropdownItem) items: QueryList<McDropdownItem>;
 
     /**
-     * Menu content that will be rendered lazily.
+     * Dropdown content that will be rendered lazily.
      * @docs-private
      */
     @ContentChild(McDropdownContent) lazyContent: McDropdownContent;
@@ -185,7 +182,7 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
     private _xPosition: DropdownPositionX = this._defaultOptions.xPosition;
     private _yPosition: DropdownPositionY = this._defaultOptions.yPosition;
 
-    /** Menu items inside the current dropdown. */
+    /** Dropdown items inside the current dropdown. */
     private _items: McDropdownItem[] = [];
 
     /** Emits whenever the amount of dropdown items changes. */
@@ -232,21 +229,12 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
             case ESCAPE:
                 this.closed.emit('keydown');
                 break;
-            case LEFT_ARROW:
-                if (this.parentMenu && this.direction === 'ltr') {
-                    this.closed.emit('keydown');
-                }
+            case UP_ARROW:
+            case DOWN_ARROW:
+                this._keyManager.setFocusOrigin('keyboard');
+                this._keyManager.onKeydown(event);
                 break;
-            case RIGHT_ARROW:
-                if (this.parentMenu && this.direction === 'rtl') {
-                    this.closed.emit('keydown');
-                }
-                break;
-            default:
-                if (keyCode === UP_ARROW || keyCode === DOWN_ARROW) {
-                    this._keyManager.setFocusOrigin('keyboard');
-                }
-
+              default:
                 this._keyManager.onKeydown(event);
         }
     }

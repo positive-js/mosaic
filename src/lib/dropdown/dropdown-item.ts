@@ -35,7 +35,6 @@ export const _McDropdownItemMixinBase: CanDisableCtor & typeof McDropdownItemBas
     host: {
         role: 'dropdown-item',
         class: 'mc-dropdown__item',
-        '[class.mc-dropdown__item-highlighted]': '_highlighted',
         '[attr.tabindex]': '_getTabIndex()',
         '[attr.aria-disabled]': 'disabled.toString()',
         '[attr.disabled]': 'disabled || null',
@@ -51,9 +50,6 @@ export class McDropdownItem extends _McDropdownItemMixinBase
 
     /** Stream that emits when the dropdown item is hovered. */
     readonly _hovered: Subject<McDropdownItem> = new Subject<McDropdownItem>();
-
-    /** Whether the dropdown item is highlighted. */
-    _highlighted: boolean = false;
 
     private _document: Document;
 
