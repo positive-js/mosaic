@@ -26,7 +26,7 @@ import {
 import {
     noop,
     Subject
-} from 'rxjs';  // tslint:disable-line rxjs-no-wholesale
+} from 'rxjs';
 
 import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import {
@@ -230,7 +230,7 @@ export class McTimepicker extends McTimepickerMixinBase
     private readonly uid = `mc-timepicker-${uniqueComponentIdSuffix++}`;
     private _disabled: boolean;
     private _required: boolean;
-    private _previousNativeValue: any;
+    private previousNativeValue: any;
     private readonly inputValueAccessor: { value: any };
     private onChange: (value: any) => void;
     private onTouched: () => void;
@@ -254,7 +254,7 @@ export class McTimepicker extends McTimepickerMixinBase
         // accessor.
         this.inputValueAccessor = inputValueAccessor || this.elementRef.nativeElement;
 
-        this._previousNativeValue = this.value;
+        this.previousNativeValue = this.value;
         this.onChange = noop;
 
         // Force setter to be called in case id was not specified.
@@ -411,8 +411,8 @@ export class McTimepicker extends McTimepickerMixinBase
     private dirtyCheckNativeValue() {
         const newValue = this.value;
 
-        if (this._previousNativeValue !== newValue) {
-            this._previousNativeValue = newValue;
+        if (this.previousNativeValue !== newValue) {
+            this.previousNativeValue = newValue;
             this.stateChanges.next();
         }
     }
