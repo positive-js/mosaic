@@ -59,9 +59,9 @@ export class McToggleChange {
     },
     animations: [
         trigger('switch', [
-            state('true' , style({ right: '-1px' })),
-            state('false', style({ right: '*' })),
-            transition('* => *', animate('150ms'))
+            state('true' , style({ left: '50%' })),
+            state('false', style({ left: '1px' })),
+            transition('true <=> false', animate('150ms'))
         ])
     ]
 })

@@ -63,6 +63,7 @@ mc-toggle {
         border-radius: 100%;
         margin-top: -1px; // due to border
         margin-left: -1px; // due to border
+        transform: translateX(-1px); // due to EDGE animation features
     }
 }
 
