@@ -5,30 +5,78 @@
 
 
 @mixin mc-icon-theme($theme) {
-    .mc-icon {
-        $primary: map-get($theme, primary);
-        $second: map-get($theme, second);
-        $error: map-get($theme, error);
+    $primary: map-get($theme, primary);
+    $second: map-get($theme, second);
+    $error: map-get($theme, error);
 
-        $foreground: map-get($theme, foreground);
-        $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
 
         background: map-get($background, background);;
 
+    $primary-color: mc-color($primary, 400);
+    $second-color: mc-color($second);
+    $error-color: mc-color($error);
+
+    // Дефолтные серые иконки default-icon: лупа в поле, иконки дропдаунов v, все иконки вне полей.
+    .mc-icon:not(.mc-icon_light) {
         &.mc-primary {
-            color: mc-color($primary, 400);
+            color: mix(map-get($foreground, default-icon), $primary-color);
+
+            &[disabled],
+            &.mc-disabled {
+                color: $primary-color;
+            }
         }
 
         &.mc-second {
-            color: mc-color($second);
+            color: mix(map-get($foreground, default-icon), $second-color, 70%);
+
+            &[disabled],
+            &.mc-disabled {
+                color: mc-color($second);
+            }
         }
 
         &.mc-error {
-            color: mc-color($error);
+            color: mix(map-get($foreground, default-icon), $error-color);
+
+            &[disabled],
+            &.mc-disabled {
+                color: $error-color;
+            }
         }
 
         &:not(.mc-primary):not(.mc-second):not(.mc-error) {
             color: map-get($foreground, default-icon);
+        }
+    }
+
+    // Облегченные серые иконки less-contrast-icon нужны тогда, когда действие, которое они делают не дефолтное и
+    // не самое важное. Не используются вне инпутов или селектов.
+    .mc-icon.mc-icon_light {
+        &.mc-primary {
+            color: $primary-color;
+
+            &:hover {
+                color: mix(map-get($foreground, text), $primary-color);
+            }
+        }
+
+        &.mc-second {
+            color: $second-color;
+
+            &:hover {
+                color: mix(map-get($foreground, text), $second-color, 90%);
+            }
+        }
+
+        &.mc-error {
+            color: $error-color;
+
+            &:hover {
+                color: mix(map-get($foreground, text), $error-color);
+            }
         }
     }
 }

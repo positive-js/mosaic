@@ -4,7 +4,7 @@
 // Define a theme.
 $primary: mc-palette($mc-blue, 300, 400, 500);
 $second: mc-palette($mc-grey, 600, 500, 400);
-$error: mc-palette($mc-red, 40, 400, 700);
+$error: mc-palette($mc-red, 40, 400, 600);
 
 $theme: mc-dark-theme($primary, $second, $error);
 

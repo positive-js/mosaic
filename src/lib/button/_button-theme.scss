@@ -46,7 +46,7 @@
     color: map-get($foreground, text);
 
     .mc-icon {
-        color: mc-color($palette, 500);
+        color: map-get($foreground, text);
     }
 
     &:hover,
