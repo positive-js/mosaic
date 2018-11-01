@@ -1,0 +1,80 @@
+<div class="container">
+    <h3>Обычные</h3>
+    <div class="line">
+        <mc-card [status]="state.Info" [selected]="s1" (selectedChange)="s1 = !s1">
+            <div class="simple-content">
+                Content
+            </div>
+        </mc-card>
+
+        <mc-card [status]="state.Warning" [selected]="s2" (selectedChange)="s2 = !s2">
+            <div class="simple-content">
+                Content 2
+            </div>
+        </mc-card>
+
+        <mc-card [status]="state.Success" [selected]="s3" (selectedChange)="s3 = !s3">
+            <div class="simple-content">
+                Content 3
+            </div>
+        </mc-card>
+
+        <mc-card [status]="state.Error" [selected]="s4" (selectedChange)="s4 = !s4">
+            <div class="simple-content">
+                Content 4
+            </div>
+        </mc-card>
+    </div>
+    <h3>Белые</h3>
+    <div class="line">
+        <mc-card [status]="state.Info" mode="white" [selected]="s1" (selectedChange)="s1 = !s1">
+            <div class="simple-content">
+                Content
+            </div>
+        </mc-card>
+
+        <mc-card [status]="state.Warning" mode="white" [selected]="s2" (selectedChange)="s2 = !s2">
+            <div class="simple-content">
+                Content 2
+            </div>
+        </mc-card>
+
+        <mc-card [status]="state.Success" mode="white" [selected]="s3" (selectedChange)="s3 = !s3">
+            <div class="simple-content">
+                Content 3
+            </div>
+        </mc-card>
+
+        <mc-card [status]="state.Error" mode="white" [selected]="s4" (selectedChange)="s4 = !s4">
+            <div class="simple-content">
+                Content 4
+            </div>
+        </mc-card>
+    </div>
+    <h3>Неинтерактивные</h3>
+    <div class="line">
+        <mc-card [status]="state.Info" [selected]="s1" (selectedChange)="s1 = !s1" [readonly]="true">
+            <div class="simple-content">
+                Content
+            </div>
+        </mc-card>
+
+        <mc-card [status]="state.Warning" [selected]="s2" (selectedChange)="s2 = !s2" [readonly]="true">
+            <div class="simple-content">
+                Content 2
+            </div>
+        </mc-card>
+
+        <mc-card [status]="state.Success" [selected]="s3" (selectedChange)="s3 = !s3" [readonly]="true">
+            <div class="simple-content">
+                Content 3
+            </div>
+        </mc-card>
+
+        <mc-card [status]="state.Error" [selected]="s4" (selectedChange)="s4 = !s4" [readonly]="true">
+            <div class="simple-content">
+                Content 4
+            </div>
+        </mc-card>
+    </div>
+</div>
