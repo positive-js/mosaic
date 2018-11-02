@@ -4,33 +4,26 @@ import {
     Component,
     ElementRef, Input,
     OnDestroy, EventEmitter,
-    ViewEncapsulation, HostBinding, Directive, ContentChild
+    ViewEncapsulation, HostBinding
 } from '@angular/core';
 
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { SPACE } from '@ptsecurity/cdk/keycodes';
 
 
-export enum Status {
-    Info,
-    Success,
-    Warning,
-    Error
-}
-
-const name = 'mc-card';
-
 @Component({
-    selector: name,
+    selector: 'mc-card',
     templateUrl: './card.component.html',
     styleUrls: ['./card.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     inputs: ['color'],
     host: {
-        class: name,
+        class: 'mc-card',
         '[class.mc-card_readonly]': 'readonly',
-        '(keydown)': 'onKeyDown($event)'
+        '[class.mc-card_selected]': 'selected',
+        '(keydown)': 'onKeyDown($event)',
+        '(click)': 'onClick($event)'
     }
 })
 export class McCard implements OnDestroy {
@@ -53,35 +46,10 @@ export class McCard implements OnDestroy {
     @Output()
     selectedChange = new EventEmitter<boolean>();
 
-    @Input()
-    mode: 'color' | 'white' = 'color';
-
-    @Input()
-    status: Status = Status.Info;
-
     private _tabIndex: number | null = 0;
 
     constructor(private _elementRef: ElementRef, private _focusMonitor: FocusMonitor) {
         this._focusMonitor.monitor(this._elementRef.nativeElement, false);
-    }
-
-    get statusClass() {
-        switch (this.status) {
-            case Status.Error:
-                return `${name}_error`;
-            case Status.Info:
-                return `${name}_info`;
-            case Status.Success:
-                return `${name}_success`;
-            case Status.Warning:
-                return `${name}_warning`;
-            default:
-                return '';
-        }
-    }
-
-    get isWhiteMode() {
-        return this.mode === 'white';
     }
 
     ngOnDestroy() {
@@ -92,9 +60,10 @@ export class McCard implements OnDestroy {
         this.hostElement.focus();
     }
 
-    clicked($event: MouseEvent) {
+    onClick($event: MouseEvent) {
         if (!this.readonly) {
             $event.stopPropagation();
+
             this.selectedChange.emit(!this.selected);
         }
     }
@@ -104,8 +73,7 @@ export class McCard implements OnDestroy {
     }
 
     onKeyDown($event: KeyboardEvent) {
-        const keyCode = $event.keyCode;
-        switch (keyCode) {
+        switch ($event.keyCode) {
             case SPACE:
                 if (!this.readonly) {
                     $event.preventDefault();

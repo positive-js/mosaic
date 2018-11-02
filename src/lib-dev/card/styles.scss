@@ -1,16 +1,8 @@
 @import '~@ptsecurity/mosaic-icons/dist/styles/mc-icons';
 
-// Светлая
-//@import '../../lib/core/theming/prebuilt/default-theme';
+@import '../../lib/core/theming/prebuilt/default-theme';
+//@import '../../lib/core/theming/prebuilt/dark-theme';
 
-//// Темная
-@import '../../lib/core/theming/prebuilt/dark-theme';
-
-html {
-    background: mc-color($mc-grey, 800);
-    color: white;
-}
-//// Темная конец
 
 mc-card {
     margin-right: 10px;
