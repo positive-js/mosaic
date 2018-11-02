@@ -7,6 +7,10 @@
         background: transparent;
     }
 
+    .mc-icon {
+        color: mc-contrast($palette, 500);
+    }
+
     &:hover,
     &.mc-hover {
         & .mc-button-overlay {
@@ -27,7 +31,11 @@
         color: transparentize(mc-contrast($palette, 500), 0.5);
 
         & .mc-button-overlay {
-            background: mc-color($background, button-disabled-overlay);
+            background: mc-color($background, disabled-overlay);
+        }
+
+        .mc-icon {
+            color: transparentize(mc-contrast($palette, 500), 0.5);
         }
     }
 }
@@ -36,6 +44,10 @@
     border-color: mc-color($background, button-border);
     background: map-get($background, button-bg);
     color: map-get($foreground, text);
+
+    .mc-icon {
+        color: map-get($foreground, text);
+    }
 
     &:hover,
     &.mc-hover {
@@ -57,15 +69,37 @@
         color: map-get($foreground, disabled-text);
 
         & .mc-button-overlay {
-            background: mc-color($background, button-disabled-overlay);
+            background: mc-color($background, disabled-overlay);
+        }
+
+        .mc-icon {
+            color: map-get($foreground, disabled-text);
         }
     }
 }
 
-@mixin _mc-button-error-color($secondPalette, $errorPalette, $foreground, $background) {
-    @include _mc-button-second-color($secondPalette, $foreground, $background);
+@mixin _mc-button-error-color($second, $error, $foreground, $background) {
+    @include _mc-button-second-color($second, $foreground, $background);
 
-    color: mc-color($errorPalette);
+    color: mc-color($error);
+
+    .mc-icon {
+        color: mc-color($error, 400);
+    }
+
+    &.mc-disabled,
+    &[disabled] {
+        border-color: mc-color($background, button-bg);
+        color: map-get($foreground, disabled-text);
+
+        & .mc-button-overlay {
+            background: mc-color($background, disabled-overlay);
+        }
+
+        .mc-icon {
+            color: map-get($foreground, disabled-text);
+        }
+    }
 }
 
 @mixin _mc-button-theme-color($theme) {
@@ -95,7 +129,7 @@
         -webkit-font-smoothing: antialiased;
 
         &.cdk-keyboard-focused {
-            $focus-color: map-get($primary, lighter);
+            $focus-color: mc-color($primary);
 
             border-color: $focus-color;
             box-shadow: 0 0 0 1px $focus-color;

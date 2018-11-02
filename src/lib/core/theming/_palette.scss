@@ -167,7 +167,6 @@ $mc-yellow: (
 );
 
 
-// Foreground palette for light themes.
 $mc-light-theme-foreground: (
     base:              black, //скорей всего это fg-default-text
     disabled:          $dark-text-disabled,
@@ -177,33 +176,29 @@ $mc-light-theme-foreground: (
     secondary-text:    rgba(black, 0.54), //скорей всего это fg-less-contrast-text
 
     // ↓ новое
-    text:                   $dark-text-default,
-    fg-less-contrast-text:  $dark-text-secondary,
-    disabled-text:          $dark-text-disabled,
+    text:               $dark-text-default,
+    less-contrast-text: $dark-text-secondary,
+    disabled-text:      $dark-text-disabled,
 
-    default-icon:        $dark-text-secondary,
-    less-contrast-icon:  $dark-icon-secondary,
+    default-icon:       rgba(transparent, 0.25),
 );
 
-// Foreground palette for dark themes.
 $mc-dark-theme-foreground: (
-    base:              white,
-    disabled:          rgba(white, 0.3),
-    disabled-button:   rgba(white, 0.3),
-    hint-text:         rgba(white, 0.3),
-    icon:              white,
-    secondary-text:    rgba(white, 0.7),
+    base:               white,
+    disabled:           rgba(white, 0.3),
+    disabled-button:    rgba(white, 0.3),
+    hint-text:          rgba(white, 0.3),
+    icon:               white,
+    secondary-text:     rgba(white, 0.7),
 
     // ↓ новое
-    text:                   $light-text-default,
-    fg-less-contrast-text:  $light-text-secondary,
-    disabled-text:          $light-text-disabled,
+    text:               $light-text-default,
+    less-contrast-text: $light-text-secondary,
+    disabled-text:      $light-text-disabled,
 
-    default-icon:        $light-text-secondary,
-    less-contrast-icon:  $light-icon-secondary,
+    default-icon:       rgba(white, 1),
 );
 
-// Background palette for light themes.
 $mc-light-theme-background: (
     disabled-button:      $black-12-opacity,
     selected-button:      grey,
@@ -212,19 +207,19 @@ $mc-light-theme-background: (
 
     // ↓ новое
     background:           white,
-    bg-content:           map-get($mc-grey, 60), //secondary-60
+    // todo not used
+    bg-content:           map-get($mc-grey, 60),
     bg-dropdowns:         white,
 
     button-bg:            map-get($mc-grey, 60),
     button-border:        map-get($mc-grey, 200),
-    button-disabled-overlay:      rgba(white, 0.3),
+    disabled-overlay:     rgba(white, 0.3),
 
     hover:                rgba(black, 0.05),
 
     in-shadow:            inset 0 1px 2px 0 rgba(black, 0.2),
 );
 
-// Background palette for dark themes.
 $mc-dark-theme-background: (
     disabled-button:      $white-12-opacity,
     selected-button:      grey,
@@ -232,15 +227,15 @@ $mc-dark-theme-background: (
     disabled-list-option: #CCC,
 
     // ↓ новое
-    // каким образом три следующих параметра предлагается связать с бэкграундом праймари и секонд кнопок ?
     background:           map-get($mc-grey, 800),
-    bg-content:           map-get($mc-grey,  60), //secondary-60
+    // todo not used
+    bg-content:           map-get($mc-grey,  60),
     bg-dropdowns:         #ffffff,
 
     // цвет бордера зависит от палитры
     button-bg:            map-get($mc-grey, 600),
     button-border:        map-get($mc-grey, 500),
-    button-disabled-overlay:      rgba(black, 0.2),
+    disabled-overlay:     rgba(black, 0.2),
 
     hover:                rgba(white, 0.05),
 

@@ -31,9 +31,14 @@ describe('McProgressSpinner', () => {
         const progressSpinnerDebugElement = fixture.debugElement.query(By.css('.first'));
 
         Object.keys(ThemePalette).forEach((key) => {
-            testComponent.color = ThemePalette[key];
-            fixture.detectChanges();
-            expect(progressSpinnerDebugElement.nativeElement.classList.contains(`mc-${ThemePalette[key]}`)).toBe(true);
+            if (ThemePalette[key]) {
+                testComponent.color = ThemePalette[key];
+                fixture.detectChanges();
+
+                expect(
+                    progressSpinnerDebugElement.nativeElement.classList.contains(`mc-${ThemePalette[key]}`)
+                ).toBe(true);
+            }
         });
     });
 

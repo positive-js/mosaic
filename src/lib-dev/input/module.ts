@@ -2,6 +2,7 @@ import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { McButtonModule } from '@ptsecurity/mosaic/button';
 
 import { McFormFieldModule } from '../../lib/form-field';
 import { McIconModule } from '../../lib/icon';
@@ -27,6 +28,7 @@ export class InputDemoComponent {
     ],
     imports: [
         BrowserModule,
+        McButtonModule,
         McInputModule,
         McFormFieldModule,
         FormsModule,
