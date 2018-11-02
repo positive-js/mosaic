@@ -31,9 +31,13 @@ describe('McProgressBar', () => {
         const progressBarDebugElement = fixture.debugElement.query(By.css('.first'));
 
         Object.keys(ThemePalette).forEach((key) => {
-            testComponent.color = ThemePalette[key];
-            fixture.detectChanges();
-            expect(progressBarDebugElement.nativeElement.classList.contains(`mc-${ThemePalette[key]}`)).toBe(true);
+            if (ThemePalette[key]) {
+                testComponent.color = ThemePalette[key];
+                fixture.detectChanges();
+                expect(
+                    progressBarDebugElement.nativeElement.classList.contains(`mc-${ThemePalette[key]}`)
+                ).toBe(true);
+            }
         });
     });
 
