@@ -12,8 +12,6 @@
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-        background: map-get($background, background);;
-
     $primary-color: mc-color($primary, 400);
     $second-color: mc-color($second);
     $error-color: mc-color($error);
@@ -45,10 +43,6 @@
             &.mc-disabled {
                 color: $error-color;
             }
-        }
-
-        &:not(.mc-primary):not(.mc-second):not(.mc-error) {
-            color: map-get($foreground, default-icon);
         }
     }
 
