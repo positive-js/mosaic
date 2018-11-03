@@ -36,7 +36,14 @@ $ npm install
 $ npm run server-dev:button
 ```
 
-## Running The Tests
+## Credits
+
+### Contributors
+
+Thank you to all the people who have already contributed to Mosaic!
+
+<a href="https://github.com/positive-js/mosaic/graphs/contributors">Contributors Graphs</a>
+
 
 
 
