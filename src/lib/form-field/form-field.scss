@@ -95,9 +95,14 @@ mc-stepper {
 
     width: 32px;
 
-    .mc-stepper-step-up, .mc-stepper-step-down {
+    .mc-stepper-step-up,
+    .mc-stepper-step-down {
         cursor: pointer;
         width: 32px;
         text-align: center;
+    }
+
+    .mc-stepper-step-up {
+        transform: scaleY(-1);
     }
 }

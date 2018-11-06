@@ -72,21 +72,6 @@
                 }
             }
         }
-
-        mc-cleaner {
-            &:hover .mc-icon {
-                color: mc-color($second, darker);
-            }
-        }
-
-        mc-stepper {
-            .mc-stepper-step-up,
-            .mc-stepper-step-down {
-                &:hover {
-                    color: mc-color($second, darker);
-                }
-            }
-        }
     }
 
     .mc-form-field__hint {

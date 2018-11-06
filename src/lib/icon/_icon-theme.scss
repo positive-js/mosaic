@@ -19,7 +19,7 @@
     // Дефолтные серые иконки default-icon: лупа в поле, иконки дропдаунов v, все иконки вне полей.
     .mc-icon:not(.mc-icon_light) {
         &.mc-primary {
-            color: mix(map-get($foreground, default-icon), $primary-color);
+            color: mix(map-get($foreground, default-icon), $primary-color, 30%);
 
             &[disabled],
             &.mc-disabled {
@@ -28,7 +28,8 @@
         }
 
         &.mc-second {
-            color: mix(map-get($foreground, default-icon), $second-color, 70%);
+            // todo Миша, less-contrast-text - в темной теме не такой как на макетах.
+            color: map-get($foreground, less-contrast-text);
 
             &[disabled],
             &.mc-disabled {
@@ -37,12 +38,16 @@
         }
 
         &.mc-error {
-            color: mix(map-get($foreground, default-icon), $error-color);
+            color: mix(map-get($foreground, default-icon), $error-color, 30%);
 
             &[disabled],
             &.mc-disabled {
                 color: $error-color;
             }
+        }
+
+        .mc-icon:not(.mc-primary):not(.mc-second):not(.mc-error) {
+            color: map-get($foreground, text);
         }
     }
 

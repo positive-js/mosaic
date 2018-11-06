@@ -54,8 +54,7 @@ export class McInputBase {
     }
 }
 
-export const _McInputMixinBase: CanUpdateErrorStateCtor & typeof McInputBase =
-    mixinErrorState(McInputBase);
+export const _McInputMixinBase: CanUpdateErrorStateCtor & typeof McInputBase = mixinErrorState(McInputBase);
 
 
 @Directive({
