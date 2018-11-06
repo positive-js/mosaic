@@ -54,8 +54,6 @@ export const MC_DROPDOWN_SCROLL_STRATEGY_FACTORY_PROVIDER = {
 @Directive({
     selector: `[mcDropdownTriggerFor]`,
     host: {
-        'aria-haspopup': 'true',
-        '[attr.aria-expanded]': 'opened || null',
         '(touchstart)': '_openedBy = "touch"',
         '(click)': 'toggle()'
     },

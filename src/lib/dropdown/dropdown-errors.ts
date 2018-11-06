@@ -1,8 +1,8 @@
 export function throwMcDropdownMissingError() {
     throw Error(`mcDropdownTriggerFor: must pass in an mc-dropdown instance.
     Example:
-      <mc-dropdown #menu="matMenu"></mc-dropdown>
-      <button [mcDropdownTriggerFor]="menu"></button>`);
+      <mc-dropdown #dropdown="mcDropdown"></mc-dropdown>
+      <button [mcDropdownTriggerFor]="dropdown"></button>`);
 }
 
 /**
@@ -12,7 +12,7 @@ export function throwMcDropdownMissingError() {
  */
 export function throwMcDropdownInvalidPositionX() {
     throw Error(`xPosition value must be either 'before' or after'.
-      Example: <mc-dropdown xPosition="before" #menu="matMenu"></mc-dropdown>`);
+      Example: <mc-dropdown xPosition="before" #dropdown="mcDropdown"></mc-dropdown>`);
 }
 
 /**
@@ -22,5 +22,5 @@ export function throwMcDropdownInvalidPositionX() {
  */
 export function throwMcDropdownInvalidPositionY() {
     throw Error(`yPosition value must be either 'above' or below'.
-      Example: <mc-dropdown yPosition="above" #menu="matMenu"></mc-dropdown>`);
+      Example: <mc-dropdown yPosition="above" #dropdown="mcDropdown"></mc-dropdown>`);
 }

@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { OverlayModule } from '@ptsecurity/cdk/overlay';
-import { McIconModule } from '@ptsecurity/mosaic/icon';
 
 import { McDropdownContent } from './dropdown-content';
 import { McDropdownItem } from './dropdown-item';
@@ -12,10 +11,9 @@ import { McDropdown } from './dropdown.component';
 @NgModule({
     imports: [
         CommonModule,
-        OverlayModule,
-        McIconModule
+        OverlayModule
     ],
-    exports: [McDropdown, McDropdownItem, McDropdownTrigger, McDropdownContent, CommonModule],
+    exports: [McDropdown, McDropdownItem, McDropdownTrigger, McDropdownContent],
     declarations: [McDropdown, McDropdownItem, McDropdownTrigger, McDropdownContent],
     providers: [MC_DROPDOWN_SCROLL_STRATEGY_FACTORY_PROVIDER]
 })

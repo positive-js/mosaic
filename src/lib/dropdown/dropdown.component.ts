@@ -23,8 +23,8 @@ import { FocusKeyManager, FocusOrigin } from '@ptsecurity/cdk/a11y';
 import { Direction } from '@ptsecurity/cdk/bidi';
 import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import { ESCAPE, DOWN_ARROW, UP_ARROW } from '@ptsecurity/cdk/keycodes';
-import { merge, Observable, Subject, Subscription } from 'rxjs';
-import { startWith, switchMap, take } from 'rxjs/operators';
+import { Subject, Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 import { mcDropdownAnimations } from './dropdown-animations';
 import { McDropdownContent } from './dropdown-content';
@@ -210,14 +210,6 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
     ngOnDestroy() {
         this._tabSubscription.unsubscribe();
         this.closed.complete();
-    }
-
-    /** Stream that emits whenever the hovered dropdown item changes. */
-    _hovered(): Observable<McDropdownItem> {
-        return this._itemChanges.pipe(
-            startWith(this._items),
-            switchMap((items) => merge(...items.map((item) => item._hovered)))
-        );
     }
 
     /** Handle a keyboard event from the dropdown, delegating to the appropriate action. */

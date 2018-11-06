@@ -489,24 +489,6 @@ describe('McDropdown', () => {
             expect(items[2].classList).toContain('cdk-keyboard-focused');
         }));
 
-    it('should toggle the aria-expanded attribute on the trigger', () => {
-        const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
-        fixture.detectChanges();
-        const triggerEl = fixture.componentInstance.triggerEl.nativeElement;
-
-        expect(triggerEl.hasAttribute('aria-expanded')).toBe(false);
-
-        fixture.componentInstance.trigger.open();
-        fixture.detectChanges();
-
-        expect(triggerEl.getAttribute('aria-expanded')).toBe('true');
-
-        fixture.componentInstance.trigger.close();
-        fixture.detectChanges();
-
-        expect(triggerEl.hasAttribute('aria-expanded')).toBe(false);
-    });
-
     it('should throw the correct error if the dropdown is not defined after init', () => {
         const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
         fixture.detectChanges();

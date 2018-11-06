@@ -13,7 +13,6 @@ import {
     CanDisable, CanDisableCtor,
     mixinDisabled
 } from '@ptsecurity/mosaic/core';
-import { Subject } from 'rxjs';
 
 import { MC_DROPDOWN_PANEL, McDropdownPanel } from './dropdown-panel';
 
@@ -36,20 +35,15 @@ export const _McDropdownItemMixinBase: CanDisableCtor & typeof McDropdownItemBas
         role: 'dropdown-item',
         class: 'mc-dropdown__item',
         '[attr.tabindex]': '_getTabIndex()',
-        '[attr.aria-disabled]': 'disabled.toString()',
         '[attr.disabled]': 'disabled || null',
-        '(click)': '_checkDisabled($event)',
-        '(mouseenter)': '_handleMouseEnter()'
+        '(click)': '_checkDisabled($event)'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    templateUrl: 'dropdown-item.html'
+    template: `<ng-content></ng-content>`
 })
 export class McDropdownItem extends _McDropdownItemMixinBase
     implements IFocusableOption, CanDisable, OnDestroy {
-
-    /** Stream that emits when the dropdown item is hovered. */
-    readonly _hovered: Subject<McDropdownItem> = new Subject<McDropdownItem>();
 
     private _document: Document;
 
@@ -91,8 +85,6 @@ export class McDropdownItem extends _McDropdownItemMixinBase
         if (this._parentDropdownPanel && this._parentDropdownPanel.removeItem) {
             this._parentDropdownPanel.removeItem(this);
         }
-
-        this._hovered.complete();
     }
 
     /** Used to set the `tabindex`. */
@@ -111,11 +103,6 @@ export class McDropdownItem extends _McDropdownItemMixinBase
             event.preventDefault();
             event.stopPropagation();
         }
-    }
-
-    /** Emits to the hover stream. */
-    _handleMouseEnter() {
-        this._hovered.next(this);
     }
 
     /** Gets the label to be used when determining whether the option should be focused. */
