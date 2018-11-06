@@ -60,27 +60,53 @@ describe('McTimepicker', () => {
     let testComponent: TestApp;
     let inputElementDebug;
 
-    it('Timepicker disabled state switching on/off', () => {
-        fixture = TestBed.createComponent(TestApp);
-        testComponent = fixture.debugElement.componentInstance;
-        inputElementDebug = fixture.debugElement.query(By.directive(McTimepicker));
+    describe('Core attributes support', () => {
+        beforeEach(() => {
+            fixture = TestBed.createComponent(TestApp);
+            testComponent = fixture.debugElement.componentInstance;
+            inputElementDebug = fixture.debugElement.query(By.directive(McTimepicker));
 
-        testComponent.isDisabled = true;
-        fixture.detectChanges();
+            testComponent.timeValue = new Date('1970-01-01 12:18:28');
+            fixture.detectChanges();
+        });
 
-        return fixture.whenStable()
-            .then(() => {
-                fixture.detectChanges();
-                expect(inputElementDebug.nativeElement.disabled).toBe(true, 'input not disabled');
-                testComponent.isDisabled = false;
-                fixture.detectChanges();
+        it('Timepicker disabled state switching on/off', () => {
+            testComponent.isDisabled = true;
+            fixture.detectChanges();
 
-                return fixture.whenStable();
-            })
-            .then(() => {
-                fixture.detectChanges();
-                expect(inputElementDebug.nativeElement.disabled).toBe(false, 'input not disabled');
-            });
+            return fixture.whenStable()
+                .then(() => {
+                    fixture.detectChanges();
+                    expect(inputElementDebug.nativeElement.disabled).toBe(true, 'input not disabled');
+                    testComponent.isDisabled = false;
+                    fixture.detectChanges();
+
+                    return fixture.whenStable();
+                })
+                .then(() => {
+                    fixture.detectChanges();
+                    expect(inputElementDebug.nativeElement.disabled).toBe(false, 'input not disabled');
+                });
+        });
+
+        it('Placeholder set on default timeFormat', () => {
+            return fixture.whenStable()
+                .then(() => {
+                    fixture.detectChanges();
+                    expect(inputElementDebug.nativeElement.placeholder).toBe('  :  ');
+                });
+        });
+
+        it('Correct placeholder set for non-default time format', () => {
+            testComponent.timeFormat = 'HH:mm:ss';
+            fixture.detectChanges();
+
+            return fixture.whenStable()
+                .then(() => {
+                    fixture.detectChanges();
+                    expect(inputElementDebug.nativeElement.placeholder).toBe('  :  :  ');
+                });
+        });
     });
 
     describe('Timerange validation', () => {
