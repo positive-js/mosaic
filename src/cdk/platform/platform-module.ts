@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
 
 
-@NgModule()
+@NgModule({})
 export class PlatformModule {}

@@ -55,7 +55,9 @@ export const MAX_VALIDATOR: Provider = {
 @Directive({
     selector: '[max][formControlName],[max][formControl],[max][ngModel]',
     providers: [MAX_VALIDATOR],
-    host: {'[attr.max]': 'max ? max : null'}
+    host: {
+        '[attr.max]': 'max ? max : null'
+    }
 })
 export class MaxValidator implements Validator,
     OnChanges {
