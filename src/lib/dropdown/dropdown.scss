@@ -22,6 +22,8 @@ $mc-dropdown-panel-border-radius: 3px !default;
 
     overflow: auto;
 
+    margin-top: -1px;
+
     border: {
         width: $mc-dropdown-panel-border-width;
         style: solid;
