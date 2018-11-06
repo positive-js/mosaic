@@ -34,10 +34,10 @@ export const mcDropdownAnimations: {
             transform: 'scale(0.8)'
         })),
         transition('void => enter', group([
-            query('.mc-dropdown__content', animate('100ms linear', style({opacity: 1}))),
-            animate('120ms cubic-bezier(0, 0, 0.2, 1)', style({transform: 'scale(1)'}))
+            query('.mc-dropdown__content', animate('50ms linear', style({opacity: 1}))),
+            animate('50ms cubic-bezier(0, 0, 0.2, 1)', style({transform: 'scale(1)'}))
         ])),
-        transition('* => void', animate('100ms 25ms linear', style({opacity: 0})))
+        transition('* => void', animate('50ms 25ms linear', style({opacity: 0})))
     ]),
 
 
@@ -50,7 +50,7 @@ export const mcDropdownAnimations: {
         state('showing', style({opacity: 1})),
         transition('void => *', [
             style({opacity: 0}),
-            animate('400ms 100ms cubic-bezier(0.55, 0, 0.55, 0.2)')
+            animate('200ms 60ms cubic-bezier(0.55, 0, 0.55, 0.2)')
         ])
     ])
 };
