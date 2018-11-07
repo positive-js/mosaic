@@ -43,11 +43,11 @@
 @function mc-light-theme(
     $primary,
     $second,
-    $error: mc-palette($mc-red),
+    $error,
+
     $info: mc-palette($mc-blue),
     $success: mc-palette($mc-green),
-    $warning: mc-palette($mc-yellow),
-    $default: mc-palette($mc-grey)
+    $warning: mc-palette($mc-yellow)
 ) {
     @return (
         is-dark: false,
@@ -62,18 +62,17 @@
         warning: $warning,
         success: $success,
         info: $info,
-        default: $default,
     );
 }
 
 @function mc-dark-theme(
     $primary,
     $second,
-    $error: mc-palette($mc-red),
+    $error,
+
     $info: mc-palette($mc-blue),
     $success: mc-palette($mc-green),
-    $warning: mc-palette($mc-yellow),
-    $default: mc-palette($mc-grey)
+    $warning: mc-palette($mc-yellow)
 ) {
     @return (
         is-dark: true,
@@ -88,6 +87,5 @@
         warning: $warning,
         success: $success,
         info: $info,
-        default: $default,
     );
 }

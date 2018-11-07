@@ -4,9 +4,9 @@
 
 @mixin normal-state($color, $second, $isDark) {
     box-shadow:
-        inset -1px 0 0 0 mc-color($second, lighter),
-        inset 0 1px 0 0 mc-color($second, lighter),
-        inset 0 -1px 0 0 mc-color($second, lighter);
+        inset -1px 0 0 0 mc-color($second, if($isDark, darker, lighter)),
+        inset 0 1px 0 0 mc-color($second, if($isDark, darker, lighter)),
+        inset 0 -1px 0 0 mc-color($second, if($isDark, darker, lighter));
 
     background-color: mc-color($color, if($isDark, darker, lighter));
 
