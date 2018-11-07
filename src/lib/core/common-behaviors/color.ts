@@ -18,7 +18,8 @@ export enum ThemePalette {
     Primary = 'primary',
     Second = 'second',
     Error = 'error',
-    Default = 'second'
+    Default = 'second',
+    Empty = ''
 }
 
 /** Mixin to augment a directive with a `color` property. */

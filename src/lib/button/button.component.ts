@@ -10,7 +10,6 @@ import {
 } from '@angular/core';
 
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
-import { Platform } from '@ptsecurity/cdk/platform';
 
 import { mixinColor, mixinDisabled, CanColor, CanDisable, CanDisableCtor, CanColorCtor } from '@ptsecurity/mosaic/core';
 import { McIcon } from '@ptsecurity/mosaic/icon';
@@ -21,34 +20,6 @@ import { McIcon } from '@ptsecurity/mosaic/icon';
     host: { class: 'mc-button' }
 })
 export class McButtonCSSStyler {}
-
-
-@Directive({
-    selector: 'button[mc-xs-button], a[mc-xs-button]',
-    host: { class: 'mc-button mc-button_xs' }
-})
-export class McXSButtonCSSStyler {}
-
-
-@Directive({
-    selector: 'button[mc-sm-button], a[mc-sm-button]',
-    host: { class: 'mc-button mc-button_sm' }
-})
-export class McSMButtonCSSStyler {}
-
-
-@Directive({
-    selector: 'button[mc-lg-button], a[mc-lg-button]',
-    host: { class: 'mc-button mc-button_lg' }
-})
-export class McLGButtonCSSStyler {}
-
-
-@Directive({
-    selector: 'button[mc-xl-button], a[mc-xl-button]',
-    host: { class: 'mc-button mc-button_xl' }
-})
-export class McXLButtonCSSStyler {}
 
 
 @Directive({

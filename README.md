@@ -1,14 +1,16 @@
+<p align="center">
+    <img width="200" src="https://preview.ibb.co/fZha7S/POSITIVE_JS_LOGO_WHITE_ed2_05.png" alt="positive_js_logo" border="0">
+</p>
+
+
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/positive-js/mosaic/blob/master/LICENSE)
 [![CircleCI](https://circleci.com/gh/positive-js/mosaic/tree/master.svg?style=shield)](https://circleci.com/gh/positive-js/mosaic/tree/master)
 [![Dependency Status](https://david-dm.org/positive-js/mosaic.svg)](https://david-dm.org/positive-js/mosaic)
 [![Known Vulnerabilities](https://snyk.io/test/github/positive-js/mosaic/badge.svg)](https://snyk.io/test/github/positive-js/mosaic)
 [![Wallaby.js](https://img.shields.io/badge/wallaby.js-configured-green.svg)](https://wallabyjs.com)
 
-# Mosaic components for Angular
 
-<p align="center">
-    <img width="300" src="https://preview.ibb.co/fZha7S/POSITIVE_JS_LOGO_WHITE_ed2_05.png" alt="positive_js_logo" border="0">
-</p>
+# UI Components for Angular
 
 ## 🖥 Browsers support
 
@@ -36,7 +38,14 @@ $ npm install
 $ npm run server-dev:button
 ```
 
-## Running The Tests
+## Credits
+
+### Contributors
+
+Thank you to all the people who have already contributed to Mosaic!
+
+<a href="https://github.com/positive-js/mosaic/graphs/contributors">Contributors Graphs</a>
+
 
 
 

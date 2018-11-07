@@ -12,7 +12,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
-import { CanColor, CanColorCtor, mixinColor, ThemePalette } from '@ptsecurity/mosaic/core';
+import { CanColor, CanColorCtor, mixinColor } from '@ptsecurity/mosaic/core';
 import { EMPTY, merge } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 
@@ -33,8 +33,7 @@ export class McFormFieldBase {
     constructor(public _elementRef: ElementRef) {}
 }
 
-export const _McFormFieldMixinBase: CanColorCtor & typeof McFormFieldBase
-    = mixinColor(McFormFieldBase, ThemePalette.Primary);
+export const _McFormFieldMixinBase: CanColorCtor & typeof McFormFieldBase = mixinColor(McFormFieldBase);
 
 @Component({
     selector: 'mc-form-field',
@@ -50,7 +49,7 @@ export const _McFormFieldMixinBase: CanColorCtor & typeof McFormFieldBase
     host: {
         class: 'mc-form-field',
         '[class.mc-form-field_invalid]': '_control.errorState',
-        '[class.mc-form-field_disabled]': '_control.disabled',
+        '[class.mc-disabled]': '_control.disabled',
         '[class.mc-form-field_has-prefix]': 'hasPrefix',
         '[class.mc-form-field_has-suffix]': 'hasSuffix',
         '[class.mc-form-field_has-cleaner]': 'canShowCleaner',
@@ -77,11 +76,12 @@ export class McFormField extends _McFormFieldMixinBase implements
 
     @ContentChild(McFormFieldControl) _control: McFormFieldControl<any>;
     @ContentChild(McFormFieldNumberControl) _numberControl: McFormFieldNumberControl<any>;
+    @ContentChild(McStepper) _stepper: McStepper;
+
     @ContentChildren(McHint) _hint: QueryList<McHint>;
     @ContentChildren(McSuffix) _suffix: QueryList<McSuffix>;
     @ContentChildren(McPrefix) _prefix: QueryList<McPrefix>;
     @ContentChildren(McCleaner) _cleaner: QueryList<McCleaner>;
-    @ContentChild(McStepper) _stepper: McStepper;
 
     // Unique id for the internal form field label.
     _labelId = `mc-form-field-label-${nextUniqueId++}`;
