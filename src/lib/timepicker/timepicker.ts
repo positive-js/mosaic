@@ -205,7 +205,7 @@ export class McTimepicker extends McTimepickerMixinBase
             .indexOf(formatValue) > -1 ? formatValue : DEFAULT_TIME_FORMAT;
 
         validatorOnChange();
-        this.placeholder = TIMEFORMAT_PLACEHOLDERS[this._timeFormat.toLowerCase()];
+        this.placeholder = TIMEFORMAT_PLACEHOLDERS[this._timeFormat];
     }
 
     @Input('min-time')
@@ -259,6 +259,8 @@ export class McTimepicker extends McTimepickerMixinBase
 
         // Force setter to be called in case id was not specified.
         this.id = this.id;
+
+        this.placeholder = TIMEFORMAT_PLACEHOLDERS[DEFAULT_TIME_FORMAT];
 
         // Instead of NG_VALUE_ACCESSOR (https://github.com/angular/material2/issues/8158#issuecomment-344618103)
         if (this.ngControl) { this.ngControl.valueAccessor = this; }
