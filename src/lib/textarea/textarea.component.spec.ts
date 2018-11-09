@@ -264,7 +264,7 @@ describe('McTextarea', () => {
             expect(firstSize).toBeGreaterThan(secondSize);
         }));
 
-        it('should has the class when glow is off', fakeAsync(() => {
+        it('should have the class when glow is off', fakeAsync(() => {
             const fixture = createComponent(McTextareaGrowOff);
             fixture.detectChanges();
 
@@ -273,6 +273,17 @@ describe('McTextarea', () => {
             const textareaElement = fixture.debugElement.query(By.directive(McTextarea)).nativeElement;
 
             expect(textareaElement.classList.contains('mc-textarea-resizable')).toBeTruthy();
+        }));
+
+        it('should not have the class when glow is on', fakeAsync(() => {
+            const fixture = createComponent(McTextareaForBehaviors);
+            fixture.detectChanges();
+
+            tick();
+
+            const textareaElement = fixture.debugElement.query(By.directive(McTextarea)).nativeElement;
+
+            expect(textareaElement.classList.contains('mc-textarea-resizable')).toBeFalsy();
         }));
     });
 });
