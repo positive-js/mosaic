@@ -13,8 +13,7 @@ import {
     mixinErrorState
 } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
-import { Subject } from 'rxjs';
-import { fromEvent, Subscription } from 'rxjs/index';
+import { fromEvent, Subscription, Subject } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 
 
