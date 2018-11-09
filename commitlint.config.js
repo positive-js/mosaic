@@ -31,6 +31,7 @@ module.exports = {
                 'select',
                 'splitter',
                 'tabs',
+                'textarea',
                 'timepicker',
                 'tooltip',
                 'tree',
