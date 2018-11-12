@@ -151,7 +151,7 @@ export class McTabGroup extends _McTabGroupMixinBase implements AfterContentInit
     super(elementRef);
     this.groupId = nextId++;
     this.animationDuration = defaultConfig && defaultConfig.animationDuration ?
-      defaultConfig.animationDuration : '500ms';
+      defaultConfig.animationDuration : '0ms';
   }
 
   /**
