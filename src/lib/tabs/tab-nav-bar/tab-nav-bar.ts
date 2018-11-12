@@ -9,19 +9,16 @@ import {
     AfterContentInit,
     Attribute,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ContentChildren,
     Directive,
     ElementRef,
     forwardRef,
-    Inject,
     Input,
     NgZone,
     OnDestroy,
     Optional,
     QueryList,
-    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
