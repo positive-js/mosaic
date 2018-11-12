@@ -70,6 +70,27 @@ export const _McInputMixinBase: CanUpdateErrorStateCtor & typeof McInputBase =
     }
 })
 export class McNumberInput implements McFormFieldNumberControl<any> {
+
+    /**
+     * Implemented as part of McFormFieldNumberControl.
+     * @docs-private
+     */
+    @Input()
+    bigStep: number;
+
+    /**
+     * Implemented as part of McFormFieldNumberControl.
+     * @docs-private
+     */
+    @Input()
+    step: number;
+
+    @Input()
+    min: number;
+
+    @Input()
+    max: number;
+
     /**
      * Implemented as part of McFormFieldNumberControl.
      * @docs-private
@@ -90,27 +111,6 @@ export class McNumberInput implements McFormFieldNumberControl<any> {
 
     private readonly _host: HTMLInputElement;
 
-    /**
-     * Implemented as part of McFormFieldNumberControl.
-     * @docs-private
-     */
-    private readonly _step: number;
-    get step() {
-        return this._step;
-    }
-
-    /**
-     * Implemented as part of McFormFieldNumberControl.
-     * @docs-private
-     */
-    private readonly _bigStep: number;
-    get bigStep() {
-        return this._bigStep;
-    }
-
-    private readonly _min: number;
-    private readonly _max: number;
-
     constructor(
         private _platform: Platform ,
         private _elementRef: ElementRef,
@@ -120,10 +120,10 @@ export class McNumberInput implements McFormFieldNumberControl<any> {
         @Attribute('min') min: string,
         @Attribute('max') max: string
     ) {
-        this._step = this.isDigit(step) ? parseFloat(step) : SMALL_STEP;
-        this._bigStep = this.isDigit(bigStep) ? parseFloat(bigStep) : BIG_STEP;
-        this._min = this.isDigit(min) ? parseFloat(min) : -Infinity;
-        this._max = this.isDigit(max) ? parseFloat(max) : Infinity;
+        this.step = this.isDigit(step) ? parseFloat(step) : SMALL_STEP;
+        this.bigStep = this.isDigit(bigStep) ? parseFloat(bigStep) : BIG_STEP;
+        this.min = this.isDigit(min) ? parseFloat(min) : -Infinity;
+        this.max = this.isDigit(max) ? parseFloat(max) : Infinity;
 
         this._host = this._elementRef.nativeElement;
 
@@ -191,7 +191,7 @@ export class McNumberInput implements McFormFieldNumberControl<any> {
             event.preventDefault();
 
             // process steps
-            const step = event.shiftKey ? this._bigStep : this._step;
+            const step = event.shiftKey ? this.bigStep : this.step;
 
             if (keyCode === UP_ARROW) {
                 this.stepUp(step);
@@ -214,14 +214,14 @@ export class McNumberInput implements McFormFieldNumberControl<any> {
 
     stepUp(step: number) {
         this._elementRef.nativeElement.focus();
-        const res = stepUp(this._host.valueAsNumber, this._max, this._min, step);
+        const res = stepUp(this._host.valueAsNumber, this.max, this.min, step);
         this._host.value = res === null ? '' : res.toString();
         this._model.update.emit(this._host.valueAsNumber);
     }
 
     stepDown(step: number) {
         this._elementRef.nativeElement.focus();
-        const res = stepDown(this._host.valueAsNumber, this._max, this._min, step);
+        const res = stepDown(this._host.valueAsNumber, this.max, this.min, step);
         this._host.value = res === null ? '' : res.toString();
         this._model.update.emit(this._host.valueAsNumber);
     }
