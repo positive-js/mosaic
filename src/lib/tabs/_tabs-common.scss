@@ -73,6 +73,8 @@ $mc-tab-height: 40px;
         top: {
             width: $mc-tab-border-width;
             style: solid;
+            left-radius: $mc-tab-border-radius;
+            right-radius: $mc-tab-border-radius;
         }
     }
 
@@ -83,10 +85,6 @@ $mc-tab-height: 40px;
         border: {
             width: $mc-tab-border-width;
             style: solid;
-            top: {
-                left-radius: $mc-tab-border-radius;
-                right-radius: $mc-tab-border-radius;
-            }
         }
 
         &.cdk-focused {
