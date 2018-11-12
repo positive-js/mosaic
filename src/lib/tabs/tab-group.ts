@@ -30,6 +30,7 @@ import { merge, Subscription } from 'rxjs';
 import { McTab } from './tab';
 import { McTabHeader } from './tab-header';
 
+
 @Directive({
   selector: 'mc-tab-group[mc-light-tabs], [mc-tab-nav-bar][mc-light-tabs]',
   host: { class: 'mc-tab-group-light' }

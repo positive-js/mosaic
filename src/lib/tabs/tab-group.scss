@@ -22,7 +22,6 @@
         flex-direction: column-reverse;
     }
 
-
     &:not(.mc-tab-group-light) {
         .mc-tab-label {
             @include tab-label

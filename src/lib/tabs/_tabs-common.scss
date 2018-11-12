@@ -1,10 +1,10 @@
 $mc-tab-horizontal-padding: 16px;
 $mc-tab-vertival-padding: 12px;
 
-$mc-tab-border-radius: 2px;
+$mc-tab-border-radius: 3px;
 $mc-tab-border-width: 1px;
-$mc-tab-border-radius-focus: 3px;
-$mc-tab-border-width-focus: 2px;
+$mc-tab-border-radius-focus: $mc-tab-border-radius;
+$mc-tab-border-width-focus: $mc-tab-border-width + 1px;
 
 @mixin tab-label-common {
     display: inline-block;
@@ -69,6 +69,8 @@ $mc-tab-border-width-focus: 2px;
         }
 
         &.cdk-focused {
+            border-color: transparent;
+
             &:after {
                 right: - $mc-tab-border-width-focus;
                 left: - $mc-tab-border-width-focus;
