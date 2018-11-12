@@ -6,7 +6,7 @@
     $background: map-get($theme, background);
 
     // Should be #d9d9d9 ?
-    $border-color: map-get($second, 300);
+    $border-color: mc-color($second, 300);
 
     .mc-tab-label,
     .mc-tab-link {
@@ -57,11 +57,15 @@
             .mc-tab-link {
                 &.mc-tab-label-active {
                     &:before {
-                        border-color: mc-color($primary, 500);
+                        background-color: mc-color($primary, 500);
                     }
                 }
                 &.mc-tab-disabled {
-                    border-color: mc-color($second, 300);
+                    border-bottom-color: transparent;
+
+                    &:after {
+                        background-color: mc-color($second, 300);
+                    }
                 }
             }
         }

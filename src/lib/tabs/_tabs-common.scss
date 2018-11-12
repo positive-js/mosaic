@@ -4,16 +4,29 @@ $mc-tab-border-radius-focus: $mc-tab-border-radius;
 $mc-tab-border-width-focus: $mc-tab-border-width + 1px;
 
 $mc-tab-padding-horizontal: 16px;
-$mc-tab-padding-top: 10px;
-$mc-tab-padding-bottom: 10px;
+
+$mc-tab-height: 40px;
+
+%tab-pseudo {
+    display: block;
+    position: absolute;
+    content: "";
+}
 
 @mixin tab-label-common {
-    display: inline-block;
+    display: inline-flex;
+    height: $mc-tab-height;
+    box-sizing: border-box;
+
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+
     cursor: pointer;
+
     padding: {
-        top: $mc-tab-padding-top;
         right: $mc-tab-padding-horizontal;
-        bottom: $mc-tab-padding-bottom - $mc-tab-border-width;
         left: $mc-tab-padding-horizontal;
     }
 
@@ -29,13 +42,12 @@ $mc-tab-padding-bottom: 10px;
         position: relative;
 
         &:after {
-            display: block;
-            position: absolute;
+            @extend %tab-pseudo;
+
             top: - $mc-tab-border-width-focus;
             right: - $mc-tab-border-width;
             bottom: - $mc-tab-border-width;
             left: - $mc-tab-border-width;
-            content: "";
             border: {
                 width: $mc-tab-border-width-focus;
                 style: solid;
@@ -55,8 +67,6 @@ $mc-tab-padding-bottom: 10px;
 }
 
 @mixin tab-label {
-    padding-top: $mc-tab-padding-bottom - $mc-tab-border-width;
-
     @include tab-label-common();
 
     border: {
@@ -69,6 +79,7 @@ $mc-tab-padding-bottom: 10px;
     &.mc-tab-label-active {
         padding-right: $mc-tab-padding-horizontal - $mc-tab-border-width;
         padding-left: $mc-tab-padding-horizontal - $mc-tab-border-width;
+
         border: {
             width: $mc-tab-border-width;
             style: solid;
@@ -89,26 +100,39 @@ $mc-tab-padding-bottom: 10px;
     }
 }
 
-@mixin tab-label-light {
+%tab-light-pseudo-highlight-border {
     $mc-tab-border-highlight-width: 4px;
 
+    @extend %tab-pseudo;
+
+    bottom: - $mc-tab-border-width;
+    left: 0;
+    height: $mc-tab-border-highlight-width;
+    right: 0;
+}
+
+@mixin tab-label-light {
     @include tab-label-common();
 
     &.mc-tab-label-active {
         position: relative;
 
         &:before {
-            display: block;
-            position: absolute;
-            bottom: - $mc-tab-border-width;
-            left: 0;
-            height: $mc-tab-border-highlight-width;
-            right: 0;
-            content: "";
-            border-bottom: {
-                width: $mc-tab-border-highlight-width;
-                style: solid;
-            }
+            @extend %tab-light-pseudo-highlight-border;
+        }
+    }
+
+    &.mc-tab-disabled {
+        position: relative;
+
+        &:after {
+            @extend %tab-light-pseudo-highlight-border;
+        }
+    }
+
+    &.cdk-focused + .mc-tab-disabled {
+        &:after {
+            left: $mc-tab-border-width-focus - $mc-tab-border-width;
         }
     }
 
@@ -116,10 +140,5 @@ $mc-tab-padding-bottom: 10px;
         &:after {
             top: - $mc-tab-border-width;
         }
-    }
-
-    &.mc-tab-disabled {
-        border-bottom-width: $mc-tab-border-highlight-width;
-        padding-bottom: $mc-tab-padding-bottom - $mc-tab-border-highlight-width + $mc-tab-border-width;
     }
 }
