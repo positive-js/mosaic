@@ -23,11 +23,14 @@
     <nav mc-tab-nav-bar
          mc-light-tabs>
         <a mc-tab-link
+           disabled
            *ngFor="let link of links"
            (click)="activeLink = link"
            [active]="activeLink == link"> {{link}} </a>
         <a mc-tab-link
-           disabled>Disabled Link</a>
+           disabled
+           (click)="activeLink = 1"
+           [active]="activeLink == 1">Disabled Link</a>
     </nav>
 
     <nav mc-tab-nav-bar
@@ -36,11 +39,19 @@
            *ngFor="let link of links"
            (click)="activeLink = link"
            [active]="activeLink == link"> {{link}} </a>
-        <a mc-tab-link>Link 2</a>
         <a mc-tab-link
-           disabled>Link 3</a>
-        <a mc-tab-link>Link 4</a>
-        <a mc-tab-link>Link 5</a>
+           (click)="activeLink = 1"
+           [active]="activeLink == 1">Link 1</a>
+        <a mc-tab-link
+           (click)="activeLink = 2"
+           [active]="activeLink == 2"
+           disabled>Link 2</a>
+        <a mc-tab-link
+           (click)="activeLink = 3"
+           [active]="activeLink == 3">Link 3</a>
+        <a mc-tab-link
+           (click)="activeLink = 4"
+           [active]="activeLink == 4">Link 4</a>
     </nav>
 
     <h3>Very slow animation</h3>

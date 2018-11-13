@@ -20,14 +20,16 @@
                 color: $border-color;
             }
         }
-
-        &:focus,
         &.cdk-keyboard-focused {
             &:after {
                 border: {
                     color: mc-color($primary, 500);
                 }
             }
+        }
+        &.mc-tab-disabled {
+            opacity: 0.5;
+            color: mc-color($second, 700);
         }
     }
 
@@ -58,14 +60,19 @@
                 &:hover {
                     border-bottom-color: transparent;
 
-                    &:after {
+                    &:before {
                         background-color: mc-color($second, 300);
                     }
                 }
                 // TODO: what color should be here?
                 &.mc-tab-label-active:hover {
-                    &:after {
+                    &:before {
                         background-color: mc-color($primary, 300);
+                    }
+                }
+                &.mc-tab-disabled.mc-tab-label-active {
+                    &:before {
+                        background-color: mc-color($second, 700);
                     }
                 }
             }

@@ -112,7 +112,8 @@ $mc-tab-height: 40px;
 @mixin tab-label-light {
     @include tab-label-common();
 
-    &.mc-tab-label-active {
+    &.mc-tab-label-active,
+    &:hover {
         position: relative;
 
         &:before {
@@ -120,16 +121,8 @@ $mc-tab-height: 40px;
         }
     }
 
-    &:hover {
-        position: relative;
-
-        &:after {
-            @extend %tab-light-pseudo-highlight-border;
-        }
-    }
-
     &.cdk-keyboard-focused + :hover {
-        &:after {
+        &:before {
             left: $mc-tab-border-width-focus - $mc-tab-border-width;
         }
     }
