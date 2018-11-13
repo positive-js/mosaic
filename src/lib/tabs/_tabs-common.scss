@@ -38,7 +38,7 @@ $mc-tab-height: 40px;
         }
     }
 
-    &.cdk-focused {
+    &.cdk-keyboard-focused {
         position: relative;
 
         &:after {
@@ -87,7 +87,7 @@ $mc-tab-height: 40px;
             style: solid;
         }
 
-        &.cdk-focused {
+        &.cdk-keyboard-focused {
             border-color: transparent;
 
             &:after {
@@ -120,7 +120,7 @@ $mc-tab-height: 40px;
         }
     }
 
-    &.mc-tab-disabled {
+    &:hover {
         position: relative;
 
         &:after {
@@ -128,13 +128,13 @@ $mc-tab-height: 40px;
         }
     }
 
-    &.cdk-focused + .mc-tab-disabled {
+    &.cdk-keyboard-focused + :hover {
         &:after {
             left: $mc-tab-border-width-focus - $mc-tab-border-width;
         }
     }
 
-    &.cdk-focused {
+    &.cdk-keyboard-focused {
         &:after {
             top: - $mc-tab-border-width;
         }

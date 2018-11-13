@@ -5,7 +5,7 @@
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    // Should be #d9d9d9 ?
+    // TODO: Should be #d9d9d9 ?
     $border-color: mc-color($second, 300);
 
     .mc-tab-label,
@@ -21,13 +21,8 @@
             }
         }
 
-        &:hover,
-        &.mc-hovered {
-            background: mc-color($background, 'hover');
-        }
-
         &:focus,
-        &.cdk-focused {
+        &.cdk-keyboard-focused {
             &:after {
                 border: {
                     color: mc-color($primary, 500);
@@ -47,8 +42,8 @@
                         bottom-color: transparent;
                     }
                 }
-                &.mc-tab-disabled {
-                    background-color: mc-color($second, 60);
+                &:hover {
+                    background: mc-color($background, 'hover');
                 }
             }
         }
@@ -60,11 +55,17 @@
                         background-color: mc-color($primary, 500);
                     }
                 }
-                &.mc-tab-disabled {
+                &:hover {
                     border-bottom-color: transparent;
 
                     &:after {
                         background-color: mc-color($second, 300);
+                    }
+                }
+                // TODO: what color should be here?
+                &.mc-tab-label-active:hover {
+                    &:after {
+                        background-color: mc-color($primary, 300);
                     }
                 }
             }
