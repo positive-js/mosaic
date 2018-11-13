@@ -65,6 +65,7 @@ System.config({
         '@ptsecurity/mosaic/modal': 'dist/packages/mosaic/modal/index.js',
         '@ptsecurity/mosaic/tag': 'dist/packages/mosaic/tag/index.js',
         '@ptsecurity/mosaic/select': 'dist/packages/mosaic/select/index.js',
+        '@ptsecurity/mosaic/textarea': 'dist/packages/mosaic/textarea/index.js',
         '@ptsecurity/mosaic/tooltip': 'dist/packages/mosaic/tooltip/index.js',
         '@ptsucurity/mosaic/timepicker': 'dist/packages/mosaic/timepicker/index.js',
         '@ptsecurity/mosaic/splitter': 'dist/packages/mosaic/splitter/index.js'
