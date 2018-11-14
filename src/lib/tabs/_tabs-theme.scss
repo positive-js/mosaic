@@ -42,7 +42,7 @@
                         bottom-color: transparent;
                     }
                 }
-                &:hover {
+                &:hover:not(.mc-tab-label-active) {
                     background: mc-color($background, 'hover');
                 }
             }
@@ -55,16 +55,11 @@
                         background-color: mc-color($primary, 500);
                     }
                 }
-                &:hover {
+                &:hover:not(.mc-tab-label-active) {
                     border-bottom-color: transparent;
 
                     &:before {
                         background-color: mc-color($second, 300);
-                    }
-                }
-                &.mc-tab-label-active:hover {
-                    &:before {
-                        background-color: mc-color($primary, 300);
                     }
                 }
                 &.mc-tab-disabled.mc-tab-label-active {
