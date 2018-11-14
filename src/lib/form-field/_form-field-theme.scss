@@ -41,7 +41,7 @@
 
             &.ng-invalid .mc-form-field__container {
                 background: {
-                    color: if($is-dark-theme, transparent, mc-color($error, lighter, 0.2));
+                    color: if($is-dark-theme, transparent, mc-color($error, lighter));
                 }
 
                 border: {
@@ -54,7 +54,7 @@
             }
 
             &.ng-invalid.mc-focused .mc-form-field__container {
-                box-shadow: 0 0 0 1px mc-color($error);
+                box-shadow: 0 0 0 1px mc-color($error, darker);
             }
 
             &.mc-disabled .mc-form-field__container {
@@ -69,21 +69,6 @@
                 .mc-icon,
                 .mc-input {
                     color: mc-color($foreground, disabled-text);
-                }
-            }
-        }
-
-        mc-cleaner {
-            &:hover .mc-icon {
-                color: mc-color($second, darker);
-            }
-        }
-
-        mc-stepper {
-            .mc-stepper-step-up,
-            .mc-stepper-step-down {
-                &:hover {
-                    color: mc-color($second, darker);
                 }
             }
         }

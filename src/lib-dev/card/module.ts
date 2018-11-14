@@ -2,7 +2,7 @@ import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import { McCardModule, Status } from '../../lib/card';
+import { McCardModule } from '../../lib/card';
 
 
 @Component({
@@ -12,7 +12,6 @@ import { McCardModule, Status } from '../../lib/card';
     encapsulation: ViewEncapsulation.None
 })
 export class CardsDemoComponent {
-    state = Status;
 
     s1 = false;
     s2 = false;
@@ -22,16 +21,12 @@ export class CardsDemoComponent {
 
 
 @NgModule({
-    declarations: [
-        CardsDemoComponent
-    ],
+    declarations: [CardsDemoComponent],
     imports: [
         BrowserModule,
         McCardModule
     ],
-    bootstrap: [
-        CardsDemoComponent
-    ]
+    bootstrap: [CardsDemoComponent]
 })
 export class CardsDemoModule {}
 
