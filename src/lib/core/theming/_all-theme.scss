@@ -5,6 +5,7 @@
 @import '../visual/panel-theme';
 @import '../../link/link-theme';
 @import '../../button/button-theme';
+@import '../../dropdown/dropdown-theme';
 @import '../../card/card-theme';
 @import '../../icon/icon-theme';
 @import '../../list/list-theme';
@@ -33,6 +34,7 @@
     @include mc-alert-theme($theme);
     @include mc-badge-theme($theme);
     @include mc-button-theme($theme);
+    @include mc-dropdown-theme($theme);
     @include mc-card-theme($theme);
     @include mc-icon-theme($theme);
     @include mc-list-theme($theme);
