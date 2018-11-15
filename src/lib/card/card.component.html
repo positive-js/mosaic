@@ -1,7 +1,2 @@
-<div class="mc-card__wrapper" [ngClass]="statusClass"
-     [class.mc-card_white]="isWhiteMode" [class.mc-card_selected]="selected"
-     (click)="clicked($event)">
-    <ng-content></ng-content>
-</div>
-<div class="mc-card__hover-overlay"></div>
-<div class="mc-card__focus-overlay"></div>
+<ng-content></ng-content>
+<div class="mc-card__overlay"></div>

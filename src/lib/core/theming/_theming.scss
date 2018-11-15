@@ -43,47 +43,49 @@
 @function mc-light-theme(
     $primary,
     $second,
-    $error: mc-palette($mc-red),
-    $warning: mc-palette($mc-yellow),
-    $success: mc-palette($mc-green),
+    $error,
+
     $info: mc-palette($mc-blue),
-    $default: mc-palette($mc-grey)
+    $success: mc-palette($mc-green),
+    $warning: mc-palette($mc-yellow)
 ) {
     @return (
+        is-dark: false,
+
         primary: $primary,
         second: $second,
-        is-dark: false,
+        error: $error,
+
         foreground: $mc-light-theme-foreground,
         background: $mc-light-theme-background,
-        // additional palette
-        error: $error,
+
         warning: $warning,
         success: $success,
         info: $info,
-        default: $default,
     );
 }
 
 @function mc-dark-theme(
     $primary,
     $second,
-    $error: mc-palette($mc-red),
-    $warning: mc-palette($mc-yellow),
-    $success: mc-palette($mc-green),
+    $error,
+
     $info: mc-palette($mc-blue),
-    $default: mc-palette($mc-grey)
+    $success: mc-palette($mc-green),
+    $warning: mc-palette($mc-yellow)
 ) {
     @return (
+        is-dark: true,
+
         primary: $primary,
         second: $second,
-        is-dark: true,
+        error: $error,
+
         foreground: $mc-dark-theme-foreground,
         background: $mc-dark-theme-background,
-        // additional palette
-        error: $error,
+
         warning: $warning,
         success: $success,
         info: $info,
-        default: $default,
     );
 }

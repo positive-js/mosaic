@@ -99,7 +99,7 @@ export class CdkTreeNode<T> implements IFocusableOption, OnDestroy {
         this._destroyed.complete();
     }
 
-    /** Focuses the menu item. Implements for IFocusableOption. */
+    /** Focuses the dropdown item. Implements for IFocusableOption. */
     focus(): void {
         this._elementRef.nativeElement.focus();
     }

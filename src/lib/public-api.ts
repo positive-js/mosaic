@@ -6,6 +6,7 @@ export * from '@ptsecurity/mosaic/button';
 export * from '@ptsecurity/mosaic/card';
 export * from '@ptsecurity/mosaic/checkbox';
 export * from '@ptsecurity/mosaic/divider';
+export * from '@ptsecurity/mosaic/dropdown';
 export * from '@ptsecurity/mosaic/form-field';
 export * from '@ptsecurity/mosaic/icon';
 export * from '@ptsecurity/mosaic/input';
