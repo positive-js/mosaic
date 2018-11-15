@@ -1,8 +1,7 @@
 import {
     Directive, DoCheck, ElementRef, Inject,
-    Input, OnChanges,
-    OnDestroy,
-    Optional, Self, InjectionToken, NgZone, OnInit
+    Input, OnChanges, OnDestroy, Optional,
+    Self, InjectionToken, NgZone, OnInit
 } from '@angular/core';
 import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
@@ -32,12 +31,11 @@ export class McTextareaBase {
     }
 }
 
-// tslint:disable-next-line
-export const McTextareaMixinBase: CanUpdateErrorStateCtor & typeof McTextareaBase =
-    mixinErrorState(McTextareaBase);
+// tslint:disable-next-line:naming-convention
+export const McTextareaMixinBase: CanUpdateErrorStateCtor & typeof McTextareaBase = mixinErrorState(McTextareaBase);
 
 @Directive({
-    selector: `textarea[mcTextarea]`,
+    selector: 'textarea[mcTextarea]',
     exportAs: 'mcTextarea',
     host: {
         class: 'mc-textarea',
@@ -297,12 +295,3 @@ export class McTextarea extends McTextareaMixinBase implements McFormFieldContro
         return realLinesCount;
     }
 }
-
-@Directive({
-    selector: 'textarea[mcTextareaMonospace]',
-    exportAs: 'McTextareaMonospace',
-    host: { class: 'mc-textarea_monospace' }
-})
-export class McTextareaMono {
-}
-

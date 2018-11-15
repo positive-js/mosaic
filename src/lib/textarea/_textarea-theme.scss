@@ -5,18 +5,18 @@
     $foreground: map-get($theme, foreground);
 
     .mc-input {
-        color: map-get($foreground, text);;
+        color: map-get($foreground, text);
 
         &::placeholder {
-            color: map-get($foreground, disabled-text);;
+            color: map-get($foreground, disabled-text);
         }
 
         &::-ms-input-placeholder {
-            color: map-get($foreground, disabled-text);;
+            color: map-get($foreground, disabled-text);
         }
 
         &::-webkit-input-placeholder {
-            color: map-get($foreground, disabled-text);;
+            color: map-get($foreground, disabled-text);
         }
     }
 }

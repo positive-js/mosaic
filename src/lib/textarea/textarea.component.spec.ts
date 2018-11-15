@@ -49,7 +49,7 @@ class McTextareaInvalid {
 @Component({
     template: `
         <mc-form-field>
-            <textarea mcTextarea mcTextareaMonospace [(ngModel)]="value"></textarea>
+            <textarea mcTextarea class="mc-textarea_monospace" [(ngModel)]="value"></textarea>
         </mc-form-field>`
 })
 class McTextareaWithMonospace {

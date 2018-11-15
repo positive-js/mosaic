@@ -1,5 +1,5 @@
-$mc-textarea-padding-h: 16px;
-$mc-textarea-padding-v: 5px;
+$mc-textarea-padding-horizontal: 16px;
+$mc-textarea-padding-vertical: 5px;
 
 %mc-textarea-base {
     background: transparent;
@@ -13,5 +13,5 @@ $mc-textarea-padding-v: 5px;
     width: 100%;
 
     box-sizing: border-box;
-    padding: $mc-textarea-padding-v $mc-textarea-padding-h;
+    padding: $mc-textarea-padding-vertical $mc-textarea-padding-horizontal;
 }

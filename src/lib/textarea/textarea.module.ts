@@ -4,13 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { A11yModule } from '@ptsecurity/cdk/a11y';
 import { McCommonModule } from '@ptsecurity/mosaic/core';
 
-import { McTextarea, McTextareaMono } from './textarea.component';
+import { McTextarea } from './textarea.component';
 
 
 @NgModule({
     imports: [CommonModule, A11yModule, McCommonModule, FormsModule],
-    exports: [McTextarea, McTextareaMono],
-    declarations: [McTextarea, McTextareaMono]
+    exports: [McTextarea],
+    declarations: [McTextarea]
 })
 export class McTextareaModule {
 }
