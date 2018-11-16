@@ -155,6 +155,10 @@ export class McTextarea extends McTextareaMixinBase implements McFormFieldContro
     private valueAccessor: { value: any };
     private growSubscription: Subscription;
 
+    private lineHeight: number = 0;
+    private freeRowsHeight: number = 0;
+    private minHeight: number = 0;
+
     constructor(protected elementRef: ElementRef,
                 @Optional() @Self() public ngControl: NgControl,
                 @Optional() _parentForm: NgForm,
@@ -173,15 +177,24 @@ export class McTextarea extends McTextareaMixinBase implements McFormFieldContro
         this.id = this.id;
 
         const growObserver = fromEvent(elementRef.nativeElement, 'input')
-            .pipe(
-                map((event: any) => `${event.target.scrollHeight} ${this.getRowCount()}`),
+            /*.pipe(
+                map((event: any) => this.getGrowHeight()),
+                // map((event: any) => event.target.scrollHeight),
                 distinctUntilChanged()
-            );
+            )*/;
         this.growSubscription = growObserver.subscribe(this.grow.bind(this));
     }
 
     ngOnInit() {
         setTimeout(() => this.grow(), 0);
+        this.lineHeight = parseInt(getComputedStyle(this.elementRef.nativeElement).lineHeight!, 10);
+
+        const paddingTop = parseInt(getComputedStyle(this.elementRef.nativeElement).paddingTop!, 10);
+        const paddingBottom = parseInt(getComputedStyle(this.elementRef.nativeElement).paddingBottom!, 10);
+
+        // tslint:disable-next-line:no-magic-numbers
+        this.minHeight = this.lineHeight * 2 + paddingTop + paddingBottom;
+        this.freeRowsHeight = this.lineHeight;
     }
 
     ngOnChanges() {
@@ -214,14 +227,15 @@ export class McTextarea extends McTextareaMixinBase implements McFormFieldContro
         }
 
         this.ngZone.runOutsideAngular(() => {
-            this.elementRef.nativeElement.rows = this.getRowCount() + 1;
+            const textarea = this.elementRef.nativeElement;
 
-            const offsetHeight: number = this.elementRef.nativeElement.offsetHeight;
-            const scrollHeight: number = this.elementRef.nativeElement.scrollHeight;
+            const outerHeight = parseInt(window.getComputedStyle(textarea).height!, 10);
+            const diff = outerHeight - textarea.clientHeight;
 
-            if (scrollHeight > offsetHeight) {
-                this.elementRef.nativeElement.style.height = 'auto';
-            }
+            textarea.style.height = 0; // this line is important to height recalculation
+
+            const height = Math.max(this.minHeight, textarea.scrollHeight + diff + this.freeRowsHeight);
+            textarea.style.height = `${height}px`;
         });
     }
 
@@ -282,16 +296,11 @@ export class McTextarea extends McTextareaMixinBase implements McFormFieldContro
         return validity && validity.badInput;
     }
 
-    private getRowCount(): number {
-        const el: HTMLTextAreaElement = this.elementRef.nativeElement;
-        const cols = el.cols - 1;
-        const lines = el.value.split(ROW_SEPARATOR);
-        let realLinesCount = 0;
+    private getGrowHeight(): number {
+        const textarea = this.elementRef.nativeElement;
+        const outerHeight = parseInt(window.getComputedStyle(textarea).height!.toString(), 10);
+        const diff = outerHeight - textarea.clientHeight;
 
-        for (const line of lines) {
-            realLinesCount += Math.ceil((line.length || 1) / cols);
-        }
-
-        return realLinesCount;
+        return Math.max(this.minHeight, textarea.scrollHeight + diff);
     }
 }
