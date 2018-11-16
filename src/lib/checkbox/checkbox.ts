@@ -98,9 +98,9 @@ export const _McCheckboxMixinBase:
         class: 'mc-checkbox',
         '[id]': 'id',
         '[attr.id]': 'id',
-        '[class.mc-checkbox-indeterminate]': 'indeterminate',
-        '[class.mc-checkbox-checked]': 'checked',
-        '[class.mc-checkbox-disabled]': 'disabled',
+        '[class.mc-indeterminate]': 'indeterminate',
+        '[class.mc-checked]': 'checked',
+        '[class.mc-disabled]': 'disabled',
         '[class.mc-checkbox-label-before]': 'labelPosition == "before"'
     },
     providers: [MC_CHECKBOX_CONTROL_VALUE_ACCESSOR],

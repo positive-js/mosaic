@@ -1,5 +1,7 @@
 <label class="mc-radio-label" [attr.for]="inputId" #label>
-    <input type="radio" class="mc-radio-input cdk-visually-hidden" #input
+    <input type="radio"
+           class="mc-radio-input cdk-visually-hidden"
+           #input
            [id]="inputId"
            [checked]="checked"
            [disabled]="disabled"
@@ -10,10 +12,8 @@
            [attr.aria-labelledby]="ariaLabelledby"
            [attr.aria-describedby]="ariaDescribedby"
            (change)="onInputChange($event)"
-           (click)="onInputClick($event)"
-    >
+           (click)="onInputClick($event)">
 
-    <!-- The label content for radio control. -->
     <div class="mc-radio-label-content" [class.mc-radio-label-before]="labelPosition == 'before'">
         <div class="mc-radio-button__outer-circle"></div>
         <div class="mc-radio-button__inner-circle"></div>
