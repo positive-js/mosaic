@@ -1,13 +1,12 @@
-import {Component, NgModule, ViewEncapsulation} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {BrowserModule} from '@angular/platform-browser';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import { Component, NgModule, ViewEncapsulation } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import {McRadioModule} from '../../lib/radio';
-import {ThemePickerModule} from '../theme-picker';
+import { McRadioModule } from '../../lib/radio';
+import { ThemePickerModule } from '../theme-picker';
 
 
-/* tslint:disable:no-trailing-whitespace */
 @Component({
     selector: 'app',
     styleUrls: ['./styles.css'],

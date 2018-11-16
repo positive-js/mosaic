@@ -1,7 +1,5 @@
-
-<label [attr.for]="inputId" class="mc-radio-label" #label>
-
-    <input #input class="mc-radio-input cdk-visually-hidden" type="radio"
+<label class="mc-radio-label" [attr.for]="inputId" #label>
+    <input type="radio" class="mc-radio-input cdk-visually-hidden" #input
            [id]="inputId"
            [checked]="checked"
            [disabled]="disabled"
@@ -17,8 +15,8 @@
 
     <!-- The label content for radio control. -->
     <div class="mc-radio-label-content" [class.mc-radio-label-before]="labelPosition == 'before'">
-        <!-- Add an invisible span so JAWS can read the label -->
-        <span style="display:none">&nbsp;</span>
+        <div class="mc-radio-button__outer-circle"></div>
+        <div class="mc-radio-button__inner-circle"></div>
         <ng-content></ng-content>
     </div>
 </label>
