@@ -1,4 +1,3 @@
-// tslint:disable:no-empty
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import {
     Attribute,
@@ -33,7 +32,7 @@ export const _McToggleMixinBase:
     HasTabIndexCtor &
     CanDisableCtor &
     CanColorCtor &
-    typeof McToggleBase = mixinTabIndex(mixinColor(mixinDisabled(McToggleBase)));
+    typeof McToggleBase = mixinTabIndex(mixinColor(mixinDisabled(McToggleBase), ThemePalette.Primary));
 
 export class McToggleChange {
     source: McToggleComponent;
@@ -52,10 +51,11 @@ export class McToggleChange {
     encapsulation: ViewEncapsulation.None,
     inputs: ['disabled', 'color', 'tabIndex'],
     host: {
+        class: 'mc-toggle',
         '[id]': 'id',
         '[attr.id]': 'id',
         '[class.mc-disabled]': 'disabled',
-        '[class.mc-toggle-off]': '!checked'
+        '[class.mc-toggle_off]': '!checked'
     },
     animations: [
         trigger('switch', [
@@ -67,8 +67,6 @@ export class McToggleChange {
 })
 export class McToggleComponent extends _McToggleMixinBase
     implements ControlValueAccessor, CanColor, CanDisable, HasTabIndex {
-
-    color: ThemePalette = ThemePalette.Primary;
 
     @ViewChild('input') _inputElement: ElementRef;
 
@@ -175,8 +173,10 @@ export class McToggleComponent extends _McToggleMixinBase
         this.disabled = isDisabled;
     }
 
+    // tslint:disable-next-line:no-empty
     private _onTouchedCallback = () => {};
 
+    // tslint:disable-next-line:no-empty
     private _onChangeCallback = (_: any) => {};
 
     private _updateModelValue() {
