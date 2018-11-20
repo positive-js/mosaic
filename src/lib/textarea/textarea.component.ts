@@ -45,8 +45,7 @@ export const McTextareaMixinBase: CanUpdateErrorStateCtor & typeof McTextareaBas
         '[disabled]': 'disabled',
         '[required]': 'required',
         '(blur)': 'focusChanged(false)',
-        '(focus)': 'focusChanged(true)',
-        '(input)': 'onInput()'
+        '(focus)': 'focusChanged(true)'
     },
     providers: [{ provide: McFormFieldControl, useExisting: McTextarea }]
 })
@@ -250,16 +249,6 @@ export class McTextarea extends McTextareaMixinBase implements McFormFieldContro
             this.focused = isFocused;
             this.stateChanges.next();
         }
-    }
-
-    onInput() {
-        // This is a noop function and is used to let Angular know whenever the value changes.
-        // Angular will run a new change detection each time the `input` event has been dispatched.
-        // It's necessary that Angular recognizes the value change, because when floatingLabel
-        // is set to false and Angular forms aren't used, the placeholder won't recognize the
-        // value changes and will not disappear.
-        // Listening to the input event wouldn't be necessary when the textarea is using the
-        // FormsModule or ReactiveFormsModule, because Angular forms also listens to input events.
     }
 
     /**
