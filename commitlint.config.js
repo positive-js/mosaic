@@ -33,6 +33,7 @@ module.exports = {
                 'tabs',
                 'textarea',
                 'timepicker',
+                'toggle',
                 'tooltip',
                 'tree',
                 'typography',
