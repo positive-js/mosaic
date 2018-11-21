@@ -31,6 +31,7 @@ $mc-toggle-padding: 26px !default;
 
     .mc-radio-button__outer-circle,
     .mc-radio-button__inner-circle {
+        box-sizing: content-box;
         position: absolute;
 
         content: '';

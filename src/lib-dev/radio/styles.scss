@@ -1,6 +1,10 @@
 //@import '../../lib/core/theming/prebuilt/default-theme';
 @import '../../lib/core/theming/prebuilt/dark-theme';
+@import '../../lib/core/visual/prebuilt/default-visual';
 
+body {
+    margin: 18px;
+}
 
 .example-radio-group {
     display: inline-flex;
