@@ -48,7 +48,7 @@
                     color: mc-color($error);
                 }
 
-                .mc-input {
+                .mc-input, .mc-textarea {
                     color: mc-color($error);
                 }
             }
@@ -67,7 +67,8 @@
                 }
 
                 .mc-icon,
-                .mc-input {
+                .mc-input,
+                .mc-textarea {
                     color: mc-color($foreground, disabled-text);
                 }
             }

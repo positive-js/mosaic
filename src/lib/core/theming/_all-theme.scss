@@ -21,6 +21,7 @@
 @import '../../select/select-theme';
 @import '../option/option-theme';
 @import '../../tag/tag-theme';
+@import '../../textarea/textarea-theme';
 @import '../../tooltip/tooltip-theme';
 @import '../../toggle/toggle-theme';
 @import '../../splitter/splitter-theme';
@@ -52,6 +53,6 @@
     @include mc-option-theme($theme);
     @include mc-tag-theme($theme);
     @include mc-tooltip-theme($theme);
-    @include mc-toggle-theme($theme);
+    @include mc-textarea-theme($theme);
     @include mc-splitter-theme($theme);
 }

@@ -161,6 +161,7 @@
         "server-dev:select": "npm run server-dev -- --env.component select",
         "server-dev:splitter": "npm run server-dev -- --env.component splitter",
         "server-dev:tag": "npm run server-dev -- --env.component tag",
+        "server-dev:textarea": "npm run server-dev -- --env.component textarea",
         "server-dev:toggle": "npm run server-dev -- --env.component toggle",
         "server-dev:theme-picker": "npm run server-dev -- --env.component theme-picker",
         "server-dev:tree": "npm run server-dev -- --env.component tree",
