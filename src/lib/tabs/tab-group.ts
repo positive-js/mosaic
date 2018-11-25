@@ -58,7 +58,7 @@ export interface IMcTabsConfig {
 }
 
 /** Injection token that can be used to provide the default options the tabs module. */
-export const MAT_TABS_CONFIG = new InjectionToken('MAT_TABS_CONFIG');
+export const MC_TABS_CONFIG = new InjectionToken('MC_TABS_CONFIG');
 
 // Boilerplate for applying mixins to McTabGroup.
 /** @docs-private */
@@ -71,9 +71,8 @@ export const _McTabGroupMixinBase:
   mixinColor(mixinDisabled(McTabGroupBase));
 
 /**
- * Mcerial design tab-group component.  Supports basic tab pairs (label + content) and includes
- * keyboard navigation and screen reader.
- * See: https://material.io/design/components/tabs.html
+ * Tab-group component.  Supports basic tab pairs (label + content) and includes
+ * keyboard navigation.
  */
 @Component({
   selector: 'mc-tab-group',
@@ -148,7 +147,7 @@ export class McTabGroup extends _McTabGroupMixinBase implements AfterContentInit
 
   constructor(elementRef: ElementRef,
               private changeDetectorRef: ChangeDetectorRef,
-              @Inject(MAT_TABS_CONFIG) @Optional() defaultConfig?: IMcTabsConfig) {
+              @Inject(MC_TABS_CONFIG) @Optional() defaultConfig?: IMcTabsConfig) {
     super(elementRef);
     this.groupId = nextId++;
     this.animationDuration = defaultConfig && defaultConfig.animationDuration ?
