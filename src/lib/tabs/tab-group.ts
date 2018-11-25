@@ -276,19 +276,19 @@ export class McTabGroup extends _McTabGroupMixinBase implements AfterContentInit
   }
 
   /** Handle click events, setting new selected index if appropriate. */
-  handleClick(tab: McTab, tabHeader: McTabHeader, idx: number) {
+  handleClick(tab: McTab, tabHeader: McTabHeader, index: number) {
     if (!tab.disabled) {
-      this.selectedIndex = tabHeader.focusIndex = idx;
+      this.selectedIndex = tabHeader.focusIndex = index;
     }
   }
 
   /** Retrieves the tabindex for the tab. */
-  getTabIndex(tab: McTab, idx: number): number | null {
+  getTabIndex(tab: McTab, index: number): number | null {
     if (tab.disabled) {
       return null;
     }
 
-    return this.selectedIndex === idx ? 0 : -1;
+    return this.selectedIndex === index ? 0 : -1;
   }
 
   private createChangeEvent(index: number): McTabChangeEvent {
