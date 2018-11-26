@@ -35,7 +35,7 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
 }
 
 .mc-select__trigger {
-    display: inline-table;
+    display: flex;
     box-sizing: border-box;
     position: relative;
 
@@ -52,8 +52,8 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
 }
 
 .mc-select__matcher {
-    display: table-cell;
-    vertical-align: middle;
+    display: flex;
+    align-items: center;
 
     width: 100%;
 

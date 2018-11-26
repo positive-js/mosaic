@@ -6,7 +6,7 @@ var_3: &job_defaults
     docker:
         - image: ptsecurity/node-container:0.1.0
 
-var_2: &cache_key mosaic-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}-0.1.0
+var_2: &cache_key mosaic-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}-0.2.0
 
 # Restores the cache that could be available for the current Yarn lock file.
 var_5: &restore_cache

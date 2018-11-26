@@ -8,7 +8,7 @@ $small-toggle-border-radius: 8px;
 
 $label-margin: 8px;
 
-mc-toggle {
+.mc-toggle {
     display: inline-block;
 
     .mc-toggle-layout {
@@ -19,28 +19,13 @@ mc-toggle {
         white-space: nowrap;
     }
 
-    .mc-toggle__container {
-        display: flex;
-        align-items: center;
-        position: relative;
-
-        &.left {
-            flex-direction: row-reverse;
-        }
-    }
-
-    .mc-toggle__content {
-        &.left {
-            margin-right: $label-margin;
-        }
-
-        &.right {
-            margin-left: $label-margin;
-        }
-    }
-
     .mc-toggle-bar {
         position: relative;
+
+        border: {
+            width: 1px;
+            style: solid;
+        }
 
         &.mc-toggle-label-position-left {
             order: 1;
@@ -50,25 +35,51 @@ mc-toggle {
     .mc-toggle-bar-container {
         position: relative;
     }
+}
 
-    .mc-toggle__focus-frame {
-        position: absolute;
-        z-index: 1;
-        top: -1px; // due to border
-        left: -1px; // due to border
-    }
+.mc-toggle__container {
+    display: flex;
+    align-items: center;
+    position: relative;
 
-    .mc-toggle__circle {
-        position: absolute;
-        border-radius: 100%;
-        margin-top: -1px; // due to border
-        margin-left: -1px; // due to border
-        transform: translateX(-1px); // due to EDGE animation features
+    &.left {
+        flex-direction: row-reverse;
     }
 }
 
-mc-toggle:not(.mc-toggle_small) {
+.mc-toggle__content {
+    &.left {
+        margin-right: $label-margin;
+    }
 
+    &.right {
+        margin-left: $label-margin;
+    }
+}
+
+.mc-toggle__circle {
+    position: absolute;
+
+    border: {
+        width: 1px;
+        style: solid;
+        radius: 100%;
+    }
+
+    margin-top: -1px;
+    margin-left: -1px;
+    transform: translateX(-1px); // due to EDGE animation features
+}
+
+.mc-toggle__focus-frame {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.mc-toggle:not(.mc-toggle_small) {
     .mc-toggle-bar {
         height: $toggle-height;
         width: $toggle-width;
@@ -76,9 +87,9 @@ mc-toggle:not(.mc-toggle_small) {
     }
 
     .mc-toggle__focus-frame {
-        border-radius: $toggle-border-radius + 1;
-        height: $toggle-height + 2;
-        width: $toggle-width + 2;
+        border-radius: $toggle-border-radius;
+        height: $toggle-height;
+        width: $toggle-width;
     }
 
     .mc-toggle__circle {
@@ -87,8 +98,7 @@ mc-toggle:not(.mc-toggle_small) {
     }
 }
 
-mc-toggle.mc-toggle_small {
-
+.mc-toggle.mc-toggle_small {
     .mc-toggle-bar {
         height: $small-toggle-height;
         width: $small-toggle-width;
@@ -96,9 +106,9 @@ mc-toggle.mc-toggle_small {
     }
 
     .mc-toggle__focus-frame {
-        border-radius: $small-toggle-border-radius + 1;
-        height: $small-toggle-height + 2;
-        width: $small-toggle-width + 2;
+        border-radius: $small-toggle-border-radius;
+        height: $small-toggle-height;
+        width: $small-toggle-width;
     }
 
     .mc-toggle__circle {
@@ -107,6 +117,6 @@ mc-toggle.mc-toggle_small {
     }
 }
 
-mc-toggle:not(.mc-disabled) {
+.mc-toggle:not(.mc-disabled) {
     cursor: pointer;
 }
