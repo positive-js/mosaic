@@ -1,78 +1,82 @@
 .mc-tab-header {
-  display: flex;
+    display: flex;
 }
 
 .mc-tab-header-pagination {
-  position: relative;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  min-width: 32px;
-  cursor: pointer;
-  z-index: 2;
+    position: relative;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    min-width: 32px;
+    cursor: pointer;
+    z-index: 2;
 
-  .mc-tab-header-pagination-controls-enabled & {
-    display: flex;
-  }
-}
-
-// The pagination control that is displayed on the left side of the tab header.
-.mc-tab-header-pagination-before, .mc-tab-header-rtl .mc-tab-header-pagination-after {
-  padding-left: 4px;
-  .mc-tab-header-pagination-chevron {
-    transform: rotate(-135deg);
-  }
-}
-
-// The pagination control that is displayed on the right side of the tab header.
-.mc-tab-header-rtl .mc-tab-header-pagination-before, .mc-tab-header-pagination-after {
-  padding-right: 4px;
-  .mc-tab-header-pagination-chevron {
-    transform: rotate(45deg);
-  }
+    .mc-tab-header-pagination-controls-enabled & {
+        display: flex;
+    }
 }
 
 .mc-tab-header-pagination-chevron {
-  border-style: solid;
-  border-width: 2px 2px 0 0;
-  content: '';
-  height: 8px;
-  width: 8px;
+    border-style: solid;
+    border-width: 2px 2px 0 0;
+    content: "";
+    height: 8px;
+    width: 8px;
+}
+
+// The pagination control that is displayed on the right side of the tab header.
+.mc-tab-header-pagination-after,
+.mc-tab-header-rtl .mc-tab-header-pagination-before {
+    padding-right: 4px;
+
+    .mc-tab-header-pagination-chevron {
+        transform: rotate(45deg);
+    }
+}
+
+// The pagination control that is displayed on the left side of the tab header.
+.mc-tab-header-pagination-before,
+.mc-tab-header-rtl .mc-tab-header-pagination-after {
+    padding-left: 4px;
+
+    .mc-tab-header-pagination-chevron {
+        transform: rotate(-135deg);
+    }
 }
 
 .mc-tab-header-pagination-disabled {
-  box-shadow: none;
-  cursor: default;
+    box-shadow: none;
+    cursor: default;
 }
 
 .mc-tab-label-container {
-  display: flex;
-  flex-grow: 1;
-  overflow: hidden;
-  z-index: 1;
+    display: flex;
+    flex-grow: 1;
+    overflow: hidden;
+    z-index: 1;
 }
 
 .mc-tab-list {
-  flex-grow: 1;
-  position: relative;
-  transition: transform 500ms cubic-bezier(0.35, 0, 0.25, 1);
+    flex-grow: 1;
+    position: relative;
+    transition: transform 500ms cubic-bezier(0.35, 0, 0.25, 1);
 }
 
 .mc-tab-labels {
-  display: flex;
+    display: flex;
 
-  .mc-tab-group_align-labels-center & {
-    justify-content: center;
-  }
+    .mc-tab-group_align-labels-center & {
+        justify-content: center;
+    }
 
-  .mc-tab-group_align-labels-end & {
-    justify-content: flex-end;
-  }
+    .mc-tab-group_align-labels-end & {
+        justify-content: flex-end;
+    }
 }
 
 .mc-tab-label {
-  .mc-tab-group_stretch-labels & {
-    flex-basis: 0;
-    flex-grow: 1;
-  }
+    .mc-tab-group_stretch-labels & {
+        flex-basis: 0;
+        flex-grow: 1;
+    }
 }

@@ -1,8 +1,8 @@
 .mc-tab-body-content {
-  height: 100%;
-  overflow: auto;
+    height: 100%;
+    overflow: auto;
 
-  .mc-tab-group_dynamic-height & {
-    overflow: hidden;
-  }
+    .mc-tab-group_dynamic-height & {
+        overflow: hidden;
+    }
 }

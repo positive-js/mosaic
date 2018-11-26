@@ -9,11 +9,11 @@ import { McTab } from './tab';
 import { McTabBody, McTabBodyPortal } from './tab-body';
 import { McTabContent } from './tab-content';
 import {
-  McTabGroup,
-  McLightTabsCssStyler,
-  McAlignTabsCenterCssStyler,
-  McAlignTabsEndCssStyler,
-  McStretchTabsCssStyler
+    McTabGroup,
+    McLightTabsCssStyler,
+    McAlignTabsCenterCssStyler,
+    McAlignTabsEndCssStyler,
+    McStretchTabsCssStyler
 } from './tab-group';
 import { McTabHeader } from './tab-header';
 import { McTabLabel } from './tab-label';
@@ -22,42 +22,42 @@ import { McTabLink, McTabNav } from './tab-nav-bar/tab-nav-bar';
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    McCommonModule,
-    PortalModule,
-    A11yModule,
-    BrowserAnimationsModule
-  ],
-  // Don't export all components because some are only to be used internally.
-  exports: [
-    McCommonModule,
-    McTabGroup,
-    McTabLabel,
-    McTab,
-    McTabNav,
-    McTabLink,
-    McTabContent,
-    McLightTabsCssStyler,
-    McAlignTabsCenterCssStyler,
-    McAlignTabsEndCssStyler,
-    McStretchTabsCssStyler
-  ],
-  declarations: [
-    McTabGroup,
-    McTabLabel,
-    McTab,
-    McTabLabelWrapper,
-    McTabNav,
-    McTabLink,
-    McTabBody,
-    McTabBodyPortal,
-    McTabHeader,
-    McTabContent,
-    McLightTabsCssStyler,
-    McAlignTabsCenterCssStyler,
-    McAlignTabsEndCssStyler,
-    McStretchTabsCssStyler
-  ]
+    imports: [
+        CommonModule,
+        McCommonModule,
+        PortalModule,
+        A11yModule,
+        BrowserAnimationsModule
+    ],
+    // Don't export all components because some are only to be used internally.
+    exports: [
+        McCommonModule,
+        McTabGroup,
+        McTabLabel,
+        McTab,
+        McTabNav,
+        McTabLink,
+        McTabContent,
+        McLightTabsCssStyler,
+        McAlignTabsCenterCssStyler,
+        McAlignTabsEndCssStyler,
+        McStretchTabsCssStyler
+    ],
+    declarations: [
+        McTabGroup,
+        McTabLabel,
+        McTab,
+        McTabLabelWrapper,
+        McTabNav,
+        McTabLink,
+        McTabBody,
+        McTabBodyPortal,
+        McTabHeader,
+        McTabContent,
+        McLightTabsCssStyler,
+        McAlignTabsCenterCssStyler,
+        McAlignTabsEndCssStyler,
+        McStretchTabsCssStyler
+    ]
 })
-export class McTabsModule { }
+export class McTabsModule {}

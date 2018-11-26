@@ -1,9 +1,10 @@
-<div class="mc-tab-body-content" #content
+<div class="mc-tab-body-content"
+     #content
      [@translateTab]="{
-        value: _position,
+        value: bodyPosition,
         params: {animationDuration: animationDuration}
      }"
-     (@translateTab.start)="_onTranslateTabStarted($event)"
-     (@translateTab.done)="_onTranslateTabComplete($event)">
-  <ng-template mcTabBodyHost></ng-template>
+     (@translateTab.start)="onTranslateTabStarted($event)"
+     (@translateTab.done)="onTranslateTabComplete($event)">
+    <ng-template mcTabBodyHost></ng-template>
 </div>

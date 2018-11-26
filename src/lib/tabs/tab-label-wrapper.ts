@@ -1,14 +1,16 @@
 import { Directive, ElementRef } from '@angular/core';
-import { CanDisable, CanDisableCtor, mixinDisabled } from '@ptsecurity/mosaic/core';
+import {
+    CanDisable,
+    CanDisableCtor,
+    mixinDisabled
+} from '@ptsecurity/mosaic/core';
 
 
 // Boilerplate for applying mixins to McTabLabelWrapper.
 /** @docs-private */
-export class McTabLabelWrapperBase { }
-export const _McTabLabelWrapperMixinBase:
-    CanDisableCtor &
-    typeof McTabLabelWrapperBase =
-    mixinDisabled(McTabLabelWrapperBase);
+export class McTabLabelWrapperBase {}
+export const mcTabLabelWrapperMixinBase: CanDisableCtor &
+    typeof McTabLabelWrapperBase = mixinDisabled(McTabLabelWrapperBase);
 
 /**
  * Used in the `mc-tab-group` view to display tab labels.
@@ -22,7 +24,8 @@ export const _McTabLabelWrapperMixinBase:
         '[attr.aria-disabled]': '!!disabled'
     }
 })
-export class McTabLabelWrapper extends _McTabLabelWrapperMixinBase implements CanDisable {
+export class McTabLabelWrapper extends mcTabLabelWrapperMixinBase
+    implements CanDisable {
     constructor(public elementRef: ElementRef) {
         super();
     }

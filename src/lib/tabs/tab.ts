@@ -13,18 +13,21 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { TemplatePortal } from '@ptsecurity/cdk/portal';
-import { CanDisable, CanDisableCtor, mixinDisabled } from '@ptsecurity/mosaic/core';
+import {
+    CanDisable,
+    CanDisableCtor,
+    mixinDisabled
+} from '@ptsecurity/mosaic/core';
 import { Subject } from 'rxjs';
 
 import { McTabContent } from './tab-content';
 import { McTabLabel } from './tab-label';
 
 
-export class McTabBase { }
-export const _McTabMixinBase:
-    CanDisableCtor &
-    typeof McTabBase =
-    mixinDisabled(McTabBase);
+export class McTabBase {}
+export const mcTabMixinBase: CanDisableCtor & typeof McTabBase = mixinDisabled(
+    McTabBase
+);
 
 @Component({
     selector: 'mc-tab',
@@ -34,37 +37,43 @@ export const _McTabMixinBase:
     encapsulation: ViewEncapsulation.None,
     exportAs: 'mcTab'
 })
-export class McTab extends _McTabMixinBase implements OnInit, CanDisable, OnChanges, OnDestroy {
-
+export class McTab extends mcTabMixinBase
+    implements OnInit, CanDisable, OnChanges, OnDestroy {
     /** @docs-private */
     get content(): TemplatePortal | null {
-        return this._contentPortal;
+        return this.contentPortal;
     }
     /** Content for the tab label given by `<ng-template mc-tab-label>`. */
-    @ContentChild(McTabLabel) templateLabel: McTabLabel;
+    @ContentChild(McTabLabel)
+    templateLabel: McTabLabel;
 
     /**
      * Template provided in the tab content that will be used if present, used to enable lazy-loading
      */
-    @ContentChild(McTabContent, { read: TemplateRef }) _explicitContent: TemplateRef<any>;
+    @ContentChild(McTabContent, { read: TemplateRef })
+    explicitContent: TemplateRef<any>;
 
     /** Template inside the McTab view that contains an `<ng-content>`. */
-    @ViewChild(TemplateRef) _implicitContent: TemplateRef<any>;
+    @ViewChild(TemplateRef)
+    implicitContent: TemplateRef<any>;
 
     /** Plain text label for the tab, used when there is no template label. */
-    @Input('label') textLabel: string = '';
+    @Input('label')
+    textLabel: string = '';
 
     /** Aria label for the tab. */
-    @Input('aria-label') ariaLabel: string;
+    @Input('aria-label')
+    ariaLabel: string;
 
     /**
      * Reference to the element that the tab is labelled by.
      * Will be cleared if `aria-label` is set at the same time.
      */
-    @Input('aria-labelledby') ariaLabelledby: string;
+    @Input('aria-labelledby')
+    ariaLabelledby: string;
 
     /** Emits whenever the internal state of the tab changes. */
-    readonly _stateChanges = new Subject<void>();
+    readonly stateChanges = new Subject<void>();
 
     /**
      * The relatively indexed position where 0 represents the center, negative is left, and positive
@@ -84,24 +93,29 @@ export class McTab extends _McTabMixinBase implements OnInit, CanDisable, OnChan
     isActive = false;
 
     /** Portal that will be the hosted content of the tab */
-    private _contentPortal: TemplatePortal | null = null;
+    private contentPortal: TemplatePortal | null = null;
 
-    constructor(private _viewContainerRef: ViewContainerRef) {
+    constructor(private viewContainerRef: ViewContainerRef) {
         super();
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        if (changes.hasOwnProperty('textLabel') || changes.hasOwnProperty('disabled')) {
-            this._stateChanges.next();
+        if (
+            changes.hasOwnProperty('textLabel') ||
+            changes.hasOwnProperty('disabled')
+        ) {
+            this.stateChanges.next();
         }
     }
 
     ngOnDestroy(): void {
-        this._stateChanges.complete();
+        this.stateChanges.complete();
     }
 
     ngOnInit(): void {
-        this._contentPortal = new TemplatePortal(
-            this._explicitContent || this._implicitContent, this._viewContainerRef);
+        this.contentPortal = new TemplatePortal(
+            this.explicitContent || this.implicitContent,
+            this.viewContainerRef
+        );
     }
 }

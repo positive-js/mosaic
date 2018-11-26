@@ -19,6 +19,7 @@
                 color: $border-color;
             }
         }
+
         &.cdk-keyboard-focused {
             &:after {
                 border: {
@@ -26,6 +27,7 @@
                 }
             }
         }
+
         &.mc-tab-disabled {
             color: mc-color($foreground, disabled-text);
         }
@@ -42,11 +44,13 @@
                         bottom-color: transparent;
                     }
                 }
+
                 &:hover:not(.mc-tab-label-active) {
                     background: mc-color($background, 'hover');
                 }
             }
         }
+
         &.mc-tab-group-light {
             .mc-tab-label,
             .mc-tab-link {
@@ -55,6 +59,7 @@
                         background-color: mc-color($primary, 500);
                     }
                 }
+
                 &:hover:not(.mc-tab-label-active) {
                     border-bottom-color: transparent;
 
@@ -62,6 +67,7 @@
                         background-color: mc-color($second, 300);
                     }
                 }
+
                 &.mc-tab-disabled.mc-tab-label-active {
                     &:before {
                         background-color: $border-color;

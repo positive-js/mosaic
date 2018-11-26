@@ -1,22 +1,26 @@
 <div class="mc-tab-header-pagination mc-tab-header-pagination-before mc-elevation-z4"
      aria-hidden="true"
-     [class.mc-tab-header-pagination-disabled]="_disableScrollBefore"
-     (click)="_scrollHeader('before')">
-  <div class="mc-tab-header-pagination-chevron"></div>
+     [class.mc-tab-header-pagination-disabled]="disableScrollBefore"
+     (click)="scrollHeader('before')">
+    <div class="mc-tab-header-pagination-chevron"></div>
 </div>
 
-<div class="mc-tab-label-container" #tabListContainer
-     (keydown)="_handleKeydown($event)">
-  <div class="mc-tab-list" #tabList role="tablist" (cdkObserveContent)="_onContentChanges()">
-    <div class="mc-tab-labels">
-      <ng-content></ng-content>
+<div class="mc-tab-label-container"
+     #tabListContainer
+     (keydown)="handleKeydown($event)">
+    <div class="mc-tab-list"
+         #tabList
+         role="tablist"
+         (cdkObserveContent)="onContentChanges()">
+        <div class="mc-tab-labels">
+            <ng-content></ng-content>
+        </div>
     </div>
-  </div>
 </div>
 
 <div class="mc-tab-header-pagination mc-tab-header-pagination-after mc-elevation-z4"
      aria-hidden="true"
-     [class.mc-tab-header-pagination-disabled]="_disableScrollAfter"
-     (click)="_scrollHeader('after')">
-  <div class="mc-tab-header-pagination-chevron"></div>
+     [class.mc-tab-header-pagination-disabled]="disableScrollAfter"
+     (click)="scrollHeader('after')">
+    <div class="mc-tab-header-pagination-chevron"></div>
 </div>
