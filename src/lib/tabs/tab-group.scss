@@ -18,7 +18,7 @@
         cursor: default;
     }
 
-    &.mc-tab-group-inverted-header {
+    &.mc-tab-group_inverted-header {
         flex-direction: column-reverse;
     }
 
@@ -37,15 +37,6 @@
 
 .mc-tab-label-container {
     padding: 1px 1px 0 1px; // Prevent focus border overflow
-}
-
-// Wraps each tab label
-
-
-// Note that we only want to target direct descendant tabs.
-.mc-tab-group[mc-stretch-tabs] > .mc-tab-header .mc-tab-label {
-    flex-basis: 0;
-    flex-grow: 1;
 }
 
 // The bottom section of the view; contains the tab bodies
@@ -73,7 +64,7 @@
         flex-grow: 1;
     }
 
-    .mc-tab-group.mc-tab-group-dynamic-height &.mc-tab-body-active {
+    .mc-tab-group.mc-tab-group_dynamic-height &.mc-tab-body-active {
         overflow-y: hidden;
     }
 }

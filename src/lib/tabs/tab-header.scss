@@ -61,11 +61,18 @@
 .mc-tab-labels {
   display: flex;
 
-  [mc-align-tabs='center'] & {
+  .mc-tab-group_align-labels-center & {
     justify-content: center;
   }
 
-  [mc-align-tabs='end'] & {
+  .mc-tab-group_align-labels-end & {
     justify-content: flex-end;
+  }
+}
+
+.mc-tab-label {
+  .mc-tab-group_stretch-labels & {
+    flex-basis: 0;
+    flex-grow: 1;
   }
 }

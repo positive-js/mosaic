@@ -8,7 +8,13 @@ import { McCommonModule } from '@ptsecurity/mosaic/core';
 import { McTab } from './tab';
 import { McTabBody, McTabBodyPortal } from './tab-body';
 import { McTabContent } from './tab-content';
-import { McTabGroup, McLightTabsCSSStyler } from './tab-group';
+import {
+  McTabGroup,
+  McLightTabsCssStyler,
+  McAlignTabsCenterCssStyler,
+  McAlignTabsEndCssStyler,
+  McStretchTabsCssStyler
+} from './tab-group';
 import { McTabHeader } from './tab-header';
 import { McTabLabel } from './tab-label';
 import { McTabLabelWrapper } from './tab-label-wrapper';
@@ -32,7 +38,10 @@ import { McTabLink, McTabNav } from './tab-nav-bar/tab-nav-bar';
     McTabNav,
     McTabLink,
     McTabContent,
-    McLightTabsCSSStyler
+    McLightTabsCssStyler,
+    McAlignTabsCenterCssStyler,
+    McAlignTabsEndCssStyler,
+    McStretchTabsCssStyler
   ],
   declarations: [
     McTabGroup,
@@ -45,7 +54,10 @@ import { McTabLink, McTabNav } from './tab-nav-bar/tab-nav-bar';
     McTabBodyPortal,
     McTabHeader,
     McTabContent,
-    McLightTabsCSSStyler
+    McLightTabsCssStyler,
+    McAlignTabsCenterCssStyler,
+    McAlignTabsEndCssStyler,
+    McStretchTabsCssStyler
   ]
 })
 export class McTabsModule { }

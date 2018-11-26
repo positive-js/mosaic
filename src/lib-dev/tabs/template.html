@@ -1,6 +1,5 @@
 <div>
-    <mc-tab-group mc-light-tabs
-                  mc-align-tabs="start">
+    <mc-tab-group mc-light-tabs>
         <mc-tab label="First">Content 1</mc-tab>
         <mc-tab label="Second">Content 2</mc-tab>
         <mc-tab disabled
@@ -9,7 +8,7 @@
         <mc-tab label="5">Content 5</mc-tab>
     </mc-tab-group>
 
-    <mc-tab-group mc-align-tabs="center">
+    <mc-tab-group mc-align-tabs-center>
         <mc-tab label="First">Content 1</mc-tab>
         <mc-tab disabled
                 label="Second">Content 2</mc-tab>
@@ -21,7 +20,8 @@
     <h3>Navigation</h3>
 
     <nav mc-tab-nav-bar
-         mc-light-tabs>
+         mc-light-tabs
+         mc-align-tabs-end>
         <a mc-tab-link
            disabled
            *ngFor="let link of links"
@@ -61,7 +61,7 @@
         <mc-tab label="Third">Content 3</mc-tab>
     </mc-tab-group>
 
-    <mc-tab-group>
+    <mc-tab-group mc-stretch-tabs>
         <mc-tab>
             <ng-template mc-tab-label>
                 <i mc-icon="mc-search_16"></i>

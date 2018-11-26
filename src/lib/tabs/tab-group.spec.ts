@@ -516,12 +516,12 @@ describe('McTabGroup', () => {
     it('should support setting the header position', () => {
       const tabGroupNode = fixture.debugElement.query(By.css('mc-tab-group')).nativeElement;
 
-      expect(tabGroupNode.classList).not.toContain('mc-tab-group-inverted-header');
+      expect(tabGroupNode.classList).not.toContain('mc-tab-group_inverted-header');
 
       tabGroup.headerPosition = 'below';
       fixture.detectChanges();
 
-      expect(tabGroupNode.classList).toContain('mc-tab-group-inverted-header');
+      expect(tabGroupNode.classList).toContain('mc-tab-group_inverted-header');
     });
   });
 

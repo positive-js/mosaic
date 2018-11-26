@@ -19,9 +19,18 @@
 }
 
 .mc-tab-links {
-    position: relative;
     display: flex;
+    position: relative;
     padding: 1px 1px 0 1px; // Prevent focus border overflow
+    flex-grow: 1;
+
+    .mc-tab-group_align-labels-center & {
+        justify-content: center;
+    }
+
+    .mc-tab-group_align-labels-end & {
+        justify-content: flex-end;
+    }
 }
 
 .mc-tab-link {
@@ -29,7 +38,7 @@
     text-decoration: none;  // Removes anchor underline styling
     -webkit-tap-highlight-color: transparent;
 
-    [mc-stretch-tabs] & {
+    .mc-tab-group_stretch-labels & {
         flex-basis: 0;
         flex-grow: 1;
     }

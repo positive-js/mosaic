@@ -35,7 +35,25 @@ import { McTabHeader } from './tab-header';
   selector: 'mc-tab-group[mc-light-tabs], [mc-tab-nav-bar][mc-light-tabs]',
   host: { class: 'mc-tab-group-light' }
 })
-export class McLightTabsCSSStyler {}
+export class McLightTabsCssStyler {}
+
+@Directive({
+  selector: 'mc-tab-group[mc-align-tabs-center], [mc-tab-nav-bar][mc-align-tabs-center]',
+  host: { class: 'mc-tab-group_align-labels-center' }
+})
+export class McAlignTabsCenterCssStyler {}
+
+@Directive({
+  selector: 'mc-tab-group[mc-align-tabs-end], [mc-tab-nav-bar][mc-align-tabs-end]',
+  host: { class: 'mc-tab-group_align-labels-end' }
+})
+export class McAlignTabsEndCssStyler {}
+
+@Directive({
+  selector: 'mc-tab-group[mc-stretch-tabs], [mc-tab-nav-bar][mc-stretch-tabs]',
+  host: { class: 'mc-tab-group_stretch-labels' }
+})
+export class McStretchTabsCssStyler {}
 
 /** Used to generate unique ID's for each tab component */
 let nextId = 0;
@@ -84,8 +102,8 @@ export const _McTabGroupMixinBase:
   inputs: ['color'],
   host: {
     class: 'mc-tab-group',
-    '[class.mc-tab-group-dynamic-height]': 'dynamicHeight',
-    '[class.mc-tab-group-inverted-header]': 'headerPosition === "below"'
+    '[class.mc-tab-group_dynamic-height]': 'dynamicHeight',
+    '[class.mc-tab-group_inverted-header]': 'headerPosition === "below"'
   }
 })
 export class McTabGroup extends _McTabGroupMixinBase implements AfterContentInit,
