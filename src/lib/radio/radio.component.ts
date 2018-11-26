@@ -303,8 +303,8 @@ export const _McRadioButtonMixinBase:
     host: {
         class: 'mc-radio-button',
         '[attr.id]': 'id',
-        '[class.mc-radio-checked]': 'checked',
-        '[class.mc-radio-disabled]': 'disabled',
+        '[class.mc-checked]': 'checked',
+        '[class.mc-disabled]': 'disabled',
         '(focus)': '_inputElement.nativeElement.focus()'
     }
 })

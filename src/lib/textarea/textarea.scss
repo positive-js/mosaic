@@ -1,0 +1,26 @@
+@import 'textarea-base';
+
+$mc-text-area-min-height: 50px; // 2 lines
+
+.mc-textarea {
+    @extend %mc-textarea-base;
+
+    display: inline-block;
+    -webkit-appearance: none; // Chrome textaria height sizing fix
+    vertical-align: bottom; // Chrome textaria height sizing fix
+
+    &:not(.mc-textarea-resizable) {
+        box-sizing: border-box;
+        overflow-y: hidden;
+    }
+
+    &.mc-textarea-resizable {
+        resize: vertical;
+        min-height: $mc-text-area-min-height;
+    }
+}
+
+/* remove default red border for HTML5 validation invalid fields in Firefox */
+.mc-textarea:invalid {
+    box-shadow: unset;
+}

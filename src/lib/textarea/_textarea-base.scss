@@ -1,0 +1,17 @@
+$mc-textarea-padding-horizontal: 16px;
+$mc-textarea-padding-vertical: 5px;
+
+%mc-textarea-base {
+    background: transparent;
+    margin: 0;
+    border: none;
+    outline: none;
+
+    resize: none;
+    overflow: auto;
+
+    width: 100%;
+
+    box-sizing: border-box;
+    padding: $mc-textarea-padding-vertical $mc-textarea-padding-horizontal;
+}

@@ -2,34 +2,21 @@ import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { McTextareaModule } from '@ptsecurity/mosaic/textarea';
 
-import { McRadioModule } from '../../lib/radio';
-import { ThemePickerModule } from '../theme-picker';
+import { McFormFieldModule } from '../../lib/form-field';
 
 
 @Component({
     selector: 'app',
-    styleUrls: ['./styles.css'],
+    template: require('./template.html'),
     encapsulation: ViewEncapsulation.None,
-    template: require('./template.html')
+    styleUrls: ['./styles.scss']
 })
 export class DemoComponent {
-    favoriteFruit: string;
-
-    isDisabled: boolean = true;
-
-    fruits = [
-        'Apple',
-        'Banana',
-        'Tomato',
-        'Крякать как уточка'
-    ];
-
-    selectionList = [
-        {name: 'Yes', value: 'true', selected: false},
-        {name: 'No', value: 'false', selected: true}
-    ];
+    value: string;
 }
+
 
 @NgModule({
     declarations: [
@@ -37,17 +24,18 @@ export class DemoComponent {
     ],
     imports: [
         BrowserModule,
-        FormsModule,
-        McRadioModule,
-        ThemePickerModule
+        McTextareaModule,
+        McFormFieldModule,
+        FormsModule
     ],
     bootstrap: [
         DemoComponent
     ]
 })
-export class DemoModule {
-}
+export class DemoModule {}
 
+// tslint:disable:no-console
 platformBrowserDynamic()
     .bootstrapModule(DemoModule)
     .catch((error) => console.error(error));
+

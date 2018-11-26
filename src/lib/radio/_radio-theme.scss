@@ -2,92 +2,85 @@
 @import '../core/styles/typography/typography-utils';
 
 
-@mixin _mc-radio-color($palette) {
-
-    .mc-radio-outer-circle {
-        border-color: mc-color($palette, 300);
-    }
-}
-
 @mixin mc-radio-theme($theme) {
-
     $primary: map-get($theme, primary);
     $second: map-get($theme, second);
-    $foreground: map-get($theme, foreground);
 
-    .mc-radio-input {
-        + .mc-radio-label-content {
-            &:before {
-                border-color: mc-color($second, 300);
-            }
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    $is-dark: map-get($theme, is-dark);
+
+    $focus-color: mc-color($primary);
+
+    .mc-radio-group {
+        color: map-get($foreground, text);
+    }
+
+    .mc-radio-button {
+        & .mc-radio-button__outer-circle {
+            background: map-get($background, background);
+            border-color: mc-color($second);
         }
 
         &:hover {
-            + .mc-radio-label-content {
-
-                &:before {
-                    background-color: darken(white, 5%);
-                }
+            & .mc-radio-button__outer-circle {
+                background: mix(map-get($background, background), map-get($background, hover), 5);
             }
         }
 
-        &:checked {
-            + .mc-radio-label-content {
+        &.mc-checked {
+            & .mc-radio-button__outer-circle {
+                background: white;
 
-                &:after {
-                    opacity: 1;
-                    background: white;
-                }
+                border-color: mc-color($primary, if($is-dark, lighter, darker));
+            }
 
-                &:before {
-                    background: mc-color($primary, 500);
-                    border-color: mc-color($primary, 600);
-                }
+            & .mc-radio-button__inner-circle {
+                display: block;
+
+                border-color: if($is-dark, mc-color($primary, 600), mc-color($primary));
             }
         }
 
-        &:checked:hover {
-            + .mc-radio-label-content {
+        & .mc-radio-input:focus {
+            + .mc-radio-label-content .mc-radio-button__outer-circle {
+                border-color: $focus-color;
 
-                &:before {
-                    background: lighten(mc-color($primary, 500), 5%);
-                    border-color: lighten(mc-color($primary, 600), 5%);
-                }
+                box-shadow: 0 0 0 2px $focus-color;
+            }
+
+            + .mc-radio-label-content .mc-radio-button__inner-circle {
+                box-shadow: 0 0 0 1px white;
             }
         }
 
-        &:focus {
-            + .mc-radio-label-content:before {
-                border-color: mc-color($primary, 500);
+        &.mc-disabled {
+            color: map-get($foreground, disabled-text);
+
+            & .mc-radio-label {
+                cursor: default;
             }
-        }
 
-        &[disabled] {
+            & .mc-radio-button__outer-circle {
+                border-color: map-get($background, button-border);
 
-            + .mc-radio-label-content {
+                background: map-get($background, button-bg);
+            }
 
-                opacity: 0.5;
-                color: mc-color($second, 700);
+            & .mc-radio-button__inner-circle {
+                border-color: map-get($background, button-bg);
 
-                &:before {
-                    background: mc-color($second, 40); // GRAY-40
-                    border: {
-                        color: mc-color($second, 100); //GRAY-100
-                    }
-                }
+                box-shadow: none;
 
-                &:after {
-                    background: mc-color($second, 200); // GRAY-200
-                }
+                background: mc-color($second, 200);
             }
         }
     }
 }
 
 @mixin mc-radio-typography($config) {
-
-    .mc-radio-button {
+    .mc-radio-group {
         @include mc-typography-level-to-styles($config, body);
-        line-height: 16px;
     }
 }

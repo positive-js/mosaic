@@ -9,19 +9,65 @@ $mc-toggle-padding: 26px !default;
 }
 
 .mc-radio-label {
-    cursor: pointer;
     display: inline-flex;
     align-items: center;
-    white-space: nowrap;
     vertical-align: middle;
+
+    cursor: pointer;
+
+    white-space: nowrap;
 }
 
-// Text label next to radio.
 .mc-radio-label-content {
     display: inline-block;
+
+    position: relative;
+
     order: 0;
     line-height: inherit;
+
+    padding-left: $mc-toggle-padding;
     padding-right: 0;
+
+    .mc-radio-button__outer-circle,
+    .mc-radio-button__inner-circle {
+        box-sizing: content-box;
+        position: absolute;
+
+        content: '';
+
+        border: {
+            style: solid;
+            radius: 50%;
+        }
+    }
+
+    .mc-radio-button__outer-circle {
+        left: 0;
+        top: calc(50% - 8px);
+
+        width: $mc-radio-size;
+        height: $mc-radio-size;
+
+        border: {
+            width: 1px;
+        }
+    }
+
+    .mc-radio-button__inner-circle {
+        display: none;
+
+        left: 1px;
+        top: calc(50% - 7px);
+
+        width: 6px;
+        height: 6px;
+
+        border: {
+            width: 4px;
+            color: transparent;
+        }
+    }
 
     [dir='rtl'] & {
         padding-right: $mc-toggle-padding;
@@ -33,75 +79,4 @@ $mc-toggle-padding: 26px !default;
     position: absolute;
     outline: none;
     opacity: 0;
-
-    + .mc-radio-label-content {
-        position: relative;
-        cursor: pointer;
-        padding-left: $mc-toggle-padding;
-
-        &:before {
-            position: absolute;
-            left: 0;
-            top: -1px;
-            content: '';
-            background: white;
-            width: $mc-radio-size;
-            height: $mc-radio-size;
-            display: block;
-            box-shadow: inset 0 0 1px 0 rgba(0, 0, 0, 0.2);
-            border: {
-                width: 1px;
-                style: solid;
-                radius: 50%;
-            }
-        }
-
-        &:after {
-            content: '';
-            top: 4px;
-            left: 5px;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            position: absolute;
-            opacity: 0;
-        }
-    }
-
-    &:checked {
-        + .mc-radio-label-content {
-
-            &:before {
-                box-shadow: unset;
-            }
-        }
-    }
-
-    &:checked:hover {
-        + .mc-radio-label-content {
-            &:after {
-                opacity: 1;
-                //background: darken(white, 5%);
-            }
-        }
-    }
-
-    &:focus {
-        + .mc-radio-label-content:before {
-            top: -2px;
-            left: -1px;
-            box-shadow: inset 0 0 0 1px white;
-            border: {
-                width: 2px;
-            }
-        }
-    }
-
-    &[disabled] {
-        cursor: default;
-
-        + .mc-radio-label-content {
-            cursor: default;
-        }
-    }
 }
