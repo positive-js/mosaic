@@ -14,7 +14,7 @@
         outline: none;
     }
 
-    &.mc-tab-disabled {
+    &.mc-tab_disabled {
         cursor: default;
     }
 
@@ -22,25 +22,25 @@
         flex-direction: column-reverse;
     }
 
-    &:not(.mc-tab-group-light) {
+    &:not(.mc-tab-group_light) {
         .mc-tab-label {
             @include tab-label
         }
     }
 
-    &.mc-tab-group-light {
+    &.mc-tab-group_light {
         .mc-tab-label {
             @include tab-label-light;
         }
     }
 }
 
-.mc-tab-label-container {
+.mc-tab-header__content {
     padding: 1px 1px 0 1px; // Prevent focus border overflow
 }
 
 // The bottom section of the view; contains the tab bodies
-.mc-tab-body-wrapper {
+.mc-tab-body__wrapper {
     display: flex;
     overflow: hidden;
     position: relative;
@@ -56,7 +56,7 @@
     // Fix for auto content wrapping in IE11
     flex-basis: 100%;
 
-    &.mc-tab-body-active {
+    &.mc-tab-body__active {
         overflow-x: hidden;
         overflow-y: auto;
         position: relative;
@@ -64,7 +64,7 @@
         flex-grow: 1;
     }
 
-    .mc-tab-group.mc-tab-group_dynamic-height &.mc-tab-body-active {
+    .mc-tab-group.mc-tab-group_dynamic-height &.mc-tab-body__active {
         overflow-y: hidden;
     }
 }

@@ -59,9 +59,9 @@ export class McTabHeaderBase {}
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         class: 'mc-tab-header',
-        '[class.mc-tab-header-pagination-controls-enabled]':
+        '[class.mc-tab-header__pagination-controls_enabled]':
             'showPaginationControls',
-        '[class.mc-tab-header-rtl]': 'getLayoutDirection() == \'rtl\''
+        '[class.mc-tab-header_rtl]': 'getLayoutDirection() == \'rtl\''
     }
 })
 export class McTabHeader extends McTabHeaderBase

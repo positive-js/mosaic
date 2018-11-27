@@ -15,7 +15,7 @@
          [attr.aria-selected]="selectedIndex == i"
          [attr.aria-label]="tab.ariaLabel || null"
          [attr.aria-labelledby]="(!tab.ariaLabel && tab.ariaLabelledby) ? tab.ariaLabelledby : null"
-         [class.mc-tab-label-active]="selectedIndex == i"
+         [class.mc-tab-label_active]="selectedIndex == i"
          [disabled]="tab.disabled"
          (click)="handleClick(tab, tabHeader, i)">
 
@@ -32,13 +32,13 @@
     </div>
 </mc-tab-header>
 
-<div class="mc-tab-body-wrapper"
+<div class="mc-tab-body__wrapper"
      #tabBodyWrapper>
     <mc-tab-body role="tabpanel"
                  *ngFor="let tab of tabs; let i = index"
                  [id]="getTabContentId(i)"
                  [attr.aria-labelledby]="getTabLabelId(i)"
-                 [class.mc-tab-body-active]="selectedIndex == i"
+                 [class.mc-tab-body__active]="selectedIndex == i"
                  [content]="tab.content"
                  [position]="tab.position"
                  [origin]="tab.origin"

@@ -68,8 +68,8 @@ export const mcTabLinkMixinBase: HasTabIndexCtor &
         '[attr.aria-current]': 'active',
         '[attr.aria-disabled]': 'disabled.toString()',
         '[attr.tabIndex]': 'tabIndex',
-        '[class.mc-tab-disabled]': 'disabled',
-        '[class.mc-tab-label-active]': 'active'
+        '[class.mc-tab_disabled]': 'disabled',
+        '[class.mc-tab-label_active]': 'active'
     }
 })
 export class McTabLink extends mcTabLinkMixinBase

@@ -5,13 +5,13 @@
 .mc-tab-nav-bar {
     display: flex;
 
-    &:not(.mc-tab-group-light) {
+    &:not(.mc-tab-group_light) {
         .mc-tab-link {
             @include tab-label;
         }
     }
 
-    &.mc-tab-group-light {
+    &.mc-tab-group_light {
         .mc-tab-link {
             @include tab-label-light;
         }
@@ -43,7 +43,7 @@
         flex-grow: 1;
     }
 
-    &.mc-tab-disabled {
+    &.mc-tab_disabled {
         // We use `pointer-events` to make the element unclickable when it's disabled, rather than
         // preventing the default action through JS, because we can't prevent the action reliably
         // due to other directives potentially registering their events earlier. This shouldn't cause

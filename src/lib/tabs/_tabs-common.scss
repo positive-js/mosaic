@@ -60,7 +60,7 @@ $mc-tab-height: 40px;
         }
     }
 
-    &.mc-tab-disabled {
+    &.mc-tab_disabled {
         pointer-events: none;
         cursor: auto;
     }
@@ -78,7 +78,7 @@ $mc-tab-height: 40px;
         }
     }
 
-    &.mc-tab-label-active {
+    &.mc-tab-label_active {
         padding-right: $mc-tab-padding-horizontal - $mc-tab-border-width;
         padding-left: $mc-tab-padding-horizontal - $mc-tab-border-width;
 
@@ -112,7 +112,7 @@ $mc-tab-height: 40px;
 @mixin tab-label-light {
     @include tab-label-common();
 
-    &.mc-tab-label-active,
+    &.mc-tab-label_active,
     &:hover {
         position: relative;
 

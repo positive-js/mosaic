@@ -227,7 +227,7 @@ describe('McTabGroup', () => {
 
             const tabLabels = fixture.debugElement.queryAll(By.css('.mc-tab-label'));
             const tabLabelContainer = fixture.debugElement
-                .query(By.css('.mc-tab-label-container')).nativeElement as HTMLElement;
+                .query(By.css('.mc-tab-header__content')).nativeElement as HTMLElement;
 
             expect(fixture.componentInstance.handleFocus).toHaveBeenCalledTimes(0);
 
@@ -295,7 +295,7 @@ describe('McTabGroup', () => {
 
         it('should have one disabled tab', () => {
             fixture.detectChanges();
-            const labels = fixture.debugElement.queryAll(By.css('.mc-tab-disabled'));
+            const labels = fixture.debugElement.queryAll(By.css('.mc-tab_disabled'));
             expect(labels.length).toBe(1);
             expect(labels[0].nativeElement.getAttribute('aria-disabled')).toBe('true');
         });
@@ -304,7 +304,7 @@ describe('McTabGroup', () => {
             fixture.detectChanges();
 
             const tabs = fixture.componentInstance.tabs.toArray();
-            let labels = fixture.debugElement.queryAll(By.css('.mc-tab-disabled'));
+            let labels = fixture.debugElement.queryAll(By.css('.mc-tab_disabled'));
             expect(tabs[2].disabled).toBe(false);
             expect(labels.length).toBe(1);
             expect(labels[0].nativeElement.getAttribute('aria-disabled')).toBe('true');
@@ -313,7 +313,7 @@ describe('McTabGroup', () => {
             fixture.detectChanges();
 
             expect(tabs[2].disabled).toBe(true);
-            labels = fixture.debugElement.queryAll(By.css('.mc-tab-disabled'));
+            labels = fixture.debugElement.queryAll(By.css('.mc-tab_disabled'));
             expect(labels.length).toBe(2);
             expect(labels.every((label) => label.nativeElement.getAttribute('aria-disabled') === 'true'))
                 .toBe(true);
@@ -569,19 +569,19 @@ describe('McTabGroup', () => {
 
         const tabLabelElement = fixture.debugElement
             .query(By.css(`.mc-tab-label:nth-of-type(${expectedIndex + 1})`)).nativeElement;
-        expect(tabLabelElement.classList.contains('mc-tab-label-active')).toBe(true);
+        expect(tabLabelElement.classList.contains('mc-tab-label_active')).toBe(true);
 
         const tabContentElement = fixture.debugElement
             .query(By.css(`mc-tab-body:nth-of-type(${expectedIndex + 1})`)).nativeElement;
-        expect(tabContentElement.classList.contains('mc-tab-body-active')).toBe(true);
+        expect(tabContentElement.classList.contains('mc-tab-body__active')).toBe(true);
     }
 
     function getSelectedLabel(fixture: ComponentFixture<any>): HTMLElement {
-        return fixture.nativeElement.querySelector('.mc-tab-label-active');
+        return fixture.nativeElement.querySelector('.mc-tab-label_active');
     }
 
     function getSelectedContent(fixture: ComponentFixture<any>): HTMLElement {
-        return fixture.nativeElement.querySelector('.mc-tab-body-active');
+        return fixture.nativeElement.querySelector('.mc-tab-body__active');
     }
 });
 

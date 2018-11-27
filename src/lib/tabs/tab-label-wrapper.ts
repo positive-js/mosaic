@@ -20,7 +20,7 @@ export const mcTabLabelWrapperMixinBase: CanDisableCtor &
     selector: '[mcTabLabelWrapper]',
     inputs: ['disabled'],
     host: {
-        '[class.mc-tab-disabled]': 'disabled',
+        '[class.mc-tab_disabled]': 'disabled',
         '[attr.aria-disabled]': '!!disabled'
     }
 })
