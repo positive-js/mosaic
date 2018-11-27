@@ -25,28 +25,33 @@ $mc-option-padding: 0 16px;
 
     -webkit-tap-highlight-color: transparent;
 
-    //.mc-optgroup &:not(.mc-option-multiple) {
-        //padding-left: $mc-dropdown-side-padding * 2;
-
-        //[dir='rtl'] & {
-            //padding-left: $mc-dropdown-side-padding;
-            //padding-right: $mc-dropdown-side-padding * 2;
-        //}
-    //}
-
     &.mc-disabled {
         cursor: default;
     }
 
-    .mc-pseudo-checkbox {
+    & .mc-pseudo-checkbox {
         margin-right: 8px;
+    }
+
+    & .mc-option-overlay {
+        position: absolute;
+
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+
+        pointer-events: none;
+        border-radius: inherit;
     }
 }
 
 .mc-option-text {
     display: inline-block;
     flex-grow: 1;
+
     overflow: hidden;
+
     white-space: nowrap;
     text-overflow: ellipsis;
 }

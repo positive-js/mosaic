@@ -31,6 +31,34 @@ $mc-checkbox-mark-stroke-size: 2 / 15 * $mc-checkbox-size !default;
 .mc-checkbox {
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
+
+    &.mc-checked {
+        .mc-checkbox-checkmark {
+            display: block;
+        }
+
+        .mc-checkbox-mixedmark {
+            display: none;
+        }
+    }
+
+    &.mc-indeterminate {
+        .mc-checkbox-checkmark {
+            display: none;
+        }
+
+        .mc-checkbox-mixedmark {
+            display: block;
+        }
+    }
+
+    &.mc-disabled {
+        cursor: default;
+
+        .mc-checkbox-frame {
+            box-shadow: none;
+        }
+    }
 }
 
 .mc-checkbox-layout {
@@ -108,33 +136,5 @@ $mc-checkbox-mark-stroke-size: 2 / 15 * $mc-checkbox-size !default;
                 right: $mc-checkbox-item-spacing;
             }
         }
-    }
-}
-
-.mc-checked {
-    .mc-checkbox-checkmark {
-        display: block;
-    }
-
-    .mc-checkbox-mixedmark {
-        display: none;
-    }
-}
-
-.mc-indeterminate {
-    .mc-checkbox-checkmark {
-        display: none;
-    }
-
-    .mc-checkbox-mixedmark {
-        display: block;
-    }
-}
-
-.mc-disabled {
-    cursor: default;
-
-    .mc-checkbox-frame {
-        box-shadow: none;
     }
 }

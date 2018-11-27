@@ -27,7 +27,7 @@
 
             &:hover .mc-form-field__container {
                 border: {
-                    color: mc-color($second, darker);
+                    color: mc-color($second, if($is-dark-theme, lighter, darker));
                 }
             }
 
@@ -39,6 +39,9 @@
                 box-shadow: 0 0 0 1px mc-color($primary);
             }
 
+            // todo временно такой класс для того что бы сделать темную тему,
+            // потом нужно разобраться почему он не проставляется в селекте
+            &.ng-invalid_ .mc-form-field__container,
             &.ng-invalid .mc-form-field__container {
                 background: {
                     color: if($is-dark-theme, transparent, mc-color($error, lighter));
@@ -48,11 +51,14 @@
                     color: mc-color($error);
                 }
 
-                .mc-input, .mc-textarea {
+                .mc-input,
+                .mc-textarea {
                     color: mc-color($error);
                 }
             }
-
+            // todo временно такой класс для того что бы сделать темную тему,
+            // потом нужно разобраться почему он не проставляется в селекте
+            &.ng-invalid_.mc-focused .mc-form-field__container,
             &.ng-invalid.mc-focused .mc-form-field__container {
                 box-shadow: 0 0 0 1px mc-color($error, darker);
             }

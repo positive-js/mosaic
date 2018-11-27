@@ -1,8 +1,35 @@
 <br><br><br><br><br><br><br>
-<div>{{ selected }}</div>
+<div style="height: 20px">{{ selected }}</div>
+
 <div class="dev-container">
     <mc-form-field>
-        <mc-select [(value)]="selected">
+        <input mcInput [(ngModel)]="value" placeholder="Placeholder">
+
+        <i mcSuffix mc-icon="mc-calendar_16" color="second"></i>
+    </mc-form-field>
+
+    <br><br>
+
+    <mc-form-field>
+        <input mcInput [(ngModel)]="value" placeholder="Placeholder" required>
+
+        <i mcSuffix mc-icon="mc-calendar_16" color="second"></i>
+    </mc-form-field>
+
+    <br><br>
+
+    <mc-form-field>
+        <input mcInput [(ngModel)]="value" placeholder="Placeholder" [disabled]="true">
+
+        <i mcSuffix mc-icon="mc-calendar_16" color="second"></i>
+    </mc-form-field>
+</div>
+
+<br>
+
+<div class="dev-container">
+    <mc-form-field>
+        <mc-select [(value)]="singleSelected">
             <mc-option value="Disabled" disabled>Disabled</mc-option>
             <mc-option value="Normal">Normal</mc-option>
             <mc-option value="Hovered">Hovered</mc-option>
@@ -20,8 +47,22 @@
             <mc-option value="Selected10">Selected10</mc-option>
         </mc-select>
     </mc-form-field>
-    <!--<br>-->
-    <!--<div>multipleSelected: {{ multipleSelected }}</div>-->
+
+    <br><br>
+
+    <mc-form-field class="ng-invalid_">
+        <mc-select [(value)]="singleSelected" required class="ng-invalid">
+            <mc-option value="Normal">Normal</mc-option>
+        </mc-select>
+    </mc-form-field>
+
+    <br><br>
+
+    <mc-form-field>
+        <mc-select [(value)]="singleSelected" [disabled]="true">
+            <mc-option value="Normal">Normal</mc-option>
+        </mc-select>
+    </mc-form-field>
 </div>
 
 <br>
@@ -50,6 +91,26 @@
             <mc-option value="Selected10">Selected10</mc-option>
         </mc-select>
     </mc-form-field>
-    <!--<br>-->
-    <!--<div>multipleSelected: {{ multipleSelected }}</div>-->
+
+    <br><br>
+
+    <mc-form-field class="ng-invalid_">
+        <mc-select multiple #select="mcSelect" [(value)]="multipleSelected" required class="ng-invalid">
+            <mc-option value="Normal">Normal</mc-option>
+            <mc-option value="Hovered">Hovered</mc-option>
+            <mc-option value="Selected">Selected</mc-option>
+            <mc-option value="Selected1">Selected1</mc-option>
+        </mc-select>
+    </mc-form-field>
+
+    <br><br>
+
+    <mc-form-field>
+        <mc-select multiple #select="mcSelect" [(value)]="multipleSelected" [disabled]="true">
+            <mc-option value="Normal">Normal</mc-option>
+            <mc-option value="Hovered">Hovered</mc-option>
+            <mc-option value="Selected">Selected</mc-option>
+            <mc-option value="Selected1">Selected1</mc-option>
+        </mc-select>
+    </mc-form-field>
 </div>

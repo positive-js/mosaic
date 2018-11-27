@@ -25,8 +25,8 @@ export type McPseudoCheckboxState = 'unchecked' | 'checked' | 'indeterminate';
     templateUrl: 'pseudo-checkbox.partial.html',
     host: {
         class: 'mc-pseudo-checkbox',
-        '[class.mc-pseudo-checkbox_indeterminate]': 'state === "indeterminate"',
-        '[class.mc-pseudo-checkbox_checked]': 'state === "checked"',
+        '[class.mc-indeterminate]': 'state === "indeterminate"',
+        '[class.mc-checked]': 'state === "checked"',
         '[class.mc-disabled]': 'disabled'
     }
 })

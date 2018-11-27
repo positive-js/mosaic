@@ -10,13 +10,13 @@
             <div *ngSwitchDefault [ngSwitch]="multiple" class="mc-select__match-container">
                 <span *ngSwitchCase="false" class="mc-select__matcher-text">{{ triggerValue }}</span>
                 <div *ngSwitchCase="true" class="mc-select__match-list">
-                    <mc-tag *ngFor="let option of triggerValues">
+                    <mc-tag *ngFor="let option of triggerValues" [disabled]="disabled">
                         {{ option.viewValue || option.value }}
                         <i mc-icon="mc-close-S_16" (click)="onRemoveMatcherItem(option, $event)"></i>
                     </mc-tag>
                 </div>
                 <div class="mc-select__match-hidden-text" [style.display]="hiddenItems > 0 ? 'block' : 'none'">
-                    ...ещё {{ hiddenItems }}
+                    {{ oneMoreText }} {{ hiddenItems }}
                 </div>
             </div>
             <ng-content select="mc-select-trigger" *ngSwitchCase="true"></ng-content>
@@ -24,7 +24,7 @@
     </div>
 
     <div class="mc-select__arrow-wrapper">
-        <i class="mc-select__arrow mc mc-angle-L_16"></i>
+        <i class="mc-select__arrow" mc-icon="mc-angle-L_16" color="second"></i>
     </div>
 </div>
 

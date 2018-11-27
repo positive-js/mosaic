@@ -3,6 +3,10 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { McButtonModule } from '@ptsecurity/mosaic/button';
+import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
+import { McIconModule } from '@ptsecurity/mosaic/icon';
+import { McInputModule } from '@ptsecurity/mosaic/input';
 
 import { McSelectModule, McSelectChange } from '@ptsecurity/mosaic/select';
 
@@ -14,6 +18,7 @@ import { McSelectModule, McSelectChange } from '@ptsecurity/mosaic/select';
     encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent {
+    singleSelected = 'Normal';
     multipleSelected = ['Normal', 'Hovered', 'Selected', 'Selected1'];
 
     onSelectionChange($event: McSelectChange) {
@@ -30,7 +35,12 @@ export class DemoComponent {
         BrowserAnimationsModule,
         BrowserModule,
         FormsModule,
-        McSelectModule
+        McSelectModule,
+
+        McButtonModule,
+        McInputModule,
+        McFormFieldModule,
+        McIconModule
     ],
     bootstrap: [
         DemoComponent
