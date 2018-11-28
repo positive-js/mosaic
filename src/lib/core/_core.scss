@@ -19,7 +19,6 @@
 @mixin mc-core-theme($theme) {
     @include mc-pseudo-checkbox-theme($theme);
 
-
     .mc-app-background {
         $background: map-get($theme, background);
         $foreground: map-get($theme, foreground);
