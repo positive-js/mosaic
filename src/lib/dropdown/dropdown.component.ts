@@ -82,7 +82,7 @@ export function MC_DROPDOWN_DEFAULT_OPTIONS_FACTORY(): McDropdownDefaultOptions 
         mcDropdownAnimations.fadeInItems
     ],
     providers: [
-        {provide: MC_DROPDOWN_PANEL, useExisting: McDropdown}
+        { provide: MC_DROPDOWN_PANEL, useExisting: McDropdown }
     ]
 })
 export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownItem>, OnInit, OnDestroy {
@@ -94,6 +94,7 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
         if (value !== 'before' && value !== 'after') {
             throwMcDropdownInvalidPositionX();
         }
+
         this._xPosition = value;
         this.setPositionClasses();
     }
@@ -105,6 +106,7 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
         if (value !== 'above' && value !== 'below') {
             throwMcDropdownInvalidPositionY();
         }
+
         this._yPosition = value;
         this.setPositionClasses();
     }
@@ -214,10 +216,9 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
 
     /** Handle a keyboard event from the dropdown, delegating to the appropriate action. */
     _handleKeydown(event: KeyboardEvent) {
-        // tslint:disable-next-line:deprecation
-        const keyCode = event.keyCode;
 
-        switch (keyCode) {
+        // tslint:disable-next-line:deprecation
+        switch (event.keyCode) {
             case ESCAPE:
                 this.closed.emit('keydown');
                 break;
@@ -226,7 +227,8 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
                 this._keyManager.setFocusOrigin('keyboard');
                 this._keyManager.onKeydown(event);
                 break;
-              default:
+            default:
+                // todo зачем обрабатывать лишние события ?
                 this._keyManager.onKeydown(event);
         }
     }
