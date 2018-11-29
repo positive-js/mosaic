@@ -1,29 +1,29 @@
 <br><br><br><br><br><br><br>
 <div style="height: 20px">{{ selected }}</div>
 
-<div class="dev-container">
-    <mc-form-field>
-        <input mcInput [(ngModel)]="value" placeholder="Placeholder">
+<!--<div class="dev-container">-->
+    <!--<mc-form-field>-->
+        <!--<input mcInput [(ngModel)]="value" placeholder="Placeholder">-->
 
-        <i mcSuffix mc-icon="mc-calendar_16" color="second"></i>
-    </mc-form-field>
+        <!--<i mcSuffix mc-icon="mc-calendar_16" color="second"></i>-->
+    <!--</mc-form-field>-->
 
-    <br><br>
+    <!--<br><br>-->
 
-    <mc-form-field>
-        <input mcInput [(ngModel)]="value" placeholder="Placeholder" required>
+    <!--<mc-form-field>-->
+        <!--<input mcInput [(ngModel)]="value" placeholder="Placeholder" required>-->
 
-        <i mcSuffix mc-icon="mc-calendar_16" color="second"></i>
-    </mc-form-field>
+        <!--<i mcSuffix mc-icon="mc-calendar_16" color="second"></i>-->
+    <!--</mc-form-field>-->
 
-    <br><br>
+    <!--<br><br>-->
 
-    <mc-form-field>
-        <input mcInput [(ngModel)]="value" placeholder="Placeholder" [disabled]="true">
+    <!--<mc-form-field>-->
+        <!--<input mcInput [(ngModel)]="value" placeholder="Placeholder" [disabled]="true">-->
 
-        <i mcSuffix mc-icon="mc-calendar_16" color="second"></i>
-    </mc-form-field>
-</div>
+        <!--<i mcSuffix mc-icon="mc-calendar_16" color="second"></i>-->
+    <!--</mc-form-field>-->
+<!--</div>-->
 
 <br>
 
@@ -50,8 +50,8 @@
 
     <br><br>
 
-    <mc-form-field class="ng-invalid_">
-        <mc-select [(value)]="singleSelected" required class="ng-invalid">
+    <mc-form-field>
+        <mc-select [formControl]="singleSelectFormControl">
             <mc-option value="Normal">Normal</mc-option>
         </mc-select>
     </mc-form-field>
@@ -67,10 +67,10 @@
 
 <br>
 
-<div>{{ multipleSelected }}</div>
+<div style="height: 20px">{{ multipleSelected }}</div>
 <div class="dev-container">
     <mc-form-field>
-        <mc-select multiple #select="mcSelect" [(value)]="multipleSelected">
+        <mc-select multiple [(value)]="multipleSelected">
             <!--<mc-select-trigger>ololo <span>{{ select.triggerValue }}</span></mc-select-trigger>-->
             <mc-option value="Disabled" disabled>Disabled</mc-option>
             <mc-option value="Normal">Normal</mc-option>
@@ -94,8 +94,8 @@
 
     <br><br>
 
-    <mc-form-field class="ng-invalid_">
-        <mc-select multiple #select="mcSelect" [(value)]="multipleSelected" required class="ng-invalid">
+    <mc-form-field>
+        <mc-select multiple [formControl]="multiSelectSelectFormControl">
             <mc-option value="Normal">Normal</mc-option>
             <mc-option value="Hovered">Hovered</mc-option>
             <mc-option value="Selected">Selected</mc-option>
@@ -106,7 +106,7 @@
     <br><br>
 
     <mc-form-field>
-        <mc-select multiple #select="mcSelect" [(value)]="multipleSelected" [disabled]="true">
+        <mc-select multiple [(value)]="multipleSelected" [disabled]="true">
             <mc-option value="Normal">Normal</mc-option>
             <mc-option value="Hovered">Hovered</mc-option>
             <mc-option value="Selected">Selected</mc-option>

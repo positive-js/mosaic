@@ -1,5 +1,5 @@
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -21,6 +21,10 @@ export class DemoComponent {
     singleSelected = 'Normal';
     multipleSelected = ['Normal', 'Hovered', 'Selected', 'Selected1'];
 
+    singleSelectFormControl = new FormControl('', Validators.required);
+
+    multiSelectSelectFormControl = new FormControl([], Validators.pattern(/^w/));
+
     onSelectionChange($event: McSelectChange) {
         console.log(`onSelectionChange: ${$event.value}`);
     }
@@ -40,7 +44,8 @@ export class DemoComponent {
         McButtonModule,
         McInputModule,
         McFormFieldModule,
-        McIconModule
+        McIconModule,
+        ReactiveFormsModule
     ],
     bootstrap: [
         DemoComponent
