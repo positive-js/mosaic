@@ -585,8 +585,6 @@ export class McSelect extends _McSelectMixinBase implements
                     this.overlayDir.overlayRef.overlayElement.style.fontSize = `${this._triggerFontSize}px`;
                 }
             });
-
-        this._onTouched();
     }
 
     /** Closes the overlay panel and focuses the host element. */
