@@ -61,6 +61,10 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
     text-overflow: ellipsis;
 
     white-space: nowrap;
+
+    & > span {
+        width: 100%;
+    }
 }
 
 .mc-select__match-list {
