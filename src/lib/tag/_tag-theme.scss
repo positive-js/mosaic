@@ -4,12 +4,11 @@
 @import '../core/theming/palette';
 
 
-@mixin _mc-tag-color($main-color, $focus-color, $is-dark-theme) {
-    color: map-get($main-color, 500);
+@mixin _mc-tag-color($main-color, $focus-color, $foreground, $background, $is-dark-theme) {
+    color: mc-color($foreground, text);
 
-    background-color: mc-color($main-color, if($is-dark-theme, 700, 100));
-
-    border-color: mc-color($main-color, if($is-dark-theme, 500, 100));
+    background: mc-color($main-color, if($is-dark-theme, 700, 100));
+    border-color: mc-color($main-color, if($is-dark-theme, 700, 100));
 
     &.mc-active,
     &.mc-focused {
@@ -19,18 +18,17 @@
 
     &.mc-disabled {
         border-color: mix(mc-color($main-color), transparent, 10%);
+        background: mix(mc-color($main-color), transparent, 10%);
 
         color: mix(mc-color($main-color), transparent, 50%);
-
-        background-color: mix(mc-color($main-color), transparent, 10%);
     }
 
     &:not(.mc-disabled) .mc-icon {
-        color: mc-color($main-color, 400);
+        color: mix(mc-color($main-color, 400), mc-color($background, hover));
 
         &:hover {
             cursor: pointer;
-            color: mc-color($main-color, 600);
+            color: mc-color($main-color, if($is-dark-theme, lighter, darker));
         }
     }
 }
@@ -46,45 +44,16 @@
     $is-dark-theme: map-get($theme, is-dark);
 
     .mc-tag {
-        border-color: transparent;
-
         &.mc-primary {
-            @include _mc-tag-color($primary, $primary, $is-dark-theme);
+            @include _mc-tag-color($primary, $primary, $foreground, $background, $is-dark-theme);
         }
 
         &.mc-second {
-            color: map-get($second, if($is-dark-theme, 60, 500));
-
-            background-color: mc-color($second, if($is-dark-theme, 700, 100));
-
-            &.mc-active,
-            &.mc-focused {
-                border-color: mc-color($primary);
-                box-shadow: 0 0 0 1px mc-color($primary);
-            }
-
-            &.mc-disabled {
-                background-color: mix(mc-color($second), transparent, 10%);
-
-                color: mix(mc-color($second), transparent, 50%);
-            }
-
-            &:not(.mc-disabled) .mc-icon {
-                color: mc-color($second, 400);
-
-                &:hover {
-                    cursor: pointer;
-                    color: mc-color($second, 600);
-                }
-            }
+            @include _mc-tag-color($second, $primary, $foreground, $background, $is-dark-theme);
         }
 
         &.mc-error {
-            @include _mc-tag-color($error, $error, $is-dark-theme);
-
-            @if $is-dark-theme {
-                background-color: transparent;
-            }
+            @include _mc-tag-color($error, $error, $foreground, $background, $is-dark-theme);
         }
 
         &:hover:not(.mc-disabled),

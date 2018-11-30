@@ -55,7 +55,7 @@
             }
 
             &.ng-invalid.mc-focused .mc-form-field__container {
-                box-shadow: 0 0 0 1px mc-color($error, darker);
+                box-shadow: 0 0 0 1px mc-color($error);
             }
 
             &.mc-disabled .mc-form-field__container {

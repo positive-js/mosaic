@@ -16,7 +16,6 @@
     .mc-select {
         color: map-get($foreground, text);
 
-        // todo не сделано
         &.ng-invalid {
             color: mc-color($error);
         }
