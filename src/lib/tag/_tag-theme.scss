@@ -4,39 +4,31 @@
 @import '../core/theming/palette';
 
 
-@mixin _mc-tag-color($main-color, $focus-color) {
-    $darken: 6%;
-    $lighten: 5%;
+@mixin _mc-tag-color($main-color, $focus-color, $foreground, $background, $is-dark-theme) {
+    color: mc-color($foreground, text);
 
-    color: mc-color($main-color, 500);
-
-    background-color: mc-color($main-color, 100);
-
-    &:hover,
-    &.mc-hovered {
-        background-color: darken(mc-color($main-color, 100), $darken);
-    }
+    background: mc-color($main-color, if($is-dark-theme, 700, 100));
+    border-color: mc-color($main-color, if($is-dark-theme, 700, 100));
 
     &.mc-active,
     &.mc-focused {
-        border-color: mc-color($focus-color, 500);
-        box-shadow: 0 0 0 1px mc-color($focus-color, 500);
-        background-color: mc-color($main-color, 100);
+        border-color: mc-color($focus-color);
+        box-shadow: 0 0 0 1px mc-color($focus-color);
     }
 
-    &[disabled] {
-        background-color: lighten(mc-color($main-color, 100), $lighten);
+    &.mc-disabled {
+        border-color: mix(mc-color($main-color), transparent, 10%);
+        background: mix(mc-color($main-color), transparent, 10%);
 
-        color: mc-color($main-color, 300);
+        color: mix(mc-color($main-color), transparent, 50%);
     }
 
-    & .mc-icon {
-        color: mc-color($main-color, 400);
+    &:not(.mc-disabled) .mc-icon {
+        color: mix(mc-color($main-color, 400), mc-color($background, hover));
 
-        // todo it should be in mc-icon
         &:hover {
             cursor: pointer;
-            color: mc-color($main-color, 600);
+            color: mc-color($main-color, if($is-dark-theme, lighter, darker));
         }
     }
 }
@@ -49,21 +41,26 @@
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    $hover-darken: 5%;
+    $is-dark-theme: map-get($theme, is-dark);
 
     .mc-tag {
-        border-color: transparent;
-
         &.mc-primary {
-            @include _mc-tag-color($primary, $primary);
+            @include _mc-tag-color($primary, $primary, $foreground, $background, $is-dark-theme);
         }
 
         &.mc-second {
-            @include _mc-tag-color($second, $primary);
+            @include _mc-tag-color($second, $primary, $foreground, $background, $is-dark-theme);
         }
 
         &.mc-error {
-            @include _mc-tag-color($error, $error);
+            @include _mc-tag-color($error, $error, $foreground, $background, $is-dark-theme);
+        }
+
+        &:hover:not(.mc-disabled),
+        &.mc-hovered:not(.mc-disabled) {
+            & .mc-tag-overlay {
+                background: mc-color($background, hover);
+            }
         }
     }
 }

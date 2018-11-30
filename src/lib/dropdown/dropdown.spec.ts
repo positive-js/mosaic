@@ -372,20 +372,6 @@ describe('McDropdown', () => {
         expect(panel.classList).toContain('custom-two');
     });
 
-    it('should set the "dropdown" role on the overlay panel', () => {
-        const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
-        fixture.detectChanges();
-        fixture.componentInstance.trigger.open();
-        fixture.detectChanges();
-
-        const dropdownPanel = overlayContainerElement.querySelector(`.${PANEL_CLASS}`);
-
-        expect(dropdownPanel).toBeTruthy('Expected to find a dropdown panel.');
-
-        const role = dropdownPanel ? dropdownPanel.getAttribute('role') : '';
-        expect(role).toBe('dropdown', 'Expected panel to have the "dropdown" role.');
-    });
-
     it('should not throw an error on destroy', () => {
         const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
         expect(fixture.destroy.bind(fixture)).not.toThrow();

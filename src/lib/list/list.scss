@@ -5,42 +5,42 @@
 @import 'list-theme';
 
 
-.mc-subheader {
-    display: flex;
-    box-sizing: border-box;
-    padding: $mc-list-side-padding;
-    align-items: center;
-
-    // This needs slightly more specificity, because it
-    // can be overwritten by the typography styles.
-    .mc-list &,
-    .mc-list-selection & {
-        margin: 0;
-    }
-}
-
 .mc-list,
 .mc-list-selection {
     display: block;
 
-    .mc-subheader {
-        @include mc-subheader-spacing($mc-list-top-padding, $mc-list-base-height);
-    }
+    outline: none;
 
-    .mc-list-item,
-    .mc-list-option {
-        @include mc-list-item-base(
-            $mc-list-base-height,
-            $mc-list-two-line-height,
-            $mc-list-three-line-height,
-            $mc-list-multi-line-padding,
-            $mc-list-icon-size
-        );
+    .mc-subheader {
+        display: flex;
+        box-sizing: border-box;
+
+        @include mc-subheader-spacing($mc-list-top-padding, $mc-list-base-height);
+
+        padding: $mc-list-side-padding;
+
+        align-items: center;
+
+        // This needs slightly more specificity, because it
+        // can be overwritten by the typography styles.
+        .mc-list &,
+        .mc-list-selection & {
+            margin: 0;
+        }
     }
 }
 
+.mc-list-item,
 .mc-list-option {
-    &:not([disabled]) {
-        cursor: pointer;
-    }
+    @include mc-list-item-base(
+        $mc-list-base-height,
+        $mc-list-two-line-height,
+        $mc-list-three-line-height,
+        $mc-list-multi-line-padding,
+        $mc-list-icon-size
+    );
+}
+
+.mc-list-option:not([disabled]) {
+    cursor: pointer;
 }
