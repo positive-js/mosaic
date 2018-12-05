@@ -1,5 +1,5 @@
-@import 'link-theme';
-@import 'link-base';
+$link-border-radius: 3px;
+$link-padding: 2px 4px;
 
 
 @mixin base-transition($args...) {
@@ -25,7 +25,17 @@
 }
 
 .mc-link {
-    @extend %link-base;
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: $link-padding;
+
+    text-decoration: none !important;
+
+    cursor: pointer;
+
+    outline: none;
 
     @include focus-transition(color);
     @include hover-transition(color);
@@ -37,7 +47,7 @@
 
     &[disabled] {
         pointer-events: none;
-        cursor: $link-cursor-disabled;
+        cursor: default;
     }
 
     & > .mc-link__icon {
@@ -52,7 +62,8 @@
         margin-right: 4px;
     }
 
-    &.mc-link_underlined,.mc-link_dashed {
+    &.mc-link_underlined,
+    &.mc-link_dashed {
         @include focus-transition(background, color);
         @include hover-transition(background, color);
     }
