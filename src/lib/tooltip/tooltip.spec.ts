@@ -4,7 +4,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { OverlayContainer } from '@ptsecurity/cdk/overlay';
 import { dispatchMouseEvent } from '@ptsecurity/cdk/testing';
 
-import { McTooltipDirective } from './tooltip.component';
+import { McTooltip } from './tooltip.component';
 import { McToolTipModule } from './tooltip.module';
 
 
@@ -136,11 +136,11 @@ describe('McTooltip', () => {
     selector: 'mc-tooltip-test-new',
     template: `
     <a #titleString
-       mc-tooltip
+       mcTooltip
        mcTitle="title-string"
        mcTrigger="hover"
        mcPlacement="top">Show</a>
-    <a #titleTemplate mc-tooltip mcTitle="template">Show</a>
+    <a #titleTemplate mcTooltip mcTitle="template">Show</a>
     <ng-template #template>
       title-template
     </ng-template>
@@ -148,33 +148,33 @@ describe('McTooltip', () => {
 })
 class McTooltipTestNewComponent {
     @ViewChild('titleString') titleString: ElementRef;
-    @ViewChild('titleString', { read: McTooltipDirective }) titleStringMcTooltipDirective: McTooltipDirective;
+    @ViewChild('titleString', { read: McTooltip }) titleStringMcTooltipDirective: McTooltip;
     @ViewChild('titleTemplate') titleTemplate: ElementRef;
-    @ViewChild('titleTemplate', { read: McTooltipDirective }) titleTemplateMcTooltipDirective: McTooltipDirective;
+    @ViewChild('titleTemplate', { read: McTooltip }) titleTemplateMcTooltipDirective: McTooltip;
 }
 @Component({
     selector: 'mc-tooltip-test-wrapper',
     template: `
-    <a #mostSimpleTrigger mc-tooltip="MOST-SIMPLE">Show</a>
+    <a #mostSimpleTrigger mcTooltip="MOST-SIMPLE">Show</a>
 
     <span #normalTrigger
-          mc-tooltip="normalized-text"
+          mcTooltip="normalized-text"
           mcTitle="NORMAL"
           mcTrigger="hover"
           mcPlacement="right">
         Show
     </span>
 
-    <span #focusTrigger mc-tooltip mcTitle="FOCUS" mcTrigger="focus">Show</span>
-    <span #visibleTrigger mc-tooltip mcTitle="VISIBLE" mcVisible="visible">Show</span>
+    <span #focusTrigger mcTooltip mcTitle="FOCUS" mcTrigger="focus">Show</span>
+    <span #visibleTrigger mcTooltip mcTitle="VISIBLE" mcVisible="visible">Show</span>
   `
 })
 class McTooltipTestWrapperComponent {
     @ViewChild('normalTrigger') normalTrigger: ElementRef;
-    @ViewChild('normalTrigger', { read: McTooltipDirective }) normalDirective: McTooltipDirective;
+    @ViewChild('normalTrigger', { read: McTooltip }) normalDirective: McTooltip;
     @ViewChild('focusTrigger') focusTrigger: ElementRef;
     visible: boolean;
     @ViewChild('visibleTrigger') visibleTrigger: ElementRef;
     @ViewChild('mostSimpleTrigger') mostSimpleTrigger: ElementRef;
-    @ViewChild('mostSimpleTrigger', { read: McTooltipDirective }) mostSimpleDirective: McTooltipDirective;
+    @ViewChild('mostSimpleTrigger', { read: McTooltip }) mostSimpleDirective: McTooltip;
 }
