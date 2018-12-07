@@ -1,6 +1,6 @@
 <div class="dev-row">
     <div class="dev-box">
-        <h1>Alerts</h1>
+        <h1>Alert</h1>
 
         <div class="mc-alert mc-alert_error mc-alert_dismissible">
             <i mc-icon="mc-info_16" class="mc-alert__icon"></i>
@@ -41,45 +41,47 @@
     </div>
 
     <div class="dev-box">
-        <h1>Badges</h1>
+        <h1>Badge</h1>
 
         <p>
             <span class="mc-badge">Новый</span>
-            <span class="mc-badge mc-badge__caps">в работе</span>
+            <span class="mc-badge mc-badge_caps">в работе</span>
         </p>
 
         <p>
-            <span class="mc-badge mc-badge__light">Новый</span>
-            <span class="mc-badge mc-badge__light mc-badge__caps">в работе</span>
+            <span class="mc-badge mc-badge_light">Новый</span>
+            <span class="mc-badge mc-badge_light mc-badge_caps">в работе</span>
         </p>
 
         <p>
-            <span class="mc-badge mc-badge__transparent">Новый</span>
-            <span class="mc-badge mc-badge__transparent mc-badge__caps">в работе</span>
+            <span class="mc-badge mc-badge_transparent">Новый</span>
+            <span class="mc-badge mc-badge_transparent mc-badge_caps">в работе</span>
         </p>
 
         <p>
-            <span class="mc-badge mc-badge__primary">Новый</span>
-            <span class="mc-badge mc-badge__primary mc-badge__caps">в работе</span>
+            <span class="mc-badge mc-badge_primary">Новый</span>
+            <span class="mc-badge mc-badge_primary mc-badge_caps">в работе</span>
         </p>
 
         <p>
-            <span class="mc-badge mc-badge__warning">Новый</span>
-            <span class="mc-badge mc-badge__warning mc-badge__caps">в работе</span>
+            <span class="mc-badge mc-badge_warning">Новый</span>
+            <span class="mc-badge mc-badge_warning mc-badge_caps">в работе</span>
         </p>
 
         <p>
-            <span class="mc-badge mc-badge__error">Новый</span>
-            <span class="mc-badge mc-badge__error mc-badge__caps">в работе</span>
+            <span class="mc-badge mc-badge_error">Новый</span>
+            <span class="mc-badge mc-badge_error mc-badge_caps">в работе</span>
         </p>
 
         <p>
-            <span class="mc-badge mc-badge__success">Новый</span>
-            <span class="mc-badge mc-badge__success mc-badge__caps">в работе</span>
+            <span class="mc-badge mc-badge_success">Новый</span>
+            <span class="mc-badge mc-badge_success mc-badge_caps">в работе</span>
         </p>
     </div>
 
     <div class="dev-box">
+        <h1>Button</h1>
+
         <button mc-icon-button color="primary" disabled><i mc-icon="mc-play_16"></i>disabled</button>&nbsp;
         <button mc-icon-button color="primary"><i mc-icon="mc-play_16"></i>normal</button>&nbsp;
         <button class="cdk-keyboard-focused" mc-icon-button color="primary"><i mc-icon="mc-play_16"></i>focus</button>&nbsp;
@@ -100,7 +102,8 @@
     </div>
 
     <div class="dev-box">
-        <h3>Обычные</h3>
+        <h1>Card</h1>
+
         <div class="line">
             <mc-card class="mc-card_info" [selected]="s1" (selectedChange)="s1 = !s1">
                 <div class="simple-content">
@@ -126,7 +129,7 @@
                 </div>
             </mc-card>
         </div>
-        <h3>Белые</h3>
+
         <div class="line">
             <mc-card class="mc-card_info mc-card_white" [selected]="s1" (selectedChange)="s1 = !s1">
                 <div class="simple-content">
@@ -152,7 +155,7 @@
                 </div>
             </mc-card>
         </div>
-        <h3>Неинтерактивные</h3>
+
         <div class="line">
             <mc-card class="mc-card_info" [selected]="s1" (selectedChange)="s1 = !s1" [readonly]="true">
                 <div class="simple-content">
@@ -181,27 +184,17 @@
     </div>
 
     <div class="dev-box">
-        <p>
-            <mc-checkbox>Default</mc-checkbox>
-        </p>
+        <h1>Checkbox</h1>
 
-        <p>
-            <mc-checkbox [(ngModel)]="checked[0]">Checked</mc-checkbox>
+        <p><mc-checkbox>Default</mc-checkbox></p>
 
-        </p>
+        <p><mc-checkbox [(ngModel)]="checked[0]">Checked</mc-checkbox></p>
 
-        <p>
-            <mc-checkbox [(ngModel)]="checked[2]" [indeterminate]="true">Indeterminate</mc-checkbox>
-        </p>
+        <p><mc-checkbox [(ngModel)]="checked[2]" [indeterminate]="true">Indeterminate</mc-checkbox></p>
 
-        <p>
-            <mc-checkbox [disabled]="true"> Default disabled</mc-checkbox>
-        </p>
+        <p><mc-checkbox [disabled]="true"> Default disabled</mc-checkbox></p>
 
-
-        <p>
-            <mc-checkbox [(ngModel)]="checked" disabled="disabled">Checked disabled</mc-checkbox>
-        </p>
+        <p><mc-checkbox [(ngModel)]="checked" disabled="disabled">Checked disabled</mc-checkbox></p>
 
         <p>
             <mc-checkbox [(ngModel)]="checked[2]"
@@ -213,6 +206,7 @@
     </div>
 
     <div class="dev-box">
+        <h1>Dropdown</h1>
 
         <span class="mc-button-group">
             <button mc-button>dropdown</button>
@@ -250,7 +244,7 @@
     </div>
 
     <div class="dev-box">
-        normal
+        <h1>Icons</h1>
         <table>
             <thead>
             <tr>
@@ -364,6 +358,8 @@
     </div>
 
     <div class="dev-box">
+        <h1>Input</h1>
+
         <mc-form-field>
             <input mcInput [(ngModel)]="numberValue" type="number" placeholder="Number MaxMin Step"
                    [min]="min" max="7" step="0.5" big-step="1.5">
@@ -473,6 +469,8 @@
     </div>
 
     <div class="dev-box">
+        <h1>Layout</h1>
+
         <mc-layout>
             <mc-header>Header</mc-header>
             <mc-content>Content</mc-content>
@@ -514,6 +512,8 @@
     </div>
 
     <div class="dev-box">
+        <h1>Link</h1>
+
         <table cellpadding="10" cellspacing="10" style="margin: auto; text-align: left;">
             <tr>
                 <td>Disabled</td>
@@ -586,7 +586,8 @@
     </div>
 
     <div class="dev-box">
-        <h5>multiple selection</h5>
+        <h1>List</h1>
+
         <mc-list-selection
             class="mc-no-select"
             [(ngModel)]="multipleSelected">
@@ -599,12 +600,14 @@
     </div>
 
     <div class="dev-box">
-        <p class="mc-headline">Confirm</p>
+        <h1>Modal</h1>
 
         <button mc-button (click)="showConfirm()" style="margin-right: 18px;">Confirm</button>
     </div>
 
     <div class="dev-box">
+        <h1>Panel</h1>
+
         <div class="mc-panel">
             <div class="mc-panel__header">
                 <div class="mc-panel__title">
@@ -633,7 +636,10 @@
             </div>
         </div>
     </div>
+
     <div class="dev-box">
+        <h1>Progress bar</h1>
+
         <div class="lines">
             <div class="line-container">
                 <mc-progress-bar [value]="percent" [mode]="mode"></mc-progress-bar>
@@ -649,7 +655,10 @@
             </div>
         </div>
     </div>
+
     <div class="dev-box container">
+        <h1>Progress spinner</h1>
+
         <div class="spinners-container">
             <ul class="spinners">
                 <li class="spinner-container">
@@ -686,7 +695,10 @@
             </ul>
         </div>
     </div>
+
     <div class="dev-box">
+        <h1>Radio</h1>
+
         <mc-radio-group class="example-radio-group" [(ngModel)]="favoriteFruit">
             <mc-radio-button class="example-radio-button" *ngFor="let season of fruits" [value]="season">
                 {{season}}
@@ -709,6 +721,8 @@
     </div>
 
     <div class="dev-box">
+        <h1>Select</h1>
+
         <div class="dev-container">
             <mc-form-field>
                 <mc-select [(value)]="singleSelected">
@@ -797,6 +811,8 @@
     </div>
 
     <div class="dev-box">
+        <h1>Tags</h1>
+
         <mc-tag>Normal <i mc-icon="mc-close-S_16"></i></mc-tag>
         <mc-tag class="mc-hovered">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>
         <mc-tag class="mc-focused">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>
@@ -862,6 +878,8 @@
     </div>
 
     <div class="dev-box">
+        <h1>Textarea</h1>
+
         <mc-form-field>
             <textarea mcTextarea [(ngModel)]="value" [canGrow]="false" placeholder="Placeholder"></textarea>
         </mc-form-field>
@@ -901,7 +919,8 @@
     </div>
 
     <div class="dev-box">
-        <div class="mc-headline">Timepicker</div>
+        <h1>Timepicker</h1>
+
         <div class="mc-body">
             <div>
                 <button mc-button (click)="toggleDisable()">Toggle disabled state</button>
@@ -1094,9 +1113,6 @@
             </mc-tree-node-option>
         </mc-tree-selection>
     </div>
-
-    <div class="dev-box"></div>
-    <div class="dev-box"></div>
 </div>
 
 
