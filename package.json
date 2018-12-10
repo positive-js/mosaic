@@ -137,6 +137,7 @@
         "linter:lib": "gulp tslint",
         "linter:styles": "gulp stylelint",
         "server-dev": "webpack-dev-server --config tools/webpack/webpack.config.js",
+        "server-dev:all": "npm run server-dev -- --env.component all",
         "server-dev:alert": "npm run server-dev -- --env.component alert",
         "server-dev:badge": "npm run server-dev -- --env.component badge",
         "server-dev:button": "npm run server-dev -- --env.component button",
