@@ -205,7 +205,7 @@ function parseExampleMetadata(fileName: string, sourceContent: string): IParsedM
 /**
  * Creates the examples module and metadata
  */
-task('build-examples-module', () => {
+task('build-examples-module', (done) => {
     const results: IExampleMetadata[] = [];
     const matchedFiles = glob(path.join(examplesPath, '**/*.ts'));
 
@@ -246,4 +246,6 @@ task('build-examples-module', () => {
 
     const generatedModuleFile = generateExampleNgModule(results);
     fs.writeFileSync(outputModuleFilename, generatedModuleFile);
+
+    done();
 });

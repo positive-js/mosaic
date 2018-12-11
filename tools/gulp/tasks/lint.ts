@@ -1,6 +1,6 @@
 import * as chalk from 'chalk';
 
-import { task } from 'gulp';
+import { task, parallel, series } from 'gulp';
 import { join } from 'path';
 
 import { buildConfig } from '../../packages';
@@ -24,8 +24,6 @@ const mosaicOutPath = join(buildConfig.outputDir, 'packages', 'mosaic');
 /** Path to the output of the CDK package. */
 const cdkOutPath = join(buildConfig.outputDir, 'packages', 'cdk');
 
-task('lint', ['tslint', 'madge']);
-
 task('tslint', execNodeTask('tslint', tsLintBaseFlags));
 
 task('stylelint', execNodeTask(
@@ -34,7 +32,7 @@ task('stylelint', execNodeTask(
 
 task('tslint:fix', execNodeTask('tslint', [...tsLintBaseFlags, '--fix']));
 
-task('madge', ['mosaic:clean-build'], () => {
+task('madge', series('mosaic:clean-build', () => {
     madge([mosaicOutPath, cdkOutPath]).then((res: any) => {
         const circularModules = res.circular();
 
@@ -45,7 +43,9 @@ task('madge', ['mosaic:clean-build'], () => {
             console.error();
         }
     });
-});
+}));
+
+task('lint', parallel('tslint', 'madge'));
 
 /** Returns a string that formats the graph of circular modules. */
 function formatMadgeCircularModules(circularModules: string[][]): string {
