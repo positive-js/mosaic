@@ -14,56 +14,59 @@
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
+    $is-dark-theme: map-get($theme, is-dark);
+
     .mc-list,
     .mc-list-selection {
-        .mc-list-item {
-            color: mc-color($foreground, text);
+        .mc-subheader {
+            color: mc-color($foreground, secondary-text);
         }
+    }
 
-        .mc-list-option {
-            outline: none;
-            border: 2px solid transparent;
+    .mc-list-item {
+        color: mc-color($foreground, text);
+    }
 
-            color: mc-color($foreground, text);
-
+<<<<<<< HEAD
             &.mc-focused {
                 border-color: mc-color($primary, 500);
             }
+=======
+    .mc-list-option {
+        outline: none;
 
-            &.mc-selected {
-                background-color: mc-color($primary, 100);
-            }
+        color: mc-color($foreground, text);
+>>>>>>> master
 
-            &[disabled] {
-                background-color: transparent;
-
-                color: mc-color($foreground, disabled-text);
-            }
+        &:hover,
+        &.mc-hovered {
+            background: mc-color($background, hover);
         }
 
-        .mc-subheader {
-            color: mc-color($foreground, secondary-text);
+        &.mc-focused {
+            border-color: mc-color($primary);
+        }
+
+        &.mc-selected {
+            background: mc-color($primary, if($is-dark-theme, 700, 100));
+        }
+
+        &[disabled] {
+            background: transparent;
+
+            color: mc-color($foreground, disabled-text);
         }
     }
 }
 
 @mixin mc-list-typography($config) {
-    $font-family: mc-font-family($config);
-
     .mc-list-item,
     .mc-list-option {
-        font-family: $font-family;
+        @include mc-typography-level-to-styles($config, body);
     }
 
     .mc-list,
     .mc-list-selection {
-        .mc-list-item,
-        .mc-list-option {
-            font-size: mc-font-size($config, subheading);
-
-            @include mc-line-base(mc-font-size($config, body));
-        }
-
         // todo now we are not use it
         .mc-subheader {
             font-family: mc-font-family($config, subheading);

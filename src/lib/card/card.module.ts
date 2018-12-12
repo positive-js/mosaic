@@ -15,11 +15,7 @@ import {
         A11yModule,
         PlatformModule
     ],
-    exports: [
-        McCard
-    ],
-    declarations: [
-        McCard
-    ]
+    exports: [McCard],
+    declarations: [McCard]
 })
 export class McCardModule {}

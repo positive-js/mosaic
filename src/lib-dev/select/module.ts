@@ -1,8 +1,12 @@
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { McButtonModule } from '@ptsecurity/mosaic/button';
+import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
+import { McIconModule } from '@ptsecurity/mosaic/icon';
+import { McInputModule } from '@ptsecurity/mosaic/input';
 
 import { McSelectModule, McSelectChange } from '@ptsecurity/mosaic/select';
 
@@ -14,7 +18,12 @@ import { McSelectModule, McSelectChange } from '@ptsecurity/mosaic/select';
     encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent {
+    singleSelected = 'Normal';
     multipleSelected = ['Normal', 'Hovered', 'Selected', 'Selected1'];
+
+    singleSelectFormControl = new FormControl('', Validators.required);
+
+    multiSelectSelectFormControl = new FormControl([], Validators.pattern(/^w/));
 
     onSelectionChange($event: McSelectChange) {
         console.log(`onSelectionChange: ${$event.value}`);
@@ -30,7 +39,13 @@ export class DemoComponent {
         BrowserAnimationsModule,
         BrowserModule,
         FormsModule,
-        McSelectModule
+        McSelectModule,
+
+        McButtonModule,
+        McInputModule,
+        McFormFieldModule,
+        McIconModule,
+        ReactiveFormsModule
     ],
     bootstrap: [
         DemoComponent

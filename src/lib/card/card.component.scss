@@ -4,41 +4,29 @@
 .mc-card {
     position: relative;
     box-sizing: border-box;
+
     display: flex;
     flex-direction: column;
+
     cursor: pointer;
 
-    &__wrapper {
-        flex: auto;
-        display: block;
-        padding-left: 4px;
-    }
-    
     &:focus {
         outline: none;
     }
 
-    &.cdk-focused {
-        z-index: 1;
-    }
-    
-    &__focus-overlay {
+    border-left: {
+        width: 4px;
+        style: solid;
+        color: transparent;
+    };
+
+    & .mc-card__overlay {
         @include mc-fill;
-        pointer-events:none;
+        pointer-events: none;
+
+        background: transparent;
     }
-    
-    &__hover-overlay {
-        @include mc-fill;
-        display: none !important;
-        pointer-events:none;
-    }
-    
-    &:not(.mc-card_readonly):hover {
-        .mc-card__hover-overlay {
-            display: block !important;
-        }
-    }
-    
+
     &.mc-card_readonly {
         cursor: auto;
     }

@@ -11,6 +11,7 @@ import {
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
+import { NgControl } from '@angular/forms';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
 import { CanColor, CanColorCtor, mixinColor } from '@ptsecurity/mosaic/core';
 import { EMPTY, merge } from 'rxjs';
@@ -44,7 +45,8 @@ export const _McFormFieldMixinBase: CanColorCtor & typeof McFormFieldBase = mixi
     // aren't using McInput.
     styleUrls: [
         'form-field.css',
-        '../input/input.css'
+        '../input/input.css',
+        '../textarea/textarea.css'
     ],
     host: {
         class: 'mc-form-field',
@@ -94,6 +96,7 @@ export class McFormField extends _McFormFieldMixinBase implements
 
     ngAfterContentInit() {
         this._validateControlChild();
+
         if (this._control.controlType) {
             this._elementRef.nativeElement.classList
                 .add(`mc-form-field-type-${this._control.controlType}`);
@@ -119,6 +122,7 @@ export class McFormField extends _McFormFieldMixinBase implements
 
         // Run change detection if the value changes.
         const valueChanges = this._control.ngControl && this._control.ngControl.valueChanges || EMPTY;
+
         merge(valueChanges)
             .subscribe(() => this._changeDetectorRef.markForCheck());
     }
@@ -146,17 +150,14 @@ export class McFormField extends _McFormFieldMixinBase implements
         }
     }
 
-    onKeyDown(e: KeyboardEvent): void {
+    onKeyDown(event: KeyboardEvent): void {
         // tslint:disable-next-line:deprecation
-        if (e.keyCode === ESCAPE &&
-            this._control.focused &&
-            this.hasCleaner) {
-
+        if (event.keyCode === ESCAPE && this._control.focused && this.hasCleaner) {
             if (this._control && this._control.ngControl) {
                 this._control.ngControl.reset();
             }
 
-            e.preventDefault();
+            event.preventDefault();
         }
     }
 
@@ -180,7 +181,7 @@ export class McFormField extends _McFormFieldMixinBase implements
     }
 
     /** Determines whether a class from the NgControl should be forwarded to the host element. */
-    _shouldForward(prop: string): boolean {
+    _shouldForward(prop: keyof NgControl): boolean {
         const ngControl = this._control ? this._control.ngControl : null;
 
         return ngControl && ngControl[prop];
@@ -241,5 +242,4 @@ export class McFormField extends _McFormFieldMixinBase implements
     exportAs: 'mcFormFieldWithoutBorders',
     host: { class: 'mc-form-field_without-borders' }
 })
-export class McFormFieldWithoutBorders {
-}
+export class McFormFieldWithoutBorders {}

@@ -53,6 +53,7 @@ System.config({
         '@ptsecurity/mosaic/button': 'dist/packages/mosaic/button/index.js',
         '@ptsecurity/mosaic/core': 'dist/packages/mosaic/core/index.js',
         '@ptsecurity/mosaic/divider': 'dist/packages/mosaic/divider/index.js',
+        '@ptsecurity/mosaic/dropdown': 'dist/packages/mosaic/dropdown/index.js',
         '@ptsecurity/mosaic/list': 'dist/packages/mosaic/list/index.js',
         '@ptsecurity/mosaic/progress-bar': 'dist/packages/mosaic/progress-bar/index.js',
         '@ptsecurity/mosaic/progress-spinner': 'dist/packages/mosaic/progress-spinner/index.js',
@@ -66,6 +67,7 @@ System.config({
         '@ptsecurity/mosaic/tag': 'dist/packages/mosaic/tag/index.js',
         '@ptsecurity/mosaic/tabs': 'dist/packages/mosaic/tabs/index.js',
         '@ptsecurity/mosaic/select': 'dist/packages/mosaic/select/index.js',
+        '@ptsecurity/mosaic/textarea': 'dist/packages/mosaic/textarea/index.js',
         '@ptsecurity/mosaic/tooltip': 'dist/packages/mosaic/tooltip/index.js',
         '@ptsucurity/mosaic/timepicker': 'dist/packages/mosaic/timepicker/index.js',
         '@ptsecurity/mosaic/splitter': 'dist/packages/mosaic/splitter/index.js'

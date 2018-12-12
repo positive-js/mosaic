@@ -1,0 +1,63 @@
+<div class="container">
+
+    <mc-form-field class="mc-focused">
+        <textarea mcTextarea [(ngModel)]="value" placeholder="Placeholder"></textarea>
+    </mc-form-field>
+
+    <br>
+    <br>
+
+    <header>Resizable:</header>
+
+    <mc-form-field>
+        <textarea mcTextarea [(ngModel)]="value" [canGrow]="false" placeholder="Placeholder"></textarea>
+    </mc-form-field>
+
+    <br>
+    <br>
+
+    <header>Without placeholder:</header>
+    <mc-form-field>
+        <textarea mcTextarea [(ngModel)]="value"></textarea>
+    </mc-form-field>
+
+    <br><br>
+
+    <header>With placeholder:</header>
+
+    <mc-form-field>
+        <textarea mcTextarea [(ngModel)]="value" placeholder="Placeholder"></textarea>
+    </mc-form-field>
+
+    <br><br>
+
+    <header>With placeholder and monospace:</header>
+
+    <mc-form-field>
+        <textarea mcTextarea class="mc-textarea_monospace" [(ngModel)]="value" placeholder="Placeholder"></textarea>
+    </mc-form-field>
+
+    <br><br>
+
+    <header>With placeholder and disabled:</header>
+
+    <mc-form-field>
+        <textarea mcTextarea [(ngModel)]="value" placeholder="Placeholder" [disabled]="true"></textarea>
+    </mc-form-field>
+
+    <br><br>
+
+    <header>Invalid:</header>
+
+    <mc-form-field>
+        <textarea mcTextarea [(ngModel)]="value" placeholder="Placeholder" required minlength="4"></textarea>
+    </mc-form-field>
+
+    <br><br>
+
+    <header>Without border:</header>
+
+    <mc-form-field mcFormFieldWithoutBorders>
+        <textarea mcTextarea [(ngModel)]="value" placeholder="Placeholder"></textarea>
+    </mc-form-field>
+</div>

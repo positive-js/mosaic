@@ -1,5 +1,4 @@
-<ng-container [ngTemplateOutlet]="mcTooltipDefaultTemplate"></ng-container>
-<ng-template #mcTooltipDefaultTemplate>
+
     <div class="mc-tooltip"
          [ngClass]="_classMap"
          [@fadeAnimation]="''+($visible | async)">
@@ -10,4 +9,4 @@
             </div>
         </div>
     </div>
-</ng-template>
+

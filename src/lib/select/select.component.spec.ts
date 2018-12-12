@@ -2023,7 +2023,7 @@ describe('McSelect', () => {
                 flush();
 
                 expect(fixture.componentInstance.control.touched)
-                    .toBe(false, 'Expected the control to stay untouched when menu opened.');
+                    .toBe(false, 'Expected the control to stay untouched when dropdown opened.');
 
                 fixture.componentInstance.select.close();
                 fixture.detectChanges();

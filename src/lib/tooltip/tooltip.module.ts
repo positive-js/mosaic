@@ -4,18 +4,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OverlayModule } from '@ptsecurity/cdk/overlay';
 
 import {
-    McToolTipComponent,
-    McTooltipDirective,
+    McTooltipComponent,
+    McTooltip,
     MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER
 } from './tooltip.component';
 
 
 @NgModule({
-    declarations: [ McToolTipComponent, McTooltipDirective ],
-    exports: [ McToolTipComponent, McTooltipDirective ],
-    imports: [ BrowserAnimationsModule, CommonModule, OverlayModule ],
+    declarations: [McTooltipComponent, McTooltip],
+    exports: [McTooltipComponent, McTooltip],
+    imports: [BrowserAnimationsModule, CommonModule, OverlayModule],
     providers: [MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER],
-    entryComponents: [ McToolTipComponent ]
+    entryComponents: [McTooltipComponent]
 })
 export class McToolTipModule {
 }

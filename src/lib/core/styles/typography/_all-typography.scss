@@ -2,6 +2,7 @@
 @import '../badges';
 @import '../alerts';
 @import '../../../button/button-theme';
+@import '../../../dropdown/dropdown-theme';
 @import '../../../link/link-theme';
 @import '../../../list/list-theme';
 @import '../../../tabs/tabs-theme';
@@ -12,8 +13,9 @@
 @import '../../../input/input-theme';
 @import '../../../form-field/form-field-theme';
 @import '../../../modal/modal-theme';
-@import '../../../tag/tag-theme';
 @import '../../option/option-theme';
+@import '../../../tag/tag-theme';
+@import '../../../textarea/textarea-theme';
 @import '../../../tooltip/tooltip-theme';
 @import '../../../toggle/toggle-theme';
 
@@ -29,6 +31,7 @@
     @include mc-alert-typography($config);
     @include mc-badge-typography($config);
     @include mc-button-typography($config);
+    @include mc-dropdown-typography($config);
     @include mc-list-typography($config);
     @include mc-radio-typography($config);
     @include mc-checkbox-typography($config);
@@ -41,5 +44,6 @@
     @include mc-modal-typography($config);
     @include mc-option-typography($config);
     @include mc-tag-typography($config);
+    @include mc-textarea-typography($config);
     @include mc-toggle-typography($config);
 }
