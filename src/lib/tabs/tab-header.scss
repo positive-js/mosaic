@@ -35,6 +35,7 @@
 }
 
 // The pagination control that is displayed on the left side of the tab header.
+/* stylelint-disable no-descending-specificity */
 .mc-tab-header__pagination_before,
 .mc-tab-header_rtl .mc-tab-header__pagination_after {
     padding-left: 4px;
@@ -43,6 +44,7 @@
         transform: rotate(-135deg);
     }
 }
+/* stylelint-enable */
 
 .mc-tab-header__pagination_disabled {
     box-shadow: none;

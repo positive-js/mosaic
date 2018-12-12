@@ -1,6 +1,25 @@
 @import '../tabs-common';
 @import '../tabs-theme';
 
+.mc-tab-link {
+    vertical-align: top;
+    text-decoration: none;  // Removes anchor underline styling
+    -webkit-tap-highlight-color: transparent;
+
+    .mc-tab-group_stretch-labels & {
+        flex-basis: 0;
+        flex-grow: 1;
+    }
+
+    &.mc-tab_disabled {
+        // We use `pointer-events` to make the element unclickable when it's disabled, rather than
+        // preventing the default action through JS, because we can't prevent the action reliably
+        // due to other directives potentially registering their events earlier. This shouldn't cause
+        // the user to click through, because we always have a `.mc-tab-links` behind the link.
+        pointer-events: none;
+    }
+}
+
 // Wraps the bar containing the anchors
 .mc-tab-nav-bar {
     display: flex;
@@ -30,24 +49,5 @@
 
     .mc-tab-group_align-labels-end & {
         justify-content: flex-end;
-    }
-}
-
-.mc-tab-link {
-    vertical-align: top;
-    text-decoration: none;  // Removes anchor underline styling
-    -webkit-tap-highlight-color: transparent;
-
-    .mc-tab-group_stretch-labels & {
-        flex-basis: 0;
-        flex-grow: 1;
-    }
-
-    &.mc-tab_disabled {
-        // We use `pointer-events` to make the element unclickable when it's disabled, rather than
-        // preventing the default action through JS, because we can't prevent the action reliably
-        // due to other directives potentially registering their events earlier. This shouldn't cause
-        // the user to click through, because we always have a `.mc-tab-links` behind the link.
-        pointer-events: none;
     }
 }
