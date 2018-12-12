@@ -27,6 +27,10 @@ import { takeUntil } from 'rxjs/operators';
 import { McTabLabelWrapper } from './tab-label-wrapper';
 
 
+const VIEWPORT_THROTTLE_TIME = 150;
+const SCROLL_DISTANCE_DELIMITER = 3;
+
+
 /**
  * The directions that scrolling can go in when the header's tabs exceed the header width. 'After'
  * will scroll the header towards the end of the tabs list and 'before' will scroll towards the
@@ -220,7 +224,7 @@ export class McTabHeader extends McTabHeaderBase
 
     ngAfterContentInit() {
         const dirChange = this.dir ? this.dir.change : observableOf(null);
-        const resize = this.viewportRuler.change(150);
+        const resize = this.viewportRuler.change(VIEWPORT_THROTTLE_TIME);
         const realign = () => {
             this.updatePagination();
         };
@@ -233,9 +237,9 @@ export class McTabHeader extends McTabHeaderBase
 
         // Defer the first call in order to allow for slower browsers to lay out the elements.
         // This helps in cases where the user lands directly on a page with paginated tabs.
-        typeof requestAnimationFrame !== 'undefined'
-            ? requestAnimationFrame(realign)
-            : realign();
+        typeof requestAnimationFrame === undefined
+            ? realign()
+            : requestAnimationFrame(realign);
 
         // On dir change or window resize, update the orientation of
         // the key manager if the direction has changed.
@@ -362,7 +366,7 @@ export class McTabHeader extends McTabHeaderBase
 
         // Move the scroll distance one-third the length of the tab list's viewport.
         this.scrollDistance +=
-            ((scrollDir === 'before' ? -1 : 1) * viewLength) / 3;
+            ((scrollDir === 'before' ? -1 : 1) * viewLength) / SCROLL_DISTANCE_DELIMITER;
     }
 
     /**

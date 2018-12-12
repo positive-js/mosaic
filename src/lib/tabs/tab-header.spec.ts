@@ -1,3 +1,4 @@
+// tslint:disable:no-magic-numbers
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import {

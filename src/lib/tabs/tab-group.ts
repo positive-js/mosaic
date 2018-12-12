@@ -81,6 +81,7 @@ export const MC_TABS_CONFIG = new InjectionToken('MC_TABS_CONFIG');
 // Boilerplate for applying mixins to McTabGroup.
 /** @docs-private */
 export class McTabGroupBase {
+    // tslint:disable-next-line:naming-convention
     constructor(public _elementRef: ElementRef) { }
 }
 export const mcTabGroupMixinBase:

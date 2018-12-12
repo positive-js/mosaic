@@ -1,3 +1,5 @@
+// tslint:disable:no-magic-numbers
+// tslint:disable:no-empty
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';

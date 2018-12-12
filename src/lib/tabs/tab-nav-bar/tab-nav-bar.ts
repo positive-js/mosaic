@@ -25,6 +25,7 @@ import {
 // Boilerplate for applying mixins to McTabNav.
 /** @docs-private */
 export class McTabNavBase {
+    // tslint:disable-next-line:naming-convention
     constructor(public _elementRef: ElementRef) {}
 }
 export const mcTabNavMixinBase: CanColorCtor &

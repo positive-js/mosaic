@@ -1,3 +1,4 @@
+// tslint:disable:no-magic-numbers
 import { Component, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import {
     async,
