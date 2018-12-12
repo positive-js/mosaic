@@ -27,16 +27,10 @@
         color: mc-color($foreground, text);
     }
 
-<<<<<<< HEAD
-            &.mc-focused {
-                border-color: mc-color($primary, 500);
-            }
-=======
     .mc-list-option {
         outline: none;
 
         color: mc-color($foreground, text);
->>>>>>> master
 
         &:hover,
         &.mc-hovered {
