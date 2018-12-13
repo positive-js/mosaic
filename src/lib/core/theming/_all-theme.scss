@@ -26,6 +26,7 @@
 @import '../../tooltip/tooltip-theme';
 @import '../../toggle/toggle-theme';
 @import '../../splitter/splitter-theme';
+@import '../../sidepanel/sidepanel-theme';
 
 
 @mixin mosaic-theme($theme) {
@@ -58,4 +59,5 @@
     @include mc-tooltip-theme($theme);
     @include mc-textarea-theme($theme);
     @include mc-splitter-theme($theme);
+    @include mc-sidepanel-theme($theme);
 }
