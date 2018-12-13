@@ -8,7 +8,7 @@ const gulpClean = require('gulp-clean');
 const resolveBin = require('resolve-bin');
 
 export function cleanTask(glob: string) {
-    return () => gulp.src(glob, { read: false }).pipe(gulpClean(null));
+    return () => gulp.src(glob, { read: false, allowEmpty: true }).pipe(gulpClean(null));
 }
 
 export function execTask(binPath: string, args: string[], options: IExecTaskOptions = {}) {

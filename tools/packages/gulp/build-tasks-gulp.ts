@@ -1,4 +1,4 @@
-import { dest, src, task } from 'gulp';
+import { dest, src, task, series, parallel } from 'gulp';
 import { join } from 'path';
 
 import { BuildPackage } from '../build-package';
@@ -7,7 +7,6 @@ import { inlineResourcesForDirectory } from '../inline-resources';
 import { tsCompile } from '../ts-compile';
 
 import { buildScssPipeline } from './build-scss-pipeline';
-import { sequenceTask } from './sequence-task';
 
 
 /* tslint:disable-next-line:no-var-requires */
@@ -20,6 +19,7 @@ const htmlMinifierOptions = {
     removeAttributeQuotes: false
 };
 
+// tslint:disable-next-line:max-func-body-length
 export function createPackageBuildTasks(buildPackage: BuildPackage, preBuildTasks: string[] = []) {
 
     // Name of the package build tasks for Gulp.
@@ -42,38 +42,6 @@ export function createPackageBuildTasks(buildPackage: BuildPackage, preBuildTask
         join(schematicsDir, '**/+(schema|collection|migration).json')
     ];
 
-    task(`${taskName}:clean-build`, sequenceTask('clean', `${taskName}:build`));
-
-    task(`${taskName}:build`, sequenceTask(
-        ...preBuildTasks,
-        ...dependencyNames.map((pkgName) => `${pkgName}:build`),
-        `${taskName}:assets`,
-        `${taskName}:build:esm`,
-        // Inline assets into ESM output.
-        `${taskName}:assets:inline`,
-        // Build bundles on top of inlined ESM output.
-        `${taskName}:build:bundles`
-    ));
-
-    task(`${taskName}:build-no-bundles`, sequenceTask(
-        // Build assets before building the ESM output. Since we compile with NGC, the compiler
-        // tries to resolve all required assets.
-        `${taskName}:assets`,
-        // Build the ESM output that includes all test files. Also build assets for the package.
-        `${taskName}:build:esm:tests`,
-        // Inline assets into ESM output.
-        `${taskName}:assets:inline`
-    ));
-
-    task(`${taskName}:build-release:clean`, sequenceTask('clean', `${taskName}:build-release`));
-    task(`${taskName}:build-release`, [`${taskName}:build`], () => composeRelease(buildPackage));
-
-
-    task(`${taskName}:build:esm`, () => buildPackage.compile());
-    task(`${taskName}:build:esm:tests`, () => buildPackage.compileTests());
-
-    task(`${taskName}:build:bundles`, () => buildPackage.createBundles());
-
     /**
      * Asset tasks. Building Sass files and inlining CSS, HTML files into the ESM output.
      */
@@ -89,12 +57,10 @@ export function createPackageBuildTasks(buildPackage: BuildPackage, preBuildTask
         assetTasks.push(`${taskName}:assets:schematics`);
     }
 
-    task(`${taskName}:assets`, assetTasks);
-
     task(`${taskName}:assets:scss`, () => {
-        buildScssPipeline(buildPackage.sourceDir, true)
-            .pipe(dest(buildPackage.outputDir))
-            .pipe(dest(buildPackage.esm5OutputDir));
+            return buildScssPipeline(buildPackage.sourceDir, true)
+                .pipe(dest(buildPackage.outputDir))
+                .pipe(dest(buildPackage.esm5OutputDir));
         }
     );
 
@@ -109,13 +75,55 @@ export function createPackageBuildTasks(buildPackage: BuildPackage, preBuildTask
             .pipe(dest(buildPackage.esm5OutputDir));
     });
 
-    task(`${taskName}:assets:inline`, () => inlineResourcesForDirectory(buildPackage.outputDir));
+    task(`${taskName}:assets:inline`, (done) => {
+        inlineResourcesForDirectory(buildPackage.outputDir);
+        done();
+    });
 
     task(`${taskName}:assets:schematics-ts`, () => {
         return tsCompile('tsc', ['-p', join(schematicsDir, 'tsconfig.json')]);
     });
 
-    task(`${taskName}:assets:schematics`, [`${taskName}:assets:schematics-ts`], () => {
+    task(`${taskName}:assets:schematics`, series(`${taskName}:assets:schematics-ts`, () => {
         return src(schematicsGlobs).pipe(dest(join(buildPackage.outputDir, 'schematics')));
-    });
+    }));
+
+    task(`${taskName}:assets`, parallel(...assetTasks));
+
+    task(`${taskName}:build:esm:tests`, () => buildPackage.compileTests());
+
+    task(`${taskName}:build-no-bundles`, series(
+        // Build assets before building the ESM output. Since we compile with NGC, the compiler
+        // tries to resolve all required assets.
+        `${taskName}:assets`,
+        // Build the ESM output that includes all test files. Also build assets for the package.
+        `${taskName}:build:esm:tests`,
+        // Inline assets into ESM output.
+        `${taskName}:assets:inline`
+    ));
+
+    task(`${taskName}:build:esm`, () => buildPackage.compile());
+
+
+    task(`${taskName}:build:bundles`, () => buildPackage.createBundles());
+
+    task(`${taskName}:build`, series(
+        ...preBuildTasks,
+        ...dependencyNames.map((pkgName) => `${pkgName}:build`),
+        `${taskName}:assets`,
+        `${taskName}:build:esm`,
+        // Inline assets into ESM output.
+        `${taskName}:assets:inline`,
+        // Build bundles on top of inlined ESM output.
+        `${taskName}:build:bundles`
+    ));
+
+    task(`${taskName}:build-release`, series(`${taskName}:build`, (done) => {
+        composeRelease(buildPackage);
+        done();
+    }));
+
+    task(`${taskName}:build-release:clean`, series('clean', `${taskName}:build-release`));
+
+    task(`${taskName}:clean-build`, series('clean', `${taskName}:build`));
 }

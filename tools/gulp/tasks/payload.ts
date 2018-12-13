@@ -1,6 +1,6 @@
 import { statSync } from 'fs';
 import { sync as glob } from 'glob';
-import { task } from 'gulp';
+import { task, series } from 'gulp';
 import { join } from 'path';
 
 import { buildConfig } from '../../packages';
@@ -13,7 +13,7 @@ const bundlesDir = join(buildConfig.outputDir, 'bundles');
 /* tslint:disable:no-console */
 
 /** Task which runs test against the size of mosaic. */
-task('payload', ['mosaic:clean-build'], async () => {
+task('payload', series('mosaic:clean-build', async () => {
 
     const results = {
         timestamp: Date.now(),
@@ -31,7 +31,7 @@ task('payload', ['mosaic:clean-build'], async () => {
 
     // Print the results to the console, so we can read it from the CI.
     console.log('Payload Results:', JSON.stringify(results, null, 2));
-});
+}));
 
 /** Returns the size of the given library bundle. */
 function getBundleSize(bundleName: string) {

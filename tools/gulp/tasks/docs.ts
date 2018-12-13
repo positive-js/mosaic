@@ -1,10 +1,10 @@
 import * as path from 'path';
 
 import { Dgeni } from 'dgeni';
-import { task, src, dest } from 'gulp';
+import { task, src, dest, series } from 'gulp';
 
 import { apiDocsPackage } from '../../dgeni';
-import { buildConfig, sequenceTask } from '../../packages';
+import { buildConfig } from '../../packages';
 
 
 const markdown = require('gulp-markdown');
@@ -71,17 +71,6 @@ const markdownOptions = {
     }
 };
 
-task('docs', sequenceTask(
-    [
-        'markdown-docs-mosaic',
-        'markdown-docs-cdk',
-        'build-highlighted-examples',
-        'build-examples-module',
-        'api-docs',
-        'copy-stackblitz-examples'
-    ],
-    'minify-html-files'
-));
 
 task('api-docs', () => {
     const docs = new Dgeni([apiDocsPackage]);
@@ -153,9 +142,20 @@ task('minify-html-files', () => {
 
 /** Copies example sources to be used as stackblitz assets for the docs site. */
 task('copy-stackblitz-examples', () => {
-    src(path.join(packagesDir, 'mosaic-examples', '**/*'))
+    return src(path.join(packagesDir, 'mosaic-examples', '**/*'))
         .pipe(dest(path.join(DIST_DOCS, 'stackblitz', 'examples')));
 });
+
+task('docs', series(series(
+        'markdown-docs-mosaic',
+        'markdown-docs-cdk',
+        'build-highlighted-examples',
+        'build-examples-module',
+        'api-docs',
+        'copy-stackblitz-examples'
+    ),
+    'minify-html-files')
+);
 
 /** Updates the markdown file's content to work inside of the docs app. */
 function transformMarkdownFiles(buffer: Buffer, file: any): string {
