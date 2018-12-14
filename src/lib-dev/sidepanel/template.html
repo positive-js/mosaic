@@ -12,7 +12,37 @@
     </div>
 
     <ng-template>
-        Sidepanel Template Content
+        <div class="mc-sidepanel-header">
+            <div class="mc-title">Sidepanel Template Content</div>
+            <button mc-sidepanel-close>
+                <span class="mc-sidepanel-close-x">
+                    <i mc-icon="mc-close-L_16" class="mc-icon mc-icon_light" color="second"></i>
+                </span>
+            </button>
+        </div>
+        <div class="mc-sidepanel-body layout-padding">
+            <div class="mc-subheading">Sidepanel Template Body</div>
+
+            <div *ngFor="let item of array; index as i">
+                {{ i + 1 }}
+            </div>
+        </div>
+        <div class="mc-sidepanel-footer">
+            <div class="mc-sidepanel-actions_left">
+                <button mc-button color="primary" (click)="openTemplateSidepanel()">
+                    <span>Open another sidepanel</span>
+                </button>
+            </div>
+            <div class="mc-sidepanel-actions_right">
+                <button mc-button color="primary" (click)="openTemplateSidepanel()">
+                    <span>Open another sidepanel</span>
+                </button>
+
+                <button mc-button color="second" mc-sidepanel-close>
+                    <span>Close</span>
+                </button>
+            </div>
+        </div>
     </ng-template>
 </div>
 

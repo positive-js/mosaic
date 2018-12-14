@@ -25,7 +25,7 @@ import { McSidepanelConfig, McSidepanelPosition } from './sidepanel-config';
 @Component({
     selector: 'mc-sidepanel-container',
     templateUrl: './sidepanel-container.component.html',
-    styleUrls: ['./sidepanel-container.component.css'],
+    styleUrls: ['./sidepanel.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     animations: [mcSidepanelAnimations.sidepanelState],
@@ -34,6 +34,7 @@ import { McSidepanelConfig, McSidepanelPosition } from './sidepanel-config';
         tabindex: '-1',
         role: 'dialog',
         'aria-modal': 'true',
+        '[attr.id]': 'id',
         '[@state]': `{
             value: animationState,
             params: animationTransform
@@ -43,7 +44,9 @@ import { McSidepanelConfig, McSidepanelPosition } from './sidepanel-config';
     }
 })
 export class McSidepanelContainerComponent extends BasePortalOutlet implements OnDestroy {
+    /** ID for the container DOM element. */
     id: string;
+
     /** The portal outlet inside of this container into which the content will be loaded. */
     @ViewChild(CdkPortalOutlet) portalOutlet: CdkPortalOutlet;
 

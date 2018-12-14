@@ -5,6 +5,7 @@ import { PortalModule } from '@ptsecurity/cdk/portal';
 import { McCommonModule } from '@ptsecurity/mosaic/core';
 
 import { McSidepanelContainerComponent } from './sidepanel-container.component';
+import { McSidepanelClose } from './sidepanel-directives';
 import { McSidepanelService } from './sidepanel.service';
 
 
@@ -16,8 +17,14 @@ import { McSidepanelService } from './sidepanel.service';
         McCommonModule
     ],
     providers: [McSidepanelService],
-    declarations: [McSidepanelContainerComponent],
+    declarations: [
+        McSidepanelContainerComponent,
+        McSidepanelClose
+    ],
     entryComponents: [McSidepanelContainerComponent],
-    exports: [McSidepanelContainerComponent]
+    exports: [
+        McSidepanelContainerComponent,
+        McSidepanelClose
+    ]
 })
 export class McSidepanelModule {}

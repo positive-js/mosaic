@@ -26,7 +26,7 @@ export class McSidepanelRef<T = any, R = any> {
     constructor(
         public containerInstance: McSidepanelContainerComponent,
         private overlayRef: OverlayRef,
-        readonly id: string = `mat-dialog-${uniqueId++}`) {
+        readonly id: string = `mc-sidepanel-${uniqueId++}`) {
 
         this.containerInstance.id = id;
 
@@ -36,11 +36,10 @@ export class McSidepanelRef<T = any, R = any> {
                 (event) => event.phaseName === 'done' && event.toState === McSidepanelAnimationState.Visible
             ),
             take(1)
-        )
-            .subscribe(() => {
-                this.afterOpened$.next();
-                this.afterOpened$.complete();
-            });
+        ).subscribe(() => {
+            this.afterOpened$.next();
+            this.afterOpened$.complete();
+        });
 
         // Dispose overlay when closing animation is complete
         containerInstance.animationStateChanged.pipe(
@@ -48,12 +47,11 @@ export class McSidepanelRef<T = any, R = any> {
                 (event) => event.phaseName === 'done' && event.toState === McSidepanelAnimationState.Hidden
             ),
             take(1)
-        )
-            .subscribe(() => {
-                overlayRef.dispose();
-                this.afterClosed$.next(this.result);
-                this.afterClosed$.complete();
-            });
+        ).subscribe(() => {
+            overlayRef.dispose();
+            this.afterClosed$.next(this.result);
+            this.afterClosed$.complete();
+        });
 
         if (!containerInstance.sidepanelConfig.disableClose) {
             merge(
@@ -71,7 +69,7 @@ export class McSidepanelRef<T = any, R = any> {
         if (!this.afterClosed$.closed) {
             // Transition the backdrop in parallel to the sidepanel.
             this.containerInstance.animationStateChanged.pipe(
-                filter((event) => event.phaseName === 'start'),
+                filter((event) => event.phaseName === 'done'),
                 take(1)
             ).subscribe(() => this.overlayRef.detachBackdrop());
 
