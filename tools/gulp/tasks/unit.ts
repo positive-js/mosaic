@@ -1,7 +1,7 @@
-import { task } from 'gulp';
+import { task, series } from 'gulp';
 import { join } from 'path';
 
-import { buildConfig, sequenceTask } from '../../packages';
+import { buildConfig } from '../../packages';
 
 
 const defaultOptions = {
@@ -10,13 +10,13 @@ const defaultOptions = {
     singleRun: false
 };
 
-task(':test:build', sequenceTask(
+task(':test:build', series(
     'clean',
     'cdk:build-no-bundles',
     'mosaic:build-no-bundles'
 ));
 
-task('test:single-run', [':test:build'], (done: () => void) => {
+task('test:single-run', series(':test:build', (done: () => void) => {
 
     const karma = require('karma');
 
@@ -25,4 +25,4 @@ task('test:single-run', [':test:build'], (done: () => void) => {
         // potential still running tunnel-browsers gulp won't exit properly.
         exitCode === 0 ? done() : process.exit(exitCode);
     }).start();
-});
+}));

@@ -2,18 +2,20 @@ import { createPackageBuildTasks } from '../packages';
 
 import { cdkPackage, examplesPackage, mosaicPackage } from './packages';
 
+/* tslint:disable:no-import-side-effect ordered-imports */
+// THIS ORDER OF IMPORTS AND CALLS IS IMPORTANT
+import './tasks/clean';
+import './tasks/example-module';
+
 
 createPackageBuildTasks(cdkPackage);
 createPackageBuildTasks(mosaicPackage);
 createPackageBuildTasks(examplesPackage, ['build-examples-module']);
 
-/* tslint:disable:no-import-side-effect */
-import './tasks/clean';
-import './tasks/ci';
 import './tasks/lint';
-import './tasks/mosaic-release';
 import './tasks/unit';
-import './tasks/example-module';
+import './tasks/ci';
+import './tasks/mosaic-release';
 import './tasks/docs';
 import './tasks/payload';
 import './tasks/changelog';
