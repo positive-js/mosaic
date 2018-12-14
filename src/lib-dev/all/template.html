@@ -7,35 +7,35 @@
             Alert text
             // todo сделать отдельную кнопку
             <button class="mc-alert__close">
-                <i mc-icon="mc-close-M_16" color="second"></i>
+                <i class="mc-icon_light" mc-icon="mc-close-M_16" color="second"></i>
             </button>
         </div>
         <div class="mc-alert mc-alert_warning mc-alert_dismissible">
             <i mc-icon="mc-info_16" class="mc-alert__icon"></i>
             Alert text
             <button class="mc-alert__close">
-                <i mc-icon="mc-close-M_16" color="second"></i>
+                <i class="mc-icon_light" mc-icon="mc-close-M_16" color="second"></i>
             </button>
         </div>
         <div class="mc-alert mc-alert_success mc-alert_dismissible">
             <i mc-icon="mc-info_16" class="mc-alert__icon"></i>
             Alert text
             <button class="mc-alert__close">
-                <i mc-icon="mc-close-M_16" color="second"></i>
+                <i class="mc-icon_light" mc-icon="mc-close-M_16" color="second"></i>
             </button>
         </div>
         <div class="mc-alert mc-alert_info mc-alert_dismissible">
             <i mc-icon="mc-info_16" class="mc-alert__icon"></i>
             Alert text
             <button class="mc-alert__close">
-                <i mc-icon="mc-close-M_16" color="second"></i>
+                <i class="mc-icon_light" mc-icon="mc-close-M_16" color="second"></i>
             </button>
         </div>
         <div class="mc-alert mc-alert_dismissible">
             <i mc-icon="mc-info_16" class="mc-alert__icon"></i>
             Alert text
             <button class="mc-alert__close">
-                <i mc-icon="mc-close-M_16" color="second"></i>
+                <i class="mc-icon_light" mc-icon="mc-close-M_16" color="second"></i>
             </button>
         </div>
     </div>
@@ -238,7 +238,12 @@
             <h5>Additional info</h5>
             <button mc-dropdown-item disabled>Disabled</button>
             <button mc-dropdown-item>Point 2</button>
-            <a href="" class="mc-link_underlined" mc-dropdown-item>Link</a>
+            <button mc-dropdown-item>
+                <a class="mc-link">
+                    <span class="mc-link__text">Link</span>
+                    <i mc-icon="mc-angle-L_16" class="mc-link__icon"></i>
+                </a>
+            </button>
             <button mc-dropdown-item>Point 3</button>
         </mc-dropdown>
     </div>
@@ -641,9 +646,6 @@
         <h1>Progress bar</h1>
 
         <div class="lines">
-            <div class="line-container">
-                <mc-progress-bar [value]="percent" [mode]="mode"></mc-progress-bar>
-            </div>
             <div class="line-container">
                 <mc-progress-bar [value]="percent" [mode]="mode" color="primary"></mc-progress-bar>
             </div>
