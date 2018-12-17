@@ -33,7 +33,9 @@
         ],
         "plugins": [
             {
-                "name": "typescript-tslint-plugin"
+                "name": "typescript-tslint-plugin",
+                "alwaysShowRuleFailuresAsWarnings": false,
+                "suppressWhileTypeErrorsPresent": false
             }
         ]
     },
