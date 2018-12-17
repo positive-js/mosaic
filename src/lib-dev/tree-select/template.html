@@ -3,23 +3,22 @@
 
 <div class="dev-container">
     <mc-form-field>
-        <mc-select [(value)]="singleSelected">
-            <mc-tree-selection
-                [dataSource]="dataSource"
-                [treeControl]="treeControl"
-                (navigationChange)="onNavigationChange($event)"
-                (selectionChange)="onSelectionChange($event)">
+        <mc-tree-select
+            [(value)]="singleSelected"
+            [dataSource]="dataSource"
+            [treeControl]="treeControl"
+            (navigationChange)="onNavigationChange($event)"
+            (selectionChange)="onSelectionChange($event)">
 
-                <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
-                    {{ node.name }}
-                </mc-tree-option>
+            <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+                {{ node.name }}
+            </mc-tree-option>
 
-                <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
-                    <i mc-icon="mc-angle-S_16" [style.transform]="treeControl.isExpanded(node) ? '' : 'rotate(-90deg)'" cdkTreeNodeToggle></i>
-                    {{ node.name }} : {{ node.type }}
-                </mc-tree-option>
-            </mc-tree-selection>
-        </mc-select>
+            <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+                <i mc-icon="mc-angle-S_16" [style.transform]="treeControl.isExpanded(node) ? '' : 'rotate(-90deg)'" cdkTreeNodeToggle></i>
+                {{ node.name }} : {{ node.type }}
+            </mc-tree-option>
+        </mc-tree-select>
     </mc-form-field>
 </div>
 

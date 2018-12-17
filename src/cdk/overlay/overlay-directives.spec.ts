@@ -234,7 +234,7 @@ describe('Overlay directives', () => {
 
             const backdrop =
                 overlayContainerElement.querySelector('.cdk-overlay-backdrop') as HTMLElement;
-            expect(backdrop.classList).toContain('mat-test-class');
+            expect(backdrop.classList).toContain('mc-test-class');
         });
 
         it('should set the offsetX', () => {
@@ -380,7 +380,7 @@ describe('Overlay directives', () => {
                      [cdkConnectedOverlayFlexibleDimensions]="flexibleDimensions"
                      [cdkConnectedOverlayGrowAfterOpen]="growAfterOpen"
                      [cdkConnectedOverlayPush]="push"
-                     cdkConnectedOverlayBackdropClass="mat-test-class"
+                     cdkConnectedOverlayBackdropClass="mc-test-class"
                      (backdropClick)="backdropClickHandler($event)"
                      [cdkConnectedOverlayOffsetX]="offsetX"
                      [cdkConnectedOverlayOffsetY]="offsetY"

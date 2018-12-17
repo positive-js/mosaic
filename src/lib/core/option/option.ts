@@ -43,7 +43,6 @@ export class McOptionSelectionChange {
  * @docs-private
  */
 export interface IMcOptionParentComponent {
-    disableRipple?: boolean;
     multiple?: boolean;
 }
 
@@ -54,7 +53,7 @@ export const MC_OPTION_PARENT_COMPONENT =
     new InjectionToken<IMcOptionParentComponent>('MC_OPTION_PARENT_COMPONENT');
 
 /**
- * Single option inside of a `<mat-select>` element.
+ * Single option inside of a `<mc-select>` element.
  */
 @Component({
     selector: 'mc-option',
@@ -104,11 +103,6 @@ export class McOption implements AfterViewChecked, OnDestroy {
         this._disabled = coerceBooleanProperty(value);
     }
 
-    /** Whether ripples for the option are disabled. */
-    get disableRipple() {
-        return this._parent && this._parent.disableRipple;
-    }
-
     /** Event emitted when the option is selected or deselected. */
         // tslint:disable-next-line:no-output-on-prefix
     @Output() readonly onSelectionChange = new EventEmitter<McOptionSelectionChange>();
@@ -127,6 +121,26 @@ export class McOption implements AfterViewChecked, OnDestroy {
         private readonly _changeDetectorRef: ChangeDetectorRef,
         @Optional() @Inject(MC_OPTION_PARENT_COMPONENT) private readonly _parent: IMcOptionParentComponent,
         @Optional() readonly group: McOptgroup) {
+    }
+
+    ngAfterViewChecked() {
+        // Since parent components could be using the option's label to display the selected values
+        // (e.g. `mc-select`) and they don't have a way of knowing if the option's label has changed
+        // we have to check for changes in the DOM ourselves and dispatch an event. These checks are
+        // relatively cheap, however we still limit them only to selected options in order to avoid
+        // hitting the DOM too often.
+        if (this._selected) {
+            const viewValue = this.viewValue;
+
+            if (viewValue !== this._mostRecentViewValue) {
+                this._mostRecentViewValue = viewValue;
+                this._stateChanges.next();
+            }
+        }
+    }
+
+    ngOnDestroy() {
+        this._stateChanges.complete();
     }
 
     /**
@@ -235,26 +249,6 @@ export class McOption implements AfterViewChecked, OnDestroy {
     /** Gets the host DOM element. */
     _getHostElement(): HTMLElement {
         return this._element.nativeElement;
-    }
-
-    ngAfterViewChecked() {
-        // Since parent components could be using the option's label to display the selected values
-        // (e.g. `mat-select`) and they don't have a way of knowing if the option's label has changed
-        // we have to check for changes in the DOM ourselves and dispatch an event. These checks are
-        // relatively cheap, however we still limit them only to selected options in order to avoid
-        // hitting the DOM too often.
-        if (this._selected) {
-            const viewValue = this.viewValue;
-
-            if (viewValue !== this._mostRecentViewValue) {
-                this._mostRecentViewValue = viewValue;
-                this._stateChanges.next();
-            }
-        }
-    }
-
-    ngOnDestroy() {
-        this._stateChanges.complete();
     }
 
     /** Emits the selection change event. */

@@ -38,7 +38,7 @@ import {
     Inject,
     InjectionToken,
     Input,
-    isDevMode,
+    isDevMode, IterableDiffers,
     NgZone,
     OnChanges,
     OnDestroy,
@@ -52,6 +52,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
+import { CdkTree } from '@ptsecurity/cdk/tree';
 import {
     _countGroupLabelsBeforeOption,
     _getOptionScrollPosition,
@@ -103,82 +104,85 @@ let nextUniqueId = 0;
  */
 
 /** The max height of the select's overlay panel */
-export const SELECT_PANEL_MAX_HEIGHT = 224;
+export const TREE_SELECT_PANEL_MAX_HEIGHT = 224;
 
 /** The panel's padding on the x-axis */
-export const SELECT_PANEL_PADDING_X = 1;
+export const TREE_SELECT_PANEL_PADDING_X = 1;
 
 /** The panel's x axis padding if it is indented (e.g. there is an option group). */
 /* tslint:disable-next-line:no-magic-numbers */
-export const SELECT_PANEL_INDENT_PADDING_X = SELECT_PANEL_PADDING_X * 2;
+export const TREE_SELECT_PANEL_INDENT_PADDING_X = TREE_SELECT_PANEL_PADDING_X * 2;
 
 /** The height of the select items in `em` units. */
-export const SELECT_ITEM_HEIGHT_EM = 2;
+export const TREE_SELECT_ITEM_HEIGHT_EM = 2;
 
 /**
  * The select panel will only "fit" inside the viewport if it is positioned at
  * this value or more away from the viewport boundary.
  */
-export const SELECT_PANEL_VIEWPORT_PADDING = 8;
+export const TREE_SELECT_PANEL_VIEWPORT_PADDING = 8;
 
 /** Injection token that determines the scroll handling while a select is open. */
-export const MC_SELECT_SCROLL_STRATEGY =
+export const MC_TREE_SELECT_SCROLL_STRATEGY =
     new InjectionToken<() => IScrollStrategy>('mc-select-scroll-strategy');
 
 /** @docs-private */
-export function mcSelectScrollStrategyProviderFactory(overlay: Overlay):
+function mcSelectScrollStrategyProviderFactory(overlay: Overlay):
     () => RepositionScrollStrategy {
     return () => overlay.scrollStrategies.reposition();
 }
 
 /** @docs-private */
-export const MC_SELECT_SCROLL_STRATEGY_PROVIDER = {
-    provide: MC_SELECT_SCROLL_STRATEGY,
+export const MC_TREE_SELECT_SCROLL_STRATEGY_PROVIDER = {
+    provide: MC_TREE_SELECT_SCROLL_STRATEGY,
     deps: [Overlay],
     useFactory: mcSelectScrollStrategyProviderFactory
 };
 
 /** Change event object that is emitted when the select value has changed. */
-export class McSelectChange {
+export class McTreeSelectChange {
     constructor(
         /** Reference to the select that emitted the change event. */
-        public source: McSelect,
+        public source: McTreeSelect,
         /** Current value of the select that emitted the event. */
         public value: any) {
     }
 }
 
-// Boilerplate for applying mixins to McSelect.
+// Boilerplate for applying mixins to McTreeSelect.
 /** @docs-private */
-export class McSelectBase {
+export class McTreeSelectBase<T> extends CdkTree<T> {
     constructor(
         public _elementRef: ElementRef,
         public _defaultErrorStateMatcher: ErrorStateMatcher,
         public _parentForm: NgForm,
         public _parentFormGroup: FormGroupDirective,
-        public ngControl: NgControl
-    ) {}
+        public ngControl: NgControl,
+        public _differs: IterableDiffers,
+        public _changeDetectorRef: ChangeDetectorRef
+    ) {
+        super(_differs, _changeDetectorRef);
+    }
 }
 
-export const _McSelectMixinBase:
+export const _McTreeSelectMixinBase:
     CanDisableCtor &
     HasTabIndexCtor &
-    CanUpdateErrorStateCtor & typeof McSelectBase
-    = mixinTabIndex(mixinDisabled(mixinErrorState(McSelectBase)));
-
+    CanUpdateErrorStateCtor & typeof McTreeSelectBase
+    = mixinTabIndex(mixinDisabled(mixinErrorState(McTreeSelectBase)));
 
 /**
  * Allows the user to customize the trigger that is displayed when the select has a value.
  */
 @Directive({ selector: 'mc-select-trigger' })
-export class McSelectTrigger {}
+export class McTreeSelectTrigger {}
 
 
 @Component({
-    selector: 'mc-select',
-    exportAs: 'mcSelect',
-    templateUrl: 'select.html',
-    styleUrls: ['./select.css'],
+    selector: 'mc-tree-select',
+    exportAs: 'mcTreeSelect',
+    templateUrl: 'tree-select.html',
+    styleUrls: ['./tree-select.css'],
     inputs: ['disabled', 'tabIndex'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -199,11 +203,11 @@ export class McSelectTrigger {}
         mcSelectAnimations.fadeInContent
     ],
     providers: [
-        { provide: McFormFieldControl, useExisting: McSelect },
-        { provide: MC_OPTION_PARENT_COMPONENT, useExisting: McSelect }
+        { provide: McFormFieldControl, useExisting: McTreeSelect },
+        { provide: MC_OPTION_PARENT_COMPONENT, useExisting: McTreeSelect }
     ]
 })
-export class McSelect extends _McSelectMixinBase implements
+export class McTreeSelect extends _McTreeSelectMixinBase implements
     AfterContentInit, AfterViewInit, OnChanges, OnDestroy, OnInit, DoCheck, ControlValueAccessor, CanDisable,
     HasTabIndex, McFormFieldControl<any>, CanUpdateErrorState {
 
@@ -277,7 +281,7 @@ export class McSelect extends _McSelectMixinBase implements
     @ViewChildren(McTag) tags: QueryList<McTag>;
 
     /** User-supplied override of the trigger element. */
-    @ContentChild(McSelectTrigger) customTrigger: McSelectTrigger;
+    @ContentChild(McTreeSelectTrigger) customTrigger: McTreeSelectTrigger;
 
     /** All of the defined select options. */
     @ContentChildren(McOption, { descendants: true }) options: QueryList<McOption>;
@@ -403,7 +407,7 @@ export class McSelect extends _McSelectMixinBase implements
         this.openedChange.pipe(filter((o) => !o), map(() => {}));
 
     /** Event emitted when the selected value has been changed by the user. */
-    @Output() readonly selectionChange: EventEmitter<McSelectChange> = new EventEmitter<McSelectChange>();
+    @Output() readonly selectionChange: EventEmitter<McTreeSelectChange> = new EventEmitter<McTreeSelectChange>();
 
     /**
      * Event that emits whenever the raw value of the select changes. This is here primarily
@@ -465,7 +469,7 @@ export class McSelect extends _McSelectMixinBase implements
         @Optional() private readonly _parentFormField: McFormField,
         @Self() @Optional() public ngControl: NgControl,
         @Attribute('tabindex') tabIndex: string,
-        @Inject(MC_SELECT_SCROLL_STRATEGY) private readonly _scrollStrategyFactory
+        @Inject(MC_TREE_SELECT_SCROLL_STRATEGY) private readonly _scrollStrategyFactory
     ) {
         super(elementRef, _defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl);
 
@@ -1106,7 +1110,7 @@ export class McSelect extends _McSelectMixinBase implements
         this._value = valueToEmit;
         this.valueChange.emit(valueToEmit);
         this._onChange(valueToEmit);
-        this.selectionChange.emit(new McSelectChange(this, valueToEmit));
+        this.selectionChange.emit(new McTreeSelectChange(this, valueToEmit));
         this._changeDetectorRef.markForCheck();
     }
 
@@ -1138,7 +1142,7 @@ export class McSelect extends _McSelectMixinBase implements
             activeOptionIndex + labelCount,
             this._getItemHeight(),
             this.panel.nativeElement.scrollTop,
-            SELECT_PANEL_MAX_HEIGHT
+            TREE_SELECT_PANEL_MAX_HEIGHT
         );
     }
 
@@ -1155,7 +1159,7 @@ export class McSelect extends _McSelectMixinBase implements
     private _calculateOverlayPosition(): void {
         const itemHeight = this._getItemHeight();
         const items = this._getItemCount();
-        const panelHeight = Math.min(items * itemHeight, SELECT_PANEL_MAX_HEIGHT);
+        const panelHeight = Math.min(items * itemHeight, TREE_SELECT_PANEL_MAX_HEIGHT);
         const scrollContainerHeight = items * itemHeight;
 
         // The farthest the panel can be scrolled before it hits the bottom
@@ -1190,11 +1194,11 @@ export class McSelect extends _McSelectMixinBase implements
         const viewportSize = this._viewportRuler.getViewportSize();
         const isRtl = this._isRtl();
         /* tslint:disable-next-line:no-magic-numbers */
-        const paddingWidth = SELECT_PANEL_PADDING_X * 2;
+        const paddingWidth = TREE_SELECT_PANEL_PADDING_X * 2;
         let offsetX: number;
 
         const selected = this._selectionModel.selected[0] || this.options.first;
-        offsetX = selected && selected.group ? SELECT_PANEL_INDENT_PADDING_X : SELECT_PANEL_PADDING_X;
+        offsetX = selected && selected.group ? TREE_SELECT_PANEL_INDENT_PADDING_X : TREE_SELECT_PANEL_PADDING_X;
 
         // Invert the offset in LTR.
         if (!isRtl) { offsetX *= -1; }
@@ -1206,9 +1210,9 @@ export class McSelect extends _McSelectMixinBase implements
 
         // If the element overflows on either side, reduce the offset to allow it to fit.
         if (leftOverflow > 0) {
-            offsetX += leftOverflow + SELECT_PANEL_VIEWPORT_PADDING;
+            offsetX += leftOverflow + TREE_SELECT_PANEL_VIEWPORT_PADDING;
         } else if (rightOverflow > 0) {
-            offsetX -= rightOverflow + SELECT_PANEL_VIEWPORT_PADDING;
+            offsetX -= rightOverflow + TREE_SELECT_PANEL_VIEWPORT_PADDING;
         }
 
         // Set the offset directly in order to avoid having to go through change detection and
@@ -1242,13 +1246,13 @@ export class McSelect extends _McSelectMixinBase implements
         const itemHeight = this._getItemHeight();
         const viewportSize = this._viewportRuler.getViewportSize();
 
-        const topSpaceAvailable = this._triggerRect.top - SELECT_PANEL_VIEWPORT_PADDING;
+        const topSpaceAvailable = this._triggerRect.top - TREE_SELECT_PANEL_VIEWPORT_PADDING;
         const bottomSpaceAvailable =
-            viewportSize.height - this._triggerRect.bottom - SELECT_PANEL_VIEWPORT_PADDING;
+            viewportSize.height - this._triggerRect.bottom - TREE_SELECT_PANEL_VIEWPORT_PADDING;
 
         const panelHeightTop = Math.abs(this._offsetY);
         const totalPanelHeight =
-            Math.min(this._getItemCount() * itemHeight, SELECT_PANEL_MAX_HEIGHT);
+            Math.min(this._getItemCount() * itemHeight, TREE_SELECT_PANEL_MAX_HEIGHT);
         const panelHeightBottom = totalPanelHeight - panelHeightTop - this._triggerRect.height;
 
         if (panelHeightBottom > bottomSpaceAvailable) {
@@ -1324,7 +1328,7 @@ export class McSelect extends _McSelectMixinBase implements
     private _getItemHeight(): number {
         /* tslint:disable-next-line:no-magic-numbers */
         return 32;
-        // return this._triggerFontSize * SELECT_ITEM_HEIGHT_EM;
+        // return this._triggerFontSize * TREE_SELECT_ITEM_HEIGHT_EM;
     }
 
     /** Comparison function to specify which option is displayed. Defaults to object equality. */

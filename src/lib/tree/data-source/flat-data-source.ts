@@ -46,8 +46,7 @@ export class McTreeFlattener<T, F> {
                 public getChildren: (node: T) => Observable<T[]>) {
     }
 
-    _flattenNode(node: T, level: number,
-                 resultNodes: F[], parentMap: boolean[]): F[] {
+    _flattenNode(node: T, level: number, resultNodes: F[], parentMap: boolean[]): F[] {
         const flatNode = this.transformFunction(node, level);
         resultNodes.push(flatNode);
 

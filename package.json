@@ -129,7 +129,6 @@
         "webpack-dev-server": "^3.1.9"
     },
     "scripts": {
-        "commitmsg": "commitlint -x=./commitlint.config.js -e $GIT_PARAMS",
         "test:unit": "gulp ci:test",
         "valid:lic": "gulp validate-licenses",
         "build:cdk": "gulp cdk:build-release",
@@ -171,6 +170,7 @@
         "server-dev:toggle": "npm run server-dev -- --env.component toggle",
         "server-dev:theme-picker": "npm run server-dev -- --env.component theme-picker",
         "server-dev:tree": "npm run server-dev -- --env.component tree",
+        "server-dev:tree-select": "npm run server-dev -- --env.component tree-select",
         "server-dev:typography": "npm run server-dev -- --env.component typography",
         "server-dev:tooltip": "npm run server-dev -- --env.component tooltip",
         "server-dev:timepicker": "npm run server-dev -- --env.component timepicker"
