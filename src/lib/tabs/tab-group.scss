@@ -1,0 +1,69 @@
+@import '../core/styles/common/layout';
+@import 'tabs-common';
+@import 'tabs-theme';
+
+.mc-tab-group {
+    display: flex;
+    flex-direction: column;
+
+    box-sizing: border-box;
+    text-align: center;
+    white-space: nowrap;
+
+    &:focus {
+        outline: none;
+    }
+
+    &.mc-tab_disabled {
+        cursor: default;
+    }
+
+    &.mc-tab-group_inverted-header {
+        flex-direction: column-reverse;
+    }
+
+    &:not(.mc-tab-group_light) {
+        .mc-tab-label {
+            @include tab-label
+        }
+    }
+
+    &.mc-tab-group_light {
+        .mc-tab-label {
+            @include tab-label-light;
+        }
+    }
+}
+
+.mc-tab-header__content {
+    padding: 1px 1px 0 1px; // Prevent focus border overflow
+}
+
+// The bottom section of the view; contains the tab bodies
+.mc-tab-body__wrapper {
+    display: flex;
+    overflow: hidden;
+    position: relative;
+}
+
+// Wraps each tab body
+.mc-tab-body {
+    @include mc-fill;
+    display: block;
+    overflow: hidden;
+
+    // Fix for auto content wrapping in IE11
+    flex-basis: 100%;
+
+    &.mc-tab-body__active {
+        overflow-x: hidden;
+        overflow-y: auto;
+        position: relative;
+        z-index: 1;
+        flex-grow: 1;
+    }
+
+    .mc-tab-group.mc-tab-group_dynamic-height &.mc-tab-body__active {
+        overflow-y: hidden;
+    }
+}

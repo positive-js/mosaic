@@ -13,6 +13,7 @@
 @import '../../progress-spinner/progress-spinner-theme';
 @import '../../radio/radio-theme';
 @import '../../checkbox/checkbox-theme';
+@import '../../tabs/tabs-theme';
 @import '../../tree/tree-theme';
 @import '../../navbar/navbar-theme';
 @import '../../input/input-theme';
@@ -44,6 +45,7 @@
     @include mc-progress-spinner-theme($theme);
     @include mc-radio-theme($theme);
     @include mc-checkbox-theme($theme);
+    @include mc-tabs-theme($theme);
     @include mc-tree-theme($theme);
     @include mc-navbar-theme($theme);
     @include mc-input-theme($theme);

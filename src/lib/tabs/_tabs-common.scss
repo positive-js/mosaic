@@ -1,0 +1,135 @@
+$mc-tab-border-radius: 3px;
+$mc-tab-border-width: 1px;
+$mc-tab-border-radius-focus: $mc-tab-border-radius;
+$mc-tab-border-width-focus: $mc-tab-border-width + 1px;
+
+$mc-tab-padding-horizontal: 16px;
+
+$mc-tab-height: 40px;
+
+%tab-pseudo {
+    display: block;
+    position: absolute;
+    content: "";
+}
+
+@mixin tab-label-common {
+    display: inline-flex;
+    height: $mc-tab-height;
+    box-sizing: border-box;
+
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    padding: {
+        right: $mc-tab-padding-horizontal;
+        left: $mc-tab-padding-horizontal;
+    }
+
+    outline: none;
+    border: {
+        bottom: {
+            width: $mc-tab-border-width;
+            style: solid;
+        }
+    }
+
+    &.cdk-keyboard-focused {
+        position: relative;
+
+        &:after {
+            @extend %tab-pseudo;
+
+            top: - $mc-tab-border-width-focus;
+            right: - $mc-tab-border-width;
+            bottom: - $mc-tab-border-width;
+            left: - $mc-tab-border-width;
+            border: {
+                width: $mc-tab-border-width-focus;
+                style: solid;
+                top: {
+                    left-radius: $mc-tab-border-radius-focus;
+                    right-radius: $mc-tab-border-radius-focus;
+                }
+                bottom: none;
+            }
+        }
+    }
+
+    &.mc-tab_disabled {
+        pointer-events: none;
+        cursor: auto;
+    }
+}
+
+@mixin tab-label {
+    @include tab-label-common();
+
+    border: {
+        top: {
+            width: $mc-tab-border-width;
+            style: solid;
+            left-radius: $mc-tab-border-radius;
+            right-radius: $mc-tab-border-radius;
+        }
+    }
+
+    &.mc-tab-label_active {
+        padding-right: $mc-tab-padding-horizontal - $mc-tab-border-width;
+        padding-left: $mc-tab-padding-horizontal - $mc-tab-border-width;
+
+        border: {
+            width: $mc-tab-border-width;
+            style: solid;
+        }
+
+        &.cdk-keyboard-focused {
+            border-color: transparent;
+
+            &:after {
+                right: - $mc-tab-border-width-focus;
+                left: - $mc-tab-border-width-focus;
+            }
+        }
+    }
+}
+
+%tab-light-pseudo-highlight-border {
+    $mc-tab-border-highlight-width: 4px;
+
+    @extend %tab-pseudo;
+
+    bottom: - $mc-tab-border-width;
+    left: 0;
+    height: $mc-tab-border-highlight-width;
+    right: 0;
+}
+
+@mixin tab-label-light {
+    @include tab-label-common();
+
+    &.mc-tab-label_active,
+    &:hover {
+        position: relative;
+
+        &:before {
+            @extend %tab-light-pseudo-highlight-border;
+        }
+    }
+
+    &.cdk-keyboard-focused + :hover {
+        &:before {
+            left: $mc-tab-border-width-focus - $mc-tab-border-width;
+        }
+    }
+
+    &.cdk-keyboard-focused {
+        &:after {
+            top: - $mc-tab-border-width;
+        }
+    }
+}

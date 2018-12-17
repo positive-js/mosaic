@@ -1,0 +1,84 @@
+.mc-tab-header {
+    display: flex;
+}
+
+.mc-tab-header__pagination {
+    position: relative;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    min-width: 32px;
+    cursor: pointer;
+    z-index: 2;
+
+    .mc-tab-header__pagination-controls_enabled & {
+        display: flex;
+    }
+}
+
+.mc-tab-header__pagination-chevron {
+    border-style: solid;
+    border-width: 2px 2px 0 0;
+    content: "";
+    height: 8px;
+    width: 8px;
+}
+
+// The pagination control that is displayed on the right side of the tab header.
+.mc-tab-header__pagination_after,
+.mc-tab-header_rtl .mc-tab-header__pagination_before {
+    padding-right: 4px;
+
+    .mc-tab-header__pagination-chevron {
+        transform: rotate(45deg);
+    }
+}
+
+// The pagination control that is displayed on the left side of the tab header.
+/* stylelint-disable no-descending-specificity */
+.mc-tab-header__pagination_before,
+.mc-tab-header_rtl .mc-tab-header__pagination_after {
+    padding-left: 4px;
+
+    .mc-tab-header__pagination-chevron {
+        transform: rotate(-135deg);
+    }
+}
+/* stylelint-enable */
+
+.mc-tab-header__pagination_disabled {
+    box-shadow: none;
+    cursor: default;
+}
+
+.mc-tab-header__content {
+    display: flex;
+    flex-grow: 1;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.mc-tab-list {
+    flex-grow: 1;
+    position: relative;
+    transition: transform 500ms cubic-bezier(0.35, 0, 0.25, 1);
+}
+
+.mc-tab-list__content {
+    display: flex;
+
+    .mc-tab-group_align-labels-center & {
+        justify-content: center;
+    }
+
+    .mc-tab-group_align-labels-end & {
+        justify-content: flex-end;
+    }
+}
+
+.mc-tab-label {
+    .mc-tab-group_stretch-labels & {
+        flex-basis: 0;
+        flex-grow: 1;
+    }
+}
