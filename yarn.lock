@@ -9424,14 +9424,9 @@ typescript-tslint-plugin@^0.2.0:
     mock-require "^3.0.2"
     vscode-languageserver "^5.1.0"
 
-typescript@3.1.6, typescript@^3.0.3:
+typescript@3.1.6, typescript@^3.0.3, typescript@~3.1.6:
   version "3.1.6"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.1.6.tgz#b6543a83cfc8c2befb3f4c8fba6896f5b0c9be68"
-
-typescript@^3.1.6:
-  version "3.2.2"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.2.2.tgz#fe8101c46aa123f8353523ebdcf5730c2ae493e5"
-  integrity sha512-VCj5UiSyHBjwfYacmDuc/NOk4QQixbE+Wn7MFJuS0nRuPQbof132Pw4u53dm264O8LPc2MVsc7RJNml5szurkg==
 
 typescript@~2.7.1:
   version "2.7.2"
