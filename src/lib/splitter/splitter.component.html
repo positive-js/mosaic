@@ -7,6 +7,6 @@
                [order]="index * 2 + 1"
                (mousedown)="onMouseDown($event, index, index + 1)"
     >
-        <i mc-icon="mc-ellipsis_16" [class.icon-vertical]="direction === 'vertical'" *ngIf="!disabled"></i>
+        <i mc-icon="mc-ellipsis_16" color="second" [class.icon-vertical]="direction === 'vertical'" *ngIf="!disabled"></i>
     </mc-gutter>
 </ng-template>

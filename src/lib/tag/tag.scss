@@ -4,7 +4,7 @@
 $mc-tag-border-width: 1px;
 $mc-tag-border-radius: 4px;
 
-$mc-tag-height: 24px - ($mc-tag-border-width * 2);
+$mc-tag-height: 24px;
 
 $mc-tag-icon-padding: 3px;
 
@@ -37,6 +37,8 @@ $mc-tag-icon-padding: 3px;
 .mc-tag__wrapper {
     display: flex;
     align-items: center;
+
+    height: 100%;
 
     flex: 1 1 100%;
 

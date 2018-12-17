@@ -139,6 +139,7 @@
         "linter:styles": "gulp stylelint",
         "release:stage": "ts-node --project tools/release/ tools/release/stage-release.ts",
         "server-dev": "webpack-dev-server --config tools/webpack/webpack.config.js",
+        "server-dev:all": "npm run server-dev -- --env.component all",
         "server-dev:alert": "npm run server-dev -- --env.component alert",
         "server-dev:badge": "npm run server-dev -- --env.component badge",
         "server-dev:button": "npm run server-dev -- --env.component button",

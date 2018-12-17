@@ -181,6 +181,8 @@ $mc-light-theme-foreground: (
     disabled-text:      $dark-text-disabled,
 
     default-icon:       rgba(transparent, 0.45),
+
+    divider:            map-get($mc-grey, 100)
 );
 
 $mc-dark-theme-foreground: (
@@ -197,6 +199,8 @@ $mc-dark-theme-foreground: (
     disabled-text:      $light-text-disabled,
 
     default-icon:       rgba(white, 1),
+
+    divider:            map-get($mc-grey, 600)
 );
 
 $mc-light-theme-background: (
@@ -209,7 +213,7 @@ $mc-light-theme-background: (
     background:           white,
     // todo not used
     bg-content:           map-get($mc-grey, 60),
-    bg-dropdowns:         white,
+    bg-dropdowns:         map-get($mc-grey, 700),
 
     button-bg:            map-get($mc-grey, 60),
     button-border:        map-get($mc-grey, 200),
@@ -230,7 +234,7 @@ $mc-dark-theme-background: (
     background:           map-get($mc-grey, 800),
     // todo not used
     bg-content:           map-get($mc-grey,  60),
-    bg-dropdowns:         #ffffff,
+    bg-dropdowns:         white,
 
     // цвет бордера зависит от палитры
     button-bg:            map-get($mc-grey, 600),

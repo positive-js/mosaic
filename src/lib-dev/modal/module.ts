@@ -37,7 +37,7 @@ export class ModalDemoComponent {
             mcContent   : 'The selected action "Send to Arbor" is used in a rule' +
                 ' or an alert. It will be <b>deleted</b> there too. </br></br>' +
                 'Delete the selected action anyway?',
-            mcOkType    : 'warn',
+            mcOkType    : 'error',
             mcOkText    : 'Yes',
             mcCancelText: 'No',
             mcWidth     : '480px',
