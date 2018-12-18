@@ -10,20 +10,15 @@ import {
 } from '@angular/core';
 import { Overlay, OverlayConfig, OverlayRef } from '@ptsecurity/cdk/overlay';
 import { ComponentPortal, IComponentType, PortalInjector, TemplatePortal } from '@ptsecurity/cdk/portal';
-import {
-    MC_SIDEPANEL_DATA,
-    McSidepanelConfig,
-    McSidepanelContainerComponent,
-    McSidepanelRef
-} from '@ptsecurity/mosaic/sidepanel';
+
+import { MC_SIDEPANEL_DATA, McSidepanelConfig } from './sidepanel-config';
+import { McSidepanelContainerComponent, MC_SIDEPANEL_WITH_INDENT } from './sidepanel-container.component';
+import { McSidepanelRef } from './sidepanel-ref';
 
 
 /** Injection token that can be used to specify default sidepanel options. */
 export const MC_SIDEPANEL_DEFAULT_OPTIONS =
     new InjectionToken<McSidepanelConfig>('mc-sidepanel-default-options');
-
-export const MC_SIDEPANEL_WITH_INDENT =
-    new InjectionToken<boolean>('mc-sidepanel-with-indent');
 
 @Injectable()
 export class McSidepanelService implements OnDestroy {

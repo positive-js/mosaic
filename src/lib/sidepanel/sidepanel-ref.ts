@@ -1,10 +1,10 @@
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
 import { OverlayRef } from '@ptsecurity/cdk/overlay';
-import { McSidepanelAnimationState } from '@ptsecurity/mosaic/sidepanel/sidepanel-animations';
-import { McSidepanelConfig } from '@ptsecurity/mosaic/sidepanel/sidepanel-config';
 import { merge, Observable, Subject } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 
+import { McSidepanelAnimationState } from './sidepanel-animations';
+import { McSidepanelConfig } from './sidepanel-config';
 import { McSidepanelContainerComponent } from './sidepanel-container.component';
 
 

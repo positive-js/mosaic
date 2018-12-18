@@ -6,22 +6,25 @@ import {
     ComponentRef,
     ElementRef,
     EmbeddedViewRef,
-    EventEmitter, Inject,
+    EventEmitter, Inject, InjectionToken,
     OnDestroy,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 
 import { BasePortalOutlet, CdkPortalOutlet, ComponentPortal, TemplatePortal } from '@ptsecurity/cdk/portal';
+
 import {
     mcSidepanelAnimations,
     McSidepanelAnimationState,
     mcSidepanelTransformAnimation
-} from '@ptsecurity/mosaic/sidepanel/sidepanel-animations';
-import { MC_SIDEPANEL_WITH_INDENT } from '@ptsecurity/mosaic/sidepanel/sidepanel.service';
+} from './sidepanel-animations';
 
 import { McSidepanelConfig, McSidepanelPosition } from './sidepanel-config';
 
+
+export const MC_SIDEPANEL_WITH_INDENT =
+    new InjectionToken<boolean>('mc-sidepanel-with-indent');
 
 @Component({
     selector: 'mc-sidepanel-container',

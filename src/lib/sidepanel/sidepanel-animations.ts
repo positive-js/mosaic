@@ -1,6 +1,7 @@
 import { animate, AnimationTriggerMetadata, state, style, transition, trigger } from '@angular/animations';
-import { AnimationCurves, AnimationDurations } from '@ptsecurity/mosaic/core/animation/animation';
-import { McSidepanelPosition } from '@ptsecurity/mosaic/sidepanel/sidepanel-config';
+import { AnimationCurves, AnimationDurations } from '@ptsecurity/mosaic/core';
+
+import { McSidepanelPosition } from './sidepanel-config';
 
 
 export enum McSidepanelAnimationState {
@@ -9,11 +10,13 @@ export enum McSidepanelAnimationState {
     Hidden = 'hidden'
 }
 
-export const mcSidepanelTransformAnimation = {
-    [McSidepanelPosition.Right]: { in: 'translateX(100%)', out: 'translateX(0%)' },
-    [McSidepanelPosition.Left]: { in: 'translateX(-100%)', out: 'translateX(0%)' },
-    [McSidepanelPosition.Top]: { in: 'translateY(-100%)', out: 'translateY(0%)' },
-    [McSidepanelPosition.Bottom]: { in: 'translateY(100%)', out: 'translateY(0%)' }
+// TODO Find a way to use dynamic keys and avoid error "Expression form not supported."
+// tslint:disable-next-line
+export const mcSidepanelTransformAnimation: Record<McSidepanelPosition, { in: string; out: string }> = {
+    right: { in: 'translateX(100%)', out: 'translateX(0%)' },
+    left: { in: 'translateX(-100%)', out: 'translateX(0%)' },
+    top: { in: 'translateY(-100%)', out: 'translateY(0%)' },
+    bottom: { in: 'translateY(100%)', out: 'translateY(0%)' }
 };
 
 export const mcSidepanelAnimations: {
@@ -29,8 +32,8 @@ export const mcSidepanelAnimations: {
             { params: { transformOut: mcSidepanelTransformAnimation[McSidepanelPosition.Right].out }}
         ),
         transition('visible => void, visible => hidden',
-            animate(`${AnimationDurations.COMPLEX} ${AnimationCurves.ACCELERATION_CURVE}`)),
+            animate(`${AnimationDurations.Complex} ${AnimationCurves.AccelerationCurve}`)),
         transition('void => visible',
-            animate(`${AnimationDurations.EXITING} ${AnimationCurves.DECELERATION_CURVE}`))
+            animate(`${AnimationDurations.Exiting} ${AnimationCurves.DecelerationCurve}`))
     ])
 };
