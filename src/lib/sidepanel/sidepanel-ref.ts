@@ -1,6 +1,7 @@
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
 import { OverlayRef } from '@ptsecurity/cdk/overlay';
 import { McSidepanelAnimationState } from '@ptsecurity/mosaic/sidepanel/sidepanel-animations';
+import { McSidepanelConfig } from '@ptsecurity/mosaic/sidepanel/sidepanel-config';
 import { merge, Observable, Subject } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 
@@ -11,6 +12,8 @@ import { McSidepanelContainerComponent } from './sidepanel-container.component';
 let uniqueId = 0;
 
 export class McSidepanelRef<T = any, R = any> {
+    readonly id: string;
+
     /** Instance of the component making up the content of the sidepanel. */
     instance: T;
 
@@ -26,9 +29,10 @@ export class McSidepanelRef<T = any, R = any> {
     constructor(
         public containerInstance: McSidepanelContainerComponent,
         private overlayRef: OverlayRef,
-        readonly id: string = `mc-sidepanel-${uniqueId++}`) {
+        public config: McSidepanelConfig) {
 
-        this.containerInstance.id = id;
+        this.id = this.config.id || `mc-sidepanel-${uniqueId++}`;
+        this.containerInstance.id = this.id;
 
         // Emit when opening animation completes
         containerInstance.animationStateChanged.pipe(

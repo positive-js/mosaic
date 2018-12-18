@@ -6,7 +6,7 @@ import {
     ComponentRef,
     ElementRef,
     EmbeddedViewRef,
-    EventEmitter,
+    EventEmitter, Inject,
     OnDestroy,
     ViewChild,
     ViewEncapsulation
@@ -18,6 +18,7 @@ import {
     McSidepanelAnimationState,
     mcSidepanelTransformAnimation
 } from '@ptsecurity/mosaic/sidepanel/sidepanel-animations';
+import { MC_SIDEPANEL_WITH_INDENT } from '@ptsecurity/mosaic/sidepanel/sidepanel.service';
 
 import { McSidepanelConfig, McSidepanelPosition } from './sidepanel-config';
 
@@ -64,7 +65,8 @@ export class McSidepanelContainerComponent extends BasePortalOutlet implements O
     constructor(
         private elementRef: ElementRef<HTMLElement>,
         private changeDetectorRef: ChangeDetectorRef,
-        public sidepanelConfig: McSidepanelConfig) {
+        public sidepanelConfig: McSidepanelConfig,
+        @Inject(MC_SIDEPANEL_WITH_INDENT) public withIndent: boolean) {
         super();
     }
 
@@ -111,7 +113,7 @@ export class McSidepanelContainerComponent extends BasePortalOutlet implements O
     }
 
     private setAnimation() {
-        const position: McSidepanelPosition = this.sidepanelConfig.position;
+        const position: McSidepanelPosition = this.sidepanelConfig.position!;
 
         this.animationTransform = {
             transformIn: mcSidepanelTransformAnimation[position].in,
@@ -121,7 +123,7 @@ export class McSidepanelContainerComponent extends BasePortalOutlet implements O
 
     private setPanelClass() {
         const element: HTMLElement = this.elementRef.nativeElement;
-        const position: McSidepanelPosition = this.sidepanelConfig.position;
+        const position: McSidepanelPosition = this.sidepanelConfig.position!;
 
         element.classList.add(`mc-sidepanel-container_${position}`);
     }

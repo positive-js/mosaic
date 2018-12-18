@@ -18,15 +18,18 @@ import {
 } from '@ptsecurity/mosaic/sidepanel';
 
 
-/** Injection token that can be used to specify default dialog options. */
+/** Injection token that can be used to specify default sidepanel options. */
 export const MC_SIDEPANEL_DEFAULT_OPTIONS =
     new InjectionToken<McSidepanelConfig>('mc-sidepanel-default-options');
+
+export const MC_SIDEPANEL_WITH_INDENT =
+    new InjectionToken<boolean>('mc-sidepanel-with-indent');
 
 @Injectable()
 export class McSidepanelService implements OnDestroy {
     private openedSidepanelsAtThisLevel: McSidepanelRef[] = [];
 
-    /** Keeps track of the currently-open dialogs. */
+    /** Keeps track of the currently-open sidepanels. */
     get openedSidepanels(): McSidepanelRef[] {
         return this.parentSidepanelService ? this.parentSidepanelService.openedSidepanels :
             this.openedSidepanelsAtThisLevel;
@@ -58,7 +61,7 @@ export class McSidepanelService implements OnDestroy {
 
         const overlayRef = this.createOverlay(fullConfig);
         const container = this.attachContainer(overlayRef, fullConfig);
-        const ref = new McSidepanelRef(container, overlayRef, fullConfig.id);
+        const ref = new McSidepanelRef(container, overlayRef, fullConfig);
 
         if (componentOrTemplateRef instanceof TemplateRef) {
             container.attachTemplatePortal(new TemplatePortal<T>(componentOrTemplateRef, null!, {
@@ -99,8 +102,9 @@ export class McSidepanelService implements OnDestroy {
      * Attaches the sidepanel container component to the overlay.
      */
     private attachContainer(overlayRef: OverlayRef, config: McSidepanelConfig): McSidepanelContainerComponent {
-        const injector = new PortalInjector(this.injector, new WeakMap([
-            [McSidepanelConfig, config]
+        const injector = new PortalInjector(this.injector, new WeakMap<any>([
+            [McSidepanelConfig, config],
+            [MC_SIDEPANEL_WITH_INDENT, this.hasOpenedSidepanelsWithSamePosition(config)]
         ]));
 
         const containerPortal = new ComponentPortal(McSidepanelContainerComponent, undefined, injector);
@@ -113,9 +117,9 @@ export class McSidepanelService implements OnDestroy {
      * Creates a custom injector to be used inside the sidepanel. This allows a component loaded inside
      * of a sidepanel to close itself and, optionally, to return a value.
      * @param config Config object that is used to construct the sidepanel.
-     * @param sidepanelRef Reference to the dialog.
-     * @param sidepanelContainer Dialog container element that wraps all of the contents.
-     * @returns The custom injector that can be used inside the dialog.
+     * @param sidepanelRef Reference to the sidepanel.
+     * @param sidepanelContainer Sidepanel container element that wraps all of the contents.
+     * @returns The custom injector that can be used inside the sidepanel.
      */
     private createInjector<T>(
         config: McSidepanelConfig,
@@ -123,8 +127,8 @@ export class McSidepanelService implements OnDestroy {
         sidepanelContainer: McSidepanelContainerComponent): PortalInjector {
 
         // The McSidepanelContainerComponent is injected in the portal as the McSidepanelContainerComponent and
-        // the dialog's content are created out of the same ViewContainerRef and as such, are siblings for injector
-        // purposes. To allow the hierarchy that is expected, the MatDialogContainer is explicitly
+        // the sidepanel's content are created out of the same ViewContainerRef and as such, are siblings for injector
+        // purposes. To allow the hierarchy that is expected, the McSidepanelContainerComponent is explicitly
         // added to the injection tokens.
         const injectionTokens = new WeakMap<any>([
             [McSidepanelContainerComponent, sidepanelContainer],
@@ -142,7 +146,9 @@ export class McSidepanelService implements OnDestroy {
     private createOverlay(config: McSidepanelConfig): OverlayRef {
         const overlayConfig = new OverlayConfig({
             hasBackdrop: config.hasBackdrop,
+            backdropClass: this.getBackdropClass(config),
             maxWidth: '100%',
+            panelClass: config.overlayPanelClass,
             scrollStrategy: this.overlay.scrollStrategies.block(),
             positionStrategy: this.overlay.position().global()
         });
@@ -156,6 +162,18 @@ export class McSidepanelService implements OnDestroy {
         reversedOpenedSidepanels.forEach((sidepanelRef: McSidepanelRef) => {
             sidepanelRef.close();
         });
+    }
+
+    private getBackdropClass(config: McSidepanelConfig): string {
+        const hasOpenedSidepanelWithBackdrop =
+            this.openedSidepanels.some((sidepanelRef) => sidepanelRef.config.hasBackdrop!);
+
+        return config.requiredBackdrop || !hasOpenedSidepanelWithBackdrop ? 'cdk-overlay-dark-backdrop' :
+            'cdk-overlay-transparent-backdrop';
+    }
+
+    private hasOpenedSidepanelsWithSamePosition(config: McSidepanelConfig): boolean {
+        return this.openedSidepanels.some((sidepanelRef) => sidepanelRef.config.position === config.position);
     }
 
     /**

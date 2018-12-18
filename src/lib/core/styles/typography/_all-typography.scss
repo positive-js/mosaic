@@ -14,6 +14,7 @@
 @import '../../../form-field/form-field-theme';
 @import '../../../modal/modal-theme';
 @import '../../option/option-theme';
+@import '../../../sidepanel/sidepanel-theme';
 @import '../../../tag/tag-theme';
 @import '../../../textarea/textarea-theme';
 @import '../../../tooltip/tooltip-theme';
@@ -43,6 +44,7 @@
     @include mc-tooltip-typography($config);
     @include mc-modal-typography($config);
     @include mc-option-typography($config);
+    @include mc-sidepanel-typography($config);
     @include mc-tag-typography($config);
     @include mc-textarea-typography($config);
     @include mc-toggle-typography($config);

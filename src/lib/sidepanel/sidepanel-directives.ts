@@ -35,7 +35,7 @@ export class McSidepanelClose implements OnInit, OnChanges {
             // This must occur in `onInit`, as the ID binding for the sidepanel container won't
             // be resolved at constructor time. We use setTimeout by same reason.
             setTimeout(() => {
-                this.sidepanelRef = getClosestDialog(this.elementRef, this.sidepanelService.openedSidepanels)!;
+                this.sidepanelRef = getClosestSidepanel(this.elementRef, this.sidepanelService.openedSidepanels)!;
             });
         }
     }
@@ -54,7 +54,7 @@ export class McSidepanelClose implements OnInit, OnChanges {
  * @param element Element relative to which to look for a sidepanel.
  * @param openSidepanels References to the currently-open sidepanels.
  */
-function getClosestDialog(element: ElementRef<HTMLElement>, openSidepanels: McSidepanelRef[]) {
+function getClosestSidepanel(element: ElementRef<HTMLElement>, openSidepanels: McSidepanelRef[]) {
     let parent: HTMLElement | null = element.nativeElement.parentElement;
 
     while (parent && !parent.classList.contains('mc-sidepanel-container')) {
