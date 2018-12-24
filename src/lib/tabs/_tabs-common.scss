@@ -45,6 +45,8 @@ $mc-tab-height: 40px;
     }
 
     &.cdk-keyboard-focused {
+        z-index: 1;
+
         &:after {
             @extend %tab-pseudo;
 
