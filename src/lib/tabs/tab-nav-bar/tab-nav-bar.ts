@@ -53,8 +53,7 @@ export class McTabNav extends mcTabNavMixinBase
 
 // Boilerplate for applying mixins to McTabLink.
 export class McTabLinkBase {}
-export const mcTabLinkMixinBase: HasTabIndexCtor &
-    CanDisableCtor &
+export const mcTabLinkMixinBase: HasTabIndexCtor & CanDisableCtor &
     typeof McTabLinkBase = mixinTabIndex(mixinDisabled(McTabLinkBase));
 
 /**
@@ -69,8 +68,8 @@ export const mcTabLinkMixinBase: HasTabIndexCtor &
         '[attr.aria-current]': 'active',
         '[attr.aria-disabled]': 'disabled.toString()',
         '[attr.tabIndex]': 'tabIndex',
-        '[class.mc-tab_disabled]': 'disabled',
-        '[class.mc-tab-label_active]': 'active'
+        '[class.mc-disabled]': 'disabled',
+        '[class.mc-active]': 'active'
     }
 })
 export class McTabLink extends mcTabLinkMixinBase

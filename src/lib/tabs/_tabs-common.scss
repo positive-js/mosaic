@@ -1,3 +1,6 @@
+@import '../core/styles/common/layout';
+
+
 $mc-tab-border-radius: 3px;
 $mc-tab-border-width: 1px;
 $mc-tab-border-radius-focus: $mc-tab-border-radius;
@@ -14,13 +17,17 @@ $mc-tab-height: 40px;
 }
 
 @mixin tab-label-common {
-    display: inline-flex;
-    height: $mc-tab-height;
+    position: relative;
+
     box-sizing: border-box;
 
-    text-align: center;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
+
+    height: $mc-tab-height;
+
+    text-align: center;
     white-space: nowrap;
 
     cursor: pointer;
@@ -31,16 +38,13 @@ $mc-tab-height: 40px;
     }
 
     outline: none;
-    border: {
-        bottom: {
-            width: $mc-tab-border-width;
-            style: solid;
-        }
+
+    border-bottom: {
+        width: $mc-tab-border-width;
+        style: solid;
     }
 
     &.cdk-keyboard-focused {
-        position: relative;
-
         &:after {
             @extend %tab-pseudo;
 
@@ -60,25 +64,34 @@ $mc-tab-height: 40px;
         }
     }
 
-    &.mc-tab_disabled {
+    &.mc-disabled {
         pointer-events: none;
-        cursor: auto;
+    }
+
+    & .mc-tab-overlay {
+        position: absolute;
+
+        top: -1px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        pointer-events: none;
     }
 }
 
 @mixin tab-label {
     @include tab-label-common();
 
-    border: {
-        top: {
-            width: $mc-tab-border-width;
-            style: solid;
-            left-radius: $mc-tab-border-radius;
-            right-radius: $mc-tab-border-radius;
-        }
+    border-top: {
+        width: $mc-tab-border-width;
+
+        style: solid;
+        left-radius: $mc-tab-border-radius;
+        right-radius: $mc-tab-border-radius;
     }
 
-    &.mc-tab-label_active {
+    &.mc-active {
         padding-right: $mc-tab-padding-horizontal - $mc-tab-border-width;
         padding-left: $mc-tab-padding-horizontal - $mc-tab-border-width;
 
@@ -88,12 +101,22 @@ $mc-tab-height: 40px;
         }
 
         &.cdk-keyboard-focused {
-            border-color: transparent;
-
             &:after {
+                z-index: 1;
                 right: - $mc-tab-border-width-focus;
                 left: - $mc-tab-border-width-focus;
             }
+        }
+    }
+
+    .mc-tab-overlay {
+        border-top: {
+            width: $mc-tab-border-width;
+
+            style: solid;
+            color: transparent;
+            left-radius: $mc-tab-border-radius;
+            right-radius: $mc-tab-border-radius;
         }
     }
 }
@@ -112,10 +135,8 @@ $mc-tab-height: 40px;
 @mixin tab-label-light {
     @include tab-label-common();
 
-    &.mc-tab-label_active,
+    &.mc-active,
     &:hover {
-        position: relative;
-
         &:before {
             @extend %tab-light-pseudo-highlight-border;
         }
@@ -131,5 +152,11 @@ $mc-tab-height: 40px;
         &:after {
             top: - $mc-tab-border-width;
         }
+    }
+
+    & .mc-tab-overlay {
+        position: absolute;
+
+        top: 0;
     }
 }

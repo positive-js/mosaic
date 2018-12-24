@@ -2,10 +2,11 @@
                [selectedIndex]="selectedIndex"
                (indexFocused)="focusChanged($event)"
                (selectFocusedIndex)="selectedIndex = $event">
-    <div class="mc-tab-label"
-         role="tab"
+    <div role="tab"
          mcTabLabelWrapper
          cdkMonitorElementFocus
+         [class.mc-tab-label]="!lightTab"
+         [class.mc-tab-light-label]="lightTab"
          *ngFor="let tab of tabs; let i = index"
          [id]="getTabLabelId(i)"
          [attr.tabIndex]="getTabIndex(tab, i)"
@@ -15,12 +16,11 @@
          [attr.aria-selected]="selectedIndex == i"
          [attr.aria-label]="tab.ariaLabel || null"
          [attr.aria-labelledby]="(!tab.ariaLabel && tab.ariaLabelledby) ? tab.ariaLabelledby : null"
-         [class.mc-tab-label_active]="selectedIndex == i"
+         [class.mc-active]="selectedIndex == i"
          [disabled]="tab.disabled"
          (click)="handleClick(tab, tabHeader, i)">
 
-
-        <div class="mc-tab-label-content">
+        <div class="mc-tab-label__content">
             <!-- If there is a label template, use it. -->
             <ng-template [ngIf]="tab.templateLabel">
                 <ng-template [cdkPortalOutlet]="tab.templateLabel"></ng-template>
@@ -29,6 +29,8 @@
             <!-- If there is not a label template, fall back to the text label. -->
             <ng-template [ngIf]="!tab.templateLabel">{{tab.textLabel}}</ng-template>
         </div>
+
+        <div class="mc-tab-overlay"></div>
     </div>
 </mc-tab-header>
 

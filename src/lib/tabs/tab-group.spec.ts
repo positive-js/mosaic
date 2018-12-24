@@ -297,7 +297,7 @@ describe('McTabGroup', () => {
 
         it('should have one disabled tab', () => {
             fixture.detectChanges();
-            const labels = fixture.debugElement.queryAll(By.css('.mc-tab_disabled'));
+            const labels = fixture.debugElement.queryAll(By.css('.mc-disabled'));
             expect(labels.length).toBe(1);
             expect(labels[0].nativeElement.getAttribute('aria-disabled')).toBe('true');
         });
@@ -306,7 +306,7 @@ describe('McTabGroup', () => {
             fixture.detectChanges();
 
             const tabs = fixture.componentInstance.tabs.toArray();
-            let labels = fixture.debugElement.queryAll(By.css('.mc-tab_disabled'));
+            let labels = fixture.debugElement.queryAll(By.css('.mc-disabled'));
             expect(tabs[2].disabled).toBe(false);
             expect(labels.length).toBe(1);
             expect(labels[0].nativeElement.getAttribute('aria-disabled')).toBe('true');
@@ -315,7 +315,7 @@ describe('McTabGroup', () => {
             fixture.detectChanges();
 
             expect(tabs[2].disabled).toBe(true);
-            labels = fixture.debugElement.queryAll(By.css('.mc-tab_disabled'));
+            labels = fixture.debugElement.queryAll(By.css('.mc-disabled'));
             expect(labels.length).toBe(2);
             expect(labels.every((label) => label.nativeElement.getAttribute('aria-disabled') === 'true'))
                 .toBe(true);
@@ -571,7 +571,7 @@ describe('McTabGroup', () => {
 
         const tabLabelElement = fixture.debugElement
             .query(By.css(`.mc-tab-label:nth-of-type(${expectedIndex + 1})`)).nativeElement;
-        expect(tabLabelElement.classList.contains('mc-tab-label_active')).toBe(true);
+        expect(tabLabelElement.classList.contains('mc-active')).toBe(true);
 
         const tabContentElement = fixture.debugElement
             .query(By.css(`mc-tab-body:nth-of-type(${expectedIndex + 1})`)).nativeElement;
@@ -579,7 +579,7 @@ describe('McTabGroup', () => {
     }
 
     function getSelectedLabel(fixture: ComponentFixture<any>): HTMLElement {
-        return fixture.nativeElement.querySelector('.mc-tab-label_active');
+        return fixture.nativeElement.querySelector('.mc-active');
     }
 
     function getSelectedContent(fixture: ComponentFixture<any>): HTMLElement {

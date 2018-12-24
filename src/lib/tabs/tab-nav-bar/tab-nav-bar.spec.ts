@@ -70,19 +70,19 @@ describe('McTabNavBar', () => {
             tabLink1.nativeElement.click();
             fixture.detectChanges();
             expect(
-                tabLinkElements[0].classList.contains('mc-tab-label_active')
+                tabLinkElements[0].classList.contains('mc-active')
             ).toBeTruthy();
             expect(
-                tabLinkElements[1].classList.contains('mc-tab-label_active')
+                tabLinkElements[1].classList.contains('mc-active')
             ).toBeFalsy();
 
             tabLink2.nativeElement.click();
             fixture.detectChanges();
             expect(
-                tabLinkElements[0].classList.contains('mc-tab-label_active')
+                tabLinkElements[0].classList.contains('mc-active')
             ).toBeFalsy();
             expect(
-                tabLinkElements[1].classList.contains('mc-tab-label_active')
+                tabLinkElements[1].classList.contains('mc-active')
             ).toBeTruthy();
         });
 
@@ -120,7 +120,7 @@ describe('McTabNavBar', () => {
             expect(
                 tabLinkElements.every(
                     (tabLinkEl) =>
-                        !tabLinkEl.classList.contains('mc-tab_disabled')
+                        !tabLinkEl.classList.contains('mc-disabled')
                 )
             ).toBe(
                 true,
@@ -132,7 +132,7 @@ describe('McTabNavBar', () => {
 
             expect(
                 tabLinkElements.every((tabLinkEl) =>
-                    tabLinkEl.classList.contains('mc-tab_disabled')
+                    tabLinkEl.classList.contains('mc-disabled')
                 )
             ).toBe(
                 true,

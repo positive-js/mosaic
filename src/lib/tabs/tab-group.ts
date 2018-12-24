@@ -16,7 +16,7 @@ import {
     InjectionToken,
     Inject,
     Optional,
-    Directive
+    Directive, Attribute
 } from '@angular/core';
 import { coerceBooleanProperty, coerceNumberProperty } from '@ptsecurity/cdk/coercion';
 import {
@@ -109,6 +109,7 @@ export const mcTabGroupMixinBase:
 })
 export class McTabGroup extends mcTabGroupMixinBase implements AfterContentInit,
     AfterContentChecked, OnDestroy, CanColor {
+    lightTab: boolean;
 
     /** Whether the tab group should grow to the size of the active tab. */
     @Input()
@@ -164,10 +165,16 @@ export class McTabGroup extends mcTabGroupMixinBase implements AfterContentInit,
 
     private groupId: number;
 
-    constructor(elementRef: ElementRef,
-                private changeDetectorRef: ChangeDetectorRef,
-                @Inject(MC_TABS_CONFIG) @Optional() defaultConfig?: IMcTabsConfig) {
+    constructor(
+        elementRef: ElementRef,
+        private changeDetectorRef: ChangeDetectorRef,
+        @Attribute('mc-light-tabs') lightTabs: string,
+        @Inject(MC_TABS_CONFIG) @Optional() defaultConfig?: IMcTabsConfig
+    ) {
         super(elementRef);
+
+        this.lightTab = coerceBooleanProperty(lightTabs);
+
         this.groupId = nextId++;
         this.animationDuration = defaultConfig && defaultConfig.animationDuration ?
             defaultConfig.animationDuration : '0ms';

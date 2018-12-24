@@ -20,12 +20,11 @@ export const mcTabLabelWrapperMixinBase: CanDisableCtor &
     selector: '[mcTabLabelWrapper]',
     inputs: ['disabled'],
     host: {
-        '[class.mc-tab_disabled]': 'disabled',
+        '[class.mc-disabled]': 'disabled',
         '[attr.aria-disabled]': '!!disabled'
     }
 })
-export class McTabLabelWrapper extends mcTabLabelWrapperMixinBase
-    implements CanDisable {
+export class McTabLabelWrapper extends mcTabLabelWrapperMixinBase implements CanDisable {
     constructor(public elementRef: ElementRef) {
         super();
     }

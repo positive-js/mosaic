@@ -31,7 +31,10 @@ export const mcTabMixinBase: CanDisableCtor & typeof McTabBase = mixinDisabled(
 
 @Component({
     selector: 'mc-tab',
-    templateUrl: 'tab.html',
+    // Create a template for the content of the <mc-tab> so that we can grab a reference to this
+    // TemplateRef and use it in a Portal to render the tab content in the appropriate place in the
+    // tab-group.
+    template: '<ng-template><ng-content></ng-content></ng-template>',
     inputs: ['disabled'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
