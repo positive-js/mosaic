@@ -5,9 +5,10 @@ import { OverlayModule } from '@ptsecurity/cdk/overlay';
 import { McOptionModule } from '@ptsecurity/mosaic/core';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
+import { MC_SELECT_SCROLL_STRATEGY_PROVIDER } from '@ptsecurity/mosaic/select';
 import { McTagModule } from '@ptsecurity/mosaic/tag';
 
-import { MC_TREE_SELECT_SCROLL_STRATEGY_PROVIDER, McTreeSelect, McTreeSelectTrigger } from './tree-select.component';
+import { McTreeSelect, McTreeSelectTrigger } from './tree-select.component';
 
 
 @NgModule({
@@ -20,6 +21,6 @@ import { MC_TREE_SELECT_SCROLL_STRATEGY_PROVIDER, McTreeSelect, McTreeSelectTrig
     ],
     exports: [McFormFieldModule, McTreeSelect, McTreeSelectTrigger, McOptionModule, CommonModule],
     declarations: [McTreeSelect, McTreeSelectTrigger],
-    providers: [MC_TREE_SELECT_SCROLL_STRATEGY_PROVIDER]
+    providers: [MC_SELECT_SCROLL_STRATEGY_PROVIDER]
 })
 export class McTreeSelectModule {}

@@ -8,7 +8,7 @@ import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
 
-import { McTreeSelectModule, McTreeSelectChange } from '@ptsecurity/mosaic/tree-select';
+import { McTreeSelectChange, McTreeSelectModule } from '@ptsecurity/mosaic/tree-select';
 
 
 @Component({

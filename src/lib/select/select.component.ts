@@ -777,14 +777,6 @@ export class McSelect extends McSelectMixinBase implements
         option.deselect();
     }
 
-    /**
-     * Implemented as part of McFormFieldControl.
-     * @docs-private
-     */
-    get shouldLabelFloat(): boolean {
-        return this._panelOpen || !this.empty;
-    }
-
     calculateHiddenItems(): void {
         if (this.empty || !this.multiple) { return; }
 
