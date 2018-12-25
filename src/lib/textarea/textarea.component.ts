@@ -24,9 +24,9 @@ let nextUniqueId = 0;
 const ROW_SEPARATOR = '\n';
 
 export class McTextareaBase {
-    constructor(public _defaultErrorStateMatcher: ErrorStateMatcher,
-                public _parentForm: NgForm,
-                public _parentFormGroup: FormGroupDirective,
+    constructor(public defaultErrorStateMatcher: ErrorStateMatcher,
+                public parentForm: NgForm,
+                public parentFormGroup: FormGroupDirective,
                 public ngControl: NgControl) {
     }
 }
@@ -160,12 +160,12 @@ export class McTextarea extends McTextareaMixinBase implements McFormFieldContro
 
     constructor(protected elementRef: ElementRef,
                 @Optional() @Self() public ngControl: NgControl,
-                @Optional() _parentForm: NgForm,
-                @Optional() _parentFormGroup: FormGroupDirective,
-                _defaultErrorStateMatcher: ErrorStateMatcher,
+                @Optional() parentForm: NgForm,
+                @Optional() parentFormGroup: FormGroupDirective,
+                defaultErrorStateMatcher: ErrorStateMatcher,
                 @Optional() @Self() @Inject(MC_TEXTAREA_VALUE_ACCESSOR) inputValueAccessor: any,
                 private ngZone: NgZone) {
-        super(_defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl);
+        super(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl);
         // If no input value accessor was explicitly specified, use the element as the textarea value
         // accessor.
         this.valueAccessor = inputValueAccessor || this.elementRef.nativeElement;

@@ -64,9 +64,9 @@ export const MC_INPUT_VALUE_ACCESSOR =
 
 export class McTimepickerBase {
     constructor(
-        public _defaultErrorStateMatcher: ErrorStateMatcher,
-        public _parentForm: NgForm,
-        public _parentFormGroup: FormGroupDirective,
+        public defaultErrorStateMatcher: ErrorStateMatcher,
+        public parentForm: NgForm,
+        public parentFormGroup: FormGroupDirective,
         public ngControl: NgControl) { }
 }
 
@@ -243,12 +243,12 @@ export class McTimepicker extends McTimepickerMixinBase
 
     constructor(private readonly elementRef: ElementRef,
                 @Optional() @Self() public ngControl: NgControl,
-                @Optional() _parentForm: NgForm,
-                @Optional() _parentFormGroup: FormGroupDirective,
-                _defaultErrorStateMatcher: ErrorStateMatcher,
+                @Optional() parentForm: NgForm,
+                @Optional() parentFormGroup: FormGroupDirective,
+                defaultErrorStateMatcher: ErrorStateMatcher,
                 @Optional() @Self() @Inject(MC_INPUT_VALUE_ACCESSOR) inputValueAccessor: any,
                 private readonly renderer: Renderer2) {
-        super(_defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl);
+        super(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl);
 
         // If no input value accessor was explicitly specified, use the element as the input value
         // accessor.

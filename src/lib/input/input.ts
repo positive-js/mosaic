@@ -47,9 +47,9 @@ export const SMALL_STEP = 1;
 let nextUniqueId = 0;
 
 export class McInputBase {
-    constructor(public _defaultErrorStateMatcher: ErrorStateMatcher,
-                public _parentForm: NgForm,
-                public _parentFormGroup: FormGroupDirective,
+    constructor(public defaultErrorStateMatcher: ErrorStateMatcher,
+                public parentForm: NgForm,
+                public parentFormGroup: FormGroupDirective,
                 public ngControl: NgControl) {
     }
 }
@@ -394,11 +394,11 @@ export class McInput extends _McInputMixinBase implements McFormFieldControl<any
 
     constructor(protected _elementRef: ElementRef,
                 @Optional() @Self() public ngControl: NgControl,
-                @Optional() _parentForm: NgForm,
-                @Optional() _parentFormGroup: FormGroupDirective,
-                _defaultErrorStateMatcher: ErrorStateMatcher,
+                @Optional() parentForm: NgForm,
+                @Optional() parentFormGroup: FormGroupDirective,
+                defaultErrorStateMatcher: ErrorStateMatcher,
                 @Optional() @Self() @Inject(MC_INPUT_VALUE_ACCESSOR) inputValueAccessor: any) {
-        super(_defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl);
+        super(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl);
         // If no input value accessor was explicitly specified, use the element as the input value
         // accessor.
         this._inputValueAccessor = inputValueAccessor || this._elementRef.nativeElement;

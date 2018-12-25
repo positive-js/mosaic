@@ -33,31 +33,31 @@
     cdkConnectedOverlayLockPosition
     cdkConnectedOverlayHasBackdrop
     cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
-    [cdkConnectedOverlayScrollStrategy]="_scrollStrategy"
+    [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
     [cdkConnectedOverlayOrigin]="origin"
     [cdkConnectedOverlayOpen]="panelOpen"
-    [cdkConnectedOverlayPositions]="_positions"
-    [cdkConnectedOverlayMinWidth]="_triggerRect?.width"
-    [cdkConnectedOverlayWidth]="_triggerRect?.width"
-    [cdkConnectedOverlayOffsetY]="_offsetY"
+    [cdkConnectedOverlayPositions]="positions"
+    [cdkConnectedOverlayMinWidth]="triggerRect?.width"
+    [cdkConnectedOverlayWidth]="triggerRect?.width"
+    [cdkConnectedOverlayOffsetY]="offsetY"
     (backdropClick)="close()"
-    (attach)="_onAttached()"
+    (attach)="onAttached()"
     (detach)="close()">
 
     <div
         #panel
-        class="mc-select__panel {{ _getPanelTheme() }}"
+        class="mc-select__panel {{ getPanelTheme() }}"
         [ngClass]="panelClass"
-        (@transformPanel.done)="_panelDoneAnimatingStream.next($event.toState)"
-        [style.transformOrigin]="_transformOrigin"
-        [class.mc-select-panel-done-animcing]="_panelDoneAnimating"
-        [style.font-size.px]="_triggerFontSize"
-        (keydown)="_handleKeydown($event)">
+        (@transformPanel.done)="panelDoneAnimatingStream.next($event.toState)"
+        [style.transformOrigin]="transformOrigin"
+        [class.mc-select-panel-done-animcing]="panelDoneAnimating"
+        [style.font-size.px]="triggerFontSize"
+        (keydown)="handleKeydown($event)">
 
         <div
             class="mc-select__content"
             [@fadeInContent]="'showing'"
-            (@fadeInContent.done)="_onFadeInDone()">
+            (@fadeInContent.done)="onFadeInDone()">
             <ng-content></ng-content>
         </div>
     </div>

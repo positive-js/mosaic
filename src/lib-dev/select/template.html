@@ -1,114 +1,116 @@
 <br><br><br><br><br><br><br>
 <div style="height: 20px">{{ selected }}</div>
 
+<!--<div class="dev-container">-->
+    <!--<mc-form-field>-->
+        <!--<input mcInput [(ngModel)]="value" placeholder="Placeholder">-->
+
+        <!--<i mcSuffix mc-icon="mc-calendar_16" color="second"></i>-->
+    <!--</mc-form-field>-->
+
+    <!--<br><br>-->
+
+    <!--<mc-form-field>-->
+        <!--<input mcInput [(ngModel)]="value" placeholder="Placeholder" required>-->
+
+        <!--<i mcSuffix mc-icon="mc-calendar_16" color="second"></i>-->
+    <!--</mc-form-field>-->
+
+    <!--<br><br>-->
+
+    <!--<mc-form-field>-->
+        <!--<input mcInput [(ngModel)]="value" placeholder="Placeholder" [disabled]="true">-->
+
+        <!--<i mcSuffix mc-icon="mc-calendar_16" color="second"></i>-->
+    <!--</mc-form-field>-->
+<!--</div>-->
+
+<br>
+
 <div class="dev-container">
     <mc-form-field>
         <mc-select [(value)]="singleSelected">
-            <mc-tree-selection
-                [dataSource]="dataSource"
-                [treeControl]="treeControl"
-                (navigationChange)="onNavigationChange($event)"
-                (selectionChange)="onSelectionChange($event)">
+            <mc-option value="Disabled" disabled>Disabled</mc-option>
+            <mc-option value="Normal">Normal</mc-option>
+            <mc-option value="Hovered">Hovered</mc-option>
+            <mc-option value="Focused">Focused</mc-option>
+            <mc-option value="Selected">Selected</mc-option>
+            <mc-option value="Selected1">Selected1</mc-option>
+            <mc-option value="Selected2">Selected2</mc-option>
+            <mc-option value="Selected3">Selected3</mc-option>
+            <mc-option value="Selected4">Selected4</mc-option>
+            <mc-option value="Selected5">Selected5</mc-option>
+            <mc-option value="Selected6">Selected6</mc-option>
+            <mc-option value="Selected7">Selected7</mc-option>
+            <mc-option value="Selected8">Selected8</mc-option>
+            <mc-option value="Selected9">Selected9</mc-option>
+            <mc-option value="Selected10">Selected10</mc-option>
+        </mc-select>
+    </mc-form-field>
 
-                <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
-                    {{ node.name }}
-                </mc-tree-option>
+    <br><br>
 
-                <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
-                    <i mc-icon="mc-angle-S_16" [style.transform]="treeControl.isExpanded(node) ? '' : 'rotate(-90deg)'" cdkTreeNodeToggle></i>
-                    {{ node.name }} : {{ node.type }}
-                </mc-tree-option>
-            </mc-tree-selection>
+    <mc-form-field>
+        <mc-select [formControl]="singleSelectFormControl">
+            <mc-option value="Normal">Normal</mc-option>
+        </mc-select>
+    </mc-form-field>
+
+    <br><br>
+
+    <mc-form-field>
+        <mc-select [(value)]="singleSelected" [disabled]="true">
+            <mc-option value="Normal">Normal</mc-option>
         </mc-select>
     </mc-form-field>
 </div>
 
 <br>
 
-<!--<div class="dev-container">-->
-    <!--<mc-form-field>-->
-        <!--<mc-select [(value)]="singleSelected">-->
-            <!--<mc-option value="Disabled" disabled>Disabled</mc-option>-->
-            <!--<mc-option value="Normal">Normal</mc-option>-->
-            <!--<mc-option value="Hovered">Hovered</mc-option>-->
-            <!--<mc-option value="Focused">Focused</mc-option>-->
-            <!--<mc-option value="Selected">Selected</mc-option>-->
-            <!--<mc-option value="Selected1">Selected1</mc-option>-->
-            <!--<mc-option value="Selected2">Selected2</mc-option>-->
-            <!--<mc-option value="Selected3">Selected3</mc-option>-->
-            <!--<mc-option value="Selected4">Selected4</mc-option>-->
-            <!--<mc-option value="Selected5">Selected5</mc-option>-->
-            <!--<mc-option value="Selected6">Selected6</mc-option>-->
-            <!--<mc-option value="Selected7">Selected7</mc-option>-->
-            <!--<mc-option value="Selected8">Selected8</mc-option>-->
-            <!--<mc-option value="Selected9">Selected9</mc-option>-->
-            <!--<mc-option value="Selected10">Selected10</mc-option>-->
-        <!--</mc-select>-->
-    <!--</mc-form-field>-->
+<div style="height: 20px">{{ multipleSelected }}</div>
+<div class="dev-container">
+    <mc-form-field>
+        <mc-select multiple [(value)]="multipleSelected">
+            <!--<mc-select-trigger>ololo <span>{{ select.triggerValue }}</span></mc-select-trigger>-->
+            <mc-option value="Disabled" disabled>Disabled</mc-option>
+            <mc-option value="Normal">Normal</mc-option>
+            <mc-option value="Hovered">Hovered</mc-option>
+            <mc-option value="FocusedFocusedFocusedFocusedFocusedFocusedFocusedFocusedFocusedFocused">
+                FocusedFocusedFocusedFocusedFocusedFocusedFocusedFocusedFocusedFocused
+            </mc-option>
+            <mc-option value="Selected">Selected</mc-option>
+            <mc-option value="Selected1">Selected1</mc-option>
+            <mc-option value="Selected2">Selected2</mc-option>
+            <mc-option value="Selected3">Selected3</mc-option>
+            <mc-option value="Selected4">Selected4</mc-option>
+            <mc-option value="Selected5">Selected5</mc-option>
+            <mc-option value="Selected6">Selected6</mc-option>
+            <mc-option value="Selected7">Selected7</mc-option>
+            <mc-option value="Selected8">Selected8</mc-option>
+            <mc-option value="Selected9">Selected9</mc-option>
+            <mc-option value="Selected10">Selected10</mc-option>
+        </mc-select>
+    </mc-form-field>
 
-    <!--<br><br>-->
+    <br><br>
 
-    <!--<mc-form-field>-->
-        <!--<mc-select [formControl]="singleSelectFormControl">-->
-            <!--<mc-option value="Normal">Normal</mc-option>-->
-        <!--</mc-select>-->
-    <!--</mc-form-field>-->
+    <mc-form-field>
+        <mc-select multiple [formControl]="multiSelectSelectFormControl">
+            <mc-option value="Normal">Normal</mc-option>
+            <mc-option value="Hovered">Hovered</mc-option>
+            <mc-option value="Selected">Selected</mc-option>
+            <mc-option value="Selected1">Selected1</mc-option>
+        </mc-select>
+    </mc-form-field>
 
-    <!--<br><br>-->
+    <br><br>
 
-    <!--<mc-form-field>-->
-        <!--<mc-select [(value)]="singleSelected" [disabled]="true">-->
-            <!--<mc-option value="Normal">Normal</mc-option>-->
-        <!--</mc-select>-->
-    <!--</mc-form-field>-->
-<!--</div>-->
-
-<br>
-
-<!--<div style="height: 20px">{{ multipleSelected }}</div>-->
-<!--<div class="dev-container">-->
-    <!--<mc-form-field>-->
-        <!--<mc-select multiple [(value)]="multipleSelected">-->
-            <!--&lt;!&ndash;<mc-select-trigger>ololo <span>{{ select.triggerValue }}</span></mc-select-trigger>&ndash;&gt;-->
-            <!--<mc-option value="Disabled" disabled>Disabled</mc-option>-->
-            <!--<mc-option value="Normal">Normal</mc-option>-->
-            <!--<mc-option value="Hovered">Hovered</mc-option>-->
-            <!--<mc-option value="FocusedFocusedFocusedFocusedFocusedFocusedFocusedFocusedFocusedFocused">-->
-                <!--FocusedFocusedFocusedFocusedFocusedFocusedFocusedFocusedFocusedFocused-->
-            <!--</mc-option>-->
-            <!--<mc-option value="Selected">Selected</mc-option>-->
-            <!--<mc-option value="Selected1">Selected1</mc-option>-->
-            <!--<mc-option value="Selected2">Selected2</mc-option>-->
-            <!--<mc-option value="Selected3">Selected3</mc-option>-->
-            <!--<mc-option value="Selected4">Selected4</mc-option>-->
-            <!--<mc-option value="Selected5">Selected5</mc-option>-->
-            <!--<mc-option value="Selected6">Selected6</mc-option>-->
-            <!--<mc-option value="Selected7">Selected7</mc-option>-->
-            <!--<mc-option value="Selected8">Selected8</mc-option>-->
-            <!--<mc-option value="Selected9">Selected9</mc-option>-->
-            <!--<mc-option value="Selected10">Selected10</mc-option>-->
-        <!--</mc-select>-->
-    <!--</mc-form-field>-->
-
-    <!--<br><br>-->
-
-    <!--<mc-form-field>-->
-        <!--<mc-select multiple [formControl]="multiSelectSelectFormControl">-->
-            <!--<mc-option value="Normal">Normal</mc-option>-->
-            <!--<mc-option value="Hovered">Hovered</mc-option>-->
-            <!--<mc-option value="Selected">Selected</mc-option>-->
-            <!--<mc-option value="Selected1">Selected1</mc-option>-->
-        <!--</mc-select>-->
-    <!--</mc-form-field>-->
-
-    <!--<br><br>-->
-
-    <!--<mc-form-field>-->
-        <!--<mc-select multiple [(value)]="multipleSelected" [disabled]="true">-->
-            <!--<mc-option value="Normal">Normal</mc-option>-->
-            <!--<mc-option value="Hovered">Hovered</mc-option>-->
-            <!--<mc-option value="Selected">Selected</mc-option>-->
-            <!--<mc-option value="Selected1">Selected1</mc-option>-->
-        <!--</mc-select>-->
-    <!--</mc-form-field>-->
-<!--</div>-->
+    <mc-form-field>
+        <mc-select multiple [(value)]="multipleSelected" [disabled]="true">
+            <mc-option value="Normal">Normal</mc-option>
+            <mc-option value="Hovered">Hovered</mc-option>
+            <mc-option value="Selected">Selected</mc-option>
+            <mc-option value="Selected1">Selected1</mc-option>
+        </mc-select>
+    </mc-form-field>
+</div>

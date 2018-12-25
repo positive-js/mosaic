@@ -1497,7 +1497,7 @@ describe('McSelect', () => {
                 const event = dispatchKeyboardEvent(trigger, 'keydown', HOME);
                 fixture.detectChanges();
 
-                expect(fixture.componentInstance.select._keyManager.activeItemIndex).toBe(0);
+                expect(fixture.componentInstance.select.keyManager.activeItemIndex).toBe(0);
                 expect(event.defaultPrevented).toBe(true);
             }));
 
@@ -1512,7 +1512,7 @@ describe('McSelect', () => {
                 const event = dispatchKeyboardEvent(trigger, 'keydown', END);
                 fixture.detectChanges();
 
-                expect(fixture.componentInstance.select._keyManager.activeItemIndex).toBe(7);
+                expect(fixture.componentInstance.select.keyManager.activeItemIndex).toBe(7);
                 expect(event.defaultPrevented).toBe(true);
             }));
 
@@ -1601,7 +1601,7 @@ describe('McSelect', () => {
                 fixture.detectChanges();
                 flush();
 
-                expect(fixture.componentInstance.select._keyManager.activeItemIndex).toEqual(0);
+                expect(fixture.componentInstance.select.keyManager.activeItemIndex).toEqual(0);
             }));
 
             it('should select an option when it is clicked', fakeAsync(() => {
@@ -1753,7 +1753,7 @@ describe('McSelect', () => {
 
                 // must wait for animation to finish
                 fixture.detectChanges();
-                expect(fixture.componentInstance.select._keyManager.activeItemIndex).toEqual(1);
+                expect(fixture.componentInstance.select.keyManager.activeItemIndex).toEqual(1);
             }));
 
             it('should select an option that was added after initialization', fakeAsync(() => {
@@ -2565,7 +2565,7 @@ describe('McSelect', () => {
             }));
 
             it('should update when making a new selection', fakeAsync(() => {
-                instance.options.last._selectViaInteraction();
+                instance.options.last.selectViaInteraction();
                 fixture.detectChanges();
                 flush();
 
@@ -2593,7 +2593,7 @@ describe('McSelect', () => {
             }));
 
             it('should not update the selection if value is copied on change', fakeAsync(() => {
-                instance.options.first._selectViaInteraction();
+                instance.options.first.selectViaInteraction();
                 fixture.detectChanges();
                 flush();
 
@@ -3215,7 +3215,7 @@ describe('McSelect', () => {
             // For the animation to start at the option's center, its origin must be the distance
             // from the top of the overlay to the option top + half the option height (48/2 = 24).
             const expectedOrigin = Math.floor(optionTop - overlayTop + 24);
-            const rawYOrigin = selectInstance._transformOrigin.split(' ')[1].trim();
+            const rawYOrigin = selectInstance.transformOrigin.split(' ')[1].trim();
             const origin = Math.floor(parseInt(rawYOrigin));
 
             // Because the origin depends on the Y axis offset, we also have to
@@ -3502,7 +3502,7 @@ describe('McSelect', () => {
                     expect(Math.abs(difference) < 2)
                         .toEqual(true, `Expected trigger bottom to align with overlay bottom.`);
 
-                    expect(fixture.componentInstance.select._transformOrigin)
+                    expect(fixture.componentInstance.select.transformOrigin)
                         .toContain(`bottom`, `Expected panel animation to originate at the bottom.`);
                 }));
 
@@ -3532,7 +3532,7 @@ describe('McSelect', () => {
                     expect(Math.floor(overlayTop))
                         .toEqual(Math.floor(triggerTop), `Expected trigger top to align with overlay top.`);
 
-                    expect(fixture.componentInstance.select._transformOrigin)
+                    expect(fixture.componentInstance.select.transformOrigin)
                         .toContain(`top`, `Expected panel animation to originate at the top.`);
                 }));
         });
@@ -4129,7 +4129,7 @@ describe('McSelect', () => {
             fixture.detectChanges();
             flush();
 
-            expect(fixture.componentInstance.select._keyManager.activeItemIndex).toBe(0);
+            expect(fixture.componentInstance.select.keyManager.activeItemIndex).toBe(0);
 
             const options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-option');
 
@@ -4137,7 +4137,7 @@ describe('McSelect', () => {
             fixture.detectChanges();
             flush();
 
-            expect(fixture.componentInstance.select._keyManager.activeItemIndex).toBe(2);
+            expect(fixture.componentInstance.select.keyManager.activeItemIndex).toBe(2);
         }));
 
         it('should be to select an option with a `null` value', fakeAsync(() => {
