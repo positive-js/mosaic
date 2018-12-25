@@ -49,28 +49,23 @@ export class SidepanelDemoComponent {
 @Component({
     selector: 'example-sidepanel',
     template: `
-    <div class="mc-sidepanel-header">
-        <div class="mc-title">Sidepanel Component Content</div>
-        <button mc-sidepanel-close>
-            <span class="mc-sidepanel-close-x">
-                <i mc-icon="mc-close-L_16" class="mc-icon mc-icon_light" color="second"></i>
-            </span>
-        </button>
-    </div>
-    <div class="mc-sidepanel-body layout-padding">
+    <mc-sidepanel-header [closeable]="false">
+        Sidepanel Component Content
+    </mc-sidepanel-header>
+    <mc-sidepanel-body class="layout-padding">
         <div class="mc-subheading">Sidepanel Component Body</div>
 
         <div *ngFor="let item of array; index as i">
             {{ i + 1 }}
         </div>
-    </div>
-    <div class="mc-sidepanel-footer">
-        <div class="mc-sidepanel-actions_left">
+    </mc-sidepanel-body>
+    <mc-sidepanel-footer>
+        <mc-sidepanel-actions align="left">
             <button mc-button color="primary" (click)="openComponentSidepanel()">
                 <span>Open another sidepanel</span>
             </button>
-        </div>
-        <div class="mc-sidepanel-actions_right">
+        </mc-sidepanel-actions>
+        <mc-sidepanel-actions align="right">
             <button mc-button color="primary" (click)="openComponentSidepanel()">
                 <span>Open another sidepanel</span>
             </button>
@@ -78,8 +73,8 @@ export class SidepanelDemoComponent {
             <button mc-button color="second" mc-sidepanel-close>
                 <span>Close</span>
             </button>
-        </div>
-    </div>`,
+        </mc-sidepanel-actions>
+    </mc-sidepanel-footer>`,
     host: {
         class: 'layout-column flex'
     }

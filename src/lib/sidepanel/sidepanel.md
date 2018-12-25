@@ -92,41 +92,36 @@ export class AppModule {}
 ```
 
 ### Sidepanel content
-To structure your sidepanel content you can use several classes:
-`mc-sidepanel-header`, `mc-sidepanel-body` and `mc-sidepanel-footer` 
-with `mc-sidepanel-actions_left` and/or `mc-sidepanel-actions_right` inside.
+To structure your sidepanel content you can use several directives:
+`<mc-sidepanel-header>`, `<mc-sidepanel-body>`, `<mc-sidepanel-footer>` 
+and `<mc-sidepanel-actions>`.
 
 Also `mc-sidepanel-close` directive is available to mark button which need 
-to close sidepanel. For example, it can be cross-icon in header or cancel button in footer.
+to close sidepanel. For example, cancel button in footer.
 
 ```html
-<div class="mc-sidepanel-header">
-    <div class="mc-title">Sidepanel Header</div>
-    <button mc-sidepanel-close>
-        <span class="mc-sidepanel-close-x">
-            <i mc-icon="mc-close-L_16" class="mc-icon mc-icon_light" color="second"></i>
-        </span>
-    </button>
-</div>
-<div class="mc-sidepanel-body layout-padding">
-    <div class="mc-subheading">Sidepanel Body</div>
-</div>
-<div class="mc-sidepanel-footer">
-    <div class="mc-sidepanel-actions_left">
-        <button mc-button color="primary">
-            <span>Action button</span>
+<mc-sidepanel-header [closeable]="true">
+    Sidepanel Header
+</mc-sidepanel-header>
+<mc-sidepanel-body class="layout-padding">
+    Sidepanel Body
+</mc-sidepanel-body>
+<mc-sidepanel-footer>
+    <mc-sidepanel-actions align="left">
+        <button mc-button color="primary" (click)="doAnotherAction()">
+            <span>Another Action</span>
         </button>
-    </div>
-    <div class="mc-sidepanel-actions_right">
-        <button mc-button color="primary">
-            <span>Action button</span>
+    </mc-sidepanel-actions>
+    <mc-sidepanel-actions align="right">
+        <button mc-button color="primary" (click)="doAction()">
+            <span>Action</span>
         </button>
 
         <button mc-button color="second" mc-sidepanel-close>
             <span>Close</span>
         </button>
-    </div>
-</div>
+    </mc-sidepanel-actions>
+</mc-sidepanel-footer>
 ```
 
 #### Keyboard interaction

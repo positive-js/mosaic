@@ -134,12 +134,14 @@
     align-items: center;
     flex: 0 0 auto;
 
-    .mc-sidepanel-actions_left {
-        text-align: left;
-    }
+    .mc-sidepanel-actions {
+        &[align="left"] {
+            text-align: left;
+        }
 
-    .mc-sidepanel-actions_right {
-        text-align: right;
+        &[align="right"] {
+            text-align: right;
+        }
     }
 
     button + button {

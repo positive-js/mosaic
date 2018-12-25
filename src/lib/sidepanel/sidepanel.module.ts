@@ -3,9 +3,16 @@ import { NgModule } from '@angular/core';
 import { OverlayModule } from '@ptsecurity/cdk/overlay';
 import { PortalModule } from '@ptsecurity/cdk/portal';
 import { McCommonModule } from '@ptsecurity/mosaic/core';
+import { McIconModule } from '@ptsecurity/mosaic/icon';
 
 import { McSidepanelContainerComponent } from './sidepanel-container.component';
-import { McSidepanelClose } from './sidepanel-directives';
+import {
+    McSidepanelActions,
+    McSidepanelBody,
+    McSidepanelClose,
+    McSidepanelFooter,
+    McSidepanelHeader
+} from './sidepanel-directives';
 import { McSidepanelService } from './sidepanel.service';
 
 
@@ -14,17 +21,26 @@ import { McSidepanelService } from './sidepanel.service';
         CommonModule,
         OverlayModule,
         PortalModule,
-        McCommonModule
+        McCommonModule,
+        McIconModule
     ],
     providers: [McSidepanelService],
     declarations: [
         McSidepanelContainerComponent,
-        McSidepanelClose
+        McSidepanelClose,
+        McSidepanelHeader,
+        McSidepanelBody,
+        McSidepanelFooter,
+        McSidepanelActions
     ],
     entryComponents: [McSidepanelContainerComponent],
     exports: [
         McSidepanelContainerComponent,
-        McSidepanelClose
+        McSidepanelClose,
+        McSidepanelHeader,
+        McSidepanelBody,
+        McSidepanelFooter,
+        McSidepanelActions
     ]
 })
 export class McSidepanelModule {}
