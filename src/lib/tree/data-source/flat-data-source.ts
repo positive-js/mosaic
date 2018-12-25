@@ -39,25 +39,28 @@ import { map, take } from 'rxjs/operators';
  * and the output flattened type is `F` with additional information.
  */
 export class McTreeFlattener<T, F> {
+    constructor(
+        public transformFunction: (node: T, level: number) => F,
+        public getLevel: (node: F) => number,
+        public isExpandable: (node: F) => boolean,
+        public getChildren: (node: T) => Observable<T[]>
+    ) {}
 
-    constructor(public transformFunction: (node: T, level: number) => F,
-                public getLevel: (node: F) => number,
-                public isExpandable: (node: F) => boolean,
-                public getChildren: (node: T) => Observable<T[]>) {
-    }
-
-    _flattenNode(node: T, level: number, resultNodes: F[], parentMap: boolean[]): F[] {
+    flattenNode(node: T, level: number, resultNodes: F[], parentMap: boolean[]): F[] {
         const flatNode = this.transformFunction(node, level);
         resultNodes.push(flatNode);
 
         if (this.isExpandable(flatNode)) {
-            this.getChildren(node).pipe(take(1)).subscribe((children) => {
-                children.forEach((child, index) => {
-                    const childParentMap: boolean[] = parentMap.slice();
-                    childParentMap.push(index !== children.length - 1);
-                    this._flattenNode(child, level + 1, resultNodes, childParentMap);
+            this.getChildren(node)
+                .pipe(take(1))
+                .subscribe((children) => {
+                    children.forEach((child, index) => {
+                        const childParentMap: boolean[] = parentMap.slice();
+                        childParentMap.push(index !== children.length - 1);
+
+                        this.flattenNode(child, level + 1, resultNodes, childParentMap);
+                    });
                 });
-            });
         }
 
         return resultNodes;
@@ -70,7 +73,7 @@ export class McTreeFlattener<T, F> {
      */
     flattenNodes(structuredData: T[]): F[] {
         const resultNodes: F[] = [];
-        structuredData.forEach((node) => this._flattenNode(node, 0, resultNodes, []));
+        structuredData.forEach((node) => this.flattenNode(node, 0, resultNodes, []));
 
         return resultNodes;
     }
@@ -110,11 +113,9 @@ export class McTreeFlattener<T, F> {
  * to type `F` for `McTree` to consume.
  */
 export class McTreeFlatDataSource<T, F> extends DataSource<F> {
-    _flattenedData = new BehaviorSubject<F[]>([]);
+    flattenedData = new BehaviorSubject<F[]>([]);
 
-    _expandedData = new BehaviorSubject<F[]>([]);
-
-    _data: BehaviorSubject<T[]>;
+    expandedData = new BehaviorSubject<F[]>([]);
 
     get data() {
         return this._data.value;
@@ -122,14 +123,19 @@ export class McTreeFlatDataSource<T, F> extends DataSource<F> {
 
     set data(value: T[]) {
         this._data.next(value);
-        this._flattenedData.next(this.treeFlattener.flattenNodes(this.data));
-        this.treeControl.dataNodes = this._flattenedData.value;
+        this.flattenedData.next(this.treeFlattener.flattenNodes(this.data));
+        this.treeControl.dataNodes = this.flattenedData.value;
     }
 
-    constructor(private treeControl: FlatTreeControl<F>,
-                private treeFlattener: McTreeFlattener<T, F>,
-                initialData: T[] = []) {
+    private _data: BehaviorSubject<T[]>;
+
+    constructor(
+        private treeControl: FlatTreeControl<F>,
+        private treeFlattener: McTreeFlattener<T, F>,
+        initialData: T[] = []
+    ) {
         super();
+
         this._data = new BehaviorSubject<T[]>(initialData);
     }
 
@@ -137,14 +143,14 @@ export class McTreeFlatDataSource<T, F> extends DataSource<F> {
         const changes = [
             collectionViewer.viewChange,
             this.treeControl.expansionModel.onChange!,
-            this._flattenedData
+            this.flattenedData
         ];
 
         return merge(...changes).pipe(map(() => {
-            this._expandedData.next(
-                this.treeFlattener.expandFlattenedNodes(this._flattenedData.value, this.treeControl));
+            this.expandedData.next(
+                this.treeFlattener.expandFlattenedNodes(this.flattenedData.value, this.treeControl));
 
-            return this._expandedData.value;
+            return this.expandedData.value;
         }));
     }
 

@@ -10,11 +10,7 @@ import { map } from 'rxjs/operators';
  * or collapse. The expansion/collapsion will be handled by ITreeControl and each non-leaf node.
  */
 export class McTreeNestedDataSource<T> extends DataSource<T> {
-    _data = new BehaviorSubject<T[]>([]);
 
-    /**
-     * Data for the nested tree
-     */
     get data() {
         return this._data.value;
     }
@@ -22,6 +18,9 @@ export class McTreeNestedDataSource<T> extends DataSource<T> {
     set data(value: T[]) {
         this._data.next(value);
     }
+
+    /* tslint:disable-next-line:naming-convention */
+    private _data = new BehaviorSubject<T[]>([]);
 
     connect(collectionViewer: ICollectionViewer): Observable<T[]> {
         return merge(...[collectionViewer.viewChange, this._data])

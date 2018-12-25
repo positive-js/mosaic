@@ -30,17 +30,21 @@ export class NestedTreeControl<T> extends BaseTreeControl<T> {
         const descendants = [];
         this._getDescendants(descendants, dataNode);
 
-        // Remove the node itself
         return descendants.splice(1);
     }
 
     /** A helper function to get descendants recursively. */
-    protected _getDescendants(descendants: T[], dataNode: T): void {
+    // todo нужно придумать другое название и понять в чем отличие между getDescendants и _getDescendants
+    /* tslint:disable-next-line:naming-convention */
+    private _getDescendants(descendants: T[], dataNode: T): void {
         descendants.push(dataNode);
-        this.getChildren(dataNode).pipe(take(1)).subscribe((children) => {
-            if (children && children.length > 0) {
-                children.forEach((child: T) => this._getDescendants(descendants, child));
-            }
-        });
+
+        this.getChildren(dataNode)
+            .pipe(take(1))
+            .subscribe((children) => {
+                if (children && children.length > 0) {
+                    children.forEach((child: T) => this._getDescendants(descendants, child));
+                }
+            });
     }
 }

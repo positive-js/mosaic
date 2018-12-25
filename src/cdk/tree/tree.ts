@@ -44,10 +44,11 @@ import {
     selector: 'cdk-tree-node',
     exportAs: 'cdkTreeNode',
     host: {
+        class: 'cdk-tree-node',
+
         '[attr.aria-expanded]': 'isExpanded',
         '[attr.aria-level]': 'role === "treeitem" ? level : null',
-        '[attr.role]': 'role',
-        class: 'cdk-tree-node'
+        '[attr.role]': 'role'
     }
 })
 export class CdkTreeNode<T> implements IFocusableOption, OnDestroy {
@@ -57,62 +58,55 @@ export class CdkTreeNode<T> implements IFocusableOption, OnDestroy {
      */
     static mostRecentTreeNode: CdkTreeNode<any> | null = null;
 
-    /**
-     * The role of the node should be 'group' if it's an internal node,
-     * and 'treeitem' if it's a leaf node.
-     */
     @Input() role: 'treeitem' | 'group' = 'treeitem';
 
-    /** Subject that emits when the component has been destroyed. */
-    protected _destroyed = new Subject<void>();
+    protected destroyed = new Subject<void>();
 
-    protected _data: T;
-
-    /** The tree node's data. */
     get data(): T {
         return this._data;
     }
 
     set data(value: T) {
         this._data = value;
-        this._setRoleFromData();
+
+        this.setRoleFromData();
     }
 
+    private _data: T;
+
     get isExpanded(): boolean {
-        return this._tree.treeControl.isExpanded(this._data);
+        return this.tree.treeControl.isExpanded(this._data);
     }
 
     get level(): number {
-        return this._tree.treeControl.getLevel ? this._tree.treeControl.getLevel(this._data) : 0;
+        return this.tree.treeControl.getLevel ? this.tree.treeControl.getLevel(this._data) : 0;
     }
 
     constructor(
-        protected _elementRef: ElementRef,
-        @Inject(forwardRef(() => CdkTree))
-        protected _tree: CdkTree<T>
+        protected elementRef: ElementRef,
+        @Inject(forwardRef(() => CdkTree)) protected tree: CdkTree<T>
     ) {
         CdkTreeNode.mostRecentTreeNode = this as CdkTreeNode<T>;
     }
 
     ngOnDestroy() {
-        this._destroyed.next();
-        this._destroyed.complete();
+        this.destroyed.next();
+        this.destroyed.complete();
     }
 
-    /** Focuses the dropdown item. Implements for IFocusableOption. */
     focus(): void {
-        this._elementRef.nativeElement.focus();
+        this.elementRef.nativeElement.focus();
     }
 
-    private _setRoleFromData(): void {
-        if (this._tree.treeControl.isExpandable) {
-            this.role = this._tree.treeControl.isExpandable(this._data) ? 'group' : 'treeitem';
+    private setRoleFromData(): void {
+        if (this.tree.treeControl.isExpandable) {
+            this.role = this.tree.treeControl.isExpandable(this._data) ? 'group' : 'treeitem';
         } else {
-            if (!this._tree.treeControl.getChildren) {
+            if (!this.tree.treeControl.getChildren) {
                 throw getTreeControlFunctionsMissingError();
             }
 
-            this._tree.treeControl.getChildren(this._data).pipe(takeUntil(this._destroyed))
+            this.tree.treeControl.getChildren(this._data).pipe(takeUntil(this.destroyed))
                 .subscribe((children) => {
                     this.role = children && children.length ? 'group' : 'treeitem';
                 });
@@ -150,10 +144,10 @@ export class CdkTree<T> implements AfterContentChecked, ICollectionViewer, OnDes
     @Input() trackBy: TrackByFunction<T>;
 
     // Outlets within the tree's template where the dataNodes will be inserted.
-    @ViewChild(CdkTreeNodeOutlet) _nodeOutlet: CdkTreeNodeOutlet;
+    @ViewChild(CdkTreeNodeOutlet) nodeOutlet: CdkTreeNodeOutlet;
 
     /** The tree node template for the tree */
-    @ContentChildren(CdkTreeNodeDef) _nodeDefs: QueryList<CdkTreeNodeDef<T>>;
+    @ContentChildren(CdkTreeNodeDef) nodeDefs: QueryList<CdkTreeNodeDef<T>>;
 
     // TODO(tinayuangao): Setup a listener for scrolling, emit the calculated view to viewChange.
     //     Remove the MAX_VALUE in viewChange
@@ -161,24 +155,23 @@ export class CdkTree<T> implements AfterContentChecked, ICollectionViewer, OnDes
      * Stream containing the latest information on what rows are being displayed on screen.
      * Can be used by the data source to as a heuristic of what data should be provided.
      */
-    viewChange =
-        new BehaviorSubject<{ start: number, end: number }>({ start: 0, end: Number.MAX_VALUE });
+    viewChange = new BehaviorSubject<{ start: number; end: number }>({ start: 0, end: Number.MAX_VALUE });
 
     /** Differ used to find the changes in the data provided by the data source. */
-    protected _dataDiffer: IterableDiffer<T>;
+    protected dataDiffer: IterableDiffer<T>;
 
     /** Subject that emits when the component has been destroyed. */
-    private _onDestroy = new Subject<void>();
+    private onDestroy = new Subject<void>();
 
 
     /** Stores the node definition that does not have a when predicate. */
-    private _defaultNodeDef: CdkTreeNodeDef<T> | null;
+    private defaultNodeDef: CdkTreeNodeDef<T> | null;
 
     /** Data subscription */
-    private _dataSubscription: Subscription | null;
+    private dataSubscription: Subscription | null;
 
     /** Level of nodes */
-    private _levels: Map<T, number> = new Map<T, number>();
+    private levels: Map<T, number> = new Map<T, number>();
 
     /**
      * Provides a stream containing the latest data array to render. Influenced by the tree's
@@ -192,19 +185,16 @@ export class CdkTree<T> implements AfterContentChecked, ICollectionViewer, OnDes
 
     set dataSource(dataSource: DataSource<T> | Observable<T[]> | T[]) {
         if (this._dataSource !== dataSource) {
-            this._switchDataSource(dataSource);
+            this.switchDataSource(dataSource);
         }
     }
 
     private _dataSource: DataSource<T> | Observable<T[]> | T[];
 
-    constructor(
-        private _differs: IterableDiffers,
-        private _changeDetectorRef: ChangeDetectorRef
-    ) {}
+    constructor(private differs: IterableDiffers, private _changeDetectorRef: ChangeDetectorRef) {}
 
     ngOnInit() {
-        this._dataDiffer = this._differs.find([]).create(this.trackBy);
+        this.dataDiffer = this.differs.find([]).create(this.trackBy);
 
         if (!this.treeControl) {
             throw getTreeControlMissingError();
@@ -212,38 +202,38 @@ export class CdkTree<T> implements AfterContentChecked, ICollectionViewer, OnDes
     }
 
     ngOnDestroy() {
-        this._nodeOutlet.viewContainer.clear();
+        this.nodeOutlet.viewContainer.clear();
 
-        this._onDestroy.next();
-        this._onDestroy.complete();
+        this.onDestroy.next();
+        this.onDestroy.complete();
 
         if (this._dataSource && typeof (this._dataSource as DataSource<T>).disconnect === 'function') {
             (this.dataSource as DataSource<T>).disconnect(this);
         }
 
-        if (this._dataSubscription) {
-            this._dataSubscription.unsubscribe();
-            this._dataSubscription = null;
+        if (this.dataSubscription) {
+            this.dataSubscription.unsubscribe();
+            this.dataSubscription = null;
         }
     }
 
     ngAfterContentChecked() {
-        const defaultNodeDefs = this._nodeDefs.filter((def) => !def.when);
+        const defaultNodeDefs = this.nodeDefs.filter((def) => !def.when);
         if (defaultNodeDefs.length > 1) {
             throw getTreeMultipleDefaultNodeDefsError();
         }
-        this._defaultNodeDef = defaultNodeDefs[0];
+        this.defaultNodeDef = defaultNodeDefs[0];
 
-        if (this.dataSource && this._nodeDefs && !this._dataSubscription) {
-            this._observeRenderChanges();
+        if (this.dataSource && this.nodeDefs && !this.dataSubscription) {
+            this.observeRenderChanges();
         }
     }
 
     /** Check for changes made in the data and render each change (node added/removed/moved). */
     renderNodeChanges(
         data: T[],
-        dataDiffer: IterableDiffer<T> = this._dataDiffer,
-        viewContainer: ViewContainerRef = this._nodeOutlet.viewContainer,
+        dataDiffer: IterableDiffer<T> = this.dataDiffer,
+        viewContainer: ViewContainerRef = this.nodeOutlet.viewContainer,
         parentData?: T
     ) {
         const changes = dataDiffer.diff(data);
@@ -257,7 +247,7 @@ export class CdkTree<T> implements AfterContentChecked, ICollectionViewer, OnDes
                 this.insertNode(data[currentIndex!], currentIndex!, viewContainer, parentData);
             } else if (currentIndex == null) {
                 viewContainer.remove(adjustedPreviousIndex!);
-                this._levels.delete(item.item);
+                this.levels.delete(item.item);
             } else {
                 const view = viewContainer.get(adjustedPreviousIndex!);
                 viewContainer.move(view!, currentIndex);
@@ -273,11 +263,11 @@ export class CdkTree<T> implements AfterContentChecked, ICollectionViewer, OnDes
      * predicate that returns true with the data. If none return true, return the default node
      * definition.
      */
-    _getNodeDef(data: T, i: number): CdkTreeNodeDef<T> {
-        if (this._nodeDefs.length === 1) { return this._nodeDefs.first; }
+    getNodeDef(data: T, i: number): CdkTreeNodeDef<T> {
+        if (this.nodeDefs.length === 1) { return this.nodeDefs.first; }
 
         const nodeDef =
-            this._nodeDefs.find((def) => def.when && def.when(i, data)) || this._defaultNodeDef;
+            this.nodeDefs.find((def) => def.when && def.when(i, data)) || this.defaultNodeDef;
 
         if (!nodeDef) { throw getTreeMissingMatchingNodeDefError(); }
 
@@ -289,7 +279,7 @@ export class CdkTree<T> implements AfterContentChecked, ICollectionViewer, OnDes
      * within the data node view container.
      */
     insertNode(nodeData: T, index: number, viewContainer?: ViewContainerRef, parentData?: T) {
-        const node = this._getNodeDef(nodeData, index);
+        const node = this.getNodeDef(nodeData, index);
 
         // Node context that will be provided to created embedded view
         const context = new CdkTreeNodeOutletContext<T>(nodeData);
@@ -298,16 +288,17 @@ export class CdkTree<T> implements AfterContentChecked, ICollectionViewer, OnDes
         // Otherwise, use the level of parent node.
         if (this.treeControl.getLevel) {
             context.level = this.treeControl.getLevel(nodeData);
-        } else if (typeof parentData !== 'undefined' && this._levels.has(parentData)) {
-            context.level = this._levels.get(parentData)! + 1;
+        /* tslint:disable-next-line:no-typeof-undefined */
+        } else if (typeof parentData !== 'undefined' && this.levels.has(parentData)) {
+            context.level = this.levels.get(parentData)! + 1;
         } else {
             context.level = 0;
         }
 
-        this._levels.set(nodeData, context.level);
+        this.levels.set(nodeData, context.level);
 
         // Use default tree nodeOutlet, or nested node's nodeOutlet
-        const container = viewContainer ? viewContainer : this._nodeOutlet.viewContainer;
+        const container = viewContainer ? viewContainer : this.nodeOutlet.viewContainer;
         container.createEmbeddedView(node.template, context, index);
 
         // Set the data to just created `CdkTreeNode`.
@@ -319,7 +310,7 @@ export class CdkTree<T> implements AfterContentChecked, ICollectionViewer, OnDes
     }
 
     /** Set up a subscription for the data provided by the data source. */
-    private _observeRenderChanges() {
+    private observeRenderChanges() {
         let dataStream: Observable<T[]> | undefined;
 
         // Cannot use `instanceof DataSource` since the data source could be a literal with
@@ -333,8 +324,8 @@ export class CdkTree<T> implements AfterContentChecked, ICollectionViewer, OnDes
         }
 
         if (dataStream) {
-            this._dataSubscription = dataStream
-                .pipe(takeUntil(this._onDestroy))
+            this.dataSubscription = dataStream
+                .pipe(takeUntil(this.onDestroy))
                 .subscribe((data) => this.renderNodeChanges(data));
         } else {
             throw getTreeNoValidDataSourceError();
@@ -346,21 +337,21 @@ export class CdkTree<T> implements AfterContentChecked, ICollectionViewer, OnDes
      * render change subscription if one exists. If the data source is null, interpret this by
      * clearing the node outlet. Otherwise start listening for new data.
      */
-    private _switchDataSource(dataSource: DataSource<T> | Observable<T[]> | T[]) {
+    private switchDataSource(dataSource: DataSource<T> | Observable<T[]> | T[]) {
         if (this._dataSource && typeof (this._dataSource as DataSource<T>).disconnect === 'function') {
             (this.dataSource as DataSource<T>).disconnect(this);
         }
 
-        if (this._dataSubscription) {
-            this._dataSubscription.unsubscribe();
-            this._dataSubscription = null;
+        if (this.dataSubscription) {
+            this.dataSubscription.unsubscribe();
+            this.dataSubscription = null;
         }
 
         // Remove the all dataNodes if there is now no data source
-        if (!dataSource) { this._nodeOutlet.viewContainer.clear(); }
+        if (!dataSource) { this.nodeOutlet.viewContainer.clear(); }
 
         this._dataSource = dataSource;
 
-        if (this._nodeDefs) { this._observeRenderChanges(); }
+        if (this.nodeDefs) { this.observeRenderChanges(); }
     }
 }
