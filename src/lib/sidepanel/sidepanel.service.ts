@@ -12,7 +12,11 @@ import { Overlay, OverlayConfig, OverlayRef } from '@ptsecurity/cdk/overlay';
 import { ComponentPortal, IComponentType, PortalInjector, TemplatePortal } from '@ptsecurity/cdk/portal';
 
 import { MC_SIDEPANEL_DATA, McSidepanelConfig } from './sidepanel-config';
-import { McSidepanelContainerComponent, MC_SIDEPANEL_WITH_INDENT } from './sidepanel-container.component';
+import {
+    McSidepanelContainerComponent,
+    MC_SIDEPANEL_WITH_INDENT,
+    MC_SIDEPANEL_WITH_SHADOW
+} from './sidepanel-container.component';
 import { McSidepanelRef } from './sidepanel-ref';
 
 
@@ -97,9 +101,12 @@ export class McSidepanelService implements OnDestroy {
      * Attaches the sidepanel container component to the overlay.
      */
     private attachContainer(overlayRef: OverlayRef, config: McSidepanelConfig): McSidepanelContainerComponent {
+        const openedSidepanelsWithSamePosition = this.getOpenedSidepanelsWithSamePosition(config);
+
         const injector = new PortalInjector(this.injector, new WeakMap<any>([
             [McSidepanelConfig, config],
-            [MC_SIDEPANEL_WITH_INDENT, this.hasOpenedSidepanelsWithSamePosition(config)]
+            [MC_SIDEPANEL_WITH_INDENT, openedSidepanelsWithSamePosition.length >= 1],
+            [MC_SIDEPANEL_WITH_SHADOW, openedSidepanelsWithSamePosition.length < 2] // tslint:disable-line
         ]));
 
         const containerPortal = new ComponentPortal(McSidepanelContainerComponent, undefined, injector);
@@ -167,8 +174,8 @@ export class McSidepanelService implements OnDestroy {
             'cdk-overlay-transparent-backdrop';
     }
 
-    private hasOpenedSidepanelsWithSamePosition(config: McSidepanelConfig): boolean {
-        return this.openedSidepanels.some((sidepanelRef) => sidepanelRef.config.position === config.position);
+    private getOpenedSidepanelsWithSamePosition(config: McSidepanelConfig): McSidepanelRef[] {
+        return this.openedSidepanels.filter((sidepanelRef) => sidepanelRef.config.position === config.position);
     }
 
     /**

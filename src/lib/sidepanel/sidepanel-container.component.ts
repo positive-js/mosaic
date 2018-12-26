@@ -26,6 +26,9 @@ import { McSidepanelConfig, McSidepanelPosition } from './sidepanel-config';
 export const MC_SIDEPANEL_WITH_INDENT =
     new InjectionToken<boolean>('mc-sidepanel-with-indent');
 
+export const MC_SIDEPANEL_WITH_SHADOW =
+    new InjectionToken<boolean>('mc-sidepanel-with-shadow');
+
 @Component({
     selector: 'mc-sidepanel-container',
     templateUrl: './sidepanel-container.component.html',
@@ -69,7 +72,8 @@ export class McSidepanelContainerComponent extends BasePortalOutlet implements O
         private elementRef: ElementRef<HTMLElement>,
         private changeDetectorRef: ChangeDetectorRef,
         public sidepanelConfig: McSidepanelConfig,
-        @Inject(MC_SIDEPANEL_WITH_INDENT) public withIndent: boolean) {
+        @Inject(MC_SIDEPANEL_WITH_INDENT) public withIndent: boolean,
+        @Inject(MC_SIDEPANEL_WITH_SHADOW) public withShadow: boolean) {
         super();
     }
 
@@ -129,6 +133,10 @@ export class McSidepanelContainerComponent extends BasePortalOutlet implements O
         const position: McSidepanelPosition = this.sidepanelConfig.position!;
 
         element.classList.add(`mc-sidepanel-container_${position}`);
+
+        if (this.withShadow) {
+            element.classList.add('mc-sidepanel-container_shadowed');
+        }
     }
 
     private validatePortalAttached() {

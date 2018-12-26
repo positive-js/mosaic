@@ -49,7 +49,7 @@ export class SidepanelDemoComponent {
 @Component({
     selector: 'example-sidepanel',
     template: `
-    <mc-sidepanel-header [closeable]="false">
+    <mc-sidepanel-header [closeable]="true">
         Sidepanel Component Content
     </mc-sidepanel-header>
     <mc-sidepanel-body class="layout-padding">
@@ -60,11 +60,6 @@ export class SidepanelDemoComponent {
         </div>
     </mc-sidepanel-body>
     <mc-sidepanel-footer>
-        <mc-sidepanel-actions align="left">
-            <button mc-button color="primary" (click)="openComponentSidepanel()">
-                <span>Open another sidepanel</span>
-            </button>
-        </mc-sidepanel-actions>
         <mc-sidepanel-actions align="right">
             <button mc-button color="primary" (click)="openComponentSidepanel()">
                 <span>Open another sidepanel</span>

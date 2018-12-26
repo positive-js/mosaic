@@ -1,5 +1,5 @@
 import { animate, AnimationTriggerMetadata, state, style, transition, trigger } from '@angular/animations';
-import { AnimationCurves, AnimationDurations } from '@ptsecurity/mosaic/core';
+import { AnimationCurves } from '@ptsecurity/mosaic/core';
 
 import { McSidepanelPosition } from './sidepanel-config';
 
@@ -32,8 +32,8 @@ export const mcSidepanelAnimations: {
             { params: { transformOut: mcSidepanelTransformAnimation[McSidepanelPosition.Right].out }}
         ),
         transition('visible => void, visible => hidden',
-            animate(`${AnimationDurations.Complex} ${AnimationCurves.AccelerationCurve}`)),
+            animate(`200ms ${AnimationCurves.AccelerationCurve}`)),
         transition('void => visible',
-            animate(`${AnimationDurations.Exiting} ${AnimationCurves.DecelerationCurve}`))
+            animate(`200ms ${AnimationCurves.DecelerationCurve}`))
     ])
 };

@@ -1,6 +1,8 @@
 @import '../core/styles/common/button';
+@import '../core/styles/common/list';
 
 .mc-sidepanel-container {
+    outline: none;
     display: flex;
     flex: 1;
     position: fixed;
@@ -79,6 +81,7 @@
     display: flex;
     flex: 1;
     min-height: 0;
+    width: 100%;
 }
 
 .mc-sidepanel-indent {
@@ -101,6 +104,7 @@
     flex-direction: column;
     flex: 1;
     min-height: 0;
+    width: 100%;
 }
 
 .mc-sidepanel-header {
@@ -114,8 +118,13 @@
     .mc-sidepanel-close {
         @include mc-button-reset();
         background: transparent;
-        padding: 0;
+        padding: 0 0 0 8px;
     }
+}
+
+.mc-sidepanel-title {
+    flex: 1;
+    @include mc-truncate-line();
 }
 
 .mc-sidepanel-body {
@@ -135,12 +144,17 @@
     flex: 0 0 auto;
 
     .mc-sidepanel-actions {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        flex: 1;
+
         &[align="left"] {
-            text-align: left;
+            justify-content: start;
         }
 
         &[align="right"] {
-            text-align: right;
+            justify-content: flex-end;
         }
     }
 
