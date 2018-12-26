@@ -55,8 +55,6 @@
                 bottom-color: transparent;
             }
 
-            background: if($is-dark, mc-color($second, 600), transparent);
-
             & .mc-tab-overlay {
                 background: transparent;
             }
