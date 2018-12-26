@@ -2,26 +2,24 @@
     <mc-tab-group mc-light-tabs>
         <mc-tab label="First">Content 1</mc-tab>
         <mc-tab label="Second">Content 2</mc-tab>
-        <mc-tab disabled
-                label="Third">Content 3</mc-tab>
+        <mc-tab disabled label="Third">Content 3</mc-tab>
         <mc-tab label="4">Content 4</mc-tab>
         <mc-tab label="5">Content 5</mc-tab>
     </mc-tab-group>
 
-    <mc-tab-group mc-align-tabs-center>
+    <br><br><br>
+
+    <mc-tab-group>
         <mc-tab label="First">Content 1</mc-tab>
-        <mc-tab disabled
-                label="Second">Content 2</mc-tab>
-        <mc-tab label="Third">Content 3</mc-tab>
+        <mc-tab label="Second">Content 2</mc-tab>
+        <mc-tab disabled label="Third">Content 3</mc-tab>
         <mc-tab label="4">Content 4</mc-tab>
         <mc-tab label="5">Content 5</mc-tab>
     </mc-tab-group>
 
     <h3>Navigation</h3>
 
-    <nav mc-tab-nav-bar
-         mc-light-tabs
-         mc-align-tabs-end>
+    <nav mc-tab-nav-bar mc-light-tabs mc-align-tabs-end>
         <a mc-tab-link
            disabled
            *ngFor="let link of links"
@@ -33,8 +31,7 @@
            [active]="activeLink == 1">Disabled Link</a>
     </nav>
 
-    <nav mc-tab-nav-bar
-         mc-light-tabs>
+    <nav mc-tab-nav-bar mc-light-tabs>
         <a mc-tab-link
            *ngFor="let link of links"
            (click)="activeLink = link"

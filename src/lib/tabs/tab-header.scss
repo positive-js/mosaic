@@ -11,7 +11,7 @@
     cursor: pointer;
     z-index: 2;
 
-    .mc-tab-header__pagination-controls_enabled & {
+    .mc-tab-header__pagination-controls_enabled {
         display: flex;
     }
 }
@@ -46,7 +46,7 @@
 }
 /* stylelint-enable */
 
-.mc-tab-header__pagination_disabled {
+.mc-tab-header_disabled {
     box-shadow: none;
     cursor: default;
 }

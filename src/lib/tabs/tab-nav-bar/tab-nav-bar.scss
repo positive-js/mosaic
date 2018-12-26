@@ -1,9 +1,9 @@
 @import '../tabs-common';
-@import '../tabs-theme';
+
 
 .mc-tab-link {
     vertical-align: top;
-    text-decoration: none;  // Removes anchor underline styling
+    text-decoration: none;
     -webkit-tap-highlight-color: transparent;
 
     .mc-tab-group_stretch-labels & {
@@ -11,7 +11,7 @@
         flex-grow: 1;
     }
 
-    &.mc-tab_disabled {
+    &.mc-disabled {
         // We use `pointer-events` to make the element unclickable when it's disabled, rather than
         // preventing the default action through JS, because we can't prevent the action reliably
         // due to other directives potentially registering their events earlier. This shouldn't cause
@@ -20,7 +20,6 @@
     }
 }
 
-// Wraps the bar containing the anchors
 .mc-tab-nav-bar {
     display: flex;
 
@@ -40,14 +39,14 @@
 .mc-tab-links {
     display: flex;
     position: relative;
-    padding: 1px 1px 0 1px; // Prevent focus border overflow
+    padding: 1px 1px 0 1px;
     flex-grow: 1;
 
-    .mc-tab-group_align-labels-center & {
+    .mc-tab-group_align-labels-center {
         justify-content: center;
     }
 
-    .mc-tab-group_align-labels-end & {
+    .mc-tab-group_align-labels-end {
         justify-content: flex-end;
     }
 }
