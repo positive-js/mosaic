@@ -1,13 +1,15 @@
-import { Component, NgModule, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, NgModule, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { McButtonModule } from '@ptsecurity/mosaic/button';
+import { McFormFieldModule} from '@ptsecurity/mosaic/form-field';
 import { McInputModule } from '@ptsecurity/mosaic/input';
 import { McListModule } from '@ptsecurity/mosaic/list';
 import { McRadioModule } from '@ptsecurity/mosaic/radio';
-import { McToolTipModule, McTooltip } from '@ptsecurity/mosaic/tooltip';
+import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 
 
 /* tslint:disable:no-trailing-whitespace */
@@ -19,7 +21,30 @@ import { McToolTipModule, McTooltip } from '@ptsecurity/mosaic/tooltip';
 })
 export class DemoComponent {
 
-    @ViewChild('manualTooltip') manualTooltip: McTooltip;
+    @ViewChild('manualTooltip') manualTooltip: any;
+    @ViewChild('tooltip') tooltip: any;
+    @ViewChild('tooltipRef') tooltipRef: any;
+
+    triggerTooltip: boolean = false;
+    tooltipPosition: string = 'left';
+    title: string = 'Default text';
+    constructor(){}
+
+    toggleTooltip() {
+        if (!this.tooltip.isTooltipOpen) {
+            this.tooltip.show();
+        } else {
+            this.tooltip.hide();
+        }
+    }
+
+    toggleTooltipExternal(flag) {
+        if (!flag) {
+            this.tooltipRef.show();
+        } else {
+            this.tooltipRef.hide();
+        }
+    }
 
     trigger(e) {
         e.stopPropagation();
@@ -29,6 +54,10 @@ export class DemoComponent {
             this.manualTooltip.show();
         }
     }
+
+    updatePosition(pos: string) {
+        this.tooltipPosition = pos;
+    }
 }
 
 @NgModule({
@@ -37,12 +66,14 @@ export class DemoComponent {
     ],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         FormsModule,
         McToolTipModule,
         McButtonModule,
         McRadioModule,
         McListModule,
-        McInputModule
+        McInputModule,
+        McFormFieldModule
     ],
     bootstrap: [
         DemoComponent
