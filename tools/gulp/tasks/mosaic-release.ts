@@ -3,8 +3,7 @@ import { task, src, dest, series, parallel } from 'gulp';
 import { join } from 'path';
 import { Bundler } from 'scss-bundle';
 
-import { buildConfig } from '../../packages';
-import { composeRelease } from '../../packages/build-release';
+import { buildConfig, composeRelease } from '../../packages';
 import { mosaicPackage } from '../packages';
 
 
