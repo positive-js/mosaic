@@ -3,21 +3,20 @@
 import * as OctokitApi from '@octokit/rest';
 import chalk from 'chalk';
 
-import { existsSync, readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
 import { prompt } from 'inquirer';
 import { join } from 'path';
 
+import { BaseReleaseTask } from './base-release-task';
 import { promptAndGenerateChangelog } from './changelog';
 import { GitClient } from './git/git-client';
 import { getGithubBranchCommitsUrl } from './git/github-urls';
 import { promptForNewVersion } from './prompt/new-version-prompt';
 import { parseVersionName, Version } from './version-name/parse-version';
-import { getExpectedPublishBranch } from './version-name/publish-branch';
-import { BaseReleaseTask } from './base-release-task';
 
 
 /** Default filename for the changelog. */
-const CHANGELOG_FILE_NAME = 'CHANGELOG.md';
+export const CHANGELOG_FILE_NAME = 'CHANGELOG.md';
 
 /**
  * Class that can be instantiated in order to stage a new release. The tasks requires user
@@ -140,7 +139,7 @@ class StageReleaseTask extends BaseReleaseTask {
     /** Updates the version of the project package.json and writes the changes to disk. */
     private updatePackageJsonVersion(newVersionName: string) {
         const newPackageJson = {...this.packageJson, version: newVersionName};
-        writeFileSync(this.packageJsonPath, JSON.stringify(newPackageJson, null, 2) + '\n');
+        writeFileSync(this.packageJsonPath, JSON.stringify(newPackageJson, null, 4) + '\n');
     }
 
     /** Verifies that the latest commit of the current branch is passing all Github statuses. */
