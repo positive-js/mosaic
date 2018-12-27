@@ -224,16 +224,6 @@ const VIEWPORT_MARGIN: number = 8;
 @Directive({
     selector: '[mcTooltip], [attribute^="mcTooltip"]',
     exportAs: 'mcTooltip',
-    inputs: [
-        'mcTooltip',
-        'mcTitle',
-        'mcPlacement',
-        'mcTrigger',
-        'mcTooltipDisabled',
-        'mcMouseEnterDelay',
-        'mcMouseLeaveDelay',
-        'mсTooltipClass',
-        'mcVisible'],
     host: {
         '(keydown)': 'handleKeydown($event)',
         '(touchend)': 'handleTouchend()'
