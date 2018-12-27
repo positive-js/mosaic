@@ -1,4 +1,3 @@
-import {CategorizedClassDoc} from './dgeni-definitions';
 import {
   ArrayLiteralExpression,
   CallExpression,
@@ -6,6 +5,9 @@ import {
   PropertyAssignment,
   StringLiteral, SyntaxKind
 } from 'typescript';
+
+import { CategorizedClassDoc } from './dgeni-definitions';
+
 
 /**
  * Determines the component or directive metadata from the specified Dgeni class doc. The resolved
@@ -30,9 +32,9 @@ export function getDirectiveMetadata(classDoc: CategorizedClassDoc): Map<string,
   }
 
   const directiveDecorator = declaration.decorators
-    .filter(decorator => decorator.expression)
-    .filter(decorator => (decorator.expression.kind as any) === SyntaxKind.CallExpression)
-    .find(decorator => (decorator.expression as any).expression.getText() === 'Component' ||
+    .filter((decorator) => decorator.expression)
+    .filter((decorator) => (decorator.expression.kind as any) === SyntaxKind.CallExpression)
+    .find((decorator) => (decorator.expression as any).expression.getText() === 'Component' ||
                        (decorator.expression as any).expression.getText() === 'Directive');
 
   if (!directiveDecorator) {

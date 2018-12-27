@@ -1,9 +1,9 @@
-import {Component, ElementRef, NgModule, NgZone} from '@angular/core';
-import {inject, TestBed} from '@angular/core/testing';
-import {ComponentPortal, PortalModule} from '@ptsecurity/cdk/portal';
-import {CdkScrollable, ScrollDispatchModule} from '@ptsecurity/cdk/scrolling';
-import {MockNgZone} from '@ptsecurity/cdk/testing';
-import {Subscription} from 'rxjs';
+import { Component, ElementRef, NgModule, NgZone } from '@angular/core';
+import { inject, TestBed } from '@angular/core/testing';
+import { ComponentPortal, PortalModule } from '@ptsecurity/cdk/portal';
+import { CdkScrollable, ScrollDispatchModule } from '@ptsecurity/cdk/scrolling';
+import { MockNgZone } from '@ptsecurity/cdk/testing';
+import { Subscription } from 'rxjs';
 
 import {
     ConnectedOverlayPositionChange,
@@ -32,7 +32,7 @@ describe('ConnectedPositionStrategy', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [ScrollDispatchModule, OverlayModule, OverlayTestModule],
-            providers: [{provide: NgZone, useFactory: () => zone = new MockNgZone()}]
+            providers: [{ provide: NgZone, useFactory: () => zone = new MockNgZone() }]
         });
 
         inject([Overlay, OverlayContainer], (o: Overlay, oc: OverlayContainer) => {
@@ -50,7 +50,7 @@ describe('ConnectedPositionStrategy', () => {
     });
 
     function attachOverlay(positionStrategy: ConnectedPositionStrategy) {
-        overlayRef = overlay.create({positionStrategy});
+        overlayRef = overlay.create({ positionStrategy });
         overlayRef.attach(new ComponentPortal(TestOverlay));
         zone.simulateZoneExit();
     }
@@ -141,8 +141,8 @@ describe('ConnectedPositionStrategy', () => {
                 originRect = originElement.getBoundingClientRect();
                 positionStrategy = overlay.position().connectedTo(
                     fakeElementRef,
-                    {originX: 'start', originY: 'top'},
-                    {overlayX: 'start', overlayY: 'top'});
+                    { originX: 'start', originY: 'top' },
+                    { overlayX: 'start', overlayY: 'top' });
 
                 positionStrategy.withOffsetX(10); //tslint:disable-line
                 attachOverlay(positionStrategy);
@@ -156,8 +156,8 @@ describe('ConnectedPositionStrategy', () => {
                 originRect = originElement.getBoundingClientRect();
                 positionStrategy = overlay.position().connectedTo(
                     fakeElementRef,
-                    {originX: 'start', originY: 'top'},
-                    {overlayX: 'start', overlayY: 'top'});
+                    { originX: 'start', originY: 'top' },
+                    { overlayX: 'start', overlayY: 'top' });
 
                 positionStrategy.withOffsetY(50); //tslint:disable-line
                 attachOverlay(positionStrategy);
@@ -175,11 +175,11 @@ describe('ConnectedPositionStrategy', () => {
 
             positionStrategy = overlay.position().connectedTo(
                 fakeElementRef,
-                {originX: 'end', originY: 'center'},
-                {overlayX: 'start', overlayY: 'center'})
+                { originX: 'end', originY: 'center' },
+                { overlayX: 'start', overlayY: 'center' })
                 .withFallbackPosition(
-                    {originX: 'start', originY: 'bottom'},
-                    {overlayX: 'end', overlayY: 'top'});
+                    { originX: 'start', originY: 'bottom' },
+                    { overlayX: 'end', overlayY: 'top' });
 
             const positionChangeHandler = jasmine.createSpy('positionChangeHandler');
             const subscription = positionStrategy.onPositionChange.subscribe(positionChangeHandler);
@@ -210,11 +210,11 @@ describe('ConnectedPositionStrategy', () => {
 
             positionStrategy = overlay.position().connectedTo(
                 fakeElementRef,
-                {originX: 'end', originY: 'bottom'},
-                {overlayX: 'start', overlayY: 'top'})
+                { originX: 'end', originY: 'bottom' },
+                { overlayX: 'start', overlayY: 'top' })
                 .withFallbackPosition(
-                    {originX: 'start', originY: 'bottom'},
-                    {overlayX: 'end', overlayY: 'top'});
+                    { originX: 'start', originY: 'bottom' },
+                    { overlayX: 'end', overlayY: 'top' });
 
             const positionChangeHandler = jasmine.createSpy('positionChangeHandler');
             const subscription = positionStrategy.onPositionChange.subscribe(positionChangeHandler);
@@ -229,8 +229,8 @@ describe('ConnectedPositionStrategy', () => {
         it('should complete the onPositionChange stream on dispose', () => {
             positionStrategy = overlay.position().connectedTo(
                 fakeElementRef,
-                {originX: 'end', originY: 'bottom'},
-                {overlayX: 'start', overlayY: 'top'});
+                { originX: 'end', originY: 'bottom' },
+                { overlayX: 'start', overlayY: 'top' });
 
             const completeHandler = jasmine.createSpy('complete handler');
 
@@ -244,12 +244,12 @@ describe('ConnectedPositionStrategy', () => {
         it('should re-use the preferred position when re-applying while locked in', () => {
             positionStrategy = overlay.position().connectedTo(
                 fakeElementRef,
-                {originX: 'end', originY: 'center'},
-                {overlayX: 'start', overlayY: 'center'})
+                { originX: 'end', originY: 'center' },
+                { overlayX: 'start', overlayY: 'center' })
                 .withLockedPosition(true)
                 .withFallbackPosition(
-                    {originX: 'start', originY: 'bottom'},
-                    {overlayX: 'end', overlayY: 'top'});
+                    { originX: 'start', originY: 'bottom' },
+                    { overlayX: 'end', overlayY: 'top' });
 
             const recalcSpy = spyOn(positionStrategy._positionStrategy, 'reapplyLastPosition');
 
@@ -285,8 +285,8 @@ describe('ConnectedPositionStrategy', () => {
             fakeElementRef = new ElementRef(originElement);
             positionStrategy = overlay.position().connectedTo(
                 fakeElementRef,
-                {originX: 'start', originY: 'bottom'},
-                {overlayX: 'start', overlayY: 'top'});
+                { originX: 'start', originY: 'bottom' },
+                { overlayX: 'start', overlayY: 'top' });
 
             positionStrategy.withScrollableContainers([
                 new CdkScrollable(new ElementRef(scrollable), null!, null!)]); //tslint:disable-line
@@ -354,8 +354,8 @@ describe('ConnectedPositionStrategy', () => {
             it('should use `left` when positioning an element at the start', () => {
                 positionStrategy = overlay.position().connectedTo(
                     fakeElementRef,
-                    {originX: 'start', originY: 'top'},
-                    {overlayX: 'start', overlayY: 'top'});
+                    { originX: 'start', originY: 'top' },
+                    { overlayX: 'start', overlayY: 'top' });
 
 
                 attachOverlay(positionStrategy);
@@ -367,8 +367,8 @@ describe('ConnectedPositionStrategy', () => {
             it('should use `right` when positioning an element at the end', () => {
                 positionStrategy = overlay.position().connectedTo(
                     fakeElementRef,
-                    {originX: 'end', originY: 'top'},
-                    {overlayX: 'end', overlayY: 'top'});
+                    { originX: 'end', originY: 'top' },
+                    { overlayX: 'end', overlayY: 'top' });
 
                 attachOverlay(positionStrategy);
 
@@ -382,8 +382,8 @@ describe('ConnectedPositionStrategy', () => {
             it('should use `right` when positioning an element at the start', () => {
                 positionStrategy = overlay.position().connectedTo(
                     fakeElementRef,
-                    {originX: 'start', originY: 'top'},
-                    {overlayX: 'start', overlayY: 'top'}
+                    { originX: 'start', originY: 'top' },
+                    { overlayX: 'start', overlayY: 'top' }
                 )
                     .withDirection('rtl');
 
@@ -396,8 +396,8 @@ describe('ConnectedPositionStrategy', () => {
             it('should use `left` when positioning an element at the end', () => {
                 positionStrategy = overlay.position().connectedTo(
                     fakeElementRef,
-                    {originX: 'end', originY: 'top'},
-                    {overlayX: 'end', overlayY: 'top'}
+                    { originX: 'end', originY: 'top' },
+                    { overlayX: 'end', overlayY: 'top' }
                 ).withDirection('rtl');
 
                 attachOverlay(positionStrategy);
@@ -411,8 +411,8 @@ describe('ConnectedPositionStrategy', () => {
             it('should use `top` when positioning at element along the top', () => {
                 positionStrategy = overlay.position().connectedTo(
                     fakeElementRef,
-                    {originX: 'start', originY: 'top'},
-                    {overlayX: 'start', overlayY: 'top'}
+                    { originX: 'start', originY: 'top' },
+                    { overlayX: 'start', overlayY: 'top' }
                 );
 
                 attachOverlay(positionStrategy);
@@ -424,8 +424,8 @@ describe('ConnectedPositionStrategy', () => {
             it('should use `bottom` when positioning at element along the bottom', () => {
                 positionStrategy = overlay.position().connectedTo(
                     fakeElementRef,
-                    {originX: 'start', originY: 'bottom'},
-                    {overlayX: 'start', overlayY: 'bottom'}
+                    { originX: 'start', originY: 'bottom' },
+                    { overlayX: 'start', overlayY: 'bottom' }
                 );
 
                 attachOverlay(positionStrategy);
@@ -472,9 +472,11 @@ function createOverflowContainerElement() {
 
 
 @Component({
-    template: `<div style="width: 60px; height: 30px;"></div>`
+    template: `
+        <div style="width: 60px; height: 30px;"></div>`
 })
-class TestOverlay { }
+class TestOverlay {
+}
 
 
 @NgModule({
@@ -483,4 +485,5 @@ class TestOverlay { }
     declarations: [TestOverlay],
     entryComponents: [TestOverlay]
 })
-class OverlayTestModule { }
+class OverlayTestModule {
+}

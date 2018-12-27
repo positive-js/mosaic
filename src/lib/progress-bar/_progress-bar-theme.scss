@@ -4,21 +4,23 @@
 @mixin mc-progress-bar-theme($theme) {
     $primary: map-get($theme, primary);
     $second: map-get($theme, second);
-    $warn: map-get($theme, warn);
+    $error: map-get($theme, error);
+
+    $is-dark: map-get($theme, is-dark);
 
     .mc-progress-bar {
-        background-color: mc-color($mc-grey, 60);
+        background-color: mc-color($second, if($is-dark, 600, 60));
 
-        &.mc-primary &__line {
-            background-color: mc-color($primary, 500);
+        &.mc-primary .mc-progress-bar__line {
+            background-color: mc-color($primary);
         }
 
-        &.mc-second &__line {
-            background-color: mc-color($second, 500);
+        &.mc-second .mc-progress-bar__line {
+            background-color: mc-color($second);
         }
 
-        &.mc-warn &__line {
-            background-color: mc-color($warn, 500);
+        &.mc-error .mc-progress-bar__line {
+            background-color: mc-color($error);
         }
     }
 }

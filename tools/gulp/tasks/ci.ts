@@ -1,8 +1,11 @@
-import { task } from 'gulp';
+import { task, parallel, series } from 'gulp';
 
 
-task('ci:lint', ['lint']);
+task('ci:lint', parallel('lint'));
 
 // Travis sometimes does not exit the process and times out. This is to prevent that.
-task('ci:test', ['test:single-run'], () => process.exit(0));
+task('ci:test', series('test:single-run', (done) => {
+    done();
+    process.exit(0);
+}));
 

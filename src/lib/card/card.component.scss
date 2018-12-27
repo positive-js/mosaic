@@ -1,0 +1,33 @@
+@import 'card-theme';
+@import '../core/styles/common/layout';
+
+.mc-card {
+    position: relative;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+
+    cursor: pointer;
+
+    &:focus {
+        outline: none;
+    }
+
+    border-left: {
+        width: 4px;
+        style: solid;
+        color: transparent;
+    };
+
+    & .mc-card__overlay {
+        @include mc-fill;
+        pointer-events: none;
+
+        background: transparent;
+    }
+
+    &.mc-card_readonly {
+        cursor: auto;
+    }
+}

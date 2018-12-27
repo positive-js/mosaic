@@ -1,0 +1,51 @@
+<div class="mc-headline">Timepicker</div>
+<div class="mc-body">
+    <h3 class="mc-title">Example 1</h3>
+    <p>Params:</p>
+    <ul>
+        <li><span class="mc-body_mono">min-time="10:00:00"</span><br>
+        <li><span class="mc-body_mono">max-time="13:30:00"</span><br>
+        <li><span class="mc-body_mono">format `HH:mm:ss`</span>
+    </ul>
+
+
+    <div>
+        <button mc-button (click)="toggleDisable()">Toggle disabled state</button>
+        <br>
+        <span class="mc-small-text">current disable state === {{isDisabled}}</span>
+    </div>
+    <br>
+
+    <section class="demo-timepicker_full">
+        <mc-form-field >
+            <i mcPrefix mc-icon="mc-clock_16" color="second"></i>
+            <input mcTimepicker
+                   [(ngModel)]="timeValue1"
+                   time-format="HH:mm:ss"
+                   min-time="10:00:00"
+                   max-time="13:30:00"
+                   [disabled]="isDisabled">
+        </mc-form-field>
+    </section>
+
+    <br>
+
+    <p class="mc-caption_mono" *ngIf="timeValue1 !== null">
+        Current time value:
+        {{timeValue1.getHours()}}:
+        {{timeValue1.getMinutes()}}:
+        {{timeValue1.getSeconds()}}
+    </p>
+
+    <p class="mc-caption_mono" *ngIf="timeValue1 === null"> Incorrect input - null result</p>
+
+    <br>
+
+    <!--<h4>No any validation, format `HH:mm`, no icon:</h4>-->
+    <!--<mc-timepicker [(ngModel)]="timeValue2"-->
+    <!--time-format="HH:mm">-->
+    <!--</mc-timepicker>-->
+    <!--<br>-->
+    <!--<p>Current time value: {{timeValue2.getHours()}}:{{timeValue2.getMinutes()}}:{{timeValue2.getSeconds()}}</p>-->
+
+</div>

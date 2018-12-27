@@ -24,6 +24,8 @@ $mc-list-item-inset-divider-offset: 72px;
     display: block;
     height: $base-height;
 
+    border: 2px solid transparent;
+
     .mc-list-item-content {
         position: relative;
 

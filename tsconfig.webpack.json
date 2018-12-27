@@ -10,7 +10,7 @@
         "sourceMap": true,
         "noEmitHelpers": true,
         "importHelpers": true,
-        "strictNullChecks": false,
+        "strictNullChecks": true,
         "lib": [
             "es5",
             "es2015",
@@ -41,8 +41,10 @@
         "dist",
         "wallabyTest.ts",
         "src/**/*.spec.ts",
+        "src/**/*._spec.ts",
         "src/**/*.e2e.ts",
-        "src/mosaic-examples/**/*.*"
+        "src/mosaic-examples/**/*.*",
+        "src/cdk/schematics/**/*.*"
     ],
     "angularCompilerOptions": {
         "skipMetadataEmit": true

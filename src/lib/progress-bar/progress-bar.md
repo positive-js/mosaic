@@ -32,16 +32,16 @@ Or for determinate progress
 ```
 
 #### `color`
-Enum ('primary', 'second', 'warn')  
+Enum ('primary', 'second', 'error')  
 Default: 'primary'  
 Set theming of element
 
 ```html
 <mc-progress-bar color="primary"></mc-progress-bar>
 <mc-progress-bar color="second"></mc-progress-bar>
-<mc-progress-bar color="warn"></mc-progress-bar>
+<mc-progress-bar color="error"></mc-progress-bar>
 ```
 
 ### Theming
 The color of a `<mc-progress-bar>` can be changed by using the `color` property. By default, it
-use the theme's `primary` color. This can be changed to `'second'` or `'warn'`.
+use the theme's `primary` color. This can be changed to `'second'` or `'error'`.

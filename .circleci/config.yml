@@ -1,110 +1,141 @@
+# To validate changes, use an online parser, eg.
+# http://yaml-online-parser.appspot.com/
+
+var_3: &job_defaults
+    working_directory: ~/mosaic
+    docker:
+        - image: ptsecurity/node-container:0.1.0
+
+var_2: &cache_key mosaic-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}-0.3.0
+
+# Restores the cache that could be available for the current Yarn lock file.
+var_5: &restore_cache
+    restore_cache:
+        key: *cache_key
+
+# After checkout, rebase on top of master.
+# Similar to travis behavior, but not quite the same.
+# See https://discuss.circleci.com/t/1662
+var_4: &checkout_code
+    checkout:
+        # After checkout, rebase on top of master. By default, PRs are not rebased on top of master,
+        # which we want. See https://discuss.circleci.com/t/1662
+        post: git pull --ff-only origin "refs/pull/${CI_PULL_REQUEST//*pull\//}/merge"
+
+var_6: &save_cache
+    save_cache:
+        key: *cache_key
+        paths:
+            - "node_modules"
+
+var_7: &yarn_install
+    run: yarn install --frozen-lockfile --non-interactive
+
+attach_options: &attach_options
+    at: .
+
 version: 2
-
-package_lock_key: &package_lock_key
-  key: mosaic-cache-{{ checksum "package.json" }}
-
-post_checkout: &post_checkout
-  post: git pull --ff-only origin "refs/pull/${CI_PULL_REQUEST//*pull\//}/merge"
-
-defaults: &defaults
-  working_directory: ~/mosaic
-  docker:
-    - image: ptsecurity/node-container:0.0.4
-
 jobs:
-  install:
-    <<: *defaults
-    steps:
-      - checkout: *post_checkout
-      - restore_cache: *package_lock_key
-      - run: npm install --no-save
-      - save_cache:
-          <<: *package_lock_key
-          paths:
-            - node_modules
+    install:
+        <<: *job_defaults
+        steps:
+            - *checkout_code
+            - *restore_cache
+            - *yarn_install
+            - persist_to_workspace:
+                  root: .
+                  paths:
+                      - ./*
+            - *save_cache
 
-  build_mosaic:
-    <<: *defaults
-    steps:
-      - checkout: *post_checkout
-      - restore_cache: *package_lock_key
-      - run: npm run build:lib
+    validate_licenses:
+        <<: *job_defaults
+        steps:
+            - attach_workspace: *attach_options
+            - run: npm run valid:lic
 
-  build_cdk:
-      <<: *defaults
-      steps:
-        - checkout: *post_checkout
-        - restore_cache: *package_lock_key
-        - run: npm run build:cdk
+    build_mosaic:
+        <<: *job_defaults
+        steps:
+            - attach_workspace: *attach_options
+            - run: npm run build:lib
 
-  test_unit:
-    <<: *defaults
-    steps:
-      - checkout: *post_checkout
-      - restore_cache: *package_lock_key
-      - run:
-          command: npm run test:unit
-          environment:
-            JUNIT_REPORT_PATH: ./junit/
-            JUNIT_REPORT_NAME: test-results.xml
-          when: always
-      - store_test_results:
-          path: ./junit
-      - store_artifacts:
-          path: ./junit
+    build_cdk:
+        <<: *job_defaults
+        steps:
+            - attach_workspace: *attach_options
+            - run: npm run build:cdk
 
-  snapshot_publish:
-    <<: *defaults
-    steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "c3:de:eb:9c:82:70:a8:23:f3:4e:92:b8:07:d2:22:df"
-      - checkout: *post_checkout
-      - restore_cache: *package_lock_key
-      - run: npm run build:cdk
-      - run: npm run build:lib
-      - run: ./scripts/deploy/publish-artifacts.sh
+    test_unit:
+        <<: *job_defaults
+        steps:
+            - attach_workspace: *attach_options
+            - run:
+                  command: npm run test:unit
+                  environment:
+                      JUNIT_REPORT_PATH: ./junit/
+                      JUNIT_REPORT_NAME: test-results.xml
+                  when: always
+            - store_test_results:
+                  path: ./junit
+            - store_artifacts:
+                  path: ./junit
 
-  docs_publish:
-    <<: *defaults
-    steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "c3:de:eb:9c:82:70:a8:23:f3:4e:92:b8:07:d2:22:df"
-      - checkout: *post_checkout
-      - restore_cache: *package_lock_key
-      - run: ./scripts/deploy/publish-docs.sh
+    snapshot_publish:
+        <<: *job_defaults
+        steps:
+            - add_ssh_keys:
+                  fingerprints:
+                      - "c3:de:eb:9c:82:70:a8:23:f3:4e:92:b8:07:d2:22:df"
+            - *checkout_code
+            - *restore_cache
+            - run: npm run build:cdk
+            - run: npm run build:lib
+            - run: ./scripts/deploy/publish-artifacts.sh
+
+    docs_publish:
+        <<: *job_defaults
+        steps:
+            - add_ssh_keys:
+                  fingerprints:
+                      - "c3:de:eb:9c:82:70:a8:23:f3:4e:92:b8:07:d2:22:df"
+            - *checkout_code
+            - *restore_cache
+            - run: ./scripts/deploy/publish-docs.sh
 
 
 workflows:
-  version: 2
-  default_workflow:
-    jobs:
-      - install
-      - build_cdk:
-          requires:
+    version: 2
+    default_workflow:
+        jobs:
             - install
-      - build_mosaic:
-          requires:
-            - install
-      - test_unit:
-          requires:
-            - build_cdk
-            - build_mosaic
-      - snapshot_publish:
-          requires:
-            - test_unit
-            - build_cdk
-            - build_mosaic
-          filters:
-              branches:
-                only:
-                  - master
-      - docs_publish:
-          requires:
-            - test_unit
-            - build_mosaic
-          filters:
-              branches:
-                only:
-                  - master
+            - validate_licenses:
+                  requires:
+                      - install
+            - build_cdk:
+                  requires:
+                      - install
+            - build_mosaic:
+                  requires:
+                      - install
+            - test_unit:
+                  requires:
+                      - build_cdk
+                      - build_mosaic
+            - snapshot_publish:
+                  requires:
+                      - test_unit
+                      - build_cdk
+                      - build_mosaic
+                  filters:
+                      branches:
+                          only:
+                              - master
+            - docs_publish:
+                  requires:
+                      - test_unit
+                      - build_mosaic
+                  filters:
+                      branches:
+                          only:
+                              - master

@@ -1,0 +1,57 @@
+@import '../styles/common/vendor-prefixes';
+@import '../../../cdk/a11y/a11y';
+
+$mc-option-padding: 0 16px;
+
+
+.mc-option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    box-sizing: border-box;
+
+    position: relative;
+
+    max-width: 100%;
+
+    border: 2px solid transparent;
+
+    cursor: pointer;
+
+    outline: none;
+
+    padding: $mc-option-padding;
+
+    -webkit-tap-highlight-color: transparent;
+
+    &.mc-disabled {
+        cursor: default;
+    }
+
+    & .mc-pseudo-checkbox {
+        margin-right: 8px;
+    }
+
+    & .mc-option-overlay {
+        position: absolute;
+
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+
+        pointer-events: none;
+        border-radius: inherit;
+    }
+}
+
+.mc-option-text {
+    display: inline-block;
+    flex-grow: 1;
+
+    overflow: hidden;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

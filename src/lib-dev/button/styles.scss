@@ -1,3 +1,9 @@
 @import '~@ptsecurity/mosaic-icons/dist/styles/mc-icons';
 
-@import '../../lib/core/theming/prebuilt/default-theme';
+//@import '../../lib/core/theming/prebuilt/default-theme';
+@import '../../lib/core/theming/prebuilt/dark-theme';
+
+
+.mc-button-group_vertical {
+    width: 200px;
+}

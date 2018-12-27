@@ -48,16 +48,29 @@ System.config({
         '@ptsecurity/cdk/portal': 'dist/packages/cdk/portal/index.js',
         '@ptsecurity/cdk/scrolling': 'dist/packages/cdk/scrolling/index.js',
         '@ptsecurity/cdk/testing': 'dist/packages/cdk/testing/index.js',
+        '@ptsecurity/cdk/tree': 'dist/packages/cdk/tree/index.js',
 
         '@ptsecurity/mosaic/button': 'dist/packages/mosaic/button/index.js',
         '@ptsecurity/mosaic/core': 'dist/packages/mosaic/core/index.js',
         '@ptsecurity/mosaic/divider': 'dist/packages/mosaic/divider/index.js',
+        '@ptsecurity/mosaic/dropdown': 'dist/packages/mosaic/dropdown/index.js',
         '@ptsecurity/mosaic/list': 'dist/packages/mosaic/list/index.js',
         '@ptsecurity/mosaic/progress-bar': 'dist/packages/mosaic/progress-bar/index.js',
         '@ptsecurity/mosaic/progress-spinner': 'dist/packages/mosaic/progress-spinner/index.js',
         '@ptsecurity/mosaic/icon': 'dist/packages/mosaic/icon/index.js',
         '@ptsecurity/mosaic/radio': 'dist/packages/mosaic/radio/index.js',
-        '@ptsecurity/mosaic/checkbox': 'dist/packages/mosaic/checkbox/index.js'
+        '@ptsecurity/mosaic/checkbox': 'dist/packages/mosaic/checkbox/index.js',
+        '@ptsecurity/mosaic/input': 'dist/packages/mosaic/input/index.js',
+        '@ptsecurity/mosaic/form-field': 'dist/packages/mosaic/form-field/index.js',
+        '@ptsecurity/mosaic/tree': 'dist/packages/mosaic/tree/index.js',
+        '@ptsecurity/mosaic/modal': 'dist/packages/mosaic/modal/index.js',
+        '@ptsecurity/mosaic/tag': 'dist/packages/mosaic/tag/index.js',
+        '@ptsecurity/mosaic/tabs': 'dist/packages/mosaic/tabs/index.js',
+        '@ptsecurity/mosaic/select': 'dist/packages/mosaic/select/index.js',
+        '@ptsecurity/mosaic/textarea': 'dist/packages/mosaic/textarea/index.js',
+        '@ptsecurity/mosaic/tooltip': 'dist/packages/mosaic/tooltip/index.js',
+        '@ptsucurity/mosaic/timepicker': 'dist/packages/mosaic/timepicker/index.js',
+        '@ptsecurity/mosaic/splitter': 'dist/packages/mosaic/splitter/index.js'
     },
     packages: {
         // Thirdparty barrels.

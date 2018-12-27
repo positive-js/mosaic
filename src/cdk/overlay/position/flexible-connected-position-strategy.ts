@@ -1,5 +1,5 @@
 import { ElementRef } from '@angular/core';
-// import { coerceCssPixelValue } from '@ptsecurity/cdk/coercion';
+import { coerceCssPixelValue } from '@ptsecurity/cdk/coercion';
 import { Platform } from '@ptsecurity/cdk/platform';
 import { ViewportRuler, CdkScrollable } from '@ptsecurity/cdk/scrolling';
 import { Observable, Subscription, Subject } from 'rxjs';
@@ -15,15 +15,6 @@ import {
 } from './connected-position';
 import { IPositionStrategy } from './position-strategy';
 import { isElementScrolledOutsideView, isElementClippedByScrolling } from './scroll-clip';
-
-
-export function coerceCssPixelValue(value: any): string {
-    if (value == null) {
-        return '';
-    }
-
-    return typeof value === 'string' ? value : `${value}px`;
-}
 
 
 /**
@@ -61,7 +52,7 @@ export class FlexibleConnectedPositionStrategy implements IPositionStrategy {
     private _isInitialRender = true;
 
     /** Last size used for the bounding box. Used to avoid resizing the overlay after open. */
-    private _lastBoundingBoxSize = {width: 0, height: 0};
+    private _lastBoundingBoxSize = { width: 0, height: 0 };
 
     /** Whether the overlay was pushed in a previous positioning. */
     private _isPushed = false;
@@ -236,7 +227,7 @@ export class FlexibleConnectedPositionStrategy implements IPositionStrategy {
             // if it has more visible area on-screen than we've seen and move onto the next preferred
             // position.
             if (!fallback || fallback.overlayFit.visibleArea < overlayFit.visibleArea) {
-                fallback = {overlayFit, overlayPoint, originPoint, position: pos, overlayRect};
+                fallback = { overlayFit, overlayPoint, originPoint, position: pos, overlayRect };
             }
         }
 
@@ -442,7 +433,7 @@ export class FlexibleConnectedPositionStrategy implements IPositionStrategy {
             y = pos.originY === 'top' ? originRect.top : originRect.bottom;
         }
 
-        return {x, y};
+        return { x, y };
     }
 
 
@@ -484,7 +475,7 @@ export class FlexibleConnectedPositionStrategy implements IPositionStrategy {
     private _getOverlayFit(point: IPoint, overlay: ClientRect, viewport: ClientRect,
                            position: IConnectedPosition): IOverlayFit {
 
-        let {x, y} = point;
+        let { x, y } = point;
         let offsetX = this._getOffset(position, 'x'); //tslint:disable-line
         let offsetY = this._getOffset(position, 'y'); //tslint:disable-line
 
@@ -609,9 +600,7 @@ export class FlexibleConnectedPositionStrategy implements IPositionStrategy {
 
     /** Sets the transform origin based on the configured selector and the passed-in position.  */
     private _setTransformOrigin(position: IConnectedPosition) {
-        if (!this._transformOriginSelector) {
-            return;
-        }
+        if (!this._transformOriginSelector) { return; }
 
         const elements: NodeListOf<HTMLElement> =
             this._boundingBox!.querySelectorAll(this._transformOriginSelector); //tslint:disable-line
@@ -700,7 +689,7 @@ export class FlexibleConnectedPositionStrategy implements IPositionStrategy {
             }
         }
 
-        return {top, left, bottom, right, width, height};
+        return { top, left, bottom, right, width, height };
     }
 
     /**
@@ -837,7 +826,7 @@ export class FlexibleConnectedPositionStrategy implements IPositionStrategy {
     private _getExactOverlayY(position: IConnectedPosition, originPoint: IPoint) {
         // Reset any existing styles. This is necessary in case the
         // preferred position has changed since the last `apply`.
-        let styles = {top: null, bottom: null} as CSSStyleDeclaration; //tslint:disable-line
+        let styles = { top: null, bottom: null } as CSSStyleDeclaration; //tslint:disable-line
         let overlayPoint = this._getOverlayPoint(originPoint, this._overlayRect, position);
 
         if (this._isPushed) {
@@ -849,7 +838,7 @@ export class FlexibleConnectedPositionStrategy implements IPositionStrategy {
         if (position.overlayY === 'bottom') {
             // When using `bottom`, we adjust the y position such that it is the distance
             // from the bottom of the viewport rather than the top.
-            const documentHeight = this._document.documentElement.clientHeight;
+            const documentHeight = this._document.documentElement!.clientHeight;
             styles.bottom = `${documentHeight - (overlayPoint.y + this._overlayRect.height)}px`;
         } else {
             styles.top = coerceCssPixelValue(overlayPoint.y);
@@ -862,7 +851,7 @@ export class FlexibleConnectedPositionStrategy implements IPositionStrategy {
     private _getExactOverlayX(position: IConnectedPosition, originPoint: IPoint) {
         // Reset any existing styles. This is necessary in case the preferred position has
         // changed since the last `apply`.
-        let styles = {left: null, right: null} as CSSStyleDeclaration; //tslint:disable-line
+        let styles = { left: null, right: null } as CSSStyleDeclaration; //tslint:disable-line
         let overlayPoint = this._getOverlayPoint(originPoint, this._overlayRect, position);
 
         if (this._isPushed) {
@@ -884,7 +873,7 @@ export class FlexibleConnectedPositionStrategy implements IPositionStrategy {
         // When we're setting `right`, we adjust the x position such that it is the distance
         // from the right edge of the viewport rather than the left edge.
         if (horizontalStyleProperty === 'right') {
-            const documentWidth = this._document.documentElement.clientWidth;
+            const documentWidth = this._document.documentElement!.clientWidth;
             styles.right = `${documentWidth - (overlayPoint.x + this._overlayRect.width)}px`;
         } else {
             styles.left = coerceCssPixelValue(overlayPoint.x);
@@ -900,7 +889,7 @@ export class FlexibleConnectedPositionStrategy implements IPositionStrategy {
     private _getScrollVisibility(): ScrollingVisibility {
         // Note: needs fresh rects since the position could've changed.
         const originBounds = this._origin.getBoundingClientRect();
-        const overlayBounds =  this._pane.getBoundingClientRect();
+        const overlayBounds = this._pane.getBoundingClientRect();
 
         // every time, we should be able to use the scrollTop of the containers if the size of those
         // containers hasn't changed.
@@ -930,16 +919,16 @@ export class FlexibleConnectedPositionStrategy implements IPositionStrategy {
         // being that the client properties don't include the scrollbar, as opposed to `innerWidth`
         // and `innerHeight` that do. This is necessary, because the overlay container uses
         // 100% `width` and `height` which don't include the scrollbar either.
-        const width = this._document.documentElement.clientWidth;
-        const height = this._document.documentElement.clientHeight;
+        const width = this._document.documentElement!.clientWidth;
+        const height = this._document.documentElement!.clientHeight;
         const scrollPosition = this._viewportRuler.getViewportScrollPosition();
 
         return {
-            top:    scrollPosition.top + this._viewportMargin,
-            left:   scrollPosition.left + this._viewportMargin,
-            right:  scrollPosition.left + width - this._viewportMargin,
+            top: scrollPosition.top + this._viewportMargin,
+            left: scrollPosition.left + this._viewportMargin,
+            right: scrollPosition.left + width - this._viewportMargin,
             bottom: scrollPosition.top + height - this._viewportMargin,
-            width:  width  - (2 * this._viewportMargin), //tslint:disable-line
+            width: width - (2 * this._viewportMargin), //tslint:disable-line
             height: height - (2 * this._viewportMargin) //tslint:disable-line
         };
     }

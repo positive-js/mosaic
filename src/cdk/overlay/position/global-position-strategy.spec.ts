@@ -1,9 +1,9 @@
-import {NgModule, NgZone, Component} from '@angular/core';
-import {TestBed, inject} from '@angular/core/testing';
-import {PortalModule, ComponentPortal} from '@ptsecurity/cdk/portal';
-import {MockNgZone} from '@ptsecurity/cdk/testing';
+import { NgModule, NgZone, Component } from '@angular/core';
+import { TestBed, inject } from '@angular/core/testing';
+import { PortalModule, ComponentPortal } from '@ptsecurity/cdk/portal';
+import { MockNgZone } from '@ptsecurity/cdk/testing';
 
-import {OverlayModule, Overlay, OverlayConfig, OverlayRef, OverlayContainer} from '../index';
+import { OverlayModule, Overlay, OverlayConfig, OverlayRef, OverlayContainer } from '../index';
 
 
 describe('GlobalPositonStrategy', () => {
@@ -14,7 +14,7 @@ describe('GlobalPositonStrategy', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [GlobalOverlayTestModule],
-            providers: [{provide: NgZone, useFactory: () => zone = new MockNgZone()}]
+            providers: [{ provide: NgZone, useFactory: () => zone = new MockNgZone() }]
         });
 
         inject([Overlay], (o: Overlay) => {
@@ -86,7 +86,7 @@ describe('GlobalPositonStrategy', () => {
             .centerHorizontally()
             .centerVertically();
 
-        attachOverlay({positionStrategy});
+        attachOverlay({ positionStrategy });
         positionStrategy.top('10px').left('40%');
         overlayRef.updatePosition();
 
@@ -226,7 +226,7 @@ describe('GlobalPositonStrategy', () => {
     it('should not throw when attempting to apply after the overlay has been disposed', () => {
         const positionStrategy = overlay.position().global();
 
-        attachOverlay({positionStrategy});
+        attachOverlay({ positionStrategy });
 
         positionStrategy.dispose();
 
@@ -294,8 +294,9 @@ describe('GlobalPositonStrategy', () => {
 });
 
 
-@Component({template: ''})
-class BlankPortal {}
+@Component({ template: '' })
+class BlankPortal {
+}
 
 @NgModule({
     imports: [OverlayModule, PortalModule],
@@ -303,4 +304,5 @@ class BlankPortal {}
     declarations: [BlankPortal],
     entryComponents: [BlankPortal]
 })
-class GlobalOverlayTestModule {}
+class GlobalOverlayTestModule {
+}

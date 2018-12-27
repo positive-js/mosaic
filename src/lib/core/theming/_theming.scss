@@ -39,24 +39,53 @@
     @return rgba($color, $opacity);
 }
 
-@function mc-light-theme($primary, $second, $warn: mc-palette($mc-red)) {
+// todo additional palette should be refactored asap (possibly to separated palette)
+@function mc-light-theme(
+    $primary,
+    $second,
+    $error,
+
+    $info: mc-palette($mc-blue),
+    $success: mc-palette($mc-green),
+    $warning: mc-palette($mc-yellow)
+) {
     @return (
+        is-dark: false,
+
         primary: $primary,
         second: $second,
-        warn: $warn,
-        is-dark: false,
+        error: $error,
+
         foreground: $mc-light-theme-foreground,
         background: $mc-light-theme-background,
+
+        warning: $warning,
+        success: $success,
+        info: $info,
     );
 }
 
-@function mc-dark-theme($primary, $second, $warn: mc-palette($mc-red)) {
+@function mc-dark-theme(
+    $primary,
+    $second,
+    $error,
+
+    $info: mc-palette($mc-blue),
+    $success: mc-palette($mc-green),
+    $warning: mc-palette($mc-yellow)
+) {
     @return (
+        is-dark: true,
+
         primary: $primary,
         second: $second,
-        warn: $warn,
-        is-dark: true,
+        error: $error,
+
         foreground: $mc-dark-theme-foreground,
-        background: $mc-dark-theme-background
+        background: $mc-dark-theme-background,
+
+        warning: $warning,
+        success: $success,
+        info: $info,
     );
 }

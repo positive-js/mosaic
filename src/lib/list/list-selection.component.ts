@@ -24,14 +24,14 @@ import { Subscription } from 'rxjs';
 
 import { FocusKeyManager, IFocusableOption } from '@ptsecurity/cdk/a11y';
 import { SelectionModel } from '@ptsecurity/cdk/collections';
-import { DOWN_ARROW, END, ENTER, HOME, PAGE_DOWN, PAGE_UP, SPACE, UP_ARROW } from '@ptsecurity/cdk/keycodes';
+import { END, ENTER, HOME, PAGE_DOWN, PAGE_UP, SPACE } from '@ptsecurity/cdk/keycodes';
 
 import {
     McLine,
     McLineSetter,
     CanDisable,
     mixinDisabled,
-    toBoolean
+    toBoolean, CanDisableCtor
 } from '@ptsecurity/mosaic/core';
 
 
@@ -49,7 +49,6 @@ import {
         class: 'mc-list-option',
         '[class.mc-selected]': 'selected',
         '[class.mc-focused]': '_hasFocus',
-        '[class.mc-list-option-disabled]': 'disabled',
         '(focus)': '_handleFocus()',
         '(blur)': '_handleBlur()',
         '(click)': '_handleClick()'
@@ -70,8 +69,6 @@ export class McListOption implements AfterContentInit, OnDestroy, OnInit, IFocus
     @Input() checkboxPosition: 'before' | 'after' = 'after';
 
     @Input() value: any;
-
-    private _focusHandlerInProgress: boolean;
 
     @Input()
     get disabled() {
@@ -220,13 +217,14 @@ export class McListSelectionChange {
 
 export class McListSelectionBase {}
 
-export const _McListSelectionMixinBase = mixinDisabled(McListSelectionBase);
+export const _McListSelectionMixinBase: CanDisableCtor & typeof McListSelectionBase
+    = mixinDisabled(McListSelectionBase);
 
 @Component({
     exportAs: 'mcListSelection',
     selector: 'mc-list-selection',
     template: '<ng-content></ng-content>',
-    styleUrls: ['list.css'],
+    styleUrls: ['./list.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     inputs: ['disabled', 'tabIndex'],
@@ -364,13 +362,14 @@ export class McListSelection extends _McListSelectionMixinBase implements
         } else if (this.withCtrl) {
             this.withCtrl = false;
 
-            if (!this._canUnselectLast(option)) { return; }
+            if (!this._canDeselectLast(option)) { return; }
 
             option.toggle();
         } else {
-            if (this.autoSelect) { this.options.forEach((item) => item.setSelected(false)); }
-
-            option.setSelected(true);
+            if (this.autoSelect) {
+                this.options.forEach((item) => item.setSelected(false));
+                option.setSelected(true);
+            }
         }
 
         this._emitChangeEvent(option);
@@ -414,7 +413,7 @@ export class McListSelection extends _McListSelectionMixinBase implements
         if (focusedIndex != null && this._isValidIndex(focusedIndex)) {
             const focusedOption: McListOption = this.options.toArray()[focusedIndex];
 
-            if (focusedOption && this._canUnselectLast(focusedOption)) {
+            if (focusedOption && this._canDeselectLast(focusedOption)) {
                 focusedOption.toggle();
 
                 // Emit a change event because the focused option changed its state through user interaction.
@@ -423,7 +422,7 @@ export class McListSelection extends _McListSelectionMixinBase implements
         }
     }
 
-    _canUnselectLast(listOption: McListOption): boolean {
+    _canDeselectLast(listOption: McListOption): boolean {
         return !(this.noUnselect && this.selectedOptions.selected.length === 1 && listOption.selected);
     }
 

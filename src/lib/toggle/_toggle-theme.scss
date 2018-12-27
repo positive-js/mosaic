@@ -1,0 +1,94 @@
+@import '../core/theming/theming';
+@import '../core/styles/typography/typography-utils';
+
+
+$hover-darken: 5%;
+
+@mixin mc-toggle-theme($theme) {
+    $primary: map-get($theme, primary);
+    $second: map-get($theme, second);
+    $error: map-get($theme, error);
+
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
+    $is-dark: map-get($theme, is-dark);
+
+    .mc-toggle {
+        color: map-get($foreground, text);
+
+        .mc-toggle-bar {
+            background: map-get($background, button-bg);
+            border-color: mc-color($background, button-border);
+        }
+
+        .mc-toggle__circle {
+            border-color: mc-color($background, button-border);
+
+            background: linear-gradient(to bottom, white, if($is-dark, white, mc-color($second, lighter)));
+        }
+
+        &.mc-toggle_off {
+            .mc-toggle-bar {
+                background: linear-gradient(to bottom, mc-color($second, lighter), mc-color($background, button-bg));
+
+                @if $is-dark {
+                    background: map-get($background, background);
+                }
+            }
+        }
+
+        &:hover {
+            & .mc-toggle__focus-frame {
+                background: map-get($background, hover);
+            }
+        }
+
+        &.cdk-keyboard-focused {
+            & .mc-toggle__focus-frame {
+                box-shadow: inset 0 0 0 1px map-get($background, background), 0 0 0 2px mc-color($primary);
+            }
+        }
+
+        &.mc-primary:not(.mc-toggle_off) {
+            .mc-toggle-bar {
+                border-color: mc-color($primary);
+                background: mc-color($primary);
+            }
+        }
+
+        &.mc-error:not(.mc-toggle_off) {
+            .mc-toggle-bar {
+                border-color: mc-color($error);
+                background: mc-color($error);
+            }
+        }
+
+        &.mc-disabled {
+            color: map-get($foreground, disabled-text);
+
+            &.mc-toggle_off {
+                .mc-toggle-bar {
+                    @if $is-dark {
+                        background: map-get($mc-grey, 700);
+                    }
+                }
+            }
+
+            & .mc-toggle__focus-frame {
+                background: map-get($background, disabled-overlay);
+            }
+        }
+    }
+}
+
+
+@mixin mc-toggle-typography($config) {
+    .mc-toggle:not(.mc-toggle_small) {
+        @include mc-typography-level-to-styles($config, body);
+    }
+
+    .mc-toggle.mc-toggle_small {
+        @include mc-typography-level-to-styles($config, caption);
+    }
+}

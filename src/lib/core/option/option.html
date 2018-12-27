@@ -1,0 +1,9 @@
+<mc-pseudo-checkbox
+    *ngIf="multiple"
+    [state]="selected ? 'checked' : ''"
+    [disabled]="disabled">
+</mc-pseudo-checkbox>
+
+<span class="mc-option-text"><ng-content></ng-content></span>
+
+<div class="mc-option-overlay"></div>

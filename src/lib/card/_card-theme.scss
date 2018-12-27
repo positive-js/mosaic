@@ -1,0 +1,68 @@
+@import '../core/theming/theming';
+@import '../core/theming/palette';
+
+
+@mixin normal-state($color, $second, $is-dark) {
+    box-shadow:
+        inset -1px 0 0 0 mc-color($second, if($is-dark, darker, lighter)),
+        inset 0 1px 0 0 mc-color($second, if($is-dark, darker, lighter)),
+        inset 0 -1px 0 0 mc-color($second, if($is-dark, darker, lighter));
+
+    background-color: mc-color($color, if($is-dark, darker, lighter));
+
+    border-left-color: mc-color($color);
+}
+
+@mixin mc-card-theme($theme) {
+    $primary: map-get($theme, primary);
+    $second: map-get($theme, second);
+    $error: map-get($theme, error);
+
+    $info: map-get($theme, info);
+    $success: map-get($theme, success);
+    $warning: map-get($theme, warning);
+
+    $is-dark: map-get($theme, is-dark);
+
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
+    .mc-card {
+        color: map-get($foreground, text);
+        
+        &.mc-card_info {
+            @include normal-state($info, $second, $is-dark);
+        }
+        
+        &.mc-card_warning {
+            @include normal-state($warning, $second, $is-dark);
+        }
+
+        &.mc-card_success {
+            @include normal-state($success, $second, $is-dark);
+        }
+
+        &.mc-card_error {
+            @include normal-state($error, $second, $is-dark);
+        }
+
+        &.mc-card_white {
+            background-color: mix(map-get($background, background), white, 90%);
+        }
+
+        &.mc-card_selected {
+            background-color: mc-color($primary, if($is-dark, 700, 100));
+        }
+
+        // todo мне кажется тут можно сделать без overlay
+        &:not(.mc-card_readonly):hover {
+            .mc-card__overlay {
+                background: map-get($background, hover);
+            }
+        }
+
+        &.cdk-keyboard-focused {
+            box-shadow: 0 0 0 2px mc-color($primary);
+        }
+    }
+}

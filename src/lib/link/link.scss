@@ -1,0 +1,72 @@
+$link-border-radius: 3px;
+$link-padding: 2px 0;
+
+
+@mixin base-transition($args...) {
+    transition-property: $args;
+    transition-duration: 0.33s;
+    transition-timing-function: ease-out;
+}
+
+@mixin hover-transition($args...) {
+    @include base-transition($args);
+
+    &:hover {
+        transition: none;
+    }
+}
+
+@mixin focus-transition($args...) {
+    @include base-transition($args);
+
+    &:focus {
+        transition: none;
+    }
+}
+
+.mc-link {
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: $link-padding;
+
+    text-decoration: none !important;
+
+    cursor: pointer;
+
+    outline: none;
+
+    @include focus-transition(color);
+    @include hover-transition(color);
+
+    &.mc-focused,
+    &:focus {
+        border-radius: $link-border-radius;
+    }
+
+    &[disabled] {
+        pointer-events: none;
+        cursor: default;
+    }
+
+    & > .mc-link__icon {
+        color: inherit;
+    }
+
+    & > .mc-link__text:not(:first-child) {
+        margin-left: 4px;
+    }
+
+    & > .mc-link__text:not(:last-child) {
+        margin-right: 4px;
+    }
+
+    &.mc-link_underlined,
+    &.mc-link_dashed {
+        @include focus-transition(background, color);
+        @include hover-transition(background, color);
+    }
+}
+
+

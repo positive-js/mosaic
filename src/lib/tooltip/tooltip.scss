@@ -1,156 +1,92 @@
-@import 'tooltip-base';
+@import '../core/theming/theming';
+@import '../core/styles/typography/typography-utils';
+@import '../core/styles/common/animation';
+@import '../core/styles/common/overlay';
 
-$tooltip-prefix-cls: #{$pt-prefix}-tooltip;
 
-// Base class
-#{$tooltip-prefix-cls} {
+$zindex-tooltip: 1060;
+$tooltip-max-width: 240px;
+$border-radius-base: 3px;
+$tooltip-arrow-width: 8px;
+$tooltip-distance: $tooltip-arrow-width + 3px;
+
+.mc-tooltip {
+    display: block;
     box-sizing: border-box;
+
+    visibility: visible;
+
+    position: relative;
+
     margin: 0;
     padding: 0;
-    list-style: none;
-    position: relative;
+
     z-index: $zindex-tooltip;
-    display: block;
-    visibility: visible;
+
     max-width: $tooltip-max-width;
 
-    font-family: Roboto;
-    font-size: 13px;
-    line-height: 1.23;
-    color: #fff;
-    letter-spacing: 0.3px;
+    list-style: none;
+    white-space: pre-line;
+}
 
+.mc-tooltip_placement-top {
+    padding-bottom: $tooltip-distance;
+}
 
-    &-hidden {
-        display: none;
-    }
+.mc-tooltip_placement-right {
+    padding-left: $tooltip-distance;
+}
 
-    &-placement-top,
-    &-placement-topLeft,
-    &-placement-topRight {
-        padding-bottom: $tooltip-distance;
-    }
+.mc-tooltip_placement-bottom {
+    padding-top: $tooltip-distance;
+}
 
-    &-placement-right,
-    &-placement-rightTop,
-    &-placement-rightBottom {
-        padding-left: $tooltip-distance;
-    }
+.mc-tooltip_placement-left {
+    padding-right: $tooltip-distance;
+}
 
-    &-placement-bottom,
-    &-placement-bottomLeft,
-    &-placement-bottomRight {
-        padding-top: $tooltip-distance;
-    }
+.mc-tooltip-inner {
+    padding: 8px 16px;
+    text-align: left;
+    text-decoration: none;
+    border-radius: $border-radius-base;
+    min-height: 16px; // 16px for font + 16px for padding = total 32px
+    height: fit-content;
+    vertical-align: center;
+}
 
-    &-placement-left,
-    &-placement-leftTop,
-    &-placement-leftBottom {
-        padding-right: $tooltip-distance;
-    }
+.mc-tooltip-arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+}
 
-    // Wrapper for the tooltip content
-    &-inner {
-        padding: 8px 16px;
-        color: $tooltip-color;
-        text-align: left;
-        text-decoration: none;
-        background-color: $tooltip-bg;
-        border-radius: $border-radius-base;
-        box-shadow: $box-shadow-base;
-        min-height: 32px;
-    }
+.mc-tooltip_placement-top .mc-tooltip-arrow {
+    bottom: $tooltip-distance - $tooltip-arrow-width;
+    border-width: $tooltip-arrow-width $tooltip-arrow-width 0;
+    left: 50%;
+    margin-left: -$tooltip-arrow-width;
+}
 
-    // Arrows
-    &-arrow {
-        position: absolute;
-        width: 0;
-        height: 0;
-        border-color: transparent;
-        border-style: solid;
-    }
+.mc-tooltip_placement-right .mc-tooltip-arrow {
+    left: $tooltip-distance - $tooltip-arrow-width;
+    border-width: $tooltip-arrow-width $tooltip-arrow-width $tooltip-arrow-width 0;
+    top: 16px;
+    margin-top: -$tooltip-arrow-width;
+}
 
-    &-placement-top &-arrow,
-    &-placement-topLeft &-arrow,
-    &-placement-topRight &-arrow {
-        bottom: $tooltip-distance - $tooltip-arrow-width;
-        border-width: $tooltip-arrow-width $tooltip-arrow-width 0;
-        border-top-color: $tooltip-arrow-color;
-    }
+.mc-tooltip_placement-left .mc-tooltip-arrow {
+    right: $tooltip-distance - $tooltip-arrow-width;
+    border-width: $tooltip-arrow-width 0 $tooltip-arrow-width $tooltip-arrow-width;
+    top: 16px;
+    margin-top: -$tooltip-arrow-width;
+}
 
-    &-placement-top &-arrow {
-        left: 50%;
-        margin-left: -$tooltip-arrow-width;
-    }
-
-    &-placement-topLeft &-arrow {
-        left: 16px;
-    }
-
-    &-placement-topRight &-arrow {
-        right: 16px;
-    }
-
-    &-placement-right &-arrow,
-    &-placement-rightTop &-arrow,
-    &-placement-rightBottom &-arrow {
-        left: $tooltip-distance - $tooltip-arrow-width;
-        border-width: $tooltip-arrow-width $tooltip-arrow-width $tooltip-arrow-width 0;
-        border-right-color: $tooltip-arrow-color;
-    }
-
-    &-placement-right &-arrow {
-        top: 50%;
-        margin-top: -$tooltip-arrow-width;
-    }
-
-    &-placement-rightTop &-arrow {
-        top: 8px;
-    }
-
-    &-placement-rightBottom &-arrow {
-        bottom: 8px;
-    }
-
-    &-placement-left &-arrow,
-    &-placement-leftTop &-arrow,
-    &-placement-leftBottom &-arrow {
-        right: $tooltip-distance - $tooltip-arrow-width;
-        border-width: $tooltip-arrow-width 0 $tooltip-arrow-width $tooltip-arrow-width;
-        border-left-color: $tooltip-arrow-color;
-    }
-
-    &-placement-left &-arrow {
-        top: 50%;
-        margin-top: -$tooltip-arrow-width;
-    }
-
-    &-placement-leftTop &-arrow {
-        top: 8px;
-    }
-
-    &-placement-leftBottom &-arrow {
-        bottom: 8px;
-    }
-
-    &-placement-bottom &-arrow,
-    &-placement-bottomLeft &-arrow,
-    &-placement-bottomRight &-arrow {
-        top: $tooltip-distance - $tooltip-arrow-width;
-        border-width: 0 $tooltip-arrow-width $tooltip-arrow-width;
-        border-bottom-color: $tooltip-arrow-color;
-    }
-
-    &-placement-bottom &-arrow {
-        left: 50%;
-        margin-left: -$tooltip-arrow-width;
-    }
-
-    &-placement-bottomLeft &-arrow {
-        left: 16px;
-    }
-
-    &-placement-bottomRight &-arrow {
-        right: 16px;
-    }
+.mc-tooltip_placement-bottom .mc-tooltip-arrow {
+    top: $tooltip-distance - $tooltip-arrow-width;
+    border-width: 0 $tooltip-arrow-width $tooltip-arrow-width;
+    left: 50%;
+    margin-left: -$tooltip-arrow-width;
 }

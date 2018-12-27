@@ -1,37 +1,26 @@
+@import '~@ptsecurity/mosaic-icons/dist/styles/mc-icons';
+
+@import '../../lib/core/theming/prebuilt/default-theme';
 @import '../../lib/core/visual/prebuilt/default-visual';
 
-@include mosaic-visual();
 
-.colorNested > div div  {
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
-    opacity: 0.9;
-    color: white;
-    text-align: center;
-    height: 80px;
+.mc-layout-header,
+.mc-layout-footer {
+    background: #7dbcea;
+    color: #fff;
 }
 
-.colorNested > div div:nth-child(1) {
-    background-color: #009688;
-}
-.colorNested > div div:nth-child(2) {
-    background-color: #3949ab;
-}
-.colorNested > div div:nth-child(3) {
-    background-color: #9c27b0;
+.mc-layout-sidebar {
+    background: #3ba0e9;
+    color: #fff;
 }
 
-.colorNested > div div:nth-child(4) {
-    background-color: #8bc34a;
+.mc-layout-content {
+    background: rgba(16, 142, 233, 1);
+    color: #fff;
+    min-height: 120px;
 }
 
-.colorNested > div div:nth-child(5)  {
-    background-color: #deb867;
-}
-
-.colorNested > div div:nth-child(6) {
-    background-color: #FF5722;
-}
-
-.colorNested > div div:nth-child(7)  {
-    background-color: #03A9F4;
+.mc-layout:last-child {
+    margin: 0;
 }

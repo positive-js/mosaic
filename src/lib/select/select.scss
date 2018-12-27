@@ -1,0 +1,197 @@
+@import '../core/styles/common/vendor-prefixes';
+@import '../divider/divider';
+
+@import './select-theme';
+
+@import '../../cdk/a11y/a11y';
+
+$mc-select-arrow-size: 5px !default;
+$mc-select-arrow-margin: 4px !default;
+$mc-select-panel-max-height: 224px !default;
+$mc-select-item-height: 32px !default;
+
+$mc-select-panel-border-width: 1px !default;
+$mc-select-panel-border-radius: 3px !default;
+
+$mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arrow-margin);
+
+
+.mc-select {
+    box-sizing: border-box;
+
+    display: inline-block;
+
+    width: 100%;
+
+    outline: none;
+
+    &.mc-disabled {
+        & .mc-select__trigger {
+            @include user-select(none);
+
+            cursor: default;
+        }
+    }
+}
+
+.mc-select__trigger {
+    display: flex;
+    box-sizing: border-box;
+    position: relative;
+
+    height: 30px;
+
+    cursor: pointer;
+
+    // todo возможно нужно через JS
+    padding: 3px 7px 3px 15px;
+
+    &.mc-select__trigger_multiple {
+        padding-left: 7px;
+    }
+}
+
+.mc-select__matcher {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    & > span {
+        width: 100%;
+    }
+}
+
+.mc-select__match-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    overflow: hidden;
+
+    max-height: 24px;
+
+    margin: 0;
+    padding-left: 0;
+
+    & .mc-tag {
+        margin-right: 4px;
+    }
+}
+
+.mc-select__match-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    width: 100%;
+
+    & .mc-select__match-hidden-text {
+        flex: 0 0 70px;
+        align-self: center;
+        padding: 0 8px;
+
+        text-align: right;
+    }
+}
+
+.mc-select__match-item {
+    display: flex;
+
+    border: 1px solid transparent;
+    border-radius: 3px;
+
+    padding-left: 7px;
+
+    margin-right: 4px;
+
+    max-width: 100%;
+}
+
+.mc-select__arrow-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+
+    // When used in a box or standard appearance form-field the arrow should be shifted up 50%.
+    .mc-form-field-appearance-fill &,
+    .mc-form-field-appearance-standard & {
+        transform: translateY(-50%);
+    }
+
+    // When used in a outline form-field the arrow should be shifted up 25%.
+    .mc-form-field-appearance-outline & {
+        transform: translateY(-25%);
+    }
+}
+
+.mc-select__panel {
+    max-height: $mc-select-panel-max-height;
+    min-width: 100%; // prevents some animcion twitching and test inconsistencies in IE11
+
+    overflow: auto;
+
+    border: {
+        width: $mc-select-panel-border-width;
+        style: solid;
+    }
+
+    border-bottom-left-radius: $mc-select-panel-border-radius;
+    border-bottom-right-radius: $mc-select-panel-border-radius;
+
+    padding: 4px 0;
+}
+
+.mc-select__content {
+    height: 100%;
+}
+
+// Override optgroup and option to scale based on font-size of the trigger.
+.mc-select__panel {
+    .mc-optgroup-label,
+    .mc-option {
+        font-size: inherit;
+        line-height: $mc-select-item-height;
+        height: $mc-select-item-height;
+    }
+}
+
+.mc-form-field-type-mc-select {
+    &:not(.mc-disabled) .mc-form-field-flex {
+        cursor: pointer;
+    }
+
+    .mc-form-field-label {
+        width: calc(100% - #{$mc-select-placeholder-arrow-space});
+    }
+}
+
+//.mc-select__placeholder {
+//    // Delay the transition until the label has animced about a third of the way through, in
+//    // order to prevent the placeholder from overlapping for a split second.
+//    transition: color $swift-ease-out-duration $swift-ease-out-duration / 3
+//    $swift-ease-out-timing-function;
+//
+//    ._mc-animcion-noopable & {
+//        transition: none;
+//    }
+//
+//    .mc-form-field-hide-placeholder & {
+//        color: transparent;
+//
+//        // Overwrite browser specific CSS properties that can overwrite the `color` property.
+//        // Some developers seem to use this approach to easily overwrite the placeholder / label color.
+//        -webkit-text-fill-color: transparent;
+//
+//        // Remove the transition to prevent the placeholder
+//        // from overlapping when the label comes back down.
+//        transition: none;
+//        // Prevents the '...' from showing on the parent element.
+//        display: block;
+//    }
+//}
+
+

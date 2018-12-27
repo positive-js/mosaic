@@ -1,10 +1,14 @@
 import { ElementRef } from '@angular/core';
+
 import { Constructor } from './constructor';
 
 
 export interface CanColor {
     color: ThemePalette;
 }
+
+/** @docs-private */
+export type CanColorCtor = Constructor<CanColor>;
 
 export interface HasElementRef {
     _elementRef: ElementRef;
@@ -13,13 +17,18 @@ export interface HasElementRef {
 export enum ThemePalette {
     Primary = 'primary',
     Second = 'second',
-    Warn = 'warn',
-    Default = 'second'
+    Error = 'error',
+    Default = 'second',
+    Empty = ''
 }
 
 /** Mixin to augment a directive with a `color` property. */
-export function mixinColor<T extends Constructor<HasElementRef>>(base: T, defaultColor: ThemePalette = ThemePalette.Default): Constructor<CanColor> & T {
+export function mixinColor<T extends Constructor<HasElementRef>>(
+    base: T,
+    defaultColor: ThemePalette = ThemePalette.Default
+): CanColorCtor & T {
     return class extends base {
+
         private _color: ThemePalette;
 
         get color(): ThemePalette {
@@ -45,7 +54,6 @@ export function mixinColor<T extends Constructor<HasElementRef>>(base: T, defaul
         constructor(...args: any[]) {
             super(...args);
 
-            // Set the default color that can be specified from the mixin.
             this.color = defaultColor;
         }
     };

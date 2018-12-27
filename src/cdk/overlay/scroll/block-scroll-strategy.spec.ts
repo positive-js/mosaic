@@ -1,166 +1,187 @@
-import {Component, NgModule} from '@angular/core';
-import {async, inject, TestBed} from '@angular/core/testing';
-import {Platform} from '@ptsecurity/cdk/platform';
-import {ComponentPortal, PortalModule} from '@ptsecurity/cdk/portal';
-import {ViewportRuler} from '@ptsecurity/cdk/scrolling';
+import { Component, NgModule } from '@angular/core';
+import { async, inject, TestBed } from '@angular/core/testing';
 
-import {Overlay, OverlayContainer, OverlayModule, OverlayRef, OverlayConfig} from '../index';
+import { Platform } from '@ptsecurity/cdk/platform';
+import { ComponentPortal, PortalModule } from '@ptsecurity/cdk/portal';
+import { ViewportRuler } from '@ptsecurity/cdk/scrolling';
+
+import { Overlay, OverlayContainer, OverlayModule, OverlayRef, OverlayConfig } from '../index';
 
 
+/* tslint:disable:no-magic-numbers */
 describe('BlockScrollStrategy', () => {
-  let platform: Platform;
-  let viewport: ViewportRuler;
-  let overlayRef: OverlayRef;
-  let componentPortal: ComponentPortal<FocacciaMsg>;
-  let forceScrollElement: HTMLElement;
+    let platform: Platform;
+    let viewport: ViewportRuler;
+    let documentElement: HTMLElement;
+    let overlayRef: OverlayRef;
+    let componentPortal: ComponentPortal<FocacciaMsg>;
+    let forceScrollElement: HTMLElement;
 
-  beforeEach(async(() => {
-    // Ensure a clean state for every test.
-    document.documentElement.classList.remove('cdk-global-scrollblock');
+    beforeEach(async(() => {
+        documentElement = document.documentElement!;
 
-    TestBed.configureTestingModule({
-      imports: [OverlayModule, PortalModule, OverlayTestModule]
-    }).compileComponents();
-  }));
+        // Ensure a clean state for every test.
+        documentElement.classList.remove('cdk-global-scrollblock');
 
-  beforeEach(inject([Overlay, ViewportRuler, Platform],
-    (overlay: Overlay, viewportRuler: ViewportRuler, _platform: Platform) => {
-    let overlayConfig = new OverlayConfig({scrollStrategy: overlay.scrollStrategies.block()}); //tslint:disable-line
+        TestBed.configureTestingModule({
+            imports: [OverlayModule, PortalModule, OverlayTestModule]
+        }).compileComponents();
+    }));
 
-    overlayRef = overlay.create(overlayConfig);
-    componentPortal = new ComponentPortal(FocacciaMsg);
+    beforeEach(inject([Overlay, ViewportRuler, Platform],
+        (overlay: Overlay, viewportRuler: ViewportRuler, _platform: Platform) => {
+            const overlayConfig = new OverlayConfig({scrollStrategy: overlay.scrollStrategies.block()});
 
-    viewport = viewportRuler;
-    forceScrollElement = document.createElement('div');
-    document.body.appendChild(forceScrollElement);
-    forceScrollElement.style.width = '100px';
-    forceScrollElement.style.height = '3000px';
-    forceScrollElement.style.background = 'rebeccapurple';
-    platform = _platform;
-  }));
+            overlayRef = overlay.create(overlayConfig);
+            componentPortal = new ComponentPortal(FocacciaMsg);
 
-  afterEach(inject([OverlayContainer], (container: OverlayContainer) => {
-    overlayRef.dispose();
-    document.body.removeChild(forceScrollElement);
-    window.scroll(0, 0);
-    container.getContainerElement().parentNode!.removeChild(container.getContainerElement()); // tslint:disable-line
-  }));
+            viewport = viewportRuler;
+            forceScrollElement = document.createElement('div');
+            document.body.appendChild(forceScrollElement);
+            forceScrollElement.style.width = '100px';
+            forceScrollElement.style.height = '3000px';
+            forceScrollElement.style.background = 'rebeccapurple';
+            platform = _platform;
+        }));
 
-  it('should toggle scroll blocking along the y axis', skipIOS(() => {
-    window.scroll(0, 100); // tslint:disable-line
-    expect(viewport.getViewportScrollPosition().top)
-        .toBe(100, 'Expected viewport to be scrollable initially.'); // tslint:disable-line
+    afterEach(inject([OverlayContainer], (container: OverlayContainer) => {
+        overlayRef.dispose();
+        document.body.removeChild(forceScrollElement);
+        window.scroll(0, 0);
+        container.getContainerElement().parentNode!.removeChild(container.getContainerElement());
+    }));
 
-    window.scroll(0, 300); // tslint:disable-line
-    expect(viewport.getViewportScrollPosition().top)
-        .toBe(300, 'Expected user to be able to scroll after disabling.'); // tslint:disable-line
-  }));
+    it('should toggle scroll blocking along the y axis', skipIOS(() => {
+        window.scroll(0, 100);
+        expect(viewport.getViewportScrollPosition().top)
+            .toBe(100, 'Expected viewport to be scrollable initially.');
 
+        overlayRef.attach(componentPortal);
+        expect(documentElement.style.top)
+            .toBe('-100px', 'Expected <html> element to be offset by the previous scroll amount.');
 
-  it('should toggle scroll blocking along the x axis', skipIOS(() => {
-    forceScrollElement.style.height = '100px';
-    forceScrollElement.style.width = '3000px';
+        window.scroll(0, 300);
+        expect(viewport.getViewportScrollPosition().top)
+            .toBe(100, 'Expected the viewport not to scroll.');
 
-    window.scroll(100, 0); // tslint:disable-line
-    expect(viewport.getViewportScrollPosition().left)
-        .toBe(100, 'Expected viewport to be scrollable initially.'); // tslint:disable-line
+        overlayRef.detach();
+        expect(viewport.getViewportScrollPosition().top)
+            .toBe(100, 'Expected old scroll position to have bee restored after disabling.');
 
-    overlayRef.attach(componentPortal);
-    expect(document.documentElement.style.left)
-        .toBe('-100px', 'Expected <html> element to be offset by the previous scroll amount.');
-
-    overlayRef.detach();
-    expect(viewport.getViewportScrollPosition().left)
-        .toBe(100, 'Expected old scroll position to have bee restored after disabling.'); // tslint:disable-line
-
-    window.scroll(300, 0); // tslint:disable-line
-    expect(viewport.getViewportScrollPosition().left)
-        .toBe(300, 'Expected user to be able to scroll after disabling.'); // tslint:disable-line
-  }));
+        window.scroll(0, 300);
+        expect(viewport.getViewportScrollPosition().top)
+            .toBe(300, 'Expected user to be able to scroll after disabling.');
+    }));
 
 
-  it('should toggle the `cdk-global-scrollblock` class', skipIOS(() => {
-    expect(document.documentElement.classList).not.toContain('cdk-global-scrollblock');
+    it('should toggle scroll blocking along the x axis', skipIOS(() => {
+        forceScrollElement.style.height = '100px';
+        forceScrollElement.style.width = '3000px';
 
-    overlayRef.attach(componentPortal);
-    expect(document.documentElement.classList).toContain('cdk-global-scrollblock');
+        window.scroll(100, 0);
+        expect(viewport.getViewportScrollPosition().left)
+            .toBe(100, 'Expected viewport to be scrollable initially.');
 
-    overlayRef.detach();
-    expect(document.documentElement.classList).not.toContain('cdk-global-scrollblock');
-  }));
+        overlayRef.attach(componentPortal);
+        expect(documentElement.style.left)
+            .toBe('-100px', 'Expected <html> element to be offset by the previous scroll amount.');
 
-  it('should restore any previously-set inline styles', skipIOS(() => {
-    const root = document.documentElement;
+        window.scroll(300, 0);
+        expect(viewport.getViewportScrollPosition().left)
+            .toBe(100, 'Expected the viewport not to scroll.');
 
-    root.style.top = '13px';
-    root.style.left = '37px';
+        overlayRef.detach();
+        expect(viewport.getViewportScrollPosition().left)
+            .toBe(100, 'Expected old scroll position to have bee restored after disabling.');
 
-    overlayRef.attach(componentPortal);
-
-    expect(root.style.top).not.toBe('13px');
-    expect(root.style.left).not.toBe('37px');
-
-    overlayRef.detach();
-
-    expect(root.style.top).toBe('13px');
-    expect(root.style.left).toBe('37px');
-  }));
-
-  it(`should't do anything if the page isn't scrollable`, skipIOS(() => {
-    forceScrollElement.style.display = 'none';
-    overlayRef.attach(componentPortal);
-    expect(document.documentElement.classList).not.toContain('cdk-global-scrollblock');
-  }));
+        window.scroll(300, 0);
+        expect(viewport.getViewportScrollPosition().left)
+            .toBe(300, 'Expected user to be able to scroll after disabling.');
+    }));
 
 
-  it('should keep the content width', () => {
-    forceScrollElement.style.width = '100px';
+    it('should toggle the `cdk-global-scrollblock` class', skipIOS(() => {
+        expect(documentElement.classList).not.toContain('cdk-global-scrollblock');
 
-    const previousContentWidth = document.documentElement.getBoundingClientRect().width;
+        overlayRef.attach(componentPortal);
+        expect(documentElement.classList).toContain('cdk-global-scrollblock');
 
-    overlayRef.attach(componentPortal);
+        overlayRef.detach();
+        expect(documentElement.classList).not.toContain('cdk-global-scrollblock');
+    }));
 
-    expect(document.documentElement.getBoundingClientRect().width).toBe(previousContentWidth);
-  });
+    it('should restore any previously-set inline styles', skipIOS(() => {
+        const root = documentElement;
 
-  it('should not clobber user-defined scroll-behavior', skipIOS(() => {
-    const root = document.documentElement;
-    const body = document.body;
+        root.style.top = '13px';
+        root.style.left = '37px';
 
-    root.style['scrollBehavior'] = body.style['scrollBehavior'] = 'smooth'; // tslint:disable-line
+        overlayRef.attach(componentPortal);
 
-    // Get the value via the style declaration in order to
-    // handle browsers that don't support the property yet.
-    const initialRootValue = root.style['scrollBehavior']; // tslint:disable-line
-    const initialBodyValue = root.style['scrollBehavior']; // tslint:disable-line
+        expect(root.style.top).not.toBe('13px');
+        expect(root.style.left).not.toBe('37px');
 
-    overlayRef.attach(componentPortal);
-    overlayRef.detach();
+        overlayRef.detach();
 
-    expect(root.style['scrollBehavior']).toBe(initialRootValue); // tslint:disable-line
-    expect(body.style['scrollBehavior']).toBe(initialBodyValue); // tslint:disable-line
+        expect(root.style.top).toBe('13px');
+        expect(root.style.left).toBe('37px');
+    }));
 
-    // Avoid bleeding styles into other tests.
-    root.style['scrollBehavior'] = body.style['scrollBehavior'] = ''; // tslint:disable-line
-  }));
+    it(`should't do anything if the page isn't scrollable`, skipIOS(() => {
+        forceScrollElement.style.display = 'none';
+        overlayRef.attach(componentPortal);
+        expect(documentElement.classList).not.toContain('cdk-global-scrollblock');
+    }));
 
-  /**
-   * Skips the specified test, if it is being executed on iOS. This is necessary, because
-   * programmatic scrolling inside the Karma iframe doesn't work on iOS, which renders these
-   * tests unusable. For example, something as basic as the following won't work:
-   * ```
-   * window.scroll(0, 100);
-   * expect(viewport.getViewportScrollPosition().top).toBe(100);
-   * ```
-   * @param spec Test to be executed or skipped.
-   */
-  function skipIOS(spec: Function) { // tslint:disable-line
-    return () => {
-      if (!platform.IOS) {
-        spec();
-      }
-    };
-  }
+
+    it('should keep the content width', () => {
+        forceScrollElement.style.width = '100px';
+
+        const previousContentWidth = documentElement.getBoundingClientRect().width;
+
+        overlayRef.attach(componentPortal);
+
+        expect(documentElement.getBoundingClientRect().width).toBe(previousContentWidth);
+    });
+
+    it('should not clobber user-defined scroll-behavior', skipIOS(() => {
+        const root = documentElement;
+        const body = document.body;
+
+        root.style['scrollBehavior'] = body.style['scrollBehavior'] = 'smooth';
+
+        // Get the value via the style declaration in order to
+        // handle browsers that don't support the property yet.
+        const initialRootValue = root.style['scrollBehavior'];
+        const initialBodyValue = root.style['scrollBehavior'];
+
+        overlayRef.attach(componentPortal);
+        overlayRef.detach();
+
+        expect(root.style['scrollBehavior']).toBe(initialRootValue);
+        expect(body.style['scrollBehavior']).toBe(initialBodyValue);
+
+        // Avoid bleeding styles into other tests.
+        root.style['scrollBehavior'] = body.style['scrollBehavior'] = '';
+    }));
+
+    /**
+     * Skips the specified test, if it is being executed on iOS. This is necessary, because
+     * programmatic scrolling inside the Karma iframe doesn't work on iOS, which renders these
+     * tests unusable. For example, something as basic as the following won't work:
+     * ```
+     * window.scroll(0, 100);
+     * expect(viewport.getViewportScrollPosition().top).toBe(100);
+     * ```
+     * @param spec Test to be executed or skipped.
+     */
+    function skipIOS(spec: Function) {
+        return () => {
+            if (!platform.IOS) {
+                spec();
+            }
+        };
+    }
 
 });
 
@@ -172,8 +193,8 @@ class FocacciaMsg { }
 
 /** Test module to hold the component. */
 @NgModule({
-  imports: [OverlayModule, PortalModule],
-  declarations: [FocacciaMsg],
-  entryComponents: [FocacciaMsg]
+    imports: [OverlayModule, PortalModule],
+    declarations: [FocacciaMsg],
+    entryComponents: [FocacciaMsg]
 })
 class OverlayTestModule { }

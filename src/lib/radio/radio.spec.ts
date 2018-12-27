@@ -1,11 +1,12 @@
 import { Component, DebugElement, ViewChild } from '@angular/core';
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { FormControl, FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
-import { McRadioButton, McRadioChange, McRadioGroup, McRadioModule } from './index';
+import { McRadioButton, McRadioGroup, McRadioModule } from './index';
 
 
+/* tslint:disable:no-magic-numbers */
 describe('MсRadio', () => {
 
     beforeEach(async(() => {
@@ -220,7 +221,7 @@ describe('MсRadio', () => {
 
             groupInstance.value = null;
 
-            expect(radioInstances.every(radio => !radio.checked)).toBe(true);
+            expect(radioInstances.every((radio) => !radio.checked)).toBe(true);
         });
 
         it(`should update the group's selected radio to null when unchecking that radio
@@ -240,7 +241,7 @@ describe('MсRadio', () => {
 
             expect(changeSpy).not.toHaveBeenCalled();
             expect(groupInstance.value).toBeFalsy();
-            expect(radioInstances.every(radio => !radio.checked)).toBe(true);
+            expect(radioInstances.every((radio) => !radio.checked)).toBe(true);
             expect(groupInstance.selected).toBeNull();
         });
 

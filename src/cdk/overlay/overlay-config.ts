@@ -1,8 +1,8 @@
-import {Direction, Directionality} from '@ptsecurity/cdk/bidi';
+import { Direction, Directionality } from '@ptsecurity/cdk/bidi';
 
-import {IPositionStrategy} from './position/position-strategy';
-import {NoopScrollStrategy} from './scroll/noop-scroll-strategy';
-import {IScrollStrategy} from './scroll/scroll-strategy';
+import { IPositionStrategy } from './position/position-strategy';
+import { NoopScrollStrategy } from './scroll/noop-scroll-strategy';
+import { IScrollStrategy } from './scroll/scroll-strategy';
 
 
 /** Initial configuration used when creating an overlay. */

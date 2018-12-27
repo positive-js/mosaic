@@ -1,0 +1,22 @@
+@import 'input-base';
+
+
+.mc-input {
+    @extend %mc-input-field-base;
+
+    display: inline-block;
+}
+
+input.mc-input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+input.mc-input[type="number"]::-webkit-inner-spin-button,
+input.mc-input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+/* remove default red border for HTML5 validation invalid fields in Firefox */
+input.mc-input:invalid {
+    box-shadow: unset;
+}

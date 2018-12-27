@@ -1,0 +1,10 @@
+<div class="mc-tab-body__content"
+     #content
+     [@translateTab]="{
+        value: bodyPosition,
+        params: {animationDuration: animationDuration}
+     }"
+     (@translateTab.start)="onTranslateTabStarted($event)"
+     (@translateTab.done)="onTranslateTabComplete($event)">
+    <ng-template mcTabBodyHost></ng-template>
+</div>

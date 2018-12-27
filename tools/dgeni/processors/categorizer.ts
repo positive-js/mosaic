@@ -1,6 +1,6 @@
-import {DocCollection, Processor} from 'dgeni';
-import {MethodMemberDoc} from 'dgeni-packages/typescript/api-doc-types/MethodMemberDoc';
-import {getDirectiveMetadata} from '../common/directive-metadata';
+import { DocCollection, Processor } from 'dgeni';
+import { MethodMemberDoc } from 'dgeni-packages/typescript/api-doc-types/MethodMemberDoc';
+
 import {
     decorateDeprecatedDoc, getDirectiveSelectors, isDirective, isMethod, isNgModule, isProperty,
     isService
@@ -9,11 +9,13 @@ import {
     CategorizedClassDoc, CategorizedClassLikeDoc, CategorizedMethodMemberDoc,
     CategorizedPropertyMemberDoc
 } from '../common/dgeni-definitions';
-import {normalizeMethodParameters} from '../common/normalize-method-parameters';
-import {getInputBindingData, getOutputBindingData} from '../common/property-bindings';
-import {sortCategorizedMembers} from '../common/sort-members';
+import { getDirectiveMetadata } from '../common/directive-metadata';
+import { normalizeMethodParameters } from '../common/normalize-method-parameters';
+import { getInputBindingData, getOutputBindingData } from '../common/property-bindings';
+import { sortCategorizedMembers } from '../common/sort-members';
 
 
+/* tslint:disable:no-non-null-assertion */
 /**
  * Processor to add properties to docs objects.
  *
@@ -28,8 +30,8 @@ export class Categorizer implements Processor {
 
     $process(docs: DocCollection) {
         docs
-            .filter(doc => doc.docType === 'class' || doc.docType === 'interface')
-            .forEach(doc => this.decorateClassLikeDoc(doc));
+            .filter((doc) => doc.docType === 'class' || doc.docType === 'interface')
+            .forEach((doc) => this.decorateClassLikeDoc(doc));
     }
 
     /**
@@ -52,8 +54,8 @@ export class Categorizer implements Processor {
         }
 
         // Call decorate hooks that can modify the method and property docs.
-        classLikeDoc.methods.forEach(doc => this.decorateMethodDoc(doc));
-        classLikeDoc.properties.forEach(doc => this.decoratePropertyDoc(doc));
+        classLikeDoc.methods.forEach((doc) => this.decorateMethodDoc(doc));
+        classLikeDoc.properties.forEach((doc) => this.decoratePropertyDoc(doc));
 
         decorateDeprecatedDoc(classLikeDoc);
 

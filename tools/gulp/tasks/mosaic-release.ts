@@ -1,9 +1,9 @@
 import { mkdirpSync, writeFileSync } from 'fs-extra';
-import { task, src, dest } from 'gulp';
+import { task, src, dest, series, parallel } from 'gulp';
 import { join } from 'path';
 import { Bundler } from 'scss-bundle';
 
-import { buildConfig, sequenceTask } from '../../packages';
+import { buildConfig } from '../../packages';
 import { composeRelease } from '../../packages/build-release';
 import { mosaicPackage } from '../packages';
 
@@ -16,8 +16,9 @@ const {sourceDir, outputDir} = mosaicPackage;
 /** Path to the directory where all releases are created. */
 const releasesDir = join(distDir, 'releases');
 
-// Matches all SCSS files in the different packages.
-const allScssGlob = join(buildConfig.packagesDir, '**/*.scss');
+// Matches all SCSS files in the different packages. Note that this glob is not used to build
+// the bundle. It's used to identify Sass files that shouldn't be included multiple times.
+const allScssDedupeGlob = join(buildConfig.packagesDir, '**/*.scss');
 
 
 // Path to the release output of mosaic.
@@ -34,18 +35,8 @@ const visualEntryPointPath = join(sourceDir, 'core', 'visual', '_all-visual.scss
 const prebuiltVisualGlob = join(outputDir, '**/visual/prebuilt/*.css?(.map)');
 const visualBundlePath = join(releasePath, '_visual.scss');
 
-task('mosaic:build-release', ['mosaic:prepare-release'], () => composeRelease(mosaicPackage));
-
-task('mosaic:prepare-release', sequenceTask(
-    'mosaic:build',
-    [
-        'mosaic:copy-prebuilt-themes', 'mosaic:bundle-theming-scss',
-        'mosaic:copy-prebuilt-visual', 'mosaic:bundle-visual-scss'
-    ]
-));
-
 task('mosaic:copy-prebuilt-themes', () => {
-    src(prebuiltThemeGlob)
+    return src(prebuiltThemeGlob)
         .pipe(gulpRename({dirname: ''}))
         .pipe(dest(join(releasePath, 'prebuilt-themes')));
 });
@@ -55,7 +46,7 @@ task('mosaic:bundle-theming-scss', () => {
     // Instantiates the SCSS bundler and bundles all imports of the specified entry point SCSS file.
     // A glob of all SCSS files in the library will be passed to the bundler. The bundler takes an
     // array of globs, which will match SCSS files that will be only included once in the bundle.
-    return new Bundler().Bundle(themingEntryPointPath, [allScssGlob]).then((result) => {
+    return new Bundler().Bundle(themingEntryPointPath, [allScssDedupeGlob]).then((result) => {
         // The release directory is not created yet because the composing of the release happens when
         // this task finishes.
         mkdirpSync(releasePath);
@@ -65,7 +56,7 @@ task('mosaic:bundle-theming-scss', () => {
 
 
 task('mosaic:copy-prebuilt-visual', () => {
-    src(prebuiltVisualGlob)
+    return src(prebuiltVisualGlob)
         .pipe(gulpRename({dirname: ''}))
         .pipe(dest(join(releasePath, 'prebuilt-visual')));
 });
@@ -74,10 +65,24 @@ task('mosaic:bundle-visual-scss', () => {
     // Instantiates the SCSS bundler and bundles all imports of the specified entry point SCSS file.
     // A glob of all SCSS files in the library will be passed to the bundler. The bundler takes an
     // array of globs, which will match SCSS files that will be only included once in the bundle.
-    return new Bundler().Bundle(visualEntryPointPath, [allScssGlob]).then((result) => {
+    return new Bundler().Bundle(visualEntryPointPath, [allScssDedupeGlob]).then((result) => {
         // The release directory is not created yet because the composing of the release happens when
         // this task finishes.
         mkdirpSync(releasePath);
         writeFileSync(visualBundlePath, result.bundledContent);
     });
 });
+
+task('mosaic:prepare-release', series(
+    'mosaic:build',
+    parallel(
+        'mosaic:copy-prebuilt-themes', 'mosaic:bundle-theming-scss',
+        'mosaic:copy-prebuilt-visual', 'mosaic:bundle-visual-scss'
+    )
+));
+
+task('mosaic:build-release', series('mosaic:prepare-release', (done) => {
+    composeRelease(mosaicPackage);
+    done();
+}));
+

@@ -8,12 +8,12 @@ const gulpClean = require('gulp-clean');
 const resolveBin = require('resolve-bin');
 
 export function cleanTask(glob: string) {
-    return () => gulp.src(glob, { read: false }).pipe(gulpClean(null));
+    return () => gulp.src(glob, { read: false, allowEmpty: true }).pipe(gulpClean(null));
 }
 
 export function execTask(binPath: string, args: string[], options: IExecTaskOptions = {}) {
     return (done: (err?: string) => void) => {
-        const env = Object.assign({}, process.env, options.env);
+        const env = {...process.env, ...options.env};
         const childProcess = child_process.spawn(binPath, args, {env});
         const stderrData: string[] = [];
 
@@ -40,12 +40,12 @@ export function execTask(binPath: string, args: string[], options: IExecTaskOpti
 export function execNodeTask(packageName: string, executable: string | string[], args?: string[],
                              options: IExecTaskOptions = {}) {
     if (!args) {
-        args = <string[]>executable;
+        args = <string[]> executable;
         executable = '';
     }
 
     return (done: (err: any) => void) => {
-        resolveBin(packageName, { executable: executable }, (err: any, binPath: string) => {
+        resolveBin(packageName, { executable }, (err: any, binPath: string) => {
             if (err) {
                 done(err);
             } else {

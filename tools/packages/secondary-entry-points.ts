@@ -56,7 +56,7 @@ export function getSecondaryEntryPointsForPackage(pkg: BuildPackage) {
         return [...order, ...getBuildOrder(node)];
     }, []);
 
-    return partitionNodesByDepth(buildOrder).map(level => level.map(node => node.name));
+    return partitionNodesByDepth(buildOrder).map((level) => level.map((node) => node.name));
 }
 
 /** Gets the build order for node with DFS. As a side-effect, sets the depth on visited nodes. */
@@ -66,12 +66,14 @@ function getBuildOrder(node: IBuildNode): IBuildNode[] {
     }
 
     let buildOrder: IBuildNode[] = [];
+
     for (const dep of node.deps) {
         buildOrder = [...buildOrder, ...getBuildOrder(dep)];
         node.depth = node.deps.reduce((maxDepth, d) => Math.max(d.depth + 1, maxDepth), -1);
     }
 
     node.visited = true;
+
     return [...buildOrder, node];
 }
 

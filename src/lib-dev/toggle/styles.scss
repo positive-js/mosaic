@@ -1,0 +1,24 @@
+@import '../../lib/core/visual/prebuilt/default-visual';
+
+//@import '../../lib/core/theming/prebuilt/default-theme';
+@import '../../lib/core/theming/prebuilt/dark-theme';
+
+
+.container {
+    margin-top: 32px;
+    margin-left: 16px;
+}
+
+.toggle-demo-container {
+    margin-bottom: 8px;
+}
+
+.control-buttons-container {
+    display: inline-block;
+    margin-right: 16px;
+    margin-bottom: 16px;
+}
+
+.toggles-container {
+    max-width: 500px;
+}

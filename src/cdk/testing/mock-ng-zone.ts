@@ -1,4 +1,4 @@
-import {EventEmitter, Injectable, NgZone} from '@angular/core';
+import { EventEmitter, Injectable, NgZone } from '@angular/core';
 
 
 /**
@@ -10,21 +10,23 @@ import {EventEmitter, Injectable, NgZone} from '@angular/core';
  */
 @Injectable()
 export class MockNgZone extends NgZone {
-  onStable: EventEmitter<any> = new EventEmitter(false);
+    onStable: EventEmitter<any> = new EventEmitter(false);
 
-  constructor() {
-    super({enableLongStackTrace: false});
-  }
+    constructor() {
+        super({enableLongStackTrace: false});
+    }
 
-  run(fn: () => void): any {
-    return fn();
-  }
+    run(fn: () => void): any {
+        // tslint:disable-next-line
+        return fn();
+    }
 
-  runOutsideAngular(fn: () => void): any {
-    return fn();
-  }
+    runOutsideAngular(fn: () => void): any {
+        // tslint:disable-next-line
+        return fn();
+    }
 
-  simulateZoneExit(): void {
-    this.onStable.emit(null);
-  }
+    simulateZoneExit(): void {
+        this.onStable.emit(null);
+    }
 }

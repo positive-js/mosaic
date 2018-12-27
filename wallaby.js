@@ -1,7 +1,5 @@
 const wallabyWebpack = require('wallaby-webpack');
 
-const { TsConfigPathsPlugin } = require('awesome-typescript-loader');
-
 const path = require('path');
 
 const compilerOptions = Object.assign(
@@ -29,20 +27,8 @@ module.exports = function (wallaby) {
 
                 { test: /\.css$/, loader: 'raw-loader' },
                 { test: /\.html$/, loader: 'raw-loader' },
-                {test: /\.js$/, loader: 'angular2-template-loader', exclude: /node_modules/},
-                {
-                    test: /\.ts$/,
-                    use: [
-                        {
-                            loader: 'awesome-typescript-loader',
-                            options: {
-                                configFileName: './tsconfig.wallaby.json'
-                            }
-
-                        }
-                    ]
-                },
-                {test: /\.scss$|\.sass$/, loaders: ['raw-loader', 'sass-loader']}
+                { test: /\.js$/, loader: 'angular2-template-loader', exclude: /node_modules/ },
+                { test: /\.scss$|\.sass$/, loaders: ['raw-loader', 'sass-loader'] }
             ]
         },
 
@@ -52,23 +38,30 @@ module.exports = function (wallaby) {
                 path.join(wallaby.projectCacheDir, 'src'),
                 'node_modules'
             ],
-            plugins: [
-                new TsConfigPathsPlugin({
-                    configFileName: './tsconfig.webpack.json'
-                })
-            ]
+            alias: {
+                '@ptsecurity/cdk': path.join(wallaby.projectCacheDir, 'src/cdk'),
+                '@ptsecurity/mosaic': path.join(wallaby.projectCacheDir, 'src/lib')
+            }
+        },
+        node: {
+            fs: 'empty',
+            net: 'empty',
+            tls: 'empty',
+            dns: 'empty'
         }
     });
 
     return {
         files: [
+            { pattern: 'src/wallabyTest.ts', load: false },
             { pattern: 'src/**/*.+(ts|css|scss|sass|html|json|svg)', load: false },
             { pattern: 'src/**/*.d.ts', ignore: true },
             { pattern: 'src/**/*spec.ts', ignore: true }
         ],
 
         tests: [
-            { pattern: 'src/**/*spec.ts', load: false }
+            { pattern: 'src/**/*.spec.ts', load: false },
+            { pattern: '!src/cdk/schematics/**/*.spec.ts', load: false }
         ],
 
         testFramework: 'jasmine',
@@ -78,7 +71,10 @@ module.exports = function (wallaby) {
         },
 
         env: {
-            kind: 'chrome'
+            kind: 'chrome',
+            params: {
+                runner: '--headless --disable-gpu'
+            }
         },
 
         postprocessor: webpackPostprocessor,

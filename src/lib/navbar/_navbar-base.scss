@@ -1,8 +1,10 @@
 
-$mc-navbar-min-width: 1280px;
 $mc-navbar-h-padding: 0px;
 $mc-navbar-height: 48px;
 $mc-navbar-item-h-padding: 16px;
+$mc-navbar-dropdown-v-padding: 4px;
+$mc-navbar-dropdown-link-v-padding: 6px;
+$mc-navbar-dropdown-link-h-padding: 16px;
 $mc-navbar-brand-h-padding: 12px;
 $mc-navbar-brand-margin-right: 24px;
 $mc-navbar-title-icon-space: 8px;
@@ -19,8 +21,6 @@ $mc-navbar-icon-min-width: 15px;
 }
 
 %mc-nav-bar-base {
-    min-width: $mc-navbar-min-width;
-
     position: relative;
     height: $mc-navbar-height;
 
@@ -47,6 +47,8 @@ $mc-navbar-icon-min-width: 15px;
     align-items: center;
     padding-left: $mc-navbar-item-h-padding;
     padding-right: $mc-navbar-item-h-padding;
+    background-color: transparent;
+    border: none;
 }
 
 %mc-navbar-brand-base {

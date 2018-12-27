@@ -1,98 +1,106 @@
-$black-87-opacity: rgba(black, 0.87);
 $black-12-opacity: rgba(black, 0.12);
 $black-6-opacity:  rgba(black, 0.06);
 
-$white-87-opacity: rgba(white, 0.87);
 $white-12-opacity: rgba(white, 0.12);
-$white-6-opacity:  rgba(white, 0.06);
 
-$dark-disabled-text: rgba(black, 0.5);
+$dark-text-default:     #4d4d4d;
+$dark-text-secondary:   #999999;
+$dark-text-disabled:    #b3b3b3;
+
+$dark-icon-secondary:   #cccccc;
+
+$light-text-default:    #f0f0f0;
+$light-text-secondary:  #999999;
+$light-text-disabled:   #999999;
+
+$light-icon-secondary:  #999999;
 
 $mc-blue: (
-    40: #f6fbfd,
-    60: #eaf4fb,
-    100: #d9ebf7,
-    200: #acd2ec,
+    40: #f5fafd,
+    60: #ebf4fb,
+    100: #d8eaf7,
+    200: #aad1ec,
     300: #7fbae1,
-    400: #56a3d7,
+    400: #57a4d7,
     500: #338fcc,
-    560: #277cb4,
+    560: #277bb3,
     600: #206ea2,
-    700: #114f78,
-    800: #07304b,
+    700: #114e77,
+    800: #07314d,
     A100: rgba(0, 153, 255, 0.15),
     A200: rgba(0, 153, 255, 0.3),
     contrast: (
-        40: $black-87-opacity,
-        60: $black-87-opacity,
-        100: $black-87-opacity,
-        200: $black-87-opacity,
-        300: $black-87-opacity,
-        400: $black-87-opacity,
+        40: $dark-text-default,
+        60: $dark-text-default,
+        100: $dark-text-default,
+        200: $dark-text-default,
+        300: $dark-text-default,
+        400: white,
         500: white,
         560: white,
         600: white,
         700: white,
-        800: $white-87-opacity,
-        A100: $black-87-opacity,
-        A200: white
+        800: white,
+        A100: $dark-text-default,
+        A200: white,
     )
 );
 
 $mc-green: (
     40: #f6fbf4,
-    60: #ecf8e8,
-    100: #dcf1d5,
-    200: #b4dfa5,
-    300: #90cd7a,
-    400: #6fbb54,
-    500: #52a932,
-    560: #439127,
-    600: #3a8320,
-    700: #276412,
-    800: #164007,
+    60: #edf8e9,
+    100: #dcf1d4,
+    200: #b4dea4,
+    300: #8fcc79,
+    400: #6fba53,
+    500: #52a832,
+    560: #449327,
+    600: #3b8520,
+    700: #276211,
+    800: #163f07,
     A100: rgba(68, 255, 0, 0.15),
     contrast: (
-        40: $black-87-opacity,
-        60: $black-87-opacity,
-        100: $black-87-opacity,
-        200: $black-87-opacity,
-        300: $black-87-opacity,
-        400: $black-87-opacity,
-        500: $black-87-opacity,
+        40: $dark-text-default,
+        60: $dark-text-default,
+        100: $dark-text-default,
+        200: $dark-text-default,
+        300: $dark-text-default,
+        400: white,
+        500: white,
         560: white,
         600: white,
         700: white,
-        800: $white-87-opacity,
-        A100: $black-87-opacity
+        800: white,
+        A100: $dark-text-default,
     )
 );
 
 $mc-red: (
     40: #fef7f6,
-    60: #fcefed,
-    100: #fadfdb,
-    200: #f4b8ae,
-    300: #ec9183,
-    400: #e66d5b,
-    500: #e04f38,
-    560: #e04f38,
-    600: #b43622,
-    700: #822112,
+    60: #fcefec,
+    100: #fadeda,
+    200: #f4b7ae,
+    300: #ed9284,
+    400: #e76e5c,
+    500: #e04d36,
+    560: #c43e29,
+    600: #b23522,
+    700: #832112,
     800: #541208,
     A100: rgba(224, 79, 56, 0.15),
     contrast: (
-        40: $black-87-opacity,
-        60: $black-87-opacity,
-        100: $black-87-opacity,
-        200: $black-87-opacity,
-        300: $black-87-opacity,
-        400: $black-87-opacity,
+        40: $dark-text-default,
+        60: $dark-text-default,
+        100: $dark-text-default,
+        200: $dark-text-default,
+        300: $dark-text-default,
+        400: white,
         500: white,
+        560: white,
         600: white,
         700: white,
-        800: $white-87-opacity,
-        A100: $black-87-opacity
+        800: white,
+        A100: $dark-text-default,
     )
 );
 
@@ -104,92 +112,136 @@ $mc-grey: (
     300: #b3b3b3,
     400: #999999,
     500: #808080,
-    560: #808080,
+    560: #707070,
     600: #666666,
     700: #4d4d4d,
     800: #333333,
+    A40: rgba(0, 0, 0, 0.04),
+    A60: rgba(0, 0, 0, 0.06),
+    A100: rgba(0, 0, 0, 0.1),
+    A200: rgba(0, 0, 0, 0.2),
+    A300: rgba(0, 0, 0, 0.3),
+    A500: rgba(0, 0, 0, 0.5),
     contrast: (
-        40: $black-87-opacity,
-        60: $black-87-opacity,
-        100: $black-87-opacity,
-        200: $black-87-opacity,
-        300: $black-87-opacity,
-        400: $black-87-opacity,
-        500: $black-87-opacity,
-        600: $white-87-opacity,
-        700: $white-87-opacity,
-        800: $white-87-opacity
+        40: $dark-text-default,
+        60: $dark-text-default,
+        100: $dark-text-default,
+        200: $dark-text-default,
+        300: $dark-text-default,
+        400: white,
+        500: white,
+        560: white,
+        600: white,
+        700: white,
+        800: white,
     )
 );
 
 $mc-yellow: (
-    40: #fdf9f2,
-    60: #fcf6e8,
-    100: #f8ecd3,
-    200: #f0d399,
-    300: #e8bd69,
-    400: #dfa83a,
-    500: #d9950d,
-    560: #f57f17,
+    40: #fdfaf3,
+    60: #fcf5e8,
+    100: #f8ebd1,
+    200: #f0d49b,
+    300: #e7bd68,
+    400: #dfa739,
+    500: #d6930d,
+    560: #bb800a,
     600: #aa7408,
-    700: #7c5404,
+    700: #7d5504,
     800: #503602,
     A100: rgba(255, 170, 0, 0.15),
     contrast: (
-        40: $black-87-opacity,
-        60: $black-87-opacity,
-        100: $black-87-opacity,
-        200: $black-87-opacity,
-        300: $black-87-opacity,
-        400: $black-87-opacity,
-        500: $black-87-opacity,
-        560: $black-87-opacity,
-        600: $black-87-opacity,
-        700: $black-87-opacity,
-        800: $black-87-opacity,
-        A100: $black-87-opacity
+        40: $dark-text-default,
+        60: $dark-text-default,
+        100: $dark-text-default,
+        200: $dark-text-default,
+        300: $dark-text-default,
+        400: white,
+        500: white,
+        560: white,
+        600: white,
+        700: white,
+        800: white,
+        A100: $dark-text-default,
     )
-
 );
 
-// Foreground palette for light themes.
+
 $mc-light-theme-foreground: (
-    base:              black,
-    disabled:          $dark-disabled-text,
+    base:              black, //скорей всего это fg-default-text
+    disabled:          $dark-text-disabled,
     disabled-button:   rgba(black, 0.26),
-    disabled-text:     rgba(black, 0.3),
     hint-text:         rgba(black, 0.38),
     icon:              rgba(black, 0.54),
-    text:              rgba(black, 0.87),
-    secondary-text:    rgba(black, 0.54),
+    secondary-text:    rgba(black, 0.54), //скорей всего это fg-less-contrast-text
+
+    // ↓ новое
+    text:               $dark-text-default,
+    less-contrast-text: $dark-text-secondary,
+    disabled-text:      $dark-text-disabled,
+
+    default-icon:       rgba(transparent, 0.45),
+
+    divider:            map-get($mc-grey, 100)
 );
 
-// Background palette for light themes.
-$mc-light-theme-background: (
-    hover: rgba(black, 0.05),
-    background: white,
-    disabled-button: $black-12-opacity,
-    focused-button: $black-6-opacity,
-    disabled-list-option: #CCC
-);
-
-// Foreground palette for dark themes.
 $mc-dark-theme-foreground: (
-    base:              white,
-    disabled:          rgba(white, 0.3),
-    disabled-button:   rgba(white, 0.3),
-    disabled-text:     rgba(white, 0.3),
-    hint-text:         rgba(white, 0.3),
-    secondary-text:    rgba(white, 0.7),
-    icon:              white,
-    icons:             white,
-    text:              white
+    base:               white,
+    disabled:           rgba(white, 0.3),
+    disabled-button:    rgba(white, 0.3),
+    hint-text:          rgba(white, 0.3),
+    icon:               white,
+    secondary-text:     rgba(white, 0.7),
+
+    // ↓ новое
+    text:               $light-text-default,
+    less-contrast-text: $light-text-secondary,
+    disabled-text:      $light-text-disabled,
+
+    default-icon:       rgba(white, 1),
+
+    divider:            map-get($mc-grey, 600)
 );
 
-// Background palette for dark themes.
+$mc-light-theme-background: (
+    disabled-button:      $black-12-opacity,
+    selected-button:      grey,
+    focused-button:       $black-6-opacity,
+    disabled-list-option: #CCC,
+
+    // ↓ новое
+    background:           white,
+    // todo not used
+    bg-content:           map-get($mc-grey, 60),
+    bg-dropdowns:         map-get($mc-grey, 700),
+
+    button-bg:            map-get($mc-grey, 60),
+    button-border:        map-get($mc-grey, 200),
+    disabled-overlay:     rgba(white, 0.3),
+
+    hover:                rgba(black, 0.05),
+
+    in-shadow:            inset 0 1px 2px 0 rgba(black, 0.2),
+);
+
 $mc-dark-theme-background: (
-    background: #303030,
-    disabled-button: $white-12-opacity,
-    selected-button: grey,
-    selected-disabled-button: grey
+    disabled-button:      $white-12-opacity,
+    selected-button:      grey,
+    focused-button:       $black-6-opacity,
+    disabled-list-option: #CCC,
+
+    // ↓ новое
+    background:           map-get($mc-grey, 800),
+    // todo not used
+    bg-content:           map-get($mc-grey,  60),
+    bg-dropdowns:         white,
+
+    // цвет бордера зависит от палитры
+    button-bg:            map-get($mc-grey, 600),
+    button-border:        map-get($mc-grey, 500),
+    disabled-overlay:     rgba(black, 0.2),
+
+    hover:                rgba(white, 0.05),
+
+    in-shadow:            inset 1px 2px 2px 0 rgba(black, 0.2),
 );

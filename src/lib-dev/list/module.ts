@@ -1,16 +1,16 @@
-import { Component, NgModule } from '@angular/core';
+import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import { McListModule } from '@ptsecurity/mosaic/list';
-import { McListSelectionChange } from '@ptsecurity/mosaic/list/list-selection.component';
+import { McListModule, McListSelectionChange } from '@ptsecurity/mosaic/list';
 
 
 @Component({
     selector: 'app',
     template: require('./template.html'),
-    styleUrls: ['./styles.scss']
+    styleUrls: ['./styles.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent {
     typesOfShoes = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
