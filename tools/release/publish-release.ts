@@ -63,7 +63,7 @@ class PublishReleaseTask extends BaseReleaseTask {
     async run() {
         console.log();
         console.log(chalk.green('-----------------------------------------'));
-        console.log(chalk.green(chalk.bold('  Angular Material release script')));
+        console.log(chalk.green(chalk.bold('  Mosaic release script')));
         console.log(chalk.green('-----------------------------------------'));
         console.log();
 
