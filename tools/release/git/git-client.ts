@@ -9,8 +9,7 @@ import { spawnSync } from 'child_process';
  */
 export class GitClient {
 
-    constructor(public projectDir: string, public remoteGitUrl: string) {
-    }
+    constructor(public projectDir: string, public remoteGitUrl: string) {}
 
     /** Gets the currently checked out branch for the project directory. */
     getCurrentBranch() {
@@ -52,7 +51,7 @@ export class GitClient {
 
     /** Gets the title of a specified commit reference. */
     getCommitTitle(commitRef: string): string {
-        return spawnSync('git', ['log', '-n1', '--format', '%s', commitRef], {cwd: this.projectDir})
+        return spawnSync('git', ['log', '-n1', '--format=%s', commitRef], {cwd: this.projectDir})
             .stdout.toString().trim();
     }
 
