@@ -1,4 +1,5 @@
 // tslint:disable:no-console
+require('dotenv').config();
 
 import * as OctokitApi from '@octokit/rest';
 import chalk from 'chalk';
@@ -9,6 +10,7 @@ import { join } from 'path';
 
 import { BaseReleaseTask } from './base-release-task';
 import { promptAndGenerateChangelog } from './changelog';
+import { CONFIG } from './config';
 import { GitClient } from './git/git-client';
 import { getGithubBranchCommitsUrl } from './git/github-urls';
 import { promptForNewVersion } from './prompt/new-version-prompt';
@@ -74,6 +76,11 @@ class StageReleaseTask extends BaseReleaseTask {
         }
 
         this.githubApi = new OctokitApi();
+
+        this.githubApi.authenticate({
+            type: 'token',
+            token: CONFIG.github.token
+        });
     }
 
     async run() {
