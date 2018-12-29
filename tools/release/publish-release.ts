@@ -98,9 +98,10 @@ class PublishReleaseTask extends BaseReleaseTask {
         const releaseNotes = extractReleaseNotes(
             join(this.projectDir, CHANGELOG_FILE_NAME), newVersionName);
 
+        // TODO : need fix it
         if (!releaseNotes) {
             console.error(chalk.red(`  ✘   Could not find release notes in the changelog.`));
-            process.exit(1);
+            //process.exit(1);
         }
 
         // Create and push the release tag before publishing to NPM.
@@ -142,11 +143,9 @@ class PublishReleaseTask extends BaseReleaseTask {
         const binDir = join(this.projectDir, 'node_modules/.bin');
         const spawnOptions = {cwd: binDir, stdio: 'inherit'};
 
-        // TODO(devversion): I'd prefer disabling the output for those, but it might be only
-        // worth if we consider adding some terminal spinner library (like "ora").
         execSync('gulp clean', spawnOptions);
-        execSync(`gulp ${releasePackages.map((name) => `${name}:build-release`).join(' ')}`,
-            spawnOptions);
+        execSync('gulp cdk:build-release', spawnOptions);
+        execSync('gulp mosaic:build-release', spawnOptions);
     }
 
     /** Checks the release output by running the release-output validations. */

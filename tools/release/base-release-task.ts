@@ -70,7 +70,7 @@ export class BaseReleaseTask {
     if (this.git.hasUncommittedChanges()) {
       console.error(chalk.red(`  ✘   There are changes which are not committed and should be ` +
         `discarded.`));
-      process.exit(1);
+      //process.exit(1);
     }
   }
 
