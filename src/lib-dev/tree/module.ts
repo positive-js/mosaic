@@ -15,21 +15,21 @@ import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { BehaviorSubject, Observable, of as observableOf } from 'rxjs';
 
 
-class FileNode {
+export class FileNode {
     children: FileNode[];
     name: string;
     type: any;
 }
 
 /** Flat node with expandable and level information */
-class FileFlatNode {
+export class FileFlatNode {
     name: string;
     type: any;
     level: number;
     expandable: boolean;
 }
 
-const TREE_DATA = `
+export const TREE_DATA = `
   {
   "rootNode_1": "app",
   "Pictures": {
@@ -68,7 +68,7 @@ const TREE_DATA = `
 }`;
 
 @Injectable()
-class FileDatabase {
+export class FileDatabase {
     dataChange: BehaviorSubject<FileNode[]> = new BehaviorSubject<FileNode[]>([]);
 
     get data(): FileNode[] { return this.dataChange.value; }

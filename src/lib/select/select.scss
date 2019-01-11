@@ -61,10 +61,10 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
     text-overflow: ellipsis;
 
     white-space: nowrap;
-}
 
-.mc-select__matcher-text {
-    //@include mc-truncate-line();
+    & > span {
+        width: 100%;
+    }
 }
 
 .mc-select__match-list {
@@ -89,8 +89,6 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
     justify-content: space-between;
 
     width: 100%;
-
-    cursor: pointer;
 
     & .mc-select__match-hidden-text {
         flex: 0 0 70px;
@@ -162,7 +160,7 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
 }
 
 .mc-form-field-type-mc-select {
-    &:not(.mc-form-field-disabled) .mc-form-field-flex {
+    &:not(.mc-disabled) .mc-form-field-flex {
         cursor: pointer;
     }
 

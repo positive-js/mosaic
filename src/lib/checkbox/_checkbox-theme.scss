@@ -3,8 +3,6 @@
 @import '../core/styles/variables';
 
 @mixin mc-checkbox-theme($theme) {
-    $hover-lighten: 5%;
-
     $primary: map-get($theme, primary);
     $second: map-get($theme, second);
 
@@ -61,7 +59,7 @@
 
             .mc-checkbox-checkmark,
             .mc-checkbox-mixedmark {
-                color: mc-color($second, 200);
+                color: map-get($foreground, disabled-text);
             }
         }
     }

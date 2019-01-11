@@ -1,19 +1,20 @@
 @mixin mc-splitter-theme($theme) {
-    $primary: map-get($theme, primary);
     $second: map-get($theme, second);
 
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    $is-dark: map-get($theme, is-dark);
+
     mc-gutter {
-        background-color: mc-color($second, 60);
-        color: mc-color($second, 600);
+        background-color: map-get($background, button-bg);
 
         &:hover {
-            background-color: mc-color($second, 100);
-            color: mc-color($second, 800);
+            background-color: mix(map-get($background, button-bg), map-get($background, hover));
         }
 
         &[disabled] {
-            background-color: mc-color($second, 60);
-            color: mc-color($second, 600);
+            background-color: mix(map-get($background, disabled-overlay), map-get($background, hover));
         }
     }
 }

@@ -2,11 +2,12 @@
 @import '../theming/palette';
 
 @mixin mc-panel-theme($theme) {
-    $backgroundColor: map-get(map-get($theme, background), background);
-    $borderColor: map-get($mc-grey, 60);
+    $background: map-get($theme, background);
+
+    $is-dark: map-get($theme, is-dark);
 
     .mc-panel {
-        background-color: $backgroundColor;
-        border: 1px solid $borderColor;
+        background-color: map-get($background, background);
+        border: 1px solid map-get($mc-grey, if($is-dark, 700, 60));
     }
 }

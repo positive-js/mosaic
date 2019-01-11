@@ -423,6 +423,7 @@ export class McSelect extends _McSelectMixinBase implements
     @Output() readonly valueChange: EventEmitter<any> = new EventEmitter<any>();
 
     hiddenItems: number = 0;
+    oneMoreText: string = '...ещё';
 
     /** Whether or not the overlay panel is open. */
     private _panelOpen = false;

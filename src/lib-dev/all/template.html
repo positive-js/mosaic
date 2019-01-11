@@ -1,0 +1,1121 @@
+<div class="dev-row">
+    <div class="dev-box">
+        <h1>Alert</h1>
+
+        <div class="mc-alert mc-alert_error mc-alert_dismissible">
+            <i mc-icon="mc-info_16" class="mc-alert__icon"></i>
+            Alert text
+            // todo сделать отдельную кнопку
+            <button class="mc-alert__close">
+                <i class="mc-icon_light" mc-icon="mc-close-M_16" color="second"></i>
+            </button>
+        </div>
+        <div class="mc-alert mc-alert_warning mc-alert_dismissible">
+            <i mc-icon="mc-info_16" class="mc-alert__icon"></i>
+            Alert text
+            <button class="mc-alert__close">
+                <i class="mc-icon_light" mc-icon="mc-close-M_16" color="second"></i>
+            </button>
+        </div>
+        <div class="mc-alert mc-alert_success mc-alert_dismissible">
+            <i mc-icon="mc-info_16" class="mc-alert__icon"></i>
+            Alert text
+            <button class="mc-alert__close">
+                <i class="mc-icon_light" mc-icon="mc-close-M_16" color="second"></i>
+            </button>
+        </div>
+        <div class="mc-alert mc-alert_info mc-alert_dismissible">
+            <i mc-icon="mc-info_16" class="mc-alert__icon"></i>
+            Alert text
+            <button class="mc-alert__close">
+                <i class="mc-icon_light" mc-icon="mc-close-M_16" color="second"></i>
+            </button>
+        </div>
+        <div class="mc-alert mc-alert_dismissible">
+            <i mc-icon="mc-info_16" class="mc-alert__icon"></i>
+            Alert text
+            <button class="mc-alert__close">
+                <i class="mc-icon_light" mc-icon="mc-close-M_16" color="second"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="dev-box">
+        <h1>Badge</h1>
+
+        <p>
+            <span class="mc-badge">Новый</span>
+            <span class="mc-badge mc-badge_caps">в работе</span>
+        </p>
+
+        <p>
+            <span class="mc-badge mc-badge_light">Новый</span>
+            <span class="mc-badge mc-badge_light mc-badge_caps">в работе</span>
+        </p>
+
+        <p>
+            <span class="mc-badge mc-badge_transparent">Новый</span>
+            <span class="mc-badge mc-badge_transparent mc-badge_caps">в работе</span>
+        </p>
+
+        <p>
+            <span class="mc-badge mc-badge_primary">Новый</span>
+            <span class="mc-badge mc-badge_primary mc-badge_caps">в работе</span>
+        </p>
+
+        <p>
+            <span class="mc-badge mc-badge_warning">Новый</span>
+            <span class="mc-badge mc-badge_warning mc-badge_caps">в работе</span>
+        </p>
+
+        <p>
+            <span class="mc-badge mc-badge_error">Новый</span>
+            <span class="mc-badge mc-badge_error mc-badge_caps">в работе</span>
+        </p>
+
+        <p>
+            <span class="mc-badge mc-badge_success">Новый</span>
+            <span class="mc-badge mc-badge_success mc-badge_caps">в работе</span>
+        </p>
+    </div>
+
+    <div class="dev-box">
+        <h1>Button</h1>
+
+        <button mc-icon-button color="primary" disabled><i mc-icon="mc-play_16"></i>disabled</button>&nbsp;
+        <button mc-icon-button color="primary"><i mc-icon="mc-play_16"></i>normal</button>&nbsp;
+        <button class="cdk-keyboard-focused" mc-icon-button color="primary"><i mc-icon="mc-play_16"></i>focus</button>&nbsp;
+
+        <br>
+        <br>
+
+        <button mc-icon-button color="second" disabled><i mc-icon="mc-play_16"></i>disabled</button>&nbsp;
+        <button mc-icon-button color="second"><i mc-icon="mc-play_16"></i>normal</button>&nbsp;
+        <button class="cdk-keyboard-focused" mc-icon-button color="second"><i mc-icon="mc-play_16"></i>focus</button>&nbsp;
+
+        <br>
+        <br>
+
+        <button mc-icon-button color="error" disabled><i mc-icon="mc-play_16"></i>disabled</button>&nbsp;
+        <button mc-icon-button color="error"><i mc-icon="mc-play_16"></i>normal</button>&nbsp;
+        <button class="cdk-keyboard-focused" mc-icon-button color="error"><i mc-icon="mc-play_16"></i>focus</button>&nbsp;
+    </div>
+
+    <div class="dev-box">
+        <h1>Card</h1>
+
+        <div class="line">
+            <mc-card class="mc-card_info" [selected]="s1" (selectedChange)="s1 = !s1">
+                <div class="simple-content">
+                    Content
+                </div>
+            </mc-card>
+
+            <mc-card class="mc-card_warning" [selected]="s2" (selectedChange)="s2 = !s2">
+                <div class="simple-content">
+                    Content 2
+                </div>
+            </mc-card>
+
+            <mc-card class="mc-card_success" [selected]="s3" (selectedChange)="s3 = !s3">
+                <div class="simple-content">
+                    Content 3
+                </div>
+            </mc-card>
+
+            <mc-card class="mc-card_error" [selected]="s4" (selectedChange)="s4 = !s4">
+                <div class="simple-content">
+                    Content 4
+                </div>
+            </mc-card>
+        </div>
+
+        <div class="line">
+            <mc-card class="mc-card_info mc-card_white" [selected]="s1" (selectedChange)="s1 = !s1">
+                <div class="simple-content">
+                    Content
+                </div>
+            </mc-card>
+
+            <mc-card class="mc-card_warning mc-card_white" [selected]="s2" (selectedChange)="s2 = !s2">
+                <div class="simple-content">
+                    Content 2
+                </div>
+            </mc-card>
+
+            <mc-card class="mc-card_success mc-card_white" [selected]="s3" (selectedChange)="s3 = !s3">
+                <div class="simple-content">
+                    Content 3
+                </div>
+            </mc-card>
+
+            <mc-card class="mc-card_error mc-card_white" [selected]="s4" (selectedChange)="s4 = !s4">
+                <div class="simple-content">
+                    Content 4
+                </div>
+            </mc-card>
+        </div>
+
+        <div class="line">
+            <mc-card class="mc-card_info" [selected]="s1" (selectedChange)="s1 = !s1" [readonly]="true">
+                <div class="simple-content">
+                    Content
+                </div>
+            </mc-card>
+
+            <mc-card class="mc-card_warning" [selected]="s2" (selectedChange)="s2 = !s2" [readonly]="true">
+                <div class="simple-content">
+                    Content 2
+                </div>
+            </mc-card>
+
+            <mc-card class="mc-card_success" [selected]="s3" (selectedChange)="s3 = !s3" [readonly]="true">
+                <div class="simple-content">
+                    Content 3
+                </div>
+            </mc-card>
+
+            <mc-card class="mc-card_error" [selected]="s4" (selectedChange)="s4 = !s4" [readonly]="true">
+                <div class="simple-content">
+                    Content 4
+                </div>
+            </mc-card>
+        </div>
+    </div>
+
+    <div class="dev-box">
+        <h1>Checkbox</h1>
+
+        <p><mc-checkbox>Default</mc-checkbox></p>
+
+        <p><mc-checkbox [(ngModel)]="checked[0]">Checked</mc-checkbox></p>
+
+        <p><mc-checkbox [(ngModel)]="checked[2]" [indeterminate]="true">Indeterminate</mc-checkbox></p>
+
+        <p><mc-checkbox [disabled]="true"> Default disabled</mc-checkbox></p>
+
+        <p><mc-checkbox [(ngModel)]="checked" disabled="disabled">Checked disabled</mc-checkbox></p>
+
+        <p>
+            <mc-checkbox [(ngModel)]="checked[2]"
+                         [indeterminate]="true"
+                         disabled="disabled">
+                Indeterminate disabled
+            </mc-checkbox>
+        </p>
+    </div>
+
+    <div class="dev-box">
+        <h1>Dropdown</h1>
+
+        <span class="mc-button-group">
+            <button mc-button>dropdown</button>
+
+            <button mc-icon-button [mcDropdownTriggerFor]="appDropdown">
+                <i mc-icon="mc-angle-L_16"></i>
+            </button>
+        </span>
+
+        <br>
+
+        <button mc-icon-button [mcDropdownTriggerFor]="appDropdown">
+            dropdown
+            <i mc-icon="mc-angle-L_16"></i>
+        </button>
+
+        <br>
+        <br>
+
+        <mc-dropdown #appDropdown="mcDropdown">
+            <button mc-dropdown-item>
+                Point 1
+                <div class="mc-dropdown__item-caption">Some info</div>
+            </button>
+            <button mc-dropdown-item>
+                <i mc-icon="mc-search_16"></i>
+                Very Long Point
+            </button>
+            <h5>Additional info</h5>
+            <button mc-dropdown-item disabled>Disabled</button>
+            <button mc-dropdown-item>Point 2</button>
+            <button mc-dropdown-item>
+                <a class="mc-link">
+                    <span class="mc-link__text">Link</span>
+                    <i mc-icon="mc-angle-L_16" class="mc-link__icon"></i>
+                </a>
+            </button>
+            <button mc-dropdown-item>Point 3</button>
+        </mc-dropdown>
+    </div>
+
+    <div class="dev-box">
+        <h1>Icons</h1>
+        <table>
+            <thead>
+            <tr>
+                <td>default</td>
+                <td>primary</td>
+                <td>second</td>
+                <td>error</td>
+            </tr>
+            </thead>
+            <tr>
+                <td><i mc-icon="mc-angle-L_16"></i></td>
+                <td><i mc-icon="mc-angle-L_16" color="primary"></i></td>
+                <td><i mc-icon="mc-angle-L_16" color="second"></i></td>
+                <td><i mc-icon="mc-angle-L_16" color="error"></i></td>
+            </tr>
+            <tr>
+                <td><i mc-icon="mc-calendar_16"></i></td>
+                <td><i mc-icon="mc-calendar_16" color="primary"></i></td>
+                <td><i mc-icon="mc-calendar_16" color="second"></i></td>
+                <td><i mc-icon="mc-calendar_16" color="error"></i></td>
+            </tr>
+            <tr>
+                <td><i mc-icon="mc-clock_16"></i></td>
+                <td><i mc-icon="mc-clock_16" color="primary"></i></td>
+                <td><i mc-icon="mc-clock_16" color="second"></i></td>
+                <td><i mc-icon="mc-clock_16" color="error"></i></td>
+            </tr>
+            <tr>
+                <td><i mc-icon="mc-folder-opened_16"></i></td>
+                <td><i mc-icon="mc-folder-opened_16" color="primary"></i></td>
+                <td><i mc-icon="mc-folder-opened_16" color="second"></i></td>
+                <td><i mc-icon="mc-folder-opened_16" color="error"></i></td>
+            </tr>
+        </table>
+
+        <br><br><br>
+
+        disabled
+        <table>
+            <thead>
+            <tr>
+                <td>default</td>
+                <td>primary</td>
+                <td>second</td>
+                <td>error</td>
+            </tr>
+            </thead>
+            <tr>
+                <td><i class="mc-disabled" mc-icon="mc-angle-L_16"></i></td>
+                <td><i class="mc-disabled" mc-icon="mc-angle-L_16" color="primary"></i></td>
+                <td><i class="mc-disabled" mc-icon="mc-angle-L_16" color="second"></i></td>
+                <td><i class="mc-disabled" mc-icon="mc-angle-L_16" color="error"></i></td>
+            </tr>
+            <tr>
+                <td><i class="mc-disabled" mc-icon="mc-calendar_16"></i></td>
+                <td><i class="mc-disabled" mc-icon="mc-calendar_16" color="primary"></i></td>
+                <td><i class="mc-disabled" mc-icon="mc-calendar_16" color="second"></i></td>
+                <td><i class="mc-disabled" mc-icon="mc-calendar_16" color="error"></i></td>
+            </tr>
+            <tr>
+                <td><i class="mc-disabled" mc-icon="mc-clock_16"></i></td>
+                <td><i class="mc-disabled" mc-icon="mc-clock_16" color="primary"></i></td>
+                <td><i class="mc-disabled" mc-icon="mc-clock_16" color="second"></i></td>
+                <td><i class="mc-disabled" mc-icon="mc-clock_16" color="error"></i></td>
+            </tr>
+            <tr>
+                <td><i class="mc-disabled" mc-icon="mc-folder-opened_16"></i></td>
+                <td><i class="mc-disabled" mc-icon="mc-folder-opened_16" color="primary"></i></td>
+                <td><i class="mc-disabled" mc-icon="mc-folder-opened_16" color="second"></i></td>
+                <td><i class="mc-disabled" mc-icon="mc-folder-opened_16" color="error"></i></td>
+            </tr>
+        </table>
+
+        <br><br><br>
+
+        light
+        <table>
+            <thead>
+            <tr>
+                <td>default</td>
+                <td>primary</td>
+                <td>second</td>
+                <td>error</td>
+            </tr>
+            </thead>
+            <tr>
+                <td><i class="mc-icon_light" mc-icon="mc-angle-L_16"></i></td>
+                <td><i class="mc-icon_light" mc-icon="mc-angle-L_16" color="primary"></i></td>
+                <td><i class="mc-icon_light" mc-icon="mc-angle-L_16" color="second"></i></td>
+                <td><i class="mc-icon_light" mc-icon="mc-angle-L_16" color="error"></i></td>
+            </tr>
+            <tr>
+                <td><i class="mc-icon_light" mc-icon="mc-calendar_16"></i></td>
+                <td><i class="mc-icon_light" mc-icon="mc-calendar_16" color="primary"></i></td>
+                <td><i class="mc-icon_light" mc-icon="mc-calendar_16" color="second"></i></td>
+                <td><i class="mc-icon_light" mc-icon="mc-calendar_16" color="error"></i></td>
+            </tr>
+            <tr>
+                <td><i class="mc-icon_light" mc-icon="mc-clock_16"></i></td>
+                <td><i class="mc-icon_light" mc-icon="mc-clock_16" color="primary"></i></td>
+                <td><i class="mc-icon_light" mc-icon="mc-clock_16" color="second"></i></td>
+                <td><i class="mc-icon_light" mc-icon="mc-clock_16" color="error"></i></td>
+            </tr>
+            <tr>
+                <td><i class="mc-icon_light" mc-icon="mc-folder-opened_16"></i></td>
+                <td><i class="mc-icon_light" mc-icon="mc-folder-opened_16" color="primary"></i></td>
+                <td><i class="mc-icon_light" mc-icon="mc-folder-opened_16" color="second"></i></td>
+                <td><i class="mc-icon_light" mc-icon="mc-folder-opened_16" color="error"></i></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="dev-box">
+        <h1>Input</h1>
+
+        <mc-form-field>
+            <input mcInput [(ngModel)]="numberValue" type="number" placeholder="Number MaxMin Step"
+                   [min]="min" max="7" step="0.5" big-step="1.5">
+            <mc-stepper></mc-stepper>
+        </mc-form-field>
+
+        <br>
+        <br>
+
+        <mc-form-field class="mc-focused">
+            <input mcInput [(ngModel)]="value" placeholder="Placeholder">
+
+            <i mcSuffix mc-icon="mc-calendar_16" color="second"></i>
+        </mc-form-field>
+
+        <br><br>
+
+        <header>With placeholder and monospace:</header>
+
+        <mc-form-field>
+            <input mcInput mcInputMonospace [(ngModel)]="value" placeholder="Placeholder">
+        </mc-form-field>
+
+        <br><br>
+
+        <header>With placeholder and hint:</header>
+
+        <mc-form-field>
+            <input mcInput [(ngModel)]="value" placeholder="Placeholder">
+
+            <mc-hint>Hint under field</mc-hint>
+        </mc-form-field>
+
+        <br><br>
+
+        <header>With placeholder, hint and disabled:</header>
+
+        <mc-form-field>
+            <input mcInput [(ngModel)]="value" placeholder="Placeholder" [disabled]="true">
+
+            <mc-hint>Hint under field</mc-hint>
+        </mc-form-field>
+
+        <br><br>
+
+        <header>With clear-button:</header>
+
+        <mc-form-field>
+            <input mcInput [(ngModel)]="value" placeholder="Placeholder">
+
+            <mc-cleaner></mc-cleaner>
+        </mc-form-field>
+
+        <br><br>
+
+        <header>With prefix:</header>
+
+        <mc-form-field>
+            <i mcPrefix mc-icon="mc-search_16" color="second"></i>
+
+            <input mcInput [(ngModel)]="value" placeholder="Placeholder">
+        </mc-form-field>
+
+        <br><br>
+
+        <header>With suffix:</header>
+
+        <mc-form-field>
+            <input mcInput [(ngModel)]="value" placeholder="Placeholder">
+
+            <i mcSuffix mc-icon="mc-calendar_16" color="second"></i>
+        </mc-form-field>
+
+        <br><br>
+
+        <header>Invalid with clear-button:</header>
+
+        <mc-form-field>
+            <input mcInput [(ngModel)]="value" placeholder="Placeholder" required minlength="4">
+
+            <mc-cleaner></mc-cleaner>
+        </mc-form-field>
+
+        <br><br>
+
+        <header>With placeholder, hint, prefix, cleaner and disabled:</header>
+
+        <mc-form-field>
+            <i mcPrefix mc-icon="mc-search_16"></i>
+
+            <input mcInput [(ngModel)]="value" placeholder="Placeholder" [disabled]="true">
+
+            <mc-cleaner></mc-cleaner>
+        </mc-form-field>
+
+        <br><br>
+
+        <header>Without borders:</header>
+
+        <mc-form-field mcFormFieldWithoutBorders>
+            <i mcPrefix mc-icon="mc-search_16" color="second"></i>
+
+            <input mcInput [(ngModel)]="value" placeholder="Placeholder">
+
+            <mc-cleaner></mc-cleaner>
+        </mc-form-field>
+    </div>
+
+    <div class="dev-box">
+        <h1>Layout</h1>
+
+        <mc-layout>
+            <mc-header>Header</mc-header>
+            <mc-content>Content</mc-content>
+            <mc-footer>Footer</mc-footer>
+        </mc-layout>
+
+        <br><br>
+
+        <mc-layout>
+            <mc-header>Header</mc-header>
+            <mc-layout>
+                <mc-content>Content</mc-content>
+                <mc-sidebar>Sidebar</mc-sidebar>
+            </mc-layout>
+        </mc-layout>
+
+        <br><br>
+
+        <mc-layout>
+            <mc-sidebar>Sidebar</mc-sidebar>
+            <mc-layout>
+                <mc-header>Header</mc-header>
+                <mc-content>Content</mc-content>
+                <mc-footer>Footer</mc-footer>
+            </mc-layout>
+        </mc-layout>
+
+        <br><br>
+
+        <mc-layout>
+            <mc-sidebar>Sidebar</mc-sidebar>
+            <mc-layout>
+                <mc-header>Header</mc-header>
+                <mc-content>Content</mc-content>
+                <mc-footer>Footer</mc-footer>
+            </mc-layout>
+            <mc-sidebar>Sidebar</mc-sidebar>
+        </mc-layout>
+    </div>
+
+    <div class="dev-box">
+        <h1>Link</h1>
+
+        <table cellpadding="10" cellspacing="10" style="margin: auto; text-align: left;">
+            <tr>
+                <td>Disabled</td>
+                <td>Normal</td>
+            </tr>
+            <tr>
+                <td><a class="mc-link" [disabled]="true" href=""><span class="mc-link__text">Сохранить</span></a></td>
+                <td><a class="mc-link"><span class="mc-link__text">Сохранить</span></a></td>
+            </tr>
+            <tr>
+                <td><a class="mc-link mc-link_dashed" [disabled]="true" href=""><span class="mc-link__text">Сохранить</span></a></td>
+                <td><a class="mc-link mc-link_dashed"><span class="mc-link__text">Сохранить</span></a></td>
+            </tr>
+            <tr>
+                <td>
+                    <a class="mc-link mc-link_underlined" [disabled]="true" href="">
+                        <span class="mc-link__text">Сохранить</span>
+                    </a>
+                </td>
+                <td>
+                    <a class="mc-link mc-link_underlined" href="">
+                        <span class="mc-link__text">Сохранить</span>
+                    </a>
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <a class="mc-link" [disabled]="true" href="">
+                        <span class="mc-link__text">Сохранить</span>
+                        <i mc-icon="mc-angle-L_16" class="mc-link__icon"></i>
+                    </a>
+                </td>
+                <td>
+                    <a class="mc-link">
+                        <span class="mc-link__text">Сохранить</span>
+                        <i mc-icon="mc-angle-L_16" class="mc-link__icon"></i>
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a class="mc-link mc-link_dashed" [disabled]="true" href="">
+                        <span class="mc-link__text ">Сохранить</span>
+                        <i mc-icon="mc-angle-L_16" class="mc-link__icon"></i>
+                    </a>
+                </td>
+                <td>
+                    <a class="mc-link mc-link_dashed">
+                        <span class="mc-link__text">Сохранить</span>
+                        <i mc-icon="mc-angle-L_16" class="mc-link__icon"></i>
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td><a class="mc-link mc-link_dashed" [disabled]="true" href="">
+                    <i mc-icon="mc-calendar_16" class="mc-link__icon"></i>
+                    <span class="mc-link__text">Сохранить</span>
+                    <i mc-icon="mc-angle-L_16" class="mc-link__icon"></i>
+                </a>
+                </td>
+                <td><a class="mc-link mc-link_dashed" >
+                    <i mc-icon="mc-calendar_16" class="mc-link__icon"></i>
+                    <span class="mc-link__text">Сохранить</span>
+                    <i mc-icon="mc-angle-L_16" class="mc-link__icon"></i>
+                </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="dev-box">
+        <h1>List</h1>
+
+        <mc-list-selection
+            class="mc-no-select"
+            [(ngModel)]="multipleSelected">
+            <mc-list-option value="Disabled" disabled>Disabled</mc-list-option>
+            <mc-list-option value="Normal">Normal</mc-list-option>
+            <mc-list-option value="Hovered" class="mc-hovered">Hovered</mc-list-option>
+            <mc-list-option value="Focused" class="mc-focused">Focused</mc-list-option>
+            <mc-list-option value="Selected" class="mc-selected">Selected</mc-list-option>
+        </mc-list-selection>
+    </div>
+
+    <div class="dev-box">
+        <h1>Modal</h1>
+
+        <button mc-button (click)="showConfirm()" style="margin-right: 18px;">Confirm</button>
+    </div>
+
+    <div class="dev-box">
+        <h1>Panel</h1>
+
+        <div class="mc-panel">
+            <div class="mc-panel__header">
+                <div class="mc-panel__title">
+                    <h1 class="mc-display-3 title">Some title</h1>
+                </div>
+                <div class="mc-panel__actions">
+                    <button mc-icon-button color="primary">
+                        <i mc-icon="mc-angle-L_16"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="mc-panel__content">
+                Vivamus suscipit tortor eget felis porttitor volutpat.
+                Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Quisque velit nisi,
+                pretium ut lacinia in, elementum id enim. Pellentesque in ipsum id orci porta dapibus. Curabitur
+                arcu erat, accumsan id imperdiet et, porttitor at sem. Donec sollicitudin molestie malesuada.
+                Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Mauris blandit aliquet elit,
+                eget tincidunt nibh pulvinar a. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
+            </div>
+            <div class="mc-panel__footer">
+                <div class="buttons-container">
+                    <button mc-button color="primary">Save</button>
+                    <button mc-button class="footer-button">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dev-box">
+        <h1>Progress bar</h1>
+
+        <div class="lines">
+            <div class="line-container">
+                <mc-progress-bar [value]="percent" [mode]="mode" color="primary"></mc-progress-bar>
+            </div>
+            <div class="line-container">
+                <mc-progress-bar [value]="percent" [mode]="mode" color="second"></mc-progress-bar>
+            </div>
+            <div class="line-container">
+                <mc-progress-bar [value]="percent" [mode]="mode" color="error"></mc-progress-bar>
+            </div>
+        </div>
+    </div>
+
+    <div class="dev-box container">
+        <h1>Progress spinner</h1>
+
+        <div class="spinners-container">
+            <ul class="spinners">
+                <li class="spinner-container">
+                    <mc-progress-spinner [value]="percent" [mode]="mode" color="primary"></mc-progress-spinner>
+                </li>
+                <li class="spinner-container">
+                    <mc-progress-spinner [value]="percent" [mode]="mode" color="second"></mc-progress-spinner>
+                </li>
+                <li class="spinner-container">
+                    <mc-progress-spinner [value]="percent" [mode]="mode" color="error"></mc-progress-spinner>
+                </li>
+            </ul>
+            <ul class="spinners">
+                <li class="spinner-container">
+                    <mc-progress-spinner [value]="percent" [mode]="mode" color="primary" class="big-spinner"></mc-progress-spinner>
+                </li>
+                <li class="spinner-container">
+                    <mc-progress-spinner [value]="percent" [mode]="mode" color="second" class="big-spinner"></mc-progress-spinner>
+                </li>
+                <li class="spinner-container">
+                    <mc-progress-spinner [value]="percent" [mode]="mode" color="error" class="big-spinner"></mc-progress-spinner>
+                </li>
+            </ul>
+            <ul class="spinners">
+                <li class="spinner-container">
+                    <mc-progress-spinner [value]="percent" [mode]="mode" color="primary" class="huge-spinner"></mc-progress-spinner>
+                </li>
+                <li class="spinner-container">
+                    <mc-progress-spinner [value]="percent" [mode]="mode" color="second" class="huge-spinner"></mc-progress-spinner>
+                </li>
+                <li class="spinner-container">
+                    <mc-progress-spinner [value]="percent" [mode]="mode" color="error" class="huge-spinner"></mc-progress-spinner>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="dev-box">
+        <h1>Radio</h1>
+
+        <mc-radio-group class="example-radio-group" [(ngModel)]="favoriteFruit">
+            <mc-radio-button class="example-radio-button" *ngFor="let season of fruits" [value]="season">
+                {{season}}
+            </mc-radio-button>
+        </mc-radio-group>
+
+        <p class="mc-headline">Disabled buttons</p>
+
+        <mc-radio-group class="example-radio-group">
+            <mc-radio-button
+                class="example-radio-button"
+                *ngFor="let data of selectionList"
+                name="data.value"
+                [disabled]="true"
+                [checked]="data.selected"
+                [value]="data.value">
+                {{data.name}}
+            </mc-radio-button>
+        </mc-radio-group>
+    </div>
+
+    <div class="dev-box">
+        <h1>Select</h1>
+
+        <div class="dev-container">
+            <mc-form-field>
+                <mc-select [(value)]="singleSelected">
+                    <mc-option value="Disabled" disabled>Disabled</mc-option>
+                    <mc-option value="Normal">Normal</mc-option>
+                    <mc-option value="Hovered">Hovered</mc-option>
+                    <mc-option value="Focused">Focused</mc-option>
+                    <mc-option value="Selected">Selected</mc-option>
+                    <mc-option value="Selected1">Selected1</mc-option>
+                    <mc-option value="Selected2">Selected2</mc-option>
+                    <mc-option value="Selected3">Selected3</mc-option>
+                    <mc-option value="Selected4">Selected4</mc-option>
+                    <mc-option value="Selected5">Selected5</mc-option>
+                    <mc-option value="Selected6">Selected6</mc-option>
+                    <mc-option value="Selected7">Selected7</mc-option>
+                    <mc-option value="Selected8">Selected8</mc-option>
+                    <mc-option value="Selected9">Selected9</mc-option>
+                    <mc-option value="Selected10">Selected10</mc-option>
+                </mc-select>
+            </mc-form-field>
+
+            <br><br>
+
+            <mc-form-field>
+                <mc-select [formControl]="singleSelectFormControl">
+                    <mc-option value="Normal">Normal</mc-option>
+                </mc-select>
+            </mc-form-field>
+
+            <br><br>
+
+            <mc-form-field>
+                <mc-select [(value)]="singleSelected" [disabled]="true">
+                    <mc-option value="Normal">Normal</mc-option>
+                </mc-select>
+            </mc-form-field>
+        </div>
+
+        <br>
+
+        <div class="dev-container">
+            <mc-form-field>
+                <mc-select multiple [(value)]="multipleSelected">
+                    <mc-option value="Disabled" disabled>Disabled</mc-option>
+                    <mc-option value="Normal">Normal</mc-option>
+                    <mc-option value="Hovered">Hovered</mc-option>
+                    <mc-option value="FocusedFocusedFocusedFocusedFocusedFocusedFocusedFocusedFocusedFocused">
+                        FocusedFocusedFocusedFocusedFocusedFocusedFocusedFocusedFocusedFocused
+                    </mc-option>
+                    <mc-option value="Selected">Selected</mc-option>
+                    <mc-option value="Selected1">Selected1</mc-option>
+                    <mc-option value="Selected2">Selected2</mc-option>
+                    <mc-option value="Selected3">Selected3</mc-option>
+                    <mc-option value="Selected4">Selected4</mc-option>
+                    <mc-option value="Selected5">Selected5</mc-option>
+                    <mc-option value="Selected6">Selected6</mc-option>
+                    <mc-option value="Selected7">Selected7</mc-option>
+                    <mc-option value="Selected8">Selected8</mc-option>
+                    <mc-option value="Selected9">Selected9</mc-option>
+                    <mc-option value="Selected10">Selected10</mc-option>
+                </mc-select>
+            </mc-form-field>
+
+            <br><br>
+
+            <mc-form-field>
+                <mc-select multiple [formControl]="multiSelectSelectFormControl">
+                    <mc-option value="Normal">Normal</mc-option>
+                    <mc-option value="Hovered">Hovered</mc-option>
+                    <mc-option value="Selected">Selected</mc-option>
+                    <mc-option value="Selected1">Selected1</mc-option>
+                </mc-select>
+            </mc-form-field>
+
+            <br><br>
+
+            <mc-form-field>
+                <mc-select multiple [(value)]="multipleSelected" [disabled]="true">
+                    <mc-option value="Normal">Normal</mc-option>
+                    <mc-option value="Hovered">Hovered</mc-option>
+                    <mc-option value="Selected">Selected</mc-option>
+                    <mc-option value="Selected1">Selected1</mc-option>
+                </mc-select>
+            </mc-form-field>
+        </div>
+    </div>
+
+    <div class="dev-box">
+        <h1>Tags</h1>
+
+        <mc-tag>Normal <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag class="mc-hovered">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag class="mc-focused">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag [disabled]="true">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>
+
+        <br><br>
+
+        <mc-tag color="primary">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag color="primary" class="mc-hovered">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag color="primary" class="mc-focused">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag color="primary" [disabled]="true">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>
+
+        <br><br>
+
+        <mc-tag color="error">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag color="error" class="mc-hovered">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag color="error" class="mc-focused">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag color="error" [disabled]="true">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>
+
+        <br><br>
+
+        mono<br>
+        <mc-tag class="mc-tag_mono">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag class="mc-hovered mc-tag_mono">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag class="mc-focused mc-tag_mono">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag [disabled]="true" class="mc-tag_mono">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>
+
+        <br><br>
+
+        <mc-tag color="primary" class="mc-tag_mono">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag color="primary" class="mc-tag_mono mc-hovered">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag color="primary" class="mc-tag_mono mc-focused">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag color="primary" [disabled]="true" class="mc-tag_mono">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>
+
+        <br><br>
+
+        <mc-tag color="error" class="mc-tag_mono">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag color="error" class="mc-tag_mono mc-hovered">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag color="error" class="mc-tag_mono mc-focused">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag color="error" [disabled]="true" class="mc-tag_mono">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>
+
+        <br><br>
+
+        CAPS<br>
+        <mc-tag class="mc-tag_caps">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag class="mc-hovered mc-tag_caps">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag class="mc-focused mc-tag_caps">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag [disabled]="true" class="mc-tag_caps">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>
+
+        <br><br>
+
+        <mc-tag color="primary" class="mc-tag_caps">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag color="primary" class="mc-hovered mc-tag_caps">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag color="primary" class="mc-focused mc-tag_caps">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag color="primary" [disabled]="true" class="mc-tag_caps">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>
+
+        <br><br>
+
+        <mc-tag color="error" class="mc-tag_caps">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag color="error" class="mc-hovered mc-tag_caps">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag color="error" class="mc-focused mc-tag_caps">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag color="error" [disabled]="true" class="mc-tag_caps">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>
+    </div>
+
+    <div class="dev-box">
+        <h1>Textarea</h1>
+
+        <mc-form-field>
+            <textarea mcTextarea [(ngModel)]="value" [canGrow]="false" placeholder="Placeholder"></textarea>
+        </mc-form-field>
+
+        <br>
+        <br>
+
+        <header>monospace:</header>
+
+        <mc-form-field>
+            <textarea mcTextarea class="mc-textarea_monospace" [(ngModel)]="value" placeholder="Placeholder"></textarea>
+        </mc-form-field>
+
+        <br><br>
+
+        <header> disabled:</header>
+
+        <mc-form-field>
+            <textarea mcTextarea [(ngModel)]="value" placeholder="Placeholder" [disabled]="true"></textarea>
+        </mc-form-field>
+
+        <br><br>
+
+        <header>Invalid:</header>
+
+        <mc-form-field>
+            <textarea mcTextarea [(ngModel)]="value" placeholder="Placeholder" required minlength="4"></textarea>
+        </mc-form-field>
+
+        <br><br>
+
+        <header>Without border:</header>
+
+        <mc-form-field mcFormFieldWithoutBorders>
+            <textarea mcTextarea [(ngModel)]="value" placeholder="Placeholder"></textarea>
+        </mc-form-field>
+    </div>
+
+    <div class="dev-box">
+        <h1>Timepicker</h1>
+
+        <div class="mc-body">
+            <div>
+                <button mc-button (click)="toggleDisable()">Toggle disabled state</button>
+            </div>
+            <br>
+
+            <section class="demo-timepicker_full">
+                <mc-form-field >
+                    <i mcPrefix mc-icon="mc-clock_16" color="second"></i>
+                    <input mcTimepicker
+                           [(ngModel)]="timeValue1"
+                           time-format="HH:mm:ss"
+                           min-time="10:00:00"
+                           max-time="13:30:00"
+                           [disabled]="isDisabled">
+                </mc-form-field>
+            </section>
+        </div>
+    </div>
+
+    <div class="dev-box">
+        <h1>Toggles</h1>
+
+        <div class="layout-row flex-100 toggles-container">
+            <div class="flex-50">
+                <h3>Small Toggles</h3>
+                <div class="layout-row flex-100 toggle-demo-container">
+                    <div class="flex-33">
+                        <mc-toggle class="mc-toggle_small" [(ngModel)]="valueSmallOn">
+                        </mc-toggle>
+                    </div>
+                    <div class="flex-33">
+                        <mc-toggle class="mc-toggle_small" [(ngModel)]="valueSmallOn">
+                        </mc-toggle>
+                    </div>
+                    <div class="flex-33">
+                        <mc-toggle class="mc-toggle_small" color="error" [(ngModel)]="valueSmallOn">
+                        </mc-toggle>
+                    </div>
+                </div>
+                <div class="toggle-demo-container">
+                    <mc-toggle class="mc-toggle_small" [(ngModel)]="valueSmallOn">
+                        Quack like a duck
+                    </mc-toggle>
+                </div>
+                <div class="toggle-demo-container">
+                    <mc-toggle class="mc-toggle_small cdk-keyboard-focused" labelPosition="left" [(ngModel)]="valueSmallOn">
+                        Quack like a duck
+                    </mc-toggle>
+                </div>
+            </div>
+            <div class="flex-50">
+                <h3>Big Toggles</h3>
+                <div class="layout-row flex-100 toggle-demo-container">
+                    <div class="flex-33">
+                        <mc-toggle [(ngModel)]="valueBigOn">
+                        </mc-toggle>
+                    </div>
+                    <div class="flex-33">
+                        <mc-toggle [(ngModel)]="valueBigOn">
+                        </mc-toggle>
+                    </div>
+                    <div class="flex-33">
+                        <mc-toggle color="error" [(ngModel)]="valueBigOn">
+                        </mc-toggle>
+                    </div>
+                </div>
+                <div class="toggle-demo-container">
+                    <mc-toggle [(ngModel)]="valueBigOn">
+                        Quack like a duck
+                    </mc-toggle>
+                </div>
+                <div class="toggle-demo-container">
+                    <mc-toggle labelPosition="left" [(ngModel)]="valueBigOn">
+                        Quack like a duck
+                    </mc-toggle>
+                </div>
+            </div>
+        </div>
+
+        <div class="layout-row flex-100 toggles-container">
+            <div class="flex-50">
+                <h3>Small Toggles</h3>
+                <div class="layout-row flex-100 toggle-demo-container">
+                    <div class="flex-33">
+                        <mc-toggle class="mc-toggle_small" [(ngModel)]="valueSmallOn" [disabled]="true">
+                        </mc-toggle>
+                    </div>
+                    <div class="flex-33">
+                        <mc-toggle class="mc-toggle_small" [(ngModel)]="valueSmallOn" [disabled]="true">
+                        </mc-toggle>
+                    </div>
+                    <div class="flex-33">
+                        <mc-toggle class="mc-toggle_small" color="error" [(ngModel)]="valueSmallOn" [disabled]="true">
+                        </mc-toggle>
+                    </div>
+                </div>
+                <div class="toggle-demo-container">
+                    <mc-toggle class="mc-toggle_small" [(ngModel)]="valueSmallOn" [disabled]="true">
+                        Quack like a duck
+                    </mc-toggle>
+                </div>
+                <div class="toggle-demo-container">
+                    <mc-toggle class="mc-toggle_small cdk-keyboard-focused" labelPosition="left" [(ngModel)]="valueSmallOn" [disabled]="true">
+                        Quack like a duck
+                    </mc-toggle>
+                </div>
+            </div>
+            <div class="flex-50">
+                <h3>Big Toggles</h3>
+                <div class="layout-row flex-100 toggle-demo-container">
+                    <div class="flex-33">
+                        <mc-toggle [(ngModel)]="valueBigOn" [disabled]="true">
+                        </mc-toggle>
+                    </div>
+                    <div class="flex-33">
+                        <mc-toggle [(ngModel)]="valueBigOn" [disabled]="true">
+                        </mc-toggle>
+                    </div>
+                    <div class="flex-33">
+                        <mc-toggle color="error" [(ngModel)]="valueBigOn" [disabled]="true">
+                        </mc-toggle>
+                    </div>
+                </div>
+                <div class="toggle-demo-container">
+                    <mc-toggle [(ngModel)]="valueBigOn" [disabled]="true">
+                        Quack like a duck
+                    </mc-toggle>
+                </div>
+                <div class="toggle-demo-container">
+                    <mc-toggle labelPosition="left" [(ngModel)]="valueBigOn" [disabled]="true">
+                        Quack like a duck
+                    </mc-toggle>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dev-box">
+        <h1>Tooltip</h1>
+
+        <div class="flex-60 layout-row layout-align-center-center">
+            <div class="flex layout-column layout-align-center-center container-item">
+                <button class="mc-primary"
+                        mc-button
+                        mc-tooltip="Показать\Скрыть"
+                        mcPlacement="top">
+                    top
+                </button>
+                <br>
+                <button class="mc-primary"
+                        mc-button
+                        mc-tooltip="Активировать записи"
+                        mcPlacement="right">
+                    right
+                </button>
+                <br>
+                <button class="mc-primary"
+                        mc-button
+                        mc-tooltip="PDQL-запрос фильтра содержит ошибки
+                            испральве запрос"
+                        mcPlacement="left">
+                    left
+                </button>
+                <br>
+                <button class="mc-primary"
+                        mc-button
+                        mc-tooltip="Обновить"
+                        mcPlacement="bottom">
+                    bottom
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="dev-box">
+        <h1>Tree</h1>
+
+        <mc-tree-selection
+            multiple
+            no-unselect="false"
+            [dataSource]="dataSource"
+            [treeControl]="treeControl">
+
+            <mc-tree-node-option *mcTreeNodeDef="let node" mcTreeNodePadding>{{ node.name }}</mc-tree-node-option>
+
+            <mc-tree-node-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+                <i mc-icon="mc-angle-S_16" [style.transform]="treeControl.isExpanded(node) ? '' : 'rotate(-90deg)'" cdkTreeNodeToggle></i>
+                {{ node.name }} : {{ node.type }}
+            </mc-tree-node-option>
+        </mc-tree-selection>
+    </div>
+</div>
+
+
+

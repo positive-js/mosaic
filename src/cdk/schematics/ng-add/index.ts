@@ -8,7 +8,7 @@ export const cdkVersion = loadPackageVersionGracefully('@ptsecurity/cdk');
 
 /**
  * Schematic factory entry-point for the `ng-add` schematic. The ng-add schematic will be
- * automatically executed if developers run `ng add @angular/cdk`.
+ * automatically executed if developers run `ng add @ptsecurity/cdk`.
  */
 export default function(): Rule {
     return (host: Tree) => {

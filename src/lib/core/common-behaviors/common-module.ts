@@ -16,7 +16,7 @@ export function MC_SANITY_CHECKS_FACTORY(): boolean {
  * Module that captures anything that should be loaded and/or run for *all* Mosaic
  * components. This includes Bidi, etc.
  *
- * This module should be imported to each top-level component module (e.g., MatTabsModule).
+ * This module should be imported to each top-level component module (e.g., McTabsModule).
  */
 @NgModule({
     imports: [ BidiModule ],

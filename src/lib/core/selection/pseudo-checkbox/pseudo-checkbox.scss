@@ -41,13 +41,13 @@ $_mc-pseudo-checkmark-size: $mc-checkbox-size - (2 * $_mc-pseudo-checkbox-paddin
         border-color: transparent;
     }
 
-    &.mc-pseudo-checkbox_checked {
+    &.mc-checked {
         .mc-checkbox-checkmark {
             display: inline-block;
         }
     }
 
-    &.mc-pseudo-checkbox_indeterminate {
+    &.mc-indeterminate {
         .mc-checkbox-mixedmark {
             display: inline-block;
         }

@@ -1,10 +1,9 @@
 import { mkdirpSync, writeFileSync } from 'fs-extra';
-import { task, src, dest } from 'gulp';
+import { task, src, dest, series, parallel } from 'gulp';
 import { join } from 'path';
 import { Bundler } from 'scss-bundle';
 
-import { buildConfig, sequenceTask } from '../../packages';
-import { composeRelease } from '../../packages/build-release';
+import { buildConfig, composeRelease } from '../../packages';
 import { mosaicPackage } from '../packages';
 
 
@@ -35,18 +34,8 @@ const visualEntryPointPath = join(sourceDir, 'core', 'visual', '_all-visual.scss
 const prebuiltVisualGlob = join(outputDir, '**/visual/prebuilt/*.css?(.map)');
 const visualBundlePath = join(releasePath, '_visual.scss');
 
-task('mosaic:build-release', ['mosaic:prepare-release'], () => composeRelease(mosaicPackage));
-
-task('mosaic:prepare-release', sequenceTask(
-    'mosaic:build',
-    [
-        'mosaic:copy-prebuilt-themes', 'mosaic:bundle-theming-scss',
-        'mosaic:copy-prebuilt-visual', 'mosaic:bundle-visual-scss'
-    ]
-));
-
 task('mosaic:copy-prebuilt-themes', () => {
-    src(prebuiltThemeGlob)
+    return src(prebuiltThemeGlob)
         .pipe(gulpRename({dirname: ''}))
         .pipe(dest(join(releasePath, 'prebuilt-themes')));
 });
@@ -66,7 +55,7 @@ task('mosaic:bundle-theming-scss', () => {
 
 
 task('mosaic:copy-prebuilt-visual', () => {
-    src(prebuiltVisualGlob)
+    return src(prebuiltVisualGlob)
         .pipe(gulpRename({dirname: ''}))
         .pipe(dest(join(releasePath, 'prebuilt-visual')));
 });
@@ -82,3 +71,17 @@ task('mosaic:bundle-visual-scss', () => {
         writeFileSync(visualBundlePath, result.bundledContent);
     });
 });
+
+task('mosaic:prepare-release', series(
+    'mosaic:build',
+    parallel(
+        'mosaic:copy-prebuilt-themes', 'mosaic:bundle-theming-scss',
+        'mosaic:copy-prebuilt-visual', 'mosaic:bundle-visual-scss'
+    )
+));
+
+task('mosaic:build-release', series('mosaic:prepare-release', (done) => {
+    composeRelease(mosaicPackage);
+    done();
+}));
+

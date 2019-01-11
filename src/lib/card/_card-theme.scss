@@ -2,13 +2,13 @@
 @import '../core/theming/palette';
 
 
-@mixin normal-state($color, $second, $isDark) {
+@mixin normal-state($color, $second, $is-dark) {
     box-shadow:
-        inset -1px 0 0 0 mc-color($second, if($isDark, darker, lighter)),
-        inset 0 1px 0 0 mc-color($second, if($isDark, darker, lighter)),
-        inset 0 -1px 0 0 mc-color($second, if($isDark, darker, lighter));
+        inset -1px 0 0 0 mc-color($second, if($is-dark, darker, lighter)),
+        inset 0 1px 0 0 mc-color($second, if($is-dark, darker, lighter)),
+        inset 0 -1px 0 0 mc-color($second, if($is-dark, darker, lighter));
 
-    background-color: mc-color($color, if($isDark, darker, lighter));
+    background-color: mc-color($color, if($is-dark, darker, lighter));
 
     border-left-color: mc-color($color);
 }
@@ -22,7 +22,7 @@
     $success: map-get($theme, success);
     $warning: map-get($theme, warning);
 
-    $isDark: map-get($theme, is-dark);
+    $is-dark: map-get($theme, is-dark);
 
     $background: map-get($theme, background);
     $foreground: map-get($theme, foreground);
@@ -31,40 +31,27 @@
         color: map-get($foreground, text);
         
         &.mc-card_info {
-            @include normal-state($info, $second, $isDark);
-
-            // todo для mc-card_selected в темной теме макеты не готовы
-            &.mc-card_selected {
-                background-color: mc-color($primary, 100);
-            }
+            @include normal-state($info, $second, $is-dark);
         }
         
         &.mc-card_warning {
-            @include normal-state($warning, $second, $isDark);
-            
-            &.mc-card_selected {
-                background-color: mc-color($primary, 100);
-            }
+            @include normal-state($warning, $second, $is-dark);
         }
 
         &.mc-card_success {
-            @include normal-state($success, $second, $isDark);
-            
-            &.mc-card_selected {
-                background-color: mc-color($primary, 100);
-            }
+            @include normal-state($success, $second, $is-dark);
         }
-        
+
         &.mc-card_error {
-            @include normal-state($error, $second, $isDark);
-            
-            &.mc-card_selected {
-                background-color: mc-color($primary, 100);
-            }
+            @include normal-state($error, $second, $is-dark);
         }
-        
+
         &.mc-card_white {
             background-color: mix(map-get($background, background), white, 90%);
+        }
+
+        &.mc-card_selected {
+            background-color: mc-color($primary, if($is-dark, 700, 100));
         }
 
         // todo мне кажется тут можно сделать без overlay

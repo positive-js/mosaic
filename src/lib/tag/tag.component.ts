@@ -7,7 +7,14 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { mixinColor, CanColor, CanColorCtor } from '@ptsecurity/mosaic/core';
+import {
+    mixinColor,
+    CanColor,
+    CanColorCtor,
+    CanDisable,
+    CanDisableCtor,
+    mixinDisabled
+} from '@ptsecurity/mosaic/core';
 import { McIcon } from '@ptsecurity/mosaic/icon';
 
 
@@ -15,8 +22,7 @@ export class McTagBase {
     constructor(public _elementRef: ElementRef) {}
 }
 
-export const _McTagMixinBase: CanColorCtor & typeof McTagBase
-    = mixinColor(McTagBase);
+export const _McTagMixinBase: CanColorCtor & CanDisableCtor & typeof McTagBase = mixinColor(mixinDisabled(McTagBase));
 
 
 @Component({
@@ -25,13 +31,26 @@ export const _McTagMixinBase: CanColorCtor & typeof McTagBase
     styleUrls: ['./tag.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    host: { class: 'mc-tag' },
-    inputs: ['color']
+    host: {
+        class: 'mc-tag',
+        '[class.mc-disabled]': 'disabled'
+    },
+    inputs: ['color', 'disabled']
 })
-export class McTag extends _McTagMixinBase implements CanColor {
+export class McTag extends _McTagMixinBase implements CanColor, CanDisable {
     @ContentChildren(McIcon) contentChildren: QueryList<McIcon>;
 
     nativeElement: HTMLElement;
+
+    private _disabled: boolean = false;
+
+    get disabled() {
+        return this._disabled;
+    }
+
+    set disabled(value: any) {
+        if (value !== this.disabled) { this._disabled = value; }
+    }
 
     constructor(elementRef: ElementRef) {
         super(elementRef);

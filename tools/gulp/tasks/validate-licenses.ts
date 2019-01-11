@@ -126,7 +126,7 @@ export function validateLicense(): Promise<number> {
 
 }
 
-task('validate-licenses', [], async () => {
+task('validate-licenses', async () => {
 
     await validateLicense();
 });

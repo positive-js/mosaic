@@ -8,16 +8,16 @@
     $error: map-get($theme, error);
 
     .mc-progress-spinner {
-        &.mc-primary &__circle {
-            stroke: mc-color($primary, 500);
+        &.mc-primary .mc-progress-spinner__circle {
+            stroke: mc-color($primary);
         }
 
-        &.mc-second &__circle {
-            stroke: mc-color($second, 500);
+        &.mc-second .mc-progress-spinner__circle {
+            stroke: mc-color($second);
         }
 
-        &.mc-error &__circle {
-            stroke: mc-color($error, 500);
+        &.mc-error .mc-progress-spinner__circle {
+            stroke: mc-color($error);
         }
     }
 }

@@ -51,7 +51,8 @@
         $font-family: _mc-get-type-value($config, $level, font-family);
     }
 
-    @return unquote($font-family);
+    // Guard against unquoting non-string values, because it's deprecated.
+    @return if(type-of($font-family) == string, unquote($font-family), $font-family);
 }
 
 @mixin mc-typography-level-to-styles($config, $level) {
