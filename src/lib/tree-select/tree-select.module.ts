@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { OverlayModule } from '@ptsecurity/cdk/overlay';
+import { CdkTreeModule } from '@ptsecurity/cdk/tree';
 import { McOptionModule } from '@ptsecurity/mosaic/core';
-import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { MC_SELECT_SCROLL_STRATEGY_PROVIDER } from '@ptsecurity/mosaic/select';
 import { McTagModule } from '@ptsecurity/mosaic/tag';
+import { McTreeModule } from '@ptsecurity/mosaic/tree';
 
 import { McTreeSelect, McTreeSelectTrigger } from './tree-select.component';
 
@@ -15,11 +16,13 @@ import { McTreeSelect, McTreeSelectTrigger } from './tree-select.component';
     imports: [
         CommonModule,
         OverlayModule,
+        CdkTreeModule,
+        McTreeModule,
         McOptionModule,
         McIconModule,
         McTagModule
     ],
-    exports: [McFormFieldModule, McTreeSelect, McTreeSelectTrigger, McOptionModule, CommonModule],
+    exports: [McTreeSelect, McTreeSelectTrigger, McOptionModule, CommonModule],
     declarations: [McTreeSelect, McTreeSelectTrigger],
     providers: [MC_SELECT_SCROLL_STRATEGY_PROVIDER]
 })

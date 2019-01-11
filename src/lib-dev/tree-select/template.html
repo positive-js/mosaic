@@ -3,22 +3,21 @@
 
 <div class="dev-container">
     <mc-form-field>
-        <mc-tree-select [(value)]="singleSelected">
-            <mc-option value="Disabled" disabled>Disabled</mc-option>
-            <mc-option value="Normal">Normal</mc-option>
-            <mc-option value="Hovered">Hovered</mc-option>
-            <mc-option value="Focused">Focused</mc-option>
-            <mc-option value="Selected">Selected</mc-option>
-            <mc-option value="Selected1">Selected1</mc-option>
-            <mc-option value="Selected2">Selected2</mc-option>
-            <mc-option value="Selected3">Selected3</mc-option>
-            <mc-option value="Selected4">Selected4</mc-option>
-            <mc-option value="Selected5">Selected5</mc-option>
-            <mc-option value="Selected6">Selected6</mc-option>
-            <mc-option value="Selected7">Selected7</mc-option>
-            <mc-option value="Selected8">Selected8</mc-option>
-            <mc-option value="Selected9">Selected9</mc-option>
-            <mc-option value="Selected10">Selected10</mc-option>
+        <mc-tree-select
+            [dataSource]="dataSource"
+            [treeControl]="treeControl"
+            [(value)]="singleSelected">
+
+            <div>asaaaa</div>
+            <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+                {{ node.name }}
+                qqqq
+            </mc-tree-option>
+
+            <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+                <i mc-icon="mc-angle-S_16" [style.transform]="treeControl.isExpanded(node) ? '' : 'rotate(-90deg)'" cdkTreeNodeToggle></i>
+                {{ node.name }} : {{ node.type }}
+            </mc-tree-option>
         </mc-tree-select>
     </mc-form-field>
 </div>

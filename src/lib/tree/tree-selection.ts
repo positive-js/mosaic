@@ -136,9 +136,6 @@ export class McTreeOption<T> extends CdkTreeNode<T> implements CanDisable {
     }
 }
 
-export const McTreeSelectionBase: HasTabIndexCtor & CanDisableCtor &
-    typeof CdkTree = mixinTabIndex(mixinDisabled(CdkTree));
-
 export class McTreeNavigationChange {
     constructor(
         public source: McTreeSelection<any>,
@@ -146,9 +143,19 @@ export class McTreeNavigationChange {
     ) {}
 }
 
-export class McTreeSelectionChange {
-    constructor(public source: McTreeSelection<any>, public option: McTreeOption<any>) {}
+export class McTreeSelectionChange<T> {
+    constructor(public source: McTreeSelection<T>, public option: McTreeOption<any>) {}
 }
+
+class McTreeSelectionBase<T> extends CdkTree<T> {
+    constructor(differs: IterableDiffers, changeDetectorRef: ChangeDetectorRef) {
+        super(differs, changeDetectorRef);
+    }
+}
+
+export const McTreeSelectionBaseMixin: HasTabIndexCtor & CanDisableCtor &
+    typeof McTreeSelectionBase = mixinTabIndex(mixinDisabled(McTreeSelectionBase));
+
 
 @Component({
     exportAs: 'mcTreeSelection',
@@ -167,7 +174,8 @@ export class McTreeSelectionChange {
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: CdkTree, useExisting: McTreeSelection }]
 })
-export class McTreeSelection<T> extends McTreeSelectionBase<T> implements AfterContentInit, CanDisable, HasTabIndex {
+export class McTreeSelection<T> extends McTreeSelectionBaseMixin<T>
+    implements AfterContentInit, CanDisable, HasTabIndex {
     // Outlets within the tree's template where the dataNodes will be inserted.
     @ViewChild(CdkTreeNodeOutlet) nodeOutlet: CdkTreeNodeOutlet;
 
@@ -209,7 +217,7 @@ export class McTreeSelection<T> extends McTreeSelectionBase<T> implements AfterC
 
     @Output() readonly navigationChange = new EventEmitter<McTreeNavigationChange>();
 
-    @Output() readonly selectionChange = new EventEmitter<McTreeSelectionChange>();
+    @Output() readonly selectionChange = new EventEmitter<McTreeSelectionChange<T>>();
 
     private _disabled: boolean = false;
 

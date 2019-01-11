@@ -1,5 +1,6 @@
 /* tslint:disable:no-empty */
 
+import { NodeDef, ViewData } from '@angular/core/src/view';
 import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
 import { Directionality } from '@ptsecurity/cdk/bidi';
 import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
@@ -15,10 +16,7 @@ import {
     UP_ARROW,
     A
 } from '@ptsecurity/cdk/keycodes';
-import {
-    CdkConnectedOverlay,
-    ViewportRuler
-} from '@ptsecurity/cdk/overlay';
+import { CdkConnectedOverlay, ViewportRuler } from '@ptsecurity/cdk/overlay';
 
 import {
     AfterContentInit, AfterViewInit,
@@ -33,7 +31,7 @@ import {
     EventEmitter,
     Inject,
     Input,
-    isDevMode,
+    isDevMode, IterableDiffer, IterableDiffers,
     NgZone,
     OnChanges,
     OnDestroy,
@@ -47,6 +45,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
+import { CdkTree, CdkTreeNodeOutlet } from '@ptsecurity/cdk/tree';
 import {
     countGroupLabelsBeforeOption,
     getOptionScrollPosition,
@@ -58,6 +57,12 @@ import {
     McOptgroup,
     McOption,
     McOptionSelectionChange,
+    CanDisableCtor,
+    HasTabIndexCtor,
+    CanUpdateErrorStateCtor,
+    mixinTabIndex,
+    mixinDisabled,
+    mixinErrorState
 } from '@ptsecurity/mosaic/core';
 
 import { McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
@@ -78,7 +83,6 @@ import {
 } from 'rxjs/operators';
 
 import {
-    McSelectMixinBase,
     MC_SELECT_SCROLL_STRATEGY,
     SELECT_PANEL_MAX_HEIGHT,
     SELECT_PANEL_PADDING_X,
@@ -107,14 +111,33 @@ let nextUniqueId = 0;
 export class McTreeSelectChange {
     constructor(
         /** Reference to the select that emitted the change event. */
-        public source: McTreeSelect,
+        public source: McTreeSelect<any>,
         /** Current value of the select that emitted the event. */
         public value: any) {
     }
 }
 
+
 @Directive({ selector: 'mc-tree-select-trigger' })
 export class McTreeSelectTrigger {}
+
+
+export class McTreeSelectBase<T> extends CdkTree<T> {
+    constructor(
+        public elementRef: ElementRef,
+        public defaultErrorStateMatcher: ErrorStateMatcher,
+        public parentForm: NgForm,
+        public parentFormGroup: FormGroupDirective,
+        public ngControl: NgControl,
+        differs: IterableDiffers,
+        changeDetectorRef: ChangeDetectorRef
+    ) {
+        super(differs, changeDetectorRef);
+    }
+}
+
+export const McTreeSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorStateCtor &
+    typeof McTreeSelectBase = mixinTabIndex(mixinDisabled(mixinErrorState(McTreeSelectBase)));
 
 
 @Component({
@@ -146,7 +169,7 @@ export class McTreeSelectTrigger {}
         { provide: MC_OPTION_PARENT_COMPONENT, useExisting: McTreeSelect }
     ]
 })
-export class McTreeSelect extends McSelectMixinBase implements
+export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     AfterContentInit, AfterViewInit, OnChanges, OnDestroy, OnInit, DoCheck, ControlValueAccessor, CanDisable,
     HasTabIndex, McFormFieldControl<any>, CanUpdateErrorState {
 
@@ -216,6 +239,8 @@ export class McTreeSelect extends McSelectMixinBase implements
     @ViewChild('panel') panel: ElementRef;
 
     @ViewChild(CdkConnectedOverlay) overlayDir: CdkConnectedOverlay;
+
+    @ViewChild(CdkTreeNodeOutlet) nodeOutlet: CdkTreeNodeOutlet;
 
     @ViewChildren(McTag) tags: QueryList<McTag>;
 
@@ -401,6 +426,7 @@ export class McTreeSelect extends McSelectMixinBase implements
         private readonly _renderer: Renderer2,
         defaultErrorStateMatcher: ErrorStateMatcher,
         elementRef: ElementRef,
+        differs: IterableDiffers,
         @Optional() private readonly _dir: Directionality,
         @Optional() parentForm: NgForm,
         @Optional() parentFormGroup: FormGroupDirective,
@@ -409,7 +435,9 @@ export class McTreeSelect extends McSelectMixinBase implements
         @Attribute('tabindex') tabIndex: string,
         @Inject(MC_SELECT_SCROLL_STRATEGY) private readonly _scrollStrategyFactory
     ) {
-        super(elementRef, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl);
+        super(
+            elementRef, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl, differs, _changeDetectorRef
+        );
 
         if (this.ngControl) {
             // Note: we provide the value accessor through here, instead of
@@ -423,7 +451,11 @@ export class McTreeSelect extends McSelectMixinBase implements
         this.id = this.id;
     }
 
+    ngAfterContentChecked() {}
+
     ngOnInit() {
+        super.ngOnInit();
+
         this.selectionModel = new SelectionModel<McOption>(this.multiple);
         this.stateChanges.next();
 
@@ -505,7 +537,8 @@ export class McTreeSelect extends McSelectMixinBase implements
 
     /** Opens the overlay panel. */
     open(): void {
-        if (this.disabled || !this.options || !this.options.length || this._panelOpen) { return; }
+        // if (this.disabled || !this.options || !this.options.length || this._panelOpen) { return; }
+        if (this.disabled || this._panelOpen) { return; }
 
         this.triggerRect = this.trigger.nativeElement.getBoundingClientRect();
         // Note: The computed font-size will be a string pixel value (e.g. "16px").
@@ -522,6 +555,7 @@ export class McTreeSelect extends McSelectMixinBase implements
         this._ngZone.onStable.asObservable()
             .pipe(take(1))
             .subscribe(() => {
+                console.log('qqq');
                 if (this.triggerFontSize && this.overlayDir.overlayRef &&
                     this.overlayDir.overlayRef.overlayElement) {
                     this.overlayDir.overlayRef.overlayElement.style.fontSize = `${this.triggerFontSize}px`;
@@ -771,6 +805,36 @@ export class McTreeSelect extends McSelectMixinBase implements
         }
 
         this._changeDetectorRef.markForCheck();
+    }
+
+    renderNodeChanges(
+        data: T[],
+        dataDiffer: IterableDiffer<T> = this.dataDiffer,
+        viewContainer: any = this.nodeOutlet.viewContainer,
+        parentData?: T
+    ): void {
+        super.renderNodeChanges(data, dataDiffer, viewContainer, parentData);
+
+        const arrayOfInstances = [];
+
+        viewContainer._embeddedViews.forEach((view: ViewData) => {
+            const viewDef = view.def;
+
+            viewDef.nodes.forEach((node: NodeDef) => {
+                if (viewDef.nodeMatchedQueries === node.matchedQueryIds) {
+                    const nodeData: any = view.nodes[node.nodeIndex];
+
+                    arrayOfInstances.push(nodeData.instance as never);
+                }
+            });
+        });
+
+        if (this.options) {
+            this.options.reset(arrayOfInstances);
+            this.options.notifyOnChanges();
+        }
+
+        // this.updateScrollSize();
     }
 
     private getTotalItemsWidthInMatcher(): number {

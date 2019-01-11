@@ -44,21 +44,20 @@
     (attach)="onAttached()"
     (detach)="close()">
 
-    <div
-        #panel
-        class="mc-select__panel {{ getPanelTheme() }}"
-        [ngClass]="panelClass"
-        (@transformPanel.done)="panelDoneAnimatingStream.next($event.toState)"
-        [style.transformOrigin]="transformOrigin"
-        [class.mc-select-panel-done-animcing]="panelDoneAnimating"
-        [style.font-size.px]="triggerFontSize"
-        (keydown)="handleKeydown($event)">
+    <div #panel
+         class="mc-select__panel {{ getPanelTheme() }}"
+         [ngClass]="panelClass"
+         (@transformPanel.done)="panelDoneAnimatingStream.next($event.toState)"
+         [style.transformOrigin]="transformOrigin"
+         [class.mc-select-panel-done-animcing]="panelDoneAnimating"
+         [style.font-size.px]="triggerFontSize"
+         (keydown)="handleKeydown($event)">
 
-        <div
-            class="mc-select__content"
-            [@fadeInContent]="'showing'"
-            (@fadeInContent.done)="onFadeInDone()">
-            <ng-content></ng-content>
+        <div class="mc-select__content"
+             [@fadeInContent]="'showing'"
+             (@fadeInContent.done)="onFadeInDone()">
+
+             <ng-content cdkTreeNodeOutlet></ng-content>
         </div>
     </div>
 </ng-template>
