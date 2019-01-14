@@ -1,0 +1,120 @@
+@import '../core/styles/layout-common';
+
+$mc-calendar-padding: 8px !default;
+$mc-calendar-header-divider-width: 1px !default;
+$mc-calendar-controls-vertical-padding: 5%;
+// We use the same padding as the month / year label, but subtract 16px since there is padding
+// between the edge of the button and the text. This ensures that the button text lines up with
+// the month / year label text.
+$mc-calendar-controls-side-margin: calc(33% / 7 - 16px);
+
+$mc-calendar-arrow-size: 5px !default;
+$mc-calendar-arrow-disabled-opacity: 0.5 !default;
+
+// Values chosen to approximate https://material.io/icons/#ic_navigate_before and
+// https://material.io/icons/#ic_navigate_next as closely as possible.
+$mc-calendar-prev-next-icon-border-width: 2px;
+$mc-calendar-prev-next-icon-margin: 15.5px;
+$mc-calendar-prev-icon-transform: translateX(2px) rotate(-45deg);
+$mc-calendar-next-icon-transform: translateX(-2px) rotate(45deg);
+
+
+.mc-calendar {
+    display: block;
+}
+
+.mc-calendar-header {
+    padding: $mc-calendar-padding $mc-calendar-padding 0 $mc-calendar-padding;
+}
+
+.mc-calendar-content {
+    padding: 0 $mc-calendar-padding $mc-calendar-padding $mc-calendar-padding;
+    outline: none;
+}
+
+.mc-calendar-controls {
+    display: flex;
+    margin: $mc-calendar-controls-vertical-padding $mc-calendar-controls-side-margin;
+}
+
+.mc-calendar-spacer {
+    flex: 1 1 auto;
+}
+
+.mc-calendar-period-button {
+    min-width: 0;
+}
+
+.mc-calendar-arrow {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: $mc-calendar-arrow-size solid transparent;
+    border-right: $mc-calendar-arrow-size solid transparent;
+    border-top-width: $mc-calendar-arrow-size;
+    border-top-style: solid;
+    margin: 0 0 0 $mc-calendar-arrow-size;
+    vertical-align: middle;
+
+    &.mc-calendar-invert {
+        transform: rotate(180deg);
+    }
+
+    [dir='rtl'] & {
+        margin: 0 $mc-calendar-arrow-size 0 0;
+    }
+}
+
+.mc-calendar-previous-button,
+.mc-calendar-next-button {
+    position: relative;
+
+    &::after {
+        @include mc-fill;
+        content: '';
+        margin: $mc-calendar-prev-next-icon-margin;
+        border: 0 solid currentColor;
+        border-top-width: $mc-calendar-prev-next-icon-border-width;
+    }
+
+    [dir='rtl'] & {
+        transform: rotate(180deg);
+    }
+}
+
+.mc-calendar-previous-button::after {
+    border-left-width: $mc-calendar-prev-next-icon-border-width;
+    transform: $mc-calendar-prev-icon-transform;
+}
+
+.mc-calendar-next-button::after {
+    border-right-width: $mc-calendar-prev-next-icon-border-width;
+    transform: $mc-calendar-next-icon-transform;
+}
+
+.mc-calendar-table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.mc-calendar-table-header th {
+    text-align: center;
+    padding: 0 0 $mc-calendar-padding 0;
+}
+
+.mc-calendar-table-header-divider {
+    position: relative;
+    height: $mc-calendar-header-divider-width;
+
+    // We use an absolutely positioned pseudo-element as the divider line for the table header so we
+    // can extend it all the way to the edge of the calendar.
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -$mc-calendar-padding;
+        right: -$mc-calendar-padding;
+        height: $mc-calendar-header-divider-width;
+    }
+}

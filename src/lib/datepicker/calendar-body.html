@@ -1,0 +1,50 @@
+<!--
+  If there's not enough space in the first row, create a separate label row. We mark this row as
+  aria-hidden because we don't want it to be read out as one of the weeks in the month.
+-->
+<tr *ngIf="firstRowOffset < labelMinRequiredCells" aria-hidden="true">
+  <td class="mat-calendar-body-label"
+      [attr.colspan]="numCols"
+      [style.paddingTop]="cellPadding"
+      [style.paddingBottom]="cellPadding">
+    {{label}}
+  </td>
+</tr>
+
+<!-- Create the first row separately so we can include a special spacer cell. -->
+<tr *ngFor="let row of rows; let rowIndex = index" role="row">
+  <!--
+    We mark this cell as aria-hidden so it doesn't get read out as one of the days in the week.
+    The aspect ratio of the table cells is maintained by setting the top and bottom padding as a
+    percentage of the width (a variant of the trick described here:
+    https://www.w3schools.com/howto/howto_css_aspect_ratio.asp).
+  -->
+  <td *ngIf="rowIndex === 0 && firstRowOffset"
+      aria-hidden="true"
+      class="mat-calendar-body-label"
+      [attr.colspan]="firstRowOffset"
+      [style.paddingTop]="cellPadding"
+      [style.paddingBottom]="cellPadding">
+    {{firstRowOffset >= labelMinRequiredCells ? label : ''}}
+  </td>
+  <td *ngFor="let item of row; let colIndex = index"
+      role="gridcell"
+      class="mat-calendar-body-cell"
+      [ngClass]="item.cssClasses"
+      [tabindex]="isActiveCell(rowIndex, colIndex) ? 0 : -1"
+      [class.mat-calendar-body-disabled]="!item.enabled"
+      [class.mat-calendar-body-active]="isActiveCell(rowIndex, colIndex)"
+      [attr.aria-label]="item.ariaLabel"
+      [attr.aria-disabled]="!item.enabled || null"
+      [attr.aria-selected]="selectedValue === item.value"
+      (click)="cellClicked(item)"
+      [style.width]="cellWidth"
+      [style.paddingTop]="cellPadding"
+      [style.paddingBottom]="cellPadding">
+    <div class="mat-calendar-body-cell-content"
+         [class.mat-calendar-body-selected]="selectedValue === item.value"
+         [class.mat-calendar-body-today]="todayValue === item.value">
+      {{item.displayValue}}
+    </div>
+  </td>
+</tr>

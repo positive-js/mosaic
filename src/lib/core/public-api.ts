@@ -8,4 +8,5 @@ export * from './option/index';
 export * from './label/label-options';
 export * from './animation/index';
 export * from './overlay/overlay-position-map';
+export * from './datetime';
 
