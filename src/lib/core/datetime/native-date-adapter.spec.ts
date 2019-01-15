@@ -2,7 +2,6 @@
 import { LOCALE_ID } from '@angular/core';
 import { async, inject, TestBed } from '@angular/core/testing';
 import { Platform } from '@ptsecurity/cdk/platform';
-import { DEC, FEB, JAN, MAR } from '@ptsecurity/mosaic/testing';
 
 import { DateAdapter, MC_DATE_LOCALE, NativeDateAdapter, NativeDateModule } from './index';
 
@@ -36,19 +35,19 @@ describe('NativeDateAdapter', () => {
   }));
 
   it('should get year', () => {
-    expect(adapter.getYear(new Date(2017, JAN, 1))).toBe(2017);
+    expect(adapter.getYear(new Date(2017, 0, 1))).toBe(2017);
   });
 
   it('should get month', () => {
-    expect(adapter.getMonth(new Date(2017, JAN, 1))).toBe(0);
+    expect(adapter.getMonth(new Date(2017, 0, 1))).toBe(0);
   });
 
   it('should get date', () => {
-    expect(adapter.getDate(new Date(2017, JAN, 1))).toBe(1);
+    expect(adapter.getDate(new Date(2017, 0, 1))).toBe(1);
   });
 
   it('should get day of week', () => {
-    expect(adapter.getDayOfWeek(new Date(2017, JAN, 1))).toBe(0);
+    expect(adapter.getDayOfWeek(new Date(2017, 0, 1))).toBe(0);
   });
 
   it('should get long month names', () => {
@@ -156,16 +155,16 @@ describe('NativeDateAdapter', () => {
   });
 
   it('should get year name', () => {
-    expect(adapter.getYearName(new Date(2017, JAN, 1))).toBe('2017');
+    expect(adapter.getYearName(new Date(2017, 0, 1))).toBe('2017');
   });
 
   it('should get year name in a different locale', () => {
     adapter.setLocale('ja-JP');
 
     if (SUPPORTS_INTL) {
-      expect(adapter.getYearName(new Date(2017, JAN, 1))).toBe('2017年');
+      expect(adapter.getYearName(new Date(2017, 0, 1))).toBe('2017年');
     } else {
-      expect(adapter.getYearName(new Date(2017, JAN, 1))).toBe('2017');
+      expect(adapter.getYearName(new Date(2017, 0, 1))).toBe('2017');
     }
   });
 
@@ -174,25 +173,25 @@ describe('NativeDateAdapter', () => {
   });
 
   it('should create Date', () => {
-    expect(adapter.createDate(2017, JAN, 1)).toEqual(new Date(2017, JAN, 1));
+    expect(adapter.createDate(2017, 0, 1)).toEqual(new Date(2017, 0, 1));
   });
 
   it('should not create Date with month over/under-flow', () => {
-    expect(() => adapter.createDate(2017, DEC + 1, 1)).toThrow();
-    expect(() => adapter.createDate(2017, JAN - 1, 1)).toThrow();
+    expect(() => adapter.createDate(2017, 11 + 1, 1)).toThrow();
+    expect(() => adapter.createDate(2017, 0 - 1, 1)).toThrow();
   });
 
   it('should not create Date with date over/under-flow', () => {
-    expect(() => adapter.createDate(2017, JAN, 32)).toThrow();
-    expect(() => adapter.createDate(2017, JAN, 0)).toThrow();
+    expect(() => adapter.createDate(2017, 0, 32)).toThrow();
+    expect(() => adapter.createDate(2017, 0, 0)).toThrow();
   });
 
   it('should create Date with low year number', () => {
-    expect(adapter.createDate(-1, JAN, 1).getFullYear()).toBe(-1);
-    expect(adapter.createDate(0, JAN, 1).getFullYear()).toBe(0);
-    expect(adapter.createDate(50, JAN, 1).getFullYear()).toBe(50);
-    expect(adapter.createDate(99, JAN, 1).getFullYear()).toBe(99);
-    expect(adapter.createDate(100, JAN, 1).getFullYear()).toBe(100);
+    expect(adapter.createDate(-1, 0, 1).getFullYear()).toBe(-1);
+    expect(adapter.createDate(0, 0, 1).getFullYear()).toBe(0);
+    expect(adapter.createDate(50, 0, 1).getFullYear()).toBe(50);
+    expect(adapter.createDate(99, 0, 1).getFullYear()).toBe(99);
+    expect(adapter.createDate(100, 0, 1).getFullYear()).toBe(100);
   });
 
   it('should get today\'s date', () => {
@@ -201,7 +200,7 @@ describe('NativeDateAdapter', () => {
   });
 
   it('should parse string', () => {
-    expect(adapter.parse('1/1/2017')).toEqual(new Date(2017, JAN, 1));
+    expect(adapter.parse('1/1/2017')).toEqual(new Date(2017, 0, 1));
   });
 
   it('should parse number', () => {
@@ -210,7 +209,7 @@ describe('NativeDateAdapter', () => {
   });
 
   it ('should parse Date', () => {
-    const date = new Date(2017, JAN, 1);
+    const date = new Date(2017, 0, 1);
     expect(adapter.parse(date)).toEqual(date);
     expect(adapter.parse(date)).not.toBe(date);
   });
@@ -226,21 +225,21 @@ describe('NativeDateAdapter', () => {
 
   it('should format', () => {
     if (SUPPORTS_INTL) {
-      expect(adapter.format(new Date(2017, JAN, 1), {})).toEqual('1/1/2017');
+      expect(adapter.format(new Date(2017, 0, 1), {})).toEqual('1/1/2017');
     } else {
-      expect(adapter.format(new Date(2017, JAN, 1), {})).toEqual('Sun Jan 01 2017');
+      expect(adapter.format(new Date(2017, 0, 1), {})).toEqual('Sun Jan 01 2017');
     }
   });
 
   it('should format with custom format', () => {
     if (SUPPORTS_INTL) {
-      expect(adapter.format(new Date(2017, JAN, 1), {
+      expect(adapter.format(new Date(2017, 0, 1), {
         year: 'numeric',
         month: 'long',
         day: 'numeric'
       })).toEqual('January 1, 2017');
     } else {
-      expect(adapter.format(new Date(2017, JAN, 1), {
+      expect(adapter.format(new Date(2017, 0, 1), {
         year: 'numeric',
         month: 'long',
         day: 'numeric'
@@ -254,12 +253,12 @@ describe('NativeDateAdapter', () => {
     if (SUPPORTS_INTL) {
       // Edge & IE use a different format in Japanese.
       if (platform.EDGE || platform.TRIDENT) {
-        expect(adapter.format(new Date(2017, JAN, 1), {})).toEqual('2017年1月1日');
+        expect(adapter.format(new Date(2017, 0, 1), {})).toEqual('2017年1月1日');
       } else {
-        expect(adapter.format(new Date(2017, JAN, 1), {})).toEqual('2017/1/1');
+        expect(adapter.format(new Date(2017, 0, 1), {})).toEqual('2017/1/1');
       }
     } else {
-      expect(adapter.format(new Date(2017, JAN, 1), {})).toEqual('Sun Jan 01 2017');
+      expect(adapter.format(new Date(2017, 0, 1), {})).toEqual('Sun Jan 01 2017');
     }
   });
 
@@ -269,68 +268,68 @@ describe('NativeDateAdapter', () => {
   });
 
   it('should add years', () => {
-    expect(adapter.addCalendarYears(new Date(2017, JAN, 1), 1)).toEqual(new Date(2018, JAN, 1));
-    expect(adapter.addCalendarYears(new Date(2017, JAN, 1), -1)).toEqual(new Date(2016, JAN, 1));
+    expect(adapter.addCalendarYears(new Date(2017, 0, 1), 1)).toEqual(new Date(2018, 0, 1));
+    expect(adapter.addCalendarYears(new Date(2017, 0, 1), -1)).toEqual(new Date(2016, 0, 1));
   });
 
   it('should respect leap years when adding years', () => {
-    expect(adapter.addCalendarYears(new Date(2016, FEB, 29), 1)).toEqual(new Date(2017, FEB, 28));
-    expect(adapter.addCalendarYears(new Date(2016, FEB, 29), -1)).toEqual(new Date(2015, FEB, 28));
+    expect(adapter.addCalendarYears(new Date(2016, 1, 29), 1)).toEqual(new Date(2017, 1, 28));
+    expect(adapter.addCalendarYears(new Date(2016, 1, 29), -1)).toEqual(new Date(2015, 1, 28));
   });
 
   it('should add months', () => {
-    expect(adapter.addCalendarMonths(new Date(2017, JAN, 1), 1)).toEqual(new Date(2017, FEB, 1));
-    expect(adapter.addCalendarMonths(new Date(2017, JAN, 1), -1)).toEqual(new Date(2016, DEC, 1));
+    expect(adapter.addCalendarMonths(new Date(2017, 0, 1), 1)).toEqual(new Date(2017, 1, 1));
+    expect(adapter.addCalendarMonths(new Date(2017, 0, 1), -1)).toEqual(new Date(2016, 11, 1));
   });
 
   it('should respect month length differences when adding months', () => {
-    expect(adapter.addCalendarMonths(new Date(2017, JAN, 31), 1)).toEqual(new Date(2017, FEB, 28));
-    expect(adapter.addCalendarMonths(new Date(2017, MAR, 31), -1)).toEqual(new Date(2017, FEB, 28));
+    expect(adapter.addCalendarMonths(new Date(2017, 0, 31), 1)).toEqual(new Date(2017, 1, 28));
+    expect(adapter.addCalendarMonths(new Date(2017, 2, 31), -1)).toEqual(new Date(2017, 1, 28));
   });
 
   it('should add days', () => {
-    expect(adapter.addCalendarDays(new Date(2017, JAN, 1), 1)).toEqual(new Date(2017, JAN, 2));
-    expect(adapter.addCalendarDays(new Date(2017, JAN, 1), -1)).toEqual(new Date(2016, DEC, 31));
+    expect(adapter.addCalendarDays(new Date(2017, 0, 1), 1)).toEqual(new Date(2017, 0, 2));
+    expect(adapter.addCalendarDays(new Date(2017, 0, 1), -1)).toEqual(new Date(2016, 11, 31));
   });
 
   it('should clone', () => {
-    const date = new Date(2017, JAN, 1);
+    const date = new Date(2017, 0, 1);
     expect(adapter.clone(date)).toEqual(date);
     expect(adapter.clone(date)).not.toBe(date);
   });
 
   it('should preserve time when cloning', () => {
-    const date = new Date(2017, JAN, 1, 4, 5, 6);
+    const date = new Date(2017, 0, 1, 4, 5, 6);
     expect(adapter.clone(date)).toEqual(date);
     expect(adapter.clone(date)).not.toBe(date);
   });
 
   it('should compare dates', () => {
-    expect(adapter.compareDate(new Date(2017, JAN, 1), new Date(2017, JAN, 2))).toBeLessThan(0);
-    expect(adapter.compareDate(new Date(2017, JAN, 1), new Date(2017, FEB, 1))).toBeLessThan(0);
-    expect(adapter.compareDate(new Date(2017, JAN, 1), new Date(2018, JAN, 1))).toBeLessThan(0);
-    expect(adapter.compareDate(new Date(2017, JAN, 1), new Date(2017, JAN, 1))).toBe(0);
-    expect(adapter.compareDate(new Date(2018, JAN, 1), new Date(2017, JAN, 1))).toBeGreaterThan(0);
-    expect(adapter.compareDate(new Date(2017, FEB, 1), new Date(2017, JAN, 1))).toBeGreaterThan(0);
-    expect(adapter.compareDate(new Date(2017, JAN, 2), new Date(2017, JAN, 1))).toBeGreaterThan(0);
+    expect(adapter.compareDate(new Date(2017, 0, 1), new Date(2017, 0, 2))).toBeLessThan(0);
+    expect(adapter.compareDate(new Date(2017, 0, 1), new Date(2017, 1, 1))).toBeLessThan(0);
+    expect(adapter.compareDate(new Date(2017, 0, 1), new Date(2018, 0, 1))).toBeLessThan(0);
+    expect(adapter.compareDate(new Date(2017, 0, 1), new Date(2017, 0, 1))).toBe(0);
+    expect(adapter.compareDate(new Date(2018, 0, 1), new Date(2017, 0, 1))).toBeGreaterThan(0);
+    expect(adapter.compareDate(new Date(2017, 1, 1), new Date(2017, 0, 1))).toBeGreaterThan(0);
+    expect(adapter.compareDate(new Date(2017, 0, 2), new Date(2017, 0, 1))).toBeGreaterThan(0);
   });
 
   it('should clamp date at lower bound', () => {
     expect(adapter.clampDate(
-        new Date(2017, JAN, 1), new Date(2018, JAN, 1), new Date(2019, JAN, 1)))
-        .toEqual(new Date(2018, JAN, 1));
+        new Date(2017, 0, 1), new Date(2018, 0, 1), new Date(2019, 0, 1)))
+        .toEqual(new Date(2018, 0, 1));
   });
 
   it('should clamp date at upper bound', () => {
     expect(adapter.clampDate(
-        new Date(2020, JAN, 1), new Date(2018, JAN, 1), new Date(2019, JAN, 1)))
-        .toEqual(new Date(2019, JAN, 1));
+        new Date(2020, 0, 1), new Date(2018, 0, 1), new Date(2019, 0, 1)))
+        .toEqual(new Date(2019, 0, 1));
   });
 
   it('should clamp date already within bounds', () => {
     expect(adapter.clampDate(
-        new Date(2018, FEB, 1), new Date(2018, JAN, 1), new Date(2019, JAN, 1)))
-        .toEqual(new Date(2018, FEB, 1));
+        new Date(2018, 1, 1), new Date(2018, 0, 1), new Date(2019, 0, 1)))
+        .toEqual(new Date(2018, 1, 1));
   });
 
   it('should use UTC for formatting by default', () => {

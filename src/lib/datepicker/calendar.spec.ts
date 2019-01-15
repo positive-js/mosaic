@@ -12,7 +12,6 @@ import {
   MockNgZone
 } from '@ptsecurity/cdk/testing';
 import { DateAdapter, McNativeDateModule } from '@ptsecurity/mosaic/core';
-import { DEC, FEB, JAN, JUL, NOV } from '@ptsecurity/mosaic/testing';
 
 import { McCalendar } from './calendar';
 import { McDatepickerIntl } from './datepicker-intl';
@@ -87,7 +86,7 @@ describe('McCalendar', () => {
 
     it('should be in month view with specified month active', () => {
       expect(calendarInstance.currentView).toBe('month');
-      expect(calendarInstance.activeDate).toEqual(new Date(2017, JAN, 31));
+      expect(calendarInstance.activeDate).toEqual(new Date(2017, 0, 31));
     });
 
     it('should select date in month view', () => {
@@ -96,7 +95,7 @@ describe('McCalendar', () => {
       fixture.detectChanges();
 
       expect(calendarInstance.currentView).toBe('month');
-      expect(testComponent.selected).toEqual(new Date(2017, JAN, 31));
+      expect(testComponent.selected).toEqual(new Date(2017, 0, 31));
     });
 
     it('should emit the selected month on cell clicked in year view', () => {
@@ -104,7 +103,7 @@ describe('McCalendar', () => {
       fixture.detectChanges();
 
       expect(calendarInstance.currentView).toBe('multi-year');
-      expect(calendarInstance.activeDate).toEqual(new Date(2017, JAN, 31));
+      expect(calendarInstance.activeDate).toEqual(new Date(2017, 0, 31));
 
       (calendarElement.querySelector('.mc-calendar-body-active') as HTMLElement).click();
 
@@ -123,7 +122,7 @@ describe('McCalendar', () => {
       fixture.detectChanges();
 
       expect(calendarInstance.currentView).toBe('multi-year');
-      expect(calendarInstance.activeDate).toEqual(new Date(2017, JAN, 31));
+      expect(calendarInstance.activeDate).toEqual(new Date(2017, 0, 31));
 
       (calendarElement.querySelector('.mc-calendar-body-active') as HTMLElement).click();
 
@@ -173,7 +172,7 @@ describe('McCalendar', () => {
         });
 
         it('should initially set start date active', () => {
-          expect(calendarInstance.activeDate).toEqual(new Date(2017, JAN, 31));
+          expect(calendarInstance.activeDate).toEqual(new Date(2017, 0, 31));
         });
 
         it('should make the calendar body focusable', () => {
@@ -231,7 +230,7 @@ describe('McCalendar', () => {
             fixture.detectChanges();
 
             expect(calendarInstance.currentView).toBe('month');
-            expect(calendarInstance.activeDate).toEqual(new Date(2017, FEB, 28));
+            expect(calendarInstance.activeDate).toEqual(new Date(2017, 1, 28));
             expect(testComponent.selected).toBeUndefined();
           });
 
@@ -245,7 +244,7 @@ describe('McCalendar', () => {
             fixture.detectChanges();
 
             expect(calendarInstance.currentView).toBe('month');
-            expect(calendarInstance.activeDate).toEqual(new Date(2017, FEB, 28));
+            expect(calendarInstance.activeDate).toEqual(new Date(2017, 1, 28));
             expect(testComponent.selected).toBeUndefined();
           });
         });
@@ -268,7 +267,7 @@ describe('McCalendar', () => {
             fixture.detectChanges();
 
             expect(calendarInstance.currentView).toBe('year');
-            expect(calendarInstance.activeDate).toEqual(new Date(2018, JAN, 31));
+            expect(calendarInstance.activeDate).toEqual(new Date(2018, 0, 31));
             expect(testComponent.selected).toBeUndefined();
           });
 
@@ -282,7 +281,7 @@ describe('McCalendar', () => {
             fixture.detectChanges();
 
             expect(calendarInstance.currentView).toBe('year');
-            expect(calendarInstance.activeDate).toEqual(new Date(2018, JAN, 31));
+            expect(calendarInstance.activeDate).toEqual(new Date(2018, 0, 31));
             expect(testComponent.selected).toBeUndefined();
           });
 
@@ -309,68 +308,68 @@ describe('McCalendar', () => {
     });
 
     it('should clamp startAt value below min date', () => {
-      testComponent.startAt = new Date(2000, JAN, 1);
+      testComponent.startAt = new Date(2000, 0, 1);
       fixture.detectChanges();
 
-      expect(calendarInstance.activeDate).toEqual(new Date(2016, JAN, 1));
+      expect(calendarInstance.activeDate).toEqual(new Date(2016, 0, 1));
     });
 
     it('should clamp startAt value above max date', () => {
-      testComponent.startAt = new Date(2020, JAN, 1);
+      testComponent.startAt = new Date(2020, 0, 1);
       fixture.detectChanges();
 
-      expect(calendarInstance.activeDate).toEqual(new Date(2018, JAN, 1));
+      expect(calendarInstance.activeDate).toEqual(new Date(2018, 0, 1));
     });
 
     it('should not go back past min date', () => {
-      testComponent.startAt = new Date(2016, FEB, 1);
+      testComponent.startAt = new Date(2016, 1, 1);
       fixture.detectChanges();
 
       const prevButton =
           calendarElement.querySelector('.mc-calendar-previous-button') as HTMLButtonElement;
 
       expect(prevButton.disabled).toBe(false, 'previous button should not be disabled');
-      expect(calendarInstance.activeDate).toEqual(new Date(2016, FEB, 1));
+      expect(calendarInstance.activeDate).toEqual(new Date(2016, 1, 1));
 
       prevButton.click();
       fixture.detectChanges();
 
       expect(prevButton.disabled).toBe(true, 'previous button should be disabled');
-      expect(calendarInstance.activeDate).toEqual(new Date(2016, JAN, 1));
+      expect(calendarInstance.activeDate).toEqual(new Date(2016, 0, 1));
 
       prevButton.click();
       fixture.detectChanges();
 
-      expect(calendarInstance.activeDate).toEqual(new Date(2016, JAN, 1));
+      expect(calendarInstance.activeDate).toEqual(new Date(2016, 0, 1));
     });
 
     it('should not go forward past max date', () => {
-      testComponent.startAt = new Date(2017, DEC, 1);
+      testComponent.startAt = new Date(2017, 11, 1);
       fixture.detectChanges();
 
       const nextButton =
           calendarElement.querySelector('.mc-calendar-next-button') as HTMLButtonElement;
 
       expect(nextButton.disabled).toBe(false, 'next button should not be disabled');
-      expect(calendarInstance.activeDate).toEqual(new Date(2017, DEC, 1));
+      expect(calendarInstance.activeDate).toEqual(new Date(2017, 11, 1));
 
       nextButton.click();
       fixture.detectChanges();
 
       expect(nextButton.disabled).toBe(true, 'next button should be disabled');
-      expect(calendarInstance.activeDate).toEqual(new Date(2018, JAN, 1));
+      expect(calendarInstance.activeDate).toEqual(new Date(2018, 0, 1));
 
       nextButton.click();
       fixture.detectChanges();
 
-      expect(calendarInstance.activeDate).toEqual(new Date(2018, JAN, 1));
+      expect(calendarInstance.activeDate).toEqual(new Date(2018, 0, 1));
     });
 
     it('should re-render the month view when the minDate changes', () => {
       fixture.detectChanges();
       spyOn(calendarInstance.monthView, 'init').and.callThrough();
 
-      testComponent.minDate = new Date(2017, NOV, 1);
+      testComponent.minDate = new Date(2017, 10, 1);
       fixture.detectChanges();
 
       expect(calendarInstance.monthView.init).toHaveBeenCalled();
@@ -380,7 +379,7 @@ describe('McCalendar', () => {
       fixture.detectChanges();
       spyOn(calendarInstance.monthView, 'init').and.callThrough();
 
-      testComponent.maxDate = new Date(2017, DEC, 1);
+      testComponent.maxDate = new Date(2017, 11, 1);
       fixture.detectChanges();
 
       expect(calendarInstance.monthView.init).toHaveBeenCalled();
@@ -398,7 +397,7 @@ describe('McCalendar', () => {
 
       spyOn(calendarInstance.yearView, 'init').and.callThrough();
 
-      testComponent.minDate = new Date(2017, NOV, 1);
+      testComponent.minDate = new Date(2017, 10, 1);
       fixture.detectChanges();
 
       expect(calendarInstance.yearView.init).toHaveBeenCalled();
@@ -416,7 +415,7 @@ describe('McCalendar', () => {
 
       spyOn(calendarInstance.yearView, 'init').and.callThrough();
 
-      testComponent.maxDate = new Date(2017, DEC, 1);
+      testComponent.maxDate = new Date(2017, 11, 1);
       fixture.detectChanges();
 
       expect(calendarInstance.yearView.init).toHaveBeenCalled();
@@ -431,7 +430,7 @@ describe('McCalendar', () => {
 
       spyOn(calendarInstance.multiYearView, 'init').and.callThrough();
 
-      testComponent.minDate = new Date(2017, NOV, 1);
+      testComponent.minDate = new Date(2017, 10, 1);
       fixture.detectChanges();
 
       expect(calendarInstance.multiYearView.init).toHaveBeenCalled();
@@ -446,7 +445,7 @@ describe('McCalendar', () => {
 
       spyOn(calendarInstance.multiYearView, 'init').and.callThrough();
 
-      testComponent.maxDate = new Date(2017, DEC, 1);
+      testComponent.maxDate = new Date(2017, 11, 1);
       fixture.detectChanges();
 
       expect(calendarInstance.multiYearView.init).toHaveBeenCalled();
@@ -510,7 +509,7 @@ describe('McCalendar', () => {
       (cells[1] as HTMLElement).click();
       fixture.detectChanges();
 
-      expect(testComponent.selected).toEqual(new Date(2017, JAN, 2));
+      expect(testComponent.selected).toEqual(new Date(2017, 0, 2));
     });
 
     describe('a11y', () => {
@@ -526,7 +525,7 @@ describe('McCalendar', () => {
 
       it('should not allow selection of disabled date in month view', () => {
         expect(calendarInstance.currentView).toBe('month');
-        expect(calendarInstance.activeDate).toEqual(new Date(2017, JAN, 1));
+        expect(calendarInstance.activeDate).toEqual(new Date(2017, 0, 1));
 
         dispatchKeyboardEvent(tableBodyEl, 'keydown', ENTER);
         fixture.detectChanges();
@@ -543,7 +542,7 @@ describe('McCalendar', () => {
         (calendarElement.querySelector('.mc-calendar-body-active') as HTMLElement).click();
         fixture.detectChanges();
 
-        calendarInstance.activeDate = new Date(2017, NOV, 1);
+        calendarInstance.activeDate = new Date(2017, 10, 1);
         fixture.detectChanges();
 
         expect(calendarInstance.currentView).toBe('year');
@@ -574,7 +573,7 @@ class StandardCalendar {
   selected: Date;
   selectedYear: Date;
   selectedMonth: Date;
-  startDate = new Date(2017, JAN, 31);
+  startDate = new Date(2017, 0, 31);
 }
 
 
@@ -585,8 +584,8 @@ class StandardCalendar {
 })
 class CalendarWithMinMax {
   startAt: Date;
-  minDate = new Date(2016, JAN, 1);
-  maxDate = new Date(2018, JAN, 1);
+  minDate = new Date(2016, 0, 1);
+  maxDate = new Date(2018, 0, 1);
 }
 
 
@@ -598,10 +597,10 @@ class CalendarWithMinMax {
 })
 class CalendarWithDateFilter {
   selected: Date;
-  startDate = new Date(2017, JAN, 1);
+  startDate = new Date(2017, 0, 1);
 
   dateFilter(date: Date) {
-    return !(date.getDate() % 2) && date.getMonth() !== NOV;
+    return !(date.getDate() % 2) && date.getMonth() !== 10;
   }
 }
 
@@ -617,12 +616,12 @@ class CalendarWithDateFilter {
   `
 })
 class CalendarWithSelectableMinDate {
-  startAt = new Date(2018, JUL, 0);
+  startAt = new Date(2018, 6, 0);
   selected: Date;
   minDate: Date;
 
   constructor() {
-    this.select(new Date(2018, JUL, 10));
+    this.select(new Date(2018, 6, 10));
   }
 
   select(value: Date) {

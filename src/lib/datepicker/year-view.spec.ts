@@ -15,7 +15,6 @@ import {
 } from '@ptsecurity/cdk/keycodes';
 import { dispatchFakeEvent, dispatchKeyboardEvent } from '@ptsecurity/cdk/testing';
 import { McNativeDateModule } from '@ptsecurity/mosaic/core';
-import { AUG, DEC, FEB, JAN, JUL, JUN, MAR, MAY, NOV, OCT, SEP } from '@ptsecurity/mosaic/testing';
 
 import { McCalendarBody } from './calendar-body';
 import { McYearView } from './year-view';
@@ -75,7 +74,7 @@ describe('McYearView', () => {
     });
 
     it('does not show selected month if in different year', () => {
-      testComponent.selected = new Date(2016, MAR, 10);
+      testComponent.selected = new Date(2016, 2, 10);
       fixture.detectChanges();
 
       const selectedEl = yearViewNativeElement.querySelector('.mc-calendar-body-selected');
@@ -108,14 +107,14 @@ describe('McYearView', () => {
     });
 
     it('should allow selection of month with less days than current active date', () => {
-      testComponent.date = new Date(2017, JUL, 31);
+      testComponent.date = new Date(2017, 6, 31);
       fixture.detectChanges();
 
       // tslint:disable-next-line:no-void-expression
-      expect(testComponent.yearView.onMonthSelected(JUN));
+      expect(testComponent.yearView.onMonthSelected(5));
       fixture.detectChanges();
 
-      expect(testComponent.selected).toEqual(new Date(2017, JUN, 30));
+      expect(testComponent.selected).toEqual(new Date(2017, 5, 30));
     });
 
     describe('a11y', () => {
@@ -129,7 +128,7 @@ describe('McYearView', () => {
             fixture.debugElement.nativeElement.querySelector('.mc-calendar-body') as HTMLElement;
           expect(calendarBodyEl).not.toBeNull();
           dir.value = 'ltr';
-          fixture.componentInstance.date = new Date(2017, JAN, 5);
+          fixture.componentInstance.date = new Date(2017, 0, 5);
           dispatchFakeEvent(calendarBodyEl, 'focus');
           fixture.detectChanges();
         });
@@ -138,12 +137,12 @@ describe('McYearView', () => {
           dispatchKeyboardEvent(calendarBodyEl, 'keydown', LEFT_ARROW);
           fixture.detectChanges();
 
-          expect(calendarInstance.date).toEqual(new Date(2016, DEC, 5));
+          expect(calendarInstance.date).toEqual(new Date(2016, 11, 5));
 
           dispatchKeyboardEvent(calendarBodyEl, 'keydown', LEFT_ARROW);
           fixture.detectChanges();
 
-          expect(calendarInstance.date).toEqual(new Date(2016, NOV, 5));
+          expect(calendarInstance.date).toEqual(new Date(2016, 10, 5));
         });
 
         it('should increment month on left arrow press in rtl', () => {
@@ -152,24 +151,24 @@ describe('McYearView', () => {
           dispatchKeyboardEvent(calendarBodyEl, 'keydown', LEFT_ARROW);
           fixture.detectChanges();
 
-          expect(calendarInstance.date).toEqual(new Date(2017, FEB, 5));
+          expect(calendarInstance.date).toEqual(new Date(2017, 1, 5));
 
           dispatchKeyboardEvent(calendarBodyEl, 'keydown', LEFT_ARROW);
           fixture.detectChanges();
 
-          expect(calendarInstance.date).toEqual(new Date(2017, MAR, 5));
+          expect(calendarInstance.date).toEqual(new Date(2017, 2, 5));
         });
 
         it('should increment month on right arrow press', () => {
           dispatchKeyboardEvent(calendarBodyEl, 'keydown', RIGHT_ARROW);
           fixture.detectChanges();
 
-          expect(calendarInstance.date).toEqual(new Date(2017, FEB, 5));
+          expect(calendarInstance.date).toEqual(new Date(2017, 1, 5));
 
           dispatchKeyboardEvent(calendarBodyEl, 'keydown', RIGHT_ARROW);
           fixture.detectChanges();
 
-          expect(calendarInstance.date).toEqual(new Date(2017, MAR, 5));
+          expect(calendarInstance.date).toEqual(new Date(2017, 2, 5));
         });
 
         it('should decrement month on right arrow press in rtl', () => {
@@ -178,118 +177,118 @@ describe('McYearView', () => {
           dispatchKeyboardEvent(calendarBodyEl, 'keydown', RIGHT_ARROW);
           fixture.detectChanges();
 
-          expect(calendarInstance.date).toEqual(new Date(2016, DEC, 5));
+          expect(calendarInstance.date).toEqual(new Date(2016, 11, 5));
 
           dispatchKeyboardEvent(calendarBodyEl, 'keydown', RIGHT_ARROW);
           fixture.detectChanges();
 
-          expect(calendarInstance.date).toEqual(new Date(2016, NOV, 5));
+          expect(calendarInstance.date).toEqual(new Date(2016, 10, 5));
         });
 
         it('should go up a row on up arrow press', () => {
           dispatchKeyboardEvent(calendarBodyEl, 'keydown', UP_ARROW);
           fixture.detectChanges();
 
-          expect(calendarInstance.date).toEqual(new Date(2016, SEP, 5));
+          expect(calendarInstance.date).toEqual(new Date(2016, 8, 5));
 
-          calendarInstance.date = new Date(2017, JUL, 1);
+          calendarInstance.date = new Date(2017, 6, 1);
           fixture.detectChanges();
 
           dispatchKeyboardEvent(calendarBodyEl, 'keydown', UP_ARROW);
           fixture.detectChanges();
 
-          expect(calendarInstance.date).toEqual(new Date(2017, MAR, 1));
+          expect(calendarInstance.date).toEqual(new Date(2017, 2, 1));
 
-          calendarInstance.date = new Date(2017, DEC, 10);
+          calendarInstance.date = new Date(2017, 11, 10);
           fixture.detectChanges();
 
           dispatchKeyboardEvent(calendarBodyEl, 'keydown', UP_ARROW);
           fixture.detectChanges();
 
-          expect(calendarInstance.date).toEqual(new Date(2017, AUG, 10));
+          expect(calendarInstance.date).toEqual(new Date(2017, 7, 10));
         });
 
         it('should go down a row on down arrow press', () => {
           dispatchKeyboardEvent(calendarBodyEl, 'keydown', DOWN_ARROW);
           fixture.detectChanges();
 
-          expect(calendarInstance.date).toEqual(new Date(2017, MAY, 5));
+          expect(calendarInstance.date).toEqual(new Date(2017, 4, 5));
 
-          calendarInstance.date = new Date(2017, JUN, 1);
+          calendarInstance.date = new Date(2017, 5, 1);
           fixture.detectChanges();
 
           dispatchKeyboardEvent(calendarBodyEl, 'keydown', DOWN_ARROW);
           fixture.detectChanges();
 
-          expect(calendarInstance.date).toEqual(new Date(2017, OCT, 1));
+          expect(calendarInstance.date).toEqual(new Date(2017, 9, 1));
 
-          calendarInstance.date = new Date(2017, SEP, 30);
+          calendarInstance.date = new Date(2017, 8, 30);
           fixture.detectChanges();
 
           dispatchKeyboardEvent(calendarBodyEl, 'keydown', DOWN_ARROW);
           fixture.detectChanges();
 
-          expect(calendarInstance.date).toEqual(new Date(2018, JAN, 30));
+          expect(calendarInstance.date).toEqual(new Date(2018, 0, 30));
         });
 
         it('should go to first month of the year on home press', () => {
-          calendarInstance.date = new Date(2017, SEP, 30);
+          calendarInstance.date = new Date(2017, 8, 30);
           fixture.detectChanges();
 
           dispatchKeyboardEvent(calendarBodyEl, 'keydown', HOME);
           fixture.detectChanges();
 
-          expect(calendarInstance.date).toEqual(new Date(2017, JAN, 30));
+          expect(calendarInstance.date).toEqual(new Date(2017, 0, 30));
 
           dispatchKeyboardEvent(calendarBodyEl, 'keydown', HOME);
           fixture.detectChanges();
 
-          expect(calendarInstance.date).toEqual(new Date(2017, JAN, 30));
+          expect(calendarInstance.date).toEqual(new Date(2017, 0, 30));
         });
 
         it('should go to last month of the year on end press', () => {
-          calendarInstance.date = new Date(2017, OCT, 31);
+          calendarInstance.date = new Date(2017, 9, 31);
           fixture.detectChanges();
 
           dispatchKeyboardEvent(calendarBodyEl, 'keydown', END);
           fixture.detectChanges();
 
-          expect(calendarInstance.date).toEqual(new Date(2017, DEC, 31));
+          expect(calendarInstance.date).toEqual(new Date(2017, 11, 31));
 
           dispatchKeyboardEvent(calendarBodyEl, 'keydown', END);
           fixture.detectChanges();
 
-          expect(calendarInstance.date).toEqual(new Date(2017, DEC, 31));
+          expect(calendarInstance.date).toEqual(new Date(2017, 11, 31));
         });
 
         it('should go back one year on page up press', () => {
-          calendarInstance.date = new Date(2016, FEB, 29);
+          calendarInstance.date = new Date(2016, 1, 29);
           fixture.detectChanges();
 
           dispatchKeyboardEvent(calendarBodyEl, 'keydown', PAGE_UP);
           fixture.detectChanges();
 
-          expect(calendarInstance.date).toEqual(new Date(2015, FEB, 28));
+          expect(calendarInstance.date).toEqual(new Date(2015, 1, 28));
 
           dispatchKeyboardEvent(calendarBodyEl, 'keydown', PAGE_UP);
           fixture.detectChanges();
 
-          expect(calendarInstance.date).toEqual(new Date(2014, FEB, 28));
+          expect(calendarInstance.date).toEqual(new Date(2014, 1, 28));
         });
 
         it('should go forward one year on page down press', () => {
-          calendarInstance.date = new Date(2016, FEB, 29);
+          calendarInstance.date = new Date(2016, 1, 29);
           fixture.detectChanges();
 
           dispatchKeyboardEvent(calendarBodyEl, 'keydown', PAGE_DOWN);
           fixture.detectChanges();
 
-          expect(calendarInstance.date).toEqual(new Date(2017, FEB, 28));
+          expect(calendarInstance.date).toEqual(new Date(2017, 1, 28));
 
           dispatchKeyboardEvent(calendarBodyEl, 'keydown', PAGE_DOWN);
           fixture.detectChanges();
 
-          expect(calendarInstance.date).toEqual(new Date(2018, FEB, 28));
+          expect(calendarInstance.date).toEqual(new Date(2018, 1, 28));
         });
       });
     });
@@ -322,8 +321,8 @@ describe('McYearView', () => {
                    (monthSelected)="selectedMonth=$event"></mc-year-view>`
 })
 class StandardYearView {
-  date = new Date(2017, JAN, 5);
-  selected = new Date(2017, MAR, 10);
+  date = new Date(2017, 0, 5);
+  selected = new Date(2017, 2, 10);
   selectedMonth: Date;
 
   @ViewChild(McYearView) yearView: McYearView<Date>;
@@ -334,13 +333,13 @@ class StandardYearView {
   template: `<mc-year-view [activeDate]="activeDate" [dateFilter]="dateFilter"></mc-year-view>`
 })
 class YearViewWithDateFilter {
-  activeDate = new Date(2017, JAN, 1);
+  activeDate = new Date(2017, 0, 1);
 
   dateFilter(date: Date) {
-    if (date.getMonth() === JAN) {
+    if (date.getMonth() === 0) {
       return date.getDate() === 10;
     }
 
-    return date.getMonth() !== FEB;
+    return date.getMonth() !== 1;
   }
 }

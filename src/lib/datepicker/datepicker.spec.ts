@@ -21,7 +21,6 @@ import {
 } from '@ptsecurity/cdk/testing';
 import { MC_DATE_LOCALE, McNativeDateModule, NativeDateModule, ThemePalette } from '@ptsecurity/mosaic/core';
 import { McFormField, McFormFieldModule } from '@ptsecurity/mosaic/form-field';
-import { DEC, JAN, JUL, JUN, SEP } from '@ptsecurity/mosaic/testing';
 import { Subject } from 'rxjs';
 
 import { McInputModule } from '../input/index';
@@ -192,7 +191,7 @@ describe('McDatepicker', () => {
           fixture.detectChanges();
 
           expect(document.querySelector('mc-datepicker-content')).not.toBeNull();
-          expect(testComponent.datepickerInput.value).toEqual(new Date(2020, JAN, currentDay));
+          expect(testComponent.datepickerInput.value).toEqual(new Date(2020, 0, currentDay));
 
           const cells = document.querySelectorAll('.mc-calendar-body-cell');
           dispatchMouseEvent(cells[1], 'click');
@@ -201,7 +200,7 @@ describe('McDatepicker', () => {
         }
 
         expect(selectedChangedSpy.calls.count()).toEqual(1);
-        expect(testComponent.datepickerInput.value).toEqual(new Date(2020, JAN, 2));
+        expect(testComponent.datepickerInput.value).toEqual(new Date(2020, 0, 2));
       }));
 
       it('pressing enter on the currently selected date should close the calendar without ' +
@@ -214,19 +213,19 @@ describe('McDatepicker', () => {
 
         const calendarBodyEl = document.querySelector('.mc-calendar-body') as HTMLElement;
         expect(calendarBodyEl).not.toBeNull();
-        expect(testComponent.datepickerInput.value).toEqual(new Date(2020, JAN, 1));
+        expect(testComponent.datepickerInput.value).toEqual(new Date(2020, 0, 1));
 
         dispatchKeyboardEvent(calendarBodyEl, 'keydown', ENTER);
         fixture.detectChanges();
 
         fixture.whenStable().then(() => {
           expect(selectedChangedSpy.calls.count()).toEqual(0);
-          expect(testComponent.datepickerInput.value).toEqual(new Date(2020, JAN, 1));
+          expect(testComponent.datepickerInput.value).toEqual(new Date(2020, 0, 1));
         });
       });
 
       it('startAt should fallback to input value', () => {
-        expect(testComponent.datepicker.startAt).toEqual(new Date(2020, JAN, 1));
+        expect(testComponent.datepicker.startAt).toEqual(new Date(2020, 0, 1));
       });
 
       it('input should aria-owns calendar after opened', fakeAsync(() => {
@@ -390,7 +389,7 @@ describe('McDatepicker', () => {
       it('should handle value changes when a datepicker is assigned after init', fakeAsync(() => {
         const fixture = createComponent(DelayedDatepicker, [McNativeDateModule]);
         const testComponent: DelayedDatepicker = fixture.componentInstance;
-        const toSelect = new Date(2017, JAN, 1);
+        const toSelect = new Date(2017, 0, 1);
 
         fixture.detectChanges();
 
@@ -452,7 +451,7 @@ describe('McDatepicker', () => {
       }));
 
       it('explicit startAt should override input value', () => {
-        expect(testComponent.datepicker.startAt).toEqual(new Date(2010, JAN, 1));
+        expect(testComponent.datepicker.startAt).toEqual(new Date(2010, 0, 1));
       });
     });
 
@@ -577,7 +576,7 @@ describe('McDatepicker', () => {
         expect(testComponent.datepickerInput.value).toBeNull();
         expect(testComponent.datepicker.selected).toBeNull();
 
-        const selected = new Date(2017, JAN, 1);
+        const selected = new Date(2017, 0, 1);
         testComponent.selected = selected;
         fixture.detectChanges();
         flush();
@@ -591,7 +590,7 @@ describe('McDatepicker', () => {
         expect(testComponent.selected).toBeNull();
         expect(testComponent.datepickerInput.value).toBeNull();
 
-        const selected = new Date(2017, JAN, 1);
+        const selected = new Date(2017, 0, 1);
         testComponent.datepicker.select(selected);
         fixture.detectChanges();
         flush();
@@ -618,7 +617,7 @@ describe('McDatepicker', () => {
 
         expect(inputEl.classList).toContain('ng-pristine');
 
-        testComponent.datepicker.select(new Date(2017, JAN, 1));
+        testComponent.datepicker.select(new Date(2017, 0, 1));
         fixture.detectChanges();
         flush();
         fixture.detectChanges();
@@ -631,7 +630,7 @@ describe('McDatepicker', () => {
 
         expect(inputEl.classList).toContain('ng-pristine');
 
-        testComponent.selected = new Date(2017, JAN, 1);
+        testComponent.selected = new Date(2017, 0, 1);
         fixture.detectChanges();
         flush();
         fixture.detectChanges();
@@ -692,7 +691,7 @@ describe('McDatepicker', () => {
 
         expect(inputEl.classList).toContain('ng-untouched');
 
-        testComponent.datepicker.select(new Date(2017, JAN, 1));
+        testComponent.datepicker.select(new Date(2017, 0, 1));
         fixture.detectChanges();
         flush();
         fixture.detectChanges();
@@ -721,7 +720,7 @@ describe('McDatepicker', () => {
         expect(testComponent.datepickerInput.value).toBeNull();
         expect(testComponent.datepicker.selected).toBeNull();
 
-        const selected = new Date(2017, JAN, 1);
+        const selected = new Date(2017, 0, 1);
         testComponent.formControl.setValue(selected);
         fixture.detectChanges();
 
@@ -733,7 +732,7 @@ describe('McDatepicker', () => {
         expect(testComponent.formControl.value).toBeNull();
         expect(testComponent.datepickerInput.value).toBeNull();
 
-        const selected = new Date(2017, JAN, 1);
+        const selected = new Date(2017, 0, 1);
         testComponent.datepicker.select(selected);
         fixture.detectChanges();
 
@@ -988,12 +987,12 @@ describe('McDatepicker', () => {
       }));
 
       it('should use min and max dates specified by the input', () => {
-        expect(testComponent.datepicker.minDate).toEqual(new Date(2010, JAN, 1));
-        expect(testComponent.datepicker.maxDate).toEqual(new Date(2020, JAN, 1));
+        expect(testComponent.datepicker.minDate).toEqual(new Date(2010, 0, 1));
+        expect(testComponent.datepicker.maxDate).toEqual(new Date(2020, 0, 1));
       });
 
       it('should mark invalid when value is before min', fakeAsync(() => {
-        testComponent.date = new Date(2009, DEC, 31);
+        testComponent.date = new Date(2009, 11, 31);
         fixture.detectChanges();
         flush();
         fixture.detectChanges();
@@ -1003,7 +1002,7 @@ describe('McDatepicker', () => {
       }));
 
       it('should mark invalid when value is after max', fakeAsync(() => {
-        testComponent.date = new Date(2020, JAN, 2);
+        testComponent.date = new Date(2020, 0, 2);
         fixture.detectChanges();
         flush();
 
@@ -1034,7 +1033,7 @@ describe('McDatepicker', () => {
       }));
 
       it('should not mark invalid when value is between min and max', fakeAsync(() => {
-        testComponent.date = new Date(2010, JAN, 2);
+        testComponent.date = new Date(2010, 0, 2);
         fixture.detectChanges();
         flush();
         fixture.detectChanges();
@@ -1062,7 +1061,7 @@ describe('McDatepicker', () => {
       }));
 
       it('should mark input invalid', fakeAsync(() => {
-        testComponent.date = new Date(2017, JAN, 1);
+        testComponent.date = new Date(2017, 0, 1);
         fixture.detectChanges();
         flush();
         fixture.detectChanges();
@@ -1070,7 +1069,7 @@ describe('McDatepicker', () => {
         expect(fixture.debugElement.query(By.css('input')).nativeElement.classList)
             .toContain('ng-invalid');
 
-        testComponent.date = new Date(2017, JAN, 2);
+        testComponent.date = new Date(2017, 0, 2);
         fixture.detectChanges();
         flush();
         fixture.detectChanges();
@@ -1203,10 +1202,10 @@ describe('McDatepicker', () => {
         flush();
         fixture.detectChanges();
 
-        expect(testComponent.datepicker.startAt).toEqual(new Date(2017, JUL, 1));
-        expect(testComponent.datepickerInput.value).toEqual(new Date(2017, JUN, 1));
-        expect(testComponent.datepickerInput.min).toEqual(new Date(2017, JAN, 1));
-        expect(testComponent.datepickerInput.max).toEqual(new Date(2017, DEC, 31));
+        expect(testComponent.datepicker.startAt).toEqual(new Date(2017, 6, 1));
+        expect(testComponent.datepickerInput.value).toEqual(new Date(2017, 5, 1));
+        expect(testComponent.datepickerInput.min).toEqual(new Date(2017, 0, 1));
+        expect(testComponent.datepickerInput.max).toEqual(new Date(2017, 11, 31));
       }));
     });
 
@@ -1360,7 +1359,7 @@ describe('McDatepicker', () => {
         return;
       }
 
-      const selected = new Date(2017, SEP, 1);
+      const selected = new Date(2017, 8, 1);
       testComponent.date = selected;
       fixture.detectChanges();
       flush();
@@ -1423,7 +1422,7 @@ describe('McDatepicker', () => {
 class StandardDatepicker {
   opened = false;
   disabled = false;
-  date: Date | null = new Date(2020, JAN, 1);
+  date: Date | null = new Date(2020, 0, 1);
   @ViewChild('d') datepicker: McDatepicker<Date>;
   @ViewChild(McDatepickerInput) datepickerInput: McDatepickerInput<Date>;
 }
@@ -1452,8 +1451,8 @@ class NoInputDatepicker {
   `
 })
 class DatepickerWithStartAt {
-  date = new Date(2020, JAN, 1);
-  startDate = new Date(2010, JAN, 1);
+  date = new Date(2020, 0, 1);
+  startDate = new Date(2010, 0, 1);
   @ViewChild('d') datepicker: McDatepicker<Date>;
 }
 
@@ -1465,7 +1464,7 @@ class DatepickerWithStartAt {
   `
 })
 class DatepickerWithStartViewYear {
-  date = new Date(2020, JAN, 1);
+  date = new Date(2020, 0, 1);
   @ViewChild('d') datepicker: McDatepicker<Date>;
 
   onYearSelection() {}
@@ -1480,7 +1479,7 @@ class DatepickerWithStartViewYear {
   `
 })
 class DatepickerWithStartViewMultiYear {
-  date = new Date(2020, JAN, 1);
+  date = new Date(2020, 0, 1);
   @ViewChild('d') datepicker: McDatepicker<Date>;
 
   onMultiYearSelection() {}
@@ -1565,8 +1564,8 @@ class FormFieldDatepicker {
 class DatepickerWithMinAndMaxValidation {
   @ViewChild('d') datepicker: McDatepicker<Date>;
   date: Date | null;
-  minDate = new Date(2010, JAN, 1);
-  maxDate = new Date(2020, JAN, 1);
+  minDate = new Date(2010, 0, 1);
+  maxDate = new Date(2020, 0, 1);
 }
 
 
@@ -1611,7 +1610,7 @@ class DatepickerWithChangeAndInputEvents {
   `
 })
 class DatepickerWithi18n {
-  date: Date | null = new Date(2010, JAN, 1);
+  date: Date | null = new Date(2010, 0, 1);
   @ViewChild('d') datepicker: McDatepicker<Date>;
   @ViewChild(McDatepickerInput) datepickerInput: McDatepickerInput<Date>;
 }
@@ -1625,10 +1624,10 @@ class DatepickerWithi18n {
 })
 // tslint:disable-next-line:naming-convention
 class DatepickerWithISOStrings {
-  value = new Date(2017, JUN, 1).toISOString();
-  min = new Date(2017, JAN, 1).toISOString();
-  max = new Date (2017, DEC, 31).toISOString();
-  startAt = new Date(2017, JUL, 1).toISOString();
+  value = new Date(2017, 5, 1).toISOString();
+  min = new Date(2017, 0, 1).toISOString();
+  max = new Date (2017, 11, 31).toISOString();
+  startAt = new Date(2017, 6, 1).toISOString();
   @ViewChild('d') datepicker: McDatepicker<Date>;
   @ViewChild(McDatepickerInput) datepickerInput: McDatepickerInput<Date>;
 }
