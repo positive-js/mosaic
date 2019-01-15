@@ -4,7 +4,7 @@ import { PlatformModule } from '@ptsecurity/cdk/platform';
 import { DateAdapter } from './date-adapter';
 import { MC_DATE_FORMATS } from './date-formats';
 import { NativeDateAdapter } from './native-date-adapter';
-import { MAT_NATIVE_DATE_FORMATS } from './native-date-formats';
+import { MC_NATIVE_DATE_FORMATS } from './native-date-formats';
 
 
 export * from './date-adapter';
@@ -24,6 +24,6 @@ export class NativeDateModule {}
 
 @NgModule({
   imports: [NativeDateModule],
-  providers: [{provide: MC_DATE_FORMATS, useValue: MAT_NATIVE_DATE_FORMATS}]
+  providers: [{provide: MC_DATE_FORMATS, useValue: MC_NATIVE_DATE_FORMATS}]
 })
 export class McNativeDateModule {}

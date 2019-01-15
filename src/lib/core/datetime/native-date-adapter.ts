@@ -1,40 +1,36 @@
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
+// tslint:disable:no-magic-numbers
+import { Inject, Injectable, Optional } from '@angular/core';
+import { Platform } from '@ptsecurity/cdk/platform';
 
-import {Platform} from '@angular/cdk/platform';
-import {Inject, Injectable, Optional} from '@angular/core';
-import {DateAdapter, MC_DATE_LOCALE} from './date-adapter';
+import { DateAdapter, MC_DATE_LOCALE } from './date-adapter';
+
 
 // TODO(mmalerba): Remove when we no longer support safari 9.
 /** Whether the browser supports the Intl API. */
-const SUPPORTS_INTL_API = typeof Intl != 'undefined';
+// tslint:disable-next-line:no-typeof-undefined
+const SUPPORTS_INTL_API = typeof Intl !== 'undefined';
 
 
 /** The default month names to use if Intl API is not available. */
 const DEFAULT_MONTH_NAMES = {
-  'long': [
+  long: [
     'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
     'October', 'November', 'December'
   ],
-  'short': ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-  'narrow': ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D']
+  short: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  narrow: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D']
 };
 
 
 /** The default date names to use if Intl API is not available. */
-const DEFAULT_DATE_NAMES = range(31, i => String(i + 1));
+const DEFAULT_DATE_NAMES = range(31, (i) => String(i + 1));
 
 
 /** The default day of the week names to use if Intl API is not available. */
 const DEFAULT_DAY_OF_WEEK_NAMES = {
-  'long': ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-  'short': ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-  'narrow': ['S', 'M', 'T', 'W', 'T', 'F', 'S']
+  long: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+  short: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+  narrow: ['S', 'M', 'T', 'W', 'T', 'F', 'S']
 };
 
 
@@ -50,17 +46,17 @@ const ISO_8601_REGEX =
 /** Creates an array and fills it with values. */
 function range<T>(length: number, valueFunction: (index: number) => T): T[] {
   const valuesArray = Array(length);
+
   for (let i = 0; i < length; i++) {
     valuesArray[i] = valueFunction(i);
   }
+
   return valuesArray;
 }
 
 /** Adapts the native JS Date for use with cdk-based components that work with dates. */
 @Injectable()
 export class NativeDateAdapter extends DateAdapter<Date> {
-  /** Whether to clamp the date between 1 and 9999 to avoid IE and Edge errors. */
-  private readonly _clampDate: boolean;
 
   /**
    * Whether to use `timeZone: 'utc'` with `Intl.DateTimeFormat` when formatting dates.
@@ -75,9 +71,13 @@ export class NativeDateAdapter extends DateAdapter<Date> {
    */
   useUtcForDisplay: boolean = true;
 
-  constructor(@Optional() @Inject(MC_DATE_LOCALE) matDateLocale: string, platform: Platform) {
+  /** Whether to clamp the date between 1 and 9999 to avoid IE and Edge errors. */
+  // tslint:disable-next-line:orthodox-getter-and-setter
+  private readonly _clampDate: boolean;
+
+  constructor(@Optional() @Inject(MC_DATE_LOCALE) mcDateLocale: string, platform: Platform) {
     super();
-    super.setLocale(matDateLocale);
+    super.setLocale(mcDateLocale);
 
     // IE does its own time zone correction, so we disable this on IE.
     this.useUtcForDisplay = !platform.TRIDENT;
@@ -103,35 +103,43 @@ export class NativeDateAdapter extends DateAdapter<Date> {
   getMonthNames(style: 'long' | 'short' | 'narrow'): string[] {
     if (SUPPORTS_INTL_API) {
       const dtf = new Intl.DateTimeFormat(this.locale, {month: style, timeZone: 'utc'});
-      return range(12, i =>
-          this._stripDirectionalityCharacters(this._format(dtf, new Date(2017, i, 1))));
+
+      return range(12, (i) =>
+          this.stripDirectionalityCharacters(this._format(dtf, new Date(2017, i, 1))));
     }
+
     return DEFAULT_MONTH_NAMES[style];
   }
 
   getDateNames(): string[] {
     if (SUPPORTS_INTL_API) {
       const dtf = new Intl.DateTimeFormat(this.locale, {day: 'numeric', timeZone: 'utc'});
-      return range(31, i => this._stripDirectionalityCharacters(
+
+      return range(31, (i) => this.stripDirectionalityCharacters(
           this._format(dtf, new Date(2017, 0, i + 1))));
     }
+
     return DEFAULT_DATE_NAMES;
   }
 
   getDayOfWeekNames(style: 'long' | 'short' | 'narrow'): string[] {
     if (SUPPORTS_INTL_API) {
       const dtf = new Intl.DateTimeFormat(this.locale, {weekday: style, timeZone: 'utc'});
-      return range(7, i => this._stripDirectionalityCharacters(
+
+      return range(7, (i) => this.stripDirectionalityCharacters(
           this._format(dtf, new Date(2017, 0, i + 1))));
     }
+
     return DEFAULT_DAY_OF_WEEK_NAMES[style];
   }
 
   getYearName(date: Date): string {
     if (SUPPORTS_INTL_API) {
       const dtf = new Intl.DateTimeFormat(this.locale, {year: 'numeric', timeZone: 'utc'});
-      return this._stripDirectionalityCharacters(this._format(dtf, date));
+
+      return this.stripDirectionalityCharacters(this._format(dtf, date));
     }
+
     return String(this.getYear(date));
   }
 
@@ -141,7 +149,7 @@ export class NativeDateAdapter extends DateAdapter<Date> {
   }
 
   getNumDaysInMonth(date: Date): number {
-    return this.getDate(this._createDateWithOverflow(
+    return this.getDate(this.createDateWithOverflow(
         this.getYear(date), this.getMonth(date) + 1, 0));
   }
 
@@ -160,9 +168,9 @@ export class NativeDateAdapter extends DateAdapter<Date> {
       throw Error(`Invalid date "${date}". Date has to be greater than 0.`);
     }
 
-    let result = this._createDateWithOverflow(year, month, date);
+    const result = this.createDateWithOverflow(year, month, date);
     // Check that the date wasn't above the upper bound for the month, causing the month to overflow
-    if (result.getMonth() != month) {
+    if (result.getMonth() !== month) {
       throw Error(`Invalid date "${date}" for month with index "${month}".`);
     }
 
@@ -176,13 +184,14 @@ export class NativeDateAdapter extends DateAdapter<Date> {
   parse(value: any): Date | null {
     // We have no way using the native JS Date to set the parse format or locale, so we ignore these
     // parameters.
-    if (typeof value == 'number') {
+    if (typeof value === 'number') {
       return new Date(value);
     }
+
     return value ? new Date(Date.parse(value)) : null;
   }
 
-  format(date: Date, displayFormat: Object): string {
+  format(date: Date, displayFormat: any): string {
     if (!this.isValid(date)) {
       throw Error('NativeDateAdapter: Cannot format invalid date.');
     }
@@ -191,16 +200,20 @@ export class NativeDateAdapter extends DateAdapter<Date> {
       // On IE and Edge the i18n API will throw a hard error that can crash the entire app
       // if we attempt to format a date whose year is less than 1 or greater than 9999.
       if (this._clampDate && (date.getFullYear() < 1 || date.getFullYear() > 9999)) {
+        // tslint:disable-next-line:no-parameter-reassignment
         date = this.clone(date);
         date.setFullYear(Math.max(1, Math.min(9999, date.getFullYear())));
       }
 
+        // tslint:disable-next-line:no-parameter-reassignment
       displayFormat = {...displayFormat, timeZone: 'utc'};
 
       const dtf = new Intl.DateTimeFormat(this.locale, displayFormat);
-      return this._stripDirectionalityCharacters(this._format(dtf, date));
+
+      return this.stripDirectionalityCharacters(this._format(dtf, date));
     }
-    return this._stripDirectionalityCharacters(date.toDateString());
+
+    return this.stripDirectionalityCharacters(date.toDateString());
   }
 
   addCalendarYears(date: Date, years: number): Date {
@@ -208,30 +221,30 @@ export class NativeDateAdapter extends DateAdapter<Date> {
   }
 
   addCalendarMonths(date: Date, months: number): Date {
-    let newDate = this._createDateWithOverflow(
+    let newDate = this.createDateWithOverflow(
         this.getYear(date), this.getMonth(date) + months, this.getDate(date));
 
     // It's possible to wind up in the wrong month if the original month has more days than the new
     // month. In this case we want to go to the last day of the desired month.
     // Note: the additional + 12 % 12 ensures we end up with a positive number, since JS % doesn't
     // guarantee this.
-    if (this.getMonth(newDate) != ((this.getMonth(date) + months) % 12 + 12) % 12) {
-      newDate = this._createDateWithOverflow(this.getYear(newDate), this.getMonth(newDate), 0);
+    if (this.getMonth(newDate) !== ((this.getMonth(date) + months) % 12 + 12) % 12) {
+      newDate = this.createDateWithOverflow(this.getYear(newDate), this.getMonth(newDate), 0);
     }
 
     return newDate;
   }
 
   addCalendarDays(date: Date, days: number): Date {
-    return this._createDateWithOverflow(
+    return this.createDateWithOverflow(
         this.getYear(date), this.getMonth(date), this.getDate(date) + days);
   }
 
   toIso8601(date: Date): string {
     return [
       date.getUTCFullYear(),
-      this._2digit(date.getUTCMonth() + 1),
-      this._2digit(date.getUTCDate())
+      this.toDigit(date.getUTCMonth() + 1),
+      this.toDigit(date.getUTCDate())
     ].join('-');
   }
 
@@ -248,12 +261,13 @@ export class NativeDateAdapter extends DateAdapter<Date> {
       // The `Date` constructor accepts formats other than ISO 8601, so we need to make sure the
       // string is the right format first.
       if (ISO_8601_REGEX.test(value)) {
-        let date = new Date(value);
+        const date = new Date(value);
         if (this.isValid(date)) {
           return date;
         }
       }
     }
+
     return super.deserialize(value);
   }
 
@@ -270,7 +284,7 @@ export class NativeDateAdapter extends DateAdapter<Date> {
   }
 
   /** Creates a date but allows the month and date to overflow. */
-  private _createDateWithOverflow(year: number, month: number, date: number) {
+  private createDateWithOverflow(year: number, month: number, date: number) {
     const result = new Date(year, month, date);
 
     // We need to correct for the fact that JS native Date treats years in range [0, 99] as
@@ -278,6 +292,7 @@ export class NativeDateAdapter extends DateAdapter<Date> {
     if (year >= 0 && year < 100) {
       result.setFullYear(this.getYear(result) - 1900);
     }
+
     return result;
   }
 
@@ -286,8 +301,8 @@ export class NativeDateAdapter extends DateAdapter<Date> {
    * @param n The number to pad.
    * @returns The padded number.
    */
-  private _2digit(n: number) {
-    return ('00' + n).slice(-2);
+  private toDigit(n: number) {
+    return (`00${n}`).slice(-2);
   }
 
   /**
@@ -297,7 +312,7 @@ export class NativeDateAdapter extends DateAdapter<Date> {
    * @param str The string to strip direction characters from.
    * @returns The stripped string.
    */
-  private _stripDirectionalityCharacters(str: string) {
+  private stripDirectionalityCharacters(str: string) {
     return str.replace(/[\u200e\u200f]/g, '');
   }
 
@@ -312,10 +327,12 @@ export class NativeDateAdapter extends DateAdapter<Date> {
    * @param date Date from which we want to get the string representation according to dtf
    * @returns A Date object with its UTC representation based on the passed in date info
    */
+  // tslint:disable-next-line:naming-convention
   private _format(dtf: Intl.DateTimeFormat, date: Date) {
     const d = new Date(Date.UTC(
         date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(),
         date.getMinutes(), date.getSeconds(), date.getMilliseconds()));
+
     return dtf.format(d);
   }
 }

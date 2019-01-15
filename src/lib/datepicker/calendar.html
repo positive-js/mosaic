@@ -1,8 +1,8 @@
 
 <ng-template [cdkPortalOutlet]="calendarHeaderPortal"></ng-template>
 
-<div class="mat-calendar-content" [ngSwitch]="currentView" cdkMonitorSubtreeFocus tabindex="-1">
-  <mat-month-view
+<div class="mc-calendar-content" [ngSwitch]="currentView" cdkMonitorSubtreeFocus tabindex="-1">
+  <mc-month-view
       *ngSwitchCase="'month'"
       [(activeDate)]="activeDate"
       [selected]="selected"
@@ -12,9 +12,9 @@
       [dateClass]="dateClass"
       (selectedChange)="dateSelected($event)"
       (userSelection)="userSelected()">
-  </mat-month-view>
+  </mc-month-view>
 
-  <mat-year-view
+  <mc-year-view
       *ngSwitchCase="'year'"
       [(activeDate)]="activeDate"
       [selected]="selected"
@@ -23,9 +23,9 @@
       [minDate]="minDate"
       (monthSelected)="monthSelectedInYearView($event)"
       (selectedChange)="goToDateInView($event, 'month')">
-  </mat-year-view>
+  </mc-year-view>
 
-  <mat-multi-year-view
+  <mc-multi-year-view
       *ngSwitchCase="'multi-year'"
       [(activeDate)]="activeDate"
       [selected]="selected"
@@ -34,5 +34,5 @@
       [minDate]="minDate"
       (yearSelected)="yearSelectedInMultiYearView($event)"
       (selectedChange)="goToDateInView($event, 'year')">
-  </mat-multi-year-view>
+  </mc-multi-year-view>
 </div>

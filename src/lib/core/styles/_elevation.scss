@@ -160,7 +160,7 @@ $_mc-elevation-prefix: 'mc-elevation-z';
 }
 
 // Applies the elevation to an element in a manner that allows
-// consumers to override it via the Material elevation classes.
+// consumers to override it via the Mosaic elevation classes.
 @mixin mc-overridable-elevation(
     $zValue,
     $color: $mc-elevation-color,

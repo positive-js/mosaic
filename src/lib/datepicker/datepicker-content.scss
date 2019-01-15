@@ -31,33 +31,15 @@ $mc-datepicker-touch-max-height: 788px;
     }
 }
 
-.mc-datepicker-content-touch {
-    display: block;
-    // make sure the dialog scrolls rather than being cropped on ludicrously small screens
-    max-height: 80vh;
-    overflow: auto;
-
-    // TODO(mmalerba): hack to offset the padding of the dialog. Can be removed when we switch away
-    // from using dialog.
-    margin: -24px;
-
-    .mc-calendar {
-        min-width: $mc-datepicker-touch-min-width;
-        min-height: $mc-datepicker-touch-min-height;
-        max-width: $mc-datepicker-touch-max-width;
-        max-height: $mc-datepicker-touch-max-height;
-    }
-}
-
 @media all and (orientation: landscape) {
-    .mc-datepicker-content-touch .mc-calendar {
+    .mc-calendar {
         width: $mc-datepicker-touch-landscape-width;
         height: $mc-datepicker-touch-landscape-height;
     }
 }
 
 @media all and (orientation: portrait) {
-    .mc-datepicker-content-touch .mc-calendar {
+    .mc-calendar {
         width: $mc-datepicker-touch-portrait-width;
         height: $mc-datepicker-touch-portrait-height;
     }

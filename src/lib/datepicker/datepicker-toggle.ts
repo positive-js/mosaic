@@ -38,8 +38,8 @@ export class McDatepickerToggleIcon {}
     // consumer may have provided, while still being able to receive focus.
     '[attr.tabindex]': '-1',
     '[class.mc-datepicker-toggle-active]': 'datepicker && datepicker.opened',
-    '[class.mc-accent]': 'datepicker && datepicker.color === "accent"',
-    '[class.mc-warn]': 'datepicker && datepicker.color === "warn"',
+    // '[class.mc-accent]': 'datepicker && datepicker.color === "accent"',
+    '[class.mc-warn]': 'datepicker && datepicker.color === "error"',
     '(focus)': 'button.focus()'
   },
   exportAs: 'mcDatepickerToggle',
@@ -62,9 +62,6 @@ export class McDatepickerToggle<D> implements AfterContentInit, OnChanges, OnDes
 
   /** Tabindex for the toggle. */
   @Input() tabIndex: number | null;
-
-  /** Whether ripples on the toggle should be disabled. */
-  @Input() disableRipple: boolean;
 
   /** Custom icon set by the consumer. */
   @ContentChild(McDatepickerToggleIcon) customIcon: McDatepickerToggleIcon;

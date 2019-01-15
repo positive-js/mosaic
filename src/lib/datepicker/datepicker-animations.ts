@@ -12,7 +12,7 @@ import {
  * Animations used by the Material datepicker.
  * @docs-private
  */
-export const matDatepickerAnimations: {
+export const mcDatepickerAnimations: {
   readonly transformPanel: AnimationTriggerMetadata;
   readonly fadeInCalendar: AnimationTriggerMetadata;
 } = {

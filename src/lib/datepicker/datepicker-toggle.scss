@@ -1,3 +1,13 @@
+$mc-datepicker-toggle-width: 32px;
+$mc-datepicker-toggle-height: 32px;
+
+mc-datepicker-toggle {
+    button {
+        width: $mc-datepicker-toggle-width;
+        height: $mc-datepicker-toggle-height;
+    }
+}
+
 .mc-form-field-appearance-legacy {
     .mc-form-field-prefix,
     .mc-form-field-suffix {

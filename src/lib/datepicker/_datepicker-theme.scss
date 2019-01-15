@@ -26,8 +26,12 @@ $mc-calendar-weekday-table-font-size: 11px !default;
 }
 
 @mixin mc-datepicker-theme($theme) {
+    $second: map-get($theme, second);
+
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
+
+    $is-dark: map-get($theme, is-dark);
 
     .mc-calendar-arrow {
         border-top-color: mc-color($foreground, icon);
@@ -84,31 +88,30 @@ $mc-calendar-weekday-table-font-size: 11px !default;
 
     .mc-datepicker-content {
         @include _mc-theme-elevation(4, $theme);
-        background-color: mc-color($background, card);
+        // background-color: mc-color($background, card);
+        background-color: mc-color($second, if($is-dark, darker, 200));
         color: mc-color($foreground, text);
 
         &.mc-accent {
-            @include _mc-datepicker-color(map-get($theme, accent));
+            // @include _mc-datepicker-color(map-get($theme, accent));
+            @include _mc-datepicker-color(map-get($theme, warning));
         }
 
         &.mc-warn {
-            @include _mc-datepicker-color(map-get($theme, warn));
+            @include _mc-datepicker-color(map-get($theme, error));
         }
-    }
-
-    .mc-datepicker-content-touch {
-        @include _mc-theme-elevation(0, $theme);
     }
 
     .mc-datepicker-toggle-active {
         color: mc-color(map-get($theme, primary));
 
         &.mc-accent {
-            color: mc-color(map-get($theme, accent));
+            // color: mc-color(map-get($theme, accent));
+            color: mc-color($mc-grey, 200);
         }
 
         &.mc-warn {
-            color: mc-color(map-get($theme, warn));
+            color: mc-color(map-get($theme, error));
         }
     }
 }
@@ -125,15 +128,17 @@ $mc-calendar-weekday-table-font-size: 11px !default;
     .mc-calendar-body-label,
     .mc-calendar-period-button {
         font: {
-            size: mc-font-size($config, button);
-            weight: mc-font-weight($config, button);
+            // size: mc-font-size($config, button);
+            size: mc-font-size($config, body);
+            // weight: mc-font-weight($config, button);
+            weight: mc-font-weight($config, body);
         }
     }
 
     .mc-calendar-table-header th {
         font: {
             size: $mc-calendar-weekday-table-font-size;
-            weight: mc-font-weight($config, body-1);
+            weight: mc-font-weight($config, body);
         }
     }
 }

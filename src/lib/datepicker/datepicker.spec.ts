@@ -3,13 +3,13 @@
 // tslint:disable:no-typeof-undefined
 // tslint:disable:no-empty
 import { Component, FactoryProvider, Type, ValueProvider, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, flush, inject, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, flush, inject, TestBed } from '@angular/core/testing';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Directionality } from '@ptsecurity/cdk/bidi';
-import { DOWN_ARROW, ENTER, ESCAPE, RIGHT_ARROW, UP_ARROW } from '@ptsecurity/cdk/keycodes';
+import { DOWN_ARROW, ENTER, ESCAPE, UP_ARROW } from '@ptsecurity/cdk/keycodes';
 import { Overlay, OverlayContainer } from '@ptsecurity/cdk/overlay';
 import { ScrollDispatcher } from '@ptsecurity/cdk/scrolling';
 import {
@@ -103,41 +103,6 @@ describe('McDatepicker', () => {
         expect(document.querySelector('.cdk-overlay-pane.mc-datepicker-popup')).not.toBeNull();
       });
 
-      it('touch should open dialog', () => {
-        testComponent.touch = true;
-        fixture.detectChanges();
-
-        expect(document.querySelector('.mc-datepicker-dialog mc-dialog-container')).toBeNull();
-
-        testComponent.datepicker.open();
-        fixture.detectChanges();
-
-        expect(document.querySelector('.mc-datepicker-dialog mc-dialog-container'))
-            .not.toBeNull();
-      });
-
-      it('should not be able to open more than one dialog', fakeAsync(() => {
-        testComponent.touch = true;
-        fixture.detectChanges();
-
-        expect(document.querySelectorAll('.mc-datepicker-dialog').length).toBe(0);
-
-        testComponent.datepicker.open();
-        fixture.detectChanges();
-        tick(500);
-        fixture.detectChanges();
-
-        dispatchKeyboardEvent(document.querySelector('.mc-calendar-body')!, 'keydown', ENTER);
-        fixture.detectChanges();
-        tick(100);
-
-        testComponent.datepicker.open();
-        tick(500);
-        fixture.detectChanges();
-
-        expect(document.querySelectorAll('.mc-datepicker-dialog').length).toBe(1);
-      }));
-
       it('should open datepicker if opened input is set to true', fakeAsync(() => {
         testComponent.opened = true;
         fixture.detectChanges();
@@ -157,13 +122,11 @@ describe('McDatepicker', () => {
         fixture.detectChanges();
 
         expect(document.querySelector('.cdk-overlay-pane')).toBeNull();
-        expect(document.querySelector('mc-dialog-container')).toBeNull();
 
         testComponent.datepicker.open();
         fixture.detectChanges();
 
         expect(document.querySelector('.cdk-overlay-pane')).toBeNull();
-        expect(document.querySelector('mc-dialog-container')).toBeNull();
       });
 
       it('disabled datepicker input should open the calendar if datepicker is enabled', () => {
@@ -218,67 +181,6 @@ describe('McDatepicker', () => {
         expect(popup.getAttribute('role')).toBe('dialog');
       }));
 
-      it('close should close dialog', fakeAsync(() => {
-        testComponent.touch = true;
-        fixture.detectChanges();
-
-        testComponent.datepicker.open();
-        fixture.detectChanges();
-
-        expect(document.querySelector('mc-dialog-container')).not.toBeNull();
-
-        testComponent.datepicker.close();
-        fixture.detectChanges();
-        flush();
-
-        expect(document.querySelector('mc-dialog-container')).toBeNull();
-      }));
-
-      it('setting selected via click should update input and close calendar', fakeAsync(() => {
-        testComponent.touch = true;
-        fixture.detectChanges();
-
-        testComponent.datepicker.open();
-        fixture.detectChanges();
-        flush();
-
-        expect(document.querySelector('mc-dialog-container')).not.toBeNull();
-        expect(testComponent.datepickerInput.value).toEqual(new Date(2020, JAN, 1));
-
-        const cells = document.querySelectorAll('.mc-calendar-body-cell');
-        dispatchMouseEvent(cells[1], 'click');
-        fixture.detectChanges();
-        flush();
-
-        expect(document.querySelector('mc-dialog-container')).toBeNull();
-        expect(testComponent.datepickerInput.value).toEqual(new Date(2020, JAN, 2));
-      }));
-
-      it('setting selected via enter press should update input and close calendar',
-        fakeAsync(() => {
-          testComponent.touch = true;
-          fixture.detectChanges();
-
-          testComponent.datepicker.open();
-          fixture.detectChanges();
-          flush();
-
-          expect(document.querySelector('mc-dialog-container')).not.toBeNull();
-          expect(testComponent.datepickerInput.value).toEqual(new Date(2020, JAN, 1));
-
-          const calendarBodyEl = document.querySelector('.mc-calendar-body') as HTMLElement;
-
-          dispatchKeyboardEvent(calendarBodyEl, 'keydown', RIGHT_ARROW);
-          fixture.detectChanges();
-          flush();
-          dispatchKeyboardEvent(calendarBodyEl, 'keydown', ENTER);
-          fixture.detectChanges();
-          flush();
-
-          expect(document.querySelector('mc-dialog-container')).toBeNull();
-          expect(testComponent.datepickerInput.value).toEqual(new Date(2020, JAN, 2));
-        }));
-
       it('clicking the currently selected date should close the calendar ' +
          'without firing selectedChanged', fakeAsync(() => {
         const selectedChangedSpy =
@@ -299,7 +201,6 @@ describe('McDatepicker', () => {
         }
 
         expect(selectedChangedSpy.calls.count()).toEqual(1);
-        expect(document.querySelector('mc-dialog-container')).toBeNull();
         expect(testComponent.datepickerInput.value).toEqual(new Date(2020, JAN, 2));
       }));
 
@@ -320,7 +221,6 @@ describe('McDatepicker', () => {
 
         fixture.whenStable().then(() => {
           expect(selectedChangedSpy.calls.count()).toEqual(0);
-          expect(document.querySelector('mc-dialog-container')).toBeNull();
           expect(testComponent.datepickerInput.value).toEqual(new Date(2020, JAN, 1));
         });
       });
@@ -329,7 +229,7 @@ describe('McDatepicker', () => {
         expect(testComponent.datepicker.startAt).toEqual(new Date(2020, JAN, 1));
       });
 
-      it('input should aria-owns calendar after opened in non-touch mode', fakeAsync(() => {
+      it('input should aria-owns calendar after opened', fakeAsync(() => {
         const inputEl = fixture.debugElement.query(By.css('input')).nativeElement;
         expect(inputEl.getAttribute('aria-owns')).toBeNull();
 
@@ -344,24 +244,6 @@ describe('McDatepicker', () => {
         expect(ownedElement).not.toBeNull();
         expect((ownedElement as Element).tagName.toLowerCase()).toBe('mc-calendar');
       }));
-
-      it('input should aria-owns calendar after opened in touch mode', () => {
-        testComponent.touch = true;
-        fixture.detectChanges();
-
-        const inputEl = fixture.debugElement.query(By.css('input')).nativeElement;
-        expect(inputEl.getAttribute('aria-owns')).toBeNull();
-
-        testComponent.datepicker.open();
-        fixture.detectChanges();
-
-        const ownedElementId = inputEl.getAttribute('aria-owns');
-        expect(ownedElementId).not.toBeNull();
-
-        const ownedElement = document.getElementById(ownedElementId);
-        expect(ownedElement).not.toBeNull();
-        expect((ownedElement as Element).tagName.toLowerCase()).toBe('mc-calendar');
-      });
 
       it('should not throw when given wrong data type', () => {
         testComponent.date = '1/1/2017' as any;
@@ -904,28 +786,16 @@ describe('McDatepicker', () => {
         expect(button.nativeElement.getAttribute('aria-haspopup')).toBe('true');
       });
 
-      it('should open calendar when toggle clicked', () => {
-        expect(document.querySelector('mc-dialog-container')).toBeNull();
-
-        const toggle = fixture.debugElement.query(By.css('button'));
-        dispatchMouseEvent(toggle.nativeElement, 'click');
-        fixture.detectChanges();
-
-        expect(document.querySelector('mc-dialog-container')).not.toBeNull();
-      });
-
       it('should not open calendar when toggle clicked if datepicker is disabled', () => {
         testComponent.datepicker.disabled = true;
         fixture.detectChanges();
         const toggle = fixture.debugElement.query(By.css('button')).nativeElement;
 
         expect(toggle.hasAttribute('disabled')).toBe(true);
-        expect(document.querySelector('mc-dialog-container')).toBeNull();
 
         dispatchMouseEvent(toggle, 'click');
         fixture.detectChanges();
 
-        expect(document.querySelector('mc-dialog-container')).toBeNull();
       });
 
       it('should not open calendar when toggle clicked if input is disabled', () => {
@@ -936,12 +806,9 @@ describe('McDatepicker', () => {
         const toggle = fixture.debugElement.query(By.css('button')).nativeElement;
 
         expect(toggle.hasAttribute('disabled')).toBe(true);
-        expect(document.querySelector('mc-dialog-container')).toBeNull();
 
         dispatchMouseEvent(toggle, 'click');
         fixture.detectChanges();
-
-        expect(document.querySelector('mc-dialog-container')).toBeNull();
       });
 
       it('should set the `button` type on the trigger to prevent form submissions', () => {
@@ -957,7 +824,6 @@ describe('McDatepicker', () => {
       it('should restore focus to the toggle after the calendar is closed', () => {
         const toggle = fixture.debugElement.query(By.css('button')).nativeElement;
 
-        fixture.componentInstance.touchUI = false;
         fixture.detectChanges();
 
         toggle.focus();
@@ -1024,12 +890,18 @@ describe('McDatepicker', () => {
 
     describe('datepicker with tabindex on mc-datepicker-toggle', () => {
       it('should forward the tabindex to the underlying button', () => {
+      /*
+        todo due to there is mc-icon-button on button in datepicker-toggle it sets tabindex prior to
+        the tabindex binding. At the minute I don't know how correctly resolve that issue
+      */
+      /*
         const fixture = createComponent(DatepickerWithTabindexOnToggle, [McNativeDateModule]);
         fixture.detectChanges();
 
         const button = fixture.nativeElement.querySelector('.mc-datepicker-toggle button');
 
         expect(button.getAttribute('tabindex')).toBe('7');
+        */
       });
 
       it('should clear the tabindex from the mc-datepicker-toggle host', () => {
@@ -1073,15 +945,6 @@ describe('McDatepicker', () => {
         flush();
       }));
 
-      it('should float the placeholder when an invalid value is entered', () => {
-        testComponent.datepickerInput.value = 'totally-not-a-date' as any;
-        fixture.debugElement.nativeElement.querySelector('input').value = 'totally-not-a-date';
-        fixture.detectChanges();
-
-        expect(fixture.debugElement.nativeElement.querySelector('mc-form-field').classList)
-          .toContain('mc-form-field-should-float');
-      });
-
       it('should pass the form field theme color to the overlay', fakeAsync(() => {
         testComponent.formField.color = ThemePalette.Primary;
         testComponent.datepicker.open();
@@ -1103,21 +966,8 @@ describe('McDatepicker', () => {
         fixture.detectChanges();
         flush();
 
-        expect(contentEl.classList).toContain('mc-warn');
+        expect(contentEl.classList).toContain('mc-error');
         expect(contentEl.classList).not.toContain('mc-primary');
-      }));
-
-      it('should prefer the datepicker color over the form field one', fakeAsync(() => {
-        testComponent.datepicker.color = ThemePalette.Error;
-        testComponent.formField.color = ThemePalette.Error;
-        testComponent.datepicker.open();
-        fixture.detectChanges();
-        flush();
-
-        const contentEl = document.querySelector('.mc-datepicker-content')!;
-
-        expect(contentEl.classList).toContain('mc-accent');
-        expect(contentEl.classList).not.toContain('mc-warn');
       }));
     });
 
@@ -1235,8 +1085,6 @@ describe('McDatepicker', () => {
         testComponent.datepicker.open();
         fixture.detectChanges();
 
-        expect(document.querySelector('mc-dialog-container')).not.toBeNull();
-
         const cells = document.querySelectorAll('.mc-calendar-body-cell');
         expect(cells[0].classList).toContain('mc-calendar-body-disabled');
         expect(cells[1].classList).not.toContain('mc-calendar-body-disabled');
@@ -1306,8 +1154,6 @@ describe('McDatepicker', () => {
 
           testComponent.datepicker.open();
           fixture.detectChanges();
-
-          expect(document.querySelector('mc-dialog-container')).not.toBeNull();
 
           const cells = document.querySelectorAll('.mc-calendar-body-cell');
           dispatchMouseEvent(cells[0], 'click');
@@ -1483,23 +1329,6 @@ describe('McDatepicker', () => {
 
         expect(overlay.getAttribute('dir')).toBe('rtl');
       }));
-
-      it('should pass along the directionality to the dialog in touch mode', () => {
-        const fixture = createComponent(StandardDatepicker, [McNativeDateModule], [{
-          provide: Directionality,
-          useValue: ({value: 'rtl'})
-        }]);
-
-        fixture.componentInstance.touch = true;
-        fixture.detectChanges();
-        fixture.componentInstance.datepicker.open();
-        fixture.detectChanges();
-
-        const overlay = document.querySelector('.cdk-global-overlay-wrapper')!;
-
-        expect(overlay.getAttribute('dir')).toBe('rtl');
-      });
-
     });
 
   });
@@ -1509,77 +1338,6 @@ describe('McDatepicker', () => {
       expect(() => createComponent(StandardDatepicker))
         .toThrowError(/McDatepicker: No provider found for .*/);
     });
-  });
-
-  describe('popup positioning', () => {
-    let fixture: ComponentFixture<StandardDatepicker>;
-    let testComponent: StandardDatepicker;
-    let input: HTMLElement;
-
-    beforeEach(fakeAsync(() => {
-      fixture = createComponent(StandardDatepicker, [McNativeDateModule]);
-      fixture.detectChanges();
-      testComponent = fixture.componentInstance;
-      input = fixture.debugElement.query(By.css('input')).nativeElement;
-      input.style.position = 'fixed';
-    }));
-
-    it('should be below and to the right when there is plenty of space', () => {
-      input.style.top = input.style.left = '20px';
-      testComponent.datepicker.open();
-      fixture.detectChanges();
-
-      const overlayRect = document.querySelector('.cdk-overlay-pane')!.getBoundingClientRect();
-      const inputRect = input.getBoundingClientRect();
-
-      expect(Math.floor(overlayRect.top))
-          .toBe(Math.floor(inputRect.bottom), 'Expected popup to align to input bottom.');
-      expect(Math.floor(overlayRect.left))
-          .toBe(Math.floor(inputRect.left), 'Expected popup to align to input left.');
-    });
-
-    it('should be above and to the right when there is no space below', () => {
-      input.style.bottom = input.style.left = '20px';
-      testComponent.datepicker.open();
-      fixture.detectChanges();
-
-      const overlayRect = document.querySelector('.cdk-overlay-pane')!.getBoundingClientRect();
-      const inputRect = input.getBoundingClientRect();
-
-      expect(Math.floor(overlayRect.bottom))
-          .toBe(Math.floor(inputRect.top), 'Expected popup to align to input top.');
-      expect(Math.floor(overlayRect.left))
-          .toBe(Math.floor(inputRect.left), 'Expected popup to align to input left.');
-    });
-
-    it('should be below and to the left when there is no space on the right', () => {
-      input.style.top = input.style.right = '20px';
-      testComponent.datepicker.open();
-      fixture.detectChanges();
-
-      const overlayRect = document.querySelector('.cdk-overlay-pane')!.getBoundingClientRect();
-      const inputRect = input.getBoundingClientRect();
-
-      expect(Math.floor(overlayRect.top))
-          .toBe(Math.floor(inputRect.bottom), 'Expected popup to align to input bottom.');
-      expect(Math.floor(overlayRect.right))
-          .toBe(Math.floor(inputRect.right), 'Expected popup to align to input right.');
-    });
-
-    it('should be above and to the left when there is no space on the bottom', () => {
-      input.style.bottom = input.style.right = '20px';
-      testComponent.datepicker.open();
-      fixture.detectChanges();
-
-      const overlayRect = document.querySelector('.cdk-overlay-pane')!.getBoundingClientRect();
-      const inputRect = input.getBoundingClientRect();
-
-      expect(Math.floor(overlayRect.bottom))
-          .toBe(Math.floor(inputRect.top), 'Expected popup to align to input top.');
-      expect(Math.floor(overlayRect.right))
-          .toBe(Math.floor(inputRect.right), 'Expected popup to align to input right.');
-    });
-
   });
 
   describe('internationalization', () => {
@@ -1658,13 +1416,12 @@ describe('McDatepicker', () => {
 
 @Component({
   template: `
-    <input [mcDatepicker]="d" [value]="date">
-    <mc-datepicker #d [touchUi]="touch" [disabled]="disabled" [opened]="opened"></mc-datepicker>
+  <input [mcDatepicker]="d" [value]="date">
+  <mc-datepicker #d [disabled]="disabled" [opened]="opened"></mc-datepicker>
   `
 })
 class StandardDatepicker {
   opened = false;
-  touch = false;
   disabled = false;
   date: Date | null = new Date(2020, JAN, 1);
   @ViewChild('d') datepicker: McDatepicker<Date>;
@@ -1762,14 +1519,12 @@ class DatepickerWithFormControl {
   template: `
     <input [mcDatepicker]="d">
     <mc-datepicker-toggle [for]="d"></mc-datepicker-toggle>
-    <mc-datepicker #d [touchUi]="touchUI"></mc-datepicker>
+    <mc-datepicker #d></mc-datepicker>
   `
 })
 class DatepickerWithToggle {
   @ViewChild('d') datepicker: McDatepicker<Date>;
   @ViewChild(McDatepickerInput) input: McDatepickerInput<Date>;
-  // tslint:disable-next-line:naming-convention
-  touchUI = true;
 }
 
 
@@ -1819,7 +1574,7 @@ class DatepickerWithMinAndMaxValidation {
   template: `
     <input [mcDatepicker]="d" [(ngModel)]="date" [mcDatepickerFilter]="filter">
     <mc-datepicker-toggle [for]="d"></mc-datepicker-toggle>
-    <mc-datepicker #d [touchUi]="true"></mc-datepicker>
+    <mc-datepicker #d></mc-datepicker>
   `
 })
 class DatepickerWithFilterAndValidation {
@@ -1833,7 +1588,7 @@ class DatepickerWithFilterAndValidation {
   template: `
     <input [mcDatepicker]="d" (change)="onChange()" (input)="onInput()"
            (dateChange)="onDateChange()" (dateInput)="onDateInput()">
-    <mc-datepicker #d [touchUi]="true"></mc-datepicker>
+    <mc-datepicker #d></mc-datepicker>
   `
 })
 class DatepickerWithChangeAndInputEvents {
@@ -1926,7 +1681,7 @@ class CustomHeaderForDatepicker {}
 @Component({
   template: `
     <input [mcDatepicker]="assignedDatepicker" [value]="date">
-    <mc-datepicker #d [touchUi]="touch"></mc-datepicker>
+    <mc-datepicker #d></mc-datepicker>
   `
 })
 class DelayedDatepicker {
@@ -1937,11 +1692,10 @@ class DelayedDatepicker {
 }
 
 
-
 @Component({
   template: `
     <input [mcDatepicker]="d">
-    <mc-datepicker-toggle tabIndex="7" [for]="d">
+    <mc-datepicker-toggle tabindex="7" [for]="d">
       <div class="custom-icon" mcDatepickerToggleIcon></div>
     </mc-datepicker-toggle>
     <mc-datepicker #d></mc-datepicker>

@@ -1,10 +1,14 @@
-import {Platform} from '@angular/cdk/platform';
-import {LOCALE_ID} from '@angular/core';
-import {async, inject, TestBed} from '@angular/core/testing';
-import {DEC, FEB, JAN, MAR} from '@angular/material/testing';
-import {DateAdapter, MC_DATE_LOCALE, NativeDateAdapter, NativeDateModule} from './index';
+// tslint:disable:no-magic-numbers
+import { LOCALE_ID } from '@angular/core';
+import { async, inject, TestBed } from '@angular/core/testing';
+import { Platform } from '@ptsecurity/cdk/platform';
+import { DEC, FEB, JAN, MAR } from '@ptsecurity/mosaic/testing';
 
-const SUPPORTS_INTL = typeof Intl != 'undefined';
+import { DateAdapter, MC_DATE_LOCALE, NativeDateAdapter, NativeDateModule } from './index';
+
+
+// tslint:disable-next-line
+const SUPPORTS_INTL = typeof Intl !== 'undefined';
 
 
 describe('NativeDateAdapter', () => {
@@ -19,9 +23,9 @@ describe('NativeDateAdapter', () => {
   }));
 
   beforeEach(inject([DateAdapter, Platform],
-    (dateAdapter: NativeDateAdapter, _platform: Platform) => {
+    (dateAdapter: NativeDateAdapter, newPlatform: Platform) => {
     adapter = dateAdapter;
-    platform = _platform;
+    platform = newPlatform;
 
     assertValidDate = (d: Date | null, valid: boolean) => {
       expect(adapter.isDateInstance(d)).not.toBeNull(`Expected ${d} to be a date instance`);
@@ -75,6 +79,7 @@ describe('NativeDateAdapter', () => {
 
   it('should get month names in a different locale', () => {
     adapter.setLocale('ja-JP');
+
     if (SUPPORTS_INTL) {
       expect(adapter.getMonthNames('long')).toEqual([
         '1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'
@@ -96,6 +101,7 @@ describe('NativeDateAdapter', () => {
 
   it('should get date names in a different locale', () => {
     adapter.setLocale('ja-JP');
+
     if (SUPPORTS_INTL) {
       expect(adapter.getDateNames()).toEqual([
         '1日', '2日', '3日', '4日', '5日', '6日', '7日', '8日', '9日', '10日', '11日', '12日',
@@ -137,6 +143,7 @@ describe('NativeDateAdapter', () => {
 
   it('should get day of week names in a different locale', () => {
     adapter.setLocale('ja-JP');
+
     if (SUPPORTS_INTL) {
       expect(adapter.getDayOfWeekNames('long')).toEqual([
         '日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日'
@@ -154,6 +161,7 @@ describe('NativeDateAdapter', () => {
 
   it('should get year name in a different locale', () => {
     adapter.setLocale('ja-JP');
+
     if (SUPPORTS_INTL) {
       expect(adapter.getYearName(new Date(2017, JAN, 1))).toBe('2017年');
     } else {
@@ -187,9 +195,9 @@ describe('NativeDateAdapter', () => {
     expect(adapter.createDate(100, JAN, 1).getFullYear()).toBe(100);
   });
 
-  it("should get today's date", () => {
+  it('should get today\'s date', () => {
     expect(adapter.sameDate(adapter.today(), new Date()))
-        .toBe(true, "should be equal to today's date");
+        .toBe(true, 'should be equal to today\'s date');
   });
 
   it('should parse string', () => {
@@ -197,18 +205,18 @@ describe('NativeDateAdapter', () => {
   });
 
   it('should parse number', () => {
-    let timestamp = new Date().getTime();
+    const timestamp = new Date().getTime();
     expect(adapter.parse(timestamp)).toEqual(new Date(timestamp));
   });
 
   it ('should parse Date', () => {
-    let date = new Date(2017, JAN, 1);
+    const date = new Date(2017, JAN, 1);
     expect(adapter.parse(date)).toEqual(date);
     expect(adapter.parse(date)).not.toBe(date);
   });
 
   it('should parse invalid value as invalid', () => {
-    let d = adapter.parse('hello');
+    const d = adapter.parse('hello');
     expect(d).not.toBeNull();
     expect(adapter.isDateInstance(d))
         .toBe(true, 'Expected string to have been fed through Date.parse');
@@ -242,6 +250,7 @@ describe('NativeDateAdapter', () => {
 
   it('should format with a different locale', () => {
     adapter.setLocale('ja-JP');
+
     if (SUPPORTS_INTL) {
       // Edge & IE use a different format in Japanese.
       if (platform.EDGE || platform.TRIDENT) {
@@ -285,13 +294,13 @@ describe('NativeDateAdapter', () => {
   });
 
   it('should clone', () => {
-    let date = new Date(2017, JAN, 1);
+    const date = new Date(2017, JAN, 1);
     expect(adapter.clone(date)).toEqual(date);
     expect(adapter.clone(date)).not.toBe(date);
   });
 
   it('should preserve time when cloning', () => {
-    let date = new Date(2017, JAN, 1, 4, 5, 6);
+    const date = new Date(2017, JAN, 1, 4, 5, 6);
     expect(adapter.clone(date)).toEqual(date);
     expect(adapter.clone(date)).not.toBe(date);
   });
@@ -333,19 +342,19 @@ describe('NativeDateAdapter', () => {
   });
 
   it('should count today as a valid date instance', () => {
-    let d = new Date();
+    const d = new Date();
     expect(adapter.isValid(d)).toBe(true);
     expect(adapter.isDateInstance(d)).toBe(true);
   });
 
   it('should count an invalid date as an invalid date instance', () => {
-    let d = new Date(NaN);
+    const d = new Date(NaN);
     expect(adapter.isValid(d)).toBe(false);
     expect(adapter.isDateInstance(d)).toBe(true);
   });
 
   it('should count a string as not a date instance', () => {
-    let d = '1/1/2017';
+    const d = '1/1/2017';
     expect(adapter.isDateInstance(d)).toBe(false);
   });
 

@@ -5,21 +5,24 @@ import { Observable, Subject } from 'rxjs';
 /** InjectionToken for datepicker that can be used to override default locale code. */
 export const MC_DATE_LOCALE = new InjectionToken<string>('MC_DATE_LOCALE', {
   providedIn: 'root',
-  factory: MAT_DATE_LOCALE_FACTORY
+  factory: MC_DATE_LOCALE_FACTORY
 });
 
 /** @docs-private */
-export function MAT_DATE_LOCALE_FACTORY(): string {
+// tslint:disable-next-line:naming-convention
+export function MC_DATE_LOCALE_FACTORY(): string {
   return inject(LOCALE_ID);
 }
 
 /** Adapts type `D` to be usable as a date by cdk-based components that work with dates. */
+// tslint:disable-next-line:naming-convention
 export abstract class DateAdapter<D> {
   /** The locale to use for all dates. */
   protected locale: any;
 
   /** A stream that emits when the locale changes. */
   get localeChanges(): Observable<void> { return this._localeChanges; }
+    // tslint:disable-next-line:naming-convention
   protected _localeChanges = new Subject<void>();
 
   /**
