@@ -25,7 +25,7 @@ export function addPackageToPackageJson(host: Tree, pkg: string, version: string
             json.dependencies = sortObjectByKeys(json.dependencies);
         }
 
-        host.overwrite('package.json', JSON.stringify(json, null, 2));
+        host.overwrite('package.json', JSON.stringify(json, null, 4));
     }
 
     return host;

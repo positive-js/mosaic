@@ -9,8 +9,7 @@ import { spawnSync } from 'child_process';
  */
 export class GitClient {
 
-    constructor(public projectDir: string, public remoteGitUrl: string) {
-    }
+    constructor(public projectDir: string, public remoteGitUrl: string) {}
 
     /** Gets the currently checked out branch for the project directory. */
     getCurrentBranch() {
@@ -50,9 +49,27 @@ export class GitClient {
         return spawnSync('git', ['add', '-A'], {cwd: this.projectDir}).status === 0;
     }
 
+    /** Gets the title of a specified commit reference. */
+    getCommitTitle(commitRef: string): string {
+        return spawnSync('git', ['log', '-n1', '--format=%s', commitRef], {cwd: this.projectDir})
+            .stdout.toString().trim();
+    }
+
     /** Creates a new commit within the current branch with the given commit message. */
     createNewCommit(message: string): boolean {
         return spawnSync('git', ['commit', '-m', message], {cwd: this.projectDir}).status === 0;
+    }
+
+    /** Pushes the specified tag to the remote git repository. */
+    pushTagToRemote(tagName: string): boolean {
+        return spawnSync('git', ['push', this.remoteGitUrl, `refs/tags/${tagName}`], {
+            cwd: this.projectDir
+        }).status === 0;
+    }
+
+    /** Creates a tag for the specified commit reference. */
+    createTag(commitRef: string, tagName: string, message: string): boolean {
+        return spawnSync('git', ['tag', tagName, '-m', message], {cwd: this.projectDir}).status === 0;
     }
 }
 

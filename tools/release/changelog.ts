@@ -79,18 +79,29 @@ function createDedupeWriterOptions(changelogPath: string) {
         finalizeContext: (context: any) => {
             context.commitGroups.forEach((group: any) => {
                 group.commits = group.commits.filter((commit: any) => {
-                    // NOTE: We cannot compare the SHA's because the commits will have a different SHA
-                    // if they are being cherry-picked into a different branch.
+
+                    // Commits that change things for "cdk-experimental" or "material-experimental" will also
+                    // show up in the changelog by default. We don't want to show these in the changelog.
+                    if (commit.scope && commit.scope.includes('experimental')) {
+                        console.log(chalk.yellow(`  ↺   Skipping experimental: "${chalk.bold(commit.header)}"`));
+
+                        return false;
+                    }
+
+                    // Filter out duplicate commits. Note that we cannot compare the SHA because the commits
+                    // will have a different SHA if they are being cherry-picked into a different branch.
                     if (existingChangelogContent.includes(commit.subject)) {
-                        console.log(
-                            chalk.yellow(`  ↺   Skipping duplicate: "${chalk.bold(commit.header)}"`)
-                        );
+                        console.log(chalk.yellow(`  ↺   Skipping duplicate: "${chalk.bold(commit.header)}"`));
 
                         return false;
                     }
 
                     return true;
                 });
+
+                // Filter out commit groups which don't have any commits. Commit groups will become
+                // empty if we filter out all duplicated commits.
+                return group.commits.length;
             });
 
             return context;

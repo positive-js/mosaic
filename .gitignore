@@ -1,5 +1,7 @@
 package-lock.json
 
+.env
+
 # folders
 node_modules/
 coverage/

@@ -1,6 +1,6 @@
 import { task } from 'gulp';
 
-import { buildConfig } from '../../packages/build-config';
+import { buildConfig } from '../../packages';
 import { cleanTask } from '../utils/helpers';
 
 

@@ -30,7 +30,7 @@ task('payload', series('mosaic:clean-build', async () => {
     };
 
     // Print the results to the console, so we can read it from the CI.
-    console.log('Payload Results:', JSON.stringify(results, null, 2));
+    console.log('Payload Results:', JSON.stringify(results, null, 4));
 }));
 
 /** Returns the size of the given library bundle. */

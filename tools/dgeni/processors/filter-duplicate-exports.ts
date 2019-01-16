@@ -7,11 +7,11 @@ import { ExportDoc } from 'dgeni-packages/typescript/api-doc-types/ExportDoc';
  * to avoid that API entries are showing up multiple times in the docs.
  *
  * ```ts
- *   // Some file in @angular/cdk/scrolling
+ *   // Some file in @ptsecurity/cdk/scrolling
  *   export {ScrollDispatcher} from './scroll-dispatcher';
  *
- *   // Other file in @angular/cdk/overlay
- *   export {ScrollDispatcher} from '@angular/cdk/scrolling';
+ *   // Other file in @ptsecurity/cdk/overlay
+ *   export {ScrollDispatcher} from '@ptsecurity/cdk/scrolling';
  *
  *   // Re-export of the same export with a different name (alias).
  *   export {ScrollDispatcher as X} from './scroll-dispatcher';

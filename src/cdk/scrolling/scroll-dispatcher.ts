@@ -44,10 +44,10 @@ export class ScrollDispatcher implements OnDestroy {
      * @param scrollable Scrollable instance to be registered.
      */
     register(scrollable: CdkScrollable): void {
-        const scrollSubscription = scrollable.elementScrolled()
-            .subscribe(() => this._scrolled.next(scrollable));
-
-        this.scrollContainers.set(scrollable, scrollSubscription);
+        if (!this.scrollContainers.has(scrollable)) {
+            this.scrollContainers.set(scrollable, scrollable.elementScrolled()
+                .subscribe(() => this._scrolled.next(scrollable)));
+        }
     }
 
     /**
@@ -79,7 +79,7 @@ export class ScrollDispatcher implements OnDestroy {
             return observableOf<void>();
         }
 
-        return Observable.create((observer: Observer<CdkScrollable | void>) => {
+        return new Observable((observer: Observer<CdkScrollable | void>) => {
             if (!this._globalSubscription) {
                 this.addGlobalListener();
             }
@@ -138,14 +138,14 @@ export class ScrollDispatcher implements OnDestroy {
 
     /** Returns true if the element is contained within the provided Scrollable. */
     private scrollableContainsElement(scrollable: CdkScrollable, elementRef: ElementRef): boolean {
-        let element = elementRef.nativeElement;
-        let scrollableElement = scrollable.getElementRef().nativeElement; //tslint:disable-line
+        let element: HTMLElement | null = elementRef.nativeElement;
+        let scrollableElement = scrollable.getElementRef().nativeElement;
 
         // Traverse through the element parents until we reach null, checking if any of the elements
         // are the scrollable's element.
         do {
-            if (element === scrollableElement) { return true; }
-        } while (element = element.parentElement); // tslint:disable-line
+            if (element == scrollableElement) { return true; }
+        } while (element = element!.parentElement);
 
         return false;
     }

@@ -36,7 +36,7 @@ export class TabsDemoComponent {
     background = '';
 
     constructor() {
-        this.asyncTabs = Observable.create((observer: Observer<ExampleTab[]>) => {
+        this.asyncTabs = new Observable((observer: Observer<ExampleTab[]>) => {
             setTimeout(() => {
                 observer.next([
                     { label: 'First', content: 'Content 1' },
