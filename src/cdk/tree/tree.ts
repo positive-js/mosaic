@@ -38,84 +38,6 @@ import {
 
 
 /**
- * Tree node for CdkTree. It contains the data in the tree node.
- */
-@Directive({
-    selector: 'cdk-tree-node',
-    exportAs: 'cdkTreeNode',
-    host: {
-        class: 'cdk-tree-node',
-
-        '[attr.aria-expanded]': 'isExpanded',
-        '[attr.aria-level]': 'role === "treeitem" ? level : null',
-        '[attr.role]': 'role'
-    }
-})
-export class CdkTreeNode<T> implements IFocusableOption, OnDestroy {
-    /**
-     * The most recently created `CdkTreeNode`. We save it in static variable so we can retrieve it
-     * in `CdkTree` and set the data to it.
-     */
-    static mostRecentTreeNode: CdkTreeNode<any> | null = null;
-
-    @Input() role: 'treeitem' | 'group' = 'treeitem';
-
-    protected destroyed = new Subject<void>();
-
-    get data(): T {
-        return this._data;
-    }
-
-    set data(value: T) {
-        this._data = value;
-
-        this.setRoleFromData();
-    }
-
-    private _data: T;
-
-    get isExpanded(): boolean {
-        return this.tree.treeControl.isExpanded(this._data);
-    }
-
-    get level(): number {
-        return this.tree.treeControl.getLevel ? this.tree.treeControl.getLevel(this._data) : 0;
-    }
-
-    constructor(
-        protected elementRef: ElementRef,
-        @Inject(forwardRef(() => CdkTree)) protected tree: CdkTree<T>
-    ) {
-        CdkTreeNode.mostRecentTreeNode = this as CdkTreeNode<T>;
-    }
-
-    ngOnDestroy() {
-        this.destroyed.next();
-        this.destroyed.complete();
-    }
-
-    focus(): void {
-        this.elementRef.nativeElement.focus();
-    }
-
-    private setRoleFromData(): void {
-        if (this.tree.treeControl.isExpandable) {
-            this.role = this.tree.treeControl.isExpandable(this._data) ? 'group' : 'treeitem';
-        } else {
-            if (!this.tree.treeControl.getChildren) {
-                throw getTreeControlFunctionsMissingError();
-            }
-
-            this.tree.treeControl.getChildren(this._data).pipe(takeUntil(this.destroyed))
-                .subscribe((children) => {
-                    this.role = children && children.length ? 'group' : 'treeitem';
-                });
-        }
-    }
-}
-
-
-/**
  * CDK tree component that connects with a data source to retrieve data of type `T` and renders
  * dataNodes with hierarchy. Updates the dataNodes when new data is provided by the data source.
  */
@@ -266,8 +188,7 @@ export class CdkTree<T> implements AfterContentChecked, ICollectionViewer, OnDes
     getNodeDef(data: T, i: number): CdkTreeNodeDef<T> {
         if (this.nodeDefs.length === 1) { return this.nodeDefs.first; }
 
-        const nodeDef =
-            this.nodeDefs.find((def) => def.when && def.when(i, data)) || this.defaultNodeDef;
+        const nodeDef = this.nodeDefs.find((def) => def.when && def.when(i, data)) || this.defaultNodeDef;
 
         if (!nodeDef) { throw getTreeMissingMatchingNodeDefError(); }
 
@@ -353,5 +274,82 @@ export class CdkTree<T> implements AfterContentChecked, ICollectionViewer, OnDes
         this._dataSource = dataSource;
 
         if (this.nodeDefs) { this.observeRenderChanges(); }
+    }
+}
+
+/**
+ * Tree node for CdkTree. It contains the data in the tree node.
+ */
+@Directive({
+    selector: 'cdk-tree-node',
+    exportAs: 'cdkTreeNode',
+    host: {
+        class: 'cdk-tree-node',
+
+        '[attr.aria-expanded]': 'isExpanded',
+        '[attr.aria-level]': 'role === "treeitem" ? level : null',
+        '[attr.role]': 'role'
+    }
+})
+export class CdkTreeNode<T> implements IFocusableOption, OnDestroy {
+    /**
+     * The most recently created `CdkTreeNode`. We save it in static variable so we can retrieve it
+     * in `CdkTree` and set the data to it.
+     */
+    static mostRecentTreeNode: CdkTreeNode<any> | null = null;
+
+    @Input() role: 'treeitem' | 'group' = 'treeitem';
+
+    protected destroyed = new Subject<void>();
+
+    get data(): T {
+        return this._data;
+    }
+
+    set data(value: T) {
+        this._data = value;
+
+        this.setRoleFromData();
+    }
+
+    private _data: T;
+
+    get isExpanded(): boolean {
+        return this.tree.treeControl.isExpanded(this._data);
+    }
+
+    get level(): number {
+        return this.tree.treeControl.getLevel ? this.tree.treeControl.getLevel(this._data) : 0;
+    }
+
+    constructor(
+        protected elementRef: ElementRef,
+        @Inject(forwardRef(() => CdkTree)) protected tree: CdkTree<T>
+    ) {
+        CdkTreeNode.mostRecentTreeNode = this as CdkTreeNode<T>;
+    }
+
+    ngOnDestroy() {
+        this.destroyed.next();
+        this.destroyed.complete();
+    }
+
+    focus(): void {
+        this.elementRef.nativeElement.focus();
+    }
+
+    private setRoleFromData(): void {
+        if (this.tree.treeControl.isExpandable) {
+            this.role = this.tree.treeControl.isExpandable(this._data) ? 'group' : 'treeitem';
+        } else {
+            if (!this.tree.treeControl.getChildren) {
+                throw getTreeControlFunctionsMissingError();
+            }
+
+            this.tree.treeControl.getChildren(this._data).pipe(takeUntil(this.destroyed))
+                .subscribe((children) => {
+                    this.role = children && children.length ? 'group' : 'treeitem';
+                });
+        }
     }
 }

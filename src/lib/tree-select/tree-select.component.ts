@@ -1,6 +1,5 @@
 /* tslint:disable:no-empty */
 
-import { NodeDef, ViewData } from '@angular/core/src/view';
 import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
 import { Directionality } from '@ptsecurity/cdk/bidi';
 import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
@@ -19,6 +18,7 @@ import {
 import { CdkConnectedOverlay, ViewportRuler } from '@ptsecurity/cdk/overlay';
 
 import {
+    AfterContentChecked,
     AfterContentInit, AfterViewInit,
     Attribute,
     ChangeDetectionStrategy,
@@ -68,6 +68,7 @@ import {
 import { McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 
 import { McTag } from '@ptsecurity/mosaic/tag';
+import { McTreeSelection } from '@ptsecurity/mosaic/tree';
 
 
 import { defer, merge, Observable, Subject } from 'rxjs';
@@ -166,12 +167,13 @@ export const McTreeSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdate
     ],
     providers: [
         { provide: McFormFieldControl, useExisting: McTreeSelect },
-        { provide: MC_OPTION_PARENT_COMPONENT, useExisting: McTreeSelect }
+        { provide: MC_OPTION_PARENT_COMPONENT, useExisting: McTreeSelect },
+        { provide: McTreeSelection, useExisting: McTreeSelect }
     ]
 })
 export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
-    AfterContentInit, AfterViewInit, OnChanges, OnDestroy, OnInit, DoCheck, ControlValueAccessor, CanDisable,
-    HasTabIndex, McFormFieldControl<any>, CanUpdateErrorState {
+    AfterContentInit, AfterContentChecked, AfterViewInit, OnChanges, OnDestroy, OnInit, DoCheck, ControlValueAccessor,
+    CanDisable, HasTabIndex, McFormFieldControl<any>, CanUpdateErrorState {
 
     /** A name for this control that can be used by `mc-form-field`. */
     controlType = 'mc-select';
@@ -439,6 +441,8 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
             elementRef, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl, differs, _changeDetectorRef
         );
 
+        console.log('McTreeSelect');
+
         if (this.ngControl) {
             // Note: we provide the value accessor through here, instead of
             // the `providers` to avoid running into a circular import.
@@ -450,8 +454,6 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
         // Force setter to be called in case id was not specified.
         this.id = this.id;
     }
-
-    ngAfterContentChecked() {}
 
     ngOnInit() {
         super.ngOnInit();
@@ -478,6 +480,8 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     }
 
     ngAfterContentInit() {
+        console.log('ngAfterContentInit');
+
         this.initKeyManager();
 
         this.selectionModel.onChange!
@@ -555,7 +559,6 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
         this._ngZone.onStable.asObservable()
             .pipe(take(1))
             .subscribe(() => {
-                console.log('qqq');
                 if (this.triggerFontSize && this.overlayDir.overlayRef &&
                     this.overlayDir.overlayRef.overlayElement) {
                     this.overlayDir.overlayRef.overlayElement.style.fontSize = `${this.triggerFontSize}px`;
@@ -710,6 +713,8 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
                 this._changeDetectorRef.detectChanges();
                 this.calculateOverlayOffsetX();
                 this.panel.nativeElement.scrollTop = this.scrollTop;
+
+                this.renderNodeChanges(this.dataSource.expandedData.value);
             });
     }
 
@@ -810,24 +815,14 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     renderNodeChanges(
         data: T[],
         dataDiffer: IterableDiffer<T> = this.dataDiffer,
-        viewContainer: any = this.nodeOutlet.viewContainer,
+        viewContainer: any = this.nodeOutlet && this.nodeOutlet.viewContainer,
         parentData?: T
     ): void {
+        if (!this.nodeOutlet) { return; }
+
         super.renderNodeChanges(data, dataDiffer, viewContainer, parentData);
 
         const arrayOfInstances = [];
-
-        viewContainer._embeddedViews.forEach((view: ViewData) => {
-            const viewDef = view.def;
-
-            viewDef.nodes.forEach((node: NodeDef) => {
-                if (viewDef.nodeMatchedQueries === node.matchedQueryIds) {
-                    const nodeData: any = view.nodes[node.nodeIndex];
-
-                    arrayOfInstances.push(nodeData.instance as never);
-                }
-            });
-        });
 
         if (this.options) {
             this.options.reset(arrayOfInstances);

@@ -571,8 +571,7 @@ export class McSelect extends McSelectMixinBase implements
         this._ngZone.onStable.asObservable()
             .pipe(take(1))
             .subscribe(() => {
-                if (this.triggerFontSize && this.overlayDir.overlayRef &&
-                    this.overlayDir.overlayRef.overlayElement) {
+                if (this.triggerFontSize && this.overlayDir.overlayRef && this.overlayDir.overlayRef.overlayElement) {
                     this.overlayDir.overlayRef.overlayElement.style.fontSize = `${this.triggerFontSize}px`;
                 }
             });

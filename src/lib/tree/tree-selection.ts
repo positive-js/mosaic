@@ -28,9 +28,6 @@ import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import { END, ENTER, HOME, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, SPACE } from '@ptsecurity/cdk/keycodes';
 
 
-/**
- * Wrapper for the CdkTree node with Material design styles.
- */
 @Directive({
     exportAs: 'mcTreeOption',
     selector: 'mc-tree-option',
@@ -158,8 +155,8 @@ export const McTreeSelectionBaseMixin: HasTabIndexCtor & CanDisableCtor &
 
 
 @Component({
-    exportAs: 'mcTreeSelection',
     selector: 'mc-tree-selection',
+    exportAs: 'mcTreeSelection',
     template: `<ng-container cdkTreeNodeOutlet></ng-container>`,
     host: {
         class: 'mc-tree-selection',
@@ -176,7 +173,7 @@ export const McTreeSelectionBaseMixin: HasTabIndexCtor & CanDisableCtor &
 })
 export class McTreeSelection<T> extends McTreeSelectionBaseMixin<T>
     implements AfterContentInit, CanDisable, HasTabIndex {
-    // Outlets within the tree's template where the dataNodes will be inserted.
+
     @ViewChild(CdkTreeNodeOutlet) nodeOutlet: CdkTreeNodeOutlet;
 
     @ContentChildren(McTreeOption) options: QueryList<McTreeOption<T>>;
