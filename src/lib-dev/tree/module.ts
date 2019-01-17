@@ -193,8 +193,7 @@ export class DemoComponent {
         BrowserModule,
         FormsModule,
         McTreeModule,
-        McIconModule,
-        CdkTreeModule
+        McIconModule
     ],
     bootstrap: [
         DemoComponent

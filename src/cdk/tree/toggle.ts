@@ -3,9 +3,6 @@ import { Directive, Input } from '@angular/core';
 import { CdkTree, CdkTreeNode } from './tree';
 
 
-/**
- * Node toggle to expand/collapse the node.
- */
 @Directive({
     selector: '[cdkTreeNodeToggle]',
     host: {
@@ -18,8 +15,7 @@ export class CdkTreeNodeToggle<T> {
 
     set recursive(value: boolean) { this._recursive = value; }
 
-    /* tslint:disable-next-line:naming-convention */
-    protected _recursive = false;
+    private _recursive = false;
 
     constructor(protected tree: CdkTree<T>, protected treeNode: CdkTreeNode<T>) {}
 

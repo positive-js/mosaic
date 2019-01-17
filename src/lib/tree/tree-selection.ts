@@ -29,11 +29,11 @@ import { END, ENTER, HOME, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, SPACE } 
 
 
 @Directive({
-    exportAs: 'mcTreeOption',
     selector: 'mc-tree-option',
+    exportAs: 'mcTreeOption',
     host: {
         tabindex: '-1',
-        class: 'mc-tree-node',
+        class: 'mc-tree-option',
         '[class.mc-selected]': 'selected',
         '[class.mc-focused]': 'hasFocus',
 

@@ -3,7 +3,7 @@ import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FlatTreeControl } from '@ptsecurity/cdk/tree';
+import { CdkTreeModule, FlatTreeControl } from '@ptsecurity/cdk/tree';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
@@ -189,6 +189,7 @@ export class DemoComponent {
         BrowserModule,
         FormsModule,
         McTreeModule,
+        CdkTreeModule,
         McTreeSelectModule,
 
         McButtonModule,

@@ -168,7 +168,8 @@ export const McTreeSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdate
     providers: [
         { provide: McFormFieldControl, useExisting: McTreeSelect },
         { provide: MC_OPTION_PARENT_COMPONENT, useExisting: McTreeSelect },
-        { provide: McTreeSelection, useExisting: McTreeSelect }
+        { provide: McTreeSelection, useExisting: McTreeSelect },
+        { provide: CdkTree, useExisting: McTreeSelect }
     ]
 })
 export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
@@ -441,8 +442,6 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
             elementRef, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl, differs, _changeDetectorRef
         );
 
-        console.log('McTreeSelect');
-
         if (this.ngControl) {
             // Note: we provide the value accessor through here, instead of
             // the `providers` to avoid running into a circular import.
@@ -480,8 +479,6 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     }
 
     ngAfterContentInit() {
-        console.log('ngAfterContentInit');
-
         this.initKeyManager();
 
         this.selectionModel.onChange!

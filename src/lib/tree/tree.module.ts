@@ -5,14 +5,16 @@ import { CdkTreeModule } from '@ptsecurity/cdk/tree';
 
 import { McTreeNodeDef } from './node';
 import { McTreeNodePadding } from './padding';
+import { McTreeNodeToggle } from './toggle';
 import { McTreeSelection, McTreeOption } from './tree-selection';
 
 
 const MC_TREE_DIRECTIVES = [
+    McTreeSelection,
+    McTreeOption,
     McTreeNodeDef,
     McTreeNodePadding,
-    McTreeSelection,
-    McTreeOption
+    McTreeNodeToggle
 ];
 
 @NgModule({
