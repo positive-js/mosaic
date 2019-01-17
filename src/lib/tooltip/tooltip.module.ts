@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OverlayModule } from '@ptsecurity/cdk/overlay';
 
 import {
@@ -13,7 +12,7 @@ import {
 @NgModule({
     declarations: [McTooltipComponent, McTooltip],
     exports: [McTooltipComponent, McTooltip],
-    imports: [BrowserAnimationsModule, CommonModule, OverlayModule],
+    imports: [CommonModule, OverlayModule],
     providers: [MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER],
     entryComponents: [McTooltipComponent]
 })
