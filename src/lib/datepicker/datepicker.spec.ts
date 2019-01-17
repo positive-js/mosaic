@@ -815,11 +815,6 @@ describe('McDatepicker', () => {
         expect(toggle.getAttribute('type')).toBe('button');
       });
 
-      it('should remove the underlying SVG icon from the tab order', () => {
-        const icon = fixture.debugElement.nativeElement.querySelector('svg');
-        expect(icon.getAttribute('focusable')).toBe('false');
-      });
-
       it('should restore focus to the toggle after the calendar is closed', () => {
         const toggle = fixture.debugElement.query(By.css('button')).nativeElement;
 

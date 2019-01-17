@@ -4,7 +4,7 @@ $mc-datepicker-non-touch-calendar-width:
         $mc-datepicker-non-touch-calendar-cell-size * 7 + $mc-datepicker-calendar-padding * 2;
 // Based on the natural height of the calendar in a month with 6 rows of dates
 // (largest the calendar will get).
-$mc-datepicker-non-touch-calendar-height: 354px;
+$mc-datepicker-non-touch-calendar-height: 344px;
 
 // Ideally the calendar would have a constant aspect ratio, no matter its size, and we would base
 // these measurements off the aspect ratio. Unfortunately, the aspect ratio does change a little as
@@ -23,7 +23,7 @@ $mc-datepicker-touch-max-height: 788px;
 
 .mc-datepicker-content {
     display: block;
-    border-radius: 4px;
+    // border-radius: 0;
 
     .mc-calendar {
         width: $mc-datepicker-non-touch-calendar-width;

@@ -4,6 +4,7 @@ import { A11yModule } from '@ptsecurity/cdk/a11y';
 import { OverlayModule } from '@ptsecurity/cdk/overlay';
 import { PortalModule } from '@ptsecurity/cdk/portal';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
+import { McIconModule } from '@ptsecurity/mosaic/icon';
 
 import { McCalendar, McCalendarHeader } from './calendar';
 import { McCalendarBody } from './calendar-body';
@@ -26,7 +27,9 @@ import { McYearView } from './year-view';
         McButtonModule,
         OverlayModule,
         A11yModule,
-        PortalModule
+        PortalModule,
+        McButtonModule,
+        McIconModule
     ],
     exports: [
         McCalendar,

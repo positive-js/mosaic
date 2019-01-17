@@ -9,7 +9,7 @@ import {
 
 
 /**
- * Animations used by the Material datepicker.
+ * Animations used by the mosaic datepicker.
  * @docs-private
  */
 export const mcDatepickerAnimations: {

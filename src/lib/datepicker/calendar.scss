@@ -11,8 +11,6 @@ $mc-calendar-controls-side-margin: calc(33% / 7 - 16px);
 $mc-calendar-arrow-size: 5px !default;
 $mc-calendar-arrow-disabled-opacity: 0.5 !default;
 
-// Values chosen to approximate https://material.io/icons/#ic_navigate_before and
-// https://material.io/icons/#ic_navigate_next as closely as possible.
 $mc-calendar-prev-next-icon-border-width: 2px;
 $mc-calendar-prev-next-icon-margin: 15.5px;
 $mc-calendar-prev-icon-transform: translateX(2px) rotate(-45deg);
@@ -35,6 +33,16 @@ $mc-calendar-next-icon-transform: translateX(-2px) rotate(45deg);
 .mc-calendar-controls {
     display: flex;
     margin: $mc-calendar-controls-vertical-padding $mc-calendar-controls-side-margin;
+
+    button[mc-button], button[mc-icon-button] {
+        border-radius: 0;
+        border-color: transparent;
+        background-color: transparent;
+
+        .mc-button-overlay {
+            z-index: -1;
+        }
+    }
 }
 
 .mc-calendar-spacer {
@@ -43,43 +51,6 @@ $mc-calendar-next-icon-transform: translateX(-2px) rotate(45deg);
 
 .mc-calendar-period-button {
     min-width: 0;
-}
-
-.mc-calendar-arrow {
-    display: inline-block;
-    width: 0;
-    height: 0;
-    border-left: $mc-calendar-arrow-size solid transparent;
-    border-right: $mc-calendar-arrow-size solid transparent;
-    border-top-width: $mc-calendar-arrow-size;
-    border-top-style: solid;
-    margin: 0 0 0 $mc-calendar-arrow-size;
-    vertical-align: middle;
-
-    &.mc-calendar-invert {
-        transform: rotate(180deg);
-    }
-
-    [dir='rtl'] & {
-        margin: 0 $mc-calendar-arrow-size 0 0;
-    }
-}
-
-.mc-calendar-previous-button,
-.mc-calendar-next-button {
-    position: relative;
-
-    &::after {
-        @include mc-fill;
-        content: '';
-        margin: $mc-calendar-prev-next-icon-margin;
-        border: 0 solid currentColor;
-        border-top-width: $mc-calendar-prev-next-icon-border-width;
-    }
-
-    [dir='rtl'] & {
-        transform: rotate(180deg);
-    }
 }
 
 .mc-calendar-previous-button::after {

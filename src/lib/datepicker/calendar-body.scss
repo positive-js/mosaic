@@ -8,6 +8,7 @@ $mc-calendar-body-label-padding-start: 5% !default;
 $mc-calendar-body-label-side-padding: 33% / 7 !default;
 $mc-calendar-body-cell-min-size: 32px !default;
 $mc-calendar-body-cell-content-margin: 5% !default;
+$mc-calendar-body-cell-content-padding: 8px !default;
 $mc-calendar-body-cell-content-border-width: 1px !default;
 
 $mc-calendar-body-min-size: 7 * $mc-calendar-body-cell-min-size !default;
@@ -44,6 +45,8 @@ $mc-calendar-body-cell-content-size: 100% - $mc-calendar-body-cell-content-margi
     top: $mc-calendar-body-cell-content-margin;
     left: $mc-calendar-body-cell-content-margin;
 
+    padding: $mc-calendar-body-cell-content-padding;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -58,13 +61,25 @@ $mc-calendar-body-cell-content-size: 100% - $mc-calendar-body-cell-content-margi
     border-width: $mc-calendar-body-cell-content-border-width;
     border-style: solid;
 
-    // Choosing a value clearly larger than the height ensures we get the correct capsule shape.
-    border-radius: 999px;
-
     @include cdk-high-contrast {
         border: none;
     }
 }
+
+mc-month-view {
+    .mc-calendar-body-cell-content {
+        justify-content: flex-end;
+    }
+}
+
+mc-multi-year-view,
+mc-year-view {
+    .mc-calendar-body-cell-content {
+        justify-content: center;
+    }
+}
+
+
 
 
 @include cdk-high-contrast {

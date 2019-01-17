@@ -1,11 +1,10 @@
 <div class="mc-calendar-header">
   <div class="mc-calendar-controls">
     <button mc-button type="button" class="mc-calendar-period-button"
-            (click)="currentPeriodClicked()" [attr.aria-label]="periodButtonLabel"
-            cdkAriaLive="polite">
+            (click)="currentPeriodClicked()" [attr.aria-label]="periodButtonLabel">
       {{periodButtonText}}
-      <div class="mc-calendar-arrow"
-           [class.mc-calendar-invert]="calendar.currentView != 'month'"></div>
+      <i mc-icon="mc-angle-M_16"
+         [class.mc-calendar-invert]="calendar.currentView != 'month'"></i>
     </button>
 
     <div class="mc-calendar-spacer"></div>
@@ -15,11 +14,13 @@
     <button mc-icon-button type="button" class="mc-calendar-previous-button"
             [disabled]="!previousEnabled()" (click)="previousClicked()"
             [attr.aria-label]="prevButtonLabel">
+        <i mc-icon="mc-angle-L_16"></i>
     </button>
 
     <button mc-icon-button type="button" class="mc-calendar-next-button"
             [disabled]="!nextEnabled()" (click)="nextClicked()"
             [attr.aria-label]="nextButtonLabel">
+        <i mc-icon="mc-angle-L_16"></i>
     </button>
   </div>
 </div>

@@ -57,12 +57,13 @@ export class McCalendarHeader<D> {
     if (this.calendar.currentView === 'month') {
       return this.dateAdapter
           .format(this.calendar.activeDate, this.dateFormats.display.monthYearLabel)
-              .toLocaleUpperCase();
+            .toLocaleUpperCase();
     }
 
     if (this.calendar.currentView === 'year') {
       return this.dateAdapter.getYearName(this.calendar.activeDate);
     }
+
     const activeYear = this.dateAdapter.getYear(this.calendar.activeDate);
     const firstYearInView = this.dateAdapter.getYearName(
         // tslint:disable-next-line:no-magic-numbers
