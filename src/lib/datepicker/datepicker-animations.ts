@@ -34,8 +34,13 @@ export const mcDatepickerAnimations: {
     state('void', style({opacity: 0})),
     state('enter', style({opacity: 1})),
 
-    // TODO(crisbeto): this animation should be removed since it isn't quite on spec, but we
     // need to keep it until #12440 gets in, otherwise the exit animation will look glitchy.
     transition('void => *', animate('120ms 100ms cubic-bezier(0.55, 0, 0.55, 0.2)'))
   ])
 };
+
+// todo should be put into polyfils
+// https://github.com/angular/angular/issues/24769
+if (!Element.prototype.matches) {
+    Element.prototype.matches = (Element.prototype as any).msMatchesSelector;
+}

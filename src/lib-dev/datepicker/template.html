@@ -1,5 +1,31 @@
-<mc-form-field>
-    <input mcInput [mcDatepicker]="myDatepicker">
-    <mc-datepicker-toggle tabindex="7" mcSuffix [for]="myDatepicker"></mc-datepicker-toggle>
-    <mc-datepicker #myDatepicker></mc-datepicker>
-</mc-form-field>
+<div class="container">
+
+    <mc-form-field>
+        <input mcInput [mcDatepicker]="myDatepicker1">
+        <mc-datepicker-toggle tabindex="7" mcSuffix [for]="myDatepicker1"></mc-datepicker-toggle>
+        <mc-datepicker #myDatepicker1></mc-datepicker>
+    </mc-form-field>
+
+    <br>
+    <br>
+
+    <mc-form-field>
+        <input mcInput [mcDatepicker]="myDatepicker2">
+        <mc-datepicker-toggle mcSuffix [for]="myDatepicker2">
+            <i mc-icon="mc-angle-M_16" mcDatepickerToggleIcon></i>
+        </mc-datepicker-toggle>
+        <mc-datepicker #myDatepicker2></mc-datepicker>
+    </mc-form-field>
+
+    <br>
+    <br>
+
+    <mc-form-field>
+        <input mcInput [mcDatepicker]="myDatepicker3">
+        <mc-datepicker-toggle mcSuffix [for]="myDatepicker3">
+            <i mc-icon="mc-angle-M_16" mcDatepickerToggleIcon></i>
+        </mc-datepicker-toggle>
+        <mc-datepicker #myDatepicker3 startView="multi-year"></mc-datepicker>
+    </mc-form-field>
+
+</div>
