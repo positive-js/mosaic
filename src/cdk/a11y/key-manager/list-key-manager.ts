@@ -60,6 +60,7 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
     private _pressedLetters: string[] = [];
 
     constructor(private _items: QueryList<T>) {
+        console.log('keymanager');
         if (_items instanceof QueryList) {
             _items.changes.subscribe((newItems: QueryList<T>) => {
                 if (this._activeItem) {

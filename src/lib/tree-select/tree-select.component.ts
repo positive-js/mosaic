@@ -1,5 +1,6 @@
 /* tslint:disable:no-empty */
 
+import { NodeDef, ViewData } from '@angular/core/src/view';
 import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
 import { Directionality } from '@ptsecurity/cdk/bidi';
 import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
@@ -68,7 +69,7 @@ import {
 import { McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 
 import { McTag } from '@ptsecurity/mosaic/tag';
-import { McTreeSelection } from '@ptsecurity/mosaic/tree';
+import { McTreeOption, McTreeSelection } from '@ptsecurity/mosaic/tree';
 
 
 import { defer, merge, Observable, Subject } from 'rxjs';
@@ -189,10 +190,10 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     triggerFontSize = 0;
 
     /** Deals with the selection logic. */
-    selectionModel: SelectionModel<McOption>;
+    selectionModel: SelectionModel<McTreeOption<T>>;
 
     /** Manages keyboard events for options in the panel. */
-    keyManager: ActiveDescendantKeyManager<McOption>;
+    keyManager: ActiveDescendantKeyManager<McTreeOption<T>>;
 
     /** The IDs of child options to be passed to the aria-owns attribute. */
     optionIds: string = '';
@@ -251,7 +252,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     @ContentChild(McTreeSelectTrigger) customTrigger: McTreeSelectTrigger;
 
     /** All of the defined select options. */
-    @ContentChildren(McOption, { descendants: true }) options: QueryList<McOption>;
+    @ViewChildren(McTreeOption) options: QueryList<McTreeOption<any>>;
 
     /** All of the defined groups of options. */
     @ContentChildren(McOptgroup) optionGroups: QueryList<McOptgroup>;
@@ -299,6 +300,8 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
      * @docs-private
      */
     @Output() readonly valueChange: EventEmitter<any> = new EventEmitter<any>();
+
+    private emptyDataDiffer: IterableDiffer<T>;
 
     @Input()
     get placeholder(): string {
@@ -448,6 +451,8 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
             this.ngControl.valueAccessor = this;
         }
 
+        this.emptyDataDiffer = this.differs.find([]).create(() => new Date().valueOf());
+
         this.tabIndex = parseInt(tabIndex) || 0;
 
         // Force setter to be called in case id was not specified.
@@ -457,7 +462,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     ngOnInit() {
         super.ngOnInit();
 
-        this.selectionModel = new SelectionModel<McOption>(this.multiple);
+        this.selectionModel = new SelectionModel<McTreeOption<T>>(this.multiple);
         this.stateChanges.next();
 
         // We need `distinctUntilChanged` here, because some browsers will
@@ -479,27 +484,26 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     }
 
     ngAfterContentInit() {
-        this.initKeyManager();
-
         this.selectionModel.onChange!
             .pipe(takeUntil(this.destroy))
             .subscribe((event) => {
                 event.added.forEach((option) => option.select());
                 event.removed.forEach((option) => option.deselect());
             });
+    }
+
+    ngAfterViewInit() {
+        this.tags.changes
+            .subscribe(() => {
+                setTimeout(() => this.calculateHiddenItems(), 0);
+            });
 
         this.options.changes
             .pipe(startWith(null), takeUntil(this.destroy))
             .subscribe(() => {
+                console.log('this.options.changes');
                 this.resetOptions();
                 this.initializeSelection();
-            });
-    }
-
-    ngAfterViewInit(): void {
-        this.tags.changes
-            .subscribe(() => {
-                setTimeout(() => this.calculateHiddenItems(), 0);
             });
     }
 
@@ -528,7 +532,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     _onTouched = () => {};
 
     /** Toggles the overlay panel open or closed. */
-    toggle(): void {
+    toggle() {
         if (this.panelOpen) {
             this.close();
         } else {
@@ -537,7 +541,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     }
 
     /** Opens the overlay panel. */
-    open(): void {
+    open() {
         // if (this.disabled || !this.options || !this.options.length || this._panelOpen) { return; }
         if (this.disabled || this._panelOpen) { return; }
 
@@ -564,7 +568,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     }
 
     /** Closes the overlay panel and focuses the host element. */
-    close(): void {
+    close() {
         if (this._panelOpen) {
             this._panelOpen = false;
             this.keyManager.withHorizontalOrientation(this.isRtl() ? 'rtl' : 'ltr');
@@ -579,7 +583,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
      *
      * @param value New value to be written to the model.
      */
-    writeValue(value: any): void {
+    writeValue(value: any) {
         if (this.options) {
             this.setSelectionByValue(value);
         }
@@ -592,7 +596,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
      *
      * @param fn Callback to be triggered when the value changes.
      */
-    registerOnChange(fn: (value: any) => void): void {
+    registerOnChange(fn: (value: any) => void) {
         this._onChange = fn;
     }
 
@@ -603,7 +607,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
      *
      * @param fn Callback to be triggered when the component has been touched.
      */
-    registerOnTouched(fn: () => {}): void {
+    registerOnTouched(fn: () => {}) {
         this._onTouched = fn;
     }
 
@@ -613,7 +617,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
      *
      * @param isDisabled Sets whether the component is disabled.
      */
-    setDisabledState(isDisabled: boolean): void {
+    setDisabledState(isDisabled: boolean) {
         this.disabled = isDisabled;
         this._changeDetectorRef.markForCheck();
         this.stateChanges.next();
@@ -659,7 +663,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
         return this._dir ? this._dir.value === 'rtl' : false;
     }
 
-    handleKeydown(event: KeyboardEvent): void {
+    handleKeydown(event: KeyboardEvent) {
         if (!this.disabled) {
             if (this.panelOpen) {
                 this.handleOpenKeydown(event);
@@ -673,7 +677,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
      * When the panel content is done fading in, the panelDoneAnimating property is
      * set so the proper class can be added to the panel.
      */
-    onFadeInDone(): void {
+    onFadeInDone() {
         this.panelDoneAnimating = this.panelOpen;
         this._changeDetectorRef.markForCheck();
     }
@@ -703,7 +707,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     /**
      * Callback that is invoked when the overlay panel has been attached.
      */
-    onAttached(): void {
+    onAttached() {
         this.overlayDir.positionChange
             .pipe(take(1))
             .subscribe(() => {
@@ -711,7 +715,9 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
                 this.calculateOverlayOffsetX();
                 this.panel.nativeElement.scrollTop = this.scrollTop;
 
-                this.renderNodeChanges(this.dataSource.expandedData.value);
+                this.renderNodeChanges(this.dataSource.expandedData.value, this.emptyDataDiffer);
+
+                this.initKeyManager();
             });
     }
 
@@ -721,7 +727,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     }
 
     /** Focuses the select element. */
-    focus(): void {
+    focus() {
         this.elementRef.nativeElement.focus();
     }
 
@@ -758,13 +764,13 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     }
 
     /** Invoked when an option is clicked. */
-    onRemoveMatcherItem(option: McOption, $event): void {
+    onRemoveMatcherItem(option: McOption, $event) {
         $event.stopPropagation();
 
         option.deselect();
     }
 
-    calculateHiddenItems(): void {
+    calculateHiddenItems() {
         if (this.empty || !this.multiple) { return; }
 
         let visibleItems: number = 0;
@@ -812,14 +818,18 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     renderNodeChanges(
         data: T[],
         dataDiffer: IterableDiffer<T> = this.dataDiffer,
-        viewContainer: any = this.nodeOutlet && this.nodeOutlet.viewContainer,
-        parentData?: T
-    ): void {
+        viewContainer: any = this.nodeOutlet && this.nodeOutlet.viewContainer
+    ) {
         if (!this.nodeOutlet) { return; }
 
-        super.renderNodeChanges(data, dataDiffer, viewContainer, parentData);
+        super.renderNodeChanges(data, dataDiffer, viewContainer);
 
         const arrayOfInstances = [];
+
+        viewContainer._embeddedViews.forEach((view: ViewData) => {
+            const nodeData: any = view.nodes[2];
+            arrayOfInstances.push(nodeData.instance as never);
+        });
 
         if (this.options) {
             this.options.reset(arrayOfInstances);
@@ -827,6 +837,40 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
         }
 
         // this.updateScrollSize();
+    }
+
+    setFocusedOption(option: McTreeOption<T>) {
+        this.keyManager.updateActiveItem(option);
+
+        if (this.withShift && this.multiple) {
+            const previousIndex = this.keyManager.previousActiveItemIndex;
+            const activeIndex = this.keyManager.activeItemIndex;
+
+            if (previousIndex < activeIndex) {
+                this.options.forEach((item, index) => {
+                    if (index >= previousIndex && index <= activeIndex) { item.setSelected(true); }
+                });
+            } else {
+                this.options.forEach((item, index) => {
+                    if (index >= activeIndex && index <= previousIndex) { item.setSelected(true); }
+                });
+            }
+
+            this.withShift = false;
+        } else if (this.withCtrl) {
+            this.withCtrl = false;
+
+            if (!this.canDeselectLast(option)) { return; }
+
+            option.toggle();
+        } else {
+            if (this.autoSelect) {
+                this.options.forEach((item) => item.setSelected(false));
+                option.setSelected(true);
+            }
+        }
+
+        // this.emitNavigationEvent(option);
     }
 
     private getTotalItemsWidthInMatcher(): number {
@@ -852,7 +896,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     }
 
     /** Handles keyboard events while the select is closed. */
-    private handleClosedKeydown(event: KeyboardEvent): void {
+    private handleClosedKeydown(event: KeyboardEvent) {
         /* tslint:disable-next-line */
         const keyCode = event.keyCode;
         const isArrowKey = keyCode === DOWN_ARROW || keyCode === UP_ARROW ||
@@ -869,7 +913,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     }
 
     /** Handles keyboard events when the selected is open. */
-    private handleOpenKeydown(event: KeyboardEvent): void {
+    private handleOpenKeydown(event: KeyboardEvent) {
         /* tslint:disable-next-line */
         const keyCode = event.keyCode;
         const isArrowKey = keyCode === DOWN_ARROW || keyCode === UP_ARROW;
@@ -913,7 +957,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
         }
     }
 
-    private initializeSelection(): void {
+    private initializeSelection() {
         // Defer setting the value in order to avoid the "Expression
         // has changed after it was checked" errors from Angular.
         Promise.resolve().then(() => {
@@ -925,7 +969,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
      * Sets the selected option based on a value. If no option can be
      * found with the designated value, the select trigger is cleared.
      */
-    private setSelectionByValue(value: any | any[]): void {
+    private setSelectionByValue(value: any | any[]) {
         if (this.multiple && value) {
             if (!Array.isArray(value)) {
                 throw getMcSelectNonArrayValueError();
@@ -976,10 +1020,9 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
 
     /** Sets up a key manager to listen to keyboard events on the overlay panel. */
     private initKeyManager() {
-        this.keyManager = new ActiveDescendantKeyManager<McOption>(this.options)
-            .withTypeAhead()
-            .withVerticalOrientation()
-            .withHorizontalOrientation(this.isRtl() ? 'rtl' : 'ltr');
+        console.log('initKeyManager');
+        this.keyManager = new ActiveDescendantKeyManager<McTreeOption<T>>(this.options)
+            .withVerticalOrientation();
 
         this.keyManager.tabOut
             .pipe(takeUntil(this.destroy))
@@ -1002,7 +1045,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     }
 
     /** Drops current option subscriptions and IDs and resets from scratch. */
-    private resetOptions(): void {
+    private resetOptions() {
         const changedOrDestroyed = merge(this.options.changes, this.destroy);
 
         this.optionSelectionChanges
@@ -1029,7 +1072,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     }
 
     /** Invoked when an option is clicked. */
-    private onSelect(option: McOption, isUserInput: boolean): void {
+    private onSelect(option: McOption, isUserInput: boolean) {
         const wasSelected = this.selectionModel.isSelected(option);
 
         if (option.value == null && !this._multiple) {
@@ -1081,7 +1124,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     }
 
     /** Emits change event to set the model value. */
-    private propagateChanges(fallbackValue?: any): void {
+    private propagateChanges(fallbackValue?: any) {
         let valueToEmit: any = null;
 
         if (this.multiple) {
@@ -1106,7 +1149,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
      * Highlights the selected item. If no option is selected, it will highlight
      * the first item instead.
      */
-    private highlightCorrectOption(): void {
+    private highlightCorrectOption() {
         if (this.keyManager) {
             if (this.empty) {
                 this.keyManager.setFirstItemActive();
@@ -1117,7 +1160,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     }
 
     /** Scrolls the active option into view. */
-    private scrollActiveOptionIntoView(): void {
+    private scrollActiveOptionIntoView() {
         const activeOptionIndex = this.keyManager.activeItemIndex || 0;
         const labelCount = countGroupLabelsBeforeOption(activeOptionIndex, this.options, this.optionGroups);
 
@@ -1139,7 +1182,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     }
 
     /** Calculates the scroll position and x- and y-offsets of the overlay panel. */
-    private calculateOverlayPosition(): void {
+    private calculateOverlayPosition() {
         const itemHeight = this.getItemHeight();
         const items = this.getItemCount();
         const panelHeight = Math.min(items * itemHeight, SELECT_PANEL_MAX_HEIGHT);
@@ -1171,7 +1214,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
      * can't be calculated until the panel has been attached, because we need to know the
      * content width in order to constrain the panel within the viewport.
      */
-    private calculateOverlayOffsetX(): void {
+    private calculateOverlayOffsetX() {
         const overlayRect = this.overlayDir.overlayRef.overlayElement.getBoundingClientRect();
         const viewportSize = this._viewportRuler.getViewportSize();
         const isRtl = this.isRtl();
@@ -1224,7 +1267,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
      * y-offset so the panel can open fully on-screen. If it still won't fit,
      * sets the offset back to 0 to allow the fallback position to take over.
      */
-    private checkOverlayWithinViewport(maxScroll: number): void {
+    private checkOverlayWithinViewport(maxScroll: number) {
         const itemHeight = this.getItemHeight();
         const viewportSize = this._viewportRuler.getViewportSize();
 

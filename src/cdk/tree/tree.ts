@@ -113,7 +113,7 @@ export class CdkTree<T> implements AfterContentChecked, ICollectionViewer, OnDes
 
     private _dataSource: DataSource<T> | Observable<T[]> | T[];
 
-    constructor(private differs: IterableDiffers, private changeDetectorRef: ChangeDetectorRef) {}
+    constructor(protected differs: IterableDiffers, protected changeDetectorRef: ChangeDetectorRef) {}
 
     ngOnInit() {
         this.dataDiffer = this.differs.find([]).create(this.trackBy);

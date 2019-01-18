@@ -304,7 +304,7 @@ export class McTreeSelection<T> extends McTreeSelectionBaseMixin<T>
         this.keyManager.withScrollSize(Math.floor(this.getHeight() / this.options.first.getHeight()));
     }
 
-    setFocusedOption(option: McTreeOption<T>): void {
+    setFocusedOption(option: McTreeOption<T>) {
         this.keyManager.updateActiveItem(option);
 
         if (this.withShift && this.multiple) {
