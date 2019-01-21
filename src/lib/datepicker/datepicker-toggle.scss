@@ -1,11 +1,15 @@
 $mc-datepicker-toggle-width: 30px;
 $mc-datepicker-toggle-height: 30px;
 
+.mc-datepicker-toggle:focus {
+    outline: 0;
+}
+
 .mc-datepicker-toggle-button.mc-icon-button {
     width: $mc-datepicker-toggle-width;
     height: $mc-datepicker-toggle-height;
     margin-left: 2px;
-    border: 0;
+    border-color: transparent;
     border-radius: 0;
     background: transparent;
 }

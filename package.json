@@ -25,6 +25,7 @@
         "@ptsecurity/mosaic-icons": "2.6.0",
         "@webcomponents/custom-elements": "^1.2.1",
         "core-js": "^2.6.0",
+        "moment": "^2.23.0",
         "rxjs": "^6.3.3",
         "systemjs": "0.19.43",
         "tslib": "^1.9.3",

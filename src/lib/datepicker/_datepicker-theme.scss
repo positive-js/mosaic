@@ -9,13 +9,13 @@ $mc-datepicker-selected-fade-amount: 0.6;
 $mc-datepicker-today-fade-amount: 0.2;
 $mc-calendar-weekday-table-font-size: 11px !default;
 
-@mixin _mc-datepicker-color($palette) {
+@mixin _mc-datepicker-color($color) {
     .mc-calendar-body-selected {
-        background-color: mc-color($palette, 100);
+        background: $color;
     }
 
     .mc-calendar-body-disabled > .mc-calendar-body-selected {
-        background-color: fade-out(mc-color($palette), $mc-datepicker-selected-fade-amount);
+        background-color: fade-out($color, $mc-datepicker-selected-fade-amount);
     }
 }
 
@@ -27,16 +27,6 @@ $mc-calendar-weekday-table-font-size: 11px !default;
     $background: map-get($theme, background);
 
     $is-dark: map-get($theme, is-dark);
-
-    // The prev/next buttons need a bit more specificity to
-    // avoid being overwritten by the .mc-icon-button.
-    .mc-datepicker-toggle,
-    .mc-datepicker-content .mc-calendar-next-button,
-    .mc-datepicker-content .mc-calendar-previous-button {
-        .mc-icon {
-            color: mc-color($second, 400);
-        }
-    }
 
     .mc-calendar-table-header {
         color: mc-color($second, 400);
@@ -57,7 +47,7 @@ $mc-calendar-weekday-table-font-size: 11px !default;
     }
 
     .mc-calendar-body-cell-content {
-        color: mc-color($second, if($is-dark, 500, 700));
+        color: mc-color($foreground, text);
         border-color: transparent;
     }
 
@@ -94,18 +84,23 @@ $mc-calendar-weekday-table-font-size: 11px !default;
     }
 
     .mc-calendar-body-disabled > .mc-calendar-body-today:not(.mc-calendar-body-selected) {
-        // border-color: fade-out(mc-color($foreground, hint-text), $mc-datepicker-today-fade-amount);
+        border-color: fade-out(mc-color($foreground, text), $mc-datepicker-today-fade-amount);
     }
 
-    @include _mc-datepicker-color(map-get($theme, primary));
+    @include _mc-datepicker-color(mc-color($primary, if($is-dark, 700, 100)));
 
     .mc-datepicker-content {
         @include _mc-theme-elevation(4, $theme);
-        background-color: map-get($background, background);
+        background-color: if($is-dark, map-get($second, 700), map-get($background, background));
         color: mc-color($foreground, text);
 
         &.mc-warn {
-            @include _mc-datepicker-color(map-get($theme, error));
+            @include _mc-datepicker-color(mc-color(map-get($theme, error)));
+        }
+
+        .mc-calendar-next-button[disabled],
+        .mc-calendar-previous-button[disabled] {
+            border: 0;
         }
     }
 

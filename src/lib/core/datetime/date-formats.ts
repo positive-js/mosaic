@@ -15,4 +15,4 @@ export interface McDateFormats {
 }
 
 
-export const MC_DATE_FORMATS = new InjectionToken<McDateFormats>('mat-date-formats');
+export const MC_DATE_FORMATS = new InjectionToken<McDateFormats>('mc-date-formats');
