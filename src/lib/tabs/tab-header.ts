@@ -137,11 +137,11 @@ export class McTabHeader extends McTabHeaderBase
 
     /** Event emitted when the option is selected. */
     @Output()
-    readonly selectFocusedIndex = new EventEmitter();
+    readonly selectFocusedIndex: EventEmitter<number> = new EventEmitter<number>();
 
     /** Event emitted when a label is focused. */
     @Output()
-    readonly indexFocused = new EventEmitter();
+    readonly indexFocused: EventEmitter<number> = new EventEmitter<number>();
 
     /** The distance in pixels that the tab labels should be translated to the left. */
     private _scrollDistance = 0;
@@ -163,6 +163,9 @@ export class McTabHeader extends McTabHeaderBase
 
     /** Used to manage focus between the tabs. */
     private keyManager: FocusKeyManager<McTabLabelWrapper>;
+
+    /** Cached text content of the header. */
+    private currentTextContent: string;
 
     private _selectedIndex: number = 0;
 
@@ -272,18 +275,33 @@ export class McTabHeader extends McTabHeaderBase
      * Callback for when the MutationObserver detects that the content has changed.
      */
     onContentChanges() {
-        const zoneCallback = () => {
-            this.updatePagination();
-            this.changeDetectorRef.markForCheck();
-        };
+        const textContent = this.elementRef.nativeElement.textContent;
 
-        // The content observer runs outside the `NgZone` by default, which
-        // means that we need to bring the callback back in ourselves.
-        this.ngZone.run(zoneCallback);
+        // We need to diff the text content of the header, because the MutationObserver callback
+        // will fire even if the text content didn't change which is inefficient and is prone
+        // to infinite loops if a poorly constructed expression is passed in.
+
+        if (textContent !== this.currentTextContent) {
+            this.currentTextContent = textContent;
+
+            const zoneCallback = () => {
+                this.updatePagination();
+                this.changeDetectorRef.markForCheck();
+            };
+
+            // The content observer runs outside the `NgZone` by default, which
+            // means that we need to bring the callback back in ourselves.
+            // TODO: Remove null check for `_ngZone` once it's a required parameter.
+            this.ngZone ? this.ngZone.run(zoneCallback) : zoneCallback();
+        }
     }
 
     /**
      * Updating the view whether pagination should be enabled or not
+     *
+     * WARNING: Calling this method can be very costly in terms of performance.  It should be called
+     * as infrequently as possible from outside of the Tabs component as it causes a reflow of the
+     * page.
      */
     updatePagination() {
         this.checkPaginationEnabled();
@@ -350,7 +368,14 @@ export class McTabHeader extends McTabHeaderBase
         // Don't use `translate3d` here because we don't want to create a new layer. A new layer
         // seems to cause flickering and overflow in Internet Explorer.
         // See: https://github.com/angular/material2/issues/10276
-        this.tabList.nativeElement.style.transform = `translateX(${translateX}px)`;
+        // We round the `transform` here, because transforms with sub-pixel precision cause some
+        // browsers to blur the content of the element.
+        this.tabList.nativeElement.style.transform = `translateX(${Math.round(translateX)}px)`;
+
+        // Setting the `transform` on IE will change the scroll offset of the parent, causing the
+        // position to be thrown off in some cases. We have to reset it ourselves to ensure that
+        // it doesn't get thrown off.
+        this.tabList.nativeElement.scrollLeft = 0;
     }
 
     /**

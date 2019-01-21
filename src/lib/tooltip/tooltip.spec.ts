@@ -47,8 +47,8 @@ describe('McTooltip', () => {
             fixture.detectChanges();
             expect(overlayContainerElement.textContent).toContain(featureKey);
             // NOTE: the overlayElement is only available after tooltip shown up
-            const overlayElement = (component.mostSimpleDirective)._overlayRef.overlayElement;
-            tooltipDirective._updatePosition(); // This line is temporarily for coverage
+            const overlayElement = (component.mostSimpleDirective).overlayRef.overlayElement;
+            tooltipDirective.updatePosition(); // This line is temporarily for coverage
             // Move out from the trigger element, then move into the tooltip element
             dispatchMouseEvent(triggerElement, 'mouseleave');
             fixture.detectChanges();
@@ -108,8 +108,8 @@ describe('McTooltip', () => {
             fixture.detectChanges();
             expect(overlayContainerElement.textContent).toContain(featureKey);
             // NOTE: the overlayElement is only available after tooltip shown up
-            const overlayElement = (component.normalDirective)._overlayRef.overlayElement;
-            tooltipDirective._updatePosition(); // This line is temporarily for coverage
+            const overlayElement = (component.normalDirective).overlayRef.overlayElement;
+            tooltipDirective.updatePosition(); // This line is temporarily for coverage
             // Move out from the trigger element, then move into the tooltip element
             dispatchMouseEvent(triggerElement, 'mouseleave');
             fixture.detectChanges();
