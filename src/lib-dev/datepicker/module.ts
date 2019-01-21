@@ -6,12 +6,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { DateAdapter, MC_DATE_FORMATS, MC_DATE_LOCALE, McNativeDateModule } from '@ptsecurity/mosaic/core';
-import { MC_MOMENT_DATE_FORMATS, McDatepickerModule, MomentDateAdapter } from '@ptsecurity/mosaic/datepicker';
+import { MC_DATE_LOCALE, McNativeDateModule } from '@ptsecurity/mosaic/core';
+import { McDatepickerModule } from '@ptsecurity/mosaic/datepicker';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
-import { Moment } from 'moment';
 
 
 @Component({
@@ -24,8 +23,8 @@ export class DemoComponent {
     minDate = new Date(2015, 0, 1);
     maxDate = new Date(2020, 0, 1);
 
-    myFilter(d: Moment): boolean {
-        const day = d.toDate().getDay();
+    myFilter(d: Date): boolean {
+        const day = d.getDay();
 
         return day !== 0 && day !== 6;
     }
@@ -49,9 +48,7 @@ export class DemoComponent {
         DemoComponent
     ],
     providers: [
-        {provide: MC_DATE_LOCALE, useValue: 'ru-RU'},
-        {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MC_DATE_LOCALE]},
-        {provide: MC_DATE_FORMATS, useValue: MC_MOMENT_DATE_FORMATS}
+        {provide: MC_DATE_LOCALE, useValue: 'ru-RU'}
     ]
 })
 export class DemoModule {}
