@@ -20,7 +20,7 @@
     </mc-tree-node-option>
 
     <mc-tree-node-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
-        <i mc-icon="mc-angle-S_16" [style.transform]="treeControl.isExpanded(node) ? '' : 'rotate(-90deg)'" cdkTreeNodeToggle></i>
+        <i mc-icon="mc-angle-down-S_16" [style.transform]="treeControl.isExpanded(node) ? '' : 'rotate(-90deg)'" cdkTreeNodeToggle></i>
         {{ node.name }} : {{ node.type }}
     </mc-tree-node-option>
 </mc-tree-selection>
@@ -32,7 +32,7 @@
 
     <!--<mc-tree-node *mcTreeNodeDef="let node; when: hasNestedChild">-->
         <!--<div class="mc-tree-node__data">-->
-            <!--<i mc-icon="mc-angle-S_16" mcTreeNodeToggle></i>-->
+            <!--<i mc-icon="mc-angle-down-S_16" mcTreeNodeToggle></i>-->
             <!--{{ node.name }}level: {{ node.level }}-->
         <!--</div>-->
         <!--<div class="mc-tree-branch"-->
