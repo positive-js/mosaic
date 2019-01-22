@@ -3,7 +3,8 @@
     <button mc-button type="button" class="mc-calendar-period-button"
             (click)="currentPeriodClicked()" [attr.aria-label]="periodButtonLabel">
       {{periodButtonText}}
-      <i [class.mc-angle-up-M_16]="calendar.currentView !== 'month'"
+      <i class="mc mc-icon"
+         [class.mc-angle-up-M_16]="calendar.currentView !== 'month'"
          [class.mc-angle-down-M_16]="calendar.currentView === 'month'"></i>
     </button>
 
