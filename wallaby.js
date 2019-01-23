@@ -40,6 +40,7 @@ module.exports = function (wallaby) {
             ],
             alias: {
                 '@ptsecurity/cdk': path.join(wallaby.projectCacheDir, 'src/cdk'),
+                '@ptsecurity/mosaic-date-adapters': path.join(wallaby.projectCacheDir, 'src/mosaic-date-adapters'),
                 '@ptsecurity/mosaic': path.join(wallaby.projectCacheDir, 'src/lib')
             }
         },

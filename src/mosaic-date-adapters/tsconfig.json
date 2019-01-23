@@ -1,0 +1,15 @@
+// Configuration for IDEs only.
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "rootDir": "..",
+        "baseUrl": ".",
+        "paths": {
+            "@ptsecurity/mosaic-date-adapters/*": ["./*"],
+            "@ptsecurity/cdk/*": ["../cdk/*"]
+        }
+    },
+    "include": [
+        "./**/*.ts"
+    ]
+}

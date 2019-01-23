@@ -21,6 +21,7 @@ import {
 } from '@angular/core';
 import { Directionality } from '@ptsecurity/cdk/bidi';
 import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
+import { DateAdapter } from '@ptsecurity/cdk/datetime';
 import { ESCAPE, UP_ARROW } from '@ptsecurity/cdk/keycodes';
 import {
     Overlay,
@@ -33,7 +34,6 @@ import { ComponentPortal, IComponentType } from '@ptsecurity/cdk/portal';
 import {
     CanColor,
     CanColorCtor,
-    DateAdapter,
     mixinColor,
     ThemePalette
 } from '@ptsecurity/mosaic/core';

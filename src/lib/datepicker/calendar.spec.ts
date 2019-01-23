@@ -4,6 +4,7 @@ import { Component, NgZone } from '@angular/core';
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Directionality } from '@ptsecurity/cdk/bidi';
+import { DateAdapter } from '@ptsecurity/cdk/datetime';
 import { ENTER, RIGHT_ARROW, SPACE } from '@ptsecurity/cdk/keycodes';
 import {
   dispatchFakeEvent,
@@ -11,7 +12,7 @@ import {
   dispatchMouseEvent,
   MockNgZone
 } from '@ptsecurity/cdk/testing';
-import { DateAdapter, McNativeDateModule } from '@ptsecurity/mosaic/core';
+import { McNativeDateModule } from '@ptsecurity/mosaic-date-adapters/native-date-adapter';
 
 import { McCalendar } from './calendar';
 import { McDatepickerIntl } from './datepicker-intl';

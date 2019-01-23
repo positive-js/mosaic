@@ -1,0 +1,44 @@
+{
+    "compilerOptions": {
+        // it is nessary for Moment.js and rollup
+        "allowSyntheticDefaultImports": true,
+        "declaration": true,
+        "stripInternal": false,
+        "experimentalDecorators": true,
+        "noUnusedParameters": true,
+        "strictNullChecks": true,
+        "importHelpers": true,
+        "newLine": "lf",
+        "module": "es2015",
+        "moduleResolution": "node",
+        "outDir": "../../dist/packages/mosaic-date-adapters",
+        "rootDir": ".",
+        "rootDirs": [
+            ".",
+            "../../dist/packages/mosaic-date-adapters"
+        ],
+        "sourceMap": true,
+        "inlineSources": true,
+        "target": "es2015",
+        "lib": ["es2015", "dom"],
+        "skipLibCheck": true,
+        "types": [
+            "moment"
+        ],
+        "baseUrl": ".",
+        "paths": {
+            "@ptsecurity/cdk/*": ["../../dist/packages/cdk/*"],
+            "@ptsecurity/mosaic-date-adapters/*": ["../../dist/packages/mosaic-date-adapters/*"]
+        }
+    },
+    "files": [
+        "public-api.ts"
+    ],
+    "angularCompilerOptions": {
+        "strictMetadataEmit": true,
+        "flatModuleOutFile": "index.js",
+        "flatModuleId": "@ptsecurity/mosaic-date-adapters",
+        "skipTemplateCodegen": true,
+        "fullTemplateTypeCheck": true
+    }
+}

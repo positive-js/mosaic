@@ -12,6 +12,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { Directionality } from '@ptsecurity/cdk/bidi';
+import { DateAdapter } from '@ptsecurity/cdk/datetime';
 import {
   DOWN_ARROW,
   END,
@@ -24,7 +25,6 @@ import {
   UP_ARROW,
   SPACE
 } from '@ptsecurity/cdk/keycodes';
-import { DateAdapter } from '@ptsecurity/mosaic/core';
 
 import { McCalendarBody, McCalendarCell } from './calendar-body';
 import { createMissingDateImplError } from './datepicker-errors';

@@ -9,6 +9,7 @@ import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Directionality } from '@ptsecurity/cdk/bidi';
+import { MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
 import { DOWN_ARROW, ENTER, ESCAPE, UP_ARROW } from '@ptsecurity/cdk/keycodes';
 import { Overlay, OverlayContainer } from '@ptsecurity/cdk/overlay';
 import { ScrollDispatcher } from '@ptsecurity/cdk/scrolling';
@@ -19,7 +20,8 @@ import {
   dispatchKeyboardEvent,
   dispatchMouseEvent
 } from '@ptsecurity/cdk/testing';
-import { MC_DATE_LOCALE, McNativeDateModule, NativeDateModule, ThemePalette } from '@ptsecurity/mosaic/core';
+import { McNativeDateModule, NativeDateModule } from '@ptsecurity/mosaic-date-adapters/native-date-adapter';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
 import { McFormField, McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { Subject } from 'rxjs';
 
@@ -481,7 +483,7 @@ describe('McDatepicker', () => {
         // When the calendar is in year view, the first cell should be for a month rather than
         // for a date.
         expect(firstCalendarCell.textContent!.trim())
-            .toBe('JAN', 'Expected the calendar to be in year-view');
+            .toBe('Jan', 'Expected the calendar to be in year-view');
       });
 
       it('should fire yearSelected when user selects calendar year in year view',

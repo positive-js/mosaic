@@ -16,8 +16,8 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
+import { DateAdapter, MC_DATE_FORMATS, McDateFormats } from '@ptsecurity/cdk/datetime';
 import { ComponentPortal, IComponentType, Portal } from '@ptsecurity/cdk/portal';
-import { DateAdapter, MC_DATE_FORMATS, McDateFormats } from '@ptsecurity/mosaic/core';
 import { Subject, Subscription } from 'rxjs';
 
 import { McCalendarCellCssClasses } from './calendar-body';
@@ -55,9 +55,10 @@ export class McCalendarHeader<D> {
   /** The label for the current calendar view. */
   get periodButtonText(): string {
     if (this.calendar.currentView === 'month') {
-      return this.dateAdapter
-          .format(this.calendar.activeDate, this.dateFormats.display.monthYearLabel)
-            .toLocaleUpperCase();
+      const label = this.dateAdapter
+          .format(this.calendar.activeDate, this.dateFormats.display.monthYearLabel);
+
+      return label[0].toLocaleUpperCase() + label.substr(1);
     }
 
     if (this.calendar.currentView === 'year') {

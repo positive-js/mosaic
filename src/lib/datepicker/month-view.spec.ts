@@ -16,7 +16,7 @@ import {
   UP_ARROW
 } from '@ptsecurity/cdk/keycodes';
 import { dispatchFakeEvent, dispatchKeyboardEvent } from '@ptsecurity/cdk/testing';
-import { McNativeDateModule } from '@ptsecurity/mosaic/core';
+import { McNativeDateModule } from '@ptsecurity/mosaic-date-adapters/native-date-adapter';
 
 import { McCalendarBody } from './calendar-body';
 import { McMonthView } from './month-view';
@@ -63,7 +63,7 @@ describe('McMonthView', () => {
 
     it('has correct month label', () => {
       const labelEl = monthViewNativeElement.querySelector('.mc-calendar-body-label')!;
-      expect(labelEl.innerHTML.trim()).toBe('JAN');
+      expect(labelEl.innerHTML.trim()).toBe('Jan');
     });
 
     it('has 31 days', () => {

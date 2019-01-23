@@ -13,6 +13,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { Directionality } from '@ptsecurity/cdk/bidi';
+import { DateAdapter, MC_DATE_FORMATS, McDateFormats } from '@ptsecurity/cdk/datetime';
 import {
   DOWN_ARROW,
   END,
@@ -25,7 +26,6 @@ import {
   UP_ARROW,
   SPACE
 } from '@ptsecurity/cdk/keycodes';
-import { DateAdapter, MC_DATE_FORMATS, McDateFormats } from '@ptsecurity/mosaic/core';
 
 import { McCalendarBody, McCalendarCell, McCalendarCellCssClasses } from './calendar-body';
 import { createMissingDateImplError } from './datepicker-errors';
@@ -240,8 +240,9 @@ export class McMonthView<D> implements AfterContentInit {
     this.selectedDate = this.getDateInCurrentMonth(this.selected);
     this.todayDate = this.getDateInCurrentMonth(this.dateAdapter.today());
     this.monthLabel =
-        this.dateAdapter.getMonthNames('short')[this.dateAdapter.getMonth(this.activeDate)]
-            .toLocaleUpperCase();
+        this.dateAdapter.getMonthNames('short')[this.dateAdapter.getMonth(this.activeDate)];
+
+    this.monthLabel = this.monthLabel[0].toLocaleUpperCase() + this.monthLabel.substr(1);
 
     const firstOfMonth = this.dateAdapter.createDate(this.dateAdapter.getYear(this.activeDate),
         this.dateAdapter.getMonth(this.activeDate), 1);

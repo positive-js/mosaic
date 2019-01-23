@@ -1,0 +1,26 @@
+{
+    "extends": "./tsconfig.build",
+    "compilerOptions": {
+        "importHelpers": false,
+        "module": "commonjs",
+        "target": "es5",
+        "types": ["jasmine"],
+        "experimentalDecorators": true,
+        "paths": {
+            "@ptsecurity/cdk/*": ["../../dist/packages/cdk/*"],
+            "@ptsecurity/mosaic-date-adapters/*": ["./*"]
+        }
+    },
+    "angularCompilerOptions": {
+        "strictMetadataEmit": true,
+        "skipTemplateCodegen": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "fullTemplateTypeCheck": true
+    },
+    "include": [
+        // Include the index.ts for each secondary entry-point
+        "./*/index.ts",
+        "**/*.spec.ts"
+    ]
+}

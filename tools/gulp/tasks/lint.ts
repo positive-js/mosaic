@@ -24,6 +24,9 @@ const mosaicOutPath = join(buildConfig.outputDir, 'packages', 'mosaic');
 /** Path to the output of the CDK package. */
 const cdkOutPath = join(buildConfig.outputDir, 'packages', 'cdk');
 
+/** Path to the output of the mosaic-date-adapters package. */
+const mosaicDateAdaptersOutPath = join(buildConfig.outputDir, 'packages', 'mosaic-date-adapters');
+
 task('tslint', execNodeTask('tslint', tsLintBaseFlags));
 
 task('stylelint', execNodeTask(
@@ -33,7 +36,7 @@ task('stylelint', execNodeTask(
 task('tslint:fix', execNodeTask('tslint', [...tsLintBaseFlags, '--fix']));
 
 task('madge', series('mosaic:clean-build', () => {
-    madge([mosaicOutPath, cdkOutPath]).then((res: any) => {
+    madge([mosaicOutPath, cdkOutPath, mosaicDateAdaptersOutPath]).then((res: any) => {
         const circularModules = res.circular();
 
         if (circularModules.length) {

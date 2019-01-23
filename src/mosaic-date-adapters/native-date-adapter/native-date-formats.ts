@@ -1,4 +1,4 @@
-import { McDateFormats } from './date-formats';
+import { McDateFormats } from '@ptsecurity/cdk/datetime';
 
 
 export const MC_NATIVE_DATE_FORMATS: McDateFormats = {

@@ -5,8 +5,13 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { MC_DATE_LOCALE, McNativeDateModule } from '@ptsecurity/mosaic/core';
+import { DateAdapter, MC_DATE_FORMATS, MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
+import {
+    MosaicDateAdapter,
+    McMosaicDateModule,
+    MC_MOSAIC_DATE_FORMATS
+} from '@ptsecurity/mosaic-date-adapters/mosaic-date-adapter';
+import { McNativeDateModule } from '@ptsecurity/mosaic-date-adapters/native-date-adapter';
 import { McDatepickerModule } from '@ptsecurity/mosaic/datepicker';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
@@ -17,7 +22,12 @@ import { McInputModule } from '@ptsecurity/mosaic/input';
     selector: 'app',
     template: require('./template.html'),
     styleUrls: ['./styles.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    providers: [
+        {provide: MC_DATE_LOCALE, useValue: 'ru-RU'},
+        {provide: DateAdapter, useClass: MosaicDateAdapter, deps: [MC_DATE_LOCALE]},
+        {provide: MC_DATE_FORMATS, useValue: MC_MOSAIC_DATE_FORMATS}
+    ]
 })
 export class DemoComponent {
     minDate = new Date(2015, 0, 1);
@@ -41,6 +51,7 @@ export class DemoComponent {
         McFormFieldModule,
         McDatepickerModule,
         McNativeDateModule,
+        McMosaicDateModule,
         McInputModule,
         McIconModule
     ],

@@ -6,6 +6,7 @@ System.config({
     },
     map: {
         'rxjs': 'node:rxjs',
+        'moment': 'node:moment',
         'main': 'main.js',
         'tslib': 'node:tslib/tslib.js',
 
@@ -39,6 +40,7 @@ System.config({
         '@ptsecurity/cdk': 'dist/packages/cdk/index.js',
         '@ptsecurity/cdk/a11y': 'dist/packages/cdk/a11y/index.js',
         '@ptsecurity/cdk/bidi': 'dist/packages/cdk/bidi/index.js',
+        '@ptsecurity/cdk/datetime': 'dist/packages/cdk/datetime/index.js',
         '@ptsecurity/cdk/coercion': 'dist/packages/cdk/coercion/index.js',
         '@ptsecurity/cdk/collections': 'dist/packages/cdk/collections/index.js',
         '@ptsecurity/cdk/keycodes': 'dist/packages/cdk/keycodes/index.js',
@@ -49,6 +51,10 @@ System.config({
         '@ptsecurity/cdk/scrolling': 'dist/packages/cdk/scrolling/index.js',
         '@ptsecurity/cdk/testing': 'dist/packages/cdk/testing/index.js',
         '@ptsecurity/cdk/tree': 'dist/packages/cdk/tree/index.js',
+
+        '@ptsecurity/mosaic-date-adapters': 'dist/packages/mosaic-date-adapters/index.js',
+        '@ptsecurity/mosaic-date-adapters/mosaic-date-adapter': 'dist/packages/mosaic-date-adapters/mosaic-date-adapter/index.js',
+        '@ptsecurity/mosaic-date-adapters/native-date-adapter': 'dist/packages/mosaic-date-adapters/native-date-adapter/index.js',
 
         '@ptsecurity/mosaic/button': 'dist/packages/mosaic/button/index.js',
         '@ptsecurity/mosaic/core': 'dist/packages/mosaic/core/index.js',
@@ -76,6 +82,7 @@ System.config({
         // Thirdparty barrels.
         'rxjs': {main: 'index'},
         'rxjs/operators': {main: 'index'},
+        'moment': {main: 'moment'},
 
         // Set the default extension for the root package, because otherwise the demo-app can't
         // be built within the production mode. Due to missing file extensions.

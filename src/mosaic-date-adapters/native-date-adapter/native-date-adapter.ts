@@ -1,8 +1,7 @@
 // tslint:disable:no-magic-numbers
 import { Inject, Injectable, Optional } from '@angular/core';
+import { DateAdapter, MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
 import { Platform } from '@ptsecurity/cdk/platform';
-
-import { DateAdapter, MC_DATE_LOCALE } from './date-adapter';
 
 
 // TODO(mmalerba): Remove when we no longer support safari 9.

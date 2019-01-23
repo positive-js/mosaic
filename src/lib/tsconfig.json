@@ -10,6 +10,9 @@
             ],
             "@ptsecurity/mosaic/*": [
                 "./*"
+            ],
+            "@ptsecurity/mosaic-date-adapters/*": [
+                "../mosaic-date-adapters/*"
             ]
         }
     },

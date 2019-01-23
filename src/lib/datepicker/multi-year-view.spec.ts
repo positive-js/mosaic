@@ -14,7 +14,7 @@ import {
   UP_ARROW
 } from '@ptsecurity/cdk/keycodes';
 import { dispatchFakeEvent, dispatchKeyboardEvent } from '@ptsecurity/cdk/testing';
-import { McNativeDateModule } from '@ptsecurity/mosaic/core';
+import { McNativeDateModule } from '@ptsecurity/mosaic-date-adapters/native-date-adapter';
 
 import { McCalendarBody } from './calendar-body';
 import { McMultiYearView, yearsPerPage, yearsPerRow } from './multi-year-view';

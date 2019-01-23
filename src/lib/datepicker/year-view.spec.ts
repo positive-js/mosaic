@@ -14,7 +14,7 @@ import {
   UP_ARROW
 } from '@ptsecurity/cdk/keycodes';
 import { dispatchFakeEvent, dispatchKeyboardEvent } from '@ptsecurity/cdk/testing';
-import { McNativeDateModule } from '@ptsecurity/mosaic/core';
+import { McNativeDateModule } from '@ptsecurity/mosaic-date-adapters/native-date-adapter';
 
 import { McCalendarBody } from './calendar-body';
 import { McYearView } from './year-view';
@@ -70,7 +70,7 @@ describe('McYearView', () => {
 
     it('shows selected month if in same year', () => {
       const selectedEl = yearViewNativeElement.querySelector('.mc-calendar-body-selected')!;
-      expect(selectedEl.innerHTML.trim()).toBe('MAR');
+      expect(selectedEl.innerHTML.trim()).toBe('Mar');
     });
 
     it('does not show selected month if in different year', () => {
@@ -87,7 +87,7 @@ describe('McYearView', () => {
       fixture.detectChanges();
 
       const selectedEl = yearViewNativeElement.querySelector('.mc-calendar-body-selected')!;
-      expect(selectedEl.innerHTML.trim()).toBe('DEC');
+      expect(selectedEl.innerHTML.trim()).toBe('Dec');
     });
 
     it('should emit the selected month on cell clicked', () => {
@@ -102,7 +102,7 @@ describe('McYearView', () => {
 
     it('should mark active date', () => {
       const cellEls = yearViewNativeElement.querySelectorAll('.mc-calendar-body-cell');
-      expect((cellEls[0] as HTMLElement).innerText.trim()).toBe('JAN');
+      expect((cellEls[0] as HTMLElement).innerText.trim()).toBe('Jan');
       expect(cellEls[0].classList).toContain('mc-calendar-body-active');
     });
 

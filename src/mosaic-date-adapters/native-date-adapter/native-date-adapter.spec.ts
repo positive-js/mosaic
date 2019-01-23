@@ -1,9 +1,11 @@
 // tslint:disable:no-magic-numbers
 import { LOCALE_ID } from '@angular/core';
 import { async, inject, TestBed } from '@angular/core/testing';
+import { MC_DATE_LOCALE, DateAdapter } from '@ptsecurity/cdk/datetime';
 import { Platform } from '@ptsecurity/cdk/platform';
 
-import { DateAdapter, MC_DATE_LOCALE, NativeDateAdapter, NativeDateModule } from './index';
+import { NativeDateAdapter } from './native-date-adapter';
+import { NativeDateModule } from './native-date-adapter-module';
 
 
 // tslint:disable-next-line

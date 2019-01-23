@@ -13,6 +13,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { Directionality } from '@ptsecurity/cdk/bidi';
+import { DateAdapter, MC_DATE_FORMATS, McDateFormats } from '@ptsecurity/cdk/datetime';
 import {
   DOWN_ARROW,
   END,
@@ -25,7 +26,6 @@ import {
   UP_ARROW,
   SPACE
 } from '@ptsecurity/cdk/keycodes';
-import { DateAdapter, MC_DATE_FORMATS, McDateFormats } from '@ptsecurity/mosaic/core';
 
 import { McCalendarBody, McCalendarCell } from './calendar-body';
 import { createMissingDateImplError } from './datepicker-errors';
@@ -236,8 +236,10 @@ export class McYearView<D> implements AfterContentInit {
         this.dateAdapter.createDate(this.dateAdapter.getYear(this.activeDate), month, 1),
         this._dateFormats.display.monthYearA11yLabel);
 
+    const newMonthName = monthName[0].toLocaleUpperCase() + monthName.substr(1);
+
     return new McCalendarCell(
-        month, monthName.toLocaleUpperCase(), ariaLabel, this.shouldEnableMonth(month));
+        month, newMonthName, ariaLabel, this.shouldEnableMonth(month));
   }
 
   /** Whether the given month is enabled. */

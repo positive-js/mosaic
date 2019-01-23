@@ -19,6 +19,9 @@ function generateRollupEntryPoints(packageName: string, entryPoints: string[]):
 /** List of potential secondary entry-points for the cdk package. */
 const cdkSecondaryEntryPoints = getSubdirectoryNames(join(buildConfig.packagesDir, 'cdk'));
 
+/** List of potential secondary entry-points for the mosaic-date-adapters package. */
+const mosaicDateAdaptersSecondaryEntryPoints =
+    getSubdirectoryNames(join(buildConfig.packagesDir, 'mosaic-date-adapters'));
 
 /** List of potential secondary entry-points for the package. */
 const mcSecondaryEntryPoints = getSubdirectoryNames(join(buildConfig.packagesDir, 'lib'));
@@ -26,6 +29,10 @@ const mcSecondaryEntryPoints = getSubdirectoryNames(join(buildConfig.packagesDir
 
 /** Object with all cdk entry points in the format of Rollup globals. */
 const rollupCdkEntryPoints = generateRollupEntryPoints('cdk', cdkSecondaryEntryPoints);
+
+/** Object with all mosaic-date-adapters entry points in the format of Rollup globals. */
+const rollupMcDatAdaptersEntryPoints =
+    generateRollupEntryPoints('mosaic-date-adapters', mosaicDateAdaptersSecondaryEntryPoints);
 
 /** Object with all mosaic entry points in the format of Rollup globals. */
 const rollupMcEntryPoints = generateRollupEntryPoints('mosaic', mcSecondaryEntryPoints);
@@ -35,6 +42,8 @@ const rollupMcEntryPoints = generateRollupEntryPoints('mosaic', mcSecondaryEntry
 export const rollupGlobals = {
     /* tslint:disable-next-line:object-literal-key-quotes */
     'tslib': 'tslib',
+    /* tslint:disable-next-line:object-literal-key-quotes */
+    'moment': 'moment.moment',
 
     '@angular/animations': 'ng.animations',
     '@angular/common': 'ng.common',
@@ -52,10 +61,12 @@ export const rollupGlobals = {
     '@angular/router': 'ng.router',
 
     '@ptsecurity/cdk': 'ng.cdk',
+    '@ptsecurity/mosaic-date-adapters': 'ng.mosaicDateAdapters',
     '@ptsecurity/mosaic': 'ng.mosaic',
     '@ptsecurity/mosaic-examples': 'ng.mosaicExamples',
 
     ...rollupCdkEntryPoints,
+    ...rollupMcDatAdaptersEntryPoints,
     ...rollupMcEntryPoints,
     /* tslint:disable-next-line:object-literal-key-quotes */
     'rxjs': 'rxjs',

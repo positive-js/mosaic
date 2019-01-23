@@ -24,6 +24,7 @@
         "baseUrl": ".",
         "paths": {
             "@ptsecurity/cdk/*": ["../../dist/packages/cdk/*"],
+            "@ptsecurity/mosaic-date-adapters/*": ["../../dist/packages/mosaic-date-adapters/*"],
             "@ptsecurity/mosaic/*": ["../../dist/packages/mosaic/*"]
         }
     },
