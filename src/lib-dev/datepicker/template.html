@@ -1,7 +1,7 @@
 <div class="container">
     <label>Default datepicker toggle</label>
     <mc-form-field>
-        <input mcInput [mcDatepicker]="myDatepicker1" />
+        <input mcInput [(ngModel)]="date" [mcDatepicker]="myDatepicker1" />
         <mc-datepicker-toggle tabindex="7" mcSuffix [for]="myDatepicker1"></mc-datepicker-toggle>
         <mc-datepicker #myDatepicker1></mc-datepicker>
     </mc-form-field>

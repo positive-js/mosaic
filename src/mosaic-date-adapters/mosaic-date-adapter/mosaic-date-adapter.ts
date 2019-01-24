@@ -51,7 +51,7 @@ export class MosaicDateAdapter extends DateAdapter<Date> {
         super();
         super.setLocale(mcDateLocale);
 
-        // todo надо ли здесь делать hardcode? Или сделать inject? Хотя кроде текущий конфиг на все случаии жизни
+        // todo надо ли здесь делать hardcode? Или сделать inject? Хотя вроде текущий конфиг на все случаии жизни
         const formatter = new McDateFormatter(this.formatterConfig, this.locale);
         this.moment = formatter.moment;
     }

@@ -11,7 +11,6 @@ import {
     McMosaicDateModule,
     MC_MOSAIC_DATE_FORMATS
 } from '@ptsecurity/mosaic-date-adapters/mosaic-date-adapter';
-import { McNativeDateModule } from '@ptsecurity/mosaic-date-adapters/native-date-adapter';
 import { McDatepickerModule } from '@ptsecurity/mosaic/datepicker';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
@@ -30,6 +29,7 @@ import { McInputModule } from '@ptsecurity/mosaic/input';
     ]
 })
 export class DemoComponent {
+    date = new Date(2019, 0, 24);
     minDate = new Date(2015, 0, 1);
     maxDate = new Date(2020, 0, 1);
 
@@ -50,7 +50,6 @@ export class DemoComponent {
         FormsModule,
         McFormFieldModule,
         McDatepickerModule,
-        McNativeDateModule,
         McMosaicDateModule,
         McInputModule,
         McIconModule
