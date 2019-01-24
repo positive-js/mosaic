@@ -43,7 +43,7 @@ describe('MosaicDateAdapter', () => {
     });
 
     it('should get day of week', () => {
-        expect(adapter.getDayOfWeek(new Date(2019, 0, 1))).toBe(0);
+        expect(adapter.getDayOfWeek(new Date(2019, 0, 1))).toBe(2);
     });
 
     it('should get long month names ru-RU', () => {
@@ -377,8 +377,7 @@ describe('MosaicDateAdapter with not exists MC_DATE_LOCALE override', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [McMosaicDateModule],
-            providers: [{ provide: MC_DATE_LOCALE, useValue: 'da-DK' }]
+            imports: [McMosaicDateModule]
         }).compileComponents();
     }));
 
@@ -387,6 +386,7 @@ describe('MosaicDateAdapter with not exists MC_DATE_LOCALE override', () => {
     }));
 
     it('should throw an error', () => {
+        adapter.setLocale('dk-DN');
         expect(() => adapter.getDayOfWeekNames('long')).toThrow();
     });
 });

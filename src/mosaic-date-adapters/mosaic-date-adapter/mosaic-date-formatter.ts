@@ -26,10 +26,19 @@ interface ICompiledVariables {
     SAME_DAY?: YesNoType;
 }
 
+// todo extract moment types (as function, as namespace and as Moment) if it is possible
+export type MomentType = any | ((...args: any[]) => Moment);
+
 export class McDateFormatter {
     private readonly errorText: string = 'Invalid date';
 
     private messageformat: MessageFormat;
+
+    get moment(): MomentType {
+        return this._moment;
+    }
+
+    private _moment: MomentType;
 
     constructor(private config: IFormatterConfig, private locale) {
         this.configure();
@@ -54,7 +63,7 @@ export class McDateFormatter {
     }
 
     relativeDate(value: Moment, template: IFormatterRelativeTemplate) {
-        if (!moment.isMoment(value)) { throw new Error(this.errorText); }
+        if (!this._moment.isMoment(value)) { throw new Error(this.errorText); }
 
         const now = this.momentWithLocale();
 
@@ -98,7 +107,7 @@ export class McDateFormatter {
     }
 
     absoluteDate(date: Moment, params, datetime = false) {
-        if (!moment.isMoment(date)) { throw new Error(this.errorText); }
+        if (!this._moment.isMoment(date)) { throw new Error(this.errorText); }
 
         const variables = {...this.config.variables, ...params.variables};
         const template = datetime ? params.DATETIME : params.DATE;
@@ -123,7 +132,7 @@ export class McDateFormatter {
     }
 
     rangeDate(startDate: Moment, endDate: Moment, template: IFormatterRangeTemplate) {
-        if (!moment.isMoment(startDate) || !moment.isMoment(endDate)) { throw new Error(this.errorText); }
+        if (!this._moment.isMoment(startDate) || !this._moment.isMoment(endDate)) { throw new Error(this.errorText); }
 
         const variables = {...this.config.variables, ...template.variables};
         const sameMonth = this.isSame('month', startDate, endDate);
@@ -143,7 +152,7 @@ export class McDateFormatter {
     }
 
     rangeDateTime(startDate: Moment, endDate: Moment, template: IFormatterRangeTemplate) {
-        if (!moment.isMoment(startDate) || !moment.isMoment(endDate)) { throw new Error(this.errorText); }
+        if (!this._moment.isMoment(startDate) || !this._moment.isMoment(endDate)) { throw new Error(this.errorText); }
 
         const variables = {...this.config.variables, ...template.variables};
         const sameMonth = this.isSame('month', startDate, endDate);
@@ -195,7 +204,7 @@ export class McDateFormatter {
     }
 
     private momentWithLocale() {
-        return moment().locale(this.locale);
+        return this.moment().locale(this.locale);
     }
 
     private configure() {
@@ -208,14 +217,15 @@ export class McDateFormatter {
     }
 
     private configureMoment(locale: string) {
-        if (locale === 'ru-RU') {
-            // todo hardcode for 'monthsShort' in 'ru' locale
-            moment.updateLocale('ru', {
-                monthsShort: {
-                    format: ['янв', 'фев', 'март', 'апр', 'май', 'июнь', 'июль', 'авг', 'сен', 'окт', 'ноя', 'дек'],
-                    standalone: ['янв', 'фев', 'март', 'апр', 'май', 'июнь', 'июль', 'авг', 'сен', 'окт', 'ноя', 'дек']
-                }
-            });
-        }
+        this._moment = moment;
+
+        const momentLocale = locale.substr(0, 2);
+
+        this._moment.updateLocale(momentLocale, {
+            monthsShort: {
+                format: this.config.monthNames.short,
+                standalone: this.config.monthNames.short
+            }
+        });
     }
 }

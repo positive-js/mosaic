@@ -32,7 +32,8 @@ module.exports = function (options) {
             '@angular/platform-browser',
             '@angular/platform-browser-dynamic',
             'rxjs',
-            'moment'
+            'moment',
+            'messageformat'
         ],
     };
 

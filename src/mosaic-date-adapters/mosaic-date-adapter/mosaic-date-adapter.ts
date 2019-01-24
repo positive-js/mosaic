@@ -1,58 +1,23 @@
 // tslint:disable:no-magic-numbers
 import { Inject, Injectable, Optional } from '@angular/core';
 import { DateAdapter, MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
-// tslint:disable-next-line:no-duplicate-imports
-import * as _moment from 'moment';
-// @ts-ignore
-// tslint:disable-next-line:no-duplicate-imports
-import { default as _rollupMoment, Moment } from 'moment';
 
-
-const moment = _rollupMoment || _moment;
-
-const DEFAULT_MONTH_NAMES = {
-    'en-US': {
-        long: [
-            'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
-            'October', 'November', 'December'
-        ],
-        short: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        narrow: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D']
-    },
-    'ru-RU': {
-        long: [
-            'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь',
-            'Октябрь', 'Ноябрь', 'Декабрь'
-        ],
-        short: ['янв', 'фев', 'март', 'апр', 'май', 'июнь', 'июль', 'авг', 'сен', 'окт', 'ноя', 'дек'],
-        narrow: ['Я', 'Ф', 'М', 'А', 'М', 'И', 'И', 'А', 'С', 'О', 'Н', 'Д']
-    }
-};
-
-
-/** The default date names to use if Intl API is not available. */
-const DEFAULT_DATE_NAMES = range(31, (i) => String(i + 1));
-
-
-/** The default day of the week names to use if Intl API is not available. */
-const DEFAULT_DAY_OF_WEEK_NAMES = {
-    'en-US': {
-        long: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-        short: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-        narrow: ['S', 'M', 'T', 'W', 'T', 'F', 'S']
-    },
-    'ru-RU': {
-        long: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-        short: ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'],
-        narrow: ['В', 'П', 'В', 'С', 'Ч', 'П', 'С']
-    }
-};
+import {
+    McDateFormatter,
+    MomentType
+} from './mosaic-date-formatter';
+import {
+    IFormatterConfig,
+    MC_DATE_FORMATTER_CONFIGS
+} from './mosaic-date-formatter-configs';
 
 
 /** https://tools.ietf.org/html/rfc3339 */
 const ISO_8601_REGEX =
     /^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|(?:(?:\+|-)\d{2}:\d{2}))?)?$/;
 
+/** The default date names to use if Intl API is not available. */
+const DEFAULT_DATE_NAMES = range(31, (i) => String(i + 1));
 
 /** Creates an array and fills it with values. */
 function range<T>(length: number, valueFunction: (index: number) => T): T[] {
@@ -68,11 +33,27 @@ function range<T>(length: number, valueFunction: (index: number) => T): T[] {
 @Injectable()
 export class MosaicDateAdapter extends DateAdapter<Date> {
 
-    useUtcForDisplay: boolean = true;
+    private readonly moment: MomentType;
 
-    constructor(@Optional() @Inject(MC_DATE_LOCALE) mcDateLocale: string) {
+    private get formatterConfig(): IFormatterConfig {
+        const config = MC_DATE_FORMATTER_CONFIGS[this.locale];
+
+        if (!config) {
+            throw Error(`There is no formatter config for locale: ${this.locale}`);
+        }
+
+        return config;
+    }
+
+    constructor(
+        @Optional() @Inject(MC_DATE_LOCALE) mcDateLocale: string
+    ) {
         super();
         super.setLocale(mcDateLocale);
+
+        // todo надо ли здесь делать hardcode? Или сделать inject? Хотя кроде текущий конфиг на все случаии жизни
+        const formatter = new McDateFormatter(this.formatterConfig, this.locale);
+        this.moment = formatter.moment;
     }
 
     getYear(date: Date): number {
@@ -92,12 +73,7 @@ export class MosaicDateAdapter extends DateAdapter<Date> {
     }
 
     getMonthNames(style: 'long' | 'short' | 'narrow'): string[] {
-        const localeSettings = DEFAULT_MONTH_NAMES[this.locale];
-        if (!localeSettings) {
-            throw Error(`There are not month names settings for locale: ${this.locale}`);
-        }
-
-        return localeSettings[style];
+        return this.formatterConfig.monthNames[style];
     }
 
     getDateNames(): string[] {
@@ -105,12 +81,7 @@ export class MosaicDateAdapter extends DateAdapter<Date> {
     }
 
     getDayOfWeekNames(style: 'long' | 'short' | 'narrow'): string[] {
-        const localeSettings = DEFAULT_DAY_OF_WEEK_NAMES[this.locale];
-        if (!localeSettings) {
-            throw Error(`There are not day of week names settings for locale: ${this.locale}`);
-        }
-
-        return localeSettings[style];
+        return this.formatterConfig.dayOfWeekNames[style];
     }
 
     getYearName(date: Date): string {
@@ -161,10 +132,10 @@ export class MosaicDateAdapter extends DateAdapter<Date> {
 
     parse(value: any, parseFormat: string | string[]): Date | null {
         if (value && typeof value === 'string') {
-            return this.createMoment(value, parseFormat, this.locale).toDate();
+            return this.moment(value, parseFormat).toDate();
         }
 
-        return value ? this.createMoment(value).locale(this.locale).toDate() : null;
+        return value ? this.moment(value).toDate() : null;
     }
 
     format(date: Date, displayFormat: string): string {
@@ -172,7 +143,7 @@ export class MosaicDateAdapter extends DateAdapter<Date> {
             throw Error('MosaicDateAdapter: Cannot format invalid date.');
         }
 
-        return moment(date).locale(this.locale).format(displayFormat);
+        return this.moment(date).format(displayFormat);
     }
 
     addCalendarYears(date: Date, years: number): Date {
@@ -249,9 +220,5 @@ export class MosaicDateAdapter extends DateAdapter<Date> {
 
     private toDigit(n: number) {
         return (`00${n}`).slice(-2);
-    }
-
-    private createMoment(...args: any[]): Moment {
-        return this.useUtcForDisplay ? moment.utc(...args) : moment(...args);
     }
 }

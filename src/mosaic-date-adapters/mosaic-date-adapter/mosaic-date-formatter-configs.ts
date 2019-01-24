@@ -1,9 +1,21 @@
-import { enUS } from './configs/en-US';
-import { ruRU } from './configs/ru-RU';
+import { enUS } from './locales/en-US';
+import { ruRU } from './locales/ru-RU';
 
 
 export interface IFormatterConfig {
     variables: IFormatterVariables;
+
+    monthNames: {
+        long: string[];
+        short: string[];
+        narrow: string[];
+    };
+
+    dayOfWeekNames: {
+        long: string[];
+        short: string[];
+        narrow: string[];
+    };
 
     relativeTemplates: {
         short: IFormatterRelativeTemplate;
@@ -49,7 +61,11 @@ export interface IFormatterRelativeTemplate {
     BEFORE_YESTERDAY: string;
 }
 
-export class FormatterConfigs {
-    'en-US' = enUS;
-    'ru-RU' = ruRU;
-}
+export const MC_DATE_FORMATTER_CONFIGS = {
+    get 'en-US'(): IFormatterConfig {
+        return enUS;
+    },
+    get 'ru-RU'(): IFormatterConfig {
+        return ruRU;
+    }
+};

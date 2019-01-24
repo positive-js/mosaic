@@ -44,6 +44,8 @@ export const rollupGlobals = {
     'tslib': 'tslib',
     /* tslint:disable-next-line:object-literal-key-quotes */
     'moment': 'moment.moment',
+    /* tslint:disable-next-line:object-literal-key-quotes */
+    'messageformat': 'messageformat',
 
     '@angular/animations': 'ng.animations',
     '@angular/common': 'ng.common',
