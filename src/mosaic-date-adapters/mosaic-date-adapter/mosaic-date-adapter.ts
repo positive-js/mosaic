@@ -2,13 +2,14 @@
 import { Inject, Injectable, Optional } from '@angular/core';
 import { DateAdapter, MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
 
+import { createMissingDateForamtterError } from './mosaic-date-adapter-errors';
 import {
     McDateFormatter,
     MomentType
 } from './mosaic-date-formatter';
 import {
-    IFormatterConfig,
-    MC_DATE_FORMATTER_CONFIGS
+    IFormatterConfig, MC_DATE_FORMATTER_CONFIGS_SET,
+    McDateFormatterConfigSet
 } from './mosaic-date-formatter-configs';
 
 
@@ -36,7 +37,7 @@ export class MosaicDateAdapter extends DateAdapter<Date> {
     private readonly moment: MomentType;
 
     private get formatterConfig(): IFormatterConfig {
-        const config = MC_DATE_FORMATTER_CONFIGS[this.locale];
+        const config = this.formatterConfigsSet[this.locale];
 
         if (!config) {
             throw Error(`There is no formatter config for locale: ${this.locale}`);
@@ -46,12 +47,16 @@ export class MosaicDateAdapter extends DateAdapter<Date> {
     }
 
     constructor(
-        @Optional() @Inject(MC_DATE_LOCALE) mcDateLocale: string
+        @Optional() @Inject(MC_DATE_LOCALE) mcDateLocale: string,
+        @Optional() @Inject(MC_DATE_FORMATTER_CONFIGS_SET) private formatterConfigsSet: McDateFormatterConfigSet
     ) {
         super();
         super.setLocale(mcDateLocale);
 
-        // todo надо ли здесь делать hardcode? Или сделать inject? Хотя вроде текущий конфиг на все случаии жизни
+        if (!this.formatterConfig) {
+            throw createMissingDateForamtterError('MC_DATE_FORMATTER_CONFIGS_SET');
+        }
+
         const formatter = new McDateFormatter(this.formatterConfig, this.locale);
         this.moment = formatter.moment;
     }
