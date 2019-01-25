@@ -121,6 +121,9 @@ workflows:
             - build_cdk:
                   requires:
                       - install
+            - build_mosaic-date-adapters:
+                  requires:
+                      - install
             - build_mosaic:
                   requires:
                       - install
@@ -128,11 +131,13 @@ workflows:
                   requires:
                       - build_cdk
                       - build_mosaic
+                      - build_mosaic-date-adapters
             - snapshot_publish:
                   requires:
                       - test_unit
                       - build_cdk
                       - build_mosaic
+                      - build_mosaic-date-adapters
                   filters:
                       branches:
                           only:
