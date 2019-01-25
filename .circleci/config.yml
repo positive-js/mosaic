@@ -66,6 +66,12 @@ jobs:
             - attach_workspace: *attach_options
             - run: npm run build:cdk
 
+    build_mosaic-date-adapters:
+        <<: *job_defaults
+        steps:
+            - attach_workspace: *attach_options
+            - run: npm run build:mosaic-date-adapters
+
     test_unit:
         <<: *job_defaults
         steps:
