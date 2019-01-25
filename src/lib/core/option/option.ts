@@ -60,14 +60,14 @@ export const MC_OPTION_PARENT_COMPONENT =
     exportAs: 'mcOption',
     host: {
         '[attr.tabindex]': 'getTabIndex()',
+        class: 'mc-option',
         '[class.mc-selected]': 'selected',
         '[class.mc-option-multiple]': 'multiple',
         '[class.mc-active]': 'active',
-        '[id]': 'id',
         '[class.mc-disabled]': 'disabled',
+        '[id]': 'id',
         '(click)': 'selectViaInteraction()',
-        '(keydown)': 'handleKeydown($event)',
-        class: 'mc-option'
+        '(keydown)': 'handleKeydown($event)'
     },
     styleUrls: ['option.css'],
     templateUrl: 'option.html',

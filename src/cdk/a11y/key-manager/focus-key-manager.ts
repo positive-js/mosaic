@@ -1,6 +1,6 @@
 import { FocusOrigin } from '../focus-monitor/focus-monitor';
 
-import { ListKeyManager, IListKeyManagerOption } from './list-key-manager';
+import { ListKeyManager, ListKeyManagerOption } from './list-key-manager';
 
 
 /**
@@ -8,7 +8,7 @@ import { ListKeyManager, IListKeyManagerOption } from './list-key-manager';
  * Each item must know how to focus itself, whether or not it is currently disabled
  * and be able to supply it's label.
  */
-export interface IFocusableOption extends IListKeyManagerOption {
+export interface IFocusableOption extends ListKeyManagerOption {
     // Focuses the `FocusableOption`. */
     focus(origin?: FocusOrigin): void;
 }

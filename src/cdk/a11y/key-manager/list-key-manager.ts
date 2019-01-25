@@ -17,7 +17,7 @@ import {
 
 
 // This interface is for items that can be passed to a ListKeyManager.
-export interface IListKeyManagerOption {
+export interface ListKeyManagerOption {
     // Whether the option is disabled.
     disabled?: boolean;
 
@@ -30,7 +30,7 @@ export interface IListKeyManagerOption {
  * This class manages keyboard events for selectable lists. If you pass it a query list
  * of items, it will set the active item correctly when arrow events occur.
  */
-export class ListKeyManager<T extends IListKeyManagerOption> {
+export class ListKeyManager<T extends ListKeyManagerOption> {
     /**
      * Stream that emits any time the TAB key is pressed, so components can react
      * when focus is shifted off of the list.
@@ -60,9 +60,10 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
     private _pressedLetters: string[] = [];
 
     constructor(private _items: QueryList<T>) {
-        console.log('keymanager');
         if (_items instanceof QueryList) {
+
             _items.changes.subscribe((newItems: QueryList<T>) => {
+
                 if (this._activeItem) {
                     const itemArray = newItems.toArray();
                     const newIndex = itemArray.indexOf(this._activeItem);

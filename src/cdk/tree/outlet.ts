@@ -1,4 +1,4 @@
-import { Directive, ViewContainerRef } from '@angular/core';
+import { ChangeDetectorRef, Directive, ViewContainerRef } from '@angular/core';
 
 
 /**
@@ -7,5 +7,5 @@ import { Directive, ViewContainerRef } from '@angular/core';
  */
 @Directive({ selector: '[cdkTreeNodeOutlet]' })
 export class CdkTreeNodeOutlet {
-    constructor(public viewContainer: ViewContainerRef) {}
+    constructor(public viewContainer: ViewContainerRef, public changeDetectorRef: ChangeDetectorRef) {}
 }

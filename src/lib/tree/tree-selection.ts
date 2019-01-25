@@ -36,6 +36,8 @@ import { END, ENTER, HOME, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, SPACE } 
         class: 'mc-tree-option',
         '[class.mc-selected]': 'selected',
         '[class.mc-focused]': 'hasFocus',
+        // todo унифицировать!
+        '[class.mc-active]': 'active',
 
         '(focus)': 'handleFocus()',
         '(blur)': 'handleBlur()',
@@ -81,8 +83,21 @@ export class McTreeOption<T> extends CdkTreeNode<T> implements CanDisable {
 
     private _selected: boolean = false;
 
+    /**
+     * Whether or not the option is currently active and ready to be selected.
+     * An active option displays styles as if it is focused, but the
+     * focus is actually retained somewhere else. This comes in handy
+     * for components like autocomplete where focus must remain on the input.
+     */
+    get active(): boolean {
+        return this._active;
+    }
+
+    private _active = false;
+
     constructor(
         protected elementRef: ElementRef,
+        protected changeDetectorRef: ChangeDetectorRef,
         @Inject(forwardRef(() => McTreeSelection)) protected treeSelection: McTreeSelection<T>
     ) {
         super(elementRef, treeSelection);
@@ -110,6 +125,30 @@ export class McTreeOption<T> extends CdkTreeNode<T> implements CanDisable {
         }
 
         // this._changeDetector.markForCheck();
+    }
+
+    /**
+     * This method sets display styles on the option to make it appear
+     * active. This is used by the ActiveDescendantKeyManager so key
+     * events will display the proper options as active on arrow key events.
+     */
+    setActiveStyles(): void {
+        if (!this._active) {
+            this._active = true;
+            this.changeDetectorRef.markForCheck();
+        }
+    }
+
+    /**
+     * This method removes display styles on the option that made it appear
+     * active. This is used by the ActiveDescendantKeyManager so key
+     * events will display the proper options as active on arrow key events.
+     */
+    setInactiveStyles(): void {
+        if (this._active) {
+            this._active = false;
+            this.changeDetectorRef.markForCheck();
+        }
     }
 
     getHeight(): number {
