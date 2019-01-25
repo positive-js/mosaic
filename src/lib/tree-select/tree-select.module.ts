@@ -8,6 +8,8 @@ import { MC_SELECT_SCROLL_STRATEGY_PROVIDER } from '@ptsecurity/mosaic/select';
 import { McTagModule } from '@ptsecurity/mosaic/tag';
 import { McTreeModule } from '@ptsecurity/mosaic/tree';
 
+import { McTreeSelectOption } from './tree-select-option.component';
+
 import { McTreeSelect, McTreeSelectTrigger } from './tree-select.component';
 
 
@@ -20,8 +22,8 @@ import { McTreeSelect, McTreeSelectTrigger } from './tree-select.component';
         McIconModule,
         McTagModule
     ],
-    exports: [McTreeSelect, McTreeSelectTrigger, CommonModule],
-    declarations: [McTreeSelect, McTreeSelectTrigger],
+    exports: [McTreeSelect, McTreeSelectOption, McTreeSelectTrigger, CommonModule],
+    declarations: [McTreeSelect, McTreeSelectOption, McTreeSelectTrigger],
     providers: [MC_SELECT_SCROLL_STRATEGY_PROVIDER]
 })
 export class McTreeSelectModule {}

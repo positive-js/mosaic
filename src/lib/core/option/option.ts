@@ -66,11 +66,12 @@ export const MC_OPTION_PARENT_COMPONENT =
         '[class.mc-active]': 'active',
         '[class.mc-disabled]': 'disabled',
         '[id]': 'id',
+
         '(click)': 'selectViaInteraction()',
         '(keydown)': 'handleKeydown($event)'
     },
-    styleUrls: ['option.css'],
-    templateUrl: 'option.html',
+    styleUrls: ['./option.css'],
+    templateUrl: './option.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -166,6 +167,7 @@ export class McOption implements AfterViewChecked, OnDestroy {
     select(): void {
         if (!this._selected) {
             this._selected = true;
+
             this.changeDetectorRef.markForCheck();
             this.emitSelectionChangeEvent();
         }
@@ -235,17 +237,16 @@ export class McOption implements AfterViewChecked, OnDestroy {
     selectViaInteraction(): void {
         if (!this.disabled) {
             this._selected = this.multiple ? !this._selected : true;
+
             this.changeDetectorRef.markForCheck();
             this.emitSelectionChangeEvent(true);
         }
     }
 
-    /** Returns the correct tabindex for the option depending on disabled state. */
     getTabIndex(): string {
         return this.disabled ? '-1' : '0';
     }
 
-    /** Gets the host DOM element. */
     getHostElement(): HTMLElement {
         return this.element.nativeElement;
     }
