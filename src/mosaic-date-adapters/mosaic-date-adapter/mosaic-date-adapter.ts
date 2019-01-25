@@ -53,7 +53,7 @@ export class MosaicDateAdapter extends DateAdapter<Date> {
         super();
         super.setLocale(mcDateLocale);
 
-        if (!this.formatterConfig) {
+        if (!this.formatterConfigsSet) {
             throw createMissingDateForamtterError('MC_DATE_FORMATTER_CONFIGS_SET');
         }
 

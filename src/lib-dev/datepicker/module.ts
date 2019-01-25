@@ -9,7 +9,8 @@ import { DateAdapter, MC_DATE_FORMATS, MC_DATE_LOCALE } from '@ptsecurity/cdk/da
 import {
     MosaicDateAdapter,
     McMosaicDateModule,
-    MC_MOSAIC_DATE_FORMATS
+    MC_MOSAIC_DATE_FORMATS,
+    MC_DATE_FORMATTER_CONFIGS_SET
 } from '@ptsecurity/mosaic-date-adapters/mosaic-date-adapter';
 import { McDatepickerModule } from '@ptsecurity/mosaic/datepicker';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
@@ -24,7 +25,7 @@ import { McInputModule } from '@ptsecurity/mosaic/input';
     encapsulation: ViewEncapsulation.None,
     providers: [
         {provide: MC_DATE_LOCALE, useValue: 'ru-RU'},
-        {provide: DateAdapter, useClass: MosaicDateAdapter, deps: [MC_DATE_LOCALE]},
+        {provide: DateAdapter, useClass: MosaicDateAdapter, deps: [MC_DATE_LOCALE, MC_DATE_FORMATTER_CONFIGS_SET]},
         {provide: MC_DATE_FORMATS, useValue: MC_MOSAIC_DATE_FORMATS}
     ]
 })
@@ -57,9 +58,7 @@ export class DemoComponent {
     bootstrap: [
         DemoComponent
     ],
-    providers: [
-        {provide: MC_DATE_LOCALE, useValue: 'ru-RU'}
-    ]
+    providers: []
 })
 export class DemoModule {}
 
