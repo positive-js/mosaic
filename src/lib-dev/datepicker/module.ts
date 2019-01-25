@@ -11,7 +11,7 @@ import {
     McMosaicDateModule,
     MC_MOSAIC_DATE_FORMATS,
     MC_DATE_FORMATTER_CONFIGS_SET
-} from '@ptsecurity/mosaic-date-adapters/mosaic-date-adapter';
+} from '@ptsecurity/mosaic-moment-adapter/adapter';
 import { McDatepickerModule } from '@ptsecurity/mosaic/datepicker';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';

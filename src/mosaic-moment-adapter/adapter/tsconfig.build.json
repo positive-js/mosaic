@@ -6,7 +6,7 @@
     "angularCompilerOptions": {
         "strictMetadataEmit": true,
         "flatModuleOutFile": "index.js",
-        "flatModuleId": "@ptsecurity/mosaic-date-adapters/mosaic-date-adapter",
+        "flatModuleId": "@ptsecurity/mosaic-moment-adapter/adapter",
         "skipTemplateCodegen": true,
         "fullTemplateTypeCheck": true
     }

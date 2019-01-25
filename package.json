@@ -134,7 +134,7 @@
         "test:unit": "gulp ci:test",
         "valid:lic": "gulp validate-licenses",
         "build:cdk": "gulp cdk:build-release",
-        "build:mosaic-date-adapters": "gulp mosaic-date-adapters:build-release",
+        "build:mosaic-moment-adapter": "gulp mosaic-moment-adapter:build-release",
         "build:lib": "gulp mosaic:build-release",
         "build:docs": "gulp docs",
         "changelog": "gulp changelog",

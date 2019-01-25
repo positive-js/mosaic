@@ -53,9 +53,8 @@ System.config({
         '@ptsecurity/cdk/testing': 'dist/packages/cdk/testing/index.js',
         '@ptsecurity/cdk/tree': 'dist/packages/cdk/tree/index.js',
 
-        '@ptsecurity/mosaic-date-adapters': 'dist/packages/mosaic-date-adapters/index.js',
-        '@ptsecurity/mosaic-date-adapters/mosaic-date-adapter': 'dist/packages/mosaic-date-adapters/mosaic-date-adapter/index.js',
-        '@ptsecurity/mosaic-date-adapters/native-date-adapter': 'dist/packages/mosaic-date-adapters/native-date-adapter/index.js',
+        '@ptsecurity/mosaic-moment-adapter': 'dist/packages/mosaic-moment-adapter/index.js',
+        '@ptsecurity/mosaic-moment-adapter/adapter': 'dist/packages/mosaic-moment-adapter/adapter/index.js',
 
         '@ptsecurity/mosaic/button': 'dist/packages/mosaic/button/index.js',
         '@ptsecurity/mosaic/core': 'dist/packages/mosaic/core/index.js',

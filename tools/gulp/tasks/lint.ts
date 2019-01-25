@@ -24,8 +24,8 @@ const mosaicOutPath = join(buildConfig.outputDir, 'packages', 'mosaic');
 /** Path to the output of the CDK package. */
 const cdkOutPath = join(buildConfig.outputDir, 'packages', 'cdk');
 
-/** Path to the output of the mosaic-date-adapters package. */
-const mosaicDateAdaptersOutPath = join(buildConfig.outputDir, 'packages', 'mosaic-date-adapters');
+/** Path to the output of the mosaic-moment-adapter package. */
+const mosaicDateAdaptersOutPath = join(buildConfig.outputDir, 'packages', 'mosaic-moment-adapter');
 
 task('tslint', execNodeTask('tslint', tsLintBaseFlags));
 

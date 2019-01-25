@@ -12,7 +12,7 @@ import {
     dispatchMouseEvent,
     MockNgZone
 } from '@ptsecurity/cdk/testing';
-import { McMosaicDateModule } from '@ptsecurity/mosaic-date-adapters/mosaic-date-adapter';
+import { McMosaicDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 
 import { McCalendar } from './calendar';
 import { McDatepickerIntl } from './datepicker-intl';

@@ -11,11 +11,11 @@
         "newLine": "lf",
         "module": "es2015",
         "moduleResolution": "node",
-        "outDir": "../../dist/packages/mosaic-date-adapters",
+        "outDir": "../../dist/packages/mosaic-moment-adapter",
         "rootDir": ".",
         "rootDirs": [
             ".",
-            "../../dist/packages/mosaic-date-adapters"
+            "../../dist/packages/mosaic-moment-adapter"
         ],
         "sourceMap": true,
         "inlineSources": true,
@@ -28,7 +28,7 @@
         "baseUrl": ".",
         "paths": {
             "@ptsecurity/cdk/*": ["../../dist/packages/cdk/*"],
-            "@ptsecurity/mosaic-date-adapters/*": ["../../dist/packages/mosaic-date-adapters/*"]
+            "@ptsecurity/mosaic-moment-adapter/*": ["../../dist/packages/mosaic-moment-adapter/*"]
         }
     },
     "files": [
@@ -37,7 +37,7 @@
     "angularCompilerOptions": {
         "strictMetadataEmit": true,
         "flatModuleOutFile": "index.js",
-        "flatModuleId": "@ptsecurity/mosaic-date-adapters",
+        "flatModuleId": "@ptsecurity/mosaic-moment-adapter",
         "skipTemplateCodegen": true,
         "fullTemplateTypeCheck": true
     }

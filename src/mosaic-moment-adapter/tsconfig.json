@@ -5,7 +5,7 @@
         "rootDir": "..",
         "baseUrl": ".",
         "paths": {
-            "@ptsecurity/mosaic-date-adapters/*": ["./*"],
+            "@ptsecurity/mosaic-moment-adapter/*": ["./*"],
             "@ptsecurity/cdk/*": ["../cdk/*"]
         }
     },

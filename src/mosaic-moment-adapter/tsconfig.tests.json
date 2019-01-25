@@ -8,7 +8,7 @@
         "experimentalDecorators": true,
         "paths": {
             "@ptsecurity/cdk/*": ["../../dist/packages/cdk/*"],
-            "@ptsecurity/mosaic-date-adapters/*": ["./*"]
+            "@ptsecurity/mosaic-moment-adapter/*": ["./*"]
         }
     },
     "angularCompilerOptions": {

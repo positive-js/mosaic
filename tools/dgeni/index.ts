@@ -29,7 +29,7 @@ const cdkPackages = globSync(path.join(sourceDir, 'cdk', '*/'))
     .map(packagePath => path.basename(packagePath));
 
 /** List of Mosaic date adapters packages that need to be documented. */
-const mosaicDateAdaptersPackages = globSync(path.join(sourceDir, 'mosaic-date-adapters', '*/'))
+const mosaicDateAdaptersPackages = globSync(path.join(sourceDir, 'mosaic-moment-adapter', '*/'))
     .map(packagePath => path.basename(packagePath));
 
 /** List of Mosaic packages that need to be documented. */
@@ -115,8 +115,8 @@ apiDocsPackage.config((readTypeScriptModules: ReadTypeScriptModules, tsParser: T
     });
 
     mosaicDateAdaptersPackages.forEach(packageName => {
-        typescriptPathMap[`@ptsecurity/mosaic-date-adapters/${packageName}`] =
-            [`./mosaic-date-adapters/${packageName}/index.ts`];
+        typescriptPathMap[`@ptsecurity/mosaic-moment-adapter/${packageName}`] =
+            [`./mosaic-moment-adapter/${packageName}/index.ts`];
     });
 
     mosaicPackages.forEach(packageName => {
@@ -132,7 +132,7 @@ apiDocsPackage.config((readTypeScriptModules: ReadTypeScriptModules, tsParser: T
     // files will have docs generated.
     readTypeScriptModules.sourceFiles = [
         ...cdkPackages.map(packageName => `./cdk/${packageName}/index.ts`),
-        ...mosaicDateAdaptersPackages.map(packageName => `./mosaic-date-adapters/${packageName}/index.ts`),
+        ...mosaicDateAdaptersPackages.map(packageName => `./mosaic-moment-adapter/${packageName}/index.ts`),
         ...mosaicPackages.map(packageName => `./lib/${packageName}/index.ts`)
     ];
 });

@@ -16,7 +16,7 @@ import {
     UP_ARROW
 } from '@ptsecurity/cdk/keycodes';
 import { dispatchFakeEvent, dispatchKeyboardEvent } from '@ptsecurity/cdk/testing';
-import { McMosaicDateModule } from '@ptsecurity/mosaic-date-adapters/mosaic-date-adapter';
+import { McMosaicDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 
 import { McCalendarBody } from './calendar-body';
 import { McMonthView } from './month-view';

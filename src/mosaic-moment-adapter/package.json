@@ -1,11 +1,11 @@
 {
-    "name": "@ptsecurity/mosaic-date-adapters",
+    "name": "@ptsecurity/mosaic-moment-adapter",
     "version": "0.0.0-PLACEHOLDER",
     "description": "Mosaic Date Adapter",
-    "main": "./bundles/mosaic-date-adapters.umd.js",
-    "module": "./esm5/mosaic-date-adapters.es5.js",
-    "es2015": "./esm2015/mosaic-date-adapters.js",
-    "typings": "./mosaic-date-adapters.d.ts",
+    "main": "./bundles/mosaic-moment-adapter.umd.js",
+    "module": "./esm5/mosaic-moment-adapter.es5.js",
+    "es2015": "./esm2015/mosaic-moment-adapter.js",
+    "typings": "./mosaic-moment-adapter.d.ts",
     "repository": {
         "type": "git",
         "url": "https://github.com/positive-js/mosaic.git"

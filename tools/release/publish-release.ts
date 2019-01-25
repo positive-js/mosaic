@@ -145,7 +145,7 @@ class PublishReleaseTask extends BaseReleaseTask {
 
         execSync('gulp clean', spawnOptions);
         execSync('gulp cdk:build-release', spawnOptions);
-        execSync('gulp mosaic-date-adapters:build-release', spawnOptions);
+        execSync('gulp mosaic-moment-adapter:build-release', spawnOptions);
         execSync('gulp mosaic:build-release', spawnOptions);
     }
 

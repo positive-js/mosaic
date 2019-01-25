@@ -11,8 +11,8 @@
             "@ptsecurity/mosaic/*": [
                 "./*"
             ],
-            "@ptsecurity/mosaic-date-adapters/*": [
-                "../mosaic-date-adapters/*"
+            "@ptsecurity/mosaic-moment-adapter/*": [
+                "../mosaic-moment-adapter/*"
             ]
         }
     },

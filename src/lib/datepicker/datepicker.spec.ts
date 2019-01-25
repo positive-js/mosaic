@@ -23,7 +23,7 @@ import {
 import {
     McMosaicDateModule,
     MosaicDateModule
-} from '@ptsecurity/mosaic-date-adapters/mosaic-date-adapter';
+} from '@ptsecurity/mosaic-moment-adapter/adapter';
 import { ThemePalette } from '@ptsecurity/mosaic/core';
 import { McFormField, McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { Subject } from 'rxjs';

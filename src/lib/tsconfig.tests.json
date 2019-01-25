@@ -8,7 +8,7 @@
         "paths": {
             "@ptsecurity/mosaic/*": ["./*"],
             "@ptsecurity/cdk/*": ["../../dist/packages/cdk/*"],
-            "@ptsecurity/mosaic-date-adapters/*": ["../../dist/packages/mosaic-date-adapters/*"]
+            "@ptsecurity/mosaic-moment-adapter/*": ["../../dist/packages/mosaic-moment-adapter/*"]
         }
     },
     "angularCompilerOptions": {
