@@ -7127,7 +7127,7 @@ messageformat-parser@^3.0.0:
   resolved "https://registry.yarnpkg.com/messageformat-parser/-/messageformat-parser-3.0.0.tgz#38ae9348eb4834ab19b3a8d682af7babb335f37a"
   integrity sha512-5KfDWGAHz5kzfKH5V4M7+o3CIFiykCfFDaLK+Ck2fkaxYfLWwKZMioxrSsMRnkfMr0ZaaC0gcxyOUb2d0GCy4A==
 
-messageformat@^2.0.5:
+messageformat@2.0.5:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/messageformat/-/messageformat-2.0.5.tgz#d3987ef91c8df37cd8dc473c47203a4bed0243b5"
   integrity sha512-iT9/DUx75LqDGepfhKJpCxsCxlMFlyW/E7pI1KZE+TcT+bDcoLJfnwamq5qyRWiFo+eND5joxik9QlzWhqYgIg==
