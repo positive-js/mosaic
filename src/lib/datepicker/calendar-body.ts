@@ -92,7 +92,7 @@ export class McCalendarBody implements OnChanges {
     /** Width of an individual cell. */
     cellWidth: string;
 
-    constructor(private elementRef: ElementRef<HTMLElement>, private _ngZone: NgZone) {
+    constructor(private elementRef: ElementRef<HTMLElement>, private ngZone: NgZone) {
     }
 
     cellClicked(cell: McCalendarCell): void {
@@ -132,8 +132,8 @@ export class McCalendarBody implements OnChanges {
 
     /** Focuses the active cell after the microtask queue is empty. */
     focusActiveCell() {
-        this._ngZone.runOutsideAngular(() => {
-            this._ngZone.onStable.asObservable().pipe(take(1)).subscribe(() => {
+        this.ngZone.runOutsideAngular(() => {
+            this.ngZone.onStable.asObservable().pipe(take(1)).subscribe(() => {
                 const activeCell: HTMLElement | null =
                     this.elementRef.nativeElement.querySelector('.mc-calendar-body-active');
 
