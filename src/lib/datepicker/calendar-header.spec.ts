@@ -46,9 +46,9 @@ describe('McCalendarHeader', () => {
 
             const calendarDebugElement = fixture.debugElement.query(By.directive(McCalendar));
             calendarElement = calendarDebugElement.nativeElement;
-            periodButton = calendarElement.querySelector('.mc-calendar-period-button') as HTMLElement;
-            prevButton = calendarElement.querySelector('.mc-calendar-previous-button') as HTMLElement;
-            nextButton = calendarElement.querySelector('.mc-calendar-next-button') as HTMLElement;
+            periodButton = calendarElement.querySelector('.mc-calendar__period-button') as HTMLElement;
+            prevButton = calendarElement.querySelector('.mc-calendar__previous-button') as HTMLElement;
+            nextButton = calendarElement.querySelector('.mc-calendar__next-button') as HTMLElement;
 
             calendarInstance = calendarDebugElement.componentInstance;
             testComponent = fixture.componentInstance;
@@ -94,7 +94,7 @@ describe('McCalendarHeader', () => {
             expect(calendarInstance.currentView).toBe('multi-year');
             expect(calendarInstance.activeDate).toEqual(new Date(2017, 0, 31));
 
-            (calendarElement.querySelector('.mc-calendar-body-active') as HTMLElement).click();
+            (calendarElement.querySelector('.mc-calendar__body_active') as HTMLElement).click();
             fixture.detectChanges();
 
             expect(calendarInstance.currentView).toBe('year');
@@ -135,14 +135,14 @@ describe('McCalendarHeader', () => {
             expect(calendarInstance.currentView).toBe('multi-year');
             expect(calendarInstance.activeDate).toEqual(new Date(2017, 0, 31));
 
-            const yearCells = calendarElement.querySelectorAll('.mc-calendar-body-cell');
+            const yearCells = calendarElement.querySelectorAll('.mc-calendar__body-cell');
             (yearCells[0] as HTMLElement).click();
             fixture.detectChanges();
 
             expect(calendarInstance.currentView).toBe('year');
             expect(calendarInstance.activeDate).toEqual(new Date(2016, 0, 31));
 
-            const monthCells = calendarElement.querySelectorAll('.mc-calendar-body-cell');
+            const monthCells = calendarElement.querySelectorAll('.mc-calendar__body-cell');
             (monthCells[monthCells.length - 1] as HTMLElement).click();
             fixture.detectChanges();
 

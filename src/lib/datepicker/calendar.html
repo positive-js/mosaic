@@ -1,7 +1,7 @@
 
 <ng-template [cdkPortalOutlet]="calendarHeaderPortal"></ng-template>
 
-<div class="mc-calendar-content" [ngSwitch]="currentView" cdkMonitorSubtreeFocus tabindex="-1">
+<div class="mc-calendar__content" [ngSwitch]="currentView" cdkMonitorSubtreeFocus tabindex="-1">
   <mc-month-view
       *ngSwitchCase="'month'"
       [(activeDate)]="activeDate"

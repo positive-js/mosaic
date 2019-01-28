@@ -87,12 +87,12 @@ describe('McDatepicker', () => {
             }));
 
             it('open non-touch should open popup', () => {
-                expect(document.querySelector('.cdk-overlay-pane.mc-datepicker-popup')).toBeNull();
+                expect(document.querySelector('.cdk-overlay-pane.mc-datepicker__popup')).toBeNull();
 
                 testComponent.datepicker.open();
                 fixture.detectChanges();
 
-                expect(document.querySelector('.cdk-overlay-pane.mc-datepicker-popup')).not.toBeNull();
+                expect(document.querySelector('.cdk-overlay-pane.mc-datepicker__popup')).not.toBeNull();
             });
 
             it('should open datepicker if opened input is set to true', fakeAsync(() => {
@@ -100,13 +100,13 @@ describe('McDatepicker', () => {
                 fixture.detectChanges();
                 flush();
 
-                expect(document.querySelector('.mc-datepicker-content')).not.toBeNull();
+                expect(document.querySelector('.mc-datepicker__content')).not.toBeNull();
 
                 testComponent.opened = false;
                 fixture.detectChanges();
                 flush();
 
-                expect(document.querySelector('.mc-datepicker-content')).toBeNull();
+                expect(document.querySelector('.mc-datepicker__content')).toBeNull();
             }));
 
             it('open in disabled mode should not open the calendar', () => {
@@ -183,10 +183,10 @@ describe('McDatepicker', () => {
                     testComponent.datepicker.open();
                     fixture.detectChanges();
 
-                    expect(document.querySelector('mc-datepicker-content')).not.toBeNull();
+                    expect(document.querySelector('mc-datepicker__content')).not.toBeNull();
                     expect(testComponent.datepickerInput.value).toEqual(new Date(2020, 0, currentDay));
 
-                    const cells = document.querySelectorAll('.mc-calendar-body-cell');
+                    const cells = document.querySelectorAll('.mc-calendar__body-cell');
                     dispatchMouseEvent(cells[1], 'click');
                     fixture.detectChanges();
                     flush();
@@ -204,7 +204,7 @@ describe('McDatepicker', () => {
                 testComponent.datepicker.open();
                 fixture.detectChanges();
 
-                const calendarBodyEl = document.querySelector('.mc-calendar-body') as HTMLElement;
+                const calendarBodyEl = document.querySelector('.mc-calendar__body') as HTMLElement;
                 expect(calendarBodyEl).not.toBeNull();
                 expect(testComponent.datepickerInput.value).toEqual(new Date(2020, 0, 1));
 
@@ -469,7 +469,7 @@ describe('McDatepicker', () => {
                 testComponent.datepicker.open();
                 fixture.detectChanges();
 
-                const firstCalendarCell = document.querySelector('.mc-calendar-body-cell')!;
+                const firstCalendarCell = document.querySelector('.mc-calendar__body-cell')!;
 
                 // When the calendar is in year view, the first cell should be for a month rather than
                 // for a date.
@@ -485,7 +485,7 @@ describe('McDatepicker', () => {
                     testComponent.datepicker.open();
                     fixture.detectChanges();
 
-                    const cells = document.querySelectorAll('.mc-calendar-body-cell');
+                    const cells = document.querySelectorAll('.mc-calendar__body-cell');
 
                     dispatchMouseEvent(cells[0], 'click');
                     fixture.detectChanges();
@@ -519,7 +519,7 @@ describe('McDatepicker', () => {
                 testComponent.datepicker.open();
                 fixture.detectChanges();
 
-                const firstCalendarCell = document.querySelector('.mc-calendar-body-cell')!;
+                const firstCalendarCell = document.querySelector('.mc-calendar__body-cell')!;
 
                 // When the calendar is in year view, the first cell should be for a month rather than
                 // for a date.
@@ -534,7 +534,7 @@ describe('McDatepicker', () => {
                     testComponent.datepicker.open();
                     fixture.detectChanges();
 
-                    const cells = document.querySelectorAll('.mc-calendar-body-cell');
+                    const cells = document.querySelectorAll('.mc-calendar__body-cell');
 
                     dispatchMouseEvent(cells[0], 'click');
                     fixture.detectChanges();
@@ -826,20 +826,20 @@ describe('McDatepicker', () => {
             it('should toggle the active state of the datepicker toggle', fakeAsync(() => {
                 const toggle = fixture.debugElement.query(By.css('mc-datepicker-toggle')).nativeElement;
 
-                expect(toggle.classList).not.toContain('mc-datepicker-toggle-active');
+                expect(toggle.classList).not.toContain('mc-datepicker-toggle_active');
 
                 fixture.componentInstance.datepicker.open();
                 fixture.detectChanges();
                 flush();
 
-                expect(toggle.classList).toContain('mc-datepicker-toggle-active');
+                expect(toggle.classList).toContain('mc-datepicker-toggle_active');
 
                 fixture.componentInstance.datepicker.close();
                 fixture.detectChanges();
                 flush();
                 fixture.detectChanges();
 
-                expect(toggle.classList).not.toContain('mc-datepicker-toggle-active');
+                expect(toggle.classList).not.toContain('mc-datepicker-toggle_active');
             }));
         });
 
@@ -919,7 +919,7 @@ describe('McDatepicker', () => {
                 fixture.detectChanges();
                 flush();
 
-                let contentEl = document.querySelector('.mc-datepicker-content')!;
+                let contentEl = document.querySelector('.mc-datepicker__content')!;
 
                 expect(contentEl.classList).toContain('mc-primary');
 
@@ -930,7 +930,7 @@ describe('McDatepicker', () => {
                 testComponent.formField.color = ThemePalette.Error;
                 testComponent.datepicker.open();
 
-                contentEl = document.querySelector('.mc-datepicker-content')!;
+                contentEl = document.querySelector('.mc-datepicker__content')!;
                 fixture.detectChanges();
                 flush();
 
@@ -1053,9 +1053,9 @@ describe('McDatepicker', () => {
                 testComponent.datepicker.open();
                 fixture.detectChanges();
 
-                const cells = document.querySelectorAll('.mc-calendar-body-cell');
-                expect(cells[0].classList).toContain('mc-calendar-body-disabled');
-                expect(cells[1].classList).not.toContain('mc-calendar-body-disabled');
+                const cells = document.querySelectorAll('.mc-calendar__body-cell');
+                expect(cells[0].classList).toContain('mc-calendar__body_disabled');
+                expect(cells[1].classList).not.toContain('mc-calendar__body_disabled');
             });
         });
 
@@ -1123,7 +1123,7 @@ describe('McDatepicker', () => {
                     testComponent.datepicker.open();
                     fixture.detectChanges();
 
-                    const cells = document.querySelectorAll('.mc-calendar-body-cell');
+                    const cells = document.querySelectorAll('.mc-calendar__body-cell');
                     dispatchMouseEvent(cells[0], 'click');
                     fixture.detectChanges();
                     flush();

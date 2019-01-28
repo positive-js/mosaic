@@ -21,16 +21,16 @@ $mc-calendar-next-icon-transform: translateX(-2px) rotate(45deg);
     display: block;
 }
 
-.mc-calendar-header {
+.mc-calendar__header {
     padding: $mc-calendar-padding $mc-calendar-padding 0 $mc-calendar-padding;
 }
 
-.mc-calendar-content {
+.mc-calendar__content {
     padding: 0 $mc-calendar-padding $mc-calendar-padding $mc-calendar-padding;
     outline: none;
 }
 
-.mc-calendar-controls {
+.mc-calendar__controls {
     display: flex;
     margin: $mc-calendar-controls-vertical-padding $mc-calendar-controls-side-margin;
 
@@ -49,32 +49,32 @@ $mc-calendar-next-icon-transform: translateX(-2px) rotate(45deg);
     flex: 1 1 auto;
 }
 
-.mc-calendar-period-button {
+.mc-calendar__period-button {
     min-width: 0;
 }
 
-.mc-calendar-previous-button::after {
+.mc-calendar__previous-button::after {
     border-left-width: $mc-calendar-prev-next-icon-border-width;
     transform: $mc-calendar-prev-icon-transform;
 }
 
-.mc-calendar-next-button::after {
+.mc-calendar__next-button::after {
     border-right-width: $mc-calendar-prev-next-icon-border-width;
     transform: $mc-calendar-next-icon-transform;
 }
 
-.mc-calendar-table {
+.mc-calendar__table {
     border-spacing: 0;
     border-collapse: collapse;
     width: 100%;
 }
 
-.mc-calendar-table-header th {
+.mc-calendar__table-header th {
     text-align: center;
     padding: 0 0 $mc-calendar-padding 0;
 }
 
-.mc-calendar-table-header-divider {
+.mc-calendar__table-header-divider {
     position: relative;
     height: $mc-calendar-header-divider-width;
 

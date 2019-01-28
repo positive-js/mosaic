@@ -59,12 +59,12 @@ describe('McMultiYearView', () => {
         });
 
         it('has correct number of years', () => {
-            const cellEls = multiYearViewNativeElement.querySelectorAll('.mc-calendar-body-cell');
+            const cellEls = multiYearViewNativeElement.querySelectorAll('.mc-calendar__body-cell');
             expect(cellEls.length).toBe(yearsPerPage);
         });
 
         it('shows selected year if in same range', () => {
-            const selectedEl = multiYearViewNativeElement.querySelector('.mc-calendar-body-selected')!;
+            const selectedEl = multiYearViewNativeElement.querySelector('.mc-calendar__body_selected')!;
             expect(selectedEl.innerHTML.trim()).toBe('2020');
         });
 
@@ -72,21 +72,21 @@ describe('McMultiYearView', () => {
             testComponent.selected = new Date(2040, 0, 10);
             fixture.detectChanges();
 
-            const selectedEl = multiYearViewNativeElement.querySelector('.mc-calendar-body-selected');
+            const selectedEl = multiYearViewNativeElement.querySelector('.mc-calendar__body_selected');
             expect(selectedEl).toBeNull();
         });
 
         it('fires selected change event on cell clicked', () => {
-            const cellEls = multiYearViewNativeElement.querySelectorAll('.mc-calendar-body-cell');
+            const cellEls = multiYearViewNativeElement.querySelectorAll('.mc-calendar__body-cell');
             (cellEls[cellEls.length - 1] as HTMLElement).click();
             fixture.detectChanges();
 
-            const selectedEl = multiYearViewNativeElement.querySelector('.mc-calendar-body-selected')!;
+            const selectedEl = multiYearViewNativeElement.querySelector('.mc-calendar__body_selected')!;
             expect(selectedEl.innerHTML.trim()).toBe('2039');
         });
 
         it('should emit the selected year on cell clicked', () => {
-            const cellEls = multiYearViewNativeElement.querySelectorAll('.mc-calendar-body-cell');
+            const cellEls = multiYearViewNativeElement.querySelectorAll('.mc-calendar__body-cell');
 
             (cellEls[1] as HTMLElement).click();
             fixture.detectChanges();
@@ -96,9 +96,9 @@ describe('McMultiYearView', () => {
         });
 
         it('should mark active date', () => {
-            const cellEls = multiYearViewNativeElement.querySelectorAll('.mc-calendar-body-cell');
+            const cellEls = multiYearViewNativeElement.querySelectorAll('.mc-calendar__body-cell');
             expect((cellEls[1] as HTMLElement).innerText.trim()).toBe('2017');
-            expect(cellEls[1].classList).toContain('mc-calendar-body-active');
+            expect(cellEls[1].classList).toContain('mc-calendar__body_active');
         });
 
         describe('a11y', () => {
@@ -109,7 +109,7 @@ describe('McMultiYearView', () => {
                 beforeEach(() => {
                     calendarInstance = fixture.componentInstance;
                     calendarBodyEl =
-                        fixture.debugElement.nativeElement.querySelector('.mc-calendar-body') as HTMLElement;
+                        fixture.debugElement.nativeElement.querySelector('.mc-calendar__body') as HTMLElement;
                     expect(calendarBodyEl).not.toBeNull();
                     dir.value = 'ltr';
                     fixture.componentInstance.date = new Date(2017, 0, 1);
@@ -239,9 +239,9 @@ describe('McMultiYearView', () => {
         });
 
         it('should disablex years with no enabled days', () => {
-            const cells = multiYearViewNativeElement.querySelectorAll('.mc-calendar-body-cell');
-            expect(cells[0].classList).not.toContain('mc-calendar-body-disabled');
-            expect(cells[1].classList).toContain('mc-calendar-body-disabled');
+            const cells = multiYearViewNativeElement.querySelectorAll('.mc-calendar__body-cell');
+            expect(cells[0].classList).not.toContain('mc-calendar__body_disabled');
+            expect(cells[1].classList).toContain('mc-calendar__body_disabled');
         });
     });
 });

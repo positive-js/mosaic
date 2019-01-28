@@ -59,17 +59,17 @@ describe('McYearView', () => {
         });
 
         it('has correct year label', () => {
-            const labelEl = yearViewNativeElement.querySelector('.mc-calendar-body-label')!;
+            const labelEl = yearViewNativeElement.querySelector('.mc-calendar__body-label')!;
             expect(labelEl.innerHTML.trim()).toBe('2017');
         });
 
         it('has 12 months', () => {
-            const cellEls = yearViewNativeElement.querySelectorAll('.mc-calendar-body-cell');
+            const cellEls = yearViewNativeElement.querySelectorAll('.mc-calendar__body-cell');
             expect(cellEls.length).toBe(12);
         });
 
         it('shows selected month if in same year', () => {
-            const selectedEl = yearViewNativeElement.querySelector('.mc-calendar-body-selected')!;
+            const selectedEl = yearViewNativeElement.querySelector('.mc-calendar__body_selected')!;
             expect(selectedEl.innerHTML.trim()).toBe('Mar');
         });
 
@@ -77,21 +77,21 @@ describe('McYearView', () => {
             testComponent.selected = new Date(2016, 2, 10);
             fixture.detectChanges();
 
-            const selectedEl = yearViewNativeElement.querySelector('.mc-calendar-body-selected');
+            const selectedEl = yearViewNativeElement.querySelector('.mc-calendar__body_selected');
             expect(selectedEl).toBeNull();
         });
 
         it('fires selected change event on cell clicked', () => {
-            const cellEls = yearViewNativeElement.querySelectorAll('.mc-calendar-body-cell');
+            const cellEls = yearViewNativeElement.querySelectorAll('.mc-calendar__body-cell');
             (cellEls[cellEls.length - 1] as HTMLElement).click();
             fixture.detectChanges();
 
-            const selectedEl = yearViewNativeElement.querySelector('.mc-calendar-body-selected')!;
+            const selectedEl = yearViewNativeElement.querySelector('.mc-calendar__body_selected')!;
             expect(selectedEl.innerHTML.trim()).toBe('Dec');
         });
 
         it('should emit the selected month on cell clicked', () => {
-            const cellEls = yearViewNativeElement.querySelectorAll('.mc-calendar-body-cell');
+            const cellEls = yearViewNativeElement.querySelectorAll('.mc-calendar__body-cell');
 
             (cellEls[cellEls.length - 1] as HTMLElement).click();
             fixture.detectChanges();
@@ -101,9 +101,9 @@ describe('McYearView', () => {
         });
 
         it('should mark active date', () => {
-            const cellEls = yearViewNativeElement.querySelectorAll('.mc-calendar-body-cell');
+            const cellEls = yearViewNativeElement.querySelectorAll('.mc-calendar__body-cell');
             expect((cellEls[0] as HTMLElement).innerText.trim()).toBe('Jan');
-            expect(cellEls[0].classList).toContain('mc-calendar-body-active');
+            expect(cellEls[0].classList).toContain('mc-calendar__body_active');
         });
 
         it('should allow selection of month with less days than current active date', () => {
@@ -125,7 +125,7 @@ describe('McYearView', () => {
                 beforeEach(() => {
                     calendarInstance = fixture.componentInstance;
                     calendarBodyEl =
-                        fixture.debugElement.nativeElement.querySelector('.mc-calendar-body') as HTMLElement;
+                        fixture.debugElement.nativeElement.querySelector('.mc-calendar__body') as HTMLElement;
                     expect(calendarBodyEl).not.toBeNull();
                     dir.value = 'ltr';
                     fixture.componentInstance.date = new Date(2017, 0, 5);
@@ -307,9 +307,9 @@ describe('McYearView', () => {
         });
 
         it('should disable months with no enabled days', () => {
-            const cells = yearViewNativeElement.querySelectorAll('.mc-calendar-body-cell');
-            expect(cells[0].classList).not.toContain('mc-calendar-body-disabled');
-            expect(cells[1].classList).toContain('mc-calendar-body-disabled');
+            const cells = yearViewNativeElement.querySelectorAll('.mc-calendar__body-cell');
+            expect(cells[0].classList).not.toContain('mc-calendar__body_disabled');
+            expect(cells[1].classList).toContain('mc-calendar__body_disabled');
         });
     });
 });

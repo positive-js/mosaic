@@ -58,7 +58,7 @@ describe('McCalendar', () => {
 
             const calendarDebugElement = fixture.debugElement.query(By.directive(McCalendar));
             calendarElement = calendarDebugElement.nativeElement;
-            periodButton = calendarElement.querySelector('.mc-calendar-period-button') as HTMLElement;
+            periodButton = calendarElement.querySelector('.mc-calendar__period-button') as HTMLElement;
 
             calendarInstance = calendarDebugElement.componentInstance;
             testComponent = fixture.componentInstance;
@@ -72,7 +72,7 @@ describe('McCalendar', () => {
             calendarInstance.updateTodaysDate();
             fixture.detectChanges();
 
-            let todayCell = calendarElement.querySelector('.mc-calendar-body-today')!;
+            let todayCell = calendarElement.querySelector('.mc-calendar__body-today')!;
             expect(todayCell).not.toBeNull();
             expect(todayCell.innerHTML.trim()).toBe('1');
 
@@ -80,7 +80,7 @@ describe('McCalendar', () => {
             calendarInstance.updateTodaysDate();
             fixture.detectChanges();
 
-            todayCell = calendarElement.querySelector('.mc-calendar-body-today')!;
+            todayCell = calendarElement.querySelector('.mc-calendar__body-today')!;
             expect(todayCell).not.toBeNull();
             expect(todayCell.innerHTML.trim()).toBe('10');
         }));
@@ -91,7 +91,7 @@ describe('McCalendar', () => {
         });
 
         it('should select date in month view', () => {
-            const monthCells = calendarElement.querySelectorAll('.mc-calendar-body-cell');
+            const monthCells = calendarElement.querySelectorAll('.mc-calendar__body-cell');
             (monthCells[monthCells.length - 1] as HTMLElement).click();
             fixture.detectChanges();
 
@@ -106,13 +106,13 @@ describe('McCalendar', () => {
             expect(calendarInstance.currentView).toBe('multi-year');
             expect(calendarInstance.activeDate).toEqual(new Date(2017, 0, 31));
 
-            (calendarElement.querySelector('.mc-calendar-body-active') as HTMLElement).click();
+            (calendarElement.querySelector('.mc-calendar__body_active') as HTMLElement).click();
 
             fixture.detectChanges();
 
             expect(calendarInstance.currentView).toBe('year');
 
-            (calendarElement.querySelector('.mc-calendar-body-active') as HTMLElement).click();
+            (calendarElement.querySelector('.mc-calendar__body_active') as HTMLElement).click();
 
             const normalizedMonth: Date = fixture.componentInstance.selectedMonth;
             expect(normalizedMonth.getMonth()).toEqual(0);
@@ -125,7 +125,7 @@ describe('McCalendar', () => {
             expect(calendarInstance.currentView).toBe('multi-year');
             expect(calendarInstance.activeDate).toEqual(new Date(2017, 0, 31));
 
-            (calendarElement.querySelector('.mc-calendar-body-active') as HTMLElement).click();
+            (calendarElement.querySelector('.mc-calendar__body_active') as HTMLElement).click();
 
             fixture.detectChanges();
 
@@ -136,7 +136,7 @@ describe('McCalendar', () => {
         it('should re-render when the i18n labels have changed',
             inject([McDatepickerIntl], (intl: McDatepickerIntl) => {
                 const button = fixture.debugElement.nativeElement
-                    .querySelector('.mc-calendar-period-button');
+                    .querySelector('.mc-calendar__period-button');
 
                 intl.switchToMultiYearViewLabel = 'Go to multi-year view?';
                 intl.changes.next();
@@ -165,7 +165,7 @@ describe('McCalendar', () => {
                 let calendarBodyEl: HTMLElement;
 
                 beforeEach(() => {
-                    calendarBodyEl = calendarElement.querySelector('.mc-calendar-content') as HTMLElement;
+                    calendarBodyEl = calendarElement.querySelector('.mc-calendar__content') as HTMLElement;
                     expect(calendarBodyEl).not.toBeNull();
 
                     dispatchFakeEvent(calendarBodyEl, 'focus');
@@ -182,7 +182,7 @@ describe('McCalendar', () => {
 
                 it('should not move focus to the active cell on init', () => {
                     const activeCell =
-                        calendarBodyEl.querySelector('.mc-calendar-body-active')! as HTMLElement;
+                        calendarBodyEl.querySelector('.mc-calendar__body_active')! as HTMLElement;
 
                     spyOn(activeCell, 'focus').and.callThrough();
                     fixture.detectChanges();
@@ -193,7 +193,7 @@ describe('McCalendar', () => {
 
                 it('should move focus to the active cell when the view changes', () => {
                     const activeCell =
-                        calendarBodyEl.querySelector('.mc-calendar-body-active')! as HTMLElement;
+                        calendarBodyEl.querySelector('.mc-calendar__body_active')! as HTMLElement;
 
                     spyOn(activeCell, 'focus').and.callThrough();
                     fixture.detectChanges();
@@ -215,14 +215,14 @@ describe('McCalendar', () => {
 
                         expect(calendarInstance.currentView).toBe('multi-year');
 
-                        (calendarBodyEl.querySelector('.mc-calendar-body-active') as HTMLElement).click();
+                        (calendarBodyEl.querySelector('.mc-calendar__body_active') as HTMLElement).click();
                         fixture.detectChanges();
 
                         expect(calendarInstance.currentView).toBe('year');
                     });
 
                     it('should return to month view on enter', () => {
-                        const tableBodyEl = calendarBodyEl.querySelector('.mc-calendar-body') as HTMLElement;
+                        const tableBodyEl = calendarBodyEl.querySelector('.mc-calendar__body') as HTMLElement;
 
                         dispatchKeyboardEvent(tableBodyEl, 'keydown', RIGHT_ARROW);
                         fixture.detectChanges();
@@ -236,7 +236,7 @@ describe('McCalendar', () => {
                     });
 
                     it('should return to month view on space', () => {
-                        const tableBodyEl = calendarBodyEl.querySelector('.mc-calendar-body') as HTMLElement;
+                        const tableBodyEl = calendarBodyEl.querySelector('.mc-calendar__body') as HTMLElement;
 
                         dispatchKeyboardEvent(tableBodyEl, 'keydown', RIGHT_ARROW);
                         fixture.detectChanges();
@@ -259,7 +259,7 @@ describe('McCalendar', () => {
                     });
 
                     it('should go to year view on enter', () => {
-                        const tableBodyEl = calendarBodyEl.querySelector('.mc-calendar-body') as HTMLElement;
+                        const tableBodyEl = calendarBodyEl.querySelector('.mc-calendar__body') as HTMLElement;
 
                         dispatchKeyboardEvent(tableBodyEl, 'keydown', RIGHT_ARROW);
                         fixture.detectChanges();
@@ -273,7 +273,7 @@ describe('McCalendar', () => {
                     });
 
                     it('should go to year view on space', () => {
-                        const tableBodyEl = calendarBodyEl.querySelector('.mc-calendar-body') as HTMLElement;
+                        const tableBodyEl = calendarBodyEl.querySelector('.mc-calendar__body') as HTMLElement;
 
                         dispatchKeyboardEvent(tableBodyEl, 'keydown', RIGHT_ARROW);
                         fixture.detectChanges();
@@ -327,7 +327,7 @@ describe('McCalendar', () => {
             fixture.detectChanges();
 
             const prevButton =
-                calendarElement.querySelector('.mc-calendar-previous-button') as HTMLButtonElement;
+                calendarElement.querySelector('.mc-calendar__previous-button') as HTMLButtonElement;
 
             expect(prevButton.disabled).toBe(false, 'previous button should not be disabled');
             expect(calendarInstance.activeDate).toEqual(new Date(2016, 1, 1));
@@ -349,7 +349,7 @@ describe('McCalendar', () => {
             fixture.detectChanges();
 
             const nextButton =
-                calendarElement.querySelector('.mc-calendar-next-button') as HTMLButtonElement;
+                calendarElement.querySelector('.mc-calendar__next-button') as HTMLButtonElement;
 
             expect(nextButton.disabled).toBe(false, 'next button should not be disabled');
             expect(calendarInstance.activeDate).toEqual(new Date(2017, 11, 1));
@@ -389,11 +389,11 @@ describe('McCalendar', () => {
         it('should re-render the year view when the minDate changes', () => {
             fixture.detectChanges();
             const periodButton =
-                calendarElement.querySelector('.mc-calendar-period-button') as HTMLElement;
+                calendarElement.querySelector('.mc-calendar__period-button') as HTMLElement;
             periodButton.click();
             fixture.detectChanges();
 
-            (calendarElement.querySelector('.mc-calendar-body-active') as HTMLElement).click();
+            (calendarElement.querySelector('.mc-calendar__body_active') as HTMLElement).click();
             fixture.detectChanges();
 
             spyOn(calendarInstance.yearView, 'init').and.callThrough();
@@ -407,11 +407,11 @@ describe('McCalendar', () => {
         it('should re-render the year view when the maxDate changes', () => {
             fixture.detectChanges();
             const periodButton =
-                calendarElement.querySelector('.mc-calendar-period-button') as HTMLElement;
+                calendarElement.querySelector('.mc-calendar__period-button') as HTMLElement;
             periodButton.click();
             fixture.detectChanges();
 
-            (calendarElement.querySelector('.mc-calendar-body-active') as HTMLElement).click();
+            (calendarElement.querySelector('.mc-calendar__body_active') as HTMLElement).click();
             fixture.detectChanges();
 
             spyOn(calendarInstance.yearView, 'init').and.callThrough();
@@ -425,7 +425,7 @@ describe('McCalendar', () => {
         it('should re-render the multi-year view when the minDate changes', () => {
             fixture.detectChanges();
             const periodButton =
-                calendarElement.querySelector('.mc-calendar-period-button') as HTMLElement;
+                calendarElement.querySelector('.mc-calendar__period-button') as HTMLElement;
             periodButton.click();
             fixture.detectChanges();
 
@@ -440,7 +440,7 @@ describe('McCalendar', () => {
         it('should re-render the multi-year view when the maxDate changes', () => {
             fixture.detectChanges();
             const periodButton =
-                calendarElement.querySelector('.mc-calendar-period-button') as HTMLElement;
+                calendarElement.querySelector('.mc-calendar__period-button') as HTMLElement;
             periodButton.click();
             fixture.detectChanges();
 
@@ -459,11 +459,11 @@ describe('McCalendar', () => {
             dynamicFixture.detectChanges();
 
             const calendarDebugElement = dynamicFixture.debugElement.query(By.directive(McCalendar));
-            const disabledClass = 'mc-calendar-body-disabled';
+            const disabledClass = 'mc-calendar__body_disabled';
             calendarElement = calendarDebugElement.nativeElement;
             calendarInstance = calendarDebugElement.componentInstance;
 
-            let cells = Array.from(calendarElement.querySelectorAll('.mc-calendar-body-cell'));
+            let cells = Array.from(calendarElement.querySelectorAll('.mc-calendar__body-cell'));
 
             expect(cells.slice(0, 9).every((c) => c.classList.contains(disabledClass)))
                 .toBe(true, 'Expected dates up to the 10th to be disabled.');
@@ -473,7 +473,7 @@ describe('McCalendar', () => {
 
             (cells[14] as HTMLElement).click();
             dynamicFixture.detectChanges();
-            cells = Array.from(calendarElement.querySelectorAll('.mc-calendar-body-cell'));
+            cells = Array.from(calendarElement.querySelectorAll('.mc-calendar__body-cell'));
 
             expect(cells.slice(0, 14).every((c) => c.classList.contains(disabledClass)))
                 .toBe(true, 'Expected dates up to the 14th to be disabled.');
@@ -501,7 +501,7 @@ describe('McCalendar', () => {
         });
 
         it('should disable and prevent selection of filtered dates', () => {
-            const cells = calendarElement.querySelectorAll('.mc-calendar-body-cell');
+            const cells = calendarElement.querySelectorAll('.mc-calendar__body-cell');
             (cells[0] as HTMLElement).click();
             fixture.detectChanges();
 
@@ -517,7 +517,7 @@ describe('McCalendar', () => {
             let tableBodyEl: HTMLElement;
 
             beforeEach(() => {
-                tableBodyEl = calendarElement.querySelector('.mc-calendar-body') as HTMLElement;
+                tableBodyEl = calendarElement.querySelector('.mc-calendar__body') as HTMLElement;
                 expect(tableBodyEl).not.toBeNull();
 
                 dispatchFakeEvent(tableBodyEl, 'focus');
@@ -536,11 +536,11 @@ describe('McCalendar', () => {
 
             it('should allow entering month view at disabled month', () => {
                 const periodButton =
-                    calendarElement.querySelector('.mc-calendar-period-button') as HTMLElement;
+                    calendarElement.querySelector('.mc-calendar__period-button') as HTMLElement;
                 dispatchMouseEvent(periodButton, 'click');
                 fixture.detectChanges();
 
-                (calendarElement.querySelector('.mc-calendar-body-active') as HTMLElement).click();
+                (calendarElement.querySelector('.mc-calendar__body_active') as HTMLElement).click();
                 fixture.detectChanges();
 
                 calendarInstance.activeDate = new Date(2017, 10, 1);
@@ -548,7 +548,7 @@ describe('McCalendar', () => {
 
                 expect(calendarInstance.currentView).toBe('year');
 
-                tableBodyEl = calendarElement.querySelector('.mc-calendar-body') as HTMLElement;
+                tableBodyEl = calendarElement.querySelector('.mc-calendar__body') as HTMLElement;
                 dispatchKeyboardEvent(tableBodyEl, 'keydown', ENTER);
                 fixture.detectChanges();
 

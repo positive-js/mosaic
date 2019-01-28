@@ -30,8 +30,8 @@ describe('McCalendarBody', () => {
 
         function refreshElementLists() {
             rowEls = Array.from(calendarBodyNativeElement.querySelectorAll('tr'));
-            labelEls = Array.from(calendarBodyNativeElement.querySelectorAll('.mc-calendar-body-label'));
-            cellEls = Array.from(calendarBodyNativeElement.querySelectorAll('.mc-calendar-body-cell'));
+            labelEls = Array.from(calendarBodyNativeElement.querySelectorAll('.mc-calendar__body-label'));
+            cellEls = Array.from(calendarBodyNativeElement.querySelectorAll('.mc-calendar__body-cell'));
         }
 
         beforeEach(() => {
@@ -52,13 +52,13 @@ describe('McCalendarBody', () => {
         });
 
         it('highlights today', () => {
-            const todayCell = calendarBodyNativeElement.querySelector('.mc-calendar-body-today')!;
+            const todayCell = calendarBodyNativeElement.querySelector('.mc-calendar__body-today')!;
             expect(todayCell).not.toBeNull();
             expect(todayCell.innerHTML.trim()).toBe('3');
         });
 
         it('highlights selected', () => {
-            const selectedCell = calendarBodyNativeElement.querySelector('.mc-calendar-body-selected')!;
+            const selectedCell = calendarBodyNativeElement.querySelector('.mc-calendar__body_selected')!;
             expect(selectedCell).not.toBeNull();
             expect(selectedCell.innerHTML.trim()).toBe('4');
         });
@@ -82,23 +82,23 @@ describe('McCalendarBody', () => {
             expect(labelEls.length).toBe(1);
             expect(cellEls.length).toBe(11);
             expect(rowEls[0].firstElementChild!.classList)
-                .toContain('mc-calendar-body-label', 'first cell should be the label');
+                .toContain('mc-calendar__body-label', 'first cell should be the label');
             expect(labelEls[0].getAttribute('colspan')).toBe('3');
         });
 
         it('cell should be selected on click', () => {
             const todayElement =
-                calendarBodyNativeElement.querySelector('.mc-calendar-body-today') as HTMLElement;
+                calendarBodyNativeElement.querySelector('.mc-calendar__body-today') as HTMLElement;
             todayElement.click();
             fixture.detectChanges();
 
             expect(todayElement.classList)
-                .toContain('mc-calendar-body-selected', 'today should be selected');
+                .toContain('mc-calendar__body_selected', 'today should be selected');
         });
 
         it('should mark active date', () => {
             expect((cellEls[10] as HTMLElement).innerText.trim()).toBe('11');
-            expect(cellEls[10].classList).toContain('mc-calendar-body-active');
+            expect(cellEls[10].classList).toContain('mc-calendar__body_active');
         });
 
         it('should set a class on even dates', () => {

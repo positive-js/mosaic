@@ -21,7 +21,7 @@ $mc-datepicker-touch-max-width: 750px;
 $mc-datepicker-touch-max-height: 788px;
 
 
-.mc-datepicker-content {
+.mc-datepicker__content {
     display: block;
 
     .mc-calendar {
@@ -29,8 +29,8 @@ $mc-datepicker-touch-max-height: 788px;
         height: $mc-datepicker-non-touch-calendar-height;
     }
 
-    .mc-calendar-next-button[disabled],
-    .mc-calendar-previous-button[disabled] {
+    .mc-calendar__next-button[disabled],
+    .mc-calendar__previous-button[disabled] {
         border: 0;
     }
 }

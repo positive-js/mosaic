@@ -62,17 +62,17 @@ describe('McMonthView', () => {
         });
 
         it('has correct month label', () => {
-            const labelEl = monthViewNativeElement.querySelector('.mc-calendar-body-label')!;
+            const labelEl = monthViewNativeElement.querySelector('.mc-calendar__body-label')!;
             expect(labelEl.innerHTML.trim()).toBe('Jan');
         });
 
         it('has 31 days', () => {
-            const cellEls = monthViewNativeElement.querySelectorAll('.mc-calendar-body-cell');
+            const cellEls = monthViewNativeElement.querySelectorAll('.mc-calendar__body-cell');
             expect(cellEls.length).toBe(31);
         });
 
         it('shows selected date if in same month', () => {
-            const selectedEl = monthViewNativeElement.querySelector('.mc-calendar-body-selected')!;
+            const selectedEl = monthViewNativeElement.querySelector('.mc-calendar__body_selected')!;
             expect(selectedEl.innerHTML.trim()).toBe('10');
         });
 
@@ -80,23 +80,23 @@ describe('McMonthView', () => {
             testComponent.selected = new Date(2017, 2, 10);
             fixture.detectChanges();
 
-            const selectedEl = monthViewNativeElement.querySelector('.mc-calendar-body-selected');
+            const selectedEl = monthViewNativeElement.querySelector('.mc-calendar__body_selected');
             expect(selectedEl).toBeNull();
         });
 
         it('fires selected change event on cell clicked', () => {
-            const cellEls = monthViewNativeElement.querySelectorAll('.mc-calendar-body-cell');
+            const cellEls = monthViewNativeElement.querySelectorAll('.mc-calendar__body-cell');
             (cellEls[cellEls.length - 1] as HTMLElement).click();
             fixture.detectChanges();
 
-            const selectedEl = monthViewNativeElement.querySelector('.mc-calendar-body-selected')!;
+            const selectedEl = monthViewNativeElement.querySelector('.mc-calendar__body_selected')!;
             expect(selectedEl.innerHTML.trim()).toBe('31');
         });
 
         it('should mark active date', () => {
-            const cellEls = monthViewNativeElement.querySelectorAll('.mc-calendar-body-cell');
+            const cellEls = monthViewNativeElement.querySelectorAll('.mc-calendar__body-cell');
             expect((cellEls[4] as HTMLElement).innerText.trim()).toBe('5');
-            expect(cellEls[4].classList).toContain('mc-calendar-body-active');
+            expect(cellEls[4].classList).toContain('mc-calendar__body_active');
         });
 
         describe('a11y', () => {
@@ -107,7 +107,7 @@ describe('McMonthView', () => {
                 beforeEach(() => {
                     calendarInstance = fixture.componentInstance;
                     calendarBodyEl =
-                        fixture.debugElement.nativeElement.querySelector('.mc-calendar-body') as HTMLElement;
+                        fixture.debugElement.nativeElement.querySelector('.mc-calendar__body') as HTMLElement;
                     expect(calendarBodyEl).not.toBeNull();
                     dir.value = 'ltr';
                     fixture.componentInstance.date = new Date(2017, 0, 5);
@@ -289,9 +289,9 @@ describe('McMonthView', () => {
         });
 
         it('should disable filtered dates', () => {
-            const cells = monthViewNativeElement.querySelectorAll('.mc-calendar-body-cell');
-            expect(cells[0].classList).toContain('mc-calendar-body-disabled');
-            expect(cells[1].classList).not.toContain('mc-calendar-body-disabled');
+            const cells = monthViewNativeElement.querySelectorAll('.mc-calendar__body-cell');
+            expect(cells[0].classList).toContain('mc-calendar__body_disabled');
+            expect(cells[1].classList).not.toContain('mc-calendar__body_disabled');
         });
     });
 
@@ -308,7 +308,7 @@ describe('McMonthView', () => {
         });
 
         it('should be able to add a custom class to some dates', () => {
-            const cells = monthViewNativeElement.querySelectorAll('.mc-calendar-body-cell');
+            const cells = monthViewNativeElement.querySelectorAll('.mc-calendar__body-cell');
             expect(cells[0].classList).not.toContain('even');
             expect(cells[1].classList).toContain('even');
         });

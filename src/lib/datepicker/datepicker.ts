@@ -88,11 +88,11 @@ export const McDatepickerContentMixinBase: CanColorCtor & typeof McDatepickerCon
  * @docs-private
  */
 @Component({
-    selector: 'mc-datepicker-content',
+    selector: 'mc-datepicker__content',
     templateUrl: 'datepicker-content.html',
     styleUrls: ['datepicker-content.css'],
     host: {
-        class: 'mc-datepicker-content',
+        class: 'mc-datepicker__content',
         '[@transformPanel]': '"enter"'
     },
     animations: [
@@ -431,7 +431,7 @@ export class McDatepicker<D> implements OnDestroy, CanColor {
             backdropClass: 'mc-overlay-transparent-backdrop',
             direction: this._dir,
             scrollStrategy: this.scrollStrategy(),
-            panelClass: 'mc-datepicker-popup'
+            panelClass: 'mc-datepicker__popup'
         });
 
         this.popupRef = this._overlay.create(overlayConfig);
@@ -452,7 +452,7 @@ export class McDatepicker<D> implements OnDestroy, CanColor {
     private createPopupPositionStrategy(): IPositionStrategy {
         return this._overlay.position()
             .flexibleConnectedTo(this.datepickerInput.elementRef)
-            .withTransformOriginOn('.mc-datepicker-content')
+            .withTransformOriginOn('.mc-datepicker__content')
             .withFlexibleDimensions(false)
             .withViewportMargin(8)
             .withLockedPosition()

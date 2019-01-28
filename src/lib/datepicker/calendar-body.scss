@@ -15,11 +15,11 @@ $mc-calendar-body-min-size: 7 * $mc-calendar-body-cell-min-size !default;
 $mc-calendar-body-cell-content-size: 100% - $mc-calendar-body-cell-content-margin * 2 !default;
 
 
-.mc-calendar-body {
+.mc-calendar__body {
     min-width: $mc-calendar-body-min-size;
 }
 
-.mc-calendar-body-label {
+.mc-calendar__body-label {
     height: 0;
     line-height: 0;
     text-align: left;
@@ -27,7 +27,7 @@ $mc-calendar-body-cell-content-size: 100% - $mc-calendar-body-cell-content-margi
     padding-right: $mc-calendar-body-label-side-padding;
 }
 
-.mc-calendar-body-cell {
+.mc-calendar__body-cell {
     position: relative;
     height: 0;
     line-height: 0;
@@ -36,11 +36,11 @@ $mc-calendar-body-cell-content-size: 100% - $mc-calendar-body-cell-content-margi
     cursor: pointer;
 }
 
-.mc-calendar-body-disabled {
+.mc-calendar__body_disabled {
     cursor: default;
 }
 
-.mc-calendar-body-cell-content {
+.mc-calendar__body-cell-content {
     position: absolute;
     top: $mc-calendar-body-cell-content-margin;
     left: $mc-calendar-body-cell-content-margin;
@@ -67,34 +67,31 @@ $mc-calendar-body-cell-content-size: 100% - $mc-calendar-body-cell-content-margi
 }
 
 mc-month-view {
-    .mc-calendar-body-cell-content {
+    .mc-calendar__body-cell-content {
         justify-content: flex-end;
     }
 }
 
 mc-multi-year-view,
 mc-year-view {
-    .mc-calendar-body-cell-content {
+    .mc-calendar__body-cell-content {
         justify-content: center;
     }
 }
 
-
-
-
 @include cdk-high-contrast {
-    .mc-datepicker-popup:not(:empty),
-    .mc-calendar-body-selected {
+    .mc-datepicker__popup:not(:empty),
+    .mc-calendar__body_selected {
         outline: solid 1px;
     }
 
-    .mc-calendar-body-today {
+    .mc-calendar__body-today {
         outline: dotted 1px;
     }
 }
 
 [dir='rtl'] {
-    .mc-calendar-body-label {
+    .mc-calendar__body-label {
         text-align: right;
     }
 }

@@ -10,11 +10,11 @@ $mc-datepicker-today-fade-amount: 0.2;
 $mc-calendar-weekday-table-font-size: 11px !default;
 
 @mixin _mc-datepicker-color($color) {
-    .mc-calendar-body-selected {
+    .mc-calendar__body_selected {
         background: $color;
     }
 
-    .mc-calendar-body-disabled > .mc-calendar-body-selected {
+    .mc-calendar__body_disabled > .mc-calendar__body_selected {
         background-color: fade-out($color, $mc-datepicker-selected-fade-amount);
     }
 }
@@ -28,36 +28,36 @@ $mc-calendar-weekday-table-font-size: 11px !default;
 
     $is-dark: map-get($theme, is-dark);
 
-    .mc-calendar-table-header {
+    .mc-calendar__table-header {
         color: mc-color($second, 400);
     }
 
-    .mc-datepicker-toggle-button.mc-icon-button {
+    .mc-datepicker-toggle__button.mc-icon-button {
         .mc-icon {
             color: mc-color($second, 400);
         }
     }
 
-    .mc-calendar-table-header-divider::after {
+    .mc-calendar__table-header-divider::after {
         background: mc-color($foreground, divider);
     }
 
-    .mc-calendar-body-label {
+    .mc-calendar__body-label {
         color: mc-color($foreground, text);
     }
 
-    .mc-calendar-body-cell-content {
+    .mc-calendar__body-cell-content {
         color: mc-color($foreground, text);
         border-color: transparent;
     }
 
-    .mc-calendar-body-disabled > .mc-calendar-body-cell-content:not(.mc-calendar-body-selected) {
+    .mc-calendar__body_disabled > .mc-calendar__body-cell-content:not(.mc-calendar__body_selected) {
         color: mc-color($foreground, disabled-text);
     }
 
-    .cdk-keyboard-focused .mc-calendar-body-active,
-    .cdk-program-focused .mc-calendar-body-active {
-        & > .mc-calendar-body-cell-content {
+    .cdk-keyboard-focused .mc-calendar__body_active,
+    .cdk-program-focused .mc-calendar__body_active {
+        & > .mc-calendar__body-cell-content {
             $focus-color: mc-color($primary);
 
             border-color: $focus-color;
@@ -65,13 +65,13 @@ $mc-calendar-weekday-table-font-size: 11px !default;
         }
     }
 
-    .mc-calendar-body-cell:not(.mc-calendar-body-disabled):hover {
-        & > .mc-calendar-body-cell-content:not(.mc-calendar-body-selected) {
+    .mc-calendar__body-cell:not(.mc-calendar__body_disabled):hover {
+        & > .mc-calendar__body-cell-content:not(.mc-calendar__body_selected) {
             background-color: mc-color($second, A60);
         }
     }
 
-    .mc-calendar-controls {
+    .mc-calendar__controls {
         button[mc-button], button[mc-icon-button] {
             &:hover {
                 background: mc-color($second, A60);
@@ -79,17 +79,17 @@ $mc-calendar-weekday-table-font-size: 11px !default;
         }
     }
 
-    .mc-calendar-body-today {
+    .mc-calendar__body-today {
         color: mc-color($primary, 500);
     }
 
-    .mc-calendar-body-disabled > .mc-calendar-body-today:not(.mc-calendar-body-selected) {
+    .mc-calendar__body_disabled > .mc-calendar__body-today:not(.mc-calendar__body_selected) {
         border-color: fade-out(mc-color($foreground, text), $mc-datepicker-today-fade-amount);
     }
 
     @include _mc-datepicker-color(mc-color($primary, if($is-dark, 700, 100)));
 
-    .mc-datepicker-content {
+    .mc-datepicker__content {
         @include _mc-theme-elevation(4, $theme);
         background-color: if($is-dark, map-get($second, 700), map-get($background, background));
         color: mc-color($foreground, text);
@@ -99,7 +99,7 @@ $mc-calendar-weekday-table-font-size: 11px !default;
         }
     }
 
-    .mc-datepicker-toggle-active {
+    .mc-datepicker-toggle_active {
         color: mc-color(map-get($theme, primary));
 
         &.mc-warn {
@@ -113,32 +113,32 @@ $mc-calendar-weekday-table-font-size: 11px !default;
         font-family: mc-font-family($config);
     }
 
-    .mc-calendar-body {
+    .mc-calendar__body {
         font-size: mc-font-size($config, body);
     }
 
-    .mc-calendar-period-button {
+    .mc-calendar__period-button {
         font: {
             size: mc-font-size($config, body);
             weight: mc-font-weight($config, body);
         }
     }
 
-    .mc-calendar-body-label {
+    .mc-calendar__body-label {
         font: {
             size: mc-font-size($config, body-strong);
             weight: mc-font-weight($config, body-strong);
         }
     }
 
-    .mc-calendar-table-header th {
+    .mc-calendar__table-header th {
         font: {
             size: $mc-calendar-weekday-table-font-size;
             weight: mc-font-weight($config, body);
         }
     }
 
-    .mc-calendar-body-today {
+    .mc-calendar__body-today {
         font-weight: mc-font-weight($config, body-strong);
     }
 }

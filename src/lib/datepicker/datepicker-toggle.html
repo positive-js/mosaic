@@ -2,14 +2,14 @@
   #button
   mc-icon-button
   type="button"
-  class="mc-datepicker-toggle-button"
+  class="mc-datepicker-toggle__button"
   aria-haspopup="true"
   [attr.aria-label]="intl.openCalendarLabel"
   [attr.tabindex]="disabled ? -1 : tabIndex"
   [disabled]="disabled"
   (click)="open($event)">
 
-  <i *ngIf="!customIcon" mc-icon="mc-calendar_16" class="mc-datepicker-toggle-default-icon"></i>
+  <i *ngIf="!customIcon" mc-icon="mc-calendar_16" class="mc-datepicker-toggle__default-icon"></i>
 
   <ng-content select="[mcDatepickerToggleIcon]"></ng-content>
 </button>

@@ -44,7 +44,7 @@ export class McCalendarCell {
     templateUrl: 'calendar-body.html',
     styleUrls: ['calendar-body.css'],
     host: {
-        class: 'mc-calendar-body',
+        class: 'mc-calendar__body',
         role: 'grid',
         'aria-readonly': 'true'
     },
@@ -135,7 +135,7 @@ export class McCalendarBody implements OnChanges {
         this.ngZone.runOutsideAngular(() => {
             this.ngZone.onStable.asObservable().pipe(take(1)).subscribe(() => {
                 const activeCell: HTMLElement | null =
-                    this.elementRef.nativeElement.querySelector('.mc-calendar-body-active');
+                    this.elementRef.nativeElement.querySelector('.mc-calendar__body_active');
 
                 if (activeCell) {
                     activeCell.focus();

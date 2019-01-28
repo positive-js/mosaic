@@ -3,7 +3,7 @@
   aria-hidden because we don't want it to be read out as one of the weeks in the month.
 -->
 <tr *ngIf="firstRowOffset < labelMinRequiredCells" aria-hidden="true">
-  <td class="mc-calendar-body-label"
+  <td class="mc-calendar__body-label"
       [attr.colspan]="numCols"
       [style.paddingTop]="cellPadding"
       [style.paddingBottom]="cellPadding">
@@ -21,7 +21,7 @@
   -->
   <td *ngIf="rowIndex === 0 && firstRowOffset"
       aria-hidden="true"
-      class="mc-calendar-body-label"
+      class="mc-calendar__body-label"
       [attr.colspan]="firstRowOffset"
       [style.paddingTop]="cellPadding"
       [style.paddingBottom]="cellPadding">
@@ -29,11 +29,11 @@
   </td>
   <td *ngFor="let item of row; let colIndex = index"
       role="gridcell"
-      class="mc-calendar-body-cell"
+      class="mc-calendar__body-cell"
       [ngClass]="item.cssClasses"
       [tabindex]="isActiveCell(rowIndex, colIndex) ? 0 : -1"
-      [class.mc-calendar-body-disabled]="!item.enabled"
-      [class.mc-calendar-body-active]="isActiveCell(rowIndex, colIndex)"
+      [class.mc-calendar__body_disabled]="!item.enabled"
+      [class.mc-calendar__body_active]="isActiveCell(rowIndex, colIndex)"
       [attr.aria-label]="item.ariaLabel"
       [attr.aria-disabled]="!item.enabled || null"
       [attr.aria-selected]="selectedValue === item.value"
@@ -41,9 +41,9 @@
       [style.width]="cellWidth"
       [style.paddingTop]="cellPadding"
       [style.paddingBottom]="cellPadding">
-    <div class="mc-calendar-body-cell-content"
-         [class.mc-calendar-body-selected]="selectedValue === item.value"
-         [class.mc-calendar-body-today]="todayValue === item.value">
+    <div class="mc-calendar__body-cell-content"
+         [class.mc-calendar__body_selected]="selectedValue === item.value"
+         [class.mc-calendar__body-today]="todayValue === item.value">
       {{item.displayValue}}
     </div>
   </td>
