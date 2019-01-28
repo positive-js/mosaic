@@ -23,11 +23,15 @@ $mc-datepicker-touch-max-height: 788px;
 
 .mc-datepicker-content {
     display: block;
-    // border-radius: 0;
 
     .mc-calendar {
         width: $mc-datepicker-non-touch-calendar-width;
         height: $mc-datepicker-non-touch-calendar-height;
+    }
+
+    .mc-calendar-next-button[disabled],
+    .mc-calendar-previous-button[disabled] {
+        border: 0;
     }
 }
 

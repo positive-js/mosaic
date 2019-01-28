@@ -14,14 +14,8 @@ import {
     imports: [PlatformModule],
     providers: [
         {provide: DateAdapter, useClass: MosaicDateAdapter},
-        {provide: MC_DATE_FORMATTER_CONFIGS_SET, useValue: DEFAULT_MC_DATE_FORMATTER_CONFIGS_SET}
+        {provide: MC_DATE_FORMATTER_CONFIGS_SET, useValue: DEFAULT_MC_DATE_FORMATTER_CONFIGS_SET},
+        {provide: MC_DATE_FORMATS, useValue: MC_MOSAIC_DATE_FORMATS}
     ]
 })
 export class MosaicDateModule {}
-
-
-@NgModule({
-    imports: [MosaicDateModule],
-    providers: [{provide: MC_DATE_FORMATS, useValue: MC_MOSAIC_DATE_FORMATS}]
-})
-export class McMosaicDateModule {}

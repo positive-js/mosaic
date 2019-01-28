@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DateAdapter, MC_DATE_FORMATS, MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
 import {
     MosaicDateAdapter,
-    McMosaicDateModule,
+    MosaicDateModule,
     MC_MOSAIC_DATE_FORMATS,
     MC_DATE_FORMATTER_CONFIGS_SET
 } from '@ptsecurity/mosaic-moment-adapter/adapter';
@@ -51,7 +51,7 @@ export class DemoComponent {
         FormsModule,
         McFormFieldModule,
         McDatepickerModule,
-        McMosaicDateModule,
+        MosaicDateModule,
         McInputModule,
         McIconModule
     ],

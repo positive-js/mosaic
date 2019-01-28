@@ -5,7 +5,7 @@ import { DateAdapter, MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
 import { Platform } from '@ptsecurity/cdk/platform';
 
 import { MosaicDateAdapter } from './mosaic-date-adapter';
-import { McMosaicDateModule } from './mosaic-date-adapter-module';
+import { MosaicDateModule } from './mosaic-date-adapter-module';
 
 
 describe('MosaicDateAdapter', () => {
@@ -14,7 +14,7 @@ describe('MosaicDateAdapter', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [McMosaicDateModule]
+            imports: [MosaicDateModule]
         }).compileComponents();
     }));
 
@@ -356,7 +356,7 @@ describe('MosaicDateAdapter with MC_DATE_LOCALE override', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [McMosaicDateModule],
+            imports: [MosaicDateModule],
             providers: [{ provide: MC_DATE_LOCALE, useValue: 'en-US' }]
         }).compileComponents();
     }));
@@ -377,7 +377,7 @@ describe('MosaicDateAdapter with not exists MC_DATE_LOCALE override', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [McMosaicDateModule]
+            imports: [MosaicDateModule]
         }).compileComponents();
     }));
 
@@ -396,7 +396,7 @@ describe('MosaicDateAdapter with LOCALE_ID override', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [McMosaicDateModule],
+            imports: [MosaicDateModule],
             providers: [{ provide: LOCALE_ID, useValue: 'ru-RU' }]
         }).compileComponents();
     }));

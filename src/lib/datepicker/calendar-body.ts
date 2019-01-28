@@ -92,7 +92,7 @@ export class McCalendarBody implements OnChanges {
     /** Width of an individual cell. */
     cellWidth: string;
 
-    constructor(private _elementRef: ElementRef<HTMLElement>, private _ngZone: NgZone) {
+    constructor(private elementRef: ElementRef<HTMLElement>, private _ngZone: NgZone) {
     }
 
     cellClicked(cell: McCalendarCell): void {
@@ -135,7 +135,7 @@ export class McCalendarBody implements OnChanges {
         this._ngZone.runOutsideAngular(() => {
             this._ngZone.onStable.asObservable().pipe(take(1)).subscribe(() => {
                 const activeCell: HTMLElement | null =
-                    this._elementRef.nativeElement.querySelector('.mc-calendar-body-active');
+                    this.elementRef.nativeElement.querySelector('.mc-calendar-body-active');
 
                 if (activeCell) {
                     activeCell.focus();

@@ -14,7 +14,7 @@ import {
     UP_ARROW
 } from '@ptsecurity/cdk/keycodes';
 import { dispatchFakeEvent, dispatchKeyboardEvent } from '@ptsecurity/cdk/testing';
-import { McMosaicDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
+import { MosaicDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 
 import { McCalendarBody } from './calendar-body';
 import { McYearView } from './year-view';
@@ -26,7 +26,7 @@ describe('McYearView', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
-                McMosaicDateModule
+                MosaicDateModule
             ],
             declarations: [
                 McCalendarBody,

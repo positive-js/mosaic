@@ -20,10 +20,7 @@ import {
     dispatchKeyboardEvent,
     dispatchMouseEvent
 } from '@ptsecurity/cdk/testing';
-import {
-    McMosaicDateModule,
-    MosaicDateModule
-} from '@ptsecurity/mosaic-moment-adapter/adapter';
+import { MosaicDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 import { ThemePalette } from '@ptsecurity/mosaic/core';
 import { McFormField, McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { Subject } from 'rxjs';
@@ -71,13 +68,13 @@ describe('McDatepicker', () => {
         container.ngOnDestroy();
     }));
 
-    describe('with McMosaicDateModule', () => {
+    describe('with MosaicDateModule', () => {
         describe('standard datepicker', () => {
             let fixture: ComponentFixture<StandardDatepicker>;
             let testComponent: StandardDatepicker;
 
             beforeEach(fakeAsync(() => {
-                fixture = createComponent(StandardDatepicker, [McMosaicDateModule]);
+                fixture = createComponent(StandardDatepicker, [MosaicDateModule]);
                 fixture.detectChanges();
 
                 testComponent = fixture.componentInstance;
@@ -282,7 +279,7 @@ describe('McDatepicker', () => {
                     const scrolledSubject = new Subject();
 
                     // Stub out a `CloseScrollStrategy` so we can trigger a detachment via the `OverlayRef`.
-                    fixture = createComponent(StandardDatepicker, [McMosaicDateModule], [
+                    fixture = createComponent(StandardDatepicker, [MosaicDateModule], [
                         {
                             provide: ScrollDispatcher,
                             useValue: { scrolled: () => scrolledSubject }
@@ -363,14 +360,14 @@ describe('McDatepicker', () => {
 
         describe('datepicker with too many inputs', () => {
             it('should throw when multiple inputs registered', fakeAsync(() => {
-                const fixture = createComponent(MultiInputDatepicker, [McMosaicDateModule]);
+                const fixture = createComponent(MultiInputDatepicker, [MosaicDateModule]);
                 expect(() => fixture.detectChanges()).toThrow();
             }));
         });
 
         describe('datepicker that is assigned to input at a later point', () => {
             it('should not throw on ALT + DOWN_ARROW for input without datepicker', fakeAsync(() => {
-                const fixture = createComponent(DelayedDatepicker, [McMosaicDateModule]);
+                const fixture = createComponent(DelayedDatepicker, [MosaicDateModule]);
                 fixture.detectChanges();
 
                 expect(() => {
@@ -383,7 +380,7 @@ describe('McDatepicker', () => {
             }));
 
             it('should handle value changes when a datepicker is assigned after init', fakeAsync(() => {
-                const fixture = createComponent(DelayedDatepicker, [McMosaicDateModule]);
+                const fixture = createComponent(DelayedDatepicker, [MosaicDateModule]);
                 const testComponent: DelayedDatepicker = fixture.componentInstance;
                 const toSelect = new Date(2017, 0, 1);
 
@@ -410,7 +407,7 @@ describe('McDatepicker', () => {
             let testComponent: NoInputDatepicker;
 
             beforeEach(fakeAsync(() => {
-                fixture = createComponent(NoInputDatepicker, [McMosaicDateModule]);
+                fixture = createComponent(NoInputDatepicker, [MosaicDateModule]);
                 fixture.detectChanges();
 
                 testComponent = fixture.componentInstance;
@@ -435,7 +432,7 @@ describe('McDatepicker', () => {
             let testComponent: DatepickerWithStartAt;
 
             beforeEach(fakeAsync(() => {
-                fixture = createComponent(DatepickerWithStartAt, [McMosaicDateModule]);
+                fixture = createComponent(DatepickerWithStartAt, [MosaicDateModule]);
                 fixture.detectChanges();
 
                 testComponent = fixture.componentInstance;
@@ -456,7 +453,7 @@ describe('McDatepicker', () => {
             let testComponent: DatepickerWithStartViewYear;
 
             beforeEach(fakeAsync(() => {
-                fixture = createComponent(DatepickerWithStartViewYear, [McMosaicDateModule]);
+                fixture = createComponent(DatepickerWithStartViewYear, [MosaicDateModule]);
                 fixture.detectChanges();
 
                 testComponent = fixture.componentInstance;
@@ -504,7 +501,7 @@ describe('McDatepicker', () => {
             let testComponent: DatepickerWithStartViewMultiYear;
 
             beforeEach(fakeAsync(() => {
-                fixture = createComponent(DatepickerWithStartViewMultiYear, [McMosaicDateModule]);
+                fixture = createComponent(DatepickerWithStartViewMultiYear, [MosaicDateModule]);
                 fixture.detectChanges();
 
                 testComponent = fixture.componentInstance;
@@ -553,7 +550,7 @@ describe('McDatepicker', () => {
             let testComponent: DatepickerWithNgModel;
 
             beforeEach(fakeAsync(() => {
-                fixture = createComponent(DatepickerWithNgModel, [McMosaicDateModule]);
+                fixture = createComponent(DatepickerWithNgModel, [MosaicDateModule]);
                 fixture.detectChanges();
 
                 fixture.whenStable().then(() => {
@@ -682,7 +679,7 @@ describe('McDatepicker', () => {
             let testComponent: DatepickerWithFormControl;
 
             beforeEach(fakeAsync(() => {
-                fixture = createComponent(DatepickerWithFormControl, [McMosaicDateModule]);
+                fixture = createComponent(DatepickerWithFormControl, [MosaicDateModule]);
                 fixture.detectChanges();
 
                 testComponent = fixture.componentInstance;
@@ -743,7 +740,7 @@ describe('McDatepicker', () => {
             let testComponent: DatepickerWithToggle;
 
             beforeEach(fakeAsync(() => {
-                fixture = createComponent(DatepickerWithToggle, [McMosaicDateModule]);
+                fixture = createComponent(DatepickerWithToggle, [MosaicDateModule]);
                 fixture.detectChanges();
 
                 testComponent = fixture.componentInstance;
@@ -848,7 +845,7 @@ describe('McDatepicker', () => {
 
         describe('datepicker with custom mc-datepicker-toggle icon', () => {
             it('should be able to override the mc-datepicker-toggle icon', fakeAsync(() => {
-                const fixture = createComponent(DatepickerWithCustomIcon, [McMosaicDateModule]);
+                const fixture = createComponent(DatepickerWithCustomIcon, [MosaicDateModule]);
                 fixture.detectChanges();
 
                 expect(fixture.nativeElement.querySelector('.mc-datepicker-toggle .custom-icon'))
@@ -866,7 +863,7 @@ describe('McDatepicker', () => {
                   the tabindex binding. At the minute I don't know how correctly resolve that issue
                 */
                 /*
-                  const fixture = createComponent(DatepickerWithTabindexOnToggle, [McMosaicDateModule]);
+                  const fixture = createComponent(DatepickerWithTabindexOnToggle, [MosaicDateModule]);
                   fixture.detectChanges();
 
                   const button = fixture.nativeElement.querySelector('.mc-datepicker-toggle button');
@@ -876,7 +873,7 @@ describe('McDatepicker', () => {
             });
 
             it('should clear the tabindex from the mc-datepicker-toggle host', () => {
-                const fixture = createComponent(DatepickerWithTabindexOnToggle, [McMosaicDateModule]);
+                const fixture = createComponent(DatepickerWithTabindexOnToggle, [MosaicDateModule]);
                 fixture.detectChanges();
 
                 const host = fixture.nativeElement.querySelector('.mc-datepicker-toggle');
@@ -885,7 +882,7 @@ describe('McDatepicker', () => {
             });
 
             it('should forward focus to the underlying button when the host is focused', () => {
-                const fixture = createComponent(DatepickerWithTabindexOnToggle, [McMosaicDateModule]);
+                const fixture = createComponent(DatepickerWithTabindexOnToggle, [MosaicDateModule]);
                 fixture.detectChanges();
 
                 const host = fixture.nativeElement.querySelector('.mc-datepicker-toggle');
@@ -905,7 +902,7 @@ describe('McDatepicker', () => {
             let testComponent: FormFieldDatepicker;
 
             beforeEach(fakeAsync(() => {
-                fixture = createComponent(FormFieldDatepicker, [McMosaicDateModule]);
+                fixture = createComponent(FormFieldDatepicker, [MosaicDateModule]);
                 fixture.detectChanges();
                 testComponent = fixture.componentInstance;
             }));
@@ -947,7 +944,7 @@ describe('McDatepicker', () => {
             let testComponent: DatepickerWithMinAndMaxValidation;
 
             beforeEach(fakeAsync(() => {
-                fixture = createComponent(DatepickerWithMinAndMaxValidation, [McMosaicDateModule]);
+                fixture = createComponent(DatepickerWithMinAndMaxValidation, [MosaicDateModule]);
                 fixture.detectChanges();
 
                 testComponent = fixture.componentInstance;
@@ -1020,7 +1017,7 @@ describe('McDatepicker', () => {
             let testComponent: DatepickerWithFilterAndValidation;
 
             beforeEach(fakeAsync(() => {
-                fixture = createComponent(DatepickerWithFilterAndValidation, [McMosaicDateModule]);
+                fixture = createComponent(DatepickerWithFilterAndValidation, [MosaicDateModule]);
                 fixture.detectChanges();
 
                 testComponent = fixture.componentInstance;
@@ -1068,7 +1065,7 @@ describe('McDatepicker', () => {
             let inputEl: HTMLInputElement;
 
             beforeEach(fakeAsync(() => {
-                fixture = createComponent(DatepickerWithChangeAndInputEvents, [McMosaicDateModule]);
+                fixture = createComponent(DatepickerWithChangeAndInputEvents, [MosaicDateModule]);
                 fixture.detectChanges();
 
                 testComponent = fixture.componentInstance;
@@ -1160,7 +1157,7 @@ describe('McDatepicker', () => {
             let testComponent: DatepickerWithISOStrings;
 
             beforeEach(fakeAsync(() => {
-                fixture = createComponent(DatepickerWithISOStrings, [McMosaicDateModule]);
+                fixture = createComponent(DatepickerWithISOStrings, [MosaicDateModule]);
                 testComponent = fixture.componentInstance;
             }));
 
@@ -1186,7 +1183,7 @@ describe('McDatepicker', () => {
             let testComponent: DatepickerWithEvents;
 
             beforeEach(fakeAsync(() => {
-                fixture = createComponent(DatepickerWithEvents, [McMosaicDateModule]);
+                fixture = createComponent(DatepickerWithEvents, [MosaicDateModule]);
                 fixture.detectChanges();
                 testComponent = fixture.componentInstance;
             }));
@@ -1217,7 +1214,7 @@ describe('McDatepicker', () => {
             let input: HTMLInputElement;
 
             beforeEach(fakeAsync(() => {
-                fixture = createComponent(DatepickerOpeningOnFocus, [McMosaicDateModule]);
+                fixture = createComponent(DatepickerOpeningOnFocus, [MosaicDateModule]);
                 fixture.detectChanges();
                 testComponent = fixture.componentInstance;
                 input = fixture.debugElement.query(By.css('input')).nativeElement;
@@ -1259,7 +1256,7 @@ describe('McDatepicker', () => {
 
         describe('datepicker directionality', () => {
             it('should pass along the directionality to the popup', () => {
-                const fixture = createComponent(StandardDatepicker, [McMosaicDateModule], [{
+                const fixture = createComponent(StandardDatepicker, [MosaicDateModule], [{
                     provide: Directionality,
                     useValue: ({ value: 'rtl' })
                 }]);
@@ -1275,7 +1272,7 @@ describe('McDatepicker', () => {
 
             it('should update the popup direction if the directionality value changes', fakeAsync(() => {
                 const dirProvider = { value: 'ltr' };
-                const fixture = createComponent(StandardDatepicker, [McMosaicDateModule], [{
+                const fixture = createComponent(StandardDatepicker, [MosaicDateModule], [{
                     provide: Directionality,
                     useFactory: () => dirProvider
                 }]);
@@ -1317,7 +1314,7 @@ describe('McDatepicker', () => {
         let input: HTMLInputElement;
 
         beforeEach(fakeAsync(() => {
-            fixture = createComponent(DatepickerWithi18n, [McMosaicDateModule, MosaicDateModule],
+            fixture = createComponent(DatepickerWithi18n, [MosaicDateModule],
                 [
                     { provide: MC_DATE_LOCALE, useValue: 'en-US' }
                 ]);
@@ -1345,7 +1342,7 @@ describe('McDatepicker', () => {
         beforeEach(fakeAsync(() => {
             fixture = createComponent(
                 DatepickerWithCustomHeader,
-                [McMosaicDateModule],
+                [MosaicDateModule],
                 [],
                 [CustomHeaderForDatepicker]
             );

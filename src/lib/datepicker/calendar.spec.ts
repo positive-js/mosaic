@@ -12,7 +12,7 @@ import {
     dispatchMouseEvent,
     MockNgZone
 } from '@ptsecurity/cdk/testing';
-import { McMosaicDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
+import { MosaicDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 
 import { McCalendar } from './calendar';
 import { McDatepickerIntl } from './datepicker-intl';
@@ -25,7 +25,7 @@ describe('McCalendar', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
-                McMosaicDateModule,
+                MosaicDateModule,
                 McDatepickerModule
             ],
             declarations: [

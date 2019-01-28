@@ -97,11 +97,6 @@ $mc-calendar-weekday-table-font-size: 11px !default;
         &.mc-warn {
             @include _mc-datepicker-color(mc-color(map-get($theme, error)));
         }
-
-        .mc-calendar-next-button[disabled],
-        .mc-calendar-previous-button[disabled] {
-            border: 0;
-        }
     }
 
     .mc-datepicker-toggle-active {

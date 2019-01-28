@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Directionality } from '@ptsecurity/cdk/bidi';
-import { McMosaicDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
+import { MosaicDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 
 import { McCalendar } from './calendar';
 import { McDatepickerIntl } from './datepicker-intl';
@@ -15,7 +15,7 @@ describe('McCalendarHeader', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
-                McMosaicDateModule,
+                MosaicDateModule,
                 McDatepickerModule
             ],
             declarations: [
