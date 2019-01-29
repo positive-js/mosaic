@@ -41,7 +41,7 @@ import {
     Output,
     QueryList, Renderer2,
     Self,
-    SimpleChanges,
+    SimpleChanges, TrackByFunction,
     ViewChild, ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
@@ -66,7 +66,6 @@ import {
 import { McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 
 import { McTag } from '@ptsecurity/mosaic/tag';
-import { McTreeSelection } from '@ptsecurity/mosaic/tree';
 import { McTreeSelectOption } from '@ptsecurity/mosaic/tree-select/tree-select-option.component';
 
 
@@ -250,6 +249,8 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     // @ViewChildren(McTreeOption) options: QueryList<McTreeSelectOption<T>>;
     options: QueryList<McTreeSelectOption<T>>;
 
+    @Input() trackBy: TrackByFunction<T>;
+
     /** Classes to be passed to the select panel. Supports the same syntax as `ngClass`. */
     @Input() panelClass: string | string[] | Set<string> | { [key: string]: any };
 
@@ -407,7 +408,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
 
     private _panelOpen = false;
 
-    private emptyDataDiffer: IterableDiffer<T>;
+    private dataDiffer: IterableDiffer<T>;
 
     /** The scroll position of the overlay panel, calculated to center the selected option. */
     private scrollTop = 0;
@@ -438,13 +439,16 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
             elementRef, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl, differs, changeDetectorRef
         );
 
+        this.options = new QueryList();
+
         if (this.ngControl) {
             // Note: we provide the value accessor through here, instead of
             // the `providers` to avoid running into a circular import.
             this.ngControl.valueAccessor = this;
         }
 
-        this.emptyDataDiffer = this.differs.find([]).create(() => new Date().valueOf());
+        const defaultTrackBy = (_, item: McTreeSelectOption<T>) => JSON.stringify(item.data);
+        this.dataDiffer = this.differs.find([]).create(this.trackBy || defaultTrackBy);
 
         this.tabIndex = parseInt(tabIndex) || 0;
 
@@ -454,6 +458,8 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
 
     ngOnInit() {
         super.ngOnInit();
+
+        this.initKeyManager();
 
         this.selectedOptions = new SelectionModel<McTreeSelectOption<T>>(this.multiple);
         this.stateChanges.next();
@@ -486,8 +492,6 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     }
 
     ngAfterViewInit() {
-        this.options = new QueryList();
-
         this.tags.changes
             .subscribe(() => {
                 setTimeout(() => this.calculateHiddenItems(), 0);
@@ -579,9 +583,9 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
      * @param value New value to be written to the model.
      */
     writeValue(value: any) {
-        if (this.options) {
-            this.setSelectionByValue(value);
-        }
+        // if (this.options) {
+        //     this.setSelectionByValue(value);
+        // }
     }
 
     /**
@@ -710,9 +714,9 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
                 this.calculateOverlayOffsetX();
                 this.panel.nativeElement.scrollTop = this.scrollTop;
 
-                this.renderNodeChanges(this.dataSource.expandedData.value, this.emptyDataDiffer);
+                this.dataDiffer.diff([]);
 
-                this.initKeyManager();
+                this.renderNodeChanges(this.dataSource.expandedData.value);
             });
     }
 
@@ -812,7 +816,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
 
     renderNodeChanges(
         data: T[],
-        dataDiffer: IterableDiffer<T> = this.emptyDataDiffer,
+        dataDiffer: IterableDiffer<T> = this.dataDiffer,
         viewContainer: any = this.nodeOutlet && this.nodeOutlet.viewContainer
     ) {
         if (!this.nodeOutlet) { return; }
