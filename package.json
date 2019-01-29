@@ -135,6 +135,7 @@
         "build:lib": "gulp mosaic:build-release",
         "build:docs": "gulp docs",
         "changelog": "gulp changelog",
+        "preinstall": "node ./tools/npm/check-npm.js",
         "publish": "ts-node --project ./scripts/tsconfig.deploy.json ./scripts/deploy/publish-artifacts.ts",
         "linter:lib": "gulp tslint",
         "linter:styles": "gulp stylelint",
