@@ -34,7 +34,7 @@ $mc-calendar-next-icon-transform: translateX(-2px) rotate(45deg);
     display: flex;
     margin: $mc-calendar-controls-vertical-padding $mc-calendar-controls-side-margin;
 
-    button[mc-button], button[mc-icon-button] {
+    .mc-button, .mc-icon-button {
         border-radius: 0;
         border-color: transparent;
         background-color: transparent;

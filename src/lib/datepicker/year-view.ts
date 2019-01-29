@@ -1,4 +1,3 @@
-// tslint:disable:no-magic-numbers
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
@@ -125,7 +124,7 @@ export class McYearView<D> implements AfterContentInit {
     private _minDate: D | null;
     private _maxDate: D | null;
 
-    constructor(private _changeDetectorRef: ChangeDetectorRef,
+    constructor(private changeDetectorRef: ChangeDetectorRef,
                 @Optional() @Inject(MC_DATE_FORMATS) private _dateFormats: McDateFormats,
                 @Optional() public dateAdapter: DateAdapter<D>,
                 @Optional() private _dir?: Directionality) {
@@ -167,6 +166,10 @@ export class McYearView<D> implements AfterContentInit {
         const oldActiveDate = this._activeDate;
         const isRtl = this.isRtl();
 
+        const VERTICAL_SHIFT = 4;
+        const PAGE_SHIFT = 10;
+        const MAX_MONTH_INDEX = 11;
+
         // tslint:disable-next-line:deprecation
         switch (event.keyCode) {
             case LEFT_ARROW:
@@ -176,10 +179,10 @@ export class McYearView<D> implements AfterContentInit {
                 this.activeDate = this.dateAdapter.addCalendarMonths(this._activeDate, isRtl ? -1 : 1);
                 break;
             case UP_ARROW:
-                this.activeDate = this.dateAdapter.addCalendarMonths(this._activeDate, -4);
+                this.activeDate = this.dateAdapter.addCalendarMonths(this._activeDate, -VERTICAL_SHIFT);
                 break;
             case DOWN_ARROW:
-                this.activeDate = this.dateAdapter.addCalendarMonths(this._activeDate, 4);
+                this.activeDate = this.dateAdapter.addCalendarMonths(this._activeDate, VERTICAL_SHIFT);
                 break;
             case HOME:
                 this.activeDate = this.dateAdapter.addCalendarMonths(this._activeDate,
@@ -187,15 +190,15 @@ export class McYearView<D> implements AfterContentInit {
                 break;
             case END:
                 this.activeDate = this.dateAdapter.addCalendarMonths(this._activeDate,
-                    11 - this.dateAdapter.getMonth(this._activeDate));
+                    MAX_MONTH_INDEX - this.dateAdapter.getMonth(this._activeDate));
                 break;
             case PAGE_UP:
                 this.activeDate =
-                    this.dateAdapter.addCalendarYears(this._activeDate, event.altKey ? -10 : -1);
+                    this.dateAdapter.addCalendarYears(this._activeDate, event.altKey ? -PAGE_SHIFT : -1);
                 break;
             case PAGE_DOWN:
                 this.activeDate =
-                    this.dateAdapter.addCalendarYears(this._activeDate, event.altKey ? 10 : 1);
+                    this.dateAdapter.addCalendarYears(this._activeDate, event.altKey ? PAGE_SHIFT : 1);
                 break;
             case ENTER:
             case SPACE:
@@ -222,10 +225,12 @@ export class McYearView<D> implements AfterContentInit {
         this.yearLabel = this.dateAdapter.getYearName(this.activeDate);
 
         const monthNames = this.dateAdapter.getMonthNames('short');
+
         // First row of months only contains 5 elements so we can fit the year label on the same row.
+        // tslint:disable-next-line:no-magic-numbers
         this.months = [[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11]].map((row) => row.map(
             (month) => this.createCellForMonth(month, monthNames[month])));
-        this._changeDetectorRef.markForCheck();
+        this.changeDetectorRef.markForCheck();
     }
 
     /** Focuses the active cell after the microtask queue is empty. */

@@ -72,7 +72,7 @@ $mc-calendar-weekday-table-font-size: 11px !default;
     }
 
     .mc-calendar__controls {
-        button[mc-button], button[mc-icon-button] {
+        .mc-button, .mc-icon-button {
             &:hover {
                 background: mc-color($second, A60);
             }

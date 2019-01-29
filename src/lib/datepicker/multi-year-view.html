@@ -1,15 +1,17 @@
 <table class="mc-calendar__table">
-  <thead class="mc-calendar__table-header">
-    <tr><th class="mc-calendar__table-header-divider" colspan="4"></th></tr>
-  </thead>
-  <tbody mc-calendar-body
-         [rows]="years"
-         [todayValue]="todayYear"
-         [selectedValue]="selectedYear"
-         [numCols]="4"
-         [cellAspectRatio]="4 / 7"
-         [activeCell]="getActiveCell()"
-         (selectedValueChange)="onYearSelected($event)"
-         (keydown)="handleCalendarBodyKeydown($event)">
-  </tbody>
+    <thead class="mc-calendar__table-header">
+    <tr>
+        <th class="mc-calendar__table-header-divider" colspan="4"></th>
+    </tr>
+    </thead>
+    <tbody mc-calendar-body
+           [rows]="years"
+           [todayValue]="todayYear"
+           [selectedValue]="selectedYear"
+           [numCols]="4"
+           [cellAspectRatio]="4 / 7"
+           [activeCell]="getActiveCell()"
+           (selectedValueChange)="onYearSelected($event)"
+           (keydown)="handleCalendarBodyKeydown($event)">
+    </tbody>
 </table>

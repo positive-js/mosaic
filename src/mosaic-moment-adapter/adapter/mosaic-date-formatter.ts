@@ -16,14 +16,12 @@ import {
 
 const moment = _rollupMoment || _moment;
 
-type YesNoType = 'yes' | 'no';
-
 interface ICompiledVariables {
-    CURRENT_YEAR?: YesNoType;
+    CURRENT_YEAR?: string;
     SECONDS_PASSED?: number;
     MINUTES_PASSED?: number;
-    SAME_MONTH?: YesNoType;
-    SAME_DAY?: YesNoType;
+    SAME_MONTH?: string;
+    SAME_DAY?: string;
 }
 
 // todo extract moment types (as function, as namespace and as Moment) if it is possible
@@ -199,7 +197,7 @@ export class McDateFormatter {
         return this.momentWithLocale().isSame(value, 'year') ? 'yes' : 'no';
     }
 
-    private isSame(unit: unitOfTime.StartOf, startDate: Moment, endDate: Moment): YesNoType {
+    private isSame(unit: unitOfTime.StartOf, startDate: Moment, endDate: Moment): string {
         return startDate.isSame(endDate, unit) ? 'yes' : 'no';
     }
 

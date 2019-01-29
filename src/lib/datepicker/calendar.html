@@ -1,38 +1,37 @@
-
 <ng-template [cdkPortalOutlet]="calendarHeaderPortal"></ng-template>
 
 <div class="mc-calendar__content" [ngSwitch]="currentView" cdkMonitorSubtreeFocus tabindex="-1">
-  <mc-month-view
-      *ngSwitchCase="'month'"
-      [(activeDate)]="activeDate"
-      [selected]="selected"
-      [dateFilter]="dateFilter"
-      [maxDate]="maxDate"
-      [minDate]="minDate"
-      [dateClass]="dateClass"
-      (selectedChange)="dateSelected($event)"
-      (userSelection)="userSelected()">
-  </mc-month-view>
+    <mc-month-view
+        *ngSwitchCase="'month'"
+        [(activeDate)]="activeDate"
+        [selected]="selected"
+        [dateFilter]="dateFilter"
+        [maxDate]="maxDate"
+        [minDate]="minDate"
+        [dateClass]="dateClass"
+        (selectedChange)="dateSelected($event)"
+        (userSelection)="userSelected()">
+    </mc-month-view>
 
-  <mc-year-view
-      *ngSwitchCase="'year'"
-      [(activeDate)]="activeDate"
-      [selected]="selected"
-      [dateFilter]="dateFilter"
-      [maxDate]="maxDate"
-      [minDate]="minDate"
-      (monthSelected)="monthSelectedInYearView($event)"
-      (selectedChange)="goToDateInView($event, 'month')">
-  </mc-year-view>
+    <mc-year-view
+        *ngSwitchCase="'year'"
+        [(activeDate)]="activeDate"
+        [selected]="selected"
+        [dateFilter]="dateFilter"
+        [maxDate]="maxDate"
+        [minDate]="minDate"
+        (monthSelected)="monthSelectedInYearView($event)"
+        (selectedChange)="goToDateInView($event, 'month')">
+    </mc-year-view>
 
-  <mc-multi-year-view
-      *ngSwitchCase="'multi-year'"
-      [(activeDate)]="activeDate"
-      [selected]="selected"
-      [dateFilter]="dateFilter"
-      [maxDate]="maxDate"
-      [minDate]="minDate"
-      (yearSelected)="yearSelectedInMultiYearView($event)"
-      (selectedChange)="goToDateInView($event, 'year')">
-  </mc-multi-year-view>
+    <mc-multi-year-view
+        *ngSwitchCase="'multi-year'"
+        [(activeDate)]="activeDate"
+        [selected]="selected"
+        [dateFilter]="dateFilter"
+        [maxDate]="maxDate"
+        [minDate]="minDate"
+        (yearSelected)="yearSelectedInMultiYearView($event)"
+        (selectedChange)="goToDateInView($event, 'year')">
+    </mc-multi-year-view>
 </div>

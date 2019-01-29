@@ -139,7 +139,7 @@ export class McMonthView<D> implements AfterContentInit {
     private _minDate: D | null;
     private _maxDate: D | null;
 
-    constructor(private _changeDetectorRef: ChangeDetectorRef,
+    constructor(private changeDetectorRef: ChangeDetectorRef,
                 @Optional() @Inject(MC_DATE_FORMATS) private _dateFormats: McDateFormats,
                 @Optional() public dateAdapter: DateAdapter<D>,
                 @Optional() private _dir?: Directionality) {
@@ -263,7 +263,7 @@ export class McMonthView<D> implements AfterContentInit {
                 this.dateAdapter.getFirstDayOfWeek()) % DAYS_PER_WEEK;
 
         this.createWeekCells();
-        this._changeDetectorRef.markForCheck();
+        this.changeDetectorRef.markForCheck();
     }
 
     /** Focuses the active cell after the microtask queue is empty. */
@@ -275,7 +275,9 @@ export class McMonthView<D> implements AfterContentInit {
     private createWeekCells() {
         const daysInMonth = this.dateAdapter.getNumDaysInMonth(this.activeDate);
         const dateNames = this.dateAdapter.getDateNames();
+
         this.weeks = [[]];
+
         for (let i = 0, cell = this.firstWeekOffset; i < daysInMonth; i++, cell++) {
             if (cell === DAYS_PER_WEEK) {
                 this.weeks.push([]);

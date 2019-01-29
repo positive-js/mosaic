@@ -124,7 +124,7 @@ export class McMultiYearView<D> implements AfterContentInit {
     private _minDate: D | null;
     private _maxDate: D | null;
 
-    constructor(private _changeDetectorRef: ChangeDetectorRef,
+    constructor(private changeDetectorRef: ChangeDetectorRef,
                 @Optional() public dateAdapter: DateAdapter<D>,
                 @Optional() private _dir?: Directionality) {
         if (!this.dateAdapter) {
@@ -151,7 +151,7 @@ export class McMultiYearView<D> implements AfterContentInit {
                 row = [];
             }
         }
-        this._changeDetectorRef.markForCheck();
+        this.changeDetectorRef.markForCheck();
     }
 
     /** Handles when a new year is selected. */
