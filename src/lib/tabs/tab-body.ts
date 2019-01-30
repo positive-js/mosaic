@@ -48,51 +48,6 @@ export type McTabBodyPositionState =
 export type McTabBodyOriginState = 'left' | 'right';
 
 /**
- * The portal host directive for the contents of the tab.
- * @docs-private
- */
-@Directive({
-    selector: '[mcTabBodyHost]'
-})
-export class McTabBodyPortal extends CdkPortalOutlet implements OnInit, OnDestroy {
-    /** Subscription to events for when the tab body begins centering. */
-    private centeringSub = Subscription.EMPTY;
-    /** Subscription to events for when the tab body finishes leaving from center position. */
-    private leavingSub = Subscription.EMPTY;
-
-    constructor(
-        componentFactoryResolver: ComponentFactoryResolver,
-        viewContainerRef: ViewContainerRef,
-        @Inject(forwardRef(() => McTabBody)) private host: McTabBody) {
-        super(componentFactoryResolver, viewContainerRef);
-    }
-
-    /** Set initial visibility or set up subscription for changing visibility. */
-    ngOnInit(): void {
-        super.ngOnInit();
-
-        this.centeringSub = this.host.beforeCentering
-            .pipe(startWith(this.host.isCenterPosition(this.host.bodyPosition)))
-            .subscribe((isCentering: boolean) => {
-                if (isCentering && !this.hasAttached()) {
-                    this.attach(this.host.content);
-                }
-            });
-
-        this.leavingSub = this.host.afterLeavingCenter.subscribe(() => {
-            this.detach();
-        });
-    }
-
-    /** Clean up centering subscription. */
-    ngOnDestroy(): void {
-        super.ngOnDestroy();
-        this.centeringSub.unsubscribe();
-        this.leavingSub.unsubscribe();
-    }
-}
-
-/**
  * Wrapper for the contents of a tab.
  * @docs-private
  */
@@ -231,5 +186,50 @@ export class McTabBody implements OnInit, OnDestroy {
         }
 
         return 'right-origin-center';
+    }
+}
+
+/**
+ * The portal host directive for the contents of the tab.
+ * @docs-private
+ */
+@Directive({
+    selector: '[mcTabBodyHost]'
+})
+export class McTabBodyPortal extends CdkPortalOutlet implements OnInit, OnDestroy {
+    /** Subscription to events for when the tab body begins centering. */
+    private centeringSub = Subscription.EMPTY;
+    /** Subscription to events for when the tab body finishes leaving from center position. */
+    private leavingSub = Subscription.EMPTY;
+
+    constructor(
+        componentFactoryResolver: ComponentFactoryResolver,
+        viewContainerRef: ViewContainerRef,
+        @Inject(forwardRef(() => McTabBody)) private host: McTabBody) {
+        super(componentFactoryResolver, viewContainerRef);
+    }
+
+    /** Set initial visibility or set up subscription for changing visibility. */
+    ngOnInit(): void {
+        super.ngOnInit();
+
+        this.centeringSub = this.host.beforeCentering
+            .pipe(startWith(this.host.isCenterPosition(this.host.bodyPosition)))
+            .subscribe((isCentering: boolean) => {
+                if (isCentering && !this.hasAttached()) {
+                    this.attach(this.host.content);
+                }
+            });
+
+        this.leavingSub = this.host.afterLeavingCenter.subscribe(() => {
+            this.detach();
+        });
+    }
+
+    /** Clean up centering subscription. */
+    ngOnDestroy(): void {
+        super.ngOnDestroy();
+        this.centeringSub.unsubscribe();
+        this.leavingSub.unsubscribe();
     }
 }

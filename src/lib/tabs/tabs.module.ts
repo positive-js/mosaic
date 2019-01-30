@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { A11yModule } from '@ptsecurity/cdk/a11y';
 import { PortalModule } from '@ptsecurity/cdk/portal';
 import { McCommonModule } from '@ptsecurity/mosaic/core';
@@ -26,8 +25,7 @@ import { McTabLink, McTabNav } from './tab-nav-bar/tab-nav-bar';
         CommonModule,
         McCommonModule,
         PortalModule,
-        A11yModule,
-        BrowserAnimationsModule
+        A11yModule
     ],
     // Don't export all components because some are only to be used internally.
     exports: [

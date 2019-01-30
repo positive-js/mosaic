@@ -3,6 +3,7 @@ import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { McButtonModule } from '../../lib/button/';
 import { McToggleModule } from '../../lib/toggle/';
@@ -31,6 +32,7 @@ export class DemoComponent {
     ],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         FormsModule,
         McToggleModule,
         McButtonModule
