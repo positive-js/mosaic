@@ -201,7 +201,7 @@ export class McDatepickerInput<D> implements ControlValueAccessor, OnDestroy, Va
     private _value: D | null;
     private _min: D | null;
     private _max: D | null;
-    private _disabled: boolean | undefined;
+    private _disabled: boolean;
 
     private datepickerSubscription = Subscription.EMPTY;
 
