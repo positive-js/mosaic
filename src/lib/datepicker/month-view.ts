@@ -139,15 +139,17 @@ export class McMonthView<D> implements AfterContentInit {
     private _minDate: D | null;
     private _maxDate: D | null;
 
-    constructor(private changeDetectorRef: ChangeDetectorRef,
-                @Optional() @Inject(MC_DATE_FORMATS) private _dateFormats: McDateFormats,
-                @Optional() public dateAdapter: DateAdapter<D>,
-                @Optional() private _dir?: Directionality) {
+    constructor(
+        private changeDetectorRef: ChangeDetectorRef,
+        @Optional() @Inject(MC_DATE_FORMATS) private dateFormats: McDateFormats,
+        @Optional() public dateAdapter: DateAdapter<D>,
+        @Optional() private dir?: Directionality
+    ) {
         if (!this.dateAdapter) {
             throw createMissingDateImplError('DateAdapter');
         }
 
-        if (!this._dateFormats) {
+        if (!this.dateFormats) {
             throw createMissingDateImplError('MC_DATE_FORMATS');
         }
 
@@ -287,7 +289,7 @@ export class McMonthView<D> implements AfterContentInit {
                 this.dateAdapter.getYear(this.activeDate),
                 this.dateAdapter.getMonth(this.activeDate), i + 1);
             const enabled = this.shouldEnableDate(date);
-            const ariaLabel = this.dateAdapter.format(date, this._dateFormats.display.dateA11yLabel);
+            const ariaLabel = this.dateAdapter.format(date, this.dateFormats.display.dateA11yLabel);
             const cellClasses = this.dateClass ? this.dateClass(date) : undefined;
 
             this.weeks[this.weeks.length - 1]
@@ -328,6 +330,6 @@ export class McMonthView<D> implements AfterContentInit {
 
     /** Determines whether the user has the RTL layout direction. */
     private isRtl() {
-        return this._dir && this._dir.value === 'rtl';
+        return this.dir && this.dir.value === 'rtl';
     }
 }

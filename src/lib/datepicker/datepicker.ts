@@ -149,7 +149,7 @@ export class McDatepicker<D> implements OnDestroy, CanColor {
     }
 
     set startAt(value: D | null) {
-        this._startAt = this.getValidDateOrNull(this._dateAdapter.deserialize(value));
+        this._startAt = this.getValidDateOrNull(this.dateAdapter.deserialize(value));
     }
 
     /** Color palette to use on the datepicker's calendar. */
@@ -287,14 +287,14 @@ export class McDatepicker<D> implements OnDestroy, CanColor {
     /** Subscription to value changes in the associated input element. */
     private inputSubscription = Subscription.EMPTY;
 
-    constructor(private _overlay: Overlay,
-                private _ngZone: NgZone,
-                private _viewContainerRef: ViewContainerRef,
+    constructor(private overlay: Overlay,
+                private ngZone: NgZone,
+                private viewContainerRef: ViewContainerRef,
                 @Inject(MC_DATEPICKER_SCROLL_STRATEGY) scrollStrategy: any,
-                @Optional() private _dateAdapter: DateAdapter<D>,
-                @Optional() private _dir: Directionality,
-                @Optional() @Inject(DOCUMENT) private _document: any) {
-        if (!this._dateAdapter) {
+                @Optional() private dateAdapter: DateAdapter<D>,
+                @Optional() private dir: Directionality,
+                @Optional() @Inject(DOCUMENT) private document: any) {
+        if (!this.dateAdapter) {
             throw createMissingDateImplError('DateAdapter');
         }
 
@@ -316,7 +316,7 @@ export class McDatepicker<D> implements OnDestroy, CanColor {
     select(date: D): void {
         const oldValue = this.selected;
         this.selected = date;
-        if (!this._dateAdapter.sameDate(oldValue, this.selected)) {
+        if (!this.dateAdapter.sameDate(oldValue, this.selected)) {
             this.selectedChanged.next(date);
         }
     }
@@ -352,8 +352,8 @@ export class McDatepicker<D> implements OnDestroy, CanColor {
         if (!this.datepickerInput) {
             throw Error('Attempted to open an McDatepicker with no associated input.');
         }
-        if (this._document) {
-            this.focusedElementBeforeOpen = this._document.activeElement;
+        if (this.document) {
+            this.focusedElementBeforeOpen = this.document.activeElement;
         }
 
         this.openAsPopup();
@@ -404,7 +404,7 @@ export class McDatepicker<D> implements OnDestroy, CanColor {
     private openAsPopup(): void {
         if (!this.calendarPortal) {
             this.calendarPortal = new ComponentPortal<McDatepickerContent<D>>(McDatepickerContent,
-                this._viewContainerRef);
+                this.viewContainerRef);
         }
 
         if (!this.popupRef) {
@@ -417,7 +417,7 @@ export class McDatepicker<D> implements OnDestroy, CanColor {
             this.setColor();
 
             // Update the position once the calendar has rendered.
-            this._ngZone.onStable.asObservable().pipe(take(1)).subscribe(() => {
+            this.ngZone.onStable.asObservable().pipe(take(1)).subscribe(() => {
                 this.popupRef.updatePosition();
             });
         }
@@ -429,12 +429,12 @@ export class McDatepicker<D> implements OnDestroy, CanColor {
             positionStrategy: this.createPopupPositionStrategy(),
             hasBackdrop: true,
             backdropClass: 'mc-overlay-transparent-backdrop',
-            direction: this._dir,
+            direction: this.dir,
             scrollStrategy: this.scrollStrategy(),
             panelClass: 'mc-datepicker__popup'
         });
 
-        this.popupRef = this._overlay.create(overlayConfig);
+        this.popupRef = this.overlay.create(overlayConfig);
         this.popupRef.overlayElement.setAttribute('role', 'dialog');
 
         merge(
@@ -450,7 +450,7 @@ export class McDatepicker<D> implements OnDestroy, CanColor {
 
     /** Create the popup PositionStrategy. */
     private createPopupPositionStrategy(): IPositionStrategy {
-        return this._overlay.position()
+        return this.overlay.position()
             .flexibleConnectedTo(this.datepickerInput.elementRef)
             .withTransformOriginOn('.mc-datepicker__content')
             .withFlexibleDimensions(false)
@@ -489,7 +489,7 @@ export class McDatepicker<D> implements OnDestroy, CanColor {
      * @returns The given object if it is both a date instance and valid, otherwise null.
      */
     private getValidDateOrNull(obj: any): D | null {
-        return (this._dateAdapter.isDateInstance(obj) && this._dateAdapter.isValid(obj)) ? obj : null;
+        return (this.dateAdapter.isDateInstance(obj) && this.dateAdapter.isValid(obj)) ? obj : null;
     }
 
     /** Passes the current theme color along to the calendar overlay. */

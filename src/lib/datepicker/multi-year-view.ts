@@ -124,9 +124,11 @@ export class McMultiYearView<D> implements AfterContentInit {
     private _minDate: D | null;
     private _maxDate: D | null;
 
-    constructor(private changeDetectorRef: ChangeDetectorRef,
-                @Optional() public dateAdapter: DateAdapter<D>,
-                @Optional() private _dir?: Directionality) {
+    constructor(
+        private changeDetectorRef: ChangeDetectorRef,
+        @Optional() public dateAdapter: DateAdapter<D>,
+        @Optional() private dir?: Directionality
+    ) {
         if (!this.dateAdapter) {
             throw createMissingDateImplError('DateAdapter');
         }
@@ -276,6 +278,6 @@ export class McMultiYearView<D> implements AfterContentInit {
 
     /** Determines whether the user has the RTL layout direction. */
     private isRtl() {
-        return this._dir && this._dir.value === 'rtl';
+        return this.dir && this.dir.value === 'rtl';
     }
 }

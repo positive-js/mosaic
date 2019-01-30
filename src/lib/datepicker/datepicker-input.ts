@@ -214,7 +214,8 @@ export class McDatepickerInput<D> implements ControlValueAccessor, OnDestroy, Va
         public elementRef: ElementRef<HTMLInputElement>,
         @Optional() public dateAdapter: DateAdapter<D>,
         @Optional() @Inject(MC_DATE_FORMATS) private dateFormats: McDateFormats,
-        @Optional() private formField: McFormField) {
+        @Optional() private formField: McFormField
+    ) {
         if (!this.dateAdapter) {
             throw createMissingDateImplError('DateAdapter');
         }

@@ -76,8 +76,8 @@ export class McDatepickerToggle<D> implements AfterContentInit, OnChanges, OnDes
     constructor(
         public intl: McDatepickerIntl,
         private changeDetectorRef: ChangeDetectorRef,
-        @Attribute('tabindex') defaultTabIndex: string) {
-
+        @Attribute('tabindex') defaultTabIndex: string
+    ) {
         const parsedTabIndex = Number(defaultTabIndex);
         this.tabIndex = (parsedTabIndex || parsedTabIndex === 0) ? parsedTabIndex : null;
     }
