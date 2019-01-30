@@ -71,7 +71,7 @@ export class McDatepickerToggle<D> implements AfterContentInit, OnChanges, OnDes
     @ViewChild('button') button: McButton;
     private stateChanges = Subscription.EMPTY;
 
-    private _disabled: boolean | null;
+    private _disabled: boolean | undefined;
 
     constructor(
         public intl: McDatepickerIntl,

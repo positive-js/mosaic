@@ -270,7 +270,7 @@ export class McDatepicker<D> implements OnDestroy, CanColor {
     readonly selectedChanged = new Subject<D>();
     private scrollStrategy: () => IScrollStrategy;
     private _startAt: D | null;
-    private _disabled: boolean | null;
+    private _disabled: boolean | undefined;
     private _opened = false;
     private validSelected: D | null = null;
     private _color: ThemePalette;
