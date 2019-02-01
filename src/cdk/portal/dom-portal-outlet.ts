@@ -1,4 +1,3 @@
-
 import {
     ComponentFactoryResolver,
     ComponentRef,
@@ -30,7 +29,8 @@ export class DomPortalOutlet extends BasePortalOutlet {
      * @returns Reference to the created component.
      */
     attachComponentPortal<T>(portal: ComponentPortal<T>): ComponentRef<T> {
-        let componentFactory = this._componentFactoryResolver.resolveComponentFactory(portal.component); //tslint:disable-line
+        const resolver = portal.componentFactoryResolver || this._componentFactoryResolver;
+        const componentFactory = resolver.resolveComponentFactory(portal.component);
         let componentRef: ComponentRef<T>;
 
         // If the portal specifies a ViewContainerRef, we will use that as the attachment point
@@ -41,7 +41,7 @@ export class DomPortalOutlet extends BasePortalOutlet {
             componentRef = portal.viewContainerRef.createComponent(
                 componentFactory,
                 portal.viewContainerRef.length,
-                portal.injector || portal.viewContainerRef.parentInjector); //tslint:disable-line
+                portal.injector || portal.viewContainerRef.injector);
 
             this.setDisposeFn(() => componentRef.destroy());
         } else {
@@ -54,7 +54,7 @@ export class DomPortalOutlet extends BasePortalOutlet {
         }
         // At this point the component has been instantiated, so we move it to the location in the DOM
         // where we want it to be rendered.
-        this.outletElement.appendChild(this._getComponentRootNode(componentRef));
+        this.outletElement.appendChild(this.getComponentRootNode(componentRef));
 
         return componentRef;
     }
@@ -96,7 +96,7 @@ export class DomPortalOutlet extends BasePortalOutlet {
     }
 
     /** Gets the root HTMLElement for an instantiated component. */
-    private _getComponentRootNode(componentRef: ComponentRef<any>): HTMLElement {
+    private getComponentRootNode(componentRef: ComponentRef<any>): HTMLElement {
         return (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
     }
 }

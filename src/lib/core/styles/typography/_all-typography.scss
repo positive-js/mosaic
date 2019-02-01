@@ -12,6 +12,7 @@
 @import '../../../modal/modal-theme';
 @import '../../../navbar/navbar-theme';
 @import '../../option/option-theme';
+@import '../../../sidepanel/sidepanel-theme';
 @import '../../../radio/radio-theme';
 @import '../../../tabs/tabs-theme';
 @import '../../../tag/tag-theme';
@@ -41,6 +42,8 @@
     @include mc-modal-typography($config);
     @include mc-navbar-typography($config);
     @include mc-option-typography($config);
+    @include mc-sidepanel-typography($config);
+    @include mc-tag-typography($config);
     @include mc-radio-typography($config);
     @include mc-tabs-typography($config);
     @include mc-textarea-typography($config);

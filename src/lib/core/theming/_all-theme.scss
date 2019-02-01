@@ -25,6 +25,8 @@
 @import '../../textarea/textarea-theme';
 @import '../../tooltip/tooltip-theme';
 @import '../../toggle/toggle-theme';
+@import '../../splitter/splitter-theme';
+@import '../../sidepanel/sidepanel-theme';
 @import '../../tree/tree-theme';
 @import '../visual/panel-theme';
 
@@ -59,5 +61,8 @@
     @include mc-textarea-theme($theme);
     @include mc-toggle-theme($theme);
     @include mc-tooltip-theme($theme);
+    @include mc-textarea-theme($theme);
+    @include mc-splitter-theme($theme);
+    @include mc-sidepanel-theme($theme);
     @include mc-tree-theme($theme);
 }
