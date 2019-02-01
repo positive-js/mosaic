@@ -15,7 +15,7 @@ import {
     TrackByFunction,
     ViewContainerRef
 } from '@angular/core';
-import { ArrayDataSource, ICollectionViewer, DataSource, ListRange } from '@ptsecurity/cdk/collections';
+import { ArrayDataSource, ICollectionViewer, DataSource, ListRange, isDataSource } from '@ptsecurity/cdk/collections';
 import { Observable, Subject } from 'rxjs';
 import { pairwise, shareReplay, startWith, switchMap, takeUntil } from 'rxjs/operators';
 
@@ -73,7 +73,7 @@ export class CdkVirtualForOf<T> implements ICollectionViewer, DoCheck, OnDestroy
 
     set cdkVirtualForOf(value: DataSource<T> | Observable<T[]> | NgIterable<T>) {
         this._cdkVirtualForOf = value;
-        const ds = value instanceof DataSource ? value :
+        const ds = isDataSource(value) ? value :
             // Slice the value if its an NgIterable to ensure we're working with an array.
             new ArrayDataSource<T>(
                 value instanceof Observable ? value : Array.prototype.slice.call(value || []));

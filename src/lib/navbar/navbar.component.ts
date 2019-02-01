@@ -78,7 +78,7 @@ export const _McNavbarMixinBase: CanDisableCtor & typeof McNavbarItemBase = mixi
             class="mc-navbar-item"
         >
             <ng-content></ng-content>
-            <i *ngIf="hasDropdownContent" mc-icon="mc-angle-M_16"></i>
+            <i *ngIf="hasDropdownContent" mc-icon="mc-angle-down-M_16"></i>
         </a>
         <ul
             #dropdownContent

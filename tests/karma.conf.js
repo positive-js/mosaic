@@ -17,6 +17,8 @@ module.exports = (config) => {
         files: [
             {pattern: 'node_modules/core-js/client/core.min.js', included: true, watched: false},
             {pattern: 'node_modules/tslib/tslib.js', included: false, watched: false},
+            {pattern: 'node_modules/moment/moment.js', included: true, watched: false},
+            {pattern: 'node_modules/messageformat/messageformat.js', included: true, watched: false},
             {pattern: 'node_modules/systemjs/dist/system.js', included: true, watched: false},
             {pattern: 'node_modules/zone.js/dist/zone.min.js', included: true, watched: false},
             {pattern: 'node_modules/zone.js/dist/proxy.min.js', included: true, watched: false},

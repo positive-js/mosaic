@@ -1,6 +1,6 @@
 import { createPackageBuildTasks } from '../packages';
 
-import { cdkPackage, examplesPackage, mosaicPackage } from './packages';
+import { cdkPackage, examplesPackage, mosaicPackage, mosaicDateAdapterPackage } from './packages';
 
 /* tslint:disable:no-import-side-effect ordered-imports */
 // THIS ORDER OF IMPORTS AND CALLS IS IMPORTANT
@@ -9,6 +9,7 @@ import './tasks/example-module';
 
 
 createPackageBuildTasks(cdkPackage);
+createPackageBuildTasks(mosaicDateAdapterPackage);
 createPackageBuildTasks(mosaicPackage);
 createPackageBuildTasks(examplesPackage, ['build-examples-module']);
 

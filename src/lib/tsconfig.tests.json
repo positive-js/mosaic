@@ -7,7 +7,8 @@
         "types": ["jasmine"],
         "paths": {
             "@ptsecurity/mosaic/*": ["./*"],
-            "@ptsecurity/cdk/*": ["../../dist/packages/cdk/*"]
+            "@ptsecurity/cdk/*": ["../../dist/packages/cdk/*"],
+            "@ptsecurity/mosaic-moment-adapter/*": ["../../dist/packages/mosaic-moment-adapter/*"]
         }
     },
     "angularCompilerOptions": {
