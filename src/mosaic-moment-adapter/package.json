@@ -1,7 +1,7 @@
 {
     "name": "@ptsecurity/mosaic-moment-adapter",
     "version": "0.0.0-PLACEHOLDER",
-    "description": "Mosaic Date Adapter",
+    "description": "Mosaic Moment Adapter",
     "main": "./bundles/mosaic-moment-adapter.umd.js",
     "module": "./esm5/mosaic-moment-adapter.es5.js",
     "es2015": "./esm2015/mosaic-moment-adapter.js",
@@ -10,11 +10,6 @@
         "type": "git",
         "url": "https://github.com/positive-js/mosaic.git"
     },
-    "keywords": [
-        "mosaic",
-        "date-adapter",
-        "development"
-    ],
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/positive-js/mosaic/issues"
@@ -22,10 +17,9 @@
     "homepage": "https://github.com/positive-js/mosaic#readme",
     "peerDependencies": {
         "@angular/core": "0.0.0-NG",
-        "@angular/common": "0.0.0-NG",
         "@ptsecurity/cdk": "0.0.0-PLACEHOLDER",
-        "messageformat": "2.0.5",
-        "moment": "2.24.0"
+        "messageformat": "^2.0.5",
+        "moment": "^2.24.0"
     },
     "dependencies": {
         "tslib": "^1.7.1"

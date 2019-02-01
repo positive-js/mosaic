@@ -4,23 +4,22 @@
         "importHelpers": false,
         "module": "commonjs",
         "target": "es5",
-        "types": ["jasmine"],
-        "experimentalDecorators": true,
-        "paths": {
-            "@ptsecurity/cdk/*": ["../../dist/packages/cdk/*"],
-            "@ptsecurity/mosaic-moment-adapter/*": ["./*"]
-        }
+        "types": ["jasmine"]
     },
     "angularCompilerOptions": {
         "strictMetadataEmit": true,
         "skipTemplateCodegen": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "fullTemplateTypeCheck": true
+        "fullTemplateTypeCheck": true,
+
+        // Unset options inherited from tsconfig-build
+        "annotateForClosureCompiler": false,
+        "flatModuleOutFile": null,
+        "flatModuleId": null
     },
     "include": [
-        // Include the index.ts for each secondary entry-point
-        "./*/index.ts",
-        "**/*.spec.ts"
+        "**/*.spec.ts",
+        "index.ts"
     ]
 }

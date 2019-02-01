@@ -3,19 +3,32 @@ import { Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Directionality } from '@ptsecurity/cdk/bidi';
-import { MosaicDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
+import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 
 import { McCalendar } from './calendar';
 import { McDatepickerIntl } from './datepicker-intl';
 import { McDatepickerModule } from './datepicker-module';
 import { yearsPerPage } from './multi-year-view';
 
+// Depending on whether rollup is used, moment needs to be imported differently.
+// Since Moment.js doesn't have a default export, we normally need to import using the `* as`
+// syntax. However, rollup creates a synthetic default module and we thus need to import it using
+// the `default as` syntax.
+// tslint:disable-next-line:ordered-imports
+import * as _moment from 'moment';
+// @ts-ignore
+// tslint:disable-next-line:no-duplicate-imports
+import { default as _rollupMoment, Moment } from 'moment';
+
+
+// tslint:disable-next-line
+const moment = _rollupMoment || _moment;
 
 describe('McCalendarHeader', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
-                MosaicDateModule,
+                McMomentDateModule,
                 McDatepickerModule
             ],
             declarations: [
@@ -38,7 +51,7 @@ describe('McCalendarHeader', () => {
         let periodButton: HTMLElement;
         let prevButton: HTMLElement;
         let nextButton: HTMLElement;
-        let calendarInstance: McCalendar<Date>;
+        let calendarInstance: McCalendar<Moment>;
 
         beforeEach(() => {
             fixture = TestBed.createComponent(StandardCalendar);
@@ -56,7 +69,7 @@ describe('McCalendarHeader', () => {
 
         it('should be in month view with specified month active', () => {
             expect(calendarInstance.currentView).toBe('month');
-            expect(calendarInstance.activeDate).toEqual(new Date(2017, 0, 31));
+            expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2017, 0, 31));
         });
 
         it('should toggle view when period clicked', () => {
@@ -74,17 +87,17 @@ describe('McCalendarHeader', () => {
         });
 
         it('should go to next and previous month', () => {
-            expect(calendarInstance.activeDate).toEqual(new Date(2017, 0, 31));
+            expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2017, 0, 31));
 
             nextButton.click();
             fixture.detectChanges();
 
-            expect(calendarInstance.activeDate).toEqual(new Date(2017, 1, 28));
+            expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2017, 1, 28));
 
             prevButton.click();
             fixture.detectChanges();
 
-            expect(calendarInstance.activeDate).toEqual(new Date(2017, 0, 28));
+            expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2017, 0, 28));
         });
 
         it('should go to previous and next year', () => {
@@ -92,7 +105,7 @@ describe('McCalendarHeader', () => {
             fixture.detectChanges();
 
             expect(calendarInstance.currentView).toBe('multi-year');
-            expect(calendarInstance.activeDate).toEqual(new Date(2017, 0, 31));
+            expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2017, 0, 31));
 
             (calendarElement.querySelector('.mc-calendar__body_active') as HTMLElement).click();
             fixture.detectChanges();
@@ -102,12 +115,12 @@ describe('McCalendarHeader', () => {
             nextButton.click();
             fixture.detectChanges();
 
-            expect(calendarInstance.activeDate).toEqual(new Date(2018, 0, 31));
+            expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2018, 0, 31));
 
             prevButton.click();
             fixture.detectChanges();
 
-            expect(calendarInstance.activeDate).toEqual(new Date(2017, 0, 31));
+            expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2017, 0, 31));
         });
 
         it('should go to previous and next multi-year range', () => {
@@ -115,17 +128,17 @@ describe('McCalendarHeader', () => {
             fixture.detectChanges();
 
             expect(calendarInstance.currentView).toBe('multi-year');
-            expect(calendarInstance.activeDate).toEqual(new Date(2017, 0, 31));
+            expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2017, 0, 31));
 
             nextButton.click();
             fixture.detectChanges();
 
-            expect(calendarInstance.activeDate).toEqual(new Date(yearsPerPage + 2017, 0, 31));
+            expect(calendarInstance.activeDate.toDate()).toEqual(new Date(yearsPerPage + 2017, 0, 31));
 
             prevButton.click();
             fixture.detectChanges();
 
-            expect(calendarInstance.activeDate).toEqual(new Date(2017, 0, 31));
+            expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2017, 0, 31));
         });
 
         it('should go back to month view after selecting year and month', () => {
@@ -133,21 +146,21 @@ describe('McCalendarHeader', () => {
             fixture.detectChanges();
 
             expect(calendarInstance.currentView).toBe('multi-year');
-            expect(calendarInstance.activeDate).toEqual(new Date(2017, 0, 31));
+            expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2017, 0, 31));
 
             const yearCells = calendarElement.querySelectorAll('.mc-calendar__body-cell');
             (yearCells[0] as HTMLElement).click();
             fixture.detectChanges();
 
             expect(calendarInstance.currentView).toBe('year');
-            expect(calendarInstance.activeDate).toEqual(new Date(2016, 0, 31));
+            expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2016, 0, 31));
 
             const monthCells = calendarElement.querySelectorAll('.mc-calendar__body-cell');
             (monthCells[monthCells.length - 1] as HTMLElement).click();
             fixture.detectChanges();
 
             expect(calendarInstance.currentView).toBe('month');
-            expect(calendarInstance.activeDate).toEqual(new Date(2016, 11, 31));
+            expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2016, 11, 31));
             expect(testComponent.selected).toBeFalsy('no date should be selected yet');
         });
 
@@ -164,8 +177,8 @@ describe('McCalendarHeader', () => {
         </mc-calendar>`
 })
 class StandardCalendar {
-    selected: Date;
-    selectedYear: Date;
-    selectedMonth: Date;
-    startDate = new Date(2017, 0, 31);
+    selected: Moment;
+    selectedYear: Moment;
+    selectedMonth: Moment;
+    startDate = moment([2017, 0, 31]);
 }

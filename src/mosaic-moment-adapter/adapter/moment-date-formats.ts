@@ -1,7 +1,7 @@
 import { McDateFormats } from '@ptsecurity/cdk/datetime';
 
 
-export const MC_MOSAIC_DATE_FORMATS: McDateFormats = {
+export const MC_MOMENT_DATE_FORMATS: McDateFormats = {
     parse: {
         dateInput: 'L'
     },

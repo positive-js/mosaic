@@ -14,11 +14,24 @@ import {
     UP_ARROW
 } from '@ptsecurity/cdk/keycodes';
 import { dispatchFakeEvent, dispatchKeyboardEvent } from '@ptsecurity/cdk/testing';
-import { MosaicDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
+import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 
 import { McCalendarBody } from './calendar-body';
 import { McMultiYearView, yearsPerPage, yearsPerRow } from './multi-year-view';
 
+// Depending on whether rollup is used, moment needs to be imported differently.
+// Since Moment.js doesn't have a default export, we normally need to import using the `* as`
+// syntax. However, rollup creates a synthetic default module and we thus need to import it using
+// the `default as` syntax.
+// tslint:disable-next-line:ordered-imports
+import * as _moment from 'moment';
+// @ts-ignore
+// tslint:disable-next-line:no-duplicate-imports
+import { default as _rollupMoment, Moment } from 'moment';
+
+
+// tslint:disable-next-line
+const moment = _rollupMoment || _moment;
 
 describe('McMultiYearView', () => {
     let dir: { value: Direction };
@@ -26,7 +39,7 @@ describe('McMultiYearView', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
-                MosaicDateModule
+                McMomentDateModule
             ],
             declarations: [
                 McCalendarBody,
@@ -69,7 +82,7 @@ describe('McMultiYearView', () => {
         });
 
         it('does not show selected year if in different range', () => {
-            testComponent.selected = new Date(2040, 0, 10);
+            testComponent.selected = moment([2040, 0, 10]);
             fixture.detectChanges();
 
             const selectedEl = multiYearViewNativeElement.querySelector('.mc-calendar__body_selected');
@@ -91,8 +104,8 @@ describe('McMultiYearView', () => {
             (cellEls[1] as HTMLElement).click();
             fixture.detectChanges();
 
-            const normalizedYear: Date = fixture.componentInstance.selectedYear;
-            expect(normalizedYear.getFullYear()).toEqual(2017);
+            const normalizedYear: Moment = fixture.componentInstance.selectedYear;
+            expect(normalizedYear.year()).toEqual(2017);
         });
 
         it('should mark active date', () => {
@@ -112,7 +125,7 @@ describe('McMultiYearView', () => {
                         fixture.debugElement.nativeElement.querySelector('.mc-calendar__body') as HTMLElement;
                     expect(calendarBodyEl).not.toBeNull();
                     dir.value = 'ltr';
-                    fixture.componentInstance.date = new Date(2017, 0, 1);
+                    fixture.componentInstance.date = moment([2017, 0, 1]);
                     dispatchFakeEvent(calendarBodyEl, 'focus');
                     fixture.detectChanges();
                 });
@@ -121,37 +134,37 @@ describe('McMultiYearView', () => {
                     dispatchKeyboardEvent(calendarBodyEl, 'keydown', LEFT_ARROW);
                     fixture.detectChanges();
 
-                    expect(calendarInstance.date).toEqual(new Date(2016, 0, 1));
+                    expect(calendarInstance.date.toDate()).toEqual(new Date(2016, 0, 1));
 
                     dispatchKeyboardEvent(calendarBodyEl, 'keydown', LEFT_ARROW);
                     fixture.detectChanges();
 
-                    expect(calendarInstance.date).toEqual(new Date(2015, 0, 1));
+                    expect(calendarInstance.date.toDate()).toEqual(new Date(2015, 0, 1));
                 });
 
                 it('should increment year on right arrow press', () => {
                     dispatchKeyboardEvent(calendarBodyEl, 'keydown', RIGHT_ARROW);
                     fixture.detectChanges();
 
-                    expect(calendarInstance.date).toEqual(new Date(2018, 0, 1));
+                    expect(calendarInstance.date.toDate()).toEqual(new Date(2018, 0, 1));
 
                     dispatchKeyboardEvent(calendarBodyEl, 'keydown', RIGHT_ARROW);
                     fixture.detectChanges();
 
-                    expect(calendarInstance.date).toEqual(new Date(2019, 0, 1));
+                    expect(calendarInstance.date.toDate()).toEqual(new Date(2019, 0, 1));
                 });
 
                 it('should go up a row on up arrow press', () => {
                     dispatchKeyboardEvent(calendarBodyEl, 'keydown', UP_ARROW);
                     fixture.detectChanges();
 
-                    expect(calendarInstance.date)
+                    expect(calendarInstance.date.toDate())
                         .toEqual(new Date(2017 - yearsPerRow, 0, 1));
 
                     dispatchKeyboardEvent(calendarBodyEl, 'keydown', UP_ARROW);
                     fixture.detectChanges();
 
-                    expect(calendarInstance.date)
+                    expect(calendarInstance.date.toDate())
                         .toEqual(new Date(2017 - yearsPerRow * 2, 0, 1));
                 });
 
@@ -159,13 +172,13 @@ describe('McMultiYearView', () => {
                     dispatchKeyboardEvent(calendarBodyEl, 'keydown', DOWN_ARROW);
                     fixture.detectChanges();
 
-                    expect(calendarInstance.date)
+                    expect(calendarInstance.date.toDate())
                         .toEqual(new Date(yearsPerRow + 2017, 0, 1));
 
                     dispatchKeyboardEvent(calendarBodyEl, 'keydown', DOWN_ARROW);
                     fixture.detectChanges();
 
-                    expect(calendarInstance.date)
+                    expect(calendarInstance.date.toDate())
                         .toEqual(new Date(yearsPerRow * 2 + 2017, 0, 1));
                 });
 
@@ -173,37 +186,37 @@ describe('McMultiYearView', () => {
                     dispatchKeyboardEvent(calendarBodyEl, 'keydown', HOME);
                     fixture.detectChanges();
 
-                    expect(calendarInstance.date).toEqual(new Date(2016, 0, 1));
+                    expect(calendarInstance.date.toDate()).toEqual(new Date(2016, 0, 1));
 
                     dispatchKeyboardEvent(calendarBodyEl, 'keydown', HOME);
                     fixture.detectChanges();
 
-                    expect(calendarInstance.date).toEqual(new Date(2016, 0, 1));
+                    expect(calendarInstance.date.toDate()).toEqual(new Date(2016, 0, 1));
                 });
 
                 it('should go to last year in current range on end press', () => {
                     dispatchKeyboardEvent(calendarBodyEl, 'keydown', END);
                     fixture.detectChanges();
 
-                    expect(calendarInstance.date).toEqual(new Date(2039, 0, 1));
+                    expect(calendarInstance.date.toDate()).toEqual(new Date(2039, 0, 1));
 
                     dispatchKeyboardEvent(calendarBodyEl, 'keydown', END);
                     fixture.detectChanges();
 
-                    expect(calendarInstance.date).toEqual(new Date(2039, 0, 1));
+                    expect(calendarInstance.date.toDate()).toEqual(new Date(2039, 0, 1));
                 });
 
                 it('should go to same index in previous year range page up press', () => {
                     dispatchKeyboardEvent(calendarBodyEl, 'keydown', PAGE_UP);
                     fixture.detectChanges();
 
-                    expect(calendarInstance.date)
+                    expect(calendarInstance.date.toDate())
                         .toEqual(new Date(2017 - yearsPerPage, 0, 1));
 
                     dispatchKeyboardEvent(calendarBodyEl, 'keydown', PAGE_UP);
                     fixture.detectChanges();
 
-                    expect(calendarInstance.date)
+                    expect(calendarInstance.date.toDate())
                         .toEqual(new Date(2017 - yearsPerPage * 2, 0, 1));
                 });
 
@@ -211,13 +224,13 @@ describe('McMultiYearView', () => {
                     dispatchKeyboardEvent(calendarBodyEl, 'keydown', PAGE_DOWN);
                     fixture.detectChanges();
 
-                    expect(calendarInstance.date)
+                    expect(calendarInstance.date.toDate())
                         .toEqual(new Date(yearsPerPage + 2017, 0, 1));
 
                     dispatchKeyboardEvent(calendarBodyEl, 'keydown', PAGE_DOWN);
                     fixture.detectChanges();
 
-                    expect(calendarInstance.date)
+                    expect(calendarInstance.date.toDate())
                         .toEqual(new Date(yearsPerPage * 2 + 2017, 0, 1));
                 });
 
@@ -253,11 +266,11 @@ describe('McMultiYearView', () => {
                             (yearSelected)="selectedYear=$event"></mc-multi-year-view>`
 })
 class StandardMultiYearView {
-    date = new Date(2017, 0, 1);
-    selected = new Date(2020, 0, 1);
-    selectedYear: Date;
+    date = moment([2017, 0, 1]);
+    selected = moment([2020, 0, 1]);
+    selectedYear: Moment;
 
-    @ViewChild(McMultiYearView) multiYearView: McMultiYearView<Date>;
+    @ViewChild(McMultiYearView) multiYearView: McMultiYearView<Moment>;
 }
 
 @Component({
@@ -266,9 +279,9 @@ class StandardMultiYearView {
     `
 })
 class MultiYearViewWithDateFilter {
-    activeDate = new Date(2017, 0, 1);
+    activeDate = moment([2017, 0, 1]);
 
-    dateFilter(date: Date) {
-        return date.getFullYear() !== 2017;
+    dateFilter(date: Moment) {
+        return date.year() !== 2017;
     }
 }

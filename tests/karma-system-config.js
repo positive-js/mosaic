@@ -6,10 +6,9 @@ System.config({
     },
     map: {
         'rxjs': 'node:rxjs',
-        'moment': 'node:moment',
-        'messageformat': 'node:messageformat',
-        'main': 'main.js',
         'tslib': 'node:tslib/tslib.js',
+        'moment': 'node:moment/min/moment-with-locales.min.js',
+        'messageformat': 'node:messageformat',
 
         // Angular specific mappings.
         '@angular/core': 'node:@angular/core/bundles/core.umd.js',
@@ -83,8 +82,6 @@ System.config({
         // Thirdparty barrels.
         'rxjs': {main: 'index'},
         'rxjs/operators': {main: 'index'},
-        'moment': {main: 'moment'},
-        'messageformat': {main: 'messageformat'},
 
         // Set the default extension for the root package, because otherwise the demo-app can't
         // be built within the production mode. Due to missing file extensions.

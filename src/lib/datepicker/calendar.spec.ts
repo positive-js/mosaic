@@ -12,12 +12,25 @@ import {
     dispatchMouseEvent,
     MockNgZone
 } from '@ptsecurity/cdk/testing';
-import { MosaicDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
+import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 
 import { McCalendar } from './calendar';
 import { McDatepickerIntl } from './datepicker-intl';
 import { McDatepickerModule } from './datepicker-module';
 
+// Depending on whether rollup is used, moment needs to be imported differently.
+// Since Moment.js doesn't have a default export, we normally need to import using the `* as`
+// syntax. However, rollup creates a synthetic default module and we thus need to import it using
+// the `default as` syntax.
+// tslint:disable-next-line:ordered-imports
+import * as _moment from 'moment';
+// @ts-ignore
+// tslint:disable-next-line:no-duplicate-imports
+import { default as _rollupMoment, Moment } from 'moment';
+
+
+// tslint:disable-next-line
+const moment = _rollupMoment || _moment;
 
 describe('McCalendar', () => {
     let zone: MockNgZone;
@@ -25,7 +38,7 @@ describe('McCalendar', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
-                MosaicDateModule,
+                McMomentDateModule,
                 McDatepickerModule
             ],
             declarations: [
@@ -50,7 +63,7 @@ describe('McCalendar', () => {
         let testComponent: StandardCalendar;
         let calendarElement: HTMLElement;
         let periodButton: HTMLElement;
-        let calendarInstance: McCalendar<Date>;
+        let calendarInstance: McCalendar<Moment>;
 
         beforeEach(() => {
             fixture = TestBed.createComponent(StandardCalendar);
@@ -64,8 +77,8 @@ describe('McCalendar', () => {
             testComponent = fixture.componentInstance;
         });
 
-        it(`should update today's date`, inject([DateAdapter], (adapter: DateAdapter<Date>) => {
-            let fakeToday = new Date(2018, 0, 1);
+        it(`should update today's date`, inject([DateAdapter], (adapter: DateAdapter<Moment>) => {
+            let fakeToday = moment([2018, 0, 1]);
             spyOn(adapter, 'today').and.callFake(() => fakeToday);
 
             calendarInstance.activeDate = fakeToday;
@@ -76,7 +89,7 @@ describe('McCalendar', () => {
             expect(todayCell).not.toBeNull();
             expect(todayCell.innerHTML.trim()).toBe('1');
 
-            fakeToday = new Date(2018, 0, 10);
+            fakeToday = moment([2018, 0, 10]);
             calendarInstance.updateTodaysDate();
             fixture.detectChanges();
 
@@ -87,7 +100,7 @@ describe('McCalendar', () => {
 
         it('should be in month view with specified month active', () => {
             expect(calendarInstance.currentView).toBe('month');
-            expect(calendarInstance.activeDate).toEqual(new Date(2017, 0, 31));
+            expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2017, 0, 31));
         });
 
         it('should select date in month view', () => {
@@ -96,7 +109,7 @@ describe('McCalendar', () => {
             fixture.detectChanges();
 
             expect(calendarInstance.currentView).toBe('month');
-            expect(testComponent.selected).toEqual(new Date(2017, 0, 31));
+            expect(testComponent.selected.toDate()).toEqual(new Date(2017, 0, 31));
         });
 
         it('should emit the selected month on cell clicked in year view', () => {
@@ -104,7 +117,7 @@ describe('McCalendar', () => {
             fixture.detectChanges();
 
             expect(calendarInstance.currentView).toBe('multi-year');
-            expect(calendarInstance.activeDate).toEqual(new Date(2017, 0, 31));
+            expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2017, 0, 31));
 
             (calendarElement.querySelector('.mc-calendar__body_active') as HTMLElement).click();
 
@@ -114,8 +127,8 @@ describe('McCalendar', () => {
 
             (calendarElement.querySelector('.mc-calendar__body_active') as HTMLElement).click();
 
-            const normalizedMonth: Date = fixture.componentInstance.selectedMonth;
-            expect(normalizedMonth.getMonth()).toEqual(0);
+            const normalizedMonth: Moment = fixture.componentInstance.selectedMonth;
+            expect(normalizedMonth.month()).toEqual(0);
         });
 
         it('should emit the selected year on cell clicked in multiyear view', () => {
@@ -123,14 +136,14 @@ describe('McCalendar', () => {
             fixture.detectChanges();
 
             expect(calendarInstance.currentView).toBe('multi-year');
-            expect(calendarInstance.activeDate).toEqual(new Date(2017, 0, 31));
+            expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2017, 0, 31));
 
             (calendarElement.querySelector('.mc-calendar__body_active') as HTMLElement).click();
 
             fixture.detectChanges();
 
-            const normalizedYear: Date = fixture.componentInstance.selectedYear;
-            expect(normalizedYear.getFullYear()).toEqual(2017);
+            const normalizedYear: Moment = fixture.componentInstance.selectedYear;
+            expect(normalizedYear.year()).toEqual(2017);
         });
 
         it('should re-render when the i18n labels have changed',
@@ -173,7 +186,7 @@ describe('McCalendar', () => {
                 });
 
                 it('should initially set start date active', () => {
-                    expect(calendarInstance.activeDate).toEqual(new Date(2017, 0, 31));
+                    expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2017, 0, 31));
                 });
 
                 it('should make the calendar body focusable', () => {
@@ -231,7 +244,7 @@ describe('McCalendar', () => {
                         fixture.detectChanges();
 
                         expect(calendarInstance.currentView).toBe('month');
-                        expect(calendarInstance.activeDate).toEqual(new Date(2017, 1, 28));
+                        expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2017, 1, 28));
                         expect(testComponent.selected).toBeUndefined();
                     });
 
@@ -245,7 +258,7 @@ describe('McCalendar', () => {
                         fixture.detectChanges();
 
                         expect(calendarInstance.currentView).toBe('month');
-                        expect(calendarInstance.activeDate).toEqual(new Date(2017, 1, 28));
+                        expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2017, 1, 28));
                         expect(testComponent.selected).toBeUndefined();
                     });
                 });
@@ -268,7 +281,7 @@ describe('McCalendar', () => {
                         fixture.detectChanges();
 
                         expect(calendarInstance.currentView).toBe('year');
-                        expect(calendarInstance.activeDate).toEqual(new Date(2018, 0, 31));
+                        expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2018, 0, 31));
                         expect(testComponent.selected).toBeUndefined();
                     });
 
@@ -282,7 +295,7 @@ describe('McCalendar', () => {
                         fixture.detectChanges();
 
                         expect(calendarInstance.currentView).toBe('year');
-                        expect(calendarInstance.activeDate).toEqual(new Date(2018, 0, 31));
+                        expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2018, 0, 31));
                         expect(testComponent.selected).toBeUndefined();
                     });
 
@@ -297,7 +310,7 @@ describe('McCalendar', () => {
         let fixture: ComponentFixture<CalendarWithMinMax>;
         let testComponent: CalendarWithMinMax;
         let calendarElement: HTMLElement;
-        let calendarInstance: McCalendar<Date>;
+        let calendarInstance: McCalendar<Moment>;
 
         beforeEach(() => {
             fixture = TestBed.createComponent(CalendarWithMinMax);
@@ -309,68 +322,68 @@ describe('McCalendar', () => {
         });
 
         it('should clamp startAt value below min date', () => {
-            testComponent.startAt = new Date(2000, 0, 1);
+            testComponent.startAt = moment([2000, 0, 1]);
             fixture.detectChanges();
 
-            expect(calendarInstance.activeDate).toEqual(new Date(2016, 0, 1));
+            expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2016, 0, 1));
         });
 
         it('should clamp startAt value above max date', () => {
-            testComponent.startAt = new Date(2020, 0, 1);
+            testComponent.startAt = moment([2020, 0, 1]);
             fixture.detectChanges();
 
-            expect(calendarInstance.activeDate).toEqual(new Date(2018, 0, 1));
+            expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2018, 0, 1));
         });
 
         it('should not go back past min date', () => {
-            testComponent.startAt = new Date(2016, 1, 1);
+            testComponent.startAt = moment([2016, 1, 1]);
             fixture.detectChanges();
 
             const prevButton =
                 calendarElement.querySelector('.mc-calendar__previous-button') as HTMLButtonElement;
 
             expect(prevButton.disabled).toBe(false, 'previous button should not be disabled');
-            expect(calendarInstance.activeDate).toEqual(new Date(2016, 1, 1));
+            expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2016, 1, 1));
 
             prevButton.click();
             fixture.detectChanges();
 
             expect(prevButton.disabled).toBe(true, 'previous button should be disabled');
-            expect(calendarInstance.activeDate).toEqual(new Date(2016, 0, 1));
+            expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2016, 0, 1));
 
             prevButton.click();
             fixture.detectChanges();
 
-            expect(calendarInstance.activeDate).toEqual(new Date(2016, 0, 1));
+            expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2016, 0, 1));
         });
 
         it('should not go forward past max date', () => {
-            testComponent.startAt = new Date(2017, 11, 1);
+            testComponent.startAt = moment([2017, 11, 1]);
             fixture.detectChanges();
 
             const nextButton =
                 calendarElement.querySelector('.mc-calendar__next-button') as HTMLButtonElement;
 
             expect(nextButton.disabled).toBe(false, 'next button should not be disabled');
-            expect(calendarInstance.activeDate).toEqual(new Date(2017, 11, 1));
+            expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2017, 11, 1));
 
             nextButton.click();
             fixture.detectChanges();
 
             expect(nextButton.disabled).toBe(true, 'next button should be disabled');
-            expect(calendarInstance.activeDate).toEqual(new Date(2018, 0, 1));
+            expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2018, 0, 1));
 
             nextButton.click();
             fixture.detectChanges();
 
-            expect(calendarInstance.activeDate).toEqual(new Date(2018, 0, 1));
+            expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2018, 0, 1));
         });
 
         it('should re-render the month view when the minDate changes', () => {
             fixture.detectChanges();
             spyOn(calendarInstance.monthView, 'init').and.callThrough();
 
-            testComponent.minDate = new Date(2017, 10, 1);
+            testComponent.minDate = moment([2017, 10, 1]);
             fixture.detectChanges();
 
             expect(calendarInstance.monthView.init).toHaveBeenCalled();
@@ -380,7 +393,7 @@ describe('McCalendar', () => {
             fixture.detectChanges();
             spyOn(calendarInstance.monthView, 'init').and.callThrough();
 
-            testComponent.maxDate = new Date(2017, 11, 1);
+            testComponent.maxDate = moment([2017, 11, 1]);
             fixture.detectChanges();
 
             expect(calendarInstance.monthView.init).toHaveBeenCalled();
@@ -398,7 +411,7 @@ describe('McCalendar', () => {
 
             spyOn(calendarInstance.yearView, 'init').and.callThrough();
 
-            testComponent.minDate = new Date(2017, 10, 1);
+            testComponent.minDate = moment([2017, 10, 1]);
             fixture.detectChanges();
 
             expect(calendarInstance.yearView.init).toHaveBeenCalled();
@@ -416,7 +429,7 @@ describe('McCalendar', () => {
 
             spyOn(calendarInstance.yearView, 'init').and.callThrough();
 
-            testComponent.maxDate = new Date(2017, 11, 1);
+            testComponent.maxDate = moment([2017, 11, 1]);
             fixture.detectChanges();
 
             expect(calendarInstance.yearView.init).toHaveBeenCalled();
@@ -431,7 +444,7 @@ describe('McCalendar', () => {
 
             spyOn(calendarInstance.multiYearView, 'init').and.callThrough();
 
-            testComponent.minDate = new Date(2017, 10, 1);
+            testComponent.minDate = moment([2017, 10, 1]);
             fixture.detectChanges();
 
             expect(calendarInstance.multiYearView.init).toHaveBeenCalled();
@@ -446,7 +459,7 @@ describe('McCalendar', () => {
 
             spyOn(calendarInstance.multiYearView, 'init').and.callThrough();
 
-            testComponent.maxDate = new Date(2017, 11, 1);
+            testComponent.maxDate = moment([2017, 11, 1]);
             fixture.detectChanges();
 
             expect(calendarInstance.multiYearView.init).toHaveBeenCalled();
@@ -488,7 +501,7 @@ describe('McCalendar', () => {
         let fixture: ComponentFixture<CalendarWithDateFilter>;
         let testComponent: CalendarWithDateFilter;
         let calendarElement: HTMLElement;
-        let calendarInstance: McCalendar<Date>;
+        let calendarInstance: McCalendar<Moment>;
 
         beforeEach(() => {
             fixture = TestBed.createComponent(CalendarWithDateFilter);
@@ -510,7 +523,7 @@ describe('McCalendar', () => {
             (cells[1] as HTMLElement).click();
             fixture.detectChanges();
 
-            expect(testComponent.selected).toEqual(new Date(2017, 0, 2));
+            expect(testComponent.selected.toDate()).toEqual(new Date(2017, 0, 2));
         });
 
         describe('a11y', () => {
@@ -526,7 +539,7 @@ describe('McCalendar', () => {
 
             it('should not allow selection of disabled date in month view', () => {
                 expect(calendarInstance.currentView).toBe('month');
-                expect(calendarInstance.activeDate).toEqual(new Date(2017, 0, 1));
+                expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2017, 0, 1));
 
                 dispatchKeyboardEvent(tableBodyEl, 'keydown', ENTER);
                 fixture.detectChanges();
@@ -543,7 +556,7 @@ describe('McCalendar', () => {
                 (calendarElement.querySelector('.mc-calendar__body_active') as HTMLElement).click();
                 fixture.detectChanges();
 
-                calendarInstance.activeDate = new Date(2017, 10, 1);
+                calendarInstance.activeDate = moment([2017, 10, 1]);
                 fixture.detectChanges();
 
                 expect(calendarInstance.currentView).toBe('year');
@@ -571,10 +584,10 @@ describe('McCalendar', () => {
         </mc-calendar>`
 })
 class StandardCalendar {
-    selected: Date;
-    selectedYear: Date;
-    selectedMonth: Date;
-    startDate = new Date(2017, 0, 31);
+    selected: Moment;
+    selectedYear: Moment;
+    selectedMonth: Moment;
+    startDate = moment([2017, 0, 31]);
 }
 
 
@@ -584,9 +597,9 @@ class StandardCalendar {
     `
 })
 class CalendarWithMinMax {
-    startAt: Date;
-    minDate = new Date(2016, 0, 1);
-    maxDate = new Date(2018, 0, 1);
+    startAt: Moment;
+    minDate = moment([2016, 0, 1]);
+    maxDate = moment([2018, 0, 1]);
 }
 
 
@@ -597,11 +610,11 @@ class CalendarWithMinMax {
     `
 })
 class CalendarWithDateFilter {
-    selected: Date;
-    startDate = new Date(2017, 0, 1);
+    selected: Moment;
+    startDate = moment([2017, 0, 1]);
 
-    dateFilter(date: Date) {
-        return !(date.getDate() % 2) && date.getMonth() !== 10;
+    dateFilter(date: Moment) {
+        return !(date.date() % 2) && date.month() !== 10;
     }
 }
 

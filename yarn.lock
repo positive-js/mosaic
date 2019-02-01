@@ -554,10 +554,10 @@
     "@types/undertaker" "*"
     "@types/vinyl-fs" "*"
 
-"@types/jasmine@^2.8.9":
-  version "2.8.14"
-  resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-2.8.14.tgz#42a87032418b7d70f427d1df16a9921fca28d8c7"
-  integrity sha512-oHgE8xWsIoJfP0qU/yi5xrzhkHvYJhD7m40pSC3pw4+BUKWFwqTz+BUosuuODh8KyRpLp1Fdaibr3If4cgNsCg==
+"@types/jasmine@^3.3.8":
+  version "3.3.8"
+  resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-3.3.8.tgz#fc6abd92f7121431685ec986f0ec8f77b4390a3e"
+  integrity sha512-BaOFpaddRVV8qykJoWHrHtamml880oh0+DIZWbtJgx0pu+KhDF1gER5hSfCIfzyMrbjMuYFnLUfyo1l0JUVU3Q==
 
 "@types/json5@^0.0.29":
   version "0.0.29"
@@ -6006,10 +6006,10 @@ istanbul@0.4.5, istanbul@^0.4.0:
     which "^1.1.1"
     wordwrap "^1.0.0"
 
-jasmine-core@~3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/jasmine-core/-/jasmine-core-3.2.1.tgz#8e4ff5b861603ee83343f2b49eee6a0ffe9650ce"
-  integrity sha512-pa9tbBWgU0EE4SWgc85T4sa886ufuQdsgruQANhECYjwqgV4z7Vw/499aCaP8ZH79JDS4vhm8doDG9HO4+e4sA==
+jasmine-core@^3.3, jasmine-core@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/jasmine-core/-/jasmine-core-3.3.0.tgz#dea1cdc634bc93c7e0d4ad27185df30fa971b10e"
+  integrity sha512-3/xSmG/d35hf80BEN66Y6g9Ca5l/Isdeg/j6zvbTYlTzeKinzmaTM4p9am5kYqOmE05D7s1t8FGjzdSnbUbceA==
 
 jest-get-type@^22.1.0:
   version "22.4.3"
@@ -6161,7 +6161,7 @@ just-debounce@^1.0.0:
   resolved "https://registry.yarnpkg.com/just-debounce/-/just-debounce-1.0.0.tgz#87fccfaeffc0b68cd19d55f6722943f929ea35ea"
   integrity sha1-h/zPrv/AtozRnVX2cilD+SnqNeo=
 
-karma-chrome-launcher@2.2.0:
+karma-chrome-launcher@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/karma-chrome-launcher/-/karma-chrome-launcher-2.2.0.tgz#cf1b9d07136cc18fe239327d24654c3dbc368acf"
   integrity sha512-uf/ZVpAabDBPvdPdveyk1EPgbnloPvFFGgmRhYLTDH7gEB4nZdSBk8yTU47w1g/drLSx5uMOkjKk7IWKfWg/+w==
@@ -6180,18 +6180,20 @@ karma-coverage@^1.1.2:
     minimatch "^3.0.0"
     source-map "^0.5.1"
 
-karma-jasmine@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/karma-jasmine/-/karma-jasmine-1.1.2.tgz#394f2b25ffb4a644b9ada6f22d443e2fd08886c3"
-  integrity sha1-OU8rJf+0pkS5rabyLUQ+L9CIhsM=
+karma-jasmine@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/karma-jasmine/-/karma-jasmine-2.0.1.tgz#26e3e31f2faf272dd80ebb0e1898914cc3a19763"
+  integrity sha512-iuC0hmr9b+SNn1DaUD2QEYtUxkS1J+bSJSn7ejdEexs7P8EYvA1CWkEdrDQ+8jVH3AgWlCNwjYsT1chjcNW9lA==
+  dependencies:
+    jasmine-core "^3.3"
 
-karma-junit-reporter@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/karma-junit-reporter/-/karma-junit-reporter-1.2.0.tgz#4f9c40cedfb1a395f8aef876abf96189917c6396"
-  integrity sha1-T5xAzt+xo5X4rvh2q/lhiZF8Y5Y=
+karma-junit-reporter@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/karma-junit-reporter/-/karma-junit-reporter-2.0.0.tgz#f84629e0e1ef28dd2977c96f346c33d5bf93e159"
+  integrity sha1-+EYp4OHvKN0pd8lvNGwz1b+T4Vk=
   dependencies:
     path-is-absolute "^1.0.0"
-    xmlbuilder "8.2.2"
+    xmlbuilder "3.1.0"
 
 karma-remap-coverage@^0.1.5:
   version "0.1.5"
@@ -6210,21 +6212,21 @@ karma-sauce-launcher@1.2.0:
     saucelabs "^1.4.0"
     wd "^1.4.0"
 
-karma-sourcemap-loader@0.3.7:
+karma-sourcemap-loader@^0.3.7:
   version "0.3.7"
   resolved "https://registry.yarnpkg.com/karma-sourcemap-loader/-/karma-sourcemap-loader-0.3.7.tgz#91322c77f8f13d46fed062b042e1009d4c4505d8"
   integrity sha1-kTIsd/jxPUb+0GKwQuEAnUxFBdg=
   dependencies:
     graceful-fs "^4.1.2"
 
-karma-spec-reporter@0.0.32:
+karma-spec-reporter@^0.0.32:
   version "0.0.32"
   resolved "https://registry.yarnpkg.com/karma-spec-reporter/-/karma-spec-reporter-0.0.32.tgz#2e9c7207ea726771260259f82becb543209e440a"
   integrity sha1-LpxyB+pyZ3EmAln4K+y1QyCeRAo=
   dependencies:
     colors "^1.1.2"
 
-karma@^3.1.3:
+karma@^3.1.4:
   version "3.1.4"
   resolved "https://registry.yarnpkg.com/karma/-/karma-3.1.4.tgz#3890ca9722b10d1d14b726e1335931455788499e"
   integrity sha512-31Vo8Qr5glN+dZEVIpnPCxEGleqE0EY6CtC2X9TagRV3rRQ3SNrvfhddICkJgUK3AgqpeKSZau03QumTGhGoSw==
@@ -6742,6 +6744,11 @@ lodash@4.17.11, lodash@^4.0.0, lodash@^4.13.1, lodash@^4.16.6, lodash@^4.17.0, l
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
   integrity sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
 
+lodash@^3.5.0:
+  version "3.10.1"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
+  integrity sha1-W/Rejkm6QYnhfUgnid/RW9FAt7Y=
+
 log-symbols@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/log-symbols/-/log-symbols-1.0.2.tgz#376ff7b58ea3086a0f09facc74617eca501e1a18"
@@ -7074,7 +7081,7 @@ messageformat-parser@^3.0.0:
   resolved "https://registry.yarnpkg.com/messageformat-parser/-/messageformat-parser-3.0.0.tgz#38ae9348eb4834ab19b3a8d682af7babb335f37a"
   integrity sha512-5KfDWGAHz5kzfKH5V4M7+o3CIFiykCfFDaLK+Ck2fkaxYfLWwKZMioxrSsMRnkfMr0ZaaC0gcxyOUb2d0GCy4A==
 
-messageformat@2.0.5:
+messageformat@^2.0.5:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/messageformat/-/messageformat-2.0.5.tgz#d3987ef91c8df37cd8dc473c47203a4bed0243b5"
   integrity sha512-iT9/DUx75LqDGepfhKJpCxsCxlMFlyW/E7pI1KZE+TcT+bDcoLJfnwamq5qyRWiFo+eND5joxik9QlzWhqYgIg==
@@ -7312,7 +7319,7 @@ module-lookup-amd@^6.1.0:
     requirejs "^2.3.5"
     requirejs-config-file "^3.1.1"
 
-moment@2.24.0:
+moment@^2.24.0:
   version "2.24.0"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
   integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
@@ -11814,10 +11821,12 @@ xhr2@^0.1.4:
   resolved "https://registry.yarnpkg.com/xml-name-validator/-/xml-name-validator-2.0.1.tgz#4d8b8f1eccd3419aa362061becef515e1e559635"
   integrity sha1-TYuPHszTQZqjYgYb7O9RXh5VljU=
 
-xmlbuilder@8.2.2:
-  version "8.2.2"
-  resolved "https://registry.yarnpkg.com/xmlbuilder/-/xmlbuilder-8.2.2.tgz#69248673410b4ba42e1a6136551d2922335aa773"
-  integrity sha1-aSSGc0ELS6QuGmE2VR0pIjNap3M=
+xmlbuilder@3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/xmlbuilder/-/xmlbuilder-3.1.0.tgz#2c86888f2d4eade850fa38ca7f7223f7209516e1"
+  integrity sha1-LIaIjy1OrehQ+jjKf3Ij9yCVFuE=
+  dependencies:
+    lodash "^3.5.0"
 
 xmlhttprequest-ssl@~1.5.4:
   version "1.5.5"
@@ -12025,7 +12034,7 @@ zip-stream@^1.2.0:
     lodash "^4.8.0"
     readable-stream "^2.0.0"
 
-zone.js@^0.8.26:
-  version "0.8.26"
-  resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.8.26.tgz#7bdd72f7668c5a7ad6b118148b4ea39c59d08d2d"
-  integrity sha512-W9Nj+UmBJG251wkCacIkETgra4QgBo/vgoEkb4a2uoLzpQG7qF9nzwoLXWU5xj3Fg2mxGvEDh47mg24vXccYjA==
+zone.js@^0.8.29:
+  version "0.8.29"
+  resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.8.29.tgz#8dce92aa0dd553b50bc5bfbb90af9986ad845a12"
+  integrity sha512-mla2acNCMkWXBD+c+yeUrBUrzOxYMNFdQ6FGfigGGtEVBPJx07BQeJekjt9DmH1FtZek4E9rE1eRR9qQpxACOQ==

@@ -145,6 +145,7 @@ export class McMonthView<D> implements AfterContentInit {
         @Optional() public dateAdapter: DateAdapter<D>,
         @Optional() private dir?: Directionality
     ) {
+
         if (!this.dateAdapter) {
             throw createMissingDateImplError('DateAdapter');
         }

@@ -20,7 +20,7 @@ function generateRollupEntryPoints(packageName: string, entryPoints: string[]):
 const cdkSecondaryEntryPoints = getSubdirectoryNames(join(buildConfig.packagesDir, 'cdk'));
 
 /** List of potential secondary entry-points for the mosaic-moment-adapter package. */
-const mosaicDateAdaptersSecondaryEntryPoints =
+const mosaicMomentAdapterSecondaryEntryPoints =
     getSubdirectoryNames(join(buildConfig.packagesDir, 'mosaic-moment-adapter'));
 
 /** List of potential secondary entry-points for the package. */
@@ -32,7 +32,7 @@ const rollupCdkEntryPoints = generateRollupEntryPoints('cdk', cdkSecondaryEntryP
 
 /** Object with all mosaic-moment-adapter entry points in the format of Rollup globals. */
 const rollupMcDatAdaptersEntryPoints =
-    generateRollupEntryPoints('mosaic-moment-adapter', mosaicDateAdaptersSecondaryEntryPoints);
+    generateRollupEntryPoints('mosaic-moment-adapter', mosaicMomentAdapterSecondaryEntryPoints);
 
 /** Object with all mosaic entry points in the format of Rollup globals. */
 const rollupMcEntryPoints = generateRollupEntryPoints('mosaic', mcSecondaryEntryPoints);
@@ -63,7 +63,7 @@ export const rollupGlobals = {
     '@angular/router': 'ng.router',
 
     '@ptsecurity/cdk': 'ng.cdk',
-    '@ptsecurity/mosaic-moment-adapter': 'ng.mosaicDateAdapters',
+    '@ptsecurity/mosaic-moment-adapter': 'ng.mosaicMomentAdapter',
     '@ptsecurity/mosaic': 'ng.mosaic',
     '@ptsecurity/mosaic-examples': 'ng.mosaicExamples',
 

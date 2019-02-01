@@ -1,6 +1,7 @@
 {
     "extends": "./tsconfig.build",
     "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
         "importHelpers": false,
         "module": "commonjs",
         "target": "es5",

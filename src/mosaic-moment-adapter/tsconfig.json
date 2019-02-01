@@ -2,10 +2,11 @@
 {
     "extends": "../../tsconfig.json",
     "compilerOptions": {
+        // Needed for Moment.js since it doesn't have a default export.
+        "allowSyntheticDefaultImports": true,
         "rootDir": "..",
         "baseUrl": ".",
         "paths": {
-            "@ptsecurity/mosaic-moment-adapter/*": ["./*"],
             "@ptsecurity/cdk/*": ["../cdk/*"]
         }
     },
