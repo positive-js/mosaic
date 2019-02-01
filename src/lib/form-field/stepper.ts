@@ -4,10 +4,10 @@ import { Component, EventEmitter, Output } from '@angular/core';
 @Component({
     selector: 'mc-stepper',
     template: `
-        <i class="mc mc-icon mc-icon_light mc-second mc-stepper-step-up mc-angle-L_16"
+        <i class="mc mc-icon mc-icon_light mc-second mc-stepper-step-up mc-angle-down-L_16"
            (mousedown)="onStepUp($event)">
         </i>
-        <i class="mc mc-icon mc-icon_light mc-second mc-stepper-step-down mc-angle-L_16"
+        <i class="mc mc-icon mc-icon_light mc-second mc-stepper-step-down mc-angle-down-L_16"
            (mousedown)="onStepDown($event)">
         </i>
     `

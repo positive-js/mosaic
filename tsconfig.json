@@ -22,6 +22,9 @@
             ],
             "@ptsecurity/mosaic/*": [
                 "./lib/*"
+            ],
+            "@ptsecurity/mosaic-moment-adapter/*": [
+                "./mosaic-moment-adapter/*"
             ]
         },
         "typeRoots": [
@@ -29,7 +32,8 @@
         ],
         "types": [
             "jasmine",
-            "tslib"
+            "tslib",
+            "moment"
         ],
         "plugins": [
             {

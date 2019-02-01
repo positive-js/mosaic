@@ -24,6 +24,7 @@
         "baseUrl": ".",
         "paths": {
             "@ptsecurity/cdk/*": ["../../dist/packages/cdk/*"],
+            "@ptsecurity/mosaic-moment-adapter/*": ["../../dist/packages/mosaic-moment-adapter/*"],
             "@ptsecurity/mosaic/*": ["../../dist/packages/mosaic/*"]
         }
     },

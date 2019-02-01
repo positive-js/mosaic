@@ -66,6 +66,12 @@ jobs:
             - attach_workspace: *attach_options
             - run: npm run build:cdk
 
+    build_mosaic-moment-adapter:
+        <<: *job_defaults
+        steps:
+            - attach_workspace: *attach_options
+            - run: npm run build:mosaic-moment-adapter
+
     test_unit:
         <<: *job_defaults
         steps:
@@ -115,6 +121,9 @@ workflows:
             - build_cdk:
                   requires:
                       - install
+            - build_mosaic-moment-adapter:
+                  requires:
+                      - install
             - build_mosaic:
                   requires:
                       - install
@@ -122,11 +131,13 @@ workflows:
                   requires:
                       - build_cdk
                       - build_mosaic
+                      - build_mosaic-moment-adapter
             - snapshot_publish:
                   requires:
                       - test_unit
                       - build_cdk
                       - build_mosaic
+                      - build_mosaic-moment-adapter
                   filters:
                       branches:
                           only:

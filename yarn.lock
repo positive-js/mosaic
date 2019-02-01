@@ -462,10 +462,10 @@
   resolved "https://registry.yarnpkg.com/@ptsecurity/commitlint-config/-/commitlint-config-0.2.0.tgz#04d20ac85719585068b198d383f4ae539401f4c0"
   integrity sha512-DBCEGw8x5CXrE0+FzLUw3po6b5rkdO8mQq0hXML9X74eCQ1436mmoosWocOEyedm4hGNC/Wn3W34OjsQUblLHg==
 
-"@ptsecurity/mosaic-icons@2.6.0":
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/@ptsecurity/mosaic-icons/-/mosaic-icons-2.6.0.tgz#7256a8d474919247ea5cd907850cfa473959587a"
-  integrity sha512-TxQKkHkSGrR9dipwxe9UJL35oh+FHmr8lnxlMJdTrS3TEPuxgselyzuojPX4tEEME0BpBLFwFaP2EijvY178fA==
+"@ptsecurity/mosaic-icons@2.7.1":
+  version "2.7.1"
+  resolved "https://registry.yarnpkg.com/@ptsecurity/mosaic-icons/-/mosaic-icons-2.7.1.tgz#3e962b6064a62c783f294630d052f7054dcb9f0b"
+  integrity sha512-buC5SoMMPkuvRYXgtS8vVbkfRDcXjaN2VZAtVdmc6C2WDjnhohHf6hvyCsnFL9d6lc2/hJnXYen20nukvGM+oQ==
 
 "@ptsecurity/tslint-config@^0.10.1":
   version "0.10.1"
@@ -2702,10 +2702,10 @@ core-js@^2.2.0, core-js@^2.4.0, core-js@^2.5.0:
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.1.tgz#87416ae817de957a3f249b3b5ca475d4aaed6042"
   integrity sha512-L72mmmEayPJBejKIWe2pYtGis5r0tQ5NaJekdhyXgeMQTpJoBsH0NL4ElY2LfSoV15xeQWKQ+XTTOZdyero5Xg==
 
-core-js@^2.6.2:
-  version "2.6.2"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.2.tgz#267988d7268323b349e20b4588211655f0e83944"
-  integrity sha512-NdBPF/RVwPW6jr0NCILuyN9RiqLo2b1mddWHkUL+VnvcB7dzlnBJ1bXYntjpTGOgkZiiLWj2JxmOr7eGE3qK6g==
+core-js@^2.6.0:
+  version "2.6.3"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.3.tgz#4b70938bdffdaf64931e66e2db158f0892289c49"
+  integrity sha512-l00tmFFZOBHtYhN4Cz7k32VM7vTn3rE2ANjQDxdEN6zmXZ/xq1jQuutnmHvMG1ZJ7xd72+TA5YpUK8wz3rWsfQ==
 
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
@@ -6943,6 +6943,13 @@ make-iterator@^1.0.0:
   dependencies:
     kind-of "^6.0.2"
 
+make-plural@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/make-plural/-/make-plural-4.3.0.tgz#f23de08efdb0cac2e0c9ba9f315b0dff6b4c2735"
+  integrity sha512-xTYd4JVHpSCW+aqDof6w/MebaMVNTVYBZhbB/vi513xXdiPT92JMVCo0Jq8W2UZnzYRFeVbQiQ+I25l13JuKvA==
+  optionalDependencies:
+    minimist "^1.2.0"
+
 map-age-cleaner@^0.1.1:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/map-age-cleaner/-/map-age-cleaner-0.1.3.tgz#7d583a7306434c055fe474b0f45078e6e1b4b92a"
@@ -7114,6 +7121,20 @@ merge2@^1.2.3:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/merge2/-/merge2-1.2.3.tgz#7ee99dbd69bb6481689253f018488a1b902b0ed5"
   integrity sha512-gdUU1Fwj5ep4kplwcmftruWofEFt6lfpkkr3h860CXbAB9c3hGb55EOL2ali0Td5oebvW0E1+3Sr+Ur7XfKpRA==
+
+messageformat-parser@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/messageformat-parser/-/messageformat-parser-3.0.0.tgz#38ae9348eb4834ab19b3a8d682af7babb335f37a"
+  integrity sha512-5KfDWGAHz5kzfKH5V4M7+o3CIFiykCfFDaLK+Ck2fkaxYfLWwKZMioxrSsMRnkfMr0ZaaC0gcxyOUb2d0GCy4A==
+
+messageformat@2.0.5:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/messageformat/-/messageformat-2.0.5.tgz#d3987ef91c8df37cd8dc473c47203a4bed0243b5"
+  integrity sha512-iT9/DUx75LqDGepfhKJpCxsCxlMFlyW/E7pI1KZE+TcT+bDcoLJfnwamq5qyRWiFo+eND5joxik9QlzWhqYgIg==
+  dependencies:
+    make-plural "^4.3.0"
+    messageformat-parser "^3.0.0"
+    reserved-words "^0.1.2"
 
 methods@~1.1.2:
   version "1.1.2"
@@ -7343,6 +7364,11 @@ module-lookup-amd@^6.1.0:
     find "^0.2.8"
     requirejs "^2.3.5"
     requirejs-config-file "^3.1.1"
+
+moment@2.24.0:
+  version "2.24.0"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
+  integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
 
 move-concurrently@^1.0.1:
   version "1.0.1"
@@ -9199,6 +9225,11 @@ requires-port@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
   integrity sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=
+
+reserved-words@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/reserved-words/-/reserved-words-0.1.2.tgz#00a0940f98cd501aeaaac316411d9adc52b31ab1"
+  integrity sha1-AKCUD5jNUBrqqsMWQR2a3FKzGrE=
 
 resolve-bin@^0.4.0:
   version "0.4.0"
