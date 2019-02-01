@@ -177,6 +177,8 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     oneMoreText: string = '...ещё';
     autoSelect: boolean = true;
 
+    dataDiffer: IterableDiffer<T>;
+
     /** The last measured value for the trigger's client bounding rect. */
     triggerRect: ClientRect;
 
@@ -408,8 +410,6 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
 
     private _panelOpen = false;
 
-    private dataDiffer: IterableDiffer<T>;
-
     /** The scroll position of the overlay panel, calculated to center the selected option. */
     private scrollTop = 0;
 
@@ -486,6 +486,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
         this.selectedOptions.onChange!
             .pipe(takeUntil(this.destroy))
             .subscribe((event) => {
+                console.log('this.selectedOptions.onChange');
                 event.added.forEach((option) => option.select());
                 event.removed.forEach((option) => option.deselect());
             });
@@ -501,8 +502,8 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
             .pipe(startWith(null), takeUntil(this.destroy))
             .subscribe(() => {
                 console.log('this.options.changes');
+
                 this.resetOptions();
-                this.initializeSelection();
             });
     }
 
@@ -520,6 +521,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
 
     ngOnDestroy() {
         this.destroy.next();
+
         this.destroy.complete();
         this.stateChanges.complete();
     }
@@ -568,8 +570,13 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
 
     /** Closes the overlay panel and focuses the host element. */
     close() {
+        console.log('close');
         if (this._panelOpen) {
             this._panelOpen = false;
+
+            this.keyManager.setActiveItem(-1);
+            console.log('this.keyManager.setActiveItem(-1);');
+
             // this.keyManager.withHorizontalOrientation(this.isRtl() ? 'rtl' : 'ltr');
             this.changeDetectorRef.markForCheck();
             this._onTouched();
@@ -717,6 +724,8 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
                 this.dataDiffer.diff([]);
 
                 this.renderNodeChanges(this.dataSource.expandedData.value);
+
+                this.updateSelectedOptions(this.selectedOptions.selected);
             });
     }
 
@@ -831,7 +840,6 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
         });
 
         if (this.options) {
-            console.log('reset');
             this.options.reset(arrayOfInstances);
             // this.nodeOutlet.changeDetectorRef.detectChanges();
             this.options.notifyOnChanges();
@@ -841,8 +849,6 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     }
 
     setFocusedOption(option: McTreeSelectOption<T>) {
-        console.log('setFocusedOption');
-
         if (this.keyManager.activeItem) {
             this.keyManager.activeItem.setInactiveStyles();
         }
@@ -860,6 +866,21 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
         this.nodeOutlet.changeDetectorRef.detectChanges();
 
         // this.emitNavigationEvent(option);
+    }
+
+    private updateSelectedOptions(selectedOptions: McTreeSelectOption<T>[]): void {
+        selectedOptions.forEach((selectedOption, index) => {
+            this.options.forEach((option) => {
+                if (option.data === selectedOption.data) {
+                    if (index === 0) {
+                        this.keyManager.setActiveItem(option);
+                        option.setActiveStyles();
+                    }
+
+                    option.select();
+                }
+            });
+        });
     }
 
     private getTotalItemsWidthInMatcher(): number {
@@ -903,7 +924,6 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
 
     /** Handles keyboard events when the selected is open. */
     private handleOpenKeydown(event: KeyboardEvent) {
-        console.log('handleOpenKeydown');
         /* tslint:disable-next-line */
         const keyCode = event.keyCode;
         const isArrowKey = keyCode === DOWN_ARROW || keyCode === UP_ARROW;
@@ -1015,7 +1035,6 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
 
     /** Sets up a key manager to listen to keyboard events on the overlay panel. */
     private initKeyManager() {
-        console.log('initKeyManager');
         this.keyManager = new ActiveDescendantKeyManager<McTreeSelectOption<T>>(this.options)
             .withVerticalOrientation();
 
@@ -1031,44 +1050,41 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
         this.keyManager.change
             .pipe(takeUntil(this.destroy))
             .subscribe(() => {
-                console.log('changes in keymanager');
-
                 if (this._panelOpen && this.panel) {
                     this.scrollActiveOptionIntoView();
                 } else if (!this._panelOpen && !this.multiple && this.keyManager.activeItem) {
                     this.keyManager.activeItem.selectViaInteraction();
                 }
-
-                console.log('keyManager.activeItemIndex');
-                console.log(this.keyManager.activeItemIndex);
             });
     }
 
     /** Drops current option subscriptions and IDs and resets from scratch. */
     private resetOptions() {
+        console.log('resetOptions');
         const changedOrDestroyed = merge(this.options.changes, this.destroy);
 
-        // this.optionSelectionChanges
-        //     .pipe(takeUntil(changedOrDestroyed))
-        //     .subscribe((event) => {
-        //         this.onSelect(event.source, event.isUserInput);
-        //
-        //         if (event.isUserInput && !this.multiple && this._panelOpen) {
-        //             this.close();
-        //             this.focus();
-        //         }
-        //     });
+        this.optionSelectionChanges
+            .pipe(takeUntil(changedOrDestroyed))
+            .subscribe((event) => {
+                console.log('this.optionSelectionChanges');
+                this.onSelect(event.source, event.isUserInput);
+
+                if (event.isUserInput && !this.multiple && this._panelOpen) {
+                    this.close();
+                    this.focus();
+                }
+            });
 
         // Listen to changes in the internal state of the options and react accordingly.
         // Handles cases like the labels of the selected options changing.
         // merge(...this.options.map((option) => option.stateChanges))
         //     .pipe(takeUntil(changedOrDestroyed))
         //     .subscribe(() => {
-        //         this._changeDetectorRef.markForCheck();
+        //         this.changeDetectorRef.markForCheck();
         //         this.stateChanges.next();
         //     });
-        //
-        // this.setOptionIds();
+
+        this.setOptionIds();
     }
 
     /** Invoked when an option is clicked. */

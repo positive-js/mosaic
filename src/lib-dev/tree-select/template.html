@@ -8,11 +8,11 @@
             [treeControl]="treeControl"
             [(value)]="singleSelected">
 
-            <mc-tree-select-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+            <mc-tree-select-option [value]="node.name" *mcTreeNodeDef="let node" mcTreeNodePadding>
                 {{ node.name }}
             </mc-tree-select-option>
 
-            <mc-tree-select-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+            <mc-tree-select-option [value]="node.name" *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
                 <i mc-icon="mc-angle-S_16" [style.transform]="treeControl.isExpanded(node) ? '' : 'rotate(-90deg)'" mcTreeNodeToggle></i>
                 {{ node.name }} : {{ node.type }}
             </mc-tree-select-option>

@@ -8,9 +8,9 @@
         <span class="mc-select__placeholder" *ngSwitchCase="true">{{ placeholder || '\u00A0' }}</span>
         <span *ngSwitchCase="false" [ngSwitch]="!!customTrigger">
             <div *ngSwitchDefault [ngSwitch]="multiple" class="mc-select__match-container">
-                <span *ngSwitchCase="false" class="mc-select__matcher-text">{{ triggerValue }}</span>
+                <span *ngSwitchCase="false" class="mc-select__matcher-text">{{ selectedOptions.selected[0].value }}</span>
                 <div *ngSwitchCase="true" class="mc-select__match-list">
-                    <mc-tag *ngFor="let option of triggerValues" [disabled]="disabled" [class.mc-error]="errorState">
+                    <mc-tag *ngFor="let option of selectedOptions" [disabled]="disabled" [class.mc-error]="errorState">
                         {{ option.viewValue || option.value }}
                         <i mc-icon="mc-close-S_16" (click)="onRemoveMatcherItem(option, $event)"></i>
                     </mc-tag>
@@ -38,7 +38,6 @@
     [cdkConnectedOverlayOpen]="panelOpen"
     [cdkConnectedOverlayPositions]="positions"
     [cdkConnectedOverlayMinWidth]="triggerRect?.width"
-    [cdkConnectedOverlayWidth]="triggerRect?.width"
     [cdkConnectedOverlayOffsetY]="offsetY"
     (backdropClick)="close()"
     (attach)="onAttached()"
