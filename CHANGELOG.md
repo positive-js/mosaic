@@ -1,25 +1,3 @@
-# 1.0.0-beta.1 "Seasonal Renitent" (2019-02-01)
-
-
-### Bug Fixes
-
-* **build:** do not load tslib twice in tests ([eed1270](https://github.com/positive-js/mosaic/commit/eed1270))
-* **button:** left right icon comment ([#87](https://github.com/positive-js/mosaic/issues/87)) ([d25d425](https://github.com/positive-js/mosaic/commit/d25d425))
-* **cdk:** added export for fixed virtual scroll ([5785949](https://github.com/positive-js/mosaic/commit/5785949))
-* **cdk:** DataSource checks whether an object is a data source ([e8f1cdd](https://github.com/positive-js/mosaic/commit/e8f1cdd))
-* **select:** fix select overlay autowidth ([#172942](https://github.com/positive-js/mosaic/issues/172942)) ([#89](https://github.com/positive-js/mosaic/issues/89)) ([1b3c620](https://github.com/positive-js/mosaic/commit/1b3c620))
-* **tabs:** remove unnecessary BrowserAnimationModule dependency ([#88](https://github.com/positive-js/mosaic/issues/88)) ([deb5de7](https://github.com/positive-js/mosaic/commit/deb5de7))
-* **tabs:** several performance changes ([51afa09](https://github.com/positive-js/mosaic/commit/51afa09))
-* **tooltip:** Fixing linter errors ([#83](https://github.com/positive-js/mosaic/issues/83)) ([eed4b64](https://github.com/positive-js/mosaic/commit/eed4b64))
-
-
-### Features
-
-* **cdk:** added virtual scrolling and for-of ([66fd1f6](https://github.com/positive-js/mosaic/commit/66fd1f6))
-* upgrade to angular 7.2.1 ([337c989](https://github.com/positive-js/mosaic/commit/337c989))
-
-
-
 <a name="1.0.0-beta.0"></a>
 # 1.0.0-beta.0 "Noid Gossip" (2018-12-29)
 
