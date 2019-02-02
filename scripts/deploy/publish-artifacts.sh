@@ -5,8 +5,8 @@ set -e
 # Go to the project root directory
 cd $(dirname ${0})/../..
 
-PACKAGES=(cdk mosaic)
-REPOSITORIES=(cdk-builds mosaic-builds)
+PACKAGES=(cdk mosaic mosaic-moment-adapter)
+REPOSITORIES=(cdk-builds mosaic-builds mosaic-moment-adapter-builds)
 
 # Command line arguments.
 COMMAND_ARGS=${*}

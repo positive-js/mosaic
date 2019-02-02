@@ -97,6 +97,7 @@ jobs:
             - *restore_cache
             - run: npm run build:cdk
             - run: npm run build:lib
+            - run: npm run build:mosaic-moment-adapter
             - run: ./scripts/deploy/publish-artifacts.sh
 
     docs_publish:
