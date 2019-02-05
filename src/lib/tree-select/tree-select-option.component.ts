@@ -106,12 +106,6 @@ export class McTreeSelectOption<T> extends CdkTreeNode<T> implements CanDisable 
         super(elementRef, treeSelection);
     }
 
-    focus(): void {
-        this.elementRef.nativeElement.focus();
-
-        this.treeSelection.setFocusedOption(this);
-    }
-
     select(): void {
         if (!this._selected) {
             this._selected = true;
@@ -128,22 +122,9 @@ export class McTreeSelectOption<T> extends CdkTreeNode<T> implements CanDisable 
         }
     }
 
-    // todo будет удалено
-    // setSelected(selected: boolean) {
-    //     if (this._selected === selected || !this.treeSelection.selectedOptions) { return; }
-    //
-    //     this._selected = selected;
-    //
-    //     if (selected) {
-    //         this.treeSelection.selectedOptions.select(this);
-    //     } else {
-    //         this.treeSelection.selectedOptions.deselect(this);
-    //     }
-    //
-    //     // this._changeDetector.markForCheck();
-    // }
-
     selectViaInteraction(): void {
+        console.log('selectViaInteraction');
+
         if (!this.disabled) {
             this._selected = this.multiple ? !this._selected : true;
 
@@ -161,6 +142,8 @@ export class McTreeSelectOption<T> extends CdkTreeNode<T> implements CanDisable 
         if (!this._active) {
             this._active = true;
 
+            if (this.treeSelection.autoSelect) { this.select(); }
+
             this.changeDetectorRef.markForCheck();
         }
     }
@@ -173,6 +156,8 @@ export class McTreeSelectOption<T> extends CdkTreeNode<T> implements CanDisable 
     setInactiveStyles(): void {
         if (this._active) {
             this._active = false;
+
+            if (this.treeSelection.autoSelect) { this.deselect(); }
 
             this.changeDetectorRef.markForCheck();
         }

@@ -433,6 +433,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
         @Optional() private readonly parentFormField: McFormField,
         @Self() @Optional() public ngControl: NgControl,
         @Attribute('tabindex') tabIndex: string,
+        @Attribute('auto-select') autoSelect: string,
         @Inject(MC_SELECT_SCROLL_STRATEGY) private readonly scrollStrategyFactory
     ) {
         super(
@@ -451,6 +452,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
         this.dataDiffer = this.differs.find([]).create(this.trackBy || defaultTrackBy);
 
         this.tabIndex = parseInt(tabIndex) || 0;
+        this.autoSelect = autoSelect === null ? true : coerceBooleanProperty(autoSelect);
 
         // Force setter to be called in case id was not specified.
         this.id = this.id;
@@ -483,7 +485,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     }
 
     ngAfterContentInit() {
-        this.selectedOptions.onChange!
+        this.selectedOptions.changed
             .pipe(takeUntil(this.destroy))
             .subscribe((event) => {
                 console.log('this.selectedOptions.onChange');
@@ -848,25 +850,26 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
         // this.updateScrollSize();
     }
 
-    setFocusedOption(option: McTreeSelectOption<T>) {
-        if (this.keyManager.activeItem) {
-            this.keyManager.activeItem.setInactiveStyles();
-        }
-
-        option.setActiveStyles();
-
-        this.keyManager.updateActiveItem(option);
-
-        if (this.autoSelect) {
-            this.options.forEach((item) => item.deselect());
-
-            option.select();
-        }
-
-        this.nodeOutlet.changeDetectorRef.detectChanges();
-
-        // this.emitNavigationEvent(option);
-    }
+    // setFocusedOption(option: McTreeSelectOption<T>) {
+    //     console.log('setFocusedOption');
+    //     if (this.keyManager.activeItem) {
+    //         this.keyManager.activeItem.setInactiveStyles();
+    //     }
+    //
+    //     option.setActiveStyles();
+    //
+    //     this.keyManager.updateActiveItem(option);
+    //
+    //     if (this.autoSelect) {
+    //         this.options.forEach((item) => item.deselect());
+    //
+    //         option.select();
+    //     }
+    //
+    //     this.nodeOutlet.changeDetectorRef.detectChanges();
+    //
+    //     // this.emitNavigationEvent(option);
+    // }
 
     private updateSelectedOptions(selectedOptions: McTreeSelectOption<T>[]): void {
         selectedOptions.forEach((selectedOption, index) => {
@@ -874,6 +877,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
                 if (option.data === selectedOption.data) {
                     if (index === 0) {
                         this.keyManager.setActiveItem(option);
+
                         option.setActiveStyles();
                     }
 
@@ -915,7 +919,9 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
 
         // Open the select on ALT + arrow key to match the native <select>
         if (isOpenKey || ((this.multiple || event.altKey) && isArrowKey)) {
-            event.preventDefault(); // prevents the page from scrolling down when pressing space
+            // prevents the page from scrolling down when pressing space
+            event.preventDefault();
+
             this.open();
         } else if (!this.multiple) {
             this.keyManager.onKeydown(event);
@@ -927,32 +933,34 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
         /* tslint:disable-next-line */
         const keyCode = event.keyCode;
         const isArrowKey = keyCode === DOWN_ARROW || keyCode === UP_ARROW;
-        const manager = this.keyManager;
 
         if (keyCode === HOME || keyCode === END) {
             event.preventDefault();
 
             if (keyCode === HOME) {
-                manager.setFirstItemActive();
+                this.keyManager.setFirstItemActive();
             } else {
-                manager.setLastItemActive();
+                this.keyManager.setLastItemActive();
             }
 
         } else if (isArrowKey && event.altKey) {
             // Close the select on ALT + arrow key to match the native <select>
             event.preventDefault();
+
             this.close();
-        } else if ((keyCode === ENTER || keyCode === SPACE) && manager.activeItem) {
+        } else if ((keyCode === ENTER || keyCode === SPACE) && this.keyManager.activeItem) {
             event.preventDefault();
 
-            manager.activeItem.selectViaInteraction();
-        } else if ((keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW) && manager.activeItem) {
+            this.keyManager.activeItem.selectViaInteraction();
+        } else if ((keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW) && this.keyManager.activeItem) {
+            event.preventDefault();
+
             this.treeControl.toggle(this.keyManager.activeItem!.data);
-
-            event.preventDefault();
         } else if (this._multiple && keyCode === A && event.ctrlKey) {
             event.preventDefault();
+
             const hasDeselectedOptions = this.options.some((option) => !option.selected);
+
             this.options.forEach((option) => {
                 if (hasDeselectedOptions && !option.disabled) {
                     option.select();
@@ -961,13 +969,13 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
                 }
             });
         } else {
-            const previouslyFocusedIndex = manager.activeItemIndex;
+            const previouslyFocusedIndex = this.keyManager.activeItemIndex;
 
-            manager.onKeydown(event);
+            this.keyManager.onKeydown(event);
 
-            if (this._multiple && isArrowKey && event.shiftKey && manager.activeItem &&
-                manager.activeItemIndex !== previouslyFocusedIndex) {
-                manager.activeItem.selectViaInteraction();
+            if (this._multiple && isArrowKey && event.shiftKey && this.keyManager.activeItem &&
+                this.keyManager.activeItemIndex !== previouslyFocusedIndex) {
+                this.keyManager.activeItem.selectViaInteraction();
             }
         }
     }
@@ -1050,6 +1058,8 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
         this.keyManager.change
             .pipe(takeUntil(this.destroy))
             .subscribe(() => {
+                console.log('this.keyManager.change');
+
                 if (this._panelOpen && this.panel) {
                     this.scrollActiveOptionIntoView();
                 } else if (!this._panelOpen && !this.multiple && this.keyManager.activeItem) {
