@@ -1,0 +1,19 @@
+<table class="mc-calendar__table">
+    <thead class="mc-calendar__table-header">
+    <tr>
+        <th class="mc-calendar__table-header-divider" colspan="4"></th>
+    </tr>
+    </thead>
+    <tbody mc-calendar-body
+           [label]="yearLabel"
+           [rows]="months"
+           [todayValue]="todayMonth"
+           [selectedValue]="selectedMonth"
+           [labelMinRequiredCells]="2"
+           [numCols]="4"
+           [cellAspectRatio]="4 / 7"
+           [activeCell]="dateAdapter.getMonth(activeDate)"
+           (selectedValueChange)="onMonthSelected($event)"
+           (keydown)="handleCalendarBodyKeydown($event)">
+    </tbody>
+</table>

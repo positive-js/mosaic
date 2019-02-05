@@ -13,6 +13,7 @@ const defaultOptions = {
 task(':test:build', series(
     'clean',
     'cdk:build-no-bundles',
+    'mosaic-moment-adapter:build-no-bundles',
     'mosaic:build-no-bundles'
 ));
 

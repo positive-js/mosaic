@@ -1,0 +1,16 @@
+<mc-calendar [id]="datepicker.id"
+             [ngClass]="datepicker.panelClass"
+             [startAt]="datepicker.startAt"
+             [startView]="datepicker.startView"
+             [minDate]="datepicker.minDate"
+             [maxDate]="datepicker.maxDate"
+             [dateFilter]="datepicker.dateFilter"
+             [headerComponent]="datepicker.calendarHeaderComponent"
+             [selected]="datepicker.selected"
+             [dateClass]="datepicker.dateClass"
+             [@fadeInCalendar]="'enter'"
+             (selectedChange)="datepicker.select($event)"
+             (yearSelected)="datepicker.selectYear($event)"
+             (monthSelected)="datepicker.selectMonth($event)"
+             (userSelection)="datepicker.close()">
+</mc-calendar>

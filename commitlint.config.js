@@ -29,6 +29,7 @@ module.exports = {
                 'progress-spinner',
                 'radio',
                 'select',
+                'sidepanel',
                 'splitter',
                 'tabs',
                 'textarea',

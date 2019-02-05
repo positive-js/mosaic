@@ -30,7 +30,7 @@ export class FlexibleConnectedPositionStrategy implements IPositionStrategy {
     _preferredPositions: ConnectionPositionPair[] = [];
 
     /** Observable sequence of position changes. */
-    positionChanges: Observable<ConnectedOverlayPositionChange> = Observable.create((observer) => {
+    positionChanges: Observable<ConnectedOverlayPositionChange> = new Observable((observer) => {
         const subscription = this._positionChanges.subscribe(observer);
         this._positionChangeSubscriptions++;
 

@@ -1,13 +1,15 @@
 {
     "extends": "./tsconfig.build",
     "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
         "importHelpers": false,
         "module": "commonjs",
         "target": "es5",
         "types": ["jasmine"],
         "paths": {
             "@ptsecurity/mosaic/*": ["./*"],
-            "@ptsecurity/cdk/*": ["../../dist/packages/cdk/*"]
+            "@ptsecurity/cdk/*": ["../../dist/packages/cdk/*"],
+            "@ptsecurity/mosaic-moment-adapter/*": ["../../dist/packages/mosaic-moment-adapter/*"]
         }
     },
     "angularCompilerOptions": {

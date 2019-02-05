@@ -6,8 +6,9 @@ System.config({
     },
     map: {
         'rxjs': 'node:rxjs',
-        'main': 'main.js',
         'tslib': 'node:tslib/tslib.js',
+        'moment': 'node:moment/min/moment-with-locales.min.js',
+        'messageformat': 'node:messageformat',
 
         // Angular specific mappings.
         '@angular/core': 'node:@angular/core/bundles/core.umd.js',
@@ -39,6 +40,7 @@ System.config({
         '@ptsecurity/cdk': 'dist/packages/cdk/index.js',
         '@ptsecurity/cdk/a11y': 'dist/packages/cdk/a11y/index.js',
         '@ptsecurity/cdk/bidi': 'dist/packages/cdk/bidi/index.js',
+        '@ptsecurity/cdk/datetime': 'dist/packages/cdk/datetime/index.js',
         '@ptsecurity/cdk/coercion': 'dist/packages/cdk/coercion/index.js',
         '@ptsecurity/cdk/collections': 'dist/packages/cdk/collections/index.js',
         '@ptsecurity/cdk/keycodes': 'dist/packages/cdk/keycodes/index.js',
@@ -49,6 +51,9 @@ System.config({
         '@ptsecurity/cdk/scrolling': 'dist/packages/cdk/scrolling/index.js',
         '@ptsecurity/cdk/testing': 'dist/packages/cdk/testing/index.js',
         '@ptsecurity/cdk/tree': 'dist/packages/cdk/tree/index.js',
+
+        '@ptsecurity/mosaic-moment-adapter': 'dist/packages/mosaic-moment-adapter/index.js',
+        '@ptsecurity/mosaic-moment-adapter/adapter': 'dist/packages/mosaic-moment-adapter/adapter/index.js',
 
         '@ptsecurity/mosaic/button': 'dist/packages/mosaic/button/index.js',
         '@ptsecurity/mosaic/core': 'dist/packages/mosaic/core/index.js',
@@ -67,6 +72,7 @@ System.config({
         '@ptsecurity/mosaic/tag': 'dist/packages/mosaic/tag/index.js',
         '@ptsecurity/mosaic/tabs': 'dist/packages/mosaic/tabs/index.js',
         '@ptsecurity/mosaic/select': 'dist/packages/mosaic/select/index.js',
+        '@ptsecurity/mosaic/sidepanel': 'dist/packages/mosaic/sidepanel/index.js',
         '@ptsecurity/mosaic/textarea': 'dist/packages/mosaic/textarea/index.js',
         '@ptsecurity/mosaic/tooltip': 'dist/packages/mosaic/tooltip/index.js',
         '@ptsucurity/mosaic/timepicker': 'dist/packages/mosaic/timepicker/index.js',

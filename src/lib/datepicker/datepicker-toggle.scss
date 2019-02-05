@@ -1,0 +1,39 @@
+$mc-datepicker-toggle-width: 30px;
+$mc-datepicker-toggle-height: 30px;
+
+.mc-datepicker-toggle:focus {
+    outline: 0;
+}
+
+.mc-datepicker-toggle__button.mc-icon-button {
+    width: $mc-datepicker-toggle-width;
+    height: $mc-datepicker-toggle-height;
+    margin-left: 2px;
+    border-color: transparent;
+    border-radius: 0;
+    background: transparent;
+}
+
+.mc-form-field-appearance-legacy {
+    .mc-form-field-prefix,
+    .mc-form-field-suffix {
+        .mc-datepicker-toggle__default-icon {
+            width: 1em;
+        }
+    }
+}
+
+.mc-form-field:not(.mc-form-field-appearance-legacy) {
+    .mc-form-field-prefix,
+    .mc-form-field-suffix {
+        .mc-datepicker-toggle__default-icon {
+            display: block;
+            width: 1.5em;
+            height: 1.5em;
+        }
+
+        .mc-icon-button .mc-datepicker-toggle__default-icon {
+            margin: auto;
+        }
+    }
+}

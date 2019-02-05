@@ -2,6 +2,7 @@ import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { FormsModule, FormControl } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Observable, Observer } from 'rxjs';
 
 import { McCheckboxModule } from '../../lib/checkbox';
@@ -36,7 +37,7 @@ export class TabsDemoComponent {
     background = '';
 
     constructor() {
-        this.asyncTabs = Observable.create((observer: Observer<ExampleTab[]>) => {
+        this.asyncTabs = new Observable((observer: Observer<ExampleTab[]>) => {
             setTimeout(() => {
                 observer.next([
                     { label: 'First', content: 'Content 1' },
@@ -83,6 +84,7 @@ export class TabsDemoComponent {
     ],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         McFormFieldModule,
         McIconModule,
         McCheckboxModule,

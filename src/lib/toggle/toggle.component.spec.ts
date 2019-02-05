@@ -4,6 +4,7 @@ import { Component, DebugElement, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, flush } from '@angular/core/testing';
 import { FormControl, FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { McToggleComponent, McToggleModule } from './index';
 
@@ -13,7 +14,7 @@ describe('McToggle', () => {
 
     beforeEach(fakeAsync(() => {
         TestBed.configureTestingModule({
-            imports: [McToggleModule, FormsModule, ReactiveFormsModule],
+            imports: [NoopAnimationsModule, McToggleModule, FormsModule, ReactiveFormsModule],
             declarations: [
                 SingleToggle,
                 ToggleWithFormDirectives,

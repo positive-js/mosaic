@@ -10,6 +10,9 @@
             ],
             "@ptsecurity/mosaic/*": [
                 "./*"
+            ],
+            "@ptsecurity/mosaic-moment-adapter/*": [
+                "../mosaic-moment-adapter/*"
             ]
         }
     },
