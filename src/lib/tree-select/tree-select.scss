@@ -152,7 +152,7 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
 // Override optgroup and option to scale based on font-size of the trigger.
 .mc-select__panel {
     .mc-optgroup-label,
-    .mc-option {
+    .mc-tree-select-option {
         font-size: inherit;
         line-height: $mc-select-item-height;
         height: $mc-select-item-height;

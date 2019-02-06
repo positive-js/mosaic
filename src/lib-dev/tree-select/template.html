@@ -4,9 +4,10 @@
 <div class="dev-container">
     <mc-form-field>
         <mc-tree-select
-
+            multiple
             [dataSource]="dataSource"
             [treeControl]="treeControl"
+            (selectionChange)="onSelectionChange($event)"
             [(value)]="singleSelected">
 
             <mc-tree-select-option [value]="node.name" *mcTreeNodeDef="let node" mcTreeNodePadding>

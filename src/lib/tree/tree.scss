@@ -32,6 +32,10 @@ $mc-tree-node-padding: 16px;
     &:not([disabled]) {
         cursor: pointer;
     }
+
+    & .mc-pseudo-checkbox {
+        margin-right: 8px;
+    }
 }
 
 .mc-icon-rotate_90 {

@@ -8,11 +8,11 @@
         <span class="mc-select__placeholder" *ngSwitchCase="true">{{ placeholder || '\u00A0' }}</span>
         <span *ngSwitchCase="false" [ngSwitch]="!!customTrigger">
             <div *ngSwitchDefault [ngSwitch]="multiple" class="mc-select__match-container">
-                <span *ngSwitchCase="false" class="mc-select__matcher-text">{{ selectedOptions.selected[0].value }}</span>
+                <span *ngSwitchCase="false" class="mc-select__matcher-text">{{ triggerValue }}</span>
                 <div *ngSwitchCase="true" class="mc-select__match-list">
-                    <mc-tag *ngFor="let option of selectedOptions" [disabled]="disabled" [class.mc-error]="errorState">
-                        {{ option.viewValue || option.value }}
-                        <i mc-icon="mc-close-S_16" (click)="onRemoveMatcherItem(option, $event)"></i>
+                    <mc-tag *ngFor="let option of selected" [disabled]="disabled" [class.mc-error]="errorState">
+                        {{ option.viewValue }}
+                        <i mc-icon="mc-close-S_16" (click)="onRemoveSelectedOption(option, $event)"></i>
                     </mc-tag>
                 </div>
                 <div class="mc-select__match-hidden-text" [style.display]="hiddenItems > 0 ? 'block' : 'none'">

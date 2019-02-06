@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import { CdkTreeModule, FlatTreeControl, NestedTreeControl } from '@ptsecurity/cdk/tree';
+import { FlatTreeControl, NestedTreeControl } from '@ptsecurity/cdk/tree';
 import {
     McTreeFlatDataSource,
     McTreeFlattener,

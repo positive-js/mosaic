@@ -129,7 +129,8 @@ export class CdkTree<T> implements AfterContentChecked, ICollectionViewer, OnDes
         this.onDestroy.next();
         this.onDestroy.complete();
 
-        if (this._dataSource && typeof (this._dataSource as DataSource<T>).disconnect === 'function') {
+        // tslint:disable-next-line:no-unbound-method
+        if (this._dataSource && typeof (this.dataSource as DataSource<T>).disconnect === 'function') {
             (this.dataSource as DataSource<T>).disconnect(this);
         }
 
@@ -141,6 +142,7 @@ export class CdkTree<T> implements AfterContentChecked, ICollectionViewer, OnDes
 
     ngAfterContentChecked() {
         const defaultNodeDefs = this.nodeDefs.filter((def) => !def.when);
+
         if (defaultNodeDefs.length > 1) {
             throw getTreeMultipleDefaultNodeDefsError();
         }
@@ -236,6 +238,7 @@ export class CdkTree<T> implements AfterContentChecked, ICollectionViewer, OnDes
 
         // Cannot use `instanceof DataSource` since the data source could be a literal with
         // `connect` function and may not extends DataSource.
+        // tslint:disable-next-line:no-unbound-method
         if (typeof (this._dataSource as DataSource<T>).connect === 'function') {
             dataStream = (this._dataSource as DataSource<T>).connect(this);
         } else if (this._dataSource instanceof Observable) {
@@ -259,6 +262,7 @@ export class CdkTree<T> implements AfterContentChecked, ICollectionViewer, OnDes
      * clearing the node outlet. Otherwise start listening for new data.
      */
     private switchDataSource(dataSource: DataSource<T> | Observable<T[]> | T[]) {
+        // tslint:disable-next-line:no-unbound-method
         if (this._dataSource && typeof (this._dataSource as DataSource<T>).disconnect === 'function') {
             (this.dataSource as DataSource<T>).disconnect(this);
         }

@@ -6,15 +6,6 @@ import { Subject } from 'rxjs';
  */
 export class SelectionModel<T> {
 
-    /** Selected values. */
-    get selected(): T[] {
-        if (!this._selected) {
-            this._selected = Array.from(this._selection.values());
-        }
-
-        return this._selected;
-    }
-
     /** Event emitted when the value has changed. */
     changed: Subject<SelectionChange<T>> = new Subject();
 
@@ -33,7 +24,14 @@ export class SelectionModel<T> {
     /** Keeps track of the selected options that haven't been emitted by the change event. */
     private _selectedToEmit: T[] = [];
 
-    /** Cache for the array value of the selected items. */
+    get selected(): T[] {
+        if (!this._selected) {
+            this._selected = Array.from(this._selection.values());
+        }
+
+        return this._selected;
+    }
+
     private _selected: T[] | null;
 
     constructor(
@@ -58,7 +56,9 @@ export class SelectionModel<T> {
      */
     select(...values: T[]): void {
         this._verifyValueAssignment(values);
+
         values.forEach((value) => this._markSelected(value));
+
         this._emitChangeEvent();
     }
 
@@ -67,7 +67,9 @@ export class SelectionModel<T> {
      */
     deselect(...values: T[]): void {
         this._verifyValueAssignment(values);
+
         values.forEach((value) => this._unmarkSelected(value));
+
         this._emitChangeEvent();
     }
 

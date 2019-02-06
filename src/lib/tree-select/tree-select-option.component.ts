@@ -2,11 +2,10 @@ import {
     ChangeDetectorRef,
     forwardRef,
     Input,
-    Directive,
     ElementRef,
     Inject,
     Output,
-    EventEmitter
+    EventEmitter, Component, ViewEncapsulation, ChangeDetectionStrategy
 } from '@angular/core';
 
 import { CdkTreeNode } from '@ptsecurity/cdk/tree';
@@ -18,19 +17,12 @@ import { McTreeSelect } from './tree-select.component';
 
 let uniqueIdCounter: number = 0;
 
-/** Event object emitted by McOption when selected or deselected. */
 export class McTreeSelectOptionChange<T> {
-    constructor(
-        /** Reference to the option that emitted the event. */
-        public source: McTreeSelectOption<T>,
-        /** Whether the change in the option's value was a result of a user action. */
-        public isUserInput = false
-    ) {
-    }
+    constructor(public source: McTreeSelectOption<T>, public isUserInput = false) {}
 }
 
 
-@Directive({
+@Component({
     selector: 'mc-tree-select-option',
     exportAs: 'mcTreeSelectOption',
     host: {
@@ -42,6 +34,9 @@ export class McTreeSelectOptionChange<T> {
 
         '(click)': 'selectViaInteraction()'
     },
+    templateUrl: './tree-select-option.html',
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         { provide: CdkTreeNode, useExisting: McTreeSelectOption }
     ]
@@ -78,6 +73,15 @@ export class McTreeSelectOption<T> extends CdkTreeNode<T> implements CanDisable 
 
     get multiple(): boolean {
         return this.treeSelection.multiple;
+    }
+
+    /**
+     * The displayed value of the option. It is necessary to show the selected option in the
+     * select's trigger.
+     */
+    get viewValue(): string {
+        // TODO(kara): Add input property alternative for node envs.
+        return (this.getHostElement().textContent || '').trim();
     }
 
     /**
@@ -123,8 +127,6 @@ export class McTreeSelectOption<T> extends CdkTreeNode<T> implements CanDisable 
     }
 
     selectViaInteraction(): void {
-        console.log('selectViaInteraction');
-
         if (!this.disabled) {
             this._selected = this.multiple ? !this._selected : true;
 
@@ -170,5 +172,9 @@ export class McTreeSelectOption<T> extends CdkTreeNode<T> implements CanDisable 
     /** Emits the selection change event. */
     emitSelectionChangeEvent(isUserInput = false): void {
         this.onSelectionChange.emit(new McTreeSelectOptionChange(this, isUserInput));
+    }
+
+    getHostElement(): HTMLElement {
+        return this.elementRef.nativeElement;
     }
 }

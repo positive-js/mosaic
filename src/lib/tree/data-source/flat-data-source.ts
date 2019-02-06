@@ -123,6 +123,7 @@ export class McTreeFlatDataSource<T, F> extends DataSource<F> {
 
     set data(value: T[]) {
         this._data.next(value);
+
         this.flattenedData.next(this.treeFlattener.flattenNodes(this.data));
         this.treeControl.dataNodes = this.flattenedData.value;
     }
@@ -142,16 +143,18 @@ export class McTreeFlatDataSource<T, F> extends DataSource<F> {
     connect(collectionViewer: ICollectionViewer): Observable<F[]> {
         const changes = [
             collectionViewer.viewChange,
-            this.treeControl.expansionModel.onChange!,
+            this.treeControl.expansionModel.changed,
             this.flattenedData
         ];
 
-        return merge(...changes).pipe(map(() => {
-            this.expandedData.next(
-                this.treeFlattener.expandFlattenedNodes(this.flattenedData.value, this.treeControl));
+        return merge(...changes)
+            .pipe(map(() => {
+                this.expandedData.next(
+                    this.treeFlattener.expandFlattenedNodes(this.flattenedData.value, this.treeControl)
+                );
 
-            return this.expandedData.value;
-        }));
+                return this.expandedData.value;
+            }));
     }
 
     disconnect() {

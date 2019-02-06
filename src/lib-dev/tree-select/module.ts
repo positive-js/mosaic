@@ -137,7 +137,6 @@ export class DemoComponent {
 
     multiSelectSelectFormControl = new FormControl([], Validators.pattern(/^w/));
 
-
     constructor(database: FileDatabase) {
         this.treeFlattener = new McTreeFlattener(
             this.transformer, this.getLevel, this.isExpandable, this.getChildren
@@ -166,7 +165,7 @@ export class DemoComponent {
         return nodeData.expandable;
     }
 
-    onSelectionChange($event: McTreeSelectChange) {
+    onSelectionChange($event: McTreeSelectChange<any>) {
         console.log(`onSelectionChange: ${$event.value}`);
     }
 
