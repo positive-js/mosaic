@@ -1,5 +1,5 @@
 <p align="center">
-    <img width="200" src="https://preview.ibb.co/fZha7S/POSITIVE_JS_LOGO_WHITE_ed2_05.png" alt="positive_js_logo" border="0">
+    <img src="https://i.ibb.co/fQNPgv6/logo-png-200.png" alt="positive_js_logo" border="0">
 </p>
 
 
