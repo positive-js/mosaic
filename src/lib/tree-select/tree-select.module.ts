@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { OverlayModule } from '@ptsecurity/cdk/overlay';
 import { CdkTreeModule } from '@ptsecurity/cdk/tree';
+import { McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McTagModule } from '@ptsecurity/mosaic/tag';
 import { McTreeModule } from '@ptsecurity/mosaic/tree';
@@ -22,7 +23,8 @@ import {
         CdkTreeModule,
         McTreeModule,
         McIconModule,
-        McTagModule
+        McTagModule,
+        McPseudoCheckboxModule
     ],
     exports: [McTreeSelect, McTreeSelectOption, McTreeSelectTrigger, CommonModule],
     declarations: [McTreeSelect, McTreeSelectOption, McTreeSelectTrigger],

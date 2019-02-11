@@ -136,7 +136,7 @@ export class McTreeSelectChange<T> {
 export class McTreeSelectTrigger {}
 
 
-export class McTreeSelectBase<T> extends CdkTree<T> {
+class McTreeSelectBase<T> extends CdkTree<T> {
     constructor(
         public defaultErrorStateMatcher: ErrorStateMatcher,
         public parentForm: NgForm,
@@ -620,7 +620,9 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
      */
     // todo нужно доделать!
     writeValue(value: any) {
-        if (this.options) {
+        // todo excluded for build and will be completed in near time
+        if (false) {
+        // if (this.options) {
             this.setSelectionByValue(value);
         }
     }
