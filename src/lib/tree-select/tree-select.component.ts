@@ -16,7 +16,13 @@ import {
     UP_ARROW,
     A
 } from '@ptsecurity/cdk/keycodes';
-import { CdkConnectedOverlay, ViewportRuler } from '@ptsecurity/cdk/overlay';
+import {
+    CdkConnectedOverlay,
+    IScrollStrategy,
+    Overlay,
+    RepositionScrollStrategy,
+    ViewportRuler
+} from '@ptsecurity/cdk/overlay';
 
 import {
     AfterContentChecked,
@@ -30,7 +36,7 @@ import {
     DoCheck,
     ElementRef,
     EventEmitter,
-    Inject,
+    Inject, InjectionToken,
     Input,
     isDevMode, IterableDiffer, IterableDiffers,
     NgZone,
@@ -59,15 +65,14 @@ import {
     CanUpdateErrorStateCtor,
     mixinTabIndex,
     mixinDisabled,
-    mixinErrorState
+    mixinErrorState,
+    mcSelectAnimations
 } from '@ptsecurity/mosaic/core';
 
 import { McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 
 import { McTag } from '@ptsecurity/mosaic/tag';
 import { McTreeFlatDataSource } from '@ptsecurity/mosaic/tree';
-import { McTreeSelectOption } from '@ptsecurity/mosaic/tree-select/tree-select-option.component';
-
 
 import { defer, merge, Observable, Subject } from 'rxjs';
 
@@ -82,22 +87,38 @@ import {
 } from 'rxjs/operators';
 
 import {
-    MC_SELECT_SCROLL_STRATEGY,
     SELECT_PANEL_MAX_HEIGHT,
     SELECT_PANEL_PADDING_X,
     SELECT_PANEL_VIEWPORT_PADDING
-} from '../select/select.component';
-
-import { mcSelectAnimations } from '../select/select-animations';
+} from '@ptsecurity/mosaic/select/select.component';
 
 import {
     getMcSelectDynamicMultipleError,
     getMcSelectNonArrayValueError,
     getMcSelectNonFunctionValueError
-} from '../select/select-errors';
+} from '@ptsecurity/mosaic/select/select-errors';
+
+import { McTreeSelectOption } from './tree-select-option.component';
 
 
 let nextUniqueId = 0;
+
+/** Injection token that determines the scroll handling while a select is open. */
+export const MC_TREE_SELECT_SCROLL_STRATEGY =
+    new InjectionToken<() => IScrollStrategy>('mc-tree-select-scroll-strategy');
+
+/** @docs-private */
+export function mcTreeSelectScrollStrategyProviderFactory(overlay: Overlay):
+    () => RepositionScrollStrategy {
+    return () => overlay.scrollStrategies.reposition();
+}
+
+/** @docs-private */
+export const MC_TREE_SELECT_SCROLL_STRATEGY_PROVIDER = {
+    provide: MC_TREE_SELECT_SCROLL_STRATEGY,
+    deps: [Overlay],
+    useFactory: mcTreeSelectScrollStrategyProviderFactory
+};
 
 /**
  * The following style constants are necessary to save here in order
@@ -117,7 +138,6 @@ export class McTreeSelectTrigger {}
 
 export class McTreeSelectBase<T> extends CdkTree<T> {
     constructor(
-        public elementRef: ElementRef,
         public defaultErrorStateMatcher: ErrorStateMatcher,
         public parentForm: NgForm,
         public parentFormGroup: FormGroupDirective,
@@ -163,7 +183,6 @@ export const McTreeSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdate
     providers: [
         { provide: McFormFieldControl, useExisting: McTreeSelect },
         { provide: MC_OPTION_PARENT_COMPONENT, useExisting: McTreeSelect },
-        // { provide: McTreeSelection, useExisting: McTreeSelect },
         { provide: CdkTree, useExisting: McTreeSelect }
     ]
 })
@@ -440,7 +459,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
         private readonly ngZone: NgZone,
         private readonly renderer: Renderer2,
         defaultErrorStateMatcher: ErrorStateMatcher,
-        elementRef: ElementRef,
+        public elementRef: ElementRef,
         differs: IterableDiffers,
         @Optional() private readonly dir: Directionality,
         @Optional() parentForm: NgForm,
@@ -448,11 +467,9 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
         @Optional() private readonly parentFormField: McFormField,
         @Self() @Optional() public ngControl: NgControl,
         @Attribute('tabindex') tabIndex: string,
-        @Inject(MC_SELECT_SCROLL_STRATEGY) private readonly scrollStrategyFactory
+        @Inject(MC_TREE_SELECT_SCROLL_STRATEGY) private readonly scrollStrategyFactory
     ) {
-        super(
-            elementRef, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl, differs, changeDetectorRef
-        );
+        super(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl, differs, changeDetectorRef);
 
         this.options = new QueryList();
 
@@ -603,9 +620,9 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
      */
     // todo нужно доделать!
     writeValue(value: any) {
-        // if (this.options) {
-        //     this.setSelectionByValue(value);
-        // }
+        if (this.options) {
+            this.setSelectionByValue(value);
+        }
     }
 
     /**

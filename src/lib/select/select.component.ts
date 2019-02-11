@@ -67,7 +67,8 @@ import {
     McOptionSelectionChange,
     mixinDisabled,
     mixinErrorState,
-    mixinTabIndex
+    mixinTabIndex,
+    mcSelectAnimations
 } from '@ptsecurity/mosaic/core';
 
 import { McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
@@ -90,8 +91,6 @@ import {
     getMcSelectNonArrayValueError,
     getMcSelectNonFunctionValueError
 } from './select-errors';
-
-import { mcSelectAnimations } from './select-animations';
 
 
 let nextUniqueId = 0;
