@@ -87,21 +87,27 @@ import {
 } from 'rxjs/operators';
 
 import {
-    SELECT_PANEL_MAX_HEIGHT,
-    SELECT_PANEL_PADDING_X,
-    SELECT_PANEL_VIEWPORT_PADDING
-} from '@ptsecurity/mosaic/select/select.component';
-
-import {
-    getMcSelectDynamicMultipleError,
-    getMcSelectNonArrayValueError,
-    getMcSelectNonFunctionValueError
-} from '@ptsecurity/mosaic/select/select-errors';
+    getMcTreeSelectDynamicMultipleError,
+    getMcTreeSelectNonArrayValueError,
+    getMcTreeSelectNonFunctionValueError
+} from './tree-select-errors';
 
 import { McTreeSelectOption } from './tree-select-option.component';
 
 
 let nextUniqueId = 0;
+
+/** The max height of the select's overlay panel */
+export const TREE_SELECT_PANEL_MAX_HEIGHT = 224;
+
+/** The panel's padding on the x-axis */
+export const TREE_SELECT_PANEL_PADDING_X = 1;
+
+/**
+ * The select panel will only "fit" inside the viewport if it is positioned at
+ * this value or more away from the viewport boundary.
+ */
+export const TREE_SELECT_PANEL_VIEWPORT_PADDING = 8;
 
 /** Injection token that determines the scroll handling while a select is open. */
 export const MC_TREE_SELECT_SCROLL_STRATEGY =
@@ -351,7 +357,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
 
     set multiple(value: boolean) {
         if (this.selectedOptions) {
-            throw getMcSelectDynamicMultipleError();
+            throw getMcTreeSelectDynamicMultipleError();
         }
 
         this._multiple = coerceBooleanProperty(value);
@@ -385,7 +391,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     set compareWith(fn: (o1: any, o2: any) => boolean) {
         /* tslint:disable-next-line:strict-type-predicates */
         if (typeof fn !== 'function') {
-            throw getMcSelectNonFunctionValueError();
+            throw getMcTreeSelectNonFunctionValueError();
         }
 
         this._compareWith = fn;
@@ -993,7 +999,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
      */
     private setSelectionByValue(value: any | any[]) {
         if (this.multiple && value) {
-            if (!Array.isArray(value)) { throw getMcSelectNonArrayValueError(); }
+            if (!Array.isArray(value)) { throw getMcTreeSelectNonArrayValueError(); }
 
             this.selectedOptions.clear();
             value.forEach((currentValue: any) => this.selectValue(currentValue));
@@ -1186,7 +1192,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
             activeOptionIndex,
             this.getItemHeight(),
             this.panel.nativeElement.scrollTop,
-            SELECT_PANEL_MAX_HEIGHT
+            TREE_SELECT_PANEL_MAX_HEIGHT
         );
     }
 
@@ -1203,7 +1209,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     private calculateOverlayPosition() {
         const itemHeight = this.getItemHeight();
         const items = this.getItemCount();
-        const panelHeight = Math.min(items * itemHeight, SELECT_PANEL_MAX_HEIGHT);
+        const panelHeight = Math.min(items * itemHeight, TREE_SELECT_PANEL_MAX_HEIGHT);
         const scrollContainerHeight = items * itemHeight;
 
         // The farthest the panel can be scrolled before it hits the bottom
@@ -1235,8 +1241,8 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
         const viewportSize = this.viewportRuler.getViewportSize();
         const isRtl = this.isRtl();
         /* tslint:disable-next-line:no-magic-numbers */
-        const paddingWidth = SELECT_PANEL_PADDING_X * 2;
-        let offsetX: number = SELECT_PANEL_PADDING_X;
+        const paddingWidth = TREE_SELECT_PANEL_PADDING_X * 2;
+        let offsetX: number = TREE_SELECT_PANEL_PADDING_X;
 
         // Invert the offset in LTR.
         if (!isRtl) { offsetX *= -1; }
@@ -1248,9 +1254,9 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
 
         // If the element overflows on either side, reduce the offset to allow it to fit.
         if (leftOverflow > 0) {
-            offsetX += leftOverflow + SELECT_PANEL_VIEWPORT_PADDING;
+            offsetX += leftOverflow + TREE_SELECT_PANEL_VIEWPORT_PADDING;
         } else if (rightOverflow > 0) {
-            offsetX -= rightOverflow + SELECT_PANEL_VIEWPORT_PADDING;
+            offsetX -= rightOverflow + TREE_SELECT_PANEL_VIEWPORT_PADDING;
         }
 
         // Set the offset directly in order to avoid having to go through change detection and
@@ -1284,13 +1290,13 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
         const itemHeight = this.getItemHeight();
         const viewportSize = this.viewportRuler.getViewportSize();
 
-        const topSpaceAvailable = this.triggerRect.top - SELECT_PANEL_VIEWPORT_PADDING;
+        const topSpaceAvailable = this.triggerRect.top - TREE_SELECT_PANEL_VIEWPORT_PADDING;
         const bottomSpaceAvailable =
-            viewportSize.height - this.triggerRect.bottom - SELECT_PANEL_VIEWPORT_PADDING;
+            viewportSize.height - this.triggerRect.bottom - TREE_SELECT_PANEL_VIEWPORT_PADDING;
 
         const panelHeightTop = Math.abs(this.offsetY);
         const totalPanelHeight =
-            Math.min(this.getItemCount() * itemHeight, SELECT_PANEL_MAX_HEIGHT);
+            Math.min(this.getItemCount() * itemHeight, TREE_SELECT_PANEL_MAX_HEIGHT);
         const panelHeightBottom = totalPanelHeight - panelHeightTop - this.triggerRect.height;
 
         if (panelHeightBottom > bottomSpaceAvailable) {
