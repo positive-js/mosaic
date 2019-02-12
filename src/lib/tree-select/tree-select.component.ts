@@ -272,8 +272,6 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     /** User-supplied override of the trigger element. */
     @ContentChild(McTreeSelectTrigger) customTrigger: McTreeSelectTrigger;
 
-    /** All of the defined select options. */
-    // @ViewChildren(McTreeOption) options: QueryList<McTreeSelectOption<T>>;
     options: QueryList<McTreeSelectOption<T>>;
 
     /** Event emitted when the select panel has been toggled. */
@@ -538,7 +536,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
         this.options.changes
             .pipe(startWith(null), takeUntil(this.destroy))
             .subscribe(() => {
-                this.updateSelectedOptions(this.selectedOptions.selected);
+                this.updateSelectedOptions();
 
                 this.resetOptions();
             });
@@ -750,8 +748,6 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
                 this.dataDiffer.diff([]);
 
                 this.renderNodeChanges((this.dataSource as McTreeFlatDataSource<T, any>).expandedData.value);
-
-                this.updateSelectedOptions(this.selectedOptions.selected);
             });
     }
 
@@ -878,10 +874,13 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
         }
     }
 
-    private updateSelectedOptions(selectedOptions: McTreeSelectOption<T>[]): void {
-        selectedOptions.forEach((selectedOption) => {
+    private updateSelectedOptions(): void {
+        this.selectedOptions.selected.forEach((selectedOption) => {
             this.options.forEach((option) => {
                 if (option.data === selectedOption.data) {
+                    this.selectedOptions.deselect(selectedOption);
+                    this.selectedOptions.select(option);
+
                     option.select();
                 }
             });
