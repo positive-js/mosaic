@@ -29,12 +29,7 @@ let uniqueIdCounter = 0;
 
 /** Event object emitted by McOption when selected or deselected. */
 export class McOptionSelectionChange {
-    constructor(
-        /** Reference to the option that emitted the event. */
-        public source: McOption,
-        /** Whether the change in the option's value was a result of a user action. */
-        public isUserInput = false) {
-    }
+    constructor(public source: McOption, public isUserInput = false) {}
 }
 
 /**

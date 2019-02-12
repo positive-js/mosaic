@@ -69,16 +69,14 @@ import {
 import {
     ErrorStateMatcher,
     McOption,
-    McOptionSelectionChange
+    McOptionSelectionChange,
+    getMcSelectDynamicMultipleError,
+    getMcSelectNonArrayValueError,
+    getMcSelectNonFunctionValueError
 } from '@ptsecurity/mosaic/core';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 
 import { McSelectModule } from './index';
-import {
-    getMcSelectDynamicMultipleError,
-    getMcSelectNonArrayValueError,
-    getMcSelectNonFunctionValueError
-} from './select-errors';
 import { McSelect } from './select.component';
 
 

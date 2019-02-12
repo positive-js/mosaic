@@ -17,9 +17,6 @@ import {
 } from '@ptsecurity/cdk/keycodes';
 import {
     CdkConnectedOverlay,
-    Overlay,
-    RepositionScrollStrategy,
-    IScrollStrategy,
     ViewportRuler
 } from '@ptsecurity/cdk/overlay';
 
@@ -36,7 +33,6 @@ import {
     ElementRef,
     EventEmitter,
     Inject,
-    InjectionToken,
     Input,
     isDevMode,
     NgZone,
@@ -78,7 +74,8 @@ import {
 
     getMcSelectDynamicMultipleError,
     getMcSelectNonFunctionValueError,
-    getMcSelectNonArrayValueError
+    getMcSelectNonArrayValueError,
+    MC_SELECT_SCROLL_STRATEGY
 } from '@ptsecurity/mosaic/core';
 
 import { McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
@@ -102,31 +99,9 @@ let nextUniqueId = 0;
 /** The height of the select items in `em` units. */
 export const SELECT_ITEM_HEIGHT_EM = 2;
 
-/** Injection token that determines the scroll handling while a select is open. */
-export const MC_SELECT_SCROLL_STRATEGY =
-    new InjectionToken<() => IScrollStrategy>('mc-select-scroll-strategy');
-
-/** @docs-private */
-export function mcSelectScrollStrategyProviderFactory(overlay: Overlay):
-    () => RepositionScrollStrategy {
-    return () => overlay.scrollStrategies.reposition();
-}
-
-/** @docs-private */
-export const MC_SELECT_SCROLL_STRATEGY_PROVIDER = {
-    provide: MC_SELECT_SCROLL_STRATEGY,
-    deps: [Overlay],
-    useFactory: mcSelectScrollStrategyProviderFactory
-};
-
 /** Change event object that is emitted when the select value has changed. */
 export class McSelectChange {
-    constructor(
-        /** Reference to the select that emitted the change event. */
-        public source: McSelect,
-        /** Current value of the select that emitted the event. */
-        public value: any) {
-    }
+    constructor(public source: McSelect, public value: any) {}
 }
 
 export class McSelectBase {

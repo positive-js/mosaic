@@ -74,7 +74,8 @@ import {
 
     getMcSelectDynamicMultipleError,
     getMcSelectNonFunctionValueError,
-    getMcSelectNonArrayValueError
+    getMcSelectNonArrayValueError,
+    MC_SELECT_SCROLL_STRATEGY
 } from '@ptsecurity/mosaic/core';
 
 import { McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
@@ -98,29 +99,6 @@ import { McTreeSelectOption } from './tree-select-option.component';
 
 
 let nextUniqueId = 0;
-
-/** Injection token that determines the scroll handling while a select is open. */
-export const MC_TREE_SELECT_SCROLL_STRATEGY =
-    new InjectionToken<() => IScrollStrategy>('mc-tree-select-scroll-strategy');
-
-/** @docs-private */
-export function mcTreeSelectScrollStrategyProviderFactory(overlay: Overlay):
-    () => RepositionScrollStrategy {
-    return () => overlay.scrollStrategies.reposition();
-}
-
-/** @docs-private */
-export const MC_TREE_SELECT_SCROLL_STRATEGY_PROVIDER = {
-    provide: MC_TREE_SELECT_SCROLL_STRATEGY,
-    deps: [Overlay],
-    useFactory: mcTreeSelectScrollStrategyProviderFactory
-};
-
-/**
- * The following style constants are necessary to save here in order
- * to properly calculate the alignment of the selected option over
- * the trigger element.
- */
 
 /** Change event object that is emitted when the select value has changed. */
 export class McTreeSelectChange<T> {
@@ -461,7 +439,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
         @Optional() private readonly parentFormField: McFormField,
         @Self() @Optional() public ngControl: NgControl,
         @Attribute('tabindex') tabIndex: string,
-        @Inject(MC_TREE_SELECT_SCROLL_STRATEGY) private readonly scrollStrategyFactory
+        @Inject(MC_SELECT_SCROLL_STRATEGY) private readonly scrollStrategyFactory
     ) {
         super(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl, differs, changeDetectorRef);
 
