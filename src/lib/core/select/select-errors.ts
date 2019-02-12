@@ -3,7 +3,7 @@
  * after initialization.
  * @docs-private
  */
-export function getMcTreeSelectDynamicMultipleError(): Error {
+export function getMcSelectDynamicMultipleError(): Error {
     return Error('Cannot change `multiple` mode of select after initialization.');
 }
 
@@ -13,7 +13,7 @@ export function getMcTreeSelectDynamicMultipleError(): Error {
  * resetting the value.
  * @docs-private
  */
-export function getMcTreeSelectNonArrayValueError(): Error {
+export function getMcSelectNonArrayValueError(): Error {
     return Error('Value must be an array in multiple-selection mode.');
 }
 
@@ -22,6 +22,6 @@ export function getMcTreeSelectNonArrayValueError(): Error {
  * used to determine if a value corresponds to an option. Note that whether the function
  * actually takes two values and returns a boolean is not checked.
  */
-export function getMcTreeSelectNonFunctionValueError(): Error {
+export function getMcSelectNonFunctionValueError(): Error {
     return Error('`compareWith` must be a function.');
 }
