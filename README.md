@@ -30,12 +30,12 @@ Before you start, make sure you have a recent version of [NodeJS](http://nodejs.
 From the project folder, execute the following commands:
 
 ```shell
-$ npm install
+$ yarn install
 ```
 
 ## Running The Component
 ```shell
-$ npm run server-dev:button
+$ yarn run server-dev:button
 ```
 
 ## Credits
