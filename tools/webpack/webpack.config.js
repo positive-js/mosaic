@@ -20,6 +20,7 @@ module.exports = function (options) {
             'core-js/es5',
             'core-js/es6',
             'core-js/es7/reflect',
+            'core-js/es7/object',
             'zone.js/dist/zone',
             'zone.js/dist/long-stack-trace-zone'
         ],
@@ -30,7 +31,9 @@ module.exports = function (options) {
             '@angular/core',
             '@angular/platform-browser',
             '@angular/platform-browser-dynamic',
-            'rxjs'
+            'rxjs',
+            'moment',
+            'messageformat'
         ],
     };
 
@@ -65,7 +68,6 @@ module.exports = function (options) {
 
         module: {
             rules: [
-
                 {
                     test: /\.(html)$/,
                     loader: 'raw-loader',

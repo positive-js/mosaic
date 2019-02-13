@@ -26,7 +26,14 @@ task('payload', series('mosaic:clean-build', async () => {
         cdk_umd: getBundleSize('cdk*.umd.js'),
         cdk_umd_minified_uglify: getBundleSize('cdk*.umd.min.js'),
         cdk_fesm_2015: getBundleSize('cdk.js') + getBundleSize('cdk/!(*.es5).js'),
-        cdk_fesm_2014: getBundleSize('cdk.es5.js') + getBundleSize('cdk/*.es5.js')
+        cdk_fesm_2014: getBundleSize('cdk.es5.js') + getBundleSize('cdk/*.es5.js'),
+        // mosaic-moment-adapter bundles
+        mosaic_date_adapter_umd: getBundleSize('mosaic-moment-adapter*.umd.js'),
+        mosaic_date_adapter_umd_minified_uglify: getBundleSize('mosaic-moment-adapter*.umd.min.js'),
+        mosaic_date_adapter_fesm_2015: getBundleSize('mosaic-moment-adapter.js') +
+            getBundleSize('mosaic-moment-adapter/!(*.es5).js'),
+        mosaic_date_adapter_fesm_2014: getBundleSize('mosaic-moment-adapter.es5.js') +
+            getBundleSize('mosaic-moment-adapter/*.es5.js')
     };
 
     // Print the results to the console, so we can read it from the CI.

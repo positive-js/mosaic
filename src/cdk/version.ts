@@ -1,4 +1,3 @@
-
 import { Version } from '@angular/core';
 
 /** Current version of the Component Development Kit. */

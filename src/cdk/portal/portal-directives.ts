@@ -10,10 +10,10 @@ import {
     OnInit,
     Output,
     TemplateRef,
-    ViewContainerRef,
+    ViewContainerRef
 } from '@angular/core';
 
-import {BasePortalOutlet, ComponentPortal, Portal, TemplatePortal} from './portal';
+import { BasePortalOutlet, ComponentPortal, Portal, TemplatePortal } from './portal';
 
 
 /**
@@ -120,11 +120,12 @@ export class CdkPortalOutlet extends BasePortalOutlet implements OnInit, OnDestr
             portal.viewContainerRef :
             this._viewContainerRef;
 
-        const componentFactory =
-            this._componentFactoryResolver.resolveComponentFactory(portal.component);
+        const resolver = portal.componentFactoryResolver || this._componentFactoryResolver;
+
+        const componentFactory = resolver.resolveComponentFactory(portal.component);
         const ref = viewContainerRef.createComponent(
             componentFactory, viewContainerRef.length,
-            portal.injector || viewContainerRef.parentInjector);
+            portal.injector || viewContainerRef.injector);
 
         super.setDisposeFn(() => ref.destroy());
         this._attachedPortal = portal;

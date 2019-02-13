@@ -4,7 +4,6 @@ import {
     ElementRef,
     forwardRef,
     Inject,
-    InjectionToken,
     Input,
     OnChanges,
     OnDestroy,
@@ -23,11 +22,6 @@ import {
     ValidatorFn,
     Validators
 } from '@angular/forms';
-import {
-    noop,
-    Subject
-} from 'rxjs';
-
 import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import {
     CanUpdateErrorState,
@@ -36,6 +30,11 @@ import {
     mixinErrorState
 } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
+import { MC_INPUT_VALUE_ACCESSOR } from '@ptsecurity/mosaic/input';
+import {
+    noop,
+    Subject
+} from 'rxjs';
 
 import {
     ARROW_DOWN_KEYCODE,
@@ -58,9 +57,6 @@ import {
 let uniqueComponentIdSuffix: number = 0;
 let validatorOnChange: () => void = noop;
 let validator: ValidatorFn | null = () => null;
-
-export const MC_INPUT_VALUE_ACCESSOR =
-    new InjectionToken<{ value: any }>('MC_INPUT_VALUE_ACCESSOR');
 
 export class McTimepickerBase {
     constructor(

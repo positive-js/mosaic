@@ -38,11 +38,13 @@ function isMosaicSpecFile(path) {
 /** Configures Angular's TestBed. */
 function configureTestBed() {
     return Promise.all([
+        System.import('@angular/core'),
         System.import('@angular/core/testing'),
         System.import('@angular/platform-browser-dynamic/testing')
     ]).then(function (providers) {
-        var testing = providers[0];
-        var testingBrowser = providers[1];
+        var core = providers[0];
+        var testing = providers[1];
+        var testingBrowser = providers[2];
 
         var testBed = testing.TestBed.initTestEnvironment(
             testingBrowser.BrowserDynamicTestingModule,

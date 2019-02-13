@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { fakeAsync, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-
 import { ThemePalette } from '@ptsecurity/mosaic/core';
+import { McIconModule } from '@ptsecurity/mosaic/icon';
 
 import { McButtonModule } from './index';
 
 
-describe('MatButton', () => {
+describe('McButton', () => {
 
     beforeEach(fakeAsync(() => {
         TestBed.configureTestingModule({
@@ -135,6 +135,57 @@ describe('MatButton', () => {
     });
 });
 
+describe('McIconButton', () => {
+    beforeEach(fakeAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [McButtonModule, McIconModule],
+            declarations: [
+                McIconButtonCommentCaseTestApp,
+                McIconButtonTextIconCaseTestApp,
+                McIconButtonTwoIconsCaseTestApp
+            ]
+        });
+
+        TestBed.compileComponents();
+    }));
+
+    it('should not add left and right css classes when sibling is html comments', () => {
+        const fixture = TestBed.createComponent(McIconButtonCommentCaseTestApp);
+
+        fixture.detectChanges();
+
+        expect(fixture.debugElement.query(By.css('.mc-icon_left'))).toBeNull();
+        expect(fixture.debugElement.query(By.css('.mc-icon_right'))).toBeNull();
+
+        expect(fixture.debugElement.query(By.css('.mc-icon-button_left'))).toBeNull();
+        expect(fixture.debugElement.query(By.css('.mc-icon-button_right'))).toBeNull();
+    });
+
+    it('should not add left and right css classes when sibling is not html comments but text node', () => {
+        const fixture = TestBed.createComponent(McIconButtonTextIconCaseTestApp);
+
+        fixture.detectChanges();
+
+        expect(fixture.debugElement.query(By.css('.mc-icon_left'))).not.toBeNull();
+        expect(fixture.debugElement.query(By.css('.mc-icon_right'))).not.toBeNull();
+
+        expect(fixture.debugElement.query(By.css('.mc-icon-button_left'))).not.toBeNull();
+        expect(fixture.debugElement.query(By.css('.mc-icon-button_right'))).not.toBeNull();
+    });
+
+    it('should not add left and right css classes when there are two icons', () => {
+        const fixture = TestBed.createComponent(McIconButtonTwoIconsCaseTestApp);
+
+        fixture.detectChanges();
+
+        expect(fixture.debugElement.queryAll(By.css('.mc-icon_left')).length).toBe(1);
+        expect(fixture.debugElement.queryAll(By.css('.mc-icon_right')).length).toBe(1);
+
+        expect(fixture.debugElement.query(By.css('.mc-icon-button_left'))).toBeNull();
+        expect(fixture.debugElement.query(By.css('.mc-icon-button_right'))).toBeNull();
+    });
+});
+
 
 @Component({
     selector: 'test-app',
@@ -160,3 +211,38 @@ class TestApp {
         this.clickCount++;
     }
 }
+
+@Component({
+    selector: 'mc-icon-button-comment-case-test-app',
+    template: `
+        <button mc-icon-button type="button">
+            <!-- comment-before -->
+            <i mc-icon="mc-angle-down-L_16"></i>
+            <!-- comment-after -->
+        </button>
+    `
+})
+class McIconButtonCommentCaseTestApp {}
+
+@Component({
+    selector: 'mc-icon-button-text-icon-case-test-app',
+    template: `
+        <button mc-icon-button type="button">
+            Some text
+            <i mc-icon="mc-angle-down-L_16"></i>
+            Some text
+        </button>
+    `
+})
+class McIconButtonTextIconCaseTestApp {}
+
+@Component({
+    selector: 'mc-icon-button-two-icons-case-test-app',
+    template: `
+        <button mc-icon-button type="button">
+            <i mc-icon="mc-angle-up-L_16"></i>
+            <i mc-icon="mc-angle-down-L_16"></i>
+        </button>
+    `
+})
+class McIconButtonTwoIconsCaseTestApp {}

@@ -1,0 +1,25 @@
+{
+    "extends": "./tsconfig.build",
+    "compilerOptions": {
+        "importHelpers": false,
+        "module": "commonjs",
+        "target": "es5",
+        "types": ["jasmine"]
+    },
+    "angularCompilerOptions": {
+        "strictMetadataEmit": true,
+        "skipTemplateCodegen": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "fullTemplateTypeCheck": true,
+
+        // Unset options inherited from tsconfig-build
+        "annotateForClosureCompiler": false,
+        "flatModuleOutFile": null,
+        "flatModuleId": null
+    },
+    "include": [
+        "**/*.spec.ts",
+        "index.ts"
+    ]
+}
