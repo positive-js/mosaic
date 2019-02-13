@@ -9,7 +9,7 @@ import { BaseReleaseTask } from './base-release-task';
 import { extractReleaseNotes } from './extract-release-notes';
 import { GitClient } from './git/git-client';
 import { getGithubNewReleaseUrl } from './git/github-urls';
-import { isNpmAuthenticated, runInteractiveNpmLogin, runNpmPublish } from './npm/npm-client';
+import { isNpmAuthenticated, npmLogout, npmLoginInteractive, npmPublish } from './npm/npm-client';
 import { promptForNpmDistTag } from './prompt/npm-dist-tag-prompt';
 import { promptForUpstreamRemote } from './prompt/upstream-remote-prompt';
 import { checkReleasePackage } from './release-output/check-packages';
@@ -129,6 +129,12 @@ class PublishReleaseTask extends BaseReleaseTask {
 
         console.log();
         console.info(chalk.green(chalk.bold(`  ✓   Published all packages successfully`)));
+
+        // Always log out of npm after releasing to prevent unintentional changes to
+        // any packages.
+        npmLogout();
+        console.info(chalk.green(chalk.bold(`  ✓   Logged out of npm`)));
+
         console.info(chalk.yellow(`  ⚠   Please draft a new release of the version on Github.`));
         console.info(chalk.yellow(`      ${newReleaseUrl}`));
     }
@@ -217,7 +223,7 @@ class PublishReleaseTask extends BaseReleaseTask {
         console.log(chalk.yellow(`  ⚠   NPM is currently not authenticated. Running "npm login"..`));
 
         for (let i = 0; i < MAX_NPM_LOGIN_TRIES; i++) {
-            if (runInteractiveNpmLogin()) {
+            if (npmLoginInteractive()) {
                 // In case the user was able to login properly, we want to exit the loop as we
                 // don't need to ask for authentication again.
                 break;
@@ -240,7 +246,7 @@ class PublishReleaseTask extends BaseReleaseTask {
     private publishPackageToNpm(packageName: string, npmDistTag: string) {
         console.info(chalk.green(`  ⭮   Publishing "${packageName}"..`));
 
-        const errorOutput = runNpmPublish(join(this.releaseOutputPath, packageName), npmDistTag);
+        const errorOutput = npmPublish(join(this.releaseOutputPath, packageName), npmDistTag);
 
         if (errorOutput) {
             console.error(chalk.red(`  ✘   An error occurred while publishing "${packageName}".`));
