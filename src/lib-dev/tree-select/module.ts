@@ -165,7 +165,7 @@ export class DemoComponent {
         return nodeData.expandable;
     }
 
-    onSelectionChange($event: McTreeSelectChange<any>) {
+    onSelectionChange($event: McTreeSelectChange) {
         console.log(`onSelectionChange: ${$event.value}`);
     }
 

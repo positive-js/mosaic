@@ -17,8 +17,8 @@ import { McTreeSelect } from './tree-select.component';
 
 let uniqueIdCounter: number = 0;
 
-export class McTreeSelectOptionChange<T> {
-    constructor(public source: McTreeSelectOption<T>, public isUserInput = false) {}
+export class McTreeSelectOptionChange {
+    constructor(public source: McTreeSelectOption, public isUserInput = false) {}
 }
 
 
@@ -41,10 +41,10 @@ export class McTreeSelectOptionChange<T> {
         { provide: CdkTreeNode, useExisting: McTreeSelectOption }
     ]
 })
-export class McTreeSelectOption<T> extends CdkTreeNode<T> implements CanDisable {
+export class McTreeSelectOption extends CdkTreeNode<McTreeSelectOption> implements CanDisable {
     /** Event emitted when the option is selected or deselected. */
     // tslint:disable-next-line:no-output-on-prefix
-    @Output() readonly onSelectionChange = new EventEmitter<McTreeSelectOptionChange<T>>();
+    @Output() readonly onSelectionChange = new EventEmitter<McTreeSelectOptionChange>();
 
     /** The form value of the option. */
     @Input() value: any;
@@ -105,7 +105,7 @@ export class McTreeSelectOption<T> extends CdkTreeNode<T> implements CanDisable 
     constructor(
         protected elementRef: ElementRef,
         protected changeDetectorRef: ChangeDetectorRef,
-        @Inject(forwardRef(() => McTreeSelect)) protected treeSelection: McTreeSelect<T>
+        @Inject(forwardRef(() => McTreeSelect)) protected treeSelection: McTreeSelect
     ) {
         super(elementRef, treeSelection);
     }

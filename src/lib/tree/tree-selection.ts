@@ -189,7 +189,7 @@ class McTreeSelectionBase<T> extends CdkTree<T> {
     }
 }
 
-export const McTreeSelectionBaseMixin: HasTabIndexCtor & CanDisableCtor &
+const McTreeSelectionBaseMixin: HasTabIndexCtor & CanDisableCtor &
     typeof McTreeSelectionBase = mixinTabIndex(mixinDisabled(McTreeSelectionBase));
 
 

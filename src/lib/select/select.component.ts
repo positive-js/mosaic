@@ -114,7 +114,7 @@ export class McSelectBase {
     ) {}
 }
 
-export const McSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorStateCtor &
+const McSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorStateCtor &
     typeof McSelectBase = mixinTabIndex(mixinDisabled(mixinErrorState(McSelectBase)));
 
 
@@ -453,7 +453,7 @@ export class McSelect extends McSelectMixinBase implements
     ngAfterContentInit() {
         this.initKeyManager();
 
-        this.selectionModel.onChange!
+        this.selectionModel.changed
             .pipe(takeUntil(this.destroy))
             .subscribe((event) => {
                 event.added.forEach((option) => option.select());

@@ -18,9 +18,6 @@ import {
 } from '@ptsecurity/cdk/keycodes';
 import {
     CdkConnectedOverlay,
-    IScrollStrategy,
-    Overlay,
-    RepositionScrollStrategy,
     ViewportRuler
 } from '@ptsecurity/cdk/overlay';
 
@@ -36,7 +33,7 @@ import {
     DoCheck,
     ElementRef,
     EventEmitter,
-    Inject, InjectionToken,
+    Inject,
     Input,
     isDevMode, IterableDiffer, IterableDiffers,
     NgZone,
@@ -101,8 +98,8 @@ import { McTreeSelectOption } from './tree-select-option.component';
 let nextUniqueId = 0;
 
 /** Change event object that is emitted when the select value has changed. */
-export class McTreeSelectChange<T> {
-    constructor(public source: McTreeSelectOption<T>, public value: any, public isUserInput = false) {}
+export class McTreeSelectChange {
+    constructor(public source: McTreeSelectOption, public value: any, public isUserInput = false) {}
 }
 
 
@@ -124,7 +121,7 @@ class McTreeSelectBase<T> extends CdkTree<T> {
 }
 
 // tslint:disable-next-line:naming-convention
-export const McTreeSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorStateCtor &
+const McTreeSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorStateCtor &
     typeof McTreeSelectBase = mixinTabIndex(mixinDisabled(mixinErrorState(McTreeSelectBase)));
 
 
@@ -160,7 +157,7 @@ export const McTreeSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdate
         { provide: CdkTree, useExisting: McTreeSelect }
     ]
 })
-export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
+export class McTreeSelect extends McTreeSelectMixinBase<McTreeSelectOption> implements
     AfterContentInit, AfterContentChecked, AfterViewInit, OnChanges, OnDestroy, OnInit, DoCheck, ControlValueAccessor,
     CanDisable, HasTabIndex, McFormFieldControl<any>, CanUpdateErrorState {
 
@@ -170,7 +167,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     hiddenItems: number = 0;
     oneMoreText: string = '...ещё';
 
-    dataDiffer: IterableDiffer<T>;
+    dataDiffer: IterableDiffer<McTreeSelectOption>;
 
     /** The last measured value for the trigger's client bounding rect. */
     triggerRect: ClientRect;
@@ -179,10 +176,10 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     triggerFontSize = 0;
 
     /** Deals with the selection logic. */
-    selectedOptions: SelectionModel<McTreeSelectOption<T>>;
+    selectedOptions: SelectionModel<McTreeSelectOption>;
 
     /** Manages keyboard events for options in the panel. */
-    keyManager: ActiveDescendantKeyManager<McTreeSelectOption<T>>;
+    keyManager: ActiveDescendantKeyManager<McTreeSelectOption>;
 
     /** The IDs of child options to be passed to the aria-owns attribute. */
     optionIds: string = '';
@@ -240,7 +237,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     /** User-supplied override of the trigger element. */
     @ContentChild(McTreeSelectTrigger) customTrigger: McTreeSelectTrigger;
 
-    options: QueryList<McTreeSelectOption<T>>;
+    options: QueryList<McTreeSelectOption>;
 
     /** Event emitted when the select panel has been toggled. */
     @Output() readonly openedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -254,7 +251,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
         this.openedChange.pipe(filter((o) => !o), map(() => {}));
 
     /** Event emitted when the selected value has been changed by the user. */
-    @Output() readonly selectionChange = new EventEmitter<McTreeSelectChange<T>>();
+    @Output() readonly selectionChange = new EventEmitter<McTreeSelectChange>();
 
     /**
      * Event that emits whenever the raw value of the select changes. This is here primarily
@@ -263,7 +260,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
      */
     @Output() readonly valueChange: EventEmitter<any> = new EventEmitter<any>();
 
-    @Input() trackBy: TrackByFunction<T>;
+    @Input() trackBy: TrackByFunction<McTreeSelectOption>;
 
     /** Classes to be passed to the select panel. Supports the same syntax as `ngClass`. */
     @Input() panelClass: string | string[] | Set<string> | { [key: string]: any };
@@ -276,11 +273,11 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
      * Follows the same logic as `Array.prototype.sort`.
      */
     @Input() sortComparator: (
-        a: McTreeSelectOption<T>, b: McTreeSelectOption<T>, options: McTreeSelectOption<T>[]
+        a: McTreeSelectOption, b: McTreeSelectOption, options: McTreeSelectOption[]
     ) => number;
 
     /** Combined stream of all of the child options' change events. */
-    readonly optionSelectionChanges: Observable<McTreeSelectChange<T>> = defer(() => {
+    readonly optionSelectionChanges: Observable<McTreeSelectChange> = defer(() => {
         if (this.options) {
             return merge(...this.options.map((option) => option.onSelectionChange));
         }
@@ -451,7 +448,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
             this.ngControl.valueAccessor = this;
         }
 
-        const defaultTrackBy = (_, item: McTreeSelectOption<T>) => JSON.stringify(item.data);
+        const defaultTrackBy = (_, item: McTreeSelectOption) => JSON.stringify(item.data);
         this.dataDiffer = this.differs.find([]).create(this.trackBy || defaultTrackBy);
 
         this.tabIndex = parseInt(tabIndex) || 0;
@@ -465,7 +462,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
 
         this.initKeyManager();
 
-        this.selectedOptions = new SelectionModel<McTreeSelectOption<T>>(this.multiple);
+        this.selectedOptions = new SelectionModel<McTreeSelectOption>(this.multiple);
         this.stateChanges.next();
 
         // We need `distinctUntilChanged` here, because some browsers will
@@ -633,17 +630,17 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
         this.stateChanges.next();
     }
 
-    get selected(): McTreeSelectOption<T> | McTreeSelectOption<T>[] {
+    get selected(): McTreeSelectOption | McTreeSelectOption[] {
         return this.multiple ? this.selectedOptions.selected : this.selectedOptions.selected[0];
     }
 
     get triggerValue(): string {
         if (this.empty) { return ''; }
 
-        return (this.selected as McTreeSelectOption<T>).viewValue;
+        return (this.selected as McTreeSelectOption).viewValue;
     }
 
-    get triggerValues(): McTreeSelectOption<T>[] {
+    get triggerValues(): McTreeSelectOption[] {
         if (this.empty) { return []; }
 
         const selectedOptions = this.selectedOptions.selected;
@@ -715,7 +712,9 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
 
                 this.dataDiffer.diff([]);
 
-                this.renderNodeChanges((this.dataSource as McTreeFlatDataSource<T, any>).expandedData.value);
+                this.renderNodeChanges(
+                    (this.dataSource as McTreeFlatDataSource<McTreeSelectOption, any>).expandedData.value
+                );
             });
     }
 
@@ -762,7 +761,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     }
 
     /** Invoked when an option is clicked. */
-    onRemoveSelectedOption(selectedOption: McTreeSelectOption<T>, $event) {
+    onRemoveSelectedOption(selectedOption: McTreeSelectOption, $event) {
         $event.stopPropagation();
 
         this.options.forEach((option) => {
@@ -818,8 +817,8 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     }
 
     renderNodeChanges(
-        data: T[],
-        dataDiffer: IterableDiffer<T> = this.dataDiffer,
+        data: McTreeSelectOption[],
+        dataDiffer: IterableDiffer<McTreeSelectOption> = this.dataDiffer,
         viewContainer: any = this.nodeOutlet && this.nodeOutlet.viewContainer
     ) {
         // todo need rework
@@ -989,8 +988,8 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
      * Finds and selects and option based on its value.
      * @returns Option that has the corresponding value.
      */
-    private selectValue(value: any): McTreeSelectOption<T> | undefined {
-        const correspondingOption = this.options.find((option: McTreeSelectOption<T>) => {
+    private selectValue(value: any): McTreeSelectOption | undefined {
+        const correspondingOption = this.options.find((option: McTreeSelectOption) => {
             try {
                 // Treat null as a special reset value.
                 return option.value != null && this._compareWith(option.value, value);
@@ -1013,7 +1012,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
 
     /** Sets up a key manager to listen to keyboard events on the overlay panel. */
     private initKeyManager() {
-        this.keyManager = new ActiveDescendantKeyManager<McTreeSelectOption<T>>(this.options)
+        this.keyManager = new ActiveDescendantKeyManager<McTreeSelectOption>(this.options)
             .withVerticalOrientation();
 
         this.keyManager.tabOut
@@ -1064,7 +1063,7 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     }
 
     /** Invoked when an option is clicked. */
-    private onSelect(option: McTreeSelectOption<T>, isUserInput: boolean) {
+    private onSelect(option: McTreeSelectOption, isUserInput: boolean) {
         const wasSelected = this.selectedOptions.isSelected(option);
 
         if (option.value == null && !this.multiple) {
@@ -1164,9 +1163,9 @@ export class McTreeSelect<T> extends McTreeSelectMixinBase<T> implements
     }
 
     /** Gets the index of the provided option in the option list. */
-    private getOptionIndex(option: McTreeSelectOption<T>): number | undefined {
+    private getOptionIndex(option: McTreeSelectOption): number | undefined {
         // todo разобраться с этим срачем!
-        return this.options.reduce((result: number, current: McTreeSelectOption<T>, index: number) => {
+        return this.options.reduce((result: number, current: McTreeSelectOption, index: number) => {
             /* tslint:disable-next-line:strict-type-predicates */
             return result === undefined ? (option === current ? index : undefined) : result;
         }, undefined);
