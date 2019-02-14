@@ -52,32 +52,32 @@ jobs:
         <<: *job_defaults
         steps:
             - attach_workspace: *attach_options
-            - run: npm run valid:lic
+            - run: yarn run valid:lic
 
     build_mosaic:
         <<: *job_defaults
         steps:
             - attach_workspace: *attach_options
-            - run: npm run build:lib
+            - run: yarn run build:lib
 
     build_cdk:
         <<: *job_defaults
         steps:
             - attach_workspace: *attach_options
-            - run: npm run build:cdk
+            - run: yarn run build:cdk
 
     build_mosaic-moment-adapter:
         <<: *job_defaults
         steps:
             - attach_workspace: *attach_options
-            - run: npm run build:mosaic-moment-adapter
+            - run: yarn run build:mosaic-moment-adapter
 
     test_unit:
         <<: *job_defaults
         steps:
             - attach_workspace: *attach_options
             - run:
-                  command: npm run test:unit
+                  command: yarn run test:unit
                   environment:
                       JUNIT_REPORT_PATH: ./junit/
                       JUNIT_REPORT_NAME: test-results.xml
@@ -95,9 +95,9 @@ jobs:
                       - "c3:de:eb:9c:82:70:a8:23:f3:4e:92:b8:07:d2:22:df"
             - *checkout_code
             - *restore_cache
-            - run: npm run build:cdk
-            - run: npm run build:lib
-            - run: npm run build:mosaic-moment-adapter
+            - run: yarn run build:cdk
+            - run: yarn run build:lib
+            - run: yarn run build:mosaic-moment-adapter
             - run: ./scripts/deploy/publish-artifacts.sh
 
     docs_publish:

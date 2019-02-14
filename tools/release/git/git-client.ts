@@ -28,7 +28,7 @@ export class GitClient {
         return this.spawnGitProcess(['rev-parse', refName]).stdout.trim();
     }
 
-    /** Gets whether the current Git repository has uncommitted changes. */
+    /** Gets whether the current Git repository has  uncommitted changes. */
     hasUncommittedChanges(): boolean {
         return this.spawnGitProcess(['diff-index', '--quiet', 'HEAD']).status !== 0;
     }
@@ -65,7 +65,7 @@ export class GitClient {
 
     /** Checks whether the specified tag exists locally. */
     hasLocalTag(tagName: string) {
-        return this.spawnGitProcess(['rev-parse', `refs/tags/${tagName}`]).status === 0;
+        return this.spawnGitProcess(['rev-parse', `refs/tags/${tagName}`], false).status === 0;
     }
 
     /** Gets the Git SHA of the specified local tag. */
@@ -80,19 +80,30 @@ export class GitClient {
     }
 
     /** Pushes the specified tag to the remote git repository. */
-    pushTagToRemote(tagName: string): boolean {
-        return this.spawnGitProcess(['push', this.remoteGitUrl, `refs/tags/${tagName}`]).status === 0;
+    pushTagToRemote(tagName: string, remoteName: string = this.remoteGitUrl): boolean {
+        return this.spawnGitProcess(['push', remoteName, `refs/tags/${tagName}`]).status === 0;
+    }
+
+    /** Checks whether the given remote has been set up. */
+    hasRemote(remoteName: string): boolean {
+        return this.spawnGitProcess(['remote', 'get-url', remoteName], false).status === 0;
+    }
+
+    /** Gets a list of all available remotes set up. */
+    getAvailableRemotes(): string[] {
+        // Note that "git" always uses a line feed for new lines.
+        return this.spawnGitProcess(['remote']).stdout.trim().split('\n');
     }
 
     /**
      * Spawns a child process running Git. The "stderr" output is inherited and will be printed
      * in case of errors. This makes it easier to debug failed commands.
      */
-    private spawnGitProcess(args: string[]): SpawnSyncReturns<string> {
+    private spawnGitProcess(args: string[], printStderr = true): SpawnSyncReturns<string> {
         return spawnSync('git', args, {
             cwd: this.projectDir,
-            stdio: ['pipe', 'pipe', 'inherit'],
-            encoding: 'utf8',
+            stdio: ['pipe', 'pipe', printStderr ? 'inherit' : 'pipe'],
+            encoding: 'utf8'
         });
     }
 }
