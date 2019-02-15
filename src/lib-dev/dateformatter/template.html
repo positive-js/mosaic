@@ -1,0 +1,80 @@
+<div class="layout-row">
+    <div class="flex container">
+        <h2>Absolute</h2>
+
+        <label>Date</label>
+        <mc-form-field>
+            <input mcInput [(ngModel)]="date" [mcDatepicker]="myDatepicker1" />
+            <mc-datepicker-toggle tabindex="7" mcSuffix [for]="myDatepicker1"></mc-datepicker-toggle>
+            <mc-datepicker #myDatepicker1></mc-datepicker>
+        </mc-form-field>
+
+        <br><br>
+
+        <label>Absolute long date</label>
+        <pre>{{dateAdapter.absoluteLongDate(date)}}</pre>
+
+        <label>Absolute long date time</label>
+        <pre>{{dateAdapter.absoluteLongDateTime(date)}}</pre>
+
+        <label>Absolute short date</label>
+        <pre>{{dateAdapter.absoluteShortDate(date)}}</pre>
+
+        <label>Absolute short date time</label>
+        <pre>{{dateAdapter.absoluteShortDateTime(date)}}</pre>
+    </div>
+    <div class="flex container">
+        <h2>Range</h2>
+
+        <label>Start date</label>
+        <mc-form-field>
+            <input mcInput [(ngModel)]="startDate" [mcDatepicker]="myDatepicker2" />
+            <mc-datepicker-toggle tabindex="7" mcSuffix [for]="myDatepicker2"></mc-datepicker-toggle>
+            <mc-datepicker #myDatepicker2></mc-datepicker>
+        </mc-form-field>
+
+        <br><br>
+
+        <label>End date</label>
+        <mc-form-field>
+            <input mcInput [(ngModel)]="endDate" [mcDatepicker]="myDatepicker3" />
+            <mc-datepicker-toggle tabindex="7" mcSuffix [for]="myDatepicker3"></mc-datepicker-toggle>
+            <mc-datepicker #myDatepicker3></mc-datepicker>
+        </mc-form-field>
+
+        <br><br>
+
+        <label>Range long date</label>
+        <pre>{{dateAdapter.rangeLongDate(startDate, endDate)}}</pre>
+
+        <label>Range long date time</label>
+        <pre>{{dateAdapter.rangeLongDateTime(startDate, endDate)}}</pre>
+
+        <label>Range short date</label>
+        <pre>{{dateAdapter.rangeShortDate(startDate, endDate)}}</pre>
+
+        <label>Range short date time</label>
+        <pre>{{dateAdapter.rangeShortDateTime(startDate, endDate)}}</pre>
+
+        <label>Range middle date time</label>
+        <pre>{{dateAdapter.rangeMiddleDateTime(startDate, endDate)}}</pre>
+    </div>
+    <div class="flex container">
+        <h2>Relative</h2>
+
+        <label>Relative date</label>
+        <mc-form-field>
+            <input mcInput [(ngModel)]="relativeDate" [mcDatepicker]="myDatepicker4" />
+            <mc-datepicker-toggle tabindex="7" mcSuffix [for]="myDatepicker4"></mc-datepicker-toggle>
+            <mc-datepicker #myDatepicker4></mc-datepicker>
+        </mc-form-field>
+
+        <br><br>
+
+        <label>Relative long date</label>
+        <pre>{{dateAdapter.relativeLongDate(relativeDate)}}</pre>
+
+        <label>Relative short date</label>
+        <pre>{{dateAdapter.relativeShortDate(relativeDate)}}</pre>
+    </div>
+</div>

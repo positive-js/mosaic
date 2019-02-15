@@ -1,0 +1,14 @@
+@import '~@ptsecurity/mosaic-icons/dist/styles/mc-icons';
+
+@import '../../lib/core/theming/prebuilt/default-theme';
+// @import '../../lib/core/theming/prebuilt/dark-theme';
+
+@import '../../lib/core/visual/prebuilt/default-visual';
+
+@include mosaic-visual();
+
+.container {
+    max-width: 400px;
+    padding-left: 16px;
+    padding-right: 16px;
+}

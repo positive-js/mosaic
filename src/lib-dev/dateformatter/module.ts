@@ -1,6 +1,6 @@
 // tslint:disable:no-console
 // tslint:disable:no-magic-numbers
-import { Component, NgModule, ViewEncapsulation } from '@angular/core';
+import { Component, NgModule, ViewEncapsulation, Inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
@@ -39,14 +39,13 @@ const moment = _rollupMoment || _moment;
 })
 export class DemoComponent {
     date = moment([2019, 0, 24]);
-    minDate = moment([2015, 0, 1]);
-    maxDate = moment([2020, 0, 1]);
+    startDate = moment([2019, 0, 20]);
+    endDate = moment([2019, 0, 24]);
+    relativeDate = moment().subtract(1, 'days');
 
-    myFilter(date: Moment): boolean {
-        const day = date.day();
-
-        return day !== 0 && day !== 6;
-    }
+    constructor(
+        @Inject(DateAdapter) public dateAdapter: DateAdapter<Moment>
+    ) {}
 }
 
 @NgModule({

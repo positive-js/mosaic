@@ -1,15 +1,3 @@
-import { InjectionToken } from '@angular/core';
-
-import { enUS } from './locales/en-US';
-import { ruRU } from './locales/ru-RU';
-
-
-export const MC_DATE_FORMATTER_CONFIGS_SET =
-    new InjectionToken<McDateFormatterConfigSet>('mc-date-formatter-configs-set');
-
-export class McDateFormatterConfigSet {
-    [name: string]: IFormatterConfig;
-}
 
 export interface IFormatterConfig {
     variables: IFormatterVariables;
@@ -70,11 +58,10 @@ export interface IFormatterRelativeTemplate {
     BEFORE_YESTERDAY: string;
 }
 
-export const DEFAULT_MC_DATE_FORMATTER_CONFIGS_SET: McDateFormatterConfigSet = {
-    get 'en-US'(): IFormatterConfig {
-        return enUS;
-    },
-    get 'ru-RU'(): IFormatterConfig {
-        return ruRU;
-    }
-};
+export interface ICompiledVariables {
+    CURRENT_YEAR?: string;
+    SECONDS_PASSED?: number;
+    MINUTES_PASSED?: number;
+    SAME_MONTH?: string;
+    SAME_DAY?: string;
+}
