@@ -533,7 +533,6 @@ export class McTreeSelect extends McTreeSelectMixinBase<McTreeSelectOption> impl
     /** `View -> model callback called when select has been touched` */
     _onTouched = () => {};
 
-    /** Toggles the overlay panel open or closed. */
     toggle() {
         if (this.panelOpen) {
             this.close();
@@ -542,7 +541,6 @@ export class McTreeSelect extends McTreeSelectMixinBase<McTreeSelectOption> impl
         }
     }
 
-    /** Opens the overlay panel. */
     open() {
         // if (this.disabled || !this.options || !this.options.length || this._panelOpen) { return; }
         if (this.disabled || this._panelOpen) { return; }

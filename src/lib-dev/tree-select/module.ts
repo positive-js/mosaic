@@ -95,7 +95,7 @@ export class FileDatabase {
     buildFileTree(value: any, level: number): FileNode[] {
         const data: any[] = [];
 
-        for (const k in value) {
+        for (const k of Object.keys(value)) {
             const v = value[k];
             const node = new FileNode();
 
