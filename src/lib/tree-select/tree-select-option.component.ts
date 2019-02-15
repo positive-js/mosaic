@@ -7,9 +7,7 @@ import {
     Output,
     EventEmitter, Component, ViewEncapsulation, ChangeDetectionStrategy
 } from '@angular/core';
-
 import { CdkTreeNode } from '@ptsecurity/cdk/tree';
-
 import { CanDisable, toBoolean } from '@ptsecurity/mosaic/core';
 
 import { McTreeSelect } from './tree-select.component';

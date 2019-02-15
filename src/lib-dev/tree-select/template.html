@@ -1,21 +1,26 @@
 <br><br><br><br><br><br><br>
 <div style="height: 20px">{{ selected }}</div>
 
+<button mc-button (click)="control.disable()">disable</button>
+<button mc-button (click)="control.setValue('rootNode_1')">setValue</button>
+
+<br><br><br>
+
 <div class="dev-container">
     <mc-form-field>
         <mc-tree-select
-            multiple
+            [formControl]="control"
             [dataSource]="dataSource"
             [treeControl]="treeControl"
             (selectionChange)="onSelectionChange($event)"
-            [(value)]="singleSelected">
+            [value]="singleSelected">
 
             <mc-tree-select-option [value]="node.name" *mcTreeNodeDef="let node" mcTreeNodePadding>
                 {{ node.name }}
             </mc-tree-select-option>
 
             <mc-tree-select-option [value]="node.name" *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
-                <i mc-icon="mc-angle-S_16" [style.transform]="treeControl.isExpanded(node) ? '' : 'rotate(-90deg)'" mcTreeNodeToggle></i>
+                <i mc-icon="mc-angle-down-S_16" [style.transform]="treeControl.isExpanded(node) ? '' : 'rotate(-90deg)'" mcTreeNodeToggle></i>
                 {{ node.name }} : {{ node.type }}
             </mc-tree-select-option>
         </mc-tree-select>

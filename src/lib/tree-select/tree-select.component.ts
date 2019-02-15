@@ -176,7 +176,7 @@ export class McTreeSelect extends McTreeSelectMixinBase<McTreeSelectOption> impl
     triggerFontSize = 0;
 
     /** Deals with the selection logic. */
-    selectedOptions: SelectionModel<McTreeSelectOption>;
+    selectionModel: SelectionModel<McTreeSelectOption>;
 
     /** Manages keyboard events for options in the panel. */
     keyManager: ActiveDescendantKeyManager<McTreeSelectOption>;
@@ -319,7 +319,7 @@ export class McTreeSelect extends McTreeSelectMixinBase<McTreeSelectOption> impl
     }
 
     set multiple(value: boolean) {
-        if (this.selectedOptions) {
+        if (this.selectionModel) {
             throw getMcSelectDynamicMultipleError();
         }
 
@@ -359,7 +359,7 @@ export class McTreeSelect extends McTreeSelectMixinBase<McTreeSelectOption> impl
 
         this._compareWith = fn;
 
-        if (this.selectedOptions) {
+        if (this.selectionModel) {
             // A different comparator means the selection could change.
             this.initializeSelection();
         }
@@ -440,8 +440,6 @@ export class McTreeSelect extends McTreeSelectMixinBase<McTreeSelectOption> impl
     ) {
         super(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl, differs, changeDetectorRef);
 
-        this.options = new QueryList();
-
         if (this.ngControl) {
             // Note: we provide the value accessor through here, instead of
             // the `providers` to avoid running into a circular import.
@@ -460,10 +458,13 @@ export class McTreeSelect extends McTreeSelectMixinBase<McTreeSelectOption> impl
     ngOnInit() {
         super.ngOnInit();
 
-        this.initKeyManager();
+        this.options = new QueryList();
 
-        this.selectedOptions = new SelectionModel<McTreeSelectOption>(this.multiple);
+        this.selectionModel = new SelectionModel<McTreeSelectOption>(this.multiple);
+
         this.stateChanges.next();
+
+        this.initKeyManager();
 
         // We need `distinctUntilChanged` here, because some browsers will
         // fire the animation end event twice for the same animation. See:
@@ -484,7 +485,7 @@ export class McTreeSelect extends McTreeSelectMixinBase<McTreeSelectOption> impl
     }
 
     ngAfterContentInit() {
-        this.selectedOptions.changed
+        this.selectionModel.changed
             .pipe(takeUntil(this.destroy))
             .subscribe((event) => {
                 event.added.forEach((option) => option.select());
@@ -590,8 +591,7 @@ export class McTreeSelect extends McTreeSelectMixinBase<McTreeSelectOption> impl
     // todo нужно доделать!
     writeValue(value: any) {
         // todo excluded for build and will be completed in near time
-        if (false) {
-        // if (this.options) {
+        if (this.options) {
             this.setSelectionByValue(value);
         }
     }
@@ -631,7 +631,7 @@ export class McTreeSelect extends McTreeSelectMixinBase<McTreeSelectOption> impl
     }
 
     get selected(): McTreeSelectOption | McTreeSelectOption[] {
-        return this.multiple ? this.selectedOptions.selected : this.selectedOptions.selected[0];
+        return this.multiple ? this.selectionModel.selected : this.selectionModel.selected[0];
     }
 
     get triggerValue(): string {
@@ -643,7 +643,7 @@ export class McTreeSelect extends McTreeSelectMixinBase<McTreeSelectOption> impl
     get triggerValues(): McTreeSelectOption[] {
         if (this.empty) { return []; }
 
-        const selectedOptions = this.selectedOptions.selected;
+        const selectedOptions = this.selectionModel.selected;
 
         if (this.isRtl()) { selectedOptions.reverse(); }
 
@@ -651,7 +651,7 @@ export class McTreeSelect extends McTreeSelectMixinBase<McTreeSelectOption> impl
     }
 
     get empty(): boolean {
-        return !this.selectedOptions || this.selectedOptions.isEmpty();
+        return !this.selectionModel || this.selectionModel.isEmpty();
     }
 
     isRtl(): boolean {
@@ -768,7 +768,7 @@ export class McTreeSelect extends McTreeSelectMixinBase<McTreeSelectOption> impl
             if (option.data === selectedOption.data) { option.deselect(); }
         });
 
-        this.selectedOptions.deselect(selectedOption);
+        this.selectionModel.deselect(selectedOption);
     }
 
     calculateHiddenItems() {
@@ -786,7 +786,7 @@ export class McTreeSelect extends McTreeSelectMixinBase<McTreeSelectOption> impl
             }
         });
 
-        this.hiddenItems = this.selectedOptions.selected.length - visibleItems;
+        this.hiddenItems = this.selectionModel.selected.length - visibleItems;
 
         if (this.hiddenItems) {
             const itemsCounter = this.trigger.nativeElement.querySelector('.mc-select__match-hidden-text');
@@ -842,11 +842,11 @@ export class McTreeSelect extends McTreeSelectMixinBase<McTreeSelectOption> impl
     }
 
     private updateSelectedOptions(): void {
-        this.selectedOptions.selected.forEach((selectedOption) => {
+        this.selectionModel.selected.forEach((selectedOption) => {
             this.options.forEach((option) => {
                 if (option.data === selectedOption.data) {
-                    this.selectedOptions.deselect(selectedOption);
-                    this.selectedOptions.select(option);
+                    this.selectionModel.deselect(selectedOption);
+                    this.selectionModel.select(option);
 
                     option.select();
                 }
@@ -967,11 +967,11 @@ export class McTreeSelect extends McTreeSelectMixinBase<McTreeSelectOption> impl
         if (this.multiple && value) {
             if (!Array.isArray(value)) { throw getMcSelectNonArrayValueError(); }
 
-            this.selectedOptions.clear();
+            this.selectionModel.clear();
             value.forEach((currentValue: any) => this.selectValue(currentValue));
             this.sortValues();
         } else {
-            this.selectedOptions.clear();
+            this.selectionModel.clear();
             const correspondingOption = this.selectValue(value);
 
             // Shift focus to the active item. Note that we shouldn't do this in multiple
@@ -1004,7 +1004,7 @@ export class McTreeSelect extends McTreeSelectMixinBase<McTreeSelectOption> impl
         });
 
         if (correspondingOption) {
-            this.selectedOptions.select(correspondingOption);
+            this.selectionModel.select(correspondingOption);
         }
 
         return correspondingOption;
@@ -1064,17 +1064,17 @@ export class McTreeSelect extends McTreeSelectMixinBase<McTreeSelectOption> impl
 
     /** Invoked when an option is clicked. */
     private onSelect(option: McTreeSelectOption, isUserInput: boolean) {
-        const wasSelected = this.selectedOptions.isSelected(option);
+        const wasSelected = this.selectionModel.isSelected(option);
 
         if (option.value == null && !this.multiple) {
             option.deselect();
-            this.selectedOptions.clear();
+            this.selectionModel.clear();
             this.propagateChanges(option.value);
         } else {
             if (option.selected) {
-                this.selectedOptions.select(option);
+                this.selectionModel.select(option);
             } else {
-                this.selectedOptions.deselect(option);
+                this.selectionModel.deselect(option);
             }
 
             if (isUserInput) {
@@ -1094,7 +1094,7 @@ export class McTreeSelect extends McTreeSelectMixinBase<McTreeSelectOption> impl
             }
         }
 
-        if (wasSelected !== this.selectedOptions.isSelected(option)) {
+        if (wasSelected !== this.selectionModel.isSelected(option)) {
             this.propagateChanges();
         }
 
@@ -1106,7 +1106,7 @@ export class McTreeSelect extends McTreeSelectMixinBase<McTreeSelectOption> impl
         if (this.multiple) {
             const options = this.options.toArray();
 
-            this.selectedOptions.sort((a, b) => {
+            this.selectionModel.sort((a, b) => {
                 return this.sortComparator ? this.sortComparator(a, b, options) :
                     options.indexOf(a) - options.indexOf(b);
             });
@@ -1145,7 +1145,7 @@ export class McTreeSelect extends McTreeSelectMixinBase<McTreeSelectOption> impl
             if (this.empty) {
                 this.keyManager.setFirstItemActive();
             } else {
-                this.keyManager.setActiveItem(this.selectedOptions.selected[0]);
+                this.keyManager.setActiveItem(this.selectionModel.selected[0]);
             }
         }
     }
@@ -1183,7 +1183,7 @@ export class McTreeSelect extends McTreeSelectMixinBase<McTreeSelectOption> impl
 
         // If no value is selected we open the popup to the first item.
         const selectedOptionOffset =
-            this.empty ? 0 : this.getOptionIndex(this.selectedOptions.selected[0])!;
+            this.empty ? 0 : this.getOptionIndex(this.selectionModel.selected[0])!;
 
         // We must maintain a scroll buffer so the selected option will be scrolled to the
         // center of the overlay panel rather than the top.

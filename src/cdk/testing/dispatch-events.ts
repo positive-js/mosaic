@@ -24,7 +24,7 @@ export function dispatchFakeEvent(node: Node | Window, type: string, canBubble?:
 export function dispatchKeyboardEvent(node: Node, type: string, keyCode: number, target?: Element,
                                       shiftKey = false, ctrlKey = false, altKey = false):
     KeyboardEvent {
-    const event =  createKeyboardEvent(type, keyCode, target, undefined, shiftKey, ctrlKey, altKey);
+    const event = createKeyboardEvent(type, keyCode, target, undefined, shiftKey, ctrlKey, altKey);
 
     return dispatchEvent(node, event) as KeyboardEvent;
 }

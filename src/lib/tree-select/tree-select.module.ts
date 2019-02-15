@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-
 import { OverlayModule } from '@ptsecurity/cdk/overlay';
 import { CdkTreeModule } from '@ptsecurity/cdk/tree';
 import { MC_SELECT_SCROLL_STRATEGY_PROVIDER, McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';

@@ -125,6 +125,10 @@ export class FileDatabase {
     providers: [FileDatabase]
 })
 export class DemoComponent {
+    control = new FormControl();
+
+    select: any;
+
     treeControl: FlatTreeControl<FileFlatNode>;
     treeFlattener: McTreeFlattener<FileNode, FileFlatNode>;
 
