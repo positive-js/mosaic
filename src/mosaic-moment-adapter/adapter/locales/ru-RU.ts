@@ -1,4 +1,4 @@
-import { IFormatterConfig } from '@ptsecurity/cdk/datetime';
+import { IFormatterConfig } from './IFormatterConfig';
 
 
 export const ruRU: IFormatterConfig = {

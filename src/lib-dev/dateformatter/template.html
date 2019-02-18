@@ -11,6 +11,9 @@
 
         <br><br>
 
+        <label>Absolute date by template</label>
+        <pre>{{dateAdapter.absoluteDate(date, absoluteDateTemplate, true)}}</pre>
+
         <label>Absolute long date</label>
         <pre>{{dateAdapter.absoluteLongDate(date)}}</pre>
 
@@ -44,6 +47,9 @@
 
         <br><br>
 
+        <label>Range date by template</label>
+        <pre>{{dateAdapter.rangeDate(startDate, endDate, rangeDateTemplate)}}</pre>
+
         <label>Range long date</label>
         <pre>{{dateAdapter.rangeLongDate(startDate, endDate)}}</pre>
 
@@ -70,6 +76,9 @@
         </mc-form-field>
 
         <br><br>
+
+        <label>Relative date by template</label>
+        <pre>{{dateAdapter.relativeDate(relativeDate, relativeDateTemplate)}}</pre>
 
         <label>Relative long date</label>
         <pre>{{dateAdapter.relativeLongDate(relativeDate)}}</pre>

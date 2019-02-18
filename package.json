@@ -152,6 +152,7 @@
         "server-dev:cdk-vscroll-custom-strategy": "npm run server-dev -- --env.component cdk-virtual-scroll-custom-strategy",
         "server-dev:cdk-vscroll-data-source": "npm run server-dev -- --env.component cdk-virtual-scroll-data-source",
         "server-dev:checkbox": "npm run server-dev -- --env.component checkbox",
+        "server-dev:dateformatter": "npm run server-dev -- --env.component dateformatter",
         "server-dev:datepicker": "npm run server-dev -- --env.component datepicker",
         "server-dev:dropdown": "npm run server-dev -- --env.component dropdown",
         "server-dev:icon": "npm run server-dev -- --env.component icon",

@@ -2,8 +2,6 @@ import { inject, InjectionToken, LOCALE_ID } from '@angular/core';
 import { Moment } from 'moment';
 import { Observable, Subject } from 'rxjs';
 
-import { IFormatterAbsoluteTemplate, IFormatterRangeTemplate, IFormatterRelativeTemplate } from './interfaces';
-
 
 /** InjectionToken for datepicker that can be used to override default locale code. */
 export const MC_DATE_LOCALE = new InjectionToken<string>('MC_DATE_LOCALE', {
@@ -15,6 +13,40 @@ export const MC_DATE_LOCALE = new InjectionToken<string>('MC_DATE_LOCALE', {
 // tslint:disable-next-line:naming-convention
 export function MC_DATE_LOCALE_FACTORY(): string {
     return inject(LOCALE_ID);
+}
+
+/**
+ * interface for absolute date or datetime formatter template
+ */
+export interface IFormatterAbsoluteTemplate {
+    variables?: { [name: string]: string };
+    DATE: string;
+    DATETIME: string;
+}
+
+/**
+ * interface for range date or datetime formatter template
+ */
+export interface IFormatterRangeTemplate {
+    variables?: { [name: string]: string };
+    START_DATE: string;
+    END_DATE: string;
+    DATE: string;
+    START_DATETIME: string;
+    END_DATETIME: string;
+    DATETIME: string;
+}
+
+/**
+ * interface for relative date or datetime formatter template
+ */
+export interface IFormatterRelativeTemplate {
+    variables?: { [name: string]: string };
+    SECONDS_AGO: string;
+    MINUTES_AGO: string;
+    TODAY: string;
+    YESTERDAY: string;
+    BEFORE_YESTERDAY: string;
 }
 
 /** Adapts type `D` to be usable as a date by cdk-based components that work with dates. */

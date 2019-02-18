@@ -3,11 +3,8 @@ import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import {
     DateAdapter,
     MC_DATE_LOCALE,
-    ICompiledVariables,
-    IFormatterConfig,
     IFormatterRangeTemplate,
     IFormatterRelativeTemplate,
-    IFormatterVariables,
     IFormatterAbsoluteTemplate
 } from '@ptsecurity/cdk/datetime';
 import * as MessageFormat from 'messageformat';
@@ -23,6 +20,7 @@ import { unitOfTime } from 'moment';
 
 import { enUS } from './locales/en-US';
 import { ruRU } from './locales/ru-RU';
+import { IFormatterConfig } from './locales/IFormatterConfig';
 
 
 const moment = _rollupMoment || _moment;
@@ -288,7 +286,7 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
         const isToday = now.isSame(date, 'day');
         const isYesterday = now.add(-1, 'days').isSame(date, 'day');
 
-        const templateVariables: IFormatterVariables = {...this.formatterConfig.variables, ...template.variables};
+        const templateVariables = {...this.formatterConfig.variables, ...template.variables};
         const variables = this.compileVariables(date, templateVariables);
         let newTemplate;
 
@@ -419,7 +417,7 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
         return (this.options && this.options.useUtc) ? moment.utc(...args) : moment(...args);
     }
 
-    private compileVariables(date: Moment, variables: IFormatterVariables): ICompiledVariables {
+    private compileVariables(date: Moment, variables: any): any {
         const compiledVariables: any = {};
 
         // tslint:disable-next-line:no-for-in
