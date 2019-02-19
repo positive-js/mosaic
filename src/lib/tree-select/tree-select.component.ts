@@ -588,7 +588,6 @@ export class McTreeSelect extends McTreeSelectMixinBase<McTreeSelectOption> impl
      */
     // todo нужно доделать!
     writeValue(value: any) {
-        // todo excluded for build and will be completed in near time
         if (this.options) {
             this.setSelectionByValue(value);
         }
@@ -697,9 +696,7 @@ export class McTreeSelect extends McTreeSelectMixinBase<McTreeSelectOption> impl
         }
     }
 
-    /**
-     * Callback that is invoked when the overlay panel has been attached.
-     */
+    /** Callback that is invoked when the overlay panel has been attached. */
     onAttached() {
         this.overlayDir.positionChange
             .pipe(take(1))
@@ -874,7 +871,6 @@ export class McTreeSelect extends McTreeSelectMixinBase<McTreeSelectOption> impl
         return totalItemsWidth;
     }
 
-    /** Handles keyboard events while the select is closed. */
     private handleClosedKeydown(event: KeyboardEvent) {
         /* tslint:disable-next-line */
         const keyCode = event.keyCode;
@@ -893,7 +889,6 @@ export class McTreeSelect extends McTreeSelectMixinBase<McTreeSelectOption> impl
         }
     }
 
-    /** Handles keyboard events when the selected is open. */
     private handleOpenKeydown(event: KeyboardEvent) {
         /* tslint:disable-next-line */
         const keyCode = event.keyCode;
@@ -1008,7 +1003,6 @@ export class McTreeSelect extends McTreeSelectMixinBase<McTreeSelectOption> impl
         return correspondingOption;
     }
 
-    /** Sets up a key manager to listen to keyboard events on the overlay panel. */
     private initKeyManager() {
         this.keyManager = new ActiveDescendantKeyManager<McTreeSelectOption>(this.options)
             .withVerticalOrientation();

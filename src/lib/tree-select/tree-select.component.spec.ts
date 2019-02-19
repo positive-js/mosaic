@@ -4,6 +4,7 @@
 /* tslint:disable:no-empty */
 /* tslint:disable:no-unbound-method */
 /* tslint:disable:prefer-for-of */
+// tslint:disable:max-func-body-length
 
 import { BehaviorSubject, Observable, of as observableOf, Subject, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
