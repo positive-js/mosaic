@@ -10,12 +10,13 @@ import {
     Directive, ElementRef, Inject
 } from '@angular/core';
 import { NodeDef, ViewData } from '@angular/core/src/view';
-
+import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import { SelectionModel } from '@ptsecurity/cdk/collections';
+import { END, ENTER, HOME, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, SPACE } from '@ptsecurity/cdk/keycodes';
 import { CdkTreeNode, CdkTree, CdkTreeNodeOutlet } from '@ptsecurity/cdk/tree';
-
 import {
-    CanDisable, CanDisableCtor,
+    CanDisable,
+    CanDisableCtor,
     HasTabIndex,
     HasTabIndexCtor,
     mixinDisabled,
@@ -23,10 +24,12 @@ import {
     toBoolean
 } from '@ptsecurity/mosaic/core';
 
-import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 
-import { END, ENTER, HOME, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, SPACE } from '@ptsecurity/cdk/keycodes';
+export class McTreeOptionChange {
+    constructor(public source: McTreeOption, public isUserInput = false) {}
+}
 
+let uniqueIdCounter: number = 0;
 
 @Directive({
     selector: 'mc-tree-option',
@@ -48,8 +51,13 @@ import { END, ENTER, HOME, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, SPACE } 
         { provide: CdkTreeNode, useExisting: McTreeOption }
     ]
 })
-export class McTreeOption<T> extends CdkTreeNode<T> implements CanDisable {
+export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisable {
     hasFocus: boolean = false;
+
+    // tslint:disable-next-line:no-output-on-prefix
+    @Output() readonly onSelectionChange = new EventEmitter<McTreeOptionChange>();
+
+    @Input() value: any;
 
     @Input()
     get disabled() {
@@ -68,7 +76,7 @@ export class McTreeOption<T> extends CdkTreeNode<T> implements CanDisable {
 
     @Input()
     get selected(): boolean {
-        return this.treeSelection.selectedOptions && this.treeSelection.selectedOptions.isSelected(this) || false;
+        return this.treeSelection.selectionModel && this.treeSelection.selectionModel.isSelected(this) || false;
     }
 
     set selected(value: boolean) {
@@ -95,12 +103,23 @@ export class McTreeOption<T> extends CdkTreeNode<T> implements CanDisable {
 
     private _active = false;
 
+    get id(): string {
+        return this._id;
+    }
+
+    private _id = `mc-option-${uniqueIdCounter++}`;
+
+    get multiple(): boolean {
+        return this.treeSelection.multiple;
+    }
+
     constructor(
         protected elementRef: ElementRef,
         protected changeDetectorRef: ChangeDetectorRef,
-        @Inject(forwardRef(() => McTreeSelection)) protected treeSelection: McTreeSelection<T>
+        @Inject(forwardRef(() => McTreeSelection)) protected treeSelection: McTreeSelection
     ) {
-        super(elementRef, treeSelection);
+        // todo any
+        super(elementRef, treeSelection as any);
     }
 
     focus(): void {
@@ -114,14 +133,14 @@ export class McTreeOption<T> extends CdkTreeNode<T> implements CanDisable {
     }
 
     setSelected(selected: boolean) {
-        if (this._selected === selected || !this.treeSelection.selectedOptions) { return; }
+        if (this._selected === selected || !this.treeSelection.selectionModel) { return; }
 
         this._selected = selected;
 
         if (selected) {
-            this.treeSelection.selectedOptions.select(this);
+            this.treeSelection.selectionModel.select(this);
         } else {
-            this.treeSelection.selectedOptions.deselect(this);
+            this.treeSelection.selectionModel.deselect(this);
         }
 
         // this._changeDetector.markForCheck();
@@ -152,7 +171,12 @@ export class McTreeOption<T> extends CdkTreeNode<T> implements CanDisable {
     }
 
     getHeight(): number {
-        return this.elementRef.nativeElement.getClientRects()[0].height;
+        const clientRects = this.elementRef.nativeElement.getClientRects();
+        if (clientRects.length) {
+            return clientRects[0].height;
+        }
+
+        return 0;
     }
 
     handleFocus(): void {
@@ -170,17 +194,60 @@ export class McTreeOption<T> extends CdkTreeNode<T> implements CanDisable {
 
         this.treeSelection.setFocusedOption(this);
     }
+
+    /**
+     * The displayed value of the option. It is necessary to show the selected option in the
+     * select's trigger.
+     */
+    get viewValue(): string {
+        // TODO(kara): Add input property alternative for node envs.
+        return (this.getHostElement().textContent || '').trim();
+    }
+
+    select(): void {
+        if (!this._selected) {
+            this._selected = true;
+
+            this.changeDetectorRef.markForCheck();
+        }
+    }
+
+    deselect(): void {
+        if (this._selected) {
+            this._selected = false;
+
+            this.changeDetectorRef.markForCheck();
+        }
+    }
+
+    selectViaInteraction(): void {
+        if (!this.disabled) {
+            this._selected = this.multiple ? !this._selected : true;
+
+            this.changeDetectorRef.markForCheck();
+            this.emitSelectionChangeEvent(true);
+        }
+    }
+
+    /** Emits the selection change event. */
+    emitSelectionChangeEvent(isUserInput = false): void {
+        this.onSelectionChange.emit(new McTreeOptionChange(this, isUserInput));
+    }
+
+    getHostElement(): HTMLElement {
+        return this.elementRef.nativeElement;
+    }
 }
 
 export class McTreeNavigationChange {
     constructor(
-        public source: McTreeSelection<any>,
-        public option: McTreeOption<any>
+        public source: McTreeSelection,
+        public option: McTreeOption
     ) {}
 }
 
-export class McTreeSelectionChange<T> {
-    constructor(public source: McTreeSelection<T>, public option: McTreeOption<any>) {}
+export class McTreeSelectionChange {
+    constructor(public source: McTreeSelection, public option: McTreeOption) {}
 }
 
 class McTreeSelectionBase<T> extends CdkTree<T> {
@@ -210,16 +277,16 @@ const McTreeSelectionBaseMixin: HasTabIndexCtor & CanDisableCtor &
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: CdkTree, useExisting: McTreeSelection }]
 })
-export class McTreeSelection<T> extends McTreeSelectionBaseMixin<T>
+export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
     implements AfterContentInit, CanDisable, HasTabIndex {
 
     @ViewChild(CdkTreeNodeOutlet) nodeOutlet: CdkTreeNodeOutlet;
 
-    @ContentChildren(McTreeOption) options: QueryList<McTreeOption<T>>;
+    @ContentChildren(McTreeOption) options: QueryList<McTreeOption>;
 
-    keyManager: FocusKeyManager<McTreeOption<T>>;
+    keyManager: FocusKeyManager<McTreeOption>;
 
-    selectedOptions: SelectionModel<McTreeOption<T>>;
+    selectionModel: SelectionModel<McTreeOption>;
 
     tabIndex: number;
     multiple: boolean;
@@ -253,7 +320,7 @@ export class McTreeSelection<T> extends McTreeSelectionBaseMixin<T>
 
     @Output() readonly navigationChange = new EventEmitter<McTreeNavigationChange>();
 
-    @Output() readonly selectionChange = new EventEmitter<McTreeSelectionChange<T>>();
+    @Output() readonly selectionChange = new EventEmitter<McTreeSelectionChange>();
 
     private _disabled: boolean = false;
 
@@ -274,11 +341,11 @@ export class McTreeSelection<T> extends McTreeSelectionBaseMixin<T>
         this.autoSelect = autoSelect === null ? true : toBoolean(autoSelect);
         this.noUnselect = noUnselect === null ? true : toBoolean(noUnselect);
 
-        this.selectedOptions = new SelectionModel<McTreeOption<T>>(this.multiple);
+        this.selectionModel = new SelectionModel<McTreeOption>(this.multiple);
     }
 
     ngAfterContentInit(): void {
-        this.keyManager = new FocusKeyManager<McTreeOption<T>>(this.options)
+        this.keyManager = new FocusKeyManager<McTreeOption>(this.options)
             .withTypeAhead()
             .withVerticalOrientation(true)
             .withHorizontalOrientation(null);
@@ -343,7 +410,7 @@ export class McTreeSelection<T> extends McTreeSelectionBaseMixin<T>
         this.keyManager.withScrollSize(Math.floor(this.getHeight() / this.options.first.getHeight()));
     }
 
-    setFocusedOption(option: McTreeOption<T>) {
+    setFocusedOption(option: McTreeOption) {
         this.keyManager.updateActiveItem(option);
 
         if (this.withShift && this.multiple) {
@@ -381,7 +448,7 @@ export class McTreeSelection<T> extends McTreeSelectionBaseMixin<T>
         const focusedIndex = this.keyManager.activeItemIndex;
 
         if (focusedIndex != null && this.isValidIndex(focusedIndex)) {
-            const focusedOption: McTreeOption<T> = this.options.toArray()[focusedIndex];
+            const focusedOption: McTreeOption = this.options.toArray()[focusedIndex];
 
             if (focusedOption && this.canDeselectLast(focusedOption)) {
                 focusedOption.toggle();
@@ -393,10 +460,10 @@ export class McTreeSelection<T> extends McTreeSelectionBaseMixin<T>
     }
 
     renderNodeChanges(
-        data: T[],
-        dataDiffer: IterableDiffer<T> = this.dataDiffer,
+        data: McTreeOption[],
+        dataDiffer: IterableDiffer<McTreeOption> = this.dataDiffer,
         viewContainer: any = this.nodeOutlet.viewContainer,
-        parentData?: T
+        parentData?: McTreeOption
     ): void {
         super.renderNodeChanges(data, dataDiffer, viewContainer, parentData);
 
@@ -423,14 +490,19 @@ export class McTreeSelection<T> extends McTreeSelectionBaseMixin<T>
     }
 
     getHeight(): number {
-        return this.elementRef.nativeElement.getClientRects()[0].height;
+        const clientRects = this.elementRef.nativeElement.getClientRects();
+        if (clientRects.length) {
+            return clientRects[0].height;
+        }
+
+        return 0;
     }
 
-    emitNavigationEvent(option: McTreeOption<T>): void {
+    emitNavigationEvent(option: McTreeOption): void {
         this.navigationChange.emit(new McTreeNavigationChange(this, option));
     }
 
-    emitChangeEvent(option: McTreeOption<T>): void {
+    emitChangeEvent(option: McTreeOption): void {
         this.selectionChange.emit(new McTreeNavigationChange(this, option));
     }
 
@@ -438,8 +510,8 @@ export class McTreeSelection<T> extends McTreeSelectionBaseMixin<T>
         return index >= 0 && index < this.options.length;
     }
 
-    private canDeselectLast(option: McTreeOption<T>): boolean {
-        return !(this.noUnselect && this.selectedOptions.selected.length === 1 && option.selected);
+    private canDeselectLast(option: McTreeOption): boolean {
+        return !(this.noUnselect && this.selectionModel.selected.length === 1 && option.selected);
     }
 }
 

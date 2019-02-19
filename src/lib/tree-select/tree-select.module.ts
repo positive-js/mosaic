@@ -7,7 +7,6 @@ import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McTagModule } from '@ptsecurity/mosaic/tag';
 import { McTreeModule } from '@ptsecurity/mosaic/tree';
 
-import { McTreeSelectOption } from './tree-select-option.component';
 import { McTreeSelect, McTreeSelectTrigger } from './tree-select.component';
 
 
@@ -21,8 +20,8 @@ import { McTreeSelect, McTreeSelectTrigger } from './tree-select.component';
         McTagModule,
         McPseudoCheckboxModule
     ],
-    exports: [McTreeSelect, McTreeSelectOption, McTreeSelectTrigger, CommonModule],
-    declarations: [McTreeSelect, McTreeSelectOption, McTreeSelectTrigger],
+    exports: [McTreeSelect, McTreeSelectTrigger, CommonModule],
+    declarations: [McTreeSelect, McTreeSelectTrigger],
     providers: [MC_SELECT_SCROLL_STRATEGY_PROVIDER]
 })
 export class McTreeSelectModule {}

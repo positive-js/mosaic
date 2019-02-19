@@ -55,7 +55,7 @@
         <div class="mc-select__content"
              [@fadeInContent]="'showing'"
              (@fadeInContent.done)="onFadeInDone()">
-            <ng-container cdkTreeNodeOutlet></ng-container>
+            <ng-content select="mc-tree-selection"></ng-content>
         </div>
     </div>
 </ng-template>
