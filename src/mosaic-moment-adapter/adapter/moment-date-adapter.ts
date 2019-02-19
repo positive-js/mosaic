@@ -435,7 +435,7 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
         return compiledVariables;
     }
 
-    private isCurrentYear(value: Moment) {
+    private isCurrentYear(value: Moment): 'yes' | 'no' {
         return this.momentWithLocale.isSame(value, 'year') ? 'yes' : 'no';
     }
 

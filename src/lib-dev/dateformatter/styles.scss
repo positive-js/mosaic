@@ -7,8 +7,20 @@
 
 @include mosaic-visual();
 
-.container {
-    max-width: 400px;
+.common-container {
     padding-left: 16px;
     padding-right: 16px;
+}
+
+.container {
+    max-width: 900px;
+}
+
+.light-text-secondary{
+    color: $light-text-secondary;
+}
+
+.row-border {
+    padding: 8px;
+    border-bottom: 1px solid $light-text-secondary;
 }
