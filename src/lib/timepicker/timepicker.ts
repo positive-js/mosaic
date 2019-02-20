@@ -58,6 +58,7 @@ let uniqueComponentIdSuffix: number = 0;
 let validatorOnChange: () => void = noop;
 let validator: ValidatorFn | null = () => null;
 
+// tslint:disable naming-convention
 export class McTimepickerBase {
     constructor(
         public _defaultErrorStateMatcher: ErrorStateMatcher,
@@ -65,6 +66,8 @@ export class McTimepickerBase {
         public _parentFormGroup: FormGroupDirective,
         public ngControl: NgControl) { }
 }
+
+// tslint:enable naming-convention
 
 // tslint:disable-next-line naming-convention
 export const McTimepickerMixinBase:
@@ -237,6 +240,7 @@ export class McTimepicker extends McTimepickerMixinBase
     private maxDateTime: Date | undefined;
     private currentDateTimeInput: Date | undefined;
 
+    // tslint:disable naming-convention
     constructor(private readonly elementRef: ElementRef,
                 @Optional() @Self() public ngControl: NgControl,
                 @Optional() _parentForm: NgForm,
@@ -244,6 +248,7 @@ export class McTimepicker extends McTimepickerMixinBase
                 _defaultErrorStateMatcher: ErrorStateMatcher,
                 @Optional() @Self() @Inject(MC_INPUT_VALUE_ACCESSOR) inputValueAccessor: any,
                 private readonly renderer: Renderer2) {
+        // tslint:enable naming-convention
         super(_defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl);
 
         // If no input value accessor was explicitly specified, use the element as the input value
@@ -348,7 +353,7 @@ export class McTimepicker extends McTimepickerMixinBase
         }
         // tslint:enable no-magic-numbers
 
-        this.applyInputChanges({ doTimestringReformat: isAutocompleteTriggered });
+        this.applyInputChanges({doTimestringReformat: isAutocompleteTriggered});
 
         this.elementRef.nativeElement.selectionStart = initialCursorStart;
         this.elementRef.nativeElement.selectionEnd = initialCursorEnd;
@@ -426,7 +431,7 @@ export class McTimepicker extends McTimepickerMixinBase
         changedTime?: Date;
         doTimestringReformat?: boolean;
     } = {}): void {
-        const { changedTime, doTimestringReformat = true } = applyParams;
+        const {changedTime, doTimestringReformat = true} = applyParams;
 
         const timeToApply: Date | undefined = changedTime ||
             this.getDateFromTimeString(this.elementRef.nativeElement.value);
@@ -461,7 +466,7 @@ export class McTimepicker extends McTimepickerMixinBase
             const keyCode: string = this.getKeyCode(event);
             if (keyCode === ARROW_UP_KEYCODE) { changedTime = this.incrementTime(changedTime, modifiedTimePart); }
             if (keyCode === ARROW_DOWN_KEYCODE) { changedTime = this.decrementTime(changedTime, modifiedTimePart); }
-            this.applyInputChanges({ changedTime });
+            this.applyInputChanges({changedTime});
             this.createSelectionOfTimeComponentInInput(cursorPos);
         }
     }
@@ -498,7 +503,7 @@ export class McTimepicker extends McTimepickerMixinBase
 
     private incrementTime(dateVal: Date,
                           whatToIncrement: TimeParts = TimeParts.seconds): Date {
-        let { hours, minutes, seconds } = this.getTimeDigitsFromDate(dateVal);
+        let {hours, minutes, seconds} = this.getTimeDigitsFromDate(dateVal);
 
         switch (whatToIncrement) {
             case TimeParts.hours:
@@ -527,7 +532,7 @@ export class McTimepicker extends McTimepickerMixinBase
      */
     private decrementTime(dateVal: Date,
                           whatToDecrement: TimeParts = TimeParts.seconds): Date {
-        let { hours, minutes, seconds } = this.getTimeDigitsFromDate(dateVal);
+        let {hours, minutes, seconds} = this.getTimeDigitsFromDate(dateVal);
 
         switch (whatToDecrement) {
             case TimeParts.hours:
@@ -694,7 +699,7 @@ export class McTimepicker extends McTimepickerMixinBase
 
     private parseValidator(): ValidationErrors | null {
         return this.currentDateTimeInput === undefined ?
-            { mcTimepickerParse: { text: this.elementRef.nativeElement.value } } :
+            {mcTimepickerParse: {text: this.elementRef.nativeElement.value}} :
             null;
     }
 
@@ -703,7 +708,7 @@ export class McTimepicker extends McTimepickerMixinBase
         if (this.currentDateTimeInput !== undefined &&
             this.minDateTime !== undefined &&
             this.isTimeLowerThenMin(this.currentDateTimeInput)) {
-            return { mcTimepickerLowerThenMintime: { text: this.elementRef.nativeElement.value } };
+            return {mcTimepickerLowerThenMintime: {text: this.elementRef.nativeElement.value}};
         }
 
         return null;
@@ -713,7 +718,7 @@ export class McTimepicker extends McTimepickerMixinBase
         if (this.currentDateTimeInput !== undefined &&
             this.maxDateTime !== undefined &&
             this.isTimeGreaterThenMax(this.currentDateTimeInput)) {
-            return { mcTimepickerHigherThenMaxtime: { text: this.elementRef.nativeElement.value } };
+            return {mcTimepickerHigherThenMaxtime: {text: this.elementRef.nativeElement.value}};
         }
 
         return null;
