@@ -1,4 +1,5 @@
 import { inject, InjectionToken, LOCALE_ID } from '@angular/core';
+import { Moment } from 'moment';
 import { Observable, Subject } from 'rxjs';
 
 
@@ -12,6 +13,40 @@ export const MC_DATE_LOCALE = new InjectionToken<string>('MC_DATE_LOCALE', {
 // tslint:disable-next-line:naming-convention
 export function MC_DATE_LOCALE_FACTORY(): string {
     return inject(LOCALE_ID);
+}
+
+/**
+ * interface for absolute date or datetime formatter template
+ */
+export interface IFormatterAbsoluteTemplate {
+    variables?: { [name: string]: string };
+    DATE: string;
+    DATETIME: string;
+}
+
+/**
+ * interface for range date or datetime formatter template
+ */
+export interface IFormatterRangeTemplate {
+    variables?: { [name: string]: string };
+    START_DATE: string;
+    END_DATE: string;
+    DATE: string;
+    START_DATETIME: string;
+    END_DATETIME: string;
+    DATETIME: string;
+}
+
+/**
+ * interface for relative date or datetime formatter template
+ */
+export interface IFormatterRelativeTemplate {
+    variables?: { [name: string]: string };
+    SECONDS_AGO: string;
+    MINUTES_AGO: string;
+    TODAY: string;
+    YESTERDAY: string;
+    BEFORE_YESTERDAY: string;
 }
 
 /** Adapts type `D` to be usable as a date by cdk-based components that work with dates. */
@@ -193,6 +228,108 @@ export abstract class DateAdapter<D> {
      * @returns An invalid date.
      */
     abstract invalid(): D;
+
+    /**
+     * @param date - date
+     * @param template - template
+     * @returns relative date by template
+     */
+    abstract relativeDate(date: Moment, template: IFormatterRelativeTemplate): string;
+
+    /**
+     * @param date - date
+     * @returns relative date in short format
+     */
+    abstract relativeShortDate(date: Moment): string;
+
+    /**
+     * @param date - date
+     * @returns relative date in long format
+     */
+    abstract relativeLongDate(date: Moment): string;
+
+    /**
+     * @param date - date
+     * @param params - parameters
+     * @param datetime - should time be shown as well
+     * @returns absolute date in common format
+     */
+    abstract absoluteDate(date: Moment, params: IFormatterAbsoluteTemplate, datetime: boolean): string;
+
+    /**
+     * @param date - date
+     * @returns absolute date in short format
+     */
+    abstract absoluteShortDate(date: Moment): string;
+
+    /**
+     * @param date - date
+     * @returns absolute date in short format with time
+     */
+    abstract absoluteShortDateTime(date: Moment): string;
+
+    /**
+     * @param date - date
+     * @returns absolute date in long format
+     */
+    abstract absoluteLongDate(date: Moment): string;
+
+    /**
+     * @param date - date
+     * @returns absolute date in long format with time
+     */
+    abstract absoluteLongDateTime(date: Moment): string;
+
+    /**
+     * @param startDate - start date
+     * @param endDate - end date
+     * @param template - template
+     * @returns range date in template format
+     */
+    abstract rangeDate(startDate: Moment, endDate: Moment, template: IFormatterRangeTemplate): string;
+
+    /**
+     * @param startDate - start date
+     * @param endDate - end date
+     * @param template - template
+     * @returns range date in template format with time
+     */
+    abstract rangeDateTime(startDate: Moment, endDate: Moment, template: IFormatterRangeTemplate): string;
+
+    /**
+     * @param startDate - start date
+     * @param endDate - end date
+     * @returns range date in short format
+     */
+    abstract rangeShortDate(startDate: Moment, endDate: Moment): string;
+
+    /**
+     * @param startDate - start date
+     * @param endDate - end date
+     * @returns range date in short format with time
+     */
+    abstract rangeShortDateTime(startDate: Moment, endDate: Moment): string;
+
+    /**
+     * @param startDate - start date
+     * @param endDate - end date
+     * @returns range date in long format
+     */
+    abstract rangeLongDate(startDate: Moment, endDate: Moment): string;
+
+    /**
+     * @param startDate - start date
+     * @param endDate - end date
+     * @returns range date in long format with time
+     */
+    abstract rangeLongDateTime(startDate: Moment, endDate: Moment): string;
+
+    /**
+     * @param startDate - start date
+     * @param endDate - end date
+     * @returns range middle date with time
+     */
+    abstract rangeMiddleDateTime(startDate: Moment, endDate: Moment): string;
 
     /**
      * Attempts to deserialize a value to a valid date object. This is different from parsing in that
