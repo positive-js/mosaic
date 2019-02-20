@@ -265,7 +265,7 @@ export class DemoComponent {
         );
         this.enRangeMiddleDateTimeSameDateCurrentYear = this.dateAdapter.rangeMiddleDateTime(
             moment().date(10).hour(10).minutes(14),
-            moment().date(10).hour(11).minutes(28)
+            moment().date(10).hour(10).minutes(28)
         );
         this.enRangeMiddleDateTimeSameDateNotCurrentYear = this.dateAdapter.rangeMiddleDateTime(
             moment().date(11).month(1).subtract(1, 'years').hour(10).minutes(14),
@@ -277,11 +277,11 @@ export class DemoComponent {
         );
         this.enRangeMiddleDateTimeStartsNotCurrentYear = this.dateAdapter.rangeMiddleDateTime(
             moment().date(1).month(1).subtract(1, 'years').hour(10).minutes(14),
-            moment().date(1).month(2).hour(11).minutes(28)
+            moment().date(1).month(1).hour(11).minutes(28)
         );
         this.enRangeMiddleDateTimeEndsNotCurrentYear = this.dateAdapter.rangeMiddleDateTime(
             moment().date(1).month(1).hour(10).minutes(14),
-            moment().date(1).month(2).add(1, 'years').hour(11).minutes(28)
+            moment().date(1).month(1).add(1, 'years').hour(11).minutes(28)
         );
     }
 
@@ -293,7 +293,7 @@ export class DemoComponent {
         );
         this.ruRangeMiddleDateTimeSameDateCurrentYear = this.dateAdapter.rangeMiddleDateTime(
             moment().date(10).hour(10).minutes(14),
-            moment().date(10).hour(11).minutes(28)
+            moment().date(10).hour(10).minutes(28)
         );
         this.ruRangeMiddleDateTimeSameDateNotCurrentYear = this.dateAdapter.rangeMiddleDateTime(
             moment().date(11).month(1).subtract(1, 'years').hour(10).minutes(14),
@@ -305,11 +305,11 @@ export class DemoComponent {
         );
         this.ruRangeMiddleDateTimeStartsNotCurrentYear = this.dateAdapter.rangeMiddleDateTime(
             moment().date(1).month(1).subtract(1, 'years').hour(10).minutes(14),
-            moment().date(1).month(2).hour(11).minutes(28)
+            moment().date(1).month(1).hour(11).minutes(28)
         );
         this.ruRangeMiddleDateTimeEndsNotCurrentYear = this.dateAdapter.rangeMiddleDateTime(
             moment().date(1).month(1).hour(10).minutes(14),
-            moment().date(1).month(2).add(1, 'years').hour(11).minutes(28)
+            moment().date(1).month(1).add(1, 'years').hour(11).minutes(28)
         );
     }
 
