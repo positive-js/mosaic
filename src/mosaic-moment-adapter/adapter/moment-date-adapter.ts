@@ -70,7 +70,7 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
 
     private formatterConfig: IFormatterConfig;
 
-    private get momentWithLocale() {
+    private get momentWithLocale(): Moment {
         return moment().locale(this.locale);
     }
 
@@ -96,7 +96,7 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
         this.configureTranslator(this.locale);
     }
 
-    setLocale(locale: string) {
+    setLocale(locale: string): void {
         super.setLocale(locale);
 
         let momentLocaleData = moment.localeData(locale);
@@ -263,11 +263,11 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
         return super.deserialize(value);
     }
 
-    isDateInstance(obj: any) {
+    isDateInstance(obj: any): boolean {
         return moment.isMoment(obj);
     }
 
-    isValid(date: Moment) {
+    isValid(date: Moment): boolean {
         return this.clone(date).isValid();
     }
 
@@ -443,7 +443,7 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
         return startDate.isSame(endDate, unit) ? 'yes' : 'no';
     }
 
-    private configureTranslator(locale: string) {
+    private configureTranslator(locale: string): void {
         this.messageformat = new MessageFormat(locale);
     }
 }
