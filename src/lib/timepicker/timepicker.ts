@@ -56,7 +56,7 @@ import {
 
 let uniqueComponentIdSuffix: number = 0;
 let validatorOnChange: () => void = noop;
-let validator: ValidatorFn | null = () => null;
+const formValidators: WeakMap<FormControl, ValidatorFn | null> = new WeakMap();
 
 // tslint:disable naming-convention
 export class McTimepickerBase {
@@ -99,8 +99,12 @@ export const McTimepickerMixinBase:
         {
             provide: NG_VALIDATORS,
             useValue: {
-                validate(c) { return validator ? validator(c) : null; },
-                registerOnValidatorChange(fn: () => void): void { validatorOnChange = fn; }
+                 validate(c) {
+                    const validator = formValidators.get(c);
+
+                    return validator ? validator(c) : null;
+                 },
+                 registerOnValidatorChange(fn: () => void): void { validatorOnChange = fn; }
             },
             multi: true
         },
@@ -267,11 +271,15 @@ export class McTimepicker extends McTimepickerMixinBase
         if (this.ngControl) { this.ngControl.valueAccessor = this; }
 
         // Substitute initial empty validator with validator linked to directive object instance (workaround)
-        validator = Validators.compose([
-            () => this.parseValidator(),
-            () => this.minTimeValidator(),
-            () => this.maxTimeValidator()
-        ]);
+
+        formValidators.set(
+            <FormControl> this.ngControl.control,
+            Validators.compose([
+                () => this.parseValidator(),
+                () => this.minTimeValidator(),
+                () => this.maxTimeValidator()
+            ])
+        );
     }
 
     ngOnChanges(): void {
@@ -432,7 +440,6 @@ export class McTimepicker extends McTimepickerMixinBase
         doTimestringReformat?: boolean;
     } = {}): void {
         const {changedTime, doTimestringReformat = true} = applyParams;
-
         const timeToApply: Date | undefined = changedTime ||
             this.getDateFromTimeString(this.elementRef.nativeElement.value);
         this.currentDateTimeInput = timeToApply;
