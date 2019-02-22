@@ -9,19 +9,19 @@
 <div class="dev-container">
     <mc-form-field>
         <mc-tree-select
+            multiple
             [formControl]="control"
             (selectionChange)="onSelectionChange($event)"
             [value]="singleSelected">
 
             <mc-tree-selection
-                multiple
                 [dataSource]="dataSource"
                 [treeControl]="treeControl">
-                <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+                <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding [value]="node.name">
                     {{ node.name }}
                 </mc-tree-option>
 
-                <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+                <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding [value]="node.name">
                     <i mc-icon="mc-angle-down-S_16" [style.transform]="treeControl.isExpanded(node) ? '' : 'rotate(-90deg)'" mcTreeNodeToggle></i>
                     {{ node.name }} : {{ node.type }}
                 </mc-tree-option>

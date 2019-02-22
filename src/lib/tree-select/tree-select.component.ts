@@ -260,8 +260,8 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
 
     /** Combined stream of all of the child options' change events. */
     readonly optionSelectionChanges: Observable<McTreeSelectChange> = defer(() => {
-        if (this.tree.options) {
-            return merge(...this.tree.options.map((option) => option.onSelectionChange));
+        if (this.options) {
+            return merge(...this.options.map((option) => option.onSelectionChange));
         }
 
         return this.ngZone.onStable
@@ -270,6 +270,8 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     });
 
     private originalOnKeyDown: (event: KeyboardEvent) => void;
+
+    private options: QueryList<McTreeOption>;
 
     @Input()
     get placeholder(): string {
@@ -460,7 +462,10 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         console.log('ngAfterContentInit');
         this.initKeyManager();
 
-        this.selectionModel = this.tree.selectionModel;
+        this.selectionModel = this.tree.selectionModel = new SelectionModel<McTreeOption>(this.multiple);
+        this.options = this.tree.options;
+        this.tree.multiple = this.multiple;
+        this.tree.autoSelect = this.autoSelect;
 
         this.selectionModel.changed
             .pipe(takeUntil(this.destroy))
@@ -476,12 +481,12 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
                 setTimeout(() => this.calculateHiddenItems(), 0);
             });
 
-        this.tree.options.changes
+        this.options.changes
             .pipe(startWith(null), takeUntil(this.destroy))
             .subscribe(() => {
                 this.updateSelectedOptions();
 
-                // this.resetOptions();
+                this.resetOptions();
             });
     }
 
@@ -519,7 +524,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     }
 
     open() {
-        // if (this.disabled || !this.tree.options || !this.tree.options.length || this._panelOpen) { return; }
+        // if (this.disabled || !this.options || !this.options.length || this._panelOpen) { return; }
         if (this.disabled || this._panelOpen) { return; }
 
         this.triggerRect = this.trigger.nativeElement.getBoundingClientRect();
@@ -565,7 +570,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
      */
     // todo нужно доделать!
     writeValue(value: any) {
-        if (this.tree.options) {
+        if (this.options) {
             this.setSelectionByValue(value);
         }
     }
@@ -730,7 +735,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     onRemoveSelectedOption(selectedOption: McTreeOption, $event) {
         $event.stopPropagation();
 
-        this.tree.options.forEach((option) => {
+        this.options.forEach((option) => {
             if (option.data === selectedOption.data) { option.deselect(); }
         });
 
@@ -784,7 +789,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
 
     private updateSelectedOptions(): void {
         this.selectionModel.selected.forEach((selectedOption) => {
-            this.tree.options.forEach((option) => {
+            this.options.forEach((option) => {
                 if (option.data === selectedOption.data) {
                     this.selectionModel.deselect(selectedOption);
                     this.selectionModel.select(option);
@@ -857,9 +862,9 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         } else if (this.multiple && keyCode === A && event.ctrlKey) {
             event.preventDefault();
 
-            const hasDeselectedOptions = this.tree.options.some((option) => !option.selected);
+            const hasDeselectedOptions = this.options.some((option) => !option.selected);
 
-            this.tree.options.forEach((option) => {
+            this.options.forEach((option) => {
                 if (hasDeselectedOptions && !option.disabled) {
                     option.select();
                 } else {
@@ -916,7 +921,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
      * @returns Option that has the corresponding value.
      */
     private selectValue(value: any): McTreeOption | undefined {
-        const correspondingOption = this.tree.options.find((option: McTreeOption) => {
+        const correspondingOption = this.options.find((option: McTreeOption) => {
             try {
                 // Treat null as a special reset value.
                 return option.value != null && this._compareWith(option.value, value);
@@ -938,7 +943,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     }
 
     private initKeyManager() {
-        // this.tree.keyManager = new ActiveDescendantKeyManager<McTreeOption>(this.tree.options)
+        // this.tree.keyManager = new ActiveDescendantKeyManager<McTreeOption>(this.options)
         //     .withVerticalOrientation();
 
         this.originalOnKeyDown = this.tree.onKeyDown;
@@ -967,7 +972,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
 
     /** Drops current option subscriptions and IDs and resets from scratch. */
     private resetOptions() {
-        const changedOrDestroyed = merge(this.tree.options.changes, this.destroy);
+        const changedOrDestroyed = merge(this.options.changes, this.destroy);
 
         this.optionSelectionChanges
             .pipe(takeUntil(changedOrDestroyed))
@@ -982,7 +987,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
 
         // Listen to changes in the internal state of the options and react accordingly.
         // Handles cases like the labels of the selected options changing.
-        // merge(...this.tree.options.map((option) => option.stateChanges))
+        // merge(...this.options.map((option) => option.stateChanges))
         //     .pipe(takeUntil(changedOrDestroyed))
         //     .subscribe(() => {
         //         this.changeDetectorRef.markForCheck();
@@ -1034,7 +1039,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     /** Sorts the selected values in the selected based on their order in the panel. */
     private sortValues() {
         if (this.multiple) {
-            const options = this.tree.options.toArray();
+            const options = this.options.toArray();
 
             this.selectionModel.sort((a, b) => {
                 return this.sortComparator ? this.sortComparator(a, b, options) :
@@ -1063,7 +1068,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
 
     /** Records option IDs to pass to the aria-owns property. */
     private setOptionIds() {
-        this.optionIds = this.tree.options.map((option) => option.id).join(' ');
+        this.optionIds = this.options.map((option) => option.id).join(' ');
     }
 
     /**
@@ -1095,7 +1100,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     /** Gets the index of the provided option in the option list. */
     private getOptionIndex(option: McTreeOption): number | undefined {
         // todo разобраться с этим срачем!
-        return this.tree.options.reduce((result: number, current: McTreeOption, index: number) => {
+        return this.options.reduce((result: number, current: McTreeOption, index: number) => {
             /* tslint:disable-next-line:strict-type-predicates */
             return result === undefined ? (option === current ? index : undefined) : result;
         }, undefined);
@@ -1261,7 +1266,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
 
     /** Calculates the amount of items in the select. This includes options and group labels. */
     private getItemCount(): number {
-        return this.tree.options.length;
+        return this.options.length;
     }
 
     /** Calculates the height of the select's options. */

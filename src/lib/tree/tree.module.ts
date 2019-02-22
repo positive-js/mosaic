@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 import { CdkTreeModule } from '@ptsecurity/cdk/tree';
+import { McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
 
 import { McTreeNodeDef } from './node';
 import { McTreeNodePadding } from './padding';
@@ -18,7 +19,7 @@ const MC_TREE_DIRECTIVES = [
 ];
 
 @NgModule({
-    imports: [CommonModule, CdkTreeModule],
+    imports: [CommonModule, CdkTreeModule, McPseudoCheckboxModule],
     exports: MC_TREE_DIRECTIVES,
     declarations: MC_TREE_DIRECTIVES
 })

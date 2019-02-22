@@ -7,10 +7,10 @@ import {
     IterableDiffers, Output, QueryList,
     ViewChild,
     ViewEncapsulation,
-    Directive, ElementRef, Inject
+    ElementRef, Inject
 } from '@angular/core';
 import { NodeDef, ViewData } from '@angular/core/src/view';
-import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
+import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
 import { SelectionModel } from '@ptsecurity/cdk/collections';
 import { END, ENTER, HOME, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, SPACE } from '@ptsecurity/cdk/keycodes';
 import { CdkTreeNode, CdkTree, CdkTreeNodeOutlet } from '@ptsecurity/cdk/tree';
@@ -31,7 +31,7 @@ export class McTreeOptionChange {
 
 let uniqueIdCounter: number = 0;
 
-@Directive({
+@Component({
     selector: 'mc-tree-option',
     exportAs: 'mcTreeOption',
     host: {
@@ -42,11 +42,12 @@ let uniqueIdCounter: number = 0;
         // todo унифицировать!
         '[class.mc-active]': 'active',
 
-        '(focus)': 'handleFocus()',
-        '(blur)': 'handleBlur()',
+        // '(focus)': 'handleFocus()',
+        // '(blur)': 'handleBlur()',
 
-        '(click)': 'handleClick()'
+        '(click)': 'selectViaInteraction()'
     },
+    templateUrl: './tree-option.html',
     providers: [
         { provide: CdkTreeNode, useExisting: McTreeOption }
     ]
@@ -74,9 +75,13 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
 
     private _disabled: boolean = false;
 
-    @Input()
+    // @Input()
+    // get selected(): boolean {
+    //     return this.treeSelection.selectionModel && this.treeSelection.selectionModel.isSelected(this) || false;
+    // }
+
     get selected(): boolean {
-        return this.treeSelection.selectionModel && this.treeSelection.selectionModel.isSelected(this) || false;
+        return this._selected;
     }
 
     set selected(value: boolean) {
@@ -122,12 +127,6 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
         super(elementRef, treeSelection as any);
     }
 
-    focus(): void {
-        this.elementRef.nativeElement.focus();
-
-        this.treeSelection.setFocusedOption(this);
-    }
-
     toggle(): void {
         this.selected = !this.selected;
     }
@@ -152,6 +151,7 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
      * events will display the proper options as active on arrow key events.
      */
     setActiveStyles(): void {
+        console.log('setActiveStyles');
         if (!this._active) {
             this._active = true;
             this.changeDetectorRef.markForCheck();
@@ -164,6 +164,7 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
      * events will display the proper options as active on arrow key events.
      */
     setInactiveStyles(): void {
+        console.log('setInactiveStyles');
         if (this._active) {
             this._active = false;
             this.changeDetectorRef.markForCheck();
@@ -185,15 +186,24 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
         this.hasFocus = true;
     }
 
+    focus(): void {
+        const element = this.getHostElement();
+
+        if (typeof element.focus === 'function') {
+            element.focus();
+        }
+    }
+
     handleBlur(): void {
         this.hasFocus = false;
     }
 
-    handleClick(): void {
-        if (this.disabled) { return; }
-
-        this.treeSelection.setFocusedOption(this);
-    }
+    // todo старая реализация, нужно восстановить tree-selection
+    // handleClick(): void {
+    //     if (this.disabled) { return; }
+    //
+    //     this.treeSelection.setFocusedOption(this);
+    // }
 
     /**
      * The displayed value of the option. It is necessary to show the selected option in the
@@ -284,7 +294,7 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
 
     @ContentChildren(McTreeOption) options: QueryList<McTreeOption>;
 
-    keyManager: FocusKeyManager<McTreeOption>;
+    keyManager: ActiveDescendantKeyManager<McTreeOption>;
 
     selectionModel: SelectionModel<McTreeOption>;
 
@@ -345,7 +355,7 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
     }
 
     ngAfterContentInit(): void {
-        this.keyManager = new FocusKeyManager<McTreeOption>(this.options)
+        this.keyManager = new ActiveDescendantKeyManager<McTreeOption>(this.options)
             .withTypeAhead()
             .withVerticalOrientation(true)
             .withHorizontalOrientation(null);
