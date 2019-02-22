@@ -71,7 +71,6 @@ export class McTimepickerBase {
         public _parentForm: NgForm,
         // tslint:disable-next-line naming-convention
         public _parentFormGroup: FormGroupDirective,
-        // tslint:enable naming-convention
         public ngControl: NgControl) { }
 }
 
@@ -488,7 +487,7 @@ export class McTimepicker extends McTimepickerMixinBase
             const keyCode: string = this.getKeyCode(event);
             if (keyCode === ARROW_UP_KEYCODE) { changedTime = this.incrementTime(changedTime, modifiedTimePart); }
             if (keyCode === ARROW_DOWN_KEYCODE) { changedTime = this.decrementTime(changedTime, modifiedTimePart); }
-            this.applyInputChanges({changedTime});
+            this.applyInputChanges({ changedTime });
             this.createSelectionOfTimeComponentInInput(cursorPos);
         }
     }
