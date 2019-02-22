@@ -60,6 +60,7 @@ const formValidators: WeakMap<FormControl, ValidatorFn | null> = new WeakMap();
 const formValidatorOnChangeRegistrators: WeakMap<FormControl, () => void> = new WeakMap();
 const validatorOnChange = (c: FormControl) => {
     const validatorOnChangeHandler = formValidatorOnChangeRegistrators.get(c);
+
     if (validatorOnChangeHandler !== undefined) { validatorOnChangeHandler(); }
 };
 
@@ -104,7 +105,7 @@ export const McTimepickerMixinBase:
         {
             provide: NG_VALIDATORS,
             useValue: {
-                validate(c) {
+                validate(c: FormControl) {
                     // TODO This is `workaround` to bind singleton-like Validator implementation to
                     // context of each validated component. This MUST be realized in proper way!
                     if (this.__validatorOnChangeHandler !== undefined) {
@@ -115,7 +116,7 @@ export const McTimepickerMixinBase:
 
                     return validator ? validator(c) : null;
                 },
-                registerOnValidatorChange(fn: () => void): void { 
+                registerOnValidatorChange(fn: () => void): void {
                     this.__validatorOnChangeHandler = fn;
                 }
             },
