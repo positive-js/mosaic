@@ -61,18 +61,19 @@ const formValidatorOnChangeRegistrators: WeakMap<FormControl, () => void> = new 
 const validatorOnChange = (c: FormControl) => {
     const validatorOnChangeHandler = formValidatorOnChangeRegistrators.get(c);
     if (validatorOnChangeHandler !== undefined) { validatorOnChangeHandler(); }
-}
+};
 
-// tslint:disable naming-convention
 export class McTimepickerBase {
     constructor(
+        // tslint:disable-next-line naming-convention
         public _defaultErrorStateMatcher: ErrorStateMatcher,
+        // tslint:disable-next-line naming-convention
         public _parentForm: NgForm,
+        // tslint:disable-next-line naming-convention
         public _parentFormGroup: FormGroupDirective,
+        // tslint:enable naming-convention
         public ngControl: NgControl) { }
 }
-
-// tslint:enable naming-convention
 
 // tslint:disable-next-line naming-convention
 export const McTimepickerMixinBase:
@@ -105,9 +106,8 @@ export const McTimepickerMixinBase:
             provide: NG_VALIDATORS,
             useValue: {
                 validate(c) {
-                    // TODO ACHTUNG! This is `workaround` to bind singleton-like Validator implementation to
-                    // context of each validated component. This MUST be burned (with the man coded this sh…t)
-                    // and realized in proper way!
+                    // TODO This is `workaround` to bind singleton-like Validator implementation to
+                    // context of each validated component. This MUST be realized in proper way!
                     if (this.__validatorOnChangeHandler !== undefined) {
                         formValidatorOnChangeRegistrators.set(c, this.__validatorOnChangeHandler);
                         this.__validatorOnChangeHandler = undefined;
@@ -258,15 +258,16 @@ export class McTimepicker extends McTimepickerMixinBase
     private maxDateTime: Date | undefined;
     private currentDateTimeInput: Date | undefined;
 
-    // tslint:disable naming-convention
     constructor(private readonly elementRef: ElementRef,
                 @Optional() @Self() public ngControl: NgControl,
+                // tslint:disable-next-line naming-convention
                 @Optional() _parentForm: NgForm,
+                // tslint:disable-next-line naming-convention
                 @Optional() _parentFormGroup: FormGroupDirective,
+                // tslint:disable-next-line naming-convention
                 _defaultErrorStateMatcher: ErrorStateMatcher,
                 @Optional() @Self() @Inject(MC_INPUT_VALUE_ACCESSOR) inputValueAccessor: any,
                 private readonly renderer: Renderer2) {
-        // tslint:enable naming-convention
         super(_defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl);
 
         // If no input value accessor was explicitly specified, use the element as the input value
@@ -375,7 +376,7 @@ export class McTimepicker extends McTimepickerMixinBase
         }
         // tslint:enable no-magic-numbers
 
-        this.applyInputChanges({doTimestringReformat: isAutocompleteTriggered});
+        this.applyInputChanges({ doTimestringReformat: isAutocompleteTriggered });
 
         this.elementRef.nativeElement.selectionStart = initialCursorStart;
         this.elementRef.nativeElement.selectionEnd = initialCursorEnd;
@@ -453,7 +454,7 @@ export class McTimepicker extends McTimepickerMixinBase
         changedTime?: Date;
         doTimestringReformat?: boolean;
     } = {}): void {
-        const {changedTime, doTimestringReformat = true} = applyParams;
+        const { changedTime, doTimestringReformat = true } = applyParams;
         const timeToApply: Date | undefined = changedTime ||
             this.getDateFromTimeString(this.elementRef.nativeElement.value);
         this.currentDateTimeInput = timeToApply;
@@ -524,7 +525,7 @@ export class McTimepicker extends McTimepickerMixinBase
 
     private incrementTime(dateVal: Date,
                           whatToIncrement: TimeParts = TimeParts.seconds): Date {
-        let {hours, minutes, seconds} = this.getTimeDigitsFromDate(dateVal);
+        let { hours, minutes, seconds } = this.getTimeDigitsFromDate(dateVal);
 
         switch (whatToIncrement) {
             case TimeParts.hours:
@@ -553,7 +554,7 @@ export class McTimepicker extends McTimepickerMixinBase
      */
     private decrementTime(dateVal: Date,
                           whatToDecrement: TimeParts = TimeParts.seconds): Date {
-        let {hours, minutes, seconds} = this.getTimeDigitsFromDate(dateVal);
+        let { hours, minutes, seconds } = this.getTimeDigitsFromDate(dateVal);
 
         switch (whatToDecrement) {
             case TimeParts.hours:
@@ -720,7 +721,7 @@ export class McTimepicker extends McTimepickerMixinBase
 
     private parseValidator(): ValidationErrors | null {
         return this.currentDateTimeInput === undefined ?
-            {mcTimepickerParse: {text: this.elementRef.nativeElement.value}} :
+            { mcTimepickerParse: { text: this.elementRef.nativeElement.value } } :
             null;
     }
 
@@ -729,7 +730,7 @@ export class McTimepicker extends McTimepickerMixinBase
         if (this.currentDateTimeInput !== undefined &&
             this.minDateTime !== undefined &&
             this.isTimeLowerThenMin(this.currentDateTimeInput)) {
-            return {mcTimepickerLowerThenMintime: {text: this.elementRef.nativeElement.value}};
+            return { mcTimepickerLowerThenMintime: { text: this.elementRef.nativeElement.value } };
         }
 
         return null;
@@ -739,7 +740,7 @@ export class McTimepicker extends McTimepickerMixinBase
         if (this.currentDateTimeInput !== undefined &&
             this.maxDateTime !== undefined &&
             this.isTimeGreaterThenMax(this.currentDateTimeInput)) {
-            return {mcTimepickerHigherThenMaxtime: {text: this.elementRef.nativeElement.value}};
+            return { mcTimepickerHigherThenMaxtime: { text: this.elementRef.nativeElement.value } };
         }
 
         return null;
