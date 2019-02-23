@@ -1,3 +1,19 @@
+# 1.0.0-beta.2 "Monoxide Sphynx" (2019-02-23)
+
+
+### Bug Fixes
+
+* **ci:** release script ([bd6f047](https://github.com/positive-js/mosaic/commit/bd6f047))
+* **timepicker:** Incorrect work of 2 and more timepickers together in page ([#95](https://github.com/positive-js/mosaic/issues/95)) ([abed2d5](https://github.com/positive-js/mosaic/commit/abed2d5))
+* added angular/forms as peer dependency ([de4a76b](https://github.com/positive-js/mosaic/commit/de4a76b))
+
+
+### Features
+
+* **common:** added dateformatter ([#93](https://github.com/positive-js/mosaic/issues/93)) ([0813e14](https://github.com/positive-js/mosaic/commit/0813e14))
+
+
+
 # 1.0.0-beta.1 "Actuarial Hotness" (2019-02-11)
 
 
