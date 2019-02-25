@@ -2,7 +2,7 @@ import { readFileSync } from 'fs';
 
 
 /** Extracts the release notes for a specific release from a given changelog file. */
-export function extractReleaseNotes(changelogPath: string, versionName: string) {
+export function extractReleaseNotes(changelogPath: string, versionName: string): any {
     const changelogContent = readFileSync(changelogPath, 'utf8');
     const escapedVersion = versionName.replace('.', '\\.');
 

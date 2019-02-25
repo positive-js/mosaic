@@ -1,4 +1,4 @@
-# 1.0.0-beta.3 (2019-02-25)
+# 1.0.0-beta.3 "Monoxide Core" (2019-02-25)
 
 
 ### Bug Fixes
