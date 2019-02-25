@@ -1,3 +1,12 @@
+# 1.0.0-beta.3 (2019-02-25)
+
+
+### Bug Fixes
+
+* correct impl interface CanUpdateErrorState ([c6a8426](https://github.com/positive-js/mosaic/commit/c6a8426))
+
+
+
 # 1.0.0-beta.2 "Monoxide Sphynx" (2019-02-23)
 
 
