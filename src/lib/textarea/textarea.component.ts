@@ -42,6 +42,7 @@ export const McTextareaMixinBase: CanUpdateErrorStateCtor & typeof McTextareaBas
         '[class.mc-textarea-resizable]': '!canGrow',
         '[attr.id]': 'id',
         '[attr.placeholder]': 'placeholder',
+        '[attr.aria-invalid]': 'errorState',
         '[disabled]': 'disabled',
         '[required]': 'required',
         '(blur)': 'focusChanged(false)',
