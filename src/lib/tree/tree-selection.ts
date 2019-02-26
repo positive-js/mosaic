@@ -35,7 +35,7 @@ let uniqueIdCounter: number = 0;
     selector: 'mc-tree-option',
     exportAs: 'mcTreeOption',
     host: {
-        tabindex: '-1',
+        '[attr.tabindex]': 'getTabIndex()',
         class: 'mc-tree-option',
         '[class.mc-selected]': 'selected',
         '[class.mc-focused]': 'hasFocus',
@@ -151,7 +151,6 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
      * events will display the proper options as active on arrow key events.
      */
     setActiveStyles(): void {
-        console.log('setActiveStyles');
         if (!this._active) {
             this._active = true;
             this.changeDetectorRef.markForCheck();
@@ -239,13 +238,16 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
         }
     }
 
-    /** Emits the selection change event. */
     emitSelectionChangeEvent(isUserInput = false): void {
         this.onSelectionChange.emit(new McTreeOptionChange(this, isUserInput));
     }
 
     getHostElement(): HTMLElement {
         return this.elementRef.nativeElement;
+    }
+
+    getTabIndex(): string {
+        return this.disabled ? '-1' : '0';
     }
 }
 

@@ -55,7 +55,7 @@ export class CdkTreeNodePadding<T> implements OnDestroy {
         @Optional() private dir: Directionality
     ) {
 
-        if (this.dir) {
+        if (this.dir && this.dir.change) {
             this.dir.change
                 .pipe(takeUntil(this.destroyed))
                 .subscribe(() => this.setPadding());

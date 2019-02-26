@@ -438,6 +438,8 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     }
 
     ngOnInit() {
+        this.tree.multiple = this.multiple;
+
         this.stateChanges.next();
 
         // We need `distinctUntilChanged` here, because some browsers will
@@ -459,12 +461,10 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     }
 
     ngAfterContentInit() {
-        console.log('ngAfterContentInit');
         this.initKeyManager();
 
         this.selectionModel = this.tree.selectionModel = new SelectionModel<McTreeOption>(this.multiple);
         this.options = this.tree.options;
-        this.tree.multiple = this.multiple;
         this.tree.autoSelect = this.autoSelect;
 
         this.selectionModel.changed
@@ -524,8 +524,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     }
 
     open() {
-        // if (this.disabled || !this.options || !this.options.length || this._panelOpen) { return; }
-        if (this.disabled || this._panelOpen) { return; }
+        if (this.disabled || !this.options || !this.options.length || this._panelOpen) { return; }
 
         this.triggerRect = this.trigger.nativeElement.getBoundingClientRect();
         // Note: The computed font-size will be a string pixel value (e.g. "16px").
@@ -554,7 +553,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         if (this._panelOpen) {
             this._panelOpen = false;
 
-            this.tree.keyManager.setActiveItem(-1);
+            // this.tree.keyManager.setActiveItem(-1);
 
             // this.tree.keyManager.withHorizontalOrientation(this.isRtl() ? 'rtl' : 'ltr');
             this.changeDetectorRef.markForCheck();
@@ -841,20 +840,25 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     }
 
     private handleOpenKeydown(event: KeyboardEvent) {
-        console.log('handleOpenKeydown');
         /* tslint:disable-next-line */
         const keyCode = event.keyCode;
         const isArrowKey = keyCode === DOWN_ARROW || keyCode === UP_ARROW;
-
-        if (keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW) {
-            return this.originalOnKeyDown.call(this.tree, event);
-        }
 
         if (isArrowKey && event.altKey) {
             // Close the select on ALT + arrow key to match the native <select>
             event.preventDefault();
 
             this.close();
+        } else if (keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW) {
+            return this.originalOnKeyDown.call(this.tree, event);
+        } else if (keyCode === HOME || keyCode === END) {
+            event.preventDefault();
+
+            if (keyCode === HOME) {
+                this.tree.keyManager.setFirstItemActive();
+            } else {
+                this.tree.keyManager.setLastItemActive();
+            }
         } else if ((keyCode === ENTER || keyCode === SPACE) && this.tree.keyManager.activeItem) {
             event.preventDefault();
 
