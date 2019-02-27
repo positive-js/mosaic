@@ -269,9 +269,9 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
             .pipe(take(1), switchMap(() => this.optionSelectionChanges));
     });
 
-    private originalOnKeyDown: (event: KeyboardEvent) => void;
+    options: QueryList<McTreeOption>;
 
-    private options: QueryList<McTreeOption>;
+    private originalOnKeyDown: (event: KeyboardEvent) => void;
 
     @Input()
     get placeholder(): string {
@@ -438,7 +438,9 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     }
 
     ngOnInit() {
-        this.tree.multiple = this.multiple;
+        if (this.tree) {
+            this.tree.multiple = this.multiple;
+        }
 
         this.stateChanges.next();
 
@@ -461,6 +463,8 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     }
 
     ngAfterContentInit() {
+        if (!this.tree) { return; }
+
         this.initKeyManager();
 
         this.selectionModel = this.tree.selectionModel = new SelectionModel<McTreeOption>(this.multiple);
@@ -476,6 +480,8 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     }
 
     ngAfterViewInit() {
+        if (!this.tree) { return; }
+
         this.tags.changes
             .subscribe(() => {
                 setTimeout(() => this.calculateHiddenItems(), 0);
@@ -947,9 +953,6 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     }
 
     private initKeyManager() {
-        // this.tree.keyManager = new ActiveDescendantKeyManager<McTreeOption>(this.options)
-        //     .withVerticalOrientation();
-
         this.originalOnKeyDown = this.tree.onKeyDown;
 
         this.tree.onKeyDown = () => {};

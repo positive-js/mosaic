@@ -42,6 +42,8 @@ let uniqueIdCounter: number = 0;
         // todo унифицировать!
         '[class.mc-active]': 'active',
 
+        '[id]': 'id',
+
         // '(focus)': 'handleFocus()',
         // '(blur)': 'handleBlur()',
 
@@ -112,7 +114,7 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
         return this._id;
     }
 
-    private _id = `mc-option-${uniqueIdCounter++}`;
+    private _id = `mc-tree-option-${uniqueIdCounter++}`;
 
     get multiple(): boolean {
         return this.treeSelection.multiple;

@@ -125,7 +125,7 @@ export class FileDatabase {
     providers: [FileDatabase]
 })
 export class DemoComponent {
-    control = new FormControl();
+    control = new FormControl('rootNode_1');
 
     select: any;
 

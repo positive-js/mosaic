@@ -6,11 +6,6 @@
 /* tslint:disable:prefer-for-of */
 // tslint:disable:max-func-body-length
 
-import { BehaviorSubject, Observable, of as observableOf, Subject, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { FlatTreeControl } from '@ptsecurity/cdk/tree';
-import { ErrorStateMatcher } from '@ptsecurity/mosaic/core';
-import { McTreeFlatDataSource, McTreeFlattener, McTreeModule, McTreeOption } from '@ptsecurity/mosaic/tree';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -65,8 +60,18 @@ import {
     dispatchKeyboardEvent,
     wrappedErrorMessage
 } from '@ptsecurity/cdk/testing';
-
+import { FlatTreeControl } from '@ptsecurity/cdk/tree';
+import { ErrorStateMatcher } from '@ptsecurity/mosaic/core';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
+import {
+    McTreeFlatDataSource,
+    McTreeFlattener,
+    McTreeModule,
+    McTreeOption,
+    McTreeOptionChange, McTreeSelectionChange
+} from '@ptsecurity/mosaic/tree';
+import { BehaviorSubject, Observable, of as observableOf, Subject, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 
 const TREE_DATA = `
@@ -321,7 +326,7 @@ class NgModelSelect {
                     <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node" mcTreeNodePadding>
                         {{ node.name }}
                     </mc-tree-option>
-    
+
                     <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
                         <i mc-icon="mc-angle-S_16" mcTreeNodeToggle></i>
                         {{ node.name }} : {{ node.type }}
@@ -336,11 +341,11 @@ class NgModelSelect {
                 <mc-tree-selection
                     [dataSource]="dataSource"
                     [treeControl]="treeControl">
-                    
+
                     <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node" mcTreeNodePadding>
                         {{ node.name }}
                     </mc-tree-option>
-    
+
                     <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
                         <i mc-icon="mc-angle-S_16" mcTreeNodeToggle></i>
                         {{ node.name }} : {{ node.type }}
@@ -379,11 +384,11 @@ class ManySelects {
                     <mc-tree-selection
                         [dataSource]="dataSource"
                         [treeControl]="treeControl">
-                        
+
                         <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node" mcTreeNodePadding>
                             {{ node.name }}
                         </mc-tree-option>
-    
+
                         <mc-tree-option
                             [value]="node.name"
                             *mcTreeNodeDef="let node; when: hasChild"
@@ -433,7 +438,7 @@ class NgIfSelect {
                     <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node" mcTreeNodePadding>
                         {{ node.name }}
                     </mc-tree-option>
-    
+
                     <mc-tree-option
                         [value]="node.name"
                         *mcTreeNodeDef="let node; when: hasChild"
@@ -474,8 +479,16 @@ class SelectWithChangeEvent {
                     [dataSource]="dataSource"
                     [treeControl]="treeControl">
 
-                    <mc-tree-option *ngFor="let food of foods" [value]="food.value">
-                        {{ food.viewValue }}
+                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node" mcTreeNodePadding>
+                        {{ node.name }}
+                    </mc-tree-option>
+
+                    <mc-tree-option
+                        [value]="node.name"
+                        *mcTreeNodeDef="let node; when: hasChild"
+                        mcTreeNodePadding>
+                        <i mc-icon="mc-angle-S_16" mcTreeNodeToggle></i>
+                        {{ node.name }} : {{ node.type }}
                     </mc-tree-option>
                 </mc-tree-selection>
             </mc-tree-select>
@@ -483,18 +496,24 @@ class SelectWithChangeEvent {
     `
 })
 class SelectInitWithoutOptions {
-    foods: any[];
-    control = new FormControl('pizza-1');
+    control = new FormControl('rootNode_1');
 
     @ViewChild(McTreeSelect) select: McTreeSelect;
     @ViewChildren(McTreeOption) options: QueryList<McTreeOption>;
 
-    addOptions() {
-        this.foods = [
-            { value: 'steak-0', viewValue: 'Steak' },
-            { value: 'pizza-1', viewValue: 'Pizza' },
-            { value: 'tacos-2', viewValue: 'Tacos' }
-        ];
+    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable);
+    treeFlattener = new McTreeFlattener(transformer, getLevel, isExpandable, getChildren);
+
+    dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
+
+    constructor(database: FileDatabase) {
+        this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
+
+        database.dataChange.subscribe((data) => this.dataSource.data = data);
+    }
+
+    hasChild(_: number, nodeData: FileFlatNode) {
+        return nodeData.expandable;
     }
 }
 
@@ -1861,7 +1880,7 @@ describe('McTreeSelect', () => {
             }));
         });
 
-        xdescribe('selection logic', () => {
+        describe('selection logic', () => {
             let fixture: ComponentFixture<BasicTreeSelect>;
             let trigger: HTMLElement;
 
@@ -1876,7 +1895,7 @@ describe('McTreeSelect', () => {
                 fixture.detectChanges();
                 flush();
 
-                expect(fixture.componentInstance.select.keyManager.activeItemIndex).toEqual(0);
+                expect(fixture.componentInstance.select.tree.keyManager.activeItemIndex).toEqual(0);
             }));
 
             it('should select an option when it is clicked', fakeAsync(() => {
@@ -1901,7 +1920,7 @@ describe('McTreeSelect', () => {
                     .toBe(fixture.componentInstance.options.first);
             }));
 
-            it('should be able to select an option using the McTreeOption API', fakeAsync(() => {
+            xit('should be able to select an option using the McTreeOption API', fakeAsync(() => {
                 trigger.click();
                 fixture.detectChanges();
                 flush();
@@ -1944,7 +1963,7 @@ describe('McTreeSelect', () => {
 
             it('should deselect other options when one is programmatically selected', fakeAsync(() => {
                 const control = fixture.componentInstance.control;
-                const foods = fixture.componentInstance.foods;
+                const treeOptions = fixture.componentInstance.dataSource.data;
 
                 trigger.click();
                 fixture.detectChanges();
@@ -1956,7 +1975,7 @@ describe('McTreeSelect', () => {
                 fixture.detectChanges();
                 flush();
 
-                control.setValue(foods[1].value);
+                control.setValue(treeOptions[1].name);
                 fixture.detectChanges();
 
                 trigger.click();
@@ -1978,7 +1997,7 @@ describe('McTreeSelect', () => {
                     .toBe(true, 'Expected second option to be selected');
             }));
 
-            it('should remove selection if option has been removed', fakeAsync(() => {
+            xit('should remove selection if option has been removed', fakeAsync(() => {
                 const select = fixture.componentInstance.select;
 
                 trigger.click();
@@ -1992,10 +2011,11 @@ describe('McTreeSelect', () => {
 
                 expect(select.selected).toBe(select.options.first, 'Expected first option to be selected.');
 
-                fixture.componentInstance.foods = [];
+                fixture.componentInstance.dataSource.data = [];
                 fixture.detectChanges();
                 flush();
 
+                // todo не очищается селект
                 expect(select.selected)
                     .toBeUndefined('Expected selection to be removed when option no longer exists.');
             }));
@@ -2012,14 +2032,14 @@ describe('McTreeSelect', () => {
 
                 const value = fixture.debugElement.query(By.css('.mc-select__matcher')).nativeElement;
 
-                expect(value.textContent).toContain('Steak');
+                expect(value.textContent).toContain('rootNode_1');
             }));
 
             it('should focus the selected option if an option is selected', fakeAsync(() => {
                 // must wait for initial writeValue promise to finish
                 flush();
 
-                fixture.componentInstance.control.setValue('pizza-1');
+                fixture.componentInstance.control.setValue('Pictures');
                 fixture.detectChanges();
 
                 trigger.click();
@@ -2028,11 +2048,11 @@ describe('McTreeSelect', () => {
 
                 // must wait for animation to finish
                 fixture.detectChanges();
-                expect(fixture.componentInstance.select.keyManager.activeItemIndex).toEqual(1);
+                expect(fixture.componentInstance.select.tree.keyManager.activeItemIndex).toEqual(1);
             }));
 
             xit('should select an option that was added after initialization', fakeAsync(() => {
-                fixture.componentInstance.foods.push({ viewValue: 'Potatoes', value: 'potatoes-8' });
+                fixture.componentInstance.dataSource.data.push({ name: 'Potatoes', type: 'app' });
                 trigger.click();
                 fixture.detectChanges();
                 flush();
@@ -2053,7 +2073,6 @@ describe('McTreeSelect', () => {
                 fixture.componentInstance.control.setValue('pizza-1');
                 fixture.detectChanges();
 
-                console.log('trigger: ', trigger.querySelector('.mc-select__matcher-text'));
                 expect(trigger.querySelector('.mc-select__matcher-text')!.textContent!.trim())
                     .toBe('Pizza');
 
@@ -2070,7 +2089,7 @@ describe('McTreeSelect', () => {
                 fixture.detectChanges();
 
                 const options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-tree-option');
-                options[2].click();
+                options[3].click();
                 fixture.detectChanges();
                 flush();
 
@@ -2083,7 +2102,7 @@ describe('McTreeSelect', () => {
                 expect(() => fixture.componentInstance.select.triggerValue).not.toThrow();
             }));
 
-            it('should emit to `optionSelectionChanges` when an option is selected', fakeAsync(() => {
+            xit('should emit to `optionSelectionChanges` when an option is selected', fakeAsync(() => {
                 trigger.click();
                 fixture.detectChanges();
                 flush();
@@ -2095,12 +2114,12 @@ describe('McTreeSelect', () => {
                 fixture.detectChanges();
                 flush();
 
-                expect(spy).toHaveBeenCalledWith(jasmine.any(McTreeOptionSelectionChange));
+                expect(spy).toHaveBeenCalledWith(jasmine.any(McTreeSelectionChange));
 
                 subscription.unsubscribe();
             }));
 
-            it('should handle accessing `optionSelectionChanges` before the options are initialized',
+            xit('should handle accessing `optionSelectionChanges` before the options are initialized',
                 fakeAsync(() => {
                     fixture.destroy();
                     fixture = TestBed.createComponent(BasicTreeSelect);
@@ -2125,14 +2144,14 @@ describe('McTreeSelect', () => {
                     fixture.detectChanges();
                     flush();
 
-                    expect(spy).toHaveBeenCalledWith(jasmine.any(McTreeOptionSelectionChange));
+                    expect(spy).toHaveBeenCalledWith(jasmine.any(McTreeSelectionChange));
 
                     /* tslint:disable-next-line:no-unnecessary-type-assertion */
                     subscription!.unsubscribe();
                 }));
         });
 
-        xdescribe('forms integration', () => {
+        describe('forms integration', () => {
             let fixture: ComponentFixture<BasicTreeSelect>;
             let trigger: HTMLElement;
 
@@ -2143,21 +2162,20 @@ describe('McTreeSelect', () => {
             }));
 
             it('should take an initial view value with reactive forms', fakeAsync(() => {
-                fixture.componentInstance.control = new FormControl('pizza-1');
+                fixture.componentInstance.control = new FormControl('rootNode_1');
                 fixture.detectChanges();
 
                 const value = fixture.debugElement.query(By.css('.mc-select__matcher'));
                 expect(value.nativeElement.textContent)
-                    .toContain('Pizza', `Expected trigger to be populated by the control's initial value.`);
+                    .toContain('rootNode_1', `Expected trigger to be populated by the control's initial value.`);
 
                 trigger = fixture.debugElement.query(By.css('.mc-select__trigger')).nativeElement;
                 trigger.click();
                 fixture.detectChanges();
                 flush();
 
-                const options =
-                    overlayContainerElement.querySelectorAll('mc-tree-option');
-                expect(options[1].classList)
+                const options = overlayContainerElement.querySelectorAll('mc-tree-option');
+                expect(options[0].classList)
                     .toContain('mc-selected',
                         `Expected option with the control's initial value to be selected.`);
             }));
@@ -2166,20 +2184,19 @@ describe('McTreeSelect', () => {
                 let value = fixture.debugElement.query(By.css('.mc-select__matcher'));
                 expect(value.nativeElement.textContent.trim()).toBe('Food');
 
-                fixture.componentInstance.control.setValue('pizza-1');
+                fixture.componentInstance.control.setValue('rootNode_1');
                 fixture.detectChanges();
 
                 value = fixture.debugElement.query(By.css('.mc-select__matcher'));
                 expect(value.nativeElement.textContent)
-                    .toContain('Pizza', `Expected trigger to be populated by the control's new value.`);
+                    .toContain('rootNode_1', `Expected trigger to be populated by the control's new value.`);
 
                 trigger.click();
                 fixture.detectChanges();
                 flush();
 
-                const options =
-                    overlayContainerElement.querySelectorAll('mc-option');
-                expect(options[1].classList).toContain(
+                const options = overlayContainerElement.querySelectorAll('mc-tree-option');
+                expect(options[0].classList).toContain(
                     'mc-selected', `Expected option with the control's new value to be selected.`);
             }));
 
@@ -2197,7 +2214,7 @@ describe('McTreeSelect', () => {
                 flush();
 
                 expect(fixture.componentInstance.control.value)
-                    .toEqual('steak-0', `Expected control's value to be set to the new option.`);
+                    .toEqual('rootNode_1', `Expected control's value to be set to the new option.`);
             }));
 
             it('should clear the selection when a nonexistent option value is selected', fakeAsync(() => {
@@ -2343,7 +2360,7 @@ describe('McTreeSelect', () => {
             }));
         });
 
-        xdescribe('disabled behavior', () => {
+        describe('disabled behavior', () => {
             it('should disable itself when control is disabled programmatically', fakeAsync(() => {
                 const fixture = TestBed.createComponent(BasicTreeSelect);
                 fixture.detectChanges();
@@ -2373,7 +2390,7 @@ describe('McTreeSelect', () => {
                 flush();
 
                 expect(overlayContainerElement.textContent)
-                    .toContain('Steak', `Expected select panel to open normally on re-enabled control`);
+                    .toContain('rootNode_1', `Expected select panel to open normally on re-enabled control`);
                 expect(fixture.componentInstance.select.panelOpen)
                     .toBe(true, `Expected select panelOpen property to become true.`);
             }));
@@ -2418,7 +2435,7 @@ describe('McTreeSelect', () => {
 
             it('should scroll up to the active option', fakeAsync(() => {
                 // Scroll to the bottom.
-                for (let i = 0; i < fixture.componentInstance.foods.length; i++) {
+                for (let i = 0; i < fixture.componentInstance.dataSource.data.length; i++) {
                     dispatchKeyboardEvent(host, 'keydown', DOWN_ARROW);
                 }
 
@@ -2468,12 +2485,15 @@ describe('McTreeSelect', () => {
         });
     });
 
-    xdescribe('when initialized without options', () => {
+    describe('when initialized without options', () => {
         beforeEach(async(() => configureMcTreeSelectTestingModule([SelectInitWithoutOptions])));
 
-        it('should select the proper option when option list is initialized later', fakeAsync(() => {
+        // todo fix
+        xit('should select the proper option when option list is initialized later', fakeAsync(() => {
             const fixture = TestBed.createComponent(SelectInitWithoutOptions);
             const instance = fixture.componentInstance;
+            const originalData = instance.dataSource.data;
+            instance.dataSource.data = [];
 
             fixture.detectChanges();
             flush();
@@ -2481,16 +2501,16 @@ describe('McTreeSelect', () => {
             // Wait for the initial writeValue promise.
             expect(instance.select.selected).toBeFalsy();
 
-            instance.addOptions();
+            instance.dataSource.data = originalData;
             fixture.detectChanges();
             flush();
 
             // Wait for the next writeValue promise.
-            expect(instance.select.selected).toBe(instance.options.toArray()[1]);
+            expect(instance.select.selected).toBe(instance.options.toArray()[0]);
         }));
     });
 
-    xdescribe('with a selectionChange event handler', () => {
+    describe('with a selectionChange event handler', () => {
         beforeEach(async(() => configureMcTreeSelectTestingModule([SelectWithChangeEvent])));
 
         let fixture: ComponentFixture<SelectWithChangeEvent>;
@@ -2507,8 +2527,6 @@ describe('McTreeSelect', () => {
             trigger.click();
             fixture.detectChanges();
 
-            console.log(overlayContainerElement);
-            console.log(overlayContainerElement.querySelector('mc-tree-option') as HTMLElement);
             (overlayContainerElement.querySelector('mc-tree-option') as HTMLElement).click();
             fixture.detectChanges();
             flush();
@@ -2524,6 +2542,8 @@ describe('McTreeSelect', () => {
 
             option.click();
             option.click();
+            fixture.detectChanges();
+            flush();
 
             expect(fixture.componentInstance.changeListener).toHaveBeenCalledTimes(1);
         }));
@@ -2536,7 +2556,7 @@ describe('McTreeSelect', () => {
         }));
     });
 
-    xdescribe('with ngModel', () => {
+    describe('with ngModel', () => {
         beforeEach(async(() => configureMcTreeSelectTestingModule([NgModelSelect])));
 
         it('should disable itself when control is disabled using the property', fakeAsync(() => {
@@ -2569,20 +2589,22 @@ describe('McTreeSelect', () => {
             expect(getComputedStyle(trigger).getPropertyValue('cursor'))
                 .toEqual('pointer', `Expected cursor to be a pointer on enabled control.`);
 
-            // trigger.click();
-            // fixture.detectChanges();
-            //
-            // expect(overlayContainerElement.textContent)
-            //     .toContain('Steak', `Expected select panel to open normally on re-enabled control`);
-            // expect(fixture.componentInstance.select.panelOpen)
-            //     .toBe(true, `Expected select panelOpen property to become true.`);
+            trigger.click();
+            fixture.detectChanges();
+            flush();
+
+            expect(overlayContainerElement.textContent)
+                .toContain('rootNode_1', `Expected select panel to open normally on re-enabled control`);
+            expect(fixture.componentInstance.select.panelOpen)
+                .toBe(true, `Expected select panelOpen property to become true.`);
         }));
     });
 
-    xdescribe('with ngIf', () => {
+    describe('with ngIf', () => {
         beforeEach(async(() => configureMcTreeSelectTestingModule([NgIfSelect])));
 
-        it('should handle nesting in an ngIf', fakeAsync(() => {
+        // todo fix
+        xit('should handle nesting in an ngIf', fakeAsync(() => {
             const fixture = TestBed.createComponent(NgIfSelect);
             fixture.detectChanges();
 
@@ -2594,22 +2616,23 @@ describe('McTreeSelect', () => {
 
             trigger.click();
             fixture.detectChanges();
+            flush();
 
             const value = fixture.debugElement.query(By.css('.mc-select__matcher'));
             expect(value.nativeElement.textContent)
-                .toContain('Pizza', `Expected trigger to be populated by the control's initial value.`);
+                .toContain('rootNode_1', `Expected trigger to be populated by the control's initial value.`);
 
             const pane = overlayContainerElement.querySelector('.cdk-overlay-pane') as HTMLElement;
             expect(pane.style.minWidth).toEqual('300px');
 
             expect(fixture.componentInstance.select.panelOpen).toBe(true);
             expect(overlayContainerElement.textContent).toContain('rootNode_1');
-            expect(overlayContainerElement.textContent).toContain('Pizza');
-            expect(overlayContainerElement.textContent).toContain('Tacos');
+            expect(overlayContainerElement.textContent).toContain('Pictures');
+            expect(overlayContainerElement.textContent).toContain('Documents');
         }));
     });
 
-    xdescribe('with multiple mc-select elements in one view', () => {
+    describe('with multiple mc-select elements in one view', () => {
         beforeEach(async(() => configureMcTreeSelectTestingModule([ManySelects])));
 
         let fixture: ComponentFixture<ManySelects>;
@@ -2645,8 +2668,7 @@ describe('McTreeSelect', () => {
             fixture.detectChanges();
             flush();
 
-            options =
-                overlayContainerElement.querySelectorAll('mc-tree-option');
+            options = overlayContainerElement.querySelectorAll('mc-tree-option');
             expect(options[0].id)
                 .toContain('mc-tree-option', `Expected option ID to have the correct prefix.`);
             expect(options[0].id).not.toEqual(firstOptionID, `Expected option IDs to be unique.`);
@@ -2654,7 +2676,7 @@ describe('McTreeSelect', () => {
         }));
     });
 
-    xdescribe('with a sibling component that throws an error', () => {
+    describe('with a sibling component that throws an error', () => {
         beforeEach(async(() => configureMcTreeSelectTestingModule([
             SelectWithErrorSibling,
             ThrowsErrorOnInit
@@ -2669,7 +2691,7 @@ describe('McTreeSelect', () => {
         }));
     });
 
-    xdescribe('with tabindex', () => {
+    describe('with tabindex', () => {
         beforeEach(async(() => configureMcTreeSelectTestingModule([SelectWithPlainTabindex])));
 
         it('should be able to set the tabindex via the native attribute', fakeAsync(() => {
@@ -2681,7 +2703,7 @@ describe('McTreeSelect', () => {
         }));
     });
 
-    xdescribe('change events', () => {
+    describe('change events', () => {
         beforeEach(async(() => configureMcTreeSelectTestingModule([SelectWithPlainTabindex])));
 
         it('should complete the stateChanges stream on destroy', () => {
