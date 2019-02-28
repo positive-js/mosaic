@@ -360,7 +360,7 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
 
     ngAfterContentInit(): void {
         this.keyManager = new ActiveDescendantKeyManager<McTreeOption>(this.options)
-            .withTypeAhead()
+            // .withTypeAhead()
             .withVerticalOrientation(true)
             .withHorizontalOrientation(null);
     }

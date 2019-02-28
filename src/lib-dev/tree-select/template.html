@@ -3,11 +3,10 @@
 
 <button mc-button (click)="control.disable()">disable</button>
 <button mc-button (click)="control.setValue('rootNode_1')">setValue</button>
-<button mc-button (click)="showOrHide = !showOrHide">Show/Hide</button>
 
 <br><br><br>
 
-<div class="dev-container" *ngIf="showOrHide">
+<div class="dev-container">
     <mc-form-field>
         <mc-tree-select
             placeholder="Food I want to eat right now"
