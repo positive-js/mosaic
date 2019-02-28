@@ -2298,7 +2298,7 @@ describe('McTreeSelect', () => {
             }));
 
             xit('should select an option that was added after initialization', fakeAsync(() => {
-                fixture.componentInstance.dataSource.data.push({ name: 'Potatoes', type: 'app' });
+                // fixture.componentInstance.dataSource.data.push({ name: 'Potatoes', type: 'app' });
                 trigger.click();
                 fixture.detectChanges();
                 flush();
@@ -2322,7 +2322,7 @@ describe('McTreeSelect', () => {
                 expect(trigger.querySelector('.mc-select__matcher-text')!.textContent!.trim())
                     .toBe('Pizza');
 
-                fixture.componentInstance.foods[1].viewValue = 'Calzone';
+                fixture.componentInstance.dataSource.data[1].name = 'Calzone';
                 fixture.detectChanges();
                 flush();
 
@@ -4516,7 +4516,7 @@ describe('McTreeSelect', () => {
                 .toBe(true,
                     'Expected `multiple` to have been added to initial set of options.');
 
-            testInstance.dataSource.data.push({ name: 'cake-8', type: 'app' });
+            // testInstance.dataSource.data.push({ name: 'cake-8', type: 'app' });
             fixture.detectChanges();
 
             expect(testInstance.options.toArray().every((option) => !!option.multiple)).toBe(true,
