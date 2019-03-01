@@ -1,13 +1,13 @@
-import { NgModule } from '@angular/core';
-
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { CdkTreeModule } from '@ptsecurity/cdk/tree';
 import { McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
 
 import { McTreeNodeDef } from './node';
 import { McTreeNodePadding } from './padding';
 import { McTreeNodeToggle } from './toggle';
-import { McTreeSelection, McTreeOption } from './tree-selection';
+import { McTreeOption } from './tree-option';
+import { McTreeSelection } from './tree-selection';
 
 
 const MC_TREE_DIRECTIVES = [

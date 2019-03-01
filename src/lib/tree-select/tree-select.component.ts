@@ -1,7 +1,8 @@
 /* tslint:disable:no-empty */
 
 import {
-    AfterContentInit, AfterViewInit,
+    AfterContentInit,
+    AfterViewInit,
     Attribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -20,14 +21,15 @@ import {
     OnInit,
     Optional,
     Output,
-    QueryList, Renderer2,
+    QueryList,
+    Renderer2,
     Self,
     SimpleChanges,
-    ViewChild, ViewChildren,
+    ViewChild,
+    ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
-import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
 import { Directionality } from '@ptsecurity/cdk/bidi';
 import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import { SelectionModel } from '@ptsecurity/cdk/collections';
@@ -53,7 +55,6 @@ import {
     CanUpdateErrorState,
     ErrorStateMatcher,
     HasTabIndex,
-    MC_OPTION_PARENT_COMPONENT,
     CanDisableCtor,
     HasTabIndexCtor,
     CanUpdateErrorStateCtor,
@@ -141,7 +142,6 @@ const McTreeSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorSt
     ],
     providers: [
         { provide: McFormFieldControl, useExisting: McTreeSelect },
-        { provide: MC_OPTION_PARENT_COMPONENT, useExisting: McTreeSelect },
         { provide: CdkTree, useExisting: McTreeSelect }
     ]
 })
@@ -163,9 +163,6 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
 
     /** Deals with the selection logic. */
     selectionModel: SelectionModel<McTreeOption>;
-
-    /** Manages keyboard events for options in the panel. */
-    keyManager: ActiveDescendantKeyManager<McTreeOption>;
 
     /** The IDs of child options to be passed to the aria-owns attribute. */
     optionIds: string = '';
@@ -516,10 +513,10 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     }
 
     /** `View -> model callback called when value changes` */
-    _onChange: (value: any) => void = () => {};
+    onChange: (value: any) => void = () => {};
 
     /** `View -> model callback called when select has been touched` */
-    _onTouched = () => {};
+    onTouched = () => {};
 
     toggle() {
         if (this.panelOpen) {
@@ -563,7 +560,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
 
             // this.tree.keyManager.withHorizontalOrientation(this.isRtl() ? 'rtl' : 'ltr');
             this.changeDetectorRef.markForCheck();
-            this._onTouched();
+            this.onTouched();
         }
     }
 
@@ -588,7 +585,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
      * @param fn Callback to be triggered when the value changes.
      */
     registerOnChange(fn: (value: any) => void) {
-        this._onChange = fn;
+        this.onChange = fn;
     }
 
     /**
@@ -599,7 +596,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
      * @param fn Callback to be triggered when the component has been touched.
      */
     registerOnTouched(fn: () => {}) {
-        this._onTouched = fn;
+        this.onTouched = fn;
     }
 
     /**
@@ -677,7 +674,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         this._focused = false;
 
         if (!this.disabled && !this.panelOpen) {
-            this._onTouched();
+            this.onTouched();
             this.changeDetectorRef.markForCheck();
             this.stateChanges.next();
         }
@@ -1068,7 +1065,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
 
         this._value = valueToEmit;
         this.valueChange.emit(valueToEmit);
-        this._onChange(valueToEmit);
+        this.onChange(valueToEmit);
         this.selectionChange.emit(new McTreeSelectChange(this as any, valueToEmit));
         this.changeDetectorRef.markForCheck();
     }

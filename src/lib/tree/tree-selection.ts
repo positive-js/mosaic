@@ -3,17 +3,23 @@ import {
     Attribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
-    Component, ContentChildren, EventEmitter, forwardRef, Input, IterableDiffer,
-    IterableDiffers, Output, QueryList,
+    Component,
+    ContentChildren,
+    EventEmitter,
+    Input,
+    IterableDiffer,
+    IterableDiffers,
+    Output,
+    QueryList,
     ViewChild,
     ViewEncapsulation,
-    ElementRef, Inject
+    ElementRef
 } from '@angular/core';
 import { NodeDef, ViewData } from '@angular/core/src/view';
 import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
 import { SelectionModel } from '@ptsecurity/cdk/collections';
 import { END, ENTER, HOME, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, SPACE } from '@ptsecurity/cdk/keycodes';
-import { CdkTreeNode, CdkTree, CdkTreeNodeOutlet } from '@ptsecurity/cdk/tree';
+import { CdkTree, CdkTreeNodeOutlet } from '@ptsecurity/cdk/tree';
 import {
     CanDisable,
     CanDisableCtor,
@@ -24,234 +30,8 @@ import {
     toBoolean
 } from '@ptsecurity/mosaic/core';
 
+import { MC_TREE_OPTION_PARENT_COMPONENT, McTreeOption } from './tree-option';
 
-export class McTreeOptionChange {
-    constructor(public source: McTreeOption, public isUserInput = false) {}
-}
-
-let uniqueIdCounter: number = 0;
-
-@Component({
-    selector: 'mc-tree-option',
-    exportAs: 'mcTreeOption',
-    host: {
-        '[attr.tabindex]': 'getTabIndex()',
-        class: 'mc-tree-option',
-        '[class.mc-selected]': 'selected',
-        '[class.mc-focused]': 'hasFocus',
-        // todo унифицировать!
-        '[class.mc-active]': 'active',
-
-        '[id]': 'id',
-
-        // '(focus)': 'handleFocus()',
-        // '(blur)': 'handleBlur()',
-
-        '(click)': 'selectViaInteraction()'
-    },
-    templateUrl: './tree-option.html',
-    providers: [
-        { provide: CdkTreeNode, useExisting: McTreeOption }
-    ]
-})
-export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisable {
-    hasFocus: boolean = false;
-
-    // tslint:disable-next-line:no-output-on-prefix
-    @Output() readonly onSelectionChange = new EventEmitter<McTreeOptionChange>();
-
-    @Input() value: any;
-
-    @Input()
-    get disabled() {
-        return this._disabled;
-    }
-
-    set disabled(value: any) {
-        const newValue = toBoolean(value);
-
-        if (newValue !== this._disabled) {
-            this._disabled = newValue;
-        }
-    }
-
-    private _disabled: boolean = false;
-
-    // @Input()
-    // get selected(): boolean {
-    //     return this.treeSelection.selectionModel && this.treeSelection.selectionModel.isSelected(this) || false;
-    // }
-
-    get selected(): boolean {
-        return this._selected;
-    }
-
-    set selected(value: boolean) {
-        const isSelected = toBoolean(value);
-
-        if (isSelected !== this._selected) {
-            this.setSelected(isSelected);
-
-            // this.treeSelection._reportValueChange();
-        }
-    }
-
-    private _selected: boolean = false;
-
-    /**
-     * Whether or not the option is currently active and ready to be selected.
-     * An active option displays styles as if it is focused, but the
-     * focus is actually retained somewhere else. This comes in handy
-     * for components like autocomplete where focus must remain on the input.
-     */
-    get active(): boolean {
-        return this._active;
-    }
-
-    private _active = false;
-
-    get id(): string {
-        return this._id;
-    }
-
-    private _id = `mc-tree-option-${uniqueIdCounter++}`;
-
-    get multiple(): boolean {
-        return this.treeSelection.multiple;
-    }
-
-    constructor(
-        protected elementRef: ElementRef,
-        protected changeDetectorRef: ChangeDetectorRef,
-        @Inject(forwardRef(() => McTreeSelection)) protected treeSelection: McTreeSelection
-    ) {
-        // todo any
-        super(elementRef, treeSelection as any);
-    }
-
-    toggle(): void {
-        this.selected = !this.selected;
-    }
-
-    setSelected(selected: boolean) {
-        if (this._selected === selected || !this.treeSelection.selectionModel) { return; }
-
-        this._selected = selected;
-
-        if (selected) {
-            this.treeSelection.selectionModel.select(this);
-        } else {
-            this.treeSelection.selectionModel.deselect(this);
-        }
-
-        // this._changeDetector.markForCheck();
-    }
-
-    /**
-     * This method sets display styles on the option to make it appear
-     * active. This is used by the ActiveDescendantKeyManager so key
-     * events will display the proper options as active on arrow key events.
-     */
-    setActiveStyles(): void {
-        if (!this._active) {
-            this._active = true;
-            this.changeDetectorRef.markForCheck();
-        }
-    }
-
-    /**
-     * This method removes display styles on the option that made it appear
-     * active. This is used by the ActiveDescendantKeyManager so key
-     * events will display the proper options as active on arrow key events.
-     */
-    setInactiveStyles(): void {
-        console.log('setInactiveStyles');
-        if (this._active) {
-            this._active = false;
-            this.changeDetectorRef.markForCheck();
-        }
-    }
-
-    getHeight(): number {
-        const clientRects = this.elementRef.nativeElement.getClientRects();
-        if (clientRects.length) {
-            return clientRects[0].height;
-        }
-
-        return 0;
-    }
-
-    handleFocus(): void {
-        if (this.disabled || this.hasFocus) { return; }
-
-        this.hasFocus = true;
-    }
-
-    focus(): void {
-        const element = this.getHostElement();
-
-        if (typeof element.focus === 'function') {
-            element.focus();
-        }
-    }
-
-    handleBlur(): void {
-        this.hasFocus = false;
-    }
-
-    // todo старая реализация, нужно восстановить tree-selection
-    // handleClick(): void {
-    //     if (this.disabled) { return; }
-    //
-    //     this.treeSelection.setFocusedOption(this);
-    // }
-
-    /**
-     * The displayed value of the option. It is necessary to show the selected option in the
-     * select's trigger.
-     */
-    get viewValue(): string {
-        // TODO(kara): Add input property alternative for node envs.
-        return (this.getHostElement().textContent || '').trim();
-    }
-
-    select(): void {
-        if (!this._selected) {
-            this._selected = true;
-
-            this.changeDetectorRef.markForCheck();
-        }
-    }
-
-    deselect(): void {
-        if (this._selected) {
-            this._selected = false;
-
-            this.changeDetectorRef.markForCheck();
-        }
-    }
-
-    selectViaInteraction(): void {
-        if (!this.disabled) {
-            this._selected = this.multiple ? !this._selected : true;
-
-            this.changeDetectorRef.markForCheck();
-            this.emitSelectionChangeEvent(true);
-        }
-    }
-
-    emitSelectionChangeEvent(isUserInput = false): void {
-        this.onSelectionChange.emit(new McTreeOptionChange(this, isUserInput));
-    }
-
-    getHostElement(): HTMLElement {
-        return this.elementRef.nativeElement;
-    }
-
-    getTabIndex(): string {
-        return this.disabled ? '-1' : '0';
-    }
-}
 
 export class McTreeNavigationChange {
     constructor(
@@ -270,6 +50,7 @@ class McTreeSelectionBase<T> extends CdkTree<T> {
     }
 }
 
+/* tslint:disable-next-line:naming-convention */
 const McTreeSelectionBaseMixin: HasTabIndexCtor & CanDisableCtor &
     typeof McTreeSelectionBase = mixinTabIndex(mixinDisabled(McTreeSelectionBase));
 
@@ -289,7 +70,10 @@ const McTreeSelectionBaseMixin: HasTabIndexCtor & CanDisableCtor &
     styleUrls: ['./tree.css'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: CdkTree, useExisting: McTreeSelection }]
+    providers: [
+        { provide: MC_TREE_OPTION_PARENT_COMPONENT, useExisting: McTreeSelection },
+        { provide: CdkTree, useExisting: McTreeSelection }
+    ]
 })
 export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
     implements AfterContentInit, CanDisable, HasTabIndex {
