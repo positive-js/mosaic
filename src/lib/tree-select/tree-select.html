@@ -1,21 +1,21 @@
 <div cdk-overlay-origin
-     class="mc-select__trigger"
+     class="mc-tree-select__trigger"
      (click)="toggle()"
-     [class.mc-select__trigger_multiple]="multiple"
+     [class.mc-tree-select__trigger_multiple]="multiple"
      #origin="cdkOverlayOrigin"
      #trigger>
-    <div class="mc-select__matcher" [ngSwitch]="empty">
-        <span class="mc-select__placeholder" *ngSwitchCase="true">{{ placeholder || '\u00A0' }}</span>
+    <div class="mc-tree-select__matcher" [ngSwitch]="empty">
+        <span class="mc-tree-select__placeholder" *ngSwitchCase="true">{{ placeholder || '\u00A0' }}</span>
         <span *ngSwitchCase="false" [ngSwitch]="!!customTrigger">
-            <div *ngSwitchDefault [ngSwitch]="multiple" class="mc-select__match-container">
-                <span *ngSwitchCase="false" class="mc-select__matcher-text">{{ triggerValue }}</span>
-                <div *ngSwitchCase="true" class="mc-select__match-list">
+            <div *ngSwitchDefault [ngSwitch]="multiple" class="mc-tree-select__match-container">
+                <span *ngSwitchCase="false" class="mc-tree-select__matcher-text">{{ triggerValue }}</span>
+                <div *ngSwitchCase="true" class="mc-tree-select__match-list">
                     <mc-tag *ngFor="let option of selected" [disabled]="disabled" [class.mc-error]="errorState">
                         {{ option.viewValue }}
                         <i mc-icon="mc-close-S_16" (click)="onRemoveSelectedOption(option, $event)"></i>
                     </mc-tag>
                 </div>
-                <div class="mc-select__match-hidden-text" [style.display]="hiddenItems > 0 ? 'block' : 'none'">
+                <div class="mc-tree-select__match-hidden-text" [style.display]="hiddenItems > 0 ? 'block' : 'none'">
                     {{ oneMoreText }} {{ hiddenItems }}
                 </div>
             </div>
@@ -23,8 +23,8 @@
         </span>
     </div>
 
-    <div class="mc-select__arrow-wrapper">
-        <i class="mc-select__arrow" mc-icon="mc-angle-down-L_16" color="second"></i>
+    <div class="mc-tree-select__arrow-wrapper">
+        <i class="mc-tree-select__arrow" mc-icon="mc-angle-down-L_16" color="second"></i>
     </div>
 </div>
 
@@ -44,7 +44,7 @@
     (detach)="close()">
 
     <div #panel
-         class="mc-select__panel {{ getPanelTheme() }}"
+         class="mc-tree-select__panel {{ getPanelTheme() }}"
          [ngClass]="panelClass"
          (@transformPanel.done)="panelDoneAnimatingStream.next($event.toState)"
          [style.transformOrigin]="transformOrigin"
@@ -52,7 +52,7 @@
          [style.font-size.px]="triggerFontSize"
          (keydown)="handleKeydown($event)">
 
-        <div class="mc-select__content"
+        <div class="mc-tree-select__content"
              [@fadeInContent]="'showing'"
              (@fadeInContent.done)="onFadeInDone()">
             <ng-content select="mc-tree-selection"></ng-content>

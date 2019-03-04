@@ -26,7 +26,7 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
     outline: none;
 
     &.mc-disabled {
-        & .mc-select__trigger {
+        & .mc-tree-select__trigger {
             @include user-select(none);
 
             cursor: default;
@@ -34,7 +34,7 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
     }
 }
 
-.mc-select__trigger {
+.mc-tree-select__trigger {
     display: flex;
     box-sizing: border-box;
     position: relative;
@@ -46,12 +46,16 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
     // todo возможно нужно через JS
     padding: 3px 7px 3px 15px;
 
-    &.mc-select__trigger_multiple {
+    &.mc-tree-select__trigger_multiple {
         padding-left: 7px;
+
+        & .mc-tree-select__placeholder {
+            margin-left: 8px;
+        }
     }
 }
 
-.mc-select__matcher {
+.mc-tree-select__matcher {
     display: flex;
     align-items: center;
 
@@ -67,7 +71,7 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
     }
 }
 
-.mc-select__match-list {
+.mc-tree-select__match-list {
     display: flex;
     flex-wrap: wrap;
 
@@ -83,14 +87,14 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
     }
 }
 
-.mc-select__match-container {
+.mc-tree-select__match-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 
     width: 100%;
 
-    & .mc-select__match-hidden-text {
+    & .mc-tree-select__match-hidden-text {
         flex: 0 0 70px;
         align-self: center;
         padding: 0 8px;
@@ -99,7 +103,7 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
     }
 }
 
-.mc-select__match-item {
+.mc-tree-select__match-item {
     display: flex;
 
     border: 1px solid transparent;
@@ -112,7 +116,7 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
     max-width: 100%;
 }
 
-.mc-select__arrow-wrapper {
+.mc-tree-select__arrow-wrapper {
     display: table-cell;
     vertical-align: middle;
 
@@ -128,7 +132,7 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
     }
 }
 
-.mc-select__panel {
+.mc-tree-select__panel {
     max-height: $mc-select-panel-max-height;
     min-width: 100%; // prevents some animcion twitching and test inconsistencies in IE11
 
@@ -145,12 +149,12 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
     padding: 4px 0;
 }
 
-.mc-select__content {
+.mc-tree-select__content {
     height: 100%;
 }
 
 // Override optgroup and option to scale based on font-size of the trigger.
-.mc-select__panel {
+.mc-tree-select__panel {
     .mc-optgroup-label,
     .mc-tree-select-option {
         font-size: inherit;
@@ -169,7 +173,7 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
     }
 }
 
-//.mc-select__placeholder {
+//.mc-tree-select__placeholder {
 //    // Delay the transition until the label has animced about a third of the way through, in
 //    // order to prevent the placeholder from overlapping for a split second.
 //    transition: color $swift-ease-out-duration $swift-ease-out-duration / 3

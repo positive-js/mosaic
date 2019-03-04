@@ -762,8 +762,8 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         this.hiddenItems = this.selectionModel.selected.length - visibleItems;
 
         if (this.hiddenItems) {
-            const itemsCounter = this.trigger.nativeElement.querySelector('.mc-select__match-hidden-text');
-            const matcherList = this.trigger.nativeElement.querySelector('.mc-select__match-list');
+            const itemsCounter = this.trigger.nativeElement.querySelector('.mc-tree-select__match-hidden-text');
+            const matcherList = this.trigger.nativeElement.querySelector('.mc-tree-select__match-list');
 
             const itemsCounterShowed = itemsCounter.offsetTop < itemsCounter.offsetHeight;
             // const itemsCounterWidth: number = itemsCounter.getBoundingClientRect().width;
@@ -804,7 +804,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
 
     private getTotalItemsWidthInMatcher(): number {
         const triggerClone = this.trigger.nativeElement.cloneNode(true);
-        triggerClone.querySelector('.mc-select__match-hidden-text').remove();
+        triggerClone.querySelector('.mc-tree-select__match-hidden-text').remove();
 
         this.renderer.setStyle(triggerClone, 'position', 'absolute');
         this.renderer.setStyle(triggerClone, 'visibility', 'hidden');

@@ -18,6 +18,7 @@ import { CanDisable, toBoolean } from '@ptsecurity/mosaic/core';
 export interface McTreeOptionParentComponent {
     multiple: boolean;
     selectionModel: SelectionModel<McTreeOption>;
+    setFocusedOption: any;
 }
 
 /**
@@ -36,28 +37,21 @@ let uniqueIdCounter: number = 0;
     selector: 'mc-tree-option',
     exportAs: 'mcTreeOption',
     host: {
+        '[attr.id]': 'id',
         '[attr.tabindex]': 'getTabIndex()',
+
+        '[attr.disabled]': 'disabled || null',
+
         class: 'mc-tree-option',
         '[class.mc-selected]': 'selected',
-        '[class.mc-focused]': 'hasFocus',
-        // todo унифицировать!
         '[class.mc-active]': 'active',
-
-        '[id]': 'id',
-
-        // '(focus)': 'handleFocus()',
-        // '(blur)': 'handleBlur()',
 
         '(click)': 'selectViaInteraction()'
     },
     templateUrl: './tree-option.html',
-    providers: [
-        { provide: CdkTreeNode, useExisting: McTreeOption }
-    ]
+    providers: [{ provide: CdkTreeNode, useExisting: McTreeOption }]
 })
 export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisable {
-    hasFocus: boolean = false;
-
     @Output() readonly onSelectionChange = new EventEmitter<McTreeOptionChange>();
 
     @Input() value: any;
@@ -155,6 +149,7 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
     setActiveStyles(): void {
         if (!this._active) {
             this._active = true;
+
             this.changeDetectorRef.markForCheck();
         }
     }
@@ -180,22 +175,12 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
         return 0;
     }
 
-    handleFocus(): void {
-        if (this.disabled || this.hasFocus) { return; }
-
-        this.hasFocus = true;
-    }
-
     focus(): void {
         const element = this.getHostElement();
 
         if (typeof element.focus === 'function') {
             element.focus();
         }
-    }
-
-    handleBlur(): void {
-        this.hasFocus = false;
     }
 
     // todo старая реализация, нужно восстановить tree-selection
@@ -236,6 +221,10 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
 
             this.changeDetectorRef.markForCheck();
             this.emitSelectionChangeEvent(true);
+
+            if (this.parent.setFocusedOption) {
+                this.parent.setFocusedOption(this);
+            }
         }
     }
 

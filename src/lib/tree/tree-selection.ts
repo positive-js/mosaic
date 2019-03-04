@@ -29,6 +29,7 @@ import {
     mixinTabIndex,
     toBoolean
 } from '@ptsecurity/mosaic/core';
+import { Subject } from 'rxjs';
 
 import { MC_TREE_OPTION_PARENT_COMPONENT, McTreeOption } from './tree-option';
 
@@ -95,6 +96,11 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
     withShift: boolean;
     withCtrl: boolean;
 
+
+    @Output() readonly navigationChange = new EventEmitter<McTreeNavigationChange>();
+
+    @Output() readonly selectionChange = new EventEmitter<McTreeSelectionChange>();
+
     @Input()
     get disabled(): boolean {
         return this._disabled;
@@ -116,11 +122,9 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
         }
     }
 
-    @Output() readonly navigationChange = new EventEmitter<McTreeNavigationChange>();
-
-    @Output() readonly selectionChange = new EventEmitter<McTreeSelectionChange>();
-
     private _disabled: boolean = false;
+
+    private readonly destroy = new Subject<void>();
 
     constructor(
         private elementRef: ElementRef,
@@ -135,7 +139,7 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
 
         this.tabIndex = parseInt(tabIndex) || 0;
 
-        this.multiple = multiple === null ? true : toBoolean(multiple);
+        this.multiple = multiple === null ? false : toBoolean(multiple);
         this.autoSelect = autoSelect === null ? true : toBoolean(autoSelect);
         this.noUnselect = noUnselect === null ? true : toBoolean(noUnselect);
 
@@ -147,6 +151,12 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
             // .withTypeAhead()
             .withVerticalOrientation(true)
             .withHorizontalOrientation(null);
+    }
+
+    ngOnDestroy() {
+        this.destroy.next();
+
+        this.destroy.complete();
     }
 
     onKeyDown(event: KeyboardEvent) {
@@ -209,7 +219,7 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
     }
 
     setFocusedOption(option: McTreeOption) {
-        this.keyManager.updateActiveItem(option);
+        this.keyManager.setActiveItem(option);
 
         if (this.withShift && this.multiple) {
             const previousIndex = this.keyManager.previousActiveItemIndex;

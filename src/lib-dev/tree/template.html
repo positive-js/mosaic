@@ -6,10 +6,10 @@
 </style>
 <h5>multiple selection</h5>
 
-<!--auto-select="true"-->
+    <!--auto-select="true"-->
+    <!--no-unselect="false"-->
+    <!--multiple-->
 <mc-tree-selection
-    multiple
-    no-unselect="false"
     [dataSource]="dataSource"
     [treeControl]="treeControl"
     (navigationChange)="onNavigationChange($event)"
@@ -19,7 +19,10 @@
         {{ node.name }}
     </mc-tree-option>
 
-    <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+    <mc-tree-option
+        *mcTreeNodeDef="let node; when: hasChild"
+        mcTreeNodePadding
+        [disabled]="node.name === 'Downloads'">
         <i mc-icon="mc-angle-down-S_16" [style.transform]="treeControl.isExpanded(node) ? '' : 'rotate(-90deg)'" mcTreeNodeToggle></i>
         {{ node.name }} : {{ node.type }}
     </mc-tree-option>
