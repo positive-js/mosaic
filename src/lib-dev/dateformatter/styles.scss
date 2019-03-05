@@ -1,0 +1,26 @@
+@import '~@ptsecurity/mosaic-icons/dist/styles/mc-icons';
+
+@import '../../lib/core/theming/prebuilt/default-theme';
+// @import '../../lib/core/theming/prebuilt/dark-theme';
+
+@import '../../lib/core/visual/prebuilt/default-visual';
+
+@include mosaic-visual();
+
+.common-container {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.container {
+    max-width: 1000px;
+}
+
+.light-text-secondary{
+    color: $light-text-secondary;
+}
+
+.row-border {
+    padding: 8px;
+    border-bottom: 1px solid $light-text-secondary;
+}

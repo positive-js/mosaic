@@ -19,6 +19,7 @@ import { McInputModule } from '@ptsecurity/mosaic/input';
 // Since Moment.js doesn't have a default export, we normally need to import using the `* as`
 // syntax. However, rollup creates a synthetic default module and we thus need to import it using
 // the `default as` syntax.
+// tslint:disable-next-line:ordered-imports
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
 import { default as _rollupMoment, Moment } from 'moment';
@@ -41,8 +42,8 @@ export class DemoComponent {
     minDate = moment([2015, 0, 1]);
     maxDate = moment([2020, 0, 1]);
 
-    myFilter(d: Moment): boolean {
-        const day = d.day();
+    myFilter(date: Moment): boolean {
+        const day = date.day();
 
         return day !== 0 && day !== 6;
     }

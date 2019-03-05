@@ -55,8 +55,14 @@ import {
 
 
 let uniqueComponentIdSuffix: number = 0;
-let validatorOnChange: () => void = noop;
-let validator: ValidatorFn | null = () => null;
+
+const formValidators: WeakMap<FormControl, ValidatorFn | null> = new WeakMap();
+const formValidatorOnChangeRegistrators: WeakMap<FormControl, () => void> = new WeakMap();
+const validatorOnChange = (c: FormControl) => {
+    const validatorOnChangeHandler = formValidatorOnChangeRegistrators.get(c);
+
+    if (validatorOnChangeHandler !== undefined) { validatorOnChangeHandler(); }
+};
 
 export class McTimepickerBase {
     constructor(
@@ -86,6 +92,7 @@ export const McTimepickerMixinBase:
         '[attr.min-time]': 'minTime',
         '[attr.max-time]': 'maxTime',
         '[attr.value]': 'value',
+        '[attr.aria-invalid]': 'errorState',
         '(blur)': 'onBlur()',
         '(focus)': 'focusChanged(true)',
         '(input)': 'onInput()',
@@ -96,8 +103,20 @@ export const McTimepickerMixinBase:
         {
             provide: NG_VALIDATORS,
             useValue: {
-                validate(c) { return validator ? validator(c) : null; },
-                registerOnValidatorChange(fn: () => void): void { validatorOnChange = fn; }
+                validate(c: FormControl) {
+                    // TODO This is `workaround` to bind singleton-like Validator implementation to
+                    // context of each validated component. This MUST be realized in proper way!
+                    if (this.__validatorOnChangeHandler !== undefined) {
+                        formValidatorOnChangeRegistrators.set(c, this.__validatorOnChangeHandler);
+                        this.__validatorOnChangeHandler = undefined;
+                    }
+                    const validator = formValidators.get(c);
+
+                    return validator ? validator(c) : null;
+                },
+                registerOnValidatorChange(fn: () => void): void {
+                    this.__validatorOnChangeHandler = fn;
+                }
             },
             multi: true
         },
@@ -200,7 +219,7 @@ export class McTimepicker extends McTimepickerMixinBase
             .map((timeFormatKey) => TimeFormats[timeFormatKey])
             .indexOf(formatValue) > -1 ? formatValue : DEFAULT_TIME_FORMAT;
 
-        validatorOnChange();
+        validatorOnChange(<FormControl> this.ngControl.control);
         this.placeholder = TIMEFORMAT_PLACEHOLDERS[this._timeFormat];
     }
 
@@ -210,7 +229,7 @@ export class McTimepicker extends McTimepickerMixinBase
     set minTime(minValue: string | null) {
         this._minTime = minValue;
         this.minDateTime = minValue !== null ? this.getDateFromTimeString(minValue) : undefined;
-        validatorOnChange();
+        validatorOnChange(<FormControl> this.ngControl.control);
     }
 
     @Input('max-time')
@@ -219,7 +238,7 @@ export class McTimepicker extends McTimepickerMixinBase
     set maxTime(maxValue: string | null) {
         this._maxTime = maxValue;
         this.maxDateTime = maxValue !== null ? this.getDateFromTimeString(maxValue) : undefined;
-        validatorOnChange();
+        validatorOnChange(<FormControl> this.ngControl.control);
     }
 
     private _id: string;
@@ -262,11 +281,15 @@ export class McTimepicker extends McTimepickerMixinBase
         if (this.ngControl) { this.ngControl.valueAccessor = this; }
 
         // Substitute initial empty validator with validator linked to directive object instance (workaround)
-        validator = Validators.compose([
-            () => this.parseValidator(),
-            () => this.minTimeValidator(),
-            () => this.maxTimeValidator()
-        ]);
+
+        formValidators.set(
+            <FormControl> this.ngControl.control,
+            Validators.compose([
+                () => this.parseValidator(),
+                () => this.minTimeValidator(),
+                () => this.maxTimeValidator()
+            ])
+        );
     }
 
     ngOnChanges(): void {
@@ -427,7 +450,6 @@ export class McTimepicker extends McTimepickerMixinBase
         doTimestringReformat?: boolean;
     } = {}): void {
         const { changedTime, doTimestringReformat = true } = applyParams;
-
         const timeToApply: Date | undefined = changedTime ||
             this.getDateFromTimeString(this.elementRef.nativeElement.value);
         this.currentDateTimeInput = timeToApply;

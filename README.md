@@ -1,5 +1,5 @@
 <p align="center">
-    <img width="200" src="https://preview.ibb.co/fZha7S/POSITIVE_JS_LOGO_WHITE_ed2_05.png" alt="positive_js_logo" border="0">
+    <img src="https://i.ibb.co/fQNPgv6/logo-png-200.png" alt="positive_js_logo" border="0">
 </p>
 
 
@@ -30,12 +30,12 @@ Before you start, make sure you have a recent version of [NodeJS](http://nodejs.
 From the project folder, execute the following commands:
 
 ```shell
-$ npm install
+$ yarn install
 ```
 
 ## Running The Component
 ```shell
-$ npm run server-dev:button
+$ yarn run server-dev:button
 ```
 
 ## Credits

@@ -1,4 +1,4 @@
-import { IFormatterConfig } from '../mosaic-date-formatter-configs';
+import { IFormatterConfig } from './IFormatterConfig';
 
 
 export const ruRU: IFormatterConfig = {

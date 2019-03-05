@@ -61,6 +61,8 @@ export function composeRelease(buildPackage: BuildPackage) {
     }
 
     if (buildPackage.exportsSecondaryEntryPointsAtRoot) {
+        // Add re-exports to the root d.ts file to prevent errors of the form
+        // "@ptsecurity/mosaic/mosaic has no exported member 'MC_SANITY_CHECKS."
         const es2015Exports = buildPackage.secondaryEntryPoints
             .map((p) => `export * from './${p}';`).join('\n');
         appendFileSync(join(releasePath, `${name}.d.ts`), es2015Exports, 'utf-8');
