@@ -5,6 +5,8 @@ import { ITreeControl } from './tree-control';
 
 
 /** Base tree control. It has basic toggle/expand/collapse operations on a single data node. */
+// todo здесь явно ошибка проектирования, абстрактный класс реализует функционал
+/* tslint:disable-next-line:naming-convention */
 export abstract class BaseTreeControl<T> implements ITreeControl<T> {
 
     /** Saved data node for `expandAll` action. */

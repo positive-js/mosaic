@@ -1,7 +1,3 @@
-@import 'tree-base';
-@import 'tree-theme';
-
-
 $mc-tree-node-border-height: 2px;
 
 $mc-tree-node-height: 28px;
@@ -13,7 +9,7 @@ $mc-tree-node-padding: 16px;
     display: block;
 }
 
-.mc-tree-node {
+.mc-tree-option {
     display: flex;
     align-items: center;
 
@@ -35,6 +31,10 @@ $mc-tree-node-padding: 16px;
 
     &:not([disabled]) {
         cursor: pointer;
+    }
+
+    & .mc-pseudo-checkbox {
+        margin-right: 8px;
     }
 }
 

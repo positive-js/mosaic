@@ -1,9 +1,10 @@
-import {FlatTreeControl} from './flat-tree-control';
+import { FlatTreeControl } from './flat-tree-control';
+
 
 describe('CdkFlatTreeControl', () => {
   let treeControl: FlatTreeControl<TestData>;
-  let getLevel = (node: TestData) => node.level;
-  let isExpandable = (node: TestData) => node.children && node.children.length > 0;
+  const getLevel = (node: TestData) => node.level;
+  const isExpandable = (node: TestData) => node.children && node.children.length > 0;
 
   beforeEach(() => {
     treeControl = new FlatTreeControl<TestData>(getLevel, isExpandable);

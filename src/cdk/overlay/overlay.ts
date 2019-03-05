@@ -46,8 +46,8 @@ export class Overlay {
         private _injector: Injector,
         private _ngZone: NgZone,
         @Inject(DOCUMENT) private _document: any,
-        private _directionality: Directionality) {
-    }
+        private _directionality: Directionality
+    ) {}
 
     /**
      * Creates an overlay.

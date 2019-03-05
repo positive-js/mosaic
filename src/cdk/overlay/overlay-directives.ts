@@ -235,7 +235,8 @@ export class CdkConnectedOverlay implements OnDestroy, OnChanges {
         templateRef: TemplateRef<any>,
         viewContainerRef: ViewContainerRef,
         @Inject(CDK_CONNECTED_OVERLAY_SCROLL_STRATEGY) private _scrollStrategy,
-        @Optional() private _dir: Directionality) {
+        @Optional() private _dir: Directionality
+    ) {
         this._templatePortal = new TemplatePortal(templateRef, viewContainerRef);
     }
 

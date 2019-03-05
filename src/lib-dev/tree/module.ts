@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import { CdkTreeModule, FlatTreeControl, NestedTreeControl } from '@ptsecurity/cdk/tree';
+import { FlatTreeControl, NestedTreeControl } from '@ptsecurity/cdk/tree';
 import {
     McTreeFlatDataSource,
     McTreeFlattener,
@@ -96,7 +96,7 @@ export class FileDatabase {
     buildFileTree(value: any, level: number): FileNode[] {
         const data: any[] = [];
 
-        for (const k in value) {
+        for (const k of Object.keys(value)) {
             const v = value[k];
             const node = new FileNode();
 
@@ -193,8 +193,7 @@ export class DemoComponent {
         BrowserModule,
         FormsModule,
         McTreeModule,
-        McIconModule,
-        CdkTreeModule
+        McIconModule
     ],
     bootstrap: [
         DemoComponent

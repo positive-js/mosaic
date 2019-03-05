@@ -6,41 +6,27 @@
 </style>
 <h5>multiple selection</h5>
 
-<!--auto-select="true"-->
+    <!--auto-select="true"-->
+    <!--no-unselect="false"-->
+    <!--multiple-->
 <mc-tree-selection
-    multiple
-    no-unselect="false"
     [dataSource]="dataSource"
     [treeControl]="treeControl"
     (navigationChange)="onNavigationChange($event)"
     (selectionChange)="onSelectionChange($event)">
 
-    <mc-tree-node-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+    <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
         {{ node.name }}
-    </mc-tree-node-option>
+    </mc-tree-option>
 
-    <mc-tree-node-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
-        <i mc-icon="mc-angle-down-S_16" [style.transform]="treeControl.isExpanded(node) ? '' : 'rotate(-90deg)'" cdkTreeNodeToggle></i>
+    <mc-tree-option
+        *mcTreeNodeDef="let node; when: hasChild"
+        mcTreeNodePadding
+        [disabled]="node.name === 'Downloads'">
+        <i mc-icon="mc-angle-down-S_16" [style.transform]="treeControl.isExpanded(node) ? '' : 'rotate(-90deg)'" mcTreeNodeToggle></i>
         {{ node.name }} : {{ node.type }}
-    </mc-tree-node-option>
+    </mc-tree-option>
 </mc-tree-selection>
-
-<!--<mc-tree [dataSource]="nestedDataSource" [treeControl]="nestedTreeControl">-->
-    <!--<mc-tree-leaf class="mc-selected" *mcTreeNodeDef="let node">-->
-        <!--{{ node.name }}.{{ node.type }} level: {{ node.level }}-->
-    <!--</mc-tree-leaf>-->
-
-    <!--<mc-tree-node *mcTreeNodeDef="let node; when: hasNestedChild">-->
-        <!--<div class="mc-tree-node__data">-->
-            <!--<i mc-icon="mc-angle-down-S_16" mcTreeNodeToggle></i>-->
-            <!--{{ node.name }}level: {{ node.level }}-->
-        <!--</div>-->
-        <!--<div class="mc-tree-branch"-->
-            <!--[class.tree-invisible]="!nestedTreeControl.isExpanded(node)">-->
-            <!--<ng-container cdkTreeNodeOutlet></ng-container>-->
-        <!--</div>-->
-    <!--</mc-tree-node>-->
-<!--</mc-tree>-->
 
 <br>
 <div>multipleSelected: {{ multipleSelected }}</div>

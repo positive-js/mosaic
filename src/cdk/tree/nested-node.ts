@@ -51,60 +51,56 @@ export class CdkNestedTreeNode<T> extends CdkTreeNode<T> implements AfterContent
     @ContentChildren(CdkTreeNodeOutlet) nodeOutlet: QueryList<CdkTreeNodeOutlet>;
 
     /** The children data dataNodes of current node. They will be placed in `CdkTreeNodeOutlet`. */
-    protected _children: T[];
+    protected children: T[];
 
     /** Differ used to find the changes in the data provided by the data source. */
-    private _dataDiffer: IterableDiffer<T>;
+    private dataDiffer: IterableDiffer<T>;
 
-    constructor(
-        protected _elementRef: ElementRef,
-        protected _tree: CdkTree<T>,
-        protected _differs: IterableDiffers
-    ) {
-        super(_elementRef, _tree);
+    constructor(protected elementRef: ElementRef, protected tree: CdkTree<T>, protected differs: IterableDiffers) {
+        super(elementRef, tree);
     }
 
     ngAfterContentInit() {
-        this._dataDiffer = this._differs.find([]).create(this._tree.trackBy);
+        this.dataDiffer = this.differs.find([]).create(this.tree.trackBy);
 
-        if (!this._tree.treeControl.getChildren) {
+        if (!this.tree.treeControl.getChildren) {
             throw getTreeControlFunctionsMissingError();
         }
 
-        this._tree.treeControl.getChildren(this.data)
-            .pipe(takeUntil(this._destroyed))
+        this.tree.treeControl.getChildren(this.data)
+            .pipe(takeUntil(this.destroyed))
             .subscribe((result) => {
-                this._children = result;
+                this.children = result;
                 this.updateChildrenNodes();
             });
 
         this.nodeOutlet.changes
-            .pipe(takeUntil(this._destroyed))
+            .pipe(takeUntil(this.destroyed))
             .subscribe(() => this.updateChildrenNodes());
     }
 
     ngOnDestroy() {
-        this._clear();
+        this.clear();
         super.ngOnDestroy();
     }
 
     /** Add children dataNodes to the NodeOutlet */
     protected updateChildrenNodes(): void {
-        if (this.nodeOutlet.length && this._children) {
-            this._tree.renderNodeChanges(
-                this._children, this._dataDiffer, this.nodeOutlet.first.viewContainer, this._data
+        if (this.nodeOutlet.length && this.children) {
+            this.tree.renderNodeChanges(
+                this.children, this.dataDiffer, this.nodeOutlet.first.viewContainer, this.data
             );
         } else {
             // Reset the data differ if there's no children nodes displayed
-            this._dataDiffer.diff([]);
+            this.dataDiffer.diff([]);
         }
     }
 
     /** Clear the children dataNodes. */
-    protected _clear(): void {
+    protected clear(): void {
         if (this.nodeOutlet && this.nodeOutlet.first) {
             this.nodeOutlet.first.viewContainer.clear();
-            this._dataDiffer.diff([]);
+            this.dataDiffer.diff([]);
         }
     }
 }

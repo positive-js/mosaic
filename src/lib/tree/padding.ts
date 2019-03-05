@@ -7,32 +7,34 @@ import { CdkTreeNodePadding } from '@ptsecurity/cdk/tree';
     providers: [{ provide: CdkTreeNodePadding, useExisting: McTreeNodePadding }]
 })
 export class McTreeNodePadding<T> extends CdkTreeNodePadding<T> implements OnInit {
-    get leftPadding(): number {
-        return (this._withIcon ? 0 : this._iconWidth) + this._baseLeftPadding;
-    }
-
-    _baseLeftPadding: number = 6;
-    _iconWidth: number = 20;
-    _indent: number = 16;
-
     @Input('mcTreeNodePadding') level: number;
 
     @Input('mcTreeNodePaddingIndent') indent: number;
 
-    _withIcon: boolean;
+    baseLeftPadding: number = 12;
+    /* tslint:disable-next-line:naming-convention */
+    _indent: number = 20;
 
-    _paddingIndent(): string | null {
-        const nodeLevel = (this._treeNode.data && this._tree.treeControl.getLevel)
-            ? this._tree.treeControl.getLevel(this._treeNode.data)
+    withIcon: boolean;
+    iconWidth: number = 20;
+
+    get leftPadding(): number {
+        return (this.withIcon ? 0 : this.iconWidth) + this.baseLeftPadding;
+    }
+
+    paddingIndent(): string | null {
+        const nodeLevel = (this.treeNode.data && this.tree.treeControl.getLevel)
+            ? this.tree.treeControl.getLevel(this.treeNode.data)
             : null;
 
-        const level = this._level || nodeLevel;
+        const level = this.level || nodeLevel;
 
-        return level ? `${(level * this._indent) + this.leftPadding}px` : `${this._baseLeftPadding}px`;
+        return level ? `${(level * this._indent) + this.leftPadding}px` : `${this.baseLeftPadding}px`;
     }
 
     ngOnInit(): void {
-        this._withIcon = this._tree.treeControl.isExpandable(this._treeNode.data);
-        this._setPadding();
+        this.withIcon = this.tree.treeControl.isExpandable(this.treeNode.data);
+
+        this.setPadding();
     }
 }

@@ -25,16 +25,11 @@ import { McOptgroup } from './optgroup';
  * Option IDs need to be unique across components, so this counter exists outside of
  * the component definition.
  */
-let _uniqueIdCounter = 0;
+let uniqueIdCounter = 0;
 
 /** Event object emitted by McOption when selected or deselected. */
 export class McOptionSelectionChange {
-    constructor(
-        /** Reference to the option that emitted the event. */
-        public source: McOption,
-        /** Whether the change in the option's value was a result of a user action. */
-        public isUserInput = false) {
-    }
+    constructor(public source: McOption, public isUserInput = false) {}
 }
 
 /**
@@ -43,7 +38,6 @@ export class McOptionSelectionChange {
  * @docs-private
  */
 export interface IMcOptionParentComponent {
-    disableRipple?: boolean;
     multiple?: boolean;
 }
 
@@ -54,47 +48,65 @@ export const MC_OPTION_PARENT_COMPONENT =
     new InjectionToken<IMcOptionParentComponent>('MC_OPTION_PARENT_COMPONENT');
 
 /**
- * Single option inside of a `<mat-select>` element.
+ * Single option inside of a `<mc-select>` element.
  */
 @Component({
     selector: 'mc-option',
     exportAs: 'mcOption',
     host: {
-        '[attr.tabindex]': '_getTabIndex()',
+        '[attr.tabindex]': 'getTabIndex()',
+        class: 'mc-option',
         '[class.mc-selected]': 'selected',
         '[class.mc-option-multiple]': 'multiple',
         '[class.mc-active]': 'active',
-        '[id]': 'id',
         '[class.mc-disabled]': 'disabled',
-        '(click)': '_selectViaInteraction()',
-        '(keydown)': '_handleKeydown($event)',
-        class: 'mc-option'
+        '[id]': 'id',
+
+        '(click)': 'selectViaInteraction()',
+        '(keydown)': 'handleKeydown($event)'
     },
-    styleUrls: ['option.css'],
-    templateUrl: 'option.html',
+    styleUrls: ['./option.css'],
+    templateUrl: './option.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class McOption implements AfterViewChecked, OnDestroy {
-    /** Whether the wrapping component is in multiple selection mode. */
-    get multiple() {
-        return this._parent && this._parent.multiple;
+    /** The form value of the option. */
+    @Input() value: any;
+
+    /** Event emitted when the option is selected or deselected. */
+    // tslint:disable-next-line:no-output-on-prefix
+    @Output() readonly onSelectionChange = new EventEmitter<McOptionSelectionChange>();
+
+    /** Emits when the state of the option changes and any parents have to be notified. */
+    readonly stateChanges = new Subject<void>();
+
+    /**
+     * The displayed value of the option. It is necessary to show the selected option in the
+     * select's trigger.
+     */
+    get viewValue(): string {
+        // TODO(kara): Add input property alternative for node envs.
+        return (this.getHostElement().textContent || '').trim();
     }
 
-    /** The unique ID of the option. */
+    /** Whether the wrapping component is in multiple selection mode. */
+    get multiple() {
+        return this.parent && this.parent.multiple;
+    }
+
     get id(): string {
         return this._id;
     }
 
-    /** Whether or not the option is currently selected. */
+    private _id = `mc-option-${uniqueIdCounter++}`;
+
     get selected(): boolean {
         return this._selected;
     }
 
-    /** The form value of the option. */
-    @Input() value: any;
+    private _selected = false;
 
-    /** Whether the option is disabled. */
     @Input()
     get disabled() {
         return (this.group && this.group.disabled) || this._disabled;
@@ -104,30 +116,7 @@ export class McOption implements AfterViewChecked, OnDestroy {
         this._disabled = coerceBooleanProperty(value);
     }
 
-    /** Whether ripples for the option are disabled. */
-    get disableRipple() {
-        return this._parent && this._parent.disableRipple;
-    }
-
-    /** Event emitted when the option is selected or deselected. */
-        // tslint:disable-next-line:no-output-on-prefix
-    @Output() readonly onSelectionChange = new EventEmitter<McOptionSelectionChange>();
-
-    /** Emits when the state of the option changes and any parents have to be notified. */
-    readonly _stateChanges = new Subject<void>();
-
-    private _selected = false;
-    private _active = false;
     private _disabled = false;
-    private readonly _id = `mc-option-${_uniqueIdCounter++}`;
-    private _mostRecentViewValue = '';
-
-    constructor(
-        private readonly _element: ElementRef,
-        private readonly _changeDetectorRef: ChangeDetectorRef,
-        @Optional() @Inject(MC_OPTION_PARENT_COMPONENT) private readonly _parent: IMcOptionParentComponent,
-        @Optional() readonly group: McOptgroup) {
-    }
 
     /**
      * Whether or not the option is currently active and ready to be selected.
@@ -139,36 +128,57 @@ export class McOption implements AfterViewChecked, OnDestroy {
         return this._active;
     }
 
-    /**
-     * The displayed value of the option. It is necessary to show the selected option in the
-     * select's trigger.
-     */
-    get viewValue(): string {
-        // TODO(kara): Add input property alternative for node envs.
-        return (this._getHostElement().textContent || '').trim();
+    private _active = false;
+
+    private mostRecentViewValue = '';
+
+    constructor(
+        private readonly element: ElementRef,
+        private readonly changeDetectorRef: ChangeDetectorRef,
+        @Optional() @Inject(MC_OPTION_PARENT_COMPONENT) private readonly parent: IMcOptionParentComponent,
+        @Optional() readonly group: McOptgroup
+    ) {}
+
+    ngAfterViewChecked() {
+        // Since parent components could be using the option's label to display the selected values
+        // (e.g. `mc-select`) and they don't have a way of knowing if the option's label has changed
+        // we have to check for changes in the DOM ourselves and dispatch an event. These checks are
+        // relatively cheap, however we still limit them only to selected options in order to avoid
+        // hitting the DOM too often.
+        if (this._selected) {
+            const viewValue = this.viewValue;
+
+            if (viewValue !== this.mostRecentViewValue) {
+                this.mostRecentViewValue = viewValue;
+                this.stateChanges.next();
+            }
+        }
     }
 
-    /** Selects the option. */
+    ngOnDestroy() {
+        this.stateChanges.complete();
+    }
+
     select(): void {
         if (!this._selected) {
             this._selected = true;
-            this._changeDetectorRef.markForCheck();
-            this._emitSelectionChangeEvent();
+
+            this.changeDetectorRef.markForCheck();
+            this.emitSelectionChangeEvent();
         }
     }
 
-    /** Deselects the option. */
     deselect(): void {
         if (this._selected) {
             this._selected = false;
-            this._changeDetectorRef.markForCheck();
-            this._emitSelectionChangeEvent();
+
+            this.changeDetectorRef.markForCheck();
+            this.emitSelectionChangeEvent();
         }
     }
 
-    /** Sets focus onto this option. */
     focus(): void {
-        const element = this._getHostElement();
+        const element = this.getHostElement();
 
         if (typeof element.focus === 'function') {
             element.focus();
@@ -183,7 +193,7 @@ export class McOption implements AfterViewChecked, OnDestroy {
     setActiveStyles(): void {
         if (!this._active) {
             this._active = true;
-            this._changeDetectorRef.markForCheck();
+            this.changeDetectorRef.markForCheck();
         }
     }
 
@@ -195,7 +205,7 @@ export class McOption implements AfterViewChecked, OnDestroy {
     setInactiveStyles(): void {
         if (this._active) {
             this._active = false;
-            this._changeDetectorRef.markForCheck();
+            this.changeDetectorRef.markForCheck();
         }
     }
 
@@ -205,10 +215,10 @@ export class McOption implements AfterViewChecked, OnDestroy {
     }
 
     /** Ensures the option is selected when activated from the keyboard. */
-    _handleKeydown(event: KeyboardEvent): void {
+    handleKeydown(event: KeyboardEvent): void {
         // tslint:disable-next-line
         if (event.keyCode === ENTER || event.keyCode === SPACE) {
-            this._selectViaInteraction();
+            this.selectViaInteraction();
 
             // Prevent the page from scrolling down and form submits.
             event.preventDefault();
@@ -219,46 +229,25 @@ export class McOption implements AfterViewChecked, OnDestroy {
      * `Selects the option while indicating the selection came from the user. Used to
      * determine if the select's view -> model callback should be invoked.`
      */
-    _selectViaInteraction(): void {
+    selectViaInteraction(): void {
         if (!this.disabled) {
             this._selected = this.multiple ? !this._selected : true;
-            this._changeDetectorRef.markForCheck();
-            this._emitSelectionChangeEvent(true);
+
+            this.changeDetectorRef.markForCheck();
+            this.emitSelectionChangeEvent(true);
         }
     }
 
-    /** Returns the correct tabindex for the option depending on disabled state. */
-    _getTabIndex(): string {
+    getTabIndex(): string {
         return this.disabled ? '-1' : '0';
     }
 
-    /** Gets the host DOM element. */
-    _getHostElement(): HTMLElement {
-        return this._element.nativeElement;
-    }
-
-    ngAfterViewChecked() {
-        // Since parent components could be using the option's label to display the selected values
-        // (e.g. `mat-select`) and they don't have a way of knowing if the option's label has changed
-        // we have to check for changes in the DOM ourselves and dispatch an event. These checks are
-        // relatively cheap, however we still limit them only to selected options in order to avoid
-        // hitting the DOM too often.
-        if (this._selected) {
-            const viewValue = this.viewValue;
-
-            if (viewValue !== this._mostRecentViewValue) {
-                this._mostRecentViewValue = viewValue;
-                this._stateChanges.next();
-            }
-        }
-    }
-
-    ngOnDestroy() {
-        this._stateChanges.complete();
+    getHostElement(): HTMLElement {
+        return this.element.nativeElement;
     }
 
     /** Emits the selection change event. */
-    private _emitSelectionChangeEvent(isUserInput = false): void {
+    private emitSelectionChangeEvent(isUserInput = false): void {
         this.onSelectionChange.emit(new McOptionSelectionChange(this, isUserInput));
     }
 }
@@ -270,8 +259,9 @@ export class McOption implements AfterViewChecked, OnDestroy {
  * @param optionGroups Flat list of all of the option groups.
  * @docs-private
  */
-export function _countGroupLabelsBeforeOption(
-    optionIndex: number, options: QueryList<McOption>,
+export function countGroupLabelsBeforeOption(
+    optionIndex: number,
+    options: QueryList<McOption>,
     optionGroups: QueryList<McOptgroup>
 ): number {
 
@@ -301,7 +291,7 @@ export function _countGroupLabelsBeforeOption(
  * @param panelHeight Height of the panel.
  * @docs-private
  */
-export function _getOptionScrollPosition(
+export function getOptionScrollPosition(
     optionIndex: number,
     optionHeight: number,
     currentScrollPosition: number,

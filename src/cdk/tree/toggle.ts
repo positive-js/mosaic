@@ -1,40 +1,28 @@
-import {
-    Directive,
-    Input
-} from '@angular/core';
+import { Directive, Input } from '@angular/core';
 
 import { CdkTree, CdkTreeNode } from './tree';
 
 
-/**
- * Node toggle to expand/collapse the node.
- */
 @Directive({
     selector: '[cdkTreeNodeToggle]',
     host: {
-        '(click)': '_toggle($event)'
+        '(click)': 'toggle($event)'
     }
 })
 export class CdkTreeNodeToggle<T> {
-    /** Whether expand/collapse the node recursively. */
     @Input('cdkTreeNodeToggleRecursive')
-    get recursive(): boolean {
-        return this._recursive;
-    }
+    get recursive(): boolean { return this._recursive; }
 
-    set recursive(value: boolean) {
-        this._recursive = value;
-    }
+    set recursive(value: boolean) { this._recursive = value; }
 
-    // set recursive(value: boolean) { this._recursive = toBoolean(value); }
-    protected _recursive = false;
+    private _recursive = false;
 
-    constructor(protected _tree: CdkTree<T>, protected _treeNode: CdkTreeNode<T>) {}
+    constructor(protected tree: CdkTree<T>, protected treeNode: CdkTreeNode<T>) {}
 
-    _toggle(event: Event): void {
+    toggle(event: Event): void {
         this.recursive
-            ? this._tree.treeControl.toggleDescendants(this._treeNode.data)
-            : this._tree.treeControl.toggle(this._treeNode.data);
+            ? this.tree.treeControl.toggleDescendants(this.treeNode.data)
+            : this.tree.treeControl.toggle(this.treeNode.data);
 
         event.stopPropagation();
     }

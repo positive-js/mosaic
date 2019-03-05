@@ -22,9 +22,9 @@ export type CanUpdateErrorStateCtor = Constructor<CanUpdateErrorState>;
 
 /** @docs-private */
 export interface HasErrorState {
-    _parentFormGroup: FormGroupDirective;
-    _parentForm: NgForm;
-    _defaultErrorStateMatcher: ErrorStateMatcher;
+    parentFormGroup: FormGroupDirective;
+    parentForm: NgForm;
+    defaultErrorStateMatcher: ErrorStateMatcher;
     ngControl: NgControl;
 }
 
@@ -51,8 +51,8 @@ export function mixinErrorState<T extends Constructor<HasErrorState>>(base: T): 
 
         updateErrorState() {
             const oldState = this.errorState;
-            const parent = this._parentFormGroup || this._parentForm;
-            const matcher = this.errorStateMatcher || this._defaultErrorStateMatcher;
+            const parent = this.parentFormGroup || this.parentForm;
+            const matcher = this.errorStateMatcher || this.defaultErrorStateMatcher;
             const control = this.ngControl ? this.ngControl.control as FormControl : null;
             const newState = matcher.isErrorState(control, parent);
 

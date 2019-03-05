@@ -1,5 +1,5 @@
 
-import { ListKeyManager, IListKeyManagerOption } from './list-key-manager';
+import { ListKeyManager, ListKeyManagerOption } from './list-key-manager';
 
 
 /**
@@ -7,7 +7,7 @@ import { ListKeyManager, IListKeyManagerOption } from './list-key-manager';
  * Each item must know how to style itself as active or inactive and whether or not it is
  * currently disabled.
  */
-export interface IHighlightable extends IListKeyManagerOption {
+export interface Highlightable extends ListKeyManagerOption {
     // Applies the styles for an active item to this item.
     setActiveStyles(): void;
 
@@ -15,7 +15,7 @@ export interface IHighlightable extends IListKeyManagerOption {
     setInactiveStyles(): void;
 }
 
-export class ActiveDescendantKeyManager<T> extends ListKeyManager<IHighlightable & T> {
+export class ActiveDescendantKeyManager<T> extends ListKeyManager<Highlightable & T> {
 
     /**
      * Sets the active item to the item at the specified index and adds the
