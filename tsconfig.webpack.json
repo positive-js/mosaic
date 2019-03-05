@@ -48,7 +48,8 @@
         "src/**/*._spec.ts",
         "src/**/*.e2e.ts",
         "src/mosaic-examples/**/*.*",
-        "src/cdk/schematics/**/*.*"
+        "src/cdk/schematics/**/*.*",
+        "src/dev-app/**/*.*"
     ],
     "angularCompilerOptions": {
         "skipMetadataEmit": true

@@ -11,7 +11,13 @@ import { Component, ViewEncapsulation } from '@angular/core';
 export class DevAppComponent {
     dark = false;
     navItems = [
-        { name: 'Button', route: '/button' }
+        {
+            text: 'Form controls',
+            children: [
+                { text: 'Button', route: '/button' },
+                { text: 'Input', route: '/input' }
+            ]
+        }
     ];
 }
 
@@ -20,7 +26,7 @@ export class DevAppComponent {
     selector: 'home',
     template: `
         <p>Welcome to the development demos for Angular Mosaic!</p>
-        <p>Open the sidenav to select a demo.</p>
+        <p>Select demo on the navbar.</p>
     `
 })
 export class DevAppHome {

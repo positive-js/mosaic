@@ -4,11 +4,14 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 import { LayoutModule } from '@ptsecurity/cdk/layout';
 
 import { ButtonDemo } from './button/button-demo';
 import { DevAppComponent, DevAppHome, DevApp404 } from './dev-app';
+import { InputDemo } from './input/input-demo';
 import { DevAppMosaicModule } from './mosaic-module';
+import { DEV_APP_ROUTES } from './routes';
 
 
 @NgModule({
@@ -21,15 +24,16 @@ import { DevAppMosaicModule } from './mosaic-module';
         FormsModule,
         HttpClientModule,
         LayoutModule,
-        ReactiveFormsModule
-        // RouterModule.forRoot(DEV_APP_ROUTES)
+        ReactiveFormsModule,
+        RouterModule.forRoot(DEV_APP_ROUTES)
     ],
     declarations: [
         DevAppComponent,
         DevAppHome,
         DevApp404,
 
-        ButtonDemo
+        ButtonDemo,
+        InputDemo
     ],
     providers: [],
     entryComponents: [],

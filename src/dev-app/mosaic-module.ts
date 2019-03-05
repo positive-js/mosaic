@@ -4,13 +4,17 @@
 import { NgModule } from '@angular/core';
 import { A11yModule } from '@ptsecurity/cdk/a11y';
 import { BidiModule } from '@ptsecurity/cdk/bidi';
-import { McButtonModule, McIconModule } from '@ptsecurity/mosaic';
+import { McButtonModule, McIconModule, McNavbarModule, McInputModule, McFormFieldModule } from '@ptsecurity/mosaic';
 
 
 @NgModule({
     exports: [
-        McButtonModule,
         McIconModule,
+        McButtonModule,
+        McInputModule,
+        McNavbarModule,
+
+        McFormFieldModule,
 
         A11yModule,
         BidiModule
