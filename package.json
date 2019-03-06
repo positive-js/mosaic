@@ -44,6 +44,7 @@
         "@ptsecurity/commitlint-config": "^0.2.1",
         "@ptsecurity/tslint-config": "^0.10.1",
         "@schematics/angular": "7.1.4",
+        "@types/browser-sync": "^0.0.42",
         "@types/chalk": "^2.2.0",
         "@types/fs-extra": "^5.0.4",
         "@types/glob": "^5.0.36",
@@ -56,6 +57,7 @@
         "angular2-template-loader": "^0.6.2",
         "autoprefixer": "^9.4.2",
         "awesome-typescript-loader": "^5.2.1",
+        "browser-sync": "^2.26.3",
         "chalk": "^2.4.1",
         "conventional-changelog": "^3.0.5",
         "dgeni": "^0.4.10",
@@ -80,6 +82,7 @@
         "gulp-transform": "^2.0.0",
         "gulp-util": "^3.0.8",
         "highlight.js": "^9.13.1",
+        "http-rewrite-middleware": "^0.1.6",
         "html-webpack-plugin": "^3.2.0",
         "husky": "^1.3.1",
         "inquirer": "^6.2.1",
@@ -130,6 +133,7 @@
         "webpack-dev-server": "^3.1.9"
     },
     "scripts": {
+        "dev-app": "gulp serve:devapp",
         "test:unit": "gulp ci:test",
         "valid:lic": "gulp validate-licenses",
         "build:cdk": "gulp cdk:build-release",

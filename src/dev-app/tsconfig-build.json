@@ -1,0 +1,60 @@
+// TypeScript config file that is used to compile the dev-app. Target environment will be ES5,
+// since the dev-app will be served in the browser.
+{
+    "compilerOptions": {
+        // Needed for Moment.js since it doesn't have a default export.
+        "allowSyntheticDefaultImports": true,
+        "declaration": false,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "noUnusedParameters": true,
+        "noUnusedLocals": true,
+        "strictNullChecks": true,
+        "strictFunctionTypes": true,
+        "noImplicitThis": true,
+        "lib": [
+            "es6",
+            "es2015",
+            "dom"
+        ],
+        "skipLibCheck": true,
+        "module": "es2015",
+        "moduleResolution": "node",
+        "noEmitOnError": true,
+        "noImplicitAny": true,
+        "outDir": "../../dist/packages/dev-app",
+        "sourceMap": true,
+        "target": "es5",
+        "stripInternal": false,
+        "typeRoots": [
+            "../../node_modules/@types/!(node)"
+        ],
+        "baseUrl": ".",
+        "paths": {
+            "@ptsecurity/mosaic/*": [
+                "../../dist/packages/mosaic/*"
+            ],
+            "@ptsecurity/mosaic": [
+                "../../dist/packages/mosaic"
+            ],
+            "@ptsecurity/cdk/*": [
+                "../../dist/packages/cdk/*"
+            ],
+            "@ptsecurity/cdk": [
+                "../../dist/packages/cdk"
+            ],
+            "@ptsecurity/mosaic-moment-adapter": [
+                "../../dist/packages/mosaic-moment-adapter"
+            ],
+            "@ptsecurity/mosaic-examples": [
+                "../../dist/packages/mosaic-examples"
+            ]
+        }
+    },
+    "files": [
+        "./dev-app-module.ts",
+        "./system-rxjs-operators.ts",
+        "./system-config.ts",
+        "./main.ts"
+    ]
+}
