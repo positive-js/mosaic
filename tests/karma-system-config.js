@@ -39,6 +39,7 @@ System.config({
 
         '@ptsecurity/cdk': 'dist/packages/cdk/index.js',
         '@ptsecurity/cdk/a11y': 'dist/packages/cdk/a11y/index.js',
+        '@ptsecurity/cdk/accordion': 'dist/packages/cdk/accordion/index.js',
         '@ptsecurity/cdk/bidi': 'dist/packages/cdk/bidi/index.js',
         '@ptsecurity/cdk/datetime': 'dist/packages/cdk/datetime/index.js',
         '@ptsecurity/cdk/coercion': 'dist/packages/cdk/coercion/index.js',
