@@ -139,6 +139,12 @@ workflows:
                       - build_cdk
                       - build_mosaic
                       - build_mosaic-moment-adapter
+            - build_dev_app_aot:
+                  requires:
+                      - test_unit
+                      - build_cdk
+                      - build_mosaic
+                      - build_mosaic-moment-adapter
             - snapshot_publish:
                   requires:
                       - test_unit
@@ -157,13 +163,4 @@ workflows:
                       branches:
                           only:
                               - master
-            - build_dev_app_aot:
-                  requires:
-                      - test_unit
-                      - build_cdk
-                      - build_mosaic
-                      - build_mosaic-moment-adapter
-                  filters:
-                      branches:
-                          only:
-                              - master
+
