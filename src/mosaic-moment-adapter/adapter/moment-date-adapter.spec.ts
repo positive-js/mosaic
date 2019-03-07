@@ -497,7 +497,9 @@ describe('MomentDateAdapter formatter', () => {
                 });
 
                 it('yesterday, less than 24 hours ago', () => {
-                    const date = moment().subtract(23, 'hours');
+                    const date = moment().subtract(23, 'hours')
+                        .subtract(59, 'minutes')
+                        .subtract(59, 'seconds');
                     expect(adapter.relativeShortDate(date)).toBe(`Вчера, ${date.format(TIME)}`);
                 });
 
@@ -509,7 +511,9 @@ describe('MomentDateAdapter formatter', () => {
                 });
 
                 it('before yesterday, less than 48 hours ago', () => {
-                    const date = moment().subtract(47, 'hours');
+                    const date = moment().subtract(47, 'hours')
+                        .subtract(59, 'minutes')
+                        .subtract(59, 'seconds');
                     expect(adapter.relativeShortDate(date)).toBe(
                         date.format(`${DAY}${NBSP}${SHORT_MONTH}, ${TIME}`)
                     );
@@ -545,7 +549,9 @@ describe('MomentDateAdapter formatter', () => {
                 });
 
                 it('yesterday, less than 24 hours ago', () => {
-                    const date = moment().subtract(23, 'hours');
+                    const date = moment().subtract(23, 'hours')
+                        .subtract(59, 'minutes')
+                        .subtract(59, 'seconds');
                     expect(adapter.relativeLongDate(date)).toBe(`Вчера, ${date.format(TIME)}`);
                 });
 
@@ -555,7 +561,9 @@ describe('MomentDateAdapter formatter', () => {
                 });
 
                 it('before yesterday, less than 48 hours ago', () => {
-                    const date = moment().subtract(47, 'hours');
+                    const date = moment().subtract(47, 'hours')
+                        .subtract(59, 'minutes')
+                        .subtract(59, 'seconds');
                     expect(adapter.relativeLongDate(date)).toBe(date.format(`${DAY_MONTH}, ${TIME}`));
                 });
 
@@ -1016,7 +1024,9 @@ describe('MomentDateAdapter formatter', () => {
                 });
 
                 it('yesterday, less than 24 hours ago', () => {
-                    const date = moment().subtract(23, 'hours');
+                    const date = moment().subtract(23, 'hours')
+                        .subtract(59, 'minutes')
+                        .subtract(59, 'seconds');
                     expect(adapter.relativeShortDate(date)).toBe(`Yesterday, ${date.format(TIME)}`);
                 });
 
@@ -1028,7 +1038,9 @@ describe('MomentDateAdapter formatter', () => {
                 });
 
                 it('before yesterday, less than 48 hours ago', () => {
-                    const date = moment().subtract(47, 'hours');
+                    const date = moment().subtract(47, 'hours')
+                        .subtract(59, 'minutes')
+                        .subtract(59, 'seconds');
                     expect(adapter.relativeShortDate(date)).toBe(
                         date.format(`${SHORT_MONTH}${NBSP}${DAY}, ${TIME}`)
                     );
@@ -1064,22 +1076,31 @@ describe('MomentDateAdapter formatter', () => {
                 });
 
                 it('yesterday, less than 24 hours ago', () => {
-                    const date = moment().subtract(23, 'hours');
+                    const date = moment().subtract(23, 'hours')
+                        .subtract(59, 'minutes')
+                        .subtract(59, 'seconds');
+
                     expect(adapter.relativeLongDate(date)).toBe(`Yesterday, ${date.format(TIME)}`);
                 });
 
                 it('before yesterday, more than 48 hours ago', () => {
-                    const date = moment().subtract(49, 'hours');
+                    const date = moment().subtract(49, 'hours')
+                        .subtract(59, 'minutes')
+                        .subtract(59, 'seconds');
                     expect(adapter.relativeLongDate(date)).toBe(date.format(`${DAY_MONTH}, ${TIME}`));
                 });
 
                 it('before yesterday, less than 48 hours ago', () => {
-                    const date = moment().subtract(47, 'hours');
+                    const date = moment().subtract(47, 'hours')
+                        .subtract(59, 'minutes')
+                        .subtract(59, 'seconds');
                     expect(adapter.relativeLongDate(date)).toBe(date.format(`${DAY_MONTH}, ${TIME}`));
                 });
 
                 it('before yesterday (other year)', () => {
-                    const date = moment().year(2015).subtract(49, 'hours');
+                    const date = moment().year(2015).subtract(49, 'hours')
+                        .subtract(59, 'minutes')
+                        .subtract(59, 'seconds');
                     expect(adapter.relativeLongDate(date)).toBe(date.format(`${DAY_MONTH}, ${YEAR}`));
                 });
             });
