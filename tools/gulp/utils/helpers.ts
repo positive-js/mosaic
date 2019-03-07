@@ -123,7 +123,7 @@ export function serverTask(packagePath: string, rewrites?: {from: string; to: st
         { from: '^(.*)$', to: `/${relativePath}/$1` }
     ];
 
-    return () => {
+    return (done: () => void) => {
         if (activeBrowserSyncInstance) {
             throw new Error('Cannot setup BrowserSync because there is already an instance running.');
         }
@@ -142,6 +142,8 @@ export function serverTask(packagePath: string, rewrites?: {from: string; to: st
             ghostMode: process.argv.includes('--ghostMode'),
             open: process.argv.includes('--open')
         });
+
+        done();
     };
 }
 
@@ -152,4 +154,17 @@ export function getActiveBrowserSyncInstance(): BrowserSyncInstance {
     }
 
     return activeBrowserSyncInstance;
+}
+
+/** Gulp 4 watch function uses unix style paths even on windows and we should keep it unix styled */
+export function replaceSlashes(value: string | string[]): string | string[] {
+    if (typeof value !== 'string' && !Array.isArray(value)) {
+        return value;
+    }
+
+    if (Array.isArray(value)) {
+        return value.map((item) => replaceSlashes(item) as string);
+    }
+
+    return value.replace(/\\/g, '/');
 }

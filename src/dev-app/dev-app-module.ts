@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@ptsecurity/cdk/layout';
 
 import { ButtonDemo } from './button/button-demo';
-import { DevAppComponent } from './dev-app';
+import { DevAppComponent, DevAppHome, DevApp404 } from './dev-app';
 import { DevAppMosaicModule } from './mosaic-module';
 
 
@@ -25,6 +25,10 @@ import { DevAppMosaicModule } from './mosaic-module';
         // RouterModule.forRoot(DEV_APP_ROUTES)
     ],
     declarations: [
+        DevAppComponent,
+        DevAppHome,
+        DevApp404,
+
         ButtonDemo
     ],
     providers: [],

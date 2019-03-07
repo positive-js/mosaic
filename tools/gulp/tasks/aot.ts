@@ -15,7 +15,7 @@ const tsconfigFile = join(devAppSource, 'tsconfig-aot.json');
 
 
 /** Builds the dev-app assets and builds the required release packages. */
-task('build-aot:release-packages', parallel(
+task('build-aot:release-packages', series(
     'cdk:build-release',
     'mosaic-moment-adapter:build-release',
     'mosaic:build-release',
@@ -34,7 +34,7 @@ task('build-aot:compiler-cli', execNodeTask(
 ));
 
 /**
- * Build the dev-app wit the release output in order confirm that the library is
+ * Build the dev-app wit the releabuild-aot:release-packagesse output in order confirm that the library is
  * working with AOT compilation enabled.
  */
 task('build-aot', series(

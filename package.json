@@ -133,7 +133,9 @@
         "webpack-dev-server": "^3.1.9"
     },
     "scripts": {
-        "dev-app": "gulp serve:devapp",
+        "serve:dev-app": "gulp serve:devapp",
+        "ci:aot": "gulp ci:aot",
+        "build-dev-app:aot": "gulp build-aot",
         "test:unit": "gulp ci:test",
         "valid:lic": "gulp validate-licenses",
         "build:cdk": "gulp cdk:build-release",

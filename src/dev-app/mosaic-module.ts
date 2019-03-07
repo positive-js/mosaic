@@ -4,15 +4,17 @@
 import { NgModule } from '@angular/core';
 import { A11yModule } from '@ptsecurity/cdk/a11y';
 import { BidiModule } from '@ptsecurity/cdk/bidi';
-import { McButtonModule } from '@ptsecurity/mosaic';
+import { McButtonModule, McIconModule } from '@ptsecurity/mosaic';
 
 
 @NgModule({
-  exports: [
-    McButtonModule,
+    exports: [
+        McButtonModule,
+        McIconModule,
 
-    A11yModule,
-    BidiModule
-  ]
+        A11yModule,
+        BidiModule
+    ]
 })
-export class DevAppMosaicModule {}
+export class DevAppMosaicModule {
+}

@@ -2,7 +2,7 @@
 import { task, dest, series, parallel } from 'gulp';
 import { join } from 'path';
 
-import { buildConfig, buildScssPipeline, copyFiles } from '../../packages';
+import { buildConfig, buildScssPipeline } from '../../packages';
 import { inlineResourcesForDirectory } from '../../packages/inline-resources';
 import {
     cdkPackage,
@@ -19,20 +19,6 @@ const { outputDir, packagesDir } = buildConfig;
 const appDir = join(packagesDir, 'dev-app');
 const outDir = join(outputDir, 'packages', 'dev-app');
 
-
-/** Array of vendors that are required to serve the dev-app. */
-const appVendors = [
-    '@angular',
-    'systemjs',
-    'zone.js',
-    'rxjs',
-    'hammerjs',
-    'core-js',
-    'moment',
-    'tslib',
-    '@webcomponents'
-];
-
 /** Glob that matches all assets that need to be copied to the output. */
 const assetsGlob = join(appDir, `**/*.+(html|css|svg|ico)`);
 
@@ -42,7 +28,7 @@ const tsconfigPath = join(appDir, 'tsconfig-build.json');
 task(':build:devapp:ts', tsBuildTask(tsconfigPath));
 task(':build:devapp:assets', copyTask(assetsGlob, outDir));
 task(':build:devapp:scss', () => buildScssPipeline(appDir).pipe(dest(outDir)));
-task(':build:devapp:inline-resources', () => inlineResourcesForDirectory(outDir));
+task(':build:devapp:inline-resources', (done) => { inlineResourcesForDirectory(outDir); done(); });
 
 task(':serve:devapp', serverTask(outDir));
 
@@ -67,7 +53,7 @@ task('build:devapp', series(
  * easier.
  */
 task(':watch:devapp', () => {
-    watchFilesAndReload(join(appDir, '**/*.ts'), [':build:devapp:ts']);
+    watchFilesAndReload(join(appDir, '**/*.ts'), [':build:devapp:ts', ':build:devapp:inline-resources']);
     watchFilesAndReload(join(appDir, '**/*.scss'), [':watch:devapp:rebuild-scss']);
     watchFilesAndReload(join(appDir, '**/*.html'), [':watch:devapp:rebuild-html']);
 
@@ -84,7 +70,7 @@ task(':watch:devapp', () => {
 
     // Mosaic package watchers.
     watchFilesAndReload([
-        join(mosaicPackage.sourceDir, '**/!(*-theme.scss)'), `!${mosaicCoreThemingGlob}`
+        join(mosaicPackage.sourceDir, '**/(*-theme.scss)'), `${mosaicCoreThemingGlob}`
     ], ['mosaic:build-no-bundles']);
     watchFilesAndReload([
         join(mosaicPackage.sourceDir, '**/*-theme.scss'), mosaicCoreThemingGlob
@@ -99,7 +85,6 @@ task(':watch:devapp', () => {
         ['mosaic-examples:build-no-bundles']);
 });
 
-// task('serve:devapp', ['build:devapp'], sequenceTask([':serve:devapp', ':watch:devapp']));
 task('serve:devapp', series('build:devapp', parallel(':serve:devapp', ':watch:devapp')));
 
 // Note that we need to rebuild the TS here, because the resource inlining

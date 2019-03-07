@@ -75,7 +75,7 @@ System.config({
         '@ptsecurity/mosaic/sidepanel': 'dist/packages/mosaic/sidepanel/index.js',
         '@ptsecurity/mosaic/textarea': 'dist/packages/mosaic/textarea/index.js',
         '@ptsecurity/mosaic/tooltip': 'dist/packages/mosaic/tooltip/index.js',
-        '@ptsucurity/mosaic/timepicker': 'dist/packages/mosaic/timepicker/index.js',
+        '@ptsecurity/mosaic/timepicker': 'dist/packages/mosaic/timepicker/index.js',
         '@ptsecurity/mosaic/splitter': 'dist/packages/mosaic/splitter/index.js'
     },
     packages: {

@@ -72,6 +72,12 @@ jobs:
             - attach_workspace: *attach_options
             - run: yarn run build:mosaic-moment-adapter
 
+    build-dev-app-aot:
+        <<: *job_defaults
+        steps:
+            - attach_workspace: *attach_options
+            - run: yarn run ci:aot
+
     test_unit:
         <<: *job_defaults
         steps:
@@ -151,3 +157,13 @@ workflows:
                       branches:
                           only:
                               - master
+            - build-dev-app-aot:
+                  requires:
+                      - test_unit
+                      - build_cdk
+                      - build_mosaic
+                      - build_mosaic-moment-adapter
+                      filters:
+                          branches:
+                              only:
+                                  - master

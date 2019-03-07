@@ -15,12 +15,11 @@ export class DevAppComponent {
     ];
 }
 
-
 /** Home component which includes a welcome message for the dev-app. */
 @Component({
     selector: 'home',
     template: `
-        <p>Welcome to the development demos for Angular Material!</p>
+        <p>Welcome to the development demos for Angular Mosaic!</p>
         <p>Open the sidenav to select a demo.</p>
     `
 })
