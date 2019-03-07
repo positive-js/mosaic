@@ -38,6 +38,7 @@ module.exports = {
                 'toggle',
                 'tooltip',
                 'tree',
+                'tree-select',
                 'typography',
                 'visual'
             ]
