@@ -163,7 +163,7 @@ workflows:
                       - build_cdk
                       - build_mosaic
                       - build_mosaic-moment-adapter
-                      filters:
-                          branches:
-                              only:
-                                  - master
+                  filters:
+                      branches:
+                          only:
+                              - master
