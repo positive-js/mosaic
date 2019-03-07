@@ -95,6 +95,7 @@ jobs:
             - *restore_cache
             - *yarn_install
             - *attach_release_output
+            - attach_workspace: *attach_options
             - run: yarn run ci:aot
 
     test_unit:
