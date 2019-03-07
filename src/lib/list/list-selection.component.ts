@@ -59,6 +59,7 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class McListOption implements AfterContentInit, OnDestroy, OnInit, IFocusableOption {
+    listSelection: McListSelection;
     _hasFocus: boolean = false;
 
     @ContentChildren(McLine) _lines: QueryList<McLine>;
@@ -107,8 +108,10 @@ export class McListOption implements AfterContentInit, OnDestroy, OnInit, IFocus
         private _element: ElementRef,
         private _changeDetector: ChangeDetectorRef,
         @Inject(forwardRef(() => McListSelection))
-        public listSelection: McListSelection
-    ) {}
+        listSelection: any
+    ) {
+        this.listSelection = listSelection;
+    }
 
     ngOnInit() {
         if (this._selected) {

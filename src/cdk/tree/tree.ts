@@ -305,6 +305,7 @@ export class CdkTreeNode<T> implements IFocusableOption, OnDestroy {
     @Input() role: 'treeitem' | 'group' = 'treeitem';
 
     protected destroyed = new Subject<void>();
+    protected tree: CdkTree<T>;
 
     get data(): T {
         return this._data;
@@ -328,8 +329,9 @@ export class CdkTreeNode<T> implements IFocusableOption, OnDestroy {
 
     constructor(
         protected elementRef: ElementRef,
-        @Inject(forwardRef(() => CdkTree)) protected tree: CdkTree<T>
+        @Inject(forwardRef(() => CdkTree)) tree: any
     ) {
+        this.tree = tree;
         CdkTreeNode.mostRecentTreeNode = this as CdkTreeNode<T>;
     }
 

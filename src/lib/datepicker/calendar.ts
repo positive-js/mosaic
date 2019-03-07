@@ -43,11 +43,14 @@ export type McCalendarView = 'month' | 'year' | 'multi-year';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class McCalendarHeader<D> {
+    calendar: McCalendar<D>;
+
     constructor(private intl: McDatepickerIntl,
-                @Inject(forwardRef(() => McCalendar)) public calendar: McCalendar<D>,
+                @Inject(forwardRef(() => McCalendar)) calendar: any,
                 @Optional() private dateAdapter: DateAdapter<D>,
                 @Optional() @Inject(MC_DATE_FORMATS) private dateFormats: McDateFormats,
                 changeDetectorRef: ChangeDetectorRef) {
+        this.calendar = calendar;
 
         this.calendar.stateChanges.subscribe(() => changeDetectorRef.markForCheck());
     }
