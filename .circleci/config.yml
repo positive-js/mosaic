@@ -31,6 +31,10 @@ var_6: &save_cache
 var_7: &yarn_install
     run: yarn install --frozen-lockfile --non-interactive
 
+var_8: &attach_release_output
+    attach_workspace:
+        at: dist/
+
 attach_options: &attach_options
     at: .
 
@@ -75,7 +79,10 @@ jobs:
     build_dev_app_aot:
         <<: *job_defaults
         steps:
-            - attach_workspace: *attach_options
+            - *checkout_code
+            - *restore_cache
+            - *yarn_install
+            - *attach_release_output
             - run: yarn run ci:aot
 
     test_unit:
