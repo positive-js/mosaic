@@ -62,7 +62,7 @@ jobs:
             - save_cache:
                 key: "mosaic_release"
                 paths:
-                    - "dist/releases/mosaic/**/*"
+                    - "./dist/releases/mosaic/**/*"
     build_cdk:
         <<: *job_defaults
         steps:
@@ -71,7 +71,7 @@ jobs:
             - save_cache:
                 key: "cdk_release"
                 paths:
-                    - "dist/releases/cdk/**/*"
+                    - "./dist/releases/cdk/**/*"
 
     build_mosaic-moment-adapter:
         <<: *job_defaults
@@ -81,7 +81,7 @@ jobs:
             - save_cache:
                 key: "mosaic-moment-adapter_release"
                 paths:
-                    - "dist/releases/mosaic-moment-adapter/**/*"
+                    - "./dist/releases/mosaic-moment-adapter/**/*"
 
     build_dev-app_aot:
         <<: *job_defaults
