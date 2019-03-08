@@ -35,6 +35,8 @@ var_8: &attach_release_output
     attach_workspace:
         at: dist/
 
+var_9: &release_path "releases/**/*"
+
 attach_options: &attach_options
     at: .
 
@@ -64,9 +66,9 @@ jobs:
             - attach_workspace: *attach_options
             - run: yarn run build:lib
             - persist_to_workspace:
-                root: dist
-                paths:
-                    - "releases/**/*"
+                  root: dist
+                  paths:
+                      - *release_path
 
     build_cdk:
         <<: *job_defaults
@@ -74,9 +76,9 @@ jobs:
             - attach_workspace: *attach_options
             - run: yarn run build:cdk
             - persist_to_workspace:
-                root: dist
-                paths:
-                    - "releases/**/*"
+                  root: dist
+                  paths:
+                      - *release_path
 
     build_mosaic-moment-adapter:
         <<: *job_defaults
@@ -84,9 +86,9 @@ jobs:
             - attach_workspace: *attach_options
             - run: yarn run build:mosaic-moment-adapter
             - persist_to_workspace:
-                root: dist
-                paths:
-                    - "releases/**/*"
+                  root: dist
+                  paths:
+                      - *release_path
 
     build_dev_app_aot:
         <<: *job_defaults
