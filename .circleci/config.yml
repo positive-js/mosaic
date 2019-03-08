@@ -59,7 +59,7 @@ jobs:
         steps:
             - attach_workspace: *attach_options
             - run: yarn run build:lib
-            save_cache:
+            - save_cache:
                 key: "mosaic_release"
                 paths:
                     - "dist/releases/mosaic/**/*"
@@ -68,7 +68,7 @@ jobs:
         steps:
             - attach_workspace: *attach_options
             - run: yarn run build:cdk
-            save_cache:
+            - save_cache:
                 key: "cdk_release"
                 paths:
                     - "dist/releases/cdk/**/*"
@@ -78,7 +78,7 @@ jobs:
         steps:
             - attach_workspace: *attach_options
             - run: yarn run build:mosaic-moment-adapter
-            save_cache:
+            - save_cache:
                 key: "mosaic-moment-adapter_release"
                 paths:
                     - "dist/releases/mosaic-moment-adapter/**/*"
