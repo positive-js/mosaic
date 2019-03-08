@@ -31,11 +31,11 @@ var_6: &save_cache
 var_7: &yarn_install
     run: yarn install --frozen-lockfile --non-interactive
 
-var_8: &cdk_release_cache cdk-cache-{{ .Branch }}-{{ epoch }}
+var_8: &cdk_release_cache cdk-cache-{{ .Branch }}-{{ .Revision }}
 
-var_9: &mosaic_release_cache mosaic-cache-{{ .Branch }}-{{ epoch }}
+var_9: &mosaic_release_cache mosaic-cache-{{ .Branch }}-{{ .Revision }}
 
-var_10: &mosaic-date-adapter_release_cache mosaic-date-adapter-cache-{{ .Branch }}-{{ epoch }}
+var_10: &mosaic-date-adapter_release_cache mosaic-date-adapter-cache-{{ .Branch }}-{{ .Revision }}
 
 attach_options: &attach_options
     at: .
