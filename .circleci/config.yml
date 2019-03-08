@@ -91,9 +91,6 @@ jobs:
     build_dev_app_aot:
         <<: *job_defaults
         steps:
-            - *checkout_code
-            - *restore_cache
-            - *yarn_install
             - *attach_release_output
             - attach_workspace: *attach_options
             - run: yarn run ci:aot
