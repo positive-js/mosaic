@@ -12,9 +12,8 @@ System.config({
         'moment': 'node:moment/min/moment-with-locales.min.js',
         'messageformat': 'node:messageformat/messageformat.min.js',
 
-        'rxjs': 'node:rxjs',
-        // 'rxjs': 'node_modules/rxjs/bundles/rxjs.umd.min.js',
-        // 'rxjs/operators': 'system-rxjs-operators.js',
+        'rxjs': 'node_modules/rxjs/bundles/rxjs.umd.min.js',
+        'rxjs/operators': 'system-rxjs-operators.js',
 
         // Angular specific mappings.
         '@angular/core': 'node:@angular/core/bundles/core.umd.js',
@@ -92,9 +91,6 @@ System.config({
         '@ptsecurity/mosaic/splitter': 'dist/packages/mosaic/splitter/index.js'
     },
     packages: {
-        // Thirdparty barrels.
-        'rxjs': {main: 'index'},
-        'rxjs/operators': {main: 'index'},
         // Set the default extension for the root package, because otherwise the dev-app can't
         // be built within the production mode. Due to missing file extensions.
         '.': {
