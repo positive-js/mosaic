@@ -9,3 +9,4 @@ task('ci:test', series('test:single-run', (done) => {
     process.exit(0);
 }));
 
+task('ci:aot', series('build-aot:no-release-build'));

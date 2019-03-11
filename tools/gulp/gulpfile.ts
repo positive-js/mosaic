@@ -13,6 +13,8 @@ createPackageBuildTasks(momentAdapterPackage);
 createPackageBuildTasks(mosaicPackage);
 createPackageBuildTasks(examplesPackage, ['build-examples-module']);
 
+import './tasks/development';
+import './tasks/aot';
 import './tasks/lint';
 import './tasks/unit';
 import './tasks/ci';

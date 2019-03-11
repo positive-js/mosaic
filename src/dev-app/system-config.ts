@@ -1,14 +1,19 @@
+/** Type declaration for ambient System. */
+declare const System: any;
+
 // Configure the base path and map the different node packages.
 System.config({
-    baseURL: '/base',
     paths: {
         'node:*': 'node_modules/*'
     },
     map: {
-        'rxjs': 'node:rxjs',
+        'main': 'main.js',
         'tslib': 'node:tslib/tslib.js',
         'moment': 'node:moment/min/moment-with-locales.min.js',
         'messageformat': 'node:messageformat/messageformat.min.js',
+
+        'rxjs': 'node_modules/rxjs/bundles/rxjs.umd.min.js',
+        'rxjs/operators': 'system-rxjs-operators.js',
 
         // Angular specific mappings.
         '@angular/core': 'node:@angular/core/bundles/core.umd.js',
@@ -23,6 +28,7 @@ System.config({
         '@angular/forms/testing': 'node:@angular/forms/bundles/forms-testing.umd.js',
         '@angular/animations': 'node:@angular/animations/bundles/animations.umd.js',
         '@angular/animations/browser': 'node:@angular/animations/bundles/animations-browser.umd.js',
+        '@angular/router': 'node:@angular/router/bundles/router.umd.js',
         '@angular/platform-browser/animations':
             'node:@angular/platform-browser/bundles/platform-browser-animations.umd',
         '@angular/platform-browser':
@@ -34,12 +40,8 @@ System.config({
         '@angular/platform-browser-dynamic/testing':
             'node:@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
 
-        // Path for local packages. Can be imported inside of tests.
-        '@ptsecurity/mosaic': 'dist/packages/mosaic/index.js',
-
         '@ptsecurity/cdk': 'dist/packages/cdk/index.js',
         '@ptsecurity/cdk/a11y': 'dist/packages/cdk/a11y/index.js',
-        '@ptsecurity/cdk/accordion': 'dist/packages/cdk/accordion/index.js',
         '@ptsecurity/cdk/bidi': 'dist/packages/cdk/bidi/index.js',
         '@ptsecurity/cdk/datetime': 'dist/packages/cdk/datetime/index.js',
         '@ptsecurity/cdk/coercion': 'dist/packages/cdk/coercion/index.js',
@@ -56,14 +58,21 @@ System.config({
         '@ptsecurity/mosaic-moment-adapter': 'dist/packages/mosaic-moment-adapter/index.js',
         '@ptsecurity/mosaic-moment-adapter/adapter': 'dist/packages/mosaic-moment-adapter/adapter/index.js',
 
+        '@ptsecurity/mosaic': 'dist/packages/mosaic/index.js',
+
         '@ptsecurity/mosaic/button': 'dist/packages/mosaic/button/index.js',
         '@ptsecurity/mosaic/core': 'dist/packages/mosaic/core/index.js',
+        '@ptsecurity/mosaic/card': 'dist/packages/mosaic/card/index.js',
+        '@ptsecurity/mosaic/datepicker': 'dist/packages/mosaic/datepicker/index.js',
         '@ptsecurity/mosaic/divider': 'dist/packages/mosaic/divider/index.js',
         '@ptsecurity/mosaic/dropdown': 'dist/packages/mosaic/dropdown/index.js',
         '@ptsecurity/mosaic/list': 'dist/packages/mosaic/list/index.js',
+        '@ptsecurity/mosaic/navbar': 'dist/packages/mosaic/navbar/index.js',
         '@ptsecurity/mosaic/progress-bar': 'dist/packages/mosaic/progress-bar/index.js',
         '@ptsecurity/mosaic/progress-spinner': 'dist/packages/mosaic/progress-spinner/index.js',
         '@ptsecurity/mosaic/icon': 'dist/packages/mosaic/icon/index.js',
+        '@ptsecurity/mosaic/layout': 'dist/packages/mosaic/layout/index.js',
+        '@ptsecurity/mosaic/link': 'dist/packages/mosaic/link/index.js',
         '@ptsecurity/mosaic/radio': 'dist/packages/mosaic/radio/index.js',
         '@ptsecurity/mosaic/checkbox': 'dist/packages/mosaic/checkbox/index.js',
         '@ptsecurity/mosaic/input': 'dist/packages/mosaic/input/index.js',
@@ -75,16 +84,14 @@ System.config({
         '@ptsecurity/mosaic/select': 'dist/packages/mosaic/select/index.js',
         '@ptsecurity/mosaic/sidepanel': 'dist/packages/mosaic/sidepanel/index.js',
         '@ptsecurity/mosaic/textarea': 'dist/packages/mosaic/textarea/index.js',
+        '@ptsecurity/mosaic/toggle': 'dist/packages/mosaic/toggle/index.js',
         '@ptsecurity/mosaic/tooltip': 'dist/packages/mosaic/tooltip/index.js',
         '@ptsecurity/mosaic/timepicker': 'dist/packages/mosaic/timepicker/index.js',
+        '@ptsecurity/mosaic/tree-select': 'dist/packages/mosaic/tree-select/index.js',
         '@ptsecurity/mosaic/splitter': 'dist/packages/mosaic/splitter/index.js'
     },
     packages: {
-        // Thirdparty barrels.
-        'rxjs': {main: 'index'},
-        'rxjs/operators': {main: 'index'},
-
-        // Set the default extension for the root package, because otherwise the demo-app can't
+        // Set the default extension for the root package, because otherwise the dev-app can't
         // be built within the production mode. Due to missing file extensions.
         '.': {
             defaultExtension: 'js'
