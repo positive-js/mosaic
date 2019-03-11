@@ -33,6 +33,9 @@
             "@ptsecurity/cdk": [
                 "../../dist/releases/cdk"
             ],
+            "@ptsecurity/mosaic-moment-adapter/*": [
+                "../../dist/releases/mosaic-moment-adapter/*"
+            ],
             "@ptsecurity/mosaic-moment-adapter": [
                 "../../dist/releases/mosaic-moment-adapter"
             ],

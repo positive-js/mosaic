@@ -4,7 +4,15 @@
 import { NgModule } from '@angular/core';
 import { A11yModule } from '@ptsecurity/cdk/a11y';
 import { BidiModule } from '@ptsecurity/cdk/bidi';
-import { McButtonModule, McIconModule, McNavbarModule, McInputModule, McFormFieldModule } from '@ptsecurity/mosaic';
+import {
+    McButtonModule,
+    McIconModule,
+    McNavbarModule,
+    McInputModule,
+    McFormFieldModule,
+    McDatepickerModule
+} from '@ptsecurity/mosaic';
+import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter';
 
 
 @NgModule({
@@ -13,6 +21,8 @@ import { McButtonModule, McIconModule, McNavbarModule, McInputModule, McFormFiel
         McButtonModule,
         McInputModule,
         McNavbarModule,
+        McMomentDateModule,
+        McDatepickerModule,
 
         McFormFieldModule,
 

@@ -41,9 +41,6 @@ System.config({
         '@angular/platform-browser-dynamic/testing':
             'node:@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
 
-        // Path for local packages. Can be imported inside of tests.
-        '@ptsecurity/mosaic': 'dist/packages/mosaic/index.js',
-
         '@ptsecurity/cdk': 'dist/packages/cdk/index.js',
         '@ptsecurity/cdk/a11y': 'dist/packages/cdk/a11y/index.js',
         '@ptsecurity/cdk/bidi': 'dist/packages/cdk/bidi/index.js',
@@ -61,6 +58,8 @@ System.config({
 
         '@ptsecurity/mosaic-moment-adapter': 'dist/packages/mosaic-moment-adapter/index.js',
         '@ptsecurity/mosaic-moment-adapter/adapter': 'dist/packages/mosaic-moment-adapter/adapter/index.js',
+
+        '@ptsecurity/mosaic': 'dist/packages/mosaic/index.js',
 
         '@ptsecurity/mosaic/button': 'dist/packages/mosaic/button/index.js',
         '@ptsecurity/mosaic/core': 'dist/packages/mosaic/core/index.js',

@@ -19,6 +19,9 @@
             "@ptsecurity/mosaic-moment-adapter": [
                 "../mosaic-moment-adapter/public-api.ts"
             ],
+            "@ptsecurity/mosaic-moment-adapter/*": [
+                "../mosaic-moment-adapter/*"
+            ],
             "@ptsecurity/mosaic-examples": [
                 "../../dist/packages/mosaic-examples"
             ]

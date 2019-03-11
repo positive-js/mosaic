@@ -15,7 +15,8 @@ export class DevAppComponent {
             text: 'Form controls',
             children: [
                 { text: 'Button', route: '/button' },
-                { text: 'Input', route: '/input' }
+                { text: 'Input', route: '/input' },
+                { text: 'Datepicker', route: '/datepicker' }
             ]
         }
     ];

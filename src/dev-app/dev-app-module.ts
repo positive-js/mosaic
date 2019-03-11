@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { LayoutModule } from '@ptsecurity/cdk/layout';
 
 import { ButtonDemo } from './button/button-demo';
+import { DatepickerDemo } from './datepicker/datepicker-demo';
 import { DevAppComponent, DevAppHome, DevApp404 } from './dev-app';
 import { InputDemo } from './input/input-demo';
 import { DevAppMosaicModule } from './mosaic-module';
@@ -33,7 +34,8 @@ import { DEV_APP_ROUTES } from './routes';
         DevApp404,
 
         ButtonDemo,
-        InputDemo
+        InputDemo,
+        DatepickerDemo
     ],
     providers: [],
     entryComponents: [],
