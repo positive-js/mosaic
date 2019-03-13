@@ -75,9 +75,7 @@ class StageReleaseTask extends BaseReleaseTask {
             process.exit(1);
         }
 
-        this.githubApi = new OctokitApi();
-
-        this.githubApi.authenticate({
+        this.githubApi = new OctokitApi({
             type: 'token',
             token: CONFIG.github.token
         });

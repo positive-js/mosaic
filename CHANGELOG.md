@@ -1,3 +1,21 @@
+# 1.0.0-beta.4 "Plaited Nome" (2019-03-13)
+
+
+### Bug Fixes
+
+* **moment-date-adapter:** relative date tests fixes ([#98](https://github.com/positive-js/mosaic/issues/98)) ([a16deb2](https://github.com/positive-js/mosaic/commit/a16deb2))
+* **tree-select:** fixed error for test unit ([#96](https://github.com/positive-js/mosaic/issues/96)) ([e7af9ca](https://github.com/positive-js/mosaic/commit/e7af9ca))
+* compilation es2015 ([6965069](https://github.com/positive-js/mosaic/commit/6965069))
+
+
+### Features
+
+* **build:** added AoT dev example application ([#99](https://github.com/positive-js/mosaic/issues/99)) ([d81764c](https://github.com/positive-js/mosaic/commit/d81764c))
+* **cdk:** accordion item ([5167225](https://github.com/positive-js/mosaic/commit/5167225))
+* **tree-select:** component tree-select ([#92](https://github.com/positive-js/mosaic/issues/92)) ([dc52656](https://github.com/positive-js/mosaic/commit/dc52656))
+
+
+
 # 1.0.0-beta.3 "Monoxide Core" (2019-02-25)
 
 
