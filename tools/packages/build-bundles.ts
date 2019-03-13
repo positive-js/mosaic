@@ -25,7 +25,12 @@ const bundlesDir = join(buildConfig.outputDir, 'bundles');
  * Utility for creating bundles from raw ngc output.
  */
 export class PackageBundler {
-    constructor(private buildPackage: BuildPackage) {}
+
+    private readonly primaryAmdModuleName: string;
+
+    constructor(private buildPackage: BuildPackage) {
+        this.primaryAmdModuleName = this.getAmdModuleName(buildPackage.name);
+    }
 
     async createBundles() {
         for (const entryPoint of this.buildPackage.secondaryEntryPoints) {
@@ -44,8 +49,8 @@ export class PackageBundler {
         return this.bundleEntryPoint({
             entryFile: this.buildPackage.entryFilePath,
             esm5EntryFile: join(this.buildPackage.esm5OutputDir, 'index.js'),
-            importName: `@ptsecurity/${this.buildPackage.name}`,
-            moduleName: `ng.${this.buildPackage.name}`,
+            importName: `@ptsecurity/${packageName}`,
+            moduleName: this.primaryAmdModuleName,
             esm2015Dest: join(bundlesDir, `${packageName}.js`),
             esm5Dest: join(bundlesDir, `${packageName}.es5.js`),
             umdDest: join(bundlesDir, `${packageName}.umd.js`),
@@ -56,21 +61,20 @@ export class PackageBundler {
     /**
      * Bundles a single secondary entry-point w/ given entry file
      */
-    private async bundleSecondaryEntryPoint(entryPoint: string) {
+    private async bundleSecondaryEntryPoint(entryPointName: string) {
         const packageName = this.buildPackage.name;
-        const entryFile = join(this.buildPackage.outputDir, entryPoint, 'index.js');
-        const esm5EntryFile = join(this.buildPackage.esm5OutputDir, entryPoint, 'index.js');
-        const dashedEntryName = dashCaseToCamelCase(entryPoint);
+        const entryFile = join(this.buildPackage.outputDir, entryPointName, 'index.js');
+        const esm5EntryFile = join(this.buildPackage.esm5OutputDir, entryPointName, 'index.js');
 
         return this.bundleEntryPoint({
             entryFile,
             esm5EntryFile,
-            importName: `@ptsecurity/${this.buildPackage.name}/${dashedEntryName}`,
-            moduleName: `ng.${packageName}.${dashedEntryName}`,
-            esm2015Dest: join(bundlesDir, `${packageName}`, `${entryPoint}.js`),
-            esm5Dest: join(bundlesDir, `${packageName}`, `${entryPoint}.es5.js`),
-            umdDest: join(bundlesDir, `${packageName}-${entryPoint}.umd.js`),
-            umdMinDest: join(bundlesDir, `${packageName}-${entryPoint}.umd.min.js`)
+            importName: `@ptsecurity/${packageName}/${entryPointName}`,
+            moduleName: this.getAmdModuleName(packageName, entryPointName),
+            esm2015Dest: join(bundlesDir, `${packageName}`, `${entryPointName}.js`),
+            esm5Dest: join(bundlesDir, `${packageName}`, `${entryPointName}.es5.js`),
+            umdDest: join(bundlesDir, `${packageName}-${entryPointName}.umd.js`),
+            umdMinDest: join(bundlesDir, `${packageName}-${entryPointName}.umd.min.js`)
         });
     }
 
@@ -191,6 +195,25 @@ export class PackageBundler {
             return map;
             // tslint:disable-next-line
         }, {} as {[key: string]: string});
+    }
+
+    /**
+     * Gets the AMD module name for a package and an optional entry point. This is consistent
+     * to the module name format being used in "angular/angular".
+     */
+    private getAmdModuleName(packageName: string, entryPointName?: string) {
+        // For example, the AMD module name for the "@angular/material-examples" package should be
+        // "ng.materialExamples". We camel-case the package name in case it contains dashes.
+        let amdModuleName = `ng.${dashCaseToCamelCase(packageName)}`;
+
+        if (entryPointName) {
+            // For example, the "@ptsecurity/mosaic/button" entry-point should be converted into
+            // the following AMD module name: "ng.mosaic.button". Similar to the package name,
+            // the entry-point name needs to be camel-cased in case it contains dashes.
+            amdModuleName += `.${dashCaseToCamelCase(entryPointName)}`;
+        }
+
+        return amdModuleName;
     }
 }
 

@@ -53,11 +53,6 @@ export class BuildPackage {
     readonly entryFilePath: string;
 
     /**
-     * Path to the tsconfig file, which will be used to build the package.
-     */
-    private readonly tsconfigBuild: string;
-
-    /**
      * Package bundler instance.
      */
     private bundler = new PackageBundler(this);
@@ -86,9 +81,6 @@ export class BuildPackage {
         this.sourceDir = join(packagesDir, name);
         this.outputDir = join(outputDir, 'packages', name);
         this.esm5OutputDir = join(outputDir, 'packages', name, 'esm5');
-
-        this.tsconfigBuild = join(this.sourceDir, buildTsConfigName);
-
         this.entryFilePath = join(this.outputDir, 'index.js');
     }
 

@@ -4,6 +4,7 @@
         "public-api.ts"
     ],
     "angularCompilerOptions": {
+        "annotateForClosureCompiler": true,
         "strictMetadataEmit": true,
         "flatModuleOutFile": "index.js",
         "flatModuleId": "@ptsecurity/mosaic/dropdown",

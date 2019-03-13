@@ -1,27 +1,13 @@
 {
+    "extends": "../tsconfig-build.json",
     "compilerOptions": {
-        "declaration": true,
-        "stripInternal": false,
-        "experimentalDecorators": true,
-        "noUnusedParameters": true,
-        "strictNullChecks": true,
-        "importHelpers": true,
-        "newLine": "lf",
-        "module": "es2015",
-        "moduleResolution": "node",
         "outDir": "../../dist/packages/mosaic",
         "rootDir": ".",
+        "baseUrl": ".",
         "rootDirs": [
             ".",
             "../../dist/packages/mosaic"
         ],
-        "sourceMap": true,
-        "inlineSources": true,
-        "target": "es2015",
-        "lib": ["es2015", "dom"],
-        "skipLibCheck": true,
-        "types": [],
-        "baseUrl": ".",
         "paths": {
             "@ptsecurity/cdk/*": ["../../dist/packages/cdk/*"],
             "@ptsecurity/mosaic-moment-adapter/*": ["../../dist/packages/mosaic-moment-adapter/*"],
@@ -32,6 +18,7 @@
         "public-api.ts"
     ],
     "angularCompilerOptions": {
+        "annotateForClosureCompiler": true,
         "strictMetadataEmit": true,
         "flatModuleOutFile": "index.js",
         "flatModuleId": "@ptsecurity/mosaic",
