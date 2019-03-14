@@ -1,25 +1,5 @@
 /* tslint:disable:no-empty */
 
-import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
-import { Directionality } from '@ptsecurity/cdk/bidi';
-import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
-import { SelectionModel } from '@ptsecurity/cdk/collections';
-import {
-    DOWN_ARROW,
-    END,
-    ENTER,
-    HOME,
-    LEFT_ARROW,
-    RIGHT_ARROW,
-    SPACE,
-    UP_ARROW,
-    A
-} from '@ptsecurity/cdk/keycodes';
-import {
-    CdkConnectedOverlay,
-    ViewportRuler
-} from '@ptsecurity/cdk/overlay';
-
 import {
     AfterContentInit, AfterViewInit,
     Attribute,
@@ -48,6 +28,25 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
+import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
+import { Directionality } from '@ptsecurity/cdk/bidi';
+import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
+import { SelectionModel } from '@ptsecurity/cdk/collections';
+import {
+    DOWN_ARROW,
+    END,
+    ENTER,
+    HOME,
+    LEFT_ARROW,
+    RIGHT_ARROW,
+    SPACE,
+    UP_ARROW,
+    A
+} from '@ptsecurity/cdk/keycodes';
+import {
+    CdkConnectedOverlay,
+    ViewportRuler
+} from '@ptsecurity/cdk/overlay';
 import {
     countGroupLabelsBeforeOption,
     getOptionScrollPosition,
@@ -77,11 +76,8 @@ import {
     getMcSelectNonArrayValueError,
     MC_SELECT_SCROLL_STRATEGY
 } from '@ptsecurity/mosaic/core';
-
 import { McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { McTag } from '@ptsecurity/mosaic/tag';
-
-
 import { defer, merge, Observable, Subject } from 'rxjs';
 import {
     filter,
@@ -254,7 +250,7 @@ export class McSelect extends McSelectMixinBase implements
         return this._ngZone.onStable
             .asObservable()
             .pipe(take(1), switchMap(() => this.optionSelectionChanges));
-    });
+    }) as Observable<McOptionSelectionChange>;
 
     /** Event emitted when the select panel has been toggled. */
     @Output() readonly openedChange: EventEmitter<boolean> = new EventEmitter<boolean>();

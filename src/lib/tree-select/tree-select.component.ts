@@ -264,7 +264,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         return this.ngZone.onStable
             .asObservable()
             .pipe(take(1), switchMap(() => this.optionSelectionChanges));
-    });
+    }) as Observable<McTreeSelectChange>;
 
     options: QueryList<McTreeOption>;
 
