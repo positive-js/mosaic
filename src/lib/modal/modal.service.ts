@@ -17,36 +17,35 @@ import { ConfirmType, IModalOptions, IModalOptionsForService } from './modal.typ
 export class ModalBuilderForService {
 
     // Modal ComponentRef, "null" means it has been destroyed
-    private modalRef: ComponentRef<McModalComponent>;
+    private modalRef: ComponentRef<McModalComponent> | null;
     private overlayRef: OverlayRef;
 
     constructor(private overlay: Overlay, options: IModalOptionsForService = {}) {
         this.createModal();
 
         if (!('mcGetContainer' in options)) {
-            options.mcGetContainer = null;
+            options.mcGetContainer = undefined;
         }
 
         this.changeProps(options);
-        this.modalRef.instance.open();
-        this.modalRef.instance.mcAfterClose.subscribe(() => this.destroyModal());
+        this.modalRef!.instance.open();
+        this.modalRef!.instance.mcAfterClose.subscribe(() => this.destroyModal());
 
         this.overlayRef.keydownEvents()
             // @ts-ignore
             .pipe(filter((event: KeyboardEvent) => {
                 return event.keyCode === ESCAPE && options.mcCloseByESC;
             }))
-            .subscribe(() => this.modalRef.instance.close());
+            .subscribe(() => this.modalRef!.instance.close());
     }
 
-    getInstance(): McModalComponent {
+    getInstance(): McModalComponent | null {
         return this.modalRef && this.modalRef.instance;
     }
 
     destroyModal(): void {
         if (this.modalRef) {
             this.overlayRef.dispose();
-            // @ts-ignore
             this.modalRef = null;
         }
     }
@@ -104,7 +103,7 @@ export class McModalService {
             options.mcWidth = 480;
         }
 
-        return new ModalBuilderForService(this.overlay, options).getInstance();
+        return new ModalBuilderForService(this.overlay, options).getInstance()!;
     }
 
     confirm<T>(options: IModalOptionsForService<T> = {}, confirmType: ConfirmType = 'confirm'): McModalRef<T> {

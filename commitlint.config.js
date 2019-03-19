@@ -23,6 +23,7 @@ module.exports = {
                 'input',
                 'link',
                 'list',
+                'modal',
                 'navbar',
                 'panel',
                 'popover',

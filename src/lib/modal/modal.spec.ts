@@ -1,11 +1,8 @@
-import { Component, DebugElement, ElementRef, EventEmitter, Input, NgModule } from '@angular/core';
+import { Component, EventEmitter, NgModule } from '@angular/core';
 import { async, ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-
 import { OverlayContainer } from '@ptsecurity/cdk/overlay';
 import { McMeasureScrollbarService } from '@ptsecurity/mosaic/core';
 
-import { CssUnitPipe } from './css-unit.pipe';
 import { McModalControlService } from './modal-control.service';
 import { McModalRef } from './modal-ref.class';
 import { McModalModule } from './modal.module';

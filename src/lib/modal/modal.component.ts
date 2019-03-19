@@ -55,13 +55,14 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     // If not specified, will use <ng-content>
     @Input() mcContent: string | TemplateRef<{}> | Type<T>;
     // available when mcContent is a component
-    @Input() mcComponentParams: object;
+    @Input() mcComponentParams: T;
     // Default Modal ONLY
     @Input() mcFooter: string | TemplateRef<{}> | IModalButtonOptions<T>[];
 
     @Input()
     get mcVisible() { return this._mcVisible; }
     set mcVisible(value) { this._mcVisible = value; }
+
     _mcVisible = false;
 
     @Output() mcVisibleChange = new EventEmitter<boolean>();
@@ -107,8 +108,6 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     _mcOkLoading = false;
 
     @Input() @Output() mcOnOk: EventEmitter<T> | OnClickCallback<T> = new EventEmitter<T>();
-    // Only aim to focus the ok button that needs to be auto focused
-    @ViewChild('autoFocusButtonOk', {read: ElementRef}) autoFocusButtonOk: ElementRef;
     @Input() mcCancelText: string;
 
     @Input()
@@ -117,8 +116,12 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     _mcCancelLoading = false;
 
     @Input() @Output() mcOnCancel: EventEmitter<T> | OnClickCallback<T> = new EventEmitter<T>();
+
     @ViewChild('modalContainer') modalContainer: ElementRef;
-    @ViewChild('bodyContainer', {read: ViewContainerRef}) bodyContainer: ViewContainerRef;
+    @ViewChild('bodyContainer', { read: ViewContainerRef }) bodyContainer: ViewContainerRef;
+    // Only aim to focus the ok button that needs to be auto focused
+    @ViewChild('autoFocusButtonOk', { read: ElementRef }) autoFocusButtonOk: ElementRef;
+
     maskAnimationClassMap: object;
     modalAnimationClassMap: object;
     // The origin point that animation based on

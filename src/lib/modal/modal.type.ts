@@ -22,7 +22,7 @@ export interface IModalOptions<T = any, R = any> {
     mcStyle?: object;
     mcTitle?: string | TemplateRef<{}>;
     mcContent?: string | TemplateRef<{}> | Type<T>;
-    mcComponentParams?: object;
+    mcComponentParams?: Partial<T>;
     mcClosable?: boolean;
     mcMask?: boolean;
     mcMaskClosable?: boolean;
