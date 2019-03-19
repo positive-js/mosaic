@@ -1,0 +1,12 @@
+{
+    "extends": "../tsconfig.build",
+    "files": ["public-api.ts"],
+    "angularCompilerOptions": {
+        "annotateForClosureCompiler": true,
+        "strictMetadataEmit": true,
+        "flatModuleOutFile": "index.js",
+        "flatModuleId": "@ptsecurity/mosaic/typeahead",
+        "skipTemplateCodegen": true,
+        "fullTemplateTypeCheck": true
+    }
+}

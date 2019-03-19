@@ -1,0 +1,187 @@
+@import '../core/styles/common/vendor-prefixes';
+@import '../divider/divider';
+
+@import '../../cdk/a11y/a11y';
+
+$mc-typeahead-arrow-size: 5px !default;
+$mc-typeahead-arrow-margin: 4px !default;
+$mc-typeahead-panel-max-height: 224px !default;
+$mc-typeahead-item-height: 32px !default;
+
+$mc-typeahead-panel-border-width: 1px !default;
+$mc-typeahead-panel-border-radius: 3px !default;
+
+$mc-typeahead-placeholder-arrow-space: 2 * ($mc-typeahead-arrow-size + $mc-typeahead-arrow-margin);
+
+
+.mc-typeahead {
+    box-sizing: border-box;
+
+    display: inline-block;
+
+    width: 100%;
+
+    outline: none;
+
+    &.mc-disabled {
+        & .mc-typeahead__trigger {
+            @include user-select(none);
+
+            cursor: default;
+        }
+    }
+}
+
+.mc-typeahead__trigger {
+    display: flex;
+    box-sizing: border-box;
+    position: relative;
+
+    cursor: pointer;
+
+    padding: 2px 6px;
+}
+
+.mc-typeahead__matcher {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    & > span {
+        width: 100%;
+    }
+}
+
+.mc-typeahead__match-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    width: 100%;
+
+    & .mc-typeahead__match-hidden-text {
+        flex: 0 0 70px;
+        align-self: center;
+        padding: 0 8px;
+
+        text-align: right;
+    }
+}
+
+.mc-typeahead__match-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    overflow: hidden;
+
+    margin: 0;
+
+    width: 100%;
+
+    padding-left: 0;
+
+    & .mc-tag {
+        margin: 2px;
+    }
+}
+
+.mc-typeahead__match-item {
+    display: flex;
+
+    border: 1px solid transparent;
+    border-radius: 3px;
+
+    padding-left: 7px;
+
+    margin-right: 4px;
+
+    max-width: 100%;
+}
+
+.mc-typeahead__match-input {
+    display: flex;
+    flex: 1 1 auto;
+
+    margin: 2px 2px 2px 12px;
+
+    min-width: 20px;
+    width: 20px;
+
+    height: 22px;
+
+    border: none;
+    outline: none;
+    background: transparent;
+
+}
+
+.mc-typeahead__arrow-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+
+    // When used in a box or standard appearance form-field the arrow should be shifted up 50%.
+    .mc-form-field-appearance-fill &,
+    .mc-form-field-appearance-standard & {
+        transform: translateY(-50%);
+    }
+
+    // When used in a outline form-field the arrow should be shifted up 25%.
+    .mc-form-field-appearance-outline & {
+        transform: translateY(-25%);
+    }
+}
+
+.mc-typeahead__panel {
+    max-height: $mc-typeahead-panel-max-height;
+    min-width: 100%; // prevents some animcion twitching and test inconsistencies in IE11
+
+    overflow: auto;
+
+    border: {
+        width: $mc-typeahead-panel-border-width;
+        style: solid;
+    }
+
+    border-bottom-left-radius: $mc-typeahead-panel-border-radius;
+    border-bottom-right-radius: $mc-typeahead-panel-border-radius;
+
+    padding: 4px 0;
+}
+
+.mc-typeahead__content {
+    height: 100%;
+}
+
+// Override optgroup and option to scale based on font-size of the trigger.
+.mc-typeahead__panel {
+    .mc-optgroup-label,
+    .mc-option {
+        font-size: inherit;
+        line-height: $mc-typeahead-item-height;
+        height: $mc-typeahead-item-height;
+    }
+}
+
+.mc-form-field-type-mc-select {
+    &:not(.mc-disabled) .mc-form-field-flex {
+        cursor: pointer;
+    }
+
+    .mc-form-field-label {
+        width: calc(100% - #{$mc-typeahead-placeholder-arrow-space});
+    }
+}
+
+.mc-typeahead__placeholder {
+    height: 24px;
+
+    margin: 2px;
+}
+
+
