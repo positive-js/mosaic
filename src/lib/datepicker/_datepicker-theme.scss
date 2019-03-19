@@ -32,6 +32,10 @@ $mc-calendar-weekday-table-font-size: 11px !default;
     }
 
     .mc-datepicker-toggle__button.mc-icon-button {
+        border-color: transparent;
+        border-radius: 0;
+        background: transparent;
+
         .mc-icon {
             color: mc-color($second, 400);
         }
@@ -72,6 +76,14 @@ $mc-calendar-weekday-table-font-size: 11px !default;
 
     .mc-calendar__controls {
         .mc-button, .mc-icon-button {
+            border-radius: 0;
+            border-color: transparent;
+            background-color: transparent;
+
+            .mc-button-overlay {
+                z-index: -1;
+            }
+
             &:hover {
                 background: mc-color($second, A60);
             }

@@ -33,16 +33,6 @@ $mc-calendar-next-icon-transform: translateX(-2px) rotate(45deg);
 .mc-calendar__controls {
     display: flex;
     margin: $mc-calendar-controls-vertical-padding $mc-calendar-controls-side-margin;
-
-    .mc-button, .mc-icon-button {
-        border-radius: 0;
-        border-color: transparent;
-        background-color: transparent;
-
-        .mc-button-overlay {
-            z-index: -1;
-        }
-    }
 }
 
 .mc-calendar-spacer {
