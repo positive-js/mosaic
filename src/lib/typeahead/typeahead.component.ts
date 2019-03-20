@@ -1,5 +1,6 @@
 /* tslint:disable:no-empty */
 
+import { DOCUMENT } from '@angular/common';
 import {
     AfterContentInit, AfterViewInit,
     Attribute,
@@ -11,7 +12,7 @@ import {
     Directive,
     DoCheck,
     ElementRef,
-    EventEmitter,
+    EventEmitter, Host,
     Inject,
     Input,
     isDevMode,
@@ -76,7 +77,7 @@ import {
 } from '@ptsecurity/mosaic/core';
 import { McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { McTag } from '@ptsecurity/mosaic/tag';
-import { defer, merge, Observable, Subject } from 'rxjs';
+import { defer, fromEvent, merge, Observable, Subject, of as observableOf, Subscription } from 'rxjs';
 import {
     filter,
     map,
@@ -132,8 +133,7 @@ export class McTypeaheadTrigger {}
         '[class.mc-typeahead-invalid]': 'errorState',
         '[class.mc-typeahead-required]': 'required',
         '(keydown)': 'handleKeydown($event)',
-        '(focus)': 'onFocus()',
-        '(blur)': 'onBlur()'
+        '(focusin)': 'onFocus()'
     },
     animations: [
         mcSelectAnimations.transformPanel,
@@ -207,6 +207,8 @@ export class McTypeahead extends McTypeaheadMixinBase implements
     ];
 
     @ViewChild('trigger') trigger: ElementRef;
+
+    @ViewChild('input') input: ElementRef;
 
     @ViewChild('panel') panel: ElementRef;
 
@@ -368,6 +370,10 @@ export class McTypeahead extends McTypeaheadMixinBase implements
     /** Emits whenever the component is destroyed. */
     private readonly destroy = new Subject<void>();
 
+    private outsideClickStream: Subscription;
+
+    private overlayAttached: boolean = false;
+
     constructor(
         private readonly _viewportRuler: ViewportRuler,
         private readonly _changeDetectorRef: ChangeDetectorRef,
@@ -380,7 +386,9 @@ export class McTypeahead extends McTypeaheadMixinBase implements
         @Optional() private readonly _parentFormField: McFormField,
         @Self() @Optional() public ngControl: NgControl,
         @Attribute('tabindex') tabIndex: string,
-        @Inject(MC_SELECT_SCROLL_STRATEGY) private readonly _scrollStrategyFactory
+        @Inject(MC_SELECT_SCROLL_STRATEGY) private readonly _scrollStrategyFactory,
+        @Optional() @Inject(DOCUMENT) private document: any,
+        @Optional() @Host() private formField: McFormField
     ) {
         super(elementRef, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl);
 
@@ -394,6 +402,9 @@ export class McTypeahead extends McTypeaheadMixinBase implements
 
         // Force setter to be called in case id was not specified.
         this.id = this.id;
+
+        this.outsideClickStream = this.getOutsideClickStream()
+            .subscribe(() => this.close());
     }
 
     ngOnInit() {
@@ -437,6 +448,8 @@ export class McTypeahead extends McTypeaheadMixinBase implements
     }
 
     ngAfterViewInit(): void {
+        console.log(this.input);
+
     }
 
     ngDoCheck() {
@@ -463,18 +476,27 @@ export class McTypeahead extends McTypeaheadMixinBase implements
     /** `View -> model callback called when select has been touched` */
     _onTouched = () => {};
 
-    /** Toggles the overlay panel open or closed. */
-    toggle(): void {
-        if (this.panelOpen) {
-            this.close();
-        } else {
-            this.open();
+    getOutsideClickStream(): Observable<any> {
+        if (!this.document) {
+            return observableOf(null);
         }
+
+        return fromEvent<MouseEvent>(this.document, 'click')
+            .pipe(filter((event) => {
+                const clickTarget = event.target as HTMLElement;
+                const formField = this.formField ? this.formField._elementRef.nativeElement : null;
+
+                return this.overlayAttached &&
+                    clickTarget !== this.elementRef.nativeElement &&
+                    (!formField || !formField.contains(clickTarget)) &&
+                    (!!this.overlayDir.overlayRef && !this.overlayDir.overlayRef.overlayElement.contains(clickTarget));
+            }));
     }
 
     /** Opens the overlay panel. */
     open(): void {
-        if (this.disabled || !this.options || !this.options.length || this._panelOpen) { return; }
+        console.log('open');
+        if (this.disabled || this._panelOpen || !this.options.length) { return; }
 
         this.triggerRect = this.trigger.nativeElement.getBoundingClientRect();
         // Note: The computed font-size will be a string pixel value (e.g. "16px").
@@ -501,6 +523,7 @@ export class McTypeahead extends McTypeaheadMixinBase implements
     close(): void {
         if (this._panelOpen) {
             this._panelOpen = false;
+            this.overlayAttached = false;
             this.keyManager.withHorizontalOrientation(this.isRtl() ? 'rtl' : 'ltr');
             this._changeDetectorRef.markForCheck();
             this._onTouched();
@@ -557,16 +580,6 @@ export class McTypeahead extends McTypeaheadMixinBase implements
         return this.selectionModel.selected;
     }
 
-    get triggerValue(): string {
-        if (this.empty) { return ''; }
-
-        const selectedOptions = this.selectionModel.selected.map((option) => option.viewValue);
-
-        if (this.isRtl()) { selectedOptions.reverse(); }
-
-        return selectedOptions.join(', ');
-    }
-
     get triggerValues(): McOption[] {
         if (this.empty) { return []; }
 
@@ -601,12 +614,23 @@ export class McTypeahead extends McTypeaheadMixinBase implements
      */
     onFadeInDone(): void {
         this.panelDoneAnimating = this.panelOpen;
+
         this._changeDetectorRef.markForCheck();
     }
 
+    /** Focuses the select element. */
+    focus(): void {
+        this.input.nativeElement.focus();
+    }
+
     onFocus() {
+        console.log('onFocus');
         if (!this.disabled) {
             this._focused = true;
+
+            this.focus();
+
+            this.open();
 
             this.stateChanges.next();
         }
@@ -617,6 +641,7 @@ export class McTypeahead extends McTypeaheadMixinBase implements
      * "blur" to the panel when it opens, causing a false positive.
      */
     onBlur() {
+        console.log('onBlur');
         this._focused = false;
 
         if (!this.disabled && !this.panelOpen) {
@@ -630,6 +655,8 @@ export class McTypeahead extends McTypeaheadMixinBase implements
      * Callback that is invoked when the overlay panel has been attached.
      */
     onAttached(): void {
+        this.overlayAttached = true;
+
         this.overlayDir.positionChange
             .pipe(take(1))
             .subscribe(() => {
@@ -642,11 +669,6 @@ export class McTypeahead extends McTypeaheadMixinBase implements
     /** Returns the theme to be used on the panel. */
     getPanelTheme(): string {
         return this._parentFormField ? `mc-${this._parentFormField.color}` : '';
-    }
-
-    /** Focuses the select element. */
-    focus(): void {
-        this.elementRef.nativeElement.focus();
     }
 
     /**
@@ -677,8 +699,9 @@ export class McTypeahead extends McTypeaheadMixinBase implements
      * @docs-private
      */
     onContainerClick() {
+        console.log('onContainerClick');
         this.focus();
-        this.open();
+        // this.open();
     }
 
     /** Invoked when an option is clicked. */
@@ -698,7 +721,8 @@ export class McTypeahead extends McTypeaheadMixinBase implements
 
         // Open the select on ALT + arrow key to match the native <select>
         if (isOpenKey || (event.altKey && isArrowKey)) {
-            event.preventDefault(); // prevents the page from scrolling down when pressing space
+            event.preventDefault();
+
             this.open();
         }
     }

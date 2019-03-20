@@ -37,7 +37,7 @@ $mc-typeahead-placeholder-arrow-space: 2 * ($mc-typeahead-arrow-size + $mc-typea
     box-sizing: border-box;
     position: relative;
 
-    cursor: pointer;
+    cursor: text;
 
     padding: 2px 6px;
 }
@@ -178,10 +178,5 @@ $mc-typeahead-placeholder-arrow-space: 2 * ($mc-typeahead-arrow-size + $mc-typea
     }
 }
 
-.mc-typeahead__placeholder {
-    height: 24px;
-
-    margin: 2px;
-}
 
 

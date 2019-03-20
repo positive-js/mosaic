@@ -1,11 +1,9 @@
 <div cdk-overlay-origin
      class="mc-typeahead__trigger"
-     (click)="toggle()"
      #origin="cdkOverlayOrigin"
      #trigger>
-    <div class="mc-typeahead__matcher" [ngSwitch]="empty">
-        <span class="mc-typeahead__placeholder" *ngSwitchCase="true">{{ placeholder || '\u00A0' }}</span>
-        <span *ngSwitchCase="false" [ngSwitch]="!!customTrigger">
+    <div class="mc-typeahead__matcher">
+        <span [ngSwitch]="!!customTrigger">
             <div *ngSwitchDefault class="mc-typeahead__match-container">
                 <div class="mc-typeahead__match-list">
                     <mc-tag *ngFor="let option of triggerValues" [disabled]="disabled" [class.mc-error]="errorState">
@@ -13,9 +11,13 @@
                         <i mc-icon="mc-close-S_16" (click)="onRemoveMatcherItem(option, $event)"></i>
                     </mc-tag>
 
-                    <input type="text" class="mc-typeahead__match-input">
+                    <input type="text"
+                           class="mc-typeahead__match-input"
+                           #input
+                           (blur)="onBlur()">
                 </div>
             </div>
+
             <ng-content select="mc-typeahead-trigger" *ngSwitchCase="true"></ng-content>
         </span>
     </div>
@@ -30,7 +32,6 @@
     [cdkConnectedOverlayPositions]="positions"
     [cdkConnectedOverlayMinWidth]="triggerRect?.width"
     [cdkConnectedOverlayOffsetY]="offsetY"
-    (backdropClick)="close()"
     (attach)="onAttached()"
     (detach)="close()">
 
@@ -41,8 +42,7 @@
         (@transformPanel.done)="panelDoneAnimatingStream.next($event.toState)"
         [style.transformOrigin]="transformOrigin"
         [class.mc-select-panel-done-animcing]="panelDoneAnimating"
-        [style.font-size.px]="triggerFontSize"
-        (keydown)="handleKeydown($event)">
+        [style.font-size.px]="triggerFontSize">
 
         <div
             class="mc-typeahead__content"
