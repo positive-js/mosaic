@@ -1,0 +1,71 @@
+<div [style.width.px]="navbarContainerWidth">
+    <mc-navbar #navbar>
+        <mc-navbar-container position="left">
+            <mc-navbar-item disabled (click)="onItemClick()">
+                <i mc-icon="mc-info_16"></i>
+                <mc-navbar-title>Left icon</mc-navbar-title>
+            </mc-navbar-item>
+            <mc-navbar-item (click)="onItemClick()">
+                <mc-navbar-title>Right icon</mc-navbar-title>
+                <i mc-icon="mc-play_16"></i>
+            </mc-navbar-item>
+            <mc-navbar-brand>
+                <mc-navbar-logo>
+                    <img style="vertical-align: middle;" width="32" height="32" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAS1JREFUWAljPMUh/J9hAAHTANoNtnrUAaMhMBoCoyEw4CHAgq0k5Hd3YVCY0sfAJiOFTZrh369fDJ+PHGd4kJHH8OvxUwbT72+wqkMXPM0pgi7EgDUE8FkOMoGJjY2B38meQWH6RAwDSRVgxFYZqa5dCjbnXmoOw9937zHMZBYSZDB6ehscEmf5MUMJFiLYfIxuGNYouB0cja6OZnysDmCTlQYHL6+tFTi4cdn++fAxXFJEi2N1AChu+Z0dcBoCToRAyx9k5uNUQ6wEVgeAfA4C56RUGP6+/0CsWWSpw5oLQKkcBMi1HBRCIMAsKACm8RFYHYBPAzFyoDICBJTmTCWonCYOABVQH/cdZPj3ExIS+FyBtRzAp4HacjQJAVIcOeqA0RAYDYHREBjwEAAApR1LyfgAzUMAAAAASUVORK5CYII=" />
+                </mc-navbar-logo>
+                <mc-navbar-title>Brand</mc-navbar-title>
+            </mc-navbar-brand>
+            <mc-navbar-title>Title before</mc-navbar-title>
+            <mc-navbar-item (click)="onItemClick()">
+                <i mc-icon="mc-pause_16"></i>
+                <mc-navbar-title>Left icon</mc-navbar-title>
+            </mc-navbar-item>
+            <mc-navbar-item (click)="onItemClick()">
+                <i mc-icon="mc-clock_16"></i>
+            </mc-navbar-item>
+            <mc-navbar-item (click)="onItemClick()">
+                <mc-navbar-title>Right icon</mc-navbar-title>
+                <i mc-icon="mc-search_16"></i>
+            </mc-navbar-item>
+            <mc-navbar-title>Title after</mc-navbar-title>
+            <mc-navbar-item (click)="onItemClick()">
+                <mc-navbar-title>Custom title</mc-navbar-title>
+                <i mc-icon="mc-gear_16"></i>
+            </mc-navbar-item>
+            <mc-navbar-item (click)="onItemClick()">
+                <mc-navbar-title>Right icon</mc-navbar-title>
+                <i mc-icon="mc-calendar_16"></i>
+            </mc-navbar-item>
+            <mc-navbar-item (click)="onItemClick()">
+                <i mc-icon="mc-circle-8_16"></i>
+                <mc-navbar-title>Left icon</mc-navbar-title>
+            </mc-navbar-item>
+            <mc-navbar-item (click)="onItemClick()">
+                <mc-navbar-title>Right icon</mc-navbar-title>
+                <i mc-icon="mc-close-L_16"></i>
+            </mc-navbar-item>
+            <mc-navbar-item (click)="onItemClick()">
+                <i mc-icon="mc-error_16"></i>
+                <mc-navbar-title>Left icon</mc-navbar-title>
+            </mc-navbar-item>
+            <mc-navbar-item [dropdownItems]="dropdownItems">
+                <span class="dropdown-text">Dropdown item</span>
+                <i mc-icon="mc-angle-down-M_16"></i>
+            </mc-navbar-item>
+        </mc-navbar-container>
+
+        <mc-navbar-container position="right">
+            <mc-navbar-item (click)="onItemClick()">
+                <i mc-icon="mc-triangle_16"></i>
+                <mc-navbar-title>Left icon</mc-navbar-title>
+            </mc-navbar-item>
+            <mc-navbar-item (click)="onItemClick()">
+                <i mc-icon="mc-download_16"></i>
+            </mc-navbar-item>
+            <mc-navbar-item (click)="onItemClick()" [collapsedTitle]="'customTitle'">
+                <mc-navbar-title>Right icon</mc-navbar-title>
+                <i mc-icon="mc-copy_16"></i>
+            </mc-navbar-item>
+        </mc-navbar-container>
+    </mc-navbar>
+</div>

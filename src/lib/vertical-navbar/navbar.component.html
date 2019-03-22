@@ -1,0 +1,14 @@
+<nav class="mc-vertical-navbar" [class.collapsed]="collapsed">
+    <div class="line"></div>
+
+
+    <div class="title">
+        <div class="collapse-button">
+            <i mc-icon="mc-hamburger_16" *ngIf="collapsed" (click)="collapsed = ! collapsed"></i>
+            <i mc-icon="mc-close-L_16" *ngIf="! collapsed" (click)="collapsed = ! collapsed"></i>
+        </div>
+        <ng-content select="mc-vertical-navbar-brand"></ng-content>
+    </div>
+    <!--<ng-content select="[mc-vertical-navbar-container],mc-vertical-navbar-container"></ng-content>-->
+    <ng-content select="mc-vertical-navbar-item"></ng-content>
+</nav>

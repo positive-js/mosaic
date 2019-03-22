@@ -189,7 +189,8 @@
         "server-dev:tree-select": "npm run server-dev -- --env.component tree-select",
         "server-dev:typography": "npm run server-dev -- --env.component typography",
         "server-dev:tooltip": "npm run server-dev -- --env.component tooltip",
-        "server-dev:timepicker": "npm run server-dev -- --env.component timepicker"
+        "server-dev:timepicker": "npm run server-dev -- --env.component timepicker",
+        "server-dev:vertical-navbar": "npm run server-dev -- --env.component vertical-navbar"
     },
     "husky": {
         "hooks": {

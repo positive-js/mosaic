@@ -1,0 +1,117 @@
+@import '../core/theming/theming';
+@import '../core/styles/typography/typography-utils';
+
+@mixin _mc-vertical-navbar-theme-color($theme) {
+    $palette: map-get($theme, primary);
+
+    background-color: mc-color($palette, 700);
+
+    mc-vertical-navbar-item.mc-vertical-navbar-item-active {
+        $active-lighten: 5%;
+        background-color: lighten(mc-color($palette, 700), $active-lighten)
+    }
+
+    mc-vertical-navbar-item[disabled] {
+        > mc-vertical-navbar-title, .mc-vertical-navbar-title, [mc-icon] {
+            opacity: 0.3;
+        }
+    }
+
+    mc-vertical-navbar-item, .mc-vertical-navbar-item, .mc-vertical-navbar-title {
+        color: mc-color($palette, 100);
+    }
+
+    mc-vertical-navbar-item, .mc-vertical-navbar-item {
+        outline: 0;
+
+        &.cdk-focused {
+            > .mc-vertical-navbar-item {
+                outline: 0;
+            }
+        }
+    }
+
+    mc-vertical-navbar-item:not([disabled]), .mc-vertical-navbar-item:not([disabled]) {
+
+        outline: 0;
+
+        &.cdk-focused {
+            border-color: mc-color($palette, 500);
+            box-shadow: 0 0 0 1px mc-color($palette, 500);
+            z-index: 1;
+
+            > .mc-vertical-navbar-item {
+                outline: 0;
+            }
+        }
+    }
+
+    mc-vertical-navbar-item:hover:not([disabled]):not(.mc-progress) {
+        $hover-lighten: 5%;
+        background-color: lighten(mc-color($palette, 700), $hover-lighten)
+    }
+
+    mc-vertical-navbar-item.mc-progress:hover:not([disabled]) {
+        $bg-lighten: 15%;
+        background-color: lighten(mc-color($palette, 800), $bg-lighten);
+    }
+
+    .mc-vertical-navbar-brand {
+        .mc-vertical-navbar-title {
+            opacity: 0.5;
+        }
+    }
+
+    .mc-vertical-navbar-dropdown {
+        background-color: #fff;
+        border-color: mc-color($mc-grey, 300);
+        box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
+
+        &-link {
+            color: mc-color($mc-grey, 700);
+            outline: none;
+
+            &:hover {
+                background-color: $black-6-opacity;
+            }
+
+            &.cdk-focused {
+                border-color: mc-color($palette, 500);
+            }
+
+            &:active,
+            &.is-active {
+                background-color: mc-color($palette, 100);
+
+                &:hover::before {
+                    background-color: $black-6-opacity;
+                }
+            }
+        }
+    }
+}
+
+@mixin mc-vertical-navbar-theme($theme) {
+    .mc-vertical-navbar {
+        @include _mc-vertical-navbar-theme-color($theme);
+    }
+}
+
+@mixin mc-vertical-navbar-typography($config) {
+    .mc-vertical-navbar-title,
+    .mc-vertical-navbar-dropdown {
+        @include mc-typography-level-to-styles($config, body);
+    }
+
+    .mc-vertical-navbar-item {
+        .mc-vertical-navbar-title {
+            @include mc-typography-level-to-styles($config, body);
+        }
+    }
+
+    .mc-vertical-navbar-brand {
+        .mc-vertical-navbar-title {
+            @include mc-typography-level-to-styles($config, title);
+        }
+    }
+}

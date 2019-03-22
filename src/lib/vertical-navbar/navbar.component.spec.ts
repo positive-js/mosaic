@@ -6,7 +6,7 @@ import { SPACE } from '@ptsecurity/cdk/keycodes';
 import { createKeyboardEvent, createFakeEvent } from '@ptsecurity/cdk/testing';
 
 import { McIconModule } from './../icon/icon.module';
-import { McNavbarModule, McNavbar, IMcNavbarDropdownItem } from './index';
+import { McVerticalNavbarModule, McVerticalNavbar, IMcNavbarDropdownItem } from './index';
 
 
 const FONT_RENDER_TIMEOUT_MS = 10;
@@ -15,7 +15,7 @@ describe('McVerticalNavbar', () => {
 
     beforeEach(fakeAsync(() => {
         TestBed.configureTestingModule({
-            imports: [McNavbarModule, McIconModule],
+            imports: [McVerticalNavbarModule, McIconModule],
             declarations: [TestApp]
         });
 
@@ -191,7 +191,7 @@ describe('McVerticalNavbar', () => {
 })
 class TestApp {
     @ViewChild('navbar')
-    navbar: McNavbar;
+    navbar: McVerticalNavbar;
 
     counter: number = 0;
     navbarContainerWidth: number = 915;

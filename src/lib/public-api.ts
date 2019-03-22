@@ -32,4 +32,5 @@ export * from '@ptsecurity/mosaic/sidepanel';
 export * from '@ptsecurity/mosaic/splitter';
 export * from '@ptsecurity/mosaic/toggle';
 export * from '@ptsecurity/mosaic/tooltip';
+// export * from '@ptsecurity/mosaic/vertical-navbar';
 

@@ -1,0 +1,58 @@
+@import '~@ptsecurity/mosaic-icons/dist/styles/mc-icons';
+
+//@import '../../lib/core/theming/prebuilt/default-theme';
+@import '../../lib/core/theming/prebuilt/dark-theme';
+
+
+//.mc-navbar {
+//    margin-top: -8px;
+//    margin-left: -8px;
+//    margin-right: -8px;
+//}
+//
+//mc-navbar.small-navbar > .mc-navbar {
+//    min-width: 300px;
+//}
+//
+//[mc-dropdown] > [mc-icon^='mc-angle'] {
+//    margin-left: 8px;
+//}
+//
+//.logo {
+//    margin-top: 5px;
+//}
+//
+///* we hope to have it implemented in dropdown component*/
+//.dropdown-text {
+//    font: normal 15px/20px Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica Neue, Arial, sans-serif;
+//    letter-spacing: 0.15px;
+//}
+
+.root {
+    display: flex;
+    height: 90vh;
+}
+
+.content {
+    background: indigo;
+    margin: 16px;
+    padding: 16px;
+}
+
+.custom-item {
+    display: flex;
+    padding-left: 0;
+
+    .avatar {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        flex: 0 0 auto;
+        background: yellow;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        margin: 12px 12px 12px -4px;
+    }
+}

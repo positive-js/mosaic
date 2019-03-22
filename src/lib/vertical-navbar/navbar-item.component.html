@@ -1,0 +1,31 @@
+<a
+    [attr.tabindex]="disabled ? -1 : tabIndex"
+    (click)="handleClickByItem()"
+    (keydown)="handleKeydown($event)"
+    class="mc-navbar-item"
+>
+    <ng-content></ng-content>
+    <i *ngIf="hasDropdownContent" mc-icon="mc-angle-down-M_16"></i>
+</a>
+<ul
+    #dropdownContent
+    *ngIf="hasDropdownContent"
+    [ngClass]="{ 'is-collapsed': isCollapsed }"
+    class="mc-navbar-dropdown"
+>
+    <li
+        *ngFor="let item of dropdownItems"
+        (click)="handleClickByDropdownItem()"
+        class="mc-navbar-dropdown-item"
+    >
+        <ng-container *ngIf="dropdownItemTmpl">
+            <ng-container *ngTemplateOutlet="dropdownItemTmpl; context: { $implicit: item }"></ng-container>
+        </ng-container>
+        <a
+            *ngIf="!dropdownItemTmpl"
+            [attr.href]="item.link"
+            [ngClass]="{ 'is-active': isActiveDropdownLink(item.link) }"
+            class="mc-navbar-dropdown-link"
+        >{{ item.text }}</a>
+    </li>
+</ul>
