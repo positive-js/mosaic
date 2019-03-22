@@ -2,7 +2,7 @@
 
 import { DOCUMENT } from '@angular/common';
 import {
-    AfterContentInit, AfterViewInit,
+    AfterContentInit, AfterViewChecked, AfterViewInit,
     Attribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -145,8 +145,8 @@ export class McTypeaheadTrigger {}
     ]
 })
 export class McTypeahead extends McTypeaheadMixinBase implements
-    AfterContentInit, AfterViewInit, OnChanges, OnDestroy, OnInit, DoCheck, ControlValueAccessor, CanDisable,
-    HasTabIndex, McFormFieldControl<any>, CanUpdateErrorState {
+    AfterContentInit, AfterViewInit, AfterViewChecked, OnChanges, OnDestroy, OnInit, DoCheck, ControlValueAccessor,
+    CanDisable, HasTabIndex, McFormFieldControl<any>, CanUpdateErrorState {
 
     /** A name for this control that can be used by `mc-form-field`. */
     controlType = 'mc-typeahead';
@@ -176,7 +176,7 @@ export class McTypeahead extends McTypeaheadMixinBase implements
     panelDoneAnimatingStream = new Subject<string>();
 
     /** Strategy that will be used to handle scrolling while the select panel is open. */
-    scrollStrategy = this._scrollStrategyFactory();
+    scrollStrategy = this.scrollStrategyFactory();
 
     /**
      * The y-offset of the overlay panel in relation to the trigger's top start corner.
@@ -239,7 +239,7 @@ export class McTypeahead extends McTypeaheadMixinBase implements
             return merge(...this.options.map((option) => option.onSelectionChange));
         }
 
-        return this._ngZone.onStable
+        return this.ngZone.onStable
             .asObservable()
             .pipe(take(1), switchMap(() => this.optionSelectionChanges));
     }) as Observable<McOptionSelectionChange>;
@@ -375,18 +375,18 @@ export class McTypeahead extends McTypeaheadMixinBase implements
     private overlayAttached: boolean = false;
 
     constructor(
-        private readonly _viewportRuler: ViewportRuler,
-        private readonly _changeDetectorRef: ChangeDetectorRef,
-        private readonly _ngZone: NgZone,
+        private readonly viewportRuler: ViewportRuler,
+        private readonly changeDetectorRef: ChangeDetectorRef,
+        private readonly ngZone: NgZone,
         defaultErrorStateMatcher: ErrorStateMatcher,
         elementRef: ElementRef,
-        @Optional() private readonly _dir: Directionality,
+        @Optional() private readonly dir: Directionality,
         @Optional() parentForm: NgForm,
         @Optional() parentFormGroup: FormGroupDirective,
-        @Optional() private readonly _parentFormField: McFormField,
+        @Optional() private readonly parentFormField: McFormField,
         @Self() @Optional() public ngControl: NgControl,
         @Attribute('tabindex') tabIndex: string,
-        @Inject(MC_SELECT_SCROLL_STRATEGY) private readonly _scrollStrategyFactory,
+        @Inject(MC_SELECT_SCROLL_STRATEGY) private readonly scrollStrategyFactory,
         @Optional() @Inject(DOCUMENT) private document: any,
         @Optional() @Host() private formField: McFormField
     ) {
@@ -424,7 +424,7 @@ export class McTypeahead extends McTypeaheadMixinBase implements
                     this.openedChange.emit(false);
                     this.panelDoneAnimating = false;
                     this.overlayDir.offsetX = 0;
-                    this._changeDetectorRef.markForCheck();
+                    this.changeDetectorRef.markForCheck();
                 }
             });
     }
@@ -450,6 +450,10 @@ export class McTypeahead extends McTypeaheadMixinBase implements
     ngAfterViewInit(): void {
         console.log(this.input);
 
+    }
+
+    ngAfterViewChecked(): void {
+        if (this.panelOpen) { this.overlayDir.overlayRef.updatePosition(); }
     }
 
     ngDoCheck() {
@@ -507,10 +511,10 @@ export class McTypeahead extends McTypeaheadMixinBase implements
         this.keyManager.withHorizontalOrientation(null);
         this.calculateOverlayPosition();
         this.highlightCorrectOption();
-        this._changeDetectorRef.markForCheck();
+        this.changeDetectorRef.markForCheck();
 
         // Set the font size on the panel element once it exists.
-        this._ngZone.onStable.asObservable()
+        this.ngZone.onStable.asObservable()
             .pipe(take(1))
             .subscribe(() => {
                 if (this.triggerFontSize && this.overlayDir.overlayRef && this.overlayDir.overlayRef.overlayElement) {
@@ -525,7 +529,7 @@ export class McTypeahead extends McTypeaheadMixinBase implements
             this._panelOpen = false;
             this.overlayAttached = false;
             this.keyManager.withHorizontalOrientation(this.isRtl() ? 'rtl' : 'ltr');
-            this._changeDetectorRef.markForCheck();
+            this.changeDetectorRef.markForCheck();
             this._onTouched();
         }
     }
@@ -572,7 +576,7 @@ export class McTypeahead extends McTypeaheadMixinBase implements
      */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
-        this._changeDetectorRef.markForCheck();
+        this.changeDetectorRef.markForCheck();
         this.stateChanges.next();
     }
 
@@ -595,7 +599,7 @@ export class McTypeahead extends McTypeaheadMixinBase implements
     }
 
     isRtl(): boolean {
-        return this._dir ? this._dir.value === 'rtl' : false;
+        return this.dir ? this.dir.value === 'rtl' : false;
     }
 
     handleKeydown(event: KeyboardEvent): void {
@@ -615,7 +619,7 @@ export class McTypeahead extends McTypeaheadMixinBase implements
     onFadeInDone(): void {
         this.panelDoneAnimating = this.panelOpen;
 
-        this._changeDetectorRef.markForCheck();
+        this.changeDetectorRef.markForCheck();
     }
 
     /** Focuses the select element. */
@@ -646,7 +650,7 @@ export class McTypeahead extends McTypeaheadMixinBase implements
 
         if (!this.disabled && !this.panelOpen) {
             this._onTouched();
-            this._changeDetectorRef.markForCheck();
+            this.changeDetectorRef.markForCheck();
             this.stateChanges.next();
         }
     }
@@ -660,7 +664,8 @@ export class McTypeahead extends McTypeaheadMixinBase implements
         this.overlayDir.positionChange
             .pipe(take(1))
             .subscribe(() => {
-                this._changeDetectorRef.detectChanges();
+                console.log('onAttached');
+                this.changeDetectorRef.detectChanges();
                 this.calculateOverlayOffsetX();
                 this.panel.nativeElement.scrollTop = this.scrollTop;
             });
@@ -668,7 +673,7 @@ export class McTypeahead extends McTypeaheadMixinBase implements
 
     /** Returns the theme to be used on the panel. */
     getPanelTheme(): string {
-        return this._parentFormField ? `mc-${this._parentFormField.color}` : '';
+        return this.parentFormField ? `mc-${this.parentFormField.color}` : '';
     }
 
     /**
@@ -749,6 +754,7 @@ export class McTypeahead extends McTypeaheadMixinBase implements
             this.close();
         } else if ((keyCode === ENTER || keyCode === SPACE) && manager.activeItem) {
             event.preventDefault();
+
             manager.activeItem.selectViaInteraction();
         } else {
             const previouslyFocusedIndex = manager.activeItemIndex;
@@ -785,7 +791,7 @@ export class McTypeahead extends McTypeaheadMixinBase implements
             this.sortValues();
         }
 
-        this._changeDetectorRef.markForCheck();
+        this.changeDetectorRef.markForCheck();
     }
 
     /**
@@ -848,11 +854,11 @@ export class McTypeahead extends McTypeaheadMixinBase implements
         this.optionSelectionChanges
             .pipe(takeUntil(changedOrDestroyed))
             .subscribe((event) => {
+                console.log('optionSelectionChanges');
                 this.onSelect(event.source, event.isUserInput);
 
-                if (event.isUserInput && this._panelOpen) {
-                    this.close();
-                    this.focus();
+                if (event.isUserInput && this.panelOpen) {
+                    // this.focus();
                 }
             });
 
@@ -861,7 +867,7 @@ export class McTypeahead extends McTypeaheadMixinBase implements
         merge(...this.options.map((option) => option.stateChanges))
             .pipe(takeUntil(changedOrDestroyed))
             .subscribe(() => {
-                this._changeDetectorRef.markForCheck();
+                this.changeDetectorRef.markForCheck();
                 this.stateChanges.next();
             });
 
@@ -924,7 +930,7 @@ export class McTypeahead extends McTypeaheadMixinBase implements
         this.valueChange.emit(valueToEmit);
         this._onChange(valueToEmit);
         this.selectionChange.emit(new McTypeaheadChange(this, valueToEmit));
-        this._changeDetectorRef.markForCheck();
+        this.changeDetectorRef.markForCheck();
     }
 
     /** Records option IDs to pass to the aria-owns property. */
@@ -938,11 +944,7 @@ export class McTypeahead extends McTypeaheadMixinBase implements
      */
     private highlightCorrectOption(): void {
         if (this.keyManager) {
-            if (this.empty) {
-                this.keyManager.setFirstItemActive();
-            } else {
-                this.keyManager.setActiveItem(this.selectionModel.selected[0]);
-            }
+            this.keyManager.setFirstItemActive();
         }
     }
 
@@ -1003,7 +1005,7 @@ export class McTypeahead extends McTypeaheadMixinBase implements
      */
     private calculateOverlayOffsetX(): void {
         const overlayRect = this.overlayDir.overlayRef.overlayElement.getBoundingClientRect();
-        const viewportSize = this._viewportRuler.getViewportSize();
+        const viewportSize = this.viewportRuler.getViewportSize();
         const isRtl = this.isRtl();
         /* tslint:disable-next-line:no-magic-numbers */
         const paddingWidth = SELECT_PANEL_PADDING_X * 2;
@@ -1056,7 +1058,7 @@ export class McTypeahead extends McTypeaheadMixinBase implements
      */
     private checkOverlayWithinViewport(maxScroll: number): void {
         const itemHeight = this.getItemHeight();
-        const viewportSize = this._viewportRuler.getViewportSize();
+        const viewportSize = this.viewportRuler.getViewportSize();
 
         const topSpaceAvailable = this.triggerRect.top - SELECT_PANEL_VIEWPORT_PADDING;
         const bottomSpaceAvailable =
