@@ -11,12 +11,12 @@
     #dropdownContent
     *ngIf="hasDropdownContent"
     [ngClass]="{ 'is-collapsed': isCollapsed }"
-    class="mc-navbar-dropdown"
+    class="mc-vertical-navbar-dropdown"
 >
     <li
         *ngFor="let item of dropdownItems"
         (click)="handleClickByDropdownItem()"
-        class="mc-navbar-dropdown-item"
+        class="mc-vertical-navbar-dropdown-item"
     >
         <ng-container *ngIf="dropdownItemTmpl">
             <ng-container *ngTemplateOutlet="dropdownItemTmpl; context: { $implicit: item }"></ng-container>
@@ -25,7 +25,7 @@
             *ngIf="!dropdownItemTmpl"
             [attr.href]="item.link"
             [ngClass]="{ 'is-active': isActiveDropdownLink(item.link) }"
-            class="mc-navbar-dropdown-link"
+            class="mc-vertical-navbar-dropdown-link"
         >{{ item.text }}</a>
     </li>
 </ul>

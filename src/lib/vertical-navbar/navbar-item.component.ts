@@ -64,6 +64,8 @@ export class McVerticalNavbarItemIcon {
 })
 export class McVerticalNavbarItem extends _McNavbarMixinBase implements OnInit, AfterViewInit, OnDestroy, CanDisable {
 
+    @Input() collapsed: boolean = true;
+
     @Input()
     tabIndex: number = 0;
 

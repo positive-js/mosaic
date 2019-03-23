@@ -53,7 +53,7 @@ mc-vertical-navbar-logo {
     height: unset;
     //width: 200px;
     overflow: hidden;
-    white-space: nowrap;
+    //white-space: nowrap;
     max-width: 1000px;
     //padding: 4px;
     //box-sizing: border-box;
@@ -140,10 +140,10 @@ mc-vertical-navbar-title.mc-vertical-navbar-collapsed-title {
 
 .mc-vertical-navbar-dropdown {
     position: absolute;
-    top: 100%;
-    left: 0;
+    top: 0;
+    left: 50%;
     box-sizing: border-box;
-    min-width: 100%;
+    //min-width: 100%;
     height: auto;
     margin: 0;
     list-style: none;
