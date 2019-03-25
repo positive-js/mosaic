@@ -47,25 +47,23 @@
         <mc-vertical-navbar-title>Disabled in-progress</mc-vertical-navbar-title>
     </mc-vertical-navbar-item>
 
-    <mc-vertical-navbar-item [dropdownItems]="dropdownItems">
-        <mc-vertical-navbar-item-icon>
-            <i mc-icon="mc-folder-opened_16"></i>
-        </mc-vertical-navbar-item-icon>
-        <mc-vertical-navbar-badge>5</mc-vertical-navbar-badge>
-        <mc-vertical-navbar-title>Disabled in-progress</mc-vertical-navbar-title>
+    <mc-vertical-navbar-container position="bottom">
+        <mc-vertical-navbar-item [dropdownItems]="dropdownItems">
+            <mc-vertical-navbar-item-icon>
+                <i mc-icon="mc-folder-opened_16"></i>
+            </mc-vertical-navbar-item-icon>
+            <mc-vertical-navbar-badge>5</mc-vertical-navbar-badge>
+            <mc-vertical-navbar-title>Disabled in-progress</mc-vertical-navbar-title>
+        </mc-vertical-navbar-item>
 
-    </mc-vertical-navbar-item>
-
-
-    <mc-vertical-navbar-item class="custom-item" (click)="onItemClick($event)">
-        <div class="avatar">NS</div>
-        <div>
-            <div>Name Surname</div>
-            <div>name.surname@email.com</div>
-        </div>
-    </mc-vertical-navbar-item>
-
-
+        <mc-vertical-navbar-item class="custom-item" (click)="onItemClick($event)">
+            <div class="avatar">NS</div>
+            <div>
+                <div>Name Surname</div>
+                <div>name.surname@email.com</div>
+            </div>
+        </mc-vertical-navbar-item>
+    </mc-vertical-navbar-container>
 
     <!--<mc-vertical-navbar-item class="cdk-focused" (click)="onItemClick($event)">-->
         <!--<div mc-dropdown>-->

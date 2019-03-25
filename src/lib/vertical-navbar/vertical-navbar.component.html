@@ -1,6 +1,10 @@
-<nav class="mc-vertical-navbar" [class.collapsed]="collapsed">
+<nav class="mc-vertical-navbar"
+     [@expand]="! collapsed"
+     (@expand.start)="animating = true"
+     (@expand.done)="animating = false"
+     [class.animating]="animating || collapsed"
+>
     <div class="line"></div>
-
 
     <div class="title">
         <div class="collapse-button">
@@ -9,6 +13,6 @@
         </div>
         <ng-content select="mc-vertical-navbar-brand"></ng-content>
     </div>
-    <!--<ng-content select="[mc-vertical-navbar-container],mc-vertical-navbar-container"></ng-content>-->
-    <ng-content select="mc-vertical-navbar-item"></ng-content>
+
+    <ng-content select="mc-vertical-navbar-item, [mc-vertical-navbar-container], mc-vertical-navbar-container"></ng-content>
 </nav>

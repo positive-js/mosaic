@@ -53,7 +53,7 @@ export class McVerticalNavbarItemIcon {
 
 @Component({
     selector: MC_NAVBAR_ITEM,
-    templateUrl: './navbar-item.component.html',
+    templateUrl: './vertical-navbar-item.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     inputs: ['disabled'],

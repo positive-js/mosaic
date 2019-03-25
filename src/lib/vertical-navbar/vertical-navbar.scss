@@ -13,6 +13,10 @@
     pointer-events: none;
 }
 
+.mc-vertical-navbar-bottom {
+    margin-top: auto;
+}
+
 .mc-vertical-navbar-badge {
     position: absolute;
     width: 64px;
@@ -27,6 +31,9 @@
 }
 
 .mc-vertical-navbar-item-icon {
+
+    margin-right: 16px;
+
     .mc-icon {
         font-size: 32px;
     }
@@ -41,6 +48,7 @@
 
 mc-vertical-navbar {
     display: flex;
+    align-items: stretch;
 }
 
 mc-vertical-navbar-logo {
@@ -51,27 +59,6 @@ mc-vertical-navbar-logo {
     @extend %mc-nav-bar-base;
 
     height: unset;
-    //width: 200px;
-    overflow: hidden;
-    //white-space: nowrap;
-    max-width: 1000px;
-    //padding: 4px;
-    //box-sizing: border-box;
-
-    //@keyframes test {
-    //    0% {
-    //        max-width: 0px;
-    //    }
-    //
-    //    100% {
-    //        max-width: 10000px;
-    //    }
-    //}
-
-    &.collapsed {
-        //width: 64px;
-        max-width: 64px;
-    }
 
     .title {
         display: flex;
@@ -93,14 +80,16 @@ mc-vertical-navbar-logo {
         }
     }
 
-    transition: max-width cubic-bezier(0, 1, 0, 1) 0.5s;
+    &.animating {
+        overflow: hidden;
+    }
 }
 
-mc-vertical-navbar-container, .mc-navbar-left, .mc-navbar-right {
+mc-vertical-navbar-container {
     @extend %mc-navbar-container-base;
 }
 
-mc-vertical-navbar-item, .mc-navbar-item, .mc-navbar-title, mc-vertival-navbar-item:first-child {
+mc-vertical-navbar-item, .mc-vertical-navbar-item, .mc-vertical-navbar-title, mc-vertical-navbar-item:first-child {
     @extend %mc-navbar-item-base;
 
     height: 64px;
@@ -116,7 +105,7 @@ mc-vertical-navbar-brand, .mc-vertical-navbar-brand {
     @extend %mc-navbar-brand-base;
 }
 
-.mc-navbar-item:not([disabled]) {
+.mc-vertical-navbar-item:not([disabled]) {
     cursor: pointer;
 }
 
@@ -141,7 +130,7 @@ mc-vertical-navbar-title.mc-vertical-navbar-collapsed-title {
 .mc-vertical-navbar-dropdown {
     position: absolute;
     top: 0;
-    left: 50%;
+    left: 100%;
     box-sizing: border-box;
     //min-width: 100%;
     height: auto;

@@ -9,7 +9,8 @@ import {
     ViewEncapsulation,
     ChangeDetectionStrategy
 } from '@angular/core';
-import { MC_NAVBAR_ITEM } from '@ptsecurity/mosaic/vertical-navbar/navbar-item.component';
+import { MC_NAVBAR_ITEM } from '@ptsecurity/mosaic/vertical-navbar/vertical-navbar-item.component';
+import { expandVerticalNavbarAnimation } from '@ptsecurity/mosaic/vertical-navbar/vertical-navbar.animation';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
@@ -24,7 +25,7 @@ const MC_NAVBAR_LOGO = 'mc-vertical-navbar-logo';
 const MC_NAVBAR_ITEM_ICON = 'mc-vertical-navbar-icon';
 const MC_NAVBAR_ITEM_BADGE = 'mc-vertical-navbar-badge';
 
-export type McNavbarContainerPositionType = 'left' | 'right';
+export type McVerticalNavbarContainerPositionType = 'top' | 'bottom';
 
 
 @Directive({
@@ -78,11 +79,11 @@ export class McNavbarTitle {}
 })
 export class McVerticalNavbarContainer {
     @Input()
-    position: McNavbarContainerPositionType = 'left';
+    position: McVerticalNavbarContainerPositionType = 'top';
 
     @HostBinding('class')
     get cssClasses(): string {
-        return this.position === 'left' ? 'mc-navbar-left' : 'mc-navbar-right';
+        return this.position === 'top' ? 'mc-vertical-navbar-top' : 'mc-vertical-navbar-bottom';
     }
 }
 
@@ -168,13 +169,17 @@ class CachedItemWidth {
 @Component({
     selector: MC_NAVBAR,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    templateUrl: './navbar.component.html',
-    styleUrls: ['./navbar.css'],
-    encapsulation: ViewEncapsulation.None
+    templateUrl: './vertical-navbar.component.html',
+    styleUrls: ['./vertical-navbar.scss'],
+    encapsulation: ViewEncapsulation.None,
+    animations: [
+        expandVerticalNavbarAnimation()
+    ]
 })
 export class McVerticalNavbar implements AfterViewInit, OnDestroy {
 
     collapsed: boolean = true;
+    animating: boolean = false;
 
     private readonly forceRecalculateItemsWidth: boolean = false;
     private readonly resizeDebounceInterval: number = 100;

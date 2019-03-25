@@ -2,6 +2,7 @@ import { Component, NgModule, ViewChild, ViewEncapsulation } from '@angular/core
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { McButtonModule } from '../../lib/button';
 import { McIconModule } from '../../lib/icon';
@@ -67,6 +68,7 @@ export class VerticalNavbarDemoComponent {
     ],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         McVerticalNavbarModule,
         McButtonModule,
         McIconModule,
