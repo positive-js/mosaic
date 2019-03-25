@@ -9,7 +9,6 @@ export function expandVerticalNavbarAnimation(): AnimationTriggerMetadata {
         state('1',  style({
             width: '*'
         })),
-        transition('0 => 1', animate('250ms cubic-bezier(0, 1, 0.5, 1)')),
-        transition('1 => 0', animate('500ms cubic-bezier(0, 1, 0, 1)'))
+        transition('0 <=> 1', animate('300ms cubic-bezier(0, 1, 0.5, 1)'))
     ]);
 }

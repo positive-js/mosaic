@@ -56,11 +56,11 @@
         background-color: lighten(mc-color($palette, 800), $bg-lighten);
     }
 
-    .mc-vertical-navbar-brand {
-        .mc-vertical-navbar-title {
-            opacity: 0.5;
-        }
-    }
+    //.mc-vertical-navbar-brand {
+    //    .mc-vertical-navbar-title {
+    //        opacity: 0.5;
+    //    }
+    //}
 
     .mc-vertical-navbar-dropdown {
         background-color: #fff;

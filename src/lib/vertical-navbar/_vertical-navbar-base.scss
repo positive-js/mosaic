@@ -10,14 +10,6 @@ $mc-navbar-brand-margin-right: 0;
 $mc-navbar-title-icon-space: 8px;
 $mc-navbar-icon-min-width: 15px;
 
-
-%mc-navbar-container-base {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    width: 100%;
-}
-
 %mc-nav-bar-base {
     position: relative;
     height: $mc-navbar-height;
@@ -30,10 +22,6 @@ $mc-navbar-icon-min-width: 15px;
     align-items: flex-start;
 
     [mc-icon] + mc-vertical-navbar-title {
-        margin-left: $mc-navbar-title-icon-space;
-    }
-
-    mc-vertical-navbar-title:not(.mc-vertical-navbar-collapsed-title) + [mc-icon] {
         margin-left: $mc-navbar-title-icon-space;
     }
 }
@@ -61,10 +49,4 @@ $mc-navbar-icon-min-width: 15px;
 
         font-size: 20px;
     }
-}
-
-%mc-navbar-title-base {
-    white-space: nowrap;
-    padding: 0 16px;
-    font-size: 15px;
 }

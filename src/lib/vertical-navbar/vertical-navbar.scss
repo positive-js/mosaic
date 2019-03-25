@@ -86,7 +86,10 @@ mc-vertical-navbar-logo {
 }
 
 mc-vertical-navbar-container {
-    @extend %mc-navbar-container-base;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
 }
 
 mc-vertical-navbar-item, .mc-vertical-navbar-item, .mc-vertical-navbar-title, mc-vertical-navbar-item:first-child {
@@ -98,7 +101,9 @@ mc-vertical-navbar-item, .mc-vertical-navbar-item, .mc-vertical-navbar-title, mc
 }
 
 .mc-vertical-navbar-title {
-    @extend %mc-navbar-title-base;
+    white-space: nowrap;
+    padding: 0 16px;
+    font-size: 15px;
 }
 
 mc-vertical-navbar-brand, .mc-vertical-navbar-brand {
@@ -121,10 +126,6 @@ mc-vertical-navbar-item[disabled] .mc-vertical-navbar-item, .mc-vertical-navbar-
     /*It is controversially. Works fine but cannot be tested*/
     /*pointer-events: none;*/
     cursor: default;
-}
-
-mc-vertical-navbar-title.mc-vertical-navbar-collapsed-title {
-    display: none;
 }
 
 .mc-vertical-navbar-dropdown {

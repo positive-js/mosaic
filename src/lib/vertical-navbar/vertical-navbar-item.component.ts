@@ -64,18 +64,11 @@ export class McVerticalNavbarItemIcon {
 })
 export class McVerticalNavbarItem extends _McNavbarMixinBase implements OnInit, AfterViewInit, OnDestroy, CanDisable {
 
-    @Input() collapsed: boolean = true;
-
     @Input()
     tabIndex: number = 0;
 
     @Input()
     dropdownItems: IMcNavbarDropdownItem[] = [];
-
-    @Input()
-    set collapsedTitle(value: string) {
-        this.elementRef.nativeElement.setAttribute('computedTitle', encodeURI(value));
-    }
 
     @ContentChild('dropdownItemTmpl', { read: TemplateRef })
     dropdownItemTmpl: TemplateRef<IMcNavbarDropdownItem>;

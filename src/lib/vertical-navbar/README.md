@@ -34,9 +34,3 @@ We believe you are able to manage navbar child components from outside. Meantime
  - cdk-focused - focused state, we control it as well for common tab order behaviour
  
 Disable state also could be combined with other states but it is **disabled** attribute.
-
-## Collapsing
-In the case that absence of space the following elements is collapsed:
-
--  mc-navbar-item is collapsed to [mc-icon] if exists (if not then the item is not collapsed). The title attribute is added for [mc-icon] from mc-navbar-item's [collapsedTitle] input value;
--  mc-navbar-item is collapsed to [mc-icon] if exists (if not then the item is not collapsed). 
