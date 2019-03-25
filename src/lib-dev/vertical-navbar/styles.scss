@@ -3,40 +3,40 @@
 //@import '../../lib/core/theming/prebuilt/default-theme';
 @import '../../lib/core/theming/prebuilt/dark-theme';
 
+body {
+    // this is just to get rid of default Chrome margins
+    margin: 0;
+}
 
-//.mc-navbar {
-//    margin-top: -8px;
-//    margin-left: -8px;
-//    margin-right: -8px;
-//}
-//
-//mc-navbar.small-navbar > .mc-navbar {
-//    min-width: 300px;
-//}
-//
-//[mc-dropdown] > [mc-icon^='mc-angle'] {
-//    margin-left: 8px;
-//}
-//
-//.logo {
-//    margin-top: 5px;
-//}
-//
-///* we hope to have it implemented in dropdown component*/
-//.dropdown-text {
-//    font: normal 15px/20px Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica Neue, Arial, sans-serif;
-//    letter-spacing: 0.15px;
-//}
 
 .root {
     display: flex;
-    height: 90vh;
+    min-height: 100vh;
 }
 
 .content {
-    background: indigo;
+    //background: rgba(128, 128, 255, 0.25);
+    display: flex;
+    flex-wrap: wrap;
     margin: 16px;
-    padding: 16px;
+
+    div {
+        flex: 1 1 50%;
+        margin: 8px;
+        padding: 8px;
+        background: rgba(128, 128, 255, 0.25);
+    }
+}
+
+mc-vertical-navbar {
+
+    height: 100vh;
+
+    &.fixed {
+        position: fixed;
+        left: 0;
+        top: 0;
+    }
 }
 
 .logo {

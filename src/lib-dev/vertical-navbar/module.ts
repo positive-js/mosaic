@@ -20,8 +20,6 @@ export class VerticalNavbarDemoComponent {
     @ViewChild('navbar')
     navbar: McVerticalNavbar;
 
-    readonly minNavbarWidth: number = 940;
-
     dropdownItems: IMcNavbarDropdownItem[] = [
         { link: '#1', text: 'Очень длинный список для проверки ширины' },
         { link: '#2', text: 'Общие сведения' },
@@ -38,23 +36,6 @@ export class VerticalNavbarDemoComponent {
         { link: '#4', text: 'Пункт в правой части navbar 1' },
         { link: '#5', text: 'Пункт в правой части navbar 2' }
     ];
-
-    private _collapsedNavbarWidth: number = 1280;
-
-    get collapsedNavbarWidth(): number {
-        return this._collapsedNavbarWidth;
-    }
-
-    set collapsedNavbarWidth(value: number) {
-        if (value < this.minNavbarWidth) {
-            return;
-        }
-        this._collapsedNavbarWidth = value;
-    }
-
-    collapsedNavbarWidthChange() {
-        this.navbar.updateCollapsed();
-    }
 
     onItemClick(event: MouseEvent) {
         alert(`innerText: ${(<HTMLElement> event.target).innerText}`);
