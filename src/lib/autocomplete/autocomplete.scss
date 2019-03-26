@@ -6,6 +6,10 @@
 $mc-autocomplete-panel-max-height: 256px !default;
 $mc-autocomplete-panel-border-radius: 3px !default;
 
+.mc-autocomplete-trigger {
+    text-overflow: ellipsis;
+}
+
 .mc-autocomplete-panel {
     visibility: hidden;
 

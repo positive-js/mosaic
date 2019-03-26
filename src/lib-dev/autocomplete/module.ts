@@ -1,5 +1,3 @@
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
 import { Component, NgModule, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -10,6 +8,8 @@ import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 
 @Component({
@@ -19,9 +19,7 @@ import { McInputModule } from '@ptsecurity/mosaic/input';
     encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent implements OnInit {
-    singleSelected = 'Normal';
-
-    options = ['One', 'Two', 'Three', 'Four', 'Five'];
+    options = ['One', 'Two', 'Three', 'Four', 'Five', 'Longest text (0123456789 qwertyuiopasdfghjklzxcvbnm)'];
 
     filteredOptions: Observable<string[]>;
 

@@ -94,6 +94,7 @@ export function getMcAutocompleteMissingPanelError(): Error {
 @Directive({
     selector: `input[mcAutocomplete], textarea[mcAutocomplete]`,
     host: {
+        class: 'mc-autocomplete-trigger',
         '[attr.autocomplete]': 'autocompleteAttribute',
         '[attr.role]': 'autocompleteDisabled ? null : "combobox"',
         '[attr.aria-autocomplete]': 'autocompleteDisabled ? null : "list"',
