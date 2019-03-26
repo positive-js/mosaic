@@ -6,6 +6,10 @@
 
     background-color: mc-color($palette, 700);
 
+    .mc-vertical-navbar-item-menu {
+        background-color: mc-color($palette, 700);
+    }
+
     mc-vertical-navbar-item.mc-vertical-navbar-item-active {
         $active-lighten: 5%;
         background-color: lighten(mc-color($palette, 700), $active-lighten)

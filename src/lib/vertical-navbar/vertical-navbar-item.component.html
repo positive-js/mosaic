@@ -5,27 +5,36 @@
     class="mc-vertical-navbar-item"
 >
     <ng-content></ng-content>
-    <i *ngIf="hasDropdownContent" mc-icon="mc-angle-right-M_16"></i>
+    <i *ngIf="menu" mc-icon="mc-angle-right-M_16" class="mc-vertical-navbar-item-menu-icon"></i>
 </a>
-<ul
-    #dropdownContent
-    *ngIf="hasDropdownContent"
-    [ngClass]="{ 'is-collapsed': isCollapsed }"
-    class="mc-vertical-navbar-dropdown"
->
-    <li
-        *ngFor="let item of dropdownItems"
-        (click)="handleClickByDropdownItem()"
-        class="mc-vertical-navbar-dropdown-item"
-    >
-        <ng-container *ngIf="dropdownItemTmpl">
-            <ng-container *ngTemplateOutlet="dropdownItemTmpl; context: { $implicit: item }"></ng-container>
-        </ng-container>
-        <a
-            *ngIf="!dropdownItemTmpl"
-            [attr.href]="item.link"
-            [ngClass]="{ 'is-active': isActiveDropdownLink(item.link) }"
-            class="mc-vertical-navbar-dropdown-link"
-        >{{ item.text }}</a>
-    </li>
-</ul>
+
+<!--<div *ngIf="menu" class="mc-vertical-navbar-dropdown" [ngClass]="{ 'is-collapsed': isCollapsed }">-->
+<!--<div *ngIf="menu" class="mc-vertical-navbar-item-menu" [ngClass]="{ 'is-collapsed': isCollapsed }">-->
+<div *ngIf="! isCollapsed" (click)="handleClickOnNestedItems($event)">
+    <ng-content select="mc-vertical-navbar-item-menu" class="mc-vertical-navbar-item-menu"></ng-content>
+</div>
+<!--</div>-->
+
+
+<!--<ul-->
+    <!--#dropdownContent-->
+    <!--*ngIf="hasDropdownContent"-->
+    <!--[ngClass]="{ 'is-collapsed': isCollapsed }"-->
+    <!--class="mc-vertical-navbar-dropdown"-->
+<!--&gt;-->
+    <!--<li-->
+        <!--*ngFor="let item of dropdownItems"-->
+        <!--(click)="handleClickByDropdownItem()"-->
+        <!--class="mc-vertical-navbar-dropdown-item"-->
+    <!--&gt;-->
+        <!--<ng-container *ngIf="dropdownItemTmpl">-->
+            <!--<ng-container *ngTemplateOutlet="dropdownItemTmpl; context: { $implicit: item }"></ng-container>-->
+        <!--</ng-container>-->
+        <!--<a-->
+            <!--*ngIf="!dropdownItemTmpl"-->
+            <!--[attr.href]="item.link"-->
+            <!--[ngClass]="{ 'is-active': isActiveDropdownLink(item.link) }"-->
+            <!--class="mc-vertical-navbar-dropdown-link"-->
+        <!--&gt;{{ item.text }}</a>-->
+    <!--</li>-->
+<!--</ul>-->

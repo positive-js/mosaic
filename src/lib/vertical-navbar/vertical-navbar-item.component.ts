@@ -1,5 +1,4 @@
 import {
-    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -10,7 +9,15 @@ import {
     OnInit,
     TemplateRef,
     ViewChild,
-    ViewEncapsulation, Directive
+    ViewEncapsulation,
+    Directive,
+    HostBinding,
+    HostListener,
+    Output,
+    EventEmitter,
+    ContentChildren,
+    QueryList,
+    AfterContentInit
 } from '@angular/core';
 import { FocusMonitor, FocusOrigin } from '@ptsecurity/cdk/a11y';
 import { SPACE } from '@ptsecurity/cdk/keycodes';
@@ -50,19 +57,39 @@ export class McVerticalNavbarItemIcon {
     @Input() icon: string;
 }
 
+@Component({
+    selector: 'mc-vertical-navbar-item-menu',
+    host: {
+        class: 'mc-vertical-navbar-item-menu'
+    },
+    template: `
+        <ng-content select="mc-vertical-navbar-item"></ng-content>
+    `
+})
+export class McVerticalNavbarItemMenu {
+    @Input() align: 'bottom' | 'top' = 'bottom';
+
+    @HostBinding('class.mc-vertical-navbar-item-menu-top') get top() { return this.align === 'top'; }
+    @HostBinding('class.mc-vertical-navbar-item-menu-bottom') get bottom() { return this.align !== 'top'; }
+}
+
 
 @Component({
     selector: MC_NAVBAR_ITEM,
     templateUrl: './vertical-navbar-item.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    styleUrls: ['./vertical-navbar-item.scss'],
     inputs: ['disabled'],
     host: {
         '[attr.disabled]': 'disabled || null',
         '[attr.tabindex]': '-1'
     }
 })
-export class McVerticalNavbarItem extends _McNavbarMixinBase implements OnInit, AfterViewInit, OnDestroy, CanDisable {
+export class McVerticalNavbarItem extends _McNavbarMixinBase implements OnInit, AfterContentInit, OnDestroy, CanDisable {
+
+    @ContentChild(McVerticalNavbarItemMenu) menu: McVerticalNavbarItemMenu;
+    @ContentChildren(McVerticalNavbarItem) nestedItems: QueryList<McVerticalNavbarItem>;
 
     @Input()
     tabIndex: number = 0;
@@ -77,7 +104,15 @@ export class McVerticalNavbarItem extends _McNavbarMixinBase implements OnInit, 
     dropdownContent: ElementRef;
 
     get hasDropdownContent() {
-        return this.dropdownItems.length > 0;
+        // return this.dropdownItems.length > 0;
+        return !! this.menu;
+    }
+
+    @Output('chosen') chosen = new EventEmitter<string>();
+
+    @HostListener('click') handleClick(event) {
+        console.log('click');
+        this.chosen.emit('asdf');
     }
 
     isCollapsed: boolean = true;
@@ -93,22 +128,23 @@ export class McVerticalNavbarItem extends _McNavbarMixinBase implements OnInit, 
         public  elementRef: ElementRef,
         private _focusMonitor: FocusMonitor,
         private _platform: Platform,
-        private _cdRef: ChangeDetectorRef
+        private _cdRef: ChangeDetectorRef,
+        // private _renderer: Renderer2
     ) {
         super(elementRef);
+
+        this._focusMonitor$ = this._focusMonitor.monitor(this.elementRef.nativeElement, true);
     }
 
     ngOnInit() {
         this.denyClickIfDisabled();
-
-        this._focusMonitor$ = this._focusMonitor.monitor(this.elementRef.nativeElement, true);
 
         if (this.hasDropdownContent) {
             this.listenClickOutside();
         }
     }
 
-    ngAfterViewInit() {
+    ngAfterContentInit() {
         if (!this.hasDropdownContent) {
             return;
         }
@@ -147,11 +183,18 @@ export class McVerticalNavbarItem extends _McNavbarMixinBase implements OnInit, 
         this.forceCloseDropdown();
     }
 
+    handleClickOnNestedItems(event) {
+        // console.log('chosen', event.target);
+        // this.forceCloseDropdown();
+        // this.emitEvent();
+    }
+
     private listenClickOutside() {
         this._subscription.add(
             this._focusMonitor$.subscribe((origin) => {
                 if (origin === null) {
                     this.forceCloseDropdown();
+                    console.log('CLICK OUTSIDE');
                 }
             })
         );
@@ -167,15 +210,25 @@ export class McVerticalNavbarItem extends _McNavbarMixinBase implements OnInit, 
     }
 
     private startListenFocusDropdownItems() {
-        this._dropdownElements.forEach((el) => {
-            this._focusMonitor.monitor(el, true);
+
+        console.log('start listening', this.nestedItems.length);
+
+        this.nestedItems.forEach((item) => {
+            console.log('start listening', item);
+            this._focusMonitor.monitor(item.elementRef.nativeElement, true);
         });
+        // this._dropdownElements.forEach((el) => {
+        //     this._focusMonitor.monitor(el, true);
+        // });
     }
 
     private stopListenFocusDropdownItems() {
-        this._dropdownElements.forEach((el) => {
-            this._focusMonitor.stopMonitoring(el);
+        this.nestedItems.forEach((item) => {
+            this._focusMonitor.stopMonitoring(item.elementRef.nativeElement);
         });
+        // this._dropdownElements.forEach((el) => {
+        //     this._focusMonitor.stopMonitoring(el);
+        // });
     }
 
     // This method is required due to angular 2 issue https://github.com/angular/angular/issues/11200

@@ -1,42 +1,9 @@
 @import 'vertical-navbar-base';
 @import 'vertical-navbar-theme';
 
-// TODO: remove
-.line {
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 64px;
-    border-right: 1px solid grey;
-    box-sizing: border-box;
-    pointer-events: none;
-}
 
 .mc-vertical-navbar-bottom {
     margin-top: auto;
-}
-
-.mc-vertical-navbar-badge {
-    position: absolute;
-    width: 64px;
-    top: 0;
-    left: 0;
-
-    .mc-badge {
-        position: absolute;
-        right: 2px;
-        top: 2px;
-    }
-}
-
-.mc-vertical-navbar-item-icon {
-
-    margin-right: 16px;
-
-    .mc-icon {
-        font-size: 32px;
-    }
 }
 
 .mc-vertical-navbar-brand-title {
@@ -83,6 +50,17 @@ mc-vertical-navbar-logo {
     &.animating {
         overflow: hidden;
     }
+
+    // box-shadow over nested elements
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0; right: 0; bottom: 0; left: 0;
+        z-index: 5;
+        box-shadow: 2px 0px 2px 0 rgba(0, 0, 0, 0.25);
+        pointer-events: none;
+    }
 }
 
 mc-vertical-navbar-container {
@@ -126,55 +104,4 @@ mc-vertical-navbar-item[disabled] .mc-vertical-navbar-item, .mc-vertical-navbar-
     /*It is controversially. Works fine but cannot be tested*/
     /*pointer-events: none;*/
     cursor: default;
-}
-
-.mc-vertical-navbar-dropdown {
-    position: absolute;
-    top: 0;
-    left: 100%;
-    box-sizing: border-box;
-    //min-width: 100%;
-    height: auto;
-    margin: 0;
-    list-style: none;
-    padding-top: $mc-navbar-dropdown-v-padding;
-    padding-right: 0;
-    padding-bottom: $mc-navbar-dropdown-v-padding;
-    padding-left: 0;
-    border: 1px solid;
-    border-top: none;
-    z-index: 1;
-
-    .mc-vertical-navbar-right & {
-        left: auto;
-        right: 0;
-    }
-
-    &-link {
-        position: relative;
-        display: block;
-        box-sizing: border-box;
-        padding-top: $mc-navbar-dropdown-link-v-padding;
-        padding-right: $mc-navbar-dropdown-link-h-padding;
-        padding-bottom: $mc-navbar-dropdown-link-v-padding;
-        padding-left: $mc-navbar-dropdown-link-h-padding;
-        border: 2px solid transparent;
-        text-decoration: none;
-        white-space: nowrap;
-
-        &.is-active {
-            &:hover::before {
-                position: absolute;
-                top: -2px;
-                right: -2px;
-                bottom: -2px;
-                left: -2px;
-                content: "";
-            }
-        }
-    }
-
-    &.is-collapsed {
-        display: none;
-    }
 }

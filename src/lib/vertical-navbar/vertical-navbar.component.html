@@ -1,15 +1,13 @@
 <nav class="mc-vertical-navbar"
-     [@expand]="! collapsed"
+     [@expand]="! expanded"
      (@expand.start)="animating = true"
      (@expand.done)="animating = false"
-     [class.animating]="animating || collapsed"
+     [class.animating]="animating || expanded"
 >
-    <div class="line"></div>
-
     <div class="title">
         <div class="collapse-button">
-            <i mc-icon="mc-hamburger_16" *ngIf="collapsed" (click)="collapsed = ! collapsed"></i>
-            <i mc-icon="mc-close-L_16" *ngIf="! collapsed" (click)="collapsed = ! collapsed"></i>
+            <i mc-icon="mc-hamburger_16" *ngIf="expanded" (click)="expanded = ! expanded"></i>
+            <i mc-icon="mc-close-L_16" *ngIf="! expanded" (click)="expanded = ! expanded"></i>
         </div>
         <ng-content select="mc-vertical-navbar-brand"></ng-content>
     </div>

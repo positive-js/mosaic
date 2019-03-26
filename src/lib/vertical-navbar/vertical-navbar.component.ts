@@ -83,6 +83,6 @@ export class McVerticalNavbarContainer {
     ]
 })
 export class McVerticalNavbar {
-    collapsed: boolean = true;
+    expanded: boolean = true;
     animating: boolean = false;
 }
