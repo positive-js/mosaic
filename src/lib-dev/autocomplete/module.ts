@@ -1,4 +1,6 @@
-import { Component, NgModule, ViewEncapsulation } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { Component, NgModule, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
@@ -16,14 +18,33 @@ import { McInputModule } from '@ptsecurity/mosaic/input';
     styleUrls: ['./styles.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class DemoComponent {
+export class DemoComponent implements OnInit {
     singleSelected = 'Normal';
 
-    singleSelectFormControl = new FormControl('', Validators.required);
+    options = ['One', 'Two', 'Three', 'Four', 'Five'];
+
+    filteredOptions: Observable<string[]>;
+
+    formControl = new FormControl('', Validators.required);
 
     onSelectionChange($event: McAutocompleteSelectedEvent) {
         console.log(`onSelectionChange: ${$event}`);
     }
+
+    ngOnInit(): void {
+        this.filteredOptions = this.formControl.valueChanges
+            .pipe(
+                startWith(''),
+                map((value) => this.filter(value))
+            );
+    }
+
+    private filter(value: string): string[] {
+        const filterValue = value.toLowerCase();
+
+        return this.options.filter((option) => option.toLowerCase().includes(filterValue));
+    }
+
 }
 
 

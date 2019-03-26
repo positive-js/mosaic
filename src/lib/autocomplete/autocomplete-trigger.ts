@@ -23,7 +23,7 @@ import {
     OverlayConfig,
     OverlayRef,
     IPositionStrategy,
-    IScrollStrategy
+    IScrollStrategy, IConnectedPosition
 } from '@ptsecurity/cdk/overlay';
 import { TemplatePortal } from '@ptsecurity/cdk/portal';
 import { ViewportRuler } from '@ptsecurity/cdk/scrolling';
@@ -52,6 +52,8 @@ export const AUTOCOMPLETE_OPTION_HEIGHT = 48;
 
 /** The total height of the autocomplete panel. */
 export const AUTOCOMPLETE_PANEL_HEIGHT = 256;
+
+export const AUTOCOMPLETE_BORDER_WIDTH: number = 2;
 
 /** Injection token that determines the scroll handling while the autocomplete panel is open. */
 export const MC_AUTOCOMPLETE_SCROLL_STRATEGY =
@@ -636,7 +638,7 @@ export class McAutocompleteTrigger implements ControlValueAccessor, OnDestroy {
                     // border-radius based on the overlay position.
                     panelClass: 'mc-autocomplete-panel-above'
                 }
-            ]);
+            ] as IConnectedPosition[]);
 
         return this.positionStrategy;
     }
@@ -650,7 +652,7 @@ export class McAutocompleteTrigger implements ControlValueAccessor, OnDestroy {
     }
 
     private getPanelWidth(): number | string {
-        return this.autocomplete.panelWidth || this.getHostWidth();
+        return this.autocomplete.panelWidth || this.getHostWidth() - AUTOCOMPLETE_BORDER_WIDTH;
     }
 
     /** Returns the width of the input element, so the panel width can match it. */
