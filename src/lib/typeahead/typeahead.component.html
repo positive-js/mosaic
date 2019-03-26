@@ -35,20 +35,20 @@
     (attach)="onAttached()"
     (detach)="close()">
 
-    <div
-        #panel
-        class="mc-typeahead__panel {{ getPanelTheme() }}"
-        [ngClass]="panelClass"
-        (@transformPanel.done)="panelDoneAnimatingStream.next($event.toState)"
-        [style.transformOrigin]="transformOrigin"
-        [class.mc-select-panel-done-animcing]="panelDoneAnimating"
-        [style.font-size.px]="triggerFontSize">
+    <div #panel
+         class="mc-typeahead__panel {{ getPanelTheme() }}"
+         [ngClass]="panelClass"
+         (@transformPanel.done)="panelDoneAnimatingStream.next($event.toState)"
+         [style.transformOrigin]="transformOrigin"
+         [class.mc-select-panel-done-animcing]="panelDoneAnimating"
+         [style.font-size.px]="triggerFontSize">
 
-        <div
-            class="mc-typeahead__content"
-            [@fadeInContent]="'showing'"
-            (@fadeInContent.done)="onFadeInDone()">
-            <ng-content></ng-content>
+        <div class="mc-typeahead__content"
+             [@fadeInContent]="'showing'"
+             (@fadeInContent.done)="onFadeInDone()">
+            <ng-container #listContainer>
+                <ng-content></ng-content>
+            </ng-container>
         </div>
     </div>
 </ng-template>

@@ -24,8 +24,8 @@ import {
     Output,
     QueryList,
     Self,
-    SimpleChanges,
-    ViewChild, ViewChildren,
+    SimpleChanges, TemplateRef,
+    ViewChild, ViewChildren, ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
@@ -212,6 +212,8 @@ export class McTypeahead extends McTypeaheadMixinBase implements
 
     @ViewChild('panel') panel: ElementRef;
 
+    @ViewChild('listContainer', { read: ViewContainerRef }) listContainer: ViewContainerRef;
+
     @ViewChild(CdkConnectedOverlay) overlayDir: CdkConnectedOverlay;
 
     @ViewChildren(McTag) tags: QueryList<McTag>;
@@ -378,8 +380,9 @@ export class McTypeahead extends McTypeaheadMixinBase implements
         private readonly viewportRuler: ViewportRuler,
         private readonly changeDetectorRef: ChangeDetectorRef,
         private readonly ngZone: NgZone,
-        defaultErrorStateMatcher: ErrorStateMatcher,
-        elementRef: ElementRef,
+        public defaultErrorStateMatcher: ErrorStateMatcher,
+        public elementRef: ElementRef,
+        public viewContainerRef: ViewContainerRef,
         @Optional() private readonly dir: Directionality,
         @Optional() parentForm: NgForm,
         @Optional() parentFormGroup: FormGroupDirective,
@@ -734,6 +737,10 @@ export class McTypeahead extends McTypeaheadMixinBase implements
 
     /** Handles keyboard events when the selected is open. */
     private handleOpenKeydown(event: KeyboardEvent): void {
+        console.log('handleOpenKeydown');
+
+        // this.options.reset(this.options.filter((option) => option.value.includes(event.key)));
+        // this.changeDetectorRef.markForCheck();
         /* tslint:disable-next-line */
         const keyCode = event.keyCode;
         const isArrowKey = keyCode === DOWN_ARROW || keyCode === UP_ARROW;
@@ -757,14 +764,7 @@ export class McTypeahead extends McTypeaheadMixinBase implements
 
             manager.activeItem.selectViaInteraction();
         } else {
-            const previouslyFocusedIndex = manager.activeItemIndex;
-
             manager.onKeydown(event);
-
-            if (isArrowKey && event.shiftKey && manager.activeItem &&
-                manager.activeItemIndex !== previouslyFocusedIndex) {
-                manager.activeItem.selectViaInteraction();
-            }
         }
     }
 

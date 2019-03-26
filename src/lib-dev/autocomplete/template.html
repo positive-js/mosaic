@@ -4,7 +4,8 @@
 
 <div class="dev-container">
     <mc-form-field>
-        <mc-typeahead [(value)]="multipleSelected">
+        <input mcInput [mcAutocomplete]="auto" [formControl]="singleSelectFormControl"/>
+        <mc-autocomplete #auto="mcAutocomplete">
             <mc-option value="Create">Create</mc-option>
             <mc-option value="Disabled" disabled>Disabled</mc-option>
             <mc-option value="Normal">Normal</mc-option>
@@ -23,7 +24,7 @@
             <mc-option value="Selected8">Selected8</mc-option>
             <mc-option value="Selected9">Selected9</mc-option>
             <mc-option value="Selected10">Selected10</mc-option>
-        </mc-typeahead>
+        </mc-autocomplete>
     </mc-form-field>
 
     <!--<br><br>-->
