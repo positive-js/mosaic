@@ -1,4 +1,4 @@
-<a
+<div
     [attr.tabindex]="disabled ? -1 : tabIndex"
     (click)="handleClickByItem()"
     (keydown)="handleKeydown($event)"
@@ -6,7 +6,7 @@
 >
     <ng-content></ng-content>
     <i *ngIf="hasDropdownContent" mc-icon="mc-angle-right-M_16" class="mc-vertical-navbar-item-menu-icon"></i>
-</a>
+</div>
 
 <div *ngIf="hasDropdownContent"
      [@toggleMenu]="! isCollapsed"
@@ -17,6 +17,6 @@
      [style.top]="alignNestedItems === 'top' ? '0' : null"
      [style.bottom]="alignNestedItems === 'bottom' ? '0' : null"
 >
-    <ng-content select="mc-vertical-navbar-item"></ng-content>
+    <ng-content select="mc-vertical-navbar-item, a[mc-vertical-navbar-item]"></ng-content>
 </div>
 

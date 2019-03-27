@@ -1,8 +1,10 @@
+import { APP_BASE_HREF } from '@angular/common';
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 
 import { McButtonModule } from '../../lib/button';
 import { McIconModule } from '../../lib/icon';
@@ -29,13 +31,16 @@ export class VerticalNavbarDemoComponent {
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
+        RouterModule.forRoot([]),
         McVerticalNavbarModule,
         McButtonModule,
-        McIconModule,
-        FormsModule
+        McIconModule
     ],
     bootstrap: [
         VerticalNavbarDemoComponent
+    ],
+    providers: [
+        {provide: APP_BASE_HREF, useValue : '/' }
     ]
 })
 export class NavbarDemoModule {}

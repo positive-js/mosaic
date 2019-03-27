@@ -52,7 +52,7 @@ mc-vertical-navbar-container {
     width: 100%;
 }
 
-mc-vertical-navbar-item, .mc-vertical-navbar-item, .mc-vertical-navbar-title, mc-vertical-navbar-item:first-child {
+mc-vertical-navbar-item, .mc-vertical-navbar-item, .mc-vertical-navbar-title, a[mc-vertical-navbar-item] {
 
     position: relative;
     display: flex;
@@ -86,7 +86,7 @@ mc-vertical-navbar-item, .mc-vertical-navbar-item, .mc-vertical-navbar-title, mc
     cursor: pointer;
 }
 
-mc-vertical-navbar-item, mc-vertical-navbar-item:first-child, mc-vertical-navbar-brand, .mc-vertical-navbar-item .mc-vertical-navbar-title {
+a[mc-vertical-navbar-item], mc-vertical-navbar-item, mc-vertical-navbar-brand, .mc-vertical-navbar-item .mc-vertical-navbar-title {
     padding: 0;
 }
 

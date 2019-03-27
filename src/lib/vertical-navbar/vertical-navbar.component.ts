@@ -7,7 +7,6 @@ const MC_NAVBAR_CONTAINER = 'mc-vertical-navbar-container';
 const MC_NAVBAR_BRAND = 'mc-vertical-navbar-brand';
 const MC_NAVBAR_TITLE = 'mc-vertical-navbar-title';
 const MC_NAVBAR_LOGO = 'mc-vertical-navbar-logo';
-const MC_NAVBAR_ITEM_ICON = 'mc-vertical-navbar-icon';
 const MC_NAVBAR_ITEM_BADGE = 'mc-vertical-navbar-badge';
 
 export type McVerticalNavbarContainerPositionType = 'top' | 'bottom';
@@ -19,15 +18,7 @@ export type McVerticalNavbarContainerPositionType = 'top' | 'bottom';
         class: MC_NAVBAR_LOGO
     }
 })
-export class McNavbarLogo {}
-
-@Directive({
-    selector: MC_NAVBAR_ITEM_ICON,
-    host: {
-        class: MC_NAVBAR_ITEM_ICON
-    }
-})
-export class McNavbarItemIcon {}
+export class McVerticalNavbarLogo {}
 
 @Component({
     selector: MC_NAVBAR_ITEM_BADGE,
@@ -40,7 +31,7 @@ export class McNavbarItemIcon {}
         class: MC_NAVBAR_ITEM_BADGE
     }
 })
-export class McNavbarItemBadge {}
+export class McVerticalNavbarItemBadge {}
 
 @Directive({
     selector: MC_NAVBAR_BRAND,
@@ -48,7 +39,7 @@ export class McNavbarItemBadge {}
         class: MC_NAVBAR_BRAND
     }
 })
-export class McNavbarBrand {}
+export class McVerticalNavbarBrand {}
 
 @Directive({
     selector: MC_NAVBAR_TITLE,
@@ -56,7 +47,7 @@ export class McNavbarBrand {}
         class: MC_NAVBAR_TITLE
     }
 })
-export class McNavbarTitle {}
+export class McVerticalNavbarTitle {}
 
 
 @Directive({

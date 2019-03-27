@@ -27,11 +27,11 @@ export const MC_NAVBAR_ITEM = 'mc-vertical-navbar-item';
 export const MC_NAVBAR_ITEM_ICON = 'mc-vertical-navbar-item-icon';
 
 
-export class McNavbarItemBase {
+export class McVerticalNavbarItemBase {
     constructor(public _elementRef: ElementRef) {}
 }
 
-export const _McNavbarMixinBase: CanDisableCtor & typeof McNavbarItemBase = mixinDisabled(McNavbarItemBase);
+export const _McVerticalNavbarMixinBase: CanDisableCtor & typeof McVerticalNavbarItemBase = mixinDisabled(McVerticalNavbarItemBase);
 
 
 @Directive({
@@ -51,7 +51,7 @@ export class McVerticalNavbarItemIcon {
 
 
 @Component({
-    selector: MC_NAVBAR_ITEM,
+    selector: `a[mc-vertical-navbar-item], ${MC_NAVBAR_ITEM}`,
     templateUrl: './vertical-navbar-item.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -65,7 +65,7 @@ export class McVerticalNavbarItemIcon {
         expandVerticalNavbarMenuAnimation()
     ]
 })
-export class McVerticalNavbarItem extends _McNavbarMixinBase implements OnInit, AfterContentInit, OnDestroy, CanDisable {
+export class McVerticalNavbarItem extends _McVerticalNavbarMixinBase implements OnInit, AfterContentInit, OnDestroy, CanDisable {
 
     @Input() alignNestedItems: 'bottom' | 'top' | undefined = 'bottom';
 

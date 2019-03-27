@@ -14,10 +14,15 @@
         <mc-vertical-navbar-title>Application Inspector</mc-vertical-navbar-title>
     </mc-vertical-navbar-brand>
 
-    <mc-vertical-navbar-item (click)="onItemClick($event)">
+    <mc-vertical-navbar-item>
         <mc-vertical-navbar-item-icon><i mc-icon="mc-gear_16"></i></mc-vertical-navbar-item-icon>
         <mc-vertical-navbar-title>Simple item with icon</mc-vertical-navbar-title>
     </mc-vertical-navbar-item>
+
+    <a mc-vertical-navbar-item href="" routerLink fragment="some-anchor" routerLinkActive="mc-vertical-navbar-item-active">
+        <mc-vertical-navbar-item-icon><i mc-icon="mc-gear_16"></i></mc-vertical-navbar-item-icon>
+        <mc-vertical-navbar-title>Link item</mc-vertical-navbar-title>
+    </a>
 
     <mc-vertical-navbar-item class="mc-vertical-navbar-item-active" (click)="onItemClick($event)">
         <mc-vertical-navbar-item-icon><i mc-icon="mc-info_16"></i></mc-vertical-navbar-item-icon>

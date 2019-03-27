@@ -8,10 +8,10 @@ import { McVerticalNavbarItem, McVerticalNavbarItemIcon } from './vertical-navba
 import {
     McVerticalNavbar,
     McVerticalNavbarContainer,
-    McNavbarTitle,
-    McNavbarBrand,
-    McNavbarLogo,
-    McNavbarItemBadge
+    McVerticalNavbarTitle,
+    McVerticalNavbarBrand,
+    McVerticalNavbarLogo,
+    McVerticalNavbarItemBadge
 } from './vertical-navbar.component';
 
 
@@ -25,22 +25,22 @@ import {
     exports: [
         McVerticalNavbar,
         McVerticalNavbarContainer,
-        McNavbarTitle,
+        McVerticalNavbarTitle,
         McVerticalNavbarItem,
         McVerticalNavbarItemIcon,
-        McNavbarItemBadge,
-        McNavbarBrand,
-        McNavbarLogo
+        McVerticalNavbarItemBadge,
+        McVerticalNavbarBrand,
+        McVerticalNavbarLogo
     ],
     declarations: [
         McVerticalNavbar,
         McVerticalNavbarContainer,
-        McNavbarTitle,
+        McVerticalNavbarTitle,
         McVerticalNavbarItem,
         McVerticalNavbarItemIcon,
-        McNavbarItemBadge,
-        McNavbarBrand,
-        McNavbarLogo
+        McVerticalNavbarItemBadge,
+        McVerticalNavbarBrand,
+        McVerticalNavbarLogo
     ]
 })
 export class McVerticalNavbarModule {}
