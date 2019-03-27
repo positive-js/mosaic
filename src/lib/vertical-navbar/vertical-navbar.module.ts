@@ -4,11 +4,7 @@ import { A11yModule } from '@ptsecurity/cdk/a11y';
 import { PlatformModule } from '@ptsecurity/cdk/platform';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 
-import {
-    McVerticalNavbarItem,
-    McVerticalNavbarItemIcon,
-    McVerticalNavbarItemMenu
-} from './vertical-navbar-item.component';
+import { McVerticalNavbarItem, McVerticalNavbarItemIcon } from './vertical-navbar-item.component';
 import {
     McVerticalNavbar,
     McVerticalNavbarContainer,
@@ -32,7 +28,6 @@ import {
         McNavbarTitle,
         McVerticalNavbarItem,
         McVerticalNavbarItemIcon,
-        McVerticalNavbarItemMenu,
         McNavbarItemBadge,
         McNavbarBrand,
         McNavbarLogo
@@ -43,7 +38,6 @@ import {
         McNavbarTitle,
         McVerticalNavbarItem,
         McVerticalNavbarItemIcon,
-        McVerticalNavbarItemMenu,
         McNavbarItemBadge,
         McNavbarBrand,
         McNavbarLogo

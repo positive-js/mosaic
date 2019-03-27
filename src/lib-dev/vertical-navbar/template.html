@@ -53,25 +53,37 @@
             <div class="avatar">NS</div>
             <div>
                 <div>Name Surname</div>
-                <div>name.surname@email.com</div>
+                <div><small>name.surname@email.com</small></div>
             </div>
 
-            <mc-vertical-navbar-item-menu>
-                <mc-vertical-navbar-item>asdfasdf </mc-vertical-navbar-item>
-                <mc-vertical-navbar-item>asdfasdf </mc-vertical-navbar-item>
-                <mc-vertical-navbar-item>asdfasdf
-
-                    <mc-vertical-navbar-item-menu>
-                        <mc-vertical-navbar-item>asdfasdf </mc-vertical-navbar-item>
-                        <mc-vertical-navbar-item>asdfasdf </mc-vertical-navbar-item>
-                        <mc-vertical-navbar-item>asdfasdf
-
-
-                        </mc-vertical-navbar-item>
-                    </mc-vertical-navbar-item-menu>
-
+            <mc-vertical-navbar-item disabled>
+                <mc-vertical-navbar-item-icon><i mc-icon="mc-folder-opened_16"></i></mc-vertical-navbar-item-icon>
+                <mc-vertical-navbar-title>Disabled</mc-vertical-navbar-title>
+            </mc-vertical-navbar-item>
+            <mc-vertical-navbar-item>
+                <mc-vertical-navbar-item-icon><i mc-icon="mc-gear_16"></i></mc-vertical-navbar-item-icon>
+                <mc-vertical-navbar-title>Settings</mc-vertical-navbar-title>
+            </mc-vertical-navbar-item>
+            <mc-vertical-navbar-item>
+                <mc-vertical-navbar-item-icon><i mc-icon="mc-folder-opened_16"></i></mc-vertical-navbar-item-icon>
+                <mc-vertical-navbar-title>Sign out</mc-vertical-navbar-title>
+            </mc-vertical-navbar-item>
+            <mc-vertical-navbar-item disabled>
+                <mc-vertical-navbar-item-icon><i mc-icon="mc-clock_16"></i></mc-vertical-navbar-item-icon>
+                <mc-vertical-navbar-title>Disabled</mc-vertical-navbar-title>
+                <mc-vertical-navbar-item>NESTED NESTED ITEM 21</mc-vertical-navbar-item>
+                <mc-vertical-navbar-item>NESTED NESTED ITEM 22</mc-vertical-navbar-item>
+                <mc-vertical-navbar-item>NESTED NESTED ITEM 23</mc-vertical-navbar-item>
+            </mc-vertical-navbar-item>
+            <mc-vertical-navbar-item>
+                NESTED ITEM 3
+                <mc-vertical-navbar-item>
+                    <mc-vertical-navbar-title>Some nested item</mc-vertical-navbar-title>
                 </mc-vertical-navbar-item>
-            </mc-vertical-navbar-item-menu>
+                <mc-vertical-navbar-item>
+                    <mc-vertical-navbar-title>Some nested item</mc-vertical-navbar-title>
+                </mc-vertical-navbar-item>
+            </mc-vertical-navbar-item>
 
         </mc-vertical-navbar-item>
     </mc-vertical-navbar-container>

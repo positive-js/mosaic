@@ -2,27 +2,25 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    ContentChild,
     ElementRef,
     Input,
     OnDestroy,
     OnInit,
-    TemplateRef,
-    ViewChild,
     ViewEncapsulation,
     Directive,
-    HostBinding,
-    HostListener,
-    Output,
-    EventEmitter,
     ContentChildren,
     QueryList,
-    AfterContentInit
+    AfterContentInit,
+    SkipSelf,
+    Inject,
+    forwardRef,
+    Optional
 } from '@angular/core';
 import { FocusMonitor, FocusOrigin } from '@ptsecurity/cdk/a11y';
 import { SPACE } from '@ptsecurity/cdk/keycodes';
 import { Platform } from '@ptsecurity/cdk/platform';
 import { CanDisable, CanDisableCtor, mixinDisabled } from '@ptsecurity/mosaic/core';
+import { expandVerticalNavbarMenuAnimation } from '@ptsecurity/mosaic/vertical-navbar/vertical-navbar.animation';
 import { Observable, Subscription } from 'rxjs';
 
 
@@ -57,22 +55,6 @@ export class McVerticalNavbarItemIcon {
     @Input() icon: string;
 }
 
-@Component({
-    selector: 'mc-vertical-navbar-item-menu',
-    host: {
-        class: 'mc-vertical-navbar-item-menu'
-    },
-    template: `
-        <ng-content select="mc-vertical-navbar-item"></ng-content>
-    `
-})
-export class McVerticalNavbarItemMenu {
-    @Input() align: 'bottom' | 'top' = 'bottom';
-
-    @HostBinding('class.mc-vertical-navbar-item-menu-top') get top() { return this.align === 'top'; }
-    @HostBinding('class.mc-vertical-navbar-item-menu-bottom') get bottom() { return this.align !== 'top'; }
-}
-
 
 @Component({
     selector: MC_NAVBAR_ITEM,
@@ -84,35 +66,24 @@ export class McVerticalNavbarItemMenu {
     host: {
         '[attr.disabled]': 'disabled || null',
         '[attr.tabindex]': '-1'
-    }
+    },
+    animations: [
+        expandVerticalNavbarMenuAnimation()
+    ]
 })
 export class McVerticalNavbarItem extends _McNavbarMixinBase implements OnInit, AfterContentInit, OnDestroy, CanDisable {
 
-    @ContentChild(McVerticalNavbarItemMenu) menu: McVerticalNavbarItemMenu;
+    @Input() alignNestedItems: 'bottom' | 'top' | undefined = 'bottom';
+
+    animating = false;
+
     @ContentChildren(McVerticalNavbarItem) nestedItems: QueryList<McVerticalNavbarItem>;
 
     @Input()
     tabIndex: number = 0;
 
-    @Input()
-    dropdownItems: IMcNavbarDropdownItem[] = [];
-
-    @ContentChild('dropdownItemTmpl', { read: TemplateRef })
-    dropdownItemTmpl: TemplateRef<IMcNavbarDropdownItem>;
-
-    @ViewChild('dropdownContent', { read: ElementRef })
-    dropdownContent: ElementRef;
-
     get hasDropdownContent() {
-        // return this.dropdownItems.length > 0;
-        return !! this.menu;
-    }
-
-    @Output('chosen') chosen = new EventEmitter<string>();
-
-    @HostListener('click') handleClick(event) {
-        console.log('click');
-        this.chosen.emit('asdf');
+        return this.nestedItems && this.nestedItems.length > 1;
     }
 
     isCollapsed: boolean = true;
@@ -120,16 +91,13 @@ export class McVerticalNavbarItem extends _McNavbarMixinBase implements OnInit, 
     private _subscription: Subscription = new Subscription();
     private _focusMonitor$: Observable<FocusOrigin>;
 
-    private get _dropdownElements(): HTMLElement[] {
-        return this.dropdownContent ? this.dropdownContent.nativeElement.querySelectorAll('li > *') : [];
-    }
-
     constructor(
         public  elementRef: ElementRef,
         private _focusMonitor: FocusMonitor,
         private _platform: Platform,
         private _cdRef: ChangeDetectorRef,
-        // private _renderer: Renderer2
+        @Optional() @SkipSelf() @Inject(forwardRef(() => McVerticalNavbarItem))
+        private parent: McVerticalNavbarItem
     ) {
         super(elementRef);
 
@@ -138,10 +106,6 @@ export class McVerticalNavbarItem extends _McNavbarMixinBase implements OnInit, 
 
     ngOnInit() {
         this.denyClickIfDisabled();
-
-        if (this.hasDropdownContent) {
-            this.listenClickOutside();
-        }
     }
 
     ngAfterContentInit() {
@@ -149,25 +113,23 @@ export class McVerticalNavbarItem extends _McNavbarMixinBase implements OnInit, 
             return;
         }
 
-        this.startListenFocusDropdownItems();
+        if (this.hasDropdownContent) {
+            this.listenClickOutside();
+        }
     }
 
     ngOnDestroy() {
         this._subscription.unsubscribe();
         this._focusMonitor.stopMonitoring(this.elementRef.nativeElement);
-        this.stopListenFocusDropdownItems();
     }
 
-    isActiveDropdownLink(link: string): boolean {
-        if (!this._platform.isBrowser) {
-            return false;
-        }
-
-        return window.location.href.indexOf(link) >= 0;
-    }
 
     handleClickByItem() {
         this.toggleDropdown();
+
+        if (this.parent && ! this.hasDropdownContent) {
+            this.parent.forceCloseDropdown(true);
+        }
     }
 
     handleKeydown($event: KeyboardEvent) {
@@ -179,22 +141,11 @@ export class McVerticalNavbarItem extends _McNavbarMixinBase implements OnInit, 
         }
     }
 
-    handleClickByDropdownItem() {
-        this.forceCloseDropdown();
-    }
-
-    handleClickOnNestedItems(event) {
-        // console.log('chosen', event.target);
-        // this.forceCloseDropdown();
-        // this.emitEvent();
-    }
-
     private listenClickOutside() {
         this._subscription.add(
             this._focusMonitor$.subscribe((origin) => {
                 if (origin === null) {
-                    this.forceCloseDropdown();
-                    console.log('CLICK OUTSIDE');
+                    this.forceCloseDropdown(false);
                 }
             })
         );
@@ -204,31 +155,13 @@ export class McVerticalNavbarItem extends _McNavbarMixinBase implements OnInit, 
         this.isCollapsed = !this.isCollapsed;
     }
 
-    private forceCloseDropdown() {
+    private forceCloseDropdown(passToParent: boolean) {
         this.isCollapsed = true;
         this._cdRef.detectChanges();
-    }
 
-    private startListenFocusDropdownItems() {
-
-        console.log('start listening', this.nestedItems.length);
-
-        this.nestedItems.forEach((item) => {
-            console.log('start listening', item);
-            this._focusMonitor.monitor(item.elementRef.nativeElement, true);
-        });
-        // this._dropdownElements.forEach((el) => {
-        //     this._focusMonitor.monitor(el, true);
-        // });
-    }
-
-    private stopListenFocusDropdownItems() {
-        this.nestedItems.forEach((item) => {
-            this._focusMonitor.stopMonitoring(item.elementRef.nativeElement);
-        });
-        // this._dropdownElements.forEach((el) => {
-        //     this._focusMonitor.stopMonitoring(el);
-        // });
+        if (this.parent && passToParent) {
+            this.parent.forceCloseDropdown(passToParent);
+        }
     }
 
     // This method is required due to angular 2 issue https://github.com/angular/angular/issues/11200

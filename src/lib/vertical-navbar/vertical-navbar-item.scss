@@ -19,16 +19,12 @@
         pointer-events: none;
     }
 
-    &.mc-vertical-navbar-item-menu-top {
-        top: 0;
-    }
-
-    &.mc-vertical-navbar-item-menu-bottom {
-        bottom: 0;
-    }
-
     &.is-collapsed {
         display: none;
+    }
+
+    &.animating {
+        overflow: hidden;
     }
 }
 
