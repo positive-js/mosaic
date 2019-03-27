@@ -1,12 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { fakeAsync, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-
 import { SPACE } from '@ptsecurity/cdk/keycodes';
 import { createKeyboardEvent, createFakeEvent } from '@ptsecurity/cdk/testing';
 
 import { McIconModule } from './../icon/icon.module';
-import { McVerticalNavbarModule, McVerticalNavbar, IMcNavbarDropdownItem } from './index';
+import { McVerticalNavbarModule, McVerticalNavbar } from './index';
 
 
 const FONT_RENDER_TIMEOUT_MS = 10;
@@ -195,12 +194,6 @@ class TestApp {
 
     counter: number = 0;
     navbarContainerWidth: number = 915;
-
-    dropdownItems: IMcNavbarDropdownItem[] = [
-        { link: '#', text: 'Очень длинный список для проверки ширины' },
-        { link: '#', text: 'Общие сведения' },
-        { link: '#', text: 'Еще один пункт' }
-    ];
 
     onItemClick() {
         this.counter++;

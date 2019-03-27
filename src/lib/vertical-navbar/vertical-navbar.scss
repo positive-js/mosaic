@@ -1,4 +1,4 @@
-@import 'vertical-navbar-base';
+@import 'vertical-navbar-common';
 @import 'vertical-navbar-theme';
 
 
@@ -6,40 +6,33 @@
     margin-top: auto;
 }
 
-.mc-vertical-navbar-brand-title {
-    @extend %mc-navbar-item-base;
-
-    font-size: 20px;
-}
-
-
-mc-vertical-navbar {
-    display: flex;
-    align-items: stretch;
-}
-
 mc-vertical-navbar-logo {
     display: flex;
 }
 
 .mc-vertical-navbar {
-    @extend %mc-nav-bar-base;
 
-    height: unset;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 100%;
 
-    .title {
+    @extend %shadow;
+
+    .mc-vertical-navbar-header {
         display: flex;
-        justify-content: center;
+        width: 100%;
         align-items: center;
+        box-sizing: border-box;
 
         .collapse-button {
             cursor: pointer;
             display: flex;
+            flex: 0 0 auto;
             justify-content: center;
             align-items: center;
-
             width: 64px;
-            height: 64px;
 
             > i {
                 font-size: 32px;
@@ -49,17 +42,6 @@ mc-vertical-navbar-logo {
 
     &.animating {
         overflow: hidden;
-    }
-
-    // box-shadow over nested elements
-    &:before {
-        content: '';
-        display: block;
-        position: absolute;
-        top: 0; right: 0; bottom: 0; left: 0;
-        z-index: 5;
-        box-shadow: 2px 0px 2px 0 rgba(0, 0, 0, 0.25);
-        pointer-events: none;
     }
 }
 
@@ -71,10 +53,17 @@ mc-vertical-navbar-container {
 }
 
 mc-vertical-navbar-item, .mc-vertical-navbar-item, .mc-vertical-navbar-title, mc-vertical-navbar-item:first-child {
-    @extend %mc-navbar-item-base;
+
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-left: $mc-navbar-item-h-padding;
+    padding-right: $mc-navbar-item-h-padding;
+    background-color: transparent;
+    border: none;
 
     height: 64px;
-    margin: 4px 0;
+    margin: 1px 0;
     width: 100%;
 }
 
@@ -84,8 +73,13 @@ mc-vertical-navbar-item, .mc-vertical-navbar-item, .mc-vertical-navbar-title, mc
     font-size: 15px;
 }
 
-mc-vertical-navbar-brand, .mc-vertical-navbar-brand {
-    @extend %mc-navbar-brand-base;
+.mc-vertical-navbar-brand {
+    display: flex;
+    align-items: center;
+
+    .mc-vertical-navbar-title {
+        font-size: 20px;
+    }
 }
 
 .mc-vertical-navbar-item:not([disabled]) {

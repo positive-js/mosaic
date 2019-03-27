@@ -59,34 +59,6 @@
         $bg-lighten: 15%;
         background-color: lighten(mc-color($palette, 800), $bg-lighten);
     }
-
-    .mc-vertical-navbar-dropdown {
-        background-color: #fff;
-        border-color: mc-color($mc-grey, 300);
-        box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
-
-        &-link {
-            color: mc-color($mc-grey, 700);
-            outline: none;
-
-            &:hover {
-                background-color: $black-6-opacity;
-            }
-
-            &.cdk-focused {
-                border-color: mc-color($palette, 500);
-            }
-
-            &:active,
-            &.is-active {
-                background-color: mc-color($palette, 100);
-
-                &:hover::before {
-                    background-color: $black-6-opacity;
-                }
-            }
-        }
-    }
 }
 
 @mixin mc-vertical-navbar-theme($theme) {

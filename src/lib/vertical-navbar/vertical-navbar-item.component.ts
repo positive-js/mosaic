@@ -18,7 +18,6 @@ import {
 } from '@angular/core';
 import { FocusMonitor, FocusOrigin } from '@ptsecurity/cdk/a11y';
 import { SPACE } from '@ptsecurity/cdk/keycodes';
-import { Platform } from '@ptsecurity/cdk/platform';
 import { CanDisable, CanDisableCtor, mixinDisabled } from '@ptsecurity/mosaic/core';
 import { expandVerticalNavbarMenuAnimation } from '@ptsecurity/mosaic/vertical-navbar/vertical-navbar.animation';
 import { Observable, Subscription } from 'rxjs';
@@ -27,11 +26,6 @@ import { Observable, Subscription } from 'rxjs';
 export const MC_NAVBAR_ITEM = 'mc-vertical-navbar-item';
 export const MC_NAVBAR_ITEM_ICON = 'mc-vertical-navbar-item-icon';
 
-
-export interface IMcNavbarDropdownItem {
-    link?: string;
-    text: string;
-}
 
 export class McNavbarItemBase {
     constructor(public _elementRef: ElementRef) {}
@@ -92,9 +86,8 @@ export class McVerticalNavbarItem extends _McNavbarMixinBase implements OnInit, 
     private _focusMonitor$: Observable<FocusOrigin>;
 
     constructor(
-        public  elementRef: ElementRef,
+        private elementRef: ElementRef,
         private _focusMonitor: FocusMonitor,
-        private _platform: Platform,
         private _cdRef: ChangeDetectorRef,
         @Optional() @SkipSelf() @Inject(forwardRef(() => McVerticalNavbarItem))
         private parent: McVerticalNavbarItem
@@ -122,7 +115,6 @@ export class McVerticalNavbarItem extends _McNavbarMixinBase implements OnInit, 
         this._subscription.unsubscribe();
         this._focusMonitor.stopMonitoring(this.elementRef.nativeElement);
     }
-
 
     handleClickByItem() {
         this.toggleDropdown();
