@@ -1,6 +1,5 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,9 +17,6 @@ import { McVerticalNavbarModule } from '../../lib/vertical-navbar/';
     encapsulation: ViewEncapsulation.None
 })
 export class VerticalNavbarDemoComponent {
-
-    stubText = Array(100).fill('asdf a asdf as asdfasdfa ').join('');
-
     onItemClick(event: MouseEvent) {
         alert(`innerText: ${(<HTMLElement> event.target).innerText}`);
     }

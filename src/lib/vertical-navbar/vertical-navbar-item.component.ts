@@ -51,7 +51,7 @@ export class McVerticalNavbarItemIcon {
 
 
 @Component({
-    selector: `a[mc-vertical-navbar-item], ${MC_NAVBAR_ITEM}`,
+    selector: `a[${MC_NAVBAR_ITEM}], ${MC_NAVBAR_ITEM}`,
     templateUrl: './vertical-navbar-item.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -69,7 +69,18 @@ export class McVerticalNavbarItem extends _McVerticalNavbarMixinBase implements 
 
     @Input() alignNestedItems: 'bottom' | 'top' | undefined = 'bottom';
 
-    animating = false;
+    animating: boolean = false;
+
+    get expanded(): boolean {
+        return this._expanded;
+    }
+    set expanded(value: boolean) {
+        this._expanded = value;
+        this.animating = true;
+        this._cdRef.detectChanges();
+        console.log('expanded', value);
+    }
+    private _expanded: boolean = false;
 
     @ContentChildren(McVerticalNavbarItem) nestedItems: QueryList<McVerticalNavbarItem>;
 
@@ -79,8 +90,6 @@ export class McVerticalNavbarItem extends _McVerticalNavbarMixinBase implements 
     get hasDropdownContent() {
         return this.nestedItems && this.nestedItems.length > 1;
     }
-
-    isCollapsed: boolean = true;
 
     private _subscription: Subscription = new Subscription();
     private _focusMonitor$: Observable<FocusOrigin>;
@@ -144,16 +153,17 @@ export class McVerticalNavbarItem extends _McVerticalNavbarMixinBase implements 
     }
 
     private toggleDropdown() {
-        this.isCollapsed = !this.isCollapsed;
+        this.expanded = ! this.expanded;
     }
 
     private forceCloseDropdown(passToParent: boolean) {
-        this.isCollapsed = true;
-        this._cdRef.detectChanges();
+        this.expanded = false;
 
         if (this.parent && passToParent) {
             this.parent.forceCloseDropdown(passToParent);
         }
+
+        this._cdRef.detectChanges();
     }
 
     // This method is required due to angular 2 issue https://github.com/angular/angular/issues/11200

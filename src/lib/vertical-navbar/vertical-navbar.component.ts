@@ -74,6 +74,15 @@ export class McVerticalNavbarContainer {
     ]
 })
 export class McVerticalNavbar {
-    expanded: boolean = false;
+
     animating: boolean = false;
+
+    get expanded(): boolean {
+        return this._expanded;
+    }
+    set expanded(value: boolean) {
+        this._expanded = value;
+        this.animating = true;
+    }
+    private _expanded: boolean = false;
 }

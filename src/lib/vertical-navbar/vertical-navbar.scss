@@ -40,7 +40,11 @@ mc-vertical-navbar-logo {
         }
     }
 
-    &.animating {
+    &.mc-vertical-navbar-collapsing {
+        overflow: hidden;
+    }
+
+    &.mc-vertical-navbar-collapsed {
         overflow: hidden;
     }
 }

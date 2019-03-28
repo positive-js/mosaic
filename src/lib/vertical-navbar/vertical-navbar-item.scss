@@ -8,15 +8,15 @@
     position: absolute;
     left: 100%;
 
-    // box-shadow over nested elements
     @extend %shadow;
 
-    &.is-collapsed {
+    &.mc-vertical-navbar-item-menu-collapsed {
         display: none;
     }
 
-    &.animating {
+    &.mc-vertical-navbar-item-menu-collapsing {
         overflow: hidden;
+        tab-index: -1;
     }
 }
 
@@ -57,7 +57,7 @@ a[mc-vertical-navbar-item] {
     text-decoration: none;
 }
 
-a[mc-vertical-navbar-item], mc-vertical-navbar-item, mc-vertical-navbar-brand, .mc-vertical-navbar-item .mc-vertical-navbar-title {
+a[mc-vertical-navbar-item], mc-vertical-navbar-item, .mc-vertical-navbar-item .mc-vertical-navbar-title {
     padding: 0;
 }
 
