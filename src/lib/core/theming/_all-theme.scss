@@ -3,6 +3,7 @@
 @import '../styles/badges';
 @import '../styles/alerts';
 @import '../../button/button-theme';
+@import '../../button-toggle/button-toggle-theme';
 @import '../../card/card-theme';
 @import '../../checkbox/checkbox-theme';
 @import '../../datepicker/datepicker-theme';
@@ -39,6 +40,7 @@
     @include mc-alert-theme($theme);
     @include mc-badge-theme($theme);
     @include mc-button-theme($theme);
+    @include mc-button-toggle-theme($theme);
     @include mc-card-theme($theme);
     @include mc-datepicker-theme($theme);
     @include mc-dropdown-theme($theme);

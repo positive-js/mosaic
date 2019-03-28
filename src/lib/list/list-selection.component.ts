@@ -232,7 +232,7 @@ export const _McListSelectionMixinBase: CanDisableCtor & typeof McListSelectionB
         class: 'mc-list-selection',
         '[tabIndex]': 'tabIndex',
         '(focus)': 'focus()',
-        '(blur)': '_onTouched()',
+        '(blur)': 'onTouched()',
         '(keydown)': '_onKeyDown($event)',
         '(window:resize)': 'updateScrollSize()'
     },
