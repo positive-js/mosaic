@@ -10,29 +10,41 @@
         background-color: mc-color($palette, 700);
     }
 
-    mc-vertical-navbar-item.mc-vertical-navbar-item-active {
-        $active-lighten: 5%;
-        background-color: lighten(mc-color($palette, 700), $active-lighten)
-    }
+    mc-vertical-navbar-item, a[mc-vertical-navbar-item] {
 
-    mc-vertical-navbar-item[disabled] {
-        > mc-vertical-navbar-title, .mc-vertical-navbar-title, [mc-icon] {
-            opacity: 0.3;
-        }
-    }
-
-    mc-vertical-navbar-item, .mc-vertical-navbar-item, .mc-vertical-navbar-title {
-        color: mc-color($palette, 100);
-    }
-
-    mc-vertical-navbar-item, .mc-vertical-navbar-item {
         outline: 0;
+        color: mc-color($palette, 100);
+
+        &.mc-vertical-navbar-item-active {
+            $active-lighten: 5%;
+            background-color: lighten(mc-color($palette, 700), $active-lighten)
+        }
+
+        &[disabled] {
+            > mc-vertical-navbar-title, .mc-vertical-navbar-title, [mc-icon] {
+                opacity: 0.3;
+            }
+        }
 
         &.cdk-focused {
             > .mc-vertical-navbar-item {
                 outline: 0;
             }
         }
+
+        &:hover:not([disabled]):not(.mc-progress) {
+            $hover-lighten: 5%;
+            background-color: lighten(mc-color($palette, 700), $hover-lighten)
+        }
+
+        &.mc-progress:hover:not([disabled]) {
+            $bg-lighten: 15%;
+            background-color: lighten(mc-color($palette, 800), $bg-lighten);
+        }
+    }
+
+    .mc-vertical-navbar-title {
+        color: mc-color($palette, 100);
     }
 
     mc-vertical-navbar-item:not([disabled]), .mc-vertical-navbar-item:not([disabled]) {
@@ -48,16 +60,6 @@
                 outline: 0;
             }
         }
-    }
-
-    mc-vertical-navbar-item:hover:not([disabled]):not(.mc-progress) {
-        $hover-lighten: 5%;
-        background-color: lighten(mc-color($palette, 700), $hover-lighten)
-    }
-
-    mc-vertical-navbar-item.mc-progress:hover:not([disabled]) {
-        $bg-lighten: 15%;
-        background-color: lighten(mc-color($palette, 800), $bg-lighten);
     }
 }
 

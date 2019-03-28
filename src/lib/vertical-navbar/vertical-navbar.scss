@@ -81,21 +81,3 @@ mc-vertical-navbar-item, .mc-vertical-navbar-item, .mc-vertical-navbar-title, a[
         font-size: 20px;
     }
 }
-
-.mc-vertical-navbar-item:not([disabled]) {
-    cursor: pointer;
-}
-
-a[mc-vertical-navbar-item], mc-vertical-navbar-item, mc-vertical-navbar-brand, .mc-vertical-navbar-item .mc-vertical-navbar-title {
-    padding: 0;
-}
-
-mc-vertical-navbar-item.mc-progress:not([disabled]) {
-    cursor: pointer;
-}
-
-mc-vertical-navbar-item[disabled] .mc-vertical-navbar-item, .mc-vertical-navbar-item[disabled] {
-    /*It is controversially. Works fine but cannot be tested*/
-    /*pointer-events: none;*/
-    cursor: default;
-}

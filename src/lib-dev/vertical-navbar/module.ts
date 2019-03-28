@@ -18,6 +18,9 @@ import { McVerticalNavbarModule } from '../../lib/vertical-navbar/';
     encapsulation: ViewEncapsulation.None
 })
 export class VerticalNavbarDemoComponent {
+
+    stubText = Array(100).fill('asdf a asdf as asdfasdfa ').join('');
+
     onItemClick(event: MouseEvent) {
         alert(`innerText: ${(<HTMLElement> event.target).innerText}`);
     }
@@ -31,7 +34,7 @@ export class VerticalNavbarDemoComponent {
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
-        RouterModule.forRoot([]),
+        RouterModule.forRoot([{path: 'dummy', children: []}, {path: 'gummy', children: []}]),
         McVerticalNavbarModule,
         McButtonModule,
         McIconModule

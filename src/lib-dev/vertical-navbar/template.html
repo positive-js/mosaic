@@ -19,11 +19,6 @@
         <mc-vertical-navbar-title>Simple item with icon</mc-vertical-navbar-title>
     </mc-vertical-navbar-item>
 
-    <a mc-vertical-navbar-item href="" routerLink fragment="some-anchor" routerLinkActive="mc-vertical-navbar-item-active">
-        <mc-vertical-navbar-item-icon><i mc-icon="mc-gear_16"></i></mc-vertical-navbar-item-icon>
-        <mc-vertical-navbar-title>Link item</mc-vertical-navbar-title>
-    </a>
-
     <mc-vertical-navbar-item class="mc-vertical-navbar-item-active" (click)="onItemClick($event)">
         <mc-vertical-navbar-item-icon><i mc-icon="mc-info_16"></i></mc-vertical-navbar-item-icon>
         <mc-vertical-navbar-title>Simple but active</mc-vertical-navbar-title>
@@ -43,6 +38,16 @@
         <mc-vertical-navbar-item-icon><i mc-icon="mc-folder-opened_16"></i></mc-vertical-navbar-item-icon>
         <mc-vertical-navbar-title>Disabled in-progress</mc-vertical-navbar-title>
     </mc-vertical-navbar-item>
+
+    <a mc-vertical-navbar-item href="" routerLink="/dummy" routerLinkActive="mc-vertical-navbar-item-active">
+        <mc-vertical-navbar-item-icon><i mc-icon="mc-play_16"></i></mc-vertical-navbar-item-icon>
+        <mc-vertical-navbar-title>Some link item</mc-vertical-navbar-title>
+    </a>
+
+    <a mc-vertical-navbar-item href="" routerLink="/gummy" routerLinkActive="mc-vertical-navbar-item-active">
+        <mc-vertical-navbar-item-icon><i mc-icon="mc-play_16"></i></mc-vertical-navbar-item-icon>
+        <mc-vertical-navbar-title>Another Link item</mc-vertical-navbar-title>
+    </a>
 
 
     <mc-vertical-navbar-container position="bottom">
@@ -93,35 +98,11 @@
         </mc-vertical-navbar-item>
     </mc-vertical-navbar-container>
 
-    <!--<mc-vertical-navbar-item class="cdk-focused" (click)="onItemClick($event)">-->
-        <!--<div mc-dropdown>-->
-            <!--<span class="dropdown-text">focused</span>-->
-            <!--<i mc-icon="mc-angle-down-M_16"></i>-->
-        <!--</div>-->
-    <!--</mc-vertical-navbar-item>-->
-
 </mc-vertical-navbar>
 
 <div class="content">
-    <div *ngFor="let i of [1, 2, 3, 4, 5]">
-asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
-asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf
+    <div *ngFor="let i of [1, 2, 3, 4]">
+        {{stubText}}
     </div>
 </div>
 

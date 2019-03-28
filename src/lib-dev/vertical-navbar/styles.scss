@@ -4,7 +4,6 @@
 @import '../../lib/core/theming/prebuilt/dark-theme';
 
 body {
-    // this is just to get rid of default Chrome margins
     margin: 0;
 }
 
@@ -15,13 +14,14 @@ body {
 }
 
 .content {
-    //background: rgba(128, 128, 255, 0.25);
     display: flex;
     flex-wrap: wrap;
     margin: 16px;
 
     div {
-        flex: 1 1 50%;
+        flex: 1 1 30%;
+        min-width: 500px;
+        box-sizing: border-box;
         margin: 8px;
         padding: 8px;
         background: rgba(128, 128, 255, 0.25);
