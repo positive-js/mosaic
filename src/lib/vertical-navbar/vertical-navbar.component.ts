@@ -4,7 +4,7 @@ import { expandVerticalNavbarAnimation } from '@ptsecurity/mosaic/vertical-navba
 
 const MC_NAVBAR = 'mc-vertical-navbar';
 const MC_NAVBAR_CONTAINER = 'mc-vertical-navbar-container';
-const MC_NAVBAR_BRAND = 'mc-vertical-navbar-brand';
+const MC_NAVBAR_HEADER = 'mc-vertical-navbar-header';
 const MC_NAVBAR_TITLE = 'mc-vertical-navbar-title';
 const MC_NAVBAR_LOGO = 'mc-vertical-navbar-logo';
 const MC_NAVBAR_ITEM_BADGE = 'mc-vertical-navbar-badge';
@@ -34,9 +34,9 @@ export class McVerticalNavbarLogo {}
 export class McVerticalNavbarItemBadge {}
 
 @Directive({
-    selector: MC_NAVBAR_BRAND,
+    selector: `${MC_NAVBAR_HEADER}, [${MC_NAVBAR_HEADER}]`,
     host: {
-        class: MC_NAVBAR_BRAND
+        class: MC_NAVBAR_HEADER
     }
 })
 export class McVerticalNavbarBrand {}

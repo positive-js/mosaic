@@ -9,8 +9,16 @@
             <i mc-icon="mc-hamburger_16" *ngIf="! expanded" (click)="expanded = ! expanded"></i>
             <i mc-icon="mc-close-L_16" *ngIf="expanded" (click)="expanded = ! expanded"></i>
         </div>
-        <ng-content select="mc-vertical-navbar-brand"></ng-content>
+        <ng-content select="
+            mc-vertical-navbar-header,
+            a[mc-vertical-navbar-header]
+        "></ng-content>
     </div>
 
-    <ng-content select="mc-vertical-navbar-item, a[mc-vertical-navbar-item], [mc-vertical-navbar-container], mc-vertical-navbar-container"></ng-content>
+    <ng-content select="
+        mc-vertical-navbar-item,
+        a[mc-vertical-navbar-item],
+        [mc-vertical-navbar-container],
+        mc-vertical-navbar-container
+    "></ng-content>
 </nav>

@@ -70,14 +70,10 @@ mc-vertical-navbar-item, .mc-vertical-navbar-item, .mc-vertical-navbar-title, a[
 .mc-vertical-navbar-title {
     white-space: nowrap;
     padding: 0 16px;
-    font-size: 15px;
 }
 
-.mc-vertical-navbar-brand {
+.mc-vertical-navbar-header {
     display: flex;
     align-items: center;
-
-    .mc-vertical-navbar-title {
-        font-size: 20px;
-    }
+    text-decoration: none;
 }

@@ -2,7 +2,7 @@
 
 <mc-vertical-navbar>
 
-    <mc-vertical-navbar-brand>
+    <a mc-vertical-navbar-header routerLink="/">
         <mc-vertical-navbar-logo>
             <svg class="logo" height="32" viewBox="0 0 32 32" width="32" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" fill-rule="evenodd">
@@ -12,7 +12,7 @@
             </svg>
         </mc-vertical-navbar-logo>
         <mc-vertical-navbar-title>Application Inspector</mc-vertical-navbar-title>
-    </mc-vertical-navbar-brand>
+    </a>
 
     <mc-vertical-navbar-item>
         <mc-vertical-navbar-item-icon><i mc-icon="mc-gear_16"></i></mc-vertical-navbar-item-icon>
@@ -101,9 +101,7 @@
 </mc-vertical-navbar>
 
 <div class="content">
-    <div *ngFor="let i of [1, 2, 3, 4]">
-        {{stubText}}
-    </div>
+    <div *ngFor="let i of [1, 2, 3, 4]"></div>
 </div>
 
 </div>
