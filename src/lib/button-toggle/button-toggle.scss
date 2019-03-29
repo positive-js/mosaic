@@ -14,7 +14,7 @@ $mc-button-border-radius: 3px;
     display: flex;
     flex-direction: row;
 
-    :not(.mc-button-toggle-vertical) {
+    &:not(.mc-button-toggle-vertical) {
         .mc-button-toggle:not([disabled]) + .mc-button-toggle:not([disabled]) {
             margin-left: -$mc-button-border-size;
         }
@@ -60,7 +60,6 @@ $mc-button-border-radius: 3px;
         }
 
         &:first-child:not(:last-child) {
-
             > .mc-button,
             > .mc-icon-button {
                 @include border-bottom-radius(0);
@@ -86,165 +85,3 @@ $mc-button-border-radius: 3px;
         }
     }
 }
-/*
-.mc-button-toggle-standalone,
-.mc-button-toggle-group {
-    position: relative;
-    display: inline-flex;
-    flex-direction: row;
-    white-space: nowrap;
-    overflow: hidden;
-    border-radius: $mc-button-toggle-standard-border-radius;
-    -webkit-tap-highlight-color: transparent;
-
-    @include cdk-high-contrast {
-        outline: solid 1px;
-    }
-}
-
-.mc-button-toggle-standalone {
-    border-radius: $mc-button-toggle-standard-border-radius;
-
-    @include cdk-high-contrast {
-        outline: 0;
-    }
-}
-
-.mc-button-toggle-vertical {
-    flex-direction: column;
-
-    .mc-button-toggle-label-content {
-        // Vertical button toggles shouldn't be an inline-block, because the toggles should
-        // fill the available width in the group.
-        display: block;
-    }
-}
-
-.mc-button-toggle {
-    white-space: nowrap;
-    position: relative;
-
-    // Fixes SVG icons that get thrown off because of the `vertical-align` on the parent.
-    .mc-icon svg {
-        vertical-align: top;
-    }
-
-    &.cdk-keyboard-focused {
-        .mc-button-toggle-focus-overlay {
-            opacity: 1;
-
-            // In high contrast mode `opacity: 1` will show the overlay as solid so we fall back 0.5.
-            @include cdk-high-contrast {
-                opacity: 0.5;
-            }
-        }
-    }
-}
-
-.mc-button-toggle {
-    &:not(.mc-button-toggle-disabled):hover .mc-button-toggle-focus-overlay {
-        opacity: 0.04;
-    }
-
-    // Similar to components like the checkbox, slide-toggle and radio, we cannot show the focus
-    // overlay for `.cdk-program-focused` because mouse clicks on the <label> element would be always
-    // treated as programmatic focus. Note that it needs the extra `:not` in order to have more
-    // specificity than the `:hover` above.
-    &.cdk-keyboard-focused:not(.mc-button-toggle-disabled) .mc-button-toggle-focus-overlay {
-        opacity: 0.12;
-
-        @include cdk-high-contrast {
-            opacity: 0.5;
-        }
-    }
-
-    // On touch devices the hover state will linger on the element after the user has tapped.
-    // Disable it, because it can be confused with focus. We target the :hover state explicitly,
-    // because we still want to preserve the keyboard focus state for hybrid devices that have
-    // a keyboard and a touchscreen.
-    @media (hover: none) {
-        &:not(.mc-button-toggle-disabled):hover .mc-button-toggle-focus-overlay {
-            display: none;
-        }
-    }
-}
-
-.mc-button-toggle-label-content {
-    @include user-select(none);
-    display: inline-block;
-    line-height: $mc-button-toggle-standard-height;
-    padding: $mc-button-toggle-standard-padding;
-
-    // Prevents IE from shifting the content on click.
-    position: relative;
-}
-
-.mc-button-toggle-label-content > * {
-    vertical-align: middle;
-}
-
-// Overlay to be used as a tint.
-.mc-button-toggle-focus-overlay {
-    border-radius: inherit;
-
-    // Disable pointer events to prevent it from hijacking user events.
-    pointer-events: none;
-    opacity: 0;
-    @include mc-fill;
-
-    .mc-button-toggle-checked & {
-        border-bottom: solid $mc-button-toggle-standard-height;
-
-        // Changing the background color for the selected item won't be visible in high contrast mode.
-        // We fall back to using the overlay to draw a brighter, semi-transparent tint on top instead.
-        // It uses a border, because the browser will render it using a brighter color.
-        @include cdk-high-contrast {
-            opacity: 0.5;
-            height: 0;
-        }
-    }
-}
-
-@include cdk-high-contrast {
-    .mc-button-toggle-checked {
-        &.mc-button-toggle-focus-overlay {
-            border-bottom: solid $mc-button-toggle-standard-height;
-        }
-    }
-}
-
-// Increase specificity because ripple styles are part of the `mc-core` mixin and can
-// potentially overwrite the absolute position of the container.
-.mc-button-toggle .mc-button-toggle-ripple {
-    @include mc-fill;
-
-    // Disable pointer events for the ripple container, because the container will overlay the user
-    // content and we don't want to prevent mouse clicks that should toggle the state.
-    // Pointer events can be safely disabled because the ripple trigger element is the label element.
-    pointer-events: none;
-}
-
-.mc-button-toggle-button {
-   !* border: 0;
-    background: none;
-    color: inherit;
-    padding: 0;
-    margin: 0;
-    font: inherit;
-    outline: none;
-    width: 100%; // Stretch the button in case the consumer set a custom width.
-    cursor: pointer;
-
-    .mc-button-toggle-disabled & {
-        cursor: default;
-    }
-
-    // Remove the extra focus outline that is added by Firefox on native buttons.
-    &::-moz-focus-inner {
-        border: 0;
-    }*!
-    @extend %mc-button-base;
-
-    @include mc-button-size($mc-button-padding, $mc-button-line-height, $mc-button-font);
-}
-*/

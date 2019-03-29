@@ -1,6 +1,5 @@
 import {
     AfterContentInit,
-    Attribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -15,13 +14,14 @@ import {
     Optional,
     Output,
     QueryList,
-    ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    ContentChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import { SelectionModel } from '@ptsecurity/cdk/collections';
+import { McButton, McIconButton } from '@ptsecurity/mosaic/button';
 
 
 /** Acceptable types for a button toggle. */
@@ -38,8 +38,6 @@ export const MC_BUTTON_TOGGLE_GROUP_VALUE_ACCESSOR: any = {
     multi: true
 };
 
-let uniqueIdCounter = 0;
-
 /** Change event object emitted by MсButtonToggle. */
 export class McButtonToggleChange {
     constructor(
@@ -53,35 +51,15 @@ export class McButtonToggleChange {
 /** Exclusive selection button toggle group that behaves like a radio-button group. */
 @Directive({
     selector: 'mc-button-toggle-group',
-    providers: [
-        MC_BUTTON_TOGGLE_GROUP_VALUE_ACCESSOR
-    ],
+    providers: [MC_BUTTON_TOGGLE_GROUP_VALUE_ACCESSOR],
     host: {
         role: 'group',
         class: 'mc-button-toggle-group',
-        '[attr.aria-disabled]': 'disabled',
         '[class.mc-button-toggle-vertical]': 'vertical'
     },
     exportAs: 'mcButtonToggleGroup'
 })
 export class McButtonToggleGroup implements ControlValueAccessor, OnInit, AfterContentInit {
-
-    /** `name` attribute for the underlying `input` element. */
-    @Input()
-    get name(): string {
-        return this._name;
-    }
-
-    set name(value: string) {
-        this._name = value;
-
-        if (this.buttonToggles) {
-            this.buttonToggles.forEach((toggle) => {
-                toggle.name = this._name;
-                toggle.markForCheck();
-            });
-        }
-    }
 
     /** Whether the toggle group is vertical. */
     @Input()
@@ -127,6 +105,9 @@ export class McButtonToggleGroup implements ControlValueAccessor, OnInit, AfterC
         this._multiple = coerceBooleanProperty(value);
     }
 
+    /** Child button toggle buttons. */
+    @ContentChildren(forwardRef(() => McButtonToggle)) buttonToggles: QueryList<McButtonToggle>;
+
     /** Whether multiple button toggle group is disabled. */
     @Input()
     get disabled(): boolean {
@@ -136,13 +117,15 @@ export class McButtonToggleGroup implements ControlValueAccessor, OnInit, AfterC
     set disabled(value: boolean) {
         this._disabled = coerceBooleanProperty(value);
 
-        if (this.buttonToggles) {
-            this.buttonToggles.forEach((toggle) => toggle.markForCheck());
+        if (!this.buttonToggles) {
+            return;
         }
-    }
 
-    /** Child button toggle buttons. */
-    @ContentChildren(forwardRef(() => McButtonToggle)) buttonToggles: QueryList<McButtonToggle>;
+        this.buttonToggles.forEach((toggle) => {
+            toggle.disabled = this._disabled;
+            toggle.markForCheck();
+        });
+    }
 
     /**
      * Event that emits whenever the value of the group changes.
@@ -167,10 +150,7 @@ export class McButtonToggleGroup implements ControlValueAccessor, OnInit, AfterC
      */
     private rawValue: any;
 
-    private _name = `mc-button-toggle-group-${uniqueIdCounter++}`;
-
-    constructor(private _changeDetector: ChangeDetectorRef) {
-    }
+    constructor(private _changeDetector: ChangeDetectorRef) {}
 
     /**
      * The method to be called in order to update ngModel.
@@ -189,6 +169,7 @@ export class McButtonToggleGroup implements ControlValueAccessor, OnInit, AfterC
 
     ngAfterContentInit() {
         this.selectionModel.select(...this.buttonToggles.filter((toggle) => toggle.checked));
+        this.disabled = this._disabled;
     }
 
     /**
@@ -314,30 +295,24 @@ export class McButtonToggleGroup implements ControlValueAccessor, OnInit, AfterC
 /** Single button inside of a toggle group. */
 @Component({
     selector: 'mc-button-toggle',
-    templateUrl: 'button-toggle.html',
+    template: `<ng-content></ng-content>`,
     styleUrls: ['button-toggle.css'],
     encapsulation: ViewEncapsulation.None,
     exportAs: 'mcButtonToggle',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    inputs: ['disableRipple'],
     host: {
         '[class.mc-button-toggle-standalone]': '!buttonToggleGroup',
         '[class.mc-button-toggle-checked]': 'checked',
-        '[class.mc-button-toggle-disabled]': 'disabled',
         class: 'mc-button-toggle',
         // Always reset the tabindex to -1 so it doesn't conflict with the one on the `button`,
         // but can still receive focus from things like cdkFocusInitial.
         '[attr.tabindex]': '-1',
-        '[attr.id]': 'id',
-        '(focus)': 'focus()'
+        '[attr.disabled]': 'disabled || null',
+        '(focus)': 'focus()',
+        '(click)': 'onToggleClick()'
     }
 })
 export class McButtonToggle implements OnInit, OnDestroy {
-
-    /** Unique ID for the underlying `button` element. */
-    get buttonId(): string {
-        return `${this.id}-button`;
-    }
 
     /** Whether the button is checked. */
     @Input()
@@ -355,90 +330,69 @@ export class McButtonToggle implements OnInit, OnDestroy {
                 this.buttonToggleGroup.syncButtonToggle(this, this._checked);
             }
 
-            this._changeDetectorRef.markForCheck();
+            this.changeDetectorRef.markForCheck();
         }
     }
 
-    /** Whether the button is disabled. */
-    @Input()
-    get disabled(): boolean {
-        return this._disabled || (this.buttonToggleGroup && this.buttonToggleGroup.disabled);
-    }
-
-    set disabled(value: boolean) {
-        this._disabled = coerceBooleanProperty(value);
-    }
-
-    /**
-     * Attached to the aria-label attribute of the host element. In most cases, arial-labelledby will
-     * take precedence so this may be omitted.
-     */
-    @Input('aria-label') ariaLabel: string;
-
-    /**
-     * Users can specify the `aria-labelledby` attribute which will be forwarded to the input element
-     */
-    @Input('aria-labelledby') ariaLabelledby: string | null = null;
-
-    /** Type of the button toggle. Either 'radio' or 'checkbox'. */
-        // tslint:disable-next-line:no-reserved-keywords
+    // tslint:disable-next-line:no-reserved-keywords
     type: ToggleType;
-
-    @ViewChild('button') buttonElement: ElementRef<HTMLButtonElement>;
 
     /** The parent button toggle group (exclusive selection). Optional. */
     buttonToggleGroup: McButtonToggleGroup;
 
-    /** The unique ID for this button toggle. */
-    @Input() id: string;
+    @ContentChild(McButton) mcButton: McButton;
 
-    /** HTML's 'name' attribute used to group radios for unique selection. */
-    @Input() name: string;
+    @ContentChild(McIconButton) mcIconsButton: McIconButton;
 
     /** McButtonToggleGroup reads this to assign its own value. */
     @Input() value: any;
-
-    /** Tabindex for the toggle. */
-    @Input() tabIndex: number | null;
 
     /** Event emitted when the group value changes. */
     @Output() readonly change: EventEmitter<McButtonToggleChange> =
         new EventEmitter<McButtonToggleChange>();
 
+    get disabled() {
+        return this.commonButton &&
+            this.commonButton.disabled;
+    }
+
+    set disabled(value: boolean) {
+        if (this.commonButton) {
+            this.commonButton.disabled = value;
+        }
+    }
+
+    private get commonButton(): McButton | McIconButton {
+        return this.mcButton || this.mcIconsButton;
+    }
+
     private isSingleSelector = false;
     private _checked = false;
 
-    private _disabled: boolean = false;
-
-    constructor(@Optional() toggleGroup: McButtonToggleGroup,
-                private _changeDetectorRef: ChangeDetectorRef,
-                private _focusMonitor: FocusMonitor,
-                @Attribute('tabindex') defaultTabIndex: string) {
-        const parsedTabIndex = Number(defaultTabIndex);
-        this.tabIndex = (parsedTabIndex || parsedTabIndex === 0) ? parsedTabIndex : null;
+    constructor(
+        @Optional() toggleGroup: McButtonToggleGroup,
+        private changeDetectorRef: ChangeDetectorRef,
+        private focusMonitor: FocusMonitor,
+        private element: ElementRef
+    ) {
         this.buttonToggleGroup = toggleGroup;
     }
 
     ngOnInit() {
         this.isSingleSelector = this.buttonToggleGroup && !this.buttonToggleGroup.multiple;
         this.type = this.isSingleSelector ? 'radio' : 'checkbox';
-        this.id = this.id || `mc-button-toggle-${uniqueIdCounter++}`;
-
-        if (this.isSingleSelector) {
-            this.name = this.buttonToggleGroup.name;
-        }
 
         if (this.buttonToggleGroup && this.buttonToggleGroup.isPrechecked(this)) {
             this.checked = true;
         }
 
-        this._focusMonitor.monitor(this.buttonElement.nativeElement, true);
+        this.focusMonitor.monitor(this.element.nativeElement, true);
     }
 
     ngOnDestroy() {
         const group = this.buttonToggleGroup;
 
-        this._focusMonitor.stopMonitoring(this.buttonElement.nativeElement);
+        this.focusMonitor.stopMonitoring(this.element.nativeElement);
 
         // Remove the toggle from the selection once it's destroyed. Needs to happen
         // on the next tick in order to avoid "changed after checked" errors.
@@ -449,11 +403,15 @@ export class McButtonToggle implements OnInit, OnDestroy {
 
     /** Focuses the button. */
     focus(): void {
-        this.buttonElement.nativeElement.focus();
+        this.element.nativeElement.focus();
     }
 
     /** Checks the button toggle due to an interaction with the underlying native button. */
-    onButtonClick() {
+    onToggleClick() {
+        if (this.disabled) {
+            return;
+        }
+
         const newChecked = this.isSingleSelector ? true : !this._checked;
 
         if (newChecked !== this._checked) {
@@ -475,6 +433,6 @@ export class McButtonToggle implements OnInit, OnDestroy {
     markForCheck() {
         // When the group value changes, the button will not be notified.
         // Use `markForCheck` to explicit update button toggle's status.
-        this._changeDetectorRef.markForCheck();
+        this.changeDetectorRef.markForCheck();
     }
 }

@@ -1,76 +1,122 @@
 <div>
-    <button mc-icon-button color="primary" disabled><i mc-icon="mc-play_16"></i>disabled</button>&nbsp;
-
-    <br>
-    <br>
-
-    <button mc-icon-button>
-        <i mc-icon="mc-play_16"></i>
-        default
-        <i mc-icon="mc-angle-down-L_16"></i>
-    </button>&nbsp;
-
-    <br>
-    <br>
-
-    <span class="mc-button-group">
-        <button mc-button>default</button>
-        <button mc-button disabled>default</button>
-        <button mc-button>default</button>
-        <button mc-icon-button><i mc-icon="mc-angle-down-L_16"></i></button>
-    </span>
-
-    <br>
-
+    <label>Horizontal Group</label>
     <mc-button-toggle-group #group1="mcButtonToggleGroup">
-        <mc-button-toggle value="left" aria-label="Play">
-            <i mc-icon="mc-play_16"></i> Play
+        <mc-button-toggle value="1">
+            <button mc-button>default</button>
         </mc-button-toggle>
-        <mc-button-toggle value="center" aria-label="Pause">
-            <i mc-icon="mc-pause_16"></i> Pause
+        <mc-button-toggle value="2">
+            <button mc-button>default</button>
         </mc-button-toggle>
-        <mc-button-toggle value="right" aria-label="Stop">
-            <i mc-icon="mc-stop_16"></i> Stop
+        <mc-button-toggle value="3">
+            <button mc-button>default</button>
         </mc-button-toggle>
-        <mc-button-toggle value="justify" disabled aria-label="Clock">
-            <i mc-icon="mc-clock_16"></i> Clock
+        <mc-button-toggle value="4">
+            <button mc-button disabled>default</button>
+        </mc-button-toggle>
+        <mc-button-toggle value="5">
+            <button mc-icon-button><i mc-icon="mc-angle-down-L_16"></i></button>
+        </mc-button-toggle>
+        <mc-button-toggle value="6">
+            <button mc-button>default</button>
+        </mc-button-toggle>
+        <mc-button-toggle value="7">
+            <button mc-icon-button><i mc-icon="mc-angle-down-L_16"></i></button>
         </mc-button-toggle>
     </mc-button-toggle-group>
     <div class="example-selected-value">Selected value: {{group1.value}}</div>
 
     <br>
 
-    <mc-button-toggle-group #group2="mcButtonToggleGroup">
-        <mc-button-toggle value="left" aria-label="Play">
-            default
-        </mc-button-toggle>
-        <mc-button-toggle value="center" disabled aria-label="Pause">
-            default
-        </mc-button-toggle>
-        <mc-button-toggle value="right" aria-label="Stop">
-            default
-        </mc-button-toggle>
-        <mc-button-toggle value="justify" aria-label="Clock">
-            <i mc-icon="mc-angle-down-L_16"></i>
-        </mc-button-toggle>
-    </mc-button-toggle-group>
-    <div class="example-selected-value">Selected value: {{group2.value}}</div>
+    <label>DisableGroup</label>
 
     <br>
 
+    <button mc-button (click)="disabled = !disabled">Toggle Disabled</button>
+
+    <br>
+    <br>
+
+    <mc-button-toggle-group [disabled]="disabled">
+        <mc-button-toggle value="1">
+            <button mc-button>default</button>
+        </mc-button-toggle>
+        <mc-button-toggle value="2">
+            <button mc-button disabled>default</button>
+        </mc-button-toggle>
+        <mc-button-toggle value="3">
+            <button mc-button>default</button>
+        </mc-button-toggle>
+        <mc-button-toggle value="4">
+            <button mc-icon-button><i mc-icon="mc-angle-down-L_16"></i></button>
+        </mc-button-toggle>
+    </mc-button-toggle-group>
+
+    <br>
+
+    <label>Multiple Group</label>
+    <mc-button-toggle-group multiple>
+        <mc-button-toggle value="1">
+            <button mc-button>default</button>
+        </mc-button-toggle>
+        <mc-button-toggle value="2">
+            <button mc-button disabled>default</button>
+        </mc-button-toggle>
+        <mc-button-toggle value="3">
+            <button mc-button>default</button>
+        </mc-button-toggle>
+        <mc-button-toggle value="4">
+            <button mc-icon-button><i mc-icon="mc-angle-down-L_16"></i></button>
+        </mc-button-toggle>
+    </mc-button-toggle-group>
+
+    <br>
+
+    <label>Standalone Toggle</label>
+
+    <br>
+
+    <mc-button-toggle value="123" #standAloneToggle="mcButtonToggle">
+        <button mc-button>default</button>
+    </mc-button-toggle>
+    <div class="example-selected-value">Selected value: {{standAloneToggle.checked}}</div>
+
+    <br>
+
+    <label>Vertical Group</label>
+
     <mc-button-toggle-group #group3="mcButtonToggleGroup" [vertical]="true">
-        <mc-button-toggle value="left" aria-label="Play">
-            default
+        <mc-button-toggle value="1">
+            <button mc-button>default</button>
         </mc-button-toggle>
-        <mc-button-toggle value="center" disabled aria-label="Pause">
-            default
+        <mc-button-toggle value="2">
+            <button mc-button disabled>default</button>
         </mc-button-toggle>
-        <mc-button-toggle value="right" aria-label="Stop">
-            default
+        <mc-button-toggle value="3">
+            <button mc-button>default</button>
         </mc-button-toggle>
-        <mc-button-toggle value="justify" aria-label="Clock">
-            <i mc-icon="mc-angle-down-L_16"></i>
+        <mc-button-toggle value="4">
+            <button mc-icon-button><i mc-icon="mc-angle-down-L_16"></i></button>
         </mc-button-toggle>
     </mc-button-toggle-group>
     <div class="example-selected-value">Selected value: {{group3.value}}</div>
+
+    <br>
+
+    <label>Group With Model</label>
+
+    <mc-button-toggle-group [(ngModel)]="modelResult">
+        <mc-button-toggle value="1">
+            <button mc-button>default</button>
+        </mc-button-toggle>
+        <mc-button-toggle value="2">
+            <button mc-button disabled>default</button>
+        </mc-button-toggle>
+        <mc-button-toggle value="3">
+            <button mc-button>default</button>
+        </mc-button-toggle>
+        <mc-button-toggle value="4">
+            <button mc-icon-button><i mc-icon="mc-angle-down-L_16"></i></button>
+        </mc-button-toggle>
+    </mc-button-toggle-group>
+    <div class="example-selected-value">Model result: {{modelResult}}</div>
 </div>

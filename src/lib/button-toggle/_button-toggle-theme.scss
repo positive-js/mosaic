@@ -11,7 +11,6 @@
     $divider-color: mc-color($foreground, divider);
 
     .mc-button-toggle-standalone {
-        border: solid 1px $divider-color;
         box-shadow: none;
     }
 
@@ -33,11 +32,6 @@
             background: darken(map-get($background, button-bg), 5);
             box-shadow: map-get($background, in-shadow);
         }
-    }
-
-    .mc-button-toggle-disabled {
-        color: mc-color($foreground, disabled-button);
-        background-color: mc-color($background, disabled-overlay);
     }
 }
 

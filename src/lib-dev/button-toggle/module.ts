@@ -1,4 +1,5 @@
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
@@ -13,7 +14,10 @@ import { McButtonToggleModule } from '../../lib/button-toggle';
     styleUrls: ['./styles.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class ButtonDemoComponent {}
+export class ButtonDemoComponent {
+    modelResult: any;
+    disabled: boolean;
+}
 
 
 @NgModule({
@@ -24,7 +28,8 @@ export class ButtonDemoComponent {}
         BrowserModule,
         McButtonModule,
         McButtonToggleModule,
-        McIconModule
+        McIconModule,
+        FormsModule
     ],
     bootstrap: [
         ButtonDemoComponent
