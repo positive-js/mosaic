@@ -7,7 +7,6 @@ const MC_NAVBAR_CONTAINER = 'mc-vertical-navbar-container';
 const MC_NAVBAR_HEADER = 'mc-vertical-navbar-header';
 const MC_NAVBAR_TITLE = 'mc-vertical-navbar-title';
 const MC_NAVBAR_LOGO = 'mc-vertical-navbar-logo';
-const MC_NAVBAR_ITEM_BADGE = 'mc-vertical-navbar-badge';
 
 export type McVerticalNavbarContainerPositionType = 'top' | 'bottom';
 
@@ -19,19 +18,6 @@ export type McVerticalNavbarContainerPositionType = 'top' | 'bottom';
     }
 })
 export class McVerticalNavbarLogo {}
-
-@Component({
-    selector: MC_NAVBAR_ITEM_BADGE,
-    template: `
-        <span class="mc-badge mc-badge_warning">
-            <ng-content></ng-content>
-        </span>
-    `,
-    host: {
-        class: MC_NAVBAR_ITEM_BADGE
-    }
-})
-export class McVerticalNavbarItemBadge {}
 
 @Directive({
     selector: `${MC_NAVBAR_HEADER}, [${MC_NAVBAR_HEADER}]`,
@@ -67,7 +53,7 @@ export class McVerticalNavbarContainer {
     selector: MC_NAVBAR,
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './vertical-navbar.component.html',
-    styleUrls: ['./vertical-navbar.scss'],
+    styleUrls: ['./vertical-navbar.component.scss'],
     encapsulation: ViewEncapsulation.None,
     animations: [
         expandVerticalNavbarAnimation()

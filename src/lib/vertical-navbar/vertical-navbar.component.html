@@ -1,7 +1,7 @@
 <nav class="mc-vertical-navbar"
      [@expand]="expanded"
      (@expand.done)="animating = false"
-     [class.mc-vertical-navbar-collapsing]="animating && ! expanded"
+     [class.mc-vertical-navbar-animating]="animating"
      [class.mc-vertical-navbar-collapsed]="! animating && ! expanded"
 >
     <div class="mc-vertical-navbar-header">

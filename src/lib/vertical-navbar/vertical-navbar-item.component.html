@@ -14,7 +14,7 @@
      class="mc-vertical-navbar-item-menu"
      [style.top]="alignNestedItems === 'top' ? '0' : null"
      [style.bottom]="alignNestedItems === 'bottom' ? '0' : null"
-     [class.mc-vertical-navbar-item-menu-collapsing]="animating && ! expanded"
+     [class.mc-vertical-navbar-item-menu-animating]="animating"
      [class.mc-vertical-navbar-item-menu-collapsed]="! animating && ! expanded"
 >
     <ng-content select="mc-vertical-navbar-item, a[mc-vertical-navbar-item]"></ng-content>

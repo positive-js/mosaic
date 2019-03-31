@@ -1,20 +1,10 @@
-
-$mc-navbar-item-h-padding: 16px;
-$mc-navbar-dropdown-v-padding: 4px;
-$mc-navbar-dropdown-link-v-padding: 6px;
-$mc-navbar-dropdown-link-h-padding: 16px;
-$mc-navbar-brand-h-padding: 12px;
-$mc-navbar-brand-margin-right: 0;
-$mc-navbar-title-icon-space: 8px;
-$mc-navbar-icon-min-width: 15px;
-
 %shadow {
     &:before {
         content: '';
         display: block;
         position: absolute;
         top: 0; right: 0; bottom: 0; left: 0;
-        z-index: 5;
+        z-index: 100;
         box-shadow: 2px 0 2px 0 rgba(0, 0, 0, 0.25);
         pointer-events: none;
     }

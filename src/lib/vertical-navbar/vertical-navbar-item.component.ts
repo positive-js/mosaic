@@ -25,6 +25,7 @@ import { Observable, Subscription } from 'rxjs';
 
 export const MC_NAVBAR_ITEM = 'mc-vertical-navbar-item';
 export const MC_NAVBAR_ITEM_ICON = 'mc-vertical-navbar-item-icon';
+export const MC_NAVBAR_ITEM_BADGE = 'mc-vertical-navbar-badge';
 
 
 export class McVerticalNavbarItemBase {
@@ -51,11 +52,25 @@ export class McVerticalNavbarItemIcon {
 
 
 @Component({
+    selector: MC_NAVBAR_ITEM_BADGE,
+    template: `
+        <span class="mc-badge mc-badge_warning">
+            <ng-content></ng-content>
+        </span>
+    `,
+    host: {
+        class: MC_NAVBAR_ITEM_BADGE
+    }
+})
+export class McVerticalNavbarItemBadge {}
+
+
+@Component({
     selector: `a[${MC_NAVBAR_ITEM}], ${MC_NAVBAR_ITEM}`,
     templateUrl: './vertical-navbar-item.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    styleUrls: ['./vertical-navbar-item.scss'],
+    styleUrls: ['./vertical-navbar-item.component.scss'],
     inputs: ['disabled'],
     host: {
         '[attr.disabled]': 'disabled || null',

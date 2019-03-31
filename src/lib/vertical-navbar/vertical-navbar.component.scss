@@ -40,7 +40,7 @@ mc-vertical-navbar-logo {
         }
     }
 
-    &.mc-vertical-navbar-collapsing {
+    &.mc-vertical-navbar-animating {
         overflow: hidden;
     }
 
@@ -61,8 +61,8 @@ mc-vertical-navbar-item, .mc-vertical-navbar-item, .mc-vertical-navbar-title, a[
     position: relative;
     display: flex;
     align-items: center;
-    padding-left: $mc-navbar-item-h-padding;
-    padding-right: $mc-navbar-item-h-padding;
+    padding-left: 16px;
+    padding-right: 16px;
     background-color: transparent;
     border: none;
 

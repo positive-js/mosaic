@@ -1,36 +1,95 @@
-# Navbar component
+# Vertical Navbar component
 
-## Objectives
+Provides configurable layout for expandable navbar panel.
 
--   create the navbar component
--   create child components to get them included into it
+## General description
 
-## Allowed child components
+So the navbar is just a container for items and its general scheme looks like this:
+```
+<mc-vertical-navbar>
+    <mc-vertical-navbar-header>Some header here</mc-vertical-navbar-header>
+    
+    <div>Some custom element with unique styling</div>
+    
+    <mc-vertical-navbar-item>Item with default styling</mc-vertical-navbar-item>
+    <a mc-vertical-navbar-item>Anchor item</a>
+    <mc-vertical-navbar-item>
+        <mc-vertical-navbar-item>First nested item</mc-vertical-navbar-item>    
+        <a mc-vertical-navbar-item>Second nested anchor item</a>    
+    </mc-vertical-navbar-item>
+</mc-vertical-navbar>
+```
 
-We strongly recommend adhere to use our child components until it is possible but you are free to insert there what you want.
+It also has two states: *expanded* and *collapsed*, with transition between them.
+In the collapsed state its width equals to exact 64px and isn't configurable out of the box for now.
+`<mc-vertical-navbar-header>` is positioned at the very top and is only shown in the expanded state.
+`<mc-vertical-navbar-item>` is partly shown in the collapsed state though.
 
- - left\right side container **mc-navbar-section**
-   - product\company title **mc-navbar-brand**
-   - logo container **mc-navbar-logo**
-     - any markup
-       - **mc-navbar-title** (please see below)
-	 - title **mc-navbar-title**
-	   - any markup, only font size, font color, font family is gonna be styled
-	- menu item container **mc-navbar-item**
-	  - icon **[mc-icon]** (another PT Mosaic component, out of the scope of this)
-	  - title **mc-navbar-title**
-    - menu item dropdown container **mc-navbar-item** with property **[dropdownItems]**
-      - any markup for title dropdown container
-	  - **ng-temaplate** with custom component for dropdown item
-	- any markup
-- any markup
+## Items
 
-## States
+You're allowed to put inside `<mc-vertical-navbar>` any content you like, but `<mc-vertical-navbar-item>` has special appearance and behavior.
 
-We believe you are able to manage navbar child components from outside. Meantime we provide number of mc-navbar-item states based on css classes which may be combined between each others.
+The default usage is something like this:
+```
+<mc-vertical-navbar-item>
+    <mc-vertical-navbar-item-icon><i mc-icon="mc-gear_16"></i></mc-vertical-navbar-item-icon>
+    <mc-vertical-navbar-title>Simple item with icon</mc-vertical-navbar-title>
+</mc-vertical-navbar-item>
+```
+In this case the title is hidden in collaps4ed state while the icon is always visible.
 
- - mc-navbar-item-active - selected item
- - mc-progress - something in progress (striped animation)
- - cdk-focused - focused state, we control it as well for common tab order behaviour
- 
-Disable state also could be combined with other states but it is **disabled** attribute.
+It's also possible to define items as `<a mc-vertical-navbar-item>` to make them behave as anchors.
+```
+<a mc-vertical-navbar-item routerLink="/some-path">Any content</a>
+```
+
+And again, you can put any content into `<mc-vertical-navbar-item>`, but its appearance in the collapsed state is your duty.
+
+## Item states
+
+Of course, you are able to manage your `mc-vertical-navbar-item` from outside, applying any styles you like,
+but we also provide some states which are allowed to be combined with each other.
+ - class `mc-navbar-item-active` highlights an item,
+ - class `mc-progress` stands for striped animation,
+ - class `cdk-focused` - focused state, we control it as well for common tab order behaviour
+ - attribute `disabled` works as expected, making an item unselectable and grayed-out.
+
+## Nested items
+
+By putting one item into another you make them work together as a menu:
+
+```
+<mc-vertical-navbar-item>
+    I'm expandable!
+    
+    <mc-vertical-navbar-item>Nested item</mc-vertical-navbar-item>
+    <a mc-vertical-navbar-item>Nested item</a>
+</mc-vertical-navbar-item>
+```
+
+And you are *not* limited to the one level of nesting:
+```
+<mc-vertical-navbar-item>Zero
+    <mc-vertical-navbar-item>One
+        <mc-vertical-navbar-item>Two
+            <mc-vertical-navbar-item>Three
+            </mc-vertical-navbar-item>
+        </mc-vertical-navbar-item>
+    </mc-vertical-navbar-item>
+</mc-vertical-navbar-item>
+```
+
+## Positioning toolbar content
+
+By default the navbar puts the items one below the other.
+However you're able to customize the positioning.
+
+For instance, putting some items at the bottom is as simple as this:
+```
+<mc-vertical-navbar>
+    <mc-vertical-navbar-item>Top aligned</mc-vertical-navbar-item>
+    <mc-vertical-navbar-item style="margin-top: auto;">Bottom aligned</mc-vertical-navbar-item>
+    <mc-vertical-navbar-item>Bottom aligned</mc-vertical-navbar-item>
+</mc-vertical-navbar-item>
+```
+
