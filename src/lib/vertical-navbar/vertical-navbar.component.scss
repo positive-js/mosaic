@@ -1,15 +1,6 @@
 @import 'vertical-navbar-common';
 @import 'vertical-navbar-theme';
 
-
-.mc-vertical-navbar-bottom {
-    margin-top: auto;
-}
-
-mc-vertical-navbar-logo {
-    display: flex;
-}
-
 .mc-vertical-navbar {
 
     position: relative;
@@ -25,6 +16,8 @@ mc-vertical-navbar-logo {
         width: 100%;
         align-items: center;
         box-sizing: border-box;
+        text-decoration: none;
+        min-height: 64px;
 
         .collapse-button {
             cursor: pointer;
@@ -38,6 +31,10 @@ mc-vertical-navbar-logo {
                 font-size: 32px;
             }
         }
+
+        .mc-vertical-navbar-title {
+            padding: 0 16px;
+        }
     }
 
     &.mc-vertical-navbar-animating {
@@ -47,37 +44,4 @@ mc-vertical-navbar-logo {
     &.mc-vertical-navbar-collapsed {
         overflow: hidden;
     }
-}
-
-mc-vertical-navbar-container {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    width: 100%;
-}
-
-mc-vertical-navbar-item, .mc-vertical-navbar-item, .mc-vertical-navbar-title, a[mc-vertical-navbar-item] {
-
-    position: relative;
-    display: flex;
-    align-items: center;
-    padding-left: 16px;
-    padding-right: 16px;
-    background-color: transparent;
-    border: none;
-
-    height: 64px;
-    margin: 1px 0;
-    width: 100%;
-}
-
-.mc-vertical-navbar-title {
-    white-space: nowrap;
-    padding: 0 16px;
-}
-
-.mc-vertical-navbar-header {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
 }

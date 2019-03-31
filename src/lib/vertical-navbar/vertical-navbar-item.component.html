@@ -5,10 +5,10 @@
     class="mc-vertical-navbar-item"
 >
     <ng-content></ng-content>
-    <i *ngIf="hasDropdownContent" mc-icon="mc-angle-right-M_16" class="mc-vertical-navbar-item-menu-icon"></i>
+    <i *ngIf="hasNestedItems" mc-icon="mc-angle-right-M_16" class="mc-vertical-navbar-item-menu-icon"></i>
 </div>
 
-<div *ngIf="hasDropdownContent"
+<div *ngIf="hasNestedItems"
      [@toggleMenu]="expanded"
      (@toggleMenu.done)="animating = false"
      class="mc-vertical-navbar-item-menu"

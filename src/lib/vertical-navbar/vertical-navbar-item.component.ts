@@ -39,16 +39,9 @@ export const _McVerticalNavbarMixinBase: CanDisableCtor & typeof McVerticalNavba
     selector: MC_NAVBAR_ITEM_ICON,
     host: {
         class: MC_NAVBAR_ITEM_ICON
-    },
-    // template: `
-    //     <i mc-icon="{{icon}}"></i>
-    //     <!--<i mc-icon="mc-hamburger_16"></i>-->
-    //     <i [attr.mc-icon]="icon"></i>
-    // `
+    }
 })
-export class McVerticalNavbarItemIcon {
-    @Input() icon: string;
-}
+export class McVerticalNavbarItemIcon {}
 
 
 @Component({
@@ -84,6 +77,8 @@ export class McVerticalNavbarItem extends _McVerticalNavbarMixinBase implements 
 
     @Input() alignNestedItems: 'bottom' | 'top' | undefined = 'bottom';
 
+    @Input() tabIndex: number = 0;
+
     animating: boolean = false;
 
     get expanded(): boolean {
@@ -93,16 +88,13 @@ export class McVerticalNavbarItem extends _McVerticalNavbarMixinBase implements 
         this._expanded = value;
         this.animating = true;
         this._cdRef.detectChanges();
-        console.log('expanded', value);
     }
     private _expanded: boolean = false;
 
-    @ContentChildren(McVerticalNavbarItem) nestedItems: QueryList<McVerticalNavbarItem>;
+    @ContentChildren(McVerticalNavbarItem)
+    private nestedItems: QueryList<McVerticalNavbarItem>;
 
-    @Input()
-    tabIndex: number = 0;
-
-    get hasDropdownContent() {
+    get hasNestedItems() {
         return this.nestedItems && this.nestedItems.length > 1;
     }
 
@@ -126,13 +118,11 @@ export class McVerticalNavbarItem extends _McVerticalNavbarMixinBase implements 
     }
 
     ngAfterContentInit() {
-        if (!this.hasDropdownContent) {
+        if (!this.hasNestedItems) {
             return;
         }
 
-        if (this.hasDropdownContent) {
-            this.listenClickOutside();
-        }
+        this.listenClickOutside();
     }
 
     ngOnDestroy() {
@@ -143,7 +133,7 @@ export class McVerticalNavbarItem extends _McVerticalNavbarMixinBase implements 
     handleClickByItem() {
         this.toggleDropdown();
 
-        if (this.parent && ! this.hasDropdownContent) {
+        if (this.parent && ! this.hasNestedItems) {
             this.parent.forceCloseDropdown(true);
         }
     }
@@ -152,7 +142,8 @@ export class McVerticalNavbarItem extends _McVerticalNavbarMixinBase implements 
         const isNavbarItem = ($event.target as HTMLElement).classList.contains(MC_NAVBAR_ITEM);
 
         // tslint:disable-next-line
-        if (this.hasDropdownContent && $event.keyCode === SPACE && isNavbarItem) {
+        // if (this.hasDropdownContent && $event.keyCode === SPACE && isNavbarItem) {
+        if (this.hasNestedItems && $event.keyCode === SPACE) {
             this.toggleDropdown();
         }
     }

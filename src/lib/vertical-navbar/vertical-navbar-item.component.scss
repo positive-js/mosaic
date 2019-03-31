@@ -53,20 +53,40 @@
     cursor: pointer;
 }
 
-a[mc-vertical-navbar-item] {
-    text-decoration: none;
-}
+//mc-vertical-navbar-item.mc-progress:not([disabled]) {
+//    cursor: pointer;
+//}
 
-a[mc-vertical-navbar-item], mc-vertical-navbar-item, .mc-vertical-navbar-item .mc-vertical-navbar-title {
-    padding: 0;
-}
-
-mc-vertical-navbar-item.mc-progress:not([disabled]) {
+mc-vertical-navbar-item, a[mc-vertical-navbar-item] {
+    height: 64px;
+    margin: 1px 0;
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-left: 16px;
+    padding-right: 16px;
+    box-sizing: border-box;
     cursor: pointer;
+    text-decoration: none;
+
+    .mc-vertical-navbar-item {
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+
+    &.mc-progress:not([disabled]) {
+        cursor: pointer;
+    }
+
+    &[disabled] {
+        .mc-vertical-navbar-item {
+            cursor: default;
+        }
+    }
 }
 
-mc-vertical-navbar-item[disabled] .mc-vertical-navbar-item, .mc-vertical-navbar-item[disabled] {
-    /*It is controversially. Works fine but cannot be tested*/
-    /*pointer-events: none;*/
-    cursor: default;
+.mc-vertical-navbar-title {
+    white-space: nowrap;
 }

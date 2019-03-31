@@ -11,12 +11,19 @@ import {
 } from './vertical-navbar-item.component';
 import {
     McVerticalNavbar,
-    McVerticalNavbarBrand,
-    McVerticalNavbarContainer,
-    McVerticalNavbarLogo,
+    McVerticalNavbarHeader,
     McVerticalNavbarTitle
 } from './vertical-navbar.component';
 
+
+const COMPONENTS = [
+    McVerticalNavbar,
+    McVerticalNavbarTitle,
+    McVerticalNavbarItem,
+    McVerticalNavbarItemIcon,
+    McVerticalNavbarItemBadge,
+    McVerticalNavbarHeader
+];
 
 @NgModule({
     imports: [
@@ -25,25 +32,7 @@ import {
         PlatformModule,
         McIconModule
     ],
-    exports: [
-        McVerticalNavbar,
-        McVerticalNavbarContainer,
-        McVerticalNavbarTitle,
-        McVerticalNavbarItem,
-        McVerticalNavbarItemIcon,
-        McVerticalNavbarItemBadge,
-        McVerticalNavbarBrand,
-        McVerticalNavbarLogo
-    ],
-    declarations: [
-        McVerticalNavbar,
-        McVerticalNavbarContainer,
-        McVerticalNavbarTitle,
-        McVerticalNavbarItem,
-        McVerticalNavbarItemIcon,
-        McVerticalNavbarItemBadge,
-        McVerticalNavbarBrand,
-        McVerticalNavbarLogo
-    ]
+    exports: COMPONENTS,
+    declarations: COMPONENTS
 })
 export class McVerticalNavbarModule {}
