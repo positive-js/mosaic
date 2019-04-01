@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, Directive, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Directive, ViewEncapsulation, Input } from '@angular/core';
 
 import { expandVerticalNavbarAnimation } from './vertical-navbar.animation';
 
 
 @Directive({
-    selector: 'mc-vertical-navbar-header, [mc-vertical-navbar-header]',
+    selector: 'mc-vertical-navbar-header, a[mc-vertical-navbar-header]',
     host: {
         class: 'mc-vertical-navbar-header'
     }
@@ -33,6 +33,7 @@ export class McVerticalNavbar {
 
     animating: boolean = false;
 
+    @Input()
     get expanded(): boolean {
         return this._expanded;
     }

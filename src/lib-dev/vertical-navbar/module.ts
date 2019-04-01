@@ -17,6 +17,7 @@ import { McVerticalNavbarModule } from '../../lib/vertical-navbar/';
     encapsulation: ViewEncapsulation.None
 })
 export class VerticalNavbarDemoComponent {
+    expanded = true;
 }
 
 

@@ -23,6 +23,8 @@ So the navbar is just a container for items and its general scheme looks like th
 It also has two states: *expanded* and *collapsed*, with transition between them.
 In the collapsed state its width equals to exact 64px and isn't configurable out of the box for now.
 
+You can toggle the navbar externally by setting `expanded` property as well.
+
 You're allowed to put inside `<mc-vertical-navbar>` any content you like,
 but `<mc-vertical-navbar-header>` and `<mc-vertical-navbar-item>` have their special appearance and behavior.
 

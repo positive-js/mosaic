@@ -1,6 +1,6 @@
 <div class="root">
 
-<mc-vertical-navbar>
+<mc-vertical-navbar [expanded]="expanded">
 
     <a mc-vertical-navbar-header routerLink="/">
         <svg class="logo" viewBox="0 0 32 32" width="32" height="32px" xmlns="http://www.w3.org/2000/svg">
@@ -101,6 +101,11 @@
 </mc-vertical-navbar>
 
 <div class="content">
+
+    <div>
+        <button mc-button class="toggle-button" (click)="expanded = ! expanded">Toggle navbar from the outside</button>
+    </div>
+
     <div *ngFor="let i of [1, 2, 3, 4]"></div>
 </div>
 

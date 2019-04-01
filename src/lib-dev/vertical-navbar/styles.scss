@@ -18,7 +18,8 @@ body {
     flex-wrap: wrap;
     margin: 16px;
 
-    div {
+    > div {
+        display: flex;
         flex: 1 1 30%;
         min-width: 500px;
         height: 45%;
@@ -27,6 +28,11 @@ body {
         padding: 8px;
         background: rgba(128, 128, 255, 0.25);
     }
+}
+
+.toggle-button {
+    height: 100px;
+    margin: auto !important;
 }
 
 mc-vertical-navbar {
