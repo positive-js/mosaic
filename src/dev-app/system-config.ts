@@ -61,6 +61,7 @@ System.config({
         '@ptsecurity/mosaic': 'dist/packages/mosaic/index.js',
 
         '@ptsecurity/mosaic/button': 'dist/packages/mosaic/button/index.js',
+        '@ptsecurity/mosaic/button-toggle': 'dist/packages/mosaic/button-toggle/index.js',
         '@ptsecurity/mosaic/core': 'dist/packages/mosaic/core/index.js',
         '@ptsecurity/mosaic/card': 'dist/packages/mosaic/card/index.js',
         '@ptsecurity/mosaic/datepicker': 'dist/packages/mosaic/datepicker/index.js',

@@ -6,8 +6,8 @@ import { McButtonToggle, McButtonToggleGroup } from './button-toggle';
 
 
 @NgModule({
-  imports: [McCommonModule, McButtonModule],
-  exports: [McCommonModule, McButtonToggleGroup, McButtonToggle],
-  declarations: [McButtonToggleGroup, McButtonToggle]
+    imports: [McCommonModule, McButtonModule],
+    exports: [McCommonModule, McButtonToggleGroup, McButtonToggle],
+    declarations: [McButtonToggleGroup, McButtonToggle]
 })
 export class McButtonToggleModule {}

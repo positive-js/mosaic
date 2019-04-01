@@ -9,6 +9,7 @@ module.exports = {
                 'badge',
                 'build',
                 'button',
+                'button-toggle',
                 'ci',
                 'cdk',
                 'card',

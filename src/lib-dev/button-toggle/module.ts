@@ -14,7 +14,7 @@ import { McButtonToggleModule } from '../../lib/button-toggle';
     styleUrls: ['./styles.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class ButtonDemoComponent {
+export class ButtonToggleDemoComponent {
     modelResult: any;
     disabled: boolean;
 }
@@ -22,7 +22,7 @@ export class ButtonDemoComponent {
 
 @NgModule({
     declarations: [
-        ButtonDemoComponent
+        ButtonToggleDemoComponent
     ],
     imports: [
         BrowserModule,
@@ -32,13 +32,13 @@ export class ButtonDemoComponent {
         FormsModule
     ],
     bootstrap: [
-        ButtonDemoComponent
+        ButtonToggleDemoComponent
     ]
 })
-export class ButtonDemoModule {}
+export class ButtonToggleDemoModule {}
 
 platformBrowserDynamic()
-    .bootstrapModule(ButtonDemoModule)
+    .bootstrapModule(ButtonToggleDemoModule)
     // tslint:disable-next-line:no-console
     .catch((error) => console.error(error));
 
