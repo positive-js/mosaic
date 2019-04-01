@@ -89,7 +89,7 @@ export class McButtonToggleGroup implements ControlValueAccessor, OnInit, AfterC
     }
 
     /** Selected button toggles in the group. */
-    get selected() {
+    get selected(): any {
         const selected = this.selectionModel.selected;
 
         return this.multiple ? selected : (selected[0] || null);
@@ -351,7 +351,7 @@ export class McButtonToggle implements OnInit, OnDestroy {
     @Output() readonly change: EventEmitter<McButtonToggleChange> =
         new EventEmitter<McButtonToggleChange>();
 
-    get disabled() {
+    get disabled(): boolean {
         return this.commonButton &&
             this.commonButton.disabled;
     }
