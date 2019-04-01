@@ -42,6 +42,7 @@ module.exports = {
                 'tree',
                 'tree-select',
                 'typography',
+                'vertical-navbar',
                 'visual'
             ]
         ]

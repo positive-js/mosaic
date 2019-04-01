@@ -19,8 +19,9 @@ import {
 import { FocusMonitor, FocusOrigin } from '@ptsecurity/cdk/a11y';
 import { SPACE } from '@ptsecurity/cdk/keycodes';
 import { CanDisable, CanDisableCtor, mixinDisabled } from '@ptsecurity/mosaic/core';
-import { expandVerticalNavbarMenuAnimation } from '@ptsecurity/mosaic/vertical-navbar/vertical-navbar.animation';
 import { Observable, Subscription } from 'rxjs';
+
+import { expandVerticalNavbarMenuAnimation } from './vertical-navbar.animation';
 
 
 export const MC_NAVBAR_ITEM = 'mc-vertical-navbar-item';
@@ -63,7 +64,7 @@ export class McVerticalNavbarItemBadge {}
     templateUrl: './vertical-navbar-item.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    styleUrls: ['./vertical-navbar-item.component.scss'],
+    styleUrls: ['./vertical-navbar-item.component.css'],
     inputs: ['disabled'],
     host: {
         '[attr.disabled]': 'disabled || null',

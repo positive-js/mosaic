@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Directive, ViewEncapsulation } from '@angular/core';
-import { expandVerticalNavbarAnimation } from '@ptsecurity/mosaic/vertical-navbar/vertical-navbar.animation';
+
+import { expandVerticalNavbarAnimation } from './vertical-navbar.animation';
 
 
 @Directive({
@@ -22,7 +23,7 @@ export class McVerticalNavbarTitle {}
     selector: 'mc-vertical-navbar',
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './vertical-navbar.component.html',
-    styleUrls: ['./vertical-navbar.component.scss'],
+    styleUrls: ['./vertical-navbar.component.css'],
     encapsulation: ViewEncapsulation.None,
     animations: [
         expandVerticalNavbarAnimation()

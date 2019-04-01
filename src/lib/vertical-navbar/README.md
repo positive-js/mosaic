@@ -55,7 +55,7 @@ Of course, you are able to manage your `mc-vertical-navbar-item` from outside, a
 but we also provide some states which are allowed to be combined with each other.
  - class `mc-vertical-navbar-item-active` highlights an item,
  - class `mc-progress` stands for striped animation,
- - class `cdk-focused` - focused state, we control it as well for common tab order behaviour
+ - class `cdk-focused` - focused state, we control it as well for common tab order behavior,
  - attribute `disabled` works as expected, making an item unselectable and grayed-out.
 
 ## Nested items
@@ -96,3 +96,5 @@ For instance, putting some items at the bottom is as simple as this:
     <mc-vertical-navbar-item>Bottom aligned</mc-vertical-navbar-item>
 </mc-vertical-navbar-item>
 ```
+
+Nested items can be vertically aligned by setting `alignNestedItems` property with allowed values `'bottom'` and `'top'`
