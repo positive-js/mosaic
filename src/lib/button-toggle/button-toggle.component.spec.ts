@@ -409,7 +409,7 @@ describe('McButtonToggle without forms', () => {
         let groupNativeElement: HTMLElement;
         let buttonToggleDebugElements: DebugElement[];
         let buttonToggleNativeElements: HTMLElement[];
-        let buttonToggleLabelElements: HTMLLabelElement[];
+        let buttonToggleButtonElements: HTMLLabelElement[];
         let groupInstance: McButtonToggleGroup;
         let buttonToggleInstances: McButtonToggle[];
         let testComponent: ButtonTogglesInsideButtonToggleGroupMultiple;
@@ -427,7 +427,7 @@ describe('McButtonToggle without forms', () => {
             buttonToggleDebugElements = fixture.debugElement.queryAll(By.directive(McButtonToggle));
             buttonToggleNativeElements = buttonToggleDebugElements
                 .map((debugEl) => debugEl.nativeElement);
-            buttonToggleLabelElements = fixture.debugElement.queryAll(By.css('button'))
+            buttonToggleButtonElements = fixture.debugElement.queryAll(By.css('button'))
                 .map((debugEl) => debugEl.nativeElement);
             buttonToggleInstances = buttonToggleDebugElements.map((debugEl) => debugEl.componentInstance);
         }));
@@ -486,14 +486,14 @@ describe('McButtonToggle without forms', () => {
         });
 
         it('should deselect a button toggle when selected twice', fakeAsync(() => {
-            buttonToggleLabelElements[0].click();
+            buttonToggleButtonElements[0].click();
             fixture.detectChanges();
             tick();
 
             expect(buttonToggleInstances[0].checked).toBe(true);
             expect(groupInstance.value).toEqual(['eggs']);
 
-            buttonToggleLabelElements[0].click();
+            buttonToggleButtonElements[0].click();
             fixture.detectChanges();
             tick();
 
@@ -507,13 +507,13 @@ describe('McButtonToggle without forms', () => {
             const changeSpy = jasmine.createSpy('button-toggle change listener');
             buttonToggleInstances[0].change.subscribe(changeSpy);
 
-            buttonToggleLabelElements[0].click();
+            buttonToggleButtonElements[0].click();
             fixture.detectChanges();
             tick();
             expect(changeSpy).toHaveBeenCalled();
             expect(groupInstance.value).toEqual(['eggs']);
 
-            buttonToggleLabelElements[0].click();
+            buttonToggleButtonElements[0].click();
             fixture.detectChanges();
             tick();
             expect(groupInstance.value).toEqual([]);
@@ -543,7 +543,8 @@ describe('McButtonToggle without forms', () => {
             fixture.detectChanges();
 
             buttonToggleDebugElement = fixture.debugElement.query(By.directive(McButtonToggle));
-            buttonToggleButtonElement = buttonToggleDebugElement.nativeElement;
+            buttonToggleButtonElement = fixture.debugElement.query(By.css('button')).nativeElement;
+
             buttonToggleInstance = buttonToggleDebugElement.componentInstance;
         }));
 
@@ -634,13 +635,13 @@ describe('McButtonToggle without forms', () => {
                                 [vertical]="isVertical"
                                 [(value)]="groupValue">
             <mc-button-toggle value="test1" *ngIf="renderFirstToggle">
-                <button mc-button>Test1</button>
+                Test1
             </mc-button-toggle>
             <mc-button-toggle value="test2">
-                <button mc-button>Test2</button>
+                Test2
             </mc-button-toggle>
             <mc-button-toggle value="test3">
-                <button mc-button>Test3</button>
+                Test3
             </mc-button-toggle>
         </mc-button-toggle-group>
     `
@@ -659,9 +660,7 @@ class ButtonTogglesInsideButtonToggleGroup {
             [(ngModel)]="modelValue"
             (change)="lastEvent = $event">
             <mc-button-toggle *ngFor="let option of options" [value]="option.value">
-                <button mc-button>
-                    {{option.label}}
-                </button>
+                {{option.label}}
             </mc-button-toggle>
         </mc-button-toggle-group>
     `
@@ -681,13 +680,13 @@ class ButtonToggleGroupWithNgModel {
     template: `
         <mc-button-toggle-group [disabled]="isGroupDisabled" [vertical]="isVertical" multiple>
             <mc-button-toggle value="eggs">
-                <button mc-button>Eggs</button>
+                Eggs
             </mc-button-toggle>
             <mc-button-toggle value="flour">
-                <button mc-button>Flour</button>
+                Flour
             </mc-button-toggle>
             <mc-button-toggle value="sugar">
-                <button mc-button>Sugar</button>
+                Sugar
             </mc-button-toggle>
         </mc-button-toggle-group>
     `
@@ -701,13 +700,13 @@ class ButtonTogglesInsideButtonToggleGroupMultiple {
     template: `
         <mc-button-toggle-group multiple [value]="value">
             <mc-button-toggle [value]="0">
-                <button mc-button>Eggs</button>
+                Eggs
             </mc-button-toggle>
             <mc-button-toggle [value]="null">
-                <button mc-button>Flour</button>
+                Flour
             </mc-button-toggle>
             <mc-button-toggle [value]="false">
-                <button mc-button>Sugar</button>
+                Sugar
             </mc-button-toggle>
             <mc-button-toggle>Sugar</mc-button-toggle>
         </mc-button-toggle-group>
@@ -721,7 +720,7 @@ class FalsyButtonTogglesInsideButtonToggleGroupMultiple {
 @Component({
     template: `
         <mc-button-toggle>
-            <button mc-button>Yes</button>
+            Yes
         </mc-button-toggle>
     `
 })
@@ -732,10 +731,10 @@ class StandaloneButtonToggle {
     template: `
         <mc-button-toggle-group (change)="lastEvent = $event" value="red">
             <mc-button-toggle value="red">
-                <button mc-button>Value Red</button>
+                Value Red
             </mc-button-toggle>
             <mc-button-toggle value="green">
-                <button mc-button>Value Green</button>
+                Value Green
             </mc-button-toggle>
         </mc-button-toggle-group>
     `
@@ -748,13 +747,13 @@ class ButtonToggleGroupWithInitialValue {
     template: `
         <mc-button-toggle-group [formControl]="control">
             <mc-button-toggle value="red">
-                <button mc-button>Value Red</button>
+                Value Red
             </mc-button-toggle>
             <mc-button-toggle value="green">
-                <button mc-button>Value Green</button>
+                Value Green
             </mc-button-toggle>
             <mc-button-toggle value="blue">
-                <button mc-button>Value Blue</button>
+                Value Blue
             </mc-button-toggle>
         </mc-button-toggle-group>
     `
@@ -767,10 +766,8 @@ class ButtonToggleGroupWithFormControl {
     template: `
         <mc-button-toggle-group [(value)]="value">
             <mc-button-toggle *ngFor="let toggle of possibleValues" [value]="toggle">
-                <button mc-button>
-                    {{toggle}}
-                </button>
-            </mc-button-toggle>
+                {{toggle}}
+             </mc-button-toggle>
         </mc-button-toggle-group>
     `
 })
