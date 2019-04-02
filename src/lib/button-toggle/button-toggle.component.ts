@@ -15,13 +15,13 @@ import {
     Output,
     QueryList,
     ViewEncapsulation,
-    ContentChild
+    ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import { SelectionModel } from '@ptsecurity/cdk/collections';
-import { McButton, McIconButton } from '@ptsecurity/mosaic/button';
+import { McButton } from '@ptsecurity/mosaic/button';
 
 
 /** Acceptable types for a button toggle. */
@@ -121,10 +121,7 @@ export class McButtonToggleGroup implements ControlValueAccessor, OnInit, AfterC
             return;
         }
 
-        this.buttonToggles.forEach((toggle) => {
-            toggle.disabled = this._disabled;
-            toggle.markForCheck();
-        });
+        this.buttonToggles.forEach((toggle) => toggle.markForCheck());
     }
 
     /**
@@ -295,7 +292,15 @@ export class McButtonToggleGroup implements ControlValueAccessor, OnInit, AfterC
 /** Single button inside of a toggle group. */
 @Component({
     selector: 'mc-button-toggle',
-    template: `<ng-content></ng-content>`,
+    template: `
+        <button
+            mc-button
+            [disabled]="disabled"
+            [attr.tabindex]="disabled ? -1 : tabIndex"
+            (click)="onToggleClick()">
+            <ng-content></ng-content>
+        </button>
+    `,
     styleUrls: ['button-toggle.css'],
     encapsulation: ViewEncapsulation.None,
     exportAs: 'mcButtonToggle',
@@ -308,8 +313,7 @@ export class McButtonToggleGroup implements ControlValueAccessor, OnInit, AfterC
         // but can still receive focus from things like cdkFocusInitial.
         '[attr.tabindex]': '-1',
         '[attr.disabled]': 'disabled || null',
-        '(focus)': 'focus()',
-        '(click)': 'onToggleClick()'
+        '(focus)': 'focus()'
     }
 })
 export class McButtonToggle implements OnInit, OnDestroy {
@@ -340,34 +344,27 @@ export class McButtonToggle implements OnInit, OnDestroy {
     /** The parent button toggle group (exclusive selection). Optional. */
     buttonToggleGroup: McButtonToggleGroup;
 
-    @ContentChild(McButton) mcButton: McButton;
-
-    @ContentChild(McIconButton) mcIconsButton: McIconButton;
+    @ViewChild(McButton) mcButton: McButton;
 
     /** McButtonToggleGroup reads this to assign its own value. */
     @Input() value: any;
+
+    /** Tabindex for the toggle. */
+    @Input() tabIndex: number | null;
+
+    @Input()
+    get disabled(): boolean {
+        return this._disabled || (this.buttonToggleGroup && this.buttonToggleGroup.disabled);
+    }
+    set disabled(value: boolean) { this._disabled = coerceBooleanProperty(value); }
 
     /** Event emitted when the group value changes. */
     @Output() readonly change: EventEmitter<McButtonToggleChange> =
         new EventEmitter<McButtonToggleChange>();
 
-    get disabled(): boolean {
-        return this.commonButton &&
-            this.commonButton.disabled;
-    }
-
-    set disabled(value: boolean) {
-        if (this.commonButton) {
-            this.commonButton.disabled = value;
-        }
-    }
-
-    private get commonButton(): McButton | McIconButton {
-        return this.mcButton || this.mcIconsButton;
-    }
-
     private isSingleSelector = false;
     private _checked = false;
+    private _disabled: boolean = false;
 
     constructor(
         @Optional() toggleGroup: McButtonToggleGroup,

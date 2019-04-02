@@ -2,25 +2,25 @@
     <label>Horizontal Group</label>
     <mc-button-toggle-group #group1="mcButtonToggleGroup">
         <mc-button-toggle value="1">
-            <button mc-button>default</button>
+            default 1
         </mc-button-toggle>
         <mc-button-toggle value="2">
-            <button mc-button>default</button>
+            default 2
         </mc-button-toggle>
         <mc-button-toggle value="3">
-            <button mc-button>default</button>
+            default 3
         </mc-button-toggle>
-        <mc-button-toggle value="4">
-            <button mc-button disabled>default</button>
+        <mc-button-toggle value="4" disabled>
+            default 4
         </mc-button-toggle>
         <mc-button-toggle value="5">
-            <button mc-icon-button><i mc-icon="mc-angle-down-L_16"></i></button>
+            <i mc-icon="mc-angle-down-L_16"></i>
         </mc-button-toggle>
         <mc-button-toggle value="6">
-            <button mc-button>default</button>
+            default 6
         </mc-button-toggle>
         <mc-button-toggle value="7">
-            <button mc-icon-button><i mc-icon="mc-angle-down-L_16"></i></button>
+            <i mc-icon="mc-angle-down-L_16"></i>
         </mc-button-toggle>
     </mc-button-toggle-group>
     <div class="example-selected-value">Selected value: {{group1.value}}</div>
@@ -36,38 +36,40 @@
     <br>
     <br>
 
-    <mc-button-toggle-group [disabled]="disabled">
+    <mc-button-toggle-group [disabled]="disabled" #disabledGroup="mcButtonToggleGroup">
         <mc-button-toggle value="1">
-            <button mc-button>default</button>
+            default 1
         </mc-button-toggle>
-        <mc-button-toggle value="2">
-            <button mc-button disabled>default</button>
+        <mc-button-toggle value="2" disabled>
+            default 2
         </mc-button-toggle>
         <mc-button-toggle value="3">
-            <button mc-button>default</button>
+            default 3
         </mc-button-toggle>
         <mc-button-toggle value="4">
-            <button mc-icon-button><i mc-icon="mc-angle-down-L_16"></i></button>
+            <i mc-icon="mc-angle-down-L_16"></i>
         </mc-button-toggle>
     </mc-button-toggle-group>
+    <div class="example-selected-value">Selected value: {{disabledGroup.value}}</div>
 
     <br>
 
     <label>Multiple Group</label>
-    <mc-button-toggle-group multiple>
+    <mc-button-toggle-group multiple #multipleGroup="mcButtonToggleGroup">
         <mc-button-toggle value="1">
-            <button mc-button>default</button>
+            default 1
         </mc-button-toggle>
-        <mc-button-toggle value="2">
-            <button mc-button disabled>default</button>
+        <mc-button-toggle value="2" disabled>
+            default 2
         </mc-button-toggle>
         <mc-button-toggle value="3">
-            <button mc-button>default</button>
+            default 3
         </mc-button-toggle>
         <mc-button-toggle value="4">
-            <button mc-icon-button><i mc-icon="mc-angle-down-L_16"></i></button>
+            <i mc-icon="mc-angle-down-L_16"></i>
         </mc-button-toggle>
     </mc-button-toggle-group>
+    <div class="example-selected-value">Selected value: {{multipleGroup.value}}</div>
 
     <br>
 
@@ -76,7 +78,7 @@
     <br>
 
     <mc-button-toggle value="123" #standAloneToggle="mcButtonToggle">
-        <button mc-button>default</button>
+        default
     </mc-button-toggle>
     <div class="example-selected-value">Selected value: {{standAloneToggle.checked}}</div>
 
@@ -86,16 +88,16 @@
 
     <mc-button-toggle-group #group3="mcButtonToggleGroup" [vertical]="true">
         <mc-button-toggle value="1">
-            <button mc-button>default</button>
+            default 1
         </mc-button-toggle>
-        <mc-button-toggle value="2">
-            <button mc-button disabled>default</button>
+        <mc-button-toggle value="2" disabled>
+            default 2
         </mc-button-toggle>
         <mc-button-toggle value="3">
-            <button mc-button>default</button>
+            default 3
         </mc-button-toggle>
         <mc-button-toggle value="4">
-            <button mc-icon-button><i mc-icon="mc-angle-down-L_16"></i></button>
+            <i mc-icon="mc-angle-down-L_16"></i>
         </mc-button-toggle>
     </mc-button-toggle-group>
     <div class="example-selected-value">Selected value: {{group3.value}}</div>
@@ -106,16 +108,16 @@
 
     <mc-button-toggle-group [(ngModel)]="modelResult">
         <mc-button-toggle value="1">
-            <button mc-button>default</button>
+            default 1
         </mc-button-toggle>
-        <mc-button-toggle value="2">
-            <button mc-button disabled>default</button>
+        <mc-button-toggle value="2" disabled>
+            default 2
         </mc-button-toggle>
         <mc-button-toggle value="3">
-            <button mc-button>default</button>
+            default 3
         </mc-button-toggle>
         <mc-button-toggle value="4">
-            <button mc-icon-button><i mc-icon="mc-angle-down-L_16"></i></button>
+            <i mc-icon="mc-angle-down-L_16"></i>
         </mc-button-toggle>
     </mc-button-toggle-group>
     <div class="example-selected-value">Model result: {{modelResult}}</div>
