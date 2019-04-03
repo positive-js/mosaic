@@ -6,6 +6,19 @@
 
     background-color: mc-color($palette, 700);
 
+    .cdk-focused {
+        outline: 2px solid mc-color($palette, 500);
+        outline-offset: -2px;
+
+        > .mc-vertical-navbar-item {
+            outline: 0;
+        }
+    }
+
+    .mc-vertical-navbar-toggle-button {
+        color: mc-color($palette, 100);
+    }
+
     .mc-vertical-navbar-title {
         color: mc-color($palette, 100);
     }
@@ -30,26 +43,15 @@
             }
         }
 
-        &:not([disabled]) {
-
-            outline: 0;
-
-            &.cdk-focused {
-                border-color: mc-color($palette, 500);
-                box-shadow: 0 0 0 1px mc-color($palette, 500);
-                z-index: 1;
-
-                > .mc-vertical-navbar-item {
-                    outline: 0;
-                }
-            }
-        }
-
-        &.cdk-focused {
-            > .mc-vertical-navbar-item {
-                outline: 0;
-            }
-        }
+        //&:not([disabled]) {
+        //
+        //    outline: 0;
+        //
+        //    &.cdk-focused {
+        //        outline: 2px solid mc-color($palette, 500);
+        //        outline-offset: -2px;
+        //    }
+        //}
 
         &:hover:not([disabled]):not(.mc-progress) {
             $hover-lighten: 5%;
