@@ -16,13 +16,13 @@ body {
 .content {
     display: flex;
     flex-wrap: wrap;
-    margin: 16px;
+    margin: 8px;
 
     > div {
         display: flex;
         flex: 1 1 30%;
         min-width: 500px;
-        height: 45%;
+        height: calc(50% - 16px);
         box-sizing: border-box;
         margin: 8px;
         padding: 8px;

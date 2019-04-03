@@ -1,0 +1,74 @@
+<mc-vertical-navbar #navbar>
+
+    <a mc-vertical-navbar-header routerLink="/">
+        <svg class="logo" viewBox="0 0 32 32" width="32" height="32px" xmlns="http://www.w3.org/2000/svg">
+            <g fill="none" fill-rule="evenodd">
+                <path d="m0 32h32v-32h-32z" fill="#c00"/>
+                <path d="m11.7013126 2.13713398h3.4056699v5.22500971c.0083884 1.2815534 1.0494758 2.31984466 2.3304078 2.32543689v-1.89825242c-.2370486-.00528156-.4296699-.19231068-.432466-.42718447v-5.22500971h3.4050485v-1.89794175h-8.7086602zm-3.29065629-1.89806602h-5.95976699-.0167767c-1.28062136.00590291-2.3192233 1.04978641-2.32481553 2.33351456h1.89794174c.00590292-.23735922.19262136-.42407767.42687379-.43557281h5.97654369c.24295146 0 .44054369.19821359.44054369.44427184v.97646602c0 .23735923-.19759223.43867961-.44054369.43867961l-5.97654369.00248544c-1.28062136.01118447-2.3192233 1.04667961-2.32481553 2.33071845v3.35782524h1.89794174v-3.35782524c.00590292-.23207767.19262136-.42438835.42687379-.42718447h5.97654369c1.28932039 0 2.34190289-1.05227184 2.34190289-2.34469903v-.97646602c0-1.29242718-1.0525825-2.34221359-2.34190289-2.34221359" fill="#fff" transform="translate(5.592 10.889)"/>
+            </g>
+        </svg>
+        <mc-vertical-navbar-title>Application Inspector</mc-vertical-navbar-title>
+    </a>
+
+    <mc-vertical-navbar-item disabled (click)="onItemClick()">
+        <i mc-icon="mc-info_16"></i>
+        <mc-vertical-navbar-title>Simple item</mc-vertical-navbar-title>
+    </mc-vertical-navbar-item>
+
+
+    <mc-vertical-navbar-item (click)="onItemClick()">
+        <i mc-icon="mc-pause_16"></i>
+        <mc-vertical-navbar-title>Left icon</mc-vertical-navbar-title>
+    </mc-vertical-navbar-item>
+
+    <mc-vertical-navbar-item (click)="onItemClick()">
+        <i mc-icon="mc-clock_16"></i>
+    </mc-vertical-navbar-item>
+
+    <mc-vertical-navbar-item (click)="onItemClick()">
+        <mc-vertical-navbar-title>Right icon</mc-vertical-navbar-title>
+        <i mc-icon="mc-search_16"></i>
+    </mc-vertical-navbar-item>
+
+    <mc-vertical-navbar-item (click)="onItemClick()">
+        <mc-vertical-navbar-title>Custom title</mc-vertical-navbar-title>
+        <i mc-icon="mc-gear_16"></i>
+    </mc-vertical-navbar-item>
+
+    <mc-vertical-navbar-item (click)="onItemClick()">
+        <mc-vertical-navbar-title>Right icon</mc-vertical-navbar-title>
+        <i mc-icon="mc-calendar_16"></i>
+    </mc-vertical-navbar-item>
+
+    <mc-vertical-navbar-item (click)="onItemClick()">
+        <i mc-icon="mc-circle-8_16"></i>
+        <mc-vertical-navbar-title>Left icon</mc-vertical-navbar-title>
+    </mc-vertical-navbar-item>
+
+    <mc-vertical-navbar-item (click)="onItemClick()">
+        <mc-vertical-navbar-title>Right icon</mc-vertical-navbar-title>
+        <i mc-icon="mc-close-L_16"></i>
+    </mc-vertical-navbar-item>
+
+    <mc-vertical-navbar-item (click)="onItemClick()">
+        <i mc-icon="mc-error_16"></i>
+        <mc-vertical-navbar-title>Left icon</mc-vertical-navbar-title>
+    </mc-vertical-navbar-item>
+
+    <mc-vertical-navbar-item>
+        <span class="dropdown-text">Dropdown item</span>
+        <i mc-icon="mc-angle-down-M_16"></i>
+    </mc-vertical-navbar-item>
+
+    <mc-vertical-navbar-item (click)="onItemClick()">
+        <i mc-icon="mc-triangle_16"></i>
+        <mc-vertical-navbar-title>Left icon</mc-vertical-navbar-title>
+    </mc-vertical-navbar-item>
+    <mc-vertical-navbar-item (click)="onItemClick()">
+        <i mc-icon="mc-download_16"></i>
+    </mc-vertical-navbar-item>
+    <mc-vertical-navbar-item (click)="onItemClick()">
+        <mc-vertical-navbar-title>Right icon</mc-vertical-navbar-title>
+        <i mc-icon="mc-copy_16"></i>
+    </mc-vertical-navbar-item>
+</mc-vertical-navbar>
