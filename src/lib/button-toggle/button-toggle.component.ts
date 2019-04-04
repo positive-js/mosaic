@@ -341,9 +341,6 @@ export class McButtonToggle implements OnInit, OnDestroy {
     // tslint:disable-next-line:no-reserved-keywords
     type: ToggleType;
 
-    /** The parent button toggle group (exclusive selection). Optional. */
-    buttonToggleGroup: McButtonToggleGroup;
-
     @ViewChild(McButton) mcButton: McButton;
 
     /** McButtonToggleGroup reads this to assign its own value. */
@@ -367,13 +364,11 @@ export class McButtonToggle implements OnInit, OnDestroy {
     private _disabled: boolean = false;
 
     constructor(
-        @Optional() toggleGroup: McButtonToggleGroup,
+        @Optional() public buttonToggleGroup: McButtonToggleGroup,
         private changeDetectorRef: ChangeDetectorRef,
         private focusMonitor: FocusMonitor,
         private element: ElementRef
-    ) {
-        this.buttonToggleGroup = toggleGroup;
-    }
+    ) {}
 
     ngOnInit() {
         this.isSingleSelector = this.buttonToggleGroup && !this.buttonToggleGroup.multiple;
