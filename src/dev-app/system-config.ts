@@ -80,7 +80,7 @@ System.config({
         '@ptsecurity/mosaic/form-field': 'dist/packages/mosaic/form-field/index.js',
         '@ptsecurity/mosaic/tree': 'dist/packages/mosaic/tree/index.js',
         '@ptsecurity/mosaic/modal': 'dist/packages/mosaic/modal/index.js',
-        '@ptsecurity/mosaic/tag': 'dist/packages/mosaic/tag/index.js',
+        '@ptsecurity/mosaic/tags': 'dist/packages/mosaic/tags/index.js',
         '@ptsecurity/mosaic/tabs': 'dist/packages/mosaic/tabs/index.js',
         '@ptsecurity/mosaic/select': 'dist/packages/mosaic/select/index.js',
         '@ptsecurity/mosaic/sidepanel': 'dist/packages/mosaic/sidepanel/index.js',

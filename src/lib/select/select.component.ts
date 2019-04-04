@@ -77,7 +77,7 @@ import {
     MC_SELECT_SCROLL_STRATEGY
 } from '@ptsecurity/mosaic/core';
 import { McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
-import { McTag } from '@ptsecurity/mosaic/tag';
+import { McTag } from '@ptsecurity/mosaic/tags';
 import { defer, merge, Observable, Subject } from 'rxjs';
 import {
     filter,

@@ -157,7 +157,7 @@ describe('McListSelection without forms', () => {
         });
 
         it('should be able to use keyboard select with SPACE', () => {
-            const manager = selectionList.componentInstance._keyManager;
+            const manager = selectionList.componentInstance.keyManager;
             const SPACE_EVENT: KeyboardEvent = createKeyboardEvent('keydown', SPACE);
             const selectList =
                 selectionList.injector.get<McListSelection>(McListSelection).selectedOptions;
@@ -173,7 +173,7 @@ describe('McListSelection without forms', () => {
         });
 
         it('should be able to select an item using ENTER', () => {
-            const manager = selectionList.componentInstance._keyManager;
+            const manager = selectionList.componentInstance.keyManager;
             const ENTER_EVENT: KeyboardEvent = createKeyboardEvent('keydown', ENTER);
             const selectList =
                 selectionList.injector.get<McListSelection>(McListSelection).selectedOptions;
@@ -190,7 +190,7 @@ describe('McListSelection without forms', () => {
 
         // todo restore this TC
         xit('should restore focus if active option is destroyed', () => {
-            const manager = selectionList.componentInstance._keyManager;
+            const manager = selectionList.componentInstance.keyManager;
 
             listOptions[3].componentInstance.focus();
 
@@ -206,7 +206,7 @@ describe('McListSelection without forms', () => {
             const testListItem = listOptions[2].nativeElement as HTMLElement;
             const UP_EVENT: KeyboardEvent =
                 createKeyboardEvent('keydown', UP_ARROW, testListItem);
-            const manager = selectionList.componentInstance._keyManager;
+            const manager = selectionList.componentInstance.keyManager;
 
             listOptions[2].componentInstance.focus();
             expect(manager.activeItemIndex).toEqual(2);
@@ -219,7 +219,7 @@ describe('McListSelection without forms', () => {
         });
 
         it('should focus and toggle the next item when pressing SHIFT + UP_ARROW', () => {
-            const manager = selectionList.componentInstance._keyManager;
+            const manager = selectionList.componentInstance.keyManager;
             const upKeyEvent = createKeyboardEvent('keydown', UP_ARROW);
             Object.defineProperty(upKeyEvent, 'shiftKey', { get: () => true });
 
@@ -243,7 +243,7 @@ describe('McListSelection without forms', () => {
         });
 
         it('should focus next item when press DOWN ARROW', () => {
-            const manager = selectionList.componentInstance._keyManager;
+            const manager = selectionList.componentInstance.keyManager;
 
             listOptions[2].componentInstance.focus();
             expect(manager.activeItemIndex).toEqual(2);
@@ -255,7 +255,7 @@ describe('McListSelection without forms', () => {
         });
 
         it('should focus and toggle the next item when pressing SHIFT + DOWN_ARROW', () => {
-            const manager = selectionList.componentInstance._keyManager;
+            const manager = selectionList.componentInstance.keyManager;
             const downKeyEvent = createKeyboardEvent('keydown', DOWN_ARROW);
             Object.defineProperty(downKeyEvent, 'shiftKey', { get: () => true });
 
@@ -279,7 +279,7 @@ describe('McListSelection without forms', () => {
         });
 
         it('should be able to focus the first item when pressing HOME', () => {
-            const manager = selectionList.componentInstance._keyManager;
+            const manager = selectionList.componentInstance.keyManager;
             expect(manager.activeItemIndex).toBe(-1);
 
             const event = dispatchKeyboardEvent(selectionList.nativeElement, 'keydown', HOME);
@@ -290,7 +290,7 @@ describe('McListSelection without forms', () => {
         });
 
         it('should focus the last item when pressing END', () => {
-            const manager = selectionList.componentInstance._keyManager;
+            const manager = selectionList.componentInstance.keyManager;
             expect(manager.activeItemIndex).toBe(-1);
 
             const event = dispatchKeyboardEvent(selectionList.nativeElement, 'keydown', END);
@@ -302,7 +302,7 @@ describe('McListSelection without forms', () => {
 
         xit('should be able to jump focus down to an item by typing', fakeAsync(() => {
             const listEl = selectionList.nativeElement;
-            const manager = selectionList.componentInstance._keyManager;
+            const manager = selectionList.componentInstance.keyManager;
 
             expect(manager.activeItemIndex).toBe(-1);
 

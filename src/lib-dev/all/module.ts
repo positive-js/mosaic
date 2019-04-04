@@ -26,7 +26,7 @@ import { McProgressSpinnerModule } from '@ptsecurity/mosaic/progress-spinner';
 import { McRadioModule } from '@ptsecurity/mosaic/radio';
 import { McSelectModule } from '@ptsecurity/mosaic/select';
 import { McSplitterModule } from '@ptsecurity/mosaic/splitter';
-import { McTagModule } from '@ptsecurity/mosaic/tag';
+import { McTagsModule } from '@ptsecurity/mosaic/tags';
 import { McTextareaModule } from '@ptsecurity/mosaic/textarea';
 import { McTimepickerModule } from '@ptsecurity/mosaic/timepicker';
 import { McToggleModule } from '@ptsecurity/mosaic/toggle';
@@ -213,7 +213,7 @@ export class DemoComponent {
         McRadioModule,
         McSelectModule,
         McSplitterModule,
-        McTagModule,
+        McTagsModule,
         McTextareaModule,
         McTimepickerModule,
         McToggleModule,

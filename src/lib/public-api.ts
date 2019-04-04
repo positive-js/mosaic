@@ -24,7 +24,7 @@ export * from '@ptsecurity/mosaic/tree';
 export * from '@ptsecurity/mosaic/tabs';
 export * from '@ptsecurity/mosaic/select';
 export * from '@ptsecurity/mosaic/tree-select';
-export * from '@ptsecurity/mosaic/tag';
+export * from '@ptsecurity/mosaic/tags';
 export * from '@ptsecurity/mosaic/textarea';
 export * from '@ptsecurity/mosaic/timepicker';
 export * from '@ptsecurity/mosaic/sidepanel';
