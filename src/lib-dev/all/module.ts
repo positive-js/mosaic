@@ -8,6 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { CdkTreeModule, FlatTreeControl, NestedTreeControl } from '@ptsecurity/cdk/tree';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
+import { McButtonToggleModule } from '@ptsecurity/mosaic/button-toggle';
 
 import { McCardModule } from '@ptsecurity/mosaic/card';
 import { McCheckboxModule } from '@ptsecurity/mosaic/checkbox';
@@ -53,6 +54,8 @@ export class DemoComponent {
     indeterminate: boolean = true;
     disabled: boolean = false;
     labelPosition = 'after';
+
+    buttonToggleModelResult: string;
 
     typesOfShoes = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
 
@@ -194,6 +197,7 @@ export class DemoComponent {
         ReactiveFormsModule,
         McIconModule,
         McButtonModule,
+        McButtonToggleModule,
         McLinkModule,
         McCardModule,
         McCheckboxModule,

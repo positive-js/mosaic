@@ -57,6 +57,7 @@ System.config({
         '@ptsecurity/mosaic-moment-adapter/adapter': 'dist/packages/mosaic-moment-adapter/adapter/index.js',
 
         '@ptsecurity/mosaic/button': 'dist/packages/mosaic/button/index.js',
+        '@ptsecurity/mosaic/button-toggle': 'dist/packages/mosaic/button-toggle/index.js',
         '@ptsecurity/mosaic/core': 'dist/packages/mosaic/core/index.js',
         '@ptsecurity/mosaic/divider': 'dist/packages/mosaic/divider/index.js',
         '@ptsecurity/mosaic/dropdown': 'dist/packages/mosaic/dropdown/index.js',

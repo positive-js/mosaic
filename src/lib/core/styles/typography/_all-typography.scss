@@ -2,6 +2,7 @@
 @import '../alerts';
 @import '../badges';
 @import '../../../button/button-theme';
+@import '../../../button-toggle/button-toggle-theme';
 @import '../../../checkbox/checkbox-theme';
 @import '../../../datepicker/datepicker-theme';
 @import '../../../dropdown/dropdown-theme';
@@ -33,6 +34,7 @@
     @include mc-alert-typography($config);
     @include mc-badge-typography($config);
     @include mc-button-typography($config);
+    @include mc-button-toggle-typography($config);
     @include mc-checkbox-typography($config);
     @include mc-datepicker-typography($config);
     @include mc-dropdown-typography($config);

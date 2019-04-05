@@ -1,0 +1,93 @@
+@import '../core/styles/common/vendor-prefixes';
+@import '../core/styles/common/layout';
+@import '../../cdk/a11y/a11y';
+@import '../core/styles/common/button';
+
+$mc-button-toggle-standard-padding: 0 12px !default;
+$mc-button-toggle-standard-height: 20px !default;
+$mc-button-toggle-standard-border-radius: 2px !default;
+
+$mc-button-toggle-border-size: 1px;
+$mc-button-toggle-border-radius: 3px;
+
+$mc-button-toggle-padding: 5px 7px;
+
+.mc-button-toggle-group {
+    display: flex;
+    flex-direction: row;
+
+    &:not(.mc-button-toggle-vertical) {
+        .mc-button-toggle:not([disabled]) + .mc-button-toggle:not([disabled]) {
+            margin-left: -$mc-button-toggle-border-size;
+        }
+    }
+
+    .mc-button-toggle {
+
+        > .mc-button {
+            padding: $mc-button-toggle-padding;
+        }
+
+        &:first-of-type:not(:last-of-type) {
+            > .mc-button,
+            > .mc-icon-button {
+                @include border-right-radius(0);
+            }
+        }
+
+        &:last-of-type:not(:first-of-type) {
+            > .mc-button,
+            > .mc-icon-button {
+                @include border-left-radius(0);
+            }
+        }
+
+        &:not(:first-of-type):not(:last-of-type) {
+            > .mc-button,
+            > .mc-icon-button {
+                border-radius: 0;
+            }
+        }
+
+    }
+}
+
+.mc-button-toggle-vertical {
+    flex-direction: column;
+
+    .mc-button-toggle:not([disabled]) + .mc-button-toggle:not([disabled]) {
+        margin-top: -$mc-button-toggle-border-size;
+    }
+
+    .mc-button-toggle {
+        .mc-button,
+        .mc-icon-button {
+            width: 100%;
+        }
+
+        &:first-child:not(:last-child) {
+            > .mc-button,
+            > .mc-icon-button {
+                @include border-bottom-radius(0);
+
+                border-top-right-radius: $mc-button-toggle-border-radius;
+            }
+        }
+
+        &:last-child:not(:first-child) {
+            > .mc-button,
+            > .mc-icon-button {
+                @include border-top-radius(0);
+
+                border-bottom-left-radius: $mc-button-toggle-border-radius;
+            }
+        }
+
+        &:not(:first-child):not(:last-child) {
+            > .mc-button,
+            > .mc-icon-button {
+                border-radius: 0;
+            }
+        }
+    }
+}

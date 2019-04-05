@@ -102,6 +102,133 @@
     </div>
 
     <div class="dev-box">
+        <h1>Button-Toggle</h1>
+
+        <label>Horizontal Group</label>
+        <mc-button-toggle-group #group1="mcButtonToggleGroup">
+            <mc-button-toggle value="1">
+                default 1
+            </mc-button-toggle>
+            <mc-button-toggle value="2">
+                default 2
+            </mc-button-toggle>
+            <mc-button-toggle value="3">
+                default 3
+            </mc-button-toggle>
+            <mc-button-toggle value="4" disabled>
+                default 4
+            </mc-button-toggle>
+            <mc-button-toggle value="5">
+                <i mc-icon="mc-angle-down-L_16"></i>
+            </mc-button-toggle>
+            <mc-button-toggle value="6">
+                default 6
+            </mc-button-toggle>
+            <mc-button-toggle value="7">
+                <i mc-icon="mc-angle-down-L_16"></i>
+            </mc-button-toggle>
+        </mc-button-toggle-group>
+        <div class="example-selected-value">Selected value: {{group1.value}}</div>
+
+        <br>
+
+        <label>DisableGroup</label>
+
+        <br>
+
+        <button mc-button (click)="disabled = !disabled">Toggle Disabled</button>
+
+        <br>
+        <br>
+
+        <mc-button-toggle-group [disabled]="disabled" #disabledGroup="mcButtonToggleGroup">
+            <mc-button-toggle value="1">
+                default 1
+            </mc-button-toggle>
+            <mc-button-toggle value="2" disabled>
+                default 2
+            </mc-button-toggle>
+            <mc-button-toggle value="3">
+                default 3
+            </mc-button-toggle>
+            <mc-button-toggle value="4">
+                <i mc-icon="mc-angle-down-L_16"></i>
+            </mc-button-toggle>
+        </mc-button-toggle-group>
+        <div class="example-selected-value">Selected value: {{disabledGroup.value}}</div>
+
+        <br>
+
+        <label>Multiple Group</label>
+        <mc-button-toggle-group multiple #multipleGroup="mcButtonToggleGroup">
+            <mc-button-toggle value="1">
+                default 1
+            </mc-button-toggle>
+            <mc-button-toggle value="2" disabled>
+                default 2
+            </mc-button-toggle>
+            <mc-button-toggle value="3">
+                default
+            </mc-button-toggle>
+            <mc-button-toggle value="4">
+                <i mc-icon="mc-angle-down-L_16"></i>
+            </mc-button-toggle>
+        </mc-button-toggle-group>
+        <div class="example-selected-value">Selected value: {{multipleGroup.value}}</div>
+
+        <br>
+
+        <label>Standalone Toggle</label>
+
+        <br>
+
+        <mc-button-toggle value="123" #standAloneToggle="mcButtonToggle">
+            default
+        </mc-button-toggle>
+        <div class="example-selected-value">Selected value: {{standAloneToggle.checked}}</div>
+
+        <br>
+
+        <label>Vertical Group</label>
+
+        <mc-button-toggle-group #group3="mcButtonToggleGroup" [vertical]="true">
+            <mc-button-toggle value="1">
+                default 1
+            </mc-button-toggle>
+            <mc-button-toggle value="2" disabled>
+                default 2
+            </mc-button-toggle>
+            <mc-button-toggle value="3">
+                default 3
+            </mc-button-toggle>
+            <mc-button-toggle value="4">
+                <i mc-icon="mc-angle-down-L_16"></i>
+            </mc-button-toggle>
+        </mc-button-toggle-group>
+        <div class="example-selected-value">Selected value: {{group3.value}}</div>
+
+        <br>
+
+        <label>Group With Model</label>
+
+        <mc-button-toggle-group [(ngModel)]="buttonToggleModelResult">
+            <mc-button-toggle value="1">
+                default 1
+            </mc-button-toggle>
+            <mc-button-toggle value="2" disabled>
+                default 2
+            </mc-button-toggle>
+            <mc-button-toggle value="3">
+                default 3
+            </mc-button-toggle>
+            <mc-button-toggle value="4">
+                <i mc-icon="mc-angle-down-L_16"></i>
+            </mc-button-toggle>
+        </mc-button-toggle-group>
+        <div class="example-selected-value">Model result: {{buttonToggleModelResult}}</div>
+    </div>
+
+    <div class="dev-box">
         <h1>Card</h1>
 
         <div class="line">
