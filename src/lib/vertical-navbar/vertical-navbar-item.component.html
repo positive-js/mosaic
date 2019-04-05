@@ -1,11 +1,11 @@
 <div
-    [attr.tabindex]="disabled ? -1 : tabIndex"
+    cdkMonitorElementFocus
     (click)="handleClickByItem()"
     (keydown)="handleKeydown($event)"
     class="mc-vertical-navbar-item"
 >
     <ng-content></ng-content>
-    <i *ngIf="hasNestedItems" mc-icon="mc-angle-right-M_16" class="mc-vertical-navbar-item-menu-icon"></i>
+    <i *ngIf="hasNestedItems" mc-icon="mc-angle-right-M_32" class="mc-vertical-navbar-item-menu-icon"></i>
 </div>
 
 <div *ngIf="hasNestedItems"

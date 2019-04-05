@@ -9,11 +9,7 @@ import {
     McVerticalNavbarItemBadge,
     McVerticalNavbarItemIcon
 } from './vertical-navbar-item.component';
-import {
-    McVerticalNavbar,
-    McVerticalNavbarHeader,
-    McVerticalNavbarTitle
-} from './vertical-navbar.component';
+import { McVerticalNavbar, McVerticalNavbarHeader, McVerticalNavbarTitle } from './vertical-navbar.component';
 
 
 const COMPONENTS = [

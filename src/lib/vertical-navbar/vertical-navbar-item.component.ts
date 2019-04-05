@@ -24,11 +24,6 @@ import { Observable, Subscription } from 'rxjs';
 import { expandVerticalNavbarMenuAnimation } from './vertical-navbar.animation';
 
 
-export const MC_NAVBAR_ITEM = 'mc-vertical-navbar-item';
-export const MC_NAVBAR_ITEM_ICON = 'mc-vertical-navbar-item-icon';
-export const MC_NAVBAR_ITEM_BADGE = 'mc-vertical-navbar-badge';
-
-
 export class McVerticalNavbarItemBase {
     constructor(public _elementRef: ElementRef) {}
 }
@@ -37,30 +32,30 @@ export const _McVerticalNavbarMixinBase: CanDisableCtor & typeof McVerticalNavba
 
 
 @Directive({
-    selector: MC_NAVBAR_ITEM_ICON,
+    selector: 'mc-vertical-navbar-item-icon',
     host: {
-        class: MC_NAVBAR_ITEM_ICON
+        class: 'mc-vertical-navbar-item-icon'
     }
 })
 export class McVerticalNavbarItemIcon {}
 
 
 @Component({
-    selector: MC_NAVBAR_ITEM_BADGE,
+    selector: 'mc-vertical-navbar-badge',
     template: `
-        <span class="mc-badge mc-badge_warning">
+        <span class="mc-badge mc-badge_light">
             <ng-content></ng-content>
         </span>
     `,
     host: {
-        class: MC_NAVBAR_ITEM_BADGE
+        class: 'mc-vertical-navbar-badge'
     }
 })
 export class McVerticalNavbarItemBadge {}
 
 
 @Component({
-    selector: `a[${MC_NAVBAR_ITEM}], ${MC_NAVBAR_ITEM}`,
+    selector: 'a[mc-vertical-navbar-item], mc-vertical-navbar-item',
     templateUrl: './vertical-navbar-item.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -68,7 +63,7 @@ export class McVerticalNavbarItemBadge {}
     inputs: ['disabled'],
     host: {
         '[attr.disabled]': 'disabled || null',
-        '[attr.tabindex]': '-1'
+        '[attr.tabindex]': 'disabled ? -1 : 0'
     },
     animations: [
         expandVerticalNavbarMenuAnimation()
@@ -140,7 +135,7 @@ export class McVerticalNavbarItem extends _McVerticalNavbarMixinBase implements 
     }
 
     handleKeydown($event: KeyboardEvent) {
-        const isNavbarItem = ($event.target as HTMLElement).classList.contains(MC_NAVBAR_ITEM);
+        const isNavbarItem = ($event.target as HTMLElement).classList.contains('mc-vertical-navbar-item');
 
         // tslint:disable-next-line
         // if (this.hasDropdownContent && $event.keyCode === SPACE && isNavbarItem) {

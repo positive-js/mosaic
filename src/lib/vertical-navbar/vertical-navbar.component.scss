@@ -14,12 +14,13 @@
     .mc-vertical-navbar-header-area {
         display: flex;
         width: 100%;
-        align-items: center;
+        align-items: stretch;
         box-sizing: border-box;
         min-height: 64px;
 
         .mc-vertical-navbar-header {
             display: flex;
+            height: 100%;
             justify-content: stretch;
             text-decoration: none;
             align-self: stretch;
@@ -34,10 +35,6 @@
             align-items: center;
             align-self: stretch;
             width: 64px;
-
-            > i {
-                font-size: 32px;
-            }
         }
 
         .mc-vertical-navbar-title {

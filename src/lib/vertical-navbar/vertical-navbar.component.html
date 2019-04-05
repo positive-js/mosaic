@@ -5,14 +5,16 @@
      [class.mc-vertical-navbar-collapsed]="! animating && ! expanded"
 >
     <div class="mc-vertical-navbar-header-area">
-        <div class="mc-vertical-navbar-toggle-button" (click)="expanded = ! expanded">
-            <i mc-icon="mc-hamburger_16" *ngIf="! expanded"></i>
-            <i mc-icon="mc-close-L_16" *ngIf="expanded"></i>
+        <div tabindex="0" class="mc-vertical-navbar-toggle-button" (click)="expanded = ! expanded" cdkMonitorElementFocus>
+            <i mc-icon="mc-hamburger_32" *ngIf="! expanded"></i>
+            <i mc-icon="mc-close-L_32" *ngIf="expanded"></i>
         </div>
-        <ng-content select="
-            mc-vertical-navbar-header,
-            a[mc-vertical-navbar-header]
-        "></ng-content>
+        <div cdkMonitorSubtreeFocus>
+            <ng-content select="
+                mc-vertical-navbar-header,
+                a[mc-vertical-navbar-header]
+            "></ng-content>
+        </div>
     </div>
 
     <ng-content></ng-content>
