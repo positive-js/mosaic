@@ -195,5 +195,10 @@
         "hooks": {
             "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
         }
+    },
+    "collective": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/mosaic",
+        "logo": "https://opencollective.com/mosaic/logo.txt"
     }
 }
