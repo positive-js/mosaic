@@ -17,8 +17,7 @@
 
     a[mc-vertical-navbar-header], .mc-vertical-navbar-toggle-button {
         &:hover {
-            $active-lighten: 5%;
-            background-color: lighten(mc-color($palette, 700), $active-lighten)
+            background-color: lighten(mc-color($palette, 700), 5%)
         }
     }
 

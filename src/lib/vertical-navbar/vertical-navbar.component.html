@@ -5,7 +5,11 @@
      [class.mc-vertical-navbar-collapsed]="! animating && ! expanded"
 >
     <div class="mc-vertical-navbar-header-area">
-        <div tabindex="0" class="mc-vertical-navbar-toggle-button" (click)="expanded = ! expanded" cdkMonitorElementFocus>
+        <div cdkMonitorElementFocus tabindex="0" class="mc-vertical-navbar-toggle-button"
+             (click)="toggle()"
+             (keyup.space)="toggle()"
+             (keyup.enter)="toggle()"
+        >
             <i mc-icon="mc-hamburger_32" *ngIf="! expanded"></i>
             <i mc-icon="mc-close-L_32" *ngIf="expanded"></i>
         </div>

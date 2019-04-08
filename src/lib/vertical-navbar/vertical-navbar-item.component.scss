@@ -20,12 +20,10 @@
     }
 }
 
-
 .mc-vertical-navbar-item-menu-icon {
     margin-left: auto;
     padding-left: 16px;
 }
-
 
 .mc-vertical-navbar-badge {
     position: absolute;
@@ -41,7 +39,6 @@
 }
 
 .mc-vertical-navbar-item-icon {
-
     margin-right: 16px;
 
     .mc-icon {
@@ -49,13 +46,9 @@
     }
 }
 
-.mc-vertical-navbar-item:not([disabled]) {
-    cursor: pointer;
+.mc-vertical-navbar-title {
+    white-space: nowrap;
 }
-
-//mc-vertical-navbar-item.mc-progress:not([disabled]) {
-//    cursor: pointer;
-//}
 
 mc-vertical-navbar-item, a[mc-vertical-navbar-item] {
     height: 64px;
@@ -74,19 +67,18 @@ mc-vertical-navbar-item, a[mc-vertical-navbar-item] {
         display: flex;
         align-items: center;
         width: 100%;
+        height: 100%;
     }
 
-    &.mc-progress:not([disabled]) {
+    &.mc-progress {
         cursor: pointer;
     }
 
-    &[disabled] {
-        .mc-vertical-navbar-item {
-            cursor: default;
-        }
+    &.mc-vertical-navbar-item-active {
+        cursor: default;
     }
-}
 
-.mc-vertical-navbar-title {
-    white-space: nowrap;
+    &[disabled] {
+        cursor: default;
+    }
 }

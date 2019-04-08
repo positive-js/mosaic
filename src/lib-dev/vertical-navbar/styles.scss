@@ -3,6 +3,7 @@
 //@import '../../lib/core/theming/prebuilt/default-theme';
 @import '../../lib/core/theming/prebuilt/dark-theme';
 
+
 body {
     margin: 0;
 }
@@ -47,14 +48,6 @@ mc-vertical-navbar {
     }
 }
 
-.custom-item {
-    width: 100%;
-    box-sizing: border-box;
-    margin: auto 0;
-    padding: 4px;
-    background: rgba(255, 255, 255, 0.25);
-}
-
 .user-menu {
     display: flex;
     padding-left: 0;
@@ -65,7 +58,7 @@ mc-vertical-navbar {
         flex-direction: column;
         text-align: center;
         flex: 0 0 auto;
-        background: yellow;
+        background: lighten(mc-color($primary, 700), 15%);
         border-radius: 50%;
         width: 40px;
         height: 40px;

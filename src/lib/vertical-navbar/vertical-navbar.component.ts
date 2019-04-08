@@ -31,6 +31,10 @@ export class McVerticalNavbarTitle {}
 })
 export class McVerticalNavbar {
 
+    toggle() {
+        this.expanded = ! this.expanded;
+    }
+
     animating: boolean = false;
 
     @Input()

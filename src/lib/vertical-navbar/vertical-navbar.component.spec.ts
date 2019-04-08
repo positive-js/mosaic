@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { SPACE } from '@ptsecurity/cdk/keycodes';
 import { createKeyboardEvent, createFakeEvent } from '@ptsecurity/cdk/testing';
 import { delay } from 'rxjs/operators';
@@ -15,18 +15,13 @@ const FONT_RENDER_TIMEOUT_MS = 10;
 describe('McVerticalNavbar', () => {
 
     beforeEach(fakeAsync(() => {
-
-        window.jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000000;
-
         TestBed.configureTestingModule({
             imports: [McVerticalNavbarModule, McIconModule, NoopAnimationsModule],
             declarations: [TestApp]
         }).compileComponents();
-
-        // TestBed.compileComponents();
     }));
 
-    it('should be toggled by click', async (done) => {
+    it('should be toggled by click', () => {
         const app = TestBed.createComponent(TestApp);
         app.detectChanges();
 
@@ -46,8 +41,6 @@ describe('McVerticalNavbar', () => {
         button.nativeElement.click();
 
         expect(app.componentInstance.navbar.expanded).toBeFalsy();
-
-        done();
     });
 
     // it('collapsed elements should have title', (done) => {
