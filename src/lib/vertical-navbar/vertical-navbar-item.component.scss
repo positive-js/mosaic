@@ -1,29 +1,5 @@
-@import 'vertical-navbar-common';
 @import 'vertical-navbar-theme';
 
-
-.mc-vertical-navbar-item-menu {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    left: 100%;
-
-    @extend %shadow;
-
-    &.mc-vertical-navbar-item-menu-collapsed {
-        display: none;
-    }
-
-    &.mc-vertical-navbar-item-menu-animating {
-        overflow: hidden;
-        tab-index: -1;
-    }
-}
-
-.mc-vertical-navbar-item-menu-icon {
-    margin-left: auto;
-    padding-left: 16px;
-}
 
 .mc-vertical-navbar-badge {
     position: absolute;

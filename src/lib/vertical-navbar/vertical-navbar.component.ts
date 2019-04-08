@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Directive, ViewEncapsulation, Input } from '@angular/core';
 
-import { expandVerticalNavbarAnimation } from './vertical-navbar.animation';
+import { toggleVerticalNavbarAnimation } from './vertical-navbar.animation';
 
 
 @Directive({
@@ -26,24 +26,14 @@ export class McVerticalNavbarTitle {}
     styleUrls: ['./vertical-navbar.component.css'],
     encapsulation: ViewEncapsulation.None,
     animations: [
-        expandVerticalNavbarAnimation()
+        toggleVerticalNavbarAnimation()
     ]
 })
 export class McVerticalNavbar {
 
+    @Input() expanded: boolean = false;
+
     toggle() {
         this.expanded = ! this.expanded;
     }
-
-    animating: boolean = false;
-
-    @Input()
-    get expanded(): boolean {
-        return this._expanded;
-    }
-    set expanded(value: boolean) {
-        this._expanded = value;
-        this.animating = true;
-    }
-    private _expanded: boolean = false;
 }

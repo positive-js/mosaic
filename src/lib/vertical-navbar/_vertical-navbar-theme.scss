@@ -33,10 +33,6 @@
 
         color: mc-contrast($palette, 700);
 
-        .mc-vertical-navbar-item-menu {
-            background-color: mc-color($palette, 700);
-        }
-
         &.mc-vertical-navbar-item-active {
             $active-lighten: 5%;
             background-color: lighten(mc-color($palette, 700), $active-lighten)
@@ -47,7 +43,6 @@
                 opacity: 0.3;
             }
         }
-
 
         &:hover:not([disabled]):not(.mc-progress) {
             $hover-lighten: 5%;

@@ -1,4 +1,3 @@
-@import 'vertical-navbar-common';
 @import 'vertical-navbar-theme';
 
 .mc-vertical-navbar {
@@ -8,8 +7,7 @@
     flex-direction: column;
     align-items: flex-start;
     min-height: 100%;
-
-    @extend %shadow;
+    overflow: hidden;
 
     .mc-vertical-navbar-header-area {
         display: flex;
@@ -40,13 +38,5 @@
         .mc-vertical-navbar-title {
             padding: 0 16px;
         }
-    }
-
-    &.mc-vertical-navbar-animating {
-        overflow: hidden;
-    }
-
-    &.mc-vertical-navbar-collapsed {
-        overflow: hidden;
     }
 }

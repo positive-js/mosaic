@@ -1,9 +1,4 @@
-<nav class="mc-vertical-navbar"
-     [@expand]="expanded"
-     (@expand.done)="animating = false"
-     [class.mc-vertical-navbar-animating]="animating"
-     [class.mc-vertical-navbar-collapsed]="! animating && ! expanded"
->
+<nav class="mc-vertical-navbar" [@toggle]="expanded">
     <div class="mc-vertical-navbar-header-area">
         <div cdkMonitorElementFocus tabindex="0" class="mc-vertical-navbar-toggle-button"
              (click)="toggle()"

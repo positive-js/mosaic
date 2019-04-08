@@ -13,10 +13,6 @@ So the navbar is just a container for items and its general scheme looks like th
     
     <mc-vertical-navbar-item>Item with default styling</mc-vertical-navbar-item>
     <a mc-vertical-navbar-item>Anchor item</a>
-    <mc-vertical-navbar-item>
-        <mc-vertical-navbar-item>First nested item</mc-vertical-navbar-item>    
-        <a mc-vertical-navbar-item>Second nested anchor item</a>    
-    </mc-vertical-navbar-item>
 </mc-vertical-navbar>
 ```
 
@@ -60,31 +56,6 @@ but we also provide some states which are allowed to be combined with each other
  - class `cdk-focused` - focused state, we control it as well for common tab order behavior,
  - attribute `disabled` works as expected, making an item unselectable and grayed-out.
 
-## Nested items
-
-By putting one item into another you make them work together as a menu:
-
-```
-<mc-vertical-navbar-item>
-    I'm expandable!
-    
-    <mc-vertical-navbar-item>Nested item</mc-vertical-navbar-item>
-    <a mc-vertical-navbar-item>Nested item</a>
-</mc-vertical-navbar-item>
-```
-
-And you are *not* limited to the one level of nesting:
-```
-<mc-vertical-navbar-item>Zero
-    <mc-vertical-navbar-item>One
-        <mc-vertical-navbar-item>Two
-            <mc-vertical-navbar-item>Three
-            </mc-vertical-navbar-item>
-        </mc-vertical-navbar-item>
-    </mc-vertical-navbar-item>
-</mc-vertical-navbar-item>
-```
-
 ## Positioning toolbar content
 
 By default the navbar puts the items one below the other.
@@ -98,5 +69,3 @@ For instance, putting some items at the bottom is as simple as this:
     <mc-vertical-navbar-item>Bottom aligned</mc-vertical-navbar-item>
 </mc-vertical-navbar-item>
 ```
-
-Nested items can be vertically aligned by setting `alignNestedItems` property with allowed values `'bottom'` and `'top'`

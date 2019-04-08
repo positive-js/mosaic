@@ -1,21 +1,3 @@
-<div
-    cdkMonitorElementFocus
-    (click)="handleClickByItem()"
-    (keydown)="handleKeydown($event)"
-    class="mc-vertical-navbar-item"
->
+<div cdkMonitorElementFocus class="mc-vertical-navbar-item">
     <ng-content></ng-content>
-    <i *ngIf="hasNestedItems" mc-icon="mc-angle-right-M_32" class="mc-vertical-navbar-item-menu-icon"></i>
-</div>
-
-<div *ngIf="hasNestedItems"
-     [@toggleMenu]="expanded"
-     (@toggleMenu.done)="animating = false"
-     class="mc-vertical-navbar-item-menu"
-     [style.top]="alignNestedItems === 'top' ? '0' : null"
-     [style.bottom]="alignNestedItems === 'bottom' ? '0' : null"
-     [class.mc-vertical-navbar-item-menu-animating]="animating"
-     [class.mc-vertical-navbar-item-menu-collapsed]="! animating && ! expanded"
->
-    <ng-content select="mc-vertical-navbar-item, a[mc-vertical-navbar-item]"></ng-content>
 </div>
