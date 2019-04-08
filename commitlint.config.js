@@ -42,7 +42,8 @@ module.exports = {
                 'tree',
                 'tree-select',
                 'typography',
-                'visual'
+                'visual',
+                'popover'
             ]
         ]
     }

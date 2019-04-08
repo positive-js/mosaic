@@ -1,0 +1,47 @@
+<ng-template #customContent>
+    <ng-container [ngSwitch]="popoverActiveStage">
+        <ng-container *ngSwitchCase="1">
+            <div class="neo-image"></div>
+        </ng-container>
+        <ng-container *ngSwitchCase="2">
+            <div class="smith-image"></div>
+        </ng-container>
+        <ng-container *ngSwitchCase="3">
+            Зачем, Нео, ты всё стараешься и стараешься? Ради чего?
+        </ng-container>
+    </ng-container>
+</ng-template>
+
+<ng-template #customFooter>
+    <div class="neo-choice">
+        <div class="neo-choice-button">
+            <button mc-button
+                    color="primary"
+                    (click)="onBlueClick()">Сделаю копипаст</button>
+        </div>
+        <div class="neo-choice-button"
+             (mousedown)="onRedClick()">
+            <button class="neo-choice-button"
+                    mc-button
+                    color="error"
+                    [disabled]="isRedPillDisabled"
+                    (mouseover)="disableRedPill(true)">Сам напишу {{ motivation }}</button>
+        </div>
+    </div>
+</ng-template>
+
+<button
+    class="help-neo"
+    mc-button
+    color="second"
+
+    mcPopover
+    mcPopoverTrigger="manual"
+    mcPopoverClass="popover-450 this-class-not-available"
+    [mcPopoverVisible]="isPopoverVisible"
+    mcPopoverHeader="Сделай правильный выбор"
+    [mcPopoverContent]="customContent"
+    [mcPopoverFooter]="customFooter"
+    (click)="changePopoverVisibility()">
+    Помоги Нео сделать правильный выбор
+</button>
