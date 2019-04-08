@@ -4,50 +4,48 @@ import {
     Directive,
     ElementRef,
     OnDestroy,
-    QueryList,
-    ViewEncapsulation,
-    ContentChildren
+    ViewEncapsulation
 } from '@angular/core';
-
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
-
 import { mixinColor, mixinDisabled, CanColor, CanDisable, CanDisableCtor, CanColorCtor } from '@ptsecurity/mosaic/core';
-import { McIcon } from '@ptsecurity/mosaic/icon';
 
 
 @Directive({
     selector: 'button[mc-button], a[mc-button]',
-    host: { class: 'mc-button' }
+    host: {
+        '[class.mc-button]': '!isIconButton',
+        '[class.mc-icon-button]': 'isIconButton'
+    }
 })
-export class McButtonCSSStyler {}
-
-
-@Directive({
-    selector: 'button[mc-icon-button], a[mc-icon-button]',
-    queries: {
-        contentChildren: new ContentChildren(McIcon)
-    },
-    host: { class: 'mc-icon-button' }
-})
-export class McIconButtonCSSStyler {
+export class McButtonCssStyler {
     nativeElement: Element;
 
-    contentChildren: QueryList<McIcon>;
+    get isIconButton(): boolean {
+        return this.icons.length > 0;
+    }
+
+    private icons: HTMLElement[] = [];
 
     constructor(elementRef: ElementRef) {
         this.nativeElement = elementRef.nativeElement;
     }
 
     ngAfterContentInit() {
-        this._addClassModificatorForIcons();
+        /**
+         * Here we had to use native selectors due to number of angular issues about ContentChildren limitations
+         * https://github.com/angular/angular/issues/16299
+         * https://github.com/angular/angular/issues/8563
+         * https://github.com/angular/angular/issues/14769
+         */
+        this.icons = Array.from(this.nativeElement.querySelectorAll('.mc-icon'));
+        this.addClassModificatorForIcons();
     }
 
-    _addClassModificatorForIcons() {
+    private addClassModificatorForIcons() {
         const twoIcons = 2;
-        const icons = this.contentChildren.map((item) => item._elementRef.nativeElement);
 
-        if (icons.length === 1) {
-            const iconElement = icons[0];
+        if (this.icons.length === 1) {
+            const iconElement = this.icons[0];
             const COMMENT_NODE = 8;
 
             if (!iconElement.previousElementSibling && !iconElement.nextElementSibling) {
@@ -61,9 +59,9 @@ export class McIconButtonCSSStyler {
                     this.nativeElement.classList.add('mc-icon-button_right');
                 }
             }
-        } else if (icons.length === twoIcons) {
-            const firstIconElement = icons[0];
-            const secondIconElement = icons[1];
+        } else if (this.icons.length === twoIcons) {
+            const firstIconElement = this.icons[0];
+            const secondIconElement = this.icons[1];
 
             firstIconElement.classList.add('mc-icon_left');
             secondIconElement.classList.add('mc-icon_right');
@@ -71,12 +69,13 @@ export class McIconButtonCSSStyler {
     }
 }
 
-
 export class McButtonBase {
+    // tslint:disable-next-line:naming-convention
     constructor(public _elementRef: ElementRef) {}
 }
 
-export const _McButtonMixinBase:
+// tslint:disable-next-line:naming-convention
+export const McButtonMixinBase:
     CanDisableCtor &
     CanColorCtor &
     typeof McButtonBase =
@@ -84,13 +83,7 @@ export const _McButtonMixinBase:
 
 
 @Component({
-    selector: `
-        button[mc-button],
-        button[mc-xs-button],
-        button[mc-sm-button],
-        button[mc-lg-button],
-        button[mc-xl-button]
-    `,
+    selector: 'button[mc-button]',
     templateUrl: './button.component.html',
     styleUrls: ['./button.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -100,7 +93,7 @@ export const _McButtonMixinBase:
         '[disabled]': 'disabled || null'
     }
 })
-export class McButton extends _McButtonMixinBase implements OnDestroy, CanDisable, CanColor {
+export class McButton extends McButtonMixinBase implements OnDestroy, CanDisable, CanColor {
     constructor(elementRef: ElementRef, private _focusMonitor: FocusMonitor) {
         super(elementRef);
 
@@ -112,17 +105,17 @@ export class McButton extends _McButtonMixinBase implements OnDestroy, CanDisabl
     }
 
     focus(): void {
-        this._getHostElement().focus();
+        this.getHostElement().focus();
     }
 
-    _getHostElement() {
+    getHostElement() {
         return this._elementRef.nativeElement;
     }
 }
 
 
 @Component({
-    selector: 'a[mc-button], a[mc-xs-button], a[mc-sm-button], a[mc-lg-button], a[mc-xl-button]',
+    selector: 'a[mc-button]',
     templateUrl: './button.component.html',
     styleUrls: ['./button.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -131,7 +124,7 @@ export class McButton extends _McButtonMixinBase implements OnDestroy, CanDisabl
     host: {
         '[attr.tabindex]': 'disabled ? -1 : 0',
         '[attr.disabled]': 'disabled || null',
-        '(click)': '_haltDisabledEvents($event)'
+        '(click)': 'haltDisabledEvents($event)'
     }
 })
 export class McAnchor extends McButton {
@@ -139,33 +132,7 @@ export class McAnchor extends McButton {
         super(elementRef, focusMonitor);
     }
 
-    _haltDisabledEvents(event: Event) {
-        if (this.disabled) {
-            event.preventDefault();
-            event.stopImmediatePropagation();
-        }
-    }
-}
-
-
-@Component({
-    selector: 'button[mc-icon-button]',
-    templateUrl: './button.component.html',
-    styleUrls: ['./button.css'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None,
-    inputs: ['disabled', 'color'],
-    host: {
-        '[attr.tabindex]': 'disabled ? -1 : 0',
-        '[attr.disabled]': 'disabled || null'
-    }
-})
-export class McIconButton extends McButton {
-    constructor(focusMonitor: FocusMonitor, elementRef: ElementRef) {
-        super(elementRef, focusMonitor);
-    }
-
-    _haltDisabledEvents(event: Event) {
+    haltDisabledEvents(event: Event) {
         if (this.disabled) {
             event.preventDefault();
             event.stopImmediatePropagation();

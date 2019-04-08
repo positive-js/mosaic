@@ -12,13 +12,13 @@
 
         <ng-content></ng-content>
 
-        <button mc-icon-button type="button" class="mc-calendar__previous-button"
+        <button mc-button type="button" class="mc-calendar__previous-button"
                 [disabled]="!previousEnabled()" (click)="previousClicked()"
                 [attr.aria-label]="prevButtonLabel">
             <i mc-icon="mc-angle-left-L_16"></i>
         </button>
 
-        <button mc-icon-button type="button" class="mc-calendar__next-button"
+        <button mc-button type="button" class="mc-calendar__next-button"
                 [disabled]="!nextEnabled()" (click)="nextClicked()"
                 [attr.aria-label]="nextButtonLabel">
             <i mc-icon="mc-angle-right-L_16"></i>

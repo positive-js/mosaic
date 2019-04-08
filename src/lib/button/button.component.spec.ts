@@ -135,14 +135,14 @@ describe('McButton', () => {
     });
 });
 
-describe('McIconButton', () => {
+describe('Button with icon', () => {
     beforeEach(fakeAsync(() => {
         TestBed.configureTestingModule({
             imports: [McButtonModule, McIconModule],
             declarations: [
-                McIconButtonCommentCaseTestApp,
-                McIconButtonTextIconCaseTestApp,
-                McIconButtonTwoIconsCaseTestApp
+                McButtonCommentCaseTestApp,
+                McButtonTextIconCaseTestApp,
+                McButtonTwoIconsCaseTestApp
             ]
         });
 
@@ -150,7 +150,7 @@ describe('McIconButton', () => {
     }));
 
     it('should not add left and right css classes when sibling is html comments', () => {
-        const fixture = TestBed.createComponent(McIconButtonCommentCaseTestApp);
+        const fixture = TestBed.createComponent(McButtonCommentCaseTestApp);
 
         fixture.detectChanges();
 
@@ -162,7 +162,7 @@ describe('McIconButton', () => {
     });
 
     it('should not add left and right css classes when sibling is not html comments but text node', () => {
-        const fixture = TestBed.createComponent(McIconButtonTextIconCaseTestApp);
+        const fixture = TestBed.createComponent(McButtonTextIconCaseTestApp);
 
         fixture.detectChanges();
 
@@ -174,7 +174,7 @@ describe('McIconButton', () => {
     });
 
     it('should not add left and right css classes when there are two icons', () => {
-        const fixture = TestBed.createComponent(McIconButtonTwoIconsCaseTestApp);
+        const fixture = TestBed.createComponent(McButtonTwoIconsCaseTestApp);
 
         fixture.detectChanges();
 
@@ -213,36 +213,36 @@ class TestApp {
 }
 
 @Component({
-    selector: 'mc-icon-button-comment-case-test-app',
+    selector: 'mc-button-comment-case-test-app',
     template: `
-        <button mc-icon-button type="button">
+        <button mc-button type="button">
             <!-- comment-before -->
             <i mc-icon="mc-angle-down-L_16"></i>
             <!-- comment-after -->
         </button>
     `
 })
-class McIconButtonCommentCaseTestApp {}
+class McButtonCommentCaseTestApp {}
 
 @Component({
-    selector: 'mc-icon-button-text-icon-case-test-app',
+    selector: 'mc-button-text-icon-case-test-app',
     template: `
-        <button mc-icon-button type="button">
+        <button mc-button type="button">
             Some text
             <i mc-icon="mc-angle-down-L_16"></i>
             Some text
         </button>
     `
 })
-class McIconButtonTextIconCaseTestApp {}
+class McButtonTextIconCaseTestApp {}
 
 @Component({
-    selector: 'mc-icon-button-two-icons-case-test-app',
+    selector: 'mc-button-two-icons-case-test-app',
     template: `
-        <button mc-icon-button type="button">
+        <button mc-button type="button">
             <i mc-icon="mc-angle-up-L_16"></i>
             <i mc-icon="mc-angle-down-L_16"></i>
         </button>
     `
 })
-class McIconButtonTwoIconsCaseTestApp {}
+class McButtonTwoIconsCaseTestApp {}
