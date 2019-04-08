@@ -171,6 +171,7 @@
         "server-dev:layout": "npm run server-dev -- --env.component layout",
         "server-dev:link": "npm run server-dev -- --env.component link",
         "server-dev:list": "npm run server-dev -- --env.component list",
+        "server-dev:menu": "npm run server-dev -- --env.component menu",
         "server-dev:modal": "npm run server-dev -- --env.component modal",
         "server-dev:navbar": "npm run server-dev -- --env.component navbar",
         "server-dev:panel": "npm run server-dev -- --env.component panel",

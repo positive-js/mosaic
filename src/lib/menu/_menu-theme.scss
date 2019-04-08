@@ -1,0 +1,48 @@
+@import '../core/theming/palette';
+@import '../core/theming/theming';
+@import '../core/styles/typography/typography-utils';
+
+
+@mixin mat-menu-theme($theme) {
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
+    .mat-menu-panel {
+        background: mc-color($background, 'card');
+    }
+
+    .mat-menu-item {
+        background: transparent;
+        color: mc-color($foreground, 'text');
+
+        &[disabled] {
+            &, &::after {
+                color: mc-color($foreground, 'disabled');
+            }
+        }
+    }
+
+    .mat-menu-item .mat-icon-no-color,
+    .mat-menu-item-submenu-trigger::after {
+        color: mc-color($foreground, 'icon');
+    }
+
+    .mat-menu-item:hover,
+    .mat-menu-item.cdk-program-focused,
+    .mat-menu-item.cdk-keyboard-focused,
+    .mat-menu-item-highlighted {
+        &:not([disabled]) {
+            background: mc-color($background, 'hover');
+        }
+    }
+}
+
+@mixin mat-menu-typography($config) {
+    .mat-menu-item {
+        font: {
+            family: mc-font-family($config, body-1);
+            size: mc-font-size($config, body-1);
+            weight: mc-font-weight($config, body-1);
+        }
+    }
+}
