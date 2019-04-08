@@ -93,7 +93,7 @@
         "karma-chrome-launcher": "^2.2.0",
         "karma-coverage": "^1.1.2",
         "karma-jasmine": "^2.0.1",
-        "karma-junit-reporter": "^2.0.0",
+        "karma-junit-reporter": "^1.2.0",
         "karma-remap-coverage": "^0.1.5",
         "karma-sauce-launcher": "1.2.0",
         "karma-sourcemap-loader": "^0.3.7",
