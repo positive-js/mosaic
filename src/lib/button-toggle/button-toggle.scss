@@ -10,8 +10,6 @@ $mc-button-toggle-standard-border-radius: 2px !default;
 $mc-button-toggle-border-size: 1px;
 $mc-button-toggle-border-radius: 3px;
 
-$mc-button-toggle-padding: 5px 7px;
-
 .mc-button-toggle-group {
     display: flex;
     flex-direction: row;
@@ -23,11 +21,6 @@ $mc-button-toggle-padding: 5px 7px;
     }
 
     .mc-button-toggle {
-
-        > .mc-button {
-            padding: $mc-button-toggle-padding;
-        }
-
         &:first-of-type:not(:last-of-type) {
             > .mc-button,
             > .mc-icon-button {
