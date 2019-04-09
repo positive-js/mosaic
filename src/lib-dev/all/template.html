@@ -82,23 +82,23 @@
     <div class="dev-box">
         <h1>Button</h1>
 
-        <button mc-icon-button color="primary" disabled><i mc-icon="mc-play_16"></i>disabled</button>&nbsp;
-        <button mc-icon-button color="primary"><i mc-icon="mc-play_16"></i>normal</button>&nbsp;
-        <button class="cdk-keyboard-focused" mc-icon-button color="primary"><i mc-icon="mc-play_16"></i>focus</button>&nbsp;
+        <button mc-button color="primary" disabled><i mc-icon="mc-play_16"></i>disabled</button>&nbsp;
+        <button mc-button color="primary"><i mc-icon="mc-play_16"></i>normal</button>&nbsp;
+        <button class="cdk-keyboard-focused" mc-button color="primary"><i mc-icon="mc-play_16"></i>focus</button>&nbsp;
 
         <br>
         <br>
 
-        <button mc-icon-button color="second" disabled><i mc-icon="mc-play_16"></i>disabled</button>&nbsp;
-        <button mc-icon-button color="second"><i mc-icon="mc-play_16"></i>normal</button>&nbsp;
-        <button class="cdk-keyboard-focused" mc-icon-button color="second"><i mc-icon="mc-play_16"></i>focus</button>&nbsp;
+        <button mc-button color="second" disabled><i mc-icon="mc-play_16"></i>disabled</button>&nbsp;
+        <button mc-button color="second"><i mc-icon="mc-play_16"></i>normal</button>&nbsp;
+        <button class="cdk-keyboard-focused" mc-button color="second"><i mc-icon="mc-play_16"></i>focus</button>&nbsp;
 
         <br>
         <br>
 
-        <button mc-icon-button color="error" disabled><i mc-icon="mc-play_16"></i>disabled</button>&nbsp;
-        <button mc-icon-button color="error"><i mc-icon="mc-play_16"></i>normal</button>&nbsp;
-        <button class="cdk-keyboard-focused" mc-icon-button color="error"><i mc-icon="mc-play_16"></i>focus</button>&nbsp;
+        <button mc-button color="error" disabled><i mc-icon="mc-play_16"></i>disabled</button>&nbsp;
+        <button mc-button color="error"><i mc-icon="mc-play_16"></i>normal</button>&nbsp;
+        <button class="cdk-keyboard-focused" mc-button color="error"><i mc-icon="mc-play_16"></i>focus</button>&nbsp;
     </div>
 
     <div class="dev-box">
@@ -338,14 +338,14 @@
         <span class="mc-button-group">
             <button mc-button>dropdown</button>
 
-            <button mc-icon-button [mcDropdownTriggerFor]="appDropdown">
+            <button mc-button [mcDropdownTriggerFor]="appDropdown">
                 <i mc-icon="mc-angle-down-L_16"></i>
             </button>
         </span>
 
         <br>
 
-        <button mc-icon-button [mcDropdownTriggerFor]="appDropdown">
+        <button mc-button [mcDropdownTriggerFor]="appDropdown">
             dropdown
             <i mc-icon="mc-angle-down-L_16"></i>
         </button>
@@ -746,7 +746,7 @@
                     <h1 class="mc-display-3 title">Some title</h1>
                 </div>
                 <div class="mc-panel__actions">
-                    <button mc-icon-button color="primary">
+                    <button mc-button color="primary">
                         <i mc-icon="mc-angle-down-L_16"></i>
                     </button>
                 </div>
