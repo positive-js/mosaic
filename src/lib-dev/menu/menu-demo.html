@@ -2,11 +2,13 @@
   <div class="demo-menu-section">
     <p>You clicked on: {{ selected }}</p>
 
-    <mat-toolbar>
-      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Open basic menu">
-        <mat-icon>more_vert</mat-icon>
+    <!--<mat-toolbar>-->
+      <button mc-button [matMenuTriggerFor]="menu" aria-label="Open basic menu">
+        <!--<mc-icon>more_vert</mc-icon>-->
+          <i mc-icon="mc-gear_16"></i>
+          Open basic menu
       </button>
-    </mat-toolbar>
+    <!--</mat-toolbar>-->
 
     <mat-menu #menu="matMenu">
       <button mat-menu-item *ngFor="let item of items" (click)="select(item.text)" [disabled]="item.disabled">
@@ -17,29 +19,30 @@
   <div class="demo-menu-section">
     <p>Menu with divider</p>
 
-    <mat-toolbar>
-      <button mat-icon-button [matMenuTriggerFor]="divider" aria-label="Open basic menu">
-        <mat-icon>more_vert</mat-icon>
+    <!--<mat-toolbar>-->
+      <button mc-button [matMenuTriggerFor]="divider" aria-label="Open basic menu">
+          <i mc-icon="mc-ellipsis_16"></i>
+          Open basic menu
       </button>
-    </mat-toolbar>
+    <!--</mat-toolbar>-->
 
     <mat-menu #divider="matMenu">
       <ng-container *ngFor="let item of items; last as last">
         <button mat-menu-item [disabled]="item.disabled">
           {{ item.text }}
         </button>
-        <mat-divider *ngIf="!last"></mat-divider>
+        <!--<mat-divider *ngIf="!last"></mat-divider>-->
       </ng-container>
     </mat-menu>
   </div>
   <div class="demo-menu-section">
     <p>Nested menu</p>
 
-    <mat-toolbar>
-      <button mat-icon-button [matMenuTriggerFor]="animals">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-    </mat-toolbar>
+    <!--<mat-toolbar>-->
+      <!--<button mc-icon-button [matMenuTriggerFor]="animals">-->
+        <!--<mc-icon>more_vert</mc-icon>-->
+      <!--</button>-->
+    <!--</mat-toolbar>-->
 
     <mat-menu #animals="matMenu">
       <button mat-menu-item [matMenuTriggerFor]="vertebrates">Vertebrates</button>
@@ -88,11 +91,11 @@
   </div>
   <div class="demo-menu-section">
     <p>Clicking these will navigate:</p>
-    <mat-toolbar>
-      <button mat-icon-button [matMenuTriggerFor]="anchorMenu" aria-label="Open anchor menu">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-    </mat-toolbar>
+    <!--<mat-toolbar>-->
+      <!--<button mc-icon-button [matMenuTriggerFor]="anchorMenu" aria-label="Open anchor menu">-->
+        <!--<mc-icon>more_vert</mc-icon>-->
+      <!--</button>-->
+    <!--</mat-toolbar>-->
 
     <mat-menu #anchorMenu="matMenu">
       <a mat-menu-item *ngFor="let item of items" href="http://www.google.com" [disabled]="item.disabled">
@@ -104,15 +107,16 @@
     <p>
       Position x: before
     </p>
-    <mat-toolbar class="demo-end-icon">
-      <button mat-icon-button [matMenuTriggerFor]="posXMenu" aria-label="Open x-positioned menu">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-    </mat-toolbar>
+    <!--<mat-toolbar class="demo-end-icon">-->
+      <!--<button mc-icon-button [matMenuTriggerFor]="posXMenu" aria-label="Open x-positioned menu">-->
+        <!--<mc-icon>more_vert</mc-icon>-->
+      <!--</button>-->
+    <!--</mat-toolbar>-->
 
     <mat-menu xPosition="before" #posXMenu="matMenu">
       <button mat-menu-item *ngFor="let item of iconItems" [disabled]="item.disabled">
-        <mat-icon>{{ item.icon }}</mat-icon>
+        <!--<mc-icon>{{ item.icon }}</mc-icon>-->
+        <i mc-icon="mc-gear_16"></i>
         {{ item.text }}
       </button>
     </mat-menu>
@@ -121,11 +125,11 @@
     <p>
       Position y: above
     </p>
-    <mat-toolbar>
-      <button mat-icon-button [matMenuTriggerFor]="posYMenu" aria-label="Open y-positioned menu">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-    </mat-toolbar>
+    <!--<mat-toolbar>-->
+      <!--<button mc-icon-button [matMenuTriggerFor]="posYMenu" aria-label="Open y-positioned menu">-->
+        <!--<mc-icon>more_vert</mc-icon>-->
+      <!--</button>-->
+    <!--</mat-toolbar>-->
 
     <mat-menu yPosition="above" #posYMenu="matMenu">
       <button mat-menu-item *ngFor="let item of items" [disabled]="item.disabled">
@@ -139,11 +143,11 @@
   <div class="demo-menu-section">
     <p>overlapTrigger: true</p>
 
-    <mat-toolbar>
-      <button mat-icon-button [mat-menu-trigger-for]="menuOverlay">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-    </mat-toolbar>
+    <!--<mat-toolbar>-->
+      <!--<button mc-icon-button [mat-menu-trigger-for]="menuOverlay">-->
+        <!--<mc-icon>more_vert</mc-icon>-->
+      <!--</button>-->
+    <!--</mat-toolbar>-->
 
     <mat-menu [overlapTrigger]="true" #menuOverlay="matMenu">
       <button mat-menu-item *ngFor="let item of items" [disabled]="item.disabled">
@@ -155,15 +159,16 @@
     <p>
       Position x: before, overlapTrigger: true
     </p>
-    <mat-toolbar class="demo-end-icon">
-      <button mat-icon-button [mat-menu-trigger-for]="posXMenuOverlay">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-    </mat-toolbar>
+    <!--<mat-toolbar class="demo-end-icon">-->
+      <!--<button mc-icon-button [mat-menu-trigger-for]="posXMenuOverlay">-->
+        <!--<mc-icon>more_vert</mc-icon>-->
+      <!--</button>-->
+    <!--</mat-toolbar>-->
 
     <mat-menu xPosition="before" [overlapTrigger]="true" #posXMenuOverlay="matMenu">
       <button mat-menu-item *ngFor="let item of iconItems" [disabled]="item.disabled">
-        <mat-icon>{{ item.icon }}</mat-icon>
+        <!--<mc-icon>{{ item.icon }}</mc-icon>-->
+        <i mc-icon="mc-gear_16"></i>
         {{ item.text }}
       </button>
     </mat-menu>
@@ -172,11 +177,11 @@
     <p>
       Position y: above, overlapTrigger: true
     </p>
-    <mat-toolbar>
-      <button mat-icon-button [mat-menu-trigger-for]="posYMenuOverlay">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-    </mat-toolbar>
+    <!--<mat-toolbar>-->
+      <!--<button mc-icon-button [mat-menu-trigger-for]="posYMenuOverlay">-->
+        <!--<mc-icon>more_vert</mc-icon>-->
+      <!--</button>-->
+    <!--</mat-toolbar>-->
 
     <mat-menu yPosition="above" [overlapTrigger]="true" #posYMenuOverlay="matMenu">
       <button mat-menu-item *ngFor="let item of items" [disabled]="item.disabled">

@@ -1,25 +1,17 @@
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-
-import {Platform, normalizePassiveListenerOptions} from '@angular/cdk/platform';
 import {
-  Directive,
-  ElementRef,
-  EventEmitter,
-  Injectable,
-  NgZone,
-  OnDestroy,
-  Optional,
-  Output,
-  SkipSelf,
+    Directive,
+    ElementRef,
+    EventEmitter,
+    Injectable,
+    NgZone,
+    OnDestroy,
+    Optional,
+    Output,
+    SkipSelf,
 } from '@angular/core';
-import {Observable, of as observableOf, Subject, Subscription} from 'rxjs';
-import {coerceElement} from '@angular/cdk/coercion';
+import { coerceElement } from '@ptsecurity/cdk/coercion';
+import { Platform, normalizePassiveListenerOptions } from '@ptsecurity/cdk/platform';
+import { Observable, of as observableOf, Subject, Subscription } from 'rxjs';
 
 
 // This is the value used by AngularJS Material. Through trial and error (on iPhone 6S) they found

@@ -1,26 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 
 @Component({
-  moduleId: module.id,
-  selector: 'menu-demo',
-  templateUrl: 'menu-demo.html',
-  styleUrls: ['menu-demo.css']
+    selector: 'app',
+    templateUrl: 'menu-demo.html',
+    styleUrls: ['menu-demo.css'],
+    encapsulation: ViewEncapsulation.None
 })
 export class MenuDemo {
-  selected = '';
-  items = [
-    {text: 'Refresh'},
-    {text: 'Settings'},
-    {text: 'Help', disabled: true},
-    {text: 'Sign Out'}
-  ];
+    selected = '';
+    items = [
+        {text: 'Refresh'},
+        {text: 'Settings'},
+        {text: 'Help', disabled: true},
+        {text: 'Sign Out'}
+    ];
 
-  iconItems = [
-    {text: 'Redial', icon: 'dialpad'},
-    {text: 'Check voicemail', icon: 'voicemail', disabled: true},
-    {text: 'Disable alerts', icon: 'notifications_off'}
-  ];
+    iconItems = [
+        {text: 'Redial', icon: 'dialpad'},
+        {text: 'Check voicemail', icon: 'voicemail', disabled: true},
+        {text: 'Disable alerts', icon: 'notifications_off'}
+    ];
 
-  select(text: string) { this.selected = text; }
+    select(text: string) {
+        this.selected = text;
+    }
 }

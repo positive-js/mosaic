@@ -1,19 +1,7 @@
 import { QueryList } from '@angular/core';
-
+import { UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB, A, Z, ZERO, NINE } from '@ptsecurity/cdk/keycodes';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, filter, map, tap } from 'rxjs/operators';
-
-import {
-    UP_ARROW,
-    DOWN_ARROW,
-    LEFT_ARROW,
-    RIGHT_ARROW,
-    TAB,
-    A,
-    Z,
-    ZERO,
-    NINE
-} from '@ptsecurity/cdk/keycodes';
 
 
 // This interface is for items that can be passed to a ListKeyManager.
@@ -42,7 +30,7 @@ export class ListKeyManager<T extends ListKeyManagerOption> {
 
     previousActiveItemIndex = -1;
     private _activeItemIndex = -1;
-    private _activeItem: T;
+    private _activeItem: T | null;
     private _wrap: boolean = false;
     private _letterKeyStream = new Subject<string>();
     private _typeaheadSubscription = Subscription.EMPTY;
@@ -59,7 +47,7 @@ export class ListKeyManager<T extends ListKeyManagerOption> {
     // Buffer for the letters that the user has pressed when the typeahead option is turned on.
     private _pressedLetters: string[] = [];
 
-    constructor(private _items: QueryList<T>) {
+    constructor(private _items: QueryList<T> | T[]) {
         if (_items instanceof QueryList) {
 
             _items.changes.subscribe((newItems: QueryList<T>) => {
@@ -133,7 +121,7 @@ export class ListKeyManager<T extends ListKeyManagerOption> {
             filter(() => this._pressedLetters.length > 0),
             map(() => this._pressedLetters.join(''))
         ).subscribe((inputString) => {
-            const items = this._items.toArray();
+            const items = this._getItemsArray();
 
             // Start at 1 because we want to start searching at the item immediately
             // following the current active item.
@@ -306,11 +294,13 @@ export class ListKeyManager<T extends ListKeyManagerOption> {
     updateActiveItem(item: number | T): void;
 
     updateActiveItem(item: any): void {
-        const itemArray = this._items.toArray();
+        const itemArray = this._getItemsArray();
         const index = typeof item === 'number' ? item : itemArray.indexOf(item);
+        const activeItem = itemArray[index];
 
+        // Explicitly check for `null` and `undefined` because other falsy values are valid.
+        this._activeItem = activeItem == null ? null : activeItem;
         this._activeItemIndex = index;
-        this._activeItem = itemArray[index];
     }
 
     /**

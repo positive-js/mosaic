@@ -54,6 +54,7 @@
     @include mc-list-theme($theme);
     @include mc-modal-theme($theme);
     @include mc-navbar-theme($theme);
+    @include mat-menu-theme($theme);
     @include mc-option-theme($theme);
     @include mc-panel-theme($theme);
     @include mc-progress-bar-theme($theme);

@@ -48,6 +48,7 @@
     @include mc-list-typography($config);
     @include mc-modal-typography($config);
     @include mc-navbar-typography($config);
+    //@include mat-menu-typography($config);
     @include mc-option-typography($config);
     @include mc-radio-typography($config);
     @include mc-select-typography($config);

@@ -1,13 +1,18 @@
+@import '~@ptsecurity/mosaic-icons/dist/styles/mc-icons';
+
+@import '../../lib/core/theming/prebuilt/default-theme';
+//@import '../../lib/core/theming/prebuilt/dark-theme';
+
 .demo-menu {
-  display: flex;
-  flex-flow: row wrap;
+    display: flex;
+    flex-flow: row wrap;
 
-  .demo-menu-section {
-    width: 300px;
-    margin: 20px;
-  }
+    .demo-menu-section {
+        width: 300px;
+        margin: 20px;
+    }
 
-  .demo-end-icon {
-    justify-content: flex-end;
-  }
+    .demo-end-icon {
+        justify-content: flex-end;
+    }
 }

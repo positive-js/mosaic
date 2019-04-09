@@ -10,14 +10,13 @@ import { MatMenuTrigger, MAT_MENU_SCROLL_STRATEGY_FACTORY_PROVIDER } from './men
 
 
 @NgModule({
-    imports: [
-        CommonModule,
-        McCommonModule,
-        OverlayModule
-    ],
-    exports: [MatMenu, MatMenuItem, MatMenuTrigger, MatMenuContent, McCommonModule],
-    declarations: [MatMenu, MatMenuItem, MatMenuTrigger, MatMenuContent],
-    providers: [MAT_MENU_SCROLL_STRATEGY_FACTORY_PROVIDER]
+  imports: [
+    CommonModule,
+    McCommonModule,
+    OverlayModule
+  ],
+  exports: [MatMenu, MatMenuItem, MatMenuTrigger, MatMenuContent, McCommonModule],
+  declarations: [MatMenu, MatMenuItem, MatMenuTrigger, MatMenuContent],
+  providers: [MAT_MENU_SCROLL_STRATEGY_FACTORY_PROVIDER]
 })
-export class MatMenuModule {
-}
+export class MatMenuModule {}

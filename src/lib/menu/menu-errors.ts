@@ -3,11 +3,11 @@
  * @docs-private
  */
 export function throwMatMenuMissingError() {
-  throw Error(`matMenuTriggerFor: must pass in an mat-menu instance.
+    throw Error(`matMenuTriggerFor: must pass in an mat-menu instance.
 
     Example:
-      <mat-menu #menu="matMenu"></mat-menu>
-      <button [matMenuTriggerFor]="menu"></button>`);
+        <mat-menu #menu="matMenu"></mat-menu>
+        <button [matMenuTriggerFor]="menu"></button>`);
 }
 
 /**
@@ -16,8 +16,8 @@ export function throwMatMenuMissingError() {
  * @docs-private
  */
 export function throwMatMenuInvalidPositionX() {
-  throw Error(`xPosition value must be either 'before' or after'.
-      Example: <mat-menu xPosition="before" #menu="matMenu"></mat-menu>`);
+    throw Error(`xPosition value must be either 'before' or after'.
+        Example: <mat-menu xPosition="before" #menu="matMenu"></mat-menu>`);
 }
 
 /**
@@ -26,6 +26,6 @@ export function throwMatMenuInvalidPositionX() {
  * @docs-private
  */
 export function throwMatMenuInvalidPositionY() {
-  throw Error(`yPosition value must be either 'above' or below'.
-      Example: <mat-menu yPosition="above" #menu="matMenu"></mat-menu>`);
+    throw Error(`yPosition value must be either 'above' or below'.
+        Example: <mat-menu yPosition="above" #menu="matMenu"></mat-menu>`);
 }
