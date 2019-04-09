@@ -5,6 +5,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
+import { McDividerModule } from '@ptsecurity/mosaic/divider';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { MatMenuModule } from '@ptsecurity/mosaic/menu';
 
@@ -24,6 +25,7 @@ import { MenuDemo } from './menu-demo';
         ]),
         McButtonModule,
         McIconModule,
+        McDividerModule,
         MatMenuModule
     ],
     bootstrap: [

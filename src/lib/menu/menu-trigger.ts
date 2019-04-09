@@ -49,11 +49,11 @@ export function MAT_MENU_SCROLL_STRATEGY_FACTORY(overlay: Overlay): () => IScrol
 export const MAT_MENU_SCROLL_STRATEGY_FACTORY_PROVIDER = {
     provide: MAT_MENU_SCROLL_STRATEGY,
     deps: [Overlay],
-    useFactory: MAT_MENU_SCROLL_STRATEGY_FACTORY,
+    useFactory: MAT_MENU_SCROLL_STRATEGY_FACTORY
 };
 
 /** Default top padding of the menu panel. */
-export const MENU_PANEL_TOP_PADDING = 8;
+export const MENU_PANEL_TOP_PADDING = 1;
 
 /** Options for binding a passive event listener. */
 const passiveEventListenerOptions = normalizePassiveListenerOptions({passive: true});

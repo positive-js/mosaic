@@ -11,7 +11,9 @@
     .mat-menu-panel {
         //@include _mat-theme-overridable-elevation(4, $theme);
         //background: mc-color($background, 'card');
-        //background: grey;
+        background: white;
+        box-shadow: 0px 3px 2px 0px rgba(0, 0, 0, 0.2);
+        border: 1px solid #b3b3b3;
     }
 
     .mat-menu-item {
