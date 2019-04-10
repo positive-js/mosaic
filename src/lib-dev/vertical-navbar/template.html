@@ -55,58 +55,42 @@
         <mc-vertical-navbar-title>With notification badge</mc-vertical-navbar-title>
     </mc-vertical-navbar-item>
 
-    <mc-vertical-navbar-item class="user-menu" [matMenuTriggerFor]="animals">
+    <mc-vertical-navbar-item class="user-menu" [matMenuTriggerFor]="userMenu">
         <div class="avatar">NS</div>
         <div>
             <div>Name Surname</div>
             <div><small>name.surname@email.com</small></div>
         </div>
 
-        <mat-menu #animals="matMenu" xPosition="after" overlapTriggerX="false" overlapTriggerY="true" yPosition="above">
-            <button mat-menu-item [matMenuTriggerFor]="vertebrates">Vertebrates</button>
-            <button mat-menu-item [matMenuTriggerFor]="invertebrates">Invertebrates</button>
+        <mat-menu #userMenu="matMenu" xPosition="after" overlapTriggerX="false" overlapTriggerY="true" yPosition="above">
+            <button mat-menu-item [matMenuTriggerFor]="settingsMenu">
+                <i mc-icon="mc-gear_16"></i>Profile settings
+            </button>
+            <button mat-menu-item [matMenuTriggerFor]="signOutMenu">
+                <i mc-icon="mc-bell_32"></i>Sign out
+            </button>
         </mat-menu>
 
-        <mat-menu #vertebrates="matMenu">
-            <button mat-menu-item [matMenuTriggerFor]="fish">Fishes</button>
-            <button mat-menu-item [matMenuTriggerFor]="amphibians">Amphibians</button>
-            <button mat-menu-item [matMenuTriggerFor]="reptiles">Reptiles</button>
-            <button mat-menu-item>Birds</button>
-            <button mat-menu-item>Mammals</button>
+        <mat-menu #settingsMenu="matMenu">
+            <button mat-menu-item [matMenuTriggerFor]="nestedSettingsMenu">Nested setting</button>
+            <button mat-menu-item><i mc-icon="mc-check_16"></i>Some setting</button>
+            <button mat-menu-item><i mc-icon="mc-bell_32"></i>Another Setting</button>
         </mat-menu>
 
-        <mat-menu #invertebrates="matMenu">
-            <button mat-menu-item>Insects</button>
-            <button mat-menu-item>Molluscs</button>
-            <button mat-menu-item>Crustaceans</button>
-            <button mat-menu-item>Corals</button>
-            <button mat-menu-item>Arachnids</button>
-            <button mat-menu-item>Velvet worms</button>
-            <button mat-menu-item>Horseshoe crabs</button>
+        <mat-menu #signOutMenu="matMenu">
+            <button mat-menu-item><i mc-icon="mc-check_16"></i>Yes, sure!</button>
+            <button mat-menu-item><i mc-icon="mc-close-M_16"></i>No, not now</button>
+            <button mat-menu-item><i mc-icon="mc-clock_16"></i>Maybe I should think it over</button>
         </mat-menu>
 
-        <mat-menu #fish="matMenu">
-            <button mat-menu-item>Baikal oilfish</button>
-            <button mat-menu-item>Bala shark</button>
-            <button mat-menu-item>Ballan wrasse</button>
-            <button mat-menu-item>Bamboo shark</button>
-            <button mat-menu-item>Banded killifish</button>
+        <mat-menu #nestedSettingsMenu="matMenu">
+            <button mat-menu-item>Graceful setting</button>
+            <button mat-menu-item>Brilliant setting</button>
+            <button mat-menu-item>Flamboyant setting</button>
+            <button mat-menu-item>Bizarre setting</button>
+            <button mat-menu-item>Picturesque setting</button>
+            <button mat-menu-item>Fanciful setting</button>
         </mat-menu>
-
-        <mat-menu #amphibians="matMenu">
-            <button mat-menu-item>Sonoran desert toad</button>
-            <button mat-menu-item>Western toad</button>
-            <button mat-menu-item>Arroyo toad</button>
-            <button mat-menu-item>Yosemite toad</button>
-        </mat-menu>
-
-        <mat-menu #reptiles="matMenu">
-            <button mat-menu-item>Banded Day Gecko</button>
-            <button mat-menu-item>Banded Gila Monster</button>
-            <button mat-menu-item>Black Tree Monitor</button>
-            <button mat-menu-item>Blue Spiny Lizard</button>
-        </mat-menu>
-
     </mc-vertical-navbar-item>
 
 </mc-vertical-navbar>

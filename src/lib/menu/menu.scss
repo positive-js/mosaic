@@ -49,11 +49,16 @@ $mat-menu-submenu-indicator-size: 10px !default;
             outline: dotted 1px;
         }
     }
+
+    .mc-icon {
+        margin-left: -4px;
+        margin-right: 8px;
+    }
 }
 
 .mat-menu-item-submenu-trigger {
     // Increase the side padding to prevent the indicator from overlapping the text.
-    padding-right: $mat-menu-side-padding * 2;
+    padding-right: $mat-menu-side-padding * 3;
 
     // Renders a triangle to indicate that the menu item will open a sub-menu.
     &::after {
