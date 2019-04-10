@@ -1,3 +1,19 @@
+# 1.0.0-beta.5 "Articulated Entomologist" (2019-04-10)
+
+
+### Bug Fixes
+
+* rxjsminor update ([75fafbd](https://github.com/positive-js/mosaic/commit/75fafbd))
+* **datepicker:** incorrect styles using ([#100](https://github.com/positive-js/mosaic/issues/100)) ([d986ef4](https://github.com/positive-js/mosaic/commit/d986ef4))
+* **modal:** updated TS types and checks ([3fa8704](https://github.com/positive-js/mosaic/commit/3fa8704))
+
+
+### Features
+
+* **button-toggle:** added new component button-toggle ([#101](https://github.com/positive-js/mosaic/issues/101)) ([37abf64](https://github.com/positive-js/mosaic/commit/37abf64))
+
+
+
 # 1.0.0-beta.4 "Plaited Nome" (2019-03-13)
 
 
