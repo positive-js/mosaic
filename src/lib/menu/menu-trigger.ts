@@ -58,8 +58,6 @@ export const MENU_PANEL_TOP_PADDING = 1;
 /** Options for binding a passive event listener. */
 const passiveEventListenerOptions = normalizePassiveListenerOptions({passive: true});
 
-// TODO(andrewseguin): Remove the kebab versions in favor of camelCased attribute selectors
-
 /**
  * This directive is intended to be used in conjunction with an mat-menu tag.  It is
  * responsible for toggling the display of the provided menu instance.
@@ -428,14 +426,17 @@ export class MatMenuTrigger implements AfterContentInit, OnDestroy {
      * @param positionStrategy Strategy whose position to update.
      */
     private _setPosition(positionStrategy: FlexibleConnectedPositionStrategy) {
-        let [originX, originFallbackX]: HorizontalConnectionPos[] =
-            this.menu.xPosition === 'before' ? ['end', 'start'] : ['start', 'end'];
 
-        let [overlayY, overlayFallbackY]: VerticalConnectionPos[] =
-            this.menu.yPosition === 'above' ? ['bottom', 'top'] : ['top', 'bottom'];
+        let [originX, originFallbackX, overlayX, overlayFallbackX]: HorizontalConnectionPos[] =
+            this.menu.xPosition === 'before' ?
+                ['end', 'start', 'end', 'start'] :
+                ['start', 'end', 'start', 'end'];
 
-        let [originY, originFallbackY] = [overlayY, overlayFallbackY];
-        let [overlayX, overlayFallbackX] = [originX, originFallbackX];
+        let [overlayY, overlayFallbackY, originY, originFallbackY]: VerticalConnectionPos[] =
+            this.menu.yPosition === 'above' ?
+                ['bottom', 'top', 'bottom', 'top'] :
+                ['top', 'bottom', 'top', 'bottom'];
+
         let offsetY = 0;
 
         if (this.triggersSubmenu()) {
@@ -444,9 +445,16 @@ export class MatMenuTrigger implements AfterContentInit, OnDestroy {
             overlayFallbackX = originX = this.menu.xPosition === 'before' ? 'start' : 'end';
             originFallbackX = overlayX = originX === 'end' ? 'start' : 'end';
             offsetY = overlayY === 'bottom' ? MENU_PANEL_TOP_PADDING : -MENU_PANEL_TOP_PADDING;
-        } else if (!this.menu.overlapTrigger) {
-            originY = overlayY === 'top' ? 'bottom' : 'top';
-            originFallbackY = overlayFallbackY === 'top' ? 'bottom' : 'top';
+        } else {
+            if (!this.menu.overlapTriggerY) {
+                originY = overlayY === 'top' ? 'bottom' : 'top';
+                originFallbackY = overlayFallbackY === 'top' ? 'bottom' : 'top';
+            }
+
+            if (!this.menu.overlapTriggerX) {
+                overlayFallbackX = originX = this.menu.xPosition === 'before' ? 'start' : 'end';
+                originFallbackX = overlayX = originX === 'end' ? 'start' : 'end';
+            }
         }
 
         positionStrategy.withPositions([

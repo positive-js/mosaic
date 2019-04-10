@@ -96,20 +96,36 @@
         </mat-menu>
     </div>
 </div>
+
 <div class="demo-menu">
     <div class="demo-menu-section">
-        <button mc-icon-button [matMenuTriggerFor]="posXMenu" aria-label="Open x-positioned menu">
+        <button mc-icon-button [matMenuTriggerFor]="beforeMenu" aria-label="Open x-positioned menu">
             <i mc-icon="mc-gear_16"></i>
-            Position: before
+            X Position: before
         </button>
 
-        <mat-menu xPosition="before" #posXMenu="matMenu">
+        <mat-menu xPosition="before" #beforeMenu="matMenu">
             <button mat-menu-item *ngFor="let item of iconItems" [disabled]="item.disabled">
                 <i mc-icon="mc-gear_16"></i>
                 {{ item.text }}
             </button>
         </mat-menu>
     </div>
+
+    <div class="demo-menu-section">
+        <button mc-icon-button [matMenuTriggerFor]="afterMenu" aria-label="Open x-positioned menu">
+            <i mc-icon="mc-gear_16"></i>
+            X Position: after
+        </button>
+
+        <mat-menu xPosition="after" #afterMenu="matMenu">
+            <button mat-menu-item *ngFor="let item of iconItems" [disabled]="item.disabled">
+                <i mc-icon="mc-gear_16"></i>
+                {{ item.text }}
+            </button>
+        </mat-menu>
+    </div>
+
     <div class="demo-menu-section">
         <button mc-icon-button [matMenuTriggerFor]="posYMenu" aria-label="Open y-positioned menu">
             <i mc-icon="mc-gear_16"></i>
@@ -129,7 +145,7 @@
             Overlap trigger
         </button>
 
-        <mat-menu [overlapTrigger]="true" #menuOverlay="matMenu">
+        <mat-menu [overlapTriggerY]="true" #menuOverlay="matMenu">
             <button mat-menu-item *ngFor="let item of items" [disabled]="item.disabled">
                 {{ item.text }}
             </button>
@@ -141,7 +157,7 @@
             Position: before, overlapTrigger
         </button>
 
-        <mat-menu xPosition="before" [overlapTrigger]="true" #posXMenuOverlay="matMenu">
+        <mat-menu xPosition="before" [overlapTriggerY]="true" #posXMenuOverlay="matMenu">
             <button mat-menu-item *ngFor="let item of iconItems" [disabled]="item.disabled">
                 <i mc-icon="mc-gear_16"></i>
                 {{ item.text }}
@@ -154,7 +170,7 @@
             Position y: above, position x: after, overlapTrigger: true
         </button>
 
-        <mat-menu yPosition="above" [overlapTrigger]="true" xPosition="after" #posYMenuOverlay="matMenu">
+        <mat-menu yPosition="above" [overlapTriggerY]="true" xPosition="after" #posYMenuOverlay="matMenu">
             <button mat-menu-item *ngFor="let item of items" [disabled]="item.disabled">
                 {{ item.text }}
             </button>

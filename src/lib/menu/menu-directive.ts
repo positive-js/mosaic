@@ -42,8 +42,11 @@ export interface MatMenuDefaultOptions {
     /** The y-axis position of the menu. */
     yPosition: MenuPositionY;
 
-    /** Whether the menu should overlap the menu trigger. */
-    overlapTrigger: boolean;
+    /** Whether the menu should overlap the menu trigger horizontally. */
+    overlapTriggerX: boolean;
+
+    /** Whether the menu should overlap the menu trigger vertically. */
+    overlapTriggerY: boolean;
 
     /** Class to be applied to the menu's backdrop. */
     backdropClass: string;
@@ -62,7 +65,8 @@ export const MAT_MENU_DEFAULT_OPTIONS =
 /** @docs-private */
 export function MAT_MENU_DEFAULT_OPTIONS_FACTORY(): MatMenuDefaultOptions {
     return {
-        overlapTrigger: false,
+        overlapTriggerX: true,
+        overlapTriggerY: false,
         xPosition: 'after',
         yPosition: 'below',
         backdropClass: 'cdk-overlay-transparent-backdrop',
@@ -171,17 +175,29 @@ export class MatMenu implements AfterContentInit, MatMenuPanel<MatMenuItem>, OnI
      */
     @ContentChild(MatMenuContent) lazyContent: MatMenuContent;
 
-    /** Whether the menu should overlap its trigger. */
+    /** Whether the menu should overlap its trigger vertically. */
     @Input()
-    get overlapTrigger(): boolean {
-        return this._overlapTrigger;
+    get overlapTriggerY(): boolean {
+        return this._overlapTriggerY;
     }
 
-    set overlapTrigger(value: boolean) {
-        this._overlapTrigger = coerceBooleanProperty(value);
+    set overlapTriggerY(value: boolean) {
+        this._overlapTriggerY = coerceBooleanProperty(value);
     }
 
-    private _overlapTrigger: boolean = this._defaultOptions.overlapTrigger;
+    private _overlapTriggerY: boolean = this._defaultOptions.overlapTriggerY;
+
+    /** Whether the menu should overlap its trigger horizontally. */
+    @Input()
+    get overlapTriggerX(): boolean {
+        return this._overlapTriggerX;
+    }
+
+    set overlapTriggerX(value: boolean) {
+        this._overlapTriggerX = coerceBooleanProperty(value);
+    }
+
+    private _overlapTriggerX: boolean = this._defaultOptions.overlapTriggerX;
 
     /** Whether the menu has a backdrop. */
     @Input()

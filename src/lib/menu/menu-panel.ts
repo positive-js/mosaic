@@ -19,7 +19,8 @@ export const MAT_MENU_PANEL = new InjectionToken<MatMenuPanel>('MAT_MENU_PANEL')
 export interface MatMenuPanel<T = any> {
     xPosition: MenuPositionX;
     yPosition: MenuPositionY;
-    overlapTrigger: boolean;
+    overlapTriggerX: boolean;
+    overlapTriggerY: boolean;
     templateRef: TemplateRef<any>;
     close: EventEmitter<void | 'click' | 'keydown' | 'tab'>;
     parentMenu?: MatMenuPanel | undefined;

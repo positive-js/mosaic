@@ -1870,7 +1870,7 @@ describe('MatMenu default overrides', () => {
     fixture.detectChanges();
     const menu = fixture.componentInstance.menu;
 
-    expect(menu.overlapTrigger).toBe(true);
+    expect(menu.overlapTriggerY).toBe(true);
     expect(menu.xPosition).toBe('before');
     expect(menu.yPosition).toBe('above');
   });
@@ -1927,10 +1927,10 @@ interface TestableMenu {
 }
 @Component({
   template: `
-    <button [matMenuTriggerFor]="menu" #triggerEl>Toggle menu</button>
-    <mat-menu [overlapTrigger]="overlapTrigger" #menu="matMenu">
-      <button mat-menu-item> Not overlapped Content </button>
-    </mat-menu>
+      <button [matMenuTriggerFor]="menu" #triggerEl>Toggle menu</button>
+      <mat-menu [overlapTriggerY]="overlapTrigger" #menu="matMenu">
+          <button mat-menu-item> Not overlapped Content</button>
+      </mat-menu>
   `
 })
 class OverlapMenu implements TestableMenu {
@@ -1953,7 +1953,7 @@ class CustomMenuPanel implements MatMenuPanel {
   direction: Direction;
   xPosition: MenuPositionX = 'after';
   yPosition: MenuPositionY = 'below';
-  overlapTrigger = true;
+  overlapTriggerY = true;
   parentMenu: MatMenuPanel;
 
   @ViewChild(TemplateRef) templateRef: TemplateRef<any>;
