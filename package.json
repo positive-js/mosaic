@@ -73,7 +73,7 @@
         "gulp-clean-css": "^3.10.0",
         "gulp-cli": "^2.0.1",
         "gulp-conventional-changelog": "^2.0.9",
-        "gulp-dom": "^0.9.17",
+        "gulp-dom": "^1.0.0",
         "gulp-flatten": "^0.3.1",
         "gulp-highlight-files": "^0.0.6",
         "gulp-htmlmin": "^4.0.0",
