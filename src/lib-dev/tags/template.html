@@ -11,18 +11,26 @@
 
 
 <mc-form-field class="example-chip-list">
-    <mc-tag-list #chipList>
-        <mc-tag *ngFor="let fruit of fruits" [selectable]="selectable"
-                  [removable]="removable" (removed)="remove(fruit)">
-            {{ fruit.name }}
+    <mc-tag-list #tagList>
+        <mc-tag *ngFor="let tag of tags" [selectable]="selectable"
+                  [removable]="removable" (removed)="remove(tag)">
+            {{ tag }}
             <i mc-icon="mc-close-S_16" mcTagRemove *ngIf="removable"></i>
         </mc-tag>
         <input placeholder="New fruit..."
-               [mcTagInputFor]="chipList"
+               #tagInput
+               [formControl]="tagCtrl"
+               [mcAutocomplete]="auto"
+               [mcTagInputFor]="tagList"
                [mcTagInputSeparatorKeyCodes]="separatorKeysCodes"
                [mcTagInputAddOnBlur]="addOnBlur"
                (mcTagInputTokenEnd)="add($event)">
     </mc-tag-list>
+    <mc-autocomplete #auto="mcAutocomplete" (optionSelected)="selected($event)">
+        <mc-option *ngFor="let tag of filteredTags | async" [value]="tag">
+            {{ tag }}
+        </mc-option>
+    </mc-autocomplete>
 </mc-form-field>
 
 <!--<mc-tag>Normal <i mc-icon="mc-close-S_16"></i></mc-tag>-->

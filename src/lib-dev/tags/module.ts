@@ -1,13 +1,16 @@
-import { Component, NgModule, ViewEncapsulation } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, ElementRef, NgModule, ViewChild, ViewEncapsulation } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { COMMA, ENTER } from '@ptsecurity/cdk/keycodes';
+import { McAutocomplete, McAutocompleteModule, McAutocompleteSelectedEvent } from '@ptsecurity/mosaic/autocomplete';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McTagsModule } from '@ptsecurity/mosaic/tags';
 import { McTagInputEvent } from '@ptsecurity/mosaic/tags/tag-input';
+import { startWith } from 'rxjs/internal/operators/startWith';
+import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -21,20 +24,33 @@ export class DemoComponent {
     selectable = true;
     removable = true;
     addOnBlur = true;
+    tagCtrl = new FormControl();
+
+    tags: string[] = ['tag1'];
+    allTags: string[] = ['tag1', 'tag2', 'tag3', 'tag4', 'tag5'];
+    filteredTags: any;
+
     readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
-    fruits = [
-        { name: 'Lemon' },
-        { name: 'Lime' },
-        { name: 'Apple' }
-    ];
+    @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
+    @ViewChild('auto') mcAutocomplete: McAutocomplete;
+
+    constructor() {
+        this.filteredTags = this.tagCtrl.valueChanges
+            .pipe(
+                startWith(null),
+                map((fruit: string | null) => {
+                    return fruit ? this.filter(fruit) : this.allTags.slice();
+                })
+            );
+    }
 
     add(event: McTagInputEvent): void {
         const input = event.input;
         const value = event.value;
 
         if ((value || '').trim()) {
-            this.fruits.push({name: value.trim()});
+            this.tags.push(value.trim());
         }
 
         if (input) {
@@ -43,11 +59,24 @@ export class DemoComponent {
     }
 
     remove(fruit: any): void {
-        const index = this.fruits.indexOf(fruit);
+        const index = this.tags.indexOf(fruit);
 
         if (index >= 0) {
-            this.fruits.splice(index, 1);
+            this.tags.splice(index, 1);
         }
+    }
+
+    selected(event: McAutocompleteSelectedEvent): void {
+        this.tags.push(event.option.viewValue);
+        this.tagInput.nativeElement.value = '';
+        this.tagCtrl.setValue(null);
+    }
+
+    private filter(value: string): string[] {
+        const filterValue = value.toLowerCase();
+
+        // todo добавить фильтрацию
+        return this.allTags.filter((tag) => tag.toLowerCase().indexOf(filterValue) === 0);
     }
 }
 
@@ -61,6 +90,9 @@ export class DemoComponent {
         BrowserModule,
         FormsModule,
         McFormFieldModule,
+        ReactiveFormsModule,
+
+        McAutocompleteModule,
         McTagsModule,
         McIconModule
     ],
