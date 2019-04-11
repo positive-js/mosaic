@@ -19,8 +19,11 @@
 | IE11, Edge| last 2 versions| last 2 versions| last 2 versions| last 2 versions
 
 
-## Demo and Documentation
+## Documentation
 * [Getting Started Guide][getting-started]
+* [Contributing][contributing]
+
+## Demo
 * [Storybook](https://positive-js.github.io/mosaic-storybook/) 
 
 ## Getting started
@@ -52,3 +55,4 @@ Thank you to all the people who have already contributed to Mosaic!
 **Inspired by AngularMaterial**
 
 [getting-started]: docs/getting-started.md
+[contributing]: docs/guides/00-contributing.md

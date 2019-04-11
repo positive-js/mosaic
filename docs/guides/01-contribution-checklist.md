@@ -17,8 +17,6 @@ When documenting a component, there's two things you need to worry about:
 * Docs - general documentation for the component.
 * Storybook - interactive use-cases showing how to use the component.
 
-## Review
-
 ### Testing
 
 The following types of tests are required for all packages:
@@ -43,3 +41,7 @@ On top of automated testing, we should also be manually testing our examples on 
   * Chrome
   * Firefox
   * Safari
+
+## Review
+
+* Ensure a core maintainer is added to the review.
