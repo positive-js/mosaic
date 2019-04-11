@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { MatMenuModule } from '@ptsecurity/mosaic/menu';
+import { McDropdownModule } from '@ptsecurity/mosaic/dropdown';
 
 import { McButtonModule } from '../../lib/button';
 import { McIconModule } from '../../lib/icon';
@@ -36,7 +36,7 @@ export class VerticalNavbarDemoComponent {
         McVerticalNavbarModule,
         McButtonModule,
         McIconModule,
-        MatMenuModule
+        McDropdownModule
     ],
     bootstrap: [
         VerticalNavbarDemoComponent

@@ -6,13 +6,15 @@ import {
     Inject,
     InjectionToken,
     Input,
-    OnDestroy, OnInit,
+    OnDestroy,
     Optional,
     Output,
-    ViewContainerRef
+    Self,
+    ViewContainerRef,
 } from '@angular/core';
-import { FocusMonitor, FocusOrigin } from '@ptsecurity/cdk/a11y';
+import { FocusMonitor, FocusOrigin, isFakeMousedownFromScreenReader } from '@ptsecurity/cdk/a11y';
 import { Direction, Directionality } from '@ptsecurity/cdk/bidi';
+import { LEFT_ARROW, RIGHT_ARROW, SPACE, ENTER } from '@ptsecurity/cdk/keycodes';
 import {
     FlexibleConnectedPositionStrategy,
     HorizontalConnectionPos,
@@ -22,12 +24,15 @@ import {
     VerticalConnectionPos,
     IScrollStrategy
 } from '@ptsecurity/cdk/overlay';
+import { normalizePassiveListenerOptions } from '@ptsecurity/cdk/platform';
 import { TemplatePortal } from '@ptsecurity/cdk/portal';
-import { merge, Subscription } from 'rxjs';
-import { filter, take, takeUntil } from 'rxjs/operators';
+import { asapScheduler, merge, of as observableOf, Subscription } from 'rxjs';
+import { delay, filter, take, takeUntil } from 'rxjs/operators';
 
 import { throwMcDropdownMissingError } from './dropdown-errors';
+import { McDropdownItem } from './dropdown-item';
 import { McDropdownPanel } from './dropdown-panel';
+import { DropdownPositionX, DropdownPositionY } from './dropdown-positions';
 import { McDropdown } from './dropdown.component';
 
 
@@ -47,6 +52,12 @@ export const MC_DROPDOWN_SCROLL_STRATEGY_FACTORY_PROVIDER = {
     useFactory: MC_DROPDOWN_SCROLL_STRATEGY_FACTORY
 };
 
+/** Default top padding of the menu panel. */
+export const MENU_PANEL_TOP_PADDING = 1;
+
+/** Options for binding a passive event listener. */
+const passiveEventListenerOptions = normalizePassiveListenerOptions({passive: true});
+
 /**
  * This directive is intended to be used in conjunction with an mc-dropdown tag.  It is
  * responsible for toggling the display of the provided dropdown instance.
@@ -54,17 +65,24 @@ export const MC_DROPDOWN_SCROLL_STRATEGY_FACTORY_PROVIDER = {
 @Directive({
     selector: `[mcDropdownTriggerFor]`,
     host: {
-        '(touchstart)': '_openedBy = "touch"',
-        '(click)': 'toggle()'
+        'aria-haspopup': 'true',
+        '[attr.aria-expanded]': 'opened || null',
+        '(mousedown)': '_handleMousedown($event)',
+        '(keydown)': '_handleKeydown($event)',
+        '(click)': '_handleClick($event)',
+        '[class.mc-dropdown-trigger]': 'true',
+        '[class.mc-dropdown-trigger__opened]': '_opened'
     },
     exportAs: 'mcDropdownTrigger'
 })
-export class McDropdownTrigger implements OnInit, AfterContentInit, OnDestroy {
+export class McDropdownTrigger implements AfterContentInit, OnDestroy {
 
-    /** Whether the dropdown is open. */
-    get opened(): boolean {
-        return this._opened;
-    }
+
+    /**
+     * Handles touch start events on the trigger.
+     * Needs to be an arrow function so we can easily use addEventListener and removeEventListener.
+     */
+    private _handleTouchStart = () => this._openedBy = 'touch';
 
     /** The text direction of the containing app. */
     get dir(): Direction {
@@ -75,8 +93,35 @@ export class McDropdownTrigger implements OnInit, AfterContentInit, OnDestroy {
     // the first item of the list when the dropdown is opened via the keyboard
     _openedBy: 'mouse' | 'touch' | null = null;
 
+
+
     /** References the dropdown instance that the trigger is associated with. */
-    @Input('mcDropdownTriggerFor') dropdown: McDropdownPanel;
+    @Input('mcDropdownTriggerFor')
+    get dropdown() {
+        return this._dropdown;
+    }
+
+    set dropdown(dropdown: McDropdownPanel) {
+        if (dropdown === this._dropdown) {
+            return;
+        }
+
+        this._dropdown = dropdown;
+        this._closeSubscription.unsubscribe();
+
+        if (dropdown) {
+            this._closeSubscription = dropdown.closed.asObservable().subscribe(reason => {
+                this._destroy();
+
+                // If a click closed the menu, we should close the entire chain of nested menus.
+                if ((reason === 'click' || reason === 'tab') && this._parentMenu) {
+                    this._parentMenu.closed.emit(reason);
+                }
+            });
+        }
+    }
+
+    private _dropdown: McDropdownPanel;
 
     /** Data to be passed along to any lazily-rendered content. */
     @Input('mcDropdownTriggerData') data: any;
@@ -97,19 +142,22 @@ export class McDropdownTrigger implements OnInit, AfterContentInit, OnDestroy {
                 private _element: ElementRef<HTMLElement>,
                 private _viewContainerRef: ViewContainerRef,
                 @Inject(MC_DROPDOWN_SCROLL_STRATEGY) private _scrollStrategy: any,
+                @Optional() private _parentMenu: McDropdown,
+                @Optional() @Self() private _menuItemInstance: McDropdownItem,
                 @Optional() private _dir: Directionality,
-                private _focusMonitor?: FocusMonitor) {}
+                private _focusMonitor?: FocusMonitor) {
 
-    ngOnInit(): void {
-        this.dropdown.closed = this.dropdown.closed || new EventEmitter<void | 'click' | 'keydown' | 'tab'>();
+        _element.nativeElement.addEventListener('touchstart', this._handleTouchStart,
+            passiveEventListenerOptions);
+
+        if (_menuItemInstance) {
+            _menuItemInstance._triggersSubmenu = this.triggersSubmenu();
+        }
     }
 
     ngAfterContentInit() {
         this._check();
-
-        this.dropdown.closed.asObservable().subscribe(() => {
-            this._destroy();
-        });
+        this._handleHover();
     }
 
     ngOnDestroy() {
@@ -118,7 +166,21 @@ export class McDropdownTrigger implements OnInit, AfterContentInit, OnDestroy {
             this._overlayRef = null;
         }
 
+        this._element.nativeElement.removeEventListener('touchstart', this._handleTouchStart,
+            passiveEventListenerOptions);
+
         this._cleanUpSubscriptions();
+        this._closeSubscription.unsubscribe();
+    }
+
+    /** Whether the menu is open. */
+    get opened(): boolean {
+        return this._opened;
+    }
+
+    /** Whether the menu triggers a sub-menu or a top-level one. */
+    triggersSubmenu(): boolean {
+        return !!(this._menuItemInstance && this._parentMenu);
     }
 
     /** Toggles the dropdown between the open and closed states. */
@@ -136,8 +198,12 @@ export class McDropdownTrigger implements OnInit, AfterContentInit, OnDestroy {
         this._check();
 
         const overlayRef = this._createOverlay();
-        this._setPosition(overlayRef.getConfig().positionStrategy as FlexibleConnectedPositionStrategy);
-        overlayRef.attach(this._portal);
+        const overlayConfig = overlayRef.getConfig();
+
+        this._setPosition(overlayConfig.positionStrategy as FlexibleConnectedPositionStrategy);
+        overlayConfig.hasBackdrop = this.dropdown.hasBackdrop == null ? !this.triggersSubmenu() :
+            this.dropdown.hasBackdrop;
+        overlayRef.attach(this._getPortal());
 
         if (this.dropdown.lazyContent) {
             this.dropdown.lazyContent.attach(this.data);
@@ -162,7 +228,7 @@ export class McDropdownTrigger implements OnInit, AfterContentInit, OnDestroy {
      */
     focus(origin: FocusOrigin = 'program') {
         if (this._focusMonitor) {
-            this._focusMonitor.focusVia(this._element.nativeElement, origin);
+            this._focusMonitor.focusVia(this._element, origin);
         } else {
             this._element.nativeElement.focus();
         }
@@ -186,12 +252,12 @@ export class McDropdownTrigger implements OnInit, AfterContentInit, OnDestroy {
                 // Wait for the exit animation to finish before detaching the content.
                 dropdown._animationDone
                     .pipe(
-                        filter((event) => event.toState === 'void'),
+                        filter(event => event.toState === 'void'),
                         take(1),
                         // Interrupt if the content got re-attached.
                         takeUntil(dropdown.lazyContent._attached)
                     )
-                    .subscribe(() => dropdown.lazyContent.detach(), undefined, () => {
+                    .subscribe(() => dropdown.lazyContent!.detach(), undefined, () => {
                         // No matter whether the content got re-attached, reset the dropdown.
                         this._reset();
                     });
@@ -212,6 +278,7 @@ export class McDropdownTrigger implements OnInit, AfterContentInit, OnDestroy {
      * the dropdown was opened via the keyboard.
      */
     private _init(): void {
+        this.dropdown.parent = this.triggersSubmenu() ? this._parentMenu : undefined;
         this.dropdown.direction = this.dir;
         this._setIsOpened(true);
         this.dropdown.focusFirstItem(this._openedBy || 'program');
@@ -231,7 +298,7 @@ export class McDropdownTrigger implements OnInit, AfterContentInit, OnDestroy {
             // Note that the focus style will show up both for `program` and
             // `keyboard` so we don't have to specify which one it is.
             this.focus();
-        } else {
+        } else if (!this.triggersSubmenu()) {
             this.focus(this._openedBy);
         }
 
@@ -243,10 +310,14 @@ export class McDropdownTrigger implements OnInit, AfterContentInit, OnDestroy {
         this._opened = isOpen;
         // tslint:disable-next-line:no-void-expression
         this._opened ? this.dropdownOpened.emit() : this.dropdownClosed.emit();
+
+        if (this.triggersSubmenu()) {
+            this._menuItemInstance._highlighted = isOpen;
+        }
     }
 
     /**
-     * This method checks that a valid instance of Dropdown has been passed into
+     * This method checks that a valid instance of McDropdown has been passed into
      * mcDropdownTriggerFor. If not, an exception is thrown.
      */
     private _check() {
@@ -261,7 +332,6 @@ export class McDropdownTrigger implements OnInit, AfterContentInit, OnDestroy {
      */
     private _createOverlay(): OverlayRef {
         if (!this._overlayRef) {
-            this._portal = new TemplatePortal(this.dropdown.templateRef, this._viewContainerRef);
             const config = this._getOverlayConfig();
             this._subscribeToPositions(config.positionStrategy as FlexibleConnectedPositionStrategy);
             this._overlayRef = this._overlay.create(config);
@@ -285,9 +355,6 @@ export class McDropdownTrigger implements OnInit, AfterContentInit, OnDestroy {
                 .flexibleConnectedTo(this._element)
                 .withLockedPosition()
                 .withTransformOriginOn('.mc-dropdown__panel'),
-            hasBackdrop: this.dropdown.hasBackdrop === null || this.dropdown.hasBackdrop === undefined
-                ? true
-                : this.dropdown.hasBackdrop,
             backdropClass: this.dropdown.backdropClass || 'cdk-overlay-transparent-backdrop',
             scrollStrategy: this._scrollStrategy(),
             direction: this._dir
@@ -301,15 +368,11 @@ export class McDropdownTrigger implements OnInit, AfterContentInit, OnDestroy {
      */
     private _subscribeToPositions(position: FlexibleConnectedPositionStrategy): void {
         if (this.dropdown.setPositionClasses) {
-            // todo possibly we should not recompute positions there
-            /*position.positionChanges.subscribe((change) => {
+            position.positionChanges.subscribe(change => {
                 const posX: DropdownPositionX = change.connectionPair.overlayX === 'start' ? 'after' : 'before';
                 const posY: DropdownPositionY = change.connectionPair.overlayY === 'top' ? 'below' : 'above';
 
                 this.dropdown.setPositionClasses!(posX, posY);
-            });*/
-            position.positionChanges.subscribe(() => {
-                this.dropdown.setPositionClasses!(this.dropdown.xPosition, this.dropdown.yPosition);
             });
         }
     }
@@ -320,19 +383,35 @@ export class McDropdownTrigger implements OnInit, AfterContentInit, OnDestroy {
      * @param positionStrategy Strategy whose position to update.
      */
     private _setPosition(positionStrategy: FlexibleConnectedPositionStrategy) {
-        const [originX, originFallbackX]: HorizontalConnectionPos[] =
-            this.dropdown.xPosition === 'before' ? ['end', 'start'] : ['start', 'end'];
 
-        const [overlayY, overlayFallbackY]: VerticalConnectionPos[] =
-            this.dropdown.yPosition === 'above' ? ['bottom', 'top'] : ['top', 'bottom'];
+        let [originX, originFallbackX, overlayX, overlayFallbackX]: HorizontalConnectionPos[] =
+            this.dropdown.xPosition === 'before' ?
+                ['end', 'start', 'end', 'start'] :
+                ['start', 'end', 'start', 'end'];
 
-        let [originY, originFallbackY] = [overlayY, overlayFallbackY];
-        const [overlayX, overlayFallbackX] = [originX, originFallbackX];
-        const offsetY = 0;
+        let [overlayY, overlayFallbackY, originY, originFallbackY]: VerticalConnectionPos[] =
+            this.dropdown.yPosition === 'above' ?
+                ['bottom', 'top', 'bottom', 'top'] :
+                ['top', 'bottom', 'top', 'bottom'];
 
-        if (!this.dropdown.overlapTrigger) {
-            originY = overlayY === 'top' ? 'bottom' : 'top';
-            originFallbackY = overlayFallbackY === 'top' ? 'bottom' : 'top';
+        let offsetY = 0;
+
+        if (this.triggersSubmenu()) {
+            // When the menu is a sub-menu, it should always align itself
+            // to the edges of the trigger, instead of overlapping it.
+            overlayFallbackX = originX = this.dropdown.xPosition === 'before' ? 'start' : 'end';
+            originFallbackX = overlayX = originX === 'end' ? 'start' : 'end';
+            offsetY = overlayY === 'bottom' ? MENU_PANEL_TOP_PADDING : -MENU_PANEL_TOP_PADDING;
+        } else {
+            if (!this.dropdown.overlapTriggerY) {
+                originY = overlayY === 'top' ? 'bottom' : 'top';
+                originFallbackY = overlayFallbackY === 'top' ? 'bottom' : 'top';
+            }
+
+            if (!this.dropdown.overlapTriggerX) {
+                overlayFallbackX = originX = this.dropdown.xPosition === 'before' ? 'start' : 'end';
+                originFallbackX = overlayX = originX === 'end' ? 'start' : 'end';
+            }
         }
 
         positionStrategy.withPositions([
@@ -365,7 +444,100 @@ export class McDropdownTrigger implements OnInit, AfterContentInit, OnDestroy {
     private _closingActions() {
         const backdrop = this._overlayRef!.backdropClick();
         const detachments = this._overlayRef!.detachments();
+        const parentClose = this._parentMenu ? this._parentMenu.closed : observableOf();
+        const hover = this._parentMenu ? this._parentMenu._hovered().pipe(
+            filter(active => active !== this._menuItemInstance),
+            filter(() => this._opened)
+        ) : observableOf();
 
-        return merge(backdrop, detachments);
+        return merge(backdrop, parentClose, hover, detachments);
     }
+
+    /** Handles mouse presses on the trigger. */
+    _handleMousedown(event: MouseEvent): void {
+        if (!isFakeMousedownFromScreenReader(event)) {
+            // Since right or middle button clicks won't trigger the `click` event,
+            // we shouldn't consider the menu as opened by mouse in those cases.
+            this._openedBy = event.button === 0 ? 'mouse' : null;
+
+            // Since clicking on the trigger won't close the menu if it opens a sub-menu,
+            // we should prevent focus from moving onto it via click to avoid the
+            // highlight from lingering on the menu item.
+            if (this.triggersSubmenu()) {
+                event.preventDefault();
+            }
+        }
+    }
+
+    /** Handles key presses on the trigger. */
+    _handleKeydown(event: KeyboardEvent): void {
+        const keyCode = event.keyCode;
+
+        if (keyCode == SPACE || keyCode == ENTER) {
+            this.open();
+        }
+
+        if (this.triggersSubmenu() && (
+            (keyCode === RIGHT_ARROW && this.dir === 'ltr') ||
+            (keyCode === LEFT_ARROW && this.dir === 'rtl'))) {
+            this.open();
+        }
+    }
+
+    /** Handles click events on the trigger. */
+    _handleClick(event: MouseEvent): void {
+        if (this.triggersSubmenu()) {
+            // Stop event propagation to avoid closing the parent menu.
+            event.stopPropagation();
+            this.open();
+        } else {
+            this.toggle();
+        }
+    }
+
+    /** Handles the cases where the user hovers over the trigger. */
+    private _handleHover() {
+        // Subscribe to changes in the hovered item in order to toggle the panel.
+        if (!this.triggersSubmenu()) {
+            return;
+        }
+
+        this._hoverSubscription = this._parentMenu._hovered()
+        // Since we might have multiple competing triggers for the same menu (e.g. a sub-menu
+        // with different data and triggers), we have to delay it by a tick to ensure that
+        // it won't be closed immediately after it is opened.
+            .pipe(
+                filter(active => active === this._menuItemInstance && !active.disabled),
+                delay(0, asapScheduler)
+            )
+            .subscribe(() => {
+                this._openedBy = 'mouse';
+
+                // If the same menu is used between multiple triggers, it might still be animating
+                // while the new trigger tries to re-open it. Wait for the animation to finish
+                // before doing so. Also interrupt if the user moves to another item.
+                if (this.dropdown instanceof McDropdown && this.dropdown._isAnimating) {
+                    // We need the `delay(0)` here in order to avoid
+                    // 'changed after checked' errors in some cases. See #12194.
+                    this.dropdown._animationDone
+                        .pipe(take(1), delay(0, asapScheduler), takeUntil(this._parentMenu._hovered()))
+                        .subscribe(() => this.open());
+                } else {
+                    this.open();
+                }
+            });
+    }
+
+    /** Gets the portal that should be attached to the overlay. */
+    private _getPortal(): TemplatePortal {
+        // Note that we can avoid this check by keeping the portal on the menu panel.
+        // While it would be cleaner, we'd have to introduce another required method on
+        // `MatMenuPanel`, making it harder to consume.
+        if (!this._portal || this._portal.templateRef !== this.dropdown.templateRef) {
+            this._portal = new TemplatePortal(this.dropdown.templateRef, this._viewContainerRef);
+        }
+
+        return this._portal;
+    }
+
 }

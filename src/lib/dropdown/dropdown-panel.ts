@@ -20,9 +20,11 @@ export const MC_DROPDOWN_PANEL = new InjectionToken<McDropdownPanel>('MC_DROPDOW
 export interface McDropdownPanel<T = any> {
     xPosition: DropdownPositionX;
     yPosition: DropdownPositionY;
-    overlapTrigger: boolean;
+    overlapTriggerX: boolean;
+    overlapTriggerY: boolean;
     templateRef: TemplateRef<any>;
     closed: EventEmitter<void | 'click' | 'keydown' | 'tab'>;
+    parent?: McDropdownPanel | undefined;
     direction?: Direction;
     lazyContent?: McDropdownContent;
     backdropClass?: string;

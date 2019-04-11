@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, Directive } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, Directive, ElementRef } from '@angular/core';
 import { CanDisable, mixinDisabled } from '@ptsecurity/mosaic/core';
 
 
@@ -36,9 +36,19 @@ class McVerticalNavbarItemBase {}
     inputs: ['disabled'],
     host: {
         '[attr.disabled]': 'disabled || null',
-        '[attr.tabindex]': 'disabled ? -1 : tabIndex'
+        '[attr.tabindex]': '-1'
     }
 })
 export class McVerticalNavbarItem extends mixinDisabled(McVerticalNavbarItemBase) implements CanDisable {
     @Input() tabIndex: number = 0;
+
+    constructor(
+        private element: ElementRef
+    ) {
+        super();
+    }
+
+    get hasDropdownAttached() {
+        return this.element.nativeElement.classList.contains('mc-dropdown-trigger');
+    }
 }

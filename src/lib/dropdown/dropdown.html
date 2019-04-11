@@ -7,7 +7,8 @@
         [@transformDropdown]="_panelAnimationState"
         (@transformDropdown.start)="_isAnimating = true"
         (@transformDropdown.done)="_onAnimationDone($event)"
-        tabindex="-1">
+        tabindex="-1"
+        role="dropdown">
         <div class="mc-dropdown__content">
             <ng-content></ng-content>
         </div>

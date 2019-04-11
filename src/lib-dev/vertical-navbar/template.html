@@ -55,42 +55,42 @@
         <mc-vertical-navbar-title>With notification badge</mc-vertical-navbar-title>
     </mc-vertical-navbar-item>
 
-    <mc-vertical-navbar-item class="user-menu" [matMenuTriggerFor]="userMenu">
+    <mc-vertical-navbar-item class="user-menu" [mcDropdownTriggerFor]="userMenu">
         <div class="avatar">NS</div>
         <div>
             <div>Name Surname</div>
             <div><small>name.surname@email.com</small></div>
         </div>
 
-        <mat-menu #userMenu="matMenu" xPosition="after" overlapTriggerX="false" overlapTriggerY="true" yPosition="above">
-            <button mat-menu-item [matMenuTriggerFor]="settingsMenu">
+        <mc-dropdown #userMenu="mcDropdown" xPosition="after" overlapTriggerX="false" overlapTriggerY="true" yPosition="above">
+            <button mc-dropdown-item [mcDropdownTriggerFor]="settingsMenu">
                 <i mc-icon="mc-gear_16"></i>Profile settings
             </button>
-            <button mat-menu-item [matMenuTriggerFor]="signOutMenu">
+            <button mc-dropdown-item [mcDropdownTriggerFor]="signOutMenu">
                 <i mc-icon="mc-bell_32"></i>Sign out
             </button>
-        </mat-menu>
+        </mc-dropdown>
 
-        <mat-menu #settingsMenu="matMenu">
-            <button mat-menu-item [matMenuTriggerFor]="nestedSettingsMenu">Nested setting</button>
-            <button mat-menu-item><i mc-icon="mc-check_16"></i>Some setting</button>
-            <button mat-menu-item><i mc-icon="mc-bell_32"></i>Another Setting</button>
-        </mat-menu>
+        <mc-dropdown #settingsMenu="mcDropdown">
+            <button mc-dropdown-item [mcDropdownTriggerFor]="nestedSettingsMenu">Nested setting</button>
+            <button mc-dropdown-item><i mc-icon="mc-check_16"></i>Some setting</button>
+            <button mc-dropdown-item><i mc-icon="mc-bell_32"></i>Another Setting</button>
+        </mc-dropdown>
 
-        <mat-menu #signOutMenu="matMenu">
-            <button mat-menu-item><i mc-icon="mc-check_16"></i>Yes, sure!</button>
-            <button mat-menu-item><i mc-icon="mc-close-M_16"></i>No, not now</button>
-            <button mat-menu-item><i mc-icon="mc-clock_16"></i>Maybe I should think it over</button>
-        </mat-menu>
+        <mc-dropdown #signOutMenu="mcDropdown">
+            <button mc-dropdown-item><i mc-icon="mc-check_16"></i>Yes, sure!</button>
+            <button mc-dropdown-item><i mc-icon="mc-close-M_16"></i>No, not now</button>
+            <button mc-dropdown-item><i mc-icon="mc-clock_16"></i>Maybe I should think it over</button>
+        </mc-dropdown>
 
-        <mat-menu #nestedSettingsMenu="matMenu">
-            <button mat-menu-item>Graceful setting</button>
-            <button mat-menu-item>Brilliant setting</button>
-            <button mat-menu-item>Flamboyant setting</button>
-            <button mat-menu-item>Bizarre setting</button>
-            <button mat-menu-item>Picturesque setting</button>
-            <button mat-menu-item>Fanciful setting</button>
-        </mat-menu>
+        <mc-dropdown #nestedSettingsMenu="mcDropdown">
+            <button mc-dropdown-item>Graceful setting</button>
+            <button mc-dropdown-item>Brilliant setting</button>
+            <button mc-dropdown-item>Flamboyant setting</button>
+            <button mc-dropdown-item>Bizarre setting</button>
+            <button mc-dropdown-item>Picturesque setting</button>
+            <button mc-dropdown-item>Fanciful setting</button>
+        </mc-dropdown>
     </mc-vertical-navbar-item>
 
 </mc-vertical-navbar>

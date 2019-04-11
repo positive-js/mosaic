@@ -50,7 +50,6 @@ mc-vertical-navbar {
 
 .user-menu {
     display: flex;
-    padding-left: 0;
 
     .avatar {
         display: flex;
@@ -62,6 +61,6 @@ mc-vertical-navbar {
         border-radius: 50%;
         width: 40px;
         height: 40px;
-        margin: 12px;
+        margin: 12px 12px 12px -4px;
     }
 }

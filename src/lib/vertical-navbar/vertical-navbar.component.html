@@ -8,7 +8,7 @@
             <i mc-icon="mc-hamburger_32" *ngIf="! expanded"></i>
             <i mc-icon="mc-close-L_32" *ngIf="expanded"></i>
         </div>
-        <div cdkMonitorSubtreeFocus>
+        <div cdkMonitorSubtreeFocus *ngIf="expanded">
             <ng-content select="
                 mc-vertical-navbar-header,
                 a[mc-vertical-navbar-header]

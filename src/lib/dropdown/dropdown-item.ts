@@ -6,13 +6,12 @@ import {
     OnDestroy,
     ViewEncapsulation,
     Inject,
-    Optional
+    Optional,
+    Input
 } from '@angular/core';
 import { IFocusableOption, FocusMonitor, FocusOrigin } from '@ptsecurity/cdk/a11y';
-import {
-    CanDisable, CanDisableCtor,
-    mixinDisabled
-} from '@ptsecurity/mosaic/core';
+import { CanDisable, CanDisableCtor, mixinDisabled } from '@ptsecurity/mosaic/core';
+import { Subject } from 'rxjs';
 
 import { MC_DROPDOWN_PANEL, McDropdownPanel } from './dropdown-panel';
 
@@ -32,20 +31,38 @@ export const _McDropdownItemMixinBase: CanDisableCtor & typeof McDropdownItemBas
     exportAs: 'mcDropdownItem',
     inputs: ['disabled'],
     host: {
-        role: 'dropdown-item',
+        '[attr.role]': 'role',
         class: 'mc-dropdown__item',
+        '[class.mat-menu-item-highlighted]': '_highlighted',
         '[attr.tabindex]': '_getTabIndex()',
+        '[attr.aria-disabled]': 'disabled.toString()',
         '[attr.disabled]': 'disabled || null',
-        '(click)': '_checkDisabled($event)'
+        '(click)': '_checkDisabled($event)',
+        '(mouseenter)': '_handleMouseEnter()'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    template: `<ng-content></ng-content>`
+    template: `
+        <ng-content></ng-content>
+        <i *ngIf="_triggersSubmenu" mc-icon="mc-angle-right-M_16" class="mc-dropdown__trigger"></i>
+    `
 })
 export class McDropdownItem extends _McDropdownItemMixinBase
     implements IFocusableOption, CanDisable, OnDestroy {
 
+    /** ARIA role for the dropdown item. */
+    @Input() role: 'menuitem' | 'menuitemradio' | 'menuitemcheckbox' = 'menuitem';
+
     private _document: Document;
+
+    /** Stream that emits when the dropdown item is hovered. */
+    readonly _hovered: Subject<McDropdownItem> = new Subject<McDropdownItem>();
+
+    /** Whether the dropdown item is highlighted. */
+    _highlighted: boolean = false;
+
+    /** Whether the dropdown item acts as a trigger for a sub-menu. */
+    _triggersSubmenu: boolean = false;
 
     constructor(
         private _elementRef: ElementRef<HTMLElement>,
@@ -58,7 +75,7 @@ export class McDropdownItem extends _McDropdownItemMixinBase
             // Start monitoring the element so it gets the appropriate focused classes. We want
             // to show the focus style for dropdown items only when the focus was not caused by a
             // mouse or touch interaction.
-            _focusMonitor.monitor(this._elementRef.nativeElement, false);
+            _focusMonitor.monitor(this._elementRef, false);
         }
 
         if (_parentDropdownPanel && _parentDropdownPanel.addItem) {
@@ -79,12 +96,14 @@ export class McDropdownItem extends _McDropdownItemMixinBase
 
     ngOnDestroy() {
         if (this._focusMonitor) {
-            this._focusMonitor.stopMonitoring(this._elementRef.nativeElement);
+            this._focusMonitor.stopMonitoring(this._elementRef);
         }
 
         if (this._parentDropdownPanel && this._parentDropdownPanel.removeItem) {
             this._parentDropdownPanel.removeItem(this);
         }
+
+        this._hovered.complete();
     }
 
     /** Used to set the `tabindex`. */
@@ -103,6 +122,11 @@ export class McDropdownItem extends _McDropdownItemMixinBase
             event.preventDefault();
             event.stopPropagation();
         }
+    }
+
+    /** Emits to the hover stream. */
+    _handleMouseEnter() {
+        this._hovered.next(this);
     }
 
     /** Gets the label to be used when determining whether the option should be focused. */
