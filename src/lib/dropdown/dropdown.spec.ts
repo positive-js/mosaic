@@ -725,7 +725,7 @@ describe('McDropdown default overrides', () => {
             declarations: [SimpleDropdown, FakeIcon],
             providers: [{
                 provide: MC_DROPDOWN_DEFAULT_OPTIONS,
-                useValue: {overlapTrigger: true, xPosition: 'before', yPosition: 'above'}
+                useValue: {overlapTriggerY: true, xPosition: 'before', yPosition: 'above'}
             }]
         }).compileComponents();
     }));
@@ -735,7 +735,7 @@ describe('McDropdown default overrides', () => {
         fixture.detectChanges();
         const dropdown = fixture.componentInstance.dropdown;
 
-        expect(dropdown.overlapTrigger).toBe(true);
+        expect(dropdown.overlapTriggerY).toBe(true);
         expect(dropdown.xPosition).toBe('before');
         expect(dropdown.yPosition).toBe('above');
     });
@@ -798,8 +798,9 @@ class CustomDropdownPanel implements McDropdownPanel {
     direction: Direction;
     xPosition: DropdownPositionX = 'after';
     yPosition: DropdownPositionY = 'below';
-    overlapTrigger = true;
-    parentDropdown: McDropdownPanel;
+    overlapTriggerX = false;
+    overlapTriggerY = true;
+    parent: McDropdownPanel;
 
     @ViewChild(TemplateRef) templateRef: TemplateRef<any>;
     @Output() close = new EventEmitter<void | 'click' | 'keydown' | 'tab'>();
