@@ -3,6 +3,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ContentChild,
     ContentChildren,
     ElementRef,
     EventEmitter,
@@ -17,11 +18,7 @@ import {
 } from '@angular/core';
 import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
 import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
-import {
-    MC_OPTION_PARENT_COMPONENT,
-    McOptgroup,
-    McOption
-} from '@ptsecurity/mosaic/core';
+import { MC_OPTION_PARENT_COMPONENT, McOptgroup, McOption } from '@ptsecurity/mosaic/core';
 
 
 /**
@@ -50,7 +47,7 @@ export const MC_AUTOCOMPLETE_DEFAULT_OPTIONS =
 
 // tslint:disable-next-line naming-convention
 export function MC_AUTOCOMPLETE_DEFAULT_OPTIONS_FACTORY(): McAutocompleteDefaultOptions {
-    return { autoActiveFirstOption: false };
+    return { autoActiveFirstOption: true };
 }
 
 @Component({
@@ -102,6 +99,8 @@ export class McAutocomplete implements AfterContentInit {
     /** Event that is emitted when the autocomplete panel is closed. */
     @Output() readonly closed: EventEmitter<void> = new EventEmitter<void>();
 
+    inputValue: string | number | null;
+
     /**
      * Takes classes set on the host mc-autocomplete element and applies them to the panel
      * inside the overlay container to allow for easy styling.
@@ -146,12 +145,11 @@ export class McAutocomplete implements AfterContentInit {
         private elementRef: ElementRef<HTMLElement>,
         @Inject(MC_AUTOCOMPLETE_DEFAULT_OPTIONS) defaults: McAutocompleteDefaultOptions
     ) {
-
         this._autoActiveFirstOption = !!defaults.autoActiveFirstOption;
     }
 
     ngAfterContentInit() {
-        this.keyManager = new ActiveDescendantKeyManager<McOption>(this.options).withWrap();
+        this.keyManager = new ActiveDescendantKeyManager<McOption>(this.options);
         this.setVisibility();
     }
 
@@ -166,9 +164,10 @@ export class McAutocomplete implements AfterContentInit {
     }
 
     setVisibility() {
+        console.log('setVisibility, showPanel: ', !!this.options.length);
         this.showPanel = !!this.options.length;
-        this._classList['mc-autocomplete-visible'] = this.showPanel;
-        this._classList['mc-autocomplete-hidden'] = !this.showPanel;
+        this._classList['mc-autocomplete_visible'] = this.showPanel;
+        this._classList['mc-autocomplete_hidden'] = !this.showPanel;
 
         this.changeDetectorRef.markForCheck();
     }
@@ -177,6 +176,10 @@ export class McAutocomplete implements AfterContentInit {
         const event = new McAutocompleteSelectedEvent(this, option);
 
         this.optionSelected.emit(event);
+    }
+
+    onKeydown(event: KeyboardEvent): any {
+        this.keyManager.onKeydown(event);
     }
 }
 

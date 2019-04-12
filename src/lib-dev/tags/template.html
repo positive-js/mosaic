@@ -11,25 +11,24 @@
 
 
 <mc-form-field class="example-chip-list">
-    <mc-tag-list #tagList>
-        <mc-tag *ngFor="let tag of tags" [selectable]="selectable"
-                  [removable]="removable" (removed)="remove(tag)">
+    <mc-tag-list #tagList (change)="onChangedTagList()">
+        <mc-tag *ngFor="let tag of tags" [value]="tag" (removed)="onRemove(tag)">
             {{ tag }}
-            <i mc-icon="mc-close-S_16" mcTagRemove *ngIf="removable"></i>
+            <i mc-icon="mc-close-S_16" mcTagRemove></i>
         </mc-tag>
-        <input placeholder="New fruit..."
+        <input placeholder="New tag..."
                #tagInput
                [formControl]="tagCtrl"
-               [mcAutocomplete]="auto"
+               [mcAutocomplete]="autocomplete"
                [mcTagInputFor]="tagList"
                [mcTagInputSeparatorKeyCodes]="separatorKeysCodes"
-               [mcTagInputAddOnBlur]="addOnBlur"
-               (mcTagInputTokenEnd)="add($event)">
+               (mcTagInputTokenEnd)="onCreate($event)">
     </mc-tag-list>
-    <mc-autocomplete #auto="mcAutocomplete" (optionSelected)="selected($event)">
-        <mc-option *ngFor="let tag of filteredTags | async" [value]="tag">
-            {{ tag }}
+    <mc-autocomplete #autocomplete (optionSelected)="onSelect($event)">
+        <mc-option *ngIf="tagInput.value" [value]="{ new: true, value: tagInput.value }">
+            Создать: {{ tagInput.value }}
         </mc-option>
+        <mc-option *ngFor="let tag of filteredTags | async" [value]="tag">{{ tag }}</mc-option>
     </mc-autocomplete>
 </mc-form-field>
 

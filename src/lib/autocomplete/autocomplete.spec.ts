@@ -274,7 +274,7 @@ describe('McAutocomplete', () => {
             const panel = overlayContainerElement.querySelector('.mc-autocomplete-panel') as HTMLElement;
 
             expect(panel.classList)
-                .toContain('mc-autocomplete-visible', `Expected panel to start out visible.`);
+                .toContain('mc-autocomplete_visible', `Expected panel to start out visible.`);
 
             // Filter down the option list such that no options match the value
             typeInElement('af', input);
@@ -283,7 +283,7 @@ describe('McAutocomplete', () => {
             fixture.detectChanges();
 
             expect(panel.classList)
-                .toContain('mc-autocomplete-hidden', `Expected panel to hide itself when empty.`);
+                .toContain('mc-autocomplete_hidden', `Expected panel to hide itself when empty.`);
         }));
 
         it('should keep the label floating until the panel closes', fakeAsync(() => {
@@ -359,7 +359,7 @@ describe('McAutocomplete', () => {
             fixture.detectChanges();
 
             expect(overlayContainerElement.querySelector('.mc-autocomplete-panel')!.classList)
-                .toContain('mc-autocomplete-visible', 'Expected panel to be visible.');
+                .toContain('mc-autocomplete_visible', 'Expected panel to be visible.');
 
             typeInElement('x', input);
             fixture.detectChanges();
@@ -367,7 +367,7 @@ describe('McAutocomplete', () => {
             fixture.detectChanges();
 
             expect(overlayContainerElement.querySelector('.mc-autocomplete-panel')!.classList)
-                .toContain('mc-autocomplete-hidden', 'Expected panel to be hidden.');
+                .toContain('mc-autocomplete_hidden', 'Expected panel to be hidden.');
 
             fixture.componentInstance.trigger.closePanel();
             fixture.detectChanges();
@@ -381,7 +381,7 @@ describe('McAutocomplete', () => {
             fixture.detectChanges();
 
             expect(overlayContainerElement.querySelector('.mc-autocomplete-panel')!.classList)
-                .toContain('mc-autocomplete-visible', 'Expected panel to be visible.');
+                .toContain('mc-autocomplete_visible', 'Expected panel to be visible.');
         }));
 
         it('should animate the label when the input is focused', () => {
@@ -2168,7 +2168,7 @@ describe('McAutocomplete', () => {
 
         Promise.resolve().then(() => {
             let panel = overlayContainerElement.querySelector('.mc-autocomplete-panel') as HTMLElement;
-            let visibleClass = 'mc-autocomplete-visible';
+            let visibleClass = 'mc-autocomplete_visible';
 
             fixture.detectChanges();
             expect(panel.classList).toContain(visibleClass, `Expected panel to be visible.`);

@@ -36,11 +36,11 @@ $mc-autocomplete-panel-border-radius: 3px !default;
 
     padding: 4px 0;
 
-    &.mc-autocomplete-visible {
+    &.mc-autocomplete_visible {
         visibility: visible;
     }
 
-    &.mc-autocomplete-hidden {
+    &.mc-autocomplete_hidden {
         visibility: hidden;
     }
 

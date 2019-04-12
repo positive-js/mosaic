@@ -108,11 +108,6 @@ export class McTagList extends _McTagListMixinBase implements McFormFieldControl
         return this.multiple ? this.selectionModel.selected : this.selectionModel.selected[0];
     }
 
-    /** The ARIA role applied to the tag list. */
-    get role(): string | null {
-        return this.empty ? null : 'listbox';
-    }
-
     /** Whether the user should be allowed to select multiple tags. */
     @Input()
     get multiple(): boolean {
@@ -271,6 +266,7 @@ export class McTagList extends _McTagListMixinBase implements McFormFieldControl
 
     selectionModel: SelectionModel<McTag>;
 
+    tagChanges = new EventEmitter<any>();
 
     /** An object used to control when error messages are shown. */
     @Input() errorStateMatcher: ErrorStateMatcher;
@@ -368,6 +364,8 @@ export class McTagList extends _McTagListMixinBase implements McFormFieldControl
         this.tags.changes
             .pipe(startWith(null), takeUntil(this.destroyed))
             .subscribe(() => {
+                this.tagChanges.emit(this.tags.toArray());
+
                 if (this.disabled) {
                     // Since this happens after the content has been
                     // checked, we need to defer it to the next tick.
@@ -515,6 +513,7 @@ export class McTagList extends _McTagListMixinBase implements McFormFieldControl
     }
 
     setSelectionByValue(value: any, isUserInput: boolean = true) {
+        console.log('setSelectionByValue');
         this.clearSelection();
         this.tags.forEach((tag) => tag.deselect());
 

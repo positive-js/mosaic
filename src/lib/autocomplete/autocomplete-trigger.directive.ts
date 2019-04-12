@@ -37,8 +37,8 @@ import { McFormField } from '@ptsecurity/mosaic/form-field';
 import { Subscription, defer, fromEvent, merge, of as observableOf, Subject, Observable } from 'rxjs';
 import { filter, take, switchMap, delay, tap, map } from 'rxjs/operators';
 
-import { McAutocomplete } from './autocomplete';
-import { McAutocompleteOrigin } from './autocomplete-origin';
+import { McAutocompleteOrigin } from './autocomplete-origin.directive';
+import { McAutocomplete } from './autocomplete.component';
 
 
 /**
@@ -96,12 +96,6 @@ export function getMcAutocompleteMissingPanelError(): Error {
     host: {
         class: 'mc-autocomplete-trigger',
         '[attr.autocomplete]': 'autocompleteAttribute',
-        '[attr.role]': 'autocompleteDisabled ? null : "combobox"',
-        '[attr.aria-autocomplete]': 'autocompleteDisabled ? null : "list"',
-        '[attr.aria-activedescendant]': '(panelOpen && activeOption) ? activeOption.id : null',
-        '[attr.aria-expanded]': 'autocompleteDisabled ? null : panelOpen.toString()',
-        '[attr.aria-owns]': '(autocompleteDisabled || !panelOpen) ? null : autocomplete?.id',
-        '[attr.aria-haspopup]': '!autocompleteDisabled',
         // Note: we use `focusin`, as opposed to `focus`, in order to open the panel
         // a little earlier. This avoids issues where IE delays the focusing of the input.
         '(focusin)': 'handleFocus()',
@@ -134,7 +128,6 @@ export class McAutocompleteTrigger implements ControlValueAccessor, OnDestroy {
         return null;
     }
 
-    /** Whether or not the autocomplete panel is open. */
     get panelOpen(): boolean {
         return this.overlayAttached && this.autocomplete.showPanel;
     }
@@ -185,9 +178,6 @@ export class McAutocompleteTrigger implements ControlValueAccessor, OnDestroy {
     /** Strategy that is used to position the panel. */
     private positionStrategy: FlexibleConnectedPositionStrategy;
 
-    /** Whether or not the label state is being overridden. */
-    private manuallyFloatingLabel = false;
-
     /** The subscription for closing actions (some are bound to document). */
     private closingActionsSubscription: Subscription;
 
@@ -204,17 +194,18 @@ export class McAutocompleteTrigger implements ControlValueAccessor, OnDestroy {
     /** Stream of keyboard events that can close the panel. */
     private readonly closeKeyEventStream = new Subject<void>();
 
-    constructor(private elementRef: ElementRef<HTMLInputElement>,
-                private viewContainerRef: ViewContainerRef,
-                private changeDetectorRef: ChangeDetectorRef,
-                private overlay: Overlay,
-                private zone: NgZone,
-                @Inject(MC_AUTOCOMPLETE_SCROLL_STRATEGY) scrollStrategy: any,
-                @Optional() private dir: Directionality,
-                @Optional() @Host() private formField: McFormField,
-                @Optional() @Inject(DOCUMENT) private document: any,
-                // @breaking-change 8.0.0 Make `_viewportRuler` required.
-                private viewportRuler?: ViewportRuler
+    constructor(
+        private elementRef: ElementRef<HTMLInputElement>,
+        private viewContainerRef: ViewContainerRef,
+        private changeDetectorRef: ChangeDetectorRef,
+        private overlay: Overlay,
+        private zone: NgZone,
+        @Inject(MC_AUTOCOMPLETE_SCROLL_STRATEGY) scrollStrategy: any,
+        @Optional() private dir: Directionality,
+        @Optional() @Host() private formField: McFormField,
+        @Optional() @Inject(DOCUMENT) private document: any,
+        // @breaking-change 8.0.0 Make `_viewportRuler` required.
+        private viewportRuler?: ViewportRuler
     ) {
         // tslint:disable-next-line no-typeof-undefined
         if (typeof window !== 'undefined') {
@@ -252,14 +243,9 @@ export class McAutocompleteTrigger implements ControlValueAccessor, OnDestroy {
     }
 
     closePanel(): void {
-        this.resetLabel();
-
-        if (!this.overlayAttached) {
-            return;
-        }
+        if (!this.overlayAttached) { return; }
 
         if (this.panelOpen) {
-            // Only emit if the panel was visible.
             this.autocomplete.closed.emit();
         }
 
@@ -351,7 +337,7 @@ export class McAutocompleteTrigger implements ControlValueAccessor, OnDestroy {
             const isArrowKey = keyCode === UP_ARROW || keyCode === DOWN_ARROW;
 
             if (this.panelOpen || keyCode === TAB) {
-                this.autocomplete.keyManager.onKeydown(event);
+                this.autocomplete.onKeydown(event);
             } else if (isArrowKey && this.canOpen()) {
                 this.openPanel();
             }
@@ -397,14 +383,9 @@ export class McAutocompleteTrigger implements ControlValueAccessor, OnDestroy {
 
     /** Stream of clicks outside of the autocomplete panel. */
     private getOutsideClickStream(): Observable<any> {
-        if (!this.document) {
-            return observableOf(null);
-        }
+        if (!this.document) { return observableOf(null); }
 
-        return merge(
-            fromEvent<MouseEvent>(this.document, 'click'),
-            fromEvent<TouchEvent>(this.document, 'touchend')
-        )
+        return fromEvent<MouseEvent>(this.document, 'click')
             .pipe(filter((event) => {
                 const clickTarget = event.target as HTMLElement;
                 const formField = this.formField ?
@@ -426,13 +407,6 @@ export class McAutocompleteTrigger implements ControlValueAccessor, OnDestroy {
         // refocused when they come back. In this case we want to skip the first focus event, if the
         // pane was closed, in order to avoid reopening it unintentionally.
         this.canOpenOnNextFocus = this.document.activeElement !== this.elementRef.nativeElement || this.panelOpen;
-    }
-
-    /** If the label has been manually elevated, return it to its normal state. */
-    private resetLabel(): void {
-        if (this.manuallyFloatingLabel) {
-            this.manuallyFloatingLabel = false;
-        }
     }
 
     /**
@@ -464,13 +438,15 @@ export class McAutocompleteTrigger implements ControlValueAccessor, OnDestroy {
      * stream every time the option list changes.
      */
     private subscribeToClosingActions(): Subscription {
-        const firstStable = this.zone.onStable.asObservable().pipe(take(1));
-        const optionChanges = this.autocomplete.options.changes.pipe(
-            tap(() => this.positionStrategy.reapplyLastPosition()),
-            // Defer emitting to the stream until the next tick, because changing
-            // bindings in here will cause "changed after checked" errors.
-            delay(0)
-        );
+        const firstStable = this.zone.onStable.asObservable()
+            .pipe(take(1));
+        const optionChanges = this.autocomplete.options.changes
+            .pipe(
+                tap(() => this.positionStrategy.reapplyLastPosition()),
+                // Defer emitting to the stream until the next tick, because changing
+                // bindings in here will cause "changed after checked" errors.
+                delay(0)
+            );
 
         // When the zone is stable initially, and when the option list changes...
         return merge(firstStable, optionChanges)
@@ -523,8 +499,7 @@ export class McAutocompleteTrigger implements ControlValueAccessor, OnDestroy {
         this.previousValue = inputValue;
     }
 
-    /**
-     * This method closes the panel, and if a value is specified, also sets the associated
+    /** This method closes the panel, and if a value is specified, also sets the associated
      * control to that value. It will also mark the control as dirty if this interaction
      * stemmed from the user.
      */
@@ -534,15 +509,14 @@ export class McAutocompleteTrigger implements ControlValueAccessor, OnDestroy {
             this.setTriggerValue(event.source.value);
             this.onChange(event.source.value);
             this.elementRef.nativeElement.focus();
+
             this.autocomplete.emitSelectEvent(event.source);
         }
 
         this.closePanel();
     }
 
-    /**
-     * Clear any previous selected option and emit a selection change event for this option
-     */
+    /** Clear any previous selected option and emit a selection change event for this option */
     private clearPreviousSelectedOption(skip: McOption) {
         this.autocomplete.options.forEach((option) => {
             if (option !== skip && option.selected) {
@@ -656,7 +630,6 @@ export class McAutocompleteTrigger implements ControlValueAccessor, OnDestroy {
         return this.autocomplete.panelWidth || this.getHostWidth() - AUTOCOMPLETE_BORDER_WIDTH;
     }
 
-    /** Returns the width of the input element, so the panel width can match it. */
     private getHostWidth(): number {
         return this.getConnectedElement().nativeElement.getBoundingClientRect().width;
     }

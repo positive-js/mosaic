@@ -37,7 +37,8 @@ export class McOptionSelectionChange {
  * Contains properties that the options can inherit.
  * @docs-private
  */
-export interface IMcOptionParentComponent {
+// tslint:disable-next-line: naming-convention
+export interface McOptionParentComponent {
     multiple?: boolean;
 }
 
@@ -45,7 +46,7 @@ export interface IMcOptionParentComponent {
  * Injection token used to provide the parent component to options.
  */
 export const MC_OPTION_PARENT_COMPONENT =
-    new InjectionToken<IMcOptionParentComponent>('MC_OPTION_PARENT_COMPONENT');
+    new InjectionToken<McOptionParentComponent>('MC_OPTION_PARENT_COMPONENT');
 
 /**
  * Single option inside of a `<mc-select>` element.
@@ -135,7 +136,7 @@ export class McOption implements AfterViewChecked, OnDestroy {
     constructor(
         private readonly element: ElementRef,
         private readonly changeDetectorRef: ChangeDetectorRef,
-        @Optional() @Inject(MC_OPTION_PARENT_COMPONENT) private readonly parent: IMcOptionParentComponent,
+        @Optional() @Inject(MC_OPTION_PARENT_COMPONENT) private readonly parent: McOptionParentComponent,
         @Optional() readonly group: McOptgroup
     ) {}
 
