@@ -4,12 +4,12 @@
 
 #### NPM
 ```bash
-npm install --save @ptsecurity/mosaic @ptsecurity/cdk
+npm install --save @ptsecurity/mosaic @ptsecurity/cdk @ptsecurity/mosaic-icons @ptsecurity/mosaic-moment-adapter moment messageformat
 ```
 
 #### Yarn
 ```bash
-yarn add @ptsecurity/mosaic @ptsecurity/cdk
+yarn add @ptsecurity/mosaic @ptsecurity/cdk @ptsecurity/mosaic-icons @ptsecurity/mosaic-moment-adapter moment messageformat
 ```
 
 #### Snapshots builds
@@ -71,4 +71,10 @@ Including a theme is **required** to apply all of the core and theme styles to y
 
 ```css
 @import "~@ptsecurity/mosaic/prebuilt-themes/default-theme.css";
+```
+
+You should include mosaic-icons in order to use icons classes
+
+```css
+@import "~@ptsecurity/mosaic-icons/dist/styles/mc-icons.css";
 ```
