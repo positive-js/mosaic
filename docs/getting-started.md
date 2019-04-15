@@ -4,12 +4,12 @@
 
 #### NPM
 ```bash
-npm install --save @ptsecurity/mosaic @ptsecurity/cdk @ptsecurity/mosaic-icons @ptsecurity/mosaic-moment-adapter moment 
+npm install --save @ptsecurity/mosaic @ptsecurity/cdk @ptsecurity/mosaic-icons @ptsecurity/mosaic-moment-adapter moment messageformat
 ```
 
 #### Yarn
 ```bash
-yarn add @ptsecurity/mosaic @ptsecurity/cdk @ptsecurity/mosaic-icons @ptsecurity/mosaic-moment-adapter moment
+yarn add @ptsecurity/mosaic @ptsecurity/cdk @ptsecurity/mosaic-icons @ptsecurity/mosaic-moment-adapter moment messageformat
 ```
 
 #### Snapshots builds
