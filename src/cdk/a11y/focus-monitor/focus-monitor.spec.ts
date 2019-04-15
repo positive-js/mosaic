@@ -6,7 +6,7 @@ import {
     dispatchFakeEvent,
     dispatchKeyboardEvent,
     dispatchMouseEvent,
-    patchElementFocus,
+    patchElementFocus
 } from '@ptsecurity/cdk/testing';
 
 import { A11yModule } from '../index';
@@ -24,8 +24,8 @@ describe('FocusMonitor', () => {
         TestBed.configureTestingModule({
             imports: [A11yModule],
             declarations: [
-                PlainButton,
-            ],
+                PlainButton
+            ]
         }).compileComponents();
     });
 
@@ -252,8 +252,8 @@ describe('cdkMonitorFocus', () => {
                 ButtonWithFocusClasses,
                 ComplexComponentWithMonitorElementFocus,
                 ComplexComponentWithMonitorSubtreeFocus,
-                ComplexComponentWithMonitorSubtreeFocusAndMonitorElementFocus,
-            ],
+                ComplexComponentWithMonitorSubtreeFocusAndMonitorElementFocus
+            ]
         }).compileComponents();
     });
 
@@ -461,8 +461,8 @@ describe('FocusMonitor observable stream', () => {
         TestBed.configureTestingModule({
             imports: [A11yModule],
             declarations: [
-                PlainButton,
-            ],
+                PlainButton
+            ]
         }).compileComponents();
     });
 
@@ -500,6 +500,7 @@ class PlainButton {
         <button cdkMonitorElementFocus (cdkFocusChange)="focusChanged($event)"></button>`
 })
 class ButtonWithFocusClasses {
+    // tslint:disable-next-line
     focusChanged(_origin: FocusOrigin) {
     }
 }
