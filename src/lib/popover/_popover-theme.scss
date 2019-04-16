@@ -13,39 +13,39 @@
     $primary-background-color: map-get($background, background);
     $secondary-background-color: if($is-dark, map-get($background, background), map-get($background, button-bg));
 
-    .mc-popover-container {
+    .mc-popover__container {
         color: map-get($foreground, text);
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         background-color: $primary-background-color;
         border-color: if($is-dark, $primary-background-color, map-get($foreground, disabled));
     }
 
-    .mc-popover-header {
+    .mc-popover__header {
         border-bottom-color: map-get($foreground, divider);
     }
 
-    .mc-popover-header, .mc-popover-content {
+    .mc-popover__header, .mc-popover__content {
         background-color: $primary-background-color;
     }
 
-    .mc-popover-footer {
+    .mc-popover__footer {
         background-color: $secondary-background-color;
         border-top-color: map-get($foreground, divider);
     }
 
-    .mc-popover_placement-top .mc-popover-arrow {
+    .mc-popover--placement-top .mc-popover__arrow {
         border-top-color: $secondary-background-color;
     }
 
-    .mc-popover_placement-right .mc-popover-arrow {
+    .mc-popover--placement-right .mc-popover-arrow {
         border-right-color: $primary-background-color;
     }
 
-    .mc-popover_placement-left .mc-popover-arrow {
+    .mc-popover--placement-left .mc-popover-arrow {
         border-left-color: $primary-background-color;
     }
 
-    .mc-popover_placement-bottom .mc-popover-arrow {
+    .mc-popover--placement-bottom .mc-popover-arrow {
         border-bottom-color: $primary-background-color;
     }
 }

@@ -69,7 +69,7 @@ import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
     }
 })
 export class McPopoverComponent {
-    prefix = 'mc-popover_placement';
+    positionPrefix = 'mc-popover--placement';
     positions: ConnectionPositionPair[] = [ ...DEFAULT_4_POSITIONS ];
     classMap = {};
     showTid: number;
@@ -179,7 +179,7 @@ export class McPopoverComponent {
     }
 
     setClassMap(): void {
-        this.classMap = `${this.prefix}-${this.mcPlacement}`;
+        this.classMap = `${this.positionPrefix}-${this.mcPlacement}`;
     }
 
     isNonEmptyContent(): boolean {
@@ -385,7 +385,7 @@ export class McPopover implements OnInit, OnDestroy {
     }
     private _mcVisible: boolean;
 
-    @HostBinding('class.mc-popover-open')
+    @HostBinding('class.mc-popover--open')
     get isOpen(): boolean {
         return this.isPopoverOpen;
     }
@@ -442,7 +442,7 @@ export class McPopover implements OnInit, OnDestroy {
         this.overlayRef = this.overlay.create({
             direction: this.direction,
             positionStrategy: strategy,
-            panelClass: 'mc-popover-panel',
+            panelClass: 'mc-popover__panel',
             scrollStrategy: this.scrollStrategy()
         });
 

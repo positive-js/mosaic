@@ -22,11 +22,11 @@ app {
     width: 450px;
 }
 
-.help-neo {
-    position: fixed;
-    top: 50%;
+button.help-neo {
+    position: absolute;
     left: 50%;
-    transform: translate(-50%, -50%);
+    bottom: 150px;
+    transform: translateX(-50%);
 }
 
 .neo-image {

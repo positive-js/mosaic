@@ -1,25 +1,25 @@
-<div class="mc-popover popover-width-300"
+<div class="mc-popover"
      [ngClass]="classMap"
      [@fadeAnimation]="''+($visible | async)">
-    <div class="mc-popover-container">
-        <div class="mc-popover-header" *ngIf="mcHeader">
+    <div class="mc-popover__container">
+        <div class="mc-popover__header" *ngIf="mcHeader">
             <ng-container *ngIf="isTemplateRef(mcHeader)" [ngTemplateOutlet]="mcHeader"></ng-container>
             <ng-container *ngIf="isNonEmptyString(mcHeader)">
                 <div [innerHTML]="mcHeader"></div>
             </ng-container>
         </div>
-        <div class="mc-popover-content" *ngIf="mcContent">
+        <div class="mc-popover__content" *ngIf="mcContent">
             <ng-container *ngIf="isTemplateRef(mcContent)" [ngTemplateOutlet]="mcContent"></ng-container>
             <ng-container *ngIf="isNonEmptyString(mcContent)">
                 <div [innerHTML]="mcContent"></div>
             </ng-container>
         </div>
-        <div class="mc-popover-footer" *ngIf="mcFooter">
+        <div class="mc-popover__footer" *ngIf="mcFooter">
             <ng-container *ngIf="isTemplateRef(mcFooter)" [ngTemplateOutlet]="mcFooter"></ng-container>
             <ng-container *ngIf="isNonEmptyString(mcFooter)">
                 <div [innerHTML]="mcFooter"></div>
             </ng-container>
         </div>
     </div>
-    <div class="mc-popover-arrow"></div>
+    <div class="mc-popover__arrow"></div>
 </div>
