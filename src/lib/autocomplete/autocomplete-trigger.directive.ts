@@ -101,7 +101,8 @@ export function getMcAutocompleteMissingPanelError(): Error {
         '(focusin)': 'handleFocus()',
         '(blur)': 'onTouched()',
         '(input)': 'handleInput($event)',
-        '(keydown)': 'handleKeydown($event)'
+        '(keydown)': 'handleKeydown($event)',
+        '(click)': 'handleClick($event)'
     },
     exportAs: 'mcAutocompleteTrigger',
     providers: [MAT_AUTOCOMPLETE_VALUE_ACCESSOR]
@@ -334,13 +335,14 @@ export class McAutocompleteTrigger implements ControlValueAccessor, OnDestroy {
             event.preventDefault();
         } else if (this.autocomplete) {
             const prevActiveItem = this.autocomplete.keyManager.activeItem;
-            const isArrowKey = keyCode === UP_ARROW || keyCode === DOWN_ARROW;
 
             if (this.panelOpen || keyCode === TAB) {
                 this.autocomplete.onKeydown(event);
-            } else if (isArrowKey && this.canOpen()) {
+            } else if (keyCode === DOWN_ARROW && this.canOpen()) {
                 this.openPanel();
             }
+
+            const isArrowKey = keyCode === UP_ARROW || keyCode === DOWN_ARROW;
 
             if (isArrowKey || this.autocomplete.keyManager.activeItem !== prevActiveItem) {
                 this.scrollToOption();
@@ -378,6 +380,12 @@ export class McAutocompleteTrigger implements ControlValueAccessor, OnDestroy {
         } else if (this.canOpen()) {
             this.previousValue = this.elementRef.nativeElement.value;
             this.attachOverlay();
+        }
+    }
+
+    handleClick($event: MouseEvent) {
+        if (this.canOpen() && this.document.activeElement === $event.target) {
+            this.openPanel();
         }
     }
 

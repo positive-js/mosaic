@@ -3,7 +3,6 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    ContentChild,
     ContentChildren,
     ElementRef,
     EventEmitter,
@@ -99,8 +98,6 @@ export class McAutocomplete implements AfterContentInit {
     /** Event that is emitted when the autocomplete panel is closed. */
     @Output() readonly closed: EventEmitter<void> = new EventEmitter<void>();
 
-    inputValue: string | number | null;
-
     /**
      * Takes classes set on the host mc-autocomplete element and applies them to the panel
      * inside the overlay container to allow for easy styling.
@@ -164,7 +161,6 @@ export class McAutocomplete implements AfterContentInit {
     }
 
     setVisibility() {
-        console.log('setVisibility, showPanel: ', !!this.options.length);
         this.showPanel = !!this.options.length;
         this._classList['mc-autocomplete_visible'] = this.showPanel;
         this._classList['mc-autocomplete_hidden'] = !this.showPanel;

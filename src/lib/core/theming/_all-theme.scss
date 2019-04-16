@@ -30,7 +30,6 @@
 @import '../../sidepanel/sidepanel-theme';
 @import '../../tree/tree-theme';
 @import '../../tree-select/tree-select-theme';
-@import '../../typeahead/typeahead-theme';
 @import '../../autocomplete/autocomplete-theme';
 @import '../visual/panel-theme';
 
@@ -71,6 +70,5 @@
     @include mc-sidepanel-theme($theme);
     @include mc-tree-theme($theme);
     @include mc-tree-select-theme($theme);
-    @include mc-typeahead-theme($theme);
     @include mc-autocomplete-theme($theme);
 }

@@ -70,6 +70,7 @@ export class McTagInput implements McTagTextControl, OnChanges {
         }
     }
 
+    // tslint:disable-next-line: naming-convention
     _tagList: McTagList;
 
     /**

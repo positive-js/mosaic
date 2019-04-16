@@ -55,8 +55,7 @@ let nextUniqueId = 0;
 
 /** Change event object that is emitted when the tag list value has changed. */
 export class McTagListChange {
-    constructor(public source: McTagList, public value: any) {
-    }
+    constructor(public source: McTagList, public value: any) {}
 }
 
 
@@ -82,6 +81,8 @@ export class McTagListChange {
 })
 export class McTagList extends _McTagListMixinBase implements McFormFieldControl<any>,
     ControlValueAccessor, AfterContentInit, DoCheck, OnInit, OnDestroy, CanUpdateErrorState {
+
+    readonly controlType: string = 'mc-tag-list';
 
     /** Combined stream of all of the child tags' selection change events. */
     get tagSelectionChanges(): Observable<McTagSelectionChange> {
@@ -245,8 +246,6 @@ export class McTagList extends _McTagListMixinBase implements McFormFieldControl
         this._tabIndex = value;
     }
 
-    readonly controlType: string = 'mc-tag-list';
-
     /**
      * Event that emits whenever the raw value of the tag-list changes. This is here primarily
      * to facilitate the two-way binding for the `value` input.
@@ -337,7 +336,6 @@ export class McTagList extends _McTagListMixinBase implements McFormFieldControl
 
     ngAfterContentInit() {
         this.keyManager = new FocusKeyManager<McTag>(this.tags)
-            .withWrap()
             .withVerticalOrientation()
             .withHorizontalOrientation(this.dir ? this.dir.value : 'ltr');
 
@@ -364,14 +362,10 @@ export class McTagList extends _McTagListMixinBase implements McFormFieldControl
         this.tags.changes
             .pipe(startWith(null), takeUntil(this.destroyed))
             .subscribe(() => {
-                this.tagChanges.emit(this.tags.toArray());
-
                 if (this.disabled) {
                     // Since this happens after the content has been
                     // checked, we need to defer it to the next tick.
-                    Promise.resolve().then(() => {
-                        this.syncTagsDisabledState();
-                    });
+                    Promise.resolve().then(() => { this.syncTagsDisabledState(); });
                 }
 
                 this.resetTags();
@@ -384,6 +378,10 @@ export class McTagList extends _McTagListMixinBase implements McFormFieldControl
 
                 // Check to see if we have a destroyed tag and need to refocus
                 this.updateFocusForDestroyedTags();
+
+                // Defer setting the value in order to avoid the "Expression
+                // has changed after it was checked" errors from Angular.
+                Promise.resolve().then(() => { this.tagChanges.emit(this.tags.toArray()); });
 
                 this.stateChanges.next();
             });
@@ -460,9 +458,7 @@ export class McTagList extends _McTagListMixinBase implements McFormFieldControl
      * are no eligible tags.
      */
     focus(): void {
-        if (this.disabled) {
-            return;
-        }
+        if (this.disabled) { return; }
 
         // TODO: ARIA says this should focus the first `selected` tag if any are selected.
         // Focus on first element if there's no tagInput inside tag-list
@@ -513,7 +509,6 @@ export class McTagList extends _McTagListMixinBase implements McFormFieldControl
     }
 
     setSelectionByValue(value: any, isUserInput: boolean = true) {
-        console.log('setSelectionByValue');
         this.clearSelection();
         this.tags.forEach((tag) => tag.deselect());
 
@@ -525,10 +520,8 @@ export class McTagList extends _McTagListMixinBase implements McFormFieldControl
 
             // Shift focus to the active item. Note that we shouldn't do this in multiple
             // mode, because we don't know what tag the user interacted with last.
-            if (correspondingTag) {
-                if (isUserInput) {
-                    this.keyManager.setActiveItem(correspondingTag);
-                }
+            if (correspondingTag && isUserInput) {
+                this.keyManager.setActiveItem(correspondingTag);
             }
         }
     }

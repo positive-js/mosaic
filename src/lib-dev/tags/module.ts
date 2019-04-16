@@ -1,9 +1,7 @@
 import {
-    AfterContentInit,
-    AfterViewInit,
     Component,
     ElementRef,
-    NgModule,
+    NgModule, OnInit,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
@@ -12,14 +10,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { COMMA, ENTER } from '@ptsecurity/cdk/keycodes';
-import { McAutocomplete, McAutocompleteModule, McAutocompleteSelectedEvent } from '@ptsecurity/mosaic/autocomplete';
+import { McAutocompleteModule, McAutocompleteSelectedEvent } from '@ptsecurity/mosaic/autocomplete';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McTagList, McTagsModule } from '@ptsecurity/mosaic/tags';
 import { McTagInputEvent } from '@ptsecurity/mosaic/tags/tag-input';
-import { from } from 'rxjs';
-import { merge } from 'rxjs/internal/observable/merge';
-import { of } from 'rxjs/internal/observable/of';
+import { merge } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 
@@ -29,63 +25,56 @@ import { map } from 'rxjs/operators';
     styleUrls: ['./styles.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class DemoComponent implements AfterViewInit, AfterContentInit {
+export class DemoComponent implements OnInit {
     visible = true;
     tagCtrl = new FormControl();
 
-    tags: string[] = ['tag1'];
-    allTags: string[] = ['tag1', 'tag2', 'tag3', 'tag4', 'tag5', 'tag6', 'tag7', 'tag8', 'tag9', 'tag10'];
-    filteredTags: any;
+    simpleTags = ['tag', 'tag1', 'tag2', 'tag3', 'tag4'];
+
+    inputTags = ['tag', 'tag1', 'tag2', 'tag3', 'tag4'];
+
+    autocompleteAllTags: string[] = ['tag1', 'tag2', 'tag3', 'tag4', 'tag5', 'tag6', 'tag7', 'tag8', 'tag9', 'tag10'];
+    autocompleteSelectedTags: string[] = ['tag1'];
+    autocompleteFilteredTagsByInput: string[] = [];
+    autocompleteFilteredTags: any;
 
     readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
-    @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
-    @ViewChild('autocomplete') mcAutocomplete: McAutocomplete;
-    @ViewChild('tagList') tagList: McTagList;
-    filteredByTagsList: any[] = [];
-    filteredByInput: any[] = [];
+    @ViewChild('inputTagInput') inputTagInput: ElementRef<HTMLInputElement>;
+    @ViewChild('inputTagList') inputTagList: McTagList;
 
-    constructor() {}
+    @ViewChild('autocompleteTagInput') autocompleteTagInput: ElementRef<HTMLInputElement>;
+    @ViewChild('autocompleteTagList') autocompleteTagList: McTagList;
 
+    ngOnInit(): void {
+        this.autocompleteFilteredTags = merge(
+            this.autocompleteTagList.tagChanges.asObservable()
+                .pipe(map((selectedTags) => {
+                    const values = selectedTags.map((tag) => tag.value);
 
-    ngAfterContentInit(): void {
-        console.log('ngAfterContentInit');
-
-        this.filteredTags = merge(
-            this.tagList.tagChanges.asObservable()
-                .pipe(map((tags) => {
-                    const values = tags.map((tag) => tag.value);
-
-                    this.filteredByTagsList = this.allTags.filter((tag) => !values.includes(tag));
-
-                    return this.filteredByTagsList;
-                    // return this.filteredByInput.filter((tag) => !this.filteredByTagsList.includes(tag));
+                    return this.autocompleteAllTags.filter((tag) => !values.includes(tag));
                 })),
             this.tagCtrl.valueChanges
                 .pipe(map((value) => {
-                    const tag = (value && value.new) ? value.value : value;
+                    const typedText = (value && value.new) ? value.value : value;
 
-                    this.filteredByInput = tag ? this.filter(tag) : this.allTags.slice();
+                    this.autocompleteFilteredTagsByInput = typedText ?
+                        this.filter(typedText) : this.autocompleteAllTags.slice();
 
-                    return this.filteredByInput.filter((tag) => !this.tags.includes(tag));
+                    return this.autocompleteFilteredTagsByInput.filter(
+                        // @ts-ignore
+                        (tag) => !this.autocompleteSelectedTags.includes(tag)
+                    );
                 }))
         );
     }
 
-    ngAfterViewInit(): void {
-        console.log('ngAfterViewInit');
-    }
-
-    onChangedTagList() {
-        console.log('onChangedTagList');
-    }
-
-    onCreate(event: McTagInputEvent): void {
+    autocompleteOnCreate(event: McTagInputEvent): void {
         const input = event.input;
         const value = event.value;
 
         if ((value || '').trim()) {
-            this.tags.push(value.trim());
+            this.autocompleteSelectedTags.push(value.trim());
         }
 
         if (input) {
@@ -93,21 +82,50 @@ export class DemoComponent implements AfterViewInit, AfterContentInit {
         }
     }
 
-    onSelect(event: McAutocompleteSelectedEvent): void {
-        if (event.option.value.new) {
-            this.tags.push(event.option.value.value);
-        } else {
-            this.tags.push(event.option.value);
+    inputOnCreate(event: McTagInputEvent): void {
+        const input = event.input;
+        const value = event.value;
+
+        if ((value || '').trim()) {
+            this.inputTags.push(value.trim());
         }
-        this.tagInput.nativeElement.value = '';
+
+        if (input) {
+            input.value = '';
+        }
+    }
+
+    autocompleteOnSelect(event: McAutocompleteSelectedEvent): void {
+        if (event.option.value.new) {
+            this.autocompleteSelectedTags.push(event.option.value.value);
+        } else {
+            this.autocompleteSelectedTags.push(event.option.value);
+        }
+        this.autocompleteTagInput.nativeElement.value = '';
         this.tagCtrl.setValue(null);
     }
 
-    onRemove(fruit: any): void {
-        const index = this.tags.indexOf(fruit);
+    autocompleteOnRemove(fruit: any): void {
+        const index = this.autocompleteSelectedTags.indexOf(fruit);
 
         if (index >= 0) {
-            this.tags.splice(index, 1);
+            this.autocompleteSelectedTags.splice(index, 1);
+        }
+    }
+
+    onRemoveTag(tag: string): void {
+        const index = this.simpleTags.indexOf(tag);
+
+        if (index >= 0) {
+            this.simpleTags.splice(index, 1);
+        }
+    }
+
+    inputOnRemoveTag(tag: string): void {
+        const index = this.inputTags.indexOf(tag);
+
+        if (index >= 0) {
+            this.inputTags.splice(index, 1);
         }
     }
 
@@ -115,7 +133,7 @@ export class DemoComponent implements AfterViewInit, AfterContentInit {
         const filterValue = value.toLowerCase();
 
         // todo добавить фильтрацию
-        return this.allTags.filter((tag) => tag.toLowerCase().indexOf(filterValue) === 0);
+        return this.autocompleteAllTags.filter((tag) => tag.toLowerCase().indexOf(filterValue) === 0);
     }
 }
 

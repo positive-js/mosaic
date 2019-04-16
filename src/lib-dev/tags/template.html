@@ -1,100 +1,124 @@
-<br><br><br><br><br><br><br>
+<div class="example-container">
+    <br><br><br>
 
-<mc-tag-list>
+    <h4>Tags list</h4>
+    <mc-form-field class="example-chip-list">
+        <mc-tag-list>
+            <mc-tag *ngFor="let tag of simpleTags" [value]="tag" (removed)="onRemoveTag(tag)">
+                {{ tag }}
+                <i mc-icon="mc-close-S_16" mcTagRemove></i>
+            </mc-tag>
+        </mc-tag-list>
+    </mc-form-field>
+
+    <br><br><br>
+
+    <h4>Tags with input</h4>
+    <mc-form-field class="example-chip-list">
+        <mc-tag-list #inputTagList>
+            <mc-tag *ngFor="let tag of inputTags" [value]="tag" (removed)="inputOnRemoveTag(tag)">
+                {{ tag }}
+                <i mc-icon="mc-close-S_16" mcTagRemove></i>
+            </mc-tag>
+            <input placeholder="New tag..."
+                   #inputTagInput
+                   [formControl]="tagCtrl"
+                   [mcTagInputFor]="inputTagList"
+                   [mcTagInputSeparatorKeyCodes]="separatorKeysCodes"
+                   (mcTagInputTokenEnd)="inputOnCreate($event)">
+        </mc-tag-list>
+    </mc-form-field>
+
+    <br><br><br>
+
+    <h4>Tags with autocomplete</h4>
+    <mc-form-field class="example-chip-list">
+        <mc-tag-list #autocompleteTagList>
+            <mc-tag *ngFor="let tag of autocompleteSelectedTags" [value]="tag" (removed)="autocompleteOnRemove(tag)">
+                {{ tag }}
+                <i mc-icon="mc-close-S_16" mcTagRemove></i>
+            </mc-tag>
+            <input placeholder="New tag..."
+                   #autocompleteTagInput
+                   [formControl]="tagCtrl"
+                   [mcAutocomplete]="autocomplete"
+                   [mcTagInputFor]="autocompleteTagList"
+                   [mcTagInputSeparatorKeyCodes]="separatorKeysCodes"
+                   (mcTagInputTokenEnd)="autocompleteOnCreate($event)">
+        </mc-tag-list>
+        <mc-autocomplete #autocomplete (optionSelected)="autocompleteOnSelect($event)">
+            <mc-option *ngIf="autocompleteTagInput.value" [value]="{ new: true, value: autocompleteTagInput.value }">
+                Создать: {{ autocompleteTagInput.value }}
+            </mc-option>
+            <mc-option *ngFor="let tag of autocompleteFilteredTags | async" [value]="tag">{{ tag }}</mc-option>
+        </mc-autocomplete>
+    </mc-form-field>
+
+    <br><br><br>
+
+    <h4>simple Tags</h4>
+    <br>
+
     <mc-tag>Normal <i mc-icon="mc-close-S_16"></i></mc-tag>
-    <mc-tag class="mc-hovered">Hovered <i mc-icon="mc-close-S_16" mcTagRemove></i></mc-tag>
-    <mc-tag class="mc-focused">Focused <i mc-icon="mc-close-S_16" mcTagRemove></i></mc-tag>
-    <mc-tag [disabled]="true">Disabled <i mc-icon="mc-close-S_16" mcTagRemove></i></mc-tag>
-</mc-tag-list>
+    <mc-tag class="mc-hovered">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>
+    <mc-tag class="mc-focused">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>
+    <mc-tag [disabled]="true">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>
 
-<br><br><br>
+    <br>
 
+    <mc-tag color="primary">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>
+    <mc-tag color="primary" class="mc-hovered">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>
+    <mc-tag color="primary" class="mc-focused">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>
+    <mc-tag color="primary" [disabled]="true">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>
 
-<mc-form-field class="example-chip-list">
-    <mc-tag-list #tagList (change)="onChangedTagList()">
-        <mc-tag *ngFor="let tag of tags" [value]="tag" (removed)="onRemove(tag)">
-            {{ tag }}
-            <i mc-icon="mc-close-S_16" mcTagRemove></i>
-        </mc-tag>
-        <input placeholder="New tag..."
-               #tagInput
-               [formControl]="tagCtrl"
-               [mcAutocomplete]="autocomplete"
-               [mcTagInputFor]="tagList"
-               [mcTagInputSeparatorKeyCodes]="separatorKeysCodes"
-               (mcTagInputTokenEnd)="onCreate($event)">
-    </mc-tag-list>
-    <mc-autocomplete #autocomplete (optionSelected)="onSelect($event)">
-        <mc-option *ngIf="tagInput.value" [value]="{ new: true, value: tagInput.value }">
-            Создать: {{ tagInput.value }}
-        </mc-option>
-        <mc-option *ngFor="let tag of filteredTags | async" [value]="tag">{{ tag }}</mc-option>
-    </mc-autocomplete>
-</mc-form-field>
+    <br>
 
-<!--<mc-tag>Normal <i mc-icon="mc-close-S_16"></i></mc-tag>-->
-<!--<mc-tag class="mc-hovered">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>-->
-<!--<mc-tag class="mc-focused">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>-->
-<!--<mc-tag [disabled]="true">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>-->
+    <mc-tag color="error">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>
+    <mc-tag color="error" class="mc-hovered">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>
+    <mc-tag color="error" class="mc-focused">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>
+    <mc-tag color="error" [disabled]="true">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>
 
-<!--<br><br><br>-->
+    <br><br><br>
 
-<!--<mc-tag color="primary">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>-->
-<!--<mc-tag color="primary" class="mc-hovered">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>-->
-<!--<mc-tag color="primary" class="mc-focused">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>-->
-<!--<mc-tag color="primary" [disabled]="true">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>-->
+    mono<br>
+    <mc-tag class="mc-tag_mono">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>
+    <mc-tag class="mc-hovered mc-tag_mono">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>
+    <mc-tag class="mc-focused mc-tag_mono">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>
+    <mc-tag [disabled]="true" class="mc-tag_mono">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>
 
-<!--<br><br><br>-->
+    <br>
 
-<!--<mc-tag color="error">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>-->
-<!--<mc-tag color="error" class="mc-hovered">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>-->
-<!--<mc-tag color="error" class="mc-focused">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>-->
-<!--<mc-tag color="error" [disabled]="true">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>-->
+    <mc-tag color="primary" class="mc-tag_mono">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>
+    <mc-tag color="primary" class="mc-tag_mono mc-hovered">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>
+    <mc-tag color="primary" class="mc-tag_mono mc-focused">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>
+    <mc-tag color="primary" [disabled]="true" class="mc-tag_mono">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>
 
+    <br>
 
+    <mc-tag color="error" class="mc-tag_mono">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>
+    <mc-tag color="error" class="mc-tag_mono mc-hovered">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>
+    <mc-tag color="error" class="mc-tag_mono mc-focused">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>
+    <mc-tag color="error" [disabled]="true" class="mc-tag_mono">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>
 
-<!--<br><br><br><br><br><br><br>-->
+    <br><br><br>
 
-<!--mono<br>-->
-<!--<mc-tag class="mc-tag_mono">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>-->
-<!--<mc-tag class="mc-hovered mc-tag_mono">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>-->
-<!--<mc-tag class="mc-focused mc-tag_mono">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>-->
-<!--<mc-tag [disabled]="true" class="mc-tag_mono">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>-->
+    CAPS<br>
+    <mc-tag class="mc-tag_caps">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>
+    <mc-tag class="mc-hovered mc-tag_caps">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>
+    <mc-tag class="mc-focused mc-tag_caps">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>
+    <mc-tag [disabled]="true" class="mc-tag_caps">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>
 
-<!--<br><br><br>-->
+    <br>
 
-<!--<mc-tag color="primary" class="mc-tag_mono">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>-->
-<!--<mc-tag color="primary" class="mc-tag_mono mc-hovered">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>-->
-<!--<mc-tag color="primary" class="mc-tag_mono mc-focused">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>-->
-<!--<mc-tag color="primary" [disabled]="true" class="mc-tag_mono">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>-->
+    <mc-tag color="primary" class="mc-tag_caps">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>
+    <mc-tag color="primary" class="mc-hovered mc-tag_caps">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>
+    <mc-tag color="primary" class="mc-focused mc-tag_caps">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>
+    <mc-tag color="primary" [disabled]="true" class="mc-tag_caps">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>
 
-<!--<br><br><br>-->
+    <br>
 
-<!--<mc-tag color="error" class="mc-tag_mono">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>-->
-<!--<mc-tag color="error" class="mc-tag_mono mc-hovered">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>-->
-<!--<mc-tag color="error" class="mc-tag_mono mc-focused">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>-->
-<!--<mc-tag color="error" [disabled]="true" class="mc-tag_mono">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>-->
-
-
-
-<!--<br><br><br><br><br><br><br>-->
-
-<!--CAPS<br>-->
-<!--<mc-tag class="mc-tag_caps">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>-->
-<!--<mc-tag class="mc-hovered mc-tag_caps">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>-->
-<!--<mc-tag class="mc-focused mc-tag_caps">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>-->
-<!--<mc-tag [disabled]="true" class="mc-tag_caps">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>-->
-
-<!--<br><br><br>-->
-
-<!--<mc-tag color="primary" class="mc-tag_caps">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>-->
-<!--<mc-tag color="primary" class="mc-hovered mc-tag_caps">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>-->
-<!--<mc-tag color="primary" class="mc-focused mc-tag_caps">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>-->
-<!--<mc-tag color="primary" [disabled]="true" class="mc-tag_caps">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>-->
-
-<!--<br><br><br>-->
-
-<!--<mc-tag color="error" class="mc-tag_caps">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>-->
-<!--<mc-tag color="error" class="mc-hovered mc-tag_caps">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>-->
-<!--<mc-tag color="error" class="mc-focused mc-tag_caps">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>-->
-<!--<mc-tag color="error" [disabled]="true" class="mc-tag_caps">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>-->
+    <mc-tag color="error" class="mc-tag_caps">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>
+    <mc-tag color="error" class="mc-hovered mc-tag_caps">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>
+    <mc-tag color="error" class="mc-focused mc-tag_caps">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>
+    <mc-tag color="error" [disabled]="true" class="mc-tag_caps">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>
+</div>
