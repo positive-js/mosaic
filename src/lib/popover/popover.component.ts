@@ -71,7 +71,6 @@ import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 export class McPopoverComponent {
     positionPrefix = 'mc-popover--placement';
     positions: ConnectionPositionPair[] = [ ...DEFAULT_4_POSITIONS ];
-    classMap = {};
     showTid: number;
     hideTid: number;
     availablePositions: any;
@@ -126,6 +125,22 @@ export class McPopoverComponent {
     }
     private _mcVisible: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+    get classList() {
+        return this._classList.join(' ');
+    }
+    set classList(value: string | string[]) {
+        let list: string[] = [`${this.positionPrefix}-${this.mcPlacement}`];
+
+        if (Array.isArray(value)) {
+            list = value;
+        } else {
+            list.push(value);
+        }
+
+        this._classList = list;
+    }
+    private _classList: string[] = [];
+
     /** Subject for notifying that the popover has been hidden from the view */
     private readonly onHideSubject: Subject<any> = new Subject();
     private closeOnInteraction: boolean = false;
@@ -176,10 +191,6 @@ export class McPopoverComponent {
             // ChangeDetectionStrategy to OnPush it will be checked anyways
             this.markForCheck();
         }, this.mcMouseLeaveDelay);
-    }
-
-    setClassMap(): void {
-        this.classMap = `${this.positionPrefix}-${this.mcPlacement}`;
     }
 
     isNonEmptyContent(): boolean {
@@ -352,21 +363,15 @@ export class McPopover implements OnInit, OnDestroy {
     }
     private _mcPlacement: string = 'top';
 
-    //
-    // FIXME: Побросить в компонент
-    //
     @Input('mcPopoverClass')
-    get mcPopoverClass() {
-        return this._mcPopoverClass;
+    get classList() {
+        return this._classList;
     }
-    set mcPopoverClass(value: string | string[] | Set<string> | {[key: string]: any}) {
-        this._mcPopoverClass = value;
-
-        if (this.popover) {
-            this.popover.setClassMap();
-        }
+    set classList(value: string | string[]) {
+        this._classList = value;
+        this.updateCompValue('classList', this._classList);
     }
-    private _mcPopoverClass: string | string[] | Set<string> | {[key: string]: any};
+    private _classList: string | string[];
 
     @Input('mcPopoverVisible')
     get mcVisible(): boolean {
@@ -480,7 +485,7 @@ export class McPopover implements OnInit, OnDestroy {
         this.updateCompValue('mcPlacement', updatedPlacement);
 
         if (this.popover) {
-            this.popover.setClassMap();
+            this.updateCompValue('classList', this.classList);
             this.popover.markForCheck();
         }
 
@@ -574,7 +579,7 @@ export class McPopover implements OnInit, OnDestroy {
                     'mcPopoverDisabled',
                     'mcMouseEnterDelay',
                     'mcMouseLeaveDelay',
-                    'mcPopoverClass',
+                    'classList',
                     'mcVisible',
                     'mcHeader',
                     'mcContent',
