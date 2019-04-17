@@ -1,7 +1,7 @@
 <div class="example-container">
     <br><br><br>
 
-    <h4>Tags list</h4>
+    <h4 class="mc-title">Tags list</h4>
     <mc-form-field class="example-chip-list">
         <mc-tag-list>
             <mc-tag *ngFor="let tag of simpleTags" [value]="tag" (removed)="onRemoveTag(tag)">
@@ -13,7 +13,7 @@
 
     <br><br><br>
 
-    <h4>Tags with input</h4>
+    <h4 class="mc-title">Tags with input</h4>
     <mc-form-field class="example-chip-list">
         <mc-tag-list #inputTagList>
             <mc-tag *ngFor="let tag of inputTags" [value]="tag" (removed)="inputOnRemoveTag(tag)">
@@ -24,14 +24,13 @@
                    #inputTagInput
                    [formControl]="tagCtrl"
                    [mcTagInputFor]="inputTagList"
-                   [mcTagInputSeparatorKeyCodes]="separatorKeysCodes"
                    (mcTagInputTokenEnd)="inputOnCreate($event)">
         </mc-tag-list>
     </mc-form-field>
 
     <br><br><br>
 
-    <h4>Tags with autocomplete</h4>
+    <h4 class="mc-title">Tags with autocomplete</h4>
     <mc-form-field class="example-chip-list">
         <mc-tag-list #autocompleteTagList>
             <mc-tag *ngFor="let tag of autocompleteSelectedTags" [value]="tag" (removed)="autocompleteOnRemove(tag)">
@@ -43,7 +42,6 @@
                    [formControl]="tagCtrl"
                    [mcAutocomplete]="autocomplete"
                    [mcTagInputFor]="autocompleteTagList"
-                   [mcTagInputSeparatorKeyCodes]="separatorKeysCodes"
                    (mcTagInputTokenEnd)="autocompleteOnCreate($event)">
         </mc-tag-list>
         <mc-autocomplete #autocomplete (optionSelected)="autocompleteOnSelect($event)">
@@ -56,7 +54,7 @@
 
     <br><br><br>
 
-    <h4>simple Tags</h4>
+    <h4 class="mc-title">simple Tags</h4>
     <br>
 
     <mc-tag>Normal <i mc-icon="mc-close-S_16"></i></mc-tag>

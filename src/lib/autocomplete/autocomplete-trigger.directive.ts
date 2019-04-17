@@ -48,7 +48,7 @@ import { McAutocomplete } from './autocomplete.component';
  */
 
 /** The height of each autocomplete option. */
-export const AUTOCOMPLETE_OPTION_HEIGHT = 48;
+export const AUTOCOMPLETE_OPTION_HEIGHT = 32;
 
 /** The total height of the autocomplete panel. */
 export const AUTOCOMPLETE_PANEL_HEIGHT = 256;

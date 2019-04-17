@@ -19,7 +19,12 @@ import { map, startWith } from 'rxjs/operators';
     encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent implements OnInit {
-    options = ['One', 'Two', 'Three', 'Four', 'Five', 'Longest text (0123456789 qwertyuiopasdfghjklzxcvbnm)'];
+    options = [
+        'One', 'Two', 'Three', 'Four', 'Five', 'Longest text (0123456789 qwertyuiopasdfghjklzxcvbnm)', 'Волгоград',
+        'Воронеж', 'Ейск', 'Екабпилс', 'Екатеринбург', 'Екатериновка', 'Екатеринославка', 'Екаша', 'Екибастуз',
+        'Екпинди', 'Елань', 'Елец', 'Казань', 'Краснодар', 'Красноярск', 'Москва', 'Нижний Новгород', 'Новосибирск',
+        'Омск', 'Пермь', 'Ростов-на-Дону',  'Самара', 'Санкт-Петербург', 'Уфа', 'Челябинск'
+    ];
 
     filteredOptions: Observable<string[]>;
 

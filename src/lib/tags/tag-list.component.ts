@@ -573,6 +573,8 @@ export class McTagList extends _McTagListMixinBase implements McFormFieldControl
         if (this.lastDestroyedTagIndex != null && this.tags.length) {
             const newTagIndex = Math.min(this.lastDestroyedTagIndex, this.tags.length - 1);
             this.keyManager.setActiveItem(newTagIndex);
+        } else if (this.tags.length === 0) {
+            this.focusInput();
         }
 
         this.lastDestroyedTagIndex = null;
