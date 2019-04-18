@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, Directive, ElementRef } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    Input,
+    ViewEncapsulation,
+    Directive,
+    ElementRef,
+    OnDestroy
+} from '@angular/core';
+import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { CanDisable, mixinDisabled } from '@ptsecurity/mosaic/core';
 
 
@@ -36,19 +45,26 @@ class McVerticalNavbarItemBase {}
     inputs: ['disabled'],
     host: {
         '[attr.disabled]': 'disabled || null',
-        '[attr.tabindex]': '-1'
+        '[attr.tabindex]': 'disabled ? -1 : 0'
     }
 })
-export class McVerticalNavbarItem extends mixinDisabled(McVerticalNavbarItemBase) implements CanDisable {
+export class McVerticalNavbarItem extends mixinDisabled(McVerticalNavbarItemBase) implements CanDisable, OnDestroy {
     @Input() tabIndex: number = 0;
 
     constructor(
-        private element: ElementRef
+        private element: ElementRef,
+        private focusMonitor: FocusMonitor
     ) {
         super();
+
+        this.focusMonitor.monitor(this.element).subscribe();
     }
 
     get hasDropdownAttached() {
         return this.element.nativeElement.classList.contains('mc-dropdown-trigger');
+    }
+
+    ngOnDestroy() {
+        this.focusMonitor.stopMonitoring(this.element);
     }
 }
