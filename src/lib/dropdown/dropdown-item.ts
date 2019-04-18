@@ -75,7 +75,7 @@ export class McDropdownItem extends _McDropdownItemMixinBase
             // Start monitoring the element so it gets the appropriate focused classes. We want
             // to show the focus style for dropdown items only when the focus was not caused by a
             // mouse or touch interaction.
-            _focusMonitor.monitor(this._elementRef, false);
+            _focusMonitor.monitor(this._elementRef.nativeElement, false);
         }
 
         if (_parentDropdownPanel && _parentDropdownPanel.addItem) {
@@ -96,7 +96,7 @@ export class McDropdownItem extends _McDropdownItemMixinBase
 
     ngOnDestroy() {
         if (this._focusMonitor) {
-            this._focusMonitor.stopMonitoring(this._elementRef);
+            this._focusMonitor.stopMonitoring(this._elementRef.nativeElement);
         }
 
         if (this._parentDropdownPanel && this._parentDropdownPanel.removeItem) {

@@ -57,7 +57,7 @@ export class McVerticalNavbarItem extends mixinDisabled(McVerticalNavbarItemBase
     ) {
         super();
 
-        this.focusMonitor.monitor(this.element).subscribe();
+        this.focusMonitor.monitor(this.element.nativeElement).subscribe();
     }
 
     get hasDropdownAttached() {
@@ -65,6 +65,6 @@ export class McVerticalNavbarItem extends mixinDisabled(McVerticalNavbarItemBase
     }
 
     ngOnDestroy() {
-        this.focusMonitor.stopMonitoring(this.element);
+        this.focusMonitor.stopMonitoring(this.element.nativeElement);
     }
 }

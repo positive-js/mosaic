@@ -11,7 +11,7 @@ import { McNavbarModule, McNavbar, IMcNavbarDropdownItem } from './index';
 
 const FONT_RENDER_TIMEOUT_MS = 10;
 
-describe('McVerticalNavbar', () => {
+describe('McNavbar', () => {
 
     beforeEach(fakeAsync(() => {
         TestBed.configureTestingModule({

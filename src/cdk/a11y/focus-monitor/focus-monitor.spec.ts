@@ -14,6 +14,8 @@ import { A11yModule } from '../index';
 import { FocusMonitor, FocusOrigin, TOUCH_BUFFER_MS } from './focus-monitor';
 
 
+// tslint:disable:no-magic-numbers
+// tslint:disable no-unbound-method
 describe('FocusMonitor', () => {
     let fixture: ComponentFixture<PlainButton>;
     let buttonElement: HTMLElement;
@@ -56,7 +58,7 @@ describe('FocusMonitor', () => {
         dispatchKeyboardEvent(document, 'keydown', TAB);
         buttonElement.focus();
         fixture.detectChanges();
-        flush();
+        tick();
 
         expect(buttonElement.classList.length)
             .toBe(2, 'button should have exactly 2 focus classes');
@@ -72,7 +74,7 @@ describe('FocusMonitor', () => {
         dispatchMouseEvent(buttonElement, 'mousedown');
         buttonElement.focus();
         fixture.detectChanges();
-        flush();
+        tick();
 
         expect(buttonElement.classList.length)
             .toBe(2, 'button should have exactly 2 focus classes');
@@ -116,7 +118,7 @@ describe('FocusMonitor', () => {
 
     it('focusVia keyboard should simulate keyboard focus', fakeAsync(() => {
         focusMonitor.focusVia(buttonElement, 'keyboard');
-        flush();
+        tick();
 
         expect(buttonElement.classList.length)
             .toBe(2, 'button should have exactly 2 focus classes');
@@ -130,7 +132,7 @@ describe('FocusMonitor', () => {
     it('focusVia mouse should simulate mouse focus', fakeAsync(() => {
         focusMonitor.focusVia(buttonElement, 'mouse');
         fixture.detectChanges();
-        flush();
+        tick();
 
         expect(buttonElement.classList.length)
             .toBe(2, 'button should have exactly 2 focus classes');
@@ -141,10 +143,10 @@ describe('FocusMonitor', () => {
         expect(changeHandler).toHaveBeenCalledWith('mouse');
     }));
 
-    it('focusVia touch should simulate touch focus', fakeAsync(() => {
+    it('focusVia mouse should simulate mouse focus', fakeAsync(() => {
         focusMonitor.focusVia(buttonElement, 'touch');
         fixture.detectChanges();
-        flush();
+        tick();
 
         expect(buttonElement.classList.length)
             .toBe(2, 'button should have exactly 2 focus classes');
@@ -158,7 +160,7 @@ describe('FocusMonitor', () => {
     it('focusVia program should simulate programmatic focus', fakeAsync(() => {
         focusMonitor.focusVia(buttonElement, 'program');
         fixture.detectChanges();
-        flush();
+        tick();
 
         expect(buttonElement.classList.length)
             .toBe(2, 'button should have exactly 2 focus classes');
@@ -214,33 +216,6 @@ describe('FocusMonitor', () => {
 
         expect(buttonElement.classList.length).toBe(0, 'button should not have any focus classes');
     }));
-
-    it('should pass focus options to the native focus method', fakeAsync(() => {
-        spyOn(buttonElement, 'focus');
-
-        focusMonitor.focusVia(buttonElement, 'program', {preventScroll: true});
-        fixture.detectChanges();
-        flush();
-
-        expect(buttonElement.focus).toHaveBeenCalledWith(jasmine.objectContaining({
-            preventScroll: true
-        }));
-    }));
-
-    it('should not clear the focus origin too early in the current event loop', fakeAsync(() => {
-        dispatchKeyboardEvent(document, 'keydown', TAB);
-
-        // Simulate the behavior of Firefox 57 where the focus event sometimes happens *one* tick later.
-        tick();
-
-        buttonElement.focus();
-
-        // Since the timeout doesn't clear the focus origin too early as with the `0ms` timeout, the
-        // focus origin should be reported properly.
-        expect(changeHandler).toHaveBeenCalledWith('keyboard');
-
-        flush();
-    }));
 });
 
 
@@ -279,7 +254,7 @@ describe('cdkMonitorFocus', () => {
             dispatchKeyboardEvent(document, 'keydown', TAB);
             buttonElement.focus();
             fixture.detectChanges();
-            flush();
+            tick();
 
             expect(buttonElement.classList.length)
                 .toBe(2, 'button should have exactly 2 focus classes');
@@ -295,7 +270,7 @@ describe('cdkMonitorFocus', () => {
             dispatchMouseEvent(buttonElement, 'mousedown');
             buttonElement.focus();
             fixture.detectChanges();
-            flush();
+            tick();
 
             expect(buttonElement.classList.length)
                 .toBe(2, 'button should have exactly 2 focus classes');
@@ -501,8 +476,7 @@ class PlainButton {
 })
 class ButtonWithFocusClasses {
     // tslint:disable-next-line
-    focusChanged(_origin: FocusOrigin) {
-    }
+    focusChanged(_origin: FocusOrigin) {}
 }
 
 
@@ -533,3 +507,5 @@ class ComplexComponentWithMonitorSubtreeFocus {
 })
 class ComplexComponentWithMonitorSubtreeFocusAndMonitorElementFocus {
 }
+
+/* tslint:enable:no-magic-numbers */

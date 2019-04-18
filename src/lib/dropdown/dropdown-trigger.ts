@@ -12,7 +12,7 @@ import {
     Self,
     ViewContainerRef,
 } from '@angular/core';
-import { FocusMonitor, FocusOrigin, isFakeMousedownFromScreenReader } from '@ptsecurity/cdk/a11y';
+import { FocusMonitor, FocusOrigin } from '@ptsecurity/cdk/a11y';
 import { Direction, Directionality } from '@ptsecurity/cdk/bidi';
 import { LEFT_ARROW, RIGHT_ARROW, SPACE, ENTER } from '@ptsecurity/cdk/keycodes';
 import {
@@ -228,7 +228,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
      */
     focus(origin: FocusOrigin = 'program') {
         if (this._focusMonitor) {
-            this._focusMonitor.focusVia(this._element, origin);
+            this._focusMonitor.focusVia(this._element.nativeElement, origin);
         } else {
             this._element.nativeElement.focus();
         }
@@ -455,17 +455,15 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
 
     /** Handles mouse presses on the trigger. */
     _handleMousedown(event: MouseEvent): void {
-        if (!isFakeMousedownFromScreenReader(event)) {
-            // Since right or middle button clicks won't trigger the `click` event,
-            // we shouldn't consider the dropdown as opened by mouse in those cases.
-            this._openedBy = event.button === 0 ? 'mouse' : null;
+        // Since right or middle button clicks won't trigger the `click` event,
+        // we shouldn't consider the dropdown as opened by mouse in those cases.
+        this._openedBy = event.button === 0 ? 'mouse' : null;
 
-            // Since clicking on the trigger won't close the dropdown if it opens a sub-menu,
-            // we should prevent focus from moving onto it via click to avoid the
-            // highlight from lingering on the dropdown item.
-            if (this.triggersSubmenu()) {
-                event.preventDefault();
-            }
+        // Since clicking on the trigger won't close the dropdown if it opens a sub-menu,
+        // we should prevent focus from moving onto it via click to avoid the
+        // highlight from lingering on the dropdown item.
+        if (this.triggersSubmenu()) {
+            event.preventDefault();
         }
     }
 
