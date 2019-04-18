@@ -2,8 +2,8 @@
     <div class="mc-vertical-navbar-header-area">
         <div cdkMonitorElementFocus tabindex="0" class="mc-vertical-navbar-toggle-button"
              (click)="toggle()"
-             (keyup.space)="toggle()"
-             (keyup.enter)="toggle()"
+             (keydown.space)="toggle()"
+             (keydown.enter)="toggle()"
         >
             <i mc-icon="mc-hamburger_32" *ngIf="! expanded"></i>
             <i mc-icon="mc-close-L_32" *ngIf="expanded"></i>

@@ -1,6 +1,6 @@
 <div class="root">
 
-<mc-vertical-navbar [expanded]="expanded">
+<mc-vertical-navbar #navbar>
 
     <a mc-vertical-navbar-header routerLink="/">
         <svg viewBox="0 0 32 32" width="32px" height="32px" xmlns="http://www.w3.org/2000/svg">
@@ -64,23 +64,32 @@
 
         <mc-dropdown #userMenu="mcDropdown" xPosition="after" overlapTriggerX="false" overlapTriggerY="true" yPosition="above">
             <button mc-dropdown-item [mcDropdownTriggerFor]="settingsMenu">
-                <i mc-icon="mc-gear_16"></i>Profile settings
+                <i mc-icon="mc-gear_16"></i>
+                Settings
+                <div class="mc-dropdown__item-caption">Setup your profile setting here</div>
             </button>
             <button mc-dropdown-item [mcDropdownTriggerFor]="signOutMenu">
-                <i mc-icon="mc-bell_32"></i>Sign out
+                Sign out
             </button>
         </mc-dropdown>
 
         <mc-dropdown #settingsMenu="mcDropdown">
-            <button mc-dropdown-item [mcDropdownTriggerFor]="nestedSettingsMenu">Nested setting</button>
-            <button mc-dropdown-item><i mc-icon="mc-check_16"></i>Some setting</button>
-            <button mc-dropdown-item><i mc-icon="mc-bell_32"></i>Another Setting</button>
+            <button mc-dropdown-item>Some setting</button>
+            <button mc-dropdown-item>Another Setting</button>
+            <button mc-dropdown-item [mcDropdownTriggerFor]="nestedSettingsMenu">More nested settings</button>
         </mc-dropdown>
 
         <mc-dropdown #signOutMenu="mcDropdown">
-            <button mc-dropdown-item><i mc-icon="mc-check_16"></i>Yes, sure!</button>
-            <button mc-dropdown-item><i mc-icon="mc-close-M_16"></i>No, not now</button>
-            <button mc-dropdown-item><i mc-icon="mc-clock_16"></i>Maybe I should think it over</button>
+            <button mc-dropdown-item>
+                <i mc-icon="mc-check_16"></i>
+                Yes, sure!
+                <div class="mc-dropdown__item-caption">I feel quite confident to do this!</div>
+            </button>
+            <button mc-dropdown-item>
+                <i mc-icon="mc-close-M_16"></i>
+                No, not now
+                <div class="mc-dropdown__item-caption">Maybe I should think it over</div>
+            </button>
         </mc-dropdown>
 
         <mc-dropdown #nestedSettingsMenu="mcDropdown">
@@ -98,7 +107,7 @@
 <div class="content">
 
     <div>
-        <button mc-button class="toggle-button" (click)="expanded = ! expanded">Toggle navbar from the outside</button>
+        <button mc-button class="toggle-button" (click)="navbar.toggle()">Toggle navbar from the outside</button>
     </div>
 
     <div *ngFor="let i of [1, 2, 3, 4]"></div>

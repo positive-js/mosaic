@@ -17,9 +17,7 @@ import { McVerticalNavbarModule } from '../../lib/vertical-navbar/';
     styleUrls: ['./styles.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class VerticalNavbarDemoComponent {
-    expanded = true;
-}
+export class VerticalNavbarDemoComponent {}
 
 
 @NgModule({

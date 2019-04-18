@@ -43,7 +43,9 @@ export const _McDropdownItemMixinBase: CanDisableCtor & typeof McDropdownItemBas
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     template: `
-        <ng-content></ng-content>
+        <div>
+            <ng-content></ng-content>
+        </div>
         <i *ngIf="_triggersSubmenu" mc-icon="mc-angle-right-M_16" class="mc-dropdown__trigger"></i>
     `
 })

@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, Directive, ViewEncapsulation, Input } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    Directive,
+    ViewEncapsulation,
+    Input,
+    ChangeDetectorRef
+} from '@angular/core';
 
 import { toggleVerticalNavbarAnimation } from './vertical-navbar.animation';
 
@@ -33,7 +40,12 @@ export class McVerticalNavbar {
 
     @Input() expanded: boolean = false;
 
+    constructor(
+        private cd: ChangeDetectorRef
+    ) {}
+
     toggle() {
         this.expanded = ! this.expanded;
+        this.cd.markForCheck();
     }
 }

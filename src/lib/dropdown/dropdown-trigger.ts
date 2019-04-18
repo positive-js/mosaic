@@ -53,7 +53,7 @@ export const MC_DROPDOWN_SCROLL_STRATEGY_FACTORY_PROVIDER = {
 };
 
 /** Default top padding of the nested dropdown panel. */
-export const NESTED_PANEL_TOP_PADDING = 1;
+export const NESTED_PANEL_TOP_PADDING = 2;
 
 /** Options for binding a passive event listener. */
 const passiveEventListenerOptions = normalizePassiveListenerOptions({passive: true});
@@ -445,7 +445,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
         const detachments = this._overlayRef!.detachments();
         const parentClose = this._parent ? this._parent.closed : observableOf();
         const hover = this._parent ? this._parent._hovered().pipe(
-            filter(active => active !== this._dropdownItemInstance),
+            filter((active) => active !== this._dropdownItemInstance),
             filter(() => this._opened)
         ) : observableOf();
 
@@ -453,7 +453,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
     }
 
     /** Handles mouse presses on the trigger. */
-    _handleMousedown(event: MouseEvent): void {
+    private _handleMousedown(event: MouseEvent): void {
         // Since right or middle button clicks won't trigger the `click` event,
         // we shouldn't consider the dropdown as opened by mouse in those cases.
         this._openedBy = event.button === 0 ? 'mouse' : null;
@@ -467,10 +467,10 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
     }
 
     /** Handles key presses on the trigger. */
-    _handleKeydown(event: KeyboardEvent): void {
+    private _handleKeydown(event: KeyboardEvent): void {
         const keyCode = event.keyCode;
 
-        if (keyCode == SPACE || keyCode == ENTER) {
+        if (keyCode === SPACE || keyCode === ENTER) {
             this.open();
         }
 
@@ -482,7 +482,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
     }
 
     /** Handles click events on the trigger. */
-    _handleClick(event: MouseEvent): void {
+    private _handleClick(event: MouseEvent): void {
         if (this.triggersSubmenu()) {
             // Stop event propagation to avoid closing the parent dropdown.
             event.stopPropagation();
@@ -504,7 +504,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
         // with different data and triggers), we have to delay it by a tick to ensure that
         // it won't be closed immediately after it is opened.
             .pipe(
-                filter(active => active === this._dropdownItemInstance && !active.disabled),
+                filter((active) => active === this._dropdownItemInstance && !active.disabled),
                 delay(0, asapScheduler)
             )
             .subscribe(() => {
