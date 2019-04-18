@@ -38,12 +38,6 @@
             background-color: lighten(mc-color($palette, 700), $active-lighten)
         }
 
-        &[disabled] {
-            > mc-vertical-navbar-title, .mc-vertical-navbar-title, [mc-icon] {
-                opacity: 0.3;
-            }
-        }
-
         &:hover:not([disabled]):not(.mc-progress) {
             $hover-lighten: 5%;
             background-color: lighten(mc-color($palette, 700), $hover-lighten)
@@ -52,6 +46,12 @@
         &.mc-progress:hover:not([disabled]) {
             $bg-lighten: 15%;
             background-color: lighten(mc-color($palette, 800), $bg-lighten);
+        }
+
+        &[disabled] {
+            > mc-vertical-navbar-title, .mc-vertical-navbar-title, [mc-icon] {
+                opacity: 0.3;
+            }
         }
     }
 }

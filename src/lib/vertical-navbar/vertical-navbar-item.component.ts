@@ -5,10 +5,13 @@ import {
     ViewEncapsulation,
     Directive,
     ElementRef,
-    OnDestroy
+    OnDestroy,
+    Optional,
+    Self
 } from '@angular/core';
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { CanDisable, mixinDisabled } from '@ptsecurity/mosaic/core';
+import { McDropdownTrigger } from '@ptsecurity/mosaic/dropdown';
 
 
 @Directive({
@@ -53,7 +56,8 @@ export class McVerticalNavbarItem extends mixinDisabled(McVerticalNavbarItemBase
 
     constructor(
         private element: ElementRef,
-        private focusMonitor: FocusMonitor
+        private focusMonitor: FocusMonitor,
+        @Optional() @Self() private trigger: McDropdownTrigger
     ) {
         super();
 
@@ -61,7 +65,7 @@ export class McVerticalNavbarItem extends mixinDisabled(McVerticalNavbarItemBase
     }
 
     get hasDropdownAttached() {
-        return this.element.nativeElement.classList.contains('mc-dropdown-trigger');
+        return !! this.trigger;
     }
 
     ngOnDestroy() {

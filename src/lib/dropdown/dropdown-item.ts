@@ -33,7 +33,7 @@ export const _McDropdownItemMixinBase: CanDisableCtor & typeof McDropdownItemBas
     host: {
         '[attr.role]': 'role',
         class: 'mc-dropdown__item',
-        '[class.mat-menu-item-highlighted]': '_highlighted',
+        '[class.mc-dropdown__item_highlighted]': '_highlighted',
         '[attr.tabindex]': '_getTabIndex()',
         '[attr.aria-disabled]': 'disabled.toString()',
         '[attr.disabled]': 'disabled || null',

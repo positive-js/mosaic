@@ -10,7 +10,7 @@ import {
     Optional,
     Output,
     Self,
-    ViewContainerRef,
+    ViewContainerRef
 } from '@angular/core';
 import { FocusMonitor, FocusOrigin } from '@ptsecurity/cdk/a11y';
 import { Direction, Directionality } from '@ptsecurity/cdk/bidi';
@@ -70,7 +70,6 @@ const passiveEventListenerOptions = normalizePassiveListenerOptions({passive: tr
         '(mousedown)': '_handleMousedown($event)',
         '(keydown)': '_handleKeydown($event)',
         '(click)': '_handleClick($event)',
-        '[class.mc-dropdown-trigger]': 'true',
         '[class.mc-dropdown-trigger__opened]': '_opened'
     },
     exportAs: 'mcDropdownTrigger'
@@ -252,7 +251,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
                 // Wait for the exit animation to finish before detaching the content.
                 dropdown._animationDone
                     .pipe(
-                        filter(event => event.toState === 'void'),
+                        filter((event) => event.toState === 'void'),
                         take(1),
                         // Interrupt if the content got re-attached.
                         takeUntil(dropdown.lazyContent._attached)
@@ -397,7 +396,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
         let offsetY = 0;
 
         if (this.triggersSubmenu()) {
-            // When the menu is a sub-menu, it should always align itself
+            // When the dropdown is a sub-menu, it should always align itself
             // to the edges of the trigger, instead of overlapping it.
             overlayFallbackX = originX = this.dropdown.xPosition === 'before' ? 'start' : 'end';
             originFallbackX = overlayX = originX === 'end' ? 'start' : 'end';
