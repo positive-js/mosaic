@@ -46,18 +46,6 @@ import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'mc-popover',
-    inputs: [
-        'mcPopoverMouseEnterDelay',
-        'mcPopoverMouseLeaveDelay',
-        'mcPopoverTitle',
-        'mcPopoverVisible',
-        'mcPopoverTrigger',
-        'mcPopoverPlacement',
-        'mcPopoverHeader',
-        'mcPopoverContent',
-        'mcPopoverFooter'
-    ],
-    outputs: ['mcPopoverVisibleChange'],
     animations: [ fadeAnimation ],
     templateUrl: './popover.component.html',
     preserveWhitespaces: false,
@@ -65,14 +53,15 @@ import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '(body:click)': 'this.handleBodyInteraction()'
+        '(body:click)': 'this.handleBodyInteraction($event)'
     }
 })
 export class McPopoverComponent {
-    positionPrefix = 'mc-popover--placement';
+    positionPrefix = 'mc-popover_placement';
     positions: ConnectionPositionPair[] = [ ...DEFAULT_4_POSITIONS ];
     showTid: number;
     hideTid: number;
+    isPopoverOpen: boolean = false;
     availablePositions: any;
     $visible: Observable<boolean>;
 
@@ -143,19 +132,11 @@ export class McPopoverComponent {
 
     /** Subject for notifying that the popover has been hidden from the view */
     private readonly onHideSubject: Subject<any> = new Subject();
-    private closeOnInteraction: boolean = false;
 
-    constructor(public cdr: ChangeDetectorRef) {
+    constructor(public cdr: ChangeDetectorRef, private el: ElementRef) {
         this.availablePositions = POSITION_MAP;
         this.$visible = this._mcVisible.asObservable();
     }
-
-    //
-    // FIXME: Нужно ли делать перерасчет позиционирования при изменения контента?
-    //
-    // ngAfterViewChecked() {
-    //
-    // }
 
     show(): void {
         if (this.hideTid) {
@@ -163,12 +144,10 @@ export class McPopoverComponent {
         }
 
         if (this.isNonEmptyContent()) {
-            if (this.mcTrigger !== 'manual') {
-                this.closeOnInteraction = true;
-            }
             this.showTid = setTimeout(() => {
                 this.mcVisible = true;
                 this.mcVisibleChange.emit(true);
+                this.isPopoverOpen = true;
 
                 // Mark for check so if any parent component has set the
                 // ChangeDetectionStrategy to OnPush it will be checked anyways
@@ -186,6 +165,7 @@ export class McPopoverComponent {
             this.mcVisible = false;
             this.mcVisibleChange.emit(false);
             this.onHideSubject.next();
+            this.isPopoverOpen = false;
 
             // Mark for check so if any parent component has set the
             // ChangeDetectionStrategy to OnPush it will be checked anyways
@@ -206,8 +186,8 @@ export class McPopoverComponent {
         this.cdr.markForCheck();
     }
 
-    handleBodyInteraction(): void {
-        if (this.closeOnInteraction) {
+    handleBodyInteraction(e): void {
+        if (this.isPopoverOpen && !this.el.nativeElement.contains(e.target)) {
             this.hide();
         }
     }
@@ -390,7 +370,7 @@ export class McPopover implements OnInit, OnDestroy {
     }
     private _mcVisible: boolean;
 
-    @HostBinding('class.mc-popover--open')
+    @HostBinding('class.mc-popover_open')
     get isOpen(): boolean {
         return this.isPopoverOpen;
     }

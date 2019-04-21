@@ -6,11 +6,6 @@ import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McPopoverModule } from '@ptsecurity/mosaic/popover';
 
 
-//
-// FIXME: Удалить этот пример
-//
-
-
 /* tslint:disable:no-trailing-whitespace */
 @Component({
     selector: 'app',
@@ -21,36 +16,22 @@ import { McPopoverModule } from '@ptsecurity/mosaic/popover';
 export class DemoComponent {
     private isPopoverVisible: boolean = false;
     private popoverActiveStage: number = 1;
-    private isRedPillDisabled: boolean = false;
-    private motivationCounter: number = 0;
 
     constructor() {}
+
+    changeStep(direction: number) {
+        this.popoverActiveStage += direction;
+    }
 
     changePopoverVisibility() {
         this.isPopoverVisible = !this.isPopoverVisible;
         this.popoverActiveStage = 1;
-        this.isRedPillDisabled = false;
-        this.motivationCounter = 0;
     }
 
-    onBlueClick() {
-        this.popoverActiveStage = 2;
-    }
-
-    onRedClick() {
-        if (this.motivationCounter > 15) {
-            this.popoverActiveStage = 3;
+    onPopoverVisibleChange(visibility: boolean) {
+        if (!visibility) {
+            this.isPopoverVisible = false;
         }
-
-        this.motivationCounter += 1;
-    }
-
-    disableRedPill(isDisabled: boolean = false) {
-        this.isRedPillDisabled = isDisabled;
-    }
-
-    get motivation() {
-        return this.motivationCounter ? `(${this.motivationCounter})` : ``;
     }
 }
 

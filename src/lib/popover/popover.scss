@@ -30,7 +30,6 @@ $border-size: 1px;
 
 .mc-popover__container {
     font-size: 15px;
-    font-weight: normal;
     border-radius: $border-radius-base;
     border-width: $border-size;
     border-style: solid;
@@ -39,33 +38,34 @@ $border-size: 1px;
 
 .mc-popover__header {
     padding: 10px 16px;
-    font-weight: bold;
     border-bottom-width: $border-size;
     border-bottom-style: solid;
 }
 
-.mc-popover__content, .mc-popover__footer {
+.mc-popover__content {
     padding: 16px;
 }
 
 .mc-popover__footer {
+    margin-top: 8px;
+    padding: 12px 16px;
     border-top-width: $border-size;
     border-top-style: solid;
 }
 
-.mc-popover--placement-top {
+.mc-popover_placement-top {
     padding-bottom: $popover-distance;
 }
 
-.mc-popover--placement-right {
+.mc-popover_placement-right {
     padding-left: $popover-distance;
 }
 
-.mc-popover--placement-bottom {
+.mc-popover_placement-bottom {
     padding-top: $popover-distance;
 }
 
-.mc-popover--placement-left {
+.mc-popover_placement-left {
     padding-right: $popover-distance;
 }
 
@@ -78,25 +78,25 @@ $border-size: 1px;
     transform: rotate(45deg);
 }
 
-.mc-popover--placement-top .mc-popover__arrow {
+.mc-popover_placement-top .mc-popover__arrow {
     bottom: $popover-distance - $popover-arrow-width;
     left: 50%;
     margin-left: -$popover-arrow-width;
 }
 
-.mc-popover--placement-right .mc-popover__arrow {
+.mc-popover_placement-right .mc-popover__arrow {
     left: $popover-distance - $popover-arrow-width;
     top: 16px;
     margin-top: -$popover-arrow-width;
 }
 
-.mc-popover--placement-left .mc-popover__arrow {
+.mc-popover_placement-left .mc-popover__arrow {
     right: $popover-distance - $popover-arrow-width;
     top: 16px;
     margin-top: -$popover-arrow-width;
 }
 
-.mc-popover--placement-bottom .mc-popover__arrow {
+.mc-popover_placement-bottom .mc-popover__arrow {
     top: $popover-distance - $popover-arrow-width;
     left: 50%;
     margin-left: -$popover-arrow-width;

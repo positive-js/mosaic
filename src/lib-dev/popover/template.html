@@ -1,37 +1,32 @@
 <ng-template #customContent>
     <ng-container [ngSwitch]="popoverActiveStage">
         <ng-container *ngSwitchCase="1">
-            <div class="neo-image"></div>
+            В западной традиции рыбой выступает фрагмент латинского текста из философского трактата Цицерона «О пределах добра и зла», написанного в 45 году до нашей эры. Впервые этот текст был применен для набора шрифтовых образцов неизвестным печатником еще в XVI веке.
         </ng-container>
         <ng-container *ngSwitchCase="2">
-            <div class="smith-image"></div>
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
         </ng-container>
         <ng-container *ngSwitchCase="3">
-            Зачем, Нео, ты всё стараешься и стараешься? Ради чего?
+            Сегодня этот текст используют практически все дизайнеры, набирающие рыбу латиницей. Абзац считается каноническим во всех справочниках по типографике и предлагается к использованию в статьях, посвященных изготовлению макета верстки при отсутствии финальных текстов. В руководствах по работе с фирменным стилем крупных международных компаний именно с этих слов начинаются образцы верстки. Существуют даже издания с названием Lorem ipsum.
         </ng-container>
     </ng-container>
 </ng-template>
 
 <ng-template #customFooter>
-    <div class="neo-choice">
-        <div class="neo-choice-button">
-            <button mc-button
-                    color="primary"
-                    (click)="onBlueClick()">Сделаю копипаст</button>
-        </div>
-        <div class="neo-choice-button"
-             (mousedown)="onRedClick()">
-            <button class="neo-choice-button"
-                    mc-button
-                    color="error"
-                    [disabled]="isRedPillDisabled"
-                    (mouseover)="disableRedPill(true)">Сам напишу {{ motivation }}</button>
-        </div>
-    </div>
+    <button class="step"
+            mc-button
+            color="primary"
+            [disabled]="popoverActiveStage === 1"
+            (click)="changeStep(-1)">&larr; Назад</button>
+    <button class="step"
+            mc-button
+            color="primary"
+            [disabled]="popoverActiveStage === 3"
+            (click)="changeStep(1)">Дальше &rarr;</button>
 </ng-template>
 
 <button
-    class="help-neo"
+    class="trigger-button"
     mc-button
     color="second"
 
@@ -39,9 +34,10 @@
     mcPopoverTrigger="manual"
     mcPopoverClass="popover-485 this-class-not-available"
     [mcPopoverVisible]="isPopoverVisible"
-    mcPopoverHeader="Сделай правильный выбор"
+    mcPopoverHeader="Lorem ipsum"
     [mcPopoverContent]="customContent"
     [mcPopoverFooter]="customFooter"
+    (mcPopoverVisibleChange)="onPopoverVisibleChange($event)"
     (click)="changePopoverVisibility()">
-    Помоги Нео сделать правильный выбор
+    Что такое Lorem ipsum?
 </button>
