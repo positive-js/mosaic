@@ -270,7 +270,6 @@ export class McTag extends _McTagMixinBase implements IFocusableOption, OnDestro
         this.destroyed.emit({ tag: this });
     }
 
-    /** Selects the tag. */
     select(): void {
         if (!this._selected) {
             this._selected = true;
@@ -278,7 +277,6 @@ export class McTag extends _McTagMixinBase implements IFocusableOption, OnDestro
         }
     }
 
-    /** Deselects the tag. */
     deselect(): void {
         if (this._selected) {
             this._selected = false;
@@ -286,7 +284,6 @@ export class McTag extends _McTagMixinBase implements IFocusableOption, OnDestro
         }
     }
 
-    /** Select this tag and emit selected event */
     selectViaInteraction(): void {
         if (!this._selected) {
             this._selected = true;
@@ -294,7 +291,6 @@ export class McTag extends _McTagMixinBase implements IFocusableOption, OnDestro
         }
     }
 
-    /** Toggles the current selected state of this tag. */
     toggleSelected(isUserInput: boolean = false): boolean {
         this._selected = !this.selected;
         this.dispatchSelectionChange(isUserInput);
@@ -323,7 +319,6 @@ export class McTag extends _McTagMixinBase implements IFocusableOption, OnDestro
         }
     }
 
-    /** Handles click events on the tag. */
     handleClick(event: Event) {
         if (this.disabled) {
             event.preventDefault();
@@ -332,11 +327,8 @@ export class McTag extends _McTagMixinBase implements IFocusableOption, OnDestro
         }
     }
 
-    /** Handle custom key presses. */
     handleKeydown(event: KeyboardEvent): void {
-        if (this.disabled) {
-            return;
-        }
+        if (this.disabled) { return; }
 
         // tslint:disable-next-line: deprecation
         switch (event.keyCode) {
