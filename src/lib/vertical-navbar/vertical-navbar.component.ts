@@ -13,7 +13,7 @@ import { toggleVerticalNavbarAnimation } from './vertical-navbar.animation';
 @Directive({
     selector: 'mc-vertical-navbar-header, a[mc-vertical-navbar-header]',
     host: {
-        class: 'mc-vertical-navbar-header'
+        class: 'mc-vertical-navbar__header'
     }
 })
 export class McVerticalNavbarHeader {}
@@ -21,7 +21,7 @@ export class McVerticalNavbarHeader {}
 @Directive({
     selector: 'mc-vertical-navbar-title',
     host: {
-        class: 'mc-vertical-navbar-title'
+        class: 'mc-vertical-navbar__title'
     }
 })
 export class McVerticalNavbarTitle {}

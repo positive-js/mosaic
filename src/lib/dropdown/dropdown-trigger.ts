@@ -93,7 +93,6 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
     _openedBy: 'mouse' | 'touch' | null = null;
 
 
-
     /** References the dropdown instance that the trigger is associated with. */
     @Input('mcDropdownTriggerFor')
     get dropdown() {

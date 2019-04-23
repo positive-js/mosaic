@@ -9,14 +9,14 @@
     min-height: 100%;
     overflow: hidden;
 
-    .mc-vertical-navbar-header-area {
+    .mc-vertical-navbar__header-area {
         display: flex;
         width: 100%;
         align-items: stretch;
         box-sizing: border-box;
         min-height: 64px;
 
-        .mc-vertical-navbar-header {
+        .mc-vertical-navbar__header {
             display: flex;
             height: 100%;
             justify-content: stretch;
@@ -25,7 +25,7 @@
             align-items: center;
         }
 
-        .mc-vertical-navbar-toggle-button {
+        .mc-vertical-navbar__toggle-button {
             cursor: pointer;
             display: flex;
             flex: 0 0 auto;
@@ -35,7 +35,7 @@
             width: 64px;
         }
 
-        .mc-vertical-navbar-title {
+        .mc-vertical-navbar__title {
             padding: 0 16px;
         }
     }

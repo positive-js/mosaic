@@ -91,7 +91,7 @@ describe('McVerticalNavbar', () => {
 
         fixture.detectChanges();
 
-        const notDisabledItem = fixture.debugElement.query(By.css('mc-vertical-navbar-item:not([disabled])'));
+        const notDisabledItem = fixture.debugElement.query(By.css('mc-vertical-navbar__item:not([disabled])'));
 
         notDisabledItem.nativeElement.click();
 

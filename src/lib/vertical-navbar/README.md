@@ -51,7 +51,7 @@ And again, you can put any content into `<mc-vertical-navbar-item>`, but its app
 
 Of course, you are able to manage your `mc-vertical-navbar-item` from outside, applying any styles you like,
 but we also provide some states which are allowed to be combined with each other.
- - class `mc-vertical-navbar-item-active` highlights an item,
+ - class `mc-vertical-navbar__item_active` highlights an item,
  - class `mc-progress` stands for striped animation,
  - class `cdk-focused` - focused state, we control it as well for common tab order behavior,
  - attribute `disabled` works as expected, making an item unselectable and grayed-out.

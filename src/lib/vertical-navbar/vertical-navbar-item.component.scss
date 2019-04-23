@@ -1,7 +1,7 @@
 @import 'vertical-navbar-theme';
 
 
-.mc-vertical-navbar-badge {
+.mc-vertical-navbar__badge {
     position: absolute;
     width: 64px;
     top: 0;
@@ -14,7 +14,7 @@
     }
 }
 
-.mc-vertical-navbar-item-icon {
+.mc-vertical-navbar__item-icon {
     margin-right: 16px;
 
     .mc-icon {
@@ -22,11 +22,11 @@
     }
 }
 
-.mc-vertical-navbar-title {
+.mc-vertical-navbar__title {
     white-space: nowrap;
 }
 
-.mc-vertical-navbar-item-dropdown-icon {
+.mc-vertical-navbar__item-dropdown-icon {
     margin-left: auto;
     padding-left: 16px;
 }
@@ -42,7 +42,7 @@ mc-vertical-navbar-item, a[mc-vertical-navbar-item] {
     cursor: pointer;
     text-decoration: none;
 
-    .mc-vertical-navbar-item {
+    .mc-vertical-navbar__item {
         padding-left: 16px;
         padding-right: 16px;
         display: flex;
@@ -55,7 +55,7 @@ mc-vertical-navbar-item, a[mc-vertical-navbar-item] {
         cursor: pointer;
     }
 
-    &.mc-vertical-navbar-item-active {
+    &.mc-vertical-navbar__item_active {
         cursor: default;
     }
 

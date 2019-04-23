@@ -17,7 +17,7 @@ import { McDropdownTrigger } from '@ptsecurity/mosaic/dropdown';
 @Directive({
     selector: 'mc-vertical-navbar-item-icon',
     host: {
-        class: 'mc-vertical-navbar-item-icon'
+        class: 'mc-vertical-navbar__item-icon'
     }
 })
 export class McVerticalNavbarItemIcon {}
@@ -31,7 +31,7 @@ export class McVerticalNavbarItemIcon {}
         </span>
     `,
     host: {
-        class: 'mc-vertical-navbar-badge'
+        class: 'mc-vertical-navbar__badge'
     }
 })
 export class McVerticalNavbarItemBadge {}
