@@ -19,7 +19,7 @@ So the navbar is just a container for items and its general scheme looks like th
 It also has two states: *expanded* and *collapsed*, with transition between them.
 In the collapsed state its width equals to exact 64px and isn't configurable out of the box for now.
 
-You can toggle the navbar externally by setting `expanded` property as well.
+You can toggle the navbar externally by calling `toggle` method as well.
 
 You're allowed to put inside `<mc-vertical-navbar>` any content you like,
 but `<mc-vertical-navbar-header>` and `<mc-vertical-navbar-item>` have their special appearance and behavior.
@@ -55,6 +55,22 @@ but we also provide some states which are allowed to be combined with each other
  - class `mc-progress` stands for striped animation,
  - class `cdk-focused` - focused state, we control it as well for common tab order behavior,
  - attribute `disabled` works as expected, making an item unselectable and grayed-out.
+
+## Nested items
+
+There's no reason why you can't use `mc-vertical-navbar-item` as a dropdown trigger.
+Notice using `xPosition="after" overlapTriggerX="false"` for dropdown to open to the right.
+```
+<mc-vertical-navbar-item [mcDropdownTriggerFor]="dropdown">
+    
+    <mc-vertical-navbar-title>Dropdown item</mc-vertical-navbar-title>
+
+    <mc-dropdown #dropdown="mcDropdown" xPosition="after" overlapTriggerX="false" overlapTriggerY="true" yPosition="above">
+        <button mc-dropdown-item>Nested item</button>
+    </mc-dropdown>
+
+</mc-vertical-navbar-item>
+```
 
 ## Positioning toolbar content
 
