@@ -9,43 +9,17 @@ body {
 }
 
 
-.root {
-    display: flex;
-    min-height: 100vh;
-}
-
-.content {
-    display: flex;
-    justify-content: stretch;
-    flex-wrap: wrap;
-    margin: 8px;
-    width: 100%;
-
-    > div {
-        display: flex;
-        flex: 1 1 30%;
-        height: calc(50% - 16px);
-        box-sizing: border-box;
-        margin: 8px;
-        padding: 8px;
-        background: rgba(128, 128, 255, 0.25);
-    }
-}
-
 .toggle-button {
-    height: 100px;
-    margin: auto !important;
+    position: absolute;
+    right: 50px;
+    top: 50px;
 }
 
 mc-vertical-navbar {
-
-    height: 100vh;
-
-    &.fixed {
-        position: fixed;
-        left: 0;
-        top: 0;
-    }
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
 }
 
 .user-menu {
