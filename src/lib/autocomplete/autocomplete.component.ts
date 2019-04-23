@@ -102,15 +102,21 @@ export class McAutocomplete implements AfterContentInit {
      * Takes classes set on the host mc-autocomplete element and applies them to the panel
      * inside the overlay container to allow for easy styling.
      */
+    get classList() {
+        return this._classList;
+    }
+
     @Input('class')
     set classList(value: string) {
         if (value && value.length) {
-            value.split(' ').forEach((className) => this._classList[className.trim()] = true);
+            value.split(' ')
+                .forEach((className) => this._classList[className.trim()] = true);
+
             this.elementRef.nativeElement.className = '';
         }
     }
 
-    private _classList: { [key: string]: boolean } = {};
+    private _classList: any = {};
 
     /**
      * Whether the first option should be highlighted when the autocomplete panel is opened.

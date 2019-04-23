@@ -108,6 +108,7 @@ export function getMcAutocompleteMissingPanelError(): Error {
     providers: [MAT_AUTOCOMPLETE_VALUE_ACCESSOR]
 })
 export class McAutocompleteTrigger implements ControlValueAccessor, OnDestroy {
+    // @ts-ignore
     readonly optionSelections: Observable<McOptionSelectionChange> = defer(() => {
         if (this.autocomplete && this.autocomplete.options) {
             return merge(...this.autocomplete.options.map((option) => option.onSelectionChange));

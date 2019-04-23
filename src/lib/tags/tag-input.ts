@@ -144,6 +144,7 @@ export class McTagInput implements McTagTextControl, OnChanges {
         if (!this.inputElement.value && !!event) {
             this._tagList.keydown(event);
         }
+
         if (!event || this.isSeparatorKey(event)) {
             this.tagEnd.emit({ input: this.inputElement, value: this.inputElement.value });
 

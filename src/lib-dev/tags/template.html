@@ -22,6 +22,7 @@
                    #inputTagInput
                    [formControl]="tagCtrl"
                    [mcTagInputFor]="inputTagList"
+                   [mcTagInputSeparatorKeyCodes]="separatorKeysCodes"
                    (mcTagInputTokenEnd)="inputOnCreate($event)">
         </mc-tag-list>
     </mc-form-field>

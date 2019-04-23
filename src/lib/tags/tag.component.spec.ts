@@ -109,13 +109,13 @@ describe('Tags', () => {
             });
 
             it('allows color customization', () => {
-                expect(tagNativeElement.classList).toContain('mat-primary');
+                expect(tagNativeElement.classList).toContain('mc-primary');
 
-                testComponent.color = 'warn';
+                testComponent.color = 'error';
                 fixture.detectChanges();
 
-                expect(tagNativeElement.classList).not.toContain('mat-primary');
-                expect(tagNativeElement.classList).toContain('mat-warn');
+                expect(tagNativeElement.classList).not.toContain('mc-primary');
+                expect(tagNativeElement.classList).toContain('mc-error');
             });
 
             it('allows selection', () => {
@@ -136,7 +136,7 @@ describe('Tags', () => {
                 tagInstance.remove();
                 fixture.detectChanges();
 
-                expect(testComponent.tagRemove).toHaveBeenCalledWith({ chip: tagInstance });
+                expect(testComponent.tagRemove).toHaveBeenCalledWith({ tag: tagInstance });
             });
 
             it('should not prevent the default click action', () => {
@@ -146,7 +146,7 @@ describe('Tags', () => {
                 expect(event.defaultPrevented).toBe(false);
             });
 
-            it('should prevent the default click action when the chip is disabled', () => {
+            it('should prevent the default click action when the tag is disabled', () => {
                 tagInstance.disabled = true;
                 fixture.detectChanges();
 
@@ -180,7 +180,7 @@ describe('Tags', () => {
                 subscription.unsubscribe();
             });
 
-            it('should not dispatch `selectionChange` event when selecting a selected chip via ' +
+            it('should not dispatch `selectionChange` event when selecting a selected tag via ' +
                 'user interaction', () => {
                 tagInstance.select();
 
@@ -214,7 +214,7 @@ describe('Tags', () => {
                     fixture.detectChanges();
                 });
 
-                it('should selects/deselects the currently focused chip on SPACE', () => {
+                it('should selects/deselects the currently focused tag on SPACE', () => {
                     const SPACE_EVENT: KeyboardEvent = createKeyboardEvent('keydown', SPACE) as KeyboardEvent;
                     const CHIP_SELECTED_EVENT: McTagSelectionChange = {
                         source: tagInstance,
@@ -246,28 +246,6 @@ describe('Tags', () => {
                     expect(testComponent.tagSelectionChange).toHaveBeenCalledTimes(2);
                     expect(testComponent.tagSelectionChange).toHaveBeenCalledWith(CHIP_DESELECTED_EVENT);
                 });
-
-                it('should have correct aria-selected in single selection mode', () => {
-                    expect(tagNativeElement.hasAttribute('aria-selected')).toBe(false);
-
-                    testComponent.selected = true;
-                    fixture.detectChanges();
-
-                    expect(tagNativeElement.getAttribute('aria-selected')).toBe('true');
-                });
-
-                it('should have the correct aria-selected in multi-selection mode', () => {
-                    testComponent.tagList.multiple = true;
-                    fixture.detectChanges();
-
-                    expect(tagNativeElement.getAttribute('aria-selected')).toBe('false');
-
-                    testComponent.selected = true;
-                    fixture.detectChanges();
-
-                    expect(tagNativeElement.getAttribute('aria-selected')).toBe('true');
-                });
-
             });
 
             describe('when selectable is false', () => {
@@ -354,15 +332,6 @@ describe('Tags', () => {
 
                     expect(testComponent.tagRemove).not.toHaveBeenCalled();
                 });
-            });
-
-            it('should update the aria-label for disabled chips', () => {
-                expect(tagNativeElement.getAttribute('aria-disabled')).toBe('false');
-
-                testComponent.disabled = true;
-                fixture.detectChanges();
-
-                expect(tagNativeElement.getAttribute('aria-disabled')).toBe('true');
             });
 
             it('should make disabled chips non-focusable', () => {

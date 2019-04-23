@@ -74,7 +74,7 @@ export const _McTagMixinBase: CanColorCtor & CanDisableCtor & typeof McTagBase =
 
 
 @Component({
-    selector: 'mc-tag',
+    selector: 'mc-tag, [mc-tag], mc-basic-tag, [mc-basic-tag]',
     exportAs: 'mcTag',
     templateUrl: 'tag.partial.html',
     styleUrls: ['./tag.css'],
@@ -88,8 +88,6 @@ export const _McTagMixinBase: CanColorCtor & CanDisableCtor & typeof McTagBase =
         '[class.mc-tag-disabled]': 'disabled',
         '[class.mc-disabled]': 'disabled',
         '[attr.disabled]': 'disabled || null',
-        '[attr.aria-disabled]': 'disabled.toString()',
-        '[attr.aria-selected]': 'ariaSelected',
         '(click)': 'handleClick($event)',
         '(keydown)': 'handleKeydown($event)',
         '(focus)': 'focus()',
@@ -195,11 +193,6 @@ export class McTag extends _McTagMixinBase implements IFocusableOption, OnDestro
     }
 
     private _removable: boolean = true;
-
-    /** The ARIA selected applied to the tag. */
-    get ariaSelected(): string | null {
-        return this.selectable ? this.selected.toString() : null;
-    }
 
     get disabled() {
         return this._disabled;

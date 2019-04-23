@@ -777,7 +777,7 @@ describe('MatTagList', () => {
             });
 
 
-            it('should set an asterisk after the placeholder if the control is required', () => {
+            xit('should set an asterisk after the placeholder if the control is required', () => {
                 let requiredMarker = fixture.debugElement.query(By.css('.mc-form-field-required-marker'));
                 expect(requiredMarker)
                     .toBeNull(`Expected placeholder not to have an asterisk, as control was not required.`);
