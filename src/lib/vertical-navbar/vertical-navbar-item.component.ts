@@ -10,7 +10,7 @@ import {
     Self
 } from '@angular/core';
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
-import { CanDisable, mixinDisabled } from '@ptsecurity/mosaic/core';
+import { CanDisable, mixinDisabled, CanDisableCtor } from '@ptsecurity/mosaic/core';
 import { McDropdownTrigger } from '@ptsecurity/mosaic/dropdown';
 
 
@@ -37,7 +37,13 @@ export class McVerticalNavbarItemIcon {}
 export class McVerticalNavbarItemBadge {}
 
 
-class McVerticalNavbarItemBase {}
+class McVerticalNavbarItemBase {
+    constructor(public _elementRef: ElementRef) {}
+}
+
+export const _McVerticalNavbarMixinBase: CanDisableCtor & typeof McVerticalNavbarItemBase
+    = mixinDisabled(McVerticalNavbarItemBase);
+
 
 @Component({
     selector: 'a[mc-vertical-navbar-item], mc-vertical-navbar-item',
@@ -51,7 +57,7 @@ class McVerticalNavbarItemBase {}
         '[attr.tabindex]': 'disabled ? -1 : 0'
     }
 })
-export class McVerticalNavbarItem extends mixinDisabled(McVerticalNavbarItemBase) implements CanDisable, OnDestroy {
+export class McVerticalNavbarItem extends _McVerticalNavbarMixinBase implements CanDisable, OnDestroy {
     @Input() tabIndex: number = 0;
 
     constructor(
@@ -59,7 +65,7 @@ export class McVerticalNavbarItem extends mixinDisabled(McVerticalNavbarItemBase
         private focusMonitor: FocusMonitor,
         @Optional() @Self() private trigger: McDropdownTrigger
     ) {
-        super();
+        super(element);
 
         this.focusMonitor.monitor(this.element.nativeElement).subscribe();
     }
