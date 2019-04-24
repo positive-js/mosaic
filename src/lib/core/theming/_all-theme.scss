@@ -22,7 +22,7 @@
 @import '../../select/select-theme';
 @import '../../splitter/splitter-theme';
 @import '../../tabs/tabs-theme';
-@import '../../tag/tag-theme';
+@import '../../tags/tag-theme';
 @import '../../textarea/textarea-theme';
 @import '../../tooltip/tooltip-theme';
 @import '../../toggle/toggle-theme';
@@ -30,6 +30,7 @@
 @import '../../sidepanel/sidepanel-theme';
 @import '../../tree/tree-theme';
 @import '../../tree-select/tree-select-theme';
+@import '../../autocomplete/autocomplete-theme';
 @import '../visual/panel-theme';
 
 
@@ -69,4 +70,5 @@
     @include mc-sidepanel-theme($theme);
     @include mc-tree-theme($theme);
     @include mc-tree-select-theme($theme);
+    @include mc-autocomplete-theme($theme);
 }

@@ -1,11 +1,12 @@
-/* tslint:disable:no-magic-numbers */
+// tslint:disable:no-magic-numbers
+// tslint:disable:mocha-no-side-effect-code
+// tslint:disable:max-func-body-length
+
 import { Component, DebugElement, ChangeDetectionStrategy } from '@angular/core';
 import { async, ComponentFixture, fakeAsync, TestBed, tick, flush } from '@angular/core/testing';
 import { FormControl, FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-
 import { DOWN_ARROW, SPACE, ENTER, UP_ARROW, HOME, END } from '@ptsecurity/cdk/keycodes';
-
 import {
     createKeyboardEvent,
     dispatchFakeEvent,
@@ -174,9 +175,9 @@ describe('McListSelection without forms', () => {
 
         it('should be able to select an item using ENTER', () => {
             const manager = selectionList.componentInstance._keyManager;
-            const ENTER_EVENT: KeyboardEvent = createKeyboardEvent('keydown', ENTER);
-            const selectList =
-                selectionList.injector.get<McListSelection>(McListSelection).selectedOptions;
+            const testListItem: HTMLElement = listOptions[1].nativeElement;
+            const ENTER_EVENT: KeyboardEvent = createKeyboardEvent('keydown', ENTER, testListItem);
+            const selectList = selectionList.injector.get<McListSelection>(McListSelection).selectedOptions;
             expect(selectList.selected.length).toBe(0);
 
             manager.updateActiveItem(1);

@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { DOWN_ARROW, ESCAPE, UP_ARROW } from '@ptsecurity/cdk/keycodes';
 import {
+    createKeyboardEvent,
+    dispatchEvent,
     dispatchFakeEvent,
     dispatchKeyboardEvent
 } from '@ptsecurity/cdk/testing';
@@ -583,7 +585,9 @@ describe('McNumberInput', () => {
             inputElement.value = 5;
             dispatchFakeEvent(inputElement, 'input');
 
-            dispatchKeyboardEvent(inputElementDebug.nativeElement, 'keydown', UP_ARROW, undefined, true);
+            const event = createKeyboardEvent('keydown', UP_ARROW);
+            Object.defineProperty(event, 'shiftKey', { get: () => true });
+            dispatchEvent(inputElementDebug.nativeElement, event);
 
             fixture.detectChanges();
 
@@ -686,7 +690,9 @@ describe('McNumberInput', () => {
             inputElement.value = 5;
             dispatchFakeEvent(inputElement, 'input');
 
-            dispatchKeyboardEvent(inputElementDebug.nativeElement, 'keydown', UP_ARROW, undefined, true);
+            const event = createKeyboardEvent('keydown', UP_ARROW);
+            Object.defineProperty(event, 'shiftKey', { get: () => true });
+            dispatchEvent(inputElementDebug.nativeElement, event);
 
             fixture.detectChanges();
 
@@ -703,7 +709,9 @@ describe('McNumberInput', () => {
             inputElement.value = 6;
             dispatchFakeEvent(inputElement, 'input');
 
-            dispatchKeyboardEvent(inputElementDebug.nativeElement, 'keydown', DOWN_ARROW, undefined, true);
+            const event = createKeyboardEvent('keydown', DOWN_ARROW);
+            Object.defineProperty(event, 'shiftKey', { get: () => true });
+            dispatchEvent(inputElementDebug.nativeElement, event);
 
             fixture.detectChanges();
 

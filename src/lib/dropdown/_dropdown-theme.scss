@@ -14,8 +14,7 @@
     .mc-dropdown__panel {
         border-color: mc-color($second);
 
-        // todo A-black-200 нет в палитре
-        box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
+        box-shadow: 0 3px 3px 0 mc-color($second, A200);
 
         background-color: if($is-dark, map-get($second, 700), map-get($background, background));
     }

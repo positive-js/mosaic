@@ -1,0 +1,23 @@
+
+
+.mc-tag-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    min-height: 28px;
+
+    padding: 2px 6px;
+
+    & .mc-tag-input {
+        flex: 1 1 auto;
+
+        height: 22px;
+        margin: 2px 4px;
+    }
+}
+
+.mc-tag-input {
+    border: none;
+    outline: none;
+    background: transparent;
+}

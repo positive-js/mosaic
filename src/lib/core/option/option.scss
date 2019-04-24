@@ -2,6 +2,7 @@
 @import '../../../cdk/a11y/a11y';
 
 $mc-option-padding: 0 16px;
+$mc-option-item-height: 32px;
 
 
 .mc-option {
@@ -14,6 +15,8 @@ $mc-option-padding: 0 16px;
     position: relative;
 
     max-width: 100%;
+
+    height: $mc-option-item-height;
 
     border: 2px solid transparent;
 

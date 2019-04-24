@@ -118,3 +118,13 @@ export const BACKSLASH = 220;
 export const CLOSE_SQUARE_BRACKET = 221;
 export const SINGLE_QUOTE = 222;
 export const MAC_META = 224;
+
+type ModifierKey = 'altKey' | 'shiftKey' | 'ctrlKey' | 'metaKey';
+
+export function hasModifierKey(event: KeyboardEvent, ...modifiers: ModifierKey[]): boolean {
+    if (modifiers.length) {
+        return modifiers.some((modifier) => event[modifier]);
+    }
+
+    return event.altKey || event.shiftKey || event.ctrlKey || event.metaKey;
+}
