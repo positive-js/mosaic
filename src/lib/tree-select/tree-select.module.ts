@@ -4,7 +4,7 @@ import { OverlayModule } from '@ptsecurity/cdk/overlay';
 import { CdkTreeModule } from '@ptsecurity/cdk/tree';
 import { MC_SELECT_SCROLL_STRATEGY_PROVIDER, McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
-import { McTagModule } from '@ptsecurity/mosaic/tag';
+import { McTagsModule } from '@ptsecurity/mosaic/tags';
 import { McTreeModule } from '@ptsecurity/mosaic/tree';
 
 import { McTreeSelect, McTreeSelectTrigger } from './tree-select.component';
@@ -17,7 +17,7 @@ import { McTreeSelect, McTreeSelectTrigger } from './tree-select.component';
         CdkTreeModule,
         McTreeModule,
         McIconModule,
-        McTagModule,
+        McTagsModule,
         McPseudoCheckboxModule
     ],
     exports: [McTreeSelect, McTreeSelectTrigger, CommonModule],

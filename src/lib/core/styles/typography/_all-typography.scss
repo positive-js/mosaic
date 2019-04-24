@@ -16,11 +16,12 @@
 @import '../../../sidepanel/sidepanel-theme';
 @import '../../../radio/radio-theme';
 @import '../../../tabs/tabs-theme';
-@import '../../../tag/tag-theme';
+@import '../../../tags/tag-theme';
 @import '../../../textarea/textarea-theme';
 @import '../../../tooltip/tooltip-theme';
 @import '../../../toggle/toggle-theme';
 @import '../../../tree/tree-theme';
+@import '../../../select/select-theme';
 @import '../../../tree-select/tree-select-theme';
 
 
@@ -54,5 +55,6 @@
     @include mc-tooltip-typography($config);
     @include mc-tree-typography($config);
     @include mc-tag-typography($config);
+    @include mc-select-typography($config);
     @include mc-tree-select-typography($config);
 }

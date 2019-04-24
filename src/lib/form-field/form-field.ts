@@ -8,7 +8,7 @@ import {
     ContentChild,
     ContentChildren, Directive,
     ElementRef,
-    QueryList,
+    QueryList, ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
@@ -84,6 +84,8 @@ export class McFormField extends _McFormFieldMixinBase implements
     @ContentChildren(McSuffix) _suffix: QueryList<McSuffix>;
     @ContentChildren(McPrefix) _prefix: QueryList<McPrefix>;
     @ContentChildren(McCleaner) _cleaner: QueryList<McCleaner>;
+
+    @ViewChild('connectionContainer') connectionContainerRef: ElementRef;
 
     // Unique id for the internal form field label.
     _labelId = `mc-form-field-label-${nextUniqueId++}`;
@@ -180,7 +182,15 @@ export class McFormField extends _McFormFieldMixinBase implements
         }
     }
 
-    /** Determines whether a class from the NgControl should be forwarded to the host element. */
+    /**
+     * Gets an ElementRef for the element that a overlay attached to the form-field should be
+     * positioned relative to.
+     */
+    getConnectedOverlayOrigin(): ElementRef {
+        return this.connectionContainerRef || this._elementRef;
+    }
+
+        /** Determines whether a class from the NgControl should be forwarded to the host element. */
     _shouldForward(prop: keyof NgControl): boolean {
         const ngControl = this._control ? this._control.ngControl : null;
 

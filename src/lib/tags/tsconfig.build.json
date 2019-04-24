@@ -7,7 +7,7 @@
         "annotateForClosureCompiler": true,
         "strictMetadataEmit": true,
         "flatModuleOutFile": "index.js",
-        "flatModuleId": "@ptsecurity/mosaic/tag",
+        "flatModuleId": "@ptsecurity/mosaic/tags",
         "skipTemplateCodegen": true,
         "fullTemplateTypeCheck": true
     }

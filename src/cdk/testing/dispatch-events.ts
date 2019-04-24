@@ -1,3 +1,5 @@
+// tslint:disable:no-reserved-keywords
+
 import {
     createFakeEvent,
     createKeyboardEvent,
@@ -20,19 +22,15 @@ export function dispatchFakeEvent(node: Node | Window, type: string, canBubble?:
 }
 
 /** Shorthand to dispatch a keyboard event with a specified key code. */
-// tslint:disable-next-line:no-reserved-keywords
-export function dispatchKeyboardEvent(node: Node, type: string, keyCode: number, target?: Element,
-                                      shiftKey = false, ctrlKey = false, altKey = false):
+export function dispatchKeyboardEvent(node: Node, type: string, keyCode: number, target?: Element):
     KeyboardEvent {
-    const event = createKeyboardEvent(type, keyCode, target, undefined, shiftKey, ctrlKey, altKey);
-
-    return dispatchEvent(node, event) as KeyboardEvent;
+    return dispatchEvent(node, createKeyboardEvent(type, keyCode, target)) as KeyboardEvent;
 }
 
 /** Shorthand to dispatch a mouse event on the specified coordinates. */
-// tslint:disable-next-line:no-reserved-keywords
-export function dispatchMouseEvent(node: Node, type: string, x = 0, y = 0,
-                                   event = createMouseEvent(type, x, y)): MouseEvent {
+export function dispatchMouseEvent(
+node: Node, type: string, x = 0, y = 0, event = createMouseEvent(type, x, y)
+): MouseEvent {
     return dispatchEvent(node, event) as MouseEvent;
 }
 

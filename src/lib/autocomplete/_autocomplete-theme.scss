@@ -1,0 +1,27 @@
+@import '../core/theming/theming';
+
+@mixin mc-autocomplete-theme($theme) {
+    $second: map-get($theme, second);
+
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    $is-dark: map-get($theme, is-dark);
+
+    .mc-autocomplete-panel {
+        color: mc-color($foreground, text);
+
+        background-color: if($is-dark, map-get($second, 700), map-get($background, background));
+
+        border-color: mc-color($second);
+
+        box-shadow: 0 3px 3px 0 mc-color($second, A200);
+
+        .mc-selected {
+            background-color: if($is-dark, map-get($second, 700), map-get($background, background));
+        }
+    }
+}
+
+@mixin mc-autocomplete-typography($config) {
+}
