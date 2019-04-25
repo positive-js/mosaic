@@ -9724,7 +9724,7 @@ script-ext-html-webpack-plugin@^2.1.3:
   dependencies:
     debug "^4.1.0"
 
-scss-bundle@2.5.1:
+scss-bundle@^2.5.1:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/scss-bundle/-/scss-bundle-2.5.1.tgz#def470dcac93484c7e40a6d4f657498ee5400934"
   integrity sha512-n5gUfBqbPDuP7LYxG7Oi51jeyErzqhLOtofQl9ctYi8DRwGYpnCJIOl+9L3/o5O5srfM80ADLF/wYg11NUnh3Q==
