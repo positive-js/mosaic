@@ -7,7 +7,8 @@ import {
     ViewEncapsulation,
     Inject,
     Optional,
-    Input
+    Input,
+    ViewChild
 } from '@angular/core';
 import { IFocusableOption, FocusMonitor, FocusOrigin } from '@ptsecurity/cdk/a11y';
 import { CanDisable, CanDisableCtor, mixinDisabled } from '@ptsecurity/mosaic/core';
@@ -43,7 +44,7 @@ export const _McDropdownItemMixinBase: CanDisableCtor & typeof McDropdownItemBas
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     template: `
-        <div>
+        <div #content>
             <ng-content></ng-content>
         </div>
         <i *ngIf="_triggersSubmenu" mc-icon="mc-angle-right-M_16" class="mc-dropdown__trigger"></i>
@@ -54,6 +55,8 @@ export class McDropdownItem extends _McDropdownItemMixinBase
 
     /** ARIA role for the dropdown item. */
     @Input() role: 'menuitem' | 'menuitemradio' | 'menuitemcheckbox' = 'menuitem';
+
+    @ViewChild('content') content;
 
     private _document: Document;
 
@@ -133,7 +136,7 @@ export class McDropdownItem extends _McDropdownItemMixinBase
 
     /** Gets the label to be used when determining whether the option should be focused. */
     getLabel(): string {
-        const element: HTMLElement = this._elementRef.nativeElement;
+        const element: HTMLElement = this.content.nativeElement;
         // tslint:disable-next-line:no-magic-numbers
         const textNodeType = this._document ? this._document.TEXT_NODE : 3;
         let output = '';
