@@ -1,8 +1,9 @@
 @import './typography';
 @import '../alerts';
 @import '../badges';
-@import '../../../button/button-theme';
+@import '../../../autocomplete/autocomplete-theme';
 @import '../../../button-toggle/button-toggle-theme';
+@import '../../../button/button-theme';
 @import '../../../checkbox/checkbox-theme';
 @import '../../../datepicker/datepicker-theme';
 @import '../../../dropdown/dropdown-theme';
@@ -12,17 +13,17 @@
 @import '../../../list/list-theme';
 @import '../../../modal/modal-theme';
 @import '../../../navbar/navbar-theme';
-@import '../../option/option-theme';
-@import '../../../sidepanel/sidepanel-theme';
 @import '../../../radio/radio-theme';
+@import '../../../select/select-theme';
+@import '../../../sidepanel/sidepanel-theme';
 @import '../../../tabs/tabs-theme';
 @import '../../../tags/tag-theme';
 @import '../../../textarea/textarea-theme';
-@import '../../../tooltip/tooltip-theme';
 @import '../../../toggle/toggle-theme';
-@import '../../../tree/tree-theme';
-@import '../../../select/select-theme';
+@import '../../../tooltip/tooltip-theme';
 @import '../../../tree-select/tree-select-theme';
+@import '../../../tree/tree-theme';
+@import '../../option/option-theme';
 
 
 @mixin mosaic-typography($config: null) {
@@ -33,9 +34,10 @@
     @include mc-base-typography($config);
 
     @include mc-alert-typography($config);
+    @include mc-autocomplete-typography($config);
     @include mc-badge-typography($config);
-    @include mc-button-typography($config);
     @include mc-button-toggle-typography($config);
+    @include mc-button-typography($config);
     @include mc-checkbox-typography($config);
     @include mc-datepicker-typography($config);
     @include mc-dropdown-typography($config);
@@ -46,15 +48,15 @@
     @include mc-modal-typography($config);
     @include mc-navbar-typography($config);
     @include mc-option-typography($config);
-    @include mc-sidepanel-typography($config);
-    @include mc-tag-typography($config);
     @include mc-radio-typography($config);
+    @include mc-select-typography($config);
+    @include mc-sidepanel-typography($config);
     @include mc-tabs-typography($config);
+    @include mc-tag-typography($config);
+    @include mc-tag-typography($config);
     @include mc-textarea-typography($config);
     @include mc-toggle-typography($config);
     @include mc-tooltip-typography($config);
-    @include mc-tree-typography($config);
-    @include mc-tag-typography($config);
-    @include mc-select-typography($config);
     @include mc-tree-select-typography($config);
+    @include mc-tree-typography($config);
 }
