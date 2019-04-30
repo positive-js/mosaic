@@ -2,9 +2,6 @@
 // tslint:disable:prefer-array-literal
 // tslint:disable:no-empty
 
-import {ComponentFixture, fakeAsync, flush, inject, TestBed, tick} from '@angular/core/testing';
-import {By} from '@angular/platform-browser';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {
     Component,
     ElementRef,
@@ -17,22 +14,16 @@ import {
     TemplateRef,
     Type,
     ViewChild,
-    ViewChildren,
+    ViewChildren
 } from '@angular/core';
-import {Direction, Directionality} from '@ptsecurity/cdk/bidi';
-import {Overlay, OverlayContainer} from '@ptsecurity/cdk/overlay';
-import {DOWN_ARROW, ESCAPE, LEFT_ARROW, RIGHT_ARROW, TAB} from '@ptsecurity/cdk/keycodes';
-import {
-    MC_DROPDOWN_DEFAULT_OPTIONS,
-    McDropdown,
-    McDropdownItem,
-    McDropdownModule,
-    McDropdownPanel,
-    McDropdownTrigger,
-    DropdownPositionX,
-    DropdownPositionY,
-} from './index';
-import {MC_DROPDOWN_SCROLL_STRATEGY, NESTED_PANEL_TOP_PADDING} from './dropdown-trigger';
+import { ComponentFixture, fakeAsync, flush, inject, TestBed, tick } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { FocusMonitor } from '@ptsecurity/cdk/a11y';
+import { Direction, Directionality } from '@ptsecurity/cdk/bidi';
+import { DOWN_ARROW, ESCAPE, LEFT_ARROW, RIGHT_ARROW, TAB } from '@ptsecurity/cdk/keycodes';
+import { Overlay, OverlayContainer } from '@ptsecurity/cdk/overlay';
+import { ScrollDispatcher } from '@ptsecurity/cdk/scrolling';
 import {
     createKeyboardEvent,
     createMouseEvent,
@@ -41,16 +32,27 @@ import {
     dispatchKeyboardEvent,
     dispatchMouseEvent,
     MockNgZone,
-    patchElementFocus,
+    patchElementFocus
 } from '@ptsecurity/cdk/testing';
-import {Subject} from 'rxjs';
-import {ScrollDispatcher} from '@ptsecurity/cdk/scrolling';
-import {FocusMonitor} from '@ptsecurity/cdk/a11y';
-import {McDropdownContent} from "@ptsecurity/mosaic/dropdown/dropdown-content";
+import { Subject } from 'rxjs';
+
+import {
+    MC_DROPDOWN_DEFAULT_OPTIONS,
+    MC_DROPDOWN_SCROLL_STRATEGY,
+    NESTED_PANEL_TOP_PADDING,
+    McDropdown,
+    McDropdownItem,
+    McDropdownModule,
+    McDropdownPanel,
+    McDropdownTrigger,
+    DropdownPositionX,
+    DropdownPositionY,
+    McDropdownContent
+} from './index';
 
 
-const PANEL_CLASS = 'mc-dropdown__panel';
-const ITEM_DIRECTIVE = 'mc-dropdown-item';
+const PANEL_SELECTOR = '.mc-dropdown__panel';
+const ITEM_SELECTOR = '[mc-dropdown-item]';
 
 describe('McDropdown', () => {
     let overlayContainer: OverlayContainer;
@@ -140,7 +142,7 @@ describe('McDropdown', () => {
         fixture.componentInstance.dropdown.hasBackdrop = false;
         fixture.detectChanges();
 
-        // Reopen the menu.
+        // Reopen the dropdown.
         fixture.componentInstance.trigger.open();
         fixture.detectChanges();
         tick(500);
@@ -157,7 +159,7 @@ describe('McDropdown', () => {
         triggerEl.click();
         fixture.detectChanges();
 
-        expect(overlayContainerElement.querySelector(`.${PANEL_CLASS}`)).toBeTruthy();
+        expect(overlayContainerElement.querySelector(PANEL_SELECTOR)).toBeTruthy();
 
         fixture.componentInstance.trigger.close();
         fixture.detectChanges();
@@ -189,7 +191,7 @@ describe('McDropdown', () => {
         triggerEl.click();
         fixture.detectChanges();
 
-        expect(overlayContainerElement.querySelector(`.${PANEL_CLASS}`)).toBeTruthy();
+        expect(overlayContainerElement.querySelector(PANEL_SELECTOR)).toBeTruthy();
 
         fixture.componentInstance.trigger.close();
         fixture.detectChanges();
@@ -207,7 +209,7 @@ describe('McDropdown', () => {
         triggerEl.click();
         fixture.detectChanges();
 
-        expect(overlayContainerElement.querySelector(`.${PANEL_CLASS}`)).toBeTruthy();
+        expect(overlayContainerElement.querySelector(PANEL_SELECTOR)).toBeTruthy();
 
         fixture.componentInstance.trigger.close();
         fixture.detectChanges();
@@ -232,96 +234,96 @@ describe('McDropdown', () => {
         // Flush due to the additional tick that is necessary for the FocusMonitor.
         flush();
 
-        expect(overlayContainerElement.querySelector(`.${PANEL_CLASS}`)!.scrollTop).toBe(0);
+        expect(overlayContainerElement.querySelector(PANEL_SELECTOR)!.scrollTop).toBe(0);
     }));
 
     it('should set the proper focus origin when restoring focus after opening by keyboard', fakeAsync(() => {
-            const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
-            fixture.detectChanges();
-            const triggerEl = fixture.componentInstance.triggerEl.nativeElement;
+        const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
+        fixture.detectChanges();
+        const triggerEl = fixture.componentInstance.triggerEl.nativeElement;
 
-            patchElementFocus(triggerEl);
-            focusMonitor.monitor(triggerEl, false);
-            triggerEl.click(); // A click without a mousedown before it is considered a keyboard open.
-            fixture.detectChanges();
-            fixture.componentInstance.trigger.close();
-            fixture.detectChanges();
-            tick(500);
-            fixture.detectChanges();
+        patchElementFocus(triggerEl);
+        focusMonitor.monitor(triggerEl, false);
+        triggerEl.click(); // A click without a mousedown before it is considered a keyboard open.
+        fixture.detectChanges();
+        fixture.componentInstance.trigger.close();
+        fixture.detectChanges();
+        tick(500);
+        fixture.detectChanges();
 
-            expect(triggerEl.classList).toContain('cdk-program-focused');
-            focusMonitor.stopMonitoring(triggerEl);
-        }));
+        expect(triggerEl.classList).toContain('cdk-program-focused');
+        focusMonitor.stopMonitoring(triggerEl);
+    }));
 
     it('should set the proper focus origin when restoring focus after opening by mouse', fakeAsync(() => {
-            const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
-            fixture.detectChanges();
-            const triggerEl = fixture.componentInstance.triggerEl.nativeElement;
+        const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
+        fixture.detectChanges();
+        const triggerEl = fixture.componentInstance.triggerEl.nativeElement;
 
-            dispatchMouseEvent(triggerEl, 'mousedown');
-            triggerEl.click();
-            fixture.detectChanges();
-            patchElementFocus(triggerEl);
-            focusMonitor.monitor(triggerEl, false);
-            fixture.componentInstance.trigger.close();
-            fixture.detectChanges();
-            tick(500);
-            fixture.detectChanges();
+        dispatchMouseEvent(triggerEl, 'mousedown');
+        triggerEl.click();
+        fixture.detectChanges();
+        patchElementFocus(triggerEl);
+        focusMonitor.monitor(triggerEl, false);
+        fixture.componentInstance.trigger.close();
+        fixture.detectChanges();
+        tick(500);
+        fixture.detectChanges();
 
-            expect(triggerEl.classList).toContain('cdk-mouse-focused');
-            focusMonitor.stopMonitoring(triggerEl);
-        }));
+        expect(triggerEl.classList).toContain('cdk-mouse-focused');
+        focusMonitor.stopMonitoring(triggerEl);
+    }));
 
     it('should set proper focus origin when right clicking on trigger, before opening by keyboard', fakeAsync(() => {
-            const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
-            fixture.detectChanges();
-            const triggerEl = fixture.componentInstance.triggerEl.nativeElement;
+        const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
+        fixture.detectChanges();
+        const triggerEl = fixture.componentInstance.triggerEl.nativeElement;
 
-            patchElementFocus(triggerEl);
-            focusMonitor.monitor(triggerEl, false);
+        patchElementFocus(triggerEl);
+        focusMonitor.monitor(triggerEl, false);
 
-            // Trigger a fake right click.
-            dispatchEvent(triggerEl, createMouseEvent('mousedown', 50, 100, 2));
+        // Trigger a fake right click.
+        dispatchEvent(triggerEl, createMouseEvent('mousedown', 50, 100, 2));
 
-            // A click without a left button mousedown before it is considered a keyboard open.
-            triggerEl.click();
-            fixture.detectChanges();
+        // A click without a left button mousedown before it is considered a keyboard open.
+        triggerEl.click();
+        fixture.detectChanges();
 
-            fixture.componentInstance.trigger.close();
-            fixture.detectChanges();
-            tick(500);
-            fixture.detectChanges();
+        fixture.componentInstance.trigger.close();
+        fixture.detectChanges();
+        tick(500);
+        fixture.detectChanges();
 
-            expect(triggerEl.classList).toContain('cdk-program-focused');
-            focusMonitor.stopMonitoring(triggerEl);
-        }));
+        expect(triggerEl.classList).toContain('cdk-program-focused');
+        focusMonitor.stopMonitoring(triggerEl);
+    }));
 
     it('should set the proper focus origin when restoring focus after opening by touch', fakeAsync(() => {
-            const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
-            fixture.detectChanges();
-            const triggerEl = fixture.componentInstance.triggerEl.nativeElement;
+        const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
+        fixture.detectChanges();
+        const triggerEl = fixture.componentInstance.triggerEl.nativeElement;
 
-            dispatchMouseEvent(triggerEl, 'touchstart');
-            triggerEl.click();
-            fixture.detectChanges();
-            patchElementFocus(triggerEl);
-            focusMonitor.monitor(triggerEl, false);
-            fixture.componentInstance.trigger.close();
-            fixture.detectChanges();
-            tick(500);
-            fixture.detectChanges();
-            flush();
+        dispatchMouseEvent(triggerEl, 'touchstart');
+        triggerEl.click();
+        fixture.detectChanges();
+        patchElementFocus(triggerEl);
+        focusMonitor.monitor(triggerEl, false);
+        fixture.componentInstance.trigger.close();
+        fixture.detectChanges();
+        tick(500);
+        fixture.detectChanges();
+        flush();
 
-            expect(triggerEl.classList).toContain('cdk-touch-focused');
-            focusMonitor.stopMonitoring(triggerEl);
-        }));
+        expect(triggerEl.classList).toContain('cdk-touch-focused');
+        focusMonitor.stopMonitoring(triggerEl);
+    }));
 
     it('should close the dropdown when pressing ESCAPE', fakeAsync(() => {
         const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
         fixture.detectChanges();
         fixture.componentInstance.trigger.open();
 
-        const panel = overlayContainerElement.querySelector(`.${PANEL_CLASS}`)!;
+        const panel = overlayContainerElement.querySelector(PANEL_SELECTOR)!;
         const event = createKeyboardEvent('keydown', ESCAPE);
 
         dispatchEvent(panel, event);
@@ -392,7 +394,7 @@ describe('McDropdown', () => {
         fixture.detectChanges();
 
         const dropdownEl = fixture.debugElement.query(By.css('mc-dropdown')).nativeElement;
-        const panel = overlayContainerElement.querySelector(`.${PANEL_CLASS}`)!;
+        const panel = overlayContainerElement.querySelector(PANEL_SELECTOR)!;
 
         expect(dropdownEl.classList).not.toContain('custom-one');
         expect(dropdownEl.classList).not.toContain('custom-two');
@@ -407,11 +409,11 @@ describe('McDropdown', () => {
         fixture.componentInstance.trigger.open();
         fixture.detectChanges();
 
-        const menuPanel = overlayContainerElement.querySelector(`.${PANEL_CLASS}`);
+        const dropdownPanel = overlayContainerElement.querySelector(PANEL_SELECTOR);
 
-        expect(menuPanel).toBeTruthy('Expected to find a menu panel.');
+        expect(dropdownPanel).toBeTruthy('Expected to find a dropdown panel.');
 
-        const role = menuPanel ? menuPanel.getAttribute('role') : '';
+        const role = dropdownPanel ? dropdownPanel.getAttribute('role') : '';
         expect(role).toBe('dropdown', 'Expected panel to have the "dropdown" role.');
     });
 
@@ -421,19 +423,19 @@ describe('McDropdown', () => {
         fixture.componentInstance.trigger.open();
         fixture.detectChanges();
 
-        const items = Array.from(overlayContainerElement.querySelectorAll('.mc-dropdown-item'));
+        const items = Array.from(overlayContainerElement.querySelectorAll('[mc-dropdown-item]'));
 
         expect(items.length).toBeGreaterThan(0);
         expect(items.every((item) => item.getAttribute('role') === 'menuitem')).toBe(true);
     });
 
-    it('should be able to set an alternate role on the menu items', () => {
-        const fixture = createComponent(MenuWithCheckboxItems);
+    it('should be able to set an alternate role on the dropdown items', () => {
+        const fixture = createComponent(DropdownWithCheckboxItems);
         fixture.detectChanges();
         fixture.componentInstance.trigger.open();
         fixture.detectChanges();
 
-        const items = Array.from(overlayContainerElement.querySelectorAll('.mc-dropdown-item'));
+        const items = Array.from(overlayContainerElement.querySelectorAll('[mc-dropdown-item]'));
 
         expect(items.length).toBeGreaterThan(0);
         expect(items.every((item) => item.getAttribute('role') === 'menuitemcheckbox')).toBe(true);
@@ -514,33 +516,33 @@ describe('McDropdown', () => {
     }));
 
     it('should switch to keyboard focus when using the keyboard after opening using the mouse', fakeAsync(() => {
-            const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
+        const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
 
-            fixture.detectChanges();
-            fixture.componentInstance.triggerEl.nativeElement.click();
-            fixture.detectChanges();
+        fixture.detectChanges();
+        fixture.componentInstance.triggerEl.nativeElement.click();
+        fixture.detectChanges();
 
-            const panel = document.querySelector(`.${PANEL_CLASS}`)! as HTMLElement;
-            const items: HTMLElement[] =
-                Array.from(panel.querySelectorAll(`.${PANEL_CLASS} [${ITEM_DIRECTIVE}]`));
+        const panel = document.querySelector(PANEL_SELECTOR)! as HTMLElement;
+        const items: HTMLElement[] =
+            Array.from(panel.querySelectorAll(`${PANEL_SELECTOR} ${ITEM_SELECTOR}`));
 
-            items.forEach(patchElementFocus);
+        items.forEach(patchElementFocus);
 
-            tick(500);
-            tick();
-            fixture.detectChanges();
-            expect(items.some((item) => item.classList.contains('cdk-keyboard-focused'))).toBe(false);
+        tick(500);
+        tick();
+        fixture.detectChanges();
+        expect(items.some((item) => item.classList.contains('cdk-keyboard-focused'))).toBe(false);
 
-            dispatchKeyboardEvent(panel, 'keydown', DOWN_ARROW);
-            fixture.detectChanges();
+        dispatchKeyboardEvent(panel, 'keydown', DOWN_ARROW);
+        fixture.detectChanges();
 
-            // Flush due to the additional tick that is necessary for the FocusMonitor.
-            flush();
+        // Flush due to the additional tick that is necessary for the FocusMonitor.
+        flush();
 
-            // We skip to the third item, because the second one is disabled.
-            expect(items[2].classList).toContain('cdk-focused');
-            expect(items[2].classList).toContain('cdk-keyboard-focused');
-        }));
+        // We skip to the third item, because the second one is disabled.
+        expect(items[2].classList).toContain('cdk-focused');
+        expect(items[2].classList).toContain('cdk-keyboard-focused');
+    }));
 
     it('should toggle the aria-expanded attribute on the trigger', () => {
         const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
@@ -573,8 +575,8 @@ describe('McDropdown', () => {
         }).toThrowError(/must pass in an mc-dropdown instance/);
     });
 
-    it('should be able to swap out a menu after the first time it is opened', fakeAsync(() => {
-        const fixture = createComponent(DynamicPanelMenu);
+    it('should be able to swap out a dropdown after the first time it is opened', fakeAsync(() => {
+        const fixture = createComponent(DynamicPanelDropdown);
         fixture.detectChanges();
         expect(overlayContainerElement.textContent).toBe('');
 
@@ -591,7 +593,7 @@ describe('McDropdown', () => {
 
         expect(overlayContainerElement.textContent).toBe('');
 
-        fixture.componentInstance.trigger.dropdown = fixture.componentInstance.secondMenu;
+        fixture.componentInstance.trigger.dropdown = fixture.componentInstance.second;
         fixture.componentInstance.trigger.open();
         fixture.detectChanges();
 
@@ -615,7 +617,7 @@ describe('McDropdown', () => {
             fixture.detectChanges();
             tick(500);
 
-            const panel = overlayContainerElement.querySelector(`.${PANEL_CLASS}`)!;
+            const panel = overlayContainerElement.querySelector(PANEL_SELECTOR)!;
 
             expect(panel).toBeTruthy('Expected panel to be defined');
             expect(panel.textContent).toContain('Another item', 'Expected panel to have correct content');
@@ -640,30 +642,29 @@ describe('McDropdown', () => {
             expect(fixture.componentInstance.items.length).toBe(0);
         }));
 
-        it('should wait for the close animation to finish before considering the panel as closed',
-            fakeAsync(() => {
-                const fixture = createComponent(SimpleLazyDropdown);
-                fixture.detectChanges();
-                const trigger = fixture.componentInstance.trigger;
+        it('should wait for the close animation to finish before considering the panel as closed', fakeAsync(() => {
+            const fixture = createComponent(SimpleLazyDropdown);
+            fixture.detectChanges();
+            const trigger = fixture.componentInstance.trigger;
 
-                expect(trigger.opened).toBe(false, 'Expected dropdown to start off closed');
+            expect(trigger.opened).toBe(false, 'Expected dropdown to start off closed');
 
-                trigger.open();
-                fixture.detectChanges();
-                tick(500);
+            trigger.open();
+            fixture.detectChanges();
+            tick(500);
 
-                expect(trigger.opened).toBe(true, 'Expected dropdown to be open');
+            expect(trigger.opened).toBe(true, 'Expected dropdown to be open');
 
-                trigger.close();
-                fixture.detectChanges();
+            trigger.close();
+            fixture.detectChanges();
 
-                expect(trigger.opened)
-                    .toBe(true, 'Expected dropdown to be considered open while the close animation is running');
-                tick(500);
-                fixture.detectChanges();
+            expect(trigger.opened)
+                .toBe(true, 'Expected dropdown to be considered open while the close animation is running');
+            tick(500);
+            fixture.detectChanges();
 
-                expect(trigger.opened).toBe(false, 'Expected dropdown to be closed');
-            }));
+            expect(trigger.opened).toBe(false, 'Expected dropdown to be closed');
+        }));
 
         it('should focus the first dropdown item when opening a lazy dropdown via keyboard', fakeAsync(() => {
             let zone: MockNgZone;
@@ -683,7 +684,7 @@ describe('McDropdown', () => {
             // Flush due to the additional tick that is necessary for the FocusMonitor.
             flush();
 
-            const item = document.querySelector(`.${PANEL_CLASS} [${ITEM_DIRECTIVE}]`)!;
+            const item = document.querySelector(`${PANEL_SELECTOR} ${ITEM_SELECTOR}`)!;
 
             expect(document.activeElement).toBe(item, 'Expected first item to be focused');
         }));
@@ -696,7 +697,7 @@ describe('McDropdown', () => {
             fixture.detectChanges();
             tick(500);
 
-            let item = overlayContainerElement.querySelector(`.${PANEL_CLASS} [${ITEM_DIRECTIVE}]`)!;
+            let item = overlayContainerElement.querySelector(`${PANEL_SELECTOR} ${ITEM_SELECTOR}`)!;
 
             expect(item.textContent!.trim()).toBe('one');
 
@@ -707,7 +708,7 @@ describe('McDropdown', () => {
             fixture.componentInstance.triggerTwo.open();
             fixture.detectChanges();
             tick(500);
-            item = overlayContainerElement.querySelector(`.${PANEL_CLASS} [${ITEM_DIRECTIVE}]`)!;
+            item = overlayContainerElement.querySelector(`${PANEL_SELECTOR} ${ITEM_SELECTOR}`)!;
 
             expect(item.textContent!.trim()).toBe('two');
         }));
@@ -735,7 +736,7 @@ describe('McDropdown', () => {
             fixture.componentInstance.trigger.open();
             fixture.detectChanges();
 
-            const panel = overlayContainerElement.querySelector(`.${PANEL_CLASS}`) as HTMLElement;
+            const panel = overlayContainerElement.querySelector(PANEL_SELECTOR) as HTMLElement;
 
             expect(panel.classList).toContain('mc-dropdown-before');
             expect(panel.classList).not.toContain('mc-dropdown-after');
@@ -751,7 +752,7 @@ describe('McDropdown', () => {
             fixture.componentInstance.trigger.open();
             fixture.detectChanges();
 
-            const panel = overlayContainerElement.querySelector(`.${PANEL_CLASS}`) as HTMLElement;
+            const panel = overlayContainerElement.querySelector(PANEL_SELECTOR) as HTMLElement;
 
             expect(panel.classList).toContain('mc-dropdown-above');
             expect(panel.classList).not.toContain('mc-dropdown-below');
@@ -773,41 +774,11 @@ describe('McDropdown', () => {
             newFixture.detectChanges();
             newFixture.componentInstance.trigger.open();
             newFixture.detectChanges();
-            const panel = overlayContainerElement.querySelector(`.${PANEL_CLASS}`) as HTMLElement;
+            const panel = overlayContainerElement.querySelector(PANEL_SELECTOR) as HTMLElement;
 
             expect(panel.classList).toContain('mc-dropdown-below');
             expect(panel.classList).toContain('mc-dropdown-after');
         });
-
-        it('should be able to update the position after the first open', () => {
-            trigger.style.position = 'fixed';
-            trigger.style.top = '200px';
-
-            fixture.componentInstance.yPosition = 'above';
-            fixture.detectChanges();
-
-            fixture.componentInstance.trigger.open();
-            fixture.detectChanges();
-
-            let panel = overlayContainerElement.querySelector(`.${PANEL_CLASS}`) as HTMLElement;
-
-            expect(Math.floor(panel.getBoundingClientRect().bottom))
-                .toBe(Math.floor(trigger.getBoundingClientRect().top), 'Expected menu to open above');
-
-            fixture.componentInstance.trigger.close();
-            fixture.detectChanges();
-
-            fixture.componentInstance.yPosition = 'below';
-            fixture.detectChanges();
-
-            fixture.componentInstance.trigger.open();
-            fixture.detectChanges();
-            panel = overlayContainerElement.querySelector(`.${PANEL_CLASS}`) as HTMLElement;
-
-            expect(Math.floor(panel.getBoundingClientRect().top))
-                .toBe(Math.floor(trigger.getBoundingClientRect().bottom), 'Expected menu to open below');
-        });
-
     });
 
     describe('fallback positions', () => {
@@ -830,16 +801,16 @@ describe('McDropdown', () => {
             const overlayRect = overlayPane.getBoundingClientRect();
 
             // In "before" position, the right sides of the overlay and the origin are aligned.
-            // To find the overlay left, subtract the menu width from the origin's right side.
+            // To find the overlay left, subtract the dropdown width from the origin's right side.
             const expectedLeft = triggerRect.right - overlayRect.width;
             expect(Math.floor(overlayRect.left))
                 .toBe(Math.floor(expectedLeft),
-                    `Expected menu to open in "before" position if "after" position wouldn't fit.`);
+                    `Expected dropdown to open in "before" position if "after" position wouldn't fit.`);
 
             // The y-position of the overlay should be unaffected, as it can already fit vertically
             expect(Math.floor(overlayRect.top))
                 .toBe(Math.floor(triggerRect.bottom),
-                    `Expected menu top position to be unchanged if it can fit in the viewport.`);
+                    `Expected dropdown top position to be unchanged if it can fit in the viewport.`);
         });
 
         it('should fall back to "above" mode if "below" mode would not fit on screen', () => {
@@ -860,15 +831,15 @@ describe('McDropdown', () => {
 
             expect(Math.floor(overlayRect.bottom))
                 .toBe(Math.floor(triggerRect.top),
-                    `Expected menu to open in "above" position if "below" position wouldn't fit.`);
+                    `Expected dropdown to open in "above" position if "below" position wouldn't fit.`);
 
             // The x-position of the overlay should be unaffected, as it can already fit horizontally
             expect(Math.floor(overlayRect.left))
                 .toBe(Math.floor(triggerRect.left),
-                    `Expected menu x position to be unchanged if it can fit in the viewport.`);
+                    `Expected dropdown x position to be unchanged if it can fit in the viewport.`);
         });
 
-        it('should re-position menu on both axes if both defaults would not fit', () => {
+        it('should re-position dropdown on both axes if both defaults would not fit', () => {
             const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
             fixture.detectChanges();
             const trigger = fixture.componentInstance.triggerEl.nativeElement;
@@ -889,14 +860,14 @@ describe('McDropdown', () => {
 
             expect(Math.floor(overlayRect.left))
                 .toBe(Math.floor(expectedLeft),
-                    `Expected menu to open in "before" position if "after" position wouldn't fit.`);
+                    `Expected dropdown to open in "before" position if "after" position wouldn't fit.`);
 
             expect(Math.floor(overlayRect.bottom))
                 .toBe(Math.floor(triggerRect.top),
-                    `Expected menu to open in "above" position if "below" position wouldn't fit.`);
+                    `Expected dropdown to open in "above" position if "below" position wouldn't fit.`);
         });
 
-        it('should re-position a menu with custom position set', () => {
+        it('should re-position a dropdown with custom position set', () => {
             const fixture = createComponent(PositionedDropdown);
             fixture.detectChanges();
             const trigger = fixture.componentInstance.triggerEl.nativeElement;
@@ -907,17 +878,17 @@ describe('McDropdown', () => {
             const triggerRect = trigger.getBoundingClientRect();
             const overlayRect = overlayPane.getBoundingClientRect();
 
-            // As designated "before" position won't fit on screen, the menu should fall back
+            // As designated "before" position won't fit on screen, the dropdown should fall back
             // to "after" mode, where the left sides of the overlay and trigger are aligned.
             expect(Math.floor(overlayRect.left))
                 .toBe(Math.floor(triggerRect.left),
-                    `Expected menu to open in "after" position if "before" position wouldn't fit.`);
+                    `Expected dropdown to open in "after" position if "before" position wouldn't fit.`);
 
-            // As designated "above" position won't fit on screen, the menu should fall back
+            // As designated "above" position won't fit on screen, the dropdown should fall back
             // to "below" mode, where the top edges of the overlay and trigger are aligned.
             expect(Math.floor(overlayRect.top))
                 .toBe(Math.floor(triggerRect.bottom),
-                    `Expected menu to open in "below" position if "above" position wouldn't fit.`);
+                    `Expected dropdown to open in "below" position if "above" position wouldn't fit.`);
         });
 
         function getOverlayPane(): HTMLElement {
@@ -927,16 +898,16 @@ describe('McDropdown', () => {
 
     describe('overlapping trigger', () => {
         /**
-         * This test class is used to create components containing a menu.
-         * It provides helpers to reposition the trigger, open the menu,
+         * This test class is used to create components containing a dropdown.
+         * It provides helpers to reposition the trigger, open the dropdown,
          * and access the trigger and overlay positions.
-         * Additionally it can take any inputs for the menu wrapper component.
+         * Additionally it can take any inputs for the dropdown wrapper component.
          *
          * Basic usage:
          * const subject = new OverlapSubject(MyComponent);
          * subject.open();
          */
-        class OverlapSubject<T extends TestableMenu> {
+        class OverlapSubject<T extends TestableDropdown> {
             readonly fixture: ComponentFixture<T>;
             readonly trigger: HTMLElement;
 
@@ -961,8 +932,8 @@ describe('McDropdown', () => {
                 return this.trigger.getBoundingClientRect();
             }
 
-            get menuPanel() {
-                return overlayContainerElement.querySelector(`.${PANEL_CLASS}`);
+            get dropdownPanel() {
+                return overlayContainerElement.querySelector(PANEL_SELECTOR);
             }
 
             private getOverlayPane() {
@@ -970,34 +941,34 @@ describe('McDropdown', () => {
             }
         }
 
-        let subject: OverlapSubject<OverlapMenu>;
+        let subject: OverlapSubject<OverlapDropdown>;
         describe('explicitly overlapping', () => {
             beforeEach(() => {
-                subject = new OverlapSubject(OverlapMenu, {overlapTriggerY: true});
+                subject = new OverlapSubject(OverlapDropdown, {overlapTriggerY: true});
             });
 
             it('positions the overlay below the trigger', () => {
                 subject.open();
 
-                // Since the menu is overlaying the trigger, the overlay top should be the trigger top.
+                // Since the dropdown is overlaying the trigger, the overlay top should be the trigger top.
                 expect(Math.floor(subject.overlayRect.top))
                     .toBe(Math.floor(subject.triggerRect.top),
-                        `Expected menu to open in default "below" position.`);
+                        `Expected dropdown to open in default "below" position.`);
             });
         });
 
         describe('not overlapping', () => {
             beforeEach(() => {
-                subject = new OverlapSubject(OverlapMenu, {overlapTriggerY: false});
+                subject = new OverlapSubject(OverlapDropdown, {overlapTriggerY: false});
             });
 
             it('positions the overlay below the trigger', () => {
                 subject.open();
 
-                // Since the menu is below the trigger, the overlay top should be the trigger bottom.
+                // Since the dropdown is below the trigger, the overlay top should be the trigger bottom.
                 expect(Math.floor(subject.overlayRect.top))
                     .toBe(Math.floor(subject.triggerRect.bottom),
-                        `Expected menu to open directly below the trigger.`);
+                        `Expected dropdown to open directly below the trigger.`);
             });
 
             it('supports above position fall back', () => {
@@ -1007,18 +978,18 @@ describe('McDropdown', () => {
                 subject.trigger.style.bottom = '0';
                 subject.open();
 
-                // Since the menu is above the trigger, the overlay bottom should be the trigger top.
+                // Since the dropdown is above the trigger, the overlay bottom should be the trigger top.
                 expect(Math.floor(subject.overlayRect.bottom))
                     .toBe(Math.floor(subject.triggerRect.top),
-                        `Expected menu to open in "above" position if "below" position wouldn't fit.`);
+                        `Expected dropdown to open in "above" position if "below" position wouldn't fit.`);
             });
 
-            it('repositions the origin to be below, so the menu opens from the trigger', () => {
+            it('repositions the origin to be below, so the dropdown opens from the trigger', () => {
                 subject.open();
                 subject.fixture.detectChanges();
 
-                expect(subject.menuPanel!.classList).toContain('mc-dropdown-below');
-                expect(subject.menuPanel!.classList).not.toContain('mc-dropdown-above');
+                expect(subject.dropdownPanel!.classList).toContain('mc-dropdown-below');
+                expect(subject.dropdownPanel!.classList).not.toContain('mc-dropdown-above');
             });
         });
     });
@@ -1034,7 +1005,7 @@ describe('McDropdown', () => {
         });
 
         it('should emit an event when a dropdown item is clicked', () => {
-            const dropdownItem = overlayContainerElement.querySelector(`[${ITEM_DIRECTIVE}]`) as HTMLElement;
+            const dropdownItem = overlayContainerElement.querySelector(ITEM_SELECTOR) as HTMLElement;
 
             dropdownItem.click();
             fixture.detectChanges();
@@ -1055,7 +1026,7 @@ describe('McDropdown', () => {
         });
 
         it('should emit an event when pressing ESCAPE', () => {
-            const dropdown = overlayContainerElement.querySelector(`.${PANEL_CLASS}`) as HTMLElement;
+            const dropdown = overlayContainerElement.querySelector(PANEL_SELECTOR) as HTMLElement;
 
             dispatchKeyboardEvent(dropdown, 'keydown', ESCAPE);
             fixture.detectChanges();
@@ -1077,12 +1048,12 @@ describe('McDropdown', () => {
         });
     });
 
-    describe('nested menu', () => {
-        let fixture: ComponentFixture<NestedMenu>;
-        let instance: NestedMenu;
+    describe('nested dropdown', () => {
+        let fixture: ComponentFixture<NestedDropdown>;
+        let instance: NestedDropdown;
         let overlay: HTMLElement;
         const compileTestComponent = (direction: Direction = 'ltr') => {
-            fixture = createComponent(NestedMenu, [{
+            fixture = createComponent(NestedDropdown, [{
                 provide: Directionality, useFactory: () => ({value: direction})
             }]);
 
@@ -1091,14 +1062,14 @@ describe('McDropdown', () => {
             overlay = overlayContainerElement;
         };
 
-        it('should set the `triggersSubmenu` flags on the triggers', () => {
+        it('should set the `triggersNestedDropdown` flags on the triggers', () => {
             compileTestComponent();
-            expect(instance.rootTrigger.triggersSubmenu()).toBe(false);
-            expect(instance.levelOneTrigger.triggersSubmenu()).toBe(true);
-            expect(instance.levelTwoTrigger.triggersSubmenu()).toBe(true);
+            expect(instance.rootTrigger.triggersNestedDropdown()).toBe(false);
+            expect(instance.levelOneTrigger.triggersNestedDropdown()).toBe(true);
+            expect(instance.levelTwoTrigger.triggersNestedDropdown()).toBe(true);
         });
 
-        it('should set the `parentMenu` on the sub-menu instances', () => {
+        it('should set the `parentDropdown` on the nested dropdown instances', () => {
             compileTestComponent();
             instance.rootTriggerEl.nativeElement.click();
             fixture.detectChanges();
@@ -1109,12 +1080,12 @@ describe('McDropdown', () => {
             instance.levelTwoTrigger.open();
             fixture.detectChanges();
 
-            expect(instance.rootMenu.parent).toBeFalsy();
-            expect(instance.levelOneMenu.parent).toBe(instance.rootMenu);
-            expect(instance.levelTwoMenu.parent).toBe(instance.levelOneMenu);
+            expect(instance.rootDropdown.parent).toBeFalsy();
+            expect(instance.levelOneDropdown.parent).toBe(instance.rootDropdown);
+            expect(instance.levelTwoDropdown.parent).toBe(instance.levelOneDropdown);
         });
 
-        it('should pass the layout direction the nested menus', () => {
+        it('should pass the layout direction the nested dropdowns', () => {
             compileTestComponent('rtl');
             instance.rootTriggerEl.nativeElement.click();
             fixture.detectChanges();
@@ -1125,26 +1096,26 @@ describe('McDropdown', () => {
             instance.levelTwoTrigger.open();
             fixture.detectChanges();
 
-            expect(instance.rootMenu.direction).toBe('rtl');
-            expect(instance.levelOneMenu.direction).toBe('rtl');
-            expect(instance.levelTwoMenu.direction).toBe('rtl');
+            expect(instance.rootDropdown.direction).toBe('rtl');
+            expect(instance.levelOneDropdown.direction).toBe('rtl');
+            expect(instance.levelTwoDropdown.direction).toBe('rtl');
         });
 
-        it('should emit an event when the hover state of the menu items changes', () => {
+        it('should emit an event when the hover state of the dropdown items changes', () => {
             compileTestComponent();
             instance.rootTrigger.open();
             fixture.detectChanges();
 
             const spy = jasmine.createSpy('hover spy');
-            const subscription = instance.rootMenu._hovered().subscribe(spy);
-            const menuItems = overlay.querySelectorAll('[mc-dropdown-item]');
+            const subscription = instance.rootDropdown._hovered().subscribe(spy);
+            const dropdownItems = overlay.querySelectorAll('[mc-dropdown-item]');
 
-            dispatchMouseEvent(menuItems[0], 'mouseenter');
+            dispatchMouseEvent(dropdownItems[0], 'mouseenter');
             fixture.detectChanges();
 
             expect(spy).toHaveBeenCalledTimes(1);
 
-            dispatchMouseEvent(menuItems[1], 'mouseenter');
+            dispatchMouseEvent(dropdownItems[1], 'mouseenter');
             fixture.detectChanges();
 
             expect(spy).toHaveBeenCalledTimes(2);
@@ -1152,13 +1123,13 @@ describe('McDropdown', () => {
             subscription.unsubscribe();
         });
 
-        it('should toggle a nested menu when its trigger is hovered', fakeAsync(() => {
+        it('should toggle a nested dropdown when its trigger is hovered', fakeAsync(() => {
             compileTestComponent();
             instance.rootTriggerEl.nativeElement.click();
             fixture.detectChanges();
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length).toBe(1, 'Expected one open menu');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length).toBe(1, 'Expected one open dropdown');
 
-            const items = Array.from(overlay.querySelectorAll(`.${PANEL_CLASS} [mc-dropdown-item]`));
+            const items = Array.from(overlay.querySelectorAll(`${PANEL_SELECTOR} ${ITEM_SELECTOR}`));
             const levelOneTrigger = overlay.querySelector('#level-one-trigger')!;
 
             dispatchMouseEvent(levelOneTrigger, 'mouseenter');
@@ -1168,47 +1139,46 @@ describe('McDropdown', () => {
 
             expect(levelOneTrigger.classList)
                 .toContain('mc-dropdown__item_highlighted', 'Expected the trigger to be highlighted');
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length).toBe(2, 'Expected two open menus');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length).toBe(2, 'Expected two open dropdowns');
 
             dispatchMouseEvent(items[items.indexOf(levelOneTrigger) + 1], 'mouseenter');
             fixture.detectChanges();
             tick(500);
 
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length).toBe(1, 'Expected one open menu');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length).toBe(1, 'Expected one open dropdown');
             expect(levelOneTrigger.classList)
                 .not.toContain('mc-dropdown-item-highlighted', 'Expected the trigger to not be highlighted');
         }));
 
-        it('should close all the open sub-menus when the hover state is changed at the root',
-            fakeAsync(() => {
-                compileTestComponent();
-                instance.rootTriggerEl.nativeElement.click();
-                fixture.detectChanges();
+        it('should close all the open nested dropdowns when the hover state is changed at the root', fakeAsync(() => {
+            compileTestComponent();
+            instance.rootTriggerEl.nativeElement.click();
+            fixture.detectChanges();
 
-                const items = Array.from(overlay.querySelectorAll(`.${PANEL_CLASS} [mc-dropdown-item]`));
-                const levelOneTrigger = overlay.querySelector('#level-one-trigger')!;
+            const items = Array.from(overlay.querySelectorAll(`${PANEL_SELECTOR} ${ITEM_SELECTOR}`));
+            const levelOneTrigger = overlay.querySelector('#level-one-trigger')!;
 
-                dispatchMouseEvent(levelOneTrigger, 'mouseenter');
-                fixture.detectChanges();
-                tick();
+            dispatchMouseEvent(levelOneTrigger, 'mouseenter');
+            fixture.detectChanges();
+            tick();
 
-                const levelTwoTrigger = overlay.querySelector('#level-two-trigger')! as HTMLElement;
-                dispatchMouseEvent(levelTwoTrigger, 'mouseenter');
-                fixture.detectChanges();
-                tick();
+            const levelTwoTrigger = overlay.querySelector('#level-two-trigger')! as HTMLElement;
+            dispatchMouseEvent(levelTwoTrigger, 'mouseenter');
+            fixture.detectChanges();
+            tick();
 
-                expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length)
-                    .toBe(3, 'Expected three open menus');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length)
+                .toBe(3, 'Expected three open dropdowns');
 
-                dispatchMouseEvent(items[items.indexOf(levelOneTrigger) + 1], 'mouseenter');
-                fixture.detectChanges();
-                tick(500);
+            dispatchMouseEvent(items[items.indexOf(levelOneTrigger) + 1], 'mouseenter');
+            fixture.detectChanges();
+            tick(500);
 
-                expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length)
-                    .toBe(1, 'Expected one open menu');
-            }));
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length)
+                .toBe(1, 'Expected one open dropdown');
+        }));
 
-        it('should close submenu when hovering over disabled sibling item', fakeAsync(() => {
+        it('should close nested dropdown when hovering over disabled sibling item', fakeAsync(() => {
             compileTestComponent();
             instance.rootTriggerEl.nativeElement.click();
             fixture.detectChanges();
@@ -1220,8 +1190,8 @@ describe('McDropdown', () => {
             fixture.detectChanges();
             tick(500);
 
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length)
-                .toBe(2, 'Expected two open menus');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length)
+                .toBe(2, 'Expected two open dropdowns');
 
             items[1].componentInstance.disabled = true;
             fixture.detectChanges();
@@ -1231,18 +1201,18 @@ describe('McDropdown', () => {
             fixture.detectChanges();
             tick(500);
 
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length)
-                .toBe(1, 'Expected one open menu');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length)
+                .toBe(1, 'Expected one open dropdown');
         }));
 
-        it('should not open submenu when hovering over disabled trigger', fakeAsync(() => {
+        it('should not open nested dropdown when hovering over disabled trigger', fakeAsync(() => {
             compileTestComponent();
             instance.rootTriggerEl.nativeElement.click();
             fixture.detectChanges();
             tick(500);
 
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length)
-                .toBe(1, 'Expected one open menu');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length)
+                .toBe(1, 'Expected one open dropdown');
 
             const item = fixture.debugElement.query(By.directive(McDropdownItem));
 
@@ -1254,90 +1224,90 @@ describe('McDropdown', () => {
             fixture.detectChanges();
             tick(500);
 
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length)
-                .toBe(1, 'Expected to remain at one open menu');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length)
+                .toBe(1, 'Expected to remain at one open dropdown');
         }));
 
 
-        it('should open a nested menu when its trigger is clicked', () => {
+        it('should open a nested dropdown when its trigger is clicked', () => {
             compileTestComponent();
             instance.rootTriggerEl.nativeElement.click();
             fixture.detectChanges();
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length).toBe(1, 'Expected one open menu');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length).toBe(1, 'Expected one open dropdown');
 
             const levelOneTrigger = overlay.querySelector('#level-one-trigger')! as HTMLElement;
 
             levelOneTrigger.click();
             fixture.detectChanges();
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length).toBe(2, 'Expected two open menus');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length).toBe(2, 'Expected two open dropdowns');
 
             levelOneTrigger.click();
             fixture.detectChanges();
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length)
-                .toBe(2, 'Expected repeat clicks not to close the menu.');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length)
+                .toBe(2, 'Expected repeat clicks not to close the dropdown.');
         });
 
-        it('should open and close a nested menu with arrow keys in ltr', fakeAsync(() => {
+        it('should open and close a nested dropdown with arrow keys in ltr', fakeAsync(() => {
             compileTestComponent();
             instance.rootTriggerEl.nativeElement.click();
             fixture.detectChanges();
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length).toBe(1, 'Expected one open menu');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length).toBe(1, 'Expected one open dropdown');
 
             const levelOneTrigger = overlay.querySelector('#level-one-trigger')! as HTMLElement;
 
             dispatchKeyboardEvent(levelOneTrigger, 'keydown', RIGHT_ARROW);
             fixture.detectChanges();
 
-            const panels = overlay.querySelectorAll(`.${PANEL_CLASS}`);
+            const panels = overlay.querySelectorAll(PANEL_SELECTOR);
 
-            expect(panels.length).toBe(2, 'Expected two open menus');
+            expect(panels.length).toBe(2, 'Expected two open dropdowns');
             dispatchKeyboardEvent(panels[1], 'keydown', LEFT_ARROW);
             fixture.detectChanges();
             tick(500);
 
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length).toBe(1);
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length).toBe(1);
         }));
 
-        it('should open and close a nested menu with the arrow keys in rtl', fakeAsync(() => {
+        it('should open and close a nested dropdown with the arrow keys in rtl', fakeAsync(() => {
             compileTestComponent('rtl');
             instance.rootTriggerEl.nativeElement.click();
             fixture.detectChanges();
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length).toBe(1, 'Expected one open menu');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length).toBe(1, 'Expected one open dropdown');
 
             const levelOneTrigger = overlay.querySelector('#level-one-trigger')! as HTMLElement;
 
             dispatchKeyboardEvent(levelOneTrigger, 'keydown', LEFT_ARROW);
             fixture.detectChanges();
 
-            const panels = overlay.querySelectorAll(`.${PANEL_CLASS}`);
+            const panels = overlay.querySelectorAll(PANEL_SELECTOR);
 
-            expect(panels.length).toBe(2, 'Expected two open menus');
+            expect(panels.length).toBe(2, 'Expected two open dropdowns');
             dispatchKeyboardEvent(panels[1], 'keydown', RIGHT_ARROW);
             fixture.detectChanges();
             tick(500);
 
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length).toBe(1);
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length).toBe(1);
         }));
 
-        it('should not do anything with the arrow keys for a top-level menu', () => {
+        it('should not do anything with the arrow keys for a top-level dropdown', () => {
             compileTestComponent();
             instance.rootTriggerEl.nativeElement.click();
             fixture.detectChanges();
 
-            const menu = overlay.querySelector(`.${PANEL_CLASS}`)!;
+            const dropdown = overlay.querySelector(PANEL_SELECTOR)!;
 
-            dispatchKeyboardEvent(menu, 'keydown', RIGHT_ARROW);
+            dispatchKeyboardEvent(dropdown, 'keydown', RIGHT_ARROW);
             fixture.detectChanges();
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length)
-                .toBe(1, 'Expected one menu to remain open');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length)
+                .toBe(1, 'Expected one dropdown to remain open');
 
-            dispatchKeyboardEvent(menu, 'keydown', LEFT_ARROW);
+            dispatchKeyboardEvent(dropdown, 'keydown', LEFT_ARROW);
             fixture.detectChanges();
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length)
-                .toBe(1, 'Expected one menu to remain open');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length)
+                .toBe(1, 'Expected one dropdown to remain open');
         });
 
-        it('should close all of the menus when the backdrop is clicked', fakeAsync(() => {
+        it('should close all of the dropdowns when the backdrop is clicked', fakeAsync(() => {
             compileTestComponent();
             instance.rootTriggerEl.nativeElement.click();
             fixture.detectChanges();
@@ -1348,54 +1318,54 @@ describe('McDropdown', () => {
             instance.levelTwoTrigger.open();
             fixture.detectChanges();
 
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length)
-                .toBe(3, 'Expected three open menus');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length)
+                .toBe(3, 'Expected three open dropdowns');
             expect(overlay.querySelectorAll('.cdk-overlay-backdrop').length)
                 .toBe(1, 'Expected one backdrop element');
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}, .cdk-overlay-backdrop`)[0].classList)
-                .toContain('cdk-overlay-backdrop', 'Expected backdrop to be beneath all of the menus');
+            expect(overlay.querySelectorAll(`${PANEL_SELECTOR}, .cdk-overlay-backdrop`)[0].classList)
+                .toContain('cdk-overlay-backdrop', 'Expected backdrop to be beneath all of the dropdowns');
 
             (overlay.querySelector('.cdk-overlay-backdrop')! as HTMLElement).click();
             fixture.detectChanges();
             tick(500);
 
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length).toBe(0, 'Expected no open menus');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length).toBe(0, 'Expected no open dropdowns');
         }));
 
-        it('should shift focus between the sub-menus', () => {
+        it('should shift focus between the nested dropdowns', () => {
             compileTestComponent();
             instance.rootTrigger.open();
             fixture.detectChanges();
 
-            expect(overlay.querySelector(`.${PANEL_CLASS}`)!.contains(document.activeElement))
-                .toBe(true, 'Expected focus to be inside the root menu');
+            expect(overlay.querySelector(PANEL_SELECTOR)!.contains(document.activeElement))
+                .toBe(true, 'Expected focus to be inside the root dropdown');
 
             instance.levelOneTrigger.open();
             fixture.detectChanges();
 
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`)[1].contains(document.activeElement))
-                .toBe(true, 'Expected focus to be inside the first nested menu');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR)[1].contains(document.activeElement))
+                .toBe(true, 'Expected focus to be inside the first nested dropdown');
 
             instance.levelTwoTrigger.open();
             fixture.detectChanges();
 
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`)[2].contains(document.activeElement))
-                .toBe(true, 'Expected focus to be inside the second nested menu');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR)[2].contains(document.activeElement))
+                .toBe(true, 'Expected focus to be inside the second nested dropdown');
 
             instance.levelTwoTrigger.close();
             fixture.detectChanges();
 
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`)[1].contains(document.activeElement))
-                .toBe(true, 'Expected focus to be back inside the first nested menu');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR)[1].contains(document.activeElement))
+                .toBe(true, 'Expected focus to be back inside the first nested dropdown');
 
             instance.levelOneTrigger.close();
             fixture.detectChanges();
 
-            expect(overlay.querySelector(`.${PANEL_CLASS}`)!.contains(document.activeElement))
-                .toBe(true, 'Expected focus to be back inside the root menu');
+            expect(overlay.querySelector(PANEL_SELECTOR)!.contains(document.activeElement))
+                .toBe(true, 'Expected focus to be back inside the root dropdown');
         });
 
-        it('should position the sub-menu to the right edge of the trigger in ltr', () => {
+        it('should position the nested dropdown to the right edge of the trigger in ltr', () => {
             compileTestComponent();
             instance.rootTriggerEl.nativeElement.style.position = 'fixed';
             instance.rootTriggerEl.nativeElement.style.left = '50px';
@@ -1431,7 +1401,7 @@ describe('McDropdown', () => {
             expect(Math.round(triggerRect.top)).toBe(Math.round(panelRect.top) + NESTED_PANEL_TOP_PADDING);
         });
 
-        it('should position the sub-menu to the left edge of the trigger in rtl', () => {
+        it('should position the nested dropdown to the left edge of the trigger in rtl', () => {
             compileTestComponent('rtl');
             instance.rootTriggerEl.nativeElement.style.position = 'fixed';
             instance.rootTriggerEl.nativeElement.style.left = '50%';
@@ -1469,7 +1439,7 @@ describe('McDropdown', () => {
             expect(Math.round(triggerRect.top)).toBe(Math.round(panelRect.top) + NESTED_PANEL_TOP_PADDING);
         }));
 
-        it('should close all of the menus when an item is clicked', fakeAsync(() => {
+        it('should close all of the dropdowns when an item is clicked', fakeAsync(() => {
             compileTestComponent();
             instance.rootTriggerEl.nativeElement.click();
             fixture.detectChanges();
@@ -1480,18 +1450,18 @@ describe('McDropdown', () => {
             instance.levelTwoTrigger.open();
             fixture.detectChanges();
 
-            const menus = overlay.querySelectorAll(`.${PANEL_CLASS}`);
+            const dropdowns = overlay.querySelectorAll(PANEL_SELECTOR);
 
-            expect(menus.length).toBe(3, 'Expected three open menus');
+            expect(dropdowns.length).toBe(3, 'Expected three open dropdowns');
 
-            (menus[2].querySelector('.mc-dropdown-item')! as HTMLElement).click();
+            (dropdowns[2].querySelector('[mc-dropdown-item]')! as HTMLElement).click();
             fixture.detectChanges();
             tick(500);
 
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length).toBe(0, 'Expected no open menus');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length).toBe(0, 'Expected no open dropdowns');
         }));
 
-        it('should close all of the menus when the user tabs away', fakeAsync(() => {
+        it('should close all of the dropdowns when the user tabs away', fakeAsync(() => {
             compileTestComponent();
             instance.rootTriggerEl.nativeElement.click();
             fixture.detectChanges();
@@ -1502,29 +1472,18 @@ describe('McDropdown', () => {
             instance.levelTwoTrigger.open();
             fixture.detectChanges();
 
-            const menus = overlay.querySelectorAll(`.${PANEL_CLASS}`);
+            const dropdowns = overlay.querySelectorAll(PANEL_SELECTOR);
 
-            expect(menus.length).toBe(3, 'Expected three open menus');
+            expect(dropdowns.length).toBe(3, 'Expected three open dropdowns');
 
-            dispatchKeyboardEvent(menus[menus.length - 1], 'keydown', TAB);
+            dispatchKeyboardEvent(dropdowns[dropdowns.length - 1], 'keydown', TAB);
             fixture.detectChanges();
             tick(500);
 
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length).toBe(0, 'Expected no open menus');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length).toBe(0, 'Expected no open dropdowns');
         }));
 
-        it('should set a class on the menu items that trigger a sub-menu', () => {
-            compileTestComponent();
-            instance.rootTrigger.open();
-            fixture.detectChanges();
-
-            const menuItems = overlay.querySelectorAll('[mc-dropdown-item]');
-
-            expect(menuItems[0].classList).toContain('mc-dropdown-item-submenu-trigger');
-            expect(menuItems[1].classList).not.toContain('mc-dropdown-item-submenu-trigger');
-        });
-
-        it('should close all of the menus when the root is closed programmatically', fakeAsync(() => {
+        it('should close all of the dropdowns when the root is closed programmatically', fakeAsync(() => {
             compileTestComponent();
             instance.rootTrigger.open();
             fixture.detectChanges();
@@ -1535,23 +1494,23 @@ describe('McDropdown', () => {
             instance.levelTwoTrigger.open();
             fixture.detectChanges();
 
-            const menus = overlay.querySelectorAll(`.${PANEL_CLASS}`);
+            const dropdowns = overlay.querySelectorAll(PANEL_SELECTOR);
 
-            expect(menus.length).toBe(3, 'Expected three open menus');
+            expect(dropdowns.length).toBe(3, 'Expected three open dropdowns');
 
             instance.rootTrigger.close();
             fixture.detectChanges();
             tick(500);
 
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length).toBe(0, 'Expected no open menus');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length).toBe(0, 'Expected no open dropdowns');
         }));
 
-        it('should toggle a nested menu when its trigger is added after init', fakeAsync(() => {
+        it('should toggle a nested dropdown when its trigger is added after init', fakeAsync(() => {
             compileTestComponent();
             instance.rootTriggerEl.nativeElement.click();
             fixture.detectChanges();
             tick(500);
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length).toBe(1, 'Expected one open menu');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length).toBe(1, 'Expected one open dropdown');
 
             instance.showLazy = true;
             fixture.detectChanges();
@@ -1565,10 +1524,10 @@ describe('McDropdown', () => {
 
             expect(lazyTrigger.classList)
                 .toContain('mc-dropdown__item_highlighted', 'Expected the trigger to be highlighted');
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length).toBe(2, 'Expected two open menus');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length).toBe(2, 'Expected two open dropdowns');
         }));
 
-        it('should prevent the default mousedown action if the menu item opens a sub-menu', () => {
+        it('should prevent the default mousedown action if the dropdown item opens a nested dropdown', () => {
             compileTestComponent();
             instance.rootTrigger.open();
             fixture.detectChanges();
@@ -1583,7 +1542,7 @@ describe('McDropdown', () => {
         });
 
         it('should handle the items being rendered in a repeater', fakeAsync(() => {
-            const repeaterFixture = createComponent(NestedMenuRepeater);
+            const repeaterFixture = createComponent(NestedDropdownRepeater);
             overlay = overlayContainerElement;
 
             expect(() => repeaterFixture.detectChanges()).not.toThrow();
@@ -1591,47 +1550,47 @@ describe('McDropdown', () => {
             repeaterFixture.componentInstance.rootTriggerEl.nativeElement.click();
             repeaterFixture.detectChanges();
             tick(500);
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length).toBe(1, 'Expected one open menu');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length).toBe(1, 'Expected one open dropdown');
 
             dispatchMouseEvent(overlay.querySelector('.level-one-trigger')!, 'mouseenter');
             repeaterFixture.detectChanges();
             tick(500);
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length).toBe(2, 'Expected two open menus');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length).toBe(2, 'Expected two open dropdowns');
         }));
 
-        it('should be able to trigger the same nested menu from different triggers', fakeAsync(() => {
-            const repeaterFixture = createComponent(NestedMenuRepeater);
+        it('should be able to trigger the same nested dropdown from different triggers', fakeAsync(() => {
+            const repeaterFixture = createComponent(NestedDropdownRepeater);
             overlay = overlayContainerElement;
 
             repeaterFixture.detectChanges();
             repeaterFixture.componentInstance.rootTriggerEl.nativeElement.click();
             repeaterFixture.detectChanges();
             tick(500);
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length).toBe(1, 'Expected one open menu');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length).toBe(1, 'Expected one open dropdown');
 
             const triggers = overlay.querySelectorAll('.level-one-trigger');
 
             dispatchMouseEvent(triggers[0], 'mouseenter');
             repeaterFixture.detectChanges();
             tick(500);
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length).toBe(2, 'Expected two open menus');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length).toBe(2, 'Expected two open dropdowns');
 
             dispatchMouseEvent(triggers[1], 'mouseenter');
             repeaterFixture.detectChanges();
             tick(500);
 
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length).toBe(2, 'Expected two open menus');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length).toBe(2, 'Expected two open dropdowns');
         }));
 
-        it('should close the initial menu if the user moves away while animating', fakeAsync(() => {
-            const repeaterFixture = createComponent(NestedMenuRepeater);
+        it('should close the initial dropdown if the user moves away while animating', fakeAsync(() => {
+            const repeaterFixture = createComponent(NestedDropdownRepeater);
             overlay = overlayContainerElement;
 
             repeaterFixture.detectChanges();
             repeaterFixture.componentInstance.rootTriggerEl.nativeElement.click();
             repeaterFixture.detectChanges();
             tick(500);
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length).toBe(1, 'Expected one open menu');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length).toBe(1, 'Expected one open dropdown');
 
             const triggers = overlay.querySelectorAll('.level-one-trigger');
 
@@ -1642,70 +1601,70 @@ describe('McDropdown', () => {
             repeaterFixture.detectChanges();
             tick(500);
 
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length).toBe(2, 'Expected two open menus');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length).toBe(2, 'Expected two open dropdowns');
         }));
 
-        it('should be able to open a submenu through an item that is not a direct descendant ' +
+        it('should be able to open a nested dropdown through an item that is not a direct descendant ' +
             'of the panel', fakeAsync(() => {
-            const nestedFixture = createComponent(SubmenuDeclaredInsideParentMenu);
+            const nestedFixture = createComponent(NestedDropdownDeclaredInsideParentDropdown);
             overlay = overlayContainerElement;
 
             nestedFixture.detectChanges();
             nestedFixture.componentInstance.rootTriggerEl.nativeElement.click();
             nestedFixture.detectChanges();
             tick(500);
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length)
-                .toBe(1, 'Expected one open menu');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length)
+                .toBe(1, 'Expected one open dropdown');
 
             dispatchMouseEvent(overlay.querySelector('.level-one-trigger')!, 'mouseenter');
             nestedFixture.detectChanges();
             tick(500);
 
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length)
-                .toBe(2, 'Expected two open menus');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length)
+                .toBe(2, 'Expected two open dropdowns');
         }));
 
-        it('should not close when hovering over a menu item inside a sub-menu panel that is declared' +
-            'inside the root menu', fakeAsync(() => {
-            const nestedFixture = createComponent(SubmenuDeclaredInsideParentMenu);
+        it('should not close when hovering over a dropdown item inside a nested dropdown panel that is declared' +
+            'inside the root dropdown', fakeAsync(() => {
+            const nestedFixture = createComponent(NestedDropdownDeclaredInsideParentDropdown);
             overlay = overlayContainerElement;
 
             nestedFixture.detectChanges();
             nestedFixture.componentInstance.rootTriggerEl.nativeElement.click();
             nestedFixture.detectChanges();
             tick(500);
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length)
-                .toBe(1, 'Expected one open menu');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length)
+                .toBe(1, 'Expected one open dropdown');
 
             dispatchMouseEvent(overlay.querySelector('.level-one-trigger')!, 'mouseenter');
             nestedFixture.detectChanges();
             tick(500);
 
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length)
-                .toBe(2, 'Expected two open menus');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length)
+                .toBe(2, 'Expected two open dropdowns');
 
             dispatchMouseEvent(overlay.querySelector('.level-two-item')!, 'mouseenter');
             nestedFixture.detectChanges();
             tick(500);
 
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length)
-                .toBe(2, 'Expected two open menus to remain');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length)
+                .toBe(2, 'Expected two open dropdowns to remain');
         }));
 
-        it('should not re-focus a child menu trigger when hovering another trigger', fakeAsync(() => {
+        it('should not re-focus a child dropdown trigger when hovering another trigger', fakeAsync(() => {
             compileTestComponent();
 
             dispatchFakeEvent(instance.rootTriggerEl.nativeElement, 'mousedown');
             instance.rootTriggerEl.nativeElement.click();
             fixture.detectChanges();
 
-            const items = Array.from(overlay.querySelectorAll(`.${PANEL_CLASS} [mc-dropdown-item]`));
+            const items = Array.from(overlay.querySelectorAll(`${PANEL_SELECTOR} ${ITEM_SELECTOR}`));
             const levelOneTrigger = overlay.querySelector('#level-one-trigger')!;
 
             dispatchMouseEvent(levelOneTrigger, 'mouseenter');
             fixture.detectChanges();
             tick();
-            expect(overlay.querySelectorAll(`.${PANEL_CLASS}`).length).toBe(2, 'Expected two open menus');
+            expect(overlay.querySelectorAll(PANEL_SELECTOR).length).toBe(2, 'Expected two open dropdowns');
 
             dispatchMouseEvent(items[items.indexOf(levelOneTrigger) + 1], 'mouseenter');
             fixture.detectChanges();
@@ -1744,20 +1703,21 @@ describe('McDropdown default overrides', () => {
 
 @Component({
     template: `
-    <button [mcDropdownTriggerFor]="dropdown" #triggerEl>Toggle dropdown</button>
-    <mc-dropdown
-      #dropdown="mcDropdown"
-      class="custom-one custom-two"
-      (closed)="closeCallback($event)"
-      [backdropClass]="backdropClass">
-      <button mc-dropdown-item> Item </button>
-      <button mc-dropdown-item disabled> Disabled </button>
-      <button mc-dropdown-item>
-        <fake-icon>unicorn</fake-icon>
-        Item with an icon
-      </button>
-      <button *ngFor="let item of extraItems" mc-dropdown-item> {{item}} </button>
-    </mc-dropdown>
+        <button [mcDropdownTriggerFor]="dropdown" #triggerEl>Toggle dropdown</button>
+        <mc-dropdown
+            #dropdown="mcDropdown"
+            class="custom-one custom-two"
+            (closed)="closeCallback($event)"
+            [backdropClass]="backdropClass"
+        >
+            <button mc-dropdown-item> Item </button>
+            <button mc-dropdown-item disabled> Disabled </button>
+            <button mc-dropdown-item>
+                <fake-icon>unicorn</fake-icon>
+                Item with an icon
+            </button>
+            <button *ngFor="let item of extraItems" mc-dropdown-item> {{item}} </button>
+        </mc-dropdown>
     `
 })
 class SimpleDropdown {
@@ -1772,10 +1732,10 @@ class SimpleDropdown {
 
 @Component({
     template: `
-    <button [mcDropdownTriggerFor]="dropdown" #triggerEl>Toggle dropdown</button>
-    <mc-dropdown [xPosition]="xPosition" [yPosition]="yPosition" #dropdown="mcDropdown">
-      <button mc-dropdown-item> Positioned Content </button>
-    </mc-dropdown>
+        <button [mcDropdownTriggerFor]="dropdown" #triggerEl>Toggle dropdown</button>
+        <mc-dropdown [xPosition]="xPosition" [yPosition]="yPosition" #dropdown="mcDropdown">
+            <button mc-dropdown-item> Positioned Content </button>
+        </mc-dropdown>
     `
 })
 class PositionedDropdown {
@@ -1785,20 +1745,20 @@ class PositionedDropdown {
     yPosition: DropdownPositionY = 'above';
 }
 
-interface TestableMenu {
+interface TestableDropdown {
     trigger: McDropdownTrigger;
     triggerEl: ElementRef<HTMLElement>;
 }
 
 @Component({
     template: `
-        <button [mcDropdownTriggerFor]="menu" #triggerEl>Toggle menu</button>
-        <mc-dropdown [overlapTriggerY]="overlapTriggerY" #menu="mcDropdown">
+        <button [mcDropdownTriggerFor]="dropdown" #triggerEl>Toggle dropdown</button>
+        <mc-dropdown [overlapTriggerY]="overlapTriggerY" #dropdown="mcDropdown">
             <button mc-dropdown-item> Not overlapped Content</button>
         </mc-dropdown>
     `
 })
-class OverlapMenu implements TestableMenu {
+class OverlapDropdown implements TestableDropdown {
     @Input() overlapTriggerY: boolean;
     @ViewChild(McDropdownTrigger) trigger: McDropdownTrigger;
     @ViewChild('triggerEl') triggerEl: ElementRef<HTMLElement>;
@@ -1808,7 +1768,7 @@ class OverlapMenu implements TestableMenu {
     selector: 'custom-dropdown',
     template: `
         <ng-template>
-      Custom Dropdown header
+            Custom Dropdown header
             <ng-content></ng-content>
         </ng-template>
     `,
@@ -1818,14 +1778,13 @@ class CustomDropdownPanel implements McDropdownPanel {
     direction: Direction;
     xPosition: DropdownPositionX = 'after';
     yPosition: DropdownPositionY = 'below';
-    overlapTriggerX = false;
+    overlapTriggerX = true;
     overlapTriggerY = true;
     parent: McDropdownPanel;
 
     @ViewChild(TemplateRef) templateRef: TemplateRef<any>;
-    @Output() close = new EventEmitter<void | 'click' | 'keydown' | 'tab'>();
+    @Output() closed = new EventEmitter<void | 'click' | 'keydown' | 'tab'>();
     backdropClass: string;
-    closed: EventEmitter<void | 'click' | 'keydown' | 'tab'>;
     hasBackdrop: boolean;
     lazyContent: McDropdownContent;
     focusFirstItem = () => {};
@@ -1839,28 +1798,27 @@ class CustomDropdownPanel implements McDropdownPanel {
 
 @Component({
     template: `
-    <button [mcDropdownTriggerFor]="dropdown">Toggle dropdown</button>
-    <custom-dropdown #dropdown="appCustomDropdown">
-      <button mc-dropdown-item> Custom Content </button>
-    </custom-dropdown>
-  `
+        <button [mcDropdownTriggerFor]="dropdown">Toggle dropdown</button>
+        <custom-dropdown #dropdown="appCustomDropdown">
+            <button mc-dropdown-item> Custom Content </button>
+        </custom-dropdown>
+    `
 })
 class CustomDropdown {
     @ViewChild(McDropdownTrigger) trigger: McDropdownTrigger;
 }
-
 
 @Component({
     template: `
         <button
             [mcDropdownTriggerFor]="root"
             #rootTrigger="mcDropdownTrigger"
-            #rootTriggerEl>Toggle menu
+            #rootTriggerEl>Toggle dropdown
         </button>
 
         <button
             [mcDropdownTriggerFor]="levelTwo"
-            #alternateTrigger="mcDropdownTrigger">Toggle alternate menu
+            #alternateTrigger="mcDropdownTrigger">Toggle alternate dropdown
         </button>
 
         <mc-dropdown #root="mcDropdown" (closed)="rootCloseCallback($event)">
@@ -1901,29 +1859,29 @@ class CustomDropdown {
         </mc-dropdown>
     `
 })
-class NestedMenu {
-    @ViewChild('root') rootMenu: McDropdown;
+class NestedDropdown {
+    @ViewChild('root') rootDropdown: McDropdown;
     @ViewChild('rootTrigger') rootTrigger: McDropdownTrigger;
     @ViewChild('rootTriggerEl') rootTriggerEl: ElementRef<HTMLElement>;
     @ViewChild('alternateTrigger') alternateTrigger: McDropdownTrigger;
-    readonly rootCloseCallback = jasmine.createSpy('root menu closed callback');
+    readonly rootCloseCallback = jasmine.createSpy('root dropdown closed callback');
 
-    @ViewChild('levelOne') levelOneMenu: McDropdown;
+    @ViewChild('levelOne') levelOneDropdown: McDropdown;
     @ViewChild('levelOneTrigger') levelOneTrigger: McDropdownTrigger;
-    readonly levelOneCloseCallback = jasmine.createSpy('level one menu closed callback');
+    readonly levelOneCloseCallback = jasmine.createSpy('level one dropdown closed callback');
 
-    @ViewChild('levelTwo') levelTwoMenu: McDropdown;
+    @ViewChild('levelTwo') levelTwoDropdown: McDropdown;
     @ViewChild('levelTwoTrigger') levelTwoTrigger: McDropdownTrigger;
-    readonly levelTwoCloseCallback = jasmine.createSpy('level one menu closed callback');
+    readonly levelTwoCloseCallback = jasmine.createSpy('level one dropdown closed callback');
 
-    @ViewChild('lazy') lazyMenu: McDropdown;
+    @ViewChild('lazy') lazyDropdown: McDropdown;
     @ViewChild('lazyTrigger') lazyTrigger: McDropdownTrigger;
     showLazy = false;
 }
 
 @Component({
     template: `
-        <button [mcDropdownTriggerFor]="root" #rootTriggerEl>Toggle menu</button>
+        <button [mcDropdownTriggerFor]="root" #rootTriggerEl>Toggle dropdown</button>
         <mc-dropdown #root="mcDropdown">
             <button
                 mc-dropdown-item
@@ -1939,7 +1897,7 @@ class NestedMenu {
         </mc-dropdown>
     `
 })
-class NestedMenuRepeater {
+class NestedDropdownRepeater {
     @ViewChild('rootTriggerEl') rootTriggerEl: ElementRef<HTMLElement>;
     @ViewChild('levelOneTrigger') levelOneTrigger: McDropdownTrigger;
 
@@ -1949,7 +1907,7 @@ class NestedMenuRepeater {
 
 @Component({
     template: `
-        <button [mcDropdownTriggerFor]="root" #rootTriggerEl>Toggle menu</button>
+        <button [mcDropdownTriggerFor]="root" #rootTriggerEl>Toggle dropdown</button>
 
         <mc-dropdown #root="mcDropdown">
             <button mc-dropdown-item class="level-one-trigger" [mcDropdownTriggerFor]="levelOne">One</button>
@@ -1960,7 +1918,7 @@ class NestedMenuRepeater {
         </mc-dropdown>
     `
 })
-class SubmenuDeclaredInsideParentMenu {
+class NestedDropdownDeclaredInsideParentDropdown {
     @ViewChild('rootTriggerEl') rootTriggerEl: ElementRef;
 }
 
@@ -1974,14 +1932,14 @@ class FakeIcon {}
 
 @Component({
     template: `
-    <button [mcDropdownTriggerFor]="dropdown" #triggerEl>Toggle dropdown</button>
-    <mc-dropdown #dropdown="mcDropdown">
-      <ng-template mcDropdownContent>
-        <button mc-dropdown-item>Item</button>
-        <button mc-dropdown-item>Another item</button>
-      </ng-template>
-    </mc-dropdown>
-  `
+        <button [mcDropdownTriggerFor]="dropdown" #triggerEl>Toggle dropdown</button>
+        <mc-dropdown #dropdown="mcDropdown">
+            <ng-template mcDropdownContent>
+                <button mc-dropdown-item>Item</button>
+                <button mc-dropdown-item>Another item</button>
+            </ng-template>
+        </mc-dropdown>
+    `
 })
 class SimpleLazyDropdown {
     @ViewChild(McDropdownTrigger) trigger: McDropdownTrigger;
@@ -1993,19 +1951,21 @@ class SimpleLazyDropdown {
 @Component({
     template: `
         <button
-      [mcDropdownTriggerFor]="dropdown"
-      [mcDropdownTriggerData]="{label: 'one'}"
-      #triggerOne="mcDropdownTrigger">One</button>
-    <button
-      [mcDropdownTriggerFor]="dropdown"
-      [mcDropdownTriggerData]="{label: 'two'}"
-      #triggerTwo="mcDropdownTrigger">Two</button>
-    <mc-dropdown #dropdown="mcDropdown">
-      <ng-template let-label="label" mcDropdownContent>
-        <button mc-dropdown-item>{{label}}</button>
-      </ng-template>
-    </mc-dropdown>
-  `
+            [mcDropdownTriggerFor]="dropdown"
+            [mcDropdownTriggerData]="{label: 'one'}"
+            #triggerOne="mcDropdownTrigger">One
+        </button>
+        <button
+            [mcDropdownTriggerFor]="dropdown"
+            [mcDropdownTriggerData]="{label: 'two'}"
+            #triggerTwo="mcDropdownTrigger">Two
+        </button>
+        <mc-dropdown #dropdown="mcDropdown">
+            <ng-template let-label="label" mcDropdownContent>
+                <button mc-dropdown-item>{{label}}</button>
+            </ng-template>
+        </mc-dropdown>
+    `
 })
 class LazyDropdownWithContext {
     @ViewChild('triggerOne') triggerOne: McDropdownTrigger;
@@ -2015,7 +1975,7 @@ class LazyDropdownWithContext {
 
 @Component({
     template: `
-        <button [mcDropdownTriggerFor]="one">Toggle menu</button>
+        <button [mcDropdownTriggerFor]="one">Toggle dropdown</button>
         <mc-dropdown #one="mcDropdown">
             <button mc-dropdown-item>One</button>
         </mc-dropdown>
@@ -2025,23 +1985,23 @@ class LazyDropdownWithContext {
         </mc-dropdown>
     `
 })
-class DynamicPanelMenu {
+class DynamicPanelDropdown {
     @ViewChild(McDropdownTrigger) trigger: McDropdownTrigger;
-    @ViewChild('one') firstMenu: McDropdown;
-    @ViewChild('two') secondMenu: McDropdown;
+    @ViewChild('one') first: McDropdown;
+    @ViewChild('two') second: McDropdown;
 }
 
 
 @Component({
     template: `
-        <button [mcDropdownTriggerFor]="menu">Toggle menu</button>
+        <button [mcDropdownTriggerFor]="dropdown">Toggle dropdown</button>
 
-        <mc-dropdown #menu="mcDropdown">
+        <mc-dropdown #dropdown="mcDropdown">
             <button mc-dropdown-item role="menuitemcheckbox" aria-checked="true">Checked</button>
             <button mc-dropdown-item role="menuitemcheckbox" aria-checked="false">Not checked</button>
         </mc-dropdown>
     `
 })
-class MenuWithCheckboxItems {
+class DropdownWithCheckboxItems {
     @ViewChild(McDropdownTrigger) trigger: McDropdownTrigger;
 }

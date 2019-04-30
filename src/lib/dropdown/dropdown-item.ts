@@ -47,7 +47,7 @@ export const _McDropdownItemMixinBase: CanDisableCtor & typeof McDropdownItemBas
         <div #content>
             <ng-content></ng-content>
         </div>
-        <i *ngIf="_triggersSubmenu" mc-icon="mc-angle-right-M_16" class="mc-dropdown__trigger"></i>
+        <i *ngIf="_triggersNestedDropdown" mc-icon="mc-angle-right-M_16" class="mc-dropdown__trigger"></i>
     `
 })
 export class McDropdownItem extends _McDropdownItemMixinBase
@@ -66,8 +66,8 @@ export class McDropdownItem extends _McDropdownItemMixinBase
     /** Whether the dropdown item is highlighted. */
     _highlighted: boolean = false;
 
-    /** Whether the dropdown item acts as a trigger for a sub-menu. */
-    _triggersSubmenu: boolean = false;
+    /** Whether the dropdown item acts as a trigger for a nested dropdown. */
+    _triggersNestedDropdown: boolean = false;
 
     constructor(
         private _elementRef: ElementRef<HTMLElement>,

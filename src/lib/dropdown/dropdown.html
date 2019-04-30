@@ -5,7 +5,7 @@
         (keydown)="_handleKeydown($event)"
         (click)="closed.emit('click')"
         [@transformDropdown]="_panelAnimationState"
-        (@transformDropdown.start)="_isAnimating = true"
+        (@transformDropdown.start)="_onAnimationStart($event)"
         (@transformDropdown.done)="_onAnimationDone($event)"
         tabindex="-1"
         role="dropdown">

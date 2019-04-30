@@ -149,7 +149,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
             passiveEventListenerOptions);
 
         if (_dropdownItemInstance) {
-            _dropdownItemInstance._triggersSubmenu = this.triggersSubmenu();
+            _dropdownItemInstance._triggersNestedDropdown = this.triggersNestedDropdown();
         }
     }
 
@@ -176,8 +176,8 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
         return this._opened;
     }
 
-    /** Whether the dropdown triggers a sub-menu or a top-level one. */
-    triggersSubmenu(): boolean {
+    /** Whether the dropdown triggers a nested dropdown or a top-level one. */
+    triggersNestedDropdown(): boolean {
         return !!(this._dropdownItemInstance && this._parent);
     }
 
@@ -199,7 +199,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
         const overlayConfig = overlayRef.getConfig();
 
         this._setPosition(overlayConfig.positionStrategy as FlexibleConnectedPositionStrategy);
-        overlayConfig.hasBackdrop = this.dropdown.hasBackdrop == null ? !this.triggersSubmenu() :
+        overlayConfig.hasBackdrop = this.dropdown.hasBackdrop == null ? !this.triggersNestedDropdown() :
             this.dropdown.hasBackdrop;
         overlayRef.attach(this._getPortal());
 
@@ -276,7 +276,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
      * the dropdown was opened via the keyboard.
      */
     private _init(): void {
-        this.dropdown.parent = this.triggersSubmenu() ? this._parent : undefined;
+        this.dropdown.parent = this.triggersNestedDropdown() ? this._parent : undefined;
         this.dropdown.direction = this.dir;
         this._setIsOpened(true);
         this.dropdown.focusFirstItem(this._openedBy || 'program');
@@ -296,7 +296,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
             // Note that the focus style will show up both for `program` and
             // `keyboard` so we don't have to specify which one it is.
             this.focus();
-        } else if (!this.triggersSubmenu()) {
+        } else if (!this.triggersNestedDropdown()) {
             this.focus(this._openedBy);
         }
 
@@ -309,7 +309,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
         // tslint:disable-next-line:no-void-expression
         this._opened ? this.dropdownOpened.emit() : this.dropdownClosed.emit();
 
-        if (this.triggersSubmenu()) {
+        if (this.triggersNestedDropdown()) {
             this._dropdownItemInstance._highlighted = isOpen;
         }
     }
@@ -394,8 +394,8 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
 
         let offsetY = 0;
 
-        if (this.triggersSubmenu()) {
-            // When the dropdown is a sub-menu, it should always align itself
+        if (this.triggersNestedDropdown()) {
+            // When the dropdown is nested, it should always align itself
             // to the edges of the trigger, instead of overlapping it.
             overlayFallbackX = originX = this.dropdown.xPosition === 'before' ? 'start' : 'end';
             originFallbackX = overlayX = originX === 'end' ? 'start' : 'end';
@@ -457,10 +457,10 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
         // we shouldn't consider the dropdown as opened by mouse in those cases.
         this._openedBy = event.button === 0 ? 'mouse' : null;
 
-        // Since clicking on the trigger won't close the dropdown if it opens a sub-menu,
+        // Since clicking on the trigger won't close the dropdown if it opens a nested dropdown,
         // we should prevent focus from moving onto it via click to avoid the
         // highlight from lingering on the dropdown item.
-        if (this.triggersSubmenu()) {
+        if (this.triggersNestedDropdown()) {
             event.preventDefault();
         }
     }
@@ -473,7 +473,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
             this.open();
         }
 
-        if (this.triggersSubmenu() && (
+        if (this.triggersNestedDropdown() && (
             (keyCode === RIGHT_ARROW && this.dir === 'ltr') ||
             (keyCode === LEFT_ARROW && this.dir === 'rtl'))) {
             this.open();
@@ -482,7 +482,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
 
     /** Handles click events on the trigger. */
     private _handleClick(event: MouseEvent): void {
-        if (this.triggersSubmenu()) {
+        if (this.triggersNestedDropdown()) {
             // Stop event propagation to avoid closing the parent dropdown.
             event.stopPropagation();
             this.open();
@@ -494,12 +494,12 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
     /** Handles the cases where the user hovers over the trigger. */
     private _handleHover() {
         // Subscribe to changes in the hovered item in order to toggle the panel.
-        if (!this.triggersSubmenu()) {
+        if (!this.triggersNestedDropdown()) {
             return;
         }
 
         this._hoverSubscription = this._parent._hovered()
-        // Since we might have multiple competing triggers for the same dropdown (e.g. a sub-menu
+        // Since we might have multiple competing triggers for the same dropdown (e.g. a nested dropdown
         // with different data and triggers), we have to delay it by a tick to ensure that
         // it won't be closed immediately after it is opened.
             .pipe(
