@@ -28,7 +28,6 @@ import { McYearView } from './year-view';
         OverlayModule,
         A11yModule,
         PortalModule,
-        McButtonModule,
         McIconModule
     ],
     exports: [
@@ -42,7 +41,8 @@ import { McYearView } from './year-view';
         McMonthView,
         McYearView,
         McMultiYearView,
-        McCalendarHeader
+        McCalendarHeader,
+        McButtonModule
     ],
     declarations: [
         McCalendar,
