@@ -45,7 +45,7 @@ export class McVerticalNavbar {
     ) {}
 
     toggle() {
-        this.expanded = ! this.expanded;
+        this.expanded = !this.expanded;
         this.cd.markForCheck();
     }
 }

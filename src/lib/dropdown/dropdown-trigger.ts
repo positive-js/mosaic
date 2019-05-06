@@ -69,8 +69,7 @@ const passiveEventListenerOptions = normalizePassiveListenerOptions({passive: tr
         '[attr.aria-expanded]': 'opened || null',
         '(mousedown)': '_handleMousedown($event)',
         '(keydown)': '_handleKeydown($event)',
-        '(click)': '_handleClick($event)',
-        '[class.mc-dropdown-trigger__opened]': '_opened'
+        '(click)': '_handleClick($event)'
     },
     exportAs: 'mcDropdownTrigger'
 })
