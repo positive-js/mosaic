@@ -1,3 +1,21 @@
+# 1.0.0-beta.6 "Informative Polyhedron" (2019-05-07)
+
+
+### Bug Fixes
+
+* **autocomplete:** Autocomplete is not built properly ([#117](https://github.com/positive-js/mosaic/issues/117)) ([e90199d](https://github.com/positive-js/mosaic/commit/e90199d))
+* **button-toggle:** button-toggle does not have type=button in button ([#115](https://github.com/positive-js/mosaic/issues/115)) ([cb254ba](https://github.com/positive-js/mosaic/commit/cb254ba))
+* Datepicker's calendar icon button should be focusable ([#114](https://github.com/positive-js/mosaic/issues/114)) ([5e23732](https://github.com/positive-js/mosaic/commit/5e23732))
+
+
+### Features
+
+* **docs:** UID-20 - updated getting-started doc ([#108](https://github.com/positive-js/mosaic/issues/108)) ([f3b0440](https://github.com/positive-js/mosaic/commit/f3b0440))
+* added Autocomplete and Tags ([#112](https://github.com/positive-js/mosaic/issues/112)) ([3783a05](https://github.com/positive-js/mosaic/commit/3783a05))
+* added Vertical Navigation ([#102](https://github.com/positive-js/mosaic/issues/102)) ([01715a0](https://github.com/positive-js/mosaic/commit/01715a0))
+
+
+
 # 1.0.0-beta.5 "Articulated Entomologist" (2019-04-10)
 
 
