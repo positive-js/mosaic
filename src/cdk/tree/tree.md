@@ -1,6 +1,6 @@
 The `<cdk-tree>` enables developers to build a customized tree experience for structured data. The
 `<cdk-tree>` provides a foundation to build other features such as filtering on top of tree.
-For a Material Design styled tree, see `<mc-tree>` which builds on top of the `<cdk-tree>`.
+`<mc-tree>` builds on top of the `<cdk-tree>`.
 
 There are two types of trees: flat tree and nested Tree. The DOM structures are different for
 these two types of trees.

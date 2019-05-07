@@ -29,7 +29,6 @@ const moment = _rollupMoment || _moment;
 export interface IMcMomentDateAdapterOptions {
     /**
      * Turns the use of utc dates on or off.
-     * Changing this will change how Angular Material components like DatePicker output dates.
      * {@default false}
      */
     useUtc: boolean;

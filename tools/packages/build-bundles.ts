@@ -202,8 +202,8 @@ export class PackageBundler {
      * to the module name format being used in "angular/angular".
      */
     private getAmdModuleName(packageName: string, entryPointName?: string) {
-        // For example, the AMD module name for the "@angular/material-examples" package should be
-        // "ng.materialExamples". We camel-case the package name in case it contains dashes.
+        // For example, the AMD module name for the "@ptsecurity/mosaic-examples" package should be
+        // "ng.mosaicExamples". We camel-case the package name in case it contains dashes.
         let amdModuleName = `ng.${dashCaseToCamelCase(packageName)}`;
 
         if (entryPointName) {

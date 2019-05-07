@@ -47,13 +47,13 @@ export function checkReleasePackage(releasesPath: string, packageName: string): 
     });
 
     // Run output validations for all TypeScript definition files within the release output.
-    typeDefinitions.forEach(filePath => {
+    typeDefinitions.forEach((filePath) => {
         checkTypeDefinitionFile(filePath)
             .forEach((message) => addFailure(message, filePath));
     });
 
-    // Special release validation checks for the "material" release package.
-    if (packageName === 'material') {
+    // Special release validation checks for the "mosaic" release package.
+    if (packageName === 'mosaic') {
         checkMosaicPackage(join(releasesPath, packageName))
             .forEach(addFailure);
     }

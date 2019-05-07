@@ -15,7 +15,7 @@ import { Observable, Subject, Subscription, of as observableOf } from 'rxjs';
 import { Platform, supportsPassiveEventListeners } from '@ptsecurity/cdk/platform';
 
 
-// This is the value used by AngularJS Material. Through trial and error (on iPhone 6S) they found
+// Through trial and error (on iPhone 6S) they found
 // that a value of around 650ms seems appropriate.
 export const TOUCH_BUFFER_MS = 650;
 
