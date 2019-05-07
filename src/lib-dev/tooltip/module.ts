@@ -28,6 +28,7 @@ export class DemoComponent {
     triggerTooltip: boolean = false;
     tooltipPosition: string = 'left';
     title: string = 'Default text';
+    availablePositions: string[] = ['top', 'bottom', 'left', 'right'];
     constructor(){}
 
     toggleTooltip() {
@@ -56,7 +57,9 @@ export class DemoComponent {
     }
 
     updatePosition(pos: string) {
-        this.tooltipPosition = pos;
+        if (this.availablePositions.indexOf(pos) > -1) {
+            this.tooltipPosition = pos;
+        }
     }
 }
 

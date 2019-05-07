@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { fakeAsync, inject, tick, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { OverlayContainer } from '@ptsecurity/cdk/overlay';
-import { dispatchMouseEvent } from '@ptsecurity/cdk/testing';
+import { dispatchMouseEvent, dispatchFakeEvent } from '@ptsecurity/cdk/testing';
 
 import { McTooltip } from './tooltip.component';
 import { McToolTipModule } from './tooltip.module';
@@ -16,7 +16,7 @@ describe('McTooltip', () => {
     beforeEach(fakeAsync(() => {
         TestBed.configureTestingModule({
             imports     : [ McToolTipModule, NoopAnimationsModule ],
-            declarations: [ McTooltipTestWrapperComponent, McTooltipTestNewComponent ]
+            declarations: [ McTooltipTestWrapperComponent, McTooltipTestNewComponent, McTooltipDisabledComponent ]
         });
         TestBed.compileComponents();
     }));
@@ -131,6 +131,33 @@ describe('McTooltip', () => {
             fixture.detectChanges();
         });
     });
+    describe('should support mcTooltipDisabled attribute', () => {
+        beforeEach(() => {
+            fixture = TestBed.createComponent(McTooltipDisabledComponent);
+            component = fixture.componentInstance;
+            fixture.detectChanges();
+        });
+        it('should not show tooltip', fakeAsync(() => {
+            const featureKey = 'DISABLED';
+            const tooltipDirective = (component.disabledDirective);
+            expect(overlayContainerElement.textContent).not.toContain(featureKey);
+            tooltipDirective.show();
+            fixture.detectChanges();
+            tick(410); // tslint:disable-line
+            fixture.detectChanges();
+            expect(overlayContainerElement.textContent).not.toContain(featureKey);
+            tooltipDirective.disabled = false;
+            tooltipDirective.show();
+            fixture.detectChanges();
+            tick(410); // tslint:disable-line
+            fixture.detectChanges();
+            tick(410); // tslint:disable-line
+            tick();
+            fixture.detectChanges();
+            expect(overlayContainerElement.textContent).toContain(featureKey);
+
+        }));
+    });
 });
 @Component({
     selector: 'mc-tooltip-test-new',
@@ -177,4 +204,19 @@ class McTooltipTestWrapperComponent {
     @ViewChild('visibleTrigger') visibleTrigger: ElementRef;
     @ViewChild('mostSimpleTrigger') mostSimpleTrigger: ElementRef;
     @ViewChild('mostSimpleTrigger', { read: McTooltip }) mostSimpleDirective: McTooltip;
+}
+
+@Component({
+    selector: 'mc-tooltip-disabled-wrapper',
+    template: `<span #disabledAttribute
+                     mcTooltip="disabled-text"
+                     mcTitle="DISABLED"
+                     mcTrigger="manual"
+                     mcTooltipDisabled="true">
+        Disabled
+    </span>`
+})
+class McTooltipDisabledComponent {
+    @ViewChild('disabledAttribute') disabledTrigger: ElementRef;
+    @ViewChild('disabledAttribute', { read: McTooltip }) disabledDirective: McTooltip;
 }
