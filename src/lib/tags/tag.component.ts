@@ -372,8 +372,6 @@ export class McTag extends _McTagMixinBase implements IFocusableOption, OnDestro
 
 
 /**
- * Applies proper (click) support and adds styling for use with the Material Design "cancel" icon
- * available at https://material.io/icons/#ic_cancel.
  *
  * Example:
  *

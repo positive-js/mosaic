@@ -1,4 +1,4 @@
-The `mc-tree` provides a Material Design styled tree that can be used to display hierarchy
+The `mc-tree` provides a styled tree that can be used to display hierarchy
 data.
 
 This tree builds on the foundation of the CDK tree and uses a similar interface for its
