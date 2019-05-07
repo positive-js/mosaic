@@ -1,0 +1,14 @@
+{
+    "extends": "../tsconfig.build",
+    "files": [
+        "public-api.ts"
+    ],
+    "angularCompilerOptions": {
+        "annotateForClosureCompiler": true,
+        "strictMetadataEmit": true,
+        "flatModuleOutFile": "index.js",
+        "flatModuleId": "@ptsecurity/mosaic/vertical-navbar",
+        "skipTemplateCodegen": true,
+        "fullTemplateTypeCheck": true
+    }
+}

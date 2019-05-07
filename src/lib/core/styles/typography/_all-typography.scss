@@ -23,6 +23,7 @@
 @import '../../../tooltip/tooltip-theme';
 @import '../../../tree-select/tree-select-theme';
 @import '../../../tree/tree-theme';
+@import '../../../vertical-navbar/vertical-navbar-theme';
 @import '../../option/option-theme';
 
 
@@ -58,4 +59,5 @@
     @include mc-tooltip-typography($config);
     @include mc-tree-select-typography($config);
     @include mc-tree-typography($config);
+    @include mc-vertical-navbar-typography($config);
 }

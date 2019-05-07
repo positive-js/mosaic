@@ -23,7 +23,7 @@ export class McDropdownContent implements OnDestroy {
 
     /** Emits when the dropdown content has been attached. */
     _attached = new Subject<void>();
-    private _portal: TemplatePortal;
+    private _portal: TemplatePortal<any>;
     private _outlet: DomPortalOutlet;
 
     constructor(

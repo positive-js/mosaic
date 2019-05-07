@@ -35,10 +35,9 @@
 
         outline: 0;
 
-        &.cdk-focused {
-            border-color: mc-color($palette, 500);
-            box-shadow: 0 0 0 1px mc-color($palette, 500);
-            z-index: 1;
+        &.cdk-keyboard-focused {
+            outline: 2px solid mc-color($palette, 500);
+            outline-offset: -2px;
 
             > .mc-navbar-item {
                 outline: 0;

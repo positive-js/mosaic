@@ -30,6 +30,7 @@
 @import '../../tooltip/tooltip-theme';
 @import '../../tree-select/tree-select-theme';
 @import '../../tree/tree-theme';
+@import '../../vertical-navbar/vertical-navbar-theme';
 @import '../option/option-theme';
 @import '../visual/panel-theme';
 
@@ -70,4 +71,5 @@
     @include mc-tooltip-theme($theme);
     @include mc-tree-select-theme($theme);
     @include mc-tree-theme($theme);
+    @include mc-vertical-navbar-theme($theme);
 }

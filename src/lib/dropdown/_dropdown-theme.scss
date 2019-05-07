@@ -29,7 +29,7 @@
             background: mc-color($background, hover);
         }
 
-        &.cdk-keyboard-focused {
+        &.cdk-keyboard-focused, &.cdk-program-focused {
             border-color: mc-color($primary);
             box-shadow: inset 0 0 0 1px mc-color($primary);
         }
@@ -40,6 +40,12 @@
 
         .mc-dropdown__item-caption {
             color: mc-color($foreground, less-contrast-text);
+        }
+    }
+
+    .mc-dropdown__item_highlighted {
+        &:not([disabled]) {
+            background: mc-color($background, hover);
         }
     }
 }

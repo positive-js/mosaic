@@ -2,7 +2,9 @@ $mc-dropdown-panel-border-width: 1px !default;
 $mc-dropdown-panel-border-radius: 3px !default;
 
 .mc-dropdown__item {
-    display: block;
+    display: flex;
+    align-items: center;
+    position: relative;
     box-sizing: border-box;
 
     width: 100%;
@@ -21,6 +23,11 @@ $mc-dropdown-panel-border-radius: 3px !default;
     .mc-dropdown__item-caption {
         margin-top: 4px;
     }
+}
+
+.mc-dropdown__trigger {
+    margin-left: auto;
+    padding-left: 16px;
 }
 
 .mc-dropdown__panel {
