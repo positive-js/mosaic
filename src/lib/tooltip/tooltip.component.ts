@@ -261,6 +261,7 @@ export class McTooltip implements OnInit, OnDestroy {
     get disabled(): boolean { return this._disabled; }
     set disabled(value) {
         this._disabled = coerceBooleanProperty(value);
+        this.updateCompValue('mcTooltipDisabled', value);
     }
     private _disabled: boolean = false;
 
@@ -334,6 +335,8 @@ export class McTooltip implements OnInit, OnDestroy {
 
         if (value) {
             this.show();
+        } else {
+            this.hide();
         }
     }
     private _mcVisible: boolean;

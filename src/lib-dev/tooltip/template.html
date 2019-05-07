@@ -30,6 +30,12 @@
                 mcTooltip="PDQL-запрос фильтра содержит ошибки. Uncaught SyntaxError: Unexpected string"
                 mcTrigger="focus"
                 mcPlacement="bottom">bottom</button>
+            <button class="mc-primary"
+                    mc-button
+                    mcTooltip="Обновить"
+                    mcTrigger="focus"
+                    mcPlacement="bottom"
+                    [mcTooltipDisabled]="true">disabled</button>
         </div>
         <div class="flex layout-column layout-align-center-center container-item">
             <span class="mc-title">Hover</span>
@@ -51,6 +57,11 @@
                     mcTooltip="Обновить"
                     mcPlacement="bottom"
                     mcVisible="true">bottom</button>
+            <button class="mc-primary"
+                    mc-button
+                    mcTooltip="Обновить"
+                    mcPlacement="bottom"
+                    [mcTooltipDisabled]="true">disabled</button>
         </div>
     <div class="flex layout-row layout-align-center-center">
         <div class="flex-45 flex-column flex-offset-10">
@@ -64,7 +75,7 @@
                 <input mcInput
                        #positionSource
                        class="mc-textarea_monospace"
-                       [value]="'Some text...'"
+                       [value]="'Add position here.'"
                 />
             </mc-form-field>
 
