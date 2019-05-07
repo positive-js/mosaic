@@ -90,7 +90,8 @@ System.config({
         '@ptsecurity/mosaic/tooltip': 'dist/packages/mosaic/tooltip/index.js',
         '@ptsecurity/mosaic/timepicker': 'dist/packages/mosaic/timepicker/index.js',
         '@ptsecurity/mosaic/tree-select': 'dist/packages/mosaic/tree-select/index.js',
-        '@ptsecurity/mosaic/splitter': 'dist/packages/mosaic/splitter/index.js'
+        '@ptsecurity/mosaic/splitter': 'dist/packages/mosaic/splitter/index.js',
+        '@ptsecurity/mosaic/vertical-navbar': 'dist/packages/mosaic/vertical-navbar/index.js'
     },
     packages: {
         // Set the default extension for the root package, because otherwise the dev-app can't

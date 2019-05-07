@@ -1,0 +1,17 @@
+<nav class="mc-vertical-navbar" [@toggle]="expanded">
+    <div class="mc-vertical-navbar__header-area">
+        <div cdkMonitorElementFocus tabindex="0" class="mc-vertical-navbar__toggle-button"
+             (click)="toggle()"
+             (keydown.space)="toggle()"
+             (keydown.enter)="toggle()"
+        >
+            <i mc-icon="mc-hamburger_32" *ngIf="!expanded"></i>
+            <i mc-icon="mc-close-L_32" *ngIf="expanded"></i>
+        </div>
+        <div cdkMonitorSubtreeFocus *ngIf="expanded">
+            <ng-content select="mc-vertical-navbar-header, a[mc-vertical-navbar-header]"></ng-content>
+        </div>
+    </div>
+
+    <ng-content></ng-content>
+</nav>

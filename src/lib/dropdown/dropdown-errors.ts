@@ -1,3 +1,7 @@
+/**
+ * Throws an exception for the case when dropdown trigger doesn't have a valid mc-dropdown instance
+ * @docs-private
+ */
 export function throwMcDropdownMissingError() {
     throw Error(`mcDropdownTriggerFor: must pass in an mc-dropdown instance.
     Example:

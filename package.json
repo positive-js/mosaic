@@ -22,7 +22,7 @@
         "@angular/elements": "^7.2.1",
         "@angular/forms": "^7.2.1",
         "@angular/platform-browser": "^7.2.1",
-        "@ptsecurity/mosaic-icons": "2.7.1",
+        "@ptsecurity/mosaic-icons": "2.7.2",
         "@webcomponents/custom-elements": "^1.2.1",
         "core-js": "^2.6.0",
         "rxjs": "^6.3.3",
@@ -189,7 +189,8 @@
         "server-dev:tree-select": "npm run server-dev -- --env.component tree-select",
         "server-dev:typography": "npm run server-dev -- --env.component typography",
         "server-dev:tooltip": "npm run server-dev -- --env.component tooltip",
-        "server-dev:timepicker": "npm run server-dev -- --env.component timepicker"
+        "server-dev:timepicker": "npm run server-dev -- --env.component timepicker",
+        "server-dev:vertical-navbar": "npm run server-dev -- --env.component vertical-navbar"
     },
     "husky": {
         "hooks": {
