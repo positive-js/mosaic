@@ -10,7 +10,7 @@ tmp/
 temp/
 
 # Example module file will be auto-generated.
-/src/mosaic-examples/example-module.ts
+/packages/mosaic-examples/example-module.ts
 
 # IDEs
 /.idea

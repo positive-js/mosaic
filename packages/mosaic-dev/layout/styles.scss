@@ -1,0 +1,26 @@
+@import '~@ptsecurity/mosaic-icons/dist/styles/mc-icons';
+
+@import '../../mosaic/core/theming/prebuilt/default-theme';
+@import '../../mosaic/core/visual/prebuilt/default-visual';
+
+
+.mc-layout-header,
+.mc-layout-footer {
+    background: #7dbcea;
+    color: #fff;
+}
+
+.mc-layout-sidebar {
+    background: #3ba0e9;
+    color: #fff;
+}
+
+.mc-layout-content {
+    background: rgba(16, 142, 233, 1);
+    color: #fff;
+    min-height: 120px;
+}
+
+.mc-layout:last-child {
+    margin: 0;
+}

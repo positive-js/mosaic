@@ -24,7 +24,7 @@ const buildConfig = {
     projectVersion: buildVersion,
     angularVersion,
     projectDir: rootDir,
-    packagesDir: join(rootDir, 'src'),
+    packagesDir: join(rootDir, 'packages'),
     outputDir: join(rootDir, 'dist'),
     licenseBanner: buildLicense
 };

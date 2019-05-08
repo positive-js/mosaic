@@ -19,7 +19,7 @@ const typescriptPackage = require('dgeni-packages/typescript');
 
 // Project configuration.
 const projectRootDir = path.resolve(__dirname, '../..');
-const sourceDir = path.resolve(projectRootDir, 'src');
+const sourceDir = path.resolve(projectRootDir, 'packages');
 const outputDir = path.resolve(projectRootDir, 'dist/docs/api');
 const templateDir = path.resolve(__dirname, './templates');
 
@@ -33,7 +33,7 @@ const mosaicDateAdaptersPackages = globSync(path.join(sourceDir, 'mosaic-moment-
     .map(packagePath => path.basename(packagePath));
 
 /** List of Mosaic packages that need to be documented. */
-const mosaicPackages = globSync(path.join(sourceDir, 'lib', '*/'))
+const mosaicPackages = globSync(path.join(sourceDir, 'mosaic', '*/'))
     .map(packagePath => path.basename(packagePath));
 
 
@@ -120,7 +120,7 @@ apiDocsPackage.config((readTypeScriptModules: ReadTypeScriptModules, tsParser: T
     });
 
     mosaicPackages.forEach(packageName => {
-        typescriptPathMap[`@ptsecurity/mosaic/${packageName}`] = [`./lib/${packageName}/index.ts`];
+        typescriptPathMap[`@ptsecurity/mosaic/${packageName}`] = [`./mosaic/${packageName}/index.ts`];
     });
 
     // Add proper path mappings to the TSParser service of Dgeni. This ensures that properties
@@ -133,7 +133,7 @@ apiDocsPackage.config((readTypeScriptModules: ReadTypeScriptModules, tsParser: T
     readTypeScriptModules.sourceFiles = [
         ...cdkPackages.map(packageName => `./cdk/${packageName}/index.ts`),
         ...mosaicDateAdaptersPackages.map(packageName => `./mosaic-moment-adapter/${packageName}/index.ts`),
-        ...mosaicPackages.map(packageName => `./lib/${packageName}/index.ts`)
+        ...mosaicPackages.map(packageName => `./mosaic/${packageName}/index.ts`)
     ];
 });
 

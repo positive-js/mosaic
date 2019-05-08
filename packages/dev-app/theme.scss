@@ -1,0 +1,7 @@
+@import '../mosaic/core/theming/all-theme';
+
+@import '../mosaic/core/theming/prebuilt/default-theme';
+
+.dark-theme {
+    @import '../mosaic/core/theming/prebuilt/dark-theme';
+}

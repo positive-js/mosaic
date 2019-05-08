@@ -95,7 +95,7 @@ task('markdown-docs-mosaic', () => {
         }
     };
 
-    return src(['src/lib/**/!(README).md', 'guides/*.md'])
+    return src(['packages/mosaic/**/!(README).md', 'guides/*.md'])
         .pipe(rename({prefix: 'mosaic-'}))
         .pipe(markdown(markdownOptions))
         .pipe(transform(transformMarkdownFiles))
@@ -104,7 +104,7 @@ task('markdown-docs-mosaic', () => {
 });
 
 task('markdown-docs-cdk', () => {
-    return src(['src/cdk/**/!(README).md'])
+    return src(['packages/cdk/**/!(README).md'])
         .pipe(rename({prefix: 'cdk-'}))
         .pipe(markdown(markdownOptions))
         .pipe(transform(transformMarkdownFiles))
@@ -123,7 +123,7 @@ task('build-highlighted-examples', () => {
         filePath.basename = `${filePath.basename}-${extension}`;
     };
 
-    return src('src/mosaic-examples/**/*.+(html|css|ts)')
+    return src('packages/mosaic-examples/**/*.+(html|css|ts)')
         .pipe(flatten())
         .pipe(rename(renameFile))
         .pipe(highlight())

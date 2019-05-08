@@ -20,7 +20,7 @@ function generateRollupEntryPoints(packageName: string, entryPoints: string[]):
 const cdkSecondaryEntryPoints = getSubdirectoryNames(join(buildConfig.packagesDir, 'cdk'));
 
 /** List of potential secondary entry-points for the package. */
-const mcSecondaryEntryPoints = getSubdirectoryNames(join(buildConfig.packagesDir, 'lib'));
+const mcSecondaryEntryPoints = getSubdirectoryNames(join(buildConfig.packagesDir, 'mosaic'));
 
 /** Object with all cdk entry points in the format of Rollup globals. */
 const rollupCdkEntryPoints = generateRollupEntryPoints('cdk', cdkSecondaryEntryPoints);

@@ -121,7 +121,7 @@ function getDocumentPackageInfo(doc: Document) {
 
     return {
         name: groupName,
-        packageName: pathSegments[0] === 'lib' ? 'mosaic' : pathSegments[0],
+        packageName: pathSegments[0] === 'mosaic',
         entryPointName: pathSegments[1]
     };
 }

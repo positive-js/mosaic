@@ -15,13 +15,13 @@
             "es2015",
             "dom"
         ],
-        "baseUrl": "./src",
+        "baseUrl": "./packages",
         "paths": {
             "@ptsecurity/cdk/*": [
                 "./cdk/*"
             ],
             "@ptsecurity/mosaic/*": [
-                "./lib/*"
+                "./mosaic/*"
             ],
             "@ptsecurity/mosaic-moment-adapter/*": [
                 "./mosaic-moment-adapter/*"
@@ -44,7 +44,7 @@
         ]
     },
     "include": [
-        "src/**/*.ts",
+        "packages/**/*.ts",
         "tools/**/*.ts"
     ],
     "exclude": [

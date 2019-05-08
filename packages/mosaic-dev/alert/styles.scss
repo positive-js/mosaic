@@ -1,0 +1,20 @@
+@import '~@ptsecurity/mosaic-icons/dist/styles/mc-icons';
+@import '../../mosaic/core/visual/prebuilt/default-visual';
+
+@import '../../mosaic/core/theming/prebuilt/default-theme';
+//@import '../../mosaic/core/theming/prebuilt/dark-theme';
+
+@include mosaic-visual();
+
+.mc-column-container {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.mc-alert {
+    margin-bottom: 15px;
+}
+
+.alert-footer {
+    margin-top: 8px;
+}
