@@ -9,7 +9,7 @@ export const mosaicPackage = new BuildPackage('mosaic', [cdkPackage, momentAdapt
 export const examplesPackage = new BuildPackage('mosaic-examples', [mosaicPackage]);
 
 mosaicPackage.exportsSecondaryEntryPointsAtRoot = true;
-mosaicPackage.sourceDir = join(buildConfig.packagesDir, 'lib');
+mosaicPackage.sourceDir = join(buildConfig.packagesDir, 'mosaic');
 
 cdkPackage.copySecondaryEntryPointStylesToRoot = true;
 cdkPackage.hasSchematics = true;

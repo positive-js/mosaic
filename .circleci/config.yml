@@ -64,7 +64,7 @@ jobs:
         <<: *job_defaults
         steps:
             - attach_workspace: *attach_options
-            - run: yarn run build:lib
+            - run: yarn run build:mosaic
             - persist_to_workspace:
                   root: dist
                   paths:
@@ -121,7 +121,7 @@ jobs:
             - *checkout_code
             - *restore_cache
             - run: yarn run build:cdk
-            - run: yarn run build:lib
+            - run: yarn run build:mosaic
             - run: yarn run build:mosaic-moment-adapter
             - run: ./scripts/deploy/publish-artifacts.sh
 

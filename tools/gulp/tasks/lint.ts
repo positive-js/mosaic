@@ -13,7 +13,7 @@ const madge = require('madge');
 
 /** Globs that matchall SCSS or CSS files that should be linted. */
 const styleGlobs = [
-    'src/**/*.+(css|scss)'
+    'packages/**/*.+(css|scss)'
 ];
 
 const tsLintBaseFlags = ['-c', 'tslint.json', '--project', './tsconfig.json'];

@@ -4,8 +4,8 @@ The top-level directory structure:
 
 ```
 ├─ docs ····················· Project documentation & guides
-├─ scripts ·················· public sh scripts
-├─ src ······················ Public packages & source code for components
+├─ scripts ·················· Public sh scripts
+├─ packages ··················Public packages & source code for components
 ├─ tests ···················· Configs for tests
 ├─ tools ···················· infrastructure/build scripts 
 ├─ commitlint.config.js ····· scope-enum declaration
@@ -14,16 +14,16 @@ The top-level directory structure:
 └─ package.json ············· Project config
 ``` 
 
-## src
+## packages
 
 ```
 ├─ cdk ················· component development kit
-├─ lib ················· component source code
-├─ lib-dev ············· dev examples
+├─ mosaic ·············· component source code
+├─ mosaic-dev ·········· dev examples
 └─ mosaic-examples ····· examples for documentation
 ```
 
-### lib/button
+### mosaic/button
 
 ```
 └─ button ···························· component name

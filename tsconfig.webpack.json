@@ -16,13 +16,13 @@
             "es2015",
             "dom"
         ],
-        "baseUrl": "./src",
+        "baseUrl": "./packages",
         "paths": {
             "@ptsecurity/cdk/*": [
                 "./cdk/*"
             ],
             "@ptsecurity/mosaic/*": [
-                "./lib/*"
+                "./mosaic/*"
             ],
             "@ptsecurity/mosaic-moment-adapter/*": [
                 "./mosaic-moment-adapter/*"
@@ -38,18 +38,18 @@
         ]
     },
     "include": [
-        "./src/**/*"
+        "./packages/**/*"
     ],
     "exclude": [
         "node_modules",
         "dist",
         "wallabyTest.ts",
-        "src/**/*.spec.ts",
-        "src/**/*._spec.ts",
-        "src/**/*.e2e.ts",
-        "src/mosaic-examples/**/*.*",
-        "src/cdk/schematics/**/*.*",
-        "src/dev-app/**/*.*"
+        "packages/**/*.spec.ts",
+        "packages/**/*._spec.ts",
+        "packages/**/*.e2e.ts",
+        "packages/mosaic-examples/**/*.*",
+        "packages/cdk/schematics/**/*.*",
+        "packages/dev-app/**/*.*"
     ],
     "angularCompilerOptions": {
         "skipMetadataEmit": true

@@ -38,7 +38,7 @@ module.exports = function (options) {
     };
 
     entryObj[COMPONENT_NAME] = [
-        'lib-dev',
+        'mosaic-dev',
         COMPONENT_NAME,
         'module.ts'
     ].join('/');
@@ -52,7 +52,7 @@ module.exports = function (options) {
 
         resolve: {
             extensions: [ '.ts', '.js' ],
-            modules: [ helpers.root('node_modules'), helpers.root('src') ],
+            modules: [ helpers.root('node_modules'), helpers.root('packages') ],
             plugins: [
                 new TsConfigPathsPlugin({
                     configFileName: './tsconfig.webpack.json'
@@ -107,7 +107,7 @@ module.exports = function (options) {
                         'resolve-url-loader',
                         'sass-loader?sourceMap'
                     ],
-                    include: [ helpers.root('src') ]
+                    include: [ helpers.root('packages') ]
                 },
 
                 {
@@ -160,7 +160,7 @@ module.exports = function (options) {
             new ContextReplacementPlugin(
                 // The (\\|\/) piece accounts for path separators in *nix and Windows
                 /@angular(\\|\/)core(\\|\/)fesm5/,
-                helpers.root('src')
+                helpers.root('packages')
             )
         ],
 

@@ -1,0 +1,20 @@
+//@import '../../mosaic/core/theming/prebuilt/default-theme';
+@import '../../mosaic/core/theming/prebuilt/dark-theme';
+@import '../../mosaic/core/visual/prebuilt/default-visual';
+
+body {
+    margin: 18px;
+}
+
+.example-radio-group {
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.example-radio-button {
+    margin-bottom: 10px;
+}
+
+.example-selected-value {
+    margin: 15px 0;
+}

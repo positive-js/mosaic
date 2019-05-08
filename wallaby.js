@@ -13,8 +13,8 @@ module.exports = function (wallaby) {
 
     const webpackPostprocessor = wallabyWebpack({
         entryPatterns: [
-            'src/wallabyTest.js',
-            'src/**/*spec.js'
+            'packages/wallabyTest.js',
+            'packages/**/*spec.js'
         ],
 
         module: {
@@ -35,13 +35,13 @@ module.exports = function (wallaby) {
         resolve: {
             extensions: ['.js', '.ts'],
             modules: [
-                path.join(wallaby.projectCacheDir, 'src'),
+                path.join(wallaby.projectCacheDir, 'packages'),
                 'node_modules'
             ],
             alias: {
-                '@ptsecurity/cdk': path.join(wallaby.projectCacheDir, 'src/cdk'),
-                '@ptsecurity/mosaic-moment-adapter': path.join(wallaby.projectCacheDir, 'src/mosaic-moment-adapter'),
-                '@ptsecurity/mosaic': path.join(wallaby.projectCacheDir, 'src/lib')
+                '@ptsecurity/cdk': path.join(wallaby.projectCacheDir, 'packages/cdk'),
+                '@ptsecurity/mosaic-moment-adapter': path.join(wallaby.projectCacheDir, 'packages/mosaic-moment-adapter'),
+                '@ptsecurity/mosaic': path.join(wallaby.projectCacheDir, 'packages/mosaic')
             }
         },
         node: {
@@ -54,15 +54,15 @@ module.exports = function (wallaby) {
 
     return {
         files: [
-            { pattern: 'src/wallabyTest.ts', load: false },
-            { pattern: 'src/**/*.+(ts|css|scss|sass|html|json|svg)', load: false },
-            { pattern: 'src/**/*.d.ts', ignore: true },
-            { pattern: 'src/**/*spec.ts', ignore: true }
+            { pattern: 'packages/wallabyTest.ts', load: false },
+            { pattern: 'packages/**/*.+(ts|css|scss|sass|html|json|svg)', load: false },
+            { pattern: 'packages/**/*.d.ts', ignore: true },
+            { pattern: 'packages/**/*spec.ts', ignore: true }
         ],
 
         tests: [
-            { pattern: 'src/**/*.spec.ts', load: false },
-            { pattern: '!src/cdk/schematics/**/*.spec.ts', load: false }
+            { pattern: 'packages/**/*.spec.ts', load: false },
+            { pattern: '!packages/cdk/schematics/**/*.spec.ts', load: false }
         ],
 
         testFramework: 'jasmine',
