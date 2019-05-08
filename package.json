@@ -77,7 +77,7 @@
         "gulp-highlight-files": "^0.0.6",
         "gulp-htmlmin": "^4.0.0",
         "gulp-if": "^2.0.2",
-        "gulp-markdown": "^4.0.0",
+        "gulp-markdown": "^1.2.0",
         "gulp-rename": "^1.4.0",
         "gulp-sass": "^4.0.2",
         "gulp-transform": "^2.0.0",
