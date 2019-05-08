@@ -154,11 +154,13 @@ workflows:
             - build_mosaic:
                   requires:
                       - install
-            - build_dev_app_aot:
-                  requires:
-                      - install
             # 3 Group
             - test_unit:
+                  requires:
+                      - build_cdk
+                      - build_mosaic
+                      - build_mosaic-moment-adapter
+            - build_dev_app_aot:
                   requires:
                       - build_cdk
                       - build_mosaic
