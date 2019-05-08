@@ -115,14 +115,13 @@ jobs:
     snapshot_publish:
         <<: *job_defaults
         steps:
+            - *checkout_code
+            - *restore_cache
+            - *attach_release_output
+            - attach_workspace: *attach_options
             - add_ssh_keys:
                   fingerprints:
                       - "c3:de:eb:9c:82:70:a8:23:f3:4e:92:b8:07:d2:22:df"
-            - *checkout_code
-            - *restore_cache
-            - run: yarn run build:cdk
-            - run: yarn run build:mosaic
-            - run: yarn run build:mosaic-moment-adapter
             - run: ./scripts/deploy/publish-artifacts.sh
 
     docs_publish:
@@ -140,7 +139,9 @@ workflows:
     version: 2
     default_workflow:
         jobs:
+            # 1 Group
             - install
+            # 2 Group
             - validate_licenses:
                   requires:
                       - install
@@ -153,17 +154,16 @@ workflows:
             - build_mosaic:
                   requires:
                       - install
+            - build_dev_app_aot:
+                  requires:
+                      - install
+            # 3 Group
             - test_unit:
                   requires:
                       - build_cdk
                       - build_mosaic
                       - build_mosaic-moment-adapter
-            - build_dev_app_aot:
-                  requires:
-                      - test_unit
-                      - build_cdk
-                      - build_mosaic
-                      - build_mosaic-moment-adapter
+            # 4 Group
             - snapshot_publish:
                   requires:
                       - test_unit
