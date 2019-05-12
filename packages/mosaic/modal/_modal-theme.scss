@@ -45,8 +45,8 @@
     .mc-confirm {
         // todo почему футер внезапно перестал быть футером ?
         .mc-confirm-btns {
+            border-top: 1px solid $inner-border;
             background-color: if($is-dark, transparent, mc-color($second, 60));
-            border-top: 1px solid mc-color($second, 60);
         }
     }
 }
