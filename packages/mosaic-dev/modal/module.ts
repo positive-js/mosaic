@@ -38,10 +38,10 @@ export class ModalDemoComponent {
                 ' or an alert. It will be <b>deleted</b> there too. </br></br>' +
                 'Delete the selected action anyway?',
             mcOkType    : 'error',
-            mcOkText    : 'Yes',
-            mcCancelText: 'No',
+            mcOkText    : 'Delete',
+            mcCancelText: 'Cancel',
             mcWidth     : '480px',
-            mcOnOk      : () => console.log('OK'),
+            mcOnOk      : () => console.log('Delete'),
             mcOnCancel  : () => console.log('Cancel')
         });
     }
@@ -100,7 +100,8 @@ export class ModalDemoComponent {
         let pos = 0;
 
         [ 'create', 'delete', 'success' ].forEach((method) => this.modalService[method]({
-            mcOkText    : 'Yes',
+            mcOkText    : 'Confirm',
+            mcCancelText: 'Cancel',
             mcMask: false,
             mcContent: `Test content: <b>${method}</b>`,
             mcStyle: { position: 'absolute', top: `${pos * 70}px`, left: `${(pos++) * 300}px` }
