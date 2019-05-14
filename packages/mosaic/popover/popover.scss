@@ -11,6 +11,10 @@ $popover-arrow-width: 8px;
 $popover-distance: $popover-arrow-width + 3px;
 $border-size: 1px;
 
+$mc-popover-small-width: 280px;
+$mc-popover-normal-width: 400px;
+$mc-popover-large-width: 640px;
+
 .mc-popover {
     position: relative;
 
@@ -26,6 +30,18 @@ $border-size: 1px;
 
     list-style: none;
     white-space: pre-line;
+}
+
+.mc-popover-small {
+    max-width: $mc-popover-small-width;
+}
+
+.mc-popover-normal {
+    max-width: $mc-popover-normal-width;
+}
+
+.mc-popover-large {
+    max-width: $mc-popover-large-width;
 }
 
 .mc-popover__container {

@@ -56,7 +56,8 @@ import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
     }
 })
 export class McPopoverComponent {
-    positionPrefix = 'mc-popover_placement';
+    positionPrefix: string = 'mc-popover_placement';
+    popoverSizePrefix: string = 'mc-popover-';
     positions: ConnectionPositionPair[] = [ ...EXTENDED_OVERLAY_POSITIONS ];
     showTimerId: number;
     hideTimerId: number;
@@ -99,6 +100,20 @@ export class McPopoverComponent {
     }
     private _mcPlacement: string = 'top';
 
+    @Input('mcPopoverSize')
+    get mcPopoverSize(): string {
+        return this.popoverSize;
+    }
+    set mcPopoverSize(value: string) {
+        console.log('set size component: ', value);
+        if (value !== this.popoverSize) {
+            this.popoverSize = value;
+        } else if (!value) {
+            this.popoverSize = 'normal';
+        }
+    }
+    private popoverSize: string;
+
     @Input('mcPopoverVisible')
     get mcVisible(): boolean {
         return this._mcVisible.value;
@@ -117,7 +132,10 @@ export class McPopoverComponent {
         return this._classList.join(' ');
     }
     set classList(value: string | string[]) {
-        let list: string[] = [`${this.positionPrefix}-${POSITION_CLASS_MAP[this.mcPlacement]}`];
+        let list: string[] = [
+            `${this.positionPrefix}-${POSITION_CLASS_MAP[this.mcPlacement]}`,
+            `${this.popoverSizePrefix}${this.mcPopoverSize}`
+        ];
 
         if (Array.isArray(value)) {
             list = value;
@@ -344,6 +362,20 @@ export class McPopover implements OnInit, OnDestroy {
     }
     private _mcTrigger: string = 'hover';
 
+    @Input('mcPopoverSize')
+    get mcPopoverSize(): string {
+        return this.popoverSize;
+    }
+    set mcPopoverSize(value: string) {
+        if (value && (value === 'small' || value === 'normal' || value === 'large')) {
+            this.popoverSize = value;
+            this.updateCompValue('mcPopoverSize', value);
+        } else {
+            this.popoverSize = 'normal';
+        }
+    }
+    private popoverSize: string = 'normal';
+
     @Input('mcPopoverPlacement')
     get mcPlacement(): string {
         return this._mcPlacement;
@@ -391,6 +423,16 @@ export class McPopover implements OnInit, OnDestroy {
 
     get isParentDisabled(): boolean {
         return this.parentDisabled;
+    }
+
+    get isSmallPopover(): boolean {
+        return this.mcPopoverSize === 'small';
+    }
+    get isDefaultPopover(): boolean {
+        return this.mcPopoverSize === 'normal';
+    }
+    get isLargePopover(): boolean {
+        return this.mcPopoverSize === 'large';
     }
 
     private manualListeners = new Map<string, EventListenerOrEventListenerObject>();
@@ -567,6 +609,7 @@ export class McPopover implements OnInit, OnDestroy {
                 this.isDynamicPopover = true;
                 const properties = [
                     'mcPlacement',
+                    'mcPopoverSize',
                     'mcTrigger',
                     'mcPopoverDisabled',
                     'mcMouseEnterDelay',
