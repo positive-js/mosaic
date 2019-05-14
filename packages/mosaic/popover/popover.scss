@@ -33,15 +33,21 @@ $mc-popover-large-width: 640px;
 }
 
 .mc-popover-small {
-    max-width: $mc-popover-small-width;
+    .mc-popover {
+        max-width: $mc-popover-small-width;
+    }
 }
 
 .mc-popover-normal {
-    max-width: $mc-popover-normal-width;
+    .mc-popover {
+        max-width: $mc-popover-normal-width;
+    }
 }
 
 .mc-popover-large {
-    max-width: $mc-popover-large-width;
+    .mc-popover {
+        max-width: $mc-popover-large-width;
+    }
 }
 
 .mc-popover__container {

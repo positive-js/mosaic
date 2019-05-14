@@ -52,12 +52,14 @@ import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '(body:click)': 'this.handleBodyInteraction($event)'
+        '(body:click)': 'handleBodyInteraction($event)',
+        '[class.mc-popover-small]': 'isSmallPopover',
+        '[class.mc-popover-normal]': 'isNormalPopover',
+        '[class.mc-popover-large]': 'isLargePopover'
     }
 })
 export class McPopoverComponent {
     positionPrefix: string = 'mc-popover_placement';
-    popoverSizePrefix: string = 'mc-popover-';
     positions: ConnectionPositionPair[] = [ ...EXTENDED_OVERLAY_POSITIONS ];
     showTimerId: number;
     hideTimerId: number;
@@ -105,7 +107,6 @@ export class McPopoverComponent {
         return this.popoverSize;
     }
     set mcPopoverSize(value: string) {
-        console.log('set size component: ', value);
         if (value !== this.popoverSize) {
             this.popoverSize = value;
         } else if (!value) {
@@ -133,8 +134,7 @@ export class McPopoverComponent {
     }
     set classList(value: string | string[]) {
         let list: string[] = [
-            `${this.positionPrefix}-${POSITION_CLASS_MAP[this.mcPlacement]}`,
-            `${this.popoverSizePrefix}${this.mcPopoverSize}`
+            `${this.positionPrefix}-${POSITION_CLASS_MAP[this.mcPlacement]}`
         ];
 
         if (Array.isArray(value)) {
@@ -146,6 +146,18 @@ export class McPopoverComponent {
         this._classList = list;
     }
     private _classList: string[] = [];
+
+    get isSmallPopover(): boolean {
+        return this.mcPopoverSize === 'small';
+    }
+
+    get isNormalPopover(): boolean {
+        return this.mcPopoverSize === 'normal';
+    }
+
+    get isLargePopover(): boolean {
+        return this.mcPopoverSize === 'large';
+    }
 
     /** Subject for notifying that the popover has been hidden from the view */
     private readonly onHideSubject: Subject<any> = new Subject();
@@ -423,16 +435,6 @@ export class McPopover implements OnInit, OnDestroy {
 
     get isParentDisabled(): boolean {
         return this.parentDisabled;
-    }
-
-    get isSmallPopover(): boolean {
-        return this.mcPopoverSize === 'small';
-    }
-    get isDefaultPopover(): boolean {
-        return this.mcPopoverSize === 'normal';
-    }
-    get isLargePopover(): boolean {
-        return this.mcPopoverSize === 'large';
     }
 
     private manualListeners = new Map<string, EventListenerOrEventListenerObject>();
