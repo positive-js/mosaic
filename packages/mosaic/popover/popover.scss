@@ -78,25 +78,33 @@ $mc-popover-large-width: 640px;
 .mc-popover_placement-top,
 .mc-popover_placement-top-left,
 .mc-popover_placement-top-right{
-    padding-bottom: $popover-distance;
+    .mc-popover {
+        padding-bottom: $popover-distance;
+    }
 }
 
 .mc-popover_placement-right,
 .mc-popover_placement-right-top,
 .mc-popover_placement-right-bottom {
-    padding-left: $popover-distance;
+    .mc-popover {
+        padding-left: $popover-distance;
+    }
 }
 
 .mc-popover_placement-bottom,
 .mc-popover_placement-bottom-left,
 .mc-popover_placement-bottom-right {
-    padding-top: $popover-distance;
+    .mc-popover {
+        padding-top: $popover-distance;
+    }
 }
 
 .mc-popover_placement-left,
 .mc-popover_placement-left-top,
 .mc-popover_placement-left-bottom {
-    padding-right: $popover-distance;
+    .mc-popover {
+        padding-right: $popover-distance;
+    }
 }
 
 .mc-popover__arrow {

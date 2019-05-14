@@ -55,7 +55,19 @@ import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
         '(body:click)': 'handleBodyInteraction($event)',
         '[class.mc-popover-small]': 'isSmallPopover',
         '[class.mc-popover-normal]': 'isNormalPopover',
-        '[class.mc-popover-large]': 'isLargePopover'
+        '[class.mc-popover-large]': 'isLargePopover',
+        '[class.mc-popover_placement-top]': 'isPlacementTop',
+        '[class.mc-popover_placement-top-left]': 'isPlacementTopLeft',
+        '[class.mc-popover_placement-top-right]': 'isPlacementTopRight',
+        '[class.mc-popover_placement-right]': 'isPlacementRight',
+        '[class.mc-popover_placement-right-top]': 'isPlacementRightTop',
+        '[class.mc-popover_placement-right-bottom]': 'isPlacementRightBottom',
+        '[class.mc-popover_placement-left]': 'isPlacementLeft',
+        '[class.mc-popover_placement-left-top]': 'isPlacementLeftTop',
+        '[class.mc-popover_placement-left-bottom]': 'isPlacementLeftBottom',
+        '[class.mc-popover_placement-bottom]': 'isPlacementBottom',
+        '[class.mc-popover_placement-bottom-left]': 'isPlacementBottomLeft',
+        '[class.mc-popover_placement-bottom-right]': 'isPlacementBottomRight'
     }
 })
 export class McPopoverComponent {
@@ -133,9 +145,7 @@ export class McPopoverComponent {
         return this._classList.join(' ');
     }
     set classList(value: string | string[]) {
-        let list: string[] = [
-            `${this.positionPrefix}-${POSITION_CLASS_MAP[this.mcPlacement]}`
-        ];
+        let list: string[] = [];
 
         if (Array.isArray(value)) {
             list = value;
@@ -147,6 +157,7 @@ export class McPopoverComponent {
     }
     private _classList: string[] = [];
 
+    /** Getters for popover size css classes */
     get isSmallPopover(): boolean {
         return this.mcPopoverSize === 'small';
     }
@@ -157,6 +168,55 @@ export class McPopoverComponent {
 
     get isLargePopover(): boolean {
         return this.mcPopoverSize === 'large';
+    }
+
+    /** Getters for placement css classes */
+    get isPlacementTop(): boolean {
+        return this.mcPlacement === 'top';
+    }
+
+    get isPlacementTopLeft(): boolean {
+        return this.mcPlacement === 'topLeft';
+    }
+
+    get isPlacementTopRight(): boolean {
+        return this.mcPlacement === 'topRight';
+    }
+
+    get isPlacementRight(): boolean {
+        return this.mcPlacement === 'right';
+    }
+
+    get isPlacementRightTop(): boolean {
+        return this.mcPlacement === 'rightTop';
+    }
+
+    get isPlacementRightBottom(): boolean {
+        return this.mcPlacement === 'rightBottom';
+    }
+
+    get isPlacementLeft(): boolean {
+        return this.mcPlacement === 'left';
+    }
+
+    get isPlacementLeftTop(): boolean {
+        return this.mcPlacement === 'leftTop';
+    }
+
+    get isPlacementLeftBottom(): boolean {
+        return this.mcPlacement === 'leftBottom';
+    }
+
+    get isPlacementBottom(): boolean {
+        return this.mcPlacement === 'bottom';
+    }
+
+    get isPlacementBottomLeft(): boolean {
+        return this.mcPlacement === 'bottomLeft';
+    }
+
+    get isPlacementBottomRight(): boolean {
+        return this.mcPlacement === 'bottomRight';
     }
 
     /** Subject for notifying that the popover has been hidden from the view */
