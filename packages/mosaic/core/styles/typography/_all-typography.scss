@@ -13,6 +13,7 @@
 @import '../../../list/list-theme';
 @import '../../../modal/modal-theme';
 @import '../../../navbar/navbar-theme';
+@import '../../../popover/popover-theme';
 @import '../../../radio/radio-theme';
 @import '../../../select/select-theme';
 @import '../../../sidepanel/sidepanel-theme';
@@ -49,6 +50,7 @@
     @include mc-modal-typography($config);
     @include mc-navbar-typography($config);
     @include mc-option-typography($config);
+    @include mc-popover-typography($config);
     @include mc-radio-typography($config);
     @include mc-select-typography($config);
     @include mc-sidepanel-typography($config);
