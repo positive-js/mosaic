@@ -27,6 +27,14 @@ $mc-calendar-weekday-table-font-size: 11px !default;
 
     $is-dark: map-get($theme, is-dark);
 
+    .mc-calendar {
+        border: {
+            color: mc-color($second);
+            width: 1px;
+            style: solid;
+        }
+    }
+
     .mc-calendar__table-header {
         color: mc-color($second, 400);
     }
