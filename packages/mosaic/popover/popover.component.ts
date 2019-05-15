@@ -317,14 +317,12 @@ const VIEWPORT_MARGIN: number = 8;
     host: {
         '(keydown)': 'handleKeydown($event)',
         '(touchend)': 'handleTouchend()',
-        '[class.mc-popover_open]': 'isOpen',
-        '[class.disabled]': 'isParentDisabled'
+        '[class.mc-popover_open]': 'isOpen'
     }
 })
 export class McPopover implements OnInit, OnDestroy {
     isPopoverOpen: boolean = false;
     isDynamicPopover = false;
-    parentDisabled: boolean = false;
     overlayRef: OverlayRef | null;
     portal: ComponentPortal<McPopoverComponent>;
     availablePositions: any;
@@ -478,10 +476,6 @@ export class McPopover implements OnInit, OnDestroy {
         return this.isPopoverOpen;
     }
 
-    get isParentDisabled(): boolean {
-        return this.parentDisabled;
-    }
-
     private manualListeners = new Map<string, EventListenerOrEventListenerObject>();
     private readonly destroyed = new Subject<void>();
 
@@ -572,22 +566,6 @@ export class McPopover implements OnInit, OnDestroy {
         }
     }
 
-    handlePositioningUpdate() {
-        if (!this.overlayRef) {
-            this.overlayRef = this.createOverlay();
-        }
-        if (this.mcPlacement === 'right' ||
-            this.mcPlacement === 'left') {
-            const pos =
-                (this.overlayRef.overlayElement.clientHeight -
-                    this.hostView.element.nativeElement.clientHeight) / 2; // tslint:disable-line
-            const currentContainer = this.overlayRef.overlayElement.style.top || '0px';
-            this.overlayRef.overlayElement.style.top =
-                `${parseInt(currentContainer.split('px')[0], 10) + pos - 1}px`;
-            // TODO: обновлять положение стрелки\указателя\"дятла"
-        }
-    }
-
     // tslint:disable-next-line:no-any
     updateCompValue(key: string, value: any): void {
         if (this.isDynamicPopover && value) {
@@ -658,7 +636,6 @@ export class McPopover implements OnInit, OnDestroy {
                     'mcPlacement',
                     'mcPopoverSize',
                     'mcTrigger',
-                    'mcPopoverDisabled',
                     'mcMouseEnterDelay',
                     'mcMouseLeaveDelay',
                     'classList',
