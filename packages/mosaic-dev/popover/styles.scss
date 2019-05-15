@@ -17,9 +17,11 @@ app {
     height: 100%;
     width: 100%;
     display: flex;
+    flex: 1 1 100%;
     flex-flow: column;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
+    padding: 0 10%;
 }
 
 .popover-485 {
@@ -29,6 +31,14 @@ app {
 
 button.step {
     display: inline-block;
-    margin: 0 1%;
-    width: 48%;
+    width: 30%;
+}
+
+.trigger-button {
+    width: 120px;
+    margin: 15px;
+}
+
+button.with-margin {
+    margin: 0 5%;
 }

@@ -71,7 +71,6 @@ import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
     }
 })
 export class McPopoverComponent {
-    positionPrefix: string = 'mc-popover_placement';
     positions: ConnectionPositionPair[] = [ ...EXTENDED_OVERLAY_POSITIONS ];
     showTimerId: number;
     hideTimerId: number;
@@ -311,20 +310,6 @@ export function getMcPopoverInvalidPositionError(position: string) {
 }
 
 const VIEWPORT_MARGIN: number = 8;
-const POSITION_CLASS_MAP = {
-    top: 'top',
-    topLeft: 'top-left',
-    topRight: 'top-right',
-    left: 'left',
-    leftTop: 'left-top',
-    leftBottom: 'left-bottom',
-    bottom: 'bottom',
-    bottomLeft: 'bottom-left',
-    bottomRight: 'bottom-right',
-    right: 'right',
-    rightTop: 'right-top',
-    rightBottom: 'right-bottom'
-};
 
 @Directive({
     selector: '[mcPopover]',
