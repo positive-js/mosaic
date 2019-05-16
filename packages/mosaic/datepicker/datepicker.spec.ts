@@ -95,6 +95,18 @@ describe('McDatepicker', () => {
                 flush();
             }));
 
+            it('should focus input after close', fakeAsync(() => {
+                testComponent.datepicker.open();
+                fixture.detectChanges();
+
+                testComponent.datepicker.close();
+                fixture.detectChanges();
+
+                flush();
+
+                expect(document.activeElement).toBe(testComponent.datepicker.datepickerInput.elementRef.nativeElement);
+            }));
+
             it('open non-touch should open popup', () => {
                 expect(document.querySelector('.cdk-overlay-pane.mc-datepicker__popup')).toBeNull();
 
@@ -1228,12 +1240,6 @@ describe('McDatepicker', () => {
             }));
 
             it('should not reopen if the browser fires the focus event asynchronously', fakeAsync(() => {
-                // Stub out the real focus method so we can call it reliably.
-                spyOn(input, 'focus').and.callFake(() => {
-                    // Dispatch the event handler async to simulate the IE11 behavior.
-                    Promise.resolve().then(() => dispatchFakeEvent(input, 'focus'));
-                });
-
                 // Open initially by focusing.
                 input.focus();
                 fixture.detectChanges();
