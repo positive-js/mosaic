@@ -53,8 +53,7 @@ export class DemoComponent {
         this.isPopoverVisibleBottom = !this.isPopoverVisibleBottom;
     }
 
-    changePopoverVisibilityBottomRight(event) {
-        event.stopPropagation();
+    changePopoverVisibilityBottomRight() {
         this.isPopoverVisibleBottomRight = !this.isPopoverVisibleBottomRight;
     }
 

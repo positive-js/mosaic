@@ -1,3 +1,4 @@
+import { AnimationEvent } from '@angular/animations';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -35,47 +36,37 @@ import {
 } from '@ptsecurity/cdk/overlay';
 import { ComponentPortal } from '@ptsecurity/cdk/portal';
 import {
-    fadeAnimation,
     EXTENDED_OVERLAY_POSITIONS,
-    POSITION_MAP
+    POSITION_MAP,
+    POSITION_TO_CSS_MAP
 } from '@ptsecurity/mosaic/core';
+import { mcPopoverAnimations } from '@ptsecurity/mosaic/popover/popover-animations';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
 
+export type PopoverVisibility = 'initial' | 'visible' | 'hidden';
+
 @Component({
     selector: 'mc-popover',
-    animations: [ fadeAnimation ],
     templateUrl: './popover.component.html',
     preserveWhitespaces: false,
     styleUrls: ['./popover.css'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [mcPopoverAnimations.popoverState],
     host: {
-        '(body:click)': 'handleBodyInteraction($event)',
-        '[class.mc-popover-small]': 'isSmallPopover',
-        '[class.mc-popover-normal]': 'isNormalPopover',
-        '[class.mc-popover-large]': 'isLargePopover',
-        '[class.mc-popover_placement-top]': 'isPlacementTop',
-        '[class.mc-popover_placement-top-left]': 'isPlacementTopLeft',
-        '[class.mc-popover_placement-top-right]': 'isPlacementTopRight',
-        '[class.mc-popover_placement-right]': 'isPlacementRight',
-        '[class.mc-popover_placement-right-top]': 'isPlacementRightTop',
-        '[class.mc-popover_placement-right-bottom]': 'isPlacementRightBottom',
-        '[class.mc-popover_placement-left]': 'isPlacementLeft',
-        '[class.mc-popover_placement-left-top]': 'isPlacementLeftTop',
-        '[class.mc-popover_placement-left-bottom]': 'isPlacementLeftBottom',
-        '[class.mc-popover_placement-bottom]': 'isPlacementBottom',
-        '[class.mc-popover_placement-bottom-left]': 'isPlacementBottomLeft',
-        '[class.mc-popover_placement-bottom-right]': 'isPlacementBottomRight'
+        '[class]': 'getCssClassesList',
+        '(body:click)': 'handleBodyInteraction()'
     }
 })
 export class McPopoverComponent {
     positions: ConnectionPositionPair[] = [ ...EXTENDED_OVERLAY_POSITIONS ];
-    showTimerId: number;
-    hideTimerId: number;
-    isPopoverOpen: boolean = false;
+    showTimerId: number | null;
+    hideTimerId: number | null;
     availablePositions: any;
+    popoverVisibility: PopoverVisibility = 'initial';
+    closeOnInteraction: boolean = false;
     $visible: Observable<boolean>;
 
     @Output('mcPopoverVisibleChange') mcVisibleChange: EventEmitter<boolean> = new EventEmitter();
@@ -156,72 +147,18 @@ export class McPopoverComponent {
     }
     private _classList: string[] = [];
 
-    /** Getters for popover size css classes */
-    get isSmallPopover(): boolean {
-        return this.mcPopoverSize === 'small';
+    get getCssClassesList(): string {
+        return `${this.classList} mc-popover-${this.mcPopoverSize} mc-popover_placement-${this.getPlacementClass}`;
     }
 
-    get isNormalPopover(): boolean {
-        return this.mcPopoverSize === 'normal';
-    }
-
-    get isLargePopover(): boolean {
-        return this.mcPopoverSize === 'large';
-    }
-
-    /** Getters for placement css classes */
-    get isPlacementTop(): boolean {
-        return this.mcPlacement === 'top';
-    }
-
-    get isPlacementTopLeft(): boolean {
-        return this.mcPlacement === 'topLeft';
-    }
-
-    get isPlacementTopRight(): boolean {
-        return this.mcPlacement === 'topRight';
-    }
-
-    get isPlacementRight(): boolean {
-        return this.mcPlacement === 'right';
-    }
-
-    get isPlacementRightTop(): boolean {
-        return this.mcPlacement === 'rightTop';
-    }
-
-    get isPlacementRightBottom(): boolean {
-        return this.mcPlacement === 'rightBottom';
-    }
-
-    get isPlacementLeft(): boolean {
-        return this.mcPlacement === 'left';
-    }
-
-    get isPlacementLeftTop(): boolean {
-        return this.mcPlacement === 'leftTop';
-    }
-
-    get isPlacementLeftBottom(): boolean {
-        return this.mcPlacement === 'leftBottom';
-    }
-
-    get isPlacementBottom(): boolean {
-        return this.mcPlacement === 'bottom';
-    }
-
-    get isPlacementBottomLeft(): boolean {
-        return this.mcPlacement === 'bottomLeft';
-    }
-
-    get isPlacementBottomRight(): boolean {
-        return this.mcPlacement === 'bottomRight';
+    get getPlacementClass(): string {
+        return POSITION_TO_CSS_MAP[this.mcPlacement];
     }
 
     /** Subject for notifying that the popover has been hidden from the view */
     private readonly onHideSubject: Subject<any> = new Subject();
 
-    constructor(public changeDetectorRef: ChangeDetectorRef, private componentElementRef: ElementRef) {
+    constructor(public changeDetectorRef: ChangeDetectorRef, public componentElementRef: ElementRef) {
         this.availablePositions = POSITION_MAP;
         this.$visible = this._mcVisible.asObservable();
     }
@@ -232,11 +169,10 @@ export class McPopoverComponent {
         }
 
         if (this.isNonEmptyContent()) {
+            this.closeOnInteraction = true;
             this.showTimerId = setTimeout(() => {
-                this.mcVisible = true;
-                this.mcVisibleChange.emit(true);
-                this.isPopoverOpen = true;
-
+                this.showTimerId = null;
+                this.popoverVisibility = 'visible';
                 // Mark for check so if any parent component has set the
                 // ChangeDetectionStrategy to OnPush it will be checked anyways
                 this.markForCheck();
@@ -250,10 +186,8 @@ export class McPopoverComponent {
         }
 
         this.hideTimerId = setTimeout(() => {
-            this.mcVisible = false;
-            this.mcVisibleChange.emit(false);
-            this.onHideSubject.next();
-            this.isPopoverOpen = false;
+            this.hideTimerId = null;
+            this.popoverVisibility = 'hidden';
 
             // Mark for check so if any parent component has set the
             // ChangeDetectionStrategy to OnPush it will be checked anyways
@@ -270,14 +204,12 @@ export class McPopoverComponent {
         return this.onHideSubject.asObservable();
     }
 
-    markForCheck(): void {
-        this.changeDetectorRef.markForCheck();
+    isVisible(): boolean {
+        return this.popoverVisibility === 'visible';
     }
 
-    handleBodyInteraction(e): void {
-        if (this.isPopoverOpen && !this.componentElementRef.nativeElement.contains(e.target)) {
-            this.hide();
-        }
+    markForCheck(): void {
+        this.changeDetectorRef.markForCheck();
     }
 
     isTemplateRef(value: any): boolean {
@@ -286,6 +218,28 @@ export class McPopoverComponent {
 
     isNonEmptyString(value: any): boolean {
         return typeof value === 'string' && value !== '';
+    }
+
+    handleBodyInteraction(): void {
+        if (this.closeOnInteraction) {
+            this.hide();
+        }
+    }
+
+    animationStart() {
+        this.closeOnInteraction = false;
+    }
+
+    animationDone(event: AnimationEvent): void {
+        const toState = event.toState as PopoverVisibility;
+
+        if (toState === 'hidden' && !this.isVisible()) {
+            this.onHideSubject.next();
+        }
+
+        if (toState === 'visible' || toState === 'hidden') {
+            this.closeOnInteraction = true;
+        }
     }
 }
 
@@ -537,11 +491,10 @@ export class McPopover implements OnInit, OnDestroy {
     }
 
     detach() {
-        if (this.overlayRef && this.overlayRef.hasAttached()) {
+        if (this.overlayRef && this.overlayRef.hasAttached() && this.popover) {
             this.overlayRef.detach();
+            this.popover = null;
         }
-
-        this.popover = null;
     }
 
     onPositionChange($event: ConnectedOverlayPositionChange): void {
@@ -592,7 +545,7 @@ export class McPopover implements OnInit, OnDestroy {
     }
 
     handleKeydown(e: KeyboardEvent) {
-        if (this.isPopoverOpen && e.keyCode === ESCAPE) { // tslint:disable-line
+        if (this.isOpen && e.keyCode === ESCAPE) { // tslint:disable-line
             this.hide();
         }
     }
@@ -628,9 +581,6 @@ export class McPopover implements OnInit, OnDestroy {
                 this.portal = this.portal || new ComponentPortal(McPopoverComponent, this.hostView);
 
                 this.popover = overlayRef.attach(this.portal).instance;
-                this.popover.afterHidden()
-                    .pipe(takeUntil(this.destroyed))
-                    .subscribe(() => this.detach());
                 this.isDynamicPopover = true;
                 const properties = [
                     'mcPlacement',
@@ -652,6 +602,9 @@ export class McPopover implements OnInit, OnDestroy {
                         this.mcVisibleChange.emit(data);
                         this.isPopoverOpen = data;
                     });
+                this.popover.afterHidden()
+                    .pipe(takeUntil(this.destroyed))
+                    .subscribe(() => this.hide());
             }
             this.updatePosition();
             this.popover.show();
@@ -660,7 +613,7 @@ export class McPopover implements OnInit, OnDestroy {
 
     hide(): void {
         if (this.popover) {
-            this.popover.hide();
+            this.detach();
         }
     }
 

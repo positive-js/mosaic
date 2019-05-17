@@ -32,6 +32,7 @@ app {
 button.step {
     display: inline-block;
     width: 30%;
+    min-width: 100px;
 }
 
 .trigger-button {

@@ -98,6 +98,21 @@ export const EXTENDED_OVERLAY_POSITIONS = objectValues([
     POSITION_MAP.left, POSITION_MAP.leftTop, POSITION_MAP.leftBottom
 ]);
 
+export const POSITION_TO_CSS_MAP: {[key: string]: string} = {
+    top: 'top',
+    topLeft: 'top-left',
+    topRight: 'top-right',
+    right: 'right',
+    rightTop: 'right-top',
+    rightBottom: 'right-bottom',
+    left: 'left',
+    leftTop: 'left-top',
+    leftBottom: 'left-bottom',
+    bottom: 'bottom',
+    bottomLeft: 'bottom-left',
+    bottomRight: 'bottom-right'
+};
+
 function arrayMap<T, S>(array: T[], iteratee: (item: T, index: number, arr: T[]) => S): S[] {
     let index = -1;
     const length = array == null ? 0 : array.length;
