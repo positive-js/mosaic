@@ -10,7 +10,7 @@ System.config({
         'main': 'main.js',
         'tslib': 'node:tslib/tslib.js',
         'moment': 'node:moment/min/moment-with-locales.min.js',
-        'messageformat': 'node:messageformat/messageformat.min.js',
+        'messageformat': 'node:messageformat/messageformat.js',
 
         'rxjs': 'node_modules/rxjs/bundles/rxjs.umd.min.js',
         'rxjs/operators': 'system-rxjs-operators.js',
