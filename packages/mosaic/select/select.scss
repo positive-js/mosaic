@@ -126,11 +126,15 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
     }
 }
 
-.mc-select__panel {
-    max-height: $mc-select-panel-max-height;
-    min-width: 100%; // prevents some animcion twitching and test inconsistencies in IE11
-
+.mc-select__panel-options-container {
     overflow: auto;
+    max-height: $mc-select-panel-max-height;
+}
+
+.mc-select__panel {
+    min-width: 100%; // prevents some animation twitching and test inconsistencies in IE11
+
+    overflow: hidden;
 
     border: {
         width: $mc-select-panel-border-width;

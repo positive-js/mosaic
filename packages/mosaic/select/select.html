@@ -42,7 +42,6 @@
     (backdropClick)="close()"
     (attach)="onAttached()"
     (detach)="close()">
-
     <div
         #panel
         class="mc-select__panel {{ getPanelTheme() }}"
@@ -53,11 +52,16 @@
         [style.font-size.px]="triggerFontSize"
         (keydown)="handleKeydown($event)">
 
-        <div
-            class="mc-select__content"
-            [@fadeInContent]="'showing'"
-            (@fadeInContent.done)="onFadeInDone()">
-            <ng-content></ng-content>
+        <div>123<br>123<br>123</div>
+        <div class="mc-select__panel-options-container">
+            <div
+                class="mc-select__content"
+                [@fadeInContent]="'showing'"
+                (@fadeInContent.done)="onFadeInDone()">
+
+                <mc-option *ngFor="let option of options"></mc-option>
+                <ng-content></ng-content>
+            </div>
         </div>
     </div>
 </ng-template>
