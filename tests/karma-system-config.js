@@ -8,7 +8,7 @@ System.config({
         'rxjs': 'node:rxjs',
         'tslib': 'node:tslib/tslib.js',
         'moment': 'node:moment/min/moment-with-locales.min.js',
-        'messageformat': 'node:messageformat/messageformat.js',
+        'messageformat': 'node:messageformat/messageformat.min.js',
 
         // Angular specific mappings.
         '@angular/core': 'node:@angular/core/bundles/core.umd.js',
