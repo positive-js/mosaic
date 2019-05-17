@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { A11yModule } from '@ptsecurity/cdk/a11y';
 import { PlatformModule } from '@ptsecurity/cdk/platform';
+import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 
 import { McTimepicker } from './timepicker';
 
@@ -13,7 +14,8 @@ import { McTimepicker } from './timepicker';
         CommonModule,
         A11yModule,
         PlatformModule,
-        FormsModule
+        FormsModule,
+        McMomentDateModule
     ],
     declarations: [
         McTimepicker

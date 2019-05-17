@@ -293,6 +293,27 @@ describe('McTimepicker', () => {
                     expect(testComponent.timeValue.toString()).toContain('19:01:08');
                 });
         });
+
+        it('Paste 12h value from clipboard', () => {
+            return fixture.whenStable()
+                .then(() => {
+                    inputElementDebug.triggerEventHandler(
+                        'paste',
+                        {
+                            preventDefault: () => null,
+                            clipboardData: {
+                                getData: () => '07:15 pm'
+                            }
+                        });
+                    fixture.detectChanges();
+
+                    return fixture.whenStable();
+                })
+                .then(() => {
+                    fixture.detectChanges();
+                    expect(testComponent.timeValue.toString()).toContain('19:15:00');
+                });
+        });
     });
 
     describe('Keyboard value control', () => {

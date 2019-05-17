@@ -23,6 +23,8 @@ import {
     Validators
 } from '@angular/forms';
 import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
+import { DateAdapter, MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
+import { MomentDateAdapter } from '@ptsecurity/mosaic-moment-adapter/adapter';
 import {
     CanUpdateErrorState,
     CanUpdateErrorStateCtor,
@@ -31,6 +33,7 @@ import {
 } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { MC_INPUT_VALUE_ACCESSOR } from '@ptsecurity/mosaic/input';
+import { Moment } from 'moment';
 import {
     noop,
     Subject
@@ -123,6 +126,11 @@ export const McTimepickerMixinBase:
         {
             provide: McFormFieldControl,
             useExisting: forwardRef(() => McTimepicker)
+        },
+        {
+            provide: DateAdapter,
+            useClass: MomentDateAdapter,
+            deps: [MC_DATE_LOCALE]
         }
     ]
 
@@ -262,7 +270,8 @@ export class McTimepicker extends McTimepickerMixinBase
                 @Optional() parentFormGroup: FormGroupDirective,
                 defaultErrorStateMatcher: ErrorStateMatcher,
                 @Optional() @Self() @Inject(MC_INPUT_VALUE_ACCESSOR) inputValueAccessor: any,
-                private readonly renderer: Renderer2) {
+                private readonly renderer: Renderer2,
+                @Inject(DateAdapter) public dateAdapter: DateAdapter<Moment>) {
         super(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl);
 
         // If no input value accessor was explicitly specified, use the element as the input value
@@ -645,9 +654,20 @@ export class McTimepicker extends McTimepickerMixinBase
         hoursAndMinutes: any;
         hoursAndMinutesAndSeconds: any;
     } {
-        const hoursAndMinutesAndSeconds = timeString.match(HOURS_MINUTES_SECONDS_REGEXP);
-        const hoursAndMinutes = timeString.match(HOURS_MINUTES_REGEXP);
-        const hoursOnly = timeString.match(HOURS_ONLY_REGEXP);
+        const momentWrappedTime = this.dateAdapter.parse(timeString, [
+            'h:m a',
+            'h:m:s a',
+            'H:m',
+            'H:m:s'
+        ]);
+
+        const convertedTimeString = momentWrappedTime !== null
+            ? momentWrappedTime.format('HH:mm:ss').toString()
+            : '';
+
+        const hoursAndMinutesAndSeconds = convertedTimeString.match(HOURS_MINUTES_SECONDS_REGEXP);
+        const hoursAndMinutes = convertedTimeString.match(HOURS_MINUTES_REGEXP);
+        const hoursOnly = convertedTimeString.match(HOURS_ONLY_REGEXP);
 
         return {
             hoursOnly,
