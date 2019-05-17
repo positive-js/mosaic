@@ -33,7 +33,6 @@ import {
 } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { MC_INPUT_VALUE_ACCESSOR } from '@ptsecurity/mosaic/input';
-import { Moment } from 'moment';
 import {
     noop,
     Subject
@@ -271,7 +270,7 @@ export class McTimepicker extends McTimepickerMixinBase
                 defaultErrorStateMatcher: ErrorStateMatcher,
                 @Optional() @Self() @Inject(MC_INPUT_VALUE_ACCESSOR) inputValueAccessor: any,
                 private readonly renderer: Renderer2,
-                @Inject(DateAdapter) public dateAdapter: DateAdapter<Moment>) {
+                @Inject(DateAdapter) private dateAdapter: MomentDateAdapter) {
         super(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl);
 
         // If no input value accessor was explicitly specified, use the element as the input value
