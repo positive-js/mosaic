@@ -65,19 +65,10 @@ export class McPopoverComponent {
     availablePositions: any;
     popoverVisibility: PopoverVisibility = 'initial';
     closeOnInteraction: boolean = false;
-    $visible: Observable<boolean>;
+    mcContent: string | TemplateRef<any>;
 
     @Output('mcPopoverVisibleChange') mcVisibleChange: EventEmitter<boolean> = new EventEmitter();
 
-    @Input('mcPopoverMouseEnterDelay') mcMouseEnterDelay = 400;
-
-    @Input('mcPopoverMouseLeaveDelay') mcMouseLeaveDelay = 0;
-
-    @Input('mcPopoverContent') mcContent: string | TemplateRef<any>;
-
-    @Input('mcPopoverFooter') mcFooter: string | TemplateRef<any>;
-
-    @Input('mcPopoverTrigger')
     get mcTrigger(): string {
         return this._mcTrigger;
     }
@@ -86,7 +77,6 @@ export class McPopoverComponent {
     }
     private _mcTrigger: string = 'hover';
 
-    @Input('mcPopoverPlacement')
     get mcPlacement(): string {
         return this._mcPlacement;
     }
@@ -100,7 +90,6 @@ export class McPopoverComponent {
     }
     private _mcPlacement: string = 'top';
 
-    @Input('mcPopoverSize')
     get mcPopoverSize(): string {
         return this.popoverSize;
     }
@@ -113,7 +102,6 @@ export class McPopoverComponent {
     }
     private popoverSize: string;
 
-    @Input('mcPopoverVisible')
     get mcVisible(): boolean {
         return this._mcVisible.value;
     }
@@ -156,7 +144,6 @@ export class McPopoverComponent {
 
     constructor(public changeDetectorRef: ChangeDetectorRef, public componentElementRef: ElementRef) {
         this.availablePositions = POSITION_MAP;
-        this.$visible = this._mcVisible.asObservable();
     }
 
     show(): void {
