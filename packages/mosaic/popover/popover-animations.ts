@@ -1,7 +1,6 @@
 import {
     animate,
     AnimationTriggerMetadata,
-    keyframes,
     state,
     style,
     transition,
@@ -14,13 +13,14 @@ export const mcPopoverAnimations: {
 } = {
     /** Animation that transitions a tooltip in and out. */
     popoverState: trigger('state', [
-        state('initial, void, hidden', style({opacity: 0, transform: 'scale(0)'})),
-        state('visible', style({transform: 'scale(1)'})),
-        transition('* => visible', animate('200ms cubic-bezier(0, 0, 0.2, 1)', keyframes([
-            style({opacity: 0, transform: 'scale(0)', offset: 0}),
-            style({opacity: 0.5, transform: 'scale(0.99)', offset: 0.5}),
-            style({opacity: 1, transform: 'scale(1)', offset: 1})
-        ]))),
-        transition('* => hidden', animate('100ms cubic-bezier(0, 0, 0.2, 1)', style({opacity: 0})))
+        state('initial', style({
+            opacity: 0,
+            transform: 'scale(1, 0.8)'
+        })),
+        transition('* => visible', animate('120ms cubic-bezier(0, 0, 0.2, 1)', style({
+            opacity: 1,
+            transform: 'scale(1, 1)'
+        }))),
+        transition('* => hidden', animate('100ms linear', style({ opacity: 0 })))
     ])
 };

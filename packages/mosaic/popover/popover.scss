@@ -7,7 +7,7 @@
 $z-index-popover: 1060;
 $popover-max-width: 240px;
 $border-radius-base: 4px;
-$popover-arrow-width: 8px;
+$popover-arrow-width: 7px;
 $popover-distance: $popover-arrow-width + 3px;
 $border-size: 1px;
 
@@ -115,8 +115,8 @@ $mc-popover-large-width: 640px;
 
 .mc-popover__arrow {
     position: absolute;
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     border-style: solid;
     transform: rotate(45deg);
 }

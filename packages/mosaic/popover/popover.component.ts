@@ -57,13 +57,11 @@ export type PopoverVisibility = 'initial' | 'visible' | 'hidden';
     animations: [mcPopoverAnimations.popoverState],
     host: {
         '[class]': 'getCssClassesList',
-        '(body:click)': 'handleBodyInteraction()'
+        '(body:click)': 'handleBodyInteraction($event)'
     }
 })
 export class McPopoverComponent {
     positions: ConnectionPositionPair[] = [ ...EXTENDED_OVERLAY_POSITIONS ];
-    showTimerId: number | null;
-    hideTimerId: number | null;
     availablePositions: any;
     popoverVisibility: PopoverVisibility = 'initial';
     closeOnInteraction: boolean = false;
@@ -74,8 +72,6 @@ export class McPopoverComponent {
     @Input('mcPopoverMouseEnterDelay') mcMouseEnterDelay = 400;
 
     @Input('mcPopoverMouseLeaveDelay') mcMouseLeaveDelay = 0;
-
-    @Input('mcPopoverHeader') mcHeader: string | TemplateRef<any>;
 
     @Input('mcPopoverContent') mcContent: string | TemplateRef<any>;
 
@@ -164,35 +160,22 @@ export class McPopoverComponent {
     }
 
     show(): void {
-        if (this.hideTimerId) {
-            clearTimeout(this.hideTimerId);
-        }
-
         if (this.isNonEmptyContent()) {
             this.closeOnInteraction = true;
-            this.showTimerId = setTimeout(() => {
-                this.showTimerId = null;
-                this.popoverVisibility = 'visible';
-                // Mark for check so if any parent component has set the
-                // ChangeDetectionStrategy to OnPush it will be checked anyways
-                this.markForCheck();
-            }, this.mcMouseEnterDelay);
+            this.popoverVisibility = 'visible';
+            // Mark for check so if any parent component has set the
+            // ChangeDetectionStrategy to OnPush it will be checked anyways
+            this.markForCheck();
         }
     }
 
     hide(): void {
-        if (this.showTimerId) {
-            clearTimeout(this.showTimerId);
-        }
+        this.popoverVisibility = 'hidden';
+        this.mcVisibleChange.emit(false);
 
-        this.hideTimerId = setTimeout(() => {
-            this.hideTimerId = null;
-            this.popoverVisibility = 'hidden';
-
-            // Mark for check so if any parent component has set the
-            // ChangeDetectionStrategy to OnPush it will be checked anyways
-            this.markForCheck();
-        }, this.mcMouseLeaveDelay);
+        // Mark for check so if any parent component has set the
+        // ChangeDetectionStrategy to OnPush it will be checked anyways
+        this.markForCheck();
     }
 
     isNonEmptyContent(): boolean {
@@ -220,14 +203,14 @@ export class McPopoverComponent {
         return typeof value === 'string' && value !== '';
     }
 
-    handleBodyInteraction(): void {
-        if (this.closeOnInteraction) {
+    handleBodyInteraction(e): void {
+        if (this.closeOnInteraction && !this.componentElementRef.nativeElement.contains(e.target)) {
             this.hide();
         }
     }
 
     animationStart() {
-        this.closeOnInteraction = false;
+            this.closeOnInteraction = false;
     }
 
     animationDone(event: AnimationEvent): void {
@@ -240,6 +223,10 @@ export class McPopoverComponent {
         if (toState === 'visible' || toState === 'hidden') {
             this.closeOnInteraction = true;
         }
+    }
+
+    ngOnDestroy() {
+        this.onHideSubject.complete();
     }
 }
 
@@ -604,7 +591,7 @@ export class McPopover implements OnInit, OnDestroy {
                     });
                 this.popover.afterHidden()
                     .pipe(takeUntil(this.destroyed))
-                    .subscribe(() => this.hide());
+                    .subscribe(() => this.detach());
             }
             this.updatePosition();
             this.popover.show();
@@ -613,7 +600,7 @@ export class McPopover implements OnInit, OnDestroy {
 
     hide(): void {
         if (this.popover) {
-            this.detach();
+            this.popover.hide();
         }
     }
 
