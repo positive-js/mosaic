@@ -59,6 +59,8 @@ export class ListKeyManager<T extends ListKeyManagerOption> {
     // Buffer for the letters that the user has pressed when the typeahead option is turned on.
     private _pressedLetters: string[] = [];
 
+    private isFirstLetterSearchAllowed: boolean = true;
+
     constructor(private _items: QueryList<T>) {
         if (_items instanceof QueryList) {
 
@@ -74,6 +76,12 @@ export class ListKeyManager<T extends ListKeyManagerOption> {
                 }
             });
         }
+    }
+
+    setFirstLetterSearch(value: boolean): this {
+        this.isFirstLetterSearchAllowed = value;
+
+        return this;
     }
 
     withScrollSize(scrollSize: number): this {
@@ -133,6 +141,12 @@ export class ListKeyManager<T extends ListKeyManagerOption> {
             filter(() => this._pressedLetters.length > 0),
             map(() => this._pressedLetters.join(''))
         ).subscribe((inputString) => {
+            if (!this.isFirstLetterSearchAllowed) {
+                this._pressedLetters = [];
+
+                return;
+            }
+
             const items = this._items.toArray();
 
             // Start at 1 because we want to start searching at the item immediately

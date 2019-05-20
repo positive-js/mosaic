@@ -34,6 +34,14 @@
 
         background-color: if($is-dark, map-get($second, 700), map-get($background, background));
     }
+
+    .mc-select__search-container {
+        border-bottom: {
+            width: 1px;
+            style: solid;
+            color: mc-color($second);
+        }
+    }
 }
 
 @mixin mc-select-typography($config) {

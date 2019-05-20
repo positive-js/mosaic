@@ -1,5 +1,5 @@
 <br><br><br><br><br><br><br>
-<div style="height: 20px">{{ selected }}</div>
+<!--<div style="height: 20px">{{ selected }}</div>-->
 
 <!--<div class="dev-container">-->
     <!--<mc-form-field>-->
@@ -28,6 +28,43 @@
 <br>
 
 <div class="dev-container">
+    <mc-form-field>
+        <mc-select [(value)]="singleSelectedWithSearch">
+            <mc-select-search>
+                <mc-form-field mcFormFieldWithoutBorders>
+                    <i mcPrefix mc-icon="mc-search_16"></i>
+                    <input mcInput mcSelectSearchField [formControl]="searchCtrl" type="text" placeholder="Search" />
+                    <mc-cleaner></mc-cleaner>
+                </mc-form-field>
+            </mc-select-search>
+
+            <mc-option value="StickedOption">Sticked Option</mc-option>
+            <mc-option *ngFor="let option of options$ | async" [value]="option">{{ option }}</mc-option>
+        </mc-select>
+    </mc-form-field>
+
+    <br><br>
+
+    <mc-form-field>
+        <mc-select multiple [(value)]="multipleSelectedWithSearch">
+            <mc-select-search>
+                <mc-form-field mcFormFieldWithoutBorders>
+                    <i mcPrefix mc-icon="mc-search_16"></i>
+                    <input mcInput mcSelectSearchField [formControl]="multipleSearchCtrl" type="text" placeholder="Search" />
+                    <mc-cleaner></mc-cleaner>
+                </mc-form-field>
+            </mc-select-search>
+
+            <mc-option value="StickedOption">Sticked Option</mc-option>
+            <mc-option *ngFor="let option of multipleOptions$ | async" [value]="option">{{ option }}</mc-option>
+        </mc-select>
+    </mc-form-field>
+</div>
+
+<br>
+
+<div class="dev-container">
+
     <mc-form-field>
         <mc-select [(value)]="singleSelected">
             <mc-option value="Disabled" disabled>Disabled</mc-option>

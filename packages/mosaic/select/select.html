@@ -52,15 +52,17 @@
         [style.font-size.px]="triggerFontSize"
         (keydown)="handleKeydown($event)">
 
-        <div>123<br>123<br>123</div>
-        <div class="mc-select__panel-options-container">
+        <div *ngIf="search" class="mc-select__search-container">
+            <ng-content select="[mc-select-search],mc-select-search"></ng-content>
+        </div>
+
+        <div #optionsContainer class="mc-select__panel-options-container">
             <div
                 class="mc-select__content"
                 [@fadeInContent]="'showing'"
                 (@fadeInContent.done)="onFadeInDone()">
 
-                <mc-option *ngFor="let option of options"></mc-option>
-                <ng-content></ng-content>
+                <ng-content select="mc-option,mc-optgroup"></ng-content>
             </div>
         </div>
     </div>
