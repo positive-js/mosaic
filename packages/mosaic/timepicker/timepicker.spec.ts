@@ -7,7 +7,6 @@ import {
 } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 
@@ -312,6 +311,226 @@ describe('McTimepicker', () => {
                 .then(() => {
                     fixture.detectChanges();
                     expect(testComponent.timeValue.toString()).toContain('19:15:00');
+                });
+        });
+        it('Paste am/pm from clipboard: 1:3 am', () => {
+            return fixture.whenStable()
+                .then(() => {
+                    inputElementDebug.triggerEventHandler(
+                        'paste',
+                        {
+                            preventDefault: () => null,
+                            clipboardData: {
+                                getData: () => '1:3 am'
+                            }
+                        });
+                    fixture.detectChanges();
+
+                    return fixture.whenStable();
+                })
+                .then(() => {
+                    fixture.detectChanges();
+                    expect(testComponent.timeValue.toString()).toContain('01:03:00');
+                });
+        });
+        it('Paste am/pm from clipboard: 01:3 am', () => {
+            return fixture.whenStable()
+                .then(() => {
+                    inputElementDebug.triggerEventHandler(
+                        'paste',
+                        {
+                            preventDefault: () => null,
+                            clipboardData: {
+                                getData: () => '01:3 am'
+                            }
+                        });
+                    fixture.detectChanges();
+
+                    return fixture.whenStable();
+                })
+                .then(() => {
+                    fixture.detectChanges();
+                    expect(testComponent.timeValue.toString()).toContain('01:03:00');
+                });
+        });
+        it('Paste am/pm from clipboard: 1:30 am', () => {
+            return fixture.whenStable()
+                .then(() => {
+                    inputElementDebug.triggerEventHandler(
+                        'paste',
+                        {
+                            preventDefault: () => null,
+                            clipboardData: {
+                                getData: () => '1:30 am'
+                            }
+                        });
+                    fixture.detectChanges();
+
+                    return fixture.whenStable();
+                })
+                .then(() => {
+                    fixture.detectChanges();
+                    expect(testComponent.timeValue.toString()).toContain('01:30:00');
+                });
+        });
+        it('Paste am/pm from clipboard: 01:30 am', () => {
+            return fixture.whenStable()
+                .then(() => {
+                    inputElementDebug.triggerEventHandler(
+                        'paste',
+                        {
+                            preventDefault: () => null,
+                            clipboardData: {
+                                getData: () => '01:30 am'
+                            }
+                        });
+                    fixture.detectChanges();
+
+                    return fixture.whenStable();
+                })
+                .then(() => {
+                    fixture.detectChanges();
+                    expect(testComponent.timeValue.toString()).toContain('01:30:00');
+                });
+        });
+        it('Paste am/pm from clipboard: 10:3 am', () => {
+            return fixture.whenStable()
+                .then(() => {
+                    inputElementDebug.triggerEventHandler(
+                        'paste',
+                        {
+                            preventDefault: () => null,
+                            clipboardData: {
+                                getData: () => '10:3 am'
+                            }
+                        });
+                    fixture.detectChanges();
+
+                    return fixture.whenStable();
+                })
+                .then(() => {
+                    fixture.detectChanges();
+                    expect(testComponent.timeValue.toString()).toContain('10:03:00');
+                });
+        });
+        it('Paste am/pm from clipboard: 10:30 am', () => {
+            return fixture.whenStable()
+                .then(() => {
+                    inputElementDebug.triggerEventHandler(
+                        'paste',
+                        {
+                            preventDefault: () => null,
+                            clipboardData: {
+                                getData: () => '10:30 am'
+                            }
+                        });
+                    fixture.detectChanges();
+
+                    return fixture.whenStable();
+                })
+                .then(() => {
+                    fixture.detectChanges();
+                    expect(testComponent.timeValue.toString()).toContain('10:30:00');
+                });
+        });
+        it('Paste am/pm from clipboard: 10:30 Pm', () => {
+            return fixture.whenStable()
+                .then(() => {
+                    inputElementDebug.triggerEventHandler(
+                        'paste',
+                        {
+                            preventDefault: () => null,
+                            clipboardData: {
+                                getData: () => '10:30 Pm'
+                            }
+                        });
+                    fixture.detectChanges();
+
+                    return fixture.whenStable();
+                })
+                .then(() => {
+                    fixture.detectChanges();
+                    expect(testComponent.timeValue.toString()).toContain('22:30:00');
+                });
+        });
+        it('Paste am/pm from clipboard: 12:3 aM', () => {
+            return fixture.whenStable()
+                .then(() => {
+                    inputElementDebug.triggerEventHandler(
+                        'paste',
+                        {
+                            preventDefault: () => null,
+                            clipboardData: {
+                                getData: () => '12:3 aM'
+                            }
+                        });
+                    fixture.detectChanges();
+
+                    return fixture.whenStable();
+                })
+                .then(() => {
+                    fixture.detectChanges();
+                    expect(testComponent.timeValue.toString()).toContain('00:03:00');
+                });
+        });
+        it('Paste am/pm from clipboard: 11:3 PM', () => {
+            return fixture.whenStable()
+                .then(() => {
+                    inputElementDebug.triggerEventHandler(
+                        'paste',
+                        {
+                            preventDefault: () => null,
+                            clipboardData: {
+                                getData: () => '11:3 PM'
+                            }
+                        });
+                    fixture.detectChanges();
+
+                    return fixture.whenStable();
+                })
+                .then(() => {
+                    fixture.detectChanges();
+                    expect(testComponent.timeValue.toString()).toContain('23:03:00');
+                });
+        });
+        it('Paste am/pm from clipboard: 11:3 a', () => {
+            return fixture.whenStable()
+                .then(() => {
+                    inputElementDebug.triggerEventHandler(
+                        'paste',
+                        {
+                            preventDefault: () => null,
+                            clipboardData: {
+                                getData: () => '11:3 a'
+                            }
+                        });
+                    fixture.detectChanges();
+
+                    return fixture.whenStable();
+                })
+                .then(() => {
+                    fixture.detectChanges();
+                    expect(testComponent.timeValue.toString()).toContain('11:03:00');
+                });
+        });
+        it('Paste am/pm from clipboard: 11:3 p', () => {
+            return fixture.whenStable()
+                .then(() => {
+                    inputElementDebug.triggerEventHandler(
+                        'paste',
+                        {
+                            preventDefault: () => null,
+                            clipboardData: {
+                                getData: () => '11:3 p'
+                            }
+                        });
+                    fixture.detectChanges();
+
+                    return fixture.whenStable();
+                })
+                .then(() => {
+                    fixture.detectChanges();
+                    expect(testComponent.timeValue.toString()).toContain('23:03:00');
                 });
         });
     });
