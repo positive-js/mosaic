@@ -491,6 +491,28 @@ export class McPopover implements OnInit, OnDestroy {
             this.updateCompValue('classList', this.classList);
             this.popover.markForCheck();
         }
+
+        this.handlePositionUpdate();
+    }
+
+    handlePositionUpdate() {
+        if (!this.overlayRef) {
+            this.overlayRef = this.createOverlay();
+        }
+
+        const pos = this.hostView.element.nativeElement.clientHeight / 2; // tslint:disable-line
+
+        if (this.mcPlacement === 'rightTop' || this.mcPlacement === 'leftTop') {
+            const currentContainer = this.overlayRef.overlayElement.style.top || '0px';
+            this.overlayRef.overlayElement.style.top =
+                `${parseInt(currentContainer.split('px')[0], 10) + pos - 20}px`; // tslint:disable-line
+        }
+
+        if (this.mcPlacement === 'rightBottom' || this.mcPlacement === 'leftBottom') {
+            const currentContainer = this.overlayRef.overlayElement.style.bottom || '0px';
+            this.overlayRef.overlayElement.style.bottom =
+                `${parseInt(currentContainer.split('px')[0], 10) - pos + 12}px`; // tslint:disable-line
+        }
     }
 
     // tslint:disable-next-line:no-any

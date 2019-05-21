@@ -158,7 +158,7 @@ $mc-popover-large-width: 640px;
 
 .mc-popover_placement-right-bottom .mc-popover__arrow {
     left: $popover-distance - $popover-arrow-width;
-    bottom: 20px;
+    bottom: 13px; // same as top placement = element.style.top + element.style.margin-top = 20px -7px
     margin-top: -$popover-arrow-width;
     border-width: 0 0 1px 1px;
 }
@@ -179,7 +179,7 @@ $mc-popover-large-width: 640px;
 
 .mc-popover_placement-left-bottom .mc-popover__arrow {
     right: $popover-distance - $popover-arrow-width;
-    bottom: 20px;
+    bottom: 13px; // same as top placement = element.style.top + element.style.margin-top = 20px -7px
     margin-top: -$popover-arrow-width;
     border-width: 1px 1px 0 0;
 }
