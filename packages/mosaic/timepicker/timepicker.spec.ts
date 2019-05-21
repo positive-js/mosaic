@@ -7,6 +7,7 @@ import {
 } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 
@@ -49,7 +50,8 @@ describe('McTimepicker', () => {
                 FormsModule,
                 McFormFieldModule,
                 McTimepickerModule,
-                McIconModule],
+                McIconModule,
+                McMomentDateModule],
             declarations: [TestApp]
         });
         TestBed.compileComponents();

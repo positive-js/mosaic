@@ -23,8 +23,7 @@ import {
     Validators
 } from '@angular/forms';
 import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
-import { DateAdapter, MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
-import { MomentDateAdapter } from '@ptsecurity/mosaic-moment-adapter/adapter';
+import { DateAdapter } from '@ptsecurity/cdk/datetime';
 import {
     CanUpdateErrorState,
     CanUpdateErrorStateCtor,
@@ -125,11 +124,6 @@ export const McTimepickerMixinBase:
         {
             provide: McFormFieldControl,
             useExisting: forwardRef(() => McTimepicker)
-        },
-        {
-            provide: DateAdapter,
-            useClass: MomentDateAdapter,
-            deps: [MC_DATE_LOCALE]
         }
     ]
 
@@ -270,8 +264,13 @@ export class McTimepicker extends McTimepickerMixinBase
                 defaultErrorStateMatcher: ErrorStateMatcher,
                 @Optional() @Self() @Inject(MC_INPUT_VALUE_ACCESSOR) inputValueAccessor: any,
                 private readonly renderer: Renderer2,
-                @Inject(DateAdapter) private dateAdapter: MomentDateAdapter) {
+                @Optional() private dateAdapter: DateAdapter<any>) {
         super(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl);
+
+        if (!this.dateAdapter) {
+            throw Error(`McTimepicker: No provider found for DateAdapter. You must import one of the existing ` +
+                `modules at your application root or provide a custom implementation or use exists ones.`);
+        }
 
         // If no input value accessor was explicitly specified, use the element as the input value
         // accessor.
