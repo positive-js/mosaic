@@ -23,6 +23,7 @@ import {
     Validators
 } from '@angular/forms';
 import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
+import { DateAdapter } from '@ptsecurity/cdk/datetime';
 import {
     CanUpdateErrorState,
     CanUpdateErrorStateCtor,
@@ -262,8 +263,14 @@ export class McTimepicker extends McTimepickerMixinBase
                 @Optional() parentFormGroup: FormGroupDirective,
                 defaultErrorStateMatcher: ErrorStateMatcher,
                 @Optional() @Self() @Inject(MC_INPUT_VALUE_ACCESSOR) inputValueAccessor: any,
-                private readonly renderer: Renderer2) {
+                private readonly renderer: Renderer2,
+                @Optional() private dateAdapter: DateAdapter<any>) {
         super(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl);
+
+        if (!this.dateAdapter) {
+            throw Error(`McTimepicker: No provider found for DateAdapter. You must import one of the existing ` +
+                `modules at your application root or provide a custom implementation or use exists ones.`);
+        }
 
         // If no input value accessor was explicitly specified, use the element as the input value
         // accessor.
@@ -645,9 +652,20 @@ export class McTimepicker extends McTimepickerMixinBase
         hoursAndMinutes: any;
         hoursAndMinutesAndSeconds: any;
     } {
-        const hoursAndMinutesAndSeconds = timeString.match(HOURS_MINUTES_SECONDS_REGEXP);
-        const hoursAndMinutes = timeString.match(HOURS_MINUTES_REGEXP);
-        const hoursOnly = timeString.match(HOURS_ONLY_REGEXP);
+        const momentWrappedTime = this.dateAdapter.parse(timeString, [
+            'h:m a',
+            'h:m:s a',
+            'H:m',
+            'H:m:s'
+        ]);
+
+        const convertedTimeString = momentWrappedTime !== null
+            ? momentWrappedTime.format('HH:mm:ss')
+            : '';
+
+        const hoursAndMinutesAndSeconds = convertedTimeString.match(HOURS_MINUTES_SECONDS_REGEXP);
+        const hoursAndMinutes = convertedTimeString.match(HOURS_MINUTES_REGEXP);
+        const hoursOnly = convertedTimeString.match(HOURS_ONLY_REGEXP);
 
         return {
             hoursOnly,

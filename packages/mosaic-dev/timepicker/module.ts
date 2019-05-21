@@ -6,6 +6,7 @@ import {
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McTimepickerModule } from '@ptsecurity/mosaic/timepicker';
 
@@ -39,7 +40,8 @@ export class TimepickerDemoComponent {
         McTimepickerModule,
         McFormFieldModule,
         McButtonModule,
-        McIconModule
+        McIconModule,
+        McMomentDateModule
     ],
     bootstrap: [
         TimepickerDemoComponent
