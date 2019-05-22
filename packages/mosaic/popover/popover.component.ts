@@ -238,6 +238,11 @@ export function getMcPopoverInvalidPositionError(position: string) {
 }
 
 const VIEWPORT_MARGIN: number = 8;
+/** @docs-private
+ * Minimal width of anchor element should be equal or greater than popover arrow width plus arrow offset right/left
+ * MIN_ANCHOR_ELEMENT_WIDTH used for positioning update inside handlePositionUpdate()
+ */
+const MIN_ANCHOR_ELEMENT_WIDTH: number = 40;
 
 @Directive({
     selector: '[mcPopover]',
@@ -500,18 +505,33 @@ export class McPopover implements OnInit, OnDestroy {
             this.overlayRef = this.createOverlay();
         }
 
-        const pos = this.hostView.element.nativeElement.clientHeight / 2; // tslint:disable-line
+        const verticalOffset = this.hostView.element.nativeElement.clientHeight / 2; // tslint:disable-line
+        const anchorElementWidth = this.hostView.element.nativeElement.clientWidth; // tslint:disable-line
 
         if (this.mcPlacement === 'rightTop' || this.mcPlacement === 'leftTop') {
             const currentContainer = this.overlayRef.overlayElement.style.top || '0px';
             this.overlayRef.overlayElement.style.top =
-                `${parseInt(currentContainer.split('px')[0], 10) + pos - 20}px`; // tslint:disable-line
+                `${parseInt(currentContainer.split('px')[0], 10) + verticalOffset - 20}px`; // tslint:disable-line
         }
 
         if (this.mcPlacement === 'rightBottom' || this.mcPlacement === 'leftBottom') {
             const currentContainer = this.overlayRef.overlayElement.style.bottom || '0px';
             this.overlayRef.overlayElement.style.bottom =
-                `${parseInt(currentContainer.split('px')[0], 10) - pos + 12}px`; // tslint:disable-line
+                `${parseInt(currentContainer.split('px')[0], 10) + verticalOffset - 22}px`; // tslint:disable-line
+        }
+
+        if ((this.mcPlacement === 'topRight' || this.mcPlacement === 'bottomRight') &&
+            anchorElementWidth < MIN_ANCHOR_ELEMENT_WIDTH) {
+            const currentContainer = this.overlayRef.overlayElement.style.right || '0px';
+            this.overlayRef.overlayElement.style.right =
+                `${parseInt(currentContainer.split('px')[0], 10) - 18}px`; // tslint:disable-line
+        }
+
+        if ((this.mcPlacement === 'topLeft' || this.mcPlacement === 'bottomLeft') &&
+            anchorElementWidth < MIN_ANCHOR_ELEMENT_WIDTH) {
+            const currentContainer = this.overlayRef.overlayElement.style.left || '0px';
+            this.overlayRef.overlayElement.style.left =
+                `${parseInt(currentContainer.split('px')[0], 10) - 20}px`; // tslint:disable-line
         }
     }
 

@@ -62,8 +62,8 @@
         (click)="changePopoverVisibilityBottom()">
         bottom
     </button>
-    <button
-        class="trigger-button with-margin"
+    <span
+        class="with-margin"
         mc-button
         color="second"
         mcPopover
@@ -77,8 +77,8 @@
         [mcPopoverFooter]="customFooter"
         (mcPopoverVisibleChange)="onPopoverVisibleChangeBottomRight($event)"
         (click)="changePopoverVisibilityBottomRight()">
-        bottomRight
-    </button>
+        <i class="mc-disabled" mc-icon="mc-folder-opened_16"></i>
+    </span>
 </section>
 
 <section class="flex layout-row layout-align-stretch-center">
@@ -115,8 +115,7 @@
             (click)="changePopoverVisibilityRight()">
             right
         </button>
-        <button
-            class="trigger-button"
+        <span
             mc-button
             color="second"
             mcPopover
@@ -129,8 +128,8 @@
             [mcPopoverFooter]="customFooter"
             (mcPopoverVisibleChange)="onPopoverVisibleChangeRightBottom($event)"
             (click)="changePopoverVisibilityRightBottom()">
-            rightBottom
-        </button>
+            rightBottom <i class="mc-disabled" mc-icon="mc-folder-opened_16"></i>
+        </span>
     </section>
 
     <section class="flex layout-column layout-align-space-between-end">
@@ -195,12 +194,13 @@
         mcPopoverClass="popover-485 this-class-not-available"
         [mcPopoverVisible]="isPopoverVisibleTopLeft"
         mcPopoverHeader="Lorem ipsum"
+        mcPopoverTrigger="manual"
         mcPopoverPlacement="topLeft"
         [mcPopoverContent]="customContent"
         [mcPopoverFooter]="customFooter"
         (mcPopoverVisibleChange)="onPopoverVisibleChangeTopLeft($event)"
         (click)="changePopoverVisibilityTopLeft()">
-        topLeft hover
+        topLeft
     </button>
     <button
         class="trigger-button with-margin"
@@ -218,8 +218,8 @@
         (click)="changePopoverVisibilityTop()">
         top hover
     </button>
-    <button
-        class="trigger-button with-margin"
+    <span
+        class="with-margin"
         mc-button
         color="second"
         mcPopover
@@ -227,11 +227,12 @@
         mcPopoverClass="popover-485 this-class-not-available"
         [mcPopoverVisible]="isPopoverVisibleTopRight"
         mcPopoverHeader="Lorem ipsum"
+        mcPopoverTrigger="manual"
         mcPopoverPlacement="topRight"
         [mcPopoverContent]="customContent"
         [mcPopoverFooter]="customFooter"
         (mcPopoverVisibleChange)="onPopoverVisibleChangeTopRight($event)"
         (click)="changePopoverVisibilityTopRight()">
-        topRight hover
-    </button>
+        <i class="mc-disabled" mc-icon="mc-folder-opened_16"></i>
+    </span>
 </section>

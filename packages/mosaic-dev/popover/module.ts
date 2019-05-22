@@ -4,6 +4,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McPopoverModule } from '@ptsecurity/mosaic/popover';
+import { McIconModule } from '../../mosaic/icon/';
 
 
 /* tslint:disable:no-trailing-whitespace */
@@ -142,7 +143,8 @@ export class DemoComponent {
         BrowserModule,
         BrowserAnimationsModule,
         McPopoverModule,
-        McButtonModule
+        McButtonModule,
+        McIconModule
     ],
     bootstrap: [
         DemoComponent
