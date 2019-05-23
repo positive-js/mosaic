@@ -40,9 +40,10 @@ import {
     POSITION_MAP,
     POSITION_TO_CSS_MAP
 } from '@ptsecurity/mosaic/core';
-import { mcPopoverAnimations } from '@ptsecurity/mosaic/popover/popover-animations';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
+
+import { mcPopoverAnimations } from './popover-animations';
 
 
 export type PopoverVisibility = 'initial' | 'visible' | 'hidden';
@@ -66,6 +67,8 @@ export class McPopoverComponent {
     popoverVisibility: PopoverVisibility = 'initial';
     closeOnInteraction: boolean = false;
     mcContent: string | TemplateRef<any>;
+    mcHeader: string | TemplateRef<any>;
+    mcFooter: string | TemplateRef<any>;
 
     @Output('mcPopoverVisibleChange') mcVisibleChange: EventEmitter<boolean> = new EventEmitter();
 
