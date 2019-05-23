@@ -28,15 +28,16 @@
 <br>
 
 <div class="dev-container">
+
+    {{singleSelectedWithSearch}}
+
     <mc-form-field>
         <mc-select [(value)]="singleSelectedWithSearch">
-            <mc-select-search>
-                <mc-form-field mcFormFieldWithoutBorders>
-                    <i mcPrefix mc-icon="mc-search_16"></i>
-                    <input mcInput mcSelectSearchField [formControl]="searchCtrl" type="text" placeholder="Search" />
-                    <mc-cleaner></mc-cleaner>
-                </mc-form-field>
-            </mc-select-search>
+            <mc-form-field mcFormFieldWithoutBorders mcSelectSearch>
+                <i mcPrefix mc-icon="mc-search_16"></i>
+                <input mcInput [formControl]="searchCtrl" type="text" placeholder="Search" />
+                <mc-cleaner></mc-cleaner>
+            </mc-form-field>
 
             <mc-option value="StickedOption">Sticked Option</mc-option>
             <mc-option *ngFor="let option of options$ | async" [value]="option">{{ option }}</mc-option>
@@ -45,15 +46,19 @@
 
     <br><br>
 
+    <button mc-button (click)="optionCounter = optionCounter + 1;allOptions.push(optionCounter.toString())">add option</button>
+
+    <br><br>
+
+    {{multipleSelectedWithSearch}}
+
     <mc-form-field>
         <mc-select multiple [(value)]="multipleSelectedWithSearch">
-            <mc-select-search>
-                <mc-form-field mcFormFieldWithoutBorders>
-                    <i mcPrefix mc-icon="mc-search_16"></i>
-                    <input mcInput mcSelectSearchField [formControl]="multipleSearchCtrl" type="text" placeholder="Search" />
-                    <mc-cleaner></mc-cleaner>
-                </mc-form-field>
-            </mc-select-search>
+            <mc-form-field mcFormFieldWithoutBorders mcSelectSearch>
+                <i mcPrefix mc-icon="mc-search_16"></i>
+                <input mcInput [formControl]="multipleSearchCtrl" type="text" placeholder="Search" />
+                <mc-cleaner></mc-cleaner>
+            </mc-form-field>
 
             <mc-option value="StickedOption">Sticked Option</mc-option>
             <mc-option *ngFor="let option of multipleOptions$ | async" [value]="option">{{ option }}</mc-option>

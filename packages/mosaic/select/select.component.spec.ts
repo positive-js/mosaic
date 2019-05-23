@@ -67,6 +67,7 @@ import {
     getMcSelectNonFunctionValueError
 } from '@ptsecurity/mosaic/core';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
+import { McInputModule } from '@ptsecurity/mosaic/input';
 import { merge, Observable, of, Subject, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -235,12 +236,12 @@ class SelectWithChangeEvent {
     template: `
         <mc-form-field>
             <mc-select [(value)]="singleSelectedWithSearch">
-                <mc-select-search>
+                <mc-form-field mcSelectSearch>
                     <input
-                        mcSelectSearchField
+                        mcInput
                         [formControl]="searchCtrl"
                         type="text" />
-                </mc-select-search>
+                </mc-form-field>
 
                 <mc-option *ngFor="let option of options$ | async" [value]="option">{{ option }}</mc-option>
             </mc-select>
@@ -875,6 +876,7 @@ describe('McSelect', () => {
             imports: [
                 McFormFieldModule,
                 McSelectModule,
+                McInputModule,
                 ReactiveFormsModule,
                 FormsModule,
                 NoopAnimationsModule
@@ -2146,7 +2148,7 @@ describe('McSelect', () => {
                 flush();
 
                 host = fixture.debugElement.query(By.css('mc-select')).nativeElement;
-                panel = overlayContainerElement.querySelector('.mc-select__panel-options-container') as HTMLElement;
+                panel = overlayContainerElement.querySelector('.mc-select__content') as HTMLElement;
             }));
 
             it('should not scroll to options that are completely in the view', fakeAsync(() => {

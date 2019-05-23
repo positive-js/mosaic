@@ -37,6 +37,9 @@ export class DemoComponent implements OnInit {
     multipleSearchCtrl: FormControl = new FormControl();
     multipleOptions$: Observable<string[]>;
 
+    allOptions = OPTIONS;
+    optionCounter = 0;
+
     private options: string[] = OPTIONS;
 
     ngOnInit(): void {

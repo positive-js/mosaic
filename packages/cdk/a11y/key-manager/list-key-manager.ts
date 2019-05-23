@@ -59,8 +59,6 @@ export class ListKeyManager<T extends ListKeyManagerOption> {
     // Buffer for the letters that the user has pressed when the typeahead option is turned on.
     private _pressedLetters: string[] = [];
 
-    private isFirstLetterSearchAllowed: boolean = true;
-
     constructor(private _items: QueryList<T>) {
         if (_items instanceof QueryList) {
 
@@ -76,12 +74,6 @@ export class ListKeyManager<T extends ListKeyManagerOption> {
                 }
             });
         }
-    }
-
-    setFirstLetterSearch(value: boolean): this {
-        this.isFirstLetterSearchAllowed = value;
-
-        return this;
     }
 
     withScrollSize(scrollSize: number): this {
@@ -124,9 +116,10 @@ export class ListKeyManager<T extends ListKeyManagerOption> {
 
     /**
      * Turns on typeahead mode which allows users to set the active item by typing.
+     * @param searchLetterIndex letter index for incremental search, if is -1 search is disabled
      * @param debounceInterval Time to wait after the last keystroke before setting the active item.
      */
-    withTypeAhead(debounceInterval: number = 200): this {
+    withTypeAhead(searchLetterIndex: number = 0, debounceInterval: number = 200): this {
         if (this._items.length && this._items.some((item) => typeof item.getLabel !== 'function')) {
             throw Error('ListKeyManager items in typeahead mode must implement the `getLabel` method.');
         }
@@ -141,7 +134,7 @@ export class ListKeyManager<T extends ListKeyManagerOption> {
             filter(() => this._pressedLetters.length > 0),
             map(() => this._pressedLetters.join(''))
         ).subscribe((inputString) => {
-            if (!this.isFirstLetterSearchAllowed) {
+            if (searchLetterIndex === -1) {
                 this._pressedLetters = [];
 
                 return;
@@ -155,7 +148,10 @@ export class ListKeyManager<T extends ListKeyManagerOption> {
                 const index = (this._activeItemIndex + i) % items.length;
                 const item = items[index];
 
-                if (!item.disabled && item.getLabel!().toUpperCase().trim().indexOf(inputString) === 0) {
+                if (
+                    !item.disabled &&
+                    item.getLabel!().toUpperCase().trim().indexOf(inputString) === searchLetterIndex
+                ) {
                     this.setActiveItem(index);
                     break;
                 }

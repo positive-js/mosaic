@@ -431,6 +431,12 @@ export class McInput extends _McInputMixinBase implements McFormFieldControl<any
         this._dirtyCheckNativeValue();
     }
 
+    reset() {
+        if (this.ngControl) {
+            this.ngControl.reset();
+        }
+    }
+
     /** Focuses the input. */
     focus(): void {
         this._elementRef.nativeElement.focus();
