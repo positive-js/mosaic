@@ -3,7 +3,7 @@ import { fakeAsync, inject, tick, TestBed, flush } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { OverlayContainer } from '@ptsecurity/cdk/overlay';
-import { dispatchMouseEvent } from '@ptsecurity/cdk/testing';
+import { dispatchMouseEvent, dispatchFakeEvent } from '@ptsecurity/cdk/testing';
 
 import { McPopoverModule } from './popover.module';
 
@@ -46,6 +46,7 @@ describe('McPopover', () => {
         it('mcPopoverTrigger = hover', fakeAsync(() => {
             const expectedValue = '_TEST1';
             const triggerElement = component.test1.nativeElement;
+            console.log(overlayContainerElement.textContent, 123123);
 
             expect(overlayContainerElement.textContent).not.toEqual(expectedValue);
 
@@ -55,9 +56,15 @@ describe('McPopover', () => {
             expect(overlayContainerElement.textContent).toEqual(expectedValue);
 
             dispatchMouseEvent(triggerElement, 'mouseleave');
-            tick();
             componentFixture.detectChanges();
-            console.log(overlayContainerElement.textContent);
+            dispatchMouseEvent(overlayContainerElement, 'mouseenter');
+            componentFixture.detectChanges();
+            expect(overlayContainerElement.textContent).toContain(expectedValue);
+            // Move out from the tooltip element to hide it
+            dispatchMouseEvent(overlayContainerElement, 'mouseleave');
+            tick(100); // tslint:disable-line
+            componentFixture.detectChanges();
+            tick(); // wait for next tick to hide
             expect(overlayContainerElement.textContent).not.toEqual(expectedValue);
         }));
 
@@ -81,21 +88,18 @@ describe('McPopover', () => {
         }));
 
         it('mcPopoverTrigger = focus', fakeAsync(() => {
-            const expectedValue = '_TEST3';
+            const featureKey = '_TEST3';
             const triggerElement = component.test3.nativeElement;
-
-            expect(overlayContainerElement.textContent).not.toEqual(expectedValue);
-
-            dispatchMouseEvent(triggerElement, 'focus');
-            tick();
+            dispatchFakeEvent(triggerElement, 'focus');
             componentFixture.detectChanges();
-            expect(overlayContainerElement.textContent).toEqual(expectedValue);
-
-            dispatchMouseEvent(triggerElement, 'blur');
-            tick();
+            expect(overlayContainerElement.textContent).toContain(featureKey);
+            dispatchFakeEvent(triggerElement, 'blur');
+            tick(100); // tslint:disable-line
             componentFixture.detectChanges();
-            console.log(overlayContainerElement.textContent);
-            expect(overlayContainerElement.textContent).not.toEqual(expectedValue);
+            tick(); // wait for next tick to hide
+            componentFixture.detectChanges();
+            tick(); // wait for next tick to hide
+            expect(overlayContainerElement.textContent).not.toContain(featureKey);
         }));
 
         it('Can set mcPopoverHeader', fakeAsync(() => {
@@ -159,15 +163,15 @@ describe('McPopover', () => {
 @Component({
     selector: 'mc-popover-test-component',
     template: `
-        <button #test1 mcPopover mcPopoverTrigger="hover" mcPopoverContent="_TEST1"></button>
-        <button #test2 mcPopover mcPopoverTrigger="manual" [mcPopoverVisible]="popoverVisibility" mcPopoverContent="_TEST2"></button>
-        <button #test3 mcPopover mcPopoverTrigger="focus" mcPopoverContent="_TEST3"></button>
+        <button #test1 mcPopover mcPopoverTrigger="hover" mcPopoverContent="_TEST1">_TEST1asdasd</button>
+        <button #test2 mcPopover mcPopoverTrigger="manual" [mcPopoverVisible]="popoverVisibility" mcPopoverContent="_TEST2">_TEST2</button>
+        <button #test3 mcPopover mcPopoverTrigger="focus" mcPopoverContent="_TEST3">_TEST3</button>
 
-        <button #test4 mcPopover mcPopoverTrigger="hover" mcPopoverHeader="_TEST4"></button>
-        <button #test5 mcPopover mcPopoverTrigger="hover" mcPopoverContent="_TEST5"></button>
-        <button #test6 mcPopover mcPopoverTrigger="hover" mcPopoverFooter="_TEST6"></button>
+        <button #test4 mcPopover mcPopoverTrigger="hover" mcPopoverHeader="_TEST4">_TEST4</button>
+        <button #test5 mcPopover mcPopoverTrigger="hover" mcPopoverContent="_TEST5">_TEST5</button>
+        <button #test6 mcPopover mcPopoverTrigger="hover" mcPopoverFooter="_TEST6">_TEST6</button>
 
-        <button #test7 mcPopover mcPopoverClass="_TEST7" mcPopoverContent="_TEST7"></button>
+        <button #test7 mcPopover mcPopoverClass="_TEST7" mcPopoverContent="_TEST7">_TEST7</button>
     `
 })
 class McPopoverTestComponent {
