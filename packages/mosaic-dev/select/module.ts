@@ -32,10 +32,10 @@ export class DemoComponent implements OnInit {
     multiSelectSelectFormControl = new FormControl([], Validators.pattern(/^w/));
 
     searchCtrl: FormControl = new FormControl();
-    options$: Observable<string[]>;
+    filteredOptions: Observable<string[]>;
 
     multipleSearchCtrl: FormControl = new FormControl();
-    multipleOptions$: Observable<string[]>;
+    filteredMultipleOptions: Observable<string[]>;
 
     allOptions = OPTIONS;
     optionCounter = 0;
@@ -43,13 +43,13 @@ export class DemoComponent implements OnInit {
     private options: string[] = OPTIONS;
 
     ngOnInit(): void {
-        this.options$ = merge(
+        this.filteredOptions = merge(
             of(OPTIONS),
             this.searchCtrl.valueChanges
                 .pipe(map((value) => this.getFilteredOptions(value)))
         );
 
-        this.multipleOptions$ = merge(
+        this.filteredMultipleOptions = merge(
             of(OPTIONS),
             this.multipleSearchCtrl.valueChanges
                 .pipe(map((value) => this.getFilteredOptions(value)))

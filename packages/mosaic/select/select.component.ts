@@ -980,8 +980,10 @@ export class McSelect extends McSelectMixinBase implements
 
     /** Sets up a key manager to listen to keyboard events on the overlay panel. */
     private initKeyManager() {
+        const typeAheadDebounce = 200;
+
         this.keyManager = new ActiveDescendantKeyManager<McOption>(this.options)
-            .withTypeAhead(this.search ? -1 : 0)
+            .withTypeAhead(typeAheadDebounce, this.search ? -1 : 0)
             .withVerticalOrientation()
             .withHorizontalOrientation(this.isRtl() ? 'rtl' : 'ltr');
 

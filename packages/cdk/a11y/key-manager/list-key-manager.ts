@@ -119,7 +119,7 @@ export class ListKeyManager<T extends ListKeyManagerOption> {
      * @param searchLetterIndex letter index for incremental search, if is -1 search is disabled
      * @param debounceInterval Time to wait after the last keystroke before setting the active item.
      */
-    withTypeAhead(searchLetterIndex: number = 0, debounceInterval: number = 200): this {
+    withTypeAhead(debounceInterval: number = 200, searchLetterIndex: number = 0): this {
         if (this._items.length && this._items.some((item) => typeof item.getLabel !== 'function')) {
             throw Error('ListKeyManager items in typeahead mode must implement the `getLabel` method.');
         }
