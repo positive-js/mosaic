@@ -16,6 +16,7 @@
 @import '../../list/list-theme';
 @import '../../modal/modal-theme';
 @import '../../navbar/navbar-theme';
+@import '../../popover/popover-theme';
 @import '../../progress-bar/progress-bar-theme';
 @import '../../progress-spinner/progress-spinner-theme';
 @import '../../radio/radio-theme';
@@ -56,6 +57,7 @@
     @include mc-navbar-theme($theme);
     @include mc-option-theme($theme);
     @include mc-panel-theme($theme);
+    @include mc-popover-theme($theme);
     @include mc-progress-bar-theme($theme);
     @include mc-progress-spinner-theme($theme);
     @include mc-radio-theme($theme);

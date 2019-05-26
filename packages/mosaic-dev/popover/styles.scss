@@ -1,0 +1,45 @@
+@import '~@ptsecurity/mosaic-icons/dist/styles/mc-icons';
+
+@import '../../mosaic/core/visual/prebuilt/default-visual';
+
+@import '../../mosaic/core/theming/prebuilt/default-theme';
+//@import '../../lib/core/theming/prebuilt/dark-theme';
+
+@include mosaic-visual();
+
+body, html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+app {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex: 1 1 100%;
+    flex-flow: column;
+    justify-content: center;
+    align-items: stretch;
+    padding: 0 10%;
+}
+
+.popover-485 {
+    width: 485px;
+}
+
+
+button.step {
+    display: inline-block;
+    width: 30%;
+    min-width: 100px;
+}
+
+.trigger-button {
+    width: 130px;
+    margin: 15px;
+}
+
+button.with-margin {
+    margin: 0 5%;
+}

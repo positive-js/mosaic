@@ -1,0 +1,194 @@
+@import '../core/theming/theming';
+@import '../core/styles/typography/typography-utils';
+@import '../core/styles/common/animation';
+@import '../core/styles/common/overlay';
+
+
+$z-index-popover: 1060;
+$popover-max-width: 240px;
+$border-radius-base: 4px;
+$popover-arrow-width: 6px;
+$popover-distance: $popover-arrow-width + 4px;
+$border-size: 1px;
+
+$mc-popover-small-width: 280px;
+$mc-popover-normal-width: 400px;
+$mc-popover-large-width: 640px;
+
+.mc-popover {
+    position: relative;
+
+    display: block;
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    visibility: visible;
+
+    z-index: $z-index-popover;
+
+    list-style: none;
+    white-space: pre-line;
+}
+
+.mc-popover-small {
+    max-width: $mc-popover-small-width;
+
+    .mc-popover {
+        max-width: $mc-popover-small-width !important;
+    }
+}
+
+.mc-popover-normal {
+    max-width: $mc-popover-normal-width;
+
+    .mc-popover {
+        max-width: $mc-popover-normal-width !important;
+    }
+}
+
+.mc-popover-large {
+    max-width: $mc-popover-large-width;
+
+    .mc-popover {
+        max-width: $mc-popover-large-width !important;
+    }
+}
+
+.mc-popover__container {
+    font-size: 15px;
+    border-radius: $border-radius-base;
+    border-width: $border-size;
+    border-style: solid;
+    overflow: hidden;
+}
+
+.mc-popover__header {
+    padding: 10px 16px;
+    border-bottom-width: $border-size;
+    border-bottom-style: solid;
+}
+
+.mc-popover__content {
+    padding: 16px;
+}
+
+.mc-popover__footer {
+    margin-top: 8px;
+    padding: 12px 16px;
+    border-top-width: $border-size;
+    border-top-style: solid;
+}
+
+.mc-popover_placement-top,
+.mc-popover_placement-top-left,
+.mc-popover_placement-top-right{
+    .mc-popover {
+        padding-bottom: $popover-distance;
+    }
+}
+
+.mc-popover_placement-right,
+.mc-popover_placement-right-top,
+.mc-popover_placement-right-bottom {
+    .mc-popover {
+        padding-left: $popover-distance;
+    }
+}
+
+.mc-popover_placement-bottom,
+.mc-popover_placement-bottom-left,
+.mc-popover_placement-bottom-right {
+    .mc-popover {
+        padding-top: $popover-distance;
+    }
+}
+
+.mc-popover_placement-left,
+.mc-popover_placement-left-top,
+.mc-popover_placement-left-bottom {
+    .mc-popover {
+        padding-right: $popover-distance;
+    }
+}
+
+.mc-popover__arrow {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border: solid 1px;
+    transform: rotate(45deg);
+}
+
+.mc-popover_placement-top .mc-popover__arrow {
+    bottom: $popover-distance - $popover-arrow-width;
+    left: 50%;
+    margin-left: -$popover-arrow-width;
+}
+
+.mc-popover_placement-top-left .mc-popover__arrow {
+    bottom: $popover-distance - $popover-arrow-width;
+    left: 20px;
+    margin-left: 0;
+}
+
+.mc-popover_placement-top-right .mc-popover__arrow {
+    bottom: $popover-distance - $popover-arrow-width;
+    right: 20px;
+    margin-left: 0;
+}
+
+.mc-popover_placement-right .mc-popover__arrow {
+    left: $popover-distance - $popover-arrow-width;
+    top: 50%;
+    margin-top: -$popover-arrow-width;
+}
+
+.mc-popover_placement-right-top .mc-popover__arrow {
+    left: $popover-distance - $popover-arrow-width;
+    top: 20px;
+    margin-top: -$popover-arrow-width;
+}
+
+.mc-popover_placement-right-bottom .mc-popover__arrow {
+    left: $popover-distance - $popover-arrow-width;
+    bottom: 14px; // same as top placement = element.style.top + element.style.margin-top = 20px -6px
+    margin-top: -$popover-arrow-width;
+}
+
+.mc-popover_placement-left .mc-popover__arrow {
+    right: $popover-distance - $popover-arrow-width;
+    top: 50%;
+    margin-top: -$popover-arrow-width;
+}
+
+.mc-popover_placement-left-top .mc-popover__arrow {
+    right: $popover-distance - $popover-arrow-width;
+    top: 20px;
+    margin-top: -$popover-arrow-width;
+}
+
+.mc-popover_placement-left-bottom .mc-popover__arrow {
+    right: $popover-distance - $popover-arrow-width;
+    bottom: 14px; // same as top placement = element.style.top + element.style.margin-top = 20px -6px
+    margin-top: -$popover-arrow-width;
+}
+
+.mc-popover_placement-bottom .mc-popover__arrow {
+    top: $popover-distance - $popover-arrow-width;
+    left: 50%;
+    margin-left: -$popover-arrow-width;
+}
+
+.mc-popover_placement-bottom-left .mc-popover__arrow {
+    top: $popover-distance - $popover-arrow-width;
+    left: 20px;
+    margin-left: 0;
+}
+
+.mc-popover_placement-bottom-right .mc-popover__arrow {
+    top: $popover-distance - $popover-arrow-width;
+    right: 20px;
+    margin-left: 0;
+}
