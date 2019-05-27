@@ -3,76 +3,59 @@
 @import '../core/styles/typography/typography-utils';
 
 
-@mixin _mc-link-dashes_mixin($color, $percentage: 66%) {
-    background: linear-gradient(90deg, $color, $percentage, transparent 0) repeat-x;
-    background-size: 5px 1px;
-    // 1.29em это меньше line-height что бы было видно подчеркивание
-    background-position: 0 1.29em;
-}
-
 @mixin mc-link-theme($theme) {
     $primary: map-get($theme, primary);
     $foreground: map-get($theme, foreground);
 
     $is-dark: map-get($theme, is-dark);
 
-    $main-color: mc-color($primary);
-    $main-color_hover: mc-color($primary, if($is-dark, lighter, darker));
-    $disabled-color: mc-color($foreground, disabled-text);
+    $color: mc-color($primary);
+    $color_hover: mc-color($primary, if($is-dark, lighter, darker));
+    $color_disabled: mc-color($foreground, disabled-text);
 
     .mc-link {
-        color: $main-color;
+        color: $color;
 
         &:visited {
-            color: $main-color;
+            color: $color;
         }
 
         &:hover {
-            color: $main-color_hover;
+            color: $color_hover;
         }
 
         &.cdk-keyboard-focused {
-            border-color: $main-color;
-            box-shadow: 0 0 0 2px $main-color;
+            border-color: $color;
+            box-shadow: 0 0 0 2px $color;
+        }
+
+        &.mc-link_underlined .mc-link__text {
+            border-bottom-style: solid;
+        }
+
+        &.mc-link_dashed .mc-link__text{
+            border-bottom-style: dashed;
+        }
+
+        &.mc-link_underlined .mc-link__text,
+        &.mc-link_dashed .mc-link__text {
+            border-bottom-width: 1px;
+            border-bottom-color: $color;
+
+            &:visited {
+                border-bottom-color: $color;
+            }
+
+            &:hover {
+                border-bottom-color: $color_hover;
+            }
         }
 
         &[disabled] {
-            color: $disabled-color;
-        }
+            color: $color_disabled;
 
-        &.mc-link_underlined {
-            & > .mc-link__text {
-                @include _mc-link-dashes_mixin($main-color, 100%);
-            }
-
-            &:visited > .mc-link__text {
-                @include _mc-link-dashes_mixin($main-color, 100%);
-            }
-
-            &:hover > .mc-link__text {
-                @include _mc-link-dashes_mixin($main-color_hover, 100%);
-            }
-
-            &[disabled] > .mc-link__text {
-                @include _mc-link-dashes_mixin($disabled-color, 100%);
-            }
-        }
-
-        &.mc-link_dashed {
-            & > .mc-link__text {
-                @include _mc-link-dashes_mixin($main-color);
-            }
-
-            &:visited > .mc-link__text {
-                @include _mc-link-dashes_mixin($main-color);
-            }
-
-            &:hover > .mc-link__text {
-                @include _mc-link-dashes_mixin($main-color_hover);
-            }
-
-            &[disabled] > .mc-link__text {
-                @include _mc-link-dashes_mixin($disabled-color);
+            & .mc-link__text {
+                border-bottom-color: $color_disabled;
             }
         }
     }
