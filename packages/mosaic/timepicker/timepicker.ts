@@ -57,14 +57,6 @@ import {
 
 let uniqueComponentIdSuffix: number = 0;
 
-const formValidators: WeakMap<FormControl, ValidatorFn | null> = new WeakMap();
-const formValidatorOnChangeRegistrators: WeakMap<FormControl, () => void> = new WeakMap();
-const validatorOnChange = (c: FormControl) => {
-    const validatorOnChangeHandler = formValidatorOnChangeRegistrators.get(c);
-
-    if (validatorOnChangeHandler !== undefined) { validatorOnChangeHandler(); }
-};
-
 export class McTimepickerBase {
     constructor(
         public defaultErrorStateMatcher: ErrorStateMatcher,
@@ -103,22 +95,7 @@ export const McTimepickerMixinBase:
     providers: [
         {
             provide: NG_VALIDATORS,
-            useValue: {
-                validate(c: FormControl) {
-                    // TODO This is `workaround` to bind singleton-like Validator implementation to
-                    // context of each validated component. This MUST be realized in proper way!
-                    if (this.__validatorOnChangeHandler !== undefined) {
-                        formValidatorOnChangeRegistrators.set(c, this.__validatorOnChangeHandler);
-                        this.__validatorOnChangeHandler = undefined;
-                    }
-                    const validator = formValidators.get(c);
-
-                    return validator ? validator(c) : null;
-                },
-                registerOnValidatorChange(fn: () => void): void {
-                    this.__validatorOnChangeHandler = fn;
-                }
-            },
+            useExisting: forwardRef(() => McTimepicker),
             multi: true
         },
         {
@@ -220,7 +197,7 @@ export class McTimepicker extends McTimepickerMixinBase
             .map((timeFormatKey) => TimeFormats[timeFormatKey])
             .indexOf(formatValue) > -1 ? formatValue : DEFAULT_TIME_FORMAT;
 
-        validatorOnChange(<FormControl> this.ngControl.control);
+        this.tpValidatorOnChange(this.ngControl.control as FormControl);
         this.placeholder = TIMEFORMAT_PLACEHOLDERS[this._timeFormat];
     }
 
@@ -230,7 +207,7 @@ export class McTimepicker extends McTimepickerMixinBase
     set minTime(minValue: string | null) {
         this._minTime = minValue;
         this.minDateTime = minValue !== null ? this.getDateFromTimeString(minValue) : undefined;
-        validatorOnChange(<FormControl> this.ngControl.control);
+        this.tpValidatorOnChange(this.ngControl.control as FormControl);
     }
 
     @Input('max-time')
@@ -239,7 +216,7 @@ export class McTimepicker extends McTimepickerMixinBase
     set maxTime(maxValue: string | null) {
         this._maxTime = maxValue;
         this.maxDateTime = maxValue !== null ? this.getDateFromTimeString(maxValue) : undefined;
-        validatorOnChange(<FormControl> this.ngControl.control);
+        this.tpValidatorOnChange(this.ngControl.control as FormControl);
     }
 
     private _id: string;
@@ -256,6 +233,8 @@ export class McTimepicker extends McTimepickerMixinBase
     private _maxTime: string | null = null;
     private maxDateTime: Date | undefined;
     private currentDateTimeInput: Date | undefined;
+    private tpValidators: ValidatorFn | null;
+    private tpValidatorOnChange: (c: FormControl) => void = noop;
 
     constructor(private readonly elementRef: ElementRef,
                 @Optional() @Self() public ngControl: NgControl,
@@ -287,16 +266,11 @@ export class McTimepicker extends McTimepickerMixinBase
         // Instead of NG_VALUE_ACCESSOR (https://github.com/angular/material2/issues/8158#issuecomment-344618103)
         if (this.ngControl) { this.ngControl.valueAccessor = this; }
 
-        // Substitute initial empty validator with validator linked to directive object instance (workaround)
-
-        formValidators.set(
-            <FormControl> this.ngControl.control,
-            Validators.compose([
-                () => this.parseValidator(),
-                () => this.minTimeValidator(),
-                () => this.maxTimeValidator()
-            ])
-        );
+        this.tpValidators = Validators.compose([
+            () => this.parseValidator(),
+            () => this.minTimeValidator(),
+            () => this.maxTimeValidator()
+        ]);
     }
 
     ngOnChanges(): void {
@@ -433,6 +407,14 @@ export class McTimepicker extends McTimepickerMixinBase
 
     registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
+    }
+
+    validate(c: FormControl) {
+        return this.tpValidators ? this.tpValidators(c) : null;
+    }
+
+    registerOnValidatorChange(fn: () => void): void {
+        this.tpValidatorOnChange = fn;
     }
 
     /** Does some manual dirty checking on the native input `value` property. */
