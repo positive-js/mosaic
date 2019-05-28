@@ -329,8 +329,6 @@ export class McListSelection extends _McListSelectionMixinBase implements
     setFocusedOption(option: McListOption, $event: KeyboardEvent): void {
         this.keyManager.updateActiveItem(option);
 
-        console.log('setFocusedOption');
-
         if (hasModifierKey($event, 'shiftKey') && this.multiple) {
             const previousIndex = this.keyManager.previousActiveItemIndex;
             const activeIndex = this.keyManager.activeItemIndex;
@@ -433,7 +431,6 @@ export class McListSelection extends _McListSelectionMixinBase implements
     }
 
     onKeyDown(event: KeyboardEvent) {
-        console.log('onKeyDown');
         const keyCode = event.keyCode;
 
         switch (keyCode) {
