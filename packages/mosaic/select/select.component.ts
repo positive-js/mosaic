@@ -118,17 +118,40 @@ const McSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorStateC
     selector: '[mcSelectSearch]',
     exportAs: 'mcSelectSearch'
 })
-export class McSelectSearch {
+export class McSelectSearch implements AfterContentInit, OnDestroy {
     @ContentChild(McInput) input: McInput;
 
-    focus() {
-        if (!this.input) {
-            return;
-        }
+    searchChangesSubscription: Subscription = new Subscription();
 
+    isSearchChanged: boolean = false;
+
+    focus(): void {
         this.input.focus();
     }
+
+    reset(): void {
+        this.input.ngControl.reset();
+    }
+
+    ngAfterContentInit(): void {
+        if (!this.input) {
+            throw Error('McSelectSearch does not work without input');
+        }
+
+        if (!this.input.ngControl) {
+            throw Error('McSelectSearch does not work without ngControl');
+        }
+
+        this.searchChangesSubscription = this.input.ngControl.valueChanges.subscribe(() => {
+            this.isSearchChanged = true;
+        });
+    }
+
+    ngOnDestroy(): void {
+        this.searchChangesSubscription.unsubscribe();
+    }
 }
+
 
 
 @Directive({ selector: 'mc-select-trigger' })
@@ -421,10 +444,6 @@ export class McSelect extends McSelectMixinBase implements
     /** Emits whenever the component is destroyed. */
     private readonly destroy = new Subject<void>();
 
-    private searchChangesSubscription: Subscription = new Subscription();
-
-    private isSearchChanged = false;
-
     constructor(
         private readonly _viewportRuler: ViewportRuler,
         private readonly _changeDetectorRef: ChangeDetectorRef,
@@ -525,6 +544,12 @@ export class McSelect extends McSelectMixinBase implements
     /** `View -> model callback called when select has been touched` */
     onTouched = () => {};
 
+    resetSearch(): void {
+        if (this.search) {
+            this.search.reset();
+        }
+    }
+
     /** Toggles the overlay panel open or closed. */
     toggle(): void {
         if (this.panelOpen) {
@@ -558,19 +583,7 @@ export class McSelect extends McSelectMixinBase implements
                 }
             });
 
-        if (this.search && this.search.input) {
-            this.search.input.reset();
-        }
-
-        const searchChanges$ = this.search && this.search.input && this.search.input.ngControl
-            ? this.search.input.ngControl.valueChanges
-            : null;
-
-        if (searchChanges$) {
-            this.searchChangesSubscription = searchChanges$.subscribe(() => {
-                this.isSearchChanged = true;
-            });
-        }
+        this.resetSearch();
     }
 
     /** Closes the overlay panel and focuses the host element. */
@@ -578,8 +591,6 @@ export class McSelect extends McSelectMixinBase implements
         if (this._panelOpen) {
             this._panelOpen = false;
             this.keyManager.withHorizontalOrientation(this.isRtl() ? 'rtl' : 'ltr');
-
-            this.searchChangesSubscription.unsubscribe();
 
             this._changeDetectorRef.markForCheck();
             this.onTouched();
@@ -1016,10 +1027,10 @@ export class McSelect extends McSelectMixinBase implements
             .subscribe((event) => {
                 this.onSelect(event.source, event.isUserInput);
 
-                if (this.isSearchChanged) {
+                if (this.search && this.search.isSearchChanged) {
                     Promise.resolve().then(() => this.keyManager.setFirstItemActive());
 
-                    this.isSearchChanged = false;
+                    this.search.isSearchChanged = false;
                 }
 
                 if (event.isUserInput && !this.multiple && this._panelOpen) {
