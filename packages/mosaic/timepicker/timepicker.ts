@@ -188,7 +188,6 @@ export class McTimepicker extends McTimepickerMixinBase
             .map((timeFormatKey) => TimeFormats[timeFormatKey])
             .indexOf(formatValue) > -1 ? formatValue : DEFAULT_TIME_FORMAT;
 
-        // TODO Make another and remove: this.tpValidatorOnChange(this.ngControl.control as FormControl);
         (this.ngControl.control as FormControl).updateValueAndValidity();
         this.placeholder = TIMEFORMAT_PLACEHOLDERS[this._timeFormat];
     }
@@ -200,7 +199,6 @@ export class McTimepicker extends McTimepickerMixinBase
         this._minTime = minValue;
         this.minDateTime = minValue !== null ? this.getDateFromTimeString(minValue) : undefined;
         (this.ngControl.control as FormControl).updateValueAndValidity();
-        // TODO Make another and remove: this.tpValidatorOnChange(this.ngControl.control as FormControl);
     }
 
     @Input('max-time')
@@ -210,7 +208,6 @@ export class McTimepicker extends McTimepickerMixinBase
         this._maxTime = maxValue;
         this.maxDateTime = maxValue !== null ? this.getDateFromTimeString(maxValue) : undefined;
         (this.ngControl.control as FormControl).updateValueAndValidity();
-        // TODO Make another and remove: this.tpValidatorOnChange(this.ngControl.control as FormControl);
     }
 
     private _id: string;
