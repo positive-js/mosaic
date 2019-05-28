@@ -38,8 +38,8 @@ export class McListItemBase {}
     selector: 'mc-list-item, a[mc-list-item]',
     host: {
         class: 'mc-list-item',
-        '(focus)': '_handleFocus()',
-        '(blur)': '_handleBlur()'
+        '(focus)': 'handleFocus()',
+        '(blur)': 'handleBlur()'
     },
     templateUrl: './list-item.html',
     encapsulation: ViewEncapsulation.None,
@@ -47,27 +47,27 @@ export class McListItemBase {}
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class McListItem extends McListItemBase implements AfterContentInit {
-    @ContentChildren(McLine) _lines: QueryList<McLine>;
+    @ContentChildren(McLine) lines: QueryList<McLine>;
 
-    private _lineSetter: McLineSetter;
+    private lineSetter: McLineSetter;
 
     constructor(private _element: ElementRef) {
         super();
     }
 
     ngAfterContentInit() {
-        this._lineSetter = new McLineSetter(this._lines, this._element);
+        this.lineSetter = new McLineSetter(this.lines, this._element);
     }
 
-    _handleFocus() {
+    handleFocus() {
         this._element.nativeElement.classList.add('mc-focused');
     }
 
-    _handleBlur() {
+    handleBlur() {
         this._element.nativeElement.classList.remove('mc-focused');
     }
 
-    _getHostElement(): HTMLElement {
+    getHostElement(): HTMLElement {
         return this._element.nativeElement;
     }
 }

@@ -34,7 +34,7 @@ describe('McList', () => {
 
         expect(listItemEl.nativeElement.classList).not.toContain('mc-list-item-focus');
 
-        listItem.componentInstance._handleFocus();
+        listItem.componentInstance.handleFocus();
         fixture.detectChanges();
         expect(listItemEl.nativeElement.classList).toContain('mc-focused');
 
