@@ -5,9 +5,6 @@
 /* tslint:disable:no-unbound-method */
 /* tslint:disable:prefer-for-of */
 
-import { Subject, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
-
 import {
     ChangeDetectionStrategy,
     Component,
@@ -17,7 +14,15 @@ import {
     ViewChild,
     ViewChildren
 } from '@angular/core';
-
+import {
+    async,
+    ComponentFixture,
+    fakeAsync,
+    flush,
+    inject,
+    TestBed,
+    tick
+} from '@angular/core/testing';
 import {
     ControlValueAccessor,
     FormControl,
@@ -28,23 +33,9 @@ import {
     ReactiveFormsModule,
     Validators
 } from '@angular/forms';
-
-import {
-    async,
-    ComponentFixture,
-    fakeAsync,
-    flush,
-    inject,
-    TestBed,
-    tick
-} from '@angular/core/testing';
-
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-
 import { By } from '@angular/platform-browser';
-
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Directionality } from '@ptsecurity/cdk/bidi';
-
 import {
     DOWN_ARROW,
     END,
@@ -57,7 +48,6 @@ import {
     UP_ARROW,
     A
 } from '@ptsecurity/cdk/keycodes';
-
 import { OverlayContainer } from '@ptsecurity/cdk/overlay';
 import { Platform } from '@ptsecurity/cdk/platform';
 import { ScrollDispatcher, ViewportRuler } from '@ptsecurity/cdk/scrolling';
@@ -68,7 +58,6 @@ import {
     dispatchKeyboardEvent,
     wrappedErrorMessage
 } from '@ptsecurity/cdk/testing';
-
 import {
     ErrorStateMatcher,
     McOption,
@@ -77,8 +66,10 @@ import {
     getMcSelectNonArrayValueError,
     getMcSelectNonFunctionValueError
 } from '@ptsecurity/mosaic/core';
-
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
+import { McInputModule } from '@ptsecurity/mosaic/input';
+import { merge, Observable, of, Subject, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { McSelectModule } from './index';
 import { McSelect } from './select.component';
@@ -86,6 +77,26 @@ import { McSelect } from './select.component';
 
 /** The debounce interval when typing letters to select an option. */
 const LETTER_KEY_DEBOUNCE_INTERVAL = 200;
+
+const OPTIONS  =
+    ['Abakan', 'Almetyevsk', 'Anadyr', 'Anapa', 'Arkhangelsk', 'Astrakhan', 'Barnaul', 'Belgorod', 'Beslan',
+    'Biysk', 'Birobidzhan', 'Blagoveshchensk', 'Bologoye', 'Bryansk', 'Veliky Novgorod',
+    'Veliky Ustyug', 'Vladivostok', 'Vladikavkaz', 'Vladimir', 'Volgograd', 'Vologda', 'Vorkuta',
+    'Voronezh', 'Gatchina', 'Gdov', 'Gelendzhik', 'Gorno-Altaysk', 'Grozny', 'Gudermes',
+    'Gus-Khrustalny', 'Dzerzhinsk', 'Dmitrov', 'Dubna', 'Yeysk', 'Yekaterinburg', 'Yelabuga', 'Yelets',
+    'Yessentuki', 'Zlatoust', 'Ivanovo', 'Izhevsk', 'Irkutsk', 'Yoshkar-Ola', 'Kazan', 'Kaliningrad',
+    'Kaluga', 'Kemerovo', 'Kislovodsk', 'Komsomolsk-on-Amur', 'Kotlas', 'Krasnodar', 'Krasnoyarsk', 'Kurgan',
+    'Kursk', 'Kyzyl', 'Leninogorsk', 'Lensk', 'Lipetsk', 'Luga', 'Lyuban', 'Lyubertsy', 'Magadan', 'Maykop',
+    'Makhachkala', 'Miass', 'Mineralnye Vody', 'Mirny', 'Moscow', 'Murmansk', 'Murom', 'Mytishchi',
+    'Naberezhnye Chelny', 'Nadym', 'Nalchik', 'Nazran', 'Naryan-Mar', 'Nakhodka', 'Nizhnevartovsk',
+    'Nizhnekamsk', 'Nizhny Novgorod', 'Nizhny Tagil', 'Novokuznetsk', 'Novosibirsk', 'Novy Urengoy',
+    'Norilsk', 'Obninsk', 'Oktyabrsky', 'Omsk', 'Orenburg', 'Orekhovo-Zuyevo', 'Oryol', 'Penza', 'Perm',
+    'Petrozavodsk', 'Petropavlovsk-Kamchatsky', 'Podolsk', 'Pskov', 'Pyatigorsk', 'Rostov-on-Don', 'Rybinsk',
+    'Ryazan', 'Salekhard', 'Samara', 'Saint Petersburg', 'Saransk', 'Saratov', 'Severodvinsk', 'Smolensk',
+    'Sol-Iletsk', 'Sochi', 'Stavropol', 'Surgut', 'Syktyvkar', 'Tambov', 'Tver', 'Tobolsk', 'Tolyatti', 'Tomsk',
+    'Tuapse', 'Tula', 'Tynda', 'Tyumen', 'Ulan-Ude', 'Ulyanovsk', 'Ufa', 'Khabarovsk', 'Khanty-Mansiysk',
+    'Chebarkul', 'Cheboksary', 'Chelyabinsk', 'Cherepovets', 'Cherkessk', 'Chistopol', 'Chita', 'Shadrinsk',
+    'Shatura', 'Shuya', 'Elista', 'Engels', 'Yuzhno-Sakhalinsk', 'Yakutsk', 'Yaroslavl'];
 
 
 @Component({
@@ -221,30 +232,45 @@ class SelectWithChangeEvent {
 }
 
 @Component({
-    selector: 'select-init-without-options',
+    selector: 'select-with-search',
     template: `
         <mc-form-field>
-            <mc-select placeholder="Food I want to eat right now" [formControl]="control">
-                <mc-option *ngFor="let food of foods" [value]="food.value">
-                    {{ food.viewValue }}
-                </mc-option>
+            <mc-select [(value)]="singleSelectedWithSearch">
+                <mc-form-field mcSelectSearch>
+                    <input
+                        mcInput
+                        [formControl]="searchCtrl"
+                        type="text" />
+                </mc-form-field>
+
+                <mc-option *ngFor="let option of options$ | async" [value]="option">{{ option }}</mc-option>
             </mc-select>
         </mc-form-field>
     `
 })
-class SelectInitWithoutOptions {
-    foods: any[];
-    control = new FormControl('pizza-1');
+class SelectWithSearch {
+    singleSelectedWithSearch = 'Moscow';
 
-    @ViewChild(McSelect) select: McSelect;
-    @ViewChildren(McOption) options: QueryList<McOption>;
+    searchCtrl: FormControl = new FormControl();
+    options$: Observable<string[]>;
 
-    addOptions() {
-        this.foods = [
-            { value: 'steak-0', viewValue: 'Steak' },
-            { value: 'pizza-1', viewValue: 'Pizza' },
-            { value: 'tacos-2', viewValue: 'Tacos' }
-        ];
+    private options: string[] = OPTIONS;
+
+    ngOnInit(): void {
+        this.options$ = merge(
+            of(OPTIONS),
+            this.searchCtrl.valueChanges
+                .pipe(map((value) => this.getFilteredOptions(value)))
+        );
+    }
+
+    private getFilteredOptions(value): string[] {
+        const searchFilter = (value && value.new) ? value.value : value;
+
+        return searchFilter
+            ? this.options.filter((option) =>
+                option.toLowerCase().includes((searchFilter.toLowerCase())))
+            : this.options;
     }
 }
 
@@ -850,6 +876,7 @@ describe('McSelect', () => {
             imports: [
                 McFormFieldModule,
                 McSelectModule,
+                McInputModule,
                 ReactiveFormsModule,
                 FormsModule,
                 NoopAnimationsModule
@@ -1705,28 +1732,6 @@ describe('McSelect', () => {
                     .toBe(true, 'Expected second option to be selected');
             }));
 
-            it('should remove selection if option has been removed', fakeAsync(() => {
-                const select = fixture.componentInstance.select;
-
-                trigger.click();
-                fixture.detectChanges();
-                flush();
-
-                const firstOption = overlayContainerElement.querySelectorAll('mc-option')[0] as HTMLElement;
-
-                firstOption.click();
-                fixture.detectChanges();
-
-                expect(select.selected).toBe(select.options.first, 'Expected first option to be selected.');
-
-                fixture.componentInstance.foods = [];
-                fixture.detectChanges();
-                flush();
-
-                expect(select.selected)
-                    .toBeUndefined('Expected selection to be removed when option no longer exists.');
-            }));
-
             it('should display the selected option in the trigger', fakeAsync(() => {
                 trigger.click();
                 fixture.detectChanges();
@@ -2143,7 +2148,7 @@ describe('McSelect', () => {
                 flush();
 
                 host = fixture.debugElement.query(By.css('mc-select')).nativeElement;
-                panel = overlayContainerElement.querySelector('.mc-select__panel') as HTMLElement;
+                panel = overlayContainerElement.querySelector('.mc-select__content') as HTMLElement;
             }));
 
             it('should not scroll to options that are completely in the view', fakeAsync(() => {
@@ -2222,7 +2227,7 @@ describe('McSelect', () => {
                 fixture.detectChanges();
 
                 // <option amount> * <option height> - <panel height> = 30 * 32 - 228 = 736
-                expect(panel.scrollTop).toBe(732, 'Expected panel to be scrolled to the bottom');
+                expect(panel.scrollTop).toBe(736, 'Expected panel to be scrolled to the bottom');
             }));
 
             it('should scroll to the active option when typing', fakeAsync(() => {
@@ -2241,25 +2246,53 @@ describe('McSelect', () => {
         });
     });
 
-    describe('when initialized without options', () => {
-        beforeEach(async(() => configureMcSelectTestingModule([SelectInitWithoutOptions])));
+    describe('with a search', () => {
+        beforeEach(async(() => configureMcSelectTestingModule([SelectWithSearch])));
 
-        it('should select the proper option when option list is initialized later', fakeAsync(() => {
-            const fixture = TestBed.createComponent(SelectInitWithoutOptions);
-            const instance = fixture.componentInstance;
+        let fixture: ComponentFixture<SelectWithSearch>;
+        let trigger: HTMLElement;
 
+        beforeEach(fakeAsync(() => {
+            fixture = TestBed.createComponent(SelectWithSearch);
+            fixture.detectChanges();
+
+            trigger = fixture.debugElement.query(By.css('.mc-select__trigger')).nativeElement;
+        }));
+
+        it('should have search input', fakeAsync(() => {
+            trigger.click();
             fixture.detectChanges();
             flush();
 
-            // Wait for the initial writeValue promise.
-            expect(instance.select.selected).toBeFalsy();
+            expect(fixture.debugElement.query(By.css('input'))).toBeDefined();
+        }));
 
-            instance.addOptions();
+        it('should search filed should be focused after open', fakeAsync(() => {
+            trigger.click();
             fixture.detectChanges();
             flush();
 
-            // Wait for the next writeValue promise.
-            expect(instance.select.selected).toBe(instance.options.toArray()[1]);
+            const input = fixture.debugElement.query(By.css('input')).nativeElement;
+
+            expect(input).toBe(document.activeElement);
+        }));
+
+        it('should search', fakeAsync(() => {
+            trigger.click();
+            fixture.detectChanges();
+            flush();
+
+            const inputElementDebug = fixture.debugElement.query(By.css('input'));
+
+            inputElementDebug.nativeElement.value = 'lu';
+
+            inputElementDebug.triggerEventHandler('input', { target: inputElementDebug.nativeElement });
+            fixture.detectChanges();
+
+            const optionsTexts = fixture.debugElement.queryAll(By.css('mc-option'))
+                .map((el) => el.nativeElement.innerText);
+
+            expect(optionsTexts).toEqual(['Kaluga', 'Luga']);
         }));
     });
 

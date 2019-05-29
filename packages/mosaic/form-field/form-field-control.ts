@@ -46,4 +46,6 @@ export abstract class McFormFieldControl<T> {
 
     /** Handles a click on the control's container. */
     abstract onContainerClick(event: MouseEvent): void;
+
+    abstract focus(): void;
 }

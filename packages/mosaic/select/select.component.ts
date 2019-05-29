@@ -77,8 +77,9 @@ import {
     MC_SELECT_SCROLL_STRATEGY
 } from '@ptsecurity/mosaic/core';
 import { McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
+import { McInput } from '@ptsecurity/mosaic/input';
 import { McTag } from '@ptsecurity/mosaic/tags';
-import { defer, merge, Observable, Subject } from 'rxjs';
+import { defer, merge, Observable, Subject, Subscription } from 'rxjs';
 import {
     filter,
     map,
@@ -112,6 +113,45 @@ export class McSelectBase {
 
 const McSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorStateCtor &
     typeof McSelectBase = mixinTabIndex(mixinDisabled(mixinErrorState(McSelectBase)));
+
+@Directive({
+    selector: '[mcSelectSearch]',
+    exportAs: 'mcSelectSearch'
+})
+export class McSelectSearch implements AfterContentInit, OnDestroy {
+    @ContentChild(McInput) input: McInput;
+
+    searchChangesSubscription: Subscription = new Subscription();
+
+    isSearchChanged: boolean = false;
+
+    focus(): void {
+        this.input.focus();
+    }
+
+    reset(): void {
+        this.input.ngControl.reset();
+    }
+
+    ngAfterContentInit(): void {
+        if (!this.input) {
+            throw Error('McSelectSearch does not work without input');
+        }
+
+        if (!this.input.ngControl) {
+            throw Error('McSelectSearch does not work without ngControl');
+        }
+
+        this.searchChangesSubscription = this.input.ngControl.valueChanges!.subscribe(() => {
+            this.isSearchChanged = true;
+        });
+    }
+
+    ngOnDestroy(): void {
+        this.searchChangesSubscription.unsubscribe();
+    }
+}
+
 
 
 @Directive({ selector: 'mc-select-trigger' })
@@ -166,6 +206,8 @@ export class McSelect extends McSelectMixinBase implements
     /** Deals with the selection logic. */
     selectionModel: SelectionModel<McOption>;
 
+    previousSelectionModelSelected: McOption[] = [];
+
     /** Manages keyboard events for options in the panel. */
     keyManager: ActiveDescendantKeyManager<McOption>;
 
@@ -216,6 +258,8 @@ export class McSelect extends McSelectMixinBase implements
 
     @ViewChild('panel') panel: ElementRef;
 
+    @ViewChild('optionsContainer') optionsContainer: ElementRef;
+
     @ViewChild(CdkConnectedOverlay) overlayDir: CdkConnectedOverlay;
 
     @ViewChildren(McTag) tags: QueryList<McTag>;
@@ -228,6 +272,8 @@ export class McSelect extends McSelectMixinBase implements
 
     /** All of the defined groups of options. */
     @ContentChildren(McOptgroup) optionGroups: QueryList<McOptgroup>;
+
+    @ContentChild(McSelectSearch) search: McSelectSearch;
 
     /** Classes to be passed to the select panel. Supports the same syntax as `ngClass`. */
     @Input() panelClass: string | string[] | Set<string> | { [key: string]: any };
@@ -244,7 +290,10 @@ export class McSelect extends McSelectMixinBase implements
     /** Combined stream of all of the child options' change events. */
     readonly optionSelectionChanges: Observable<McOptionSelectionChange> = defer(() => {
         if (this.options) {
-            return merge(...this.options.map((option) => option.onSelectionChange));
+            return merge(
+                ...this.options.map((option) => option.onSelectionChange),
+                ...this.selectionModel.selected.map((option) => option.onSelectionChange)
+            );
         }
 
         return this._ngZone.onStable
@@ -490,10 +539,16 @@ export class McSelect extends McSelectMixinBase implements
     }
 
     /** `View -> model callback called when value changes` */
-    _onChange: (value: any) => void = () => {};
+    onChange: (value: any) => void = () => {};
 
     /** `View -> model callback called when select has been touched` */
-    _onTouched = () => {};
+    onTouched = () => {};
+
+    resetSearch(): void {
+        if (this.search) {
+            this.search.reset();
+        }
+    }
 
     /** Toggles the overlay panel open or closed. */
     toggle(): void {
@@ -527,6 +582,8 @@ export class McSelect extends McSelectMixinBase implements
                     this.overlayDir.overlayRef.overlayElement.style.fontSize = `${this.triggerFontSize}px`;
                 }
             });
+
+        this.resetSearch();
     }
 
     /** Closes the overlay panel and focuses the host element. */
@@ -534,8 +591,9 @@ export class McSelect extends McSelectMixinBase implements
         if (this._panelOpen) {
             this._panelOpen = false;
             this.keyManager.withHorizontalOrientation(this.isRtl() ? 'rtl' : 'ltr');
+
             this._changeDetectorRef.markForCheck();
-            this._onTouched();
+            this.onTouched();
         }
     }
 
@@ -559,7 +617,7 @@ export class McSelect extends McSelectMixinBase implements
      * @param fn Callback to be triggered when the value changes.
      */
     registerOnChange(fn: (value: any) => void): void {
-        this._onChange = fn;
+        this.onChange = fn;
     }
 
     /**
@@ -570,7 +628,7 @@ export class McSelect extends McSelectMixinBase implements
      * @param fn Callback to be triggered when the component has been touched.
      */
     registerOnTouched(fn: () => {}): void {
-        this._onTouched = fn;
+        this.onTouched = fn;
     }
 
     /**
@@ -642,6 +700,10 @@ export class McSelect extends McSelectMixinBase implements
     onFadeInDone(): void {
         this.panelDoneAnimating = this.panelOpen;
         this._changeDetectorRef.markForCheck();
+
+        if (this.search && this._panelOpen) {
+            this.search.focus();
+        }
     }
 
     onFocus() {
@@ -660,7 +722,7 @@ export class McSelect extends McSelectMixinBase implements
         this._focused = false;
 
         if (!this.disabled && !this.panelOpen) {
-            this._onTouched();
+            this.onTouched();
             this._changeDetectorRef.markForCheck();
             this.stateChanges.next();
         }
@@ -675,7 +737,7 @@ export class McSelect extends McSelectMixinBase implements
             .subscribe(() => {
                 this._changeDetectorRef.detectChanges();
                 this.calculateOverlayOffsetX();
-                this.panel.nativeElement.scrollTop = this.scrollTop;
+                this.optionsContainer.nativeElement.scrollTop = this.scrollTop;
             });
     }
 
@@ -870,6 +932,8 @@ export class McSelect extends McSelectMixinBase implements
      * found with the designated value, the select trigger is cleared.
      */
     private setSelectionByValue(value: any | any[]): void {
+        this.previousSelectionModelSelected = this.selectionModel.selected;
+
         if (this.multiple && value) {
             if (!Array.isArray(value)) {
                 throw getMcSelectNonArrayValueError();
@@ -892,12 +956,11 @@ export class McSelect extends McSelectMixinBase implements
         this._changeDetectorRef.markForCheck();
     }
 
-    /**
-     * Finds and selects and option based on its value.
-     * @returns Option that has the corresponding value.
-     */
-    private selectValue(value: any): McOption | undefined {
-        const correspondingOption = this.options.find((option: McOption) => {
+    private getCorrespondOption(value: any): McOption | undefined {
+        return [
+            ...this.options.toArray(),
+            ...this.previousSelectionModelSelected
+        ].find((option: McOption) => {
             try {
                 // Treat null as a special reset value.
                 return option.value != null && this._compareWith(option.value, value);
@@ -910,6 +973,14 @@ export class McSelect extends McSelectMixinBase implements
                 return false;
             }
         });
+    }
+
+    /**
+     * Finds and selects and option based on its value.
+     * @returns Option that has the corresponding value.
+     */
+    private selectValue(value: any): McOption | undefined {
+        const correspondingOption = this.getCorrespondOption(value);
 
         if (correspondingOption) {
             this.selectionModel.select(correspondingOption);
@@ -920,8 +991,10 @@ export class McSelect extends McSelectMixinBase implements
 
     /** Sets up a key manager to listen to keyboard events on the overlay panel. */
     private initKeyManager() {
+        const typeAheadDebounce = 200;
+
         this.keyManager = new ActiveDescendantKeyManager<McOption>(this.options)
-            .withTypeAhead()
+            .withTypeAhead(typeAheadDebounce, this.search ? -1 : 0)
             .withVerticalOrientation()
             .withHorizontalOrientation(this.isRtl() ? 'rtl' : 'ltr');
 
@@ -953,6 +1026,12 @@ export class McSelect extends McSelectMixinBase implements
             .pipe(takeUntil(changedOrDestroyed))
             .subscribe((event) => {
                 this.onSelect(event.source, event.isUserInput);
+
+                if (this.search && this.search.isSearchChanged) {
+                    Promise.resolve().then(() => this.keyManager.setFirstItemActive());
+
+                    this.search.isSearchChanged = false;
+                }
 
                 if (event.isUserInput && !this.multiple && this._panelOpen) {
                     this.close();
@@ -999,7 +1078,12 @@ export class McSelect extends McSelectMixinBase implements
                     // want to restore focus back to the trigger, in order to
                     // prevent the select keyboard controls from clashing with
                     // the ones from `mc-option`.
-                    this.focus();
+                    // If search is avaliable then we focus search again.
+                    if (this.search) {
+                        this.search.focus();
+                    } else {
+                        this.focus();
+                    }
                 }
             }
         }
@@ -1036,7 +1120,7 @@ export class McSelect extends McSelectMixinBase implements
 
         this._value = valueToEmit;
         this.valueChange.emit(valueToEmit);
-        this._onChange(valueToEmit);
+        this.onChange(valueToEmit);
         this.selectionChange.emit(new McSelectChange(this, valueToEmit));
         this._changeDetectorRef.markForCheck();
     }
@@ -1065,10 +1149,10 @@ export class McSelect extends McSelectMixinBase implements
         const activeOptionIndex = this.keyManager.activeItemIndex || 0;
         const labelCount = countGroupLabelsBeforeOption(activeOptionIndex, this.options, this.optionGroups);
 
-        this.panel.nativeElement.scrollTop = getOptionScrollPosition(
+        this.optionsContainer.nativeElement.scrollTop = getOptionScrollPosition(
             activeOptionIndex + labelCount,
             this.getItemHeight(),
-            this.panel.nativeElement.scrollTop,
+            this.optionsContainer.nativeElement.scrollTop,
             SELECT_PANEL_MAX_HEIGHT
         );
     }

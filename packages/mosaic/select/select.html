@@ -42,7 +42,6 @@
     (backdropClick)="close()"
     (attach)="onAttached()"
     (detach)="close()">
-
     <div
         #panel
         class="mc-select__panel {{ getPanelTheme() }}"
@@ -53,11 +52,17 @@
         [style.font-size.px]="triggerFontSize"
         (keydown)="handleKeydown($event)">
 
+        <div *ngIf="search" class="mc-select__search-container">
+            <ng-content select="[mcSelectSearch]"></ng-content>
+        </div>
+
         <div
+            #optionsContainer
             class="mc-select__content"
             [@fadeInContent]="'showing'"
             (@fadeInContent.done)="onFadeInDone()">
-            <ng-content></ng-content>
+
+            <ng-content select="mc-option,mc-optgroup"></ng-content>
         </div>
     </div>
 </ng-template>

@@ -143,6 +143,7 @@ export class McFormField extends _McFormFieldMixinBase implements
 
         if (this._control && this._control.ngControl) {
             this._control.ngControl.reset();
+            this._control.focus();
         }
     }
 

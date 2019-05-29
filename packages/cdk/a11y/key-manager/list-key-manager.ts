@@ -116,9 +116,10 @@ export class ListKeyManager<T extends ListKeyManagerOption> {
 
     /**
      * Turns on typeahead mode which allows users to set the active item by typing.
+     * @param searchLetterIndex letter index for incremental search, if is -1 search is disabled
      * @param debounceInterval Time to wait after the last keystroke before setting the active item.
      */
-    withTypeAhead(debounceInterval: number = 200): this {
+    withTypeAhead(debounceInterval: number = 200, searchLetterIndex: number = 0): this {
         if (this._items.length && this._items.some((item) => typeof item.getLabel !== 'function')) {
             throw Error('ListKeyManager items in typeahead mode must implement the `getLabel` method.');
         }
@@ -133,6 +134,12 @@ export class ListKeyManager<T extends ListKeyManagerOption> {
             filter(() => this._pressedLetters.length > 0),
             map(() => this._pressedLetters.join(''))
         ).subscribe((inputString) => {
+            if (searchLetterIndex === -1) {
+                this._pressedLetters = [];
+
+                return;
+            }
+
             const items = this._items.toArray();
 
             // Start at 1 because we want to start searching at the item immediately
@@ -141,7 +148,10 @@ export class ListKeyManager<T extends ListKeyManagerOption> {
                 const index = (this._activeItemIndex + i) % items.length;
                 const item = items[index];
 
-                if (!item.disabled && item.getLabel!().toUpperCase().trim().indexOf(inputString) === 0) {
+                if (
+                    !item.disabled &&
+                    item.getLabel!().toUpperCase().trim().indexOf(inputString) === searchLetterIndex
+                ) {
                     this.setActiveItem(index);
                     break;
                 }
