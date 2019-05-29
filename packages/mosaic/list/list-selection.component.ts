@@ -20,7 +20,18 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FocusKeyManager, IFocusableOption } from '@ptsecurity/cdk/a11y';
 import { SelectionModel } from '@ptsecurity/cdk/collections';
-import { END, ENTER, hasModifierKey, HOME, PAGE_DOWN, PAGE_UP, SPACE } from '@ptsecurity/cdk/keycodes';
+import {
+    DOWN_ARROW,
+    END,
+    ENTER,
+    hasModifierKey,
+    HOME, LEFT_ARROW,
+    PAGE_DOWN,
+    PAGE_UP, RIGHT_ARROW,
+    SPACE,
+    TAB,
+    UP_ARROW
+} from '@ptsecurity/cdk/keycodes';
 import {
     McLine,
     CanDisable,
@@ -139,8 +150,6 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
 
     focus(): void {
         this._element.nativeElement.focus();
-
-        // this.listSelection.setFocusedOption(this);
     }
 
     getLabel() {
@@ -326,10 +335,13 @@ export class McListSelection extends _McListSelectionMixinBase implements
     }
 
     // Sets the focused option of the selection-list.
-    setFocusedOption(option: McListOption, $event: KeyboardEvent): void {
+    setFocusedOption(option: McListOption, $event?: KeyboardEvent): void {
         this.keyManager.updateActiveItem(option);
 
-        if (hasModifierKey($event, 'shiftKey') && this.multiple) {
+        const withShift = $event ? hasModifierKey($event, 'shiftKey') : false;
+        const withCtrl = $event ? hasModifierKey($event, 'ctrlKey') : false;
+
+        if (withShift && this.multiple) {
             const previousIndex = this.keyManager.previousActiveItemIndex;
             const activeIndex = this.keyManager.activeItemIndex;
 
@@ -342,7 +354,7 @@ export class McListSelection extends _McListSelectionMixinBase implements
                     if (index >= activeIndex && index <= previousIndex) { item.setSelected(true); }
                 });
             }
-        } else if (hasModifierKey($event, 'ctrlKey')) {
+        } else if (withCtrl) {
 
             if (!this.canDeselectLast(option)) { return; }
 
@@ -437,34 +449,45 @@ export class McListSelection extends _McListSelectionMixinBase implements
             case SPACE:
             case ENTER:
                 this.toggleFocusedOption();
-                event.preventDefault();
+
+                break;
+
+            case TAB:
+                this.keyManager.tabOut.next();
+
+                return;
+
+            case DOWN_ARROW:
+                this.keyManager.setNextItemActive();
+
+                break;
+            case UP_ARROW:
+                this.keyManager.setPreviousItemActive();
 
                 break;
             case HOME:
                 this.keyManager.setFirstItemActive();
-                event.preventDefault();
 
                 break;
             case END:
                 this.keyManager.setLastItemActive();
-                event.preventDefault();
 
                 break;
             case PAGE_UP:
-                if (!this.horizontal) { this.keyManager.setPreviousPageItemActive(); }
-
-                event.preventDefault();
+                this.keyManager.setPreviousPageItemActive();
 
                 break;
             case PAGE_DOWN:
-                if (!this.horizontal) { this.keyManager.setNextPageItemActive(); }
-
-                event.preventDefault();
+                this.keyManager.setNextPageItemActive();
 
                 break;
             default:
-                this.keyManager.onKeydown(event);
+                return;
         }
+
+        event.preventDefault();
+
+        this.setFocusedOption(this.keyManager.activeItem as McListOption, event);
     }
 
     // Reports a value change to the ControlValueAccessor

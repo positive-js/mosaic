@@ -11,7 +11,7 @@ import {
     createKeyboardEvent,
     dispatchFakeEvent,
     dispatchEvent,
-    dispatchKeyboardEvent
+    dispatchKeyboardEvent, createMouseEvent
 } from '@ptsecurity/cdk/testing';
 
 import {
@@ -151,7 +151,9 @@ describe('McListSelection without forms', () => {
 
             expect(selectList.selected.length).toBe(0);
 
-            testListItem.handleClick();
+            const event = createMouseEvent('click');
+
+            testListItem.handleClick(event);
             fixture.detectChanges();
 
             expect(selectList.selected.length).toBe(0);
@@ -209,7 +211,7 @@ describe('McListSelection without forms', () => {
                 createKeyboardEvent('keydown', UP_ARROW, testListItem);
             const manager = selectionList.componentInstance.keyManager;
 
-            listOptions[2].componentInstance.focus();
+            manager.setActiveItem(2);
             expect(manager.activeItemIndex).toEqual(2);
 
             selectionList.componentInstance.onKeyDown(UP_EVENT);
@@ -224,7 +226,7 @@ describe('McListSelection without forms', () => {
             const upKeyEvent = createKeyboardEvent('keydown', UP_ARROW);
             Object.defineProperty(upKeyEvent, 'shiftKey', { get: () => true });
 
-            listOptions[3].componentInstance.focus();
+            manager.setActiveItem(3);
             expect(manager.activeItemIndex).toBe(3);
 
             expect(listOptions[1].componentInstance.selected).toBe(false);
@@ -246,7 +248,7 @@ describe('McListSelection without forms', () => {
         it('should focus next item when press DOWN ARROW', () => {
             const manager = selectionList.componentInstance.keyManager;
 
-            listOptions[2].componentInstance.focus();
+            manager.setActiveItem(2);
             expect(manager.activeItemIndex).toEqual(2);
 
             selectionList.componentInstance.onKeyDown(createKeyboardEvent('keydown', DOWN_ARROW));
@@ -260,7 +262,7 @@ describe('McListSelection without forms', () => {
             const downKeyEvent = createKeyboardEvent('keydown', DOWN_ARROW);
             Object.defineProperty(downKeyEvent, 'shiftKey', { get: () => true });
 
-            listOptions[1].componentInstance.focus();
+            manager.setActiveItem(1);
             expect(manager.activeItemIndex).toBe(1);
 
             expect(listOptions[2].componentInstance.selected).toBe(false);
@@ -541,7 +543,9 @@ describe('McListSelection without forms', () => {
 
             expect(selectList.selected.length).toBe(0);
 
-            testListItem.handleClick();
+            const event = createMouseEvent('click');
+
+            testListItem.handleClick(event);
             fixture.detectChanges();
 
             expect(selectList.selected.length).toBe(0);
