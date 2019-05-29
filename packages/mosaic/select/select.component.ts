@@ -142,7 +142,7 @@ export class McSelectSearch implements AfterContentInit, OnDestroy {
             throw Error('McSelectSearch does not work without ngControl');
         }
 
-        this.searchChangesSubscription = this.input.ngControl.valueChanges.subscribe(() => {
+        this.searchChangesSubscription = this.input.ngControl.valueChanges!.subscribe(() => {
             this.isSearchChanged = true;
         });
     }
