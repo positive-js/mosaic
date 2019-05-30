@@ -383,6 +383,8 @@ export class McDatepicker<D> implements OnDestroy, CanColor {
                 this._opened = false;
                 this.closedStream.emit();
                 this.focusedElementBeforeOpen = null;
+
+                this.datepickerInput.elementRef.nativeElement.focus();
             }
         };
 
