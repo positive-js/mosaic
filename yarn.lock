@@ -470,14 +470,14 @@
   resolved "https://registry.yarnpkg.com/@ptsecurity/mosaic-icons/-/mosaic-icons-2.7.2.tgz#000159da22ead25c55cfabaa5a2ad37c7a6a59f4"
   integrity sha512-vHQK7O1OgY4PnxEqZIa/GjM6MR67QQeDr6CSz3jYs/qewEeIVr3TtVGBkAWp+Db3iYgfBmTwxVbBBRxPdKK6rA==
 
-"@ptsecurity/tslint-config@^0.10.1":
-  version "0.10.1"
-  resolved "https://registry.yarnpkg.com/@ptsecurity/tslint-config/-/tslint-config-0.10.1.tgz#519e16c77239c7a69e312e00b4f8393477953a64"
-  integrity sha512-sQWUwcSQyeGHaD/Qg2+BZc8ZLv/364mmH0qz9G1qcrfB8ktO2foo2II8hMtJU/TIkt1rcLdVwwb1pS66Z1IR0w==
+"@ptsecurity/tslint-config@^0.12.0":
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/@ptsecurity/tslint-config/-/tslint-config-0.12.0.tgz#a3464a95653f1af5a3a9c057cb41b78629ef87a0"
+  integrity sha512-U53MIBOSpOLGvWSksdpI2AbP3+OkAAmtrQtG+5BSyy6K0Jyu+fdB7ry8kGkmWdwjBLW//v2jrBLDBBqZUXtsFQ==
   dependencies:
     rxjs-tslint-rules "4.10.0"
     tslib "1.9.3"
-    tslint "5.11.0"
+    tslint "5.16.0"
     tslint-eslint-rules "5.4.0"
     tslint-microsoft-contrib "5.2.1"
     tsutils "3.1.0"
@@ -1549,15 +1549,6 @@ axios@0.17.1:
   dependencies:
     follow-redirects "^1.2.5"
     is-buffer "^1.1.5"
-
-babel-code-frame@^6.22.0:
-  version "6.26.0"
-  resolved "https://registry.yarnpkg.com/babel-code-frame/-/babel-code-frame-6.26.0.tgz#63fd43f7dc1e3bb7ce35947db8fe369a3f58c74b"
-  integrity sha1-Y/1D99weO7fONZR9uP42mj9Yx0s=
-  dependencies:
-    chalk "^1.1.3"
-    esutils "^2.0.2"
-    js-tokens "^3.0.2"
 
 babel-polyfill@6.26.0:
   version "6.26.0"
@@ -6158,17 +6149,12 @@ js-base64@^2.1.8:
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.5.1.tgz#1efa39ef2c5f7980bb1784ade4a8af2de3291121"
   integrity sha512-M7kLczedRMYX4L8Mdh4MzyAMM9O5osx+4FcOQuTvr3A9F2D9S5JXheN0ewNbrvK2UatkTRhL5ejGmGSjNMiZuw==
 
-js-tokens@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
-  integrity sha1-mGbfOVECEw449/mWvOtlRDIJwls=
-
 js-tokens@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
   integrity sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
 
-js-yaml@3.x, js-yaml@^3.7.0:
+js-yaml@3.x:
   version "3.12.2"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.12.2.tgz#ef1d067c5a9d9cb65bd72f285b5d8105c77f14fc"
   integrity sha512-QHn/Lh/7HhZ/Twc7vJYQTkjuCa0kaCcDcjK5Zlk2rvnUpy7DxMJ23+Jc2dcyvltwQVg1nygAVlB2oRDFHoRS5Q==
@@ -11194,25 +11180,7 @@ tslint-microsoft-contrib@5.2.1:
   dependencies:
     tsutils "^2.27.2 <2.29.0"
 
-tslint@5.11.0:
-  version "5.11.0"
-  resolved "https://registry.yarnpkg.com/tslint/-/tslint-5.11.0.tgz#98f30c02eae3cde7006201e4c33cb08b48581eed"
-  integrity sha1-mPMMAurjzecAYgHkwzywi0hYHu0=
-  dependencies:
-    babel-code-frame "^6.22.0"
-    builtin-modules "^1.1.1"
-    chalk "^2.3.0"
-    commander "^2.12.1"
-    diff "^3.2.0"
-    glob "^7.1.1"
-    js-yaml "^3.7.0"
-    minimatch "^3.0.4"
-    resolve "^1.3.2"
-    semver "^5.3.0"
-    tslib "^1.8.0"
-    tsutils "^2.27.2"
-
-tslint@^5.15.0:
+tslint@5.16.0, tslint@^5.15.0:
   version "5.16.0"
   resolved "https://registry.yarnpkg.com/tslint/-/tslint-5.16.0.tgz#ae61f9c5a98d295b9a4f4553b1b1e831c1984d67"
   integrity sha512-UxG2yNxJ5pgGwmMzPMYh/CCnCnh0HfPgtlVRDs1ykZklufFBL1ZoTlWFRz2NQjcoEiDoRp+JyT0lhBbbH/obyA==
@@ -11238,17 +11206,17 @@ tsutils@3.1.0:
   dependencies:
     tslib "^1.8.1"
 
-tsutils@^2.27.2, tsutils@^2.29.0:
-  version "2.29.0"
-  resolved "https://registry.yarnpkg.com/tsutils/-/tsutils-2.29.0.tgz#32b488501467acbedd4b85498673a0812aca0b99"
-  integrity sha512-g5JVHCIJwzfISaXpXE1qvNalca5Jwob6FjI4AoPlqMusJ6ftFE7IkkFoMhVLRgK+4Kx3gkzb8UZK5t5yTTvEmA==
-  dependencies:
-    tslib "^1.8.1"
-
 "tsutils@^2.27.2 <2.29.0":
   version "2.28.0"
   resolved "https://registry.yarnpkg.com/tsutils/-/tsutils-2.28.0.tgz#6bd71e160828f9d019b6f4e844742228f85169a1"
   integrity sha512-bh5nAtW0tuhvOJnx1GLRn5ScraRLICGyJV5wJhtRWOLsxW70Kk5tZtpK3O/hW6LDnqKS9mlUMPZj9fEMJ0gxqA==
+  dependencies:
+    tslib "^1.8.1"
+
+tsutils@^2.29.0:
+  version "2.29.0"
+  resolved "https://registry.yarnpkg.com/tsutils/-/tsutils-2.29.0.tgz#32b488501467acbedd4b85498673a0812aca0b99"
+  integrity sha512-g5JVHCIJwzfISaXpXE1qvNalca5Jwob6FjI4AoPlqMusJ6ftFE7IkkFoMhVLRgK+4Kx3gkzb8UZK5t5yTTvEmA==
   dependencies:
     tslib "^1.8.1"
 

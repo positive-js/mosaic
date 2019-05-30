@@ -44,7 +44,7 @@
         "@commitlint/config-conventional": "^7.5.0",
         "@octokit/rest": "^16.2.0",
         "@ptsecurity/commitlint-config": "^0.2.1",
-        "@ptsecurity/tslint-config": "^0.10.1",
+        "@ptsecurity/tslint-config": "^0.12.0",
         "@schematics/angular": "7.1.4",
         "@types/browser-sync": "^0.0.42",
         "@types/chalk": "^2.2.0",
