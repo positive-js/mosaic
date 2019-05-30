@@ -30,31 +30,48 @@
         }
 
         &.mc-link_underlined .mc-link__text {
-            border-bottom-style: solid;
+            border-bottom-style: solid;            
+            border-bottom-color: rgba( $color, .32);
         }
 
         &.mc-link_dashed .mc-link__text{
             border-bottom-style: dashed;
         }
 
-        &.mc-link_underlined .mc-link__text,
         &.mc-link_dashed .mc-link__text {
             border-bottom-width: 1px;
-            border-bottom-color: $color;
+            border-bottom-color: rgba( $color, .5);
 
             &:visited {
-                border-bottom-color: $color;
+                border-bottom-color: rgba( $color, .5);
             }
 
             &:hover {
-                border-bottom-color: $color_hover;
+                border-bottom-color: rgba($color_hover, 0.5);
+            }
+        }
+
+        &.mc-link_underlined .mc-link__text{
+            border-bottom-width: 1px;
+            border-bottom-color: rgba( $color, .32);
+
+            &:visited {
+                border-bottom-color: rgba( $color, .32);
+            }
+
+            &:hover {
+                border-bottom-color: rgba($color_hover, 0.32);
             }
         }
 
         &[disabled] {
             color: $color_disabled;
 
-            & .mc-link__text {
+            &.mc-link_underlined .mc-link__text{
+                border-bottom-color: rgba($color_disabled, 0.64);
+            }
+
+            &.mc-link_dashed .mc-link__text{
                 border-bottom-color: $color_disabled;
             }
         }
