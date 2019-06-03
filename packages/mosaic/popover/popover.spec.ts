@@ -46,7 +46,6 @@ describe('McPopover', () => {
         it('mcPopoverTrigger = hover', fakeAsync(() => {
             const expectedValue = '_TEST1';
             const triggerElement = component.test1.nativeElement;
-            console.log(overlayContainerElement.textContent, 123123);
 
             expect(overlayContainerElement.textContent).not.toEqual(expectedValue);
 
@@ -83,7 +82,6 @@ describe('McPopover', () => {
             componentFixture.detectChanges();
             tick();
             componentFixture.detectChanges();
-            console.log(overlayContainerElement.textContent);
             expect(overlayContainerElement.textContent).not.toEqual(expectedValue);
         }));
 
