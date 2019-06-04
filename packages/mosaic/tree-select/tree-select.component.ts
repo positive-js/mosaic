@@ -42,7 +42,7 @@ import {
     RIGHT_ARROW,
     SPACE,
     UP_ARROW,
-    A
+    A, PAGE_UP, PAGE_DOWN
 } from '@ptsecurity/cdk/keycodes';
 import {
     CdkConnectedOverlay,
@@ -212,6 +212,8 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     @ViewChild('panel') panel: ElementRef;
 
     @ViewChild(CdkConnectedOverlay) overlayDir: CdkConnectedOverlay;
+
+    @ViewChild('optionsContainer') optionsContainer: ElementRef;
 
     @ViewChildren(McTag) tags: QueryList<McTag>;
 
@@ -789,6 +791,18 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         this.changeDetectorRef.markForCheck();
     }
 
+    private getHeightOfOptionsContainer(): number {
+        return this.optionsContainer.nativeElement.getClientRects()[0].height;
+    }
+
+    private updateScrollSize(): void {
+        if (!this.options.first) { return; }
+
+        this.tree.keyManager.withScrollSize(
+            Math.floor(this.getHeightOfOptionsContainer() / this.options.first.getHeight())
+        );
+    }
+
     private updateSelectedOptions(): void {
         this.selectionModel.selected.forEach((selectedOption) => {
             this.options.forEach((option) => {
@@ -843,6 +857,8 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     }
 
     private handleOpenKeydown(event: KeyboardEvent) {
+        this.updateScrollSize();
+
         /* tslint:disable-next-line */
         const keyCode = event.keyCode;
         const isArrowKey = keyCode === DOWN_ARROW || keyCode === UP_ARROW;
@@ -854,14 +870,22 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
             this.close();
         } else if (keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW) {
             return this.originalOnKeyDown.call(this.tree, event);
-        } else if (keyCode === HOME || keyCode === END) {
+        } else if (keyCode === HOME) {
             event.preventDefault();
 
-            if (keyCode === HOME) {
-                this.tree.keyManager.setFirstItemActive();
-            } else {
-                this.tree.keyManager.setLastItemActive();
-            }
+            this.tree.keyManager.setFirstItemActive();
+        } else if (keyCode === END) {
+            event.preventDefault();
+
+            this.tree.keyManager.setLastItemActive();
+        } else if (keyCode === PAGE_UP) {
+            event.preventDefault();
+
+            this.tree.keyManager.setPreviousPageItemActive();
+        } else if (keyCode === PAGE_DOWN) {
+            event.preventDefault();
+
+            this.tree.keyManager.setNextPageItemActive();
         } else if ((keyCode === ENTER || keyCode === SPACE) && this.tree.keyManager.activeItem) {
             event.preventDefault();
 
