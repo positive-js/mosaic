@@ -213,8 +213,6 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
 
     @ViewChild(CdkConnectedOverlay) overlayDir: CdkConnectedOverlay;
 
-    @ViewChild('optionsContainer') optionsContainer: ElementRef;
-
     @ViewChildren(McTag) tags: QueryList<McTag>;
 
     /** User-supplied override of the trigger element. */
@@ -546,8 +544,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         this.ngZone.onStable.asObservable()
             .pipe(take(1))
             .subscribe(() => {
-                if (this.triggerFontSize && this.overlayDir.overlayRef &&
-                    this.overlayDir.overlayRef.overlayElement) {
+                if (this.triggerFontSize && this.overlayDir.overlayRef && this.overlayDir.overlayRef.overlayElement) {
                     this.overlayDir.overlayRef.overlayElement.style.fontSize = `${this.triggerFontSize}px`;
                 }
             });
@@ -690,6 +687,8 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
                 this.changeDetectorRef.detectChanges();
                 this.calculateOverlayOffsetX();
                 this.panel.nativeElement.scrollTop = this.scrollTop;
+
+                this.tree.updateScrollSize();
             });
     }
 
@@ -791,18 +790,6 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         this.changeDetectorRef.markForCheck();
     }
 
-    private getHeightOfOptionsContainer(): number {
-        return this.optionsContainer.nativeElement.getClientRects()[0].height;
-    }
-
-    private updateScrollSize(): void {
-        if (!this.options.first) { return; }
-
-        this.tree.keyManager.withScrollSize(
-            Math.floor(this.getHeightOfOptionsContainer() / this.options.first.getHeight())
-        );
-    }
-
     private updateSelectedOptions(): void {
         this.selectionModel.selected.forEach((selectedOption) => {
             this.options.forEach((option) => {
@@ -857,8 +844,6 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     }
 
     private handleOpenKeydown(event: KeyboardEvent) {
-        this.updateScrollSize();
-
         /* tslint:disable-next-line */
         const keyCode = event.keyCode;
         const isArrowKey = keyCode === DOWN_ARROW || keyCode === UP_ARROW;

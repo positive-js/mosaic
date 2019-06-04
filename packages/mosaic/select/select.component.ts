@@ -740,6 +740,8 @@ export class McSelect extends McSelectMixinBase implements
                 this._changeDetectorRef.detectChanges();
                 this.calculateOverlayOffsetX();
                 this.optionsContainer.nativeElement.scrollTop = this.scrollTop;
+
+                this.updateScrollSize();
             });
     }
 
@@ -890,14 +892,16 @@ export class McSelect extends McSelectMixinBase implements
 
     /** Handles keyboard events when the selected is open. */
     private handleOpenKeydown(event: KeyboardEvent): void {
-        this.updateScrollSize();
-
         /* tslint:disable-next-line */
         const keyCode = event.keyCode;
         const isArrowKey = keyCode === DOWN_ARROW || keyCode === UP_ARROW;
         const manager = this.keyManager;
 
-        if (keyCode === HOME) {
+        if (isArrowKey && event.altKey) {
+            // Close the select on ALT + arrow key to match the native <select>
+            event.preventDefault();
+            this.close();
+        } else if (keyCode === HOME) {
             event.preventDefault();
 
             manager.setFirstItemActive();
@@ -913,10 +917,6 @@ export class McSelect extends McSelectMixinBase implements
             event.preventDefault();
 
             manager.setNextPageItemActive();
-        } else if (isArrowKey && event.altKey) {
-            // Close the select on ALT + arrow key to match the native <select>
-            event.preventDefault();
-            this.close();
         } else if ((keyCode === ENTER || keyCode === SPACE) && manager.activeItem) {
             event.preventDefault();
             manager.activeItem.selectViaInteraction();

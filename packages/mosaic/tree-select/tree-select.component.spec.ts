@@ -1579,7 +1579,7 @@ describe('McTreeSelect', () => {
                     expect(formControl.value).toBeFalsy('Expected value not to have changed.');
                 }));
 
-                it('should should close when pressing ALT + DOWN_ARROW', fakeAsync(() => {
+                it('should close when pressing ALT + DOWN_ARROW', fakeAsync(() => {
                     const { select: selectInstance } = fixture.componentInstance;
 
                     selectInstance.open();
@@ -1595,7 +1595,7 @@ describe('McTreeSelect', () => {
                     expect(event.defaultPrevented).toBe(true, 'Expected default action to be prevented.');
                 }));
 
-                it('should should close when pressing ALT + UP_ARROW', fakeAsync(() => {
+                it('should close when pressing ALT + UP_ARROW', fakeAsync(() => {
                     const { select: selectInstance } = fixture.componentInstance;
 
                     selectInstance.open();

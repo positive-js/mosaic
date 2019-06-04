@@ -168,6 +168,7 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
 
     getHeight(): number {
         const clientRects = this.elementRef.nativeElement.getClientRects();
+
         if (clientRects.length) {
             return clientRects[0].height;
         }
