@@ -456,6 +456,12 @@ describe('MomentDateAdapter', () => {
             expect(adapter.parse('6 Feb 2019', '', true)!.toDate())
                 .toEqual(new Date(2019, 1, 6));
         });
+
+        it('should parse unix timestamp', () => {
+            adapter.setLocale('ru');
+            expect(adapter.parse('1559509200', '', true)!.toDate())
+                .toEqual(new Date(2019, 5, 3));
+        });
     });
 });
 
