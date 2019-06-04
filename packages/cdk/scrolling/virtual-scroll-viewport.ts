@@ -63,7 +63,7 @@ export class CdkVirtualScrollViewport extends CdkScrollable implements OnInit, O
                 Promise.resolve().then(() => this.ngZone.run(() => observer.next(index)))));
 
     /** The element that wraps the rendered content. */
-    @ViewChild('contentWrapper') _contentWrapper: ElementRef<HTMLElement>;
+    @ViewChild('contentWrapper', {static: true}) _contentWrapper: ElementRef<HTMLElement>;
 
     /** Emits when the viewport is detached from a CdkVirtualForOf. */
     private _detachedSubject = new Subject<void>();

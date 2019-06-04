@@ -25,9 +25,9 @@ import {
     END,
     ENTER,
     hasModifierKey,
-    HOME, LEFT_ARROW,
+    HOME,
     PAGE_DOWN,
-    PAGE_UP, RIGHT_ARROW,
+    PAGE_UP,
     SPACE,
     TAB,
     UP_ARROW
@@ -69,7 +69,7 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
 
     @ContentChildren(McLine) lines: QueryList<McLine>;
 
-    @ViewChild('text') text: ElementRef;
+    @ViewChild('text', {static: false}) text: ElementRef;
 
     // Whether the label should appear before or after the checkbox. Defaults to 'after'
     @Input() checkboxPosition: 'before' | 'after' = 'after';

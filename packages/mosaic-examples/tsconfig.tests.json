@@ -2,7 +2,7 @@
 // also compile the unit-test files. Since the code will run inside of the browser, the target is
 // set to ES5. Also the format needs to be CommonJS for Karma.
 {
-    "extends": "./tsconfig-build",
+    "extends": "./tsconfig.build",
     "compilerOptions": {
         "importHelpers": false,
         "module": "commonjs",

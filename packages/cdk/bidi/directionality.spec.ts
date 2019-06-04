@@ -137,7 +137,7 @@ describe('Directionality', () => {
     `
 })
 class ElementWithDir {
-    @ViewChild(Dir) dir: Dir;
+    @ViewChild(Dir, {static: false}) dir: Dir;
     direction = 'rtl';
     changeCount = 0;
 }

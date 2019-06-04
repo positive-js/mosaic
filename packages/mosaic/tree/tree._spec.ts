@@ -614,7 +614,7 @@ class SimpleMatTreeApp {
 
     underlyingDataSource = new FakeDataSource();
 
-    @ViewChild(McTreeSelection) tree: McTreeSelection<TestData>;
+    @ViewChild(McTreeSelection, {static: false}) tree: McTreeSelection<TestData>;
 
     constructor() {
         this.underlyingDataSource.connect().subscribe((data) => {
@@ -642,7 +642,7 @@ class NestedMatTreeApp {
     dataSource = new McTreeNestedDataSource();
     underlyingDataSource = new FakeDataSource();
 
-    @ViewChild(McTreeSelection) tree: McTreeSelection<TestData>;
+    @ViewChild(McTreeSelection, {static: false}) tree: McTreeSelection<TestData>;
 
     constructor() {
         this.underlyingDataSource.connect().subscribe((data) => {
@@ -677,7 +677,7 @@ class WhenNodeNestedMatTreeApp {
     dataSource = new McTreeNestedDataSource();
     underlyingDataSource = new FakeDataSource();
 
-    @ViewChild(McTreeSelection) tree: McTreeSelection<TestData>;
+    @ViewChild(McTreeSelection, {static: false}) tree: McTreeSelection<TestData>;
 
     constructor() {
         this.underlyingDataSource.connect().subscribe((data) => {
@@ -720,7 +720,7 @@ class MatTreeAppWithToggle {
     dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
     underlyingDataSource = new FakeDataSource();
 
-    @ViewChild(McTreeSelection) tree: McTreeSelection<TestData>;
+    @ViewChild(McTreeSelection, {static: false}) tree: McTreeSelection<TestData>;
 
     constructor() {
         this.underlyingDataSource.connect().subscribe((data) => {
@@ -751,7 +751,7 @@ class NestedMatTreeAppWithToggle {
     dataSource = new McTreeNestedDataSource();
     underlyingDataSource = new FakeDataSource();
 
-    @ViewChild(McTreeSelection) tree: McTreeSelection<TestData>;
+    @ViewChild(McTreeSelection, {static: false}) tree: McTreeSelection<TestData>;
 
     constructor() {
         this.underlyingDataSource.connect().subscribe((data) => {
@@ -795,7 +795,7 @@ class WhenNodeMatTreeApp {
     dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
     underlyingDataSource = new FakeDataSource();
 
-    @ViewChild(McTreeSelection) tree: McTreeSelection<TestData>;
+    @ViewChild(McTreeSelection, {static: false}) tree: McTreeSelection<TestData>;
 
     constructor() {
         this.underlyingDataSource.connect().subscribe((data) => {

@@ -342,7 +342,7 @@ export class McButtonToggle implements OnInit, OnDestroy {
     // tslint:disable-next-line:no-reserved-keywords
     type: ToggleType;
 
-    @ViewChild(McButton) mcButton: McButton;
+    @ViewChild(McButton, {static: false}) mcButton: McButton;
 
     /** McButtonToggleGroup reads this to assign its own value. */
     @Input() value: any;

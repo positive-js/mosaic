@@ -121,9 +121,9 @@ export class McTabHeader extends McTabHeaderBase
 
     @ContentChildren(McTabLabelWrapper)
     labelWrappers: QueryList<McTabLabelWrapper>;
-    @ViewChild('tabListContainer')
+    @ViewChild('tabListContainer', {static: true})
     tabListContainer: ElementRef;
-    @ViewChild('tabList')
+    @ViewChild('tabList', {static: true})
     tabList: ElementRef;
 
     /** Whether the controls for pagination should be displayed */

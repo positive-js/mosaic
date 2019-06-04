@@ -87,7 +87,7 @@ export class McTabBody implements OnInit, OnDestroy {
     @Output() readonly onCentered: EventEmitter<void> = new EventEmitter<void>(true);
 
     /** The portal host inside of this container into which the tab body content will be loaded. */
-    @ViewChild(PortalHostDirective) portalHost: PortalHostDirective;
+    @ViewChild(PortalHostDirective, {static: false}) portalHost: PortalHostDirective;
 
     /** The tab body content to display. */
     @Input('content') content: TemplatePortal;

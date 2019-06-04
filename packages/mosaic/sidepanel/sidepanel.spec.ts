@@ -289,7 +289,7 @@ class ComponentWithTemplateForSidepanel {
     localValue: string;
     sidepanelRef: McSidepanelRef;
 
-    @ViewChild(TemplateRef) templateRef: TemplateRef<any>;
+    @ViewChild(TemplateRef, {static: false}) templateRef: TemplateRef<any>;
 
     setSidepanelRef(sidepanelRef: McSidepanelRef): string {
         this.sidepanelRef = sidepanelRef;

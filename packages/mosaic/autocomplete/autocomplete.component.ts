@@ -71,9 +71,9 @@ export class McAutocomplete implements AfterContentInit {
     /** Whether the autocomplete panel should be visible, depending on option length. */
     showPanel: boolean = false;
 
-    @ViewChild(TemplateRef) template: TemplateRef<any>;
+    @ViewChild(TemplateRef, {static: true}) template: TemplateRef<any>;
 
-    @ViewChild('panel') panel: ElementRef;
+    @ViewChild('panel', {static: false}) panel: ElementRef;
 
     @ContentChildren(McOption, { descendants: true }) options: QueryList<McOption>;
 

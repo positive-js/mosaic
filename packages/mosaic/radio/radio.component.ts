@@ -408,7 +408,7 @@ export class McRadioButton extends _McRadioButtonMixinBase
     private _labelPosition: 'before' | 'after';
 
     /** The native `<input type=radio>` element */
-    @ViewChild('input') _inputElement: ElementRef;
+    @ViewChild('input', {static: false}) _inputElement: ElementRef;
 
     /**
      * Event emitted when the checked state of this radio button changes.
