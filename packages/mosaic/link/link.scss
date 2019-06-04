@@ -3,26 +3,15 @@ $link-padding: 4px 8px;
 
 
 .mc-link {
-    display: inline-flex;
-
-    align-items: center;
-
-    padding: $link-padding;
-
-    text-decoration: none !important;
-
-    cursor: pointer;
+    display: inline;
 
     outline: none;
 
-    &.cdk-keyboard-focused {
-        border-radius: $link-border-radius;
-    }
+    padding: $link-padding;
 
-    &[disabled] {
-        pointer-events: none;
-        cursor: default;
-    }
+    text-decoration: none;
+
+    cursor: pointer;
 
     & > .mc-link__icon {
         color: inherit;
@@ -34,6 +23,15 @@ $link-padding: 4px 8px;
 
     & > .mc-link__text:not(:last-child) {
         margin-right: 4px;
+    }
+
+    &.cdk-keyboard-focused {
+        border-radius: $link-border-radius;
+    }
+
+    &[disabled] {
+        pointer-events: none;
+        cursor: default;
     }
 }
 
