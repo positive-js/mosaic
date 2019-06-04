@@ -1,3 +1,28 @@
+# 1.0.0-beta.7 "Topo Restructuring" (2019-06-04)
+
+
+### Bug Fixes
+
+* **build:** docker image ([f508b8d](https://github.com/positive-js/mosaic/commit/f508b8d))
+* **datepicker:** no calendar border ([#123](https://github.com/positive-js/mosaic/issues/123)) ([43ac4ab](https://github.com/positive-js/mosaic/commit/43ac4ab))
+* Timepicker — am/pm clipboard insertion fails ([#125](https://github.com/positive-js/mosaic/issues/125)) ([10eab4c](https://github.com/positive-js/mosaic/commit/10eab4c))
+* **datepicker:** no input focus after close ([#124](https://github.com/positive-js/mosaic/issues/124)) ([c9036a1](https://github.com/positive-js/mosaic/commit/c9036a1))
+* **list:** selection in McList ([#176613](https://github.com/positive-js/mosaic/issues/176613)) ([#130](https://github.com/positive-js/mosaic/issues/130)) ([503f9ed](https://github.com/positive-js/mosaic/commit/503f9ed))
+* **modal:** Footer border line in dark theme ([#119](https://github.com/positive-js/mosaic/issues/119)) ([1835bab](https://github.com/positive-js/mosaic/commit/1835bab))
+* **popover:** Popover missing public api export ([#128](https://github.com/positive-js/mosaic/issues/128)) ([37c2782](https://github.com/positive-js/mosaic/commit/37c2782))
+* **timepicker:** Validation remastered ([#129](https://github.com/positive-js/mosaic/issues/129)) ([f69c381](https://github.com/positive-js/mosaic/commit/f69c381))
+* **tooltip:** Missing hide call when mcDisabled set to true ([#118](https://github.com/positive-js/mosaic/issues/118)) ([d1a2eb2](https://github.com/positive-js/mosaic/commit/d1a2eb2))
+
+
+### Features
+
+* move to monorepo, added packages folder and rename lib to mosaic ([9fadf43](https://github.com/positive-js/mosaic/commit/9fadf43))
+* **popover:** added popover component ([#120](https://github.com/positive-js/mosaic/issues/120)) ([d2e885e](https://github.com/positive-js/mosaic/commit/d2e885e))
+* **select:** add search ([#126](https://github.com/positive-js/mosaic/issues/126)) ([dcaf303](https://github.com/positive-js/mosaic/commit/dcaf303))
+* updated ptsecurity-tslint-config ([#131](https://github.com/positive-js/mosaic/issues/131)) ([4836a11](https://github.com/positive-js/mosaic/commit/4836a11))
+
+
+
 # 1.0.0-beta.6 "Informative Polyhedron" (2019-05-07)
 
 
