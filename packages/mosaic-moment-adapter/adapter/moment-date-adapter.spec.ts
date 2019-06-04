@@ -369,8 +369,10 @@ describe('MomentDateAdapter', () => {
     describe('with date format guessing', () => {
         it('should parse ISO', () => {
             adapter.setLocale('ru');
+            const utcDate = new Date(2019, 5, 3, 14, 50,  30);
+            utcDate.setMinutes(utcDate.getMinutes() - utcDate.getTimezoneOffset());
             expect(adapter.parse('2019-06-03T14:50:30.000Z', '', true)!.toDate())
-                .toEqual(new Date(2019, 5, 3, 17, 50,  30));
+                .toEqual(utcDate);
         });
 
         it('should parse dashed date', () => {
@@ -420,7 +422,6 @@ describe('MomentDateAdapter', () => {
                 .toEqual(new Date(2019, 5, 23));
         });
 
-
         it('should parse doted date', () => {
             adapter.setLocale('ru');
             expect(adapter.parse('03.06.2019', '', true)!.toDate())
@@ -459,8 +460,10 @@ describe('MomentDateAdapter', () => {
 
         it('should parse unix timestamp', () => {
             adapter.setLocale('ru');
-            expect(adapter.parse('1559509200', '', true)!.toDate())
-                .toEqual(new Date(2019, 5, 3));
+            const utcDate = new Date(2019, 5, 3, 14, 50,  30);
+            utcDate.setMinutes(utcDate.getMinutes() - utcDate.getTimezoneOffset());
+            expect(adapter.parse('1559573430', '', true)!.toDate())
+                .toEqual(utcDate);
         });
     });
 });
