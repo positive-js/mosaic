@@ -357,6 +357,12 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
         const endDateVariables = this.compileVariables(endDate, variables);
         endDateVariables.SAME_MONTH = sameMonth;
 
+        const bothCurrentYear =
+            startDateVariables.CURRENT_YEAR === 'yes' &&
+            endDateVariables.CURRENT_YEAR === 'yes';
+        startDateVariables.CURRENT_YEAR = bothCurrentYear ? 'yes' : 'no';
+        endDateVariables.CURRENT_YEAR = bothCurrentYear ? 'yes' : 'no';
+
         const params = {...variables,
             START_DATE: this.messageformat.compile(template.START_DATE)(startDateVariables),
             END_DATE: this.messageformat.compile(template.END_DATE)(endDateVariables),
@@ -381,6 +387,12 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
         const endDateVariables = this.compileVariables(endDate, variables);
         endDateVariables.SAME_MONTH = sameMonth;
         endDateVariables.SAME_DAY = sameDay;
+
+        const bothCurrentYear =
+            startDateVariables.CURRENT_YEAR === 'yes' &&
+            endDateVariables.CURRENT_YEAR === 'yes';
+        startDateVariables.CURRENT_YEAR = bothCurrentYear ? 'yes' : 'no';
+        endDateVariables.CURRENT_YEAR = bothCurrentYear ? 'yes' : 'no';
 
         const params = {...variables,
             START_DATETIME: this.messageformat.compile(template.START_DATETIME)(startDateVariables),

@@ -669,7 +669,7 @@ describe('MomentDateAdapter formatter', () => {
                     const endDate = moment();
 
                     const startString: string = startDate.format(`${startDateFormat} ${YEAR}`);
-                    const endString: string = endDate.format(endDateFormat);
+                    const endString: string = endDate.format(`${endDateFormat} ${YEAR}`);
 
                     expect(adapter.rangeShortDate(startDate, endDate)).toBe(
                         `${startString}${LONG_DASH}${endString}`
@@ -680,7 +680,7 @@ describe('MomentDateAdapter formatter', () => {
                     const startDate = moment();
                     const endDate = moment(startDate).add(1, 'years');
 
-                    const startString: string = startDate.format(startDateFormat);
+                    const startString: string = startDate.format(`${startDateFormat} ${YEAR}`);
                     const endString: string = endDate.format(`${endDateFormat} ${YEAR}`);
 
                     expect(adapter.rangeShortDate(startDate, endDate)).toBe(
@@ -748,7 +748,7 @@ describe('MomentDateAdapter formatter', () => {
                     const endDate = moment();
 
                     const startString: string = startDate.format(`${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
-                    const endString: string = endDate.format(endDateFormat);
+                    const endString: string = endDate.format(`${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
 
                     expect(adapter.rangeShortDateTime(startDate, endDate)).toBe(
                         `${startString}${LONG_DASH}${endString}`
@@ -759,7 +759,7 @@ describe('MomentDateAdapter formatter', () => {
                     const startDate = moment();
                     const endDate = moment(startDate).add(1, 'years');
 
-                    const startString: string = startDate.format(startDateFormat);
+                    const startString: string = startDate.format(`${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
                     const endString: string = endDate.format(`${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
 
                     expect(adapter.rangeShortDateTime(startDate, endDate)).toBe(
@@ -803,7 +803,7 @@ describe('MomentDateAdapter formatter', () => {
                     const endDate: Moment = moment();
 
                     const startString: string = startDate.format(`${startDateFormat} ${YEAR}`);
-                    const endString: string = endDate.format(`${endDateFormat}`);
+                    const endString: string = endDate.format(`${endDateFormat} ${YEAR}`);
 
                     expect(adapter.rangeLongDate(startDate, endDate)).toBe(
                         `${startString}${LONG_DASH}${endString}`
@@ -814,7 +814,7 @@ describe('MomentDateAdapter formatter', () => {
                     const startDate: Moment = moment().dayOfYear(1);
                     const endDate: Moment = moment(startDate).add(1, 'years');
 
-                    const startString: string = startDate.format(`${startDateFormat}`);
+                    const startString: string = startDate.format(`${startDateFormat} ${YEAR}`);
                     const endString: string = endDate.format(`${endDateFormat} ${YEAR}`);
 
                     expect(adapter.rangeLongDate(startDate, endDate)).toBe(
@@ -882,7 +882,7 @@ describe('MomentDateAdapter formatter', () => {
                     const endDate: Moment = moment();
 
                     const startString: string = startDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
-                    const endString: string = endDate.format(endDateFormat);
+                    const endString: string = endDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
 
                     expect(adapter.rangeLongDateTime(startDate, endDate)).toBe(
                         `С${NBSP}${startString} по${NBSP}${endString}`
@@ -893,7 +893,7 @@ describe('MomentDateAdapter formatter', () => {
                     const startDate: Moment = moment().dayOfYear(1);
                     const endDate: Moment = moment(startDate).add(1, 'years');
 
-                    const startString: string = startDate.format(startDateFormat);
+                    const startString: string = startDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
                     const endString: string = endDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
 
                     expect(adapter.rangeLongDateTime(startDate, endDate)).toBe(
@@ -961,7 +961,7 @@ describe('MomentDateAdapter formatter', () => {
                     const endDate: Moment = moment();
 
                     const startString: string = startDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
-                    const endString: string = endDate.format(endDateFormat);
+                    const endString: string = endDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
 
                     expect(adapter.rangeMiddleDateTime(startDate, endDate)).toBe(
                         `${startString}${LONG_DASH}${endString}`
@@ -972,7 +972,7 @@ describe('MomentDateAdapter formatter', () => {
                     const startDate: Moment = moment().dayOfYear(1);
                     const endDate: Moment = moment(startDate).add(1, 'years');
 
-                    const startString: string = startDate.format(startDateFormat);
+                    const startString: string = startDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
                     const endString: string = endDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
 
                     expect(adapter.rangeMiddleDateTime(startDate, endDate)).toBe(
@@ -1201,7 +1201,7 @@ describe('MomentDateAdapter formatter', () => {
                     const endDate: Moment = moment();
 
                     const startString: string = startDate.format(`${startDateFormat}, ${YEAR}`);
-                    const endString: string = endDate.format(endDateFormat);
+                    const endString: string = endDate.format(`${endDateFormat}, ${YEAR}`);
 
                     expect(adapter.rangeShortDate(startDate, endDate)).toBe(
                         `${startString}${LONG_DASH}${endString}`
@@ -1212,7 +1212,7 @@ describe('MomentDateAdapter formatter', () => {
                     const startDate: Moment = moment();
                     const endDate: Moment = moment(startDate).add(1, 'years');
 
-                    const startString: string = startDate.format(startDateFormat);
+                    const startString: string = startDate.format(`${startDateFormat}, ${YEAR}`);
                     const endString: string = endDate.format(`${endDateFormat}, ${YEAR}`);
 
                     expect(adapter.rangeShortDate(startDate, endDate)).toBe(
@@ -1280,7 +1280,7 @@ describe('MomentDateAdapter formatter', () => {
                     const endDate: Moment = moment();
 
                     const startString: string = startDate.format(`${DAY_SHORT_MONTH}, ${YEAR}, ${TIME}`);
-                    const endString: string = endDate.format(endDateFormat);
+                    const endString: string = endDate.format(`${DAY_SHORT_MONTH}, ${YEAR}, ${TIME}`);
 
                     expect(adapter.rangeShortDateTime(startDate, endDate)).toBe(
                         `${startString}${LONG_DASH}${endString}`
@@ -1291,7 +1291,7 @@ describe('MomentDateAdapter formatter', () => {
                     const startDate: Moment = moment();
                     const endDate: Moment = moment(startDate).add(1, 'years');
 
-                    const startString: string = startDate.format(startDateFormat);
+                    const startString: string = startDate.format(`${DAY_SHORT_MONTH}, ${YEAR}, ${TIME}`);
                     const endString: string = endDate.format(`${DAY_SHORT_MONTH}, ${YEAR}, ${TIME}`);
 
                     expect(adapter.rangeShortDateTime(startDate, endDate)).toBe(
@@ -1335,7 +1335,7 @@ describe('MomentDateAdapter formatter', () => {
                     const endDate: Moment = moment();
 
                     const startString: string = startDate.format(`${startDateFormat}, ${YEAR}`);
-                    const endString: string = endDate.format(`${endDateFormat}`);
+                    const endString: string = endDate.format(`${endDateFormat}, ${YEAR}`);
 
                     expect(adapter.rangeLongDate(startDate, endDate)).toBe(
                         `${startString}${LONG_DASH}${endString}`
@@ -1346,7 +1346,7 @@ describe('MomentDateAdapter formatter', () => {
                     const startDate: Moment = moment().dayOfYear(1);
                     const endDate: Moment = moment(startDate).add(1, 'years');
 
-                    const startString: string = startDate.format(`${startDateFormat}`);
+                    const startString: string = startDate.format(`${startDateFormat}, ${YEAR}`);
                     const endString: string = endDate.format(`${endDateFormat}, ${YEAR}`);
 
                     expect(adapter.rangeLongDate(startDate, endDate)).toBe(
@@ -1414,7 +1414,7 @@ describe('MomentDateAdapter formatter', () => {
                     const endDate: Moment = moment();
 
                     const startString: string = startDate.format(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
-                    const endString: string = endDate.format(endDateFormat);
+                    const endString: string = endDate.format(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
 
                     expect(adapter.rangeLongDateTime(startDate, endDate)).toBe(
                         `From ${startString} to${NBSP}${endString}`
@@ -1425,7 +1425,7 @@ describe('MomentDateAdapter formatter', () => {
                     const startDate: Moment = moment().dayOfYear(1);
                     const endDate: Moment = moment(startDate).add(1, 'years');
 
-                    const startString: string = startDate.format(startDateFormat);
+                    const startString: string = startDate.format(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
                     const endString: string = endDate.format(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
 
                     expect(adapter.rangeLongDateTime(startDate, endDate)).toBe(
@@ -1493,7 +1493,7 @@ describe('MomentDateAdapter formatter', () => {
                     const endDate = moment();
 
                     const startString = startDate.format(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
-                    const endString = endDate.format(endDateFormat);
+                    const endString = endDate.format(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
 
                     expect(adapter.rangeMiddleDateTime(startDate, endDate)).toBe(
                         `${startString}${LONG_DASH}${endString}`
@@ -1504,7 +1504,7 @@ describe('MomentDateAdapter formatter', () => {
                     const startDate = moment().dayOfYear(1);
                     const endDate = moment(startDate).add(1, 'years');
 
-                    const startString = startDate.format(startDateFormat);
+                    const startString = startDate.format(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
                     const endString = endDate.format(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
 
                     expect(adapter.rangeMiddleDateTime(startDate, endDate)).toBe(
