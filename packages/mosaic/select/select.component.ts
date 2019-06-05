@@ -11,7 +11,7 @@ import {
     Directive,
     DoCheck,
     ElementRef,
-    EventEmitter,
+    EventEmitter, HostListener,
     Inject,
     Input,
     isDevMode,
@@ -41,7 +41,7 @@ import {
     RIGHT_ARROW,
     SPACE,
     UP_ARROW,
-    A
+    A, ESCAPE
 } from '@ptsecurity/cdk/keycodes';
 import {
     CdkConnectedOverlay,
@@ -129,13 +129,17 @@ export class McSelectSearch implements AfterContentInit, OnDestroy {
         this.input.focus();
     }
 
-    reset(): void {
+    reset(doNotChangeSearch: boolean = false): void {
         this.input.ngControl.reset();
+
+        if (doNotChangeSearch) {
+            this.isSearchChanged = false;
+        }
     }
 
     ngAfterContentInit(): void {
         if (!this.input) {
-            throw Error('McSelectSearch does not work without input');
+            throw Error('McSelectSearch does not work without mcInput');
         }
 
         if (!this.input.ngControl) {
@@ -150,8 +154,15 @@ export class McSelectSearch implements AfterContentInit, OnDestroy {
     ngOnDestroy(): void {
         this.searchChangesSubscription.unsubscribe();
     }
-}
 
+    @HostListener('keydown', ['$event'])
+    keyEvent(event: KeyboardEvent) {
+        // tslint:disable-next-line:deprecation
+        if (event.keyCode === ESCAPE) {
+            this.reset();
+        }
+    }
+}
 
 
 @Directive({ selector: 'mc-select-trigger' })
@@ -195,7 +206,9 @@ export class McSelect extends McSelectMixinBase implements
     controlType = 'mc-select';
 
     hiddenItems: number = 0;
+    // todo localization
     oneMoreText: string = '...ещё';
+    noOptionsText: string = 'Ничего не найдено';
 
     /** The last measured value for the trigger's client bounding rect. */
     triggerRect: ClientRect;
@@ -433,6 +446,12 @@ export class McSelect extends McSelectMixinBase implements
         return this._panelOpen;
     }
 
+    get isEmptySearchResult(): boolean {
+        return this.search &&
+            this.options.length === 0 &&
+            !!this.search.input.value;
+    }
+
     private _panelOpen = false;
 
     /** The scroll position of the overlay panel, calculated to center the selected option. */
@@ -544,9 +563,9 @@ export class McSelect extends McSelectMixinBase implements
     /** `View -> model callback called when select has been touched` */
     onTouched = () => {};
 
-    resetSearch(): void {
+    resetSearch(doNotChangeSearch: boolean = false): void {
         if (this.search) {
-            this.search.reset();
+            this.search.reset(doNotChangeSearch);
         }
     }
 
@@ -582,8 +601,6 @@ export class McSelect extends McSelectMixinBase implements
                     this.overlayDir.overlayRef.overlayElement.style.fontSize = `${this.triggerFontSize}px`;
                 }
             });
-
-        this.resetSearch();
     }
 
     /** Closes the overlay panel and focuses the host element. */
@@ -593,6 +610,7 @@ export class McSelect extends McSelectMixinBase implements
             this.keyManager.withHorizontalOrientation(this.isRtl() ? 'rtl' : 'ltr');
 
             this._changeDetectorRef.markForCheck();
+            this.resetSearch(true.mc-select__match-list);
             this.onTouched();
         }
     }

@@ -100,6 +100,9 @@ export class CdkConnectedOverlay implements OnDestroy, OnChanges {
     /** Origin for the connected overlay. */
     @Input('cdkConnectedOverlayOrigin') origin: CdkOverlayOrigin;
 
+    /** Should overlay be closed via ESC. */
+    @Input('cdkConnectedOverlayCloseOnEsc') closeOnEsc: boolean = true;
+
     /** Registered connected position pairs. */
     @Input('cdkConnectedOverlayPositions') positions: IConnectedPosition[];
 
@@ -358,11 +361,13 @@ export class CdkConnectedOverlay implements OnDestroy, OnChanges {
         if (!this._overlayRef) {
             this._createOverlay();
 
-            this._overlayRef!.keydownEvents().subscribe((event: KeyboardEvent) => { //tslint:disable-line
-                if (event.keyCode === ESCAPE) { //tslint:disable-line
-                    this._detachOverlay();
-                }
-            });
+            if (this.closeOnEsc) {
+                this._overlayRef!.keydownEvents().subscribe((event: KeyboardEvent) => { //tslint:disable-line
+                    if (event.keyCode === ESCAPE) { //tslint:disable-line
+                        this._detachOverlay();
+                    }
+                });
+            }
         } else {
             // Update the overlay size, in case the directive's inputs have changed
             this._overlayRef.updateSize({

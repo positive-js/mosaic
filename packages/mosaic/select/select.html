@@ -33,6 +33,7 @@
     cdkConnectedOverlayLockPosition
     cdkConnectedOverlayHasBackdrop
     cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+    [cdkConnectedOverlayCloseOnEsc]="!search"
     [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
     [cdkConnectedOverlayOrigin]="origin"
     [cdkConnectedOverlayOpen]="panelOpen"
@@ -62,6 +63,7 @@
             [@fadeInContent]="'showing'"
             (@fadeInContent.done)="onFadeInDone()">
 
+            <div *ngIf="isEmptySearchResult" class="mc-select__no-options-message">{{noOptionsText}}</div>
             <ng-content select="mc-option,mc-optgroup"></ng-content>
         </div>
     </div>
