@@ -610,7 +610,7 @@ export class McSelect extends McSelectMixinBase implements
             this.keyManager.withHorizontalOrientation(this.isRtl() ? 'rtl' : 'ltr');
 
             this._changeDetectorRef.markForCheck();
-            this.resetSearch(true.mc-select__match-list);
+            this.resetSearch(true);
             this.onTouched();
         }
     }
