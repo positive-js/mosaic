@@ -37,10 +37,9 @@ export class DemoComponent implements OnInit {
     multipleSearchCtrl: FormControl = new FormControl();
     filteredMultipleOptions: Observable<string[]>;
 
-    allOptions = OPTIONS;
     optionCounter = 0;
 
-    private options: string[] = OPTIONS;
+    options: string[] = OPTIONS.sort();
 
     ngOnInit(): void {
         this.filteredOptions = merge(
