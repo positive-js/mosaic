@@ -88,10 +88,6 @@ export class McDatepickerInputEvent<D> {
     exportAs: 'mcDatepickerInput'
 })
 export class McDatepickerInput<D> implements ControlValueAccessor, OnDestroy, Validator {
-    // whether should detepicker guess date format
-    @Input()
-    shouldGuess: boolean = false;
-
     /** The datepicker that this input is associated with. */
     @Input()
     set mcDatepicker(value: McDatepicker<D>) {
@@ -285,7 +281,7 @@ export class McDatepickerInput<D> implements ControlValueAccessor, OnDestroy, Va
     }
 
     onInput(value: string) {
-        let date = this.dateAdapter.parse(value, this.dateFormats.parse.dateInput, this.shouldGuess);
+        let date = this.dateAdapter.parse(value, this.dateFormats.parse.dateInput);
         this.lastValueValid = !date || this.dateAdapter.isValid(date);
         date = this.getValidDateOrNull(date);
 
