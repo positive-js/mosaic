@@ -195,8 +195,8 @@ export class DemoComponent {
             moment().date(10).month(2)
         );
         this.enRangeShortDateEndsNotCurrentYear = this.dateAdapter.rangeShortDate(
-            moment().date(1).month(1).subtract(1, 'years'),
-            moment().date(10).month(2).subtract(1, 'years')
+            moment().date(1).month(1),
+            moment().date(10).month(2).add(1, 'years')
         );
         this.enRangeShortDateTimeSameDateCurrentYear = this.dateAdapter.rangeShortDateTime(
             moment().date(10).hour(10).minutes(14),
@@ -325,8 +325,8 @@ export class DemoComponent {
             moment().date(10).month(2)
         );
         this.enRangeLongDateEndsNotCurrentYear = this.dateAdapter.rangeLongDate(
-            moment().date(1).month(1).subtract(1, 'years'),
-            moment().date(10).month(2).subtract(1, 'years')
+            moment().date(1).month(1),
+            moment().date(10).month(2).add(1, 'years')
         );
         this.enRangeLongDateTimeSameDateCurrentYear = this.dateAdapter.rangeLongDateTime(
             moment().date(10).hour(10).minutes(14),
