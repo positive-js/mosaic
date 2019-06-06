@@ -313,14 +313,12 @@ describe('McListSelection without forms', () => {
             fixture.detectChanges();
             tick(201);
 
-            console.log(manager.activeItemIndex);
             expect(manager.activeItemIndex).toBe(1);
 
             dispatchEvent(listEl, createKeyboardEvent('keydown', 68, undefined, 'd'));
             fixture.detectChanges();
             tick(200);
 
-            console.log(manager.activeItemIndex);
             expect(manager.activeItemIndex).toBe(3);
         }));
 

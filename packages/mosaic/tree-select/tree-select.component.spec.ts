@@ -255,7 +255,7 @@ class BasicTreeSelect {
     tabIndexOverride: number;
     panelClass = ['custom-one', 'custom-two'];
 
-    @ViewChild(McTreeSelect) select: McTreeSelect;
+    @ViewChild(McTreeSelect, {static: true}) select: McTreeSelect;
     @ViewChildren(McTreeOption) options: QueryList<McTreeOption>;
 
     constructor(database: FileDatabase) {
@@ -303,7 +303,7 @@ class NgModelSelect {
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
-    @ViewChild(McTreeSelect) select: McTreeSelect;
+    @ViewChild(McTreeSelect, {static: false}) select: McTreeSelect;
     @ViewChildren(McTreeOption) options: QueryList<McTreeOption>;
 
     constructor(database: FileDatabase) {
@@ -416,7 +416,7 @@ class NgIfSelect {
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
-    @ViewChild(McTreeSelect) select: McTreeSelect;
+    @ViewChild(McTreeSelect, {static: false}) select: McTreeSelect;
 
     constructor(database: FileDatabase) {
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
@@ -502,7 +502,7 @@ class SelectWithChangeEvent {
 class SelectInitWithoutOptions {
     control = new FormControl('rootNode_1');
 
-    @ViewChild(McTreeSelect) select: McTreeSelect;
+    @ViewChild(McTreeSelect, {static: false}) select: McTreeSelect;
     @ViewChildren(McTreeOption) options: QueryList<McTreeOption>;
 
     treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable);
@@ -534,7 +534,7 @@ class SelectInitWithoutOptions {
     }]
 })
 class CustomSelectAccessor implements ControlValueAccessor {
-    @ViewChild(McTreeSelect) select: McTreeSelect;
+    @ViewChild(McTreeSelect, {static: false}) select: McTreeSelect;
 
     writeValue: (value?: any) => void = () => {};
     registerOnChange: (changeFn?: (value: any) => void) => void = () => {};
@@ -553,7 +553,7 @@ class CustomSelectAccessor implements ControlValueAccessor {
 })
 class CompWithCustomSelect {
     ctrl = new FormControl('initial value');
-    @ViewChild(CustomSelectAccessor) customAccessor: CustomSelectAccessor;
+    @ViewChild(CustomSelectAccessor, {static: true}) customAccessor: CustomSelectAccessor;
 }
 
 @Component({
@@ -698,7 +698,7 @@ class MultiSelect {
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
-    @ViewChild(McTreeSelect) select: McTreeSelect;
+    @ViewChild(McTreeSelect, {static: false}) select: McTreeSelect;
 
     @ViewChildren(McTreeOption) options: QueryList<McTreeOption>;
 
@@ -832,7 +832,7 @@ class BasicSelectNoPlaceholder {
     `
 })
 class BasicSelectWithTheming {
-    @ViewChild(McTreeSelect) select: McTreeSelect;
+    @ViewChild(McTreeSelect, {static: false}) select: McTreeSelect;
     theme: string;
 }
 
@@ -861,7 +861,7 @@ class BasicSelectWithTheming {
 class ResetValuesSelect {
     control = new FormControl();
 
-    @ViewChild(McTreeSelect) select: McTreeSelect;
+    @ViewChild(McTreeSelect, {static: false}) select: McTreeSelect;
 
     treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable);
     treeFlattener = new McTreeFlattener(transformer, getLevel, isExpandable, getChildren);
@@ -959,8 +959,8 @@ class InvalidSelectInForm {
     `
 })
 class SelectInsideFormGroup {
-    @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective;
-    @ViewChild(McTreeSelect) select: McTreeSelect;
+    @ViewChild(FormGroupDirective, {static: false}) formGroupDirective: FormGroupDirective;
+    @ViewChild(McTreeSelect, {static: false}) select: McTreeSelect;
 
     formControl = new FormControl('', Validators.required);
     formGroup = new FormGroup({
@@ -1007,7 +1007,7 @@ class SelectInsideFormGroup {
 class BasicSelectWithoutForms {
     selectedFood: string | null;
 
-    @ViewChild(McTreeSelect) select: McTreeSelect;
+    @ViewChild(McTreeSelect, {static: false}) select: McTreeSelect;
 
     treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable);
     treeFlattener = new McTreeFlattener(transformer, getLevel, isExpandable, getChildren);
@@ -1049,7 +1049,7 @@ class BasicSelectWithoutForms {
 class BasicSelectWithoutFormsPreselected {
     selectedFood = 'Pictures';
 
-    @ViewChild(McTreeSelect) select: McTreeSelect;
+    @ViewChild(McTreeSelect, {static: false}) select: McTreeSelect;
 
     treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable);
     treeFlattener = new McTreeFlattener(transformer, getLevel, isExpandable, getChildren);
@@ -1091,7 +1091,7 @@ class BasicSelectWithoutFormsPreselected {
 class BasicSelectWithoutFormsMultiple {
     selectedFoods: string[];
 
-    @ViewChild(McTreeSelect) select: McTreeSelect;
+    @ViewChild(McTreeSelect, {static: false}) select: McTreeSelect;
 
     treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable);
     treeFlattener = new McTreeFlattener(transformer, getLevel, isExpandable, getChildren);
@@ -1182,7 +1182,7 @@ class NgModelCompareWithSelect {
     selectedFood: { name: string; type: string } = { name: 'rootNode_1', type: 'app' };
     comparator: ((f1: any, f2: any) => boolean) | null = this.compareByValue;
 
-    @ViewChild(McTreeSelect) select: McTreeSelect;
+    @ViewChild(McTreeSelect, {static: false}) select: McTreeSelect;
     @ViewChildren(McTreeOption) options: QueryList<McTreeOption>;
 
     treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable);
@@ -1245,7 +1245,7 @@ class NgModelCompareWithSelect {
     `
 })
 class CustomErrorBehaviorSelect {
-    @ViewChild(McTreeSelect) select: McTreeSelect;
+    @ViewChild(McTreeSelect, {static: false}) select: McTreeSelect;
 
     control = new FormControl();
 
@@ -1291,7 +1291,7 @@ class CustomErrorBehaviorSelect {
 class SingleSelectWithPreselectedArrayValues {
     selectedFood = { name: 'Pictures', type: 'app' };
 
-    @ViewChild(McTreeSelect) select: McTreeSelect;
+    @ViewChild(McTreeSelect, {static: false}) select: McTreeSelect;
     @ViewChildren(McTreeOption) options: QueryList<McTreeOption>;
 
     treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable);
@@ -1335,7 +1335,7 @@ class SingleSelectWithPreselectedArrayValues {
 class SelectWithoutOptionCentering {
     control = new FormControl('rootNode_1');
 
-    @ViewChild(McTreeSelect) select: McTreeSelect;
+    @ViewChild(McTreeSelect, {static: false}) select: McTreeSelect;
     @ViewChildren(McTreeOption) options: QueryList<McTreeOption>;
 
     treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable);
@@ -1681,6 +1681,7 @@ describe('McTreeSelect', () => {
                     const multiFixture = TestBed.createComponent(MultiSelect);
                     const instance = multiFixture.componentInstance;
 
+                    multiFixture.detectChanges();
                     select = multiFixture.debugElement.query(By.css('mc-tree-select')).nativeElement;
 
                     const initialValue = instance.control.value;
@@ -4349,7 +4350,7 @@ describe('McTreeSelect', () => {
 
             options[0].click();
             options[2].click();
-            options[4].click();
+            options[5].click();
             fixture.detectChanges();
 
             expect(Array.from(trigger.querySelectorAll('mc-tag'), (item) => item.textContent!.trim()))

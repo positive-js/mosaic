@@ -2384,7 +2384,7 @@ class AutocompleteWithNumbers {
     `
 })
 class AutocompleteWithOnPushDelay implements OnInit {
-    @ViewChild(McAutocompleteTrigger) trigger: McAutocompleteTrigger;
+    @ViewChild(McAutocompleteTrigger, {static: false}) trigger: McAutocompleteTrigger;
     options: string[];
 
     ngOnInit() {

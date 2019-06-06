@@ -338,7 +338,7 @@ class StandardYearView {
     selected = moment([2017, 2, 10]);
     selectedMonth: Moment;
 
-    @ViewChild(McYearView) yearView: McYearView<Moment>;
+    @ViewChild(McYearView, {static: false}) yearView: McYearView<Moment>;
 }
 
 

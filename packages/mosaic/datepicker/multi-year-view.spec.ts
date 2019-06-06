@@ -270,7 +270,7 @@ class StandardMultiYearView {
     selected = moment([2020, 0, 1]);
     selectedYear: Moment;
 
-    @ViewChild(McMultiYearView) multiYearView: McMultiYearView<Moment>;
+    @ViewChild(McMultiYearView, {static: false}) multiYearView: McMultiYearView<Moment>;
 }
 
 @Component({

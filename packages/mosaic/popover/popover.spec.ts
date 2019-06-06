@@ -175,12 +175,12 @@ describe('McPopover', () => {
 class McPopoverTestComponent {
     popoverVisibility: boolean = false;
 
-    @ViewChild('test1') test1: ElementRef;
-    @ViewChild('test2') test2: ElementRef;
-    @ViewChild('test3') test3: ElementRef;
-    @ViewChild('test4') test4: ElementRef;
-    @ViewChild('test5') test5: ElementRef;
-    @ViewChild('test6') test6: ElementRef;
-    @ViewChild('test7') test7: ElementRef;
+    @ViewChild('test1', {static: false}) test1: ElementRef;
+    @ViewChild('test2', {static: false}) test2: ElementRef;
+    @ViewChild('test3', {static: false}) test3: ElementRef;
+    @ViewChild('test4', {static: false}) test4: ElementRef;
+    @ViewChild('test5', {static: false}) test5: ElementRef;
+    @ViewChild('test6', {static: false}) test6: ElementRef;
+    @ViewChild('test7', {static: false}) test7: ElementRef;
 }
 

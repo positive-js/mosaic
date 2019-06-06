@@ -132,7 +132,7 @@ class BasicSelect {
     tabIndexOverride: number;
     panelClass = ['custom-one', 'custom-two'];
 
-    @ViewChild(McSelect) select: McSelect;
+    @ViewChild(McSelect, {static: true}) select: McSelect;
     @ViewChildren(McOption) options: QueryList<McOption>;
 }
 
@@ -156,7 +156,7 @@ class NgModelSelect {
     ];
     isDisabled: boolean;
 
-    @ViewChild(McSelect) select: McSelect;
+    @ViewChild(McSelect, {static: false}) select: McSelect;
     @ViewChildren(McOption) options: QueryList<McOption>;
 }
 
@@ -203,7 +203,7 @@ class NgIfSelect {
     ];
     control = new FormControl('pizza-1');
 
-    @ViewChild(McSelect) select: McSelect;
+    @ViewChild(McSelect, {static: false}) select: McSelect;
 }
 
 @Component({
@@ -287,7 +287,7 @@ class SelectWithSearch {
     }]
 })
 class CustomSelectAccessor implements ControlValueAccessor {
-    @ViewChild(McSelect) select: McSelect;
+    @ViewChild(McSelect, {static: false}) select: McSelect;
 
     writeValue: (value?: any) => void = () => {};
     registerOnChange: (changeFn?: (value: any) => void) => void = () => {};
@@ -306,7 +306,7 @@ class CustomSelectAccessor implements ControlValueAccessor {
 })
 class CompWithCustomSelect {
     ctrl = new FormControl('initial value');
-    @ViewChild(CustomSelectAccessor) customAccessor: CustomSelectAccessor;
+    @ViewChild(CustomSelectAccessor, {static: true}) customAccessor: CustomSelectAccessor;
 }
 
 @Component({
@@ -402,7 +402,7 @@ class MultiSelect {
     ];
     control = new FormControl();
 
-    @ViewChild(McSelect) select: McSelect;
+    @ViewChild(McSelect, {static: false}) select: McSelect;
     @ViewChildren(McOption) options: QueryList<McOption>;
     sortComparator: (a: McOption, b: McOption, options: McOption[]) => number;
 }
@@ -468,7 +468,7 @@ class BasicSelectNoPlaceholder {
     `
 })
 class BasicSelectWithTheming {
-    @ViewChild(McSelect) select: McSelect;
+    @ViewChild(McSelect, {static: false}) select: McSelect;
     theme: string;
 }
 
@@ -496,7 +496,7 @@ class ResetValuesSelect {
     ];
     control = new FormControl();
 
-    @ViewChild(McSelect) select: McSelect;
+    @ViewChild(McSelect, {static: false}) select: McSelect;
 }
 
 @Component({
@@ -572,7 +572,7 @@ class SelectWithGroups {
         }
     ];
 
-    @ViewChild(McSelect) select: McSelect;
+    @ViewChild(McSelect, {static: false}) select: McSelect;
     @ViewChildren(McOption) options: QueryList<McOption>;
 }
 
@@ -626,8 +626,8 @@ class InvalidSelectInForm {
     `
 })
 class SelectInsideFormGroup {
-    @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective;
-    @ViewChild(McSelect) select: McSelect;
+    @ViewChild(FormGroupDirective, {static: false}) formGroupDirective: FormGroupDirective;
+    @ViewChild(McSelect, {static: false}) select: McSelect;
     formControl = new FormControl('', Validators.required);
     formGroup = new FormGroup({
         food: this.formControl
@@ -653,7 +653,7 @@ class BasicSelectWithoutForms {
         { value: 'sandwich-2', viewValue: 'Sandwich' }
     ];
 
-    @ViewChild(McSelect) select: McSelect;
+    @ViewChild(McSelect, {static: false}) select: McSelect;
 }
 
 @Component({
@@ -674,7 +674,7 @@ class BasicSelectWithoutFormsPreselected {
         { value: 'pizza-1', viewValue: 'Pizza' }
     ];
 
-    @ViewChild(McSelect) select: McSelect;
+    @ViewChild(McSelect, {static: false}) select: McSelect;
 }
 
 @Component({
@@ -696,7 +696,7 @@ class BasicSelectWithoutFormsMultiple {
         { value: 'sandwich-2', viewValue: 'Sandwich' }
     ];
 
-    @ViewChild(McSelect) select: McSelect;
+    @ViewChild(McSelect, {static: false}) select: McSelect;
 }
 
 @Component({
@@ -742,7 +742,7 @@ class NgModelCompareWithSelect {
     selectedFood: { value: string; viewValue: string } = { value: 'pizza-1', viewValue: 'Pizza' };
     comparator: ((f1: any, f2: any) => boolean) | null = this.compareByValue;
 
-    @ViewChild(McSelect) select: McSelect;
+    @ViewChild(McSelect, {static: false}) select: McSelect;
     @ViewChildren(McOption) options: QueryList<McOption>;
 
     useCompareByValue() {
@@ -780,7 +780,7 @@ class NgModelCompareWithSelect {
     `
 })
 class CustomErrorBehaviorSelect {
-    @ViewChild(McSelect) select: McSelect;
+    @ViewChild(McSelect, {static: false}) select: McSelect;
     control = new FormControl();
     foods: any[] = [
         { value: 'steak-0', viewValue: 'Steak' },
@@ -809,7 +809,7 @@ class SingleSelectWithPreselectedArrayValues {
 
     selectedFoods = this.foods[1].value;
 
-    @ViewChild(McSelect) select: McSelect;
+    @ViewChild(McSelect, {static: false}) select: McSelect;
     @ViewChildren(McOption) options: QueryList<McOption>;
 }
 
@@ -838,7 +838,7 @@ class SelectWithoutOptionCentering {
     ];
     control = new FormControl('pizza-1');
 
-    @ViewChild(McSelect) select: McSelect;
+    @ViewChild(McSelect, {static: false}) select: McSelect;
     @ViewChildren(McOption) options: QueryList<McOption>;
 }
 
