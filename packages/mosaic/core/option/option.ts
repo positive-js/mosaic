@@ -160,6 +160,10 @@ export class McOption implements AfterViewChecked, OnDestroy {
         this.stateChanges.complete();
     }
 
+    getHeight(): number {
+        return this.element.nativeElement.getClientRects()[0].height;
+    }
+
     select(): void {
         if (!this._selected) {
             this._selected = true;

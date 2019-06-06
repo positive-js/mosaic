@@ -151,6 +151,10 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
 
 .mc-tree-select__content {
     height: 100%;
+
+    & .mc-tree-selection {
+        height: 100%;
+    }
 }
 
 // Override optgroup and option to scale based on font-size of the trigger.

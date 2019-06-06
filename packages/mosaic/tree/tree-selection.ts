@@ -299,6 +299,7 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
 
     getHeight(): number {
         const clientRects = this.elementRef.nativeElement.getClientRects();
+
         if (clientRects.length) {
             return clientRects[0].height;
         }
