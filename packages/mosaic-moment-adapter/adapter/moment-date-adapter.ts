@@ -32,6 +32,11 @@ export interface IMcMomentDateAdapterOptions {
      * {@default false}
      */
     useUtc: boolean;
+    /**
+     * whether should parse method try guess date format
+     * {@default false}
+     */
+    findDateFormat: boolean;
 }
 
 /** InjectionToken for moment date adapter to configure options. */
@@ -45,7 +50,8 @@ export const MC_MOMENT_DATE_ADAPTER_OPTIONS = new InjectionToken<IMcMomentDateAd
 // tslint:disable:naming-convention
 export function MC_MOMENT_DATE_ADAPTER_OPTIONS_FACTORY(): IMcMomentDateAdapterOptions {
     return {
-        useUtc: false
+        useUtc: false,
+        findDateFormat: false
     };
 }
 
@@ -205,11 +211,11 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
         return this.createMoment().locale(this.locale);
     }
 
-    parse(value: any, parseFormat: string | string[], shouldGuess: boolean = false): Moment | null {
+    parse(value: any, parseFormat: string | string[]): Moment | null {
         if (value) {
             if (value && typeof value === 'string') {
-                if (shouldGuess) {
-                    return this.guessFormat(value);
+                if (this.options && this.options.findDateFormat) {
+                    return this.findFormat(value);
                 }
 
                 return parseFormat
@@ -459,7 +465,7 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
         return !isNaN(parseFloat(value)) && isFinite(value);
     }
 
-    private guessFormat(value: string): Moment | null {
+    private findFormat(value: string): Moment | null {
         if (!value) {
             return null;
         }
@@ -476,19 +482,22 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
             return this.createMoment(value, 'X', this.locale);
         }
 
-        if (value.trim().includes(' ')) {
+        if (
+            /^\S\s\S+\s(\d{2}|\d{4})$/.test(value.trim()) ||
+            /^\S+\s\d{1,2}[a-z]{2}\s(\d{2}|\d{4})$/.test(value.trim())
+        ) {
             return this.parseWithSpace(value);
         }
 
-        if (value.includes('/')) {
+        if (/^\d{1,2}\/\d{1,2}\/(\d{2}|\d{4})$/.test(value)) {
             return this.parseWithSlash(value);
         }
 
-        if (value.includes('-')) {
+        if (/(^(\d{1,2}|\d{4})-\d{1,2}-\d{1,2}$)|(^\d{1,2}-\d{1,2}-(\d{2}|\d{4})$)/.test(value)) {
            return this.parseWithDash(value);
         }
 
-        if (value.includes('.')) {
+        if (/^\d{1,2}\.\d{1,2}\.(\d{2}|\d{4})$/.test(value)) {
             return this.parseWithDot(value);
         }
 
@@ -497,7 +506,6 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
 
     private parseWithSpace(value: string): Moment | null {
         switch (this.locale) {
-            default:
             case 'ru':
                 return this.createMoment(value, 'DD MMMM YYYY', this.locale);
             case 'en':
@@ -507,12 +515,13 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
                 }
 
                 return this.createMoment(value, 'MMMM Do YYYY', this.locale);
+            default:
+                throw new Error(`Locale ${this.locale} is not supported`);
         }
     }
 
     private parseWithSlash(value: string): Moment | null {
         switch (this.locale) {
-            default:
             case 'ru':
                 return this.createMoment(value, 'DD/MM/YYYY', this.locale);
             // todo do we use generalized locales? en vs en-US; until not we try to guess
@@ -551,6 +560,8 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
                 return canFirstBeMonth && !canSecondByMonth
                     ? this.createMoment(value, 'MM/DD/YYYY', this.locale)
                     : this.createMoment(value, 'DD/MM/YYYY', this.locale);
+            default:
+                throw new Error(`Locale ${this.locale} is not supported`);
         }
     }
 
