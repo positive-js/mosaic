@@ -108,7 +108,7 @@ export class McDatepickerContent<D> extends McDatepickerContentMixinBase
     implements AfterViewInit, CanColor {
 
     /** Reference to the internal calendar component. */
-    @ViewChild(McCalendar) calendar: McCalendar<D>;
+    @ViewChild(McCalendar, {static: false}) calendar: McCalendar<D>;
 
     /** Reference to the datepicker that created the overlay. */
     datepicker: McDatepicker<D>;

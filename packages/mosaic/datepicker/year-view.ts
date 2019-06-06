@@ -103,7 +103,7 @@ export class McYearView<D> implements AfterContentInit {
     @Output() readonly activeDateChange: EventEmitter<D> = new EventEmitter<D>();
 
     /** The body of calendar table */
-    @ViewChild(McCalendarBody) mcCalendarBody: McCalendarBody;
+    @ViewChild(McCalendarBody, {static: false}) mcCalendarBody: McCalendarBody;
 
     /** Grid of calendar cells representing the months of the year. */
     months: McCalendarCell[][];

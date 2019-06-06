@@ -117,10 +117,10 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
 
     @Input() @Output() mcOnCancel: EventEmitter<T> | OnClickCallback<T> = new EventEmitter<T>();
 
-    @ViewChild('modalContainer') modalContainer: ElementRef;
-    @ViewChild('bodyContainer', { read: ViewContainerRef }) bodyContainer: ViewContainerRef;
+    @ViewChild('modalContainer', {static: false}) modalContainer: ElementRef;
+    @ViewChild('bodyContainer', { read: ViewContainerRef, static: false}) bodyContainer: ViewContainerRef;
     // Only aim to focus the ok button that needs to be auto focused
-    @ViewChild('autoFocusButtonOk', { read: ElementRef }) autoFocusButtonOk: ElementRef;
+    @ViewChild('autoFocusButtonOk', { read: ElementRef, static: false}) autoFocusButtonOk: ElementRef;
 
     maskAnimationClassMap: object;
     modalAnimationClassMap: object;

@@ -112,7 +112,7 @@ export class McMonthView<D> implements AfterContentInit {
     @Output() readonly activeDateChange: EventEmitter<D> = new EventEmitter<D>();
 
     /** The body of calendar table */
-    @ViewChild(McCalendarBody) mcCalendarBody: McCalendarBody;
+    @ViewChild(McCalendarBody, {static: false}) mcCalendarBody: McCalendarBody;
 
     /** The label for this month (e.g. "January 2017"). */
     monthLabel: string;
