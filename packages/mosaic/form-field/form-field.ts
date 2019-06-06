@@ -92,6 +92,8 @@ export class McFormField extends _McFormFieldMixinBase implements
 
     hovered: boolean = false;
 
+    canCleanerClearByEsc: boolean = true;
+
     constructor(public _elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) {
         super(_elementRef);
     }
@@ -155,7 +157,7 @@ export class McFormField extends _McFormFieldMixinBase implements
 
     onKeyDown(event: KeyboardEvent): void {
         // tslint:disable-next-line:deprecation
-        if (event.keyCode === ESCAPE && this._control.focused && this.hasCleaner) {
+        if (this.canCleanerClearByEsc && event.keyCode === ESCAPE && this._control.focused && this.hasCleaner) {
             if (this._control && this._control.ngControl) {
                 this._control.ngControl.reset();
             }

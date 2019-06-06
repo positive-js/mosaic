@@ -121,9 +121,16 @@ const McSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorStateC
 export class McSelectSearch implements AfterContentInit, OnDestroy {
     @ContentChild(McInput) input: McInput;
 
+    @Output()
+    escPressedOnEmptyInput: EventEmitter<void> = new EventEmitter<void>();
+
     searchChangesSubscription: Subscription = new Subscription();
 
     isSearchChanged: boolean = false;
+
+    constructor(formField: McFormField) {
+        formField.canCleanerClearByEsc = false;
+    }
 
     focus(): void {
         this.input.focus();
@@ -159,7 +166,11 @@ export class McSelectSearch implements AfterContentInit, OnDestroy {
     keyEvent(event: KeyboardEvent) {
         // tslint:disable-next-line:deprecation
         if (event.keyCode === ESCAPE) {
-            this.reset();
+            if (this.input.value) {
+                this.reset();
+            } else {
+                this.escPressedOnEmptyInput.emit();
+            }
         }
     }
 }
@@ -512,6 +523,12 @@ export class McSelect extends McSelectMixinBase implements
                     this._changeDetectorRef.markForCheck();
                 }
             });
+
+        if (this.search) {
+            this.search.escPressedOnEmptyInput.subscribe(() => {
+                this.close();
+            });
+        }
     }
 
     ngAfterContentInit() {
