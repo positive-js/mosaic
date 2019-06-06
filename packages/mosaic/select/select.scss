@@ -30,19 +30,19 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
             cursor: default;
         }
     }
+}
 
-    .mc-select__no-options-message {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        box-sizing: border-box;
-        position: relative;
-        max-width: 100%;
-        height: 32px;
-        cursor: default;
-        outline: none;
-        padding: 0 16px;
-    }
+.mc-select__no-options-message {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+    max-width: 100%;
+    height: 32px;
+    cursor: default;
+    outline: none;
+    padding: 0 16px;
 }
 
 .mc-select__trigger {
