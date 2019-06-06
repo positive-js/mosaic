@@ -42,7 +42,7 @@ import {
     RIGHT_ARROW,
     SPACE,
     UP_ARROW,
-    A
+    A, PAGE_UP, PAGE_DOWN
 } from '@ptsecurity/cdk/keycodes';
 import {
     CdkConnectedOverlay,
@@ -544,8 +544,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         this.ngZone.onStable.asObservable()
             .pipe(take(1))
             .subscribe(() => {
-                if (this.triggerFontSize && this.overlayDir.overlayRef &&
-                    this.overlayDir.overlayRef.overlayElement) {
+                if (this.triggerFontSize && this.overlayDir.overlayRef && this.overlayDir.overlayRef.overlayElement) {
                     this.overlayDir.overlayRef.overlayElement.style.fontSize = `${this.triggerFontSize}px`;
                 }
             });
@@ -688,6 +687,8 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
                 this.changeDetectorRef.detectChanges();
                 this.calculateOverlayOffsetX();
                 this.panel.nativeElement.scrollTop = this.scrollTop;
+
+                this.tree.updateScrollSize();
             });
     }
 
@@ -854,14 +855,22 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
             this.close();
         } else if (keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW) {
             return this.originalOnKeyDown.call(this.tree, event);
-        } else if (keyCode === HOME || keyCode === END) {
+        } else if (keyCode === HOME) {
             event.preventDefault();
 
-            if (keyCode === HOME) {
-                this.tree.keyManager.setFirstItemActive();
-            } else {
-                this.tree.keyManager.setLastItemActive();
-            }
+            this.tree.keyManager.setFirstItemActive();
+        } else if (keyCode === END) {
+            event.preventDefault();
+
+            this.tree.keyManager.setLastItemActive();
+        } else if (keyCode === PAGE_UP) {
+            event.preventDefault();
+
+            this.tree.keyManager.setPreviousPageItemActive();
+        } else if (keyCode === PAGE_DOWN) {
+            event.preventDefault();
+
+            this.tree.keyManager.setNextPageItemActive();
         } else if ((keyCode === ENTER || keyCode === SPACE) && this.tree.keyManager.activeItem) {
             event.preventDefault();
 

@@ -41,7 +41,9 @@ import {
     RIGHT_ARROW,
     SPACE,
     UP_ARROW,
-    A
+    A,
+    PAGE_UP,
+    PAGE_DOWN
 } from '@ptsecurity/cdk/keycodes';
 import {
     CdkConnectedOverlay,
@@ -738,6 +740,8 @@ export class McSelect extends McSelectMixinBase implements
                 this._changeDetectorRef.detectChanges();
                 this.calculateOverlayOffsetX();
                 this.optionsContainer.nativeElement.scrollTop = this.scrollTop;
+
+                this.updateScrollSize();
             });
     }
 
@@ -835,6 +839,18 @@ export class McSelect extends McSelectMixinBase implements
         this._changeDetectorRef.markForCheck();
     }
 
+    private getHeightOfOptionsContainer(): number {
+        return this.optionsContainer.nativeElement.getClientRects()[0].height;
+    }
+
+    private updateScrollSize(): void {
+        if (!this.options.first) { return; }
+
+        this.keyManager.withScrollSize(
+            Math.floor(this.getHeightOfOptionsContainer() / this.options.first.getHeight())
+        );
+    }
+
     private getTotalItemsWidthInMatcher(): number {
         const triggerClone = this.trigger.nativeElement.cloneNode(true);
         triggerClone.querySelector('.mc-select__match-hidden-text').remove();
@@ -881,19 +897,26 @@ export class McSelect extends McSelectMixinBase implements
         const isArrowKey = keyCode === DOWN_ARROW || keyCode === UP_ARROW;
         const manager = this.keyManager;
 
-        if (keyCode === HOME || keyCode === END) {
-            event.preventDefault();
-
-            if (keyCode === HOME) {
-                manager.setFirstItemActive();
-            } else {
-                manager.setLastItemActive();
-            }
-
-        } else if (isArrowKey && event.altKey) {
+        if (isArrowKey && event.altKey) {
             // Close the select on ALT + arrow key to match the native <select>
             event.preventDefault();
             this.close();
+        } else if (keyCode === HOME) {
+            event.preventDefault();
+
+            manager.setFirstItemActive();
+        } else if (keyCode === END) {
+            event.preventDefault();
+
+            manager.setLastItemActive();
+        } else if (keyCode === PAGE_UP) {
+            event.preventDefault();
+
+            manager.setPreviousPageItemActive();
+        } else if (keyCode === PAGE_DOWN) {
+            event.preventDefault();
+
+            manager.setNextPageItemActive();
         } else if ((keyCode === ENTER || keyCode === SPACE) && manager.activeItem) {
             event.preventDefault();
             manager.activeItem.selectViaInteraction();
