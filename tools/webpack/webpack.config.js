@@ -101,7 +101,7 @@ module.exports = function (options) {
                             loader: 'postcss-loader',
                             options: {
                                 sourceMap: true,
-                                plugins: () => [require('autoprefixer')({ browsers: ['last 2 versions'] })]
+                                plugins: () => [require('autoprefixer')({ overrideBrowserslist: ['last 2 versions'] })]
                             }
                         },
                         'resolve-url-loader',

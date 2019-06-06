@@ -7,7 +7,7 @@ import {
     ElementRef,
     Inject,
     Optional,
-    InjectionToken
+    InjectionToken, ViewEncapsulation
 } from '@angular/core';
 import { SelectionModel } from '@ptsecurity/cdk/collections';
 import { CdkTreeNode } from '@ptsecurity/cdk/tree';
@@ -195,7 +195,7 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
      * select's trigger.
      */
     get viewValue(): string {
-        // TODO(kara): Add input property alternative for node envs.
+        // TODO: Add input property alternative for node envs.
         return (this.getHostElement().textContent || '').trim();
     }
 

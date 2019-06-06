@@ -699,9 +699,7 @@ class MultiSelect {
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
     @ViewChild(McTreeSelect, {static: false}) select: McTreeSelect;
-
     @ViewChildren(McTreeOption) options: QueryList<McTreeOption>;
-
     sortComparator: (a: McTreeOption, b: McTreeOption, options: McTreeOption[]) => number;
 
     constructor(database: FileDatabase) {
@@ -709,6 +707,8 @@ class MultiSelect {
 
         database.dataChange.subscribe((data) => this.dataSource.data = data);
     }
+
+
 
     hasChild(_: number, nodeData: FileFlatNode) {
         return nodeData.expandable;
@@ -4329,8 +4329,16 @@ describe('McTreeSelect', () => {
 
             const option = overlayContainerElement.querySelector('mc-tree-option') as HTMLElement;
 
+            console.log('======1=======')
+            console.log(option)
+            console.log(testInstance.control.value);
+
             option.click();
             fixture.detectChanges();
+            flush();
+            console.log('======2======')
+            console.log(option)
+            console.log(testInstance.control.value);
 
             expect(testInstance.control.value).toEqual(['rootNode_1']);
 
@@ -4338,6 +4346,9 @@ describe('McTreeSelect', () => {
             fixture.detectChanges();
             flush();
 
+            console.log('======3======')
+            console.log(option)
+            console.log(testInstance.control.value);
             expect(testInstance.control.value).toEqual([]);
         }));
 
@@ -4352,6 +4363,7 @@ describe('McTreeSelect', () => {
             options[2].click();
             options[5].click();
             fixture.detectChanges();
+            flush();
 
             expect(Array.from(trigger.querySelectorAll('mc-tag'), (item) => item.textContent!.trim()))
                 .toEqual(['rootNode_1', 'Documents :', 'Applications :']);
