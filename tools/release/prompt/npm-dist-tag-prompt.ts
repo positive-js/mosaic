@@ -33,10 +33,11 @@ export async function promptForNpmDistTag(version: Version): Promise<string> {
 export function getDistTagChoicesForVersion(version: Version) {
     const {prereleaseLabel} = version;
 
+    // TODO: for refactoring
     if (!prereleaseLabel) {
         return [LATEST_TAG_CHOICE, NEXT_TAG_CHOICE];
     }
 
-    return [NEXT_TAG_CHOICE];
+    return [LATEST_TAG_CHOICE, NEXT_TAG_CHOICE];
 }
 
