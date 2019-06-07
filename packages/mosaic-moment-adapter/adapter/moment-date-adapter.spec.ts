@@ -7,6 +7,7 @@ import {
     MC_DATE_LOCALE
 } from '@ptsecurity/cdk/datetime';
 import * as moment from 'moment';
+// tslint:disable-next-line:no-duplicate-imports
 import { Moment } from 'moment';
 
 import { MC_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateModule } from './index';
@@ -364,7 +365,125 @@ describe('MomentDateAdapter', () => {
         expect(adapter.addCalendarMonths(moment(), 1).locale()).toBe('ja');
         expect(adapter.addCalendarYears(moment(), 1).locale()).toBe('ja');
     });
+});
 
+describe('MomentDateAdapter findDateFormat = true', () => {
+    let adapter: MomentDateAdapter;
+
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            imports: [MomentDateModule],
+            providers: [{
+                provide: MC_MOMENT_DATE_ADAPTER_OPTIONS,
+                useValue: {findDateFormat: true}
+            }]
+        }).compileComponents();
+    }));
+
+    beforeEach(inject([DateAdapter], (dateAdapter: MomentDateAdapter) => {
+        moment.locale('en');
+        adapter = dateAdapter;
+        adapter.setLocale('en');
+    }));
+
+    it('should parse ISO', () => {
+        adapter.setLocale('ru');
+        const utcDate = new Date(2019, 5, 3, 14, 50,  30);
+        utcDate.setMinutes(utcDate.getMinutes() - utcDate.getTimezoneOffset());
+        expect(adapter.parse('2019-06-03T14:50:30.000Z', '')!.toDate())
+            .toEqual(utcDate);
+    });
+
+    it('should parse dashed date', () => {
+        adapter.setLocale('ru');
+        // finishing year
+        expect(adapter.parse('03-06-2019', '')!.toDate())
+            .toEqual(new Date(2019, 5, 3));
+        expect(adapter.parse('03-06-19', '')!.toDate())
+            .toEqual(new Date(2019, 5, 3));
+        // leading year
+        expect(adapter.parse('2019-06-03', '')!.toDate())
+            .toEqual(new Date(2019, 5, 3));
+
+        adapter.setLocale('en');
+        // finishing year
+        expect(adapter.parse('03-06-2019', '')!.toDate())
+            .toEqual(new Date(2019, 5, 3));
+        // short year
+        expect(adapter.parse('03-06-19', '')!.toDate())
+            .toEqual(new Date(2019, 5, 3));
+
+        // leading year
+        expect(adapter.parse('2019-06-03', '')!.toDate())
+            .toEqual(new Date(2019, 5, 3));
+
+    });
+
+    it('should parse slashed date', () => {
+        adapter.setLocale('ru');
+        expect(adapter.parse('03/06/2019', '')!.toDate())
+            .toEqual(new Date(2019, 5, 3));
+        // short year
+        expect(adapter.parse('03/06/19', '')!.toDate())
+            .toEqual(new Date(2019, 5, 3));
+
+        adapter.setLocale('en');
+        // US by default
+        expect(adapter.parse('03/06/2019', '')!.toDate())
+            .toEqual(new Date(2019, 2, 6));
+
+        // short year
+        expect(adapter.parse('03/06/19', '')!.toDate())
+            .toEqual(new Date(2019, 2, 6));
+
+        // month order guessing
+        expect(adapter.parse('23/06/2019', '')!.toDate())
+            .toEqual(new Date(2019, 5, 23));
+    });
+
+    it('should parse doted date', () => {
+        adapter.setLocale('ru');
+        expect(adapter.parse('03.06.2019', '')!.toDate())
+            .toEqual(new Date(2019, 5, 3));
+        expect(adapter.parse('03.06.19', '')!.toDate())
+            .toEqual(new Date(2019, 5, 3));
+
+        adapter.setLocale('en');
+        expect(adapter.parse('03.06.2019', '')!.toDate())
+            .toEqual(new Date(2019, 5, 3));
+        expect(adapter.parse('03.06.19', '')!.toDate())
+            .toEqual(new Date(2019, 5, 3));
+    });
+
+    it('should parse long formatted date', () => {
+        adapter.setLocale('ru');
+        expect(adapter.parse('3 июня 2019', '')!.toDate())
+            .toEqual(new Date(2019, 5, 3));
+
+        expect(adapter.parse('6 фев 2019', '')!.toDate())
+            .toEqual(new Date(2019, 1, 6));
+
+        adapter.setLocale('en');
+        expect(adapter.parse('June 3rd 2019', '')!.toDate())
+            .toEqual(new Date(2019, 5, 3));
+
+        expect(adapter.parse('Feb 6th 2019', '')!.toDate())
+            .toEqual(new Date(2019, 1, 6));
+
+        expect(adapter.parse('3 June 2019', '')!.toDate())
+            .toEqual(new Date(2019, 5, 3));
+
+        expect(adapter.parse('6 Feb 2019', '')!.toDate())
+            .toEqual(new Date(2019, 1, 6));
+    });
+
+    it('should parse unix timestamp', () => {
+        adapter.setLocale('ru');
+        const utcDate = new Date(2019, 5, 3, 14, 50,  30);
+        utcDate.setMinutes(utcDate.getMinutes() - utcDate.getTimezoneOffset());
+        expect(adapter.parse('1559573430', '')!.toDate())
+            .toEqual(utcDate);
+    });
 });
 
 describe('MomentDateAdapter with MC_DATE_LOCALE override', () => {
