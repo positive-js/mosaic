@@ -116,13 +116,13 @@ const McSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorStateC
 
 @Directive({
     selector: '[mcSelectSearch]',
-    exportAs: 'mcSelectSearch'
+    exportAs: 'mcSelectSearch',
+    host: {
+        '(keydown)': 'handleKeydown($event)'
+    }
 })
 export class McSelectSearch implements AfterContentInit, OnDestroy {
     @ContentChild(McInput) input: McInput;
-
-    @Output()
-    escPressedOnEmptyInput: EventEmitter<void> = new EventEmitter<void>();
 
     searchChangesSubscription: Subscription = new Subscription();
 
@@ -162,14 +162,12 @@ export class McSelectSearch implements AfterContentInit, OnDestroy {
         this.searchChangesSubscription.unsubscribe();
     }
 
-    @HostListener('keydown', ['$event'])
-    keyEvent(event: KeyboardEvent) {
+    handleKeydown(event: KeyboardEvent) {
         // tslint:disable-next-line:deprecation
         if (event.keyCode === ESCAPE) {
             if (this.input.value) {
                 this.reset();
-            } else {
-                this.escPressedOnEmptyInput.emit();
+                event.stopPropagation();
             }
         }
     }
@@ -523,12 +521,6 @@ export class McSelect extends McSelectMixinBase implements
                     this._changeDetectorRef.markForCheck();
                 }
             });
-
-        if (this.search) {
-            this.search.escPressedOnEmptyInput.subscribe(() => {
-                this.close();
-            });
-        }
     }
 
     ngAfterContentInit() {
@@ -942,6 +934,8 @@ export class McSelect extends McSelectMixinBase implements
                     option.deselect();
                 }
             });
+        } else if (keyCode === ESCAPE && this.search) {
+            this.close();
         } else {
             const previouslyFocusedIndex = manager.activeItemIndex;
 
