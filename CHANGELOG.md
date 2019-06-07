@@ -1,3 +1,15 @@
+# 1.0.0 "Gauzy Hatred" (2019-06-07)
+
+
+### Features
+
+* **date-formatter:** update range dates formatter to show current year in some cases ([#137](https://github.com/positive-js/mosaic/issues/137)) ([22c14a3](https://github.com/positive-js/mosaic/commit/22c14a3))
+* **form-field:** formFieldWithoutBorder does not work in storybook ([#134](https://github.com/positive-js/mosaic/issues/134)) ([fe3df0f](https://github.com/positive-js/mosaic/commit/fe3df0f))
+* **link:** Новые стили в links ([#183685](https://github.com/positive-js/mosaic/issues/183685)) ([#127](https://github.com/positive-js/mosaic/issues/127)) ([3762afc](https://github.com/positive-js/mosaic/commit/3762afc))
+* **select:** PgDn and PgUp in selects ([#135](https://github.com/positive-js/mosaic/issues/135)) ([4a384a7](https://github.com/positive-js/mosaic/commit/4a384a7)), closes [#184327](https://github.com/positive-js/mosaic/issues/184327)
+
+
+
 # 1.0.0-beta.7 "Topo Restructuring" (2019-06-04)
 
 

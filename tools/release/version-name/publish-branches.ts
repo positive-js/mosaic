@@ -8,7 +8,7 @@ export function getAllowedPublishBranches(version: Version): string[] {
     const versionType = getSemverVersionType(version);
 
     if (versionType === 'major') {
-        return ['master'];
+        return [`${version.major}.${version.minor}.x`];
     } else if (versionType === 'minor') {
         // It's also possible that the caretaker wants to stage a minor release from a different
         // branch than "master". This can happen if major changes have been merged into "master"
