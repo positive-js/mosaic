@@ -484,7 +484,7 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
 
         // long months naming: D MMM YYYY, MMM Do YYYY with short case support
         if (
-            /^\S\s\S+\s(\d{2}|\d{4})$/.test(value.trim()) ||
+            /^\d{1,2}\s\S+\s(\d{2}|\d{4})$/.test(value.trim()) ||
             /^\S+\s\d{1,2}[a-z]{2}\s(\d{2}|\d{4})$/.test(value.trim())
         ) {
             return this.parseWithSpace(value);
