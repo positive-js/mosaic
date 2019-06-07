@@ -772,7 +772,7 @@ class ButtonToggleGroupWithFormControl {
     `
 })
 class RepeatedButtonTogglesWithPreselectedValue {
-    @ViewChild(McButtonToggleGroup) toggleGroup: McButtonToggleGroup;
+    @ViewChild(McButtonToggleGroup, {static: false}) toggleGroup: McButtonToggleGroup;
     @ViewChildren(McButtonToggle) toggles: QueryList<McButtonToggle>;
 
     possibleValues = ['One', 'Two', 'Three'];

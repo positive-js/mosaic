@@ -114,13 +114,13 @@ export class McTag extends _McTagMixinBase implements IFocusableOption, OnDestro
     @ContentChildren(McIcon) contentChildren: QueryList<McIcon>;
 
     /** The tag avatar */
-    @ContentChild(McTagAvatar) avatar: McTagAvatar;
+    @ContentChild(McTagAvatar, {static: false}) avatar: McTagAvatar;
 
     /** The tag's trailing icon. */
-    @ContentChild(McTagTrailingIcon) trailingIcon: McTagTrailingIcon;
+    @ContentChild(McTagTrailingIcon, {static: false}) trailingIcon: McTagTrailingIcon;
 
     /** The tag's remove toggler. */
-    @ContentChild(forwardRef(() => McTagRemove)) removeIcon: McTagRemove;
+    @ContentChild(forwardRef(() => McTagRemove), {static: false}) removeIcon: McTagRemove;
 
     /** Emitted when the tag is selected or deselected. */
     @Output() readonly selectionChange: EventEmitter<McTagSelectionChange> =

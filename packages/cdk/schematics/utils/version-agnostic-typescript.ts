@@ -1,17 +1,12 @@
 /**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-
-/**
  * This is just a type import and won't be generated in the release output.
  *
  * Note that we always need to adjust this type import based on the location of the Typescript
  * dependency that will be shipped with `@schematics/angular`.
  */
+import { SchematicsException } from '@angular-devkit/schematics';
+
+
 import typescript = require('typescript');
 
 /**
@@ -30,9 +25,9 @@ try {
   try {
     ts = require('typescript');
   } catch {
-    throw new Error('Error: Could not find a TypeScript version for the schematics. ' +
-      'Please report an issue on the Angular Material repository.');
+    throw new SchematicsException('Error: Could not find a TypeScript version for the ' +
+      'schematics. Please report an issue on the Angular Material repository.');
   }
 }
 
-export {ts};
+export { ts, typescript };

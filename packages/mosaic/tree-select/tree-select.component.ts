@@ -207,18 +207,18 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         }
     ];
 
-    @ViewChild('trigger') trigger: ElementRef;
+    @ViewChild('trigger', {static: false}) trigger: ElementRef;
 
-    @ViewChild('panel') panel: ElementRef;
+    @ViewChild('panel', {static: false}) panel: ElementRef;
 
-    @ViewChild(CdkConnectedOverlay) overlayDir: CdkConnectedOverlay;
+    @ViewChild(CdkConnectedOverlay, {static: false}) overlayDir: CdkConnectedOverlay;
 
     @ViewChildren(McTag) tags: QueryList<McTag>;
 
     /** User-supplied override of the trigger element. */
-    @ContentChild(McTreeSelectTrigger) customTrigger: McTreeSelectTrigger;
+    @ContentChild(McTreeSelectTrigger, {static: false}) customTrigger: McTreeSelectTrigger;
 
-    @ContentChild(McTreeSelection) tree: McTreeSelection;
+    @ContentChild(McTreeSelection, {static: false}) tree: McTreeSelection;
 
     /** Event emitted when the select panel has been toggled. */
     @Output() readonly openedChange: EventEmitter<boolean> = new EventEmitter<boolean>();

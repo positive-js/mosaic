@@ -56,7 +56,7 @@ export class McDropdownItem extends _McDropdownItemMixinBase
     /** ARIA role for the dropdown item. */
     @Input() role: 'menuitem' | 'menuitemradio' | 'menuitemcheckbox' = 'menuitem';
 
-    @ViewChild('content') content;
+    @ViewChild('content', {static: false}) content;
 
     private _document: Document;
 

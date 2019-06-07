@@ -24,7 +24,7 @@ import { McSidepanelModule } from '@ptsecurity/mosaic/sidepanel/sidepanel.module
     encapsulation: ViewEncapsulation.None
 })
 export class SidepanelDemoComponent {
-    @ViewChild(TemplateRef) template: TemplateRef<any>;
+    @ViewChild(TemplateRef, {static: false}) template: TemplateRef<any>;
 
     array = new Array(40); // tslint:disable-line
 

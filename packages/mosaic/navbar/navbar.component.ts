@@ -124,10 +124,10 @@ export class McNavbarItem extends _McNavbarMixinBase implements OnInit, AfterVie
         this.elementRef.nativeElement.setAttribute('computedTitle', encodeURI(value));
     }
 
-    @ContentChild('dropdownItemTmpl', { read: TemplateRef })
+    @ContentChild('dropdownItemTmpl', { read: TemplateRef, static: false })
     dropdownItemTmpl: TemplateRef<IMcNavbarDropdownItem>;
 
-    @ViewChild('dropdownContent', { read: ElementRef })
+    @ViewChild('dropdownContent', { read: ElementRef, static: false })
     dropdownContent: ElementRef;
 
     get hasDropdownContent() {

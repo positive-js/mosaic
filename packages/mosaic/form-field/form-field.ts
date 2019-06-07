@@ -76,16 +76,16 @@ export const _McFormFieldMixinBase: CanColorCtor & typeof McFormFieldBase = mixi
 export class McFormField extends _McFormFieldMixinBase implements
     AfterContentInit, AfterContentChecked, AfterViewInit, CanColor {
 
-    @ContentChild(McFormFieldControl) _control: McFormFieldControl<any>;
-    @ContentChild(McFormFieldNumberControl) _numberControl: McFormFieldNumberControl<any>;
-    @ContentChild(McStepper) _stepper: McStepper;
+    @ContentChild(McFormFieldControl, {static: false}) _control: McFormFieldControl<any>;
+    @ContentChild(McFormFieldNumberControl, {static: false}) _numberControl: McFormFieldNumberControl<any>;
+    @ContentChild(McStepper, {static: false}) _stepper: McStepper;
 
     @ContentChildren(McHint) _hint: QueryList<McHint>;
     @ContentChildren(McSuffix) _suffix: QueryList<McSuffix>;
     @ContentChildren(McPrefix) _prefix: QueryList<McPrefix>;
     @ContentChildren(McCleaner) _cleaner: QueryList<McCleaner>;
 
-    @ViewChild('connectionContainer') connectionContainerRef: ElementRef;
+    @ViewChild('connectionContainer', {static: true}) connectionContainerRef: ElementRef;
 
     // Unique id for the internal form field label.
     _labelId = `mc-form-field-label-${nextUniqueId++}`;

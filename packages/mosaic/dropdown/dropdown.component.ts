@@ -198,7 +198,7 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
     @Input() backdropClass: string = this._defaultOptions.backdropClass;
 
     /** @docs-private */
-    @ViewChild(TemplateRef) templateRef: TemplateRef<any>;
+    @ViewChild(TemplateRef, {static: false}) templateRef: TemplateRef<any>;
 
     /**
      * List of the items inside of a dropdown.
@@ -209,7 +209,7 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
      * Dropdown content that will be rendered lazily.
      * @docs-private
      */
-    @ContentChild(McDropdownContent) lazyContent: McDropdownContent;
+    @ContentChild(McDropdownContent, {static: false}) lazyContent: McDropdownContent;
 
     private _previousPanelClass: string;
 

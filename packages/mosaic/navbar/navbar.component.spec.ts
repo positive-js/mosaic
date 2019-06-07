@@ -190,7 +190,7 @@ describe('McNavbar', () => {
     templateUrl: './navbar.component.spec.html'
 })
 class TestApp {
-    @ViewChild('navbar')
+    @ViewChild('navbar', {static: false})
     navbar: McNavbar;
 
     counter: number = 0;

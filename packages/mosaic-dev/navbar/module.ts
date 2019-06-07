@@ -16,7 +16,7 @@ import { McNavbarModule, McNavbar, IMcNavbarDropdownItem } from '../../mosaic/na
 })
 export class NavbarDemoComponent {
 
-    @ViewChild('navbar')
+    @ViewChild('navbar', {static: false})
     navbar: McNavbar;
 
     readonly minNavbarWidth: number = 940;

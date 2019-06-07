@@ -355,7 +355,7 @@ class SimpleTabHeaderApp {
     ];
     dir: Direction = 'ltr';
 
-    @ViewChild(McTabHeader)
+    @ViewChild(McTabHeader, {static: true})
     tabHeader: McTabHeader;
 
     constructor() {

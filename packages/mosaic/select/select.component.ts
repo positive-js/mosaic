@@ -121,7 +121,7 @@ const McSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorStateC
     exportAs: 'mcSelectSearch'
 })
 export class McSelectSearch implements AfterContentInit, OnDestroy {
-    @ContentChild(McInput) input: McInput;
+    @ContentChild(McInput, {static: false}) input: McInput;
 
     searchChangesSubscription: Subscription = new Subscription();
 
@@ -256,18 +256,18 @@ export class McSelect extends McSelectMixinBase implements
         }
     ];
 
-    @ViewChild('trigger') trigger: ElementRef;
+    @ViewChild('trigger', {static: false}) trigger: ElementRef;
 
-    @ViewChild('panel') panel: ElementRef;
+    @ViewChild('panel', {static: false}) panel: ElementRef;
 
-    @ViewChild('optionsContainer') optionsContainer: ElementRef;
+    @ViewChild('optionsContainer', {static: false}) optionsContainer: ElementRef;
 
-    @ViewChild(CdkConnectedOverlay) overlayDir: CdkConnectedOverlay;
+    @ViewChild(CdkConnectedOverlay, {static: false}) overlayDir: CdkConnectedOverlay;
 
     @ViewChildren(McTag) tags: QueryList<McTag>;
 
     /** User-supplied override of the trigger element. */
-    @ContentChild(McSelectTrigger) customTrigger: McSelectTrigger;
+    @ContentChild(McSelectTrigger, {static: false}) customTrigger: McSelectTrigger;
 
     /** All of the defined select options. */
     @ContentChildren(McOption, { descendants: true }) options: QueryList<McOption>;
@@ -275,7 +275,7 @@ export class McSelect extends McSelectMixinBase implements
     /** All of the defined groups of options. */
     @ContentChildren(McOptgroup) optionGroups: QueryList<McOptgroup>;
 
-    @ContentChild(McSelectSearch) search: McSelectSearch;
+    @ContentChild(McSelectSearch, {static: false}) search: McSelectSearch;
 
     /** Classes to be passed to the select panel. Supports the same syntax as `ngClass`. */
     @Input() panelClass: string | string[] | Set<string> | { [key: string]: any };

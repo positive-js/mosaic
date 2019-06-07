@@ -66,7 +66,7 @@ export class CdkTree<T> implements AfterContentChecked, ICollectionViewer, OnDes
     @Input() trackBy: TrackByFunction<T>;
 
     // Outlets within the tree's template where the dataNodes will be inserted.
-    @ViewChild(CdkTreeNodeOutlet) nodeOutlet: CdkTreeNodeOutlet;
+    @ViewChild(CdkTreeNodeOutlet, {static: true}) nodeOutlet: CdkTreeNodeOutlet;
 
     /** The tree node template for the tree */
     @ContentChildren(CdkTreeNodeDef) nodeDefs: QueryList<CdkTreeNodeDef<T>>;

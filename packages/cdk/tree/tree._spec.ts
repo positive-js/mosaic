@@ -1050,7 +1050,7 @@ class SimpleCdkTreeApp {
 
     dataSource: FakeDataSource | null = new FakeDataSource(this.treeControl);
 
-    @ViewChild(CdkTree) tree: CdkTree<TestData>;
+    @ViewChild(CdkTree, {static: false}) tree: CdkTree<TestData>;
 
 }
 
@@ -1071,7 +1071,7 @@ class NestedCdkTreeApp {
 
     dataSource: FakeDataSource | null = new FakeDataSource(this.treeControl);
 
-    @ViewChild(CdkTree) tree: CdkTree<TestData>;
+    @ViewChild(CdkTree, {static: false}) tree: CdkTree<TestData>;
 }
 
 @Component({
@@ -1097,7 +1097,7 @@ class WhenNodeNestedCdkTreeApp {
 
     dataSource: FakeDataSource | null = new FakeDataSource(this.treeControl);
 
-    @ViewChild(CdkTree) tree: CdkTree<TestData>;
+    @ViewChild(CdkTree, {static: false}) tree: CdkTree<TestData>;
 }
 
 
@@ -1121,7 +1121,7 @@ class CdkTreeAppWithToggle {
     treeControl: ITreeControl<TestData> = new FlatTreeControl(this.getLevel, this.isExpandable);
     dataSource: FakeDataSource | null = new FakeDataSource(this.treeControl);
 
-    @ViewChild(CdkTree) tree: CdkTree<TestData>;
+    @ViewChild(CdkTree, {static: false}) tree: CdkTree<TestData>;
 }
 
 @Component({
@@ -1145,7 +1145,7 @@ class NestedCdkTreeAppWithToggle {
     treeControl: ITreeControl<TestData> = new NestedTreeControl(this.getChildren);
     dataSource: FakeDataSource | null = new FakeDataSource(this.treeControl);
 
-    @ViewChild(CdkTree) tree: CdkTree<TestData>;
+    @ViewChild(CdkTree, {static: false}) tree: CdkTree<TestData>;
 }
 
 @Component({
@@ -1173,7 +1173,7 @@ class WhenNodeCdkTreeApp {
 
     dataSource: FakeDataSource | null = new FakeDataSource(this.treeControl);
 
-    @ViewChild(CdkTree) tree: CdkTree<TestData>;
+    @ViewChild(CdkTree, {static: false}) tree: CdkTree<TestData>;
 }
 
 @Component({
@@ -1199,7 +1199,7 @@ class ArrayDataSourceCdkTreeApp {
         return this.dataSource.data;
     }
 
-    @ViewChild(CdkTree) tree: CdkTree<TestData>;
+    @ViewChild(CdkTree, {static: false}) tree: CdkTree<TestData>;
 }
 
 @Component({
@@ -1225,7 +1225,7 @@ class ObservableDataSourceCdkTreeApp {
         return this.dataSource._dataChange;
     }
 
-    @ViewChild(CdkTree) tree: CdkTree<TestData>;
+    @ViewChild(CdkTree, {static: false}) tree: CdkTree<TestData>;
 }
 
 @Component({
@@ -1250,7 +1250,7 @@ class ArrayDataSourceNestedCdkTreeApp {
         return this.dataSource.data;
     }
 
-    @ViewChild(CdkTree) tree: CdkTree<TestData>;
+    @ViewChild(CdkTree, {static: false}) tree: CdkTree<TestData>;
 }
 
 @Component({
@@ -1275,7 +1275,7 @@ class ObservableDataSourceNestedCdkTreeApp {
         return this.dataSource._dataChange;
     }
 
-    @ViewChild(CdkTree) tree: CdkTree<TestData>;
+    @ViewChild(CdkTree, {static: false}) tree: CdkTree<TestData>;
 }
 
 @Component({
@@ -1297,7 +1297,7 @@ class NestedCdkErrorTreeApp {
 
     dataSource: FakeDataSource | null = new FakeDataSource(this.treeControl);
 
-    @ViewChild(CdkTree) tree: CdkTree<TestData>;
+    @ViewChild(CdkTree, {static: false}) tree: CdkTree<TestData>;
 }
 
 class FakeTreeControl extends BaseTreeControl<TestData> {
@@ -1330,7 +1330,7 @@ class FlatCdkErrorTreeApp {
 
     dataSource: FakeDataSource | null = new FakeDataSource(this.treeControl);
 
-    @ViewChild(CdkTree) tree: CdkTree<TestData>;
+    @ViewChild(CdkTree, {static: false}) tree: CdkTree<TestData>;
 }
 
 
@@ -1357,7 +1357,7 @@ class DepthNestedCdkTreeApp {
         return this.dataSource.data;
     }
 
-    @ViewChild(CdkTree) tree: CdkTree<TestData>;
+    @ViewChild(CdkTree, {static: false}) tree: CdkTree<TestData>;
 }
 
 @Component({
@@ -1389,7 +1389,7 @@ class CdkTreeAppWithTrackBy {
     treeControl: ITreeControl<TestData> = new FlatTreeControl(this.getLevel, this.isExpandable);
     dataSource: FakeDataSource = new FakeDataSource(this.treeControl);
 
-    @ViewChild(CdkTree) tree: CdkTree<TestData>;
+    @ViewChild(CdkTree, {static: false}) tree: CdkTree<TestData>;
 }
 
 @Component({
@@ -1426,5 +1426,5 @@ class NestedCdkTreeAppWithTrackBy {
         return this.dataSource.data;
     }
 
-    @ViewChild(CdkTree) tree: CdkTree<TestData>;
+    @ViewChild(CdkTree, {static: false}) tree: CdkTree<TestData>;
 }

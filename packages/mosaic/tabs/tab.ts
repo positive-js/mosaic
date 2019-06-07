@@ -47,17 +47,17 @@ export class McTab extends mcTabMixinBase
         return this.contentPortal;
     }
     /** Content for the tab label given by `<ng-template mc-tab-label>`. */
-    @ContentChild(McTabLabel)
+    @ContentChild(McTabLabel, {static: false})
     templateLabel: McTabLabel;
 
     /**
      * Template provided in the tab content that will be used if present, used to enable lazy-loading
      */
-    @ContentChild(McTabContent, { read: TemplateRef })
+    @ContentChild(McTabContent, { read: TemplateRef, static: true })
     explicitContent: TemplateRef<any>;
 
     /** Template inside the McTab view that contains an `<ng-content>`. */
-    @ViewChild(TemplateRef)
+    @ViewChild(TemplateRef, {static: true})
     implicitContent: TemplateRef<any>;
 
     /** Plain text label for the tab, used when there is no template label. */

@@ -1,7 +1,7 @@
 // TypeScript config that extends the dev-app tsconfig file. This config compiles the
 // "main-aot.ts" file and also enables templage code generation / AOT.
 {
-    "extends": "./tsconfig-build",
+    "extends": "./tsconfig.build",
     "compilerOptions": {
         // Needed for Moment.js since it doesn't have a default export.
         "allowSyntheticDefaultImports": true,

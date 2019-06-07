@@ -87,7 +87,7 @@ export class McOption implements AfterViewChecked, OnDestroy {
      * select's trigger.
      */
     get viewValue(): string {
-        // TODO(kara): Add input property alternative for node envs.
+        // TODO: Add input property alternative for node envs.
         return (this.getHostElement().textContent || '').trim();
     }
 

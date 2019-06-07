@@ -217,7 +217,7 @@ describe('McTagInput', () => {
     `
 })
 class TestTagInput {
-    @ViewChild(McTagList) tagListInstance: McTagList;
+    @ViewChild(McTagList, {static: false}) tagListInstance: McTagList;
 
     addOnBlur: boolean = false;
     placeholder = '';
