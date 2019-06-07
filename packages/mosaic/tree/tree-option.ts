@@ -217,7 +217,7 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
 
     selectViaInteraction(): void {
         if (!this.disabled) {
-            this._selected = this.multiple ? !this._selected : true;
+            this._selected = !this._selected;
 
             this.changeDetectorRef.markForCheck();
             this.emitSelectionChangeEvent(true);
