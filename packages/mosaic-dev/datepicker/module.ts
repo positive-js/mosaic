@@ -7,6 +7,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DateAdapter, MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
 import {
+    MC_MOMENT_DATE_ADAPTER_OPTIONS,
     McMomentDateModule,
     MomentDateAdapter
 } from '@ptsecurity/mosaic-moment-adapter/adapter';
@@ -33,8 +34,9 @@ const moment = _rollupMoment || _moment;
     styleUrls: ['./styles.scss'],
     encapsulation: ViewEncapsulation.None,
     providers: [
-        {provide: MC_DATE_LOCALE, useValue: 'ru'},
-        {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MC_DATE_LOCALE]}
+        { provide: MC_DATE_LOCALE, useValue: 'ru' },
+        { provide: MC_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { findDateFormat: true } },
+        { provide: DateAdapter, useClass: MomentDateAdapter, deps: [ MC_DATE_LOCALE, MC_MOMENT_DATE_ADAPTER_OPTIONS ] }
     ]
 })
 export class DemoComponent {

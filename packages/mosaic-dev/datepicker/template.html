@@ -1,14 +1,4 @@
 <div class="container">
-    <label>Date format guessing</label>
-    <mc-form-field>
-        <input mcInput [(ngModel)]="date" [mcDatepicker]="myDatepicker0" [shouldGuess]="true" />
-        <mc-datepicker-toggle mcSuffix [for]="myDatepicker0"></mc-datepicker-toggle>
-        <mc-datepicker #myDatepicker0></mc-datepicker>
-    </mc-form-field>
-
-    <br/>
-    <br/>
-
     <label>Default datepicker toggle</label>
     <mc-form-field>
         <input mcInput [(ngModel)]="date" [mcDatepicker]="myDatepicker1" />
