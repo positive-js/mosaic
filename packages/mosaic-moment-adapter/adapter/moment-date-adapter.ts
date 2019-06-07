@@ -470,7 +470,7 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
             return null;
         }
 
-        // default test
+        // default test - iso
         const isoDate =  this.createMoment(value, moment.ISO_8601, this.locale);
 
         if (isoDate.isValid()) {
@@ -482,6 +482,7 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
             return this.createMoment(value, 'X', this.locale);
         }
 
+        // long months naming: D MMM YYYY, MMM Do YYYY with short case support
         if (
             /^\S\s\S+\s(\d{2}|\d{4})$/.test(value.trim()) ||
             /^\S+\s\d{1,2}[a-z]{2}\s(\d{2}|\d{4})$/.test(value.trim())
@@ -489,14 +490,17 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
             return this.parseWithSpace(value);
         }
 
+        // slash notation: DD/MM/YYYY, MM/DD/YYYY with short case support
         if (/^\d{1,2}\/\d{1,2}\/(\d{2}|\d{4})$/.test(value)) {
             return this.parseWithSlash(value);
         }
 
+        // dash notation: DD-MM-YYYY, YYYY-DD-MM with short case support
         if (/(^(\d{1,2}|\d{4})-\d{1,2}-\d{1,2}$)|(^\d{1,2}-\d{1,2}-(\d{2}|\d{4})$)/.test(value)) {
            return this.parseWithDash(value);
         }
 
+        // dot notation: DD.MM.YYYY with short case support
         if (/^\d{1,2}\.\d{1,2}\.(\d{2}|\d{4})$/.test(value)) {
             return this.parseWithDot(value);
         }
