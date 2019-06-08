@@ -35,6 +35,7 @@ module.exports = {
                 'sidepanel',
                 'splitter',
                 'tabs',
+                'tags',
                 'textarea',
                 'timepicker',
                 'toggle',
