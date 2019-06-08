@@ -537,7 +537,7 @@ describe('MatTagList', () => {
 
         it('should complete the stateChanges stream on destroy', () => {
             const spy = jasmine.createSpy('stateChanges complete');
-            const subscription = tagListInstance.stateChanges.subscribe(undefined, undefined, spy);
+            const subscription = tagListInstance.stateChanges.subscribe({complete: spy});
 
             fixture.destroy();
             expect(spy).toHaveBeenCalled();
