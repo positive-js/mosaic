@@ -392,9 +392,12 @@ export class McAutocompleteTrigger implements ControlValueAccessor, OnDestroy {
 
     /** Stream of clicks outside of the autocomplete panel. */
     private getOutsideClickStream(): Observable<any> {
-        if (!this.document) { return observableOf(null); }
-
-        return fromEvent<MouseEvent>(this.document, 'click')
+        return merge(
+            // tslint:disable-next-line: no-unnecessary-type-assertion
+            fromEvent(this.document, 'click') as Observable<MouseEvent>,
+            // tslint:disable-next-line: no-unnecessary-type-assertion
+            fromEvent(this.document, 'touchend') as Observable<TouchEvent>
+        )
             .pipe(filter((event) => {
                 const clickTarget = event.target as HTMLElement;
                 const formField = this.formField ?
