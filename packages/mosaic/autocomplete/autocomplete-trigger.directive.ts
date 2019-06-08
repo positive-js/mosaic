@@ -463,11 +463,20 @@ export class McAutocompleteTrigger implements ControlValueAccessor, OnDestroy {
                 // create a new stream of panelClosingActions, replacing any previous streams
                 // that were created, and flatten it so our stream only emits closing events...
                 switchMap(() => {
+                    const wasOpen = this.panelOpen;
                     this.resetActiveItem();
                     this.autocomplete.setVisibility();
 
                     if (this.panelOpen) {
                         this.overlayRef!.updatePosition();
+
+                        // If the `panelOpen` state changed, we need to make sure to emit the `opened`
+                        // event, because we may not have emitted it when the panel was attached. This
+                        // can happen if the users opens the panel and there are no options, but the
+                        // options come in slightly later or as a result of the value changing.
+                        if (wasOpen !== this.panelOpen) {
+                            this.autocomplete.opened.emit();
+                        }
                     }
 
                     return this.panelClosingActions;

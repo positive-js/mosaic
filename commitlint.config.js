@@ -6,6 +6,7 @@ module.exports = {
             'always',
             [
                 'alert',
+                'autocomplete',
                 'badge',
                 'build',
                 'button',
