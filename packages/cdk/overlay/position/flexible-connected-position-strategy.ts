@@ -29,10 +29,6 @@ export class FlexibleConnectedPositionStrategy implements IPositionStrategy {
     /** Ordered list of preferred positions, from most to least desirable. */
     _preferredPositions: ConnectionPositionPair[] = [];
 
-    /** Observable sequence of position changes. */
-    positionChanges: Observable<ConnectedOverlayPositionChange> =
-        this._positionChanges.asObservable();
-
     /** Ordered list of preferred positions, from most to least desirable. */
     get positions(): ConnectionPositionPair[] {
         return this._preferredPositions;
@@ -109,6 +105,10 @@ export class FlexibleConnectedPositionStrategy implements IPositionStrategy {
 
     /** Selector to be used when finding the elements on which to set the transform origin. */
     private _transformOriginSelector: string;
+
+    /** Observable sequence of position changes. */
+    positionChanges: Observable<ConnectedOverlayPositionChange> =
+        this._positionChanges.asObservable();
 
     constructor(
         connectedTo: ElementRef | HTMLElement,

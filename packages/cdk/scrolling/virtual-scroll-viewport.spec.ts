@@ -4,7 +4,6 @@ import {
     NgZone,
     TrackByFunction,
     ViewChild,
-    ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
 import { ComponentFixture, fakeAsync, flush, inject, TestBed } from '@angular/core/testing';
@@ -489,6 +488,24 @@ describe('CdkVirtualScrollViewport', () => {
                 .toEqual({start: 0, end: 3}, 'newly emitted items should be rendered');
         }));
 
+        it('should disconnect from data source on destroy', fakeAsync(() => {
+            const data = new Subject<number[]>();
+            const dataSource = new ArrayDataSource(data);
+
+            spyOn(dataSource, 'connect').and.callThrough();
+            spyOn(dataSource, 'disconnect').and.callThrough();
+
+            testComponent.items = dataSource as any;
+            finishInit(fixture);
+
+            expect(dataSource.connect).toHaveBeenCalled();
+
+            fixture.destroy();
+
+            expect(dataSource.disconnect).toHaveBeenCalled();
+        }));
+
+
         it('should trackBy value by default', fakeAsync(() => {
             testComponent.items = [];
             spyOn(testComponent.virtualForOf, '_detachView').and.callThrough();
@@ -527,7 +544,7 @@ describe('CdkVirtualScrollViewport', () => {
         }));
 
         it('should recycle views when template cache is large enough to accommodate', fakeAsync(() => {
-            testComponent.trackBy = i => i;
+            testComponent.trackBy = (i) => i;
             const spy = spyOn(testComponent.virtualForOf, '_createEmbeddedViewAt')
                 .and.callThrough();
 
@@ -551,6 +568,7 @@ describe('CdkVirtualScrollViewport', () => {
             spy.calls.reset();
             const maxOffset =
                 testComponent.itemSize * testComponent.items.length - testComponent.viewportSize;
+
             for (let offset = 10; offset <= maxOffset; offset += 10) {
                 triggerScroll(viewport, offset);
                 fixture.detectChanges();
