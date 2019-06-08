@@ -20,6 +20,7 @@ module.exports = {
                 'datepicker',
                 'docs',
                 'dropdown',
+                'overlay',
                 'form-field',
                 'icon',
                 'input',
