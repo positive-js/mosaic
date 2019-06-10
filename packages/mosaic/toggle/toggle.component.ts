@@ -68,7 +68,7 @@ export class McToggleChange {
 export class McToggleComponent extends _McToggleMixinBase
     implements ControlValueAccessor, CanColor, CanDisable, HasTabIndex {
 
-    @ViewChild('input') _inputElement: ElementRef;
+    @ViewChild('input', {static: false}) _inputElement: ElementRef;
 
     @Input() labelPosition: ToggleLabelPositionType = 'right';
 

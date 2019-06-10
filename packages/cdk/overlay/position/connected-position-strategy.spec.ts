@@ -234,7 +234,7 @@ describe('ConnectedPositionStrategy', () => {
 
             const completeHandler = jasmine.createSpy('complete handler');
 
-            positionStrategy.onPositionChange.subscribe(undefined, undefined, completeHandler);
+            positionStrategy.onPositionChange.subscribe({complete: completeHandler});
             attachOverlay(positionStrategy);
             positionStrategy.dispose();
 

@@ -65,10 +65,10 @@ export class McDatepickerToggle<D> implements AfterContentInit, OnChanges, OnDes
     @Input() tabIndex: number | null;
 
     /** Custom icon set by the consumer. */
-    @ContentChild(McDatepickerToggleIcon) customIcon: McDatepickerToggleIcon;
+    @ContentChild(McDatepickerToggleIcon, {static: false}) customIcon: McDatepickerToggleIcon;
 
     /** Underlying button element. */
-    @ViewChild('button') button: McButton;
+    @ViewChild('button', {static: false}) button: McButton;
     private stateChanges = Subscription.EMPTY;
 
     private _disabled: boolean;

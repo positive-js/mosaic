@@ -269,13 +269,13 @@ export class McCalendar<D> implements AfterContentInit, AfterViewChecked, OnDest
     @Output() readonly userSelection: EventEmitter<void> = new EventEmitter<void>();
 
     /** Reference to the current month view component. */
-    @ViewChild(McMonthView) monthView: McMonthView<D>;
+    @ViewChild(McMonthView, {static: false}) monthView: McMonthView<D>;
 
     /** Reference to the current year view component. */
-    @ViewChild(McYearView) yearView: McYearView<D>;
+    @ViewChild(McYearView, {static: false}) yearView: McYearView<D>;
 
     /** Reference to the current multi-year view component. */
-    @ViewChild(McMultiYearView) multiYearView: McMultiYearView<D>;
+    @ViewChild(McMultiYearView, {static: false}) multiYearView: McMultiYearView<D>;
 
     /**
      * Emits whenever there is a state change that the header may need to respond to.

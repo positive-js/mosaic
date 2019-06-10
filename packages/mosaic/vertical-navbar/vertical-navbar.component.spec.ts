@@ -49,7 +49,7 @@ describe('McVerticalNavbar', () => {
     templateUrl: './vertical-navbar.component.spec.html'
 })
 class TestApp {
-    @ViewChild('navbar')
+    @ViewChild('navbar', {static: false})
     navbar: McVerticalNavbar;
 
     counter: number = 0;

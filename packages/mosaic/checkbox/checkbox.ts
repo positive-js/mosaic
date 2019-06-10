@@ -161,7 +161,7 @@ export class McCheckbox extends _McCheckboxMixinBase implements ControlValueAcce
     @Input() value: string;
 
     /** The native `<input type="checkbox">` element */
-    @ViewChild('input') _inputElement: ElementRef;
+    @ViewChild('input', {static: false}) _inputElement: ElementRef;
 
     /**
      * Called when the checkbox is blurred. Needed to properly implement ControlValueAccessor.

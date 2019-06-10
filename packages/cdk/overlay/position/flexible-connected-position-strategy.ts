@@ -29,19 +29,8 @@ export class FlexibleConnectedPositionStrategy implements IPositionStrategy {
     /** Ordered list of preferred positions, from most to least desirable. */
     _preferredPositions: ConnectionPositionPair[] = [];
 
-    /** Observable sequence of position changes. */
-    positionChanges: Observable<ConnectedOverlayPositionChange> = new Observable((observer) => {
-        const subscription = this._positionChanges.subscribe(observer);
-        this._positionChangeSubscriptions++;
-
-        return () => {
-            subscription.unsubscribe();
-            this._positionChangeSubscriptions--;
-        };
-    });
-
     /** Ordered list of preferred positions, from most to least desirable. */
-    get positions() {
+    get positions(): ConnectionPositionPair[] {
         return this._preferredPositions;
     }
 
@@ -117,8 +106,9 @@ export class FlexibleConnectedPositionStrategy implements IPositionStrategy {
     /** Selector to be used when finding the elements on which to set the transform origin. */
     private _transformOriginSelector: string;
 
-    /** Amount of subscribers to the `positionChanges` stream. */
-    private _positionChangeSubscriptions = 0;
+    /** Observable sequence of position changes. */
+    positionChanges: Observable<ConnectedOverlayPositionChange> =
+        this._positionChanges.asObservable();
 
     constructor(
         connectedTo: ElementRef | HTMLElement,
@@ -589,7 +579,7 @@ export class FlexibleConnectedPositionStrategy implements IPositionStrategy {
         // Notify that the position has been changed along with its change properties.
         // We only emit if we've got any subscriptions, because the scroll visibility
         // calculcations can be somewhat expensive.
-        if (this._positionChangeSubscriptions > 0) {
+        if (this._positionChanges.observers.length) {
             const scrollableViewProperties = this._getScrollVisibility();
             const changeEvent = new ConnectedOverlayPositionChange(position, scrollableViewProperties);
             this._positionChanges.next(changeEvent);

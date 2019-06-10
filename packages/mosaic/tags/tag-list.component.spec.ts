@@ -537,7 +537,7 @@ describe('MatTagList', () => {
 
         it('should complete the stateChanges stream on destroy', () => {
             const spy = jasmine.createSpy('stateChanges complete');
-            const subscription = tagListInstance.stateChanges.subscribe(undefined, undefined, spy);
+            const subscription = tagListInstance.stateChanges.subscribe({complete: spy});
 
             fixture.destroy();
             expect(spy).toHaveBeenCalled();
@@ -1377,7 +1377,7 @@ class BasicTagList {
     tabIndexOverride: number;
     selectable: boolean;
 
-    @ViewChild(McTagList) tagList: McTagList;
+    @ViewChild(McTagList, {static: false}) tagList: McTagList;
     @ViewChildren(McTag) tags: QueryList<McTag>;
 }
 
@@ -1412,7 +1412,7 @@ class MultiSelectionTagList {
     tabIndexOverride: number;
     selectable: boolean;
 
-    @ViewChild(McTagList) tagList: McTagList;
+    @ViewChild(McTagList, {static: false}) tagList: McTagList;
     @ViewChildren(McTag) tags: QueryList<McTag>;
 }
 
@@ -1451,7 +1451,7 @@ class InputTagList {
     addOnBlur: boolean = true;
     isRequired: boolean;
 
-    @ViewChild(McTagList) tagList: McTagList;
+    @ViewChild(McTagList, {static: false}) tagList: McTagList;
     @ViewChildren(McTag) tags: QueryList<McTag>;
 
     add(event: McTagInputEvent): void {
@@ -1543,7 +1543,7 @@ class TagListWithFormErrorMessages {
 
     @ViewChildren(McTag) tags: QueryList<McTag>;
 
-    @ViewChild('form') form: NgForm;
+    @ViewChild('form', {static: false}) form: NgForm;
 }
 
 

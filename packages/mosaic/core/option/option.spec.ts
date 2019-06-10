@@ -26,7 +26,7 @@ describe('McOption component', () => {
         const optionInstance: McOption =
             fixture.debugElement.query(By.directive(McOption)).componentInstance;
         const completeSpy = jasmine.createSpy('complete spy');
-        const subscription = optionInstance.stateChanges.subscribe(undefined, undefined, completeSpy);
+        const subscription = optionInstance.stateChanges.subscribe({complete: completeSpy});
 
         fixture.destroy();
         expect(completeSpy).toHaveBeenCalled();

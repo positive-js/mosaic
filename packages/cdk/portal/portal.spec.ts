@@ -548,8 +548,8 @@ class ArbitraryViewContainerRefComponent {
 })
 class PortalTestApp {
     @ViewChildren(CdkPortal) portals: QueryList<CdkPortal>;
-    @ViewChild(CdkPortalOutlet) portalOutlet: CdkPortalOutlet;
-    @ViewChild('templateRef', { read: TemplateRef }) templateRef: TemplateRef<any>;
+    @ViewChild(CdkPortalOutlet, {static: true}) portalOutlet: CdkPortalOutlet;
+    @ViewChild('templateRef', { read: TemplateRef, static: true }) templateRef: TemplateRef<any>;
 
     selectedPortal: Portal<any> | undefined;
     fruit: string = 'Banana';
@@ -586,7 +586,7 @@ class PortalTestApp {
     `
 })
 class UnboundPortalTestApp {
-    @ViewChild(CdkPortalOutlet) portalOutlet: CdkPortalOutlet;
+    @ViewChild(CdkPortalOutlet, {static: true}) portalOutlet: CdkPortalOutlet;
 }
 
 // Create a real (non-test) NgModule as a workaround for

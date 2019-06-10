@@ -95,7 +95,7 @@ describe('ScrollDispatcher', () => {
 
         it('should complete the `scrolled` stream on destroy', () => {
             const completeSpy = jasmine.createSpy('complete spy');
-            const subscription = scroll.scrolled(0).subscribe(undefined, undefined, completeSpy);
+            const subscription = scroll.scrolled(0).subscribe({complete: completeSpy});
 
             scroll.ngOnDestroy();
 
@@ -107,7 +107,7 @@ describe('ScrollDispatcher', () => {
         it('should complete the scrollable stream when it is destroyed', () => {
             const scrollable = fixture.componentInstance.scrollable;
             const spy = jasmine.createSpy('complete spy');
-            const subscription = scrollable.elementScrolled().subscribe(undefined, undefined, spy);
+            const subscription = scrollable.elementScrolled().subscribe({complete: spy});
 
             fixture.destroy();
             expect(spy).toHaveBeenCalled();
@@ -229,8 +229,8 @@ describe('ScrollDispatcher', () => {
     template: `<div #scrollingElement cdk-scrollable style="height: 9999px"></div>`
 })
 class ScrollingComponent {
-    @ViewChild(CdkScrollable) scrollable: CdkScrollable;
-    @ViewChild('scrollingElement') scrollingElement: ElementRef<HTMLElement>;
+    @ViewChild(CdkScrollable, {static: false}) scrollable: CdkScrollable;
+    @ViewChild('scrollingElement', {static: false}) scrollingElement: ElementRef<HTMLElement>;
 }
 
 
@@ -247,7 +247,7 @@ class ScrollingComponent {
     `
 })
 class NestedScrollingComponent {
-    @ViewChild('interestingElement') interestingElement: ElementRef<HTMLElement>;
+    @ViewChild('interestingElement', {static: false}) interestingElement: ElementRef<HTMLElement>;
 }
 
 const TEST_COMPONENTS = [ScrollingComponent, NestedScrollingComponent];

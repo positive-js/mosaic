@@ -15,15 +15,23 @@ import {
     TrackByFunction,
     ViewContainerRef
 } from '@angular/core';
-import { ArrayDataSource, ICollectionViewer, DataSource, ListRange, isDataSource } from '@ptsecurity/cdk/collections';
-import { Observable, Subject } from 'rxjs';
+
+import { Observable, Subject, of as observableOf } from 'rxjs';
 import { pairwise, shareReplay, startWith, switchMap, takeUntil } from 'rxjs/operators';
+
+import {
+    ArrayDataSource,
+    ICollectionViewer,
+    DataSource,
+    ListRange,
+    isDataSource
+} from '@ptsecurity/cdk/collections';
 
 import { CdkVirtualScrollViewport } from './virtual-scroll-viewport';
 
 
 /** The context for an item rendered by `CdkVirtualForOf` */
-export interface CdkVirtualForOfContext<T> {
+export type CdkVirtualForOfContext<T> = {
     /** The item value. */
     $implicit: T;
     /** The DataSource, Observable, or NgIterable that was passed to *cdkVirtualFor. */
@@ -40,7 +48,7 @@ export interface CdkVirtualForOfContext<T> {
     even: boolean;
     /** Whether the index is odd. */
     odd: boolean;
-}
+};
 
 
 /** Helper to extract size from a DOM Node. */
@@ -52,7 +60,7 @@ function getSize(orientation: 'horizontal' | 'vertical', node: Node): number {
     }
     const rect = el.getBoundingClientRect();
 
-    return orientation == 'horizontal' ? rect.width : rect.height;
+    return orientation === 'horizontal' ? rect.width : rect.height;
 }
 
 
@@ -61,16 +69,20 @@ function getSize(orientation: 'horizontal' | 'vertical', node: Node): number {
  * container.
  */
 @Directive({
-    selector: '[cdkVirtualFor][cdkVirtualForOf]'
+    selector: '[cdkVirtualFor][cdkVirtualForOf]',
 })
 export class CdkVirtualForOf<T> implements ICollectionViewer, DoCheck, OnDestroy {
+    /** Emits when the rendered view of the data changes. */
+    viewChange = new Subject<ListRange>();
+
+    /** Subject that emits when a new DataSource instance is given. */
+    private _dataSourceChanges = new Subject<DataSource<T>>();
 
     /** The DataSource to display. */
     @Input()
     get cdkVirtualForOf(): DataSource<T> | Observable<T[]> | NgIterable<T> {
         return this._cdkVirtualForOf;
     }
-
     set cdkVirtualForOf(value: DataSource<T> | Observable<T[]> | NgIterable<T>) {
         this._cdkVirtualForOf = value;
         const ds = isDataSource(value) ? value :
@@ -79,6 +91,7 @@ export class CdkVirtualForOf<T> implements ICollectionViewer, DoCheck, OnDestroy
                 value instanceof Observable ? value : Array.prototype.slice.call(value || []));
         this._dataSourceChanges.next(ds);
     }
+    _cdkVirtualForOf: DataSource<T> | Observable<T[]> | NgIterable<T>;
 
     /**
      * The `TrackByFunction` to use for tracking changes. The `TrackByFunction` takes the index and
@@ -88,13 +101,13 @@ export class CdkVirtualForOf<T> implements ICollectionViewer, DoCheck, OnDestroy
     get cdkVirtualForTrackBy(): TrackByFunction<T> | undefined {
         return this._cdkVirtualForTrackBy;
     }
-
     set cdkVirtualForTrackBy(fn: TrackByFunction<T> | undefined) {
         this._needsUpdate = true;
         this._cdkVirtualForTrackBy = fn ?
             (index, item) => fn(index + (this._renderedRange ? this._renderedRange.start : 0), item) :
             undefined;
     }
+    private _cdkVirtualForTrackBy: TrackByFunction<T> | undefined;
 
     /** The template used to stamp out new elements. */
     @Input()
@@ -105,24 +118,17 @@ export class CdkVirtualForOf<T> implements ICollectionViewer, DoCheck, OnDestroy
         }
     }
 
-    /** Emits when the rendered view of the data changes. */
-    viewChange = new Subject<ListRange>();
-    _cdkVirtualForOf: DataSource<T> | Observable<T[]> | NgIterable<T>;
-
     /**
      * The size of the cache used to store templates that are not being used for re-use later.
      * Setting the cache size to `0` will disable caching. Defaults to 20 templates.
      */
     @Input() cdkVirtualForTemplateCacheSize: number = 20;
 
-    /** Subject that emits when a new DataSource instance is given. */
-    private _dataSourceChanges = new Subject<DataSource<T>>();
-
     /** Emits whenever the data in the current DataSource changes. */
     dataStream: Observable<T[] | ReadonlyArray<T>> = this._dataSourceChanges
         .pipe(
             // Start off with null `DataSource`.
-            startWith<DataSource<T>>(null!),
+            startWith(null!),
             // Bundle up the previous and current data sources so we can work with both.
             pairwise(),
             // Use `_changeDataSource` to disconnect from the previous data source and connect to the
@@ -131,8 +137,6 @@ export class CdkVirtualForOf<T> implements ICollectionViewer, DoCheck, OnDestroy
             switchMap(([prev, cur]) => this._changeDataSource(prev, cur)),
             // Replay the last emitted data when someone subscribes.
             shareReplay(1));
-
-    private _cdkVirtualForTrackBy: TrackByFunction<T> | undefined;
 
     /** The differ used to calculate changes to the data. */
     private _differ: IterableDiffer<T> | null = null;
@@ -168,11 +172,11 @@ export class CdkVirtualForOf<T> implements ICollectionViewer, DoCheck, OnDestroy
         /** The virtual scrolling viewport that these items are being rendered in. */
         @SkipSelf() private _viewport: CdkVirtualScrollViewport,
         ngZone: NgZone) {
-        this.dataStream.subscribe((data) => {
+        this.dataStream.subscribe(data => {
             this._data = data;
             this._onRenderedDataChange();
         });
-        this._viewport.renderedRangeStream.pipe(takeUntil(this._destroyed)).subscribe((range) => {
+        this._viewport.renderedRangeStream.pipe(takeUntil(this._destroyed)).subscribe(range => {
             this._renderedRange = range;
             ngZone.run(() => this.viewChange.next(this._renderedRange));
             this._onRenderedDataChange();
@@ -231,13 +235,14 @@ export class CdkVirtualForOf<T> implements ICollectionViewer, DoCheck, OnDestroy
     ngOnDestroy() {
         this._viewport.detach();
 
+        this._dataSourceChanges.next();
         this._dataSourceChanges.complete();
         this.viewChange.complete();
 
         this._destroyed.next();
         this._destroyed.complete();
 
-        for (const view of this._templateCache) {
+        for (let view of this._templateCache) {
             view.destroy();
         }
     }
@@ -255,7 +260,7 @@ export class CdkVirtualForOf<T> implements ICollectionViewer, DoCheck, OnDestroy
     }
 
     /** Swap out one `DataSource` for another. */
-    private _changeDataSource(oldDs: DataSource<T> | null, newDs: DataSource<T>):
+    private _changeDataSource(oldDs: DataSource<T> | null, newDs: DataSource<T> | null):
         Observable<T[] | ReadonlyArray<T>> {
 
         if (oldDs) {
@@ -264,7 +269,7 @@ export class CdkVirtualForOf<T> implements ICollectionViewer, DoCheck, OnDestroy
 
         this._needsUpdate = true;
 
-        return newDs.connect(this);
+        return newDs ? newDs.connect(this) : observableOf();
     }
 
     /** Update the `CdkVirtualForOfContext` for all views. */
@@ -272,7 +277,7 @@ export class CdkVirtualForOf<T> implements ICollectionViewer, DoCheck, OnDestroy
         const count = this._data.length;
         let i = this._viewContainerRef.length;
         while (i--) {
-            const view = this._viewContainerRef.get(i) as EmbeddedViewRef<CdkVirtualForOfContext<T>>;
+            let view = this._viewContainerRef.get(i) as EmbeddedViewRef<CdkVirtualForOfContext<T>>;
             view.context.index = this._renderedRange.start + i;
             view.context.count = count;
             this._updateComputedContextProperties(view.context);
@@ -287,12 +292,10 @@ export class CdkVirtualForOf<T> implements ICollectionViewer, DoCheck, OnDestroy
                                   adjustedPreviousIndex: number | null,
                                   currentIndex: number | null) => {
             if (record.previousIndex == null) {  // Item added.
-                const view = this._getViewForNewItem();
-                this._viewContainerRef.insert(view, currentIndex!);
+                const view = this._insertViewForNewItem(currentIndex!);
                 view.context.$implicit = record.item;
             } else if (currentIndex == null) {  // Item removed.
-                this._cacheView(this._viewContainerRef.detach(adjustedPreviousIndex!) as
-                    EmbeddedViewRef<CdkVirtualForOfContext<T>>);
+                this._cacheView(this._detachView(adjustedPreviousIndex !));
             } else {  // Item moved.
                 const view = this._viewContainerRef.get(adjustedPreviousIndex!) as
                     EmbeddedViewRef<CdkVirtualForOfContext<T>>;
@@ -337,9 +340,22 @@ export class CdkVirtualForOf<T> implements ICollectionViewer, DoCheck, OnDestroy
         }
     }
 
-    /** Get a view for a new item, either from the cache or by creating a new one. */
-    private _getViewForNewItem(): EmbeddedViewRef<CdkVirtualForOfContext<T>> {
-        return this._templateCache.pop() || this._viewContainerRef.createEmbeddedView(this._template, {
+    /** Inserts a view for a new item, either from the cache or by creating a new one. */
+    private _insertViewForNewItem(index: number): EmbeddedViewRef<CdkVirtualForOfContext<T>> {
+        return this._insertViewFromCache(index) || this._createEmbeddedViewAt(index);
+    }
+
+    /** Update the computed properties on the `CdkVirtualForOfContext`. */
+    private _updateComputedContextProperties(context: CdkVirtualForOfContext<any>) {
+        context.first = context.index === 0;
+        context.last = context.index === context.count - 1;
+        context.even = context.index % 2 === 0;
+        context.odd = !context.even;
+    }
+
+    /** Creates a new embedded view and moves it to the given index */
+    private _createEmbeddedViewAt(index: number): EmbeddedViewRef<CdkVirtualForOfContext<T>> {
+        const view = this._viewContainerRef.createEmbeddedView(this._template, {
             $implicit: null!,
             cdkVirtualForOf: this._cdkVirtualForOf,
             index: -1,
@@ -349,13 +365,26 @@ export class CdkVirtualForOf<T> implements ICollectionViewer, DoCheck, OnDestroy
             odd: false,
             even: false
         });
+        if (index < this._viewContainerRef.length) {
+            this._viewContainerRef.move(view, index);
+        }
+
+        return view;
     }
 
-    /** Update the computed properties on the `CdkVirtualForOfContext`. */
-    private _updateComputedContextProperties(context: CdkVirtualForOfContext<any>) {
-        context.first = context.index === 0;
-        context.last = context.index === context.count - 1;
-        context.even = context.index % 2 === 0;
-        context.odd = !context.even;
+    /** Inserts a recycled view from the cache at the given index. */
+    private _insertViewFromCache(index: number): EmbeddedViewRef<CdkVirtualForOfContext<T>>|null {
+        const cachedView = this._templateCache.pop();
+        if (cachedView) {
+            this._viewContainerRef.insert(cachedView, index);
+        }
+
+        return cachedView || null;
+    }
+
+    /** Detaches the embedded view at the given index. */
+    private _detachView(index: number): EmbeddedViewRef<CdkVirtualForOfContext<T>> {
+        return this._viewContainerRef.detach(index) as
+            EmbeddedViewRef<CdkVirtualForOfContext<T>>;
     }
 }

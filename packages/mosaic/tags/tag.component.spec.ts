@@ -370,7 +370,7 @@ class SingleTag {
     removable: boolean = true;
     shouldShow: boolean = true;
 
-    @ViewChild(McTagList) tagList: McTagList;
+    @ViewChild(McTagList, {static: false}) tagList: McTagList;
 
     tagFocus: (event?: McTagEvent) => void = () => {};
     tagDestroy: (event?: McTagEvent) => void = () => {};

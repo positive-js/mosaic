@@ -7,6 +7,7 @@ import {
     MC_DATE_LOCALE
 } from '@ptsecurity/cdk/datetime';
 import * as moment from 'moment';
+// tslint:disable-next-line:no-duplicate-imports
 import { Moment } from 'moment';
 
 import { MC_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateModule } from './index';
@@ -364,7 +365,125 @@ describe('MomentDateAdapter', () => {
         expect(adapter.addCalendarMonths(moment(), 1).locale()).toBe('ja');
         expect(adapter.addCalendarYears(moment(), 1).locale()).toBe('ja');
     });
+});
 
+describe('MomentDateAdapter findDateFormat = true', () => {
+    let adapter: MomentDateAdapter;
+
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            imports: [MomentDateModule],
+            providers: [{
+                provide: MC_MOMENT_DATE_ADAPTER_OPTIONS,
+                useValue: {findDateFormat: true}
+            }]
+        }).compileComponents();
+    }));
+
+    beforeEach(inject([DateAdapter], (dateAdapter: MomentDateAdapter) => {
+        moment.locale('en');
+        adapter = dateAdapter;
+        adapter.setLocale('en');
+    }));
+
+    it('should parse ISO', () => {
+        adapter.setLocale('ru');
+        const utcDate = new Date(2019, 5, 3, 14, 50,  30);
+        utcDate.setMinutes(utcDate.getMinutes() - utcDate.getTimezoneOffset());
+        expect(adapter.parse('2019-06-03T14:50:30.000Z', '')!.toDate())
+            .toEqual(utcDate);
+    });
+
+    it('should parse dashed date', () => {
+        adapter.setLocale('ru');
+        // finishing year
+        expect(adapter.parse('03-06-2019', '')!.toDate())
+            .toEqual(new Date(2019, 5, 3));
+        expect(adapter.parse('03-06-19', '')!.toDate())
+            .toEqual(new Date(2019, 5, 3));
+        // leading year
+        expect(adapter.parse('2019-06-03', '')!.toDate())
+            .toEqual(new Date(2019, 5, 3));
+
+        adapter.setLocale('en');
+        // finishing year
+        expect(adapter.parse('03-06-2019', '')!.toDate())
+            .toEqual(new Date(2019, 5, 3));
+        // short year
+        expect(adapter.parse('03-06-19', '')!.toDate())
+            .toEqual(new Date(2019, 5, 3));
+
+        // leading year
+        expect(adapter.parse('2019-06-03', '')!.toDate())
+            .toEqual(new Date(2019, 5, 3));
+
+    });
+
+    it('should parse slashed date', () => {
+        adapter.setLocale('ru');
+        expect(adapter.parse('03/06/2019', '')!.toDate())
+            .toEqual(new Date(2019, 5, 3));
+        // short year
+        expect(adapter.parse('03/06/19', '')!.toDate())
+            .toEqual(new Date(2019, 5, 3));
+
+        adapter.setLocale('en');
+        // US by default
+        expect(adapter.parse('03/06/2019', '')!.toDate())
+            .toEqual(new Date(2019, 2, 6));
+
+        // short year
+        expect(adapter.parse('03/06/19', '')!.toDate())
+            .toEqual(new Date(2019, 2, 6));
+
+        // month order guessing
+        expect(adapter.parse('23/06/2019', '')!.toDate())
+            .toEqual(new Date(2019, 5, 23));
+    });
+
+    it('should parse doted date', () => {
+        adapter.setLocale('ru');
+        expect(adapter.parse('03.06.2019', '')!.toDate())
+            .toEqual(new Date(2019, 5, 3));
+        expect(adapter.parse('03.06.19', '')!.toDate())
+            .toEqual(new Date(2019, 5, 3));
+
+        adapter.setLocale('en');
+        expect(adapter.parse('03.06.2019', '')!.toDate())
+            .toEqual(new Date(2019, 5, 3));
+        expect(adapter.parse('03.06.19', '')!.toDate())
+            .toEqual(new Date(2019, 5, 3));
+    });
+
+    it('should parse long formatted date', () => {
+        adapter.setLocale('ru');
+        expect(adapter.parse('3 июня 2019', '')!.toDate())
+            .toEqual(new Date(2019, 5, 3));
+
+        expect(adapter.parse('6 фев 2019', '')!.toDate())
+            .toEqual(new Date(2019, 1, 6));
+
+        adapter.setLocale('en');
+        expect(adapter.parse('June 3rd 2019', '')!.toDate())
+            .toEqual(new Date(2019, 5, 3));
+
+        expect(adapter.parse('Feb 6th 2019', '')!.toDate())
+            .toEqual(new Date(2019, 1, 6));
+
+        expect(adapter.parse('3 June 2019', '')!.toDate())
+            .toEqual(new Date(2019, 5, 3));
+
+        expect(adapter.parse('6 Feb 2019', '')!.toDate())
+            .toEqual(new Date(2019, 1, 6));
+    });
+
+    it('should parse unix timestamp', () => {
+        adapter.setLocale('ru');
+        const utcDate = new Date(2019, 5, 3, 14, 50,  30);
+        utcDate.setMinutes(utcDate.getMinutes() - utcDate.getTimezoneOffset());
+        expect(adapter.parse('1559573430', '')!.toDate())
+            .toEqual(utcDate);
+    });
 });
 
 describe('MomentDateAdapter with MC_DATE_LOCALE override', () => {
@@ -669,7 +788,7 @@ describe('MomentDateAdapter formatter', () => {
                     const endDate = moment();
 
                     const startString: string = startDate.format(`${startDateFormat} ${YEAR}`);
-                    const endString: string = endDate.format(endDateFormat);
+                    const endString: string = endDate.format(`${endDateFormat} ${YEAR}`);
 
                     expect(adapter.rangeShortDate(startDate, endDate)).toBe(
                         `${startString}${LONG_DASH}${endString}`
@@ -680,7 +799,7 @@ describe('MomentDateAdapter formatter', () => {
                     const startDate = moment();
                     const endDate = moment(startDate).add(1, 'years');
 
-                    const startString: string = startDate.format(startDateFormat);
+                    const startString: string = startDate.format(`${startDateFormat} ${YEAR}`);
                     const endString: string = endDate.format(`${endDateFormat} ${YEAR}`);
 
                     expect(adapter.rangeShortDate(startDate, endDate)).toBe(
@@ -748,7 +867,7 @@ describe('MomentDateAdapter formatter', () => {
                     const endDate = moment();
 
                     const startString: string = startDate.format(`${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
-                    const endString: string = endDate.format(endDateFormat);
+                    const endString: string = endDate.format(`${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
 
                     expect(adapter.rangeShortDateTime(startDate, endDate)).toBe(
                         `${startString}${LONG_DASH}${endString}`
@@ -759,7 +878,7 @@ describe('MomentDateAdapter formatter', () => {
                     const startDate = moment();
                     const endDate = moment(startDate).add(1, 'years');
 
-                    const startString: string = startDate.format(startDateFormat);
+                    const startString: string = startDate.format(`${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
                     const endString: string = endDate.format(`${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
 
                     expect(adapter.rangeShortDateTime(startDate, endDate)).toBe(
@@ -803,7 +922,7 @@ describe('MomentDateAdapter formatter', () => {
                     const endDate: Moment = moment();
 
                     const startString: string = startDate.format(`${startDateFormat} ${YEAR}`);
-                    const endString: string = endDate.format(`${endDateFormat}`);
+                    const endString: string = endDate.format(`${endDateFormat} ${YEAR}`);
 
                     expect(adapter.rangeLongDate(startDate, endDate)).toBe(
                         `${startString}${LONG_DASH}${endString}`
@@ -814,7 +933,7 @@ describe('MomentDateAdapter formatter', () => {
                     const startDate: Moment = moment().dayOfYear(1);
                     const endDate: Moment = moment(startDate).add(1, 'years');
 
-                    const startString: string = startDate.format(`${startDateFormat}`);
+                    const startString: string = startDate.format(`${startDateFormat} ${YEAR}`);
                     const endString: string = endDate.format(`${endDateFormat} ${YEAR}`);
 
                     expect(adapter.rangeLongDate(startDate, endDate)).toBe(
@@ -882,7 +1001,7 @@ describe('MomentDateAdapter formatter', () => {
                     const endDate: Moment = moment();
 
                     const startString: string = startDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
-                    const endString: string = endDate.format(endDateFormat);
+                    const endString: string = endDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
 
                     expect(adapter.rangeLongDateTime(startDate, endDate)).toBe(
                         `С${NBSP}${startString} по${NBSP}${endString}`
@@ -893,7 +1012,7 @@ describe('MomentDateAdapter formatter', () => {
                     const startDate: Moment = moment().dayOfYear(1);
                     const endDate: Moment = moment(startDate).add(1, 'years');
 
-                    const startString: string = startDate.format(startDateFormat);
+                    const startString: string = startDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
                     const endString: string = endDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
 
                     expect(adapter.rangeLongDateTime(startDate, endDate)).toBe(
@@ -961,7 +1080,7 @@ describe('MomentDateAdapter formatter', () => {
                     const endDate: Moment = moment();
 
                     const startString: string = startDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
-                    const endString: string = endDate.format(endDateFormat);
+                    const endString: string = endDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
 
                     expect(adapter.rangeMiddleDateTime(startDate, endDate)).toBe(
                         `${startString}${LONG_DASH}${endString}`
@@ -972,7 +1091,7 @@ describe('MomentDateAdapter formatter', () => {
                     const startDate: Moment = moment().dayOfYear(1);
                     const endDate: Moment = moment(startDate).add(1, 'years');
 
-                    const startString: string = startDate.format(startDateFormat);
+                    const startString: string = startDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
                     const endString: string = endDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
 
                     expect(adapter.rangeMiddleDateTime(startDate, endDate)).toBe(
@@ -1201,7 +1320,7 @@ describe('MomentDateAdapter formatter', () => {
                     const endDate: Moment = moment();
 
                     const startString: string = startDate.format(`${startDateFormat}, ${YEAR}`);
-                    const endString: string = endDate.format(endDateFormat);
+                    const endString: string = endDate.format(`${endDateFormat}, ${YEAR}`);
 
                     expect(adapter.rangeShortDate(startDate, endDate)).toBe(
                         `${startString}${LONG_DASH}${endString}`
@@ -1212,7 +1331,7 @@ describe('MomentDateAdapter formatter', () => {
                     const startDate: Moment = moment();
                     const endDate: Moment = moment(startDate).add(1, 'years');
 
-                    const startString: string = startDate.format(startDateFormat);
+                    const startString: string = startDate.format(`${startDateFormat}, ${YEAR}`);
                     const endString: string = endDate.format(`${endDateFormat}, ${YEAR}`);
 
                     expect(adapter.rangeShortDate(startDate, endDate)).toBe(
@@ -1280,7 +1399,7 @@ describe('MomentDateAdapter formatter', () => {
                     const endDate: Moment = moment();
 
                     const startString: string = startDate.format(`${DAY_SHORT_MONTH}, ${YEAR}, ${TIME}`);
-                    const endString: string = endDate.format(endDateFormat);
+                    const endString: string = endDate.format(`${DAY_SHORT_MONTH}, ${YEAR}, ${TIME}`);
 
                     expect(adapter.rangeShortDateTime(startDate, endDate)).toBe(
                         `${startString}${LONG_DASH}${endString}`
@@ -1291,7 +1410,7 @@ describe('MomentDateAdapter formatter', () => {
                     const startDate: Moment = moment();
                     const endDate: Moment = moment(startDate).add(1, 'years');
 
-                    const startString: string = startDate.format(startDateFormat);
+                    const startString: string = startDate.format(`${DAY_SHORT_MONTH}, ${YEAR}, ${TIME}`);
                     const endString: string = endDate.format(`${DAY_SHORT_MONTH}, ${YEAR}, ${TIME}`);
 
                     expect(adapter.rangeShortDateTime(startDate, endDate)).toBe(
@@ -1335,7 +1454,7 @@ describe('MomentDateAdapter formatter', () => {
                     const endDate: Moment = moment();
 
                     const startString: string = startDate.format(`${startDateFormat}, ${YEAR}`);
-                    const endString: string = endDate.format(`${endDateFormat}`);
+                    const endString: string = endDate.format(`${endDateFormat}, ${YEAR}`);
 
                     expect(adapter.rangeLongDate(startDate, endDate)).toBe(
                         `${startString}${LONG_DASH}${endString}`
@@ -1346,7 +1465,7 @@ describe('MomentDateAdapter formatter', () => {
                     const startDate: Moment = moment().dayOfYear(1);
                     const endDate: Moment = moment(startDate).add(1, 'years');
 
-                    const startString: string = startDate.format(`${startDateFormat}`);
+                    const startString: string = startDate.format(`${startDateFormat}, ${YEAR}`);
                     const endString: string = endDate.format(`${endDateFormat}, ${YEAR}`);
 
                     expect(adapter.rangeLongDate(startDate, endDate)).toBe(
@@ -1414,7 +1533,7 @@ describe('MomentDateAdapter formatter', () => {
                     const endDate: Moment = moment();
 
                     const startString: string = startDate.format(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
-                    const endString: string = endDate.format(endDateFormat);
+                    const endString: string = endDate.format(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
 
                     expect(adapter.rangeLongDateTime(startDate, endDate)).toBe(
                         `From ${startString} to${NBSP}${endString}`
@@ -1425,7 +1544,7 @@ describe('MomentDateAdapter formatter', () => {
                     const startDate: Moment = moment().dayOfYear(1);
                     const endDate: Moment = moment(startDate).add(1, 'years');
 
-                    const startString: string = startDate.format(startDateFormat);
+                    const startString: string = startDate.format(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
                     const endString: string = endDate.format(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
 
                     expect(adapter.rangeLongDateTime(startDate, endDate)).toBe(
@@ -1493,7 +1612,7 @@ describe('MomentDateAdapter formatter', () => {
                     const endDate = moment();
 
                     const startString = startDate.format(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
-                    const endString = endDate.format(endDateFormat);
+                    const endString = endDate.format(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
 
                     expect(adapter.rangeMiddleDateTime(startDate, endDate)).toBe(
                         `${startString}${LONG_DASH}${endString}`
@@ -1504,7 +1623,7 @@ describe('MomentDateAdapter formatter', () => {
                     const startDate = moment().dayOfYear(1);
                     const endDate = moment(startDate).add(1, 'years');
 
-                    const startString = startDate.format(startDateFormat);
+                    const startString = startDate.format(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
                     const endString = endDate.format(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
 
                     expect(adapter.rangeMiddleDateTime(startDate, endDate)).toBe(

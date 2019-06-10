@@ -494,16 +494,20 @@ describe('McDropdown', () => {
         // tslint:disable-next-line
         const scrolledSubject = new Subject();
         const fixture = createComponent(SimpleDropdown,  [
-            {provide: ScrollDispatcher, useFactory: () => ({scrolled: () => scrolledSubject})},
+            {
+                provide: ScrollDispatcher, useFactory: () => ({scrolled: () => scrolledSubject})
+            },
             {
                 provide: MC_DROPDOWN_SCROLL_STRATEGY,
                 deps: [Overlay],
                 useFactory: (overlay: Overlay) => () => overlay.scrollStrategies.close()
             }
         ], [FakeIcon]);
-        const trigger = fixture.componentInstance.trigger;
 
         fixture.detectChanges();
+
+        const trigger = fixture.componentInstance.trigger;
+
         trigger.open();
         fixture.detectChanges();
 
@@ -1721,9 +1725,9 @@ describe('McDropdown default overrides', () => {
     `
 })
 class SimpleDropdown {
-    @ViewChild(McDropdownTrigger) trigger: McDropdownTrigger;
-    @ViewChild('triggerEl') triggerEl: ElementRef<HTMLElement>;
-    @ViewChild(McDropdown) dropdown: McDropdown;
+    @ViewChild(McDropdownTrigger, {static: false}) trigger: McDropdownTrigger;
+    @ViewChild('triggerEl', {static: false}) triggerEl: ElementRef<HTMLElement>;
+    @ViewChild(McDropdown, {static: false}) dropdown: McDropdown;
     @ViewChildren(McDropdownItem) items: QueryList<McDropdownItem>;
     extraItems: string[] = [];
     closeCallback = jasmine.createSpy('dropdown closed callback');
@@ -1739,8 +1743,8 @@ class SimpleDropdown {
     `
 })
 class PositionedDropdown {
-    @ViewChild(McDropdownTrigger) trigger: McDropdownTrigger;
-    @ViewChild('triggerEl') triggerEl: ElementRef<HTMLElement>;
+    @ViewChild(McDropdownTrigger, {static: false}) trigger: McDropdownTrigger;
+    @ViewChild('triggerEl', {static: false}) triggerEl: ElementRef<HTMLElement>;
     xPosition: DropdownPositionX = 'before';
     yPosition: DropdownPositionY = 'above';
 }
@@ -1760,8 +1764,8 @@ interface TestableDropdown {
 })
 class OverlapDropdown implements TestableDropdown {
     @Input() overlapTriggerY: boolean;
-    @ViewChild(McDropdownTrigger) trigger: McDropdownTrigger;
-    @ViewChild('triggerEl') triggerEl: ElementRef<HTMLElement>;
+    @ViewChild(McDropdownTrigger, {static: false}) trigger: McDropdownTrigger;
+    @ViewChild('triggerEl', {static: false}) triggerEl: ElementRef<HTMLElement>;
 }
 
 @Component({
@@ -1782,7 +1786,7 @@ class CustomDropdownPanel implements McDropdownPanel {
     overlapTriggerY = true;
     parent: McDropdownPanel;
 
-    @ViewChild(TemplateRef) templateRef: TemplateRef<any>;
+    @ViewChild(TemplateRef, {static: false}) templateRef: TemplateRef<any>;
     @Output() closed = new EventEmitter<void | 'click' | 'keydown' | 'tab'>();
     backdropClass: string;
     hasBackdrop: boolean;
@@ -1805,7 +1809,7 @@ class CustomDropdownPanel implements McDropdownPanel {
     `
 })
 class CustomDropdown {
-    @ViewChild(McDropdownTrigger) trigger: McDropdownTrigger;
+    @ViewChild(McDropdownTrigger, {static: false}) trigger: McDropdownTrigger;
 }
 
 @Component({
@@ -1860,22 +1864,22 @@ class CustomDropdown {
     `
 })
 class NestedDropdown {
-    @ViewChild('root') rootDropdown: McDropdown;
-    @ViewChild('rootTrigger') rootTrigger: McDropdownTrigger;
-    @ViewChild('rootTriggerEl') rootTriggerEl: ElementRef<HTMLElement>;
-    @ViewChild('alternateTrigger') alternateTrigger: McDropdownTrigger;
+    @ViewChild('root', {static: false}) rootDropdown: McDropdown;
+    @ViewChild('rootTrigger', {static: false}) rootTrigger: McDropdownTrigger;
+    @ViewChild('rootTriggerEl', {static: false}) rootTriggerEl: ElementRef<HTMLElement>;
+    @ViewChild('alternateTrigger', {static: false}) alternateTrigger: McDropdownTrigger;
     readonly rootCloseCallback = jasmine.createSpy('root dropdown closed callback');
 
-    @ViewChild('levelOne') levelOneDropdown: McDropdown;
-    @ViewChild('levelOneTrigger') levelOneTrigger: McDropdownTrigger;
+    @ViewChild('levelOne', {static: false}) levelOneDropdown: McDropdown;
+    @ViewChild('levelOneTrigger', {static: false}) levelOneTrigger: McDropdownTrigger;
     readonly levelOneCloseCallback = jasmine.createSpy('level one dropdown closed callback');
 
-    @ViewChild('levelTwo') levelTwoDropdown: McDropdown;
-    @ViewChild('levelTwoTrigger') levelTwoTrigger: McDropdownTrigger;
+    @ViewChild('levelTwo', {static: false}) levelTwoDropdown: McDropdown;
+    @ViewChild('levelTwoTrigger', {static: false}) levelTwoTrigger: McDropdownTrigger;
     readonly levelTwoCloseCallback = jasmine.createSpy('level one dropdown closed callback');
 
-    @ViewChild('lazy') lazyDropdown: McDropdown;
-    @ViewChild('lazyTrigger') lazyTrigger: McDropdownTrigger;
+    @ViewChild('lazy', {static: false}) lazyDropdown: McDropdown;
+    @ViewChild('lazyTrigger', {static: false}) lazyTrigger: McDropdownTrigger;
     showLazy = false;
 }
 
@@ -1898,8 +1902,8 @@ class NestedDropdown {
     `
 })
 class NestedDropdownRepeater {
-    @ViewChild('rootTriggerEl') rootTriggerEl: ElementRef<HTMLElement>;
-    @ViewChild('levelOneTrigger') levelOneTrigger: McDropdownTrigger;
+    @ViewChild('rootTriggerEl', {static: false}) rootTriggerEl: ElementRef<HTMLElement>;
+    @ViewChild('levelOneTrigger', {static: false}) levelOneTrigger: McDropdownTrigger;
 
     items = ['one', 'two', 'three'];
 }
@@ -1919,7 +1923,7 @@ class NestedDropdownRepeater {
     `
 })
 class NestedDropdownDeclaredInsideParentDropdown {
-    @ViewChild('rootTriggerEl') rootTriggerEl: ElementRef;
+    @ViewChild('rootTriggerEl', {static: false}) rootTriggerEl: ElementRef;
 }
 
 
@@ -1942,8 +1946,8 @@ class FakeIcon {}
     `
 })
 class SimpleLazyDropdown {
-    @ViewChild(McDropdownTrigger) trigger: McDropdownTrigger;
-    @ViewChild('triggerEl') triggerEl: ElementRef<HTMLElement>;
+    @ViewChild(McDropdownTrigger, {static: false}) trigger: McDropdownTrigger;
+    @ViewChild('triggerEl', {static: false}) triggerEl: ElementRef<HTMLElement>;
     @ViewChildren(McDropdownItem) items: QueryList<McDropdownItem>;
 }
 
@@ -1968,8 +1972,8 @@ class SimpleLazyDropdown {
     `
 })
 class LazyDropdownWithContext {
-    @ViewChild('triggerOne') triggerOne: McDropdownTrigger;
-    @ViewChild('triggerTwo') triggerTwo: McDropdownTrigger;
+    @ViewChild('triggerOne', {static: false}) triggerOne: McDropdownTrigger;
+    @ViewChild('triggerTwo', {static: false}) triggerTwo: McDropdownTrigger;
 }
 
 
@@ -1986,9 +1990,9 @@ class LazyDropdownWithContext {
     `
 })
 class DynamicPanelDropdown {
-    @ViewChild(McDropdownTrigger) trigger: McDropdownTrigger;
-    @ViewChild('one') first: McDropdown;
-    @ViewChild('two') second: McDropdown;
+    @ViewChild(McDropdownTrigger, {static: false}) trigger: McDropdownTrigger;
+    @ViewChild('one', {static: false}) first: McDropdown;
+    @ViewChild('two', {static: false}) second: McDropdown;
 }
 
 
@@ -2003,5 +2007,5 @@ class DynamicPanelDropdown {
     `
 })
 class DropdownWithCheckboxItems {
-    @ViewChild(McDropdownTrigger) trigger: McDropdownTrigger;
+    @ViewChild(McDropdownTrigger, {static: false}) trigger: McDropdownTrigger;
 }

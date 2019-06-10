@@ -23,7 +23,7 @@ const outDir = join(outputDir, 'packages', 'dev-app');
 const assetsGlob = join(appDir, `**/*.+(html|css|svg|ico)`);
 
 /** Path to the dev-app tsconfig file. */
-const tsconfigPath = join(appDir, 'tsconfig-build.json');
+const tsconfigPath = join(appDir, 'tsconfig.build.json');
 
 task(':build:devapp:ts', tsBuildTask(tsconfigPath));
 task(':build:devapp:assets', copyTask(assetsGlob, outDir));

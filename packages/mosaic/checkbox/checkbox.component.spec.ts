@@ -985,7 +985,7 @@ class CheckboxWithTabIndex {
     <mc-checkbox></mc-checkbox>`
 })
 class CheckboxUsingViewChild {
-    @ViewChild(McCheckbox) checkbox;
+    @ViewChild(McCheckbox, {static: false}) checkbox;
 
     set isDisabled(value: boolean) {
         this.checkbox.disabled = value;

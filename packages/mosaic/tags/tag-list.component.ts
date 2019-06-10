@@ -277,7 +277,11 @@ export class McTagList extends _McTagListMixinBase implements McFormFieldControl
     @Output() readonly change: EventEmitter<McTagListChange> = new EventEmitter<McTagListChange>();
 
     /** The tag components contained within this tag list. */
-    @ContentChildren(McTag) tags: QueryList<McTag>;
+    @ContentChildren(McTag, {
+        // Need to use `descendants: true`,
+        // Ivy will no longer match indirect descendants if it's left as false.
+        descendants: true
+    }) tags: QueryList<McTag>;
 
     _tabIndex = 0;
 

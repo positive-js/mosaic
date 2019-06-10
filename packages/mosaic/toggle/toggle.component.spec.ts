@@ -574,7 +574,7 @@ class ToggleWithTabIndex {
     <mc-toggle></mc-toggle>`
 })
 class ToggleUsingViewChild {
-    @ViewChild(McToggleComponent) toggle;
+    @ViewChild(McToggleComponent, {static: false}) toggle;
 
     set isDisabled(value: boolean) {
         this.toggle.disabled = value;

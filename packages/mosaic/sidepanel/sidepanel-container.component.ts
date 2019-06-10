@@ -55,7 +55,7 @@ export class McSidepanelContainerComponent extends BasePortalOutlet implements O
     id: string;
 
     /** The portal outlet inside of this container into which the content will be loaded. */
-    @ViewChild(CdkPortalOutlet) portalOutlet: CdkPortalOutlet;
+    @ViewChild(CdkPortalOutlet, {static: true}) portalOutlet: CdkPortalOutlet;
 
     /** The state of the sidepanel animations. */
     animationState: McSidepanelAnimationState = McSidepanelAnimationState.Void;

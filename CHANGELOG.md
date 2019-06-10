@@ -1,3 +1,17 @@
+# 8.0.0-beta.1 "Yemeni Foxtrot" (2019-06-07)
+
+
+### Features
+
+* **date-formatter:** update range dates formatter to show current year in some cases ([#137](https://github.com/positive-js/mosaic/issues/137)) ([fa5f15f](https://github.com/positive-js/mosaic/commit/fa5f15f))
+* **datepicker:** date format finding ([#133](https://github.com/positive-js/mosaic/issues/133)) ([075c91d](https://github.com/positive-js/mosaic/commit/075c91d))
+* **form-field:** formFieldWithoutBorder does not work in storybook ([#134](https://github.com/positive-js/mosaic/issues/134)) ([fe3df0f](https://github.com/positive-js/mosaic/commit/fe3df0f))
+* **link:** Новые стили в links ([#183685](https://github.com/positive-js/mosaic/issues/183685)) ([#127](https://github.com/positive-js/mosaic/issues/127)) ([31d6b87](https://github.com/positive-js/mosaic/commit/31d6b87))
+* **select:** PgDn and PgUp in selects ([#135](https://github.com/positive-js/mosaic/issues/135)) ([a024473](https://github.com/positive-js/mosaic/commit/a024473)), closes [#184327](https://github.com/positive-js/mosaic/issues/184327)
+* upgrade to Angular 8 ([#138](https://github.com/positive-js/mosaic/issues/138)) ([b5334c2](https://github.com/positive-js/mosaic/commit/b5334c2))
+
+
+
 # 1.0.0-beta.7 "Topo Restructuring" (2019-06-04)
 
 

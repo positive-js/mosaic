@@ -1,11 +1,11 @@
-import { Component, NgModule, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, NgModule, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { McButtonModule } from '@ptsecurity/mosaic/button';
-import { McFormFieldModule} from '@ptsecurity/mosaic/form-field';
+import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McInputModule } from '@ptsecurity/mosaic/input';
 import { McListModule } from '@ptsecurity/mosaic/list';
 import { McRadioModule } from '@ptsecurity/mosaic/radio';
@@ -21,9 +21,9 @@ import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 })
 export class DemoComponent {
 
-    @ViewChild('manualTooltip') manualTooltip: any;
-    @ViewChild('tooltip') tooltip: any;
-    @ViewChild('tooltipRef') tooltipRef: any;
+    @ViewChild('manualTooltip', {static: false}) manualTooltip: any;
+    @ViewChild('tooltip', {static: false}) tooltip: any;
+    @ViewChild('tooltipRef', {static: false}) tooltipRef: any;
 
     triggerTooltip: boolean = false;
     tooltipPosition: string = 'left';

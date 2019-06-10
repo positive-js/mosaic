@@ -16,6 +16,8 @@ $mc-toggle-padding: 26px !default;
     cursor: pointer;
 
     white-space: nowrap;
+    // for maximum clickable area.
+    width: 100%;
 }
 
 .mc-radio-label-content {

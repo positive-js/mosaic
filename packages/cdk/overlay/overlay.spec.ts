@@ -244,8 +244,8 @@ describe('Overlay', () => {
         const attachCompleteSpy = jasmine.createSpy('attachCompleteSpy spy');
         const detachCompleteSpy = jasmine.createSpy('detachCompleteSpy spy');
 
-        overlayRef.attachments().subscribe(undefined, undefined, attachCompleteSpy);
-        overlayRef.detachments().subscribe(disposeSpy, undefined, detachCompleteSpy);
+        overlayRef.attachments().subscribe({complete: attachCompleteSpy});
+        overlayRef.detachments().subscribe({next: disposeSpy, complete: detachCompleteSpy});
 
         overlayRef.attach(componentPortal);
         overlayRef.dispose();
@@ -259,8 +259,8 @@ describe('Overlay', () => {
         const overlayRef = overlay.create();
         const callbackOrder: string[] = [];
 
-        overlayRef.attachments().subscribe(undefined, undefined, () => callbackOrder.push('attach'));
-        overlayRef.detachments().subscribe(undefined, undefined, () => callbackOrder.push('detach'));
+        overlayRef.attachments().subscribe({complete: () => callbackOrder.push('attach')});
+        overlayRef.detachments().subscribe({complete: () => callbackOrder.push('detach')});
 
         overlayRef.attach(componentPortal);
         overlayRef.dispose();
@@ -492,7 +492,7 @@ describe('Overlay', () => {
 
             const completeHandler = jasmine.createSpy('backdrop complete handler');
 
-            overlayRef.backdropClick().subscribe(undefined, undefined, completeHandler);
+            overlayRef.backdropClick().subscribe({complete: completeHandler});
             overlayRef.dispose();
 
             expect(completeHandler).toHaveBeenCalled();
@@ -637,7 +637,7 @@ class PizzaMsg {
         <ng-template cdk-portal>Cake</ng-template>`
 })
 class TestComponentWithTemplatePortals {
-    @ViewChild(CdkPortal) templatePortal: CdkPortal;
+    @ViewChild(CdkPortal, {static: false}) templatePortal: CdkPortal;
 
     constructor(public viewContainerRef: ViewContainerRef) {
     }

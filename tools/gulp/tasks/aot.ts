@@ -11,7 +11,7 @@ const { packagesDir } = buildConfig;
 const devAppSource = join(packagesDir, 'dev-app');
 
 /** Path to the tsconfig file that builds the AOT files. */
-const tsconfigFile = join(devAppSource, 'tsconfig-aot.json');
+const tsconfigFile = join(devAppSource, 'tsconfig.aot.json');
 
 
 /** Builds the dev-app assets and builds the required release packages. */

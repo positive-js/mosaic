@@ -257,10 +257,8 @@ describe('McTabNavBar', () => {
   `
 })
 class SimpleTabNavBarTestApp {
-    @ViewChild(McTabNav)
-    tabNavBar: McTabNav;
-    @ViewChildren(McTabLink)
-    tabLinks: QueryList<McTabLink>;
+    @ViewChild(McTabNav, {static: false}) tabNavBar: McTabNav;
+    @ViewChildren(McTabLink) tabLinks: QueryList<McTabLink>;
 
     label = '';
     disabled = false;

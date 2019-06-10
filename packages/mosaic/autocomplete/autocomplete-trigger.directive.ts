@@ -392,9 +392,12 @@ export class McAutocompleteTrigger implements ControlValueAccessor, OnDestroy {
 
     /** Stream of clicks outside of the autocomplete panel. */
     private getOutsideClickStream(): Observable<any> {
-        if (!this.document) { return observableOf(null); }
-
-        return fromEvent<MouseEvent>(this.document, 'click')
+        return merge(
+            // tslint:disable-next-line: no-unnecessary-type-assertion
+            fromEvent(this.document, 'click') as Observable<MouseEvent>,
+            // tslint:disable-next-line: no-unnecessary-type-assertion
+            fromEvent(this.document, 'touchend') as Observable<TouchEvent>
+        )
             .pipe(filter((event) => {
                 const clickTarget = event.target as HTMLElement;
                 const formField = this.formField ?
@@ -463,11 +466,20 @@ export class McAutocompleteTrigger implements ControlValueAccessor, OnDestroy {
                 // create a new stream of panelClosingActions, replacing any previous streams
                 // that were created, and flatten it so our stream only emits closing events...
                 switchMap(() => {
+                    const wasOpen = this.panelOpen;
                     this.resetActiveItem();
                     this.autocomplete.setVisibility();
 
                     if (this.panelOpen) {
                         this.overlayRef!.updatePosition();
+
+                        // If the `panelOpen` state changed, we need to make sure to emit the `opened`
+                        // event, because we may not have emitted it when the panel was attached. This
+                        // can happen if the users opens the panel and there are no options, but the
+                        // options come in slightly later or as a result of the value changing.
+                        if (wasOpen !== this.panelOpen) {
+                            this.autocomplete.opened.emit();
+                        }
                     }
 
                     return this.panelClosingActions;

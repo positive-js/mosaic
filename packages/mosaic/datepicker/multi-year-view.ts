@@ -109,7 +109,7 @@ export class McMultiYearView<D> implements AfterContentInit {
     @Output() readonly activeDateChange: EventEmitter<D> = new EventEmitter<D>();
 
     /** The body of calendar table */
-    @ViewChild(McCalendarBody) mcCalendarBody: McCalendarBody;
+    @ViewChild(McCalendarBody, {static: false}) mcCalendarBody: McCalendarBody;
 
     /** Grid of calendar cells representing the currently displayed years. */
     years: McCalendarCell[][];

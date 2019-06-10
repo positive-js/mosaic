@@ -364,6 +364,25 @@ describe('McAutocomplete', () => {
             expect(fixture.componentInstance.openedSpy).not.toHaveBeenCalled();
         });
 
+        it('should emit the `opened` event if the options come in after the panel is shown',
+            fakeAsync(() => {
+                fixture.componentInstance.filteredStates = fixture.componentInstance.states = [];
+                fixture.detectChanges();
+
+                fixture.componentInstance.trigger.openPanel();
+                fixture.detectChanges();
+
+                expect(fixture.componentInstance.openedSpy).not.toHaveBeenCalled();
+
+                fixture.componentInstance.filteredStates = fixture.componentInstance.states =
+                    [{name: 'California', code: 'CA'}];
+                fixture.detectChanges();
+                tick();
+                fixture.detectChanges();
+
+                expect(fixture.componentInstance.openedSpy).toHaveBeenCalled();
+            }));
+
         it('should not emit the opened event multiple times while typing', fakeAsync(() => {
             fixture.componentInstance.trigger.openPanel();
             fixture.detectChanges();
@@ -2226,9 +2245,9 @@ class SimpleAutocomplete implements OnDestroy {
     openedSpy = jasmine.createSpy('autocomplete opened spy');
     closedSpy = jasmine.createSpy('autocomplete closed spy');
 
-    @ViewChild(McAutocompleteTrigger) trigger: McAutocompleteTrigger;
-    @ViewChild(McAutocomplete) panel: McAutocomplete;
-    @ViewChild(McFormField) formField: McFormField;
+    @ViewChild(McAutocompleteTrigger, {static: true}) trigger: McAutocompleteTrigger;
+    @ViewChild(McAutocomplete, {static: false}) panel: McAutocomplete;
+    @ViewChild(McFormField, {static: false}) formField: McFormField;
     @ViewChildren(McOption) options: QueryList<McOption>;
 
     states = [
@@ -2283,7 +2302,7 @@ class NgIfAutocomplete {
     isVisible = true;
     options = ['One', 'Two', 'Three'];
 
-    @ViewChild(McAutocompleteTrigger) trigger: McAutocompleteTrigger;
+    @ViewChild(McAutocompleteTrigger, {static: false}) trigger: McAutocompleteTrigger;
     @ViewChildren(McOption) mcOptions: QueryList<McOption>;
 
     constructor() {
@@ -2384,7 +2403,7 @@ class AutocompleteWithNumbers {
     `
 })
 class AutocompleteWithOnPushDelay implements OnInit {
-    @ViewChild(McAutocompleteTrigger) trigger: McAutocompleteTrigger;
+    @ViewChild(McAutocompleteTrigger, {static: false}) trigger: McAutocompleteTrigger;
     options: string[];
 
     ngOnInit() {
@@ -2410,7 +2429,7 @@ class AutocompleteWithNativeInput {
     filteredOptions: Observable<any>;
     options = ['En', 'To', 'Tre', 'Fire', 'Fem'];
 
-    @ViewChild(McAutocompleteTrigger) trigger: McAutocompleteTrigger;
+    @ViewChild(McAutocompleteTrigger, {static: false}) trigger: McAutocompleteTrigger;
     @ViewChildren(McOption) mcOptions: QueryList<McOption>;
 
     constructor() {
@@ -2428,7 +2447,7 @@ class AutocompleteWithNativeInput {
     template: `<input placeholder="Choose" [mcAutocomplete]="auto" [formControl]="control">`
 })
 class AutocompleteWithoutPanel {
-    @ViewChild(McAutocompleteTrigger) trigger: McAutocompleteTrigger;
+    @ViewChild(McAutocompleteTrigger, {static: false}) trigger: McAutocompleteTrigger;
     control = new FormControl();
 }
 
@@ -2465,7 +2484,7 @@ class AutocompleteWithFormsAndNonfloatingLabel {
     `
 })
 class AutocompleteWithGroups {
-    @ViewChild(McAutocompleteTrigger) trigger: McAutocompleteTrigger;
+    @ViewChild(McAutocompleteTrigger, {static: false}) trigger: McAutocompleteTrigger;
     selectedState: string;
     stateGroups = [
         {
@@ -2501,8 +2520,8 @@ class AutocompleteWithSelectEvent {
     states = ['New York', 'Washington', 'Oregon'];
     optionSelected = jasmine.createSpy('optionSelected callback');
 
-    @ViewChild(McAutocompleteTrigger) trigger: McAutocompleteTrigger;
-    @ViewChild(McAutocomplete) autocomplete: McAutocomplete;
+    @ViewChild(McAutocompleteTrigger, {static: false}) trigger: McAutocompleteTrigger;
+    @ViewChild(McAutocomplete, {static: false}) autocomplete: McAutocomplete;
 }
 
 
@@ -2559,8 +2578,8 @@ class AutocompleteWithNumberInputAndNgModel {
     `
 })
 class AutocompleteWithDifferentOrigin {
-    @ViewChild(McAutocompleteTrigger) trigger: McAutocompleteTrigger;
-    @ViewChild(McAutocompleteOrigin) alternateOrigin: McAutocompleteOrigin;
+    @ViewChild(McAutocompleteTrigger, {static: false}) trigger: McAutocompleteTrigger;
+    @ViewChild(McAutocompleteOrigin, {static: false}) alternateOrigin: McAutocompleteOrigin;
 
     selectedValue: string;
     values = ['one', 'two', 'three'];

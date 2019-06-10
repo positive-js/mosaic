@@ -40,11 +40,11 @@ export class DemoComponent implements OnInit {
 
     readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
-    @ViewChild('inputTagInput') inputTagInput: ElementRef<HTMLInputElement>;
-    @ViewChild('inputTagList') inputTagList: McTagList;
+    @ViewChild('inputTagInput', {static: false}) inputTagInput: ElementRef<HTMLInputElement>;
+    @ViewChild('inputTagList', {static: false}) inputTagList: McTagList;
 
-    @ViewChild('autocompleteTagInput') autocompleteTagInput: ElementRef<HTMLInputElement>;
-    @ViewChild('autocompleteTagList') autocompleteTagList: McTagList;
+    @ViewChild('autocompleteTagInput', {static: false}) autocompleteTagInput: ElementRef<HTMLInputElement>;
+    @ViewChild('autocompleteTagList', {static: false}) autocompleteTagList: McTagList;
 
     ngOnInit(): void {
         this.autocompleteFilteredTags = merge(

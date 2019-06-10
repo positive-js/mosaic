@@ -32,6 +32,11 @@ export interface IMcMomentDateAdapterOptions {
      * {@default false}
      */
     useUtc: boolean;
+    /**
+     * whether should parse method try guess date format
+     * {@default false}
+     */
+    findDateFormat: boolean;
 }
 
 /** InjectionToken for moment date adapter to configure options. */
@@ -45,7 +50,8 @@ export const MC_MOMENT_DATE_ADAPTER_OPTIONS = new InjectionToken<IMcMomentDateAd
 // tslint:disable:naming-convention
 export function MC_MOMENT_DATE_ADAPTER_OPTIONS_FACTORY(): IMcMomentDateAdapterOptions {
     return {
-        useUtc: false
+        useUtc: false,
+        findDateFormat: false
     };
 }
 
@@ -206,12 +212,21 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
     }
 
     parse(value: any, parseFormat: string | string[]): Moment | null {
-        // tslint:disable:triple-equals
-        if (value && typeof value == 'string') {
-            return this.createMoment(value, parseFormat, this.locale);
+        if (value) {
+            if (value && typeof value === 'string') {
+                if (this.options && this.options.findDateFormat) {
+                    return this.findFormat(value);
+                }
+
+                return parseFormat
+                    ? this.createMoment(value, parseFormat, this.locale)
+                    : this.createMoment(value).locale(this.locale);
+            }
+
+            return this.createMoment(value).locale(this.locale);
         }
 
-        return value ? this.createMoment(value).locale(this.locale) : null;
+        return null;
     }
 
     format(date: Moment, displayFormat: string): string {
@@ -357,6 +372,12 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
         const endDateVariables = this.compileVariables(endDate, variables);
         endDateVariables.SAME_MONTH = sameMonth;
 
+        const bothCurrentYear =
+            startDateVariables.CURRENT_YEAR === 'yes' &&
+            endDateVariables.CURRENT_YEAR === 'yes';
+        startDateVariables.CURRENT_YEAR = bothCurrentYear ? 'yes' : 'no';
+        endDateVariables.CURRENT_YEAR = bothCurrentYear ? 'yes' : 'no';
+
         const params = {...variables,
             START_DATE: this.messageformat.compile(template.START_DATE)(startDateVariables),
             END_DATE: this.messageformat.compile(template.END_DATE)(endDateVariables),
@@ -381,6 +402,12 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
         const endDateVariables = this.compileVariables(endDate, variables);
         endDateVariables.SAME_MONTH = sameMonth;
         endDateVariables.SAME_DAY = sameDay;
+
+        const bothCurrentYear =
+            startDateVariables.CURRENT_YEAR === 'yes' &&
+            endDateVariables.CURRENT_YEAR === 'yes';
+        startDateVariables.CURRENT_YEAR = bothCurrentYear ? 'yes' : 'no';
+        endDateVariables.CURRENT_YEAR = bothCurrentYear ? 'yes' : 'no';
 
         const params = {...variables,
             START_DATETIME: this.messageformat.compile(template.START_DATETIME)(startDateVariables),
@@ -444,5 +471,132 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
 
     private configureTranslator(locale: string): void {
         this.messageformat = new MessageFormat(locale);
+    }
+
+    private isNumeric(value: any): boolean {
+        return !isNaN(parseFloat(value)) && isFinite(value);
+    }
+
+    private findFormat(value: string): Moment | null {
+        if (!value) {
+            return null;
+        }
+
+        // default test - iso
+        const isoDate =  this.createMoment(value, moment.ISO_8601, this.locale);
+
+        if (isoDate.isValid()) {
+            return isoDate;
+        }
+
+        if (this.isNumeric(value)) {
+            // unix time sec
+            return this.createMoment(value, 'X', this.locale);
+        }
+
+        // long months naming: D MMM YYYY, MMM Do YYYY with short case support
+        if (
+            /^\d{1,2}\s\S+\s(\d{2}|\d{4})$/.test(value.trim()) ||
+            /^\S+\s\d{1,2}[a-z]{2}\s(\d{2}|\d{4})$/.test(value.trim())
+        ) {
+            return this.parseWithSpace(value);
+        }
+
+        // slash notation: DD/MM/YYYY, MM/DD/YYYY with short case support
+        if (/^\d{1,2}\/\d{1,2}\/(\d{2}|\d{4})$/.test(value)) {
+            return this.parseWithSlash(value);
+        }
+
+        // dash notation: DD-MM-YYYY, YYYY-DD-MM with short case support
+        if (/(^(\d{1,2}|\d{4})-\d{1,2}-\d{1,2}$)|(^\d{1,2}-\d{1,2}-(\d{2}|\d{4})$)/.test(value)) {
+           return this.parseWithDash(value);
+        }
+
+        // dot notation: DD.MM.YYYY with short case support
+        if (/^\d{1,2}\.\d{1,2}\.(\d{2}|\d{4})$/.test(value)) {
+            return this.parseWithDot(value);
+        }
+
+        return null;
+    }
+
+    private parseWithSpace(value: string): Moment | null {
+        switch (this.locale) {
+            case 'ru':
+                return this.createMoment(value, 'DD MMMM YYYY', this.locale);
+            case 'en':
+                // 16 Feb 2019 vs Feb 16th 2019, covers Feb and February cases
+                if (this.isNumeric(value[0])) {
+                    return this.createMoment(value, 'D MMMM YYYY', this.locale);
+                }
+
+                return this.createMoment(value, 'MMMM Do YYYY', this.locale);
+            default:
+                throw new Error(`Locale ${this.locale} is not supported`);
+        }
+    }
+
+    private parseWithSlash(value: string): Moment | null {
+        switch (this.locale) {
+            case 'ru':
+                return this.createMoment(value, 'DD/MM/YYYY', this.locale);
+            // todo do we use generalized locales? en vs en-US; until not we try to guess
+            case 'en':
+                // US vs UK
+                const parts = value.split('/');
+                const datePartsCount = 3;
+                if (parts.length !== datePartsCount) {
+                    return null;
+                }
+
+                const firstPart = parts[0].trim();
+                const secondPart = parts[1].trim();
+
+                if (!this.isNumeric(firstPart) || !this.isNumeric(secondPart)) {
+                    return null;
+                }
+
+                const monthsInYears = 12;
+
+                const canFirstBeMonth = +firstPart <= monthsInYears;
+                const canSecondByMonth = +secondPart <= monthsInYears;
+
+                // first two parts cannot be month
+                if (!canFirstBeMonth && !canSecondByMonth) {
+                    return null;
+                }
+
+                const canDetermineWhereMonth = canFirstBeMonth && canSecondByMonth;
+
+                if (canDetermineWhereMonth) {
+                    // use US format by default
+                    return this.createMoment(value, 'MM/DD/YYYY', this.locale);
+                }
+
+                return canFirstBeMonth && !canSecondByMonth
+                    ? this.createMoment(value, 'MM/DD/YYYY', this.locale)
+                    : this.createMoment(value, 'DD/MM/YYYY', this.locale);
+            default:
+                throw new Error(`Locale ${this.locale} is not supported`);
+        }
+    }
+
+    private parseWithDash(value: string): Moment | null {
+        // leading year vs finishing year
+        const parts = value.split('-');
+        if (parts[0].length === 0) {
+            return null;
+        }
+
+        const maxDayOrMonthCharsCount = 2;
+
+        return parts[0].length <= maxDayOrMonthCharsCount
+            ? this.createMoment(value, 'DD-MM-YYYY', this.locale)
+            : this.createMoment(value, 'YYYY-MM-DD', this.locale);
+    }
+
+    private parseWithDot(value: string): Moment | null {
+        // covers two cases YYYY and YY (for current year)
+        return this.createMoment(value, 'DD.MM.YYYY', this.locale);
     }
 }

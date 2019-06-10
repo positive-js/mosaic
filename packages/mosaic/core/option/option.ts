@@ -87,7 +87,7 @@ export class McOption implements AfterViewChecked, OnDestroy {
      * select's trigger.
      */
     get viewValue(): string {
-        // TODO(kara): Add input property alternative for node envs.
+        // TODO: Add input property alternative for node envs.
         return (this.getHostElement().textContent || '').trim();
     }
 
@@ -158,6 +158,10 @@ export class McOption implements AfterViewChecked, OnDestroy {
 
     ngOnDestroy() {
         this.stateChanges.complete();
+    }
+
+    getHeight(): number {
+        return this.element.nativeElement.getClientRects()[0].height;
     }
 
     select(): void {

@@ -356,7 +356,7 @@ class RadiosInsideRadioGroup {
     template: `<mc-radio-button>One</mc-radio-button>`
 })
 class DisableableRadioButton {
-    @ViewChild(McRadioButton) mcRadioButton;
+    @ViewChild(McRadioButton, {static: false}) mcRadioButton;
 
     set disabled(value: boolean) {
         this.mcRadioButton.disabled = value;

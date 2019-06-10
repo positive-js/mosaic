@@ -44,7 +44,10 @@ import {
     RIGHT_ARROW,
     SPACE,
     UP_ARROW,
-    A, ESCAPE
+    A,
+    ESCAPE,
+    PAGE_UP,
+    PAGE_DOWN
 } from '@ptsecurity/cdk/keycodes';
 import {
     CdkConnectedOverlay,
@@ -125,7 +128,7 @@ const McSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorStateC
     }
 })
 export class McSelectSearch implements AfterContentInit, OnDestroy {
-    @ContentChild(McInput) input: McInput;
+    @ContentChild(McInput, {static: false}) input: McInput;
 
     searchChangesSubscription: Subscription = new Subscription();
 
@@ -275,18 +278,18 @@ export class McSelect extends McSelectMixinBase implements
         }
     ];
 
-    @ViewChild('trigger') trigger: ElementRef;
+    @ViewChild('trigger', {static: false}) trigger: ElementRef;
 
-    @ViewChild('panel') panel: ElementRef;
+    @ViewChild('panel', {static: false}) panel: ElementRef;
 
-    @ViewChild('optionsContainer') optionsContainer: ElementRef;
+    @ViewChild('optionsContainer', {static: false}) optionsContainer: ElementRef;
 
-    @ViewChild(CdkConnectedOverlay) overlayDir: CdkConnectedOverlay;
+    @ViewChild(CdkConnectedOverlay, {static: false}) overlayDir: CdkConnectedOverlay;
 
     @ViewChildren(McTag) tags: QueryList<McTag>;
 
     /** User-supplied override of the trigger element. */
-    @ContentChild(McSelectTrigger) customTrigger: McSelectTrigger;
+    @ContentChild(McSelectTrigger, {static: false}) customTrigger: McSelectTrigger;
 
     /** All of the defined select options. */
     @ContentChildren(McOption, { descendants: true }) options: QueryList<McOption>;
@@ -294,7 +297,7 @@ export class McSelect extends McSelectMixinBase implements
     /** All of the defined groups of options. */
     @ContentChildren(McOptgroup) optionGroups: QueryList<McOptgroup>;
 
-    @ContentChild(McSelectSearch) search: McSelectSearch;
+    @ContentChild(McSelectSearch, {static: false}) search: McSelectSearch;
 
     /** Classes to be passed to the select panel. Supports the same syntax as `ngClass`. */
     @Input() panelClass: string | string[] | Set<string> | { [key: string]: any };
@@ -771,6 +774,8 @@ export class McSelect extends McSelectMixinBase implements
                 this._changeDetectorRef.detectChanges();
                 this.calculateOverlayOffsetX();
                 this.optionsContainer.nativeElement.scrollTop = this.scrollTop;
+
+                this.updateScrollSize();
             });
     }
 
@@ -868,6 +873,18 @@ export class McSelect extends McSelectMixinBase implements
         this._changeDetectorRef.markForCheck();
     }
 
+    private getHeightOfOptionsContainer(): number {
+        return this.optionsContainer.nativeElement.getClientRects()[0].height;
+    }
+
+    private updateScrollSize(): void {
+        if (!this.options.first) { return; }
+
+        this.keyManager.withScrollSize(
+            Math.floor(this.getHeightOfOptionsContainer() / this.options.first.getHeight())
+        );
+    }
+
     private getTotalItemsWidthInMatcher(): number {
         const triggerClone = this.trigger.nativeElement.cloneNode(true);
         triggerClone.querySelector('.mc-select__match-hidden-text').remove();
@@ -914,19 +931,26 @@ export class McSelect extends McSelectMixinBase implements
         const isArrowKey = keyCode === DOWN_ARROW || keyCode === UP_ARROW;
         const manager = this.keyManager;
 
-        if (keyCode === HOME || keyCode === END) {
-            event.preventDefault();
-
-            if (keyCode === HOME) {
-                manager.setFirstItemActive();
-            } else {
-                manager.setLastItemActive();
-            }
-
-        } else if (isArrowKey && event.altKey) {
+        if (isArrowKey && event.altKey) {
             // Close the select on ALT + arrow key to match the native <select>
             event.preventDefault();
             this.close();
+        } else if (keyCode === HOME) {
+            event.preventDefault();
+
+            manager.setFirstItemActive();
+        } else if (keyCode === END) {
+            event.preventDefault();
+
+            manager.setLastItemActive();
+        } else if (keyCode === PAGE_UP) {
+            event.preventDefault();
+
+            manager.setPreviousPageItemActive();
+        } else if (keyCode === PAGE_DOWN) {
+            event.preventDefault();
+
+            manager.setNextPageItemActive();
         } else if ((keyCode === ENTER || keyCode === SPACE) && manager.activeItem) {
             event.preventDefault();
             manager.activeItem.selectViaInteraction();

@@ -125,9 +125,9 @@ export class McTabGroup extends mcTabGroupMixinBase implements AfterContentInit,
 
     @ContentChildren(McTab) tabs: QueryList<McTab>;
 
-    @ViewChild('tabBodyWrapper') tabBodyWrapper: ElementRef;
+    @ViewChild('tabBodyWrapper', {static: false}) tabBodyWrapper: ElementRef;
 
-    @ViewChild('tabHeader') tabHeader: McTabHeader;
+    @ViewChild('tabHeader', {static: false}) tabHeader: McTabHeader;
 
     /** Position of the tab header. */
     @Input() headerPosition: McTabHeaderPosition = 'above';

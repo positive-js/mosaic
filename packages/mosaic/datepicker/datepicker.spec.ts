@@ -1402,8 +1402,8 @@ class StandardDatepicker {
     opened = false;
     disabled = false;
     date: Moment | null = moment([2020, 0, 1]);
-    @ViewChild('d') datepicker: McDatepicker<Moment>;
-    @ViewChild(McDatepickerInput) datepickerInput: McDatepickerInput<Moment>;
+    @ViewChild('d', {static: false}) datepicker: McDatepicker<Moment>;
+    @ViewChild(McDatepickerInput, {static: false}) datepickerInput: McDatepickerInput<Moment>;
 }
 
 
@@ -1422,7 +1422,7 @@ class MultiInputDatepicker {
         <mc-datepicker #d></mc-datepicker>`
 })
 class NoInputDatepicker {
-    @ViewChild('d') datepicker: McDatepicker<Moment>;
+    @ViewChild('d', {static: false}) datepicker: McDatepicker<Moment>;
 }
 
 
@@ -1435,7 +1435,7 @@ class NoInputDatepicker {
 class DatepickerWithStartAt {
     date = moment([2020, 0, 1]);
     startDate = moment([2010, 0, 1]);
-    @ViewChild('d') datepicker: McDatepicker<Moment>;
+    @ViewChild('d', {static: false}) datepicker: McDatepicker<Moment>;
 }
 
 
@@ -1447,7 +1447,7 @@ class DatepickerWithStartAt {
 })
 class DatepickerWithStartViewYear {
     date = moment([2020, 0, 1]);
-    @ViewChild('d') datepicker: McDatepicker<Moment>;
+    @ViewChild('d', {static: false}) datepicker: McDatepicker<Moment>;
 
     onYearSelection() {
     }
@@ -1463,7 +1463,7 @@ class DatepickerWithStartViewYear {
 })
 class DatepickerWithStartViewMultiYear {
     date = moment([2020, 0, 1]);
-    @ViewChild('d') datepicker: McDatepicker<Moment>;
+    @ViewChild('d', {static: false}) datepicker: McDatepicker<Moment>;
 
     onMultiYearSelection() {
     }
@@ -1478,8 +1478,8 @@ class DatepickerWithStartViewMultiYear {
 })
 class DatepickerWithNgModel {
     selected: Moment | null = null;
-    @ViewChild('d') datepicker: McDatepicker<Moment>;
-    @ViewChild(McDatepickerInput) datepickerInput: McDatepickerInput<Moment>;
+    @ViewChild('d', {static: false}) datepicker: McDatepicker<Moment>;
+    @ViewChild(McDatepickerInput, {static: false}) datepickerInput: McDatepickerInput<Moment>;
 }
 
 
@@ -1492,9 +1492,9 @@ class DatepickerWithNgModel {
 })
 class DatepickerWithFormControl {
     formControl = new FormControl();
-    @ViewChild('d') datepicker: McDatepicker<Moment>;
-    @ViewChild(McDatepickerInput) datepickerInput: McDatepickerInput<Moment>;
-    @ViewChild(McDatepickerToggle) datepickerToggle: McDatepickerToggle<Moment>;
+    @ViewChild('d', {static: false}) datepicker: McDatepicker<Moment>;
+    @ViewChild(McDatepickerInput, {static: false}) datepickerInput: McDatepickerInput<Moment>;
+    @ViewChild(McDatepickerToggle, {static: false}) datepickerToggle: McDatepickerToggle<Moment>;
 }
 
 
@@ -1506,8 +1506,8 @@ class DatepickerWithFormControl {
     `
 })
 class DatepickerWithToggle {
-    @ViewChild('d') datepicker: McDatepicker<Moment>;
-    @ViewChild(McDatepickerInput) input: McDatepickerInput<Moment>;
+    @ViewChild('d', {static: false}) datepicker: McDatepicker<Moment>;
+    @ViewChild(McDatepickerInput, {static: false}) input: McDatepickerInput<Moment>;
 }
 
 
@@ -1533,9 +1533,9 @@ class DatepickerWithCustomIcon {
     `
 })
 class FormFieldDatepicker {
-    @ViewChild('d') datepicker: McDatepicker<Moment>;
-    @ViewChild(McDatepickerInput) datepickerInput: McDatepickerInput<Moment>;
-    @ViewChild(McFormField) formField: McFormField;
+    @ViewChild('d', {static: false}) datepicker: McDatepicker<Moment>;
+    @ViewChild(McDatepickerInput, {static: false}) datepickerInput: McDatepickerInput<Moment>;
+    @ViewChild(McFormField, {static: false}) formField: McFormField;
 }
 
 
@@ -1547,7 +1547,7 @@ class FormFieldDatepicker {
     `
 })
 class DatepickerWithMinAndMaxValidation {
-    @ViewChild('d') datepicker: McDatepicker<Moment>;
+    @ViewChild('d', {static: false}) datepicker: McDatepicker<Moment>;
     date: Moment | null;
     minDate = moment([2010, 0, 1]);
     maxDate = moment([2020, 0, 1]);
@@ -1562,7 +1562,7 @@ class DatepickerWithMinAndMaxValidation {
     `
 })
 class DatepickerWithFilterAndValidation {
-    @ViewChild('d') datepicker: McDatepicker<Moment>;
+    @ViewChild('d', {static: false}) datepicker: McDatepicker<Moment>;
     date: Moment;
     filter = (date: Moment) => date.date() !== 1;
 }
@@ -1576,7 +1576,7 @@ class DatepickerWithFilterAndValidation {
     `
 })
 class DatepickerWithChangeAndInputEvents {
-    @ViewChild('d') datepicker: McDatepicker<Moment>;
+    @ViewChild('d', {static: false}) datepicker: McDatepicker<Moment>;
 
     onChange() {
     }
@@ -1600,8 +1600,8 @@ class DatepickerWithChangeAndInputEvents {
 })
 class DatepickerWithi18n {
     date: Moment | null = moment([2010, 0, 1]);
-    @ViewChild('d') datepicker: McDatepicker<Moment>;
-    @ViewChild(McDatepickerInput) datepickerInput: McDatepickerInput<Moment>;
+    @ViewChild('d', {static: false}) datepicker: McDatepicker<Moment>;
+    @ViewChild(McDatepickerInput, {static: false}) datepickerInput: McDatepickerInput<Moment>;
 }
 
 
@@ -1617,8 +1617,8 @@ class DatepickerWithISOStrings {
     min = new Date(2017, 0, 1).toISOString();
     max = new Date (2017, 11, 31).toISOString();
     startAt = new Date(2017, 6, 1).toISOString();
-    @ViewChild('d') datepicker: McDatepicker<Moment>;
-    @ViewChild(McDatepickerInput) datepickerInput: McDatepickerInput<Moment>;
+    @ViewChild('d', {static: false}) datepicker: McDatepicker<Moment>;
+    @ViewChild(McDatepickerInput, {static: false}) datepickerInput: McDatepickerInput<Moment>;
 }
 
 
@@ -1632,7 +1632,7 @@ class DatepickerWithEvents {
     selected: Moment | null = null;
     openedSpy = jasmine.createSpy('opened spy');
     closedSpy = jasmine.createSpy('closed spy');
-    @ViewChild('d') datepicker: McDatepicker<Moment>;
+    @ViewChild('d', {static: false}) datepicker: McDatepicker<Moment>;
 }
 
 
@@ -1643,7 +1643,7 @@ class DatepickerWithEvents {
     `
 })
 class DatepickerOpeningOnFocus {
-    @ViewChild(McDatepicker) datepicker: McDatepicker<Moment>;
+    @ViewChild(McDatepicker, {static: false}) datepicker: McDatepicker<Moment>;
 }
 
 
@@ -1654,7 +1654,7 @@ class DatepickerOpeningOnFocus {
     `
 })
 class DatepickerWithCustomHeader {
-    @ViewChild('ch') datepicker: McDatepicker<Moment>;
+    @ViewChild('ch', {static: false}) datepicker: McDatepicker<Moment>;
     customHeaderForDatePicker = CustomHeaderForDatepicker;
 }
 
@@ -1674,8 +1674,8 @@ class CustomHeaderForDatepicker {
     `
 })
 class DelayedDatepicker {
-    @ViewChild('d') datepicker: McDatepicker<Moment>;
-    @ViewChild(McDatepickerInput) datepickerInput: McDatepickerInput<Moment>;
+    @ViewChild('d', {static: false}) datepicker: McDatepicker<Moment>;
+    @ViewChild(McDatepickerInput, {static: false}) datepickerInput: McDatepickerInput<Moment>;
     date: Moment | null;
     assignedDatepicker: McDatepicker<Moment>;
 }
