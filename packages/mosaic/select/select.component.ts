@@ -940,8 +940,6 @@ export class McSelect extends McSelectMixinBase implements
                     option.deselect();
                 }
             });
-        } else if (keyCode === ESCAPE && this.search) {
-            this.close();
         } else {
             const previouslyFocusedIndex = manager.activeItemIndex;
 
