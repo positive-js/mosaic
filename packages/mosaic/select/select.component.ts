@@ -1,7 +1,8 @@
 /* tslint:disable:no-empty */
 
 import {
-    AfterContentInit, AfterViewInit,
+    AfterContentInit,
+    AfterViewInit,
     Attribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -11,7 +12,7 @@ import {
     Directive,
     DoCheck,
     ElementRef,
-    EventEmitter, HostListener,
+    EventEmitter,
     Inject,
     Input,
     isDevMode,
@@ -21,10 +22,12 @@ import {
     OnInit,
     Optional,
     Output,
-    QueryList, Renderer2,
+    QueryList,
+    Renderer2,
     Self,
     SimpleChanges,
-    ViewChild, ViewChildren,
+    ViewChild,
+    ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
@@ -136,12 +139,8 @@ export class McSelectSearch implements AfterContentInit, OnDestroy {
         this.input.focus();
     }
 
-    reset(doNotChangeSearch: boolean = false): void {
+    reset(): void {
         this.input.ngControl.reset();
-
-        if (doNotChangeSearch) {
-            this.isSearchChanged = false;
-        }
     }
 
     ngAfterContentInit(): void {
@@ -572,9 +571,15 @@ export class McSelect extends McSelectMixinBase implements
     /** `View -> model callback called when select has been touched` */
     onTouched = () => {};
 
-    resetSearch(doNotChangeSearch: boolean = false): void {
+    resetSearch(): void {
         if (this.search) {
-            this.search.reset(doNotChangeSearch);
+            this.search.reset();
+            /*
+            todo the incorrect behaviour of keyManager is possible here
+            to avoid first item selection (to provide correct options flipping on closed select)
+            we should process options update like it is the first options appearance
+             */
+            this.search.isSearchChanged = false;
         }
     }
 
@@ -615,11 +620,12 @@ export class McSelect extends McSelectMixinBase implements
     /** Closes the overlay panel and focuses the host element. */
     close(): void {
         if (this._panelOpen) {
+            // the order of calls is important
+            this.resetSearch();
             this._panelOpen = false;
             this.keyManager.withHorizontalOrientation(this.isRtl() ? 'rtl' : 'ltr');
 
             this._changeDetectorRef.markForCheck();
-            this.resetSearch(true);
             this.onTouched();
         }
     }
