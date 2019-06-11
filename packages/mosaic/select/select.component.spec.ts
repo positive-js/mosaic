@@ -249,7 +249,7 @@ class SelectWithChangeEvent {
     `
 })
 class SelectWithSearch {
-    @ViewChild(McSelect) select: McSelect;
+    @ViewChild(McSelect, {static: false}) select: McSelect;
 
     singleSelectedWithSearch = 'Moscow';
 
