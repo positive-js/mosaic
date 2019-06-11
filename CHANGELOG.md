@@ -1,3 +1,20 @@
+# 8.0.0-beta.2 "Unremitting Recalcitrance" (2019-06-11)
+
+
+### Bug Fixes
+
+* **autocomplete:** not emitting opened event if options come in after open ([16efa07](https://github.com/positive-js/mosaic/commit/16efa07))
+* **radio:** label - maximum clickable area ([930669d](https://github.com/positive-js/mosaic/commit/930669d))
+* **tags:** tags-list doesn't pick up wrapped div with Ivy ([0c45e93](https://github.com/positive-js/mosaic/commit/0c45e93))
+* check npm login before build ([ce408b5](https://github.com/positive-js/mosaic/commit/ce408b5))
+
+
+### Features
+
+* **select:** select search cosmetic and behavior fixes ([#136](https://github.com/positive-js/mosaic/issues/136)) ([a25a60b](https://github.com/positive-js/mosaic/commit/a25a60b))
+
+
+
 # 8.0.0-beta.1 "Yemeni Foxtrot" (2019-06-07)
 
 
