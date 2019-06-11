@@ -39,14 +39,13 @@
                 <mc-cleaner></mc-cleaner>
             </mc-form-field>
 
-            <mc-option value="StickedOption">Sticked Option</mc-option>
             <mc-option *ngFor="let option of filteredOptions | async" [value]="option">{{ option }}</mc-option>
         </mc-select>
     </mc-form-field>
 
     <br><br>
 
-    <button mc-button (click)="optionCounter = optionCounter + 1;allOptions.push(optionCounter.toString())">add option</button>
+    <button mc-button (click)="optionCounter = optionCounter + 1;options.push(optionCounter.toString())">add option</button>
 
     <br><br>
 
@@ -60,7 +59,6 @@
                 <mc-cleaner></mc-cleaner>
             </mc-form-field>
 
-            <mc-option value="StickedOption">Sticked Option</mc-option>
             <mc-option *ngFor="let option of filteredMultipleOptions | async" [value]="option">{{ option }}</mc-option>
         </mc-select>
     </mc-form-field>

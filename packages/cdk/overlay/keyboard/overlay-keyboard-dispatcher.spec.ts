@@ -72,7 +72,7 @@ describe('OverlayKeyboardDispatcher', () => {
         expect(overlayTwoSpy).toHaveBeenCalled();
     });
 
-    it('should dispatch keyboard events when propagation is stopped', () => {
+    it('should not dispatch keyboard events when propagation is stopped', () => {
         const overlayRef = overlay.create();
         const spy = jasmine.createSpy('keyboard event spy');
         const button = document.createElement('button');
@@ -84,7 +84,7 @@ describe('OverlayKeyboardDispatcher', () => {
         keyboardDispatcher.add(overlayRef);
         dispatchKeyboardEvent(button, 'keydown', ESCAPE);
 
-        expect(spy).toHaveBeenCalled();
+        expect(spy).not.toHaveBeenCalled();
 
         button.parentNode!.removeChild(button); //tslint:disable-line
     });
@@ -140,10 +140,10 @@ describe('OverlayKeyboardDispatcher', () => {
         spyOn(body, 'removeEventListener');
 
         keyboardDispatcher.add(overlayRef);
-        expect(body.addEventListener).toHaveBeenCalledWith('keydown', jasmine.any(Function), true);
+        expect(body.addEventListener).toHaveBeenCalledWith('keydown', jasmine.any(Function));
 
         overlayRef.dispose();
-        expect(body.removeEventListener).toHaveBeenCalledWith('keydown', jasmine.any(Function), true);
+        expect(body.removeEventListener).toHaveBeenCalledWith('keydown', jasmine.any(Function));
     });
 
 });

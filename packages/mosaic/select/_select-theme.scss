@@ -35,6 +35,10 @@
         background-color: if($is-dark, map-get($second, 700), map-get($background, background));
     }
 
+    .mc-select__no-options-message {
+        color: mc-color($second, 400);
+    }
+
     .mc-select__search-container {
         border-bottom: {
             width: 1px;

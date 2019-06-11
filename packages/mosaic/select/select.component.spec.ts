@@ -46,7 +46,7 @@ import {
     SPACE,
     TAB,
     UP_ARROW,
-    A
+    A, ESCAPE
 } from '@ptsecurity/cdk/keycodes';
 import { OverlayContainer } from '@ptsecurity/cdk/overlay';
 import { Platform } from '@ptsecurity/cdk/platform';
@@ -235,7 +235,7 @@ class SelectWithChangeEvent {
     selector: 'select-with-search',
     template: `
         <mc-form-field>
-            <mc-select [(value)]="singleSelectedWithSearch">
+            <mc-select #select [(value)]="singleSelectedWithSearch">
                 <mc-form-field mcSelectSearch>
                     <input
                         mcInput
@@ -249,6 +249,8 @@ class SelectWithChangeEvent {
     `
 })
 class SelectWithSearch {
+    @ViewChild(McSelect, {static: false}) select: McSelect;
+
     singleSelectedWithSearch = 'Moscow';
 
     searchCtrl: FormControl = new FormControl();
@@ -2294,6 +2296,39 @@ describe('McSelect', () => {
 
             expect(optionsTexts).toEqual(['Kaluga', 'Luga']);
         }));
+
+        it('should clear search by esc', (() => {
+            trigger.click();
+            fixture.detectChanges();
+
+            const inputElementDebug = fixture.debugElement.query(By.css('input'));
+
+            inputElementDebug.nativeElement.value = 'lu';
+
+            inputElementDebug.triggerEventHandler('input', { target: inputElementDebug.nativeElement });
+            fixture.detectChanges();
+
+            dispatchKeyboardEvent(inputElementDebug.nativeElement, 'keydown', ESCAPE);
+
+            fixture.detectChanges();
+
+            expect(inputElementDebug.nativeElement.value).toBe('');
+        }));
+
+        it('should close list by esc if input is empty', () => {
+            trigger.click();
+            fixture.detectChanges();
+
+            const inputElementDebug = fixture.debugElement.query(By.css('input'));
+
+            dispatchKeyboardEvent(inputElementDebug.nativeElement, 'keydown', ESCAPE);
+
+            fixture.detectChanges();
+
+            const selectInstance = fixture.componentInstance.select;
+
+            expect(selectInstance.panelOpen).toBe(false);
+        });
     });
 
     describe('with a selectionChange event handler', () => {

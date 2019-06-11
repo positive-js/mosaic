@@ -32,6 +32,19 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
     }
 }
 
+.mc-select__no-options-message {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+    max-width: 100%;
+    height: 32px;
+    cursor: default;
+    outline: none;
+    padding: 0 16px;
+}
+
 .mc-select__trigger {
     display: flex;
     box-sizing: border-box;
@@ -58,6 +71,9 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
     overflow: hidden;
     text-overflow: ellipsis;
 
+    // compensate borders
+    margin-top: -2px;
+
     white-space: nowrap;
 
     & > span {
@@ -71,7 +87,7 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
 
     overflow: hidden;
 
-    max-height: 24px;
+    max-height: 26px;
 
     margin: 0;
     padding-left: 0;

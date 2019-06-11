@@ -1,7 +1,8 @@
 /* tslint:disable:no-empty */
 
 import {
-    AfterContentInit, AfterViewInit,
+    AfterContentInit,
+    AfterViewInit,
     Attribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -21,10 +22,12 @@ import {
     OnInit,
     Optional,
     Output,
-    QueryList, Renderer2,
+    QueryList,
+    Renderer2,
     Self,
     SimpleChanges,
-    ViewChild, ViewChildren,
+    ViewChild,
+    ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
@@ -42,6 +45,7 @@ import {
     SPACE,
     UP_ARROW,
     A,
+    ESCAPE,
     PAGE_UP,
     PAGE_DOWN
 } from '@ptsecurity/cdk/keycodes';
@@ -118,7 +122,10 @@ const McSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorStateC
 
 @Directive({
     selector: '[mcSelectSearch]',
-    exportAs: 'mcSelectSearch'
+    exportAs: 'mcSelectSearch',
+    host: {
+        '(keydown)': 'handleKeydown($event)'
+    }
 })
 export class McSelectSearch implements AfterContentInit, OnDestroy {
     @ContentChild(McInput, {static: false}) input: McInput;
@@ -126,6 +133,10 @@ export class McSelectSearch implements AfterContentInit, OnDestroy {
     searchChangesSubscription: Subscription = new Subscription();
 
     isSearchChanged: boolean = false;
+
+    constructor(formField: McFormField) {
+        formField.canCleanerClearByEsc = false;
+    }
 
     focus(): void {
         this.input.focus();
@@ -137,7 +148,7 @@ export class McSelectSearch implements AfterContentInit, OnDestroy {
 
     ngAfterContentInit(): void {
         if (!this.input) {
-            throw Error('McSelectSearch does not work without input');
+            throw Error('McSelectSearch does not work without mcInput');
         }
 
         if (!this.input.ngControl) {
@@ -152,8 +163,17 @@ export class McSelectSearch implements AfterContentInit, OnDestroy {
     ngOnDestroy(): void {
         this.searchChangesSubscription.unsubscribe();
     }
-}
 
+    handleKeydown(event: KeyboardEvent) {
+        // tslint:disable-next-line:deprecation
+        if (event.keyCode === ESCAPE) {
+            if (this.input.value) {
+                this.reset();
+                event.stopPropagation();
+            }
+        }
+    }
+}
 
 
 @Directive({ selector: 'mc-select-trigger' })
@@ -197,7 +217,9 @@ export class McSelect extends McSelectMixinBase implements
     controlType = 'mc-select';
 
     hiddenItems: number = 0;
+    // todo localization
     oneMoreText: string = '...ещё';
+    noOptionsText: string = 'Ничего не найдено';
 
     /** The last measured value for the trigger's client bounding rect. */
     triggerRect: ClientRect;
@@ -435,6 +457,12 @@ export class McSelect extends McSelectMixinBase implements
         return this._panelOpen;
     }
 
+    get isEmptySearchResult(): boolean {
+        return this.search &&
+            this.options.length === 0 &&
+            !!this.search.input.value;
+    }
+
     private _panelOpen = false;
 
     /** The scroll position of the overlay panel, calculated to center the selected option. */
@@ -549,6 +577,12 @@ export class McSelect extends McSelectMixinBase implements
     resetSearch(): void {
         if (this.search) {
             this.search.reset();
+            /*
+            todo the incorrect behaviour of keyManager is possible here
+            to avoid first item selection (to provide correct options flipping on closed select)
+            we should process options update like it is the first options appearance
+             */
+            this.search.isSearchChanged = false;
         }
     }
 
@@ -584,13 +618,13 @@ export class McSelect extends McSelectMixinBase implements
                     this.overlayDir.overlayRef.overlayElement.style.fontSize = `${this.triggerFontSize}px`;
                 }
             });
-
-        this.resetSearch();
     }
 
     /** Closes the overlay panel and focuses the host element. */
     close(): void {
         if (this._panelOpen) {
+            // the order of calls is important
+            this.resetSearch();
             this._panelOpen = false;
             this.keyManager.withHorizontalOrientation(this.isRtl() ? 'rtl' : 'ltr');
 
