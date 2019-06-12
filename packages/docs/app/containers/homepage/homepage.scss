@@ -1,0 +1,27 @@
+
+.section {
+    width: 100%;
+
+    .container {
+        max-width: 1140px;
+        margin: 0 auto;
+    }
+}
+
+.section-banner {
+    text-align: center;
+
+    .logo {
+        margin: 200px auto 0;
+        width: 160px;
+    }
+
+    .btn-container {
+        margin-top: 72px;
+
+        .btn {
+            display: inline-block;
+            margin: 0 18px;
+        }
+    }
+}
