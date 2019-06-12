@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+        "declaration": false,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "lib": [
+            "es6",
+            "dom"
+        ],
+        "mapRoot": "./",
+        "module": "es6",
+        "moduleResolution": "node",
+        "outDir": "../dist/out-tsc",
+        "sourceMap": true,
+        "target": "es5",
+        "baseUrl": ".",
+        "paths": {
+            "@ptsecurity/cdk/*": [
+                "../../dist/packages/cdk/*"
+            ],
+            "@ptsecurity/mosaic/*": [
+                "../../dist/packages/mosaic/*"
+            ],
+            "@ptsecurity/mosaic-moment-adapter/*": [
+                "../mosaic-moment-adapter/*"
+            ]
+        }
+    },
+    "exclude": [
+        "assets"
+    ]
+}

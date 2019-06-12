@@ -1,0 +1,87 @@
+{
+    "version": 1,
+    "newProjectRoot": "projects",
+    "projects": {
+        "mosaic-io": {
+            "root": "",
+            "projectType": "application",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "aot": true,
+                        "sourceMap": false,
+                        "outputPath": "dist",
+                        "index": "packages/docs/index.html",
+                        "main": "packages/docs/main.ts",
+                        "tsConfig": "packages/docs/tsconfig.json",
+                        "assets": [
+                            {
+                                "glob": "**/*",
+                                "input": "packages/docs/assets",
+                                "output": "/assets"
+                            },
+                            {
+                                "glob": "**/*",
+                                "input": "./node_modules/@angular/material-examples/docs-content",
+                                "output": "/docs-content"
+                            },
+                            {
+                                "glob": "favicon.ico",
+                                "input": "src",
+                                "output": "/"
+                            }
+                        ],
+                        "styles": [
+                            {
+                                "input": "packages/docs/main.scss"
+                            }
+                        ],
+                        "scripts": []
+                    },
+                    "configurations": {
+                        "production": {
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "aot": true,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "fileReplacements": [
+                                {
+                                    "src": "src/environments/environment.ts",
+                                    "replaceWith": "src/environments/environment.prod.ts"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "mosaic-io:build"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "mosaic-io:build:production"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "packages/docs/tsconfig.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**"
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}
