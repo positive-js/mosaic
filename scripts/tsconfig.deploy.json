@@ -10,11 +10,11 @@
             "es2016",
             "dom"
         ],
-        "outDir": "../out-tsc/app",
+        "outDir": "./out-tsc/app",
         "target": "es5",
         "module": "commonjs",
         "baseUrl": "",
-        "rootDir": "./",
+        "rootDir": "../",
         "strict": true
     },
     "exclude": [

@@ -1,9 +1,9 @@
-import * as path from 'path';
-
+/* tslint:disable:no-var-requires */
 import { Dgeni } from 'dgeni';
 import { task, src, dest, series } from 'gulp';
+import * as path from 'path';
 
-import { apiDocsPackage } from '../../dgeni';
+import { apiDocsPackageConfig } from '../../dgeni/bin';
 import { buildConfig } from '../../packages';
 
 
@@ -18,7 +18,7 @@ const dom  = require('gulp-dom');
 
 const { outputDir, packagesDir } = buildConfig;
 
-const DIST_DOCS = path.join(outputDir, 'docs');
+const DIST_DOCS = path.join(outputDir, 'docs-content');
 
 const EXAMPLE_PATTERN = /<!--\W*example\(([^)]+)\)\W*-->/g;
 
@@ -73,14 +73,24 @@ const markdownOptions = {
 
 
 task('api-docs', () => {
-    const docs = new Dgeni([apiDocsPackage]);
 
-    return docs.generate();
+    // Run the docs generation. The process will be automatically kept alive until Dgeni
+    // completed. In case the returned promise has been rejected, we need to manually exit the
+    // process with the proper exit code because Dgeni doesn't use native promises which would
+    // automatically cause the error to propagate.
+    const docs = new Dgeni([apiDocsPackageConfig]);
+
+    return docs.generate().catch((e: any) => {
+        // tslint:disable-next-line:no-console
+        console.error(e);
+        process.exit(1);
+    });
 });
 
 task('markdown-docs-mosaic', () => {
 
     markdown.marked.Renderer.prototype.heading = (text: string, level: number): string => {
+        // tslint:disable-next-line:no-magic-numbers
         if (level === 3 || level === 4) {
             const escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
 
@@ -96,20 +106,10 @@ task('markdown-docs-mosaic', () => {
     };
 
     return src(['packages/mosaic/**/!(README).md', 'guides/*.md'])
-        .pipe(rename({prefix: 'mosaic-'}))
         .pipe(markdown(markdownOptions))
         .pipe(transform(transformMarkdownFiles))
-        .pipe(dom(createTagNameAliaser('docs-markdown')))
-        .pipe(dest('dist/docs/markdown'));
-});
-
-task('markdown-docs-cdk', () => {
-    return src(['packages/cdk/**/!(README).md'])
-        .pipe(rename({prefix: 'cdk-'}))
-        .pipe(markdown(markdownOptions))
-        .pipe(transform(transformMarkdownFiles))
-        .pipe(dom(createTagNameAliaser('docs-markdown')))
-        .pipe(dest('dist/docs/markdown'));
+        .pipe(flatten())
+        .pipe(dest('dist/docs-content/overviews/mosaic'));
 });
 
 /**
@@ -123,38 +123,34 @@ task('build-highlighted-examples', () => {
         filePath.basename = `${filePath.basename}-${extension}`;
     };
 
-    return src('packages/mosaic-examples/**/*.+(html|css|ts)')
+    return src([
+            'packages/mosaic-examples/**/*.+(html|css|ts)',
+            '!packages/mosaic-examples/*.ts'
+        ])
         .pipe(flatten())
         .pipe(rename(renameFile))
         .pipe(highlight())
-        .pipe(dest('dist/docs/examples'));
+        .pipe(dest('dist/docs-content/examples-highlighted'));
 });
 
-/**
- * Minifies all HTML files that have been generated. The HTML files for the
- * highlighted examples can be skipped, because it won't have any effect.
- */
-task('minify-html-files', () => {
-    return src('dist/docs/+(api|markdown)/**/*.html')
-        .pipe(htmlmin(htmlMinifierOptions))
-        .pipe(dest('dist/docs'));
-});
 
 /** Copies example sources to be used as stackblitz assets for the docs site. */
 task('copy-stackblitz-examples', () => {
-    return src(path.join(packagesDir, 'mosaic-examples', '**/*'))
-        .pipe(dest(path.join(DIST_DOCS, 'stackblitz', 'examples')));
+    return src(
+        [path.join(packagesDir, 'mosaic-examples', '**/*.+(html|css|ts)'),
+            '!packages/mosaic-examples/*.ts'
+        ])
+        .pipe(flatten())
+        .pipe(dest(path.join(DIST_DOCS, 'examples-source')));
 });
 
-task('docs', series(series(
+task('docs', series(
         'markdown-docs-mosaic',
-        'markdown-docs-cdk',
         'build-highlighted-examples',
         'build-examples-module',
         'api-docs',
         'copy-stackblitz-examples'
-    ),
-    'minify-html-files')
+    )
 );
 
 /** Updates the markdown file's content to work inside of the docs app. */
