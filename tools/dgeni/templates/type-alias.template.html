@@ -1,0 +1,26 @@
+{% import "macros.html" as macros %}
+
+<h4 id="{$ alias.name $}" class="docs-header-link docs-api-h4 docs-api-type-alias-name">
+    <span header-link="{$ alias.name $}"></span>
+      <code>{$ alias.name $}</code>
+</h4>
+
+{%- if alias.isDeprecated -%}
+<div class="docs-api-type-alias-deprecated-marker" {$ macros.deprecationTitle(alias) $}>
+    Deprecated
+</div>
+{%- endif -%}
+
+{%- if alias.description -%}
+    <p class="docs-api-type-alias-description">{$ alias.description | marked | safe $}</p>
+{%- endif -%}
+
+<div class="docs-markdown">
+    <pre class="docs-markdown-pre">
+    <code class="docs-markdown-code">
+        {%- highlight "typescript" -%}
+            type {$ alias.name | safe $} = {$ alias.typeDefinition | safe $};
+        {%- end_highlight -%}
+    </code>
+    </pre>
+</div>
