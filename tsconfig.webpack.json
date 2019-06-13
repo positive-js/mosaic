@@ -49,6 +49,7 @@
         "packages/**/*.e2e.ts",
         "packages/mosaic-examples/**/*.*",
         "packages/cdk/schematics/**/*.*",
+        "packages/docs/**/*.*",
         "packages/dev-app/**/*.*"
     ],
     "angularCompilerOptions": {

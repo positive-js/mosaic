@@ -2,5 +2,6 @@
 export const releasePackages = [
     'cdk',
     'mosaic-moment-adapter',
-    'mosaic'
+    'mosaic',
+    'mosaic-examples'
 ];
