@@ -1,6 +1,8 @@
+import { task, series } from 'gulp';
+
 import { createPackageBuildTasks } from '../packages';
 
-import { cdkPackage, examplesPackage, mosaicPackage, momentAdapterPackage } from './packages';
+import { cdkPackage, examplesPackage, mosaicPackage, momentAdapterPackage, allBuildPackages } from './packages';
 
 /* tslint:disable:no-import-side-effect ordered-imports */
 // THIS ORDER OF IMPORTS AND CALLS IS IMPORTANT
@@ -23,4 +25,13 @@ import './tasks/docs';
 import './tasks/payload';
 import './tasks/changelog';
 import './tasks/validate-licenses';
+
+
 /* tslint:enable:no-import-side-effect */
+
+
+/** Task that builds all available release packages. */
+task('all-build-release-packages', series(
+    ...allBuildPackages.map((buildPackage) => `${buildPackage.name}:build-release`)
+));
+
