@@ -8,19 +8,23 @@
         "stripInternal": false,
         "experimentalDecorators": true,
         "noUnusedParameters": true,
+        "noUnusedLocals": true,
         "strictNullChecks": true,
+        "strictFunctionTypes": true,
+        "noImplicitAny": true,
+        "noImplicitThis": true,
         "importHelpers": true,
         "module": "es2015",
         "moduleResolution": "node",
         "outDir": "../../dist/packages/mosaic-examples",
-        "rootDir": ".",
+        "rootDirs": [
+            ".",
+            "../../dist/packages/mosaic-examples"
+        ],
         "sourceMap": true,
         "inlineSources": true,
         "target": "es2015",
-        "lib": [
-            "es2015",
-            "dom"
-        ],
+        "lib": ["es2015", "dom"],
         "skipLibCheck": true,
         "types": [],
         "baseUrl": ".",
@@ -28,12 +32,13 @@
             "@ptsecurity/mosaic/*": [
                 "../../dist/packages/mosaic/*"
             ],
-            "@ptsecurity/mosaic": [
-                "../../dist/packages/mosaic/public-api"
-            ],
+//            "@ptsecurity/mosaic": [
+//                "../../dist/packages/mosaic/public-api"
+//            ],
             "@ptsecurity/cdk/*": [
                 "../../dist/packages/cdk/*"
-            ]
+            ],
+            "@ptsecurity/mosaic-moment-adapter/*": ["../../dist/packages/mosaic-moment-adapter/*"]
         }
     },
     "files": [

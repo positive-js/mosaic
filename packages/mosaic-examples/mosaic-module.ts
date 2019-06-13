@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
-import { McButtonModule } from '@ptsecurity/mosaic';
+import {
+    McButtonModule
+} from '@ptsecurity/mosaic/button';
 
 
 @NgModule({
