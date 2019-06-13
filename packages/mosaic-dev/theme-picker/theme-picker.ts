@@ -28,7 +28,7 @@ export class ThemePicker {
         }
     ];
 
-    constructor( private _themeStorage: ThemeStorage ) {
+    constructor(private _themeStorage: ThemeStorage) {
         const currentTheme = this._themeStorage.getStoredTheme();
 
         if (currentTheme) {
