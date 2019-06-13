@@ -53,6 +53,14 @@ export class GitClient {
         return this.spawnGitProcess(['log', '-n1', '--format="%s"', commitRef]).stdout.trim();
     }
 
+    getCommitterUserName() {
+        return this.spawnGitProcess(['--no-pager', 'show', '-s', `--format='%cN'`, 'HEAD']).stdout.trim();
+    }
+
+    getCommitterUserEmail() {
+        return this.spawnGitProcess(['--no-pager', 'show', '-s', `--format='%cE'`, 'HEAD']).stdout.trim();
+    }
+
     /** Creates a new commit within the current branch with the given commit message. */
     createNewCommit(message: string): boolean {
         return this.spawnGitProcess(['commit', '-m', message]).status === 0;

@@ -1,0 +1,25 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "outDir": "./out-tsc/app",
+        "paths": {
+            "@ptsecurity/cdk/*": [
+                "../../dist/packages/cdk/*"
+            ],
+            "@ptsecurity/mosaic/*": [
+                "../../dist/packages/mosaic/*"
+            ],
+            "@ptsecurity/mosaic-examples/*": ["../../dist/packages/mosaic-examples/*"],
+            "@ptsecurity/mosaic-examples": ["../../dist/packages/mosaic-examples"]
+
+        }
+    },
+    "include": [
+        "src/**/*.ts"
+    ],
+    "exclude": [
+        "src/test.ts",
+        "src/**/*.spec.ts",
+        "src/assets"
+    ]
+}
