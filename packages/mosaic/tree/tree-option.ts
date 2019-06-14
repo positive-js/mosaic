@@ -7,7 +7,7 @@ import {
     ElementRef,
     Inject,
     Optional,
-    InjectionToken, ViewEncapsulation
+    InjectionToken
 } from '@angular/core';
 import { SelectionModel } from '@ptsecurity/cdk/collections';
 import { CdkTreeNode } from '@ptsecurity/cdk/tree';
@@ -52,9 +52,16 @@ let uniqueIdCounter: number = 0;
     providers: [{ provide: CdkTreeNode, useExisting: McTreeOption }]
 })
 export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisable {
-    @Output() readonly onSelectionChange = new EventEmitter<McTreeOptionChange>();
+    @Input()
+    get value(): any {
+        return this._value || this.viewValue;
+    }
 
-    @Input() value: any;
+    set value(value: any) {
+        this._value = value;
+    }
+
+    private _value: any;
 
     @Input()
     get disabled() {
@@ -70,6 +77,8 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
     }
 
     private _disabled: boolean = false;
+
+    @Output() readonly onSelectionChange = new EventEmitter<McTreeOptionChange>();
 
     // @Input()
     // get selected(): boolean {
@@ -133,9 +142,9 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
         this._selected = selected;
 
         if (selected) {
-            this.parent.selectionModel.select(this);
+            this.parent.selectionModel.select(this.value);
         } else {
-            this.parent.selectionModel.deselect(this);
+            this.parent.selectionModel.deselect(this.value);
         }
 
         // this._changeDetector.markForCheck();
@@ -191,10 +200,6 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
     //     this.treeSelection.setFocusedOption(this);
     // }
 
-    /**
-     * The displayed value of the option. It is necessary to show the selected option in the
-     * select's trigger.
-     */
     get viewValue(): string {
         // TODO: Add input property alternative for node envs.
         return (this.getHostElement().textContent || '').trim();
@@ -218,8 +223,6 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
 
     selectViaInteraction(): void {
         if (!this.disabled) {
-            this._selected = !this._selected;
-
             this.changeDetectorRef.markForCheck();
             this.emitSelectionChangeEvent(true);
 

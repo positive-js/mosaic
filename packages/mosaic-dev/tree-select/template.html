@@ -9,6 +9,7 @@
 <div class="dev-container">
     <mc-form-field>
         <mc-tree-select
+            [multiple]="true"
             placeholder="Food I want to eat right now"
             [formControl]="control"
             (selectionChange)="onSelectionChange($event)"
