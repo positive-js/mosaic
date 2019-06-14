@@ -473,12 +473,7 @@ export class DemoComponent {
     imports: [
         BrowserAnimationsModule,
         BrowserModule,
-        FormsModule,
-        McFormFieldModule,
-        McDatepickerModule,
-        McMomentDateModule,
-        McInputModule,
-        McIconModule
+        McMomentDateModule
     ],
     bootstrap: [
         DemoComponent
