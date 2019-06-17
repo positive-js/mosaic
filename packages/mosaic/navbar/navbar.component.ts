@@ -1,25 +1,18 @@
-import { fromEvent, Observable, Subscription } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
-
 import {
     AfterViewInit,
-    Component, Directive,
+    Component,
+    Directive,
     ElementRef,
     HostBinding,
     Input,
     OnDestroy,
     OnInit,
-    ViewEncapsulation,
-    ContentChild,
-    TemplateRef,
-    ChangeDetectorRef,
-    ChangeDetectionStrategy,
-    ViewChild
+    ViewEncapsulation
 } from '@angular/core';
-import { FocusMonitor, FocusOrigin } from '@ptsecurity/cdk/a11y';
-import { SPACE } from '@ptsecurity/cdk/keycodes';
-import { Platform } from '@ptsecurity/cdk/platform';
+import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { CanDisable, CanDisableCtor, mixinDisabled } from '@ptsecurity/mosaic/core';
+import { fromEvent, Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 
 const COLLAPSED_CLASS: string = 'mc-navbar-collapsed-title';
@@ -32,11 +25,6 @@ const MC_NAVBAR_TITLE = 'mc-navbar-title';
 const MC_NAVBAR_LOGO = 'mc-navbar-logo';
 
 export type McNavbarContainerPositionType = 'left' | 'right';
-
-export interface IMcNavbarDropdownItem {
-    link?: string;
-    text: string;
-}
 
 @Directive({
     selector: MC_NAVBAR_LOGO,
@@ -63,91 +51,36 @@ export class McNavbarBrand {}
 export class McNavbarTitle {}
 
 export class McNavbarItemBase {
-    constructor(public _elementRef: ElementRef) {}
+    constructor(public elementRef: ElementRef) {}
 }
 
-export const _McNavbarMixinBase: CanDisableCtor & typeof McNavbarItemBase = mixinDisabled(McNavbarItemBase);
+// tslint:disable-next-line:naming-convention
+export const McNavbarMixinBase: CanDisableCtor & typeof McNavbarItemBase = mixinDisabled(McNavbarItemBase);
 
 @Component({
     selector: MC_NAVBAR_ITEM,
-    template: `
-        <a
-            [attr.tabindex]=\"disabled ? -1 : tabIndex\"
-            (click)="handleClickByItem()"
-            (keydown)="handleKeydown($event)"
-            class="mc-navbar-item"
-        >
-            <ng-content></ng-content>
-            <i *ngIf="hasDropdownContent" mc-icon="mc-angle-down-M_16"></i>
-        </a>
-        <ul
-            #dropdownContent
-            *ngIf="hasDropdownContent"
-            [ngClass]="{ 'is-collapsed': isCollapsed }"
-            class="mc-navbar-dropdown"
-        >
-            <li
-                *ngFor="let item of dropdownItems"
-                (click)="handleClickByDropdownItem()"
-                class="mc-navbar-dropdown-item"
-            >
-                <ng-container *ngIf="dropdownItemTmpl">
-                    <ng-container *ngTemplateOutlet="dropdownItemTmpl; context: { $implicit: item }"></ng-container>
-                </ng-container>
-                <a
-                    *ngIf="!dropdownItemTmpl"
-                    [attr.href]="item.link"
-                    [ngClass]="{ 'is-active': isActiveDropdownLink(item.link) }"
-                    class="mc-navbar-dropdown-link"
-                >{{ item.text }}</a>
-            </li>
-        </ul>
-    `,
+    template: `<ng-content></ng-content>`,
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
     inputs: ['disabled'],
     host: {
+        '[attr.tabIndex]': 'disabled ? -1 : tabIndex',
         '[attr.disabled]': 'disabled || null',
-        '[attr.tabindex]': '-1'
+        class: 'mc-navbar-item'
     }
 })
-export class McNavbarItem extends _McNavbarMixinBase implements OnInit, AfterViewInit, OnDestroy, CanDisable {
+export class McNavbarItem extends McNavbarMixinBase implements OnInit, OnDestroy, CanDisable {
 
     @Input()
     tabIndex: number = 0;
-
-    @Input()
-    dropdownItems: IMcNavbarDropdownItem[] = [];
 
     @Input()
     set collapsedTitle(value: string) {
         this.elementRef.nativeElement.setAttribute('computedTitle', encodeURI(value));
     }
 
-    @ContentChild('dropdownItemTmpl', { read: TemplateRef, static: false })
-    dropdownItemTmpl: TemplateRef<IMcNavbarDropdownItem>;
-
-    @ViewChild('dropdownContent', { read: ElementRef, static: false })
-    dropdownContent: ElementRef;
-
-    get hasDropdownContent() {
-        return this.dropdownItems.length > 0;
-    }
-
-    isCollapsed: boolean = true;
-
-    private _subscription: Subscription = new Subscription();
-    private _focusMonitor$: Observable<FocusOrigin>;
-
-    private get _dropdownElements(): HTMLElement[] {
-        return this.dropdownContent ? this.dropdownContent.nativeElement.querySelectorAll('li > *') : [];
-    }
-
     constructor(
         public  elementRef: ElementRef,
-        private _focusMonitor: FocusMonitor,
-        private _platform: Platform,
-        private _cdRef: ChangeDetectorRef
+        private _focusMonitor: FocusMonitor
     ) {
         super(elementRef);
     }
@@ -155,81 +88,11 @@ export class McNavbarItem extends _McNavbarMixinBase implements OnInit, AfterVie
     ngOnInit() {
         this.denyClickIfDisabled();
 
-        this._focusMonitor$ = this._focusMonitor.monitor(this.elementRef.nativeElement, true);
-
-        if (this.hasDropdownContent) {
-            this.listenClickOutside();
-        }
-    }
-
-    ngAfterViewInit() {
-        if (!this.hasDropdownContent) {
-            return;
-        }
-
-        this.startListenFocusDropdownItems();
+        this._focusMonitor.monitor(this.elementRef.nativeElement, true);
     }
 
     ngOnDestroy() {
-        this._subscription.unsubscribe();
         this._focusMonitor.stopMonitoring(this.elementRef.nativeElement);
-        this.stopListenFocusDropdownItems();
-    }
-
-    isActiveDropdownLink(link: string): boolean {
-        if (!this._platform.isBrowser) {
-            return false;
-        }
-
-        return window.location.href.indexOf(link) >= 0;
-    }
-
-    handleClickByItem() {
-        this.toggleDropdown();
-    }
-
-    handleKeydown($event: KeyboardEvent) {
-        const isNavbarItem = ($event.target as HTMLElement).classList.contains(MC_NAVBAR_ITEM);
-
-        // tslint:disable-next-line
-        if (this.hasDropdownContent && $event.keyCode === SPACE && isNavbarItem) {
-            this.toggleDropdown();
-        }
-    }
-
-    handleClickByDropdownItem() {
-        this.forceCloseDropdown();
-    }
-
-    private listenClickOutside() {
-        this._subscription.add(
-            this._focusMonitor$.subscribe((origin) => {
-                if (origin === null) {
-                    this.forceCloseDropdown();
-                }
-            })
-        );
-    }
-
-    private toggleDropdown() {
-        this.isCollapsed = !this.isCollapsed;
-    }
-
-    private forceCloseDropdown() {
-        this.isCollapsed = true;
-        this._cdRef.detectChanges();
-    }
-
-    private startListenFocusDropdownItems() {
-        this._dropdownElements.forEach((el) => {
-            this._focusMonitor.monitor(el, true);
-        });
-    }
-
-    private stopListenFocusDropdownItems() {
-        this._dropdownElements.forEach((el) => {
-            this._focusMonitor.stopMonitoring(el);
-        });
     }
 
     // This method is required due to angular 2 issue https://github.com/angular/angular/issues/11200
@@ -262,7 +125,7 @@ export class McNavbarContainer {
 }
 
 class CollapsibleItem {
-    private _collapsed: boolean = false;
+    private collapsed: boolean = false;
 
     constructor(
         public element: HTMLElement,
@@ -270,13 +133,13 @@ class CollapsibleItem {
     ) {}
 
     processCollapsed(collapsed: boolean) {
-        this._collapsed = collapsed;
+        this.collapsed = collapsed;
 
         this.updateCollapsedClass();
     }
 
     private updateCollapsedClass() {
-        if (this._collapsed) {
+        if (this.collapsed) {
             this.element.classList.add(COLLAPSED_CLASS);
         } else {
             this.element.classList.remove(COLLAPSED_CLASS);
@@ -291,8 +154,6 @@ class CachedItemWidth {
         return this.itemsForCollapse.length > 0;
     }
 
-    private _collapsedItemsWidth: number;
-
     get collapsedItemsWidth(): number {
         if (this._collapsedItemsWidth !== undefined) {
             return this._collapsedItemsWidth;
@@ -302,6 +163,8 @@ class CachedItemWidth {
 
         return this._collapsedItemsWidth;
     }
+
+    private _collapsedItemsWidth: number;
 
     constructor(
         public element: HTMLElement,
@@ -342,7 +205,6 @@ class CachedItemWidth {
 
 @Component({
     selector: MC_NAVBAR,
-    changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <nav class="mc-navbar">
             <ng-content select="[${MC_NAVBAR_CONTAINER}],${MC_NAVBAR_CONTAINER}"></ng-content>
@@ -362,8 +224,7 @@ export class McNavbar implements AfterViewInit, OnDestroy {
         MC_NAVBAR_TITLE
     ];
 
-    private _totalItemsWidths: number;
-    private _itemsWidths: CachedItemWidth[];
+    private totalItemsWidths: number;
 
     private get maxAllowedWidth(): number {
         return this._elementRef.nativeElement.querySelector('nav').getBoundingClientRect().width;
@@ -379,17 +240,19 @@ export class McNavbar implements AfterViewInit, OnDestroy {
         return this._itemsWidths;
     }
 
+    private _itemsWidths: CachedItemWidth[];
+
     private get totalItemsWidth(): number {
-        if (this._totalItemsWidths !== undefined && !this.forceRecalculateItemsWidth) {
-            return this._totalItemsWidths;
+        if (this.totalItemsWidths !== undefined && !this.forceRecalculateItemsWidth) {
+            return this.totalItemsWidths;
         }
 
         this.calculateAndCacheTotalItemsWidth();
 
-        return this._totalItemsWidths;
+        return this.totalItemsWidths;
     }
 
-    private _resizeSubscription: Subscription;
+    private resizeSubscription: Subscription;
 
     constructor(
         private _elementRef: ElementRef
@@ -397,7 +260,7 @@ export class McNavbar implements AfterViewInit, OnDestroy {
         const resizeObserver = fromEvent(window, 'resize')
             .pipe(debounceTime(this.resizeDebounceInterval));
 
-        this._resizeSubscription = resizeObserver.subscribe(this.updateCollapsed.bind(this));
+        this.resizeSubscription = resizeObserver.subscribe(this.updateCollapsed.bind(this));
     }
 
     updateCollapsed(): void {
@@ -422,11 +285,11 @@ export class McNavbar implements AfterViewInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this._resizeSubscription.unsubscribe();
+        this.resizeSubscription.unsubscribe();
     }
 
     private calculateAndCacheTotalItemsWidth() {
-        this._totalItemsWidths = this.itemsWidths
+        this.totalItemsWidths = this.itemsWidths
             .reduce((acc, item) => acc + item.width, 0);
     }
 
