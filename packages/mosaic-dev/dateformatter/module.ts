@@ -158,9 +158,7 @@ export class DemoComponent {
     enRangeShortDateTimeEndsNotCurrentYear: string;
 
     // tslint:disable-next-line:max-func-body-length
-    constructor(
-        @Inject(DateAdapter) public dateAdapter: DateAdapter<Moment>
-    ) {
+    constructor(private dateAdapter: DateAdapter<Moment>) {
         this.populateRuLongDate();
         this.populateEnLongDate();
 
@@ -471,7 +469,6 @@ export class DemoComponent {
         DemoComponent
     ],
     imports: [
-        BrowserAnimationsModule,
         BrowserModule,
         McMomentDateModule
     ],
