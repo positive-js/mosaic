@@ -153,7 +153,6 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     controlType = 'mc-select';
 
     hiddenItems: number = 0;
-    oneMoreText: string = '...ещё';
 
     /** The last measured value for the trigger's client bounding rect. */
     triggerRect: ClientRect;
@@ -219,6 +218,8 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     @ContentChild(McTreeSelectTrigger, {static: false}) customTrigger: McTreeSelectTrigger;
 
     @ContentChild(McTreeSelection, {static: false}) tree: McTreeSelection;
+
+    @Input() hiddenItemsText: string = '...ещё';
 
     /** Event emitted when the select panel has been toggled. */
     @Output() readonly openedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
