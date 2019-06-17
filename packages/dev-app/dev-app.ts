@@ -10,16 +10,6 @@ import { Component, ViewEncapsulation } from '@angular/core';
 })
 export class DevAppComponent {
     dark = false;
-    navItems = [
-        {
-            text: 'Form controls',
-            children: [
-                { text: 'Button', route: '/button' },
-                { text: 'Input', route: '/input' },
-                { text: 'Datepicker', route: '/datepicker' }
-            ]
-        }
-    ];
 }
 
 /** Home component which includes a welcome message for the dev-app. */
