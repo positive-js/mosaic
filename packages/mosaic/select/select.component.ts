@@ -120,6 +120,7 @@ export class McSelectBase {
 const McSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorStateCtor &
     typeof McSelectBase = mixinTabIndex(mixinDisabled(mixinErrorState(McSelectBase)));
 
+
 @Directive({
     selector: '[mcSelectSearch]',
     exportAs: 'mcSelectSearch',
@@ -176,6 +177,13 @@ export class McSelectSearch implements AfterContentInit, OnDestroy {
 }
 
 
+@Directive({
+    selector: '[mc-select-search-empty-result]',
+    exportAs: 'mcSelectSearchEmptyResult'
+})
+export class McSelectSearchEmptyResult {}
+
+
 @Directive({ selector: 'mc-select-trigger' })
 export class McSelectTrigger {}
 
@@ -217,9 +225,6 @@ export class McSelect extends McSelectMixinBase implements
     controlType = 'mc-select';
 
     hiddenItems: number = 0;
-    // todo localization
-    oneMoreText: string = '...ещё';
-    noOptionsText: string = 'Ничего не найдено';
 
     /** The last measured value for the trigger's client bounding rect. */
     triggerRect: ClientRect;
@@ -297,7 +302,9 @@ export class McSelect extends McSelectMixinBase implements
     /** All of the defined groups of options. */
     @ContentChildren(McOptgroup) optionGroups: QueryList<McOptgroup>;
 
-    @ContentChild(McSelectSearch, {static: false}) search: McSelectSearch;
+    @ContentChild(McSelectSearch, { static: false }) search: McSelectSearch;
+
+    @Input() hiddenItemsText: string = '...ещё';
 
     /** Classes to be passed to the select panel. Supports the same syntax as `ngClass`. */
     @Input() panelClass: string | string[] | Set<string> | { [key: string]: any };
@@ -457,13 +464,11 @@ export class McSelect extends McSelectMixinBase implements
         return this._panelOpen;
     }
 
-    get isEmptySearchResult(): boolean {
-        return this.search &&
-            this.options.length === 0 &&
-            !!this.search.input.value;
-    }
-
     private _panelOpen = false;
+
+    get isEmptySearchResult(): boolean {
+        return this.search && this.options.length === 0 && !!this.search.input.value;
+    }
 
     /** The scroll position of the overlay panel, calculated to center the selected option. */
     private scrollTop = 0;

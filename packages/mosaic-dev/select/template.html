@@ -35,9 +35,11 @@
         <mc-select [(value)]="singleSelectedWithSearch">
             <mc-form-field mcFormFieldWithoutBorders mcSelectSearch>
                 <i mcPrefix mc-icon="mc-search_16"></i>
-                <input mcInput [formControl]="searchCtrl" type="text" placeholder="Search" />
+                <input mcInput [formControl]="searchCtrl" type="text" placeholder="Search"/>
                 <mc-cleaner></mc-cleaner>
             </mc-form-field>
+
+            <div mc-select-search-empty-result>Ничего не найдено</div>
 
             <mc-option *ngFor="let option of filteredOptions | async" [value]="option">{{ option }}</mc-option>
         </mc-select>
@@ -58,6 +60,8 @@
                 <input mcInput [formControl]="multipleSearchCtrl" type="text" placeholder="Search" />
                 <mc-cleaner></mc-cleaner>
             </mc-form-field>
+
+            <div mc-select-search-empty-result>Ничего не найдено</div>
 
             <mc-option *ngFor="let option of filteredMultipleOptions | async" [value]="option">{{ option }}</mc-option>
         </mc-select>
