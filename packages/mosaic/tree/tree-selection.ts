@@ -22,11 +22,7 @@ import { END, ENTER, HOME, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, SPACE } 
 import { CdkTree, CdkTreeNodeOutlet } from '@ptsecurity/cdk/tree';
 import {
     CanDisable,
-    CanDisableCtor,
     HasTabIndex,
-    HasTabIndexCtor,
-    mixinDisabled,
-    mixinTabIndex,
     toBoolean
 } from '@ptsecurity/mosaic/core';
 import { Subject } from 'rxjs';
@@ -44,17 +40,6 @@ export class McTreeNavigationChange {
 export class McTreeSelectionChange {
     constructor(public source: McTreeSelection, public option: McTreeOption) {}
 }
-
-class McTreeSelectionBase<T> extends CdkTree<T> {
-    constructor(differs: IterableDiffers, changeDetectorRef: ChangeDetectorRef) {
-        super(differs, changeDetectorRef);
-    }
-}
-
-/* tslint:disable-next-line:naming-convention */
-const McTreeSelectionBaseMixin: HasTabIndexCtor & CanDisableCtor &
-    typeof McTreeSelectionBase = mixinTabIndex(mixinDisabled(McTreeSelectionBase));
-
 
 @Component({
     selector: 'mc-tree-selection',
@@ -76,7 +61,7 @@ const McTreeSelectionBaseMixin: HasTabIndexCtor & CanDisableCtor &
         { provide: CdkTree, useExisting: McTreeSelection }
     ]
 })
-export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
+export class McTreeSelection extends CdkTree<McTreeOption>
     implements AfterContentInit, CanDisable, HasTabIndex {
 
     @ViewChild(CdkTreeNodeOutlet, {static: true}) nodeOutlet: CdkTreeNodeOutlet;
