@@ -70,6 +70,7 @@ System.config({
         '@ptsecurity/mosaic/dropdown': 'dist/packages/mosaic/dropdown/index.js',
         '@ptsecurity/mosaic/list': 'dist/packages/mosaic/list/index.js',
         '@ptsecurity/mosaic/navbar': 'dist/packages/mosaic/navbar/index.js',
+        '@ptsecurity/mosaic/popover': 'dist/packages/mosaic/popover/index.js',
         '@ptsecurity/mosaic/progress-bar': 'dist/packages/mosaic/progress-bar/index.js',
         '@ptsecurity/mosaic/progress-spinner': 'dist/packages/mosaic/progress-spinner/index.js',
         '@ptsecurity/mosaic/icon': 'dist/packages/mosaic/icon/index.js',
