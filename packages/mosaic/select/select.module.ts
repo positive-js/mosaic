@@ -6,7 +6,7 @@ import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McTagsModule } from '@ptsecurity/mosaic/tags';
 
-import { McSelect, McSelectSearch, McSelectTrigger } from './select.component';
+import { McSelect, McSelectSearch, McSelectSearchEmptyResult, McSelectTrigger } from './select.component';
 
 
 @NgModule({
@@ -21,6 +21,7 @@ import { McSelect, McSelectSearch, McSelectTrigger } from './select.component';
         McFormFieldModule,
         McSelect,
         McSelectSearch,
+        McSelectSearchEmptyResult,
         McSelectTrigger,
         McOptionModule,
         CommonModule
@@ -28,6 +29,7 @@ import { McSelect, McSelectSearch, McSelectTrigger } from './select.component';
     declarations: [
         McSelect,
         McSelectSearch,
+        McSelectSearchEmptyResult,
         McSelectTrigger],
     providers: [MC_SELECT_SCROLL_STRATEGY_PROVIDER]
 })

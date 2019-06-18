@@ -16,7 +16,7 @@
                     </mc-tag>
                 </div>
                 <div class="mc-select__match-hidden-text" [style.display]="hiddenItems > 0 ? 'block' : 'none'">
-                    {{ oneMoreText }} {{ hiddenItems }}
+                    {{ hiddenItemsText }} {{ hiddenItems }}
                 </div>
             </div>
             <ng-content select="mc-select-trigger" *ngSwitchCase="true"></ng-content>
@@ -56,13 +56,14 @@
             <ng-content select="[mcSelectSearch]"></ng-content>
         </div>
 
-        <div
-            #optionsContainer
-            class="mc-select__content"
-            [@fadeInContent]="'showing'"
-            (@fadeInContent.done)="onFadeInDone()">
+        <div #optionsContainer
+             class="mc-select__content"
+             [@fadeInContent]="'showing'"
+             (@fadeInContent.done)="onFadeInDone()">
 
-            <div *ngIf="isEmptySearchResult" class="mc-select__no-options-message">{{noOptionsText}}</div>
+            <div *ngIf="isEmptySearchResult" class="mc-select__no-options-message">
+                <ng-content select="[mc-select-search-empty-result]"></ng-content>
+            </div>
             <ng-content select="mc-option,mc-optgroup"></ng-content>
         </div>
     </div>
