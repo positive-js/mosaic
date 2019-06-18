@@ -2,6 +2,8 @@ import { Component, NgModule, ViewChild, ViewEncapsulation } from '@angular/core
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { McDropdownModule } from '@ptsecurity/mosaic/dropdown';
 
 import { McIconModule } from '../../mosaic/icon';
 import { McNavbarModule, McNavbar } from '../../mosaic/navbar';
@@ -48,10 +50,12 @@ export class NavbarDemoComponent {
         NavbarDemoComponent
     ],
     imports: [
+        BrowserAnimationsModule,
         BrowserModule,
         McNavbarModule,
         McIconModule,
-        FormsModule
+        FormsModule,
+        McDropdownModule
     ],
     bootstrap: [
         NavbarDemoComponent

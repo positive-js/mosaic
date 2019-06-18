@@ -1,4 +1,21 @@
 <h3>Common example</h3>
+
+<mc-dropdown #appDropdown="mcDropdown">
+    <button mc-dropdown-item>
+        Point 1
+        <div class="mc-dropdown__item-caption">Some info</div>
+    </button>
+    <button mc-dropdown-item>
+        <i mc-icon="mc-search_16"></i>
+        Very Long Point
+    </button>
+    <h5>Additional info</h5>
+    <button mc-dropdown-item disabled>Disabled</button>
+    <button mc-dropdown-item>Point 2</button>
+    <a href="https://google.com" class="mc-link mc-link_underlined" mc-dropdown-item>Link</a>
+    <button mc-dropdown-item>Point 3</button>
+</mc-dropdown>
+
 <div>
     <mc-navbar>
         <mc-navbar-container position="left">
@@ -28,11 +45,10 @@
                 <mc-navbar-title>Right Icon</mc-navbar-title>
                 <i mc-icon="mc-search_16"></i>
             </mc-navbar-item>
-            <mc-navbar-item (click)="onItemClick($event)">
-                <div mc-dropdown>
-                    <span class="dropdown-text">mc-dropdown</span>
-                    <i mc-icon="mc-angle-M_16"></i>
-                </div>
+
+            <mc-navbar-item [mcDropdownTriggerFor]="appDropdown">
+                <span class="dropdown-text">mc-dropdown</span>
+                <i mc-icon="mc-angle-M_16"></i>
             </mc-navbar-item>
 
             <mc-navbar-item (click)="onItemClick($event)">
