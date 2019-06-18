@@ -67,29 +67,18 @@ const passiveEventListenerOptions = normalizePassiveListenerOptions({passive: tr
     host: {
         'aria-haspopup': 'true',
         '[attr.aria-expanded]': 'opened || null',
-        '(mousedown)': '_handleMousedown($event)',
-        '(keydown)': '_handleKeydown($event)',
-        '(click)': '_handleClick($event)'
+        '(mousedown)': 'handleMousedown($event)',
+        '(keydown)': 'handleKeydown($event)',
+        '(click)': 'handleClick($event)'
     },
     exportAs: 'mcDropdownTrigger'
 })
 export class McDropdownTrigger implements AfterContentInit, OnDestroy {
 
-
-    /**
-     * Handles touch start events on the trigger.
-     * Needs to be an arrow function so we can easily use addEventListener and removeEventListener.
-     */
-    private _handleTouchStart = () => this._openedBy = 'touch';
-
     /** The text direction of the containing app. */
     get dir(): Direction {
         return this._dir && this._dir.value === 'rtl' ? 'rtl' : 'ltr';
     }
-
-    // Tracking input type is necessary so it's possible to only auto-focus
-    // the first item of the list when the dropdown is opened via the keyboard
-    _openedBy: 'mouse' | 'touch' | null = null;
 
 
     /** References the dropdown instance that the trigger is associated with. */
@@ -107,7 +96,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
         this._closeSubscription.unsubscribe();
 
         if (dropdown) {
-            this._closeSubscription = dropdown.closed.asObservable().subscribe(reason => {
+            this._closeSubscription = dropdown.closed.asObservable().subscribe((reason) => {
                 this._destroy();
 
                 // If a click closed the dropdown, we should close the entire chain of nested dropdowns.
@@ -120,6 +109,16 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
 
     private _dropdown: McDropdownPanel;
 
+    private _opened: boolean = false;
+    /** Whether the dropdown is open. */
+    get opened(): boolean {
+        return this._opened;
+    }
+
+    // Tracking input type is necessary so it's possible to only auto-focus
+    // the first item of the list when the dropdown is opened via the keyboard
+    _openedBy: 'mouse' | 'touch' | null = null;
+
     /** Data to be passed along to any lazily-rendered content. */
     @Input('mcDropdownTriggerData') data: any;
 
@@ -130,9 +129,11 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
     @Output() readonly dropdownClosed: EventEmitter<void> = new EventEmitter<void>();
 
     private _portal: TemplatePortal;
+
     private _overlayRef: OverlayRef | null = null;
-    private _opened: boolean = false;
+
     private _closeSubscription = Subscription.EMPTY;
+
     private _hoverSubscription = Subscription.EMPTY;
 
     constructor(private _overlay: Overlay,
@@ -168,11 +169,6 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
 
         this._cleanUpSubscriptions();
         this._closeSubscription.unsubscribe();
-    }
-
-    /** Whether the dropdown is open. */
-    get opened(): boolean {
-        return this._opened;
     }
 
     /** Whether the dropdown triggers a nested dropdown or a top-level one. */
@@ -230,6 +226,52 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
             this._element.nativeElement.focus();
         }
     }
+
+    /** Handles mouse presses on the trigger. */
+    handleMousedown(event: MouseEvent): void {
+        // Since right or middle button clicks won't trigger the `click` event,
+        // we shouldn't consider the dropdown as opened by mouse in those cases.
+        this._openedBy = event.button === 0 ? 'mouse' : null;
+
+        // Since clicking on the trigger won't close the dropdown if it opens a nested dropdown,
+        // we should prevent focus from moving onto it via click to avoid the
+        // highlight from lingering on the dropdown item.
+        if (this.triggersNestedDropdown()) {
+            event.preventDefault();
+        }
+    }
+
+    /** Handles key presses on the trigger. */
+    handleKeydown(event: KeyboardEvent): void {
+        const keyCode = event.keyCode;
+
+        if (keyCode === SPACE || keyCode === ENTER) {
+            this.open();
+        }
+
+        if (this.triggersNestedDropdown() && (
+            (keyCode === RIGHT_ARROW && this.dir === 'ltr') ||
+            (keyCode === LEFT_ARROW && this.dir === 'rtl'))) {
+            this.open();
+        }
+    }
+
+    /** Handles click events on the trigger. */
+    handleClick(event: MouseEvent): void {
+        if (this.triggersNestedDropdown()) {
+            // Stop event propagation to avoid closing the parent dropdown.
+            event.stopPropagation();
+            this.open();
+        } else {
+            this.toggle();
+        }
+    }
+
+    /**
+     * Handles touch start events on the trigger.
+     * Needs to be an arrow function so we can easily use addEventListener and removeEventListener.
+     */
+    private _handleTouchStart = () => this._openedBy = 'touch';
 
     /** Closes the dropdown and does the necessary cleanup. */
     private _destroy() {
@@ -365,7 +407,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
      */
     private _subscribeToPositions(position: FlexibleConnectedPositionStrategy): void {
         if (this.dropdown.setPositionClasses) {
-            position.positionChanges.subscribe(change => {
+            position.positionChanges.subscribe((change) => {
                 const posX: DropdownPositionX = change.connectionPair.overlayX === 'start' ? 'after' : 'before';
                 const posY: DropdownPositionY = change.connectionPair.overlayY === 'top' ? 'below' : 'above';
 
@@ -448,46 +490,6 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
         ) : observableOf();
 
         return merge(backdrop, parentClose, hover, detachments);
-    }
-
-    /** Handles mouse presses on the trigger. */
-    private _handleMousedown(event: MouseEvent): void {
-        // Since right or middle button clicks won't trigger the `click` event,
-        // we shouldn't consider the dropdown as opened by mouse in those cases.
-        this._openedBy = event.button === 0 ? 'mouse' : null;
-
-        // Since clicking on the trigger won't close the dropdown if it opens a nested dropdown,
-        // we should prevent focus from moving onto it via click to avoid the
-        // highlight from lingering on the dropdown item.
-        if (this.triggersNestedDropdown()) {
-            event.preventDefault();
-        }
-    }
-
-    /** Handles key presses on the trigger. */
-    private _handleKeydown(event: KeyboardEvent): void {
-        const keyCode = event.keyCode;
-
-        if (keyCode === SPACE || keyCode === ENTER) {
-            this.open();
-        }
-
-        if (this.triggersNestedDropdown() && (
-            (keyCode === RIGHT_ARROW && this.dir === 'ltr') ||
-            (keyCode === LEFT_ARROW && this.dir === 'rtl'))) {
-            this.open();
-        }
-    }
-
-    /** Handles click events on the trigger. */
-    private _handleClick(event: MouseEvent): void {
-        if (this.triggersNestedDropdown()) {
-            // Stop event propagation to avoid closing the parent dropdown.
-            event.stopPropagation();
-            this.open();
-        } else {
-            this.toggle();
-        }
     }
 
     /** Handles the cases where the user hovers over the trigger. */
