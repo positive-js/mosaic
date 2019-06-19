@@ -3,6 +3,7 @@
 
 <button mc-button (click)="control.disable()">disable</button>
 <button mc-button (click)="control.setValue('rootNode_1')">setValue</button>
+<button mc-button (click)="control.reset()">reset</button>
 
 <br><br><br>
 
@@ -12,8 +13,7 @@
             [multiple]="true"
             placeholder="Food I want to eat right now"
             [formControl]="control"
-            (selectionChange)="onSelectionChange($event)"
-            [value]="singleSelected">
+            (selectionChange)="onSelectionChange($event)">
 
             <mc-tree-selection
                 [dataSource]="dataSource"

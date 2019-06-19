@@ -17,18 +17,18 @@ export type McPseudoCheckboxState = 'unchecked' | 'checked' | 'indeterminate';
  * @docs-private
  */
 @Component({
-    encapsulation: ViewEncapsulation.None,
-    preserveWhitespaces: false,
-    changeDetection: ChangeDetectionStrategy.OnPush,
     selector: 'mc-pseudo-checkbox',
-    styleUrls: ['pseudo-checkbox.css'],
     templateUrl: 'pseudo-checkbox.partial.html',
+    styleUrls: ['pseudo-checkbox.css'],
     host: {
         class: 'mc-pseudo-checkbox',
         '[class.mc-indeterminate]': 'state === "indeterminate"',
         '[class.mc-checked]': 'state === "checked"',
         '[class.mc-disabled]': 'disabled'
-    }
+    },
+    preserveWhitespaces: false,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class McPseudoCheckbox {
     @Input() state: McPseudoCheckboxState = 'unchecked';

@@ -89,7 +89,7 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
 
     keyManager: ActiveDescendantKeyManager<McTreeOption>;
 
-    selectionModel: SelectionModel<McTreeOption>;
+    selectionModel: SelectionModel<any>;
 
     tabIndex: number;
     multiple: boolean;
@@ -153,7 +153,7 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
         this.autoSelect = autoSelect === null ? true : toBoolean(autoSelect);
         this.noUnselect = noUnselect === null ? true : toBoolean(noUnselect);
 
-        this.selectionModel = new SelectionModel<McTreeOption>(this.multiple);
+        this.selectionModel = new SelectionModel<any>(this.multiple);
     }
 
     ngAfterContentInit(): void {
@@ -165,7 +165,6 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
             .pipe(takeUntil(this.destroy))
             .subscribe((changeEvent) => {
                 this.onChange(changeEvent.source.selected);
-                console.log('this.selectionModel.changed');
                 // event.added.forEach((option) => option.select());
                 // event.removed.forEach((option) => option.deselect());
             });
@@ -314,6 +313,8 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
                     const nodeData: any = view.nodes[node.nodeIndex];
 
                     arrayOfInstances.push(nodeData.instance as never);
+
+                    setTimeout(() => nodeData.instance.changeDetectorRef.detectChanges());
                 }
             });
         });
@@ -324,6 +325,8 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
         }
 
         this.updateScrollSize();
+
+        this.nodeOutlet.changeDetectorRef.detectChanges();
     }
 
     getHeight(): number {

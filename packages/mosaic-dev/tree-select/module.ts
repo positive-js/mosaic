@@ -125,7 +125,10 @@ export class FileDatabase {
     providers: [FileDatabase]
 })
 export class DemoComponent {
-    control = new FormControl('rootNode_1');
+    control = new FormControl(['rootNode_1']);
+
+    // modelValue = 'Applications';
+    modelValue: any[] = ['Applications', 'Documents', 'Calendar', 'Chrome'];
 
     select: any;
 

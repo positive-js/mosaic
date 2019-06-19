@@ -7,7 +7,7 @@ import {
     ElementRef,
     Inject,
     Optional,
-    InjectionToken
+    InjectionToken, ChangeDetectionStrategy, ViewEncapsulation, OnInit
 } from '@angular/core';
 import { SelectionModel } from '@ptsecurity/cdk/collections';
 import { CdkTreeNode } from '@ptsecurity/cdk/tree';
@@ -17,7 +17,7 @@ import { CanDisable, toBoolean } from '@ptsecurity/mosaic/core';
 /* tslint:disable-next-line:naming-convention */
 export interface McTreeOptionParentComponent {
     multiple: boolean;
-    selectionModel: SelectionModel<McTreeOption>;
+    selectionModel: SelectionModel<any>;
     setFocusedOption: any;
 }
 
@@ -36,6 +36,7 @@ let uniqueIdCounter: number = 0;
 @Component({
     selector: 'mc-tree-option',
     exportAs: 'mcTreeOption',
+    templateUrl: './tree-option.html',
     host: {
         '[attr.id]': 'id',
         '[attr.tabindex]': 'getTabIndex()',
@@ -48,7 +49,8 @@ let uniqueIdCounter: number = 0;
 
         '(click)': 'selectViaInteraction()'
     },
-    templateUrl: './tree-option.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
     providers: [{ provide: CdkTreeNode, useExisting: McTreeOption }]
 })
 export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisable {
@@ -94,7 +96,6 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
 
         if (isSelected !== this._selected) {
             this.setSelected(isSelected);
-
             // this.treeSelection._reportValueChange();
         }
     }
