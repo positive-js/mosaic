@@ -47,7 +47,7 @@
             </mc-navbar-item>
 
             <mc-navbar-item [mcDropdownTriggerFor]="appDropdown">
-                <span class="dropdown-text">mc-dropdown</span>
+                <mc-navbar-title>mc-dropdown</mc-navbar-title>
                 <i mc-icon="mc-angle-down-L_16"></i>
             </mc-navbar-item>
 
@@ -62,10 +62,8 @@
                 <i mc-icon="mc-search_16"></i>
             </mc-navbar-item>
             <mc-navbar-item class="cdk-focused" (click)="onItemClick($event)">
-                <div mc-dropdown>
-                    <span class="dropdown-text">focused</span>
-                    <i mc-icon="mc-angle-down-M_16"></i>
-                </div>
+                <mc-navbar-title>focused</mc-navbar-title>
+                <i mc-icon="mc-angle-down-M_16"></i>
             </mc-navbar-item>
 
             <mc-navbar-item (click)="onItemClick($event)">
