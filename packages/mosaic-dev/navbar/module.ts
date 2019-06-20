@@ -2,10 +2,11 @@ import { Component, NgModule, ViewChild, ViewEncapsulation } from '@angular/core
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { McDropdownModule } from '@ptsecurity/mosaic/dropdown';
 
-import { McButtonModule } from '../../mosaic/button';
 import { McIconModule } from '../../mosaic/icon';
-import { McNavbarModule, McNavbar, IMcNavbarDropdownItem } from '../../mosaic/navbar/';
+import { McNavbarModule, McNavbar } from '../../mosaic/navbar';
 
 
 @Component({
@@ -21,25 +22,6 @@ export class NavbarDemoComponent {
 
     readonly minNavbarWidth: number = 940;
 
-    dropdownItems: IMcNavbarDropdownItem[] = [
-        { link: '#1', text: 'Очень длинный список для проверки ширины' },
-        { link: '#2', text: 'Общие сведения' },
-        { link: '#3', text: 'Еще один пункт' }
-    ];
-
-    buttonDropdownItems: IMcNavbarDropdownItem[] = [
-        { text: 'Пример кастомного компонента 1' },
-        { text: 'Пример кастомного компонента 2' },
-        { text: 'Пример кастомного компонента 3' }
-    ];
-
-    rightDropdownItems: IMcNavbarDropdownItem[] = [
-        { link: '#4', text: 'Пункт в правой части navbar 1' },
-        { link: '#5', text: 'Пункт в правой части navbar 2' }
-    ];
-
-    private _collapsedNavbarWidth: number = 1280;
-
     get collapsedNavbarWidth(): number {
         return this._collapsedNavbarWidth;
     }
@@ -50,6 +32,8 @@ export class NavbarDemoComponent {
         }
         this._collapsedNavbarWidth = value;
     }
+
+    private _collapsedNavbarWidth: number = 1280;
 
     collapsedNavbarWidthChange() {
         this.navbar.updateCollapsed();
@@ -66,11 +50,12 @@ export class NavbarDemoComponent {
         NavbarDemoComponent
     ],
     imports: [
+        BrowserAnimationsModule,
         BrowserModule,
         McNavbarModule,
-        McButtonModule,
         McIconModule,
-        FormsModule
+        FormsModule,
+        McDropdownModule
     ],
     bootstrap: [
         NavbarDemoComponent
@@ -80,5 +65,5 @@ export class NavbarDemoModule {}
 
 platformBrowserDynamic()
     .bootstrapModule(NavbarDemoModule)
+    // tslint:disable-next-line:no-console
     .catch((error) => console.error(error));
-

@@ -1,4 +1,21 @@
 <h3>Common example</h3>
+
+<mc-dropdown #appDropdown="mcDropdown">
+    <button mc-dropdown-item>
+        Point 1
+        <div class="mc-dropdown__item-caption">Some info</div>
+    </button>
+    <button mc-dropdown-item>
+        <i mc-icon="mc-search_16"></i>
+        Very Long Point
+    </button>
+    <h5>Additional info</h5>
+    <button mc-dropdown-item disabled>Disabled</button>
+    <button mc-dropdown-item>Point 2</button>
+    <a href="https://google.com" class="mc-link mc-link_underlined" mc-dropdown-item>Link</a>
+    <button mc-dropdown-item>Point 3</button>
+</mc-dropdown>
+
 <div>
     <mc-navbar>
         <mc-navbar-container position="left">
@@ -28,6 +45,12 @@
                 <mc-navbar-title>Right Icon</mc-navbar-title>
                 <i mc-icon="mc-search_16"></i>
             </mc-navbar-item>
+
+            <mc-navbar-item [mcDropdownTriggerFor]="appDropdown">
+                <mc-navbar-title>mc-dropdown</mc-navbar-title>
+                <i mc-icon="mc-angle-down-L_16"></i>
+            </mc-navbar-item>
+
             <mc-navbar-item (click)="onItemClick($event)">
                 <i mc-icon="mc-gear_16"></i>
             </mc-navbar-item>
@@ -39,10 +62,8 @@
                 <i mc-icon="mc-search_16"></i>
             </mc-navbar-item>
             <mc-navbar-item class="cdk-focused" (click)="onItemClick($event)">
-                <div mc-dropdown>
-                    <span class="dropdown-text">focused</span>
-                    <i mc-icon="mc-angle-down-M_16"></i>
-                </div>
+                <mc-navbar-title>focused</mc-navbar-title>
+                <i mc-icon="mc-angle-down-M_16"></i>
             </mc-navbar-item>
 
             <mc-navbar-item (click)="onItemClick($event)">
@@ -52,40 +73,13 @@
     </mc-navbar>
 </div>
 
-<h3>Dropdowns exmaple</h3>
-<div>
-    <mc-navbar>
-        <mc-navbar-container position="left">
-            <mc-navbar-item [dropdownItems]="dropdownItems">
-                <mc-navbar-title>Dropdown items</mc-navbar-title>
-            </mc-navbar-item>
-            <mc-navbar-item [dropdownItems]="buttonDropdownItems">
-                <mc-navbar-title>Custom dropdown items</mc-navbar-title>
-                <ng-template #dropdownItemTmpl let-item>
-                    <button mc-button>
-                        {{ item.text }}
-                        <i mc-icon="mc-check_16"></i>
-                    </button>
-                </ng-template>
-            </mc-navbar-item>
-        </mc-navbar-container>
-
-        <mc-navbar-container position="right">
-            <mc-navbar-item [dropdownItems]="rightDropdownItems">
-                <mc-navbar-title>Right dropdown items</mc-navbar-title>
-            </mc-navbar-item>
-        </mc-navbar-container>
-    </mc-navbar>
-</div>
-
-
 <h3>Collapse example</h3>
 <div style="margin-bottom: 20px;">
     <label>Navbar width (min = 940; please use arrow up and arrow down in Chrome for comfortable testing):</label>
     <br>
     <input [(ngModel)]="collapsedNavbarWidth" type="number" [min]="minNavbarWidth" (ngModelChange)="collapsedNavbarWidthChange()" />
 </div>
-<div [style.width.px]="collapsedNavbarWidth">
+<div [style.width.px]="collapsedNavbarWidth" style="width: 1280px;">
     <mc-navbar class="small-navbar" #navbar>
         <mc-navbar-container position="left">
             <mc-navbar-item>
@@ -138,7 +132,7 @@
 
         <mc-navbar-container position="right">
             <mc-navbar-item>
-                <i mc-icon="mc-triangle_16"></i>
+                <i mc-icon="mc-info_16"></i>
                 <mc-navbar-title>Left icon</mc-navbar-title>
             </mc-navbar-item>
             <mc-navbar-item>

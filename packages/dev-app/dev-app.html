@@ -1,3 +1,21 @@
+<mc-dropdown #appDropdown="mcDropdown">
+    <button
+        mc-dropdown-item
+        routerLink="/button">
+        Button
+    </button>
+    <button
+        mc-dropdown-item
+        routerLink="/input">
+        Input
+    </button>
+    <button
+        mc-dropdown-item
+        routerLink="/datepicker">
+        Datepicker
+    </button>
+</mc-dropdown>
+
 <div [class.dark-theme]="dark">
     <div class="mc-app-background">
         <mc-navbar>
@@ -15,28 +33,10 @@
                     </mc-navbar-logo>
                     <mc-navbar-title>PT Mosaic</mc-navbar-title>
                 </mc-navbar-brand>
-
-                <mc-navbar-item
-                    *ngFor="let navItem of navItems"
-                    [dropdownItems]="navItem.children"
-                    routerLinkActive="mc-navbar-item-active"
-                    [routerLinkActiveOptions]="{exact: true}">
-                    <mc-navbar-title>
-                        {{navItem.text}}
-                    </mc-navbar-title>
-                    <ng-template #dropdownItemTmpl let-item>
-                        <a
-                            class="mc-navbar-dropdown-link"
-                            routerLinkActive="is-active"
-                            [routerLinkActiveOptions]="{exact: true}"
-                            [routerLink]="[item.route]">
-                            {{ item.text }}
-                        </a>
-                    </ng-template>
+                <mc-navbar-item [mcDropdownTriggerFor]="appDropdown">
+                    Form controls
+                    <i mc-icon="mc-angle-down-L_16"></i>
                 </mc-navbar-item>
-
-
-
             </mc-navbar-container>
 
             <mc-navbar-container position="right">

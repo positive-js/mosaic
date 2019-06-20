@@ -2,11 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { fakeAsync, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { SPACE } from '@ptsecurity/cdk/keycodes';
-import { createKeyboardEvent, createFakeEvent } from '@ptsecurity/cdk/testing';
-
+import { McNavbarModule, McNavbar } from './index';
 import { McIconModule } from './../icon/icon.module';
-import { McNavbarModule, McNavbar, IMcNavbarDropdownItem } from './index';
 
 
 const FONT_RENDER_TIMEOUT_MS = 10;
@@ -108,81 +105,6 @@ describe('McNavbar', () => {
 
         expect(testComponent.counter).toBe(0);
     });
-
-    it('dropdown item by default should render list links', () => {
-        const fixture = TestBed.createComponent(TestApp);
-
-        fixture.detectChanges();
-
-        const dropdowns = fixture.debugElement.queryAll(By.css('[ng-reflect-dropdown-items]'));
-
-        dropdowns.forEach((dropdown) => {
-            const links = dropdown.queryAll(By.css('.mc-navbar-dropdown-link'));
-            expect(links.length).toBeGreaterThan(0);
-        });
-    });
-
-    it('dropdown content should open by click on navbar-item', () => {
-        const fixture = TestBed.createComponent(TestApp);
-
-        fixture.detectChanges();
-
-        const dropdown = fixture.debugElement.query(By.css('[ng-reflect-dropdown-items]'));
-        const dropdownToggler = dropdown.query(By.css('.mc-navbar-item'));
-        const dropdownContent = dropdown.query(By.css('.mc-navbar-dropdown')).nativeElement as HTMLElement;
-
-        dropdownToggler.nativeElement.click();
-
-        fixture.detectChanges();
-
-        const isOpened = !dropdownContent.classList.contains('is-collapsed');
-
-        expect(isOpened).toBeTruthy();
-    });
-
-    it('dropdown content should open by keydown SPACE on navbar-item', () => {
-        const fixture = TestBed.createComponent(TestApp);
-
-        fixture.detectChanges();
-
-        const dropdown = fixture.debugElement.query(By.css('[ng-reflect-dropdown-items]'));
-        const dropdownToggler = dropdown.query(By.css('.mc-navbar-item')).nativeElement as HTMLElement;
-        const dropdownContent = dropdown.query(By.css('.mc-navbar-dropdown')).nativeElement as HTMLElement;
-
-        const keydownEvent = createKeyboardEvent('keydown', SPACE, dropdownToggler);
-
-        dropdownToggler.dispatchEvent(keydownEvent);
-
-        fixture.detectChanges();
-
-        const isOpened = !dropdownContent.classList.contains('is-collapsed');
-
-        expect(isOpened).toBeTruthy();
-    });
-
-    it('dropdown content should close by blur event from <mc-navbar-item>', () => {
-        const fixture = TestBed.createComponent(TestApp);
-
-        fixture.detectChanges();
-
-        const dropdown = fixture.debugElement.query(By.css('[ng-reflect-dropdown-items]'));
-        const dropdownToggler = dropdown.query(By.css('.mc-navbar-item'));
-        const dropdownContent = dropdown.query(By.css('.mc-navbar-dropdown')).nativeElement as HTMLElement;
-
-        const keydownEvent = createFakeEvent('blur');
-
-        dropdownToggler.nativeElement.click();
-
-        fixture.detectChanges();
-
-        dropdown.nativeElement.dispatchEvent(keydownEvent);
-
-        fixture.detectChanges();
-
-        const isClosed = dropdownContent.classList.contains('is-collapsed');
-
-        expect(isClosed).toBeTruthy();
-    });
 });
 
 @Component({
@@ -195,12 +117,6 @@ class TestApp {
 
     counter: number = 0;
     navbarContainerWidth: number = 915;
-
-    dropdownItems: IMcNavbarDropdownItem[] = [
-        { link: '#', text: 'Очень длинный список для проверки ширины' },
-        { link: '#', text: 'Общие сведения' },
-        { link: '#', text: 'Еще один пункт' }
-    ];
 
     onItemClick() {
         this.counter++;

@@ -10,7 +10,7 @@ import {
     McNavbarModule,
     McInputModule,
     McFormFieldModule,
-    McDatepickerModule
+    McDatepickerModule, McDropdownModule
 } from '@ptsecurity/mosaic';
 import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter';
 
@@ -23,6 +23,7 @@ import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter';
         McNavbarModule,
         McMomentDateModule,
         McDatepickerModule,
+        McDropdownModule,
 
         McFormFieldModule,
 
