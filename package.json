@@ -178,6 +178,7 @@
         "server-dev:progress-spinner": "npm run server-dev -- --env.component progress-spinner",
         "server-dev:radio": "npm run server-dev -- --env.component radio",
         "server-dev:select": "npm run server-dev -- --env.component select",
+        "server-dev:sidebar": "npm run server-dev -- --env.component sidebar",
         "server-dev:sidepanel": "npm run server-dev -- --env.component sidepanel",
         "server-dev:splitter": "npm run server-dev -- --env.component splitter",
         "server-dev:tabs": "npm run server-dev -- --env.component tabs",
