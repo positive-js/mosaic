@@ -1,6 +1,48 @@
-<div>
-    <button mc-button>
-        <i mc-icon="mc-angle-down-L_16"></i>
-    </button>&nbsp;
+<br>
 
+<div class="layout-row layout-align-space-between">
+    <div>
+        <button mc-button (click)="toggleLeftSidebar()">toggle by state</button>&nbsp;
+        <button mc-button (click)="leftSidebar.toggle()">toggle by method</button>&nbsp;
+        <button mc-button (click)="setParamsInLeftSidebar()">set params</button>
+    </div>
+
+    <div>
+        <button mc-button (click)="toggleRightSidebar()">toggle by state</button>&nbsp;
+        <button mc-button (click)="rightSidebar.toggle()">toggle by method</button>&nbsp;
+        <button mc-button (click)="setParamsInRightSidebar()">set params</button>
+    </div>
 </div>
+
+<br>
+<br>
+<br>
+
+<div class="container layout-row layout-align-space-between">
+    <mc-sidebar
+        #leftSidebar="mcSidebar"
+        [position]="'left'"
+        [opened]="leftSidebarSidebarState"
+        [params]="leftSidebarParams"
+        (stateChanged)="onStateChanged($event)">
+        <div mc-sidebar-opened class="mc-sidebar-opened">mc-sidebar-opened</div>
+        <div mc-sidebar-closed class="mc-sidebar-closed">mc-sidebar-closed</div>
+    </mc-sidebar>
+
+    <mc-sidebar
+        #rightSidebar="mcSidebar"
+        [position]="'right'"
+        [opened]="rightSidebarSidebarState"
+        [params]="rightSidebarParams"
+        (stateChanged)="onStateChanged($event)">
+        <div mc-sidebar-opened class="mc-sidebar-opened">mc-sidebar-opened</div>
+        <div mc-sidebar-closed class="mc-sidebar-closed">mc-sidebar-closed</div>
+    </mc-sidebar>
+</div>
+
+
+<br>
+<br>
+<br>
+
+<div>{{ leftSidebar.params | json }}</div>
