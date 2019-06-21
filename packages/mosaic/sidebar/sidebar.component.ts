@@ -1,6 +1,5 @@
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ContentChild,
     Directive,
@@ -12,7 +11,8 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { isControl, isInput, isLeftBracket, isRightBracket } from '@ptsecurity/cdk/keycodes';
-import { mcSidebarAnimations, McSidebarAnimationState } from '@ptsecurity/mosaic/sidebar/sidebar-animations';
+
+import { mcSidebarAnimations, McSidebarAnimationState } from './sidebar-animations';
 
 
 export enum SidebarPositions {
