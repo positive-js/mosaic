@@ -75,7 +75,9 @@ export class McSidebar implements OnDestroy, OnInit {
 
     internalState: boolean = true;
 
-    constructor(private changeDetectorRef: ChangeDetectorRef, private ngZone: NgZone) {}
+    private documentKeydownListener: (event: KeyboardEvent) => void;
+
+    constructor(private ngZone: NgZone) {}
 
     ngOnInit(): void {
         if (this.position === SidebarPositions.Left || this.position === SidebarPositions.Right) {
@@ -106,6 +108,17 @@ export class McSidebar implements OnDestroy, OnInit {
     }
 
     private registerKeydownListener(): void {
+        this.documentKeydownListener = (event) => {
+            if (isControl(event) || isInput(event)) { return; }
+
+            if (
+                (this.position === SidebarPositions.Left && isLeftBracket(event)) ||
+                (this.position === SidebarPositions.Right && isRightBracket(event))
+            ) {
+                this.ngZone.run(() => this.opened = !this.opened);
+            }
+        };
+
         this.ngZone.runOutsideAngular(() => {
             // tslint:disable-next-line: no-unbound-method
             document.addEventListener('keypress', this.documentKeydownListener, true);
@@ -115,19 +128,5 @@ export class McSidebar implements OnDestroy, OnInit {
     private unRegisterKeydownListener(): void {
         // tslint:disable-next-line: no-unbound-method
         document.removeEventListener('keypress', this.documentKeydownListener, true);
-    }
-
-    private documentKeydownListener(event) {
-        if (isControl(event) || isInput(event)) { return; }
-
-        if (
-            (this.position === SidebarPositions.Left && isLeftBracket(event)) ||
-            (this.position === SidebarPositions.Right && isRightBracket(event))
-        ) {
-            console.log('documentKeydownListener');
-            this.opened = !this.opened;
-
-            this.changeDetectorRef.detectChanges();
-        }
     }
 }
