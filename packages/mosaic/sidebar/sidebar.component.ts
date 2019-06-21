@@ -25,17 +25,13 @@ export enum SidebarPositions {
     selector: '[mc-sidebar-opened]',
     exportAs: 'mcSidebarOpened'
 })
-export class McSidebarOpened {
-    @Input() width: number;
-}
+export class McSidebarOpened {}
 
 @Directive({
     selector: '[mc-sidebar-closed]',
     exportAs: 'mcSidebarClosed'
 })
-export class McSidebarClosed {
-    @Input() width: number;
-}
+export class McSidebarClosed {}
 
 
 @Component({
