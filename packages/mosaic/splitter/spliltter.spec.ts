@@ -50,9 +50,9 @@ function checkDirection<T>(fixture: ComponentFixture<T>,
     selector: 'mc-demo-spllitter',
     template: `
         <mc-splitter>
-            <mc-splitter-area>first</mc-splitter-area>
-            <mc-splitter-area>second</mc-splitter-area>
-            <mc-splitter-area>third</mc-splitter-area>
+            <div mc-splitter-area>first</div>
+            <div mc-splitter-area>second</div>
+            <div mc-splitter-area>third</div>
         </mc-splitter>
     `
 })
@@ -62,9 +62,9 @@ class McSplitterDefaultDirection {}
     selector: 'mc-demo-spllitter',
     template: `
         <mc-splitter [direction]="direction">
-            <mc-splitter-area>first</mc-splitter-area>
-            <mc-splitter-area>second</mc-splitter-area>
-            <mc-splitter-area>third</mc-splitter-area>
+            <div mc-splitter-area>first</div>
+            <div mc-splitter-area>second</div>
+            <div mc-splitter-area>third</div>
         </mc-splitter>
     `
 })

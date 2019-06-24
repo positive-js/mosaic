@@ -55,7 +55,7 @@ const defaultParams = { openedStateWidth: '100%', closedStateWidth: '32px' };
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class McSidebar implements OnDestroy, OnInit, AfterContentInit {
+export class McSidebar implements OnDestroy, OnInit {
     @Input()
     get opened(): boolean {
         return this._opened;
@@ -146,10 +146,6 @@ export class McSidebar implements OnDestroy, OnInit, AfterContentInit {
     private unRegisterKeydownListener(): void {
         // tslint:disable-next-line: no-unbound-method
         document.removeEventListener('keypress', this.documentKeydownListener, true);
-    }
-
-    ngAfterContentInit(): void {
-        console.log('ngAfterContentInit this.params.openedStateWidth');
     }
 
     private saveWidth() {

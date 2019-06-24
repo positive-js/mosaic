@@ -121,7 +121,6 @@ describe('Sidebar', () => {
                 #sidebarRef="mcSidebar"
                 [position]="position"
                 [opened]="state"
-                [params]="params"
                 (stateChanged)="onStateChanged($event)">
                 <div mc-sidebar-opened>mc-sidebar-opened</div>
                 <div mc-sidebar-closed>mc-sidebar-closed</div>
@@ -131,8 +130,6 @@ describe('Sidebar', () => {
 })
 class SimpleSidebar {
     showContainer: boolean = true;
-
-    params: any;
 
     position: SidebarPositions = SidebarPositions.Left;
 
