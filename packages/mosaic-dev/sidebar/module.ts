@@ -5,6 +5,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McSidebarModule } from '@ptsecurity/mosaic/sidebar';
+import { McSplitterModule } from '@ptsecurity/mosaic/splitter';
 
 import { McButtonModule } from '../../mosaic/button';
 
@@ -51,9 +52,9 @@ export class DemoComponent {
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
+        McSplitterModule,
         McButtonModule,
-        McSidebarModule,
-        McIconModule
+        McSidebarModule
     ],
     bootstrap: [
         DemoComponent
