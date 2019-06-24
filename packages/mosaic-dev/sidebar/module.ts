@@ -17,22 +17,16 @@ import { McButtonModule } from '../../mosaic/button';
     encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent {
-    leftSidebarParams: any;
-    rightSidebarParams: any;
+    leftSidebarParams = { openedStateWidth: '500px', closedStateWidth: '50px' };
 
     leftSidebarSidebarState: boolean = false;
+    leftSplitterState: boolean = false;
+
     rightSidebarSidebarState: boolean = false;
+    rightSplitterState: boolean = false;
 
     onStateChanged($event): void {
         console.log('onStateChanged: ', $event);
-    }
-
-    setParamsInLeftSidebar() {
-        this.leftSidebarParams = { openedStateWidth: '500px', closedStateWidth: '50px' };
-    }
-
-    setParamsInRightSidebar() {
-        this.rightSidebarParams = { openedStateWidth: '500px', closedStateWidth: '50px' };
     }
 
     toggleLeftSidebar() {

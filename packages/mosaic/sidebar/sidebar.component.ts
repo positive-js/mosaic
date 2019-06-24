@@ -1,8 +1,9 @@
 import {
+    AfterContentInit,
     ChangeDetectionStrategy,
     Component,
     ContentChild,
-    Directive,
+    Directive, ElementRef,
     EventEmitter,
     Input,
     NgZone,
@@ -33,6 +34,8 @@ export class McSidebarOpened {}
 })
 export class McSidebarClosed {}
 
+const defaultParams = { openedStateWidth: '100%', closedStateWidth: '32px' };
+
 
 @Component({
     selector: 'mc-sidebar',
@@ -52,12 +55,24 @@ export class McSidebarClosed {}
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class McSidebar implements OnDestroy, OnInit {
-    @Input() opened: boolean = true;
+export class McSidebar implements OnDestroy, OnInit, AfterContentInit {
+    @Input()
+    get opened(): boolean {
+        return this._opened;
+    }
+
+    set opened(value: boolean) {
+        if (this.needSaveAndRestoreWidth && this._opened) {
+            this.saveWidth();
+        }
+
+        this._opened = value;
+    }
+    private _opened: boolean = true;
 
     @Input() position: SidebarPositions;
 
-    @Input() params: { openedStateWidth: string; closedStateWidth: string };
+    @Input() params: { openedStateWidth: string; closedStateWidth: string } = defaultParams;
 
     @Output() readonly stateChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -65,19 +80,26 @@ export class McSidebar implements OnDestroy, OnInit {
 
     @ContentChild(McSidebarClosed, { static: false }) closedContent: McSidebarClosed;
 
+
     get animationState(): McSidebarAnimationState {
-        return this.opened ? McSidebarAnimationState.Opened : McSidebarAnimationState.Closed;
+        return this._opened ? McSidebarAnimationState.Opened : McSidebarAnimationState.Closed;
     }
 
     internalState: boolean = true;
 
+    private needSaveAndRestoreWidth: boolean = false;
+
     private documentKeydownListener: (event: KeyboardEvent) => void;
 
-    constructor(private ngZone: NgZone) {}
+    constructor(private ngZone: NgZone, private elementRef: ElementRef) {}
 
     ngOnInit(): void {
         if (this.position === SidebarPositions.Left || this.position === SidebarPositions.Right) {
             this.registerKeydownListener();
+        }
+
+        if (this.params.openedStateWidth === defaultParams.openedStateWidth) {
+            this.needSaveAndRestoreWidth = true;
         }
     }
 
@@ -88,19 +110,19 @@ export class McSidebar implements OnDestroy, OnInit {
     }
 
     toggle(): void {
-        this.opened = !this.opened;
+        this._opened = !this._opened;
     }
 
     onAnimationStart() {
-        if (this.opened) {
-            this.internalState = this.opened;
+        if (this._opened) {
+            this.internalState = this._opened;
         }
     }
 
     onAnimationDone() {
-        this.internalState = this.opened;
+        this.internalState = this._opened;
 
-        this.stateChanged.emit(this.opened);
+        this.stateChanged.emit(this._opened);
     }
 
     private registerKeydownListener(): void {
@@ -111,7 +133,7 @@ export class McSidebar implements OnDestroy, OnInit {
                 (this.position === SidebarPositions.Left && isLeftBracket(event)) ||
                 (this.position === SidebarPositions.Right && isRightBracket(event))
             ) {
-                this.ngZone.run(() => this.opened = !this.opened);
+                this.ngZone.run(() => this._opened = !this._opened);
             }
         };
 
@@ -124,5 +146,13 @@ export class McSidebar implements OnDestroy, OnInit {
     private unRegisterKeydownListener(): void {
         // tslint:disable-next-line: no-unbound-method
         document.removeEventListener('keypress', this.documentKeydownListener, true);
+    }
+
+    ngAfterContentInit(): void {
+        console.log('ngAfterContentInit this.params.openedStateWidth');
+    }
+
+    private saveWidth() {
+        this.params.openedStateWidth = `${this.elementRef.nativeElement.offsetWidth}px`;
     }
 }

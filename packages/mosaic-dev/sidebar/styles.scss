@@ -13,7 +13,13 @@ app {
     flex-direction: row;
     justify-content: flex-start;
 
-    height: 500px;
+    height: 200px;
+}
+
+.container__body {
+    flex: 1 1 30%;
+
+    background-color: antiquewhite;
 }
 
 .mc-sidebar {

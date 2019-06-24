@@ -11,10 +11,10 @@ export const mcSidebarAnimations: {
 } = {
     sidebarState: trigger('state', [
         state('opened', style({ width: '{{ openedStateWidth }}' }),
-            { params: { openedStateWidth: '100%' }}
+            { params: { openedStateWidth: '' }}
         ),
         state('closed', style({ width: '{{ closedStateWidth }}' }),
-            { params: { closedStateWidth: '32px' }}
+            { params: { closedStateWidth: '' }}
         ),
         transition('opened => closed', [animate('0.1s')]),
         transition('closed => opened', [animate('0.2s')])
