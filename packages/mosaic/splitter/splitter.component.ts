@@ -142,6 +142,8 @@ export class McSplitterComponent implements OnInit {
             return;
         }
 
+        event.preventDefault();
+
         const leftArea = this.areas[leftAreaIndex];
         const rightArea = this.areas[rightAreaIndex];
 
