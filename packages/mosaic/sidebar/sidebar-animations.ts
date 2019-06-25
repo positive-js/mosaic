@@ -10,10 +10,18 @@ export const mcSidebarAnimations: {
     readonly sidebarState: AnimationTriggerMetadata;
 } = {
     sidebarState: trigger('state', [
-        state('opened', style({ width: '{{ openedStateWidth }}' }),
-            { params: { openedStateWidth: '' }}
+        state('opened', style({
+                minWidth: '{{ openedStateMinWidth }}',
+                width: '{{ openedStateWidth }}',
+                maxWidth: '{{ openedStateMaxWidth }}'
+            }),
+            { params: { openedStateMinWidth: '', openedStateWidth: '', openedStateMaxWidth: '' }}
         ),
-        state('closed', style({ width: '{{ closedStateWidth }}' }),
+        state('closed', style({
+                minWidth: '{{ closedStateWidth }}',
+                width: '{{ closedStateWidth }}',
+                maxWidth: '{{ closedStateWidth }}'
+            }),
             { params: { closedStateWidth: '' }}
         ),
         transition('opened => closed', [animate('0.1s')]),

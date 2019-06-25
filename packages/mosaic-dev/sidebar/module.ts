@@ -17,8 +17,6 @@ import { McButtonModule } from '../../mosaic/button';
     encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent {
-    leftSidebarParams = { openedStateWidth: '500px', closedStateWidth: '50px' };
-
     leftSidebarSidebarState: boolean = false;
     leftSplitterState: boolean = false;
 
