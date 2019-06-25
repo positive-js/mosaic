@@ -56,7 +56,7 @@ let uniqueIdCounter: number = 0;
 export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisable {
     @Input()
     get value(): any {
-        return this._value || this.viewValue;
+        return this._value;
     }
 
     set value(value: any) {
@@ -148,7 +148,7 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
             this.parent.selectionModel.deselect(this.value);
         }
 
-        // this._changeDetector.markForCheck();
+        this.changeDetectorRef.markForCheck();
     }
 
     /**
