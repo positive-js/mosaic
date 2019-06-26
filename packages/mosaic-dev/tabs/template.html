@@ -1,8 +1,8 @@
 <div>
     <h4>Default tabs</h4>
-    <mc-tab-group>
-        <mc-tab label="First">Content 1</mc-tab>
-        <mc-tab label="Second">Content 2</mc-tab>
+    <mc-tab-group (selectedTabChange)="selectedTabChange($event)">
+        <mc-tab [tabId]="'firstTab'" label="First">Content 1</mc-tab>
+        <mc-tab [tabId]="'secondTab'" label="Second">Content 2</mc-tab>
         <mc-tab disabled label="Third">Content 3</mc-tab>
         <mc-tab label="4">Content 4</mc-tab>
         <mc-tab label="5">Content 5</mc-tab>
