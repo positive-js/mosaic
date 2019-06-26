@@ -336,7 +336,7 @@ export class McListSelection extends _McListSelectionMixinBase implements
 
     // Sets the focused option of the selection-list.
     setFocusedOption(option: McListOption, $event?: KeyboardEvent): void {
-        this.keyManager.updateActiveItem(option);
+        this.keyManager.setActiveItem(option);
 
         const withShift = $event ? hasModifierKey($event, 'shiftKey') : false;
         const withCtrl = $event ? hasModifierKey($event, 'ctrlKey') : false;
