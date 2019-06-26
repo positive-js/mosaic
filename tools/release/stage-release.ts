@@ -164,9 +164,17 @@ class StageReleaseTask extends BaseReleaseTask {
             console.error(chalk.red(`      Please have a look at: ${githubCommitsUrl}`));
             process.exit(1);
         } else if (state === 'pending') {
-            console.error(chalk.red(`  ✘   Cannot stage release yet. Commit "${commitRef}" still has ` +
-                `pending github statuses that need to succeed before staging a release.`));
+            console.error(
+                chalk.red(`  ✘   Commit "${commitRef}" still has pending github statuses that ` +
+                    `need to succeed before staging a release.`));
             console.error(chalk.red(`      Please have a look at: ${githubCommitsUrl}`));
+
+            if (await this.promptConfirm('Do you want to ignore the Github status and proceed?')) {
+                console.info(chalk.green(
+                    `  ⚠   Upstream commit is pending CI, but status has been ` +
+                    `forcibly ignored.`));
+                return;
+            }
             process.exit(0);
         }
 
