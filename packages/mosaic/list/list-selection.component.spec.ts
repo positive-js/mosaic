@@ -642,7 +642,7 @@ xdescribe('McListSelection with forms', () => {
             expect(fixture.componentInstance.selectedOptions.length)
                 .toBe(0, 'Expected no options to be selected by default');
 
-            fixture.componentInstance.selectionModel = ['opt3'];
+            fixture.componentInstance.selectedOptions = ['opt3'];
             fixture.detectChanges();
 
             tick();
@@ -665,7 +665,7 @@ xdescribe('McListSelection with forms', () => {
 
         it('should be pristine by default', fakeAsync(() => {
             fixture = TestBed.createComponent(SelectionListWithModel);
-            fixture.componentInstance.selectionModel = ['opt2'];
+            fixture.componentInstance.selectedOptions = ['opt2'];
             fixture.detectChanges();
 
             ngModel =
