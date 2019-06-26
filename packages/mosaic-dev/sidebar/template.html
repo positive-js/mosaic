@@ -1,0 +1,86 @@
+<br>
+
+<div class="layout-row layout-align-space-between">
+    <div>
+        <button mc-button (click)="leftSidebar.toggle()">toggle by method</button>&nbsp;
+    </div>
+
+    <div>
+        <button mc-button (click)="rightSidebar.toggle()">toggle by method</button>&nbsp;
+    </div>
+</div>
+
+<br><br>
+
+<div class="container layout-row layout-align-space-between">
+    <mc-sidebar
+        #leftSidebar="mcSidebar"
+        [position]="'left'"
+        (stateChanged)="onStateChanged($event)">
+        <div mc-sidebar-opened class="mc-sidebar-opened">mc-sidebar-opened</div>
+        <div mc-sidebar-closed class="mc-sidebar-closed">mc-sidebar-closed</div>
+    </mc-sidebar>
+
+    <div class="container__body">main area</div>
+
+    <mc-sidebar
+        #rightSidebar="mcSidebar"
+        [position]="'right'"
+        (stateChanged)="onStateChanged($event)">
+        <div mc-sidebar-opened class="mc-sidebar-opened">mc-sidebar-opened</div>
+        <div mc-sidebar-closed class="mc-sidebar-closed">mc-sidebar-closed</div>
+    </mc-sidebar>
+</div>
+
+<br><br><br>
+
+<div class="layout-row layout-align-space-between">
+    <div>
+        <button mc-button (click)="toggleLeftSidebar()">toggle by state</button>&nbsp;
+    </div>
+
+    <div>
+        <button mc-button (click)="toggleRightSidebar()">toggle by state</button>&nbsp;
+    </div>
+</div>
+
+<br><br>
+
+<mc-splitter
+    class="container layout-row layout-align-space-between"
+    direction="horizontal"
+    [disabled]="!leftSidebarSidebarState">
+    <mc-sidebar
+        mc-splitter-area
+        [position]="'left'"
+        [opened]="leftSidebarSidebarState"
+        (stateChanged)="onStateChanged($event)">
+        <div class="mc-sidebar-opened"
+             mc-sidebar-opened
+             [minWidth]="'320px'"
+             [maxWidth]="'600px'">
+            mc-sidebar-opened
+        </div>
+
+        <div class="mc-sidebar-closed"
+             mc-sidebar-closed
+             [width]="'32px'">
+            mc-sidebar-closed
+        </div>
+    </mc-sidebar>
+
+    <div mc-splitter-area class="flex container__body">main body</div>
+
+    <mc-sidebar
+        mc-splitter-area
+        [position]="'right'"
+        [opened]="rightSidebarSidebarState"
+        (stateChanged)="onStateChanged($event)">
+        <div mc-sidebar-opened class="mc-sidebar-opened">mc-sidebar-opened</div>
+        <div mc-sidebar-closed class="mc-sidebar-closed">mc-sidebar-closed</div>
+    </mc-sidebar>
+</mc-splitter>
+
+<br><br><br>
+
+<div>{{ leftSidebar.params | json }}</div>

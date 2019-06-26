@@ -1,0 +1,36 @@
+@import '~@ptsecurity/mosaic-icons/dist/styles/mc-icons';
+@import '../../mosaic/core/visual/prebuilt/default-visual';
+
+@import '../../mosaic/core/theming/prebuilt/default-theme';
+//@import '../../mosaic/core/theming/prebuilt/dark-theme';
+
+app {
+    display: block;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    height: 200px;
+}
+
+.container__body {
+    flex: 1 1 30%;
+
+    background-color: antiquewhite;
+}
+
+.mc-sidebar {
+
+}
+
+.mc-sidebar-opened {
+    background-color: #6fba53;
+}
+
+.mc-sidebar-closed {
+    background-color: darkgray;
+}
+

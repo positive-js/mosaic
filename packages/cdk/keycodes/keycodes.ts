@@ -1,3 +1,4 @@
+/* tslint:disable:no-magic-numbers no-bitwise */
 
 export const MAC_ENTER = 3;
 export const BACKSPACE = 8;
@@ -127,4 +128,66 @@ export function hasModifierKey(event: KeyboardEvent, ...modifiers: ModifierKey[]
     }
 
     return event.altKey || event.shiftKey || event.ctrlKey || event.metaKey;
+}
+
+export function isControl(event) {
+    const keyCode = event.which;
+    switch (keyCode) {
+        case SHIFT:
+        case CONTROL:
+        case ALT:
+            return true;
+        default:
+            return !!event.metaKey;
+    }
+}
+
+export function isNumberKey(event) {
+    const keyCode = event.which ? event.which : event;
+
+    return keyCode >= 49 && keyCode <= 57;
+}
+
+export function isLetterKey(event) {
+    const keyCode = event.which ? event.which : event;
+
+    return keyCode >= 65 && keyCode <= 90;
+}
+
+export function isFunctionKey(event) {
+    const keyCode = event.which ? event.which : event;
+
+    return keyCode >= 112 && keyCode <= 123;
+}
+
+export function isVerticalMovement(event) {
+    return ~[UP_ARROW, DOWN_ARROW, PAGE_DOWN, PAGE_UP, HOME, END].indexOf(event);
+}
+
+export function isHorizontalMovement(event) {
+    return ~[LEFT_ARROW, RIGHT_ARROW, BACKSPACE, DELETE].indexOf(event);
+}
+
+export function isSelectAll(event) {
+    return event.ctrlKey && event.keyCode === 65;
+}
+
+export function isCopy(event) {
+    return event.ctrlKey && event.keyCode === 67;
+}
+
+export function isInput(event) {
+    return event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA';
+}
+
+export function isLeftBracket(event) {
+    return event.code === 'BracketLeft';
+}
+
+export function isRightBracket(event) {
+    return event.code === 'BracketRight';
+}
+
+export function isDigit(event) {
+    return [48, 49, 50, 51, 52, 53, 54, 55, 56, 57].indexOf(event.which) !== -1;
 }

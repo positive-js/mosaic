@@ -1,5 +1,5 @@
 import {
-    ChangeDetectionStrategy,
+    ChangeDetectionStrategy, ChangeDetectorRef,
     Component,
     Directive,
     ElementRef,
@@ -64,6 +64,7 @@ export const enum Direction {
 
 @Component({
     selector: 'mc-splitter',
+    exportAs: 'mcSplitter',
     preserveWhitespaces: false,
     styleUrls: ['splitter.css'],
     templateUrl: './splitter.component.html',
@@ -110,9 +111,12 @@ export class McSplitterComponent implements OnInit {
         return this._gutterSize;
     }
 
-    constructor(private elementRef: ElementRef,
-                private ngZone: NgZone,
-                private renderer: Renderer2) {}
+    constructor(
+        public elementRef: ElementRef,
+        public changeDetectorRef: ChangeDetectorRef,
+        private ngZone: NgZone,
+        private renderer: Renderer2
+    ) {}
 
     addArea(area: McSplitterAreaDirective): void {
         const index: number = this.areas.length;
@@ -138,9 +142,7 @@ export class McSplitterComponent implements OnInit {
     }
 
     onMouseDown(event: MouseEvent, leftAreaIndex: number, rightAreaIndex: number) {
-        if (this.disabled) {
-            return;
-        }
+        if (this.disabled) { return; }
 
         event.preventDefault();
 
@@ -364,7 +366,7 @@ export class McGutterDirective implements OnInit {
 }
 
 @Directive({
-    selector: 'mc-splitter-area'
+    selector: '[mc-splitter-area]'
 })
 export class McSplitterAreaDirective implements OnInit, OnDestroy {
     constructor(private elementRef: ElementRef,
@@ -379,7 +381,9 @@ export class McSplitterAreaDirective implements OnInit, OnDestroy {
         this.splitter.addArea(this);
 
         this.removeStyle(StyleProperty.MaxWidth);
-        this.setStyle(StyleProperty.Flex, '1');
+
+        // todo нахера это сделано ?
+        // this.setStyle(StyleProperty.Flex, '1');
 
         if (this.splitter.direction === Direction.Vertical) {
             this.setStyle(StyleProperty.Width, '100%');

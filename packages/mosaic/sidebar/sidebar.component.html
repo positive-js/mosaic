@@ -1,0 +1,9 @@
+<ng-container [ngSwitch]="internalState">
+    <ng-container *ngSwitchCase="true">
+        <ng-content select="[mc-sidebar-opened]"></ng-content>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="false">
+        <ng-content select="[mc-sidebar-closed]"></ng-content>
+    </ng-container>
+</ng-container>

@@ -16,7 +16,6 @@ import { McDropdownModule } from '@ptsecurity/mosaic/dropdown';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
-import { McLayoutModule } from '@ptsecurity/mosaic/layout';
 import { McLinkModule } from '@ptsecurity/mosaic/link';
 import { McListModule } from '@ptsecurity/mosaic/list';
 import { McModalModule, McModalService } from '@ptsecurity/mosaic/modal';
@@ -204,7 +203,6 @@ export class DemoComponent {
         McDropdownModule,
         McInputModule,
         McFormFieldModule,
-        McLayoutModule,
         McNavbarModule,
         McListModule,
         McModalModule,

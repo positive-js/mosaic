@@ -74,7 +74,6 @@ System.config({
         '@ptsecurity/mosaic/progress-bar': 'dist/packages/mosaic/progress-bar/index.js',
         '@ptsecurity/mosaic/progress-spinner': 'dist/packages/mosaic/progress-spinner/index.js',
         '@ptsecurity/mosaic/icon': 'dist/packages/mosaic/icon/index.js',
-        '@ptsecurity/mosaic/layout': 'dist/packages/mosaic/layout/index.js',
         '@ptsecurity/mosaic/link': 'dist/packages/mosaic/link/index.js',
         '@ptsecurity/mosaic/radio': 'dist/packages/mosaic/radio/index.js',
         '@ptsecurity/mosaic/checkbox': 'dist/packages/mosaic/checkbox/index.js',
