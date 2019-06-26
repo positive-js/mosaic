@@ -165,9 +165,7 @@ class StageReleaseTask extends BaseReleaseTask {
                     `status checks. Please make sure this commit passes all checks before re-running.`));
             console.error(chalk.red(`      Please have a look at: ${githubCommitsUrl}`));
 
-            const promptConfirm = await this.promptConfirm('Do you want to ignore the Github status and proceed?');
-            console.log('after')
-            if (promptConfirm) {
+            if (await this.promptConfirm('Do you want to ignore the Github status and proceed?')) {
                 console.info(chalk.green(
                     `  ⚠   Upstream commit is failing CI checks, but status has been ` +
                     `forcibly ignored.`));
