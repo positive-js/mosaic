@@ -1,3 +1,4 @@
+import { A11yModule } from '@angular/cdk/a11y';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -11,10 +12,10 @@ import { McModalService } from './modal.service';
 
 
 @NgModule({
-    imports: [ CommonModule, OverlayModule, McButtonModule, McIconModule ],
-    exports: [ McModalComponent ],
-    declarations: [ McModalComponent, CssUnitPipe ],
-    entryComponents: [ McModalComponent ],
-    providers: [ McModalControlService, McModalService ]
+    imports: [CommonModule, OverlayModule, A11yModule, McButtonModule, McIconModule],
+    exports: [McModalComponent],
+    declarations: [McModalComponent, CssUnitPipe],
+    entryComponents: [McModalComponent],
+    providers: [McModalControlService, McModalService]
 })
-export class McModalModule { }
+export class McModalModule {}
