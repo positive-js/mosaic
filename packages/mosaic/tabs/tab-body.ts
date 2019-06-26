@@ -1,4 +1,6 @@
 import { AnimationEvent } from '@angular/animations';
+import { Directionality, Direction } from '@angular/cdk/bidi';
+import { TemplatePortal, CdkPortalOutlet, PortalHostDirective } from '@angular/cdk/portal';
 import {
     Component,
     ChangeDetectorRef,
@@ -18,8 +20,6 @@ import {
     forwardRef,
     ViewChild
 } from '@angular/core';
-import { Directionality, Direction } from '@ptsecurity/cdk/bidi';
-import { TemplatePortal, CdkPortalOutlet, PortalHostDirective } from '@ptsecurity/cdk/portal';
 import { Subscription } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 

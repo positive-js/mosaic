@@ -1,3 +1,5 @@
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { getSupportedInputTypes, Platform } from '@angular/cdk/platform';
 import {
     Attribute,
     Directive, DoCheck, ElementRef, Inject, Input, OnChanges,
@@ -8,13 +10,11 @@ import {
     NgControl,
     NgForm, NgModel
 } from '@angular/forms';
-import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import {
     END, C, V, X, A, DELETE, BACKSPACE, TAB, ENTER,
     ESCAPE, ZERO, NINE, NUMPAD_ZERO, NUMPAD_NINE, NUMPAD_MINUS, DASH,
     FF_MINUS, LEFT_ARROW, RIGHT_ARROW, HOME, UP_ARROW, DOWN_ARROW, F1, F12
 } from '@ptsecurity/cdk/keycodes';
-import { getSupportedInputTypes, Platform } from '@ptsecurity/cdk/platform';
 import {
     CanUpdateErrorState,
     CanUpdateErrorStateCtor,

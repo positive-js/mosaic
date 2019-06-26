@@ -1,4 +1,6 @@
 import { AnimationEvent } from '@angular/animations';
+import { Direction } from '@angular/cdk/bidi';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
@@ -20,8 +22,6 @@ import {
     OnInit
 } from '@angular/core';
 import { FocusKeyManager, FocusOrigin } from '@ptsecurity/cdk/a11y';
-import { Direction } from '@ptsecurity/cdk/bidi';
-import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import { ESCAPE, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, UP_ARROW } from '@ptsecurity/cdk/keycodes';
 import { merge, Observable, Subject, Subscription } from 'rxjs';
 import { startWith, switchMap, take } from 'rxjs/operators';
@@ -175,6 +175,11 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
             this._elementRef.nativeElement.className = '';
         }
     }
+    private _xPosition: DropdownPositionX = this._defaultOptions.xPosition;
+    private _yPosition: DropdownPositionY = this._defaultOptions.yPosition;
+    private _overlapTriggerX: boolean = this._defaultOptions.overlapTriggerX;
+    private _overlapTriggerY: boolean = this._defaultOptions.overlapTriggerY;
+    private _hasBackdrop: boolean | undefined = this._defaultOptions.hasBackdrop;
 
     /** Config object to be passed into the dropdown's ngClass */
     _classList: { [key: string]: boolean } = {};
@@ -211,15 +216,13 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
      */
     @ContentChild(McDropdownContent, {static: false}) lazyContent: McDropdownContent;
 
-    private _previousPanelClass: string;
-
     /** Event emitted when the dropdown is closed. */
     @Output() readonly closed: EventEmitter<void | 'click' | 'keydown' | 'tab'> =
         new EventEmitter<void | 'click' | 'keydown' | 'tab'>();
 
+    private _previousPanelClass: string;
+
     private _keyManager: FocusKeyManager<McDropdownItem>;
-    private _xPosition: DropdownPositionX = this._defaultOptions.xPosition;
-    private _yPosition: DropdownPositionY = this._defaultOptions.yPosition;
 
     /** Dropdown items inside the current dropdown. */
     private _items: McDropdownItem[] = [];
@@ -229,9 +232,6 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
 
     /** Subscription to tab events on the dropdown panel */
     private _tabSubscription = Subscription.EMPTY;
-    private _overlapTriggerX: boolean = this._defaultOptions.overlapTriggerX;
-    private _overlapTriggerY: boolean = this._defaultOptions.overlapTriggerY;
-    private _hasBackdrop: boolean | undefined = this._defaultOptions.hasBackdrop;
 
     constructor(
         private _elementRef: ElementRef<HTMLElement>,
@@ -256,7 +256,7 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
     _hovered(): Observable<McDropdownItem> {
         return this._itemChanges.pipe(
             startWith(this._items),
-            switchMap(items => merge(...items.map(item => item._hovered)))
+            switchMap((items) => merge(...items.map((item) => item._hovered)))
         );
     }
 

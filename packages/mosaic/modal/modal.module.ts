@@ -1,7 +1,6 @@
+import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-
-import { OverlayModule } from '@ptsecurity/cdk/overlay';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 

@@ -42,16 +42,8 @@ System.config({
 
         '@ptsecurity/cdk': 'dist/packages/cdk/index.js',
         '@ptsecurity/cdk/a11y': 'dist/packages/cdk/a11y/index.js',
-        '@ptsecurity/cdk/bidi': 'dist/packages/cdk/bidi/index.js',
         '@ptsecurity/cdk/datetime': 'dist/packages/cdk/datetime/index.js',
-        '@ptsecurity/cdk/coercion': 'dist/packages/cdk/coercion/index.js',
-        '@ptsecurity/cdk/collections': 'dist/packages/cdk/collections/index.js',
         '@ptsecurity/cdk/keycodes': 'dist/packages/cdk/keycodes/index.js',
-        '@ptsecurity/cdk/layout': 'dist/packages/cdk/layout/index.js',
-        '@ptsecurity/cdk/overlay': 'dist/packages/cdk/overlay/index.js',
-        '@ptsecurity/cdk/platform': 'dist/packages/cdk/platform/index.js',
-        '@ptsecurity/cdk/portal': 'dist/packages/cdk/portal/index.js',
-        '@ptsecurity/cdk/scrolling': 'dist/packages/cdk/scrolling/index.js',
         '@ptsecurity/cdk/testing': 'dist/packages/cdk/testing/index.js',
         '@ptsecurity/cdk/tree': 'dist/packages/cdk/tree/index.js',
 

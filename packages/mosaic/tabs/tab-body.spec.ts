@@ -1,9 +1,9 @@
+import { Direction, Directionality } from '@angular/cdk/bidi';
+import { PortalModule, TemplatePortal } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import { AfterContentInit, Component, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { Direction, Directionality } from '@ptsecurity/cdk/bidi';
-import { PortalModule, TemplatePortal } from '@ptsecurity/cdk/portal';
 import { Subject } from 'rxjs';
 
 import { McTabBody, McTabBodyPortal } from './tab-body';

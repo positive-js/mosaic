@@ -6,6 +6,10 @@
 /* tslint:disable:prefer-for-of */
 // tslint:disable:max-func-body-length
 
+import { Directionality } from '@angular/cdk/bidi';
+import { OverlayContainer } from '@angular/cdk/overlay';
+import { Platform } from '@angular/cdk/platform';
+import { ScrollDispatcher, ViewportRuler } from '@angular/cdk/scrolling';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -37,7 +41,6 @@ import {
 } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { Directionality } from '@ptsecurity/cdk/bidi';
 import {
     DOWN_ARROW,
     END,
@@ -50,9 +53,6 @@ import {
     UP_ARROW,
     A
 } from '@ptsecurity/cdk/keycodes';
-import { OverlayContainer } from '@ptsecurity/cdk/overlay';
-import { Platform } from '@ptsecurity/cdk/platform';
-import { ScrollDispatcher, ViewportRuler } from '@ptsecurity/cdk/scrolling';
 import {
     createKeyboardEvent,
     dispatchEvent,

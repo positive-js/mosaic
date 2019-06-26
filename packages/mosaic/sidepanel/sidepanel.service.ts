@@ -1,3 +1,5 @@
+import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
+import { ComponentPortal, ComponentType, PortalInjector, TemplatePortal } from '@angular/cdk/portal';
 import {
     ComponentRef,
     Inject,
@@ -8,8 +10,6 @@ import {
     SkipSelf,
     TemplateRef
 } from '@angular/core';
-import { Overlay, OverlayConfig, OverlayRef } from '@ptsecurity/cdk/overlay';
-import { ComponentPortal, IComponentType, PortalInjector, TemplatePortal } from '@ptsecurity/cdk/portal';
 
 import { MC_SIDEPANEL_DATA, McSidepanelConfig } from './sidepanel-config';
 import {
@@ -47,7 +47,7 @@ export class McSidepanelService implements OnDestroy {
         this.closeSidepanels(this.openedSidepanelsAtThisLevel);
     }
 
-    open<T, D = any>(componentOrTemplateRef: IComponentType<T> | TemplateRef<T>,
+    open<T, D = any>(componentOrTemplateRef: ComponentType<T> | TemplateRef<T>,
                      config?: McSidepanelConfig<D>): McSidepanelRef<T> {
         const fullConfig = {
             ...(this.defaultOptions || new McSidepanelConfig()),

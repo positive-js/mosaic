@@ -1,5 +1,5 @@
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
-import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 
 
 @Component({

@@ -1,9 +1,9 @@
 /**
  * NgModule that includes all Mosaic modules that are required to serve the dev-app.
  */
+import { BidiModule } from '@angular/cdk/bidi';
 import { NgModule } from '@angular/core';
 import { A11yModule } from '@ptsecurity/cdk/a11y';
-import { BidiModule } from '@ptsecurity/cdk/bidi';
 import {
     McButtonModule,
     McIconModule,

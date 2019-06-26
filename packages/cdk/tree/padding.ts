@@ -1,7 +1,5 @@
+import { Directionality } from '@angular/cdk/bidi';
 import { Directive, ElementRef, Input, OnDestroy, Optional, Renderer2 } from '@angular/core';
-
-import { Directionality } from '@ptsecurity/cdk/bidi';
-
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 

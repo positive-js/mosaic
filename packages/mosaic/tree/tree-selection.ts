@@ -1,3 +1,4 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import {
     AfterContentInit,
     Attribute,
@@ -17,7 +18,6 @@ import {
 } from '@angular/core';
 import { NodeDef, ViewData } from '@angular/core/esm2015/src/view';
 import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
-import { SelectionModel } from '@ptsecurity/cdk/collections';
 import { END, ENTER, HOME, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, SPACE } from '@ptsecurity/cdk/keycodes';
 import { CdkTree, CdkTreeNodeOutlet } from '@ptsecurity/cdk/tree';
 import {

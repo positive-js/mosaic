@@ -1,3 +1,4 @@
+import { UniqueSelectionDispatcher } from '@angular/cdk/collections';
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
@@ -8,9 +9,6 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-
-import { UniqueSelectionDispatcher } from '@ptsecurity/cdk/collections';
-
 import {
     CanColor, CanColorCtor,
     CanDisable, CanDisableCtor,
@@ -311,25 +309,6 @@ export const _McRadioButtonMixinBase:
 export class McRadioButton extends _McRadioButtonMixinBase
     implements OnInit, OnDestroy, CanColor, HasTabIndex {
 
-    private readonly _uniqueId: string = `mc-radio-${++nextUniqueId}`;
-
-    /* tslint:disable:member-ordering */
-
-    /** The unique ID for the radio button. */
-    @Input() id: string = this._uniqueId;
-
-    /** Analog to HTML 'name' attribute used to group radios for unique selection. */
-    @Input() name: string;
-
-    /** Used to set the 'aria-label' attribute on the underlying input element. */
-    @Input('aria-label') ariaLabel: string;
-
-    /** The 'aria-labelledby' attribute takes precedence as the element's text alternative. */
-    @Input('aria-labelledby') ariaLabelledby: string;
-
-    /** The 'aria-describedby' attribute is read after the element's label and field type. */
-    @Input('aria-describedby') ariaDescribedby: string;
-
     /** Whether this radio button is checked. */
     @Input()
     get checked(): boolean { return this._checked; }
@@ -407,21 +386,11 @@ export class McRadioButton extends _McRadioButtonMixinBase
     }
     private _labelPosition: 'before' | 'after';
 
-    /** The native `<input type=radio>` element */
-    @ViewChild('input', {static: false}) _inputElement: ElementRef;
+    /* tslint:disable:member-ordering */
+    private readonly _uniqueId: string = `mc-radio-${++nextUniqueId}`;
 
-    /**
-     * Event emitted when the checked state of this radio button changes.
-     * Change events are only emitted when the value changes due to user interaction with
-     * the radio button (the same behavior as `<input type-"radio">`).
-     */
-    @Output() readonly change: EventEmitter<McRadioChange> = new EventEmitter<McRadioChange>();
-
-    /** The parent radio group. May or may not be present. */
-    radioGroup: McRadioGroup;
-
-    @Input()
-    isFocused: boolean = false;
+    /** The unique ID for the radio button. */
+    @Input() id: string = this._uniqueId;
 
     /** ID of the native input element inside `<mc-radio-button>` */
     get inputId(): string { return `${this.id || this._uniqueId}-input`; }
@@ -438,9 +407,33 @@ export class McRadioButton extends _McRadioButtonMixinBase
     /** Value assigned to this radio. */
     private _value: any = null;
 
-    /** Unregister function for _radioDispatcher */
-    // tslint:disable-next-line
-    private readonly removeUniqueSelectionListener: () => void = () => {};
+    /** Analog to HTML 'name' attribute used to group radios for unique selection. */
+    @Input() name: string;
+
+    /** Used to set the 'aria-label' attribute on the underlying input element. */
+    @Input('aria-label') ariaLabel: string;
+
+    /** The 'aria-labelledby' attribute takes precedence as the element's text alternative. */
+    @Input('aria-labelledby') ariaLabelledby: string;
+
+    /** The 'aria-describedby' attribute is read after the element's label and field type. */
+    @Input('aria-describedby') ariaDescribedby: string;
+
+    /** The native `<input type=radio>` element */
+    @ViewChild('input', {static: false}) _inputElement: ElementRef;
+
+    /**
+     * Event emitted when the checked state of this radio button changes.
+     * Change events are only emitted when the value changes due to user interaction with
+     * the radio button (the same behavior as `<input type-"radio">`).
+     */
+    @Output() readonly change: EventEmitter<McRadioChange> = new EventEmitter<McRadioChange>();
+
+    /** The parent radio group. May or may not be present. */
+    radioGroup: McRadioGroup;
+
+    @Input()
+    isFocused: boolean = false;
 
     constructor(
         @Optional() radioGroup: McRadioGroup,
@@ -518,6 +511,10 @@ export class McRadioButton extends _McRadioButtonMixinBase
             }
         }
     }
+
+    /** Unregister function for _radioDispatcher */
+    // tslint:disable-next-line
+    private readonly removeUniqueSelectionListener: () => void = () => {};
 
     /** Dispatch change event with current value. */
     private emitChangeEvent(): void {

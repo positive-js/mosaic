@@ -1,6 +1,5 @@
+import { OverlayRef } from '@angular/cdk/overlay';
 import { EventEmitter, TemplateRef, Type } from '@angular/core';
-
-import { OverlayRef } from '@ptsecurity/cdk/overlay';
 
 
 export type OnClickCallback<T> = ((instance: T) => (false | void | {}) | Promise<false | void | {}>);

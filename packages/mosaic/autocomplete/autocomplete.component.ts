@@ -1,3 +1,4 @@
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
@@ -16,7 +17,6 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
-import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import { MC_OPTION_PARENT_COMPONENT, McOptgroup, McOption } from '@ptsecurity/mosaic/core';
 
 

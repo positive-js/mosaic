@@ -1,3 +1,4 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import {
     AfterContentInit,
     Attribute,
@@ -19,7 +20,6 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FocusKeyManager, IFocusableOption } from '@ptsecurity/cdk/a11y';
-import { SelectionModel } from '@ptsecurity/cdk/collections';
 import {
     DOWN_ARROW,
     END,

@@ -2,17 +2,17 @@
 // tslint:disable:no-unbound-method
 // tslint:disable:no-typeof-undefined
 // tslint:disable:no-empty
+import { Directionality } from '@angular/cdk/bidi';
+import { Overlay, OverlayContainer } from '@angular/cdk/overlay';
+import { ScrollDispatcher } from '@angular/cdk/scrolling';
 import { Component, FactoryProvider, Type, ValueProvider, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, flush, inject, TestBed } from '@angular/core/testing';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { Directionality } from '@ptsecurity/cdk/bidi';
 import { MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
 import { DOWN_ARROW, ENTER, ESCAPE, UP_ARROW } from '@ptsecurity/cdk/keycodes';
-import { Overlay, OverlayContainer } from '@ptsecurity/cdk/overlay';
-import { ScrollDispatcher } from '@ptsecurity/cdk/scrolling';
 import {
     createKeyboardEvent,
     dispatchEvent,

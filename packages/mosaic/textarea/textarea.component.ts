@@ -1,10 +1,10 @@
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     Directive, DoCheck, ElementRef, Inject,
     Input, OnChanges, OnDestroy, Optional,
     Self, InjectionToken, NgZone, OnInit
 } from '@angular/core';
 import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
-import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import {
     CanUpdateErrorState,
     CanUpdateErrorStateCtor,
@@ -13,7 +13,6 @@ import {
 } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { fromEvent, Subscription, Subject } from 'rxjs';
-import { distinctUntilChanged, map } from 'rxjs/operators';
 
 
 export const MC_TEXTAREA_VALUE_ACCESSOR =

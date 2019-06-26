@@ -2,16 +2,14 @@ import { Component, Injectable, NgModule, ViewEncapsulation } from '@angular/cor
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-
 import { FlatTreeControl, NestedTreeControl } from '@ptsecurity/cdk/tree';
+import { McIconModule } from '@ptsecurity/mosaic/icon';
 import {
     McTreeFlatDataSource,
     McTreeFlattener,
     McTreeNestedDataSource,
     McTreeModule
 } from '@ptsecurity/mosaic/tree';
-
-import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { BehaviorSubject, Observable, of as observableOf } from 'rxjs';
 
 

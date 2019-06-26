@@ -1,3 +1,15 @@
+import { Direction, Directionality } from '@angular/cdk/bidi';
+import {
+    FlexibleConnectedPositionStrategy,
+    HorizontalConnectionPos,
+    Overlay,
+    OverlayConfig,
+    OverlayRef,
+    VerticalConnectionPos,
+    ScrollStrategy
+} from '@angular/cdk/overlay';
+import { normalizePassiveListenerOptions } from '@angular/cdk/platform';
+import { TemplatePortal } from '@angular/cdk/portal';
 import {
     AfterContentInit,
     Directive,
@@ -13,19 +25,7 @@ import {
     ViewContainerRef
 } from '@angular/core';
 import { FocusMonitor, FocusOrigin } from '@ptsecurity/cdk/a11y';
-import { Direction, Directionality } from '@ptsecurity/cdk/bidi';
 import { LEFT_ARROW, RIGHT_ARROW, SPACE, ENTER } from '@ptsecurity/cdk/keycodes';
-import {
-    FlexibleConnectedPositionStrategy,
-    HorizontalConnectionPos,
-    Overlay,
-    OverlayConfig,
-    OverlayRef,
-    VerticalConnectionPos,
-    IScrollStrategy
-} from '@ptsecurity/cdk/overlay';
-import { normalizePassiveListenerOptions } from '@ptsecurity/cdk/platform';
-import { TemplatePortal } from '@ptsecurity/cdk/portal';
 import { asapScheduler, merge, of as observableOf, Subscription } from 'rxjs';
 import { delay, filter, take, takeUntil } from 'rxjs/operators';
 
@@ -38,10 +38,10 @@ import { McDropdown } from './dropdown.component';
 
 /** Injection token that determines the scroll handling while the dropdown is open. */
 export const MC_DROPDOWN_SCROLL_STRATEGY =
-    new InjectionToken<() => IScrollStrategy>('mc-dropdown-scroll-strategy');
+    new InjectionToken<() => ScrollStrategy>('mc-dropdown-scroll-strategy');
 
 /** @docs-private */
-export function MC_DROPDOWN_SCROLL_STRATEGY_FACTORY(overlay: Overlay): () => IScrollStrategy {
+export function MC_DROPDOWN_SCROLL_STRATEGY_FACTORY(overlay: Overlay): () => ScrollStrategy {
     return () => overlay.scrollStrategies.reposition();
 }
 

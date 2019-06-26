@@ -1,3 +1,4 @@
+import { TemplatePortal, DomPortalOutlet } from '@angular/cdk/portal';
 import { DOCUMENT } from '@angular/common';
 import {
     Directive,
@@ -9,7 +10,6 @@ import {
     Inject,
     OnDestroy
 } from '@angular/core';
-import { TemplatePortal, DomPortalOutlet } from '@ptsecurity/cdk/portal';
 import { Subject } from 'rxjs';
 
 

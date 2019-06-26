@@ -1,3 +1,4 @@
+import { ComponentPortal, ComponentType, Portal } from '@angular/cdk/portal';
 import {
     AfterContentInit,
     AfterViewChecked,
@@ -17,7 +18,6 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { DateAdapter, MC_DATE_FORMATS, McDateFormats } from '@ptsecurity/cdk/datetime';
-import { ComponentPortal, IComponentType, Portal } from '@ptsecurity/cdk/portal';
 import { Subject, Subscription } from 'rxjs';
 
 import { McCalendarCellCssClasses } from './calendar-body';
@@ -236,7 +236,7 @@ export class McCalendar<D> implements AfterContentInit, AfterViewChecked, OnDest
     }
 
     /** An input indicating the type of the header component, if set. */
-    @Input() headerComponent: IComponentType<any>;
+    @Input() headerComponent: ComponentType<any>;
 
     /** A portal containing the header component type for this calendar. */
     calendarHeaderPortal: Portal<any>;

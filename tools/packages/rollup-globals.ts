@@ -8,6 +8,7 @@ import { dashCaseToCamelCase } from './utils';
 /** Generates rollup entry point mappings for the given package and entry points. */
 function generateRollupEntryPoints(packageName: string, entryPoints: string[]):
     {[k: string]: string} {
+// tslint:disable-next-line: no-inferred-empty-object-type
     return entryPoints.reduce((globals: {[k: string]: string}, entryPoint: string) => {
         globals[`@ptsecurity/${packageName}/${entryPoint}`] =
             `ng.${dashCaseToCamelCase(packageName)}.${dashCaseToCamelCase(entryPoint)}`;
@@ -38,6 +39,15 @@ export const rollupGlobals = {
     /* tslint:disable-next-line:object-literal-key-quotes */
     'messageformat': 'messageformat',
 
+    '@angular/cdk': 'ng.cdk',
+    '@angular/cdk/bidi': 'ng.cdk.bidi',
+    '@angular/cdk/coercion': 'ng.cdk.coercion',
+    '@angular/cdk/collections': 'ng.cdk.collections',
+    '@angular/cdk/platform': 'ng.cdk.platform',
+    '@angular/cdk/portal': 'ng.cdk.portal',
+    '@angular/cdk/overlay': 'ng.cdk.overlay',
+    '@angular/cdk/scrolling': 'ng.cdk.scrolling',
+
     '@angular/animations': 'ng.animations',
     '@angular/common': 'ng.common',
     '@angular/common/http': 'ng.common.http',
@@ -53,7 +63,7 @@ export const rollupGlobals = {
     '@angular/platform-server': 'ng.platformServer',
     '@angular/router': 'ng.router',
 
-    '@ptsecurity/cdk': 'ng.cdk',
+    '@ptsecurity/cdk': 'ng.mosaic.cdk',
     '@ptsecurity/mosaic': 'ng.mosaic',
     '@ptsecurity/mosaic-examples': 'ng.mosaicExamples',
     '@ptsecurity/mosaic-moment-adapter': 'ng.mosaicMomentAdapter',
