@@ -75,6 +75,10 @@ export class TabsDemoComponent {
     toggleBackground() {
         this.background = this.background ? '' : 'primary';
     }
+
+    selectedTabChange($event: any) {
+        console.log('selectedTabChange');
+    }
 }
 
 

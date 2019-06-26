@@ -64,6 +64,9 @@ export class McTab extends mcTabMixinBase
     @Input('label')
     textLabel: string = '';
 
+    @Input('tabId')
+    tabId: string;
+
     /** Aria label for the tab. */
     @Input('aria-label')
     ariaLabel: string;
