@@ -11,14 +11,19 @@ export class Version {
         /** Patch version number */
         public patch: number,
         /** Pre-release label for the version (e.g. alpha, beta, rc) */
-        public prereleaseLabel?: string,
+        public prereleaseLabel: string | null,
         /** Number for the pre-release. There can be multiple pre-releases for a version. */
-        public prereleaseNumber?: number) {
-    }
+        public prereleaseNumber: number | null) {}
 
     /** Serializes the version info into a string formatted version name. */
     format(): string {
         return serializeVersion(this);
+    }
+
+    equals(other: Version): boolean {
+        return this.major === other.major && this.minor === other.minor && this.patch === other.patch &&
+            this.prereleaseLabel === other.prereleaseLabel &&
+            this.prereleaseNumber === other.prereleaseNumber;
     }
 
     clone(): Version {
@@ -45,11 +50,8 @@ export function parseVersionName(version: string): Version | null {
 
     // tslint:disable:no-magic-numbers
     return new Version(
-        Number(matches[1]),
-        Number(matches[2]),
-        Number(matches[3]),
-        matches[4],
-        Number(matches[5]));
+        Number(matches[1]), Number(matches[2]), Number(matches[3]), matches[4] || null,
+        Number(matches[5]) || null);
 }
 
 /** Serializes the specified version into a string. */
@@ -58,7 +60,7 @@ export function serializeVersion(newVersion: Version): string {
 
     let versionString = `${major}.${minor}.${patch}`;
 
-    if (prereleaseLabel && !isNaN(prereleaseNumber)) {
+    if (prereleaseLabel && prereleaseNumber !== null) {
         versionString += `-${prereleaseLabel}.${prereleaseNumber}`;
     }
 

@@ -1,11 +1,8 @@
 // tslint:disable:no-console
-require('dotenv').config();
-
 import * as OctokitApi from '@octokit/rest';
 import chalk from 'chalk';
 
 import { readFileSync, writeFileSync } from 'fs';
-import { prompt } from 'inquirer';
 import { join } from 'path';
 
 import { BaseReleaseTask } from './base-release-task';
@@ -90,6 +87,7 @@ class StageReleaseTask extends BaseReleaseTask {
 
         const newVersion = await promptForNewVersion(this.currentVersion);
         const newVersionName = newVersion.format();
+        const needsVersionBump = !newVersion.equals(this.currentVersion);
         const stagingBranch = `release-stage/${newVersionName}`;
 
         // After the prompt for the new version, we print a new line because we want the
@@ -111,11 +109,14 @@ class StageReleaseTask extends BaseReleaseTask {
             process.exit(1);
         }
 
-        this.updatePackageJsonVersion(newVersionName);
+        if (needsVersionBump) {
+            this.updatePackageJsonVersion(newVersionName);
 
-        console.log(chalk.green(`  ✓   Updated the version to "${chalk.bold(newVersionName)}" inside of the ` +
-            `${chalk.italic('package.json')}`));
-        console.log();
+            console.log(chalk.green(
+                `  ✓   Updated the version to "${chalk.bold(newVersionName)}" inside of the ` +
+                `${chalk.italic('package.json')}`));
+            console.log();
+        }
 
         await promptAndGenerateChangelog(join(this.projectDir, CHANGELOG_FILE_NAME));
 
@@ -150,8 +151,8 @@ class StageReleaseTask extends BaseReleaseTask {
     /** Verifies that the latest commit of the current branch is passing all Github statuses. */
     private async verifyPassingGithubStatus(expectedPublishBranch: string) {
         const commitRef = this.git.getLocalCommitSha('HEAD');
-        const githubCommitsUrl = getGithubBranchCommitsUrl(this.repositoryOwner, this.repositoryName,
-            expectedPublishBranch);
+        const githubCommitsUrl =
+            getGithubBranchCommitsUrl(this.repositoryOwner, this.repositoryName, expectedPublishBranch);
         const {state} = (await this.githubApi.repos.getCombinedStatusForRef({
             owner: this.repositoryOwner,
             repo: this.repositoryName,
@@ -159,9 +160,17 @@ class StageReleaseTask extends BaseReleaseTask {
         })).data;
 
         if (state === 'failure') {
-            console.error(chalk.red(`  ✘   Cannot stage release. Commit "${commitRef}" does not pass all ` +
-                `github status checks. Please make sure this commit passes all checks before re-running.`));
+            console.error(
+                chalk.red(`  ✘   Cannot stage release. Commit "${commitRef}" does not pass all github ` +
+                    `status checks. Please make sure this commit passes all checks before re-running.`));
             console.error(chalk.red(`      Please have a look at: ${githubCommitsUrl}`));
+            if (await this.promptConfirm('Do you want to ignore the Github status and proceed?')) {
+                console.info(chalk.green(
+                    `  ⚠   Upstream commit is failing CI checks, but status has been ` +
+                    `forcibly ignored.`));
+
+                return;
+            }
             process.exit(1);
         } else if (state === 'pending') {
             console.error(
@@ -173,6 +182,7 @@ class StageReleaseTask extends BaseReleaseTask {
                 console.info(chalk.green(
                     `  ⚠   Upstream commit is pending CI, but status has been ` +
                     `forcibly ignored.`));
+
                 return;
             }
             process.exit(0);
