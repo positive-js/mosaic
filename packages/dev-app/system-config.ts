@@ -15,6 +15,16 @@ System.config({
         'rxjs': 'node_modules/rxjs/bundles/rxjs.umd.min.js',
         'rxjs/operators': 'system-rxjs-operators.js',
 
+        // Angular CDK specific mappings.
+        '@angular/cdk/bidi': 'node:@angular/cdk/bundles/cdk-bidi.umd.js',
+        '@angular/cdk/coercion': 'node:@angular/cdk/bundles/cdk-coercion.umd.js',
+        '@angular/cdk/collections': 'node:@angular/cdk/bundles/cdk-collections.umd.js',
+        '@angular/cdk/keycodes': 'node:@angular/cdk/bundles/cdk-keycodes.umd.js',
+        '@angular/cdk/platform': 'node:@angular/cdk/bundles/cdk-platform.umd.js',
+        '@angular/cdk/portal': 'node:@angular/cdk/bundles/cdk-portal.umd.js',
+        '@angular/cdk/overlay': 'node:@angular/cdk/bundles/cdk-overlay.umd.js',
+        '@angular/cdk/scrolling': 'node:@angular/cdk/bundles/cdk-scrolling.umd.js',
+
         // Angular specific mappings.
         '@angular/core': 'node:@angular/core/bundles/core.umd.js',
         '@angular/core/testing': 'node:@angular/core/bundles/core-testing.umd.js',
