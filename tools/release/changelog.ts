@@ -13,7 +13,12 @@ const merge2 = require('merge2');
 
 /** Prompts for a changelog release name and prepends the new changelog. */
 export async function promptAndGenerateChangelog(changelogPath: string) {
+    console.log('before')
+
     const releaseName = await promptChangelogReleaseName();
+
+    console.log('after')
+
     await prependChangelogFromLatestTag(changelogPath, releaseName);
 }
 
@@ -54,11 +59,11 @@ export async function prependChangelogFromLatestTag(changelogPath: string, relea
 
 /** Prompts the terminal for a changelog release name. */
 export async function promptChangelogReleaseName(): Promise<string> {
-    return (await prompt<{ releaseName: string }>({
+    return (await prompt({
         type: 'text',
         name: 'releaseName',
         message: 'What should be the name of the release?'
-    })).releaseName;
+    }));
 }
 
 /**

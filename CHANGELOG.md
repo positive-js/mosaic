@@ -1,3 +1,22 @@
+# 8.0.0-beta.3 "[object Object]" (2019-06-26)
+
+
+### Bug Fixes
+
+* navbar remove dropdown, remove anchor wrapper ([#139](https://github.com/positive-js/mosaic/issues/139)) ([835fac5](https://github.com/positive-js/mosaic/commit/835fac5))
+* restore yarn.lock ([#143](https://github.com/positive-js/mosaic/issues/143)) ([7b00549](https://github.com/positive-js/mosaic/commit/7b00549))
+* **list:** Invalid selection in mc-list #UIM-15 ([#148](https://github.com/positive-js/mosaic/issues/148)) ([fb2c763](https://github.com/positive-js/mosaic/commit/fb2c763)), closes [#UIM-15](https://github.com/positive-js/mosaic/issues/UIM-15)
+* **splitter:** При передвижении бегунка идет выделение текста ([#147](https://github.com/positive-js/mosaic/issues/147)) ([481f7e9](https://github.com/positive-js/mosaic/commit/481f7e9))
+* **tabs:** stretching while applying mc-stretch-tab within mc-light-tab ([#146](https://github.com/positive-js/mosaic/issues/146)) ([195c5c7](https://github.com/positive-js/mosaic/commit/195c5c7))
+
+
+### Features
+
+* **i18n:** remove text resources from components ([#142](https://github.com/positive-js/mosaic/issues/142)) ([3f02b73](https://github.com/positive-js/mosaic/commit/3f02b73))
+* add sidebar ([#145](https://github.com/positive-js/mosaic/issues/145)) ([9f618eb](https://github.com/positive-js/mosaic/commit/9f618eb))
+
+
+
 # 8.0.0-beta.2 "Unremitting Recalcitrance" (2019-06-11)
 
 
