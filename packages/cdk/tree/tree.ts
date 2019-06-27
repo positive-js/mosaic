@@ -83,7 +83,6 @@ export class CdkTree<T> implements AfterContentChecked, CollectionViewer, OnDest
     /** Subject that emits when the component has been destroyed. */
     private onDestroy = new Subject<void>();
 
-
     /** Stores the node definition that does not have a when predicate. */
     private defaultNodeDef: CdkTreeNodeDef<T> | null;
 

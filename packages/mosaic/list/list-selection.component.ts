@@ -38,7 +38,8 @@ import {
     mixinDisabled,
     toBoolean, CanDisableCtor
 } from '@ptsecurity/mosaic/core';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 
 /**
@@ -94,7 +95,7 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
 
     @Input()
     get selected(): boolean {
-        return this.listSelection.selectedOptions && this.listSelection.selectedOptions.isSelected(this) || false;
+        return this.listSelection.selectionModel && this.listSelection.selectionModel.isSelected(this) || false;
     }
 
     set selected(value: boolean) {
@@ -112,8 +113,7 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
     constructor(
         private _element: ElementRef,
         private _changeDetector: ChangeDetectorRef,
-        @Inject(forwardRef(() => McListSelection))
-        public listSelection: McListSelection
+        @Inject(forwardRef(() => McListSelection)) public listSelection: McListSelection
     ) {}
 
     ngOnInit() {
@@ -157,14 +157,14 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
     }
 
     setSelected(selected: boolean) {
-        if (this._selected === selected || !this.listSelection.selectedOptions) { return; }
+        if (this._selected === selected || !this.listSelection.selectionModel) { return; }
 
         this._selected = selected;
 
         if (selected) {
-            this.listSelection.selectedOptions.select(this);
+            this.listSelection.selectionModel.select(this);
         } else {
-            this.listSelection.selectedOptions.deselect(this);
+            this.listSelection.selectionModel.deselect(this);
         }
 
         this._changeDetector.markForCheck();
@@ -256,12 +256,13 @@ export class McListSelection extends _McListSelectionMixinBase implements
     // Emits a change event whenever the selected state of an option changes.
     @Output() readonly selectionChange: EventEmitter<McListSelectionChange> = new EventEmitter<McListSelectionChange>();
 
-    selectedOptions: SelectionModel<McListOption>;
+    selectionModel: SelectionModel<McListOption>;
 
     // Used for storing the values that were assigned before the options were initialized.
     private tempValues: string[] | null;
 
-    private modelChanges = Subscription.EMPTY;
+    /** Emits whenever the component is destroyed. */
+    private readonly destroy = new Subject<void>();
 
     constructor(
         private element: ElementRef,
@@ -278,7 +279,7 @@ export class McListSelection extends _McListSelectionMixinBase implements
 
         this.tabIndex = parseInt(tabIndex) || 0;
 
-        this.selectedOptions = new SelectionModel<McListOption>(this.multiple);
+        this.selectionModel = new SelectionModel<McListOption>(this.multiple);
     }
 
     ngAfterContentInit(): void {
@@ -294,22 +295,21 @@ export class McListSelection extends _McListSelectionMixinBase implements
             this.tempValues = null;
         }
 
-        // Sync external changes to the model back to the options.
-        this.modelChanges = this.selectedOptions.onChange!.subscribe((event) => {
-            for (const item of event.added) {
-                item.selected = true;
-            }
+        this.selectionModel.changed
+            .pipe(takeUntil(this.destroy))
+            .subscribe((event) => {
+                for (const item of event.added) { item.selected = true; }
 
-            for (const item of event.removed) {
-                item.selected = false;
-            }
-        });
+                for (const item of event.removed) { item.selected = false; }
+            });
 
         this.updateScrollSize();
     }
 
     ngOnDestroy() {
-        this.modelChanges.unsubscribe();
+        this.destroy.next();
+
+        this.destroy.complete();
     }
 
     focus() {
@@ -417,7 +417,7 @@ export class McListSelection extends _McListSelectionMixinBase implements
     }
 
     canDeselectLast(listOption: McListOption): boolean {
-        return !(this.noUnselect && this.selectedOptions.selected.length === 1 && listOption.selected);
+        return !(this.noUnselect && this.selectionModel.selected.length === 1 && listOption.selected);
     }
 
     getHeight(): number {

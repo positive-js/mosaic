@@ -131,6 +131,8 @@ export class DemoComponent {
     nestedTreeControl: NestedTreeControl<FileNode>;
     nestedDataSource: McTreeNestedDataSource<FileNode>;
 
+    modelValue: any[] = ['rootNode_1', 'Documents', 'Calendar', 'Chrome'];
+
     constructor(database: FileDatabase) {
         this.treeFlattener = new McTreeFlattener(
             this.transformer, this._getLevel, this._isExpandable, this._getChildren
