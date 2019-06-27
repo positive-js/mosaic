@@ -21,7 +21,17 @@ import {
 import { NodeDef, ViewData } from '@angular/core/esm2015/src/view';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
-import { END, ENTER, HOME, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, SPACE } from '@ptsecurity/cdk/keycodes';
+import {
+    END,
+    ENTER,
+    hasModifierKey,
+    HOME,
+    LEFT_ARROW,
+    PAGE_DOWN,
+    PAGE_UP,
+    RIGHT_ARROW,
+    SPACE
+} from '@ptsecurity/cdk/keycodes';
 import { CdkTree, CdkTreeNodeOutlet } from '@ptsecurity/cdk/tree';
 import {
     CanDisable,
@@ -95,10 +105,6 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
     multiple: boolean;
     autoSelect: boolean;
     noUnselect: boolean;
-
-    // todo temporary solution
-    withShift: boolean;
-    withCtrl: boolean;
 
     @Output() readonly navigationChange = new EventEmitter<McTreeNavigationChange>();
 
@@ -189,8 +195,6 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
     onKeyDown(event: KeyboardEvent) {
         // tslint:disable-next-line: deprecation
         const keyCode = event.keyCode;
-        this.withShift = event.shiftKey;
-        this.withCtrl = event.ctrlKey;
 
         switch (keyCode) {
             case LEFT_ARROW:
@@ -246,14 +250,17 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
         this.keyManager.withScrollSize(Math.floor(this.getHeight() / this.options.first.getHeight()));
     }
 
-    setFocusedOption(option: McTreeOption) {
+    setFocusedOption(option: McTreeOption, $event?: KeyboardEvent) {
         this.keyManager.setActiveItem(option);
+
+        const withShift = $event ? hasModifierKey($event, 'shiftKey') : false;
+        const withCtrl = $event ? hasModifierKey($event, 'ctrlKey') : false;
 
         if (this.multiple) {
             if (!this.canDeselectLast(option)) { return; }
 
             option.toggle();
-        } else if (this.withShift) {
+        } else if (withShift) {
             const previousIndex = this.keyManager.previousActiveItemIndex;
             const activeIndex = this.keyManager.activeItemIndex;
 
@@ -266,11 +273,7 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
                     if (index >= activeIndex && index <= previousIndex) { item.setSelected(true); }
                 });
             }
-
-            this.withShift = false;
-        } else if (this.withCtrl) {
-            this.withCtrl = false;
-
+        } else if (withCtrl) {
             if (!this.canDeselectLast(option)) { return; }
 
             option.toggle();
