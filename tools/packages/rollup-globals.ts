@@ -40,11 +40,13 @@ export const rollupGlobals = {
     'messageformat': 'messageformat',
 
     '@angular/cdk': 'ng.cdk',
+    '@angular/cdk/a11y': 'ng.cdk.a11y',
     '@angular/cdk/bidi': 'ng.cdk.bidi',
     '@angular/cdk/coercion': 'ng.cdk.coercion',
     '@angular/cdk/collections': 'ng.cdk.collections',
     '@angular/cdk/platform': 'ng.cdk.platform',
     '@angular/cdk/portal': 'ng.cdk.portal',
+    '@angular/cdk/observers': 'ng.cdk.observers',
     '@angular/cdk/overlay': 'ng.cdk.overlay',
     '@angular/cdk/scrolling': 'ng.cdk.scrolling',
 

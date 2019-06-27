@@ -27,7 +27,7 @@
              [style.transform-origin]="transformOrigin"
              role="document"
         >
-            <div class="mc-modal-content">
+            <div class="mc-modal-content" cdkTrapFocus>
                 <button *ngIf="mcClosable" (click)="onClickCloseBtn()" class="mc-modal-close" aria-label="Close">
                   <span class="mc-modal-close-x">
                       <i mc-icon="mc-close-L_16" class="mc-icon mc-icon_light" color="second"></i>
@@ -86,7 +86,7 @@
                 <button *ngIf="mcOkText!==null" mc-button color="primary" (click)="onClickOkCancel('ok')">
                     {{ okText }}
                 </button>
-                <button *ngIf="mcCancelText!==null" mc-button (click)="onClickOkCancel('cancel')">
+                <button *ngIf="mcCancelText!==null" mc-button (click)="onClickOkCancel('cancel')" autofocus>
                     {{ cancelText }}
                 </button>
             </ng-container>
@@ -119,7 +119,7 @@
         <button mc-button [color]="mcOkType" #autoFocusButtonOk *ngIf="mcOkText !== ''" (click)="onClickOkCancel('ok')">
             {{ okText }}
         </button>
-        <button mc-button color="second" *ngIf="mcCancelText!==''" (click)="onClickOkCancel('cancel')">
+        <button mc-button color="second" *ngIf="mcCancelText!==''" (click)="onClickOkCancel('cancel')" autofocus>
             {{ cancelText }}
         </button>
     </div>
