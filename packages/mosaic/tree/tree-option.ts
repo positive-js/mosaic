@@ -47,7 +47,7 @@ let uniqueIdCounter: number = 0;
         '[class.mc-selected]': 'selected',
         '[class.mc-active]': 'active',
 
-        '(click)': 'selectViaInteraction()'
+        '(click)': 'selectViaInteraction($event)'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
@@ -222,13 +222,13 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
         }
     }
 
-    selectViaInteraction(): void {
+    selectViaInteraction($event?: KeyboardEvent): void {
         if (!this.disabled) {
             this.changeDetectorRef.markForCheck();
             this.emitSelectionChangeEvent(true);
 
             if (this.parent.setFocusedOption) {
-                this.parent.setFocusedOption(this);
+                this.parent.setFocusedOption(this, $event);
             }
         }
     }
