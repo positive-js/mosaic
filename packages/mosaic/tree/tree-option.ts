@@ -1,3 +1,4 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import {
     ChangeDetectorRef,
     Component,
@@ -7,9 +8,8 @@ import {
     ElementRef,
     Inject,
     Optional,
-    InjectionToken, ChangeDetectionStrategy, ViewEncapsulation, OnInit
+    InjectionToken, ChangeDetectionStrategy, ViewEncapsulation
 } from '@angular/core';
-import { SelectionModel } from '@ptsecurity/cdk/collections';
 import { CdkTreeNode } from '@ptsecurity/cdk/tree';
 import { CanDisable, toBoolean } from '@ptsecurity/mosaic/core';
 

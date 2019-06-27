@@ -1,8 +1,8 @@
 /* tslint:disable:no-magic-numbers no-empty */
+import { Directionality } from '@angular/cdk/bidi';
 import { Component, DebugElement, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { Directionality } from '@ptsecurity/cdk/bidi';
 import { BACKSPACE, DELETE, SPACE } from '@ptsecurity/cdk/keycodes';
 import { createKeyboardEvent, dispatchFakeEvent } from '@ptsecurity/cdk/testing';
 import { Subject } from 'rxjs';

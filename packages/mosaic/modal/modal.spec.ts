@@ -1,6 +1,6 @@
+import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, EventEmitter, NgModule } from '@angular/core';
 import { async, ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
-import { OverlayContainer } from '@ptsecurity/cdk/overlay';
 import { McMeasureScrollbarService } from '@ptsecurity/mosaic/core';
 
 import { McModalControlService } from './modal-control.service';

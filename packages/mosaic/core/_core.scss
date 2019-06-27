@@ -1,7 +1,7 @@
 @import 'styles/common/animation';
 
 @import '../../cdk/a11y/a11y';
-@import '../../cdk/overlay/overlay';
+@import '../../../node_modules/@angular/cdk/overlay';
 
 @import './selection/pseudo-checkbox/pseudo-checkbox-theme';
 

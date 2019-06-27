@@ -1,4 +1,4 @@
-import { ConnectionPositionPair } from '@ptsecurity/cdk/overlay';
+import { ConnectionPositionPair } from '@angular/cdk/overlay';
 
 
 export const POSITION_MAP: { [key: string]: ConnectionPositionPair } = {

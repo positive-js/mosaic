@@ -1,5 +1,15 @@
 // tslint:disable:no-unbound-method
 // tslint:disable:no-magic-numbers
+import { Directionality } from '@angular/cdk/bidi';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import {
+    Overlay,
+    OverlayConfig,
+    OverlayRef,
+    PositionStrategy,
+    ScrollStrategy
+} from '@angular/cdk/overlay';
+import { ComponentPortal, ComponentType } from '@angular/cdk/portal';
 import { DOCUMENT } from '@angular/common';
 import {
     AfterViewInit,
@@ -19,18 +29,8 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { Directionality } from '@ptsecurity/cdk/bidi';
-import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
 import { ESCAPE, UP_ARROW } from '@ptsecurity/cdk/keycodes';
-import {
-    Overlay,
-    OverlayConfig,
-    OverlayRef,
-    IPositionStrategy,
-    IScrollStrategy
-} from '@ptsecurity/cdk/overlay';
-import { ComponentPortal, IComponentType } from '@ptsecurity/cdk/portal';
 import {
     CanColor,
     CanColorCtor,
@@ -53,11 +53,11 @@ let datepickerUid = 0;
 
 /** Injection token that determines the scroll handling while the calendar is open. */
 export const MC_DATEPICKER_SCROLL_STRATEGY =
-    new InjectionToken<() => IScrollStrategy>('mc-datepicker-scroll-strategy');
+    new InjectionToken<() => ScrollStrategy>('mc-datepicker-scroll-strategy');
 
 /** @docs-private */
 // tslint:disable-next-line:naming-convention
-export function MC_DATEPICKER_SCROLL_STRATEGY_FACTORY(overlay: Overlay): () => IScrollStrategy {
+export function MC_DATEPICKER_SCROLL_STRATEGY_FACTORY(overlay: Overlay): () => ScrollStrategy {
     return () => overlay.scrollStrategies.reposition();
 }
 
@@ -223,7 +223,7 @@ export class McDatepicker<D> implements OnDestroy, CanColor {
     }
 
     /** An input indicating the type of the custom header component for the calendar, if set. */
-    @Input() calendarHeaderComponent: IComponentType<any>;
+    @Input() calendarHeaderComponent: ComponentType<any>;
 
     /** The view that the calendar should start in. */
     @Input() startView: 'month' | 'year' | 'multi-year' = 'month';
@@ -268,7 +268,7 @@ export class McDatepicker<D> implements OnDestroy, CanColor {
 
     /** Emits new selected date when selected date changes. */
     readonly selectedChanged = new Subject<D>();
-    private scrollStrategy: () => IScrollStrategy;
+    private scrollStrategy: () => ScrollStrategy;
     private _startAt: D | null;
     private _disabled: boolean;
     private _opened = false;
@@ -451,7 +451,7 @@ export class McDatepicker<D> implements OnDestroy, CanColor {
     }
 
     /** Create the popup PositionStrategy. */
-    private createPopupPositionStrategy(): IPositionStrategy {
+    private createPopupPositionStrategy(): PositionStrategy {
         return this.overlay.position()
             .flexibleConnectedTo(this.datepickerInput.elementRef)
             .withTransformOriginOn('.mc-datepicker__content')

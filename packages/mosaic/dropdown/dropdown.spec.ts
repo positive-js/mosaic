@@ -2,6 +2,9 @@
 // tslint:disable:prefer-array-literal
 // tslint:disable:no-empty
 
+import { Direction, Directionality } from '@angular/cdk/bidi';
+import { Overlay, OverlayContainer } from '@angular/cdk/overlay';
+import { ScrollDispatcher } from '@angular/cdk/scrolling';
 import {
     Component,
     ElementRef,
@@ -20,10 +23,7 @@ import { ComponentFixture, fakeAsync, flush, inject, TestBed, tick } from '@angu
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
-import { Direction, Directionality } from '@ptsecurity/cdk/bidi';
 import { DOWN_ARROW, ESCAPE, LEFT_ARROW, RIGHT_ARROW, TAB } from '@ptsecurity/cdk/keycodes';
-import { Overlay, OverlayContainer } from '@ptsecurity/cdk/overlay';
-import { ScrollDispatcher } from '@ptsecurity/cdk/scrolling';
 import {
     createKeyboardEvent,
     createMouseEvent,
@@ -915,7 +915,7 @@ describe('McDropdown', () => {
             readonly fixture: ComponentFixture<T>;
             readonly trigger: HTMLElement;
 
-            constructor(ctor: { new(): T; }, inputs: { [key: string]: any } = {}) {
+            constructor(ctor: new() => T, inputs: { [key: string]: any } = {}) {
                 this.fixture = createComponent(ctor);
                 Object.keys(inputs)
                     .forEach((key) => (this.fixture.componentInstance as any)[key] = inputs[key]);

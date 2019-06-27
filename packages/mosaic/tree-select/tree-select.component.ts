@@ -1,5 +1,12 @@
 /* tslint:disable:no-empty */
 
+import { Directionality } from '@angular/cdk/bidi';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { SelectionModel } from '@angular/cdk/collections';
+import {
+    CdkConnectedOverlay,
+    ViewportRuler
+} from '@angular/cdk/overlay';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -30,9 +37,6 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
-import { Directionality } from '@ptsecurity/cdk/bidi';
-import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
-import { SelectionModel } from '@ptsecurity/cdk/collections';
 import {
     DOWN_ARROW,
     END,
@@ -44,10 +48,6 @@ import {
     UP_ARROW,
     A, PAGE_UP, PAGE_DOWN
 } from '@ptsecurity/cdk/keycodes';
-import {
-    CdkConnectedOverlay,
-    ViewportRuler
-} from '@ptsecurity/cdk/overlay';
 import { CdkTree } from '@ptsecurity/cdk/tree';
 import {
     getOptionScrollPosition,

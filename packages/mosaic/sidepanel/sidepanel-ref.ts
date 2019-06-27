@@ -1,5 +1,5 @@
+import { OverlayRef } from '@angular/cdk/overlay';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
-import { OverlayRef } from '@ptsecurity/cdk/overlay';
 import { merge, Observable, Subject } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 

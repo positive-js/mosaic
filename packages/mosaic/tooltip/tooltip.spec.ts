@@ -1,7 +1,7 @@
+import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { fakeAsync, inject, tick, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { OverlayContainer } from '@ptsecurity/cdk/overlay';
 import { dispatchMouseEvent } from '@ptsecurity/cdk/testing';
 
 import { McTooltip } from './tooltip.component';

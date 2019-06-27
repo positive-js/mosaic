@@ -1,11 +1,9 @@
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
 import { ComponentRef, Injectable } from '@angular/core';
-
+import { ESCAPE } from '@ptsecurity/cdk/keycodes';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
-
-import { ESCAPE } from '@ptsecurity/cdk/keycodes';
-import { Overlay, OverlayRef } from '@ptsecurity/cdk/overlay';
-import { ComponentPortal } from '@ptsecurity/cdk/portal';
 
 import { McModalControlService } from './modal-control.service';
 import { McModalRef } from './modal-ref.class';

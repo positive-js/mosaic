@@ -1,3 +1,4 @@
+import { TemplatePortal } from '@angular/cdk/portal';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -12,7 +13,6 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { TemplatePortal } from '@ptsecurity/cdk/portal';
 import {
     CanDisable,
     CanDisableCtor,

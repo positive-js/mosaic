@@ -10,6 +10,17 @@ System.config({
         'moment': 'node:moment/min/moment-with-locales.min.js',
         'messageformat': 'node:messageformat/messageformat.js',
 
+        '@angular/cdk/a11y': 'node:@angular/cdk/bundles/cdk-a11y.umd.js',
+        '@angular/cdk/bidi': 'node:@angular/cdk/bundles/cdk-bidi.umd.js',
+        '@angular/cdk/coercion': 'node:@angular/cdk/bundles/cdk-coercion.umd.js',
+        '@angular/cdk/collections': 'node:@angular/cdk/bundles/cdk-collections.umd.js',
+        '@angular/cdk/keycodes': 'node:@angular/cdk/bundles/cdk-keycodes.umd.js',
+        '@angular/cdk/platform': 'node:@angular/cdk/bundles/cdk-platform.umd.js',
+        '@angular/cdk/portal': 'node:@angular/cdk/bundles/cdk-portal.umd.js',
+        '@angular/cdk/observers': 'node:@angular/cdk/bundles/cdk-observers.umd.js',
+        '@angular/cdk/overlay': 'node:@angular/cdk/bundles/cdk-overlay.umd.js',
+        '@angular/cdk/scrolling': 'node:@angular/cdk/bundles/cdk-scrolling.umd.js',
+
         // Angular specific mappings.
         '@angular/core': 'node:@angular/core/bundles/core.umd.js',
         '@angular/core/testing': 'node:@angular/core/bundles/core-testing.umd.js',
@@ -39,17 +50,8 @@ System.config({
 
         '@ptsecurity/cdk': 'dist/packages/cdk/index.js',
         '@ptsecurity/cdk/a11y': 'dist/packages/cdk/a11y/index.js',
-        '@ptsecurity/cdk/accordion': 'dist/packages/cdk/accordion/index.js',
-        '@ptsecurity/cdk/bidi': 'dist/packages/cdk/bidi/index.js',
         '@ptsecurity/cdk/datetime': 'dist/packages/cdk/datetime/index.js',
-        '@ptsecurity/cdk/coercion': 'dist/packages/cdk/coercion/index.js',
-        '@ptsecurity/cdk/collections': 'dist/packages/cdk/collections/index.js',
         '@ptsecurity/cdk/keycodes': 'dist/packages/cdk/keycodes/index.js',
-        '@ptsecurity/cdk/layout': 'dist/packages/cdk/layout/index.js',
-        '@ptsecurity/cdk/overlay': 'dist/packages/cdk/overlay/index.js',
-        '@ptsecurity/cdk/platform': 'dist/packages/cdk/platform/index.js',
-        '@ptsecurity/cdk/portal': 'dist/packages/cdk/portal/index.js',
-        '@ptsecurity/cdk/scrolling': 'dist/packages/cdk/scrolling/index.js',
         '@ptsecurity/cdk/testing': 'dist/packages/cdk/testing/index.js',
         '@ptsecurity/cdk/tree': 'dist/packages/cdk/tree/index.js',
 

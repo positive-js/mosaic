@@ -1,3 +1,6 @@
+import { Direction, Directionality } from '@angular/cdk/bidi';
+import { coerceNumberProperty } from '@angular/cdk/coercion';
+import { ViewportRuler } from '@angular/cdk/scrolling';
 import {
     AfterContentChecked,
     AfterContentInit,
@@ -17,10 +20,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
-import { Direction, Directionality } from '@ptsecurity/cdk/bidi';
-import { coerceNumberProperty } from '@ptsecurity/cdk/coercion';
 import { END, ENTER, HOME, SPACE } from '@ptsecurity/cdk/keycodes';
-import { ViewportRuler } from '@ptsecurity/cdk/scrolling';
 import { merge, of as observableOf, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 

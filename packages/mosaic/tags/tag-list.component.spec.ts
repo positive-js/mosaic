@@ -2,6 +2,7 @@
 // tslint:disable:mocha-no-side-effect-code
 // tslint:disable:max-func-body-length
 import { animate, style, transition, trigger } from '@angular/animations';
+import { Directionality, Direction } from '@angular/cdk/bidi';
 import {
     Component,
     DebugElement,
@@ -17,7 +18,6 @@ import { FormControl, FormsModule, NgForm, ReactiveFormsModule, Validators } fro
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
-import { Directionality, Direction } from '@ptsecurity/cdk/bidi';
 import {
     BACKSPACE,
     DELETE,

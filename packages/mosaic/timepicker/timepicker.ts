@@ -1,3 +1,4 @@
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     Directive,
     DoCheck,
@@ -19,7 +20,6 @@ import {
     NgForm,
     ValidationErrors
 } from '@angular/forms';
-import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
 import {
     CanUpdateErrorState,

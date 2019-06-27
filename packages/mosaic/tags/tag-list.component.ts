@@ -1,3 +1,6 @@
+import { Directionality } from '@angular/cdk/bidi';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { SelectionModel } from '@angular/cdk/collections';
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
@@ -18,9 +21,6 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
-import { Directionality } from '@ptsecurity/cdk/bidi';
-import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
-import { SelectionModel } from '@ptsecurity/cdk/collections';
 import { BACKSPACE, END, HOME } from '@ptsecurity/cdk/keycodes';
 import {
     CanUpdateErrorState,

@@ -1,3 +1,4 @@
+import { Directionality } from '@angular/cdk/bidi';
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
@@ -11,7 +12,6 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { Directionality } from '@ptsecurity/cdk/bidi';
 import { DateAdapter, MC_DATE_FORMATS, McDateFormats } from '@ptsecurity/cdk/datetime';
 import {
     DOWN_ARROW,

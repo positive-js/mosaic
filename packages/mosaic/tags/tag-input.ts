@@ -1,5 +1,5 @@
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Directive, ElementRef, EventEmitter, Inject, Input, OnChanges, Output } from '@angular/core';
-import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import { hasModifierKey } from '@ptsecurity/cdk/keycodes';
 
 import { MC_TAGS_DEFAULT_OPTIONS, McTagsDefaultOptions } from './tag-default-options';

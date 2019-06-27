@@ -1,8 +1,6 @@
-import { ComponentFixture, TestBed, fakeAsync, flush } from '@angular/core/testing';
-
+import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { Component, ViewChild, TrackByFunction } from '@angular/core';
-
-import { ICollectionViewer, DataSource } from '@ptsecurity/cdk/collections';
+import { ComponentFixture, TestBed, fakeAsync, flush } from '@angular/core/testing';
 import { combineLatest, BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -906,7 +904,7 @@ class FakeDataSource extends DataSource<TestData> {
         }
     }
 
-    connect(collectionViewer: ICollectionViewer): Observable<TestData[]> {
+    connect(collectionViewer: CollectionViewer): Observable<TestData[]> {
         this.isConnected = true;
         const streams = [this._dataChange, collectionViewer.viewChange];
         return combineLatest<TestData[]>(streams)

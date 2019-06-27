@@ -1,9 +1,7 @@
+import { ScrollingModule, VIRTUAL_SCROLL_STRATEGY, FixedSizeVirtualScrollStrategy } from '@angular/cdk/scrolling';
 import { ChangeDetectionStrategy, Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-
-import { ScrollingModule, VIRTUAL_SCROLL_STRATEGY } from '../../cdk/scrolling';
-import { FixedSizeVirtualScrollStrategy } from '../../cdk/scrolling/fixed-size-virtual-scroll';
 
 
 export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy {

@@ -1,3 +1,5 @@
+import { Directionality } from '@angular/cdk/bidi';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { DOCUMENT } from '@angular/common';
 import {
     ChangeDetectorRef,
@@ -14,19 +16,17 @@ import {
     ViewContainerRef
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Directionality } from '@ptsecurity/cdk/bidi';
-import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import { DOWN_ARROW, ENTER, ESCAPE, TAB, UP_ARROW } from '@ptsecurity/cdk/keycodes';
 import {
     FlexibleConnectedPositionStrategy,
     Overlay,
     OverlayConfig,
     OverlayRef,
-    IPositionStrategy,
-    IScrollStrategy, IConnectedPosition
-} from '@ptsecurity/cdk/overlay';
-import { TemplatePortal } from '@ptsecurity/cdk/portal';
-import { ViewportRuler } from '@ptsecurity/cdk/scrolling';
+    PositionStrategy,
+    ScrollStrategy, ConnectedPosition
+} from '@angular/cdk/overlay';
+import { TemplatePortal } from '@angular/cdk/portal';
+import { ViewportRuler } from '@angular/cdk/scrolling';
 import {
     countGroupLabelsBeforeOption,
     getOptionScrollPosition,
@@ -57,10 +57,10 @@ export const AUTOCOMPLETE_BORDER_WIDTH: number = 2;
 
 /** Injection token that determines the scroll handling while the autocomplete panel is open. */
 export const MC_AUTOCOMPLETE_SCROLL_STRATEGY =
-    new InjectionToken<() => IScrollStrategy>('mc-autocomplete-scroll-strategy');
+    new InjectionToken<() => ScrollStrategy>('mc-autocomplete-scroll-strategy');
 
 // tslint:disable-next-line naming-convention
-export function MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY(overlay: Overlay): () => IScrollStrategy {
+export function MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY(overlay: Overlay): () => ScrollStrategy {
     return () => overlay.scrollStrategies.reposition();
 }
 
@@ -172,7 +172,7 @@ export class McAutocompleteTrigger implements ControlValueAccessor, OnDestroy {
 
     private componentDestroyed = false;
 
-    private scrollStrategy: () => IScrollStrategy;
+    private scrollStrategy: () => ScrollStrategy;
 
     /** Old value of the native input. Used to work around issues with the `input` event on IE. */
     private previousValue: string | number | null;
@@ -611,7 +611,7 @@ export class McAutocompleteTrigger implements ControlValueAccessor, OnDestroy {
         });
     }
 
-    private getOverlayPosition(): IPositionStrategy {
+    private getOverlayPosition(): PositionStrategy {
         this.positionStrategy = this.overlay.position()
             .flexibleConnectedTo(this.getConnectedElement())
             .withFlexibleDimensions(false)
@@ -634,7 +634,7 @@ export class McAutocompleteTrigger implements ControlValueAccessor, OnDestroy {
                     // border-radius based on the overlay position.
                     panelClass: 'mc-autocomplete-panel-above'
                 }
-            ] as IConnectedPosition[]);
+            ] as ConnectedPosition[]);
 
         return this.positionStrategy;
     }

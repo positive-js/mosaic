@@ -1,3 +1,4 @@
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     AfterContentInit,
     Attribute,
@@ -13,7 +14,6 @@ import {
     ViewEncapsulation,
     ViewChild
 } from '@angular/core';
-import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import { McButton } from '@ptsecurity/mosaic/button';
 import { merge, of as observableOf, Subscription } from 'rxjs';
 

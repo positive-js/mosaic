@@ -1,3 +1,4 @@
+import { Platform, supportsPassiveEventListeners } from '@angular/cdk/platform';
 import {
     Directive,
     ElementRef,
@@ -9,10 +10,7 @@ import {
     Output,
     SkipSelf
 } from '@angular/core';
-
 import { Observable, Subject, Subscription, of as observableOf } from 'rxjs';
-
-import { Platform, supportsPassiveEventListeners } from '@ptsecurity/cdk/platform';
 
 
 // Through trial and error (on iPhone 6S) they found
@@ -23,11 +21,11 @@ export const TOUCH_BUFFER_MS = 650;
 export type FocusOrigin = 'touch' | 'mouse' | 'keyboard' | 'program' | null;
 
 
-type MonitoredElementInfo = {
-    unlisten: Function,
-    checkChildren: boolean,
-    subject: Subject<FocusOrigin>
-};
+interface MonitoredElementInfo {
+    unlisten: Function;
+    checkChildren: boolean;
+    subject: Subject<FocusOrigin>;
+}
 
 
 /** Monitors mouse and keyboard events to determine the cause of focus events. */
@@ -57,9 +55,6 @@ export class FocusMonitor implements OnDestroy {
     /** Map of elements being monitored to their info. */
     private _elementInfo = new Map<HTMLElement, MonitoredElementInfo>();
 
-    /** A map of global objects to lists of current listeners. */
-    private _unregisterGlobalListeners = () => {};
-
     /** The number of elements currently being monitored. */
     private _monitoredElementCount = 0;
 
@@ -87,7 +82,7 @@ export class FocusMonitor implements OnDestroy {
         // Create monitored element info.
         const info: MonitoredElementInfo = {
             unlisten: () => {},
-            checkChildren: checkChildren,
+            checkChildren,
             subject: new Subject<FocusOrigin>()
         };
         this._elementInfo.set(element, info);
@@ -144,6 +139,28 @@ export class FocusMonitor implements OnDestroy {
     ngOnDestroy() {
         this._elementInfo.forEach((_info, element) => this.stopMonitoring(element));
     }
+
+    /**
+     * Handles blur events on a registered element.
+     * @param event The blur event.
+     * @param element The monitored element.
+     */
+    _onBlur(event: FocusEvent, element: HTMLElement) {
+        // If we are counting child-element-focus as focused, make sure that we aren't just blurring in
+        // order to focus another child of the monitored element.
+        const elementInfo = this._elementInfo.get(element);
+
+        if (!elementInfo || (elementInfo.checkChildren && event.relatedTarget instanceof Node &&
+                element.contains(event.relatedTarget))) {
+            return;
+        }
+
+        this._setClasses(element);
+        elementInfo.subject.next(null);
+    }
+
+    /** A map of global objects to lists of current listeners. */
+    private _unregisterGlobalListeners = () => {};
 
     /** Register necessary event listeners on the document and window. */
     private _registerGlobalListeners() {
@@ -313,25 +330,6 @@ export class FocusMonitor implements OnDestroy {
         this._setClasses(element, origin);
         this._emitOrigin(elementInfo.subject, origin);
         this._lastFocusOrigin = origin;
-    }
-
-    /**
-     * Handles blur events on a registered element.
-     * @param event The blur event.
-     * @param element The monitored element.
-     */
-    _onBlur(event: FocusEvent, element: HTMLElement) {
-        // If we are counting child-element-focus as focused, make sure that we aren't just blurring in
-        // order to focus another child of the monitored element.
-        const elementInfo = this._elementInfo.get(element);
-
-        if (!elementInfo || (elementInfo.checkChildren && event.relatedTarget instanceof Node &&
-                element.contains(event.relatedTarget))) {
-            return;
-        }
-
-        this._setClasses(element);
-        elementInfo.subject.next(null);
     }
 
     private _emitOrigin(subject: Subject<FocusOrigin>, origin: FocusOrigin) {

@@ -1,5 +1,5 @@
+import { BidiModule } from '@angular/cdk/bidi';
 import { NgModule, InjectionToken, Optional, Inject, isDevMode } from '@angular/core';
-import { BidiModule } from '@ptsecurity/cdk/bidi';
 
 
 // Injection token that configures whether the Mosaic sanity checks are enabled.

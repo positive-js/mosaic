@@ -1,4 +1,4 @@
-import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 import { Constructor } from './constructor';
 

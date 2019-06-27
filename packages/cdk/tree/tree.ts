@@ -1,3 +1,4 @@
+import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import {
     AfterContentChecked,
     ChangeDetectionStrategy,
@@ -18,10 +19,7 @@ import {
     ViewEncapsulation,
     TrackByFunction, Inject, forwardRef
 } from '@angular/core';
-
 import { IFocusableOption } from '@ptsecurity/cdk/a11y';
-import { ICollectionViewer, DataSource } from '@ptsecurity/cdk/collections';
-
 import { BehaviorSubject, Observable, of as observableOf, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -52,7 +50,7 @@ import {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CdkTree<T> implements AfterContentChecked, ICollectionViewer, OnDestroy, OnInit {
+export class CdkTree<T> implements AfterContentChecked, CollectionViewer, OnDestroy, OnInit {
 
     /** The tree controller */
     @Input() treeControl: ITreeControl<T>;
@@ -154,7 +152,7 @@ export class CdkTree<T> implements AfterContentChecked, ICollectionViewer, OnDes
 
     /** Check for changes made in the data and render each change (node added/removed/moved). */
     renderNodeChanges(
-        data: T[],
+        data: T[] | ReadonlyArray<T>,
         dataDiffer: IterableDiffer<T> = this.dataDiffer,
         viewContainer: ViewContainerRef = this.nodeOutlet.viewContainer,
         parentData?: T
@@ -233,7 +231,7 @@ export class CdkTree<T> implements AfterContentChecked, ICollectionViewer, OnDes
 
     /** Set up a subscription for the data provided by the data source. */
     private observeRenderChanges() {
-        let dataStream: Observable<T[]> | undefined;
+        let dataStream: Observable<T[] | ReadonlyArray<T>> | undefined;
 
         // Cannot use `instanceof DataSource` since the data source could be a literal with
         // `connect` function and may not extends DataSource.
