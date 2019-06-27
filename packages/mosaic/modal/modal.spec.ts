@@ -1,6 +1,8 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, EventEmitter, NgModule } from '@angular/core';
 import { async, ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
+import { McButtonModule } from '@ptsecurity/mosaic/button';
+
 import { McMeasureScrollbarService } from '@ptsecurity/mosaic/core';
 
 import { McModalControlService } from './modal-control.service';
@@ -66,6 +68,37 @@ describe('McModal', () => {
             expect(spy).toHaveBeenCalledTimes(2);
             expect(modalService.openModals.indexOf(modalRef)).toBeGreaterThan(-1);
             expect(modalService.openModals.length).toBe(1);
+        }));
+
+        it('should fire onClick events', fakeAsync(() => {
+            const spy = jasmine.createSpy('mcFooter onClick spy');
+            const onClickEmitter = new EventEmitter<void>();
+
+            onClickEmitter.subscribe(spy);
+
+            modalService.create({
+                mcContent: TestModalContentComponent,
+                mcFooter: [
+                    {
+                        label: 'Test label',
+                        type: 'primary',
+                        onClick: () => {
+                            onClickEmitter.emit();
+                        }
+                    }
+                ]
+            });
+
+            fixture.detectChanges();
+            tick(600);
+            expect(spy).not.toHaveBeenCalled();
+
+            const button = overlayContainerElement.querySelector('button.mc-primary') as HTMLButtonElement;
+
+            button.click();
+
+            fixture.detectChanges();
+            expect(spy).toHaveBeenCalled();
         }));
 
         it('should trigger both afterClose/mcAfterClose and have the correct openModals length', fakeAsync(() => {
@@ -180,6 +213,10 @@ describe('McModal', () => {
 })
 class TestCssUnitPipeComponent { }
 
+@Component({
+    template: `Modal Content`
+})
+class TestModalContentComponent { }
 
 @Component({
     selector: 'mc-modal-by-service',
@@ -198,15 +235,17 @@ class ModalByServiceComponent {
 
 
 const TEST_DIRECTIVES = [
-    ModalByServiceComponent
+    ModalByServiceComponent,
+    TestModalContentComponent
 ];
 
 @NgModule({
-    imports: [ McModalModule ],
+    imports: [ McModalModule, McButtonModule ],
     exports: TEST_DIRECTIVES,
     declarations: TEST_DIRECTIVES,
     entryComponents: [
-        ModalByServiceComponent
+        ModalByServiceComponent,
+        TestModalContentComponent
     ]
 })
 class ModalTestModule { }
