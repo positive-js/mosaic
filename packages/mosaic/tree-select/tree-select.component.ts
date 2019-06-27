@@ -480,7 +480,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         this.tree.multiple = this.multiple;
 
         if (this.multiple) {
-            this.tree.noUnselect = false;
+            this.tree.noUnselectLastSelected = false;
         }
 
         if (this.tempValues) {

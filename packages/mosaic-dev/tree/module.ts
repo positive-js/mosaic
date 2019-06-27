@@ -1,3 +1,4 @@
+/* tslint:disable:no-console no-reserved-keywords */
 import { Component, Injectable, NgModule, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -135,13 +136,13 @@ export class DemoComponent {
 
     constructor(database: FileDatabase) {
         this.treeFlattener = new McTreeFlattener(
-            this.transformer, this._getLevel, this._isExpandable, this._getChildren
+            this.transformer, this.getLevel, this.isExpandable, this.getChildren
         );
 
-        this.treeControl = new FlatTreeControl<FileFlatNode>(this._getLevel, this._isExpandable);
+        this.treeControl = new FlatTreeControl<FileFlatNode>(this.getLevel, this.isExpandable);
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-        this.nestedTreeControl = new NestedTreeControl<FileNode>(this._getChildren);
+        this.nestedTreeControl = new NestedTreeControl<FileNode>(this.getChildren);
         this.nestedDataSource = new McTreeNestedDataSource();
 
         database.dataChange.subscribe((data) => {
@@ -161,7 +162,7 @@ export class DemoComponent {
         return flatNode;
     }
 
-    hasChild(_: number, _nodeData: FileFlatNode) { return _nodeData.expandable; }
+    hasChild(_: number, nodeData: FileFlatNode) { return nodeData.expandable; }
 
     hasNestedChild(_: number, nodeData: FileNode) {
         return !(nodeData.type);
@@ -175,29 +176,25 @@ export class DemoComponent {
         console.log('onSelectionChange');
     }
 
-    private _getLevel(node: FileFlatNode) { return node.level; }
+    private getLevel(node: FileFlatNode) { return node.level; }
 
-    private _isExpandable(node: FileFlatNode) { return node.expandable; }
+    private isExpandable(node: FileFlatNode) { return node.expandable; }
 
-    private _getChildren = (node: FileNode): Observable<FileNode[]> => {
+    private getChildren = (node: FileNode): Observable<FileNode[]> => {
         return observableOf(node.children);
     }
 }
 
 
 @NgModule({
-    declarations: [
-        DemoComponent
-    ],
+    declarations: [DemoComponent],
     imports: [
         BrowserModule,
         FormsModule,
         McTreeModule,
         McIconModule
     ],
-    bootstrap: [
-        DemoComponent
-    ]
+    bootstrap: [DemoComponent]
 })
 export class DemoModule {}
 
