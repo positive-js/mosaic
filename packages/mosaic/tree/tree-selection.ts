@@ -104,7 +104,7 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
     tabIndex: number;
     multiple: boolean;
     autoSelect: boolean;
-    noUnselect: boolean;
+    noUnselectLastSelected: boolean;
 
     @Output() readonly navigationChange = new EventEmitter<McTreeNavigationChange>();
 
@@ -157,7 +157,7 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
 
         this.multiple = multiple === null ? false : toBoolean(multiple);
         this.autoSelect = autoSelect === null ? true : toBoolean(autoSelect);
-        this.noUnselect = noUnselect === null ? true : toBoolean(noUnselect);
+        this.noUnselectLastSelected = noUnselect === null ? true : toBoolean(noUnselect);
 
         this.selectionModel = new SelectionModel<any>(this.multiple);
     }
@@ -167,12 +167,18 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
             .withVerticalOrientation(true)
             .withHorizontalOrientation(null);
 
+        this.keyManager.change
+            .pipe(takeUntil(this.destroy))
+            .subscribe(() => {
+                if (this.keyManager.activeItem) {
+                    this.emitNavigationEvent(this.keyManager.activeItem);
+                }
+            });
+
         this.selectionModel.changed
             .pipe(takeUntil(this.destroy))
             .subscribe((changeEvent) => {
                 this.onChange(changeEvent.source.selected);
-                // event.added.forEach((option) => option.select());
-                // event.removed.forEach((option) => option.deselect());
             });
 
         this.options.changes
@@ -260,6 +266,7 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
             if (!this.canDeselectLast(option)) { return; }
 
             option.toggle();
+            this.emitChangeEvent(option);
         } else if (withShift) {
             const previousIndex = this.keyManager.previousActiveItemIndex;
             const activeIndex = this.keyManager.activeItemIndex;
@@ -273,18 +280,20 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
                     if (index >= activeIndex && index <= previousIndex) { item.setSelected(true); }
                 });
             }
+            this.emitChangeEvent(option);
         } else if (withCtrl) {
             if (!this.canDeselectLast(option)) { return; }
 
             option.toggle();
+            this.emitChangeEvent(option);
         } else {
             if (this.autoSelect) {
                 this.options.forEach((item) => item.setSelected(false));
                 option.setSelected(true);
+
+                this.emitChangeEvent(option);
             }
         }
-
-        this.emitNavigationEvent(option);
     }
 
     toggleFocusedOption(): void {
@@ -292,9 +301,6 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
 
         if (focusedOption) {
             this.setFocusedOption(focusedOption);
-
-            // Emit a change event because the focused option changed its state through user interaction.
-            this.emitChangeEvent(focusedOption);
         }
     }
 
@@ -400,7 +406,7 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
     }
 
     private canDeselectLast(option: McTreeOption): boolean {
-        return !(this.noUnselect && this.selectionModel.selected.length === 1 && option.selected);
+        return !(this.noUnselectLastSelected && this.selectionModel.selected.length === 1 && option.selected);
     }
 }
 
