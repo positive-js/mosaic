@@ -78,6 +78,7 @@
                         mc-button
                         [hidden]="!getButtonCallableProp(button, 'show')"
                         [disabled]="getButtonCallableProp(button, 'disabled')"
+                        (click)="onButtonClick(button)"
                         [color]="button.type"
                 >{{ button.label }}
                 </button>
