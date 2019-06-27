@@ -1,8 +1,8 @@
+import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, Inject, NgModule, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, flush, inject, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
-import { OverlayContainer } from '@ptsecurity/cdk/overlay';
 import { dispatchKeyboardEvent } from '@ptsecurity/cdk/testing';
 
 import { MC_SIDEPANEL_DATA, McSidepanelModule, McSidepanelPosition, McSidepanelRef, McSidepanelService } from './index';

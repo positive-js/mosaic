@@ -1,13 +1,13 @@
 // tslint:disable:no-unbound-method
 // tslint:disable:no-empty
 
+import { Directionality } from '@angular/cdk/bidi';
+import { PlatformModule } from '@angular/cdk/platform';
 import { Component, DebugElement, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { Directionality } from '@ptsecurity/cdk/bidi';
 import { ENTER, COMMA } from '@ptsecurity/cdk/keycodes';
-import { PlatformModule } from '@ptsecurity/cdk/platform';
 import { createKeyboardEvent } from '@ptsecurity/cdk/testing';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { Subject } from 'rxjs';

@@ -1,4 +1,20 @@
 import { AnimationEvent } from '@angular/animations';
+import { Directionality } from '@angular/cdk/bidi';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import {
+    ConnectedOverlayPositionChange,
+    ConnectionPositionPair,
+    Overlay,
+    OverlayRef,
+    ScrollDispatcher,
+    ScrollStrategy,
+    FlexibleConnectedPositionStrategy,
+    OverlayConnectionPosition,
+    OriginConnectionPosition,
+    HorizontalConnectionPos,
+    VerticalConnectionPos
+} from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -18,23 +34,7 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { Directionality } from '@ptsecurity/cdk/bidi';
-import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
-import {
-    ConnectedOverlayPositionChange,
-    ConnectionPositionPair,
-    Overlay,
-    OverlayRef,
-    ScrollDispatcher,
-    IScrollStrategy,
-    FlexibleConnectedPositionStrategy,
-    IOverlayConnectionPosition,
-    IOriginConnectionPosition,
-    HorizontalConnectionPos,
-    VerticalConnectionPos
-} from '@ptsecurity/cdk/overlay';
-import { ComponentPortal } from '@ptsecurity/cdk/portal';
 import {
     EXTENDED_OVERLAY_POSITIONS,
     POSITION_MAP,
@@ -221,10 +221,10 @@ export class McPopoverComponent {
 }
 
 export const MC_POPOVER_SCROLL_STRATEGY =
-    new InjectionToken<() => IScrollStrategy>('mc-popover-scroll-strategy');
+    new InjectionToken<() => ScrollStrategy>('mc-popover-scroll-strategy');
 
 /** @docs-private */
-export function mcPopoverScrollStrategyFactory(overlay: Overlay): () => IScrollStrategy {
+export function mcPopoverScrollStrategyFactory(overlay: Overlay): () => ScrollStrategy {
     return () => overlay.scrollStrategies.reposition({scrollThrottle: 20});
 }
 
@@ -665,8 +665,8 @@ export class McPopover implements OnInit, OnDestroy {
      * Returns the origin position and a fallback position based on the user's position preference.
      * The fallback position is the inverse of the origin (e.g. `'below' -> 'above'`).
      */
-    getOrigin(): {main: IOriginConnectionPosition; fallback: IOriginConnectionPosition} {
-        let originPosition: IOriginConnectionPosition;
+    getOrigin(): {main: OriginConnectionPosition; fallback: OriginConnectionPosition} {
+        let originPosition: OriginConnectionPosition;
         const originXPosition = this.getOriginXaxis();
         const originYPosition = this.getOriginYaxis();
         originPosition = {originX: originXPosition, originY: originYPosition};
@@ -715,9 +715,9 @@ export class McPopover implements OnInit, OnDestroy {
     }
 
     /** Returns the overlay position and a fallback position based on the user's preference */
-    getOverlayPosition(): {main: IOverlayConnectionPosition; fallback: IOverlayConnectionPosition} {
+    getOverlayPosition(): {main: OverlayConnectionPosition; fallback: OverlayConnectionPosition} {
         const position = this.mcPlacement;
-        let overlayPosition: IOverlayConnectionPosition;
+        let overlayPosition: OverlayConnectionPosition;
         if (this.availablePositions[position]) {
             overlayPosition = {
                 overlayX : this.availablePositions[position].overlayX,

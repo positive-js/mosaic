@@ -1,4 +1,4 @@
-import { ICollectionViewer, DataSource } from '@ptsecurity/cdk/collections';
+import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { BehaviorSubject, merge, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -22,7 +22,7 @@ export class McTreeNestedDataSource<T> extends DataSource<T> {
     /* tslint:disable-next-line:naming-convention */
     private _data = new BehaviorSubject<T[]>([]);
 
-    connect(collectionViewer: ICollectionViewer): Observable<T[]> {
+    connect(collectionViewer: CollectionViewer): Observable<T[]> {
         return merge(...[collectionViewer.viewChange, this._data])
             .pipe(map(() => this.data));
     }

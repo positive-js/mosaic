@@ -1,3 +1,4 @@
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { DOCUMENT } from '@angular/common';
 import {
     AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef,
@@ -21,7 +22,6 @@ import {
     ViewContainerRef, ViewEncapsulation
 } from '@angular/core';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
-import { Overlay, OverlayRef } from '@ptsecurity/cdk/overlay';
 import { McMeasureScrollbarService } from '@ptsecurity/mosaic/core';
 import { Observable } from 'rxjs';
 

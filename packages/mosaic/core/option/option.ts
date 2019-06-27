@@ -1,3 +1,4 @@
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     AfterViewChecked,
     ChangeDetectionStrategy,
@@ -14,7 +15,6 @@ import {
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
-import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import { ENTER, SPACE } from '@ptsecurity/cdk/keycodes';
 import { Subject } from 'rxjs';
 

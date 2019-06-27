@@ -1,4 +1,4 @@
-import { ICollectionViewer, DataSource } from '@ptsecurity/cdk/collections';
+import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { FlatTreeControl, ITreeControl } from '@ptsecurity/cdk/tree';
 import { BehaviorSubject, merge, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
@@ -140,7 +140,7 @@ export class McTreeFlatDataSource<T, F> extends DataSource<F> {
         this._data = new BehaviorSubject<T[]>(initialData);
     }
 
-    connect(collectionViewer: ICollectionViewer): Observable<F[]> {
+    connect(collectionViewer: CollectionViewer): Observable<F[]> {
         const changes = [
             collectionViewer.viewChange,
             this.treeControl.expansionModel.changed,

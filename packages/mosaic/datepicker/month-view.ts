@@ -1,4 +1,5 @@
 // tslint:disable:no-magic-numbers
+import { Directionality } from '@angular/cdk/bidi';
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
@@ -12,7 +13,6 @@ import {
     ViewEncapsulation,
     ViewChild
 } from '@angular/core';
-import { Directionality } from '@ptsecurity/cdk/bidi';
 import { DateAdapter, MC_DATE_FORMATS, McDateFormats } from '@ptsecurity/cdk/datetime';
 import {
     DOWN_ARROW,

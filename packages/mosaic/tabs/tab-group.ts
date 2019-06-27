@@ -1,3 +1,4 @@
+import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
 import {
     AfterContentChecked,
     AfterContentInit,
@@ -18,7 +19,6 @@ import {
     Optional,
     Directive, Attribute
 } from '@angular/core';
-import { coerceBooleanProperty, coerceNumberProperty } from '@ptsecurity/cdk/coercion';
 import {
     CanColor,
     CanColorCtor,

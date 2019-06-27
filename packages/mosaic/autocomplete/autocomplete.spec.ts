@@ -28,10 +28,10 @@ import {
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { Directionality } from '@ptsecurity/cdk/bidi';
+import { Directionality } from '@angular/cdk/bidi';
 import { DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW } from '@ptsecurity/cdk/keycodes';
-import { Overlay, OverlayContainer } from '@ptsecurity/cdk/overlay';
-import { ScrollDispatcher } from '@ptsecurity/cdk/scrolling';
+import { Overlay, OverlayContainer } from '@angular/cdk/overlay';
+import { ScrollDispatcher } from '@angular/cdk/scrolling';
 import {
     createKeyboardEvent,
     dispatchFakeEvent,

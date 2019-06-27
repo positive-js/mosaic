@@ -1,3 +1,4 @@
+import { TemplatePortal } from '@angular/cdk/portal';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -12,7 +13,6 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { TemplatePortal } from '@ptsecurity/cdk/portal';
 import {
     CanDisable,
     CanDisableCtor,
@@ -63,6 +63,9 @@ export class McTab extends mcTabMixinBase
     /** Plain text label for the tab, used when there is no template label. */
     @Input('label')
     textLabel: string = '';
+
+    @Input('tabId')
+    tabId: string;
 
     /** Aria label for the tab. */
     @Input('aria-label')

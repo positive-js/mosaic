@@ -1,3 +1,4 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import {
     ChangeDetectorRef,
     Component,
@@ -7,9 +8,8 @@ import {
     ElementRef,
     Inject,
     Optional,
-    InjectionToken, ViewEncapsulation
+    InjectionToken, ChangeDetectionStrategy, ViewEncapsulation
 } from '@angular/core';
-import { SelectionModel } from '@ptsecurity/cdk/collections';
 import { CdkTreeNode } from '@ptsecurity/cdk/tree';
 import { CanDisable, toBoolean } from '@ptsecurity/mosaic/core';
 
@@ -17,7 +17,7 @@ import { CanDisable, toBoolean } from '@ptsecurity/mosaic/core';
 /* tslint:disable-next-line:naming-convention */
 export interface McTreeOptionParentComponent {
     multiple: boolean;
-    selectionModel: SelectionModel<McTreeOption>;
+    selectionModel: SelectionModel<any>;
     setFocusedOption: any;
 }
 
@@ -36,6 +36,7 @@ let uniqueIdCounter: number = 0;
 @Component({
     selector: 'mc-tree-option',
     exportAs: 'mcTreeOption',
+    templateUrl: './tree-option.html',
     host: {
         '[attr.id]': 'id',
         '[attr.tabindex]': 'getTabIndex()',
@@ -48,13 +49,21 @@ let uniqueIdCounter: number = 0;
 
         '(click)': 'selectViaInteraction()'
     },
-    templateUrl: './tree-option.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
     providers: [{ provide: CdkTreeNode, useExisting: McTreeOption }]
 })
 export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisable {
-    @Output() readonly onSelectionChange = new EventEmitter<McTreeOptionChange>();
+    @Input()
+    get value(): any {
+        return this._value;
+    }
 
-    @Input() value: any;
+    set value(value: any) {
+        this._value = value;
+    }
+
+    private _value: any;
 
     @Input()
     get disabled() {
@@ -71,6 +80,8 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
 
     private _disabled: boolean = false;
 
+    @Output() readonly onSelectionChange = new EventEmitter<McTreeOptionChange>();
+
     // @Input()
     // get selected(): boolean {
     //     return this.treeSelection.selectionModel && this.treeSelection.selectionModel.isSelected(this) || false;
@@ -85,7 +96,6 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
 
         if (isSelected !== this._selected) {
             this.setSelected(isSelected);
-
             // this.treeSelection._reportValueChange();
         }
     }
@@ -133,12 +143,12 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
         this._selected = selected;
 
         if (selected) {
-            this.parent.selectionModel.select(this);
+            this.parent.selectionModel.select(this.value);
         } else {
-            this.parent.selectionModel.deselect(this);
+            this.parent.selectionModel.deselect(this.value);
         }
 
-        // this._changeDetector.markForCheck();
+        this.changeDetectorRef.markForCheck();
     }
 
     /**
@@ -191,10 +201,6 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
     //     this.treeSelection.setFocusedOption(this);
     // }
 
-    /**
-     * The displayed value of the option. It is necessary to show the selected option in the
-     * select's trigger.
-     */
     get viewValue(): string {
         // TODO: Add input property alternative for node envs.
         return (this.getHostElement().textContent || '').trim();
@@ -218,8 +224,6 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
 
     selectViaInteraction(): void {
         if (!this.disabled) {
-            this._selected = !this._selected;
-
             this.changeDetectorRef.markForCheck();
             this.emitSelectionChangeEvent(true);
 

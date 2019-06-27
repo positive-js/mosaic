@@ -1,3 +1,4 @@
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -15,7 +16,6 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { IFocusableOption } from '@ptsecurity/cdk/a11y';
-import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import { BACKSPACE, DELETE, SPACE } from '@ptsecurity/cdk/keycodes';
 import {
     CanColor,

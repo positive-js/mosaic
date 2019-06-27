@@ -1,8 +1,8 @@
 // tslint:disable:no-magic-numbers
+import { Direction, Directionality } from '@angular/cdk/bidi';
 import { Component, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { Direction, Directionality } from '@ptsecurity/cdk/bidi';
 import {
     DOWN_ARROW,
     END,

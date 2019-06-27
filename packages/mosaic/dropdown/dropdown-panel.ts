@@ -1,6 +1,6 @@
+import { Direction } from '@angular/cdk/bidi';
 import { EventEmitter, TemplateRef, InjectionToken } from '@angular/core';
 import { FocusOrigin } from '@ptsecurity/cdk/a11y';
-import { Direction } from '@ptsecurity/cdk/bidi';
 
 import { McDropdownContent } from './dropdown-content';
 import { DropdownPositionX, DropdownPositionY } from './dropdown-positions';

@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { LayoutModule } from '@ptsecurity/cdk/layout';
+import { LayoutModule } from '@angular/cdk/layout';
 
 import { ButtonDemo } from './button/button-demo';
 import { DatepickerDemo } from './datepicker/datepicker-demo';

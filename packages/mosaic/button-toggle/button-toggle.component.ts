@@ -1,3 +1,5 @@
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { SelectionModel } from '@angular/cdk/collections';
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
@@ -19,8 +21,6 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
-import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
-import { SelectionModel } from '@ptsecurity/cdk/collections';
 import { McButton } from '@ptsecurity/mosaic/button';
 
 

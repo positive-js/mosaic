@@ -1,3 +1,19 @@
+import { Directionality } from '@angular/cdk/bidi';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import {
+    ConnectedOverlayPositionChange,
+    ConnectionPositionPair,
+    Overlay,
+    OverlayRef,
+    ScrollDispatcher,
+    ScrollStrategy,
+    FlexibleConnectedPositionStrategy,
+    OverlayConnectionPosition,
+    OriginConnectionPosition,
+    HorizontalConnectionPos,
+    VerticalConnectionPos
+} from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -18,23 +34,7 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { Directionality } from '@ptsecurity/cdk/bidi';
-import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
-import {
-    ConnectedOverlayPositionChange,
-    ConnectionPositionPair,
-    Overlay,
-    OverlayRef,
-    ScrollDispatcher,
-    IScrollStrategy,
-    FlexibleConnectedPositionStrategy,
-    IOverlayConnectionPosition,
-    IOriginConnectionPosition,
-    HorizontalConnectionPos,
-    VerticalConnectionPos
-} from '@ptsecurity/cdk/overlay';
-import { ComponentPortal } from '@ptsecurity/cdk/portal';
 import {
     fadeAnimation,
     DEFAULT_4_POSITIONS,
@@ -201,10 +201,10 @@ export class McTooltipComponent {
 }
 
 export const MC_TOOLTIP_SCROLL_STRATEGY =
-    new InjectionToken<() => IScrollStrategy>('mc-tooltip-scroll-strategy');
+    new InjectionToken<() => ScrollStrategy>('mc-tooltip-scroll-strategy');
 
 /** @docs-private */
-export function mcTooltipScrollStrategyFactory(overlay: Overlay): () => IScrollStrategy {
+export function mcTooltipScrollStrategyFactory(overlay: Overlay): () => ScrollStrategy {
     return () => overlay.scrollStrategies.reposition({scrollThrottle: 20});
 }
 
@@ -573,10 +573,10 @@ export class McTooltip implements OnInit, OnDestroy {
      * Returns the origin position and a fallback position based on the user's position preference.
      * The fallback position is the inverse of the origin (e.g. `'below' -> 'above'`).
      */
-    getOrigin(): {main: IOriginConnectionPosition; fallback: IOriginConnectionPosition} {
+    getOrigin(): {main: OriginConnectionPosition; fallback: OriginConnectionPosition} {
         const position = this.mcPlacement;
         const isLtr = !this.direction || this.direction.value === 'ltr';
-        let originPosition: IOriginConnectionPosition;
+        let originPosition: OriginConnectionPosition;
 
         if (position === 'top' || position === 'bottom') {
             originPosition = {originX: 'center', originY: position === 'top' ? 'top' : 'bottom'};
@@ -603,10 +603,10 @@ export class McTooltip implements OnInit, OnDestroy {
     }
 
     /** Returns the overlay position and a fallback position based on the user's preference */
-    getOverlayPosition(): {main: IOverlayConnectionPosition; fallback: IOverlayConnectionPosition} {
+    getOverlayPosition(): {main: OverlayConnectionPosition; fallback: OverlayConnectionPosition} {
         const position = this.mcPlacement;
         const isLtr = !this.direction || this.direction.value === 'ltr';
-        let overlayPosition: IOverlayConnectionPosition;
+        let overlayPosition: OverlayConnectionPosition;
 
         if (position === 'top') {
             overlayPosition = {overlayX: 'center', overlayY: 'bottom'};

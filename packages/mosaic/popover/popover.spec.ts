@@ -1,8 +1,8 @@
+import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { fakeAsync, inject, tick, TestBed, flush } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { OverlayContainer } from '@ptsecurity/cdk/overlay';
 import { dispatchMouseEvent, dispatchFakeEvent } from '@ptsecurity/cdk/testing';
 
 import { McPopoverModule } from './popover.module';

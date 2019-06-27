@@ -1,4 +1,5 @@
 // tslint:disable:no-magic-numbers
+import { Direction, Directionality } from '@angular/cdk/bidi';
 import { Component, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import {
     async,
@@ -6,7 +7,6 @@ import {
     TestBed
 } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { Direction, Directionality } from '@ptsecurity/cdk/bidi';
 import { Subject } from 'rxjs';
 
 import { McTabLink, McTabNav, McTabsModule } from '../index';

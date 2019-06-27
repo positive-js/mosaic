@@ -1,8 +1,8 @@
 // tslint:disable:no-magic-numbers
+import { Directionality } from '@angular/cdk/bidi';
 import { Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { Directionality } from '@ptsecurity/cdk/bidi';
 import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 
 import { McCalendar } from './calendar';

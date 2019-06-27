@@ -1,3 +1,4 @@
+import { coerceBooleanProperty, coerceCssPixelValue, coerceNumberProperty } from '@angular/cdk/coercion';
 import {
     ChangeDetectionStrategy, ChangeDetectorRef,
     Component,
@@ -9,8 +10,6 @@ import {
     Renderer2,
     ViewEncapsulation
 } from '@angular/core';
-
-import { coerceBooleanProperty, coerceCssPixelValue, coerceNumberProperty } from '@ptsecurity/cdk/coercion';
 
 
 interface IArea {

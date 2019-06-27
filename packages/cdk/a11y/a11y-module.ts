@@ -1,7 +1,6 @@
-
+import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { PlatformModule } from '@ptsecurity/cdk/platform';
 
 import { CdkMonitorFocus, FOCUS_MONITOR_PROVIDER } from './focus-monitor/focus-monitor';
 

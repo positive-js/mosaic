@@ -99,7 +99,7 @@ describe('McListSelection without forms', () => {
         it('should be able to dispatch one selected item', () => {
             const testListItem = listOptions[2].injector.get<McListOption>(McListOption);
             const selectList =
-                selectionList.injector.get<McListSelection>(McListSelection).selectedOptions;
+                selectionList.injector.get<McListSelection>(McListSelection).selectionModel;
 
             expect(selectList.selected.length).toBe(0);
 
@@ -113,7 +113,7 @@ describe('McListSelection without forms', () => {
             const testListItem = listOptions[2].injector.get<McListOption>(McListOption);
             const testListItem2 = listOptions[1].injector.get<McListOption>(McListOption);
             const selectList =
-                selectionList.injector.get<McListSelection>(McListSelection).selectedOptions;
+                selectionList.injector.get<McListSelection>(McListSelection).selectionModel;
 
             expect(selectList.selected.length).toBe(0);
 
@@ -129,7 +129,7 @@ describe('McListSelection without forms', () => {
         it('should be able to deselect an option', () => {
             const testListItem = listOptions[2].injector.get<McListOption>(McListOption);
             const selectList =
-                selectionList.injector.get<McListSelection>(McListSelection).selectedOptions;
+                selectionList.injector.get<McListSelection>(McListSelection).selectionModel;
 
             expect(selectList.selected.length).toBe(0);
 
@@ -147,7 +147,7 @@ describe('McListSelection without forms', () => {
         it('should not allow selection of disabled items', () => {
             const testListItem = listOptions[0].injector.get<McListOption>(McListOption);
             const selectList =
-                selectionList.injector.get<McListSelection>(McListSelection).selectedOptions;
+                selectionList.injector.get<McListSelection>(McListSelection).selectionModel;
 
             expect(selectList.selected.length).toBe(0);
 
@@ -163,7 +163,7 @@ describe('McListSelection without forms', () => {
             const manager = selectionList.componentInstance.keyManager;
             const SPACE_EVENT: KeyboardEvent = createKeyboardEvent('keydown', SPACE);
             const selectList =
-                selectionList.injector.get<McListSelection>(McListSelection).selectedOptions;
+                selectionList.injector.get<McListSelection>(McListSelection).selectionModel;
             expect(selectList.selected.length).toBe(0);
 
             manager.updateActiveItem(1);
@@ -179,7 +179,7 @@ describe('McListSelection without forms', () => {
             const manager = selectionList.componentInstance.keyManager;
             const testListItem: HTMLElement = listOptions[1].nativeElement;
             const ENTER_EVENT: KeyboardEvent = createKeyboardEvent('keydown', ENTER, testListItem);
-            const selectList = selectionList.injector.get<McListSelection>(McListSelection).selectedOptions;
+            const selectList = selectionList.injector.get<McListSelection>(McListSelection).selectionModel;
             expect(selectList.selected.length).toBe(0);
 
             manager.updateActiveItem(1);
@@ -348,15 +348,15 @@ describe('McListSelection without forms', () => {
         it('should update the list value when an item is selected programmatically', () => {
             const list: McListSelection = selectionList.componentInstance;
 
-            expect(list.selectedOptions.isEmpty()).toBe(true);
+            expect(list.selectionModel.isEmpty()).toBe(true);
 
             listOptions[0].componentInstance.selected = true;
             listOptions[2].componentInstance.selected = true;
             fixture.detectChanges();
 
-            expect(list.selectedOptions.isEmpty()).toBe(false);
-            expect(list.selectedOptions.isSelected(listOptions[0].componentInstance)).toBe(true);
-            expect(list.selectedOptions.isSelected(listOptions[2].componentInstance)).toBe(true);
+            expect(list.selectionModel.isEmpty()).toBe(false);
+            expect(list.selectionModel.isSelected(listOptions[0].componentInstance)).toBe(true);
+            expect(list.selectionModel.isSelected(listOptions[2].componentInstance)).toBe(true);
         });
 
         it('should update the item selected state when it is selected via the model', () => {
@@ -365,7 +365,7 @@ describe('McListSelection without forms', () => {
 
             expect(item.selected).toBe(false);
 
-            list.selectedOptions.select(item);
+            list.selectionModel.select(item);
             fixture.detectChanges();
 
             expect(item.selected).toBe(true);
@@ -393,9 +393,9 @@ describe('McListSelection without forms', () => {
             fixture.detectChanges();
         }));
 
-        it('should set its initial selected state in the selectedOptions', () => {
+        it('should set its initial selected state in the selectionModel', () => {
             const optionEl = listItemEl.injector.get(McListOption);
-            const selectedOptions = selectionList.componentInstance.selectedOptions;
+            const selectedOptions = selectionList.componentInstance.selectionModel;
             expect(selectedOptions.isSelected(optionEl)).toBeTruthy();
         });
     });
@@ -537,7 +537,7 @@ describe('McListSelection without forms', () => {
         it('should not allow selection on disabled selection-list', () => {
             const testListItem = listOption[2].injector.get<McListOption>(McListOption);
             const selectList =
-                selectionList.injector.get<McListSelection>(McListSelection).selectedOptions;
+                selectionList.injector.get<McListSelection>(McListSelection).selectionModel;
 
             expect(selectList.selected.length).toBe(0);
 
@@ -707,7 +707,7 @@ xdescribe('McListSelection with forms', () => {
         it('should update the model if an option got selected via the model', fakeAsync(() => {
             expect(fixture.componentInstance.selectedOptions).toEqual([]);
 
-            selectionListDebug.componentInstance.selectedOptions.select(listOptions[0]);
+            selectionListDebug.componentInstance.selectionModel.select(listOptions[0]);
             fixture.detectChanges();
             tick();
 

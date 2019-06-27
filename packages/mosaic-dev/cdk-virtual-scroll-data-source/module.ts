@@ -1,10 +1,9 @@
+import { DataSource, CollectionViewer } from '@angular/cdk/collections';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ChangeDetectionStrategy, Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-
-import { DataSource, ICollectionViewer } from '../../cdk/collections';
-import { ScrollingModule } from '../../cdk/scrolling';
 
 
 export class MyDataSource extends DataSource<string | undefined> {
@@ -15,7 +14,7 @@ export class MyDataSource extends DataSource<string | undefined> {
     private dataStream = new BehaviorSubject<(string | undefined)[]>(this.cachedData);
     private subscription = new Subscription();
 
-    connect(collectionViewer: ICollectionViewer): Observable<(string | undefined)[]> {
+    connect(collectionViewer: CollectionViewer): Observable<(string | undefined)[]> {
         this.subscription.add(collectionViewer.viewChange.subscribe((range) => {
             const startPage = this.getPageForIndex(range.start);
             const endPage = this.getPageForIndex(range.end - 1);

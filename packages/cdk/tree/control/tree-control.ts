@@ -1,5 +1,4 @@
-import { SelectionModel } from '@ptsecurity/cdk/collections';
-
+import { SelectionModel } from '@angular/cdk/collections';
 import { Observable } from 'rxjs';
 
 

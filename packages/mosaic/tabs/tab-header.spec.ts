@@ -1,4 +1,7 @@
 // tslint:disable:no-magic-numbers
+import { Direction, Directionality } from '@angular/cdk/bidi';
+import { PortalModule } from '@angular/cdk/portal';
+import { ScrollingModule, ViewportRuler } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import {
@@ -9,7 +12,6 @@ import {
     TestBed,
     tick
 } from '@angular/core/testing';
-import { Direction, Directionality } from '@ptsecurity/cdk/bidi';
 import {
     END,
     ENTER,
@@ -18,8 +20,6 @@ import {
     RIGHT_ARROW,
     SPACE
 } from '@ptsecurity/cdk/keycodes';
-import { PortalModule } from '@ptsecurity/cdk/portal';
-import { ScrollingModule, ViewportRuler } from '@ptsecurity/cdk/scrolling';
 import {
     dispatchFakeEvent,
     dispatchKeyboardEvent
