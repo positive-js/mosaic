@@ -21,7 +21,6 @@ export class DemoComponent {
     leftSplitterState: boolean = false;
 
     rightSidebarSidebarState: boolean = false;
-    rightSplitterState: boolean = false;
 
     onStateChanged($event): void {
         console.log('onStateChanged: ', $event);
@@ -33,6 +32,10 @@ export class DemoComponent {
 
     toggleRightSidebar() {
         this.rightSidebarSidebarState = !this.rightSidebarSidebarState;
+    }
+
+    toggleLeftSplitterState() {
+        this.leftSplitterState = !this.leftSplitterState;
     }
 }
 

@@ -37,6 +37,7 @@
 <div class="layout-row layout-align-space-between">
     <div>
         <button mc-button (click)="toggleLeftSidebar()">toggle by state</button>&nbsp;
+        <button mc-button (click)="toggleLeftSplitterState()">toggle splitter state</button>&nbsp;
     </div>
 
     <div>
@@ -49,7 +50,7 @@
 <mc-splitter
     class="container layout-row layout-align-space-between"
     direction="horizontal"
-    [disabled]="!leftSidebarSidebarState">
+    [disabled]="leftSplitterState">
     <mc-sidebar
         mc-splitter-area
         [position]="'left'"

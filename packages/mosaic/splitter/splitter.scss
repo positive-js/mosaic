@@ -1,23 +1,28 @@
-mc-splitter {
+.mc-splitter {
     display: flex;
+
     flex-wrap: nowrap;
     align-items: stretch;
+
     overflow: hidden;
+
+    .mc-splitter-area {
+        overflow: hidden;
+    }
 }
 
-mc-splitter-area {
-    overflow: hidden;
-}
-
-mc-gutter {
+.mc-gutter {
     display: flex;
+
     flex-grow: 0;
     flex-shrink: 0;
-    overflow: hidden;
+
     justify-content: center;
     align-items: center;
-}
 
-.icon-vertical {
-    transform: rotate(90deg);
+    overflow: hidden;
+
+    &.mc-gutter_horizontal > .mc-icon {
+        transform: rotate(90deg);
+    }
 }
