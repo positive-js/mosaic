@@ -24,19 +24,7 @@ interface IPoint {
     y: number;
 }
 
-
-const enum AttributeProperty {
-    Disabled = 'disabled'
-}
-
-const enum Cursor {
-    Default = 'default',
-    ResizeColumn = 'col-resize',
-    ResizeRow = 'row-resize'
-}
-
 const enum StyleProperty {
-    Cursor = 'cursor',
     Flex = 'flex',
     FlexBasis = 'flex-basis',
     FlexDirection = 'flex-direction',
@@ -50,12 +38,6 @@ const enum StyleProperty {
     Width = 'width'
 }
 
-const enum State {
-    Disabled = 'disabled',
-    Horizontal = 'horizontal',
-    Vertical = 'vertical'
-}
-
 export const enum Direction {
     Horizontal = 'horizontal',
     Vertical = 'vertical'
@@ -64,6 +46,9 @@ export const enum Direction {
 @Component({
     selector: 'mc-splitter',
     exportAs: 'mcSplitter',
+    host: {
+        class: 'mc-splitter'
+    },
     preserveWhitespaces: false,
     styleUrls: ['splitter.css'],
     templateUrl: './splitter.component.html',
@@ -73,22 +58,24 @@ export const enum Direction {
 export class McSplitterComponent implements OnInit {
     readonly areas: IArea[] = [];
 
-    private _direction: Direction;
-    private _disabled: boolean = false;
-    private _gutterSize: number = 6;
-
     private isDragging: boolean = false;
 
     private readonly areaPositionDivider: number = 2;
     private readonly listeners: (() => void)[] = [];
+
+    get direction(): Direction {
+        return this._direction;
+    }
 
     @Input()
     set direction(direction: Direction) {
         this._direction = direction;
     }
 
-    get direction(): Direction {
-        return this._direction;
+    private _direction: Direction;
+
+    get disabled(): boolean {
+        return this._disabled;
     }
 
     @Input()
@@ -96,8 +83,10 @@ export class McSplitterComponent implements OnInit {
         this._disabled = coerceBooleanProperty(disabled);
     }
 
-    get disabled(): boolean {
-        return this._disabled;
+    private _disabled: boolean = false;
+
+    get gutterSize(): number {
+        return this._gutterSize;
     }
 
     @Input()
@@ -106,9 +95,7 @@ export class McSplitterComponent implements OnInit {
         this._gutterSize = size > 0 ? size : this.gutterSize;
     }
 
-    get gutterSize(): number {
-        return this._gutterSize;
-    }
+    private _gutterSize: number = 6;
 
     constructor(
         public elementRef: ElementRef,
@@ -205,7 +192,7 @@ export class McSplitterComponent implements OnInit {
         this.areas.splice(indexToRemove, 1);
     }
 
-    private isVertical(): boolean {
+    isVertical(): boolean {
         return this.direction === Direction.Vertical;
     }
 
@@ -264,30 +251,25 @@ export class McSplitterComponent implements OnInit {
 }
 
 @Directive({
-    selector: 'mc-gutter'
+    selector: 'mc-gutter',
+    host: {
+        class: 'mc-gutter'
+    }
 })
 export class McGutterDirective implements OnInit {
-    private _direction: Direction = Direction.Vertical;
-    private _disabled: boolean = false;
-    private _order: number = 0;
-    private _size: number = 6;
+    get direction(): Direction {
+        return this._direction;
+    }
 
     @Input()
     set direction(direction: Direction) {
         this._direction = direction;
     }
 
-    get direction(): Direction {
-        return this._direction;
-    }
+    private _direction: Direction = Direction.Vertical;
 
-    @Input()
-    set disabled(disabled: boolean) {
-        this._disabled = coerceBooleanProperty(disabled);
-    }
-
-    get disabled(): boolean {
-        return this._disabled;
+    get order(): number {
+        return this._order;
     }
 
     @Input()
@@ -295,8 +277,10 @@ export class McGutterDirective implements OnInit {
         this._order = coerceNumberProperty(order);
     }
 
-    get order(): number {
-        return this._order;
+    private _order: number = 0;
+
+    get size(): number {
+        return this._size;
     }
 
     @Input()
@@ -304,26 +288,17 @@ export class McGutterDirective implements OnInit {
         this._size = coerceNumberProperty(size);
     }
 
-    get size(): number {
-        return this._size;
-    }
+    private _size: number = 6;
 
-    constructor(private renderer: Renderer2,
-                private elementRef: ElementRef) {
-    }
+    constructor(private renderer: Renderer2, private elementRef: ElementRef) {}
 
     ngOnInit(): void {
-        this.setStyle(StyleProperty.Cursor, this.getCursor(this.getState()));
         this.setStyle(StyleProperty.FlexBasis, coerceCssPixelValue(this.size));
         this.setStyle(this.isVertical() ? StyleProperty.Height : StyleProperty.Width, coerceCssPixelValue(this.size));
         this.setStyle(StyleProperty.Order, this.order);
 
         if (!this.isVertical()) {
             this.setStyle(StyleProperty.Height, '100%');
-        }
-
-        if (this.disabled) {
-            this.setAttr(AttributeProperty.Disabled, 'true');
         }
 
         // fix IE issue with gutter icon. flex-direction is requied for flex alignment options
@@ -334,38 +309,16 @@ export class McGutterDirective implements OnInit {
         return this.direction === Direction.Vertical;
     }
 
-    private getCursor(state: State): string {
-        switch (state) {
-            case State.Disabled:
-                return Cursor.Default;
-            case State.Vertical:
-                return  Cursor.ResizeRow;
-            case State.Horizontal:
-                return Cursor.ResizeColumn;
-            default:
-                throw Error(`Unknown gutter state for cursor: ${state}`);
-        }
-    }
-
-    private getState(): State {
-        return this.disabled
-            ? State.Disabled
-            : this.direction === Direction.Vertical
-                ? State.Vertical
-                : State.Horizontal;
-    }
-
     private setStyle(property: StyleProperty, value: string | number) {
         this.renderer.setStyle(this.elementRef.nativeElement, property, value);
-    }
-
-    private setAttr(attribute: AttributeProperty, value: string) {
-        this.renderer.setAttribute(this.elementRef.nativeElement, attribute, value);
     }
 }
 
 @Directive({
-    selector: '[mc-splitter-area]'
+    selector: '[mc-splitter-area]',
+    host: {
+        class: 'mc-splitter-area'
+    }
 })
 export class McSplitterAreaDirective implements OnInit, OnDestroy {
     constructor(private elementRef: ElementRef,
@@ -380,9 +333,6 @@ export class McSplitterAreaDirective implements OnInit, OnDestroy {
         this.splitter.addArea(this);
 
         this.removeStyle(StyleProperty.MaxWidth);
-
-        // todo нахера это сделано ?
-        // this.setStyle(StyleProperty.Flex, '1');
 
         if (this.splitter.direction === Direction.Vertical) {
             this.setStyle(StyleProperty.Width, '100%');
