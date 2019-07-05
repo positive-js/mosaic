@@ -114,8 +114,8 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
 
             momentLocaleData = moment.updateLocale(locale, {
                 monthsShort: {
-                    format: this.formatterConfig.monthNames.short,
-                    standalone: this.formatterConfig.monthNames.short
+                    format: this.formatterConfig.monthNames.short.formatted,
+                    standalone: this.formatterConfig.monthNames.short.standalone
                 },
                 weekdaysShort: this.formatterConfig.dayOfWeekNames.short,
                 weekdays: this.formatterConfig.dayOfWeekNames.long
@@ -334,10 +334,17 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
     }
 
     absoluteDate(date: Moment, params: IFormatterAbsoluteTemplate, datetime = false): string {
+
+        console.log('absdate', date);
+
         if (!this.isDateInstance(date)) { throw new Error(this.invalidDateErrorText); }
 
         const variables = {...this.formatterConfig.variables, ...params.variables};
+
+        console.log('variables', variables);
         const template = datetime ? params.DATETIME : params.DATE;
+
+        console.log('template', template);
 
         return this.messageformat.compile(template)(this.compileVariables(date, variables));
     }
@@ -444,6 +451,10 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
     }
 
     private compileVariables(date: Moment, variables: any): any {
+
+        console.log('CV', date, variables);
+
+
         const compiledVariables: any = {};
 
         // tslint:disable-next-line:no-for-in
@@ -457,6 +468,8 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
         }
 
         compiledVariables.CURRENT_YEAR = this.isCurrentYear(date);
+
+        console.log('compiled variables', compiledVariables)
 
         return compiledVariables;
     }
