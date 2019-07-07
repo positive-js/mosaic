@@ -38,11 +38,17 @@
                                   [ngTemplateOutlet]="tplContentDefault"></ng-container>
                     <ng-container *ngSwitchCase="isModalType('confirm')"
                                   [ngTemplateOutlet]="tplContentConfirm"></ng-container>
+                    <ng-container *ngSwitchCase="isModalType('custom')"
+                                  [ngTemplateOutlet]="tplContentConfirm"></ng-container>
                 </ng-container>
             </div>
         </div>
     </div>
 </div>
+
+<ng-template>
+
+</ng-template>
 
 <!-- [Predefined] Default Modal Content -->
 <ng-template #tplContentDefault>
@@ -56,7 +62,7 @@
             </ng-container>
         </div>
     </div>
-    <div class="mc-modal-body" [ngStyle]="mcBodyStyle">
+    <div class="mc-modal-body" *ngIf="isComponent(mcContent)" [ngStyle]="mcBodyStyle">
         <ng-container #bodyContainer>
             <ng-container *ngIf="!isComponent(mcContent)" [ngSwitch]="true">
                 <ng-container *ngSwitchCase="isTemplateRef(mcContent)" [ngTemplateOutlet]="mcContent"></ng-container>
@@ -67,7 +73,7 @@
             </ng-container>
         </ng-container>
     </div>
-    <div *ngIf="mcFooter !== null" class="mc-modal-footer">
+    <div *ngIf="mcFooter" class="mc-modal-footer">
         <ng-container [ngSwitch]="true">
             <ng-container *ngSwitchCase="isTemplateRef(mcFooter)" [ngTemplateOutlet]="mcFooter"></ng-container>
             <ng-container *ngSwitchCase="isNonEmptyString(mcFooter)">

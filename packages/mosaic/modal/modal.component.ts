@@ -52,6 +52,8 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
 
     // tslint:disable-next-line:no-any
     @Input() mcModalType: ModalType = 'default';
+
+    @Input() mcComponentOrTemplateRef: TemplateRef<{}> | Type<T>;
     // If not specified, will use <ng-content>
     @Input() mcContent: string | TemplateRef<{}> | Type<T>;
     // available when mcContent is a component
@@ -117,7 +119,7 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
 
     @Input() @Output() mcOnCancel: EventEmitter<T> | OnClickCallback<T> = new EventEmitter<T>();
 
-    @ViewChild('modalContainer', {static: false}) modalContainer: ElementRef;
+    @ViewChild('modalContainer', { static: true }) modalContainer: ElementRef;
     @ViewChild('bodyContainer', { read: ViewContainerRef, static: false}) bodyContainer: ViewContainerRef;
     // Only aim to focus the ok button that needs to be auto focused
     @ViewChild('autoFocusButtonOk', { read: ElementRef, static: false}) autoFocusButtonOk: ElementRef;
@@ -182,6 +184,11 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
         // Setup default button options
         if (this.isModalButtons(this.mcFooter)) {
             this.mcFooter = this.formatModalButtons(this.mcFooter as IModalButtonOptions<T>[]);
+        }
+
+
+        if (this.isComponent(this.mcComponentOrTemplateRef)) {
+            this.createDynamicComponent(this.mcComponentOrTemplateRef as Type<T>);
         }
 
         // Place the modal dom to elsewhere
@@ -479,8 +486,6 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
         // Do the first change detection immediately
         // (or we do detection at ngAfterViewInit, multi-changes error will be thrown)
         this.contentComponentRef.changeDetectorRef.detectChanges();
-
-
     }
 
     // Update transform-origin to the last click position on document
