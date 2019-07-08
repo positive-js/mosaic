@@ -59,7 +59,7 @@ export class ModalDemoComponent {
 
     createModalComponent() {
         const modalRef = this.modalService.open({
-            mcComponentOrTemplateRef: McModalFullCustomComponent
+            mcComponent: McModalFullCustomComponent
         });
     }
 
@@ -172,22 +172,20 @@ export class McModalCustomComponent {
 @Component({
     selector: 'mc-modal-full-custom-component',
     template: `
-        <div class="mc-modal-header">
-            <div class="mc-modal-title">
-                Modal Title
-            </div>
-        </div>
+        <mc-modal-title>
+            Modal Title
+        </mc-modal-title>
 
-        <div class="mc-modal-body">
+        <mc-modal-body>
             <h2>{{ title }}</h2>
             <h4>{{ subtitle }}</h4>
             <p>
                 <span>Get Modal instance in component</span>
                 <button mc-button color="primary" (click)="destroyModal()">destroy modal in the component</button>
             </p>
-        </div>
+        </mc-modal-body>
 
-        <div class="mc-modal-footer">
+        <div mc-modal-footer>
             <button mc-button color="primary" >Save</button>
             <button mc-button autofocus>Close</button>
         </div>

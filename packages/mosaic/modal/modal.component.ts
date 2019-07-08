@@ -53,7 +53,8 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     // tslint:disable-next-line:no-any
     @Input() mcModalType: ModalType = 'default';
 
-    @Input() mcComponentOrTemplateRef: TemplateRef<{}> | Type<T>;
+    // The instance of component opened into the dialog.
+    @Input() mcComponent: Type<T>;
     // If not specified, will use <ng-content>
     @Input() mcContent: string | TemplateRef<{}> | Type<T>;
     // available when mcContent is a component
@@ -187,8 +188,8 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
         }
 
 
-        if (this.isComponent(this.mcComponentOrTemplateRef)) {
-            this.createDynamicComponent(this.mcComponentOrTemplateRef as Type<T>);
+        if (this.isComponent(this.mcComponent)) {
+            this.createDynamicComponent(this.mcComponent as Type<T>);
         }
 
         // Place the modal dom to elsewhere

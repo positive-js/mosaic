@@ -21,7 +21,7 @@ export interface IModalOptions<T = any, R = any> {
     mcStyle?: object;
     mcTitle?: string | TemplateRef<{}>;
     mcContent?: string | TemplateRef<{}> | Type<T>;
-    mcComponentOrTemplateRef?: TemplateRef<{}> | Type<T>;
+    mcComponent?: Type<T>; // The instance of component opened into the dialog.
     mcComponentParams?: Partial<T>;
     mcClosable?: boolean;
     mcMask?: boolean;
