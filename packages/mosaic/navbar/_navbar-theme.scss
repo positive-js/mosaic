@@ -6,6 +6,10 @@
 
     background-color: mc-color($palette, 700);
 
+    [mc-icon], .mc-icon {
+        color: mc-color($palette, 100);
+    }
+
     mc-navbar-item.mc-navbar-item-active {
         $active-lighten: 5%;
         background-color: lighten(mc-color($palette, 700), $active-lighten)
