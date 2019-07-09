@@ -76,6 +76,18 @@ describe('MomentDateAdapter', () => {
         ]);
     });
 
+    it('should get formatted month (genitive) name for short absolute date', () => {
+        adapter.setLocale('ru');
+        const NBSP = '\u00A0';
+        expect(
+            Array.from(Array(12).keys())
+                .map((monthIndex) => moment().month(monthIndex))
+                .map((date) => adapter.absoluteShortDate(date))
+                // '9 декабря' => ['9', 'декабря'] => 'декабря'
+                .map((formattedDate) => formattedDate.split(NBSP)[1])
+        ).toEqual(['янв', 'фев', 'мар', 'апр', 'мая', 'июня', 'июля', 'авг', 'сен', 'окт', 'ноя', 'дек']);
+    });
+
     it('should get long month names en', () => {
         adapter.setLocale('en');
 
