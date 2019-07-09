@@ -1,14 +1,4 @@
-$link-border-radius: 3px;
-$link-padding: 4px 8px;
-
-
 .mc-link {
-    display: inline-block;
-
-    outline: none;
-
-    padding: $link-padding;
-
     text-decoration: none;
 
     cursor: pointer;
@@ -26,7 +16,9 @@ $link-padding: 4px 8px;
     }
 
     &.cdk-keyboard-focused {
-        border-radius: $link-border-radius;
+        outline-width: 2px;
+        outline-style: solid;
+        outline-offset: 2px;
     }
 
     &[disabled] {

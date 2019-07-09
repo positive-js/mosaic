@@ -1,3 +1,25 @@
+# 8.0.0-beta.4 "Xeno Residue" (2019-07-02)
+
+
+### Bug Fixes
+
+* **link:** link is incorrectly displayed in the text #UIM-50 ([5619d23](https://github.com/positive-js/mosaic/commit/5619d23)), closes [#UIM-50](https://github.com/positive-js/mosaic/issues/UIM-50)
+* **list:** Components have different height of node #UIM-47 ([f5cc2c7](https://github.com/positive-js/mosaic/commit/f5cc2c7)), closes [#UIM-47](https://github.com/positive-js/mosaic/issues/UIM-47)
+* **modal:** modal does not fire onclick event when custom component is used ([#149](https://github.com/positive-js/mosaic/issues/149)) ([417eb64](https://github.com/positive-js/mosaic/commit/417eb64))
+* **navbar:** navbar default paddings for first element ([#156](https://github.com/positive-js/mosaic/issues/156)) ([e5e1972](https://github.com/positive-js/mosaic/commit/e5e1972))
+* **splitter:** disabled splitter has the wrong cursor style #UIM-48 ([a1a4b39](https://github.com/positive-js/mosaic/commit/a1a4b39)), closes [#UIM-48](https://github.com/positive-js/mosaic/issues/UIM-48)
+* **tree:** added emitting events for navigationChange and selectionChange #UIM-2 ([#155](https://github.com/positive-js/mosaic/issues/155)) ([16d785c](https://github.com/positive-js/mosaic/commit/16d785c)), closes [#UIM-2](https://github.com/positive-js/mosaic/issues/UIM-2)
+* **tree:** mc-tree multi select is not reset by first click #UIM-8 ([#152](https://github.com/positive-js/mosaic/issues/152)) ([c982895](https://github.com/positive-js/mosaic/commit/c982895)), closes [#UIM-8](https://github.com/positive-js/mosaic/issues/UIM-8)
+
+
+### Features
+
+* **tabs:** added input tabId ([#151](https://github.com/positive-js/mosaic/issues/151)) ([d06ffa5](https://github.com/positive-js/mosaic/commit/d06ffa5))
+* **tree:** added ngModel ([#150](https://github.com/positive-js/mosaic/issues/150)) ([e0b3071](https://github.com/positive-js/mosaic/commit/e0b3071))
+* add angular/cdk ([#153](https://github.com/positive-js/mosaic/issues/153)) ([ef06e63](https://github.com/positive-js/mosaic/commit/ef06e63)), closes [#UIM-11](https://github.com/positive-js/mosaic/issues/UIM-11) [#154](https://github.com/positive-js/mosaic/issues/154)
+
+
+
 # 8.0.0-beta.3 "[object Object]" (2019-06-26)
 
 

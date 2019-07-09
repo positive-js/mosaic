@@ -25,7 +25,7 @@
         }
 
         &.cdk-keyboard-focused {
-            box-shadow: 0 0 0 2px $color;
+            outline-color: $color;
         }
 
         &.mc-link_underlined .mc-link__text {

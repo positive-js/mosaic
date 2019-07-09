@@ -10,7 +10,9 @@
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/positive-js/mosaic/blob/master/LICENSE)
 
 
-# UI Components for Angular
+# UI Components for Angular based on angular/cdk
+
+Mosaic components are the building blocks of Positive Technologies applications.
 
 ## 🖥 Browsers support
 
