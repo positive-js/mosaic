@@ -114,8 +114,8 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
 
             momentLocaleData = moment.updateLocale(locale, {
                 monthsShort: {
-                    format: this.formatterConfig.monthNames.short,
-                    standalone: this.formatterConfig.monthNames.short
+                    format: this.formatterConfig.monthNames.short.formatted,
+                    standalone: this.formatterConfig.monthNames.short.standalone
                 },
                 weekdaysShort: this.formatterConfig.dayOfWeekNames.short,
                 weekdays: this.formatterConfig.dayOfWeekNames.long
