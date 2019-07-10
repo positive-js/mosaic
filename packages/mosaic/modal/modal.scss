@@ -82,25 +82,22 @@
 
 .mc-modal-header {
     padding: 14px 16px;
-
+    display: block;
     border-radius: 4px 4px 0 0;
 }
 
 .mc-modal-body {
+    display: block;
     padding: 16px 24px 24px 24px;
-
     max-height: calc(100vh - 260px);
-
     word-wrap: break-word;
-
     overflow-y: auto;
 }
 
 .mc-modal-footer {
+    display: block;
     padding: 16px 16px;
-
     border-radius: 0 0 4px 4px;
-
     text-align: right;
 
     button + button {

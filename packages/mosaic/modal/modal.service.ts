@@ -1,6 +1,6 @@
-import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { ComponentType, Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { ComponentRef, Injectable } from '@angular/core';
+import { ComponentRef, Injectable, TemplateRef } from '@angular/core';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -119,6 +119,13 @@ export class McModalService {
         options.mcModalType = 'confirm';
         options.mcClassName = `mc-confirm mc-confirm-${confirmType} ${options.mcClassName || ''}`;
         options.mcMaskClosable = false;
+
+        return this.create(options);
+    }
+
+    open<T>(options: IModalOptionsForService<T> = {}): McModalRef<T> {
+
+        options.mcModalType = 'custom';
 
         return this.create(options);
     }
