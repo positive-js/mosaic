@@ -38,11 +38,18 @@
                                   [ngTemplateOutlet]="tplContentDefault"></ng-container>
                     <ng-container *ngSwitchCase="isModalType('confirm')"
                                   [ngTemplateOutlet]="tplContentConfirm"></ng-container>
+                    <ng-container *ngSwitchCase="isModalType('custom')"
+                                  [ngTemplateOutlet]="tplContentCustom"></ng-container>
                 </ng-container>
             </div>
         </div>
     </div>
 </div>
+
+<ng-template #tplContentCustom>
+    <ng-container #bodyContainer></ng-container>
+</ng-template>
+
 
 <!-- [Predefined] Default Modal Content -->
 <ng-template #tplContentDefault>

@@ -5,7 +5,7 @@ import { EventEmitter, TemplateRef, Type } from '@angular/core';
 export type OnClickCallback<T> = ((instance: T) => (false | void | {}) | Promise<false | void | {}>);
 
 // Different modal styles we have supported
-export type ModalType = 'default' | 'confirm';
+export type ModalType = 'default' | 'confirm' | 'custom';
 
 // Subtypes of Confirm Modal
 export type ConfirmType = 'confirm' | 'success' | 'warn';
@@ -21,6 +21,7 @@ export interface IModalOptions<T = any, R = any> {
     mcStyle?: object;
     mcTitle?: string | TemplateRef<{}>;
     mcContent?: string | TemplateRef<{}> | Type<T>;
+    mcComponent?: Type<T>; // The instance of component opened into the dialog.
     mcComponentParams?: Partial<T>;
     mcClosable?: boolean;
     mcMask?: boolean;
