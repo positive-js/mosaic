@@ -1,4 +1,4 @@
-# 8.0.0-beta.5 "Wintry Yoho" (2019-07-11)
+# 8.0.0-beta.6 "Unconfident Woodwork" (2019-07-11)
 
 
 ### Bug Fixes
