@@ -145,6 +145,26 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
         return this.clone(date).date();
     }
 
+    getHours(date: Moment): number {
+        return this.clone(date).hours();
+    }
+
+    getMinutes(date: Moment): number {
+        return this.clone(date).minutes();
+    }
+
+    getSeconds(date: Moment): number {
+        return this.clone(date).seconds();
+    }
+
+    getMilliseconds(date: Moment): number {
+        return this.clone(date).milliseconds();
+    }
+
+    getTime(date: Moment): number {
+        return date.valueOf();
+    }
+
     getDayOfWeek(date: Moment): number {
         return this.clone(date).day();
     }
@@ -205,6 +225,18 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
         }
 
         return result;
+    }
+
+    createDateTime(year: number, month: number, date: number,
+                   hours: number, minutes: number, seconds: number, milliseconds: number): Moment {
+        const newDate = this.createDate(year, month, date);
+
+        newDate.hours(hours);
+        newDate.minutes(minutes);
+        newDate.seconds(seconds);
+        newDate.milliseconds(milliseconds);
+
+        return newDate;
     }
 
     today(): Moment {

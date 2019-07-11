@@ -13,6 +13,18 @@ import { McTimepickerModule } from '@ptsecurity/mosaic/timepicker';
 import { McButtonModule } from '../../mosaic/button';
 import { McIconModule } from '../../mosaic/icon';
 
+// Depending on whether rollup is used, moment needs to be imported differently.
+// Since Moment.js doesn't have a default export, we normally need to import using the `* as`
+// syntax. However, rollup creates a synthetic default module and we thus need to import it using
+// the `default as` syntax.
+// tslint:disable-next-line:ordered-imports
+import * as _moment from 'moment';
+// @ts-ignore
+// tslint:disable-next-line:no-duplicate-imports
+import { default as _rollupMoment, Moment } from 'moment';
+
+
+const moment = _rollupMoment || _moment;
 
 @Component({
     selector: 'app',
@@ -21,8 +33,7 @@ import { McIconModule } from '../../mosaic/icon';
     encapsulation: ViewEncapsulation.None
 })
 export class TimepickerDemoComponent {
-    timeValue1: Date = new Date();
-    timeValue2: Date = new Date();
+    timeValue1: Moment = moment();
     isDisabled: boolean = false;
 
     toggleDisable() {
