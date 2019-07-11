@@ -32,9 +32,9 @@
 
     <p class="mc-caption_mono" *ngIf="timeValue1 !== null">
         Current time value:
-        {{timeValue1.getHours()}}:
-        {{timeValue1.getMinutes()}}:
-        {{timeValue1.getSeconds()}}
+        {{timeValue1.hours()}}:
+        {{timeValue1.minutes()}}:
+        {{timeValue1.seconds()}}
     </p>
 
     <p class="mc-caption_mono" *ngIf="timeValue1 === null"> Incorrect input - null result</p>
