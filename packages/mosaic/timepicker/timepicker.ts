@@ -96,7 +96,7 @@ export const McTimepickerMixinBase:
         }
     ]
 })
-export class McTimepicker extends McTimepickerMixinBase
+export class McTimepicker<D> extends McTimepickerMixinBase
     implements McFormFieldControl<any>,
         OnChanges,
         OnDestroy,
@@ -220,10 +220,10 @@ export class McTimepicker extends McTimepickerMixinBase
     private onTouched: () => void;
     private _timeFormat: TimeFormats;
     private _minTime: string | null = null;
-    private minDateTime: Date | undefined;
+    private minDateTime: D | undefined;
     private _maxTime: string | null = null;
-    private maxDateTime: Date | undefined;
-    private currentDateTimeInput: Date | undefined;
+    private maxDateTime: D | undefined;
+    private currentDateTimeInput: D | undefined;
 
     constructor(private readonly elementRef: ElementRef,
                 @Optional() @Self() public ngControl: NgControl,
@@ -377,7 +377,7 @@ export class McTimepicker extends McTimepickerMixinBase
         this.focus();
     }
 
-    writeValue(value: Date | null): void {
+    writeValue(value: D | null): void {
         if (value !== null) {
             this.renderer.setProperty(this.elementRef.nativeElement,
                 'value',
@@ -400,7 +400,7 @@ export class McTimepicker extends McTimepickerMixinBase
         }
     }
 
-    registerOnChange(fn: (value: Date) => void): void {
+    registerOnChange(fn: (value: D) => void): void {
         this.onChange = fn;
     }
 
@@ -426,11 +426,11 @@ export class McTimepicker extends McTimepickerMixinBase
     }
 
     private applyInputChanges(applyParams: {
-        changedTime?: Date;
+        changedTime?: D;
         doTimestringReformat?: boolean;
     } = {}): void {
         const { changedTime, doTimestringReformat = true } = applyParams;
-        const timeToApply: Date | undefined = changedTime ||
+        const timeToApply: D | undefined = changedTime ||
             this.getDateFromTimeString(this.elementRef.nativeElement.value);
         this.currentDateTimeInput = timeToApply;
 
@@ -440,7 +440,8 @@ export class McTimepicker extends McTimepickerMixinBase
             this.renderer.setProperty(
                 this.elementRef.nativeElement,
                 'value',
-                this.getTimeStringFromDate(timeToApply, this.timeFormat));
+                this.getTimeStringFromDate(timeToApply, this.timeFormat)
+            );
             this.elementRef.nativeElement.selectionStart = selectionStart;
             this.elementRef.nativeElement.selectionEnd = selectionEnd;
         }
@@ -454,7 +455,7 @@ export class McTimepicker extends McTimepickerMixinBase
     private upDownTimeByArrowKeys(event: KeyboardEvent): void {
         event.preventDefault();
 
-        let changedTime: Date | undefined = this.currentDateTimeInput;
+        let changedTime: D | undefined = this.currentDateTimeInput;
         if (changedTime !== undefined) {
             const cursorPos = this.elementRef.nativeElement.selectionStart;
 
@@ -469,7 +470,7 @@ export class McTimepicker extends McTimepickerMixinBase
     }
 
     private switchSelectionBetweenTimeparts(event: KeyboardEvent): void {
-        const changedTime: Date | undefined = this.currentDateTimeInput;
+        const changedTime: D | undefined = this.currentDateTimeInput;
         const keyCode: string = this.getKeyCode(event);
 
         if (changedTime !== undefined) {
@@ -498,8 +499,8 @@ export class McTimepicker extends McTimepickerMixinBase
         });
     }
 
-    private incrementTime(dateVal: Date,
-                          whatToIncrement: TimeParts = TimeParts.seconds): Date {
+    private incrementTime(dateVal: D,
+                          whatToIncrement: TimeParts = TimeParts.seconds): D {
         let { hours, minutes, seconds } = this.getTimeDigitsFromDate(dateVal);
 
         switch (whatToIncrement) {
@@ -521,14 +522,14 @@ export class McTimepicker extends McTimepickerMixinBase
 
         if (hours > HOURS_PER_DAY) { hours = 0; }
 
-        return <Date> this.getDateFromTimeDigits(hours, minutes, seconds);
+        return <D> this.getDateFromTimeDigits(hours, minutes, seconds);
     }
 
     /**
      * @description Decrement part of time
      */
-    private decrementTime(dateVal: Date,
-                          whatToDecrement: TimeParts = TimeParts.seconds): Date {
+    private decrementTime(dateVal: D,
+                          whatToDecrement: TimeParts = TimeParts.seconds): D {
         let { hours, minutes, seconds } = this.getTimeDigitsFromDate(dateVal);
 
         switch (whatToDecrement) {
@@ -550,7 +551,7 @@ export class McTimepicker extends McTimepickerMixinBase
 
         if (hours < 0) { hours = HOURS_PER_DAY; }
 
-        return <Date> this.getDateFromTimeDigits(hours, minutes, seconds);
+        return <D> this.getDateFromTimeDigits(hours, minutes, seconds);
     }
 
     private getCursorPositionOfPrevTimePartStart(cursorPos: number, timeString: string): number {
@@ -606,18 +607,13 @@ export class McTimepicker extends McTimepickerMixinBase
     /**
      * @description Create time string for displaying inside input element of UI
      */
-    private getTimeStringFromDate(tempVal: Date,
+    private getTimeStringFromDate(value: D,
                                   timeFormat: TimeFormats = DEFAULT_TIME_FORMAT): string {
-        const hours: string = this.getNumberWithLeadingZero(tempVal.getHours());
-        const minutes: string = this.getNumberWithLeadingZero(tempVal.getMinutes());
-        const seconds: string = this.getNumberWithLeadingZero(tempVal.getSeconds());
+        if (value === undefined || value === null) {
+            return '';
+        }
 
-        const formattedTimeGenerators = {
-            [TimeFormats.HHmm]: () => `${hours}:${minutes}`,
-            [TimeFormats.HHmmss]: () => `${hours}:${minutes}:${seconds}`
-        };
-
-        return formattedTimeGenerators[timeFormat]();
+        return this.dateAdapter.format(value, timeFormat);
     }
 
     private getParsedTimeParts(timeString: string): {
@@ -650,12 +646,11 @@ export class McTimepicker extends McTimepickerMixinBase
     /**
      * @description Create Date object from separate parts of time
      */
-    private getDateFromTimeDigits(hours: number, minutes: number, seconds: number = 0): Date | undefined {
+    private getDateFromTimeDigits(hours: number, minutes: number, seconds: number = 0): D | undefined {
         return this.getDateFromTimeString(`${hours}:${minutes}:${seconds}`);
     }
 
-    private getDateFromTimeString(timeString: string | undefined): Date | undefined {
-        // TODO Use moment-js
+    private getDateFromTimeString(timeString: string | undefined): D | undefined {
         if (timeString === undefined) { return; }
 
         const {
@@ -684,24 +679,18 @@ export class McTimepicker extends McTimepickerMixinBase
             minutes = Number(hoursAndMinutesAndSeconds[2]);
             seconds = Number(hoursAndMinutesAndSeconds[3]);
         }
-        // const timestamp: number = Date.parse(fullDateString);
-        const resultDate: Date = new Date(1970, 0, 1, hours, minutes, seconds);
+
+        const resultDate: D = this.dateAdapter.createDateTime(1970, 0, 1, hours, minutes, seconds, 0);
         // tslint:enable no-magic-numbers
 
-        return isNaN(resultDate.getTime()) ? undefined : resultDate;
+        return this.dateAdapter.isValid(resultDate) ? resultDate : undefined;
     }
 
-    private getNumberWithLeadingZero(digit: number): string {
-        const MAX_DIGIT_WITH_LEADING_ZERO: number = 9;
-
-        return digit > MAX_DIGIT_WITH_LEADING_ZERO ? `${digit}` : `0${digit}`;
-    }
-
-    private getTimeDigitsFromDate(dateVal: Date): { hours: number; minutes: number; seconds: number } {
+    private getTimeDigitsFromDate(dateVal: D): { hours: number; minutes: number; seconds: number } {
         return {
-            hours: dateVal.getHours(),
-            minutes: dateVal.getMinutes(),
-            seconds: dateVal.getSeconds()
+            hours: this.dateAdapter.getHours(dateVal),
+            minutes: this.dateAdapter.getMinutes(dateVal),
+            seconds: this.dateAdapter.getSeconds(dateVal)
         };
     }
 
@@ -712,9 +701,9 @@ export class McTimepicker extends McTimepickerMixinBase
     }
 
     private minTimeValidator(): ValidationErrors | null {
-
         if (this.currentDateTimeInput !== undefined &&
             this.minDateTime !== undefined &&
+            this.minDateTime !== null &&
             this.isTimeLowerThenMin(this.currentDateTimeInput)) {
             return { mcTimepickerLowerThenMintime: { text: this.elementRef.nativeElement.value } };
         }
@@ -725,6 +714,7 @@ export class McTimepicker extends McTimepickerMixinBase
     private maxTimeValidator(): ValidationErrors | null {
         if (this.currentDateTimeInput !== undefined &&
             this.maxDateTime !== undefined &&
+            this.maxDateTime !== null &&
             this.isTimeGreaterThenMax(this.currentDateTimeInput)) {
             return { mcTimepickerHigherThenMaxtime: { text: this.elementRef.nativeElement.value } };
         }
@@ -732,11 +722,19 @@ export class McTimepicker extends McTimepickerMixinBase
         return null;
     }
 
-    private isTimeLowerThenMin(timeToCompare: Date): boolean {
-        return timeToCompare.getTime() - (<Date> this.minDateTime).getTime() < 0;
+    private isTimeLowerThenMin(timeToCompare: D): boolean {
+        if (timeToCompare === undefined || timeToCompare ===  null) {
+            return false;
+        }
+
+        return this.dateAdapter.compareDateTime(timeToCompare, this.minDateTime) < 0;
     }
 
-    private isTimeGreaterThenMax(timeToCompare: Date): boolean {
-        return timeToCompare.getTime() - (<Date> this.maxDateTime).getTime() >= 0;
+    private isTimeGreaterThenMax(timeToCompare: D): boolean {
+        if (timeToCompare === undefined || timeToCompare ===  null) {
+            return false;
+        }
+
+        return this.dateAdapter.compareDateTime(timeToCompare, this.maxDateTime) >= 0;
     }
 }

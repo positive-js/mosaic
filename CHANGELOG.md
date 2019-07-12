@@ -1,3 +1,20 @@
+# 8.0.0-beta.6 "Unconfident Woodwork" (2019-07-11)
+
+
+### Bug Fixes
+
+* proper month naming for short format & ru locale ([#161](https://github.com/positive-js/mosaic/issues/161)) ([1c269c9](https://github.com/positive-js/mosaic/commit/1c269c9))
+* **navbar:** icon color #UIM-56 ([#164](https://github.com/positive-js/mosaic/issues/164)) ([6a1a4bc](https://github.com/positive-js/mosaic/commit/6a1a4bc)), closes [#UIM-56](https://github.com/positive-js/mosaic/issues/UIM-56)
+* **timepicker:** date adapter integration #UIM-77 ([#165](https://github.com/positive-js/mosaic/issues/165)) ([ef23887](https://github.com/positive-js/mosaic/commit/ef23887)), closes [#UIM-77](https://github.com/positive-js/mosaic/issues/UIM-77)
+
+
+### Features
+
+* updated Angular to 8.1.0 ([#160](https://github.com/positive-js/mosaic/issues/160)) ([d44e8d8](https://github.com/positive-js/mosaic/commit/d44e8d8))
+* **modal:** allow open instance of component into the dialog ([#163](https://github.com/positive-js/mosaic/issues/163)) ([8315eef](https://github.com/positive-js/mosaic/commit/8315eef))
+
+
+
 # 8.0.0-beta.4 "Xeno Residue" (2019-07-02)
 
 

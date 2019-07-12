@@ -10,6 +10,10 @@ import { By } from '@angular/platform-browser';
 import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
+import * as _moment from 'moment';
+// @ts-ignore
+// tslint:disable-next-line:no-duplicate-imports
+import { default as _rollupMoment, Moment } from 'moment';
 
 import {
     ARROW_DOWN_KEYCODE,
@@ -18,6 +22,9 @@ import {
     McTimepickerModule
 } from './index';
 
+
+// tslint:disable-next-line
+const moment = _rollupMoment || _moment;
 
 @Component({
     selector: 'test-app',
@@ -36,7 +43,7 @@ class TestApp {
     timeFormat: string;
     minTime: string;
     maxTime: string;
-    timeValue: Date;
+    timeValue: Moment;
     isDisabled: boolean;
 }
 
@@ -67,7 +74,7 @@ describe('McTimepicker', () => {
             testComponent = fixture.debugElement.componentInstance;
             inputElementDebug = fixture.debugElement.query(By.directive(McTimepicker));
 
-            testComponent.timeValue = new Date('1970-01-01 12:18:28');
+            testComponent.timeValue = moment('1970-01-01 12:18:28');
             fixture.detectChanges();
         });
 
@@ -116,7 +123,7 @@ describe('McTimepicker', () => {
             testComponent = fixture.debugElement.componentInstance;
             inputElementDebug = fixture.debugElement.query(By.directive(McTimepicker));
 
-            testComponent.timeValue = new Date('1970-01-01 12:18:28');
+            testComponent.timeValue = moment('1970-01-01 12:18:28');
             fixture.detectChanges();
         });
 
@@ -164,7 +171,7 @@ describe('McTimepicker', () => {
             testComponent = fixture.debugElement.componentInstance;
             inputElementDebug = fixture.debugElement.query(By.directive(McTimepicker));
 
-            testComponent.timeValue = new Date('1970-01-01 12:18:28');
+            testComponent.timeValue = moment('1970-01-01 12:18:28');
             fixture.detectChanges();
         });
 
@@ -220,7 +227,7 @@ describe('McTimepicker', () => {
             testComponent = fixture.debugElement.componentInstance;
             inputElementDebug = fixture.debugElement.query(By.directive(McTimepicker));
 
-            testComponent.timeValue = new Date('1970-01-01 12:18:28');
+            testComponent.timeValue = moment('1970-01-01 12:18:28');
             fixture.detectChanges();
         });
 
@@ -229,13 +236,15 @@ describe('McTimepicker', () => {
                 .then(() => {
                     testComponent.timeFormat = 'HH:mm:ss';
                     inputElementDebug.nativeElement.value = '18:08:08';
+                    fixture.detectChanges();
+
                     inputElementDebug.triggerEventHandler('input', { target: inputElementDebug.nativeElement });
                     fixture.detectChanges();
 
                     return fixture.whenStable();
                 }).then(() => {
                     fixture.detectChanges();
-                    expect(testComponent.timeValue.toString()).toContain('18:08:08');
+                    expect(testComponent.timeValue.toDate().toString()).toContain('18:08:08');
                 });
         });
 
@@ -261,6 +270,7 @@ describe('McTimepicker', () => {
             return fixture.whenStable()
                 .then(() => {
                     inputElementDebug.nativeElement.value = '19:08:08';
+
                     inputElementDebug.triggerEventHandler(
                         'blur',
                         { target: inputElementDebug.nativeElement }
@@ -277,6 +287,9 @@ describe('McTimepicker', () => {
         it('Paste value from clipboard', () => {
             return fixture.whenStable()
                 .then(() => {
+                    testComponent.timeFormat = 'HH:mm:ss';
+                    fixture.detectChanges();
+
                     inputElementDebug.triggerEventHandler(
                         'paste',
                         {
@@ -392,7 +405,8 @@ describe('McTimepicker', () => {
                 })
                 .then(() => {
                     fixture.detectChanges();
-                    expect(testComponent.timeValue.toString()).toContain('01:30:00');
+
+                    expect(testComponent.timeValue.toDate().toString()).toContain('01:30:00');
                 });
         });
         it('Paste am/pm from clipboard: 10:3 am', () => {
@@ -443,7 +457,7 @@ describe('McTimepicker', () => {
                         {
                             preventDefault: () => null,
                             clipboardData: {
-                                getData: () => '10:30 Pm'
+                                getData: () => '10:30 pm'
                             }
                         });
                     fixture.detectChanges();
@@ -543,7 +557,7 @@ describe('McTimepicker', () => {
             testComponent = fixture.debugElement.componentInstance;
             inputElementDebug = fixture.debugElement.query(By.directive(McTimepicker));
 
-            testComponent.timeValue = new Date('1970-01-01 23:00:08');
+            testComponent.timeValue = moment('1970-01-01 23:00:08');
             testComponent.timeFormat = 'HH:mm';
             fixture.detectChanges();
         });
