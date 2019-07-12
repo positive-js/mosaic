@@ -1,3 +1,4 @@
+import { ComponentPortal, DomPortalHost } from '@angular/cdk/portal';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import {
     ApplicationRef,
@@ -14,7 +15,6 @@ import {
     ViewContainerRef
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ComponentPortal, DomPortalHost } from '@ptsecurity/cdk/portal';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 
