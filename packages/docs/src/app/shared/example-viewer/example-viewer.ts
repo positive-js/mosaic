@@ -1,5 +1,5 @@
+import { ComponentPortal } from '@angular/cdk/portal';
 import { Component, Input } from '@angular/core';
-import { ComponentPortal } from '@ptsecurity/cdk/portal';
 import { EXAMPLE_COMPONENTS, LiveExample } from '@ptsecurity/mosaic-examples';
 
 import { CopierService } from '../copier/copier.service';
