@@ -2,7 +2,7 @@
 
 <ng-template ngFor let-area [ngForOf]="areas" let-index="index" let-last="last">
     <mc-gutter *ngIf="last === false"
-               [class.mc-gutter_horizontal]="!isVertical"
+               [class.mc-gutter_vertical]="isVertical()"
                [direction]="direction"
                [attr.disabled]="disabled || null"
                [size]="gutterSize"

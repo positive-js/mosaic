@@ -197,9 +197,7 @@ export class McSplitterComponent implements OnInit {
     }
 
     private onMouseMove(event: MouseEvent, startPoint: IPoint, leftArea: IArea, rightArea: IArea) {
-        if (!this.isDragging || this.disabled) {
-            return;
-        }
+        if (!this.isDragging || this.disabled) { return; }
 
         const endPoint: IPoint = {
             x: event.screenX,
@@ -352,8 +350,10 @@ export class McSplitterAreaDirective implements OnInit, OnDestroy {
     }
 
     setSize(size: number): void {
-        const sz = coerceNumberProperty(size);
-        this.setStyle(this.getSizeProperty(), coerceCssPixelValue(sz));
+        if (size) {
+            const sz = coerceNumberProperty(size);
+            this.setStyle(this.getSizeProperty(), coerceCssPixelValue(sz));
+        }
     }
 
     getSize(): number {
