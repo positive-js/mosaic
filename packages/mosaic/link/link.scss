@@ -15,16 +15,6 @@
         margin-right: 4px;
     }
 
-    &.cdk-focused {
-        outline-width: 2px;
-        outline-style: solid;
-        outline-offset: 2px;
-    }
-
-    &.cdk-mouse-focused {
-        outline: none;
-    }
-
     &[disabled] {
         pointer-events: none;
         cursor: default;
