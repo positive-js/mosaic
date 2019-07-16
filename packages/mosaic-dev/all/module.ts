@@ -1,15 +1,14 @@
-import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-
 // tslint:disable:no-console
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CdkTreeModule, FlatTreeControl, NestedTreeControl } from '@ptsecurity/cdk/tree';
+import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McButtonToggleModule } from '@ptsecurity/mosaic/button-toggle';
-
 import { McCardModule } from '@ptsecurity/mosaic/card';
 import { McCheckboxModule } from '@ptsecurity/mosaic/checkbox';
 import { McDropdownModule } from '@ptsecurity/mosaic/dropdown';
@@ -34,6 +33,19 @@ import { McTreeFlatDataSource, McTreeFlattener, McTreeModule, McTreeNestedDataSo
 import { Observable, of as observableOf } from 'rxjs';
 
 import { FileDatabase, FileFlatNode, FileNode } from '../tree/module';
+
+// Depending on whether rollup is used, moment needs to be imported differently.
+// Since Moment.js doesn't have a default export, we normally need to import using the `* as`
+// syntax. However, rollup creates a synthetic default module and we thus need to import it using
+// the `default as` syntax.
+// tslint:disable-next-line:ordered-imports
+import * as _moment from 'moment';
+// @ts-ignore
+// tslint:disable-next-line:no-duplicate-imports
+import { default as _rollupMoment, Moment } from 'moment';
+
+
+const moment = _rollupMoment || _moment;
 
 
 const INTERVAL: number = 300;
@@ -110,7 +122,7 @@ export class DemoComponent {
 
     multiSelectSelectFormControl = new FormControl([], Validators.pattern(/^w/));
 
-    timeValue1: Date = new Date();
+    timeValue1: Moment = moment();
 
     treeControl: FlatTreeControl<FileFlatNode>;
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
@@ -206,6 +218,7 @@ export class DemoComponent {
         McNavbarModule,
         McListModule,
         McModalModule,
+        McMomentDateModule,
         McProgressBarModule,
         McProgressSpinnerModule,
         McRadioModule,
