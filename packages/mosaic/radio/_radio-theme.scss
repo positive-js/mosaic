@@ -43,18 +43,6 @@
             }
         }
 
-        & .mc-radio-input:focus {
-            + .mc-radio-label-content .mc-radio-button__outer-circle {
-                border-color: $focus-color;
-
-                box-shadow: 0 0 0 2px $focus-color;
-            }
-
-            + .mc-radio-label-content .mc-radio-button__inner-circle {
-                box-shadow: 0 0 0 1px white;
-            }
-        }
-
         &.mc-disabled {
             color: map-get($foreground, disabled-text);
 
