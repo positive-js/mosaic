@@ -15,12 +15,6 @@
         margin-right: 4px;
     }
 
-    &.cdk-keyboard-focused {
-        outline-width: 2px;
-        outline-style: solid;
-        outline-offset: 2px;
-    }
-
     &[disabled] {
         pointer-events: none;
         cursor: default;
