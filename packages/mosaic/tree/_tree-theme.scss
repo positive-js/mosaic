@@ -19,8 +19,7 @@
             background-color: mc-color($background, hover);
         }
 
-        &.mc-focused,
-        &.mc-active {
+        &.mc-focused {
             border-color: mc-color($primary);
         }
 

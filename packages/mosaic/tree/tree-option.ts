@@ -18,6 +18,7 @@ import { CanDisable, toBoolean } from '@ptsecurity/mosaic/core';
 export interface McTreeOptionParentComponent {
     multiple: boolean;
     selectionModel: SelectionModel<any>;
+    setSelectedOption: any;
     setFocusedOption: any;
 }
 
@@ -45,8 +46,10 @@ let uniqueIdCounter: number = 0;
 
         class: 'mc-tree-option',
         '[class.mc-selected]': 'selected',
-        '[class.mc-active]': 'active',
+        '[class.mc-focused]': 'hasFocus',
 
+        '(focus)': 'handleFocus()',
+        '(blur)': 'handleBlur()',
         '(click)': 'selectViaInteraction($event)'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -102,18 +105,6 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
 
     private _selected: boolean = false;
 
-    /**
-     * Whether or not the option is currently active and ready to be selected.
-     * An active option displays styles as if it is focused, but the
-     * focus is actually retained somewhere else. This comes in handy
-     * for components like autocomplete where focus must remain on the input.
-     */
-    get active(): boolean {
-        return this._active;
-    }
-
-    private _active = false;
-
     get id(): string {
         return this._id;
     }
@@ -123,6 +114,8 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
     get multiple(): boolean {
         return this.parent.multiple;
     }
+
+    hasFocus: boolean = false;
 
     constructor(
         protected elementRef: ElementRef,
@@ -151,28 +144,26 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
         this.changeDetectorRef.markForCheck();
     }
 
-    /**
-     * This method sets display styles on the option to make it appear
-     * active. This is used by the ActiveDescendantKeyManager so key
-     * events will display the proper options as active on arrow key events.
-     */
-    setActiveStyles(): void {
-        if (!this._active) {
-            this._active = true;
+    handleFocus() {
+        console.log('handleFocus');
+        if (this.disabled || this.hasFocus) { return; }
 
-            this.changeDetectorRef.markForCheck();
+        this.hasFocus = true;
+
+        if (this.parent.setFocusedOption) {
+            this.parent.setFocusedOption(this);
         }
     }
 
-    /**
-     * This method removes display styles on the option that made it appear
-     * active. This is used by the ActiveDescendantKeyManager so key
-     * events will display the proper options as active on arrow key events.
-     */
-    setInactiveStyles(): void {
-        if (this._active) {
-            this._active = false;
-            this.changeDetectorRef.markForCheck();
+    handleBlur() {
+        this.hasFocus = false;
+    }
+
+    focus(): void {
+        const element = this.getHostElement();
+
+        if (typeof element.focus === 'function') {
+            element.focus();
         }
     }
 
@@ -185,21 +176,6 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
 
         return 0;
     }
-
-    focus(): void {
-        const element = this.getHostElement();
-
-        if (typeof element.focus === 'function') {
-            element.focus();
-        }
-    }
-
-    // todo старая реализация, нужно восстановить tree-selection
-    // handleClick(): void {
-    //     if (this.disabled) { return; }
-    //
-    //     this.treeSelection.setFocusedOption(this);
-    // }
 
     get viewValue(): string {
         // TODO: Add input property alternative for node envs.
@@ -227,8 +203,8 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
             this.changeDetectorRef.markForCheck();
             this.emitSelectionChangeEvent(true);
 
-            if (this.parent.setFocusedOption) {
-                this.parent.setFocusedOption(this, $event);
+            if (this.parent.setSelectedOption) {
+                this.parent.setSelectedOption(this, $event);
             }
         }
     }

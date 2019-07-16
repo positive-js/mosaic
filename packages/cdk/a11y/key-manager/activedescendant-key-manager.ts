@@ -49,5 +49,4 @@ export class ActiveDescendantKeyManager<T> extends ListKeyManager<Highlightable 
             this.activeItem.setActiveStyles();
         }
     }
-
 }
