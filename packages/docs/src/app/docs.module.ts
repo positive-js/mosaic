@@ -31,7 +31,9 @@ import { DocumentationItems } from './shared/documentation-items/documentation-i
         ExampleModule,
 
         RouterModule.forRoot([
-            { path: '', component: HomepageComponent, pathMatch: 'full' },
+            { path: '', redirectTo: 'categories' , pathMatch: 'full' },
+            { path: 'categories', redirectTo: '/components/categories' },
+
             {
                 path: ':section',
                 component: MainLayoutComponent,
