@@ -227,8 +227,9 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
         return result;
     }
 
-    createDateTime(year: number, month: number, date: number,
-                   hours: number, minutes: number, seconds: number, milliseconds: number): Moment {
+    createDateTime(
+        year: number, month: number, date: number, hours: number, minutes: number, seconds: number, milliseconds: number
+    ): Moment {
         const newDate = this.createDate(year, month, date);
 
         newDate.hours(hours);
