@@ -5,7 +5,7 @@ import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CdkTreeModule, FlatTreeControl, NestedTreeControl } from '@ptsecurity/cdk/tree';
+import { CdkTreeModule, FlatTreeControl } from '@ptsecurity/cdk/tree';
 import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McButtonToggleModule } from '@ptsecurity/mosaic/button-toggle';
@@ -29,7 +29,7 @@ import { McTextareaModule } from '@ptsecurity/mosaic/textarea';
 import { McTimepickerModule } from '@ptsecurity/mosaic/timepicker';
 import { McToggleModule } from '@ptsecurity/mosaic/toggle';
 import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
-import { McTreeFlatDataSource, McTreeFlattener, McTreeModule, McTreeNestedDataSource } from '@ptsecurity/mosaic/tree';
+import { McTreeFlatDataSource, McTreeFlattener, McTreeModule } from '@ptsecurity/mosaic/tree';
 import { Observable, of as observableOf } from 'rxjs';
 
 import { FileDatabase, FileFlatNode, FileNode } from '../tree/module';
@@ -84,6 +84,7 @@ export class DemoComponent {
             updated: new Date('1/28/16')
         }
     ];
+
     notes = [
         {
             name: 'Vacation Itinerary',
@@ -128,9 +129,6 @@ export class DemoComponent {
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
     treeFlattener: McTreeFlattener<FileNode, FileFlatNode>;
 
-    nestedTreeControl: NestedTreeControl<FileNode>;
-    nestedDataSource: McTreeNestedDataSource<FileNode>;
-
     constructor(private modalService: McModalService, database: FileDatabase) {
         setInterval(() => {
             this.percent = (this.percent + STEP) % (MAX_PERCENT + STEP);
@@ -143,12 +141,8 @@ export class DemoComponent {
         this.treeControl = new FlatTreeControl<FileFlatNode>(this._getLevel, this._isExpandable);
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-        this.nestedTreeControl = new NestedTreeControl<FileNode>(this._getChildren);
-        this.nestedDataSource = new McTreeNestedDataSource();
-
         database.dataChange.subscribe((data) => {
             this.dataSource.data = data;
-            this.nestedDataSource.data = data;
         });
     }
 
