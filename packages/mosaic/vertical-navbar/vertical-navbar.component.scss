@@ -1,8 +1,11 @@
 @import 'vertical-navbar-theme';
 
 .mc-vertical-navbar {
-
-    position: relative;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100;
     display: flex;
     flex-direction: column;
     align-items: flex-start;

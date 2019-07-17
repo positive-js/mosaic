@@ -1,15 +1,14 @@
-import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-
 // tslint:disable:no-console
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { CdkTreeModule, FlatTreeControl, NestedTreeControl } from '@ptsecurity/cdk/tree';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CdkTreeModule, FlatTreeControl } from '@ptsecurity/cdk/tree';
+import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McButtonToggleModule } from '@ptsecurity/mosaic/button-toggle';
-
 import { McCardModule } from '@ptsecurity/mosaic/card';
 import { McCheckboxModule } from '@ptsecurity/mosaic/checkbox';
 import { McDropdownModule } from '@ptsecurity/mosaic/dropdown';
@@ -30,10 +29,23 @@ import { McTextareaModule } from '@ptsecurity/mosaic/textarea';
 import { McTimepickerModule } from '@ptsecurity/mosaic/timepicker';
 import { McToggleModule } from '@ptsecurity/mosaic/toggle';
 import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
-import { McTreeFlatDataSource, McTreeFlattener, McTreeModule, McTreeNestedDataSource } from '@ptsecurity/mosaic/tree';
+import { McTreeFlatDataSource, McTreeFlattener, McTreeModule } from '@ptsecurity/mosaic/tree';
 import { Observable, of as observableOf } from 'rxjs';
 
 import { FileDatabase, FileFlatNode, FileNode } from '../tree/module';
+
+// Depending on whether rollup is used, moment needs to be imported differently.
+// Since Moment.js doesn't have a default export, we normally need to import using the `* as`
+// syntax. However, rollup creates a synthetic default module and we thus need to import it using
+// the `default as` syntax.
+// tslint:disable-next-line:ordered-imports
+import * as _moment from 'moment';
+// @ts-ignore
+// tslint:disable-next-line:no-duplicate-imports
+import { default as _rollupMoment, Moment } from 'moment';
+
+
+const moment = _rollupMoment || _moment;
 
 
 const INTERVAL: number = 300;
@@ -72,6 +84,7 @@ export class DemoComponent {
             updated: new Date('1/28/16')
         }
     ];
+
     notes = [
         {
             name: 'Vacation Itinerary',
@@ -110,14 +123,11 @@ export class DemoComponent {
 
     multiSelectSelectFormControl = new FormControl([], Validators.pattern(/^w/));
 
-    timeValue1: Date = new Date();
+    timeValue1: Moment = moment();
 
     treeControl: FlatTreeControl<FileFlatNode>;
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
     treeFlattener: McTreeFlattener<FileNode, FileFlatNode>;
-
-    nestedTreeControl: NestedTreeControl<FileNode>;
-    nestedDataSource: McTreeNestedDataSource<FileNode>;
 
     constructor(private modalService: McModalService, database: FileDatabase) {
         setInterval(() => {
@@ -131,12 +141,8 @@ export class DemoComponent {
         this.treeControl = new FlatTreeControl<FileFlatNode>(this._getLevel, this._isExpandable);
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-        this.nestedTreeControl = new NestedTreeControl<FileNode>(this._getChildren);
-        this.nestedDataSource = new McTreeNestedDataSource();
-
         database.dataChange.subscribe((data) => {
             this.dataSource.data = data;
-            this.nestedDataSource.data = data;
         });
     }
 
@@ -206,6 +212,7 @@ export class DemoComponent {
         McNavbarModule,
         McListModule,
         McModalModule,
+        McMomentDateModule,
         McProgressBarModule,
         McProgressSpinnerModule,
         McRadioModule,

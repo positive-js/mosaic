@@ -16,6 +16,10 @@
     .mc-link {
         color: $color;
 
+        &:focus {
+            outline: none;
+        }
+
         &:visited {
             color: $color;
         }
@@ -25,7 +29,8 @@
         }
 
         &.cdk-keyboard-focused {
-            outline-color: $color;
+            outline: $color solid 2px;
+            outline-offset: 2px;
         }
 
         &.mc-link_underlined .mc-link__text {
