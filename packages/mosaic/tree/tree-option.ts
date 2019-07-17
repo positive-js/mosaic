@@ -145,7 +145,6 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
     }
 
     handleFocus() {
-        console.log('handleFocus');
         if (this.disabled || this.hasFocus) { return; }
 
         this.hasFocus = true;
