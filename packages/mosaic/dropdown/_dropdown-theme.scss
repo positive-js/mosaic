@@ -32,6 +32,11 @@
         &.cdk-keyboard-focused, &.cdk-program-focused {
             border-color: mc-color($primary);
             box-shadow: inset 0 0 0 1px mc-color($primary);
+
+            &.mc-link{
+                outline: none;
+            }
+
         }
 
         &[disabled] {
