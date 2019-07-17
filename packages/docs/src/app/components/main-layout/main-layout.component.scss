@@ -1,24 +1,48 @@
 
-mc-vertical-navbar {
-    height: 100%;
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 1px 0 2px 1px grey;
 
-    .mc-vertical-navbar__toggle-button {
-        visibility: hidden;
-        width: 24px !important;
+.main
+{
+}
+
+.content{
+
+    &__wrapper{
+        padding: 10px 0;
     }
 }
 
-[mc-vertical-navbar-item]:first-of-type {
-    margin-top: 64px;
+.nav
+{
+    position: fixed;
+    top: 64px;
+    bottom: 0;
+    z-index: 2;
+    overflow: hidden;
+    overflow-y: auto;
+    max-height: 100%;
+    width: 360px;
+    background-color: #f5f6f9;
+
+
+    &__wrapper
+    {
+        list-style: none;
+    }
+
+    &__item
+    {
+        & > a
+        {
+            position: relative;
+            display: block;
+            padding: 1em;
+            color: gray;
+            text-decoration: none;
+
+            &:hover, &:active, &:focus
+            {
+                text-decoration: none;
+            }
+        }
+    }
 }
-
-.content {
-    margin-left: 218px;
-}
-
-
