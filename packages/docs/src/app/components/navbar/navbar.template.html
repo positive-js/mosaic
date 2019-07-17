@@ -10,7 +10,23 @@
         Выбор Версии
     </div>
     <div class="flex-spacer"></div>
-    <div>Lang Select</div>
+
+    <a class="mc-link" [mcDropdownTriggerFor]="appDropdown">
+        <span class="mc-link__text">Русский язык</span>
+        <i mc-icon="mc-angle-m-16" class="mc-link__icon"></i>
+    </a>
+
+
+    <mc-dropdown #appDropdown="mcDropdown">
+        <button mc-dropdown-item>
+            Русский язык
+        </button>
+        <button mc-dropdown-item>
+            Английский язык
+        </button>
+    </mc-dropdown>
+
+
     <div>Theme Select</div>
     <div>Color Select</div>
 </header>
