@@ -37,12 +37,8 @@ a {
     color: inherit;
 }
 
-.float-left {
-    float: left;
-}
-
-.float-right {
-    float: right;
+.flex-spacer {
+    flex-grow: 1;
 }
 
 code, pre {
