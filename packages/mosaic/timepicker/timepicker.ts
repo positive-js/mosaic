@@ -6,7 +6,6 @@ import {
     forwardRef,
     Inject,
     Input,
-    OnChanges,
     OnDestroy,
     Optional,
     Renderer2,
