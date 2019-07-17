@@ -9,9 +9,9 @@
 
     <h2 class="mc-h2">Horizontal</h2>
 
-    <mc-splitter class="horizontal-block" direction="horizontal">
+    <mc-splitter class="horizontal-block" [direction]="'horizontal'">
         <div mc-splitter-area>first</div>
-        <div mc-splitter-area>second</div>
+        <div mc-splitter-area class="flex">second</div>
         <div mc-splitter-area>third</div>
     </mc-splitter>
 
@@ -19,9 +19,9 @@
 
     <h2 class="mc-h2">Vertical</h2>
 
-    <mc-splitter class="vertical-block" direction="vertical">
+    <mc-splitter class="vertical-block" [direction]="'vertical'">
         <div mc-splitter-area>first</div>
-        <div mc-splitter-area>second</div>
+        <div mc-splitter-area class="flex">second</div>
         <div mc-splitter-area>third</div>
     </mc-splitter>
 
@@ -31,7 +31,7 @@
 
     <mc-splitter class="horizontal-block">
         <div mc-splitter-area>first</div>
-        <div mc-splitter-area>second</div>
+        <div mc-splitter-area class="flex">second</div>
         <div mc-splitter-area>third</div>
     </mc-splitter>
 
@@ -39,9 +39,9 @@
 
     <h2 class="mc-h2">Disabled</h2>
 
-    <mc-splitter class="horizontal-block" direction="horizontal" disabled>
+    <mc-splitter class="horizontal-block" [direction]="'horizontal'" disabled>
         <div mc-splitter-area>first</div>
-        <div mc-splitter-area>second</div>
+        <div mc-splitter-area class="flex">second</div>
         <div mc-splitter-area>third</div>
     </mc-splitter>
 
@@ -51,7 +51,7 @@
 
     <mc-splitter class="horizontal-block">
         <div mc-splitter-area class="min-width-enabled">first (with min-width)</div>
-        <div mc-splitter-area>second</div>
+        <div mc-splitter-area class="flex">second</div>
         <div mc-splitter-area class="min-width-enabled">third (with min-width)</div>
     </mc-splitter>
 
@@ -61,8 +61,8 @@
 
     <mc-splitter class="horizontal-block">
         <div mc-splitter-area>first</div>
-        <div mc-splitter-area>
-            <mc-splitter direction="vertical">
+        <div mc-splitter-area class="flex">
+            <mc-splitter [direction]="'vertical'">
                 <div mc-splitter-area>top</div>
                 <div mc-splitter-area>center</div>
                 <div mc-splitter-area>bottom</div>
@@ -77,7 +77,7 @@
 
     <mc-splitter class="horizontal-block custom-color">
         <div mc-splitter-area>first</div>
-        <div mc-splitter-area>second</div>
+        <div mc-splitter-area class="flex">second</div>
         <div mc-splitter-area>third</div>
     </mc-splitter>
 
@@ -87,7 +87,7 @@
 
     <mc-splitter class="horizontal-block custom-gutter">
         <div mc-splitter-area>first</div>
-        <div mc-splitter-area>second</div>
+        <div mc-splitter-area class="flex">second</div>
         <div mc-splitter-area>third</div>
     </mc-splitter>
 
