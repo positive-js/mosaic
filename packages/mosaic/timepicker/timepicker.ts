@@ -214,7 +214,6 @@ export class McTimepicker<D> extends McTimepickerMixinBase
 
     set minTime(value: string | null) {
         this._minTime = value;
-        // this.minDateTime = value !== null ? this.getDateFromTimeString(value) : undefined;
         (this.ngControl.control as FormControl).updateValueAndValidity();
     }
 
@@ -227,7 +226,6 @@ export class McTimepicker<D> extends McTimepickerMixinBase
 
     set maxTime(maxValue: string | null) {
         this._maxTime = maxValue;
-        // this.maxDateTime = maxValue !== null ? this.getDateFromTimeString(maxValue) : undefined;
         (this.ngControl.control as FormControl).updateValueAndValidity();
     }
 
