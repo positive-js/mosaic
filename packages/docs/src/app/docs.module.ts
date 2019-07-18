@@ -7,18 +7,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { ExampleModule } from '@ptsecurity/mosaic-examples';
 
-import { MainLayoutComponent } from './components/main-layout/main-layout.component';
+import { ComponentViewerModule } from './components/component-viewer/component-viewer.module';
 import { MainLayoutModule } from './components/main-layout/main-layout.module';
-import { ComponentListModule, ComponentListComponent, HomepageComponent, HomepageModule } from './containers';
-import { ComponentCategoryList } from './containers/component-category-list/component-category-list.component';
+import { ComponentListModule, HomepageModule } from './containers';
 import { ComponentCategoryListModule } from './containers/component-category-list/component-category-list.module';
-import {
-    ComponentApiComponent,
-    ComponentOverviewComponent,
-    ComponentViewerComponent
-} from './containers/component-viewer/component-viewer.component';
-import { ComponentViewerModule } from './containers/component-viewer/component-viewer.module';
 import { DocsComponent } from './docs.component';
+import { APP_ROUTES } from './docs.module-routes';
 import { DocumentationItems } from './shared/documentation-items/documentation-items';
 
 
@@ -30,40 +24,7 @@ import { DocumentationItems } from './shared/documentation-items/documentation-i
         HttpClientModule,
         ExampleModule,
 
-        RouterModule.forRoot([
-            { path: '', redirectTo: 'categories' , pathMatch: 'full' },
-            { path: 'categories', redirectTo: '/components/categories' },
-
-            {
-                path: ':section',
-                component: MainLayoutComponent,
-                children: [
-                    {path: '', redirectTo: 'categories', pathMatch: 'full'},
-                    {path: 'component/:id', redirectTo: ':id', pathMatch: 'full'},
-                    {path: 'category/:id', redirectTo: '/categories/:id', pathMatch: 'full'},
-
-                    {
-                        path: 'categories',
-                        children: [
-                            {path: '', component: ComponentCategoryList},
-                            {path: ':id', component: ComponentListComponent}
-                        ]
-                    },
-
-                    {
-                        path: ':id',
-                        component: ComponentViewerComponent,
-                        children: [
-                            {path: '', redirectTo: 'overview', pathMatch: 'full'},
-                            {path: 'overview', component: ComponentOverviewComponent, pathMatch: 'full'},
-                            {path: 'api', component: ComponentApiComponent, pathMatch: 'full'},
-                            {path: '**', redirectTo: 'overview'}
-                        ]
-                    }
-                ]
-            },
-            {path: '**', redirectTo: ''}
-        ]),
+        RouterModule.forRoot(APP_ROUTES),
 
         HomepageModule,
         ComponentListModule,

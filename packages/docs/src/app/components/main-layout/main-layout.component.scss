@@ -10,39 +10,3 @@
         padding: 10px 0;
     }
 }
-
-.nav
-{
-    position: fixed;
-    top: 64px;
-    bottom: 0;
-    z-index: 2;
-    overflow: hidden;
-    overflow-y: auto;
-    max-height: 100%;
-    width: 360px;
-    background-color: #f5f6f9;
-
-
-    &__wrapper
-    {
-        list-style: none;
-    }
-
-    &__item
-    {
-        & > a
-        {
-            position: relative;
-            display: block;
-            padding: 1em;
-            color: gray;
-            text-decoration: none;
-
-            &:hover, &:active, &:focus
-            {
-                text-decoration: none;
-            }
-        }
-    }
-}
