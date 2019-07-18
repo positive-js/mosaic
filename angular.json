@@ -10,8 +10,8 @@
                     "style": "scss"
                 }
             },
-            "root": "packages/docs",
-            "sourceRoot": "packages/docs/src",
+            "root": "",
+            "sourceRoot": "",
             "prefix": "app",
             "architect": {
                 "build": {
@@ -31,7 +31,7 @@
                             },
                             {
                                 "glob": "**/*",
-                                "input": "../../dist/docs-content",
+                                "input": "dist/docs-content",
                                 "output": "/docs-content"
                             },
                             {
