@@ -33,7 +33,7 @@ const moment = _rollupMoment || _moment;
     encapsulation: ViewEncapsulation.None
 })
 export class TimepickerDemoComponent {
-    timeValue1: Moment = moment();
+    timeValue: Moment = moment('2000-10-01 12:00:00');
     isDisabled: boolean = false;
 
     toggleDisable() {

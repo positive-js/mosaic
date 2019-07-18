@@ -20,7 +20,7 @@
         <mc-form-field >
             <i mcPrefix mc-icon="mc-clock_16" color="second"></i>
             <input mcTimepicker
-                   [(ngModel)]="timeValue1"
+                   [(ngModel)]="timeValue"
                    time-format="HH:mm:ss"
                    min-time="10:00:00"
                    max-time="13:30:00"
@@ -30,14 +30,14 @@
 
     <br>
 
-    <p class="mc-caption_mono" *ngIf="timeValue1 !== null">
+    <p class="mc-caption_mono" *ngIf="timeValue !== null">
         Current time value:
-        {{timeValue1.hours()}}:
-        {{timeValue1.minutes()}}:
-        {{timeValue1.seconds()}}
+        {{timeValue.hours()}}:
+        {{timeValue.minutes()}}:
+        {{timeValue.seconds()}}
     </p>
 
-    <p class="mc-caption_mono" *ngIf="timeValue1 === null"> Incorrect input - null result</p>
+    <p class="mc-caption_mono" *ngIf="timeValue === null"> Incorrect input - null result</p>
 
     <br>
 
