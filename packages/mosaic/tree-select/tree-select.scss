@@ -44,7 +44,7 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
     cursor: pointer;
 
     // todo возможно нужно через JS
-    padding: 3px 7px 3px 15px;
+    padding: 0 7px 0 15px;
 
     &.mc-tree-select__trigger_multiple {
         padding-left: 7px;
@@ -77,7 +77,7 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
 
     overflow: hidden;
 
-    max-height: 24px;
+    max-height: 28px;
 
     margin: 0;
     padding-left: 0;
@@ -119,6 +119,7 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
 .mc-tree-select__arrow-wrapper {
     display: table-cell;
     vertical-align: middle;
+    line-height: 30px;
 
     // When used in a box or standard appearance form-field the arrow should be shifted up 50%.
     .mc-form-field-appearance-fill &,
