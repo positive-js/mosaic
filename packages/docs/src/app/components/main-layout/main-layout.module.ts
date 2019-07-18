@@ -6,8 +6,9 @@ import { McDropdownModule } from '@ptsecurity/mosaic/dropdown';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McTreeModule } from '@ptsecurity/mosaic/tree';
 
-import { MainLayoutComponent } from './main-layout.component';
 import { NavbarModule } from '../navbar';
+import { SidenavModule } from '../sidenav/sidenav.module';
+import { MainLayoutComponent } from './main-layout.component';
 
 
 @NgModule({
@@ -16,10 +17,12 @@ import { NavbarModule } from '../navbar';
         RouterModule,
 
         McTreeModule,
-        NavbarModule,
         McButtonModule,
         McIconModule,
-        McDropdownModule
+        McDropdownModule,
+
+        NavbarModule,
+        SidenavModule
     ],
     exports: [MainLayoutComponent],
     declarations: [MainLayoutComponent]
