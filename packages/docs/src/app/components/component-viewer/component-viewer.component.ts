@@ -31,6 +31,7 @@ export class ComponentViewerComponent implements OnDestroy {
         ).subscribe((d) => {
             this.componentDocItem = d.doc;
 
+            console.log(d);
             if (this.componentDocItem) {
                 console.log(this.componentDocItem.name);
                 this.componentDocItem.examples.length ?
