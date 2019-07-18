@@ -49,6 +49,12 @@ const DOCS: { [key: string]: DocCategory[] } = {
             name: 'Buttons',
             summary: 'Buttons, toggles.',
             items: [
+                {
+                    id: 'button',
+                    name: 'Button',
+                    summary: 'An interactive button with a range of presentation options.',
+                    examples: ['button-types']
+                }
             ]
         },
         {
