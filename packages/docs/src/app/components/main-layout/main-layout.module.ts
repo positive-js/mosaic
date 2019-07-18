@@ -8,6 +8,7 @@ import { McTreeModule } from '@ptsecurity/mosaic/tree';
 
 import { NavbarModule } from '../navbar';
 import { SidenavModule } from '../sidenav/sidenav.module';
+
 import { MainLayoutComponent } from './main-layout.component';
 
 
