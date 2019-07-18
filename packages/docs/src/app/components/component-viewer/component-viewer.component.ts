@@ -1,7 +1,7 @@
-import {Component, OnDestroy, ViewChild, ViewEncapsulation} from '@angular/core';
+import { Component, OnDestroy, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import {combineLatest, Subject} from 'rxjs';
-import {map, takeUntil} from 'rxjs/operators';
+import { combineLatest, Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 
 import { DocItem, DocumentationItems } from '../../shared/documentation-items/documentation-items';
 import { TableOfContents } from '../../shared/table-of-contents/table-of-contents';
@@ -37,7 +37,7 @@ export class ComponentViewerComponent implements OnDestroy {
                     this.sections.add('examples') :
                     this.sections.delete('examples');
             } else {
-                //this.router.navigate(['/' + d.section]);
+                // this.router.navigate(['/' + d.section]);
             }
         });
     }
