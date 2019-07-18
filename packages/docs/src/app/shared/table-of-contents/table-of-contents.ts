@@ -1,5 +1,6 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 interface Link {
@@ -29,12 +30,16 @@ export class TableOfContents {
     @Input() links: Link[] = [];
     @Input() headerSelectors = '.docs-markdown h3, .docs-markdown h4';
 
+    // tslint:disable-next-line
+    _rootUrl = this._router.url.split('#')[0];
+
     constructor(
-        @Inject(DOCUMENT) private _document: Document
+        @Inject(DOCUMENT) private _document: Document,
+        private _router: Router,
+        private _route: ActivatedRoute
     ) {
         this.links = this.createLinks();
     }
-
 
     private createLinks(): Link[] {
 
@@ -49,7 +54,7 @@ export class TableOfContents {
                 links.push({
                     name,
                     type: header.tagName.toLowerCase(),
-                    top: top,
+                    top,
                     id: header.id,
                     active: false
                 });
