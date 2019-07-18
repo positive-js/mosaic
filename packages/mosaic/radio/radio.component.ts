@@ -1,6 +1,6 @@
 import { UniqueSelectionDispatcher } from '@angular/cdk/collections';
 import {
-    AfterContentInit,
+    AfterContentInit, AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component, ContentChildren, Directive, ElementRef, EventEmitter, forwardRef,
@@ -18,7 +18,7 @@ import {
     mixinTabIndex,
     toBoolean
 } from '@ptsecurity/mosaic/core';
-
+import {FocusMonitor} from '@angular/cdk/a11y';
 
 // Increasing integer for generating unique ids for radio components.
 let nextUniqueId = 0;
@@ -307,7 +307,7 @@ export const _McRadioButtonMixinBase:
     }
 })
 export class McRadioButton extends _McRadioButtonMixinBase
-    implements OnInit, OnDestroy, CanColor, HasTabIndex {
+    implements OnInit, AfterViewInit, OnDestroy, CanColor, HasTabIndex {
 
     /** Whether this radio button is checked. */
     @Input()
@@ -439,6 +439,7 @@ export class McRadioButton extends _McRadioButtonMixinBase
         @Optional() radioGroup: McRadioGroup,
         elementRef: ElementRef,
         private readonly _changeDetector: ChangeDetectorRef,
+        private _focusMonitor: FocusMonitor,
         private readonly _radioDispatcher: UniqueSelectionDispatcher
     ) {
 
@@ -463,13 +464,26 @@ export class McRadioButton extends _McRadioButtonMixinBase
         }
     }
 
+    ngAfterViewInit() {
+        this._focusMonitor
+            .monitor(this._elementRef, true)
+            .subscribe((focusOrigin) => {
+                if (!focusOrigin && this.radioGroup) {
+                    this.radioGroup.touch();
+                }
+            });
+    }
+
     ngOnDestroy() {
+        this._focusMonitor.stopMonitoring(this._elementRef);
         this.removeUniqueSelectionListener();
     }
 
     /** Focuses the radio button. */
     // tslint:disable-next-line
-    focus(): void {}
+    focus(): void {
+        this._focusMonitor.focusVia(this._inputElement, 'keyboard');
+    }
 
     /**
      * Marks the radio button as needing checking for change detection.
