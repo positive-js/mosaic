@@ -10,6 +10,7 @@ import { TableOfContents } from '../../shared/table-of-contents/table-of-content
 @Component({
     selector: 'docs-component-viewer',
     templateUrl: './component-viewer.template.html',
+    styleUrls: ['./component-overview.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class ComponentViewerComponent implements OnDestroy {
