@@ -55,7 +55,10 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
     cursor: pointer;
 
     // todo возможно нужно через JS
-    padding: 3px 7px 3px 15px;
+    padding: {
+        right: 7px;
+        left: 15px;
+    };
 
     &.mc-select__trigger_multiple {
         padding-left: 7px;
@@ -71,9 +74,6 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
     overflow: hidden;
     text-overflow: ellipsis;
 
-    // compensate borders
-    margin-top: -2px;
-
     white-space: nowrap;
 
     & > span {
@@ -87,7 +87,7 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
 
     overflow: hidden;
 
-    max-height: 26px;
+    max-height: 28px;
 
     margin: 0;
     padding-left: 0;
@@ -127,8 +127,7 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
 }
 
 .mc-select__arrow-wrapper {
-    display: table-cell;
-    vertical-align: middle;
+    align-self: center;
 
     // When used in a box or standard appearance form-field the arrow should be shifted up 50%.
     .mc-form-field-appearance-fill &,
