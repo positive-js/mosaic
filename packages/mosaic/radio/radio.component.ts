@@ -1,3 +1,4 @@
+import { FocusMonitor } from '@angular/cdk/a11y';
 import { UniqueSelectionDispatcher } from '@angular/cdk/collections';
 import {
     AfterContentInit, AfterViewInit,
@@ -18,7 +19,7 @@ import {
     mixinTabIndex,
     toBoolean
 } from '@ptsecurity/mosaic/core';
-import {FocusMonitor} from '@angular/cdk/a11y';
+
 
 // Increasing integer for generating unique ids for radio components.
 let nextUniqueId = 0;
@@ -302,8 +303,7 @@ export const _McRadioButtonMixinBase:
         class: 'mc-radio-button',
         '[attr.id]': 'id',
         '[class.mc-checked]': 'checked',
-        '[class.mc-disabled]': 'disabled',
-        '(focus)': '_inputElement.nativeElement.focus()'
+        '[class.mc-disabled]': 'disabled'
     }
 })
 export class McRadioButton extends _McRadioButtonMixinBase
@@ -439,7 +439,7 @@ export class McRadioButton extends _McRadioButtonMixinBase
         @Optional() radioGroup: McRadioGroup,
         elementRef: ElementRef,
         private readonly _changeDetector: ChangeDetectorRef,
-        private _focusMonitor: FocusMonitor,
+        private focusMonitor: FocusMonitor,
         private readonly _radioDispatcher: UniqueSelectionDispatcher
     ) {
 
@@ -465,7 +465,7 @@ export class McRadioButton extends _McRadioButtonMixinBase
     }
 
     ngAfterViewInit() {
-        this._focusMonitor
+        this.focusMonitor
             .monitor(this._elementRef, true)
             .subscribe((focusOrigin) => {
                 if (!focusOrigin && this.radioGroup) {
@@ -475,14 +475,13 @@ export class McRadioButton extends _McRadioButtonMixinBase
     }
 
     ngOnDestroy() {
-        this._focusMonitor.stopMonitoring(this._elementRef);
+        this.focusMonitor.stopMonitoring(this._elementRef);
         this.removeUniqueSelectionListener();
     }
 
     /** Focuses the radio button. */
-    // tslint:disable-next-line
     focus(): void {
-        this._focusMonitor.focusVia(this._inputElement, 'keyboard');
+        this._inputElement.nativeElement.focus();
     }
 
     /**
