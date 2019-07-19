@@ -1,24 +1,13 @@
 <nav class="main__nav nav">
-
-    <ul class="nav__wrapper">
-        <li class="nav__item nav__item--active">
-            <a href="index.html">
-                <i class="nav__icon"></i> Typography
-            </a>
-        </li>
-
-        <li class="nav__item nav__item--has-child">
-            <a href="#">
-                <i class="nav__icon"></i> Elements
-                <i class="nav__arrow"></i>
-            </a>
-
-            <ul class="nav__wrapper nav__wrapper--child">
-                <li class="nav__item--child"><a href="typography.html">Typography</a></li>
-                <li class="nav__item--child"><a href="cards.html">Cards</a></li>
-                <li class="nav__item--child"><a href="buttons.html">Buttons</a></li>
-                <li class="nav__item--child"><a href="alert.html">Alert</a></li>
-            </ul>
-        </li>
-    </ul>
+    <div *ngFor="let category of categories;">
+        <button cdkAccordionItem
+            #panel="cdkAccordionItem" (click)="panel.toggle()" expanded="true">
+            {{category.name}}
+        </button>
+        <ul class="nav__wrapper" >
+            <li *ngFor="let component of category.items">
+                {{component.name}}
+            </li>
+        </ul>
+    </div>
 </nav>

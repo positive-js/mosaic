@@ -1,5 +1,7 @@
-import { ViewEncapsulation } from '@schematics/angular/component/schema';
 import { Component } from '@angular/core';
+import { ViewEncapsulation } from '@schematics/angular/component/schema';
+
+import { DocumentationItems } from '../../shared/documentation-items/documentation-items';
 
 
 @Component({
@@ -10,4 +12,9 @@ import { Component } from '@angular/core';
 })
 export class ComponentSidenav {
 
+    categories: any;
+
+    constructor(public docItems: DocumentationItems) {
+        this.categories = docItems.getCategories('components');
+    }
 }
