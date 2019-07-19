@@ -27,6 +27,10 @@
     display: none;
 }
 
+.docs-example-source-wrapper {
+    background-color: #eaedf1;
+}
+
 .docs-example-source-wrapper:hover {
     .docs-example-source-copy {
         display: inline-block;
@@ -34,7 +38,7 @@
 }
 
 .docs-example-source {
-    padding: 0 30px 10px 30px;
+    padding: 10px 30px 10px 30px;
     min-height: 150px;
 }
 
