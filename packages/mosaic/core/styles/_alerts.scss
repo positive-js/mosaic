@@ -98,7 +98,9 @@
 
     $is-dark: map-get($theme, is-dark);
 
-    
+    .mc-alert__close:focus {
+        outline: none;
+    }
 
     .mc-alert {
         color: mc-color($foreground, text);
