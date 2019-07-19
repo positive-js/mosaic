@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
     styleUrls: ['./main-layout.component.scss']
 })
 export class MainLayoutComponent {
+
+    constructor(private router: Router) {
+        if (this.router.routerState.snapshot.url === '/') {
+            this.router.navigateByUrl('button/overview');
+        }
+    }
 
 }
