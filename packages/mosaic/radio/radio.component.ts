@@ -1,6 +1,7 @@
+import { FocusMonitor } from '@angular/cdk/a11y';
 import { UniqueSelectionDispatcher } from '@angular/cdk/collections';
 import {
-    AfterContentInit,
+    AfterContentInit, AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component, ContentChildren, Directive, ElementRef, EventEmitter, forwardRef,
@@ -302,12 +303,11 @@ export const _McRadioButtonMixinBase:
         class: 'mc-radio-button',
         '[attr.id]': 'id',
         '[class.mc-checked]': 'checked',
-        '[class.mc-disabled]': 'disabled',
-        '(focus)': '_inputElement.nativeElement.focus()'
+        '[class.mc-disabled]': 'disabled'
     }
 })
 export class McRadioButton extends _McRadioButtonMixinBase
-    implements OnInit, OnDestroy, CanColor, HasTabIndex {
+    implements OnInit, AfterViewInit, OnDestroy, CanColor, HasTabIndex {
 
     /** Whether this radio button is checked. */
     @Input()
@@ -439,6 +439,7 @@ export class McRadioButton extends _McRadioButtonMixinBase
         @Optional() radioGroup: McRadioGroup,
         elementRef: ElementRef,
         private readonly _changeDetector: ChangeDetectorRef,
+        private focusMonitor: FocusMonitor,
         private readonly _radioDispatcher: UniqueSelectionDispatcher
     ) {
 
@@ -463,13 +464,25 @@ export class McRadioButton extends _McRadioButtonMixinBase
         }
     }
 
+    ngAfterViewInit() {
+        this.focusMonitor
+            .monitor(this._elementRef, true)
+            .subscribe((focusOrigin) => {
+                if (!focusOrigin && this.radioGroup) {
+                    this.radioGroup.touch();
+                }
+            });
+    }
+
     ngOnDestroy() {
+        this.focusMonitor.stopMonitoring(this._elementRef);
         this.removeUniqueSelectionListener();
     }
 
     /** Focuses the radio button. */
-    // tslint:disable-next-line
-    focus(): void {}
+    focus(): void {
+        this._inputElement.nativeElement.focus();
+    }
 
     /**
      * Marks the radio button as needing checking for change detection.

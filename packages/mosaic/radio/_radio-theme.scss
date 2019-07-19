@@ -43,7 +43,7 @@
             }
         }
 
-        & .mc-radio-input:focus {
+        &.cdk-keyboard-focused .mc-radio-input {
             + .mc-radio-label-content .mc-radio-button__outer-circle {
                 border-color: $focus-color;
 
