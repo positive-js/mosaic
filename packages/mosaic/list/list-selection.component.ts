@@ -1,6 +1,7 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import {
     AfterContentInit,
+    AfterViewInit,
     Attribute,
     ChangeDetectionStrategy,
     Component,
@@ -19,7 +20,7 @@ import {
     ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { FocusKeyManager, IFocusableOption } from '@ptsecurity/cdk/a11y';
+import { FocusKeyManager, FocusMonitor, IFocusableOption } from '@ptsecurity/cdk/a11y';
 import {
     DOWN_ARROW,
     END,
@@ -65,7 +66,7 @@ import { takeUntil } from 'rxjs/operators';
     preserveWhitespaces: false,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class McListOption implements OnDestroy, OnInit, IFocusableOption {
+export class McListOption implements OnDestroy, OnInit, AfterViewInit, IFocusableOption {
     hasFocus: boolean = false;
 
     @ContentChildren(McLine) lines: QueryList<McLine>;
@@ -111,7 +112,8 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
     private _selected = false;
 
     constructor(
-        private _element: ElementRef,
+        private elementRef: ElementRef<HTMLElement>,
+        private focusMonitor: FocusMonitor,
         private _changeDetector: ChangeDetectorRef,
         @Inject(forwardRef(() => McListSelection)) public listSelection: McListSelection
     ) {}
@@ -134,13 +136,17 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
         }
     }
 
+    ngAfterViewInit() {
+        this.focusMonitor.monitor(this.elementRef.nativeElement, false);
+    }
+
     ngOnDestroy(): void {
         if (this.selected) {
             // We have to delay this until the next tick in order
             // to avoid changed after checked errors.
             Promise.resolve().then(() => this.selected = false);
         }
-
+        this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
         this.listSelection.removeOptionFromList(this);
     }
 
@@ -149,7 +155,7 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
     }
 
     focus(): void {
-        this._element.nativeElement.focus();
+        this.elementRef.nativeElement.focus();
     }
 
     getLabel() {
@@ -171,7 +177,7 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
     }
 
     getHeight(): number {
-        return this._element.nativeElement.getClientRects()[0].height;
+        return this.elementRef.nativeElement.getClientRects()[0].height;
     }
 
     handleClick($event) {
@@ -193,7 +199,7 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
     }
 
     getHostElement(): HTMLElement {
-        return this._element.nativeElement;
+        return this.elementRef.nativeElement;
     }
 }
 
