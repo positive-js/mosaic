@@ -57,8 +57,7 @@ export type PopoverVisibility = 'initial' | 'visible' | 'hidden';
     changeDetection: ChangeDetectionStrategy.OnPush,
     animations: [mcPopoverAnimations.popoverState],
     host: {
-        '[class]': 'getCssClassesList',
-        '(body:click)': 'handleBodyInteraction($event)'
+        '[class]': 'getCssClassesList'
     }
 })
 export class McPopoverComponent {
@@ -191,12 +190,6 @@ export class McPopoverComponent {
 
     isNonEmptyString(value: any): boolean {
         return typeof value === 'string' && value !== '';
-    }
-
-    handleBodyInteraction(e): void {
-        if (this.closeOnInteraction && !this.componentElementRef.nativeElement.contains(e.target)) {
-            this.hide();
-        }
     }
 
     animationStart() {
@@ -460,8 +453,20 @@ export class McPopover implements OnInit, OnDestroy {
             direction: this.direction,
             positionStrategy: strategy,
             panelClass: 'mc-popover__panel',
-            scrollStrategy: this.scrollStrategy()
+            scrollStrategy: this.scrollStrategy(),
+            hasBackdrop: this.mcTrigger === 'manual',
+            backdropClass: 'no-class'
         });
+
+        if (this.mcTrigger === 'manual') {
+            this.overlayRef.backdropClick().subscribe(() => {
+                if (!this.popover) {
+                    return;
+                }
+
+                this.popover.hide();
+            });
+        }
 
         this.updatePosition();
 
