@@ -24,4 +24,6 @@ $theme: mc-light-theme($primary, $second, $error, $info, $success, $warning);
 // Include all theme styles for the components.
 @include mosaic-theme($theme);
 
+@include mosaic-docs-app-theme($theme);
+
 @include layout-padding-margin();
