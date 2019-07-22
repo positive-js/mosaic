@@ -7,3 +7,11 @@
     height: 64px;
     border-bottom: 1px solid #e6e7e8;
 }
+
+.docs-navbar-header_fixed{
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    z-index: 1000;
+}

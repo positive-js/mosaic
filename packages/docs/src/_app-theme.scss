@@ -7,14 +7,18 @@
     $warn: map-get($theme, warn);
     $background: map-get($theme, background);
     $foreground: map-get($theme, foreground);
-    $next-theme: mc-palette($mat-red);
+    //$next-theme: mc-palette($map-red); Переменная $map-red не определена
 
     .docs-app-background {
-        background: mc-palette($background, background);
+        background: map-get($background, background);
     }
 
     .docs-footer {
-        background: mc-palette($primary);
-        color: mc-palette($primary, default-contrast);
+        background: map-get($primary, background);
+        color: map-get($primary, default-contrast);
+    }
+
+    .docs-navbar-header {
+        background: map-get($background, background);
     }
 }
