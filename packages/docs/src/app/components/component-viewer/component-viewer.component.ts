@@ -1,5 +1,5 @@
 import { Component, OnDestroy, ViewChild, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { combineLatest, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 
@@ -10,41 +10,33 @@ import { TableOfContents } from '../../shared/table-of-contents/table-of-content
 @Component({
     selector: 'docs-component-viewer',
     templateUrl: './component-viewer.template.html',
+    styleUrls: ['./component-overview.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class ComponentViewerComponent implements OnDestroy {
 
     componentDocItem: DocItem;
     sections: Set<string> = new Set(['overview', 'api']);
-    private _destroyed = new Subject();
 
-    constructor(_route: ActivatedRoute,
-                private router: Router,
+    private destroyed = new Subject();
+
+    constructor(routeActivated: ActivatedRoute,
                 public docItems: DocumentationItems
     ) {
         // Listen to changes on the current route for the doc id (e.g. button/checkbox) and the
-        // parent route for the section (material/cdk).
-        combineLatest(_route.params, _route.parent.params).pipe(
+        // parent route for the section (mosaic/cdk).
+
+        combineLatest(routeActivated.params, routeActivated.parent.params).pipe(
             map((p: [Params, Params]) => ({id: p[0].id, section: p[1].section})),
             map((p) => ({doc: docItems.getItemById(p.id, p.section), section: p.section}),
-                takeUntil(this._destroyed))
+                takeUntil(this.destroyed))
         ).subscribe((d) => {
             this.componentDocItem = d.doc;
-
-            console.log(d);
-            if (this.componentDocItem) {
-                console.log(this.componentDocItem.name);
-                this.componentDocItem.examples.length ?
-                    this.sections.add('examples') :
-                    this.sections.delete('examples');
-            } else {
-                // this.router.navigate(['/' + d.section]);
-            }
         });
     }
 
     ngOnDestroy(): void {
-        this._destroyed.next();
+        this.destroyed.next();
     }
 }
 
