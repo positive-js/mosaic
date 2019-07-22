@@ -9,7 +9,7 @@ import { ExampleModule } from '@ptsecurity/mosaic-examples';
 
 import { ComponentViewerModule } from './components/component-viewer/component-viewer.module';
 import { MainLayoutModule } from './components/main-layout/main-layout.module';
-import { ComponentListModule, HomepageModule } from './containers';
+import { HomepageModule } from './containers';
 import { ComponentCategoryListModule } from './containers/component-category-list/component-category-list.module';
 import { DocsComponent } from './docs.component';
 import { APP_ROUTES } from './docs.module-routes';
@@ -27,7 +27,6 @@ import { DocumentationItems } from './shared/documentation-items/documentation-i
         RouterModule.forRoot(APP_ROUTES),
 
         HomepageModule,
-        ComponentListModule,
         ComponentViewerModule,
         ComponentCategoryListModule,
         MainLayoutModule
