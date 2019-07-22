@@ -1512,7 +1512,9 @@ describe('McTreeSelect', () => {
                     fixture.detectChanges();
                     flush();
 
-                    (overlayContainerElement.querySelectorAll('mc-tree-option')[2] as HTMLElement).click();
+                    const optionToClick = overlayContainerElement.querySelectorAll('mc-tree-option')[2] as HTMLElement;
+                    optionToClick.focus();
+                    optionToClick.click();
                     fixture.detectChanges();
                     flush();
 
@@ -1722,7 +1724,8 @@ describe('McTreeSelect', () => {
                         tick(10);
 
                         expect(formControl.value).toBe('Documents');
-                        expect(fixture.componentInstance.options.toArray()[2].active).toBe(true);
+                        expect(fixture.componentInstance.select.tree.keyManager.activeItem!.value)
+                            .toBe('Documents');
                     }));
 
                 it('should not shift focus when the selected options are updated programmatically ' +
@@ -4581,6 +4584,7 @@ describe('McTreeSelect', () => {
 
             const options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-tree-option');
 
+            options[2].focus();
             options[2].click();
             fixture.detectChanges();
             flush();

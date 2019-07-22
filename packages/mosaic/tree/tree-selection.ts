@@ -20,7 +20,7 @@ import {
 } from '@angular/core';
 import { NodeDef, ViewData } from '@angular/core/esm2015/src/view';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
+import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import {
     END,
     ENTER,
@@ -97,7 +97,7 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
 
     @ContentChildren(McTreeOption) options: QueryList<McTreeOption>;
 
-    keyManager: ActiveDescendantKeyManager<McTreeOption>;
+    keyManager: FocusKeyManager<McTreeOption>;
 
     selectionModel: SelectionModel<any>;
 
@@ -163,7 +163,7 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
     }
 
     ngAfterContentInit(): void {
-        this.keyManager = new ActiveDescendantKeyManager<McTreeOption>(this.options)
+        this.keyManager = new FocusKeyManager<McTreeOption>(this.options)
             .withVerticalOrientation(true)
             .withHorizontalOrientation(null);
 
@@ -256,9 +256,7 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
         this.keyManager.withScrollSize(Math.floor(this.getHeight() / this.options.first.getHeight()));
     }
 
-    setFocusedOption(option: McTreeOption, $event?: KeyboardEvent) {
-        this.keyManager.setActiveItem(option);
-
+    setSelectedOption(option: McTreeOption, $event?: KeyboardEvent) {
         const withShift = $event ? hasModifierKey($event, 'shiftKey') : false;
         const withCtrl = $event ? hasModifierKey($event, 'ctrlKey') : false;
 
@@ -296,11 +294,15 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
         }
     }
 
+    setFocusedOption(option: McTreeOption): void {
+        this.keyManager.setActiveItem(option);
+    }
+
     toggleFocusedOption(): void {
         const focusedOption = this.keyManager.activeItem;
 
         if (focusedOption) {
-            this.setFocusedOption(focusedOption);
+            this.setSelectedOption(focusedOption);
         }
     }
 
