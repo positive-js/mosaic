@@ -78,10 +78,10 @@ describe('McPopover', () => {
             expect(overlayContainerElement.textContent).toEqual(expectedValue);
 
             component.popoverVisibility = false;
-            tick();
             componentFixture.detectChanges();
-            tick();
+            tick(500);  // wait for next tick to hide
             componentFixture.detectChanges();
+
             expect(overlayContainerElement.textContent).not.toEqual(expectedValue);
         }));
 
