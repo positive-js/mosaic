@@ -186,7 +186,7 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
             .subscribe((options) => {
                 options.forEach((option) => {
                     this.selectionModel.selected.forEach((selectedOption) => {
-                        if (option.value === selectedOption) { option._selected = true; }
+                        option._selected = option.value === selectedOption;
                     });
                 });
             });
@@ -398,6 +398,8 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
     }
 
     private setOptionsFromValues(values: any[]): void {
+        this.selectionModel.clear();
+
         values.forEach((value) => {
             const correspondingOption = this.getCorrespondOption(value);
 
@@ -405,6 +407,8 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
 
             if (correspondingOption) { correspondingOption.selected = true; }
         });
+
+        this.options.notifyOnChanges();
     }
 
     private canDeselectLast(option: McTreeOption): boolean {
