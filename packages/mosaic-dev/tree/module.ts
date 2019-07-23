@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { FlatTreeControl, NestedTreeControl } from '@ptsecurity/cdk/tree';
+import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import {
     McTreeFlatDataSource,
@@ -191,6 +192,7 @@ export class DemoComponent {
     imports: [
         BrowserModule,
         FormsModule,
+        McButtonModule,
         McTreeModule,
         McIconModule
     ],
