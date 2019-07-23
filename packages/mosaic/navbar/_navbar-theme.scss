@@ -34,10 +34,9 @@
 
         &.cdk-keyboard-focused, &.cdk-program-focused  {
             $focus-color: mc-color($primary);
-
-            border-color: $focus-color;
-            box-shadow: 0 0 0 1px $focus-color;
+            outline: $focus-color solid 2px;
         }
+
     }
 
     mc-navbar-item:hover:not([disabled]):not(.mc-progress) {

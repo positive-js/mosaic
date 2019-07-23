@@ -19,7 +19,7 @@ import {
     ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { FocusKeyManager, IFocusableOption } from '@ptsecurity/cdk/a11y';
+import { FocusKeyManager, FocusMonitor, IFocusableOption } from '@ptsecurity/cdk/a11y';
 import {
     DOWN_ARROW,
     END,
@@ -111,12 +111,14 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
     private _selected = false;
 
     constructor(
-        private _element: ElementRef,
+        private elementRef: ElementRef<HTMLElement>,
+        private focusMonitor: FocusMonitor,
         private _changeDetector: ChangeDetectorRef,
         @Inject(forwardRef(() => McListSelection)) public listSelection: McListSelection
     ) {}
 
     ngOnInit() {
+        this.focusMonitor.monitor(this.elementRef.nativeElement, false);
         if (this._selected) {
             // List options that are selected at initialization can't be reported properly to the form
             // control. This is because it takes some time until the selection-list knows about all
@@ -141,6 +143,7 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
             Promise.resolve().then(() => this.selected = false);
         }
 
+        this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
         this.listSelection.removeOptionFromList(this);
     }
 
@@ -149,7 +152,7 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
     }
 
     focus(): void {
-        this._element.nativeElement.focus();
+        this.elementRef.nativeElement.focus();
     }
 
     getLabel() {
@@ -171,7 +174,7 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
     }
 
     getHeight(): number {
-        return this._element.nativeElement.getClientRects()[0].height;
+        return this.elementRef.nativeElement.getClientRects()[0].height;
     }
 
     handleClick($event) {
@@ -193,7 +196,7 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
     }
 
     getHostElement(): HTMLElement {
-        return this._element.nativeElement;
+        return this.elementRef.nativeElement;
     }
 }
 

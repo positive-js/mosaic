@@ -3,7 +3,6 @@ import {
     AfterContentInit, ChangeDetectionStrategy, Component, ContentChildren, Directive, ElementRef, QueryList,
     ViewEncapsulation
 } from '@angular/core';
-
 import { McLine, McLineSetter } from '@ptsecurity/mosaic/core';
 
 

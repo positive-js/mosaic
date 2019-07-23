@@ -40,10 +40,9 @@
             }
         }
 
-        & .mc-checkbox-input.cdk-focused {
+        & .mc-checkbox-input.cdk-keyboard-focused {
             + .mc-checkbox-frame {
                 border-color: $focus-color;
-
                 box-shadow: inset 0 0 0 1px white, 0 0 0 1px $focus-color;
             }
         }
