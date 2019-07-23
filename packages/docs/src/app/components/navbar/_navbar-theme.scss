@@ -1,0 +1,26 @@
+@import '../../../../../mosaic/core/theming/theming';
+
+
+@mixin mc-navbar-theme($theme) {
+    $background: #fefefe;
+    $dodger_blue: #2f80ed;
+    $dodger_blue: #8c949e;
+    $solitude: #e6e7e8;
+    $doc_green: #2f2f33;
+
+    .docs-navbar-header {
+        border-bottom: 1px solid $solitude;
+        background: $background;
+
+         .__version,
+         .__version .mc-select {
+            color: $dodger_blue;
+        }
+
+        .dropdown-trigger {
+            color: $doc_green;
+        }
+
+    }
+
+}

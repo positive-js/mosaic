@@ -17,8 +17,4 @@
         background: map-get($primary, background);
         color: map-get($primary, default-contrast);
     }
-
-    .docs-navbar-header {
-        background: map-get($background, background);
-    }
 }
