@@ -1,7 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import {
     AfterContentInit,
-    AfterViewInit,
     Attribute,
     ChangeDetectionStrategy,
     Component,
@@ -66,7 +65,7 @@ import { takeUntil } from 'rxjs/operators';
     preserveWhitespaces: false,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class McListOption implements OnDestroy, OnInit, AfterViewInit, IFocusableOption {
+export class McListOption implements OnDestroy, OnInit, IFocusableOption {
     hasFocus: boolean = false;
 
     @ContentChildren(McLine) lines: QueryList<McLine>;
@@ -119,6 +118,7 @@ export class McListOption implements OnDestroy, OnInit, AfterViewInit, IFocusabl
     ) {}
 
     ngOnInit() {
+        this.focusMonitor.monitor(this.elementRef.nativeElement, false);
         if (this._selected) {
             // List options that are selected at initialization can't be reported properly to the form
             // control. This is because it takes some time until the selection-list knows about all
@@ -134,10 +134,6 @@ export class McListOption implements OnDestroy, OnInit, AfterViewInit, IFocusabl
                 }
             });
         }
-    }
-
-    ngAfterViewInit() {
-        this.focusMonitor.monitor(this.elementRef.nativeElement, false);
     }
 
     ngOnDestroy(): void {
