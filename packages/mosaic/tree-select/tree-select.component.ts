@@ -489,12 +489,14 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
             this.fireValueChangedEvent = true;
         }
 
+        this.tree.selectionChange
+            .pipe(takeUntil(this.destroy))
+            .subscribe(() => this.propagateChanges());
+
         this.selectionModel.changed
             .pipe(takeUntil(this.destroy))
             .subscribe((event) => {
                 this.changeDetectorRef.detectChanges();
-
-                this.propagateChanges();
 
                 if (!this.multiple && this.panelOpen) {
                     this.close();
@@ -762,7 +764,6 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
      */
     onContainerClick() {
         this.focus();
-        this.open();
     }
 
     /** Invoked when an option is clicked. */
@@ -945,11 +946,9 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     private setSelectionByValue(value: any | any[]) {
         this.options.forEach((option) => { option.deselect(); });
 
-        if (value === null) {
-            this.selectionModel.clear();
+        this.selectionModel.clear();
 
-            return;
-        }
+        if (value === null) { return; }
 
         if (this.multiple && value) {
             if (!Array.isArray(value)) { throw getMcSelectNonArrayValueError(); }

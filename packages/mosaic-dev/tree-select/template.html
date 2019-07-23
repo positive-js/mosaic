@@ -1,8 +1,8 @@
 <br><br><br><br><br><br><br>
 <div style="height: 20px">{{ modelValue }}</div>
 
-<button mc-button (click)="control.disable()">disable</button>
-<button mc-button (click)="modelValue = ['Applications']">setValue</button>
+<button mc-button (click)="control.disable()">disable</button>&nbsp;
+<button mc-button (click)="modelValue = ['Applications']">setValue</button>&nbsp;
 <button mc-button (click)="modelValue = null">reset</button>
 
 <br><br><br>
@@ -11,7 +11,7 @@
     <mc-form-field>
         <mc-tree-select
             [multiple]="true"
-            placeholder="Food I want to eat right now"
+            placeholder="this is placeholder"
             [(value)]="modelValue"
             (selectionChange)="onSelectionChange($event)">
 
