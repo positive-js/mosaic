@@ -11,15 +11,15 @@ $doc-navbar-padding: 10px;
     padding: 16px 32px;
     height: $doc-navbar-height;
 
-    & .logo a {
+    .docs-navbar-logo {
         display: flex;
 
-        & img {
+        &__img {
             max-width:100%;
             width: 32px;
         }
 
-        & span {
+        &__title {
             line-height: 32px;
             font-size: 28px;
             padding: {
@@ -29,7 +29,7 @@ $doc-navbar-padding: 10px;
         }
     }
 
-    & .version {
+    .docs-navbar-version {
         display: flex;
         align-items: baseline;
         height: $doc-navbar-font-size;
@@ -37,35 +37,31 @@ $doc-navbar-padding: 10px;
         font-size: $doc-navbar-font-size;
         margin-bottom: -5px;
 
-        .version__number{
+        &__number{
             margin-left: 7px;
         }
 
-        mc-select {
-            font-size: $doc-navbar-font-size;
-            margin-left: -7px;
-        }
-
     }
 
-.dropdown-container{
-    min-width: 140px;
+    .docs-navbar-dropdown{
+        min-width: 140px;
 
-    .dropdown-container__trigger{
-        line-height: $doc-navbar-font-size;
-        font-size: 15px;
-        padding: {
-            left: $doc-navbar-padding;
-            right: $doc-navbar-padding;
-        };
+        &__trigger{
+            line-height: $doc-navbar-font-size;
+            font-size: 15px;
+            padding: {
+                left: $doc-navbar-padding;
+                right: $doc-navbar-padding;
+            };
+        }
 
-        i {
+        &__icon {
             color: inherit;
         }
-    }
-}
 
-    .color-picker i {
+    }
+
+    .color-picker__icon {
         font-size: $doc-navbar-font-size;
     }
 

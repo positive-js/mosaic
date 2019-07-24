@@ -9,12 +9,11 @@
         border-bottom: 1px solid $solitude;
         background: $background;
 
-         .version,
-         .version .mc-select {
+        .docs-navbar-version {
             color: $dodger_blue;
         }
 
-        .dropdown-container__trigger {
+        .docs-navbar-dropdown__trigger {
             color: $doc_green;
         }
 

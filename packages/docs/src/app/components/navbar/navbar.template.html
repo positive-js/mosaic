@@ -1,20 +1,18 @@
 <header role="header" class="docs-navbar-header docs-navbar-header_fixed">
-    <div class="logo">
-        <a href="#/en">
-            <img src="https://camo.githubusercontent.com/87a8f7c8b454d1c5bd916e286f682b68a178e3c4/68747470733a2f2f692e6962622e636f2f66514e506776362f6c6f676f2d706e672d3230302e706e67" alt="positive_js_logo" data-canonical-src="https://i.ibb.co/fQNPgv6/logo-png-200.png">
-            <span >Mosaic</span>
-        </a>
+    <div class="docs-navbar-logo">
+            <img class = "docs-navbar-logo__img" src="https://camo.githubusercontent.com/87a8f7c8b454d1c5bd916e286f682b68a178e3c4/68747470733a2f2f692e6962622e636f2f66514e506776362f6c6f676f2d706e672d3230302e706e67" alt="positive_js_logo" data-canonical-src="https://i.ibb.co/fQNPgv6/logo-png-200.png">
+            <span class="docs-navbar-logo__title">Mosaic</span>
     </div>
 
-    <div class="version">
-        <div [mcDropdownTriggerFor]="versionDropdown">
-            <span >Версия</span>
-            <span class="version__number" id="versionNumber">{{curVerIndex}}</span>
-            <i mc-icon="mc-angle-down-L_16" class="version__icon"></i>
+    <div class="docs-navbar-version">
+        <div [mcDropdownTriggerFor]="versionDropdown" class="docs-navbar-version__trigger">
+            <span>Версия</span>
+            <span class="docs-navbar-version__number" id="versionNumber">{{curVerIndex}}</span>
+            <i mc-icon="mc-angle-down-L_16" class="docs-navbar-version__icon"></i>
         </div>
-    <mc-dropdown #versionDropdown="mcDropdown">
-        <button mc-dropdown-item *ngFor="let version of versions; let i = index" (click)="setVersion(version)">{{version}}</button>
-    </mc-dropdown>
+        <mc-dropdown #versionDropdown="mcDropdown" xPosition="after" class="docs-navbar-version__dropdown">
+            <button mc-dropdown-item *ngFor="let version of versions; let i = index" (click)="setVersion(version)">{{version}}</button>
+        </mc-dropdown>
     </div>
 
     <!--Возможно здесь следует сделать select на случай большого количества версий
@@ -27,23 +25,23 @@
 
     <div class="flex-spacer"></div>
 
-<div class="dropdown-link">
-    <a class="dropdown-link__trigger" [mcDropdownTriggerFor]="languageDropdown">
-        <span >{{curLanguage}}</span>
-        <i mc-icon="mc-angle-down-M_16"></i>
-    </a>
+    <div class="docs-navbar-dropdown">
+        <a class="docs-navbar-dropdown__trigger" [mcDropdownTriggerFor]="languageDropdown">
+            <span >{{curLanguage}}</span>
+            <i mc-icon="mc-angle-down-M_16" class="docs-navbar-dropdown__icon"></i>
+        </a>
 
-    <mc-dropdown #languageDropdown="mcDropdown">
-        <button mc-dropdown-item *ngFor="let language of languages; let i = index" (click)="setLanguage(language)">
-            {{language}}
-        </button>
-    </mc-dropdown>
-</div>
+        <mc-dropdown #languageDropdown="mcDropdown">
+            <button mc-dropdown-item *ngFor="let language of languages; let i = index" (click)="setLanguage(language)">
+                {{language}}
+            </button>
+        </mc-dropdown>
+    </div>
 
-    <div class="dropdown-container">
-        <a class="dropdown-container__trigger" [mcDropdownTriggerFor]="themeDropdown">
+    <div class="docs-navbar-dropdown">
+        <a class="docs-navbar-dropdown__trigger" [mcDropdownTriggerFor]="themeDropdown">
             <span>{{curTheme}}</span>
-            <i mc-icon="mc-angle-down-M_16"></i>
+            <i mc-icon="mc-angle-down-M_16" class="docs-navbar-dropdown__icon"></i>
         </a>
 
         <mc-dropdown #themeDropdown="mcDropdown">
@@ -52,7 +50,8 @@
             </button>
         </mc-dropdown>
     </div>
+
     <div class="color-picker">
-    <i mc-icon="mc-circle-8_16" [style.color]='activeColor'></i>
+    <i mc-icon="mc-circle-8_16" [style.color]='activeColor' class="color-picker__icon"></i>
     </div>
 </header>

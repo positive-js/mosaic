@@ -7,7 +7,7 @@ import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McDropdownModule } from '@ptsecurity/mosaic/dropdown';
 import { McLinkModule } from '@ptsecurity/mosaic/link';
-import {McSelectModule} from "@ptsecurity/mosaic/select";
+import { McSelectModule } from "@ptsecurity/mosaic/select";
 
 
 
