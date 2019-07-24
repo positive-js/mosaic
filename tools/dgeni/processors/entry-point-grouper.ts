@@ -6,6 +6,7 @@ import { TypeAliasExportDoc } from 'dgeni-packages/typescript/api-doc-types/Type
 import * as path from 'path';
 
 import { computeApiDocumentUrl } from '../common/compute-api-url';
+import { isDeprecatedDoc, isPrimaryModuleDoc } from '../common/decorators';
 import { CategorizedClassDoc } from '../common/dgeni-definitions';
 
 
@@ -66,6 +67,9 @@ export class EntryPointDoc {
     /** Constants that belong to the entry-point. */
     constants: ConstExportDoc[] = [];
 
+    /** List of NgModules which are exported in the current entry-point. */
+    exportedNgModules: CategorizedClassDoc[] = [];
+
     /** NgModule that defines the current entry-point. */
     ngModule: CategorizedClassDoc | null = null;
 
@@ -93,6 +97,7 @@ export class EntryPointGrouper implements Processor {
             const packageDisplayName = packageName === 'cdk' ? 'CDK' : 'Material';
 
             const moduleImportPath = `@angular/${packageName}/${moduleInfo.entryPointName}`;
+            // tslint:disable-next-line:prefer-template
             const entryPointName = packageName + '-' + moduleInfo.name;
 
             // Compute a public URL that refers to the document. This is helpful if we want to
@@ -119,7 +124,12 @@ export class EntryPointGrouper implements Processor {
             } else if (doc.isService) {
                 entryPoint.services.push(doc);
             } else if (doc.isNgModule) {
-                entryPoint.ngModule = doc;
+                entryPoint.exportedNgModules.push(doc);
+                // If the module is explicitly marked as primary module using the "@docs-primary-module"
+                // annotation, we set is as primary entry-point module.
+                if (isPrimaryModuleDoc(doc)) {
+                    entryPoint.ngModule = doc;
+                }
             } else if (doc.docType === 'class') {
                 entryPoint.classes.push(doc);
             } else if (doc.docType === 'interface') {
@@ -130,6 +140,25 @@ export class EntryPointGrouper implements Processor {
                 entryPoint.functions.push(doc);
             } else if (doc.docType === 'const') {
                 entryPoint.constants.push(doc);
+            }
+        });
+
+        // For each entry-point we determine a primary NgModule that defines the entry-point
+        // if no primary module has been explicitly declared (using "@docs-primary-module").
+        entryPoints.forEach((entryPoint) => {
+            if (entryPoint.ngModule !== null) {
+                return;
+            }
+
+            // Usually the first module that is not deprecated is used, but in case there are
+            // only deprecated modules, the last deprecated module is used. We don't want to
+            // always skip deprecated modules as they could be still needed for documentation
+            // of a deprecated entry-point.
+            for (const ngModule of entryPoint.exportedNgModules) {
+                entryPoint.ngModule = ngModule;
+                if (!isDeprecatedDoc(ngModule)) {
+                    break;
+                }
             }
         });
 
@@ -154,6 +183,7 @@ function getModulePackageInfo(doc: Document): ModuleInfo {
     // The ripples are technically part of the `@angular/material/core` entry-point, but we
     // want to show the ripple API separately in the docs. In order to archive this, we treat
     // the ripple folder as its own module.
+    // tslint:disable-next-line:no-magic-numbers
     if (pathSegments[1] === 'core' && pathSegments[2] === 'ripple') {
         moduleName = 'ripple';
     }
