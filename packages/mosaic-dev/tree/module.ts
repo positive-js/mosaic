@@ -41,6 +41,7 @@ export const TREE_DATA = `
         }
     },
     "Documents": {
+    "Pictures": "Pictures",
       "angular": {
         "src": {
           "core": "ts",

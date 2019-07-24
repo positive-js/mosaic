@@ -179,18 +179,21 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
             .pipe(takeUntil(this.destroy))
             .subscribe((changeEvent) => {
                 this.onChange(changeEvent.source.selected);
+
+                this.options.notifyOnChanges();
             });
 
         this.options.changes
             .pipe(takeUntil(this.destroy))
             .subscribe((options) => {
                 options.forEach((option) => {
+                    option.deselect();
+
                     this.selectionModel.selected.forEach((selectedOption) => {
-                        option._selected = option.value === selectedOption;
+                        if (option.value === selectedOption) { option.select(); }
                     });
                 });
             });
-
     }
 
     ngOnDestroy() {
