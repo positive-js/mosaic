@@ -1,6 +1,3 @@
-@import '../../../../../mosaic/core/theming/theming';
-
-
 @mixin mc-navbar-theme($theme) {
     $background: #fefefe;
     $dodger_blue: #2f80ed;
@@ -12,12 +9,12 @@
         border-bottom: 1px solid $solitude;
         background: $background;
 
-         .__version,
-         .__version .mc-select {
+         .version,
+         .version .mc-select {
             color: $dodger_blue;
         }
 
-        .dropdown-trigger {
+        .dropdown-container__trigger {
             color: $doc_green;
         }
 

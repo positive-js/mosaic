@@ -20,7 +20,7 @@ export class NavbarComponent {
 
     colors = ["#2f80ed", "#333491", "#07804e", "#eaaf00"];
     activeColor = "#2f80ed";
-
+    //
     setVersion(version) {
         this.curVerIndex = version;
     }

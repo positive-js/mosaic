@@ -1,16 +1,16 @@
 <header role="header" class="docs-navbar-header docs-navbar-header_fixed">
-    <div class="__logo">
+    <div class="logo">
         <a href="#/en">
             <img src="https://camo.githubusercontent.com/87a8f7c8b454d1c5bd916e286f682b68a178e3c4/68747470733a2f2f692e6962622e636f2f66514e506776362f6c6f676f2d706e672d3230302e706e67" alt="positive_js_logo" data-canonical-src="https://i.ibb.co/fQNPgv6/logo-png-200.png">
             <span >Mosaic</span>
         </a>
     </div>
 
-    <div class="__version">
+    <div class="version">
         <div [mcDropdownTriggerFor]="versionDropdown">
             <span >Версия</span>
-            <span class="__number" id="versionNumber">{{curVerIndex}}</span>
-            <i mc-icon="mc-angle-down-L_16"></i>
+            <span class="version__number" id="versionNumber">{{curVerIndex}}</span>
+            <i mc-icon="mc-angle-down-L_16" class="version__icon"></i>
         </div>
     <mc-dropdown #versionDropdown="mcDropdown">
         <button mc-dropdown-item *ngFor="let version of versions; let i = index" (click)="setVersion(version)">{{version}}</button>
@@ -28,8 +28,8 @@
     <div class="flex-spacer"></div>
 
 <div class="dropdown-link">
-    <a class="__trigger" [mcDropdownTriggerFor]="languageDropdown">
-        <span class="mc-link__text">{{curLanguage}}</span>
+    <a class="dropdown-link__trigger" [mcDropdownTriggerFor]="languageDropdown">
+        <span >{{curLanguage}}</span>
         <i mc-icon="mc-angle-down-M_16"></i>
     </a>
 
@@ -40,9 +40,9 @@
     </mc-dropdown>
 </div>
 
-    <div class="dropdown-link">
-        <a class="__trigger" [mcDropdownTriggerFor]="themeDropdown">
-            <span class="mc-link__text">{{curTheme}}</span>
+    <div class="dropdown-container">
+        <a class="dropdown-container__trigger" [mcDropdownTriggerFor]="themeDropdown">
+            <span>{{curTheme}}</span>
             <i mc-icon="mc-angle-down-M_16"></i>
         </a>
 
