@@ -1,0 +1,22 @@
+@mixin mc-navbar-theme($theme) {
+    $background: #fefefe;
+    $dodger_blue: #2f80ed;
+    $dodger_blue: #8c949e;
+    $solitude: #e6e7e8;
+    $doc_green: #2f2f33;
+
+    .docs-navbar-header {
+        border-bottom: 1px solid $solitude;
+        background: $background;
+
+        .docs-navbar-version {
+            color: $dodger_blue;
+        }
+
+        .docs-navbar-dropdown__trigger {
+            color: $doc_green;
+        }
+
+    }
+
+}
