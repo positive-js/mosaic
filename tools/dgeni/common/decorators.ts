@@ -1,8 +1,9 @@
+import { ApiDoc } from 'dgeni-packages/typescript/api-doc-types/ApiDoc';
 import { ClassExportDoc } from 'dgeni-packages/typescript/api-doc-types/ClassExportDoc';
 import { MemberDoc } from 'dgeni-packages/typescript/api-doc-types/MemberDoc';
 import { PropertyMemberDoc } from 'dgeni-packages/typescript/api-doc-types/PropertyMemberDoc';
 
-import { CategorizedClassDoc, DeprecationDoc, HasDecoratorsDoc } from './dgeni-definitions';
+import { CategorizedClassDoc, DeprecationInfo, HasDecoratorsDoc } from './dgeni-definitions';
 
 
 /**
@@ -58,6 +59,12 @@ export function isDeprecatedDoc(doc: any) {
     return (doc.tags && doc.tags.tags || []).some((tag: any) => tag.tagName === 'deprecated');
 }
 
+/** "@docs-primary-module" jsdoc tag. */
+export function isPrimaryModuleDoc(doc: any) {
+    return (doc.tags && doc.tags.tags || [])
+        .some((tag: any) => tag.tagName === 'docs-primary-module');
+}
+
 export function getDirectiveSelectors(classDoc: CategorizedClassDoc) {
     if (!classDoc.directiveMetadata) {
         return;
@@ -100,14 +107,11 @@ export function getDeletionTarget(doc: any): string | null {
  * Decorates public exposed docs. Creates a property on the doc that indicates whether
  * the item is deprecated or not.
  */
-export function decorateDeprecatedDoc(doc: DeprecationDoc) {
+export function decorateDeprecatedDoc(doc: ApiDoc & DeprecationInfo) {
     doc.isDeprecated = isDeprecatedDoc(doc);
-    doc.deletionTarget = getDeletionTarget(doc);
+    doc.breakingChange = getDeletionTarget(doc);
 
-    if (doc.isDeprecated && !doc.deletionTarget) {
-        console.warn('Warning: There is a deprecated item without a @deletion-target tag.', doc.id);
-    } else if (doc.deletionTarget && !doc.isDeprecated) {
-        console.warn('Warning: There is an item with a @deletion-target which is not deprecated.',
-            doc.id);
+    if (doc.isDeprecated && !doc.breakingChange) {
+        console.warn('Warning: There is a deprecated item without a @breaking-change tag.', doc.id);
     }
 }
