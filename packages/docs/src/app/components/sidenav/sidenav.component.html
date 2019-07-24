@@ -4,7 +4,7 @@
             #panel="cdkAccordionItem" (click)="panel.toggle()" expanded="true">
             {{category.name}}
         </button>
-        <ul class="nav__wrapper" >
+        <ul class="nav__wrapper" [@bodyExpansion]="panel.expanded ? 'expanded' : 'collapsed'" >
             <li *ngFor="let component of category.items">
                 {{component.name}}
             </li>
