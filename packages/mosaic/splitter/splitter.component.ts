@@ -1,11 +1,13 @@
 import { coerceBooleanProperty, coerceCssPixelValue, coerceNumberProperty } from '@angular/cdk/coercion';
 import {
-    ChangeDetectionStrategy, ChangeDetectorRef,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     Directive,
     ElementRef,
     Input,
-    NgZone, OnDestroy,
+    NgZone,
+    OnDestroy,
     OnInit,
     Renderer2,
     ViewEncapsulation

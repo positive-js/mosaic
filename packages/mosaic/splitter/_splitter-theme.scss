@@ -7,8 +7,6 @@
     $is-dark: map-get($theme, is-dark);
 
     .mc-gutter {
-        background-color: map-get($background, button-bg);
-
         cursor: col-resize;
 
         &:hover {
