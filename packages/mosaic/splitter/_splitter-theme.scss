@@ -7,11 +7,13 @@
     $is-dark: map-get($theme, is-dark);
 
     .mc-gutter {
-        background-color: map-get($background, button-bg);
-
         cursor: col-resize;
 
         &:hover {
+            background-color: mix(map-get($background, button-bg), map-get($background, hover));
+        }
+
+        &.mc-gutter_dragged {
             background-color: mix(map-get($background, button-bg), map-get($background, hover));
         }
 
