@@ -22,6 +22,8 @@ export class NavbarComponent {
     activeColor = "#2f80ed";
     //TODO Эти значения временные, надо определиться с постоянными и заменить ими текущие значения.
 
+    iconFont="20px";
+
     setVersion(version) {
         this.curVerIndex = version;
     }
@@ -32,7 +34,10 @@ export class NavbarComponent {
 
     setTheme(i) {
         this.curTheme = this.themes[i];
-        this.activeColor = this.colors[i]
+    }
+
+    setColor(i) {
+        this.activeColor = this.colors[i];
     }
 
 }
