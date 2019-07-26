@@ -9,7 +9,9 @@ import {
     NgZone,
     OnDestroy,
     OnInit,
+    QueryList,
     Renderer2,
+    ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
 
@@ -45,6 +47,80 @@ export const enum Direction {
     Vertical = 'vertical'
 }
 
+
+@Directive({
+    selector: 'mc-gutter',
+    host: {
+        class: 'mc-gutter',
+        '[class.mc-gutter_vertical]': 'isVertical()',
+        '[class.mc-gutter_dragged]': 'dragged',
+        '(mousedown)': 'dragged = true'
+    }
+})
+export class McGutterDirective implements OnInit {
+    get direction(): Direction {
+        return this._direction;
+    }
+
+    @Input()
+    set direction(direction: Direction) {
+        this._direction = direction;
+    }
+
+    private _direction: Direction = Direction.Vertical;
+
+    get order(): number {
+        return this._order;
+    }
+
+    @Input()
+    set order(order: number) {
+        this._order = coerceNumberProperty(order);
+    }
+
+    private _order: number = 0;
+
+    get size(): number {
+        return this._size;
+    }
+
+    @Input()
+    set size(size: number) {
+        this._size = coerceNumberProperty(size);
+    }
+
+    private _size: number = 6;
+
+    dragged: boolean = false;
+
+    constructor(
+        private elementRef: ElementRef,
+        private renderer: Renderer2
+    ) {}
+
+    ngOnInit(): void {
+        this.setStyle(StyleProperty.FlexBasis, coerceCssPixelValue(this.size));
+        this.setStyle(this.isVertical() ? StyleProperty.Height : StyleProperty.Width, coerceCssPixelValue(this.size));
+        this.setStyle(StyleProperty.Order, this.order);
+
+        if (!this.isVertical()) {
+            this.setStyle(StyleProperty.Height, '100%');
+        }
+
+        // fix IE issue with gutter icon. flex-direction is requied for flex alignment options
+        this.setStyle(StyleProperty.FlexDirection, this.isVertical() ? 'row' : 'column');
+    }
+
+    isVertical(): boolean {
+        return this.direction === Direction.Vertical;
+    }
+
+    private setStyle(property: StyleProperty, value: string | number) {
+        this.renderer.setStyle(this.elementRef.nativeElement, property, value);
+    }
+}
+
+
 @Component({
     selector: 'mc-splitter',
     exportAs: 'mcSplitter',
@@ -59,6 +135,8 @@ export const enum Direction {
 })
 export class McSplitterComponent implements OnInit {
     readonly areas: IArea[] = [];
+
+    @ViewChildren(McGutterDirective) gutters: QueryList<McGutterDirective>;
 
     private isDragging: boolean = false;
 
@@ -198,6 +276,17 @@ export class McSplitterComponent implements OnInit {
         return this.direction === Direction.Vertical;
     }
 
+    private updateGutter(): void {
+        this.gutters.forEach((gutter) => {
+            if (gutter.dragged) {
+                gutter.dragged = false;
+
+                this.changeDetectorRef.detectChanges();
+            }
+        });
+
+    }
+
     private onMouseMove(event: MouseEvent, startPoint: IPoint, leftArea: IArea, rightArea: IArea) {
         if (!this.isDragging || this.disabled) { return; }
 
@@ -243,70 +332,8 @@ export class McSplitterComponent implements OnInit {
         }
 
         this.isDragging = false;
-    }
 
-    private setStyle(property: StyleProperty, value: string | number) {
-        this.renderer.setStyle(this.elementRef.nativeElement, property, value);
-    }
-}
-
-@Directive({
-    selector: 'mc-gutter',
-    host: {
-        class: 'mc-gutter'
-    }
-})
-export class McGutterDirective implements OnInit {
-    get direction(): Direction {
-        return this._direction;
-    }
-
-    @Input()
-    set direction(direction: Direction) {
-        this._direction = direction;
-    }
-
-    private _direction: Direction = Direction.Vertical;
-
-    get order(): number {
-        return this._order;
-    }
-
-    @Input()
-    set order(order: number) {
-        this._order = coerceNumberProperty(order);
-    }
-
-    private _order: number = 0;
-
-    get size(): number {
-        return this._size;
-    }
-
-    @Input()
-    set size(size: number) {
-        this._size = coerceNumberProperty(size);
-    }
-
-    private _size: number = 6;
-
-    constructor(private renderer: Renderer2, private elementRef: ElementRef) {}
-
-    ngOnInit(): void {
-        this.setStyle(StyleProperty.FlexBasis, coerceCssPixelValue(this.size));
-        this.setStyle(this.isVertical() ? StyleProperty.Height : StyleProperty.Width, coerceCssPixelValue(this.size));
-        this.setStyle(StyleProperty.Order, this.order);
-
-        if (!this.isVertical()) {
-            this.setStyle(StyleProperty.Height, '100%');
-        }
-
-        // fix IE issue with gutter icon. flex-direction is requied for flex alignment options
-        this.setStyle(StyleProperty.FlexDirection, this.isVertical() ? 'row' : 'column');
-    }
-
-    private isVertical(): boolean {
-        return this.direction === Direction.Vertical;
+        this.updateGutter();
     }
 
     private setStyle(property: StyleProperty, value: string | number) {
@@ -321,9 +348,11 @@ export class McGutterDirective implements OnInit {
     }
 })
 export class McSplitterAreaDirective implements OnInit, OnDestroy {
-    constructor(private elementRef: ElementRef,
-                private renderer: Renderer2,
-                private splitter: McSplitterComponent) {}
+    constructor(
+        private elementRef: ElementRef,
+        private renderer: Renderer2,
+        private splitter: McSplitterComponent
+    ) {}
 
     disableFlex(): void {
         this.renderer.removeStyle(this.elementRef.nativeElement, 'flex');
