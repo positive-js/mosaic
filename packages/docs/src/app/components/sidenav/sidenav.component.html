@@ -1,11 +1,11 @@
 <nav class="main__nav nav">
     <div *ngFor="let category of categories;">
         <button cdkAccordionItem
-            #panel="cdkAccordionItem" (click)="panel.toggle()" expanded="true">
-            {{category.name}}
+            #panel="cdkAccordionItem" (click)="panel.toggle()" expanded="true" class="nav__trigger">
+            {{category.name}} <i [className]="panel.expanded ? iconClassExpanded : iconClassCollapsed"></i>
         </button>
         <ul class="nav__wrapper" [@bodyExpansion]="panel.expanded ? 'expanded' : 'collapsed'" >
-            <li *ngFor="let component of category.items">
+            <li *ngFor="let component of category.items" class="nav__item">
                 {{component.name}}
             </li>
         </ul>
