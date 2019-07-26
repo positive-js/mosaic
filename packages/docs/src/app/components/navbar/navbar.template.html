@@ -15,14 +15,6 @@
         </mc-dropdown>
     </div>
 
-    <!--Возможно здесь следует сделать select на случай большого количества версий
-    <div class="__version">
-        <span >Версия</span>
-        <mc-select  id="versionSelector" [(value)]="curVerIndex">
-            <mc-option *ngFor="let version of versions; let i = index" value="{{version}}">{{version}}</mc-option>
-        </mc-select>
-    </div>-->
-
     <div class="flex-spacer"></div>
 
     <div class="docs-navbar-dropdown">
@@ -52,6 +44,11 @@
     </div>
 
     <div class="color-picker">
-    <i mc-icon="mc-circle-8_16" [style.color]='activeColor' class="color-picker__icon"></i>
+    <i mc-icon="mc-circle-8_16" [style.color]='activeColor' class="color-picker__icon" [mcDropdownTriggerFor]="colorDropdown"></i>
+        <mc-dropdown #colorDropdown="mcDropdown" class="color-picker__dropdown" [style.margin-top]="0">
+            <span class="color-picker__dropdown-content" *ngFor="let color of colors; let i = index" (click)="setColor(i)">
+                <i mc-icon="mc-circle-8_16"  [style.color]='color' class="color-picker__icon" [style.font-size]="iconFont" ></i>
+            </span>
+        </mc-dropdown>
     </div>
 </header>
