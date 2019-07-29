@@ -4,7 +4,6 @@
         height: 328px;
     }
 </style>
-<h5>multiple selection</h5>
 
 <button class="mc-primary" mc-button (click)="modelValue = 'Applications'">set modelValue = Applications</button>
 
@@ -14,6 +13,11 @@
 
 <br><br><br>
 
+<mc-form-field>
+    <input type="text" placeholder="tree filter" (ngModelChange)="onFilterChange($event)" mcInput [(ngModel)]="filterValue">
+</mc-form-field>
+
+<br><br><br>
     <!--auto-select="true"-->
     <!--no-unselect="false"-->
 <!--    multiple-->
@@ -43,6 +47,3 @@
         {{ node.name }}: {{ node.type }}
     </mc-tree-option>
 </mc-tree-selection>
-
-<br>
-<div>multipleSelected: {{ multipleSelected }}</div>

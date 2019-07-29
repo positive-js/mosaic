@@ -1,5 +1,5 @@
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
-import { FlatTreeControl, ITreeControl } from '@ptsecurity/cdk/tree';
+import { FlatTreeControl, TreeControl } from '@ptsecurity/cdk/tree';
 import { BehaviorSubject, merge, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
@@ -43,7 +43,7 @@ export class McTreeFlattener<T, F> {
         public transformFunction: (node: T, level: number) => F,
         public getLevel: (node: F) => number,
         public isExpandable: (node: F) => boolean,
-        public getChildren: (node: T) => Observable<T[]>
+        public getChildren: (node: T) => Observable<T[]> | T[] | undefined | null
     ) {}
 
     flattenNode(node: T, level: number, resultNodes: F[], parentMap: boolean[]): F[] {
@@ -51,19 +51,31 @@ export class McTreeFlattener<T, F> {
         resultNodes.push(flatNode);
 
         if (this.isExpandable(flatNode)) {
-            this.getChildren(node)
-                .pipe(take(1))
-                .subscribe((children) => {
-                    children.forEach((child, index) => {
-                        const childParentMap: boolean[] = parentMap.slice();
-                        childParentMap.push(index !== children.length - 1);
+            const childrenNodes = this.getChildren(node);
 
-                        this.flattenNode(child, level + 1, resultNodes, childParentMap);
-                    });
-                });
+            if (childrenNodes) {
+                if (Array.isArray(childrenNodes)) {
+                    this.flattenChildren(childrenNodes, level, resultNodes, parentMap);
+                } else {
+                    childrenNodes
+                        .pipe(take(1))
+                        .subscribe((children) => {
+                            this.flattenChildren(children, level, resultNodes, parentMap);
+                        });
+                }
+            }
         }
 
         return resultNodes;
+    }
+
+    flattenChildren(children: T[], level: number, resultNodes: F[], parentMap: boolean[]): void {
+        children.forEach((child, index) => {
+            const childParentMap: boolean[] = parentMap.slice();
+            childParentMap.push(index !== children.length - 1);
+
+            this.flattenNode(child, level + 1, resultNodes, childParentMap);
+        });
     }
 
     /**
@@ -82,7 +94,7 @@ export class McTreeFlattener<T, F> {
      * Expand flattened node with current expansion status.
      * The returned list may have different length.
      */
-    expandFlattenedNodes(nodes: F[], treeControl: ITreeControl<F>): F[] {
+    expandFlattenedNodes(nodes: F[], treeControl: TreeControl<F>): F[] {
         const results: F[] = [];
         const currentExpand: boolean[] = [];
         currentExpand[0] = true;
@@ -104,6 +116,17 @@ export class McTreeFlattener<T, F> {
     }
 }
 
+enum McTreeDataSourceChangeTypes {
+    Expansion = 'expansion',
+    Filter = 'filter'
+}
+
+interface McTreeDataSourceChanges {
+    // tslint:disable-next-line:no-reserved-keywords
+    type: McTreeDataSourceChangeTypes;
+    value: any;
+}
+
 
 /**
  * Data source for flat tree.
@@ -116,6 +139,8 @@ export class McTreeFlatDataSource<T, F> extends DataSource<F> {
     flattenedData = new BehaviorSubject<F[]>([]);
 
     expandedData = new BehaviorSubject<F[]>([]);
+
+    filteredData = new BehaviorSubject<F[]>([]);
 
     get data() {
         return this._data.value;
@@ -141,20 +166,38 @@ export class McTreeFlatDataSource<T, F> extends DataSource<F> {
     }
 
     connect(collectionViewer: CollectionViewer): Observable<F[]> {
-        const changes = [
+        return merge(
             collectionViewer.viewChange,
-            this.treeControl.expansionModel.changed,
+            this.treeControl.expansionModel.changed
+                .pipe(map((value) => ({ type: McTreeDataSourceChangeTypes.Expansion, value }))),
+            this.treeControl.filterValue
+                .pipe(map((value) => ({ type: McTreeDataSourceChangeTypes.Filter, value }))),
             this.flattenedData
-        ];
+        )
+        .pipe(map((changeObj: any): any => {
+            if (changeObj.type === McTreeDataSourceChangeTypes.Filter) {
+                if (changeObj.value && changeObj.value.length > 0) {
+                    return this.filterHandler();
+                } else {
+                    return this.expansionHandler();
+                }
+            }
 
-        return merge(...changes)
-            .pipe(map(() => {
-                this.expandedData.next(
-                    this.treeFlattener.expandFlattenedNodes(this.flattenedData.value, this.treeControl)
-                );
+            return this.expansionHandler();
+        }));
+    }
 
-                return this.expandedData.value;
-            }));
+    filterHandler(): F[] {
+        this.filteredData.next(this.treeControl.filterModel.selected);
+
+        return this.filteredData.value;
+    }
+
+    expansionHandler(): F[] {
+        const expandedNodes = this.treeFlattener.expandFlattenedNodes(this.flattenedData.value, this.treeControl);
+        this.expandedData.next(expandedNodes);
+
+        return this.expandedData.value;
     }
 
     disconnect() {

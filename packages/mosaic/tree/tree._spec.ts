@@ -1,7 +1,7 @@
 /* tslint:disable:no-magic-numbers */
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FlatTreeControl, NestedTreeControl, ITreeControl } from '@ptsecurity/cdk/tree';
+import { FlatTreeControl, NestedTreeControl, TreeControl } from '@ptsecurity/cdk/tree';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import {
@@ -672,7 +672,7 @@ class WhenNodeNestedMatTreeApp {
 
     getChildren = (node: TestData) => node.observableChildren;
 
-    treeControl: ITreeControl<TestData> = new NestedTreeControl(this.getChildren);
+    treeControl: TreeControl<TestData> = new NestedTreeControl(this.getChildren);
 
     dataSource = new McTreeNestedDataSource();
     underlyingDataSource = new FakeDataSource();

@@ -1,18 +1,19 @@
 /* tslint:disable:no-console no-reserved-keywords */
-import { Component, Injectable, NgModule, ViewEncapsulation } from '@angular/core';
+import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { FlatTreeControl, NestedTreeControl } from '@ptsecurity/cdk/tree';
+import { FlatTreeControl } from '@ptsecurity/cdk/tree';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
+import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
+import { McInputModule } from '@ptsecurity/mosaic/input';
 import {
     McTreeFlatDataSource,
     McTreeFlattener,
-    McTreeNestedDataSource,
     McTreeModule
 } from '@ptsecurity/mosaic/tree';
-import { BehaviorSubject, Observable, of as observableOf } from 'rxjs';
+import { Observable, of as observableOf } from 'rxjs';
 
 
 export class FileNode {
@@ -29,114 +30,90 @@ export class FileFlatNode {
     expandable: boolean;
 }
 
-export const TREE_DATA = `
-  {
-  "rootNode_1": "app",
-  "Pictures": {
-        "Sun": "png",
-        "Woods": "jpg",
-        "Photo Booth Library": {
-          "Contents": "dir",
-          "Pictures": "dir"
-        }
-    },
-    "Documents": {
-    "Pictures": "Pictures",
-      "angular": {
-        "src": {
-          "core": "ts",
-          "compiler": "ts"
-        }
-      },
-      "material2": {
-        "src": {
-          "button": "ts",
-          "checkbox": "ts",
-          "input": "ts"
-        }
-      }
-    },
-    "Downloads": {
-        "Tutorial": "html",
-        "November": "pdf",
-        "October": "pdf"
-    },
-    "Applications": {
-        "Chrome": "app",
-        "Calendar": "app",
-        "Webstorm": "app"
-    }
-}`;
+/**
+ * Build the file structure tree. The `value` is the Json object, or a sub-tree of a Json object.
+ * The return value is the list of `FileNode`.
+ */
+export function buildFileTree(value: any, level: number): FileNode[] {
+    const data: any[] = [];
 
-@Injectable()
-export class FileDatabase {
-    dataChange: BehaviorSubject<FileNode[]> = new BehaviorSubject<FileNode[]>([]);
+    for (const k of Object.keys(value)) {
+        const v = value[k];
+        const node = new FileNode();
 
-    get data(): FileNode[] { return this.dataChange.value; }
+        node.name = `${k}`;
 
-    constructor() {
-        this.initialize();
-    }
-
-    initialize() {
-        // Parse the string to json object.
-        const dataObject = JSON.parse(TREE_DATA);
-
-        // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
-        //     file node as children.
-        const data = this.buildFileTree(dataObject, 0);
-
-        // Notify the change.
-        this.dataChange.next(data);
-    }
-
-    /**
-     * Build the file structure tree. The `value` is the Json object, or a sub-tree of a Json object.
-     * The return value is the list of `FileNode`.
-     */
-    buildFileTree(value: any, level: number): FileNode[] {
-        const data: any[] = [];
-
-        for (const k of Object.keys(value)) {
-            const v = value[k];
-            const node = new FileNode();
-
-            node.name = `${k}`;
-
-            if (v === null || v === undefined) {
-                // no action
-            } else if (typeof v === 'object') {
-                node.children = this.buildFileTree(v, level + 1);
-            } else {
-                node.type = v;
-            }
-
-            data.push(node);
+        if (v === null || v === undefined) {
+            // no action
+        } else if (typeof v === 'object') {
+            node.children = buildFileTree(v, level + 1);
+        } else {
+            node.type = v;
         }
 
-        return data;
+        data.push(node);
     }
+
+    return data;
 }
+
+export const DATA_OBJECT = {
+    rootNode_1: 'app',
+    Pictures: {
+        Sun: 'png',
+        Woods: 'jpg',
+        PhotoBoothLibrary: {
+            Contents: 'dir',
+            Pictures: 'dir'
+        }
+    },
+    Documents: {
+        Pictures: 'Pictures',
+        angular: {
+            src: {
+                core: 'ts',
+                compiler: 'ts'
+            }
+        },
+        material2: {
+            src: {
+                button: 'ts',
+                checkbox: 'ts',
+                input: 'ts'
+            }
+        }
+    },
+    Downloads: {
+        Tutorial: 'html',
+        November: 'pdf',
+        October: 'pdf'
+    },
+    Applications: {
+        Chrome: 'app',
+        Calendar: 'app',
+        Webstorm: 'app'
+    }
+};
 
 
 @Component({
     selector: 'app',
     template: require('./template.html'),
     styleUrls: ['./styles.scss'],
-    encapsulation: ViewEncapsulation.None,
-    providers: [FileDatabase]
+    encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent {
     treeControl: FlatTreeControl<FileFlatNode>;
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
     treeFlattener: McTreeFlattener<FileNode, FileFlatNode>;
 
-    nestedTreeControl: NestedTreeControl<FileNode>;
-    nestedDataSource: McTreeNestedDataSource<FileNode>;
+    filterValue: string = '';
 
     modelValue: any[] = ['rootNode_1', 'Documents', 'Calendar', 'Chrome'];
 
-    constructor(database: FileDatabase) {
+    treeDataObject: FileNode[];
+
+    constructor() {
         this.treeFlattener = new McTreeFlattener(
             this.transformer, this.getLevel, this.isExpandable, this.getChildren
         );
@@ -144,13 +121,20 @@ export class DemoComponent {
         this.treeControl = new FlatTreeControl<FileFlatNode>(this.getLevel, this.isExpandable);
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-        this.nestedTreeControl = new NestedTreeControl<FileNode>(this.getChildren);
-        this.nestedDataSource = new McTreeNestedDataSource();
-
-        database.dataChange.subscribe((data) => {
-            this.dataSource.data = data;
-            this.nestedDataSource.data = data;
+        this.dataSource.flattenedData.subscribe((flattenedData) => {
+            console.log('flattenedData', flattenedData);
         });
+
+        this.dataSource.expandedData.subscribe((expandedData) => {
+            console.log('expandedData', expandedData);
+        });
+
+        this.dataSource.data = this.treeDataObject = buildFileTree(DATA_OBJECT, 0);
+    }
+
+    onFilterChange(value): void {
+        this.treeControl.filterNodes(value);
+        // console.log('new value', value);
     }
 
     transformer(node: FileNode, level: number) {
@@ -178,12 +162,16 @@ export class DemoComponent {
         console.log('onSelectionChange');
     }
 
-    private getLevel(node: FileFlatNode) { return node.level; }
+    private getLevel(node: FileFlatNode) {
+        return node.level;
+    }
 
-    private isExpandable(node: FileFlatNode) { return node.expandable; }
+    private isExpandable(node: FileFlatNode) {
+        return node.expandable;
+    }
 
-    private getChildren = (node: FileNode): Observable<FileNode[]> => {
-        return observableOf(node.children);
+    private getChildren = (node: FileNode): FileNode[] => {
+        return node.children;
     }
 }
 
@@ -193,6 +181,8 @@ export class DemoComponent {
     imports: [
         BrowserModule,
         FormsModule,
+        McFormFieldModule,
+        McInputModule,
         McButtonModule,
         McTreeModule,
         McIconModule

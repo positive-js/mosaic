@@ -32,7 +32,7 @@ import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 import { McTreeFlatDataSource, McTreeFlattener, McTreeModule } from '@ptsecurity/mosaic/tree';
 import { Observable, of as observableOf } from 'rxjs';
 
-import { FileDatabase, FileFlatNode, FileNode } from '../tree/module';
+import { buildFileTree, FileFlatNode, FileNode, DATA_OBJECT } from '../tree/module';
 
 // Depending on whether rollup is used, moment needs to be imported differently.
 // Since Moment.js doesn't have a default export, we normally need to import using the `* as`
@@ -57,8 +57,7 @@ const MAX_PERCENT: number = 100;
     selector: 'app',
     template: require('./template.html'),
     styleUrls: ['./styles.scss'],
-    encapsulation: ViewEncapsulation.None,
-    providers: [FileDatabase]
+    encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent {
     checked: boolean[] = [true, true, false];
@@ -129,21 +128,19 @@ export class DemoComponent {
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
     treeFlattener: McTreeFlattener<FileNode, FileFlatNode>;
 
-    constructor(private modalService: McModalService, database: FileDatabase) {
+    constructor(private modalService: McModalService) {
         setInterval(() => {
             this.percent = (this.percent + STEP) % (MAX_PERCENT + STEP);
         }, INTERVAL);
 
         this.treeFlattener = new McTreeFlattener(
-            this.transformer, this._getLevel, this._isExpandable, this._getChildren
+            this.transformer, this.getLevel, this.isExpandable, this.getChildren
         );
 
-        this.treeControl = new FlatTreeControl<FileFlatNode>(this._getLevel, this._isExpandable);
+        this.treeControl = new FlatTreeControl<FileFlatNode>(this.getLevel, this.isExpandable);
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-        database.dataChange.subscribe((data) => {
-            this.dataSource.data = data;
-        });
+        this.dataSource.data = buildFileTree(DATA_OBJECT, 0);
     }
 
     showConfirm() {
@@ -170,7 +167,7 @@ export class DemoComponent {
         return flatNode;
     }
 
-    hasChild(_: number, _nodeData: FileFlatNode) { return _nodeData.expandable; }
+    hasChild(_: number, nodeData: FileFlatNode) { return nodeData.expandable; }
 
     hasNestedChild(_: number, nodeData: FileNode) {
         return !(nodeData.type);
@@ -180,11 +177,11 @@ export class DemoComponent {
         clearInterval(this.intervalId);
     }
 
-    private _getLevel(node: FileFlatNode) { return node.level; }
+    private getLevel(node: FileFlatNode) { return node.level; }
 
-    private _isExpandable(node: FileFlatNode) { return node.expandable; }
+    private isExpandable(node: FileFlatNode) { return node.expandable; }
 
-    private _getChildren = (node: FileNode): Observable<FileNode[]> => {
+    private getChildren = (node: FileNode): Observable<FileNode[]> => {
         return observableOf(node.children);
     }
 

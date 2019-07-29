@@ -39,7 +39,7 @@ export class McIcon extends _McIconMixinBase implements CanColor {
         elementRef.nativeElement.classList.add(iconName);
     }
 
-    _getHostElement() {
+    getHostElement() {
         return this._elementRef.nativeElement;
     }
 }
