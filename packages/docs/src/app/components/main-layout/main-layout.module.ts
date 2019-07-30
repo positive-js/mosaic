@@ -1,3 +1,4 @@
+import { AnchorsModule } from '../anchors/anchors.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -14,6 +15,8 @@ import { MainLayoutComponent } from './main-layout.component';
 
 @NgModule({
     imports: [
+        AnchorsModule,
+
         CommonModule,
         RouterModule,
 
