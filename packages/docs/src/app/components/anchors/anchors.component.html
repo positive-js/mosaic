@@ -1,0 +1,9 @@
+<div class="anchors-menu">
+    <div class="anchors-menu__container">
+        <div class="anchors-menu__list" >
+            <div *ngFor="let anchor of anchors; let i = index" [attr.class] = "i == activeAnchor? activeClass : inactiveClass"    >
+                <a href="{{anchor.href}}" (click)="setActiveAnchor(i)">{{anchor.name}}</a>
+            </div>
+        </div>
+    </div>
+</div>
