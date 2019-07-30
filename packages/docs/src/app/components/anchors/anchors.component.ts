@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,18 +11,30 @@ export class AnchorsComponent {
 
     activeAnchor: number = 0;
     activeClass: string = "anchors-menu__list-element anchors-menu__list-element_active";
-    anchors: {href: string, name: string }[]  = [
-        {href: "#variants", name: "Variants"},
-        {href: "#colors", name: "Colors"},
-        {href: "#progress-indication", name: "Progress indication"},
-    ];
+    anchors: {href: string, name: string }[];
     inactiveClass: string = "anchors-menu__list-element";
+    href: any;
+
+    constructor(private router : Router) {}
 
     ngAfterViewInit() {
         // TODO: collect real anchors data
     }
 
-    setActiveAnchor ( index ) {
+    ngOnInit() {
+        this.href = this.removeAnchor(this.router.url);
+        this.anchors = [
+            {href: `${this.href}#variants`, name: "Variants"},
+            {href: `${this.href}#colors`, name: "Colors"},
+            {href: `${this.href}#progress-indication`, name: "Progress indication"}
+        ];
+    }
+
+    setActiveAnchor(index) {
         this.activeAnchor = index;
+    }
+
+    removeAnchor(url) {
+        return url.split('#')[0];
     }
 }
