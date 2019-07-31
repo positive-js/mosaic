@@ -24,19 +24,23 @@
 
         background: transparent;
 
-        &:hover:not([disabled]),
-        &.mc-hovered:not([disabled]) {
+        &:hover,
+        &.mc-hovered {
             background: mc-color($background, hover);
         }
 
-        &.cdk-keyboard-focused, &.cdk-program-focused {
+        &.cdk-keyboard-focused {
             outline: mc-color($primary) solid 2px;
             outline-offset: -2px;
 
-            &.mc-link{
+            &.mc-link {
                 outline-offset: -2px;
             }
 
+        }
+
+        &.mc-selected {
+            background: mc-color($primary, if($is-dark, 700, 100));
         }
 
         &[disabled] {
