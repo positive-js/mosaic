@@ -1,3 +1,34 @@
+# 8.0.0-beta.7 "Fixed Lotus" (2019-07-31)
+
+
+### Bug Fixes
+
+* **cdk:** add cdk focused classes to radio and disable focus on alert [#94](https://github.com/positive-js/mosaic/issues/94)  ([#178](https://github.com/positive-js/mosaic/issues/178)) ([9b1f9bb](https://github.com/positive-js/mosaic/commit/9b1f9bb))
+* **chore:** fixed bad example for tree ([#171](https://github.com/positive-js/mosaic/issues/171)) ([d9add6c](https://github.com/positive-js/mosaic/commit/d9add6c))
+* **chore:** fixed dev example with all components ([#170](https://github.com/positive-js/mosaic/issues/170)) ([4f87ccd](https://github.com/positive-js/mosaic/commit/4f87ccd))
+* **dropdown:** .mc-link outline set to none ([#86](https://github.com/positive-js/mosaic/issues/86)) ([33055c5](https://github.com/positive-js/mosaic/commit/33055c5))
+* **dropdown:** dropdown's scroll fix ([#186](https://github.com/positive-js/mosaic/issues/186)) ([10656f5](https://github.com/positive-js/mosaic/commit/10656f5))
+* **link:** add style for correct display of a focused link ([#51](https://github.com/positive-js/mosaic/issues/51)) ([#166](https://github.com/positive-js/mosaic/issues/166)) ([e2f306c](https://github.com/positive-js/mosaic/commit/e2f306c))
+* **list, checkbox, navbar:** fixing focus in list, checkbox and navbar (#UIM-80) ([40e584d](https://github.com/positive-js/mosaic/commit/40e584d)), closes [#UIM-80](https://github.com/positive-js/mosaic/issues/UIM-80)
+* **multiselect:**  multyselect tag size [#90](https://github.com/positive-js/mosaic/issues/90) ([#174](https://github.com/positive-js/mosaic/issues/174)) ([c76b96a](https://github.com/positive-js/mosaic/commit/c76b96a))
+* **popover:** incorrectly works with overlay #UIM-102 ([#182](https://github.com/positive-js/mosaic/issues/182)) ([49dca88](https://github.com/positive-js/mosaic/commit/49dca88)), closes [#UIM-102](https://github.com/positive-js/mosaic/issues/UIM-102)
+* **splitter:** fixed and improved dev example ([#173](https://github.com/positive-js/mosaic/issues/173)) ([c027191](https://github.com/positive-js/mosaic/commit/c027191))
+* **splitter:** splitter jumps (narrow size), if the block has a min-width (#UIM-49) ([99b97d9](https://github.com/positive-js/mosaic/commit/99b97d9)), closes [#UIM-49](https://github.com/positive-js/mosaic/issues/UIM-49)
+* **timepicker:** need keep source date (#UIM-79) ([#176](https://github.com/positive-js/mosaic/issues/176)) ([9ba7050](https://github.com/positive-js/mosaic/commit/9ba7050)), closes [#UIM-79](https://github.com/positive-js/mosaic/issues/UIM-79)
+* **tree:** selection is not work correctly (#UIM-88) ([#184](https://github.com/positive-js/mosaic/issues/184)) ([a8d30ec](https://github.com/positive-js/mosaic/commit/a8d30ec)), closes [#UIM-88](https://github.com/positive-js/mosaic/issues/UIM-88)
+* **tree:** tree does not scroll to focused item (#UIM-89) ([#172](https://github.com/positive-js/mosaic/issues/172)) ([0e5e3b0](https://github.com/positive-js/mosaic/commit/0e5e3b0)), closes [#UIM-89](https://github.com/positive-js/mosaic/issues/UIM-89)
+* **tree-select:** fixing tag's height [#97](https://github.com/positive-js/mosaic/issues/97) ([#177](https://github.com/positive-js/mosaic/issues/177)) ([e0b4f04](https://github.com/positive-js/mosaic/commit/e0b4f04))
+* **tree-selection:** if ngModel change View will have previous value ([#183](https://github.com/positive-js/mosaic/issues/183)) ([33ad81b](https://github.com/positive-js/mosaic/commit/33ad81b))
+
+
+### Features
+
+* **dropdown:** Style for the selected item in the drop-down list (UIM-108) ([#194](https://github.com/positive-js/mosaic/issues/194)) ([7dc1533](https://github.com/positive-js/mosaic/commit/7dc1533))
+* **splitter:** changed styles and added some improvements (#UIM-83) ([2fd0268](https://github.com/positive-js/mosaic/commit/2fd0268)), closes [#UIM-83](https://github.com/positive-js/mosaic/issues/UIM-83) [#UIM-83](https://github.com/positive-js/mosaic/issues/UIM-83)
+* **vertical-navbar:** new default styles for vertical-navbar ([#52](https://github.com/positive-js/mosaic/issues/52)) ([#167](https://github.com/positive-js/mosaic/issues/167)) ([1f6b85f](https://github.com/positive-js/mosaic/commit/1f6b85f))
+
+
+
 # 8.0.0-beta.6 "Unconfident Woodwork" (2019-07-11)
 
 
