@@ -11,6 +11,7 @@ import { NavbarModule } from '../navbar';
 import { SidenavModule } from '../sidenav/sidenav.module';
 
 import { MainLayoutComponent } from './main-layout.component';
+import { FooterModule } from '../footer/footer.module';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { MainLayoutComponent } from './main-layout.component';
         McDropdownModule,
 
         NavbarModule,
-        SidenavModule
+        SidenavModule,
+        FooterModule
     ],
     exports: [MainLayoutComponent],
     declarations: [MainLayoutComponent]
