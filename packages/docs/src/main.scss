@@ -8,7 +8,7 @@
 @import './styles/mosaic-fixed';
 @import "~@ptsecurity/mosaic-icons/dist/styles/mc-icons.css";
 @import 'app/components/navbar/navbar-theme';
-
+@import 'app/components/footer/footer-theme';
 
 $primary: mc-palette($mc-blue, 400, 500, 600);
 $second: mc-palette($mc-grey, 100, 300, 400);
@@ -19,6 +19,8 @@ $success: mc-palette($mc-green, 60, 200, 400);
 $warning: mc-palette($mc-yellow, 60, 200, 400);
 
 $theme: mc-light-theme($primary, $second, $error, $info, $success, $warning);
+
+$config: mc-typography-config();
 
 // Include all typography for the components.
 @include mc-core();
@@ -31,3 +33,7 @@ $theme: mc-light-theme($primary, $second, $error, $info, $success, $warning);
 @include layout-padding-margin();
 
 @include mc-navbar-theme($theme);
+
+@include mc-footer-theme($theme);
+
+@include mc-footer-typography($config);
