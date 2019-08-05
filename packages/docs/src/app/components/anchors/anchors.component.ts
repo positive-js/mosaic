@@ -8,8 +8,6 @@ import { debounceTime, map, takeUntil } from 'rxjs/operators';
 interface IAnchor {
     href: string;
     name: string;
-    /* header level h3/h4 */
-    level: string;
     /* If the anchor is in view of the page */
     active: boolean;
     /* top offset px of the anchor */
@@ -131,7 +129,6 @@ export class AnchorsComponent {
                 anchors.push({
                     href,
                     name,
-                    level: headers[i].tagName.toLowerCase() === 'h4',
                     active: i === 0,
                     top
                 });

@@ -29,10 +29,5 @@
 
         &_active, &_active:hover { @include box-shadow( inset 3px 0 0 #2f80ed ); }
     }
-
-
-    &__list-element-h4 {
-        padding-left: 32px;
-    }
 }
 
