@@ -4,7 +4,7 @@ import { combineLatest, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 
 import { DocItem, DocumentationItems } from '../../shared/documentation-items/documentation-items';
-import { TableOfContents } from '../../shared/table-of-contents/table-of-contents';
+import { AnchorsComponent } from '../anchors/anchors.component';
 
 
 @Component({
@@ -48,10 +48,16 @@ export class ComponentViewerComponent implements OnDestroy {
 })
 export class ComponentOverviewComponent {
 
-    @ViewChild('toc', {static: false}) tableOfContents: TableOfContents;
+    @ViewChild('toc', {static: false}) anchorsComponent: AnchorsComponent;
 
     constructor(public componentViewer: ComponentViewerComponent) {
 
+    }
+
+    scrollToSelectedContentSection() {
+        if (this.anchorsComponent) {
+            this.anchorsComponent.setScrollPosition();
+        }
     }
 }
 
