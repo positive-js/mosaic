@@ -20,22 +20,7 @@ Add any text before or after the `<i>` element to place a button label to the ri
 ### Colors
 
 Mosaic provides three button colors, applied using the `color` property with possible values `primary`, `second`, and `error`.
-Mosaic provides three button colors, applied using the `color` property with possible values `primary`, `second`, and `error`.
-Mosaic provides three button colors, applied using the `color` property with possible values `primary`, `second`, and `error`.
-Mosaic provides three button colors, applied using the `color` property with pssible values `primary`, `second`, and `error`.
-Mosaic provides three button colors, applied using the `color` property with possible values `primary`, `second`, and `error`.
-Mosaic provides three button colors, applied using the `color` property with possible values `primary`, `second`, and `error`.
-Mosaic provides three button colors, applied using the `color` property with possible values `primary`, `second`, and `error`.
-Mosaic provides three button colors, applied using the `color` property with possible values `primary`, `second`, and `error`.
-Mosaic provides three button colors, applied using the `color` property with pssible values `primary`, `second`, and `error`.
-Mosaic provides three button colors, applied using the `color` property with possible values `primary`, `second`, and `error`.
 
 ### Progress indication
-If processing an action takes more than 1-2 seconds, the progress indication ("loading") can be used. This shows that the system takes action, and the user won't wonder whether the button is working or not.
-To enable the button progress indication, use `class="mc-progress"` which can be combined with other properties.
-If processing an action takes more than 1-2 seconds, the progress indication ("loading") can be used. This shows that the system takes action, and the user won't wonder whether the button is working or not.
-To enable the button progress indication, use `class="mc-progress"` which can be combined with other properties.
-If processing an action takes more than 1-2 seconds, the progress indication ("loading") can be used. This shows that the system takes action, and the user won't wonder whether the button is working or not.
-To enable the button progress indication, use `class="mc-progress"` which can be combined with other properties.
 If processing an action takes more than 1-2 seconds, the progress indication ("loading") can be used. This shows that the system takes action, and the user won't wonder whether the button is working or not.
 To enable the button progress indication, use `class="mc-progress"` which can be combined with other properties.
