@@ -22,7 +22,6 @@ import {
     ViewContainerRef, ViewEncapsulation
 } from '@angular/core';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
-import { McMeasureScrollbarService } from '@ptsecurity/mosaic/core';
 import { Observable } from 'rxjs';
 
 import { McModalControlService } from './modal-control.service';
@@ -165,7 +164,6 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
         private cfr: ComponentFactoryResolver,
         private elementRef: ElementRef,
         private viewContainer: ViewContainerRef,
-        private mcMeasureScrollbarService: McMeasureScrollbarService,
         private modalControl: McModalControlService,
         private changeDetector: ChangeDetectorRef,
         @Inject(DOCUMENT) private document: any) {
@@ -352,6 +350,10 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
 
     // Do rest things when visible state changed
     private handleVisibleStateChange(visible: boolean, animation: boolean = true, closeResult?: R): Promise<any> {
+        // Hide scrollbar at the first time when shown up
+        if (visible) {
+            this.changeBodyOverflow(1);
+        }
 
         return Promise
             .resolve(animation && this.animateTo(visible))
@@ -361,6 +363,8 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
                     this.mcAfterOpen.emit();
                 } else {
                     this.mcAfterClose.emit(closeResult);
+                    // Show/hide scrollbar when animation is over
+                    this.changeBodyOverflow();
                 }
             });
     }
@@ -491,6 +495,21 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
         if (lastPosition) {
             // tslint:disable-next-line
             this.transformOrigin = `${lastPosition.x - modalElement.offsetLeft}px ${lastPosition.y - modalElement.offsetTop}px 0px`;
+        }
+    }
+
+    /**
+     * Take care of the body's overflow to decide the existense of scrollbar
+     * @param plusNum The number that the openModals.length will increase soon
+     */
+    private changeBodyOverflow(plusNum: number = 0) {
+        const openModals = this.modalControl.openModals;
+
+        if (openModals.length + plusNum > 0) {
+            // tslint:disable-next-line
+            this.renderer.setStyle(this.document.body, 'overflow', 'hidden');
+        } else {
+            this.renderer.removeStyle(this.document.body, 'overflow');
         }
     }
 }
