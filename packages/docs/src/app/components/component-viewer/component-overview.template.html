@@ -3,7 +3,7 @@
 </span>
 <doc-viewer
     documentUrl="/docs-content/overviews/{{componentViewer.componentDocItem.packageName}}/{{componentViewer.componentDocItem.id}}.html"
->
-
+    class="docs-component-view-text-content docs-component-overview"
+    (contentRendered)="scrollToSelectedContentSection()">
 </doc-viewer>
-<table-of-contents #toc container=".mat-drawer-content"></table-of-contents>
+<anchors #toc ></anchors>

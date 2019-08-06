@@ -6,6 +6,8 @@ import { McTabsModule } from '@ptsecurity/mosaic/tabs';
 import { DocViewerModule } from '../../shared/doc-viewer/doc-viewer-module';
 import { DocumentationItems } from '../../shared/documentation-items/documentation-items';
 import { TableOfContentsModule } from '../../shared/table-of-contents/table-of-contents.module';
+import { AnchorsModule } from '../anchors/anchors.module';
+
 
 import {
     ComponentApiComponent,
@@ -16,6 +18,7 @@ import {
 
 @NgModule({
     imports: [
+        AnchorsModule,
         McTabsModule,
         RouterModule,
         DocViewerModule,
