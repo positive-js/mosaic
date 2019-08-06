@@ -45,12 +45,33 @@ export class FlatTreeControl<T> extends BaseTreeControl<T> {
         this.expansionModel.select(...this.dataNodes);
     }
 
+    getParents(node: any, result: T[]): T[] {
+        if (node.parent) {
+            result.unshift(node.parent);
+
+            return this.getParents(node.parent, result);
+        } else {
+            return result;
+        }
+    }
+
+    compareFunction(node: any, value: string): boolean {
+        return node.name.includes(value);
+    }
+
     filterNodes(value: string): void {
         this.filterModel.clear();
 
-        const filteredNodes = this.dataNodes.filter((node: any) => node.name.includes(value));
+        const filteredNodes = this.dataNodes.filter((node: any) => this.compareFunction(node, value));
 
-        this.filterModel.select(...filteredNodes);
+        const filteredNodesWithTheirParents = new Set();
+        filteredNodes.forEach((filteredNode) => {
+            this.getParents(filteredNode, []).forEach((node) => filteredNodesWithTheirParents.add(node));
+
+            filteredNodesWithTheirParents.add(filteredNode);
+        });
+
+        this.filterModel.select(...Array.from(filteredNodesWithTheirParents));
 
         this.filterValue.next(value);
     }

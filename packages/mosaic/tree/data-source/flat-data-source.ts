@@ -40,14 +40,14 @@ import { map, take } from 'rxjs/operators';
  */
 export class McTreeFlattener<T, F> {
     constructor(
-        public transformFunction: (node: T, level: number) => F,
+        public transformFunction: (node: T, level: number, parent: F | null) => F,
         public getLevel: (node: F) => number,
         public isExpandable: (node: F) => boolean,
         public getChildren: (node: T) => Observable<T[]> | T[] | undefined | null
     ) {}
 
-    flattenNode(node: T, level: number, resultNodes: F[], parentMap: boolean[]): F[] {
-        const flatNode = this.transformFunction(node, level);
+    flattenNode(node: T, level: number, resultNodes: F[], parent: F | null): F[] {
+        const flatNode = this.transformFunction(node, level, parent);
         resultNodes.push(flatNode);
 
         if (this.isExpandable(flatNode)) {
@@ -55,12 +55,12 @@ export class McTreeFlattener<T, F> {
 
             if (childrenNodes) {
                 if (Array.isArray(childrenNodes)) {
-                    this.flattenChildren(childrenNodes, level, resultNodes, parentMap);
+                    this.flattenChildren(childrenNodes, level, resultNodes, flatNode);
                 } else {
                     childrenNodes
                         .pipe(take(1))
                         .subscribe((children) => {
-                            this.flattenChildren(children, level, resultNodes, parentMap);
+                            this.flattenChildren(children, level, resultNodes, flatNode);
                         });
                 }
             }
@@ -69,12 +69,9 @@ export class McTreeFlattener<T, F> {
         return resultNodes;
     }
 
-    flattenChildren(children: T[], level: number, resultNodes: F[], parentMap: boolean[]): void {
-        children.forEach((child, index) => {
-            const childParentMap: boolean[] = parentMap.slice();
-            childParentMap.push(index !== children.length - 1);
-
-            this.flattenNode(child, level + 1, resultNodes, childParentMap);
+    flattenChildren(children: T[], level: number, resultNodes: F[], parent: F | null): void {
+        children.forEach((child) => {
+            this.flattenNode(child, level + 1, resultNodes, parent);
         });
     }
 
@@ -85,7 +82,7 @@ export class McTreeFlattener<T, F> {
      */
     flattenNodes(structuredData: T[]): F[] {
         const resultNodes: F[] = [];
-        structuredData.forEach((node) => this.flattenNode(node, 0, resultNodes, []));
+        structuredData.forEach((node) => this.flattenNode(node, 0, resultNodes, null));
 
         return resultNodes;
     }
@@ -120,13 +117,6 @@ enum McTreeDataSourceChangeTypes {
     Expansion = 'expansion',
     Filter = 'filter'
 }
-
-interface McTreeDataSourceChanges {
-    // tslint:disable-next-line:no-reserved-keywords
-    type: McTreeDataSourceChangeTypes;
-    value: any;
-}
-
 
 /**
  * Data source for flat tree.

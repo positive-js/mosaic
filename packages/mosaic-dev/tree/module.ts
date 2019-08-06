@@ -13,7 +13,6 @@ import {
     McTreeFlattener,
     McTreeModule
 } from '@ptsecurity/mosaic/tree';
-import { Observable, of as observableOf } from 'rxjs';
 
 
 export class FileNode {
@@ -28,6 +27,7 @@ export class FileFlatNode {
     type: any;
     level: number;
     expandable: boolean;
+    parent: any;
 }
 
 /**
@@ -121,26 +121,18 @@ export class DemoComponent {
         this.treeControl = new FlatTreeControl<FileFlatNode>(this.getLevel, this.isExpandable);
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-        this.dataSource.flattenedData.subscribe((flattenedData) => {
-            console.log('flattenedData', flattenedData);
-        });
-
-        this.dataSource.expandedData.subscribe((expandedData) => {
-            console.log('expandedData', expandedData);
-        });
-
         this.dataSource.data = this.treeDataObject = buildFileTree(DATA_OBJECT, 0);
     }
 
     onFilterChange(value): void {
         this.treeControl.filterNodes(value);
-        // console.log('new value', value);
     }
 
-    transformer(node: FileNode, level: number) {
+    transformer(node: FileNode, level: number, parent: any) {
         const flatNode = new FileFlatNode();
 
         flatNode.name = node.name;
+        flatNode.parent = parent;
         flatNode.type = node.type;
         flatNode.level = level;
         flatNode.expandable = !!node.children;
