@@ -3,8 +3,6 @@ import { Component, EventEmitter, NgModule } from '@angular/core';
 import { async, ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 
-import { McMeasureScrollbarService } from '@ptsecurity/mosaic/core';
-
 import { McModalControlService } from './modal-control.service';
 import { McModalRef } from './modal-ref.class';
 import { McModalModule } from './modal.module';
@@ -22,8 +20,7 @@ describe('McModal', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [ ModalTestModule ],
-            providers: [ McMeasureScrollbarService ]
+            imports: [ ModalTestModule ]
         });
 
         TestBed.compileComponents();

@@ -22,7 +22,6 @@ import {
     ViewContainerRef, ViewEncapsulation
 } from '@angular/core';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
-import { McMeasureScrollbarService } from '@ptsecurity/mosaic/core';
 import { Observable } from 'rxjs';
 
 import { McModalControlService } from './modal-control.service';
@@ -165,7 +164,6 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
         private cfr: ComponentFactoryResolver,
         private elementRef: ElementRef,
         private viewContainer: ViewContainerRef,
-        private mcMeasureScrollbarService: McMeasureScrollbarService,
         private modalControl: McModalControlService,
         private changeDetector: ChangeDetectorRef,
         @Inject(DOCUMENT) private document: any) {
@@ -509,10 +507,8 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
 
         if (openModals.length + plusNum > 0) {
             // tslint:disable-next-line
-            this.renderer.setStyle(this.document.body, 'padding-right', `${this.mcMeasureScrollbarService.scrollBarWidth}px`);
             this.renderer.setStyle(this.document.body, 'overflow', 'hidden');
         } else {
-            this.renderer.removeStyle(this.document.body, 'padding-right');
             this.renderer.removeStyle(this.document.body, 'overflow');
         }
     }
