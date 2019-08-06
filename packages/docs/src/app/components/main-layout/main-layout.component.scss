@@ -1,18 +1,19 @@
-
-
-.main
-{
-}
+.main {}
 
 .content {
+    margin: {
+        top: 64px;
+        left: 360px;
+        bottom: 62px;
+    }
 
-    margin-left: 360px;
-    margin-top: 64px;
-    padding-left: 48px;
-    padding-top: 20px;
-    padding-right: 360px;
+    padding: {
+        top: 20px;
+        right: 360px;
+        left: 48px;
+    }
 
-    &__wrapper{
+    &__wrapper {
         padding: 10px 0;
     }
 }
