@@ -2,7 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { ChangeDetectorRef , Component, ElementRef, Inject, Input } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Subject, fromEvent } from 'rxjs';
-import { debounceTime, map, takeUntil } from 'rxjs/operators';
+import { debounceTime, takeUntil } from 'rxjs/operators';
 
 
 interface IAnchor {
@@ -20,30 +20,33 @@ interface IAnchor {
     styleUrls: ['./anchors.scss']
 })
 export class AnchorsComponent {
-
     @Input() anchors: IAnchor[] = [];
-    @Input() headerSelectors = 'h3.docs-header-link, h4.docs-header-link'; // TODO edit selector to right one
+    // TODO edit selector to the right one after content correction - there wil be no h3 after that
+    @Input() headerSelectors = 'h3.docs-header-link';
 
     click: boolean = false;
     container: string;
     headerHeight: number = 64;
-    debounceTime: number = 20;
+    // коэффициент для вычисления расстояния якоря над заголовком при скроле ( = headerHeight*anchorHeaderCoef)
+    anchorHeaderCoef = 3;
+    debounceTime: number = 5;
     private destroyed = new Subject();
     private urlFragment = '';
     private scrollContainer: any;
-    private  currentUrl: any;
+    private currentUrl: any;
+    private scrollTimeout: number = 1000;
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private element: ElementRef,
                 private ref: ChangeDetectorRef,
                 @Inject(DOCUMENT) private document: Document) {
-
         this.container = '.anchors-menu';
 
         this.router.events.pipe(takeUntil(this.destroyed)).subscribe((event) => {
             if (event instanceof NavigationEnd) {
                 const rootUrl = router.url.split('#')[0];
+
                 if (rootUrl !== this.currentUrl) {
                     this.anchors = this.createAnchors();
                     this.currentUrl = rootUrl;
@@ -51,47 +54,55 @@ export class AnchorsComponent {
             }
         });
 
+        // Срабатывает при изменении якоря в адресной строке руками или кликом по якорю
         this.route.fragment.pipe(takeUntil(this.destroyed)).subscribe((fragment) => {
             this.urlFragment = fragment;
             const target = document.getElementById(this.urlFragment);
+            const index = this.getAnchorIndex(this.urlFragment);
+
+            if (index) { this.setActiveAnchor(index); }
 
             if (target) {
                 this.click = true;
                 target.scrollIntoView();
             }
-
         });
-    }
-
-    ngAfterViewInit() {
-        this.updateScrollPosition();
     }
 
     ngOnDestroy() {
         this.destroyed.next();
     }
 
-    updateScrollPosition() {
-        this.anchors = this.createAnchors();
-        const target = document.getElementById(this.urlFragment);
-        if (target) {
-            target.scrollIntoView();
-        }
+    getAnchorIndex(urlFragment): number {
+        let index = 0;
+        this.anchors.forEach((anchor, i) => {
+            if (anchor.href === `#${urlFragment}`) { index = i; }
+        });
+
+        return index;
     }
 
     setScrollPosition() {
         this.anchors = this.createAnchors();
         const target = document.getElementById(this.urlFragment);
+
         if (target) {
+            const index = this.getAnchorIndex(this.urlFragment);
+
+            if (index) { this.setActiveAnchor(index); }
+            target.scrollTop += this.headerHeight;
             target.scrollIntoView();
         }
 
-        Promise.resolve().then(() => {
+        const scrollPromise = new Promise((resolve, reject) => {
+            setTimeout(() => { resolve(); }, this.scrollTimeout);
+        });
+
+        scrollPromise.then(() => {
             this.scrollContainer = this.document || window;
 
             if (this.scrollContainer) {
                 fromEvent(this.scrollContainer, 'scroll').pipe(
-
                     takeUntil(this.destroyed),
                     debounceTime(this.debounceTime))
                     .subscribe(() => this.onScroll());
@@ -99,6 +110,8 @@ export class AnchorsComponent {
         });
     }
 
+    /* TODO Техдолг: при изменении ширины экрана должен переопределяться параметр top
+    *   делать это по window:resize нельзя, т.к. изменение ширины контента страницы проиходит после window:resize */
     onResize() {
         const headers = Array.from(this.document.querySelectorAll(this.headerSelectors)) as HTMLElement[];
 
@@ -110,9 +123,8 @@ export class AnchorsComponent {
         this.ref.detectChanges();
     }
 
-    /** Gets the scroll offset of the scroll container */
     private getScrollOffset(): number {
-        return window.pageYOffset + this.headerHeight;
+        return window.pageYOffset + this.headerHeight * this.anchorHeaderCoef;
     }
 
     private createAnchors(): IAnchor[] {
@@ -122,7 +134,7 @@ export class AnchorsComponent {
         if (headers.length) {
             for (let i = 0; i < headers.length; i++) {
                 // remove the 'link' icon name from the inner text
-                const name = headers[i].innerText.trim().replace(/^link/, '');
+                const name = headers[i].innerText.trim();
                 const href = `#${headers[i].id}`;
                 const {top} = headers[i].getBoundingClientRect();
 
@@ -135,10 +147,13 @@ export class AnchorsComponent {
             }
         }
 
+        if (anchors.length) { anchors[0].top = this.headerHeight; }
+
         return anchors;
     }
 
     private onScroll() {
+        // Если переход на якорь был инициирован не скролом выходим из функции
         if (this.click) {
             this.click = false;
 
@@ -148,19 +163,19 @@ export class AnchorsComponent {
         for (let i = 0; i < this.anchors.length; i++) {
             this.anchors[i].active = this.isLinkActive(this.anchors[i], this.anchors[i + 1]);
         }
-
         this.ref.detectChanges();
     }
 
     private isLinkActive(currentLink: any, nextLink: any): boolean {
-        // A link is considered active if the page is scrolled passed the anchor without also
-        // being scrolled passed the next link
+        // Ссылка считается активной, если позиция скролла ниже позиции якоря + отступ (headerHeight*anchorHeaderCoef)
+        // и выше следующего за ним якоря
         const scrollOffset = this.getScrollOffset();
 
         return scrollOffset >= currentLink.top && !(nextLink && nextLink.top < scrollOffset);
     }
 
     private setActiveAnchor(index) {
+        this.click = true;
         for (const anchor of this.anchors) {
             anchor.active = false;
         }
