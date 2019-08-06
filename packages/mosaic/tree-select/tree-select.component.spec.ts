@@ -1113,10 +1113,10 @@ class BasicSelectWithoutFormsMultiple {
     selector: 'select-with-custom-trigger',
     template: `
         <mc-form-field>
-            <mc-tree-select placeholder="Food" [formControl]="control" #select="mcSelect">
-                <mc-select-trigger>
-                    {{ select.selected?.viewValue.split('').reverse().join('') }}
-                </mc-select-trigger>
+            <mc-tree-select placeholder="Food" [formControl]="control" #select="mcTreeSelect">
+                <mc-tree-select-trigger>
+                    {{ select.selected?.split('').reverse().join('') }}
+                </mc-tree-select-trigger>
                 <mc-tree-selection
                     [dataSource]="dataSource"
                     [treeControl]="treeControl">
@@ -3384,8 +3384,7 @@ describe('McTreeSelect', () => {
         }));
     });
 
-    // todo fix
-    xdescribe('with custom trigger', () => {
+    describe('with custom trigger', () => {
         beforeEach(async(() => configureMcTreeSelectTestingModule([SelectWithCustomTrigger])));
 
         it('should allow the user to customize the label', fakeAsync(() => {
@@ -3394,10 +3393,11 @@ describe('McTreeSelect', () => {
 
             fixture.componentInstance.control.setValue('pizza-1');
             fixture.detectChanges();
+            flush();
 
             const label = fixture.debugElement.query(By.css('.mc-tree-select__matcher')).nativeElement;
 
-            expect(label.textContent).toContain('azziP',
+            expect(label.textContent).toContain('1-azzip',
                 'Expected the displayed text to be "Pizza" in reverse.');
         }));
     });
