@@ -56,7 +56,7 @@ $text-color: #2f2f33;
             &_collapsed { transform: rotate(-180deg); }
         }
 
-        &:hover { background: fade-out($hover-color,.85); }
+        &:hover { background: fade-out($hover-color, 0.85); }
     }
 
     &__item {
@@ -65,16 +65,14 @@ $text-color: #2f2f33;
         color: $text-color;
         padding: 6px 32px;
 
-        &:hover { background: fade-out($hover-color,.85); }
+        &.docs-component-viewer-sidenav-item-selected,
+        &:hover { background: fade-out($hover-color, 0.85); }
 
-        &:active, &:focus { background: fade-out($hover-color,.8); }
+        &:active, &:focus { background: fade-out($hover-color, 0.8); }
 
         & > a {
             position: relative;
-            display: block;
-            color: gray;
             text-decoration: none;
-            padding: 1em;
 
             &:hover, &:active, &:focus { text-decoration: none; }
         }
