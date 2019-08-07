@@ -6,7 +6,10 @@
         </button>
         <ul class="nav__wrapper" [@bodyExpansion]="panel.expanded ? 'expanded' : 'collapsed'" >
             <li *ngFor="let component of category.items" class="nav__item">
-                {{component.name}}
+                <a [routerLink]="'/' + component.id"
+                   routerLinkActive="docs-component-viewer-sidenav-item-selected">
+                    {{component.name}}
+                </a>
             </li>
         </ul>
     </div>
