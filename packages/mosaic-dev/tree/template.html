@@ -32,7 +32,7 @@
         *mcTreeNodeDef="let node"
         [value]="node.name"
         mcTreeNodePadding>
-        {{ node.name }}
+        <span [innerHTML]="node.name | mcHighlight : treeControl.filterValue.value"></span>
     </mc-tree-option>
 
     <mc-tree-option
@@ -44,6 +44,6 @@
            [style.transform]="treeControl.isExpanded(node) ? '' : 'rotate(-90deg)'"
            mcTreeNodeToggle>
         </i>
-        {{ node.name }}: {{ node.type }}
+        <span [innerHTML]="(node.name + ':') | mcHighlight : treeControl.filterValue.value"></span>
     </mc-tree-option>
 </mc-tree-selection>

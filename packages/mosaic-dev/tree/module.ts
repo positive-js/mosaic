@@ -1,5 +1,5 @@
 /* tslint:disable:no-console no-reserved-keywords */
-import { Component, NgModule, ViewEncapsulation } from '@angular/core';
+import { Component, NgModule, Pipe, PipeTransform, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
@@ -28,6 +28,15 @@ export class FileFlatNode {
     level: number;
     expandable: boolean;
     parent: any;
+}
+
+@Pipe({ name: 'mcHighlight' })
+export class HighlightSearch implements PipeTransform {
+    transform(value: any, args: any): any {
+        if (!args) { return value; }
+
+        return value.replace(new RegExp(args, 'gi'), `<mark class="mc-founded-text">${args}</mark>`);
+    }
 }
 
 /**
@@ -169,7 +178,7 @@ export class DemoComponent {
 
 
 @NgModule({
-    declarations: [DemoComponent],
+    declarations: [DemoComponent, HighlightSearch],
     imports: [
         BrowserModule,
         FormsModule,
