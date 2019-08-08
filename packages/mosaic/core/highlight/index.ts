@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { McHighlightPipePipe } from './highlight.pipe';
+import { McHighlightPipe } from './highlight.pipe';
 
 
 @NgModule({
     imports: [CommonModule],
-    exports: [McHighlightPipePipe],
-    declarations: [McHighlightPipePipe]
+    exports: [McHighlightPipe],
+    declarations: [McHighlightPipe]
 })
 export class McHighlightModule {}

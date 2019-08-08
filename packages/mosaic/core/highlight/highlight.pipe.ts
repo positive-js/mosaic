@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 
 @Pipe({ name: 'mcHighlight' })
-export class McHighlightPipePipe implements PipeTransform {
+export class McHighlightPipe implements PipeTransform {
     transform(value: any, args: any): any {
         if (!args) { return value; }
 
