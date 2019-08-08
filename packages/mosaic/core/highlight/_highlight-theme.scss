@@ -1,0 +1,8 @@
+
+
+@mixin mc-highlight-theme($theme) {
+    .mc-highlight {
+        font-weight: bold;
+        background-color: transparent;
+    }
+}

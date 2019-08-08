@@ -33,11 +33,6 @@
             color: mc-color($foreground, disabled-text);
         }
     }
-
-    .mc-founded-text {
-        font-weight: bold;
-        background-color: transparent;
-    }
 }
 
 @mixin mc-tree-typography($config) {

@@ -33,6 +33,7 @@
 @import '../../tree/tree-theme';
 @import '../../vertical-navbar/vertical-navbar-theme';
 @import '../option/option-theme';
+@import '../highlight/highlight-theme';
 @import '../visual/panel-theme';
 
 
@@ -74,4 +75,5 @@
     @include mc-tree-select-theme($theme);
     @include mc-tree-theme($theme);
     @include mc-vertical-navbar-theme($theme);
+    @include mc-highlight-theme($theme);
 }

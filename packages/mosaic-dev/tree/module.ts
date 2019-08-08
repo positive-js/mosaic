@@ -1,10 +1,11 @@
 /* tslint:disable:no-console no-reserved-keywords */
-import { Component, NgModule, Pipe, PipeTransform, ViewEncapsulation } from '@angular/core';
+import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { FlatTreeControl } from '@ptsecurity/cdk/tree';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
+import { McHighlightModule } from '@ptsecurity/mosaic/core/highlight';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
@@ -28,15 +29,6 @@ export class FileFlatNode {
     level: number;
     expandable: boolean;
     parent: any;
-}
-
-@Pipe({ name: 'mcHighlight' })
-export class HighlightSearch implements PipeTransform {
-    transform(value: any, args: any): any {
-        if (!args) { return value; }
-
-        return value.replace(new RegExp(args, 'gi'), `<mark class="mc-founded-text">${args}</mark>`);
-    }
 }
 
 /**
@@ -178,7 +170,7 @@ export class DemoComponent {
 
 
 @NgModule({
-    declarations: [DemoComponent, HighlightSearch],
+    declarations: [DemoComponent],
     imports: [
         BrowserModule,
         FormsModule,
@@ -186,7 +178,8 @@ export class DemoComponent {
         McInputModule,
         McButtonModule,
         McTreeModule,
-        McIconModule
+        McIconModule,
+        McHighlightModule
     ],
     bootstrap: [DemoComponent]
 })
