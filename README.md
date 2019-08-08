@@ -1,5 +1,6 @@
 <p align="center">
     <img src="https://i.ibb.co/fQNPgv6/logo-png-200.png" alt="positive_js_logo" border="0">
+    <img src="https://i.ibb.co/3kB49b4/cdk.png" alt="cdk" border="0">
 </p>
 
 [![npm version](https://badge.fury.io/js/%40ptsecurity%2Fmosaic.svg)](https://badge.fury.io/js/%40ptsecurity%2Fmosaic)
@@ -21,25 +22,25 @@ Mosaic components are the building blocks of Positive Technologies applications.
 |  Edge| last 2 versions| last 2 versions| last 2 versions| last 2 versions
 
 
-## Documentation
+## 📖 Documentation
 * [Getting Started Guide][getting-started]
 * [Contributing][contributing]
 
 ## Demo
 * [Storybook](https://positive-js.github.io/mosaic-storybook/) 
 
-## Getting started
+## 🚀 Getting started
 
 Before you start, make sure you have a recent version of [NodeJS](http://nodejs.org/) environment *>=8.0* with NPM *>=5.0*.
 
 From the project folder, execute the following commands:
 
-```shell
+```bash
 $ yarn install
 ```
 
-## Running The Component
-```shell
+### Running The Component
+```bash
 $ yarn run server-dev:button
 ```
 
