@@ -1,0 +1,45 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "id": "mosaic-ng-add",
+    "title": "Mosaic ng-add schematic",
+    "type": "object",
+    "properties": {
+        "project": {
+            "type": "string",
+            "description": "Name of the project.",
+            "$default": {
+                "$source": "projectName"
+            }
+        },
+        "theme": {
+            "description": "The theme to apply",
+            "type": "string",
+            "default": "default-theme",
+            "x-prompt": {
+                "message": "Choose a prebuilt theme name, or \"custom\" for a custom theme:",
+                "type": "list",
+                "items": [
+                    {
+                        "value": "default-theme",
+                        "label": "Blue/Gray"
+                    },
+                    {
+                        "value": "dark-theme",
+                        "label": "Dark Theme"
+                    },
+                    {
+                        "value": "custom",
+                        "label": "Custom"
+                    }
+                ]
+            }
+        },
+        "animations": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether Angular browser animations should be set up.",
+            "x-prompt": "Set up browser animations for Mosaic?"
+        }
+    },
+    "required": []
+}

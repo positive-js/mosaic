@@ -33,6 +33,7 @@ module.exports = {
                 'progress-bar',
                 'progress-spinner',
                 'radio',
+                'schematics',
                 'scrolling',
                 'select',
                 'sidepanel',

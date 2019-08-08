@@ -1,0 +1,22 @@
+// This is the root config file where the schematics are defined.
+{
+    "$schema": "./node_modules/@angular-devkit/schematics/collection-schema.json",
+    "schematics": {
+        // Adds Mosaic to an application without changing any templates
+        "ng-add": {
+            "description": "Adds Mosaic to the application without affecting any templates",
+            "factory": "./ng-add/index",
+            "schema": "./ng-add/schema.json",
+            "aliases": [
+                "mosaic-shell",
+                "install"
+            ]
+        },
+        "ng-add-setup-project": {
+            "description": "Sets up the specified project after the ng-add dependencies have been installed.",
+            "private": true,
+            "factory": "./ng-add/setup-project",
+            "schema": "./ng-add/schema.json"
+        }
+    }
+}

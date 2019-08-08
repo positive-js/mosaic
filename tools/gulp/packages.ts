@@ -10,6 +10,7 @@ export const examplesPackage = new BuildPackage('mosaic-examples', [mosaicPackag
 
 mosaicPackage.exportsSecondaryEntryPointsAtRoot = true;
 mosaicPackage.sourceDir = join(buildConfig.packagesDir, 'mosaic');
+mosaicPackage.hasSchematics = true;
 
 cdkPackage.copySecondaryEntryPointStylesToRoot = true;
 cdkPackage.hasSchematics = true;
