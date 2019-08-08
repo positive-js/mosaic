@@ -41,7 +41,7 @@ import {
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { MC_TREE_OPTION_PARENT_COMPONENT, McTreeOption } from './tree-option';
+import { MC_TREE_OPTION_PARENT_COMPONENT, McTreeOption } from './tree-option.component';
 
 
 export class McTreeNavigationChange {

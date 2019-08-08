@@ -40,10 +40,9 @@
         [value]="node.name"
         mcTreeNodePadding
         [disabled]="node.name === 'Downloads'">
-        <i mc-icon="mc-angle-down-S_16"
-           [style.transform]="treeControl.isExpanded(node) ? '' : 'rotate(-90deg)'"
-           mcTreeNodeToggle>
-        </i>
+
+        <mc-tree-node-toggle [node]="node"></mc-tree-node-toggle>
+
         <span [innerHTML]="(node.name + ':') | mcHighlight : treeControl.filterValue.value"></span>
     </mc-tree-option>
 </mc-tree-selection>

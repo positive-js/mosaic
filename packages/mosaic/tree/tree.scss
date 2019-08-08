@@ -38,14 +38,20 @@ $mc-tree-node-padding: 16px;
     }
 }
 
-.mc-icon-rotate_90 {
-    transform: rotate(90deg);
-}
+.mc-tree-node-toggle {
+    margin-right: 4px;
 
-.mc-icon-rotate_180 {
-    transform: rotate(180deg);
-}
+    & .mc-icon {
+        transform: rotate(-90deg);
+    }
 
-.mc-icon-rotate_270 {
-    transform: rotate(270deg);
+    &.mc-opened {
+        & .mc-icon {
+            transform: rotate(0);
+        }
+    }
+
+    &.mc-disabled {
+        cursor: default;
+    }
 }
