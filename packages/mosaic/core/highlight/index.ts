@@ -10,3 +10,6 @@ import { McHighlightPipe } from './highlight.pipe';
     declarations: [McHighlightPipe]
 })
 export class McHighlightModule {}
+
+
+export * from './highlight.pipe';
