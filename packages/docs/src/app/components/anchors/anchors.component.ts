@@ -21,13 +21,12 @@ interface IAnchor {
 })
 export class AnchorsComponent {
     @Input() anchors: IAnchor[] = [];
-    // TODO edit selector to the right one after content correction - there wil be no h3 after that
-    @Input() headerSelectors = 'h3.docs-header-link';
+    @Input() headerSelectors = '.docs-header-link_3';
 
     click: boolean = false;
     container: string;
     headerHeight: number = 64;
-    // коэффициент для вычисления расстояния якоря над заголовком при скроле ( = headerHeight*anchorHeaderCoef)
+    // коэффициент для вычисления расстояния якоря над заголовком при скроле (== headerHeight * anchorHeaderCoef)
     anchorHeaderCoef = 3;
     debounceTime: number = 5;
     private destroyed = new Subject();

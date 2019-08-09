@@ -9,6 +9,9 @@
 @import "~@ptsecurity/mosaic-icons/dist/styles/mc-icons.css";
 @import 'app/components/navbar/navbar-theme';
 @import 'app/components/footer/footer-theme';
+@import 'app/components/component-viewer/component-overview-theme';
+@import 'app/shared/stackblitz/stackblitz-button-theme';
+@import 'app/shared/example-viewer/example-viewer-theme';
 
 $primary: mc-palette($mc-blue, 400, 500, 600);
 $second: mc-palette($mc-grey, 100, 300, 400);
@@ -37,3 +40,15 @@ $config: mc-typography-config();
 @include mc-footer-theme($theme);
 
 @include mc-footer-typography($config);
+
+@include mc-component-viewer-theme($theme);
+
+@include docs-markdown-theme($theme);
+
+@include docs-markdown-typography($config);
+
+@include docs-stackblitz-theme($theme);
+
+@include docs-stackblitz-typography($config);
+
+@include example-viewer-theme($theme);
