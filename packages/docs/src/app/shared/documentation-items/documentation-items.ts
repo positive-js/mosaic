@@ -129,20 +129,6 @@ const DOCS: { [key: string]: DocCategory[] } = {
                     examples: ['button-types']
                 }
             ]
-        },
-        {
-            id: 'modals',
-            name: 'Popups & Modals',
-            summary: 'Floating components that can be dynamically shown or hidden.',
-            items: [
-            ]
-        },
-        {
-            id: 'tables',
-            name: 'Data table',
-            summary: 'Tools for displaying and interacting with tabular data.',
-            items: [
-            ]
         }
     ],
     [CDK]: [
