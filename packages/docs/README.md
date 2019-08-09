@@ -12,10 +12,13 @@ yarn run build:docs
 
 
 ## Development Server
-Start dev server documentation (aka ng serve)
+Start ng server documentation
 
 ```bash
 yarn run docs:start 
 ```
 
-open http://localhost:4200/
+Open
+```
+http://localhost:4200/
+```
