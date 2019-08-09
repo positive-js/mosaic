@@ -49,6 +49,9 @@ const MARKDOWN_TAGS_TO_CLASS_ALIAS = [
     'code'
 ];
 
+const CLASS_PREFIX: string = 'docs-markdown';
+const tagNameStringAliaser = createTagNameStringAliaser(CLASS_PREFIX);
+
 // Options for the html-minifier that minifies the generated HTML files.
 const htmlMinifierOptions = {
     collapseWhitespace: true,
@@ -95,13 +98,13 @@ task('markdown-docs-mosaic', () => {
             const escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
 
             return `
-        <h${level} id="${escapedText}" class="docs-header-link">
+        <div id="${escapedText}" class="docs-header-link docs-header-link_${level}">
           <span header-link="${escapedText}"></span>
           ${text}
-        </h${level}>
+        </div>
       `;
         } else {
-            return `<h${level}>${text}</h${level}>`;
+            return `<div class="docs-header-link docs-header-link_${level}">${text}</div>`;
         }
     };
 
@@ -156,6 +159,7 @@ task('docs', series(
 /** Updates the markdown file's content to work inside of the docs app. */
 function transformMarkdownFiles(buffer: Buffer, file: any): string {
     let content = buffer.toString('utf-8');
+    content = tagNameStringAliaser(content);
 
     // Replace <!-- example(..) --> comments with HTML elements.
     content = content.replace(EXAMPLE_PATTERN, (_match: string, name: string) =>
@@ -203,5 +207,20 @@ function createTagNameAliaser(classPrefix: string) {
         });
 
         return this;
+    };
+}
+
+function createTagNameStringAliaser(classPrefix: string) {
+    return (content: string) => {
+        let str = content;
+
+        MARKDOWN_TAGS_TO_CLASS_ALIAS.forEach((tag) => {
+            const regex = new RegExp(`<${tag}`, 'g');
+            str = str.replace(regex, (_match: string) =>
+                `<${tag} class="${classPrefix}__${tag}"`
+            );
+        });
+
+        return str;
     };
 }
