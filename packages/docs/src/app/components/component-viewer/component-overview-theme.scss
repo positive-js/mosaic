@@ -1,0 +1,7 @@
+@mixin mc-component-viewer-theme($theme) {
+    $second: map-get($theme, second);
+
+    .title{
+        color: map-get($second, 700);
+    }
+}

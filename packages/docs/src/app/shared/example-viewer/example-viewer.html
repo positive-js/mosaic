@@ -1,16 +1,12 @@
-<div class="docs-example-viewer-wrapper">
-    <div class="docs-example-viewer-title">
-        <div class="docs-example-viewer-title-spacer">{{exampleData?.title}}</div>
-
-        <button type="button" (click)="toggleSourceView()">
-            SourceView button
-        </button>
-
-
-        <stackblitz-button [example]="example"></stackblitz-button>
+<div class="docs-example-viewer__wrapper">
+    <div class="docs-example-viewer__example">
+        <div class="docs-example-viewer-body">
+            <ng-template [cdkPortalOutlet]="selectedPortal"></ng-template>
+        </div>
     </div>
 
-    <div class="docs-example-viewer-source" *ngIf="showSource">
+    <div class="docs-example-viewer__source" >
+        <stackblitz-button [example]="example"></stackblitz-button>
         <mc-tab-group mc-light-tabs>
             <mc-tab *ngFor="let tabName of getExampleTabNames()" [label]="tabName">
                 <div class="docs-example-source-wrapper">
@@ -20,9 +16,5 @@
                 </div>
             </mc-tab>
         </mc-tab-group>
-    </div>
-
-    <div class="docs-example-viewer-body">
-        <ng-template [cdkPortalOutlet]="selectedPortal"></ng-template>
     </div>
 </div>
