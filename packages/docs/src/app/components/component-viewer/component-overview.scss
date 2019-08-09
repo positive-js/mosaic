@@ -1,3 +1,14 @@
-.capitalize {
+.title{
     text-transform: capitalize;
+}
+
+.docs-header-link {
+    padding-top: 20px;
+}
+
+.docs-markdown {
+    &__p {
+        margin: 0;
+        padding-top: 8px;
+    }
 }
