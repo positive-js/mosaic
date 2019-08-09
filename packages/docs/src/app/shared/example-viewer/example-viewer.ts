@@ -58,7 +58,7 @@ export class ExampleViewer {
     }
 
     private resolveHighlightedExampleFile(fileName: string) {
-        return `/docs-content/examples-highlighted/${fileName}`;
+        return `docs-content/examples-highlighted/${fileName}`;
     }
 
     private generateExampleTabs() {
