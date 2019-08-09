@@ -10,13 +10,13 @@
         "url": "https://github.com/positive-js/mosaic.git"
     },
     "engines": {
-        "node": ">= 8",
-        "npm": ">=5"
+        "node": ">= 10",
+        "npm": ">=6"
     },
     "requiredAngularVersion": ">=8.0.0",
     "dependencies": {
         "@angular/animations": "^8.0.0",
-        "@angular/cdk": "^8.0.1",
+        "@angular/cdk": "^8.1.2",
         "@angular/common": "^8.0.0",
         "@angular/compiler": "^8.0.0",
         "@angular/core": "^8.0.0",
@@ -33,6 +33,7 @@
         "zone.js": "~0.9.1"
     },
     "devDependencies": {
+        "@angular-devkit/build-angular": "~0.802.1",
         "@angular-devkit/core": "^8.0.1",
         "@angular-devkit/schematics": "^8.0.1",
         "@angular/compiler-cli": "^8.0.0",
@@ -64,8 +65,8 @@
         "browser-sync": "^2.26.3",
         "chalk": "^2.4.1",
         "conventional-changelog": "^3.0.5",
-        "dgeni": "^0.4.10",
-        "dgeni-packages": "^0.26.12",
+        "dgeni": "^0.4.12",
+        "dgeni-packages": "^0.28.1",
         "dotenv": "^6.2.0",
         "fs-extra": "^5.0.0",
         "glob": "^7.1.3",
@@ -126,15 +127,15 @@
         "ts-node": "4.1.0",
         "tsconfig-paths": "^3.7.0",
         "tsconfig-paths-webpack-plugin": "^3.2.0",
-        "tslint": "^5.15.0",
+        "tslint": "^5.18.0",
         "typescript": "~3.4.x",
         "typescript-tslint-plugin": "^0.2.0",
         "uglify-js": "^2.8.29",
         "url-loader": "^1.1.2",
         "wallaby-webpack": "^3.9.13",
-        "webpack": "^4.27.0",
-        "webpack-cli": "^3.1.2",
-        "webpack-dev-server": "^3.1.9"
+        "webpack": "^4.39.1",
+        "webpack-cli": "^3.3.6",
+        "webpack-dev-server": "^3.7.2"
     },
     "scripts": {
         "serve:dev-app": "gulp serve:devapp",

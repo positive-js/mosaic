@@ -70,8 +70,8 @@ export class McTooltipComponent {
     positions: ConnectionPositionPair[] = [ ...DEFAULT_4_POSITIONS ];
     classMap = {};
     isTitleString: boolean;
-    showTid: number;
-    hideTid: number;
+    showTid: any;
+    hideTid: any;
     availablePositions: any;
     $visible: Observable<boolean>;
 

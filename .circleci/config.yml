@@ -2,7 +2,7 @@
 # http://yaml-online-parser.appspot.com/
 
 var_1: &default_docker_image circleci/node:10.12-browsers
-var_2: &cache_key mosaic-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}-0.5.0
+var_2: &cache_key mosaic-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}-0.6.0
 
 var_3: &job_defaults
     working_directory: ~/mosaic
