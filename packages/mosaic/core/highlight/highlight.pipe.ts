@@ -6,6 +6,6 @@ export class McHighlightPipe implements PipeTransform {
     transform(value: any, args: any): any {
         if (!args) { return value; }
 
-        return value.replace(new RegExp(args, 'gi'), `<mark class="mc-highlight">${args}</mark>`);
+        return value.replace(new RegExp(`(${args})`, 'gi'), '<mark class="mc-highlight">$1</mark>');
     }
 }

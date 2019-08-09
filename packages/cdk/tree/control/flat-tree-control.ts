@@ -55,14 +55,15 @@ export class FlatTreeControl<T> extends BaseTreeControl<T> {
         }
     }
 
-    compareFunction(node: any, value: string): boolean {
-        return node.name.includes(value);
+    compareFunction(name: string, value: string): boolean {
+        return RegExp(value, 'gi').test(name);
     }
 
     filterNodes(value: string): void {
         this.filterModel.clear();
 
-        const filteredNodes = this.dataNodes.filter((node: any) => this.compareFunction(node, value));
+        // todo нет возможности управлять параметром имени 'node.name'
+        const filteredNodes = this.dataNodes.filter((node: any) => this.compareFunction(node.name, value));
 
         const filteredNodesWithTheirParents = new Set();
         filteredNodes.forEach((filteredNode) => {
