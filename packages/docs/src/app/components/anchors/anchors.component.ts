@@ -21,20 +21,22 @@ interface IAnchor {
 })
 export class AnchorsComponent {
     @Input() anchors: IAnchor[] = [];
-    // TODO edit selector to the right one after content correction - there wil be no h3 after that
-    @Input() headerSelectors = 'h3.docs-header-link';
+    @Input() headerSelectors = '.docs-header-link_3';
 
     click: boolean = false;
     container: string;
     headerHeight: number = 64;
-    // коэффициент для вычисления расстояния якоря над заголовком при скроле ( = headerHeight*anchorHeaderCoef)
+    // коэффициент для вычисления расстояния якоря над заголовком при скроле (== headerHeight * anchorHeaderCoef)
     anchorHeaderCoef = 3;
     debounceTime: number = 5;
+    readonly isSmoothScrollSupported;
     private destroyed = new Subject();
     private urlFragment = '';
     private scrollContainer: any;
     private currentUrl: any;
     private scrollTimeout: number = 1000;
+    private scrolling = false;
+    private scrollOptions: ScrollIntoViewOptions = { behavior: 'smooth' };
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
@@ -42,7 +44,7 @@ export class AnchorsComponent {
                 private ref: ChangeDetectorRef,
                 @Inject(DOCUMENT) private document: Document) {
         this.container = '.anchors-menu';
-
+        this.isSmoothScrollSupported  = 'scrollBehavior' in this.document.documentElement.style;
         this.router.events.pipe(takeUntil(this.destroyed)).subscribe((event) => {
             if (event instanceof NavigationEnd) {
                 const rootUrl = router.url.split('#')[0];
@@ -57,20 +59,34 @@ export class AnchorsComponent {
         // Срабатывает при изменении якоря в адресной строке руками или кликом по якорю
         this.route.fragment.pipe(takeUntil(this.destroyed)).subscribe((fragment) => {
             this.urlFragment = fragment;
-            const target = document.getElementById(this.urlFragment);
+            const anchorActive = this.document.querySelector('.anchors-menu__list-element_active');
+
+            const target = this.document.getElementById(this.urlFragment);
             const index = this.getAnchorIndex(this.urlFragment);
 
             if (index) { this.setActiveAnchor(index); }
 
             if (target) {
                 this.click = true;
-                target.scrollIntoView();
+
+                if (anchorActive && this.urlFragment === anchorActive.textContent.trim().toLowerCase()) {
+                    return;
+                }
+                this.scrollTo(target);
             }
         });
     }
 
     ngOnDestroy() {
         this.destroyed.next();
+    }
+
+    scrollTo(target) {
+        if (this.isSmoothScrollSupported) {
+            target.scrollIntoView(this.scrollOptions);
+        } else {
+            target.scrollIntoView();
+        }
     }
 
     getAnchorIndex(urlFragment): number {
@@ -84,14 +100,14 @@ export class AnchorsComponent {
 
     setScrollPosition() {
         this.anchors = this.createAnchors();
-        const target = document.getElementById(this.urlFragment);
+        const target = this.document.getElementById(this.urlFragment);
 
         if (target) {
             const index = this.getAnchorIndex(this.urlFragment);
 
             if (index) { this.setActiveAnchor(index); }
             target.scrollTop += this.headerHeight;
-            target.scrollIntoView();
+            this.scrollTo(target);
         }
 
         const scrollPromise = new Promise((resolve, reject) => {
@@ -155,7 +171,7 @@ export class AnchorsComponent {
     private onScroll() {
         // Если переход на якорь был инициирован не скролом выходим из функции
         if (this.click) {
-            this.click = false;
+            this.disableClickState();
 
             return;
         }
@@ -181,5 +197,13 @@ export class AnchorsComponent {
         }
         this.anchors[index].active = true;
         this.ref.detectChanges();
+    }
+
+    private disableClickState() {
+        // При клике по якорю браузер вызывает scroll несколько раз - setTimeout нужен, чтобы код отработал единожды
+        // Возможная альтернатива: debounceTime: number = 50; - но это ухудшает отзывчивость якорей при скролле
+        setTimeout(() => {
+            this.click = false;
+        }, 500);
     }
 }
