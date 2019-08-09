@@ -105,14 +105,13 @@ export const DATA_OBJECT = {
 })
 export class DemoComponent {
     treeControl: FlatTreeControl<FileFlatNode>;
-    dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
     treeFlattener: McTreeFlattener<FileNode, FileFlatNode>;
+
+    dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
     filterValue: string = '';
 
     modelValue: any[] = ['rootNode_1', 'Documents', 'Calendar', 'Chrome'];
-
-    treeDataObject: FileNode[];
 
     constructor() {
         this.treeFlattener = new McTreeFlattener(
@@ -122,7 +121,7 @@ export class DemoComponent {
         this.treeControl = new FlatTreeControl<FileFlatNode>(this.getLevel, this.isExpandable);
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-        this.dataSource.data = this.treeDataObject = buildFileTree(DATA_OBJECT, 0);
+        this.dataSource.data = buildFileTree(DATA_OBJECT, 0);
     }
 
     onFilterChange(value): void {
