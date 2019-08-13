@@ -35,11 +35,7 @@ import {
 import { CdkTree, CdkTreeNodeOutlet } from '@ptsecurity/cdk/tree';
 import {
     CanDisable,
-    CanDisableCtor,
     HasTabIndex,
-    HasTabIndexCtor,
-    mixinDisabled,
-    mixinTabIndex,
     toBoolean
 } from '@ptsecurity/mosaic/core';
 import { Subject } from 'rxjs';
@@ -58,16 +54,6 @@ export class McTreeNavigationChange {
 export class McTreeSelectionChange {
     constructor(public source: McTreeSelection, public option: McTreeOption) {}
 }
-
-class McTreeSelectionBase<T> extends CdkTree<T> {
-    constructor(differs: IterableDiffers, changeDetectorRef: ChangeDetectorRef) {
-        super(differs, changeDetectorRef);
-    }
-}
-
-/* tslint:disable-next-line:naming-convention */
-const McTreeSelectionBaseMixin: HasTabIndexCtor & CanDisableCtor &
-    typeof McTreeSelectionBase = mixinTabIndex(mixinDisabled(McTreeSelectionBase));
 
 
 @Component({
@@ -90,7 +76,7 @@ const McTreeSelectionBaseMixin: HasTabIndexCtor & CanDisableCtor &
         { provide: CdkTree, useExisting: McTreeSelection }
     ]
 })
-export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
+export class McTreeSelection extends CdkTree<any>
     implements ControlValueAccessor, AfterContentInit, CanDisable, HasTabIndex {
 
     @ViewChild(CdkTreeNodeOutlet, { static: true }) nodeOutlet: CdkTreeNodeOutlet;
@@ -101,7 +87,6 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
 
     selectionModel: SelectionModel<any>;
 
-    tabIndex: number;
     multiple: boolean;
     autoSelect: boolean;
     noUnselectLastSelected: boolean;
@@ -133,6 +118,17 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
 
     private _disabled: boolean = false;
 
+    @Input()
+    get tabIndex(): number {
+        return this.disabled ? -1 : this._tabIndex;
+    }
+
+    set tabIndex(value: number) {
+        this._tabIndex = value != null ? value : 0;
+    }
+
+    private _tabIndex: number;
+
     private readonly destroy = new Subject<void>();
 
     constructor(
@@ -140,7 +136,6 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
         differs: IterableDiffers,
         changeDetectorRef: ChangeDetectorRef,
         @Self() @Optional() public ngControl: NgControl,
-        @Attribute('tabindex') tabIndex: string,
         @Attribute('multiple') multiple: string,
         @Attribute('auto-select') autoSelect: string,
         @Attribute('no-unselect') noUnselect: string
@@ -152,8 +147,6 @@ export class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption>
             // the `providers` to avoid running into a circular import.
             this.ngControl.valueAccessor = this;
         }
-
-        this.tabIndex = parseInt(tabIndex) || 0;
 
         this.multiple = multiple === null ? false : toBoolean(multiple);
         this.autoSelect = autoSelect === null ? true : toBoolean(autoSelect);
