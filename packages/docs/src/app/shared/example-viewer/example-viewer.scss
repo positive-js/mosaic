@@ -1,12 +1,45 @@
 :host {
     display: block;
-    padding: 20px 0;
+    padding: 20px 0 0;
 }
 
 .docs-example-viewer-wrapper {
     h3 {
         margin-top: 10px;
     }
+}
+
+.docs-example-viewer__source_hidden {
+    .docs-example-source-wrapper {
+        max-height: 211px;
+        overflow-y: hidden;
+    }
+}
+
+.docs-example-source-shadow {
+    position: absolute;
+    bottom: 0;
+    margin: 0;
+    left: 0;
+    height: 44px;
+    width: 100%;
+    background: linear-gradient(0deg, rgba(234,236,241,1) 0%, rgba(234,236,241,0.5) 50%, rgba(234,236,241,0) 100%);
+}
+
+.docs-example-source__show {
+    text-align: center;
+    padding: 8px;
+}
+
+.docs-example-source__hide {
+    display: none;
+}
+
+.docs-example-source_copy {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 2px 6px;
 }
 
 .docs-example-viewer-title {
@@ -28,7 +61,7 @@
 }
 
 .docs-example-source-wrapper {
-    background-color: #eaedf1;
+    display: flex;
 }
 
 .docs-example-source-wrapper:hover {
@@ -37,8 +70,24 @@
     }
 }
 
+.docs-example-numbers {
+    $color: #eaedf1;
+    background-color: fade_out($color, 0.5);
+    color: #8c949e;
+    text-align: right;
+    width: 44px;
+    padding: 12px 8px;
+    margin: 0;
+}
+
 .docs-example-source {
-    padding: 10px 30px 10px 30px;
+    position: relative;
+    background-color: #eaedf1;
+    overflow-y: hidden;
+    display: flex;
+    margin: 0;
+    flex-grow: 1;
+    padding: 12px;
     min-height: 150px;
 }
 
