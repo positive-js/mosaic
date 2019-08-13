@@ -25,7 +25,7 @@ export class ExampleViewer {
 
     /** Whether the source for the example is being displayed. */
     showSource = false;
-
+    numbers = '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n';
     /** String key of the currently displayed example. */
     @Input()
     get example() {
@@ -49,12 +49,32 @@ export class ExampleViewer {
     constructor(private copier: CopierService) {
     }
 
+    setNumbers() {
+        const length = document.querySelector('.docs-example-source').textContent.match(/\n/g).length + 1;
+        this.numbers = '';
+        for (let i = 1; i <= length; i++) {
+            this.numbers += `${i}\n`;
+        }
+    }
+
     toggleSourceView(): void {
         this.showSource = !this.showSource;
     }
 
     getExampleTabNames() {
         return Object.keys(this.exampleTabs);
+    }
+
+    copyCode(event): void {
+        const code = event.target.parentNode.parentNode;
+        // event.target.parentNode.parentNode.select();
+        const range = document.createRange();
+        range.selectNodeContents(code);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        document.execCommand('copy');
+        sel.removeAllRanges();
     }
 
     private resolveHighlightedExampleFile(fileName: string) {

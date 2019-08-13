@@ -5,16 +5,36 @@
         </div>
     </div>
 
-    <div class="docs-example-viewer__source" >
+    <div [class.docs-example-viewer__source]="true"
+         [class.docs-example-viewer__source_hidden]="!showSource">
         <stackblitz-button [example]="example"></stackblitz-button>
-        <mc-tab-group mc-light-tabs>
+        <mc-tab-group mc-light-tabs (selectedTabChange)="setNumbers()">
             <mc-tab *ngFor="let tabName of getExampleTabNames()" [label]="tabName">
                 <div class="docs-example-source-wrapper">
+                    <pre class="docs-example-numbers">{{numbers}}</pre>
                     <pre class="docs-example-source">
+                        <span class="docs-example-source_copy"><i class="mc mc-copy_16" (click)="copyCode($event)"></i></span>
                         <doc-viewer #viewer [documentUrl]="exampleTabs[tabName]"></doc-viewer>
+                        <div class="docs-example-source-shadow"></div>
                     </pre>
                 </div>
             </mc-tab>
         </mc-tab-group>
+        <div  [class.docs-example-source__show]="true"
+              [class.docs-example-source__hide]="showSource">
+            <span class="mc-link mc-link_underlined" (click)="toggleSourceView()"
+               [ngClass]="{'mc-active' : active, 'mc-focused': focus}">
+                <span class="mc-link__text">Показать полностью</span>
+                <i class="mc mc-angle-down-M_16"></i>
+            </span>
+        </div>
+        <div [class.docs-example-source__show]="true"
+             [class.docs-example-source__hide]="!showSource">
+            <span class="mc-link mc-link_underlined" (click)="toggleSourceView()"
+               [ngClass]="{'mc-active' : active, 'mc-focused': focus}">
+                <span class="mc-link__text">Свернуть</span>
+                <i class="mc mc-angle-up-M_16"></i>
+            </span>
+        </div>
     </div>
 </div>
