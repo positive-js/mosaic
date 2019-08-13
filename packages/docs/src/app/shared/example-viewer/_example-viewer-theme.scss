@@ -4,6 +4,9 @@
     $warn: map-get($theme, warn);
     $background: map-get($theme, background);
     $foreground: map-get($theme, foreground);
+    $is-dark: map-get($theme, is-dark);
+    $color: mc-color($primary);
+    $color_hover: mc-color($primary, if($is-dark, lighter, darker));
 
     example-viewer {
         .docs-example-viewer-wrapper {
@@ -34,6 +37,23 @@
 
         .docs-example-viewer-body {
             border: 1px solid mc-color($foreground, divider);
+        }
+
+        .docs-example-source_copy {
+            color: $color;
+
+            &:focus {
+                outline: none;
+            }
+
+            &:visited {
+                color: $color;
+            }
+
+            &:hover {
+                color: $color_hover;
+            }
+
         }
     }
 }
