@@ -148,6 +148,7 @@
         "build:cdk": "gulp cdk:build-release",
         "build:mosaic-moment-adapter": "gulp mosaic-moment-adapter:build-release",
         "build:mosaic": "gulp mosaic:build-release",
+        "build:mosaic-examples": "gulp mosaic-examples:build-release",
         "build:docs": "gulp docs",
         "changelog": "ts-node --project tools/release tools/release/changelog.ts",
         "ng": "ng",
