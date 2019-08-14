@@ -38,6 +38,7 @@
         "@angular-devkit/core": "^8.2.1",
         "@angular-devkit/schematics": "^8.2.1",
         "@angular/compiler-cli": "^8.2.2",
+        "@angular/cli": "^8.2.1",
         "@angular/platform-browser-dynamic": "^8.2.2",
         "@angular/platform-server": "^8.2.2",
         "@angular/router": "^8.2.2",
