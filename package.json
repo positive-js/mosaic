@@ -128,7 +128,7 @@
         "tsconfig-paths": "^3.7.0",
         "tsconfig-paths-webpack-plugin": "^3.2.0",
         "tslint": "^5.18.0",
-        "typescript": "~3.5.3",
+        "typescript": "~3.4.5",
         "typescript-tslint-plugin": "^0.2.0",
         "uglify-js": "^2.8.29",
         "url-loader": "^1.1.2",
