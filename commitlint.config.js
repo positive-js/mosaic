@@ -36,6 +36,7 @@ module.exports = {
                 'schematics',
                 'scrolling',
                 'select',
+                'security',
                 'sidepanel',
                 'splitter',
                 'tabs',
