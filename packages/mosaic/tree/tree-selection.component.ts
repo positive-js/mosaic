@@ -321,7 +321,11 @@ export class McTreeSelection extends CdkTree<any>
 
                     arrayOfInstances.push(nodeData.instance as never);
 
-                    setTimeout(() => nodeData.instance.changeDetectorRef.detectChanges());
+                    setTimeout(() => {
+                        if (!nodeData.instance.changeDetectorRef.destroyed) {
+                            nodeData.instance.changeDetectorRef.detectChanges();
+                        }
+                    });
                 }
             });
         });
