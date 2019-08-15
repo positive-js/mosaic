@@ -44,11 +44,15 @@ export abstract class BaseTreeControl<T> implements TreeControl<T> {
 
     /** Expands one single data node. */
     expand(dataNode: T): void {
+        if (this.filterValue.value) { return; }
+
         this.expansionModel.select(dataNode);
     }
 
     /** Collapses one single data node. */
     collapse(dataNode: T): void {
+        if (this.filterValue.value) { return; }
+
         this.expansionModel.deselect(dataNode);
     }
 
