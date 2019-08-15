@@ -2,7 +2,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FlatTreeControl } from '@ptsecurity/cdk/tree';
-import { BehaviorSubject } from 'rxjs';
 
 import {
     McTreeSelection,
@@ -159,30 +158,71 @@ describe('McTreeSelection', () => {
                 );
             });
         });
+
+        describe('should initialize', () => {
+            let fixture: ComponentFixture<FiltrationMcTreeApp>;
+            let component: FiltrationMcTreeApp;
+
+            beforeEach(() => {
+                configureMatTreeTestingModule([FiltrationMcTreeApp]);
+                fixture = TestBed.createComponent(FiltrationMcTreeApp);
+
+                component = fixture.componentInstance;
+                treeElement = fixture.nativeElement.querySelector('.mc-tree-selection');
+
+                fixture.detectChanges();
+            });
+
+            it('should filter nodes by condition', () => {
+                let nodes = getNodes(treeElement);
+                expect(nodes.length).toBe(5);
+
+                component.treeControl.filterNodes('Pictures');
+                nodes = getNodes(treeElement);
+                expect(nodes.length).toBe(3);
+
+                component.treeControl.filterNodes('Documents');
+                fixture.detectChanges();
+                nodes = getNodes(treeElement);
+                expect(nodes.length).toBe(1);
+
+                component.treeControl.filterNodes('condition for filter all nodes');
+                nodes = getNodes(treeElement);
+                expect(nodes.length).toBe(0);
+            });
+
+            it('should filter nodes and but not their parents', () => {
+                let nodes = getNodes(treeElement);
+                expect(nodes.length).toBe(5);
+
+                component.treeControl.filterNodes('Sun');
+                nodes = getNodes(treeElement);
+
+                const parentOfFoundedNode = nodes[0].textContent!.trim();
+                expect(parentOfFoundedNode).toBe('Pictures');
+
+                const foundedNode = nodes[1].textContent!.trim();
+                expect(foundedNode).toBe('Sun');
+
+                expect(nodes.length).toBe(2);
+            });
+
+            it('should delete filtration with empty condition', () => {
+                let nodes = getNodes(treeElement);
+                expect(nodes.length).toBe(5);
+
+                component.treeControl.filterNodes('Pictures');
+                nodes = getNodes(treeElement);
+                expect(nodes.length).toBe(3);
+
+                component.treeControl.filterNodes('');
+                nodes = getNodes(treeElement);
+                expect(nodes.length).toBe(5);
+            });
+        });
     });
 });
 
-export class TestData {
-    pizzaTopping: string;
-    pizzaCheese: string;
-    pizzaBase: string;
-    level: number;
-    children: TestData[];
-    observableChildren: BehaviorSubject<TestData[]>;
-    isSpecial: boolean;
-
-    constructor(
-        pizzaTopping: string, pizzaCheese: string, pizzaBase: string, children: TestData[] = [],
-        isSpecial: boolean = false
-    ) {
-        this.pizzaTopping = pizzaTopping;
-        this.pizzaCheese = pizzaCheese;
-        this.pizzaBase = pizzaBase;
-        this.isSpecial = isSpecial;
-        this.children = children;
-        this.observableChildren = new BehaviorSubject<TestData[]>(this.children);
-    }
-}
 
 export const DATA_OBJECT = {
     rootNode_1: 'app',
@@ -471,4 +511,64 @@ class WhenNodeMcTreeApp {
     }
 
     isSpecial = (_: number, node: FileFlatNode) => node.isSpecial;
+}
+
+@Component({
+    template: `
+        <mc-tree-selection
+            [dataSource]="dataSource"
+            [treeControl]="treeControl">
+
+            <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+                {{ node.name }}
+            </mc-tree-option>
+
+            <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+                {{ node.name }}
+            </mc-tree-option>
+        </mc-tree-selection>
+    `
+})
+class FiltrationMcTreeApp {
+    treeControl: FlatTreeControl<FileFlatNode>;
+    treeFlattener: McTreeFlattener<FileNode, FileFlatNode>;
+
+    dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
+
+    treeData: FileNode[];
+
+    @ViewChild(McTreeSelection, { static: false }) tree: McTreeSelection;
+
+    constructor() {
+        this.treeFlattener = new McTreeFlattener<FileNode, FileFlatNode>(
+            this.transformer, this.getLevel, this.isExpandable, this.getChildren
+        );
+
+        this.treeControl = new FlatTreeControl(this.getLevel, this.isExpandable);
+        this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
+
+        this.dataSource.data = this.treeData = buildFileTree(DATA_OBJECT, 0);
+    }
+
+    getLevel = (node: FileFlatNode) => node.level;
+
+    isExpandable = (node: FileFlatNode) => node.expandable;
+
+    getChildren = (node: FileNode) => node.children;
+
+    transformer = (node: FileNode, level: number, parent: any) => {
+        const flatNode = new FileFlatNode();
+
+        flatNode.name = node.name;
+        flatNode.parent = parent;
+        flatNode.type = node.type;
+        flatNode.level = level;
+        flatNode.expandable = !!node.children;
+
+        return flatNode;
+    }
+
+    hasChild(_: number, nodeData: FileFlatNode) {
+        return nodeData.expandable;
+    }
 }
