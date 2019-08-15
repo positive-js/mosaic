@@ -34,8 +34,8 @@ export class AnchorsComponent {
     private urlFragment = '';
     private scrollContainer: any;
     private currentUrl: any;
+    private pathName: string;
     private scrollTimeout: number = 1000;
-    private scrolling = false;
     private scrollOptions: ScrollIntoViewOptions = { behavior: 'smooth' };
 
     constructor(private router: Router,
@@ -52,6 +52,7 @@ export class AnchorsComponent {
                 if (rootUrl !== this.currentUrl) {
                     this.anchors = this.createAnchors();
                     this.currentUrl = rootUrl;
+                    this.pathName = location.pathname;
                 }
             }
         });
