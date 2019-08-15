@@ -4,7 +4,7 @@
             <div *ngFor="let anchor of anchors; let i = index"
                  [class.anchors-menu__list-element]="true"
                  [class.anchors-menu__list-element_active]="anchors[i].active">
-                <a [href]="anchor.href" (click)="setActiveAnchor(i)">{{anchor.name}}</a>
+                <a [href]="this.pathName + anchor.href" (click)="setActiveAnchor(i)">{{anchor.name}}</a>
             </div>
         </div>
     </div>
