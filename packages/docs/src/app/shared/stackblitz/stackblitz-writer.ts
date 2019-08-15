@@ -19,7 +19,7 @@ const COPYRIGHT =
  */
 const DOCS_CONTENT_PATH = 'docs-content/examples-source/';
 
-const TEMPLATE_PATH = '/assets/stackblitz/';
+const TEMPLATE_PATH = 'assets/stackblitz/';
 const TEMPLATE_FILES = [
     'index.html',
     'styles.css',
