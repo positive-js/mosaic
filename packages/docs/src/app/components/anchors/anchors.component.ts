@@ -144,6 +144,7 @@ export class AnchorsComponent {
     }
 
     private createAnchors(): IAnchor[] {
+
         const anchors = [];
         const headers = Array.from(this.document.querySelectorAll(this.headerSelectors)) as HTMLElement[];
 
