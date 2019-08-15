@@ -1,0 +1,18 @@
+@import '../../mosaic/core/visual/prebuilt/default-visual';
+
+@import '../../mosaic/core/theming/prebuilt/default-theme';
+//@import '../../mosaic/core/theming/prebuilt/dark-theme';
+
+ru-locale,
+en-locale {
+    display: block;
+}
+
+table {
+    tr {
+        td {
+            width: 150px;
+        }
+    }
+}
+
