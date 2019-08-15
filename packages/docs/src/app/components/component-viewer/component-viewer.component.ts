@@ -60,10 +60,3 @@ export class ComponentOverviewComponent {
         }
     }
 }
-
-@Component({
-    selector: 'component-api',
-    templateUrl: './component-api.template.html',
-    encapsulation: ViewEncapsulation.None
-})
-export class ComponentApiComponent extends ComponentOverviewComponent {}

@@ -10,7 +10,6 @@ import { AnchorsModule } from '../anchors/anchors.module';
 
 
 import {
-    ComponentApiComponent,
     ComponentOverviewComponent,
     ComponentViewerComponent
 } from './component-viewer.component';
@@ -30,8 +29,7 @@ import {
     ],
     declarations: [
         ComponentViewerComponent,
-        ComponentOverviewComponent,
-        ComponentApiComponent
+        ComponentOverviewComponent
     ],
     providers: [DocumentationItems]
 })
