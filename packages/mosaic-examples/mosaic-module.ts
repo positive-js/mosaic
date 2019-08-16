@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
-import {
-    McButtonModule
-} from '@ptsecurity/mosaic/button';
+import { McButtonModule } from '@ptsecurity/mosaic/button';
+import { McCheckboxModule } from '@ptsecurity/mosaic/checkbox';
 
 
 @NgModule({
-    imports: [
-        McButtonModule
+
+     imports: [
+         McButtonModule,
+         McCheckboxModule
     ],
     exports: [
-        McButtonModule
+        McButtonModule,
+        McCheckboxModule
     ]
 })
 export class ExampleMosaicModule {}
