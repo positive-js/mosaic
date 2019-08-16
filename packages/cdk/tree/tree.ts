@@ -23,7 +23,7 @@ import { IFocusableOption } from '@ptsecurity/cdk/a11y';
 import { BehaviorSubject, Observable, of as observableOf, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { ITreeControl } from './control/tree-control';
+import { TreeControl } from './control/tree-control';
 import { CdkTreeNodeDef, CdkTreeNodeOutletContext } from './node';
 import { CdkTreeNodeOutlet } from './outlet';
 import {
@@ -53,7 +53,7 @@ import {
 export class CdkTree<T> implements AfterContentChecked, CollectionViewer, OnDestroy, OnInit {
 
     /** The tree controller */
-    @Input() treeControl: ITreeControl<T>;
+    @Input() treeControl: TreeControl<T>;
 
     /**
      * Tracking function that will be used to check the differences in data changes. Used similarly

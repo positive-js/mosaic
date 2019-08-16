@@ -1,19 +1,21 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
-import { ITreeControl } from './tree-control';
+import { TreeControl } from './tree-control';
 
 
 /** Base tree control. It has basic toggle/expand/collapse operations on a single data node. */
-// todo здесь явно ошибка проектирования, абстрактный класс реализует функционал
 /* tslint:disable-next-line:naming-convention */
-export abstract class BaseTreeControl<T> implements ITreeControl<T> {
+export abstract class BaseTreeControl<T> implements TreeControl<T> {
 
-    /** Saved data node for `expandAll` action. */
     dataNodes: T[];
 
     /** A selection model with multi-selection to track expansion status. */
     expansionModel: SelectionModel<T> = new SelectionModel<T>(true);
+
+    filterModel: SelectionModel<T> = new SelectionModel<T>(true);
+
+    filterValue = new BehaviorSubject<string>('');
 
     /** Get depth of a given data node, return the level number. This is for flat tree node. */
     getLevel: (dataNode: T) => number;
@@ -35,16 +37,22 @@ export abstract class BaseTreeControl<T> implements ITreeControl<T> {
 
     /** Toggles one single data node's expanded/collapsed state. */
     toggle(dataNode: T): void {
+        if (this.filterValue.value) { return; }
+
         this.expansionModel.toggle(dataNode);
     }
 
     /** Expands one single data node. */
     expand(dataNode: T): void {
+        if (this.filterValue.value) { return; }
+
         this.expansionModel.select(dataNode);
     }
 
     /** Collapses one single data node. */
     collapse(dataNode: T): void {
+        if (this.filterValue.value) { return; }
+
         this.expansionModel.deselect(dataNode);
     }
 

@@ -41,7 +41,7 @@ import {
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { MC_TREE_OPTION_PARENT_COMPONENT, McTreeOption } from './tree-option';
+import { MC_TREE_OPTION_PARENT_COMPONENT, McTreeOption } from './tree-option.component';
 
 
 export class McTreeNavigationChange {
@@ -321,7 +321,11 @@ export class McTreeSelection extends CdkTree<any>
 
                     arrayOfInstances.push(nodeData.instance as never);
 
-                    setTimeout(() => nodeData.instance.changeDetectorRef.detectChanges());
+                    setTimeout(() => {
+                        if (!nodeData.instance.changeDetectorRef.destroyed) {
+                            nodeData.instance.changeDetectorRef.detectChanges();
+                        }
+                    });
                 }
             });
         });

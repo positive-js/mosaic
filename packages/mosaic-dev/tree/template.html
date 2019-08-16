@@ -4,7 +4,6 @@
         height: 328px;
     }
 </style>
-<h5>multiple selection</h5>
 
 <button class="mc-primary" mc-button (click)="modelValue = 'Applications'">set modelValue = Applications</button>
 
@@ -14,6 +13,11 @@
 
 <br><br><br>
 
+<mc-form-field>
+    <input type="text" placeholder="tree filter" (ngModelChange)="onFilterChange($event)" mcInput [(ngModel)]="filterValue">
+</mc-form-field>
+
+<br><br><br>
     <!--auto-select="true"-->
     <!--no-unselect="false"-->
 <!--    multiple-->
@@ -28,7 +32,7 @@
         *mcTreeNodeDef="let node"
         [value]="node.name"
         mcTreeNodePadding>
-        {{ node.name }}
+        <span [innerHTML]="node.name | mcHighlight : treeControl.filterValue.value"></span>
     </mc-tree-option>
 
     <mc-tree-option
@@ -36,13 +40,9 @@
         [value]="node.name"
         mcTreeNodePadding
         [disabled]="node.name === 'Downloads'">
-        <i mc-icon="mc-angle-down-S_16"
-           [style.transform]="treeControl.isExpanded(node) ? '' : 'rotate(-90deg)'"
-           mcTreeNodeToggle>
-        </i>
-        {{ node.name }}: {{ node.type }}
+
+        <mc-tree-node-toggle [node]="node"></mc-tree-node-toggle>
+
+        <span [innerHTML]="(node.name + ':') | mcHighlight : treeControl.filterValue.value"></span>
     </mc-tree-option>
 </mc-tree-selection>
-
-<br>
-<div>multipleSelected: {{ multipleSelected }}</div>

@@ -15,7 +15,7 @@ export class NestedTreeControl<T> extends BaseTreeControl<T> {
     /**
      * Expands all dataNodes in the tree.
      *
-     * To make this working, the `dataNodes` variable of the ITreeControl must be set to all root level
+     * To make this working, the `dataNodes` variable of the TreeControl must be set to all root level
      * data nodes of the tree.
      */
     expandAll(): void {

@@ -12,7 +12,7 @@ export class FlatTreeControl<T> extends BaseTreeControl<T> {
     /**
      * Gets a list of the data node's subtree of descendent data nodes.
      *
-     * To make this working, the `dataNodes` of the ITreeControl must be flattened tree nodes
+     * To make this working, the `dataNodes` of the TreeControl must be flattened tree nodes
      * with correct levels.
      */
     getDescendants(dataNode: T): T[] {
@@ -38,10 +38,42 @@ export class FlatTreeControl<T> extends BaseTreeControl<T> {
     /**
      * Expands all data nodes in the tree.
      *
-     * To make this working, the `dataNodes` variable of the ITreeControl must be set to all flattened
+     * To make this working, the `dataNodes` variable of the TreeControl must be set to all flattened
      * data nodes of the tree.
      */
     expandAll(): void {
         this.expansionModel.select(...this.dataNodes);
+    }
+
+    getParents(node: any, result: T[]): T[] {
+        if (node.parent) {
+            result.unshift(node.parent);
+
+            return this.getParents(node.parent, result);
+        } else {
+            return result;
+        }
+    }
+
+    compareFunction(name: string, value: string): boolean {
+        return RegExp(value, 'gi').test(name);
+    }
+
+    filterNodes(value: string): void {
+        this.filterModel.clear();
+
+        // todo нет возможности управлять параметром имени 'node.name'
+        const filteredNodes = this.dataNodes.filter((node: any) => this.compareFunction(node.name, value));
+
+        const filteredNodesWithTheirParents = new Set();
+        filteredNodes.forEach((filteredNode) => {
+            this.getParents(filteredNode, []).forEach((node) => filteredNodesWithTheirParents.add(node));
+
+            filteredNodesWithTheirParents.add(filteredNode);
+        });
+
+        this.filterModel.select(...Array.from(filteredNodesWithTheirParents));
+
+        this.filterValue.next(value);
     }
 }
