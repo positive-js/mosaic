@@ -23,7 +23,7 @@ import { DocumentationItems } from './shared/documentation-items/documentation-i
         HttpClientModule,
         ExampleModule,
 
-        RouterModule.forRoot(APP_ROUTES,{
+        RouterModule.forRoot(APP_ROUTES, {
             scrollPositionRestoration: 'enabled',
             anchorScrolling: 'enabled',
             scrollOffset: [0, 64] // [x, y]
