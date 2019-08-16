@@ -1564,6 +1564,7 @@ describe('McTreeSelect', () => {
                     Object.defineProperty(event, 'altKey', { get: () => true });
 
                     dispatchEvent(select, event);
+                    flush();
 
                     expect(selectInstance.panelOpen).toBe(true, 'Expected select to be open.');
                     expect(formControl.value).toBeFalsy('Expected value not to have changed.');
@@ -1579,6 +1580,7 @@ describe('McTreeSelect', () => {
                     Object.defineProperty(event, 'altKey', { get: () => true });
 
                     dispatchEvent(select, event);
+                    flush();
 
                     expect(selectInstance.panelOpen).toBe(true, 'Expected select to be open.');
                     expect(formControl.value).toBeFalsy('Expected value not to have changed.');
@@ -1595,6 +1597,7 @@ describe('McTreeSelect', () => {
                     Object.defineProperty(event, 'altKey', { get: () => true });
 
                     dispatchEvent(select, event);
+                    flush();
 
                     expect(selectInstance.panelOpen).toBe(false, 'Expected select to be closed.');
                     expect(event.defaultPrevented).toBe(true, 'Expected default action to be prevented.');
@@ -1611,6 +1614,7 @@ describe('McTreeSelect', () => {
                     Object.defineProperty(event, 'altKey', { get: () => true });
 
                     dispatchEvent(select, event);
+                    flush();
 
                     expect(selectInstance.panelOpen).toBe(false, 'Expected select to be closed.');
                     expect(event.defaultPrevented).toBe(true, 'Expected default action to be prevented.');
@@ -1709,6 +1713,7 @@ describe('McTreeSelect', () => {
                     expect(formControl.pristine).toBe(true, 'Expected form control to be clean.');
 
                     dispatchKeyboardEvent(select, 'keydown', 16); // Press a random key.
+                    flush();
 
                     expect(formControl.value).toBeNull('Expected form control value to stay empty.');
                     expect(formControl.pristine).toBe(true, 'Expected form control to stay clean.');
@@ -1855,6 +1860,8 @@ describe('McTreeSelect', () => {
 
                 it('should prevent the default action when pressing space', fakeAsync(() => {
                     const event = dispatchKeyboardEvent(select, 'keydown', SPACE);
+                    flush();
+
                     expect(event.defaultPrevented).toBe(true);
                 }));
 
@@ -2073,6 +2080,7 @@ describe('McTreeSelect', () => {
 
                 const event = dispatchKeyboardEvent(trigger, 'keydown', HOME);
                 fixture.detectChanges();
+                flush();
 
                 expect(fixture.componentInstance.select.tree.keyManager.activeItemIndex).toBe(0);
                 expect(event.defaultPrevented).toBe(true);
