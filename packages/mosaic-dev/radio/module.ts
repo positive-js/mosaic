@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import { McRadioModule } from '../../mosaic/radio';
+import { McRadioChange, McRadioModule } from '../../mosaic/radio';
 import { ThemePickerModule } from '../theme-picker';
 
 
@@ -29,6 +29,10 @@ export class DemoComponent {
         {name: 'Yes', value: 'true', selected: false},
         {name: 'No', value: 'false', selected: true}
     ];
+
+    onChange($event: McRadioChange) {
+        console.log('McRadioChange: ', $event);
+    }
 }
 
 @NgModule({
