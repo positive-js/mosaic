@@ -1,3 +1,28 @@
+# 8.0.0-beta.8 "Keynesian Doughnut" (2019-08-19)
+
+
+### Bug Fixes
+
+* **modal:** remove padding-right from body UIM-114 ([#196](https://github.com/positive-js/mosaic/issues/196)) ([5d711d4](https://github.com/positive-js/mosaic/commit/5d711d4))
+* **security:** update dev packages - gulp-markdown ([ae8342c](https://github.com/positive-js/mosaic/commit/ae8342c))
+* **tree:** replacing mixins with methods (#UIM-129) ([#201](https://github.com/positive-js/mosaic/issues/201)) ([46de5c2](https://github.com/positive-js/mosaic/commit/46de5c2)), closes [#UIM-129](https://github.com/positive-js/mosaic/issues/UIM-129)
+* **tree:** tree has focus style after click on node (#UIM-131) ([#203](https://github.com/positive-js/mosaic/issues/203)) ([83b1239](https://github.com/positive-js/mosaic/commit/83b1239)), closes [#UIM-131](https://github.com/positive-js/mosaic/issues/UIM-131)
+* **tree-select:** customization of the matcher does not work (UIM-116) ([#197](https://github.com/positive-js/mosaic/issues/197)) ([c236b77](https://github.com/positive-js/mosaic/commit/c236b77))
+
+
+### Features
+
+* **build:** update Angular to 8.2.2 and TS to 3.5.3 ([a1007de](https://github.com/positive-js/mosaic/commit/a1007de))
+* **schematics:** added ng-add command for Mosaic ([bd831fe](https://github.com/positive-js/mosaic/commit/bd831fe))
+* **tree:** filtration (#UIM-14) ([#195](https://github.com/positive-js/mosaic/issues/195)) ([7fe6423](https://github.com/positive-js/mosaic/commit/7fe6423)), closes [#UIM-14](https://github.com/positive-js/mosaic/issues/UIM-14)
+
+
+### Reverts
+
+* TS to 3.4 ([3c4b077](https://github.com/positive-js/mosaic/commit/3c4b077))
+
+
+
 # 8.0.0-beta.7 "Fixed Lotus" (2019-07-31)
 
 
