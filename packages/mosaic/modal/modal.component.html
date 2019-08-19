@@ -83,6 +83,8 @@
             <ng-container *ngSwitchCase="isModalButtons(mcFooter)">
                 <button *ngFor="let button of mcFooter"
                         mc-button
+                        #autoFocusedButton
+                        [attr.autofocus]="button.autoFocus"
                         [hidden]="!getButtonCallableProp(button, 'show')"
                         [disabled]="getButtonCallableProp(button, 'disabled')"
                         (click)="onButtonClick(button)"
@@ -91,10 +93,17 @@
                 </button>
             </ng-container>
             <ng-container *ngSwitchDefault>
-                <button *ngIf="mcOkText!==null" mc-button color="primary" (click)="onClickOkCancel('ok')">
+                <button
+                    #autoFocusedButton
+                    [attr.autofocus]="true"
+                    *ngIf="mcOkText !== null"
+                    mc-button
+                    color="primary"
+                    (click)="onClickOkCancel('ok')">
+
                     {{ okText }}
                 </button>
-                <button *ngIf="mcCancelText!==null" mc-button (click)="onClickOkCancel('cancel')" autofocus>
+                <button *ngIf="mcCancelText!==null" mc-button (click)="onClickOkCancel('cancel')">
                     {{ cancelText }}
                 </button>
             </ng-container>
@@ -124,10 +133,17 @@
         </div> <!-- /.mc-confirm-body-wrapper -->
     </div>
     <div class="mc-confirm-btns">
-        <button mc-button [color]="mcOkType" #autoFocusButtonOk *ngIf="mcOkText !== ''" (click)="onClickOkCancel('ok')">
+        <button
+            mc-button
+            #autoFocusedButton
+            [color]="mcOkType"
+            [attr.autofocus]="true"
+            *ngIf="mcOkText !== ''"
+            (click)="onClickOkCancel('ok')">
+
             {{ okText }}
         </button>
-        <button mc-button color="second" *ngIf="mcCancelText!==''" (click)="onClickOkCancel('cancel')" autofocus>
+        <button mc-button color="second" *ngIf="mcCancelText!==''" (click)="onClickOkCancel('cancel')">
             {{ cancelText }}
         </button>
     </div>
