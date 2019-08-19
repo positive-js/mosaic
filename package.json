@@ -172,6 +172,7 @@
         "server-dev:icon": "npm run server-dev -- --env.component icon",
         "server-dev:input": "npm run server-dev -- --env.component input",
         "server-dev:flex-layout": "npm run server-dev -- --env.component flex-layout",
+        "server-dev:formatters": "npm run server-dev -- --env.component formatters",
         "server-dev:link": "npm run server-dev -- --env.component link",
         "server-dev:list": "npm run server-dev -- --env.component list",
         "server-dev:modal": "npm run server-dev -- --env.component modal",
