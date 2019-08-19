@@ -47,6 +47,21 @@
 
     <br>
 
+    <button mc-button (click)="toggleVisibility()">
+        <i mc-icon="mc-play_16"></i>
+        toggle visibility of gutters
+    </button>&nbsp;
+
+    <h2 class="mc-h2">Hidden gutters</h2>
+
+    <mc-splitter class="horizontal-block" [direction]="'horizontal'" [hideGutters]="guttersVisibility">
+        <div mc-splitter-area>first</div>
+        <div mc-splitter-area class="flex">second</div>
+        <div mc-splitter-area>third</div>
+    </mc-splitter>
+
+    <br>
+
     <h2 class="mc-h2">min-width for the first area</h2>
 
     <mc-splitter class="horizontal-block">
