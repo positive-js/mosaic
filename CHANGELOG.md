@@ -1,3 +1,18 @@
+# 8.0.0-beta.9 "Vestibular Kerygma" (2019-08-20)
+
+
+### Bug Fixes
+
+* **modal:** autoFocus does' t work (#UIM-133) ([#204](https://github.com/positive-js/mosaic/issues/204)) ([6038e05](https://github.com/positive-js/mosaic/commit/6038e05)), closes [#UIM-133](https://github.com/positive-js/mosaic/issues/UIM-133)
+
+
+### Features
+
+* **formatters:** Added number formatter (McDecimalPipe) (#UIM-84) ([#202](https://github.com/positive-js/mosaic/issues/202)) ([7ca9788](https://github.com/positive-js/mosaic/commit/7ca9788)), closes [#UIM-84](https://github.com/positive-js/mosaic/issues/UIM-84)
+* **splitter:** Added parameter for hide gutters (#UIM-130) ([#205](https://github.com/positive-js/mosaic/issues/205)) ([ff441bd](https://github.com/positive-js/mosaic/commit/ff441bd)), closes [#UIM-130](https://github.com/positive-js/mosaic/issues/UIM-130)
+
+
+
 # 8.0.0-beta.8 "Keynesian Doughnut" (2019-08-19)
 
 
