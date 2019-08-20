@@ -4,6 +4,7 @@
     <mc-gutter *ngIf="last === false"
                [direction]="direction"
                [attr.disabled]="disabled || null"
+               [style.display]="hideGutters ? 'none' : 'flex'"
                [size]="gutterSize"
                [order]="index * 2 + 1"
                (mousedown)="onMouseDown($event, index, index + 1)">

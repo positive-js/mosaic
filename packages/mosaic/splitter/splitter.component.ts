@@ -143,6 +143,17 @@ export class McSplitterComponent implements OnInit {
     private readonly areaPositionDivider: number = 2;
     private readonly listeners: (() => void)[] = [];
 
+    get hideGutters(): boolean {
+        return this._hideGutters;
+    }
+
+    @Input()
+    set hideGutters(value: boolean) {
+        this._hideGutters = coerceBooleanProperty(value);
+    }
+
+    private _hideGutters: boolean = false;
+
     get direction(): Direction {
         return this._direction;
     }
