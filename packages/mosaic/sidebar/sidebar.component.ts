@@ -75,7 +75,7 @@ export class McSidebar implements OnDestroy, OnInit, AfterContentInit {
     }
 
     set opened(value: boolean) {
-        if (this.needSaveAndRestoreWidth && this._opened) {
+        if (this._opened) {
             this.saveWidth();
         }
 
@@ -85,7 +85,13 @@ export class McSidebar implements OnDestroy, OnInit, AfterContentInit {
 
     @Input() position: SidebarPositions;
 
-    params: McSidebarParams;
+    params: McSidebarParams = {
+        openedStateWidth: 'inherit',
+        openedStateMinWidth: 'inherit',
+        openedStateMaxWidth: 'inherit',
+
+        closedStateWidth: '32px'
+    };
 
     @Output() readonly stateChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -99,8 +105,6 @@ export class McSidebar implements OnDestroy, OnInit, AfterContentInit {
     }
 
     internalState: boolean = true;
-
-    private needSaveAndRestoreWidth: boolean = false;
 
     private documentKeydownListener: (event: KeyboardEvent) => void;
 
@@ -135,10 +139,6 @@ export class McSidebar implements OnDestroy, OnInit, AfterContentInit {
     }
 
     ngAfterContentInit(): void {
-        if (!this.openedContent.width) {
-            this.needSaveAndRestoreWidth = true;
-        }
-
         this.params = {
             openedStateWidth: this.openedContent.width || 'inherit',
             openedStateMinWidth: this.openedContent.minWidth || 'inherit',
