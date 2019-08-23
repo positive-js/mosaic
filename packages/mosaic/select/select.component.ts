@@ -891,7 +891,7 @@ export class McSelect extends McSelectMixinBase implements
 
     private getTotalItemsWidthInMatcher(): number {
         const triggerClone = this.trigger.nativeElement.cloneNode(true);
-        triggerClone.querySelector('.mc-select__match-hidden-text').remove();
+        this._renderer.removeChild(triggerClone, triggerClone.querySelector('.mc-select__match-hidden-text'));
 
         this._renderer.setStyle(triggerClone, 'position', 'absolute');
         this._renderer.setStyle(triggerClone, 'visibility', 'hidden');
@@ -902,11 +902,15 @@ export class McSelect extends McSelectMixinBase implements
 
         let totalItemsWidth: number = 0;
         const itemMargin: number = 4;
-        triggerClone.querySelectorAll('mc-tag').forEach((item) => {
-            totalItemsWidth += item.getBoundingClientRect().width as number + itemMargin;
-        });
 
-        triggerClone.remove();
+        const mcTags = triggerClone.querySelectorAll('mc-tag');
+        const mcTagsLength = mcTags.length;
+
+        for (let i = 0; i < mcTagsLength; i++) {
+            totalItemsWidth += mcTags[i].getBoundingClientRect().width as number + itemMargin;
+        }
+
+        this._renderer.removeChild(this.trigger.nativeElement, triggerClone);
 
         return totalItemsWidth;
     }
