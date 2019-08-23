@@ -2,17 +2,20 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <!--<title>Mosaic</title>
+    <base href="/mosaic/dist/releases/mosaic-docs/">
+        <meta http-equiv="refresh" content="0;URL='/'">
+-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
+
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <script>
-        // Note: this 404.html file must be at least 512 bytes for it to work
-        // with Internet Explorer (it is currently > 512 bytes)
-        const serverSlash = 5;
+        const serverSlash = 7; // TODO для pt 5
         const route = location.href.split("/");
         route.splice(0,serverSlash);
-        const path = `${location.href.split("/").slice(0,serverSlash).join("/")}?nextRoute=${route}`;
+        const path = `${location.href.split("/").slice(0,serverSlash).join("/")}${location.search? location.search + '&' : '?'}nextRoute=${route}`;
         location.href = path;
     </script>
 </head>
