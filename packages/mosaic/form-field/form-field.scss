@@ -5,6 +5,7 @@ $mc-form-field-border-size: 1px;
     position: relative;
     display: inline-block;
     width: 100%;
+    border-radius: $mc-form-field-border-radius;
 }
 
 .mc-form-field__hint {
