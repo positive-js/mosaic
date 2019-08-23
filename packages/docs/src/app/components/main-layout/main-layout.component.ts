@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -8,10 +8,21 @@ import { Router } from '@angular/router';
 })
 export class MainLayoutComponent {
 
-    constructor(private router: Router) {
+    constructor(private router: Router,
+                private route: ActivatedRoute) {
+        this.setNextRoute();
+
         if (this.router.routerState.snapshot.url === '/') {
             this.router.navigateByUrl('button/overview');
         }
+    }
+
+    setNextRoute() {
+        const isRoute = location.search.includes('nextRoute');
+        const search =  location.search.split('=');
+        if (!isRoute || search.length < 2) { return; }
+        const nextRoute = search[1] + location.hash;
+        this.router.navigateByUrl(nextRoute.split(',').join('/'));
     }
 
 }
