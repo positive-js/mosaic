@@ -23,7 +23,6 @@ export class MainLayoutComponent {
         if (!search || !search.nextRoute) { return; }
         const nextRoute = search.nextRoute;
         delete search.nextRoute;
-
         const route = nextRoute + this.setParams(search) + location.hash;
         this.router.navigateByUrl(route.split(',').join('/'));
     }
