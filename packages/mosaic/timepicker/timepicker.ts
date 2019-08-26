@@ -645,7 +645,7 @@ export class McTimepicker<D> extends McTimepickerMixinBase
         ]);
 
         const convertedTimeString = momentWrappedTime !== null
-            ? momentWrappedTime.format('HH:mm:ss')
+            ? momentWrappedTime.format('H:m:s')
             : '';
 
         const hoursAndMinutesAndSeconds = convertedTimeString.match(HOURS_MINUTES_SECONDS_REGEXP);
