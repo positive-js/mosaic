@@ -46,7 +46,8 @@ const MARKDOWN_TAGS_TO_CLASS_ALIAS = [
     'tr',
     'ul',
     'pre',
-    'code'
+    'code',
+    'img'
 ];
 
 const CLASS_PREFIX: string = 'docs-markdown';
@@ -212,7 +213,7 @@ function createTagNameAliaser(classPrefix: string) {
 
 function createTagNameStringAliaser(classPrefix: string) {
     return (content: string) => {
-        let str = content;
+        let str = setImageCaption(content);
 
         MARKDOWN_TAGS_TO_CLASS_ALIAS.forEach((tag) => {
             const regex = new RegExp(`<${tag}`, 'g');
@@ -223,4 +224,23 @@ function createTagNameStringAliaser(classPrefix: string) {
 
         return str;
     };
+}
+
+function setImageCaption(content: string): string  {
+    let html = content;
+    let pos = 0;
+
+    while (html.includes('<img', pos)) {
+        const imgIndex = html.indexOf('<img', pos);
+        const captionIndex = html.indexOf('>', imgIndex) + 1;
+        html = [html.slice(0, captionIndex),
+                '<span class="docs-markdown__caption">',
+                html.slice(captionIndex)].join('');
+        const captionEndIndex = html.indexOf('</', captionIndex);
+        html = [html.slice(0, captionEndIndex), '</span>', html.slice(captionEndIndex)].join('');
+
+        pos = imgIndex + 1;
+    }
+
+    return html;
 }
