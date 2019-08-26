@@ -1,12 +1,14 @@
-`<mc-checkbox>` provides the same functionality as a native `<input type="checkbox">`
-enhanced with Mosaic styling.
+Checkboxes are defined using the `<mc-checkbox>` element. Clicking the checkbox or its label toggles the checkbox state, which can be checked, unchecked, or indeterminate.
 
-<!-- example(checkbox-overview) -->
+### Label
 
-### Checkbox label
-The checkbox label is provided as the content to the `<mc-checkbox>` element. The label can be 
-positioned before or after the checkbox by setting the `labelPosition` property to `'before'` or
-`'after'`.
+The checkbox label describes an option to be selected. The label is provided as the content of the `<mc-checkbox>` element.
+
+### Label position
+
+To place the label before or after the checkbox, use the `[labelPosition]` attribute with possible values `'before'` and `'after'`. The default position is after the checkbox.
+
+`<mc-checkbox [labelPosition]="'before'">Left side label</mc-checkbox>`
 
 If you don't want the label to appear next to the checkbox, you can use 
 [`aria-label`](https://www.w3.org/TR/wai-aria/states_and_properties#aria-label) or 
@@ -17,11 +19,27 @@ specify an appropriate label.
 `<mc-checkbox>` is compatible with `@angular/forms` and supports both `FormsModule` 
 and `ReactiveFormsModule`.
 
-### Indeterminate state
-`<mc-checkbox>` supports an `indeterminate` state, similar to the native `<input type="checkbox">`.
-While the `indeterminate` property of the checkbox is true, it will render as indeterminate 
-regardless of the `checked` value. Any interaction with the checkbox by a user (i.e., clicking) will
-remove the indeterminate state.
+### Dual-state
+
+The dual-state is applied using the `[checked]` boolean attribute to show whether the checkbox is selected or not. The default state is checked.
+
+<!-- example(checkbox-overview) -->
+
+### Indeterminate state (partially selected)
+
+The indeterminate state is applied using the `[indeterminate]` boolean attribute and can be used when you have a group of options, and a higher-level checkbox must represent their state:
++ if only some of the options in a group are selected, the higher-level checkbox appears partially selected (`[indeterminate]="true"`).
++ If all of them are selected, the higher-level checkbox appears selected.
++ If none are selected, the higher-level checkbox appears not selected.
+
+<Можно пример с группой чекбоксов?>
+<!-- example(checkbox-indeterminate) -->
+
+### Disabled checkboxes
+
+You can use the `[disabled]` boolean attribute to make a checkbox look unclickable.
+
+`<mc-checkbox [disabled]="true">Disabled</mc-checkbox>`
 
 ### Click action config
 When user clicks on the `mc-checkbox`, the default behavior is toggle `checked` value and set
