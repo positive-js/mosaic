@@ -11,6 +11,9 @@ Basic `mc-button` buttons are rectangular buttons containing text only.
 
 <!-- example(button-overview) -->
 
+![Button states](./assets/images/Basic_buttons.png)
+Basic button's states
+
 #### Icon buttons
 Icon buttons consist of an icon and can contain text.
 To create an icon button, add the `<i mc-icon="icon_name"></i>` element within `<button c-icon-button>` where `"icon_name"` is the name of a [Mosaic icon](https://github.com/positive-js/mosaic-icons). For example:
