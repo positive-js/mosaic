@@ -11,7 +11,7 @@ Basic `mc-button` buttons are rectangular buttons containing text only.
 
 <!-- example(button-overview) -->
 
-![Button states](https://screenshots.ptsecurity.com/myakovleva-2019-08-22_17-51-37.png)
+![Button states](./assets/images/Basic_buttons.png)
 Basic button's states
 
 #### Icon buttons
