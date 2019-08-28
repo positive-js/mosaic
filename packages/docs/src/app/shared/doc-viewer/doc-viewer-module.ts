@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McTabsModule } from '@ptsecurity/mosaic/tabs';
+import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 
 import { CopierService } from '../copier/copier.service';
 import { ExampleViewer } from '../example-viewer/example-viewer';
@@ -18,7 +19,8 @@ import { DocViewer } from './doc-viewer';
         McTabsModule,
         CommonModule,
         StackblitzButtonModule,
-        PortalModule
+        PortalModule,
+        McToolTipModule
     ],
     providers: [CopierService],
     declarations: [DocViewer, ExampleViewer],

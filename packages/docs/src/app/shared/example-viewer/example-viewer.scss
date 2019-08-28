@@ -36,10 +36,12 @@
 }
 
 .docs-example-source_copy {
+    display: flex;
     position: absolute;
     top: 0;
     right: 0;
-    padding: 2px 6px;
+    z-index: 1;
+    padding: 6px 6px;
 }
 
 .docs-example-viewer-title {

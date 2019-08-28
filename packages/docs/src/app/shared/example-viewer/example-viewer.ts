@@ -1,6 +1,7 @@
 import { ComponentPortal } from '@angular/cdk/portal';
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { EXAMPLE_COMPONENTS, LiveExample } from '@ptsecurity/mosaic-examples';
+import { McTooltip } from '@ptsecurity/mosaic/tooltip';
 
 import { CopierService } from '../copier/copier.service';
 
@@ -26,6 +27,7 @@ export class ExampleViewer {
     /** Whether the source for the example is being displayed. */
     showSource = false;
     numbers = '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n';
+    mcTooltipDelay = 3000;
     /** String key of the currently displayed example. */
     @Input()
     get example() {
@@ -46,6 +48,7 @@ export class ExampleViewer {
 
     private _example: string;
 
+    @ViewChild('tooltip', { static: false }) tooltip: McTooltip;
     constructor(private copier: CopierService) {
     }
 
@@ -75,6 +78,11 @@ export class ExampleViewer {
         sel.addRange(range);
         document.execCommand('copy');
         sel.removeAllRanges();
+
+        this.tooltip.show();
+        setTimeout(() => {
+            this.tooltip.hide();
+        }, this.mcTooltipDelay);
     }
 
     private resolveHighlightedExampleFile(fileName: string) {
