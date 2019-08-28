@@ -19,6 +19,7 @@ export enum ThemePalette {
     Second = 'second',
     Error = 'error',
     Default = 'second',
+    Transparent = 'transparent',
     Empty = ''
 }
 

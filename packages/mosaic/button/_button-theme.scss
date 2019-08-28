@@ -102,6 +102,36 @@
     }
 }
 
+@mixin _mc-button-transparent-color($foreground, $background) {
+    border-color: transparent;
+    background-color: transparent;
+    color: map-get($foreground, text);
+
+    .mc-icon {
+        color: map-get($foreground, text);
+    }
+
+    &:hover,
+    &.mc-hover {
+        & .mc-button-overlay {
+            background: map-get($background, hover);
+        }
+    }
+
+    &.mc-disabled,
+    &[disabled] {
+        color: map-get($foreground, disabled-text);
+
+        & .mc-button-overlay {
+            background: transparent;
+        }
+
+        .mc-icon {
+            color: map-get($foreground, disabled-text);
+        }
+    }
+}
+
 @mixin _mc-button-theme-color($theme) {
     $primary: map-get($theme, primary);
     $second: map-get($theme, second);
@@ -123,9 +153,14 @@
         @include _mc-button-error-color($second, $error, $foreground, $background);
     }
 
+    &.mc-transparent {
+        @include _mc-button-transparent-color($foreground, $background);
+    }
+
     &.mc-primary,
     &.mc-second,
-    &.mc-error {
+    &.mc-error,
+    &.mc-transparent {
         -webkit-font-smoothing: antialiased;
 
         &.cdk-keyboard-focused {
