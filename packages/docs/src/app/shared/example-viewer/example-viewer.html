@@ -12,8 +12,16 @@
             <mc-tab *ngFor="let tabName of getExampleTabNames()" [label]="tabName">
                 <div class="docs-example-source-wrapper">
                     <pre class="docs-example-numbers">{{numbers}}</pre>
+                    <span class="docs-example-source_copy">
+                            <i class="mc mc-copy_16"
+                               (click)="copyCode($event)"
+                               #tooltip="mcTooltip"
+                               mcTooltip
+                               mcTitle="Содержимое скопировано в буфер обмена"
+                               mcTrigger="manual"
+                               mcPlacement="bottom"></i>
+                    </span>
                     <pre class="docs-example-source">
-                        <span class="docs-example-source_copy"><i class="mc mc-copy_16" (click)="copyCode($event)"></i></span>
                         <doc-viewer #viewer [documentUrl]="exampleTabs[tabName]"></doc-viewer>
                         <div class="docs-example-source-shadow"></div>
                     </pre>
