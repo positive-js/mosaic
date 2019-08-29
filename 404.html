@@ -7,12 +7,28 @@
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <script>
-        const serverSlash = 7; // TODO change on 5 for PT
-        const route = location.href.split("/");
+        const serverSlash = 5;
+        const nextRoute = location.href;
+        const searchStart = nextRoute.indexOf('?');
+        const anchorStart = nextRoute.indexOf('#');
+        let search = "";
+        let anchor = '';
+
+        if (searchStart > 0) {
+            const searchEnd = anchorStart > 0 ? anchorStart : nextRoute.length;
+            search = nextRoute.substring(searchStart + 1, searchEnd);
+        }
+
+        if (anchorStart > 0) {
+            const anchorEnd = nextRoute.length;
+            anchor = nextRoute.substring(anchorStart + 1, anchorEnd);
+        }
+
+        const route = nextRoute.split("/");
         route.splice(0,serverSlash);
         localStorage.setItem("PT_nextRoute", route.join("/"));
-        const path = location.href.split("/").slice(0,serverSlash).join("/");
-        location.href = path;
+        const path = nextRoute.split("/").slice(0,serverSlash).join("/");
+        location.href = `${path}${search? `?${search}` : '' }${anchor? `#${anchor}` : '' }`;
     </script>
 </head>
 
