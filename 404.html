@@ -7,10 +7,11 @@
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <script>
-        const serverSlash = 5;
+        const serverSlash = 7; // TODO change on 5 for PT
         const route = location.href.split("/");
         route.splice(0,serverSlash);
-        const path = `${location.href.split("/").slice(0,serverSlash).join("/")}${location.search? location.search + '&' : '?'}nextRoute=${route}`;
+        localStorage.setItem("PT_nextRoute", route.join("/"));
+        const path = location.href.split("/").slice(0,serverSlash).join("/");
         location.href = path;
     </script>
 </head>

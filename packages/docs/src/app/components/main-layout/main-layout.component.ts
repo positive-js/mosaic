@@ -19,15 +19,35 @@ export class MainLayoutComponent {
     }
 
     setNextRoute() {
-        const search =  this.getParams();
+        const nextRoute = localStorage.getItem("PT_nextRoute");
+        /*if (searchStart) {
+         const searchStart = nextRoute.indexOf('?');
+        const anchorStart = nextRoute.indexOf('#');
+        let href = '', search = '', anchor = '';
+            const searchEnd = anchorStart || nextRoute.length - 1;
+            href = nextRoute.substring(0, searchStart);
+            search = nextRoute.substring(searchStart, searchEnd);
+        }
+
+        if (anchorStart) {
+            const anchorEnd = nextRoute.length - 1;
+            if (!href)  {
+                href = nextRoute.substring(0, anchorStart);
+            }
+            anchor = nextRoute.substring(anchorStart, anchorEnd);
+        }
+                const search =  this.getParams();
         if (!search || !search.nextRoute) { return; }
         const nextRoute = search.nextRoute;
         delete search.nextRoute;
-        const route = nextRoute + this.setParams(search) + location.hash;
-        this.router.navigateByUrl(route.split(',').join('/'));
+         const route = nextRoute + this.setParams(search) + location.hash;
+         this.router.navigateByUrl(route.split(',').join('/'));
+        */
+
+        if (nextRoute) { this.router.navigateByUrl(nextRoute); }
     }
 
-    getParams() {
+    /*getParams() {
         const search = location.search.substring(1);
 
         if (search) {
@@ -43,6 +63,6 @@ export class MainLayoutComponent {
         }
 
         return '';
-    }
+    }*/
 
 }
