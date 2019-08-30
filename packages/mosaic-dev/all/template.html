@@ -335,10 +335,10 @@
     <div class="dev-box">
         <h1>Dropdown</h1>
 
-        <span class="mc-button-group">
-            <button mc-button>dropdown</button>
+        <span class="mc-group">
+            <button mc-button class="mc-group-item">dropdown</button>
 
-            <button mc-button [mcDropdownTriggerFor]="appDropdown">
+            <button mc-button class="mc-group-item" [mcDropdownTriggerFor]="appDropdown">
                 <i mc-icon="mc-angle-down-L_16"></i>
             </button>
         </span>
@@ -1205,6 +1205,122 @@
                 {{ node.name }} : {{ node.type }}
             </mc-tree-option>
         </mc-tree-selection>
+    </div>
+
+    <div class="dev-box">
+        <h1>Groups</h1>
+
+        <div class="mc-group">
+            <mc-form-field class="mc-group-item">
+                <input mcInput type="text" placeholder="text">
+            </mc-form-field>
+
+            <mc-form-field class="mc-group-item">
+                <input mcInput type="text" placeholder="text">
+            </mc-form-field>
+
+            <mc-form-field class="mc-group-item">
+                <input mcInput type="text" placeholder="text">
+            </mc-form-field>
+
+            <button mc-button class="mc-group-item">
+                <i mc-icon="mc-angle-down-L_16"></i>
+            </button>
+        </div>
+
+        <br>
+
+        <div class="mc-group">
+            <button mc-button class="mc-group-item">
+                <i mc-icon="mc-angle-down-L_16"></i>
+            </button>
+
+            <mc-form-field class="mc-group-item">
+                <input mcInput type="text" placeholder="text">
+            </mc-form-field>
+
+            <mc-form-field class="mc-group-item">
+                <input mcInput type="text" placeholder="text">
+            </mc-form-field>
+
+            <mc-form-field class="mc-group-item">
+                <input mcInput type="text" placeholder="text">
+            </mc-form-field>
+        </div>
+
+        <br>
+
+        <div class="mc-vertical-group">
+            <mc-form-field class="mc-group-item">
+                <input mcInput type="text" placeholder="text">
+            </mc-form-field>
+
+            <mc-form-field class="mc-group-item">
+                <input mcInput type="text" placeholder="text">
+            </mc-form-field>
+
+            <mc-form-field class="mc-group-item">
+                <input mcInput type="text" placeholder="text">
+            </mc-form-field>
+
+            <button mc-button class="mc-group-item">
+                <i mc-icon="mc-angle-down-L_16"></i>
+            </button>
+        </div>
+
+        <br>
+
+        <div class="mc-vertical-group">
+            <button mc-button class="mc-group-item">
+                <i mc-icon="mc-angle-down-L_16"></i>
+            </button>
+
+            <mc-form-field class="mc-group-item">
+                <input mcInput type="text" placeholder="text">
+            </mc-form-field>
+
+            <mc-form-field class="mc-group-item">
+                <input mcInput type="text" placeholder="text">
+            </mc-form-field>
+
+            <mc-form-field class="mc-group-item">
+                <input mcInput type="text" placeholder="text">
+            </mc-form-field>
+        </div>
+
+        <br>
+
+        <div class="mc-group">
+            <mc-form-field class="mc-group-item">
+                <mc-select multiple [formControl]="multiSelectSelectFormControl">
+                    <mc-option value="Normal">Normal</mc-option>
+                    <mc-option value="Hovered">Hovered</mc-option>
+                    <mc-option value="Selected">Selected</mc-option>
+                    <mc-option value="Selected1">Selected1</mc-option>
+                </mc-select>
+            </mc-form-field>
+
+            <button mc-button class="mc-group-item">
+                <i mc-icon="mc-angle-down-L_16"></i>
+            </button>
+        </div>
+
+        <br>
+
+        <div class="mc-group">
+            <button mc-button class="mc-group-item">
+                <i mc-icon="mc-angle-down-L_16"></i>
+            </button>
+
+            <mc-form-field class="mc-group-item">
+                <mc-select multiple [formControl]="multiSelectSelectFormControl">
+                    <mc-option value="Normal">Normal</mc-option>
+                    <mc-option value="Hovered">Hovered</mc-option>
+                    <mc-option value="Selected">Selected</mc-option>
+                    <mc-option value="Selected1">Selected1</mc-option>
+                </mc-select>
+            </mc-form-field>
+        </div>
     </div>
 </div>
 

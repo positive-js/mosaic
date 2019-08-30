@@ -1,0 +1,110 @@
+@import 'vendor-prefixes';
+@import 'button';
+
+
+@mixin border-top-radius($radius) {
+    border-top: {
+        right-radius: $radius;
+        left-radius: $radius;
+    }
+}
+
+@mixin border-bottom-radius($radius) {
+    border-bottom: {
+        right-radius: $radius;
+        left-radius: $radius;
+    }
+}
+
+@mixin border-right-radius($radius) {
+    border: {
+        bottom-right-radius: $radius;
+        top-right-radius: $radius;
+    }
+}
+
+@mixin border-left-radius($radius) {
+    border: {
+        bottom-left-radius: $radius;
+        top-left-radius: $radius;
+    }
+}
+
+.mc-group {
+    display: flex;
+    flex-direction: row;
+
+    & > .mc-group-item:first-child:not(:last-child) {
+        @include border-right-radius(0);
+
+        > .mc-form-field__container {
+            @include border-right-radius(0);
+        }
+    }
+
+    & > .mc-group-item:last-child:not(:first-child) {
+        @include border-left-radius(0);
+
+        > .mc-form-field__container {
+            @include border-left-radius(0);
+        }
+    }
+
+    & > .mc-group-item:not(:first-child):not(:last-child) {
+        border-radius: 0;
+
+        > .mc-form-field__container {
+            border-radius: 0;
+        }
+    }
+
+    .mc-group-item + .mc-group-item {
+        margin-left: -$mc-button-border-size;
+    }
+}
+
+.mc-group_justified {
+    > .mc-group-item {
+        width: 100%;
+    }
+}
+
+.mc-vertical-group {
+    display: flex;
+    flex-direction: column;
+
+    > .mc-group-item {
+        &:first-child:not(:last-child) {
+            @include border-bottom-radius(0);
+
+            border-top-right-radius: $mc-button-border-radius;
+
+            > .mc-form-field__container {
+                @include border-bottom-radius(0);
+            }
+        }
+
+        &:last-child:not(:first-child) {
+            @include border-top-radius(0);
+
+            border-bottom-left-radius: $mc-button-border-radius;
+
+            > .mc-form-field__container {
+                @include border-top-radius(0);
+            }
+        }
+
+        &:not(:first-child):not(:last-child) {
+            border-radius: 0;
+
+            > .mc-form-field__container {
+                border-radius: 0;
+            }
+        }
+    }
+
+    .mc-group-item + .mc-group-item {
+        margin-top: -$mc-button-border-size;
+    }
+}
+
