@@ -574,11 +574,13 @@ export class McTagList extends _McTagListMixinBase implements McFormFieldControl
      * key manager state and focus the next closest tag.
      */
     protected updateFocusForDestroyedTags() {
-        if (this.lastDestroyedTagIndex != null && this.tags.length) {
-            const newTagIndex = Math.min(this.lastDestroyedTagIndex, this.tags.length - 1);
-            this.keyManager.setActiveItem(newTagIndex);
-        } else if (this.tags.length === 0) {
-            this.focusInput();
+        if (this.lastDestroyedTagIndex != null) {
+            if (this.tags.length) {
+                const newTagIndex = Math.min(this.lastDestroyedTagIndex, this.tags.length - 1);
+                this.keyManager.setActiveItem(newTagIndex);
+            } else {
+                this.focusInput();
+            }
         }
 
         this.lastDestroyedTagIndex = null;
