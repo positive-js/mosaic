@@ -4,10 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McDropdownModule } from '@ptsecurity/mosaic/dropdown';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
+import { McLinkModule } from '@ptsecurity/mosaic/link';
 
 
 @Component({
@@ -28,6 +28,7 @@ export class DemoComponent {
         BrowserAnimationsModule,
         BrowserModule,
         FormsModule,
+        McLinkModule,
         McIconModule,
         McButtonModule,
         McDropdownModule
