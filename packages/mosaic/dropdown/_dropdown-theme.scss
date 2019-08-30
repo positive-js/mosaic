@@ -45,6 +45,8 @@
 
         &[disabled] {
             color: mc-color($foreground, disabled-text);
+
+            background: transparent;
         }
 
         .mc-dropdown__item-caption {
