@@ -616,10 +616,9 @@ describe('McTimepicker', () => {
 
                     const key2PressEvent: KeyboardEvent = createKeyboardEvent('keydown', TWO);
                     dispatchEvent(inputNativeElement, key2PressEvent);
-                    inputNativeElement.value =
-                        `${inputNativeElement.value.substring(0, 1)}` +
-                        `2` +
-                        `${inputNativeElement.value.substring(1)}`;
+                    const inputStringBeforeInsertion = inputNativeElement.value.substring(0, 1);
+                    const inputStringAfterInsertion = inputNativeElement.value.substring(1);
+                    inputNativeElement.value = `${inputStringBeforeInsertion}2${inputStringAfterInsertion}`;
                     inputNativeElement.selectionStart = 2;
                     inputNativeElement.selectionEnd = 2;
                     dispatchFakeEvent(inputNativeElement, 'input');
