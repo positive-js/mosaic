@@ -601,31 +601,32 @@ describe('McTimepicker', () => {
             return fixture.whenStable()
                 .then(() => {
                     dispatchFakeEvent(inputElementDebug.nativeElement, 'focus');
-                    inputElementDebug.nativeElement.selectionStart = 0;
-                    inputElementDebug.nativeElement.selectionEnd = 2;
+                    const inputNativeElement = inputElementDebug.nativeElement;
+                    inputNativeElement.selectionStart = 0;
+                    inputNativeElement.selectionEnd = 2;
 
                     const key1PressEvent: KeyboardEvent = createKeyboardEvent('keydown', ONE);
-                    dispatchEvent(inputElementDebug.nativeElement, key1PressEvent);
-                    inputElementDebug.nativeElement.value = `1${inputElementDebug.nativeElement.value.substring(2)}`;
-                    inputElementDebug.nativeElement.selectionStart = 1;
-                    inputElementDebug.nativeElement.selectionEnd = 1;
-                    dispatchFakeEvent(inputElementDebug.nativeElement, 'input');
+                    dispatchEvent(inputNativeElement, key1PressEvent);
+                    inputNativeElement.value = `1${inputNativeElement.value.substring(2)}`;
+                    inputNativeElement.selectionStart = 1;
+                    inputNativeElement.selectionEnd = 1;
+                    dispatchFakeEvent(inputNativeElement, 'input');
                     fixture.detectChanges();
 
-                    expect(inputElementDebug.nativeElement.value).toBe('1:00', 'Keypress works!');
+                    expect(inputNativeElement.value).toBe('1:00', 'Keypress works!');
 
                     const key2PressEvent: KeyboardEvent = createKeyboardEvent('keydown', TWO);
-                    dispatchEvent(inputElementDebug.nativeElement, key2PressEvent);
-                    inputElementDebug.nativeElement.value =
-                        `${inputElementDebug.nativeElement.value.substring(0, 1)}` +
+                    dispatchEvent(inputNativeElement, key2PressEvent);
+                    inputNativeElement.value =
+                        `${inputNativeElement.value.substring(0, 1)}` +
                         `2` +
-                        `${inputElementDebug.nativeElement.value.substring(1)}`;
-                    inputElementDebug.nativeElement.selectionStart = 2;
-                    inputElementDebug.nativeElement.selectionEnd = 2;
-                    dispatchFakeEvent(inputElementDebug.nativeElement, 'input');
+                        `${inputNativeElement.value.substring(1)}`;
+                    inputNativeElement.selectionStart = 2;
+                    inputNativeElement.selectionEnd = 2;
+                    dispatchFakeEvent(inputNativeElement, 'input');
                     fixture.detectChanges();
 
-                    expect(inputElementDebug.nativeElement.value).toBe('12:00', 'Keypress works!');
+                    expect(inputNativeElement.value).toBe('12:00', 'Keypress works!');
                 });
         });
     });
