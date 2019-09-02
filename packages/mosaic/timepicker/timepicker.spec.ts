@@ -612,7 +612,7 @@ describe('McTimepicker', () => {
                     dispatchFakeEvent(inputNativeElement, 'input');
                     fixture.detectChanges();
 
-                    expect(inputNativeElement.value).toBe('1:00', 'Keypress works!');
+                    expect(inputNativeElement.value).toBe('1:00', 'Failed key-by-key input on 1st key');
 
                     const key2PressEvent: KeyboardEvent = createKeyboardEvent('keydown', TWO);
                     dispatchEvent(inputNativeElement, key2PressEvent);
@@ -624,7 +624,7 @@ describe('McTimepicker', () => {
                     dispatchFakeEvent(inputNativeElement, 'input');
                     fixture.detectChanges();
 
-                    expect(inputNativeElement.value).toBe('12:00', 'Failed key-by-key input');
+                    expect(inputNativeElement.value).toBe('12:00', 'Failed key-by-key input on 2nd key');
                 });
         });
     });
