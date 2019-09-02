@@ -600,7 +600,6 @@ describe('McTimepicker', () => {
         it('Manual keyboard input digit-by-digit', () => {
             return fixture.whenStable()
                 .then(() => {
-                    dispatchFakeEvent(inputElementDebug.nativeElement, 'focus');
                     const inputNativeElement = inputElementDebug.nativeElement;
                     inputNativeElement.selectionStart = 0;
                     inputNativeElement.selectionEnd = 2;
