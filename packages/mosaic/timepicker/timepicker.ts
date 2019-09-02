@@ -411,9 +411,11 @@ export class McTimepicker<D> extends McTimepickerMixinBase
         if (keyCode === ARROW_UP_KEYCODE || keyCode === ARROW_DOWN_KEYCODE) {
             this.upDownTimeByArrowKeys(event);
         }
+
         if (keyCode === ARROW_LEFT_KEYCODE || keyCode === ARROW_RIGHT_KEYCODE) {
             this.switchSelectionBetweenTimeparts(event);
         }
+
     }
 
     registerOnChange(fn: (value: D) => void): void {
@@ -645,7 +647,7 @@ export class McTimepicker<D> extends McTimepickerMixinBase
         ]);
 
         const convertedTimeString = momentWrappedTime !== null
-            ? momentWrappedTime.format('HH:mm:ss')
+            ? momentWrappedTime.format('H:m:s')
             : '';
 
         const hoursAndMinutesAndSeconds = convertedTimeString.match(HOURS_MINUTES_SECONDS_REGEXP);

@@ -7,6 +7,8 @@ import {
 } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { ONE, TWO } from '@ptsecurity/cdk/keycodes';
+import { createKeyboardEvent, dispatchFakeEvent, dispatchEvent } from '@ptsecurity/cdk/testing';
 import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
@@ -592,6 +594,37 @@ describe('McTimepicker', () => {
                     );
                     fixture.detectChanges();
                     expect(inputElementDebug.nativeElement.value).toBe('23:59', 'Arrow-Down key decrement not working');
+                });
+        });
+
+        it('Manual keyboard input digit-by-digit', () => {
+            return fixture.whenStable()
+                .then(() => {
+                    const inputNativeElement = inputElementDebug.nativeElement;
+                    inputNativeElement.selectionStart = 0;
+                    inputNativeElement.selectionEnd = 2;
+
+                    const key1PressEvent: KeyboardEvent = createKeyboardEvent('keydown', ONE);
+                    dispatchEvent(inputNativeElement, key1PressEvent);
+                    inputNativeElement.value = `1${inputNativeElement.value.substring(2)}`;
+                    inputNativeElement.selectionStart = 1;
+                    inputNativeElement.selectionEnd = 1;
+                    dispatchFakeEvent(inputNativeElement, 'input');
+                    fixture.detectChanges();
+
+                    expect(inputNativeElement.value).toBe('1:00', 'Failed key-by-key input on 1st key');
+
+                    const key2PressEvent: KeyboardEvent = createKeyboardEvent('keydown', TWO);
+                    dispatchEvent(inputNativeElement, key2PressEvent);
+                    const inputStringBeforeInsertion = inputNativeElement.value.substring(0, 1);
+                    const inputStringAfterInsertion = inputNativeElement.value.substring(1);
+                    inputNativeElement.value = `${inputStringBeforeInsertion}2${inputStringAfterInsertion}`;
+                    inputNativeElement.selectionStart = 2;
+                    inputNativeElement.selectionEnd = 2;
+                    dispatchFakeEvent(inputNativeElement, 'input');
+                    fixture.detectChanges();
+
+                    expect(inputNativeElement.value).toBe('12:00', 'Failed key-by-key input on 2nd key');
                 });
         });
     });
