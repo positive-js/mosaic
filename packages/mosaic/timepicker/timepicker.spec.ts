@@ -626,7 +626,7 @@ describe('McTimepicker', () => {
                     dispatchFakeEvent(inputNativeElement, 'input');
                     fixture.detectChanges();
 
-                    expect(inputNativeElement.value).toBe('12:00', 'Keypress works!');
+                    expect(inputNativeElement.value).toBe('12:00', 'Failed key-by-key input');
                 });
         });
     });
