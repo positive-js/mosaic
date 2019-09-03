@@ -8,7 +8,6 @@ import { DocumentationItems } from '../../shared/documentation-items/documentati
 import { TableOfContentsModule } from '../../shared/table-of-contents/table-of-contents.module';
 import { AnchorsModule } from '../anchors/anchors.module';
 
-
 import {
     ComponentOverviewComponent,
     ComponentViewerComponent
