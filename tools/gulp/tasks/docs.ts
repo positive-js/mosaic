@@ -99,8 +99,8 @@ task('markdown-docs-mosaic', () => {
             const escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
 
             return `
-        <div id="${escapedText}" class="docs-header-link docs-header-link_${level}">
-          <span header-link="${escapedText}"></span>
+        <div class="docs-header-link docs-header-link_${level}">
+          <span header-link="${escapedText}" id="${escapedText}"></span>
           ${text}
         </div>
       `;
