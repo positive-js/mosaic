@@ -51,6 +51,17 @@
     }
 }
 
+.docs-header-link {
+    position: relative;
+
+    & span {
+        position: absolute;
+        display: block;
+        left: 0;
+        top: -60px;
+    }
+}
+
 @mixin docs-markdown-theme($theme) {
     $primary: map-get($theme, primary);
     $second: map-get($theme, second);

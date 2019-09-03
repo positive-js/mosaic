@@ -25,8 +25,8 @@ import { DocumentationItems } from './shared/documentation-items/documentation-i
 
         RouterModule.forRoot(APP_ROUTES, {
             scrollPositionRestoration: 'enabled',
-            anchorScrolling: 'enabled',
-            scrollOffset: [0, 64] // [x, y]
+            onSameUrlNavigation: 'reload',
+            anchorScrolling: 'enabled'
         }),
 
         HomepageModule,
