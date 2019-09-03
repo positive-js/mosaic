@@ -43,14 +43,14 @@ export class AnchorsComponent {
                 @Inject(DOCUMENT) private document: Document) {
         this.currentUrl = router.url.split('#')[0];
         this.container = '.anchors-menu';
-        this.pathName = location.pathname;
+        this.pathName = this.router.url;
         this.router.events.pipe(takeUntil(this.destroyed)).subscribe((event) => {
             if (event instanceof NavigationEnd) {
                 const rootUrl = router.url.split('#')[0];
 
                 if (rootUrl !== this.currentUrl) {
                     this.currentUrl = rootUrl;
-                    this.pathName = location.pathname;
+                    this.pathName = this.router.url;
                 }
             }
         });
