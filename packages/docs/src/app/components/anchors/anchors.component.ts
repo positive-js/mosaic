@@ -27,54 +27,42 @@ export class AnchorsComponent {
     container: string;
     headerHeight: number = 64;
     // коэффициент для вычисления расстояния якоря над заголовком при скроле (== headerHeight * anchorHeaderCoef)
-    anchorHeaderCoef = 3;
-    debounceTime: number = 5;
-    readonly isSmoothScrollSupported;
+    anchorHeaderCoef = 2;
+    debounceTime: number = 10;
     private destroyed = new Subject();
-    private urlFragment = '';
+    private fragment = '';
+    private activeClass = 'anchors-menu__list-element_active';
     private scrollContainer: any;
     private currentUrl: any;
     private pathName: string;
-    private scrollTimeout: number = 1000;
-    private scrollOptions: ScrollIntoViewOptions = { behavior: 'smooth' };
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private element: ElementRef,
                 private ref: ChangeDetectorRef,
                 @Inject(DOCUMENT) private document: Document) {
+        this.currentUrl = router.url.split('#')[0];
         this.container = '.anchors-menu';
-        this.isSmoothScrollSupported  = 'scrollBehavior' in this.document.documentElement.style;
+        this.pathName = location.pathname;
         this.router.events.pipe(takeUntil(this.destroyed)).subscribe((event) => {
             if (event instanceof NavigationEnd) {
                 const rootUrl = router.url.split('#')[0];
 
                 if (rootUrl !== this.currentUrl) {
-                    this.anchors = this.createAnchors();
                     this.currentUrl = rootUrl;
                     this.pathName = location.pathname;
                 }
             }
         });
+    }
 
+    ngOnInit() {
         // Срабатывает при изменении якоря в адресной строке руками или кликом по якорю
         this.route.fragment.pipe(takeUntil(this.destroyed)).subscribe((fragment) => {
-            this.urlFragment = fragment;
-            const anchorActive = this.document.querySelector('.anchors-menu__list-element_active');
+            this.fragment = fragment;
+            const index = this.getAnchorIndex(fragment);
 
-            const target = this.document.getElementById(this.urlFragment);
-            const index = this.getAnchorIndex(this.urlFragment);
-
-            if (index) { this.setActiveAnchor(index); }
-
-            if (target) {
-                this.click = true;
-
-                if (anchorActive && this.urlFragment === anchorActive.textContent.trim().toLowerCase()) {
-                    return;
-                }
-                this.scrollTo(target);
-            }
+            if (index) { this.setFragment(index); }
         });
     }
 
@@ -82,18 +70,10 @@ export class AnchorsComponent {
         this.destroyed.next();
     }
 
-    scrollTo(target) {
-        if (this.isSmoothScrollSupported) {
-            target.scrollIntoView(this.scrollOptions);
-        } else {
-            target.scrollIntoView();
-        }
-    }
-
     getAnchorIndex(urlFragment): number {
         let index = 0;
         this.anchors.forEach((anchor, i) => {
-            if (anchor.href === `#${urlFragment}`) { index = i; }
+            if (anchor.href === `${urlFragment}`) { index = i; }
         });
 
         return index;
@@ -101,30 +81,23 @@ export class AnchorsComponent {
 
     setScrollPosition() {
         this.anchors = this.createAnchors();
-        const target = this.document.getElementById(this.urlFragment);
+        this.scrollContainer = this.document || window;
+        const target = this.document.getElementById(this.fragment);
 
         if (target) {
-            const index = this.getAnchorIndex(this.urlFragment);
+            const index = this.getAnchorIndex(this.fragment);
 
-            if (index) { this.setActiveAnchor(index); }
+            if (index) { this.setFragment(index); }
             target.scrollTop += this.headerHeight;
-            this.scrollTo(target);
+            target.scrollIntoView();
         }
 
-        const scrollPromise = new Promise((resolve, reject) => {
-            setTimeout(() => { resolve(); }, this.scrollTimeout);
-        });
-
-        scrollPromise.then(() => {
-            this.scrollContainer = this.document || window;
-
-            if (this.scrollContainer) {
-                fromEvent(this.scrollContainer, 'scroll').pipe(
-                    takeUntil(this.destroyed),
-                    debounceTime(this.debounceTime))
-                    .subscribe(() => this.onScroll());
-            }
-        });
+        if (this.scrollContainer) {
+            fromEvent(this.scrollContainer, 'scroll').pipe(
+                takeUntil(this.destroyed),
+                debounceTime(this.debounceTime))
+                .subscribe(() => this.onScroll());
+        }
     }
 
     /* TODO Техдолг: при изменении ширины экрана должен переопределяться параметр top
@@ -144,17 +117,26 @@ export class AnchorsComponent {
         return window.pageYOffset + this.headerHeight * this.anchorHeaderCoef;
     }
 
-    private createAnchors(): IAnchor[] {
+    private isScrolledToEnd(): boolean {
+        const documentHeight = this.document.documentElement.scrollHeight;
+        const scrollTop = window.pageYOffset || this.document.documentElement.scrollTop || this.document.body.scrollTop;
+        const clientHeight = this.document.documentElement.clientHeight;
+        const scrollHeight = scrollTop + clientHeight;
 
+        // scrollHeight должен быть строго равен documentHeight, но в Edge он чуть больше
+        return scrollHeight >= documentHeight;
+    }
+
+    private createAnchors(): IAnchor[] {
         const anchors = [];
         const headers = Array.from(this.document.querySelectorAll(this.headerSelectors)) as HTMLElement[];
 
         if (headers.length) {
+            const bodyTop = this.document.body.getBoundingClientRect().top;
             for (let i = 0; i < headers.length; i++) {
-                // remove the 'link' icon name from the inner text
                 const name = headers[i].innerText.trim();
-                const href = `#${headers[i].id}`;
-                const {top} = headers[i].getBoundingClientRect();
+                const href = `${headers[i].querySelector('span').id}`;
+                const top = headers[i].getBoundingClientRect().top - bodyTop + this.headerHeight;
 
                 anchors.push({
                     href,
@@ -171,15 +153,17 @@ export class AnchorsComponent {
     }
 
     private onScroll() {
-        // Если переход на якорь был инициирован не скролом выходим из функции
-        if (this.click) {
-            this.disableClickState();
+        if (this.isScrolledToEnd()) {
+            this.setActiveAnchor(this.anchors.length - 1);
+            this.ref.detectChanges();
 
             return;
         }
 
         for (let i = 0; i < this.anchors.length; i++) {
-            this.anchors[i].active = this.isLinkActive(this.anchors[i], this.anchors[i + 1]);
+            if (this.isLinkActive(this.anchors[i], this.anchors[i + 1])) {
+                this.setActiveAnchor(i);
+            }
         }
         this.ref.detectChanges();
     }
@@ -192,20 +176,20 @@ export class AnchorsComponent {
         return scrollOffset >= currentLink.top && !(nextLink && nextLink.top < scrollOffset);
     }
 
-    private setActiveAnchor(index) {
+    private setFragment(index) {
+        if (this.isScrolledToEnd()) {
+            this.setActiveAnchor(this.anchors.length - 1);
+
+            return;
+        }
         this.click = true;
+        this.setActiveAnchor(index);
+    }
+
+    private setActiveAnchor(index) {
         for (const anchor of this.anchors) {
             anchor.active = false;
         }
         this.anchors[index].active = true;
-        this.ref.detectChanges();
-    }
-
-    private disableClickState() {
-        // При клике по якорю браузер вызывает scroll несколько раз - setTimeout нужен, чтобы код отработал единожды
-        // Возможная альтернатива: debounceTime: number = 50; - но это ухудшает отзывчивость якорей при скролле
-        setTimeout(() => {
-            this.click = false;
-        }, 500);
     }
 }
