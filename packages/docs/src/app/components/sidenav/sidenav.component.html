@@ -1,16 +1,3 @@
 <nav class="main__nav nav">
-    <div *ngFor="let category of categories;">
-        <button cdkAccordionItem
-            #panel="cdkAccordionItem" (click)="panel.toggle()" expanded="true" class="nav__trigger">
-            {{category.name}} <i [className]="panel.expanded ? iconClassExpanded : iconClassCollapsed"></i>
-        </button>
-        <ul class="nav__wrapper" [@bodyExpansion]="panel.expanded ? 'expanded' : 'collapsed'" >
-            <li *ngFor="let component of category.items" class="nav__item">
-                <a [routerLink]="'/' + component.id"
-                   routerLinkActive="docs-component-viewer-sidenav-item-selected">
-                    {{component.name}}
-                </a>
-            </li>
-        </ul>
-    </div>
+    <app-accordion [categories] = categories></app-accordion>
 </nav>

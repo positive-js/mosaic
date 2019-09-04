@@ -9,6 +9,7 @@
 @import "~@ptsecurity/mosaic-icons/dist/styles/mc-icons.css";
 @import 'app/components/navbar/navbar-theme';
 @import 'app/components/footer/footer-theme';
+@import 'app/components/sidenav/sidenav-theme';
 @import 'app/components/component-viewer/component-overview-theme';
 @import 'app/shared/stackblitz/stackblitz-button-theme';
 @import 'app/shared/example-viewer/example-viewer-theme';
@@ -52,4 +53,6 @@ $config: mc-typography-config();
 @include docs-stackblitz-typography($config);
 
 @include example-viewer-theme($theme);
+
+@include mc-sidenav-theme($theme);
 

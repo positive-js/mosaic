@@ -1,0 +1,8 @@
+@mixin mc-sidenav-theme($theme) {
+    $second: map-get($theme, second);
+    $secondary: mc-color($second, 100);
+
+    .nav {
+        background-color: $secondary;
+    }
+}

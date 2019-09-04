@@ -1,0 +1,16 @@
+<div class="app-accordion">
+    <div *ngFor="let category of categories;">
+        <button cdkAccordionItem
+                #panel="cdkAccordionItem" (click)="panel.toggle()" expanded="true" class="app-accordion__trigger">
+            {{category.name}} <i [className]="panel.expanded ? iconClassExpanded : iconClassCollapsed"></i>
+        </button>
+        <ul class="app-accordion__wrapper" [@bodyExpansion]="panel.expanded ? 'expanded' : 'collapsed'" >
+            <li *ngFor="let component of category.items" class="app-accordion__item">
+                <a [routerLink]="'/' + component.id"
+                   routerLinkActive="docs-component-viewer-sidenav-item-selected">
+                    {{component.name}}
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
