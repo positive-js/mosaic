@@ -364,13 +364,15 @@ class SimpleMcTreeApp {
             this.transformer, this.getLevel, this.isExpandable, this.getChildren
         );
 
-        this.treeControl = new FlatTreeControl(this.getLevel, this.isExpandable);
+        this.treeControl = new FlatTreeControl(this.getLevel, this.isExpandable, this.getValue, this.getValue);
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
         this.dataSource.data = this.treeData = buildFileTree(DATA_OBJECT, 0);
     }
 
     getLevel = (node: FileFlatNode) => node.level;
+
+    getValue = (node: FileFlatNode) => node.name;
 
     isExpandable = (node: FileFlatNode) => node.expandable;
 
@@ -419,7 +421,7 @@ class McTreeAppWithToggle {
     @ViewChild(McTreeSelection, { static: false }) tree: McTreeSelection;
 
     constructor() {
-        this.treeControl = new FlatTreeControl(this.getLevel, this.isExpandable);
+        this.treeControl = new FlatTreeControl(this.getLevel, this.isExpandable, this.getValue, this.getValue);
 
         this.treeFlattener = new McTreeFlattener<FileNode, FileFlatNode>(
             this.transformer, this.getLevel, this.isExpandable, this.getChildren
@@ -435,6 +437,8 @@ class McTreeAppWithToggle {
     }
 
     getLevel = (node: FileFlatNode) => node.level;
+
+    getValue = (node: FileFlatNode) => node.name;
 
     isExpandable = (node: FileFlatNode) => node.expandable;
 
@@ -481,7 +485,7 @@ class WhenNodeMcTreeApp {
     @ViewChild(McTreeSelection, { static: false }) tree: McTreeSelection;
 
     constructor() {
-        this.treeControl = new FlatTreeControl(this.getLevel, this.isExpandable);
+        this.treeControl = new FlatTreeControl(this.getLevel, this.isExpandable, this.getValue, this.getValue);
         this.treeFlattener = new McTreeFlattener<FileNode, FileFlatNode>(
             this.transformer, this.getLevel, this.isExpandable, this.getChildren
         );
@@ -492,6 +496,8 @@ class WhenNodeMcTreeApp {
     }
 
     getLevel = (node: FileFlatNode) => node.level;
+
+    getValue = (node: FileFlatNode) => node.name;
 
     isExpandable = (node: FileFlatNode) => node.expandable;
 
@@ -544,13 +550,15 @@ class FiltrationMcTreeApp {
             this.transformer, this.getLevel, this.isExpandable, this.getChildren
         );
 
-        this.treeControl = new FlatTreeControl(this.getLevel, this.isExpandable);
+        this.treeControl = new FlatTreeControl(this.getLevel, this.isExpandable, this.getValue, this.getValue);
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
         this.dataSource.data = this.treeData = buildFileTree(DATA_OBJECT, 0);
     }
 
     getLevel = (node: FileFlatNode) => node.level;
+
+    getValue = (node: FileFlatNode) => node.name;
 
     isExpandable = (node: FileFlatNode) => node.expandable;
 

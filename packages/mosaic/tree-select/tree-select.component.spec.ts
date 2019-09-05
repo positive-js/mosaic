@@ -1,4 +1,4 @@
-/* tslint:disable:no-magic-numbers */
+/* tslint:disable:no-magic-numbers no-reserved-keywords */
 /* tslint:disable:mocha-no-side-effect-code */
 /* tslint:disable:no-non-null-assertion */
 /* tslint:disable:no-empty */
@@ -14,7 +14,6 @@ import {
     ChangeDetectionStrategy,
     Component,
     DebugElement,
-    Injectable,
     OnInit,
     QueryList,
     ViewChild,
@@ -74,47 +73,46 @@ import {
     McTreeOption,
     McTreeSelectionChange
 } from '@ptsecurity/mosaic/tree';
-import { BehaviorSubject, Observable, of as observableOf, Subject, Subscription } from 'rxjs';
+import { Observable, of as observableOf, Subject, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 
-const TREE_DATA = `
-  {
-  "rootNode_1": "app",
-  "Pictures": {
-        "Sun": "png",
-        "Woods": "jpg",
-        "Photo Booth Library": {
-          "Contents": "dir",
-          "Pictures": "dir"
+const TREE_DATA = {
+  rootNode_1: 'app',
+  Pictures: {
+        Sun: 'png',
+        Woods: 'jpg',
+        Photo_Booth_Library: {
+          Contents: 'dir',
+          Pictures: 'dir'
         }
     },
-    "Documents": {
-      "angular": {
-        "src": {
-          "core": "ts",
-          "compiler": "ts"
+    Documents: {
+      angular: {
+        src: {
+          core: 'ts',
+          compiler: 'ts'
         }
       },
-      "material2": {
-        "src": {
-          "button": "ts",
-          "checkbox": "ts",
-          "input": "ts"
+      material2: {
+        src: {
+          button: 'ts',
+          checkbox: 'ts',
+          input: 'ts'
         }
       }
     },
-    "Downloads": {
-        "Tutorial": "html",
-        "November": "pdf",
-        "October": "pdf"
+    Downloads: {
+        Tutorial: 'html',
+        November: 'pdf',
+        October: 'pdf'
     },
-    "Applications": {
-        "Chrome": "app",
-        "Calendar": "app",
-        "Webstorm": "app"
+    Applications: {
+        Chrome: 'app',
+        Calendar: 'app',
+        Webstorm: 'app'
     }
-}`;
+};
 
 class FileNode {
     children: FileNode[];
@@ -129,54 +127,31 @@ class FileFlatNode {
     expandable: boolean;
 }
 
-@Injectable()
-export class FileDatabase {
-    dataChange: BehaviorSubject<FileNode[]> = new BehaviorSubject<FileNode[]>([]);
+/**
+ * Build the file structure tree. The `value` is the Json object, or a sub-tree of a Json object.
+ * The return value is the list of `FileNode`.
+ */
+function buildFileTree(value: any, level: number): FileNode[] {
+    const data: any[] = [];
 
-    get data(): FileNode[] { return this.dataChange.value; }
+    for (const k of Object.keys(value)) {
+        const v = value[k];
+        const node = new FileNode();
 
-    constructor() {
-        this.initialize();
-    }
+        node.name = `${k}`;
 
-    initialize() {
-        // Parse the string to json object.
-        const dataObject = JSON.parse(TREE_DATA);
-
-        // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
-        //     file node as children.
-        const data = this.buildFileTree(dataObject, 0);
-
-        // Notify the change.
-        this.dataChange.next(data);
-    }
-
-    /**
-     * Build the file structure tree. The `value` is the Json object, or a sub-tree of a Json object.
-     * The return value is the list of `FileNode`.
-     */
-    buildFileTree(value: any, level: number): FileNode[] {
-        const data: any[] = [];
-
-        for (const k of Object.keys(value)) {
-            const v = value[k];
-            const node = new FileNode();
-
-            node.name = `${k}`;
-
-            if (v === null || v === undefined) {
-                // no action
-            } else if (typeof v === 'object') {
-                node.children = this.buildFileTree(v, level + 1);
-            } else {
-                node.type = v;
-            }
-
-            data.push(node);
+        if (v === null || v === undefined) {
+            // no action
+        } else if (typeof v === 'object') {
+            node.children = buildFileTree(v, level + 1);
+        } else {
+            node.type = v;
         }
 
-        return data;
+        data.push(node);
     }
+
+    return data;
 }
 
 import { McTreeSelectModule, McTreeSelect } from './index';
@@ -197,6 +172,8 @@ const transformer = (node: FileNode, level: number) => {
 };
 
 const getLevel = (node: FileFlatNode) => node.level;
+
+const getValue = (node: FileFlatNode) => node.name;
 
 const isExpandable = (node: FileFlatNode) => node.expandable;
 
@@ -220,20 +197,17 @@ const getChildren = (node: FileNode): Observable<FileNode[]> => {
                 <mc-tree-selection
                     [dataSource]="dataSource"
                     [treeControl]="treeControl">
-                    <mc-tree-option
-                        *mcTreeNodeDef="let node"
-                        mcTreeNodePadding
-                        [value]="node.name">
-                        {{ node.name }}
+                    <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
 
                     <mc-tree-option
                         *mcTreeNodeDef="let node; when: hasChild"
                         mcTreeNodePadding
-                        [disabled]="node.name === 'Downloads'"
-                        [value]="node.name">
+                        [disabled]="node.name === 'Downloads'">
+
                         <i mc-icon="mc-angle-down-S_16" mcTreeNodeToggle></i>
-                        {{ node.name }} : {{ node.type }}
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
                 </mc-tree-selection>
             </mc-tree-select>
@@ -244,7 +218,7 @@ const getChildren = (node: FileNode): Observable<FileNode[]> => {
 class BasicTreeSelect {
     control = new FormControl();
 
-    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable);
+    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable, getValue, getValue);
     treeFlattener = new McTreeFlattener(transformer, getLevel, isExpandable, getChildren);
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
@@ -258,12 +232,12 @@ class BasicTreeSelect {
     @ViewChild(McTreeSelect, {static: true}) select: McTreeSelect;
     @ViewChildren(McTreeOption) options: QueryList<McTreeOption>;
 
-    constructor(database: FileDatabase) {
+    constructor() {
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-        database.dataChange.subscribe((data) => {
-            this.dataSource.data = data;
-        });
+        // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
+        // file node as children.
+        this.dataSource.data = buildFileTree(TREE_DATA, 0);
     }
 
     hasChild(_: number, nodeData: FileFlatNode) {
@@ -282,13 +256,13 @@ class BasicTreeSelect {
                 <mc-tree-selection
                     [dataSource]="dataSource"
                     [treeControl]="treeControl">
-                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node" mcTreeNodePadding>
-                        {{ node.name }}
+                    <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
 
-                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+                    <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
                         <i mc-icon="mc-angle-S_16" mcTreeNodeToggle></i>
-                        {{ node.name }} : {{ node.type }}
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
                 </mc-tree-selection>
             </mc-tree-select>
@@ -298,7 +272,7 @@ class BasicTreeSelect {
 class NgModelSelect {
     isDisabled: boolean;
 
-    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable);
+    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable, getValue, getValue);
     treeFlattener = new McTreeFlattener(transformer, getLevel, isExpandable, getChildren);
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
@@ -306,10 +280,12 @@ class NgModelSelect {
     @ViewChild(McTreeSelect, {static: false}) select: McTreeSelect;
     @ViewChildren(McTreeOption) options: QueryList<McTreeOption>;
 
-    constructor(database: FileDatabase) {
+    constructor() {
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-        database.dataChange.subscribe((data) => this.dataSource.data = data);
+        // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
+        // file node as children.
+        this.dataSource.data = buildFileTree(TREE_DATA, 0);
     }
 
     hasChild(_: number, nodeData: FileFlatNode) {
@@ -327,13 +303,13 @@ class NgModelSelect {
                     [dataSource]="dataSource"
                     [treeControl]="treeControl">
 
-                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node" mcTreeNodePadding>
-                        {{ node.name }}
+                    <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
 
-                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+                    <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
                         <i mc-icon="mc-angle-S_16" mcTreeNodeToggle></i>
-                        {{ node.name }} : {{ node.type }}
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
                 </mc-tree-selection>
             </mc-tree-select>
@@ -346,13 +322,13 @@ class NgModelSelect {
                     [dataSource]="dataSource"
                     [treeControl]="treeControl">
 
-                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node" mcTreeNodePadding>
-                        {{ node.name }}
+                    <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
 
-                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+                    <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
                         <i mc-icon="mc-angle-S_16" mcTreeNodeToggle></i>
-                        {{ node.name }} : {{ node.type }}
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
                 </mc-tree-selection>
             </mc-tree-select>
@@ -360,15 +336,17 @@ class NgModelSelect {
     `
 })
 class ManySelects {
-    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable);
+    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable, getValue, getValue);
     treeFlattener = new McTreeFlattener(transformer, getLevel, isExpandable, getChildren);
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
-    constructor(database: FileDatabase) {
+    constructor() {
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-        database.dataChange.subscribe((data) => this.dataSource.data = data);
+        // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
+        // file node as children.
+        this.dataSource.data = buildFileTree(TREE_DATA, 0);
     }
 
     hasChild(_: number, nodeData: FileFlatNode) {
@@ -389,16 +367,15 @@ class ManySelects {
                         [dataSource]="dataSource"
                         [treeControl]="treeControl">
 
-                        <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node" mcTreeNodePadding>
-                            {{ node.name }}
+                        <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+                            {{ treeControl.getViewValue(node) }}
                         </mc-tree-option>
 
                         <mc-tree-option
-                            [value]="node.name"
-                            *mcTreeNodeDef="let node; when: hasChild"
+                                                        *mcTreeNodeDef="let node; when: hasChild"
                             mcTreeNodePadding>
                             <i mc-icon="mc-angle-S_16" mcTreeNodeToggle></i>
-                            {{ node.name }} : {{ node.type }}
+                            {{ treeControl.getViewValue(node) }}
                         </mc-tree-option>
                     </mc-tree-selection>
                 </mc-tree-select>
@@ -411,17 +388,19 @@ class NgIfSelect {
 
     control = new FormControl('rootNode_1');
 
-    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable);
+    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable, getValue, getValue);
     treeFlattener = new McTreeFlattener(transformer, getLevel, isExpandable, getChildren);
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
     @ViewChild(McTreeSelect, {static: false}) select: McTreeSelect;
 
-    constructor(database: FileDatabase) {
+    constructor() {
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-        database.dataChange.subscribe((data) => this.dataSource.data = data);
+        // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
+        // file node as children.
+        this.dataSource.data = buildFileTree(TREE_DATA, 0);
     }
 
     hasChild(_: number, nodeData: FileFlatNode) {
@@ -439,16 +418,15 @@ class NgIfSelect {
                     [dataSource]="dataSource"
                     [treeControl]="treeControl">
 
-                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node" mcTreeNodePadding>
-                        {{ node.name }}
+                    <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
 
                     <mc-tree-option
-                        [value]="node.name"
-                        *mcTreeNodeDef="let node; when: hasChild"
+                                                *mcTreeNodeDef="let node; when: hasChild"
                         mcTreeNodePadding>
                         <i mc-icon="mc-angle-S_16" mcTreeNodeToggle></i>
-                        {{ node.name }} : {{ node.type }}
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
                 </mc-tree-selection>
             </mc-tree-select>
@@ -458,15 +436,17 @@ class NgIfSelect {
 class SelectWithChangeEvent {
     changeListener = jasmine.createSpy('McTreeSelect change listener');
 
-    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable);
+    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable, getValue, getValue);
     treeFlattener = new McTreeFlattener(transformer, getLevel, isExpandable, getChildren);
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
-    constructor(database: FileDatabase) {
+    constructor() {
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-        database.dataChange.subscribe((data) => this.dataSource.data = data);
+        // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
+        // file node as children.
+        this.dataSource.data = buildFileTree(TREE_DATA, 0);
     }
 
     hasChild(_: number, nodeData: FileFlatNode) {
@@ -483,16 +463,14 @@ class SelectWithChangeEvent {
                     [dataSource]="dataSource"
                     [treeControl]="treeControl">
 
-                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node" mcTreeNodePadding>
-                        {{ node.name }}
+                    <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
 
-                    <mc-tree-option
-                        [value]="node.name"
-                        *mcTreeNodeDef="let node; when: hasChild"
+                    <mc-tree-option *mcTreeNodeDef="let node; when: hasChild"
                         mcTreeNodePadding>
                         <i mc-icon="mc-angle-S_16" mcTreeNodeToggle></i>
-                        {{ node.name }} : {{ node.type }}
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
                 </mc-tree-selection>
             </mc-tree-select>
@@ -505,15 +483,17 @@ class SelectInitWithoutOptions {
     @ViewChild(McTreeSelect, {static: false}) select: McTreeSelect;
     @ViewChildren(McTreeOption) options: QueryList<McTreeOption>;
 
-    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable);
+    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable, getValue, getValue);
     treeFlattener = new McTreeFlattener(transformer, getLevel, isExpandable, getChildren);
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
-    constructor(database: FileDatabase) {
+    constructor() {
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-        database.dataChange.subscribe((data) => this.dataSource.data = data);
+        // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
+        // file node as children.
+        this.dataSource.data = buildFileTree(TREE_DATA, 0);
     }
 
     hasChild(_: number, nodeData: FileFlatNode) {
@@ -589,13 +569,13 @@ class ThrowsErrorOnInit implements OnInit {
                     [dataSource]="dataSource"
                     [treeControl]="treeControl">
 
-                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node" mcTreeNodePadding>
-                        {{ node.name }}
+                    <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
 
-                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+                    <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
                         <i mc-icon="mc-angle-S_16" mcTreeNodeToggle></i>
-                        {{ node.name }} : {{ node.type }}
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
                 </mc-tree-selection>
             </mc-tree-select>
@@ -605,15 +585,17 @@ class ThrowsErrorOnInit implements OnInit {
 class BasicSelectOnPush {
     control = new FormControl();
 
-    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable);
+    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable, getValue, getValue);
     treeFlattener = new McTreeFlattener(transformer, getLevel, isExpandable, getChildren);
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
-    constructor(database: FileDatabase) {
+    constructor() {
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-        database.dataChange.subscribe((data) => this.dataSource.data = data);
+        // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
+        // file node as children.
+        this.dataSource.data = buildFileTree(TREE_DATA, 0);
     }
 
     hasChild(_: number, nodeData: FileFlatNode) {
@@ -631,13 +613,13 @@ class BasicSelectOnPush {
                     [dataSource]="dataSource"
                     [treeControl]="treeControl">
 
-                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node" mcTreeNodePadding>
-                        {{ node.name }}
+                    <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
 
-                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+                    <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
                         <i mc-icon="mc-angle-S_16" mcTreeNodeToggle></i>
-                        {{ node.name }} : {{ node.type }}
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
                 </mc-tree-selection>
             </mc-tree-select>
@@ -647,15 +629,17 @@ class BasicSelectOnPush {
 class BasicSelectOnPushPreselected {
     control = new FormControl('rootNode_1');
 
-    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable);
+    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable, getValue, getValue);
     treeFlattener = new McTreeFlattener(transformer, getLevel, isExpandable, getChildren);
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
-    constructor(database: FileDatabase) {
+    constructor() {
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-        database.dataChange.subscribe((data) => this.dataSource.data = data);
+        // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
+        // file node as children.
+        this.dataSource.data = buildFileTree(TREE_DATA, 0);
     }
 
     hasChild(_: number, nodeData: FileFlatNode) {
@@ -670,20 +654,19 @@ class BasicSelectOnPushPreselected {
             <mc-tree-select
                 [multiple]="true"
                 placeholder="Food"
-                [formControl]="control"
-                [sortComparator]="sortComparator">
+                [formControl]="control">
 
                 <mc-tree-selection
                     [dataSource]="dataSource"
                     [treeControl]="treeControl">
 
-                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node" mcTreeNodePadding>
-                        {{ node.name }}
+                    <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
 
-                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+                    <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
                         <i mc-icon="mc-angle-S_16" mcTreeNodeToggle></i>
-                        {{ node.name }} : {{ node.type }}
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
                 </mc-tree-selection>
             </mc-tree-select>
@@ -693,22 +676,21 @@ class BasicSelectOnPushPreselected {
 class MultiSelect {
     control = new FormControl();
 
-    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable);
+    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable, getValue, getValue);
     treeFlattener = new McTreeFlattener(transformer, getLevel, isExpandable, getChildren);
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
     @ViewChild(McTreeSelect, {static: false}) select: McTreeSelect;
     @ViewChildren(McTreeOption) options: QueryList<McTreeOption>;
-    sortComparator: (a: McTreeOption, b: McTreeOption, options: McTreeOption[]) => number;
 
-    constructor(database: FileDatabase) {
+    constructor() {
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-        database.dataChange.subscribe((data) => this.dataSource.data = data);
+        // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
+        // file node as children.
+        this.dataSource.data = buildFileTree(TREE_DATA, 0);
     }
-
-
 
     hasChild(_: number, nodeData: FileFlatNode) {
         return nodeData.expandable;
@@ -744,13 +726,13 @@ class SelectEarlyAccessSibling {}
                     [dataSource]="dataSource"
                     [treeControl]="treeControl">
 
-                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node" mcTreeNodePadding>
-                        {{ node.name }}
+                    <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
 
-                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+                    <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
                         <i mc-icon="mc-angle-S_16" mcTreeNodeToggle></i>
-                        {{ node.name }} : {{ node.type }}
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
                 </mc-tree-selection>
             </mc-tree-select>
@@ -760,15 +742,17 @@ class SelectEarlyAccessSibling {}
 class BasicSelectInitiallyHidden {
     isVisible = false;
 
-    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable);
+    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable, getValue, getValue);
     treeFlattener = new McTreeFlattener(transformer, getLevel, isExpandable, getChildren);
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
-    constructor(database: FileDatabase) {
+    constructor() {
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-        database.dataChange.subscribe((data) => this.dataSource.data = data);
+        // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
+        // file node as children.
+        this.dataSource.data = buildFileTree(TREE_DATA, 0);
     }
 
     hasChild(_: number, nodeData: FileFlatNode) {
@@ -785,13 +769,13 @@ class BasicSelectInitiallyHidden {
                     [dataSource]="dataSource"
                     [treeControl]="treeControl">
 
-                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node" mcTreeNodePadding>
-                        {{ node.name }}
+                    <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
 
-                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+                    <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
                         <i mc-icon="mc-angle-S_16" mcTreeNodeToggle></i>
-                        {{ node.name }} : {{ node.type }}
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
                 </mc-tree-selection>
             </mc-tree-select>
@@ -799,15 +783,17 @@ class BasicSelectInitiallyHidden {
     `
 })
 class BasicSelectNoPlaceholder {
-    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable);
+    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable, getValue, getValue);
     treeFlattener = new McTreeFlattener(transformer, getLevel, isExpandable, getChildren);
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
-    constructor(database: FileDatabase) {
+    constructor() {
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-        database.dataChange.subscribe((data) => this.dataSource.data = data);
+        // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
+        // file node as children.
+        this.dataSource.data = buildFileTree(TREE_DATA, 0);
     }
 
     hasChild(_: number, nodeData: FileFlatNode) {
@@ -845,13 +831,13 @@ class BasicSelectWithTheming {
                     [dataSource]="dataSource"
                     [treeControl]="treeControl">
 
-                    <mc-tree-option [value]="" *mcTreeNodeDef="let node" mcTreeNodePadding>
-                        {{ node.name }}
+                    <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
 
-                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+                    <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
                         <i mc-icon="mc-angle-S_16" mcTreeNodeToggle></i>
-                        {{ node.name }} : {{ node.type }}
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
                 </mc-tree-selection>
             </mc-tree-select>
@@ -863,15 +849,17 @@ class ResetValuesSelect {
 
     @ViewChild(McTreeSelect, { static: false }) select: McTreeSelect;
 
-    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable);
+    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable, getValue, getValue);
     treeFlattener = new McTreeFlattener(transformer, getLevel, isExpandable, getChildren);
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
-    constructor(database: FileDatabase) {
+    constructor() {
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-        database.dataChange.subscribe((data) => this.dataSource.data = data);
+        // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
+        // file node as children.
+        this.dataSource.data = buildFileTree(TREE_DATA, 0);
     }
 
     hasChild(_: number, nodeData: FileFlatNode) {
@@ -887,13 +875,13 @@ class ResetValuesSelect {
                     [dataSource]="dataSource"
                     [treeControl]="treeControl">
 
-                    <mc-tree-option [value]="0" *mcTreeNodeDef="let node" mcTreeNodePadding>
-                        {{ node.name }}
+                    <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
 
-                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+                    <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
                         <i mc-icon="mc-angle-S_16" mcTreeNodeToggle></i>
-                        {{ node.name }} : {{ node.type }}
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
                 </mc-tree-selection>
             </mc-tree-select>
@@ -905,15 +893,17 @@ class FalsyValueSelect {
 
     control = new FormControl();
 
-    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable);
+    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable, getValue, getValue);
     treeFlattener = new McTreeFlattener(transformer, getLevel, isExpandable, getChildren);
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
-    constructor(database: FileDatabase) {
+    constructor() {
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-        database.dataChange.subscribe((data) => this.dataSource.data = data);
+        // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
+        // file node as children.
+        this.dataSource.data = buildFileTree(TREE_DATA, 0);
     }
 
     hasChild(_: number, nodeData: FileFlatNode) {
@@ -943,13 +933,13 @@ class InvalidSelectInForm {
                         [dataSource]="dataSource"
                         [treeControl]="treeControl">
 
-                        <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node" mcTreeNodePadding>
-                            {{ node.name }}
+                        <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+                            {{ treeControl.getViewValue(node) }}
                         </mc-tree-option>
 
-                        <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+                        <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
                             <i mc-icon="mc-angle-S_16" mcTreeNodeToggle></i>
-                            {{ node.name }} : {{ node.type }}
+                            {{ treeControl.getViewValue(node) }}
                         </mc-tree-option>
                     </mc-tree-selection>
                 </mc-tree-select>
@@ -967,15 +957,17 @@ class SelectInsideFormGroup {
         food: this.formControl
     });
 
-    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable);
+    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable, getValue, getValue);
     treeFlattener = new McTreeFlattener(transformer, getLevel, isExpandable, getChildren);
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
-    constructor(database: FileDatabase) {
+    constructor() {
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-        database.dataChange.subscribe((data) => this.dataSource.data = data);
+        // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
+        // file node as children.
+        this.dataSource.data = buildFileTree(TREE_DATA, 0);
     }
 
     hasChild(_: number, nodeData: FileFlatNode) {
@@ -986,18 +978,18 @@ class SelectInsideFormGroup {
 @Component({
     template: `
         <mc-form-field>
-            <mc-tree-select placeholder="Food" [(value)]="selectedFood">
+            <mc-tree-select placeholder="Food" [(ngModel)]="selectedFood">
                 <mc-tree-selection
                     [dataSource]="dataSource"
                     [treeControl]="treeControl">
 
-                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node" mcTreeNodePadding>
-                        {{ node.name }}
+                    <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
 
-                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+                    <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
                         <i mc-icon="mc-angle-S_16" mcTreeNodeToggle></i>
-                        {{ node.name }} : {{ node.type }}
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
                 </mc-tree-selection>
             </mc-tree-select>
@@ -1009,15 +1001,17 @@ class BasicSelectWithoutForms {
 
     @ViewChild(McTreeSelect, {static: false}) select: McTreeSelect;
 
-    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable);
+    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable, getValue, getValue);
     treeFlattener = new McTreeFlattener(transformer, getLevel, isExpandable, getChildren);
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
-    constructor(database: FileDatabase) {
+    constructor() {
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-        database.dataChange.subscribe((data) => this.dataSource.data = data);
+        // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
+        // file node as children.
+        this.dataSource.data = buildFileTree(TREE_DATA, 0);
     }
 
     hasChild(_: number, nodeData: FileFlatNode) {
@@ -1028,18 +1022,18 @@ class BasicSelectWithoutForms {
 @Component({
     template: `
         <mc-form-field>
-            <mc-tree-select placeholder="Food" [(value)]="selectedFood">
+            <mc-tree-select placeholder="Food" [(ngModel)]="selectedFood">
                 <mc-tree-selection
                     [dataSource]="dataSource"
                     [treeControl]="treeControl">
 
-                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node" mcTreeNodePadding>
-                        {{ node.name }}
+                    <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
 
-                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+                    <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
                         <i mc-icon="mc-angle-S_16" mcTreeNodeToggle></i>
-                        {{ node.name }} : {{ node.type }}
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
                 </mc-tree-selection>
             </mc-tree-select>
@@ -1051,15 +1045,17 @@ class BasicSelectWithoutFormsPreselected {
 
     @ViewChild(McTreeSelect, {static: false}) select: McTreeSelect;
 
-    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable);
+    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable, getValue, getValue);
     treeFlattener = new McTreeFlattener(transformer, getLevel, isExpandable, getChildren);
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
-    constructor(database: FileDatabase) {
+    constructor() {
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-        database.dataChange.subscribe((data) => this.dataSource.data = data);
+        // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
+        // file node as children.
+        this.dataSource.data = buildFileTree(TREE_DATA, 0);
     }
 
     hasChild(_: number, nodeData: FileFlatNode) {
@@ -1070,18 +1066,18 @@ class BasicSelectWithoutFormsPreselected {
 @Component({
     template: `
         <mc-form-field>
-            <mc-tree-select placeholder="Food" [(value)]="selectedFoods" multiple>
+            <mc-tree-select placeholder="Food" [(ngModel)]="selectedFoods" multiple>
                 <mc-tree-selection
                     [dataSource]="dataSource"
                     [treeControl]="treeControl">
 
-                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node" mcTreeNodePadding>
-                        {{ node.name }}
+                    <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
 
-                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+                    <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
                         <i mc-icon="mc-angle-S_16" mcTreeNodeToggle></i>
-                        {{ node.name }} : {{ node.type }}
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
                 </mc-tree-selection>
             </mc-tree-select>
@@ -1093,15 +1089,17 @@ class BasicSelectWithoutFormsMultiple {
 
     @ViewChild(McTreeSelect, {static: false}) select: McTreeSelect;
 
-    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable);
+    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable, getValue, getValue);
     treeFlattener = new McTreeFlattener(transformer, getLevel, isExpandable, getChildren);
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
-    constructor(database: FileDatabase) {
+    constructor() {
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-        database.dataChange.subscribe((data) => this.dataSource.data = data);
+        // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
+        // file node as children.
+        this.dataSource.data = buildFileTree(TREE_DATA, 0);
     }
 
     hasChild(_: number, nodeData: FileFlatNode) {
@@ -1115,19 +1113,19 @@ class BasicSelectWithoutFormsMultiple {
         <mc-form-field>
             <mc-tree-select placeholder="Food" [formControl]="control" #select="mcTreeSelect">
                 <mc-tree-select-trigger>
-                    {{ select.selected?.split('').reverse().join('') }}
+                    {{ select.triggerValue?.split('').reverse().join('') }}
                 </mc-tree-select-trigger>
                 <mc-tree-selection
                     [dataSource]="dataSource"
                     [treeControl]="treeControl">
 
-                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node" mcTreeNodePadding>
-                        {{ node.name }}
+                    <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
 
-                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+                    <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
                         <i mc-icon="mc-angle-S_16" mcTreeNodeToggle></i>
-                        {{ node.name }} : {{ node.type }}
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
                 </mc-tree-selection>
             </mc-tree-select>
@@ -1137,15 +1135,17 @@ class BasicSelectWithoutFormsMultiple {
 class SelectWithCustomTrigger {
     control = new FormControl();
 
-    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable);
+    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable, getValue, getValue);
     treeFlattener = new McTreeFlattener(transformer, getLevel, isExpandable, getChildren);
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
-    constructor(database: FileDatabase) {
+    constructor() {
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-        database.dataChange.subscribe((data) => this.dataSource.data = data);
+        // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
+        // file node as children.
+        this.dataSource.data = buildFileTree(TREE_DATA, 0);
     }
 
     hasChild(_: number, nodeData: FileFlatNode) {
@@ -1165,13 +1165,13 @@ class SelectWithCustomTrigger {
                     [dataSource]="dataSource"
                     [treeControl]="treeControl">
 
-                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node" mcTreeNodePadding>
-                        {{ node.name }}
+                    <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
 
-                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+                    <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
                         <i mc-icon="mc-angle-S_16" mcTreeNodeToggle></i>
-                        {{ node.name }} : {{ node.type }}
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
                 </mc-tree-selection>
             </mc-tree-select>
@@ -1185,15 +1185,17 @@ class NgModelCompareWithSelect {
     @ViewChild(McTreeSelect, {static: false}) select: McTreeSelect;
     @ViewChildren(McTreeOption) options: QueryList<McTreeOption>;
 
-    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable);
+    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable, getValue, getValue);
     treeFlattener = new McTreeFlattener(transformer, getLevel, isExpandable, getChildren);
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
-    constructor(database: FileDatabase) {
+    constructor() {
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-        database.dataChange.subscribe((data) => this.dataSource.data = data);
+        // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
+        // file node as children.
+        this.dataSource.data = buildFileTree(TREE_DATA, 0);
     }
 
     hasChild(_: number, nodeData: FileFlatNode) {
@@ -1232,13 +1234,13 @@ class NgModelCompareWithSelect {
                 [dataSource]="dataSource"
                 [treeControl]="treeControl">
 
-                <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node" mcTreeNodePadding>
-                    {{ node.name }}
+                <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+                    {{ treeControl.getViewValue(node) }}
                 </mc-tree-option>
 
-                <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+                <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
                     <i mc-icon="mc-angle-S_16" mcTreeNodeToggle></i>
-                    {{ node.name }} : {{ node.type }}
+                    {{ treeControl.getViewValue(node) }}
                 </mc-tree-option>
             </mc-tree-selection>
         </mc-tree-select>
@@ -1251,15 +1253,17 @@ class CustomErrorBehaviorSelect {
 
     errorStateMatcher: ErrorStateMatcher;
 
-    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable);
+    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable, getValue, getValue);
     treeFlattener = new McTreeFlattener(transformer, getLevel, isExpandable, getChildren);
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
-    constructor(database: FileDatabase) {
+    constructor() {
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-        database.dataChange.subscribe((data) => this.dataSource.data = data);
+        // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
+        // file node as children.
+        this.dataSource.data = buildFileTree(TREE_DATA, 0);
     }
 
     hasChild(_: number, nodeData: FileFlatNode) {
@@ -1275,13 +1279,13 @@ class CustomErrorBehaviorSelect {
                     [dataSource]="dataSource"
                     [treeControl]="treeControl">
 
-                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node" mcTreeNodePadding>
-                        {{ node.name }}
+                    <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
 
-                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+                    <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
                         <i mc-icon="mc-angle-S_16" mcTreeNodeToggle></i>
-                        {{ node.name }} : {{ node.type }}
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
                 </mc-tree-selection>
             </mc-tree-select>
@@ -1294,15 +1298,17 @@ class SingleSelectWithPreselectedArrayValues {
     @ViewChild(McTreeSelect, {static: false}) select: McTreeSelect;
     @ViewChildren(McTreeOption) options: QueryList<McTreeOption>;
 
-    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable);
+    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable, getValue, getValue);
     treeFlattener = new McTreeFlattener(transformer, getLevel, isExpandable, getChildren);
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
-    constructor(database: FileDatabase) {
+    constructor() {
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-        database.dataChange.subscribe((data) => this.dataSource.data = data);
+        // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
+        // file node as children.
+        this.dataSource.data = buildFileTree(TREE_DATA, 0);
     }
 
     hasChild(_: number, nodeData: FileFlatNode) {
@@ -1319,13 +1325,13 @@ class SingleSelectWithPreselectedArrayValues {
                     [dataSource]="dataSource"
                     [treeControl]="treeControl">
 
-                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node" mcTreeNodePadding>
-                        {{ node.name }}
+                    <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
 
-                    <mc-tree-option [value]="node.name" *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+                    <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
                         <i mc-icon="mc-angle-S_16" mcTreeNodeToggle></i>
-                        {{ node.name }} : {{ node.type }}
+                        {{ treeControl.getViewValue(node) }}
                     </mc-tree-option>
                 </mc-tree-selection>
             </mc-tree-select>
@@ -1338,15 +1344,17 @@ class SelectWithoutOptionCentering {
     @ViewChild(McTreeSelect, {static: false}) select: McTreeSelect;
     @ViewChildren(McTreeOption) options: QueryList<McTreeOption>;
 
-    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable);
+    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable, getValue, getValue);
     treeFlattener = new McTreeFlattener(transformer, getLevel, isExpandable, getChildren);
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
-    constructor(database: FileDatabase) {
+    constructor() {
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-        database.dataChange.subscribe((data) => this.dataSource.data = data);
+        // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
+        // file node as children.
+        this.dataSource.data = buildFileTree(TREE_DATA, 0);
     }
 
     hasChild(_: number, nodeData: FileFlatNode) {
@@ -1364,7 +1372,7 @@ class SelectWithoutOptionCentering {
                     [dataSource]="dataSource"
                     [treeControl]="treeControl">
 
-                    <mc-tree-option value="thing">A thing</mc-tree-option>
+                    <mc-tree-option>A thing</mc-tree-option>
                 </mc-tree-selection>
             </mc-tree-select>
         </mc-form-field>
@@ -1400,7 +1408,6 @@ describe('McTreeSelect', () => {
             ],
             declarations,
             providers: [
-                FileDatabase,
                 { provide: Directionality, useFactory: () => dir = { value: 'ltr' } },
                 { provide: ScrollDispatcher, useFactory: () => ({
                         scrolled: () => scrolledSubject.asObservable()
@@ -2199,7 +2206,7 @@ describe('McTreeSelect', () => {
 
                 expect(option.classList).toContain('mc-selected');
                 expect(fixture.componentInstance.options.first.selected).toBe(true);
-                expect(fixture.componentInstance.select.selected)
+                expect(fixture.componentInstance.select.selectedValues)
                     .toBe(fixture.componentInstance.options.first.value);
             }));
 
@@ -2502,7 +2509,7 @@ describe('McTreeSelect', () => {
                     .toEqual('rootNode_1', `Expected control's value to be set to the new option.`);
             }));
 
-            //todo сейчас логика позволяет устанавливать несуществующие значения
+            // todo сейчас логика позволяет устанавливать несуществующие значения
             xit('should clear the selection when a nonexistent option value is selected', fakeAsync(() => {
                 fixture.componentInstance.control.setValue('pizza-1');
                 fixture.detectChanges();
@@ -3119,8 +3126,6 @@ describe('McTreeSelect', () => {
                 flush();
 
                 const selectedOption = instance.select.selected as McTreeOption;
-                console.log(instance.selectedFood);
-                console.log(instance.selectedFood.name);
                 expect(instance.selectedFood.name).toEqual('tacos-2');
                 expect(selectedOption.value).toEqual('tacos-2');
             }));
@@ -3260,10 +3265,7 @@ describe('McTreeSelect', () => {
                     NoopAnimationsModule
                 ],
                 declarations: [SelectInsideFormGroup],
-                providers: [
-                    FileDatabase,
-                    { provide: ErrorStateMatcher, useValue: errorStateMatcher }
-                ]
+                providers: [{ provide: ErrorStateMatcher, useValue: errorStateMatcher }]
             });
 
             const errorFixture = TestBed.createComponent(SelectInsideFormGroup);
@@ -3400,13 +3402,13 @@ describe('McTreeSelect', () => {
             const fixture = TestBed.createComponent(SelectWithCustomTrigger);
             fixture.detectChanges();
 
-            fixture.componentInstance.control.setValue('pizza-1');
+            fixture.componentInstance.control.setValue('Downloads');
             fixture.detectChanges();
             flush();
 
             const label = fixture.debugElement.query(By.css('.mc-tree-select__matcher')).nativeElement;
 
-            expect(label.textContent).toContain('1-azzip',
+            expect(label.textContent).toContain('sdaolnwoD',
                 'Expected the displayed text to be "Pizza" in reverse.');
         }));
     });
@@ -3577,22 +3579,18 @@ describe('McTreeSelect', () => {
 
             trigger.click();
             fixture.detectChanges();
-            flush();
 
             (overlayContainerElement.querySelector('mc-tree-option') as HTMLElement).click();
             fixture.detectChanges();
-            flush();
 
             expect(fixture.componentInstance.selectedFood).toBe('rootNode_1');
-            expect(fixture.componentInstance.select.value).toBe('rootNode_1');
             expect(trigger.textContent).toContain('rootNode_1');
 
             fixture.componentInstance.selectedFood = null;
             fixture.detectChanges();
             flush();
 
-            expect(fixture.componentInstance.select.value).toBeNull();
-            expect(trigger.textContent).not.toContain('Steak');
+            expect(trigger.textContent).not.toContain('rootNode_1');
         }));
 
         // todo fix
@@ -4389,7 +4387,6 @@ describe('McTreeSelect', () => {
 
             option.click();
             fixture.detectChanges();
-            flush();
 
             expect(testInstance.control.value).toEqual(['rootNode_1']);
 
@@ -4510,9 +4507,9 @@ describe('McTreeSelect', () => {
         }));
 
         xit('should be able to customize the value sorting logic', fakeAsync(() => {
-            fixture.componentInstance.sortComparator = (a, b, optionsArray) => {
-                return optionsArray.indexOf(b) - optionsArray.indexOf(a);
-            };
+            // fixture.componentInstance.sortComparator = (a, b, optionsArray) => {
+            //     return optionsArray.indexOf(b) - optionsArray.indexOf(a);
+            // };
             fixture.detectChanges();
 
             trigger.click();

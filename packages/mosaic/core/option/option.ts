@@ -161,7 +161,10 @@ export class McOption implements AfterViewChecked, OnDestroy {
     }
 
     getHeight(): number {
-        return this.element.nativeElement.getClientRects()[0].height;
+        // tslint:disable-next-line:naming-convention
+        const DOMRect: DOMRect = this.element.nativeElement.getClientRects()[0];
+
+        return DOMRect ? DOMRect.height : 0;
     }
 
     select(): void {

@@ -11,9 +11,13 @@ import { CdkTree, CdkTreeNode } from './tree';
 })
 export class CdkTreeNodeToggle<T> {
     @Input('cdkTreeNodeToggleRecursive')
-    get recursive(): boolean { return this._recursive; }
+    get recursive(): boolean {
+        return this._recursive;
+    }
 
-    set recursive(value: boolean) { this._recursive = value; }
+    set recursive(value: boolean) {
+        this._recursive = value;
+    }
 
     private _recursive = false;
 
