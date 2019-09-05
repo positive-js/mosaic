@@ -311,6 +311,7 @@ export class McTreeSelection extends CdkTree<any>
         super.renderNodeChanges(data, dataDiffer, viewContainer, parentData);
 
         const arrayOfInstances = [];
+        const changeDetectorRefs: any[] = [];
 
         viewContainer._embeddedViews.forEach((view: ViewData) => {
             const viewDef = view.def;
@@ -320,12 +321,15 @@ export class McTreeSelection extends CdkTree<any>
                     const nodeData: any = view.nodes[node.nodeIndex];
 
                     arrayOfInstances.push(nodeData.instance as never);
+                    changeDetectorRefs.push(nodeData.instance.changeDetectorRef);
+                }
+            });
+        });
 
-                    setTimeout(() => {
-                        if (!nodeData.instance.changeDetectorRef.destroyed) {
-                            nodeData.instance.changeDetectorRef.detectChanges();
-                        }
-                    });
+        setTimeout(() => {
+            changeDetectorRefs.forEach((changeDetectorRef) => {
+                if (!changeDetectorRef.destroyed) {
+                    changeDetectorRef.detectChanges();
                 }
             });
         });

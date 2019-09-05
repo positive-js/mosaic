@@ -2018,6 +2018,7 @@ describe('McTreeSelect', () => {
 
                 trigger.click();
                 fixture.detectChanges();
+                flush();
 
                 expect(fixture.componentInstance.select.panelOpen).toBe(false);
             }));
