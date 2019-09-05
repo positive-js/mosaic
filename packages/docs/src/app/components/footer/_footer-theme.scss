@@ -1,24 +1,35 @@
 @mixin mc-footer-theme($theme) {
-    $background: #fff;
-    $dodger_blue: #8c949e;
-    $celtic_blue: #2768bb;
-    $light_gray: #c6cacf;
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+    $second: map-get($theme, second);
+
+    $is-dark: map-get($theme, is-dark);
+
+    $white: mc-color($background, background);
+    $hint-text: mc-color($foreground, hint-text);
+    $color: mc-color($primary);
+    $color_hover: mc-color($primary, if($is-dark, lighter, darker));
+    $border-color: mc-color($second, 300);
 
     .docs-footer {
-        background-color: $background;
+        background-color: $white;
 
         &__wrapper {
-            border-top: 1px solid $light_gray;
+            border-top: 1px solid $border-color;
         }
 
-        &__text-wrapper { color: $dodger_blue; }
+        &__text-wrapper { color: $hint-text; }
 
         &__link {
-            color: $celtic_blue;
-            border-bottom: 1px solid $celtic_blue;
+            color: $color;
+            border-bottom: 1px solid $color_hover;
+
+            &:hover {
+                color: $color_hover;
+            }
         }
 
-        &__icon { fill: $dodger_blue; }
+        &__icon { fill: $hint-text; }
     }
 
 }
