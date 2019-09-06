@@ -9,13 +9,6 @@
     }
 }
 
-.docs-example-viewer__source_hidden {
-    .docs-example-source-wrapper {
-        max-height: 211px;
-        overflow-y: hidden;
-    }
-}
-
 .docs-example-source-shadow {
     position: absolute;
     bottom: 0;
@@ -23,7 +16,12 @@
     left: 0;
     height: 44px;
     width: 100%;
+    opacity: 1;
     background: linear-gradient(0deg, rgba(234,236,241,1) 0%, rgba(234,236,241,0.5) 50%, rgba(234,236,241,0) 100%);
+
+    &_hidden {
+        opacity: 0;
+    }
 }
 
 .docs-example-source__show {
@@ -63,12 +61,20 @@
 }
 
 .docs-example-source-wrapper {
+    min-height: 201px;
     display: flex;
 }
 
 .docs-example-source-wrapper:hover {
     .docs-example-source-copy {
         display: inline-block;
+    }
+}
+
+.docs-example-viewer__source_hidden {
+    .docs-example-source-wrapper {
+        height: 201px;
+        overflow-y: hidden;
     }
 }
 
