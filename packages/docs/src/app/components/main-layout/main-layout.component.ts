@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 
 
 @Component({
@@ -7,23 +7,27 @@ import { ActivatedRoute, Router } from '@angular/router';
     styleUrls: ['./main-layout.component.scss']
 })
 export class MainLayoutComponent {
+    nextRoute: string = '';
+    extras: NavigationExtras = {
+        preserveFragment: true,
+        queryParamsHandling: 'preserve'
+    };
 
     constructor(private router: Router,
                 private route: ActivatedRoute) {
 
         this.setNextRoute();
-
-        if (this.router.routerState.snapshot.url === '/') {
-            this.router.navigateByUrl('button/overview');
-        }
     }
 
     setNextRoute() {
-        const nextRoute = localStorage.getItem('PT_nextRoute');
+        this.nextRoute = localStorage.getItem('PT_nextRoute');
 
-        if (nextRoute) {
-            this.router.navigate([nextRoute], { preserveFragment: true, queryParamsHandling: 'preserve' });
+        if (this.nextRoute) {
+            this.router.navigate([this.nextRoute], this.extras);
+        } else {
+            this.router.navigate(['button/overview'], this.extras);
         }
+        localStorage.removeItem('PT_nextRoute');
     }
 
 }
