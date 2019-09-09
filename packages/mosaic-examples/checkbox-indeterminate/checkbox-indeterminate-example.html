@@ -1,1 +1,4 @@
-<mc-checkbox [checked]="true" [indeterminate]="true"> Indeterminate</mc-checkbox>
+<div class="mc-body">
+    <mc-checkbox  [checked]="parentChecked" [indeterminate]="parentIndeterminate" (change)="toggleChecked()" > All fruits</mc-checkbox>
+    <p *ngFor="let fruit of fruits; let i = index"><mc-checkbox [checked]="fruit.checked" (change)="updateCheckboxes(i)" >{{fruit.name}}</mc-checkbox>
+</div>
