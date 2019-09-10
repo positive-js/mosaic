@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 
 
 @Component({
@@ -22,13 +22,17 @@ export class NavbarComponent {
     curVerIndex = this.versions[0].number;
     languages = ['Русский язык', 'Английский язык'];
     curLanguage = this.languages[0];
-    themes = ['Светлая тема', 'Темная тема'];
+    themes = [{theme: 'default', name: 'Светлая тема'}, {theme: 'dark', name: 'Темная тема'}];
     curTheme = this.themes[0];
     // TODO Эти значения временные, надо определиться с постоянными и заменить ими текущие значения.
     colors = ['#2f80ed', '#333491', '#07804e', '#eaaf00'];
     activeColor = '#2f80ed';
 
     iconFont = '20px';
+
+    constructor(
+        private renderer: Renderer2
+    ) {}
 
     setVersion(version) {
         this.curVerIndex = version;
@@ -44,6 +48,14 @@ export class NavbarComponent {
 
     setColor(i) {
         this.activeColor = this.colors[i];
+    }
+
+    private changeThemeOnBody(theme) {
+        if (theme) {
+            this.renderer.removeClass(document.body, `theme-${this.currentTheme}`);
+            // this.currentTheme = this.currentModelTheme = theme;
+            this.renderer.addClass(document.body, `theme-${theme}`);
+        }
     }
 
 }
