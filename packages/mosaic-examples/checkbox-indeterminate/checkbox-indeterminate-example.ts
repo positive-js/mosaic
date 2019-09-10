@@ -5,6 +5,8 @@ interface ICheckbox {
     name: string;
     checked: boolean;
 }
+
+
 /**
  * @title Indeterminate checkbox
  */
@@ -55,3 +57,4 @@ export class CheckboxIndeterminateExample {
         this.parentChecked = this.parentIndeterminate || length === checked;
     }
 }
+

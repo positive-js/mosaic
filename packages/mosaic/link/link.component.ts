@@ -1,14 +1,11 @@
 import {
     Input,
-    Attribute,
-    Component,
     ElementRef,
     OnDestroy,
-    ViewEncapsulation,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef
+    ChangeDetectorRef,
+    Directive,
+    Attribute
 } from '@angular/core';
-
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import {
     CanDisable, CanDisableCtor,
@@ -20,20 +17,15 @@ import {
 
 
 export class McLinkBase {
-    constructor(public _elementRef: ElementRef) {
-    }
+    constructor(public elementRef: ElementRef) {}
 }
 
 export const _McLinkBase: HasTabIndexCtor & CanDisableCtor & typeof McLinkBase
     = mixinTabIndex(mixinDisabled(McLinkBase));
 
-@Component({
+@Directive({
     selector: 'a.mc-link',
-    template: `<ng-content></ng-content>`,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None,
     exportAs: 'mcLink',
-    styleUrls: ['./link.css'],
     inputs: ['disabled'],
     host: {
         '[attr.disabled]': 'disabled || null',
@@ -53,32 +45,34 @@ export class McLink extends _McLinkBase implements OnDestroy, HasTabIndex, CanDi
 
         if (newValue !== this._disabled) {
             this._disabled = newValue;
-            this._changeDetector.markForCheck();
+            this.changeDetector.markForCheck();
         }
     }
 
     private _disabled = false;
 
     constructor(
-        @Attribute('tabindex') tabIndex: string,
-        public elementRef: ElementRef,
-        private _focusMonitor: FocusMonitor,
-        private _changeDetector: ChangeDetectorRef) {
-
+        elementRef: ElementRef,
+        private focusMonitor: FocusMonitor,
+        private changeDetector: ChangeDetectorRef,
+        @Attribute('tabindex') tabIndex: string
+    ) {
         super(elementRef);
-        this._focusMonitor.monitor(elementRef.nativeElement, true);
+
         this.tabIndex = parseInt(tabIndex) || 0;
+
+        this.focusMonitor.monitor(elementRef.nativeElement, true);
     }
 
     ngOnDestroy() {
-        this._focusMonitor.stopMonitoring(this.elementRef.nativeElement);
+        this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
     }
 
     focus(): void {
-        this._getHostElement().focus();
+        this.getHostElement().focus();
     }
 
-    _getHostElement() {
+    getHostElement() {
         return this.elementRef.nativeElement;
     }
 }

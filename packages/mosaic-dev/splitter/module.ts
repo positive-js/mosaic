@@ -1,6 +1,7 @@
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { McButtonModule } from '@ptsecurity/mosaic/button';
 
 import { McSplitterModule } from '../../mosaic/splitter';
 
@@ -11,7 +12,13 @@ import { McSplitterModule } from '../../mosaic/splitter';
     styleUrls: ['./styles.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class DemoComponent {}
+export class DemoComponent {
+    guttersVisibility = true;
+
+    toggleVisibility() {
+        this.guttersVisibility = !this.guttersVisibility;
+    }
+}
 
 
 @NgModule({
@@ -20,6 +27,7 @@ export class DemoComponent {}
     ],
     imports: [
         BrowserModule,
+        McButtonModule,
         McSplitterModule
     ],
     bootstrap: [

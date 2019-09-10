@@ -14,11 +14,13 @@ import {
     OnDestroy,
     OnInit,
     Output,
+    QueryList,
     Renderer2,
     SimpleChanges,
     TemplateRef,
     Type,
     ViewChild,
+    ViewChildren,
     ViewContainerRef, ViewEncapsulation
 } from '@angular/core';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
@@ -122,7 +124,7 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     @ViewChild('modalContainer', { static: true }) modalContainer: ElementRef;
     @ViewChild('bodyContainer', { read: ViewContainerRef, static: false}) bodyContainer: ViewContainerRef;
     // Only aim to focus the ok button that needs to be auto focused
-    @ViewChild('autoFocusButtonOk', { read: ElementRef, static: false}) autoFocusButtonOk: ElementRef;
+    @ViewChildren('autoFocusedButton', { read: ElementRef }) autoFocusedButtons: QueryList<ElementRef>;
 
     maskAnimationClassMap: object;
     modalAnimationClassMap: object;
@@ -221,8 +223,12 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
             this.bodyContainer.insert(this.contentComponentRef.hostView);
         }
 
-        if (this.autoFocusButtonOk) {
-            (this.autoFocusButtonOk.nativeElement as HTMLButtonElement).focus();
+        for (const autoFocusedButton of this.autoFocusedButtons.toArray()) {
+            if (autoFocusedButton.nativeElement.autofocus) {
+                (autoFocusedButton.nativeElement as HTMLButtonElement).focus();
+
+                break;
+            }
         }
     }
 

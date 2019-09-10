@@ -3,11 +3,11 @@ import { NgModule } from '@angular/core';
 import { CdkTreeModule } from '@ptsecurity/cdk/tree';
 import { McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
 
-import { McTreeNodeDef } from './node';
-import { McTreeNodePadding } from './padding';
-import { McTreeNodeToggle } from './toggle';
-import { McTreeOption } from './tree-option';
-import { McTreeSelection } from './tree-selection';
+import { McTreeNodeDef } from './node.directive';
+import { McTreeNodePadding } from './padding.directive';
+import { McTreeNodeToggleDirective, McTreeNodeToggleComponent } from './toggle';
+import { McTreeOption } from './tree-option.component';
+import { McTreeSelection } from './tree-selection.component';
 
 
 const MC_TREE_DIRECTIVES = [
@@ -15,7 +15,8 @@ const MC_TREE_DIRECTIVES = [
     McTreeOption,
     McTreeNodeDef,
     McTreeNodePadding,
-    McTreeNodeToggle
+    McTreeNodeToggleComponent,
+    McTreeNodeToggleDirective
 ];
 
 @NgModule({

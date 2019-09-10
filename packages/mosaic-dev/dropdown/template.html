@@ -1,8 +1,8 @@
 <div>
-    <span class="mc-button-group">
-        <button mc-button>dropdown</button>
+    <span class="mc-group">
+        <button mc-button class="mc-group-item">dropdown</button>
 
-        <button mc-button [mcDropdownTriggerFor]="appDropdown">
+        <button mc-button class="mc-group-item" [mcDropdownTriggerFor]="appDropdown">
             <i mc-icon="mc-angle-down-L_16"></i>
         </button>
     </span>
@@ -29,7 +29,9 @@
         <h5>Additional info</h5>
         <button mc-dropdown-item disabled>Disabled</button>
         <button mc-dropdown-item>Point 2</button>
-        <a href="https://google.com" class="mc-link mc-link_underlined" mc-dropdown-item>Link</a>
+        <a href="https://google.com" class="mc-link mc-link_underlined" mc-dropdown-item>
+            <span class="mc-link__text">Link</span>
+        </a>
         <button mc-dropdown-item>Point 3</button>
     </mc-dropdown>
 

@@ -1,3 +1,66 @@
+# 8.0.0-beta.10 "Maltese Firebush" (2019-09-05)
+
+
+### Bug Fixes
+
+* **dropdown:** mc-link and mc-dropdown-item do not work together  (#UIM-139) ([#221](https://github.com/positive-js/mosaic/issues/221)) ([1572fc0](https://github.com/positive-js/mosaic/commit/1572fc0)), closes [#UIM-139](https://github.com/positive-js/mosaic/issues/UIM-139)
+* **form-field:** border radius applied to mc-form-field ([#209](https://github.com/positive-js/mosaic/issues/209)) ([9344d57](https://github.com/positive-js/mosaic/commit/9344d57))
+* **form-field:** ie fixes: apply vertical alignment on select, tree-select ([#211](https://github.com/positive-js/mosaic/issues/211)) ([4d80a83](https://github.com/positive-js/mosaic/commit/4d80a83))
+* **icon:** mc-icon does not work without parameter (#UIM-140) ([#208](https://github.com/positive-js/mosaic/issues/208)) ([a2c53d0](https://github.com/positive-js/mosaic/commit/a2c53d0)), closes [#UIM-140](https://github.com/positive-js/mosaic/issues/UIM-140)
+* **navbar:** focus partially hided by active element (#UIM-126) ([#206](https://github.com/positive-js/mosaic/issues/206)) ([c1fe5a5](https://github.com/positive-js/mosaic/commit/c1fe5a5)), closes [#UIM-126](https://github.com/positive-js/mosaic/issues/UIM-126)
+* **sidebar:** sidebar does not save width before closing (#UIM-141) ([#207](https://github.com/positive-js/mosaic/issues/207)) ([3a4857e](https://github.com/positive-js/mosaic/commit/3a4857e)), closes [#UIM-141](https://github.com/positive-js/mosaic/issues/UIM-141)
+* **splitter:** sets wrong size for areas (#UIM-110) ([#217](https://github.com/positive-js/mosaic/issues/217)) ([2e87d62](https://github.com/positive-js/mosaic/commit/2e87d62)), closes [#UIM-110](https://github.com/positive-js/mosaic/issues/UIM-110)
+* **tag-list:** if tags empty it sets focus (#UIM-144) ([#222](https://github.com/positive-js/mosaic/issues/222)) ([14c3340](https://github.com/positive-js/mosaic/commit/14c3340)), closes [#UIM-144](https://github.com/positive-js/mosaic/issues/UIM-144)
+* **timepicker:** Manual keyboard input broken ([#143](https://github.com/positive-js/mosaic/issues/143)) ([#213](https://github.com/positive-js/mosaic/issues/213)) ([e4b9c00](https://github.com/positive-js/mosaic/commit/e4b9c00))
+* **tree:** tree very slow expand a lot of nodes in IE (#UIM-142) ([#229](https://github.com/positive-js/mosaic/issues/229)) ([9c11997](https://github.com/positive-js/mosaic/commit/9c11997)), closes [#UIM-142](https://github.com/positive-js/mosaic/issues/UIM-142)
+
+
+### Features
+
+* **styles:** added .mc-group and .mc-group-item for grouping buttons, form-fields and selects (#UIM-125) ([#219](https://github.com/positive-js/mosaic/issues/219)) ([1edaf2a](https://github.com/positive-js/mosaic/commit/1edaf2a)), closes [#UIM-125](https://github.com/positive-js/mosaic/issues/UIM-125)
+
+
+
+# 8.0.0-beta.9 "Vestibular Kerygma" (2019-08-20)
+
+
+### Bug Fixes
+
+* **modal:** autoFocus does' t work (#UIM-133) ([#204](https://github.com/positive-js/mosaic/issues/204)) ([6038e05](https://github.com/positive-js/mosaic/commit/6038e05)), closes [#UIM-133](https://github.com/positive-js/mosaic/issues/UIM-133)
+
+
+### Features
+
+* **formatters:** Added number formatter (McDecimalPipe) (#UIM-84) ([#202](https://github.com/positive-js/mosaic/issues/202)) ([7ca9788](https://github.com/positive-js/mosaic/commit/7ca9788)), closes [#UIM-84](https://github.com/positive-js/mosaic/issues/UIM-84)
+* **splitter:** Added parameter for hide gutters (#UIM-130) ([#205](https://github.com/positive-js/mosaic/issues/205)) ([ff441bd](https://github.com/positive-js/mosaic/commit/ff441bd)), closes [#UIM-130](https://github.com/positive-js/mosaic/issues/UIM-130)
+
+
+
+# 8.0.0-beta.8 "Keynesian Doughnut" (2019-08-19)
+
+
+### Bug Fixes
+
+* **modal:** remove padding-right from body UIM-114 ([#196](https://github.com/positive-js/mosaic/issues/196)) ([5d711d4](https://github.com/positive-js/mosaic/commit/5d711d4))
+* **security:** update dev packages - gulp-markdown ([ae8342c](https://github.com/positive-js/mosaic/commit/ae8342c))
+* **tree:** replacing mixins with methods (#UIM-129) ([#201](https://github.com/positive-js/mosaic/issues/201)) ([46de5c2](https://github.com/positive-js/mosaic/commit/46de5c2)), closes [#UIM-129](https://github.com/positive-js/mosaic/issues/UIM-129)
+* **tree:** tree has focus style after click on node (#UIM-131) ([#203](https://github.com/positive-js/mosaic/issues/203)) ([83b1239](https://github.com/positive-js/mosaic/commit/83b1239)), closes [#UIM-131](https://github.com/positive-js/mosaic/issues/UIM-131)
+* **tree-select:** customization of the matcher does not work (UIM-116) ([#197](https://github.com/positive-js/mosaic/issues/197)) ([c236b77](https://github.com/positive-js/mosaic/commit/c236b77))
+
+
+### Features
+
+* **build:** update Angular to 8.2.2 and TS to 3.5.3 ([a1007de](https://github.com/positive-js/mosaic/commit/a1007de))
+* **schematics:** added ng-add command for Mosaic ([bd831fe](https://github.com/positive-js/mosaic/commit/bd831fe))
+* **tree:** filtration (#UIM-14) ([#195](https://github.com/positive-js/mosaic/issues/195)) ([7fe6423](https://github.com/positive-js/mosaic/commit/7fe6423)), closes [#UIM-14](https://github.com/positive-js/mosaic/issues/UIM-14)
+
+
+### Reverts
+
+* TS to 3.4 ([3c4b077](https://github.com/positive-js/mosaic/commit/3c4b077))
+
+
+
 # 8.0.0-beta.7 "Fixed Lotus" (2019-07-31)
 
 

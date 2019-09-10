@@ -5,6 +5,15 @@ $mc-form-field-border-size: 1px;
     position: relative;
     display: inline-block;
     width: 100%;
+    border-radius: $mc-form-field-border-radius;
+
+    &:hover {
+        z-index: 1;
+    }
+
+    &.mc-focused {
+        z-index: 2;
+    }
 }
 
 .mc-form-field__hint {

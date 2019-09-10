@@ -1,0 +1,10 @@
+
+
+@mixin mc-highlight-theme($theme) {
+    .mc-highlight {
+        color: inherit;
+
+        font-weight: bold;
+        background-color: transparent;
+    }
+}

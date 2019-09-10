@@ -38,7 +38,7 @@ import {
     mixinDisabled,
     toBoolean, CanDisableCtor
 } from '@ptsecurity/mosaic/core';
-import { Subject, Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 
@@ -119,6 +119,7 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
 
     ngOnInit() {
         this.focusMonitor.monitor(this.elementRef.nativeElement, false);
+
         if (this._selected) {
             // List options that are selected at initialization can't be reported properly to the form
             // control. This is because it takes some time until the selection-list knows about all

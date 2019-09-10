@@ -3,6 +3,7 @@
 
 @mixin _mc-navbar-theme-color($theme) {
     $palette: map-get($theme, primary);
+    $focus-color: mc-color($primary);
 
     background-color: mc-color($palette, 700);
 
@@ -32,9 +33,8 @@
     mc-navbar-item:not([disabled]), .mc-navbar-item:not([disabled]) {
         outline: 0;
 
-        &.cdk-keyboard-focused, &.cdk-program-focused  {
-            $focus-color: mc-color($primary);
-            outline: $focus-color solid 2px;
+        &.cdk-keyboard-focused  {
+            box-shadow: inset 0 0 0 2px $focus-color;
         }
 
     }

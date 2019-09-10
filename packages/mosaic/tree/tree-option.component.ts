@@ -8,8 +8,9 @@ import {
     ElementRef,
     Inject,
     Optional,
-    InjectionToken, ChangeDetectionStrategy, ViewEncapsulation
+    InjectionToken, ChangeDetectionStrategy, ViewEncapsulation, OnInit, OnDestroy
 } from '@angular/core';
+import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { CdkTreeNode } from '@ptsecurity/cdk/tree';
 import { CanDisable, toBoolean } from '@ptsecurity/mosaic/core';
 
@@ -56,7 +57,7 @@ let uniqueIdCounter: number = 0;
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: CdkTreeNode, useExisting: McTreeOption }]
 })
-export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisable {
+export class McTreeOption extends CdkTreeNode<McTreeOption> implements OnInit, OnDestroy, CanDisable {
     @Input()
     get value(): any {
         return this._value;
@@ -84,11 +85,6 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
     private _disabled: boolean = false;
 
     @Output() readonly onSelectionChange = new EventEmitter<McTreeOptionChange>();
-
-    // @Input()
-    // get selected(): boolean {
-    //     return this.treeSelection.selectionModel && this.treeSelection.selectionModel.isSelected(this) || false;
-    // }
 
     get selected(): boolean {
         return this._selected;
@@ -120,10 +116,19 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
     constructor(
         protected elementRef: ElementRef,
         protected changeDetectorRef: ChangeDetectorRef,
+        private focusMonitor: FocusMonitor,
         @Optional() @Inject(MC_TREE_OPTION_PARENT_COMPONENT) private readonly parent: McTreeOptionParentComponent
     ) {
         // todo any
         super(elementRef, parent as any);
+    }
+
+    ngOnInit() {
+        this.focusMonitor.monitor(this.elementRef.nativeElement, false);
+    }
+
+    ngOnDestroy(): void {
+        this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
     }
 
     toggle(): void {

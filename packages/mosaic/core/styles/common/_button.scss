@@ -1,38 +1,13 @@
 @import 'vendor-prefixes';
 
+$mc-button-border-size: 1px;
+$mc-button-border-radius: 3px;
+
 
 @mixin mc-button-reset {
     @include user-select(none);
     cursor: pointer;
     outline: none;
     border: none;
-}
-
-@mixin border-top-radius($radius) {
-    border-top: {
-        right-radius: $radius;
-        left-radius: $radius;
-    }
-}
-
-@mixin border-bottom-radius($radius) {
-    border-bottom: {
-        right-radius: $radius;
-        left-radius: $radius;
-    }
-}
-
-@mixin border-right-radius($radius) {
-    border: {
-        bottom-right-radius: $radius;
-        top-right-radius: $radius;
-    }
-}
-
-@mixin border-left-radius($radius) {
-    border: {
-        bottom-left-radius: $radius;
-        top-left-radius: $radius;
-    }
 }
 

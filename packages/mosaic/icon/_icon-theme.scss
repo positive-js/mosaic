@@ -46,8 +46,13 @@
             }
         }
 
-        .mc-icon:not(.mc-primary):not(.mc-second):not(.mc-error) {
-            color: map-get($foreground, text);
+        &:not(.mc-primary):not(.mc-second):not(.mc-error) {
+            &[disabled],
+            &.mc-disabled {
+                color: mc-color($second);
+
+                cursor: default;
+            }
         }
     }
 

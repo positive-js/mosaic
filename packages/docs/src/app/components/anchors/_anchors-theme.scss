@@ -1,0 +1,22 @@
+@mixin mc-anchors-theme($theme) {
+    $foreground: map-get($theme, foreground);
+    $text: mc-color($foreground, text);
+    $primary: map_get($theme, primary);
+    $primary_500: mc-color($primary, 500);
+    $shadow: mc-color($foreground, less-contrast-text);
+
+    .anchors-menu__list-element {
+        color: $text;
+
+        &:hover { @include box-shadow( inset 3px 0 0 rgba($shadow, 0.2) ); }
+
+        &_active, &_active:hover { @include box-shadow( inset 3px 0 0 $primary_500 ); }
+    }
+}
+
+@mixin box-shadow ($shadow) {
+    -webkit-box-shadow: $shadow;
+    -moz-box-shadow: $shadow;
+    -o-box-shadow: $shadow;
+    box-shadow: $shadow;
+}

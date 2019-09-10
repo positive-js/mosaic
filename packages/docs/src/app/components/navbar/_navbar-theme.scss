@@ -1,22 +1,22 @@
 @mixin mc-navbar-theme($theme) {
-    $background: #fefefe;
-    $dodger_blue: #2f80ed;
-    $dodger_blue: #8c949e;
-    $solitude: #e6e7e8;
-    $doc_green: #2f2f33;
+
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+    $white: mc-color($background, background);
+    $text: mc-color($foreground, text);
+    $divider: mc-color($foreground, divider);
+    $hint-text: mc-color($foreground, hint-text);
 
     .docs-navbar-header {
-        border-bottom: 1px solid $solitude;
-        background: $background;
+        box-shadow: 0 1px $divider;
+        background: $white;
 
-        .docs-navbar-version {
-            color: $dodger_blue;
-        }
-
-        .docs-navbar-dropdown__trigger {
-            color: $doc_green;
-        }
-
+        .docs-navbar-dropdown__trigger { color: $text; }
     }
 
+    .docs-navbar-version {
+        color: $hint-text;
+
+        &__date { color: $hint-text; }
+    }
 }

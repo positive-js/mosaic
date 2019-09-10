@@ -143,6 +143,17 @@ export class McSplitterComponent implements OnInit {
     private readonly areaPositionDivider: number = 2;
     private readonly listeners: (() => void)[] = [];
 
+    get hideGutters(): boolean {
+        return this._hideGutters;
+    }
+
+    @Input()
+    set hideGutters(value: boolean) {
+        this._hideGutters = coerceBooleanProperty(value);
+    }
+
+    private _hideGutters: boolean = false;
+
     get direction(): Direction {
         return this._direction;
     }
@@ -306,10 +317,7 @@ export class McSplitterComponent implements OnInit {
         const minRightAreaSize = rightArea.area.getMinSize();
 
         if (newLeftAreaSize <= minLeftAreaSize || newRightAreaSize <= minRightAreaSize) {
-            const rightAreaOffset = leftArea.initialSize - minLeftAreaSize;
-
-            leftArea.area.setSize(minLeftAreaSize);
-            rightArea.area.setSize(rightArea.initialSize + rightAreaOffset);
+            return;
         } else if (newLeftAreaSize <= 0) {
             leftArea.area.setSize(0);
             rightArea.area.setSize(rightArea.initialSize + leftArea.initialSize);
