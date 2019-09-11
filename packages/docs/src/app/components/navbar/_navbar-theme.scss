@@ -1,14 +1,14 @@
 @mixin mc-navbar-theme($theme) {
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
-    $white: mc-color($background, background);
+    $background-color: mc-color($background, background);
     $text: mc-color($foreground, text);
     $divider: mc-color($foreground, divider);
     $hint-text: mc-color($foreground, hint-text);
 
     .docs-navbar-header {
         box-shadow: 0 1px $divider;
-        background: $white;
+        background: $background-color;
 
         .docs-navbar-dropdown__trigger { color: $text; }
     }
