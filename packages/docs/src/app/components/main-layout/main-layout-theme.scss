@@ -1,0 +1,6 @@
+@mixin mc-main-layout-theme($theme) {
+    $background: map-get($theme, background);
+    $background-color: mc-color($background, background);
+
+    .main { background-color: $background-color; }
+}

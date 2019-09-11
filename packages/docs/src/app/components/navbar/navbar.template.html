@@ -45,13 +45,13 @@
 
     <div class="docs-navbar-dropdown">
         <a class="docs-navbar-dropdown__trigger" [mcDropdownTriggerFor]="themeDropdown">
-            <span>{{curTheme}}</span>
+            <span>{{curTheme.name}}</span>
             <i mc-icon="mc-angle-down-M_16" class="docs-navbar-dropdown__icon"></i>
         </a>
 
         <mc-dropdown #themeDropdown="mcDropdown">
             <button mc-dropdown-item *ngFor="let theme of themes; let i = index" (click)="setTheme(i)">
-                {{theme}}
+                {{theme.name}}
             </button>
         </mc-dropdown>
     </div>

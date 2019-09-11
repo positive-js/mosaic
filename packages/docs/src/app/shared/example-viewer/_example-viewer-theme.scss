@@ -1,59 +1,19 @@
 @mixin example-viewer-theme($theme) {
-    $primary: map-get($theme, primary);
-    $accent: map-get($theme, accent);
-    $warn: map-get($theme, warn);
-    $background: map-get($theme, background);
     $foreground: map-get($theme, foreground);
-    $is-dark: map-get($theme, is-dark);
-    $color: mc-color($primary);
-    $color_hover: mc-color($primary, if($is-dark, lighter, darker));
+    $divider: mc-color($foreground, divider);
+    $hint-text: mc-color($foreground, hint-text);
 
-    example-viewer {
-        .docs-example-viewer-wrapper {
-            border: 1px solid rgba(mc-color($foreground, secondary-text), 0.03);
-            box-shadow: 0 2px 2px rgba(0,0,0,0.24), 0 0 2px rgba(0,0,0,0.12);
-            margin: 4px;
-        }
+    .docs-example-source-shadow {
+        background: linear-gradient(0deg, rgba($divider,1) 0%, rgba($divider,0.5) 50%, rgba($divider,0) 100%);
+    }
 
-        .docs-example-viewer-title {
-            color: mc-color($foreground, secondary-text);
-            background: rgba(mc-color($foreground, secondary-text), 0.03);
-        }
+    .docs-example-numbers {
+        background-color: fade_out($divider, 0.5);
+        color: $hint-text;
+    }
 
-        .docs-example-source-copy {
-            color: mc-color($foreground, hint-text);
-            right: 8px;
+    .docs-example-source {
+        background-color: $divider;
 
-            [dir='rtl'] & {
-                right: auto;
-                left: 8px;
-            }
-        }
-
-        .docs-example-source {
-            border-bottom: 1px solid mc-color($foreground, divider);
-            overflow: auto;
-        }
-
-        .docs-example-viewer-body {
-            border: 1px solid mc-color($foreground, divider);
-        }
-
-        .docs-example-source_copy {
-            color: $color;
-
-            &:focus {
-                outline: none;
-            }
-
-            &:visited {
-                color: $color;
-            }
-
-            &:hover {
-                color: $color_hover;
-            }
-
-        }
     }
 }

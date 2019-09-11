@@ -1,0 +1,12 @@
+// -----------------------------------------------------------------------------------------------------
+// @ Define a dark theme
+// -----------------------------------------------------------------------------------------------------
+$dark-primary: mc-palette($mc-blue, 300, 400, 500);
+$dark-second: mc-palette($mc-grey, 200, 400, 700);
+$dark-error: mc-palette($mc-red, 200, 400, 700);
+
+$dark-info: mc-palette($mc-blue, 200, 400, 700);
+$dark-success: mc-palette($mc-green, 200, 400, 700);
+$dark-warning: mc-palette($mc-yellow, 200, 400, 700);
+
+$dark-theme: mc-dark-theme($dark-primary, $dark-second, $dark-error, $dark-info, $dark-success, $dark-warning);
