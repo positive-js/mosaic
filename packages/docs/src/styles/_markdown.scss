@@ -64,18 +64,17 @@
 
 @mixin docs-markdown-theme($theme) {
     $primary: map-get($theme, primary);
-    $second: map-get($theme, second);
     $foreground: map-get($theme, foreground);
-
     $is-dark: map-get($theme, is-dark);
 
+    $text: mc-color($foreground, text);
     $color: mc-color($primary);
     $color_hover: mc-color($primary, if($is-dark, lighter, darker));
     $color_disabled: mc-color($foreground, disabled-text);
     $fg-default: mc-color($foreground, text);
 
     .docs-header-link {
-        color: map-get($second, 700);
+        color: $text;
     }
 
     .docs-markdown {

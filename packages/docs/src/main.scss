@@ -10,54 +10,46 @@
 @import 'app/components/anchors/anchors-theme';
 @import 'app/components/navbar/navbar-theme';
 @import 'app/components/footer/footer-theme';
+@import 'app/components/main-layout/main-layout-theme';
 @import 'app/components/sidenav/sidenav-theme';
 @import 'app/components/component-viewer/component-overview-theme';
 @import 'app/shared/stackblitz/stackblitz-button-theme';
 @import 'app/shared/example-viewer/example-viewer-theme';
 
-$primary: mc-palette($mc-blue, 400, 500, 600);
-$second: mc-palette($mc-grey, 100, 300, 400);
-$error: mc-palette($mc-red, 60, 400, 500);
-
-$info: mc-palette($mc-blue, 60, 200, 400);
-$success: mc-palette($mc-green, 60, 200, 400);
-$warning: mc-palette($mc-yellow, 60, 200, 400);
-
-$theme: mc-light-theme($primary, $second, $error, $info, $success, $warning);
-
-$config: mc-typography-config();
-
 // Include all typography for the components.
 @include mc-core();
 
+$typography: mc-typography-config();
+
+@include mc-footer-typography($typography);
+@include docs-markdown-typography($typography);
+@include docs-stackblitz-typography($typography);
+
+@mixin docs-component-theme($theme) {
+    @include mosaic-theme($theme);
+    @include mosaic-docs-app-theme($theme);
+    @include layout-padding-margin();
+    @include mc-anchors-theme($theme);
+    @include mc-navbar-theme($theme);
+    @include mc-footer-theme($theme);
+    @include mc-main-layout-theme($theme);
+    @include mc-sidenav-theme($theme);
+    @include mc-component-viewer-theme($theme);
+    @include docs-markdown-theme($theme);
+    @include docs-stackblitz-theme($theme);
+    @include example-viewer-theme($theme);
+}
+
 // Include all theme styles for the components.
-@include mosaic-theme($theme);
 
-@include mosaic-docs-app-theme($theme);
+@import './styles/theme-default';
+@import './styles/theme-dark';
 
-@include layout-padding-margin();
+.theme-default {
+    @include docs-component-theme($theme);
+}
 
-@include mc-navbar-theme($theme);
-
-@include mc-footer-theme($theme);
-
-@include mc-footer-typography($config);
-
-@include mc-component-viewer-theme($theme);
-
-@include docs-markdown-theme($theme);
-
-@include docs-markdown-typography($config);
-
-@include docs-stackblitz-theme($theme);
-
-@include docs-stackblitz-typography($config);
-
-@include example-viewer-theme($theme);
-
-@include mc-anchors-theme($theme);
-
-@include mc-sidenav-theme($theme);
-
-@include mc-sidenav-typography($config);
+.theme-dark {
+    @include docs-component-theme($dark-theme);
+}
 
