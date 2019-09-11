@@ -3,12 +3,6 @@
     padding: 20px 0 0;
 }
 
-.docs-example-viewer-wrapper {
-    h3 {
-        margin-top: 10px;
-    }
-}
-
 .docs-example-source-shadow {
     position: absolute;
     bottom: 0;
@@ -17,7 +11,6 @@
     height: 44px;
     width: 100%;
     opacity: 1;
-    background: linear-gradient(0deg, rgba(234,236,241,1) 0%, rgba(234,236,241,0.5) 50%, rgba(234,236,241,0) 100%);
 
     &_hidden {
         opacity: 0;
@@ -79,9 +72,6 @@
 }
 
 .docs-example-numbers {
-    $color: #eaedf1;
-    background-color: fade_out($color, 0.5);
-    color: #8c949e;
     text-align: right;
     width: 44px;
     padding: 12px 8px;
@@ -90,7 +80,6 @@
 
 .docs-example-source {
     position: relative;
-    background-color: #eaedf1;
     overflow-y: hidden;
     display: flex;
     margin: 0;
