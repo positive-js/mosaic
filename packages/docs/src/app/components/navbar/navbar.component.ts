@@ -6,7 +6,6 @@ import { Component, Renderer2 } from '@angular/core';
     templateUrl: './navbar.template.html',
     styleUrls: ['./navbar.scss']
 })
-
 export class NavbarComponent {
     // TODO fetch real data instead
     versions = [{number: '5.1', date: '15 октября', bold: true},
@@ -22,7 +21,18 @@ export class NavbarComponent {
     curVerIndex = this.versions[0].number;
     languages = ['Русский язык', 'Английский язык'];
     curLanguage = this.languages[0];
-    themes = [{theme: 'default', name: 'Светлая тема'}, {theme: 'dark', name: 'Темная тема'}];
+    themes = [
+        {
+            theme: 'default',
+            name: 'Светлая тема',
+            className: 'theme-default'
+        },
+        {
+            theme: 'dark',
+            name: 'Темная тема',
+            className: 'theme-dark'
+        }
+    ];
     curTheme = this.themes[0];
     // TODO Эти значения временные, надо определиться с постоянными и заменить ими текущие значения.
     colors = ['#2f80ed', '#333491', '#07804e', '#eaaf00'];
@@ -30,9 +40,7 @@ export class NavbarComponent {
 
     iconFont = '20px';
 
-    constructor(
-        private renderer: Renderer2
-    ) {}
+    constructor(private renderer: Renderer2) {}
 
     setVersion(version) {
         this.curVerIndex = version;
@@ -44,17 +52,21 @@ export class NavbarComponent {
 
     setTheme(i) {
         this.curTheme = this.themes[i];
+        this.changeThemeOnBody();
     }
 
     setColor(i) {
         this.activeColor = this.colors[i];
     }
 
-    private changeThemeOnBody(theme) {
-        if (theme) {
-            this.renderer.removeClass(document.body, `theme-${this.currentTheme}`);
-            // this.currentTheme = this.currentModelTheme = theme;
-            this.renderer.addClass(document.body, `theme-${theme}`);
+    private changeThemeOnBody() {
+
+        if (this.curTheme) {
+            for (const theme of this.themes) {
+                this.renderer.removeClass(document.body, theme.className);
+            }
+
+            this.renderer.addClass(document.body, this.curTheme.className);
         }
     }
 

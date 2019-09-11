@@ -24,13 +24,7 @@ $typography: mc-typography-config();
 @include docs-markdown-typography($typography);
 @include docs-stackblitz-typography($typography);
 
-// Include all theme styles for the components.
-
-@import './styles/theme-default';
-@import './styles/theme-dark';
-
-.theme-default {
-
+@mixin docs-component-theme($theme) {
     @include mosaic-theme($theme);
     @include mosaic-docs-app-theme($theme);
     @include layout-padding-margin();
@@ -42,16 +36,16 @@ $typography: mc-typography-config();
     @include example-viewer-theme($theme);
 }
 
-.theme-dark {
+// Include all theme styles for the components.
 
-    @include mosaic-theme($dark-theme);
-    @include mosaic-docs-app-theme($dark-theme);
-    @include layout-padding-margin();
-    @include mc-navbar-theme($dark-theme);
-    @include mc-footer-theme($dark-theme);
-    @include mc-component-viewer-theme($dark-theme);
-    @include docs-markdown-theme($dark-theme);
-    @include docs-stackblitz-theme($dark-theme);
-    @include example-viewer-theme($dark-theme);
+@import './styles/theme-default';
+@import './styles/theme-dark';
+
+.theme-default {
+    @include docs-component-theme($theme);
+}
+
+.theme-dark {
+    @include docs-component-theme($dark-theme);
 }
 
