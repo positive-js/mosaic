@@ -194,22 +194,6 @@ function fixMarkdownDocLinks(link: string, filePath: string): string {
     return `guide/${baseName}`;
 }
 
-/**
- * Returns a function to be called with an HTML document as its context that aliases HTML tags by
- * adding a class consisting of a prefix + the tag name.
- * @param classPrefix The prefix to use for the alias class.
- */
-function createTagNameAliaser(classPrefix: string) {
-    return function() {
-        MARKDOWN_TAGS_TO_CLASS_ALIAS.forEach((tag) => {
-            for (const el of this.querySelectorAll(tag)) {
-                el.classList.add(`${classPrefix}-${tag}`);
-            }
-        });
-
-        return this;
-    };
-}
 
 function createTagNameStringAliaser(classPrefix: string) {
     return (content: string) => {
