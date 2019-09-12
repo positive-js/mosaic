@@ -1,9 +1,11 @@
 @mixin mc-navbar-theme($theme) {
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
+    $is-dark: map-get($theme, is-dark);
     $background-color: mc-color($background, background);
     $text: mc-color($foreground, text);
     $divider: mc-color($foreground, divider);
+    $less-contrast-text: mc-color($foreground, less-contrast-text);
     $hint-text: mc-color($foreground, hint-text);
 
     .docs-navbar-header {
@@ -18,8 +20,8 @@
     }
 
     .docs-navbar-version {
-        color: $hint-text;
+        color: if($is-dark, $text, $hint-text);
 
-        &__date { color: $hint-text; }
+        &__date { color: $less-contrast-text; }
     }
 }
