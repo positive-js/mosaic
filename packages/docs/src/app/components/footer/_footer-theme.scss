@@ -6,7 +6,7 @@
     $is-dark: map-get($theme, is-dark);
 
     $background-color: mc-color($background, background);
-    $hint-text: mc-color($foreground, hint-text);
+    $less-contrast-text: mc-color($foreground, less-contrast-text);
     $color: mc-color($primary);
     $color_hover: mc-color($primary, if($is-dark, lighter, darker));
     $border-color: mc-color($second, 300);
@@ -18,7 +18,7 @@
             border-top: 1px solid $border-color;
         }
 
-        &__text-wrapper { color: $hint-text; }
+        &__text-wrapper { color: $less-contrast-text; }
 
         &__link {
             color: $color;
@@ -29,7 +29,7 @@
             }
         }
 
-        &__icon { fill: $hint-text; }
+        &__icon { fill: $less-contrast-text; }
     }
 
 }
