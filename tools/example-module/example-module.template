@@ -8,9 +8,6 @@
  ******************************************************************************/
 
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { ExampleMosaicModule } from './mosaic-module';
 
 ${exampleImports}
 
@@ -24,16 +21,17 @@ export interface LiveExample {
 
 export const EXAMPLE_COMPONENTS: {[key: string]: LiveExample} = ${exampleComponents};
 
-export const EXAMPLE_LIST = ${exampleList};
+export const EXAMPLE_MODULES = ${exampleModules};
+
+export const EXAMPLE_LIST = [${exampleList}];
 
 @NgModule({
-    declarations: EXAMPLE_LIST,
+    imports: EXAMPLE_MODULES,
+    exports: EXAMPLE_MODULES,
     entryComponents: EXAMPLE_LIST,
-    imports: [
-        ExampleMosaicModule,
-        FormsModule,
-        ReactiveFormsModule,
-        CommonModule
-    ]
 })
 export class ExampleModule { }
+
+// Export all individual example components because ngtsc requires all
+// referenced components to be available in the top-level entry-point.
+export {${exampleList}}
