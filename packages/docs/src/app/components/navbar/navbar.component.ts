@@ -35,8 +35,25 @@ export class NavbarComponent {
     ];
     curTheme = this.themes[0];
     // TODO Эти значения временные, надо определиться с постоянными и заменить ими текущие значения.
-    colors = ['#2f80ed', '#333491', '#07804e', '#eaaf00'];
-    activeColor = '#2f80ed';
+    colors = [
+        {
+            code: '#2f80ed',
+            className: 'active-blue'
+        },
+        {
+            code: '#832112',
+            className: 'active-red'
+        },
+        {
+            code: '#07804e',
+            className: 'active-green'
+        },
+        {
+            code: '#eaaf00',
+            className: 'active-yellow'
+        }
+        ];
+    activeColor = this.colors[0];
 
     iconFont = '20px';
 
@@ -57,6 +74,7 @@ export class NavbarComponent {
 
     setColor(i) {
         this.activeColor = this.colors[i];
+        this.changeColorOnBody();
     }
 
     private changeThemeOnBody() {
@@ -70,4 +88,14 @@ export class NavbarComponent {
         }
     }
 
+    private changeColorOnBody() {
+
+        if (this.activeColor) {
+            for (const color of this.colors) {
+                this.renderer.removeClass(document.body, color.className);
+            }
+
+            this.renderer.addClass(document.body, this.activeColor.className);
+        }
+    }
 }
