@@ -1,5 +1,8 @@
 @mixin example-viewer-theme($theme) {
     $foreground: map-get($theme, foreground);
+    $error: map-get($theme, error);
+    $error-border: mc-color($error, 200);
+    $error-background: mc-color($error, 60);
     $divider: mc-color($foreground, divider);
     $hint-text: mc-color($foreground, hint-text);
 
@@ -15,5 +18,11 @@
     .docs-example-source {
         background-color: $divider;
 
+    }
+
+    .docs-example-viewer__lost-example {
+        border: 1px solid $error-border;
+        background-color: $error-background;
+        padding: 16px;
     }
 }
