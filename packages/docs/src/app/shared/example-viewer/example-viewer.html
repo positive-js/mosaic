@@ -1,11 +1,11 @@
 <div class="docs-example-viewer__wrapper">
-    <div class="docs-example-viewer__example">
+    <div *ngIf="exampleData" class="docs-example-viewer__example">
         <div class="docs-example-viewer-body">
             <ng-template [cdkPortalOutlet]="selectedPortal"></ng-template>
         </div>
     </div>
 
-    <div [class.docs-example-viewer__source]="true"
+    <div *ngIf="exampleData; else lostExample" [class.docs-example-viewer__source]="true"
          [class.docs-example-viewer__source_hidden]="!showSource">
         <stackblitz-button [example]="example"></stackblitz-button>
         <mc-tab-group mc-light-tabs (selectedTabChange)="setNumbers()">
@@ -45,4 +45,11 @@
             </span>
         </div>
     </div>
+
+    <ng-template #lostExample>
+        <p class="docs-example-viewer__lost-example">Oops, this code example is lost... But you can help us find it!
+            Just send a Pull Request to this repository:
+            <a class="docs-markdown__a" href="https://github.com/positive-js/mosaic.">Mosaic</a>
+        </p>
+    </ng-template>
 </div>
