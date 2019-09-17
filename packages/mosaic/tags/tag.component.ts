@@ -1,6 +1,7 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ContentChild,
     ContentChildren,
@@ -216,7 +217,11 @@ export class McTag extends _McTagMixinBase implements IFocusableOption, OnDestro
 
     private _disabled: boolean = false;
 
-    constructor(public elementRef: ElementRef, private _ngZone: NgZone) {
+    constructor(
+        public elementRef: ElementRef,
+        public changeDetectorRef: ChangeDetectorRef,
+        private _ngZone: NgZone
+    ) {
         super(elementRef);
 
         this.addHostClassName();
@@ -307,10 +312,14 @@ export class McTag extends _McTagMixinBase implements IFocusableOption, OnDestro
 
         if (!this.hasFocus) {
             this.elementRef.nativeElement.focus();
-            this.onFocus.next({ tag: this });
-        }
 
-        this.hasFocus = true;
+            this.onFocus.next({ tag: this });
+
+            Promise.resolve().then(() => {
+                this.hasFocus = true;
+                this.changeDetectorRef.markForCheck();
+            });
+        }
     }
 
     /**
