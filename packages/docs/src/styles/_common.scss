@@ -28,7 +28,7 @@ html {
 
 body {
     display: flex;
-    height: 100vh;
+    min-height: 100vh;
     font-family: map-get(map-get($fonts, 'base'), font-family);
     margin: 0; // 1
 }
