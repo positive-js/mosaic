@@ -21,7 +21,6 @@ import {
     EventEmitter,
     Inject,
     Input,
-    isDevMode,
     NgZone,
     OnChanges,
     OnDestroy,
@@ -465,7 +464,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         this.tree.multiple = this.multiple;
 
         if (this.multiple) {
-            this.tree.noUnselectLastSelected = false;
+            this.tree.noUnselectLast = false;
         }
 
         if (this.tempValues) {
@@ -488,8 +487,6 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
                     this.tree.keyManager.setActiveItem(
                         this.options.find((option) => option.data === event.added[0]) as any
                     );
-                } else {
-                    this.tree.keyManager.updateActiveItem(-1);
                 }
 
                 if (!this.multiple && this.panelOpen) {
@@ -851,7 +848,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         } else if ((keyCode === ENTER || keyCode === SPACE) && this.tree.keyManager.activeItem) {
             event.preventDefault();
 
-            this.tree.keyManager.activeItem.selectViaInteraction(event);
+            this.selectionModel.toggle(this.tree.keyManager.activeItem.data);
         } else if (this.multiple && keyCode === A && event.ctrlKey) {
             event.preventDefault();
 
@@ -869,8 +866,10 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
 
             this.tree.keyManager.onKeydown(event);
 
-            if (this.multiple && isArrowKey && event.shiftKey && this.tree.keyManager.activeItem &&
-                this.tree.keyManager.activeItemIndex !== previouslyFocusedIndex) {
+            if (
+                this.multiple && isArrowKey && event.shiftKey && this.tree.keyManager.activeItem &&
+                this.tree.keyManager.activeItemIndex !== previouslyFocusedIndex
+            ) {
                 this.tree.keyManager.activeItem.selectViaInteraction(event);
             }
         }
