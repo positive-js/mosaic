@@ -125,7 +125,7 @@ function createDedupeWriterOptions(changelogPath: string) {
                     // the commit format that is parsed by the conventional-changelog-parser, can be
                     // still resolved to their package from the scope. This handles the case where
                     // a commit targets the whole package and does not specify a specific scope.
-                    // e.g. "refactor(material-experimental): support strictness flags".
+                    // e.g. "refactor(scope): support strictness flags".
                     if (!commit.package && commit.scope) {
                         const matchingPackage = releasePackages.find((pkgName) => pkgName === commit.scope);
                         if (matchingPackage) {
@@ -134,10 +134,8 @@ function createDedupeWriterOptions(changelogPath: string) {
                         }
                     }
 
-                    // TODO(devversion): once we formalize the commit message format and
-                    // require specifying the "material" package explicitly, we can remove
-                    // the fallback to the "material" package.
-                    const packageName = commit.package || 'material';
+                    // TODO: once we formalize the commit message format
+                    const packageName = commit.package || 'Mosaic';
                     // tslint:disable-next-line:no-reserved-keywords
                     const type = getTypeOfCommitGroupDescription(group.title);
 

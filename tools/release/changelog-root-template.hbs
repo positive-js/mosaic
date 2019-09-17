@@ -11,11 +11,9 @@ _Breaking changes:_
 {{/each}}
 
 {{/if}}
-|            |                       |
-| ---------- | --------------------- |
+
 {{#each commits}}
-| {{type}} | {{> commit root=@root}} |
+ * {{type}} {{> commit root=@root}}
 {{/each}}
 
 {{/each}}
-

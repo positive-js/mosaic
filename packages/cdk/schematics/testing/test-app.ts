@@ -12,6 +12,6 @@ export async function createTestApp(runner: SchematicTestRunner, appOptions = {}
     }, tree);
 
     return runner.runExternalSchematicAsync('@schematics/angular', 'application',
-        {name: 'material', ...appOptions}, workspaceTree).toPromise();
+        {name: 'mosaic', ...appOptions}, workspaceTree).toPromise();
 }
 
