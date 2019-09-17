@@ -2,6 +2,15 @@
 @import "~@ptsecurity/mosaic-icons/dist/styles/mc-icons.css";
 
 
+@font-face {
+    font-family:"PT Mosaic Icons";
+
+    src: url('//cdn.jsdelivr.net/npm/@ptsecurity/mosaic-icons@3.0.0/dist/fonts/mc-icons.woff') format("woff");
+
+    font-weight:normal;
+    font-style:normal;
+}
+
 body {
     font-family: Roboto, Arial, sans-serif;
     margin: 0;
