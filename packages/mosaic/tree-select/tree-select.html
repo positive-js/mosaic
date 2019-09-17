@@ -10,7 +10,10 @@
             <div *ngSwitchDefault [ngSwitch]="multiple" class="mc-tree-select__match-container">
                 <span *ngSwitchCase="false" class="mc-tree-select__matcher-text">{{ triggerValue }}</span>
                 <div *ngSwitchCase="true" class="mc-tree-select__match-list">
-                    <mc-tag *ngFor="let option of selected" [disabled]="disabled" [class.mc-error]="errorState">
+                    <mc-tag *ngFor="let option of selected"
+                            [selectable]="false"
+                            [disabled]="disabled"
+                            [class.mc-error]="errorState">
                         {{ option }}
                         <i mc-icon="mc-close-S_16" (click)="onRemoveSelectedOption(option, $event)"></i>
                     </mc-tag>

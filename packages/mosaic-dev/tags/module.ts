@@ -1,4 +1,5 @@
 import {
+    AfterViewInit,
     Component,
     ElementRef,
     NgModule, OnInit,
@@ -25,7 +26,7 @@ import { map } from 'rxjs/operators';
     styleUrls: ['./styles.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class DemoComponent implements OnInit {
+export class DemoComponent implements AfterViewInit {
     visible = true;
     tagCtrl = new FormControl();
 
@@ -46,7 +47,7 @@ export class DemoComponent implements OnInit {
     @ViewChild('autocompleteTagInput', {static: false}) autocompleteTagInput: ElementRef<HTMLInputElement>;
     @ViewChild('autocompleteTagList', {static: false}) autocompleteTagList: McTagList;
 
-    ngOnInit(): void {
+    ngAfterViewInit(): void {
         this.autocompleteFilteredTags = merge(
             this.autocompleteTagList.tagChanges.asObservable()
                 .pipe(map((selectedTags) => {

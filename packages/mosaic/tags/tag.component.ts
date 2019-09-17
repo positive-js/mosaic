@@ -1,6 +1,7 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ContentChild,
     ContentChildren,
@@ -81,13 +82,17 @@ export const _McTagMixinBase: CanColorCtor & CanDisableCtor & typeof McTagBase =
     inputs: ['color', 'disabled'],
     host: {
         class: 'mc-tag',
-        '[attr.tabindex]': 'disabled ? null : -1',
-        '[class.mc-tag-selected]': 'selected',
+
+        '[attr.tabindex]': 'tabindex',
+        '[attr.disabled]': 'disabled || null',
+
+        '[class.mc-selected]': 'selected',
+        '[class.mc-focused]': 'hasFocus',
         '[class.mc-tag-with-avatar]': 'avatar',
         '[class.mc-tag-with-trailing-icon]': 'trailingIcon || removeIcon',
         '[class.mc-tag-disabled]': 'disabled',
         '[class.mc-disabled]': 'disabled',
-        '[attr.disabled]': 'disabled || null',
+
         '(click)': 'handleClick($event)',
         '(keydown)': 'handleKeydown($event)',
         '(focus)': 'focus()',
@@ -194,6 +199,12 @@ export class McTag extends _McTagMixinBase implements IFocusableOption, OnDestro
 
     private _removable: boolean = true;
 
+    get tabindex(): any {
+        if (!this.selectable) { return null; }
+
+        return this.disabled ? null : -1;
+    }
+
     get disabled() {
         return this._disabled;
     }
@@ -206,7 +217,11 @@ export class McTag extends _McTagMixinBase implements IFocusableOption, OnDestro
 
     private _disabled: boolean = false;
 
-    constructor(public elementRef: ElementRef, private _ngZone: NgZone) {
+    constructor(
+        public elementRef: ElementRef,
+        public changeDetectorRef: ChangeDetectorRef,
+        private _ngZone: NgZone
+    ) {
         super(elementRef);
 
         this.addHostClassName();
@@ -293,11 +308,18 @@ export class McTag extends _McTagMixinBase implements IFocusableOption, OnDestro
 
     /** Allows for programmatic focusing of the tag. */
     focus(): void {
+        if (!this.selectable) { return; }
+
         if (!this.hasFocus) {
             this.elementRef.nativeElement.focus();
+
             this.onFocus.next({ tag: this });
+
+            Promise.resolve().then(() => {
+                this.hasFocus = true;
+                this.changeDetectorRef.markForCheck();
+            });
         }
-        this.hasFocus = true;
     }
 
     /**
