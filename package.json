@@ -147,7 +147,7 @@
         "build:mosaic-moment-adapter": "gulp mosaic-moment-adapter:build-release",
         "build:mosaic": "gulp mosaic:build-release",
         "build:docs": "gulp docs",
-        "changelog": "gulp changelog",
+        "changelog": "ts-node --project tools/release tools/release/changelog.ts",
         "postinstall": "ngc -p angular.tsconfig.json",
         "preinstall": "node ./tools/npm/check-npm.js",
         "publish": "ts-node --project ./scripts/tsconfig.deploy.json ./scripts/deploy/publish-artifacts.ts",
