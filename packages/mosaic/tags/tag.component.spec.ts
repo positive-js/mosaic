@@ -120,12 +120,12 @@ describe('Tags', () => {
 
             it('allows selection', () => {
                 spyOn(testComponent, 'tagSelectionChange');
-                expect(tagNativeElement.classList).not.toContain('mc-tag-selected');
+                expect(tagNativeElement.classList).not.toContain('mc-selected');
 
                 testComponent.selected = true;
                 fixture.detectChanges();
 
-                expect(tagNativeElement.classList).toContain('mc-tag-selected');
+                expect(tagNativeElement.classList).toContain('mc-selected');
                 expect(testComponent.tagSelectionChange)
                     .toHaveBeenCalledWith({ source: tagInstance, isUserInput: false, selected: true });
             });
