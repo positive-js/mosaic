@@ -1,3 +1,4 @@
+/* tslint:disable:no-empty */
 import { SelectionModel } from '@angular/cdk/collections';
 import {
     AfterContentInit,
@@ -36,7 +37,11 @@ import {
     McLine,
     CanDisable,
     mixinDisabled,
-    toBoolean, CanDisableCtor
+    toBoolean,
+    CanDisableCtor,
+    HasTabIndexCtor,
+    mixinTabIndex,
+    HasTabIndex
 } from '@ptsecurity/mosaic/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -209,18 +214,15 @@ export const MC_SELECTION_LIST_VALUE_ACCESSOR: any = {
 };
 
 export class McListSelectionChange {
-    constructor(
-        public source: McListSelection,
-        public option: McListOption
-    ) {}
+    constructor(public source: McListSelection, public option: McListOption) {}
 }
 
 
 export class McListSelectionBase {}
 
 // tslint:disable-next-line:naming-convention
-export const _McListSelectionMixinBase: CanDisableCtor & typeof McListSelectionBase
-    = mixinDisabled(McListSelectionBase);
+export const _McListSelectionMixinBase: CanDisableCtor & HasTabIndexCtor & typeof McListSelectionBase
+    = mixinTabIndex(mixinDisabled(McListSelectionBase));
 
 @Component({
     exportAs: 'mcListSelection',
@@ -229,7 +231,7 @@ export const _McListSelectionMixinBase: CanDisableCtor & typeof McListSelectionB
     styleUrls: ['./list.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    inputs: ['disabled', 'tabIndex'],
+    inputs: ['disabled'],
     host: {
         class: 'mc-list-selection',
         '[tabIndex]': 'tabIndex',
@@ -242,14 +244,12 @@ export const _McListSelectionMixinBase: CanDisableCtor & typeof McListSelectionB
     preserveWhitespaces: false
 })
 export class McListSelection extends _McListSelectionMixinBase implements
-    IFocusableOption, CanDisable, AfterContentInit, ControlValueAccessor {
+    IFocusableOption, CanDisable, HasTabIndex, AfterContentInit, ControlValueAccessor, HasTabIndex {
 
     keyManager: FocusKeyManager<McListOption>;
 
     // The option components contained within this selection-list.
     @ContentChildren(McListOption) options: QueryList<McListOption>;
-
-    tabIndex: number;
 
     autoSelect: boolean;
     noUnselect: boolean;
@@ -447,6 +447,7 @@ export class McListSelection extends _McListSelectionMixinBase implements
     }
 
     onKeyDown(event: KeyboardEvent) {
+        // tslint:disable-next-line: deprecation
         const keyCode = event.keyCode;
 
         switch (keyCode) {

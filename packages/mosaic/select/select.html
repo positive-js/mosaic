@@ -14,7 +14,7 @@
                             [disabled]="disabled"
                             [selectable]="false"
                             [class.mc-error]="errorState">
-                        {{ option.viewValue || option.value }}
+                        {{ option.viewValue }}
                         <i mc-icon="mc-close-S_16" (click)="onRemoveMatcherItem(option, $event)"></i>
                     </mc-tag>
                 </div>

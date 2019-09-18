@@ -27,7 +27,6 @@ import { TreeControl } from './control/tree-control';
 import { CdkTreeNodeDef, CdkTreeNodeOutletContext } from './node';
 import { CdkTreeNodeOutlet } from './outlet';
 import {
-    getTreeControlFunctionsMissingError,
     getTreeControlMissingError,
     getTreeMissingMatchingNodeDefError,
     getTreeMultipleDefaultNodeDefsError,
@@ -309,8 +308,6 @@ export class CdkTreeNode<T> implements IFocusableOption, OnDestroy {
 
     set data(value: T) {
         this._data = value;
-
-        this.setRoleFromData();
     }
 
     private _data: T;
@@ -325,9 +322,9 @@ export class CdkTreeNode<T> implements IFocusableOption, OnDestroy {
 
     constructor(
         protected elementRef: ElementRef,
-        @Inject(forwardRef(() => CdkTree)) protected tree: CdkTree<T>
+        @Inject(forwardRef(() => CdkTree)) public tree: CdkTree<T>
     ) {
-        CdkTreeNode.mostRecentTreeNode = this as CdkTreeNode<T>;
+        CdkTreeNode.mostRecentTreeNode = this;
     }
 
     ngOnDestroy() {
@@ -337,20 +334,5 @@ export class CdkTreeNode<T> implements IFocusableOption, OnDestroy {
 
     focus(): void {
         this.elementRef.nativeElement.focus();
-    }
-
-    private setRoleFromData(): void {
-        if (this.tree.treeControl.isExpandable) {
-            this.role = this.tree.treeControl.isExpandable(this._data) ? 'group' : 'treeitem';
-        } else {
-            if (!this.tree.treeControl.getChildren) {
-                throw getTreeControlFunctionsMissingError();
-            }
-
-            this.tree.treeControl.getChildren(this._data).pipe(takeUntil(this.destroyed))
-                .subscribe((children) => {
-                    this.role = children && children.length ? 'group' : 'treeitem';
-                });
-        }
     }
 }

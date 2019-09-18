@@ -99,9 +99,6 @@ import {
 
 let nextUniqueId = 0;
 
-/** The height of the select items in `em` units. */
-export const SELECT_ITEM_HEIGHT_EM = 2;
-
 /** Change event object that is emitted when the select value has changed. */
 export class McSelectChange {
     constructor(public source: McSelect, public value: any) {}
@@ -117,6 +114,7 @@ export class McSelectBase {
     ) {}
 }
 
+// tslint:disable-next-line:naming-convention
 const McSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorStateCtor &
     typeof McSelectBase = mixinTabIndex(mixinDisabled(mixinErrorState(McSelectBase)));
 
@@ -129,7 +127,7 @@ const McSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorStateC
     }
 })
 export class McSelectSearch implements AfterContentInit, OnDestroy {
-    @ContentChild(McInput, {static: false}) input: McInput;
+    @ContentChild(McInput, { static: false }) input: McInput;
 
     searchChangesSubscription: Subscription = new Subscription();
 
@@ -192,16 +190,18 @@ export class McSelectTrigger {}
     exportAs: 'mcSelect',
     templateUrl: 'select.html',
     styleUrls: ['./select.css'],
-    inputs: ['disabled', 'tabIndex'],
+    inputs: ['disabled'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[attr.id]': 'id',
-        '[attr.tabindex]': 'tabIndex',
+        '[tabindex]': 'tabIndex',
+
         class: 'mc-select',
         '[class.mc-disabled]': 'disabled',
         '[class.mc-select-invalid]': 'errorState',
         '[class.mc-select-required]': 'required',
+
         '(keydown)': 'handleKeydown($event)',
         '(focus)': 'onFocus()',
         '(blur)': 'onBlur()',
@@ -238,9 +238,6 @@ export class McSelect extends McSelectMixinBase implements
 
     /** Manages keyboard events for options in the panel. */
     keyManager: ActiveDescendantKeyManager<McOption>;
-
-    /** The IDs of child options to be passed to the aria-owns attribute. */
-    optionIds: string = '';
 
     /** The value of the select panel's transform-origin property. */
     transformOrigin: string = 'top';
@@ -282,18 +279,18 @@ export class McSelect extends McSelectMixinBase implements
         }
     ];
 
-    @ViewChild('trigger', {static: false}) trigger: ElementRef;
+    @ViewChild('trigger', { static: false }) trigger: ElementRef;
 
-    @ViewChild('panel', {static: false}) panel: ElementRef;
+    @ViewChild('panel', { static: false }) panel: ElementRef;
 
-    @ViewChild('optionsContainer', {static: false}) optionsContainer: ElementRef;
+    @ViewChild('optionsContainer', { static: false }) optionsContainer: ElementRef;
 
-    @ViewChild(CdkConnectedOverlay, {static: false}) overlayDir: CdkConnectedOverlay;
+    @ViewChild(CdkConnectedOverlay, { static: false }) overlayDir: CdkConnectedOverlay;
 
     @ViewChildren(McTag) tags: QueryList<McTag>;
 
     /** User-supplied override of the trigger element. */
-    @ContentChild(McSelectTrigger, {static: false}) customTrigger: McSelectTrigger;
+    @ContentChild(McSelectTrigger, { static: false }) customTrigger: McSelectTrigger;
 
     /** All of the defined select options. */
     @ContentChildren(McOption, { descendants: true }) options: QueryList<McOption>;
@@ -610,7 +607,6 @@ export class McSelect extends McSelectMixinBase implements
 
         this._panelOpen = true;
         this.keyManager.withHorizontalOrientation(null);
-        this.calculateOverlayPosition();
         this.highlightCorrectOption();
         this._changeDetectorRef.markForCheck();
 
@@ -690,29 +686,17 @@ export class McSelect extends McSelectMixinBase implements
     get triggerValue(): string {
         if (this.empty) { return ''; }
 
-        if (this._multiple) {
-            const selectedOptions = this.selectionModel.selected.map((option) => option.viewValue);
-
-            if (this.isRtl()) { selectedOptions.reverse(); }
-
-            return selectedOptions.join(', ');
-        }
-
         return this.selectionModel.selected[0].viewValue;
     }
 
     get triggerValues(): McOption[] {
         if (this.empty) { return []; }
 
-        if (this._multiple) {
-            const selectedOptions = this.selectionModel.selected;
+        const selectedOptions = this.selectionModel.selected;
 
-            if (this.isRtl()) { selectedOptions.reverse(); }
+        if (this.isRtl()) { selectedOptions.reverse(); }
 
-            return selectedOptions;
-        }
-
-        return [this.selectionModel.selected[0]];
+        return selectedOptions;
     }
 
     get empty(): boolean {
@@ -794,29 +778,6 @@ export class McSelect extends McSelectMixinBase implements
     }
 
     /**
-     * Calculates the scroll position of the select's overlay panel.
-     *
-     * Attempts to center the selected option in the panel. If the option is
-     * too high or too low in the panel to be scrolled to the center, it clamps the
-     * scroll position to the min or max scroll positions respectively.
-     */
-    calculateOverlayScroll(selectedIndex: number, scrollBuffer: number, maxScroll: number): number {
-        const itemHeight = this.getItemHeight();
-        const optionOffsetFromScrollTop = itemHeight * selectedIndex;
-
-        /* tslint:disable-next-line:no-magic-numbers */
-        const halfOptionHeight = itemHeight / 2;
-
-        // Starts at the optionOffsetFromScrollTop, which scrolls the option to the top of the
-        // scroll container, then subtracts the scroll buffer to scroll the option down to
-        // the center of the overlay panel. Half the option height must be re-added to the
-        // scrollTop so the option is centered based on its middle, not its top edge.
-        const optimalScrollPosition = optionOffsetFromScrollTop - scrollBuffer + halfOptionHeight;
-
-        return Math.min(Math.max(0, optimalScrollPosition), maxScroll);
-    }
-
-    /**
      * Implemented as part of McFormFieldControl.
      * @docs-private
      */
@@ -875,6 +836,10 @@ export class McSelect extends McSelectMixinBase implements
         }
 
         this._changeDetectorRef.markForCheck();
+    }
+
+    getItemHeight(): number {
+        return this.options.first ? this.options.first.getHeight() : 0;
     }
 
     private getHeightOfOptionsContainer(): number {
@@ -1108,8 +1073,6 @@ export class McSelect extends McSelectMixinBase implements
                 this._changeDetectorRef.markForCheck();
                 this.stateChanges.next();
             });
-
-        this.setOptionIds();
     }
 
     /** Invoked when an option is clicked. */
@@ -1186,11 +1149,6 @@ export class McSelect extends McSelectMixinBase implements
         this._changeDetectorRef.markForCheck();
     }
 
-    /** Records option IDs to pass to the aria-owns property. */
-    private setOptionIds() {
-        this.optionIds = this.options.map((option) => option.id).join(' ');
-    }
-
     /**
      * Highlights the selected item. If no option is selected, it will highlight
      * the first item instead.
@@ -1216,41 +1174,6 @@ export class McSelect extends McSelectMixinBase implements
             this.optionsContainer.nativeElement.scrollTop,
             SELECT_PANEL_MAX_HEIGHT
         );
-    }
-
-    /** Gets the index of the provided option in the option list. */
-    private getOptionIndex(option: McOption): number | undefined {
-        /* tslint:disable-next-line */
-        return this.options.reduce((result: number, current: McOption, index: number) => {
-            /* tslint:disable-next-line:strict-type-predicates */
-            return result === undefined ? (option === current ? index : undefined) : result;
-        }, undefined);
-    }
-
-    /** Calculates the scroll position and x- and y-offsets of the overlay panel. */
-    private calculateOverlayPosition(): void {
-        const itemHeight = this.getItemHeight();
-        const items = this.getItemCount();
-        const panelHeight = Math.min(items * itemHeight, SELECT_PANEL_MAX_HEIGHT);
-        const scrollContainerHeight = items * itemHeight;
-
-        // The farthest the panel can be scrolled before it hits the bottom
-        const maxScroll = scrollContainerHeight - panelHeight;
-
-        // If no value is selected we open the popup to the first item.
-        let selectedOptionOffset =
-            this.empty ? 0 : this.getOptionIndex(this.selectionModel.selected[0])!;
-
-        selectedOptionOffset += countGroupLabelsBeforeOption(selectedOptionOffset, this.options, this.optionGroups);
-
-        // We must maintain a scroll buffer so the selected option will be scrolled to the
-        // center of the overlay panel rather than the top.
-        /* tslint:disable-next-line:no-magic-numbers */
-        const scrollBuffer = panelHeight / 2;
-        this.scrollTop = this.calculateOverlayScroll(selectedOptionOffset, scrollBuffer, maxScroll);
-        this.offsetY = this.calculateOverlayOffsetY();
-
-        this.checkOverlayWithinViewport(maxScroll);
     }
 
     /**
@@ -1291,116 +1214,6 @@ export class McSelect extends McSelectMixinBase implements
         // blurry content in some browsers.
         this.overlayDir.offsetX = Math.round(offsetX);
         this.overlayDir.overlayRef.updatePosition();
-    }
-
-    /**
-     * Calculates the y-offset of the select's overlay panel in relation to the
-     * top start corner of the trigger. It has to be adjusted in order for the
-     * selected option to be aligned over the trigger when the panel opens.
-     */
-    private calculateOverlayOffsetY(): number {
-        // const itemHeight = this.getItemHeight();
-        // const optionHeightAdjustment = (itemHeight - this.triggerRect.height) / 2;
-
-        // todo I'm not sure that we will use it
-        return 0;
-        // return Math.round(-optionHeightAdjustment);
-    }
-
-    /**
-     * Checks that the attempted overlay position will fit within the viewport.
-     * If it will not fit, tries to adjust the scroll position and the associated
-     * y-offset so the panel can open fully on-screen. If it still won't fit,
-     * sets the offset back to 0 to allow the fallback position to take over.
-     */
-    private checkOverlayWithinViewport(maxScroll: number): void {
-        const itemHeight = this.getItemHeight();
-        const viewportSize = this._viewportRuler.getViewportSize();
-
-        const topSpaceAvailable = this.triggerRect.top - SELECT_PANEL_VIEWPORT_PADDING;
-        const bottomSpaceAvailable =
-            viewportSize.height - this.triggerRect.bottom - SELECT_PANEL_VIEWPORT_PADDING;
-
-        const panelHeightTop = Math.abs(this.offsetY);
-        const totalPanelHeight =
-            Math.min(this.getItemCount() * itemHeight, SELECT_PANEL_MAX_HEIGHT);
-        const panelHeightBottom = totalPanelHeight - panelHeightTop - this.triggerRect.height;
-
-        if (panelHeightBottom > bottomSpaceAvailable) {
-            this.adjustPanelUp(panelHeightBottom, bottomSpaceAvailable);
-        } else if (panelHeightTop > topSpaceAvailable) {
-            this.adjustPanelDown(panelHeightTop, topSpaceAvailable, maxScroll);
-        } else {
-            this.transformOrigin = this.getOriginBasedOnOption();
-        }
-    }
-
-    /** Adjusts the overlay panel up to fit in the viewport. */
-    private adjustPanelUp(panelHeightBottom: number, bottomSpaceAvailable: number) {
-        // Browsers ignore fractional scroll offsets, so we need to round.
-        const distanceBelowViewport = Math.round(panelHeightBottom - bottomSpaceAvailable);
-
-        // Scrolls the panel up by the distance it was extending past the boundary, then
-        // adjusts the offset by that amount to move the panel up into the viewport.
-        this.scrollTop -= distanceBelowViewport;
-        this.offsetY -= distanceBelowViewport;
-        this.transformOrigin = this.getOriginBasedOnOption();
-
-        // If the panel is scrolled to the very top, it won't be able to fit the panel
-        // by scrolling, so set the offset to 0 to allow the fallback position to take
-        // effect.
-        if (this.scrollTop <= 0) {
-            this.scrollTop = 0;
-            this.offsetY = 0;
-            this.transformOrigin = `50% bottom 0px`;
-        }
-    }
-
-    /** Adjusts the overlay panel down to fit in the viewport. */
-    private adjustPanelDown(panelHeightTop: number, topSpaceAvailable: number, maxScroll: number) {
-        // Browsers ignore fractional scroll offsets, so we need to round.
-        const distanceAboveViewport = Math.round(panelHeightTop - topSpaceAvailable);
-
-        // Scrolls the panel down by the distance it was extending past the boundary, then
-        // adjusts the offset by that amount to move the panel down into the viewport.
-        this.scrollTop += distanceAboveViewport;
-        this.offsetY += distanceAboveViewport;
-        this.transformOrigin = this.getOriginBasedOnOption();
-
-        // If the panel is scrolled to the very bottom, it won't be able to fit the
-        // panel by scrolling, so set the offset to 0 to allow the fallback position
-        // to take effect.
-        if (this.scrollTop >= maxScroll) {
-            this.scrollTop = maxScroll;
-            this.offsetY = 0;
-            this.transformOrigin = `50% top 0px`;
-
-            return;
-        }
-    }
-
-    /** Sets the transform origin point based on the selected option. */
-    private getOriginBasedOnOption(): string {
-        const itemHeight = this.getItemHeight();
-        /* tslint:disable-next-line:no-magic-numbers */
-        const optionHeightAdjustment = (itemHeight - this.triggerRect.height) / 2;
-        /* tslint:disable-next-line:no-magic-numbers */
-        const originY = Math.abs(this.offsetY) - optionHeightAdjustment + itemHeight / 2;
-
-        return `50% ${originY}px 0px`;
-    }
-
-    /** Calculates the amount of items in the select. This includes options and group labels. */
-    private getItemCount(): number {
-        return this.options.length + this.optionGroups.length;
-    }
-
-    /** Calculates the height of the select's options. */
-    private getItemHeight(): number {
-        // todo доделать
-        /* tslint:disable-next-line:no-magic-numbers */
-        return 32;
-        // return this.triggerFontSize * SELECT_ITEM_HEIGHT_EM;
     }
 
     /** Comparison function to specify which option is displayed. Defaults to object equality. */

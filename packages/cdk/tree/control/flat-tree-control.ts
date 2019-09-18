@@ -3,9 +3,13 @@ import { BaseTreeControl } from './base-tree-control';
 
 /** Flat tree control. Able to expand/collapse a subtree recursively for flattened tree. */
 export class FlatTreeControl<T> extends BaseTreeControl<T> {
-
     /** Construct with flat tree data node functions getLevel and isExpandable. */
-    constructor(public getLevel: (dataNode: T) => number, public isExpandable: (dataNode: T) => boolean) {
+    constructor(
+        public getLevel: (dataNode: T) => number,
+        public isExpandable: (dataNode: T) => boolean,
+        public getValue: (dataNode) => string,
+        public getViewValue: (dataNode) => string
+    ) {
         super();
     }
 
@@ -55,15 +59,20 @@ export class FlatTreeControl<T> extends BaseTreeControl<T> {
         }
     }
 
-    compareFunction(name: string, value: string): boolean {
+    hasValue(value: string): T | undefined {
+        return this.dataNodes.find((node: any) => this.getValue(node) === value);
+    }
+
+    filterNodesFunction(name: string, value: string): boolean {
         return RegExp(value, 'gi').test(name);
     }
 
     filterNodes(value: string): void {
         this.filterModel.clear();
 
-        // todo нет возможности управлять параметром имени 'node.name'
-        const filteredNodes = this.dataNodes.filter((node: any) => this.compareFunction(node.name, value));
+        const filteredNodes = this.dataNodes.filter(
+            (node: any) => this.filterNodesFunction(this.getViewValue(node), value)
+        );
 
         const filteredNodesWithTheirParents = new Set();
         filteredNodes.forEach((filteredNode) => {

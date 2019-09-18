@@ -407,7 +407,7 @@ describe('McListSelection without forms', () => {
                 imports: [McListModule],
                 declarations: [
                     SelectionListWithTabindexAttr,
-                    SelectionListWithTabindexBinding
+                    SelectionListWithTabindexInDisabledState
                 ]
             });
 
@@ -422,24 +422,18 @@ describe('McListSelection without forms', () => {
                 .toBe(5, 'Expected the selection-list tabindex to be set to the attribute value.');
         });
 
-        it('should support changing the tabIndex through binding', () => {
-            const fixture = TestBed.createComponent(SelectionListWithTabindexBinding);
+        it('should set tabindex to "-1" in disabled state', () => {
+            const fixture = TestBed.createComponent(SelectionListWithTabindexInDisabledState);
             const selectionList = fixture.debugElement.query(By.directive(McListSelection));
 
             expect(selectionList.componentInstance.tabIndex)
                 .toBe(0, 'Expected the tabIndex to be set to "0" by default.');
 
-            fixture.componentInstance.tabIndex = 3;
-            fixture.detectChanges();
-
-            expect(selectionList.componentInstance.tabIndex)
-                .toBe(3, 'Expected the tabIndex to updated through binding.');
-
             fixture.componentInstance.disabled = true;
             fixture.detectChanges();
 
             expect(selectionList.componentInstance.tabIndex)
-                .toBe(3, 'Expected the tabIndex to be still set to "3".');
+                .toBe(-1, 'Expected the tabIndex to be set to "-1".');
         });
     });
 
@@ -914,9 +908,9 @@ class SelectionListWithTabindexAttr {}
 
 @Component({
     template: `
-        <mc-list-selection [tabIndex]="tabIndex" [disabled]="disabled"></mc-list-selection>`
+        <mc-list-selection [disabled]="disabled"></mc-list-selection>`
 })
-class SelectionListWithTabindexBinding {
+class SelectionListWithTabindexInDisabledState {
     tabIndex: number;
     disabled: boolean;
 }

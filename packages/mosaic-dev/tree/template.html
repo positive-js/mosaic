@@ -6,6 +6,10 @@
 </style>
 
 <button class="mc-primary" mc-button (click)="modelValue = 'Applications'">set modelValue = Applications</button>
+<button class="mc-primary" mc-button (click)="modelValue = 'Application'">set modelValue = Application</button>
+<br>
+<br>
+<button class="mc-primary" mc-button (click)="disableState = !disableState">toggle disableState</button>
 
 <br><br><br>
 
@@ -14,7 +18,7 @@
 <br><br><br>
 
 <mc-form-field>
-    <input type="text" placeholder="tree filter" (ngModelChange)="onFilterChange($event)" mcInput [(ngModel)]="filterValue">
+    <input type="text" mcInput (ngModelChange)="onFilterChange($event)" [(ngModel)]="filterValue">
 </mc-form-field>
 
 <br><br><br>
@@ -22,6 +26,7 @@
     <!--no-unselect="false"-->
 <!--    multiple-->
 <mc-tree-selection
+    [disabled]="disableState"
     [(ngModel)]="modelValue"
     [dataSource]="dataSource"
     [treeControl]="treeControl"
@@ -30,19 +35,17 @@
 
     <mc-tree-option
         *mcTreeNodeDef="let node"
-        [value]="node.name"
         mcTreeNodePadding>
-        <span [innerHTML]="node.name | mcHighlight : treeControl.filterValue.value"></span>
+        <span [innerHTML]="treeControl.getViewValue(node) | mcHighlight : treeControl.filterValue.value"></span>
     </mc-tree-option>
 
     <mc-tree-option
         *mcTreeNodeDef="let node; when: hasChild"
-        [value]="node.name"
         mcTreeNodePadding
         [disabled]="node.name === 'Downloads'">
 
         <mc-tree-node-toggle [node]="node"></mc-tree-node-toggle>
 
-        <span [innerHTML]="(node.name + ':') | mcHighlight : treeControl.filterValue.value"></span>
+        <span [innerHTML]="treeControl.getViewValue(node) | mcHighlight : treeControl.filterValue.value"></span>
     </mc-tree-option>
 </mc-tree-selection>

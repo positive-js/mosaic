@@ -1,4 +1,3 @@
-import { SelectionModel } from '@angular/cdk/collections';
 import {
     ChangeDetectorRef,
     Component,
@@ -7,27 +6,22 @@ import {
     Output,
     ElementRef,
     Inject,
-    Optional,
-    InjectionToken, ChangeDetectionStrategy, ViewEncapsulation, OnInit, OnDestroy
+    InjectionToken,
+    ChangeDetectionStrategy,
+    ViewEncapsulation,
+    OnInit,
+    OnDestroy,
+    AfterContentInit
 } from '@angular/core';
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { CdkTreeNode } from '@ptsecurity/cdk/tree';
 import { CanDisable, toBoolean } from '@ptsecurity/mosaic/core';
 
 
-/* tslint:disable-next-line:naming-convention */
-export interface McTreeOptionParentComponent {
-    multiple: boolean;
-    selectionModel: SelectionModel<any>;
-    setSelectedOption: any;
-    setFocusedOption: any;
-}
-
 /**
  * Injection token used to provide the parent component to options.
  */
-export const MC_TREE_OPTION_PARENT_COMPONENT =
-    new InjectionToken<McTreeOptionParentComponent>('MC_TREE_OPTION_PARENT_COMPONENT');
+export const MC_TREE_OPTION_PARENT_COMPONENT = new InjectionToken<any>('MC_TREE_OPTION_PARENT_COMPONENT');
 
 export class McTreeOptionChange {
     constructor(public source: McTreeOption, public isUserInput = false) {}
@@ -57,8 +51,7 @@ let uniqueIdCounter: number = 0;
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: CdkTreeNode, useExisting: McTreeOption }]
 })
-export class McTreeOption extends CdkTreeNode<McTreeOption> implements OnInit, OnDestroy, CanDisable {
-    @Input()
+export class McTreeOption extends CdkTreeNode<McTreeOption> implements OnInit, OnDestroy, CanDisable, AfterContentInit {
     get value(): any {
         return this._value;
     }
@@ -71,7 +64,7 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements OnInit, O
 
     @Input()
     get disabled() {
-        return this._disabled;
+        return this._disabled || (this.tree && this.tree.disabled);
     }
 
     set disabled(value: any) {
@@ -95,7 +88,6 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements OnInit, O
 
         if (isSelected !== this._selected) {
             this.setSelected(isSelected);
-            // this.treeSelection._reportValueChange();
         }
     }
 
@@ -108,23 +100,31 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements OnInit, O
     private _id = `mc-tree-option-${uniqueIdCounter++}`;
 
     get multiple(): boolean {
-        return this.parent.multiple;
+        return this.tree.multiple;
+    }
+
+    get viewValue(): string {
+        // TODO: Add input property alternative for node envs.
+        return (this.getHostElement().textContent || '').trim();
     }
 
     hasFocus: boolean = false;
 
     constructor(
-        protected elementRef: ElementRef,
-        protected changeDetectorRef: ChangeDetectorRef,
+        elementRef: ElementRef,
+        private changeDetectorRef: ChangeDetectorRef,
         private focusMonitor: FocusMonitor,
-        @Optional() @Inject(MC_TREE_OPTION_PARENT_COMPONENT) private readonly parent: McTreeOptionParentComponent
+        @Inject(MC_TREE_OPTION_PARENT_COMPONENT) public tree: any
     ) {
-        // todo any
-        super(elementRef, parent as any);
+        super(elementRef, tree);
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.focusMonitor.monitor(this.elementRef.nativeElement, false);
+    }
+
+    ngAfterContentInit(): void {
+        this.value = this.tree.treeControl.getValue(this.data);
     }
 
     ngOnDestroy(): void {
@@ -135,37 +135,38 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements OnInit, O
         this.selected = !this.selected;
     }
 
-    setSelected(selected: boolean) {
-        if (this._selected === selected || !this.parent.selectionModel) { return; }
+    setSelected(selected: boolean): void {
+        if (this._selected === selected || !this.tree.selectionModel) { return; }
 
         this._selected = selected;
 
         if (selected) {
-            this.parent.selectionModel.select(this.value);
+            this.tree.selectionModel.select(this.value);
         } else {
-            this.parent.selectionModel.deselect(this.value);
+            this.tree.selectionModel.deselect(this.value);
         }
 
         this.changeDetectorRef.markForCheck();
     }
 
-    handleFocus() {
+    handleFocus(): void {
         if (this.disabled || this.hasFocus) { return; }
 
         this.hasFocus = true;
 
-        if (this.parent.setFocusedOption) {
-            this.parent.setFocusedOption(this);
+        if (this.tree.setFocusedOption) {
+            this.tree.setFocusedOption(this);
         }
     }
 
-    handleBlur() {
+    handleBlur(): void {
         this.hasFocus = false;
     }
 
     focus(): void {
         const element = this.getHostElement();
 
+        // tslint:disable-next-line: no-unbound-method
         if (typeof element.focus === 'function') {
             element.focus();
         }
@@ -179,11 +180,6 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements OnInit, O
         }
 
         return 0;
-    }
-
-    get viewValue(): string {
-        // TODO: Add input property alternative for node envs.
-        return (this.getHostElement().textContent || '').trim();
     }
 
     select(): void {
@@ -207,8 +203,8 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements OnInit, O
             this.changeDetectorRef.markForCheck();
             this.emitSelectionChangeEvent(true);
 
-            if (this.parent.setSelectedOption) {
-                this.parent.setSelectedOption(this, $event);
+            if (this.tree.setSelectedOption) {
+                this.tree.setSelectedOption(this, $event);
             }
         }
     }
@@ -223,5 +219,9 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements OnInit, O
 
     getTabIndex(): string {
         return this.disabled ? '-1' : '0';
+    }
+
+    markForCheck() {
+        this.changeDetectorRef.markForCheck();
     }
 }
