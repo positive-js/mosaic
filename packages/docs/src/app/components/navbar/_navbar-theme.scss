@@ -3,6 +3,8 @@
     $background: map-get($theme, background);
     $is-dark: map-get($theme, is-dark);
     $background-color: mc-color($background, background);
+    $hover:  mc-color($background, hover);
+    $selected: mc-color($primary, if($is-dark, 700, 100));
     $text: mc-color($foreground, text);
     $divider: mc-color($foreground, divider);
     $less-contrast-text: mc-color($foreground, less-contrast-text);
@@ -23,5 +25,15 @@
         color: if($is-dark, $text, $hint-text);
 
         &__date { color: $less-contrast-text; }
+    }
+
+    .color-picker__dropdown-content {
+        &:hover {
+            background-color: $hover;
+        }
+
+        &.mc-selected {
+            background: $selected;
+        }
     }
 }
