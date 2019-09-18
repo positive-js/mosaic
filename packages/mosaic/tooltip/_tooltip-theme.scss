@@ -12,10 +12,15 @@
     $is-dark: map-get($theme, is-dark);
 
     $background-color: mc-color($background, bg-dropdowns);
+    $border-color: if($is-dark, $background-color, map-get($foreground, disabled));
 
     .mc-tooltip-inner {
         color: if($is-dark, mc-color($second, 700), mc-contrast($second, 700));
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+        background-color: $background-color;
+    }
+
+    .mc-tooltip .mc-tooltip-arrow {
         background-color: $background-color;
     }
 

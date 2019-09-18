@@ -7,8 +7,8 @@
 $zindex-tooltip: 1060;
 $tooltip-max-width: 240px;
 $border-radius-base: 3px;
-$tooltip-arrow-width: 8px;
-$tooltip-distance: $tooltip-arrow-width + 3px;
+$tooltip-arrow-width: 5px;
+$tooltip-distance: $tooltip-arrow-width + 4px;
 
 .mc-tooltip {
     display: block;
@@ -57,36 +57,31 @@ $tooltip-distance: $tooltip-arrow-width + 3px;
 
 .mc-tooltip-arrow {
     position: absolute;
-    width: 0;
-    height: 0;
-    border-color: transparent;
-    border-style: solid;
+    width: 12px;
+    height: 12px;
+    transform: rotate(45deg);
 }
 
 .mc-tooltip_placement-top .mc-tooltip-arrow {
     bottom: $tooltip-distance - $tooltip-arrow-width;
-    border-width: $tooltip-arrow-width $tooltip-arrow-width 0;
     left: 50%;
     margin-left: -$tooltip-arrow-width;
 }
 
 .mc-tooltip_placement-right .mc-tooltip-arrow {
     left: $tooltip-distance - $tooltip-arrow-width;
-    border-width: $tooltip-arrow-width $tooltip-arrow-width $tooltip-arrow-width 0;
     top: 16px;
     margin-top: -$tooltip-arrow-width;
 }
 
 .mc-tooltip_placement-left .mc-tooltip-arrow {
     right: $tooltip-distance - $tooltip-arrow-width;
-    border-width: $tooltip-arrow-width 0 $tooltip-arrow-width $tooltip-arrow-width;
     top: 16px;
     margin-top: -$tooltip-arrow-width;
 }
 
 .mc-tooltip_placement-bottom .mc-tooltip-arrow {
     top: $tooltip-distance - $tooltip-arrow-width;
-    border-width: 0 $tooltip-arrow-width $tooltip-arrow-width;
     left: 50%;
     margin-left: -$tooltip-arrow-width;
 }

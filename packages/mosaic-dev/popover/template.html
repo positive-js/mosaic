@@ -62,23 +62,20 @@
         (click)="changePopoverVisibilityBottom()">
         bottom
     </button>
-    <span
+    <button
         class="with-margin"
         mc-button
         color="second"
         mcPopover
-        mcPopoverTrigger="manual"
+        mcPopoverTrigger="focus"
         mcPopoverClass="popover-485 this-class-not-available"
-        [mcPopoverVisible]="isPopoverVisibleBottomRight"
         mcPopoverHeader="Lorem ipsum"
         mcPopoverSize="azaza"
         mcPopoverPlacement="bottomRight"
         [mcPopoverContent]="customContent"
-        [mcPopoverFooter]="customFooter"
-        (mcPopoverVisibleChange)="onPopoverVisibleChangeBottomRight($event)"
-        (click)="changePopoverVisibilityBottomRight()">
+        [mcPopoverFooter]="customFooter">
         <i class="mc-disabled" mc-icon="mc-folder-opened_16"></i>
-    </span>
+    </button>
 </section>
 
 <section class="flex layout-row layout-align-stretch-center">
