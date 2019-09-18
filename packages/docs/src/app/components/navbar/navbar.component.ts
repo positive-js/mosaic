@@ -38,24 +38,26 @@ export class NavbarComponent {
     colors = [
         {
             code: '#2f80ed',
-            className: 'active-blue'
+            className: 'active-blue',
+            selected: true
         },
         {
             code: '#832112',
-            className: 'active-red'
+            className: 'active-red',
+            selected: false
         },
         {
             code: '#07804e',
-            className: 'active-green'
+            className: 'active-green',
+            selected: false
         },
         {
             code: '#eaaf00',
-            className: 'active-yellow'
+            className: 'active-yellow',
+            selected: false
         }
         ];
     activeColor = this.colors[0];
-
-    iconFont = '20px';
 
     constructor(private renderer: Renderer2) {}
 
@@ -75,6 +77,9 @@ export class NavbarComponent {
     setColor(i) {
         this.activeColor = this.colors[i];
         this.changeColorOnBody();
+
+        this.colors.forEach((color) => { color.selected = false; });
+        this.colors[i].selected = true;
     }
 
     private changeThemeOnBody() {

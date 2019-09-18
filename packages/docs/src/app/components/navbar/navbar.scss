@@ -2,6 +2,7 @@
 
 $doc-navbar-height: 64px;
 $doc-navbar-font-size: 20px;
+$doc-navbar-icon-font-size: 22px;
 $doc-navbar-padding: 10px;
 
 .docs-navbar-header {
@@ -44,8 +45,16 @@ $doc-navbar-padding: 10px;
 
         &__icon { color: inherit; }
     }
+}
 
-    .color-picker__icon { font-size: $doc-navbar-font-size; }
+.color-picker {
+    &__icon {
+        font-size: $doc-navbar-icon-font-size;
+    }
+
+    &__dropdown-content {
+        padding: 7px 5px;
+    }
 }
 
 .docs-navbar-version {
