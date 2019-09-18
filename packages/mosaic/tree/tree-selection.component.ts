@@ -1,4 +1,5 @@
 /* tslint:disable:no-empty */
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { SelectionModel } from '@angular/cdk/collections';
 import {
     AfterContentInit,
@@ -35,8 +36,8 @@ import {
 import { CdkTree, CdkTreeNodeOutlet, FlatTreeControl } from '@ptsecurity/cdk/tree';
 import {
     CanDisable,
-    HasTabIndex,
-    toBoolean
+    getMcSelectNonArrayValueError,
+    HasTabIndex
 } from '@ptsecurity/mosaic/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -100,10 +101,6 @@ export class McTreeSelection extends CdkTree<McTreeOption>
 
     selectionModel: SelectionModel<SelectionModelOption>;
 
-    multiple: boolean;
-    autoSelect: boolean;
-    noUnselectLastSelected: boolean;
-
     @Input() treeControl: FlatTreeControl<McTreeOption>;
 
     @Output() readonly navigationChange = new EventEmitter<McTreeNavigationChange>();
@@ -111,12 +108,45 @@ export class McTreeSelection extends CdkTree<McTreeOption>
     @Output() readonly selectionChange = new EventEmitter<McTreeSelectionChange>();
 
     @Input()
+    get multiple(): boolean {
+        return this._multiple;
+    }
+
+    set multiple(value: boolean) {
+        this._multiple = coerceBooleanProperty(value);
+    }
+
+    private _multiple: boolean = false;
+
+    @Input()
+    get autoSelect(): boolean {
+        return this._autoSelect;
+    }
+
+    set autoSelect(value: boolean) {
+        this._autoSelect = coerceBooleanProperty(value);
+    }
+
+    private _autoSelect: boolean = true;
+
+    @Input()
+    get noUnselectLast(): boolean {
+        return this._noUnselectLast;
+    }
+
+    set noUnselectLast(value: boolean) {
+        this._noUnselectLast = coerceBooleanProperty(value);
+    }
+
+    private _noUnselectLast: boolean = true;
+
+    @Input()
     get disabled(): boolean {
         return this._disabled;
     }
 
     set disabled(rawValue: boolean) {
-        const value = toBoolean(rawValue);
+        const value = coerceBooleanProperty(rawValue);
 
         if (this._disabled !== value) {
             this._disabled = value;
@@ -144,17 +174,17 @@ export class McTreeSelection extends CdkTree<McTreeOption>
         differs: IterableDiffers,
         changeDetectorRef: ChangeDetectorRef,
         @Attribute('tabindex') tabIndex: string,
-        @Attribute('multiple') multiple: string,
-        @Attribute('auto-select') autoSelect: string,
-        @Attribute('no-unselect') noUnselect: string
+        @Attribute('multiple') multiple: string
     ) {
         super(differs, changeDetectorRef);
 
         this.tabIndex = parseInt(tabIndex) || 0;
+        this.multiple = multiple === null ? false : coerceBooleanProperty(multiple);
 
-        this.multiple = multiple === null ? false : toBoolean(multiple);
-        this.autoSelect = autoSelect === null ? true : toBoolean(autoSelect);
-        this.noUnselectLastSelected = noUnselect === null ? true : toBoolean(noUnselect);
+        if (this.multiple) {
+            this.autoSelect = false;
+            this.noUnselectLast = false;
+        }
 
         this.selectionModel = new SelectionModel<SelectionModelOption>(this.multiple);
     }
@@ -213,7 +243,7 @@ export class McTreeSelection extends CdkTree<McTreeOption>
 
                 event.preventDefault();
 
-                break;
+                return;
             case RIGHT_ARROW:
                 if (this.keyManager.activeItem) {
                     this.treeControl.expand(this.keyManager.activeItem.data);
@@ -221,7 +251,7 @@ export class McTreeSelection extends CdkTree<McTreeOption>
 
                 event.preventDefault();
 
-                break;
+                return;
             case SPACE:
             case ENTER:
                 this.toggleFocusedOption();
@@ -251,6 +281,10 @@ export class McTreeSelection extends CdkTree<McTreeOption>
             default:
                 this.keyManager.onKeydown(event);
         }
+
+        if (this.autoSelect && this.keyManager.activeItem) {
+            this.setSelectedOption(this.keyManager.activeItem);
+        }
     }
 
     updateScrollSize(): void {
@@ -264,37 +298,36 @@ export class McTreeSelection extends CdkTree<McTreeOption>
         const withCtrl = $event ? hasModifierKey($event, 'ctrlKey') : false;
 
         if (this.multiple) {
-            if (!this.canDeselectLast(option)) { return; }
+            if (withShift) {
+                const previousIndex = this.keyManager.previousActiveItemIndex;
+                const activeIndex = this.keyManager.activeItemIndex;
 
-            this.selectionModel.toggle(option.data);
+                if (previousIndex < activeIndex) {
+                    this.renderedOptions.forEach((item, index) => {
+                        if (index >= previousIndex && index <= activeIndex) { item.setSelected(true); }
+                    });
+                } else {
+                    this.renderedOptions.forEach((item, index) => {
+                        if (index >= activeIndex && index <= previousIndex) { item.setSelected(true); }
+                    });
+                }
+                this.emitChangeEvent(option);
+            } else if (withCtrl) {
+                if (!this.canDeselectLast(option)) { return; }
 
-            this.emitChangeEvent(option);
-        } else if (withShift) {
-            const previousIndex = this.keyManager.previousActiveItemIndex;
-            const activeIndex = this.keyManager.activeItemIndex;
+                this.selectionModel.toggle(option.data);
 
-            if (previousIndex < activeIndex) {
-                this.renderedOptions.forEach((item, index) => {
-                    if (index >= previousIndex && index <= activeIndex) { item.setSelected(true); }
-                });
+                this.emitChangeEvent(option);
             } else {
-                this.renderedOptions.forEach((item, index) => {
-                    if (index >= activeIndex && index <= previousIndex) { item.setSelected(true); }
-                });
+                this.selectionModel.toggle(option.data);
+
+                this.emitChangeEvent(option);
             }
-            this.emitChangeEvent(option);
-        } else if (withCtrl) {
-            if (!this.canDeselectLast(option)) { return; }
-
-            this.selectionModel.toggle(option.data);
-
-            this.emitChangeEvent(option);
         } else {
             if (!this.canDeselectLast(option)) { return; }
 
             if (this.autoSelect) {
-                this.renderedOptions.forEach((item) => item.setSelected(false));
-
+                this.selectionModel.deselect(...this.selectionModel.selected);
                 this.selectionModel.select(option.data);
 
                 // todo не факт что это нужно
@@ -380,6 +413,10 @@ export class McTreeSelection extends CdkTree<McTreeOption>
     }
 
     writeValue(value: any): void {
+        if (this.multiple && value && !Array.isArray(value)) {
+            throw getMcSelectNonArrayValueError();
+        }
+
         if (this.renderedOptions) {
             this.setOptionsFromValues(this.multiple ? value : [value]);
         }
@@ -428,7 +465,7 @@ export class McTreeSelection extends CdkTree<McTreeOption>
     }
 
     private canDeselectLast(option: McTreeOption): boolean {
-        return !(this.noUnselectLastSelected && this.selectionModel.selected.length === 1 && option.selected);
+        return !(this.noUnselectLast && this.selectionModel.selected.length === 1 && option.selected);
     }
 }
 
