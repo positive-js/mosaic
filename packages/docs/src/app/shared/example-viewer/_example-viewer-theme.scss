@@ -6,20 +6,6 @@
     $divider: mc-color($foreground, divider);
     $hint-text: mc-color($foreground, hint-text);
 
-    .docs-example-source-shadow {
-        background: linear-gradient(0deg, rgba($divider,1) 0%, rgba($divider,0.5) 50%, rgba($divider,0) 100%);
-    }
-
-    .docs-example-numbers {
-        background-color: fade_out($divider, 0.5);
-        color: $hint-text;
-    }
-
-    .docs-example-source {
-        background-color: $divider;
-
-    }
-
     .docs-example-viewer__lost-example {
         border: 1px solid $error-border;
         background-color: $error-background;

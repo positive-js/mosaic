@@ -1,80 +1,96 @@
-/** Adapted from https://github.com/atom-material/atom-material-syntax-light */
+/*
+Orginal Style from ethanschoonover.com/solarized (c) Jeremy Hull <sourdrums@gmail.com>
+*/
+
 .hljs {
     display: block;
     overflow-x: auto;
-    padding: 1em;
-    background: #FAFAFA;
-    color: #37474f;
-    -webkit-font-smoothing: antialiased;
-    text-size-adjust: 100%;
-    font: 300 100%/1 Roboto Mono, monospace;
-    font-size: 14px;
+    padding: 0.5em;
+    background: #fdf6e3;
+    color: #657b83;
 }
 
-.hljs > *::selection,
-.hljs-section {
-    background-color: #D6EDEA;
+.hljs-shadow {
+    position: absolute;
+    bottom: 0;
+    margin: 0;
+    left: 0;
+    height: 44px;
+    width: 100%;
+    opacity: 1;
+    background: linear-gradient(0deg, rgba(#fdf6e3,1) 0%, rgba(#fdf6e3,0.5) 50%, rgba(#fdf6e3,0) 100%);
+
+    &_hidden {
+        opacity: 0;
+    }
 }
 
-.hljs-comment {
-    color: #B0BEC5;
-    font-style: italic;
+.hljs-numbers {
+    background-color: #EDE7D6;
+    color: #B2B7B3;
 }
 
-.hljs-tag,
-.hljs-selector-tag,
-.hljs-regexp,
-.hljs-meta {
-    color: #9c27b0;
+.hljs-comment,
+.hljs-quote {
+    color: #93a1a1;
 }
 
-.hljs-string,
-.hljs-subst {
-    color: #0d904f;
-}
-
-.hljs-number,
-.hljs-variable,
-.hljs-template-variable {
-    color: #80CBC4;
-}
-
-.hljs-name,
+/* Solarized Green */
 .hljs-keyword,
-.hljs-type,
-.hljs-attribute {
-    color: #3b78e7;
-}
-
-.hljs-title,
-.hljs-function > .hljs-title,
-.hljs-symbol,
-.hljs-bullet,
-.hljs-built_in,
-.hljs-builtin-name,
-.hljs-link {
-    color: #6182B8;
-}
-
-.hljs-params {
-    color: #d81b60;
-}
-
+.hljs-selector-tag,
 .hljs-addition {
-    color: #3b78e7;
-    display: inline-block;
-    width: 100%;
+    color: #859900;
 }
 
-.hljs-deletion {
-    color: #E53935;
-    display: inline-block;
-    width: 100%;
+/* Solarized Cyan */
+.hljs-number,
+.hljs-string,
+.hljs-meta .hljs-meta-string,
+.hljs-literal,
+.hljs-doctag,
+.hljs-regexp {
+    color: #2aa198;
 }
 
+/* Solarized Blue */
+.hljs-title,
+.hljs-section,
+.hljs-name,
 .hljs-selector-id,
 .hljs-selector-class {
-    color: #8796B0;
+    color: #268bd2;
+}
+
+/* Solarized Yellow */
+.hljs-attribute,
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-class .hljs-title,
+.hljs-type {
+    color: #b58900;
+}
+
+/* Solarized Orange */
+.hljs-symbol,
+.hljs-bullet,
+.hljs-subst,
+.hljs-meta,
+.hljs-meta .hljs-keyword,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-link {
+    color: #cb4b16;
+}
+
+/* Solarized Red */
+.hljs-built_in,
+.hljs-deletion {
+    color: #dc322f;
+}
+
+.hljs-formula {
+    background: #eee8d5;
 }
 
 .hljs-emphasis {
@@ -83,8 +99,4 @@
 
 .hljs-strong {
     font-weight: bold;
-}
-
-.hljs-link {
-    text-decoration: underline;
 }
