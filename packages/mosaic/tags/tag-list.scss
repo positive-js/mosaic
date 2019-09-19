@@ -9,6 +9,8 @@
     padding: 2px 6px;
 
     & .mc-tag-input {
+        max-width: 100%;
+
         flex: 1 1 auto;
 
         height: 22px;
