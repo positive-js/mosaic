@@ -1,9 +1,10 @@
 @mixin mc-sidenav-theme($theme) {
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
-    $background-color: mc-color($background, background);
+    $second: map-get($theme, second);
+    $is-dark: map-get($theme, is-dark);
+    $background-color: mc-color($second, if($is-dark, 700, 40));
     $text: mc-color($foreground, text);
-    $is-dark-theme: map-get($theme, is-dark);
     $hover-color: mc-color($background, hover);
 
     .nav {
