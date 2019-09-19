@@ -3,20 +3,6 @@
     padding: 20px 0 0;
 }
 
-.docs-example-source-shadow {
-    position: absolute;
-    bottom: 0;
-    margin: 0;
-    left: 0;
-    height: 44px;
-    width: 100%;
-    opacity: 1;
-
-    &_hidden {
-        opacity: 0;
-    }
-}
-
 .docs-example-source__show {
     text-align: center;
     padding: 8px;
