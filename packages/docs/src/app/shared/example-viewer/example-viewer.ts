@@ -27,7 +27,7 @@ export class ExampleViewer {
 
     /** Whether the source for the example is being displayed. */
     showSource = false;
-    shadowHide = 'docs-example-source-shadow_hidden';
+    shadowHide = 'hljs-shadow_hidden';
     numbers = '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n';
     mcTooltipDelay = 3000;
     /** String key of the currently displayed example. */
