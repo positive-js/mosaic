@@ -27,8 +27,10 @@ export class ExampleViewer {
 
     /** Whether the source for the example is being displayed. */
     showSource = false;
+    hideSwitcher = false;
     shadowHide = 'hljs-shadow_hidden';
-    numbers = '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n';
+    defaultEditorLength = 10;
+    numbers = '';
     mcTooltipDelay = 3000;
     /** String key of the currently displayed example. */
     @Input()
@@ -56,12 +58,20 @@ export class ExampleViewer {
         this.elementRef = elementRef;
     }
 
+    ngAfterContentChecked() {
+        if (!this.numbers) { this.setNumbers(); }
+    }
+
     setNumbers() {
         const exampleSource = this.elementRef.nativeElement.querySelector('.docs-example-source-viewer');
-        const length = exampleSource.textContent.match(/\n/g).length + 1;
-        this.numbers = '';
-        for (let i = 1; i <= length; i++) {
-            this.numbers += `${i}\n`;
+        if (exampleSource) {
+            const text = exampleSource.textContent.match(/\n/g);
+            const length = text ? text.length + 1 : 0;
+            this.numbers = '';
+            for (let i = 1; i <= length; i++) {
+                this.numbers += `${i}\n`;
+            }
+            this.hideSwitcher = length < this.defaultEditorLength;
         }
     }
 
