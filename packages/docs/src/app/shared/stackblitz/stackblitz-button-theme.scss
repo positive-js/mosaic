@@ -35,6 +35,11 @@
             color: $color_disabled;
         }
     }
+
+    .stackblitz__icon-g {
+        fill: $color;
+        fill-rule: nonzero;
+    }
 }
 
 @mixin docs-stackblitz-typography($config) {

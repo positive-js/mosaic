@@ -1,4 +1,6 @@
 @import '~@ptsecurity/mosaic/prebuilt-themes/default-theme.css';
+@import "~@ptsecurity/mosaic-icons/dist/styles/mc-icons.css";
+
 
 body {
     font-family: Roboto, Arial, sans-serif;

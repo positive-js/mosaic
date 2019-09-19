@@ -15,6 +15,7 @@
 @import 'app/components/component-viewer/component-overview-theme';
 @import 'app/shared/stackblitz/stackblitz-button-theme';
 @import 'app/shared/example-viewer/example-viewer-theme';
+@import 'highlightjs/material-dark';
 
 // Include all typography for the components.
 @include mc-core();
@@ -46,10 +47,39 @@ $typography: mc-typography-config();
 @import './styles/theme-dark';
 
 .theme-default {
-    @include docs-component-theme($theme);
+    &.active-blue {
+        @include docs-component-theme($theme);
+    }
+
+    &.active-red {
+        @include docs-component-theme($theme-red);
+    }
+
+    &.active-green {
+        @include docs-component-theme($theme-green);
+    }
+
+    &.active-yellow {
+        @include docs-component-theme($theme-yellow);
+    }
 }
 
 .theme-dark {
-    @include docs-component-theme($dark-theme);
-}
+    @include material-dark();
 
+    &.active-blue {
+        @include docs-component-theme($dark-theme);
+    }
+
+    &.active-red {
+        @include docs-component-theme($dark-theme-red);
+    }
+
+    &.active-green {
+        @include docs-component-theme($dark-theme-green);
+    }
+
+    &.active-yellow {
+        @include docs-component-theme($dark-theme-yellow);
+    }
+}

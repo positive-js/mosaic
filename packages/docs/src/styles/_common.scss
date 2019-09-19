@@ -27,6 +27,8 @@ html {
 // 1. remove the margin in all browsers.
 
 body {
+    display: flex;
+    min-height: 100vh;
     font-family: map-get(map-get($fonts, 'base'), font-family);
     margin: 0; // 1
 }
