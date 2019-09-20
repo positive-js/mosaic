@@ -26,11 +26,11 @@ export class ExampleViewer {
     exampleData: LiveExample;
 
     /** Whether the source for the example is being displayed. */
-    showSource = false;
-    hideSwitcher = false;
+    isSourceShown = false;
+    isSwitcherHidden = false;
     shadowHide = 'hljs-shadow_hidden';
-    defaultEditorLength = 10;
-    numbers = '';
+    maxEditorLength = 15;
+    lineNumbers = '';
     mcTooltipDelay = 3000;
     /** String key of the currently displayed example. */
     @Input()
@@ -59,24 +59,24 @@ export class ExampleViewer {
     }
 
     ngAfterContentChecked() {
-        if (!this.numbers) { this.setNumbers(); }
+        if (!this.lineNumbers) { this.setLineNumbers(); }
     }
 
-    setNumbers() {
+    setLineNumbers() {
         const exampleSource = this.elementRef.nativeElement.querySelector('.docs-example-source-viewer');
         if (exampleSource) {
             const text = exampleSource.textContent.match(/\n/g);
             const length = text ? text.length + 1 : 0;
-            this.numbers = '';
+            this.lineNumbers = '';
             for (let i = 1; i <= length; i++) {
-                this.numbers += `${i}\n`;
+                this.lineNumbers += `${i}\n`;
             }
-            this.hideSwitcher = length < this.defaultEditorLength;
+            this.isSwitcherHidden = length < this.maxEditorLength;
         }
     }
 
     toggleSourceView(): void {
-        this.showSource = !this.showSource;
+        this.isSourceShown = !this.isSourceShown;
     }
 
     getExampleTabNames() {
