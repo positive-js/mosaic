@@ -135,6 +135,26 @@
             box-shadow: 0 0 0 1px $focus-color;
         }
     }
+
+    &_transparent {
+        &.mc-primary,
+        &.mc-second {
+            border-color: transparent;
+            background-color: transparent;
+
+            &.mc-disabled,
+            &[disabled] {
+                border-color: transparent;
+            }
+
+            &:active,
+            &.mc-active {
+                border-color: transparent;
+                background-color: transparent;
+                box-shadow: none;
+            }
+        }
+    }
 }
 
 @mixin mc-button-theme($theme) {
