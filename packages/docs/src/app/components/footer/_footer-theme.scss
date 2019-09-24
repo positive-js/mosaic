@@ -13,9 +13,8 @@
     $border-color: mc-color($second, 300);
 
     .docs-footer {
-        background-color: $background-color;
-
         &__wrapper {
+            background-color: $background-color;
             border-top: 1px solid $border-color;
         }
 
