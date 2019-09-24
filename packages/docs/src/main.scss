@@ -23,8 +23,12 @@
 $typography: mc-typography-config();
 
 @include mc-footer-typography($typography);
+@include mc-sidenav-typography($typography);
+@include mc-anchors-typography($typography);
+@include mc-navbar-typography($typography);
 @include docs-markdown-typography($typography);
 @include docs-stackblitz-typography($typography);
+@include example-viewer-typography($typography);
 
 @mixin docs-component-theme($theme) {
     @include mosaic-theme($theme);
