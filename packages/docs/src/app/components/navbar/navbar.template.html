@@ -61,8 +61,8 @@
 
     <div class="color-picker">
         <button mc-button color="second" class="mc-button mc-button_transparent docs-navbar-dropdown__trigger"
-                [mcDropdownTriggerFor]="themeDropdown">
-            <i mc-icon="mc-circle-8_16" [style.color]='activeColor.code' class="color-picker__icon" [mcDropdownTriggerFor]="colorDropdown"></i>
+                [mcDropdownTriggerFor]="colorDropdown">
+            <i mc-icon="mc-circle-8_16" [style.color]='activeColor.code' class="color-picker__icon"></i>
             <i mc-icon="mc-angle-down-M_16" class="docs-navbar-dropdown__icon"></i>
         </button>
         <mc-dropdown #colorDropdown="mcDropdown" class="color-picker__dropdown" [style.margin-top]="0">
