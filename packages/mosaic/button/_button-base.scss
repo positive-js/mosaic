@@ -2,16 +2,12 @@
 
 $mc-button-margin: 0 !default;
 
-// TODO: convert it to common values from typography
 $mc-button-padding: 5px 15px;
-$mc-button-line-height: 20px;
-$mc-button-font: 15px;
 
 $mc-icon-button-padding: 5px 7px;
+
 $mc-icon-button-text-padding: 15px;
 $mc-icon-button-icon-padding: 7px;
-$mc-icon-button-line-height: 20px;
-$mc-icon-button-font: 15px;
 
 
 %mc-button-base {
@@ -51,10 +47,4 @@ $mc-icon-button-font: 15px;
     &.cdk-focused {
         z-index: 1;
     }
-}
-
-@mixin mc-button-size($padding, $line-height, $font-size) {
-    padding: $padding;
-    line-height: $line-height;
-    font-size: $font-size;
 }
