@@ -22,9 +22,12 @@
     }
 
     .docs-navbar-version {
-        color: if($is-dark, $text, $hint-text);
-
         &__date { color: $less-contrast-text; }
+
+        &__trigger.mc-icon-button,
+        &__trigger .docs-navbar-version__icon.mc-icon {
+            color: if($is-dark, $text, $hint-text);
+        }
     }
 
     .color-picker__dropdown-content {

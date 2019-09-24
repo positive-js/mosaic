@@ -60,9 +60,6 @@ $doc-navbar-padding: 10px;
 .docs-navbar-version {
     display: flex;
     align-items: baseline;
-    height: $doc-navbar-font-size;
-    font-size: $doc-navbar-font-size;
-    line-height: $doc-navbar-font-size;
     margin-bottom: -5px;
 
     &_bold { font-weight: 500; }
@@ -81,6 +78,10 @@ $doc-navbar-padding: 10px;
         flex-grow: 1;
         white-space: nowrap;
     }
+
+    &__trigger {
+        font-size: $doc-navbar-font-size;
+    }
 }
 
 .docs-navbar-header_fixed {
@@ -89,4 +90,11 @@ $doc-navbar-padding: 10px;
     top: 0;
     right: 0;
     z-index: 1000;
+}
+
+.color-picker .mc.mc-icon {
+    margin: {
+        left: 0;
+        right: 0;
+    }
 }
