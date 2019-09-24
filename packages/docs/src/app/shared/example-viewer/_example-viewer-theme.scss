@@ -12,3 +12,10 @@
         padding: 16px;
     }
 }
+
+@mixin example-viewer-typography($config) {
+    .docs-example-source {
+        @include mc-typography-level-to-styles($config, body-mono);
+        font-size: 14px;
+    }
+}
