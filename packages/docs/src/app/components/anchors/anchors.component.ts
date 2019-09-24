@@ -26,9 +26,12 @@ export class AnchorsComponent {
     click: boolean = false;
     container: string;
     headerHeight: number = 64;
-    // коэффициент для вычисления расстояния якоря над заголовком при скроле (== headerHeight * anchorHeaderCoef)
+    // coef for calculating the distance between anchor and header when scrolling (== headerHeight * anchorHeaderCoef)
     anchorHeaderCoef = 2;
-    debounceTime: number = 10;
+    // If smooth scroll is supported bigger debounce time is needed to avoid active anchor's hitch
+    readonly isSmoothScrollSupported;
+    noSmoothScrollDebounce = 10;
+    debounceTime: number = 15;
     private destroyed = new Subject();
     private fragment = '';
     private activeClass = 'anchors-menu__list-element_active';
@@ -41,6 +44,11 @@ export class AnchorsComponent {
                 private element: ElementRef,
                 private ref: ChangeDetectorRef,
                 @Inject(DOCUMENT) private document: Document) {
+        this.isSmoothScrollSupported  = 'scrollBehavior' in this.document.documentElement.style;
+
+        if (!this.isSmoothScrollSupported) {
+            this.debounceTime = this.noSmoothScrollDebounce;
+        }
         this.currentUrl = router.url.split('#')[0];
         this.container = '.anchors-menu';
         this.pathName = this.router.url;
@@ -57,7 +65,7 @@ export class AnchorsComponent {
     }
 
     ngOnInit() {
-        // Срабатывает при изменении якоря в адресной строке руками или кликом по якорю
+        // attached to anchor's change in the address bar manually or by clicking on the anchor
         this.route.fragment.pipe(takeUntil(this.destroyed)).subscribe((fragment) => {
             this.fragment = fragment;
             const index = this.getAnchorIndex(fragment);
@@ -98,6 +106,7 @@ export class AnchorsComponent {
                 debounceTime(this.debounceTime))
                 .subscribe(() => this.onScroll());
         }
+        this.ref.detectChanges();
     }
 
     /* TODO Техдолг: при изменении ширины экрана должен переопределяться параметр top
@@ -123,7 +132,7 @@ export class AnchorsComponent {
         const clientHeight = this.document.documentElement.clientHeight;
         const scrollHeight = scrollTop + clientHeight;
 
-        // scrollHeight должен быть строго равен documentHeight, но в Edge он чуть больше
+        // scrollHeight should be strictly equal to documentHeight, but in Edge it is slightly larger
         return scrollHeight >= documentHeight;
     }
 
@@ -169,8 +178,8 @@ export class AnchorsComponent {
     }
 
     private isLinkActive(currentLink: any, nextLink: any): boolean {
-        // Ссылка считается активной, если позиция скролла ниже позиции якоря + отступ (headerHeight*anchorHeaderCoef)
-        // и выше следующего за ним якоря
+        // A link is active if the scroll position is lower than the anchor position + headerHeight*anchorHeaderCoef
+        // and above the next anchor
         const scrollOffset = this.getScrollOffset();
 
         return scrollOffset >= currentLink.top && !(nextLink && nextLink.top < scrollOffset);
