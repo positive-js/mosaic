@@ -161,6 +161,7 @@ task('docs', series(
 function transformMarkdownFiles(buffer: Buffer, file: any): string {
     let content = buffer.toString('utf-8');
     content = tagNameStringAliaser(content);
+    content = setTargetBlank(content);
 
     // Replace <!-- example(..) --> comments with HTML elements.
     content = content.replace(EXAMPLE_PATTERN, (_match: string, name: string) =>
@@ -225,6 +226,16 @@ function setImageCaption(content: string): string  {
 
         pos = imgIndex + 1;
     }
+
+    return html;
+}
+
+function setTargetBlank(content: string): string {
+    let html = content;
+    const regex = new RegExp(`href=".[^"]*"`, 'g'); // .[^"]* - any symbol exept "
+    html = html.replace(regex, (match: string) =>
+        `${match} target="_blank"`
+    );
 
     return html;
 }
