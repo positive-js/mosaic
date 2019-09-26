@@ -6,7 +6,7 @@
 .mc-button {
     @extend %mc-button-base;
 
-    @include mc-button-size($mc-button-padding, $mc-button-line-height, $mc-button-font);
+    padding: $mc-button-padding;
 
     &_transparent {
         &.mc-primary,
