@@ -87,3 +87,7 @@ $typography: mc-typography-config();
         @include docs-component-theme($dark-theme-yellow);
     }
 }
+
+.docs-app-wrapper {
+    width: 100%;
+}
