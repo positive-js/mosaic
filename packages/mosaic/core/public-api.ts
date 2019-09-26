@@ -12,3 +12,4 @@ export * from './overlay/overlay-position-map';
 export * from './select/index';
 export * from './highlight/index';
 export * from './formatters/index';
+export * from './validation/index';

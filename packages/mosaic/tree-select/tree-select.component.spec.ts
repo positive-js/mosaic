@@ -189,7 +189,6 @@ const getChildren = (node: FileNode): Observable<FileNode[]> => {
             <mc-tree-select
                 placeholder="Food"
                 [formControl]="control"
-                [required]="isRequired"
                 [tabIndex]="tabIndexOverride"
                 [panelClass]="panelClass">
 
@@ -222,7 +221,6 @@ class BasicTreeSelect {
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
-    isRequired: boolean;
     heightAbove = 0;
     heightBelow = 0;
     tabIndexOverride: number;
@@ -1460,17 +1458,6 @@ describe('McTreeSelect', () => {
                     expect(select.getAttribute('tabindex')).toBe('3');
                 }));
 
-                it('should set the mc-select-required class for required selects', fakeAsync(() => {
-                    expect(select.classList).not.toContain(
-                        'mc-select-required', `Expected the mc-select-required class not to be set.`);
-
-                    fixture.componentInstance.isRequired = true;
-                    fixture.detectChanges();
-
-                    expect(select.classList).toContain(
-                        'mc-select-required', `Expected the mc-select-required class to be set.`);
-                }));
-
                 it('should set the tabindex of the select to -1 if disabled', fakeAsync(() => {
                     fixture.componentInstance.control.disable();
                     fixture.detectChanges();
@@ -2640,19 +2627,6 @@ describe('McTreeSelect', () => {
                     expect(fixture.componentInstance.control.dirty)
                         .toEqual(false, `Expected control to stay pristine after programmatic change.`);
                 }));
-
-            xit('should set an asterisk after the label if control is required', fakeAsync(() => {
-                let requiredMarker = fixture.debugElement.query(By.css('.mc-form-field-required-marker'));
-                expect(requiredMarker)
-                    .toBeNull(`Expected label not to have an asterisk, as control was not required.`);
-
-                fixture.componentInstance.isRequired = true;
-                fixture.detectChanges();
-
-                requiredMarker = fixture.debugElement.query(By.css('.mc-form-field-required-marker'));
-                expect(requiredMarker)
-                    .not.toBeNull(`Expected label to have an asterisk, as control was required.`);
-            }));
         });
 
         describe('disabled behavior', () => {
@@ -3196,12 +3170,12 @@ describe('McTreeSelect', () => {
 
         it('should not set the invalid class on a clean select', fakeAsync(() => {
             expect(testComponent.formGroup.untouched).toBe(true, 'Expected the form to be untouched.');
-            expect(testComponent.formControl.invalid).toBe(true, 'Expected form control to be invalid.');
+            expect(testComponent.formControl.invalid).toBe(false, 'Expected form control to be invalid.');
             expect(select.classList)
                 .not.toContain('mc-select-invalid', 'Expected select not to appear invalid.');
         }));
 
-        it('should appear as invalid if it becomes touched', fakeAsync(() => {
+        it('should not appear as invalid if it becomes touched', fakeAsync(() => {
             expect(select.classList)
                 .not.toContain('mc-select-invalid', 'Expected select not to appear invalid.');
 
@@ -3209,7 +3183,7 @@ describe('McTreeSelect', () => {
             fixture.detectChanges();
 
             expect(select.classList)
-                .toContain('mc-select-invalid', 'Expected select to appear invalid.');
+                .not.toContain('mc-select-invalid', 'Expected select to appear invalid.');
         }));
 
         it('should not have the invalid class when the select becomes valid', fakeAsync(() => {
@@ -3217,7 +3191,7 @@ describe('McTreeSelect', () => {
             fixture.detectChanges();
 
             expect(select.classList)
-                .toContain('mc-select-invalid', 'Expected select to appear invalid.');
+                .not.toContain('mc-select-invalid', 'Expected select to appear invalid.');
 
             testComponent.formControl.setValue('pizza-1');
             fixture.detectChanges();

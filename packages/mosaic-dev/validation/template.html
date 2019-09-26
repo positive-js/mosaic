@@ -1,0 +1,181 @@
+<div class="container">
+    <form [formGroup]="reactiveForm" (ngSubmit)="onSubmitReactiveForm(reactiveForm)" novalidate>
+        <div>Reactive form</div>
+        <br>
+
+        <mc-form-field>
+            <input name="input" mcInput formControlName="reactiveInputValue" placeholder="required pattern=[a-zA-Z]*">
+        </mc-form-field>
+
+        <br><br>
+
+        <mc-form-field>
+            <mc-select name="select" formControlName="reactiveSelectValue">
+                <mc-option value="Disabled" disabled>Disabled</mc-option>
+                <mc-option value="Normal">Normal</mc-option>
+                <mc-option value="Hovered">Hovered</mc-option>
+                <mc-option value="Focused">Focused</mc-option>
+                <mc-option value="Selected">Selected</mc-option>
+                <mc-option value="Selected1">Selected1</mc-option>
+                <mc-option value="Selected2">Selected2</mc-option>
+                <mc-option value="Selected3">Selected3</mc-option>
+                <mc-option value="Selected4">Selected4</mc-option>
+                <mc-option value="Selected5">Selected5</mc-option>
+                <mc-option value="Selected6">Selected6</mc-option>
+                <mc-option value="Selected7">Selected7</mc-option>
+                <mc-option value="Selected8">Selected8</mc-option>
+                <mc-option value="Selected9">Selected9</mc-option>
+                <mc-option value="Selected10">Selected10</mc-option>
+            </mc-select>
+        </mc-form-field>
+
+        <br><br>
+
+        <mc-form-field>
+            <mc-tree-select name="tree-select" formControlName="reactiveTreeSelectValue">
+                <mc-tree-selection
+                    [dataSource]="dataSource"
+                    [treeControl]="treeControl">
+                    <mc-tree-option
+                        *mcTreeNodeDef="let node"
+                        mcTreeNodePadding>
+                        {{ treeControl.getViewValue(node) }}
+                    </mc-tree-option>
+
+                    <mc-tree-option
+                        *mcTreeNodeDef="let node; when: hasChild"
+                        mcTreeNodePadding
+                        [disabled]="node.name === 'Downloads'">
+                        <i mc-icon="mc-angle-down-S_16" [style.transform]="treeControl.isExpanded(node) ? '' : 'rotate(-90deg)'" mcTreeNodeToggle></i>
+                        {{ treeControl.getViewValue(node) }}
+                    </mc-tree-option>
+                </mc-tree-selection>
+            </mc-tree-select>
+        </mc-form-field>
+
+        <br><br>
+
+        <mc-form-field>
+            <mc-tag-list name="typeahead" #inputTagList formControlName="reactiveTypeaheadValue">
+                <mc-tag *ngFor="let tag of reactiveTypeaheadItems" [value]="tag" (removed)="reactiveInputOnRemoveTag(tag)">
+                    {{ tag }}
+                    <i mc-icon="mc-close-S_16" mcTagRemove></i>
+                </mc-tag>
+                <input placeholder="New tag..."
+                       [mcTagInputFor]="inputTagList"
+                       [mcTagInputSeparatorKeyCodes]="separatorKeysCodes"
+                       (mcTagInputTokenEnd)="reactiveInputOnCreate($event)">
+            </mc-tag-list>
+        </mc-form-field>
+
+        <br><br>
+
+        <button mc-button>Submit</button>
+    </form>
+
+    <br><br>
+
+    <form #form="ngForm" (ngSubmit)="onSubmitTemplateForm(form)" novalidate>
+        <div>Template form</div>
+        <br>
+
+        <mc-form-field>
+            <input
+                name="input"
+                mcInput
+                [(ngModel)]="inputValue"
+                placeholder="required pattern=[a-zA-Z]*" required pattern="[a-zA-Z]*">
+        </mc-form-field>
+
+        <br><br>
+
+        <mc-form-field>
+            <mc-select name="select" [(ngModel)]="selectValue" required>
+                <mc-option value="Disabled" disabled>Disabled</mc-option>
+                <mc-option value="Normal">Normal</mc-option>
+                <mc-option value="Hovered">Hovered</mc-option>
+                <mc-option value="Focused">Focused</mc-option>
+                <mc-option value="Selected">Selected</mc-option>
+                <mc-option value="Selected1">Selected1</mc-option>
+                <mc-option value="Selected2">Selected2</mc-option>
+                <mc-option value="Selected3">Selected3</mc-option>
+                <mc-option value="Selected4">Selected4</mc-option>
+                <mc-option value="Selected5">Selected5</mc-option>
+                <mc-option value="Selected6">Selected6</mc-option>
+                <mc-option value="Selected7">Selected7</mc-option>
+                <mc-option value="Selected8">Selected8</mc-option>
+                <mc-option value="Selected9">Selected9</mc-option>
+                <mc-option value="Selected10">Selected10</mc-option>
+            </mc-select>
+        </mc-form-field>
+
+        <br>
+        <br>
+
+        <mc-form-field>
+            <mc-tree-select name="tree-select" [(ngModel)]="treeSelectValue" required>
+                <mc-tree-selection
+                    [dataSource]="dataSource"
+                    [treeControl]="treeControl">
+                    <mc-tree-option
+                        *mcTreeNodeDef="let node"
+                        mcTreeNodePadding>
+                        {{ treeControl.getViewValue(node) }}
+                    </mc-tree-option>
+
+                    <mc-tree-option
+                        *mcTreeNodeDef="let node; when: hasChild"
+                        mcTreeNodePadding
+                        [disabled]="node.name === 'Downloads'">
+                        <i mc-icon="mc-angle-down-S_16" [style.transform]="treeControl.isExpanded(node) ? '' : 'rotate(-90deg)'" mcTreeNodeToggle></i>
+                        {{ treeControl.getViewValue(node) }}
+                    </mc-tree-option>
+                </mc-tree-selection>
+            </mc-tree-select>
+        </mc-form-field>
+
+        <br>
+        <br>
+
+        <mc-form-field>
+            <mc-tag-list name="typeahead" #inputTagList [(ngModel)]="typeaheadItems" required>
+                <mc-tag *ngFor="let tag of typeaheadItems" [value]="tag" (removed)="inputOnRemoveTag(tag)">
+                    {{ tag }}
+                    <i mc-icon="mc-close-S_16" mcTagRemove></i>
+                </mc-tag>
+                <input placeholder="New tag..."
+                       [mcTagInputFor]="inputTagList"
+                       [mcTagInputSeparatorKeyCodes]="separatorKeysCodes"
+                       (mcTagInputTokenEnd)="inputOnCreate($event)">
+            </mc-tag-list>
+        </mc-form-field>
+
+        <br>
+        <br>
+
+        <button mc-button>Submit</button>
+    </form>
+
+    <br><br>
+
+    <form [formGroup]="formWithCustomValidator"
+          (ngSubmit)="onSubmitFormWithCustomValidator(formWithCustomValidator)"
+          novalidate>
+        <div>formGroup with custom validator</div>
+        <br>
+
+        <mc-form-field>
+            <input mcInput formControlName="login" placeholder="Login">
+        </mc-form-field>
+
+        <br><br>
+
+        <mc-form-field>
+            <input mcInput formControlName="password" placeholder="Password">
+        </mc-form-field>
+
+        <br><br>
+
+        <button mc-button>Submit</button>
+    </form>
+</div>

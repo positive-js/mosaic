@@ -12,7 +12,7 @@
     <br><br><br>
 
     <h4 class="mc-title">Tags with input</h4>
-    <mc-form-field class="example-chip-list">
+    <mc-form-field>
         <mc-tag-list #inputTagList>
             <mc-tag *ngFor="let tag of inputTags" [value]="tag" (removed)="inputOnRemoveTag(tag)">
                 {{ tag }}
@@ -33,7 +33,7 @@
     <br><br><br>
 
     <h4 class="mc-title">Tags with autocomplete</h4>
-    <mc-form-field class="example-chip-list">
+    <mc-form-field>
         <mc-tag-list #autocompleteTagList>
             <mc-tag *ngFor="let tag of autocompleteSelectedTags" [value]="tag" (removed)="autocompleteOnRemove(tag)">
                 {{ tag }}
@@ -57,7 +57,7 @@
     <br><br><br>
 
     <h4 class="mc-title">Tags with tag adding on blur disabled</h4>
-    <mc-form-field class="example-chip-list">
+    <mc-form-field>
         <mc-tag-list #enterInputTagList>
             <mc-tag *ngFor="let tag of enterTags" [value]="tag" (removed)="enterOnRemoveTag(tag)">
                 {{ tag }}

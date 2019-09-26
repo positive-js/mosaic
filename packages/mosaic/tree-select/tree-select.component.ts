@@ -35,7 +35,7 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
+import { ControlValueAccessor, FormGroupDirective, NG_VALIDATORS, NgControl, NgForm, Validator } from '@angular/forms';
 import {
     DOWN_ARROW,
     END,
@@ -65,12 +65,16 @@ import {
     SELECT_PANEL_MAX_HEIGHT,
     SELECT_PANEL_PADDING_X,
     SELECT_PANEL_VIEWPORT_PADDING,
+    MC_SELECT_SCROLL_STRATEGY,
 
     getMcSelectDynamicMultipleError,
     getMcSelectNonFunctionValueError,
     getMcSelectNonArrayValueError,
-    MC_SELECT_SCROLL_STRATEGY,
-    MultipleMode
+    MultipleMode,
+
+    MC_VALIDATION,
+    setMosaicValidation,
+    McValidationOptions
 } from '@ptsecurity/mosaic/core';
 import { McCleaner, McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { McTag } from '@ptsecurity/mosaic/tags';
@@ -128,7 +132,6 @@ const McTreeSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorSt
         class: 'mc-tree-select',
         '[class.mc-disabled]': 'disabled',
         '[class.mc-select-invalid]': 'errorState',
-        '[class.mc-select-required]': 'required',
 
         '(click)': 'toggle()',
         '(keydown)': 'handleKeydown($event)',
@@ -413,12 +416,14 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         private readonly renderer: Renderer2,
         defaultErrorStateMatcher: ErrorStateMatcher,
         @Attribute('tabindex') tabIndex: string,
+        @Optional() @Inject(NG_VALIDATORS) private rawValidators: Validator[],
+        @Optional() @Inject(MC_VALIDATION) private mcValidation: McValidationOptions,
         @Inject(MC_SELECT_SCROLL_STRATEGY) private readonly scrollStrategyFactory,
         @Optional() private readonly dir: Directionality,
         @Optional() parentForm: NgForm,
         @Optional() parentFormGroup: FormGroupDirective,
         @Optional() private readonly parentFormField: McFormField,
-        @Self() @Optional() public ngControl: NgControl
+        @Optional() @Self() ngControl: NgControl
     ) {
         super(elementRef, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl);
 
@@ -457,6 +462,10 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
 
     ngAfterContentInit() {
         if (!this.tree) { return; }
+
+        if (this.mcValidation.useValidation) {
+            setMosaicValidation.call(this, this.rawValidators, this.parentForm || this.parentFormGroup, this.ngControl);
+        }
 
         this.tree.resetFocusedItemOnBlur = false;
 
