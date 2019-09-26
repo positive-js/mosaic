@@ -135,10 +135,14 @@
             box-shadow: 0 0 0 1px $focus-color;
         }
     }
+}
 
-    &_transparent {
-        &.mc-primary,
-        &.mc-second {
+@mixin mc-button-theme($theme) {
+    .mc-button,
+    .mc-icon-button {
+        @include _mc-button-theme-color($theme);
+
+        &.mc-button_transparent {
             border-color: transparent;
             background-color: transparent;
 
@@ -154,13 +158,6 @@
                 box-shadow: none;
             }
         }
-    }
-}
-
-@mixin mc-button-theme($theme) {
-    .mc-button,
-    .mc-icon-button {
-        @include _mc-button-theme-color($theme);
     }
 }
 
