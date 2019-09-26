@@ -14,17 +14,21 @@
         &__trigger {
             color: $text;
 
-            &:hover { background: $hover-color; }
+            &:hover, &:focus {
+                background: $hover-color;
+                outline: none;
+            }
         }
 
         &__trigger-icon { color: $text; }
 
         &__item {
 
-            &.docs-component-viewer-sidenav-item-selected,
+            & .nav__item-selected,
             &:hover { background: $hover-color; }
 
-            &:active, &:focus { background: $hover-color; }
+            &:active, &:focus, & .nav__item-link:focus { background: $hover-color; }
+
         }
     }
 }
