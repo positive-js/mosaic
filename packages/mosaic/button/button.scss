@@ -7,26 +7,6 @@
     @extend %mc-button-base;
 
     padding: $mc-button-padding;
-
-    &_transparent {
-        &.mc-primary,
-        &.mc-second {
-            border-color: transparent;
-            background-color: transparent;
-
-            &.mc-disabled,
-            &[disabled] {
-                border-color: transparent;
-            }
-
-            &:active,
-            &.mc-active {
-                border-color: transparent;
-                background-color: transparent;
-                box-shadow: none;
-            }
-        }
-    }
 }
 
 .mc-light-button {

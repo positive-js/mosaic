@@ -141,6 +141,23 @@
     .mc-button,
     .mc-icon-button {
         @include _mc-button-theme-color($theme);
+
+        &.mc-button_transparent {
+            border-color: transparent;
+            background-color: transparent;
+
+            &.mc-disabled,
+            &[disabled] {
+                border-color: transparent;
+            }
+
+            &:active,
+            &.mc-active {
+                border-color: transparent;
+                background-color: transparent;
+                box-shadow: none;
+            }
+        }
     }
 }
 
