@@ -84,7 +84,7 @@ export class ExampleViewer {
     }
 
     copyCode(event): void {
-        const code = event.target.parentNode.parentNode;
+        const code = this.elementRef.nativeElement.querySelector('.docs-example-source-viewer');
         // event.target.parentNode.parentNode.select();
         const range = document.createRange();
         range.selectNodeContents(code);
