@@ -311,17 +311,12 @@ export class McTreeSelection extends CdkTree<McTreeOption>
                         if (index >= activeIndex && index <= previousIndex) { item.setSelected(true); }
                     });
                 }
-                this.emitChangeEvent(option);
             } else if (withCtrl) {
                 if (!this.canDeselectLast(option)) { return; }
 
                 this.selectionModel.toggle(option.data);
-
-                this.emitChangeEvent(option);
             } else {
                 this.selectionModel.toggle(option.data);
-
-                this.emitChangeEvent(option);
             }
         } else {
             if (!this.canDeselectLast(option)) { return; }
@@ -329,11 +324,10 @@ export class McTreeSelection extends CdkTree<McTreeOption>
             if (this.autoSelect) {
                 this.selectionModel.deselect(...this.selectionModel.selected);
                 this.selectionModel.select(option.data);
-
-                // todo не факт что это нужно
-                this.emitChangeEvent(option);
             }
         }
+
+        this.emitChangeEvent(option);
     }
 
     setFocusedOption(option: McTreeOption): void {

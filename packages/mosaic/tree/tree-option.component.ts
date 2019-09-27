@@ -164,12 +164,7 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements OnInit, O
     }
 
     focus(): void {
-        const element = this.getHostElement();
-
-        // tslint:disable-next-line: no-unbound-method
-        if (typeof element.focus === 'function') {
-            element.focus();
-        }
+        this.focusMonitor.focusVia(this.getHostElement(), 'keyboard');
     }
 
     getHeight(): number {
@@ -187,6 +182,7 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements OnInit, O
             this._selected = true;
 
             this.changeDetectorRef.markForCheck();
+            this.emitSelectionChangeEvent();
         }
     }
 

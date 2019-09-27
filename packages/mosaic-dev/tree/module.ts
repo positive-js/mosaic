@@ -65,11 +65,11 @@ export const DATA_OBJECT = {
         Woods: 'jpg',
         PhotoBoothLibrary: {
             Contents: 'dir',
-            Pictures: 'dir'
+            Pictures_2: 'dir'
         }
     },
     Documents: {
-        Pictures: 'Pictures',
+        Pictures_3: 'Pictures',
         angular: {
             src: {
                 core: 'ts',
