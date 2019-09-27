@@ -29,7 +29,7 @@ html {
 body {
     display: flex;
     min-height: 100vh;
-    min-width: 100vw;
+    min-width: calc(100vw - (100vw - 100%) ); // cutting out vertical scrollbar
     font-family: map-get(map-get($fonts, 'base'), font-family);
     margin: 0; // 1
 }

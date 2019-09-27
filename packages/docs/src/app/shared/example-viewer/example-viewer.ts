@@ -63,7 +63,9 @@ export class ExampleViewer {
     }
 
     setLineNumbers() {
-        const exampleSource = this.elementRef.nativeElement.querySelector('.docs-example-source-viewer');
+        const exampleSource = this.elementRef
+            .nativeElement.querySelector('.mc-tab-body__active .docs-example-source-viewer');
+
         if (exampleSource) {
             const text = exampleSource.textContent.match(/\n/g);
             const length = text ? text.length + 1 : 0;
