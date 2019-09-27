@@ -1,3 +1,33 @@
+# 8.0.0 "Temporal Shielding" (2019-09-27)
+
+### Mosaic
+
+
+ * bug fix  **build:** infinite import loops ([6dba625](https://github.com/positive-js/mosaic/commit/6dba625))
+ * bug fix  **button:** button don't get font size from typography (#UIM-171) ([#261](https://github.com/positive-js/mosaic/issues/261)) ([c1d2f9c](https://github.com/positive-js/mosaic/commit/c1d2f9c)), closes [#UIM-171](https://github.com/positive-js/mosaic/issues/UIM-171)
+ * bug fix  **button:** moving transparent modificator to theme scss file ([#256](https://github.com/positive-js/mosaic/issues/256)) ([31032e2](https://github.com/positive-js/mosaic/commit/31032e2))
+ * bug fix  **dropdown:** hide scrollbar in safary ([#267](https://github.com/positive-js/mosaic/issues/267)) ([fa7f5b7](https://github.com/positive-js/mosaic/commit/fa7f5b7))
+ * bug fix  **link:** Incorrect selector for icon in link (#UIM-158) ([#246](https://github.com/positive-js/mosaic/issues/246)) ([7572f89](https://github.com/positive-js/mosaic/commit/7572f89)), closes [#UIM-158](https://github.com/positive-js/mosaic/issues/UIM-158)
+ * bug fix  **select, tree-select:** need prevent selecting tags (#UIM-91) ([#249](https://github.com/positive-js/mosaic/issues/249)) ([1532e07](https://github.com/positive-js/mosaic/commit/1532e07)), closes [#UIM-91](https://github.com/positive-js/mosaic/issues/UIM-91)
+ * bug fix  **tags:** need transfer input on next line (#UIM-154) ([#253](https://github.com/positive-js/mosaic/issues/253)) ([7b88e6b](https://github.com/positive-js/mosaic/commit/7b88e6b)), closes [#UIM-154](https://github.com/positive-js/mosaic/issues/UIM-154)
+ * bug fix  **tooltip:** Edge styles fix, arrow styles update ([#225](https://github.com/positive-js/mosaic/issues/225)) ([77cad57](https://github.com/positive-js/mosaic/commit/77cad57))
+ * bug fix  **tree:** Default value in autoSelect have to be 'true' (#UIM-153) ([#245](https://github.com/positive-js/mosaic/issues/245)) ([55ea44e](https://github.com/positive-js/mosaic/commit/55ea44e)), closes [#UIM-153](https://github.com/positive-js/mosaic/issues/UIM-153)
+ * feature  **button:** add transparent button ([#218](https://github.com/positive-js/mosaic/issues/218)) ([eb2f9ba](https://github.com/positive-js/mosaic/commit/eb2f9ba))
+
+#### BREAKING CHANGES
+* **select, tree-select**
+
+`FlatTreeControl` - two parameters getValue and getViewValue are added to the constructor.
+`McTreeOption` - removed the ability to set value, now getValue is used for this purpose.
+`McTreeSelection` - tabindex must be set via an attribute (it used to be via binding)
+`McTreeSelect` - removed the ability to set `[value]` for this you need to use `[(ngModel)]` or `[formControl]`
+
+code examples:
+
+* https://github.com/positive-js/mosaic-storybook/tree/master/stories/tree-select
+* https://github.com/positive-js/mosaic-storybook/tree/master/stories/tree
+
+
 # 8.0.0-beta.10 "Maltese Firebush" (2019-09-05)
 
 
