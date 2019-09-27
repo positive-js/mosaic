@@ -1,4 +1,4 @@
-import { Component, OnDestroy, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { combineLatest, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
@@ -48,15 +48,25 @@ export class ComponentViewerComponent implements OnDestroy {
 })
 export class ComponentOverviewComponent {
 
+    documentLost = false;
+
     @ViewChild('toc', {static: false}) anchorsComponent: AnchorsComponent;
 
-    constructor(public componentViewer: ComponentViewerComponent) {
+    constructor(public componentViewer: ComponentViewerComponent,
+                private ref: ChangeDetectorRef) {
 
     }
 
     scrollToSelectedContentSection() {
+        this.documentLost = false;
+        this.ref.detectChanges();
         if (this.anchorsComponent) {
             this.anchorsComponent.setScrollPosition();
         }
+    }
+
+    showDocumentLostAlert() {
+        this.documentLost = true;
+        this.ref.detectChanges();
     }
 }

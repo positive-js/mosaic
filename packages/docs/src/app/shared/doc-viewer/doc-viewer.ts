@@ -34,6 +34,7 @@ export class DocViewer implements OnDestroy {
     }
 
     @Output() contentRendered = new EventEmitter<void>();
+    @Output() contentRenderFailed = new EventEmitter<void>();
 
     /** The document text. It should not be HTML encoded. */
     textContent = '';
@@ -102,6 +103,7 @@ export class DocViewer implements OnDestroy {
 
     /** Show an error that occurred when fetching a document. */
     private showError(url: string, error: HttpErrorResponse) {
+        this.contentRenderFailed.next();
         // tslint:disable-next-line:no-console
         console.error(error);
         this._elementRef.nativeElement.innerText =
