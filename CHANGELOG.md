@@ -1,3 +1,11 @@
+## 8.0.1 "Relentless Quotient" (2019-09-30)
+
+### Mosaic
+
+
+ * bug fix  vulnerable dependendencies audit ([#271](https://github.com/positive-js/mosaic/issues/271)) ([e730214](https://github.com/positive-js/mosaic/commit/e730214))
+ * bug fix  **button:** moving button's typography in specific button's classes ([#272](https://github.com/positive-js/mosaic/issues/272)) ([94fe11f](https://github.com/positive-js/mosaic/commit/94fe11f))
+
 # 8.0.0 "Temporal Shielding" (2019-09-27)
 
 ### Mosaic
