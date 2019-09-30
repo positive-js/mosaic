@@ -5919,12 +5919,12 @@ gulp-if@^2.0.2:
     ternary-stream "^2.0.1"
     through2 "^2.0.1"
 
-gulp-markdown@5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/gulp-markdown/-/gulp-markdown-5.0.0.tgz#5bc4b00243413e5e45c84c47680eca51b4a7ff26"
-  integrity sha512-yCc+erQgao8ACRv6hm19xunK2qWB/4P3MzGiZtR/R23sBmfOjkHtkDiH3RVr1yHBBpGO8TLELxpIFzm4Ah0YJA==
+gulp-markdown@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/gulp-markdown/-/gulp-markdown-4.0.0.tgz#1bf228052f52c98d53cc2fa6f50c750ceeceb920"
+  integrity sha512-aLpEc695NHBJMyS0XnQjKLPAx3By7VElALjBV0GVbicsNdiz9pYjcjgA1Eh+hErGJ7WlLiWhISfKf/sg08Q2BA==
   dependencies:
-    marked "^0.7.0"
+    marked "^0.6.2"
     plugin-error "^1.0.1"
     through2 "^3.0.1"
 
@@ -8341,6 +8341,11 @@ markdown-table@^1.1.0:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/markdown-table/-/markdown-table-1.1.3.tgz#9fcb69bcfdb8717bfd0398c6ec2d93036ef8de60"
   integrity sha512-1RUZVgQlpJSPWYbFSpmudq5nHY1doEIv89gBtF0s4gW1GF2XorxcA/70M5vq7rLv0a6mhOUccRsqkwhwLCIQ2Q==
+
+marked@^0.6.2:
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-0.6.3.tgz#79babad78af638ba4d522a9e715cdfdd2429e946"
+  integrity sha512-Fqa7eq+UaxfMriqzYLayfqAE40WN03jf+zHjT18/uXNuzjq3TY0XTbrAoPeqSJrAmPz11VuUA+kBPYOhHt9oOQ==
 
 marked@^0.7.0:
   version "0.7.0"
