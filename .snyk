@@ -1,0 +1,13 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.5
+# ignores vulnerabilities until expiry date; change duration by modifying expiry date
+ignore:
+  SNYK-JS-USERAGENT-174737:
+    - karma > useragent:
+        reason: нет версии для обновления
+        expires: '2019-10-30T10:00:11.916Z'
+  'npm:ua-parser-js:20180227':
+    - browser-sync > ua-parser-js:
+        reason: нет версии для обновления
+        expires: '2019-10-30T10:00:11.916Z'
+patch: {}
