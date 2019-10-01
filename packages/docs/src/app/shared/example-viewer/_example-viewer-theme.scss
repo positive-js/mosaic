@@ -9,6 +9,8 @@
     $error-background: mc-color($error, 60);
     $divider: mc-color($foreground, divider);
     $hint-text: mc-color($foreground, hint-text);
+    $text: mc-color($foreground, text);
+    $example-border: if($is-dark, $text, $hint-text);
 
     .docs-example-viewer__lost-example {
         border: 1px solid $error-border;
@@ -20,6 +22,10 @@
         color: $color;
 
         &:hover { color: $color_hover; }
+    }
+
+    .docs-example-viewer__example {
+        border: 1px solid fade_out($example-border, 0.3);
     }
 }
 
