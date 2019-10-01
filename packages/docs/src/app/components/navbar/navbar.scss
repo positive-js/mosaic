@@ -49,7 +49,15 @@ $doc-navbar-padding: 10px;
     }
 
     &__dropdown-content {
-        padding: 7px 5px;
+        overflow: hidden;
+        display:flex;
+    }
+
+    &__dropdown-item {
+        padding: 5px 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
 
