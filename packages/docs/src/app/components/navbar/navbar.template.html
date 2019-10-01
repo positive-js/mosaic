@@ -58,9 +58,11 @@
             <i mc-icon="mc-angle-down-M_16" class="docs-navbar-dropdown__icon"></i>
         </button>
         <mc-dropdown #colorDropdown="mcDropdown" class="color-picker__dropdown" [style.margin-top]="0">
-            <span *ngFor="let color of colors; let i = index" [class.color-picker__dropdown-content]="true" [class.mc-selected]="color.selected"  (click)="setColor(i)">
-                <i mc-icon="mc-circle-8_16" [style.color]='color.code' class="color-picker__icon"></i>
-            </span>
+            <div class="color-picker__dropdown-content">
+                <span *ngFor="let color of colors; let i = index" [class.color-picker__dropdown-item]="true" [class.mc-selected]="color.selected"  (click)="setColor(i)">
+                    <i mc-icon="mc-circle-8_16" [style.color]='color.code' class="color-picker__icon"></i>
+                </span>
+            </div>
         </mc-dropdown>
     </div>
 </header>
