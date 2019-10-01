@@ -30,7 +30,7 @@
         }
     }
 
-    .color-picker__dropdown-content {
+    .color-picker__dropdown-item {
         &:hover {
             background-color: $hover;
         }
@@ -38,6 +38,10 @@
         &.mc-selected {
             background: $selected;
         }
+    }
+
+    .color-picker__dropdown {
+        padding: 0;
     }
 }
 
