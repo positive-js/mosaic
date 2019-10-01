@@ -50,6 +50,7 @@ export class AnchorsComponent {
             this.debounceTime = this.noSmoothScrollDebounce;
         }
         this.currentUrl = router.url.split('#')[0];
+        localStorage.setItem('PT_nextRoute', this.currentUrl);
         this.container = '.anchors-menu';
         this.pathName = this.router.url;
         this.router.events.pipe(takeUntil(this.destroyed)).subscribe((event) => {
@@ -57,6 +58,7 @@ export class AnchorsComponent {
                 const rootUrl = router.url.split('#')[0];
 
                 if (rootUrl !== this.currentUrl) {
+                    localStorage.setItem('PT_nextRoute', rootUrl);
                     this.currentUrl = rootUrl;
                     this.pathName = this.router.url;
                 }

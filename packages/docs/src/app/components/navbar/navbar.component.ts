@@ -59,7 +59,10 @@ export class NavbarComponent {
         ];
     activeColor = this.colors[0];
 
-    constructor(private renderer: Renderer2) {}
+    constructor(private renderer: Renderer2) {
+        this.initTheme();
+        this.initActiveColor();
+    }
 
     setVersion(version) {
         this.curVerIndex = version;
@@ -71,15 +74,37 @@ export class NavbarComponent {
 
     setTheme(i) {
         this.curTheme = this.themes[i];
+        localStorage.setItem('PT_theme', `${i}`);
         this.changeThemeOnBody();
     }
 
     setColor(i) {
         this.activeColor = this.colors[i];
+        localStorage.setItem('PT_color', `${i}`);
         this.changeColorOnBody();
 
         this.colors.forEach((color) => { color.selected = false; });
         this.colors[i].selected = true;
+    }
+
+    initTheme() {
+        const theme = localStorage.getItem('PT_theme');
+
+        if (theme) {
+            this.setTheme(theme);
+        } else {
+            localStorage.setItem('PT_theme', '0');
+        }
+    }
+
+    initActiveColor() {
+        const color = localStorage.getItem('PT_color');
+
+        if (color) {
+            this.setColor(color);
+        } else {
+            localStorage.setItem('PT_color', '0');
+        }
     }
 
     private changeThemeOnBody() {
