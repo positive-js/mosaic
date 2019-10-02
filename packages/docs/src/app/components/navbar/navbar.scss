@@ -39,6 +39,10 @@ $doc-navbar-padding: 10px;
             };
         }
 
+        &_hidden {
+            visibility: hidden;
+        }
+
         &__icon { color: inherit; }
     }
 }

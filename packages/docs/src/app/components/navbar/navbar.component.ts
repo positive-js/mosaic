@@ -58,6 +58,8 @@ export class NavbarComponent {
         }
         ];
     activeColor = this.colors[0];
+    private readonly themeProperty = 'PT_theme';
+    private readonly colorProperty = 'PT_color';
 
     constructor(private renderer: Renderer2) {
         this.initTheme();
@@ -74,13 +76,13 @@ export class NavbarComponent {
 
     setTheme(i) {
         this.curTheme = this.themes[i];
-        localStorage.setItem('PT_theme', `${i}`);
+        localStorage.setItem(this.themeProperty, `${i}`);
         this.changeThemeOnBody();
     }
 
     setColor(i) {
         this.activeColor = this.colors[i];
-        localStorage.setItem('PT_color', `${i}`);
+        localStorage.setItem(this.colorProperty, `${i}`);
         this.changeColorOnBody();
 
         this.colors.forEach((color) => { color.selected = false; });
@@ -88,22 +90,22 @@ export class NavbarComponent {
     }
 
     initTheme() {
-        const theme = localStorage.getItem('PT_theme');
+        const theme = localStorage.getItem(this.themeProperty);
 
         if (theme) {
             this.setTheme(theme);
         } else {
-            localStorage.setItem('PT_theme', '0');
+            localStorage.setItem(this.themeProperty, '0');
         }
     }
 
     initActiveColor() {
-        const color = localStorage.getItem('PT_color');
+        const color = localStorage.getItem(this.colorProperty);
 
         if (color) {
             this.setColor(color);
         } else {
-            localStorage.setItem('PT_color', '0');
+            localStorage.setItem(this.colorProperty, '0');
         }
     }
 
