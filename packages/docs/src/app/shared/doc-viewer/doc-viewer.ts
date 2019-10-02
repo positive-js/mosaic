@@ -103,11 +103,14 @@ export class DocViewer implements OnDestroy {
 
     /** Show an error that occurred when fetching a document. */
     private showError(url: string, error: HttpErrorResponse) {
-        this.contentRenderFailed.next();
         // tslint:disable-next-line:no-console
         console.error(error);
         this._elementRef.nativeElement.innerText =
             `Failed to load document: ${url}. Error: ${error.statusText}`;
+
+        this._ngZone.onStable
+            .pipe(take(1))
+            .subscribe(() => this.contentRenderFailed.next());
     }
 
     /** Instantiate a ExampleViewer for each example. */
