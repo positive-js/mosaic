@@ -1,5 +1,6 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ChangeDetectorRef, Component, OnDestroy, ViewChild, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Router, Params, NavigationStart } from '@angular/router';
 import { combineLatest, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 
@@ -44,22 +45,46 @@ export class ComponentViewerComponent implements OnDestroy {
 @Component({
     selector: 'component-overview',
     templateUrl: './component-overview.template.html',
+    animations: [
+        trigger('fadeInOut', [
+            state('fadeIn', style({
+                opacity: 1
+            })),
+            state('fadeOut', style({
+                opacity: 0
+            })),
+            transition('fadeIn => fadeOut', [
+                animate('0s')
+            ]),
+            transition('fadeOut => fadeIn', [
+                animate('0.3s')
+            ])
+        ])
+    ],
     encapsulation: ViewEncapsulation.None
 })
-export class ComponentOverviewComponent {
-
-    documentLost = false;
+export class ComponentOverviewComponent implements OnDestroy {
+    documentName: string = '';
+    documentLost: boolean = false;
+    isLoad: boolean = true;
+    private destroyed = new Subject();
 
     @ViewChild('toc', {static: false}) anchorsComponent: AnchorsComponent;
 
     constructor(public componentViewer: ComponentViewerComponent,
+                private router: Router,
                 private ref: ChangeDetectorRef) {
 
+        this.router.events.pipe(takeUntil(this.destroyed)).subscribe((event) => {
+            if (event instanceof NavigationStart) {
+                this.isLoad = false;
+            }
+        });
     }
 
     scrollToSelectedContentSection() {
         this.documentLost = false;
-        this.ref.detectChanges();
+        this.showView();
 
         if (this.anchorsComponent) {
             this.anchorsComponent.setScrollPosition();
@@ -68,6 +93,16 @@ export class ComponentOverviewComponent {
 
     showDocumentLostAlert() {
         this.documentLost = true;
+        this.showView();
+    }
+
+    showView() {
+        this.documentName = this.componentViewer.componentDocItem.id;
+        this.isLoad = true;
         this.ref.detectChanges();
+    }
+
+    ngOnDestroy() {
+        this.destroyed.next();
     }
 }
