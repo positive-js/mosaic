@@ -1,16 +1,9 @@
 // tslint:disable:no-console
-import {
-    animate,
-    state,
-    style,
-    transition,
-    trigger
-} from '@angular/animations';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { McButtonModule } from '../../mosaic/button';
 import { McIconModule } from '../../mosaic/icon';
