@@ -61,5 +61,10 @@
 
             &:hover, &:active, &:focus { text-decoration: none; }
         }
+
+        &-selected {
+            pointer-events: none;
+            cursor: default;
+        }
     }
 }
