@@ -17,7 +17,7 @@ const moment = _rollupMoment || _moment;
 @Component({
     selector: 'datepicker-demo',
     templateUrl: 'datepicker-demo.html',
-    styleUrls: ['datepicker-demo.css'],
+    styleUrls: ['datepicker-demo.css']
 })
 export class DatepickerDemo {
     date = moment([2019, 0, 24]);
