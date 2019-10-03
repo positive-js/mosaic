@@ -144,14 +144,6 @@ export class DemoComponent {
         this.dataSource.data = buildFileTree(DATA_OBJECT, 0);
     }
 
-    private getValue = (node: FileNode): string => {
-        return node.name;
-    }
-
-    private getViewValue = (node: FileNode): string => {
-        return node.name + ' view';
-    }
-
     showConfirm() {
         this.modalService.success({
             mcContent   : 'Сохранить сделанные изменения в запросе "Все активы с виндой"?',
@@ -184,6 +176,14 @@ export class DemoComponent {
 
     ngOnDestroy() {
         clearInterval(this.intervalId);
+    }
+
+    private getValue = (node: FileNode): string => {
+        return node.name;
+    }
+
+    private getViewValue = (node: FileNode): string => {
+        return `${node.name} view`;
     }
 
     private getLevel(node: FileFlatNode) { return node.level; }
