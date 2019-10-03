@@ -1,4 +1,6 @@
-import { Component, Renderer2 } from '@angular/core';
+import { Component } from '@angular/core';
+
+import { INavbarProperty, NavbarProperty } from './navbar-property';
 
 
 @Component({
@@ -7,127 +9,139 @@ import { Component, Renderer2 } from '@angular/core';
     styleUrls: ['./navbar.scss']
 })
 export class NavbarComponent {
-    // TODO fetch real data instead
-    versions = [{number: '5.1', date: '15 октября', bold: true},
-        {number: '5.0.1', date: '14 октября', bold: false},
-        {number: '5', date: '13 октября', bold: true},
-        {number: '4.8.8', date: '12 октября', bold: false},
-        {number: '4.8.5', date: '11 октября', bold: false},
-        {number: '4.8.4', date: '10 октября', bold: false},
-        {number: '4.8', date: '9 октября', bold: true},
-        {number: '4.7.1', date: '8 октября', bold: false},
-        {number: '1.0', date: '7 октября', bold: true}];
+    /*To add navbar property create new private property of type INavbarProperty
+    and instantiate new NavbarProperty(property: INavbarProperty)*/
+    versionSwitch: NavbarProperty;
+    colorSwitch: NavbarProperty;
+    themeSwitch: NavbarProperty;
+    languageSwitch: NavbarProperty;
 
-    curVerIndex = this.versions[0].number;
-    languages = ['Русский язык', 'Английский язык'];
-    curLanguage = this.languages[0];
-    themes = [
-        {
-            theme: 'default',
-            name: 'Светлая тема',
-            className: 'theme-default'
-        },
-        {
-            theme: 'dark',
-            name: 'Темная тема',
-            className: 'theme-dark'
-        }
-    ];
-    curTheme = this.themes[0];
-    // TODO Эти значения временные, надо определиться с постоянными и заменить ими текущие значения.
-    colors = [
-        {
-            code: '#2f80ed',
-            className: 'active-blue',
-            selected: true
-        },
-        {
-            code: '#832112',
-            className: 'active-red',
-            selected: false
-        },
-        {
-            code: '#07804e',
-            className: 'active-green',
-            selected: false
-        },
-        {
-            code: '#eaaf00',
-            className: 'active-yellow',
-            selected: false
-        }
-        ];
-    activeColor = this.colors[0];
-    private readonly themeProperty = 'PT_theme';
-    private readonly colorProperty = 'PT_color';
-
-    constructor(private renderer: Renderer2) {
-        this.initTheme();
-        this.initActiveColor();
-    }
-
-    setVersion(version) {
-        this.curVerIndex = version;
-    }
-
-    setLanguage(language) {
-        this.curLanguage = language;
-    }
-
-    setTheme(i) {
-        this.curTheme = this.themes[i];
-        localStorage.setItem(this.themeProperty, `${i}`);
-        this.changeThemeOnBody();
-    }
-
-    setColor(i) {
-        this.activeColor = this.colors[i];
-        localStorage.setItem(this.colorProperty, `${i}`);
-        this.changeColorOnBody();
-
-        this.colors.forEach((color) => { color.selected = false; });
-        this.colors[i].selected = true;
-    }
-
-    initTheme() {
-        const theme = localStorage.getItem(this.themeProperty);
-
-        if (theme) {
-            this.setTheme(theme);
-        } else {
-            localStorage.setItem(this.themeProperty, '0');
-        }
-    }
-
-    initActiveColor() {
-        const color = localStorage.getItem(this.colorProperty);
-
-        if (color) {
-            this.setColor(color);
-        } else {
-            localStorage.setItem(this.colorProperty, '0');
-        }
-    }
-
-    private changeThemeOnBody() {
-
-        if (this.curTheme) {
-            for (const theme of this.themes) {
-                this.renderer.removeClass(document.body, theme.className);
+    private activeColorProperty: INavbarProperty = {
+        property: 'PT_color',
+        data: [
+            {
+                code: '#2f80ed',
+                className: 'active-blue',
+                selected: true
+            },
+            {
+                code: '#832112',
+                className: 'active-red',
+                selected: false
+            },
+            {
+                code: '#07804e',
+                className: 'active-green',
+                selected: false
+            },
+            {
+                code: '#eaaf00',
+                className: 'active-yellow',
+                selected: false
             }
+        ],
+        updateTemplate: true,
+        updateSelected: true
+    };
 
-            this.renderer.addClass(document.body, this.curTheme.className);
-        }
-    }
+    private languageProperty: INavbarProperty = {
+        property: 'PT_language',
+        data: [
+            'Русский язык',
+            'Английский язык'
+        ],
+        updateTemplate: false,
+        updateSelected: false
+    };
 
-    private changeColorOnBody() {
-
-        if (this.activeColor) {
-            for (const color of this.colors) {
-                this.renderer.removeClass(document.body, color.className);
+    private themeProperty: INavbarProperty = {
+        property: 'PT_theme',
+        data: [
+            {
+                theme: 'default',
+                name: 'Светлая тема',
+                className: 'theme-default',
+                selected: true
+            },
+            {
+                theme: 'dark',
+                name: 'Темная тема',
+                className: 'theme-dark',
+                selected: false
             }
+        ],
+        updateTemplate: true,
+        updateSelected: true
+    };
 
-            this.renderer.addClass(document.body, this.activeColor.className);
-        }
+    private versionProperty: INavbarProperty = {
+        property: 'PT_version',
+        data: [
+            {
+                number: '5.1',
+                date: '15 октября',
+                bold: true,
+                selected: true
+            },
+            {
+                number: '5.0.1',
+                date: '14 октября',
+                bold: false,
+                selected: false
+            },
+            {
+                number: '5',
+                date: '13 октября',
+                bold: true,
+                selected: false
+            },
+            {
+                number: '4.8.8',
+                date: '12 октября',
+                bold: false,
+                selected: false
+            },
+            {
+                number: '4.8.5',
+                date: '11 октября',
+                bold: false,
+                selected: false
+            },
+            {
+                number: '4.8.4',
+                date: '10 октября',
+                bold: false,
+                selected: false
+            },
+            {
+                number: '4.8',
+                date: '9 октября',
+                bold: true,
+                selected: false
+            },
+            {
+                number: '4.7.1',
+                date: '8 октября',
+                bold: false,
+                selected: false
+            },
+            {
+                number: '1.0',
+                date: '7 октября',
+                bold: true,
+                selected: false
+            }
+        ],
+        updateTemplate: false,
+        updateSelected: true
+    };
+
+    constructor() {
+        this.versionSwitch = new NavbarProperty(this.versionProperty);
+        this.colorSwitch = new NavbarProperty(this.activeColorProperty);
+        this.themeSwitch = new NavbarProperty(this.themeProperty);
+        this.languageSwitch = new NavbarProperty(this.languageProperty);
     }
+
+
 }
