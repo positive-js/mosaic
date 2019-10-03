@@ -12,7 +12,9 @@
             <i mc-icon="mc-angle-down-L_16" class="docs-navbar-version__icon"></i>
         </button>
         <mc-dropdown #versionDropdown="mcDropdown" xPosition="after" class="docs-navbar-version__dropdown">
-            <button mc-dropdown-item *ngFor="let version of versionSwitch.data; let i = index" [class.mc-selected]="version.selected" (click)="versionSwitch.setValue(i)" [class.docs-navbar-version_bold]="version.bold">
+            <button mc-dropdown-item *ngFor="let version of versionSwitch.data; let i = index"
+                    [class.mc-selected]="version.selected" (click)="versionSwitch.setValue(i)"
+                    [class.docs-navbar-version_bold]="version.number.length < 4">
                 <span class="docs-navbar-version__item" >
                     <span class="docs-navbar-version__num" >{{version.number}}</span>
                     <span class="docs-navbar-version__date" >{{version.date}}</span>

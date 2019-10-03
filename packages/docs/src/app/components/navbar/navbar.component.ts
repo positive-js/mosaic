@@ -80,55 +80,46 @@ export class NavbarComponent {
             {
                 number: '5.1',
                 date: '15 октября',
-                bold: true,
                 selected: true
             },
             {
                 number: '5.0.1',
                 date: '14 октября',
-                bold: false,
                 selected: false
             },
             {
                 number: '5',
                 date: '13 октября',
-                bold: true,
                 selected: false
             },
             {
                 number: '4.8.8',
                 date: '12 октября',
-                bold: false,
                 selected: false
             },
             {
                 number: '4.8.5',
                 date: '11 октября',
-                bold: false,
                 selected: false
             },
             {
                 number: '4.8.4',
                 date: '10 октября',
-                bold: false,
                 selected: false
             },
             {
                 number: '4.8',
                 date: '9 октября',
-                bold: true,
                 selected: false
             },
             {
                 number: '4.7.1',
                 date: '8 октября',
-                bold: false,
                 selected: false
             },
             {
                 number: '1.0',
                 date: '7 октября',
-                bold: true,
                 selected: false
             }
         ],
