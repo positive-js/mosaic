@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync } from 'fs';
 import { sync as glob } from 'glob';
-import { join, basename} from 'path';
+import { join, basename } from 'path';
 
 
 /**

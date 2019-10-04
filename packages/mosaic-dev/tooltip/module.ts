@@ -29,7 +29,6 @@ export class DemoComponent {
     tooltipPosition: string = 'left';
     title: string = 'Default text';
     availablePositions: string[] = ['top', 'bottom', 'left', 'right'];
-    constructor(){}
 
     toggleTooltip() {
         if (!this.tooltip.isTooltipOpen) {
