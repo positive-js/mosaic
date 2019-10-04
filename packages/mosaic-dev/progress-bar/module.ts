@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ViewEncapsulation, NgModule, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
