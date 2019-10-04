@@ -1,4 +1,5 @@
-import {prompt} from 'inquirer';
+import { prompt } from 'inquirer';
+
 
 /**
  * Prompts the current user-input interface for a Git remote that refers to the upstream

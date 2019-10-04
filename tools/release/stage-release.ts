@@ -1,7 +1,6 @@
 // tslint:disable:no-console
 import * as OctokitApi from '@octokit/rest';
 import chalk from 'chalk';
-
 import { readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
 
@@ -145,7 +144,7 @@ class StageReleaseTask extends BaseReleaseTask {
     /** Updates the version of the project package.json and writes the changes to disk. */
     private updatePackageJsonVersion(newVersionName: string) {
         const newPackageJson = {...this.packageJson, version: newVersionName};
-        writeFileSync(this.packageJsonPath, JSON.stringify(newPackageJson, null, 4) + '\n');
+        writeFileSync(this.packageJsonPath, `${JSON.stringify(newPackageJson, null, 4)}\n`);
     }
 
     /** Verifies that the latest commit of the current branch is passing all Github statuses. */
