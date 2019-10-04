@@ -202,7 +202,7 @@ describe('McCheckbox', () => {
             expect(checkboxInstance.checked).toBe(false);
             expect(checkboxInstance.indeterminate).toBe(true);
 
-            checkboxInstance._onInputClick(<Event> {
+            checkboxInstance.onInputClick(<Event> {
                 stopPropagation: () => {
                 }
             });
@@ -213,7 +213,7 @@ describe('McCheckbox', () => {
             expect(checkboxInstance.checked).toBe(true);
             expect(checkboxInstance.indeterminate).toBe(false);
 
-            checkboxInstance._onInputClick(<Event> {
+            checkboxInstance.onInputClick(<Event> {
                 stopPropagation: () => {
                 }
             });
