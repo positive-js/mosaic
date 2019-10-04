@@ -1,16 +1,15 @@
-import * as path from 'path';
-import {sync as globSync} from 'glob';
-
 import { Package } from 'dgeni';
-import { TsParser } from 'dgeni-packages/typescript/services/TsParser';
 import { ReadTypeScriptModules } from 'dgeni-packages/typescript/processors/readTypeScriptModules';
+import { TsParser } from 'dgeni-packages/typescript/services/TsParser';
+import { sync as globSync } from 'glob';
+import * as path from 'path';
 
 import { patchLogService } from './patch-log-service';
-import {FilterDuplicateExports} from './processors/filter-duplicate-exports';
-import {MergeInheritedProperties} from './processors/merge-inherited-properties';
-import {DocsPrivateFilter} from './processors/docs-private-filter';
-import {Categorizer} from './processors/categorizer';
-import {ComponentGrouper} from './processors/component-grouper';
+import { Categorizer } from './processors/categorizer';
+import { ComponentGrouper } from './processors/component-grouper';
+import { DocsPrivateFilter } from './processors/docs-private-filter';
+import { FilterDuplicateExports } from './processors/filter-duplicate-exports';
+import { MergeInheritedProperties } from './processors/merge-inherited-properties';
 
 
 const jsdocPackage = require('dgeni-packages/jsdoc');
