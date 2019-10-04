@@ -1,3 +1,4 @@
+// tslint:disable:no-console
 import { DataSource, CollectionViewer } from '@angular/cdk/collections';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ChangeDetectionStrategy, Component, NgModule, ViewEncapsulation } from '@angular/core';

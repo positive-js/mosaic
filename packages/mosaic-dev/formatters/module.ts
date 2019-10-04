@@ -1,4 +1,5 @@
 /* tslint:disable:naming-convention */
+// tslint:disable:no-console
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
