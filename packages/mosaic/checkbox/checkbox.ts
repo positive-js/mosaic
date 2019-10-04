@@ -18,8 +18,8 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FocusMonitor, FocusOrigin } from '@ptsecurity/cdk/a11y';
 import {
-    CanColor, CanColorCtor,
-    CanDisable, CanDisableCtor,
+    ICanColor, CanColorCtor,
+    ICanDisable, CanDisableCtor,
     HasTabIndex, HasTabIndexCtor,
     mixinColor,
     mixinDisabled,
@@ -109,7 +109,7 @@ export const _McCheckboxMixinBase:
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class McCheckbox extends _McCheckboxMixinBase implements ControlValueAccessor,
-    AfterViewInit, OnDestroy, CanColor, CanDisable, HasTabIndex {
+    AfterViewInit, OnDestroy, ICanColor, ICanDisable, HasTabIndex {
 
     /**
      * Attached to the aria-label attribute of the host element. In most cases, arial-labelledby will

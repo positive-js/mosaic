@@ -10,7 +10,7 @@ import {
     Self
 } from '@angular/core';
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
-import { CanDisable, mixinDisabled, CanDisableCtor } from '@ptsecurity/mosaic/core';
+import { ICanDisable, mixinDisabled, CanDisableCtor } from '@ptsecurity/mosaic/core';
 import { McDropdownTrigger } from '@ptsecurity/mosaic/dropdown';
 
 
@@ -57,7 +57,7 @@ export const _McVerticalNavbarMixinBase: CanDisableCtor & typeof McVerticalNavba
         '[attr.tabindex]': 'disabled ? -1 : 0'
     }
 })
-export class McVerticalNavbarItem extends _McVerticalNavbarMixinBase implements CanDisable, OnDestroy {
+export class McVerticalNavbarItem extends _McVerticalNavbarMixinBase implements ICanDisable, OnDestroy {
     @Input() tabIndex: number = 0;
 
     constructor(

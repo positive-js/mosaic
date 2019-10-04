@@ -19,9 +19,9 @@ import {
 import { IFocusableOption } from '@ptsecurity/cdk/a11y';
 import { BACKSPACE, DELETE, SPACE } from '@ptsecurity/cdk/keycodes';
 import {
-    CanColor,
+    ICanColor,
     CanColorCtor,
-    CanDisable,
+    ICanDisable,
     CanDisableCtor,
     mixinColor,
     mixinDisabled
@@ -101,7 +101,7 @@ export const _McTagMixinBase: CanColorCtor & CanDisableCtor & typeof McTagBase =
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class McTag extends _McTagMixinBase implements IFocusableOption, OnDestroy, CanColor, CanDisable {
+export class McTag extends _McTagMixinBase implements IFocusableOption, OnDestroy, ICanColor, ICanDisable {
     /** Emits when the tag is focused. */
     readonly onFocus = new Subject<McTagEvent>();
 

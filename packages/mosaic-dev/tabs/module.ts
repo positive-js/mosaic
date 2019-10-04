@@ -14,7 +14,7 @@ import { McRadioModule } from '../../mosaic/radio';
 import { McTabsModule } from '../../mosaic/tabs/';
 
 
-export interface ExampleTab {
+export interface IExampleTab {
     label: string;
     content: string;
 }
@@ -26,7 +26,7 @@ export interface ExampleTab {
     encapsulation: ViewEncapsulation.None
 })
 export class TabsDemoComponent {
-    asyncTabs: Observable<ExampleTab[]>;
+    asyncTabs: Observable<IExampleTab[]>;
 
     tabs = ['First', 'Second', 'Third'];
     selected = new FormControl(0);
@@ -38,7 +38,7 @@ export class TabsDemoComponent {
     background = '';
 
     constructor() {
-        this.asyncTabs = new Observable((observer: Observer<ExampleTab[]>) => {
+        this.asyncTabs = new Observable((observer: Observer<IExampleTab[]>) => {
             setTimeout(() => {
                 observer.next([
                     { label: 'First', content: 'Content 1' },

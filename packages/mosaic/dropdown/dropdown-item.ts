@@ -11,7 +11,7 @@ import {
     ViewChild
 } from '@angular/core';
 import { IFocusableOption, FocusMonitor, FocusOrigin } from '@ptsecurity/cdk/a11y';
-import { CanDisable, CanDisableCtor, mixinDisabled } from '@ptsecurity/mosaic/core';
+import { ICanDisable, CanDisableCtor, mixinDisabled } from '@ptsecurity/mosaic/core';
 import { Subject } from 'rxjs';
 
 import { MC_DROPDOWN_PANEL, McDropdownPanel } from './dropdown-panel';
@@ -51,7 +51,7 @@ export const _McDropdownItemMixinBase: CanDisableCtor & typeof McDropdownItemBas
     `
 })
 export class McDropdownItem extends _McDropdownItemMixinBase
-    implements IFocusableOption, CanDisable, OnDestroy {
+    implements IFocusableOption, ICanDisable, OnDestroy {
 
     /** ARIA role for the dropdown item. */
     @Input() role: 'menuitem' | 'menuitemradio' | 'menuitemcheckbox' = 'menuitem';

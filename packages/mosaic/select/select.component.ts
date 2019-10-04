@@ -56,7 +56,7 @@ import {
 import {
     countGroupLabelsBeforeOption,
     getOptionScrollPosition,
-    CanDisable,
+    ICanDisable,
     CanDisableCtor,
     CanUpdateErrorState,
     CanUpdateErrorStateCtor,
@@ -217,7 +217,7 @@ export class McSelectTrigger {}
     ]
 })
 export class McSelect extends McSelectMixinBase implements
-    AfterContentInit, AfterViewInit, OnChanges, OnDestroy, OnInit, DoCheck, ControlValueAccessor, CanDisable,
+    AfterContentInit, AfterViewInit, OnChanges, OnDestroy, OnInit, DoCheck, ControlValueAccessor, ICanDisable,
     HasTabIndex, McFormFieldControl<any>, CanUpdateErrorState {
 
     /** A name for this control that can be used by `mc-form-field`. */

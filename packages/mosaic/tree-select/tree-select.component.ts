@@ -50,7 +50,7 @@ import {
 import { CdkTree } from '@ptsecurity/cdk/tree';
 import {
     getOptionScrollPosition,
-    CanDisable,
+    ICanDisable,
     CanUpdateErrorState,
     ErrorStateMatcher,
     HasTabIndex,
@@ -145,7 +145,7 @@ const McTreeSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorSt
 })
 export class McTreeSelect extends McTreeSelectMixinBase implements
     AfterContentInit, AfterViewInit, OnChanges, OnDestroy, OnInit, DoCheck, ControlValueAccessor,
-    CanDisable, HasTabIndex, McFormFieldControl<McTreeOption>, CanUpdateErrorState {
+    ICanDisable, HasTabIndex, McFormFieldControl<McTreeOption>, CanUpdateErrorState {
 
     /** A name for this control that can be used by `mc-form-field`. */
     controlType = 'mc-select';

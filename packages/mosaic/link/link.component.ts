@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import {
-    CanDisable, CanDisableCtor,
+    ICanDisable, CanDisableCtor,
     HasTabIndex, HasTabIndexCtor,
     mixinDisabled,
     mixinTabIndex,
@@ -33,7 +33,7 @@ export const _McLinkBase: HasTabIndexCtor & CanDisableCtor & typeof McLinkBase
     }
 })
 
-export class McLink extends _McLinkBase implements OnDestroy, HasTabIndex, CanDisable {
+export class McLink extends _McLinkBase implements OnDestroy, HasTabIndex, ICanDisable {
 
     @Input()
     get disabled() {

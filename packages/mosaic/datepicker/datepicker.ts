@@ -32,7 +32,7 @@ import {
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
 import { ESCAPE, UP_ARROW } from '@ptsecurity/cdk/keycodes';
 import {
-    CanColor,
+    ICanColor,
     CanColorCtor,
     mixinColor,
     ThemePalette
@@ -105,7 +105,7 @@ export const McDatepickerContentMixinBase: CanColorCtor & typeof McDatepickerCon
     inputs: ['color']
 })
 export class McDatepickerContent<D> extends McDatepickerContentMixinBase
-    implements AfterViewInit, CanColor {
+    implements AfterViewInit, ICanColor {
 
     /** Reference to the internal calendar component. */
     @ViewChild(McCalendar, {static: false}) calendar: McCalendar<D>;
@@ -138,7 +138,7 @@ export class McDatepickerContent<D> extends McDatepickerContentMixinBase
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: McFormFieldControl, useExisting: McDatepicker }]
 })
-export class McDatepicker<D> implements OnDestroy, CanColor {
+export class McDatepicker<D> implements OnDestroy, ICanColor {
 
     /** The date to open the calendar to initially. */
     @Input()

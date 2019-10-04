@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
-import { CanColor, CanColorCtor, mixinColor } from '@ptsecurity/mosaic/core';
+import { ICanColor, CanColorCtor, mixinColor } from '@ptsecurity/mosaic/core';
 import { EMPTY, merge } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 
@@ -74,7 +74,7 @@ export const _McFormFieldMixinBase: CanColorCtor & typeof McFormFieldBase = mixi
 })
 
 export class McFormField extends _McFormFieldMixinBase implements
-    AfterContentInit, AfterContentChecked, AfterViewInit, CanColor {
+    AfterContentInit, AfterContentChecked, AfterViewInit, ICanColor {
 
     @ContentChild(McFormFieldControl, {static: false}) _control: McFormFieldControl<any>;
     @ContentChild(McFormFieldNumberControl, {static: false}) _numberControl: McFormFieldNumberControl<any>;

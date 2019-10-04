@@ -7,7 +7,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { mixinColor, CanColor, CanColorCtor, ThemePalette } from '@ptsecurity/mosaic/core';
+import { mixinColor, ICanColor, CanColorCtor, ThemePalette } from '@ptsecurity/mosaic/core';
 
 
 @Directive({
@@ -32,7 +32,7 @@ export const _McIconMixinBase: CanColorCtor & typeof McIconBase = mixinColor(McI
     encapsulation: ViewEncapsulation.None,
     inputs: ['color']
 })
-export class McIcon extends _McIconMixinBase implements CanColor {
+export class McIcon extends _McIconMixinBase implements ICanColor {
     constructor(elementRef: ElementRef, @Attribute('mc-icon') iconName: string) {
         super(elementRef);
 

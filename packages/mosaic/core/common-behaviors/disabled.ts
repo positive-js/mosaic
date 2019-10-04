@@ -3,12 +3,12 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Constructor } from './constructor';
 
 
-export interface CanDisable {
+export interface ICanDisable {
     disabled: boolean;
 }
 
 /** @docs-private */
-export type CanDisableCtor = Constructor<CanDisable>;
+export type CanDisableCtor = Constructor<ICanDisable>;
 
 export function mixinDisabled<T extends Constructor<{}>>(base: T): CanDisableCtor & T {
     return class extends base {

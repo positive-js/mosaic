@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import { mixinDisabled, CanDisable, CanDisableCtor } from '../common-behaviors/index';
+import { mixinDisabled, ICanDisable, CanDisableCtor } from '../common-behaviors/index';
 
 
 // Boilerplate for applying mixins to McOptgroup.
@@ -31,7 +31,7 @@ let uniqueOptgroupIdCounter = 0;
         '[attr.aria-labelledby]': 'labelId'
     }
 })
-export class McOptgroup extends McOptgroupMixinBase implements CanDisable {
+export class McOptgroup extends McOptgroupMixinBase implements ICanDisable {
     /** Label for the option group. */
     @Input() label: string;
 

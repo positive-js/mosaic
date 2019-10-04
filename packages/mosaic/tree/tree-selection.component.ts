@@ -35,7 +35,7 @@ import {
 } from '@ptsecurity/cdk/keycodes';
 import { CdkTree, CdkTreeNodeOutlet, FlatTreeControl } from '@ptsecurity/cdk/tree';
 import {
-    CanDisable,
+    ICanDisable,
     getMcSelectNonArrayValueError,
     HasTabIndex
 } from '@ptsecurity/mosaic/core';
@@ -91,7 +91,7 @@ interface SelectionModelOption {
     ]
 })
 export class McTreeSelection extends CdkTree<McTreeOption>
-    implements ControlValueAccessor, AfterContentInit, CanDisable, HasTabIndex {
+    implements ControlValueAccessor, AfterContentInit, ICanDisable, HasTabIndex {
 
     @ViewChild(CdkTreeNodeOutlet, { static: true }) nodeOutlet: CdkTreeNodeOutlet;
 

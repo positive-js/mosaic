@@ -11,8 +11,8 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {
-    CanColor, CanColorCtor,
-    CanDisable, CanDisableCtor,
+    ICanColor, CanColorCtor,
+    ICanDisable, CanDisableCtor,
     HasTabIndex, HasTabIndexCtor,
     mixinColor,
     mixinDisabled,
@@ -60,7 +60,7 @@ export const MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR: any = {
     inputs: ['disabled']
 })
 export class McRadioGroup extends _McRadioGroupMixinBase
-    implements AfterContentInit, ControlValueAccessor, CanDisable {
+    implements AfterContentInit, ControlValueAccessor, ICanDisable {
 
     /** Name of the radio button group. All radio buttons inside this group will use this name. */
     @Input()
@@ -307,7 +307,7 @@ export const _McRadioButtonMixinBase:
     }
 })
 export class McRadioButton extends _McRadioButtonMixinBase
-    implements OnInit, AfterViewInit, OnDestroy, CanColor, HasTabIndex {
+    implements OnInit, AfterViewInit, OnDestroy, ICanColor, HasTabIndex {
 
     /** Whether this radio button is checked. */
     @Input()

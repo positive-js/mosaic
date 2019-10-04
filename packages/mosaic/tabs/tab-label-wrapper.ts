@@ -1,6 +1,6 @@
 import { Directive, ElementRef } from '@angular/core';
 import {
-    CanDisable,
+    ICanDisable,
     CanDisableCtor,
     mixinDisabled
 } from '@ptsecurity/mosaic/core';
@@ -24,7 +24,7 @@ export const mcTabLabelWrapperMixinBase: CanDisableCtor &
         '[attr.aria-disabled]': '!!disabled'
     }
 })
-export class McTabLabelWrapper extends mcTabLabelWrapperMixinBase implements CanDisable {
+export class McTabLabelWrapper extends mcTabLabelWrapperMixinBase implements ICanDisable {
     constructor(public elementRef: ElementRef) {
         super();
     }

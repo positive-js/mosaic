@@ -20,7 +20,7 @@ import {
     Directive, Attribute
 } from '@angular/core';
 import {
-    CanColor,
+    ICanColor,
     CanColorCtor,
     mixinColor,
     mixinDisabled
@@ -108,7 +108,7 @@ export const mcTabGroupMixinBase:
     }
 })
 export class McTabGroup extends mcTabGroupMixinBase implements AfterContentInit,
-    AfterContentChecked, OnDestroy, CanColor {
+    AfterContentChecked, OnDestroy, ICanColor {
     lightTab: boolean;
 
     /** Whether the tab group should grow to the size of the active tab. */

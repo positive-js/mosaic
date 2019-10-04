@@ -7,7 +7,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
-import { mixinColor, mixinDisabled, CanColor, CanDisable, CanDisableCtor, CanColorCtor } from '@ptsecurity/mosaic/core';
+import { mixinColor, mixinDisabled, ICanColor, ICanDisable, CanDisableCtor, CanColorCtor } from '@ptsecurity/mosaic/core';
 
 
 @Directive({
@@ -93,7 +93,7 @@ export const McButtonMixinBase:
         '[disabled]': 'disabled || null'
     }
 })
-export class McButton extends McButtonMixinBase implements OnDestroy, CanDisable, CanColor {
+export class McButton extends McButtonMixinBase implements OnDestroy, ICanDisable, ICanColor {
     constructor(elementRef: ElementRef, private _focusMonitor: FocusMonitor) {
         super(elementRef);
 

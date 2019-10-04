@@ -14,7 +14,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import {
-    CanDisable,
+    ICanDisable,
     CanDisableCtor,
     mixinDisabled
 } from '@ptsecurity/mosaic/core';
@@ -41,7 +41,7 @@ export const mcTabMixinBase: CanDisableCtor & typeof McTabBase = mixinDisabled(
     exportAs: 'mcTab'
 })
 export class McTab extends mcTabMixinBase
-    implements OnInit, CanDisable, OnChanges, OnDestroy {
+    implements OnInit, ICanDisable, OnChanges, OnDestroy {
     /** @docs-private */
     get content(): TemplatePortal | null {
         return this.contentPortal;

@@ -11,8 +11,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import {
     ThemePalette,
-    CanColor, CanColorCtor,
-    CanDisable, CanDisableCtor,
+    ICanColor, CanColorCtor,
+    ICanDisable, CanDisableCtor,
     HasTabIndex, HasTabIndexCtor,
     mixinColor,
     mixinDisabled,
@@ -66,7 +66,7 @@ export class McToggleChange {
     ]
 })
 export class McToggleComponent extends _McToggleMixinBase
-    implements ControlValueAccessor, CanColor, CanDisable, HasTabIndex {
+    implements ControlValueAccessor, ICanColor, ICanDisable, HasTabIndex {
 
     @ViewChild('input', {static: false}) _inputElement: ElementRef;
 

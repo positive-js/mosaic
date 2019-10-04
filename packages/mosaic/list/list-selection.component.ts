@@ -35,7 +35,7 @@ import {
 } from '@ptsecurity/cdk/keycodes';
 import {
     McLine,
-    CanDisable,
+    ICanDisable,
     mixinDisabled,
     toBoolean,
     CanDisableCtor,
@@ -244,7 +244,7 @@ export const _McListSelectionMixinBase: CanDisableCtor & HasTabIndexCtor & typeo
     preserveWhitespaces: false
 })
 export class McListSelection extends _McListSelectionMixinBase implements
-    IFocusableOption, CanDisable, HasTabIndex, AfterContentInit, ControlValueAccessor, HasTabIndex {
+    IFocusableOption, ICanDisable, HasTabIndex, AfterContentInit, ControlValueAccessor, HasTabIndex {
 
     keyManager: FocusKeyManager<McListOption>;
 

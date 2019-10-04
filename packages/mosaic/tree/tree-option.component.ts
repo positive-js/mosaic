@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { CdkTreeNode } from '@ptsecurity/cdk/tree';
-import { CanDisable, toBoolean } from '@ptsecurity/mosaic/core';
+import { ICanDisable, toBoolean } from '@ptsecurity/mosaic/core';
 
 
 /**
@@ -51,7 +51,7 @@ let uniqueIdCounter: number = 0;
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: CdkTreeNode, useExisting: McTreeOption }]
 })
-export class McTreeOption extends CdkTreeNode<McTreeOption> implements OnInit, OnDestroy, CanDisable, AfterContentInit {
+export class McTreeOption extends CdkTreeNode<McTreeOption> implements OnInit, OnDestroy, ICanDisable, AfterContentInit {
     get value(): any {
         return this._value;
     }

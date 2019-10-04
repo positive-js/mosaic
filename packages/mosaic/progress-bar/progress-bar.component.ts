@@ -5,7 +5,7 @@ import {
     ElementRef,
     Input
 } from '@angular/core';
-import { CanColor, CanColorCtor, mixinColor, ThemePalette } from '@ptsecurity/mosaic/core';
+import { ICanColor, CanColorCtor, mixinColor, ThemePalette } from '@ptsecurity/mosaic/core';
 
 
 export type ProgressBarMode = 'determinate' | 'indeterminate';
@@ -35,7 +35,7 @@ export const _McProgressBarMixinBase:
         '[attr.id]': 'id'
     }
 })
-export class McProgressBar extends _McProgressBarMixinBase implements CanColor {
+export class McProgressBar extends _McProgressBarMixinBase implements ICanColor {
     @Input() id: string = `mc-progress-bar-${idIterator++}`;
     @Input() value: number = 0;
     @Input() mode: ProgressBarMode = 'determinate';

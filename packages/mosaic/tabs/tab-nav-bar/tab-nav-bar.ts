@@ -10,9 +10,9 @@ import {
 } from '@angular/core';
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import {
-    CanColor,
+    ICanColor,
     CanColorCtor,
-    CanDisable,
+    ICanDisable,
     CanDisableCtor,
     HasTabIndex,
     HasTabIndexCtor,
@@ -45,7 +45,7 @@ export const mcTabNavMixinBase: CanColorCtor &
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class McTabNav extends mcTabNavMixinBase
-    implements CanColor {
+    implements ICanColor {
         constructor(elementRef: ElementRef) {
             super(elementRef);
         }
@@ -73,7 +73,7 @@ export const mcTabLinkMixinBase: HasTabIndexCtor & CanDisableCtor &
     }
 })
 export class McTabLink extends mcTabLinkMixinBase
-    implements OnDestroy, CanDisable, HasTabIndex {
+    implements OnDestroy, ICanDisable, HasTabIndex {
     /** Whether the link is active. */
     @Input()
     get active(): boolean {

@@ -3,14 +3,14 @@ import { ElementRef } from '@angular/core';
 import { Constructor } from './constructor';
 
 
-export interface CanColor {
+export interface ICanColor {
     color: ThemePalette;
 }
 
 /** @docs-private */
-export type CanColorCtor = Constructor<CanColor>;
+export type CanColorCtor = Constructor<ICanColor>;
 
-export interface HasElementRef {
+export interface IHasElementRef {
     _elementRef: ElementRef;
 }
 
@@ -23,7 +23,7 @@ export enum ThemePalette {
 }
 
 /** Mixin to augment a directive with a `color` property. */
-export function mixinColor<T extends Constructor<HasElementRef>>(
+export function mixinColor<T extends Constructor<IHasElementRef>>(
     base: T,
     defaultColor: ThemePalette = ThemePalette.Default
 ): CanColorCtor & T {

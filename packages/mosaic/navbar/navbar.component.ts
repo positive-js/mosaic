@@ -10,7 +10,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
-import { CanDisable, CanDisableCtor, mixinDisabled } from '@ptsecurity/mosaic/core';
+import { ICanDisable, CanDisableCtor, mixinDisabled } from '@ptsecurity/mosaic/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
@@ -68,7 +68,7 @@ export const McNavbarMixinBase: CanDisableCtor & typeof McNavbarItemBase = mixin
         class: 'mc-navbar-item'
     }
 })
-export class McNavbarItem extends McNavbarMixinBase implements OnInit, OnDestroy, CanDisable {
+export class McNavbarItem extends McNavbarMixinBase implements OnInit, OnDestroy, ICanDisable {
 
     @Input()
     tabIndex: number = 0;
