@@ -172,7 +172,7 @@ export class DemoComponent {
     }
 
     private getViewValue = (node: FileNode): string => {
-        return node.name + ' view';
+        return `${node.name} view`;
     }
 }
 
