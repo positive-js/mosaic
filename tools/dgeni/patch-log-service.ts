@@ -12,13 +12,13 @@
  * through mixin functions and will be stored as a constant.
  */
 export function patchLogService(log: any) {
-  const _warnFn = log.warn;
+  const warnFn = log.warn;
 
   log.warn = function(message: string) {
     if (message.includes('Unresolved TypeScript symbol') && message.includes('MixinBase')) {
       return;
     }
 
-    _warnFn.apply(this, [message]);
+    warnFn.apply(this, [message]);
   };
 }

@@ -98,7 +98,7 @@ export const DATA_OBJECT = {
     selector: 'app',
     template: require('./template.html'),
     styleUrls: ['./styles.scss'],
-    encapsulation: ViewEncapsulation.None,
+    encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent {
     disabledState: boolean = false;

@@ -3,12 +3,12 @@ import { join, resolve } from 'path';
 
 
 /* tslint:disable:no-var-requires */
-const _package = require('../../package.json');
+const packageJSON = require('../../package.json');
 /* tslint:enable:no-var-requires */
 
-const buildVersion = _package.version;
+const buildVersion = packageJSON.version;
 
-const angularVersion = _package.requiredAngularVersion;
+const angularVersion = packageJSON.requiredAngularVersion;
 
 // License that will be placed inside of all created bundles.
 const buildLicense = `/**
