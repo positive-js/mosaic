@@ -41,8 +41,8 @@ const MARKDOWN_TAGS_TO_CLASS_ALIAS = [
     'p',
     'table',
     'tbody',
+    'thead',
     'td',
-    'th',
     'tr',
     'ul',
     'pre',
@@ -50,6 +50,8 @@ const MARKDOWN_TAGS_TO_CLASS_ALIAS = [
     'img'
 ];
 
+// separating th to prevent it's conflict with thead
+const MARKDOWN_WHOLE_TAGS_TO_CLASS_ALIAS = [ 'th' ];
 const CLASS_PREFIX: string = 'docs-markdown';
 const tagNameStringAliaser = createTagNameStringAliaser(CLASS_PREFIX);
 
@@ -204,6 +206,13 @@ function createTagNameStringAliaser(classPrefix: string) {
             const regex = new RegExp(`<${tag}`, 'g');
             str = str.replace(regex, (_match: string) =>
                 `<${tag} class="${classPrefix}__${tag}"`
+            );
+        });
+
+        MARKDOWN_WHOLE_TAGS_TO_CLASS_ALIAS.forEach((tag) => {
+            const regex = new RegExp(`<${tag}\s*>`, 'g');
+            str = str.replace(regex, (_match: string) =>
+                `<${tag} class="${classPrefix}__${tag}">`
             );
         });
 
