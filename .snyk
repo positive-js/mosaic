@@ -14,4 +14,14 @@ ignore:
     - gulp-markdown > marked:
         reason: затратно править файлы документации
         expires: '2019-10-30T12:28:17.125Z'
-patch: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-HTTPSPROXYAGENT-469131:
+    - karma-sauce-launcher > sauce-connect-launcher > https-proxy-agent:
+        patched: '2019-10-05T02:25:13.928Z'
+    - karma-sauce-launcher > saucelabs > https-proxy-agent:
+        patched: '2019-10-05T02:25:13.928Z'
+    - snyk > proxy-agent > https-proxy-agent:
+        patched: '2019-10-05T02:25:13.928Z'
+    - snyk > proxy-agent > pac-proxy-agent > https-proxy-agent:
+        patched: '2019-10-05T02:25:13.928Z'
