@@ -64,6 +64,8 @@ export class ComponentViewerComponent implements OnDestroy {
     encapsulation: ViewEncapsulation.None
 })
 export class ComponentOverviewComponent implements OnDestroy {
+    currentUrl: string;
+    routeSeparator: string = '/overview';
     documentName: string = '';
     documentLost: boolean = false;
     isLoad: boolean = true;
@@ -74,12 +76,22 @@ export class ComponentOverviewComponent implements OnDestroy {
     constructor(public componentViewer: ComponentViewerComponent,
                 private router: Router,
                 private ref: ChangeDetectorRef) {
+        this.currentUrl = this.getRoute(router.url);
 
         this.router.events.pipe(takeUntil(this.destroyed)).subscribe((event) => {
             if (event instanceof NavigationStart) {
-                this.isLoad = false;
+                const rootUrl = this.getRoute(event.url);
+
+                if (rootUrl !== this.currentUrl) {
+                    this.currentUrl = rootUrl;
+                    this.isLoad = false;
+                }
             }
         });
+    }
+
+    getRoute(route: string): string {
+        return route.split(this.routeSeparator)[0];
     }
 
     scrollToSelectedContentSection() {
