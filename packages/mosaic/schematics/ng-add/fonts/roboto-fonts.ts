@@ -5,7 +5,7 @@ import { getWorkspace } from '@schematics/angular/utility/config';
 import { Schema } from '../schema';
 
 
-//TODO: add Roboto Fonts
+// TODO: add Roboto Fonts
 export function addRobotoFonts(options: Schema): (host: Tree) => Tree {
 
     return (host: Tree) => {
