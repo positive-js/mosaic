@@ -38,7 +38,6 @@ const MARKDOWN_TAGS_TO_CLASS_ALIAS = [
     'h5',
     'li',
     'ol',
-    'p',
     'table',
     'tbody',
     'thead',
@@ -50,8 +49,11 @@ const MARKDOWN_TAGS_TO_CLASS_ALIAS = [
     'img'
 ];
 
-// separating th to prevent it's conflict with thead
-const MARKDOWN_WHOLE_TAGS_TO_CLASS_ALIAS = [ 'th' ];
+// separating th and p to prevent it's conflict with thead and pre
+const MARKDOWN_WHOLE_TAGS_TO_CLASS_ALIAS = [
+    'th',
+    'p'
+];
 const CLASS_PREFIX: string = 'docs-markdown';
 const tagNameStringAliaser = createTagNameStringAliaser(CLASS_PREFIX);
 
