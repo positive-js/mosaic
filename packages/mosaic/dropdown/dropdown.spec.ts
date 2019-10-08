@@ -1111,7 +1111,7 @@ describe('McDropdown', () => {
             fixture.detectChanges();
 
             const spy = jasmine.createSpy('hover spy');
-            const subscription = instance.rootDropdown._hovered().subscribe(spy);
+            const subscription = instance.rootDropdown.hovered().subscribe(spy);
             const dropdownItems = overlay.querySelectorAll('[mc-dropdown-item]');
 
             dispatchMouseEvent(dropdownItems[0], 'mouseenter');
@@ -1542,7 +1542,7 @@ describe('McDropdown', () => {
             event.preventDefault = jasmine.createSpy('preventDefault spy');
 
             dispatchMouseEvent(overlay.querySelector('[mc-dropdown-item]')!, 'mousedown', 0, 0, event);
-            expect(event.preventDefault).toHaveBeenCalled();
+            expect(event.preventDefault.bind(event)).toHaveBeenCalled();
         });
 
         it('should handle the items being rendered in a repeater', fakeAsync(() => {
@@ -1749,6 +1749,7 @@ class PositionedDropdown {
     yPosition: DropdownPositionY = 'above';
 }
 
+// tslint:disable-next-line: naming-convention
 interface TestableDropdown {
     trigger: McDropdownTrigger;
     triggerEl: ElementRef<HTMLElement>;

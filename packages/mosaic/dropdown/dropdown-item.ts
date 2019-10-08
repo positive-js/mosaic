@@ -20,7 +20,7 @@ import { MC_DROPDOWN_PANEL, McDropdownPanel } from './dropdown-panel';
 // Boilerplate for applying mixins to McDropdownItem.
 /** @docs-private */
 export class McDropdownItemBase {}
-export const _McDropdownItemMixinBase: CanDisableCtor & typeof McDropdownItemBase =
+export const mcDropdownItemMixinBase: CanDisableCtor & typeof McDropdownItemBase =
     mixinDisabled(McDropdownItemBase);
 
 /**
@@ -34,12 +34,12 @@ export const _McDropdownItemMixinBase: CanDisableCtor & typeof McDropdownItemBas
     host: {
         '[attr.role]': 'role',
         class: 'mc-dropdown__item',
-        '[class.mc-dropdown__item_highlighted]': '_highlighted',
-        '[attr.tabindex]': '_getTabIndex()',
+        '[class.mc-dropdown__item_highlighted]': 'highlighted',
+        '[attr.tabindex]': 'getTabIndex()',
         '[attr.aria-disabled]': 'disabled.toString()',
         '[attr.disabled]': 'disabled || null',
-        '(click)': '_checkDisabled($event)',
-        '(mouseenter)': '_handleMouseEnter()'
+        '(click)': 'checkDisabled($event)',
+        '(mouseenter)': 'handleMouseEnter()'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
@@ -47,10 +47,10 @@ export const _McDropdownItemMixinBase: CanDisableCtor & typeof McDropdownItemBas
         <div #content>
             <ng-content></ng-content>
         </div>
-        <i *ngIf="_triggersNestedDropdown" mc-icon="mc-angle-right-M_16" class="mc-dropdown__trigger"></i>
+        <i *ngIf="triggersNestedDropdown" mc-icon="mc-angle-right-M_16" class="mc-dropdown__trigger"></i>
     `
 })
-export class McDropdownItem extends _McDropdownItemMixinBase
+export class McDropdownItem extends mcDropdownItemMixinBase
     implements IFocusableOption, CanDisable, OnDestroy {
 
     /** ARIA role for the dropdown item. */
@@ -58,16 +58,16 @@ export class McDropdownItem extends _McDropdownItemMixinBase
 
     @ViewChild('content', {static: false}) content;
 
-    private _document: Document;
-
     /** Stream that emits when the dropdown item is hovered. */
-    readonly _hovered: Subject<McDropdownItem> = new Subject<McDropdownItem>();
+    readonly hovered: Subject<McDropdownItem> = new Subject<McDropdownItem>();
 
     /** Whether the dropdown item is highlighted. */
-    _highlighted: boolean = false;
+    highlighted: boolean = false;
 
     /** Whether the dropdown item acts as a trigger for a nested dropdown. */
-    _triggersNestedDropdown: boolean = false;
+    triggersNestedDropdown: boolean = false;
+
+    private document: Document;
 
     constructor(
         private _elementRef: ElementRef<HTMLElement>,
@@ -87,15 +87,15 @@ export class McDropdownItem extends _McDropdownItemMixinBase
             _parentDropdownPanel.addItem(this);
         }
 
-        this._document = document;
+        this.document = document;
     }
 
     /** Focuses the dropdown item. */
     focus(origin: FocusOrigin = 'program'): void {
         if (this._focusMonitor) {
-            this._focusMonitor.focusVia(this._getHostElement(), origin);
+            this._focusMonitor.focusVia(this.getHostElement(), origin);
         } else {
-            this._getHostElement().focus();
+            this.getHostElement().focus();
         }
     }
 
@@ -108,21 +108,21 @@ export class McDropdownItem extends _McDropdownItemMixinBase
             this._parentDropdownPanel.removeItem(this);
         }
 
-        this._hovered.complete();
+        this.hovered.complete();
     }
 
     /** Used to set the `tabindex`. */
-    _getTabIndex(): string {
+    getTabIndex(): string {
         return this.disabled ? '-1' : '0';
     }
 
     /** Returns the host DOM element. */
-    _getHostElement(): HTMLElement {
+    getHostElement(): HTMLElement {
         return this._elementRef.nativeElement;
     }
 
     /** Prevents the default element actions if it is disabled. */
-    _checkDisabled(event: Event): void {
+    checkDisabled(event: Event): void {
         if (this.disabled) {
             event.preventDefault();
             event.stopPropagation();
@@ -130,15 +130,15 @@ export class McDropdownItem extends _McDropdownItemMixinBase
     }
 
     /** Emits to the hover stream. */
-    _handleMouseEnter() {
-        this._hovered.next(this);
+    handleMouseEnter() {
+        this.hovered.next(this);
     }
 
     /** Gets the label to be used when determining whether the option should be focused. */
     getLabel(): string {
         const element: HTMLElement = this.content.nativeElement;
         // tslint:disable-next-line:no-magic-numbers
-        const textNodeType = this._document ? this._document.TEXT_NODE : 3;
+        const textNodeType = this.document ? this.document.TEXT_NODE : 3;
         let output = '';
 
         if (element.childNodes) {
