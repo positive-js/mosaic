@@ -39,6 +39,24 @@ const DOCS: { [key: string]: DocCategory[] } = {
                     name: 'Badges',
                     summary: '',
                     examples: ['badges-types']
+                },
+                {
+                    id: 'icon',
+                    name: 'Icon',
+                    summary: '',
+                    examples: ['icon-types']
+                },
+                {
+                    id: 'progress-bar',
+                    name: 'Progress-bar',
+                    summary: '',
+                    examples: ['progress-bar-types']
+                },
+                {
+                    id: 'progress-spinner',
+                    name: 'Progress-spinner',
+                    summary: '',
+                    examples: ['progress-spinner-types']
                 }
             ]
         },
@@ -114,6 +132,12 @@ const DOCS: { [key: string]: DocCategory[] } = {
                     name: 'Splitter',
                     summary: '',
                     examples: ['splitter-types']
+                },
+                {
+                    id: 'divider',
+                    name: 'Divider',
+                    summary: '',
+                    examples: ['divider-types']
                 }
             ]
         },
@@ -127,6 +151,19 @@ const DOCS: { [key: string]: DocCategory[] } = {
                     name: 'Button',
                     summary: 'An interactive button with a range of presentation options.',
                     examples: ['button-types']
+                }
+            ]
+        },
+        {
+            id: 'core/styles',
+            name: 'Styles',
+            summary: 'styles',
+            items: [
+                {
+                    id: 'typography',
+                    name: 'Typography',
+                    summary: '',
+                    examples: ['typography-types']
                 }
             ]
         }
