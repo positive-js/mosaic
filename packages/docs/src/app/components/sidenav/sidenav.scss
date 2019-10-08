@@ -9,12 +9,12 @@
     position: fixed;
     top: 64px;
     bottom: 0;
-    z-index: 2;
+    z-index: 101;
 
     overflow: hidden;
     overflow-y: auto;
     max-height: 100%;
-    width: 360px;
+    width: 300px;
 
     padding: {
         top: 10px;
