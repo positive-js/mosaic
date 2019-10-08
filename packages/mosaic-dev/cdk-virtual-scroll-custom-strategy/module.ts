@@ -7,7 +7,10 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy {
     constructor() {
-        super(50, 250, 500);
+        const itemSize = 50;
+        const minBufferPx = 250;
+        const maxBufferPx = 500;
+        super(itemSize, minBufferPx, maxBufferPx);
     }
 }
 
