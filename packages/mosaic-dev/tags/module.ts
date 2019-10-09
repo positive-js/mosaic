@@ -28,12 +28,15 @@ import { map } from 'rxjs/operators';
     encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent implements AfterViewInit {
+    addOnBlur = false;
     visible = true;
     tagCtrl = new FormControl();
 
     simpleTags = ['tag', 'tag1', 'tag2', 'tag3', 'tag4'];
 
     inputTags = ['tag', 'tag1', 'tag2', 'tag3', 'tag4'];
+
+    enterTags = ['tag', 'tag1', 'tag2', 'tag3', 'tag4'];
 
     autocompleteAllTags: string[] = ['tag1', 'tag2', 'tag3', 'tag4', 'tag5', 'tag6', 'tag7', 'tag8', 'tag9', 'tag10'];
     autocompleteSelectedTags: string[] = ['tag1'];
@@ -47,6 +50,9 @@ export class DemoComponent implements AfterViewInit {
 
     @ViewChild('autocompleteTagInput', {static: false}) autocompleteTagInput: ElementRef<HTMLInputElement>;
     @ViewChild('autocompleteTagList', {static: false}) autocompleteTagList: McTagList;
+
+    @ViewChild('enterTagInput', {static: false}) enterTagInput: ElementRef<HTMLInputElement>;
+    @ViewChild('enterInputTagList', {static: false}) enterInputTagList: McTagList;
 
     ngAfterViewInit(): void {
         this.autocompleteFilteredTags = merge(
@@ -97,6 +103,19 @@ export class DemoComponent implements AfterViewInit {
         }
     }
 
+    enterOnCreate(event: McTagInputEvent): void {
+        const input = event.input;
+        const value = event.value;
+
+        if ((value || '').trim()) {
+            this.enterTags.push(value.trim());
+        }
+
+        if (input) {
+            input.value = '';
+        }
+    }
+
     autocompleteOnSelect(event: McAutocompleteSelectedEvent): void {
         if (event.option.value.new) {
             this.autocompleteSelectedTags.push(event.option.value.value);
@@ -128,6 +147,14 @@ export class DemoComponent implements AfterViewInit {
 
         if (index >= 0) {
             this.inputTags.splice(index, 1);
+        }
+    }
+
+    enterOnRemoveTag(tag: string): void {
+        const index = this.enterTags.indexOf(tag);
+
+        if (index >= 0) {
+            this.enterTags.splice(index, 1);
         }
     }
 
