@@ -1,3 +1,10 @@
+## 8.0.2 "Yellowy Verification" (2019-10-09)
+
+### Mosaic
+
+
+ * bug fix  **tags:** updating default _addOnBlur value ([#292](https://github.com/positive-js/mosaic/issues/292)) ([baa710d4e2a69ae0890d94623d9f4fc1b76ddce8](https://github.com/positive-js/mosaic/commit/baa710d4e2a69ae0890d94623d9f4fc1b76ddce8))
+
 ## 8.0.1 "Relentless Quotient" (2019-09-30)
 
 ### Mosaic
