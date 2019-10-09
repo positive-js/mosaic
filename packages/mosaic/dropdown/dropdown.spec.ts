@@ -1111,7 +1111,7 @@ describe('McDropdown', () => {
             fixture.detectChanges();
 
             const spy = jasmine.createSpy('hover spy');
-            const subscription = instance.rootDropdown._hovered().subscribe(spy);
+            const subscription = instance.rootDropdown.hovered().subscribe(spy);
             const dropdownItems = overlay.querySelectorAll('[mc-dropdown-item]');
 
             dispatchMouseEvent(dropdownItems[0], 'mouseenter');
@@ -1201,7 +1201,7 @@ describe('McDropdown', () => {
             fixture.detectChanges();
 
             // Invoke the handler directly since the fake events are flaky on disabled elements.
-            items[1].componentInstance._handleMouseEnter();
+            items[1].componentInstance.handleMouseEnter();
             fixture.detectChanges();
             tick(500);
 
@@ -1224,7 +1224,7 @@ describe('McDropdown', () => {
             fixture.detectChanges();
 
             // Invoke the handler directly since the fake events are flaky on disabled elements.
-            item.componentInstance._handleMouseEnter();
+            item.componentInstance.handleMouseEnter();
             fixture.detectChanges();
             tick(500);
 
@@ -1542,6 +1542,7 @@ describe('McDropdown', () => {
             event.preventDefault = jasmine.createSpy('preventDefault spy');
 
             dispatchMouseEvent(overlay.querySelector('[mc-dropdown-item]')!, 'mousedown', 0, 0, event);
+            // tslint:disable-next-line: no-unbound-method
             expect(event.preventDefault).toHaveBeenCalled();
         });
 
@@ -1749,6 +1750,7 @@ class PositionedDropdown {
     yPosition: DropdownPositionY = 'above';
 }
 
+// tslint:disable-next-line: naming-convention
 interface TestableDropdown {
     trigger: McDropdownTrigger;
     triggerEl: ElementRef<HTMLElement>;

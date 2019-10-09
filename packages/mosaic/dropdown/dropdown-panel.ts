@@ -16,7 +16,7 @@ export const MC_DROPDOWN_PANEL = new InjectionToken<McDropdownPanel>('MC_DROPDOW
  * Interface for a custom dropdown panel that can be used with `mcDropdownTriggerFor`.
  * @docs-private
  */
-// tslint:disable-next-line:interface-name
+// tslint:disable-next-line:naming-convention
 export interface McDropdownPanel<T = any> {
     xPosition: DropdownPositionX;
     yPosition: DropdownPositionY;

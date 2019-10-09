@@ -35,7 +35,7 @@ import { DropdownPositionX, DropdownPositionY } from './dropdown-positions';
 
 
 /** Default `mc-dropdown` options that can be overridden. */
-// tslint:disable-next-line:interface-name
+// tslint:disable-next-line:naming-convention
 export interface McDropdownDefaultOptions {
     /** The x-axis position of the dropdown. */
     xPosition: DropdownPositionX;
@@ -64,6 +64,7 @@ export const MC_DROPDOWN_DEFAULT_OPTIONS =
     });
 
 /** @docs-private */
+// tslint:disable-next-line:naming-convention
 export function MC_DROPDOWN_DEFAULT_OPTIONS_FACTORY(): McDropdownDefaultOptions {
     return {
         overlapTriggerX: true,
@@ -157,19 +158,19 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
      */
     @Input('class')
     set panelClass(classes: string) {
-        const previousPanelClass = this._previousPanelClass;
+        const previousPanelClass = this.previousPanelClass;
 
         if (previousPanelClass && previousPanelClass.length) {
             previousPanelClass.split(' ').forEach((className: string) => {
-                this._classList[className] = false;
+                this.classList[className] = false;
             });
         }
 
-        this._previousPanelClass = classes;
+        this.previousPanelClass = classes;
 
         if (classes && classes.length) {
             classes.split(' ').forEach((className: string) => {
-                this._classList[className] = true;
+                this.classList[className] = true;
             });
 
             this._elementRef.nativeElement.className = '';
@@ -182,16 +183,16 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
     private _hasBackdrop: boolean | undefined = this._defaultOptions.hasBackdrop;
 
     /** Config object to be passed into the dropdown's ngClass */
-    _classList: { [key: string]: boolean } = {};
+    classList: { [key: string]: boolean } = {};
 
     /** Current state of the panel animation. */
-    _panelAnimationState: 'void' | 'enter' = 'void';
+    panelAnimationState: 'void' | 'enter' = 'void';
 
     /** Emits whenever an animation on the dropdown completes. */
-    _animationDone = new Subject<AnimationEvent>();
+    animationDone = new Subject<AnimationEvent>();
 
     /** Whether the dropdown is animating. */
-    _isAnimating: boolean;
+    isAnimating: boolean;
 
     /** Parent dropdown of the current dropdown panel. */
     parent: McDropdownPanel | undefined;
@@ -220,18 +221,18 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
     @Output() readonly closed: EventEmitter<void | 'click' | 'keydown' | 'tab'> =
         new EventEmitter<void | 'click' | 'keydown' | 'tab'>();
 
-    private _previousPanelClass: string;
+    private previousPanelClass: string;
 
-    private _keyManager: FocusKeyManager<McDropdownItem>;
+    private keyManager: FocusKeyManager<McDropdownItem>;
 
     /** Dropdown items inside the current dropdown. */
-    private _items: McDropdownItem[] = [];
+    private itemsArray: McDropdownItem[] = [];
 
     /** Emits whenever the amount of dropdown items changes. */
-    private _itemChanges = new Subject<McDropdownItem[]>();
+    private itemChanges = new Subject<McDropdownItem[]>();
 
     /** Subscription to tab events on the dropdown panel */
-    private _tabSubscription = Subscription.EMPTY;
+    private tabSubscription = Subscription.EMPTY;
 
     constructor(
         private _elementRef: ElementRef<HTMLElement>,
@@ -243,26 +244,27 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
     }
 
     ngAfterContentInit() {
-        this._keyManager = new FocusKeyManager<McDropdownItem>(this.items).withWrap().withTypeAhead();
-        this._tabSubscription = this._keyManager.tabOut.subscribe(() => this.closed.emit('tab'));
+        this.keyManager = new FocusKeyManager<McDropdownItem>(this.items).withWrap().withTypeAhead();
+        this.tabSubscription = this.keyManager.tabOut.subscribe(() => this.closed.emit('tab'));
     }
 
     ngOnDestroy() {
-        this._tabSubscription.unsubscribe();
+        this.tabSubscription.unsubscribe();
         this.closed.complete();
     }
 
     /** Stream that emits whenever the hovered dropdown item changes. */
-    _hovered(): Observable<McDropdownItem> {
-        return this._itemChanges.pipe(
-            startWith(this._items),
-            switchMap((items) => merge(...items.map((item) => item._hovered)))
+    hovered(): Observable<McDropdownItem> {
+        return this.itemChanges.pipe(
+            startWith(this.itemsArray),
+            switchMap((items) => merge(...items.map((item) => item.hovered)))
         );
     }
 
     /** Handle a keyboard event from the dropdown, delegating to the appropriate action. */
-    _handleKeydown(event: KeyboardEvent) {
-        const keyCode = event.keyCode;
+    handleKeydown(event: KeyboardEvent) {
+        // tslint:disable-next-line:deprecation
+        const keyCode = event.key || event.keyCode;
 
         switch (keyCode) {
             case ESCAPE:
@@ -280,10 +282,10 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
                 break;
             default:
                 if (keyCode === UP_ARROW || keyCode === DOWN_ARROW) {
-                    this._keyManager.setFocusOrigin('keyboard');
+                    this.keyManager.setFocusOrigin('keyboard');
                 }
 
-                this._keyManager.onKeydown(event);
+                this.keyManager.onKeydown(event);
         }
     }
 
@@ -296,9 +298,9 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
         if (this.lazyContent) {
             this._ngZone.onStable.asObservable()
                 .pipe(take(1))
-                .subscribe(() => this._keyManager.setFocusOrigin(origin).setFirstItemActive());
+                .subscribe(() => this.keyManager.setFocusOrigin(origin).setFirstItemActive());
         } else {
-            this._keyManager.setFocusOrigin(origin).setFirstItemActive();
+            this.keyManager.setFocusOrigin(origin).setFirstItemActive();
         }
     }
 
@@ -307,7 +309,7 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
      * the user to start from the first option when pressing the down arrow.
      */
     resetActiveItem() {
-        this._keyManager.setActiveItem(-1);
+        this.keyManager.setActiveItem(-1);
     }
 
     /**
@@ -320,9 +322,9 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
         // `mc-dropdown` ancestor. If we used `@ContentChildren(McDropdownItem, {descendants: true})`,
         // all descendant items will bleed into the top-level dropdown in the case where the consumer
         // has `mc-dropdown` instances nested inside each other.
-        if (this._items.indexOf(item) === -1) {
-            this._items.push(item);
-            this._itemChanges.next(this._items);
+        if (this.itemsArray.indexOf(item) === -1) {
+            this.itemsArray.push(item);
+            this.itemChanges.next(this.itemsArray);
         }
     }
 
@@ -331,11 +333,11 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
      * @docs-private
      */
     removeItem(item: McDropdownItem) {
-        const index = this._items.indexOf(item);
+        const index = this.itemsArray.indexOf(item);
 
-        if (this._items.indexOf(item) > -1) {
-            this._items.splice(index, 1);
-            this._itemChanges.next(this._items);
+        if (this.itemsArray.indexOf(item) > -1) {
+            this.itemsArray.splice(index, 1);
+            this.itemChanges.next(this.itemsArray);
         }
     }
 
@@ -347,7 +349,7 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
      * @docs-private
      */
     setPositionClasses(posX: DropdownPositionX = this.xPosition, posY: DropdownPositionY = this.yPosition) {
-        const classes = this._classList;
+        const classes = this.classList;
         classes['mc-dropdown-before'] = posX === 'before';
         classes['mc-dropdown-after'] = posX === 'after';
         classes['mc-dropdown-above'] = posY === 'above';
@@ -355,23 +357,23 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
     }
 
     /** Starts the enter animation. */
-    _startAnimation() {
-        this._panelAnimationState = 'enter';
+    startAnimation() {
+        this.panelAnimationState = 'enter';
     }
 
     /** Resets the panel animation to its initial state. */
-    _resetAnimation() {
-        this._panelAnimationState = 'void';
+    resetAnimation() {
+        this.panelAnimationState = 'void';
     }
 
     /** Callback that is invoked when the panel animation completes. */
-    _onAnimationDone(event: AnimationEvent) {
-        this._animationDone.next(event);
-        this._isAnimating = false;
+    onAnimationDone(event: AnimationEvent) {
+        this.animationDone.next(event);
+        this.isAnimating = false;
     }
 
-    _onAnimationStart(event: AnimationEvent) {
-        this._isAnimating = true;
+    onAnimationStart(event: AnimationEvent) {
+        this.isAnimating = true;
 
         // Scroll the content element to the top as soon as the animation starts. This is necessary,
         // because we move focus to the first item while it's still being animated, which can throw
@@ -379,7 +381,7 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
         // when the animation is done, however moving focus asynchronously will interrupt screen
         // readers which are in the process of reading out the dropdown already. We take the `element`
         // from the `event` since we can't use a `ViewChild` to access the pane.
-        if (event.toState === 'enter' && this._keyManager.activeItemIndex === 0) {
+        if (event.toState === 'enter' && this.keyManager.activeItemIndex === 0) {
             event.element.scrollTop = 0;
         }
     }
