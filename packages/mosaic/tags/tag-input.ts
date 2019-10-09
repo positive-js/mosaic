@@ -85,7 +85,7 @@ export class McTagInput implements McTagTextControl, OnChanges {
         this._addOnBlur = coerceBooleanProperty(value);
     }
 
-    private _addOnBlur: boolean = false;
+    private _addOnBlur: boolean = true;
 
     /** Whether the input is disabled. */
     @Input()
