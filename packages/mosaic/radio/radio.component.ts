@@ -36,7 +36,7 @@ export class McRadioChange {
 // Boilerplate for applying mixins to McRadioGroup.
 /** @docs-private */
 export class McRadioGroupBase {}
-export const _McRadioGroupMixinBase: CanDisableCtor & typeof McRadioGroupBase = mixinDisabled(McRadioGroupBase);
+export const mcRadioGroupMixinBase: CanDisableCtor & typeof McRadioGroupBase = mixinDisabled(McRadioGroupBase);
 
 /**
  * Provider Expression that allows mc-radio-group to register as a ControlValueAccessor. This
@@ -59,7 +59,7 @@ export const MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR: any = {
     },
     inputs: ['disabled']
 })
-export class McRadioGroup extends _McRadioGroupMixinBase
+export class McRadioGroup extends mcRadioGroupMixinBase
     implements AfterContentInit, ControlValueAccessor, CanDisable {
 
     /** Name of the radio button group. All radio buttons inside this group will use this name. */
@@ -127,7 +127,7 @@ export class McRadioGroup extends _McRadioGroupMixinBase
 
     /** Child radio buttons. */
     @ContentChildren(forwardRef(() => McRadioButton), { descendants: true })
-    _radios: QueryList<McRadioButton>;
+    radios: QueryList<McRadioButton>;
 
     /**
      * Selected value for group. Should equal the value of the selected radio button if there *is*
@@ -144,7 +144,7 @@ export class McRadioGroup extends _McRadioGroupMixinBase
     private _selected: McRadioButton | null = null;
 
     /** Whether the `value` has been set to its initial value. */
-    private _isInitialized: boolean = false;
+    private isInitialized: boolean = false;
 
     /** Whether the labels should appear after or before the radio-buttons. Defaults to 'after' */
     private _labelPosition: 'before' | 'after' = 'after';
@@ -186,7 +186,7 @@ export class McRadioGroup extends _McRadioGroupMixinBase
         // Mark this component as initialized in AfterContentInit because the initial value can
         // possibly be set by NgModel on McRadioGroup, and it is possible that the OnInit of the
         // NgModel occurs *after* the OnInit of the McRadioGroup.
-        this._isInitialized = true;
+        this.isInitialized = true;
     }
 
     /**
@@ -201,14 +201,14 @@ export class McRadioGroup extends _McRadioGroupMixinBase
 
     /** Dispatch change event with current selection and group value. */
     emitChangeEvent(): void {
-        if (this._isInitialized) {
+        if (this.isInitialized) {
             this.change.emit(new McRadioChange(this._selected!, this._value));
         }
     }
 
     markRadiosForCheck() {
-        if (this._radios) {
-            this._radios.forEach((radio) => radio.markForCheck());
+        if (this.radios) {
+            this.radios.forEach((radio) => radio.markForCheck());
         }
     }
 
@@ -248,8 +248,8 @@ export class McRadioGroup extends _McRadioGroupMixinBase
     }
 
     private updateRadioButtonNames(): void {
-        if (this._radios) {
-            this._radios.forEach((radio) => {
+        if (this.radios) {
+            this.radios.forEach((radio) => {
                 radio.name = this.name;
             });
         }
@@ -260,9 +260,9 @@ export class McRadioGroup extends _McRadioGroupMixinBase
         // If the value already matches the selected radio, do nothing.
         const isAlreadySelected = this._selected !== null && this._selected.value === this._value;
 
-        if (this._radios != null && !isAlreadySelected) {
+        if (this.radios != null && !isAlreadySelected) {
             this._selected = null;
-            this._radios.forEach((radio) => {
+            this.radios.forEach((radio) => {
                 radio.checked = this.value === radio.value;
                 if (radio.checked) {
                     this._selected = radio;
@@ -281,10 +281,11 @@ export class McRadioButtonBase {
     // defined to properly work.
     disabled: boolean;
 
+    // tslint:disable-next-line:naming-convention
     constructor(public _elementRef: ElementRef) {}
 }
 
-export const _McRadioButtonMixinBase:
+export const mcRadioButtonMixinBase:
     CanColorCtor &
     HasTabIndexCtor &
     typeof McRadioButtonBase =
@@ -306,7 +307,7 @@ export const _McRadioButtonMixinBase:
         '[class.mc-disabled]': 'disabled'
     }
 })
-export class McRadioButton extends _McRadioButtonMixinBase
+export class McRadioButton extends mcRadioButtonMixinBase
     implements OnInit, AfterViewInit, OnDestroy, CanColor, HasTabIndex {
 
     /** Whether this radio button is checked. */
@@ -384,28 +385,6 @@ export class McRadioButton extends _McRadioButtonMixinBase
     set labelPosition(value) {
         this._labelPosition = value;
     }
-    private _labelPosition: 'before' | 'after';
-
-    /* tslint:disable:member-ordering */
-    private readonly _uniqueId: string = `mc-radio-${++nextUniqueId}`;
-
-    /** The unique ID for the radio button. */
-    @Input() id: string = this._uniqueId;
-
-    /** ID of the native input element inside `<mc-radio-button>` */
-    get inputId(): string { return `${this.id || this._uniqueId}-input`; }
-
-    /** Whether this radio is checked. */
-    private _checked: boolean = false;
-
-    /** Whether this radio is disabled. */
-    private _disabled: boolean;
-
-    /** Whether this radio is required. */
-    private _required: boolean;
-
-    /** Value assigned to this radio. */
-    private _value: any = null;
 
     /** Analog to HTML 'name' attribute used to group radios for unique selection. */
     @Input() name: string;
@@ -420,7 +399,7 @@ export class McRadioButton extends _McRadioButtonMixinBase
     @Input('aria-describedby') ariaDescribedby: string;
 
     /** The native `<input type=radio>` element */
-    @ViewChild('input', {static: false}) _inputElement: ElementRef;
+    @ViewChild('input', {static: false}) inputElement: ElementRef;
 
     /**
      * Event emitted when the checked state of this radio button changes.
@@ -435,6 +414,29 @@ export class McRadioButton extends _McRadioButtonMixinBase
     @Input()
     isFocused: boolean = false;
 
+    /** The unique ID for the radio button. */
+    @Input() id: string;
+
+    /** ID of the native input element inside `<mc-radio-button>` */
+    get inputId(): string { return `${this.id || this.uniqueId}-input`; }
+
+    private _labelPosition: 'before' | 'after';
+
+    /* tslint:disable:member-ordering */
+    private readonly uniqueId: string = `mc-radio-${++nextUniqueId}`;
+
+    /** Whether this radio is checked. */
+    private _checked: boolean = false;
+
+    /** Whether this radio is disabled. */
+    private _disabled: boolean;
+
+    /** Whether this radio is required. */
+    private _required: boolean;
+
+    /** Value assigned to this radio. */
+    private _value: any = null;
+
     constructor(
         @Optional() radioGroup: McRadioGroup,
         elementRef: ElementRef,
@@ -444,6 +446,8 @@ export class McRadioButton extends _McRadioButtonMixinBase
     ) {
 
         super(elementRef);
+
+        this.id = this.uniqueId;
 
         this.radioGroup = radioGroup;
 
@@ -481,7 +485,7 @@ export class McRadioButton extends _McRadioButtonMixinBase
 
     /** Focuses the radio button. */
     focus(): void {
-        this._inputElement.nativeElement.focus();
+        this.inputElement.nativeElement.focus();
     }
 
     /**
