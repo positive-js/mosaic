@@ -22,9 +22,9 @@ import { Subject } from 'rxjs';
 export class McDropdownContent implements OnDestroy {
 
     /** Emits when the dropdown content has been attached. */
-    _attached = new Subject<void>();
-    private _portal: TemplatePortal<any>;
-    private _outlet: DomPortalOutlet;
+    attached = new Subject<void>();
+    private portal: TemplatePortal;
+    private outlet: DomPortalOutlet;
 
     constructor(
         private _template: TemplateRef<any>,
@@ -39,14 +39,14 @@ export class McDropdownContent implements OnDestroy {
      * @docs-private
      */
     attach(context: any = {}) {
-        if (!this._portal) {
-            this._portal = new TemplatePortal(this._template, this._viewContainerRef);
+        if (!this.portal) {
+            this.portal = new TemplatePortal(this._template, this._viewContainerRef);
         }
 
         this.detach();
 
-        if (!this._outlet) {
-            this._outlet = new DomPortalOutlet(this._document.createElement('div'),
+        if (!this.outlet) {
+            this.outlet = new DomPortalOutlet(this._document.createElement('div'),
                 this._componentFactoryResolver, this._appRef, this._injector);
         }
 
@@ -55,9 +55,9 @@ export class McDropdownContent implements OnDestroy {
         // Because we support opening the same dropdown from different triggers (which in turn have their
         // own `OverlayRef` panel), we have to re-insert the host element every time, otherwise we
         // risk it staying attached to a pane that's no longer in the DOM.
-        element.parentNode!.insertBefore(this._outlet.outletElement, element);
-        this._portal.attach(this._outlet, context);
-        this._attached.next();
+        element.parentNode!.insertBefore(this.outlet.outletElement, element);
+        this.portal.attach(this.outlet, context);
+        this.attached.next();
     }
 
     /**
@@ -65,14 +65,14 @@ export class McDropdownContent implements OnDestroy {
      * @docs-private
      */
     detach() {
-        if (this._portal.isAttached) {
-            this._portal.detach();
+        if (this.portal.isAttached) {
+            this.portal.detach();
         }
     }
 
     ngOnDestroy() {
-        if (this._outlet) {
-            this._outlet.dispose();
+        if (this.outlet) {
+            this.outlet.dispose();
         }
     }
 }
