@@ -1201,7 +1201,7 @@ describe('McDropdown', () => {
             fixture.detectChanges();
 
             // Invoke the handler directly since the fake events are flaky on disabled elements.
-            items[1].componentInstance._handleMouseEnter();
+            items[1].componentInstance.handleMouseEnter();
             fixture.detectChanges();
             tick(500);
 
@@ -1224,7 +1224,7 @@ describe('McDropdown', () => {
             fixture.detectChanges();
 
             // Invoke the handler directly since the fake events are flaky on disabled elements.
-            item.componentInstance._handleMouseEnter();
+            item.componentInstance.handleMouseEnter();
             fixture.detectChanges();
             tick(500);
 
@@ -1542,7 +1542,8 @@ describe('McDropdown', () => {
             event.preventDefault = jasmine.createSpy('preventDefault spy');
 
             dispatchMouseEvent(overlay.querySelector('[mc-dropdown-item]')!, 'mousedown', 0, 0, event);
-            expect(event.preventDefault.bind(event)).toHaveBeenCalled();
+            // tslint:disable-next-line: no-unbound-method
+            expect(event.preventDefault).toHaveBeenCalled();
         });
 
         it('should handle the items being rendered in a repeater', fakeAsync(() => {
