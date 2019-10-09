@@ -22,21 +22,21 @@ export const MIN_VALIDATOR: Provider = {
 export class MinValidator implements Validator, OnChanges {
 
     @Input() min: string;
-    private _validator: ValidatorFn;
-    private _onChange: () => void;
+    private validator: ValidatorFn;
+    private onChange: () => void;
 
     ngOnChanges(changes: SimpleChanges): void {
         if ('min' in changes) {
-            this._createValidator();
-            if (this._onChange) { this._onChange(); }
+            this.createValidator();
+            if (this.onChange) { this.onChange(); }
         }
     }
 
-    validate(c: AbstractControl): ValidationErrors | null { return this._validator(c); }
+    validate(c: AbstractControl): ValidationErrors | null { return this.validator(c); }
 
-    registerOnValidatorChange(fn: () => void): void { this._onChange = fn; }
+    registerOnValidatorChange(fn: () => void): void { this.onChange = fn; }
 
-    private _createValidator(): void { this._validator = Validators.min(parseInt(this.min, 10)); }
+    private createValidator(): void { this.validator = Validators.min(parseInt(this.min, 10)); }
 }
 
 
@@ -63,19 +63,19 @@ export class MaxValidator implements Validator,
     OnChanges {
 
     @Input() max: string;
-    private _validator: ValidatorFn;
-    private _onChange: () => void;
+    private validator: ValidatorFn;
+    private onChange: () => void;
 
     ngOnChanges(changes: SimpleChanges): void {
         if ('max' in changes) {
-            this._createValidator();
-            if (this._onChange) { this._onChange(); }
+            this.createValidator();
+            if (this.onChange) { this.onChange(); }
         }
     }
 
-    validate(c: AbstractControl): ValidationErrors | null { return this._validator(c); }
+    validate(c: AbstractControl): ValidationErrors | null { return this.validator(c); }
 
-    registerOnValidatorChange(fn: () => void): void { this._onChange = fn; }
+    registerOnValidatorChange(fn: () => void): void { this.onChange = fn; }
 
-    private _createValidator(): void { this._validator = Validators.max(parseInt(this.max, 10)); }
+    private createValidator(): void { this.validator = Validators.max(parseInt(this.max, 10)); }
 }
