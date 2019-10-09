@@ -512,7 +512,7 @@ export class McAutocompleteTrigger implements ControlValueAccessor, OnDestroy {
         // If it's used within a `MatFormField`, we should set it through the property so it can go
         // through change detection.
         if (this.formField) {
-            this.formField._control.value = inputValue;
+            this.formField.control.value = inputValue;
         } else {
             this.elementRef.nativeElement.value = inputValue;
         }
