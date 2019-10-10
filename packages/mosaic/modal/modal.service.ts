@@ -32,6 +32,7 @@ export class ModalBuilderForService {
         this.overlayRef.keydownEvents()
             // @ts-ignore
             .pipe(filter((event: KeyboardEvent) => {
+                // tslint:disable-next-line:deprecation replacement .key isn't supported in Edge
                 return event.keyCode === ESCAPE && options.mcCloseByESC;
             }))
             .subscribe(() => this.modalRef!.instance.close());
@@ -134,6 +135,7 @@ export class McModalService {
         return this.simpleConfirm(options, 'success');
     }
 
+    // tslint:disable-next-line: no-reserved-keywords
     delete<T>(options: IModalOptionsForService<T> = {}): McModalRef<T> {
         return this.simpleConfirm(options, 'warn');
     }

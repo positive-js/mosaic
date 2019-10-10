@@ -15,12 +15,12 @@ export class McModalControlService {
 
     // Track singleton afterAllClose through over the injection tree
     get afterAllClose(): Subject<void> {
-        return this.parentService ? this.parentService.afterAllClose : this.rootAfterAllClose!;
+        return this.parentService ? this.parentService.afterAllClose : this.rootAfterAllClose;
     }
 
     // Track singleton openModals array through over the injection tree
     get openModals(): McModalRef[] {
-        return this.parentService ? this.parentService.openModals : this.rootOpenModals!;
+        return this.parentService ? this.parentService.openModals : this.rootOpenModals;
     }
 
     // @ts-ignore
