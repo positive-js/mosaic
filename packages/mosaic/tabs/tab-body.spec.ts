@@ -11,7 +11,11 @@ import { McTabBody, McTabBodyPortal } from './tab-body';
 
 describe('McTabBody', () => {
     let dir: Direction = 'ltr';
-    const dirChange: Subject<Direction> = new Subject<Direction>();
+    let dirChange: Subject<Direction>;
+
+    beforeAll(() => {
+        dirChange = new Subject<Direction>();
+    });
 
     beforeEach(async(() => {
         dir = 'ltr';
