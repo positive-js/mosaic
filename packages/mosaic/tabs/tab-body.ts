@@ -1,6 +1,6 @@
 import { AnimationEvent } from '@angular/animations';
 import { Directionality, Direction } from '@angular/cdk/bidi';
-import { TemplatePortal, CdkPortalOutlet, PortalHostDirective } from '@angular/cdk/portal';
+import { TemplatePortal, CdkPortalOutlet } from '@angular/cdk/portal';
 import {
     Component,
     ChangeDetectorRef,
@@ -87,7 +87,7 @@ export class McTabBody implements OnInit, OnDestroy {
     @Output() readonly onCentered: EventEmitter<void> = new EventEmitter<void>(true);
 
     /** The portal host inside of this container into which the tab body content will be loaded. */
-    @ViewChild(PortalHostDirective, {static: false}) portalHost: PortalHostDirective;
+    @ViewChild(CdkPortalOutlet, {static: false}) portalHost: CdkPortalOutlet;
 
     /** The tab body content to display. */
     @Input('content') content: TemplatePortal;

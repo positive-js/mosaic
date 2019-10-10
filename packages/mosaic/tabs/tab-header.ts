@@ -87,7 +87,7 @@ export class McTabHeader extends McTabHeaderBase
 
     /** Tracks which element has focus; used for keyboard navigation */
     get focusIndex(): number {
-        return this.keyManager ? this.keyManager.activeItemIndex! : 0;
+        return this.keyManager ? this.keyManager.activeItemIndex : 0;
     }
 
     /** When the focus index is set, we must manually send focus to the correct label */
@@ -206,6 +206,7 @@ export class McTabHeader extends McTabHeaderBase
     }
 
     handleKeydown(event: KeyboardEvent) {
+        // tslint:disable-next-line: deprecation
         switch (event.keyCode) {
             case HOME:
                 this.keyManager.setFirstItemActive();
@@ -410,7 +411,7 @@ export class McTabHeader extends McTabHeaderBase
         }
 
         // The view length is the visible width of the tab labels.
-        const viewLength = this.tabListContainer.nativeElement.offsetWidth;
+        const viewLength: number = this.tabListContainer.nativeElement.offsetWidth;
 
         let labelBeforePos: number;
         let labelAfterPos: number;
