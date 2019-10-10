@@ -76,7 +76,7 @@ export interface IMcTabsConfig {
 }
 
 /** Injection token that can be used to provide the default options the tabs module. */
-export const MC_TABS_CONFIG = new InjectionToken('MC_TABS_CONFIG');
+export const MC_TABS_CONFIG = new InjectionToken<string>('MC_TABS_CONFIG');
 
 // Boilerplate for applying mixins to McTabGroup.
 /** @docs-private */
