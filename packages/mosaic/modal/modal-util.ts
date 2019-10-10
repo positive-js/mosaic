@@ -22,4 +22,4 @@ export class ModalUtil {
     }
 }
 
-export default new ModalUtil(document);
+export const modalUtilObject = new ModalUtil(document);

@@ -7,6 +7,7 @@ import { McModalComponent } from './modal.component';
  * API class that public to users to handle the modal instance.
  * McModalRef is aim to avoid accessing to the modal instance directly by users.
  */
+// tslint:disable-next-line:naming-convention
 export abstract class McModalRef<T = any, R = any> {
     abstract afterOpen: Observable<void>;
     abstract afterClose: Observable<R>;
