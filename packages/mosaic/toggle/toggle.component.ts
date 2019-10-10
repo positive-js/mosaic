@@ -25,10 +25,11 @@ let nextUniqueId = 0;
 type ToggleLabelPositionType = 'left' | 'right';
 
 export class McToggleBase {
+    // tslint:disable-next-line: naming-convention
     constructor(public _elementRef: ElementRef) {}
 }
 
-export const _McToggleMixinBase:
+export const mcToggleMixinBase:
     HasTabIndexCtor &
     CanDisableCtor &
     CanColorCtor &
@@ -65,30 +66,25 @@ export class McToggleChange {
         ])
     ]
 })
-export class McToggleComponent extends _McToggleMixinBase
+export class McToggleComponent extends mcToggleMixinBase
     implements ControlValueAccessor, CanColor, CanDisable, HasTabIndex {
 
-    @ViewChild('input', {static: false}) _inputElement: ElementRef;
+    @ViewChild('input', {static: false}) inputElement: ElementRef;
 
     @Input() labelPosition: ToggleLabelPositionType = 'right';
 
     @Input('aria-label') ariaLabel: string = '';
     @Input('aria-labelledby') ariaLabelledby: string | null = null;
 
-    private _uniqueId: string = `mc-toggle-${++nextUniqueId}`;
-
-    // tslint:disable:member-ordering
-    @Input() id: string = this._uniqueId;
+    @Input() id: string;
 
     get inputId(): string {
-        return `${this.id || this._uniqueId}-input`;
+        return `${this.id || this.uniqueId}-input`;
     }
 
     @Input() name: string | null = null;
 
     @Input() value: string;
-
-    private _disabled: boolean = false;
 
     @Input()
     get disabled() {
@@ -102,7 +98,7 @@ export class McToggleComponent extends _McToggleMixinBase
         }
     }
 
-    private _checked: boolean = false;
+    private _disabled: boolean = false;
 
     get checked() {
         return this._checked;
@@ -116,15 +112,22 @@ export class McToggleComponent extends _McToggleMixinBase
         }
     }
 
+    private _checked: boolean = false;
+
     @Output() readonly change: EventEmitter<McToggleChange> =
         new EventEmitter<McToggleChange>();
 
+    private uniqueId: string = `mc-toggle-${++nextUniqueId}`;
+
+    // tslint:disable-next-line:naming-convention
     constructor(public _elementRef: ElementRef,
                 private _focusMonitor: FocusMonitor,
                 private _changeDetectorRef: ChangeDetectorRef,
                 @Attribute('tabindex') tabIndex: string
     ) {
         super(_elementRef);
+
+        this.id =  this.uniqueId;
 
         this.tabIndex = parseInt(tabIndex) || 0;
 
@@ -136,25 +139,25 @@ export class McToggleComponent extends _McToggleMixinBase
     }
 
     focus(): void {
-        this._focusMonitor.focusVia(this._inputElement.nativeElement, 'keyboard');
+        this._focusMonitor.focusVia(this.inputElement.nativeElement, 'keyboard');
     }
 
-    _getAriaChecked(): boolean {
+    getAriaChecked(): boolean {
         return this.checked;
     }
 
-    _onInteractionEvent(event: Event) {
+    onInteractionEvent(event: Event) {
         event.stopPropagation();
     }
 
-    _onLabelTextChange() {
+    onLabelTextChange() {
         this._changeDetectorRef.markForCheck();
     }
 
-    _onInputClick(event: MouseEvent) {
+    onInputClick(event: MouseEvent) {
         event.stopPropagation();
-        this._updateModelValue();
-        this._emitChangeEvent();
+        this.updateModelValue();
+        this.emitChangeEvent();
     }
 
     writeValue(value: any) {
@@ -162,11 +165,11 @@ export class McToggleComponent extends _McToggleMixinBase
     }
 
     registerOnChange(fn: any) {
-        this._onChangeCallback = fn;
+        this.onChangeCallback = fn;
     }
 
     registerOnTouched(fn: any) {
-        this._onTouchedCallback = fn;
+        this.onTouchedCallback = fn;
     }
 
     setDisabledState(isDisabled: boolean) {
@@ -174,23 +177,23 @@ export class McToggleComponent extends _McToggleMixinBase
     }
 
     // tslint:disable-next-line:no-empty
-    private _onTouchedCallback = () => {};
+    private onTouchedCallback = () => {};
 
     // tslint:disable-next-line:no-empty
-    private _onChangeCallback = (_: any) => {};
+    private onChangeCallback = (_: any) => {};
 
-    private _updateModelValue() {
+    private updateModelValue() {
         this._checked = !this.checked;
-        this._onChangeCallback(this.checked);
-        this._onTouchedCallback();
+        this.onChangeCallback(this.checked);
+        this.onTouchedCallback();
     }
 
-    private _emitChangeEvent() {
+    private emitChangeEvent() {
         const event = new McToggleChange();
         event.source = this;
         event.checked = this.checked;
 
-        this._onChangeCallback(this.checked);
+        this.onChangeCallback(this.checked);
         this.change.emit(event);
     }
 }
