@@ -35,7 +35,7 @@ const angularVersion = '>=8.0.0';
 const dependencies = {
     '@ptsecurity/cdk': mosaicVersion,
     '@ptsecurity/mosaic': mosaicVersion,
-    '@ptsecurity/mosaic-icons': '~3.0.0',
+    '@ptsecurity/mosaic-icons': '~3.1.0',
     '@ptsecurity/mosaic-moment-adapter': mosaicVersion,
     '@angular/cdk': angularVersion,
     '@angular/animations': angularVersion,
