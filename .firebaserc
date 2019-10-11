@@ -1,0 +1,14 @@
+{
+    "projects": {
+        "default": "mosaic-stable"
+    },
+    "targets": {
+        "mosaic-stable": {
+            "hosting": {
+                "stable": [
+                    "mosaic-stable"
+                ]
+            }
+        }
+    }
+}
