@@ -7,8 +7,7 @@
     <div class="docs-navbar-version">
         <button mc-button color="second" class="mc-button mc-button_transparent docs-navbar-version__trigger"
                 [mcDropdownTriggerFor]="versionDropdown">
-            <span>Версия</span>
-            <span class="docs-navbar-version__number" id="versionNumber">{{versionSwitch.currentValue.number}}</span>
+            Версия {{versionSwitch.currentValue.number}}
             <i mc-icon="mc-angle-down-L_16" class="docs-navbar-version__icon"></i>
         </button>
         <mc-dropdown #versionDropdown="mcDropdown" xPosition="after" class="docs-navbar-version__dropdown">
@@ -28,7 +27,7 @@
     <div class="docs-navbar-dropdown docs-navbar-dropdown_hidden">
         <button mc-button color="second" class="mc-button mc-button_transparent docs-navbar-dropdown__trigger"
                 [mcDropdownTriggerFor]="languageDropdown">
-            <span>{{languageSwitch.currentValue}}</span>
+           {{languageSwitch.currentValue}}
             <i mc-icon="mc-angle-down-M_16" class="docs-navbar-dropdown__icon"></i>
         </button>
 
@@ -42,7 +41,7 @@
     <div class="docs-navbar-dropdown">
         <button mc-button color="second" class="mc-button mc-button_transparent docs-navbar-dropdown__trigger"
                 [mcDropdownTriggerFor]="themeDropdown">
-            <span >{{themeSwitch.currentValue.name}}</span>
+            {{themeSwitch.currentValue.name}}
             <i mc-icon="mc-angle-down-M_16" class="docs-navbar-dropdown__icon"></i>
         </button>
 
