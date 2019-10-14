@@ -32,13 +32,6 @@ $doc-navbar-padding: 10px;
     .docs-navbar-dropdown {
         min-width: 140px;
 
-        &__trigger {
-            padding: {
-                left: $doc-navbar-padding;
-                right: $doc-navbar-padding;
-            };
-        }
-
         &_hidden {
             visibility: hidden;
         }
@@ -95,8 +88,5 @@ $doc-navbar-padding: 10px;
 }
 
 .color-picker .mc.mc-icon {
-    margin: {
-        left: 0;
-        right: 0;
-    }
+    margin-right: 0;
 }

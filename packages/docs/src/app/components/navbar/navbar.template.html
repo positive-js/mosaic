@@ -1,23 +1,22 @@
 <header role="header" class="docs-navbar-header docs-navbar-header_fixed">
     <div class="docs-navbar-logo">
-        <img _ngcontent-cyq-c2="" alt="positive_js_logo" class="docs-navbar-logo__img" src="./assets/images/Mosaic.svg">
+        <img alt="positive_js_logo" class="docs-navbar-logo__img" src="./assets/images/Mosaic.svg">
         <span class="docs-navbar-logo__title">Mosaic</span>
     </div>
 
     <div class="docs-navbar-version">
-        <button mc-button color="second" class="mc-button mc-button_transparent docs-navbar-version__trigger"
-                [mcDropdownTriggerFor]="versionDropdown">
-            <span>Версия</span>
-            <span class="docs-navbar-version__number" id="versionNumber">{{versionSwitch.currentValue.number}}</span>
+        <button mc-button class="mc-button mc-button_transparent" [mcDropdownTriggerFor]="versionDropdown">
+            Версия {{versionSwitch.currentValue.number}}
             <i mc-icon="mc-angle-down-L_16" class="docs-navbar-version__icon"></i>
         </button>
-        <mc-dropdown #versionDropdown="mcDropdown" xPosition="after" class="docs-navbar-version__dropdown">
+
+        <mc-dropdown #versionDropdown="mcDropdown" class="docs-navbar-version__dropdown">
             <button mc-dropdown-item *ngFor="let version of versionSwitch.data; let i = index"
                     [class.mc-selected]="version.selected" (click)="versionSwitch.setValue(i)"
                     [class.docs-navbar-version_bold]="version.number.length < 4">
-                <span class="docs-navbar-version__item" >
-                    <span class="docs-navbar-version__num" >{{version.number}}</span>
-                    <span class="docs-navbar-version__date" >{{version.date}}</span>
+                <span class="docs-navbar-version__item">
+                    <span class="docs-navbar-version__num">{{version.number}}</span>
+                    <span class="docs-navbar-version__date">{{version.date}}</span>
                 </span>
             </button>
         </mc-dropdown>
@@ -26,42 +25,44 @@
     <div class="flex-spacer"></div>
 
     <div class="docs-navbar-dropdown docs-navbar-dropdown_hidden">
-        <button mc-button color="second" class="mc-button mc-button_transparent docs-navbar-dropdown__trigger"
-                [mcDropdownTriggerFor]="languageDropdown">
-            <span>{{languageSwitch.currentValue}}</span>
+        <button mc-button class="mc-button mc-button_transparent" [mcDropdownTriggerFor]="languageDropdown">
+           {{languageSwitch.currentValue}}
             <i mc-icon="mc-angle-down-M_16" class="docs-navbar-dropdown__icon"></i>
         </button>
 
         <mc-dropdown #languageDropdown="mcDropdown">
-            <button mc-dropdown-item *ngFor="let language of languageSwitch.data; let i = index" (click)="languageSwitch.setValue(i)">
+            <button mc-dropdown-item *ngFor="let language of languageSwitch.data; let i = index"
+                    (click)="languageSwitch.setValue(i)">
                 {{language}}
             </button>
         </mc-dropdown>
     </div>
 
     <div class="docs-navbar-dropdown">
-        <button mc-button color="second" class="mc-button mc-button_transparent docs-navbar-dropdown__trigger"
-                [mcDropdownTriggerFor]="themeDropdown">
-            <span >{{themeSwitch.currentValue.name}}</span>
+        <button mc-button class="mc-button mc-button_transparent" [mcDropdownTriggerFor]="themeDropdown">
+            {{themeSwitch.currentValue.name}}
             <i mc-icon="mc-angle-down-M_16" class="docs-navbar-dropdown__icon"></i>
         </button>
 
         <mc-dropdown #themeDropdown="mcDropdown">
-            <button mc-dropdown-item *ngFor="let theme of themeSwitch.data; let i = index" [class.mc-selected]="theme.selected" (click)="themeSwitch.setValue(i)">
+            <button mc-dropdown-item *ngFor="let theme of themeSwitch.data; let i = index"
+                    [class.mc-selected]="theme.selected" (click)="themeSwitch.setValue(i)">
                 {{theme.name}}
             </button>
         </mc-dropdown>
     </div>
 
     <div class="color-picker">
-        <button mc-button color="second" class="mc-button mc-button_transparent docs-navbar-dropdown__trigger"
-                [mcDropdownTriggerFor]="colorDropdown">
+        <button mc-button class="mc-button mc-button_transparent" [mcDropdownTriggerFor]="colorDropdown">
             <i mc-icon="mc-circle-8_16" [style.color]='colorSwitch.currentValue.code' class="color-picker__icon"></i>
             <i mc-icon="mc-angle-down-M_16" class="docs-navbar-dropdown__icon"></i>
         </button>
+
         <mc-dropdown #colorDropdown="mcDropdown" class="color-picker__dropdown" [style.margin-top]="0">
             <div class="color-picker__dropdown-content">
-                <span *ngFor="let color of colorSwitch.data; let i = index" [class.color-picker__dropdown-item]="true" [class.mc-selected]="color.selected"  (click)="colorSwitch.setValue(i)">
+                <span *ngFor="let color of colorSwitch.data; let i = index"
+                      [class.color-picker__dropdown-item]="true" [class.mc-selected]="color.selected"
+                      (click)="colorSwitch.setValue(i)">
                     <i mc-icon="mc-circle-8_16" [style.color]='color.code' class="color-picker__icon"></i>
                 </span>
             </div>
