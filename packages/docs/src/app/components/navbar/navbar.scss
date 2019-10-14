@@ -38,14 +38,6 @@ $doc-navbar-padding: 10px;
 
         &__icon { color: inherit; }
     }
-
-    .docs-navbar-version__trigger,
-    .docs-navbar-dropdown__trigger {
-        padding: {
-            left: $doc-navbar-padding;
-            right: $doc-navbar-padding;
-        };
-    }
 }
 
 .color-picker {
