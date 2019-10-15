@@ -1,30 +1,31 @@
-Mosaic buttons are available using native `<button>` or `<a>` elements.
+Кнопки Mosaic доступны с использованием нативных элементов `<button>` или `<a>`.
 
-### Variants
-There are two button variants, each applied as an attribute:
-+ basic buttons;
-+ icon buttons.
+### Варианты
+Есть два варианта кнопок, каждый из которых применяется как атрибут:
++ базовые кнопки
++ кнопки с иконками
 
-#### Basic buttons
+#### Базовые кнопки
 
-Basic `mc-button` buttons are rectangular buttons containing text only.
+`mc-button` это прямуогульные кнопки, содержащие только текст.
 
 <!-- example(button-overview) -->
 
 ![Button states](./assets/images/Basic_buttons.png)
-Basic button's states
+Состояния кнопок
 
-#### Icon buttons
-Icon buttons consist of an icon and can contain text.
-To create an icon button, add the `<i mc-icon="icon_name"></i>` element within `<button c-icon-button>` where `"icon_name"` is the name of a [Mosaic icon](https://github.com/positive-js/mosaic-icons). For example:
+#### Кнопки с иконками
+Кнопки состоят из иконки и могут содержать текст.
+Чтобы создать кнопку с иконкой, добавьте элемент `<i mc-icon =" icon_name "> </ i>` в `<button c-icon-button>`, где `" icon_name "` - это имя [Mosaic icon](https://github.com/positive-js/mosaic-icons).
+Например:
 
 
-Add any text before or after the `<i>` element to place a button label to the right or to the left of the icon.
+Добавьте любой текст до или после элемента `<i>`, чтобы разместить текст кнопки справа или слева от иконки.
 
-### Colors
+### Цвета
+Mosaic предоставляет три цвета кнопок, применяемые с к свойству `color` с возможными значениями` primary`, `second` и` error`.
 
-Mosaic provides three button colors, applied using the `color` property with possible values `primary`, `second`, and `error`.
-
-### Progress indication
-If processing an action takes more than 1-2 seconds, the progress indication ("loading") can be used. This shows that the system takes action, and the user won't wonder whether the button is working or not.
-To enable the button progress indication, use `class="mc-progress"` which can be combined with other properties.
+### Индикация прогресса
+Если обработка действия занимает более 1-2 секунд, можно использовать индикацию хода выполнения («загрузка»).
+Это показывает, что система производит обработку данных, и пользователь не задастся вопросом, работает ли кнопка или нет.
+Чтобы включить индикацию хода выполнения прогресса, используйте `class =" mc-progress "`, который можно комбинировать с другими свойствами.

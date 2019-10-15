@@ -78,49 +78,9 @@ export class NavbarComponent {
         property: 'PT_version',
         data: [
             {
-                number: '5.1',
-                date: '15 октября',
-                selected: true
-            },
-            {
-                number: '5.0.1',
-                date: '14 октября',
-                selected: false
-            },
-            {
-                number: '5',
-                date: '13 октября',
-                selected: false
-            },
-            {
-                number: '4.8.8',
-                date: '12 октября',
-                selected: false
-            },
-            {
-                number: '4.8.5',
-                date: '11 октября',
-                selected: false
-            },
-            {
-                number: '4.8.4',
-                date: '10 октября',
-                selected: false
-            },
-            {
-                number: '4.8',
+                number: '8.0',
                 date: '9 октября',
-                selected: false
-            },
-            {
-                number: '4.7.1',
-                date: '8 октября',
-                selected: false
-            },
-            {
-                number: '1.0',
-                date: '7 октября',
-                selected: false
+                selected: true
             }
         ],
         updateTemplate: false,
