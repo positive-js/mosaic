@@ -3698,7 +3698,7 @@ describe('McSelect', () => {
             // both Chrome and Firefox.
             function setScrollTop(num: number) {
                 document.body.scrollTop = num;
-                document.documentElement!.scrollTop = num;
+                document.documentElement.scrollTop = num;
             }
 
             beforeEach(fakeAsync(() => {

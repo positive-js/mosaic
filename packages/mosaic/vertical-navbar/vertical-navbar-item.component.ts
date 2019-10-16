@@ -38,6 +38,7 @@ export class McVerticalNavbarItemBadge {}
 
 
 class McVerticalNavbarItemBase {
+    // tslint:disable-next-line:naming-convention
     constructor(public _elementRef: ElementRef) {}
 }
 

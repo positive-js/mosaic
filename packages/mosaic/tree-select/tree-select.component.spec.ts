@@ -2,7 +2,6 @@
 /* tslint:disable:mocha-no-side-effect-code */
 /* tslint:disable:no-non-null-assertion */
 /* tslint:disable:no-empty */
-/* tslint:disable:no-unbound-method */
 /* tslint:disable:prefer-for-of */
 // tslint:disable:max-func-body-length
 
@@ -4178,7 +4177,7 @@ describe('McTreeSelect', () => {
             // both Chrome and Firefox.
             function setScrollTop(num: number) {
                 document.body.scrollTop = num;
-                document.documentElement!.scrollTop = num;
+                document.documentElement.scrollTop = num;
             }
 
             beforeEach(fakeAsync(() => {

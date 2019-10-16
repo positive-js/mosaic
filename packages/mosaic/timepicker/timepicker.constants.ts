@@ -1,7 +1,7 @@
 export enum TimeParts {
-    hours,
-    minutes,
-    seconds
+    Hours,
+    Minutes,
+    Seconds
 }
 
 export enum TimeFormats {

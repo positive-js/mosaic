@@ -520,17 +520,17 @@ export class McTimepicker<D> extends McTimepickerMixinBase
         });
     }
 
-    private incrementTime(dateVal: D, whatToIncrement: TimeParts = TimeParts.seconds): D {
+    private incrementTime(dateVal: D, whatToIncrement: TimeParts = TimeParts.Seconds): D {
         let { hours, minutes, seconds } = this.getTimeDigitsFromDate(dateVal);
 
         switch (whatToIncrement) {
-            case TimeParts.hours:
+            case TimeParts.Hours:
                 hours++;
                 break;
-            case TimeParts.minutes:
+            case TimeParts.Minutes:
                 minutes++;
                 break;
-            case TimeParts.seconds:
+            case TimeParts.Seconds:
                 seconds++;
                 break;
             default:
@@ -548,17 +548,17 @@ export class McTimepicker<D> extends McTimepickerMixinBase
     /**
      * @description Decrement part of time
      */
-    private decrementTime(dateVal: D, whatToDecrement: TimeParts = TimeParts.seconds): D {
+    private decrementTime(dateVal: D, whatToDecrement: TimeParts = TimeParts.Seconds): D {
         let { hours, minutes, seconds } = this.getTimeDigitsFromDate(dateVal);
 
         switch (whatToDecrement) {
-            case TimeParts.hours:
+            case TimeParts.Hours:
                 hours--;
                 break;
-            case TimeParts.minutes:
+            case TimeParts.Minutes:
                 minutes--;
                 break;
-            case TimeParts.seconds:
+            case TimeParts.Seconds:
                 seconds--;
                 break;
             default:
@@ -603,15 +603,15 @@ export class McTimepicker<D> extends McTimepickerMixinBase
         const secondsIndex = minutesIndex !== -1 ? timeString.indexOf(':', minutesIndex + 1) : -1;
 
         if (secondsIndex !== -1 && cursorPosition > secondsIndex) {
-            modifiedTimePart = TimeParts.seconds;
+            modifiedTimePart = TimeParts.Seconds;
             cursorStartPosition = secondsIndex + 1;
             cursorEndPosition = timeString.length;
         } else if (minutesIndex !== -1 && cursorPosition > minutesIndex) {
-            modifiedTimePart = TimeParts.minutes;
+            modifiedTimePart = TimeParts.Minutes;
             cursorStartPosition = minutesIndex + 1;
             cursorEndPosition = secondsIndex > -1 ? secondsIndex : timeString.length;
         } else {
-            modifiedTimePart = TimeParts.hours;
+            modifiedTimePart = TimeParts.Hours;
             cursorStartPosition = hoursIndex;
             cursorEndPosition = minutesIndex !== -1 ? minutesIndex : timeString.length;
         }

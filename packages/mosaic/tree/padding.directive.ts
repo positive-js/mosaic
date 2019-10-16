@@ -12,7 +12,7 @@ export class McTreeNodePadding<T> extends CdkTreeNodePadding<T> implements OnIni
     @Input('mcTreeNodePaddingIndent') indent: number;
 
     baseLeftPadding: number = 12;
-    /* tslint:disable-next-line:naming-convention */
+    /* tslint:disable-next-line:naming-convention orthodox-getter-and-setter*/
     _indent: number = 20;
 
     withIcon: boolean;

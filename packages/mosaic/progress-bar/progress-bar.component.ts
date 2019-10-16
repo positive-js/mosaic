@@ -16,6 +16,7 @@ const MIN_PERCENT = 0;
 const MAX_PERCENT = 100;
 
 export class McProgressBarBase {
+    // tslint:disable-next-line:naming-convention
     constructor(public _elementRef: ElementRef) {}
 }
 
