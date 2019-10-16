@@ -3,6 +3,7 @@ import { ElementRef } from '@angular/core';
 import { Constructor } from './constructor';
 
 
+// tslint:disable-next-line:naming-convention
 export interface CanColor {
     color: ThemePalette;
 }
@@ -10,6 +11,7 @@ export interface CanColor {
 /** @docs-private */
 export type CanColorCtor = Constructor<CanColor>;
 
+// tslint:disable-next-line:naming-convention
 export interface HasElementRef {
     _elementRef: ElementRef;
 }
@@ -28,8 +30,6 @@ export function mixinColor<T extends Constructor<HasElementRef>>(
     defaultColor: ThemePalette = ThemePalette.Default
 ): CanColorCtor & T {
     return class extends base {
-
-        private _color: ThemePalette;
 
         get color(): ThemePalette {
             return this._color;
@@ -50,6 +50,8 @@ export function mixinColor<T extends Constructor<HasElementRef>>(
                 this._color = colorPalette;
             }
         }
+
+        private _color: ThemePalette;
 
         constructor(...args: any[]) {
             super(...args);
