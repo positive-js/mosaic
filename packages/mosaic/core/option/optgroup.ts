@@ -7,7 +7,7 @@ import { mixinDisabled, CanDisable, CanDisableCtor } from '../common-behaviors/i
 /** @docs-private */
 export class McOptgroupBase {}
 
-export const McOptgroupMixinBase: CanDisableCtor & typeof McOptgroupBase = mixinDisabled(McOptgroupBase);
+export const mcOptgroupMixinBase: CanDisableCtor & typeof McOptgroupBase = mixinDisabled(McOptgroupBase);
 
 // Counter for unique group ids.
 let uniqueOptgroupIdCounter = 0;
@@ -31,7 +31,7 @@ let uniqueOptgroupIdCounter = 0;
         '[attr.aria-labelledby]': 'labelId'
     }
 })
-export class McOptgroup extends McOptgroupMixinBase implements CanDisable {
+export class McOptgroup extends mcOptgroupMixinBase implements CanDisable {
     /** Label for the option group. */
     @Input() label: string;
 
