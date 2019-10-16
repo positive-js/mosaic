@@ -622,15 +622,15 @@ export class McSelect extends McSelectMixinBase implements
 
     /** Closes the overlay panel and focuses the host element. */
     close(): void {
-        if (this._panelOpen) {
-            // the order of calls is important
-            this.resetSearch();
-            this._panelOpen = false;
-            this.keyManager.withHorizontalOrientation(this.isRtl() ? 'rtl' : 'ltr');
+        if (!this._panelOpen) { return; }
 
-            this._changeDetectorRef.markForCheck();
-            this.onTouched();
-        }
+        // the order of calls is important
+        this.resetSearch();
+        this._panelOpen = false;
+        this.keyManager.withHorizontalOrientation(this.isRtl() ? 'rtl' : 'ltr');
+
+        this._changeDetectorRef.markForCheck();
+        this.onTouched();
     }
 
     /**
