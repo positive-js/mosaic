@@ -129,6 +129,7 @@ const McTreeSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorSt
         '[class.mc-select-invalid]': 'errorState',
         '[class.mc-select-required]': 'required',
 
+        '(click)': 'toggle()',
         '(keydown)': 'handleKeydown($event)',
         '(focus)': 'onFocus()',
         '(blur)': 'onBlur()',
@@ -472,6 +473,14 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
             this.tempValues = null;
         }
 
+        this.optionSelectionChanges
+            .pipe(takeUntil(this.destroy))
+            .subscribe((event) => {
+                if (!this.multiple && this.panelOpen && event.isUserInput) {
+                    this.close();
+                }
+            });
+
         this.tree.selectionChange
             .pipe(takeUntil(this.destroy))
             .subscribe((event) => {
@@ -487,11 +496,6 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
                     this.tree.keyManager.setActiveItem(
                         this.options.find((option) => option.data === event.added[0]) as any
                     );
-                }
-
-                if (!this.multiple && this.panelOpen) {
-                    this.close();
-                    this.focus();
                 }
             });
     }
@@ -549,7 +553,9 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         this.triggerFontSize = parseInt(getComputedStyle(this.trigger.nativeElement)['font-size']);
 
         this._panelOpen = true;
-        this.highlightCorrectOption();
+
+        setTimeout(() => this.highlightCorrectOption());
+
         this.changeDetectorRef.markForCheck();
 
         // Set the font size on the panel element once it exists.
@@ -564,12 +570,14 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
 
     /** Closes the overlay panel and focuses the host element. */
     close(): void {
-        if (this._panelOpen) {
-            this._panelOpen = false;
+        if (!this._panelOpen) { return; }
 
-            this.changeDetectorRef.markForCheck();
-            this.onTouched();
-        }
+        this._panelOpen = false;
+
+        this.changeDetectorRef.markForCheck();
+        this.onTouched();
+
+        setTimeout(() => this.focus(), 0);
     }
 
     /**
@@ -848,7 +856,11 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         } else if ((keyCode === ENTER || keyCode === SPACE) && this.tree.keyManager.activeItem) {
             event.preventDefault();
 
-            this.selectionModel.toggle(this.tree.keyManager.activeItem.data);
+            if (!this.autoSelect) {
+                this.selectionModel.toggle(this.tree.keyManager.activeItem.data);
+            } else {
+                this.close();
+            }
         } else if (this.multiple && keyCode === A && event.ctrlKey) {
             event.preventDefault();
 
@@ -871,6 +883,10 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
                 this.tree.keyManager.activeItemIndex !== previouslyFocusedIndex
             ) {
                 this.tree.keyManager.activeItem.selectViaInteraction(event);
+            }
+
+            if (this.autoSelect && this.tree.keyManager.activeItem) {
+                this.tree.setSelectedOption(this.tree.keyManager.activeItem);
             }
         }
     }
@@ -945,17 +961,17 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
      * the first item instead.
      */
     private highlightCorrectOption() {
-        if (this.tree.keyManager) {
-            if (this.empty) {
-                this.tree.keyManager.setFirstItemActive();
-            } else {
-                const firstSelectedValue = this.multiple ? this.selectedValues[0] : this.selectedValues;
+        if (!this.tree.keyManager) { return; }
 
-                const selectedOption = this.options.find((option) => option.value === firstSelectedValue);
+        if (this.empty) {
+            this.tree.keyManager.setFirstItemActive();
+        } else {
+            const firstSelectedValue = this.multiple ? this.selectedValues[0] : this.selectedValues;
 
-                if (selectedOption) {
-                    this.tree.keyManager.setActiveItem(selectedOption);
-                }
+            const selectedOption = this.options.find((option) => option.value === firstSelectedValue);
+
+            if (selectedOption) {
+                this.tree.keyManager.setActiveItem(selectedOption);
             }
         }
     }

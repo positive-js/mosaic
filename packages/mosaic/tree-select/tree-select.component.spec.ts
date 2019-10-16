@@ -3671,7 +3671,8 @@ describe('McTreeSelect', () => {
             expect(document.activeElement).toBe(select, 'Expected trigger to be focused.');
         }));
 
-        it('should not restore focus to the host element when clicking outside', fakeAsync(() => {
+        // excluded because tree-select works not like select
+        xit('should not restore focus to the host element when clicking outside', fakeAsync(() => {
             const fixture = TestBed.createComponent(BasicSelectWithoutForms);
             const select = fixture.debugElement.nativeElement.querySelector('mc-tree-select');
 
