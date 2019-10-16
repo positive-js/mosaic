@@ -2,6 +2,7 @@ import { Constructor } from './constructor';
 import { CanDisable } from './disabled';
 
 
+// tslint:disable-next-line:naming-convention
 export interface HasTabIndex {
     tabIndex: number;
 }
