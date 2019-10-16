@@ -395,7 +395,7 @@ describe('McListSelection without forms', () => {
         }));
 
         it('should set its initial selected state in the selectionModel', () => {
-            const optionEl = listItemEl.injector.get(McListOption);
+            const optionEl = listItemEl.injector.get<McListOption>(McListOption);
             const selectedOptions = selectionList.componentInstance.selectionModel;
             expect(selectedOptions.isSelected(optionEl)).toBeTruthy();
         });
