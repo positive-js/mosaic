@@ -141,6 +141,8 @@ describe('Button with icon', () => {
             imports: [McButtonModule, McIconModule],
             declarations: [
                 McButtonCommentCaseTestApp,
+                McButtonHtmlIconLeftCaseTestApp,
+                McButtonHtmlIconRightCaseTestApp,
                 McButtonTextIconCaseTestApp,
                 McButtonTwoIconsCaseTestApp
             ]
@@ -184,6 +186,24 @@ describe('Button with icon', () => {
         expect(fixture.debugElement.query(By.css('.mc-icon-button_left'))).toBeNull();
         expect(fixture.debugElement.query(By.css('.mc-icon-button_right'))).toBeNull();
     });
+
+    it('should add right css class when the sibling in an html element', () => {
+        const fixture = TestBed.createComponent(McButtonHtmlIconRightCaseTestApp);
+
+        fixture.detectChanges();
+
+        expect(fixture.debugElement.query(By.css('.mc-icon-button_right')))
+            .toBeTruthy('Expected the element has right css class');
+    });
+
+    it('should add left css class when the sibling in an html element', () => {
+        const fixture = TestBed.createComponent(McButtonHtmlIconLeftCaseTestApp);
+
+        fixture.detectChanges();
+
+        expect(fixture.debugElement.query(By.css('.mc-icon-button_left')))
+            .toBeTruthy('Expected the element has left css class');
+    });
 });
 
 
@@ -223,6 +243,28 @@ class TestApp {
     `
 })
 class McButtonCommentCaseTestApp {}
+
+@Component({
+    selector: 'mc-button-two-icons-case-test-app',
+    template: `
+        <button mc-button type="button">
+            <span>Some text</span>
+            <i mc-icon="mc-angle-down-L_16"></i>
+        </button>
+    `
+})
+class McButtonHtmlIconRightCaseTestApp {}
+
+@Component({
+    selector: 'mc-button-two-icons-case-test-app',
+    template: `
+        <button mc-button type="button">
+            <i mc-icon="mc-angle-down-L_16"></i>
+            <span>Some text</span>
+        </button>
+    `
+})
+class McButtonHtmlIconLeftCaseTestApp {}
 
 @Component({
     selector: 'mc-button-text-icon-case-test-app',
