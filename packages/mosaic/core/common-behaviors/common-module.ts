@@ -27,10 +27,12 @@ export class McCommonModule {
     private hasDoneGlobalChecks = false;
 
     // Reference to the global `document` object.
-    private document = typeof document === 'object' && document ? document : null;
+    // tslint:disable-next-line: orthodox-getter-and-setter
+    private _document = typeof document === 'object' && document ? document : null;
 
     // Reference to the global 'window' object.
-    private window = typeof window === 'object' && window ? window : null;
+    // tslint:disable-next-line: orthodox-getter-and-setter
+    private _window = typeof window === 'object' && window ? window : null;
 
     constructor(@Optional() @Inject(MC_SANITY_CHECKS) private _sanityChecksEnabled: boolean) {
         if (this.areChecksEnabled() && !this.hasDoneGlobalChecks) {
@@ -48,11 +50,11 @@ export class McCommonModule {
     // Whether the code is running in tests.
     private isTestEnv() {
         // tslint:disable-next-line
-        return this.window && (this.window['__karma__'] || this.window['jasmine']);
+        return this._window && (this._window['__karma__'] || this._window['jasmine']);
     }
 
     private checkDoctypeIsDefined(): void {
-        if (this.document && !this.document.doctype) {
+        if (this._document && !this._document.doctype) {
             console.warn(
                 'Current document does not have a doctype. This may cause ' +
                 'some Mosaic components not to behave as expected.'
@@ -61,11 +63,11 @@ export class McCommonModule {
     }
 
     private checkThemeIsPresent(): void {
-        if (this.document && typeof getComputedStyle === 'function') {
-            const testElement = this.document.createElement('div');
+        if (this._document && typeof getComputedStyle === 'function') {
+            const testElement = this._document.createElement('div');
 
             testElement.classList.add('mc-theme-loaded-marker');
-            this.document.body.appendChild(testElement);
+            this._document.body.appendChild(testElement);
 
             const computedStyle = getComputedStyle(testElement);
 
@@ -80,7 +82,7 @@ export class McCommonModule {
                 );
             }
 
-            this.document.body.removeChild(testElement);
+            this._document.body.removeChild(testElement);
         }
     }
 }
