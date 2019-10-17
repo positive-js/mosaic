@@ -1,7 +1,8 @@
+// tslint:disable:naming-convention
 export enum TimeParts {
-    Hours,
-    Minutes,
-    Seconds
+    hours,
+    minutes,
+    seconds
 }
 
 export enum TimeFormats {
