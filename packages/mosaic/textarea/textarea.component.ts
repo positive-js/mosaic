@@ -147,9 +147,11 @@ export class McTextarea extends McTextareaMixinBase implements McFormFieldContro
 
     protected uid = `mc-textsrea-${nextUniqueId++}`;
     protected previousNativeValue: any;
+    // tslint:disable:naming-convention
     protected _disabled = false;
     protected _id: string;
     protected _required = false;
+    // tslint:enable:naming-convention
 
     private valueAccessor: { value: any };
     private growSubscription: Subscription;
@@ -233,7 +235,7 @@ export class McTextarea extends McTextareaMixinBase implements McFormFieldContro
 
             textarea.style.height = 0; // this line is important to height recalculation
 
-            const height = Math.max(this.minHeight, textarea.scrollHeight + diff + this.freeRowsHeight);
+            const height = Math.max(this.minHeight, +textarea.scrollHeight + diff + this.freeRowsHeight);
             textarea.style.height = `${height}px`;
         });
     }
@@ -290,6 +292,6 @@ export class McTextarea extends McTextareaMixinBase implements McFormFieldContro
         const outerHeight = parseInt(window.getComputedStyle(textarea).height!.toString(), 10);
         const diff = outerHeight - textarea.clientHeight;
 
-        return Math.max(this.minHeight, textarea.scrollHeight + diff);
+        return Math.max(this.minHeight, +textarea.scrollHeight + diff);
     }
 }
