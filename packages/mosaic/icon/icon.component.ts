@@ -22,7 +22,8 @@ export class McIconBase {
     constructor(public _elementRef: ElementRef) {}
 }
 
-export const mcIconMixinBase: CanColorCtor & typeof McIconBase = mixinColor(McIconBase, ThemePalette.Empty);
+// tslint:disable-next-line: naming-convention
+export const McIconMixinBase: CanColorCtor & typeof McIconBase = mixinColor(McIconBase, ThemePalette.Empty);
 
 
 @Component({
@@ -33,7 +34,7 @@ export const mcIconMixinBase: CanColorCtor & typeof McIconBase = mixinColor(McIc
     encapsulation: ViewEncapsulation.None,
     inputs: ['color']
 })
-export class McIcon extends mcIconMixinBase implements CanColor {
+export class McIcon extends McIconMixinBase implements CanColor {
     constructor(elementRef: ElementRef, @Attribute('mc-icon') iconName: string) {
         super(elementRef);
 

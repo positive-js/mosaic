@@ -20,7 +20,8 @@ export class McLinkBase {
     constructor(public elementRef: ElementRef) {}
 }
 
-export const mcLinkBase: HasTabIndexCtor & CanDisableCtor & typeof McLinkBase
+// tslint:disable-next-line: naming-convention
+export const McLinkBaseConst: HasTabIndexCtor & CanDisableCtor & typeof McLinkBase
     = mixinTabIndex(mixinDisabled(McLinkBase));
 
 @Directive({
@@ -33,7 +34,7 @@ export const mcLinkBase: HasTabIndexCtor & CanDisableCtor & typeof McLinkBase
     }
 })
 
-export class McLink extends mcLinkBase implements OnDestroy, HasTabIndex, CanDisable {
+export class McLink extends McLinkBaseConst implements OnDestroy, HasTabIndex, CanDisable {
 
     @Input()
     get disabled() {
