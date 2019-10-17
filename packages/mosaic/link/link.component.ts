@@ -16,13 +16,13 @@ import {
 } from '@ptsecurity/mosaic/core';
 
 
-export class McLinkMixinBase {
+export class McLinkBase {
     constructor(public elementRef: ElementRef) {}
 }
 
 // tslint:disable-next-line: naming-convention
-export const McLinkBase: HasTabIndexCtor & CanDisableCtor & typeof McLinkMixinBase
-    = mixinTabIndex(mixinDisabled(McLinkMixinBase));
+export const McLinkMixinBase: HasTabIndexCtor & CanDisableCtor & typeof McLinkBase
+    = mixinTabIndex(mixinDisabled(McLinkBase));
 
 @Directive({
     selector: 'a.mc-link',
@@ -34,7 +34,7 @@ export const McLinkBase: HasTabIndexCtor & CanDisableCtor & typeof McLinkMixinBa
     }
 })
 
-export class McLink extends McLinkBase implements OnDestroy, HasTabIndex, CanDisable {
+export class McLink extends McLinkMixinBase implements OnDestroy, HasTabIndex, CanDisable {
 
     @Input()
     get disabled() {
