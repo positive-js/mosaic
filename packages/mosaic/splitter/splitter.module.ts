@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 
 import { McGutterDirective, McSplitterAreaDirective, McSplitterComponent } from './splitter.component';

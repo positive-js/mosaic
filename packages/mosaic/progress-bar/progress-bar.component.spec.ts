@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { fakeAsync, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-
 import { ThemePalette } from '@ptsecurity/mosaic/core';
 
 import { McProgressBarModule } from './index';

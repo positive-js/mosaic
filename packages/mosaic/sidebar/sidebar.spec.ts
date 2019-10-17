@@ -1,3 +1,6 @@
+/* tslint:disable:no-magic-numbers */
+/* tslint:disable:mocha-no-side-effect-code */
+/* tslint:disable:no-empty */
 import { Component, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -6,7 +9,6 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { McSidebar, McSidebarModule, SidebarPositions } from './index';
 
 
-/* tslint:disable:no-magic-numbers */
 describe('Sidebar', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({

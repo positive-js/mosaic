@@ -1,3 +1,4 @@
+// tslint:disable:naming-convention
 export enum TimeParts {
     hours,
     minutes,
