@@ -195,14 +195,6 @@ export class DemoComponent {
     private getChildren = (node: FileNode): Observable<FileNode[]> => {
         return observableOf(node.children);
     }
-
-    private getValue = (node: FileNode): string => {
-        return node.name;
-    }
-
-    private getViewValue = (node: FileNode): string => {
-        return node.name + ' view';
-    }
 }
 
 
