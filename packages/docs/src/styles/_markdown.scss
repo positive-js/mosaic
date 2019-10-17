@@ -67,6 +67,36 @@
             padding-right: 16px;
         }
     }
+
+    &__code {
+        white-space: pre-line;
+    }
+
+    &__pre>&__code {
+        display: block;
+        position: relative;
+        overflow-x: auto;
+        padding: 12px;
+    }
+
+    &__code-icon {
+        display: flex;
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 10;
+        padding: 6px 6px;
+        -webkit-transition: -webkit-transform 0.1s;
+        -moz-transition: -moz-transform 0.1s;
+        transition: transform 0.1s;
+    }
+
+    &__code-icon_active {
+        -webkit-transform: scale(0.93);
+        -moz-transform: scale(0.93);
+        -ms-transform: scale(0.93);
+        transform: scale(0.93);
+    }
 }
 
 .docs-header-link {
@@ -96,6 +126,12 @@
 
     .docs-header-link {
         color: $text;
+    }
+
+    .docs-markdown__pre .docs-markdown__code {
+        //colors from solarized and Darcula color schemes
+        background:  if($is-dark, #2b2b2b, #fdf6e3);
+        color: if($is-dark, #bababa, #657b83);
     }
 
     .docs-markdown {
@@ -138,6 +174,10 @@
 
         &__th {
             color: $th-color;
+        }
+
+        &__code-icon {
+            color: $color;
         }
     }
 

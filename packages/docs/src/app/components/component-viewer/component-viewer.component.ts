@@ -97,10 +97,40 @@ export class ComponentOverviewComponent implements OnDestroy {
     scrollToSelectedContentSection() {
         this.documentLost = false;
         this.showView();
+        this.createCopyIcons();
 
         if (this.anchorsComponent) {
             this.anchorsComponent.setScrollPosition();
         }
+    }
+
+    createCopyIcons() {
+        const codeBlocks: NodeListOf<Element> = document.querySelectorAll('.docs-markdown__pre .docs-markdown__code');
+
+        codeBlocks.forEach((codeBlock) => {
+            const copyIcon = document.createElement('i');
+            copyIcon.className = 'mc mc-copy_16 docs-markdown__code-icon';
+            copyIcon.addEventListener('click', this.copyCode);
+            codeBlock.prepend(copyIcon);
+        });
+    }
+
+    copyCode(event: Event) {
+        const codeCopyAnimationTime = 200;
+        const code = (<HTMLElement> event.target).parentNode;
+
+        const range = document.createRange();
+        range.selectNodeContents(code);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        document.execCommand('copy');
+        sel.removeAllRanges();
+
+        (<HTMLElement> event.target).classList.add('docs-markdown__code-icon_active');
+        setTimeout(() => {
+            (<HTMLElement> event.target).classList.remove('docs-markdown__code-icon_active');
+        }, codeCopyAnimationTime);
     }
 
     showDocumentLostAlert() {
