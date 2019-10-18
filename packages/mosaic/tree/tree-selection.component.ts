@@ -1,6 +1,6 @@
 /* tslint:disable:no-empty */
-import {coerceBooleanProperty} from '@angular/cdk/coercion';
-import {SelectionModel} from '@angular/cdk/collections';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { SelectionModel } from '@angular/cdk/collections';
 import {
     AfterContentInit,
     Attribute,
@@ -19,9 +19,9 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import {NodeDef, ViewData} from '@angular/core/esm2015/src/view';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {FocusKeyManager} from '@ptsecurity/cdk/a11y';
+import { NodeDef, ViewData } from '@angular/core/esm2015/src/view';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import {
     END,
     ENTER,
@@ -33,12 +33,12 @@ import {
     RIGHT_ARROW,
     SPACE
 } from '@ptsecurity/cdk/keycodes';
-import {CdkTree, CdkTreeNodeOutlet, FlatTreeControl} from '@ptsecurity/cdk/tree';
-import {CanDisable, getMcSelectNonArrayValueError, HasTabIndex} from '@ptsecurity/mosaic/core';
-import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import { CdkTree, CdkTreeNodeOutlet, FlatTreeControl } from '@ptsecurity/cdk/tree';
+import { CanDisable, getMcSelectNonArrayValueError, HasTabIndex } from '@ptsecurity/mosaic/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
-import {MC_TREE_OPTION_PARENT_COMPONENT, McTreeOption, MultipleMode} from './tree-option.component';
+import { MC_TREE_OPTION_PARENT_COMPONENT, McTreeOption, MultipleMode } from './tree-option.component';
 
 
 export const MC_SELECTION_TREE_VALUE_ACCESSOR: any = {
