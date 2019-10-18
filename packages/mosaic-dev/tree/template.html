@@ -26,6 +26,8 @@
     <!--no-unselect="false"-->
 <!--    multiple-->
 <mc-tree-selection
+    multiple="true"
+    [multipleMode]="MULTIPLE_MODE.CTRL"
     [disabled]="disableState"
     [(ngModel)]="modelValue"
     [dataSource]="dataSource"
