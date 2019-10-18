@@ -1,3 +1,10 @@
+## 8.0.3 "Retracted Enology" (2019-10-18)
+
+### Mosaic
+
+
+ * bug fix  **tree:** fixed few bugs (example, initial highlight, focus on close, autoselect=true) ([#305](https://github.com/positive-js/mosaic/issues/305)) ([31fc6627d056a69b5c9988f1d7f492153246912d](https://github.com/positive-js/mosaic/commit/31fc6627d056a69b5c9988f1d7f492153246912d))
+
 ## 8.0.2 "Yellowy Verification" (2019-10-09)
 
 ### Mosaic
