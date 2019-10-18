@@ -8,15 +8,15 @@ import { Inject, Injectable } from '@angular/core';
 export class McMeasureScrollbarService {
 
     get scrollBarWidth(): number {
-        if (this._scrollbarWidth) {
-            return this._scrollbarWidth;
+        if (this._scrollBarWidth) {
+            return this._scrollBarWidth;
         }
         this.initScrollBarWidth();
 
-        return this._scrollbarWidth;
+        return this._scrollBarWidth;
     }
 
-    private _scrollbarWidth: number;
+    private _scrollBarWidth: number;
     private scrollbarMeasure = {
         position: 'absolute',
         top: '-9999px',
@@ -46,6 +46,6 @@ export class McMeasureScrollbarService {
         const width = scrollDiv.offsetWidth - scrollDiv.clientWidth;
 
         this.document.body.removeChild(scrollDiv);
-        this._scrollbarWidth = width;
+        this._scrollBarWidth = width;
     }
 }

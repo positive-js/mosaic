@@ -1,6 +1,7 @@
 // tslint:disable:no-magic-numbers
 // tslint:disable:mocha-no-side-effect-code
 // tslint:disable:max-func-body-length
+// tslint:disable:no-empty
 
 import { Component, DebugElement, ChangeDetectionStrategy } from '@angular/core';
 import { async, ComponentFixture, fakeAsync, TestBed, tick, flush } from '@angular/core/testing';
@@ -394,7 +395,7 @@ describe('McListSelection without forms', () => {
         }));
 
         it('should set its initial selected state in the selectionModel', () => {
-            const optionEl = listItemEl.injector.get(McListOption);
+            const optionEl = listItemEl.injector.get<McListOption>(McListOption);
             const selectedOptions = selectionList.componentInstance.selectionModel;
             expect(selectedOptions.isSelected(optionEl)).toBeTruthy();
         });

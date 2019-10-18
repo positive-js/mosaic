@@ -1,8 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-
 import { A11yModule } from '@ptsecurity/cdk/a11y';
-
 import { McLineModule } from '@ptsecurity/mosaic/core';
 
 import { McListSelection, McListOption } from './list-selection.component';
