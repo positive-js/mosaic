@@ -210,12 +210,22 @@ export class McDatepickerInput<D> implements ControlValueAccessor, OnDestroy, Va
     /** Whether the last value set on the input was valid. */
     private lastValueValid = false;
 
+    /** The combined form control validator for this input. */
+    private validator: ValidatorFn | null;
+
     constructor(
         public elementRef: ElementRef<HTMLInputElement>,
         @Optional() public dateAdapter: DateAdapter<D>,
         @Optional() @Inject(MC_DATE_FORMATS) private dateFormats: McDateFormats,
         @Optional() private formField: McFormField
     ) {
+        this.validator = Validators.compose([
+            this.parseValidator,
+            this.minValidator,
+            this.maxValidator,
+            this.filterValidator
+        ]);
+
         if (!this.dateAdapter) {
             throw createMissingDateImplError('DateAdapter');
         }
@@ -355,16 +365,6 @@ export class McDatepickerInput<D> implements ControlValueAccessor, OnDestroy, Va
         this.elementRef.nativeElement.value =
             value ? this.dateAdapter.format(value, this.dateFormats.display.dateInput) : '';
     }
-
-    /** The combined form control validator for this input. */
-        // tslint:disable:member-ordering
-    private validator: ValidatorFn | null =
-        Validators.compose([
-            this.parseValidator,
-            this.minValidator,
-            this.maxValidator,
-            this.filterValidator
-        ]);
 
     /**
      * @param obj The object to check.
