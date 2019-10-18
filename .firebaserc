@@ -7,6 +7,9 @@
             "hosting": {
                 "stable": [
                     "mosaic-stable"
+                ],
+                "v8": [
+                    "mosaic-v8"
                 ]
             }
         }
