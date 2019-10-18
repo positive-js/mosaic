@@ -78,6 +78,10 @@
     .mc-form-field__hint {
         color: mc-color($second, 400);
     }
+
+    .mc-form-field__prefix .mc-icon {
+        color: map-get($foreground, disabled-text);
+    }
 }
 
 @mixin mc-form-field-typography($config) {
