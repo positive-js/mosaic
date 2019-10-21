@@ -1,82 +1,76 @@
-Checkboxes are defined using the `<mc-checkbox>` element. Clicking the checkbox or its label toggles the checkbox state, which can be checked, unchecked, or indeterminate.
+Checkboxes определяются с помощью элемента `<mc-checkbox>`.
+Нажатие на checkbox или его label переключает состояние checkbox, может быть отмечен, снят или не установлен.
 
 ### Label
 
-The checkbox label describes an option to be selected. The label is provided as the content of the `<mc-checkbox>` element.
+Label описывает значение, которое будет выбрано. Label является частью элемента `<mc-checkbox>`.
 
-### Label position
+### Label позиционирование
 
-To place the label before or after the checkbox, use the `[labelPosition]` attribute with possible values `'before'` and `'after'`. The default position is after the checkbox.
+Чтобы разместить Label до или после checkbox, используйте атрибут `[labelPosition]` с
+возможными значениями `'before'` и `'after'`. Положение по умолчанию - `'after'`.
 
+```
 `<mc-checkbox [labelPosition]="'before'">Left side label</mc-checkbox>`
+```
 
-If you don't want the label to appear next to the checkbox, you can use 
-[`aria-label`](https://www.w3.org/TR/wai-aria/states_and_properties#aria-label) or 
-[`aria-labelledby`](https://www.w3.org/TR/wai-aria/states_and_properties#aria-labelledby) to 
-specify an appropriate label.
+Если вы не хотите, чтобы label отображался рядом с checkbox, вы можете использовать
+[`aria-label`](https://www.w3.org/TR/wai-aria/states_and_properties#aria-label) или 
+[`aria-labelledby`](https://www.w3.org/TR/wai-aria/states_and_properties#aria-labelledby).
 
-### Use with `@angular/forms`
-`<mc-checkbox>` is compatible with `@angular/forms` and supports both `FormsModule` 
-and `ReactiveFormsModule`.
+### Использование с `@angular/forms`
+`<mc-checkbox>` совместим `@angular/forms` и поддерживает `FormsModule` 
+и `ReactiveFormsModule`.
 
 ### Dual-state
 
-The dual-state is applied using the `[checked]` boolean attribute to show whether the checkbox is selected or not. The default state is checked.
+Dual-state применяется с использованием логического атрибута `[checked]`, чтобы показать,
+установлен checkbox или нет.
 
 <!-- example(checkbox-overview) -->
 
-### Indeterminate state (partially selected)
+### Indeterminate state (частичный выбор)
 
-The indeterminate state is applied using the `[indeterminate]` boolean attribute and can be used when you have a group of options, and a higher-level checkbox must represent their state:
-+ if only some of the options in a group are selected, the higher-level checkbox appears partially selected (`[indeterminate]="true"`).
-+ If all of them are selected, the higher-level checkbox appears selected.
-+ If none are selected, the higher-level checkbox appears not selected.
+Состояние indeterminate применяется с использованием логического атрибута «[indeterminate]» и может использоваться,
+когда у вас есть группа параметров, а checkbox более высокого уровня должен отобразить их состояние:
++ если выбраны только некоторые параметры в группе, флажок более высокого уровня отображается частично выбранным (`[indeterminate] =" true "`).
++ если выбраны все, отображается checkbox более высокого уровня.
++ Если ни один не выбран, checkbox более высокого уровня появляется не установленным.
 
 <Можно пример с группой чекбоксов?>
 <!-- example(checkbox-indeterminate) -->
 
 ### Disabled checkboxes
 
-You can use the `[disabled]` boolean attribute to make a checkbox look unclickable.
+Вы можете использовать логический атрибут `[disabled]`, чтобы сделать флажок неактивным.
 
 `<mc-checkbox [disabled]="true">Disabled</mc-checkbox>`
 
 ### Click action config
-When user clicks on the `mc-checkbox`, the default behavior is toggle `checked` value and set
-`indeterminate` to `false`. This behavior can be customized by
-[providing a new value](https://angular.io/guide/dependency-injection)
-of `MC_CHECKBOX_CLICK_ACTION` to the checkbox.
+
+Когда пользователь кликает на `mc-checkbox`, поведение по умолчанию переводит в значение `checked` и `indeterminate` to `false`.
+Это поведение может быть настроено [добавлением нового значения] (https://angular.io/guide/dependency-injection)
+`MC_CHECKBOX_CLICK_ACTION` на checkbox.
 
 ```
 providers: [
-  {provide: MC_CHECKBOX_CLICK_ACTION, useValue: 'check'}
+    { provide: MC_CHECKBOX_CLICK_ACTION, useValue: 'check' }
 ]
 ```
 
-The possible values are:
+Возможные значения:
 
 #### `noop`
-Do not change the `checked` value or `indeterminate` value. Developers have the power to
-implement customized click actions.
 
 #### `check`
-Toggle `checked` value of the checkbox, ignore `indeterminate` value. If the
-checkbox is in `indeterminate` state, the checkbox will display as an `indeterminate` checkbox
-regardless the `checked` value.
 
 #### `check-indeterminate`
-Default behavior of `mc-checkbox`. Always set `indeterminate` to `false`
-when user click on the `mc-checkbox`.
-This matches the behavior of native `<input type="checkbox">`.
 
-### Theming
-The color of a `<mc-checkbox>` can be changed by using the `color` property. By default, checkboxes
-use the theme's accent color. This can be changed to `'primary'` or `'error'`.  
+### Theming  
+Цвет `<mc-checkbox>` можно изменить с помощью свойства `color`. По умолчанию checkboxes
+имеют цвет акцента темы. Это значение может быть изменено на `'primary'` или `'error'`.
 
 ### Accessibility
-The `<mc-checkbox>` uses an internal `<input type="checkbox">` to provide an accessible experience.
-This internal checkbox receives focus and is automatically labelled by the text content of the
-`<mc-checkbox>` element.
+`<mc-checkbox>` использует `<input type="checkbox">` для обеспечения Accessibility.
 
-Checkboxes without text or labels should be given a meaningful label via `aria-label` or
-`aria-labelledby`.
+Checkboxes без текста или label должны иметь метку `aria-label` или `aria-labelledby`.
