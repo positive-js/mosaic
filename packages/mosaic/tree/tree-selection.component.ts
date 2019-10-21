@@ -103,7 +103,6 @@ export class McTreeSelection extends CdkTree<McTreeOption>
 
     @Output() readonly selectionChange = new EventEmitter<McTreeSelectionChange>();
 
-    @Input('multiple')
     multipleMode?: MultipleMode;
 
     get multiple(): boolean {
@@ -182,6 +181,10 @@ export class McTreeSelection extends CdkTree<McTreeOption>
 
         if (this.multipleAttr !== null) {
             this.multiple = true;
+
+            if (this.multipleAttr === MultipleMode.CHECKBOX || this.multipleAttr === MultipleMode.KEYBOARD) {
+                this.multipleMode = this.multipleAttr;
+            }
         }
 
         if (this.multiple) {

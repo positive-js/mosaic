@@ -9,8 +9,7 @@ import {
     McTreeSelection,
     McTreeFlatDataSource,
     McTreeFlattener,
-    McTreeModule,
-    MultipleMode
+    McTreeModule
 } from './index';
 
 
@@ -529,7 +528,7 @@ class SimpleMcTreeApp {
     template: `
         <mc-tree-selection
             [(ngModel)]="modelValue"
-            [multiple]="MULTIPLE_MODE.KEYBOARD"
+            multiple="keyboard"
             [dataSource]="dataSource"
             [treeControl]="treeControl">
 
@@ -554,8 +553,6 @@ class McTreeAppMultiple {
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
     treeData: FileNode[];
-
-    MULTIPLE_MODE = MultipleMode;
 
     @ViewChild(McTreeSelection, { static: false }) tree: McTreeSelection;
 

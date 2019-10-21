@@ -20,7 +20,7 @@ import { CanDisable, toBoolean } from '@ptsecurity/mosaic/core';
 
 export enum MultipleMode {
     CHECKBOX = 'checkbox',
-    KEYBOARD = 'KEYBOARD'
+    KEYBOARD = 'keyboard'
 }
 
 /**
