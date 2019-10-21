@@ -4,7 +4,8 @@ import {
     Directive,
     ElementRef,
     OnDestroy,
-    ViewEncapsulation
+    ViewEncapsulation,
+    Renderer2
 } from '@angular/core';
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { mixinColor, mixinDisabled, CanColor, CanDisable, CanDisableCtor, CanColorCtor } from '@ptsecurity/mosaic/core';
@@ -26,7 +27,10 @@ export class McButtonCssStyler {
 
     private icons: HTMLElement[] = [];
 
-    constructor(elementRef: ElementRef) {
+    constructor(
+        elementRef: ElementRef,
+        private renderer: Renderer2
+    ) {
         this.nativeElement = elementRef.nativeElement;
     }
 
@@ -43,28 +47,23 @@ export class McButtonCssStyler {
 
     private addClassModificatorForIcons() {
         const twoIcons = 2;
+        const [firstIconElement, secondIconElement] = this.icons;
 
         if (this.icons.length === 1) {
-            const iconElement = this.icons[0];
             const COMMENT_NODE = 8;
 
-            if (!iconElement.previousElementSibling && !iconElement.nextElementSibling) {
-                if (iconElement.nextSibling && iconElement.nextSibling.nodeType !== COMMENT_NODE) {
-                    iconElement.classList.add('mc-icon_left');
-                    this.nativeElement.classList.add('mc-icon-button_left');
-                }
+            if (firstIconElement.nextSibling && firstIconElement.nextSibling.nodeType !== COMMENT_NODE) {
+                this.renderer.addClass(firstIconElement, 'mc-icon_left');
+                this.renderer.addClass(this.nativeElement, 'mc-icon-button_left');
+            }
 
-                if (iconElement.previousSibling && iconElement.previousSibling.nodeType !== COMMENT_NODE) {
-                    iconElement.classList.add('mc-icon_right');
-                    this.nativeElement.classList.add('mc-icon-button_right');
-                }
+            if (firstIconElement.previousSibling && firstIconElement.previousSibling.nodeType !== COMMENT_NODE) {
+                this.renderer.addClass(firstIconElement, 'mc-icon_right');
+                this.renderer.addClass(this.nativeElement, 'mc-icon-button_right');
             }
         } else if (this.icons.length === twoIcons) {
-            const firstIconElement = this.icons[0];
-            const secondIconElement = this.icons[1];
-
-            firstIconElement.classList.add('mc-icon_left');
-            secondIconElement.classList.add('mc-icon_right');
+            this.renderer.addClass(firstIconElement, 'mc-icon_left');
+            this.renderer.addClass(secondIconElement, 'mc-icon_right');
         }
     }
 }
