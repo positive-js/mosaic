@@ -1,7 +1,6 @@
 import { ComponentPortal } from '@angular/cdk/portal';
-import { Component, ElementRef, Inject, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, Input } from '@angular/core';
 import { EXAMPLE_COMPONENTS, LiveExample } from '@ptsecurity/mosaic-examples';
-import { McTooltip } from '@ptsecurity/mosaic/tooltip';
 
 import { CopierService } from '../copier/copier.service';
 
@@ -31,7 +30,10 @@ export class ExampleViewer {
     shadowHide = 'hljs-shadow_hidden';
     maxEditorLength = 15;
     lineNumbers = '';
-    mcTooltipDelay = 3000;
+    codeCopyDelay = 1000;
+
+    codeCopySuccessClass: string = 'docs-example-source-copy_success';
+
     /** String key of the currently displayed example. */
     @Input()
     get example() {
@@ -52,7 +54,6 @@ export class ExampleViewer {
 
     private _example: string;
 
-    @ViewChild('tooltip', { static: false }) tooltip: McTooltip;
     constructor(private copier: CopierService,
                 @Inject(ElementRef) elementRef: ElementRef) {
         this.elementRef = elementRef;
@@ -95,11 +96,10 @@ export class ExampleViewer {
         sel.addRange(range);
         document.execCommand('copy');
         sel.removeAllRanges();
-
-        this.tooltip.show();
+        event.target.parentNode.classList.add(this.codeCopySuccessClass);
         setTimeout(() => {
-            this.tooltip.hide();
-        }, this.mcTooltipDelay);
+            event.target.parentNode.classList.remove(this.codeCopySuccessClass);
+        }, this.codeCopyDelay);
     }
 
     private resolveHighlightedExampleFile(fileName: string) {

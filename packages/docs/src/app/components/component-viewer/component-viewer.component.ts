@@ -108,28 +108,49 @@ export class ComponentOverviewComponent implements OnDestroy {
         const codeBlocks: NodeListOf<Element> = document.querySelectorAll('.docs-markdown__pre .docs-markdown__code');
 
         codeBlocks.forEach((codeBlock) => {
+            // Creating copy code Block
+            const copyBlock = document.createElement('span');
+            copyBlock.className = 'docs-markdown-code-block';
+
+            // Creating copy success message
+            const copySuccessBlock = document.createElement('span');
+            copySuccessBlock.className = 'docs-markdown-code-block__copied';
+            copySuccessBlock.innerText = 'Скопировано';
+
+            const succeedIcon = document.createElement('i');
+            succeedIcon.className = 'mc mc-check_16';
+            copySuccessBlock.prepend(succeedIcon);
+
+            // Adding copy success message to copy code Block
+            copyBlock.appendChild(copySuccessBlock);
+
+            // Creating copy Icon
             const copyIcon = document.createElement('i');
             copyIcon.className = 'mc mc-copy_16 docs-markdown__code-icon';
             copyIcon.addEventListener('click', this.copyCode);
-            codeBlock.prepend(copyIcon);
+            // Adding copy Icon to copy code Block
+            copyBlock.appendChild(copyIcon);
+
+            codeBlock.prepend(copyBlock);
         });
     }
 
     copyCode(event: Event) {
-        const codeCopyAnimationTime = 200;
-        const code = (<HTMLElement> event.target).parentNode;
+        const codeCopyAnimationTime = 1000;
+        const copyBlock = (<HTMLElement> event.target).parentElement.parentElement;
 
         const range = document.createRange();
-        range.selectNodeContents(code);
+        range.selectNodeContents(copyBlock);
         const sel = window.getSelection();
         sel.removeAllRanges();
         sel.addRange(range);
         document.execCommand('copy');
         sel.removeAllRanges();
 
-        (<HTMLElement> event.target).classList.add('docs-markdown__code-icon_active');
+        copyBlock.classList.add('docs-markdown-code-block_success');
+
         setTimeout(() => {
-            (<HTMLElement> event.target).classList.remove('docs-markdown__code-icon_active');
+            copyBlock.classList.remove('docs-markdown-code-block_success');
         }, codeCopyAnimationTime);
     }
 

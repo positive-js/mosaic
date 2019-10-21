@@ -12,13 +12,28 @@
     display: none;
 }
 
-.docs-example-source_copy {
+.docs-example-source-copy {
     display: flex;
     position: absolute;
     top: 40px;
     right: 0;
     z-index: 10;
     padding: 6px 6px;
+
+    .code-copy__copied {
+        display: none;
+        font-size: 14px;
+    }
+
+    &_success {
+        .code-copy__copied {
+            display: block;
+        }
+
+        .code-copy__icon {
+            display: none;
+        }
+    }
 }
 
 .docs-example-viewer-title {
@@ -31,12 +46,6 @@
 
 .docs-example-viewer-title-spacer {
     flex: 1 1 auto;
-}
-
-.docs-example-source-copy {
-    position: absolute;
-    top: 8px;
-    display: none;
 }
 
 .docs-example-source-wrapper {
