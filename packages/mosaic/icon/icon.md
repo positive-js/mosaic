@@ -1,30 +1,44 @@
-### Installation
-Note that Mosaic Icons is optional package and it should be installed manually.
+### Установка
+Обратите внимание, что Mosaic Icons - это необязательный пакет, и его следует установить вручную.
 
 ##### NPM
-`npm install @ptsecurity/mosaic-icons --save`
+```
+npm install @ptsecurity/mosaic-icons --save
+```
+
 ##### Yarn
-`yarn add @ptsecurity/mosaic-icons`
+```
+yarn add @ptsecurity/mosaic-icons
+```
 
-Then you should add icons styles:
+Затем вы должны импортировть стили:
+```
+@import "~@ptsecurity/mosaic-icons/dist/styles/mc-icons.css";
+```
 
-`@import "~@ptsecurity/mosaic-icons/dist/styles/mc-icons.css";`
+И импортируйте McIconModule в ваш модуль.
 
-And finally import McIconModule to your component module.
+```
+import { McIconModule } from '@ptsecurity/mosaic';
+```
 
-`import { McIconModule } from '@ptsecurity/mosaic';`
-
-If mc-icons.css does't suit your project, you can also add:
+Если *.css не используется вашем проекте, вы также можете добавить:
 
 - mc-icons.less;
-- mc-icons-embed.css with embedded font included.
+- mc-icons.scss;
+- mc-icons-embed.css (включает встроенные шрифты)
 
-### Variants
+### Примеры использования
 
-There are two icon usage variants:
+Есть два варианта использования иконок:
 
-1. `<i mc-icon="mc-gear_16"></i>`;
+1. Добавить атрибут `[color]`, используя следующие значения: *primary*, *second*, *error*.
 
-    In this case you can provide `[color]` attribute. It can have following values: *primary*, *second*, *error*.
+```
+<i mc-icon="mc-gear_16" color="primary"></i>
+```
 
-2. Simply `<i class="mc mc-gear_16"></i>`.
+2. Более простой способ
+```
+<i class="mc mc-gear_16"></i>
+```
