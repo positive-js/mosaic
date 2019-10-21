@@ -6,6 +6,10 @@
         display: block;
         overflow-x: auto;
         padding: 0.5em;
+    }
+
+    .hljs,
+    .docs-example-source-copy {
         background: #2b2b2b;
         color: #bababa;
     }
