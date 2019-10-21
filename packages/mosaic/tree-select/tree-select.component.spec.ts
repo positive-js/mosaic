@@ -651,7 +651,7 @@ class BasicSelectOnPushPreselected {
     template: `
         <mc-form-field>
             <mc-tree-select
-                [multiple]="true"
+                multiple
                 placeholder="Food"
                 [formControl]="control">
 

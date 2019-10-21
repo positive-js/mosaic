@@ -26,8 +26,7 @@
     <!--no-unselect="false"-->
 <!--    multiple-->
 <mc-tree-selection
-    multiple="true"
-    [multipleMode]="MULTIPLE_MODE.CTRL"
+    [multiple]="MULTIPLE_MODE.KEYBOARD"
     [disabled]="disableState"
     [(ngModel)]="modelValue"
     [dataSource]="dataSource"

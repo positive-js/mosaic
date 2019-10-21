@@ -103,19 +103,16 @@ export class McTreeSelection extends CdkTree<McTreeOption>
 
     @Output() readonly selectionChange = new EventEmitter<McTreeSelectionChange>();
 
-    @Input()
-    multipleMode: MultipleMode = MultipleMode.CHECKBOX;
+    @Input('multiple')
+    multipleMode?: MultipleMode;
 
-    @Input()
     get multiple(): boolean {
-        return this._multiple;
+        return !!this.multipleMode;
     }
 
     set multiple(value: boolean) {
-        this._multiple = coerceBooleanProperty(value);
+        this.multipleMode = coerceBooleanProperty(value) ? this.multipleMode || MultipleMode.CHECKBOX : undefined;
     }
-
-    private _multiple: boolean = false;
 
     @Input()
     get autoSelect(): boolean {
@@ -173,12 +170,19 @@ export class McTreeSelection extends CdkTree<McTreeOption>
         differs: IterableDiffers,
         changeDetectorRef: ChangeDetectorRef,
         @Attribute('tabindex') tabIndex: string,
-        @Attribute('multiple') multiple: string
+        @Attribute('multiple') private multipleAttr: string
     ) {
         super(differs, changeDetectorRef);
 
         this.tabIndex = parseInt(tabIndex) || 0;
-        this.multiple = multiple === null ? false : coerceBooleanProperty(multiple);
+    }
+
+    ngOnInit() {
+        super.ngOnInit();
+
+        if (this.multipleAttr !== null) {
+            this.multiple = true;
+        }
 
         if (this.multiple) {
             this.autoSelect = false;
@@ -320,7 +324,7 @@ export class McTreeSelection extends CdkTree<McTreeOption>
                     case MultipleMode.CHECKBOX:
                         this.selectionModel.toggle(option.data);
                         break;
-                    case MultipleMode.CTRL:
+                    case MultipleMode.KEYBOARD:
                         this.selectionModel.clear();
                         this.selectionModel.toggle(option.data);
                 }
