@@ -1519,7 +1519,6 @@ describe('McTreeSelect', () => {
                     flush();
 
                     const optionToClick = overlayContainerElement.querySelectorAll('mc-tree-option')[2] as HTMLElement;
-                    optionToClick.focus();
                     optionToClick.click();
                     fixture.detectChanges();
                     flush();
@@ -1941,9 +1940,8 @@ describe('McTreeSelect', () => {
                 }));
 
                 it('should set the tabindex of each option according to disabled state', fakeAsync(() => {
-                    expect(options[0].getAttribute('tabindex')).toEqual('0');
-                    expect(options[1].getAttribute('tabindex')).toEqual('0');
-                    expect(options[3].getAttribute('tabindex')).toEqual('-1');
+                    expect(options[0].getAttribute('tabindex')).toEqual('-1');
+                    expect(options[3].getAttribute('tabindex')).toEqual(null);
                 }));
             });
         });

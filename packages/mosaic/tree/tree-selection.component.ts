@@ -23,22 +23,23 @@ import { NodeDef, ViewData } from '@angular/core/esm2015/src/view';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import {
+    hasModifierKey,
     END,
     ENTER,
-    hasModifierKey,
     HOME,
     LEFT_ARROW,
     PAGE_DOWN,
     PAGE_UP,
     RIGHT_ARROW,
-    SPACE
+    SPACE,
+    TAB
 } from '@ptsecurity/cdk/keycodes';
 import { CdkTree, CdkTreeNodeOutlet, FlatTreeControl } from '@ptsecurity/cdk/tree';
 import { CanDisable, getMcSelectNonArrayValueError, HasTabIndex } from '@ptsecurity/mosaic/core';
-import { Subject } from 'rxjs';
+import { merge, Observable, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { MC_TREE_OPTION_PARENT_COMPONENT, McTreeOption } from './tree-option.component';
+import { MC_TREE_OPTION_PARENT_COMPONENT, McTreeOption, McTreeOptionEvent } from './tree-option.component';
 
 
 export enum MultipleMode {
@@ -77,7 +78,10 @@ interface SelectionModelOption {
     host: {
         class: 'mc-tree-selection',
 
-        '[tabindex]': 'tabIndex',
+        '[attr.tabindex]': 'tabIndex',
+
+        '(focus)': 'focus()',
+        '(blur)': 'blur()',
 
         '(keydown)': 'onKeyDown($event)',
         '(window:resize)': 'updateScrollSize()'
@@ -102,6 +106,8 @@ export class McTreeSelection extends CdkTree<McTreeOption>
 
     selectionModel: SelectionModel<SelectionModelOption>;
 
+    resetFocusedItemOnBlur: boolean = true;
+
     @Input() treeControl: FlatTreeControl<McTreeOption>;
 
     @Output() readonly navigationChange = new EventEmitter<McTreeNavigationChange>();
@@ -109,6 +115,15 @@ export class McTreeSelection extends CdkTree<McTreeOption>
     @Output() readonly selectionChange = new EventEmitter<McTreeSelectionChange>();
 
     multipleMode: MultipleMode | null;
+
+    get optionFocusChanges(): Observable<McTreeOptionEvent> {
+        return merge(...this.renderedOptions.map((option) => option.onFocus));
+    }
+
+    get optionBlurChanges(): Observable<McTreeOptionEvent> {
+        return merge(...this.renderedOptions.map((option) => option.onBlur));
+    }
+
 
     get multiple(): boolean {
         return !!this.multipleMode;
@@ -153,21 +168,26 @@ export class McTreeSelection extends CdkTree<McTreeOption>
 
     private _disabled: boolean = false;
 
-    get tabIndex(): number {
-        return this.disabled ? -1 : this._tabIndex;
+    @Input()
+    get tabIndex(): any {
+        return this._tabIndex;
     }
 
-    set tabIndex(value: number) {
-        this._tabIndex = value != null ? value : 0;
+    set tabIndex(value: any) {
+        this._tabIndex = value;
     }
 
-    private _tabIndex: number;
+    private _tabIndex = 0;
 
     get showCheckbox(): boolean {
         return this.multipleMode === MultipleMode.CHECKBOX;
     }
 
     private readonly destroy = new Subject<void>();
+
+    private optionFocusSubscription: Subscription | null;
+
+    private optionBlurSubscription: Subscription | null;
 
     constructor(
         private elementRef: ElementRef,
@@ -218,6 +238,11 @@ export class McTreeSelection extends CdkTree<McTreeOption>
         this.renderedOptions.changes
             .pipe(takeUntil(this.destroy))
             .subscribe((options) => {
+                this.resetOptions();
+
+                // Check to see if we need to update our tab index
+                this.updateTabIndex();
+
                 // todo need to do optimisation
                 options.forEach((option) => {
                     option.deselect();
@@ -234,6 +259,21 @@ export class McTreeSelection extends CdkTree<McTreeOption>
     ngOnDestroy(): void {
         this.destroy.next();
         this.destroy.complete();
+    }
+
+    focus(): void {
+        if (this.renderedOptions.length === 0) { return; }
+
+        this.keyManager.setFirstItemActive();
+    }
+
+    blur() {
+        if (!this.hasFocusedOption() && this.resetFocusedItemOnBlur) {
+            this.keyManager.setActiveItem(-1);
+        }
+
+        this.onTouched();
+        this.changeDetectorRef.markForCheck();
     }
 
     onKeyDown(event: KeyboardEvent): void {
@@ -283,6 +323,9 @@ export class McTreeSelection extends CdkTree<McTreeOption>
                 event.preventDefault();
 
                 break;
+            case TAB:
+                return;
+
             default:
                 this.keyManager.onKeydown(event);
         }
@@ -462,6 +505,55 @@ export class McTreeSelection extends CdkTree<McTreeOption>
 
     getSelectedValues(): any[] {
         return this.selectionModel.selected.map((selected) => this.treeControl.getValue(selected));
+    }
+
+    protected updateTabIndex(): void {
+        this._tabIndex = this.renderedOptions.length === 0 ? -1 : 0;
+    }
+
+    private resetOptions() {
+        this.dropSubscriptions();
+        this.listenToOptionsFocus();
+    }
+
+    private dropSubscriptions() {
+        if (this.optionFocusSubscription) {
+            this.optionFocusSubscription.unsubscribe();
+            this.optionFocusSubscription = null;
+        }
+
+        if (this.optionBlurSubscription) {
+            this.optionBlurSubscription.unsubscribe();
+            this.optionBlurSubscription = null;
+        }
+    }
+
+    private listenToOptionsFocus(): void {
+        this.optionFocusSubscription = this.optionFocusChanges
+            .subscribe((event) => {
+                const index: number = this.renderedOptions.toArray().indexOf(event.option);
+
+                if (this.isValidIndex(index)) {
+                    this.keyManager.updateActiveItem(index);
+                }
+            });
+
+        this.optionBlurSubscription = this.optionBlurChanges
+            .subscribe(() => this.blur());
+    }
+
+    /**
+     * Utility to ensure all indexes are valid.
+     * @param index The index to be checked.
+     * @returns True if the index is valid for our list of options.
+     */
+    private isValidIndex(index: number): boolean {
+        return index >= 0 && index < this.renderedOptions.length;
+    }
+
+    /** Checks whether any of the options is focused. */
+    private hasFocusedOption() {
+        return this.renderedOptions.some((option) => option.hasFocus);
     }
 
     private markOptionsForCheck() {

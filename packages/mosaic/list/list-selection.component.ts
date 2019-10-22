@@ -17,10 +17,11 @@ import {
     Inject,
     OnDestroy,
     OnInit,
-    ViewChild
+    ViewChild,
+    NgZone
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { FocusKeyManager, FocusMonitor, IFocusableOption } from '@ptsecurity/cdk/a11y';
+import { FocusKeyManager, IFocusableOption } from '@ptsecurity/cdk/a11y';
 import {
     DOWN_ARROW,
     END,
@@ -43,9 +44,14 @@ import {
     mixinTabIndex,
     HasTabIndex
 } from '@ptsecurity/mosaic/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { merge, Observable, Subject, Subscription } from 'rxjs';
+import { startWith, take, takeUntil } from 'rxjs/operators';
 
+
+// tslint:disable-next-line:naming-convention
+export interface McOptionEvent {
+    option: McListOption;
+}
 
 /**
  * Component for list-options of selection-list. Each list-option can automatically
@@ -56,13 +62,14 @@ import { takeUntil } from 'rxjs/operators';
     exportAs: 'mcListOption',
     selector: 'mc-list-option',
     host: {
-        tabindex: '-1',
+        '[attr.tabindex]': 'tabIndex',
 
         class: 'mc-list-option',
         '[class.mc-selected]': 'selected',
         '[class.mc-focused]': 'hasFocus',
-        '(focus)': 'handleFocus()',
-        '(blur)': 'handleBlur()',
+
+        '(focus)': 'focus()',
+        '(blur)': 'blur()',
         '(click)': 'handleClick($event)'
     },
     templateUrl: 'list-option.html',
@@ -72,6 +79,10 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class McListOption implements OnDestroy, OnInit, IFocusableOption {
     hasFocus: boolean = false;
+
+    readonly onFocus = new Subject<McOptionEvent>();
+
+    readonly onBlur = new Subject<McOptionEvent>();
 
     @ContentChildren(McLine) lines: QueryList<McLine>;
 
@@ -92,7 +103,7 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
 
         if (newValue !== this._disabled) {
             this._disabled = newValue;
-            this._changeDetector.markForCheck();
+            this.changeDetector.markForCheck();
         }
     }
 
@@ -115,16 +126,18 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
 
     private _selected = false;
 
+    get tabIndex(): any {
+        return this.disabled ? null : -1;
+    }
+
     constructor(
         private elementRef: ElementRef<HTMLElement>,
-        private focusMonitor: FocusMonitor,
-        private _changeDetector: ChangeDetectorRef,
+        private changeDetector: ChangeDetectorRef,
+        private ngZone: NgZone,
         @Inject(forwardRef(() => McListSelection)) public listSelection: McListSelection
     ) {}
 
     ngOnInit() {
-        this.focusMonitor.monitor(this.elementRef.nativeElement, false);
-
         if (this._selected) {
             // List options that are selected at initialization can't be reported properly to the form
             // control. This is because it takes some time until the selection-list knows about all
@@ -136,7 +149,7 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
             Promise.resolve().then(() => {
                 if (this._selected || wasSelected) {
                     this.selected = true;
-                    this._changeDetector.markForCheck();
+                    this.changeDetector.markForCheck();
                 }
             });
         }
@@ -149,16 +162,11 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
             Promise.resolve().then(() => this.selected = false);
         }
 
-        this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
         this.listSelection.removeOptionFromList(this);
     }
 
     toggle(): void {
         this.selected = !this.selected;
-    }
-
-    focus(): void {
-        this.elementRef.nativeElement.focus();
     }
 
     getLabel() {
@@ -176,7 +184,7 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
             this.listSelection.selectionModel.deselect(this);
         }
 
-        this._changeDetector.markForCheck();
+        this.changeDetector.markForCheck();
     }
 
     getHeight(): number {
@@ -189,16 +197,35 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
         this.listSelection.setFocusedOption(this, $event);
     }
 
-    handleFocus() {
-        if (this.disabled || this.hasFocus) { return; }
+    focus() {
+        if (!this.hasFocus) {
+            this.elementRef.nativeElement.focus();
 
-        this.hasFocus = true;
+            this.onFocus.next({ option: this });
+
+            Promise.resolve().then(() => {
+                this.hasFocus = true;
+
+                this.changeDetector.markForCheck();
+            });
+        }
     }
 
-    handleBlur() {
-        this.hasFocus = false;
+    blur(): void {
+        // When animations are enabled, Angular may end up removing the option from the DOM a little
+        // earlier than usual, causing it to be blurred and throwing off the logic in the list
+        // that moves focus not the next item. To work around the issue, we defer marking the option
+        // as not focused until the next time the zone stabilizes.
+        this.ngZone.onStable
+            .asObservable()
+            .pipe(take(1))
+            .subscribe(() => {
+                this.ngZone.run(() => {
+                    this.hasFocus = false;
 
-        this.listSelection.onTouched();
+                    this.onBlur.next({ option: this });
+                });
+            });
     }
 
     getHostElement(): HTMLElement {
@@ -233,18 +260,20 @@ export const McListSelectionMixinBase: CanDisableCtor & HasTabIndexCtor & typeof
     encapsulation: ViewEncapsulation.None,
     inputs: ['disabled'],
     host: {
+        '[attr.tabindex]': 'tabIndex',
+
         class: 'mc-list-selection',
-        '[tabIndex]': 'tabIndex',
+
         '(focus)': 'focus()',
-        '(blur)': 'onTouched()',
+        '(blur)': 'blur()',
         '(keydown)': 'onKeyDown($event)',
         '(window:resize)': 'updateScrollSize()'
     },
     providers: [MC_SELECTION_LIST_VALUE_ACCESSOR],
     preserveWhitespaces: false
 })
-export class McListSelection extends McListSelectionMixinBase implements
-    IFocusableOption, CanDisable, HasTabIndex, AfterContentInit, ControlValueAccessor, HasTabIndex {
+export class McListSelection extends McListSelectionMixinBase implements CanDisable, HasTabIndex, AfterContentInit,
+    ControlValueAccessor {
 
     keyManager: FocusKeyManager<McListOption>;
 
@@ -257,19 +286,43 @@ export class McListSelection extends McListSelectionMixinBase implements
 
     @Input() horizontal: boolean = false;
 
+    @Input()
+    get tabIndex(): any {
+        return this._tabIndex;
+    }
+
+    set tabIndex(value: any) {
+        this._tabIndex = value;
+    }
+
+    private _tabIndex = 0;
+
     // Emits a change event whenever the selected state of an option changes.
     @Output() readonly selectionChange: EventEmitter<McListSelectionChange> = new EventEmitter<McListSelectionChange>();
 
     selectionModel: SelectionModel<McListOption>;
 
+    get optionFocusChanges(): Observable<McOptionEvent> {
+        return merge(...this.options.map((option) => option.onFocus));
+    }
+
+    get optionBlurChanges(): Observable<McOptionEvent> {
+        return merge(...this.options.map((option) => option.onBlur));
+    }
+
     // Used for storing the values that were assigned before the options were initialized.
     private tempValues: string[] | null;
 
     /** Emits whenever the component is destroyed. */
-    private readonly destroy = new Subject<void>();
+    private readonly destroyed = new Subject<void>();
+
+    private optionFocusSubscription: Subscription | null;
+
+    private optionBlurSubscription: Subscription | null;
 
     constructor(
         private element: ElementRef,
+        private changeDetectorRef: ChangeDetectorRef,
         @Attribute('tabindex') tabIndex: string,
         @Attribute('auto-select') autoSelect: string,
         @Attribute('no-unselect') noUnselect: string,
@@ -281,7 +334,7 @@ export class McListSelection extends McListSelectionMixinBase implements
         this.multiple = multiple === null ? true : toBoolean(multiple);
         this.noUnselect = noUnselect === null ? true : toBoolean(noUnselect);
 
-        this.tabIndex = parseInt(tabIndex) || 0;
+        this._tabIndex = parseInt(tabIndex) || 0;
 
         this.selectionModel = new SelectionModel<McListOption>(this.multiple);
     }
@@ -294,30 +347,61 @@ export class McListSelection extends McListSelectionMixinBase implements
             .withVerticalOrientation(!this.horizontal)
             .withHorizontalOrientation(this.horizontal ? 'ltr' : null);
 
+        this.keyManager.tabOut
+            .pipe(takeUntil(this.destroyed))
+            .subscribe(() => {
+                this._tabIndex = -1;
+
+                setTimeout(() => {
+                    this._tabIndex = 0;
+                    this.changeDetectorRef.markForCheck();
+                });
+            });
+
         if (this.tempValues) {
             this.setOptionsFromValues(this.tempValues);
             this.tempValues = null;
         }
 
         this.selectionModel.changed
-            .pipe(takeUntil(this.destroy))
+            .pipe(takeUntil(this.destroyed))
             .subscribe((event) => {
                 for (const item of event.added) { item.selected = true; }
 
                 for (const item of event.removed) { item.selected = false; }
             });
 
+        this.options.changes
+            .pipe(startWith(null), takeUntil(this.destroyed))
+            .subscribe(() => {
+                this.resetOptions();
+
+                // Check to see if we need to update our tab index
+                this.updateTabIndex();
+            });
+
         this.updateScrollSize();
     }
 
     ngOnDestroy() {
-        this.destroy.next();
+        this.destroyed.next();
 
-        this.destroy.complete();
+        this.destroyed.complete();
     }
 
-    focus() {
-        this.element.nativeElement.focus();
+    focus(): void {
+        if (this.options.length === 0) { return; }
+
+        this.keyManager.setFirstItemActive();
+    }
+
+    blur() {
+        if (!this.hasFocusedOption()) {
+            this.keyManager.setActiveItem(-1);
+        }
+
+        this.onTouched();
+        this.changeDetectorRef.markForCheck();
     }
 
     selectAll() {
@@ -505,6 +589,46 @@ export class McListSelection extends McListSelectionMixinBase implements
     // Emits a change event if the selected state of an option changed.
     emitChangeEvent(option: McListOption) {
         this.selectionChange.emit(new McListSelectionChange(this, option));
+    }
+
+    protected updateTabIndex(): void {
+        this._tabIndex = this.options.length === 0 ? -1 : 0;
+    }
+
+    private resetOptions() {
+        this.dropSubscriptions();
+        this.listenToOptionsFocus();
+    }
+
+    private dropSubscriptions() {
+        if (this.optionFocusSubscription) {
+            this.optionFocusSubscription.unsubscribe();
+            this.optionFocusSubscription = null;
+        }
+
+        if (this.optionBlurSubscription) {
+            this.optionBlurSubscription.unsubscribe();
+            this.optionBlurSubscription = null;
+        }
+    }
+
+    private listenToOptionsFocus(): void {
+        this.optionFocusSubscription = this.optionFocusChanges
+            .subscribe((event) => {
+                const index: number = this.options.toArray().indexOf(event.option);
+
+                if (this.isValidIndex(index)) {
+                    this.keyManager.updateActiveItem(index);
+                }
+            });
+
+        this.optionBlurSubscription = this.optionBlurChanges
+            .subscribe(() => this.blur());
+    }
+
+    /** Checks whether any of the options is focused. */
+    private hasFocusedOption() {
+        return this.options.some((option) => option.hasFocus);
     }
 
     // Returns the option with the specified value.
