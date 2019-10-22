@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 
 /**
- * @title Basic checkboxes
+ * @title Basic radio
  */
 @Component({
     selector: 'radio-overview-example',
