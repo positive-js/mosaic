@@ -94,7 +94,7 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     get mcMaskClosable() { return this._mcMaskClosable; }
     set mcMaskClosable(value) { this._mcMaskClosable = value; }
     // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
-    _mcMaskClosable = true;
+    _mcMaskClosable = false;
 
     @Input() mcMaskStyle: object;
     @Input() mcBodyStyle: object;

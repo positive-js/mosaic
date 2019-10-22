@@ -119,7 +119,6 @@ export class McModalService {
 
         options.mcModalType = 'confirm';
         options.mcClassName = `mc-confirm mc-confirm-${confirmType} ${options.mcClassName || ''}`;
-        options.mcMaskClosable = false;
 
         return this.create(options);
     }

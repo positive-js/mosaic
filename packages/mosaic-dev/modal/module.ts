@@ -51,7 +51,6 @@ export class ModalDemoComponent {
             mcTitle       : tplTitle,
             mcContent     : tplContent,
             mcFooter      : tplFooter,
-            mcMaskClosable: false,
             mcClosable    : true,
             mcOnOk        : () => console.log('Click ok')
         });
