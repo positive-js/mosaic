@@ -25,6 +25,10 @@
         }
     }
 
+    .mc-select__placeholder {
+        color: map-get($foreground, disabled-text);
+    }
+
     .mc-select__panel {
         border: {
             color: mc-color($second);
