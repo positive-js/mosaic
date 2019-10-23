@@ -1,10 +1,13 @@
-import * as request from 'request';
-import * as dotenv from 'dotenv';
-import { extractReleaseNotes } from './extract-release-notes';
-import { join } from "path";
-import { CHANGELOG_FILE_NAME } from './stage-release';
 import chalk from 'chalk';
+import * as dotenv from 'dotenv';
+import { join } from 'path';
+import * as request from 'request';
 
+import { extractReleaseNotes } from './extract-release-notes';
+import { CHANGELOG_FILE_NAME } from './stage-release';
+
+
+const HTTP_CODE_OK = 200;
 
 export function notify(tag, version) {
     if (!verifyNotificationPossibility()) {
@@ -31,8 +34,10 @@ ${prepareChangeLog(version)}"
         headers,
         body
     }, (error, response) => {
-        if (error || response.statusCode !== 200) {
+        if (error || response.statusCode !== HTTP_CODE_OK) {
+            // tslint:disable-next-line:no-console
             console.error(chalk.red(`  ✘   Could not post notification in Mattermost.`));
+
             return;
         }
 
@@ -50,5 +55,5 @@ function prepareChangeLog(version) {
     const changelogPath = join(join(__dirname, '../../'), CHANGELOG_FILE_NAME);
     const extractedReleaseNotes = extractReleaseNotes(changelogPath, version);
 
-    return extractedReleaseNotes.releaseNotes.replace(/"/g, '\\\"')
+    return extractedReleaseNotes.releaseNotes.replace(/"/g, '\\\"');
 }
