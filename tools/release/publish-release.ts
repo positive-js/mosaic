@@ -16,6 +16,7 @@ import { checkReleasePackage } from './release-output/check-packages';
 import { releasePackages } from './release-output/release-packages';
 import { CHANGELOG_FILE_NAME } from './stage-release';
 import { parseVersionName, Version } from './version-name/parse-version';
+import { notify } from './notify-release';
 
 
 /** Maximum allowed tries to authenticate NPM. */
@@ -143,6 +144,8 @@ class PublishReleaseTask extends BaseReleaseTask {
 
         console.info(chalk.yellow(`  ⚠   Please draft a new release of the version on Github.`));
         console.info(chalk.yellow(`      ${newReleaseUrl}`));
+
+        notify(releasePackages, npmDistTag, newVersionName);
     }
 
     /**

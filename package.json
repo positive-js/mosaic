@@ -26,6 +26,7 @@
         "@ptsecurity/mosaic-icons": "~3.0.0",
         "@webcomponents/custom-elements": "^1.2.4",
         "core-js": "^2.6.0",
+        "request": "^2.88.0",
         "rxjs": "^6.4.0",
         "snyk": "^1.228.5",
         "systemjs": "0.19.43",
