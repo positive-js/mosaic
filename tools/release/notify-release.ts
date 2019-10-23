@@ -7,11 +7,11 @@ import chalk from 'chalk';
 
 
 export function notify(releasePackages, tag, version) {
-    const result = dotenv.config();
-
     if (!verifyNotificationPossibility()) {
         return;
     }
+    
+    const result = dotenv.config();
 
     const url = result.parsed.MATTERMOST_ENDPOINT_URL;
     const channel = result.parsed.MATTERMOST_CHANNEL;
@@ -48,7 +48,7 @@ ${prepareChangeLog(version)}"
 export function verifyNotificationPossibility() {
     const result = dotenv.config();
 
-    return !result.error;
+    return !result.error && result.parsed.MATTERMOST_ENDPOINT_URL && result.parsed.MATTERMOST_CHANNEL;
 }
 
 function formatPackagesLinks(releasePackages = [], tag) {
