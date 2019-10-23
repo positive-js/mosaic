@@ -10,15 +10,11 @@ export function notify(releasePackages, tag, version) {
     if (!verifyNotificationPossibility()) {
         return;
     }
-    
+
     const result = dotenv.config();
 
     const url = result.parsed.MATTERMOST_ENDPOINT_URL;
     const channel = result.parsed.MATTERMOST_CHANNEL;
-
-    if (!url || !channel) {
-        return;
-    }
 
     const headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
 
