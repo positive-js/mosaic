@@ -50,9 +50,9 @@ ${prepareChangeLog(version)}"
 function formatPackagesLinks(releasePackages = [], tag) {
     const npmLogoUrl = 'https://upload.wikimedia.org/wikipedia/commons/d/db/Npm-logo.svg';
 
-    return releasePackages.reduce((value, releaseName, i) => {
+    return releasePackages.reduce((value, packageName, i) => {
         const lastSymbol = i !== releasePackages.length - 1 ? '\n': '';
-        return `${value} #### [![NPM](${npmLogoUrl} =48x) ${releaseName}](https://www.npmjs.com/package/@ptsecurity/${releaseName}/v/${tag})${lastSymbol} `
+        return `${value} #### [![NPM](${npmLogoUrl} =48x) ${packageName}](https://www.npmjs.com/package/@ptsecurity/${packageName}/v/${tag})${lastSymbol} `
     }, '');
 }
 
