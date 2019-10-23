@@ -111,6 +111,7 @@
         "node-sass": "^4.11.0",
         "postcss-loader": "^3.0.0",
         "raw-loader": "^0.5.1",
+        "request": "^2.88.0",
         "resolve-bin": "^0.4.0",
         "resolve-url-loader": "^2.3.1",
         "rollup": "^0.56.5",
