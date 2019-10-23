@@ -149,7 +149,7 @@ class PublishReleaseTask extends BaseReleaseTask {
         console.info(chalk.yellow(`  ⚠   Please draft a new release of the version on Github.`));
         console.info(chalk.yellow(`      ${newReleaseUrl}`));
 
-        notify(releasePackages, npmDistTag, newVersionName);
+        notify(npmDistTag, newVersionName);
     }
 
     /**

@@ -6,7 +6,7 @@ import { CHANGELOG_FILE_NAME } from './stage-release';
 import chalk from 'chalk';
 
 
-export function notify(releasePackages, tag, version) {
+export function notify(tag, version) {
     if (!verifyNotificationPossibility()) {
         return;
     }
@@ -23,7 +23,6 @@ export function notify(releasePackages, tag, version) {
         "username": "Wall-e",
         "short": false,
         "text": " #### [![Mosaic Logo](https://i.ibb.co/fQNPgv6/logo-png-200.png =32x32)osaic](https://github.com/positive-js/mosaic/tree/${tag}) was published.
-${formatPackagesLinks(releasePackages, tag)}
 ${prepareChangeLog(version)}"
 }`;
 
@@ -45,15 +44,6 @@ export function verifyNotificationPossibility() {
     const result = dotenv.config();
 
     return !result.error && result.parsed.MATTERMOST_ENDPOINT_URL && result.parsed.MATTERMOST_CHANNEL;
-}
-
-function formatPackagesLinks(releasePackages = [], tag) {
-    const npmLogoUrl = 'https://upload.wikimedia.org/wikipedia/commons/d/db/Npm-logo.svg';
-
-    return releasePackages.reduce((value, packageName, i) => {
-        const lastSymbol = i !== releasePackages.length - 1 ? '\n': '';
-        return `${value} #### [![NPM](${npmLogoUrl} =48x) ${packageName}](https://www.npmjs.com/package/@ptsecurity/${packageName}/v/${tag})${lastSymbol} `
-    }, '');
 }
 
 function prepareChangeLog(version) {
