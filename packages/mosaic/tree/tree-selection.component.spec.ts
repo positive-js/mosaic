@@ -268,6 +268,77 @@ describe('McTreeSelection', () => {
 
                     expect(component.modelValue.length).toBe(4);
                 });
+
+                it('should deselect nodes', () => {
+                    expect(component.modelValue.length).toBe(0);
+
+                    const nodes = getNodes(treeElement);
+
+                    const event = createMouseEvent('click');
+                    Object.defineProperty(event, 'ctrlKey', { get: () => true });
+
+                    dispatchEvent(nodes[0], event);
+                    fixture.detectChanges();
+
+                    dispatchEvent(nodes[1], event);
+                    fixture.detectChanges();
+
+                    dispatchEvent(nodes[2], event);
+                    fixture.detectChanges();
+
+                    dispatchEvent(nodes[3], event);
+                    fixture.detectChanges();
+
+                    (nodes[3] as HTMLElement).focus();
+
+                    expect(component.modelValue.length).toBe(4);
+
+                    const targetNode: HTMLElement = nodes[0] as HTMLElement;
+
+                    targetNode.focus();
+
+                    Object.defineProperty(event, 'ctrlKey', { get: () => false });
+                    Object.defineProperty(event, 'shiftKey', { get: () => true });
+
+                    dispatchEvent(targetNode, event);
+                    fixture.detectChanges();
+
+                    expect(component.modelValue.length).toBe(0);
+                });
+
+                it('should set last selected status', () => {
+                    expect(component.modelValue.length).toBe(0);
+
+                    const nodes = getNodes(treeElement);
+
+                    const event = createMouseEvent('click');
+                    Object.defineProperty(event, 'ctrlKey', { get: () => true });
+
+                    dispatchEvent(nodes[0], event);
+                    fixture.detectChanges();
+
+                    dispatchEvent(nodes[2], event);
+                    fixture.detectChanges();
+
+                    dispatchEvent(nodes[4], event);
+                    fixture.detectChanges();
+
+                    (nodes[3] as HTMLElement).focus();
+
+                    expect(component.modelValue.length).toBe(3);
+
+                    const targetNode: HTMLElement = nodes[0] as HTMLElement;
+
+                    targetNode.focus();
+
+                    Object.defineProperty(event, 'ctrlKey', { get: () => false });
+                    Object.defineProperty(event, 'shiftKey', { get: () => true });
+
+                    dispatchEvent(targetNode, event);
+                    fixture.detectChanges();
+
+                    expect(component.modelValue.length).toBe(1);
+                });
             });
         });
 

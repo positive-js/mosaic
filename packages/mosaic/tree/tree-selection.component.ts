@@ -307,14 +307,17 @@ export class McTreeSelection extends CdkTree<McTreeOption>
             if (withShift) {
                 const previousIndex = this.keyManager.previousActiveItemIndex;
                 const activeIndex = this.keyManager.activeItemIndex;
+                const activeOption = this.renderedOptions.toArray()[activeIndex];
+
+                const targetSelected = !activeOption.selected;
 
                 if (previousIndex < activeIndex) {
                     this.renderedOptions.forEach((item, index) => {
-                        if (index >= previousIndex && index <= activeIndex) { item.setSelected(true); }
+                        if (index >= previousIndex && index <= activeIndex) { item.setSelected(targetSelected); }
                     });
                 } else {
                     this.renderedOptions.forEach((item, index) => {
-                        if (index >= activeIndex && index <= previousIndex) { item.setSelected(true); }
+                        if (index >= activeIndex && index <= previousIndex) { item.setSelected(targetSelected); }
                     });
                 }
             } else if (withCtrl) {
