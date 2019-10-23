@@ -1,3 +1,13 @@
+## 8.0.4 "Calm Hooray" (2019-10-23)
+
+### Mosaic
+
+
+ * bug fix  **button:** fix auto align classes when contains html children ([#302](https://github.com/positive-js/mosaic/issues/302)) ([d917edaaa3859e816159bd13af052ad688bbd3d5](https://github.com/positive-js/mosaic/commit/d917edaaa3859e816159bd13af052ad688bbd3d5))
+ * bug fix  **form-field:** change prefix icon color according the theme settings ([#309](https://github.com/positive-js/mosaic/issues/309)) ([fc85868a47a833419317ff52636e21491dec32ee](https://github.com/positive-js/mosaic/commit/fc85868a47a833419317ff52636e21491dec32ee))
+ * bug fix  **modal:** set mcMaskClosable to false by default (#UIM-172) ([8a59154b0b348071196d780e502534a29ded8b72](https://github.com/positive-js/mosaic/commit/8a59154b0b348071196d780e502534a29ded8b72)), closes [#UIM-172](https://github.com/positive-js/mosaic/issues/UIM-172)
+ * bug fix  **select:** added color for placeholder (#UIM-194) ([#314](https://github.com/positive-js/mosaic/issues/314)) ([ec4a91d7d5de2f355f9b896e9b2dd1d0f3236772](https://github.com/positive-js/mosaic/commit/ec4a91d7d5de2f355f9b896e9b2dd1d0f3236772)), closes [#UIM-194](https://github.com/positive-js/mosaic/issues/UIM-194)
+
 ## 8.0.3 "Retracted Enology" (2019-10-18)
 
 ### Mosaic
