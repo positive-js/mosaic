@@ -9,10 +9,9 @@ import chalk from 'chalk';
 export function notify(releasePackages, tag, version) {
     const result = dotenv.config();
 
-    if (result.error) {
-        throw result.error;
+    if (!verifyNotificationPossibility()) {
+        return;
     }
-
 
     const url = result.parsed.MATTERMOST_ENDPOINT_URL;
     const channel = result.parsed.MATTERMOST_CHANNEL;
@@ -46,6 +45,11 @@ ${prepareChangeLog(version)}"
     });
 }
 
+export function verifyNotificationPossibility() {
+    const result = dotenv.config();
+
+    return !result.error;
+}
 
 function formatPackagesLinks(releasePackages = [], tag) {
     const npmLogoUrl = 'https://upload.wikimedia.org/wikipedia/commons/d/db/Npm-logo.svg';
