@@ -60,5 +60,5 @@ function prepareChangeLog(version) {
     const changelogPath = join(join(__dirname, '../../'), CHANGELOG_FILE_NAME);
     const extractedReleaseNotes = extractReleaseNotes(changelogPath, version);
 
-    return extractedReleaseNotes.releaseNotes.replace(/"/g, '')
+    return extractedReleaseNotes.releaseNotes.replace(/"/g, '\\\"')
 }
