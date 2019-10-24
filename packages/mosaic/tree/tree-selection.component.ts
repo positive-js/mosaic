@@ -174,10 +174,6 @@ export class McTreeSelection extends CdkTree<McTreeOption>
         super(differs, changeDetectorRef);
 
         this.tabIndex = parseInt(tabIndex) || 0;
-    }
-
-    ngOnInit() {
-        super.ngOnInit();
 
         if (this.multipleAttr !== null) {
             this.multiple = true;
@@ -325,15 +321,11 @@ export class McTreeSelection extends CdkTree<McTreeOption>
 
                 this.selectionModel.toggle(option.data);
             } else {
-                switch (this.multipleMode) {
-                    default:
-                    case MultipleMode.CHECKBOX:
-                        this.selectionModel.toggle(option.data);
-                        break;
-                    case MultipleMode.KEYBOARD:
-                        this.selectionModel.clear();
-                        this.selectionModel.toggle(option.data);
+                if (this.multipleMode === MultipleMode.KEYBOARD) {
+                    this.selectionModel.clear();
                 }
+
+                this.selectionModel.toggle(option.data);
             }
         } else {
             if (!this.canDeselectLast(option)) { return; }
