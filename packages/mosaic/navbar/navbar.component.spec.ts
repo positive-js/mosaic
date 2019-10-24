@@ -2,8 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { fakeAsync, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { McNavbarModule, McNavbar } from './index';
 import { McIconModule } from './../icon/icon.module';
+import { McNavbarModule, McNavbar } from './index';
 
 
 const FONT_RENDER_TIMEOUT_MS = 10;

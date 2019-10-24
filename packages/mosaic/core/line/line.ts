@@ -26,10 +26,12 @@ export class McLineSetter {
     }
 
     private setLineClass(count: number): void {
+        const minLineClassNumber = 2;
+        const maxLineClassNumber = 3;
         this.resetClasses();
-        if (count === 2 || count === 3) {
+        if (count === minLineClassNumber || count === maxLineClassNumber) {
             this.setClass(`mc-${count}-line`, true);
-        } else if (count > 3) {
+        } else if (count > maxLineClassNumber) {
             this.setClass(`mc-multi-line`, true);
         }
     }
