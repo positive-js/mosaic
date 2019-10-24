@@ -84,7 +84,8 @@ export class McTabGroupBase {
     // tslint:disable-next-line:naming-convention
     constructor(public _elementRef: ElementRef) { }
 }
-export const mcTabGroupMixinBase:
+// tslint:disable-next-line:naming-convention
+export const McTabGroupMixinBase:
     CanColorCtor &
     typeof McTabGroupBase =
     mixinColor(mixinDisabled(McTabGroupBase));
@@ -107,7 +108,7 @@ export const mcTabGroupMixinBase:
         '[class.mc-tab-group_inverted-header]': 'headerPosition === "below"'
     }
 })
-export class McTabGroup extends mcTabGroupMixinBase implements AfterContentInit,
+export class McTabGroup extends McTabGroupMixinBase implements AfterContentInit,
     AfterContentChecked, OnDestroy, CanColor {
     lightTab: boolean;
 
