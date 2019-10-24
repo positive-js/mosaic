@@ -17,6 +17,6 @@
         // need only for this project
         "no-non-null-assertion": false,
         "strict-type-predicates": false,
-        "no-unbound-method": [true, { "whitelist": ["expect"], "allow-typeof": true }]
+        "no-unbound-method": [true, {"ignore-static": true, "whitelist": ["expect"], "allow-typeof": true }]
     }
 }
