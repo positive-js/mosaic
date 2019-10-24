@@ -9,7 +9,8 @@ import {
 // Boilerplate for applying mixins to McTabLabelWrapper.
 /** @docs-private */
 export class McTabLabelWrapperBase {}
-export const mcTabLabelWrapperMixinBase: CanDisableCtor &
+// tslint:disable-next-line:naming-convention
+export const McTabLabelWrapperMixinBase: CanDisableCtor &
     typeof McTabLabelWrapperBase = mixinDisabled(McTabLabelWrapperBase);
 
 /**
@@ -24,7 +25,7 @@ export const mcTabLabelWrapperMixinBase: CanDisableCtor &
         '[attr.aria-disabled]': '!!disabled'
     }
 })
-export class McTabLabelWrapper extends mcTabLabelWrapperMixinBase implements CanDisable {
+export class McTabLabelWrapper extends McTabLabelWrapperMixinBase implements CanDisable {
     constructor(public elementRef: ElementRef) {
         super();
     }

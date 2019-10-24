@@ -28,7 +28,8 @@ export class McTabNavBase {
     // tslint:disable-next-line:naming-convention
     constructor(public _elementRef: ElementRef) {}
 }
-export const mcTabNavMixinBase: CanColorCtor &
+// tslint:disable-next-line:naming-convention
+export const McTabNavMixinBase: CanColorCtor &
     typeof McTabNavBase = mixinColor(McTabNavBase);
 
 /**
@@ -44,7 +45,7 @@ export const mcTabNavMixinBase: CanColorCtor &
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class McTabNav extends mcTabNavMixinBase
+export class McTabNav extends McTabNavMixinBase
     implements CanColor {
         constructor(elementRef: ElementRef) {
             super(elementRef);
@@ -53,7 +54,8 @@ export class McTabNav extends mcTabNavMixinBase
 
 // Boilerplate for applying mixins to McTabLink.
 export class McTabLinkBase {}
-export const mcTabLinkMixinBase: HasTabIndexCtor & CanDisableCtor &
+// tslint:disable-next-line:naming-convention
+export const McTabLinkMixinBase: HasTabIndexCtor & CanDisableCtor &
     typeof McTabLinkBase = mixinTabIndex(mixinDisabled(McTabLinkBase));
 
 /**
@@ -72,7 +74,7 @@ export const mcTabLinkMixinBase: HasTabIndexCtor & CanDisableCtor &
         '[class.mc-active]': 'active'
     }
 })
-export class McTabLink extends mcTabLinkMixinBase
+export class McTabLink extends McTabLinkMixinBase
     implements OnDestroy, CanDisable, HasTabIndex {
     /** Whether the link is active. */
     @Input()

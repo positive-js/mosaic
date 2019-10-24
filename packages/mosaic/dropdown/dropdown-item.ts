@@ -20,7 +20,8 @@ import { MC_DROPDOWN_PANEL, McDropdownPanel } from './dropdown-panel';
 // Boilerplate for applying mixins to McDropdownItem.
 /** @docs-private */
 export class McDropdownItemBase {}
-export const mcDropdownItemMixinBase: CanDisableCtor & typeof McDropdownItemBase =
+// tslint:disable-next-line:naming-convention
+export const McDropdownItemMixinBase: CanDisableCtor & typeof McDropdownItemBase =
     mixinDisabled(McDropdownItemBase);
 
 /**
@@ -50,7 +51,7 @@ export const mcDropdownItemMixinBase: CanDisableCtor & typeof McDropdownItemBase
         <i *ngIf="triggersNestedDropdown" mc-icon="mc-angle-right-M_16" class="mc-dropdown__trigger"></i>
     `
 })
-export class McDropdownItem extends mcDropdownItemMixinBase
+export class McDropdownItem extends McDropdownItemMixinBase
     implements IFocusableOption, CanDisable, OnDestroy {
 
     /** ARIA role for the dropdown item. */

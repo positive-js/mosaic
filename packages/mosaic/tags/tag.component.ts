@@ -71,7 +71,7 @@ export class McTagBase {
 }
 
 // tslint:disable-next-line:naming-convention
-export const _McTagMixinBase: CanColorCtor & CanDisableCtor & typeof McTagBase = mixinColor(mixinDisabled(McTagBase));
+export const McTagMixinBase: CanColorCtor & CanDisableCtor & typeof McTagBase = mixinColor(mixinDisabled(McTagBase));
 
 
 @Component({
@@ -101,7 +101,7 @@ export const _McTagMixinBase: CanColorCtor & CanDisableCtor & typeof McTagBase =
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class McTag extends _McTagMixinBase implements IFocusableOption, OnDestroy, CanColor, CanDisable {
+export class McTag extends McTagMixinBase implements IFocusableOption, OnDestroy, CanColor, CanDisable {
     /** Emits when the tag is focused. */
     readonly onFocus = new Subject<McTagEvent>();
 

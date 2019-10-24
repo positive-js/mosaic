@@ -221,7 +221,7 @@ export class McListSelectionChange {
 export class McListSelectionBase {}
 
 // tslint:disable-next-line:naming-convention
-export const _McListSelectionMixinBase: CanDisableCtor & HasTabIndexCtor & typeof McListSelectionBase
+export const McListSelectionMixinBase: CanDisableCtor & HasTabIndexCtor & typeof McListSelectionBase
     = mixinTabIndex(mixinDisabled(McListSelectionBase));
 
 @Component({
@@ -243,7 +243,7 @@ export const _McListSelectionMixinBase: CanDisableCtor & HasTabIndexCtor & typeo
     providers: [MC_SELECTION_LIST_VALUE_ACCESSOR],
     preserveWhitespaces: false
 })
-export class McListSelection extends _McListSelectionMixinBase implements
+export class McListSelection extends McListSelectionMixinBase implements
     IFocusableOption, CanDisable, HasTabIndex, AfterContentInit, ControlValueAccessor, HasTabIndex {
 
     keyManager: FocusKeyManager<McListOption>;
