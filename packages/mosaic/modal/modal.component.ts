@@ -65,8 +65,7 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     get mcVisible() { return this._mcVisible; }
     set mcVisible(value) { this._mcVisible = value; }
 
-    // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
-    _mcVisible = false;
+    private _mcVisible = false;
 
     @Output() mcVisibleChange = new EventEmitter<boolean>();
 
@@ -81,20 +80,17 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     @Input()
     get mcClosable() { return this._mcClosable; }
     set mcClosable(value) { this._mcClosable = value; }
-    // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
-    _mcClosable = true;
+    private _mcClosable = true;
 
     @Input()
     get mcMask() { return this._mcMask; }
     set mcMask(value) { this._mcMask = value; }
-    // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
-    _mcMask = true;
+    private _mcMask = true;
 
     @Input()
     get mcMaskClosable() { return this._mcMaskClosable; }
     set mcMaskClosable(value) { this._mcMaskClosable = value; }
-    // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
-    _mcMaskClosable = false;
+    private _mcMaskClosable = false;
 
     @Input() mcMaskStyle: object;
     @Input() mcBodyStyle: object;
@@ -111,8 +107,7 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     @Input()
     get mcOkLoading() { return this._mcOkLoading; }
     set mcOkLoading(value) { this._mcOkLoading = value; }
-    // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
-    _mcOkLoading = false;
+    private _mcOkLoading = false;
 
     @Input() @Output() mcOnOk: EventEmitter<T> | OnClickCallback<T> = new EventEmitter<T>();
     @Input() mcCancelText: string;
@@ -120,8 +115,7 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     @Input()
     get mcCancelLoading() { return this._mcCancelLoading; }
     set mcCancelLoading(value) { this._mcCancelLoading = value; }
-    // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
-    _mcCancelLoading = false;
+    private _mcCancelLoading = false;
 
     @Input() @Output() mcOnCancel: EventEmitter<T> | OnClickCallback<T> = new EventEmitter<T>();
 

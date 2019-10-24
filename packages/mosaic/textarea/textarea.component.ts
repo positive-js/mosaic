@@ -147,11 +147,9 @@ export class McTextarea extends McTextareaMixinBase implements McFormFieldContro
 
     protected uid = `mc-textsrea-${nextUniqueId++}`;
     protected previousNativeValue: any;
-    // tslint:disable:naming-convention
-    protected _disabled = false;
-    protected _id: string;
-    protected _required = false;
-    // tslint:enable:naming-convention
+    private _disabled = false;
+    private _id: string;
+    private _required = false;
 
     private valueAccessor: { value: any };
     private growSubscription: Subscription;

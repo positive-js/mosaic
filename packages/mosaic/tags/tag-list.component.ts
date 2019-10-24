@@ -283,7 +283,6 @@ export class McTagList extends McTagListMixinBase implements McFormFieldControl<
         descendants: true
     }) tags: QueryList<McTag>;
 
-    // public property with setter - should be private?
     // tslint:disable-next-line: naming-convention orthodox-getter-and-setter
     _tabIndex = 0;
 
