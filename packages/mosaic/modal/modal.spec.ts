@@ -12,6 +12,7 @@ import { McModalService } from './modal.service';
 // tslint:disable:no-magic-numbers
 // tslint:disable:max-line-length
 // tslint:disable:no-console
+// tslint:disable:no-empty
 // tslint:disable:no-unnecessary-class
 describe('McModal', () => {
     let modalService: McModalService;
