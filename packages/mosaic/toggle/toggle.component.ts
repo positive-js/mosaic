@@ -29,7 +29,8 @@ export class McToggleBase {
     constructor(public _elementRef: ElementRef) {}
 }
 
-export const mcToggleMixinBase:
+// tslint:disable-next-line: naming-convention
+export const McToggleMixinBase:
     HasTabIndexCtor &
     CanDisableCtor &
     CanColorCtor &
@@ -66,7 +67,7 @@ export class McToggleChange {
         ])
     ]
 })
-export class McToggleComponent extends mcToggleMixinBase
+export class McToggleComponent extends McToggleMixinBase
     implements ControlValueAccessor, CanColor, CanDisable, HasTabIndex {
 
     @ViewChild('input', {static: false}) inputElement: ElementRef;

@@ -47,7 +47,7 @@ export class McTagListBase {
 }
 
 // tslint:disable-next-line:naming-convention
-export const _McTagListMixinBase: CanUpdateErrorStateCtor & typeof McTagListBase = mixinErrorState(McTagListBase);
+export const McTagListMixinBase: CanUpdateErrorStateCtor & typeof McTagListBase = mixinErrorState(McTagListBase);
 
 
 // Increasing integer for generating unique ids for tag-list components.
@@ -79,7 +79,7 @@ export class McTagListChange {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class McTagList extends _McTagListMixinBase implements McFormFieldControl<any>,
+export class McTagList extends McTagListMixinBase implements McFormFieldControl<any>,
     ControlValueAccessor, AfterContentInit, DoCheck, OnInit, OnDestroy, CanUpdateErrorState {
 
     readonly controlType: string = 'mc-tag-list';

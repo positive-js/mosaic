@@ -36,7 +36,8 @@ export class McRadioChange {
 // Boilerplate for applying mixins to McRadioGroup.
 /** @docs-private */
 export class McRadioGroupBase {}
-export const mcRadioGroupMixinBase: CanDisableCtor & typeof McRadioGroupBase = mixinDisabled(McRadioGroupBase);
+// tslint:disable-next-line:naming-convention
+export const McRadioGroupMixinBase: CanDisableCtor & typeof McRadioGroupBase = mixinDisabled(McRadioGroupBase);
 
 /**
  * Provider Expression that allows mc-radio-group to register as a ControlValueAccessor. This
@@ -59,7 +60,7 @@ export const MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR: any = {
     },
     inputs: ['disabled']
 })
-export class McRadioGroup extends mcRadioGroupMixinBase
+export class McRadioGroup extends McRadioGroupMixinBase
     implements AfterContentInit, ControlValueAccessor, CanDisable {
 
     /** Name of the radio button group. All radio buttons inside this group will use this name. */
@@ -285,7 +286,8 @@ export class McRadioButtonBase {
     constructor(public _elementRef: ElementRef) {}
 }
 
-export const mcRadioButtonMixinBase:
+// tslint:disable-next-line:naming-convention
+export const McRadioButtonMixinBase:
     CanColorCtor &
     HasTabIndexCtor &
     typeof McRadioButtonBase =
@@ -307,7 +309,7 @@ export const mcRadioButtonMixinBase:
         '[class.mc-disabled]': 'disabled'
     }
 })
-export class McRadioButton extends mcRadioButtonMixinBase
+export class McRadioButton extends McRadioButtonMixinBase
     implements OnInit, AfterViewInit, OnDestroy, CanColor, HasTabIndex {
 
     /** Whether this radio button is checked. */

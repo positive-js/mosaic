@@ -54,7 +54,8 @@ export class McInputBase {
     }
 }
 
-export const mcInputMixinBase: CanUpdateErrorStateCtor & typeof McInputBase = mixinErrorState(McInputBase);
+// tslint:disable-next-line:naming-convention
+export const McInputMixinBase: CanUpdateErrorStateCtor & typeof McInputBase = mixinErrorState(McInputBase);
 
 
 @Directive({
@@ -259,7 +260,7 @@ export class McNumberInput implements McFormFieldNumberControl<any> {
     },
     providers: [{ provide: McFormFieldControl, useExisting: McInput }]
 })
-export class McInput extends mcInputMixinBase implements McFormFieldControl<any>, OnChanges,
+export class McInput extends McInputMixinBase implements McFormFieldControl<any>, OnChanges,
     OnDestroy, DoCheck, CanUpdateErrorState {
 
     /** An object used to control when error messages are shown. */

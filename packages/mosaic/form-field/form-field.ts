@@ -35,7 +35,8 @@ export class McFormFieldBase {
     constructor(public _elementRef: ElementRef) {}
 }
 
-export const mcFormFieldMixinBase: CanColorCtor & typeof McFormFieldBase = mixinColor(McFormFieldBase);
+// tslint:disable-next-line:naming-convention
+export const McFormFieldMixinBase: CanColorCtor & typeof McFormFieldBase = mixinColor(McFormFieldBase);
 
 @Component({
     selector: 'mc-form-field',
@@ -74,7 +75,7 @@ export const mcFormFieldMixinBase: CanColorCtor & typeof McFormFieldBase = mixin
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class McFormField extends mcFormFieldMixinBase implements
+export class McFormField extends McFormFieldMixinBase implements
     AfterContentInit, AfterContentChecked, AfterViewInit, CanColor {
 
     @ContentChild(McFormFieldControl, {static: false}) control: McFormFieldControl<any>;

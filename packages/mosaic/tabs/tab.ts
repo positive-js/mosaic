@@ -25,7 +25,8 @@ import { McTabLabel } from './tab-label';
 
 
 export class McTabBase {}
-export const mcTabMixinBase: CanDisableCtor & typeof McTabBase = mixinDisabled(
+// tslint:disable-next-line:naming-convention
+export const McTabMixinBase: CanDisableCtor & typeof McTabBase = mixinDisabled(
     McTabBase
 );
 
@@ -40,7 +41,7 @@ export const mcTabMixinBase: CanDisableCtor & typeof McTabBase = mixinDisabled(
     encapsulation: ViewEncapsulation.None,
     exportAs: 'mcTab'
 })
-export class McTab extends mcTabMixinBase
+export class McTab extends McTabMixinBase
     implements OnInit, CanDisable, OnChanges, OnDestroy {
     /** @docs-private */
     get content(): TemplatePortal | null {

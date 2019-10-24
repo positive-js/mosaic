@@ -75,7 +75,8 @@ export class McCheckboxBase {
     }
 }
 
-export const mcCheckboxMixinBase:
+// tslint:disable-next-line:naming-convention
+export const McCheckboxMixinBase:
     HasTabIndexCtor &
     CanColorCtor &
     CanDisableCtor &
@@ -109,7 +110,7 @@ export const mcCheckboxMixinBase:
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class McCheckbox extends mcCheckboxMixinBase implements ControlValueAccessor,
+export class McCheckbox extends McCheckboxMixinBase implements ControlValueAccessor,
     AfterViewInit, OnDestroy, CanColor, CanDisable, HasTabIndex {
 
     /**
