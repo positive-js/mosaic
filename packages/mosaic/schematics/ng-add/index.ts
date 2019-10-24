@@ -6,6 +6,7 @@ import { Schema } from './schema';
 import { mosaicVersion, requiredAngularVersionRange } from './version-names';
 
 
+// tslint:disable-next-line:no-default-export
 export default function(options: Schema): Rule {
 
     return (host: Tree, context: SchematicContext) => {
