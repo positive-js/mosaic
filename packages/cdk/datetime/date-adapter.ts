@@ -60,8 +60,7 @@ export abstract class DateAdapter<D> {
         return this._localeChanges;
     }
 
-    // tslint:disable-next-line:naming-convention
-    protected _localeChanges = new Subject<void>();
+    private _localeChanges = new Subject<void>();
 
     /**
      * Gets the year component of the given date.

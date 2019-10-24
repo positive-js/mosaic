@@ -325,8 +325,7 @@ export class McInput extends McInputMixinBase implements McFormFieldControl<any>
         }
     }
 
-    // tslint:disable-next-line: naming-convention
-    protected _disabled = false;
+    private _disabled = false;
 
     /**
      * Implemented as part of McFormFieldControl.
@@ -341,8 +340,7 @@ export class McInput extends McInputMixinBase implements McFormFieldControl<any>
         this._id = value || this.uid;
     }
 
-    // tslint:disable-next-line: naming-convention
-    protected _id: string;
+    private _id: string;
 
     /**
      * Implemented as part of McFormFieldControl.
@@ -357,8 +355,7 @@ export class McInput extends McInputMixinBase implements McFormFieldControl<any>
         this._required = coerceBooleanProperty(value);
     }
 
-    // tslint:disable-next-line: naming-convention
-    protected _required = false;
+    private _required = false;
 
     // tslint:disable no-reserved-keywords
     /** Input type of the element. */
@@ -380,8 +377,7 @@ export class McInput extends McInputMixinBase implements McFormFieldControl<any>
     }
     // tslint:enable no-reserved-keywords
 
-    // tslint:disable-next-line: naming-convention
-    protected _type = 'text';
+    private _type = 'text';
 
     /**
      * Implemented as part of McFormFieldControl.
