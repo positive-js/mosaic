@@ -47,9 +47,11 @@ function addAnimationsModule(options: Schema) {
 
         if (options.animations) {
             if (hasNgModuleImport(host, appModulePath, noopAnimationsModuleName)) {
-                return console.warn(chalk.red(`Could not set up "${chalk.bold(browserAnimationsModuleName)}" ` +
+                console.warn(chalk.red(`Could not set up "${chalk.bold(browserAnimationsModuleName)}" ` +
                     `because "${chalk.bold(noopAnimationsModuleName)}" is already imported. Please manually ` +
                     `set up browser animations.`));
+
+                return;
             }
 
             addModuleImportToRootModule(host, browserAnimationsModuleName,

@@ -1,14 +1,15 @@
 import { normalize } from '@angular-devkit/core';
+import { WorkspaceProject, WorkspaceSchema } from '@angular-devkit/core/src/experimental/workspace';
 import { SchematicsException, Tree } from '@angular-devkit/schematics';
 import { getProjectFromWorkspace, getProjectStyleFile, getProjectTargetOptions } from '@angular/cdk/schematics';
 import { InsertChange } from '@schematics/angular/utility/change';
-import { WorkspaceProject, WorkspaceSchema } from '@angular-devkit/core/src/experimental/workspace';
+import { getWorkspace } from '@schematics/angular/utility/config';
 import chalk from 'chalk';
 import { join } from 'path';
 
-import { createCustomTheme } from './create-custom-theme';
 import { Schema } from '../schema';
-import { getWorkspace } from '@schematics/angular/utility/config';
+
+import { createCustomTheme } from './create-custom-theme';
 
 
 /** Path segment that can be found in paths that refer to a prebuilt theme. */
