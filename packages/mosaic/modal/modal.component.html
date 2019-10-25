@@ -12,7 +12,7 @@
          [style.zIndex]="mcZIndex"
     ></div>
     <div
-        (click)="onClickMask($event)"
+        (mousedown)="onClickMask($event)"
         class="mc-modal-wrap {{ mcWrapClassName }}"
         [style.zIndex]="mcZIndex"
         [style.display]="hidden ? 'none' : ''"
