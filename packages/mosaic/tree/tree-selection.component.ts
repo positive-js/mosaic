@@ -8,16 +8,16 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChildren,
+    ElementRef,
     EventEmitter,
+    forwardRef,
     Input,
     IterableDiffer,
     IterableDiffers,
     Output,
     QueryList,
     ViewChild,
-    ViewEncapsulation,
-    ElementRef,
-    forwardRef
+    ViewEncapsulation
 } from '@angular/core';
 import { NodeDef, ViewData } from '@angular/core/esm2015/src/view';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -34,16 +34,17 @@ import {
     SPACE
 } from '@ptsecurity/cdk/keycodes';
 import { CdkTree, CdkTreeNodeOutlet, FlatTreeControl } from '@ptsecurity/cdk/tree';
-import {
-    CanDisable,
-    getMcSelectNonArrayValueError,
-    HasTabIndex
-} from '@ptsecurity/mosaic/core';
+import { CanDisable, getMcSelectNonArrayValueError, HasTabIndex } from '@ptsecurity/mosaic/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { MC_TREE_OPTION_PARENT_COMPONENT, McTreeOption } from './tree-option.component';
 
+
+export enum MultipleMode {
+    CHECKBOX = 'checkbox',
+    KEYBOARD = 'keyboard'
+}
 
 export const MC_SELECTION_TREE_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
@@ -107,16 +108,11 @@ export class McTreeSelection extends CdkTree<McTreeOption>
 
     @Output() readonly selectionChange = new EventEmitter<McTreeSelectionChange>();
 
-    @Input()
+    multipleMode: MultipleMode | null;
+
     get multiple(): boolean {
-        return this._multiple;
+        return !!this.multipleMode;
     }
-
-    set multiple(value: boolean) {
-        this._multiple = coerceBooleanProperty(value);
-    }
-
-    private _multiple: boolean = false;
 
     @Input()
     get autoSelect(): boolean {
@@ -167,6 +163,10 @@ export class McTreeSelection extends CdkTree<McTreeOption>
 
     private _tabIndex: number;
 
+    get showCheckbox(): boolean {
+        return this.multipleMode === MultipleMode.CHECKBOX;
+    }
+
     private readonly destroy = new Subject<void>();
 
     constructor(
@@ -179,7 +179,12 @@ export class McTreeSelection extends CdkTree<McTreeOption>
         super(differs, changeDetectorRef);
 
         this.tabIndex = parseInt(tabIndex) || 0;
-        this.multiple = multiple === null ? false : coerceBooleanProperty(multiple);
+
+        if (multiple === MultipleMode.CHECKBOX || multiple === MultipleMode.KEYBOARD) {
+            this.multipleMode = multiple;
+        } else if (multiple !== null) {
+            this.multipleMode = MultipleMode.CHECKBOX;
+        }
 
         if (this.multiple) {
             this.autoSelect = false;
@@ -301,14 +306,17 @@ export class McTreeSelection extends CdkTree<McTreeOption>
             if (withShift) {
                 const previousIndex = this.keyManager.previousActiveItemIndex;
                 const activeIndex = this.keyManager.activeItemIndex;
+                const activeOption = this.renderedOptions.toArray()[activeIndex];
+
+                const targetSelected = !activeOption.selected;
 
                 if (previousIndex < activeIndex) {
                     this.renderedOptions.forEach((item, index) => {
-                        if (index >= previousIndex && index <= activeIndex) { item.setSelected(true); }
+                        if (index >= previousIndex && index <= activeIndex) { item.setSelected(targetSelected); }
                     });
                 } else {
                     this.renderedOptions.forEach((item, index) => {
-                        if (index >= activeIndex && index <= previousIndex) { item.setSelected(true); }
+                        if (index >= activeIndex && index <= previousIndex) { item.setSelected(targetSelected); }
                     });
                 }
             } else if (withCtrl) {
@@ -316,6 +324,10 @@ export class McTreeSelection extends CdkTree<McTreeOption>
 
                 this.selectionModel.toggle(option.data);
             } else {
+                if (this.multipleMode === MultipleMode.KEYBOARD) {
+                    this.selectionModel.clear();
+                }
+
                 this.selectionModel.toggle(option.data);
             }
         } else {

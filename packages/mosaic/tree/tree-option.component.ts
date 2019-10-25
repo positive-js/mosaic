@@ -77,6 +77,10 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements OnInit, O
 
     private _disabled: boolean = false;
 
+    get showCheckbox(): boolean {
+        return this.tree.showCheckbox;
+    }
+
     @Output() readonly onSelectionChange = new EventEmitter<McTreeOptionChange>();
 
     get selected(): boolean {
@@ -141,9 +145,9 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements OnInit, O
         this._selected = selected;
 
         if (selected) {
-            this.tree.selectionModel.select(this.value);
+            this.tree.selectionModel.select(this.data);
         } else {
-            this.tree.selectionModel.deselect(this.value);
+            this.tree.selectionModel.deselect(this.data);
         }
 
         this.changeDetectorRef.markForCheck();

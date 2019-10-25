@@ -73,7 +73,7 @@ import {
 } from '@ptsecurity/mosaic/core';
 import { McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { McTag } from '@ptsecurity/mosaic/tags';
-import { McTreeSelection, McTreeOption } from '@ptsecurity/mosaic/tree';
+import { McTreeSelection, McTreeOption, MultipleMode } from "@ptsecurity/mosaic/tree";
 import { defer, merge, Observable, Subject } from 'rxjs';
 import {
     filter,
@@ -428,10 +428,6 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     }
 
     ngOnInit() {
-        if (this.tree) {
-            this.tree.multiple = this.multiple;
-        }
-
         this.stateChanges.next();
 
         // We need `distinctUntilChanged` here, because some browsers will
@@ -462,7 +458,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
 
         this.options = this.tree.renderedOptions;
         this.tree.autoSelect = this.autoSelect;
-        this.tree.multiple = this.multiple;
+        this.tree.multipleMode = this.multiple ? MultipleMode.CHECKBOX : null;
 
         if (this.multiple) {
             this.tree.noUnselectLast = false;
