@@ -1,3 +1,7 @@
-span {
-    margin-right: 15px;
+.vertical-gap {
+    margin-bottom: 16px;
+}
+
+.mc-badge {
+    margin-right: 8px;
 }
