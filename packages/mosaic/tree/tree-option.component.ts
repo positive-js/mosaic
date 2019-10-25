@@ -18,11 +18,6 @@ import { CdkTreeNode } from '@ptsecurity/cdk/tree';
 import { CanDisable, toBoolean } from '@ptsecurity/mosaic/core';
 
 
-export enum MultipleMode {
-    CHECKBOX = 'checkbox',
-    KEYBOARD = 'keyboard'
-}
-
 /**
  * Injection token used to provide the parent component to options.
  */
@@ -83,7 +78,7 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements OnInit, O
     private _disabled: boolean = false;
 
     get showCheckbox(): boolean {
-        return this.tree.multipleMode === MultipleMode.CHECKBOX;
+        return this.tree.showCheckbox;
     }
 
     @Output() readonly onSelectionChange = new EventEmitter<McTreeOptionChange>();

@@ -38,8 +38,13 @@ import { CanDisable, getMcSelectNonArrayValueError, HasTabIndex } from '@ptsecur
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { MC_TREE_OPTION_PARENT_COMPONENT, McTreeOption, MultipleMode } from './tree-option.component';
+import { MC_TREE_OPTION_PARENT_COMPONENT, McTreeOption } from './tree-option.component';
 
+
+export enum MultipleMode {
+    CHECKBOX = 'checkbox',
+    KEYBOARD = 'keyboard'
+}
 
 export const MC_SELECTION_TREE_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
@@ -103,14 +108,10 @@ export class McTreeSelection extends CdkTree<McTreeOption>
 
     @Output() readonly selectionChange = new EventEmitter<McTreeSelectionChange>();
 
-    multipleMode?: MultipleMode;
+    multipleMode: MultipleMode | null;
 
     get multiple(): boolean {
         return !!this.multipleMode;
-    }
-
-    set multiple(value: boolean) {
-        this.multipleMode = coerceBooleanProperty(value) ? this.multipleMode || MultipleMode.CHECKBOX : undefined;
     }
 
     @Input()
@@ -162,6 +163,10 @@ export class McTreeSelection extends CdkTree<McTreeOption>
 
     private _tabIndex: number;
 
+    get showCheckbox(): boolean {
+        return this.multipleMode === MultipleMode.CHECKBOX;
+    }
+
     private readonly destroy = new Subject<void>();
 
     constructor(
@@ -175,12 +180,10 @@ export class McTreeSelection extends CdkTree<McTreeOption>
 
         this.tabIndex = parseInt(tabIndex) || 0;
 
-        if (multiple !== null) {
-            this.multiple = true;
-
-            if (multiple === MultipleMode.CHECKBOX || multiple === MultipleMode.KEYBOARD) {
-                this.multipleMode = multiple;
-            }
+        if (multiple === MultipleMode.CHECKBOX || multiple === MultipleMode.KEYBOARD) {
+            this.multipleMode = multiple;
+        } else if (multiple !== null) {
+            this.multipleMode = MultipleMode.CHECKBOX;
         }
 
         if (this.multiple) {
