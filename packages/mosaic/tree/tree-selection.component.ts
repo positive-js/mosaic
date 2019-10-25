@@ -169,17 +169,17 @@ export class McTreeSelection extends CdkTree<McTreeOption>
         differs: IterableDiffers,
         changeDetectorRef: ChangeDetectorRef,
         @Attribute('tabindex') tabIndex: string,
-        @Attribute('multiple') private multipleAttr: string
+        @Attribute('multiple') multiple: string
     ) {
         super(differs, changeDetectorRef);
 
         this.tabIndex = parseInt(tabIndex) || 0;
 
-        if (this.multipleAttr !== null) {
+        if (multiple !== null) {
             this.multiple = true;
 
-            if (this.multipleAttr === MultipleMode.CHECKBOX || this.multipleAttr === MultipleMode.KEYBOARD) {
-                this.multipleMode = this.multipleAttr;
+            if (multiple === MultipleMode.CHECKBOX || multiple === MultipleMode.KEYBOARD) {
+                this.multipleMode = multiple;
             }
         }
 

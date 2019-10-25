@@ -12,8 +12,7 @@ import { McInputModule } from '@ptsecurity/mosaic/input';
 import {
     McTreeFlatDataSource,
     McTreeFlattener,
-    McTreeModule,
-    MultipleMode
+    McTreeModule
 } from '@ptsecurity/mosaic/tree';
 
 
@@ -111,8 +110,6 @@ export class DemoComponent {
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
     filterValue: string = '';
-
-    MULTIPLE_MODE = MultipleMode;
 
     modelValue: any = ['Chrome'];
     // modelValue: any[] = ['rootNode_1', 'Documents', 'Calendar', 'Chrome'];

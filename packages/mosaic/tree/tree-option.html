@@ -1,7 +1,7 @@
 <ng-content select="[mc-icon]"></ng-content>
 
 <mc-pseudo-checkbox
-    *ngIf="multiple && multipleMode === MULTIPLE_MODE.CHECKBOX"
+    *ngIf="showCheckbox"
     [state]="selected ? 'checked' : ''"
     [disabled]="disabled">
 </mc-pseudo-checkbox>
