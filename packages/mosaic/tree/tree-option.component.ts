@@ -83,7 +83,7 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements OnInit, O
     private _disabled: boolean = false;
 
     get showCheckbox(): boolean {
-        return this.multiple && this.tree.multipleMode === MultipleMode.CHECKBOX;
+        return this.tree.multipleMode === MultipleMode.CHECKBOX;
     }
 
     @Output() readonly onSelectionChange = new EventEmitter<McTreeOptionChange>();
