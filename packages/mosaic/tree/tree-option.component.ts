@@ -9,14 +9,18 @@ import {
     InjectionToken,
     ChangeDetectionStrategy,
     ViewEncapsulation,
-    OnInit,
-    OnDestroy,
-    AfterContentInit
+    AfterContentInit, NgZone
 } from '@angular/core';
-import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { CdkTreeNode } from '@ptsecurity/cdk/tree';
 import { CanDisable, toBoolean } from '@ptsecurity/mosaic/core';
+import { Subject } from 'rxjs';
+import { take } from 'rxjs/operators';
 
+
+// tslint:disable-next-line:naming-convention
+export interface McTreeOptionEvent {
+    option: McTreeOption;
+}
 
 /**
  * Injection token used to provide the parent component to options.
@@ -35,7 +39,7 @@ let uniqueIdCounter: number = 0;
     templateUrl: './tree-option.html',
     host: {
         '[attr.id]': 'id',
-        '[attr.tabindex]': 'getTabIndex()',
+        '[attr.tabindex]': 'tabIndex',
 
         '[attr.disabled]': 'disabled || null',
 
@@ -43,15 +47,21 @@ let uniqueIdCounter: number = 0;
         '[class.mc-selected]': 'selected',
         '[class.mc-focused]': 'hasFocus',
 
-        '(focus)': 'handleFocus()',
-        '(blur)': 'handleBlur()',
+        '(focus)': 'focus()',
+        '(blur)': 'blur()',
+
         '(click)': 'selectViaInteraction($event)'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: CdkTreeNode, useExisting: McTreeOption }]
 })
-export class McTreeOption extends CdkTreeNode<McTreeOption> implements OnInit, OnDestroy, CanDisable, AfterContentInit {
+export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisable, AfterContentInit {
+
+    readonly onFocus = new Subject<McTreeOptionEvent>();
+
+    readonly onBlur = new Subject<McTreeOptionEvent>();
+
     get value(): any {
         return this._value;
     }
@@ -112,27 +122,23 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements OnInit, O
         return (this.getHostElement().textContent || '').trim();
     }
 
+    get tabIndex(): any {
+        return this.disabled ? null : -1;
+    }
+
     hasFocus: boolean = false;
 
     constructor(
         elementRef: ElementRef,
         private changeDetectorRef: ChangeDetectorRef,
-        private focusMonitor: FocusMonitor,
+        private ngZone: NgZone,
         @Inject(MC_TREE_OPTION_PARENT_COMPONENT) public tree: any
     ) {
         super(elementRef, tree);
     }
 
-    ngOnInit(): void {
-        this.focusMonitor.monitor(this.elementRef.nativeElement, false);
-    }
-
     ngAfterContentInit(): void {
         this.value = this.tree.treeControl.getValue(this.data);
-    }
-
-    ngOnDestroy(): void {
-        this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
     }
 
     toggle(): void {
@@ -153,22 +159,35 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements OnInit, O
         this.changeDetectorRef.markForCheck();
     }
 
-    handleFocus(): void {
+    focus() {
         if (this.disabled || this.hasFocus) { return; }
 
-        this.hasFocus = true;
+        this.elementRef.nativeElement.focus();
 
-        if (this.tree.setFocusedOption) {
-            this.tree.setFocusedOption(this);
-        }
+        this.onFocus.next({ option: this });
+
+        Promise.resolve().then(() => {
+            this.hasFocus = true;
+
+            this.changeDetectorRef.markForCheck();
+        });
     }
 
-    handleBlur(): void {
-        this.hasFocus = false;
-    }
+    blur(): void {
+        // When animations are enabled, Angular may end up removing the option from the DOM a little
+        // earlier than usual, causing it to be blurred and throwing off the logic in the tree
+        // that moves focus not the next item. To work around the issue, we defer marking the option
+        // as not focused until the next time the zone stabilizes.
+        this.ngZone.onStable
+            .asObservable()
+            .pipe(take(1))
+            .subscribe(() => {
+                this.ngZone.run(() => {
+                    this.hasFocus = false;
 
-    focus(): void {
-        this.focusMonitor.focusVia(this.getHostElement(), 'keyboard');
+                    this.onBlur.next({ option: this });
+                });
+            });
     }
 
     getHeight(): number {
@@ -215,10 +234,6 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements OnInit, O
 
     getHostElement(): HTMLElement {
         return this.elementRef.nativeElement;
-    }
-
-    getTabIndex(): string {
-        return this.disabled ? '-1' : '0';
     }
 
     markForCheck() {

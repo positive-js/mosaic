@@ -278,24 +278,14 @@ describe('McTreeSelection', () => {
                     Object.defineProperty(event, 'ctrlKey', { get: () => true });
 
                     dispatchEvent(nodes[0], event);
-                    fixture.detectChanges();
-
                     dispatchEvent(nodes[1], event);
-                    fixture.detectChanges();
-
                     dispatchEvent(nodes[2], event);
+                    (nodes[2] as HTMLElement).focus();
                     fixture.detectChanges();
 
-                    dispatchEvent(nodes[3], event);
-                    fixture.detectChanges();
-
-                    (nodes[3] as HTMLElement).focus();
-
-                    expect(component.modelValue.length).toBe(4);
+                    expect(component.modelValue.length).toBe(3);
 
                     const targetNode: HTMLElement = nodes[0] as HTMLElement;
-
-                    targetNode.focus();
 
                     Object.defineProperty(event, 'ctrlKey', { get: () => false });
                     Object.defineProperty(event, 'shiftKey', { get: () => true });
@@ -323,11 +313,9 @@ describe('McTreeSelection', () => {
                     dispatchEvent(nodes[4], event);
                     fixture.detectChanges();
 
-                    (nodes[3] as HTMLElement).focus();
-
                     expect(component.modelValue.length).toBe(3);
 
-                    const targetNode: HTMLElement = nodes[0] as HTMLElement;
+                    const targetNode: HTMLElement = nodes[2] as HTMLElement;
 
                     targetNode.focus();
 

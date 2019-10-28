@@ -37,7 +37,7 @@
             background: mc-color($background, hover);
         }
 
-        &.cdk-keyboard-focused {
+        &.mc-focused {
             border-color: mc-color($primary);
         }
 

@@ -451,6 +451,8 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     ngAfterContentInit() {
         if (!this.tree) { return; }
 
+        this.tree.resetFocusedItemOnBlur = false;
+
         this.selectionModel = this.tree.selectionModel = new SelectionModel<any>(this.multiple);
         this.tree.ngAfterContentInit();
 
