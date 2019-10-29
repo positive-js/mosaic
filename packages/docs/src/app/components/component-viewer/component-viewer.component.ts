@@ -157,6 +157,10 @@ export class ComponentOverviewComponent implements OnDestroy {
     showDocumentLostAlert() {
         this.documentLost = true;
         this.showView();
+
+        if (this.anchorsComponent) {
+            this.anchorsComponent.setScrollPosition();
+        }
     }
 
     showView() {
