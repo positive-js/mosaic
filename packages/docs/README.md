@@ -18,7 +18,7 @@ Start ng server documentation
 yarn run docs:start 
 ```
 
-Open
+Open app
 ```
 http://localhost:4200/
 ```
