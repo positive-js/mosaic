@@ -21,7 +21,7 @@ interface IAnchor {
 })
 export class AnchorsComponent {
     @Input() anchors: IAnchor[] = [];
-    @Input() headerSelectors = '.docs-header-link_3';
+    @Input() headerSelectors = '.mc-display-3.title, .docs-header-link_3';
 
     click: boolean = false;
     container: string;
@@ -146,7 +146,8 @@ export class AnchorsComponent {
             const bodyTop = this.document.body.getBoundingClientRect().top;
             for (let i = 0; i < headers.length; i++) {
                 const name = headers[i].innerText.trim();
-                const href = `${headers[i].querySelector('span').id}`;
+                const anchorHeader = headers[i].querySelector('span');
+                const href = anchorHeader ? `${anchorHeader.id}` : '';
                 const top = headers[i].getBoundingClientRect().top - bodyTop + this.headerHeight;
 
                 anchors.push({
