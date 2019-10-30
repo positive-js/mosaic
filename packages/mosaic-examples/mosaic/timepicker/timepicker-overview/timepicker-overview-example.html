@@ -1,0 +1,18 @@
+    <mc-form-field >
+        <i *ngIf="isIconVisible" mcPrefix mc-icon="mc-clock_16"></i>
+        <input mcTimepicker
+               [(ngModel)]="value"
+               [disabled]="isDisabled"
+               [time-format]="timeFormat">
+    </mc-form-field>
+
+<mc-checkbox class="example-dropdown-element" [(ngModel)]="isIconVisible">Show icon</mc-checkbox>
+<mc-checkbox class="example-dropdown-element" [(ngModel)]="isDisabled">Disabled</mc-checkbox>
+
+<mc-form-field style="width: 100%">
+    <mc-select [(value)]="timeFormat">
+        <mc-option value="HH:mm">HH:mm</mc-option>
+        <mc-option value="HH:mm:ss">HH:mm:ss</mc-option>
+    </mc-select>
+</mc-form-field>
+
