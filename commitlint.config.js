@@ -42,6 +42,7 @@ module.exports = {
                 'security',
                 'sidepanel',
                 'splitter',
+                'table',
                 'tabs',
                 'tags',
                 'textarea',
