@@ -53,15 +53,12 @@ export const MC_SELECTION_TREE_VALUE_ACCESSOR: any = {
     multi: true
 };
 
-export class McTreeNavigationChange {
-    constructor(
-        public source: McTreeSelection,
-        public option: McTreeOption
-    ) {}
+export class McTreeNavigationChange<T> {
+    constructor(public source: McTreeSelection<any>, public option: T) {}
 }
 
-export class McTreeSelectionChange {
-    constructor(public source: McTreeSelection, public option: McTreeOption) {}
+export class McTreeSelectionChange<T> {
+    constructor(public source: McTreeSelection<any>, public option: T) {}
 }
 
 // tslint:disable-next-line:naming-convention
@@ -95,24 +92,24 @@ interface SelectionModelOption {
         { provide: CdkTree, useExisting: McTreeSelection }
     ]
 })
-export class McTreeSelection extends CdkTree<McTreeOption>
+export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
     implements ControlValueAccessor, AfterContentInit, CanDisable, HasTabIndex {
 
     @ViewChild(CdkTreeNodeOutlet, { static: true }) nodeOutlet: CdkTreeNodeOutlet;
 
-    @ContentChildren(McTreeOption) renderedOptions: QueryList<McTreeOption>;
+    @ContentChildren(McTreeOption) renderedOptions: QueryList<T>;
 
-    keyManager: FocusKeyManager<McTreeOption>;
+    keyManager: FocusKeyManager<T>;
 
     selectionModel: SelectionModel<SelectionModelOption>;
 
     resetFocusedItemOnBlur: boolean = true;
 
-    @Input() treeControl: FlatTreeControl<McTreeOption>;
+    @Input() treeControl: FlatTreeControl<T>;
 
-    @Output() readonly navigationChange = new EventEmitter<McTreeNavigationChange>();
+    @Output() readonly navigationChange = new EventEmitter<McTreeNavigationChange<T>>();
 
-    @Output() readonly selectionChange = new EventEmitter<McTreeSelectionChange>();
+    @Output() readonly selectionChange = new EventEmitter<McTreeSelectionChange<T>>();
 
     multipleMode: MultipleMode | null;
 
@@ -215,7 +212,7 @@ export class McTreeSelection extends CdkTree<McTreeOption>
     }
 
     ngAfterContentInit(): void {
-        this.keyManager = new FocusKeyManager<McTreeOption>(this.renderedOptions)
+        this.keyManager = new FocusKeyManager<T>(this.renderedOptions)
             .withVerticalOrientation(true)
             .withHorizontalOrientation(null);
 
@@ -283,7 +280,7 @@ export class McTreeSelection extends CdkTree<McTreeOption>
         switch (keyCode) {
             case LEFT_ARROW:
                 if (this.keyManager.activeItem) {
-                    this.treeControl.collapse(this.keyManager.activeItem.data);
+                    this.treeControl.collapse(this.keyManager.activeItem.data as T);
                 }
 
                 event.preventDefault();
@@ -291,7 +288,7 @@ export class McTreeSelection extends CdkTree<McTreeOption>
                 return;
             case RIGHT_ARROW:
                 if (this.keyManager.activeItem) {
-                    this.treeControl.expand(this.keyManager.activeItem.data);
+                    this.treeControl.expand(this.keyManager.activeItem.data as T);
                 }
 
                 event.preventDefault();
@@ -341,7 +338,7 @@ export class McTreeSelection extends CdkTree<McTreeOption>
         this.keyManager.withScrollSize(Math.floor(this.getHeight() / this.renderedOptions.first.getHeight()));
     }
 
-    setSelectedOption(option: McTreeOption, $event?: KeyboardEvent): void {
+    setSelectedOption(option: T, $event?: KeyboardEvent): void {
         const withShift = $event ? hasModifierKey($event, 'shiftKey') : false;
         const withCtrl = $event ? hasModifierKey($event, 'ctrlKey') : false;
 
@@ -385,7 +382,7 @@ export class McTreeSelection extends CdkTree<McTreeOption>
         this.emitChangeEvent(option);
     }
 
-    setFocusedOption(option: McTreeOption): void {
+    setFocusedOption(option: T): void {
         this.keyManager.setActiveItem(option);
     }
 
@@ -398,10 +395,10 @@ export class McTreeSelection extends CdkTree<McTreeOption>
     }
 
     renderNodeChanges(
-        data: McTreeOption[],
-        dataDiffer: IterableDiffer<McTreeOption> = this.dataDiffer,
+        data: T[],
+        dataDiffer: IterableDiffer<T> = this.dataDiffer,
         viewContainer: any = this.nodeOutlet.viewContainer,
-        parentData?: McTreeOption
+        parentData?: T
     ): void {
         super.renderNodeChanges(data, dataDiffer, viewContainer, parentData);
 
@@ -453,11 +450,11 @@ export class McTreeSelection extends CdkTree<McTreeOption>
         return this.renderedOptions.first ? this.renderedOptions.first.getHeight() : 0;
     }
 
-    emitNavigationEvent(option: McTreeOption): void {
+    emitNavigationEvent(option: T): void {
         this.navigationChange.emit(new McTreeNavigationChange(this, option));
     }
 
-    emitChangeEvent(option: McTreeOption): void {
+    emitChangeEvent(option: T): void {
         this.selectionChange.emit(new McTreeNavigationChange(this, option));
     }
 
@@ -531,7 +528,7 @@ export class McTreeSelection extends CdkTree<McTreeOption>
     private listenToOptionsFocus(): void {
         this.optionFocusSubscription = this.optionFocusChanges
             .subscribe((event) => {
-                const index: number = this.renderedOptions.toArray().indexOf(event.option);
+                const index: number = this.renderedOptions.toArray().indexOf(event.option as T);
 
                 if (this.isValidIndex(index)) {
                     this.keyManager.updateActiveItem(index);

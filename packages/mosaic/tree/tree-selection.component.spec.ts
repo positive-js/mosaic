@@ -9,7 +9,8 @@ import {
     McTreeSelection,
     McTreeFlatDataSource,
     McTreeFlattener,
-    McTreeModule
+    McTreeModule,
+    McTreeOption
 } from './index';
 
 
@@ -549,7 +550,7 @@ class SimpleMcTreeApp {
 
     treeData: FileNode[];
 
-    @ViewChild(McTreeSelection, { static: false }) tree: McTreeSelection;
+    @ViewChild(McTreeSelection, { static: false }) tree: McTreeSelection<McTreeOption>;
 
     constructor() {
         this.treeFlattener = new McTreeFlattener<FileNode, FileFlatNode>(
@@ -613,7 +614,7 @@ class McTreeAppMultiple {
 
     treeData: FileNode[];
 
-    @ViewChild(McTreeSelection, { static: false }) tree: McTreeSelection;
+    @ViewChild(McTreeSelection, { static: false }) tree: McTreeSelection<McTreeOption>;
 
     constructor() {
         this.treeControl = new FlatTreeControl(this.getLevel, this.isExpandable, this.getValue, this.getValue);
@@ -679,7 +680,7 @@ class McTreeAppWithToggle {
 
     treeData: FileNode[];
 
-    @ViewChild(McTreeSelection, { static: false }) tree: McTreeSelection;
+    @ViewChild(McTreeSelection, { static: false }) tree: McTreeSelection<McTreeOption>;
 
     constructor() {
         this.treeControl = new FlatTreeControl(this.getLevel, this.isExpandable, this.getValue, this.getValue);
@@ -743,7 +744,7 @@ class WhenNodeMcTreeApp {
 
     treeData: FileNode[];
 
-    @ViewChild(McTreeSelection, { static: false }) tree: McTreeSelection;
+    @ViewChild(McTreeSelection, { static: false }) tree: McTreeSelection<McTreeOption>;
 
     constructor() {
         this.treeControl = new FlatTreeControl(this.getLevel, this.isExpandable, this.getValue, this.getValue);
@@ -804,7 +805,7 @@ class FiltrationMcTreeApp {
 
     treeData: FileNode[];
 
-    @ViewChild(McTreeSelection, { static: false }) tree: McTreeSelection;
+    @ViewChild(McTreeSelection, { static: false }) tree: McTreeSelection<McTreeOption>;
 
     constructor() {
         this.treeFlattener = new McTreeFlattener<FileNode, FileFlatNode>(

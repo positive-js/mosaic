@@ -73,7 +73,7 @@ import {
 } from '@ptsecurity/mosaic/core';
 import { McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { McTag } from '@ptsecurity/mosaic/tags';
-import { McTreeSelection, McTreeOption, MultipleMode } from "@ptsecurity/mosaic/tree";
+import { McTreeSelection, McTreeOption, MultipleMode } from '@ptsecurity/mosaic/tree';
 import { defer, merge, Observable, Subject } from 'rxjs';
 import {
     filter,
@@ -217,7 +217,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     /** User-supplied override of the trigger element. */
     @ContentChild(McTreeSelectTrigger, { static: false }) customTrigger: McTreeSelectTrigger;
 
-    @ContentChild(McTreeSelection, { static: false }) tree: McTreeSelection;
+    @ContentChild(McTreeSelection, { static: false }) tree: McTreeSelection<McTreeOption>;
 
     @Input() hiddenItemsText: string = '...ещё';
 
