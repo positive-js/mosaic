@@ -3,28 +3,30 @@
 
 
 @function mc-typography-config(
-    $font-family:   map-get(map-get($fonts, base), font-family),
-    $font-family-mono:   map-get(map-get($fonts, monospace), font-family),
+    $font-family:           map-get(map-get($fonts, base), font-family),
+    $font-family-display:   map-get(map-get($fonts, display), font-family),
+    $font-family-mono:      map-get(map-get($fonts, monospace), font-family),
 
-    $display-1:     mc-typography-level(56px, 76px, -0.4px),
-    $display-2:     mc-typography-level(45px, 56px),
-    $display-3:     mc-typography-level(34px, 44px, 0.25px),
+    $display-1:             mc-typography-level(56px, 76px, -0.4px, 400, $font-family-display),
+    $display-2:             mc-typography-level(45px, 56px, normal, 400, $font-family-display),
+    $display-3:             mc-typography-level(34px, 44px, 0.25px, 400, $font-family-display),
 
-    $headline:      mc-typography-level(24px, 32px),
-    $title:         mc-typography-level(20px, 28px, 0.15px, 500),
-    $subheading:    mc-typography-level(15px, 20px, 0.15px, 500),
+    $headline:              mc-typography-level(24px, 32px, normal, 400, $font-family-display),
+    $title:                 mc-typography-level(20px, 28px, 0.15px, 500, $font-family-display),
 
-    $body:          mc-typography-level(15px, 20px, 0.15px),
-    $body-strong:   mc-typography-level(15px, 20px, 0.15px, 500),
-    $body-caps:     mc-typography-level(15px, 20px, 1.7px, normal, $font-family, uppercase),
-    $body-mono:     mc-typography-level(15px, 20px, normal, normal, $font-family-mono),
+    $subheading:            mc-typography-level(15px, 20px, 0.15px, 500, $font-family),
 
-    $caption:       mc-typography-level(13px, 16px, 0.25px),
-    $caption-caps:  mc-typography-level(13px, 16px, 1.5px, normal, $font-family, uppercase),
-    $caption-mono:  mc-typography-level(13px, 16px, normal, normal, $font-family-mono),
+    $body:                  mc-typography-level(15px, 20px, 0.15px, 400, $font-family),
+    $body-strong:           mc-typography-level(15px, 20px, 0.15px, 500, $font-family),
+    $body-caps:             mc-typography-level(15px, 20px,  1.7px, 400, $font-family, uppercase),
+    $body-mono:             mc-typography-level(15px, 20px, normal, 400, $font-family-mono),
 
-    $small-text:    mc-typography-level(13px, 16px, 0.25px),
-    $extra-small-text:    mc-typography-level(11px, 16px, 0.22px)
+    $caption:               mc-typography-level(13px, 16px, 0.25px, 400, $font-family),
+    $caption-caps:          mc-typography-level(13px, 16px,  1.5px, 400, $font-family, uppercase),
+    $caption-mono:          mc-typography-level(13px, 16px, normal, 400, $font-family-mono),
+
+    $small-text:            mc-typography-level(13px, 16px, 0.25px),
+    $extra-small-text:      mc-typography-level(11px, 16px, 0.22px)
 ) {
 
     $config: (
