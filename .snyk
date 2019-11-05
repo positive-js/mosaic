@@ -14,4 +14,14 @@ ignore:
     - gulp-markdown > marked:
         reason: затратно править файлы документации
         expires: '2019-10-30T12:28:17.125Z'
-patch: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-HTTPSPROXYAGENT-469131:
+    - '@angular/cli > pacote > make-fetch-happen > https-proxy-agent':
+        patched: '2019-11-05T16:07:25.584Z'
+    - '@angular/cli > pacote > npm-registry-fetch > make-fetch-happen > https-proxy-agent':
+        patched: '2019-11-05T16:07:25.584Z'
+    - '@angular/cli > @schematics/update > pacote > make-fetch-happen > https-proxy-agent':
+        patched: '2019-11-05T16:07:25.584Z'
+    - '@angular/cli > @schematics/update > pacote > npm-registry-fetch > make-fetch-happen > https-proxy-agent':
+        patched: '2019-11-05T16:07:25.584Z'
