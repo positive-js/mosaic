@@ -37,8 +37,19 @@
             background-color: if($is-dark, transparent, mc-color($second, 60));
         }
 
-        .mc-modal-close-x:hover .mc-icon {
-            color: mix(map-get($foreground, text), mc-color($second), 90%);
+        .mc-modal-close {
+            border: $mc-button-border-size solid transparent;
+
+            &:hover .mc-button-overlay {
+                background-color: transparent;
+            }
+
+            &:hover,
+            &.cdk-keyboard-focused {
+                .mc-icon {
+                    color: mix(map-get($foreground, text), mc-color($second), 90%);
+                }
+            }
         }
     }
 
