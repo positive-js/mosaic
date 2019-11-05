@@ -39,6 +39,8 @@
                 <mc-cleaner></mc-cleaner>
             </mc-form-field>
 
+            <mc-cleaner #mcSelectCleaner></mc-cleaner>
+
             <div mc-select-search-empty-result>Ничего не найдено</div>
 
             <mc-option *ngFor="let option of filteredOptions | async" [value]="option">{{ option }}</mc-option>
@@ -60,6 +62,8 @@
                 <input mcInput [formControl]="multipleSearchCtrl" type="text" placeholder="Search" />
                 <mc-cleaner></mc-cleaner>
             </mc-form-field>
+
+            <mc-cleaner #mcSelectCleaner></mc-cleaner>
 
             <div mc-select-search-empty-result>Ничего не найдено</div>
 

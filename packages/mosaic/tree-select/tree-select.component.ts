@@ -71,7 +71,7 @@ import {
     getMcSelectNonArrayValueError,
     MC_SELECT_SCROLL_STRATEGY
 } from '@ptsecurity/mosaic/core';
-import { McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
+import { McCleaner, McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { McTag } from '@ptsecurity/mosaic/tags';
 import { McTreeSelection, McTreeOption, MultipleMode } from '@ptsecurity/mosaic/tree';
 import { defer, merge, Observable, Subject } from 'rxjs';
@@ -213,6 +213,8 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     @ViewChild('hiddenItemsCounter', { static: false }) hiddenItemsCounter: ElementRef;
 
     @ViewChildren(McTag) tags: QueryList<McTag>;
+
+    @ContentChild('mcSelectCleaner', { static: true }) cleaner: McCleaner;
 
     /** User-supplied override of the trigger element. */
     @ContentChild(McTreeSelectTrigger, { static: false }) customTrigger: McTreeSelectTrigger;
@@ -382,6 +384,10 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         return this._panelOpen;
     }
 
+    get canShowCleaner(): boolean {
+        return this.cleaner && this.selectionModel.hasValue();
+    }
+
     private _panelOpen = false;
 
     private originalOnKeyDown: (event: KeyboardEvent) => void;
@@ -526,6 +532,16 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
 
         this.destroy.complete();
         this.stateChanges.complete();
+    }
+
+    clearValue($event): void {
+        $event.stopPropagation();
+
+        this.selectionModel.clear();
+
+        this.setSelectionByValue([]);
+
+        this.onChange(this.selectedValues);
     }
 
     /** `View -> model callback called when value changes` */

@@ -72,21 +72,32 @@ $mc-form-field-border-size: 1px;
     }
 }
 
-mc-cleaner {
-    position: absolute;
+.mc-form-field__cleaner {
+    .mc-cleaner {
+        position: absolute;
 
+        top: 0;
+        bottom: 0;
+        right: 0;
+    }
+}
+
+.mc-cleaner {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-
-    top: 0;
-    bottom: 0;
-    right: 0;
 
     width: 32px;
+    height: 100%;
 
     cursor: pointer;
+
+    & .mc-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 100%;
+        height: 100%;
+    }
 }
 
 mc-stepper {

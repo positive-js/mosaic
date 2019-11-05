@@ -2,8 +2,15 @@
 
 .mc-tag-list {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: row;
+}
 
+.mc-tags-list__list-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1 100%;
+
+    min-width: 0;
     min-height: 28px;
 
     padding: 2px 6px;
@@ -15,6 +22,12 @@
 
         height: 22px;
         margin: 2px 4px;
+    }
+}
+
+.mc-tags-list__cleaner {
+    & .mc-cleaner {
+        height: 32px;
     }
 }
 

@@ -77,6 +77,10 @@ export class DemoComponent implements AfterViewInit {
         );
     }
 
+    onClear(): void {
+        this.inputTags.length = 0;
+    }
+
     autocompleteOnCreate(event: McTagInputEvent): void {
         const input = event.input;
         const value = event.value;

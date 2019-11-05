@@ -30,6 +30,10 @@
         </span>
     </div>
 
+    <div class="mc-select__cleaner" *ngIf="canShowCleaner" (click)="clearValue($event)">
+        <ng-content select="mc-cleaner"></ng-content>
+    </div>
+
     <div class="mc-tree-select__arrow-wrapper">
         <i class="mc-tree-select__arrow" mc-icon="mc-angle-down-L_16" color="second"></i>
     </div>
