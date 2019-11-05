@@ -171,8 +171,9 @@ class PublishReleaseTask extends BaseReleaseTask {
         const spawnOptions = {cwd: binDir, stdio: 'inherit'};
 
         execSync('gulp clean', spawnOptions);
-        execSync(`gulp ${releasePackages.map((name) => `${name}:build-release`).join(' ')}`,
-            spawnOptions);
+        execSync('gulp cdk:build-release', spawnOptions);
+        execSync('gulp mosaic-moment-adapter:build-release', spawnOptions);
+        execSync('gulp mosaic:build-release', spawnOptions);
     }
 
     /** Checks the release output by running the release-output validations. */
