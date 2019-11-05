@@ -171,7 +171,7 @@ jobs:
                       - "c3:de:eb:9c:82:70:a8:23:f3:4e:92:b8:07:d2:22:df"
             - *checkout_code
             - *restore_cache
-            - run: yarn run cleanup-preview
+            - run: yarn run docs:cleanup-preview
 
 workflows:
     version: 2
