@@ -1,0 +1,19 @@
+.anchors-menu {
+    position: fixed;
+    top: 64px;
+    width: 300px;
+    right: 0;
+    bottom: 0;
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        margin-top: 25px;
+    }
+
+    &__list-element {
+        list-style-type: none;
+        padding: 6px 16px;
+    }
+}
+

@@ -1,0 +1,20 @@
+@import '../../mosaic/core/theming/theming';
+
+
+@mixin mosaic-docs-app-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+    //$next-theme: mc-palette($map-red); Переменная $map-red не определена
+
+    .docs-app-background {
+        background: map-get($background, background);
+    }
+
+    .docs-footer {
+        background: map-get($primary, background);
+        color: map-get($primary, default-contrast);
+    }
+}

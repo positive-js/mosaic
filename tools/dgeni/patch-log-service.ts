@@ -1,3 +1,5 @@
+/** Regular expression that matches TypeScript mixin names inside of the project. */
+const mixinNameRegex = /_\w+Base/;
 
 /**
  * Function that patches Dgeni's instantiated log service. The patch will hide warnings about
@@ -12,13 +14,13 @@
  * through mixin functions and will be stored as a constant.
  */
 export function patchLogService(log: any) {
-  const warnFn = log.warn;
+    const warnFn = log.warn;
 
-  log.warn = function(message: string) {
-    if (message.includes('Unresolved TypeScript symbol') && message.includes('MixinBase')) {
-      return;
-    }
+    log.warn = function(message: string) {
+        if (message.includes('Unresolved TypeScript symbol') && mixinNameRegex.test(message)) {
+            return;
+        }
 
-    warnFn.apply(this, [message]);
-  };
+        warnFn.apply(this, [message]);
+    };
 }

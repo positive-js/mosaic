@@ -1,0 +1,158 @@
+<div class="alert-example-group">
+    <div class="flex-33 mc-column-container">
+        <h3>Colors</h3>
+
+        <div class="mc-alert mc-alert_error mc-alert_dismissible" [@hideShowAnimator]="isAlertShown(1)">
+            <i mc-icon="mc-info_16" class="mc-alert__icon"></i>
+            Alert text
+            <button class="mc-alert__close" (click)="hideAlert(1)">
+                <i class="mc-icon_light" mc-icon="mc-close-M_16" color="second"></i>
+            </button>
+        </div>
+        <div class="mc-alert mc-alert_warning mc-alert_dismissible" [@hideShowAnimator]="isAlertShown(2)">
+            <i mc-icon="mc-info_16" class="mc-alert__icon"></i>
+            Alert text
+            <button class="mc-alert__close" (click)="hideAlert(2)">
+                <i class="mc-icon_light" mc-icon="mc-close-M_16" color="second"></i>
+            </button>
+        </div>
+        <div class="mc-alert mc-alert_success mc-alert_dismissible" [@hideShowAnimator]="isAlertShown(3)">
+            <i mc-icon="mc-info_16" class="mc-alert__icon"></i>
+            Alert text
+            <button class="mc-alert__close" (click)="hideAlert(3)">
+                <i class="mc-icon_light" mc-icon="mc-close-M_16" color="second"></i>
+            </button>
+        </div>
+        <div class="mc-alert mc-alert_info mc-alert_dismissible" [@hideShowAnimator]="isAlertShown(4)">
+            <i mc-icon="mc-info_16" class="mc-alert__icon"></i>
+            Alert text
+            <button class="mc-alert__close" (click)="hideAlert(4)">
+                <i class="mc-icon_light" mc-icon="mc-close-M_16" color="second"></i>
+            </button>
+        </div>
+        <div class="mc-alert mc-alert_dismissible" [@hideShowAnimator]="isAlertShown(5)">
+            <i mc-icon="mc-info_16" class="mc-alert__icon"></i>
+            Alert text
+            <button class="mc-alert__close" (click)="hideAlert(5)">
+                <i class="mc-icon_light" mc-icon="mc-close-M_16" color="second"></i>
+            </button>
+        </div>
+    </div>
+    <div class="flex-33 mc-column-container">
+        <h3>Normal composition</h3>
+
+        <div class="mc-alert mc-alert_error mc-alert_dismissible" [@hideShowAnimator]="isAlertShown(6)">
+            <i mc-icon="mc-info_16" class="mc-alert__icon"></i>
+            Alert text
+            <button class="mc-alert__close" (click)="hideAlert(6)">
+                <i class="mc-icon_light" mc-icon="mc-close-M_16" color="second"></i>
+            </button>
+        </div>
+
+        <div class="mc-alert mc-alert_warning mc-alert_dismissible" [@hideShowAnimator]="isAlertShown(7)">
+            <i mc-icon="mc-info_16" class="mc-alert__icon"></i>
+            <div>
+                <header>Header</header>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit
+            </div>
+            <button class="mc-alert__close" (click)="hideAlert(7)">
+                <i class="mc-icon_light" mc-icon="mc-close-M_16" color="second"></i>
+            </button>
+        </div>
+
+        <div class="mc-alert mc-alert_success mc-alert_dismissible" [@hideShowAnimator]="isAlertShown(8)">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            <button class="mc-alert__close" (click)="hideAlert(8)">
+                <i class="mc-icon_light" mc-icon="mc-close-M_16" color="second"></i>
+            </button>
+        </div>
+
+
+        <div class="mc-alert mc-alert_info" [@hideShowAnimator]="isAlertShown(9)">
+            <div>
+                <header>Header</header>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                <div class="alert-footer">
+                    <button mc-button color="primary" (click)="hideAlert(9)">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="flex-33 mc-column-container">
+        <h3>Small composition</h3>
+
+        <div class="mc-alert mc-alert_error mc-alert_dismissible mc-alert_small" [@hideShowAnimator]="isAlertShown(10)">
+            <i mc-icon="mc-info_16" class="mc-alert__icon"></i>
+            Alert text
+            <button class="mc-alert__close" (click)="hideAlert(10)">
+                <i class="mc-icon_light" mc-icon="mc-close-M_16" color="second"></i>
+            </button>
+        </div>
+
+        <div class="mc-alert mc-alert_warning mc-alert_dismissible mc-alert_small" [@hideShowAnimator]="isAlertShown(11)">
+            <i mc-icon="mc-info_16" class="mc-alert__icon"></i>
+            <div>
+                <header>Header</header>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit
+            </div>
+            <button class="mc-alert__close" (click)="hideAlert(11)">
+                <i class="mc-icon_light" mc-icon="mc-close-M_16" color="second"></i>
+            </button>
+        </div>
+
+        <div class="mc-alert mc-alert_success mc-alert_dismissible mc-alert_small" [@hideShowAnimator]="isAlertShown(12)">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            <button class="mc-alert__close" (click)="hideAlert(12)">
+                <i class="mc-icon_light" mc-icon="mc-close-M_16" color="second"></i>
+            </button>
+        </div>
+
+        <div class="mc-alert mc-alert_info mc-alert_small" [@hideShowAnimator]="isAlertShown(13)">
+            <div>
+                <header>Header</header>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                <div class="alert-footer">
+                    <a class="mc-link mc-link_dashed" (click)="hideAlert(13)">
+                        <span class="mc-link__text">Close</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mc-column-container">
+    <h2>Long text</h2>
+</div>
+
+<div class="alert-example-group">
+    <div class="flex-50 mc-column-container">
+        <h3>Normal composition</h3>
+
+        <div class="mc-alert mc-alert_dismissible" [@hideShowAnimator]="isAlertShown(14)">
+            <i mc-icon="mc-info_16" class="mc-alert__icon"></i>
+            <div>
+                <header>Header</header>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed iaculis risus ac varius ultricies. Aenean maximus ex at ornare tempus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque sit amet ipsum id augue porta dignissim tristique at nibh. Nullam interdum libero in laoreet pretium. Maecenas et placerat sem. Donec fringilla viverra nunc in vestibulum. Pellentesque suscipit odio ut erat ullamcorper pellentesque eget ac elit. Quisque eleifend orci sit amet erat bibendum sollicitudin. Donec elementum facilisis dui, at volutpat purus. Aliquam posuere non lacus sollicitudin aliquam. Donec nec semper diam, eget imperdiet dui. Integer ornare quam magna, a pretium metus iaculis non. Ut fermentum risus vel sem accumsan, ac egestas nulla sollicitudin. Vivamus nec mi mauris.
+            </div>
+            <button class="mc-alert__close" (click)="hideAlert(14)">
+                <i class="mc-icon_light" mc-icon="mc-close-M_16" color="second"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="flex-50 mc-column-container">
+        <h3>Small composition</h3>
+
+        <div class="mc-alert mc-alert_dismissible mc-alert_small" [@hideShowAnimator]="isAlertShown(15)">
+            <i mc-icon="mc-info_16" class="mc-alert__icon"></i>
+            <div>
+                <header>Header</header>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed iaculis risus ac varius ultricies. Aenean maximus ex at ornare tempus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque sit amet ipsum id augue porta dignissim tristique at nibh. Nullam interdum libero in laoreet pretium. Maecenas et placerat sem. Donec fringilla viverra nunc in vestibulum. Pellentesque suscipit odio ut erat ullamcorper pellentesque eget ac elit. Quisque eleifend orci sit amet erat bibendum sollicitudin. Donec elementum facilisis dui, at volutpat purus. Aliquam posuere non lacus sollicitudin aliquam. Donec nec semper diam, eget imperdiet dui. Integer ornare quam magna, a pretium metus iaculis non. Ut fermentum risus vel sem accumsan, ac egestas nulla sollicitudin. Vivamus nec mi mauris.
+            </div>
+            <button class="mc-alert__close" (click)="hideAlert(15)">
+                <i class="mc-icon_light" mc-icon="mc-close-M_16" color="second"></i>
+            </button>
+        </div>
+    </div>
+</div>

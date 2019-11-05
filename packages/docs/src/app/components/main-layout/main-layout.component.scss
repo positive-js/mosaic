@@ -1,0 +1,17 @@
+.main {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.content {
+    width: calc(100% - 600px); // for Edge
+    margin: {
+        top: 64px;
+        left: 300px;
+        right: 300px;
+        bottom: 62px;
+    }
+
+    padding: 20px 69px;
+}

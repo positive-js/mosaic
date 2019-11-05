@@ -1,0 +1,70 @@
+@mixin transition ($transition) {
+    -webkit-transition: $transition;
+    -moz-transition: $transition;
+    -o-transition: $transition;
+    transition: $transition;
+}
+
+.nav {
+    position: fixed;
+    top: 64px;
+    bottom: 0;
+    z-index: 101;
+
+    overflow: hidden;
+    overflow-y: auto;
+    max-height: 100%;
+    width: 300px;
+
+    padding: {
+        top: 10px;
+        bottom: 10px;
+    };
+
+    &__wrapper {
+        overflow: hidden;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    &__trigger {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+
+        font-size: 17px;
+        text-align: left;
+
+        border: none;
+        background: none;
+        padding: 14px 32px 6px 32px;
+
+        .nav__trigger-icon {
+            @include transition( transform 225ms cubic-bezier(0.4,0.0,0.2,1) );
+
+            &_expanded { &_collapsed { transform: rotate(0); } }
+
+            &_collapsed { transform: rotate(-180deg); }
+        }
+
+    }
+
+    &__item {
+        line-height: 20px;
+        font-size: 15px;
+
+        & > a {
+            position: relative;
+            text-decoration: none;
+            padding: 6px 32px;
+
+            &:hover, &:active, &:focus { text-decoration: none; }
+        }
+
+        &-selected {
+            pointer-events: none;
+            cursor: default;
+        }
+    }
+}

@@ -61,6 +61,25 @@ jobs:
             - attach_workspace: *attach_options
             - run: yarn run valid:lic
 
+    build_mosaic_docs:
+        <<: *job_defaults
+        steps:
+            - attach_workspace: *attach_options
+            - run:
+                  name: Setup Environment Variables
+                  command: |
+                      echo 'export CI_PREVIEW=true' >> $BASH_ENV
+                      echo 'export SHORT_GIT_HASH=$(git rev-parse --short $CIRCLE_SHA1)' >> $BASH_ENV
+                      echo 'export CIRCLE_PULL_REQUEST_NUMBER=$(echo "$CIRCLE_PULL_REQUEST" | cut -d"/" -f7)' >> $BASH_ENV
+                      source $BASH_ENV
+            - run: yarn run build:docs
+            - run: yarn run build:mosaic-examples
+            - run: yarn run docs:prod-build --progress false --base-href /mosaic-previews/pr$CIRCLE_PULL_REQUEST_NUMBER-$SHORT_GIT_HASH/ --output-path dist/releases/mosaic-docs/pr$CIRCLE_PULL_REQUEST_NUMBER-$SHORT_GIT_HASH/
+            - persist_to_workspace:
+                  root: dist
+                  paths:
+                      - *release_path
+
     build_mosaic:
         <<: *job_defaults
         steps:
@@ -125,7 +144,7 @@ jobs:
                       - "c3:de:eb:9c:82:70:a8:23:f3:4e:92:b8:07:d2:22:df"
             - run: ./scripts/deploy/publish-artifacts.sh
 
-    docs_publish:
+    preview_mosaic_docs:
         <<: *job_defaults
         steps:
             - add_ssh_keys:
@@ -133,8 +152,26 @@ jobs:
                       - "c3:de:eb:9c:82:70:a8:23:f3:4e:92:b8:07:d2:22:df"
             - *checkout_code
             - *restore_cache
-            - run: ./scripts/deploy/publish-docs.sh
+            - *attach_release_output
+            - run:
+                name: Setup Environment Variables
+                command: |
+                    echo 'export CI_PREVIEW=true' >> $BASH_ENV
+                    echo 'export SHORT_GIT_HASH=$(git rev-parse --short $CIRCLE_SHA1)' >> $BASH_ENV
+                    echo 'export CIRCLE_PULL_REQUEST_NUMBER=$(echo "$CIRCLE_PULL_REQUEST" | cut -d"/" -f7)' >> $BASH_ENV
+                    source $BASH_ENV
+            - run: yarn run build:docs
+            - run: yarn run docs:publish-preview
 
+    cleanup_preview_mosaic_docs:
+        <<: *job_defaults
+        steps:
+            - add_ssh_keys:
+                  fingerprints:
+                      - "c3:de:eb:9c:82:70:a8:23:f3:4e:92:b8:07:d2:22:df"
+            - *checkout_code
+            - *restore_cache
+            - run: yarn run cleanup-preview
 
 workflows:
     version: 2
@@ -155,6 +192,12 @@ workflows:
             - build_mosaic:
                   requires:
                       - install
+
+            - build_mosaic_docs:
+                  requires:
+                      - build_cdk
+                      - build_mosaic
+                      - build_mosaic-moment-adapter
             # 3 Group
             - test_unit:
                   requires:
@@ -177,11 +220,14 @@ workflows:
                       branches:
                           only:
                               - master
-            - docs_publish:
+
+            - preview_mosaic_docs:
                   requires:
+                      - build_mosaic_docs
                       - test_unit
-                      - build_mosaic
+            - cleanup_preview_mosaic_docs:
+                  requires:
+                      - install
                   filters:
                       branches:
-                          only:
-                              - master
+                          only: master

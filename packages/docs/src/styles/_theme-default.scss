@@ -1,0 +1,19 @@
+// -----------------------------------------------------------------------------------------------------
+// @ Define the default theme
+// -----------------------------------------------------------------------------------------------------
+$primary: mc-palette($mc-blue, 400, 500, 600);
+$primary-red: mc-palette($mc-red, 400, 500, 600);
+$primary-green: mc-palette($mc-green, 400, 500, 600);
+$primary-yellow: mc-palette($mc-yellow, 400, 500, 600);
+
+$second: mc-palette($mc-grey, 100, 300, 400);
+$error: mc-palette($mc-red, 60, 400, 500);
+
+$info: mc-palette($mc-blue, 60, 200, 400);
+$success: mc-palette($mc-green, 60, 200, 400);
+$warning: mc-palette($mc-yellow, 60, 200, 400);
+
+$theme: mc-light-theme($primary, $second, $error, $info, $success, $warning);
+$theme-red: mc-light-theme($primary-red, $second, $error, $info, $success, $warning);
+$theme-green: mc-light-theme($primary-green, $second, $error, $info, $success, $warning);
+$theme-yellow: mc-light-theme($primary-yellow, $second, $error, $info, $success, $warning);

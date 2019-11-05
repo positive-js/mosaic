@@ -1,0 +1,40 @@
+.docs-footer {
+    position: fixed;
+    bottom: 0;
+    z-index: 100;
+    width: 100%;
+    will-change: transform;
+    padding: {
+        left: 300px;
+        right: 300px;
+    };
+
+    &__wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        margin: {
+            right: 68px;
+            left: 68px;
+        };
+        padding: {
+            top: 12px;
+            bottom: 12px;
+        };
+    }
+
+    &__text-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__link { display: inline-flex; }
+
+    &__icon {
+        width: 23.3px;
+        height: 22.7px;
+        opacity: 0.8;
+    }
+}

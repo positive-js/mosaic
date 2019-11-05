@@ -1,0 +1,58 @@
+
+// TODO
+*,
+*::before,
+*::after {
+    box-sizing: border-box; // 1
+}
+
+html {
+    -webkit-text-size-adjust: 100%; // 2
+    -ms-text-size-adjust: 100%; // 2
+
+    -ms-overflow-style: scrollbar; // 3
+
+    -moz-osx-font-smoothing: grayscale;
+
+    // Helps fonts on OSX looks more consistent with other systems
+    // Isn't currently in button styles due to performance concerns
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0); // 4
+    -webkit-touch-callout: none;
+    scroll-behavior: smooth;
+}
+
+// Body
+//
+// 1. remove the margin in all browsers.
+
+body {
+    display: flex;
+    min-height: 100vh;
+    min-width: calc(100vw - (100vw - 100%) ); // cutting out vertical scrollbar
+    font-family: map-get(map-get($fonts, 'base'), font-family);
+    margin: 0; // 1
+}
+
+a {
+    display: block;
+    outline: none;
+    text-decoration: none;
+    color: inherit;
+}
+
+.flex-spacer {
+    flex-grow: 1;
+}
+
+code, pre {
+    font-family: 'Roboto Mono', monospace;
+}
+
+code {
+    font-size: 90%;
+}
+
+pre {
+    font-size: 14px;
+}

@@ -1,0 +1,68 @@
+{
+    "hosting": [
+        {
+            "target": "stable",
+            "public": "dist/releases/mosaic-docs",
+            "cleanUrls": true,
+            "rewrites": [
+                {
+                    "source": "**/!(*.*)",
+                    "destination": "/index.html"
+                }
+            ],
+            "headers": [
+                {
+                    // Hashed CSS/JS files...
+                    "source": "**/*.+([0-9a-f]).@(css|js)",
+                    "headers": [
+                        {"key": "Cache-Control", "value": "max-age=2592000"}  // 30 days
+                    ]
+                },
+                {
+                    // Images, fonts, (non-hashed) CSS/JS files.
+                    "source": "**/*.@(gif|jpg|jpeg|png|svg|webp|js|css|eot|otf|ttf|ttc|woff|woff2)",
+                    "headers": [
+                        {"key": "Cache-Control", "value": "max-age=86400"}  // 1 day
+                    ]
+                }
+            ],
+            "ignore": [
+                "firebase.json",
+                "**/node_modules/**",
+                "tmp"
+            ]
+        },
+        {
+            "target": "v8",
+            "public": "dist/releases/mosaic-docs",
+            "cleanUrls": true,
+            "rewrites": [
+                {
+                    "source": "**/!(*.*)",
+                    "destination": "/index.html"
+                }
+            ],
+            "headers": [
+                {
+                    // Hashed CSS/JS files...
+                    "source": "**/*.+([0-9a-f]).@(css|js)",
+                    "headers": [
+                        {"key": "Cache-Control", "value": "max-age=2592000"}  // 30 days
+                    ]
+                },
+                {
+                    // Images, fonts, (non-hashed) CSS/JS files.
+                    "source": "**/*.@(gif|jpg|jpeg|png|svg|webp|js|css|eot|otf|ttf|ttc|woff|woff2)",
+                    "headers": [
+                        {"key": "Cache-Control", "value": "max-age=86400"}  // 1 day
+                    ]
+                }
+            ],
+            "ignore": [
+                "firebase.json",
+                "**/node_modules/**",
+                "tmp"
+            ]
+        }
+    ]
+}
