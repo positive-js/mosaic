@@ -16,6 +16,9 @@
             "@ptsecurity/mosaic": [
                 "../mosaic/public-api"
             ],
+            "@ptsecurity/mosaic-moment-adapter/*": [
+                "../mosaic-moment-adapter/*"
+            ],
             "@ptsecurity/mosaic-moment-adapter": [
                 "../mosaic-moment-adapter/public-api"
             ]

@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McCheckboxModule } from '@ptsecurity/mosaic/checkbox';
 import { McDropdownModule } from '@ptsecurity/mosaic/dropdown';
@@ -11,12 +12,14 @@ import { McRadioModule } from '@ptsecurity/mosaic/radio';
          McButtonModule,
          McCheckboxModule,
          McDropdownModule,
-         McRadioModule
+         McRadioModule,
+         McMomentDateModule
     ],
     exports: [
         McButtonModule,
         McCheckboxModule,
-        McRadioModule
+        McRadioModule,
+        McMomentDateModule
     ]
 })
 export class ExampleMosaicModule {}
