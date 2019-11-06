@@ -82,7 +82,7 @@ import {
     getMcSelectNonArrayValueError,
     MC_SELECT_SCROLL_STRATEGY
 } from '@ptsecurity/mosaic/core';
-import { McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
+import { McCleaner, McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { McInput } from '@ptsecurity/mosaic/input';
 import { McTag } from '@ptsecurity/mosaic/tags';
 import { defer, merge, Observable, Subject, Subscription } from 'rxjs';
@@ -292,6 +292,8 @@ export class McSelect extends McSelectMixinBase implements
     /** User-supplied override of the trigger element. */
     @ContentChild(McSelectTrigger, { static: false }) customTrigger: McSelectTrigger;
 
+    @ContentChild('mcSelectCleaner', { static: true }) cleaner: McCleaner;
+
     /** All of the defined select options. */
     @ContentChildren(McOption, { descendants: true }) options: QueryList<McOption>;
 
@@ -466,6 +468,10 @@ export class McSelect extends McSelectMixinBase implements
         return this.search && this.options.length === 0 && !!this.search.input.value;
     }
 
+    get canShowCleaner(): boolean {
+        return this.cleaner && this.selectionModel.hasValue();
+    }
+
     /** The scroll position of the overlay panel, calculated to center the selected option. */
     private scrollTop = 0;
 
@@ -567,6 +573,14 @@ export class McSelect extends McSelectMixinBase implements
         this.destroy.next();
         this.destroy.complete();
         this.stateChanges.complete();
+    }
+
+    clearValue($event): void {
+        $event.stopPropagation();
+
+        this.selectionModel.clear();
+
+        this.propagateChanges();
     }
 
     /** `View -> model callback called when value changes` */

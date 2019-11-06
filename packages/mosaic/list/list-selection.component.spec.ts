@@ -52,20 +52,21 @@ describe('McListSelection without forms', () => {
             selectionList = fixture.debugElement.query(By.directive(McListSelection));
         }));
 
-        it('should add and remove focus class on focus/blur', () => {
+        it('should add and remove focus class on focus/blur', fakeAsync(() => {
             // Use the second list item, because the first one is always disabled.
             const listItem = listOptions[1].nativeElement;
 
             expect(listItem.classList).not.toContain('mc-focused');
 
             dispatchFakeEvent(listItem, 'focus');
+            flush();
             fixture.detectChanges();
             expect(listItem.className).toContain('mc-focused');
 
             dispatchFakeEvent(listItem, 'blur');
             fixture.detectChanges();
             expect(listItem.className).not.toContain('mc-focused');
-        });
+        }));
 
         it('should be able to set a value on a list option', () => {
             const optionValues = ['inbox', 'starred', 'sent-mail', 'drafts'];
@@ -464,8 +465,9 @@ describe('McListSelection without forms', () => {
             fixture.detectChanges();
         }));
 
-        it('should be focused when focus on nativeElements', () => {
+        it('should be focused when focus on nativeElements', fakeAsync(() => {
             dispatchFakeEvent(listOption.nativeElement, 'focus');
+            flush();
             fixture.detectChanges();
 
             expect(listItemEl.nativeElement.className).toContain('mc-focused');
@@ -474,7 +476,7 @@ describe('McListSelection without forms', () => {
             fixture.detectChanges();
 
             expect(listItemEl.nativeElement.className).not.toContain('mc-focused');
-        });
+        }));
     });
 
     describe('with option disabled', () => {
@@ -894,7 +896,7 @@ class SelectionListWithSelectedOption {}
 @Component({
     template: `
         <mc-list-selection id="selection-list-4">
-            <mc-list-option checkboxPosition="after" class="test-focus" id="123">
+            <mc-list-option checkboxPosition="after" id="123">
                 Inbox
             </mc-list-option>
         </mc-list-selection>`

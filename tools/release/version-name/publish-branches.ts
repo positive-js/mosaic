@@ -13,7 +13,7 @@ export function getAllowedPublishBranches(version: Version): string[] {
         // It's also possible that the caretaker wants to stage a minor release from a different
         // branch than "master". This can happen if major changes have been merged into "master"
         // and non-major changes are cherry-picked into a separate branch (e.g. 7.x)
-        return ['master', `${version.major}.x`];
+        return [`${version.major}.${version.minor}.x`];
     } else if (versionType === 'patch') {
         return [`${version.major}.${version.minor}.x`];
     }

@@ -13,27 +13,27 @@
     .mc-pseudo-checkbox {
         border-color: mc-color($second);
         background-color: map-get($background, background);;
-    }
 
-    .mc-checkbox-checkmark,
-    .mc-checkbox-mixedmark {
-        color: white;
-    }
+        & .mc-checkbox-checkmark,
+        & .mc-checkbox-mixedmark {
+            color: white;
+        }
 
-    .mc-pseudo-checkbox.mc-checked {
-        border-color: mc-color($primary, if($is-dark-theme, lighter, darker));
+        &.mc-checked {
+            border-color: mc-color($primary, if($is-dark-theme, lighter, darker));
 
-        background: if($is-dark-theme, mc-color($primary, 600), mc-color($primary));
-    }
+            background: if($is-dark-theme, mc-color($primary, 600), mc-color($primary));
+        }
 
-    .mc-pseudo-checkbox.mc-disabled {
-        border-color: map-get($background, button-border);
+        &.mc-disabled {
+            border-color: map-get($background, button-border);
 
-        background-color: map-get($background, button-bg);
+            background-color: map-get($background, button-bg);
 
-        .mc-checkbox-checkmark,
-        .mc-checkbox-mixedmark {
-            color: map-get($foreground, disabled-text);
+            .mc-checkbox-checkmark,
+            .mc-checkbox-mixedmark {
+                color: map-get($foreground, disabled-text);
+            }
         }
     }
 }

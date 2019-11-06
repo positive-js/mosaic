@@ -18,12 +18,15 @@
                 {{ tag }}
                 <i mc-icon="mc-close-S_16" mcTagRemove></i>
             </mc-tag>
+
             <input placeholder="New tag..."
                    #inputTagInput
                    [formControl]="tagCtrl"
                    [mcTagInputFor]="inputTagList"
                    [mcTagInputSeparatorKeyCodes]="separatorKeysCodes"
                    (mcTagInputTokenEnd)="inputOnCreate($event)">
+
+            <mc-cleaner #mcTagListCleaner (click)="onClear()"></mc-cleaner>
         </mc-tag-list>
     </mc-form-field>
 

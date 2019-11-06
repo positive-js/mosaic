@@ -62,22 +62,8 @@
     top: 0;
     right: 0;
 
-    padding: 0;
-
-    border: 0;
-    outline: 0;
-
-    cursor: pointer;
-    background: transparent;
-
-    .mc-modal-close-x {
-        display: block;
-        vertical-align: baseline;
-        text-align: center;
-        width: 56px;
-        height: 56px;
-        line-height: 56px;
-    }
+    width: 56px;
+    height: 56px;
 }
 
 .mc-modal-header {

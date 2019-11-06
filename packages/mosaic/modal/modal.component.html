@@ -28,10 +28,12 @@
              role="document"
         >
             <div class="mc-modal-content" cdkTrapFocus>
-                <button *ngIf="mcClosable" (click)="onClickCloseBtn()" class="mc-modal-close" aria-label="Close">
-                  <span class="mc-modal-close-x">
-                      <i mc-icon="mc-close-L_16" class="mc-icon mc-icon_light" color="second"></i>
-                  </span>
+                <button *ngIf="mcClosable"
+                        mc-button
+                        (click)="onClickCloseBtn()"
+                        class="mc-modal-close mc-button_transparent"
+                        aria-label="Close">
+                    <i mc-icon="mc-close-L_16" class="mc-icon mc-icon_light" color="second"></i>
                 </button>
                 <ng-container [ngSwitch]="true">
                     <ng-container *ngSwitchCase="isModalType('default')"

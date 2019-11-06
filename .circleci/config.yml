@@ -1,8 +1,8 @@
 # To validate changes, use an online parser, eg.
 # http://yaml-online-parser.appspot.com/
 
-var_1: &default_docker_image circleci/node:10.12-browsers
-var_2: &cache_key mosaic-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}-0.7.0
+var_1: &default_docker_image circleci/node:10.17-browsers
+var_2: &cache_key mosaic-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}-0.8.0
 
 var_3: &job_defaults
     working_directory: ~/mosaic
@@ -154,12 +154,12 @@ jobs:
             - *restore_cache
             - *attach_release_output
             - run:
-                name: Setup Environment Variables
-                command: |
-                    echo 'export CI_PREVIEW=true' >> $BASH_ENV
-                    echo 'export SHORT_GIT_HASH=$(git rev-parse --short $CIRCLE_SHA1)' >> $BASH_ENV
-                    echo 'export CIRCLE_PULL_REQUEST_NUMBER=$(echo "$CIRCLE_PULL_REQUEST" | cut -d"/" -f7)' >> $BASH_ENV
-                    source $BASH_ENV
+                  name: Setup Environment Variables
+                  command: |
+                      echo 'export CI_PREVIEW=true' >> $BASH_ENV
+                      echo 'export SHORT_GIT_HASH=$(git rev-parse --short $CIRCLE_SHA1)' >> $BASH_ENV
+                      echo 'export CIRCLE_PULL_REQUEST_NUMBER=$(echo "$CIRCLE_PULL_REQUEST" | cut -d"/" -f7)' >> $BASH_ENV
+                      source $BASH_ENV
             - run: yarn run build:docs
             - run: yarn run docs:publish-preview
 
@@ -171,7 +171,7 @@ jobs:
                       - "c3:de:eb:9c:82:70:a8:23:f3:4e:92:b8:07:d2:22:df"
             - *checkout_code
             - *restore_cache
-            - run: yarn run cleanup-preview
+            - run: yarn run docs:cleanup-preview
 
 workflows:
     version: 2

@@ -1,22 +1,25 @@
 /* tslint:disable:no-magic-numbers max-func-body-length no-reserved-keywords */
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { createMouseEvent, dispatchEvent } from '@ptsecurity/cdk/testing';
 import { FlatTreeControl } from '@ptsecurity/cdk/tree';
 
 import {
     McTreeSelection,
     McTreeFlatDataSource,
     McTreeFlattener,
-    McTreeModule
+    McTreeModule,
+    McTreeOption
 } from './index';
 
 
 describe('McTreeSelection', () => {
     let treeElement: HTMLElement;
 
-    function configureMatTreeTestingModule(declarations) {
+    function configureMcTreeTestingModule(declarations) {
         TestBed.configureTestingModule({
-            imports: [McTreeModule],
+            imports: [McTreeModule, FormsModule],
             declarations
         }).compileComponents();
     }
@@ -27,7 +30,7 @@ describe('McTreeSelection', () => {
             let component: SimpleMcTreeApp;
 
             beforeEach(() => {
-                configureMatTreeTestingModule([SimpleMcTreeApp]);
+                configureMcTreeTestingModule([SimpleMcTreeApp]);
                 fixture = TestBed.createComponent(SimpleMcTreeApp);
 
                 component = fixture.componentInstance;
@@ -59,7 +62,7 @@ describe('McTreeSelection', () => {
             let component: McTreeAppWithToggle;
 
             beforeEach(() => {
-                configureMatTreeTestingModule([McTreeAppWithToggle]);
+                configureMcTreeTestingModule([McTreeAppWithToggle]);
                 fixture = TestBed.createComponent(McTreeAppWithToggle);
 
                 component = fixture.componentInstance;
@@ -138,11 +141,201 @@ describe('McTreeSelection', () => {
             });
         });
 
+        describe('with multipleMode is CTRL', () => {
+            let fixture: ComponentFixture<McTreeAppMultiple>;
+            let component: McTreeAppMultiple;
+
+            beforeEach(() => {
+                configureMcTreeTestingModule([McTreeAppMultiple]);
+                fixture = TestBed.createComponent(McTreeAppMultiple);
+
+                component = fixture.componentInstance;
+                treeElement = fixture.nativeElement.querySelector('mc-tree-selection');
+
+                fixture.detectChanges();
+            });
+
+            describe('when ctrl is pressed', () => {
+                it('should select node', () => {
+                    expect(component.modelValue.length).toBe(0);
+
+                    const nodes = getNodes(treeElement);
+
+                    const event = createMouseEvent('click');
+                    Object.defineProperty(event, 'ctrlKey', { get: () => true });
+
+                    dispatchEvent(nodes[0], event);
+                    fixture.detectChanges();
+                    expect(component.modelValue.length).toBe(1);
+
+                    dispatchEvent(nodes[2], event);
+                    fixture.detectChanges();
+                    expect(component.modelValue.length).toBe(2);
+
+                    dispatchEvent(nodes[4], event);
+                    fixture.detectChanges();
+                    expect(component.modelValue.length).toBe(3);
+                });
+
+                it('should deselect', () => {
+                    expect(component.modelValue.length).toBe(0);
+
+                    const nodes = getNodes(treeElement);
+
+                    const event = createMouseEvent('click');
+                    Object.defineProperty(event, 'ctrlKey', { get: () => true });
+
+                    dispatchEvent(nodes[0], event);
+                    fixture.detectChanges();
+                    expect(component.modelValue.length).toBe(1);
+
+                    dispatchEvent(nodes[2], event);
+                    fixture.detectChanges();
+                    expect(component.modelValue.length).toBe(2);
+
+                    dispatchEvent(nodes[2], event);
+                    fixture.detectChanges();
+                    expect(component.modelValue.length).toBe(1);
+                });
+            });
+
+            describe('when ctrl is not pressed', () => {
+                describe('should reset selection', () => {
+                    it('when clicked on selected node', () => {
+                        const nodes = getNodes(treeElement);
+
+                        const event = createMouseEvent('click');
+                        Object.defineProperty(event, 'ctrlKey', {get: () => true});
+
+                        dispatchEvent(nodes[0], event);
+                        fixture.detectChanges();
+                        expect(component.modelValue.length).toBe(1);
+
+                        dispatchEvent(nodes[2], event);
+                        fixture.detectChanges();
+                        expect(component.modelValue.length).toBe(2);
+
+                        Object.defineProperty(event, 'ctrlKey', {get: () => false});
+
+                        dispatchEvent(nodes[2], event);
+                        fixture.detectChanges();
+                        expect(component.modelValue.length).toBe(1);
+                    });
+
+                    it('when clicked on not selected node', () => {
+                        const nodes = getNodes(treeElement);
+
+                        const event = createMouseEvent('click');
+                        Object.defineProperty(event, 'ctrlKey', {get: () => true});
+
+                        dispatchEvent(nodes[0], event);
+                        fixture.detectChanges();
+                        expect(component.modelValue.length).toBe(1);
+
+                        dispatchEvent(nodes[2], event);
+                        fixture.detectChanges();
+                        expect(component.modelValue.length).toBe(2);
+
+                        Object.defineProperty(event, 'ctrlKey', {get: () => false});
+
+                        dispatchEvent(nodes[3], event);
+                        fixture.detectChanges();
+                        expect(component.modelValue.length).toBe(1);
+                    });
+                });
+            });
+
+            describe('when shift is pressed', () => {
+                it('should select nodes', () => {
+                    expect(component.modelValue.length).toBe(0);
+
+                    const nodes = getNodes(treeElement);
+
+                    const event = createMouseEvent('click');
+
+                    dispatchEvent(nodes[0], event);
+                    fixture.detectChanges();
+
+                    expect(component.modelValue.length).toBe(1);
+
+                    const targetNode: HTMLElement = nodes[3] as HTMLElement;
+
+                    targetNode.focus();
+
+                    Object.defineProperty(event, 'shiftKey', { get: () => true });
+
+                    dispatchEvent(targetNode, event);
+                    fixture.detectChanges();
+
+                    expect(component.modelValue.length).toBe(4);
+                });
+
+                it('should deselect nodes', () => {
+                    expect(component.modelValue.length).toBe(0);
+
+                    const nodes = getNodes(treeElement);
+
+                    const event = createMouseEvent('click');
+                    Object.defineProperty(event, 'ctrlKey', { get: () => true });
+
+                    dispatchEvent(nodes[0], event);
+                    dispatchEvent(nodes[1], event);
+                    dispatchEvent(nodes[2], event);
+                    (nodes[2] as HTMLElement).focus();
+                    fixture.detectChanges();
+
+                    expect(component.modelValue.length).toBe(3);
+
+                    const targetNode: HTMLElement = nodes[0] as HTMLElement;
+
+                    Object.defineProperty(event, 'ctrlKey', { get: () => false });
+                    Object.defineProperty(event, 'shiftKey', { get: () => true });
+
+                    dispatchEvent(targetNode, event);
+                    fixture.detectChanges();
+
+                    expect(component.modelValue.length).toBe(0);
+                });
+
+                it('should set last selected status', () => {
+                    expect(component.modelValue.length).toBe(0);
+
+                    const nodes = getNodes(treeElement);
+
+                    const event = createMouseEvent('click');
+                    Object.defineProperty(event, 'ctrlKey', { get: () => true });
+
+                    dispatchEvent(nodes[0], event);
+                    fixture.detectChanges();
+
+                    dispatchEvent(nodes[2], event);
+                    fixture.detectChanges();
+
+                    dispatchEvent(nodes[4], event);
+                    fixture.detectChanges();
+
+                    expect(component.modelValue.length).toBe(3);
+
+                    const targetNode: HTMLElement = nodes[2] as HTMLElement;
+
+                    targetNode.focus();
+
+                    Object.defineProperty(event, 'ctrlKey', { get: () => false });
+                    Object.defineProperty(event, 'shiftKey', { get: () => true });
+
+                    dispatchEvent(targetNode, event);
+                    fixture.detectChanges();
+
+                    expect(component.modelValue.length).toBe(1);
+                });
+            });
+        });
+
         describe('with when node template', () => {
             let fixture: ComponentFixture<WhenNodeMcTreeApp>;
 
             beforeEach(() => {
-                configureMatTreeTestingModule([WhenNodeMcTreeApp]);
+                configureMcTreeTestingModule([WhenNodeMcTreeApp]);
                 fixture = TestBed.createComponent(WhenNodeMcTreeApp);
 
                 treeElement = fixture.nativeElement.querySelector('mc-tree-selection');
@@ -164,7 +357,7 @@ describe('McTreeSelection', () => {
             let component: FiltrationMcTreeApp;
 
             beforeEach(() => {
-                configureMatTreeTestingModule([FiltrationMcTreeApp]);
+                configureMcTreeTestingModule([FiltrationMcTreeApp]);
                 fixture = TestBed.createComponent(FiltrationMcTreeApp);
 
                 component = fixture.componentInstance;
@@ -357,7 +550,7 @@ class SimpleMcTreeApp {
 
     treeData: FileNode[];
 
-    @ViewChild(McTreeSelection, { static: false }) tree: McTreeSelection;
+    @ViewChild(McTreeSelection, { static: false }) tree: McTreeSelection<McTreeOption>;
 
     constructor() {
         this.treeFlattener = new McTreeFlattener<FileNode, FileFlatNode>(
@@ -368,6 +561,75 @@ class SimpleMcTreeApp {
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
         this.dataSource.data = this.treeData = buildFileTree(DATA_OBJECT, 0);
+    }
+
+    getLevel = (node: FileFlatNode) => node.level;
+
+    getValue = (node: FileFlatNode) => node.name;
+
+    isExpandable = (node: FileFlatNode) => node.expandable;
+
+    getChildren = (node: FileNode) => node.children;
+
+    transformer = (node: FileNode, level: number, parent: any) => {
+        const flatNode = new FileFlatNode();
+
+        flatNode.name = node.name;
+        flatNode.parent = parent;
+        flatNode.type = node.type;
+        flatNode.level = level;
+        flatNode.expandable = !!node.children;
+
+        return flatNode;
+    }
+}
+
+@Component({
+    template: `
+        <mc-tree-selection
+            [(ngModel)]="modelValue"
+            multiple="keyboard"
+            [dataSource]="dataSource"
+            [treeControl]="treeControl">
+
+            <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+                {{ node.name }}
+            </mc-tree-option>
+
+            <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+                <mc-tree-node-toggle></mc-tree-node-toggle>
+
+                {{ node.name }}
+            </mc-tree-option>
+        </mc-tree-selection>
+    `
+})
+class McTreeAppMultiple {
+    modelValue = [];
+    toggleRecursively: boolean = true;
+    treeControl: FlatTreeControl<FileFlatNode>;
+    treeFlattener: McTreeFlattener<FileNode, FileFlatNode>;
+
+    dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
+
+    treeData: FileNode[];
+
+    @ViewChild(McTreeSelection, { static: false }) tree: McTreeSelection<McTreeOption>;
+
+    constructor() {
+        this.treeControl = new FlatTreeControl(this.getLevel, this.isExpandable, this.getValue, this.getValue);
+
+        this.treeFlattener = new McTreeFlattener<FileNode, FileFlatNode>(
+            this.transformer, this.getLevel, this.isExpandable, this.getChildren
+        );
+
+        this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
+
+        this.dataSource.data = this.treeData = buildFileTree(DATA_OBJECT, 0);
+    }
+
+    hasChild(_: number, nodeData: FileFlatNode) {
+        return nodeData.expandable;
     }
 
     getLevel = (node: FileFlatNode) => node.level;
@@ -418,7 +680,7 @@ class McTreeAppWithToggle {
 
     treeData: FileNode[];
 
-    @ViewChild(McTreeSelection, { static: false }) tree: McTreeSelection;
+    @ViewChild(McTreeSelection, { static: false }) tree: McTreeSelection<McTreeOption>;
 
     constructor() {
         this.treeControl = new FlatTreeControl(this.getLevel, this.isExpandable, this.getValue, this.getValue);
@@ -482,7 +744,7 @@ class WhenNodeMcTreeApp {
 
     treeData: FileNode[];
 
-    @ViewChild(McTreeSelection, { static: false }) tree: McTreeSelection;
+    @ViewChild(McTreeSelection, { static: false }) tree: McTreeSelection<McTreeOption>;
 
     constructor() {
         this.treeControl = new FlatTreeControl(this.getLevel, this.isExpandable, this.getValue, this.getValue);
@@ -543,7 +805,7 @@ class FiltrationMcTreeApp {
 
     treeData: FileNode[];
 
-    @ViewChild(McTreeSelection, { static: false }) tree: McTreeSelection;
+    @ViewChild(McTreeSelection, { static: false }) tree: McTreeSelection<McTreeOption>;
 
     constructor() {
         this.treeFlattener = new McTreeFlattener<FileNode, FileFlatNode>(

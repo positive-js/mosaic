@@ -1,0 +1,8 @@
+<div class="mc-tags-list__list-container">
+    <ng-content></ng-content>
+</div>
+
+<div class="mc-tags-list__cleaner"
+     *ngIf="canShowCleaner">
+    <ng-content select="mc-cleaner"></ng-content>
+</div>

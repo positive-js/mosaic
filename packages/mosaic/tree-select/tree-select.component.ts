@@ -71,9 +71,9 @@ import {
     getMcSelectNonArrayValueError,
     MC_SELECT_SCROLL_STRATEGY
 } from '@ptsecurity/mosaic/core';
-import { McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
+import { McCleaner, McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { McTag } from '@ptsecurity/mosaic/tags';
-import { McTreeSelection, McTreeOption } from '@ptsecurity/mosaic/tree';
+import { McTreeSelection, McTreeOption, MultipleMode } from '@ptsecurity/mosaic/tree';
 import { defer, merge, Observable, Subject } from 'rxjs';
 import {
     filter,
@@ -214,10 +214,12 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
 
     @ViewChildren(McTag) tags: QueryList<McTag>;
 
+    @ContentChild('mcSelectCleaner', { static: true }) cleaner: McCleaner;
+
     /** User-supplied override of the trigger element. */
     @ContentChild(McTreeSelectTrigger, { static: false }) customTrigger: McTreeSelectTrigger;
 
-    @ContentChild(McTreeSelection, { static: false }) tree: McTreeSelection;
+    @ContentChild(McTreeSelection, { static: false }) tree: McTreeSelection<McTreeOption>;
 
     @Input() hiddenItemsText: string = '...ещё';
 
@@ -382,6 +384,10 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         return this._panelOpen;
     }
 
+    get canShowCleaner(): boolean {
+        return this.cleaner && this.selectionModel.hasValue();
+    }
+
     private _panelOpen = false;
 
     private originalOnKeyDown: (event: KeyboardEvent) => void;
@@ -428,10 +434,6 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     }
 
     ngOnInit() {
-        if (this.tree) {
-            this.tree.multiple = this.multiple;
-        }
-
         this.stateChanges.next();
 
         // We need `distinctUntilChanged` here, because some browsers will
@@ -455,6 +457,8 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     ngAfterContentInit() {
         if (!this.tree) { return; }
 
+        this.tree.resetFocusedItemOnBlur = false;
+
         this.selectionModel = this.tree.selectionModel = new SelectionModel<any>(this.multiple);
         this.tree.ngAfterContentInit();
 
@@ -462,7 +466,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
 
         this.options = this.tree.renderedOptions;
         this.tree.autoSelect = this.autoSelect;
-        this.tree.multiple = this.multiple;
+        this.tree.multipleMode = this.multiple ? MultipleMode.CHECKBOX : null;
 
         if (this.multiple) {
             this.tree.noUnselectLast = false;
@@ -528,6 +532,16 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
 
         this.destroy.complete();
         this.stateChanges.complete();
+    }
+
+    clearValue($event): void {
+        $event.stopPropagation();
+
+        this.selectionModel.clear();
+
+        this.setSelectionByValue([]);
+
+        this.onChange(this.selectedValues);
     }
 
     /** `View -> model callback called when value changes` */
