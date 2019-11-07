@@ -1,0 +1,21 @@
+<mc-form-field>
+    <textarea mcTextarea [placeholder]="placeholder"></textarea>
+</mc-form-field>
+
+<br><br>
+
+<mc-form-field>
+    <textarea mcTextarea [disabled]="disabled" [placeholder]="placeholder"></textarea>
+</mc-form-field>
+
+<br><br>
+
+<mc-form-field>
+    <textarea mcTextarea [placeholder]="placeholder" [required]="required" [(ngModel)]="value"></textarea>
+</mc-form-field>
+
+<br><br>
+
+<mc-form-field mcFormFieldWithoutBorders>
+    <textarea mcTextarea [(ngModel)]="value" placeholder="Placeholder"></textarea>
+</mc-form-field>
