@@ -5,9 +5,9 @@ import { Component } from '@angular/core';
  * @title Basic textarea
  */
 @Component({
-    selector: 'textarea-overview-example',
-    templateUrl: 'textarea-overview-example.html',
-    styleUrls: ['textarea-overview-example.css']
+    selector: 'text-area-overview-example',
+    templateUrl: 'text-area-overview-example.html',
+    styleUrls: ['text-area-overview-example.css']
 })
 export class TextAreaOverviewExample {
 
