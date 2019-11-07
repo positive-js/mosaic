@@ -90,6 +90,12 @@ const DOCS: { [key: string]: DocCategory[] } = {
                     examples: ['input-types']
                 },
                 {
+                    id: 'textarea',
+                    name: 'Textarea',
+                    summary: '',
+                    examples: ['textarea-types']
+                },
+                {
                     id: 'radio',
                     name: 'Radio',
                     summary: '',
