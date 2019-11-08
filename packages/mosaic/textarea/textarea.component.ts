@@ -231,10 +231,10 @@ export class McTextarea extends McTextareaMixinBase implements McFormFieldContro
             const outerHeight = parseInt(window.getComputedStyle(textarea).height!, 10);
             const diff = outerHeight - textarea.clientHeight;
 
-            textarea.style.height = 0; // this line is important to height recalculation
+            textarea.style.minHeight = 0; // this line is important to height recalculation
 
             const height = Math.max(this.minHeight, +textarea.scrollHeight + diff + this.freeRowsHeight);
-            textarea.style.height = `${height}px`;
+            textarea.style.minHeight = `${height}px`;
         });
     }
 
