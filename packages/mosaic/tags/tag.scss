@@ -4,7 +4,7 @@
 $mc-tag-border-width: 1px;
 $mc-tag-border-radius: 4px;
 
-$mc-tag-height: 22px;
+$mc-tag-height: 24px;
 
 $mc-tag-icon-padding: 3px;
 
@@ -28,6 +28,8 @@ $mc-tag-icon-padding: 3px;
     cursor: default;
 
     outline: none;
+
+    box-sizing: border-box;
 
     &.mc-left-icon {
         padding-left: $mc-tag-icon-padding;
