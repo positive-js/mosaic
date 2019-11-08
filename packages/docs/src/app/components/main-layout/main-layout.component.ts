@@ -15,8 +15,19 @@ export class MainLayoutComponent {
 
     constructor(private router: Router,
                 private route: ActivatedRoute) {
+        const href = location.href;
 
-        this.setNextRoute();
+        if(href.match('github')) {
+            this.setNextRoute();
+        } else {
+            this.setDefaultRoute();
+        }
+    }
+
+    setDefaultRoute() {
+        if (location.pathname === '/') {
+            this.router.navigate(['button/overview'], this.extras);
+        }
     }
 
     setNextRoute() {
@@ -29,5 +40,4 @@ export class MainLayoutComponent {
         }
         localStorage.removeItem('PT_nextRoute');
     }
-
 }
