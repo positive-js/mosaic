@@ -1,3 +1,18 @@
+## 8.1.1 "Time Consuming Relocation" (2019-11-11)
+
+### Mosaic
+
+
+ * bug fix  **tags:** logic for one more does not work in examples (#UIM-147) ([#334](https://github.com/positive-js/mosaic/issues/334)) ([0714db4de42550b8a97e34baa6e36680dbc5c130](https://github.com/positive-js/mosaic/commit/0714db4de42550b8a97e34baa6e36680dbc5c130)), closes [#UIM-147](https://github.com/positive-js/mosaic/issues/UIM-147)
+ * bug fix  **textarea:** textarea does not support rows attribute ([#335](https://github.com/positive-js/mosaic/issues/335)) ([c3057afc28555757dd5cde7aa9f68111ea793add](https://github.com/positive-js/mosaic/commit/c3057afc28555757dd5cde7aa9f68111ea793add))
+
+### Docs
+
+
+ * feature  **docs:** setting version from INavbarProperty to custom property ([#337](https://github.com/positive-js/mosaic/issues/337)) ([5de6f7fed90221d9e734f31bc39823fd7f34b4d8](https://github.com/positive-js/mosaic/commit/5de6f7fed90221d9e734f31bc39823fd7f34b4d8))
+ * bug fix  **docs:** fixing codes examples  white-space ([#333](https://github.com/positive-js/mosaic/issues/333)) ([86819cb7f82f9f2e270b09eee27988847eacd713](https://github.com/positive-js/mosaic/commit/86819cb7f82f9f2e270b09eee27988847eacd713))
+ * bug fix  **docs:** fixing routing for not githab platforms ([#336](https://github.com/positive-js/mosaic/issues/336)) ([72c93ad965f2884a6c31ad1dc276d0243c60af27](https://github.com/positive-js/mosaic/commit/72c93ad965f2884a6c31ad1dc276d0243c60af27))
+
 # 8.1.0 "Quieter Becket" (2019-11-05)
 
 ### Mosaic
