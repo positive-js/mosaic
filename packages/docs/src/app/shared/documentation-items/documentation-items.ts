@@ -100,6 +100,12 @@ const DOCS: { [key: string]: DocCategory[] } = {
                     name: 'Radio',
                     summary: '',
                     examples: ['radio-types']
+                },
+                {
+                    id: 'timepicker',
+                    name: 'Timepicker',
+                    summary: '',
+                    examples: ['timepicker-types']
                 }
             ]
         },
