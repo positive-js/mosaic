@@ -113,6 +113,8 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
 
     multipleMode: MultipleMode | null;
 
+    userTabIndex: number | null = null;
+
     get optionFocusChanges(): Observable<McTreeOptionEvent> {
         return merge(...this.renderedOptions.map((option) => option.onFocus));
     }
@@ -172,6 +174,7 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
 
     set tabIndex(value: any) {
         this._tabIndex = value;
+        this.userTabIndex = value;
     }
 
     private _tabIndex = 0;
@@ -223,6 +226,10 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
                     this.emitNavigationEvent(this.keyManager.activeItem);
                 }
             });
+
+        this.keyManager.tabOut
+            .pipe(takeUntil(this.destroy))
+            .subscribe(() => this.allowFocusEscape());
 
         this.selectionModel.changed
             .pipe(takeUntil(this.destroy))
@@ -320,9 +327,6 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
                 event.preventDefault();
 
                 break;
-            case TAB:
-                return;
-
             default:
                 this.keyManager.onKeydown(event);
         }
@@ -506,6 +510,17 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
 
     protected updateTabIndex(): void {
         this._tabIndex = this.renderedOptions.length === 0 ? -1 : 0;
+    }
+
+    private allowFocusEscape() {
+        if (this._tabIndex !== -1) {
+            this._tabIndex = -1;
+
+            setTimeout(() => {
+                this._tabIndex = this.userTabIndex || 0;
+                this.changeDetectorRef.markForCheck();
+            });
+        }
     }
 
     private resetOptions() {
