@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import * as momentImported from 'moment';
 // @ts-ignore
 // tslint:disable-next-line:no-duplicate-imports
-import { default as _rollupMoment, Moment } from 'moment';
+import { default as _rollupMoment } from 'moment';
 
 
 // tslint:disable-next-line

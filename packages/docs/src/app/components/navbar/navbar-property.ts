@@ -53,9 +53,12 @@ export class NavbarProperty {
     }
 
     updateSelected(i: number) {
-        this.data.forEach((color) => {
-            color.selected = false;
-        });
-        this.data[i].selected = true;
+        if (this.data[i]) {
+            this.data.forEach((color) => {
+                color.selected = false;
+            });
+            this.data[i].selected = true;
+        }
+
     }
 }
