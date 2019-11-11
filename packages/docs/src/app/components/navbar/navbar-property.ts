@@ -59,6 +59,5 @@ export class NavbarProperty {
             });
             this.data[i].selected = true;
         }
-
     }
 }
