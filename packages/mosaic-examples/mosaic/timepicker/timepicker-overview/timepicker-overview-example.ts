@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
 import * as momentImported from 'moment';
+// @ts-ignore
+// tslint:disable-next-line:no-duplicate-imports
+import { default as _rollupMoment, Moment } from 'moment';
 
 
-const moment = momentImported;
+// tslint:disable-next-line
+const moment = _rollupMoment || momentImported;
 /**
  * @title Badges
  */
