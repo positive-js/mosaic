@@ -78,11 +78,9 @@ export class NavbarComponent {
     };
 
     // To add new version to dropdown add new object to the end of data array,
-    // number of first (current) version is taken from package.json, rest should be specified
+    // number of current version is taken from package.json, rest should be specified
     // run npm show @ptsecurity/mosaic versions --json to see all mosaic versions
-    private versionProperty: INavbarProperty = {
-        property: 'PT_version',
-        data: [
+    private versionData = [
             {
                 number: '8.1.0',
                 date: '9 октября',
@@ -90,41 +88,42 @@ export class NavbarComponent {
                 link: '//mosaic.ptsecurity.com'
             },
             {
-                number: '7.-.-',
+                number: '8.-.-',
                 date: '9 октября',
                 selected: false,
-                link: '//mosaic.ptsecurity.com'
+                link: '//v8.mosaic.ptsecurity.com'
             }
-        ],
-
-        updateTemplate: false,
-        updateSelected: false,
-        customActions: function(i) {
-            if (!location.origin.match(this.data[i].link) && !location.origin.match('localhost')) {
-                location.href = `${this.data[i].link}${location.pathname}${location.search}${location.hash}`;
-            }
-        }
-    };
+        ];
 
     constructor() {
         this.setSelectedVersion();
 
-        this.versionSwitch = new NavbarProperty(this.versionProperty);
         this.colorSwitch = new NavbarProperty(this.activeColorProperty);
         this.themeSwitch = new NavbarProperty(this.themeProperty);
         this.languageSwitch = new NavbarProperty(this.languageProperty);
     }
 
+    goToVersion(i: number) {
+        const link = this.versionData[i].link;
+        if (!location.origin.match(link)) {
+            location.href = `${link}${location.pathname}${location.search}${location.hash}`;
+        }
+        this.versionSwitch.setValue(i)
+    }
+
     setSelectedVersion() {
         /* Если мы находимся на последней версии - обновляем ее из package.json
         Если нет - последние версии предыдущих мажоров должны быть указаны в массиве*/
-        if (location.origin.match(this.versionProperty.data[0].link)) {
-            this.versionProperty.data[0].number =  this.mosaicVersion;
+        if (location.origin.match(this.versionData[0].link)) {
+            this.versionData[0].number =  this.mosaicVersion;
+            this.versionData[0].selected = true;
+        } else {
+            // Определяем выбранную версию
+            this.versionData.forEach((version) => {
+                if(version.number == this.mosaicVersion) version.selected = true;
+            })
         }
-        // Определяем выбранную версию
-        this.versionProperty.data.forEach((version) => {
-            if(version.number == this.mosaicVersion) version.selected = true;
-        })
+
     }
 
 }

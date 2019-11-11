@@ -6,13 +6,13 @@
 
     <div class="docs-navbar-version">
         <button mc-button class="mc-button mc-button_transparent" [mcDropdownTriggerFor]="versionDropdown">
-            Версия {{versionSwitch.currentValue.number}}
+            Версия {{mosaicVersion}}
             <i mc-icon="mc-angle-down-L_16" class="docs-navbar-version__icon"></i>
         </button>
 
         <mc-dropdown #versionDropdown="mcDropdown" class="docs-navbar-version__dropdown">
-            <button mc-dropdown-item *ngFor="let version of versionSwitch.data; let i = index"
-                    [class.mc-selected]="version.selected" (click)="versionSwitch.setValue(i)"
+            <button mc-dropdown-item *ngFor="let version of versionData; let i = index"
+                    (click)="goToVersion(i)" [class.mc-selected]="version.selected"
                     [class.docs-navbar-version_bold]="version.number.length < 4">
                 <span class="docs-navbar-version__item">
                     <span class="docs-navbar-version__num">{{version.number}}</span>

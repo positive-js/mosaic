@@ -10,31 +10,26 @@ export interface INavbarProperty {
 
     // Applies in NavbarProperty.setValue for updating selected value
     updateSelected: boolean;
-
-    customActions?: (i: number) => void;
 }
 
 export class NavbarProperty {
     data: any[];
     currentValue: any;
     private readonly property: string;
-    customActions;
 
     constructor(navbarProperty: INavbarProperty) {
         this.data = navbarProperty.data;
         this.currentValue = this.data[0];
         this.property = navbarProperty.property;
-        if (navbarProperty.customActions) { this.customActions = navbarProperty.customActions; }
+
         this.init();
     }
 
     setValue(i: number) {
-        localStorage.setItem(this.property, `${i}`);
-        if (this.customActions) { this.customActions(i); }
         this.currentValue = this.data[i];
+        localStorage.setItem(this.property, `${i}`);
         if (this.updateTemplate) { this.updateTemplate(i); }
         if (this.updateSelected) { this.updateSelected(i); }
-
     }
 
     init() {
