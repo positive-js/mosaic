@@ -32,13 +32,12 @@
             "@ptsecurity/mosaic/*": [
                 "../../dist/packages/mosaic/*"
             ],
-//            "@ptsecurity/mosaic": [
-//                "../../dist/packages/mosaic/public-api"
-//            ],
             "@ptsecurity/cdk/*": [
                 "../../dist/packages/cdk/*"
             ],
-            "@ptsecurity/mosaic-moment-adapter/*": ["../../dist/packages/mosaic-moment-adapter/*"]
+            "@ptsecurity/mosaic-moment-adapter": [
+                "../../dist/packages/mosaic-moment-adapter"
+            ]
         }
     },
     "files": [
