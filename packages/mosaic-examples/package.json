@@ -25,6 +25,7 @@
         "@angular/core": "0.0.0-NG",
         "@angular/common": "0.0.0-NG",
         "@ptsecurity/mosaic": "0.0.0-PLACEHOLDER",
+        "@ptsecurity/mosaic-moment-adapter": "0.0.0-PLACEHOLDER",
         "@ptsecurity/cdk": "0.0.0-PLACEHOLDER"
     },
     "dependencies": {

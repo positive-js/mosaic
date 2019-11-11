@@ -1,0 +1,8 @@
+.example-timepicker-group {
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.example-timepicker-element {
+    margin-bottom: 10px;
+}

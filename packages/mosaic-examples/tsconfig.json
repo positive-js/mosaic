@@ -13,11 +13,8 @@
             "@ptsecurity/mosaic/*": [
                 "../mosaic/*"
             ],
-            "@ptsecurity/mosaic": [
-                "../mosaic/public-api"
-            ],
             "@ptsecurity/mosaic-moment-adapter": [
-                "../mosaic-moment-adapter/public-api"
+                "../mosaic-moment-adapter/public-api.ts"
             ]
         }
     },
