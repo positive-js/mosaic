@@ -88,7 +88,7 @@ export class NavbarComponent {
                 link: '//mosaic.ptsecurity.com'
             },
             {
-                number: '8.-.-',
+                number: '8.0.0',
                 date: '9 октября',
                 selected: false,
                 link: '//v8.mosaic.ptsecurity.com'
