@@ -123,7 +123,5 @@ export class NavbarComponent {
                 if(version.number == this.mosaicVersion) version.selected = true;
             })
         }
-
     }
-
 }
