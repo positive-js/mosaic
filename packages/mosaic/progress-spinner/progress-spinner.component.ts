@@ -16,10 +16,12 @@ const MIN_PERCENT = 0;
 const MAX_PERCENT = 100;
 
 export class McProgressSpinnerBase {
+    // tslint:disable-next-line:naming-convention
     constructor(public _elementRef: ElementRef) {}
 }
 
-export const _McProgressSpinnerMixinBase:
+// tslint:disable-next-line:naming-convention
+export const McProgressSpinnerMixinBase:
     CanColorCtor &
     typeof McProgressSpinnerBase =
         mixinColor(McProgressSpinnerBase);
@@ -37,7 +39,7 @@ const MAX_DASH_ARRAY = 273;
         '[attr.id]': 'id'
     }
 })
-export class McProgressSpinner extends _McProgressSpinnerMixinBase implements CanColor {
+export class McProgressSpinner extends McProgressSpinnerMixinBase implements CanColor {
     @Input() id: string = `mc-progress-spinner-${idIterator++}`;
     @Input() value: number = 0;
     @Input() mode: ProgressSpinnerMode = 'determinate';

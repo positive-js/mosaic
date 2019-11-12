@@ -1,0 +1,9 @@
+<div  class="anchors-menu">
+    <div class="anchors-menu__container">
+        <div class="anchors-menu__list">
+            <div *ngFor="let anchor of anchors; let i = index" class="anchors-menu__list-element {{anchors[i].active? activeClass: null}}">
+                <a [routerLink]="[this.pathName]" fragment="{{anchor.href}}" (click)="setFragment(i)" class="anchors-menu__link">{{anchor.name}}</a>
+            </div>
+        </div>
+    </div>
+</div>

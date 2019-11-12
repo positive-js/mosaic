@@ -26,7 +26,7 @@ try {
     ts = require('typescript');
   } catch {
     throw new SchematicsException('Error: Could not find a TypeScript version for the ' +
-      'schematics. Please report an issue on the Angular Material repository.');
+      'schematics. Please report an issue on the Mosaic repository.');
   }
 }
 

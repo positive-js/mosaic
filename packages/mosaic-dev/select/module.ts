@@ -21,7 +21,7 @@ import { OPTIONS } from './options';
     encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent implements OnInit {
-    singleSelected = 'Normal';
+    singleSelected = '';
     multipleSelected = ['Normal', 'Hovered', 'Selected', 'Selected1'];
 
     singleSelectedWithSearch = 'Moscow';

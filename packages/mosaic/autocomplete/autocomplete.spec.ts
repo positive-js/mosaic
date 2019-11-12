@@ -1,9 +1,11 @@
 // tslint:disable:no-magic-numbers
-// tslint:disable:no-unbound-method
 // tslint:disable:mocha-no-side-effect-code
 // tslint:disable:max-func-body-length
 // tslint:disable:no-inferred-empty-object-type
 // tslint:disable:chai-vague-errors
+import { Directionality } from '@angular/cdk/bidi';
+import { Overlay, OverlayContainer } from '@angular/cdk/overlay';
+import { ScrollDispatcher } from '@angular/cdk/scrolling';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -28,10 +30,7 @@ import {
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { Directionality } from '@angular/cdk/bidi';
 import { DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW } from '@ptsecurity/cdk/keycodes';
-import { Overlay, OverlayContainer } from '@angular/cdk/overlay';
-import { ScrollDispatcher } from '@angular/cdk/scrolling';
 import {
     createKeyboardEvent,
     dispatchFakeEvent,
@@ -1643,7 +1642,7 @@ describe('McAutocomplete', () => {
             zone.simulateZoneExit();
 
             expect(spy).toHaveBeenCalledWith(jasmine.any(McOptionSelectionChange));
-            subscription!.unsubscribe();
+            subscription.unsubscribe();
         }));
 
         xit('should reposition the panel when the amount of options changes', fakeAsync(() => {

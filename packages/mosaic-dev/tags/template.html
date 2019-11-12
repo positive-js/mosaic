@@ -18,12 +18,15 @@
                 {{ tag }}
                 <i mc-icon="mc-close-S_16" mcTagRemove></i>
             </mc-tag>
+
             <input placeholder="New tag..."
                    #inputTagInput
                    [formControl]="tagCtrl"
                    [mcTagInputFor]="inputTagList"
                    [mcTagInputSeparatorKeyCodes]="separatorKeysCodes"
                    (mcTagInputTokenEnd)="inputOnCreate($event)">
+
+            <mc-cleaner #mcTagListCleaner (click)="onClear()"></mc-cleaner>
         </mc-tag-list>
     </mc-form-field>
 
@@ -49,6 +52,25 @@
             </mc-option>
             <mc-option *ngFor="let tag of autocompleteFilteredTags | async" [value]="tag">{{ tag }}</mc-option>
         </mc-autocomplete>
+    </mc-form-field>
+
+    <br><br><br>
+
+    <h4 class="mc-title">Tags with tag adding on blur disabled</h4>
+    <mc-form-field class="example-chip-list">
+        <mc-tag-list #enterInputTagList>
+            <mc-tag *ngFor="let tag of enterTags" [value]="tag" (removed)="enterOnRemoveTag(tag)">
+                {{ tag }}
+                <i mc-icon="mc-close-S_16" mcTagRemove></i>
+            </mc-tag>
+            <input placeholder="New tag..."
+                   #enterTagInput
+                   [formControl]="tagCtrl"
+                   [mcTagInputFor]="enterInputTagList"
+                   [mcTagInputAddOnBlur]="addOnBlur"
+                   [mcTagInputSeparatorKeyCodes]="separatorKeysCodes"
+                   (mcTagInputTokenEnd)="enterOnCreate($event)">
+        </mc-tag-list>
     </mc-form-field>
 
     <br><br><br>

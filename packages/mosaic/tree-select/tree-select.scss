@@ -77,6 +77,10 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
     }
 }
 
+.mc-tree-select__multiple-matcher {
+    display: flex;
+}
+
 .mc-tree-select__match-list {
     display: flex;
     flex-wrap: wrap;

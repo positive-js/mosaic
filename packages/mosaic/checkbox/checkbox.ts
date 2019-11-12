@@ -70,11 +70,13 @@ export class McCheckboxChange {
 // Boilerplate for applying mixins to McCheckbox.
 /** @docs-private */
 export class McCheckboxBase {
+    // tslint:disable-next-line:naming-convention
     constructor(public _elementRef: ElementRef) {
     }
 }
 
-export const _McCheckboxMixinBase:
+// tslint:disable-next-line:naming-convention
+export const McCheckboxMixinBase:
     HasTabIndexCtor &
     CanColorCtor &
     CanDisableCtor &
@@ -108,7 +110,7 @@ export const _McCheckboxMixinBase:
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class McCheckbox extends _McCheckboxMixinBase implements ControlValueAccessor,
+export class McCheckbox extends McCheckboxMixinBase implements ControlValueAccessor,
     AfterViewInit, OnDestroy, CanColor, CanDisable, HasTabIndex {
 
     /**
@@ -122,27 +124,8 @@ export class McCheckbox extends _McCheckboxMixinBase implements ControlValueAcce
      */
     @Input('aria-labelledby') ariaLabelledby: string | null = null;
 
-    private _uniqueId: string = `mc-checkbox-${++nextUniqueId}`;
-
     /** A unique id for the checkbox input. If none is supplied, it will be auto-generated. */
-    @Input() id: string = this._uniqueId;
-
-    /** Returns the unique id for the visual hidden input. */
-    get inputId(): string {
-        return `${this.id || this._uniqueId}-input`;
-    }
-
-    /** Whether the checkbox is required. */
-    @Input()
-    get required(): boolean {
-        return this._required;
-    }
-
-    set required(value: boolean) {
-        this._required = toBoolean(value);
-    }
-
-    private _required: boolean;
+    @Input() id: string;
 
     /** Whether the label should appear after or before the checkbox. Defaults to 'after' */
     @Input() labelPosition: 'before' | 'after' = 'after';
@@ -161,41 +144,58 @@ export class McCheckbox extends _McCheckboxMixinBase implements ControlValueAcce
     @Input() value: string;
 
     /** The native `<input type="checkbox">` element */
-    @ViewChild('input', {static: false}) _inputElement: ElementRef;
+    @ViewChild('input', {static: false}) inputElement: ElementRef;
 
-    /**
-     * Called when the checkbox is blurred. Needed to properly implement ControlValueAccessor.
-     * @docs-private
-     */
-    _onTouched: () => any = () => {
+    private uniqueId: string = `mc-checkbox-${++nextUniqueId}`;
+
+    private currentAnimationClass: string = '';
+
+    private currentCheckState: TransitionCheckState = TransitionCheckState.Init;
+
+    /** Returns the unique id for the visual hidden input. */
+    get inputId(): string {
+        return `${this.id || this.uniqueId}-input`;
     }
 
-    private _currentAnimationClass: string = '';
-
-    private _currentCheckState: TransitionCheckState = TransitionCheckState.Init;
-
-    private _controlValueAccessorChangeFn: (value: any) => void = () => {
+    /** Whether the checkbox is required. */
+    @Input()
+    get required(): boolean {
+        return this._required;
     }
 
-    constructor(elementRef: ElementRef,
+    set required(value: boolean) {
+        this._required = toBoolean(value);
+    }
+
+    private _required: boolean;
+// tslint:disable-next-line:naming-convention
+    constructor(_elementRef: ElementRef,
                 private _changeDetectorRef: ChangeDetectorRef,
                 private _focusMonitor: FocusMonitor,
                 @Attribute('tabindex') tabIndex: string,
                 @Optional() @Inject(MC_CHECKBOX_CLICK_ACTION)
                 private _clickAction: McCheckboxClickAction) {
-        super(elementRef);
+        super(_elementRef);
 
         this.tabIndex = parseInt(tabIndex) || 0;
+        this.id = this.uniqueId;
     }
+
+    /**
+     * Called when the checkbox is blurred. Needed to properly implement ControlValueAccessor.
+     * @docs-private
+     */
+    // tslint:disable-next-line:no-empty
+    onTouched: () => any = () => {};
 
     ngAfterViewInit() {
         this._focusMonitor
-            .monitor(this._inputElement.nativeElement)
-            .subscribe((focusOrigin) => this._onInputFocusChange(focusOrigin));
+            .monitor(this.inputElement.nativeElement)
+            .subscribe((focusOrigin) => this.onInputFocusChange(focusOrigin));
     }
 
     ngOnDestroy() {
-        this._focusMonitor.stopMonitoring(this._inputElement.nativeElement);
+        this._focusMonitor.stopMonitoring(this.inputElement.nativeElement);
     }
 
     /**
@@ -207,7 +207,7 @@ export class McCheckbox extends _McCheckboxMixinBase implements ControlValueAcce
     }
 
     set checked(value: boolean) {
-        if (value != this.checked) {
+        if (value !== this.checked) {
             this._checked = value;
             this._changeDetectorRef.markForCheck();
         }
@@ -225,7 +225,7 @@ export class McCheckbox extends _McCheckboxMixinBase implements ControlValueAcce
     }
 
     set disabled(value: any) {
-        if (value != this.disabled) {
+        if (value !== this.disabled) {
             this._disabled = value;
             this._changeDetectorRef.markForCheck();
         }
@@ -245,14 +245,14 @@ export class McCheckbox extends _McCheckboxMixinBase implements ControlValueAcce
     }
 
     set indeterminate(value: boolean) {
-        const changed = value != this._indeterminate;
+        const changed = value !== this._indeterminate;
         this._indeterminate = value;
 
         if (changed) {
             if (this._indeterminate) {
-                this._transitionCheckState(TransitionCheckState.Indeterminate);
+                this.transitionCheckState(TransitionCheckState.Indeterminate);
             } else {
-                this._transitionCheckState(
+                this.transitionCheckState(
                     this.checked ? TransitionCheckState.Checked : TransitionCheckState.Unchecked);
             }
             this.indeterminateChange.emit(this._indeterminate);
@@ -262,7 +262,7 @@ export class McCheckbox extends _McCheckboxMixinBase implements ControlValueAcce
     private _indeterminate: boolean = false;
 
     /** Method being called whenever the label text changes. */
-    _onLabelTextChange() {
+    onLabelTextChange() {
         // This method is getting called whenever the label of the checkbox changes.
         // Since the checkbox uses the OnPush strategy we need to notify it about the change
         // that has been recognized by the cdkObserveContent directive.
@@ -276,12 +276,12 @@ export class McCheckbox extends _McCheckboxMixinBase implements ControlValueAcce
 
     // Implemented as part of ControlValueAccessor.
     registerOnChange(fn: (value: any) => void) {
-        this._controlValueAccessorChangeFn = fn;
+        this.controlValueAccessorChangeFn = fn;
     }
 
     // Implemented as part of ControlValueAccessor.
     registerOnTouched(fn: any) {
-        this._onTouched = fn;
+        this.onTouched = fn;
     }
 
     // Implemented as part of ControlValueAccessor.
@@ -289,42 +289,8 @@ export class McCheckbox extends _McCheckboxMixinBase implements ControlValueAcce
         this.disabled = isDisabled;
     }
 
-    _getAriaChecked(): 'true' | 'false' | 'mixed' {
+    getAriaChecked(): 'true' | 'false' | 'mixed' {
         return this.checked ? 'true' : (this.indeterminate ? 'mixed' : 'false');
-    }
-
-    private _transitionCheckState(newState: TransitionCheckState) {
-        const oldState = this._currentCheckState;
-        const element: HTMLElement = this._elementRef.nativeElement;
-
-        if (oldState === newState) {
-            return;
-        }
-        if (this._currentAnimationClass.length > 0) {
-            element.classList.remove(this._currentAnimationClass);
-        }
-
-        this._currentCheckState = newState;
-
-        if (this._currentAnimationClass.length > 0) {
-            element.classList.add(this._currentAnimationClass);
-        }
-    }
-
-    private _emitChangeEvent() {
-        const event = new McCheckboxChange();
-        event.source = this;
-        event.checked = this.checked;
-
-        this._controlValueAccessorChangeFn(this.checked);
-        this.change.emit(event);
-    }
-
-    /** Function is called whenever the focus changes for the input element. */
-    private _onInputFocusChange(focusOrigin: FocusOrigin) {
-        if (focusOrigin) {
-            this._onTouched();
-        }
     }
 
     /** Toggles the `checked` state of the checkbox. */
@@ -337,9 +303,9 @@ export class McCheckbox extends _McCheckboxMixinBase implements ControlValueAcce
      * Toggles checked state if element is not disabled.
      * Do not toggle on (change) event since IE doesn't fire change event when
      *   indeterminate checkbox is clicked.
-     * @param event
+     * @param event Input click event
      */
-    _onInputClick(event: Event) {
+    onInputClick(event: Event) {
         // We have to stop propagation for click events on the visual hidden input element.
         // By default, when a user clicks on a label element, a generated click event will be
         // dispatched on the associated input element. Since we are using a label element as our
@@ -361,30 +327,66 @@ export class McCheckbox extends _McCheckboxMixinBase implements ControlValueAcce
             }
 
             this.toggle();
-            this._transitionCheckState(
+            this.transitionCheckState(
                 this._checked ? TransitionCheckState.Checked : TransitionCheckState.Unchecked);
 
             // Emit our custom change event if the native input emitted one.
             // It is important to only emit it, if the native input triggered one, because
             // we don't want to trigger a change event, when the `checked` variable changes for example.
-            this._emitChangeEvent();
+            this.emitChangeEvent();
         } else if (!this.disabled && this._clickAction === 'noop') {
             // Reset native input when clicked with noop. The native checkbox becomes checked after
             // click, reset it to be align with `checked` value of `mc-checkbox`.
-            this._inputElement.nativeElement.checked = this.checked;
-            this._inputElement.nativeElement.indeterminate = this.indeterminate;
+            this.inputElement.nativeElement.checked = this.checked;
+            this.inputElement.nativeElement.indeterminate = this.indeterminate;
         }
     }
 
     /** Focuses the checkbox. */
     focus(): void {
-        this._focusMonitor.focusVia(this._inputElement.nativeElement, 'keyboard');
+        this._focusMonitor.focusVia(this.inputElement.nativeElement, 'keyboard');
     }
 
-    _onInteractionEvent(event: Event) {
+    onInteractionEvent(event: Event) {
         // We always have to stop propagation on the change event.
         // Otherwise the change event, from the input element, will bubble up and
         // emit its event object to the `change` output.
         event.stopPropagation();
+    }
+    // tslint:disable-next-line:no-empty
+    private controlValueAccessorChangeFn: (value: any) => void = () => {};
+
+    private transitionCheckState(newState: TransitionCheckState) {
+        const oldState = this.currentCheckState;
+        const element: HTMLElement = this._elementRef.nativeElement;
+
+        if (oldState === newState) {
+            return;
+        }
+        if (this.currentAnimationClass.length > 0) {
+            element.classList.remove(this.currentAnimationClass);
+        }
+
+        this.currentCheckState = newState;
+
+        if (this.currentAnimationClass.length > 0) {
+            element.classList.add(this.currentAnimationClass);
+        }
+    }
+
+    private emitChangeEvent() {
+        const event = new McCheckboxChange();
+        event.source = this;
+        event.checked = this.checked;
+
+        this.controlValueAccessorChangeFn(this.checked);
+        this.change.emit(event);
+    }
+
+    /** Function is called whenever the focus changes for the input element. */
+    private onInputFocusChange(focusOrigin: FocusOrigin) {
+        if (focusOrigin) {
+            this.onTouched();
+        }
     }
 }

@@ -1,4 +1,3 @@
-import { SelectionModel } from '@angular/cdk/collections';
 import {
     ChangeDetectorRef,
     Component,
@@ -7,27 +6,26 @@ import {
     Output,
     ElementRef,
     Inject,
-    Optional,
-    InjectionToken, ChangeDetectionStrategy, ViewEncapsulation, OnInit, OnDestroy
+    InjectionToken,
+    ChangeDetectionStrategy,
+    ViewEncapsulation,
+    AfterContentInit, NgZone
 } from '@angular/core';
-import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { CdkTreeNode } from '@ptsecurity/cdk/tree';
 import { CanDisable, toBoolean } from '@ptsecurity/mosaic/core';
+import { Subject } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 
-/* tslint:disable-next-line:naming-convention */
-export interface McTreeOptionParentComponent {
-    multiple: boolean;
-    selectionModel: SelectionModel<any>;
-    setSelectedOption: any;
-    setFocusedOption: any;
+// tslint:disable-next-line:naming-convention
+export interface McTreeOptionEvent {
+    option: McTreeOption;
 }
 
 /**
  * Injection token used to provide the parent component to options.
  */
-export const MC_TREE_OPTION_PARENT_COMPONENT =
-    new InjectionToken<McTreeOptionParentComponent>('MC_TREE_OPTION_PARENT_COMPONENT');
+export const MC_TREE_OPTION_PARENT_COMPONENT = new InjectionToken<any>('MC_TREE_OPTION_PARENT_COMPONENT');
 
 export class McTreeOptionChange {
     constructor(public source: McTreeOption, public isUserInput = false) {}
@@ -41,7 +39,7 @@ let uniqueIdCounter: number = 0;
     templateUrl: './tree-option.html',
     host: {
         '[attr.id]': 'id',
-        '[attr.tabindex]': 'getTabIndex()',
+        '[attr.tabindex]': 'tabIndex',
 
         '[attr.disabled]': 'disabled || null',
 
@@ -49,16 +47,21 @@ let uniqueIdCounter: number = 0;
         '[class.mc-selected]': 'selected',
         '[class.mc-focused]': 'hasFocus',
 
-        '(focus)': 'handleFocus()',
-        '(blur)': 'handleBlur()',
+        '(focus)': 'focus()',
+        '(blur)': 'blur()',
+
         '(click)': 'selectViaInteraction($event)'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: CdkTreeNode, useExisting: McTreeOption }]
 })
-export class McTreeOption extends CdkTreeNode<McTreeOption> implements OnInit, OnDestroy, CanDisable {
-    @Input()
+export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisable, AfterContentInit {
+
+    readonly onFocus = new Subject<McTreeOptionEvent>();
+
+    readonly onBlur = new Subject<McTreeOptionEvent>();
+
     get value(): any {
         return this._value;
     }
@@ -71,7 +74,7 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements OnInit, O
 
     @Input()
     get disabled() {
-        return this._disabled;
+        return this._disabled || (this.tree && this.tree.disabled);
     }
 
     set disabled(value: any) {
@@ -84,6 +87,10 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements OnInit, O
 
     private _disabled: boolean = false;
 
+    get showCheckbox(): boolean {
+        return this.tree.showCheckbox;
+    }
+
     @Output() readonly onSelectionChange = new EventEmitter<McTreeOptionChange>();
 
     get selected(): boolean {
@@ -95,7 +102,6 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements OnInit, O
 
         if (isSelected !== this._selected) {
             this.setSelected(isSelected);
-            // this.treeSelection._reportValueChange();
         }
     }
 
@@ -108,67 +114,80 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements OnInit, O
     private _id = `mc-tree-option-${uniqueIdCounter++}`;
 
     get multiple(): boolean {
-        return this.parent.multiple;
+        return this.tree.multiple;
+    }
+
+    get viewValue(): string {
+        // TODO: Add input property alternative for node envs.
+        return (this.getHostElement().textContent || '').trim();
+    }
+
+    get tabIndex(): any {
+        return this.disabled ? null : -1;
     }
 
     hasFocus: boolean = false;
 
     constructor(
-        protected elementRef: ElementRef,
-        protected changeDetectorRef: ChangeDetectorRef,
-        private focusMonitor: FocusMonitor,
-        @Optional() @Inject(MC_TREE_OPTION_PARENT_COMPONENT) private readonly parent: McTreeOptionParentComponent
+        elementRef: ElementRef,
+        private changeDetectorRef: ChangeDetectorRef,
+        private ngZone: NgZone,
+        @Inject(MC_TREE_OPTION_PARENT_COMPONENT) public tree: any
     ) {
-        // todo any
-        super(elementRef, parent as any);
+        super(elementRef, tree);
     }
 
-    ngOnInit() {
-        this.focusMonitor.monitor(this.elementRef.nativeElement, false);
-    }
-
-    ngOnDestroy(): void {
-        this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
+    ngAfterContentInit(): void {
+        this.value = this.tree.treeControl.getValue(this.data);
     }
 
     toggle(): void {
         this.selected = !this.selected;
     }
 
-    setSelected(selected: boolean) {
-        if (this._selected === selected || !this.parent.selectionModel) { return; }
+    setSelected(selected: boolean): void {
+        if (this._selected === selected || !this.tree.selectionModel) { return; }
 
         this._selected = selected;
 
         if (selected) {
-            this.parent.selectionModel.select(this.value);
+            this.tree.selectionModel.select(this.data);
         } else {
-            this.parent.selectionModel.deselect(this.value);
+            this.tree.selectionModel.deselect(this.data);
         }
 
         this.changeDetectorRef.markForCheck();
     }
 
-    handleFocus() {
+    focus() {
         if (this.disabled || this.hasFocus) { return; }
 
-        this.hasFocus = true;
+        this.elementRef.nativeElement.focus();
 
-        if (this.parent.setFocusedOption) {
-            this.parent.setFocusedOption(this);
-        }
+        this.onFocus.next({ option: this });
+
+        Promise.resolve().then(() => {
+            this.hasFocus = true;
+
+            this.changeDetectorRef.markForCheck();
+        });
     }
 
-    handleBlur() {
-        this.hasFocus = false;
-    }
+    blur(): void {
+        // When animations are enabled, Angular may end up removing the option from the DOM a little
+        // earlier than usual, causing it to be blurred and throwing off the logic in the tree
+        // that moves focus not the next item. To work around the issue, we defer marking the option
+        // as not focused until the next time the zone stabilizes.
+        this.ngZone.onStable
+            .asObservable()
+            .pipe(take(1))
+            .subscribe(() => {
+                this.ngZone.run(() => {
+                    this.hasFocus = false;
 
-    focus(): void {
-        const element = this.getHostElement();
-
-        if (typeof element.focus === 'function') {
-            element.focus();
-        }
+                    this.onBlur.next({ option: this });
+                });
+            });
     }
 
     getHeight(): number {
@@ -181,16 +200,12 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements OnInit, O
         return 0;
     }
 
-    get viewValue(): string {
-        // TODO: Add input property alternative for node envs.
-        return (this.getHostElement().textContent || '').trim();
-    }
-
     select(): void {
         if (!this._selected) {
             this._selected = true;
 
             this.changeDetectorRef.markForCheck();
+            this.emitSelectionChangeEvent();
         }
     }
 
@@ -207,8 +222,8 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements OnInit, O
             this.changeDetectorRef.markForCheck();
             this.emitSelectionChangeEvent(true);
 
-            if (this.parent.setSelectedOption) {
-                this.parent.setSelectedOption(this, $event);
+            if (this.tree.setSelectedOption) {
+                this.tree.setSelectedOption(this, $event);
             }
         }
     }
@@ -221,7 +236,7 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements OnInit, O
         return this.elementRef.nativeElement;
     }
 
-    getTabIndex(): string {
-        return this.disabled ? '-1' : '0';
+    markForCheck() {
+        this.changeDetectorRef.markForCheck();
     }
 }

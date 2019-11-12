@@ -5,9 +5,10 @@ describe('CdkFlatTreeControl', () => {
   let treeControl: FlatTreeControl<TestData>;
   const getLevel = (node: TestData) => node.level;
   const isExpandable = (node: TestData) => node.children && node.children.length > 0;
+  const getValue = (node: TestData) => node.name;
 
   beforeEach(() => {
-    treeControl = new FlatTreeControl<TestData>(getLevel, isExpandable);
+    treeControl = new FlatTreeControl<TestData>(getLevel, isExpandable, getValue, getValue);
   });
 
   describe('base tree control actions', () => {
@@ -148,6 +149,7 @@ export class TestData {
   b: string;
   c: string;
   level: number;
+  name: string;
   children: TestData[];
 
   constructor(a: string, b: string, c: string, level: number = 1, children: TestData[] = []) {

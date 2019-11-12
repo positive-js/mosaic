@@ -1,5 +1,5 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Directive, ElementRef, EventEmitter, Inject, Input, OnChanges, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Inject, Input, OnChanges, Output, Renderer2 } from '@angular/core';
 import { hasModifierKey } from '@ptsecurity/cdk/keycodes';
 
 import { MC_TAGS_DEFAULT_OPTIONS, McTagsDefaultOptions } from './tag-default-options';
@@ -71,7 +71,7 @@ export class McTagInput implements McTagTextControl, OnChanges {
     }
 
     // tslint:disable-next-line: naming-convention
-    _tagList: McTagList;
+    private _tagList: McTagList;
 
     /**
      * Whether or not the tagEnd event will be emitted when the input is blurred.
@@ -85,7 +85,7 @@ export class McTagInput implements McTagTextControl, OnChanges {
         this._addOnBlur = coerceBooleanProperty(value);
     }
 
-    private _addOnBlur: boolean = false;
+    private _addOnBlur: boolean = true;
 
     /** Whether the input is disabled. */
     @Input()
@@ -104,15 +104,22 @@ export class McTagInput implements McTagTextControl, OnChanges {
         return !this.inputElement.value;
     }
 
+    countOfSymbolsForUpdateWidth: number = 3;
+
+    private oneSymbolWidth: number;
+
     /** The native input element to which this directive is attached. */
     private inputElement: HTMLInputElement;
 
     constructor(
         private elementRef: ElementRef<HTMLInputElement>,
+        private renderer: Renderer2,
         @Inject(MC_TAGS_DEFAULT_OPTIONS) private defaultOptions: McTagsDefaultOptions
     ) {
         // tslint:disable-next-line: no-unnecessary-type-assertion
         this.inputElement = this.elementRef.nativeElement as HTMLInputElement;
+
+        this.setDefaultInputWidth();
     }
 
     ngOnChanges() {
@@ -147,6 +154,7 @@ export class McTagInput implements McTagTextControl, OnChanges {
 
         if (!event || this.isSeparatorKey(event)) {
             this.tagEnd.emit({ input: this.inputElement, value: this.inputElement.value });
+            this.updateInputWidth();
 
             if (event) {
                 event.preventDefault();
@@ -155,8 +163,23 @@ export class McTagInput implements McTagTextControl, OnChanges {
     }
 
     onInput() {
+        this.updateInputWidth();
         // Let tag list know whenever the value changes.
         this._tagList.stateChanges.next();
+    }
+
+    updateInputWidth(): void {
+        const length = this.inputElement.value.length;
+
+        this.renderer.setStyle(this.inputElement, 'max-width', 0);
+        this.oneSymbolWidth = this.inputElement.scrollWidth / length;
+        this.renderer.setStyle(this.inputElement, 'max-width', '');
+
+        if (length > this.countOfSymbolsForUpdateWidth) {
+            this.renderer.setStyle(this.inputElement, 'width', `${length * this.oneSymbolWidth}px`);
+        } else {
+            this.setDefaultInputWidth();
+        }
     }
 
     onFocus() {
@@ -167,6 +190,10 @@ export class McTagInput implements McTagTextControl, OnChanges {
     /** Focuses the input. */
     focus(): void {
         this.inputElement.focus();
+    }
+
+    private setDefaultInputWidth() {
+        this.renderer.setStyle(this.inputElement, 'width', '30px');
     }
 
     /** Checks whether a keycode is one of the configured separators. */

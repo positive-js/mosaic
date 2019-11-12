@@ -10,8 +10,11 @@
             <div *ngSwitchDefault [ngSwitch]="multiple" class="mc-select__match-container">
                 <span *ngSwitchCase="false" class="mc-select__matcher-text">{{ triggerValue }}</span>
                 <div *ngSwitchCase="true" class="mc-select__match-list">
-                    <mc-tag *ngFor="let option of triggerValues" [disabled]="disabled" [class.mc-error]="errorState">
-                        {{ option.viewValue || option.value }}
+                    <mc-tag *ngFor="let option of triggerValues"
+                            [disabled]="disabled"
+                            [selectable]="false"
+                            [class.mc-error]="errorState">
+                        {{ option.viewValue }}
                         <i mc-icon="mc-close-S_16" (click)="onRemoveMatcherItem(option, $event)"></i>
                     </mc-tag>
                 </div>
@@ -21,6 +24,10 @@
             </div>
             <ng-content select="mc-select-trigger" *ngSwitchCase="true"></ng-content>
         </span>
+    </div>
+
+    <div class="mc-select__cleaner" *ngIf="canShowCleaner" (click)="clearValue($event)">
+        <ng-content select="mc-cleaner"></ng-content>
     </div>
 
     <div class="mc-select__arrow-wrapper">

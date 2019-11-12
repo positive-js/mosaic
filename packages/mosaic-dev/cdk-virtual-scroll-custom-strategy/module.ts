@@ -1,3 +1,4 @@
+// tslint:disable:no-console
 import { ScrollingModule, VIRTUAL_SCROLL_STRATEGY, FixedSizeVirtualScrollStrategy } from '@angular/cdk/scrolling';
 import { ChangeDetectionStrategy, Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -6,7 +7,10 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy {
     constructor() {
-        super(50, 250, 500);
+        const itemSize = 50;
+        const minBufferPx = 250;
+        const maxBufferPx = 500;
+        super(itemSize, minBufferPx, maxBufferPx);
     }
 }
 

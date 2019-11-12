@@ -38,10 +38,12 @@ export class McVerticalNavbarItemBadge {}
 
 
 class McVerticalNavbarItemBase {
+    // tslint:disable-next-line:naming-convention
     constructor(public _elementRef: ElementRef) {}
 }
 
-export const _McVerticalNavbarMixinBase: CanDisableCtor & typeof McVerticalNavbarItemBase
+// tslint:disable-next-line:naming-convention
+export const McVerticalNavbarMixinBase: CanDisableCtor & typeof McVerticalNavbarItemBase
     = mixinDisabled(McVerticalNavbarItemBase);
 
 
@@ -57,7 +59,7 @@ export const _McVerticalNavbarMixinBase: CanDisableCtor & typeof McVerticalNavba
         '[attr.tabindex]': 'disabled ? -1 : 0'
     }
 })
-export class McVerticalNavbarItem extends _McVerticalNavbarMixinBase implements CanDisable, OnDestroy {
+export class McVerticalNavbarItem extends McVerticalNavbarMixinBase implements CanDisable, OnDestroy {
     @Input() tabIndex: number = 0;
 
     constructor(

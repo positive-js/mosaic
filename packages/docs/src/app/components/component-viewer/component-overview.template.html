@@ -1,0 +1,19 @@
+<div [@fadeInOut]="isLoad ? 'fadeIn' : 'fadeOut'" >
+    <span class="mc-display-3 title">
+        {{documentName}}
+    </span>
+    <div *ngIf="documentLost" class="mc-alert mc-alert_error mc-alert_dismissible">
+                <span>Oops, {{documentName}} component seems to be lost... But you can help us find it!
+                    Just send a Pull Request to this repository:
+                    <a class="docs-markdown__a" href="//github.com/positive-js/mosaic/pulls"> Mosaic</a>
+                </span>
+    </div>
+    <doc-viewer
+        documentUrl="docs-content/overviews/{{componentViewer.componentDocItem.packageName}}/{{componentViewer.componentDocItem.id}}.html"
+        class="docs-component-view-text-content docs-component-overview"
+        [class.docs-component-overview_hidden]="documentLost"
+        (contentRendered)="scrollToSelectedContentSection()"
+        (contentRenderFailed)="showDocumentLostAlert()">
+    </doc-viewer>
+    <anchors #toc ></anchors>
+</div>

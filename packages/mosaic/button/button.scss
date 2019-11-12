@@ -6,7 +6,7 @@
 .mc-button {
     @extend %mc-button-base;
 
-    @include mc-button-size($mc-button-padding, $mc-button-line-height, $mc-button-font);
+    padding: $mc-button-padding;
 }
 
 .mc-light-button {
@@ -16,7 +16,7 @@
 .mc-icon-button {
     @extend %mc-button-base;
 
-    @include mc-button-size($mc-icon-button-padding, $mc-icon-button-line-height, $mc-icon-button-font);
+    padding: $mc-icon-button-padding;
 
     &.mc-icon-button_left {
         padding-right: $mc-icon-button-text-padding;

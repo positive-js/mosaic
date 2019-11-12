@@ -5,10 +5,10 @@ import { NgModule, InjectionToken, Optional, Inject, isDevMode } from '@angular/
 // Injection token that configures whether the Mosaic sanity checks are enabled.
 export const MC_SANITY_CHECKS = new InjectionToken<boolean>('mc-sanity-checks', {
     providedIn: 'root',
-    factory: MC_SANITY_CHECKS_FACTORY
+    factory: mcSanityChecksFactory
 });
 
-export function MC_SANITY_CHECKS_FACTORY(): boolean {
+export function mcSanityChecksFactory(): boolean {
     return true;
 }
 
@@ -24,34 +24,36 @@ export function MC_SANITY_CHECKS_FACTORY(): boolean {
 })
 export class McCommonModule {
     // Whether we've done the global sanity checks (e.g. a theme is loaded, there is a doctype).
-    private _hasDoneGlobalChecks = false;
+    private hasDoneGlobalChecks = false;
 
     // Reference to the global `document` object.
+    // tslint:disable-next-line: orthodox-getter-and-setter
     private _document = typeof document === 'object' && document ? document : null;
 
     // Reference to the global 'window' object.
+    // tslint:disable-next-line: orthodox-getter-and-setter
     private _window = typeof window === 'object' && window ? window : null;
 
     constructor(@Optional() @Inject(MC_SANITY_CHECKS) private _sanityChecksEnabled: boolean) {
-        if (this._areChecksEnabled() && !this._hasDoneGlobalChecks) {
-            this._checkDoctypeIsDefined();
-            this._checkThemeIsPresent();
-            this._hasDoneGlobalChecks = true;
+        if (this.areChecksEnabled() && !this.hasDoneGlobalChecks) {
+            this.checkDoctypeIsDefined();
+            this.checkThemeIsPresent();
+            this.hasDoneGlobalChecks = true;
         }
     }
 
     // Whether any sanity checks are enabled
-    private _areChecksEnabled(): boolean {
-        return this._sanityChecksEnabled && isDevMode() && !this._isTestEnv();
+    private areChecksEnabled(): boolean {
+        return this._sanityChecksEnabled && isDevMode() && !this.isTestEnv();
     }
 
     // Whether the code is running in tests.
-    private _isTestEnv() {
+    private isTestEnv() {
         // tslint:disable-next-line
         return this._window && (this._window['__karma__'] || this._window['jasmine']);
     }
 
-    private _checkDoctypeIsDefined(): void {
+    private checkDoctypeIsDefined(): void {
         if (this._document && !this._document.doctype) {
             console.warn(
                 'Current document does not have a doctype. This may cause ' +
@@ -60,7 +62,7 @@ export class McCommonModule {
         }
     }
 
-    private _checkThemeIsPresent(): void {
+    private checkThemeIsPresent(): void {
         if (this._document && typeof getComputedStyle === 'function') {
             const testElement = this._document.createElement('div');
 

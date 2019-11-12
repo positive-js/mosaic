@@ -7,6 +7,8 @@ import { MC_CHECKBOX_CLICK_ACTION } from './checkbox-config';
 import { McCheckbox, McCheckboxChange, McCheckboxModule } from './index';
 
 
+// tslint:disable no-empty
+// tslint:disable no-magic-numbers
 describe('McCheckbox', () => {
     let fixture: ComponentFixture<any>;
 
@@ -198,14 +200,12 @@ describe('McCheckbox', () => {
             testComponent.isChecked = false;
             testComponent.isIndeterminate = true;
             fixture.detectChanges();
+            const inputClickEvent = new Event('inputClick');
 
             expect(checkboxInstance.checked).toBe(false);
             expect(checkboxInstance.indeterminate).toBe(true);
 
-            checkboxInstance._onInputClick(<Event> {
-                stopPropagation: () => {
-                }
-            });
+            checkboxInstance.onInputClick(inputClickEvent);
 
             // Flush the microtasks because the indeterminate state will be updated in the next tick.
             flush();
@@ -213,10 +213,7 @@ describe('McCheckbox', () => {
             expect(checkboxInstance.checked).toBe(true);
             expect(checkboxInstance.indeterminate).toBe(false);
 
-            checkboxInstance._onInputClick(<Event> {
-                stopPropagation: () => {
-                }
-            });
+            checkboxInstance.onInputClick(inputClickEvent);
             fixture.detectChanges();
 
             expect(checkboxInstance.checked).toBe(false);
@@ -927,10 +924,8 @@ class SingleCheckbox {
     checkboxColor: string = 'primary';
     checkboxValue: string = 'single_checkbox';
 
-    onCheckboxClick: (event?: Event) => void = () => {
-    }
-    onCheckboxChange: (event?: McCheckboxChange) => void = () => {
-    }
+    onCheckboxClick: (event?: Event) => void = () => {};
+    onCheckboxChange: (event?: McCheckboxChange) => void = () => {};
 }
 
 /** Simple component for testing an McCheckbox with ngModel in a form. */

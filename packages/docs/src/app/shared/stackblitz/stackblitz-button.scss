@@ -1,0 +1,27 @@
+.stackblitz {
+
+    &__wrapper {
+        position: absolute;
+        right: 0;
+        z-index: 100;
+    }
+
+    &__icon {
+        width: 9.5px;
+        height: 14px;
+        margin-bottom: -2px;
+    }
+
+    &__link {
+        margin: {
+            top: 11px;
+            bottom: 11px;
+        }
+
+        background: none;
+        border-top: 0;
+        border-left: 0;
+        border-right: 0;
+        cursor: pointer;
+    }
+}

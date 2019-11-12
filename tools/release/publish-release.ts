@@ -16,6 +16,7 @@ import { checkReleasePackage } from './release-output/check-packages';
 import { releasePackages } from './release-output/release-packages';
 import { CHANGELOG_FILE_NAME } from './stage-release';
 import { parseVersionName, Version } from './version-name/parse-version';
+import { notify, verifyNotificationPossibility } from './notify-release';
 
 
 /** Maximum allowed tries to authenticate NPM. */
@@ -74,6 +75,10 @@ class PublishReleaseTask extends BaseReleaseTask {
         // Ensure there are no uncommitted changes. Checking this before switching to a
         // publish branch is sufficient as unstaged changes are not specific to Git branches.
         this.verifyNoUncommittedChanges();
+
+        if (!verifyNotificationPossibility()) {
+            await this.promptPublishReleaseWithoutNotification();
+        }
 
         // Branch that will be used to build the output for the release of the current version.
         const publishBranch = this.switchToPublishBranch(newVersion);
@@ -143,6 +148,8 @@ class PublishReleaseTask extends BaseReleaseTask {
 
         console.info(chalk.yellow(`  ⚠   Please draft a new release of the version on Github.`));
         console.info(chalk.yellow(`      ${newReleaseUrl}`));
+
+        notify(npmDistTag, newVersionName);
     }
 
     /**
@@ -207,6 +214,19 @@ class PublishReleaseTask extends BaseReleaseTask {
      */
     private async promptConfirmReleasePublish() {
         if (!await this.promptConfirm('Are you sure that you want to release now?')) {
+            console.log();
+            console.log(chalk.yellow('Aborting publish...'));
+            process.exit(0);
+        }
+    }
+
+    /**
+     * Prompts the user whether he is sure that the script should continue publishing
+     * the release to NPM.
+     */
+    private async promptPublishReleaseWithoutNotification() {
+        if (!await this.promptConfirm(
+            'File .env not found or invalid. Are you sure that you want to release without notification')) {
             console.log();
             console.log(chalk.yellow('Aborting publish...'));
             process.exit(0);

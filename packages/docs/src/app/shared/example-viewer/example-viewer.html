@@ -1,0 +1,55 @@
+<div class="docs-example-viewer__wrapper">
+    <div *ngIf="exampleData" class="docs-example-viewer__example">
+        <div class="docs-example-viewer-body">
+            <ng-template [cdkPortalOutlet]="selectedPortal"></ng-template>
+        </div>
+    </div>
+
+    <div *ngIf="exampleData; else lostExample" [class.docs-example-viewer__source]="true"
+         [class.docs-example-viewer__source_hidden]="!(isSourceShown || isSwitcherHidden)">
+        <stackblitz-button [example]="example"></stackblitz-button>
+        <span class="docs-example-source-copy">
+            <span class="code-copy__copied"><i class="mc mc-check_16"></i> Скопировано</span>
+            <i class="code-copy__icon mc mc-copy_16" (click)="copyCode($event)"></i>
+        </span>
+        <mc-tab-group mc-light-tabs (selectedTabChange)="setLineNumbers()">
+            <mc-tab *ngFor="let tabName of getExampleTabNames()" [label]="tabName">
+                <div class="docs-example-source-wrapper">
+                    <pre class="docs-example-numbers hljs-line-numbers">{{lineNumbers}}</pre>
+                    <pre class="docs-example-source hljs">
+                        <doc-viewer #viewer [documentUrl]="exampleTabs[tabName]" class="docs-example-source-viewer"></doc-viewer>
+                        <div class="hljs-shadow {{isSourceShown  || isSwitcherHidden ? shadowHide : null}}"></div>
+                    </pre>
+                </div>
+            </mc-tab>
+        </mc-tab-group>
+        <div [class.docs-example-source__switcher]="true"
+             [class.docs-example-source__switcher_hide]="isSwitcherHidden">
+            <div  [class.docs-example-source__show]="true"
+                  [class.docs-example-source__hide]="isSourceShown">
+                <span class="mc-link mc-link_underlined" (click)="toggleSourceView()"
+                   [ngClass]="{'mc-active' : active, 'mc-focused': focus}">
+                    <span class="mc-link__text">Показать полностью</span>
+                    <i class="mc mc-angle-down-M_16"></i>
+                </span>
+            </div>
+            <div [class.docs-example-source__show]="true"
+                 [class.docs-example-source__hide]="!isSourceShown">
+                <span class="mc-link mc-link_underlined" (click)="toggleSourceView()"
+                   [ngClass]="{'mc-active' : active, 'mc-focused': focus}">
+                    <span class="mc-link__text">Свернуть</span>
+                    <i class="mc mc-angle-up-M_16"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #lostExample>
+        <div class="mc-alert mc-alert_error mc-alert_dismissible">
+            <span>Oops, this code example is lost... But you can help us find it!
+                Just send a Pull Request to this repository:
+                <a class="docs-markdown__a" href="//github.com/positive-js/mosaic/pulls"> Mosaic</a>
+            </span>
+        </div>
+    </ng-template>
+</div>

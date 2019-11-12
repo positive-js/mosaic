@@ -1,0 +1,93 @@
+@import '../../mosaic/core/theming/theming';
+@import '../../mosaic/core/theming/all-theme';
+@import '../../mosaic/core/visual/all-visual';
+
+@import './app-theme';
+@import './styles/common';
+@import './styles/markdown';
+@import './styles/mosaic-fixed';
+@import "~@ptsecurity/mosaic-icons/dist/styles/mc-icons.css";
+@import 'app/components/anchors/anchors-theme';
+@import 'app/components/navbar/navbar-theme';
+@import 'app/components/footer/footer-theme';
+@import 'app/components/main-layout/main-layout-theme';
+@import 'app/components/sidenav/sidenav-theme';
+@import 'app/components/component-viewer/component-overview-theme';
+@import 'app/shared/stackblitz/stackblitz-button-theme';
+@import 'app/shared/example-viewer/example-viewer-theme';
+@import 'highlightjs/material-dark';
+
+// Include all typography for the components.
+@include mc-core();
+
+$typography: mc-typography-config();
+
+@include mc-footer-typography($typography);
+@include mc-sidenav-typography($typography);
+@include mc-anchors-typography($typography);
+@include mc-navbar-typography($typography);
+@include docs-markdown-typography($typography);
+@include docs-stackblitz-typography($typography);
+@include example-viewer-typography($typography);
+
+@mixin docs-component-theme($theme) {
+    @include mosaic-theme($theme);
+    @include mosaic-docs-app-theme($theme);
+    @include layout-padding-margin();
+    @include mc-anchors-theme($theme);
+    @include mc-navbar-theme($theme);
+    @include mc-footer-theme($theme);
+    @include mc-main-layout-theme($theme);
+    @include mc-sidenav-theme($theme);
+    @include mc-component-viewer-theme($theme);
+    @include docs-markdown-theme($theme);
+    @include docs-stackblitz-theme($theme);
+    @include example-viewer-theme($theme);
+}
+
+// Include all theme styles for the components.
+
+@import './styles/theme-default';
+@import './styles/theme-dark';
+
+.theme-default {
+    &.active-blue {
+        @include docs-component-theme($theme);
+    }
+
+    &.active-red {
+        @include docs-component-theme($theme-red);
+    }
+
+    &.active-green {
+        @include docs-component-theme($theme-green);
+    }
+
+    &.active-yellow {
+        @include docs-component-theme($theme-yellow);
+    }
+}
+
+.theme-dark {
+    @include material-dark();
+
+    &.active-blue {
+        @include docs-component-theme($dark-theme);
+    }
+
+    &.active-red {
+        @include docs-component-theme($dark-theme-red);
+    }
+
+    &.active-green {
+        @include docs-component-theme($dark-theme-green);
+    }
+
+    &.active-yellow {
+        @include docs-component-theme($dark-theme-yellow);
+    }
+}
+
+.docs-app-wrapper {
+    width: 100%;
+}

@@ -6,7 +6,6 @@ import {
     ElementRef,
     ViewEncapsulation
 } from '@angular/core';
-
 import { mixinColor, CanColor, CanColorCtor, ThemePalette } from '@ptsecurity/mosaic/core';
 
 
@@ -14,14 +13,17 @@ import { mixinColor, CanColor, CanColorCtor, ThemePalette } from '@ptsecurity/mo
     selector: '[mc-icon]',
     host: { class: 'mc mc-icon' }
 })
+// tslint:disable-next-line:naming-convention
 export class McIconCSSStyler {}
 
 
 export class McIconBase {
+    // tslint:disable-next-line:naming-convention
     constructor(public _elementRef: ElementRef) {}
 }
 
-export const _McIconMixinBase: CanColorCtor & typeof McIconBase = mixinColor(McIconBase, ThemePalette.Empty);
+// tslint:disable-next-line: naming-convention
+export const McIconMixinBase: CanColorCtor & typeof McIconBase = mixinColor(McIconBase, ThemePalette.Empty);
 
 
 @Component({
@@ -32,7 +34,7 @@ export const _McIconMixinBase: CanColorCtor & typeof McIconBase = mixinColor(McI
     encapsulation: ViewEncapsulation.None,
     inputs: ['color']
 })
-export class McIcon extends _McIconMixinBase implements CanColor {
+export class McIcon extends McIconMixinBase implements CanColor {
     constructor(elementRef: ElementRef, @Attribute('mc-icon') iconName: string) {
         super(elementRef);
 

@@ -28,8 +28,7 @@ import { Observable } from 'rxjs';
 
 import { McModalControlService } from './modal-control.service';
 import { McModalRef } from './modal-ref.class';
-// tslint:disable-next-line
-import ModalUtil from './modal-util';
+import { modalUtilObject as ModalUtil } from './modal-util';
 import { IModalButtonOptions, IModalOptions, ModalType, OnClickCallback } from './modal.type';
 
 
@@ -51,7 +50,6 @@ type AnimationState = 'enter' | 'leave' | null;
 export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     implements OnInit, OnChanges, AfterViewInit, OnDestroy, IModalOptions {
 
-    // tslint:disable-next-line:no-any
     @Input() mcModalType: ModalType = 'default';
 
     // The instance of component opened into the dialog.
@@ -67,7 +65,7 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     get mcVisible() { return this._mcVisible; }
     set mcVisible(value) { this._mcVisible = value; }
 
-    _mcVisible = false;
+    private _mcVisible = false;
 
     @Output() mcVisibleChange = new EventEmitter<boolean>();
 
@@ -82,17 +80,17 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     @Input()
     get mcClosable() { return this._mcClosable; }
     set mcClosable(value) { this._mcClosable = value; }
-    _mcClosable = true;
+    private _mcClosable = true;
 
     @Input()
     get mcMask() { return this._mcMask; }
     set mcMask(value) { this._mcMask = value; }
-    _mcMask = true;
+    private _mcMask = true;
 
     @Input()
     get mcMaskClosable() { return this._mcMaskClosable; }
     set mcMaskClosable(value) { this._mcMaskClosable = value; }
-    _mcMaskClosable = true;
+    private _mcMaskClosable = false;
 
     @Input() mcMaskStyle: object;
     @Input() mcBodyStyle: object;
@@ -109,7 +107,7 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     @Input()
     get mcOkLoading() { return this._mcOkLoading; }
     set mcOkLoading(value) { this._mcOkLoading = value; }
-    _mcOkLoading = false;
+    private _mcOkLoading = false;
 
     @Input() @Output() mcOnOk: EventEmitter<T> | OnClickCallback<T> = new EventEmitter<T>();
     @Input() mcCancelText: string;
@@ -117,7 +115,7 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     @Input()
     get mcCancelLoading() { return this._mcCancelLoading; }
     set mcCancelLoading(value) { this._mcCancelLoading = value; }
-    _mcCancelLoading = false;
+    private _mcCancelLoading = false;
 
     @Input() @Output() mcOnCancel: EventEmitter<T> | OnClickCallback<T> = new EventEmitter<T>();
 
@@ -189,7 +187,7 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
 
 
         if (this.isComponent(this.mcComponent)) {
-            this.createDynamicComponent(this.mcComponent as Type<T>);
+            this.createDynamicComponent(this.mcComponent);
         }
 
         // Place the modal dom to elsewhere
@@ -286,13 +284,14 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
         }
     }
 
-    // tslint:disable-next-line
+    // tslint:disable-next-line: no-reserved-keywords
     isModalType(type: ModalType): boolean {
         return this.mcModalType === type;
     }
 
     onKeyDown(event: KeyboardEvent): void {
 
+        // tslint:disable-next-line:deprecation .key isn't supported in Edge
         if (event.keyCode === ESCAPE && this.container && (this.container instanceof OverlayRef)) {
 
             this.close();
@@ -308,7 +307,7 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     }
 
     // AoT
-    // tslint:disable-next-line
+    // tslint:disable-next-line: no-reserved-keywords
     onClickOkCancel(type: 'ok' | 'cancel') {
         const trigger = { ok: this.mcOnOk, cancel: this.mcOnCancel }[type];
         const loadingKey = { ok: 'mcOkLoading', cancel: 'mcCancelLoading' }[type];
@@ -354,6 +353,30 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
         return Array.isArray(value) && value.length > 0;
     }
 
+    // Lookup a button's property, if the prop is a function, call & then return the result, otherwise, return itself.
+    // AoT
+    getButtonCallableProp(options: IModalButtonOptions<T>, prop: string): {} {
+        const value = options[prop];
+        const args: any[] = [];
+        if (this.contentComponentRef) {
+            args.push(this.contentComponentRef.instance);
+        }
+
+        return typeof value === 'function' ? value.apply(options, args) : value;
+    }
+
+    // On mcFooter's modal button click
+    // AoT
+    onButtonClick(button: IModalButtonOptions<T>) {
+        // Call onClick directly
+        // tslint:disable-next-line:no-inferred-empty-object-type  rule seems to be broken
+        const result = this.getButtonCallableProp(button, 'onClick');
+        if (isPromise(result)) {
+            button.loading = true;
+            (result as Promise<{}>).then(() => button.loading = false).catch(() => button.loading = false);
+        }
+    }
+
     // Do rest things when visible state changed
     private handleVisibleStateChange(visible: boolean, animation: boolean = true, closeResult?: R): Promise<any> {
         // Hide scrollbar at the first time when shown up
@@ -373,31 +396,6 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
                     this.changeBodyOverflow();
                 }
             });
-    }
-
-    // Lookup a button's property, if the prop is a function, call & then return the result, otherwise, return itself.
-    // AoT
-    // tslint:disable-next-line
-    getButtonCallableProp(options: IModalButtonOptions<T>, prop: string): {} {
-        const value = options[prop];
-        const args: any[] = [];
-        if (this.contentComponentRef) {
-            args.push(this.contentComponentRef.instance);
-        }
-
-        return typeof value === 'function' ? value.apply(options, args) : value;
-    }
-
-    // On mcFooter's modal button click
-    // AoT
-    // tslint:disable-next-line
-    onButtonClick(button: IModalButtonOptions<T>) {
-        // Call onClick directly
-        const result = this.getButtonCallableProp(button, 'onClick');
-        if (isPromise(result)) {
-            button.loading = true;
-            (result as Promise<{}>).then(() => button.loading = false).catch(() => button.loading = false);
-        }
     }
 
     // Change mcVisible from inside
@@ -479,7 +477,7 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
         const factory = this.cfr.resolveComponentFactory(component);
         const childInjector = Injector.create({
             providers: [{provide: McModalRef, useValue: this}],
-            parent: this.viewContainer.parentInjector
+            parent: this.viewContainer.injector
         });
 
         this.contentComponentRef = factory.create(childInjector);
@@ -499,7 +497,6 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
         const lastPosition = ModalUtil.getLastClickPosition();
 
         if (lastPosition) {
-            // tslint:disable-next-line
             this.transformOrigin = `${lastPosition.x - modalElement.offsetLeft}px ${lastPosition.y - modalElement.offsetTop}px 0px`;
         }
     }
@@ -512,7 +509,6 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
         const openModals = this.modalControl.openModals;
 
         if (openModals.length + plusNum > 0) {
-            // tslint:disable-next-line
             this.renderer.setStyle(this.document.body, 'overflow', 'hidden');
         } else {
             this.renderer.removeStyle(this.document.body, 'overflow');
@@ -523,6 +519,6 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
 ////////////
 
 function isPromise(obj: {} | void): boolean {
-    // tslint:disable-next-line
+    // tslint:disable-next-line: no-unbound-method
     return !!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof (obj as Promise<{}>).then === 'function' && typeof (obj as Promise<{}>).catch === 'function';
 }

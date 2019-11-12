@@ -39,6 +39,8 @@
                 <mc-cleaner></mc-cleaner>
             </mc-form-field>
 
+            <mc-cleaner #mcSelectCleaner></mc-cleaner>
+
             <div mc-select-search-empty-result>Ничего не найдено</div>
 
             <mc-option *ngFor="let option of filteredOptions | async" [value]="option">{{ option }}</mc-option>
@@ -61,6 +63,8 @@
                 <mc-cleaner></mc-cleaner>
             </mc-form-field>
 
+            <mc-cleaner #mcSelectCleaner></mc-cleaner>
+
             <div mc-select-search-empty-result>Ничего не найдено</div>
 
             <mc-option *ngFor="let option of filteredMultipleOptions | async" [value]="option">{{ option }}</mc-option>
@@ -73,7 +77,7 @@
 <div class="dev-container">
 
     <mc-form-field>
-        <mc-select [(value)]="singleSelected">
+        <mc-select [(value)]="singleSelected" [placeholder]="'placeholder'">
             <mc-option value="Disabled" disabled>Disabled</mc-option>
             <mc-option value="Normal">Normal</mc-option>
             <mc-option value="Hovered">Hovered</mc-option>

@@ -1,4 +1,6 @@
+// tslint:disable:no-console
 import {
+    AfterViewInit,
     Component,
     ElementRef,
     NgModule, OnInit,
@@ -25,13 +27,16 @@ import { map } from 'rxjs/operators';
     styleUrls: ['./styles.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class DemoComponent implements OnInit {
+export class DemoComponent implements AfterViewInit {
+    addOnBlur = false;
     visible = true;
     tagCtrl = new FormControl();
 
     simpleTags = ['tag', 'tag1', 'tag2', 'tag3', 'tag4'];
 
     inputTags = ['tag', 'tag1', 'tag2', 'tag3', 'tag4'];
+
+    enterTags = ['tag', 'tag1', 'tag2', 'tag3', 'tag4'];
 
     autocompleteAllTags: string[] = ['tag1', 'tag2', 'tag3', 'tag4', 'tag5', 'tag6', 'tag7', 'tag8', 'tag9', 'tag10'];
     autocompleteSelectedTags: string[] = ['tag1'];
@@ -46,7 +51,10 @@ export class DemoComponent implements OnInit {
     @ViewChild('autocompleteTagInput', {static: false}) autocompleteTagInput: ElementRef<HTMLInputElement>;
     @ViewChild('autocompleteTagList', {static: false}) autocompleteTagList: McTagList;
 
-    ngOnInit(): void {
+    @ViewChild('enterTagInput', {static: false}) enterTagInput: ElementRef<HTMLInputElement>;
+    @ViewChild('enterInputTagList', {static: false}) enterInputTagList: McTagList;
+
+    ngAfterViewInit(): void {
         this.autocompleteFilteredTags = merge(
             this.autocompleteTagList.tagChanges.asObservable()
                 .pipe(map((selectedTags) => {
@@ -69,6 +77,10 @@ export class DemoComponent implements OnInit {
         );
     }
 
+    onClear(): void {
+        this.inputTags.length = 0;
+    }
+
     autocompleteOnCreate(event: McTagInputEvent): void {
         const input = event.input;
         const value = event.value;
@@ -88,6 +100,19 @@ export class DemoComponent implements OnInit {
 
         if ((value || '').trim()) {
             this.inputTags.push(value.trim());
+        }
+
+        if (input) {
+            input.value = '';
+        }
+    }
+
+    enterOnCreate(event: McTagInputEvent): void {
+        const input = event.input;
+        const value = event.value;
+
+        if ((value || '').trim()) {
+            this.enterTags.push(value.trim());
         }
 
         if (input) {
@@ -126,6 +151,14 @@ export class DemoComponent implements OnInit {
 
         if (index >= 0) {
             this.inputTags.splice(index, 1);
+        }
+    }
+
+    enterOnRemoveTag(tag: string): void {
+        const index = this.enterTags.indexOf(tag);
+
+        if (index >= 0) {
+            this.enterTags.splice(index, 1);
         }
     }
 

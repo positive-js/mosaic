@@ -1,5 +1,6 @@
 import { Component, Directive, Input, ViewEncapsulation } from '@angular/core';
-import { BaseTreeControl, CdkTree, CdkTreeNode, CdkTreeNodeToggle } from '@ptsecurity/cdk/tree';
+import { CdkTree, CdkTreeNode, CdkTreeNodeToggle } from '@ptsecurity/cdk/tree';
+import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -25,12 +26,12 @@ export class McTreeNodeToggleComponent<T> extends CdkTreeNodeToggle<T> {
         return this.disabled || this.tree.treeControl.isExpanded(this.node);
     }
 
-    constructor(protected tree: CdkTree<T>, protected treeNode: CdkTreeNode<T>) {
+    constructor(tree: CdkTree<T>, treeNode: CdkTreeNode<T>) {
         super(tree, treeNode);
 
-        // todo может пересмотреть, как то не очень
-        (this.tree.treeControl as BaseTreeControl<T>).filterValue
-            .subscribe((value: string) => { this.disabled = value.length > 0; });
+        this.tree.treeControl.filterValue
+            .pipe(map((value) => value.length > 0))
+            .subscribe((state: boolean) => this.disabled = state);
     }
 }
 
@@ -45,11 +46,11 @@ export class McTreeNodeToggleComponent<T> extends CdkTreeNodeToggle<T> {
 export class McTreeNodeToggleDirective<T> extends CdkTreeNodeToggle<T> {
     disabled: boolean = false;
 
-    constructor(protected tree: CdkTree<T>, protected treeNode: CdkTreeNode<T>) {
+    constructor(tree: CdkTree<T>, treeNode: CdkTreeNode<T>) {
         super(tree, treeNode);
 
-        // todo может пересмотреть, как то не очень
-        (this.tree.treeControl as BaseTreeControl<T>).filterValue
-            .subscribe((value: string) => { this.disabled = value.length > 0; });
+        this.tree.treeControl.filterValue
+            .pipe(map((value) => value.length > 0))
+            .subscribe((state: boolean) => this.disabled = state);
     }
 }

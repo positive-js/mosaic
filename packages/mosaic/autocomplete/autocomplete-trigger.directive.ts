@@ -1,5 +1,16 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import {
+    ConnectedPosition,
+    FlexibleConnectedPositionStrategy,
+    Overlay,
+    OverlayConfig,
+    OverlayRef,
+    PositionStrategy,
+    ScrollStrategy
+} from '@angular/cdk/overlay';
+import { TemplatePortal } from '@angular/cdk/portal';
+import { ViewportRuler } from '@angular/cdk/scrolling';
 import { DOCUMENT } from '@angular/common';
 import {
     ChangeDetectorRef,
@@ -17,16 +28,6 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DOWN_ARROW, ENTER, ESCAPE, TAB, UP_ARROW } from '@ptsecurity/cdk/keycodes';
-import {
-    FlexibleConnectedPositionStrategy,
-    Overlay,
-    OverlayConfig,
-    OverlayRef,
-    PositionStrategy,
-    ScrollStrategy, ConnectedPosition
-} from '@angular/cdk/overlay';
-import { TemplatePortal } from '@angular/cdk/portal';
-import { ViewportRuler } from '@angular/cdk/scrolling';
 import {
     countGroupLabelsBeforeOption,
     getOptionScrollPosition,
@@ -512,7 +513,7 @@ export class McAutocompleteTrigger implements ControlValueAccessor, OnDestroy {
         // If it's used within a `MatFormField`, we should set it through the property so it can go
         // through change detection.
         if (this.formField) {
-            this.formField._control.value = inputValue;
+            this.formField.control.value = inputValue;
         } else {
             this.elementRef.nativeElement.value = inputValue;
         }

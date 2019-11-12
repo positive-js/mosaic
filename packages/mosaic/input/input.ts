@@ -54,7 +54,8 @@ export class McInputBase {
     }
 }
 
-export const _McInputMixinBase: CanUpdateErrorStateCtor & typeof McInputBase = mixinErrorState(McInputBase);
+// tslint:disable-next-line:naming-convention
+export const McInputMixinBase: CanUpdateErrorStateCtor & typeof McInputBase = mixinErrorState(McInputBase);
 
 
 @Directive({
@@ -62,8 +63,8 @@ export const _McInputMixinBase: CanUpdateErrorStateCtor & typeof McInputBase = m
     exportAs: 'mcNumericalInput',
     providers: [NgModel, { provide: McFormFieldNumberControl, useExisting: McNumberInput }],
     host: {
-        '(blur)': '_focusChanged(false)',
-        '(focus)': '_focusChanged(true)',
+        '(blur)': 'focusChanged(false)',
+        '(focus)': 'focusChanged(true)',
         '(paste)': 'onPaste($event)',
         '(keydown)': 'onKeyDown($event)'
     }
@@ -108,7 +109,7 @@ export class McNumberInput implements McFormFieldNumberControl<any> {
      */
     readonly stateChanges: Subject<void> = new Subject<void>();
 
-    private readonly _host: HTMLInputElement;
+    private readonly host: HTMLInputElement;
 
     constructor(
         private _platform: Platform ,
@@ -124,12 +125,12 @@ export class McNumberInput implements McFormFieldNumberControl<any> {
         this.min = this.isDigit(min) ? parseFloat(min) : -Infinity;
         this.max = this.isDigit(max) ? parseFloat(max) : Infinity;
 
-        this._host = this._elementRef.nativeElement;
+        this.host = this._elementRef.nativeElement;
 
         const self = this;
 
-        if ('valueAsNumber' in this._host) {
-            Object.defineProperty(Object.getPrototypeOf(this._host), 'valueAsNumber', {
+        if ('valueAsNumber' in this.host) {
+            Object.defineProperty(Object.getPrototypeOf(this.host), 'valueAsNumber', {
                 // tslint:disable-next-line:no-reserved-keywords
                 get() {
                     const res = parseFloat(self.normalizeSplitter(this.value));
@@ -140,7 +141,7 @@ export class McNumberInput implements McFormFieldNumberControl<any> {
         }
     }
 
-    _focusChanged(isFocused: boolean) {
+    focusChanged(isFocused: boolean) {
         if (isFocused !== this.focused) {
             this.focused = isFocused;
             this.stateChanges.next();
@@ -213,16 +214,16 @@ export class McNumberInput implements McFormFieldNumberControl<any> {
 
     stepUp(step: number) {
         this._elementRef.nativeElement.focus();
-        const res = stepUp(this._host.valueAsNumber, this.max, this.min, step);
-        this._host.value = res === null ? '' : res.toString();
-        this._model.update.emit(this._host.valueAsNumber);
+        const res = stepUp(this.host.valueAsNumber, this.max, this.min, step);
+        this.host.value = res === null ? '' : res.toString();
+        this._model.update.emit(this.host.valueAsNumber);
     }
 
     stepDown(step: number) {
         this._elementRef.nativeElement.focus();
-        const res = stepDown(this._host.valueAsNumber, this.max, this.min, step);
-        this._host.value = res === null ? '' : res.toString();
-        this._model.update.emit(this._host.valueAsNumber);
+        const res = stepDown(this.host.valueAsNumber, this.max, this.min, step);
+        this.host.value = res === null ? '' : res.toString();
+        this._model.update.emit(this.host.valueAsNumber);
     }
 
     private normalizeSplitter(value: string): string {
@@ -253,13 +254,13 @@ export class McNumberInput implements McFormFieldNumberControl<any> {
         '[attr.placeholder]': 'placeholder',
         '[disabled]': 'disabled',
         '[required]': 'required',
-        '(blur)': '_focusChanged(false)',
-        '(focus)': '_focusChanged(true)',
-        '(input)': '_onInput()'
+        '(blur)': 'focusChanged(false)',
+        '(focus)': 'focusChanged(true)',
+        '(input)': 'onInput()'
     },
     providers: [{ provide: McFormFieldControl, useExisting: McInput }]
 })
-export class McInput extends _McInputMixinBase implements McFormFieldControl<any>, OnChanges,
+export class McInput extends McInputMixinBase implements McFormFieldControl<any>, OnChanges,
     OnDestroy, DoCheck, CanUpdateErrorState {
 
     /** An object used to control when error messages are shown. */
@@ -287,6 +288,23 @@ export class McInput extends _McInputMixinBase implements McFormFieldControl<any
      * Implemented as part of McFormFieldControl.
      * @docs-private
      */
+    @Input() placeholder: string;
+
+    protected uid = `mc-input-${nextUniqueId++}`;
+    protected previousNativeValue: any;
+    protected neverEmptyInputTypes = [
+        'date',
+        'datetime',
+        'datetime-local',
+        'month',
+        'time',
+        'week'
+    ].filter((t) => getSupportedInputTypes().has(t));
+
+    /**
+     * Implemented as part of McFormFieldControl.
+     * @docs-private
+     */
     @Input()
     get disabled(): boolean {
         if (this.ngControl && this.ngControl.disabled !== null) {
@@ -307,6 +325,8 @@ export class McInput extends _McInputMixinBase implements McFormFieldControl<any
         }
     }
 
+    private _disabled = false;
+
     /**
      * Implemented as part of McFormFieldControl.
      * @docs-private
@@ -317,14 +337,10 @@ export class McInput extends _McInputMixinBase implements McFormFieldControl<any
     }
 
     set id(value: string) {
-        this._id = value || this._uid;
+        this._id = value || this.uid;
     }
 
-    /**
-     * Implemented as part of McFormFieldControl.
-     * @docs-private
-     */
-    @Input() placeholder: string;
+    private _id: string;
 
     /**
      * Implemented as part of McFormFieldControl.
@@ -339,6 +355,8 @@ export class McInput extends _McInputMixinBase implements McFormFieldControl<any
         this._required = coerceBooleanProperty(value);
     }
 
+    private _required = false;
+
     // tslint:disable no-reserved-keywords
     /** Input type of the element. */
     @Input()
@@ -348,7 +366,7 @@ export class McInput extends _McInputMixinBase implements McFormFieldControl<any
 
     set type(value: string) {
         this._type = value || 'text';
-        this._validateType();
+        this.validateType();
 
         // When using Angular inputs, developers are no longer able to set the properties on the native
         // input element. To ensure that bindings for `type` work, we need to sync the setter
@@ -358,6 +376,8 @@ export class McInput extends _McInputMixinBase implements McFormFieldControl<any
         }
     }
     // tslint:enable no-reserved-keywords
+
+    private _type = 'text';
 
     /**
      * Implemented as part of McFormFieldControl.
@@ -375,23 +395,10 @@ export class McInput extends _McInputMixinBase implements McFormFieldControl<any
         }
     }
 
-    protected _uid = `mc-input-${nextUniqueId++}`;
-    protected _previousNativeValue: any;
-    protected _disabled = false;
-    protected _id: string;
-    protected _required = false;
-    protected _type = 'text';
-    protected _neverEmptyInputTypes = [
-        'date',
-        'datetime',
-        'datetime-local',
-        'month',
-        'time',
-        'week'
-    ].filter((t) => getSupportedInputTypes().has(t));
-
+    // tslint:disable-next-line: orthodox-getter-and-setter
     private _inputValueAccessor: { value: any };
 
+    // tslint:disable-next-line: naming-convention
     constructor(protected _elementRef: ElementRef,
                 @Optional() @Self() public ngControl: NgControl,
                 @Optional() parentForm: NgForm,
@@ -403,7 +410,7 @@ export class McInput extends _McInputMixinBase implements McFormFieldControl<any
         // accessor.
         this._inputValueAccessor = inputValueAccessor || this._elementRef.nativeElement;
 
-        this._previousNativeValue = this.value;
+        this.previousNativeValue = this.value;
 
         // Force setter to be called in case id was not specified.
         this.id = this.id;
@@ -428,7 +435,7 @@ export class McInput extends _McInputMixinBase implements McFormFieldControl<any
         // We need to dirty-check the native element's value, because there are some cases where
         // we won't be notified when it changes (e.g. the consumer isn't using forms or they're
         // updating the value using `emitEvent: false`).
-        this._dirtyCheckNativeValue();
+        this.dirtyCheckNativeValue();
     }
 
     /** Focuses the input. */
@@ -437,14 +444,14 @@ export class McInput extends _McInputMixinBase implements McFormFieldControl<any
     }
 
     /** Callback for the cases where the focused state of the input changes. */
-    _focusChanged(isFocused: boolean) {
+    focusChanged(isFocused: boolean) {
         if (isFocused !== this.focused) {
             this.focused = isFocused;
             this.stateChanges.next();
         }
     }
 
-    _onInput() {
+    onInput() {
         // This is a noop function and is used to let Angular know whenever the value changes.
         // Angular will run a new change detection each time the `input` event has been dispatched.
         // It's necessary that Angular recognizes the value change, because when floatingLabel
@@ -459,7 +466,7 @@ export class McInput extends _McInputMixinBase implements McFormFieldControl<any
      * @docs-private
      */
     get empty(): boolean {
-        return !this._isNeverEmpty() && !this._elementRef.nativeElement.value && !this._isBadInput();
+        return !this.isNeverEmpty() && !this._elementRef.nativeElement.value && !this.isBadInput();
     }
 
     /**
@@ -471,29 +478,29 @@ export class McInput extends _McInputMixinBase implements McFormFieldControl<any
     }
 
     /** Does some manual dirty checking on the native input `value` property. */
-    protected _dirtyCheckNativeValue() {
+    protected dirtyCheckNativeValue() {
         const newValue = this.value;
 
-        if (this._previousNativeValue !== newValue) {
-            this._previousNativeValue = newValue;
+        if (this.previousNativeValue !== newValue) {
+            this.previousNativeValue = newValue;
             this.stateChanges.next();
         }
     }
 
     /** Make sure the input is a supported type. */
-    protected _validateType() {
+    protected validateType() {
         if (MC_INPUT_INVALID_TYPES.indexOf(this._type) > -1) {
             throw getMcInputUnsupportedTypeError(this._type);
         }
     }
 
     /** Checks whether the input type is one of the types that are never empty. */
-    protected _isNeverEmpty() {
-        return this._neverEmptyInputTypes.indexOf(this._type) > -1;
+    protected isNeverEmpty() {
+        return this.neverEmptyInputTypes.indexOf(this._type) > -1;
     }
 
     /** Checks whether the input is invalid based on the native validation. */
-    protected _isBadInput() {
+    protected isBadInput() {
         // The `validity` property won't be present on platform-server.
         const validity = (this._elementRef.nativeElement as HTMLInputElement).validity;
 

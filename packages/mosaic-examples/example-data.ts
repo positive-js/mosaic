@@ -37,9 +37,9 @@ export class ExampleData {
 
     const exampleConfig = EXAMPLE_COMPONENTS[example];
 
-    // TODO(tinayuangao): Do not hard-code extensions
+    // TODO: Do not hard-code extensions
     this.exampleFiles = ['html', 'ts', 'css'].map((extension) => `${example}-example.${extension}`);
-    this.examplePath = `/assets/stackblitz/examples/${example}/`;
+    this.examplePath = `assets/stackblitz/examples/${example}/`;
     this.selectorName = this.indexFilename = `${example}-example`;
 
     if (exampleConfig.additionalFiles) {
@@ -48,8 +48,8 @@ export class ExampleData {
 
     const exampleName = example.replace(/(?:^\w|\b\w)/g, (letter) => letter.toUpperCase());
 
-    this.description = exampleConfig.title || exampleName.replace(/[\-]+/g, ' ') + ' Example';
+    this.description = exampleConfig.title || `${exampleName.replace(/[\-]+/g, ' ')} Example`;
     this.componentName = exampleConfig.selectorName ||
-                          exampleName.replace(/[\-]+/g, '') + 'Example';
+                          `${exampleName.replace(/[\-]+/g, '')}Example`;
   }
 }

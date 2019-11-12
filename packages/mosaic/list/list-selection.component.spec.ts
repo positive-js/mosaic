@@ -1,6 +1,7 @@
 // tslint:disable:no-magic-numbers
 // tslint:disable:mocha-no-side-effect-code
 // tslint:disable:max-func-body-length
+// tslint:disable:no-empty
 
 import { Component, DebugElement, ChangeDetectionStrategy } from '@angular/core';
 import { async, ComponentFixture, fakeAsync, TestBed, tick, flush } from '@angular/core/testing';
@@ -51,20 +52,21 @@ describe('McListSelection without forms', () => {
             selectionList = fixture.debugElement.query(By.directive(McListSelection));
         }));
 
-        it('should add and remove focus class on focus/blur', () => {
+        it('should add and remove focus class on focus/blur', fakeAsync(() => {
             // Use the second list item, because the first one is always disabled.
             const listItem = listOptions[1].nativeElement;
 
             expect(listItem.classList).not.toContain('mc-focused');
 
             dispatchFakeEvent(listItem, 'focus');
+            flush();
             fixture.detectChanges();
             expect(listItem.className).toContain('mc-focused');
 
             dispatchFakeEvent(listItem, 'blur');
             fixture.detectChanges();
             expect(listItem.className).not.toContain('mc-focused');
-        });
+        }));
 
         it('should be able to set a value on a list option', () => {
             const optionValues = ['inbox', 'starred', 'sent-mail', 'drafts'];
@@ -394,7 +396,7 @@ describe('McListSelection without forms', () => {
         }));
 
         it('should set its initial selected state in the selectionModel', () => {
-            const optionEl = listItemEl.injector.get(McListOption);
+            const optionEl = listItemEl.injector.get<McListOption>(McListOption);
             const selectedOptions = selectionList.componentInstance.selectionModel;
             expect(selectedOptions.isSelected(optionEl)).toBeTruthy();
         });
@@ -407,7 +409,7 @@ describe('McListSelection without forms', () => {
                 imports: [McListModule],
                 declarations: [
                     SelectionListWithTabindexAttr,
-                    SelectionListWithTabindexBinding
+                    SelectionListWithTabindexInDisabledState
                 ]
             });
 
@@ -422,24 +424,18 @@ describe('McListSelection without forms', () => {
                 .toBe(5, 'Expected the selection-list tabindex to be set to the attribute value.');
         });
 
-        it('should support changing the tabIndex through binding', () => {
-            const fixture = TestBed.createComponent(SelectionListWithTabindexBinding);
+        it('should set tabindex to "-1" in disabled state', () => {
+            const fixture = TestBed.createComponent(SelectionListWithTabindexInDisabledState);
             const selectionList = fixture.debugElement.query(By.directive(McListSelection));
 
             expect(selectionList.componentInstance.tabIndex)
                 .toBe(0, 'Expected the tabIndex to be set to "0" by default.');
 
-            fixture.componentInstance.tabIndex = 3;
-            fixture.detectChanges();
-
-            expect(selectionList.componentInstance.tabIndex)
-                .toBe(3, 'Expected the tabIndex to updated through binding.');
-
             fixture.componentInstance.disabled = true;
             fixture.detectChanges();
 
             expect(selectionList.componentInstance.tabIndex)
-                .toBe(3, 'Expected the tabIndex to be still set to "3".');
+                .toBe(-1, 'Expected the tabIndex to be set to "-1".');
         });
     });
 
@@ -469,8 +465,9 @@ describe('McListSelection without forms', () => {
             fixture.detectChanges();
         }));
 
-        it('should be focused when focus on nativeElements', () => {
+        it('should be focused when focus on nativeElements', fakeAsync(() => {
             dispatchFakeEvent(listOption.nativeElement, 'focus');
+            flush();
             fixture.detectChanges();
 
             expect(listItemEl.nativeElement.className).toContain('mc-focused');
@@ -479,7 +476,7 @@ describe('McListSelection without forms', () => {
             fixture.detectChanges();
 
             expect(listItemEl.nativeElement.className).not.toContain('mc-focused');
-        });
+        }));
     });
 
     describe('with option disabled', () => {
@@ -899,7 +896,7 @@ class SelectionListWithSelectedOption {}
 @Component({
     template: `
         <mc-list-selection id="selection-list-4">
-            <mc-list-option checkboxPosition="after" class="test-focus" id="123">
+            <mc-list-option checkboxPosition="after" id="123">
                 Inbox
             </mc-list-option>
         </mc-list-selection>`
@@ -914,9 +911,9 @@ class SelectionListWithTabindexAttr {}
 
 @Component({
     template: `
-        <mc-list-selection [tabIndex]="tabIndex" [disabled]="disabled"></mc-list-selection>`
+        <mc-list-selection [disabled]="disabled"></mc-list-selection>`
 })
-class SelectionListWithTabindexBinding {
+class SelectionListWithTabindexInDisabledState {
     tabIndex: number;
     disabled: boolean;
 }

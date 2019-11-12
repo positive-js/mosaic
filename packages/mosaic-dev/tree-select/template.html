@@ -1,9 +1,14 @@
 <br><br><br><br><br><br><br>
-<div style="height: 20px">{{ modelValue }}</div>
+<div style="height: 20px">{{ multiSelectSelectFormControl.value | json }}</div>
 
-<button mc-button (click)="control.disable()">disable</button>&nbsp;
-<button mc-button (click)="modelValue = ['Applications']">setValue</button>&nbsp;
-<button mc-button (click)="modelValue = null">reset</button>
+<button mc-button (click)="disabledState = !disabledState">disable</button>&nbsp;
+<button mc-button (click)="modelValue = 'Application'">setValue: incorrect array</button>&nbsp;
+<button mc-button (click)="modelValue = 'Applications'">setValue: correct array</button>&nbsp;
+<button mc-button (click)="modelValue = null">modelValue = null</button>
+
+<button mc-button (click)="multiSelectSelectFormControl.setValue(null)">setValue(null)</button>
+<button mc-button (click)="multiSelectSelectFormControl.reset()">reset</button>
+<button mc-button (click)="multiSelectSelectFormControl.setValue(['Pictures'])">setValue</button>
 
 <br><br><br>
 
@@ -11,8 +16,9 @@
     <mc-form-field>
         <mc-tree-select
             [multiple]="true"
+            [disabled]="disabledState"
             placeholder="this is placeholder"
-            [(value)]="modelValue"
+            [(ngModel)]="modelValue"
             (selectionChange)="onSelectionChange($event)">
 
             <mc-tree-selection
@@ -20,20 +26,20 @@
                 [treeControl]="treeControl">
                 <mc-tree-option
                     *mcTreeNodeDef="let node"
-                    mcTreeNodePadding
-                    [value]="node.name">
-                    {{ node.name }}
+                    mcTreeNodePadding>
+                    {{ treeControl.getViewValue(node) }}
                 </mc-tree-option>
 
                 <mc-tree-option
                     *mcTreeNodeDef="let node; when: hasChild"
                     mcTreeNodePadding
-                    [disabled]="node.name === 'Downloads'"
-                    [value]="node.name">
+                    [disabled]="node.name === 'Downloads'">
                     <i mc-icon="mc-angle-down-S_16" [style.transform]="treeControl.isExpanded(node) ? '' : 'rotate(-90deg)'" mcTreeNodeToggle></i>
-                    {{ node.name }} : {{ node.type }}
+                    {{ treeControl.getViewValue(node) }}
                 </mc-tree-option>
             </mc-tree-selection>
+
+            <mc-cleaner #mcSelectCleaner></mc-cleaner>
         </mc-tree-select>
     </mc-form-field>
 </div>

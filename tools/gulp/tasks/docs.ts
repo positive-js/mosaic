@@ -1,9 +1,9 @@
-import * as path from 'path';
-
+/* tslint:disable:no-var-requires */
 import { Dgeni } from 'dgeni';
 import { task, src, dest, series } from 'gulp';
+import * as path from 'path';
 
-import { apiDocsPackage } from '../../dgeni';
+import { apiDocsPackageConfig } from '../../dgeni/bin';
 import { buildConfig } from '../../packages';
 
 
@@ -18,7 +18,7 @@ const dom  = require('gulp-dom');
 
 const { outputDir, packagesDir } = buildConfig;
 
-const DIST_DOCS = path.join(outputDir, 'docs');
+const DIST_DOCS = path.join(outputDir, 'docs-content');
 
 const EXAMPLE_PATTERN = /<!--\W*example\(([^)]+)\)\W*-->/g;
 
@@ -38,16 +38,24 @@ const MARKDOWN_TAGS_TO_CLASS_ALIAS = [
     'h5',
     'li',
     'ol',
-    'p',
     'table',
     'tbody',
+    'thead',
     'td',
-    'th',
     'tr',
     'ul',
     'pre',
-    'code'
+    'code',
+    'img'
 ];
+
+// separating th and p to prevent it's conflict with thead and pre
+const MARKDOWN_WHOLE_TAGS_TO_CLASS_ALIAS = [
+    'th',
+    'p'
+];
+const CLASS_PREFIX: string = 'docs-markdown';
+const tagNameStringAliaser = createTagNameStringAliaser(CLASS_PREFIX);
 
 // Options for the html-minifier that minifies the generated HTML files.
 const htmlMinifierOptions = {
@@ -73,43 +81,43 @@ const markdownOptions = {
 
 
 task('api-docs', () => {
-    const docs = new Dgeni([apiDocsPackage]);
 
-    return docs.generate();
+    // Run the docs generation. The process will be automatically kept alive until Dgeni
+    // completed. In case the returned promise has been rejected, we need to manually exit the
+    // process with the proper exit code because Dgeni doesn't use native promises which would
+    // automatically cause the error to propagate.
+    const docs = new Dgeni([apiDocsPackageConfig]);
+
+    return docs.generate().catch((e: any) => {
+        // tslint:disable-next-line:no-console
+        console.error(e);
+        process.exit(1);
+    });
 });
 
 task('markdown-docs-mosaic', () => {
 
     markdown.marked.Renderer.prototype.heading = (text: string, level: number): string => {
+        // tslint:disable-next-line:no-magic-numbers
         if (level === 3 || level === 4) {
             const escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
 
             return `
-        <h${level} id="${escapedText}" class="docs-header-link">
-          <span header-link="${escapedText}"></span>
+        <div class="docs-header-link docs-header-link_${level}">
+          <span header-link="${escapedText}" id="${escapedText}"></span>
           ${text}
-        </h${level}>
+        </div>
       `;
         } else {
-            return `<h${level}>${text}</h${level}>`;
+            return `<div class="docs-header-link docs-header-link_${level}">${text}</div>`;
         }
     };
 
     return src(['packages/mosaic/**/!(README).md', 'guides/*.md'])
-        .pipe(rename({prefix: 'mosaic-'}))
         .pipe(markdown(markdownOptions))
         .pipe(transform(transformMarkdownFiles))
-        .pipe(dom(createTagNameAliaser('docs-markdown')))
-        .pipe(dest('dist/docs/markdown'));
-});
-
-task('markdown-docs-cdk', () => {
-    return src(['packages/cdk/**/!(README).md'])
-        .pipe(rename({prefix: 'cdk-'}))
-        .pipe(markdown(markdownOptions))
-        .pipe(transform(transformMarkdownFiles))
-        .pipe(dom(createTagNameAliaser('docs-markdown')))
-        .pipe(dest('dist/docs/markdown'));
+        .pipe(flatten())
+        .pipe(dest('dist/docs-content/overviews/mosaic'));
 });
 
 /**
@@ -123,43 +131,41 @@ task('build-highlighted-examples', () => {
         filePath.basename = `${filePath.basename}-${extension}`;
     };
 
-    return src('packages/mosaic-examples/**/*.+(html|css|ts)')
+    return src([
+            'packages/mosaic-examples/**/*.+(html|css|ts)',
+            '!packages/mosaic-examples/*.ts'
+        ])
         .pipe(flatten())
         .pipe(rename(renameFile))
         .pipe(highlight())
-        .pipe(dest('dist/docs/examples'));
+        .pipe(dest('dist/docs-content/examples-highlighted'));
 });
 
-/**
- * Minifies all HTML files that have been generated. The HTML files for the
- * highlighted examples can be skipped, because it won't have any effect.
- */
-task('minify-html-files', () => {
-    return src('dist/docs/+(api|markdown)/**/*.html')
-        .pipe(htmlmin(htmlMinifierOptions))
-        .pipe(dest('dist/docs'));
-});
 
 /** Copies example sources to be used as stackblitz assets for the docs site. */
 task('copy-stackblitz-examples', () => {
-    return src(path.join(packagesDir, 'mosaic-examples', '**/*'))
-        .pipe(dest(path.join(DIST_DOCS, 'stackblitz', 'examples')));
+    return src(
+        [path.join(packagesDir, 'mosaic-examples', '**/*.+(html|css|ts)'),
+            '!packages/mosaic-examples/*.ts'
+        ])
+        .pipe(flatten())
+        .pipe(dest(path.join(DIST_DOCS, 'examples-source')));
 });
 
-task('docs', series(series(
+task('docs', series(
         'markdown-docs-mosaic',
-        'markdown-docs-cdk',
         'build-highlighted-examples',
         'build-examples-module',
         'api-docs',
         'copy-stackblitz-examples'
-    ),
-    'minify-html-files')
+    )
 );
 
 /** Updates the markdown file's content to work inside of the docs app. */
 function transformMarkdownFiles(buffer: Buffer, file: any): string {
     let content = buffer.toString('utf-8');
+    content = tagNameStringAliaser(content);
+    content = setTargetBlank(content);
 
     // Replace <!-- example(..) --> comments with HTML elements.
     content = content.replace(EXAMPLE_PATTERN, (_match: string, name: string) =>
@@ -193,19 +199,54 @@ function fixMarkdownDocLinks(link: string, filePath: string): string {
     return `guide/${baseName}`;
 }
 
-/**
- * Returns a function to be called with an HTML document as its context that aliases HTML tags by
- * adding a class consisting of a prefix + the tag name.
- * @param classPrefix The prefix to use for the alias class.
- */
-function createTagNameAliaser(classPrefix: string) {
-    return function() {
+
+function createTagNameStringAliaser(classPrefix: string) {
+    return (content: string) => {
+        let str = setImageCaption(content);
+
         MARKDOWN_TAGS_TO_CLASS_ALIAS.forEach((tag) => {
-            for (const el of this.querySelectorAll(tag)) {
-                el.classList.add(`${classPrefix}-${tag}`);
-            }
+            const regex = new RegExp(`<${tag}`, 'g');
+            str = str.replace(regex, (_match: string) =>
+                `<${tag} class="${classPrefix}__${tag}"`
+            );
         });
 
-        return this;
+        MARKDOWN_WHOLE_TAGS_TO_CLASS_ALIAS.forEach((tag) => {
+            const regex = new RegExp(`<${tag}\s*>`, 'g');
+            str = str.replace(regex, (_match: string) =>
+                `<${tag} class="${classPrefix}__${tag}">`
+            );
+        });
+
+        return str;
     };
+}
+
+function setImageCaption(content: string): string  {
+    let html = content;
+    let pos = 0;
+
+    while (html.includes('<img', pos)) {
+        const imgIndex = html.indexOf('<img', pos);
+        const captionIndex = html.indexOf('>', imgIndex) + 1;
+        html = [html.slice(0, captionIndex),
+                '<span class="docs-markdown__caption">',
+                html.slice(captionIndex)].join('');
+        const captionEndIndex = html.indexOf('</', captionIndex);
+        html = [html.slice(0, captionEndIndex), '</span>', html.slice(captionEndIndex)].join('');
+
+        pos = imgIndex + 1;
+    }
+
+    return html;
+}
+
+function setTargetBlank(content: string): string {
+    let html = content;
+    const regex = new RegExp(`href=".[^"]*"`, 'g'); // .[^"]* - any symbol exept "
+    html = html.replace(regex, (match: string) =>
+        `${match} target="_blank"`
+    );
+
+    return html;
 }

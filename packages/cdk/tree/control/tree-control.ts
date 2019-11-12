@@ -1,5 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 
 /**
@@ -16,6 +16,8 @@ export interface TreeControl<T> {
     expansionModel: SelectionModel<T>;
 
     filterModel: SelectionModel<T>;
+
+    filterValue: BehaviorSubject<string>;
 
     /** Get depth of a given data node, return the level number. This is for flat tree node. */
     getLevel(dataNode: T): number;

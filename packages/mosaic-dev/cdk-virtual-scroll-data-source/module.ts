@@ -1,3 +1,4 @@
+// tslint:disable:no-console
 import { DataSource, CollectionViewer } from '@angular/cdk/collections';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ChangeDetectionStrategy, Component, NgModule, ViewEncapsulation } from '@angular/core';
@@ -35,6 +36,8 @@ export class MyDataSource extends DataSource<string | undefined> {
     }
 
     private fetchPage(page: number) {
+        const minTimeout = 200;
+        const timeInterval = 1000;
         if (this.fetchedPages.has(page)) {
             return;
         }
@@ -46,7 +49,9 @@ export class MyDataSource extends DataSource<string | undefined> {
                 ...Array.from({length: this.pageSize})
                     .map((_, i) => `Item #${page * this.pageSize + i}`));
             this.dataStream.next(this.cachedData);
-        }, Math.random() * 1000 + 200);
+        },
+            // tslint:disable insecure-random
+            Math.random() * timeInterval + minTimeout);
     }
 }
 

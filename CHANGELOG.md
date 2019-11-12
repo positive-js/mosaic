@@ -1,3 +1,119 @@
+## 8.1.1 "Time Consuming Relocation" (2019-11-11)
+
+### Mosaic
+
+
+ * bug fix  **tags:** logic for one more does not work in examples (#UIM-147) ([#334](https://github.com/positive-js/mosaic/issues/334)) ([0714db4de42550b8a97e34baa6e36680dbc5c130](https://github.com/positive-js/mosaic/commit/0714db4de42550b8a97e34baa6e36680dbc5c130)), closes [#UIM-147](https://github.com/positive-js/mosaic/issues/UIM-147)
+ * bug fix  **textarea:** textarea does not support rows attribute ([#335](https://github.com/positive-js/mosaic/issues/335)) ([c3057afc28555757dd5cde7aa9f68111ea793add](https://github.com/positive-js/mosaic/commit/c3057afc28555757dd5cde7aa9f68111ea793add))
+
+### Docs
+
+
+ * feature  **docs:** setting version from INavbarProperty to custom property ([#337](https://github.com/positive-js/mosaic/issues/337)) ([5de6f7fed90221d9e734f31bc39823fd7f34b4d8](https://github.com/positive-js/mosaic/commit/5de6f7fed90221d9e734f31bc39823fd7f34b4d8))
+ * bug fix  **docs:** fixing codes examples  white-space ([#333](https://github.com/positive-js/mosaic/issues/333)) ([86819cb7f82f9f2e270b09eee27988847eacd713](https://github.com/positive-js/mosaic/commit/86819cb7f82f9f2e270b09eee27988847eacd713))
+ * bug fix  **docs:** fixing routing for not githab platforms ([#336](https://github.com/positive-js/mosaic/issues/336)) ([72c93ad965f2884a6c31ad1dc276d0243c60af27](https://github.com/positive-js/mosaic/commit/72c93ad965f2884a6c31ad1dc276d0243c60af27))
+
+# 8.1.0 "Quieter Becket" (2019-11-05)
+
+### Mosaic
+
+
+ * bug fix  deleted duplicates after rebase ([86d84a8dfae4d852670e237fb0cb60be0621ab29](https://github.com/positive-js/mosaic/commit/86d84a8dfae4d852670e237fb0cb60be0621ab29))
+ * bug fix  **checkbox:** wrong selector for checkmark (#UIM-190) ([#326](https://github.com/positive-js/mosaic/issues/326)) ([29b9bc35e57f3c582209e40998c2f327c8aac197](https://github.com/positive-js/mosaic/commit/29b9bc35e57f3c582209e40998c2f327c8aac197)), closes [#UIM-190](https://github.com/positive-js/mosaic/issues/UIM-190)
+ * bug fix  **modal:** change mask click handler to mousedown handler ([#169](https://github.com/positive-js/mosaic/issues/169)) ([#321](https://github.com/positive-js/mosaic/issues/321)) ([cfa8ad3dfdcda2ee8623ed1c12059772e7b6fbbc](https://github.com/positive-js/mosaic/commit/cfa8ad3dfdcda2ee8623ed1c12059772e7b6fbbc))
+ * bug fix  **modal:** setup modal close button focus styles (#UIM-200) ([#325](https://github.com/positive-js/mosaic/issues/325)) ([ca96275d24cf34426f8b518caef680dbdc1d53c8](https://github.com/positive-js/mosaic/commit/ca96275d24cf34426f8b518caef680dbdc1d53c8)), closes [#UIM-200](https://github.com/positive-js/mosaic/issues/UIM-200)
+ * bug fix  **tree:** not assignable type for dataSource and treeControl (#UIM-204) ([#328](https://github.com/positive-js/mosaic/issues/328)) ([c8acab7c77520d01a347483405d737101fee9fbb](https://github.com/positive-js/mosaic/commit/c8acab7c77520d01a347483405d737101fee9fbb)), closes [#UIM-204](https://github.com/positive-js/mosaic/issues/UIM-204)
+ * feature  add documentation app ([#140](https://github.com/positive-js/mosaic/issues/140)) ([e83f088ef08babba60ea192ea428d97838107eb4](https://github.com/positive-js/mosaic/commit/e83f088ef08babba60ea192ea428d97838107eb4)), closes [#UIM-4](https://github.com/positive-js/mosaic/issues/UIM-4) [#UIM-4](https://github.com/positive-js/mosaic/issues/UIM-4) [#UIM-4](https://github.com/positive-js/mosaic/issues/UIM-4) [#4](https://github.com/positive-js/mosaic/issues/4) [#181](https://github.com/positive-js/mosaic/issues/181) [#185](https://github.com/positive-js/mosaic/issues/185) [#188](https://github.com/positive-js/mosaic/issues/188) [#189](https://github.com/positive-js/mosaic/issues/189) [#191](https://github.com/positive-js/mosaic/issues/191) [#193](https://github.com/positive-js/mosaic/issues/193) [#192](https://github.com/positive-js/mosaic/issues/192) [#199](https://github.com/positive-js/mosaic/issues/199) [#200](https://github.com/positive-js/mosaic/issues/200) [#210](https://github.com/positive-js/mosaic/issues/210) [#214](https://github.com/positive-js/mosaic/issues/214) [#215](https://github.com/positive-js/mosaic/issues/215) [#212](https://github.com/positive-js/mosaic/issues/212) [#216](https://github.com/positive-js/mosaic/issues/216) [#220](https://github.com/positive-js/mosaic/issues/220) [#223](https://github.com/positive-js/mosaic/issues/223) [#224](https://github.com/positive-js/mosaic/issues/224) [#226](https://github.com/positive-js/mosaic/issues/226) [#227](https://github.com/positive-js/mosaic/issues/227) [#230](https://github.com/positive-js/mosaic/issues/230) [#231](https://github.com/positive-js/mosaic/issues/231) [#233](https://github.com/positive-js/mosaic/issues/233) [#234](https://github.com/positive-js/mosaic/issues/234) [#235](https://github.com/positive-js/mosaic/issues/235) [#237](https://github.com/positive-js/mosaic/issues/237) [#238](https://github.com/positive-js/mosaic/issues/238) [#236](https://github.com/positive-js/mosaic/issues/236) [#239](https://github.com/positive-js/mosaic/issues/239) [#241](https://github.com/positive-js/mosaic/issues/241) [#242](https://github.com/positive-js/mosaic/issues/242) [#243](https://github.com/positive-js/mosaic/issues/243) [#244](https://github.com/positive-js/mosaic/issues/244) [#247](https://github.com/positive-js/mosaic/issues/247) [#250](https://github.com/positive-js/mosaic/issues/250) [#251](https://github.com/positive-js/mosaic/issues/251) [#240](https://github.com/positive-js/mosaic/issues/240) [#252](https://github.com/positive-js/mosaic/issues/252) [#255](https://github.com/positive-js/mosaic/issues/255) [#254](https://github.com/positive-js/mosaic/issues/254) [#257](https://github.com/positive-js/mosaic/issues/257) [#258](https://github.com/positive-js/mosaic/issues/258) [#259](https://github.com/positive-js/mosaic/issues/259) [#260](https://github.com/positive-js/mosaic/issues/260) [#262](https://github.com/positive-js/mosaic/issues/262) [#264](https://github.com/positive-js/mosaic/issues/264) [#266](https://github.com/positive-js/mosaic/issues/266) [#265](https://github.com/positive-js/mosaic/issues/265) [#263](https://github.com/positive-js/mosaic/issues/263) [#273](https://github.com/positive-js/mosaic/issues/273) [#275](https://github.com/positive-js/mosaic/issues/275) [#274](https://github.com/positive-js/mosaic/issues/274) [#276](https://github.com/positive-js/mosaic/issues/276) [#277](https://github.com/positive-js/mosaic/issues/277) [#279](https://github.com/positive-js/mosaic/issues/279) [#288](https://github.com/positive-js/mosaic/issues/288) [#287](https://github.com/positive-js/mosaic/issues/287) [#300](https://github.com/positive-js/mosaic/issues/300) [#301](https://github.com/positive-js/mosaic/issues/301) [#307](https://github.com/positive-js/mosaic/issues/307) [#312](https://github.com/positive-js/mosaic/issues/312) [#313](https://github.com/positive-js/mosaic/issues/313) [#322](https://github.com/positive-js/mosaic/issues/322) [#323](https://github.com/positive-js/mosaic/issues/323) [#324](https://github.com/positive-js/mosaic/issues/324)
+ * feature  **list, tree:** changed logic for focusing (#UIM-177) ([#318](https://github.com/positive-js/mosaic/issues/318)) ([1a6616b2f40c8b4c65de80e892ccf527dd1c62a3](https://github.com/positive-js/mosaic/commit/1a6616b2f40c8b4c65de80e892ccf527dd1c62a3)), closes [#UIM-177](https://github.com/positive-js/mosaic/issues/UIM-177)
+ * feature  **select:** added cleaner in select and tags-list (#UIM-196) ([#327](https://github.com/positive-js/mosaic/issues/327)) ([fc64a63757902bf6836b83e9118b8c0f3b5514da](https://github.com/positive-js/mosaic/commit/fc64a63757902bf6836b83e9118b8c0f3b5514da)), closes [#UIM-196](https://github.com/positive-js/mosaic/issues/UIM-196)
+ * feature  **tree:** added description for getValue and getViewValue, also added compareValues and compareViewValues (#UIM-174) ([#308](https://github.com/positive-js/mosaic/issues/308)) ([42d27b474f846b8dfeab92a3e4edcf185d16120c](https://github.com/positive-js/mosaic/commit/42d27b474f846b8dfeab92a3e4edcf185d16120c)), closes [#UIM-174](https://github.com/positive-js/mosaic/issues/UIM-174)
+ * feature  **tree:** added selection via ctrl and shift (#UIM-197) ([d5ba2757d51b0b88648e3a580ed0500b5538beb9](https://github.com/positive-js/mosaic/commit/d5ba2757d51b0b88648e3a580ed0500b5538beb9)), closes [#UIM-197](https://github.com/positive-js/mosaic/issues/UIM-197) [#197](https://github.com/positive-js/mosaic/issues/197) [#197](https://github.com/positive-js/mosaic/issues/197)
+
+## 8.0.4 "Calm Hooray" (2019-10-23)
+
+### Mosaic
+
+
+ * bug fix  **button:** fix auto align classes when contains html children ([#302](https://github.com/positive-js/mosaic/issues/302)) ([d917edaaa3859e816159bd13af052ad688bbd3d5](https://github.com/positive-js/mosaic/commit/d917edaaa3859e816159bd13af052ad688bbd3d5))
+ * bug fix  **form-field:** change prefix icon color according the theme settings ([#309](https://github.com/positive-js/mosaic/issues/309)) ([fc85868a47a833419317ff52636e21491dec32ee](https://github.com/positive-js/mosaic/commit/fc85868a47a833419317ff52636e21491dec32ee))
+ * bug fix  **modal:** set mcMaskClosable to false by default (#UIM-172) ([8a59154b0b348071196d780e502534a29ded8b72](https://github.com/positive-js/mosaic/commit/8a59154b0b348071196d780e502534a29ded8b72)), closes [#UIM-172](https://github.com/positive-js/mosaic/issues/UIM-172)
+ * bug fix  **select:** added color for placeholder (#UIM-194) ([#314](https://github.com/positive-js/mosaic/issues/314)) ([ec4a91d7d5de2f355f9b896e9b2dd1d0f3236772](https://github.com/positive-js/mosaic/commit/ec4a91d7d5de2f355f9b896e9b2dd1d0f3236772)), closes [#UIM-194](https://github.com/positive-js/mosaic/issues/UIM-194)
+
+## 8.0.3 "Retracted Enology" (2019-10-18)
+
+### Mosaic
+
+
+ * bug fix  **tree:** fixed few bugs (example, initial highlight, focus on close, autoselect=true) ([#305](https://github.com/positive-js/mosaic/issues/305)) ([31fc6627d056a69b5c9988f1d7f492153246912d](https://github.com/positive-js/mosaic/commit/31fc6627d056a69b5c9988f1d7f492153246912d))
+
+## 8.0.2 "Yellowy Verification" (2019-10-09)
+
+### Mosaic
+
+
+ * bug fix  **tags:** updating default _addOnBlur value ([#292](https://github.com/positive-js/mosaic/issues/292)) ([baa710d4e2a69ae0890d94623d9f4fc1b76ddce8](https://github.com/positive-js/mosaic/commit/baa710d4e2a69ae0890d94623d9f4fc1b76ddce8))
+
+## 8.0.1 "Relentless Quotient" (2019-09-30)
+
+### Mosaic
+
+
+ * bug fix  vulnerable dependendencies audit ([#271](https://github.com/positive-js/mosaic/issues/271)) ([e730214](https://github.com/positive-js/mosaic/commit/e730214))
+ * bug fix  **button:** moving button's typography in specific button's classes ([#272](https://github.com/positive-js/mosaic/issues/272)) ([94fe11f](https://github.com/positive-js/mosaic/commit/94fe11f))
+
+# 8.0.0 "Temporal Shielding" (2019-09-27)
+
+### Mosaic
+
+
+ * bug fix  **build:** infinite import loops ([6dba625](https://github.com/positive-js/mosaic/commit/6dba625))
+ * bug fix  **button:** button don't get font size from typography (#UIM-171) ([#261](https://github.com/positive-js/mosaic/issues/261)) ([c1d2f9c](https://github.com/positive-js/mosaic/commit/c1d2f9c)), closes [#UIM-171](https://github.com/positive-js/mosaic/issues/UIM-171)
+ * bug fix  **button:** moving transparent modificator to theme scss file ([#256](https://github.com/positive-js/mosaic/issues/256)) ([31032e2](https://github.com/positive-js/mosaic/commit/31032e2))
+ * bug fix  **dropdown:** hide scrollbar in safary ([#267](https://github.com/positive-js/mosaic/issues/267)) ([fa7f5b7](https://github.com/positive-js/mosaic/commit/fa7f5b7))
+ * bug fix  **link:** Incorrect selector for icon in link (#UIM-158) ([#246](https://github.com/positive-js/mosaic/issues/246)) ([7572f89](https://github.com/positive-js/mosaic/commit/7572f89)), closes [#UIM-158](https://github.com/positive-js/mosaic/issues/UIM-158)
+ * bug fix  **select, tree-select:** need prevent selecting tags (#UIM-91) ([#249](https://github.com/positive-js/mosaic/issues/249)) ([1532e07](https://github.com/positive-js/mosaic/commit/1532e07)), closes [#UIM-91](https://github.com/positive-js/mosaic/issues/UIM-91)
+ * bug fix  **tags:** need transfer input on next line (#UIM-154) ([#253](https://github.com/positive-js/mosaic/issues/253)) ([7b88e6b](https://github.com/positive-js/mosaic/commit/7b88e6b)), closes [#UIM-154](https://github.com/positive-js/mosaic/issues/UIM-154)
+ * bug fix  **tooltip:** Edge styles fix, arrow styles update ([#225](https://github.com/positive-js/mosaic/issues/225)) ([77cad57](https://github.com/positive-js/mosaic/commit/77cad57))
+ * bug fix  **tree:** Default value in autoSelect have to be 'true' (#UIM-153) ([#245](https://github.com/positive-js/mosaic/issues/245)) ([55ea44e](https://github.com/positive-js/mosaic/commit/55ea44e)), closes [#UIM-153](https://github.com/positive-js/mosaic/issues/UIM-153)
+ * feature  **button:** add transparent button ([#218](https://github.com/positive-js/mosaic/issues/218)) ([eb2f9ba](https://github.com/positive-js/mosaic/commit/eb2f9ba))
+
+#### BREAKING CHANGES
+* **select, tree-select**
+
+`FlatTreeControl` - two parameters getValue and getViewValue are added to the constructor.
+`McTreeOption` - removed the ability to set value, now getValue is used for this purpose.
+`McTreeSelection` - tabindex must be set via an attribute (it used to be via binding)
+`McTreeSelect` - removed the ability to set `[value]` for this you need to use `[(ngModel)]` or `[formControl]`
+
+code examples:
+
+* https://github.com/positive-js/mosaic-storybook/tree/master/stories/tree-select
+* https://github.com/positive-js/mosaic-storybook/tree/master/stories/tree
+
+
+# 8.0.0-beta.10 "Maltese Firebush" (2019-09-05)
+
+
+### Bug Fixes
+
+* **dropdown:** mc-link and mc-dropdown-item do not work together  (#UIM-139) ([#221](https://github.com/positive-js/mosaic/issues/221)) ([1572fc0](https://github.com/positive-js/mosaic/commit/1572fc0)), closes [#UIM-139](https://github.com/positive-js/mosaic/issues/UIM-139)
+* **form-field:** border radius applied to mc-form-field ([#209](https://github.com/positive-js/mosaic/issues/209)) ([9344d57](https://github.com/positive-js/mosaic/commit/9344d57))
+* **form-field:** ie fixes: apply vertical alignment on select, tree-select ([#211](https://github.com/positive-js/mosaic/issues/211)) ([4d80a83](https://github.com/positive-js/mosaic/commit/4d80a83))
+* **icon:** mc-icon does not work without parameter (#UIM-140) ([#208](https://github.com/positive-js/mosaic/issues/208)) ([a2c53d0](https://github.com/positive-js/mosaic/commit/a2c53d0)), closes [#UIM-140](https://github.com/positive-js/mosaic/issues/UIM-140)
+* **navbar:** focus partially hided by active element (#UIM-126) ([#206](https://github.com/positive-js/mosaic/issues/206)) ([c1fe5a5](https://github.com/positive-js/mosaic/commit/c1fe5a5)), closes [#UIM-126](https://github.com/positive-js/mosaic/issues/UIM-126)
+* **sidebar:** sidebar does not save width before closing (#UIM-141) ([#207](https://github.com/positive-js/mosaic/issues/207)) ([3a4857e](https://github.com/positive-js/mosaic/commit/3a4857e)), closes [#UIM-141](https://github.com/positive-js/mosaic/issues/UIM-141)
+* **splitter:** sets wrong size for areas (#UIM-110) ([#217](https://github.com/positive-js/mosaic/issues/217)) ([2e87d62](https://github.com/positive-js/mosaic/commit/2e87d62)), closes [#UIM-110](https://github.com/positive-js/mosaic/issues/UIM-110)
+* **tag-list:** if tags empty it sets focus (#UIM-144) ([#222](https://github.com/positive-js/mosaic/issues/222)) ([14c3340](https://github.com/positive-js/mosaic/commit/14c3340)), closes [#UIM-144](https://github.com/positive-js/mosaic/issues/UIM-144)
+* **timepicker:** Manual keyboard input broken ([#143](https://github.com/positive-js/mosaic/issues/143)) ([#213](https://github.com/positive-js/mosaic/issues/213)) ([e4b9c00](https://github.com/positive-js/mosaic/commit/e4b9c00))
+* **tree:** tree very slow expand a lot of nodes in IE (#UIM-142) ([#229](https://github.com/positive-js/mosaic/issues/229)) ([9c11997](https://github.com/positive-js/mosaic/commit/9c11997)), closes [#UIM-142](https://github.com/positive-js/mosaic/issues/UIM-142)
+
+
+### Features
+
+* **styles:** added .mc-group and .mc-group-item for grouping buttons, form-fields and selects (#UIM-125) ([#219](https://github.com/positive-js/mosaic/issues/219)) ([1edaf2a](https://github.com/positive-js/mosaic/commit/1edaf2a)), closes [#UIM-125](https://github.com/positive-js/mosaic/issues/UIM-125)
+
+
+
 # 8.0.0-beta.9 "Vestibular Kerygma" (2019-08-20)
 
 

@@ -18,29 +18,31 @@ export class McLine {}
  */
 export class McLineSetter {
     constructor(private _lines: QueryList<McLine>, private _element: ElementRef) {
-        this._setLineClass(this._lines.length);
+        this.setLineClass(this._lines.length);
 
         this._lines.changes.subscribe(() => {
-            this._setLineClass(this._lines.length);
+            this.setLineClass(this._lines.length);
         });
     }
 
-    private _setLineClass(count: number): void {
-        this._resetClasses();
-        if (count === 2 || count === 3) {
-            this._setClass(`mc-${count}-line`, true);
-        } else if (count > 3) {
-            this._setClass(`mc-multi-line`, true);
+    private setLineClass(count: number): void {
+        const minLineClassNumber = 2;
+        const maxLineClassNumber = 3;
+        this.resetClasses();
+        if (count === minLineClassNumber || count === maxLineClassNumber) {
+            this.setClass(`mc-${count}-line`, true);
+        } else if (count > maxLineClassNumber) {
+            this.setClass(`mc-multi-line`, true);
         }
     }
 
-    private _resetClasses(): void {
-        this._setClass('mc-2-line', false);
-        this._setClass('mc-3-line', false);
-        this._setClass('mc-multi-line', false);
+    private resetClasses(): void {
+        this.setClass('mc-2-line', false);
+        this.setClass('mc-3-line', false);
+        this.setClass('mc-multi-line', false);
     }
 
-    private _setClass(className: string, isAdd: boolean): void {
+    private setClass(className: string, isAdd: boolean): void {
         if (isAdd) {
             this._element.nativeElement.classList.add(className);
         } else {

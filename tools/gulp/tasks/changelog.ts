@@ -60,7 +60,7 @@ const writerOpts = {
                     // User URLs.
                     commit.subject = commit.subject.replace(
                         /\B@([a-z0-9](?:-?[a-z0-9]){0,38})/g,
-                        '[@$1](' + context.host + '/$1)'
+                        `[@$1](${context.host}/$1)`
                     );
                 }
             }

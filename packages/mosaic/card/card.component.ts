@@ -6,7 +6,6 @@ import {
     OnDestroy, EventEmitter,
     ViewEncapsulation, HostBinding
 } from '@angular/core';
-
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { SPACE } from '@ptsecurity/cdk/keycodes';
 
@@ -73,6 +72,7 @@ export class McCard implements OnDestroy {
     }
 
     onKeyDown($event: KeyboardEvent) {
+        // tslint:disable-next-line:deprecation
         switch ($event.keyCode) {
             case SPACE:
                 if (!this.readonly) {

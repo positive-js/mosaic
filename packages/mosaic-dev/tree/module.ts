@@ -65,11 +65,11 @@ export const DATA_OBJECT = {
         Woods: 'jpg',
         PhotoBoothLibrary: {
             Contents: 'dir',
-            Pictures: 'dir'
+            Pictures_2: 'dir'
         }
     },
     Documents: {
-        Pictures: 'Pictures',
+        Pictures_3: 'Pictures',
         angular: {
             src: {
                 core: 'ts',
@@ -111,14 +111,19 @@ export class DemoComponent {
 
     filterValue: string = '';
 
-    modelValue: any[] = ['rootNode_1', 'Documents', 'Calendar', 'Chrome'];
+    modelValue: any = ['Chrome'];
+    // modelValue: any[] = ['rootNode_1', 'Documents', 'Calendar', 'Chrome'];
+
+    disableState: boolean = false;
 
     constructor() {
         this.treeFlattener = new McTreeFlattener(
             this.transformer, this.getLevel, this.isExpandable, this.getChildren
         );
 
-        this.treeControl = new FlatTreeControl<FileFlatNode>(this.getLevel, this.isExpandable);
+        this.treeControl = new FlatTreeControl<FileFlatNode>(
+            this.getLevel, this.isExpandable, this.getValue, this.getViewValue
+        );
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
         this.dataSource.data = buildFileTree(DATA_OBJECT, 0);
@@ -128,7 +133,17 @@ export class DemoComponent {
         this.treeControl.filterNodes(value);
     }
 
-    transformer(node: FileNode, level: number, parent: any) {
+    hasChild(_: number, nodeData: FileFlatNode) { return nodeData.expandable; }
+
+    onNavigationChange() {
+        console.log('onNavigationChange');
+    }
+
+    onSelectionChange() {
+        console.log('onSelectionChange');
+    }
+
+    private transformer = (node: FileNode, level: number, parent: any) => {
         const flatNode = new FileFlatNode();
 
         flatNode.name = node.name;
@@ -140,30 +155,24 @@ export class DemoComponent {
         return flatNode;
     }
 
-    hasChild(_: number, nodeData: FileFlatNode) { return nodeData.expandable; }
-
-    hasNestedChild(_: number, nodeData: FileNode) {
-        return !(nodeData.type);
-    }
-
-    onNavigationChange($event) {
-        console.log('onNavigationChange');
-    }
-
-    onSelectionChange($event) {
-        console.log('onSelectionChange');
-    }
-
-    private getLevel(node: FileFlatNode) {
+    private getLevel = (node: FileFlatNode) => {
         return node.level;
     }
 
-    private isExpandable(node: FileFlatNode) {
+    private isExpandable = (node: FileFlatNode) => {
         return node.expandable;
     }
 
     private getChildren = (node: FileNode): FileNode[] => {
         return node.children;
+    }
+
+    private getValue = (node: FileNode): string => {
+        return node.name;
+    }
+
+    private getViewValue = (node: FileNode): string => {
+        return `${node.name} view`;
     }
 }
 

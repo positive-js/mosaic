@@ -1,3 +1,4 @@
+// tslint:disable:no-magic-numbers
 import { Component, ViewChild, DebugElement } from '@angular/core';
 import { fakeAsync, TestBed, ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';

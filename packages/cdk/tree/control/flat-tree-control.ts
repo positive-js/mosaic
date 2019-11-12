@@ -1,11 +1,29 @@
 import { BaseTreeControl } from './base-tree-control';
 
 
+export function defaultCompareValues(firstValue, secondValue): boolean {
+    return firstValue === secondValue;
+}
+
+export function defaultCompareViewValues(firstViewValue, secondViewValue): boolean {
+    return RegExp(secondViewValue, 'gi').test(firstViewValue);
+}
+
 /** Flat tree control. Able to expand/collapse a subtree recursively for flattened tree. */
 export class FlatTreeControl<T> extends BaseTreeControl<T> {
-
-    /** Construct with flat tree data node functions getLevel and isExpandable. */
-    constructor(public getLevel: (dataNode: T) => number, public isExpandable: (dataNode: T) => boolean) {
+    /** Construct with flat tree data node functions getLevel, isExpandable, getValue and getViewValue. */
+    constructor(
+        public getLevel: (dataNode: T) => number,
+        public isExpandable: (dataNode: T) => boolean,
+        /** getValue will be used to determine if the tree contains value or not. Used in method hasValue */
+        public getValue: (dataNode) => any,
+        /** getViewValue will be used for filter nodes. Returned value will be first argument in filterNodesFunction */
+        public getViewValue: (dataNode) => string,
+        /** compareValues will be used to comparing values. */
+        public compareValues: (firstValue, secondValue) => boolean = defaultCompareValues,
+        /** compareValues will be used to comparing values. */
+        public compareViewValues: (firstViewValue, secondViewValue) => boolean = defaultCompareViewValues
+    ) {
         super();
     }
 
@@ -55,15 +73,16 @@ export class FlatTreeControl<T> extends BaseTreeControl<T> {
         }
     }
 
-    compareFunction(name: string, value: string): boolean {
-        return RegExp(value, 'gi').test(name);
+    hasValue(value: string): T | undefined {
+        return this.dataNodes.find((node: any) => this.compareValues(this.getValue(node), value));
     }
 
     filterNodes(value: string): void {
         this.filterModel.clear();
 
-        // todo нет возможности управлять параметром имени 'node.name'
-        const filteredNodes = this.dataNodes.filter((node: any) => this.compareFunction(node.name, value));
+        const filteredNodes = this.dataNodes.filter(
+            (node: any) => this.compareViewValues(this.getViewValue(node), value)
+        );
 
         const filteredNodesWithTheirParents = new Set();
         filteredNodes.forEach((filteredNode) => {

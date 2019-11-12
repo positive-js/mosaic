@@ -2,7 +2,9 @@ import { Tree } from '@angular-devkit/schematics';
 
 
 function sortObjectByKeys(obj: object) {
-    return Object.keys(obj).sort().reduce((result, key) => (result[key] = obj[key]) && result, {});
+    const initialValue: object = {};
+
+    return Object.keys(obj).sort().reduce((result, key) => (result[key] = obj[key]) && result, initialValue);
 }
 
 export function getPackageVersionFromPackageJson(tree: Tree, name: string): string | null {
@@ -20,6 +22,7 @@ export function getPackageVersionFromPackageJson(tree: Tree, name: string): stri
 }
 
 export function addPackageToPackageJson(host: Tree, pkg: string, version: string): Tree {
+    const space: number = 4;
 
     if (host.exists('package.json')) {
 
@@ -35,7 +38,7 @@ export function addPackageToPackageJson(host: Tree, pkg: string, version: string
             json.dependencies = sortObjectByKeys(json.dependencies);
         }
 
-        host.overwrite('package.json', JSON.stringify(json, null, 4));
+        host.overwrite('package.json', JSON.stringify(json, null, space));
     }
 
     return host;

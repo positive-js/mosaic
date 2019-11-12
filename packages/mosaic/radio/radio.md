@@ -1,20 +1,21 @@
-`<mc-radio>` provides the same functionality as a native `<input type="radio">`.
+`<mc-radio>` обеспечивает ту же функциональность, что и нативный `<input type="radio">`.
 
 <!-- example(radio-overview) -->
 
-### Radio groups
-Radio-buttons should typically be placed inside of an `<mc-radio-group>` unless the DOM structure
-would make that impossible (e.g., radio-buttons inside of table cells). The radio-group has a
-`value` property that reflects the currently selected radio-button inside of the group.
+### Radio группы
+Radio-buttons обычно должны располагаться внутри `<mc-radio-group>`, если это позволяет структура DOM
+(например, radio-buttons внутри ячеек таблицы). Радио-группа имеет
+свойство `value`, которое отражает выбранный в данный момент переключатель внутри группы.
 
-Individual radio-buttons inside of a radio-group will inherit the `name` of the group.
+Отдельные radio-buttons внутри радиогруппы унаследуют «имя» группы.
 
 
-### Use with `@angular/forms`
-`<mc-radio-group>` is compatible with `@angular/forms` and supports both `FormsModule`
-and `ReactiveFormsModule`.
+### Использование с `@angular/forms`
+`<mc-radio-group>` совместимо с `@angular/forms` и поддерживает `FormsModule`
+и `ReactiveFormsModule`.
 
 ### Accessibility
-The `<mc-radio-button>` uses an internal `<input type="radio">` to provide an accessible experience.
-This internal radio button receives focus and is automatically labelled by the text content of the
-`<mc-radio-button>` element.
+
+Для обеспечения accessible `<mc-radio-button>` использует тип radio `<input type ="radio">`.
+Эта внутренняя radio button получает фокус и автоматически помечается текстовым содержимым
+`<mc-radio-button>`.

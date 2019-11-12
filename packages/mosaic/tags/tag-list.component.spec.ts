@@ -13,7 +13,7 @@ import {
     ViewChild,
     ViewChildren
 } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 import { FormControl, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -206,13 +206,14 @@ describe('MatTagList', () => {
                     expect(manager.activeItemIndex).toEqual(2);
                 });
 
-                it('should focus the previous item', () => {
+                it('should focus the previous item', fakeAsync(() => {
                     const array = tags.toArray();
                     const lastIndex = array.length - 1;
                     const lastItem = array[lastIndex];
 
                     // Focus the last item
                     lastItem.focus();
+                    flush();
 
                     // Destroy the last item
                     testComponent.tags.pop();
@@ -220,7 +221,7 @@ describe('MatTagList', () => {
 
                     // It focuses the next-to-last item
                     expect(manager.activeItemIndex).toEqual(lastIndex - 1);
-                });
+                }));
 
                 it('should not focus if tag list is not focused', () => {
                     const array = tags.toArray();
@@ -253,6 +254,7 @@ describe('MatTagList', () => {
                     tags = tagListInstance.tags;
 
                     tags.last.focus();
+                    flush();
                     fixture.detectChanges();
 
                     expect(tagListInstance.keyManager.activeItemIndex).toBe(tags.length - 1);
@@ -274,7 +276,7 @@ describe('MatTagList', () => {
                     manager = tagListInstance.keyManager;
                 });
 
-                it('should focus previous item when press LEFT ARROW', () => {
+                it('should focus previous item when press LEFT ARROW', fakeAsync(() => {
                     const nativeTags = tagListNativeElement.querySelectorAll('mc-tag');
                     const lastNativeChip = nativeTags[nativeTags.length - 1] as HTMLElement;
 
@@ -285,6 +287,7 @@ describe('MatTagList', () => {
 
                     // Focus the last item in the array
                     lastItem.focus();
+                    flush();
                     expect(manager.activeItemIndex).toEqual(lastIndex);
 
                     // Press the LEFT arrow
@@ -294,9 +297,9 @@ describe('MatTagList', () => {
 
                     // It focuses the next-to-last item
                     expect(manager.activeItemIndex).toEqual(lastIndex - 1);
-                });
+                }));
 
-                it('should focus next item when press RIGHT ARROW', () => {
+                it('should focus next item when press RIGHT ARROW', fakeAsync(() => {
                     const nativeTags = tagListNativeElement.querySelectorAll('mc-tag');
                     const firstNativeChip = nativeTags[0] as HTMLElement;
 
@@ -306,6 +309,7 @@ describe('MatTagList', () => {
 
                     // Focus the last item in the array
                     firstItem.focus();
+                    flush();
                     expect(manager.activeItemIndex).toEqual(0);
 
                     // Press the RIGHT arrow
@@ -315,7 +319,7 @@ describe('MatTagList', () => {
 
                     // It focuses the next-to-last item
                     expect(manager.activeItemIndex).toEqual(1);
-                });
+                }));
 
                 it('should not handle arrow key events from non-chip elements', () => {
                     const event: KeyboardEvent = createKeyboardEvent('keydown', RIGHT_ARROW, tagListNativeElement);
@@ -366,7 +370,7 @@ describe('MatTagList', () => {
                     manager = tagListInstance.keyManager;
                 });
 
-                it('should focus previous item when press RIGHT ARROW', () => {
+                it('should focus previous item when press RIGHT ARROW', fakeAsync(() => {
                     const nativeTags = tagListNativeElement.querySelectorAll('mc-tag');
                     const lastNativeChip = nativeTags[nativeTags.length - 1] as HTMLElement;
 
@@ -378,6 +382,7 @@ describe('MatTagList', () => {
 
                     // Focus the last item in the array
                     lastItem.focus();
+                    flush();
                     expect(manager.activeItemIndex).toEqual(lastIndex);
 
                     // Press the RIGHT arrow
@@ -387,9 +392,9 @@ describe('MatTagList', () => {
 
                     // It focuses the next-to-last item
                     expect(manager.activeItemIndex).toEqual(lastIndex - 1);
-                });
+                }));
 
-                it('should focus next item when press LEFT ARROW', () => {
+                it('should focus next item when press LEFT ARROW', fakeAsync(() => {
                     const nativeTags = tagListNativeElement.querySelectorAll('mc-tag');
                     const firstNativeChip = nativeTags[0] as HTMLElement;
 
@@ -400,6 +405,7 @@ describe('MatTagList', () => {
 
                     // Focus the last item in the array
                     firstItem.focus();
+                    flush();
                     expect(manager.activeItemIndex).toEqual(0);
 
                     // Press the LEFT arrow
@@ -409,7 +415,7 @@ describe('MatTagList', () => {
 
                     // It focuses the next-to-last item
                     expect(manager.activeItemIndex).toEqual(1);
-                });
+                }));
 
                 it('should allow focus to escape when tabbing away', fakeAsync(() => {
                     tagListInstance.keyManager.onKeydown(createKeyboardEvent('keydown', TAB));
@@ -441,7 +447,7 @@ describe('MatTagList', () => {
                 }));
             });
 
-            it('should account for the direction changing', () => {
+            it('should account for the direction changing', fakeAsync(() => {
                 setupStandardList();
                 manager = tagListInstance.keyManager;
 
@@ -454,6 +460,7 @@ describe('MatTagList', () => {
                 const firstItem = array[0];
 
                 firstItem.focus();
+                flush();
                 expect(manager.activeItemIndex).toBe(0);
 
                 tagListInstance.keydown(RIGHT_EVENT);
@@ -470,7 +477,7 @@ describe('MatTagList', () => {
                 fixture.detectChanges();
 
                 expect(manager.activeItemIndex).toBe(0);
-            });
+            }));
         });
     });
 
@@ -485,19 +492,21 @@ describe('MatTagList', () => {
                 manager = tagListInstance.keyManager;
             });
 
-            it('should maintain focus if the active tag is deleted', () => {
+            it('should maintain focus if the active tag is deleted', fakeAsync(() => {
                 const secondTag = fixture.nativeElement.querySelectorAll('.mc-tag')[1];
 
                 secondTag.focus();
                 fixture.detectChanges();
+                flush();
 
                 expect(tagListInstance.tags.toArray().findIndex((tag) => tag.hasFocus)).toBe(1);
 
                 dispatchKeyboardEvent(secondTag, 'keydown', DELETE);
                 fixture.detectChanges();
+                flush();
 
                 expect(tagListInstance.tags.toArray().findIndex((tag) => tag.hasFocus)).toBe(1);
-            });
+            }));
 
             describe('when the input has focus', () => {
 
@@ -820,6 +829,7 @@ describe('MatTagList', () => {
                 const formField: HTMLElement = fixture.nativeElement.querySelector('.mc-form-field');
 
                 nativeTags[0].focus();
+                flush();
                 fixture.detectChanges();
 
                 expect(formField.classList).toContain('mc-focused');
@@ -1061,6 +1071,7 @@ describe('MatTagList', () => {
             // Remove the tags via backspace to simulate the user removing them.
             chipEls.forEach((tag) => {
                 tag.focus();
+                flush();
                 dispatchKeyboardEvent(tag, 'keydown', BACKSPACE);
                 fixture.detectChanges();
                 tick();
@@ -1430,7 +1441,7 @@ class MultiSelectionTagList {
                    [mcTagInputFor]="tagList1"
                    [mcTagInputSeparatorKeyCodes]="separatorKeyCodes"
                    [mcTagInputAddOnBlur]="addOnBlur"
-                   (mcTagInputTokenEnd)="add($event)"/>/>
+                   (mcTagInputTokenEnd)="add($event)"/>
         </mc-form-field>
     `
 })

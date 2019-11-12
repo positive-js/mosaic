@@ -6,6 +6,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ContentChild,
     ContentChildren,
     DoCheck,
     ElementRef,
@@ -28,7 +29,7 @@ import {
     ErrorStateMatcher,
     mixinErrorState
 } from '@ptsecurity/mosaic/core';
-import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
+import { McCleaner, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { merge, Observable, Subject, Subscription } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 
@@ -47,7 +48,7 @@ export class McTagListBase {
 }
 
 // tslint:disable-next-line:naming-convention
-export const _McTagListMixinBase: CanUpdateErrorStateCtor & typeof McTagListBase = mixinErrorState(McTagListBase);
+export const McTagListMixinBase: CanUpdateErrorStateCtor & typeof McTagListBase = mixinErrorState(McTagListBase);
 
 
 // Increasing integer for generating unique ids for tag-list components.
@@ -62,7 +63,7 @@ export class McTagListChange {
 @Component({
     selector: 'mc-tag-list',
     exportAs: 'mcTagList',
-    template: '<ng-content></ng-content>',
+    templateUrl: 'tag-list.partial.html',
     host: {
         class: 'mc-tag-list',
         '[attr.tabindex]': 'disabled ? null : _tabIndex',
@@ -79,7 +80,7 @@ export class McTagListChange {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class McTagList extends _McTagListMixinBase implements McFormFieldControl<any>,
+export class McTagList extends McTagListMixinBase implements McFormFieldControl<any>,
     ControlValueAccessor, AfterContentInit, DoCheck, OnInit, OnDestroy, CanUpdateErrorState {
 
     readonly controlType: string = 'mc-tag-list';
@@ -107,6 +108,10 @@ export class McTagList extends _McTagListMixinBase implements McFormFieldControl
     /** The array of selected tags inside tag list. */
     get selected(): McTag[] | McTag {
         return this.multiple ? this.selectionModel.selected : this.selectionModel.selected[0];
+    }
+
+    get canShowCleaner(): boolean {
+        return this.cleaner && this.tags.length > 0;
     }
 
     /** Whether the user should be allowed to select multiple tags. */
@@ -276,6 +281,8 @@ export class McTagList extends _McTagListMixinBase implements McFormFieldControl
     /** Event emitted when the selected tag list value has been changed by the user. */
     @Output() readonly change: EventEmitter<McTagListChange> = new EventEmitter<McTagListChange>();
 
+    @ContentChild('mcTagListCleaner', { static: true }) cleaner: McCleaner;
+
     /** The tag components contained within this tag list. */
     @ContentChildren(McTag, {
         // Need to use `descendants: true`,
@@ -283,6 +290,7 @@ export class McTagList extends _McTagListMixinBase implements McFormFieldControl
         descendants: true
     }) tags: QueryList<McTag>;
 
+    // tslint:disable-next-line: naming-convention orthodox-getter-and-setter
     _tabIndex = 0;
 
     private _value: any;
@@ -385,7 +393,11 @@ export class McTagList extends _McTagListMixinBase implements McFormFieldControl
 
                 // Defer setting the value in order to avoid the "Expression
                 // has changed after it was checked" errors from Angular.
-                Promise.resolve().then(() => { this.tagChanges.emit(this.tags.toArray()); });
+                Promise.resolve().then(() => {
+                    this.tagChanges.emit(this.tags.toArray());
+
+                    this.changeDetectorRef.markForCheck();
+                });
 
                 this.stateChanges.next();
             });
@@ -750,6 +762,7 @@ export class McTagList extends _McTagListMixinBase implements McFormFieldControl
             if (this.isValidIndex(tagIndex)) {
                 this.keyManager.updateActiveItem(tagIndex);
             }
+
             this.stateChanges.next();
         });
 

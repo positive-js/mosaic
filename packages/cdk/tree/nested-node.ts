@@ -56,7 +56,11 @@ export class CdkNestedTreeNode<T> extends CdkTreeNode<T> implements AfterContent
     /** Differ used to find the changes in the data provided by the data source. */
     private dataDiffer: IterableDiffer<T>;
 
-    constructor(protected elementRef: ElementRef, protected tree: CdkTree<T>, protected differs: IterableDiffers) {
+    constructor(
+        protected elementRef: ElementRef,
+        tree: CdkTree<T>,
+        protected differs: IterableDiffers
+    ) {
         super(elementRef, tree);
     }
 

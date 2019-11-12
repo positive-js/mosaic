@@ -1,0 +1,8 @@
+.example-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.example-margin {
+    margin-bottom: 10px;
+}

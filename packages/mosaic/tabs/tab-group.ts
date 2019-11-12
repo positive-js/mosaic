@@ -76,7 +76,7 @@ export interface IMcTabsConfig {
 }
 
 /** Injection token that can be used to provide the default options the tabs module. */
-export const MC_TABS_CONFIG = new InjectionToken('MC_TABS_CONFIG');
+export const MC_TABS_CONFIG = new InjectionToken<string>('MC_TABS_CONFIG');
 
 // Boilerplate for applying mixins to McTabGroup.
 /** @docs-private */
@@ -84,7 +84,8 @@ export class McTabGroupBase {
     // tslint:disable-next-line:naming-convention
     constructor(public _elementRef: ElementRef) { }
 }
-export const mcTabGroupMixinBase:
+// tslint:disable-next-line:naming-convention
+export const McTabGroupMixinBase:
     CanColorCtor &
     typeof McTabGroupBase =
     mixinColor(mixinDisabled(McTabGroupBase));
@@ -107,7 +108,7 @@ export const mcTabGroupMixinBase:
         '[class.mc-tab-group_inverted-header]': 'headerPosition === "below"'
     }
 })
-export class McTabGroup extends mcTabGroupMixinBase implements AfterContentInit,
+export class McTabGroup extends McTabGroupMixinBase implements AfterContentInit,
     AfterContentChecked, OnDestroy, CanColor {
     lightTab: boolean;
 

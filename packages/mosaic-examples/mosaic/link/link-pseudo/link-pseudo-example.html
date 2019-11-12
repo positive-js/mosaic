@@ -1,0 +1,20 @@
+<div style="padding: 10px;">
+    <a class="mc-link mc-link_dashed"
+       [ngClass]="{'mc-active' : active}">
+        <span class="mc-link__text">Сохранить</span>
+    </a>
+</div>
+<div style="padding: 10px;">
+    <a class="mc-link mc-link_dashed" [disabled]="disabled">
+        <span class="mc-link__text">Сохранить</span>
+        <i mc-icon="mc-angle-L_16" class="mc-link__icon"></i>
+    </a>
+</div>
+<div style="padding: 10px;">
+    <a class="mc-link mc-link_dashed" [disabled]="disabled"
+       [ngClass]="{'mc-focused': focus}">
+        <i mc-icon="mc-calendar_16" class="mc-link__icon"></i>
+        <span class="mc-link__text">Сохранить</span>
+        <i mc-icon="mc-angle-L_16" class="mc-link__icon"></i>
+    </a>
+</div>
