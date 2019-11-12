@@ -29,6 +29,9 @@ Mosaic components are the building blocks of Positive Technologies applications.
 ## Demo
 * [Storybook](https://positive-js.github.io/mosaic-storybook/) 
 
+## New Documentation
+* [Mosaic](https://mosaic.ptsecurity.com/)
+
 ## 🚀 Getting started
 
 Before you start, make sure you have a recent version of [NodeJS](http://nodejs.org/) environment *>=8.0* with NPM *>=5.0*.
