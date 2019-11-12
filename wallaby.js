@@ -55,13 +55,21 @@ module.exports = function (wallaby) {
     return {
         files: [
             { pattern: 'packages/wallabyTest.ts', load: false },
-            { pattern: 'packages/**/*.+(ts|css|scss|sass|html|json|svg)', load: false },
-            { pattern: 'packages/**/*.d.ts', ignore: true },
-            { pattern: 'packages/**/*spec.ts', ignore: true }
+            { pattern: 'packages/cdk/**/*.+(ts|css|scss|sass|html|json|svg)', load: false },
+            { pattern: 'packages/mosaic/**/*.+(ts|css|scss|sass|html|json|svg)', load: false },
+            { pattern: 'packages/mosaic-moment-adapter/**/*.+(ts|css|scss|sass|html|json|svg)', load: false },
+            { pattern: 'packages/cdk/**/*.d.ts', ignore: true },
+            { pattern: 'packages/mosaic/**/*.d.ts', ignore: true },
+            { pattern: 'packages/mosaic-moment-adapter/**/*.d.ts', ignore: true },
+            { pattern: 'packages/cdk/**/*spec.ts', ignore: true },
+            { pattern: 'packages/mosaic/**/*spec.ts', ignore: true },
+            { pattern: 'packages/mosaic-moment-adapter/**/*spec.ts', ignore: true }
         ],
 
         tests: [
-            { pattern: 'packages/**/*.spec.ts', load: false },
+            { pattern: 'packages/cdk/**/*.spec.ts', load: false },
+            { pattern: 'packages/mosaic/**/*.spec.ts', load: false },
+            { pattern: 'packages/mosaic-moment-adapter/**/*.spec.ts', load: false },
             { pattern: '!packages/cdk/schematics/**/*.spec.ts', load: false }
         ],
 
