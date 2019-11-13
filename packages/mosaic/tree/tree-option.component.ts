@@ -1,3 +1,4 @@
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     ChangeDetectorRef,
     Component,
@@ -9,10 +10,11 @@ import {
     InjectionToken,
     ChangeDetectionStrategy,
     ViewEncapsulation,
-    AfterContentInit, NgZone
+    AfterContentInit,
+    NgZone
 } from '@angular/core';
 import { CdkTreeNode } from '@ptsecurity/cdk/tree';
-import { CanDisable, toBoolean } from '@ptsecurity/mosaic/core';
+import { CanDisable } from '@ptsecurity/mosaic/core';
 import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
 
@@ -78,7 +80,7 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
     }
 
     set disabled(value: any) {
-        const newValue = toBoolean(value);
+        const newValue = coerceBooleanProperty(value);
 
         if (newValue !== this._disabled) {
             this._disabled = newValue;
@@ -87,9 +89,16 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
 
     private _disabled: boolean = false;
 
-    get showCheckbox(): boolean {
-        return this.tree.showCheckbox;
+    @Input()
+    get showCheckbox() {
+        return this._showCheckbox !== undefined ? this._showCheckbox : this.tree.showCheckbox;
     }
+
+    set showCheckbox(value: any) {
+        this._showCheckbox = coerceBooleanProperty(value);
+    }
+
+    private _showCheckbox: boolean;
 
     @Output() readonly onSelectionChange = new EventEmitter<McTreeOptionChange>();
 
@@ -98,7 +107,7 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
     }
 
     set selected(value: boolean) {
-        const isSelected = toBoolean(value);
+        const isSelected = coerceBooleanProperty(value);
 
         if (isSelected !== this._selected) {
             this.setSelected(isSelected);

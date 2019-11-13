@@ -1,4 +1,5 @@
 /* tslint:disable:no-empty */
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { SelectionModel } from '@angular/cdk/collections';
 import {
     AfterContentInit,
@@ -18,7 +19,8 @@ import {
     OnDestroy,
     OnInit,
     ViewChild,
-    NgZone
+    NgZone,
+    ContentChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FocusKeyManager, IFocusableOption } from '@ptsecurity/cdk/a11y';
@@ -111,6 +113,17 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
     private _disabled = false;
 
     @Input()
+    get showCheckbox() {
+        return this._showCheckbox !== undefined ? this._showCheckbox : this.listSelection.showCheckbox;
+    }
+
+    set showCheckbox(value: any) {
+        this._showCheckbox = coerceBooleanProperty(value);
+    }
+
+    private _showCheckbox: boolean;
+
+    @Input()
     get selected(): boolean {
         return this.listSelection.selectionModel && this.listSelection.selectionModel.isSelected(this) || false;
     }
@@ -129,10 +142,6 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
 
     get tabIndex(): any {
         return this.disabled ? null : -1;
-    }
-
-    get showCheckbox(): boolean {
-        return this.listSelection.showCheckbox;
     }
 
     constructor(
