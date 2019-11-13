@@ -19,8 +19,7 @@ import {
     OnDestroy,
     OnInit,
     ViewChild,
-    NgZone,
-    ContentChild
+    NgZone
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FocusKeyManager, IFocusableOption } from '@ptsecurity/cdk/a11y';
