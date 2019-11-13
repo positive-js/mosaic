@@ -14,11 +14,14 @@
     $secondary-background-color: if($is-dark, map-get($background, background), map-get($background, button-bg));
     $border-color: if($is-dark, $primary-background-color, map-get($foreground, disabled));
 
+    .mc-popover {
+        border-color: $border-color;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
+
     .mc-popover__container {
         color: map-get($foreground, text);
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         background-color: $primary-background-color;
-        border-color: $border-color;
     }
 
     .mc-popover__header {
