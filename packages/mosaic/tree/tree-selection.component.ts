@@ -31,21 +31,15 @@ import {
     PAGE_DOWN,
     PAGE_UP,
     RIGHT_ARROW,
-    SPACE,
-    TAB
+    SPACE
 } from '@ptsecurity/cdk/keycodes';
 import { CdkTree, CdkTreeNodeOutlet, FlatTreeControl } from '@ptsecurity/cdk/tree';
-import { CanDisable, getMcSelectNonArrayValueError, HasTabIndex } from '@ptsecurity/mosaic/core';
+import { CanDisable, getMcSelectNonArrayValueError, HasTabIndex, MultipleMode } from '@ptsecurity/mosaic/core';
 import { merge, Observable, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { MC_TREE_OPTION_PARENT_COMPONENT, McTreeOption, McTreeOptionEvent } from './tree-option.component';
 
-
-export enum MultipleMode {
-    CHECKBOX = 'checkbox',
-    KEYBOARD = 'keyboard'
-}
 
 export const MC_SELECTION_TREE_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
@@ -122,7 +116,6 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
     get optionBlurChanges(): Observable<McTreeOptionEvent> {
         return merge(...this.renderedOptions.map((option) => option.onBlur));
     }
-
 
     get multiple(): boolean {
         return !!this.multipleMode;
