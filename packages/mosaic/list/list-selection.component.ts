@@ -305,8 +305,6 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
 
     @Input() horizontal: boolean = false;
 
-    @Input() hideCheckbox: boolean = false;
-
     @Input()
     get tabIndex(): any {
         return this._tabIndex;
