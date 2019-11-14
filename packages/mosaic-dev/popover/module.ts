@@ -1,3 +1,4 @@
+import { A11yModule } from '@angular/cdk/a11y';
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
@@ -44,6 +45,7 @@ export class DemoComponent {
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
+        A11yModule,
         McPopoverModule,
         McButtonModule,
         McIconModule
