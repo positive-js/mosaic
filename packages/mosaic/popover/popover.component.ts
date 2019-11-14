@@ -46,6 +46,13 @@ import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { mcPopoverAnimations } from './popover-animations';
 
 
+enum PopoverTriggers {
+    Click = 'click',
+    Focus = 'focus',
+    Hover = 'hover'
+}
+
+
 export type PopoverVisibility = 'initial' | 'visible' | 'hidden';
 
 @Component({
@@ -77,7 +84,7 @@ export class McPopoverComponent {
     set mcTrigger(value: string) {
         this._mcTrigger = value;
     }
-    private _mcTrigger: string = 'hover';
+    private _mcTrigger: string = PopoverTriggers.Hover;
 
     get mcPlacement(): string {
         return this._mcPlacement;
@@ -336,15 +343,17 @@ export class McPopover implements OnInit, OnDestroy {
     get mcTrigger(): string {
         return this._mcTrigger;
     }
+
     set mcTrigger(value: string) {
         if (value) {
             this._mcTrigger = value;
             this.updateCompValue('mcTrigger', value);
         } else {
-            this._mcTrigger = 'hover';
+            this._mcTrigger = PopoverTriggers.Click;
         }
     }
-    private _mcTrigger: string = 'hover';
+
+    private _mcTrigger: string = PopoverTriggers.Click;
 
     @Input('mcPopoverSize')
     get mcPopoverSize(): string {
@@ -388,6 +397,7 @@ export class McPopover implements OnInit, OnDestroy {
     get mcVisible(): boolean {
         return this._mcVisible;
     }
+
     set mcVisible(externalValue: boolean) {
         const value = coerceBooleanProperty(externalValue);
         this._mcVisible = value;
@@ -399,6 +409,7 @@ export class McPopover implements OnInit, OnDestroy {
             this.hide();
         }
     }
+
     private _mcVisible: boolean;
 
     get isOpen(): boolean {
@@ -454,18 +465,17 @@ export class McPopover implements OnInit, OnDestroy {
             positionStrategy: strategy,
             panelClass: 'mc-popover__panel',
             scrollStrategy: this.scrollStrategy(),
-            hasBackdrop: this.mcTrigger === 'manual',
+            hasBackdrop: this.mcTrigger === PopoverTriggers.Click,
             backdropClass: 'no-class'
         });
 
-        if (this.mcTrigger === 'manual') {
-            this.overlayRef.backdropClick().subscribe(() => {
-                if (!this.popover) {
-                    return;
-                }
+        if (this.mcTrigger === PopoverTriggers.Click) {
+            this.overlayRef.backdropClick()
+                .subscribe(() => {
+                    if (!this.popover) { return; }
 
-                this.popover.hide();
-            });
+                    this.popover.hide();
+                });
         }
 
         this.updatePosition();
@@ -560,8 +570,11 @@ export class McPopover implements OnInit, OnDestroy {
         if (this.overlayRef) {
             this.overlayRef.dispose();
         }
-        this.manualListeners.forEach((listener, event) =>
-            this.elementRef.nativeElement.removeEventListener(event, listener));
+
+        this.manualListeners.forEach((listener, event) => {
+            this.elementRef.nativeElement.removeEventListener(event, listener);
+        });
+
         this.manualListeners.clear();
 
         this.$unsubscribe.next();
@@ -569,7 +582,8 @@ export class McPopover implements OnInit, OnDestroy {
     }
 
     handleKeydown(e: KeyboardEvent) {
-        if (this.isOpen && e.keyCode === ESCAPE) { // tslint:disable-line
+        // tslint:disable-next-line: deprecation
+        if (this.isOpen && e.keyCode === ESCAPE) {
             this.hide();
         }
     }
@@ -579,20 +593,26 @@ export class McPopover implements OnInit, OnDestroy {
     }
 
     initElementRefListeners() {
-        if (this.mcTrigger === 'hover') {
-
+        if (this.mcTrigger === PopoverTriggers.Click) {
+            this.manualListeners
+                .set('click', () => this.show())
+                .forEach((listener, event) => {
+                    this.elementRef.nativeElement.addEventListener(event, listener);
+                });
+        } else if (this.mcTrigger === PopoverTriggers.Hover) {
             this.manualListeners
                 .set('mouseenter', () => this.show())
                 .set('mouseleave', () => this.hide())
-                .forEach((listener, event) => this.elementRef.nativeElement.addEventListener(event, listener));
-        }
-
-        if (this.mcTrigger === 'focus') {
-
+                .forEach((listener, event) => {
+                    this.elementRef.nativeElement.addEventListener(event, listener);
+                });
+        } else if (this.mcTrigger === PopoverTriggers.Focus) {
             this.manualListeners
                 .set('focus', () => this.show())
                 .set('blur', () => this.hide())
-                .forEach((listener, event) => this.elementRef.nativeElement.addEventListener(event, listener));
+                .forEach((listener, event) => {
+                    this.elementRef.nativeElement.addEventListener(event, listener);
+                });
         }
     }
 
@@ -620,6 +640,7 @@ export class McPopover implements OnInit, OnDestroy {
                 ];
 
                 properties.forEach((property) => this.updateCompValue(property, this[ property ]));
+
                 this.popover.mcVisibleChange.pipe(takeUntil(this.$unsubscribe), distinctUntilChanged())
                     .subscribe((data) => {
                         this.mcVisible = data;
