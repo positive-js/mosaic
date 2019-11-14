@@ -9,6 +9,7 @@ $popover-max-width: 240px;
 $border-radius-base: 4px;
 $popover-arrow-width: 6px;
 $popover-distance: $popover-arrow-width + 4px;
+$popover-arrow-distance: -($popover-arrow-width + 2px);
 $border-size: 1px;
 
 $mc-popover-small-width: 280px;
@@ -21,6 +22,11 @@ $mc-popover-large-width: 640px;
     display: block;
 
     margin: 0;
+
+    border-radius: $border-radius-base;
+    border-width: $border-size;
+    border-style: solid;
+
     padding: 0;
     box-sizing: border-box;
 
@@ -59,8 +65,6 @@ $mc-popover-large-width: 640px;
 .mc-popover__container {
     font-size: 15px;
     border-radius: $border-radius-base;
-    border-width: $border-size;
-    border-style: solid;
     overflow: hidden;
 }
 
@@ -85,7 +89,7 @@ $mc-popover-large-width: 640px;
 .mc-popover_placement-top-left,
 .mc-popover_placement-top-right{
     .mc-popover {
-        padding-bottom: $popover-distance;
+        margin-bottom: $popover-distance;
     }
 }
 
@@ -93,7 +97,7 @@ $mc-popover-large-width: 640px;
 .mc-popover_placement-right-top,
 .mc-popover_placement-right-bottom {
     .mc-popover {
-        padding-left: $popover-distance;
+        margin-left: $popover-distance;
     }
 }
 
@@ -101,7 +105,7 @@ $mc-popover-large-width: 640px;
 .mc-popover_placement-bottom-left,
 .mc-popover_placement-bottom-right {
     .mc-popover {
-        padding-top: $popover-distance;
+        margin-top: $popover-distance;
     }
 }
 
@@ -109,12 +113,13 @@ $mc-popover-large-width: 640px;
 .mc-popover_placement-left-top,
 .mc-popover_placement-left-bottom {
     .mc-popover {
-        padding-right: $popover-distance;
+        margin-left: -$popover-distance;
     }
 }
 
 .mc-popover__arrow {
     position: absolute;
+    z-index: -1;
     width: 14px;
     height: 14px;
     border: solid 1px;
@@ -122,73 +127,73 @@ $mc-popover-large-width: 640px;
 }
 
 .mc-popover_placement-top .mc-popover__arrow {
-    bottom: $popover-distance - $popover-arrow-width;
+    bottom: $popover-arrow-distance;
     left: 50%;
     margin-left: -$popover-arrow-width;
 }
 
 .mc-popover_placement-top-left .mc-popover__arrow {
-    bottom: $popover-distance - $popover-arrow-width;
+    bottom: $popover-arrow-distance;
     left: 20px;
     margin-left: 0;
 }
 
 .mc-popover_placement-top-right .mc-popover__arrow {
-    bottom: $popover-distance - $popover-arrow-width;
+    bottom: $popover-arrow-distance;
     right: 20px;
     margin-left: 0;
 }
 
 .mc-popover_placement-right .mc-popover__arrow {
-    left: $popover-distance - $popover-arrow-width;
+    left: $popover-arrow-distance;
     top: 50%;
     margin-top: -$popover-arrow-width;
 }
 
 .mc-popover_placement-right-top .mc-popover__arrow {
-    left: $popover-distance - $popover-arrow-width;
+    left: $popover-arrow-distance;
     top: 20px;
     margin-top: -$popover-arrow-width;
 }
 
 .mc-popover_placement-right-bottom .mc-popover__arrow {
-    left: $popover-distance - $popover-arrow-width;
+    left: $popover-arrow-distance;
     bottom: 14px; // same as top placement = element.style.top + element.style.margin-top = 20px -6px
     margin-top: -$popover-arrow-width;
 }
 
 .mc-popover_placement-left .mc-popover__arrow {
-    right: $popover-distance - $popover-arrow-width;
+    right: $popover-arrow-distance;
     top: 50%;
     margin-top: -$popover-arrow-width;
 }
 
 .mc-popover_placement-left-top .mc-popover__arrow {
-    right: $popover-distance - $popover-arrow-width;
+    right: $popover-arrow-distance;
     top: 20px;
     margin-top: -$popover-arrow-width;
 }
 
 .mc-popover_placement-left-bottom .mc-popover__arrow {
-    right: $popover-distance - $popover-arrow-width;
+    right: $popover-arrow-distance;
     bottom: 14px; // same as top placement = element.style.top + element.style.margin-top = 20px -6px
     margin-top: -$popover-arrow-width;
 }
 
 .mc-popover_placement-bottom .mc-popover__arrow {
-    top: $popover-distance - $popover-arrow-width;
+    top: $popover-arrow-distance;
     left: 50%;
     margin-left: -$popover-arrow-width;
 }
 
 .mc-popover_placement-bottom-left .mc-popover__arrow {
-    top: $popover-distance - $popover-arrow-width;
+    top: $popover-arrow-distance;
     left: 20px;
     margin-left: 0;
 }
 
 .mc-popover_placement-bottom-right .mc-popover__arrow {
-    top: $popover-distance - $popover-arrow-width;
+    top: $popover-arrow-distance;
     right: 20px;
     margin-left: 0;
 }
