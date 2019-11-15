@@ -1,5 +1,6 @@
 import chalk from 'chalk';
 import * as dotenv from 'dotenv';
+import * as os from 'os';
 import { join } from 'path';
 import * as request from 'request';
 
@@ -8,6 +9,8 @@ import { CHANGELOG_FILE_NAME } from './stage-release';
 
 
 const HTTP_CODE_OK = 200;
+
+const platform = os.platform();
 
 export function notify(tag, version) {
     if (!verifyNotificationPossibility()) {
@@ -19,15 +22,27 @@ export function notify(tag, version) {
     const url = result.parsed.MATTERMOST_ENDPOINT_URL;
     const channel = result.parsed.MATTERMOST_CHANNEL;
 
-    const headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
+    let headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
 
-    const body = `payload={
+    let body = `payload={
         "channel": "${channel}",
         "username": "Wall-e",
         "short": false,
         "text": " #### [![Mosaic Logo](https://i.ibb.co/fQNPgv6/logo-png-200.png =32x32)osaic](https://github.com/positive-js/mosaic/tree/${tag}) was published.
 ${prepareChangeLog(version)}"
 }`;
+
+    if (platform === 'win32') {
+        headers = { 'Content-Type': 'application/json' };
+
+        body = `{
+            \"channel\": \"${channel}\",
+            \"username\": \"Wall-e\",
+            \"short\": false,
+            \"text\": \" #### [![Mosaic Logo](https://i.ibb.co/fQNPgv6/logo-png-200.png =32x32)osaic](https://github.com/positive-js/mosaic/tree/${tag}) was published.
+    ${prepareChangeLog(version)}\"
+}`;
+    }
 
     request.post({
         url,
