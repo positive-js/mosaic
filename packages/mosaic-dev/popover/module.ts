@@ -26,6 +26,11 @@ export class DemoComponent {
     }
 
     changeStep(direction: number) {
+        const newStage = this.popoverActiveStage + direction;
+
+        // tslint:disable-next-line:no-magic-numbers
+        if (newStage < 1 || newStage > 3) { return; }
+
         this.popoverActiveStage += direction;
     }
 
