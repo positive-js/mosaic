@@ -46,7 +46,7 @@
         "@commitlint/cli": "8.1.0",
         "@commitlint/config-conventional": "^7.5.0",
         "@octokit/rest": "^16.2.0",
-        "@ptsecurity/commitlint-config": "^0.2.1",
+        "@ptsecurity/commitlint-config": "^1.0.0",
         "@ptsecurity/tslint-config": "^0.13.1",
         "@schematics/angular": "^8.2.1",
         "@types/browser-sync": "^0.0.42",

@@ -601,10 +601,10 @@
   dependencies:
     esquery "^1.0.1"
 
-"@ptsecurity/commitlint-config@^0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@ptsecurity/commitlint-config/-/commitlint-config-0.2.1.tgz#5a75b1228ff4d63dae56af70baa468c7bc539d14"
-  integrity sha512-MRNk3NRuF956/wxq/+mX9/GbMaS99jZhl/5ESmkQs8hn6A5WcSTy4KSCwOJQA5MvEWtSrRycGWMitpVHeDgzZg==
+"@ptsecurity/commitlint-config@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@ptsecurity/commitlint-config/-/commitlint-config-1.0.0.tgz#3939ccb03de8a0f2165d6185de0de794d2851ccc"
+  integrity sha512-Cih2McIfrIkZL6iTvkzRVhPSjersHixQ8wbbWnTNG3s4pu0l7Kd0Fh4lL+vqIKMK8Wxibb2SG7RnMb6Ax6uVWw==
 
 "@ptsecurity/mosaic-icons@~3.0.0":
   version "3.0.0"
