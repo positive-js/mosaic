@@ -1,3 +1,18 @@
+## 8.1.2 "Yellowing Waterfall" (2019-11-15)
+
+### Mosaic
+
+
+ * bug fix  **popover:** added trigger click and it was set by default (#UIM-238) ([#338](https://github.com/positive-js/mosaic/issues/338)) ([cf122193cfa75b49d5c920fd55442ee5d8896d10](https://github.com/positive-js/mosaic/commit/cf122193cfa75b49d5c920fd55442ee5d8896d10)), closes [#UIM-238](https://github.com/positive-js/mosaic/issues/UIM-238)
+ * bug fix  **popover:** arrow have to be under content (#UIM-242) ([#340](https://github.com/positive-js/mosaic/issues/340)) ([28a3cc53229eae007ac93558d5a8b9847ff1ebcc](https://github.com/positive-js/mosaic/commit/28a3cc53229eae007ac93558d5a8b9847ff1ebcc)), closes [#UIM-242](https://github.com/positive-js/mosaic/issues/UIM-242)
+ * bug fix  **tree:** autoSelect does not work when multiple="keybord" (#UIM-250) ([#343](https://github.com/positive-js/mosaic/issues/343)) ([ab195c7e43c71d72d0902348052802cb81a919ca](https://github.com/positive-js/mosaic/commit/ab195c7e43c71d72d0902348052802cb81a919ca)), closes [#UIM-250](https://github.com/positive-js/mosaic/issues/UIM-250)
+ * bug fix  **tree:** tree catch focus with shift + TAB (#UIM-246) ([#339](https://github.com/positive-js/mosaic/issues/339)) ([8371e369a6bbf76793b54ef79ffe797f319c7c0e](https://github.com/positive-js/mosaic/commit/8371e369a6bbf76793b54ef79ffe797f319c7c0e)), closes [#UIM-246](https://github.com/positive-js/mosaic/issues/UIM-246)
+
+### Docs
+
+
+ * feature  **docs:** adding timepicker example (#330)
+
 ## 8.1.1 "Time Consuming Relocation" (2019-11-11)
 
 ### Mosaic
