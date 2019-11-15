@@ -206,7 +206,7 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
             this.multipleMode = MultipleMode.CHECKBOX;
         }
 
-        if (this.multiple) {
+        if (this.multipleMode === MultipleMode.CHECKBOX) {
             this.autoSelect = false;
             this.noUnselectLast = false;
         }
