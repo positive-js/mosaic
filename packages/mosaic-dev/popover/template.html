@@ -13,16 +13,14 @@
 </ng-template>
 
 <ng-template #customFooter>
-    <div class="flex-100 layout-row layout-align-space-between-center">
+    <div class="flex-100 layout-row layout-align-space-between-center" cdkTrapFocus="true" cdkTrapFocusAutoCapture="true">
         <button class="step"
                 mc-button
                 color="primary"
-                [disabled]="popoverActiveStage === 1"
                 (click)="changeStep(-1)">&larr; Назад</button>
         <button class="step"
                 mc-button
                 color="primary"
-                [disabled]="popoverActiveStage === 3"
                 (click)="changeStep(1)">Дальше &rarr;</button>
     </div>
 </ng-template>
@@ -60,10 +58,8 @@
         mcPopoverClass="popover-485 this-class-not-available"
         mcPopoverHeader="Lorem ipsum"
         mcPopoverSize="azaza"
-        mcPopoverPlacement="bottomRight"
-        [mcPopoverContent]="customContent"
-        [mcPopoverFooter]="customFooter">
-        <i class="mc-disabled" mc-icon="mc-folder-opened_16"></i>
+        [mcPopoverContent]="customContent">
+        mcPopoverTrigger="focus"
     </button>
 </section>
 
