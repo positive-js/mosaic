@@ -69,11 +69,12 @@ import {
     getMcSelectDynamicMultipleError,
     getMcSelectNonFunctionValueError,
     getMcSelectNonArrayValueError,
-    MC_SELECT_SCROLL_STRATEGY
+    MC_SELECT_SCROLL_STRATEGY,
+    MultipleMode
 } from '@ptsecurity/mosaic/core';
 import { McCleaner, McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { McTag } from '@ptsecurity/mosaic/tags';
-import { McTreeSelection, McTreeOption, MultipleMode } from '@ptsecurity/mosaic/tree';
+import { McTreeSelection, McTreeOption } from '@ptsecurity/mosaic/tree';
 import { defer, merge, Observable, Subject } from 'rxjs';
 import {
     filter,
