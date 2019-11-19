@@ -1,4 +1,5 @@
 /* tslint:disable:no-empty */
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { SelectionModel } from '@angular/cdk/collections';
 import {
     AfterContentInit,
@@ -42,7 +43,8 @@ import {
     CanDisableCtor,
     HasTabIndexCtor,
     mixinTabIndex,
-    HasTabIndex
+    HasTabIndex,
+    MultipleMode
 } from '@ptsecurity/mosaic/core';
 import { merge, Observable, Subject, Subscription } from 'rxjs';
 import { startWith, take, takeUntil } from 'rxjs/operators';
@@ -86,10 +88,10 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
 
     @ContentChildren(McLine) lines: QueryList<McLine>;
 
-    @ViewChild('text', {static: false}) text: ElementRef;
+    @ViewChild('text', { static: false }) text: ElementRef;
 
     // Whether the label should appear before or after the checkbox. Defaults to 'after'
-    @Input() checkboxPosition: 'before' | 'after' = 'after';
+    @Input() checkboxPosition: 'before' | 'after';
 
     @Input() value: any;
 
@@ -108,6 +110,17 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
     }
 
     private _disabled = false;
+
+    @Input()
+    get showCheckbox() {
+        return this._showCheckbox !== undefined ? this._showCheckbox : this.listSelection.showCheckbox;
+    }
+
+    set showCheckbox(value: any) {
+        this._showCheckbox = coerceBooleanProperty(value);
+    }
+
+    private _showCheckbox: boolean;
 
     @Input()
     get selected(): boolean {
@@ -282,7 +295,12 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
 
     autoSelect: boolean;
     noUnselect: boolean;
-    multiple: boolean;
+
+    multipleMode: MultipleMode | null;
+
+    get multiple(): boolean {
+        return !!this.multipleMode;
+    }
 
     @Input() horizontal: boolean = false;
 
@@ -296,6 +314,10 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
     }
 
     private _tabIndex = 0;
+
+    get showCheckbox(): boolean {
+        return this.multipleMode === MultipleMode.CHECKBOX;
+    }
 
     // Emits a change event whenever the selected state of an option changes.
     @Output() readonly selectionChange: EventEmitter<McListSelectionChange> = new EventEmitter<McListSelectionChange>();
@@ -331,8 +353,13 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
         super();
 
         this.autoSelect = autoSelect === null ? true : toBoolean(autoSelect);
-        this.multiple = multiple === null ? true : toBoolean(multiple);
         this.noUnselect = noUnselect === null ? true : toBoolean(noUnselect);
+
+        if (multiple === MultipleMode.CHECKBOX || multiple === MultipleMode.KEYBOARD) {
+            this.multipleMode = multiple;
+        } else if (multiple !== null) {
+            this.multipleMode = MultipleMode.CHECKBOX;
+        }
 
         this._tabIndex = parseInt(tabIndex) || 0;
 
