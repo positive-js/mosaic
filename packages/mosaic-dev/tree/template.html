@@ -22,11 +22,9 @@
 </mc-form-field>
 
 <br><br><br>
-    <!--auto-select="true"-->
-    <!--no-unselect="false"-->
-<!--    multiple-->
+<!--    [noUnselectLast]="false"-->
 <mc-tree-selection
-    multiple="checkbox"
+    multiple="keyboard"
     [disabled]="disableState"
     [(ngModel)]="modelValue"
     [dataSource]="dataSource"

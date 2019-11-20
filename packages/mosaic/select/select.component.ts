@@ -579,6 +579,7 @@ export class McSelect extends McSelectMixinBase implements
         $event.stopPropagation();
 
         this.selectionModel.clear();
+        this.keyManager.setActiveItem(-1);
 
         this.propagateChanges();
     }
