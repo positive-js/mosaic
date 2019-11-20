@@ -217,6 +217,12 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
             .subscribe(() => {
                 if (this.keyManager.activeItem) {
                     this.emitNavigationEvent(this.keyManager.activeItem);
+
+                    if (this.autoSelect && !this.keyManager.activeItem.disabled) {
+                        this.updateOptionsFocus();
+
+                        this.setSelectedOption(this.keyManager.activeItem);
+                    }
                 }
             });
 
@@ -323,10 +329,6 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
             default:
                 this.keyManager.onKeydown(event);
         }
-
-        if (this.autoSelect && this.keyManager.activeItem) {
-            this.setSelectedOption(this.keyManager.activeItem);
-        }
     }
 
     updateScrollSize(): void {
@@ -371,8 +373,7 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
             if (!this.canDeselectLast(option)) { return; }
 
             if (this.autoSelect) {
-                this.selectionModel.deselect(...this.selectionModel.selected);
-                this.selectionModel.select(option.data);
+                this.selectionModel.toggle(option.data);
             }
         }
 
@@ -386,8 +387,9 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
     toggleFocusedOption(): void {
         const focusedOption = this.keyManager.activeItem;
 
-        if (focusedOption) {
-            this.setSelectedOption(focusedOption);
+        if (focusedOption && (!focusedOption.selected || this.canDeselectLast(focusedOption))) {
+            focusedOption.toggle();
+            this.emitChangeEvent(focusedOption);
         }
     }
 
@@ -565,6 +567,12 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
         if (this.renderedOptions) {
             this.renderedOptions.forEach((option) => option.markForCheck());
         }
+    }
+
+    private updateOptionsFocus() {
+        this.renderedOptions
+            .filter((option) => option.hasFocus)
+            .forEach((option) => option.hasFocus = false);
     }
 
     private canDeselectLast(option: McTreeOption): boolean {

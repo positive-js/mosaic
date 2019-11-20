@@ -1941,7 +1941,7 @@ describe('McTreeSelect', () => {
 
                 it('should set the tabindex of each option according to disabled state', fakeAsync(() => {
                     expect(options[0].getAttribute('tabindex')).toEqual('-1');
-                    expect(options[3].getAttribute('tabindex')).toEqual(null);
+                    expect(options[3].getAttribute('tabindex')).toEqual('-1');
                 }));
             });
         });
@@ -2124,7 +2124,8 @@ describe('McTreeSelect', () => {
                 fixture.detectChanges();
                 flush();
 
-                const option = overlayContainerElement.querySelector('mc-tree-option') as Node;
+                const option = overlayContainerElement.querySelector('mc-tree-option') as HTMLElement;
+                option.focus();
                 const event = dispatchKeyboardEvent(option, 'keydown', SPACE);
                 tick(10);
 
@@ -2136,7 +2137,10 @@ describe('McTreeSelect', () => {
                 fixture.detectChanges();
                 flush();
 
-                const option = overlayContainerElement.querySelector('mc-tree-option') as Node;
+                expect(fixture.componentInstance.select.panelOpen).toBe(true);
+
+                const option = overlayContainerElement.querySelector('mc-tree-option') as HTMLElement;
+                option.focus();
                 const event = dispatchKeyboardEvent(option, 'keydown', ENTER);
                 tick(10);
 
@@ -2159,6 +2163,7 @@ describe('McTreeSelect', () => {
                 flush();
                 dispatchFakeEvent(selectElement, 'blur');
                 fixture.detectChanges();
+                tick(10);
 
                 /* tslint:disable-next-line:deprecation */
                 expect(selectInstance.focused).toBe(true, 'Expected select element to remain focused.');
@@ -2177,12 +2182,12 @@ describe('McTreeSelect', () => {
                 tick(10);
             }));
 
-            it('should focus the first option if no option is selected', fakeAsync(() => {
+            it('should not focus the first option if no option is selected', fakeAsync(() => {
                 trigger.click();
                 fixture.detectChanges();
                 flush();
 
-                expect(fixture.componentInstance.select.tree.keyManager.activeItemIndex).toEqual(0);
+                expect(fixture.componentInstance.select.tree.keyManager.activeItemIndex).toEqual(-1);
             }));
 
             it('should select an option when it is clicked', fakeAsync(() => {
@@ -4584,7 +4589,7 @@ describe('McTreeSelect', () => {
             fixture.detectChanges();
             flush();
 
-            expect(fixture.componentInstance.select.tree.keyManager.activeItemIndex).toBe(0);
+            expect(fixture.componentInstance.select.tree.keyManager.activeItemIndex).toBe(-1);
 
             const options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-tree-option');
 

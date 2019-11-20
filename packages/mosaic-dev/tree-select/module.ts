@@ -105,8 +105,8 @@ export class DemoComponent {
 
     control = new FormControl(['rootNode_1']);
 
-    // modelValue = 'Chrome';
-    modelValue: any[] = ['Applications', 'Documents', 'Calendar', 'Chrome'];
+    modelValue = 'Chrome';
+    // modelValue: any[] = ['Applications', 'Documents', 'Calendar', 'Chrome'];
 
     select: any;
 
@@ -141,6 +141,13 @@ export class DemoComponent {
 
     onSelectionChange($event: McTreeSelectChange) {
         console.log(`onSelectionChange: ${$event.value}`);
+        const treeSelect = $event.source;
+
+        // if ($event.value.selected) {
+        //     treeSelect.selectionModel.select(...treeSelect.tree.treeControl.getDescendants($event.value.data));
+        // } else {
+        //     treeSelect.selectionModel.deselect(...treeSelect.tree.treeControl.getDescendants($event.value.data));
+        // }
     }
 
     private transformer = (node: FileNode, level: number, parent: any) => {
