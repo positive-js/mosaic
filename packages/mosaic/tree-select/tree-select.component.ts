@@ -539,6 +539,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         $event.stopPropagation();
 
         this.selectionModel.clear();
+        this.tree.keyManager.setActiveItem(-1);
 
         this.setSelectionByValue([]);
 
@@ -976,18 +977,14 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
      * the first item instead.
      */
     private highlightCorrectOption() {
-        if (!this.tree.keyManager) { return; }
+        if (this.empty || !this.tree.keyManager) { return; }
 
-        if (this.empty) {
-            this.tree.keyManager.setFirstItemActive();
-        } else {
-            const firstSelectedValue = this.multiple ? this.selectedValues[0] : this.selectedValues;
+        const firstSelectedValue = this.multiple ? this.selectedValues[0] : this.selectedValues;
 
-            const selectedOption = this.options.find((option) => option.value === firstSelectedValue);
+        const selectedOption = this.options.find((option) => option.value === firstSelectedValue);
 
-            if (selectedOption) {
-                this.tree.keyManager.setActiveItem(selectedOption);
-            }
+        if (selectedOption) {
+            this.tree.keyManager.setActiveItem(selectedOption);
         }
     }
 

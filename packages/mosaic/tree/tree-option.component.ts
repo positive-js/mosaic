@@ -41,7 +41,7 @@ let uniqueIdCounter: number = 0;
     templateUrl: './tree-option.html',
     host: {
         '[attr.id]': 'id',
-        '[attr.tabindex]': 'tabIndex',
+        '[attr.tabindex]': '-1',
 
         '[attr.disabled]': 'disabled || null',
 
@@ -129,10 +129,6 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
     get viewValue(): string {
         // TODO: Add input property alternative for node envs.
         return (this.getHostElement().textContent || '').trim();
-    }
-
-    get tabIndex(): any {
-        return this.disabled ? null : -1;
     }
 
     hasFocus: boolean = false;
