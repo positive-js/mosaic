@@ -1,6 +1,5 @@
 import chalk from 'chalk';
 import * as dotenv from 'dotenv';
-import * as os from 'os';
 import { join } from 'path';
 import * as request from 'request';
 
@@ -9,8 +8,6 @@ import { CHANGELOG_FILE_NAME } from './stage-release';
 
 
 const HTTP_CODE_OK = 200;
-
-const platform = os.platform();
 
 export function notify(tag, version) {
     if (!verifyNotificationPossibility()) {
@@ -22,32 +19,18 @@ export function notify(tag, version) {
     const url = result.parsed.MATTERMOST_ENDPOINT_URL;
     const channel = result.parsed.MATTERMOST_CHANNEL;
 
-    let headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
-
-    let body = `payload={
-        "channel": "${channel}",
-        "username": "Wall-e",
-        "short": false,
-        "text": " #### [![Mosaic Logo](https://i.ibb.co/fQNPgv6/logo-png-200.png =32x32)osaic](https://github.com/positive-js/mosaic/tree/${tag}) was published.
-${prepareChangeLog(version)}"
-}`;
-
-    if (platform === 'win32') {
-        headers = { 'Content-Type': 'application/json' };
-
-        body = `{
-            \"channel\": \"${channel}\",
-            \"username\": \"Wall-e\",
-            \"short\": false,
-            \"text\": \" #### [![Mosaic Logo](https://i.ibb.co/fQNPgv6/logo-png-200.png =32x32)osaic](https://github.com/positive-js/mosaic/tree/${tag}) was published.
-    ${prepareChangeLog(version)}\"
-}`;
-    }
+    const headers = { 'Content-Type': 'application/json' };
+    const body = {
+        channel: `${channel}`,
+        username: "Wall-e",
+        short: false,
+        text: "#### [![Mosaic Logo](https://i.ibb.co/fQNPgv6/logo-png-200.png =32x32)osaic](https://github.com/positive-js/mosaic/tree/${tag}) was published. \n " + prepareChangeLog(version)
+    };
 
     request.post({
         url,
         headers,
-        body
+        body: JSON.stringify(body)
     }, (error, response) => {
         if (error || response.statusCode !== HTTP_CODE_OK) {
             // tslint:disable-next-line:no-console
@@ -70,5 +53,5 @@ function prepareChangeLog(version) {
     const changelogPath = join(join(__dirname, '../../'), CHANGELOG_FILE_NAME);
     const extractedReleaseNotes = extractReleaseNotes(changelogPath, version);
 
-    return extractedReleaseNotes.releaseNotes.replace(/"/g, '\\\"');
+    return extractedReleaseNotes.releaseNotes.replace(/"/g, '');
 }
