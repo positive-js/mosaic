@@ -1,3 +1,18 @@
+## 8.1.3 "Maple" (2019-11-20)
+
+### Mosaic
+
+
+ * bug fix  **option:** added parameter for hide checkbox (#UIM-252) ([#342](https://github.com/positive-js/mosaic/issues/342)) ([7959c5c0416c61d520232956be271ac93481f057](https://github.com/positive-js/mosaic/commit/7959c5c0416c61d520232956be271ac93481f057)), closes [#UIM-252](https://github.com/positive-js/mosaic/issues/UIM-252)
+ * bug fix  **popover:** added ESC handler and added focusTrap in example (#UIM-245) ([#341](https://github.com/positive-js/mosaic/issues/341)) ([62991edd45b06209590d84c175d8829cb7e6e303](https://github.com/positive-js/mosaic/commit/62991edd45b06209590d84c175d8829cb7e6e303)), closes [#UIM-245](https://github.com/positive-js/mosaic/issues/UIM-245)
+ * bug fix  **tags:** prevent focusing on remove tag (#UIM-255) ([#346](https://github.com/positive-js/mosaic/issues/346)) ([7b5950c6daa4fea298f8f67c953821a9e68f44f8](https://github.com/positive-js/mosaic/commit/7b5950c6daa4fea298f8f67c953821a9e68f44f8)), closes [#UIM-255](https://github.com/positive-js/mosaic/issues/UIM-255)
+ * bug fix  **tree:** noUnselectLast does not work (#UIM-178) ([#345](https://github.com/positive-js/mosaic/issues/345)) ([ce661a4f24cda3db0df75a9ae45fe8ad92c61c71](https://github.com/positive-js/mosaic/commit/ce661a4f24cda3db0df75a9ae45fe8ad92c61c71)), closes [#UIM-178](https://github.com/positive-js/mosaic/issues/UIM-178)
+
+### Docs
+
+
+ * feature  **docs:** add datepicker examples (#330)
+
 ## 8.1.2 "Yellowing Waterfall" (2019-11-15)
 
 ### Mosaic
