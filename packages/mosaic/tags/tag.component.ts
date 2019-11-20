@@ -408,11 +408,17 @@ export class McTag extends McTagMixinBase implements IFocusableOption, OnDestroy
     selector: '[mcTagRemove]',
     host: {
         class: 'mc-tag-remove mc-tag-trailing-icon',
-        '(click)': 'handleClick($event)'
+        '[attr.tabindex]': '-1',
+        '(click)': 'handleClick($event)',
+        '(focus)': 'focus($event)'
     }
 })
 export class McTagRemove {
     constructor(protected parentTag: McTag) {}
+
+    focus($event): void {
+        $event.stopPropagation();
+    }
 
     /** Calls the parent tag's public `remove()` method if applicable. */
     handleClick(event: Event): void {
