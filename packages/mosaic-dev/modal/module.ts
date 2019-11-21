@@ -21,6 +21,8 @@ export class ModalDemoComponent {
     tplModal: McModalRef;
     htmlModalVisible = false;
 
+    isLoading = false;
+
     constructor(private modalService: McModalService) {}
 
     showConfirm() {
@@ -57,14 +59,13 @@ export class ModalDemoComponent {
     }
 
     createModalComponent() {
-        const modalRef = this.modalService.open({
+        this.modalService.open({
             mcComponent: McModalFullCustomComponent
         });
     }
 
     createLongModal() {
-
-        const modal = this.modalService.create({
+        this.modalService.create({
             mcTitle     : 'Modal Title',
             mcContent   : McModalLongCustomComponent,
             mcOkText    : 'Yes',
@@ -73,6 +74,10 @@ export class ModalDemoComponent {
     }
 
     createComponentModal() {
+        let isLoading = false;
+        let isDisabled = false;
+        let isShown = false;
+
         const modal = this.modalService.create({
             mcTitle: 'Modal Title',
             mcContent: McModalCustomComponent,
@@ -83,6 +88,7 @@ export class ModalDemoComponent {
             mcFooter: [{
                 label: 'button 1',
                 type: 'primary',
+                loading: () => isLoading,
                 onClick: (componentInstance: any) => {
                     componentInstance.title = 'title in inner component is changed';
                 }
@@ -90,19 +96,31 @@ export class ModalDemoComponent {
                 label: 'button 2',
                 type: 'primary',
                 autoFocus: true,
+                show: () => isShown,
                 onClick: (componentInstance: any) => {
                     componentInstance.title = 'title in inner component is changed';
                 }
             }]
         });
 
-        modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));
+        modal.afterOpen.subscribe(() => {
+            console.log('[afterOpen] emitted!');
+
+            isLoading = true;
+            setTimeout(() => isLoading = false, 3000);
+
+            isDisabled = true;
+            setTimeout(() => isDisabled = false, 2000);
+
+            isShown = true;
+            setTimeout(() => isShown = false, 4000);
+        });
 
         // Return a result when closed
         modal.afterClose.subscribe((result) => console.log('[afterClose] The result is:', result));
 
         // delay until modal instance created
-        window.setTimeout(() => {
+        setTimeout(() => {
             const instance = modal.getContentComponent();
             instance.subtitle = 'sub title is changed';
         }, 2000);
