@@ -6,8 +6,9 @@ import { McDatepickerModule } from '@ptsecurity/mosaic/datepicker';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
-import { McTimepickerModule } from '@ptsecurity/mosaic/timepicker';
+import { McRadioModule } from '@ptsecurity/mosaic/radio';
 import { McSelectModule } from '@ptsecurity/mosaic/select';
+import { McTimepickerModule } from '@ptsecurity/mosaic/timepicker';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { McSelectModule } from '@ptsecurity/mosaic/select';
         McFormFieldModule,
         McIconModule,
         McInputModule,
+        McRadioModule,
         McTimepickerModule,
         McSelectModule
     ]

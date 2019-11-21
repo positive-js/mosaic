@@ -8,7 +8,7 @@ import { default as _rollupMoment, Moment } from 'moment';
 // tslint:disable-next-line
 const moment = _rollupMoment || momentImported;
 /**
- * @title Datepicker
+ * @title Disabled datepicker
  */
 @Component({
     selector: 'datepicker-disabled-example',

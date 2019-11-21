@@ -6,14 +6,21 @@ import { McDatepickerModule } from '@ptsecurity/mosaic/datepicker';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
+import { McRadioModule } from '@ptsecurity/mosaic/radio';
 
 import { DatepickerDisabledExample } from './datepicker-disabled/datepicker-disabled-example';
+import { DatepickerLanguageExample } from './datepicker-language/datepicker-language-example';
 import { DatepickerOverviewExample } from './datepicker-overview/datepicker-overview-example';
+import { DatepickerToggleExample } from './datepicker-toggle/datepicker-toggle-example';
+import { DatepickerYearExample } from './datepicker-year/datepicker-year-example';
 
 
 const EXAMPLES = [
     DatepickerDisabledExample,
-    DatepickerOverviewExample
+    DatepickerLanguageExample,
+    DatepickerOverviewExample,
+    DatepickerToggleExample,
+    DatepickerYearExample
 ];
 
 
@@ -26,7 +33,8 @@ const EXAMPLES = [
         McDatepickerModule,
         McInputModule,
         McFormFieldModule,
-        McIconModule
+        McIconModule,
+        McRadioModule
     ],
     declarations: EXAMPLES,
     exports: EXAMPLES
