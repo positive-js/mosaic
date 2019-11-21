@@ -5,6 +5,7 @@ import { join } from 'path';
 import { GitClient } from '../../tools/release/git/git-client';
 
 
+// tslint:disable-next-line:naming-convention
 function getPrNumber(prNumber: string, circlePR: string): string {
     const PR_NUMBER = prNumber;
 
@@ -32,7 +33,7 @@ function publishDocsPreview() {
     console.log('PR_NUMBER: ', PR_NUMBER);
     console.log('SHORT_SHA: ', SHORT_SHA);
 
-    if (PR_NUMBER) {
+    if (PR_NUMBER && owner === 'positive-js') {
         console.log(
             `Preparing and deploying docs preview for pr${PR_NUMBER}-${SHORT_SHA} to ${REPO_URL}`
         );
