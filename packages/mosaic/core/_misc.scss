@@ -1,0 +1,9 @@
+/**
+    This code provide ability to check whether theme is present on site
+ */
+
+@mixin mc-theme-detection() {
+    .mc-theme-loaded-marker {
+        display: none !important; // we use important here to avoid any overrides
+    }
+}

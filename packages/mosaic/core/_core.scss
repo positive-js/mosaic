@@ -1,6 +1,7 @@
 @import 'styles/common/animation';
 @import 'styles/common/groups';
 
+@import './misc';
 @import '../../cdk/a11y/a11y';
 @import '../../../node_modules/@angular/cdk/overlay';
 
@@ -14,6 +15,7 @@
     @include mosaic-typography($typography-config);
     @include cdk-a11y();
     @include cdk-overlay();
+    @include mc-theme-detection();
 }
 
 // Mixin that renders all of the core styles that depend on the theme.
