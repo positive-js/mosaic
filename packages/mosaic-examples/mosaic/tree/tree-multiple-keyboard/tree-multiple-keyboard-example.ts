@@ -1,20 +1,7 @@
-/* tslint:disable:no-console no-reserved-keywords */
-import { Component, NgModule, ViewEncapsulation } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+/* tslint:disable:no-reserved-keywords object-literal-key-quotes */
+import { Component } from '@angular/core';
 import { FlatTreeControl } from '@ptsecurity/cdk/tree';
-import { McButtonModule } from '@ptsecurity/mosaic/button';
-import { McCheckboxModule } from '@ptsecurity/mosaic/checkbox';
-import { McHighlightModule } from '@ptsecurity/mosaic/core/highlight';
-import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
-import { McIconModule } from '@ptsecurity/mosaic/icon';
-import { McInputModule } from '@ptsecurity/mosaic/input';
-import {
-    McTreeFlatDataSource,
-    McTreeFlattener,
-    McTreeModule
-} from '@ptsecurity/mosaic/tree';
+import { McTreeFlatDataSource, McTreeFlattener } from '@ptsecurity/mosaic/tree';
 
 
 export class FileNode {
@@ -60,62 +47,71 @@ export function buildFileTree(value: any, level: number): FileNode[] {
 }
 
 export const DATA_OBJECT = {
-    rootNode_1: 'app',
-    Pictures: {
-        Sun: 'png',
-        Woods: 'jpg',
-        PhotoBoothLibrary: {
-            Contents: 'dir',
-            Pictures_2: 'dir'
-        }
-    },
-    Documents: {
-        Pictures_3: 'Pictures',
-        angular: {
-            src: {
-                core: 'ts',
-                compiler: 'ts'
+    docs: 'app',
+    src: {
+        cdk: {
+            a11ly: {
+                'aria-describer': {
+                    'aria-describer': 'ts',
+                    'aria-describer.spec': 'ts',
+                    'aria-reference': 'ts',
+                    'aria-reference.spec': 'ts'
+                },
+                'focus-monitor': {
+                    'focus-monitor': 'ts',
+                    'focus-monitor.spec': 'ts'
+                }
             }
         },
-        material2: {
-            src: {
-                button: 'ts',
-                checkbox: 'ts',
-                input: 'ts'
-            }
-        }
+        documentation: {
+            source: '',
+            tools: ''
+        },
+        mosaic: {
+            autocomplete: '',
+            button: '',
+            'button-toggle': '',
+            index: 'ts',
+            package: 'json',
+            version: 'ts'
+        },
+        'mosaic-dev': {
+            alert: '',
+            badge: ''
+        },
+        'mosaic-examples': '',
+        'mosaic-moment-adapter': '',
+        README: 'md',
+        'tsconfig.build': 'json',
+        'wallabyTest': 'ts'
     },
-    Downloads: {
-        Tutorial: 'html',
-        November: 'pdf',
-        October: 'pdf'
+    scripts: {
+        deploy: {
+            'cleanup-preview': 'ts',
+            'publish-artifacts': 'sh',
+            'publish-docs': 'sh',
+            'publish-docs-preview': 'ts'
+        },
+        'tsconfig.deploy': 'json'
     },
-    Applications: {
-        Chrome: 'app',
-        Calendar: 'app',
-        Webstorm: 'app'
-    }
+    tests: ''
 };
 
-
+/**
+ * @title Basic tree
+ */
 @Component({
-    selector: 'app',
-    template: require('./template.html'),
-    styleUrls: ['./styles.scss'],
-    encapsulation: ViewEncapsulation.None
+    selector: 'tree-multiple-keyboard-example',
+    templateUrl: 'tree-multiple-keyboard-example.html',
+    styleUrls: ['tree-multiple-keyboard-example.css']
 })
-export class DemoComponent {
+export class TreeMultipleKeyboardExample {
     treeControl: FlatTreeControl<FileFlatNode>;
     treeFlattener: McTreeFlattener<FileNode, FileFlatNode>;
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
-    filterValue: string = '';
-
-    modelValue: any = ['Chrome'];
-    // modelValue: any[] = ['rootNode_1', 'Documents', 'Calendar', 'Chrome'];
-
-    disableState: boolean = false;
+    modelValue: any = [];
 
     constructor() {
         this.treeFlattener = new McTreeFlattener(
@@ -130,19 +126,7 @@ export class DemoComponent {
         this.dataSource.data = buildFileTree(DATA_OBJECT, 0);
     }
 
-    onFilterChange(value): void {
-        this.treeControl.filterNodes(value);
-    }
-
     hasChild(_: number, nodeData: FileFlatNode) { return nodeData.expandable; }
-
-    onNavigationChange() {
-        console.log('onNavigationChange');
-    }
-
-    onSelectionChange() {
-        console.log('onSelectionChange');
-    }
 
     private transformer = (node: FileNode, level: number, parent: any) => {
         const flatNode = new FileFlatNode();
@@ -178,26 +162,4 @@ export class DemoComponent {
         return `${node.name}${nodeType}`;
     }
 }
-
-
-@NgModule({
-    declarations: [DemoComponent],
-    imports: [
-        BrowserModule,
-        FormsModule,
-        McFormFieldModule,
-        McCheckboxModule,
-        McInputModule,
-        McButtonModule,
-        McTreeModule,
-        McIconModule,
-        McHighlightModule
-    ],
-    bootstrap: [DemoComponent]
-})
-export class DemoModule {}
-
-platformBrowserDynamic()
-    .bootstrapModule(DemoModule)
-    .catch((error) => console.error(error));
 
