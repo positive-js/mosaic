@@ -32,6 +32,7 @@ function publishDocsPreview() {
 
     console.log('PR_NUMBER: ', PR_NUMBER);
     console.log('SHORT_SHA: ', SHORT_SHA);
+    console.log('OWNER: ', owner);
 
     if (PR_NUMBER && owner === 'positive-js') {
         console.log(
