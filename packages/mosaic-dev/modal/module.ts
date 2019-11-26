@@ -105,6 +105,7 @@ export class ModalDemoComponent {
         window.setTimeout(() => {
             const instance = modal.getContentComponent();
             instance.subtitle = 'sub title is changed';
+            modal.markForCheck();
         }, 2000);
     }
 
