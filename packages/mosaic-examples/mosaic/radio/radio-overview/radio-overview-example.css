@@ -6,3 +6,8 @@
 .example-radio-button {
     margin-bottom: 10px;
 }
+
+.example-radio-control {
+    display: flex;
+    margin-top: 10px;
+}

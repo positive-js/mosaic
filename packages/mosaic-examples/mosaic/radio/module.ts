@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { McCheckboxModule } from '@ptsecurity/mosaic/checkbox';
 import { McRadioModule } from '@ptsecurity/mosaic/radio';
 
 import { RadioOverviewExample } from './radio-overview/radio-overview-example';
@@ -13,6 +14,7 @@ const EXAMPLES = [
 @NgModule({
     imports: [
         CommonModule,
+        McCheckboxModule,
         McRadioModule,
         FormsModule
     ],
