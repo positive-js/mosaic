@@ -112,8 +112,8 @@ export class ModalDemoComponent {
             isDisabled = true;
             setTimeout(() => isDisabled = false, 2000);
 
-            isShown = true;
-            setTimeout(() => isShown = false, 4000);
+            // isShown = true;
+            // setTimeout(() => isShown = false, 4000);
         });
 
         // Return a result when closed
