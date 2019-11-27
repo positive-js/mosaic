@@ -8,6 +8,7 @@ import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
 import { McRadioModule } from '@ptsecurity/mosaic/radio';
 import { McSelectModule } from '@ptsecurity/mosaic/select';
+import { McProgressBarModule } from '@ptsecurity/mosaic/progress-bar';
 import { McTimepickerModule } from '@ptsecurity/mosaic/timepicker';
 
 
@@ -21,6 +22,7 @@ import { McTimepickerModule } from '@ptsecurity/mosaic/timepicker';
         McIconModule,
         McInputModule,
         McRadioModule,
+        McProgressBarModule,
         McTimepickerModule,
         McSelectModule
     ]
