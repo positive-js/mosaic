@@ -64,10 +64,10 @@ async function postGithubComment() {
             token: CONFIG.github.token
         });
 
-        const comments: { data: any[] } = await githubApi.pulls.listCommits({
+        const comments: { data: any[] } = await githubApi.issues.listComments({
             owner,
             repo,
-            pull_number: PR_NUMBER,
+            issue_number: PR_NUMBER
         });
 
         const ptBotComment = comments.data
@@ -77,17 +77,18 @@ async function postGithubComment() {
         const body = `Preview docs changes for ${SHORT_SHA} at https://positive-js.github.io/mosaic-previews/pr${PR_NUMBER}-${SHORT_SHA}/`;
 
         if (ptBotComment) {
-            await githubApi.pulls.updateComment({
+            await githubApi.issues.updateComment({
                 owner,
                 repo,
                 comment_id: ptBotComment.id,
                 body
             });
         } else {
-            await githubApi.pulls.createComment({
+
+            await githubApi.issues.createComment({
                 owner,
                 repo,
-                pull_number: PR_NUMBER,
+                issue_number: PR_NUMBER,
                 body
             });
         }
