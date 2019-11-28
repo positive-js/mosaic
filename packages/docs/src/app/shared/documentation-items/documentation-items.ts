@@ -106,6 +106,18 @@ const DOCS: { [key: string]: DocCategory[] } = {
                     name: 'Timepicker',
                     summary: '',
                     examples: ['timepicker-types']
+                },
+                {
+                    id: 'select',
+                    name: 'Select',
+                    summary: '',
+                    examples: ['select-types']
+                },
+                {
+                    id: 'tree-select',
+                    name: 'Tree-select',
+                    summary: '',
+                    examples: ['treeSelect-types']
                 }
             ]
         },

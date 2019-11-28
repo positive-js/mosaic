@@ -1,4 +1,4 @@
-/* tslint:disable:no-reserved-keywords object-literal-key-quotes */
+/* tslint:disable:no-reserved-keywords */
 import { Component } from '@angular/core';
 import { FlatTreeControl } from '@ptsecurity/cdk/tree';
 import { McTreeFlatDataSource, McTreeFlattener } from '@ptsecurity/mosaic/tree';
@@ -98,20 +98,20 @@ export const DATA_OBJECT = {
 };
 
 /**
- * @title Basic tree
+ * @title Basic Select
  */
 @Component({
-    selector: 'tree-overview-example',
-    templateUrl: 'tree-overview-example.html',
-    styleUrls: ['tree-overview-example.css']
+    selector: 'tree-select-overview-example',
+    templateUrl: 'tree-select-overview-example.html',
+    styleUrls: ['tree-select-overview-example.css']
 })
-export class TreeOverviewExample {
+export class TreeSelectOverviewExample {
+    selected = '';
+
     treeControl: FlatTreeControl<FileFlatNode>;
     treeFlattener: McTreeFlattener<FileNode, FileFlatNode>;
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
-
-    modelValue: any = '';
 
     constructor() {
         this.treeFlattener = new McTreeFlattener(
@@ -126,7 +126,9 @@ export class TreeOverviewExample {
         this.dataSource.data = buildFileTree(DATA_OBJECT, 0);
     }
 
-    hasChild(_: number, nodeData: FileFlatNode) { return nodeData.expandable; }
+    hasChild(_: number, nodeData: FileFlatNode) {
+        return nodeData.expandable;
+    }
 
     private transformer = (node: FileNode, level: number, parent: any) => {
         const flatNode = new FileFlatNode();
@@ -157,8 +159,6 @@ export class TreeOverviewExample {
     }
 
     private getViewValue = (node: FileNode): string => {
-        const nodeType = node.type ? `.${node.type}` : '';
-
-        return `${node.name}${nodeType}`;
+        return `${node.name} view`;
     }
 }
