@@ -4,7 +4,6 @@ import { execSync } from 'child_process';
 import { join } from 'path';
 
 import { GitClient } from '../../tools/release/git/git-client';
-import { CONFIG } from '../../tools/release/config';
 
 
 // tslint:disable-next-line:naming-convention
@@ -58,10 +57,10 @@ async function postGithubComment() {
         const repo = process.env.CIRCLE_PROJECT_REPONAME;
 
         console.log('Start to create a comment');
+        const auth = process.env.GITHUB_API_MOSAIC;
 
         const githubApi: OctokitApi = new OctokitApi({
-            type: 'token',
-            token: CONFIG.github.token
+            auth
         });
 
         const comments: { data: any[] } = await githubApi.issues.listComments({
