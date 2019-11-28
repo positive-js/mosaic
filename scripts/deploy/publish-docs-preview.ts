@@ -56,17 +56,18 @@ async function postGithubComment() {
     if (PR_NUMBER && owner === 'positive-js') {
         const SHORT_SHA = process.env.SHORT_GIT_HASH;
         const repo = process.env.CIRCLE_PROJECT_REPONAME;
-        const token = process.env.GITHUB_API_MOSAIC;
+
+        console.log('Start to create a comment');
 
         const githubApi: OctokitApi = new OctokitApi({
             type: 'token',
             token: CONFIG.github.token
         });
 
-        const comments: { data: any[] } = await githubApi.issues.getComments({
+        const comments: { data: any[] } = await githubApi.pulls.listCommits({
             owner,
             repo,
-            number: PR_NUMBER,
+            pull_number: PR_NUMBER,
         });
 
         const ptBotComment = comments.data
@@ -76,17 +77,17 @@ async function postGithubComment() {
         const body = `Preview docs changes for ${SHORT_SHA} at https://positive-js.github.io/mosaic-previews/pr${PR_NUMBER}-${SHORT_SHA}/`;
 
         if (ptBotComment) {
-            await githubApi.issues.editComment({
+            await githubApi.pulls.updateComment({
                 owner,
                 repo,
                 comment_id: ptBotComment.id,
                 body
             });
         } else {
-            await githubApi.issues.createComment({
+            await githubApi.pulls.createComment({
                 owner,
                 repo,
-                number: PR_NUMBER,
+                pull_number: PR_NUMBER,
                 body
             });
         }
