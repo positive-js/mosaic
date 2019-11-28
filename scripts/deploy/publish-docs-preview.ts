@@ -88,6 +88,7 @@ function prepareAndPublish(
 
     execSync('rm commit_message');
 
+    console.log('Push to Preview');
     execSync('git push origin master --force');
     process.chdir('../../');
 }
