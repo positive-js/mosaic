@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CdkTreeModule } from '@ptsecurity/cdk/tree';
 import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
@@ -15,6 +15,7 @@ import { McSelectModule } from '@ptsecurity/mosaic/select';
 import { McProgressBarModule } from '@ptsecurity/mosaic/progress-bar';
 import { McTimepickerModule } from '@ptsecurity/mosaic/timepicker';
 import { McTreeModule } from '@ptsecurity/mosaic/tree';
+import { McTreeSelectModule } from '@ptsecurity/mosaic/tree-select';
 
 
 @NgModule({
@@ -35,9 +36,10 @@ import { McTreeModule } from '@ptsecurity/mosaic/tree';
         McIconModule,
         McHighlightModule,
         FormsModule,
-        McInputModule,
         McPseudoCheckboxModule,
-        CdkTreeModule
+        CdkTreeModule,
+        ReactiveFormsModule,
+        McTreeSelectModule
     ]
 })
 export class DemoMosaicModule {}

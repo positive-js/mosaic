@@ -83,7 +83,7 @@ export const DATA_OBJECT = {
         'mosaic-moment-adapter': '',
         README: 'md',
         'tsconfig.build': 'json',
-        'wallabyTest': 'ts'
+        wallabyTest: 'ts'
     },
     scripts: {
         deploy: {
