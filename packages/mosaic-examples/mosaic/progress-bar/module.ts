@@ -25,5 +25,4 @@ const EXAMPLES = [
     declarations: EXAMPLES,
     exports: EXAMPLES
 })
-export class ProgressBarExamplesModule {
-}
+export class ProgressBarExamplesModule {}
