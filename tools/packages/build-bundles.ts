@@ -128,9 +128,9 @@ export class PackageBundler {
             context: 'this',
             external: Object.keys(rollupGlobals),
             input: config.entry,
-            onwarn: (warning: any) => {
+            onwarn: (warning: {message: string, code: string}) => {
                 if (/but never used/.test(warning.message)) {
-                    return false;
+                    return;
                 }
 
                 if (warning.code === 'CIRCULAR_DEPENDENCY') {
