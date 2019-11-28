@@ -178,6 +178,25 @@ const DOCS: { [key: string]: DocCategory[] } = {
                     examples: ['typography-types']
                 }
             ]
+        },
+        {
+            id: 'core/styles',
+            name: 'Data list',
+            summary: 'styles',
+            items: [
+                {
+                    id: 'list',
+                    name: 'List',
+                    summary: '',
+                    examples: ['list-types']
+                },
+                {
+                    id: 'tree',
+                    name: 'Tree',
+                    summary: '',
+                    examples: ['tree-types']
+                }
+            ]
         }
     ],
     [CDK]: [

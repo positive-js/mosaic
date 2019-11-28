@@ -72,6 +72,8 @@ jobs:
                       echo 'export SHORT_GIT_HASH=$(git rev-parse --short $CIRCLE_SHA1)' >> $BASH_ENV
                       echo 'export CIRCLE_PULL_REQUEST_NUMBER=$(echo "$CIRCLE_PULL_REQUEST" | cut -d"/" -f7)' >> $BASH_ENV
                       source $BASH_ENV
+            - run: echo "$CIRCLE_PULL_REQUEST" | cut -d"/" -f7 && echo $CIRCLE_PULL_REQUEST_NUMBER
+            - run: printenv
             - run: yarn run build:docs
             - run: yarn run build:mosaic-examples
             - run: yarn run docs:prod-build --progress false --base-href /mosaic-previews/pr$CIRCLE_PULL_REQUEST_NUMBER-$SHORT_GIT_HASH/ --output-path dist/releases/mosaic-docs/pr$CIRCLE_PULL_REQUEST_NUMBER-$SHORT_GIT_HASH/
@@ -160,6 +162,7 @@ jobs:
                     echo 'export SHORT_GIT_HASH=$(git rev-parse --short $CIRCLE_SHA1)' >> $BASH_ENV
                     echo 'export CIRCLE_PULL_REQUEST_NUMBER=$(echo "$CIRCLE_PULL_REQUEST" | cut -d"/" -f7)' >> $BASH_ENV
                     source $BASH_ENV
+            - run: printenv
             - run: yarn run build:docs
             - run: yarn run docs:publish-preview
 
