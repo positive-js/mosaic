@@ -1,4 +1,5 @@
 /* tslint:disable:no-console */
+import * as OctokitApi from '@octokit/rest';
 import { execSync } from 'child_process';
 import { join } from 'path';
 
@@ -29,7 +30,6 @@ function publishDocsPreview() {
     const SHORT_SHA = process.env.SHORT_GIT_HASH;
     const owner = process.env.CIRCLE_PROJECT_USERNAME;
 
-
     console.log('PR_NUMBER: ', PR_NUMBER);
     console.log('SHORT_SHA: ', SHORT_SHA);
     console.log('OWNER: ', owner);
@@ -41,6 +41,56 @@ function publishDocsPreview() {
         prepareAndPublish(SOURCE_DIR, REPO_URL, REPO_DIR, false, 0);
     } else {
         console.log('No PR number found, skipping preview deployment');
+    }
+}
+
+async function postGithubComment() {
+
+    const PR_NUMBER = getPrNumber(
+        process.env.CIRCLE_PR_NUMBER,
+        process.env.CIRCLE_PULL_REQUEST_NUMBER
+    );
+    const owner = process.env.CIRCLE_PROJECT_USERNAME;
+
+    if (PR_NUMBER && owner === 'positive-js') {
+        const SHORT_SHA = process.env.SHORT_GIT_HASH;
+        const repo = process.env.CIRCLE_PROJECT_REPONAME;
+
+        console.log('Start to create a comment');
+        const auth = process.env.GITHUB_API_MOSAIC;
+
+        const githubApi: OctokitApi = new OctokitApi({
+            auth
+        });
+
+        const comments: { data: any[] } = await githubApi.issues.listComments({
+            owner,
+            repo,
+            issue_number: PR_NUMBER
+        });
+
+        const ptBotComment = comments.data
+            .filter(comment => comment.user.login === 'positivejs')
+            .pop();
+
+        const body = `Preview docs changes for ${SHORT_SHA} at https://positive-js.github.io/mosaic-previews/pr${PR_NUMBER}-${SHORT_SHA}/`;
+
+        if (ptBotComment) {
+            await githubApi.issues.updateComment({
+                owner,
+                repo,
+                comment_id: ptBotComment.id,
+                body
+            });
+        } else {
+
+            await githubApi.issues.createComment({
+                owner,
+                repo,
+                issue_number: PR_NUMBER,
+                body
+            });
+        }
     }
 }
 
@@ -88,8 +138,11 @@ function prepareAndPublish(
 
     execSync('rm commit_message');
 
+    console.log('Push to Preview');
     execSync('git push origin master --force');
     process.chdir('../../');
+
+    postGithubComment();
 }
 
 publishDocsPreview();
