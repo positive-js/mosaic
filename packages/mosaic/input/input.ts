@@ -11,7 +11,7 @@ import {
     NgForm, NgModel
 } from '@angular/forms';
 import {
-    END, C, V, X, A, DELETE, BACKSPACE, TAB, ENTER,
+    END, C, V, X, A, Z, DELETE, BACKSPACE, TAB, ENTER,
     ESCAPE, ZERO, NINE, NUMPAD_ZERO, NUMPAD_NINE, NUMPAD_MINUS, DASH,
     FF_MINUS, LEFT_ARROW, RIGHT_ARROW, HOME, UP_ARROW, DOWN_ARROW, F1, F12
 } from '@ptsecurity/cdk/keycodes';
@@ -156,6 +156,7 @@ export class McNumberInput implements McFormFieldNumberControl<any> {
         const isCtrlC = (e) => e.keyCode === C && (e.ctrlKey || e.metaKey);
         const isCtrlV = (e) => e.keyCode === V && (e.ctrlKey || e.metaKey);
         const isCtrlX = (e) => e.keyCode === X && (e.ctrlKey || e.metaKey);
+        const isCtrlZ = (e) => e.keyCode === Z && (e.ctrlKey || e.metaKey);
 
         const isFKey = (e) => e.keyCode >= F1 && e.keyCode <= F12;
 
@@ -180,6 +181,7 @@ export class McNumberInput implements McFormFieldNumberControl<any> {
             isCtrlC(event) ||
             isCtrlV(event) ||
             isCtrlX(event) ||
+            isCtrlZ(event) ||
             isFKey(event) ||
             isPeriod(event)
         ) {
