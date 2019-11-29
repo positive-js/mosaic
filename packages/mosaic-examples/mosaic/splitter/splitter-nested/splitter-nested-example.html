@@ -1,0 +1,17 @@
+<mc-splitter class="with-border">
+    <div mc-splitter-area>left</div>
+    <div mc-splitter-area class="flex">
+        <mc-splitter class="without-border flex" [direction]="'vertical'">
+            <div mc-splitter-area>top</div>
+            <div mc-splitter-area class="layout-column flex">
+                <mc-splitter class="flex nested-splitter">
+                    <div mc-splitter-area>center-left</div>
+                    <div mc-splitter-area class="flex">center</div>
+                    <div mc-splitter-area>center-right</div>
+                </mc-splitter>
+            </div>
+            <div mc-splitter-area>bottom</div>
+        </mc-splitter>
+    </div>
+    <div mc-splitter-area>right</div>
+</mc-splitter>

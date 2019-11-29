@@ -1,0 +1,9 @@
+/** No CSS for this example */
+
+.mc-card {
+    margin-right: 1rem;
+    margin-bottom: 0.5rem;
+    padding: 0.3rem;
+    width: 180px;
+    display: block;
+}
