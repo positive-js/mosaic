@@ -83,18 +83,19 @@
                 <div [innerHTML]="mcFooter"></div>
             </ng-container>
             <ng-container *ngSwitchCase="isModalButtons(mcFooter)">
-                <button
-                    mc-button
-                    #autoFocusedButton
-                    *ngFor="let button of mcFooter"
-                    [attr.autofocus]="button.autoFocus"
-                    [hidden]="!getButtonCallableProp(button, 'show')"
-                    [disabled]="getButtonCallableProp(button, 'disabled')"
-                    [class.mc-progress]="getButtonCallableProp(button, 'loading')"
-                    (click)="onButtonClick(button)"
-                    [color]="button.type">
-                    {{ button.label }}
-                </button>
+                <ng-container *ngFor="let button of mcFooter">
+                    <button
+                        mc-button
+                        #autoFocusedButton
+                        [attr.autofocus]="button.autoFocus"
+                        *ngIf="getButtonCallableProp(button, 'show')"
+                        [disabled]="getButtonCallableProp(button, 'disabled')"
+                        [class.mc-progress]="getButtonCallableProp(button, 'loading')"
+                        (click)="onButtonClick(button)"
+                        [color]="button.type">
+                        {{ button.label }}
+                    </button>
+                </ng-container>
             </ng-container>
             <ng-container *ngSwitchDefault>
                 <button
