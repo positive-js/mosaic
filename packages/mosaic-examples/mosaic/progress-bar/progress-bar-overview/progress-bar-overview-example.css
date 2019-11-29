@@ -1,0 +1,8 @@
+.example-progress-bar-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.example-progress-bar {
+    margin-bottom: 12px;
+}

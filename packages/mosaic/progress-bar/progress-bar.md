@@ -19,6 +19,7 @@ Default: 0
 This will fill 30% of the hole progress bar
 <mc-progress-bar value="30"></mc-progress-bar>
 ```
+<!-- example(progress-bar-overview) -->
 
 #### `mode`
 Enum ('determinate', 'indeterminate')  
@@ -30,6 +31,8 @@ To show indeterminate progress
 Or for determinate progress
 <mc-progress-bar mode="determinate" value="30"></mc-progress-bar>
 ```
+<!-- example(progress-bar-indeterminate) -->
+
 
 #### `color`
 Enum ('primary', 'second', 'error')  

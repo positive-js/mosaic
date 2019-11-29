@@ -28,7 +28,7 @@
         color: mc-color($foreground, text);
     }
 
-    [hidden] {
+    .mc-theme-loaded-marker {
         display: none;
     }
 }

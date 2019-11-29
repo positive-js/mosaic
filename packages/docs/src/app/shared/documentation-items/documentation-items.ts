@@ -106,6 +106,18 @@ const DOCS: { [key: string]: DocCategory[] } = {
                     name: 'Timepicker',
                     summary: '',
                     examples: ['timepicker-types']
+                },
+                {
+                    id: 'select',
+                    name: 'Select',
+                    summary: '',
+                    examples: ['select-types']
+                },
+                {
+                    id: 'tree-select',
+                    name: 'Tree-select',
+                    summary: '',
+                    examples: ['treeSelect-types']
                 }
             ]
         },
@@ -176,6 +188,25 @@ const DOCS: { [key: string]: DocCategory[] } = {
                     name: 'Typography',
                     summary: '',
                     examples: ['typography-types']
+                }
+            ]
+        },
+        {
+            id: 'core/styles',
+            name: 'Data list',
+            summary: 'styles',
+            items: [
+                {
+                    id: 'list',
+                    name: 'List',
+                    summary: '',
+                    examples: ['list-types']
+                },
+                {
+                    id: 'tree',
+                    name: 'Tree',
+                    summary: '',
+                    examples: ['tree-types']
                 }
             ]
         }

@@ -1,0 +1,15 @@
+<mc-form-field>
+    <mc-select multiple [(value)]="selected">
+        <mc-form-field mcFormFieldWithoutBorders mcSelectSearch>
+            <i mcPrefix mc-icon="mc-search_16"></i>
+            <input mcInput [formControl]="searchControl" type="text"/>
+            <mc-cleaner></mc-cleaner>
+        </mc-form-field>
+
+        <mc-cleaner #mcSelectCleaner></mc-cleaner>
+
+        <div mc-select-search-empty-result>Ничего не найдено</div>
+
+        <mc-option *ngFor="let option of filteredOptions | async" [value]="option">{{ option }}</mc-option>
+    </mc-select>
+</mc-form-field>

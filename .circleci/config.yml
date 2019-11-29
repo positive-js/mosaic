@@ -2,7 +2,7 @@
 # http://yaml-online-parser.appspot.com/
 
 var_1: &default_docker_image circleci/node:10.17-browsers
-var_2: &cache_key mosaic-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}-0.8.0
+var_2: &cache_key mosaic-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}-0.9.0
 
 var_3: &job_defaults
     working_directory: ~/mosaic
@@ -72,6 +72,8 @@ jobs:
                       echo 'export SHORT_GIT_HASH=$(git rev-parse --short $CIRCLE_SHA1)' >> $BASH_ENV
                       echo 'export CIRCLE_PULL_REQUEST_NUMBER=$(echo "$CIRCLE_PULL_REQUEST" | cut -d"/" -f7)' >> $BASH_ENV
                       source $BASH_ENV
+            - run: echo "$CIRCLE_PULL_REQUEST" | cut -d"/" -f7 && echo $CIRCLE_PULL_REQUEST_NUMBER
+            - run: printenv
             - run: yarn run build:docs
             - run: yarn run build:mosaic-examples
             - run: yarn run docs:prod-build --progress false --base-href /mosaic-previews/pr$CIRCLE_PULL_REQUEST_NUMBER-$SHORT_GIT_HASH/ --output-path dist/releases/mosaic-docs/pr$CIRCLE_PULL_REQUEST_NUMBER-$SHORT_GIT_HASH/
@@ -160,6 +162,7 @@ jobs:
                     echo 'export SHORT_GIT_HASH=$(git rev-parse --short $CIRCLE_SHA1)' >> $BASH_ENV
                     echo 'export CIRCLE_PULL_REQUEST_NUMBER=$(echo "$CIRCLE_PULL_REQUEST" | cut -d"/" -f7)' >> $BASH_ENV
                     source $BASH_ENV
+            - run: printenv
             - run: yarn run build:docs
             - run: yarn run docs:publish-preview
 

@@ -173,7 +173,9 @@ export class DemoComponent {
     }
 
     private getViewValue = (node: FileNode): string => {
-        return `${node.name} view`;
+        const nodeType = node.type ? `.${node.type}` : '';
+
+        return `${node.name}${nodeType}`;
     }
 }
 
