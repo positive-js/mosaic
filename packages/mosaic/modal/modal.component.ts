@@ -166,8 +166,7 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
         private viewContainer: ViewContainerRef,
         private modalControl: McModalControlService,
         private changeDetector: ChangeDetectorRef,
-        @Inject(DOCUMENT) private document: any
-    ) {
+        @Inject(DOCUMENT) private document: any) {
 
         super();
     }
