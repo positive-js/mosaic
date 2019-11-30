@@ -7,6 +7,7 @@ import { buildConfig, composeRelease } from '../../packages';
 import { mosaicPackage } from '../packages';
 
 
+// tslint:disable-next-line:no-var-requires
 const gulpRename = require('gulp-rename');
 
 const distDir = buildConfig.outputDir;
@@ -45,7 +46,7 @@ task('mosaic:bundle-theming-scss', () => {
     // Instantiates the SCSS bundler and bundles all imports of the specified entry point SCSS file.
     // A glob of all SCSS files in the library will be passed to the bundler. The bundler takes an
     // array of globs, which will match SCSS files that will be only included once in the bundle.
-    return new Bundler().Bundle(themingEntryPointPath, [allScssDedupeGlob]).then((result) => {
+    return new Bundler().bundle(themingEntryPointPath, [allScssDedupeGlob]).then((result) => {
         // The release directory is not created yet because the composing of the release happens when
         // this task finishes.
         mkdirpSync(releasePath);
@@ -64,7 +65,7 @@ task('mosaic:bundle-visual-scss', () => {
     // Instantiates the SCSS bundler and bundles all imports of the specified entry point SCSS file.
     // A glob of all SCSS files in the library will be passed to the bundler. The bundler takes an
     // array of globs, which will match SCSS files that will be only included once in the bundle.
-    return new Bundler().Bundle(visualEntryPointPath, [allScssDedupeGlob]).then((result) => {
+    return new Bundler().bundle(visualEntryPointPath, [allScssDedupeGlob]).then((result) => {
         // The release directory is not created yet because the composing of the release happens when
         // this task finishes.
         mkdirpSync(releasePath);
