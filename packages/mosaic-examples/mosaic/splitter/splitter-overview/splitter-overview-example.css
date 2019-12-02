@@ -1,0 +1,13 @@
+mc-splitter {
+    border: 1px solid black;
+    height: 100px;
+    margin: 2px;
+}
+
+div[mc-splitter-area] {
+    background: #c5c0c0
+}
+
+.flex {
+    flex: 1;
+}
