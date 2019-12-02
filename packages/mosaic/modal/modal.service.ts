@@ -1,6 +1,6 @@
-import { ComponentType, Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { ComponentRef, Injectable, TemplateRef } from '@angular/core';
+import { ComponentRef, Injectable } from '@angular/core';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
