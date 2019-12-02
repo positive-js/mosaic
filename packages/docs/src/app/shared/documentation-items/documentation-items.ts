@@ -61,6 +61,19 @@ const DOCS: { [key: string]: DocCategory[] } = {
             ]
         },
         {
+            id: 'modals',
+            name: 'Popups & Modals',
+            summary: '',
+            items: [
+                {
+                    id: 'modal',
+                    name: 'Modal',
+                    summary: '',
+                    examples: ['modal-types']
+                }
+            ]
+        },
+        {
             id: 'forms',
             name: 'Form Controls',
             summary: 'Controls that collect and validate user input.',
