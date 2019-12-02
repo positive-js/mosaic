@@ -10,9 +10,10 @@ import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
 import { McListModule } from '@ptsecurity/mosaic/list';
+import { McModalModule } from '@ptsecurity/mosaic/modal';
+import { McProgressBarModule } from '@ptsecurity/mosaic/progress-bar';
 import { McRadioModule } from '@ptsecurity/mosaic/radio';
 import { McSelectModule } from '@ptsecurity/mosaic/select';
-import { McProgressBarModule } from '@ptsecurity/mosaic/progress-bar';
 import { McTimepickerModule } from '@ptsecurity/mosaic/timepicker';
 import { McTreeModule } from '@ptsecurity/mosaic/tree';
 import { McTreeSelectModule } from '@ptsecurity/mosaic/tree-select';
@@ -34,6 +35,7 @@ import { McTreeSelectModule } from '@ptsecurity/mosaic/tree-select';
         McListModule,
         McTreeModule,
         McIconModule,
+        McModalModule,
         McHighlightModule,
         FormsModule,
         McPseudoCheckboxModule,
