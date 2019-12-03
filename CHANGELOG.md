@@ -1,3 +1,25 @@
+# 8.2.0 "Bigtooth Aspen" (2019-12-03)
+
+### Mosaic
+
+
+ * bug fix  **app:** console warning - theme detection (#UIM-168) ([#351](https://github.com/positive-js/mosaic/issues/351)) ([dd4668bf9944edb5577b13dd9cf0125d219fae1d](https://github.com/positive-js/mosaic/commit/dd4668bf9944edb5577b13dd9cf0125d219fae1d)), closes [#UIM-168](https://github.com/positive-js/mosaic/issues/UIM-168)
+ * bug fix  **input:** Add undo and redo commands checks (#UIM-161) ([#350](https://github.com/positive-js/mosaic/issues/350)) ([1736acf4bfdda90bccbdc20ee5345be78225c970](https://github.com/positive-js/mosaic/commit/1736acf4bfdda90bccbdc20ee5345be78225c970)), closes [#UIM-161](https://github.com/positive-js/mosaic/issues/UIM-161)
+ * feature  **modal:** add markForCheck for modal (#UIM-262) ([#349](https://github.com/positive-js/mosaic/issues/349)) ([e3ecb9fd0d511a18f9616eee785344db525868b5](https://github.com/positive-js/mosaic/commit/e3ecb9fd0d511a18f9616eee785344db525868b5)), closes [#UIM-262](https://github.com/positive-js/mosaic/issues/UIM-262)
+ * feature  **modal:** modal should allow set disabled, visibility and progress ([#348](https://github.com/positive-js/mosaic/issues/348)) ([4cd142abadf90c1923a0304331043030e1dcb6e0](https://github.com/positive-js/mosaic/commit/4cd142abadf90c1923a0304331043030e1dcb6e0))
+
+### Docs
+
+
+ * feature  **docs:** added basic Modal example ([0db75d1ec527d100db116b839ab2ec8ee3d12543](https://github.com/positive-js/mosaic/commit/0db75d1ec527d100db116b839ab2ec8ee3d12543))
+ * feature  **docs:** added examples for card and splitter (#UIM-290) ([#357](https://github.com/positive-js/mosaic/issues/357)) ([9e6518483e60b3ec017102271f2086f6fc42b12b](https://github.com/positive-js/mosaic/commit/9e6518483e60b3ec017102271f2086f6fc42b12b)), closes [#UIM-290](https://github.com/positive-js/mosaic/issues/UIM-290)
+ * feature  **docs:** added examples for input (#UIM-283) ([#356](https://github.com/positive-js/mosaic/issues/356)) ([5cf3219ed5a499ad8e17999a39bd1bb6eddd7d8f](https://github.com/positive-js/mosaic/commit/5cf3219ed5a499ad8e17999a39bd1bb6eddd7d8f)), closes [#UIM-283](https://github.com/positive-js/mosaic/issues/UIM-283)
+ * feature  **docs:** added examples for list and tree (#UIM-261, #UIM-270) ([#352](https://github.com/positive-js/mosaic/issues/352)) ([22c19db06cb5bb4ed150e033f3b94d571787b1a6](https://github.com/positive-js/mosaic/commit/22c19db06cb5bb4ed150e033f3b94d571787b1a6)), closes [#UIM-261](https://github.com/positive-js/mosaic/issues/UIM-261) [#UIM-270](https://github.com/positive-js/mosaic/issues/UIM-270)
+ * feature  **docs:** added examples for select and tree-select (#UIM-277) ([#355](https://github.com/positive-js/mosaic/issues/355)) ([6ab915fd5a069998f5e74037ddbad6d3c41a2658](https://github.com/positive-js/mosaic/commit/6ab915fd5a069998f5e74037ddbad6d3c41a2658)), closes [#UIM-277](https://github.com/positive-js/mosaic/issues/UIM-277)
+ * feature  **docs:** adding datapicker examples ([#347](https://github.com/positive-js/mosaic/issues/347)) ([561bbde9bc5eb3d4c4b0d6ea06bb48a74abf33d4](https://github.com/positive-js/mosaic/commit/561bbde9bc5eb3d4c4b0d6ea06bb48a74abf33d4))
+ * feature  **docs:** adding disabled control to radio overview example ([#353](https://github.com/positive-js/mosaic/issues/353)) ([8cd752b5929958a6752e20f21321beceb26fc44d](https://github.com/positive-js/mosaic/commit/8cd752b5929958a6752e20f21321beceb26fc44d))
+ * feature  **docs:** adding progress bar examples ([#354](https://github.com/positive-js/mosaic/issues/354)) ([7e084384ddfb958c21432003a7a9ae61d85d11a4](https://github.com/positive-js/mosaic/commit/7e084384ddfb958c21432003a7a9ae61d85d11a4))
+
 ## 8.1.3 "Maple" (2019-11-20)
 
 ### Mosaic
