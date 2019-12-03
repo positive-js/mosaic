@@ -25,6 +25,18 @@
         transform: none;
         opacity: 0;
     }
+
+
+    .mc-modal-close {
+        position: absolute;
+
+        z-index: 10;
+        top: 0;
+        right: 0;
+
+        width: 56px;
+        height: 56px;
+    }
 }
 
 .mc-modal-wrap {
@@ -53,17 +65,6 @@
 
     background-clip: padding-box;
     background-color: white;
-}
-
-.mc-modal-close {
-    position: absolute;
-
-    z-index: 10;
-    top: 0;
-    right: 0;
-
-    width: 56px;
-    height: 56px;
 }
 
 .mc-modal-header {
