@@ -1,3 +1,10 @@
+## 8.2.1 "Bleakest hawker" (2019-12-04)
+
+### Mosaic
+
+
+ * bug fix  **modal:** cross added incorrectly when using mcModalTitle ([09910732f7612de49e951a707120df05353b3bf5](https://github.com/positive-js/mosaic/commit/09910732f7612de49e951a707120df05353b3bf5))
+
 # 8.2.0 "Bigtooth Aspen" (2019-12-03)
 
 ### Mosaic
