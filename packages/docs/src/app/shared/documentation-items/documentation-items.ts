@@ -57,6 +57,12 @@ const DOCS: { [key: string]: DocCategory[] } = {
                     name: 'Progress-spinner',
                     summary: '',
                     examples: ['progress-spinner-types']
+                },
+                {
+                    id: 'tags',
+                    name: 'Tags',
+                    summary: '',
+                    examples: ['tags-types']
                 }
             ]
         },
@@ -131,6 +137,12 @@ const DOCS: { [key: string]: DocCategory[] } = {
                     name: 'Tree-select',
                     summary: '',
                     examples: ['treeSelect-types']
+                },
+                {
+                    id: 'autocomplete',
+                    name: 'Autocomplete',
+                    summary: '',
+                    examples: ['autocomplete-types']
                 }
             ]
         },
@@ -188,6 +200,18 @@ const DOCS: { [key: string]: DocCategory[] } = {
                     name: 'Button',
                     summary: 'An interactive button with a range of presentation options.',
                     examples: ['button-types']
+                },
+                {
+                    id: 'button-toggle',
+                    name: 'Button Toggle',
+                    summary: '',
+                    examples: ['button-toggle-types']
+                },
+                {
+                    id: 'toggle',
+                    name: 'Toggle',
+                    summary: '',
+                    examples: ['toggle-types']
                 }
             ]
         },
