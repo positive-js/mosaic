@@ -1,4 +1,4 @@
-import { ComponentPortal, DomPortalHost } from '@angular/cdk/portal';
+import { ComponentPortal, DomPortalOutlet } from '@angular/cdk/portal';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import {
     ApplicationRef,
@@ -38,7 +38,7 @@ export class DocViewer implements OnDestroy {
 
     /** The document text. It should not be HTML encoded. */
     textContent = '';
-    private portalHosts: DomPortalHost[] = [];
+    private portalHosts: DomPortalOutlet[] = [];
     private documentFetchSubscription: Subscription;
 
     constructor(private _appRef: ApplicationRef,
@@ -120,7 +120,7 @@ export class DocViewer implements OnDestroy {
 
         Array.prototype.slice.call(exampleElements).forEach((element: Element) => {
             const example = element.getAttribute(componentName);
-            const portalHost = new DomPortalHost(
+            const portalHost = new DomPortalOutlet(
                 element, this._componentFactoryResolver, this._appRef, this._injector);
             const examplePortal = new ComponentPortal(componentClass, this._viewContainerRef);
             const exampleViewer = portalHost.attach(examplePortal);

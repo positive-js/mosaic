@@ -13,7 +13,7 @@ const versionUrl = '';
     templateUrl: './version-picker.html'
 })
 export class VersionPicker {
-    /** The currently running versin of Material. */
+    /** The currently running versin. */
     mosaicVersion = mosaicVersion;
     /** The possible versions of the doc site. */
     docVersions = this.http.get(versionUrl);

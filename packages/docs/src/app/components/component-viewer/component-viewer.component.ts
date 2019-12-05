@@ -17,7 +17,6 @@ import { AnchorsComponent } from '../anchors/anchors.component';
 export class ComponentViewerComponent implements OnDestroy {
 
     componentDocItem: DocItem;
-    sections: Set<string> = new Set(['overview', 'api']);
 
     private destroyed = new Subject();
 
@@ -69,9 +68,10 @@ export class ComponentOverviewComponent implements OnDestroy {
     documentName: string = '';
     documentLost: boolean = false;
     isLoad: boolean = true;
-    private destroyed = new Subject();
 
     @ViewChild('toc', {static: false}) anchorsComponent: AnchorsComponent;
+
+    private destroyed = new Subject();
 
     constructor(public componentViewer: ComponentViewerComponent,
                 private router: Router,

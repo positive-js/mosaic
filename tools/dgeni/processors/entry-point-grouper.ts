@@ -94,7 +94,7 @@ export class EntryPointGrouper implements Processor {
             const moduleInfo = getModulePackageInfo(doc);
 
             const packageName = moduleInfo.packageName;
-            const packageDisplayName = packageName === 'cdk' ? 'CDK' : 'Material';
+            const packageDisplayName = packageName === 'cdk' ? 'CDK' : 'Mosaic';
 
             const moduleImportPath = `@angular/${packageName}/${moduleInfo.entryPointName}`;
             // tslint:disable-next-line:prefer-template
