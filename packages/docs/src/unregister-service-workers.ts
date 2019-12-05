@@ -9,9 +9,8 @@ export async function unregisterServiceWorkers(): Promise<boolean> {
 
     const registrations = await navigator.serviceWorker.getRegistrations();
 
-    // Walk through every currently registered Service Worker and unregister it. There can be
-    // service workers from previous versions of the Angular Material docs.
-    registrations.forEach(registration => registration.unregister());
+    // Walk through every currently registered Service Worker and unregister it.
+    registrations.forEach((registration) => registration.unregister());
 
     return registrations.length > 0;
 }
