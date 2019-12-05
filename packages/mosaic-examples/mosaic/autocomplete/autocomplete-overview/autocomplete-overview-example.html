@@ -1,0 +1,8 @@
+<label>Enter countries to see autocomplete</label>
+<mc-form-field>
+    <input type="text" mcInput [mcAutocomplete]="auto" [formControl]="control"/>
+
+    <mc-autocomplete #auto="mcAutocomplete">
+        <mc-option *ngFor="let option of filteredOptions | async" [value]="option">{{ option }}</mc-option>
+    </mc-autocomplete>
+</mc-form-field>
