@@ -1,0 +1,16 @@
+<mc-form-field>
+    <mc-tag-list #tagList>
+        <mc-tag *ngFor="let tag of tags" [value]="tag" (removed)="onRemoveTag(tag)">
+            {{ tag }}
+            <i mc-icon="mc-close-S_16" mcTagRemove></i>
+        </mc-tag>
+
+        <input placeholder="New tag..."
+               [formControl]="control"
+               [mcTagInputFor]="tagList"
+               [mcTagInputSeparatorKeyCodes]="separatorKeysCodes"
+               (mcTagInputTokenEnd)="onCreate($event)">
+
+        <mc-cleaner (click)="onClear()"></mc-cleaner>
+    </mc-tag-list>
+</mc-form-field>
