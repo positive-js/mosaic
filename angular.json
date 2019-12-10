@@ -53,6 +53,7 @@
                     },
                     "configurations": {
                         "production": {
+                            "tsConfig": "packages/docs/tsconfig.aot.json",
                             "fileReplacements": [
                                 {
                                     "replace": "packages/docs/src/environments/environment.ts",
