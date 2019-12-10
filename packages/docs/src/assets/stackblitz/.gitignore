@@ -1,0 +1,31 @@
+# firebase artifacts
+.firebase
+
+package-lock.json
+
+.env
+
+# folders
+node_modules/
+coverage/
+dist/
+tmp/
+temp/
+
+# Example module file will be auto-generated.
+/packages/mosaic-examples/example-module.ts
+
+# IDEs
+/.idea
+/.vscode
+/.awcache
+
+# misc
+.DS_Store
+Thumbs.db
+npm-debug.log
+*~
+*.sw[mnpcod]
+*.log
+*.tmp
+*.tmp.*
