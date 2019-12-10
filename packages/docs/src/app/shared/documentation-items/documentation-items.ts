@@ -76,6 +76,18 @@ const DOCS: { [key: string]: DocCategory[] } = {
                     name: 'Modal',
                     summary: '',
                     examples: ['modal-types']
+                },
+                {
+                    id: 'popover',
+                    name: 'Popover',
+                    summary: '',
+                    examples: ['popover-types']
+                },
+                {
+                    id: 'tooltip',
+                    name: 'Tooltip',
+                    summary: '',
+                    examples: ['tooltip-types']
                 }
             ]
         },
