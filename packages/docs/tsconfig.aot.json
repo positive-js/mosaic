@@ -1,0 +1,23 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "outDir": "./out-tsc/app",
+        "paths": {
+            "@ptsecurity/cdk/*": ["../../dist/releases/cdk/*"],
+
+            "@ptsecurity/mosaic/*": ["../../dist/releases/mosaic/*"],
+
+            "@ptsecurity/mosaic-examples": ["../../dist/releases/mosaic-examples"],
+
+            "@ptsecurity/mosaic-moment-adapter": ["../../dist/releases/mosaic-moment-adapter"]
+        }
+    },
+    "include": [
+        "src/**/*.ts"
+    ],
+    "exclude": [
+        "src/test.ts",
+        "src/**/*.spec.ts",
+        "src/assets"
+    ]
+}

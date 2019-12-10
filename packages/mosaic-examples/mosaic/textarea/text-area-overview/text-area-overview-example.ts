@@ -14,4 +14,5 @@ export class TextAreaOverviewExample {
     disabled: boolean = true;
     required: boolean = true;
     placeholder: string = 'placeholder';
+    value: any;
 }

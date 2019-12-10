@@ -80,7 +80,7 @@ export class NavbarComponent {
     // To add new version to dropdown add new object to the end of data array,
     // number of current version is taken from package.json, rest should be specified
     // run npm show @ptsecurity/mosaic versions --json to see all mosaic versions
-    private versionData = [
+    versionData = [
             {
                 number: '8.1.0',
                 date: '9 октября',
