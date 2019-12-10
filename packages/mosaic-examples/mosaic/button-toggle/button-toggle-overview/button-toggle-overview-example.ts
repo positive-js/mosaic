@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 
 /**
- * @title Basic buttons
+ * @title button-toggle
  */
 @Component({
     selector: 'button-toggle-overview-example',

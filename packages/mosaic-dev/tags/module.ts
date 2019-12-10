@@ -3,7 +3,7 @@ import {
     AfterViewInit,
     Component,
     ElementRef,
-    NgModule, OnInit,
+    NgModule,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
