@@ -575,6 +575,11 @@ export class McSelect extends McSelectMixinBase implements
         this.stateChanges.complete();
     }
 
+    @Input()
+    hiddenItemsTextFormatter(hiddenItemsText: string, hiddenItems: number): string {
+        return `${hiddenItemsText} ${hiddenItems}`;
+    }
+
     clearValue($event): void {
         $event.stopPropagation();
 
