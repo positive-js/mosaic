@@ -155,6 +155,18 @@ const DOCS: { [key: string]: DocCategory[] } = {
                     name: 'Autocomplete',
                     summary: '',
                     examples: ['autocomplete-types']
+                },
+                {
+                    id: 'tags-input',
+                    name: 'Tags input',
+                    summary: '',
+                    examples: ['tags-input-types']
+                },
+                {
+                    id: 'tags-autocomplete',
+                    name: 'Tags autocomplete',
+                    summary: '',
+                    examples: ['tags-autocomplete-types']
                 }
             ]
         },
@@ -262,6 +274,12 @@ const DOCS: { [key: string]: DocCategory[] } = {
                     name: 'Tree',
                     summary: '',
                     examples: ['tree-types']
+                },
+                {
+                    id: 'tags-list',
+                    name: 'Tags list',
+                    summary: '',
+                    examples: ['tags-list-types']
                 }
             ]
         }
