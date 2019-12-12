@@ -7,7 +7,3 @@ mc-splitter {
 div[mc-splitter-area] {
     background: #c5c0c0
 }
-
-.flex {
-    flex: 1;
-}

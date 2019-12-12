@@ -6,20 +6,6 @@
     max-height: 100%;
 }
 
-.flex-50 {
-    flex: 1 1 100%;
-    max-width: 50%;
-    max-height: 100%;
-    box-sizing: border-box;
-}
-
-.flex-33 {
-    flex: 1 1 100%;
-    max-width: 33.33%;
-    max-height: 100%;
-    box-sizing: border-box;
-}
-
 .mc-column-container {
     margin-left: 15px;
     margin-right: 15px;

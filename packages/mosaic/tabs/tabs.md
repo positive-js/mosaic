@@ -1,8 +1,8 @@
-| Attribute          | Description                                                                 |
-|--------------------|-----------------------------------------------------------------------------|
-| `mc-tab-group`          |                                                                             |
-| `mc-tab`           |                                                                             |
+#### Default tabs
+<!-- example(tabs-overview) -->
 
-### Theming
+### Light tabs
+<!-- example(tabs-light) -->
 
-### Accessibility
+### Stretch tabs
+<!-- example(tabs-stretch) -->

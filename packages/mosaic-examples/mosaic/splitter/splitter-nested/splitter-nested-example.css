@@ -19,11 +19,3 @@ mc-splitter.without-border {
 .nested-splitter > div[mc-splitter-area] {
     background: #9f9f9f;
 }
-
-.flex {
-    flex: 1;
-}
-
-.layout-column {
-    flex-direction: column;
-}
