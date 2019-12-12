@@ -22,7 +22,7 @@
                     <div class="mc-tree-select__match-hidden-text"
                          [style.display]="hiddenItems > 0 ? 'block' : 'none'"
                          #hiddenItemsCounter>
-                        {{ hiddenItemsText }} {{ hiddenItems }}
+                        {{ hiddenItemsTextFormatter(hiddenItemsText, hiddenItems) }}
                     </div>
                 </div>
             </div>

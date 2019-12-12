@@ -105,8 +105,8 @@ export class DemoComponent {
 
     control = new FormControl(['rootNode_1']);
 
-    modelValue = 'Chrome';
-    // modelValue: any[] = ['Applications', 'Documents', 'Calendar', 'Chrome'];
+    // modelValue = 'Chrome';
+    modelValue: any[] = ['Applications', 'Documents', 'Calendar', 'Chrome'];
 
     select: any;
 
@@ -148,6 +148,10 @@ export class DemoComponent {
         // } else {
         //     treeSelect.selectionModel.deselect(...treeSelect.tree.treeControl.getDescendants($event.value.data));
         // }
+    }
+
+    hiddenItemsTextFormatter(hiddenItemsText: string, hiddenItems: number): string {
+        return `${hiddenItemsText} ${hiddenItems}`;
     }
 
     private transformer = (node: FileNode, level: number, parent: any) => {

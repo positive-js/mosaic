@@ -1,3 +1,4 @@
+/* tslint:disable:no-console */
 import { Component, NgModule, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -56,8 +57,11 @@ export class DemoComponent implements OnInit {
     }
 
     onSelectionChange($event: McSelectChange) {
-        // tslint:disable-next-line:no-console
         console.log(`onSelectionChange: ${$event.value}`);
+    }
+
+    hiddenItemsTextFormatter(hiddenItemsText: string, hiddenItems: number): string {
+        return `${hiddenItemsText} ${hiddenItems}`;
     }
 
     private getFilteredOptions(value): string[] {

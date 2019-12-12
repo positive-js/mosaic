@@ -79,6 +79,8 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
 
 .mc-tree-select__multiple-matcher {
     display: flex;
+
+    width: 100%;
 }
 
 .mc-tree-select__match-list {
