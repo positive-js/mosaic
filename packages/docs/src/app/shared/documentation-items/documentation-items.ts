@@ -199,6 +199,12 @@ const DOCS: { [key: string]: DocCategory[] } = {
                     name: 'Divider',
                     summary: '',
                     examples: ['divider-types']
+                },
+                {
+                    id: 'tabs',
+                    name: 'Tabs',
+                    summary: '',
+                    examples: ['tabs-types']
                 }
             ]
         },

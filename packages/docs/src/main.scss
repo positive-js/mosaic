@@ -32,10 +32,12 @@ $typography: mc-typography-config();
 
 @mixin docs-component-theme($theme) {
     @include mosaic-theme($theme);
+    @include layouts_for_breakpoint();
+    @include layout-padding-margin();
     @include mosaic-docs-app-theme($theme);
     @include layout-padding-margin();
     @include mc-anchors-theme($theme);
-    @include mc-navbar-theme($theme);
+    @include mc-docs-navbar-theme($theme);
     @include mc-footer-theme($theme);
     @include mc-main-layout-theme($theme);
     @include mc-sidenav-theme($theme);
