@@ -6,7 +6,6 @@
 $mc-datepicker-selected-today-box-shadow-width: 1px;
 $mc-datepicker-selected-fade-amount: 0.6;
 $mc-datepicker-today-fade-amount: 0.2;
-$mc-calendar-weekday-table-font-size: 11px !default;
 
 @mixin _mc-datepicker-color($color) {
     .mc-calendar__body_selected {
@@ -152,7 +151,7 @@ $mc-calendar-weekday-table-font-size: 11px !default;
 
     .mc-calendar__table-header th {
         font: {
-            size: $mc-calendar-weekday-table-font-size;
+            size: mc-font-size($config, caption);
             weight: mc-font-weight($config, body);
         }
     }
