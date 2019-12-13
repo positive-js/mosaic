@@ -1,0 +1,39 @@
+<br><br>
+
+<div class="example-controls">
+    <div class="layout-column flex">
+        <label class="layout-padding">'Block 1'</label>
+        <mc-form-field>
+            <mc-select [(value)]="selectedFirstBlockOrder">
+                <mc-option *ngFor="let flexOrder of flexOrders" [value]="flexOrder">{{ flexOrder }}</mc-option>
+            </mc-select>
+        </mc-form-field>
+    </div>
+
+    <div class="layout-column flex">
+        <label class="layout-padding">'Block 2'</label>
+        <mc-form-field>
+            <mc-select [(value)]="selectedSecondBlockOrder">
+                <mc-option *ngFor="let flexOrder of flexOrders" [value]="flexOrder">{{ flexOrder }}</mc-option>
+            </mc-select>
+        </mc-form-field>
+    </div>
+
+    <div class="layout-column flex">
+        <label class="layout-padding">'Block 3'</label>
+        <mc-form-field>
+            <mc-select [(value)]="selectedThirdBlockOrder">
+                <mc-option *ngFor="let flexOrder of flexOrders" [value]="flexOrder">{{ flexOrder }}</mc-option>
+            </mc-select>
+        </mc-form-field>
+    </div>
+</div>
+
+<br><br>
+
+<div class="layout-row block">
+    <div class="flex block {{ selectedFirstBlockOrder }}">Block 1</div>
+    <div class="flex block {{ selectedSecondBlockOrder }}">Block 2</div>
+    <div class="flex block {{ selectedThirdBlockOrder }}">Block 3</div>
+</div>
+
