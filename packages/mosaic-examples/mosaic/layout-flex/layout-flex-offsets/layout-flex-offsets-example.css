@@ -1,0 +1,24 @@
+.example-controls {
+    display: flex;
+    flex-direction: row;
+}
+
+.mc-form-field {
+    max-width: 20%;
+
+    margin-left: 32px;
+}
+
+.block {
+    border: 1px solid black;
+    padding: 8px;
+}
+
+.mc-radio-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.mc-radio-button {
+    margin-bottom: 8px;
+}

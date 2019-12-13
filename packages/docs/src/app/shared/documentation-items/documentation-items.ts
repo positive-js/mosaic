@@ -217,6 +217,12 @@ const DOCS: { [key: string]: DocCategory[] } = {
                     name: 'Tabs',
                     summary: '',
                     examples: ['tabs-types']
+                },
+                {
+                    id: 'layout-flex',
+                    name: 'Layout flex',
+                    summary: '',
+                    examples: ['layout-flex-types']
                 }
             ]
         },
