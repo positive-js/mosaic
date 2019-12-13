@@ -40,14 +40,14 @@ export const enUS: IFormatterConfig = {
 
     relativeTemplates: {
         short: {
-            SECONDS_AGO: 'just now',
+            SECONDS_AGO: 'Just now',
             MINUTES_AGO: '{MINUTES_PASSED}{NBSP}min ago',
             TODAY: '{TIME}',
             YESTERDAY: 'Yesterday, {TIME}',
             BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE}, {YEAR}}}'
         },
         long: {
-            SECONDS_AGO: 'just now',
+            SECONDS_AGO: 'Just now',
             MINUTES_AGO: '{MINUTES_PASSED, plural, =1{#{NBSP}minute} other{#{NBSP}minutes}} ago',
             TODAY: '{TIME}',
             YESTERDAY: 'Yesterday, {TIME}',
