@@ -1,0 +1,23 @@
+<br><br>
+
+<div class="example-controls">
+    <mc-form-field>
+        <mc-select [(value)]="selectedSize">
+            <mc-option *ngFor="let flexSize of flexSizes" [value]="flexSize">{{ flexSize }}</mc-option>
+        </mc-select>
+    </mc-form-field>
+
+    <mc-form-field>
+        <mc-select [(value)]="selectedOffset">
+            <mc-option *ngFor="let flexOffset of flexOffsets" [value]="flexOffset">{{ flexOffset }}</mc-option>
+        </mc-select>
+    </mc-form-field>
+</div>
+
+<br><br>
+
+<div class="layout-row block">
+    <div class="{{selectedSize}} {{selectedOffset}} block">{{selectedSize}} {{selectedOffset}}</div>
+    <div class="{{selectedSize}} {{selectedOffset}} block">{{selectedSize}} {{selectedOffset}}</div>
+    <div class="{{selectedSize}} {{selectedOffset}} block">{{selectedSize}} {{selectedOffset}}</div>
+</div>
