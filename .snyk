@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.13.5
+version: v1.14.0
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
   SNYK-JS-USERAGENT-174737:
@@ -14,4 +14,12 @@ ignore:
     - gulp-markdown > marked:
         reason: затратно править файлы документации
         expires: '2019-10-30T12:28:17.125Z'
-patch: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-TREEKILL-536781:
+    - '@angular-devkit/build-angular > tree-kill':
+        patched: '2019-12-14T02:25:16.699Z'
+    - '@angular-devkit/build-angular > @ngtools/webpack > tree-kill':
+        patched: '2019-12-14T02:25:16.699Z'
+    - snyk > snyk-sbt-plugin > tree-kill:
+        patched: '2019-12-14T02:25:16.699Z'
