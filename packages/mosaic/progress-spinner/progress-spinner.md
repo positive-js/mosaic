@@ -7,6 +7,7 @@ A `<mc-progress-spinner>` element can be used on its own to create a sector prog
 ```html
 <mc-progress-spinner></mc-progress-spinner>
 ```
+<!-- example(progress-spinner-overview) -->
 
 ### Props
 
@@ -30,6 +31,7 @@ To show indeterminate progress
 Or for determinate progress
 <mc-progress-spinner mode="determinate" value="30"></mc-progress-spinner>
 ```
+<!-- example(progress-spinner-indeterminate) -->
 
 #### `color`
 Enum ('primary', 'second', 'error')
