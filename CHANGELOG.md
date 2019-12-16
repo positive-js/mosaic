@@ -1,3 +1,20 @@
+## 8.2.2 "Fluent Order" (2019-12-16)
+
+### Mosaic
+
+
+ * bug fix  **select, tree-select:** added formatter for hidden text (#UIM-319) ([#363](https://github.com/positive-js/mosaic/issues/363)) ([39be15c185f6953faec2637235cadb366072c1ea](https://github.com/positive-js/mosaic/commit/39be15c185f6953faec2637235cadb366072c1ea)), closes [#UIM-319](https://github.com/positive-js/mosaic/issues/UIM-319)
+ * bug fix  **typography:** fix subheading font-weight(#UIM-330) ([#369](https://github.com/positive-js/mosaic/issues/369)) ([1821dc2f5189b73afcae451587845be6e8e46dfe](https://github.com/positive-js/mosaic/commit/1821dc2f5189b73afcae451587845be6e8e46dfe)), closes [#UIM-330](https://github.com/positive-js/mosaic/issues/UIM-330)
+ * bug fix  **typography:** replace font-size numbers with typography mixixs (#UIM-271) ([#360](https://github.com/positive-js/mosaic/issues/360)) ([60dd7ce9c9a2d14b91ec08e35421344d1a49f7ad](https://github.com/positive-js/mosaic/commit/60dd7ce9c9a2d14b91ec08e35421344d1a49f7ad)), closes [#UIM-271](https://github.com/positive-js/mosaic/issues/UIM-271)
+
+### Docs
+
+
+ * feature  **docs:** added autocomplete, button-toggle, tags, toggle (#UIM-297, #UIM-300, #UIM-303, #UIM-306) ([#359](https://github.com/positive-js/mosaic/issues/359)) ([0cbe3fc7d4b0e337b847fc5ed05fe7220034963c](https://github.com/positive-js/mosaic/commit/0cbe3fc7d4b0e337b847fc5ed05fe7220034963c)), closes [#UIM-297](https://github.com/positive-js/mosaic/issues/UIM-297) [#UIM-300](https://github.com/positive-js/mosaic/issues/UIM-300) [#UIM-303](https://github.com/positive-js/mosaic/issues/UIM-303) [#UIM-306](https://github.com/positive-js/mosaic/issues/UIM-306)
+ * feature  **docs:** added layout flex (#UIM-329) ([#367](https://github.com/positive-js/mosaic/issues/367)) ([e985aac7ee84eb41edc08c4457931525821fe96b](https://github.com/positive-js/mosaic/commit/e985aac7ee84eb41edc08c4457931525821fe96b)), closes [#UIM-329](https://github.com/positive-js/mosaic/issues/UIM-329)
+ * feature  **docs:** added navbar and tabs (#UIM-326) ([#366](https://github.com/positive-js/mosaic/issues/366)) ([88d1da7fe799ff9aa6dd524011c8f8cd8f90efec](https://github.com/positive-js/mosaic/commit/88d1da7fe799ff9aa6dd524011c8f8cd8f90efec)), closes [#UIM-326](https://github.com/positive-js/mosaic/issues/UIM-326)
+ * feature  **docs:** added popover and tooltip (#UIM-311, #UIM-314) ([#361](https://github.com/positive-js/mosaic/issues/361)) ([cd5b264a58b9ae3fc522b61e0ae9d2bbaf955f97](https://github.com/positive-js/mosaic/commit/cd5b264a58b9ae3fc522b61e0ae9d2bbaf955f97)), closes [#UIM-311](https://github.com/positive-js/mosaic/issues/UIM-311) [#UIM-314](https://github.com/positive-js/mosaic/issues/UIM-314)
+
 ## 8.2.1 "Bleakest hawker" (2019-12-04)
 
 ### Mosaic
