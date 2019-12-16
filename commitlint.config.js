@@ -21,6 +21,7 @@ module.exports = {
                 'docs',
                 'dropdown',
                 'overlay',
+                'formatter',
                 'form-field',
                 'icon',
                 'input',
