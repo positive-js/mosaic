@@ -45,6 +45,7 @@
             background: mc-color($primary, if($is-dark-theme, 700, 100));
         }
 
+        &.mc-disabled,
         &[disabled] {
             background: transparent;
 

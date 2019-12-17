@@ -2,6 +2,9 @@
 
 
 .mc-optgroup-label {
+    padding-left: 16px;
+
     @include user-select(none);
+
     cursor: default;
 }

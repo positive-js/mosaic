@@ -19,7 +19,8 @@ import {
     OnDestroy,
     OnInit,
     ViewChild,
-    NgZone
+    NgZone,
+    Optional
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FocusKeyManager, IFocusableOption } from '@ptsecurity/cdk/a11y';
@@ -44,7 +45,8 @@ import {
     HasTabIndexCtor,
     mixinTabIndex,
     HasTabIndex,
-    MultipleMode
+    MultipleMode,
+    McOptgroup
 } from '@ptsecurity/mosaic/core';
 import { merge, Observable, Subject, Subscription } from 'rxjs';
 import { startWith, take, takeUntil } from 'rxjs/operators';
@@ -69,6 +71,7 @@ export interface McOptionEvent {
         class: 'mc-list-option',
         '[class.mc-selected]': 'selected',
         '[class.mc-focused]': 'hasFocus',
+        '[class.mc-disabled]': 'disabled',
 
         '(focus)': 'focus()',
         '(blur)': 'blur()',
@@ -97,7 +100,8 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
 
     @Input()
     get disabled() {
-        return this._disabled || (this.listSelection && this.listSelection.disabled);
+        return (this.listSelection && this.listSelection.disabled) || (this.group && this.group.disabled) ||
+            this._disabled;
     }
 
     set disabled(value: any) {
@@ -147,7 +151,8 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
         private elementRef: ElementRef<HTMLElement>,
         private changeDetector: ChangeDetectorRef,
         private ngZone: NgZone,
-        @Inject(forwardRef(() => McListSelection)) public listSelection: McListSelection
+        @Inject(forwardRef(() => McListSelection)) public listSelection: McListSelection,
+        @Optional() readonly group: McOptgroup
     ) {}
 
     ngOnInit() {
@@ -290,8 +295,7 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
 
     keyManager: FocusKeyManager<McListOption>;
 
-    // The option components contained within this selection-list.
-    @ContentChildren(McListOption) options: QueryList<McListOption>;
+    @ContentChildren(McListOption, { descendants: true }) options: QueryList<McListOption>;
 
     autoSelect: boolean;
     noUnselect: boolean;

@@ -6,3 +6,6 @@
 
 #### With search
 <!-- example(select-search-overview) -->
+
+#### With groups
+<!-- example(select-groups) -->
