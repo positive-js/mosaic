@@ -1,0 +1,7 @@
+.example-progress-spinner-group {
+    display: flex;
+}
+
+.example-progress-spinner-element {
+    margin-right: 8px;
+}

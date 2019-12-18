@@ -1,40 +1,42 @@
-`<mc-progress-spinner>` is a component that allows display progress spinner.
+`<mc-progress-spinner>` - компонент, отображающий индикатор загрузки в виде спиннера.
 
 ### Simple progress spinner
 
-A `<mc-progress-spinner>` element can be used on its own to create a sector progress with Mosaic theme
+Элемент `<mc-progress-spinner>` может быть использован отдельно для создания сектора прогресса с темой Mosaic.
 
 ```html
 <mc-progress-spinner></mc-progress-spinner>
 ```
+<!-- example(progress-spinner-overview) -->
 
 ### Props
 
 #### `value`
-Displaying sector filling progress depends on this property  
-The range of value is [0, 100]  
-Default: 0
+Степень заполнения сектора, определяющая прогресс, зависит от свойства value. 
+Его значение может меняться в диапазоне [0, 100].
+Значение по-умолчанию: 0
 
 ```html
-This will fill 30% of the sector
+Такое значение заполнит 30% сектора
 <mc-progress-spinner value="30"></mc-progress-spinner>
 ```
 
 #### `mode`
-Enum ('determinate', 'indeterminate')  
-Default: 'determinate'  
+Возможные значения: 'determinate', 'indeterminate'.
+Значение по-умолчанию: 'determinate'.
 
 ```html
-To show indeterminate progress
+Для отображения неопределенного по завершенности прогресса:
 <mc-progress-spinner mode="indeterminate"></mc-progress-spinner>
-Or for determinate progress
+Для отображения определенного по завершенности прогресса:
 <mc-progress-spinner mode="determinate" value="30"></mc-progress-spinner>
 ```
+<!-- example(progress-spinner-indeterminate) -->
 
 #### `color`
-Enum ('primary', 'second', 'error')
-Default: 'primary'
-Set theming of element
+Возможные значения: 'primary', 'second', 'error'.
+Значение по-умолчанию: 'primary'.
+Это свойство задает тему элемента.
 
 ```html
 <mc-progress-spinner color="primary"></mc-progress-spinner>
@@ -43,5 +45,5 @@ Set theming of element
 ```
 
 ### Theming
-The color of a `<mc-progress-spinner>` can be changed by using the `color` property. By default, it
-use the theme's `primary` color. This can be changed to `'second'` or `'error'`.
+Цвет `<mc-progress-spinner>` можно менять с помощью свойства `color`. 
+По умолчанию используется установленный в теме цвет `primary`. Его можно изменить на `'second'` или `'error'`.
