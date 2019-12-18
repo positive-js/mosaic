@@ -1,11 +1,11 @@
 #### With default parameters
 <!-- example(select-overview) -->
 
-#### Multiple select
+### Multiple select
 <!-- example(select-multiple-overview) -->
 
-#### With search
+### With search
 <!-- example(select-search-overview) -->
 
-#### With groups
+### With groups
 <!-- example(select-groups) -->

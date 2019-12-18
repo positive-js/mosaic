@@ -2,13 +2,13 @@
 <!-- example(list-overview) -->
 
 
-#### Multiple mode with checkboxes
+### Multiple mode with checkboxes
 <!-- example(list-multiple-checkbox) -->
 
 
-#### Multiple mode without checkboxes
+### Multiple mode without checkboxes
 <!-- example(list-multiple-keyboard) -->
 
 
-#### Multiple mode without checkboxes
+### Multiple mode without checkboxes
 <!-- example(list-groups) -->
