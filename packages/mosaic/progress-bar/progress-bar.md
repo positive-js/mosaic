@@ -1,8 +1,8 @@
-`<mc-progress-bar>` is a component that allows display progress bar.
+`<mc-progress-bar>` - компонент, отображающий индикатор выполнения.
 
 ### Simple progress bar
 
-A `<mc-progress-bar>` element can be used on its own to create a horizontal progress line with Mosaic theme
+Элемент `<mc-progress-bar>` может быть использован отдельно для создания горизонтальной линии прогресса с темой Mosaic.
 
 ```html
 <mc-progress-bar></mc-progress-bar>
@@ -11,33 +11,33 @@ A `<mc-progress-bar>` element can be used on its own to create a horizontal prog
 ### Props
 
 #### `value`
-Displaying length of progress bar depends on this property  
-The range of value is [0, 100]  
-Default: 0
+Степень заполнения линии, определяющая прогресс, зависит от свойства value.
+Его значение может меняться в диапазоне [0, 100].
+Значение по-умолчанию: 0
 
 ```html
-This will fill 30% of the hole progress bar
+Такое значение заполнит 30% линии
 <mc-progress-bar value="30"></mc-progress-bar>
 ```
 <!-- example(progress-bar-overview) -->
 
 #### `mode`
-Enum ('determinate', 'indeterminate')  
-Default: 'determinate'  
+Возможные значения: 'determinate', 'indeterminate'.
+Значение по-умолчанию: 'determinate'.  
 
 ```html
-To show indeterminate progress
+Для отображения неопределенного по завершенности прогресса:
 <mc-progress-bar mode="indeterminate"></mc-progress-bar>
-Or for determinate progress
+Для отображения определенного по завершенности прогресса:
 <mc-progress-bar mode="determinate" value="30"></mc-progress-bar>
 ```
 <!-- example(progress-bar-indeterminate) -->
 
 
 #### `color`
-Enum ('primary', 'second', 'error')  
-Default: 'primary'  
-Set theming of element
+Возможные значения: 'primary', 'second', 'error'.
+Значение по-умолчанию: 'primary'.
+Это свойство задает тему элемента.
 
 ```html
 <mc-progress-bar color="primary"></mc-progress-bar>
@@ -46,5 +46,5 @@ Set theming of element
 ```
 
 ### Theming
-The color of a `<mc-progress-bar>` can be changed by using the `color` property. By default, it
-use the theme's `primary` color. This can be changed to `'second'` or `'error'`.
+Цвет `<mc-progress-bar>` можно менять с помощью свойства `color`. 
+По умолчанию используется установленный в теме цвет `primary`. Его можно изменить на `'second'` или `'error'`.
