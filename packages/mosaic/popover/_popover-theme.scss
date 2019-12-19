@@ -11,8 +11,8 @@
     $is-dark: map-get($theme, is-dark);
 
     $primary-background-color: map-get($background, background);
-    $secondary-background-color: if($is-dark, map-get($background, background), map-get($background, button-bg));
-    $border-color: if($is-dark, $primary-background-color, map-get($foreground, disabled-text));
+    $secondary-background-color: if($is-dark, map-get($background, background), map-get($background, background-disabled));
+    $border-color: if($is-dark, $primary-background-color, map-get($foreground, text-disabled));
 
     .mc-popover {
         border-color: $border-color;

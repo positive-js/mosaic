@@ -11,7 +11,7 @@
 
     $color: mc-color($primary);
     $color_hover: mc-color($primary, if($is-dark, lighter, darker));
-    $color_disabled: mc-color($foreground, disabled-text);
+    $color_disabled: mc-color($foreground, text-disabled);
 
     .mc-link {
         color: $color;

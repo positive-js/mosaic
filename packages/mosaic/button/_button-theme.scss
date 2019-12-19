@@ -14,7 +14,7 @@
     &:hover,
     &.mc-hover {
         & .mc-button-overlay {
-            background: map-get($background, hover);
+            background: map-get($background, overlay-hovered);
         }
     }
 
@@ -31,7 +31,7 @@
         color: transparentize(mc-contrast($palette, 500), 0.5);
 
         & .mc-button-overlay {
-            background: mc-color($background, disabled-overlay);
+            background: mc-color($background, overlay-disabled);
         }
 
         .mc-icon {
@@ -41,8 +41,8 @@
 }
 
 @mixin _mc-button-second-color($palette, $foreground, $background) {
-    border-color: mc-color($background, button-border);
-    background: map-get($background, button-bg);
+    border-color: mc-color($foreground, border);
+    background: map-get($background, background-disabled);
     color: map-get($foreground, text);
 
     .mc-icon {
@@ -52,28 +52,28 @@
     &:hover,
     &.mc-hover {
         & .mc-button-overlay {
-            background: map-get($background, hover);
+            background: map-get($background, overlay-hovered);
         }
     }
 
     &:active,
     &.mc-active {
-        border-color: darken(mc-color($background, button-border), 5);
-        background: darken(map-get($background, button-bg), 5);
+        border-color: darken(mc-color($foreground, border), 5);
+        background: darken(map-get($background, background-disabled), 5);
         box-shadow: map-get($background, in-shadow);
     }
 
     &.mc-disabled,
     &[disabled] {
-        border-color: mc-color($background, button-bg);
-        color: map-get($foreground, disabled-text);
+        border-color: mc-color($background, background-disabled);
+        color: map-get($foreground, text-disabled);
 
         & .mc-button-overlay {
-            background: mc-color($background, disabled-overlay);
+            background: mc-color($background, overlay-disabled);
         }
 
         .mc-icon {
-            color: map-get($foreground, disabled-text);
+            color: map-get($foreground, text-disabled);
         }
     }
 }
@@ -89,15 +89,15 @@
 
     &.mc-disabled,
     &[disabled] {
-        border-color: mc-color($background, button-bg);
-        color: map-get($foreground, disabled-text);
+        border-color: mc-color($background, background-disabled);
+        color: map-get($foreground, text-disabled);
 
         & .mc-button-overlay {
-            background: mc-color($background, disabled-overlay);
+            background: mc-color($background, overlay-disabled);
         }
 
         .mc-icon {
-            color: map-get($foreground, disabled-text);
+            color: map-get($foreground, text-disabled);
         }
     }
 }
