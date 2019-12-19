@@ -8,3 +8,7 @@
 
 ### Multiple mode without checkboxes
 <!-- example(list-multiple-keyboard) -->
+
+
+### Multiple mode without checkboxes
+<!-- example(list-groups) -->
