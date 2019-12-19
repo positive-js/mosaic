@@ -26,7 +26,7 @@
 
         &:hover,
         &.mc-hovered {
-            background: mc-color($background, hover);
+            background: mc-color($background, overlay-hovered);
         }
 
         &.cdk-keyboard-focused {
@@ -44,19 +44,19 @@
         }
 
         &[disabled] {
-            color: mc-color($foreground, disabled-text);
+            color: mc-color($foreground, text-disabled);
 
             background: transparent;
         }
 
         .mc-dropdown__item-caption {
-            color: mc-color($foreground, less-contrast-text);
+            color: mc-color($foreground, text-less-contrast);
         }
     }
 
     .mc-dropdown__item_highlighted {
         &:not([disabled]) {
-            background: mc-color($background, hover);
+            background: mc-color($background, overlay-hovered);
         }
     }
 }

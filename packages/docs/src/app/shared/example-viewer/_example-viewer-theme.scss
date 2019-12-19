@@ -8,7 +8,7 @@
     $error-border: mc-color($error, 200);
     $error-background: mc-color($error, 60);
     $divider: mc-color($foreground, divider);
-    $hint-text: mc-color($foreground, less-contrast-text);
+    $hint-text: mc-color($foreground, text-less-contrast);
     $text: mc-color($foreground, text);
     $example-border: if($is-dark, $text, $hint-text);
 

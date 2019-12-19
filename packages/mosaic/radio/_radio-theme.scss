@@ -25,7 +25,7 @@
 
         &:hover {
             & .mc-radio-button__outer-circle {
-                background: mix(map-get($background, background), map-get($background, hover), 5);
+                background: mix(map-get($background, background), map-get($background, overlay-hovered), 5);
             }
         }
 
@@ -56,20 +56,20 @@
         }
 
         &.mc-disabled {
-            color: map-get($foreground, disabled-text);
+            color: map-get($foreground, text-disabled);
 
             & .mc-radio-label {
                 cursor: default;
             }
 
             & .mc-radio-button__outer-circle {
-                border-color: map-get($background, button-border);
+                border-color: map-get($foreground, border);
 
-                background: map-get($background, button-bg);
+                background: map-get($background, background-disabled);
             }
 
             & .mc-radio-button__inner-circle {
-                border-color: map-get($background, button-bg);
+                border-color: map-get($background, background-disabled);
 
                 box-shadow: none;
 

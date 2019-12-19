@@ -26,13 +26,13 @@
         }
 
         &.mc-disabled {
-            border-color: map-get($background, button-border);
+            border-color: map-get($foreground, border);
 
-            background-color: map-get($background, button-bg);
+            background-color: map-get($background, background-disabled);
 
             .mc-checkbox-checkmark,
             .mc-checkbox-mixedmark {
-                color: map-get($foreground, disabled-text);
+                color: map-get($foreground, text-disabled);
             }
         }
     }

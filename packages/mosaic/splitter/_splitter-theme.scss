@@ -10,11 +10,11 @@
         cursor: col-resize;
 
         &:hover {
-            background-color: mix(map-get($background, button-bg), map-get($background, hover));
+            background-color: mix(map-get($background, background-disabled), map-get($background, overlay-hovered));
         }
 
         &.mc-gutter_dragged {
-            background-color: mix(map-get($background, button-bg), map-get($background, hover));
+            background-color: mix(map-get($background, background-disabled), map-get($background, overlay-hovered));
         }
 
         &.mc-gutter_vertical {
@@ -22,7 +22,7 @@
         }
 
         &[disabled] {
-            background-color: mix(map-get($background, disabled-overlay), map-get($background, hover));
+            background-color: mix(map-get($background, overlay-disabled), map-get($background, overlay-hovered));
 
             cursor: default;
         }

@@ -17,7 +17,7 @@
         &:hover:not(.mc-disabled),
         &.mc-hovered:not(.mc-disabled) {
             .mc-option-overlay {
-                background: mc-color($background, hover);
+                background: mc-color($background, overlay-hovered);
             }
         }
 
@@ -33,7 +33,7 @@
         &.mc-disabled {
             background: transparent;
 
-            color: mc-color($foreground, disabled-text);
+            color: mc-color($foreground, text-disabled);
         }
     }
 }
