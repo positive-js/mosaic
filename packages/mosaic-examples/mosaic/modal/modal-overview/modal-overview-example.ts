@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { McModalRef, McModalService } from '@ptsecurity/mosaic/modal';
+// tslint:disable:no-console
+import { Component } from '@angular/core';
+import { McModalService } from '@ptsecurity/mosaic/modal';
 
 
 /**
@@ -12,46 +13,35 @@ import { McModalRef, McModalService } from '@ptsecurity/mosaic/modal';
 })
 export class ModalOverviewExample {
 
-    constructor(
-        private modalService: McModalService
-    ) {}
+    constructor(private modalService: McModalService) {}
 
-    openModal() {
-        this.modalService.open({
-            mcComponent: McModalCustomComponent
+    showConfirmModal() {
+        this.modalService.confirm({
+            mcContent   : 'Save changes?',
+            mcOkText    : 'Save',
+            mcCancelText: 'Cancel',
+            mcOnOk      : () => console.log('OK')
         });
     }
-}
 
-@Component({
-    selector: 'mc-modal-full-custom-component',
-    template: `
-        <mc-modal-title>
-            Modal Title
-        </mc-modal-title>
+    showSuccessModal() {
+        this.modalService.success({
+            mcContent   : 'All changes are saved!',
+            mcOkText    : 'ОК',
+            mcCancelText: 'Cancel',
+            mcOnOk      : () => console.log('OK')
+        });
+    }
 
-        <mc-modal-body>
-            <h2>{{ title }}</h2>
-            <h4>{{ subtitle }}</h4>
-            <p>
-                <span>Get Modal instance in component</span>
-                <button mc-button color="primary" (click)="destroyModal()">destroy modal in the component</button>
-            </p>
-        </mc-modal-body>
-
-        <div mc-modal-footer>
-            <button mc-button color="primary" >Save</button>
-            <button mc-button autofocus>Close</button>
-        </div>
-  `
-})
-export class McModalCustomComponent {
-    @Input() title: string;
-    @Input() subtitle: string;
-
-    constructor(private modal: McModalRef) { }
-
-    destroyModal() {
-        this.modal.destroy({ data: 'this the result data' });
+    showDeleteModal() {
+        this.modalService.delete({
+            mcContent   : 'The tasks, policies and tags associated with the customer will be deleted too. Delete selected customer?',
+            mcOkType    : 'error',
+            mcOkText    : 'Delete',
+            mcCancelText: 'Cancel',
+            mcWidth     : '480px',
+            mcOnOk      : () => console.log('Delete'),
+            mcOnCancel  : () => console.log('Cancel')
+        });
     }
 }
