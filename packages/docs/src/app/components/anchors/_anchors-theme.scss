@@ -5,7 +5,7 @@
     $text: mc-color($foreground, text);
     $primary: map_get($theme, primary);
     $primary_500: mc-color($primary, 500);
-    $shadow: mc-color($foreground, less-contrast-text);
+    $shadow: mc-color($foreground, text-less-contrast);
 
     .anchors-menu {
         background-color: $background-color;

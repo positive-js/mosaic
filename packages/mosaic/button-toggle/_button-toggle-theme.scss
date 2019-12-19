@@ -28,13 +28,13 @@
     .mc-button-toggle-checked:not([disabled]) {
         .mc-button,
         .mc-icon-button {
-            background: darken(map-get($background, button-bg), 5);
+            background: darken(map-get($background, background-disabled), 5);
         }
 
         &:not(.cdk-keyboard-focused) {
             .mc-button,
             .mc-icon-button {
-                border-color: darken(mc-color($background, button-border), 5);
+                border-color: darken(mc-color($foreground, border), 5);
                 box-shadow: map-get($background, in-shadow);
             }
         }

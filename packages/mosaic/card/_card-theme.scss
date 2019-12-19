@@ -29,11 +29,11 @@
 
     .mc-card {
         color: map-get($foreground, text);
-        
+
         &.mc-card_info {
             @include normal-state($info, $second, $is-dark);
         }
-        
+
         &.mc-card_warning {
             @include normal-state($warning, $second, $is-dark);
         }
@@ -57,7 +57,7 @@
         // todo мне кажется тут можно сделать без overlay
         &:not(.mc-card_readonly):hover {
             .mc-card__overlay {
-                background: map-get($background, hover);
+                background: map-get($background, overlay-hovered);
             }
         }
 

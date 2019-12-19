@@ -59,17 +59,17 @@
 
             &.mc-disabled .mc-form-field__container {
                 border: {
-                    color: mix(map-get($background, button-border), map-get($background, disabled-overlay));
+                    color: mix(map-get($foreground, border), map-get($background, overlay-disabled));
                 }
 
                 background: {
-                    color: mix(map-get($background, button-bg), map-get($background, disabled-overlay));
+                    color: mix(map-get($background, background-disabled), map-get($background, overlay-disabled));
                 }
 
                 .mc-icon,
                 .mc-input,
                 .mc-textarea {
-                    color: mc-color($foreground, disabled-text);
+                    color: mc-color($foreground, text-disabled);
                 }
             }
         }
@@ -80,7 +80,7 @@
     }
 
     .mc-form-field__prefix .mc-icon {
-        color: map-get($foreground, disabled-text);
+        color: map-get($foreground, text-disabled);
     }
 }
 

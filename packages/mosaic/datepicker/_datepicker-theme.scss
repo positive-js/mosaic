@@ -62,7 +62,7 @@ $mc-datepicker-today-fade-amount: 0.2;
     }
 
     .mc-calendar__body_disabled > .mc-calendar__body-cell-content:not(.mc-calendar__body_selected) {
-        color: mc-color($foreground, disabled-text);
+        color: mc-color($foreground, text-disabled);
     }
 
     .cdk-keyboard-focused .mc-calendar__body_active,
