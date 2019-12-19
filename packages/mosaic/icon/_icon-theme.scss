@@ -30,8 +30,7 @@
         }
 
         &.mc-second {
-            // todo Миша, less-contrast-text - в темной теме не такой как на макетах.
-            color: map-get($foreground, less-contrast-text);
+            color: map-get($foreground, text-less-contrast);
 
             &[disabled],
             &.mc-disabled {

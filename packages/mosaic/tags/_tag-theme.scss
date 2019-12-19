@@ -24,7 +24,7 @@
     }
 
     &:not(.mc-disabled) .mc-icon {
-        color: mix(mc-color($main-color, 400), mc-color($background, hover));
+        color: mix(mc-color($main-color, 400), mc-color($background, overlay-hovered));
 
         &:hover {
             cursor: pointer;
@@ -59,7 +59,7 @@
         &:hover:not(.mc-disabled),
         &.mc-hovered:not(.mc-disabled) {
             & .mc-tag-overlay {
-                background: mc-color($background, hover);
+                background: mc-color($background, overlay-hovered);
             }
         }
     }
@@ -68,15 +68,15 @@
         color: map-get($foreground, text);;
 
         &::placeholder {
-            color: map-get($foreground, disabled-text);;
+            color: map-get($foreground, text-disabled);;
         }
 
         &::-ms-input-placeholder {
-            color: map-get($foreground, disabled-text);;
+            color: map-get($foreground, text-disabled);;
         }
 
         &::-webkit-input-placeholder {
-            color: map-get($foreground, disabled-text);;
+            color: map-get($foreground, text-disabled);;
         }
     }
 }

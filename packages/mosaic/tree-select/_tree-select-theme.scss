@@ -21,12 +21,12 @@
         }
 
         &.mc-disabled {
-            color: mc-color($foreground, disabled-text);
+            color: mc-color($foreground, text-disabled);
         }
     }
 
     .mc-tree-select__placeholder {
-        color: mc-color($foreground, disabled-text);
+        color: mc-color($foreground, text-disabled);
     }
 
     .mc-tree-select__panel {

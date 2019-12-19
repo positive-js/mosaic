@@ -11,7 +11,7 @@
 
     $is-dark: map-get($theme, is-dark);
 
-    $background-color: mc-color($background, bg-dropdowns);
+    $background-color: mc-color($background, background-second);
 
     .mc-tooltip-inner {
         color: if($is-dark, mc-color($second, 700), mc-contrast($second, 700));

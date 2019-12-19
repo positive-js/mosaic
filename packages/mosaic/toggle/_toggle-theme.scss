@@ -18,19 +18,19 @@ $hover-darken: 5%;
         color: map-get($foreground, text);
 
         .mc-toggle-bar {
-            background: map-get($background, button-bg);
-            border-color: mc-color($background, button-border);
+            background: map-get($background, background-disabled);
+            border-color: mc-color($foreground, border);
         }
 
         .mc-toggle__circle {
-            border-color: mc-color($background, button-border);
+            border-color: mc-color($foreground, border);
 
             background: linear-gradient(to bottom, white, if($is-dark, white, mc-color($second, lighter)));
         }
 
         &.mc-toggle_off {
             .mc-toggle-bar {
-                background: linear-gradient(to bottom, mc-color($second, lighter), mc-color($background, button-bg));
+                background: linear-gradient(to bottom, mc-color($second, lighter), mc-color($background, background-disabled));
 
                 @if $is-dark {
                     background: map-get($background, background);
@@ -40,7 +40,7 @@ $hover-darken: 5%;
 
         &:hover {
             & .mc-toggle__focus-frame {
-                background: map-get($background, hover);
+                background: map-get($background, overlay-hovered);
             }
         }
 
@@ -65,7 +65,7 @@ $hover-darken: 5%;
         }
 
         &.mc-disabled {
-            color: map-get($foreground, disabled-text);
+            color: map-get($foreground, text-disabled);
 
             &.mc-toggle_off {
                 .mc-toggle-bar {
@@ -76,7 +76,7 @@ $hover-darken: 5%;
             }
 
             & .mc-toggle__focus-frame {
-                background: map-get($background, disabled-overlay);
+                background: map-get($background, overlay-disabled);
             }
         }
     }

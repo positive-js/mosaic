@@ -1,22 +1,16 @@
 @import '../core/theming/theming';
 @import '../core/styles/typography/typography-utils';
+@import '../core/styles/common/popup';
 
 
 @mixin mc-dropdown-theme($theme) {
-    $primary: map-get($theme, primary);
-    $second: map-get($theme, second);
-
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    $is-dark: map-get($theme, is-dark);
+    $selected-color: map-get(map-get($theme, states), selected-color);
 
     .mc-dropdown__panel {
-        border-color: mc-color($second);
-
-        box-shadow: 0 3px 3px 0 mc-color($second, A200);
-
-        background-color: if($is-dark, map-get($second, 700), map-get($background, background));
+        @include popup-params($theme);
     }
 
     .mc-dropdown__item {
@@ -24,13 +18,14 @@
 
         background: transparent;
 
-        &:hover,
-        &.mc-hovered {
-            background: mc-color($background, hover);
+        &:hover {
+            background: mc-color($background, overlay-hovered);
         }
 
         &.cdk-keyboard-focused {
-            outline: mc-color($primary) solid 2px;
+            $focused-color: map-get(map-get($theme, states), focused-color);
+
+            outline: $focused-color solid 2px;
             outline-offset: -2px;
 
             &.mc-link {
@@ -39,25 +34,22 @@
         }
 
         &.mc-selected {
-            background: mc-color($primary, if($is-dark, 700, 100));
+            background: $selected-color;
         }
 
-        &[disabled],
-        &.mc-disabled {
-            color: mc-color($foreground, disabled-text);
+        &[disabled] {
+            color: mc-color($foreground, text-disabled);
 
             background: transparent;
         }
 
         .mc-dropdown__item-caption {
-            color: mc-color($foreground, less-contrast-text);
+            color: mc-color($foreground, text-less-contrast);
         }
     }
 
-    .mc-dropdown__item_highlighted {
-        &:not([disabled]):not(.mc-disabled){
-            background: mc-color($background, hover);
-        }
+    .mc-dropdown__item_highlighted:not([disabled]) {
+        background: mc-color($background, overlay-hovered);
     }
 }
 

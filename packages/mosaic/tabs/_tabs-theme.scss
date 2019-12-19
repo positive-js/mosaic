@@ -21,7 +21,7 @@
         }
 
         &:hover .mc-tab-overlay {
-            background: mc-color($background, hover);
+            background: mc-color($background, overlay-hovered);
         }
 
         &.cdk-keyboard-focused {
@@ -31,14 +31,14 @@
         }
 
         &.mc-disabled {
-            color: mc-color($foreground, disabled-text);
+            color: mc-color($foreground, text-disabled);
 
             cursor: default;
 
             background: if($is-dark, mc-color($second, 600), transparent);
 
             & .mc-tab-overlay {
-                background: mc-color($background, disabled-overlay);
+                background: mc-color($background, overlay-disabled);
             }
         }
     }

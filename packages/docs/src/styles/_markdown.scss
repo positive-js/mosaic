@@ -124,7 +124,7 @@
     $text: mc-color($foreground, text);
     $color: mc-color($primary);
     $color_hover: mc-color($primary, if($is-dark, lighter, darker));
-    $color_disabled: mc-color($foreground, disabled-text);
+    $color_disabled: mc-color($foreground, text-disabled);
     $fg-default: mc-color($foreground, text);
     $th-color: mc-color($second, 400);
     $divider: mc-color($foreground, divider);

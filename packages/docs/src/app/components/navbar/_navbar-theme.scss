@@ -4,12 +4,12 @@
     $primary: map-get($theme, primary);
     $is-dark: map-get($theme, is-dark);
     $background-color: mc-color($background, background);
-    $hover:  mc-color($background, hover);
+    $hover:  mc-color($background, overlay-hovered);
     $selected: mc-color($primary, if($is-dark, 700, 100));
     $text: mc-color($foreground, text);
     $divider: mc-color($foreground, divider);
-    $less-contrast-text: mc-color($foreground, less-contrast-text);
-    $hint-text: mc-color($foreground, less-contrast-text);
+    $less-contrast-text: mc-color($foreground, text-less-contrast);
+    $hint-text: mc-color($foreground, text-less-contrast);
 
     .docs-navbar-header {
         box-shadow: 0 1px $divider;

@@ -22,7 +22,7 @@
 
         &:hover,
         &.mc-hovered {
-            background-color: mc-color($background, hover);
+            background-color: mc-color($background, overlay-hovered);
         }
 
         &.mc-focused {
@@ -36,7 +36,7 @@
         &[disabled] {
             background-color: transparent;
 
-            color: mc-color($foreground, disabled-text);
+            color: mc-color($foreground, text-disabled);
         }
     }
 }
