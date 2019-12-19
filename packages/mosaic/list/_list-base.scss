@@ -115,13 +115,3 @@ $mc-list-item-inset-divider-offset: 72px;
         }
     }
 }
-
-// This mixin adjusts the heights and padding based on whether the list is in dense mode.
-@mixin mc-subheader-spacing($top-padding, $base-height) {
-    height: $base-height;
-    line-height: $base-height - $mc-list-side-padding * 2;
-
-    &:first-child {
-        margin-top: -$top-padding;
-    }
-}

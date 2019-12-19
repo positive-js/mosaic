@@ -9,7 +9,7 @@
     $text: mc-color($foreground, text);
     $divider: mc-color($foreground, divider);
     $less-contrast-text: mc-color($foreground, less-contrast-text);
-    $hint-text: mc-color($foreground, hint-text);
+    $hint-text: mc-color($foreground, less-contrast-text);
 
     .docs-navbar-header {
         box-shadow: 0 1px $divider;
