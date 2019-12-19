@@ -18,8 +18,10 @@
 
     // Дефолтные серые иконки default-icon: лупа в поле, иконки дропдаунов v, все иконки вне полей.
     .mc-icon:not(.mc-icon_light) {
+        color: map-get($foreground, icon);
+
         &.mc-primary {
-            color: mix(map-get($foreground, default-icon), $primary-color, 30%);
+            color: mix(map-get($foreground, icon), $primary-color, 30%);
 
             &[disabled],
             &.mc-disabled {
@@ -38,7 +40,7 @@
         }
 
         &.mc-error {
-            color: mix(map-get($foreground, default-icon), $error-color, 30%);
+            color: mix(map-get($foreground, icon), $error-color, 30%);
 
             &[disabled],
             &.mc-disabled {
