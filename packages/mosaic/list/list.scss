@@ -45,6 +45,6 @@
     }
 }
 
-.mc-list-option:not([disabled]) {
+.mc-list-option:not([disabled]):not(.mc-disabled){
     cursor: pointer;
 }

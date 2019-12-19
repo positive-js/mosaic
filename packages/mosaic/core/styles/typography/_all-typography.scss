@@ -26,6 +26,7 @@
 @import '../../../tree/tree-theme';
 @import '../../../vertical-navbar/vertical-navbar-theme';
 @import '../../option/option-theme';
+@import '../../option/optgroup-theme';
 
 
 @mixin mosaic-typography($config: null) {
@@ -50,6 +51,7 @@
     @include mc-modal-typography($config);
     @include mc-navbar-typography($config);
     @include mc-option-typography($config);
+    @include mc-optgroup-typography($config);
     @include mc-popover-typography($config);
     @include mc-radio-typography($config);
     @include mc-select-typography($config);

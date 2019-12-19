@@ -526,8 +526,7 @@ class FalsyValueSelect {
     template: `
         <mc-form-field>
             <mc-select placeholder="Pokemon" [formControl]="control">
-                <mc-optgroup *ngFor="let group of pokemonTypes" [label]="group.name"
-                             [disabled]="group.disabled">
+                <mc-optgroup *ngFor="let group of pokemonTypes" [label]="group.name" [disabled]="group.disabled">
                     <mc-option *ngFor="let pokemon of group.pokemon" [value]="pokemon.value">
                         {{ pokemon.viewValue }}
                     </mc-option>
@@ -2187,7 +2186,7 @@ describe('McSelect', () => {
                 expect(panel.scrollTop).toBe(288, 'Expected scroll to be at the 9th option.');
             }));
 
-            xit('should skip option group labels', fakeAsync(() => {
+            it('should skip option group labels', fakeAsync(() => {
                 fixture.destroy();
 
                 const groupFixture = TestBed.createComponent(SelectWithGroups);
@@ -2198,7 +2197,7 @@ describe('McSelect', () => {
                 flush();
 
                 host = groupFixture.debugElement.query(By.css('mc-select')).nativeElement;
-                panel = overlayContainerElement.querySelector('.mc-select__panel') as HTMLElement;
+                panel = overlayContainerElement.querySelector('.mc-select__content') as HTMLElement;
 
                 for (let i = 0; i < 5; i++) {
                     dispatchKeyboardEvent(host, 'keydown', DOWN_ARROW);
@@ -2206,8 +2205,8 @@ describe('McSelect', () => {
 
                 // Note that we press down 5 times, but it will skip
                 // 3 options because the second group is disabled.
-                // <(option index + group labels) * height> - <panel height> = (9 + 3) * 48 - 256 = 320
-                expect(panel.scrollTop).toBe(320, 'Expected scroll to be at the 9th option.');
+                // <(option index + group labels) * height> - <panel height> = (9 + 3) * 32 - 224 = 160
+                expect(panel.scrollTop).toBe(160, 'Expected scroll to be at the 9th option.');
             }));
 
             it('should scroll top the top when pressing HOME', fakeAsync(() => {
@@ -3403,7 +3402,7 @@ describe('McSelect', () => {
                 groupFixture.detectChanges();
                 flush();
 
-                const scrollContainer = document.querySelector('.cdk-overlay-pane .mc-select__panel')!;
+                const scrollContainer = document.querySelector('.cdk-overlay-pane .mc-select__content')!;
 
                 // The selected option should be scrolled to the center of the panel.
                 // This will be its original offset from the scrollTop - half the panel height + half the

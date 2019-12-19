@@ -29,6 +29,7 @@ module.exports = {
                 'list',
                 'modal',
                 'navbar',
+                'optgroup',
                 'panel',
                 'popover',
                 'progress-bar',

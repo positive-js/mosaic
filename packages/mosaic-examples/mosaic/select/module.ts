@@ -5,6 +5,7 @@ import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
 import { McSelectModule } from '@ptsecurity/mosaic/select';
 
+import { SelectGroupsExample } from './select-groups/select-groups-example';
 import { SelectMultipleOverviewExample } from './select-multiple-overview/select-multiple-overview-example';
 import { SelectOverviewExample } from './select-overview/select-overview-example';
 import { SelectSearchOverviewExample } from './select-search-overview/select-search-overview-example';
@@ -13,7 +14,8 @@ import { SelectSearchOverviewExample } from './select-search-overview/select-sea
 const EXAMPLES = [
     SelectOverviewExample,
     SelectMultipleOverviewExample,
-    SelectSearchOverviewExample
+    SelectSearchOverviewExample,
+    SelectGroupsExample
 ];
 
 @NgModule({
