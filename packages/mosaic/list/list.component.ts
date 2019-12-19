@@ -19,17 +19,6 @@ export class McListBase {}
 export class McList extends McListBase {}
 
 
-/**
- * Directive whose purpose is to add the mc- CSS styling to this selector.
- * @docs-private
- */
-@Directive({
-    selector: '[mc-subheader], [mcSubheader]',
-    host: { class: 'mc-subheader' }
-})
-export class McListSubheaderCssStyler {}
-
-
 // Boilerplate for applying mixins to McListItem.
 export class McListItemBase {}
 
