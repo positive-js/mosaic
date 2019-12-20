@@ -1,21 +1,21 @@
 @import '../core/theming/theming';
 
 @mixin mc-autocomplete-theme($theme) {
-    $second: map-get($theme, second);
-
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    $is-dark: map-get($theme, is-dark);
+    $second: map-get($theme, second);
+
+    $autocomplete: map-get(map-get($theme, components), autocomplete);
 
     .mc-autocomplete-panel {
-        color: mc-color($foreground, text);
+        $panel: map-get($autocomplete, panel);
 
+        color: mc-color($foreground, text);
         background-color: map-get($background, background-popup);
 
-        border-color: mc-color($second);
-
-        box-shadow: 0 3px 3px 0 mc-color($second, A200);
+        border-color: map-get($panel, border-color);
+        box-shadow: map-get($panel, box-shadow);
 
         .mc-selected {
             background-color: map-get($background, background-popup);
@@ -23,5 +23,4 @@
     }
 }
 
-@mixin mc-autocomplete-typography($config) {
-}
+@mixin mc-autocomplete-typography($config) {}

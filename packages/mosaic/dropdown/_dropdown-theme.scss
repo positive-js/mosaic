@@ -11,10 +11,13 @@
 
     $is-dark: map-get($theme, is-dark);
 
-    .mc-dropdown__panel {
-        border-color: mc-color($second);
+    $dropdown: map-get(map-get($theme, components), dropdown);
 
-        box-shadow: 0 3px 3px 0 mc-color($second, A200);
+    .mc-dropdown__panel {
+        $panel: map-get($dropdown, panel);
+
+        border-color: map-get($panel, border-color);
+        box-shadow: map-get($panel, box-shadow);
 
         background-color: map-get($background, background-popup);
     }
@@ -30,7 +33,9 @@
         }
 
         &.cdk-keyboard-focused {
-            outline: mc-color($primary) solid 2px;
+            $focus-color: map-get(map-get(map-get($theme, states), focus), color);
+
+            outline: $focus-color solid 2px;
             outline-offset: -2px;
 
             &.mc-link {
@@ -54,10 +59,8 @@
         }
     }
 
-    .mc-dropdown__item_highlighted {
-        &:not([disabled]) {
-            background: mc-color($background, overlay-hovered);
-        }
+    .mc-dropdown__item_highlighted:not([disabled]) {
+        background: mc-color($background, overlay-hovered);
     }
 }
 

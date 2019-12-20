@@ -155,7 +155,6 @@ $mc-light-theme-foreground: (
     text-less-contrast:     map-get($mc-grey, 400),
     text-disabled:          map-get($mc-grey, 300),
 
-    // divider и border - нужно оставить один
     divider:                map-get($mc-grey, 100),
     border:                 map-get($mc-grey, 200),
 

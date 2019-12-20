@@ -1,4 +1,5 @@
 @import 'palette';
+@import 'components-theming';
 
 
 @function mc-contrast($palette, $hue) {
@@ -39,7 +40,6 @@
     @return rgba($color, $opacity);
 }
 
-// todo additional palette should be refactored asap (possibly to separated palette)
 @function mc-light-theme(
     $primary,
     $second,
@@ -49,7 +49,13 @@
     $success: mc-palette($mc-green),
     $warning: mc-palette($mc-yellow)
 ) {
-    @return (
+    $states: (
+        focus: (
+            color: mc-color($primary)
+        )
+    );
+
+    $theme: (
         is-dark: false,
 
         primary: $primary,
@@ -62,7 +68,11 @@
         warning: $warning,
         success: $success,
         info: $info,
+
+        states: $states
     );
+
+    @return map_merge($theme, (components: mc-light-theme-components($theme)));
 }
 
 @function mc-dark-theme(
@@ -74,7 +84,13 @@
     $success: mc-palette($mc-green),
     $warning: mc-palette($mc-yellow)
 ) {
-    @return (
+    $states: (
+        focus: (
+            color: mc-color($primary)
+        )
+    );
+
+    $theme: (
         is-dark: true,
 
         primary: $primary,
@@ -87,5 +103,9 @@
         warning: $warning,
         success: $success,
         info: $info,
+
+        states: $states
     );
+
+    @return map_merge($theme, (components: mc-dark-theme-components($theme)));
 }

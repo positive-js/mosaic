@@ -10,42 +10,31 @@
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    $is-dark-theme: map-get($theme, is-dark);
+    $is-dark: map-get($theme, is-dark);
 
     .mc-form-field {
-        background: {
-            color: map-get($background, background);
-        }
+        background-color: map-get($background, background);
 
         &:not(.mc-form-field_without-borders) {
             .mc-form-field__container {
-                border: {
-                    color: mc-color($second);
-                }
+                border-color: mc-color($second);
             }
 
             &:hover .mc-form-field__container {
-                border: {
-                    color: mc-color($second, if($is-dark-theme, lighter, darker));
-                }
+                border-color: mc-color($second, if($is-dark, lighter, darker));
             }
 
             &.mc-focused:not(.ng-invalid) .mc-form-field__container {
-                border: {
-                    color: mc-color($primary);
-                }
+                $focus-color: map-get(map-get(map-get($theme, states), focus), color);
 
-                box-shadow: 0 0 0 1px mc-color($primary);
+                border-color: $focus-color;
+                box-shadow: 0 0 0 1px $focus-color;
             }
 
             &.ng-invalid .mc-form-field__container {
-                background: {
-                    color: if($is-dark-theme, transparent, mc-color($error, lighter));
-                }
+                background-color: if($is-dark, transparent, mc-color($error, lighter));
 
-                border: {
-                    color: mc-color($error);
-                }
+                border-color: mc-color($error);
 
                 .mc-input,
                 .mc-textarea {
@@ -58,13 +47,9 @@
             }
 
             &.mc-disabled .mc-form-field__container {
-                border: {
-                    color: mix(map-get($foreground, border), map-get($background, overlay-disabled));
-                }
+                border-color: mix(map-get($foreground, border), map-get($background, overlay-disabled));
 
-                background: {
-                    color: mix(map-get($background, background-disabled), map-get($background, overlay-disabled));
-                }
+                background-color: mix(map-get($background, background-disabled), map-get($background, overlay-disabled));
 
                 .mc-icon,
                 .mc-input,
@@ -76,11 +61,7 @@
     }
 
     .mc-form-field__hint {
-        color: mc-color($second, 400);
-    }
-
-    .mc-form-field__prefix .mc-icon {
-        color: map-get($foreground, text-disabled);
+        color: mc-color($foreground, text-less-contrast);
     }
 }
 

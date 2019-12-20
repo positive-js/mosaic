@@ -14,7 +14,7 @@
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    $is-dark-theme: map-get($theme, is-dark);
+    $is-dark: map-get($theme, is-dark);
 
     .mc-list-item {
         color: mc-color($foreground, text);
@@ -35,7 +35,7 @@
         }
 
         &.mc-selected {
-            background: mc-color($primary, if($is-dark-theme, 700, 100));
+            background: mc-color($primary, if($is-dark, 700, 100));
         }
 
         &.mc-disabled,

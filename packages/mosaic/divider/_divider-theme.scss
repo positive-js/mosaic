@@ -3,13 +3,13 @@
 
 
 @mixin mc-divider-theme($theme) {
-    $foreground: map-get($theme, foreground);
+    $divider-color: map-get(map-get(map-get($theme, components), devider), color);
 
     .mc-divider {
-        border-top-color: mc-color($foreground, divider);
+        border-top-color: $divider-color;
     }
 
     .mc-divider-vertical {
-        border-right-color: mc-color($foreground, divider);
+        border-right-color: $divider-color;
     }
 }
