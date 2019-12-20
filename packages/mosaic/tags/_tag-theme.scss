@@ -4,11 +4,11 @@
 @import '../core/theming/palette';
 
 
-@mixin _mc-tag-color($main-color, $focus-color, $foreground, $background, $is-dark-theme) {
+@mixin _mc-tag-color($main-color, $focus-color, $foreground, $background, $is-dark) {
     color: mc-color($foreground, text);
 
-    background: mc-color($main-color, if($is-dark-theme, 700, 100));
-    border-color: mc-color($main-color, if($is-dark-theme, 700, 100));
+    background: mc-color($main-color, if($is-dark, 700, 100));
+    border-color: mc-color($main-color, if($is-dark, 700, 100));
 
     &.mc-active,
     &.mc-focused {
@@ -28,7 +28,7 @@
 
         &:hover {
             cursor: pointer;
-            color: mc-color($main-color, if($is-dark-theme, lighter, darker));
+            color: mc-color($main-color, if($is-dark, lighter, darker));
         }
     }
 }
@@ -41,19 +41,19 @@
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    $is-dark-theme: map-get($theme, is-dark);
+    $is-dark: map-get($theme, is-dark);
 
     .mc-tag {
         &.mc-primary {
-            @include _mc-tag-color($primary, $primary, $foreground, $background, $is-dark-theme);
+            @include _mc-tag-color($primary, $primary, $foreground, $background, $is-dark);
         }
 
         &.mc-second {
-            @include _mc-tag-color($second, $primary, $foreground, $background, $is-dark-theme);
+            @include _mc-tag-color($second, $primary, $foreground, $background, $is-dark);
         }
 
         &.mc-error {
-            @include _mc-tag-color($error, $error, $foreground, $background, $is-dark-theme);
+            @include _mc-tag-color($error, $error, $foreground, $background, $is-dark);
         }
 
         &:hover:not(.mc-disabled),
