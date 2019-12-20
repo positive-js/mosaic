@@ -4,12 +4,16 @@ import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McModalModule } from '@ptsecurity/mosaic/modal';
 
-import { McModalCustomComponent, ModalOverviewExample } from './modal-overview/modal-overview-example';
+import { ModalComponentExample, McModalCustomComponent } from './modal-component/modal-component-example';
+import { ModalOverviewExample } from './modal-overview/modal-overview-example';
+import { ModalTemplateExample } from './modal-template/modal-template-example';
 
 
 const EXAMPLES = [
     ModalOverviewExample,
-    McModalCustomComponent
+    ModalComponentExample,
+    McModalCustomComponent,
+    ModalTemplateExample
 ];
 
 @NgModule({

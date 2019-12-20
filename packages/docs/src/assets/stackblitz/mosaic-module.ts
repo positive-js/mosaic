@@ -13,6 +13,7 @@ import { McListModule } from '@ptsecurity/mosaic/list';
 import { McModalModule } from '@ptsecurity/mosaic/modal';
 import { McPopoverModule } from '@ptsecurity/mosaic/popover';
 import { McProgressBarModule } from '@ptsecurity/mosaic/progress-bar';
+import { McProgressSpinnerModule } from '@ptsecurity/mosaic/progress-spinner';
 import { McRadioModule } from '@ptsecurity/mosaic/radio';
 import { McSelectModule } from '@ptsecurity/mosaic/select';
 import { McTimepickerModule } from '@ptsecurity/mosaic/timepicker';
@@ -32,6 +33,7 @@ import { McTreeSelectModule } from '@ptsecurity/mosaic/tree-select';
         McInputModule,
         McRadioModule,
         McProgressBarModule,
+        McProgressSpinnerModule,
         McTimepickerModule,
         McSelectModule,
         McListModule,
