@@ -39,8 +39,8 @@
 
 
 @mixin mosaic-theme($theme) {
-
     @include mc-core-theme($theme);
+
     @include mc-alert-theme($theme);
     @include mc-autocomplete-theme($theme);
     @include mc-badge-theme($theme);

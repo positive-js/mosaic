@@ -36,7 +36,7 @@
 
         box-shadow: 0 3px 3px 0 mc-color($second, A200);
 
-        background-color: if($is-dark, map-get($second, 700), map-get($background, background));
+        background-color: map-get($background, background-popup);
     }
 
     .mc-select__no-options-message {
