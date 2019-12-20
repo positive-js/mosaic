@@ -11,6 +11,8 @@ $warning: mc-palette($mc-yellow, 200, 400, 700);
 
 $theme: mc-dark-theme($primary, $second, $error, $info, $success, $warning);
 
+@debug map-get($theme, components);
+
 // Include all typography for the components.
 @include mc-core();
 

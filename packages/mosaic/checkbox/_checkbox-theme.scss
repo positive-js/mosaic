@@ -4,22 +4,16 @@
 
 @mixin mc-checkbox-theme($theme) {
     $primary: map-get($theme, primary);
-    $second: map-get($theme, second);
 
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
     $is-dark: map-get($theme, is-dark);
 
-    $focus-color: mc-color($primary);
+    $checkbox: map-get(map-get($theme, components), checkbox);
 
     .mc-checkbox-frame {
-        border-color: mc-color($second);
-
-        & .mc-checkbox-checkmark,
-        & .mc-checkbox-mixedmark {
-            color: white;
-        }
+        border-color: map-get($checkbox, border-color);
     }
 
     .mc-checkbox {
@@ -27,7 +21,7 @@
 
         &:hover {
             .mc-checkbox-frame {
-                background: mix(map-get($background, background), map-get($background, overlay-hovered), 5);
+                background: map-get($background, overlay-hovered);
             }
         }
 
@@ -41,6 +35,8 @@
         }
 
         & .mc-checkbox-input.cdk-keyboard-focused {
+            $focus-color: map-get(map-get(map-get($theme, states), focus), color);
+
             + .mc-checkbox-frame {
                 border-color: $focus-color;
                 box-shadow: inset 0 0 0 1px white, 0 0 0 1px $focus-color;
@@ -54,11 +50,6 @@
                 border-color: map-get($foreground, border);
 
                 background-color: map-get($background, background-disabled);
-            }
-
-            .mc-checkbox-checkmark,
-            .mc-checkbox-mixedmark {
-                color: map-get($foreground, text-disabled);
             }
         }
     }
