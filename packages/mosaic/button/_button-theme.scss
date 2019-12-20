@@ -22,7 +22,6 @@
     &.mc-active {
         border-color: darken(mc-color($palette, 560), 5);
         background: darken(mc-color($palette, 500), 5);
-        box-shadow: map-get($background, in-shadow);
     }
 
     &.mc-disabled,
@@ -60,7 +59,6 @@
     &.mc-active {
         border-color: darken(mc-color($foreground, border), 5);
         background: darken(map-get($background, background-disabled), 5);
-        box-shadow: map-get($background, in-shadow);
     }
 
     &.mc-disabled,
@@ -108,6 +106,8 @@
     $error: map-get($theme, error);
     $is-dark: map-get($theme, is-dark);
 
+    $in-shadow: if($is-dark, inset 1px 2px 2px 0 rgba(black, 0.2), inset 0 1px 2px 0 rgba(black, 0.2));
+
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
@@ -134,6 +134,11 @@
             border-color: $focus-color;
             box-shadow: 0 0 0 1px $focus-color;
         }
+    }
+
+    &:active,
+    &.mc-active {
+        box-shadow: $in-shadow;
     }
 }
 

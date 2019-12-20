@@ -11,14 +11,14 @@
     .mc-autocomplete-panel {
         color: mc-color($foreground, text);
 
-        background-color: if($is-dark, map-get($second, 700), map-get($background, background));
+        background-color: map-get($background, background-popup);
 
         border-color: mc-color($second);
 
         box-shadow: 0 3px 3px 0 mc-color($second, A200);
 
         .mc-selected {
-            background-color: if($is-dark, map-get($second, 700), map-get($background, background));
+            background-color: map-get($background, background-popup);
         }
     }
 }

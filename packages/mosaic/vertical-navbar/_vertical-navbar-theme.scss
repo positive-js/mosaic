@@ -10,7 +10,8 @@
         outline: 0;
     }
 
-    .cdk-keyboard-focused, .cdk-program-focused {
+    .cdk-keyboard-focused,
+    .cdk-program-focused {
         outline: 2px solid mc-color($palette, 500);
         outline-offset: -2px;
     }
@@ -19,7 +20,8 @@
         color: mc-contrast($palette, 700);
     }
 
-    a[mc-vertical-navbar-header], .mc-vertical-navbar__toggle-button {
+    a[mc-vertical-navbar-header],
+    .mc-vertical-navbar__toggle-button {
         &:hover {
             background-color: lighten(mc-color($palette, 700), 5%)
         }
@@ -29,7 +31,8 @@
         color: mc-contrast($palette, 700);
     }
 
-    mc-vertical-navbar-item, a[mc-vertical-navbar-item] {
+    mc-vertical-navbar-item,
+    a[mc-vertical-navbar-item] {
 
         color: mc-contrast($palette, 700);
 
@@ -49,7 +52,9 @@
         }
 
         &[disabled] {
-            > mc-vertical-navbar-title, .mc-vertical-navbar__title, [mc-icon] {
+            > mc-vertical-navbar-title,
+            .mc-vertical-navbar__title,
+            [mc-icon] {
                 opacity: 0.3;
             }
         }
