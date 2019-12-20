@@ -1,0 +1,166 @@
+@function mc-light-theme-components($theme) {
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    $primary: map-get($theme, primary);
+    $second: map-get($theme, second);
+    $error: map-get($theme, error);
+
+    $autocomplete: (
+        panel: (
+            border-color: mc-color($second),
+            box-shadow: 0 3px 3px 0 mc-color($second, A200),
+        )
+    );
+
+    $button: (
+        panel: (
+            border-color: mc-color($second),
+            box-shadow: 0 3px 3px 0 mc-color($second, A200),
+        )
+    );
+
+    $button-toggle: (
+        panel: (
+            border-color: mc-color($second),
+            box-shadow: 0 3px 3px 0 mc-color($second, A200),
+        )
+    );
+
+    $checkbox: (
+        border-color: mc-color($second)
+    );
+
+    $divider: (
+        color: map-get($second, 100)
+    );
+
+    $dropdown: (
+        panel: (
+            border-color: mc-color($second),
+            box-shadow: 0 3px 3px 0 mc-color($second, A200),
+        )
+    );
+
+    @return (
+        autocomplete: $autocomplete,
+        button: $button,
+        button-toggle: $button-toggle,
+        // все настраивается автоматом (mc-card_selected, cdk-keyboard-focused)
+        card: 'card',
+        checkbox: $checkbox,
+        datepicker: 'alert',
+        divider: $divider,
+        dropdown: $dropdown,
+        form-field: 'alert',
+        icon: 'alert',
+        input: 'alert',
+        link: 'alert',
+        list: 'alert',
+        modal: 'alert',
+        navbar: 'alert',
+        popover: 'alert',
+        progress-bar: 'alert',
+        progress-spinner: 'alert',
+        radio: 'alert',
+        select: 'alert',
+        sidebar: 'alert',
+        sidepanel: 'alert',
+        splitter: 'alert',
+        tabs: 'alert',
+        tags: 'alert',
+        textarea: 'alert',
+        timepicker: 'alert',
+        toggle: 'alert',
+        tooltip: 'alert',
+        tree: 'alert',
+        tree-select: 'alert',
+        vertical-navbar: 'alert',
+    );
+}
+
+@function mc-dark-theme-components($theme) {
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    $primary: map-get($theme, primary);
+    $second: map-get($theme, second);
+    $error: map-get($theme, error);
+
+    $autocomplete: (
+        panel: (
+            border-color: mc-color($second),
+            box-shadow: 0 3px 3px 0 mc-color($second, A200),
+        )
+    );
+
+    $button: (
+        panel: (
+            border-color: mc-color($second),
+            box-shadow: 0 3px 3px 0 mc-color($second, A200),
+        )
+    );
+
+    $button-toggle: (
+        panel: (
+            border-color: mc-color($second),
+            box-shadow: 0 3px 3px 0 mc-color($second, A200),
+        )
+    );
+
+    $checkbox: (
+        border-color: mc-color($second),
+        states: (
+            checked: '',
+        )
+    );
+
+    $datepicker: ();
+
+    $divider: (
+        color: map-get($mc-grey, 600)
+    );
+
+    $dropdown: (
+        panel: (
+            border-color: mc-color($second),
+            box-shadow: 0 3px 3px 0 mc-color($second, A200),
+        )
+    );
+
+    @return (
+        autocomplete: $autocomplete,
+        button: $button,
+        button-toggle: $button-toggle,
+        // все настраивается автоматом (mc-card_selected, cdk-keyboard-focused)
+        card: 'card',
+        checkbox: $checkbox,
+        datepicker: $datepicker,
+        divider: 'alert',
+        dropdown: $dropdown,
+        form-field: 'alert',
+        icon: 'alert',
+        input: 'alert',
+        link: 'alert',
+        list: 'alert',
+        modal: 'alert',
+        navbar: 'alert',
+        popover: 'alert',
+        progress-bar: 'alert',
+        progress-spinner: 'alert',
+        radio: 'alert',
+        select: 'alert',
+        sidebar: 'alert',
+        sidepanel: 'alert',
+        splitter: 'alert',
+        tabs: 'alert',
+        tags: 'alert',
+        textarea: 'alert',
+        timepicker: 'alert',
+        toggle: 'alert',
+        tooltip: 'alert',
+        tree: 'alert',
+        tree-select: 'alert',
+        vertical-navbar: 'alert',
+    );
+}
