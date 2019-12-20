@@ -109,7 +109,7 @@ $mc-datepicker-today-fade-amount: 0.2;
 
     .mc-datepicker__content {
         box-shadow: 0 1px 10px 0 rgba(black, 0.12);
-        background-color: if($is-dark, map-get($second, 700), map-get($background, background));
+        background-color: map-get($background, background-popup);
         color: mc-color($foreground, text);
 
         &.mc-warn {

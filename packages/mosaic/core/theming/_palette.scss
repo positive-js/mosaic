@@ -175,20 +175,23 @@ $mc-dark-theme-foreground: (
 
 $mc-light-theme-background: (
     background:             white,
-    background-second:      map-get($mc-grey, 700), // сейчас только тултип
+    // в поповере цвет контейнера совпадает с цветом бэкграунда
+    // в сайдпанели background-color: map-get($background, background);
+    // в модалке background-color: map-get($background, background);
+    // эту переменную переименовать и она будет использоваться во всплывашках (поповер, дропдовн, дропдовн в слектах, сайдпанель и модалки)
+    // нужно посмотреть цвета всех дропдовнов
+    background-popup:       white,
     background-disabled:    map-get($mc-grey, 60),
 
     overlay-hovered:        rgba(black, 0.05),
-    overlay-disabled:       rgba(white, 0.3), // используется но не часто
-    in-shadow:              inset 0 1px 2px 0 rgba(black, 0.2), // сейчас только в кнопках и это состояние нажатости
+    overlay-disabled:       rgba(white, 0.3) // используется но не часто
 );
 
 $mc-dark-theme-background: (
     background:             map-get($mc-grey, 800),
-    background-second:      white,
+    background-popup:       map-get($mc-grey, 700),
     background-disabled:    map-get($mc-grey, 600),
 
     overlay-hovered:        rgba(white, 0.05),
-    overlay-disabled:       rgba(black, 0.2),
-    in-shadow:              inset 1px 2px 2px 0 rgba(black, 0.2),
+    overlay-disabled:       rgba(black, 0.2)
 );
