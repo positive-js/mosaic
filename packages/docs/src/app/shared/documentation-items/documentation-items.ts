@@ -84,6 +84,12 @@ const DOCS: { [key: string]: DocCategory[] } = {
                     examples: ['popover-types']
                 },
                 {
+                    id: 'sidepanel',
+                    name: 'Sidepanel',
+                    summary: '',
+                    examples: ['sidepanel-types']
+                },
+                {
                     id: 'tooltip',
                     name: 'Tooltip',
                     summary: '',

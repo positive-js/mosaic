@@ -1,0 +1,7 @@
+.layout-padding {
+    padding: 8px;
+}
+
+.layout-padding > * {
+    padding: 8px;
+}
