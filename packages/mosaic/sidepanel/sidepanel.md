@@ -1,10 +1,9 @@
-The `McSidepanelService` can be used to open sidepanels.
-These panels appear at the edge of the screen and can be used to perform 
-some actions or display additional information without losing context.
+`McSidepanelService` используется для открытия боковых панелей.
+Эти панели появляются из за границы экрана. Их можно использовать для отображения дополнительной информации без потери контекста
+или для выполнения каких-либо действий.
 
-You can open a sidepanel by calling `open` method with a component to be loaded or a template
-and an optional config object. 
-The `open` method will return an instance of `McSidepanelRef`:
+Боковую панель можно вызвать методом `open`, передав в него шаблон или компонент для загрузки, а также объект конфигурации, если нужно. 
+Метод `open` возвращает экземпляр класса `McSidepanelRef`:
 
 ```ts
 const sidepanelRef = sidepanelService.open(ExampleSidepanelComponent, {
@@ -12,8 +11,8 @@ const sidepanelRef = sidepanelService.open(ExampleSidepanelComponent, {
 });
 ```
 
-The `McSidepanelRef` is a reference to the opened sidepanel and can be used to close it or
-to receive notification when the sidepanel has been opened (after animation) or closed.
+`McSidepanelRef` - это ссылка на открытую боковую панель. Она используется для закрытия панели 
+и для получения уведомлений при открытии/закрытии панели.
 
 ```ts
 sidepanelRef.afterClosed().subscribe((result) => {
@@ -23,12 +22,12 @@ sidepanelRef.afterClosed().subscribe((result) => {
 sidepanelRef.close('I was closed');
 ```
 
-Note that multiple sidepanels can be open at a time. Any component contained inside of a sidepanel
-can inject the `McSidepanelRef` as well.
+Заметьте, что за раз можно открыть несколько боковых панелей. Любой компонент, содержащийся внутри боковой панели
+также может использовать `McSidepanelRef`.
 
 ###Specifying global configuration defaults
-Default sidepanel options can be specified by providing an instance of `McSidepanelConfig`
-for `MC_SIDEPANEL_DEFAULT_OPTIONS` in your application's root module.
+Свойства боковых панелей по-умолчанию можно определить передав экземпляра класса `McSidepanelConfig`
+в `MC_SIDEPANEL_DEFAULT_OPTIONS` в корневом модуле вашего приложения.
 
 ```ts
 @NgModule({
@@ -39,8 +38,7 @@ for `MC_SIDEPANEL_DEFAULT_OPTIONS` in your application's root module.
 ```
 
 ###Sharing data with the sidepanel component
-If you want to pass in some data to the sidepanel, you can do so by using `data` property
-in configuration:
+Если вы хотите передать некоторые данные в боковую панель, нужно использовать в конфигурации свойство `data`:
 
 ```ts
 const sidepanelRef = sidepanelService.open(ExampleSidepanelComponent, {
@@ -48,7 +46,7 @@ const sidepanelRef = sidepanelService.open(ExampleSidepanelComponent, {
 });
 ```
 
-Afterwards you can access thr injected data using the `MC_SIDEPANEL_DATA` injection token:
+После этого вы можете получить доступ к переданным данным с помощью токена `MC_SIDEPANEL_DATA`:
 
 ```ts
 import { Component, Inject } from '@angular/core';
@@ -63,12 +61,11 @@ export class ExampleSidepanelComponent {
 ```
 
 ### Configuring sidepanel content via `entryComponents`
-`McSidepanelService` instantiates components at run-time. In order for it to work,
-the Angular compiler needs extra information to create the necessary `ComponentFactory`
-for your sidepanel content component.
+`McSidepanelService` создает экземпляры компонентов во время выполнения. Чтобы это работало,
+кампилятору Angular нужна дополнительная информация для создания `ComponentFactory`
+для вашего компонента контента боковой панели.
 
-Any components that are include inside of a sidepanel have to be added to the `entryComponents`
-inside your `NgModule`.
+Все компоненты, использующиеся в боковой панели нужно добавить в `entryComponents` в `NgModule`.
 
 ```ts
 @NgModule({
@@ -92,12 +89,11 @@ export class AppModule {}
 ```
 
 ### Sidepanel content
-To structure your sidepanel content you can use several directives:
+Для структуризации контента боковой панели можно использовать несколько директив:
 `<mc-sidepanel-header>`, `<mc-sidepanel-body>`, `<mc-sidepanel-footer>` 
-and `<mc-sidepanel-actions>`.
+и `<mc-sidepanel-actions>`.
 
-Also `mc-sidepanel-close` directive is available to mark button which need 
-to close sidepanel. For example, cancel button in footer.
+Также, вы можете обозначить кнопку закрытия боковой панели с помощью директивы `mc-sidepanel-close`. Например, кнопка отмены в футере.
 
 ```html
 <mc-sidepanel-header [closeable]="true">
@@ -125,6 +121,5 @@ to close sidepanel. For example, cancel button in footer.
 ```
 
 #### Keyboard interaction
-By default pressing the escape key will close the sidepanel. While this behavior can
-be turned off via the `disableClose` option, users should generally avoid doing so
-as it breaks the expected interaction pattern for screen-reader users.
+По-умолчанию, нажатие ESC закроет боковую панел. Хотя это поведение можно отключить с помощью свойства `disableClose`,
+этого стоит избегать, чтобы не сломать ожидаемые пользователями паттерны поведения.
