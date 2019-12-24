@@ -20,6 +20,11 @@ $mc-datepicker-touch-portrait-height: 100vw;
 .mc-datepicker__content {
     display: block;
 
+    border: {
+        width: 1px;
+        style: solid;
+    }
+
     .mc-calendar {
         width: $mc-datepicker-non-touch-calendar-width;
         height: $mc-datepicker-non-touch-calendar-height;

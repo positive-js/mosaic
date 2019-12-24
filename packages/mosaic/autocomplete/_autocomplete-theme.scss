@@ -2,23 +2,19 @@
 
 @mixin mc-autocomplete-theme($theme) {
     $foreground: map-get($theme, foreground);
-    $background: map-get($theme, background);
-
-    $second: map-get($theme, second);
-
-    $autocomplete: map-get(map-get($theme, components), autocomplete);
 
     .mc-autocomplete-panel {
-        $panel: map-get($autocomplete, panel);
+        $popup: map-get(map-get($theme, components), popup);
+
+        box-shadow: map-get($popup, box-shadow);
+        border-color: map-get($popup, border-color);
+
+        background-color: map-get($popup, background);
 
         color: mc-color($foreground, text);
-        background-color: map-get($background, background-popup);
-
-        border-color: map-get($panel, border-color);
-        box-shadow: map-get($panel, box-shadow);
 
         .mc-selected {
-            background-color: map-get($background, background-popup);
+            background-color: map-get($popup, background);
         }
     }
 }

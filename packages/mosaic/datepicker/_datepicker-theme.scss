@@ -20,19 +20,12 @@ $mc-datepicker-today-fade-amount: 0.2;
 @mixin mc-datepicker-theme($theme) {
     $primary: map-get($theme, primary);
     $second: map-get($theme, second);
+    $error: map-get($theme, error);
 
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    $is-dark: map-get($theme, is-dark);
-
-    .mc-calendar {
-        border: {
-            color: mc-color($second);
-            width: 1px;
-            style: solid;
-        }
-    }
+    $selected-color: map-get(map-get($theme, states), selected-color);
 
     .mc-calendar__table-header {
         color: mc-color($second, 400);
@@ -44,7 +37,7 @@ $mc-datepicker-today-fade-amount: 0.2;
         background: transparent;
 
         .mc-icon {
-            color: mc-color($second, 400);
+            color: map-get($foreground, icon);
         }
     }
 
@@ -68,10 +61,10 @@ $mc-datepicker-today-fade-amount: 0.2;
     .cdk-keyboard-focused .mc-calendar__body_active,
     .cdk-program-focused .mc-calendar__body_active {
         & > .mc-calendar__body-cell-content {
-            $focus-color: mc-color($primary);
+            $focused-color: map-get(map-get($theme, states), focused-color);
 
-            border-color: $focus-color;
-            box-shadow: 0 0 0 1px $focus-color;
+            border-color: $focused-color;
+            box-shadow: 0 0 0 1px $focused-color;
         }
     }
 
@@ -82,7 +75,8 @@ $mc-datepicker-today-fade-amount: 0.2;
     }
 
     .mc-calendar__controls {
-        .mc-button, .mc-icon-button {
+        .mc-button,
+        .mc-icon-button {
             border-radius: 0;
             border-color: transparent;
             background-color: transparent;
@@ -98,30 +92,35 @@ $mc-datepicker-today-fade-amount: 0.2;
     }
 
     .mc-calendar__body-today {
-        color: mc-color($primary, 500);
+        color: mc-color($primary);
     }
 
     .mc-calendar__body_disabled > .mc-calendar__body-today:not(.mc-calendar__body_selected) {
         border-color: fade-out(mc-color($foreground, text), $mc-datepicker-today-fade-amount);
     }
 
-    @include _mc-datepicker-color(mc-color($primary, if($is-dark, 700, 100)));
+    @include _mc-datepicker-color($selected-color);
 
     .mc-datepicker__content {
-        box-shadow: 0 1px 10px 0 rgba(black, 0.12);
-        background-color: map-get($background, background-popup);
+        $popup: map-get(map-get($theme, components), popup);
+
+        box-shadow: map-get($popup, box-shadow);
+        border-color: map-get($popup, border-color);
+
+        background-color: map-get($popup, background);
+
         color: mc-color($foreground, text);
 
         &.mc-warn {
-            @include _mc-datepicker-color(mc-color(map-get($theme, error)));
+            @include _mc-datepicker-color(mc-color($error));
         }
     }
 
     .mc-datepicker-toggle_active {
-        color: mc-color(map-get($theme, primary));
+        color: mc-color($primary);
 
         &.mc-warn {
-            color: mc-color(map-get($theme, error));
+            color: mc-color($error);
         }
     }
 }

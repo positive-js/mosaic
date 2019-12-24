@@ -185,6 +185,13 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
     }
 }
 
+.mc-select__search-container {
+    border-bottom: {
+        width: 1px;
+        style: solid;
+    }
+}
+
 //.mc-select__placeholder {
 //    // Delay the transition until the label has animced about a third of the way through, in
 //    // order to prevent the placeholder from overlapping for a split second.

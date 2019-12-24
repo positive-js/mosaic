@@ -11,8 +11,7 @@ import { McSidepanelService } from './sidepanel.service';
     selector: 'button[mc-sidepanel-close], button[mcSidepanelClose]',
     host: {
         '(click)': 'sidepanelRef.close(sidepanelResult)',
-        class: 'mc-sidepanel-close',
-        type: 'button'
+        class: 'mc-sidepanel-close'
     }
 })
 export class McSidepanelClose implements OnInit, OnChanges {

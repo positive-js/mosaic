@@ -14,7 +14,6 @@
 }
 
 @mixin mc-card-theme($theme) {
-    $primary: map-get($theme, primary);
     $second: map-get($theme, second);
     $error: map-get($theme, error);
 
@@ -26,6 +25,8 @@
 
     $background: map-get($theme, background);
     $foreground: map-get($theme, foreground);
+
+    $selected-color: map-get(map-get($theme, states), selected-color);
 
     .mc-card {
         color: map-get($foreground, text);
@@ -47,11 +48,13 @@
         }
 
         &.mc-card_white {
-            background-color: map-get($background, background-popup);
+            $popup: map-get(map-get($theme, components), popup);
+
+            background-color: map-get($popup, background);
         }
 
         &.mc-card_selected {
-            background-color: mc-color($primary, if($is-dark, 700, 100));
+            background-color: $selected-color;
         }
 
         &:not(.mc-card_readonly):hover {
@@ -61,7 +64,9 @@
         }
 
         &.cdk-keyboard-focused {
-            box-shadow: 0 0 0 2px mc-color($primary);
+            $focused-color: map-get(map-get($theme, states), focused-color);
+
+            box-shadow: 0 0 0 2px $focused-color;
         }
     }
 }

@@ -3,7 +3,6 @@
 @import '../core/styles/variables';
 
 @mixin mc-form-field-theme($theme) {
-    $primary: map-get($theme, primary);
     $second: map-get($theme, second);
     $error: map-get($theme, error);
 
@@ -25,10 +24,10 @@
             }
 
             &.mc-focused:not(.ng-invalid) .mc-form-field__container {
-                $focus-color: map-get(map-get(map-get($theme, states), focus), color);
+                $focused-color: map-get(map-get($theme, states), focused-color);
 
-                border-color: $focus-color;
-                box-shadow: 0 0 0 1px $focus-color;
+                border-color: $focused-color;
+                box-shadow: 0 0 0 1px $focused-color;
             }
 
             &.ng-invalid .mc-form-field__container {

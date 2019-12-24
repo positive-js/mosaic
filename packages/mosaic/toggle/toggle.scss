@@ -71,7 +71,7 @@ $label-margin: 8px;
     transform: translateX(-1px); // due to EDGE animation features
 }
 
-.mc-toggle__focus-frame {
+.mc-toggle__overlay {
     position: absolute;
 
     top: 0;
@@ -86,7 +86,7 @@ $label-margin: 8px;
         border-radius: $toggle-border-radius;
     }
 
-    .mc-toggle__focus-frame {
+    .mc-toggle__overlay {
         border-radius: $toggle-border-radius;
         height: $toggle-height;
         width: $toggle-width;
@@ -105,7 +105,7 @@ $label-margin: 8px;
         border-radius: $small-toggle-border-radius;
     }
 
-    .mc-toggle__focus-frame {
+    .mc-toggle__overlay {
         border-radius: $small-toggle-border-radius;
         height: $small-toggle-height;
         width: $small-toggle-width;

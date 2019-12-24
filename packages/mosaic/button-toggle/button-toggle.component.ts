@@ -296,6 +296,7 @@ export class McButtonToggleGroup implements ControlValueAccessor, OnInit, AfterC
         <button
             mc-button
             type="button"
+            [class.mc-active]="checked"
             [disabled]="disabled"
             [attr.tabindex]="disabled ? -1 : tabIndex"
             (click)="onToggleClick()">
@@ -307,9 +308,8 @@ export class McButtonToggleGroup implements ControlValueAccessor, OnInit, AfterC
     exportAs: 'mcButtonToggle',
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '[class.mc-button-toggle-standalone]': '!buttonToggleGroup',
-        '[class.mc-button-toggle-checked]': 'checked',
         class: 'mc-button-toggle',
+        '[class.mc-button-toggle-standalone]': '!buttonToggleGroup',
         // Always reset the tabindex to -1 so it doesn't conflict with the one on the `button`,
         // but can still receive focus from things like cdkFocusInitial.
         '[attr.tabindex]': '-1',
