@@ -53,6 +53,12 @@ $typography: mc-typography-config();
 @import './styles/theme-dark';
 
 .theme-default {
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
+    background: mc-color($background, background);
+    color: mc-color($foreground, text);
+
     &.active-blue {
         @include docs-component-theme($theme);
     }
@@ -71,6 +77,12 @@ $typography: mc-typography-config();
 }
 
 .theme-dark {
+    $background: map-get($dark-theme, background);
+    $foreground: map-get($dark-theme, foreground);
+
+    background: mc-color($background, background);
+    color: mc-color($foreground, text);
+
     @include material-dark();
 
     &.active-blue {
