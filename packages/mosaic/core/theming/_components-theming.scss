@@ -6,76 +6,108 @@
     $second: map-get($theme, second);
     $error: map-get($theme, error);
 
-    $autocomplete: (
-        panel: (
-            border-color: mc-color($second),
-            box-shadow: 0 3px 3px 0 mc-color($second, A200),
-        )
+    $popup: (
+        box-shadow: 0 3px 3px 0 mc-color($second, A200),
+        border-color: mc-color($second),
+        background: white,
+        footer_background: map-get($second, 60),
     );
 
     $button: (
-        panel: (
-            border-color: mc-color($second),
-            box-shadow: 0 3px 3px 0 mc-color($second, A200),
-        )
-    );
-
-    $button-toggle: (
-        panel: (
-            border-color: mc-color($second),
-            box-shadow: 0 3px 3px 0 mc-color($second, A200),
-        )
+        border-color: mc-color($second),
+        box-shadow: 0 3px 3px 0 mc-color($second, A200),
     );
 
     $checkbox: (
-        border-color: mc-color($second)
+        border-color: mc-color($second),
+        state-checked_border-color: mc-color($primary, darker),
+        state-checked_background: mc-color($primary)
     );
 
     $divider: (
         color: map-get($second, 100)
     );
 
-    $dropdown: (
-        panel: (
-            border-color: mc-color($second),
-            box-shadow: 0 3px 3px 0 mc-color($second, A200),
+    $navbar: (
+        background-color: mc-color($primary, 700),
+        color: mc-color($primary, 100),
+
+        item: (
+            color: mc-color($primary, 100),
+
+            states: (
+                active: lighten(mc-color($primary, 700), 5%),
+                hover: lighten(mc-color($primary, 700), 5%),
+                progress: lighten(mc-color($primary, 800), 15%)
+            )
         )
     );
 
+    $progress-bar: (
+        background-color: mc-color($second, 60),
+    );
+
+    $radio: (
+        outer-circle: (
+            border-color: mc-color($second)
+        ),
+
+        inner-circle: (
+            border-color: transparent
+        ),
+    );
+
+    $tabs: (
+        border-color: mc-color($second, 300),
+    );
+
+    $tooltip: (
+        background-color: map-get($second, 700),
+        color: mc-contrast($second, 700),
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2)
+    );
+
+    $vertical-navbar: (
+        background-color: mc-color($primary, 700),
+        color: mc-contrast($primary, 700),
+
+        toggle-button_color: mc-contrast($primary, 700),
+
+        state-hover_background-color: lighten(mc-color($primary, 700), 5%),
+        state-active_background-color: lighten(mc-color($primary, 700), 5%),
+        state-progress_background-color: lighten(mc-color($primary, 800), 15%),
+    );
+
     @return (
-        autocomplete: $autocomplete,
+        popup: $popup,
         button: $button,
-        button-toggle: $button-toggle,
-        // все настраивается автоматом (mc-card_selected, cdk-keyboard-focused)
-        card: 'card',
         checkbox: $checkbox,
         datepicker: 'alert',
         divider: $divider,
-        dropdown: $dropdown,
         form-field: 'alert',
         icon: 'alert',
         input: 'alert',
         link: 'alert',
-        list: 'alert',
-        modal: 'alert',
-        navbar: 'alert',
+        list: 'alert', // большинство вынесено
+        modal: 'alert', // большинство вынесено
+        navbar: $navbar,
         popover: 'alert',
-        progress-bar: 'alert',
-        progress-spinner: 'alert',
-        radio: 'alert',
+        progress-bar: $progress-bar,
+        progress-spinner: 'alert', // нечего выносить
+        radio: $radio, // сложно... очень много состояний, наверно сначала нужно упросить
         select: 'alert',
         sidebar: 'alert',
         sidepanel: 'alert',
         splitter: 'alert',
-        tabs: 'alert',
+        tabs: $tabs,
         tags: 'alert',
         textarea: 'alert',
         timepicker: 'alert',
         toggle: 'alert',
-        tooltip: 'alert',
+        tooltip: $tooltip,
         tree: 'alert',
         tree-select: 'alert',
-        vertical-navbar: 'alert',
+        vertical-navbar: $vertical-navbar,
     );
 }
 
@@ -87,11 +119,11 @@
     $second: map-get($theme, second);
     $error: map-get($theme, error);
 
-    $autocomplete: (
-        panel: (
-            border-color: mc-color($second),
-            box-shadow: 0 3px 3px 0 mc-color($second, A200),
-        )
+    $popup: (
+        box-shadow: 0 3px 3px 0 mc-color($second, A200),
+        border-color: mc-color($second),
+        background: map-get($mc-grey, 700),
+        footer_background: transparent,
     );
 
     $button: (
@@ -101,18 +133,10 @@
         )
     );
 
-    $button-toggle: (
-        panel: (
-            border-color: mc-color($second),
-            box-shadow: 0 3px 3px 0 mc-color($second, A200),
-        )
-    );
-
     $checkbox: (
         border-color: mc-color($second),
-        states: (
-            checked: '',
-        )
+        state-checked_border-color: mc-color($primary, lighter),
+        state-checked_background: mc-color($primary, 600)
     );
 
     $datepicker: ();
@@ -121,46 +145,81 @@
         color: map-get($mc-grey, 600)
     );
 
-    $dropdown: (
-        panel: (
-            border-color: mc-color($second),
-            box-shadow: 0 3px 3px 0 mc-color($second, A200),
+    $navbar: (
+        background-color: mc-color($primary, 700),
+        color: mc-color($primary, 100),
+
+        item: (
+            color: mc-color($primary, 100),
+
+            states: (
+                active: lighten(mc-color($primary, 700), 5%),
+                hover: lighten(mc-color($primary, 700), 5%),
+                progress: lighten(mc-color($primary, 800), 15%)
+            )
         )
     );
 
+    $progress-bar: (
+        background-color: mc-color($second, 600),
+    );
+
+    $tabs: (
+        border-color: mc-color($second, 300),
+    );
+
+    $tooltip: (
+        background-color: white,
+        color: mc-color($second, 700),
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2)
+    );
+
+    $tooltip: (
+        background-color: white,
+        color: mc-color($second, 700),
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2)
+    );
+
+    $vertical-navbar: (
+        background-color: mc-color($primary, 700),
+        color: mc-contrast($primary, 700),
+
+        toggle-button_color: mc-contrast($primary, 700),
+
+        state-hover_background-color: lighten(mc-color($primary, 700), 5%),
+        state-active_background-color: lighten(mc-color($primary, 700), 5%),
+        state-progress_background-color: lighten(mc-color($primary, 800), 15%),
+    );
+
     @return (
-        autocomplete: $autocomplete,
+        popup: $popup,
         button: $button,
-        button-toggle: $button-toggle,
-        // все настраивается автоматом (mc-card_selected, cdk-keyboard-focused)
-        card: 'card',
         checkbox: $checkbox,
         datepicker: $datepicker,
         divider: 'alert',
-        dropdown: $dropdown,
         form-field: 'alert',
         icon: 'alert',
         input: 'alert',
         link: 'alert',
         list: 'alert',
         modal: 'alert',
-        navbar: 'alert',
+        navbar: $navbar,
         popover: 'alert',
-        progress-bar: 'alert',
+        progress-bar: $progress-bar,
         progress-spinner: 'alert',
         radio: 'alert',
         select: 'alert',
         sidebar: 'alert',
         sidepanel: 'alert',
         splitter: 'alert',
-        tabs: 'alert',
+        tabs: $tabs,
         tags: 'alert',
         textarea: 'alert',
         timepicker: 'alert',
         toggle: 'alert',
-        tooltip: 'alert',
+        tooltip: $tooltip,
         tree: 'alert',
         tree-select: 'alert',
-        vertical-navbar: 'alert',
+        vertical-navbar: $vertical-navbar,
     );
 }

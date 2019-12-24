@@ -13,7 +13,9 @@
 
     $is-dark: map-get($theme, is-dark);
 
-    $inner-border: mc-color($second, if($is-dark, 600, 60));
+    $background-footer: map-get($background, background-popup-footer);
+
+    $divider-color: mc-color($foreground, divider);
 
     .mc-modal {
         .mc-modal-content {
@@ -29,16 +31,16 @@
         }
 
         .mc-modal-header {
-            border-bottom: 1px solid $inner-border;
+            border-bottom: 1px solid $divider-color;
         }
 
         .mc-modal-footer {
-            border-top: 1px solid $inner-border;
-            background-color: if($is-dark, transparent, mc-color($second, 60));
+            border-top: 1px solid $divider-color;
+            background-color: $background-footer;
         }
 
         .mc-modal-close {
-            border: $mc-button-border-size solid transparent;
+            border: 1px solid transparent;
 
             &:hover .mc-button-overlay {
                 background-color: transparent;
@@ -54,10 +56,9 @@
     }
 
     .mc-confirm {
-        // todo почему футер внезапно перестал быть футером ?
         .mc-confirm-btns {
-            border-top: 1px solid $inner-border;
-            background-color: if($is-dark, transparent, mc-color($second, 60));
+            border-top: 1px solid $divider-color;
+            background-color: $background-footer;
         }
     }
 }

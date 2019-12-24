@@ -1,69 +1,68 @@
 @import '../core/theming/theming';
 @import '../core/styles/typography/typography-utils';
 
-@mixin _mc-vertical-navbar-theme-color($theme) {
-    $palette: map-get($theme, primary);
+@mixin mc-vertical-navbar-theme($theme) {
+    $focused-color: map-get(map-get($theme, states), focused-color);
 
-    background-color: mc-color($palette, 700);
+    $vertical-navbar: map-get(map-get($theme, components), vertical-navbar);
 
-    :focus {
-        outline: 0;
-    }
+    $background-color: map-get($vertical-navbar, background-color);
+    $color: map-get($vertical-navbar, color);
+    $toggle-button_color: map-get($vertical-navbar, toggle-button_color);
 
-    .cdk-keyboard-focused,
-    .cdk-program-focused {
-        outline: 2px solid mc-color($palette, 500);
-        outline-offset: -2px;
-    }
+    $state-hover_background-color: map-get($vertical-navbar, state-hover_background-color);
+    $state-active_background-color: map-get($vertical-navbar, state-active_background-color);
+    $state-progress_background-color: map-get($vertical-navbar, state-progress_background-color);
 
-    .mc-vertical-navbar__toggle-button {
-        color: mc-contrast($palette, 700);
-    }
+    .mc-vertical-navbar {
+        background-color: $background-color;
 
-    a[mc-vertical-navbar-header],
-    .mc-vertical-navbar__toggle-button {
-        &:hover {
-            background-color: lighten(mc-color($palette, 700), 5%)
-        }
-    }
-
-    .mc-vertical-navbar__title {
-        color: mc-contrast($palette, 700);
-    }
-
-    mc-vertical-navbar-item,
-    a[mc-vertical-navbar-item] {
-
-        color: mc-contrast($palette, 700);
-
-        &.mc-vertical-navbar__item_active {
-            $active-lighten: 5%;
-            background-color: lighten(mc-color($palette, 700), $active-lighten)
+        :focus {
+            outline: 0;
         }
 
-        &:hover:not([disabled]):not(.mc-progress) {
-            $hover-lighten: 5%;
-            background-color: lighten(mc-color($palette, 700), $hover-lighten)
+        .cdk-keyboard-focused {
+            outline: 2px solid $focused-color;
+            outline-offset: -2px;
         }
 
-        &.mc-progress:hover:not([disabled]) {
-            $bg-lighten: 15%;
-            background-color: lighten(mc-color($palette, 800), $bg-lighten);
+        .mc-vertical-navbar__toggle-button {
+            color: $toggle-button_color;
         }
 
-        &[disabled] {
-            > mc-vertical-navbar-title,
-            .mc-vertical-navbar__title,
-            [mc-icon] {
-                opacity: 0.3;
+        .mc-vertical-navbar__header,
+        .mc-vertical-navbar__toggle-button {
+            &:hover {
+                background-color: $state-hover_background-color;
             }
         }
-    }
-}
 
-@mixin mc-vertical-navbar-theme($theme) {
-    .mc-vertical-navbar {
-        @include _mc-vertical-navbar-theme-color($theme);
+        .mc-vertical-navbar__title {
+            color: $color;
+        }
+
+        .mc-vertical-navbar-item {
+            color: $color;
+
+            &.mc-vertical-navbar__item_active {
+                background-color: $state-active_background-color;
+            }
+
+            &:hover:not([disabled]):not(.mc-progress) {
+                background-color: $state-hover_background-color;
+            }
+
+            &.mc-progress:hover:not([disabled]) {
+                background-color: $state-progress_background-color;
+            }
+
+            &[disabled] {
+                .mc-vertical-navbar__title,
+                .mc-icon {
+                    opacity: 0.3;
+                }
+            }
+        }
     }
 }
 

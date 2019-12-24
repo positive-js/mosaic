@@ -10,6 +10,7 @@ $mc-button-toggle-standard-border-radius: 2px !default;
 $mc-button-toggle-border-size: 1px;
 $mc-button-toggle-border-radius: 3px;
 
+
 .mc-button-toggle-group {
     display: flex;
     flex-direction: row;
@@ -42,11 +43,19 @@ $mc-button-toggle-border-radius: 3px;
             }
         }
 
+        &[disabled] {
+            outline: 0;
+        }
     }
 }
 
 .mc-button-toggle-vertical {
     flex-direction: column;
+
+    .mc-button-toggle + .mc-button-toggle {
+        border-left: none;
+        border-right: none;
+    }
 
     .mc-button-toggle:not([disabled]) + .mc-button-toggle:not([disabled]) {
         margin-top: -$mc-button-toggle-border-size;
@@ -83,4 +92,8 @@ $mc-button-toggle-border-radius: 3px;
             }
         }
     }
+}
+
+.mc-button-toggle-standalone {
+    box-shadow: none;
 }

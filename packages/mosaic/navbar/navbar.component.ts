@@ -16,36 +16,29 @@ import { debounceTime } from 'rxjs/operators';
 
 
 const COLLAPSED_CLASS: string = 'mc-navbar-collapsed-title';
-const MC_ICON = 'mc-icon';
-const MC_NAVBAR = 'mc-navbar';
-const MC_NAVBAR_CONTAINER = 'mc-navbar-container';
-const MC_NAVBAR_ITEM = 'mc-navbar-item';
-const MC_NAVBAR_BRAND = 'mc-navbar-brand';
-const MC_NAVBAR_TITLE = 'mc-navbar-title';
-const MC_NAVBAR_LOGO = 'mc-navbar-logo';
 
 export type McNavbarContainerPositionType = 'left' | 'right';
 
 @Directive({
-    selector: MC_NAVBAR_LOGO,
+    selector: 'mc-navbar-logo',
     host: {
-        class: MC_NAVBAR_LOGO
+        class: 'mc-navbar-logo'
     }
 })
 export class McNavbarLogo {}
 
 @Directive({
-    selector: MC_NAVBAR_BRAND,
+    selector: 'mc-navbar-brand',
     host: {
-        class: MC_NAVBAR_BRAND
+        class: 'mc-navbar-brand'
     }
 })
 export class McNavbarBrand {}
 
 @Directive({
-    selector: MC_NAVBAR_TITLE,
+    selector: 'mc-navbar-title',
     host: {
-        class: MC_NAVBAR_TITLE
+        class: 'mc-navbar-title'
     }
 })
 export class McNavbarTitle {}
@@ -58,7 +51,7 @@ export class McNavbarItemBase {
 export const McNavbarMixinBase: CanDisableCtor & typeof McNavbarItemBase = mixinDisabled(McNavbarItemBase);
 
 @Component({
-    selector: MC_NAVBAR_ITEM,
+    selector: 'mc-navbar-item',
     template: `<ng-content></ng-content>`,
     encapsulation: ViewEncapsulation.None,
     inputs: ['disabled'],
@@ -112,7 +105,7 @@ export class McNavbarItem extends McNavbarMixinBase implements OnInit, OnDestroy
 }
 
 @Directive({
-    selector: MC_NAVBAR_CONTAINER
+    selector: 'mc-navbar-container'
 })
 export class McNavbarContainer {
     @Input()
@@ -204,10 +197,10 @@ class CachedItemWidth {
 
 
 @Component({
-    selector: MC_NAVBAR,
+    selector: 'mc-navbar',
     template: `
         <nav class="mc-navbar">
-            <ng-content select="[${MC_NAVBAR_CONTAINER}],${MC_NAVBAR_CONTAINER}"></ng-content>
+            <ng-content select="[mc-navbar-container], mc-navbar-container"></ng-content>
         </nav>
     `,
     styleUrls: ['./navbar.css'],
@@ -217,11 +210,11 @@ export class McNavbar implements AfterViewInit, OnDestroy {
 
     private readonly forceRecalculateItemsWidth: boolean = false;
     private readonly resizeDebounceInterval: number = 100;
-    private readonly firstLevelElement: string = MC_NAVBAR_CONTAINER;
+    private readonly firstLevelElement: string = 'mc-navbar-container';
     private readonly secondLevelElements: string[] = [
-        MC_NAVBAR_ITEM,
-        MC_NAVBAR_BRAND,
-        MC_NAVBAR_TITLE
+        'mc-navbar-item',
+        'mc-navbar-brand',
+        'mc-navbar-title'
     ];
 
     private totalItemsWidths: number;
@@ -311,13 +304,13 @@ export class McNavbar implements AfterViewInit, OnDestroy {
     }
 
     private getItemsForCollapse(element: HTMLElement): CollapsibleItem[] {
-        const icon = element.querySelector(`[${MC_ICON}],${MC_NAVBAR_LOGO},[${MC_NAVBAR_LOGO}]`);
+        const icon = element.querySelector(`[mc-icon],mc-navbar-logo,[mc-navbar-logo]`);
 
         if (!icon) {
             return [];
         }
 
-        return Array.from(element.querySelectorAll(MC_NAVBAR_TITLE))
+        return Array.from(element.querySelectorAll('mc-navbar-title'))
             .map((el) => new CollapsibleItem(<HTMLElement> el, el.getBoundingClientRect().width));
     }
 }

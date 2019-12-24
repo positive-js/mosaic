@@ -9,7 +9,7 @@
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    $is-dark: map-get($theme, is-dark);
+    $selected-color: map-get(map-get($theme, states), selected-color);
 
     .mc-option {
         color: mc-color($foreground, text);
@@ -26,8 +26,7 @@
         }
 
         &.mc-selected {
-            // todo пока непонятно откуда брать эти цвета
-            background: mc-color($primary, if($is-dark, 700, 100));
+            background: $selected-color;
         }
 
         &.mc-disabled {

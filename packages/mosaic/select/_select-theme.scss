@@ -4,14 +4,11 @@
 
 
 @mixin mc-select-theme($theme) {
-    $primary: map-get($theme, primary);
-    $second: map-get($theme, second);
     $error: map-get($theme, error);
 
     $foreground: map-get($theme, foreground);
-    $background: map-get($theme, background);
 
-    $is-dark: map-get($theme, is-dark);
+    $popup: map-get(map-get($theme, components), popup);
 
     .mc-select {
         color: map-get($foreground, text);
@@ -30,25 +27,18 @@
     }
 
     .mc-select__panel {
-        border: {
-            color: mc-color($second);
-        }
+        box-shadow: map-get($popup, box-shadow);
+        border-color: map-get($popup, border-color);
 
-        box-shadow: 0 3px 3px 0 mc-color($second, A200);
-
-        background-color: map-get($background, background-popup);
-    }
-
-    .mc-select__no-options-message {
-        color: mc-color($second, 400);
+        background-color: map-get($popup, background);
     }
 
     .mc-select__search-container {
-        border-bottom: {
-            width: 1px;
-            style: solid;
-            color: mc-color($second);
-        }
+        border-bottom-color: map-get($popup, border-color);
+    }
+
+    .mc-select__no-options-message {
+        color: mc-color($foreground, text-less-contrast);
     }
 }
 

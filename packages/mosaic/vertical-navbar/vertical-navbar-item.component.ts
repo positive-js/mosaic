@@ -55,6 +55,7 @@ export const McVerticalNavbarMixinBase: CanDisableCtor & typeof McVerticalNavbar
     styleUrls: ['./vertical-navbar-item.component.css'],
     inputs: ['disabled'],
     host: {
+        class: 'mc-vertical-navbar-item',
         '[attr.disabled]': 'disabled || null',
         '[attr.tabindex]': 'disabled ? -1 : 0'
     }

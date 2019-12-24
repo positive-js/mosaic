@@ -4,32 +4,14 @@
 @import '../core/theming/palette';
 
 
-@mixin _mc-tag-color($main-color, $focus-color, $foreground, $background, $is-dark) {
-    color: mc-color($foreground, text);
-
-    background: mc-color($main-color, if($is-dark, 700, 100));
-    border-color: mc-color($main-color, if($is-dark, 700, 100));
+@mixin _mc-tag-color($color, $focused-color, $is-dark) {
+    background: mc-color($color, if($is-dark, 700, 100));
+    border-color: mc-color($color, if($is-dark, 700, 100));
 
     &.mc-active,
     &.mc-focused {
-        border-color: mc-color($focus-color);
-        box-shadow: 0 0 0 1px mc-color($focus-color);
-    }
-
-    &.mc-disabled {
-        border-color: mix(mc-color($main-color), transparent, 10%);
-        background: mix(mc-color($main-color), transparent, 10%);
-
-        color: mix(mc-color($main-color), transparent, 50%);
-    }
-
-    &:not(.mc-disabled) .mc-icon {
-        color: mix(mc-color($main-color, 400), mc-color($background, overlay-hovered));
-
-        &:hover {
-            cursor: pointer;
-            color: mc-color($main-color, if($is-dark, lighter, darker));
-        }
+        border-color: $focused-color;
+        box-shadow: 0 0 0 1px $focused-color;
     }
 }
 
@@ -43,23 +25,53 @@
 
     $is-dark: map-get($theme, is-dark);
 
+    $focused-color: map-get(map-get($theme, states), focused-color);
+
     .mc-tag {
+        color: mc-color($foreground, text);
+
         &.mc-primary {
-            @include _mc-tag-color($primary, $primary, $foreground, $background, $is-dark);
+            @include _mc-tag-color($primary, $focused-color, $is-dark);
         }
 
         &.mc-second {
-            @include _mc-tag-color($second, $primary, $foreground, $background, $is-dark);
+            @include _mc-tag-color($second, $focused-color, $is-dark);
         }
 
         &.mc-error {
-            @include _mc-tag-color($error, $error, $foreground, $background, $is-dark);
+            @include _mc-tag-color($error, mc-color($error), $is-dark);
         }
 
         &:hover:not(.mc-disabled),
         &.mc-hovered:not(.mc-disabled) {
             & .mc-tag-overlay {
                 background: mc-color($background, overlay-hovered);
+            }
+        }
+
+        .mc-icon {
+            color: map-get($foreground, icon);
+
+            &:hover {
+                cursor: pointer;
+                color: mix(map-get($foreground, text), mc-color($second), 90%);
+            }
+        }
+
+        &.mc-disabled {
+            color: mc-color($foreground, text-disabled);
+
+            border-color: transparent;
+
+            background-color: map-get($background, background-disabled);
+
+            & .mc-tag-overlay {
+                background: mc-color($background, overlay-disabled);
+            }
+
+            & .mc-icon {
+                color: map-get($foreground, icon);
+                cursor: default;
             }
         }
     }

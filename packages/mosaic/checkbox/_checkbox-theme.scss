@@ -12,8 +12,12 @@
 
     $checkbox: map-get(map-get($theme, components), checkbox);
 
+    $border-color: map-get($checkbox, border-color);
+    $state-checked_border-color: map-get($checkbox, state-checked_border-color);
+    $state-checked_background: map-get($checkbox, state-checked_background);
+
     .mc-checkbox-frame {
-        border-color: map-get($checkbox, border-color);
+        border-color: $border-color;
     }
 
     .mc-checkbox {
@@ -28,18 +32,18 @@
         &.mc-checked,
         &.mc-indeterminate {
             .mc-checkbox-frame {
-                border-color: mc-color($primary, if($is-dark, lighter, darker));
+                border-color: $state-checked_border-color;
 
-                background: if($is-dark, mc-color($primary, 600), mc-color($primary));
+                background: $state-checked_background;
             }
         }
 
         & .mc-checkbox-input.cdk-keyboard-focused {
-            $focus-color: map-get(map-get(map-get($theme, states), focus), color);
+            $focused-color: map-get(map-get($theme, states), focused-color);
 
             + .mc-checkbox-frame {
-                border-color: $focus-color;
-                box-shadow: inset 0 0 0 1px white, 0 0 0 1px $focus-color;
+                border-color: $focused-color;
+                box-shadow: inset 0 0 0 1px white, 0 0 0 1px $focused-color;
             }
         }
 
@@ -47,7 +51,7 @@
             color: map-get($foreground, text-disabled);
 
             .mc-checkbox-frame {
-                border-color: map-get($foreground, border);
+                border-color: map-get($foreground, text-disabled);
 
                 background-color: map-get($background, background-disabled);
             }

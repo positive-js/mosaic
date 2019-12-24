@@ -4,7 +4,6 @@
 @mixin mc-textarea-theme($theme) {
     $foreground: map-get($theme, foreground);
 
-    .mc-input,
     .mc-textarea {
         color: map-get($foreground, text);
 

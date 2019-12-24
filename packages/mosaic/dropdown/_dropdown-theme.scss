@@ -3,23 +3,18 @@
 
 
 @mixin mc-dropdown-theme($theme) {
-    $primary: map-get($theme, primary);
-    $second: map-get($theme, second);
-
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    $is-dark: map-get($theme, is-dark);
-
-    $dropdown: map-get(map-get($theme, components), dropdown);
+    $selected-color: map-get(map-get($theme, states), selected-color);
 
     .mc-dropdown__panel {
-        $panel: map-get($dropdown, panel);
+        $popup: map-get(map-get($theme, components), popup);
 
-        border-color: map-get($panel, border-color);
-        box-shadow: map-get($panel, box-shadow);
+        box-shadow: map-get($popup, box-shadow);
+        border-color: map-get($popup, border-color);
 
-        background-color: map-get($background, background-popup);
+        background-color: map-get($popup, background);
     }
 
     .mc-dropdown__item {
@@ -33,19 +28,18 @@
         }
 
         &.cdk-keyboard-focused {
-            $focus-color: map-get(map-get(map-get($theme, states), focus), color);
+            $focused-color: map-get(map-get($theme, states), focused-color);
 
-            outline: $focus-color solid 2px;
+            outline: $focused-color solid 2px;
             outline-offset: -2px;
 
             &.mc-link {
                 outline-offset: -2px;
             }
-
         }
 
         &.mc-selected {
-            background: mc-color($primary, if($is-dark, 700, 100));
+            background: $selected-color;
         }
 
         &[disabled] {

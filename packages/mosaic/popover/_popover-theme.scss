@@ -35,7 +35,7 @@
 
     .mc-popover__footer {
         background-color: $footer-background;
-        border-top-color: if($is-dark, map-get($foreground, divider), $footer-background);
+        border-top-color: map-get($foreground, divider);
     }
 
     .mc-popover .mc-popover__arrow {
