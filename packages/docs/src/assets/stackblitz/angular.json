@@ -1,0 +1,64 @@
+{
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "version": 1,
+    "newProjectRoot": "projects",
+    "projects": {
+        "mosaic-docs": {
+            "root": "",
+            "sourceRoot": "",
+            "projectType": "application",
+            "prefix": "app",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "aot": true,
+                        "outputPath": "dist",
+                        "index": "index.html",
+                        "main": "main.ts",
+                        "polyfills": "polyfills.ts",
+                        "tsConfig": "tsconfig.app.json",
+                        "assets": [],
+                        "styles": [
+                            "styles.css"
+                        ],
+                        "scripts": []
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "aot": true,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "2mb",
+                                    "maximumError": "5mb"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "mosaic-docs:build"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "mosaic-docs:build:production"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "defaultProject": "mosaic-docs"
+}
