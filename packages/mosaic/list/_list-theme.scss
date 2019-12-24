@@ -14,7 +14,9 @@
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    $is-dark: map-get($theme, is-dark);
+    $states: map-get($theme, states);
+    $selected-color: map-get($states, selected-color);
+    $focused-color: map-get($states, focused-color);
 
     .mc-list-item {
         color: mc-color($foreground, text);
@@ -31,11 +33,11 @@
         }
 
         &.mc-focused {
-            border-color: mc-color($primary);
+            border-color: $focused-color;
         }
 
         &.mc-selected {
-            background: mc-color($primary, if($is-dark, 700, 100));
+            background: $selected-color;
         }
 
         &.mc-disabled,

@@ -151,46 +151,43 @@ $mc-yellow: (
 
 
 $mc-light-theme-foreground: (
-    text:                   map-get($mc-grey, 700),
-    text-less-contrast:     map-get($mc-grey, 400),
-    text-disabled:          map-get($mc-grey, 300),
+    text:                       map-get($mc-grey, 700),
+    text-less-contrast:         map-get($mc-grey, 400),
+    text-disabled:              map-get($mc-grey, 300),
 
-    divider:                map-get($mc-grey, 100),
-    border:                 map-get($mc-grey, 200),
+    divider:                    map-get($mc-grey, 100),
+    border:                     map-get($mc-grey, 200),
 
-    icon:                   map-get($mc-grey, 400),
+    icon:                       map-get($mc-grey, 400),
 );
 
 $mc-dark-theme-foreground: (
-    text:                   map-get($mc-grey, 60),
-    text-less-contrast:     map-get($mc-grey, 400),
-    text-disabled:          map-get($mc-grey, 400),
+    text:                       map-get($mc-grey, 60),
+    text-less-contrast:         map-get($mc-grey, 400),
+    text-disabled:              map-get($mc-grey, 400),
 
-    divider:                map-get($mc-grey, 600),
-    border:                 map-get($mc-grey, 500),
+    divider:                    map-get($mc-grey, 600),
+    border:                     map-get($mc-grey, 500),
 
-    icon:                   map-get($mc-grey, 400),
+    icon:                       map-get($mc-grey, 400),
 );
 
 $mc-light-theme-background: (
-    background:             white,
-    // в поповере цвет контейнера совпадает с цветом бэкграунда
-    // в сайдпанели background-color: map-get($background, background);
-    // в модалке background-color: map-get($background, background);
-    // эту переменную переименовать и она будет использоваться во всплывашках (поповер, дропдовн, дропдовн в слектах, сайдпанель и модалки)
-    // нужно посмотреть цвета всех дропдовнов
-    background-popup:       white,
-    background-disabled:    map-get($mc-grey, 60),
+    background:                 white,
+    background-popup:           white,
+    background-popup-footer:    map-get($mc-grey, 60),
+    background-disabled:        map-get($mc-grey, 60),
 
-    overlay-hovered:        rgba(black, 0.05),
-    overlay-disabled:       rgba(white, 0.3) // используется но не часто
+    overlay-hovered:            rgba(black, 0.05),
+    overlay-disabled:           rgba(white, 0.3)
 );
 
 $mc-dark-theme-background: (
-    background:             map-get($mc-grey, 800),
-    background-popup:       map-get($mc-grey, 700),
-    background-disabled:    map-get($mc-grey, 600),
+    background:                 map-get($mc-grey, 800),
+    background-popup:           map-get($mc-grey, 700),
+    background-popup-footer:    transparent,
+    background-disabled:        map-get($mc-grey, 600),
 
-    overlay-hovered:        rgba(white, 0.05),
-    overlay-disabled:       rgba(black, 0.2)
+    overlay-hovered:            rgba(white, 0.05),
+    overlay-disabled:           rgba(black, 0.2)
 );

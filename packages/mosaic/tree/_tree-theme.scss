@@ -9,7 +9,8 @@
     $background: map-get($theme, background);
     $foreground: map-get($theme, foreground);
 
-    $is-dark: map-get($theme, is-dark);
+    $selected-color: map-get(map-get($theme, states), selected-color);
+    $focused-color: map-get(map-get($theme, states), focused-color);
 
     .mc-tree-selection {
         &:focus {
@@ -26,11 +27,11 @@
         }
 
         &.mc-focused {
-            border-color: mc-color($primary);
+            border-color: $focused-color;
         }
 
         &.mc-selected {
-            background: mc-color($primary, if($is-dark, 700, 100));
+            background: $selected-color;
         }
 
         &[disabled] {
