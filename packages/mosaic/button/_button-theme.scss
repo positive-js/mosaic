@@ -1,106 +1,4 @@
-@mixin _mc-button-primary-color($palette, $foreground, $background) {
-    border-color: map-get($palette, 560);
-    background: mc-color($palette, 500);
-    color: mc-contrast($palette, 500);
-
-    .mc-button-overlay {
-        background: transparent;
-    }
-
-    .mc-icon {
-        color: mc-contrast($palette, 500);
-    }
-
-    &:hover,
-    &.mc-hover {
-        & .mc-button-overlay {
-            background: map-get($background, overlay-hovered);
-        }
-    }
-
-    &:active,
-    &.mc-active {
-        border-color: darken(mc-color($palette, 560), 5);
-        background: darken(mc-color($palette, 500), 5);
-    }
-
-    &.mc-disabled,
-    &[disabled] {
-        border-color: map-get($palette, 500);
-        color: transparentize(mc-contrast($palette, 500), 0.5);
-
-        & .mc-button-overlay {
-            background: mc-color($background, overlay-disabled);
-        }
-
-        .mc-icon {
-            color: transparentize(mc-contrast($palette, 500), 0.5);
-        }
-    }
-}
-
-@mixin _mc-button-second-color($palette, $foreground, $background) {
-    border-color: mc-color($foreground, border);
-    background: map-get($background, background-disabled);
-    color: map-get($foreground, text);
-
-    .mc-icon {
-        color: map-get($foreground, text);
-    }
-
-    &:hover,
-    &.mc-hover {
-        & .mc-button-overlay {
-            background: map-get($background, overlay-hovered);
-        }
-    }
-
-    &:active,
-    &.mc-active {
-        border-color: darken(mc-color($foreground, border), 5);
-        background: darken(map-get($background, background-disabled), 5);
-    }
-
-    &.mc-disabled,
-    &[disabled] {
-        border-color: mc-color($background, background-disabled);
-        color: map-get($foreground, text-disabled);
-
-        & .mc-button-overlay {
-            background: mc-color($background, overlay-disabled);
-        }
-
-        .mc-icon {
-            color: map-get($foreground, text-disabled);
-        }
-    }
-}
-
-@mixin _mc-button-error-color($second, $error, $foreground, $background) {
-    @include _mc-button-second-color($second, $foreground, $background);
-
-    color: mc-color($error);
-
-    .mc-icon {
-        color: mc-color($error, 400);
-    }
-
-    &.mc-disabled,
-    &[disabled] {
-        border-color: mc-color($background, background-disabled);
-        color: map-get($foreground, text-disabled);
-
-        & .mc-button-overlay {
-            background: mc-color($background, overlay-disabled);
-        }
-
-        .mc-icon {
-            color: map-get($foreground, text-disabled);
-        }
-    }
-}
-
-@mixin _mc-button-theme-color($theme) {
+@mixin mc-button-theme($theme) {
     $primary: map-get($theme, primary);
     $second: map-get($theme, second);
     $error: map-get($theme, error);
@@ -111,50 +9,88 @@
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    &.mc-primary {
-        @include _mc-button-primary-color($primary, $foreground, $background);
+    .mc-button-overlay {
+        background: transparent;
     }
 
-    &.mc-second {
-        @include _mc-button-second-color($second, $foreground, $background);
-    }
-
-    &.mc-error {
-        @include _mc-button-error-color($second, $error, $foreground, $background);
-    }
-
-    &.mc-primary,
-    &.mc-second,
-    &.mc-error {
-        -webkit-font-smoothing: antialiased;
-
-        &.cdk-keyboard-focused {
-            $focus-color: mc-color($primary);
-
-            border-color: $focus-color;
-            box-shadow: 0 0 0 1px $focus-color;
-        }
-    }
-
-    &:active,
-    &.mc-active {
-        box-shadow: $in-shadow;
-    }
-}
-
-@mixin mc-button-theme($theme) {
     .mc-button,
     .mc-icon-button {
-        @include _mc-button-theme-color($theme);
+        -webkit-font-smoothing: antialiased;
+
+        &.mc-primary {
+            border-color: map-get($primary, 560);
+            background: mc-color($primary, 500);
+            color: mc-contrast($primary, 500);
+
+            .mc-icon {
+                color: mc-contrast($primary, 500);
+            }
+
+            &:active,
+            &.mc-active {
+                border-color: darken(mc-color($primary, 560), 5);
+                background: darken(mc-color($primary, 500), 5);
+            }
+        }
+
+        &.mc-second {
+            border-color: mc-color($foreground, border);
+            background: map-get($background, background-disabled);
+            color: map-get($foreground, text);
+
+            .mc-icon {
+                color: map-get($foreground, text);
+            }
+
+            &:active,
+            &.mc-active {
+                border-color: darken(mc-color($foreground, border), 5);
+                background: darken(map-get($background, background-disabled), 5);
+            }
+        }
+
+        &.mc-error {
+            border-color: mc-color($foreground, border);
+            background: map-get($background, background-disabled);
+            color: mc-color($error);
+
+            .mc-icon {
+                color: mc-color($error, 400);
+            }
+
+            &:active,
+            &.mc-active {
+                border-color: darken(mc-color($foreground, border), 5);
+                background: darken(map-get($background, background-disabled), 5);
+            }
+        }
+
+        &:hover,
+        &.mc-hover {
+            & .mc-button-overlay {
+                background: map-get($background, overlay-hovered);
+            }
+        }
+
+        &:active,
+        &.mc-active {
+            box-shadow: $in-shadow;
+        }
+
+        &.mc-primary,
+        &.mc-second,
+        &.mc-error {
+            &.cdk-keyboard-focused {
+                $focused-color: map-get(map-get($theme, states), focused-color);
+
+                border-color: $focused-color;
+                box-shadow: 0 0 0 1px $focused-color;
+            }
+        }
 
         &.mc-button_transparent {
             border-color: transparent;
             background-color: transparent;
-
-            &.mc-disabled,
-            &[disabled] {
-                border-color: transparent;
-            }
 
             &:active,
             &.mc-active {
@@ -162,6 +98,16 @@
                 background-color: transparent;
                 box-shadow: none;
             }
+
+            &.mc-disabled,
+            &[disabled] {
+                border-color: transparent;
+            }
+        }
+
+        &.mc-disabled,
+        &[disabled] {
+            opacity: 0.3;
         }
     }
 }

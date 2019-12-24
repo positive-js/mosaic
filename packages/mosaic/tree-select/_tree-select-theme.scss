@@ -4,14 +4,9 @@
 
 
 @mixin mc-tree-select-theme($theme) {
-    $primary: map-get($theme, primary);
-    $second: map-get($theme, second);
     $error: map-get($theme, error);
 
     $foreground: map-get($theme, foreground);
-    $background: map-get($theme, background);
-
-    $is-dark: map-get($theme, is-dark);
 
     .mc-tree-select {
         color: map-get($foreground, text);
@@ -30,13 +25,12 @@
     }
 
     .mc-tree-select__panel {
-        border: {
-            color: mc-color($second);
-        }
+        $popup: map-get(map-get($theme, components), popup);
 
-        box-shadow: 0 3px 3px 0 mc-color($second, A200);
+        box-shadow: map-get($popup, box-shadow);
+        border-color: map-get($popup, border-color);
 
-        background-color: map-get($background, background-popup);
+        background-color: map-get($popup, background);
     }
 }
 

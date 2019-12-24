@@ -11,7 +11,9 @@
 
     $is-dark: map-get($theme, is-dark);
 
-    $inner-border: mc-color($second, if($is-dark, 600, 60));
+    $divider-color: mc-color($foreground, divider);
+
+    $background-footer: map-get($background, background-popup-footer);
 
     .mc-sidepanel-content {
         background-color: map-get($background, background);
@@ -52,17 +54,12 @@
     }
 
     .mc-sidepanel-header {
-        border-bottom: 1px solid $inner-border;
+        border-bottom: 1px solid $divider-color;
     }
 
     .mc-sidepanel-footer {
-        border-top: 1px solid $inner-border;
-        background-color: if($is-dark, transparent, mc-color($second, 60));
-    }
-
-    .mc-sidepanel-close-x:hover .mc-icon,
-    .mc-sidepanel-close:hover .mc-sidepanel-close-x .mc-icon {
-        color: mix(map-get($foreground, text), mc-color($second), 90%);
+        border-top: 1px solid $divider-color;
+        background-color: $background-footer;
     }
 }
 
