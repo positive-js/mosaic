@@ -1,16 +1,10 @@
 @mixin mc-splitter-theme($theme) {
-    $second: map-get($theme, second);
-
-    $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
     .mc-gutter {
         cursor: col-resize;
 
-        &:hover {
-            background-color: mix(map-get($background, background-disabled), map-get($background, overlay-hovered));
-        }
-
+        &:hover,
         &.mc-gutter_dragged {
             background-color: mix(map-get($background, background-disabled), map-get($background, overlay-hovered));
         }

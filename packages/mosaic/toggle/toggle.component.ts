@@ -57,7 +57,7 @@ export class McToggleChange {
         '[id]': 'id',
         '[attr.id]': 'id',
         '[class.mc-disabled]': 'disabled',
-        '[class.mc-toggle_off]': '!checked'
+        '[class.mc-active]': 'checked'
     },
     animations: [
         trigger('switch', [

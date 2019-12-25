@@ -5,7 +5,7 @@
     $foreground: map-get($theme, foreground);
 
     .mc-input {
-        color: map-get($foreground, text);;
+        color: map-get($foreground, text);
 
         &::placeholder {
             color: map-get($foreground, text-disabled);

@@ -11,7 +11,7 @@
     .mc-dropdown__panel {
         $popup: map-get(map-get($theme, components), popup);
 
-        box-shadow: map-get($popup, box-shadow);
+        box-shadow: map-get($popup, shadow);
         border-color: map-get($popup, border-color);
 
         background-color: map-get($popup, background);
@@ -22,8 +22,7 @@
 
         background: transparent;
 
-        &:hover,
-        &.mc-hovered {
+        &:hover {
             background: mc-color($background, overlay-hovered);
         }
 

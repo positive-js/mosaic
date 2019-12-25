@@ -3,32 +3,23 @@
 
 
 @mixin mc-navbar-theme($theme) {
-    $primary: map-get($theme, primary);
-
     $focused-color: map-get(map-get($theme, states), focused-color);
 
-    $navbar-item: map-get(map-get($theme, components), navbar);
+    $navbar: map-get(map-get($theme, components), navbar);
 
     .mc-navbar {
-        background-color: map-get($navbar-item, background-color);
+        background-color: map-get($navbar, background-color);
 
+        .mc-navbar-title,
         .mc-icon {
-            color: map-get($navbar-item, color);
-        }
-
-        .mc-navbar-title {
-            color: map-get($navbar-item, color);
+            color: map-get($navbar, color);
         }
     }
 
     .mc-navbar-item {
-        $navbar-item: map-get($navbar-item, item);
-
-        $states: map-get($navbar-item, states);
-
         outline: 0;
 
-        color: map-get($navbar-item, color);
+        color: map-get($navbar, item_color);
 
         &:not([disabled]) {
             outline: 0;
@@ -39,22 +30,21 @@
         }
 
         &.mc-navbar-item-active {
-            background-color: map-get($states, active);
+            background-color: map-get($navbar, item_state-active_color);
         }
 
-        // need do with overlay
         &:hover:not([disabled]):not(.mc-progress) {
-            background-color: map-get($states, hover);
+            background-color: map-get($navbar, item_state-hover_color);
         }
 
         &.mc-progress:hover:not([disabled]) {
-            background-color: map-get($states, progress);
+            background-color: map-get($navbar, item_state-progress_color);
         }
 
         &[disabled] {
             .mc-navbar-title,
             .mc-icon {
-                opacity: 0.3;
+                opacity: map-get($navbar, item_state-disabled_opacity);
             }
         }
     }

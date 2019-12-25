@@ -1,7 +1,4 @@
 @mixin mc-tabs-theme($theme) {
-    $primary: map-get($theme, primary);
-    $second: map-get($theme, second);
-
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
@@ -9,6 +6,7 @@
 
     $tabs: map-get(map-get($theme, components), tabs);
     $border-color: map-get($tabs, border-color);
+    $state-active_color: map-get($tabs, state-active_color);
 
     .mc-tab-label,
     .mc-tab-light-label,
@@ -72,7 +70,7 @@
 
         &.mc-active {
             &:before {
-                background-color: mc-color($primary);
+                background-color: $state-active_color;
             }
 
             & .mc-tab-overlay {
