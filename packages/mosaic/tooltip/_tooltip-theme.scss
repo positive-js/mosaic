@@ -5,20 +5,16 @@
 
 
 @mixin mc-tooltip-theme($theme) {
-    $second: map-get($theme, second);
-    $background: map-get($theme, background);
-    $foreground: map-get($theme, foreground);
-
-    $is-dark: map-get($theme, is-dark);
-
     $tooltip: map-get(map-get($theme, components), tooltip);
 
-    $background-color: map-get($tooltip, background-color);
+    $shadow: map-get($tooltip, shadow);
+    $background-color: map-get($tooltip, background_color);
+    $color: map-get($tooltip, color);
 
     .mc-tooltip-inner {
-        color: map-get($tooltip, color);
+        color: $color;
 
-        box-shadow: map-get($tooltip, box-shadow);
+        box-shadow: $shadow;
         background-color: $background-color;
     }
 

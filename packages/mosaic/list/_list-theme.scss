@@ -9,8 +9,6 @@
 
 
 @mixin mc-list-theme($theme) {
-    $primary: map-get($theme, primary);
-
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
@@ -27,8 +25,7 @@
 
         color: mc-color($foreground, text);
 
-        &:hover,
-        &.mc-hovered {
+        &:hover {
             background: mc-color($background, overlay-hovered);
         }
 

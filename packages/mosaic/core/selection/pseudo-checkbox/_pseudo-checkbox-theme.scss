@@ -12,7 +12,7 @@
 
     .mc-pseudo-checkbox {
         border-color: mc-color($second);
-        background-color: map-get($background, background);;
+        background-color: map-get($background, background);
 
         & .mc-checkbox-checkmark,
         & .mc-checkbox-mixedmark {

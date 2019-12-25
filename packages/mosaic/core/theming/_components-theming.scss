@@ -7,7 +7,7 @@
     $error: map-get($theme, error);
 
     $popup: (
-        box-shadow: 0 3px 3px 0 mc-color($second, A200),
+        shadow: 0 3px 3px 0 mc-color($second, A200),
         border-color: mc-color($second),
         background: white,
         footer_background: map-get($second, 60),
@@ -28,43 +28,76 @@
         color: map-get($second, 100)
     );
 
+    $modal: (
+        shadow: (0 0 0 1px mc-color($second, 300), 0 6px 12px 0 rgba(0, 0, 0, 0.5))
+    );
+
     $navbar: (
         background-color: mc-color($primary, 700),
         color: mc-color($primary, 100),
 
-        item: (
-            color: mc-color($primary, 100),
+        item_color: mc-color($primary, 100),
 
-            states: (
-                active: lighten(mc-color($primary, 700), 5%),
-                hover: lighten(mc-color($primary, 700), 5%),
-                progress: lighten(mc-color($primary, 800), 15%)
-            )
-        )
+        item_state-active_color: lighten(mc-color($primary, 700), 5%),
+        item_state-hover_color: lighten(mc-color($primary, 700), 5%),
+        item_state-progress_color: lighten(mc-color($primary, 800), 15%),
+        item_state-disabled_opacity: lighten(mc-color($primary, 800), 15%),
+    );
+
+    $popover: (
+        background: map-get($background, background),
+        footer_background: map-get($background, background-disabled),
+        border-color: map-get($foreground, text-disabled),
     );
 
     $progress-bar: (
-        background-color: mc-color($second, 60),
+        background: mc-color($second, 60),
     );
 
     $radio: (
-        outer-circle: (
-            border-color: mc-color($second)
-        ),
+        outer-circle_border-color: mc-color($second),
+        inner-circle_border-color: transparent,
 
-        inner-circle: (
-            border-color: transparent
-        ),
+        outer-circle_checked-state_border-color: mc-color($primary),
+        inner-circle_checked-state_border-color: mc-color($primary)
+    );
+
+    $sidepanel: (
+        shadow_color: mc-color($second, 300)
     );
 
     $tabs: (
         border-color: mc-color($second, 300),
+        state-active_color: mc-color($primary),
+    );
+
+    $tags: (
+        primary_background: mc-color($primary, 100),
+        primary_border-color: mc-color($primary, 100),
+        primary_focused-state_color: mc-color($primary),
+
+        second_background: mc-color($second, 100),
+        second_border-color: mc-color($second, 100),
+        second_focused-state_color: mc-color($primary),
+
+        error_background: mc-color($error, 100),
+        error_border-color: mc-color($error, 100),
+        error_focused-state_color: mc-color($error)
+    );
+
+    $toggle: (
+        border: mc-color($foreground, border),
+        background: linear-gradient(to bottom, mc-color($second, lighter), mc-color($background, background-disabled)),
+        circle_border: mc-color($foreground, border),
+        circle_background: linear-gradient(to bottom, white, mc-color($second, lighter)),
+
+        focused-state_color: (inset 0 0 0 1px map-get($background, background), 0 0 0 2px mc-color($primary)),
     );
 
     $tooltip: (
-        background-color: map-get($second, 700),
+        background_color: map-get($second, 700),
         color: mc-contrast($second, 700),
-        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2)
+        shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2)
     );
 
     $vertical-navbar: (
@@ -82,31 +115,31 @@
         popup: $popup,
         button: $button,
         checkbox: $checkbox,
-        datepicker: 'alert',
+        datepicker: '',
         divider: $divider,
-        form-field: 'alert',
-        icon: 'alert',
-        input: 'alert',
-        link: 'alert',
-        list: 'alert', // большинство вынесено
-        modal: 'alert', // большинство вынесено
+        form-field: '',
+        icon: '',
+        input: '',
+        link: '',
+        list: '',
+        modal: $modal,
         navbar: $navbar,
-        popover: 'alert',
+        popover: $popover,
         progress-bar: $progress-bar,
-        progress-spinner: 'alert', // нечего выносить
-        radio: $radio, // сложно... очень много состояний, наверно сначала нужно упросить
-        select: 'alert',
-        sidebar: 'alert',
-        sidepanel: 'alert',
-        splitter: 'alert',
+        progress-spinner: '',
+        radio: $radio,
+        select: '',
+        sidebar: '',
+        sidepanel: $sidepanel,
+        splitter: '',
         tabs: $tabs,
-        tags: 'alert',
-        textarea: 'alert',
-        timepicker: 'alert',
-        toggle: 'alert',
+        tags: $tags,
+        textarea: '',
+        timepicker: '',
+        toggle: $toggle,
         tooltip: $tooltip,
-        tree: 'alert',
-        tree-select: 'alert',
+        tree: '',
+        tree-select: '',
         vertical-navbar: $vertical-navbar,
     );
 }
@@ -120,7 +153,7 @@
     $error: map-get($theme, error);
 
     $popup: (
-        box-shadow: 0 3px 3px 0 mc-color($second, A200),
+        shadow: 0 3px 3px 0 mc-color($second, A200),
         border-color: mc-color($second),
         background: map-get($mc-grey, 700),
         footer_background: transparent,
@@ -145,39 +178,76 @@
         color: map-get($mc-grey, 600)
     );
 
+    $modal: (
+        shadow: (0 0 0 1px mc-color($second, 800), 0 6px 12px 0 rgba(0, 0, 0, 0.5))
+    );
+
     $navbar: (
         background-color: mc-color($primary, 700),
         color: mc-color($primary, 100),
 
-        item: (
-            color: mc-color($primary, 100),
+        item_color: mc-color($primary, 100),
 
-            states: (
-                active: lighten(mc-color($primary, 700), 5%),
-                hover: lighten(mc-color($primary, 700), 5%),
-                progress: lighten(mc-color($primary, 800), 15%)
-            )
-        )
+        item_state-active_color: lighten(mc-color($primary, 700), 5%),
+        item_state-hover_color: lighten(mc-color($primary, 700), 5%),
+        item_state-progress_color: lighten(mc-color($primary, 800), 15%),
+        item_state-disabled_opacity: lighten(mc-color($primary, 800), 15%),
+    );
+
+    $popover: (
+        background: map-get($background, background),
+        footer_background: map-get($background, background-disabled),
+        border-color: map-get($background, background),
     );
 
     $progress-bar: (
         background-color: mc-color($second, 600),
     );
 
+    $radio: (
+        outer-circle_border-color: mc-color($second),
+        inner-circle_border-color: transparent,
+
+        outer-circle_checked-state_border-color: mc-color($primary),
+        inner-circle_checked-state_border-color: mc-color($primary, 600)
+    );
+
+    $sidepanel: (
+        shadow_color: mc-color($second, 800),
+    );
+
     $tabs: (
         border-color: mc-color($second, 300),
+        state-active_color: mc-color($primary),
+    );
+
+    $tags: (
+        primary_background: mc-color($primary, 700),
+        primary_border-color: mc-color($primary, 700),
+        primary_focused-state_color: mc-color($primary),
+
+        second_background: mc-color($second, 700),
+        second_border-color: mc-color($second, 700),
+        second_focused-state_color: mc-color($primary),
+
+        error_background: mc-color($error, 700),
+        error_border-color: mc-color($error, 700),
+        error_focused-state_color: mc-color($error)
+    );
+
+    $toggle: (
+        border: mc-color($foreground, border),
+        background: map-get($background, background),
+        circle_border: mc-color($foreground, border),
+        circle_background: white,
+
+        focused-state_color: (inset 0 0 0 1px map-get($background, background), 0 0 0 2px mc-color($primary)),
     );
 
     $tooltip: (
-        background-color: white,
+        background_color: white,
         color: mc-color($second, 700),
-        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2)
-    );
-
-    $tooltip: (
-        background-color: white,
-        color: mc-color($second, 700),
-        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2)
+        shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2)
     );
 
     $vertical-navbar: (
@@ -196,30 +266,30 @@
         button: $button,
         checkbox: $checkbox,
         datepicker: $datepicker,
-        divider: 'alert',
-        form-field: 'alert',
-        icon: 'alert',
-        input: 'alert',
-        link: 'alert',
-        list: 'alert',
-        modal: 'alert',
+        divider: '',
+        form-field: '',
+        icon: '',
+        input: '',
+        link: '',
+        list: '',
+        modal: $modal,
         navbar: $navbar,
-        popover: 'alert',
+        popover: $popover,
         progress-bar: $progress-bar,
-        progress-spinner: 'alert',
-        radio: 'alert',
-        select: 'alert',
-        sidebar: 'alert',
-        sidepanel: 'alert',
-        splitter: 'alert',
+        progress-spinner: '',
+        radio: $radio,
+        select: '',
+        sidebar: '',
+        sidepanel: $sidepanel,
+        splitter: '',
         tabs: $tabs,
-        tags: 'alert',
-        textarea: 'alert',
-        timepicker: 'alert',
-        toggle: 'alert',
+        tags: $tags,
+        textarea: '',
+        timepicker: '',
+        toggle: $toggle,
         tooltip: $tooltip,
-        tree: 'alert',
-        tree-select: 'alert',
+        tree: '',
+        tree-select: '',
         vertical-navbar: $vertical-navbar,
     );
 }

@@ -4,17 +4,6 @@
 @import '../core/theming/palette';
 
 
-@mixin _mc-tag-color($color, $focused-color, $is-dark) {
-    background: mc-color($color, if($is-dark, 700, 100));
-    border-color: mc-color($color, if($is-dark, 700, 100));
-
-    &.mc-active,
-    &.mc-focused {
-        border-color: $focused-color;
-        box-shadow: 0 0 0 1px $focused-color;
-    }
-}
-
 @mixin mc-tag-theme($theme) {
     $primary: map-get($theme, primary);
     $second: map-get($theme, second);
@@ -23,27 +12,58 @@
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    $is-dark: map-get($theme, is-dark);
+    $tags: map-get(map-get($theme, components), tags);
 
-    $focused-color: map-get(map-get($theme, states), focused-color);
+    $primary_background: map-get($tags, primary_background);
+    $primary_border-color: map-get($tags, primary_border-color);
+    $primary_focused-state_color: map-get($tags, primary_focused-state_color);
+
+    $second_background: map-get($tags, second_background);
+    $second_border-color: map-get($tags, second_border-color);
+    $second_focused-state_color: map-get($tags, second_focused-state_color);
+
+    $error_background: map-get($tags, error_background);
+    $error_border-color: map-get($tags, error_border-color);
+    $error_focused-state_color: map-get($tags, error_focused-state_color);
 
     .mc-tag {
         color: mc-color($foreground, text);
 
         &.mc-primary {
-            @include _mc-tag-color($primary, $focused-color, $is-dark);
+            background: $primary_background;
+            border-color: $primary_border-color;
+
+            &.mc-active,
+            &.mc-focused {
+                border-color: $primary_focused-state_color;
+                box-shadow: 0 0 0 1px $primary_focused-state_color;
+            }
         }
 
         &.mc-second {
-            @include _mc-tag-color($second, $focused-color, $is-dark);
+            background: $second_background;
+            border-color: $second_border-color;
+
+            &.mc-active,
+            &.mc-focused {
+                border-color: $second_focused-state_color;
+                box-shadow: 0 0 0 1px $second_focused-state_color;
+            }
+
         }
 
         &.mc-error {
-            @include _mc-tag-color($error, mc-color($error), $is-dark);
+            background: $error_background;
+            border-color: $error_border-color;
+
+            &.mc-active,
+            &.mc-focused {
+                border-color: $error_focused-state_color;
+                box-shadow: 0 0 0 1px $error_focused-state_color;
+            }
         }
 
-        &:hover:not(.mc-disabled),
-        &.mc-hovered:not(.mc-disabled) {
+        &:hover:not(.mc-disabled) {
             & .mc-tag-overlay {
                 background: mc-color($background, overlay-hovered);
             }
@@ -54,7 +74,7 @@
 
             &:hover {
                 cursor: pointer;
-                color: mix(map-get($foreground, text), mc-color($second), 90%);
+                color: inherit;
             }
         }
 
@@ -77,18 +97,18 @@
     }
 
     .mc-tag-input {
-        color: map-get($foreground, text);;
+        color: map-get($foreground, text);
 
         &::placeholder {
-            color: map-get($foreground, text-disabled);;
+            color: map-get($foreground, text-disabled);
         }
 
         &::-ms-input-placeholder {
-            color: map-get($foreground, text-disabled);;
+            color: map-get($foreground, text-disabled);
         }
 
         &::-webkit-input-placeholder {
-            color: map-get($foreground, text-disabled);;
+            color: map-get($foreground, text-disabled);
         }
     }
 }

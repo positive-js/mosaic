@@ -3,17 +3,14 @@
 
 
 @mixin mc-sidepanel-theme($theme) {
-    $primary: map-get($theme, primary);
-    $second: map-get($theme, second);
-
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    $is-dark: map-get($theme, is-dark);
-
     $divider-color: mc-color($foreground, divider);
 
-    $background-footer: map-get($background, background-popup-footer);
+    $popup: map-get(map-get($theme, components), popup);
+
+    $sidepanel: map-get(map-get($theme, components), sidepanel);
 
     .mc-sidepanel-content {
         background-color: map-get($background, background);
@@ -23,7 +20,7 @@
         &.mc-sidepanel-container_right {
             .mc-sidepanel-content {
                 box-shadow:
-                    0 0 0 1px mc-color($second, if($is-dark, 800, 300)),
+                    0 0 0 1px map-get($sidepanel, shadow_color),
                     -6px 0 12px 0 rgba(0, 0, 0, 0.24);
             }
         }
@@ -31,7 +28,7 @@
         &.mc-sidepanel-container_left {
             .mc-sidepanel-content {
                 box-shadow:
-                    0 0 0 1px mc-color($second, if($is-dark, 800, 300)),
+                    0 0 0 1px map-get($sidepanel, shadow_color),
                     6px 0 12px 0 rgba(0, 0, 0, 0.24);
             }
         }
@@ -39,7 +36,7 @@
         &.mc-sidepanel-container_bottom {
             .mc-sidepanel-content {
                 box-shadow:
-                    0 0 0 1px mc-color($second, if($is-dark, 800, 300)),
+                    0 0 0 1px map-get($sidepanel, shadow_color),
                     0 -6px 12px 0 rgba(0, 0, 0, 0.24);
             }
         }
@@ -47,7 +44,7 @@
         &.mc-sidepanel-container_top {
             .mc-sidepanel-content {
                 box-shadow:
-                    0 0 0 1px mc-color($second, if($is-dark, 800, 300)),
+                    0 0 0 1px map-get($sidepanel, shadow_color),
                     0 6px 12px 0 rgba(0, 0, 0, 0.24);
             }
         }
@@ -59,7 +56,7 @@
 
     .mc-sidepanel-footer {
         border-top: 1px solid $divider-color;
-        background-color: $background-footer;
+        background-color: map-get($popup, footer_background);
     }
 }
 
