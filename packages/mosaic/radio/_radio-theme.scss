@@ -3,15 +3,18 @@
 
 
 @mixin mc-radio-theme($theme) {
-    $primary: map-get($theme, primary);
-    $second: map-get($theme, second);
-
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    $is-dark: map-get($theme, is-dark);
-
     $focused-color: map-get(map-get($theme, states), focused-color);
+
+    $radio: map-get(map-get($theme, components), radio);
+
+    $outer-circle_border-color: map-get($radio, outer-circle_border-color);
+    $inner-circle_border-color: map-get($radio, inner-circle_border-color);
+
+    $outer-circle_checked-state_border-color: map-get($radio, outer-circle_checked-state_border-color);
+    $inner-circle_checked-state_border-color: map-get($radio, inner-circle_checked-state_border-color);
 
     .mc-radio-group {
         color: map-get($foreground, text);
@@ -19,12 +22,12 @@
 
     .mc-radio-button {
         & .mc-radio-button__outer-circle {
-            border-color: mc-color($second);
+            border-color: $outer-circle_border-color;
             background: map-get($background, background);
         }
 
         & .mc-radio-button__inner-circle {
-            border-color: transparent;
+            border-color: $inner-circle_border-color;
         }
 
         &:hover {
@@ -35,13 +38,13 @@
 
         &.mc-checked {
             & .mc-radio-button__outer-circle {
-                border-color: mc-color($primary);
+                border-color: $outer-circle_checked-state_border-color;
                 background: white;
             }
 
             & .mc-radio-button__inner-circle {
                 display: block;
-                border-color: if($is-dark, mc-color($primary, 600), mc-color($primary));
+                border-color: $inner-circle_checked-state_border-color;
             }
         }
 

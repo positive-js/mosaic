@@ -27,7 +27,7 @@
     .mc-tree-select__panel {
         $popup: map-get(map-get($theme, components), popup);
 
-        box-shadow: map-get($popup, box-shadow);
+        box-shadow: map-get($popup, shadow);
         border-color: map-get($popup, border-color);
 
         background-color: map-get($popup, background);

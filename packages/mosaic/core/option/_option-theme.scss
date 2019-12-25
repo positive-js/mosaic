@@ -14,8 +14,7 @@
     .mc-option {
         color: mc-color($foreground, text);
 
-        &:hover:not(.mc-disabled),
-        &.mc-hovered:not(.mc-disabled) {
+        &:hover:not(.mc-disabled) {
             .mc-option-overlay {
                 background: mc-color($background, overlay-hovered);
             }

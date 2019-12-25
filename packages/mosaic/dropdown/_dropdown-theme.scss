@@ -10,7 +10,16 @@
     $selected-color: map-get(map-get($theme, states), selected-color);
 
     .mc-dropdown__panel {
+<<<<<<< HEAD
         @include popup-params($theme);
+=======
+        $popup: map-get(map-get($theme, components), popup);
+
+        box-shadow: map-get($popup, shadow);
+        border-color: map-get($popup, border-color);
+
+        background-color: map-get($popup, background);
+>>>>>>> css params moved...
     }
 
     .mc-dropdown__item {
