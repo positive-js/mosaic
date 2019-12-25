@@ -65,10 +65,8 @@
     @include mc-select-theme($theme);
     @include mc-sidepanel-theme($theme);
     @include mc-splitter-theme($theme);
-    @include mc-splitter-theme($theme);
     @include mc-tabs-theme($theme);
     @include mc-tag-theme($theme);
-    @include mc-textarea-theme($theme);
     @include mc-textarea-theme($theme);
     @include mc-toggle-theme($theme);
     @include mc-tooltip-theme($theme);
