@@ -11,7 +11,7 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
+// import { MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
 import { DOWN_ARROW, ENTER, ESCAPE, UP_ARROW } from '@ptsecurity/cdk/keycodes';
 import {
     createKeyboardEvent,
@@ -1185,7 +1185,7 @@ describe('McDatepicker', () => {
             }));
 
             // TODO ISO
-            xit('should coerce ISO strings', fakeAsync(() => {
+            /*xit('should coerce ISO strings', fakeAsync(() => {
                 expect(() => fixture.detectChanges()).not.toThrow();
                 flush();
                 fixture.detectChanges();
@@ -1194,7 +1194,7 @@ describe('McDatepicker', () => {
                 expect(testComponent.datepickerInput.value).toEqual(moment([2017, 5, 1]));
                 // expect(testComponent.datepickerInput.min).toEqual(new Date(2017, 0, 1));
                 // expect(testComponent.datepickerInput.max).toEqual(new Date(2017, 11, 31));
-            }));
+            }));*/
         });
 
         describe('with events', () => {
@@ -1322,7 +1322,7 @@ describe('McDatepicker', () => {
     });
 
     // TODO Fix it with (use Moment)
-    xdescribe('internationalization', () => {
+    /*xdescribe('internationalization', () => {
         let fixture: ComponentFixture<DatepickerWithi18n>;
         let testComponent: DatepickerWithi18n;
         let input: HTMLInputElement;
@@ -1349,7 +1349,7 @@ describe('McDatepicker', () => {
             expect(input.value).toMatch(/0?1\.0?9\.2017/);
             expect(testComponent.datepickerInput.value).toBe(selected);
         }));
-    });
+    });*/
 
     describe('datepicker with custom header', () => {
         let fixture: ComponentFixture<DatepickerWithCustomHeader>;

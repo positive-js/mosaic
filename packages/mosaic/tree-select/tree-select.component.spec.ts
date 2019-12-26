@@ -1179,7 +1179,7 @@ class SelectWithCustomTrigger {
 })
 class NgModelCompareWithSelect {
     selectedFood: { name: string; type: string } = { name: 'rootNode_1', type: 'app' };
-    comparator: ((f1: any, f2: any) => boolean) | null = this.compareByValue;
+    comparator: ((f1: any, f2: any) => boolean) | null = this.compareByValue.bind(this);
 
     @ViewChild(McTreeSelect, {static: false}) select: McTreeSelect;
     @ViewChildren(McTreeOption) options: QueryList<McTreeOption>;
