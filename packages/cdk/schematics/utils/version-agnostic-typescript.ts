@@ -4,10 +4,10 @@
  * Note that we always need to adjust this type import based on the location of the Typescript
  * dependency that will be shipped with `@schematics/angular`.
  */
+// tslint:disable-next-line:blank-lines
 import { SchematicsException } from '@angular-devkit/schematics';
-
-
 import typescript = require('typescript');
+
 
 /**
  * This is an agnostic re-export of TypeScript. Depending on the context, this module file will

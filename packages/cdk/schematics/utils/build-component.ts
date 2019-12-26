@@ -59,10 +59,8 @@ function addDeclarationToNgModule(options: ComponentOptions): Rule {
         const modulePath = options.module;
         let source = readIntoSourceFile(host, modulePath);
 
-        const componentPath = `/${options.path}/`
-            + (options.flat ? '' : strings.dasherize(options.name) + '/')
-            + strings.dasherize(options.name)
-            + '.component';
+        const componentPath = `/${options.path}/${(options.flat ? '' :
+            `${strings.dasherize(options.name)}/`)}${strings.dasherize(options.name)}.component/`;
         const relativePath = buildRelativePath(modulePath, componentPath);
         const classifiedName = strings.classify(`${options.name}Component`);
 
