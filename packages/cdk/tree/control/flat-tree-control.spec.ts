@@ -1,3 +1,4 @@
+// tslint:disable no-magic-numbers
 import { FlatTreeControl } from './flat-tree-control';
 
 
@@ -96,17 +97,18 @@ describe('CdkFlatTreeControl', () => {
       const numGrandChildren = 2;
       const nodes = generateData(numNodes, numChildren, numGrandChildren);
 
-      let data = [];
+      const data = [];
       flatten(nodes, data);
       treeControl.dataNodes = data;
 
       treeControl.expandDescendants(nodes[1]);
 
-      const expandedNodesNum = 1 + numChildren + numChildren * numGrandChildren;
+      const expandedNodesNum = numChildren + 1 + numChildren * numGrandChildren;
       expect(treeControl.expansionModel.selected.length)
           .toBe(expandedNodesNum, `Expect expanded ${expandedNodesNum} nodes`);
 
       expect(treeControl.isExpanded(nodes[1])).toBeTruthy('Expect second node to be expanded');
+
       for (let i = 0; i < numChildren; i++) {
 
         expect(treeControl.isExpanded(nodes[1].children[i]))
@@ -124,7 +126,7 @@ describe('CdkFlatTreeControl', () => {
       const numChildren = 4;
       const numGrandChildren = 2;
       const nodes = generateData(numNodes, numChildren, numGrandChildren);
-      let data = [];
+      const data = [];
       flatten(nodes, data);
       treeControl.dataNodes = data;
 
@@ -163,12 +165,13 @@ export class TestData {
 
 function generateData(dataLength: number, childLength: number, grandChildLength: number = 0)
     : TestData[] {
-  let data = <any>[];
+  const data = <any> [];
   let nextIndex = 0;
+
   for (let i = 0; i < dataLength; i++) {
-    let children = <any>[];
+    const children = <any> [];
     for (let j = 0; j < childLength; j++) {
-      let grandChildren = <any>[];
+      const grandChildren = <any> [];
       for (let k = 0; k < grandChildLength; k++) {
         grandChildren.push(new TestData(`a_${nextIndex}`, `b_${nextIndex}`, `c_${nextIndex++}`, 3));
       }
@@ -177,11 +180,12 @@ function generateData(dataLength: number, childLength: number, grandChildLength:
     }
     data.push(new TestData(`a_${nextIndex}`, `b_${nextIndex}`, `c_${nextIndex++}`, 1, children));
   }
+
   return data;
 }
 
 function flatten(nodes: TestData[], data: TestData[]) {
-  for (let node of nodes) {
+  for (const node of nodes) {
     data.push(node);
 
     if (node.children && node.children.length > 0) {
