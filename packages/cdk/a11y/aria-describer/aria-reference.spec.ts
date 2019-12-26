@@ -1,4 +1,4 @@
-import {addAriaReferencedId, getAriaReferenceIds, removeAriaReferencedId} from './aria-reference';
+import { addAriaReferencedId, getAriaReferenceIds, removeAriaReferencedId } from './aria-reference';
 
 
 describe('AriaReference', () => {
