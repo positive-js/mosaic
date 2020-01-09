@@ -20,7 +20,7 @@ export function hasNgModuleImport(tree: Tree, modulePath: string, className: str
         throw new SchematicsException(`Could not find NgModule declaration inside: "${modulePath}"`);
     }
 
-    for (const property of ngModuleMetadata!.properties) {
+    for (const property of ngModuleMetadata.properties) {
         if (!ts.isPropertyAssignment(property) || property.name.getText() !== 'imports' ||
             !ts.isArrayLiteralExpression(property.initializer)) {
             continue;

@@ -36,7 +36,7 @@ export function getDefaultComponentOptions(project: WorkspaceProject) {
  */
 function getDefaultComponentOption<T>(project: WorkspaceProject, optionNames: string[],
                                       fallbackValue: T): T {
-    for (let optionName of optionNames) {
+    for (const optionName of optionNames) {
         if (project.schematics &&
             project.schematics['@schematics/angular:component'] &&
             project.schematics['@schematics/angular:component'][optionName] != null) {

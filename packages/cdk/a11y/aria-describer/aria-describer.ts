@@ -4,14 +4,16 @@ import {
     Injectable,
     OnDestroy
 } from '@angular/core';
+import {of} from "rxjs";
 
 import { addAriaReferencedId, getAriaReferenceIds, removeAriaReferencedId } from './aria-reference';
 
 
 /**
  * Interface used to register message elements and keep a count of how many registrations have
- * the same message and the reference to the message element used for the `aria-describedby`.
+ * the sa me  messag'rxjs'the reference to the message element used for the `aria-describedby`.
  */
+// tslint:disable-next-line naming-convention
 export interface RegisteredMessage {
     /** The element containing the message. */
     messageElement: Element;
@@ -115,7 +117,7 @@ export class AriaDescriber implements OnDestroy {
     private _createMessageElement(message: string) {
         const messageElement = this._document.createElement('div');
         messageElement.setAttribute('id', `${CDK_DESCRIBEDBY_ID_PREFIX}-${nextId++}`);
-        messageElement.appendChild(this._document.createTextNode(message)!);
+        messageElement.appendChild(this._document.createTextNode(message));
 
         this._createMessagesContainer();
         messagesContainer!.appendChild(messageElement);
@@ -166,7 +168,7 @@ export class AriaDescriber implements OnDestroy {
     private _removeCdkDescribedByReferenceIds(element: Element) {
         // Remove all aria-describedby reference IDs that are prefixed by CDK_DESCRIBEDBY_ID_PREFIX
         const originalReferenceIds = getAriaReferenceIds(element, 'aria-describedby')
-            .filter((id) => id.indexOf(CDK_DESCRIBEDBY_ID_PREFIX) != 0);
+            .filter((id) => id.indexOf(CDK_DESCRIBEDBY_ID_PREFIX) !== 0);
         element.setAttribute('aria-describedby', originalReferenceIds.join(' '));
     }
 
@@ -203,7 +205,7 @@ export class AriaDescriber implements OnDestroy {
         const registeredMessage = messageRegistry.get(message);
         const messageId = registeredMessage && registeredMessage.messageElement.id;
 
-        return !!messageId && referenceIds.indexOf(messageId) != -1;
+        return !!messageId && referenceIds.indexOf(messageId) !== -1;
     }
 
     /** Determines whether a message can be described on a particular element. */
