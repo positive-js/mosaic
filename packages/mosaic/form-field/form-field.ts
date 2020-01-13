@@ -78,16 +78,16 @@ export const McFormFieldMixinBase: CanColorCtor & typeof McFormFieldBase = mixin
 export class McFormField extends McFormFieldMixinBase implements
     AfterContentInit, AfterContentChecked, AfterViewInit, CanColor {
 
-    @ContentChild(McFormFieldControl, {static: false}) control: McFormFieldControl<any>;
-    @ContentChild(McFormFieldNumberControl, {static: false}) numberControl: McFormFieldNumberControl<any>;
-    @ContentChild(McStepper, {static: false}) stepper: McStepper;
+    @ContentChild(McFormFieldControl, { static: false }) control: McFormFieldControl<any>;
+    @ContentChild(McFormFieldNumberControl, { static: false }) numberControl: McFormFieldNumberControl<any>;
+    @ContentChild(McStepper, { static: false }) stepper: McStepper;
 
     @ContentChildren(McHint) hint: QueryList<McHint>;
     @ContentChildren(McSuffix) suffix: QueryList<McSuffix>;
     @ContentChildren(McPrefix) prefix: QueryList<McPrefix>;
     @ContentChildren(McCleaner) cleaner: QueryList<McCleaner>;
 
-    @ViewChild('connectionContainer', {static: true}) connectionContainerRef: ElementRef;
+    @ViewChild('connectionContainer', { static: true }) connectionContainerRef: ElementRef;
 
     // Unique id for the internal form field label.
     labelId = `mc-form-field-label-${nextUniqueId++}`;
@@ -115,13 +115,15 @@ export class McFormField extends McFormFieldMixinBase implements
         }
 
         // Subscribe to changes in the child control state in order to update the form field UI.
-        this.control.stateChanges.pipe(startWith())
+        this.control.stateChanges
+            .pipe(startWith())
             .subscribe(() => {
                 this._changeDetectorRef.markForCheck();
             });
 
         if (this.numberControl) {
-            this.numberControl.stateChanges.pipe(startWith())
+            this.numberControl.stateChanges
+                .pipe(startWith())
                 .subscribe(() => {
                     this._changeDetectorRef.markForCheck();
                 });
