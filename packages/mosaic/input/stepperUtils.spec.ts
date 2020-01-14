@@ -11,16 +11,6 @@ describe('stepperUtils', () => {
         expect(stepDown(10, 100, -100, 1)).toBe(9);
     });
 
-
-    it('stepUp empty', () => {
-        expect(stepUp(null, 100, -100, 1)).toBe(-99);
-    });
-
-    it('stepDown empty', () => {
-        expect(stepDown(null, 100, -100, 1)).toBe(99);
-    });
-
-
     it('stepUp over step', () => {
         expect(stepUp(99, 100, -100, 5)).toBe(100);
     });
@@ -39,10 +29,10 @@ describe('stepperUtils', () => {
     });
 
     it('stepUp no min', () => {
-        expect(stepUp(null, 100, -Infinity, 5)).toBe(null);
+        expect(stepUp(0, 100, -Infinity, 5)).toBe(5);
     });
 
     it('stepDown no max', () => {
-        expect(stepDown(null, Infinity, -100, 5)).toBe(null);
+        expect(stepDown(0, Infinity, -100, 5)).toBe(-5);
     });
 });
