@@ -77,7 +77,6 @@ export const McInputMixinBase: CanUpdateErrorStateCtor & typeof McInputBase = mi
     selector: `input[mcInput][type="number"]`,
     exportAs: 'mcNumericalInput',
     providers: [
-        NgModel,
         { provide: McFormFieldNumberControl, useExisting: McNumberInput }
     ],
     host: {
@@ -234,15 +233,19 @@ export class McNumberInput implements McFormFieldNumberControl<any> {
 
     stepUp(step: number) {
         this.elementRef.nativeElement.focus();
-        const res = stepUp(this.host.valueAsNumber, this.max, this.min, step);
-        this.host.value = res === null ? '' : res.toString();
+
+        const res = stepUp(this.host.valueAsNumber || 0, this.max, this.min, step);
+
+        this.host.value = res.toString();
         this.model.update.emit(this.host.valueAsNumber);
     }
 
     stepDown(step: number) {
         this.elementRef.nativeElement.focus();
-        const res = stepDown(this.host.valueAsNumber, this.max, this.min, step);
-        this.host.value = res === null ? '' : res.toString();
+
+        const res = stepDown(this.host.valueAsNumber || 0, this.max, this.min, step);
+
+        this.host.value = res.toString();
         this.model.update.emit(this.host.valueAsNumber);
     }
 
