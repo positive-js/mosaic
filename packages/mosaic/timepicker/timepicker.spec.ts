@@ -221,6 +221,31 @@ describe('McTimepicker', () => {
                         'broken fallback to default time format');
                 });
         });
+
+        it('When the format updates', () => {
+            testComponent.timeFormat = 'HH:mm:ss';
+            testComponent.timeValue = moment('1970-01-01 00:00:00');
+            fixture.detectChanges();
+
+            return fixture.whenStable()
+                .then(() => {
+                    expect(inputElementDebug.nativeElement.value).toBe(
+                        '00:00:00',
+                        'mismatch time format'
+                    );
+
+                    testComponent.timeFormat = 'HH:mm';
+                    fixture.detectChanges();
+
+                    return fixture.whenStable();
+                })
+                .then(() => {
+                    expect(inputElementDebug.nativeElement.value).toBe(
+                        '00:00',
+                        'mismatch time format'
+                    );
+                });
+        });
     });
 
     describe('Convert user input', () => {
