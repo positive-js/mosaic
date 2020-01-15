@@ -14,8 +14,34 @@
     );
 
     $button: (
-        border-color: mc-color($second),
-        box-shadow: 0 3px 3px 0 mc-color($second, A200),
+        state-active_shadow: inset 0 1px 2px 0 rgba(black, 0.2),
+
+        primary: (
+            color: mc-contrast($primary, 500),
+            border-color: map-get($primary, 560),
+            background: map-get($primary, 500),
+            icon-color: mc-contrast($primary, 500),
+            state-active_border-color: darken(mc-color($primary, 560), 5),
+            state-active_background: darken(mc-color($primary, 500), 5),
+        ),
+
+        second: (
+            border-color: mc-color($foreground, border),
+            background: map-get($background, background-disabled),
+            color: map-get($foreground, text),
+            icon-color: map-get($foreground, text-less-contrast),
+            state-active_border-color: darken(mc-color($foreground, border), 5),
+            state-active_background: darken(map-get($background, background-disabled), 5),
+        ),
+
+        error: (
+            border-color: mc-color($foreground, border),
+            background: map-get($background, background-disabled),
+            color: mc-color($error),
+            icon-color: mc-color($error, 400),
+            state-active_border-color: darken(mc-color($foreground, border), 5),
+            state-active_background: darken(map-get($background, background-disabled), 5)
+        )
     );
 
     $checkbox: (
@@ -72,17 +98,23 @@
     );
 
     $tags: (
-        primary_background: mc-color($primary, 100),
-        primary_border-color: mc-color($primary, 100),
-        primary_focused-state_color: mc-color($primary),
+        primary: (
+            background: mc-color($primary, 100),
+            border-color: mc-color($primary, 100),
+            focused-state_color: mc-color($primary),
+        ),
 
-        second_background: mc-color($second, 100),
-        second_border-color: mc-color($second, 100),
-        second_focused-state_color: mc-color($primary),
+        second: (
+            background: mc-color($second, 100),
+            border-color: mc-color($second, 100),
+            focused-state_color: mc-color($primary),
+        ),
 
-        error_background: mc-color($error, 100),
-        error_border-color: mc-color($error, 100),
-        error_focused-state_color: mc-color($error)
+        error: (
+            background: mc-color($error, 100),
+            border-color: mc-color($error, 100),
+            focused-state_color: mc-color($error)
+        )
     );
 
     $toggle: (
@@ -160,9 +192,33 @@
     );
 
     $button: (
-        panel: (
-            border-color: mc-color($second),
-            box-shadow: 0 3px 3px 0 mc-color($second, A200),
+        state-active_shadow: inset 1px 2px 2px 0 rgba(black, 0.2),
+
+        primary: (
+            color: mc-contrast($primary, 500),
+            border-color: map-get($primary, 560),
+            background: map-get($primary, 500),
+            icon-color: mc-contrast($primary, 500),
+            state-active_border-color: darken(mc-color($primary, 560), 5),
+            state-active_background: darken(mc-color($primary, 500), 5),
+        ),
+
+        second: (
+            color: map-get($foreground, text),
+            border-color: mc-color($foreground, border),
+            background: map-get($background, background-disabled),
+            icon-color: map-get($foreground, text-less-contrast),
+            state-active_border-color: darken(mc-color($foreground, border), 5),
+            state-active_background: darken(map-get($background, background-disabled), 5),
+        ),
+
+        error: (
+            color: mc-color($error),
+            border-color: mc-color($foreground, border),
+            background: map-get($background, background-disabled),
+            icon-color: mc-color($error, 400),
+            state-active_border-color: darken(mc-color($foreground, border), 5),
+            state-active_background: darken(map-get($background, background-disabled), 5)
         )
     );
 
@@ -222,17 +278,23 @@
     );
 
     $tags: (
-        primary_background: mc-color($primary, 700),
-        primary_border-color: mc-color($primary, 700),
-        primary_focused-state_color: mc-color($primary),
+        primary: (
+            background: mc-color($primary, 700),
+            border-color: mc-color($primary, 700),
+            focused-state_color: mc-color($primary),
+        ),
 
-        second_background: mc-color($second, 700),
-        second_border-color: mc-color($second, 700),
-        second_focused-state_color: mc-color($primary),
+        second: (
+            background: mc-color($second, 700),
+            border-color: mc-color($second, 700),
+            focused-state_color: mc-color($primary),
+        ),
 
-        error_background: mc-color($error, 700),
-        error_border-color: mc-color($error, 700),
-        error_focused-state_color: mc-color($error)
+        error: (
+            background: mc-color($error, 700),
+            border-color: mc-color($error, 700),
+            focused-state_color: mc-color($error)
+        )
     );
 
     $toggle: (
