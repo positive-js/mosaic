@@ -19,8 +19,8 @@ import { McList, McListItem } from './list.component';
         McList,
         McListSelection,
         McListItem,
-        McListOption
-        McOptionModule,
+        McListOption,
+        McOptionModule
     ],
     declarations: [
         McList,
