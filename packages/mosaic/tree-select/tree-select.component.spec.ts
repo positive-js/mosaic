@@ -1177,7 +1177,7 @@ class SelectWithCustomTrigger {
 })
 class NgModelCompareWithSelect {
     selectedFood: { name: string; type: string } = { name: 'rootNode_1', type: 'app' };
-    comparator: ((f1: any, f2: any) => boolean) | null = this.compareByValue;
+    comparator: ((f1: any, f2: any) => boolean) | null;
 
     @ViewChild(McTreeSelect, {static: false}) select: McTreeSelect;
     @ViewChildren(McTreeOption) options: QueryList<McTreeOption>;
@@ -1188,6 +1188,7 @@ class NgModelCompareWithSelect {
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
     constructor() {
+        this.useCompareByValue();
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
         // Build the tree nodes from Json object. The result is a list of `FileNode` with nested

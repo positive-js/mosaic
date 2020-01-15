@@ -3,6 +3,7 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Constructor } from './constructor';
 
 
+// tslint:disable-next-line naming-convention
 export interface CanDisable {
     disabled: boolean;
 }
