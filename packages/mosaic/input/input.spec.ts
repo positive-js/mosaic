@@ -1,5 +1,11 @@
 import { Component, Provider, Type } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, ComponentFixtureAutoDetect } from '@angular/core/testing';
+import {
+    ComponentFixture,
+    fakeAsync,
+    TestBed,
+    ComponentFixtureAutoDetect,
+    flush
+} from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { DOWN_ARROW, ESCAPE, UP_ARROW } from '@ptsecurity/cdk/keycodes';
@@ -9,7 +15,11 @@ import {
     dispatchFakeEvent,
     dispatchKeyboardEvent
 } from '@ptsecurity/cdk/testing';
-import { McFormField, McFormFieldModule } from '@ptsecurity/mosaic/form-field';
+import {
+    getMcFormFieldYouCanNotUseCleanerInNumberInputError,
+    McFormField,
+    McFormFieldModule
+} from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 
 import { McInput, McInputModule } from './index';
@@ -379,6 +389,18 @@ class McNumberInputMaxMinStepInput {
     step: number = 0.5;
     bigStep: number = 2;
 }
+
+@Component({
+    template: `
+        <mc-form-field>
+            <input mcInput [(ngModel)]="value" type="number">
+            <mc-cleaner></mc-cleaner>
+        </mc-form-field>
+    `
+})
+class McNumberInputWithCleaner {
+    value: number = 0;
+}
 // tslint:enable no-unnecessary-class
 
 // tslint:disable no-magic-numbers
@@ -400,11 +422,24 @@ describe('McNumberInput', () => {
         expect(icons.length).toBe(2);
     }));
 
-    it('should not have stepper initially', fakeAsync(() => {
+    it('should throw error with stepper', fakeAsync(() => {
+        const fixture = createComponent(McNumberInputWithCleaner);
+
+        expect(() => {
+            try {
+                fixture.detectChanges();
+                flush();
+            } catch {
+                flush();
+            }
+        }).toThrow(getMcFormFieldYouCanNotUseCleanerInNumberInputError());
+    }));
+
+    it('should throw an exception with mc-cleaner', fakeAsync(() => {
         const fixture = createComponent(McNumberInput);
         fixture.detectChanges();
 
-        const mcStepper = fixture.debugElement.query(By.css('mc-stepper'));
+        const mcStepper = fixture.debugElement.query(By.css('mc-cleaner'));
 
         expect(mcStepper).toBeNull();
     }));
