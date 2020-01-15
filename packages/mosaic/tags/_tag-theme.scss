@@ -3,6 +3,17 @@
 
 @import '../core/theming/palette';
 
+@mixin mc-tag-color($params) {
+    background: map-get($params, background);
+    border-color: map-get($params, border-color);
+
+    &.mc-active,
+    &.mc-focused {
+        border-color: map-get($params, focused-state_color);
+        box-shadow: 0 0 0 1px map-get($params, focused-state_color);
+    }
+}
+
 
 @mixin mc-tag-theme($theme) {
     $primary: map-get($theme, primary);
@@ -14,53 +25,19 @@
 
     $tags: map-get(map-get($theme, components), tags);
 
-    $primary_background: map-get($tags, primary_background);
-    $primary_border-color: map-get($tags, primary_border-color);
-    $primary_focused-state_color: map-get($tags, primary_focused-state_color);
-
-    $second_background: map-get($tags, second_background);
-    $second_border-color: map-get($tags, second_border-color);
-    $second_focused-state_color: map-get($tags, second_focused-state_color);
-
-    $error_background: map-get($tags, error_background);
-    $error_border-color: map-get($tags, error_border-color);
-    $error_focused-state_color: map-get($tags, error_focused-state_color);
-
     .mc-tag {
         color: mc-color($foreground, text);
 
         &.mc-primary {
-            background: $primary_background;
-            border-color: $primary_border-color;
-
-            &.mc-active,
-            &.mc-focused {
-                border-color: $primary_focused-state_color;
-                box-shadow: 0 0 0 1px $primary_focused-state_color;
-            }
+            @include mc-tag-color(map-get($tags, primary));
         }
 
         &.mc-second {
-            background: $second_background;
-            border-color: $second_border-color;
-
-            &.mc-active,
-            &.mc-focused {
-                border-color: $second_focused-state_color;
-                box-shadow: 0 0 0 1px $second_focused-state_color;
-            }
-
+            @include mc-tag-color(map-get($tags, second));
         }
 
         &.mc-error {
-            background: $error_background;
-            border-color: $error_border-color;
-
-            &.mc-active,
-            &.mc-focused {
-                border-color: $error_focused-state_color;
-                box-shadow: 0 0 0 1px $error_focused-state_color;
-            }
+            @include mc-tag-color(map-get($tags, error));
         }
 
         &:hover:not(.mc-disabled) {
