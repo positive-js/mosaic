@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 
 /**
- * @title Basic buttons
+ * @title Basic button
  */
 @Component({
     selector: 'button-overview-example',
@@ -10,4 +10,5 @@ import { Component } from '@angular/core';
     styleUrls: ['button-overview-example.css']
 })
 export class ButtonOverviewExample {
+    isDisabled = false;
 }
