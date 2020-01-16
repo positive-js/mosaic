@@ -3,12 +3,8 @@
 @import '../core/styles/variables';
 
 @mixin mc-checkbox-theme($theme) {
-    $primary: map-get($theme, primary);
-
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
-
-    $is-dark: map-get($theme, is-dark);
 
     $checkbox: map-get(map-get($theme, components), checkbox);
 
@@ -18,6 +14,11 @@
 
     .mc-checkbox-frame {
         border-color: $border-color;
+
+        & .mc-checkbox-checkmark,
+        & .mc-checkbox-mixedmark {
+            color: white;
+        }
     }
 
     .mc-checkbox {
@@ -54,6 +55,11 @@
                 border-color: map-get($foreground, text-disabled);
 
                 background-color: map-get($background, background-disabled);
+
+                & .mc-checkbox-checkmark,
+                & .mc-checkbox-mixedmark {
+                    color: map-get($foreground, text-disabled);
+                }
             }
         }
     }

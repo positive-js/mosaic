@@ -1,6 +1,7 @@
 @import '../core/theming/theming';
 @import '../core/theming/palette';
 @import '../core/styles/typography/typography-utils';
+@import '../core/styles/common/popup';
 
 
 @mixin mc-select-theme($theme) {
@@ -27,10 +28,7 @@
     }
 
     .mc-select__panel {
-        box-shadow: map-get($popup, shadow);
-        border-color: map-get($popup, border-color);
-
-        background-color: map-get($popup, background);
+        @include popup-params($theme);
     }
 
     .mc-select__search-container {
