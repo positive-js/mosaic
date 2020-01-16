@@ -11,6 +11,7 @@
 
     .mc-dropdown__panel {
 <<<<<<< HEAD
+<<<<<<< HEAD
         @include popup-params($theme);
 =======
         $popup: map-get(map-get($theme, components), popup);
@@ -20,6 +21,9 @@
 
         background-color: map-get($popup, background);
 >>>>>>> css params moved...
+=======
+        @include popup-params($theme);
+>>>>>>> added fixes and refactored components theming
     }
 
     .mc-dropdown__item {
