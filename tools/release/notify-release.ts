@@ -19,20 +19,18 @@ export function notify(tag, version) {
     const url = result.parsed.MATTERMOST_ENDPOINT_URL;
     const channel = result.parsed.MATTERMOST_CHANNEL;
 
-    const headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
-
-    const body = `payload={
-        "channel": "${channel}",
-        "username": "Wall-e",
-        "short": false,
-        "text": " #### [![Mosaic Logo](https://i.ibb.co/fQNPgv6/logo-png-200.png =32x32)osaic](https://github.com/positive-js/mosaic/tree/${tag}) was published.
-${prepareChangeLog(version)}"
-}`;
+    const headers = { 'Content-Type': 'application/json' };
+    const body = {
+        channel: `${channel}`,
+        username: "Wall-e",
+        short: false,
+        text: "#### [![Mosaic Logo](https://i.ibb.co/fQNPgv6/logo-png-200.png =32x32)osaic](https://github.com/positive-js/mosaic/tree/${tag}) was published. \n " + prepareChangeLog(version)
+    };
 
     request.post({
         url,
         headers,
-        body
+        body: JSON.stringify(body)
     }, (error, response) => {
         if (error || response.statusCode !== HTTP_CODE_OK) {
             // tslint:disable-next-line:no-console
@@ -55,5 +53,5 @@ function prepareChangeLog(version) {
     const changelogPath = join(join(__dirname, '../../'), CHANGELOG_FILE_NAME);
     const extractedReleaseNotes = extractReleaseNotes(changelogPath, version);
 
-    return extractedReleaseNotes.releaseNotes.replace(/"/g, '\\\"');
+    return extractedReleaseNotes.releaseNotes.replace(/"/g, '');
 }

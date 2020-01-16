@@ -1,8 +1,4 @@
 import { QueryList } from '@angular/core';
-
-import { Subject, Subscription } from 'rxjs';
-import { debounceTime, filter, map, tap } from 'rxjs/operators';
-
 import {
     UP_ARROW,
     DOWN_ARROW,
@@ -14,9 +10,12 @@ import {
     ZERO,
     NINE
 } from '@ptsecurity/cdk/keycodes';
+import { Subject, Subscription } from 'rxjs';
+import { debounceTime, filter, map, tap } from 'rxjs/operators';
 
 
 // This interface is for items that can be passed to a ListKeyManager.
+// tslint:disable-next-line naming-convention
 export interface ListKeyManagerOption {
     // Whether the option is disabled.
     disabled?: boolean;
@@ -50,11 +49,6 @@ export class ListKeyManager<T extends ListKeyManagerOption> {
     private _horizontal: 'ltr' | 'rtl' | null;
 
     private _scrollSize: number = 0;
-    /**
-     * Predicate function that can be used to check whether an item should be skipped
-     * by the key manager. By default, disabled items are skipped.
-     */
-    private _skipPredicateFn = (item: T) => item.disabled;
 
     // Buffer for the letters that the user has pressed when the typeahead option is turned on.
     private _pressedLetters: string[] = [];
@@ -324,6 +318,12 @@ export class ListKeyManager<T extends ListKeyManagerOption> {
     }
 
     /**
+     * Predicate function that can be used to check whether an item should be skipped
+     * by the key manager. By default, disabled items are skipped.
+     */
+    private _skipPredicateFn = (item: T) => item.disabled;
+
+    /**
      * This method sets the active item, given a list of items and the delta between the
      * currently active item and the new active item. It will calculate differently
      * depending on whether wrap mode is turned on.
@@ -371,13 +371,14 @@ export class ListKeyManager<T extends ListKeyManagerOption> {
 
         if (!items[index]) { return; }
 
-        while (this._skipPredicateFn(items[index])) {
-            index += fallbackDelta;
+        let curIndex = index;
+        while (this._skipPredicateFn(items[curIndex])) {
+            curIndex += fallbackDelta;
 
-            if (!items[index]) { return; }
+            if (!items[curIndex]) { return; }
         }
 
-        this.setActiveItem(index);
+        this.setActiveItem(curIndex);
     }
 
     /** Returns the items as an array. */

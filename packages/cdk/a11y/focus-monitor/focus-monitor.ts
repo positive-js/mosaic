@@ -20,11 +20,11 @@ export const TOUCH_BUFFER_MS = 650;
 
 export type FocusOrigin = 'touch' | 'mouse' | 'keyboard' | 'program' | null;
 
-
+// tslint:disable-next-line naming-convention
 interface MonitoredElementInfo {
-    unlisten: Function;
     checkChildren: boolean;
     subject: Subject<FocusOrigin>;
+    unlisten(): void;
 }
 
 
@@ -81,7 +81,7 @@ export class FocusMonitor implements OnDestroy {
 
         // Create monitored element info.
         const info: MonitoredElementInfo = {
-            unlisten: () => {},
+            unlisten: () => {}, // tslint:disable-line no-empty
             checkChildren,
             subject: new Subject<FocusOrigin>()
         };
@@ -160,7 +160,7 @@ export class FocusMonitor implements OnDestroy {
     }
 
     /** A map of global objects to lists of current listeners. */
-    private _unregisterGlobalListeners = () => {};
+    private _unregisterGlobalListeners = () => {};  // tslint:disable-line no-empty
 
     /** Register necessary event listeners on the document and window. */
     private _registerGlobalListeners() {
@@ -347,7 +347,7 @@ export class FocusMonitor implements OnDestroy {
         // Unregister global listeners when last element is unmonitored.
         if (!--this._monitoredElementCount) {
             this._unregisterGlobalListeners();
-            this._unregisterGlobalListeners = () => {};
+            this._unregisterGlobalListeners = () => {};  // tslint:disable-line no-empty
         }
     }
 }
@@ -383,7 +383,7 @@ export class CdkMonitorFocus implements OnDestroy {
     }
 }
 
-/** @docs-private @deprecated*/
+/** @docs-private @deprecated */
 export function FOCUS_MONITOR_PROVIDER_FACTORY(parentDispatcher: FocusMonitor, ngZone: NgZone, platform: Platform) {
     return parentDispatcher || new FocusMonitor(ngZone, platform);
 }

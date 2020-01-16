@@ -37,7 +37,14 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
+import {
+    ControlValueAccessor,
+    FormGroupDirective,
+    NG_VALIDATORS,
+    NgControl,
+    NgForm,
+    Validator
+} from '@angular/forms';
 import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
 import {
     DOWN_ARROW,
@@ -76,11 +83,15 @@ import {
     SELECT_PANEL_MAX_HEIGHT,
     SELECT_PANEL_PADDING_X,
     SELECT_PANEL_VIEWPORT_PADDING,
+    MC_SELECT_SCROLL_STRATEGY,
 
     getMcSelectDynamicMultipleError,
     getMcSelectNonFunctionValueError,
     getMcSelectNonArrayValueError,
-    MC_SELECT_SCROLL_STRATEGY
+
+    setMosaicValidation,
+    MC_VALIDATION,
+    McValidationOptions
 } from '@ptsecurity/mosaic/core';
 import { McCleaner, McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { McInput } from '@ptsecurity/mosaic/input';
@@ -200,7 +211,6 @@ export class McSelectTrigger {}
         class: 'mc-select',
         '[class.mc-disabled]': 'disabled',
         '[class.mc-select-invalid]': 'errorState',
-        '[class.mc-select-required]': 'required',
 
         '(keydown)': 'handleKeydown($event)',
         '(focus)': 'onFocus()',
@@ -488,13 +498,15 @@ export class McSelect extends McSelectMixinBase implements
         private readonly _renderer: Renderer2,
         defaultErrorStateMatcher: ErrorStateMatcher,
         elementRef: ElementRef,
+        @Optional() @Inject(NG_VALIDATORS) private rawValidators: Validator[],
         @Optional() private readonly _dir: Directionality,
         @Optional() parentForm: NgForm,
         @Optional() parentFormGroup: FormGroupDirective,
         @Optional() private readonly _parentFormField: McFormField,
-        @Self() @Optional() public ngControl: NgControl,
+        @Self() @Optional() ngControl: NgControl,
         @Attribute('tabindex') tabIndex: string,
-        @Inject(MC_SELECT_SCROLL_STRATEGY) private readonly _scrollStrategyFactory
+        @Inject(MC_SELECT_SCROLL_STRATEGY) private readonly _scrollStrategyFactory,
+        @Optional() @Inject(MC_VALIDATION) private mcValidation: McValidationOptions
     ) {
         super(elementRef, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl);
 
@@ -533,6 +545,10 @@ export class McSelect extends McSelectMixinBase implements
     }
 
     ngAfterContentInit() {
+        if (this.mcValidation.useValidation) {
+            setMosaicValidation.call(this, this.rawValidators, this.parentForm || this.parentFormGroup, this.ngControl);
+        }
+
         this.initKeyManager();
 
         this.selectionModel.changed
@@ -575,10 +591,16 @@ export class McSelect extends McSelectMixinBase implements
         this.stateChanges.complete();
     }
 
+    @Input()
+    hiddenItemsTextFormatter(hiddenItemsText: string, hiddenItems: number): string {
+        return `${hiddenItemsText} ${hiddenItems}`;
+    }
+
     clearValue($event): void {
         $event.stopPropagation();
 
         this.selectionModel.clear();
+        this.keyManager.setActiveItem(-1);
 
         this.propagateChanges();
     }

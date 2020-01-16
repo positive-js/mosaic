@@ -1,0 +1,20 @@
+<br><br>
+
+<div class="example-controls">
+    <mc-radio-group [(ngModel)]="flexClass">
+        <mc-radio-button value="flex">flex</mc-radio-button>
+        <mc-radio-button value="flex-none">flex-none</mc-radio-button>
+        <mc-radio-button value="flex-auto">flex-auto</mc-radio-button>
+        <mc-radio-button value="flex-grow">flex-grow</mc-radio-button>
+        <mc-radio-button value="flex-nogrow">flex-nogrow</mc-radio-button>
+        <mc-radio-button value="flex-noshrink">flex-noshrink</mc-radio-button>
+    </mc-radio-group>
+</div>
+
+<br><br>
+
+<div class="layout-row block">
+    <div class="block {{ flexClass }}">flex</div>
+    <div class="flex block">flex</div>
+    <div class="flex-none block">flex-none</div>
+</div>

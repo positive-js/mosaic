@@ -3,14 +3,12 @@ import { Component, ViewEncapsulation, Input, ChangeDetectionStrategy } from '@a
 import { mixinDisabled, CanDisable, CanDisableCtor } from '../common-behaviors/index';
 
 
-// Boilerplate for applying mixins to McOptgroup.
 /** @docs-private */
 export class McOptgroupBase {}
 
 // tslint:disable-next-line: naming-convention
 export const McOptgroupMixinBase: CanDisableCtor & typeof McOptgroupBase = mixinDisabled(McOptgroupBase);
 
-// Counter for unique group ids.
 let uniqueOptgroupIdCounter = 0;
 
 /**
@@ -20,20 +18,16 @@ let uniqueOptgroupIdCounter = 0;
     selector: 'mc-optgroup',
     exportAs: 'mcOptgroup',
     templateUrl: 'optgroup.html',
+    styleUrls: ['./optgroup.css'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     inputs: ['disabled'],
-    styleUrls: ['optgroup.css'],
     host: {
         class: 'mc-optgroup',
-        role: 'group',
-        '[class.mc-optgroup-disabled]': 'disabled',
-        '[attr.aria-disabled]': 'disabled.toString()',
-        '[attr.aria-labelledby]': 'labelId'
+        '[class.mc-disabled]': 'disabled'
     }
 })
 export class McOptgroup extends McOptgroupMixinBase implements CanDisable {
-    /** Label for the option group. */
     @Input() label: string;
 
     /** Unique id for the underlying label. */

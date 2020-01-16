@@ -3,6 +3,7 @@ import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { McCheckboxModule } from '@ptsecurity/mosaic/checkbox';
 import { McListModule, McListSelectionChange } from '@ptsecurity/mosaic/list';
 
 
@@ -54,6 +55,7 @@ export class DemoComponent {
     imports: [
         BrowserModule,
         FormsModule,
+        McCheckboxModule,
         McListModule
     ],
     bootstrap: [

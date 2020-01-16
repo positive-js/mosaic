@@ -146,7 +146,7 @@ describe('McPopover', () => {
             const expectedValue = '_TEST7';
             const triggerElement = component.test7.nativeElement;
 
-            dispatchMouseEvent(triggerElement, 'mouseenter');
+            dispatchMouseEvent(triggerElement, 'click');
             tick();
             componentFixture.detectChanges();
 

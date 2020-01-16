@@ -59,16 +59,14 @@ function addDeclarationToNgModule(options: ComponentOptions): Rule {
         const modulePath = options.module;
         let source = readIntoSourceFile(host, modulePath);
 
-        const componentPath = `/${options.path}/`
-            + (options.flat ? '' : strings.dasherize(options.name) + '/')
-            + strings.dasherize(options.name)
-            + '.component';
+        const componentPath = `/${options.path}/${(options.flat ? '' :
+            `${strings.dasherize(options.name)}/`)}${strings.dasherize(options.name)}.component/`;
         const relativePath = buildRelativePath(modulePath, componentPath);
         const classifiedName = strings.classify(`${options.name}Component`);
 
         const declarationChanges = addDeclarationToModule(
             // TODO: TypeScript version mismatch due to @schematics/angular using a different version
-            // than Material. Cast to any to avoid the type assignment failure.
+            // Cast to any to avoid the type assignment failure.
             source as any,
             modulePath,
             classifiedName,
@@ -90,7 +88,7 @@ function addDeclarationToNgModule(options: ComponentOptions): Rule {
             const exportRecorder = host.beginUpdate(modulePath);
             const exportChanges = addExportToModule(
                 // TODO: TypeScript version mismatch due to @schematics/angular using a different version
-                // than Material. Cast to any to avoid the type assignment failure.
+                // Cast to any to avoid the type assignment failure.
                 source as any,
                 modulePath,
                 strings.classify(`${options.name}Component`),
@@ -111,7 +109,7 @@ function addDeclarationToNgModule(options: ComponentOptions): Rule {
             const entryComponentRecorder = host.beginUpdate(modulePath);
             const entryComponentChanges = addEntryComponentToModule(
                 // TODO: TypeScript version mismatch due to @schematics/angular using a different version
-                // than Material. Cast to any to avoid the type assignment failure.
+                // Cast to any to avoid the type assignment failure.
                 source as any,
                 modulePath,
                 strings.classify(`${options.name}Component`),
@@ -149,7 +147,7 @@ function buildSelector(options: ComponentOptions, projectPrefix: string) {
  * include the additional files.
  */
 function indentTextContent(text: string, numSpaces: number): string {
-    // In the Material project there should be only LF line-endings, but the schematic files
+    // project there should be only LF line-endings, but the schematic files
     // are not being linted and therefore there can be also CRLF or just CR line-endings.
     return text.replace(/(\r\n|\r|\n)/g, `$1${' '.repeat(numSpaces)}`);
 }

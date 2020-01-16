@@ -15,15 +15,15 @@ import { DocumentationItems } from '../../shared/documentation-items/documentati
             state('collapsed', style({maxHeight: '0', visibility: 'hidden'})),
             state('expanded', style({maxHeight: '10000px', visibility: 'visible'})),
             transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4,0.0,0.2,1)')),
-            transition('collapsed <=> expanded', animate('225ms cubic-bezier(0.4,0.0,0.2,1)')),
+            transition('collapsed <=> expanded', animate('225ms cubic-bezier(0.4,0.0,0.2,1)'))
         ])
     ]
 })
 export class ComponentSidenav {
 
     categories: any;
-    icon: string = "mc mc-angle-up-M_16";
-    iconClass: string = "nav__trigger-icon";
+    icon: string = 'mc mc-angle-up-M_16';
+    iconClass: string = 'nav__trigger-icon';
     iconClassExpanded: string = `${this.icon} ${this.iconClass} ${this.iconClass}_expanded`;
     iconClassCollapsed: string = `${this.icon} ${this.iconClass} ${this.iconClass}_collapsed`;
 

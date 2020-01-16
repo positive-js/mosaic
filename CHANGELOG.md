@@ -1,3 +1,79 @@
+## 8.2.2 "Fluent Order" (2019-12-16)
+
+### Mosaic
+
+
+ * bug fix  **select, tree-select:** added formatter for hidden text (#UIM-319) ([#363](https://github.com/positive-js/mosaic/issues/363)) ([39be15c185f6953faec2637235cadb366072c1ea](https://github.com/positive-js/mosaic/commit/39be15c185f6953faec2637235cadb366072c1ea)), closes [#UIM-319](https://github.com/positive-js/mosaic/issues/UIM-319)
+ * bug fix  **typography:** fix subheading font-weight(#UIM-330) ([#369](https://github.com/positive-js/mosaic/issues/369)) ([1821dc2f5189b73afcae451587845be6e8e46dfe](https://github.com/positive-js/mosaic/commit/1821dc2f5189b73afcae451587845be6e8e46dfe)), closes [#UIM-330](https://github.com/positive-js/mosaic/issues/UIM-330)
+ * bug fix  **typography:** replace font-size numbers with typography mixixs (#UIM-271) ([#360](https://github.com/positive-js/mosaic/issues/360)) ([60dd7ce9c9a2d14b91ec08e35421344d1a49f7ad](https://github.com/positive-js/mosaic/commit/60dd7ce9c9a2d14b91ec08e35421344d1a49f7ad)), closes [#UIM-271](https://github.com/positive-js/mosaic/issues/UIM-271)
+
+### Docs
+
+
+ * feature  **docs:** added autocomplete, button-toggle, tags, toggle (#UIM-297, #UIM-300, #UIM-303, #UIM-306) ([#359](https://github.com/positive-js/mosaic/issues/359)) ([0cbe3fc7d4b0e337b847fc5ed05fe7220034963c](https://github.com/positive-js/mosaic/commit/0cbe3fc7d4b0e337b847fc5ed05fe7220034963c)), closes [#UIM-297](https://github.com/positive-js/mosaic/issues/UIM-297) [#UIM-300](https://github.com/positive-js/mosaic/issues/UIM-300) [#UIM-303](https://github.com/positive-js/mosaic/issues/UIM-303) [#UIM-306](https://github.com/positive-js/mosaic/issues/UIM-306)
+ * feature  **docs:** added layout flex (#UIM-329) ([#367](https://github.com/positive-js/mosaic/issues/367)) ([e985aac7ee84eb41edc08c4457931525821fe96b](https://github.com/positive-js/mosaic/commit/e985aac7ee84eb41edc08c4457931525821fe96b)), closes [#UIM-329](https://github.com/positive-js/mosaic/issues/UIM-329)
+ * feature  **docs:** added navbar and tabs (#UIM-326) ([#366](https://github.com/positive-js/mosaic/issues/366)) ([88d1da7fe799ff9aa6dd524011c8f8cd8f90efec](https://github.com/positive-js/mosaic/commit/88d1da7fe799ff9aa6dd524011c8f8cd8f90efec)), closes [#UIM-326](https://github.com/positive-js/mosaic/issues/UIM-326)
+ * feature  **docs:** added popover and tooltip (#UIM-311, #UIM-314) ([#361](https://github.com/positive-js/mosaic/issues/361)) ([cd5b264a58b9ae3fc522b61e0ae9d2bbaf955f97](https://github.com/positive-js/mosaic/commit/cd5b264a58b9ae3fc522b61e0ae9d2bbaf955f97)), closes [#UIM-311](https://github.com/positive-js/mosaic/issues/UIM-311) [#UIM-314](https://github.com/positive-js/mosaic/issues/UIM-314)
+
+## 8.2.1 "Bleakest hawker" (2019-12-04)
+
+### Mosaic
+
+
+ * bug fix  **modal:** cross added incorrectly when using mcModalTitle ([09910732f7612de49e951a707120df05353b3bf5](https://github.com/positive-js/mosaic/commit/09910732f7612de49e951a707120df05353b3bf5))
+
+# 8.2.0 "Bigtooth Aspen" (2019-12-03)
+
+### Mosaic
+
+
+ * bug fix  **app:** console warning - theme detection (#UIM-168) ([#351](https://github.com/positive-js/mosaic/issues/351)) ([dd4668bf9944edb5577b13dd9cf0125d219fae1d](https://github.com/positive-js/mosaic/commit/dd4668bf9944edb5577b13dd9cf0125d219fae1d)), closes [#UIM-168](https://github.com/positive-js/mosaic/issues/UIM-168)
+ * bug fix  **input:** Add undo and redo commands checks (#UIM-161) ([#350](https://github.com/positive-js/mosaic/issues/350)) ([1736acf4bfdda90bccbdc20ee5345be78225c970](https://github.com/positive-js/mosaic/commit/1736acf4bfdda90bccbdc20ee5345be78225c970)), closes [#UIM-161](https://github.com/positive-js/mosaic/issues/UIM-161)
+ * feature  **modal:** add markForCheck for modal (#UIM-262) ([#349](https://github.com/positive-js/mosaic/issues/349)) ([e3ecb9fd0d511a18f9616eee785344db525868b5](https://github.com/positive-js/mosaic/commit/e3ecb9fd0d511a18f9616eee785344db525868b5)), closes [#UIM-262](https://github.com/positive-js/mosaic/issues/UIM-262)
+ * feature  **modal:** modal should allow set disabled, visibility and progress ([#348](https://github.com/positive-js/mosaic/issues/348)) ([4cd142abadf90c1923a0304331043030e1dcb6e0](https://github.com/positive-js/mosaic/commit/4cd142abadf90c1923a0304331043030e1dcb6e0))
+
+### Docs
+
+
+ * feature  **docs:** added basic Modal example ([0db75d1ec527d100db116b839ab2ec8ee3d12543](https://github.com/positive-js/mosaic/commit/0db75d1ec527d100db116b839ab2ec8ee3d12543))
+ * feature  **docs:** added examples for card and splitter (#UIM-290) ([#357](https://github.com/positive-js/mosaic/issues/357)) ([9e6518483e60b3ec017102271f2086f6fc42b12b](https://github.com/positive-js/mosaic/commit/9e6518483e60b3ec017102271f2086f6fc42b12b)), closes [#UIM-290](https://github.com/positive-js/mosaic/issues/UIM-290)
+ * feature  **docs:** added examples for input (#UIM-283) ([#356](https://github.com/positive-js/mosaic/issues/356)) ([5cf3219ed5a499ad8e17999a39bd1bb6eddd7d8f](https://github.com/positive-js/mosaic/commit/5cf3219ed5a499ad8e17999a39bd1bb6eddd7d8f)), closes [#UIM-283](https://github.com/positive-js/mosaic/issues/UIM-283)
+ * feature  **docs:** added examples for list and tree (#UIM-261, #UIM-270) ([#352](https://github.com/positive-js/mosaic/issues/352)) ([22c19db06cb5bb4ed150e033f3b94d571787b1a6](https://github.com/positive-js/mosaic/commit/22c19db06cb5bb4ed150e033f3b94d571787b1a6)), closes [#UIM-261](https://github.com/positive-js/mosaic/issues/UIM-261) [#UIM-270](https://github.com/positive-js/mosaic/issues/UIM-270)
+ * feature  **docs:** added examples for select and tree-select (#UIM-277) ([#355](https://github.com/positive-js/mosaic/issues/355)) ([6ab915fd5a069998f5e74037ddbad6d3c41a2658](https://github.com/positive-js/mosaic/commit/6ab915fd5a069998f5e74037ddbad6d3c41a2658)), closes [#UIM-277](https://github.com/positive-js/mosaic/issues/UIM-277)
+ * feature  **docs:** adding datapicker examples ([#347](https://github.com/positive-js/mosaic/issues/347)) ([561bbde9bc5eb3d4c4b0d6ea06bb48a74abf33d4](https://github.com/positive-js/mosaic/commit/561bbde9bc5eb3d4c4b0d6ea06bb48a74abf33d4))
+ * feature  **docs:** adding disabled control to radio overview example ([#353](https://github.com/positive-js/mosaic/issues/353)) ([8cd752b5929958a6752e20f21321beceb26fc44d](https://github.com/positive-js/mosaic/commit/8cd752b5929958a6752e20f21321beceb26fc44d))
+ * feature  **docs:** adding progress bar examples ([#354](https://github.com/positive-js/mosaic/issues/354)) ([7e084384ddfb958c21432003a7a9ae61d85d11a4](https://github.com/positive-js/mosaic/commit/7e084384ddfb958c21432003a7a9ae61d85d11a4))
+
+## 8.1.3 "Maple" (2019-11-20)
+
+### Mosaic
+
+
+ * bug fix  **option:** added parameter for hide checkbox (#UIM-252) ([#342](https://github.com/positive-js/mosaic/issues/342)) ([7959c5c0416c61d520232956be271ac93481f057](https://github.com/positive-js/mosaic/commit/7959c5c0416c61d520232956be271ac93481f057)), closes [#UIM-252](https://github.com/positive-js/mosaic/issues/UIM-252)
+ * bug fix  **popover:** added ESC handler and added focusTrap in example (#UIM-245) ([#341](https://github.com/positive-js/mosaic/issues/341)) ([62991edd45b06209590d84c175d8829cb7e6e303](https://github.com/positive-js/mosaic/commit/62991edd45b06209590d84c175d8829cb7e6e303)), closes [#UIM-245](https://github.com/positive-js/mosaic/issues/UIM-245)
+ * bug fix  **tags:** prevent focusing on remove tag (#UIM-255) ([#346](https://github.com/positive-js/mosaic/issues/346)) ([7b5950c6daa4fea298f8f67c953821a9e68f44f8](https://github.com/positive-js/mosaic/commit/7b5950c6daa4fea298f8f67c953821a9e68f44f8)), closes [#UIM-255](https://github.com/positive-js/mosaic/issues/UIM-255)
+ * bug fix  **tree:** noUnselectLast does not work (#UIM-178) ([#345](https://github.com/positive-js/mosaic/issues/345)) ([ce661a4f24cda3db0df75a9ae45fe8ad92c61c71](https://github.com/positive-js/mosaic/commit/ce661a4f24cda3db0df75a9ae45fe8ad92c61c71)), closes [#UIM-178](https://github.com/positive-js/mosaic/issues/UIM-178)
+
+### Docs
+
+
+ * feature  **docs:** add datepicker examples (#330)
+
+## 8.1.2 "Yellowing Waterfall" (2019-11-15)
+
+### Mosaic
+
+
+ * bug fix  **popover:** added trigger click and it was set by default (#UIM-238) ([#338](https://github.com/positive-js/mosaic/issues/338)) ([cf122193cfa75b49d5c920fd55442ee5d8896d10](https://github.com/positive-js/mosaic/commit/cf122193cfa75b49d5c920fd55442ee5d8896d10)), closes [#UIM-238](https://github.com/positive-js/mosaic/issues/UIM-238)
+ * bug fix  **popover:** arrow have to be under content (#UIM-242) ([#340](https://github.com/positive-js/mosaic/issues/340)) ([28a3cc53229eae007ac93558d5a8b9847ff1ebcc](https://github.com/positive-js/mosaic/commit/28a3cc53229eae007ac93558d5a8b9847ff1ebcc)), closes [#UIM-242](https://github.com/positive-js/mosaic/issues/UIM-242)
+ * bug fix  **tree:** autoSelect does not work when multiple="keybord" (#UIM-250) ([#343](https://github.com/positive-js/mosaic/issues/343)) ([ab195c7e43c71d72d0902348052802cb81a919ca](https://github.com/positive-js/mosaic/commit/ab195c7e43c71d72d0902348052802cb81a919ca)), closes [#UIM-250](https://github.com/positive-js/mosaic/issues/UIM-250)
+ * bug fix  **tree:** tree catch focus with shift + TAB (#UIM-246) ([#339](https://github.com/positive-js/mosaic/issues/339)) ([8371e369a6bbf76793b54ef79ffe797f319c7c0e](https://github.com/positive-js/mosaic/commit/8371e369a6bbf76793b54ef79ffe797f319c7c0e)), closes [#UIM-246](https://github.com/positive-js/mosaic/issues/UIM-246)
+
+### Docs
+
+
+ * feature  **docs:** adding timepicker example (#330)
+
 ## 8.1.1 "Time Consuming Relocation" (2019-11-11)
 
 ### Mosaic

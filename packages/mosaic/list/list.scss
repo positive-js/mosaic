@@ -39,8 +39,12 @@
         $mc-list-multi-line-padding,
         $mc-list-icon-size
     );
+
+    & .mc-pseudo-checkbox {
+        margin-right: 8px;
+    }
 }
 
-.mc-list-option:not([disabled]) {
+.mc-list-option:not([disabled]):not(.mc-disabled){
     cursor: pointer;
 }

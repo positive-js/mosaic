@@ -1,0 +1,8 @@
+<mc-list-selection>
+    <mc-optgroup *ngFor="let group of pokemonTypes" [label]="group.name" [disabled]="group.disabled">
+        <mc-list-option *ngFor="let pokemon of group.pokemon" [value]="pokemon.value">
+            {{ pokemon.viewValue }}
+        </mc-list-option>
+    </mc-optgroup>
+    <mc-list-option value="mime-11">Mr. Mime</mc-list-option>
+</mc-list-selection>

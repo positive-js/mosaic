@@ -31,21 +31,15 @@ import {
     PAGE_DOWN,
     PAGE_UP,
     RIGHT_ARROW,
-    SPACE,
-    TAB
+    SPACE
 } from '@ptsecurity/cdk/keycodes';
 import { CdkTree, CdkTreeNodeOutlet, FlatTreeControl } from '@ptsecurity/cdk/tree';
-import { CanDisable, getMcSelectNonArrayValueError, HasTabIndex } from '@ptsecurity/mosaic/core';
+import { CanDisable, getMcSelectNonArrayValueError, HasTabIndex, MultipleMode } from '@ptsecurity/mosaic/core';
 import { merge, Observable, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { MC_TREE_OPTION_PARENT_COMPONENT, McTreeOption, McTreeOptionEvent } from './tree-option.component';
 
-
-export enum MultipleMode {
-    CHECKBOX = 'checkbox',
-    KEYBOARD = 'keyboard'
-}
 
 export const MC_SELECTION_TREE_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
@@ -122,7 +116,6 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
     get optionBlurChanges(): Observable<McTreeOptionEvent> {
         return merge(...this.renderedOptions.map((option) => option.onBlur));
     }
-
 
     get multiple(): boolean {
         return !!this.multipleMode;
@@ -206,7 +199,7 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
             this.multipleMode = MultipleMode.CHECKBOX;
         }
 
-        if (this.multiple) {
+        if (this.multipleMode === MultipleMode.CHECKBOX) {
             this.autoSelect = false;
             this.noUnselectLast = false;
         }
@@ -224,6 +217,12 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
             .subscribe(() => {
                 if (this.keyManager.activeItem) {
                     this.emitNavigationEvent(this.keyManager.activeItem);
+
+                    if (this.autoSelect && !this.keyManager.activeItem.disabled) {
+                        this.updateOptionsFocus();
+
+                        this.setSelectedOption(this.keyManager.activeItem);
+                    }
                 }
             });
 
@@ -330,10 +329,6 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
             default:
                 this.keyManager.onKeydown(event);
         }
-
-        if (this.autoSelect && this.keyManager.activeItem) {
-            this.setSelectedOption(this.keyManager.activeItem);
-        }
     }
 
     updateScrollSize(): void {
@@ -378,8 +373,7 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
             if (!this.canDeselectLast(option)) { return; }
 
             if (this.autoSelect) {
-                this.selectionModel.deselect(...this.selectionModel.selected);
-                this.selectionModel.select(option.data);
+                this.selectionModel.toggle(option.data);
             }
         }
 
@@ -393,8 +387,9 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
     toggleFocusedOption(): void {
         const focusedOption = this.keyManager.activeItem;
 
-        if (focusedOption) {
-            this.setSelectedOption(focusedOption);
+        if (focusedOption && (!focusedOption.selected || this.canDeselectLast(focusedOption))) {
+            focusedOption.toggle();
+            this.emitChangeEvent(focusedOption);
         }
     }
 
@@ -572,6 +567,12 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
         if (this.renderedOptions) {
             this.renderedOptions.forEach((option) => option.markForCheck());
         }
+    }
+
+    private updateOptionsFocus() {
+        this.renderedOptions
+            .filter((option) => option.hasFocus)
+            .forEach((option) => option.hasFocus = false);
     }
 
     private canDeselectLast(option: McTreeOption): boolean {

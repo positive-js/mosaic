@@ -1,0 +1,6 @@
+<mc-tag-list>
+    <mc-tag *ngFor="let tag of simpleTags" [value]="tag" (removed)="onRemoveTag(tag)">
+        {{ tag }}
+        <i mc-icon="mc-close-S_16" mcTagRemove></i>
+    </mc-tag>
+</mc-tag-list>

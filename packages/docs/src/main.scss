@@ -32,10 +32,12 @@ $typography: mc-typography-config();
 
 @mixin docs-component-theme($theme) {
     @include mosaic-theme($theme);
+    @include layouts_for_breakpoint();
+    @include layout-padding-margin();
     @include mosaic-docs-app-theme($theme);
     @include layout-padding-margin();
     @include mc-anchors-theme($theme);
-    @include mc-navbar-theme($theme);
+    @include mc-docs-navbar-theme($theme);
     @include mc-footer-theme($theme);
     @include mc-main-layout-theme($theme);
     @include mc-sidenav-theme($theme);
@@ -51,6 +53,12 @@ $typography: mc-typography-config();
 @import './styles/theme-dark';
 
 .theme-default {
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
+    background: mc-color($background, background);
+    color: mc-color($foreground, text);
+
     &.active-blue {
         @include docs-component-theme($theme);
     }
@@ -69,6 +77,12 @@ $typography: mc-typography-config();
 }
 
 .theme-dark {
+    $background: map-get($dark-theme, background);
+    $foreground: map-get($dark-theme, foreground);
+
+    background: mc-color($background, background);
+    color: mc-color($foreground, text);
+
     @include material-dark();
 
     &.active-blue {

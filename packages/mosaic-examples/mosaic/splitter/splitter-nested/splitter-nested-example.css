@@ -1,0 +1,21 @@
+mc-splitter.with-border {
+    border: 1px solid black;
+    height: 300px;
+    margin: 2px;
+}
+
+mc-splitter.without-border {
+    height: 300px;
+}
+
+.with-border > div[mc-splitter-area] {
+    background: #c5c0c0
+}
+
+.without-border > div[mc-splitter-area] {
+    background: #b3b3b3;
+}
+
+.nested-splitter > div[mc-splitter-area] {
+    background: #9f9f9f;
+}

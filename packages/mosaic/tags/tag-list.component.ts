@@ -11,6 +11,7 @@ import {
     DoCheck,
     ElementRef,
     EventEmitter,
+    Inject,
     Input,
     OnDestroy,
     OnInit,
@@ -20,14 +21,17 @@ import {
     Self,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
+import { ControlValueAccessor, FormGroupDirective, NG_VALIDATORS, NgControl, NgForm, Validator } from '@angular/forms';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import { BACKSPACE, END, HOME } from '@ptsecurity/cdk/keycodes';
 import {
     CanUpdateErrorState,
     CanUpdateErrorStateCtor,
     ErrorStateMatcher,
-    mixinErrorState
+    MC_VALIDATION,
+    McValidationOptions,
+    mixinErrorState,
+    setMosaicValidation
 } from '@ptsecurity/mosaic/core';
 import { McCleaner, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { merge, Observable, Subject, Subscription } from 'rxjs';
@@ -176,6 +180,7 @@ export class McTagList extends McTagListMixinBase implements McFormFieldControl<
 
     set required(value: boolean) {
         this._required = coerceBooleanProperty(value);
+
         this.stateChanges.next();
     }
 
@@ -334,10 +339,12 @@ export class McTagList extends McTagListMixinBase implements McFormFieldControl<
         protected elementRef: ElementRef<HTMLElement>,
         private changeDetectorRef: ChangeDetectorRef,
         defaultErrorStateMatcher: ErrorStateMatcher,
+        @Optional() @Inject(NG_VALIDATORS) private rawValidators: Validator[],
+        @Optional() @Inject(MC_VALIDATION) private mcValidation: McValidationOptions,
         @Optional() private dir: Directionality,
         @Optional() parentForm: NgForm,
         @Optional() parentFormGroup: FormGroupDirective,
-        @Optional() @Self() public ngControl: NgControl
+        @Optional() @Self() ngControl: NgControl
     ) {
         super(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl);
 
@@ -347,6 +354,10 @@ export class McTagList extends McTagListMixinBase implements McFormFieldControl<
     }
 
     ngAfterContentInit() {
+        if (this.mcValidation.useValidation) {
+            setMosaicValidation.call(this, this.rawValidators, this.parentForm || this.parentFormGroup, this.ngControl);
+        }
+
         this.keyManager = new FocusKeyManager<McTag>(this.tags)
             .withVerticalOrientation()
             .withHorizontalOrientation(this.dir ? this.dir.value : 'ltr');
@@ -400,6 +411,8 @@ export class McTagList extends McTagListMixinBase implements McFormFieldControl<
                 });
 
                 this.stateChanges.next();
+
+                this.propagateTagsChanges();
             });
     }
 
@@ -686,6 +699,7 @@ export class McTagList extends McTagListMixinBase implements McFormFieldControl<
     }
 
     /** Emits change event to set the model value. */
+    // todo need rethink this method and selection logic
     private propagateChanges(fallbackValue?: any): void {
         let valueToEmit: any = null;
 
@@ -694,6 +708,16 @@ export class McTagList extends McTagListMixinBase implements McFormFieldControl<
         } else {
             valueToEmit = this.selected ? this.selected.value : fallbackValue;
         }
+        this._value = valueToEmit;
+        this.change.emit(new McTagListChange(this, valueToEmit));
+        this.valueChange.emit(valueToEmit);
+        this.onChange(valueToEmit);
+        this.changeDetectorRef.markForCheck();
+    }
+
+    private propagateTagsChanges(): void {
+        const valueToEmit: any = this.tags.map((tag) => tag.value);
+
         this._value = valueToEmit;
         this.change.emit(new McTagListChange(this, valueToEmit));
         this.valueChange.emit(valueToEmit);

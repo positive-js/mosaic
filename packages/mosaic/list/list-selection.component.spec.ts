@@ -114,8 +114,7 @@ describe('McListSelection without forms', () => {
         it('should be able to dispatch multiple selected items', () => {
             const testListItem = listOptions[2].injector.get<McListOption>(McListOption);
             const testListItem2 = listOptions[1].injector.get<McListOption>(McListOption);
-            const selectList =
-                selectionList.injector.get<McListSelection>(McListSelection).selectionModel;
+            const selectList = selectionList.injector.get<McListSelection>(McListSelection).selectionModel;
 
             expect(selectList.selected.length).toBe(0);
 
@@ -812,10 +811,12 @@ xdescribe('McListSelection with forms', () => {
 
 @Component({
     template: `
-        <mc-list-selection id="selection-list-1"
-                           auto-select="false"
-                           no-unselect="false"
-                           (selectionChange)="onValueChange($event)">
+        <mc-list-selection
+                id="selection-list-1"
+                auto-select="false"
+                no-unselect="false"
+                multiple="keyboard"
+                (selectionChange)="onValueChange($event)">
             <mc-list-option checkboxPosition="before" disabled="true" value="inbox">
                 Inbox (disabled selection-option)
             </mc-list-option>

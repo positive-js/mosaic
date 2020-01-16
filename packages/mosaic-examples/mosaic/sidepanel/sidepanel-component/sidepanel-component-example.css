@@ -1,0 +1,12 @@
+.sidepanel-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.layout-padding {
+    padding: 8px;
+}
+
+.layout-padding > * {
+    padding: 8px;
+}

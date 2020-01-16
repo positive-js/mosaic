@@ -20,7 +20,10 @@ import { startWith } from 'rxjs/operators';
 
 import { McCleaner } from './cleaner';
 import { McFormFieldControl } from './form-field-control';
-import { getMcFormFieldMissingControlError } from './form-field-errors';
+import {
+    getMcFormFieldMissingControlError,
+    getMcFormFieldYouCanNotUseCleanerInNumberInputError
+} from './form-field-errors';
 import { McFormFieldNumberControl } from './form-field-number-control';
 import { McHint } from './hint';
 import { McPrefix } from './prefix';
@@ -78,16 +81,16 @@ export const McFormFieldMixinBase: CanColorCtor & typeof McFormFieldBase = mixin
 export class McFormField extends McFormFieldMixinBase implements
     AfterContentInit, AfterContentChecked, AfterViewInit, CanColor {
 
-    @ContentChild(McFormFieldControl, {static: false}) control: McFormFieldControl<any>;
-    @ContentChild(McFormFieldNumberControl, {static: false}) numberControl: McFormFieldNumberControl<any>;
-    @ContentChild(McStepper, {static: false}) stepper: McStepper;
+    @ContentChild(McFormFieldControl, { static: false }) control: McFormFieldControl<any>;
+    @ContentChild(McFormFieldNumberControl, { static: false }) numberControl: McFormFieldNumberControl<any>;
+    @ContentChild(McStepper, { static: false }) stepper: McStepper;
+    @ContentChild(McCleaner, { static: false }) cleaner: McCleaner | null;
 
     @ContentChildren(McHint) hint: QueryList<McHint>;
     @ContentChildren(McSuffix) suffix: QueryList<McSuffix>;
     @ContentChildren(McPrefix) prefix: QueryList<McPrefix>;
-    @ContentChildren(McCleaner) cleaner: QueryList<McCleaner>;
 
-    @ViewChild('connectionContainer', {static: true}) connectionContainerRef: ElementRef;
+    @ViewChild('connectionContainer', { static: true }) connectionContainerRef: ElementRef;
 
     // Unique id for the internal form field label.
     labelId = `mc-form-field-label-${nextUniqueId++}`;
@@ -102,6 +105,11 @@ export class McFormField extends McFormFieldMixinBase implements
     }
 
     ngAfterContentInit() {
+        if (this.numberControl && this.hasCleaner) {
+            this.cleaner = null;
+            throw getMcFormFieldYouCanNotUseCleanerInNumberInputError();
+        }
+
         this.validateControlChild();
 
         if (this.control.controlType) {
@@ -115,13 +123,15 @@ export class McFormField extends McFormFieldMixinBase implements
         }
 
         // Subscribe to changes in the child control state in order to update the form field UI.
-        this.control.stateChanges.pipe(startWith())
+        this.control.stateChanges
+            .pipe(startWith())
             .subscribe(() => {
                 this._changeDetectorRef.markForCheck();
             });
 
         if (this.numberControl) {
-            this.numberControl.stateChanges.pipe(startWith())
+            this.numberControl.stateChanges
+                .pipe(startWith())
                 .subscribe(() => {
                     this._changeDetectorRef.markForCheck();
                 });
@@ -223,7 +233,7 @@ export class McFormField extends McFormFieldMixinBase implements
     }
 
     get hasCleaner(): boolean {
-        return this.cleaner && this.cleaner.length > 0;
+        return !!this.cleaner;
     }
 
     get hasStepper(): boolean {

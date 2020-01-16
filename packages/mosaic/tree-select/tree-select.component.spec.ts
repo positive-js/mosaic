@@ -189,7 +189,6 @@ const getChildren = (node: FileNode): Observable<FileNode[]> => {
             <mc-tree-select
                 placeholder="Food"
                 [formControl]="control"
-                [required]="isRequired"
                 [tabIndex]="tabIndexOverride"
                 [panelClass]="panelClass">
 
@@ -222,7 +221,6 @@ class BasicTreeSelect {
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
-    isRequired: boolean;
     heightAbove = 0;
     heightBelow = 0;
     tabIndexOverride: number;
@@ -1179,7 +1177,7 @@ class SelectWithCustomTrigger {
 })
 class NgModelCompareWithSelect {
     selectedFood: { name: string; type: string } = { name: 'rootNode_1', type: 'app' };
-    comparator: ((f1: any, f2: any) => boolean) | null = this.compareByValue;
+    comparator: ((f1: any, f2: any) => boolean) | null;
 
     @ViewChild(McTreeSelect, {static: false}) select: McTreeSelect;
     @ViewChildren(McTreeOption) options: QueryList<McTreeOption>;
@@ -1190,6 +1188,7 @@ class NgModelCompareWithSelect {
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
     constructor() {
+        this.useCompareByValue();
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
         // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
@@ -1458,17 +1457,6 @@ describe('McTreeSelect', () => {
                     fixture.detectChanges();
 
                     expect(select.getAttribute('tabindex')).toBe('3');
-                }));
-
-                it('should set the mc-select-required class for required selects', fakeAsync(() => {
-                    expect(select.classList).not.toContain(
-                        'mc-select-required', `Expected the mc-select-required class not to be set.`);
-
-                    fixture.componentInstance.isRequired = true;
-                    fixture.detectChanges();
-
-                    expect(select.classList).toContain(
-                        'mc-select-required', `Expected the mc-select-required class to be set.`);
                 }));
 
                 it('should set the tabindex of the select to -1 if disabled', fakeAsync(() => {
@@ -1941,7 +1929,7 @@ describe('McTreeSelect', () => {
 
                 it('should set the tabindex of each option according to disabled state', fakeAsync(() => {
                     expect(options[0].getAttribute('tabindex')).toEqual('-1');
-                    expect(options[3].getAttribute('tabindex')).toEqual(null);
+                    expect(options[3].getAttribute('tabindex')).toEqual('-1');
                 }));
             });
         });
@@ -2124,7 +2112,8 @@ describe('McTreeSelect', () => {
                 fixture.detectChanges();
                 flush();
 
-                const option = overlayContainerElement.querySelector('mc-tree-option') as Node;
+                const option = overlayContainerElement.querySelector('mc-tree-option') as HTMLElement;
+                option.focus();
                 const event = dispatchKeyboardEvent(option, 'keydown', SPACE);
                 tick(10);
 
@@ -2136,7 +2125,10 @@ describe('McTreeSelect', () => {
                 fixture.detectChanges();
                 flush();
 
-                const option = overlayContainerElement.querySelector('mc-tree-option') as Node;
+                expect(fixture.componentInstance.select.panelOpen).toBe(true);
+
+                const option = overlayContainerElement.querySelector('mc-tree-option') as HTMLElement;
+                option.focus();
                 const event = dispatchKeyboardEvent(option, 'keydown', ENTER);
                 tick(10);
 
@@ -2159,6 +2151,7 @@ describe('McTreeSelect', () => {
                 flush();
                 dispatchFakeEvent(selectElement, 'blur');
                 fixture.detectChanges();
+                tick(10);
 
                 /* tslint:disable-next-line:deprecation */
                 expect(selectInstance.focused).toBe(true, 'Expected select element to remain focused.');
@@ -2177,12 +2170,12 @@ describe('McTreeSelect', () => {
                 tick(10);
             }));
 
-            it('should focus the first option if no option is selected', fakeAsync(() => {
+            it('should not focus the first option if no option is selected', fakeAsync(() => {
                 trigger.click();
                 fixture.detectChanges();
                 flush();
 
-                expect(fixture.componentInstance.select.tree.keyManager.activeItemIndex).toEqual(0);
+                expect(fixture.componentInstance.select.tree.keyManager.activeItemIndex).toEqual(-1);
             }));
 
             it('should select an option when it is clicked', fakeAsync(() => {
@@ -2635,19 +2628,6 @@ describe('McTreeSelect', () => {
                     expect(fixture.componentInstance.control.dirty)
                         .toEqual(false, `Expected control to stay pristine after programmatic change.`);
                 }));
-
-            xit('should set an asterisk after the label if control is required', fakeAsync(() => {
-                let requiredMarker = fixture.debugElement.query(By.css('.mc-form-field-required-marker'));
-                expect(requiredMarker)
-                    .toBeNull(`Expected label not to have an asterisk, as control was not required.`);
-
-                fixture.componentInstance.isRequired = true;
-                fixture.detectChanges();
-
-                requiredMarker = fixture.debugElement.query(By.css('.mc-form-field-required-marker'));
-                expect(requiredMarker)
-                    .not.toBeNull(`Expected label to have an asterisk, as control was required.`);
-            }));
         });
 
         describe('disabled behavior', () => {
@@ -3191,12 +3171,12 @@ describe('McTreeSelect', () => {
 
         it('should not set the invalid class on a clean select', fakeAsync(() => {
             expect(testComponent.formGroup.untouched).toBe(true, 'Expected the form to be untouched.');
-            expect(testComponent.formControl.invalid).toBe(true, 'Expected form control to be invalid.');
+            expect(testComponent.formControl.invalid).toBe(false, 'Expected form control to be invalid.');
             expect(select.classList)
                 .not.toContain('mc-select-invalid', 'Expected select not to appear invalid.');
         }));
 
-        it('should appear as invalid if it becomes touched', fakeAsync(() => {
+        it('should not appear as invalid if it becomes touched', fakeAsync(() => {
             expect(select.classList)
                 .not.toContain('mc-select-invalid', 'Expected select not to appear invalid.');
 
@@ -3204,7 +3184,7 @@ describe('McTreeSelect', () => {
             fixture.detectChanges();
 
             expect(select.classList)
-                .toContain('mc-select-invalid', 'Expected select to appear invalid.');
+                .not.toContain('mc-select-invalid', 'Expected select to appear invalid.');
         }));
 
         it('should not have the invalid class when the select becomes valid', fakeAsync(() => {
@@ -3212,7 +3192,7 @@ describe('McTreeSelect', () => {
             fixture.detectChanges();
 
             expect(select.classList)
-                .toContain('mc-select-invalid', 'Expected select to appear invalid.');
+                .not.toContain('mc-select-invalid', 'Expected select to appear invalid.');
 
             testComponent.formControl.setValue('pizza-1');
             fixture.detectChanges();
@@ -4584,7 +4564,7 @@ describe('McTreeSelect', () => {
             fixture.detectChanges();
             flush();
 
-            expect(fixture.componentInstance.select.tree.keyManager.activeItemIndex).toBe(0);
+            expect(fixture.componentInstance.select.tree.keyManager.activeItemIndex).toBe(-1);
 
             const options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-tree-option');
 

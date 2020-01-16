@@ -35,7 +35,7 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
+import { ControlValueAccessor, FormGroupDirective, NG_VALIDATORS, NgControl, NgForm, Validator } from '@angular/forms';
 import {
     DOWN_ARROW,
     END,
@@ -65,15 +65,20 @@ import {
     SELECT_PANEL_MAX_HEIGHT,
     SELECT_PANEL_PADDING_X,
     SELECT_PANEL_VIEWPORT_PADDING,
+    MC_SELECT_SCROLL_STRATEGY,
 
     getMcSelectDynamicMultipleError,
     getMcSelectNonFunctionValueError,
     getMcSelectNonArrayValueError,
-    MC_SELECT_SCROLL_STRATEGY
+    MultipleMode,
+
+    MC_VALIDATION,
+    setMosaicValidation,
+    McValidationOptions
 } from '@ptsecurity/mosaic/core';
 import { McCleaner, McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { McTag } from '@ptsecurity/mosaic/tags';
-import { McTreeSelection, McTreeOption, MultipleMode } from '@ptsecurity/mosaic/tree';
+import { McTreeSelection, McTreeOption } from '@ptsecurity/mosaic/tree';
 import { defer, merge, Observable, Subject } from 'rxjs';
 import {
     filter,
@@ -127,7 +132,6 @@ const McTreeSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorSt
         class: 'mc-tree-select',
         '[class.mc-disabled]': 'disabled',
         '[class.mc-select-invalid]': 'errorState',
-        '[class.mc-select-required]': 'required',
 
         '(click)': 'toggle()',
         '(keydown)': 'handleKeydown($event)',
@@ -412,12 +416,14 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         private readonly renderer: Renderer2,
         defaultErrorStateMatcher: ErrorStateMatcher,
         @Attribute('tabindex') tabIndex: string,
+        @Optional() @Inject(NG_VALIDATORS) private rawValidators: Validator[],
+        @Optional() @Inject(MC_VALIDATION) private mcValidation: McValidationOptions,
         @Inject(MC_SELECT_SCROLL_STRATEGY) private readonly scrollStrategyFactory,
         @Optional() private readonly dir: Directionality,
         @Optional() parentForm: NgForm,
         @Optional() parentFormGroup: FormGroupDirective,
         @Optional() private readonly parentFormField: McFormField,
-        @Self() @Optional() public ngControl: NgControl
+        @Optional() @Self() ngControl: NgControl
     ) {
         super(elementRef, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl);
 
@@ -456,6 +462,10 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
 
     ngAfterContentInit() {
         if (!this.tree) { return; }
+
+        if (this.mcValidation.useValidation) {
+            setMosaicValidation.call(this, this.rawValidators, this.parentForm || this.parentFormGroup, this.ngControl);
+        }
 
         this.tree.resetFocusedItemOnBlur = false;
 
@@ -534,10 +544,16 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         this.stateChanges.complete();
     }
 
+    @Input()
+    hiddenItemsTextFormatter(hiddenItemsText: string, hiddenItems: number): string {
+        return `${hiddenItemsText} ${hiddenItems}`;
+    }
+
     clearValue($event): void {
         $event.stopPropagation();
 
         this.selectionModel.clear();
+        this.tree.keyManager.setActiveItem(-1);
 
         this.setSelectionByValue([]);
 
@@ -975,18 +991,14 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
      * the first item instead.
      */
     private highlightCorrectOption() {
-        if (!this.tree.keyManager) { return; }
+        if (this.empty || !this.tree.keyManager) { return; }
 
-        if (this.empty) {
-            this.tree.keyManager.setFirstItemActive();
-        } else {
-            const firstSelectedValue = this.multiple ? this.selectedValues[0] : this.selectedValues;
+        const firstSelectedValue = this.multiple ? this.selectedValues[0] : this.selectedValues;
 
-            const selectedOption = this.options.find((option) => option.value === firstSelectedValue);
+        const selectedOption = this.options.find((option) => option.value === firstSelectedValue);
 
-            if (selectedOption) {
-                this.tree.keyManager.setActiveItem(selectedOption);
-            }
+        if (selectedOption) {
+            this.tree.keyManager.setActiveItem(selectedOption);
         }
     }
 

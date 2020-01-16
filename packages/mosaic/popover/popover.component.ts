@@ -4,14 +4,14 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     ConnectedOverlayPositionChange,
     ConnectionPositionPair,
+    FlexibleConnectedPositionStrategy,
+    HorizontalConnectionPos,
+    OriginConnectionPosition,
     Overlay,
+    OverlayConnectionPosition,
     OverlayRef,
     ScrollDispatcher,
     ScrollStrategy,
-    FlexibleConnectedPositionStrategy,
-    OverlayConnectionPosition,
-    OriginConnectionPosition,
-    HorizontalConnectionPos,
     VerticalConnectionPos
 } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
@@ -35,18 +35,25 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
-import {
-    EXTENDED_OVERLAY_POSITIONS,
-    POSITION_MAP,
-    POSITION_TO_CSS_MAP
-} from '@ptsecurity/mosaic/core';
+import { EXTENDED_OVERLAY_POSITIONS, POSITION_MAP, POSITION_TO_CSS_MAP } from '@ptsecurity/mosaic/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
 import { mcPopoverAnimations } from './popover-animations';
 
 
-export type PopoverVisibility = 'initial' | 'visible' | 'hidden';
+enum PopoverTriggers {
+    Click = 'click',
+    Focus = 'focus',
+    Hover = 'hover'
+}
+
+export enum PopoverVisibility {
+    Initial = 'initial',
+    Visible = 'visible',
+    Hidden = 'hidden'
+}
+
 
 @Component({
     selector: 'mc-popover',
@@ -57,13 +64,14 @@ export type PopoverVisibility = 'initial' | 'visible' | 'hidden';
     changeDetection: ChangeDetectionStrategy.OnPush,
     animations: [mcPopoverAnimations.popoverState],
     host: {
-        '[class]': 'getCssClassesList'
+        '[class]': 'getCssClassesList',
+        '(keydown)': 'handleKeydown($event)'
     }
 })
 export class McPopoverComponent {
     positions: ConnectionPositionPair[] = [ ...EXTENDED_OVERLAY_POSITIONS ];
     availablePositions: any;
-    popoverVisibility: PopoverVisibility = 'initial';
+    popoverVisibility: PopoverVisibility = PopoverVisibility.Initial;
     closeOnInteraction: boolean = false;
     mcContent: string | TemplateRef<any>;
     mcHeader: string | TemplateRef<any>;
@@ -77,7 +85,7 @@ export class McPopoverComponent {
     set mcTrigger(value: string) {
         this._mcTrigger = value;
     }
-    private _mcTrigger: string = 'hover';
+    private _mcTrigger: string = PopoverTriggers.Hover;
 
     get mcPlacement(): string {
         return this._mcPlacement;
@@ -141,6 +149,10 @@ export class McPopoverComponent {
         return POSITION_TO_CSS_MAP[this.mcPlacement];
     }
 
+    get isOpen(): boolean {
+        return this.popoverVisibility === PopoverVisibility.Visible;
+    }
+
     /** Subject for notifying that the popover has been hidden from the view */
     private readonly onHideSubject: Subject<any> = new Subject();
 
@@ -148,10 +160,17 @@ export class McPopoverComponent {
         this.availablePositions = POSITION_MAP;
     }
 
+    handleKeydown(e: KeyboardEvent) {
+        // tslint:disable-next-line: deprecation
+        if (this.isOpen && e.keyCode === ESCAPE) {
+            this.hide();
+        }
+    }
+
     show(): void {
         if (this.isNonEmptyContent()) {
             this.closeOnInteraction = true;
-            this.popoverVisibility = 'visible';
+            this.popoverVisibility = PopoverVisibility.Visible;
             // Mark for check so if any parent component has set the
             // ChangeDetectionStrategy to OnPush it will be checked anyways
             this.markForCheck();
@@ -159,7 +178,7 @@ export class McPopoverComponent {
     }
 
     hide(): void {
-        this.popoverVisibility = 'hidden';
+        this.popoverVisibility = PopoverVisibility.Hidden;
         this.mcVisibleChange.emit(false);
 
         // Mark for check so if any parent component has set the
@@ -177,7 +196,7 @@ export class McPopoverComponent {
     }
 
     isVisible(): boolean {
-        return this.popoverVisibility === 'visible';
+        return this.popoverVisibility === PopoverVisibility.Visible;
     }
 
     markForCheck(): void {
@@ -193,17 +212,17 @@ export class McPopoverComponent {
     }
 
     animationStart() {
-            this.closeOnInteraction = false;
+        this.closeOnInteraction = false;
     }
 
     animationDone(event: AnimationEvent): void {
         const toState = event.toState as PopoverVisibility;
 
-        if (toState === 'hidden' && !this.isVisible()) {
+        if (toState === PopoverVisibility.Hidden && !this.isVisible()) {
             this.onHideSubject.next();
         }
 
-        if (toState === 'visible' || toState === 'hidden') {
+        if (toState === PopoverVisibility.Visible || toState === PopoverVisibility.Hidden) {
             this.closeOnInteraction = true;
         }
     }
@@ -336,15 +355,17 @@ export class McPopover implements OnInit, OnDestroy {
     get mcTrigger(): string {
         return this._mcTrigger;
     }
+
     set mcTrigger(value: string) {
         if (value) {
             this._mcTrigger = value;
             this.updateCompValue('mcTrigger', value);
         } else {
-            this._mcTrigger = 'hover';
+            this._mcTrigger = PopoverTriggers.Click;
         }
     }
-    private _mcTrigger: string = 'hover';
+
+    private _mcTrigger: string = PopoverTriggers.Click;
 
     @Input('mcPopoverSize')
     get mcPopoverSize(): string {
@@ -388,6 +409,7 @@ export class McPopover implements OnInit, OnDestroy {
     get mcVisible(): boolean {
         return this._mcVisible;
     }
+
     set mcVisible(externalValue: boolean) {
         const value = coerceBooleanProperty(externalValue);
         this._mcVisible = value;
@@ -399,6 +421,7 @@ export class McPopover implements OnInit, OnDestroy {
             this.hide();
         }
     }
+
     private _mcVisible: boolean;
 
     get isOpen(): boolean {
@@ -454,18 +477,17 @@ export class McPopover implements OnInit, OnDestroy {
             positionStrategy: strategy,
             panelClass: 'mc-popover__panel',
             scrollStrategy: this.scrollStrategy(),
-            hasBackdrop: this.mcTrigger === 'manual',
+            hasBackdrop: this.mcTrigger === PopoverTriggers.Click,
             backdropClass: 'no-class'
         });
 
-        if (this.mcTrigger === 'manual') {
-            this.overlayRef.backdropClick().subscribe(() => {
-                if (!this.popover) {
-                    return;
-                }
+        if (this.mcTrigger === PopoverTriggers.Click) {
+            this.overlayRef.backdropClick()
+                .subscribe(() => {
+                    if (!this.popover) { return; }
 
-                this.popover.hide();
-            });
+                    this.popover.hide();
+                });
         }
 
         this.updatePosition();
@@ -560,8 +582,11 @@ export class McPopover implements OnInit, OnDestroy {
         if (this.overlayRef) {
             this.overlayRef.dispose();
         }
-        this.manualListeners.forEach((listener, event) =>
-            this.elementRef.nativeElement.removeEventListener(event, listener));
+
+        this.manualListeners.forEach((listener, event) => {
+            this.elementRef.nativeElement.removeEventListener(event, listener);
+        });
+
         this.manualListeners.clear();
 
         this.$unsubscribe.next();
@@ -569,7 +594,8 @@ export class McPopover implements OnInit, OnDestroy {
     }
 
     handleKeydown(e: KeyboardEvent) {
-        if (this.isOpen && e.keyCode === ESCAPE) { // tslint:disable-line
+        // tslint:disable-next-line: deprecation
+        if (this.isOpen && e.keyCode === ESCAPE) {
             this.hide();
         }
     }
@@ -579,20 +605,26 @@ export class McPopover implements OnInit, OnDestroy {
     }
 
     initElementRefListeners() {
-        if (this.mcTrigger === 'hover') {
-
+        if (this.mcTrigger === PopoverTriggers.Click) {
+            this.manualListeners
+                .set('click', () => this.show())
+                .forEach((listener, event) => {
+                    this.elementRef.nativeElement.addEventListener(event, listener);
+                });
+        } else if (this.mcTrigger === PopoverTriggers.Hover) {
             this.manualListeners
                 .set('mouseenter', () => this.show())
                 .set('mouseleave', () => this.hide())
-                .forEach((listener, event) => this.elementRef.nativeElement.addEventListener(event, listener));
-        }
-
-        if (this.mcTrigger === 'focus') {
-
+                .forEach((listener, event) => {
+                    this.elementRef.nativeElement.addEventListener(event, listener);
+                });
+        } else if (this.mcTrigger === PopoverTriggers.Focus) {
             this.manualListeners
                 .set('focus', () => this.show())
                 .set('blur', () => this.hide())
-                .forEach((listener, event) => this.elementRef.nativeElement.addEventListener(event, listener));
+                .forEach((listener, event) => {
+                    this.elementRef.nativeElement.addEventListener(event, listener);
+                });
         }
     }
 
@@ -619,17 +651,21 @@ export class McPopover implements OnInit, OnDestroy {
                     'mcFooter'
                 ];
 
-                properties.forEach((property) => this.updateCompValue(property, this[ property ]));
-                this.popover.mcVisibleChange.pipe(takeUntil(this.$unsubscribe), distinctUntilChanged())
+                properties.forEach((property) => this.updateCompValue(property, this[property]));
+
+                this.popover.mcVisibleChange
+                    .pipe(takeUntil(this.$unsubscribe), distinctUntilChanged())
                     .subscribe((data) => {
                         this.mcVisible = data;
                         this.mcVisibleChange.emit(data);
                         this.isPopoverOpen = data;
                     });
+
                 this.popover.afterHidden()
                     .pipe(takeUntil(this.destroyed))
                     .subscribe(() => this.detach());
             }
+
             this.updatePosition();
             this.popover.show();
         }

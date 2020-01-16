@@ -1,0 +1,14 @@
+mc-splitter {
+    display: flex;
+    border: 1px solid black;
+    height: 100px;
+    margin: 2px;
+}
+
+.mc-splitter-area_fixed-width {
+    min-width: 200px;
+}
+
+div[mc-splitter-area] {
+    background: #c5c0c0
+}

@@ -21,10 +21,15 @@ const DOCS_CONTENT_PATH = 'docs-content/examples-source/';
 
 const TEMPLATE_PATH = 'assets/stackblitz/';
 const TEMPLATE_FILES = [
+    '.editorconfig',
+    '.gitignore',
     'index.html',
+    'tsconfig.json',
+    'tsconfig.app.json',
+    'tsconfig.spec.json',
     'styles.css',
     'polyfills.ts',
-    '.angular-cli.json',
+    'angular.json',
     'main.ts',
     'mosaic-module.ts'
 ];
@@ -50,6 +55,7 @@ const dependencies = {
     rxjs: '^6.4.0',
     'web-animations-js': '^2.3.1',
     messageformat: '^2.0.5',
+    'tslib': '^1.10.0',
     'zone.js': '^0.8.14',
     moment: '^2.24.0'
 };

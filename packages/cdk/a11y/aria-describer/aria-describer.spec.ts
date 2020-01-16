@@ -1,8 +1,9 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AriaDescriber, MESSAGES_CONTAINER_ID } from './aria-describer';
 import { A11yModule, CDK_DESCRIBEDBY_HOST_ATTRIBUTE } from '../index';
+
+import { AriaDescriber, MESSAGES_CONTAINER_ID } from './aria-describer';
 
 
 describe('AriaDescriber', () => {
@@ -192,7 +193,7 @@ function expectMessage(el: Element, message: string) {
         <div #element2></div>
         <div #element3></div>
         <div #element4 aria-describedby="existing-aria-describedby1 existing-aria-describedby2"></div>
-    `,
+    `
 })
 class TestApp {
     @ViewChild('element1', {static: false}) _element1: ElementRef<HTMLElement>;

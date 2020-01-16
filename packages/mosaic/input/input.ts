@@ -1,17 +1,28 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { getSupportedInputTypes, Platform } from '@angular/cdk/platform';
 import {
+    AfterContentInit,
     Attribute,
-    Directive, DoCheck, ElementRef, Inject, Input, OnChanges,
-    OnDestroy, Optional, Self
+    Directive,
+    DoCheck,
+    ElementRef,
+    Inject,
+    Input,
+    OnChanges,
+    OnDestroy,
+    Optional,
+    Self
 } from '@angular/core';
 import {
     FormGroupDirective,
+    NG_VALIDATORS,
     NgControl,
-    NgForm, NgModel
+    NgForm,
+    NgModel,
+    Validator
 } from '@angular/forms';
 import {
-    END, C, V, X, A, DELETE, BACKSPACE, TAB, ENTER,
+    END, C, V, X, A, Z, DELETE, BACKSPACE, TAB, ENTER,
     ESCAPE, ZERO, NINE, NUMPAD_ZERO, NUMPAD_NINE, NUMPAD_MINUS, DASH,
     FF_MINUS, LEFT_ARROW, RIGHT_ARROW, HOME, UP_ARROW, DOWN_ARROW, F1, F12
 } from '@ptsecurity/cdk/keycodes';
@@ -19,7 +30,10 @@ import {
     CanUpdateErrorState,
     CanUpdateErrorStateCtor,
     ErrorStateMatcher,
-    mixinErrorState
+    MC_VALIDATION,
+    McValidationOptions,
+    mixinErrorState,
+    setMosaicValidation
 } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl, McFormFieldNumberControl } from '@ptsecurity/mosaic/form-field';
 import { Subject } from 'rxjs';
@@ -47,11 +61,12 @@ export const SMALL_STEP = 1;
 let nextUniqueId = 0;
 
 export class McInputBase {
-    constructor(public defaultErrorStateMatcher: ErrorStateMatcher,
-                public parentForm: NgForm,
-                public parentFormGroup: FormGroupDirective,
-                public ngControl: NgControl) {
-    }
+    constructor(
+        public defaultErrorStateMatcher: ErrorStateMatcher,
+        public parentForm: NgForm,
+        public parentFormGroup: FormGroupDirective,
+        public ngControl: NgControl
+    ) {}
 }
 
 // tslint:disable-next-line:naming-convention
@@ -61,7 +76,9 @@ export const McInputMixinBase: CanUpdateErrorStateCtor & typeof McInputBase = mi
 @Directive({
     selector: `input[mcInput][type="number"]`,
     exportAs: 'mcNumericalInput',
-    providers: [NgModel, { provide: McFormFieldNumberControl, useExisting: McNumberInput }],
+    providers: [
+        { provide: McFormFieldNumberControl, useExisting: McNumberInput }
+    ],
     host: {
         '(blur)': 'focusChanged(false)',
         '(focus)': 'focusChanged(true)',
@@ -112,9 +129,9 @@ export class McNumberInput implements McFormFieldNumberControl<any> {
     private readonly host: HTMLInputElement;
 
     constructor(
-        private _platform: Platform ,
-        private _elementRef: ElementRef,
-        private _model: NgModel,
+        private platform: Platform ,
+        private elementRef: ElementRef,
+        private model: NgModel,
         @Attribute('step') step: string,
         @Attribute('big-step') bigStep: string,
         @Attribute('min') min: string,
@@ -125,7 +142,7 @@ export class McNumberInput implements McFormFieldNumberControl<any> {
         this.min = this.isDigit(min) ? parseFloat(min) : -Infinity;
         this.max = this.isDigit(max) ? parseFloat(max) : Infinity;
 
-        this.host = this._elementRef.nativeElement;
+        this.host = this.elementRef.nativeElement;
 
         const self = this;
 
@@ -156,6 +173,7 @@ export class McNumberInput implements McFormFieldNumberControl<any> {
         const isCtrlC = (e) => e.keyCode === C && (e.ctrlKey || e.metaKey);
         const isCtrlV = (e) => e.keyCode === V && (e.ctrlKey || e.metaKey);
         const isCtrlX = (e) => e.keyCode === X && (e.ctrlKey || e.metaKey);
+        const isCtrlZ = (e) => e.keyCode === Z && (e.ctrlKey || e.metaKey);
 
         const isFKey = (e) => e.keyCode >= F1 && e.keyCode <= F12;
 
@@ -171,7 +189,7 @@ export class McNumberInput implements McFormFieldNumberControl<any> {
         const isNotIEPeriod = (e) => e.key === '.' || e.key === ',';
 
         // Decimal is for IE
-        const isPeriod = (e) => this._platform.EDGE || this._platform.TRIDENT
+        const isPeriod = (e) => this.platform.EDGE || this.platform.TRIDENT
             ? isIEPeriod(e)
             : isNotIEPeriod(e);
 
@@ -180,6 +198,7 @@ export class McNumberInput implements McFormFieldNumberControl<any> {
             isCtrlC(event) ||
             isCtrlV(event) ||
             isCtrlX(event) ||
+            isCtrlZ(event) ||
             isFKey(event) ||
             isPeriod(event)
         ) {
@@ -213,17 +232,21 @@ export class McNumberInput implements McFormFieldNumberControl<any> {
     }
 
     stepUp(step: number) {
-        this._elementRef.nativeElement.focus();
-        const res = stepUp(this.host.valueAsNumber, this.max, this.min, step);
-        this.host.value = res === null ? '' : res.toString();
-        this._model.update.emit(this.host.valueAsNumber);
+        this.elementRef.nativeElement.focus();
+
+        const res = stepUp(this.host.valueAsNumber || 0, this.max, this.min, step);
+
+        this.host.value = res.toString();
+        this.model.update.emit(this.host.valueAsNumber);
     }
 
     stepDown(step: number) {
-        this._elementRef.nativeElement.focus();
-        const res = stepDown(this.host.valueAsNumber, this.max, this.min, step);
-        this.host.value = res === null ? '' : res.toString();
-        this._model.update.emit(this.host.valueAsNumber);
+        this.elementRef.nativeElement.focus();
+
+        const res = stepDown(this.host.valueAsNumber || 0, this.max, this.min, step);
+
+        this.host.value = res.toString();
+        this.model.update.emit(this.host.valueAsNumber);
     }
 
     private normalizeSplitter(value: string): string {
@@ -243,6 +266,7 @@ export class McNumberInput implements McFormFieldNumberControl<any> {
     }
 }
 
+
 @Directive({
     selector: `input[mcInput]`,
     exportAs: 'mcInput',
@@ -254,14 +278,16 @@ export class McNumberInput implements McFormFieldNumberControl<any> {
         '[attr.placeholder]': 'placeholder',
         '[disabled]': 'disabled',
         '[required]': 'required',
-        '(blur)': 'focusChanged(false)',
+        '(blur)': 'onBlur()',
         '(focus)': 'focusChanged(true)',
         '(input)': 'onInput()'
     },
-    providers: [{ provide: McFormFieldControl, useExisting: McInput }]
+    providers: [
+        { provide: McFormFieldControl, useExisting: McInput }
+    ]
 })
-export class McInput extends McInputMixinBase implements McFormFieldControl<any>, OnChanges,
-    OnDestroy, DoCheck, CanUpdateErrorState {
+export class McInput extends McInputMixinBase implements McFormFieldControl<any>, OnChanges, OnDestroy, DoCheck,
+    CanUpdateErrorState, AfterContentInit, OnChanges {
 
     /** An object used to control when error messages are shown. */
     @Input() errorStateMatcher: ErrorStateMatcher;
@@ -372,7 +398,7 @@ export class McInput extends McInputMixinBase implements McFormFieldControl<any>
         // input element. To ensure that bindings for `type` work, we need to sync the setter
         // with the native property. Textarea elements don't support the type property or attribute.
         if (getSupportedInputTypes().has(this._type)) {
-            this._elementRef.nativeElement.type = this._type;
+            this.elementRef.nativeElement.type = this._type;
         }
     }
     // tslint:enable no-reserved-keywords
@@ -399,21 +425,34 @@ export class McInput extends McInputMixinBase implements McFormFieldControl<any>
     private _inputValueAccessor: { value: any };
 
     // tslint:disable-next-line: naming-convention
-    constructor(protected _elementRef: ElementRef,
-                @Optional() @Self() public ngControl: NgControl,
-                @Optional() parentForm: NgForm,
-                @Optional() parentFormGroup: FormGroupDirective,
-                defaultErrorStateMatcher: ErrorStateMatcher,
-                @Optional() @Self() @Inject(MC_INPUT_VALUE_ACCESSOR) inputValueAccessor: any) {
+    constructor(
+        protected elementRef: ElementRef,
+        @Optional() @Self() @Inject(NG_VALIDATORS) private rawValidators: Validator[],
+        @Optional() @Inject(MC_VALIDATION) private mcValidation: McValidationOptions,
+        @Optional() @Self() ngControl: NgControl,
+        @Optional() parentForm: NgForm,
+        @Optional() parentFormGroup: FormGroupDirective,
+        defaultErrorStateMatcher: ErrorStateMatcher,
+        @Optional() @Self() @Inject(MC_INPUT_VALUE_ACCESSOR) inputValueAccessor: any
+    ) {
         super(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl);
+
         // If no input value accessor was explicitly specified, use the element as the input value
         // accessor.
-        this._inputValueAccessor = inputValueAccessor || this._elementRef.nativeElement;
+        this._inputValueAccessor = inputValueAccessor || this.elementRef.nativeElement;
 
         this.previousNativeValue = this.value;
 
         // Force setter to be called in case id was not specified.
         this.id = this.id;
+    }
+
+    ngAfterContentInit(): void {
+        if (!this.ngControl) { return; }
+
+        if (this.mcValidation.useValidation) {
+            setMosaicValidation.call(this, this.rawValidators, this.parentForm || this.parentFormGroup, this.ngControl);
+        }
     }
 
     ngOnChanges() {
@@ -440,7 +479,13 @@ export class McInput extends McInputMixinBase implements McFormFieldControl<any>
 
     /** Focuses the input. */
     focus(): void {
-        this._elementRef.nativeElement.focus();
+        this.elementRef.nativeElement.focus();
+    }
+
+    onBlur(): void {
+        this.focusChanged(false);
+
+        this.ngControl.control!.updateValueAndValidity();
     }
 
     /** Callback for the cases where the focused state of the input changes. */
@@ -466,7 +511,7 @@ export class McInput extends McInputMixinBase implements McFormFieldControl<any>
      * @docs-private
      */
     get empty(): boolean {
-        return !this.isNeverEmpty() && !this._elementRef.nativeElement.value && !this.isBadInput();
+        return !this.isNeverEmpty() && !this.elementRef.nativeElement.value && !this.isBadInput();
     }
 
     /**
@@ -502,7 +547,7 @@ export class McInput extends McInputMixinBase implements McFormFieldControl<any>
     /** Checks whether the input is invalid based on the native validation. */
     protected isBadInput() {
         // The `validity` property won't be present on platform-server.
-        const validity = (this._elementRef.nativeElement as HTMLInputElement).validity;
+        const validity = (this.elementRef.nativeElement as HTMLInputElement).validity;
 
         return validity && validity.badInput;
     }

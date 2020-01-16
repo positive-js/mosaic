@@ -1,3 +1,5 @@
+<!-- example(typography-overview) -->
+
 ### Usage and Override
 
 ```scss
@@ -40,7 +42,7 @@ $typography: mc-typography-config(
 
     $headline:          mc-typography-level(24px, 32px),
     $title:             mc-typography-level(20px, 28px, 0.15px, 500),
-    $subheading:        mc-typography-level(15px, 20px, 0.15px, 500),
+    $subheading:        mc-typography-level(15px, 20px, 0.15px, 700),
 
     $body:              mc-typography-level(45px, 20px, 0.55px),
     $body-strong:       mc-typography-level(15px, 20px, 0.15px, 500),

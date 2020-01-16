@@ -19,7 +19,7 @@
                     </mc-tag>
                 </div>
                 <div class="mc-select__match-hidden-text" [style.display]="hiddenItems > 0 ? 'block' : 'none'">
-                    {{ hiddenItemsText }} {{ hiddenItems }}
+                    {{ hiddenItemsTextFormatter(hiddenItemsText, hiddenItems) }}
                 </div>
             </div>
             <ng-content select="mc-select-trigger" *ngSwitchCase="true"></ng-content>

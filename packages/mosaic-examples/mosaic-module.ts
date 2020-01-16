@@ -4,6 +4,7 @@ import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McCheckboxModule } from '@ptsecurity/mosaic/checkbox';
 import { McDropdownModule } from '@ptsecurity/mosaic/dropdown';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
+import { McModalModule } from '@ptsecurity/mosaic/modal';
 import { McRadioModule } from '@ptsecurity/mosaic/radio';
 import { McTextareaModule } from '@ptsecurity/mosaic/textarea';
 
@@ -11,13 +12,14 @@ import { McTextareaModule } from '@ptsecurity/mosaic/textarea';
 @NgModule({
 
     imports: [
-         McButtonModule,
-         McCheckboxModule,
-         McDropdownModule,
-         McRadioModule,
-         McMomentDateModule,
-         McFormFieldModule,
-         McTextareaModule
+        McButtonModule,
+        McCheckboxModule,
+        McDropdownModule,
+        McRadioModule,
+        McMomentDateModule,
+        McFormFieldModule,
+        McTextareaModule,
+        McModalModule
     ],
     exports: [
         McButtonModule,
@@ -26,7 +28,8 @@ import { McTextareaModule } from '@ptsecurity/mosaic/textarea';
         McMomentDateModule,
         McDropdownModule,
         McFormFieldModule,
-        McTextareaModule
+        McTextareaModule,
+        McModalModule
     ]
 })
 export class ExampleMosaicModule {}

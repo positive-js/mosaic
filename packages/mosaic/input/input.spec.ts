@@ -1,5 +1,11 @@
 import { Component, Provider, Type } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, ComponentFixtureAutoDetect } from '@angular/core/testing';
+import {
+    ComponentFixture,
+    fakeAsync,
+    TestBed,
+    ComponentFixtureAutoDetect,
+    flush
+} from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { DOWN_ARROW, ESCAPE, UP_ARROW } from '@ptsecurity/cdk/keycodes';
@@ -9,7 +15,11 @@ import {
     dispatchFakeEvent,
     dispatchKeyboardEvent
 } from '@ptsecurity/cdk/testing';
-import { McFormField, McFormFieldModule } from '@ptsecurity/mosaic/form-field';
+import {
+    getMcFormFieldYouCanNotUseCleanerInNumberInputError,
+    McFormField,
+    McFormFieldModule
+} from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 
 import { McInput, McInputModule } from './index';
@@ -379,6 +389,18 @@ class McNumberInputMaxMinStepInput {
     step: number = 0.5;
     bigStep: number = 2;
 }
+
+@Component({
+    template: `
+        <mc-form-field>
+            <input mcInput [(ngModel)]="value" type="number">
+            <mc-cleaner></mc-cleaner>
+        </mc-form-field>
+    `
+})
+class McNumberInputWithCleaner {
+    value: number = 0;
+}
 // tslint:enable no-unnecessary-class
 
 // tslint:disable no-magic-numbers
@@ -400,17 +422,30 @@ describe('McNumberInput', () => {
         expect(icons.length).toBe(2);
     }));
 
-    it('should not have stepper initially', fakeAsync(() => {
+    it('should throw error with stepper', fakeAsync(() => {
+        const fixture = createComponent(McNumberInputWithCleaner);
+
+        expect(() => {
+            try {
+                fixture.detectChanges();
+                flush();
+            } catch {
+                flush();
+            }
+        }).toThrow(getMcFormFieldYouCanNotUseCleanerInNumberInputError());
+    }));
+
+    it('should throw an exception with mc-cleaner', fakeAsync(() => {
         const fixture = createComponent(McNumberInput);
         fixture.detectChanges();
 
-        const mcStepper = fixture.debugElement.query(By.css('mc-stepper'));
+        const mcStepper = fixture.debugElement.query(By.css('mc-cleaner'));
 
         expect(mcStepper).toBeNull();
     }));
 
     describe('empty value', () => {
-        it('should not step up when no max', fakeAsync(() => {
+        it('should step up when no max', fakeAsync(() => {
             const fixture = createComponent(McNumberInput);
             fixture.detectChanges();
 
@@ -428,10 +463,10 @@ describe('McNumberInput', () => {
 
             fixture.detectChanges();
 
-            expect(fixture.componentInstance.value).toBeNull();
+            expect(fixture.componentInstance.value).toBe(1);
         }));
 
-        it('should not step down when no min', fakeAsync(() => {
+        it('should step down when no min', fakeAsync(() => {
             const fixture = createComponent(McNumberInput);
             fixture.detectChanges();
 
@@ -449,9 +484,8 @@ describe('McNumberInput', () => {
 
             fixture.detectChanges();
 
-            expect(fixture.componentInstance.value).toBeNull();
+            expect(fixture.componentInstance.value).toBe(1);
         }));
-
 
         it('should step up when max is set', fakeAsync(() => {
             const fixture = createComponent(McNumberInputMaxMinStep);
@@ -468,7 +502,11 @@ describe('McNumberInput', () => {
             const iconUp = icons[0];
 
             dispatchFakeEvent(iconUp.nativeElement, 'mousedown');
+            fixture.detectChanges();
 
+            expect(fixture.componentInstance.value).toBe(3);
+
+            dispatchFakeEvent(iconUp.nativeElement, 'mousedown');
             fixture.detectChanges();
 
             expect(fixture.componentInstance.value).toBe(3.5);
@@ -490,17 +528,23 @@ describe('McNumberInput', () => {
             const iconDown = icons[1];
 
             dispatchFakeEvent(iconDown.nativeElement, 'mousedown');
-
             fixture.detectChanges();
 
-            expect(fixture.componentInstance.value).toBe(9.5);
+            expect(fixture.componentInstance.value).toBe(3);
+
+            dispatchFakeEvent(iconDown.nativeElement, 'mousedown');
+            fixture.detectChanges();
+
+            expect(fixture.componentInstance.value).toBe(3);
         }));
 
         it('should be able to set min', fakeAsync(() => {
+            const min = 1;
+
             const fixture = createComponent(McNumberInputMaxMinStepInput);
             fixture.detectChanges();
 
-            fixture.componentInstance.min = 1;
+            fixture.componentInstance.min = min;
 
             fixture.detectChanges();
 
@@ -518,14 +562,14 @@ describe('McNumberInput', () => {
 
             fixture.detectChanges();
 
-            expect(fixture.componentInstance.value).toBe(1.5);
+            expect(fixture.componentInstance.value).toBe(min);
         }));
 
         it('should be able to set max', fakeAsync(() => {
-            const fixture = createComponent(McNumberInputMaxMinStepInput);
-            fixture.detectChanges();
+            const max = 3.5;
 
-            fixture.componentInstance.max = 5;
+            const fixture = createComponent(McNumberInputMaxMinStepInput);
+            fixture.componentInstance.max = max;
 
             fixture.detectChanges();
 
@@ -537,13 +581,22 @@ describe('McNumberInput', () => {
 
             const mcStepper = fixture.debugElement.query(By.css('mc-stepper'));
             const icons = mcStepper.queryAll(By.css('.mc-icon'));
-            const iconDown = icons[1];
+            const stepUp = icons[0];
 
-            dispatchFakeEvent(iconDown.nativeElement, 'mousedown');
-
+            dispatchFakeEvent(stepUp.nativeElement, 'mousedown');
             fixture.detectChanges();
 
-            expect(fixture.componentInstance.value).toBe(4.5);
+            expect(fixture.componentInstance.value).toBe(fixture.componentInstance.min);
+
+            dispatchFakeEvent(stepUp.nativeElement, 'mousedown');
+            fixture.detectChanges();
+
+            expect(fixture.componentInstance.value).toBe(max);
+
+            dispatchFakeEvent(stepUp.nativeElement, 'mousedown');
+            fixture.detectChanges();
+
+            expect(fixture.componentInstance.value).toBe(max);
         }));
 
         it('should be able to set step', fakeAsync(() => {
@@ -565,10 +618,14 @@ describe('McNumberInput', () => {
             const iconDown = icons[1];
 
             dispatchFakeEvent(iconDown.nativeElement, 'mousedown');
-
             fixture.detectChanges();
 
-            expect(fixture.componentInstance.value).toBe(8);
+            expect(fixture.componentInstance.value).toBe(3);
+
+            dispatchFakeEvent(iconDown.nativeElement, 'mousedown');
+            fixture.detectChanges();
+
+            expect(fixture.componentInstance.value).toBe(3);
         }));
 
         it('should be able to set big-step', fakeAsync(() => {

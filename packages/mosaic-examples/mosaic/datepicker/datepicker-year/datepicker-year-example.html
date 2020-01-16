@@ -1,0 +1,5 @@
+<mc-form-field>
+    <input mcInput [(ngModel)]="date" [mcDatepicker]="myDatepicker" />
+    <mc-datepicker-toggle tabindex="7" mcSuffix [for]="myDatepicker"></mc-datepicker-toggle>
+    <mc-datepicker #myDatepicker startView="multi-year"></mc-datepicker>
+</mc-form-field>

@@ -198,6 +198,60 @@ describe('McModal', () => {
             modalRef.triggerCancel();
             expect(spyCancel).toHaveBeenCalled();
         });
+
+        it('should process loading flag', fakeAsync((done) => {
+            const isLoading = true;
+            const modalRef = modalService.create({
+                mcFooter: [
+                    {
+                        label: 'button 1',
+                        type: 'primary',
+                        loading: () => isLoading
+                    }
+                ]
+            });
+
+            fixture.detectChanges();
+            tick(600);
+
+            expect(modalRef.getElement().querySelectorAll('.mc-progress').length).toBe(1);
+        }));
+
+        it('should process show flag', fakeAsync(() => {
+            const isShown = false;
+            const modalRef = modalService.create({
+                mcFooter: [
+                    {
+                        label: 'button 1',
+                        type: 'primary',
+                        show: () => isShown
+                    }
+                ]
+            });
+
+            fixture.detectChanges();
+            tick(600);
+
+            expect(modalRef.getElement().querySelectorAll('.mc-primary').length).toBe(0);
+        }));
+
+        it('should process disable flag', fakeAsync(() => {
+            const isDisabled = true;
+            const modalRef = modalService.create({
+                mcFooter: [
+                    {
+                        label: 'button 1',
+                        type: 'primary',
+                        disabled: () => isDisabled
+                    }
+                ]
+            });
+
+            fixture.detectChanges();
+            tick(600);
+
+            expect(modalRef.getElement().querySelectorAll('[disabled]').length).toBe(1);
+        }));
     });
 });
 

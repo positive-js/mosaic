@@ -1,0 +1,21 @@
+<mc-form-field>
+    <input type="text" mcInput (ngModelChange)="onFilterChange($event)" [(ngModel)]="filterValue">
+</mc-form-field>
+
+<br><br><br>
+
+<mc-tree-selection
+    [(ngModel)]="modelValue"
+    [dataSource]="dataSource"
+    [treeControl]="treeControl">
+
+    <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding [disabled]="node.name === 'tests'">
+        <span [innerHTML]="treeControl.getViewValue(node) | mcHighlight : treeControl.filterValue.value"></span>
+    </mc-tree-option>
+
+    <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+        <mc-tree-node-toggle [node]="node"></mc-tree-node-toggle>
+
+        <span [innerHTML]="treeControl.getViewValue(node) | mcHighlight : treeControl.filterValue.value"></span>
+    </mc-tree-option>
+</mc-tree-selection>

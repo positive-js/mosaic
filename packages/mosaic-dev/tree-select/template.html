@@ -19,6 +19,7 @@
             [disabled]="disabledState"
             placeholder="this is placeholder"
             [(ngModel)]="modelValue"
+            [hiddenItemsTextFormatter]="hiddenItemsTextFormatter"
             (selectionChange)="onSelectionChange($event)">
 
             <mc-tree-selection

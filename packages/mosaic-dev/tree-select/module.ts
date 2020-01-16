@@ -143,11 +143,15 @@ export class DemoComponent {
         console.log(`onSelectionChange: ${$event.value}`);
         const treeSelect = $event.source;
 
-        if ($event.value.selected) {
-            treeSelect.selectionModel.select(...treeSelect.tree.treeControl.getDescendants($event.value.data));
-        } else {
-            treeSelect.selectionModel.deselect(...treeSelect.tree.treeControl.getDescendants($event.value.data));
-        }
+        // if ($event.value.selected) {
+        //     treeSelect.selectionModel.select(...treeSelect.tree.treeControl.getDescendants($event.value.data));
+        // } else {
+        //     treeSelect.selectionModel.deselect(...treeSelect.tree.treeControl.getDescendants($event.value.data));
+        // }
+    }
+
+    hiddenItemsTextFormatter(hiddenItemsText: string, hiddenItems: number): string {
+        return `${hiddenItemsText} ${hiddenItems}`;
     }
 
     private transformer = (node: FileNode, level: number, parent: any) => {

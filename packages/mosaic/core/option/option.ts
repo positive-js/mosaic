@@ -75,6 +75,17 @@ export class McOption implements AfterViewChecked, OnDestroy {
     /** The form value of the option. */
     @Input() value: any;
 
+    @Input()
+    get showCheckbox() {
+        return this._showCheckbox === undefined ? this.multiple : this._showCheckbox;
+    }
+
+    set showCheckbox(value) {
+        this._showCheckbox = coerceBooleanProperty(value);
+    }
+
+    private _showCheckbox: boolean;
+
     /** Event emitted when the option is selected or deselected. */
     // tslint:disable-next-line:no-output-on-prefix
     @Output() readonly onSelectionChange = new EventEmitter<McOptionSelectionChange>();
