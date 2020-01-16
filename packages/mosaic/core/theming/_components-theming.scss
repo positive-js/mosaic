@@ -50,10 +50,6 @@
         state-checked_background: mc-color($primary)
     );
 
-    $divider: (
-        color: map-get($second, 100)
-    );
-
     $modal: (
         shadow: (0 0 0 1px mc-color($second, 300), 0 6px 12px 0 rgba(0, 0, 0, 0.5))
     );
@@ -147,31 +143,16 @@
         popup: $popup,
         button: $button,
         checkbox: $checkbox,
-        datepicker: '',
-        divider: $divider,
-        form-field: '',
-        icon: '',
-        input: '',
-        link: '',
-        list: '',
         modal: $modal,
         navbar: $navbar,
         popover: $popover,
         progress-bar: $progress-bar,
-        progress-spinner: '',
         radio: $radio,
-        select: '',
-        sidebar: '',
         sidepanel: $sidepanel,
-        splitter: '',
         tabs: $tabs,
         tags: $tags,
-        textarea: '',
-        timepicker: '',
         toggle: $toggle,
         tooltip: $tooltip,
-        tree: '',
-        tree-select: '',
         vertical-navbar: $vertical-navbar,
     );
 }
@@ -229,10 +210,6 @@
     );
 
     $datepicker: ();
-
-    $divider: (
-        color: map-get($mc-grey, 600)
-    );
 
     $modal: (
         shadow: (0 0 0 1px mc-color($second, 800), 0 6px 12px 0 rgba(0, 0, 0, 0.5))
@@ -327,31 +304,16 @@
         popup: $popup,
         button: $button,
         checkbox: $checkbox,
-        datepicker: $datepicker,
-        divider: '',
-        form-field: '',
-        icon: '',
-        input: '',
-        link: '',
-        list: '',
         modal: $modal,
         navbar: $navbar,
         popover: $popover,
         progress-bar: $progress-bar,
-        progress-spinner: '',
         radio: $radio,
-        select: '',
-        sidebar: '',
         sidepanel: $sidepanel,
-        splitter: '',
         tabs: $tabs,
         tags: $tags,
-        textarea: '',
-        timepicker: '',
         toggle: $toggle,
         tooltip: $tooltip,
-        tree: '',
-        tree-select: '',
         vertical-navbar: $vertical-navbar,
     );
 }

@@ -4,15 +4,15 @@
 @mixin mc-vertical-navbar-theme($theme) {
     $focused-color: map-get(map-get($theme, states), focused-color);
 
-    $vertical-navbar: map-get(map-get($theme, components), vertical-navbar);
+    $navbar: map-get(map-get($theme, components), vertical-navbar);
 
-    $background-color: map-get($vertical-navbar, background-color);
-    $color: map-get($vertical-navbar, color);
-    $toggle-button_color: map-get($vertical-navbar, toggle-button_color);
+    $color: map-get($navbar, color);
+    $background-color: map-get($navbar, background-color);
+    $toggle-button_color: map-get($navbar, toggle-button_color);
 
-    $state-hover_background-color: map-get($vertical-navbar, state-hover_background-color);
-    $state-active_background-color: map-get($vertical-navbar, state-active_background-color);
-    $state-progress_background-color: map-get($vertical-navbar, state-progress_background-color);
+    $state-hover_background-color: map-get($navbar, state-hover_background-color);
+    $state-active_background-color: map-get($navbar, state-active_background-color);
+    $state-progress_background-color: map-get($navbar, state-progress_background-color);
 
     .mc-vertical-navbar {
         background-color: $background-color;

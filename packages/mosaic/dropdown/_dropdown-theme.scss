@@ -1,5 +1,6 @@
 @import '../core/theming/theming';
 @import '../core/styles/typography/typography-utils';
+@import '../core/styles/common/popup';
 
 
 @mixin mc-dropdown-theme($theme) {
@@ -9,12 +10,7 @@
     $selected-color: map-get(map-get($theme, states), selected-color);
 
     .mc-dropdown__panel {
-        $popup: map-get(map-get($theme, components), popup);
-
-        box-shadow: map-get($popup, shadow);
-        border-color: map-get($popup, border-color);
-
-        background-color: map-get($popup, background);
+        @include popup-params($theme);
     }
 
     .mc-dropdown__item {

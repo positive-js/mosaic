@@ -1,5 +1,6 @@
 @import '../core/theming/palette';
 @import '../core/theming/theming';
+@import '../core/styles/common/popup';
 @import '../core/styles/typography/typography-utils';
 
 
@@ -23,7 +24,6 @@ $mc-datepicker-today-fade-amount: 0.2;
     $error: map-get($theme, error);
 
     $foreground: map-get($theme, foreground);
-    $background: map-get($theme, background);
 
     $selected-color: map-get(map-get($theme, states), selected-color);
 
@@ -102,12 +102,7 @@ $mc-datepicker-today-fade-amount: 0.2;
     @include _mc-datepicker-color($selected-color);
 
     .mc-datepicker__content {
-        $popup: map-get(map-get($theme, components), popup);
-
-        box-shadow: map-get($popup, shadow);
-        border-color: map-get($popup, border-color);
-
-        background-color: map-get($popup, background);
+        @include popup-params($theme);
 
         color: mc-color($foreground, text);
 
