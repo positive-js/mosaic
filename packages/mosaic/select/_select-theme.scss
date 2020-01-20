@@ -9,7 +9,7 @@
 
     $foreground: map-get($theme, foreground);
 
-    $popup: map-get(map-get($theme, components), popup);
+    $popup-common: map-get(map-get($theme, components), popup-common);
 
     .mc-select {
         color: map-get($foreground, text);
@@ -32,7 +32,7 @@
     }
 
     .mc-select__search-container {
-        border-bottom-color: map-get($popup, border-color);
+        border-bottom-color: map-get($popup-common, border-color);
     }
 
     .mc-select__no-options-message {

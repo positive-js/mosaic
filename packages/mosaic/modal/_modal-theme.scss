@@ -10,8 +10,8 @@
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    $popup: map-get(map-get($theme, components), popup);
-    $background-footer: map-get($popup, footer_background);
+    $popup-common: map-get(map-get($theme, components), popup-common);
+    $background-footer: map-get($popup-common, footer_background);
 
     $modal: map-get(map-get($theme, components), modal);
 
