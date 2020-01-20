@@ -6,7 +6,7 @@
     $second: map-get($theme, second);
     $error: map-get($theme, error);
 
-    $popup: (
+    $popup-common: (
         shadow: 0 3px 3px 0 mc-color($second, A200),
         border-color: mc-color($second),
         background: white,
@@ -85,7 +85,7 @@
     );
 
     $sidepanel: (
-        shadow_color: mc-color($second, 300)
+        border_color: mc-color($second, 300)
     );
 
     $tabs: (
@@ -140,7 +140,7 @@
     );
 
     @return (
-        popup: $popup,
+        popup-common: $popup-common,
         button: $button,
         checkbox: $checkbox,
         modal: $modal,
@@ -165,7 +165,7 @@
     $second: map-get($theme, second);
     $error: map-get($theme, error);
 
-    $popup: (
+    $popup-common: (
         shadow: 0 3px 3px 0 mc-color($second, A200),
         border-color: mc-color($second),
         background: map-get($mc-grey, 700),
@@ -246,7 +246,7 @@
     );
 
     $sidepanel: (
-        shadow_color: mc-color($second, 800),
+        border_color: mc-color($second, 800),
     );
 
     $tabs: (
@@ -301,7 +301,7 @@
     );
 
     @return (
-        popup: $popup,
+        popup-common: $popup-common,
         button: $button,
         checkbox: $checkbox,
         modal: $modal,

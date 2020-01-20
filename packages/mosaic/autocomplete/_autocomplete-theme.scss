@@ -10,9 +10,9 @@
         color: mc-color($foreground, text);
 
         .mc-selected {
-            $popup: map-get(map-get($theme, components), popup);
+            $popup-common: map-get(map-get($theme, components), popup-common);
 
-            background-color: map-get($popup, background);
+            background-color: map-get($popup-common, background);
         }
     }
 }
