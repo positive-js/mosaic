@@ -8,19 +8,17 @@ import { default as _rollupMoment } from 'moment';
 // tslint:disable-next-line
 const moment = _rollupMoment || momentImported;
 /**
- * @title Timepicker overview
+ * @title Timepicker range
  */
 @Component({
-    selector: 'timepicker-overview-example',
-    templateUrl: 'timepicker-overview-example.html',
-    styleUrls: ['timepicker-overview-example.css']
+    selector: 'timepicker-range-example',
+    templateUrl: 'timepicker-range-example.html',
+    styleUrls: ['timepicker-range-example.css']
 })
-export class TimepickerOverviewExample {
-    isDisabled = false;
-    isIconVisible = true;
+export class TimepickerRangeExample {
     moment = moment;
+    format = 'HH:MM';
 
-    value = this.moment();
-
-    timeFormat = 'HH:mm';
+    startTime = this.moment().startOf('day');
+    endTime = this.moment();
 }

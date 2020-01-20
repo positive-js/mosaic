@@ -1,0 +1,10 @@
+.example-timepicker-group {
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.example-timepicker-element {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}

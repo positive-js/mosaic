@@ -1,0 +1,25 @@
+<div class="example-timepicker-group">
+    <div class="example-timepicker-element">
+        <label for="startTime"
+               class="flex-15 mc-form-label">С</label>
+        <mc-form-field >
+            <i mcPrefix mc-icon="mc-clock_16"></i>
+            <input mcTimepicker
+                   id="startTime"
+                   [max-time]="endTime?.format(format)"
+                   [(ngModel)]="startTime">
+        </mc-form-field>
+    </div>
+
+    <div class="example-timepicker-element">
+        <label for="endTime"
+               class="flex-15 mc-form-label">По</label>
+        <mc-form-field >
+            <i mcPrefix mc-icon="mc-clock_16"></i>
+            <input mcTimepicker
+                   id="endTime"
+                   [min-time]="startTime?.format(format)"
+                   [(ngModel)]="endTime">
+        </mc-form-field>
+    </div>
+</div>
