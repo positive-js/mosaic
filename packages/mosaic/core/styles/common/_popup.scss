@@ -1,8 +1,8 @@
 @mixin popup-params($theme) {
-    $popup: map-get(map-get($theme, components), popup);
+    $popup-common: map-get(map-get($theme, components), popup-common);
 
-    box-shadow: map-get($popup, shadow);
-    border-color: map-get($popup, border-color);
+    box-shadow: map-get($popup-common, shadow);
+    border-color: map-get($popup-common, border-color);
 
-    background-color: map-get($popup, background);
+    background-color: map-get($popup-common, background);
 }
