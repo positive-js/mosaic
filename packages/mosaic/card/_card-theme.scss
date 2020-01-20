@@ -48,9 +48,9 @@
         }
 
         &.mc-card_white {
-            $popup: map-get(map-get($theme, components), popup);
+            $popup-common: map-get(map-get($theme, components), popup-common);
 
-            background-color: map-get($popup, background);
+            background-color: map-get($popup-common, background);
         }
 
         &.mc-card_selected {
