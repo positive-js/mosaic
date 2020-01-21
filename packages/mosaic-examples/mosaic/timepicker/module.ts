@@ -10,10 +10,12 @@ import { McSelectModule } from '@ptsecurity/mosaic/select';
 import { McTimepickerModule } from '@ptsecurity/mosaic/timepicker';
 
 import { TimepickerOverviewExample } from './timepicker-overview/timepicker-overview-example';
+import { TimepickerRangeExample } from './timepicker-range/timepicker-range-example';
 
 
 const EXAMPLES = [
-    TimepickerOverviewExample
+    TimepickerOverviewExample,
+    TimepickerRangeExample
 ];
 
 

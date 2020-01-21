@@ -8,7 +8,7 @@ import { default as _rollupMoment } from 'moment';
 // tslint:disable-next-line
 const moment = _rollupMoment || momentImported;
 /**
- * @title Badges
+ * @title Timepicker overview
  */
 @Component({
     selector: 'timepicker-overview-example',
