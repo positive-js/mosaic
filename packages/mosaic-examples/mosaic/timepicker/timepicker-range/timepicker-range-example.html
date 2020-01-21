@@ -1,9 +1,11 @@
 <div class="example-timepicker-group">
-    <div>Для Start Time установлено [max-time]="getEndTime()", а для End Time - [min-time]="getStartTime()".</div>
-    <div>Чтобы значение правильно применилось, оно должно быть валидным.</div>
+    <div class="example-timepicker-element">
+        Для Start Time установлено [max-time]="getEndTime()", а для End Time - [min-time]="getStartTime()".
+    </div>
+    <div class="example-timepicker-element">Чтобы значение правильно применилось, оно должно быть валидным.</div>
     <div class="example-timepicker-element">
         <label for="startTime"
-               class="flex-35 mc-form-label">Start Time ( < End Time )</label>
+               class="flex-35 mc-form-label">Start Time ( меньше End Time )</label>
         <mc-form-field >
             <i mcPrefix mc-icon="mc-clock_16"></i>
             <input mcTimepicker
@@ -15,7 +17,7 @@
 
     <div class="example-timepicker-element">
         <label for="endTime"
-               class="flex-35 mc-form-label">End Time ( > Start Time)</label>
+               class="flex-35 mc-form-label">End Time ( больше Start Time)</label>
         <mc-form-field >
             <i mcPrefix mc-icon="mc-clock_16"></i>
             <input mcTimepicker
