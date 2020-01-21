@@ -1,24 +1,26 @@
 <div class="example-timepicker-group">
+    <div>Для Start Time установлено [max-time]="getEndTime()", а для End Time - [min-time]="getStartTime()".</div>
+    <div>Чтобы значение правильно применилось, оно должно быть валидным.</div>
     <div class="example-timepicker-element">
         <label for="startTime"
-               class="flex-15 mc-form-label">С</label>
+               class="flex-35 mc-form-label">Start Time ( < End Time )</label>
         <mc-form-field >
             <i mcPrefix mc-icon="mc-clock_16"></i>
             <input mcTimepicker
                    id="startTime"
-                   [max-time]="endTime?.format(format)"
+                   [max-time]="getEndTime()"
                    [(ngModel)]="startTime">
         </mc-form-field>
     </div>
 
     <div class="example-timepicker-element">
         <label for="endTime"
-               class="flex-15 mc-form-label">По</label>
+               class="flex-35 mc-form-label">End Time ( > Start Time)</label>
         <mc-form-field >
             <i mcPrefix mc-icon="mc-clock_16"></i>
             <input mcTimepicker
                    id="endTime"
-                   [min-time]="startTime?.format(format)"
+                   [min-time]="getStartTime()"
                    [(ngModel)]="endTime">
         </mc-form-field>
     </div>
