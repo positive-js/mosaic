@@ -17,10 +17,11 @@ const moment = _rollupMoment || momentImported;
 })
 export class TimepickerRangeExample {
     moment = moment;
-    format = 'hh:mm:ss';
+    format = 'HH:mm:ss';
 
     startTime = this.moment().startOf('day');
     endTime = this.moment();
+    time = this.moment().startOf('hour');
 
     getStartTime() {
         return this.startTime ? this.startTime.format(this.format) : '';
