@@ -14,6 +14,7 @@ import {
     Self
 } from '@angular/core';
 import {
+    FormControlName,
     FormGroupDirective,
     NG_VALIDATORS,
     NgControl,
@@ -427,9 +428,11 @@ export class McInput extends McInputMixinBase implements McFormFieldControl<any>
     // tslint:disable-next-line: naming-convention
     constructor(
         protected elementRef: ElementRef,
-        @Optional() @Self() @Inject(NG_VALIDATORS) private rawValidators: Validator[],
+        @Optional() @Self() @Inject(NG_VALIDATORS) public rawValidators: Validator[],
         @Optional() @Inject(MC_VALIDATION) private mcValidation: McValidationOptions,
         @Optional() @Self() ngControl: NgControl,
+        @Optional() @Self() public ngModel: NgModel,
+        @Optional() @Self() public formControlName: FormControlName,
         @Optional() parentForm: NgForm,
         @Optional() parentFormGroup: FormGroupDirective,
         defaultErrorStateMatcher: ErrorStateMatcher,
@@ -451,7 +454,7 @@ export class McInput extends McInputMixinBase implements McFormFieldControl<any>
         if (!this.ngControl) { return; }
 
         if (this.mcValidation.useValidation) {
-            setMosaicValidation.call(this, this.rawValidators, this.parentForm || this.parentFormGroup, this.ngControl);
+            setMosaicValidation(this);
         }
     }
 

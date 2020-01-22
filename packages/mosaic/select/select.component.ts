@@ -39,10 +39,12 @@ import {
 } from '@angular/core';
 import {
     ControlValueAccessor,
+    FormControlName,
     FormGroupDirective,
     NG_VALIDATORS,
     NgControl,
     NgForm,
+    NgModel,
     Validator
 } from '@angular/forms';
 import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
@@ -498,12 +500,14 @@ export class McSelect extends McSelectMixinBase implements
         private readonly _renderer: Renderer2,
         defaultErrorStateMatcher: ErrorStateMatcher,
         elementRef: ElementRef,
-        @Optional() @Inject(NG_VALIDATORS) private rawValidators: Validator[],
+        @Optional() @Inject(NG_VALIDATORS) public rawValidators: Validator[],
         @Optional() private readonly _dir: Directionality,
         @Optional() parentForm: NgForm,
         @Optional() parentFormGroup: FormGroupDirective,
         @Optional() private readonly _parentFormField: McFormField,
         @Self() @Optional() ngControl: NgControl,
+        @Optional() @Self() public ngModel: NgModel,
+        @Optional() @Self() public formControlName: FormControlName,
         @Attribute('tabindex') tabIndex: string,
         @Inject(MC_SELECT_SCROLL_STRATEGY) private readonly _scrollStrategyFactory,
         @Optional() @Inject(MC_VALIDATION) private mcValidation: McValidationOptions
@@ -546,7 +550,7 @@ export class McSelect extends McSelectMixinBase implements
 
     ngAfterContentInit() {
         if (this.mcValidation.useValidation) {
-            setMosaicValidation.call(this, this.rawValidators, this.parentForm || this.parentFormGroup, this.ngControl);
+            setMosaicValidation(this);
         }
 
         this.initKeyManager();

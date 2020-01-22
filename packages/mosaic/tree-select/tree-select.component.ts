@@ -35,7 +35,16 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlValueAccessor, FormGroupDirective, NG_VALIDATORS, NgControl, NgForm, Validator } from '@angular/forms';
+import {
+    ControlValueAccessor,
+    FormControlName,
+    FormGroupDirective,
+    NG_VALIDATORS,
+    NgControl,
+    NgForm,
+    NgModel,
+    Validator
+} from '@angular/forms';
 import {
     DOWN_ARROW,
     END,
@@ -409,21 +418,23 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     private tempValues: string | string[] | null;
 
     constructor(
-        public elementRef: ElementRef,
+        elementRef: ElementRef,
         readonly changeDetectorRef: ChangeDetectorRef,
         private readonly viewportRuler: ViewportRuler,
         private readonly ngZone: NgZone,
         private readonly renderer: Renderer2,
         defaultErrorStateMatcher: ErrorStateMatcher,
         @Attribute('tabindex') tabIndex: string,
-        @Optional() @Inject(NG_VALIDATORS) private rawValidators: Validator[],
-        @Optional() @Inject(MC_VALIDATION) private mcValidation: McValidationOptions,
         @Inject(MC_SELECT_SCROLL_STRATEGY) private readonly scrollStrategyFactory,
+        @Optional() @Inject(NG_VALIDATORS) public rawValidators: Validator[],
+        @Optional() @Inject(MC_VALIDATION) private mcValidation: McValidationOptions,
         @Optional() private readonly dir: Directionality,
         @Optional() parentForm: NgForm,
         @Optional() parentFormGroup: FormGroupDirective,
         @Optional() private readonly parentFormField: McFormField,
-        @Optional() @Self() ngControl: NgControl
+        @Optional() @Self() ngControl: NgControl,
+        @Optional() @Self() public ngModel: NgModel,
+        @Optional() @Self() public formControlName: FormControlName
     ) {
         super(elementRef, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl);
 
@@ -464,7 +475,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         if (!this.tree) { return; }
 
         if (this.mcValidation.useValidation) {
-            setMosaicValidation.call(this, this.rawValidators, this.parentForm || this.parentFormGroup, this.ngControl);
+            setMosaicValidation(this);
         }
 
         this.tree.resetFocusedItemOnBlur = false;
