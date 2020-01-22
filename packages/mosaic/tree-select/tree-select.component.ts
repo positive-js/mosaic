@@ -787,11 +787,10 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         let visibleItems: number = 0;
         const totalItemsWidth = this.getTotalItemsWidthInMatcher();
         let totalVisibleItemsWidth: number = 0;
-        const itemMargin: number = 4;
 
         this.tags.forEach((tag) => {
             if (tag.nativeElement.offsetTop < tag.nativeElement.offsetHeight) {
-                totalVisibleItemsWidth += tag.nativeElement.getBoundingClientRect().width + itemMargin;
+                totalVisibleItemsWidth += this.getItemWidth(tag.nativeElement);
                 visibleItems++;
             }
         });
@@ -838,14 +837,23 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         this.renderer.appendChild(this.trigger.nativeElement, triggerClone);
 
         let totalItemsWidth: number = 0;
-        const itemMargin: number = 4;
         triggerClone.querySelectorAll('mc-tag').forEach((item) => {
-            totalItemsWidth += item.getBoundingClientRect().width as number + itemMargin;
+            totalItemsWidth += this.getItemWidth(item);
         });
 
         triggerClone.remove();
 
         return totalItemsWidth;
+    }
+
+    private getItemWidth(element: HTMLElement): number {
+        const computedStyle = window.getComputedStyle(element);
+
+        const width: number = parseInt(computedStyle.width as string);
+        const marginLeft: number = parseInt(computedStyle.marginLeft as string);
+        const marginRight: number = parseInt(computedStyle.marginRight as string);
+
+        return width + marginLeft + marginRight;
     }
 
     private handleClosedKeydown(event: KeyboardEvent) {
