@@ -21,7 +21,16 @@ import {
     Self,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlValueAccessor, FormGroupDirective, NG_VALIDATORS, NgControl, NgForm, Validator } from '@angular/forms';
+import {
+    ControlValueAccessor,
+    FormControlName,
+    FormGroupDirective,
+    NG_VALIDATORS,
+    NgControl,
+    NgForm,
+    NgModel,
+    Validator
+} from '@angular/forms';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import { BACKSPACE, END, HOME } from '@ptsecurity/cdk/keycodes';
 import {
@@ -339,12 +348,14 @@ export class McTagList extends McTagListMixinBase implements McFormFieldControl<
         protected elementRef: ElementRef<HTMLElement>,
         private changeDetectorRef: ChangeDetectorRef,
         defaultErrorStateMatcher: ErrorStateMatcher,
-        @Optional() @Inject(NG_VALIDATORS) private rawValidators: Validator[],
+        @Optional() @Inject(NG_VALIDATORS) public rawValidators: Validator[],
         @Optional() @Inject(MC_VALIDATION) private mcValidation: McValidationOptions,
         @Optional() private dir: Directionality,
         @Optional() parentForm: NgForm,
         @Optional() parentFormGroup: FormGroupDirective,
-        @Optional() @Self() ngControl: NgControl
+        @Optional() @Self() ngControl: NgControl,
+        @Optional() @Self() public ngModel: NgModel,
+        @Optional() @Self() public formControlName: FormControlName
     ) {
         super(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl);
 
@@ -355,7 +366,7 @@ export class McTagList extends McTagListMixinBase implements McFormFieldControl<
 
     ngAfterContentInit() {
         if (this.mcValidation.useValidation) {
-            setMosaicValidation.call(this, this.rawValidators, this.parentForm || this.parentFormGroup, this.ngControl);
+            setMosaicValidation(this);
         }
 
         this.keyManager = new FocusKeyManager<McTag>(this.tags)
