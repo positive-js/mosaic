@@ -104,18 +104,27 @@
     @if $name == null { $name : '';          }
     @if $name != ''   { $name : '-#{$name}'; }
 
-    .layout#{$name}, .layout#{$name}-column, .layout#{$name}-row {
+    .layout#{$name},
+    .layout#{$name}-column,
+    .layout#{$name}-row {
         box-sizing: border-box;
         display: -webkit-box;
         display: -webkit-flex;
         display: -moz-box;
         display: -ms-flexbox;
         display: flex;
+
+        min-width: 0;
+        min-height: 0;
     }
 
-    .layout#{$name}-column {  flex-direction: column;     }
+    .layout#{$name}-column {
+        flex-direction: column;
+    }
 
-    .layout#{$name}-row    {  flex-direction: row;        }
+    .layout#{$name}-row {
+        flex-direction: row;
+    }
 }
 
 @mixin flex-properties-for-name($name: null) {
