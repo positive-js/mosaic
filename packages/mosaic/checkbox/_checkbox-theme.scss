@@ -12,6 +12,9 @@
     $state-checked_border-color: map-get($checkbox, state-checked_border-color);
     $state-checked_background: map-get($checkbox, state-checked_background);
 
+    $state-focused_box-shadow: map-get($checkbox, state-focused_box-shadow);
+    $state-focused_border-color: map-get($checkbox, state-focused_border-color);
+
     .mc-checkbox-frame {
         border-color: $border-color;
 
@@ -40,11 +43,10 @@
         }
 
         & .mc-checkbox-input.cdk-keyboard-focused {
-            $focused-color: map-get(map-get($theme, states), focused-color);
-
             + .mc-checkbox-frame {
-                border-color: $focused-color;
-                box-shadow: inset 0 0 0 1px white, 0 0 0 1px $focused-color;
+                border-color: $state-focused_border-color;
+
+                box-shadow: $state-focused_box-shadow;
             }
         }
 
