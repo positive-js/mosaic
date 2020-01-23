@@ -6,11 +6,13 @@
     $second: map-get($theme, second);
     $error: map-get($theme, error);
 
+    $focused-color: map-get(map-get($theme, states), focused-color);
+
     $popup-common: (
         shadow: 0 3px 3px 0 mc-color($second, A200),
         border-color: mc-color($second),
         background: white,
-        footer_background: map-get($second, 60),
+        footer_background: map-get($second, 60)
     );
 
     $button: (
@@ -22,7 +24,7 @@
             background: map-get($primary, 500),
             icon-color: mc-contrast($primary, 500),
             state-active_border-color: darken(mc-color($primary, 560), 5),
-            state-active_background: darken(mc-color($primary, 500), 5),
+            state-active_background: darken(mc-color($primary, 500), 5)
         ),
 
         second: (
@@ -31,7 +33,7 @@
             color: map-get($foreground, text),
             icon-color: map-get($foreground, text-less-contrast),
             state-active_border-color: darken(mc-color($foreground, border), 5),
-            state-active_background: darken(map-get($background, background-disabled), 5),
+            state-active_background: darken(map-get($background, background-disabled), 5)
         ),
 
         error: (
@@ -47,7 +49,10 @@
     $checkbox: (
         border-color: mc-color($second),
         state-checked_border-color: mc-color($primary, darker),
-        state-checked_background: mc-color($primary)
+        state-checked_background: mc-color($primary),
+
+        state-focused_border-color: mc-color($primary),
+        state-focused_box-shadow: (inset 0 0 0 1px map-get($background, background), 0 0 0 1px mc-color($primary))
     );
 
     $modal: (
@@ -63,7 +68,7 @@
         item_state-active_color: lighten(mc-color($primary, 700), 5%),
         item_state-hover_color: lighten(mc-color($primary, 700), 5%),
         item_state-progress_color: lighten(mc-color($primary, 800), 15%),
-        item_state-disabled_opacity: lighten(mc-color($primary, 800), 15%),
+        item_state-disabled_opacity: lighten(mc-color($primary, 800), 15%)
     );
 
     $popover: (
@@ -81,7 +86,11 @@
         inner-circle_border-color: transparent,
 
         outer-circle_checked-state_border-color: mc-color($primary),
-        inner-circle_checked-state_border-color: mc-color($primary)
+        inner-circle_checked-state_border-color: mc-color($primary),
+
+        outer-circle_focused-state_border-color: $focused-color,
+        outer-circle_focused-state_box-shadow: 0 0 0 2px $focused-color,
+        inner-circle_focused-state_box-shadow: 0 0 0 1px map-get($background, background)
     );
 
     $sidepanel: (
@@ -119,7 +128,7 @@
         circle_border: mc-color($foreground, border),
         circle_background: linear-gradient(to bottom, white, mc-color($second, lighter)),
 
-        focused-state_color: (inset 0 0 0 1px map-get($background, background), 0 0 0 2px mc-color($primary)),
+        focused-state_color: (inset 0 0 0 1px map-get($background, background), 0 0 0 2px mc-color($primary))
     );
 
     $tooltip: (
@@ -136,7 +145,7 @@
 
         state-hover_background-color: lighten(mc-color($primary, 700), 5%),
         state-active_background-color: lighten(mc-color($primary, 700), 5%),
-        state-progress_background-color: lighten(mc-color($primary, 800), 15%),
+        state-progress_background-color: lighten(mc-color($primary, 800), 15%)
     );
 
     @return (
@@ -164,6 +173,8 @@
     $primary: map-get($theme, primary);
     $second: map-get($theme, second);
     $error: map-get($theme, error);
+
+    $focused-color: map-get(map-get($theme, states), focused-color);
 
     $popup-common: (
         shadow: 0 3px 3px 0 mc-color($second, A200),
@@ -206,7 +217,10 @@
     $checkbox: (
         border-color: mc-color($second),
         state-checked_border-color: mc-color($primary, lighter),
-        state-checked_background: mc-color($primary, 600)
+        state-checked_background: mc-color($primary, 600),
+
+        state-focused_border-color: mc-color($primary),
+        state-focused_box-shadow: (inset 0 0 0 1px map-get($background, background), 0 0 0 1px mc-color($primary))
     );
 
     $datepicker: ();
@@ -242,7 +256,11 @@
         inner-circle_border-color: transparent,
 
         outer-circle_checked-state_border-color: mc-color($primary),
-        inner-circle_checked-state_border-color: mc-color($primary, 600)
+        inner-circle_checked-state_border-color: mc-color($primary, 600),
+
+        outer-circle_focused-state_border-color: $focused-color,
+        outer-circle_focused-state_box-shadow: 0 0 0 2px $focused-color,
+        inner-circle_focused-state_box-shadow: 0 0 0 1px map-get($background, background)
     );
 
     $sidepanel: (
