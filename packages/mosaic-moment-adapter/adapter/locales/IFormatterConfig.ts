@@ -32,8 +32,14 @@ export interface IFormatterConfig {
         long: IFormatterAbsoluteTemplate;
     };
     rangeTemplates: {
-        short: IFormatterRangeTemplate;
-        middle: IFormatterRangeTemplate;
-        long: IFormatterRangeTemplate;
+        closedRange: {
+            short: IFormatterRangeTemplate;
+            middle: IFormatterRangeTemplate;
+            long: IFormatterRangeTemplate;
+        };
+        openedRange: {
+            short: IFormatterRangeTemplate;
+            long: IFormatterRangeTemplate;
+        };
     };
 }

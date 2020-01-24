@@ -587,6 +587,7 @@ describe('MomentDateAdapter formatter', () => {
         adapter = d;
     }));
 
+    // todo tests repeated twice for ru and then for en
     describe('ru (default)', () => {
         beforeEach(() => {
             adapter.setLocale('ru');
@@ -600,6 +601,9 @@ describe('MomentDateAdapter formatter', () => {
 
         const DASH = '\u2013';
         const LONG_DASH = '\u202F\u2014\u2009';
+
+        const FROM = 'С';
+        const UNTIL = 'По';
 
         const NBSP = '\u00A0';
         const DAY_MONTH = `${DAY}${NBSP}${MONTH}`;
@@ -765,350 +769,514 @@ describe('MomentDateAdapter formatter', () => {
             let startDateFormat: any;
             let endDateFormat: any;
 
-            describe('Range short (rangeShortDate method)', () => {
-                beforeEach(() => {
-                    startDateFormat = DAY_SHORT_MONTH;
-                    endDateFormat = startDateFormat;
+            describe('closed range', () => {
+                describe('Range short (rangeShortDate method)', () => {
+                    beforeEach(() => {
+                        startDateFormat = DAY_SHORT_MONTH;
+                        endDateFormat = startDateFormat;
+                    });
+
+                    it('rangeShortDate', () => {
+                        const startDate = moment().dayOfYear(1);
+                        const endDate = moment(startDate).add(10, 'days');
+
+                        const startString: string = startDate.format(`${DAY}`);
+                        const endString: string = endDate.format(endDateFormat);
+
+                        expect(adapter.rangeShortDate(startDate, endDate)).toBe(
+                            `${startString}${DASH}${endString}`
+                        );
+                    });
+
+                    it('rangeShortDate (other month)', () => {
+                        const startDate = moment().month(1);
+                        const endDate = moment(startDate).add(1, 'months');
+
+                        const startString: string = startDate.format(startDateFormat);
+                        const endString: string = endDate.format(endDateFormat);
+
+                        expect(adapter.rangeShortDate(startDate, endDate)).toBe(
+                            `${startString}${LONG_DASH}${endString}`
+                        );
+                    });
+
+                    it('rangeShortDate (startDate is other year)', () => {
+                        const startDate = moment().subtract(1, 'years');
+                        const endDate = moment();
+
+                        const startString: string = startDate.format(`${startDateFormat} ${YEAR}`);
+                        const endString: string = endDate.format(`${endDateFormat} ${YEAR}`);
+
+                        expect(adapter.rangeShortDate(startDate, endDate)).toBe(
+                            `${startString}${LONG_DASH}${endString}`
+                        );
+                    });
+
+                    it('rangeShortDate (endDate is other year)', () => {
+                        const startDate = moment();
+                        const endDate = moment(startDate).add(1, 'years');
+
+                        const startString: string = startDate.format(`${startDateFormat} ${YEAR}`);
+                        const endString: string = endDate.format(`${endDateFormat} ${YEAR}`);
+
+                        expect(adapter.rangeShortDate(startDate, endDate)).toBe(
+                            `${startString}${LONG_DASH}${endString}`
+                        );
+                    });
                 });
 
-                it('rangeShortDate', () => {
-                    const startDate = moment().dayOfYear(1);
-                    const endDate = moment(startDate).add(10, 'days');
+                describe('Range short (rangeShortDateTime method)', () => {
+                    beforeEach(() => {
+                        startDateFormat = `${DAY_SHORT_MONTH}, ${TIME}`;
+                        endDateFormat = startDateFormat;
+                    });
 
-                    const startString: string = startDate.format(`${DAY}`);
-                    const endString: string = endDate.format(endDateFormat);
+                    it('rangeShortDateTime', () => {
+                        const startDate = moment().dayOfYear(1);
+                        const endDate = moment(startDate).add(10, 'days');
 
-                    expect(adapter.rangeShortDate(startDate, endDate)).toBe(
-                        `${startString}${DASH}${endString}`
-                    );
+                        const startString: string = startDate.format(startDateFormat);
+                        const endString: string = endDate.format(endDateFormat);
+
+                        expect(adapter.rangeShortDateTime(startDate, endDate)).toBe(
+                            `${startString}${LONG_DASH}${endString}`
+                        );
+                    });
+
+                    it('rangeShortDateTime (same day)', () => {
+                        const startDate = moment().dayOfYear(1);
+                        const endDate = moment(startDate).add(10, 'minutes');
+
+                        const startString = startDate.format(`${TIME}`);
+                        const endString = endDate.format(`${TIME}, ${DAY_SHORT_MONTH}`);
+
+                        expect(adapter.rangeShortDateTime(startDate, endDate)).toBe(
+                            `${startString}${DASH}${endString}`
+                        );
+                    });
+
+                    it('rangeShortDateTime (same day, other year)', () => {
+                        const startDate = moment().subtract(1, 'years');
+                        const endDate = moment(startDate).add(10, 'minutes');
+
+                        const startString = startDate.format(`${TIME}`);
+                        const endString = endDate.format(`${TIME}, ${DAY_SHORT_MONTH} ${YEAR}`);
+
+                        expect(adapter.rangeShortDateTime(startDate, endDate)).toBe(
+                            `${startString}${DASH}${endString}`
+                        );
+                    });
+
+                    it('rangeShortDateTime (other month)', () => {
+                        const startDate = moment().month(1);
+                        const endDate = moment(startDate).add(1, 'months');
+
+                        const startString: string = startDate.format(startDateFormat);
+                        const endString: string = endDate.format(endDateFormat);
+
+                        expect(adapter.rangeShortDateTime(startDate, endDate)).toBe(
+                            `${startString}${LONG_DASH}${endString}`
+                        );
+                    });
+
+                    it('rangeShortDateTime (startDate is other year)', () => {
+                        const startDate = moment().subtract(1, 'years');
+                        const endDate = moment();
+
+                        const startString: string = startDate.format(`${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
+                        const endString: string = endDate.format(`${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
+
+                        expect(adapter.rangeShortDateTime(startDate, endDate)).toBe(
+                            `${startString}${LONG_DASH}${endString}`
+                        );
+                    });
+
+                    it('rangeShortDateTime (endDate is other year)', () => {
+                        const startDate = moment();
+                        const endDate = moment(startDate).add(1, 'years');
+
+                        const startString: string = startDate.format(`${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
+                        const endString: string = endDate.format(`${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
+
+                        expect(adapter.rangeShortDateTime(startDate, endDate)).toBe(
+                            `${startString}${LONG_DASH}${endString}`
+                        );
+                    });
                 });
 
-                it('rangeShortDate (other month)', () => {
-                    const startDate = moment().month(1);
-                    const endDate = moment(startDate).add(1, 'months');
+                describe('Range long (rangeLongDate method)', () => {
+                    beforeEach(() => {
+                        startDateFormat = `${DAY_MONTH}`;
+                        endDateFormat = startDateFormat;
+                    });
 
-                    const startString: string = startDate.format(startDateFormat);
-                    const endString: string = endDate.format(endDateFormat);
+                    it('rangeLongDate', () => {
+                        const startDate: Moment = moment().dayOfYear(1);
+                        const endDate: Moment = moment(startDate).add(10, 'days');
 
-                    expect(adapter.rangeShortDate(startDate, endDate)).toBe(
-                        `${startString}${LONG_DASH}${endString}`
-                    );
+                        const startString: string = startDate.format(`${DAY}`);
+                        const endString: string = endDate.format(`${endDateFormat}`);
+
+                        expect(adapter.rangeLongDate(startDate, endDate)).toBe(
+                            `${startString}${DASH}${endString}`
+                        );
+                    });
+
+                    it('rangeLongDate (other month)', () => {
+                        const startDate: Moment = moment().month(1);
+                        const endDate: Moment = moment(startDate).add(1, 'months');
+
+                        const startString: string = startDate.format(startDateFormat);
+                        const endString: string = endDate.format(`${endDateFormat}`);
+
+                        expect(adapter.rangeLongDate(startDate, endDate)).toBe(
+                            `${startString}${LONG_DASH}${endString}`
+                        );
+                    });
+
+                    it('rangeLongDate (startDate is other year)', () => {
+                        const startDate: Moment = moment().subtract(1, 'years');
+                        const endDate: Moment = moment();
+
+                        const startString: string = startDate.format(`${startDateFormat} ${YEAR}`);
+                        const endString: string = endDate.format(`${endDateFormat} ${YEAR}`);
+
+                        expect(adapter.rangeLongDate(startDate, endDate)).toBe(
+                            `${startString}${LONG_DASH}${endString}`
+                        );
+                    });
+
+                    it('rangeLongDate (endDate is other year)', () => {
+                        const startDate: Moment = moment().dayOfYear(1);
+                        const endDate: Moment = moment(startDate).add(1, 'years');
+
+                        const startString: string = startDate.format(`${startDateFormat} ${YEAR}`);
+                        const endString: string = endDate.format(`${endDateFormat} ${YEAR}`);
+
+                        expect(adapter.rangeLongDate(startDate, endDate)).toBe(
+                            `${startString}${LONG_DASH}${endString}`
+                        );
+                    });
                 });
 
-                it('rangeShortDate (startDate is other year)', () => {
-                    const startDate = moment().subtract(1, 'years');
-                    const endDate = moment();
+                describe('Range long (rangeLongDateTime method)', () => {
+                    beforeEach(() => {
+                        startDateFormat = `${DAY_MONTH}, ${TIME}`;
+                        endDateFormat = startDateFormat;
+                    });
 
-                    const startString: string = startDate.format(`${startDateFormat} ${YEAR}`);
-                    const endString: string = endDate.format(`${endDateFormat} ${YEAR}`);
+                    it('rangeLongDateTime', () => {
+                        const startDate: Moment = moment().dayOfYear(1);
+                        const endDate: Moment = moment(startDate).add(10, 'days');
 
-                    expect(adapter.rangeShortDate(startDate, endDate)).toBe(
-                        `${startString}${LONG_DASH}${endString}`
-                    );
+                        const startString: string = startDate.format(startDateFormat);
+                        const endString: string = endDate.format(endDateFormat);
+
+                        expect(adapter.rangeLongDateTime(startDate, endDate)).toBe(
+                            `С${NBSP}${startString} по${NBSP}${endString}`
+                        );
+                    });
+
+                    it('rangeLongDateTime (same day)', () => {
+                        const startDate: Moment = moment().dayOfYear(1);
+                        const endDate: Moment = moment(startDate).add(10, 'minutes');
+
+                        const startString: string = startDate.format(`${DAY_MONTH}, с${NBSP}${TIME}`);
+                        const endString: string = endDate.format(`по${NBSP}${TIME}`);
+
+                        expect(adapter.rangeLongDateTime(startDate, endDate)).toBe(
+                            `${startString} ${endString}`
+                        );
+                    });
+
+                    it('rangeLongDateTime (same day, other year)', () => {
+                        const startDate: Moment = moment().subtract(1, 'years');
+                        const endDate: Moment = moment(startDate).add(10, 'minutes');
+
+                        const startString: string = startDate.format(`${DAY_MONTH} ${YEAR}, с${NBSP}${TIME}`);
+                        const endString: string = endDate.format(`по${NBSP}${TIME}`);
+
+                        expect(adapter.rangeLongDateTime(startDate, endDate)).toBe(
+                            `${startString} ${endString}`
+                        );
+                    });
+
+                    it('rangeLongDateTime (other month)', () => {
+                        const startDate: Moment = moment().month(1);
+                        const endDate: Moment = moment(startDate).add(1, 'months');
+
+                        const startString: string = startDate.format(startDateFormat);
+                        const endString: string = endDate.format(endDateFormat);
+
+                        expect(adapter.rangeLongDateTime(startDate, endDate)).toBe(
+                            `С${NBSP}${startString} по${NBSP}${endString}`
+                        );
+                    });
+
+                    it('rangeLongDateTime (startDate is other year)', () => {
+                        const startDate: Moment = moment().subtract(1, 'years');
+                        const endDate: Moment = moment();
+
+                        const startString: string = startDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
+                        const endString: string = endDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
+
+                        expect(adapter.rangeLongDateTime(startDate, endDate)).toBe(
+                            `С${NBSP}${startString} по${NBSP}${endString}`
+                        );
+                    });
+
+                    it('rangeLongDateTime (endDate is other year)', () => {
+                        const startDate: Moment = moment().dayOfYear(1);
+                        const endDate: Moment = moment(startDate).add(1, 'years');
+
+                        const startString: string = startDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
+                        const endString: string = endDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
+
+                        expect(adapter.rangeLongDateTime(startDate, endDate)).toBe(
+                            `С${NBSP}${startString} по${NBSP}${endString}`
+                        );
+                    });
                 });
 
-                it('rangeShortDate (endDate is other year)', () => {
-                    const startDate = moment();
-                    const endDate = moment(startDate).add(1, 'years');
+                describe('Range middle (rangeMiddleDateTime method)', () => {
+                    beforeEach(() => {
+                        startDateFormat = `${DAY_MONTH}, ${TIME}`;
+                        endDateFormat = startDateFormat;
+                    });
 
-                    const startString: string = startDate.format(`${startDateFormat} ${YEAR}`);
-                    const endString: string = endDate.format(`${endDateFormat} ${YEAR}`);
+                    it('rangeMiddleDateTime', () => {
+                        const startDate: Moment = moment().dayOfYear(1);
+                        const endDate: Moment = moment(startDate).add(10, 'days');
 
-                    expect(adapter.rangeShortDate(startDate, endDate)).toBe(
-                        `${startString}${LONG_DASH}${endString}`
-                    );
+                        const startString: string = startDate.format(startDateFormat);
+                        const endString: string = endDate.format(endDateFormat);
+
+                        expect(adapter.rangeMiddleDateTime(startDate, endDate)).toBe(
+                            `${startString}${LONG_DASH}${endString}`
+                        );
+                    });
+
+                    it('rangeMiddleDateTime (same day)', () => {
+                        const startDate: Moment = moment().dayOfYear(1);
+                        const endDate: Moment = moment(startDate).add(10, 'minutes');
+
+                        const startString: string = startDate.format(`${TIME}`);
+                        const endString: string = endDate.format(`${TIME}, ${DAY_MONTH}`);
+
+                        expect(adapter.rangeMiddleDateTime(startDate, endDate)).toBe(
+                            `${startString}${DASH}${endString}`
+                        );
+                    });
+
+                    it('rangeMiddleDateTime (same day, other year)', () => {
+                        const startDate: Moment = moment().subtract(1, 'years');
+                        const endDate: Moment = moment(startDate).add(10, 'minutes');
+
+                        const startString: string = startDate.format(`${TIME}`);
+                        const endString: string = endDate.format(`${TIME}, ${DAY_MONTH} ${YEAR}`);
+
+                        expect(adapter.rangeMiddleDateTime(startDate, endDate)).toBe(
+                            `${startString}${DASH}${endString}`
+                        );
+                    });
+
+                    it('rangeMiddleDateTime (other month)', () => {
+                        const startDate: Moment = moment().month(1);
+                        const endDate: Moment = moment(startDate).add(1, 'months');
+
+                        const startString: string = startDate.format(startDateFormat);
+                        const endString: string = endDate.format(endDateFormat);
+
+                        expect(adapter.rangeMiddleDateTime(startDate, endDate)).toBe(
+                            `${startString}${LONG_DASH}${endString}`
+                        );
+                    });
+
+                    it('rangeMiddleDateTime (startDate is other year)', () => {
+                        const startDate: Moment = moment().subtract(1, 'years');
+                        const endDate: Moment = moment();
+
+                        const startString: string = startDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
+                        const endString: string = endDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
+
+                        expect(adapter.rangeMiddleDateTime(startDate, endDate)).toBe(
+                            `${startString}${LONG_DASH}${endString}`
+                        );
+                    });
+
+                    it('rangeMiddleDateTime (endDate is other year)', () => {
+                        const startDate: Moment = moment().dayOfYear(1);
+                        const endDate: Moment = moment(startDate).add(1, 'years');
+
+                        const startString: string = startDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
+                        const endString: string = endDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
+
+                        expect(adapter.rangeMiddleDateTime(startDate, endDate)).toBe(
+                            `${startString}${LONG_DASH}${endString}`
+                        );
+                    });
                 });
             });
 
-            describe('Range short (rangeShortDateTime method)', () => {
-                beforeEach(() => {
-                    startDateFormat = `${DAY_SHORT_MONTH}, ${TIME}`;
-                    endDateFormat = startDateFormat;
+            describe('opened range', () => {
+                describe('Range short (rangeShortDate method)', () => {
+                    beforeEach(() => {
+                        startDateFormat = DAY_SHORT_MONTH;
+                        endDateFormat = DAY_SHORT_MONTH;
+                    });
+
+                    it('throw Error', () => {
+                        const wrapper = () => adapter.rangeShortDate(null);
+                        expect(wrapper).toThrowError('Invalid date');
+                    });
+
+                    it('rangeShortDate (only startDate)', () => {
+                        const startDate = moment().dayOfYear(1);
+                        const startString = startDate.format(startDateFormat);
+
+                        expect(adapter.rangeShortDate(startDate)).toBe(`${FROM}${NBSP}${startString}`);
+                    });
+
+                    it('rangeShortDate (only endDate)', () => {
+                        const endDate = moment().dayOfYear(1);
+                        const endString = endDate.format(endDateFormat);
+
+                        expect(adapter.rangeShortDate(null, endDate)).toBe(`${UNTIL}${NBSP}${endString}`);
+                    });
+
+                    it('rangeShortDate (startDate is other year)', () => {
+                        const startDate = moment().subtract(1, 'years');
+                        const startString = startDate.format(`${startDateFormat} ${YEAR}`);
+
+                        expect(adapter.rangeShortDate(startDate)).toBe(`${FROM}${NBSP}${startString}`);
+                    });
+
+                    it('rangeShortDate (endDate is other year)', () => {
+                        const endDate = moment().add(1, 'years');
+                        const endString = endDate.format(`${endDateFormat} ${YEAR}`);
+
+                        expect(adapter.rangeShortDate(null, endDate)).toBe(`${UNTIL}${NBSP}${endString}`);
+                    });
                 });
 
-                it('rangeShortDateTime', () => {
-                    const startDate = moment().dayOfYear(1);
-                    const endDate = moment(startDate).add(10, 'days');
+                describe('Range short (rangeShortDateTime method)', () => {
+                    beforeEach(() => {
+                        startDateFormat = `${DAY_SHORT_MONTH}, ${TIME}`;
+                        endDateFormat = `${DAY_SHORT_MONTH}, ${TIME}`;
+                    });
 
-                    const startString: string = startDate.format(startDateFormat);
-                    const endString: string = endDate.format(endDateFormat);
+                    it('throw Error', () => {
+                        const wrapper = () => adapter.rangeShortDateTime(null);
+                        expect(wrapper).toThrowError('Invalid date');
+                    });
 
-                    expect(adapter.rangeShortDateTime(startDate, endDate)).toBe(
-                        `${startString}${LONG_DASH}${endString}`
-                    );
+                    it('rangeShortDateTime (only startDate)', () => {
+                        const startDate = moment().dayOfYear(1);
+                        const startString = startDate.format(startDateFormat);
+
+                        expect(adapter.rangeShortDateTime(startDate)).toBe(`${FROM}${NBSP}${startString}`);
+                    });
+
+                    it('rangeShortDateTime (only endDate)', () => {
+                        const endDate = moment().dayOfYear(1);
+                        const endString = endDate.format(endDateFormat);
+
+                        expect(adapter.rangeShortDateTime(null, endDate)).toBe(`${UNTIL}${NBSP}${endString}`);
+                    });
+
+                    it('rangeShortDateTime (startDate is other year)', () => {
+                        const startDate = moment().subtract(1, 'years');
+                        const startString = startDate.format(`${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
+
+                        expect(adapter.rangeShortDateTime(startDate)).toBe(`${FROM}${NBSP}${startString}`);
+                    });
+
+                    it('rangeShortDateTime (endDate is other year)', () => {
+                        const endDate = moment().add(1, 'years');
+                        const endString = endDate.format(`${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
+
+                        expect(adapter.rangeShortDateTime(null, endDate)).toBe(`${UNTIL}${NBSP}${endString}`);
+                    });
                 });
 
-                it('rangeShortDateTime (same day)', () => {
-                    const startDate = moment().dayOfYear(1);
-                    const endDate = moment(startDate).add(10, 'minutes');
+                describe('Range long (rangeLongDate method)', () => {
+                    beforeEach(() => {
+                        startDateFormat = `${DAY_MONTH}`;
+                        endDateFormat = `${DAY_MONTH}`;
+                    });
 
-                    const startString = startDate.format(`${TIME}`);
-                    const endString = endDate.format(`${TIME}, ${DAY_SHORT_MONTH}`);
+                    it('throw Error', () => {
+                        const wrapper = () => adapter.rangeLongDate(null);
+                        expect(wrapper).toThrowError('Invalid date');
+                    });
 
-                    expect(adapter.rangeShortDateTime(startDate, endDate)).toBe(
-                        `${startString}${DASH}${endString}`
-                    );
+                    it('rangeLongDate (only startDate)', () => {
+                        const startDate = moment().dayOfYear(1);
+                        const startString = startDate.format(startDateFormat);
+
+                        expect(adapter.rangeLongDate(startDate)).toBe(`${FROM}${NBSP}${startString}`);
+                    });
+
+                    it('rangeLongDate (only endDate)', () => {
+                        const endDate = moment().dayOfYear(1);
+                        const endString = endDate.format(endDateFormat);
+
+                        expect(adapter.rangeLongDate(null, endDate)).toBe(`${UNTIL}${NBSP}${endString}`);
+                    });
+
+                    it('rangeLongDate (startDate is other year)', () => {
+                        const startDate = moment().subtract(1, 'years');
+                        const startString = startDate.format(`${startDateFormat} ${YEAR}`);
+
+                        expect(adapter.rangeLongDate(startDate)).toBe(`${FROM}${NBSP}${startString}`);
+                    });
+
+                    it('rangeLongDate (endDate is other year)', () => {
+                        const endDate = moment().add(1, 'years');
+                        const endString = endDate.format(`${endDateFormat} ${YEAR}`);
+
+                        expect(adapter.rangeLongDate(null, endDate)).toBe(`${UNTIL}${NBSP}${endString}`);
+                    });
                 });
 
-                it('rangeShortDateTime (same day, other year)', () => {
-                    const startDate = moment().subtract(1, 'years');
-                    const endDate = moment(startDate).add(10, 'minutes');
+                describe('Range long (rangeLongDateTime method)', () => {
+                    beforeEach(() => {
+                        startDateFormat = `${DAY_MONTH}, ${TIME}`;
+                        endDateFormat = `${DAY_MONTH}, ${TIME}`;
+                    });
 
-                    const startString = startDate.format(`${TIME}`);
-                    const endString = endDate.format(`${TIME}, ${DAY_SHORT_MONTH} ${YEAR}`);
+                    it('throw Error', () => {
+                        const wrapper = () => adapter.rangeLongDateTime(null);
+                        expect(wrapper).toThrowError('Invalid date');
+                    });
 
-                    expect(adapter.rangeShortDateTime(startDate, endDate)).toBe(
-                        `${startString}${DASH}${endString}`
-                    );
-                });
+                    it('rangeLongDateTime (only startDate)', () => {
+                        const startDate = moment().dayOfYear(1);
+                        const startString = startDate.format(startDateFormat);
 
-                it('rangeShortDateTime (other month)', () => {
-                    const startDate = moment().month(1);
-                    const endDate = moment(startDate).add(1, 'months');
+                        expect(adapter.rangeLongDateTime(startDate)).toBe(`${FROM}${NBSP}${startString}`);
+                    });
 
-                    const startString: string = startDate.format(startDateFormat);
-                    const endString: string = endDate.format(endDateFormat);
+                    it('rangeLongDateTime (only endDate)', () => {
+                        const endDate = moment().dayOfYear(1);
+                        const endString = endDate.format(endDateFormat);
 
-                    expect(adapter.rangeShortDateTime(startDate, endDate)).toBe(
-                        `${startString}${LONG_DASH}${endString}`
-                    );
-                });
+                        expect(adapter.rangeLongDateTime(null, endDate)).toBe(`${UNTIL}${NBSP}${endString}`);
+                    });
 
-                it('rangeShortDateTime (startDate is other year)', () => {
-                    const startDate = moment().subtract(1, 'years');
-                    const endDate = moment();
+                    it('rangeLongDateTime (startDate is other year)', () => {
+                        const startDate = moment().subtract(1, 'years');
+                        const startString = startDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
 
-                    const startString: string = startDate.format(`${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
-                    const endString: string = endDate.format(`${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
+                        expect(adapter.rangeLongDateTime(startDate)).toBe(`${FROM}${NBSP}${startString}`);
+                    });
 
-                    expect(adapter.rangeShortDateTime(startDate, endDate)).toBe(
-                        `${startString}${LONG_DASH}${endString}`
-                    );
-                });
+                    it('rangeLongDateTime (endDate is other year)', () => {
+                        const endDate = moment().add(1, 'years');
+                        const endString = endDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
 
-                it('rangeShortDateTime (endDate is other year)', () => {
-                    const startDate = moment();
-                    const endDate = moment(startDate).add(1, 'years');
-
-                    const startString: string = startDate.format(`${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
-                    const endString: string = endDate.format(`${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
-
-                    expect(adapter.rangeShortDateTime(startDate, endDate)).toBe(
-                        `${startString}${LONG_DASH}${endString}`
-                    );
-                });
-            });
-
-            describe('Range long (rangeLongDate method)', () => {
-                beforeEach(() => {
-                    startDateFormat = `${DAY_MONTH}`;
-                    endDateFormat = startDateFormat;
-                });
-
-                it('rangeLongDate', () => {
-                    const startDate: Moment = moment().dayOfYear(1);
-                    const endDate: Moment = moment(startDate).add(10, 'days');
-
-                    const startString: string = startDate.format(`${DAY}`);
-                    const endString: string = endDate.format(`${endDateFormat}`);
-
-                    expect(adapter.rangeLongDate(startDate, endDate)).toBe(
-                        `${startString}${DASH}${endString}`
-                    );
-                });
-
-                it('rangeLongDate (other month)', () => {
-                    const startDate: Moment = moment().month(1);
-                    const endDate: Moment = moment(startDate).add(1, 'months');
-
-                    const startString: string = startDate.format(startDateFormat);
-                    const endString: string = endDate.format(`${endDateFormat}`);
-
-                    expect(adapter.rangeLongDate(startDate, endDate)).toBe(
-                        `${startString}${LONG_DASH}${endString}`
-                    );
-                });
-
-                it('rangeLongDate (startDate is other year)', () => {
-                    const startDate: Moment = moment().subtract(1, 'years');
-                    const endDate: Moment = moment();
-
-                    const startString: string = startDate.format(`${startDateFormat} ${YEAR}`);
-                    const endString: string = endDate.format(`${endDateFormat} ${YEAR}`);
-
-                    expect(adapter.rangeLongDate(startDate, endDate)).toBe(
-                        `${startString}${LONG_DASH}${endString}`
-                    );
-                });
-
-                it('rangeLongDate (endDate is other year)', () => {
-                    const startDate: Moment = moment().dayOfYear(1);
-                    const endDate: Moment = moment(startDate).add(1, 'years');
-
-                    const startString: string = startDate.format(`${startDateFormat} ${YEAR}`);
-                    const endString: string = endDate.format(`${endDateFormat} ${YEAR}`);
-
-                    expect(adapter.rangeLongDate(startDate, endDate)).toBe(
-                        `${startString}${LONG_DASH}${endString}`
-                    );
-                });
-            });
-
-            describe('Range long (rangeLongDateTime method)', () => {
-                beforeEach(() => {
-                    startDateFormat = `${DAY_MONTH}, ${TIME}`;
-                    endDateFormat = startDateFormat;
-                });
-
-                it('rangeLongDateTime', () => {
-                    const startDate: Moment = moment().dayOfYear(1);
-                    const endDate: Moment = moment(startDate).add(10, 'days');
-
-                    const startString: string = startDate.format(startDateFormat);
-                    const endString: string = endDate.format(endDateFormat);
-
-                    expect(adapter.rangeLongDateTime(startDate, endDate)).toBe(
-                        `С${NBSP}${startString} по${NBSP}${endString}`
-                    );
-                });
-
-                it('rangeLongDateTime (same day)', () => {
-                    const startDate: Moment = moment().dayOfYear(1);
-                    const endDate: Moment = moment(startDate).add(10, 'minutes');
-
-                    const startString: string = startDate.format(`${DAY_MONTH}, с${NBSP}${TIME}`);
-                    const endString: string = endDate.format(`по${NBSP}${TIME}`);
-
-                    expect(adapter.rangeLongDateTime(startDate, endDate)).toBe(
-                        `${startString} ${endString}`
-                    );
-                });
-
-                it('rangeLongDateTime (same day, other year)', () => {
-                    const startDate: Moment = moment().subtract(1, 'years');
-                    const endDate: Moment = moment(startDate).add(10, 'minutes');
-
-                    const startString: string = startDate.format(`${DAY_MONTH} ${YEAR}, с${NBSP}${TIME}`);
-                    const endString: string = endDate.format(`по${NBSP}${TIME}`);
-
-                    expect(adapter.rangeLongDateTime(startDate, endDate)).toBe(
-                        `${startString} ${endString}`
-                    );
-                });
-
-                it('rangeLongDateTime (other month)', () => {
-                    const startDate: Moment = moment().month(1);
-                    const endDate: Moment = moment(startDate).add(1, 'months');
-
-                    const startString: string = startDate.format(startDateFormat);
-                    const endString: string = endDate.format(endDateFormat);
-
-                    expect(adapter.rangeLongDateTime(startDate, endDate)).toBe(
-                        `С${NBSP}${startString} по${NBSP}${endString}`
-                    );
-                });
-
-                it('rangeLongDateTime (startDate is other year)', () => {
-                    const startDate: Moment = moment().subtract(1, 'years');
-                    const endDate: Moment = moment();
-
-                    const startString: string = startDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
-                    const endString: string = endDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
-
-                    expect(adapter.rangeLongDateTime(startDate, endDate)).toBe(
-                        `С${NBSP}${startString} по${NBSP}${endString}`
-                    );
-                });
-
-                it('rangeLongDateTime (endDate is other year)', () => {
-                    const startDate: Moment = moment().dayOfYear(1);
-                    const endDate: Moment = moment(startDate).add(1, 'years');
-
-                    const startString: string = startDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
-                    const endString: string = endDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
-
-                    expect(adapter.rangeLongDateTime(startDate, endDate)).toBe(
-                        `С${NBSP}${startString} по${NBSP}${endString}`
-                    );
-                });
-            });
-
-            describe('Range middle (rangeMiddleDateTime method)', () => {
-                beforeEach(() => {
-                    startDateFormat = `${DAY_MONTH}, ${TIME}`;
-                    endDateFormat = startDateFormat;
-                });
-
-                it('rangeMiddleDateTime', () => {
-                    const startDate: Moment = moment().dayOfYear(1);
-                    const endDate: Moment = moment(startDate).add(10, 'days');
-
-                    const startString: string = startDate.format(startDateFormat);
-                    const endString: string = endDate.format(endDateFormat);
-
-                    expect(adapter.rangeMiddleDateTime(startDate, endDate)).toBe(
-                        `${startString}${LONG_DASH}${endString}`
-                    );
-                });
-
-                it('rangeMiddleDateTime (same day)', () => {
-                    const startDate: Moment = moment().dayOfYear(1);
-                    const endDate: Moment = moment(startDate).add(10, 'minutes');
-
-                    const startString: string = startDate.format(`${TIME}`);
-                    const endString: string = endDate.format(`${TIME}, ${DAY_MONTH}`);
-
-                    expect(adapter.rangeMiddleDateTime(startDate, endDate)).toBe(
-                        `${startString}${DASH}${endString}`
-                    );
-                });
-
-                it('rangeMiddleDateTime (same day, other year)', () => {
-                    const startDate: Moment = moment().subtract(1, 'years');
-                    const endDate: Moment = moment(startDate).add(10, 'minutes');
-
-                    const startString: string = startDate.format(`${TIME}`);
-                    const endString: string = endDate.format(`${TIME}, ${DAY_MONTH} ${YEAR}`);
-
-                    expect(adapter.rangeMiddleDateTime(startDate, endDate)).toBe(
-                        `${startString}${DASH}${endString}`
-                    );
-                });
-
-                it('rangeMiddleDateTime (other month)', () => {
-                    const startDate: Moment = moment().month(1);
-                    const endDate: Moment = moment(startDate).add(1, 'months');
-
-                    const startString: string = startDate.format(startDateFormat);
-                    const endString: string = endDate.format(endDateFormat);
-
-                    expect(adapter.rangeMiddleDateTime(startDate, endDate)).toBe(
-                        `${startString}${LONG_DASH}${endString}`
-                    );
-                });
-
-                it('rangeMiddleDateTime (startDate is other year)', () => {
-                    const startDate: Moment = moment().subtract(1, 'years');
-                    const endDate: Moment = moment();
-
-                    const startString: string = startDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
-                    const endString: string = endDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
-
-                    expect(adapter.rangeMiddleDateTime(startDate, endDate)).toBe(
-                        `${startString}${LONG_DASH}${endString}`
-                    );
-                });
-
-                it('rangeMiddleDateTime (endDate is other year)', () => {
-                    const startDate: Moment = moment().dayOfYear(1);
-                    const endDate: Moment = moment(startDate).add(1, 'years');
-
-                    const startString: string = startDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
-                    const endString: string = endDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
-
-                    expect(adapter.rangeMiddleDateTime(startDate, endDate)).toBe(
-                        `${startString}${LONG_DASH}${endString}`
-                    );
+                        expect(adapter.rangeLongDateTime(null, endDate)).toBe(`${UNTIL}${NBSP}${endString}`);
+                    });
                 });
             });
         });
@@ -1127,6 +1295,9 @@ describe('MomentDateAdapter formatter', () => {
 
         const DASH = '\u2013';
         const LONG_DASH = '\u202F\u2013\u2009';
+
+        const FROM = 'From';
+        const UNTIL = 'Until';
 
         const NBSP = '\u00A0';
         const DAY_MONTH = `${MONTH}${NBSP}${DAY}`;
@@ -1297,350 +1468,514 @@ describe('MomentDateAdapter formatter', () => {
             let startDateFormat: any;
             let endDateFormat: any;
 
-            describe('Range short (rangeShortDate method)', () => {
-                beforeEach(() => {
-                    endDateFormat = DAY_SHORT_MONTH;
-                    startDateFormat = endDateFormat;
+            describe('closed range', () => {
+                describe('Range short (rangeShortDate method)', () => {
+                    beforeEach(() => {
+                        endDateFormat = DAY_SHORT_MONTH;
+                        startDateFormat = endDateFormat;
+                    });
+
+                    it('rangeShortDate', () => {
+                        const startDate: Moment = moment().dayOfYear(1);
+                        const endDate: Moment = moment(startDate).add(10, 'days');
+
+                        const startString: string = startDate.format(startDateFormat);
+                        const endString: string = endDate.format(`${DAY}`);
+
+                        expect(adapter.rangeShortDate(startDate, endDate)).toBe(
+                            `${startString}${DASH}${endString}`
+                        );
+                    });
+
+                    it('rangeShortDate (other month)', () => {
+                        const startDate: Moment = moment().month(1);
+                        const endDate: Moment = moment(startDate).add(1, 'months');
+
+                        const startString: string = startDate.format(startDateFormat);
+                        const endString: string = endDate.format(endDateFormat);
+
+                        expect(adapter.rangeShortDate(startDate, endDate)).toBe(
+                            `${startString}${LONG_DASH}${endString}`
+                        );
+                    });
+
+                    it('rangeShortDate (startDate is other year)', () => {
+                        const startDate: Moment = moment().subtract(1, 'years');
+                        const endDate: Moment = moment();
+
+                        const startString: string = startDate.format(`${startDateFormat}, ${YEAR}`);
+                        const endString: string = endDate.format(`${endDateFormat}, ${YEAR}`);
+
+                        expect(adapter.rangeShortDate(startDate, endDate)).toBe(
+                            `${startString}${LONG_DASH}${endString}`
+                        );
+                    });
+
+                    it('rangeShortDate (endDate is other year)', () => {
+                        const startDate: Moment = moment();
+                        const endDate: Moment = moment(startDate).add(1, 'years');
+
+                        const startString: string = startDate.format(`${startDateFormat}, ${YEAR}`);
+                        const endString: string = endDate.format(`${endDateFormat}, ${YEAR}`);
+
+                        expect(adapter.rangeShortDate(startDate, endDate)).toBe(
+                            `${startString}${LONG_DASH}${endString}`
+                        );
+                    });
                 });
 
-                it('rangeShortDate', () => {
-                    const startDate: Moment = moment().dayOfYear(1);
-                    const endDate: Moment = moment(startDate).add(10, 'days');
+                describe('Range short (rangeShortDateTime method)', () => {
+                    beforeEach(() => {
+                        startDateFormat = `${DAY_SHORT_MONTH}, ${TIME}`;
+                        endDateFormat = startDateFormat;
+                    });
 
-                    const startString: string = startDate.format(startDateFormat);
-                    const endString: string = endDate.format(`${DAY}`);
+                    it('rangeShortDateTime', () => {
+                        const startDate: Moment = moment().dayOfYear(1);
+                        const endDate: Moment = moment(startDate).add(10, 'days');
 
-                    expect(adapter.rangeShortDate(startDate, endDate)).toBe(
-                        `${startString}${DASH}${endString}`
-                    );
+                        const startString: string = startDate.format(startDateFormat);
+                        const endString: string = endDate.format(endDateFormat);
+
+                        expect(adapter.rangeShortDateTime(startDate, endDate)).toBe(
+                            `${startString}${LONG_DASH}${endString}`
+                        );
+                    });
+
+                    it('rangeShortDateTime (same day)', () => {
+                        const startDate: Moment = moment().dayOfYear(1);
+                        const endDate: Moment = moment(startDate).add(10, 'minutes');
+
+                        const startString = startDate.format(`${TIME}`);
+                        const endString = endDate.format(`${TIME}, ${DAY_SHORT_MONTH}`);
+
+                        expect(adapter.rangeShortDateTime(startDate, endDate)).toBe(
+                            `${startString}${DASH}${endString}`
+                        );
+                    });
+
+                    it('rangeShortDateTime (same day, other year)', () => {
+                        const startDate: Moment = moment().subtract(1, 'years');
+                        const endDate: Moment = moment(startDate).add(10, 'minutes');
+
+                        const startString: string = startDate.format(`${TIME}`);
+                        const endString: string = endDate.format(`${TIME}, ${DAY_SHORT_MONTH}, ${YEAR}`);
+
+                        expect(adapter.rangeShortDateTime(startDate, endDate)).toBe(
+                            `${startString}${DASH}${endString}`
+                        );
+                    });
+
+                    it('rangeShortDateTime (other month)', () => {
+                        const startDate: Moment = moment().month(1);
+                        const endDate: Moment = moment(startDate).add(1, 'months');
+
+                        const startString: string = startDate.format(startDateFormat);
+                        const endString: string = endDate.format(endDateFormat);
+
+                        expect(adapter.rangeShortDateTime(startDate, endDate)).toBe(
+                            `${startString}${LONG_DASH}${endString}`
+                        );
+                    });
+
+                    it('rangeShortDateTime (startDate is other year)', () => {
+                        const startDate: Moment = moment().subtract(1, 'years');
+                        const endDate: Moment = moment();
+
+                        const startString: string = startDate.format(`${DAY_SHORT_MONTH}, ${YEAR}, ${TIME}`);
+                        const endString: string = endDate.format(`${DAY_SHORT_MONTH}, ${YEAR}, ${TIME}`);
+
+                        expect(adapter.rangeShortDateTime(startDate, endDate)).toBe(
+                            `${startString}${LONG_DASH}${endString}`
+                        );
+                    });
+
+                    it('rangeShortDateTime (endDate is other year)', () => {
+                        const startDate: Moment = moment();
+                        const endDate: Moment = moment(startDate).add(1, 'years');
+
+                        const startString: string = startDate.format(`${DAY_SHORT_MONTH}, ${YEAR}, ${TIME}`);
+                        const endString: string = endDate.format(`${DAY_SHORT_MONTH}, ${YEAR}, ${TIME}`);
+
+                        expect(adapter.rangeShortDateTime(startDate, endDate)).toBe(
+                            `${startString}${LONG_DASH}${endString}`
+                        );
+                    });
                 });
 
-                it('rangeShortDate (other month)', () => {
-                    const startDate: Moment = moment().month(1);
-                    const endDate: Moment = moment(startDate).add(1, 'months');
+                describe('Range long (rangeLongDate method)', () => {
+                    beforeEach(() => {
+                        startDateFormat = DAY_MONTH;
+                        endDateFormat = startDateFormat;
+                    });
 
-                    const startString: string = startDate.format(startDateFormat);
-                    const endString: string = endDate.format(endDateFormat);
+                    it('rangeLongDate', () => {
+                        const startDate: Moment = moment().dayOfYear(1);
+                        const endDate: Moment = moment(startDate).add(10, 'days');
 
-                    expect(adapter.rangeShortDate(startDate, endDate)).toBe(
-                        `${startString}${LONG_DASH}${endString}`
-                    );
+                        const startString: string = startDate.format(startDateFormat);
+                        const endString: string = endDate.format(DAY);
+
+                        expect(adapter.rangeLongDate(startDate, endDate)).toBe(
+                            `${startString}${DASH}${endString}`
+                        );
+                    });
+
+                    it('rangeLongDate (other month)', () => {
+                        const startDate: Moment = moment().month(1);
+                        const endDate: Moment = moment(startDate).add(1, 'months');
+
+                        const startString: string = startDate.format(startDateFormat);
+                        const endString: string = endDate.format(`${endDateFormat}`);
+
+                        expect(adapter.rangeLongDate(startDate, endDate)).toBe(
+                            `${startString}${LONG_DASH}${endString}`
+                        );
+                    });
+
+                    it('rangeLongDate (startDate is other year)', () => {
+                        const startDate: Moment = moment().subtract(1, 'years');
+                        const endDate: Moment = moment();
+
+                        const startString: string = startDate.format(`${startDateFormat}, ${YEAR}`);
+                        const endString: string = endDate.format(`${endDateFormat}, ${YEAR}`);
+
+                        expect(adapter.rangeLongDate(startDate, endDate)).toBe(
+                            `${startString}${LONG_DASH}${endString}`
+                        );
+                    });
+
+                    it('rangeLongDate (endDate is other year)', () => {
+                        const startDate: Moment = moment().dayOfYear(1);
+                        const endDate: Moment = moment(startDate).add(1, 'years');
+
+                        const startString: string = startDate.format(`${startDateFormat}, ${YEAR}`);
+                        const endString: string = endDate.format(`${endDateFormat}, ${YEAR}`);
+
+                        expect(adapter.rangeLongDate(startDate, endDate)).toBe(
+                            `${startString}${LONG_DASH}${endString}`
+                        );
+                    });
                 });
 
-                it('rangeShortDate (startDate is other year)', () => {
-                    const startDate: Moment = moment().subtract(1, 'years');
-                    const endDate: Moment = moment();
+                describe('Range long (rangeLongDateTime method)', () => {
+                    beforeEach(() => {
+                        startDateFormat = `${DAY_MONTH}, ${TIME}`;
+                        endDateFormat = startDateFormat;
+                    });
 
-                    const startString: string = startDate.format(`${startDateFormat}, ${YEAR}`);
-                    const endString: string = endDate.format(`${endDateFormat}, ${YEAR}`);
+                    it('rangeLongDateTime', () => {
+                        const startDate: Moment = moment().dayOfYear(1);
+                        const endDate: Moment = moment(startDate).add(10, 'days');
 
-                    expect(adapter.rangeShortDate(startDate, endDate)).toBe(
-                        `${startString}${LONG_DASH}${endString}`
-                    );
+                        const startString: string = startDate.format(startDateFormat);
+                        const endString: string = endDate.format(endDateFormat);
+
+                        expect(adapter.rangeLongDateTime(startDate, endDate)).toBe(
+                            `From ${startString} to${NBSP}${endString}`
+                        );
+                    });
+
+                    it('rangeLongDateTime (same day)', () => {
+                        const startDate: Moment = moment().dayOfYear(1);
+                        const endDate: Moment = moment(startDate).add(10, 'minutes');
+
+                        const startString: string = startDate.format(`${DAY_MONTH}, [from]${NBSP}${TIME}`);
+                        const endString: string = endDate.format(`to${NBSP}${TIME}`);
+
+                        expect(adapter.rangeLongDateTime(startDate, endDate)).toBe(
+                            `${startString} ${endString}`
+                        );
+                    });
+
+                    it('rangeLongDateTime (same day, other year)', () => {
+                        const startDate: Moment = moment().subtract(1, 'years');
+                        const endDate: Moment = moment(startDate).add(10, 'minutes');
+
+                        const startString: string = startDate.format(`${DAY_MONTH}, ${YEAR}, [from]${NBSP}${TIME}`);
+                        const endString: string = endDate.format(`to${NBSP}${TIME}`);
+
+                        expect(adapter.rangeLongDateTime(startDate, endDate)).toBe(
+                            `${startString} ${endString}`
+                        );
+                    });
+
+                    it('rangeLongDateTime (other month)', () => {
+                        const startDate: Moment = moment().month(1);
+                        const endDate: Moment = moment(startDate).add(1, 'months');
+
+                        const startString: string = startDate.format(startDateFormat);
+                        const endString: string = endDate.format(endDateFormat);
+
+                        expect(adapter.rangeLongDateTime(startDate, endDate)).toBe(
+                            `From ${startString} to${NBSP}${endString}`
+                        );
+                    });
+
+                    it('rangeLongDateTime (startDate is other year)', () => {
+                        const startDate: Moment = moment().subtract(1, 'years');
+                        const endDate: Moment = moment();
+
+                        const startString: string = startDate.format(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
+                        const endString: string = endDate.format(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
+
+                        expect(adapter.rangeLongDateTime(startDate, endDate)).toBe(
+                            `From ${startString} to${NBSP}${endString}`
+                        );
+                    });
+
+                    it('rangeLongDateTime (endDate is other year)', () => {
+                        const startDate: Moment = moment().dayOfYear(1);
+                        const endDate: Moment = moment(startDate).add(1, 'years');
+
+                        const startString: string = startDate.format(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
+                        const endString: string = endDate.format(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
+
+                        expect(adapter.rangeLongDateTime(startDate, endDate)).toBe(
+                            `From ${startString} to${NBSP}${endString}`
+                        );
+                    });
                 });
 
-                it('rangeShortDate (endDate is other year)', () => {
-                    const startDate: Moment = moment();
-                    const endDate: Moment = moment(startDate).add(1, 'years');
+                describe('Range middle (rangeMiddleDateTime method)', () => {
+                    beforeEach(() => {
+                        startDateFormat = `${DAY_MONTH}, ${TIME}`;
+                        endDateFormat = startDateFormat;
+                    });
 
-                    const startString: string = startDate.format(`${startDateFormat}, ${YEAR}`);
-                    const endString: string = endDate.format(`${endDateFormat}, ${YEAR}`);
+                    it('rangeMiddleDateTime', () => {
+                        const startDate: Moment = moment().dayOfYear(1);
+                        const endDate: Moment = moment(startDate).add(10, 'days');
 
-                    expect(adapter.rangeShortDate(startDate, endDate)).toBe(
-                        `${startString}${LONG_DASH}${endString}`
-                    );
+                        const startString: string = startDate.format(startDateFormat);
+                        const endString: string = endDate.format(endDateFormat);
+
+                        expect(adapter.rangeMiddleDateTime(startDate, endDate)).toBe(
+                            `${startString}${LONG_DASH}${endString}`
+                        );
+                    });
+
+                    it('rangeMiddleDateTime (same day)', () => {
+                        const startDate: Moment = moment().dayOfYear(1);
+                        const endDate: Moment = moment(startDate).add(10, 'minutes');
+
+                        const startString: string = startDate.format(`${TIME}`);
+                        const endString: string = endDate.format(`${TIME}, ${DAY_MONTH}`);
+
+                        expect(adapter.rangeMiddleDateTime(startDate, endDate)).toBe(
+                            `${startString}${DASH}${endString}`
+                        );
+                    });
+
+                    it('rangeMiddleDateTime (same day, other year)', () => {
+                        const startDate: Moment = moment().subtract(1, 'years');
+                        const endDate: Moment = moment(startDate).add(10, 'minutes');
+
+                        const startString: string = startDate.format(`${TIME}`);
+                        const endString: string = endDate.format(`${TIME}, ${DAY_MONTH}, ${YEAR}`);
+
+                        expect(adapter.rangeMiddleDateTime(startDate, endDate)).toBe(
+                            `${startString}${DASH}${endString}`
+                        );
+                    });
+
+                    it('rangeMiddleDateTime (other month)', () => {
+                        const startDate: Moment = moment().month(1);
+                        const endDate: Moment = moment(startDate).add(1, 'months');
+
+                        const startString: string = startDate.format(startDateFormat);
+                        const endString: string = endDate.format(endDateFormat);
+
+                        expect(adapter.rangeMiddleDateTime(startDate, endDate)).toBe(
+                            `${startString}${LONG_DASH}${endString}`
+                        );
+                    });
+
+                    it('rangeMiddleDateTime (startDate is other year)', () => {
+                        const startDate = moment().subtract(1, 'years');
+                        const endDate = moment();
+
+                        const startString = startDate.format(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
+                        const endString = endDate.format(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
+
+                        expect(adapter.rangeMiddleDateTime(startDate, endDate)).toBe(
+                            `${startString}${LONG_DASH}${endString}`
+                        );
+                    });
+
+                    it('rangeMiddleDateTime (endDate is other year)', () => {
+                        const startDate = moment().dayOfYear(1);
+                        const endDate = moment(startDate).add(1, 'years');
+
+                        const startString = startDate.format(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
+                        const endString = endDate.format(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
+
+                        expect(adapter.rangeMiddleDateTime(startDate, endDate)).toBe(
+                            `${startString}${LONG_DASH}${endString}`
+                        );
+                    });
                 });
             });
 
-            describe('Range short (rangeShortDateTime method)', () => {
-                beforeEach(() => {
-                    startDateFormat = `${DAY_SHORT_MONTH}, ${TIME}`;
-                    endDateFormat = startDateFormat;
+            describe('opened range', () => {
+                describe('Range short (rangeShortDate method)', () => {
+                    beforeEach(() => {
+                        startDateFormat = DAY_SHORT_MONTH;
+                        endDateFormat = DAY_SHORT_MONTH;
+                    });
+
+                    it('throw Error', () => {
+                        const wrapper = () => adapter.rangeShortDate(null);
+                        expect(wrapper).toThrowError('Invalid date');
+                    });
+
+                    it('rangeShortDate (only startDate)', () => {
+                        const startDate = moment().dayOfYear(1);
+                        const startString = startDate.format(startDateFormat);
+
+                        expect(adapter.rangeShortDate(startDate)).toBe(`${FROM}${NBSP}${startString}`);
+                    });
+
+                    it('rangeShortDate (only endDate)', () => {
+                        const endDate = moment().dayOfYear(1);
+                        const endString = endDate.format(endDateFormat);
+
+                        expect(adapter.rangeShortDate(null, endDate)).toBe(`${UNTIL}${NBSP}${endString}`);
+                    });
+
+                    it('rangeShortDate (startDate is other year)', () => {
+                        const startDate = moment().subtract(1, 'years');
+                        const startString = startDate.format(`${startDateFormat} ${YEAR}`);
+
+                        expect(adapter.rangeShortDate(startDate)).toBe(`${FROM}${NBSP}${startString}`);
+                    });
+
+                    it('rangeShortDate (endDate is other year)', () => {
+                        const endDate = moment().add(1, 'years');
+                        const endString = endDate.format(`${endDateFormat} ${YEAR}`);
+
+                        expect(adapter.rangeShortDate(null, endDate)).toBe(`${UNTIL}${NBSP}${endString}`);
+                    });
                 });
 
-                it('rangeShortDateTime', () => {
-                    const startDate: Moment = moment().dayOfYear(1);
-                    const endDate: Moment = moment(startDate).add(10, 'days');
+                describe('Range short (rangeShortDateTime method)', () => {
+                    beforeEach(() => {
+                        startDateFormat = `${DAY_SHORT_MONTH}, ${TIME}`;
+                        endDateFormat = `${DAY_SHORT_MONTH}, ${TIME}`;
+                    });
 
-                    const startString: string = startDate.format(startDateFormat);
-                    const endString: string = endDate.format(endDateFormat);
+                    it('throw Error', () => {
+                        const wrapper = () => adapter.rangeShortDateTime(null);
+                        expect(wrapper).toThrowError('Invalid date');
+                    });
 
-                    expect(adapter.rangeShortDateTime(startDate, endDate)).toBe(
-                        `${startString}${LONG_DASH}${endString}`
-                    );
+                    it('rangeShortDateTime (only startDate)', () => {
+                        const startDate = moment().dayOfYear(1);
+                        const startString = startDate.format(startDateFormat);
+
+                        expect(adapter.rangeShortDateTime(startDate)).toBe(`${FROM}${NBSP}${startString}`);
+                    });
+
+                    it('rangeShortDateTime (only endDate)', () => {
+                        const endDate = moment().dayOfYear(1);
+                        const endString = endDate.format(endDateFormat);
+
+                        expect(adapter.rangeShortDateTime(null, endDate)).toBe(`${UNTIL}${NBSP}${endString}`);
+                    });
+
+                    it('rangeShortDateTime (startDate is other year)', () => {
+                        const startDate = moment().subtract(1, 'years');
+                        const startString = startDate.format(`${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
+
+                        expect(adapter.rangeShortDateTime(startDate)).toBe(`${FROM}${NBSP}${startString}`);
+                    });
+
+                    it('rangeShortDateTime (endDate is other year)', () => {
+                        const endDate = moment().add(1, 'years');
+                        const endString = endDate.format(`${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
+
+                        expect(adapter.rangeShortDateTime(null, endDate)).toBe(`${UNTIL}${NBSP}${endString}`);
+                    });
                 });
 
-                it('rangeShortDateTime (same day)', () => {
-                    const startDate: Moment = moment().dayOfYear(1);
-                    const endDate: Moment = moment(startDate).add(10, 'minutes');
+                describe('Range long (rangeLongDate method)', () => {
+                    beforeEach(() => {
+                        startDateFormat = `${DAY_MONTH}`;
+                        endDateFormat = `${DAY_MONTH}`;
+                    });
 
-                    const startString = startDate.format(`${TIME}`);
-                    const endString = endDate.format(`${TIME}, ${DAY_SHORT_MONTH}`);
+                    it('throw Error', () => {
+                        const wrapper = () => adapter.rangeLongDate(null);
+                        expect(wrapper).toThrowError('Invalid date');
+                    });
 
-                    expect(adapter.rangeShortDateTime(startDate, endDate)).toBe(
-                        `${startString}${DASH}${endString}`
-                    );
+                    it('rangeLongDate (only startDate)', () => {
+                        const startDate = moment().dayOfYear(1);
+                        const startString = startDate.format(startDateFormat);
+
+                        expect(adapter.rangeLongDate(startDate)).toBe(`${FROM}${NBSP}${startString}`);
+                    });
+
+                    it('rangeLongDate (only endDate)', () => {
+                        const endDate = moment().dayOfYear(1);
+                        const endString = endDate.format(endDateFormat);
+
+                        expect(adapter.rangeLongDate(null, endDate)).toBe(`${UNTIL}${NBSP}${endString}`);
+                    });
+
+                    it('rangeLongDate (startDate is other year)', () => {
+                        const startDate = moment().subtract(1, 'years');
+                        const startString = startDate.format(`${startDateFormat} ${YEAR}`);
+
+                        expect(adapter.rangeLongDate(startDate)).toBe(`${FROM}${NBSP}${startString}`);
+                    });
+
+                    it('rangeLongDate (endDate is other year)', () => {
+                        const endDate = moment().add(1, 'years');
+                        const endString = endDate.format(`${endDateFormat} ${YEAR}`);
+
+                        expect(adapter.rangeLongDate(null, endDate)).toBe(`${UNTIL}${NBSP}${endString}`);
+                    });
                 });
 
-                it('rangeShortDateTime (same day, other year)', () => {
-                    const startDate: Moment = moment().subtract(1, 'years');
-                    const endDate: Moment = moment(startDate).add(10, 'minutes');
+                describe('Range long (rangeLongDateTime method)', () => {
+                    beforeEach(() => {
+                        startDateFormat = `${DAY_MONTH}, ${TIME}`;
+                        endDateFormat = `${DAY_MONTH}, ${TIME}`;
+                    });
 
-                    const startString: string = startDate.format(`${TIME}`);
-                    const endString: string = endDate.format(`${TIME}, ${DAY_SHORT_MONTH}, ${YEAR}`);
+                    it('throw Error', () => {
+                        const wrapper = () => adapter.rangeLongDateTime(null);
+                        expect(wrapper).toThrowError('Invalid date');
+                    });
 
-                    expect(adapter.rangeShortDateTime(startDate, endDate)).toBe(
-                        `${startString}${DASH}${endString}`
-                    );
-                });
+                    it('rangeLongDateTime (only startDate)', () => {
+                        const startDate = moment().dayOfYear(1);
+                        const startString = startDate.format(startDateFormat);
 
-                it('rangeShortDateTime (other month)', () => {
-                    const startDate: Moment = moment().month(1);
-                    const endDate: Moment = moment(startDate).add(1, 'months');
+                        expect(adapter.rangeLongDateTime(startDate)).toBe(`${FROM}${NBSP}${startString}`);
+                    });
 
-                    const startString: string = startDate.format(startDateFormat);
-                    const endString: string = endDate.format(endDateFormat);
+                    it('rangeLongDateTime (only endDate)', () => {
+                        const endDate = moment().dayOfYear(1);
+                        const endString = endDate.format(endDateFormat);
 
-                    expect(adapter.rangeShortDateTime(startDate, endDate)).toBe(
-                        `${startString}${LONG_DASH}${endString}`
-                    );
-                });
+                        expect(adapter.rangeLongDateTime(null, endDate)).toBe(`${UNTIL}${NBSP}${endString}`);
+                    });
 
-                it('rangeShortDateTime (startDate is other year)', () => {
-                    const startDate: Moment = moment().subtract(1, 'years');
-                    const endDate: Moment = moment();
+                    it('rangeLongDateTime (startDate is other year)', () => {
+                        const startDate = moment().subtract(1, 'years');
+                        const startString = startDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
 
-                    const startString: string = startDate.format(`${DAY_SHORT_MONTH}, ${YEAR}, ${TIME}`);
-                    const endString: string = endDate.format(`${DAY_SHORT_MONTH}, ${YEAR}, ${TIME}`);
+                        expect(adapter.rangeLongDateTime(startDate)).toBe(`${FROM}${NBSP}${startString}`);
+                    });
 
-                    expect(adapter.rangeShortDateTime(startDate, endDate)).toBe(
-                        `${startString}${LONG_DASH}${endString}`
-                    );
-                });
+                    it('rangeLongDateTime (endDate is other year)', () => {
+                        const endDate = moment().add(1, 'years');
+                        const endString = endDate.format(`${DAY_MONTH} ${YEAR}, ${TIME}`);
 
-                it('rangeShortDateTime (endDate is other year)', () => {
-                    const startDate: Moment = moment();
-                    const endDate: Moment = moment(startDate).add(1, 'years');
-
-                    const startString: string = startDate.format(`${DAY_SHORT_MONTH}, ${YEAR}, ${TIME}`);
-                    const endString: string = endDate.format(`${DAY_SHORT_MONTH}, ${YEAR}, ${TIME}`);
-
-                    expect(adapter.rangeShortDateTime(startDate, endDate)).toBe(
-                        `${startString}${LONG_DASH}${endString}`
-                    );
-                });
-            });
-
-            describe('Range long (rangeLongDate method)', () => {
-                beforeEach(() => {
-                    startDateFormat = DAY_MONTH;
-                    endDateFormat = startDateFormat;
-                });
-
-                it('rangeLongDate', () => {
-                    const startDate: Moment = moment().dayOfYear(1);
-                    const endDate: Moment = moment(startDate).add(10, 'days');
-
-                    const startString: string = startDate.format(startDateFormat);
-                    const endString: string = endDate.format(DAY);
-
-                    expect(adapter.rangeLongDate(startDate, endDate)).toBe(
-                        `${startString}${DASH}${endString}`
-                    );
-                });
-
-                it('rangeLongDate (other month)', () => {
-                    const startDate: Moment = moment().month(1);
-                    const endDate: Moment = moment(startDate).add(1, 'months');
-
-                    const startString: string = startDate.format(startDateFormat);
-                    const endString: string = endDate.format(`${endDateFormat}`);
-
-                    expect(adapter.rangeLongDate(startDate, endDate)).toBe(
-                        `${startString}${LONG_DASH}${endString}`
-                    );
-                });
-
-                it('rangeLongDate (startDate is other year)', () => {
-                    const startDate: Moment = moment().subtract(1, 'years');
-                    const endDate: Moment = moment();
-
-                    const startString: string = startDate.format(`${startDateFormat}, ${YEAR}`);
-                    const endString: string = endDate.format(`${endDateFormat}, ${YEAR}`);
-
-                    expect(adapter.rangeLongDate(startDate, endDate)).toBe(
-                        `${startString}${LONG_DASH}${endString}`
-                    );
-                });
-
-                it('rangeLongDate (endDate is other year)', () => {
-                    const startDate: Moment = moment().dayOfYear(1);
-                    const endDate: Moment = moment(startDate).add(1, 'years');
-
-                    const startString: string = startDate.format(`${startDateFormat}, ${YEAR}`);
-                    const endString: string = endDate.format(`${endDateFormat}, ${YEAR}`);
-
-                    expect(adapter.rangeLongDate(startDate, endDate)).toBe(
-                        `${startString}${LONG_DASH}${endString}`
-                    );
-                });
-            });
-
-            describe('Range long (rangeLongDateTime method)', () => {
-                beforeEach(() => {
-                    startDateFormat = `${DAY_MONTH}, ${TIME}`;
-                    endDateFormat = startDateFormat;
-                });
-
-                it('rangeLongDateTime', () => {
-                    const startDate: Moment = moment().dayOfYear(1);
-                    const endDate: Moment = moment(startDate).add(10, 'days');
-
-                    const startString: string = startDate.format(startDateFormat);
-                    const endString: string = endDate.format(endDateFormat);
-
-                    expect(adapter.rangeLongDateTime(startDate, endDate)).toBe(
-                        `From ${startString} to${NBSP}${endString}`
-                    );
-                });
-
-                it('rangeLongDateTime (same day)', () => {
-                    const startDate: Moment = moment().dayOfYear(1);
-                    const endDate: Moment = moment(startDate).add(10, 'minutes');
-
-                    const startString: string = startDate.format(`${DAY_MONTH}, [from]${NBSP}${TIME}`);
-                    const endString: string = endDate.format(`to${NBSP}${TIME}`);
-
-                    expect(adapter.rangeLongDateTime(startDate, endDate)).toBe(
-                        `${startString} ${endString}`
-                    );
-                });
-
-                it('rangeLongDateTime (same day, other year)', () => {
-                    const startDate: Moment = moment().subtract(1, 'years');
-                    const endDate: Moment = moment(startDate).add(10, 'minutes');
-
-                    const startString: string = startDate.format(`${DAY_MONTH}, ${YEAR}, [from]${NBSP}${TIME}`);
-                    const endString: string = endDate.format(`to${NBSP}${TIME}`);
-
-                    expect(adapter.rangeLongDateTime(startDate, endDate)).toBe(
-                        `${startString} ${endString}`
-                    );
-                });
-
-                it('rangeLongDateTime (other month)', () => {
-                    const startDate: Moment = moment().month(1);
-                    const endDate: Moment = moment(startDate).add(1, 'months');
-
-                    const startString: string = startDate.format(startDateFormat);
-                    const endString: string = endDate.format(endDateFormat);
-
-                    expect(adapter.rangeLongDateTime(startDate, endDate)).toBe(
-                        `From ${startString} to${NBSP}${endString}`
-                    );
-                });
-
-                it('rangeLongDateTime (startDate is other year)', () => {
-                    const startDate: Moment = moment().subtract(1, 'years');
-                    const endDate: Moment = moment();
-
-                    const startString: string = startDate.format(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
-                    const endString: string = endDate.format(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
-
-                    expect(adapter.rangeLongDateTime(startDate, endDate)).toBe(
-                        `From ${startString} to${NBSP}${endString}`
-                    );
-                });
-
-                it('rangeLongDateTime (endDate is other year)', () => {
-                    const startDate: Moment = moment().dayOfYear(1);
-                    const endDate: Moment = moment(startDate).add(1, 'years');
-
-                    const startString: string = startDate.format(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
-                    const endString: string = endDate.format(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
-
-                    expect(adapter.rangeLongDateTime(startDate, endDate)).toBe(
-                        `From ${startString} to${NBSP}${endString}`
-                    );
-                });
-            });
-
-            describe('Range middle (rangeMiddleDateTime method)', () => {
-                beforeEach(() => {
-                    startDateFormat = `${DAY_MONTH}, ${TIME}`;
-                    endDateFormat = startDateFormat;
-                });
-
-                it('rangeMiddleDateTime', () => {
-                    const startDate: Moment = moment().dayOfYear(1);
-                    const endDate: Moment = moment(startDate).add(10, 'days');
-
-                    const startString: string = startDate.format(startDateFormat);
-                    const endString: string = endDate.format(endDateFormat);
-
-                    expect(adapter.rangeMiddleDateTime(startDate, endDate)).toBe(
-                        `${startString}${LONG_DASH}${endString}`
-                    );
-                });
-
-                it('rangeMiddleDateTime (same day)', () => {
-                    const startDate: Moment = moment().dayOfYear(1);
-                    const endDate: Moment = moment(startDate).add(10, 'minutes');
-
-                    const startString: string = startDate.format(`${TIME}`);
-                    const endString: string = endDate.format(`${TIME}, ${DAY_MONTH}`);
-
-                    expect(adapter.rangeMiddleDateTime(startDate, endDate)).toBe(
-                        `${startString}${DASH}${endString}`
-                    );
-                });
-
-                it('rangeMiddleDateTime (same day, other year)', () => {
-                    const startDate: Moment = moment().subtract(1, 'years');
-                    const endDate: Moment = moment(startDate).add(10, 'minutes');
-
-                    const startString: string = startDate.format(`${TIME}`);
-                    const endString: string = endDate.format(`${TIME}, ${DAY_MONTH}, ${YEAR}`);
-
-                    expect(adapter.rangeMiddleDateTime(startDate, endDate)).toBe(
-                        `${startString}${DASH}${endString}`
-                    );
-                });
-
-                it('rangeMiddleDateTime (other month)', () => {
-                    const startDate: Moment = moment().month(1);
-                    const endDate: Moment = moment(startDate).add(1, 'months');
-
-                    const startString: string = startDate.format(startDateFormat);
-                    const endString: string = endDate.format(endDateFormat);
-
-                    expect(adapter.rangeMiddleDateTime(startDate, endDate)).toBe(
-                        `${startString}${LONG_DASH}${endString}`
-                    );
-                });
-
-                it('rangeMiddleDateTime (startDate is other year)', () => {
-                    const startDate = moment().subtract(1, 'years');
-                    const endDate = moment();
-
-                    const startString = startDate.format(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
-                    const endString = endDate.format(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
-
-                    expect(adapter.rangeMiddleDateTime(startDate, endDate)).toBe(
-                        `${startString}${LONG_DASH}${endString}`
-                    );
-                });
-
-                it('rangeMiddleDateTime (endDate is other year)', () => {
-                    const startDate = moment().dayOfYear(1);
-                    const endDate = moment(startDate).add(1, 'years');
-
-                    const startString = startDate.format(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
-                    const endString = endDate.format(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
-
-                    expect(adapter.rangeMiddleDateTime(startDate, endDate)).toBe(
-                        `${startString}${LONG_DASH}${endString}`
-                    );
+                        expect(adapter.rangeLongDateTime(null, endDate)).toBe(`${UNTIL}${NBSP}${endString}`);
+                    });
                 });
             });
         });
