@@ -3,11 +3,10 @@
         class="mc-dropdown__panel"
         [ngClass]="classList"
         (keydown)="handleKeydown($event)"
-        (click)="closed.emit('click')"
+        (click)="handleClick()"
         [@transformDropdown]="panelAnimationState"
         (@transformDropdown.start)="onAnimationStart($event)"
         (@transformDropdown.done)="onAnimationDone($event)"
-        tabindex="-1"
         role="dropdown">
         <div class="mc-dropdown__content">
             <ng-content></ng-content>
