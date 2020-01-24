@@ -6,8 +6,6 @@ import { prompt } from 'inquirer';
 import { join } from 'path';
 import { Readable } from 'stream';
 
-import { releasePackages } from './release-output/release-packages';
-
 
 // These imports lack type definitions.
 // tslint:disable:no-var-requires
@@ -57,6 +55,7 @@ export async function promptAndGenerateChangelog(changelogPath: string) {
  */
 export async function prependChangelogFromLatestTag(changelogPath: string, releaseName: string) {
     const angularPresetWriterOptions = await require('conventional-changelog-angular/writer-opts');
+
     const outputStream: Readable = conventionalChangelog(
         /* core options */ {preset: 'angular'},
         /* context options */ {title: releaseName},
@@ -146,6 +145,7 @@ function createChangelogWriterOptions(changelogPath: string, presetWriterOptions
                     }
 
                     const packageName = commit.package || 'mosaic';
+
                     // tslint:disable-next-line:no-reserved-keywords
                     const type = getTypeOfCommitGroupDescription(group.title);
 
@@ -179,7 +179,8 @@ function createChangelogWriterOptions(changelogPath: string, presetWriterOptions
                 const packageGroup = packageGroups[pkgName];
 
                 return {
-                    title: pkgName,
+                    // @ts-ignore
+                    title: pkgName.capitalize(),
                     commits: packageGroup.commits.sort(commitSortFunction),
                     breakingChanges: packageGroup.breakingChanges,
                     deprecations: packageGroup.deprecations
@@ -229,6 +230,11 @@ function getTypeOfCommitGroupDescription(description: string): string {
 
     return description.toLowerCase();
 }
+
+// @ts-ignore
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+};
 
 /** Entry-point for generating the changelog when called through the CLI. */
 if (require.main === module) {
