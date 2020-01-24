@@ -1,3 +1,25 @@
+## 8.3.1 "Yummiest Pie" (2020-01-24)
+
+### Mosaic
+
+
+ * bug fix  **modal:** for apply changes need run changeDetection (#UIM-348) ([#394](https://github.com/positive-js/mosaic/issues/394)) ([8edd198fe1d8d55a4c373c31839d29f363d35489](https://github.com/positive-js/mosaic/commit/8edd198fe1d8d55a4c373c31839d29f363d35489)), closes [#UIM-348](https://github.com/positive-js/mosaic/issues/UIM-348)
+ * bug fix  **select, tree-select:** "one more" label will hide if open select (#UIM-352) ([#393](https://github.com/positive-js/mosaic/issues/393)) ([6724cc4ed8e3d848baec357dee0dc7007641f1be](https://github.com/positive-js/mosaic/commit/6724cc4ed8e3d848baec357dee0dc7007641f1be)), closes [#UIM-352](https://github.com/positive-js/mosaic/issues/UIM-352)
+ * bug fix  **validation:** validation does not work after build with optimization=true (#UIM-349) ([#391](https://github.com/positive-js/mosaic/issues/391)) ([28aa649b2ca68ddab617922604c31921ee641892](https://github.com/positive-js/mosaic/commit/28aa649b2ca68ddab617922604c31921ee641892)), closes [#UIM-349](https://github.com/positive-js/mosaic/issues/UIM-349)
+ * bug fix  **visual:** layout-row and layout-column are not have min-width and min-height (#UIM-355) ([#392](https://github.com/positive-js/mosaic/issues/392)) ([fa5a4d8be4492cc942b3d4196b326129f0b023d6](https://github.com/positive-js/mosaic/commit/fa5a4d8be4492cc942b3d4196b326129f0b023d6)), closes [#UIM-355](https://github.com/positive-js/mosaic/issues/UIM-355)
+
+### Formater
+
+
+* bug fix  **formatter:** date-adapter does not have methods for open range (#UIM-163) ([#395](https://github.com/positive-js/mosaic/issues/395)) ([c385849f7391c05acf89704ceab28dab0b5972f6](https://github.com/positive-js/mosaic/commit/c385849f7391c05acf89704ceab28dab0b5972f6)), closes [#UIM-163](https://github.com/positive-js/mosaic/issues/UIM-163)
+
+### Docs
+
+
+ * bug fix  **docs:** fix bold button text ([#388](https://github.com/positive-js/mosaic/issues/388)) ([04921ce3a7fa2d50cc5500f4d827049b43c2bbeb](https://github.com/positive-js/mosaic/commit/04921ce3a7fa2d50cc5500f4d827049b43c2bbeb))
+ * feature  **docs:** adding timepicker range example ([#390](https://github.com/positive-js/mosaic/issues/390)) ([f90b82aff4cdcbb9ac4b561f97d5a828ae9be1cd](https://github.com/positive-js/mosaic/commit/f90b82aff4cdcbb9ac4b561f97d5a828ae9be1cd))
+ * feature  **docs:** adding typography example ([#386](https://github.com/positive-js/mosaic/issues/386)) ([081bb22d22da8bc57ee4b681afabecf3f635830e](https://github.com/positive-js/mosaic/commit/081bb22d22da8bc57ee4b681afabecf3f635830e))
+
 # 8.3.0 "Unquestionable Disturbing" (2020-01-15)
 
 ### Mosaic
