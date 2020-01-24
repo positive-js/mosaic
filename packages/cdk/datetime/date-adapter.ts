@@ -326,6 +326,22 @@ export abstract class DateAdapter<D> {
     abstract absoluteLongDate(date: Moment): string;
 
     /**
+     * @param startDate - start date
+     * @param endDate - end date
+     * @param template - template
+     * @returns opened date
+     */
+    abstract openedRangeDate(startDate: Moment, endDate: Moment, template: IFormatterRangeTemplate): string;
+
+    /**
+     * @param startDate - start date
+     * @param endDate - end date
+     * @param template - template
+     * @returns opened date
+     */
+    abstract openedRangeDateTime(startDate: Moment, endDate: Moment, template: IFormatterRangeTemplate): string;
+
+    /**
      * @param date - date
      * @returns absolute date in long format with time
      */
