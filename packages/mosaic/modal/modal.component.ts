@@ -41,7 +41,6 @@ type AnimationState = 'enter' | 'leave' | null;
     selector: 'mc-modal',
     templateUrl: './modal.component.html',
     styleUrls: ['./modal.css'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {
         '(keydown)': 'onKeyDown($event)'
@@ -120,7 +119,7 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     @Input() @Output() mcOnCancel: EventEmitter<T> | OnClickCallback<T> = new EventEmitter<T>();
 
     @ViewChild('modalContainer', { static: true }) modalContainer: ElementRef;
-    @ViewChild('bodyContainer', { read: ViewContainerRef, static: false}) bodyContainer: ViewContainerRef;
+    @ViewChild('bodyContainer', { read: ViewContainerRef, static: false }) bodyContainer: ViewContainerRef;
     // Only aim to focus the ok button that needs to be auto focused
     @ViewChildren('autoFocusedButton', { read: ElementRef }) autoFocusedButtons: QueryList<ElementRef>;
 
@@ -168,7 +167,6 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
         private changeDetector: ChangeDetectorRef,
         @Inject(DOCUMENT) private document: any
     ) {
-
         super();
     }
 
