@@ -391,12 +391,71 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
         return this.absoluteDate(date, this.formatterConfig.absoluteTemplates.long, true);
     }
 
+    openedRangeDate(startDate: Moment | null, endDate: Moment | null, template: IFormatterRangeTemplate) {
+        if (!moment.isMoment(startDate) && !moment.isMoment(endDate)) {
+            throw new Error(this.invalidDateErrorText);
+        }
+
+        const variables = { ...this.formatterConfig.variables, ...template.variables };
+        let params = {};
+
+        if (startDate) {
+            const startDateVariables = this.compileVariables(startDate, variables);
+
+            params = {
+                ...variables,
+                START_DATE: this.messageformat.compile(template.START_DATE)(startDateVariables),
+                RANGE_TYPE: 'onlyStart'
+            };
+        } else if (endDate) {
+            const endDateVariables = this.compileVariables(endDate, variables);
+
+            params = {
+                ...variables,
+                END_DATE: this.messageformat.compile(template.END_DATE)(endDateVariables),
+                RANGE_TYPE: 'onlyEnd'
+            };
+        }
+
+        return this.messageformat.compile(template.DATE)(params);
+    }
+
+    openedRangeDateTime(startDate: Moment | null, endDate: Moment | null, template: IFormatterRangeTemplate) {
+        console.log('openedRangeDateTime: '); // tslint:disable-line:no-console
+        if (!moment.isMoment(startDate) && !moment.isMoment(endDate)) {
+            throw new Error(this.invalidDateErrorText);
+        }
+
+        const variables = { ...this.formatterConfig.variables, ...template.variables };
+        let params = {};
+
+        if (startDate) {
+            const startDateVariables = this.compileVariables(startDate, variables);
+
+            params = {
+                ...variables,
+                START_DATETIME: this.messageformat.compile(template.START_DATETIME)(startDateVariables),
+                RANGE_TYPE: 'onlyStart'
+            };
+        } else if (endDate) {
+            const endDateVariables = this.compileVariables(endDate, variables);
+
+            params = {
+                ...variables,
+                END_DATETIME: this.messageformat.compile(template.END_DATETIME)(endDateVariables),
+                RANGE_TYPE: 'onlyEnd'
+            };
+        }
+
+        return this.messageformat.compile(template.DATETIME)(params);
+    }
+
     rangeDate(startDate: Moment, endDate: Moment, template: IFormatterRangeTemplate): string {
         if (!this.isDateInstance(startDate) || !this.isDateInstance(endDate)) {
             throw new Error(this.invalidDateErrorText);
         }
 
-        const variables = {...this.formatterConfig.variables, ...template.variables};
+        const variables = { ...this.formatterConfig.variables, ...template.variables };
         const sameMonth = this.isSame('month', startDate, endDate);
 
         const startDateVariables = this.compileVariables(startDate, variables);
@@ -411,10 +470,12 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
         startDateVariables.CURRENT_YEAR = bothCurrentYear ? 'yes' : 'no';
         endDateVariables.CURRENT_YEAR = bothCurrentYear ? 'yes' : 'no';
 
-        const params = {...variables,
+        const params = {
+            ...variables,
             START_DATE: this.messageformat.compile(template.START_DATE)(startDateVariables),
             END_DATE: this.messageformat.compile(template.END_DATE)(endDateVariables),
-            SAME_MONTH: sameMonth};
+            SAME_MONTH: sameMonth
+        };
 
         return this.messageformat.compile(template.DATE)(params);
     }
@@ -451,24 +512,48 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
         return this.messageformat.compile(template.DATETIME)(params);
     }
 
-    rangeShortDate(startDate: Moment, endDate: Moment): string {
-        return this.rangeDate(startDate, endDate, this.formatterConfig.rangeTemplates.short);
+    rangeShortDate(startDate: Moment | null, endDate?: Moment): string {
+        const rangeTemplates = this.formatterConfig.rangeTemplates;
+
+        if (startDate && endDate) {
+            return this.rangeDate(startDate, endDate, rangeTemplates.closedRange.short);
+        }
+
+        return this.openedRangeDate(startDate, endDate || null, rangeTemplates.openedRange.short);
     }
 
-    rangeShortDateTime(startDate: Moment, endDate: Moment): string {
-        return this.rangeDateTime(startDate, endDate, this.formatterConfig.rangeTemplates.short);
+    rangeShortDateTime(startDate: Moment | null, endDate?: Moment): string {
+        const rangeTemplates = this.formatterConfig.rangeTemplates;
+
+        if (startDate && endDate) {
+            return this.rangeDateTime(startDate, endDate, rangeTemplates.closedRange.short);
+        }
+
+        return this.openedRangeDateTime(startDate, endDate || null, rangeTemplates.openedRange.short);
     }
 
-    rangeLongDate(startDate: Moment, endDate: Moment): string {
-        return this.rangeDate(startDate, endDate, this.formatterConfig.rangeTemplates.long);
+    rangeLongDate(startDate: Moment | null, endDate?: Moment): string {
+        const rangeTemplates = this.formatterConfig.rangeTemplates;
+
+        if (startDate && endDate) {
+            return this.rangeDate(startDate, endDate, rangeTemplates.closedRange.long);
+        }
+
+        return this.openedRangeDate(startDate, endDate || null, rangeTemplates.openedRange.long);
     }
 
-    rangeLongDateTime(startDate: Moment, endDate: Moment): string {
-        return this.rangeDateTime(startDate, endDate, this.formatterConfig.rangeTemplates.long);
+    rangeLongDateTime(startDate: Moment | null, endDate?: Moment): string {
+        const rangeTemplates = this.formatterConfig.rangeTemplates;
+
+        if (startDate && endDate) {
+            return this.rangeDateTime(startDate, endDate, rangeTemplates.closedRange.long);
+        }
+
+        return this.openedRangeDateTime(startDate, endDate || null, rangeTemplates.openedRange.long);
     }
 
     rangeMiddleDateTime(startDate: Moment, endDate: Moment): string {
-        return this.rangeDateTime(startDate, endDate, this.formatterConfig.rangeTemplates.middle);
+        return this.rangeDateTime(startDate, endDate, this.formatterConfig.rangeTemplates.closedRange.middle);
     }
 
     /** Creates a Moment instance while respecting the current UTC settings. */
