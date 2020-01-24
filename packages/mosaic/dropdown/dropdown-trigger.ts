@@ -89,9 +89,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
     }
 
     set dropdown(dropdown: McDropdownPanel) {
-        if (dropdown === this._dropdown) {
-            return;
-        }
+        if (dropdown === this._dropdown) { return; }
 
         this._dropdown = dropdown;
         this.closeSubscription.unsubscribe();
@@ -186,9 +184,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
 
     /** Opens the dropdown. */
     open(): void {
-        if (this._opened) {
-            return;
-        }
+        if (this._opened) { return; }
 
         this.check();
 
@@ -425,7 +421,6 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
      * @param positionStrategy Strategy whose position to update.
      */
     private setPosition(positionStrategy: FlexibleConnectedPositionStrategy) {
-
         let [originX, originFallbackX, overlayX, overlayFallbackX]: HorizontalConnectionPos[] =
             this.dropdown.xPosition === 'before' ?
                 ['end', 'start', 'end', 'start'] :
@@ -458,8 +453,8 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
         }
 
         positionStrategy.withPositions([
-            {originX, originY, overlayX, overlayY, offsetY},
-            {originX: originFallbackX, originY, overlayX: overlayFallbackX, overlayY, offsetY},
+            { originX, originY, overlayX, overlayY, offsetY },
+            { originX: originFallbackX, originY, overlayX: overlayFallbackX, overlayY, offsetY },
             {
                 originX,
                 originY: originFallbackY,

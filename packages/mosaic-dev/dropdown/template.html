@@ -18,7 +18,7 @@
     <br>
 
     <mc-dropdown #appDropdown="mcDropdown">
-        <button mc-dropdown-item class="mc-selected">
+        <button mc-dropdown-item>
             Point 1
             <div class="mc-dropdown__item-caption">Some info</div>
         </button>
@@ -27,7 +27,7 @@
             Very Long Point
         </button>
         <h5>Additional info</h5>
-        <button mc-dropdown-item disabled>Disabled</button>
+        <button mc-dropdown-item [disabled]="true">Disabled</button>
         <button mc-dropdown-item>Point 2</button>
         <a href="https://google.com" class="mc-link mc-link_underlined" mc-dropdown-item>
             <i mc-icon class="mc-link__icon mc-icons mc-search_16"></i>
