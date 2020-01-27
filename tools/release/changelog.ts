@@ -67,7 +67,6 @@ export async function prependChangelogFromLatestTag(changelogPath: string, relea
             headerCorrespondence: ['type', 'package', 'scope', 'subject']
         },
         /* writer options */ createChangelogWriterOptions(changelogPath, angularPresetWriterOptions));
-        /// * writer options */ createDedupeWriterOptions(changelogPath));
 
     // Stream for reading the existing changelog. This is necessary because we want to
     // actually prepend the new changelog to the existing one.
