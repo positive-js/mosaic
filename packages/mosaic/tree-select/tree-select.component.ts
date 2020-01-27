@@ -487,7 +487,10 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
 
         this.options = this.tree.renderedOptions;
         this.tree.autoSelect = this.autoSelect;
-        this.tree.multipleMode = this.multiple ? MultipleMode.CHECKBOX : null;
+
+        if (this.tree.multipleMode === null) {
+            this.tree.multipleMode = this.multiple ? MultipleMode.CHECKBOX : null;
+        }
 
         if (this.multiple) {
             this.tree.noUnselectLast = false;

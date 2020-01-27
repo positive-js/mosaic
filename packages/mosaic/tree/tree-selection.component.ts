@@ -105,7 +105,7 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
 
     @Output() readonly selectionChange = new EventEmitter<McTreeSelectionChange<T>>();
 
-    multipleMode: MultipleMode | null;
+    multipleMode: MultipleMode | null = null;
 
     userTabIndex: number | null = null;
 
@@ -539,6 +539,10 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
         this.optionFocusSubscription = this.optionFocusChanges
             .subscribe((event) => {
                 const index: number = this.renderedOptions.toArray().indexOf(event.option as T);
+
+                this.renderedOptions
+                    .filter((option) => option.hasFocus)
+                    .forEach((option) => option.hasFocus = false);
 
                 if (this.isValidIndex(index)) {
                     this.keyManager.updateActiveItem(index);
