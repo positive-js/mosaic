@@ -6,8 +6,6 @@ import { prompt } from 'inquirer';
 import { join } from 'path';
 import { Readable } from 'stream';
 
-import { releasePackages } from './release-output/release-packages';
-
 
 // These imports lack type definitions.
 // tslint:disable:no-var-requires
@@ -15,20 +13,32 @@ const conventionalChangelog = require('conventional-changelog');
 const changelogCompare = require('conventional-changelog-writer/lib/util');
 const merge2 = require('merge2');
 
+/**
+ * Maps a commit note to a string that will be used to match notes of the
+ * given type in commit messages.
+ */
+const enum CommitNote {
+    Deprecation = 'DEPRECATED',
+    BreakingChange = 'BREAKING CHANGE'
+}
+
 /** Interface that describes a package in the changelog. */
 interface ChangelogPackage {
     commits: any[];
     breakingChanges: any[];
+    deprecations: any[];
 }
 
 /** Hardcoded order of packages shown in the changelog. */
-const changelogPackageOrder = [
+const orderedChangelogPackages = [
     'cdk',
     'mosaic',
-    'mosaic-moment-adapter'
+    'mosaic-moment-adapter',
+    'docs'
 ];
 
-const excludedChangelogPackages = [];
+/** List of packages which are excluded in the changelog. */
+const excludedChangelogPackages: string[] = [];
 
 
 /** Prompts for a changelog release name and prepends the new changelog. */
@@ -44,6 +54,8 @@ export async function promptAndGenerateChangelog(changelogPath: string) {
  * @param releaseName Name of the release that should show up in the changelog.
  */
 export async function prependChangelogFromLatestTag(changelogPath: string, releaseName: string) {
+    const angularPresetWriterOptions = await require('conventional-changelog-angular/writer-opts');
+
     const outputStream: Readable = conventionalChangelog(
         /* core options */ {preset: 'angular'},
         /* context options */ {title: releaseName},
@@ -54,7 +66,7 @@ export async function prependChangelogFromLatestTag(changelogPath: string, relea
             headerPattern: /^(\w*)(?:\((?:([^/]+)\/)?(.*)\))?: (.*)$/,
             headerCorrespondence: ['type', 'package', 'scope', 'subject']
         },
-        /* writer options */ createDedupeWriterOptions(changelogPath));
+        /* writer options */ createChangelogWriterOptions(changelogPath, angularPresetWriterOptions));
 
     // Stream for reading the existing changelog. This is necessary because we want to
     // actually prepend the new changelog to the existing one.
@@ -87,18 +99,10 @@ export async function promptChangelogReleaseName(): Promise<string> {
     })).releaseName;
 }
 
-/**
- * Creates changelog writer options which ensure that commits are not showing up multiple times.
- * Commits can show up multiple times if a changelog has been generated on a publish branch
- * and has been cherry-picked into "master". In that case, the changelog will already contain
- * commits from master which might be added to the changelog again. This is because usually
- * patch and minor releases are tagged from the publish branches and therefore
- * conventional-changelog tries to build the changelog from last major version to master's
- * HEAD when a new major version is being published from the "master" branch.
- */
-function createDedupeWriterOptions(changelogPath: string) {
+function createChangelogWriterOptions(changelogPath: string, presetWriterOptions: any) {
     const existingChangelogContent = readFileSync(changelogPath, 'utf8');
     const commitSortFunction = changelogCompare.functionify(['type', 'scope', 'subject']);
+    const allPackages = [...orderedChangelogPackages, ...excludedChangelogPackages];
 
     return {
         // Overwrite the changelog templates so that we can render the commits grouped
@@ -106,6 +110,16 @@ function createDedupeWriterOptions(changelogPath: string) {
         // angular preset: "conventional-changelog-angular/templates".
         mainTemplate: readFileSync(join(__dirname, 'changelog-root-template.hbs'), 'utf8'),
         commitPartial: readFileSync(join(__dirname, 'changelog-commit-template.hbs'), 'utf8'),
+
+        // Overwrites the conventional-changelog-angular preset transform function. This is necessary
+        // because the Angular preset changes every commit note to a breaking change note. Since we
+        // have a custom note type for deprecations, we need to keep track of the original type.
+        transform: (commit, context) => {
+            commit.notes.forEach((n) => n.type = n.title);
+
+            return presetWriterOptions.transform(commit, context);
+        },
+
         // Specify a writer option that can be used to modify the content of a new changelog section.
         // See: conventional-changelog/tree/master/packages/conventional-changelog-writer
         finalizeContext: (context: any) => {
@@ -121,37 +135,42 @@ function createDedupeWriterOptions(changelogPath: string) {
                         return false;
                     }
 
-                    // Commits which just specify a scope that refers to a package but do not follow
-                    // the commit format that is parsed by the conventional-changelog-parser, can be
-                    // still resolved to their package from the scope. This handles the case where
-                    // a commit targets the whole package and does not specify a specific scope.
-                    // e.g. "refactor(scope): support strictness flags".
                     if (!commit.package && commit.scope) {
-                        const matchingPackage = releasePackages.find((pkgName) => pkgName === commit.scope);
+                        const matchingPackage = allPackages.find((pkgName) => pkgName === commit.scope);
                         if (matchingPackage) {
                             commit.scope = null;
                             commit.package = matchingPackage;
                         }
                     }
 
-                    // TODO: once we formalize the commit message format
-                    const packageName = commit.package || 'Mosaic';
+                    const packageName = commit.package || 'mosaic';
+
                     // tslint:disable-next-line:no-reserved-keywords
                     const type = getTypeOfCommitGroupDescription(group.title);
 
                     if (!packageGroups[packageName]) {
-                        packageGroups[packageName] = {commits: [], breakingChanges: []};
+                        packageGroups[packageName] = {commits: [], breakingChanges: [], deprecations: []};
                     }
                     const packageGroup = packageGroups[packageName];
 
-                    packageGroup.breakingChanges.push(...commit.notes);
+                    // Collect all notes of the commit. Either breaking change or deprecation notes.
+                    commit.notes.forEach((n) => {
+                        if (n.type === CommitNote.Deprecation) {
+                            packageGroup.deprecations.push(n);
+                        } else if (n.type === CommitNote.BreakingChange) {
+                            packageGroup.breakingChanges.push(n);
+                        } else {
+                            // tslint:disable-next-line:no-magic-numbers
+                            throw Error(`Found commit note that is not known: ${JSON.stringify(n, null, 4)}`);
+                        }
+                    });
+
                     packageGroup.commits.push({...commit, type});
                 });
             });
 
             const sortedPackageGroupNames =
                 Object.keys(packageGroups)
-                    // @ts-ignore
                     .filter((pkgName) => !excludedChangelogPackages.includes(pkgName))
                     .sort(preferredOrderComparator);
 
@@ -159,9 +178,11 @@ function createDedupeWriterOptions(changelogPath: string) {
                 const packageGroup = packageGroups[pkgName];
 
                 return {
-                    title: pkgName,
+                    // @ts-ignore
+                    title: pkgName.capitalize(),
                     commits: packageGroup.commits.sort(commitSortFunction),
-                    breakingChanges: packageGroup.breakingChanges
+                    breakingChanges: packageGroup.breakingChanges,
+                    deprecations: packageGroup.deprecations
                 };
             });
 
@@ -176,8 +197,8 @@ function createDedupeWriterOptions(changelogPath: string) {
  * sorted in alphabetical order after the hardcoded entries.
  */
 function preferredOrderComparator(a: string, b: string): number {
-    const aIndex = changelogPackageOrder.indexOf(a);
-    const bIndex = changelogPackageOrder.indexOf(b);
+    const aIndex = orderedChangelogPackages.indexOf(a);
+    const bIndex = orderedChangelogPackages.indexOf(b);
 
     // If a package name could not be found in the hardcoded order, it should be
     // sorted after the hardcoded entries in alphabetical order.
@@ -208,6 +229,11 @@ function getTypeOfCommitGroupDescription(description: string): string {
 
     return description.toLowerCase();
 }
+
+// @ts-ignore
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+};
 
 /** Entry-point for generating the changelog when called through the CLI. */
 if (require.main === module) {
