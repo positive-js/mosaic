@@ -32,8 +32,7 @@ export class McDropdownContent implements OnDestroy {
         private _appRef: ApplicationRef,
         private _injector: Injector,
         private _viewContainerRef: ViewContainerRef,
-        @Inject(DOCUMENT) private _document: Document
-    ) {}
+        @Inject(DOCUMENT) private _document: any) {}
 
     /**
      * Attaches the content with a particular context.
@@ -47,12 +46,8 @@ export class McDropdownContent implements OnDestroy {
         this.detach();
 
         if (!this.outlet) {
-            this.outlet = new DomPortalOutlet(
-                this._document.createElement('div'),
-                this._componentFactoryResolver,
-                this._appRef,
-                this._injector
-            );
+            this.outlet = new DomPortalOutlet(this._document.createElement('div'),
+                this._componentFactoryResolver, this._appRef, this._injector);
         }
 
         const element: HTMLElement = this._template.elementRef.nativeElement;

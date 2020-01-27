@@ -77,11 +77,11 @@ export function MC_DROPDOWN_DEFAULT_OPTIONS_FACTORY(): McDropdownDefaultOptions 
 
 @Component({
     selector: 'mc-dropdown',
-    exportAs: 'mcDropdown',
     templateUrl: 'dropdown.html',
     styleUrls: ['dropdown.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
+    exportAs: 'mcDropdown',
     animations: [
         mcDropdownAnimations.transformDropdown,
         mcDropdownAnimations.fadeInItems
@@ -264,7 +264,7 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
     /** Handle a keyboard event from the dropdown, delegating to the appropriate action. */
     handleKeydown(event: KeyboardEvent) {
         // tslint:disable-next-line:deprecation
-        const keyCode = event.keyCode;
+        const keyCode = event.key || event.keyCode;
 
         switch (keyCode) {
             case ESCAPE:
@@ -287,10 +287,6 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
 
                 this.keyManager.onKeydown(event);
         }
-    }
-
-    handleClick() {
-        this.closed.emit('click');
     }
 
     /**
