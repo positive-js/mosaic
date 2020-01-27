@@ -33,12 +33,11 @@ export const McDropdownItemMixinBase: CanDisableCtor & typeof McDropdownItemBase
     exportAs: 'mcDropdownItem',
     inputs: ['disabled'],
     host: {
-        '[attr.role]': 'role',
         class: 'mc-dropdown__item',
         '[class.mc-dropdown__item_highlighted]': 'highlighted',
+        '[attr.role]': 'role',
         '[attr.tabindex]': 'getTabIndex()',
-        '[attr.aria-disabled]': 'disabled.toString()',
-        '[attr.disabled]': 'disabled || null',
+        '[class.mc-disabled]': 'disabled',
         '(click)': 'checkDisabled($event)',
         '(mouseenter)': 'handleMouseEnter()'
     },
@@ -51,13 +50,12 @@ export const McDropdownItemMixinBase: CanDisableCtor & typeof McDropdownItemBase
         <i *ngIf="triggersNestedDropdown" mc-icon="mc-angle-right-M_16" class="mc-dropdown__trigger"></i>
     `
 })
-export class McDropdownItem extends McDropdownItemMixinBase
-    implements IFocusableOption, CanDisable, OnDestroy {
+export class McDropdownItem extends McDropdownItemMixinBase implements IFocusableOption, CanDisable, OnDestroy {
 
     /** ARIA role for the dropdown item. */
     @Input() role: 'menuitem' | 'menuitemradio' | 'menuitemcheckbox' = 'menuitem';
 
-    @ViewChild('content', {static: false}) content;
+    @ViewChild('content', { static: false }) content;
 
     /** Stream that emits when the dropdown item is hovered. */
     readonly hovered: Subject<McDropdownItem> = new Subject<McDropdownItem>();
@@ -68,13 +66,12 @@ export class McDropdownItem extends McDropdownItemMixinBase
     /** Whether the dropdown item acts as a trigger for a nested dropdown. */
     triggersNestedDropdown: boolean = false;
 
-    private document: Document;
-
     constructor(
         private _elementRef: ElementRef<HTMLElement>,
-        @Inject(DOCUMENT) document: any,
         private _focusMonitor: FocusMonitor,
-        @Inject(MC_DROPDOWN_PANEL) @Optional() private _parentDropdownPanel?: McDropdownPanel<McDropdownItem>) {
+        @Inject(DOCUMENT) private document: any,
+        @Optional() @Inject(MC_DROPDOWN_PANEL) private _parentDropdownPanel?: McDropdownPanel<McDropdownItem>
+    ) {
         super();
 
         if (_focusMonitor) {
@@ -87,8 +84,6 @@ export class McDropdownItem extends McDropdownItemMixinBase
         if (_parentDropdownPanel && _parentDropdownPanel.addItem) {
             _parentDropdownPanel.addItem(this);
         }
-
-        this.document = document;
     }
 
     /** Focuses the dropdown item. */
@@ -123,7 +118,7 @@ export class McDropdownItem extends McDropdownItemMixinBase
     }
 
     /** Prevents the default element actions if it is disabled. */
-    checkDisabled(event: Event): void {
+    checkDisabled(event: MouseEvent): void {
         if (this.disabled) {
             event.preventDefault();
             event.stopPropagation();

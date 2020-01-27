@@ -17,7 +17,7 @@ $mc-dropdown-panel-border-radius: 3px !default;
     text-align: left;
     white-space: nowrap;
 
-    &:not([disabled]) {
+    &:not([disabled]):not(.mc-disabled){
         cursor: pointer;
     }
 
