@@ -338,26 +338,28 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
     }
 
     setSelectedOption(option: T, $event?: KeyboardEvent): void {
+        console.log('setSelectedOption: '); // tslint:disable-line:no-console
         const withShift = $event ? hasModifierKey($event, 'shiftKey') : false;
         const withCtrl = $event ? hasModifierKey($event, 'ctrlKey') : false;
 
         if (this.multiple) {
             if (withShift) {
-                const previousIndex = this.keyManager.previousActiveItemIndex;
-                const activeIndex = this.keyManager.activeItemIndex;
-                const activeOption = this.renderedOptions.toArray()[activeIndex];
+                const renderedOptions: T[] = this.renderedOptions.toArray();
+
+                let previousIndex = this.keyManager.previousActiveItemIndex;
+                let activeIndex = this.keyManager.activeItemIndex;
+                const activeOption = renderedOptions[activeIndex];
+
+                if (previousIndex > activeIndex) {
+                    [previousIndex, activeIndex] = [activeIndex, previousIndex];
+                }
 
                 const targetSelected = !activeOption.selected;
 
-                if (previousIndex < activeIndex) {
-                    this.renderedOptions.forEach((item, index) => {
-                        if (index >= previousIndex && index <= activeIndex) { item.setSelected(targetSelected); }
-                    });
-                } else {
-                    this.renderedOptions.forEach((item, index) => {
-                        if (index >= activeIndex && index <= previousIndex) { item.setSelected(targetSelected); }
-                    });
-                }
+                renderedOptions.slice(previousIndex, activeIndex + 1)
+                    .filter((item) => !item.disabled)
+                    .forEach((item) => item.setSelected(targetSelected));
+
             } else if (withCtrl) {
                 if (!this.canDeselectLast(option)) { return; }
 
