@@ -28,6 +28,7 @@ module.exports = {
                 'link',
                 'list',
                 'modal',
+                'mosaic-moment-adapter',
                 'navbar',
                 'optgroup',
                 'panel',
