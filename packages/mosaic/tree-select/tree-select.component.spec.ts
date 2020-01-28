@@ -4345,6 +4345,7 @@ describe('McTreeSelect', () => {
         it('should be able to select multiple values', fakeAsync(() => {
             trigger.click();
             fixture.detectChanges();
+            flush();
 
             const options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-tree-option');
 
@@ -4438,6 +4439,7 @@ describe('McTreeSelect', () => {
         it('should not close the panel when clicking on options', fakeAsync(() => {
             trigger.click();
             fixture.detectChanges();
+            flush();
 
             expect(testInstance.select.panelOpen).toBe(true);
 
