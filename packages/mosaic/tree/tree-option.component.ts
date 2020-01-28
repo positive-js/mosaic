@@ -13,6 +13,7 @@ import {
     AfterContentInit,
     NgZone
 } from '@angular/core';
+import { FocusOrigin } from '@ptsecurity/cdk/a11y';
 import { CdkTreeNode } from '@ptsecurity/cdk/tree';
 import { CanDisable } from '@ptsecurity/mosaic/core';
 import { Subject } from 'rxjs';
@@ -164,7 +165,9 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
         this.changeDetectorRef.markForCheck();
     }
 
-    focus() {
+    focus(focusOrigin?: FocusOrigin) {
+        if (focusOrigin === 'program') { return; }
+
         if (this.disabled || this.hasFocus) { return; }
 
         this.elementRef.nativeElement.focus();

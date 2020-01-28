@@ -338,7 +338,6 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
     }
 
     setSelectedOption(option: T, $event?: KeyboardEvent): void {
-        console.log('setSelectedOption: '); // tslint:disable-line:no-console
         const withShift = $event ? hasModifierKey($event, 'shiftKey') : false;
         const withCtrl = $event ? hasModifierKey($event, 'ctrlKey') : false;
 

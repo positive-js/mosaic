@@ -521,6 +521,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
             .pipe(takeUntil(this.destroy))
             .subscribe((event) => {
                 if (event.added.length) {
+                    this.tree.keyManager.setFocusOrigin('program');
                     this.tree.keyManager.setActiveItem(
                         this.options.find((option) => option.data === event.added[0]) as any
                     );
@@ -928,6 +929,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         } else {
             const previouslyFocusedIndex = this.tree.keyManager.activeItemIndex;
 
+            this.tree.keyManager.setFocusOrigin('keyboard');
             this.tree.keyManager.onKeydown(event);
 
             if (
