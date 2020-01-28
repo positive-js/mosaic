@@ -124,9 +124,10 @@ export class McTooltipComponent {
     set mcVisible(value: boolean) {
         const visible = coerceBooleanProperty(value);
 
-        if (this._mcVisible.value !== visible) {
-            this._mcVisible.next(visible);
-            this.mcVisibleChange.emit(visible);
+        if (visible && this._mcVisible.value !== visible) {
+            this.show();
+        } else {
+            this.hide();
         }
     }
     private _mcVisible: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -150,7 +151,7 @@ export class McTooltipComponent {
                 this.closeOnInteraction = true;
             }
             this.showTid = setTimeout(() => {
-                this.mcVisible = true;
+                this._mcVisible.next(true);
                 this.mcVisibleChange.emit(true);
 
                 // Mark for check so if any parent component has set the
@@ -166,7 +167,7 @@ export class McTooltipComponent {
         }
 
         this.hideTid = setTimeout(() => {
-            this.mcVisible = false;
+            this._mcVisible.next(false);
             this.mcVisibleChange.emit(false);
             this.onHideSubject.next();
 
@@ -330,13 +331,16 @@ export class McTooltip implements OnInit, OnDestroy {
     }
     set mcVisible(externalValue: boolean) {
         const value = coerceBooleanProperty(externalValue);
-        this._mcVisible = value;
-        this.updateCompValue('mcVisible', value);
 
-        if (value) {
-            this.show();
-        } else {
-            this.hide();
+        if (this._mcVisible !== value) {
+            this._mcVisible = value;
+            this.updateCompValue('mcVisible', value);
+
+            if (value) {
+                this.show();
+            } else {
+                this.hide();
+            }
         }
     }
     private _mcVisible: boolean;
@@ -531,8 +535,7 @@ export class McTooltip implements OnInit, OnDestroy {
                     'mcTooltipDisabled',
                     'mcMouseEnterDelay',
                     'mcMouseLeaveDelay',
-                    'mсTooltipClass',
-                    'mcVisible'
+                    'mсTooltipClass'
                 ];
                 properties.forEach((property) => this.updateCompValue(property, this[ property ]));
                 this.tooltip.mcVisibleChange.pipe(takeUntil(this.$unsubscribe), distinctUntilChanged())
