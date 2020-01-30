@@ -18,7 +18,7 @@ export class ComponentViewerComponent implements OnDestroy {
 
     componentDocItem: DocItem;
 
-    private destroyed = new Subject();
+    private destroyed: Subject<boolean> = new Subject();
 
     constructor(routeActivated: ActivatedRoute,
                 public docItems: DocumentationItems
@@ -71,7 +71,7 @@ export class ComponentOverviewComponent implements OnDestroy {
 
     @ViewChild('toc', {static: false}) anchorsComponent: AnchorsComponent;
 
-    private destroyed = new Subject();
+    private destroyed: Subject<boolean> = new Subject();
 
     constructor(public componentViewer: ComponentViewerComponent,
                 private router: Router,
@@ -135,7 +135,7 @@ export class ComponentOverviewComponent implements OnDestroy {
         });
     }
 
-    copyCode(event: Event) {
+    copyCode = (event: Event) =>  {
         const codeCopyAnimationTime = 1000;
         const copyBlock = (<HTMLElement> event.target).parentElement.parentElement;
 

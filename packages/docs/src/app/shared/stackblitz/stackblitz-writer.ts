@@ -55,7 +55,7 @@ const dependencies = {
     rxjs: '^6.4.0',
     'web-animations-js': '^2.3.1',
     messageformat: '^2.0.5',
-    'tslib': '^1.10.0',
+    tslib: '^1.10.0',
     'zone.js': '^0.8.14',
     moment: '^2.24.0'
 };

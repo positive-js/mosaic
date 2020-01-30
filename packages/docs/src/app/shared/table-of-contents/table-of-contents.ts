@@ -3,12 +3,12 @@ import { Component, Inject, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 
-interface Link {
+interface ILink {
     /* id of the section*/
     id: string;
 
     /* header type h3/h4 */
-    type: string;
+    headerType: string;
 
     /* If the anchor is in view of the page */
     active: boolean;
@@ -27,7 +27,7 @@ interface Link {
 })
 export class TableOfContents {
 
-    @Input() links: Link[] = [];
+    @Input() links: ILink[] = [];
     @Input() headerSelectors = '.docs-markdown h3, .docs-markdown h4';
 
     // tslint:disable-next-line
@@ -41,11 +41,11 @@ export class TableOfContents {
         this.links = this.createLinks();
     }
 
-    private createLinks(): Link[] {
+    private createLinks(): ILink[] {
 
         const links = [];
-        const headers =
-            Array.from(this._document.querySelectorAll(this.headerSelectors)) as HTMLElement[];
+        const headers: HTMLElement[] =
+            Array.from(this._document.querySelectorAll(this.headerSelectors));
 
         if (headers.length) {
             for (const header of headers) {

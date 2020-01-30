@@ -1,5 +1,3 @@
-import './polyfills';
-
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -9,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MosaicDocsExample } from './app/mosaic-docs-example';
 import { DemoMosaicModule } from './mosaic-module';
+// tslint:disable-next-line:no-import-side-effect
+import './polyfills';
 
 
 @NgModule({
