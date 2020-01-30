@@ -1,3 +1,10 @@
+## 8.3.2 "Coffee Winks" (2020-01-30)
+
+### Mosaic
+
+ * bug fix  **dropdown:** disabled item should prevent click event (#UIM-315) ([#396](https://github.com/positive-js/mosaic/issues/396)) ([ef4a41a](https://github.com/positive-js/mosaic/commit/ef4a41adef8ece111e73adf04c9f94a1156f2619)), closes [#UIM-315](https://github.com/positive-js/mosaic/issues/UIM-315)
+ * bug fix  **tooltip:** mosaic tooltip manual trigger rendering issue #UIM-351 ([#399](https://github.com/positive-js/mosaic/issues/399)) ([7f30c5d](https://github.com/positive-js/mosaic/commit/7f30c5de05d7419256eba5723c174b54efaee6b1)), closes [#UIM-351](https://github.com/positive-js/mosaic/issues/UIM-351)
+
 ## 8.3.1 "Yummiest Pie" (2020-01-24)
 
 ### Mosaic
