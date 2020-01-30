@@ -193,14 +193,14 @@ export function buildComponent(options: ComponentOptions,
 
         options.module = findModuleFromOptions(host, options);
 
-        const parsedPath = parseName(options.path!, options.name);
+        const parsedPath = parseName(options.path, options.name);
 
         options.name = parsedPath.name;
         options.path = parsedPath.path;
         options.selector = options.selector || buildSelector(options, project.prefix);
 
         validateName(options.name);
-        validateHtmlSelector(options.selector!);
+        validateHtmlSelector(options.selector);
 
         // In case the specified style extension is not part of the supported CSS supersets,
         // we generate the stylesheets with the "css" extension. This ensures that we don't
@@ -223,14 +223,14 @@ export function buildComponent(options: ComponentOptions,
         // The resolved contents can be used inside EJS templates.
         const resolvedFiles = {};
 
-        for (const key in additionalFiles) {
+        Object.keys(additionalFiles).forEach((key) => {
             if (additionalFiles[key]) {
                 const fileContent = readFileSync(join(schematicFilesPath, additionalFiles[key]), 'utf-8');
 
                 // Interpolate the additional files with the base EJS template context.
                 resolvedFiles[key] = interpolateTemplate(fileContent)(baseTemplateContext);
             }
-        }
+        });
 
         const templateSource = apply(url(schematicFilesUrl), [
             options.skipTests ? filter((path) => !path.endsWith('.spec.ts')) : noop(),

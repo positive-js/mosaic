@@ -1,4 +1,3 @@
-import { Tree } from '@angular-devkit/schematics';
 import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
 import { getFileContent } from '@schematics/angular/utility/test';
 
@@ -7,15 +6,15 @@ import { createTestApp } from '../testing';
 
 describe('CDK ng-add', () => {
   let runner: SchematicTestRunner;
-  let appTree: Tree;
+  let appTree;
 
   beforeEach(() => {
     runner = new SchematicTestRunner('schematics', require.resolve('../collection.json'));
     appTree = createTestApp(runner);
   });
 
-  it('should update the package.json', () => {
-    const tree = runner.runSchematic('ng-add', {}, appTree);
+  it('should update the package.json', async () => {
+    const tree = await runner.runSchematicAsync('ng-add', {}, appTree).toPromise();
     const packageJson = JSON.parse(getFileContent(tree, '/package.json'));
     const dependencies = packageJson.dependencies;
 
