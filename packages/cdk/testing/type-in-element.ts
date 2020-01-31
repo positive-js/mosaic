@@ -1,5 +1,6 @@
 import { dispatchFakeEvent } from './dispatch-events';
 
+
 /**
  * Focuses an input, sets its value and dispatches
  * the `input` event, simulating the user typing.

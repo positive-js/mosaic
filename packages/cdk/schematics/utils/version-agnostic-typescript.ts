@@ -20,9 +20,11 @@ import typescript = require('typescript');
 let ts: typeof typescript;
 
 try {
+    // tslint:disable-next-line:no-var-requires
   ts = require('@schematics/angular/node_modules/typescript');
 } catch {
   try {
+      // tslint:disable-next-line:no-var-requires
     ts = require('typescript');
   } catch {
     throw new SchematicsException('Error: Could not find a TypeScript version for the ' +

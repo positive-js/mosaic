@@ -193,14 +193,14 @@ export function buildComponent(options: ComponentOptions,
 
         options.module = findModuleFromOptions(host, options);
 
-        const parsedPath = parseName(options.path!, options.name);
+        const parsedPath = parseName(options.path, options.name);
 
         options.name = parsedPath.name;
         options.path = parsedPath.path;
         options.selector = options.selector || buildSelector(options, project.prefix);
 
         validateName(options.name);
-        validateHtmlSelector(options.selector!);
+        validateHtmlSelector(options.selector);
 
         // In case the specified style extension is not part of the supported CSS supersets,
         // we generate the stylesheets with the "css" extension. This ensures that we don't
