@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 
-import { INavbarProperty, NavbarProperty } from './navbar-property';
 import { mosaicVersion } from '../../shared/version/version';
+
+import { INavbarProperty, NavbarProperty } from './navbar-property';
 
 
 @Component({
@@ -18,6 +19,24 @@ export class NavbarComponent {
     colorSwitch: NavbarProperty;
     themeSwitch: NavbarProperty;
     languageSwitch: NavbarProperty;
+
+    // To add new version to dropdown add new object to the end of data array,
+    // number of current version is taken from package.json, rest should be specified
+    // run npm show @ptsecurity/mosaic versions --json to see all mosaic versions
+    versionData = [
+        {
+            number: '8.1.0',
+            date: '9 октября',
+            selected: false,
+            link: '//mosaic.ptsecurity.com'
+        },
+        {
+            number: '8.0.0',
+            date: '9 октября',
+            selected: false,
+            link: '//v8.mosaic.ptsecurity.com'
+        }
+    ];
 
     private activeColorProperty: INavbarProperty = {
         property: 'PT_color',
@@ -77,24 +96,6 @@ export class NavbarComponent {
         updateSelected: true
     };
 
-    // To add new version to dropdown add new object to the end of data array,
-    // number of current version is taken from package.json, rest should be specified
-    // run npm show @ptsecurity/mosaic versions --json to see all mosaic versions
-    versionData = [
-            {
-                number: '8.1.0',
-                date: '9 октября',
-                selected: false,
-                link: '//mosaic.ptsecurity.com'
-            },
-            {
-                number: '8.0.0',
-                date: '9 октября',
-                selected: false,
-                link: '//v8.mosaic.ptsecurity.com'
-            }
-        ];
-
     constructor() {
         this.setSelectedVersion();
 
@@ -108,7 +109,7 @@ export class NavbarComponent {
         if (!location.origin.match(link)) {
             location.href = `${link}${location.pathname}${location.search}${location.hash}`;
         }
-        this.versionSwitch.setValue(i)
+        this.versionSwitch.setValue(i);
     }
 
     setSelectedVersion() {
@@ -120,8 +121,10 @@ export class NavbarComponent {
         } else {
             // Определяем выбранную версию
             this.versionData.forEach((version) => {
-                if(version.number == this.mosaicVersion) version.selected = true;
-            })
+                if (version.number === this.mosaicVersion) {
+                    version.selected = true;
+                }
+            });
         }
     }
 }

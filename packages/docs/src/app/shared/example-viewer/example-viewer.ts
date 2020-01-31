@@ -68,7 +68,7 @@ export class ExampleViewer {
             .nativeElement.querySelector('.mc-tab-body__active .docs-example-source-viewer');
 
         if (exampleSource) {
-            const text = exampleSource.textContent.match(/\n/g);
+            const text: string[] = exampleSource.textContent.match(/\n/g);
             const length = text ? text.length + 1 : 0;
             this.lineNumbers = '';
             for (let i = 1; i <= length; i++) {
