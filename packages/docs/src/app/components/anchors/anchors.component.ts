@@ -32,7 +32,7 @@ export class AnchorsComponent {
     readonly isSmoothScrollSupported;
     noSmoothScrollDebounce = 10;
     debounceTime: number = 15;
-    private destroyed = new Subject();
+    private destroyed: Subject<boolean> = new Subject();
     private fragment = '';
     private activeClass = 'anchors-menu__list-element_active';
     private scrollContainer: any;
@@ -78,6 +78,7 @@ export class AnchorsComponent {
 
     ngOnDestroy() {
         this.destroyed.next();
+        this.destroyed.complete();
     }
 
     getAnchorIndex(urlFragment): number {
@@ -114,7 +115,7 @@ export class AnchorsComponent {
     /* TODO Техдолг: при изменении ширины экрана должен переопределяться параметр top
     *   делать это по window:resize нельзя, т.к. изменение ширины контента страницы проиходит после window:resize */
     onResize() {
-        const headers = Array.from(this.document.querySelectorAll(this.headerSelectors)) as HTMLElement[];
+        const headers = Array.from(this.document.querySelectorAll(this.headerSelectors));
 
         for (let i = 0; i < this.anchors.length; i++) {
             const {top} = headers[i].getBoundingClientRect();
@@ -140,7 +141,7 @@ export class AnchorsComponent {
 
     private createAnchors(): IAnchor[] {
         const anchors = [];
-        const headers = Array.from(this.document.querySelectorAll(this.headerSelectors)) as HTMLElement[];
+        const headers: HTMLElement[] = Array.from(this.document.querySelectorAll(this.headerSelectors));
 
         if (headers.length) {
             const bodyTop = this.document.body.getBoundingClientRect().top;

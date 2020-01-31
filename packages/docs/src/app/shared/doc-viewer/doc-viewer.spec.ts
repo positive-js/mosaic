@@ -49,7 +49,7 @@ describe('DocViewer', () => {
 
     it('should correct hash based links', () => {
         const fixture = TestBed.createComponent(DocViewerTestComponent);
-        fixture.componentInstance.documentUrl = `http://mosaic.ptsecurity.com/doc-with-links.html`;
+        fixture.componentInstance.documentUrl = `//mosaic.ptsecurity.com/doc-with-links.html`;
         fixture.detectChanges();
 
         const url = fixture.componentInstance.documentUrl;
@@ -67,14 +67,14 @@ describe('DocViewer', () => {
         <doc-viewer [documentUrl]="documentUrl"></doc-viewer>`
 })
 class DocViewerTestComponent {
-    documentUrl = 'http://mosaic.ptsecurity.com/simple-doc.html';
+    documentUrl = '//mosaic.ptsecurity.com/simple-doc.html';
 }
 
 const FAKE_DOCS = {
-    'http://mosaic.ptsecurity.com/simple-doc.html': '<div>my docs page</div>',
-    'http://mosaic.ptsecurity.com/doc-with-example.html': `
+    '//mosaic.ptsecurity.com/simple-doc.html': '<div>my docs page</div>',
+    '//mosaic.ptsecurity.com/doc-with-example.html': `
       <div>Check out this example:</div>
       <div mosaic-docs-example="some-example"></div>`,
-    'http://mosaic.ptsecurity.com/doc-with-links.html': `<a href="#test">Test link</a>`,
-    'http://mosaic.ptsecurity.com/doc-with-element-ids.html': `<h4 id="my-header">Header</h4>`
+    '//mosaic.ptsecurity.com/doc-with-links.html': `<a href="#test">Test link</a>`,
+    '//mosaic.ptsecurity.com/doc-with-element-ids.html': `<h4 id="my-header">Header</h4>`
 };

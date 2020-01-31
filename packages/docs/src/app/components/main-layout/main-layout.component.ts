@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 
 
 @Component({
@@ -17,7 +17,7 @@ export class MainLayoutComponent {
                 private route: ActivatedRoute) {
         const href = location.href;
 
-        if(href.match('github')) {
+        if (href.match('github')) {
             this.setNextRoute();
         } else {
             this.setDefaultRoute();
