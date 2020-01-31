@@ -10,6 +10,7 @@ import { isDeprecatedDoc, isPrimaryModuleDoc } from '../common/decorators';
 import { CategorizedClassDoc } from '../common/dgeni-definitions';
 
 
+// tslint:disable-next-line:naming-convention
 export interface ModuleInfo {
     /** Name of the module (e.g. toolbar, drag-drop, ripple) */
     name: string;

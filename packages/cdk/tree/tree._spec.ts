@@ -17,6 +17,7 @@ import { getTreeControlFunctionsMissingError } from './tree-errors';
 // tslint:disable-next-line:max-func-body-length
 xdescribe('CdkTree', () => {
     /** Represents an indent for expectNestedTreeToMatch */
+    // tslint:disable-next-line:naming-convention
     const _ = {};
     let dataSource: FakeDataSource;
     let treeElement: HTMLElement;
@@ -889,14 +890,14 @@ class FakeDataSource extends DataSource<TestData> {
     dataIndex = 0;
     isConnected = false;
 
-    _dataChange = new BehaviorSubject<TestData[]>([]);
+    dataChange = new BehaviorSubject<TestData[]>([]);
 
     get data() {
-        return this._dataChange.getValue();
+        return this.dataChange.getValue();
     }
 
     set data(data: TestData[]) {
-        this._dataChange.next(data);
+        this.dataChange.next(data);
     }
 
     constructor(public treeControl: TreeControl<TestData>) {
@@ -909,7 +910,7 @@ class FakeDataSource extends DataSource<TestData> {
 
     connect(collectionViewer: CollectionViewer): Observable<TestData[]> {
         this.isConnected = true;
-        const streams = [this._dataChange, collectionViewer.viewChange];
+        const streams = [this.dataChange, collectionViewer.viewChange];
 
         return combineLatest<TestData[]>(streams)
             .pipe(map(([data]) => {
@@ -1261,7 +1262,7 @@ class ArrayDataSourceCdkTreeApp {
 class ObservableDataSourceCdkTreeApp {
 
     get dataObservable() {
-        return this.dataSource._dataChange;
+        return this.dataSource.dataChange;
     }
 
     treeControl: TreeControl<TestData>;
@@ -1322,7 +1323,7 @@ class ArrayDataSourceNestedCdkTreeApp {
 class ObservableDataSourceNestedCdkTreeApp {
 
     get dataObservable() {
-        return this.dataSource._dataChange;
+        return this.dataSource.dataChange;
     }
 
     treeControl: TreeControl<TestData>;

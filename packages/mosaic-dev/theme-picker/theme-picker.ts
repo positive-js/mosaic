@@ -37,8 +37,9 @@ export class ThemePicker {
     }
 
     installTheme(theme: IDocsSiteTheme) {
-        this.currentTheme = this._getCurrentThemeFromHref(theme.href);
+        this.currentTheme = this.getCurrentThemeFromHref(theme.href);
 
+        // tslint:disable-next-line:non-literal-require
         require(`style-loader!./../../mosaic/core/theming/prebuilt/${theme.href}`);
 
         if (this.currentTheme) {
@@ -46,7 +47,7 @@ export class ThemePicker {
         }
     }
 
-    private _getCurrentThemeFromHref(href: string) {
+    private getCurrentThemeFromHref(href: string) {
 
         return this.themes.find((theme) => theme.href === href);
     }
