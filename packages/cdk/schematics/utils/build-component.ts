@@ -223,14 +223,14 @@ export function buildComponent(options: ComponentOptions,
         // The resolved contents can be used inside EJS templates.
         const resolvedFiles = {};
 
-        Object.keys(additionalFiles).forEach((key) => {
+        for (const key in additionalFiles) {
             if (additionalFiles[key]) {
                 const fileContent = readFileSync(join(schematicFilesPath, additionalFiles[key]), 'utf-8');
 
                 // Interpolate the additional files with the base EJS template context.
                 resolvedFiles[key] = interpolateTemplate(fileContent)(baseTemplateContext);
             }
-        });
+        }
 
         const templateSource = apply(url(schematicFilesUrl), [
             options.skipTests ? filter((path) => !path.endsWith('.spec.ts')) : noop(),
