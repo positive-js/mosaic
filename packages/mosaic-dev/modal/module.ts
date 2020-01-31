@@ -76,7 +76,7 @@ export class ModalDemoComponent {
     createComponentModal() {
         let isLoading = false;
         let isDisabled = false;
-        let isShown = false;
+        const isShown = false;
 
         const modal = this.modalService.create({
             mcTitle: 'Modal Title',

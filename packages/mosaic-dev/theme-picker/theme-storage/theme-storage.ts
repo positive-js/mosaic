@@ -1,3 +1,4 @@
+// tslint:disable:no-console
 import { Injectable, EventEmitter } from '@angular/core';
 
 
@@ -19,7 +20,9 @@ export class ThemeStorage {
     storeTheme(theme: IDocsSiteTheme) {
         try {
             window.localStorage[ThemeStorage.storageKey] = JSON.stringify(theme);
-        } catch (e) {}
+        } catch (e) {
+            console.log(e);
+        }
 
         this.onThemeUpdate.emit(theme);
     }
@@ -35,6 +38,8 @@ export class ThemeStorage {
     clearStorage() {
         try {
             window.localStorage.removeItem(ThemeStorage.storageKey);
-        } catch (e) {}
+        } catch (e) {
+            return null;
+        }
     }
 }

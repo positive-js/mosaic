@@ -16,13 +16,14 @@ const moment = _rollupMoment || momentImported;
     styleUrls: ['datepicker-disabled-example.css']
 })
 export class DatepickerDisabledExample {
-    date = moment([2019, 0, 24]);
-    minDate = moment([2015, 0, 1]);
-    maxDate = moment([2020, 0, 1]);
+    sunday = 6;
+    date = moment();
+    minDate = moment().subtract(1, 'year');
+    maxDate = moment().add(1, 'years');
 
     myFilter(date: Moment): boolean {
         const day = date.day();
 
-        return day !== 0 && day !== 6;
+        return day !== 0 && day !== this.sunday;
     }
 }

@@ -3,8 +3,8 @@ import { PropertyMemberDoc } from 'dgeni-packages/typescript/api-doc-types/Prope
 import { hasMemberDecorator } from './decorators';
 
 
-/* tslint:disable:no-non-null-assertion */
 /** Interface that describes an Angular property binding. Can be either an input or output. */
+// tslint:disable-next-line:naming-convention
 export interface PropertyBinding {
     name: string;
     alias?: string;

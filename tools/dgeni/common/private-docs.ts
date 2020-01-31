@@ -28,14 +28,14 @@ const INTERNAL_METHODS = [
 
 /** Checks whether the given API document is public. */
 export function isPublicDoc(doc: ApiDoc) {
-    if (_isEnforcedPublicDoc(doc)) {
+    if (isEnforcedPublicDoc(doc)) {
         return true;
     }
 
-    if (_hasDocsPrivateTag(doc) || doc.name.startsWith('_')) {
+    if (hasDocsPrivateTag(doc) || doc.name.startsWith('_')) {
         return false;
     } else if (doc instanceof MemberDoc) {
-        return !_isInternalMember(doc);
+        return !isInternalMember(doc);
     }
 
     return true;
@@ -45,19 +45,19 @@ export function isPublicDoc(doc: ApiDoc) {
 export function getDocsPublicTag(doc: any): { tagName: string; description: string } | undefined {
     const tags = doc.tags && doc.tags.tags;
 
-    return tags ? tags.find((d: any) => d.tagName == 'docs-public') : undefined;
+    return tags ? tags.find((d: any) => d.tagName === 'docs-public') : undefined;
 }
 
 /** Whether the given method member is listed as an internal member. */
-function _isInternalMember(memberDoc: MemberDoc) {
+function isInternalMember(memberDoc: MemberDoc) {
     return INTERNAL_METHODS.includes(memberDoc.name);
 }
 
 /** Whether the given doc has a @docs-private tag set. */
-function _hasDocsPrivateTag(doc: any) {
+function hasDocsPrivateTag(doc: any) {
     const tags = doc.tags && doc.tags.tags;
 
-    return tags ? tags.find((d: any) => d.tagName == 'docs-private') : false;
+    return tags ? tags.find((d: any) => d.tagName === 'docs-private') : false;
 }
 
 /**
@@ -69,6 +69,6 @@ function _hasDocsPrivateTag(doc: any) {
  * split up into several base classes to support the MDC prototypes. e.g. "_MatMenu" should
  * show up in the docs as "MatMenu".
  */
-function _isEnforcedPublicDoc(doc: any): boolean {
+function isEnforcedPublicDoc(doc: any): boolean {
     return getDocsPublicTag(doc) !== undefined;
 }
