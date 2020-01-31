@@ -66,7 +66,7 @@ apiDocsPackage.config(function(readFilesProcessor: any) {
 
 // Patches Dgeni's log service to not print warnings about unresolved mixin base symbols.
 apiDocsPackage.config(function(log: any) {
-    return patchLogService(log);
+    patchLogService(log);
 });
 
 // Configure the output path for written files (i.e., file names).

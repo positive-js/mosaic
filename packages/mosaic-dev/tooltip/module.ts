@@ -3,7 +3,6 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McInputModule } from '@ptsecurity/mosaic/input';
