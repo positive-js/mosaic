@@ -18,6 +18,7 @@
         "no-non-null-assertion": false,
         "strict-type-predicates": false,
         "no-unbound-method": [true, {"ignore-static": true, "whitelist": ["expect"], "allow-typeof": true }],
-        "mocha-no-side-effect-code": [true, { "ignore": "xdescribe|xit" }]
+        "mocha-no-side-effect-code": [true, { "ignore": "xdescribe|xit" }],
+        "no-for-in": false
     }
 }

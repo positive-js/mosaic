@@ -14,6 +14,7 @@ import { CdkTree } from './tree';
 import { getTreeControlFunctionsMissingError } from './tree-errors';
 
 
+// tslint:disable-next-line:max-func-body-length
 xdescribe('CdkTree', () => {
     /** Represents an indent for expectNestedTreeToMatch */
     const _ = {};
@@ -913,6 +914,7 @@ class FakeDataSource extends DataSource<TestData> {
         return combineLatest<TestData[]>(streams)
             .pipe(map(([data]) => {
                 this.treeControl.dataNodes = data;
+
                 return data;
             }));
     }
@@ -959,6 +961,7 @@ function expectFlatTreeToMatch(treeElement: Element, expectedPaddingIndent: numb
     function checkNode(node: Element, expectedNode: any[]) {
         const actualTextContent = node.textContent!.trim();
         const expectedTextContent = expectedNode[expectedNode.length - 1];
+
         if (actualTextContent !== expectedTextContent) {
             missedExpectations.push(
                 `Expected node contents to be ${expectedTextContent} but was ${actualTextContent}`);

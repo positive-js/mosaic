@@ -4,7 +4,7 @@ import { DefaultTreeElement } from 'parse5';
 
 /** Determines the indentation of child elements for the given Parse5 element. */
 export function getChildElementIndentation(element: DefaultTreeElement) {
-    const spaceAmount = 2;
+    const spaceAmount: number = 2;
     const childElement = element.childNodes
         .find((node) => node.tagName) as DefaultTreeElement | null;
 
@@ -19,7 +19,7 @@ export function getChildElementIndentation(element: DefaultTreeElement) {
         childElement.sourceCodeLocation.startCol :
         // In case there is no child element, we just assume that child elements should be indented
         // by two spaces.
-        element.sourceCodeLocation.startCol + spaceAmount;
+        <number> element.sourceCodeLocation.startCol + spaceAmount;
 
     // Since Parse5 does not set the `startCol` properties as zero-based, we need to subtract
     // one column in order to have a proper zero-based offset for the indentation.

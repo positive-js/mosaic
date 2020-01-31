@@ -14,14 +14,14 @@ export interface IFocusableOption extends ListKeyManagerOption {
 }
 
 export class FocusKeyManager<T> extends ListKeyManager<IFocusableOption & T> {
-    private _origin: FocusOrigin = 'program';
+    private origin: FocusOrigin = 'program';
 
     /**
      * Sets the focus origin that will be passed in to the items for any subsequent `focus` calls.
      * @param origin Focus origin to be used when focusing items.
      */
     setFocusOrigin(origin: FocusOrigin): this {
-        this._origin = origin;
+        this.origin = origin;
 
         return this;
     }
@@ -36,7 +36,7 @@ export class FocusKeyManager<T> extends ListKeyManager<IFocusableOption & T> {
         super.setActiveItem(item);
 
         if (this.activeItem) {
-            this.activeItem.focus(this._origin);
+            this.activeItem.focus(this.origin);
         }
     }
 }
