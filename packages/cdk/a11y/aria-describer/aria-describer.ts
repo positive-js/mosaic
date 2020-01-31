@@ -4,7 +4,6 @@ import {
     Injectable,
     OnDestroy
 } from '@angular/core';
-import {of} from "rxjs";
 
 import { addAriaReferencedId, getAriaReferenceIds, removeAriaReferencedId } from './aria-reference';
 
@@ -48,10 +47,10 @@ let messagesContainer: HTMLElement | null = null;
  */
 @Injectable({providedIn: 'root'})
 export class AriaDescriber implements OnDestroy {
-    private _document: Document;
+    private document: Document;
 
-    constructor(@Inject(DOCUMENT) _document: any) {
-        this._document = _document;
+    constructor(@Inject(DOCUMENT) document: any) {
+        this.document = document;
     }
 
     /**
@@ -60,51 +59,51 @@ export class AriaDescriber implements OnDestroy {
      * message element.
      */
     describe(hostElement: Element, message: string) {
-        if (!this._canBeDescribed(hostElement, message)) {
+        if (!this.canBeDescribed(hostElement, message)) {
             return;
         }
 
         if (!messageRegistry.has(message)) {
-            this._createMessageElement(message);
+            this.createMessageElement(message);
         }
 
-        if (!this._isElementDescribedByMessage(hostElement, message)) {
-            this._addMessageReference(hostElement, message);
+        if (!this.isElementDescribedByMessage(hostElement, message)) {
+            this.addMessageReference(hostElement, message);
         }
     }
 
     /** Removes the host element's aria-describedby reference to the message element. */
     removeDescription(hostElement: Element, message: string) {
-        if (!this._isElementNode(hostElement)) {
+        if (!this.isElementNode(hostElement)) {
             return;
         }
 
-        if (this._isElementDescribedByMessage(hostElement, message)) {
-            this._removeMessageReference(hostElement, message);
+        if (this.isElementDescribedByMessage(hostElement, message)) {
+            this.removeMessageReference(hostElement, message);
         }
 
         const registeredMessage = messageRegistry.get(message);
         if (registeredMessage && registeredMessage.referenceCount === 0) {
-            this._deleteMessageElement(message);
+            this.deleteMessageElement(message);
         }
 
         if (messagesContainer && messagesContainer.childNodes.length === 0) {
-            this._deleteMessagesContainer();
+            this.deleteMessagesContainer();
         }
     }
 
     /** Unregisters all created message elements and removes the message container. */
     ngOnDestroy() {
         const describedElements =
-            this._document.querySelectorAll(`[${CDK_DESCRIBEDBY_HOST_ATTRIBUTE}]`);
+            Array.from(this.document.querySelectorAll(`[${CDK_DESCRIBEDBY_HOST_ATTRIBUTE}]`));
 
-        for (let i = 0; i < describedElements.length; i++) {
-            this._removeCdkDescribedByReferenceIds(describedElements[i]);
-            describedElements[i].removeAttribute(CDK_DESCRIBEDBY_HOST_ATTRIBUTE);
-        }
+        describedElements.forEach((element) => {
+            this.removeCdkDescribedByReferenceIds(element);
+            element.removeAttribute(CDK_DESCRIBEDBY_HOST_ATTRIBUTE);
+        });
 
         if (messagesContainer) {
-            this._deleteMessagesContainer();
+            this.deleteMessagesContainer();
         }
 
         messageRegistry.clear();
@@ -114,19 +113,19 @@ export class AriaDescriber implements OnDestroy {
      * Creates a new element in the visually hidden message container element with the message
      * as its content and adds it to the message registry.
      */
-    private _createMessageElement(message: string) {
-        const messageElement = this._document.createElement('div');
+    private createMessageElement(message: string) {
+        const messageElement = this.document.createElement('div');
         messageElement.setAttribute('id', `${CDK_DESCRIBEDBY_ID_PREFIX}-${nextId++}`);
-        messageElement.appendChild(this._document.createTextNode(message));
+        messageElement.appendChild(this.document.createTextNode(message));
 
-        this._createMessagesContainer();
+        this.createMessagesContainer();
         messagesContainer!.appendChild(messageElement);
 
         messageRegistry.set(message, {messageElement, referenceCount: 0});
     }
 
     /** Deletes the message element from the global messages container. */
-    private _deleteMessageElement(message: string) {
+    private deleteMessageElement(message: string) {
         const registeredMessage = messageRegistry.get(message);
         const messageElement = registeredMessage && registeredMessage.messageElement;
         if (messagesContainer && messageElement) {
@@ -136,9 +135,9 @@ export class AriaDescriber implements OnDestroy {
     }
 
     /** Creates the global container for all aria-describedby messages. */
-    private _createMessagesContainer() {
+    private createMessagesContainer() {
         if (!messagesContainer) {
-            const preExistingContainer = this._document.getElementById(MESSAGES_CONTAINER_ID);
+            const preExistingContainer = this.document.getElementById(MESSAGES_CONTAINER_ID);
 
             // When going from the server to the client, we may end up in a situation where there's
             // already a container on the page, but we don't have a reference to it. Clear the
@@ -148,16 +147,16 @@ export class AriaDescriber implements OnDestroy {
                 preExistingContainer.parentNode!.removeChild(preExistingContainer);
             }
 
-            messagesContainer = this._document.createElement('div');
+            messagesContainer = this.document.createElement('div');
             messagesContainer.id = MESSAGES_CONTAINER_ID;
             messagesContainer.setAttribute('aria-hidden', 'true');
             messagesContainer.style.display = 'none';
-            this._document.body.appendChild(messagesContainer);
+            this.document.body.appendChild(messagesContainer);
         }
     }
 
     /** Deletes the global messages container. */
-    private _deleteMessagesContainer() {
+    private deleteMessagesContainer() {
         if (messagesContainer && messagesContainer.parentNode) {
             messagesContainer.parentNode.removeChild(messagesContainer);
             messagesContainer = null;
@@ -165,7 +164,7 @@ export class AriaDescriber implements OnDestroy {
     }
 
     /** Removes all cdk-describedby messages that are hosted through the element. */
-    private _removeCdkDescribedByReferenceIds(element: Element) {
+    private removeCdkDescribedByReferenceIds(element: Element) {
         // Remove all aria-describedby reference IDs that are prefixed by CDK_DESCRIBEDBY_ID_PREFIX
         const originalReferenceIds = getAriaReferenceIds(element, 'aria-describedby')
             .filter((id) => id.indexOf(CDK_DESCRIBEDBY_ID_PREFIX) !== 0);
@@ -176,7 +175,7 @@ export class AriaDescriber implements OnDestroy {
      * Adds a message reference to the element using aria-describedby and increments the registered
      * message's reference count.
      */
-    private _addMessageReference(element: Element, message: string) {
+    private addMessageReference(element: Element, message: string) {
         const registeredMessage = messageRegistry.get(message)!;
 
         // Add the aria-describedby reference and set the
@@ -191,7 +190,7 @@ export class AriaDescriber implements OnDestroy {
      * Removes a message reference from the element using aria-describedby
      * and decrements the registered message's reference count.
      */
-    private _removeMessageReference(element: Element, message: string) {
+    private removeMessageReference(element: Element, message: string) {
         const registeredMessage = messageRegistry.get(message)!;
         registeredMessage.referenceCount--;
 
@@ -200,7 +199,7 @@ export class AriaDescriber implements OnDestroy {
     }
 
     /** Returns true if the element has been described by the provided message ID. */
-    private _isElementDescribedByMessage(element: Element, message: string): boolean {
+    private isElementDescribedByMessage(element: Element, message: string): boolean {
         const referenceIds = getAriaReferenceIds(element, 'aria-describedby');
         const registeredMessage = messageRegistry.get(message);
         const messageId = registeredMessage && registeredMessage.messageElement.id;
@@ -209,8 +208,8 @@ export class AriaDescriber implements OnDestroy {
     }
 
     /** Determines whether a message can be described on a particular element. */
-    private _canBeDescribed(element: Element, message: string): boolean {
-        if (!this._isElementNode(element)) {
+    private canBeDescribed(element: Element, message: string): boolean {
+        if (!this.isElementNode(element)) {
             return false;
         }
 
@@ -223,7 +222,7 @@ export class AriaDescriber implements OnDestroy {
     }
 
     /** Checks whether a node is an Element node. */
-    private _isElementNode(element: Node): element is Element {
-        return element.nodeType === this._document.ELEMENT_NODE;
+    private isElementNode(element: Node): element is Element {
+        return element.nodeType === this.document.ELEMENT_NODE;
     }
 }
