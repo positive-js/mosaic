@@ -13,7 +13,7 @@ export function parseExampleModuleFile(filePath: string) {
             moduleNames.push(node.name.text);
         }
 
-        ts.forEachChild(node, (n) => visitNode(n));
+        ts.forEachChild(node, visitNode);
     };
 
     visitNode(sourceFile);

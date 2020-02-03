@@ -52,6 +52,8 @@ class StageReleaseTask extends BaseReleaseTask {
     /** Octokit API instance that can be used to make Github API calls. */
     githubApi: OctokitApi;
 
+    tabSpaces = 4;
+
     constructor(public projectDir: string,
                 public repositoryOwner: string,
                 public repositoryName: string) {
@@ -144,7 +146,7 @@ class StageReleaseTask extends BaseReleaseTask {
     /** Updates the version of the project package.json and writes the changes to disk. */
     private updatePackageJsonVersion(newVersionName: string) {
         const newPackageJson = {...this.packageJson, version: newVersionName};
-        writeFileSync(this.packageJsonPath, `${JSON.stringify(newPackageJson, null, 4)}\n`);
+        writeFileSync(this.packageJsonPath, `${JSON.stringify(newPackageJson, null, this.tabSpaces)}\n`);
     }
 
     /** Verifies that the latest commit of the current branch is passing all Github statuses. */

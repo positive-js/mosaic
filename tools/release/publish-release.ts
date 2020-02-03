@@ -9,6 +9,7 @@ import { BaseReleaseTask } from './base-release-task';
 import { extractReleaseNotes } from './extract-release-notes';
 import { GitClient } from './git/git-client';
 import { getGithubNewReleaseUrl } from './git/github-urls';
+import { notify, verifyNotificationPossibility } from './notify-release';
 import { isNpmAuthenticated, npmLogout, npmLoginInteractive, npmPublish } from './npm/npm-client';
 import { promptForNpmDistTag } from './prompt/npm-dist-tag-prompt';
 import { promptForUpstreamRemote } from './prompt/upstream-remote-prompt';
@@ -16,7 +17,6 @@ import { checkReleasePackage } from './release-output/check-packages';
 import { releasePackages } from './release-output/release-packages';
 import { CHANGELOG_FILE_NAME } from './stage-release';
 import { parseVersionName, Version } from './version-name/parse-version';
-import { notify, verifyNotificationPossibility } from './notify-release';
 
 
 /** Maximum allowed tries to authenticate NPM. */

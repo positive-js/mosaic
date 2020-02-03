@@ -87,11 +87,11 @@ export class BuildPackage {
     async compile() {
 
         for (const entryPointGroup of this.secondaryEntryPointsByDepth) {
-            await Promise.all(entryPointGroup.map((p) => this._compileBothTargets(p)));
+            await Promise.all(entryPointGroup.map((p) => this.compileBothTargets(p)));
         }
 
         // Compile the primary entry-point.
-        await this._compileBothTargets();
+        await this.compileBothTargets();
     }
 
     /** Compiles the TypeScript test source files for the package. */
@@ -107,7 +107,7 @@ export class BuildPackage {
     /**
      * Compiles TS into both ES2015 and ES5, then updates exports.
      */
-    private async _compileBothTargets(p = '') {
+    private async compileBothTargets(p = '') {
         return compileEntryPoint(this, buildTsConfigName, p)
             .then(() => compileEntryPoint(this, buildTsConfigName, p, this.esm5OutputDir))
             .then(() => renamePrivateReExportsToBeUnique(this, p));

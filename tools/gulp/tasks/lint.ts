@@ -1,5 +1,4 @@
 import * as chalk from 'chalk';
-
 import { task, parallel, series } from 'gulp';
 import { join } from 'path';
 
