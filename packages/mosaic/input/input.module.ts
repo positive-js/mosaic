@@ -4,7 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { A11yModule } from '@ptsecurity/cdk/a11y';
 import { McCommonModule } from '@ptsecurity/mosaic/core';
 
-import { McInput, McInputMono, McNumberInput } from './input';
+import { McInput, McInputMono } from './input';
+import { McNumberInput } from './input-number';
 import { MaxValidator, MinValidator } from './input-number-validators';
 
 
@@ -13,5 +14,4 @@ import { MaxValidator, MinValidator } from './input-number-validators';
     exports: [McInput, McNumberInput, McInputMono, MinValidator, MaxValidator],
     declarations: [McInput, McNumberInput, McInputMono, MinValidator, MaxValidator ]
 })
-export class McInputModule {
-}
+export class McInputModule {}
