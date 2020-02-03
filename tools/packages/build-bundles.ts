@@ -1,10 +1,9 @@
 import { dirname, join } from 'path';
 
-import { rollupGlobals } from './rollup-globals';
-
 import { buildConfig } from './build-config';
 import { BuildPackage } from './build-package';
 import { uglifyJsFile } from './minify-sources';
+import { rollupGlobals } from './rollup-globals';
 import { rollupRemoveLicensesPlugin } from './rollup-remove-licenses';
 import { remapSourcemap } from './sourcemap-remap';
 import { dashCaseToCamelCase } from './utils';
@@ -128,7 +127,7 @@ export class PackageBundler {
             context: 'this',
             external: Object.keys(rollupGlobals),
             input: config.entry,
-            onwarn: (warning: {message: string, code: string}) => {
+            onwarn: (warning: {message: string; code: string}) => {
                 if (/but never used/.test(warning.message)) {
                     return;
                 }

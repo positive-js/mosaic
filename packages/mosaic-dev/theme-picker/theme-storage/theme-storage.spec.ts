@@ -17,7 +17,10 @@ const clearTestData = () => {
 };
 
 describe('ThemeStorage Service', () => {
-    const service = new ThemeStorage();
+    let service;
+    beforeAll(() => {
+        service = new ThemeStorage();
+    });
     const getCurrTheme = () => JSON.parse(window.localStorage.getItem(testStorageKey));
     const secondTestTheme = {
         primary: '#666666',
