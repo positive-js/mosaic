@@ -1,7 +1,7 @@
 import * as ts from 'typescript';
 
 
-interface ParsedMetadata {
+interface IParsedMetadata {
     primary: boolean;
     component: string;
     title: string;
@@ -9,13 +9,13 @@ interface ParsedMetadata {
     styleUrls: string[];
 }
 
-interface ParsedMetadataResults {
-    primaryComponent: ParsedMetadata;
-    secondaryComponents: ParsedMetadata[];
+interface IParsedMetadataResults {
+    primaryComponent: IParsedMetadata;
+    secondaryComponents: IParsedMetadata[];
 }
 
 /** Parse the AST of the given source file and collect Angular component metadata. */
-export function parseExampleFile(fileName: string, content: string): ParsedMetadataResults {
+export function parseExampleFile(fileName: string, content: string): IParsedMetadataResults {
     const sourceFile = ts.createSourceFile(fileName, content, ts.ScriptTarget.Latest, false);
     const metas: any[] = [];
 

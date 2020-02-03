@@ -12,8 +12,7 @@ export class MergeInheritedProperties implements Processor {
     $runBefore = ['categorizer'];
 
     $process(docs: DocCollection) {
-        return docs
-            .filter((doc) => doc.docType === 'class')
+        docs.filter((doc) => doc.docType === 'class')
             .forEach((doc) => this.addInheritedProperties(doc));
     }
 

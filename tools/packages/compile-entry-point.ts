@@ -1,5 +1,4 @@
 import * as chalk from 'chalk';
-
 import { readFileSync, writeFileSync } from 'fs';
 import { sync as glob } from 'glob';
 import { join } from 'path';
@@ -90,7 +89,7 @@ function addIdToGlob(outputPath: string, entryPointId: number): void {
         // We check for double ɵ to avoid mangling symbols like `ɵɵdefineInjectable`.
         fileContent = fileContent.replace(/ɵ(ɵ)?[a-z]+/g,
             (match, isDoubleTheta) => {
-                return isDoubleTheta ? match : match + entryPointId;
+                return isDoubleTheta ? match : match + entryPointId.toString();
             });
 
         writeFileSync(filePath, fileContent, 'utf-8');

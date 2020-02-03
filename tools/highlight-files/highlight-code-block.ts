@@ -1,4 +1,5 @@
 // These type lacks type definitions.
+// tslint:disable-next-line:no-var-requires
 const highlightJs = require('highlight.js');
 
 /**

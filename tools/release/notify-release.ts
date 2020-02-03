@@ -22,9 +22,9 @@ export function notify(tag, version) {
     const headers = { 'Content-Type': 'application/json' };
     const body = {
         channel: `${channel}`,
-        username: "Wall-e",
+        username: 'Wall-e',
         short: false,
-        text: "#### [![Mosaic Logo](https://i.ibb.co/fQNPgv6/logo-png-200.png =32x32)osaic](https://github.com/positive-js/mosaic/tree/${tag}) was published. \n " + prepareChangeLog(version)
+        text: `#### [![Mosaic Logo](https://i.ibb.co/fQNPgv6/logo-png-200.png =32x32)osaic](https://github.com/positive-js/mosaic/tree/\${tag}) was published. \n ${prepareChangeLog(version)}`
     };
 
     request.post({

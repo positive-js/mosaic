@@ -67,7 +67,7 @@ const ignoredPackages = [
 
 
 // Check if a license is accepted by an array of accepted licenses
-function _passesSPDX(licenses: string[], accepted: string[]) {
+function passesSpdx(licenses: string[], accepted: string[]) {
     return accepted.some((l) => {
         try {
             return spdxSatisfies(licenses.join(' AND '), l);
@@ -98,12 +98,12 @@ export function validateLicense(): Promise<number> {
                         id: key,
                         licenses: ([] as string[])
                         /* tslint:disable:no-non-null-assertion */
-                            .concat((json[key] !).licenses as string[])
+                            .concat((json[key]).licenses as string[])
                             // `*` is used when the license is guessed.
                             .map((x) => x.replace(/\*$/, ''))
                             .map((x) => x in licenseReplacements ? licenseReplacements[x] : x)
                     }))
-                    .filter((pkg) => !_passesSPDX(pkg.licenses, licensesWhitelist))
+                    .filter((pkg) => !passesSpdx(pkg.licenses, licensesWhitelist))
                     .filter((pkg) => !ignoredPackages.find((ignored) => ignored === pkg.id));
 
                 // Report packages with bad licenses

@@ -1,4 +1,4 @@
-import { ChoiceType, prompt } from 'inquirer';
+import { ChoiceType, prompt, Question } from 'inquirer';
 
 import { createNewVersion, ReleaseType } from '../version-name/create-version';
 import { parseVersionName, Version } from '../version-name/parse-version';
@@ -41,8 +41,7 @@ export async function promptForNewVersion(currentVersion: Version): Promise<Vers
             createVersionChoice(currentVersion, 'minor', 'Minor release'),
             createVersionChoice(currentVersion, 'patch', 'Patch release'));
     }
-
-    const answers = await prompt<IVersionPromptAnswers>([{
+    const questions: Question[] = [{
         type: 'list',
         name: 'proposedVersion',
         message: `What's the type of the new release?`,
@@ -63,7 +62,9 @@ export async function promptForNewVersion(currentVersion: Version): Promise<Vers
             // Only prompt for selecting a pre-release label if the current release is a pre-release,
             // or the existing pre-release label should be changed.
             isPrerelease || proposedVersion === 'new-prerelease-label'
-    }]);
+    }];
+
+    const answers = await prompt<IVersionPromptAnswers>(questions);
 
     // In case the new version just changes the pre-release label, we base the new version
     // on top of the current version. Otherwise, we use the proposed version from the
