@@ -10,20 +10,7 @@
     $selected-color: map-get(map-get($theme, states), selected-color);
 
     .mc-dropdown__panel {
-<<<<<<< HEAD
-<<<<<<< HEAD
         @include popup-params($theme);
-=======
-        $popup: map-get(map-get($theme, components), popup);
-
-        box-shadow: map-get($popup, shadow);
-        border-color: map-get($popup, border-color);
-
-        background-color: map-get($popup, background);
->>>>>>> css params moved...
-=======
-        @include popup-params($theme);
->>>>>>> added fixes and refactored components theming
     }
 
     .mc-dropdown__item {
@@ -50,7 +37,8 @@
             background: $selected-color;
         }
 
-        &[disabled] {
+        &[disabled],
+        &.mc-disabled {
             color: mc-color($foreground, text-disabled);
 
             background: transparent;
@@ -61,7 +49,7 @@
         }
     }
 
-    .mc-dropdown__item_highlighted:not([disabled]) {
+    .mc-dropdown__item_highlighted:not([disabled]):not(.mc-disabled) {
         background: mc-color($background, overlay-hovered);
     }
 }
