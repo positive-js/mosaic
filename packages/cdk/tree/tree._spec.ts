@@ -912,8 +912,9 @@ class FakeDataSource extends DataSource<TestData> {
         this.isConnected = true;
         const streams = [this.dataChange, collectionViewer.viewChange];
 
+        // tslint:disable-next-line:deprecation
         return combineLatest<TestData[]>(streams)
-            .pipe(map(([data]) => {
+            .pipe(map((data) => {
                 this.treeControl.dataNodes = data;
 
                 return data;

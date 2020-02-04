@@ -26,7 +26,7 @@ export class ComponentViewerComponent implements OnDestroy {
         // Listen to changes on the current route for the doc id (e.g. button/checkbox) and the
         // parent route for the section (mosaic/cdk).
 
-        combineLatest(routeActivated.params, routeActivated.parent.params).pipe(
+        combineLatest([routeActivated.params, routeActivated.parent.params]).pipe(
             map((p: [Params, Params]) => ({id: p[0].id, section: p[1].section})),
             map((p) => ({doc: docItems.getItemById(p.id, p.section), section: p.section}),
                 takeUntil(this.destroyed))
