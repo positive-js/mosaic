@@ -1,3 +1,13 @@
+## 8.3.2-beta.1 "Design Tokens" (2020-02-04)
+
+### Mosaic
+
+ * feature  **common:** rename params ([4a3fd35](https://github.com/positive-js/mosaic/commit/4a3fd35e64e03b6352372aa3f5cd97d84827ef8d))
+
+### Docs
+
+ * bug fix  correct expand link underline ([#405](https://github.com/positive-js/mosaic/issues/405)) ([f3e851f](https://github.com/positive-js/mosaic/commit/f3e851f6f267b1ed9afc15e189def94927be0937))
+
 ## 8.3.2 "Coffee Winks" (2020-01-30)
 
 ### Mosaic
