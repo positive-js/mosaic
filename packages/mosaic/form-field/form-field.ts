@@ -6,9 +6,11 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChild,
-    ContentChildren, Directive,
+    ContentChildren,
+    Directive,
     ElementRef,
-    QueryList, ViewChild,
+    QueryList,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
@@ -17,14 +19,12 @@ import { CanColor, CanColorCtor, mixinColor } from '@ptsecurity/mosaic/core';
 import { EMPTY, merge } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 
-
 import { McCleaner } from './cleaner';
 import { McFormFieldControl } from './form-field-control';
 import {
     getMcFormFieldMissingControlError,
     getMcFormFieldYouCanNotUseCleanerInNumberInputError
 } from './form-field-errors';
-import { McFormFieldNumberControl } from './form-field-number-control';
 import { McHint } from './hint';
 import { McPrefix } from './prefix';
 import { McStepper } from './stepper';
@@ -82,7 +82,6 @@ export class McFormField extends McFormFieldMixinBase implements
     AfterContentInit, AfterContentChecked, AfterViewInit, CanColor {
 
     @ContentChild(McFormFieldControl, { static: false }) control: McFormFieldControl<any>;
-    @ContentChild(McFormFieldNumberControl, { static: false }) numberControl: McFormFieldNumberControl<any>;
     @ContentChild(McStepper, { static: false }) stepper: McStepper;
     @ContentChild(McCleaner, { static: false }) cleaner: McCleaner | null;
 
@@ -105,7 +104,7 @@ export class McFormField extends McFormFieldMixinBase implements
     }
 
     ngAfterContentInit() {
-        if (this.numberControl && this.hasCleaner) {
+        if ((this.control as any).numberInput && this.hasCleaner) {
             this.cleaner = null;
             throw getMcFormFieldYouCanNotUseCleanerInNumberInputError();
         }
@@ -113,13 +112,7 @@ export class McFormField extends McFormFieldMixinBase implements
         this.validateControlChild();
 
         if (this.control.controlType) {
-            this._elementRef.nativeElement.classList
-                .add(`mc-form-field-type-${this.control.controlType}`);
-
-            if (this.numberControl && this.hasStepper) {
-                this.stepper.stepUp.subscribe(this.onStepUp.bind(this));
-                this.stepper.stepDown.subscribe(this.onStepDown.bind(this));
-            }
+            this._elementRef.nativeElement.classList.add(`mc-form-field-type-${this.control.controlType}`);
         }
 
         // Subscribe to changes in the child control state in order to update the form field UI.
@@ -129,12 +122,8 @@ export class McFormField extends McFormFieldMixinBase implements
                 this._changeDetectorRef.markForCheck();
             });
 
-        if (this.numberControl) {
-            this.numberControl.stateChanges
-                .pipe(startWith())
-                .subscribe(() => {
-                    this._changeDetectorRef.markForCheck();
-                });
+        if (this.hasStepper) {
+            this.stepper.connectTo((this.control as any).numberInput);
         }
 
         // Run change detection if the value changes.
@@ -183,18 +172,6 @@ export class McFormField extends McFormFieldMixinBase implements
         if (isHovered !== this.hovered) {
             this.hovered  = isHovered;
             this._changeDetectorRef.markForCheck();
-        }
-    }
-
-    onStepUp() {
-        if (this.numberControl) {
-            this.numberControl.stepUp(this.numberControl.step);
-        }
-    }
-
-    onStepDown() {
-        if (this.numberControl) {
-            this.numberControl.stepDown(this.numberControl.step);
         }
     }
 
@@ -253,12 +230,7 @@ export class McFormField extends McFormFieldMixinBase implements
     }
 
     get canShowStepper(): boolean {
-        return this.numberControl &&
-            !this.disabled &&
-            (
-                this.numberControl.focused ||
-                this.hovered
-            );
+        return this.control && !this.disabled && (this.control.focused || this.hovered);
     }
 }
 
