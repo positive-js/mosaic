@@ -1,8 +1,7 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { getSupportedInputTypes, Platform } from '@angular/cdk/platform';
+import { getSupportedInputTypes } from '@angular/cdk/platform';
 import {
     AfterContentInit,
-    Attribute,
     Directive,
     DoCheck,
     ElementRef,
@@ -19,14 +18,8 @@ import {
     NG_VALIDATORS,
     NgControl,
     NgForm,
-    NgModel,
     Validator
 } from '@angular/forms';
-import {
-    END, C, V, X, A, Z, DELETE, BACKSPACE, TAB, ENTER,
-    ESCAPE, ZERO, NINE, NUMPAD_ZERO, NUMPAD_NINE, NUMPAD_MINUS, DASH,
-    FF_MINUS, LEFT_ARROW, RIGHT_ARROW, HOME, UP_ARROW, DOWN_ARROW, F1, F12
-} from '@ptsecurity/cdk/keycodes';
 import {
     CanUpdateErrorState,
     CanUpdateErrorStateCtor,
@@ -36,12 +29,12 @@ import {
     mixinErrorState,
     setMosaicValidation
 } from '@ptsecurity/mosaic/core';
-import { McFormFieldControl, McFormFieldNumberControl } from '@ptsecurity/mosaic/form-field';
+import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { Subject } from 'rxjs';
 
 import { getMcInputUnsupportedTypeError } from './input-errors';
+import { McNumberInput } from './input-number';
 import { MC_INPUT_VALUE_ACCESSOR } from './input-value-accessor';
-import { stepDown, stepUp } from './stepperUtils';
 
 
 const MC_INPUT_INVALID_TYPES = [
@@ -56,9 +49,6 @@ const MC_INPUT_INVALID_TYPES = [
     'submit'
 ];
 
-export const BIG_STEP = 10;
-export const SMALL_STEP = 1;
-
 let nextUniqueId = 0;
 
 export class McInputBase {
@@ -72,200 +62,6 @@ export class McInputBase {
 
 // tslint:disable-next-line:naming-convention
 export const McInputMixinBase: CanUpdateErrorStateCtor & typeof McInputBase = mixinErrorState(McInputBase);
-
-
-@Directive({
-    selector: `input[mcInput][type="number"]`,
-    exportAs: 'mcNumericalInput',
-    providers: [
-        { provide: McFormFieldNumberControl, useExisting: McNumberInput }
-    ],
-    host: {
-        '(blur)': 'focusChanged(false)',
-        '(focus)': 'focusChanged(true)',
-        '(paste)': 'onPaste($event)',
-        '(keydown)': 'onKeyDown($event)'
-    }
-})
-export class McNumberInput implements McFormFieldNumberControl<any> {
-
-    /**
-     * Implemented as part of McFormFieldNumberControl.
-     * @docs-private
-     */
-    @Input()
-    bigStep: number;
-
-    /**
-     * Implemented as part of McFormFieldNumberControl.
-     * @docs-private
-     */
-    @Input()
-    step: number;
-
-    @Input()
-    min: number;
-
-    @Input()
-    max: number;
-
-    /**
-     * Implemented as part of McFormFieldNumberControl.
-     * @docs-private
-     */
-    value: any;
-
-    /**
-     * Implemented as part of McFormFieldNumberControl.
-     * @docs-private
-     */
-    focused: boolean = false;
-
-    /**
-     * Implemented as part of McFormFieldNumberControl.
-     * @docs-private
-     */
-    readonly stateChanges: Subject<void> = new Subject<void>();
-
-    private readonly host: HTMLInputElement;
-
-    constructor(
-        private platform: Platform ,
-        private elementRef: ElementRef,
-        private model: NgModel,
-        @Attribute('step') step: string,
-        @Attribute('big-step') bigStep: string,
-        @Attribute('min') min: string,
-        @Attribute('max') max: string
-    ) {
-        this.step = this.isDigit(step) ? parseFloat(step) : SMALL_STEP;
-        this.bigStep = this.isDigit(bigStep) ? parseFloat(bigStep) : BIG_STEP;
-        this.min = this.isDigit(min) ? parseFloat(min) : -Infinity;
-        this.max = this.isDigit(max) ? parseFloat(max) : Infinity;
-
-        this.host = this.elementRef.nativeElement;
-
-        const self = this;
-
-        if ('valueAsNumber' in this.host) {
-            Object.defineProperty(Object.getPrototypeOf(this.host), 'valueAsNumber', {
-                // tslint:disable-next-line:no-reserved-keywords
-                get() {
-                    const res = parseFloat(self.normalizeSplitter(this.value));
-
-                    return isNaN(res) ? null : res;
-                }
-            });
-        }
-    }
-
-    focusChanged(isFocused: boolean) {
-        if (isFocused !== this.focused) {
-            this.focused = isFocused;
-            this.stateChanges.next();
-        }
-    }
-
-    onKeyDown(event: KeyboardEvent) {
-        // tslint:disable-next-line:deprecation
-        const keyCode = event.keyCode;
-
-        const isCtrlA = (e) => e.keyCode === A && (e.ctrlKey || e.metaKey);
-        const isCtrlC = (e) => e.keyCode === C && (e.ctrlKey || e.metaKey);
-        const isCtrlV = (e) => e.keyCode === V && (e.ctrlKey || e.metaKey);
-        const isCtrlX = (e) => e.keyCode === X && (e.ctrlKey || e.metaKey);
-        const isCtrlZ = (e) => e.keyCode === Z && (e.ctrlKey || e.metaKey);
-
-        const isFKey = (e) => e.keyCode >= F1 && e.keyCode <= F12;
-
-        const isNumber = (e) => (e.keyCode >= ZERO && e.keyCode <= NINE) ||
-            (e.keyCode >= NUMPAD_ZERO && e.keyCode <= NUMPAD_NINE);
-
-        const minuses = [NUMPAD_MINUS, DASH, FF_MINUS];
-        const serviceKeys = [DELETE, BACKSPACE, TAB, ESCAPE, ENTER];
-        const arrows = [LEFT_ARROW, RIGHT_ARROW];
-        const allowedKeys =  [HOME, END].concat(arrows).concat(serviceKeys).concat(minuses);
-
-        const isIEPeriod = (e) => e.key === '.' || e.key === 'Decimal';
-        const isNotIEPeriod = (e) => e.key === '.' || e.key === ',';
-
-        // Decimal is for IE
-        const isPeriod = (e) => this.platform.EDGE || this.platform.TRIDENT
-            ? isIEPeriod(e)
-            : isNotIEPeriod(e);
-
-        if (allowedKeys.indexOf(keyCode) !== -1 ||
-            isCtrlA(event) ||
-            isCtrlC(event) ||
-            isCtrlV(event) ||
-            isCtrlX(event) ||
-            isCtrlZ(event) ||
-            isFKey(event) ||
-            isPeriod(event)
-        ) {
-            // let it happen, don't do anything
-            return;
-        }
-        // Ensure that it is not a number and stop the keypress
-        if (event.shiftKey || !isNumber(event)) {
-            event.preventDefault();
-
-            // process steps
-            const step = event.shiftKey ? this.bigStep : this.step;
-
-            if (keyCode === UP_ARROW) {
-                this.stepUp(step);
-            }
-
-            if (keyCode === DOWN_ARROW) {
-                this.stepDown(step);
-            }
-        }
-    }
-
-    onPaste(event) {
-        let value = event.clipboardData.getData('text');
-        value = this.normalizeSplitter(value);
-
-        if (!this.isDigit(value)) {
-            event.preventDefault();
-        }
-    }
-
-    stepUp(step: number) {
-        this.elementRef.nativeElement.focus();
-
-        const res = stepUp(this.host.valueAsNumber || 0, this.max, this.min, step);
-
-        this.host.value = res.toString();
-        this.model.update.emit(this.host.valueAsNumber);
-    }
-
-    stepDown(step: number) {
-        this.elementRef.nativeElement.focus();
-
-        const res = stepDown(this.host.valueAsNumber || 0, this.max, this.min, step);
-
-        this.host.value = res.toString();
-        this.model.update.emit(this.host.valueAsNumber);
-    }
-
-    private normalizeSplitter(value: string): string {
-        return value ? value.replace(/,/g, '.') : value;
-    }
-
-    private isDigit(value: string): boolean {
-        return this.isFloat(value) || this.isInt(value);
-    }
-
-    private isFloat(value: string): boolean {
-        return /^-?\d+\.\d+$/.test(value);
-    }
-
-    private isInt(value: string): boolean {
-        return /^-?\d+$/.test(value);
-    }
-}
 
 
 @Directive({
@@ -431,7 +227,7 @@ export class McInput extends McInputMixinBase implements McFormFieldControl<any>
         @Optional() @Self() @Inject(NG_VALIDATORS) public rawValidators: Validator[],
         @Optional() @Inject(MC_VALIDATION) private mcValidation: McValidationOptions,
         @Optional() @Self() ngControl: NgControl,
-        @Optional() @Self() public ngModel: NgModel,
+        @Optional() @Self() public numberInput: McNumberInput,
         @Optional() @Self() public formControlName: FormControlName,
         @Optional() parentForm: NgForm,
         @Optional() parentFormGroup: FormGroupDirective,
@@ -488,7 +284,9 @@ export class McInput extends McInputMixinBase implements McFormFieldControl<any>
     onBlur(): void {
         this.focusChanged(false);
 
-        this.ngControl.control!.updateValueAndValidity();
+        if (this.ngControl) {
+            this.ngControl.control!.updateValueAndValidity();
+        }
     }
 
     /** Callback for the cases where the focused state of the input changes. */

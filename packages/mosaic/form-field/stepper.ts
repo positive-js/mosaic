@@ -18,6 +18,18 @@ export class McStepper {
     @Output()
     readonly stepDown: EventEmitter<void> = new EventEmitter<void>();
 
+    connectTo(numberInput: any) {
+        if (!numberInput) { return; }
+
+        this.stepUp.subscribe(() => {
+            numberInput.stepUp(numberInput.step);
+        });
+
+        this.stepDown.subscribe(() => {
+            numberInput.stepDown(numberInput.step);
+        });
+    }
+
     onStepUp($event: MouseEvent) {
         this.stepUp.emit();
         $event.preventDefault();
