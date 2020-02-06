@@ -649,7 +649,7 @@ class BasicSelectOnPushPreselected {
     template: `
         <mc-form-field>
             <mc-tree-select
-                multiple
+                [multiple]="true"
                 placeholder="Food"
                 [formControl]="control">
 
@@ -1063,7 +1063,7 @@ class BasicSelectWithoutFormsPreselected {
 @Component({
     template: `
         <mc-form-field>
-            <mc-tree-select placeholder="Food" [(ngModel)]="selectedFoods" multiple>
+            <mc-tree-select placeholder="Food" [(ngModel)]="selectedFoods" [multiple]="true">
                 <mc-tree-selection
                     [dataSource]="dataSource"
                     [treeControl]="treeControl">

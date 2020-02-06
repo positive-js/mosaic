@@ -54,7 +54,10 @@ import {
     RIGHT_ARROW,
     SPACE,
     UP_ARROW,
-    A, PAGE_UP, PAGE_DOWN
+    A,
+    PAGE_UP,
+    PAGE_DOWN,
+    hasModifierKey
 } from '@ptsecurity/cdk/keycodes';
 import { CdkTree } from '@ptsecurity/cdk/tree';
 import {
@@ -940,7 +943,9 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
             }
 
             if (this.autoSelect && this.tree.keyManager.activeItem) {
-                this.tree.setSelectedOption(this.tree.keyManager.activeItem);
+                this.tree.setSelectedOptionsByKey(
+                    this.tree.keyManager.activeItem, hasModifierKey(event, 'shiftKey'), hasModifierKey(event, 'ctrlKey')
+                );
             }
         }
     }

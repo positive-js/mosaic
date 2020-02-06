@@ -31,7 +31,9 @@ import {
     PAGE_DOWN,
     PAGE_UP,
     RIGHT_ARROW,
-    SPACE
+    SPACE,
+    DOWN_ARROW,
+    UP_ARROW
 } from '@ptsecurity/cdk/keycodes';
 import { CdkTree, CdkTreeNodeOutlet, FlatTreeControl } from '@ptsecurity/cdk/tree';
 import { CanDisable, getMcSelectNonArrayValueError, HasTabIndex, MultipleMode } from '@ptsecurity/mosaic/core';
@@ -218,10 +220,9 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
                 if (this.keyManager.activeItem) {
                     this.emitNavigationEvent(this.keyManager.activeItem);
 
+                    // todo need check this logic
                     if (this.autoSelect && !this.keyManager.activeItem.disabled) {
                         this.updateOptionsFocus();
-
-                        this.setSelectedOption(this.keyManager.activeItem);
                     }
                 }
             });
@@ -280,10 +281,20 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
     }
 
     onKeyDown(event: KeyboardEvent): void {
+        this.keyManager.setFocusOrigin('keyboard');
+        console.log('onKeyDown: '); // tslint:disable-line:no-console
         // tslint:disable-next-line: deprecation
         const keyCode = event.keyCode;
 
         switch (keyCode) {
+            case DOWN_ARROW:
+                this.keyManager.setNextItemActive();
+
+                break;
+            case UP_ARROW:
+                this.keyManager.setPreviousItemActive();
+
+                break;
             case LEFT_ARROW:
                 if (this.keyManager.activeItem) {
                     this.treeControl.collapse(this.keyManager.activeItem.data as T);
@@ -327,7 +338,13 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
 
                 break;
             default:
-                this.keyManager.onKeydown(event);
+                return;
+        }
+
+        if (this.keyManager.activeItem) {
+            this.setSelectedOptionsByKey(
+                this.keyManager.activeItem, hasModifierKey(event, 'shiftKey'), hasModifierKey(event, 'ctrlKey')
+            );
         }
     }
 
@@ -337,49 +354,63 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
         this.keyManager.withScrollSize(Math.floor(this.getHeight() / this.renderedOptions.first.getHeight()));
     }
 
-    setSelectedOption(option: T, $event?: KeyboardEvent): void {
-        const withShift = $event ? hasModifierKey($event, 'shiftKey') : false;
-        const withCtrl = $event ? hasModifierKey($event, 'ctrlKey') : false;
-
-        if (this.multiple) {
-            if (withShift) {
-                const renderedOptions: T[] = this.renderedOptions.toArray();
-
-                let previousIndex = this.keyManager.previousActiveItemIndex;
-                let activeIndex = this.keyManager.activeItemIndex;
-                const activeOption = renderedOptions[activeIndex];
-
-                const targetSelected = !activeOption.selected;
-
-                if (previousIndex > activeIndex) {
-                    [previousIndex, activeIndex] = [activeIndex, previousIndex];
-                }
-
-                renderedOptions.forEach((item, index) => {
-                    if (!item.disabled && index >= previousIndex && index <= activeIndex) {
-                        item.setSelected(targetSelected);
-                    }
-                });
-            } else if (withCtrl) {
-                if (!this.canDeselectLast(option)) { return; }
-
-                this.selectionModel.toggle(option.data);
-            } else {
-                if (this.multipleMode === MultipleMode.KEYBOARD) {
-                    this.selectionModel.clear();
-                }
-
-                this.selectionModel.toggle(option.data);
-            }
-        } else {
+    setSelectedOptionsByKey(option: T, shiftKey: boolean, ctrlKey: boolean): void {
+        if (shiftKey && this.multiple) {
+            this.setSelectedOptions(option);
+        } else if (ctrlKey) {
             if (!this.canDeselectLast(option)) { return; }
-
-            if (this.autoSelect) {
-                this.selectionModel.toggle(option.data);
-            }
+        } else if (this.autoSelect) {
+            this.selectionModel.clear();
+            this.selectionModel.toggle(option.data);
         }
 
         this.emitChangeEvent(option);
+    }
+
+    setSelectedOptionsByClick(option: T, shiftKey: boolean, ctrlKey: boolean): void {
+        if (!shiftKey && !ctrlKey) {
+            this.keyManager.setActiveItem(option);
+        }
+
+        if (shiftKey && this.multiple) {
+            this.setSelectedOptions(option);
+        } else if (ctrlKey) {
+            if (!this.canDeselectLast(option)) { return; }
+
+            this.selectionModel.toggle(option.data);
+        } else if (this.autoSelect) {
+            this.selectionModel.clear();
+            this.selectionModel.toggle(option.data);
+        } else {
+            this.selectionModel.toggle(option.data);
+        }
+
+        this.emitChangeEvent(option);
+    }
+
+    setSelectedOptions(option: T): void {
+        const selectedOptionState = option.selected;
+
+        let fromIndex = this.keyManager.previousActiveItemIndex;
+        let toIndex = this.keyManager.previousActiveItemIndex = this.keyManager.activeItemIndex;
+
+        if (toIndex === fromIndex) { return; }
+
+        if (fromIndex > toIndex) {
+            [fromIndex, toIndex] = [toIndex, fromIndex];
+        }
+
+        this.renderedOptions
+            .toArray()
+            .slice(fromIndex, toIndex + 1)
+            .filter((item) => !item.disabled)
+            .forEach((renderedOption) => {
+                const isLastRenderedOption = renderedOption === this.keyManager.activeItem;
+
+                if (isLastRenderedOption && renderedOption.selected && this.noUnselectLast) { return; }
+
+                renderedOption.setSelected(!selectedOptionState);
+            });
     }
 
     setFocusedOption(option: T): void {
