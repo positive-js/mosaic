@@ -8,7 +8,7 @@
     $tooltip: map-get(map-get($theme, components), tooltip);
 
     $shadow: map-get($tooltip, shadow);
-    $background-color: map-get($tooltip, background_color);
+    $background-color: map-get($tooltip, background-color);
     $color: map-get($tooltip, color);
 
     .mc-tooltip-inner {

@@ -15,8 +15,8 @@
     $inner-circle_checked-state_border-color: map-get($radio, inner-circle_checked-state_border-color);
 
     $outer-circle_focused-state_border-color: map-get($radio, outer-circle_focused-state_border-color);
-    $outer-circle_focused-state_box-shadow: map-get($radio, outer-circle_focused-state_box-shadow);
-    $inner-circle_focused-state_box-shadow: map-get($radio, inner-circle_focused-state_box-shadow);
+    $outer-circle_focused-state_shadow: map-get($radio, outer-circle_focused-state_shadow);
+    $inner-circle_focused-state_shadow: map-get($radio, inner-circle_focused-state_shadow);
 
     .mc-radio-group {
         color: map-get($foreground, text);
@@ -53,11 +53,11 @@
         &.cdk-keyboard-focused {
             & .mc-radio-button__outer-circle {
                 border-color: $outer-circle_focused-state_border-color;
-                box-shadow: $outer-circle_focused-state_box-shadow;
+                box-shadow: $outer-circle_focused-state_shadow;
             }
 
             & .mc-radio-button__inner-circle {
-                box-shadow: $inner-circle_focused-state_box-shadow;
+                box-shadow: $inner-circle_focused-state_shadow;
             }
         }
 
