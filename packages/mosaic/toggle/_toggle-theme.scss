@@ -11,9 +11,9 @@
 
     $toggle: map-get(map-get($theme, components), toggle);
 
-    $border: map-get($toggle, border);
+    $border-color: map-get($toggle, border-color);
     $background_color: map-get($toggle, background);
-    $circle_border: map-get($toggle, circle_border);
+    $circle_border-color: map-get($toggle, circle_border-color);
     $circle_background: map-get($toggle, circle_background);
 
     $focused-state_color: map-get($toggle, focused-state_color);
@@ -22,13 +22,13 @@
         color: map-get($foreground, text);
 
         .mc-toggle-bar {
-            border-color: $border;
+            border-color: $border-color;
 
             background: $background_color;
         }
 
         .mc-toggle__circle {
-            border-color: $circle_border;
+            border-color: $circle_border-color;
 
             background: $circle_background;
         }

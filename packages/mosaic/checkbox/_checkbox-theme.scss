@@ -12,7 +12,7 @@
     $state-checked_border-color: map-get($checkbox, state-checked_border-color);
     $state-checked_background: map-get($checkbox, state-checked_background);
 
-    $state-focused_box-shadow: map-get($checkbox, state-focused_box-shadow);
+    $state-focused_shadow: map-get($checkbox, state-focused_shadow);
     $state-focused_border-color: map-get($checkbox, state-focused_border-color);
 
     .mc-checkbox-frame {
@@ -46,7 +46,7 @@
             + .mc-checkbox-frame {
                 border-color: $state-focused_border-color;
 
-                box-shadow: $state-focused_box-shadow;
+                box-shadow: $state-focused_shadow;
             }
         }
 

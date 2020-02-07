@@ -11,7 +11,7 @@
     $background: map-get($theme, background);
 
     $popup-common: map-get(map-get($theme, components), popup-common);
-    $background-footer: map-get($popup-common, footer_background);
+    $footer_background-color: map-get($popup-common, footer_background-color);
 
     $modal: map-get(map-get($theme, components), modal);
 
@@ -35,7 +35,7 @@
 
         .mc-modal-footer {
             border-top: 1px solid $divider-color;
-            background-color: $background-footer;
+            background-color: $footer_background-color;
         }
 
         .mc-modal-close {
@@ -56,7 +56,7 @@
     .mc-confirm {
         .mc-confirm-btns {
             border-top: 1px solid $divider-color;
-            background-color: $background-footer;
+            background-color: $footer_background-color;
         }
     }
 }

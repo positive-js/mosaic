@@ -9,8 +9,8 @@
 
     $popover: map-get(map-get($theme, components), popover);
 
-    $background: map-get($popover, background);
-    $footer-background: map-get($popover, footer_background);
+    $background-color: map-get($popover, background-color);
+    $footer_background-color: map-get($popover, footer_background-color);
     $border-color: map-get($popover, border-color);
 
     .mc-popover {
@@ -20,7 +20,7 @@
 
     .mc-popover__container {
         color: map-get($foreground, text);
-        background-color: $background;
+        background-color: $background-color;
     }
 
     .mc-popover__header {
@@ -29,11 +29,11 @@
 
     .mc-popover__header,
     .mc-popover__content {
-        background-color: $background;
+        background-color: $background-color;
     }
 
     .mc-popover__footer {
-        background-color: $footer-background;
+        background-color: $footer_background-color;
         border-top-color: map-get($foreground, divider);
     }
 
@@ -44,45 +44,45 @@
     .mc-popover_placement-top .mc-popover__arrow,
     .mc-popover_placement-top-left .mc-popover__arrow,
     .mc-popover_placement-top-right .mc-popover__arrow {
-        background-color: $background;
-        border-top-color: $background;
-        border-left-color: $background;
+        background-color: $background-color;
+        border-top-color: $background-color;
+        border-left-color: $background-color;
     }
 
     .mc-popover_placement-top .mc-popover__arrow.mc-popover__arrow_with-footer,
     .mc-popover_placement-top-left .mc-popover__arrow.mc-popover__arrow_with-footer,
     .mc-popover_placement-top-right .mc-popover__arrow.mc-popover__arrow_with-footer {
-        background-color: $footer-background;
-        border-top-color: $footer-background;
-        border-left-color: $footer-background;
+        background-color: $footer_background-color;
+        border-top-color: $footer_background-color;
+        border-left-color: $footer_background-color;
     }
 
     .mc-popover_placement-right .mc-popover__arrow,
     .mc-popover_placement-right-top .mc-popover__arrow,
     .mc-popover_placement-right-bottom .mc-popover__arrow {
-        background-color: $background;
-        border-top-color: $background;
-        border-right-color: $background;
+        background-color: $background-color;
+        border-top-color: $background-color;
+        border-right-color: $background-color;
     }
 
     .mc-popover_placement-right-bottom .mc-popover__arrow.mc-popover__arrow_with-footer {
-        background-color: $footer-background;
-        border-top-color: $footer-background;
-        border-right-color: $footer-background;
+        background-color: $footer_background-color;
+        border-top-color: $footer_background-color;
+        border-right-color: $footer_background-color;
     }
 
     .mc-popover_placement-left .mc-popover__arrow,
     .mc-popover_placement-left-top .mc-popover__arrow,
     .mc-popover_placement-left-bottom .mc-popover__arrow {
-        background-color: $background;
-        border-bottom-color: $background;
-        border-left-color: $background;
+        background-color: $background-color;
+        border-bottom-color: $background-color;
+        border-left-color: $background-color;
     }
 
     .mc-popover_placement-left-bottom .mc-popover__arrow.mc-popover__arrow_with-footer {
-        background-color: $footer-background;
-        border-bottom-color: $footer-background;
-        border-left-color: $footer-background;
+        background-color: $footer_background-color;
+        border-bottom-color: $footer_background-color;
+        border-left-color: $footer_background-color;
     }
 
     .mc-popover_placement-bottom .mc-popover__arrow,
@@ -91,9 +91,9 @@
     .mc-popover_placement-bottom .mc-popover__arrow.mc-popover__arrow_with-footer,
     .mc-popover_placement-bottom-left .mc-popover__arrow.mc-popover__arrow_with-footer,
     .mc-popover_placement-bottom-right .mc-popover__arrow.mc-popover__arrow_with-footer {
-        background-color: $background;
-        border-right-color: $background;
-        border-bottom-color: $background;
+        background-color: $background-color;
+        border-right-color: $background-color;
+        border-bottom-color: $background-color;
     }
 }
 
