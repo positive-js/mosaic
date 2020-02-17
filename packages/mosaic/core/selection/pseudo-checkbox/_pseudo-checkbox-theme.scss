@@ -8,11 +8,11 @@
     $background: map-get($theme, background);
     $foreground: map-get($theme, foreground);
 
-    $is-dark-theme: map-get($theme, is-dark);
+    $is-dark: map-get($theme, is-dark);
 
     .mc-pseudo-checkbox {
         border-color: mc-color($second);
-        background-color: map-get($background, background);;
+        background-color: map-get($background, background);
 
         & .mc-checkbox-checkmark,
         & .mc-checkbox-mixedmark {
@@ -20,19 +20,19 @@
         }
 
         &.mc-checked {
-            border-color: mc-color($primary, if($is-dark-theme, lighter, darker));
+            border-color: mc-color($primary, if($is-dark, lighter, darker));
 
-            background: if($is-dark-theme, mc-color($primary, 600), mc-color($primary));
+            background: if($is-dark, mc-color($primary, 600), mc-color($primary));
         }
 
         &.mc-disabled {
-            border-color: map-get($background, button-border);
+            border-color: map-get($foreground, border);
 
-            background-color: map-get($background, button-bg);
+            background-color: map-get($background, background-disabled);
 
             .mc-checkbox-checkmark,
             .mc-checkbox-mixedmark {
-                color: map-get($foreground, disabled-text);
+                color: map-get($foreground, text-disabled);
             }
         }
     }

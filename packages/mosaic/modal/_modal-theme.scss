@@ -5,23 +5,24 @@
 
 
 @mixin mc-modal-theme($theme) {
-    $primary: map-get($theme, primary);
     $second: map-get($theme, second);
 
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    $is-dark: map-get($theme, is-dark);
+    $popup-common: map-get(map-get($theme, components), popup-common);
+    $footer_background-color: map-get($popup-common, footer_background-color);
 
-    $inner-border: mc-color($second, if($is-dark, 600, 60));
+    $modal: map-get(map-get($theme, components), modal);
+
+    $divider-color: mc-color($foreground, divider);
 
     .mc-modal {
         .mc-modal-content {
+            // почему у модалки такой бэкграунд ?
             background-color: map-get($background, background);
 
-            box-shadow:
-                0 0 0 1px mc-color($second, if($is-dark, 800, 300)),
-                0 6px 12px 0 rgba(0, 0, 0, 0.5);
+            box-shadow: map-get($modal, shadow);
         }
 
         .mc-modal-title {
@@ -29,35 +30,33 @@
         }
 
         .mc-modal-header {
-            border-bottom: 1px solid $inner-border;
+            border-bottom: 1px solid $divider-color;
         }
 
         .mc-modal-footer {
-            border-top: 1px solid $inner-border;
-            background-color: if($is-dark, transparent, mc-color($second, 60));
+            border-top: 1px solid $divider-color;
+            background-color: $footer_background-color;
         }
 
         .mc-modal-close {
-            border: $mc-button-border-size solid transparent;
+            border: 1px solid transparent;
 
-            &:hover .mc-button-overlay {
-                background-color: transparent;
-            }
+            &:hover {
+                .mc-button-overlay {
+                    background: map-get($background, overlay-hovered);
+                }
 
-            &:hover,
-            &.cdk-keyboard-focused {
                 .mc-icon {
-                    color: mix(map-get($foreground, text), mc-color($second), 90%);
+                    color: inherit;
                 }
             }
         }
     }
 
     .mc-confirm {
-        // todo почему футер внезапно перестал быть футером ?
         .mc-confirm-btns {
-            border-top: 1px solid $inner-border;
-            background-color: if($is-dark, transparent, mc-color($second, 60));
+            border-top: 1px solid $divider-color;
+            background-color: $footer_background-color;
         }
     }
 }

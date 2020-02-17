@@ -37,7 +37,7 @@ in a list, because it will overlap with the section divider.
 
 ```html
 <mc-list>
-   <h3 mc-subheader>Folders</h3>
+   <h3>Folders</h3>
    <mc-list-item *ngFor="let folder of folders; last as last">
       <mc-icon mc-list-icon>folder</mc-icon>
       <h4 mc-line>{{folder.name}}</h4>
@@ -45,7 +45,7 @@ in a list, because it will overlap with the section divider.
       <mc-divider [inset]="true" *ngIf="!last"></mc-divider>
    </mc-list-item>
    <mc-divider></mc-divider>
-   <h3 mc-subheader>Notes</h3>
+   <h3>Notes</h3>
    <mc-list-item *ngFor="let note of notes">
       <mc-icon mc-list-icon>note</mc-icon>
       <h4 mc-line>{{note.name}}</h4>

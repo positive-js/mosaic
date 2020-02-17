@@ -2,7 +2,7 @@
 @import '../core/theming/palette';
 
 
-@mixin normal-state($color, $second, $is-dark) {
+@mixin card-type($color, $second, $is-dark) {
     box-shadow:
         inset -1px 0 0 0 mc-color($second, if($is-dark, darker, lighter)),
         inset 0 1px 0 0 mc-color($second, if($is-dark, darker, lighter)),
@@ -14,7 +14,6 @@
 }
 
 @mixin mc-card-theme($theme) {
-    $primary: map-get($theme, primary);
     $second: map-get($theme, second);
     $error: map-get($theme, error);
 
@@ -27,42 +26,47 @@
     $background: map-get($theme, background);
     $foreground: map-get($theme, foreground);
 
+    $selected-color: map-get(map-get($theme, states), selected-color);
+
     .mc-card {
         color: map-get($foreground, text);
-        
+
         &.mc-card_info {
-            @include normal-state($info, $second, $is-dark);
+            @include card-type($info, $second, $is-dark);
         }
-        
+
         &.mc-card_warning {
-            @include normal-state($warning, $second, $is-dark);
+            @include card-type($warning, $second, $is-dark);
         }
 
         &.mc-card_success {
-            @include normal-state($success, $second, $is-dark);
+            @include card-type($success, $second, $is-dark);
         }
 
         &.mc-card_error {
-            @include normal-state($error, $second, $is-dark);
+            @include card-type($error, $second, $is-dark);
         }
 
         &.mc-card_white {
-            background-color: mix(map-get($background, background), white, 90%);
+            $popup-common: map-get(map-get($theme, components), popup-common);
+
+            background-color: map-get($popup-common, background);
         }
 
         &.mc-card_selected {
-            background-color: mc-color($primary, if($is-dark, 700, 100));
+            background-color: $selected-color;
         }
 
-        // todo мне кажется тут можно сделать без overlay
         &:not(.mc-card_readonly):hover {
             .mc-card__overlay {
-                background: map-get($background, hover);
+                background: map-get($background, overlay-hovered);
             }
         }
 
         &.cdk-keyboard-focused {
-            box-shadow: 0 0 0 2px mc-color($primary);
+            $focused-color: map-get(map-get($theme, states), focused-color);
+
+            box-shadow: 0 0 0 2px $focused-color;
         }
     }
 }

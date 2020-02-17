@@ -2,81 +2,70 @@
 @import '../core/styles/typography/typography-utils';
 
 
-$hover-darken: 5%;
-
 @mixin mc-toggle-theme($theme) {
     $primary: map-get($theme, primary);
-    $second: map-get($theme, second);
     $error: map-get($theme, error);
 
     $background: map-get($theme, background);
     $foreground: map-get($theme, foreground);
 
-    $is-dark: map-get($theme, is-dark);
+    $toggle: map-get(map-get($theme, components), toggle);
+
+    $border-color: map-get($toggle, border-color);
+    $background_color: map-get($toggle, background);
+    $circle_border-color: map-get($toggle, circle_border-color);
+    $circle_background: map-get($toggle, circle_background);
+
+    $focused-state_color: map-get($toggle, focused-state_color);
 
     .mc-toggle {
         color: map-get($foreground, text);
 
         .mc-toggle-bar {
-            background: map-get($background, button-bg);
-            border-color: mc-color($background, button-border);
+            border-color: $border-color;
+
+            background: $background_color;
         }
 
         .mc-toggle__circle {
-            border-color: mc-color($background, button-border);
+            border-color: $circle_border-color;
 
-            background: linear-gradient(to bottom, white, if($is-dark, white, mc-color($second, lighter)));
-        }
-
-        &.mc-toggle_off {
-            .mc-toggle-bar {
-                background: linear-gradient(to bottom, mc-color($second, lighter), mc-color($background, button-bg));
-
-                @if $is-dark {
-                    background: map-get($background, background);
-                }
-            }
+            background: $circle_background;
         }
 
         &:hover {
-            & .mc-toggle__focus-frame {
-                background: map-get($background, hover);
+            & .mc-toggle__overlay {
+                background: map-get($background, overlay-hovered);
             }
         }
 
         &.cdk-keyboard-focused {
-            & .mc-toggle__focus-frame {
-                box-shadow: inset 0 0 0 1px map-get($background, background), 0 0 0 2px mc-color($primary);
+            & .mc-toggle__overlay {
+                box-shadow: $focused-state_color;
             }
         }
 
-        &.mc-primary:not(.mc-toggle_off) {
-            .mc-toggle-bar {
-                border-color: mc-color($primary);
-                background: mc-color($primary);
+        &.mc-active {
+            &.mc-primary {
+                .mc-toggle-bar {
+                    border-color: mc-color($primary);
+                    background: mc-color($primary);
+                }
             }
-        }
 
-        &.mc-error:not(.mc-toggle_off) {
-            .mc-toggle-bar {
-                border-color: mc-color($error);
-                background: mc-color($error);
+            &.mc-error {
+                .mc-toggle-bar {
+                    border-color: mc-color($error);
+                    background: mc-color($error);
+                }
             }
         }
 
         &.mc-disabled {
-            color: map-get($foreground, disabled-text);
+            color: map-get($foreground, text-disabled);
 
-            &.mc-toggle_off {
-                .mc-toggle-bar {
-                    @if $is-dark {
-                        background: map-get($mc-grey, 700);
-                    }
-                }
-            }
-
-            & .mc-toggle__focus-frame {
-                background: map-get($background, disabled-overlay);
+            & .mc-toggle__overlay {
+                background: map-get($background, overlay-disabled);
             }
         }
     }

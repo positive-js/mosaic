@@ -3,15 +3,14 @@
 
 
 @mixin mc-sidepanel-theme($theme) {
-    $primary: map-get($theme, primary);
-    $second: map-get($theme, second);
-
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    $is-dark: map-get($theme, is-dark);
+    $divider-color: mc-color($foreground, divider);
 
-    $inner-border: mc-color($second, if($is-dark, 600, 60));
+    $popup-common: map-get(map-get($theme, components), popup-common);
+
+    $sidepanel: map-get(map-get($theme, components), sidepanel);
 
     .mc-sidepanel-content {
         background-color: map-get($background, background);
@@ -21,7 +20,7 @@
         &.mc-sidepanel-container_right {
             .mc-sidepanel-content {
                 box-shadow:
-                    0 0 0 1px mc-color($second, if($is-dark, 800, 300)),
+                    0 0 0 1px map-get($sidepanel, border_color),
                     -6px 0 12px 0 rgba(0, 0, 0, 0.24);
             }
         }
@@ -29,7 +28,7 @@
         &.mc-sidepanel-container_left {
             .mc-sidepanel-content {
                 box-shadow:
-                    0 0 0 1px mc-color($second, if($is-dark, 800, 300)),
+                    0 0 0 1px map-get($sidepanel, border_color),
                     6px 0 12px 0 rgba(0, 0, 0, 0.24);
             }
         }
@@ -37,7 +36,7 @@
         &.mc-sidepanel-container_bottom {
             .mc-sidepanel-content {
                 box-shadow:
-                    0 0 0 1px mc-color($second, if($is-dark, 800, 300)),
+                    0 0 0 1px map-get($sidepanel, border_color),
                     0 -6px 12px 0 rgba(0, 0, 0, 0.24);
             }
         }
@@ -45,24 +44,19 @@
         &.mc-sidepanel-container_top {
             .mc-sidepanel-content {
                 box-shadow:
-                    0 0 0 1px mc-color($second, if($is-dark, 800, 300)),
+                    0 0 0 1px map-get($sidepanel, border_color),
                     0 6px 12px 0 rgba(0, 0, 0, 0.24);
             }
         }
     }
 
     .mc-sidepanel-header {
-        border-bottom: 1px solid $inner-border;
+        border-bottom: 1px solid $divider-color;
     }
 
     .mc-sidepanel-footer {
-        border-top: 1px solid $inner-border;
-        background-color: if($is-dark, transparent, mc-color($second, 60));
-    }
-
-    .mc-sidepanel-close-x:hover .mc-icon,
-    .mc-sidepanel-close:hover .mc-sidepanel-close-x .mc-icon {
-        color: mix(map-get($foreground, text), mc-color($second), 90%);
+        border-top: 1px solid $divider-color;
+        background-color: map-get($popup-common, footer_background-color);
     }
 }
 

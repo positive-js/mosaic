@@ -11,7 +11,7 @@
     }
 
     .mc-disabled .mc-optgroup-label {
-        color: mc-color($foreground, disabled-text);
+        color: mc-color($foreground, text-disabled);
     }
 }
 

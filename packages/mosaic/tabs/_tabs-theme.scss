@@ -1,13 +1,12 @@
 @mixin mc-tabs-theme($theme) {
-    $primary: map-get($theme, primary);
-    $second: map-get($theme, second);
-
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    $is-dark: map-get($theme, is-dark);
+    $focused-color: map-get(map-get($theme, states), focused-color);
 
-    $border-color: mc-color($second, 300);
+    $tabs: map-get(map-get($theme, components), tabs);
+    $border-color: map-get($tabs, border-color);
+    $state-active_color: map-get($tabs, state-active_color);
 
     .mc-tab-label,
     .mc-tab-light-label,
@@ -21,24 +20,22 @@
         }
 
         &:hover .mc-tab-overlay {
-            background: mc-color($background, hover);
+            background: mc-color($background, overlay-hovered);
         }
 
-        &.cdk-keyboard-focused {
-            &:after {
-                border-color: mc-color($primary);
-            }
+        &.cdk-keyboard-focused:after {
+            border-color: $focused-color;
         }
 
         &.mc-disabled {
-            color: mc-color($foreground, disabled-text);
+            color: mc-color($foreground, text-disabled);
 
             cursor: default;
 
-            background: if($is-dark, mc-color($second, 600), transparent);
+            background: mc-color($background, background-disabled);
 
             & .mc-tab-overlay {
-                background: mc-color($background, disabled-overlay);
+                background: mc-color($background, overlay-disabled);
             }
         }
     }
@@ -67,13 +64,13 @@
             border-bottom-color: transparent;
 
             &:before {
-                background-color: mc-color($second, 300);
+                background-color: $border-color;
             }
         }
 
         &.mc-active {
             &:before {
-                background-color: mc-color($primary);
+                background-color: $state-active_color;
             }
 
             & .mc-tab-overlay {

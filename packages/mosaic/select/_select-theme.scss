@@ -1,17 +1,15 @@
 @import '../core/theming/theming';
 @import '../core/theming/palette';
 @import '../core/styles/typography/typography-utils';
+@import '../core/styles/common/popup';
 
 
 @mixin mc-select-theme($theme) {
-    $primary: map-get($theme, primary);
-    $second: map-get($theme, second);
     $error: map-get($theme, error);
 
     $foreground: map-get($theme, foreground);
-    $background: map-get($theme, background);
 
-    $is-dark: map-get($theme, is-dark);
+    $popup-common: map-get(map-get($theme, components), popup-common);
 
     .mc-select {
         color: map-get($foreground, text);
@@ -21,34 +19,24 @@
         }
 
         &.mc-disabled {
-            color: mc-color($foreground, disabled-text);
+            color: mc-color($foreground, text-disabled);
         }
     }
 
     .mc-select__placeholder {
-        color: map-get($foreground, disabled-text);
+        color: map-get($foreground, text-disabled);
     }
 
     .mc-select__panel {
-        border: {
-            color: mc-color($second);
-        }
-
-        box-shadow: 0 3px 3px 0 mc-color($second, A200);
-
-        background-color: if($is-dark, map-get($second, 700), map-get($background, background));
-    }
-
-    .mc-select__no-options-message {
-        color: mc-color($second, 400);
+        @include popup-params($theme);
     }
 
     .mc-select__search-container {
-        border-bottom: {
-            width: 1px;
-            style: solid;
-            color: mc-color($second);
-        }
+        border-bottom-color: map-get($popup-common, border-color);
+    }
+
+    .mc-select__no-options-message {
+        color: mc-color($foreground, text-less-contrast);
     }
 }
 

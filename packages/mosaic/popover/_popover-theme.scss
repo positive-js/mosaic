@@ -5,14 +5,13 @@
 
 
 @mixin mc-popover-theme($theme) {
-    $background: map-get($theme, background);
     $foreground: map-get($theme, foreground);
 
-    $is-dark: map-get($theme, is-dark);
+    $popover: map-get(map-get($theme, components), popover);
 
-    $primary-background-color: map-get($background, background);
-    $secondary-background-color: if($is-dark, map-get($background, background), map-get($background, button-bg));
-    $border-color: if($is-dark, $primary-background-color, map-get($foreground, disabled));
+    $background-color: map-get($popover, background-color);
+    $footer_background-color: map-get($popover, footer_background-color);
+    $border-color: map-get($popover, border-color);
 
     .mc-popover {
         border-color: $border-color;
@@ -21,20 +20,21 @@
 
     .mc-popover__container {
         color: map-get($foreground, text);
-        background-color: $primary-background-color;
+        background-color: $background-color;
     }
 
     .mc-popover__header {
         border-bottom-color: map-get($foreground, divider);
     }
 
-    .mc-popover__header, .mc-popover__content {
-        background-color: $primary-background-color;
+    .mc-popover__header,
+    .mc-popover__content {
+        background-color: $background-color;
     }
 
     .mc-popover__footer {
-        background-color: $secondary-background-color;
-        border-top-color: if($is-dark, map-get($foreground, divider), $secondary-background-color);
+        background-color: $footer_background-color;
+        border-top-color: map-get($foreground, divider);
     }
 
     .mc-popover .mc-popover__arrow {
@@ -43,46 +43,46 @@
 
     .mc-popover_placement-top .mc-popover__arrow,
     .mc-popover_placement-top-left .mc-popover__arrow,
-    .mc-popover_placement-top-right .mc-popover__arrow{
-        background-color: $primary-background-color;
-        border-top-color: $primary-background-color;
-        border-left-color: $primary-background-color;
+    .mc-popover_placement-top-right .mc-popover__arrow {
+        background-color: $background-color;
+        border-top-color: $background-color;
+        border-left-color: $background-color;
     }
 
     .mc-popover_placement-top .mc-popover__arrow.mc-popover__arrow_with-footer,
     .mc-popover_placement-top-left .mc-popover__arrow.mc-popover__arrow_with-footer,
     .mc-popover_placement-top-right .mc-popover__arrow.mc-popover__arrow_with-footer {
-        background-color: $secondary-background-color;
-        border-top-color: $secondary-background-color;
-        border-left-color: $secondary-background-color;
+        background-color: $footer_background-color;
+        border-top-color: $footer_background-color;
+        border-left-color: $footer_background-color;
     }
 
     .mc-popover_placement-right .mc-popover__arrow,
     .mc-popover_placement-right-top .mc-popover__arrow,
-    .mc-popover_placement-right-bottom .mc-popover__arrow{
-        background-color: $primary-background-color;
-        border-top-color: $primary-background-color;
-        border-right-color: $primary-background-color;
+    .mc-popover_placement-right-bottom .mc-popover__arrow {
+        background-color: $background-color;
+        border-top-color: $background-color;
+        border-right-color: $background-color;
     }
 
     .mc-popover_placement-right-bottom .mc-popover__arrow.mc-popover__arrow_with-footer {
-        background-color: $secondary-background-color;
-        border-top-color: $secondary-background-color;
-        border-right-color: $secondary-background-color;
+        background-color: $footer_background-color;
+        border-top-color: $footer_background-color;
+        border-right-color: $footer_background-color;
     }
 
     .mc-popover_placement-left .mc-popover__arrow,
     .mc-popover_placement-left-top .mc-popover__arrow,
     .mc-popover_placement-left-bottom .mc-popover__arrow {
-        background-color: $primary-background-color;
-        border-bottom-color: $primary-background-color;
-        border-left-color: $primary-background-color;
+        background-color: $background-color;
+        border-bottom-color: $background-color;
+        border-left-color: $background-color;
     }
 
     .mc-popover_placement-left-bottom .mc-popover__arrow.mc-popover__arrow_with-footer {
-        background-color: $secondary-background-color;
-        border-bottom-color: $secondary-background-color;
-        border-left-color: $secondary-background-color;
+        background-color: $footer_background-color;
+        border-bottom-color: $footer_background-color;
+        border-left-color: $footer_background-color;
     }
 
     .mc-popover_placement-bottom .mc-popover__arrow,
@@ -90,10 +90,10 @@
     .mc-popover_placement-bottom-right .mc-popover__arrow,
     .mc-popover_placement-bottom .mc-popover__arrow.mc-popover__arrow_with-footer,
     .mc-popover_placement-bottom-left .mc-popover__arrow.mc-popover__arrow_with-footer,
-    .mc-popover_placement-bottom-right .mc-popover__arrow.mc-popover__arrow_with-footer{
-        background-color: $primary-background-color;
-        border-right-color: $primary-background-color;
-        border-bottom-color: $primary-background-color;
+    .mc-popover_placement-bottom-right .mc-popover__arrow.mc-popover__arrow_with-footer {
+        background-color: $background-color;
+        border-right-color: $background-color;
+        border-bottom-color: $background-color;
     }
 }
 

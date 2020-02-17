@@ -4,7 +4,7 @@ import { A11yModule } from '@ptsecurity/cdk/a11y';
 import { McLineModule, McOptionModule, McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
 
 import { McListSelection, McListOption } from './list-selection.component';
-import { McList, McListItem, McListSubheaderCssStyler } from './list.component';
+import { McList, McListItem } from './list.component';
 
 
 @NgModule({
@@ -20,15 +20,13 @@ import { McList, McListItem, McListSubheaderCssStyler } from './list.component';
         McListSelection,
         McListItem,
         McListOption,
-        McOptionModule,
-        McListSubheaderCssStyler
+        McOptionModule
     ],
     declarations: [
         McList,
         McListSelection,
         McListItem,
-        McListOption,
-        McListSubheaderCssStyler
+        McListOption
     ]
 })
 export class McListModule {}

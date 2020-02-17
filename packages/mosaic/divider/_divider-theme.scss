@@ -4,12 +4,13 @@
 
 @mixin mc-divider-theme($theme) {
     $foreground: map-get($theme, foreground);
+    $color: mc-color($foreground, divider);
 
     .mc-divider {
-        border-top-color: mc-color($foreground, divider);
+        border-top-color: $color;
     }
 
     .mc-divider-vertical {
-        border-right-color: mc-color($foreground, divider);
+        border-right-color: $color;
     }
 }

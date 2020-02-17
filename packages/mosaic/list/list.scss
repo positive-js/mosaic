@@ -10,24 +10,6 @@
     display: block;
 
     outline: none;
-
-    .mc-subheader {
-        display: flex;
-        box-sizing: border-box;
-
-        @include mc-subheader-spacing($mc-list-top-padding, $mc-list-base-height);
-
-        padding: $mc-list-side-padding;
-
-        align-items: center;
-
-        // This needs slightly more specificity, because it
-        // can be overwritten by the typography styles.
-        .mc-list &,
-        .mc-list-selection & {
-            margin: 0;
-        }
-    }
 }
 
 .mc-list-item,

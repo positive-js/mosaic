@@ -1,27 +1,20 @@
 @import '../core/theming/theming';
+@import '../core/styles/common/popup';
 
 @mixin mc-autocomplete-theme($theme) {
-    $second: map-get($theme, second);
-
     $foreground: map-get($theme, foreground);
-    $background: map-get($theme, background);
-
-    $is-dark: map-get($theme, is-dark);
 
     .mc-autocomplete-panel {
+        @include popup-params($theme);
+
         color: mc-color($foreground, text);
 
-        background-color: if($is-dark, map-get($second, 700), map-get($background, background));
-
-        border-color: mc-color($second);
-
-        box-shadow: 0 3px 3px 0 mc-color($second, A200);
-
         .mc-selected {
-            background-color: if($is-dark, map-get($second, 700), map-get($background, background));
+            $popup-common: map-get(map-get($theme, components), popup-common);
+
+            background-color: map-get($popup-common, background);
         }
     }
 }
 
-@mixin mc-autocomplete-typography($config) {
-}
+@mixin mc-autocomplete-typography($config) {}

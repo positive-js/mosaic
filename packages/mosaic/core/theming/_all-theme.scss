@@ -3,7 +3,6 @@
 @import '../styles/badges';
 @import '../styles/alerts';
 @import '../../autocomplete/autocomplete-theme';
-@import '../../button-toggle/button-toggle-theme';
 @import '../../button/button-theme';
 @import '../../card/card-theme';
 @import '../../checkbox/checkbox-theme';
@@ -39,13 +38,12 @@
 
 
 @mixin mosaic-theme($theme) {
-
     @include mc-core-theme($theme);
+
     @include mc-alert-theme($theme);
     @include mc-autocomplete-theme($theme);
     @include mc-badge-theme($theme);
     @include mc-button-theme($theme);
-    @include mc-button-toggle-theme($theme);
     @include mc-card-theme($theme);
     @include mc-checkbox-theme($theme);
     @include mc-datepicker-theme($theme);
@@ -67,10 +65,8 @@
     @include mc-select-theme($theme);
     @include mc-sidepanel-theme($theme);
     @include mc-splitter-theme($theme);
-    @include mc-splitter-theme($theme);
     @include mc-tabs-theme($theme);
     @include mc-tag-theme($theme);
-    @include mc-textarea-theme($theme);
     @include mc-textarea-theme($theme);
     @include mc-toggle-theme($theme);
     @include mc-tooltip-theme($theme);

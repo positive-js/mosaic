@@ -1,120 +1,103 @@
-$black-12-opacity: rgba(black, 0.12);
-$black-6-opacity:  rgba(black, 0.06);
-
-$white-12-opacity: rgba(white, 0.12);
-
-$dark-text-default:     #4d4d4d;
-$dark-text-secondary:   #999999;
-$dark-text-disabled:    #b3b3b3;
-
-$dark-icon-secondary:   #cccccc;
-
-$light-text-default:    #f0f0f0;
-$light-text-secondary:  #999999;
-$light-text-disabled:   #999999;
-
-$light-icon-secondary:  #999999;
-
 $mc-blue: (
-    40: #f5fafd,
-    60: #ebf4fb,
-    100: #d8eaf7,
-    200: #aad1ec,
-    300: #7fbae1,
-    400: #57a4d7,
-    500: #338fcc,
-    560: #277bb3,
-    600: #206ea2,
-    700: #114e77,
-    800: #07314d,
+    40: #F5FAFD,
+    60: #EBF4FB,
+    100: #D8EAF7,
+    200: #AAD1EC,
+    300: #7FBAE1,
+    400: #57A4D7,
+    500: #338FCC,
+    560: #277BB3,
+    600: #206EA2,
+    700: #114E77,
+    800: #07314D,
     A100: rgba(0, 153, 255, 0.15),
     A200: rgba(0, 153, 255, 0.3),
     contrast: (
-        40: $dark-text-default,
-        60: $dark-text-default,
-        100: $dark-text-default,
-        200: $dark-text-default,
-        300: $dark-text-default,
+        40: #4D4D4D,
+        60: #4D4D4D,
+        100: #4D4D4D,
+        200: #4D4D4D,
+        300: #4D4D4D,
         400: white,
         500: white,
         560: white,
         600: white,
         700: white,
         800: white,
-        A100: $dark-text-default,
+        A100: #4D4D4D,
         A200: white,
     )
 );
 
 $mc-green: (
-    40: #f6fbf4,
-    60: #edf8e9,
-    100: #dcf1d4,
-    200: #b4dea4,
-    300: #8fcc79,
-    400: #6fba53,
-    500: #52a832,
+    40: #F6FBF4,
+    60: #EDF8E9,
+    100: #DCF1D4,
+    200: #B4DEA4,
+    300: #8FCC79,
+    400: #6FBA53,
+    500: #52A832,
     560: #449327,
-    600: #3b8520,
+    600: #3B8520,
     700: #276211,
-    800: #163f07,
+    800: #163F07,
     A100: rgba(68, 255, 0, 0.15),
     contrast: (
-        40: $dark-text-default,
-        60: $dark-text-default,
-        100: $dark-text-default,
-        200: $dark-text-default,
-        300: $dark-text-default,
+        40: #4D4D4D,
+        60: #4D4D4D,
+        100: #4D4D4D,
+        200: #4D4D4D,
+        300: #4D4D4D,
         400: white,
         500: white,
         560: white,
         600: white,
         700: white,
         800: white,
-        A100: $dark-text-default,
+        A100: #4D4D4D,
     )
 );
 
 $mc-red: (
-    40: #fef7f6,
-    60: #fcefec,
-    100: #fadeda,
-    200: #f4b7ae,
-    300: #ed9284,
-    400: #e76e5c,
-    500: #e04d36,
-    560: #c43e29,
-    600: #b23522,
+    40: #FEF7F6,
+    60: #FCEFEC,
+    100: #FADEDA,
+    200: #F4B7AE,
+    300: #ED9284,
+    400: #E76E5C,
+    500: #E04D36,
+    560: #C43E29,
+    600: #B23522,
     700: #832112,
     800: #541208,
     A100: rgba(224, 79, 56, 0.15),
     contrast: (
-        40: $dark-text-default,
-        60: $dark-text-default,
-        100: $dark-text-default,
-        200: $dark-text-default,
-        300: $dark-text-default,
+        40: #4D4D4D,
+        60: #4D4D4D,
+        100: #4D4D4D,
+        200: #4D4D4D,
+        300: #4D4D4D,
         400: white,
         500: white,
         560: white,
         600: white,
         700: white,
         800: white,
-        A100: $dark-text-default,
+        A100: #4D4D4D,
     )
 );
 
 $mc-grey: (
-    40: #f5f5f5,
-    60: #f0f0f0,
-    100: #e6e6e6,
-    200: #cccccc,
-    300: #b3b3b3,
+    40: #F5F5F5,
+    60: #F0F0F0,
+    100: #E6E6E6,
+    200: #CCCCCC,
+    300: #B3B3B3,
     400: #999999,
     500: #808080,
     560: #707070,
     600: #666666,
-    700: #4d4d4d,
+    700: #4D4D4D,
     800: #333333,
     A40: rgba(0, 0, 0, 0.04),
     A60: rgba(0, 0, 0, 0.06),
@@ -123,11 +106,11 @@ $mc-grey: (
     A300: rgba(0, 0, 0, 0.3),
     A500: rgba(0, 0, 0, 0.5),
     contrast: (
-        40: $dark-text-default,
-        60: $dark-text-default,
-        100: $dark-text-default,
-        200: $dark-text-default,
-        300: $dark-text-default,
+        40: #4D4D4D,
+        60: #4D4D4D,
+        100: #4D4D4D,
+        200: #4D4D4D,
+        300: #4D4D4D,
         400: white,
         500: white,
         560: white,
@@ -138,110 +121,73 @@ $mc-grey: (
 );
 
 $mc-yellow: (
-    40: #fdfaf3,
-    60: #fcf5e8,
-    100: #f8ebd1,
-    200: #f0d49b,
-    300: #e7bd68,
-    400: #dfa739,
-    500: #d6930d,
-    560: #bb800a,
-    600: #aa7408,
-    700: #7d5504,
+    40: #FDFAF3,
+    60: #FCF5E8,
+    100: #F8EBD1,
+    200: #F0D49B,
+    300: #E7BD68,
+    400: #DFA739,
+    500: #D6930D,
+    560: #BB800A,
+    600: #AA7408,
+    700: #7D5504,
     800: #503602,
     A100: rgba(255, 170, 0, 0.15),
     contrast: (
-        40: $dark-text-default,
-        60: $dark-text-default,
-        100: $dark-text-default,
-        200: $dark-text-default,
-        300: $dark-text-default,
+        40: #4D4D4D,
+        60: #4D4D4D,
+        100: #4D4D4D,
+        200: #4D4D4D,
+        300: #4D4D4D,
         400: white,
         500: white,
         560: white,
         600: white,
         700: white,
         800: white,
-        A100: $dark-text-default,
+        A100: #4D4D4D,
     )
 );
 
 
 $mc-light-theme-foreground: (
-    base:              black, //скорей всего это fg-default-text
-    disabled:          $dark-text-disabled,
-    disabled-button:   rgba(black, 0.26),
-    hint-text:         rgba(black, 0.38),
-    icon:              rgba(black, 0.54),
-    secondary-text:    rgba(black, 0.54), //скорей всего это fg-less-contrast-text
+    text:                       map-get($mc-grey, 700),
+    text-less-contrast:         map-get($mc-grey, 400),
+    text-disabled:              map-get($mc-grey, 300),
 
-    // ↓ новое
-    text:               $dark-text-default,
-    less-contrast-text: $dark-text-secondary,
-    disabled-text:      $dark-text-disabled,
+    divider:                    map-get($mc-grey, 100),
+    border:                     map-get($mc-grey, 200),
 
-    default-icon:       rgba(transparent, 0.45),
-
-    divider:            map-get($mc-grey, 100)
+    icon:                       map-get($mc-grey, 400),
 );
 
 $mc-dark-theme-foreground: (
-    base:               white,
-    disabled:           rgba(white, 0.3),
-    disabled-button:    rgba(white, 0.3),
-    hint-text:          rgba(white, 0.3),
-    icon:               white,
-    secondary-text:     rgba(white, 0.7),
+    text:                       map-get($mc-grey, 60),
+    text-less-contrast:         map-get($mc-grey, 400),
+    text-disabled:              map-get($mc-grey, 400),
 
-    // ↓ новое
-    text:               $light-text-default,
-    less-contrast-text: $light-text-secondary,
-    disabled-text:      $light-text-disabled,
+    divider:                    map-get($mc-grey, 600),
+    border:                     map-get($mc-grey, 500),
 
-    default-icon:       rgba(white, 1),
-
-    divider:            map-get($mc-grey, 600)
+    icon:                       map-get($mc-grey, 400),
 );
 
 $mc-light-theme-background: (
-    disabled-button:      $black-12-opacity,
-    selected-button:      grey,
-    focused-button:       $black-6-opacity,
-    disabled-list-option: #CCC,
+    background:                 white,
+    background-popup:           white,
+    background-popup-footer:    map-get($mc-grey, 60),
+    background-disabled:        map-get($mc-grey, 60),
 
-    // ↓ новое
-    background:           white,
-    // todo not used
-    bg-content:           map-get($mc-grey, 60),
-    bg-dropdowns:         map-get($mc-grey, 700),
-
-    button-bg:            map-get($mc-grey, 60),
-    button-border:        map-get($mc-grey, 200),
-    disabled-overlay:     rgba(white, 0.3),
-
-    hover:                rgba(black, 0.05),
-
-    in-shadow:            inset 0 1px 2px 0 rgba(black, 0.2),
+    overlay-hovered:            rgba(black, 0.05),
+    overlay-disabled:           rgba(white, 0.3)
 );
 
 $mc-dark-theme-background: (
-    disabled-button:      $white-12-opacity,
-    selected-button:      grey,
-    focused-button:       $black-6-opacity,
-    disabled-list-option: #CCC,
+    background:                 map-get($mc-grey, 800),
+    background-popup:           map-get($mc-grey, 700),
+    background-popup-footer:    transparent,
+    background-disabled:        map-get($mc-grey, 600),
 
-    // ↓ новое
-    background:           map-get($mc-grey, 800),
-    // todo not used
-    bg-content:           map-get($mc-grey,  60),
-    bg-dropdowns:         white,
-
-    // цвет бордера зависит от палитры
-    button-bg:            map-get($mc-grey, 600),
-    button-border:        map-get($mc-grey, 500),
-    disabled-overlay:     rgba(black, 0.2),
-
-    hover:                rgba(white, 0.05),
-
-    in-shadow:            inset 1px 2px 2px 0 rgba(black, 0.2),
+    overlay-hovered:            rgba(white, 0.05),
+    overlay-disabled:           rgba(black, 0.2)
 );

@@ -4,20 +4,19 @@
 @mixin mc-textarea-theme($theme) {
     $foreground: map-get($theme, foreground);
 
-    .mc-input,
     .mc-textarea {
         color: map-get($foreground, text);
 
         &::placeholder {
-            color: map-get($foreground, disabled-text);
+            color: map-get($foreground, text-disabled);
         }
 
         &::-ms-input-placeholder {
-            color: map-get($foreground, disabled-text);
+            color: map-get($foreground, text-disabled);
         }
 
         &::-webkit-input-placeholder {
-            color: map-get($foreground, disabled-text);
+            color: map-get($foreground, text-disabled);
         }
     }
 }

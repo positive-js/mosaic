@@ -9,15 +9,14 @@
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    $is-dark-theme: map-get($theme, is-dark);
+    $selected-color: map-get(map-get($theme, states), selected-color);
 
     .mc-option {
         color: mc-color($foreground, text);
 
-        &:hover:not(.mc-disabled),
-        &.mc-hovered:not(.mc-disabled) {
+        &:hover:not(.mc-disabled) {
             .mc-option-overlay {
-                background: mc-color($background, hover);
+                background: mc-color($background, overlay-hovered);
             }
         }
 
@@ -26,14 +25,13 @@
         }
 
         &.mc-selected {
-            // todo пока непонятно откуда брать эти цвета
-            background: mc-color($primary, if($is-dark-theme, 700, 100));
+            background: $selected-color;
         }
 
         &.mc-disabled {
             background: transparent;
 
-            color: mc-color($foreground, disabled-text);
+            color: mc-color($foreground, text-disabled);
         }
     }
 }

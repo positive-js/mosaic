@@ -6,10 +6,10 @@
     $second: map-get($theme, second);
     $error: map-get($theme, error);
 
-    $is-dark: map-get($theme, is-dark);
+    $progress-bar: map-get(map-get($theme, components), progress-bar);
 
     .mc-progress-bar {
-        background-color: mc-color($second, if($is-dark, 600, 60));
+        background-color: map-get($progress-bar, background);
 
         &.mc-primary .mc-progress-bar__line {
             background-color: mc-color($primary);
