@@ -1,5 +1,16 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Directive, ElementRef, EventEmitter, Inject, Input, OnChanges, Output, Renderer2 } from '@angular/core';
+import {
+    Directive,
+    ElementRef,
+    EventEmitter,
+    Inject,
+    Input,
+    OnChanges,
+    Optional,
+    Output,
+    Renderer2, Self
+} from '@angular/core';
+import { NgControl } from '@angular/forms';
 import { hasModifierKey } from '@ptsecurity/cdk/keycodes';
 
 import { MC_TAGS_DEFAULT_OPTIONS, McTagsDefaultOptions } from './tag-default-options';
@@ -113,7 +124,8 @@ export class McTagInput implements McTagTextControl, OnChanges {
     constructor(
         private elementRef: ElementRef<HTMLInputElement>,
         private renderer: Renderer2,
-        @Inject(MC_TAGS_DEFAULT_OPTIONS) private defaultOptions: McTagsDefaultOptions
+        @Inject(MC_TAGS_DEFAULT_OPTIONS) private defaultOptions: McTagsDefaultOptions,
+        @Optional() @Self() public ngControl: NgControl
     ) {
         // tslint:disable-next-line: no-unnecessary-type-assertion
         this.inputElement = this.elementRef.nativeElement as HTMLInputElement;

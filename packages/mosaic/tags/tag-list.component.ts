@@ -458,6 +458,12 @@ export class McTagList extends McTagListMixinBase implements McFormFieldControl<
     /** Associates an HTML input element with this tag list. */
     registerInput(inputElement: McTagTextControl): void {
         this.tagInput = inputElement;
+
+        // todo need rethink about it
+        if (this.ngControl && inputElement.ngControl) {
+            inputElement.ngControl.statusChanges!
+                .subscribe(() => this.ngControl.control!.setErrors(inputElement.ngControl!.errors));
+        }
     }
 
     // Implemented as part of ControlValueAccessor.
