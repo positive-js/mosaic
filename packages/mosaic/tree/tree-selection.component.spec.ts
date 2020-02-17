@@ -1,6 +1,6 @@
 /* tslint:disable:no-magic-numbers max-func-body-length no-reserved-keywords */
 import { Component, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { createMouseEvent, dispatchEvent } from '@ptsecurity/cdk/testing';
 import { FlatTreeControl } from '@ptsecurity/cdk/tree';
@@ -246,58 +246,56 @@ describe('McTreeSelection', () => {
             });
 
             describe('when shift is pressed', () => {
-                it('should select nodes', () => {
+                it('should select nodes', fakeAsync(() => {
                     expect(component.modelValue.length).toBe(0);
 
                     const nodes = getNodes(treeElement);
 
                     const event = createMouseEvent('click');
 
+                    (nodes[0] as HTMLElement).focus();
                     dispatchEvent(nodes[0], event);
-                    fixture.detectChanges();
-
                     expect(component.modelValue.length).toBe(1);
 
                     const targetNode: HTMLElement = nodes[3] as HTMLElement;
 
-                    targetNode.focus();
-
                     Object.defineProperty(event, 'shiftKey', { get: () => true });
 
+                    targetNode.focus();
                     dispatchEvent(targetNode, event);
                     fixture.detectChanges();
 
                     expect(component.modelValue.length).toBe(4);
-                });
+                }));
 
-                it('should deselect nodes', () => {
+                it('should deselect nodes', fakeAsync(() => {
                     expect(component.modelValue.length).toBe(0);
 
                     const nodes = getNodes(treeElement);
 
-                    const event = createMouseEvent('click');
+                    let event = createMouseEvent('click');
                     Object.defineProperty(event, 'ctrlKey', { get: () => true });
 
-                    dispatchEvent(nodes[0], event);
-                    dispatchEvent(nodes[1], event);
-                    dispatchEvent(nodes[2], event);
-                    (nodes[2] as HTMLElement).focus();
-                    fixture.detectChanges();
+                    component.tree.renderedOptions.toArray().forEach((option, index) => {
+                        if (index < 3) {option.selected = true; }
+                    });
+                    component.tree.keyManager.setActiveItem(2);
 
                     expect(component.modelValue.length).toBe(3);
 
                     const targetNode: HTMLElement = nodes[0] as HTMLElement;
 
-                    Object.defineProperty(event, 'ctrlKey', { get: () => false });
+                    event = createMouseEvent('click');
                     Object.defineProperty(event, 'shiftKey', { get: () => true });
 
+                    component.tree.keyManager.setActiveItem(0);
                     dispatchEvent(targetNode, event);
                     fixture.detectChanges();
 
-                    expect(component.modelValue.length).toBe(0);
-                });
+                    expect(component.modelValue.length).toBe(1);
+                }));
 
-                it('should set last selected status', () => {
+                it('should set last selected status', fakeAsync(() => {
                     expect(component.modelValue.length).toBe(0);
 
                     const nodes = getNodes(treeElement);
@@ -313,12 +311,13 @@ describe('McTreeSelection', () => {
 
                     dispatchEvent(nodes[4], event);
                     fixture.detectChanges();
+                    component.tree.keyManager.setActiveItem(4);
 
                     expect(component.modelValue.length).toBe(3);
 
                     const targetNode: HTMLElement = nodes[2] as HTMLElement;
 
-                    targetNode.focus();
+                    component.tree.keyManager.setActiveItem(2);
 
                     Object.defineProperty(event, 'ctrlKey', { get: () => false });
                     Object.defineProperty(event, 'shiftKey', { get: () => true });
@@ -326,8 +325,8 @@ describe('McTreeSelection', () => {
                     dispatchEvent(targetNode, event);
                     fixture.detectChanges();
 
-                    expect(component.modelValue.length).toBe(1);
-                });
+                    expect(component.modelValue.length).toBe(2);
+                }));
             });
         });
 
