@@ -68,7 +68,7 @@ export interface McOptionEvent {
     host: {
         '[attr.tabindex]': 'tabIndex',
 
-        class: 'mc-list-option',
+        class: 'mc-list-option mc-no-select',
         '[class.mc-selected]': 'selected',
         '[class.mc-focused]': 'hasFocus',
         '[class.mc-disabled]': 'disabled',
@@ -365,6 +365,11 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
             this.multipleMode = multiple;
         } else if (multiple !== null) {
             this.multipleMode = MultipleMode.CHECKBOX;
+        }
+
+        if (this.multipleMode === MultipleMode.CHECKBOX) {
+            this.autoSelect = false;
+            this.noUnselect = false;
         }
 
         this._tabIndex = parseInt(tabIndex) || 0;
