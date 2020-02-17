@@ -1096,20 +1096,6 @@ describe('MatTagList', () => {
             expect(document.activeElement).toBe(nativeInput, 'Expected input to remain focused.');
         }));
 
-        it('should set aria-invalid if the form field is invalid', () => {
-            fixture.componentInstance.control = new FormControl(undefined, [Validators.required]);
-            fixture.detectChanges();
-
-            const input: HTMLInputElement = fixture.nativeElement.querySelector('input');
-
-            expect(input.getAttribute('aria-invalid')).toBe('true');
-
-            fixture.componentInstance.tags.first.selectViaInteraction();
-            fixture.detectChanges();
-
-            expect(input.getAttribute('aria-invalid')).toBe('false');
-        });
-
         describe('keyboard behavior', () => {
             beforeEach(() => {
                 tagListDebugElement = fixture.debugElement.query(By.directive(McTagList));
