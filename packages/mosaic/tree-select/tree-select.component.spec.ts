@@ -649,7 +649,7 @@ class BasicSelectOnPushPreselected {
     template: `
         <mc-form-field>
             <mc-tree-select
-                multiple
+                [multiple]="true"
                 placeholder="Food"
                 [formControl]="control">
 
@@ -1063,7 +1063,7 @@ class BasicSelectWithoutFormsPreselected {
 @Component({
     template: `
         <mc-form-field>
-            <mc-tree-select placeholder="Food" [(ngModel)]="selectedFoods" multiple>
+            <mc-tree-select placeholder="Food" [(ngModel)]="selectedFoods" [multiple]="true">
                 <mc-tree-selection
                     [dataSource]="dataSource"
                     [treeControl]="treeControl">
@@ -4345,6 +4345,7 @@ describe('McTreeSelect', () => {
         it('should be able to select multiple values', fakeAsync(() => {
             trigger.click();
             fixture.detectChanges();
+            flush();
 
             const options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-tree-option');
 
@@ -4438,6 +4439,7 @@ describe('McTreeSelect', () => {
         it('should not close the panel when clicking on options', fakeAsync(() => {
             trigger.click();
             fixture.detectChanges();
+            flush();
 
             expect(testInstance.select.panelOpen).toBe(true);
 

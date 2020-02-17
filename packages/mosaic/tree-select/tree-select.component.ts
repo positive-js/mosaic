@@ -54,7 +54,10 @@ import {
     RIGHT_ARROW,
     SPACE,
     UP_ARROW,
-    A, PAGE_UP, PAGE_DOWN
+    A,
+    PAGE_UP,
+    PAGE_DOWN,
+    hasModifierKey
 } from '@ptsecurity/cdk/keycodes';
 import { CdkTree } from '@ptsecurity/cdk/tree';
 import {
@@ -487,7 +490,10 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
 
         this.options = this.tree.renderedOptions;
         this.tree.autoSelect = this.autoSelect;
-        this.tree.multipleMode = this.multiple ? MultipleMode.CHECKBOX : null;
+
+        if (this.tree.multipleMode === null) {
+            this.tree.multipleMode = this.multiple ? MultipleMode.CHECKBOX : null;
+        }
 
         if (this.multiple) {
             this.tree.noUnselectLast = false;
@@ -518,6 +524,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
             .pipe(takeUntil(this.destroy))
             .subscribe((event) => {
                 if (event.added.length) {
+                    this.tree.keyManager.setFocusOrigin('program');
                     this.tree.keyManager.setActiveItem(
                         this.options.find((option) => option.data === event.added[0]) as any
                     );
@@ -925,6 +932,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         } else {
             const previouslyFocusedIndex = this.tree.keyManager.activeItemIndex;
 
+            this.tree.keyManager.setFocusOrigin('keyboard');
             this.tree.keyManager.onKeydown(event);
 
             if (
@@ -935,7 +943,9 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
             }
 
             if (this.autoSelect && this.tree.keyManager.activeItem) {
-                this.tree.setSelectedOption(this.tree.keyManager.activeItem);
+                this.tree.setSelectedOptionsByKey(
+                    this.tree.keyManager.activeItem, hasModifierKey(event, 'shiftKey'), hasModifierKey(event, 'ctrlKey')
+                );
             }
         }
     }
