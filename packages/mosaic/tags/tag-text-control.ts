@@ -1,14 +1,18 @@
-
 /** Interface for a text control that is used to drive interaction with a mc-tag-list. */
+import { NgControl } from '@angular/forms';
+
+
 // tslint:disable-next-line: naming-convention
 export interface McTagTextControl {
-  id: string;
+    id: string;
 
-  placeholder: string;
+    placeholder: string;
 
-  focused: boolean;
+    focused: boolean;
 
-  empty: boolean;
+    empty: boolean;
 
-  focus(): void;
+    ngControl?: NgControl;
+
+    focus(): void;
 }

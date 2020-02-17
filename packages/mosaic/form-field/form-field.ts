@@ -170,7 +170,7 @@ export class McFormField extends McFormFieldMixinBase implements
 
     onHoverChanged(isHovered: boolean) {
         if (isHovered !== this.hovered) {
-            this.hovered  = isHovered;
+            this.hovered = isHovered;
             this._changeDetectorRef.markForCheck();
         }
     }
@@ -183,7 +183,7 @@ export class McFormField extends McFormFieldMixinBase implements
         return this.connectionContainerRef || this._elementRef;
     }
 
-        /** Determines whether a class from the NgControl should be forwarded to the host element. */
+    /** Determines whether a class from the NgControl should be forwarded to the host element. */
     shouldForward(prop: keyof NgControl): boolean {
         const ngControl = this.control ? this.control.ngControl : null;
 
