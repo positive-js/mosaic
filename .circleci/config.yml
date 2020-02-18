@@ -61,6 +61,12 @@ jobs:
             - attach_workspace: *attach_options
             - run: yarn run valid:lic
 
+    lint_mosaic:
+        <<: *job_defaults
+        steps:
+            -   attach_workspace: *attach_options
+            -   run: yarn run linter:mosaic
+
     build_mosaic_docs:
         <<: *job_defaults
         steps:
@@ -184,6 +190,9 @@ workflows:
             - install
             # 2 Group
             - validate_licenses:
+                  requires:
+                      - install
+            - lint_mosaic:
                   requires:
                       - install
             - build_cdk:
