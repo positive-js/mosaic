@@ -13,8 +13,6 @@ import {
     AfterContentInit,
     NgZone
 } from '@angular/core';
-import { FocusOrigin } from '@ptsecurity/cdk/a11y';
-import { hasModifierKey } from '@ptsecurity/cdk/keycodes';
 import { CdkTreeNode } from '@ptsecurity/cdk/tree';
 import { CanDisable } from '@ptsecurity/mosaic/core';
 import { Subject } from 'rxjs';
@@ -166,9 +164,7 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
         this.changeDetectorRef.markForCheck();
     }
 
-    focus(focusOrigin?: FocusOrigin) {
-        if (focusOrigin === 'program') { return; }
-
+    focus() {
         if (this.disabled || this.hasFocus) { return; }
 
         this.elementRef.nativeElement.focus();
@@ -231,10 +227,9 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
             this.changeDetectorRef.markForCheck();
             this.emitSelectionChangeEvent(true);
 
-            const shiftKey = $event ? hasModifierKey($event, 'shiftKey') : false;
-            const ctrlKey = $event ? hasModifierKey($event, 'ctrlKey') : false;
-
-            this.tree.setSelectedOptionsByClick(this, shiftKey, ctrlKey);
+            if (this.tree.setSelectedOption) {
+                this.tree.setSelectedOption(this, $event);
+            }
         }
     }
 

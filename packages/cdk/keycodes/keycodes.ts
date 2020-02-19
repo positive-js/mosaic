@@ -122,7 +122,7 @@ export const MAC_META = 224;
 
 type ModifierKey = 'altKey' | 'shiftKey' | 'ctrlKey' | 'metaKey';
 
-export function hasModifierKey(event: KeyboardEvent | MouseEvent, ...modifiers: ModifierKey[]): boolean {
+export function hasModifierKey(event: KeyboardEvent, ...modifiers: ModifierKey[]): boolean {
     if (modifiers.length) {
         return modifiers.some((modifier) => event[modifier]);
     }

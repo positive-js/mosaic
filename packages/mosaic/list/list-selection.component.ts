@@ -68,7 +68,7 @@ export interface McOptionEvent {
     host: {
         '[attr.tabindex]': 'tabIndex',
 
-        class: 'mc-list-option mc-no-select',
+        class: 'mc-list-option',
         '[class.mc-selected]': 'selected',
         '[class.mc-focused]': 'hasFocus',
         '[class.mc-disabled]': 'disabled',
@@ -212,9 +212,7 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
     handleClick($event) {
         if (this.disabled) { return; }
 
-        this.listSelection.setSelectedOptionsByClick(
-            this, hasModifierKey($event, 'shiftKey'), hasModifierKey($event, 'ctrlKey')
-        );
+        this.listSelection.setFocusedOption(this, $event);
     }
 
     focus() {
@@ -367,11 +365,6 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
             this.multipleMode = MultipleMode.CHECKBOX;
         }
 
-        if (this.multipleMode === MultipleMode.CHECKBOX) {
-            this.autoSelect = false;
-            this.noUnselect = false;
-        }
-
         this._tabIndex = parseInt(tabIndex) || 0;
 
         this.selectionModel = new SelectionModel<McListOption>(this.multiple);
@@ -460,13 +453,31 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
         this.keyManager.withScrollSize(Math.floor(this.getHeight() / this.options.first.getHeight()));
     }
 
-    setSelectedOptionsByClick(option: McListOption, shiftKey: boolean, ctrlKey: boolean): void {
-        if (shiftKey && this.multiple) {
-            this.setSelectedOptions(option);
-        } else if (ctrlKey) {
+    // Sets the focused option of the selection-list.
+    setFocusedOption(option: McListOption, $event?: KeyboardEvent): void {
+        this.keyManager.setActiveItem(option);
+
+        const withShift = $event ? hasModifierKey($event, 'shiftKey') : false;
+        const withCtrl = $event ? hasModifierKey($event, 'ctrlKey') : false;
+
+        if (withShift && this.multiple) {
+            const previousIndex = this.keyManager.previousActiveItemIndex;
+            const activeIndex = this.keyManager.activeItemIndex;
+
+            if (previousIndex < activeIndex) {
+                this.options.forEach((item, index) => {
+                    if (index >= previousIndex && index <= activeIndex) { item.setSelected(true); }
+                });
+            } else {
+                this.options.forEach((item, index) => {
+                    if (index >= activeIndex && index <= previousIndex) { item.setSelected(true); }
+                });
+            }
+        } else if (withCtrl) {
+
             if (!this.canDeselectLast(option)) { return; }
 
-            this.selectionModel.toggle(option);
+            option.toggle();
         } else {
             if (this.autoSelect) {
                 this.options.forEach((item) => item.setSelected(false));
@@ -476,47 +487,6 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
 
         this.emitChangeEvent(option);
         this.reportValueChange();
-    }
-
-    setSelectedOptionsByKey(option: McListOption, shiftKey: boolean, ctrlKey: boolean): void {
-        if (shiftKey && this.multiple) {
-            this.setSelectedOptions(option);
-        } else if (ctrlKey) {
-            if (!this.canDeselectLast(option)) { return; }
-        } else {
-            if (this.autoSelect) {
-                this.options.forEach((item) => item.setSelected(false));
-                option.setSelected(true);
-            }
-        }
-
-        this.emitChangeEvent(option);
-        this.reportValueChange();
-    }
-
-    setSelectedOptions(option: McListOption): void {
-        const selectedOptionState = option.selected;
-
-        let fromIndex = this.keyManager.previousActiveItemIndex;
-        let toIndex = this.keyManager.previousActiveItemIndex = this.keyManager.activeItemIndex;
-
-        if (toIndex === fromIndex) { return; }
-
-        if (fromIndex > toIndex) {
-            [fromIndex, toIndex] = [toIndex, fromIndex];
-        }
-
-        this.options
-            .toArray()
-            .slice(fromIndex, toIndex + 1)
-            .filter((item) => !item.disabled)
-            .forEach((renderedOption) => {
-                const isLastRenderedOption = renderedOption === this.keyManager.activeItem;
-
-                if (isLastRenderedOption && renderedOption.selected && this.noUnselect) { return; }
-
-                renderedOption.setSelected(!selectedOptionState);
-            });
     }
 
     // Implemented as part of ControlValueAccessor.
@@ -637,11 +607,7 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
 
         event.preventDefault();
 
-        this.setSelectedOptionsByKey(
-            this.keyManager.activeItem as McListOption,
-            hasModifierKey(event, 'shiftKey'),
-            hasModifierKey(event, 'ctrlKey')
-        );
+        this.setFocusedOption(this.keyManager.activeItem as McListOption, event);
     }
 
     // Reports a value change to the ControlValueAccessor
