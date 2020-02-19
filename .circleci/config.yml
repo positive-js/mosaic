@@ -64,8 +64,8 @@ jobs:
     lint_mosaic:
         <<: *job_defaults
         steps:
-            -   attach_workspace: *attach_options
-            -   run: yarn run linter:mosaic
+            - attach_workspace: *attach_options
+            - run: yarn run linter:mosaic
 
     build_mosaic_docs:
         <<: *job_defaults
