@@ -1,3 +1,16 @@
+# 8.4.0 "Nightly Extravert" (2020-02-19)
+
+### Mosaic
+
+ * bug fix  **input:** errors with AoT (#UIM-370) ([#411](https://github.com/positive-js/mosaic/issues/411)) ([1cfdb42](https://github.com/positive-js/mosaic/commit/1cfdb423bf4d0246c20f44274ace4f5cc9a736c3)), closes [#UIM-370](https://github.com/positive-js/mosaic/issues/UIM-370)
+ * bug fix  **input:** input require ngModel (#UIM-361) ([#409](https://github.com/positive-js/mosaic/issues/409)) ([36a6e0a](https://github.com/positive-js/mosaic/commit/36a6e0a0a061b74b79a6b0f03a577e7b310203e3)), closes [#UIM-361](https://github.com/positive-js/mosaic/issues/UIM-361)
+ * bug fix  **tags:** input validation in tags-list (#UIM-368) ([#412](https://github.com/positive-js/mosaic/issues/412)) ([5b03230](https://github.com/positive-js/mosaic/commit/5b03230863692ee265975f337107afcfe1a86d0d)), closes [#UIM-368](https://github.com/positive-js/mosaic/issues/UIM-368)
+ * feature  **tree-select:** multiselect without checkbox + multiselect with shift and ctrl (#UIM-156) ([#400](https://github.com/positive-js/mosaic/issues/400)) ([99835cb](https://github.com/positive-js/mosaic/commit/99835cbb445a10ae1c55658fb83c6642ed225c3b)), closes [#UIM-156](https://github.com/positive-js/mosaic/issues/UIM-156)
+
+### Docs
+
+ * bug fix  correct expand link underline ([#405](https://github.com/positive-js/mosaic/issues/405)) ([f3e851f](https://github.com/positive-js/mosaic/commit/f3e851f6f267b1ed9afc15e189def94927be0937))
+
 ## 8.3.2 "Coffee Winks" (2020-01-30)
 
 ### Mosaic
