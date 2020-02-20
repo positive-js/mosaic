@@ -1,14 +1,17 @@
-import { Component, Provider, Type } from '@angular/core';
+import { Component, Provider, Type, ViewChild } from '@angular/core';
 import {
     ComponentFixture,
     fakeAsync,
     TestBed,
-    ComponentFixtureAutoDetect
+    ComponentFixtureAutoDetect,
+    flush
 } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
 import {
+    createMouseEvent,
+    dispatchEvent,
     dispatchFakeEvent,
     dispatchKeyboardEvent
 } from '@ptsecurity/cdk/testing';
@@ -123,7 +126,34 @@ class McFormFieldWithCleaner {
             <input mcInput/>
         </mc-form-field>`
 })
-class McFormFieldWithoutBorders {
+class McFormFieldWithoutBorders {}
+
+@Component({
+    template: `
+        <mc-form-field>
+            <input mcInput [(ngModel)]="value" required/>
+        </mc-form-field>
+    `
+})
+class McFormFieldWithStandaloneNgModel {
+    value: string = '';
+}
+
+@Component({
+    template: `
+        <form #form="ngForm">
+            <mc-form-field>
+                <input mcInput [(ngModel)]="value" name="control" required/>
+            </mc-form-field>
+
+            <button type="submit"></button>
+        </form>
+    `
+})
+class McFormFieldWithNgModelInForm {
+    @ViewChild('form', { static: false }) form: NgForm;
+
+    value: string = '';
 }
 
 // tslint:enable no-unnecessary-class
@@ -132,7 +162,6 @@ class McFormFieldWithoutBorders {
 describe('McInput', () => {
 
     describe('basic behaviors', () => {
-
         it('should change state "disable"', fakeAsync(() => {
             const fixture = createComponent(McInputForBehaviors);
             fixture.detectChanges();
@@ -141,16 +170,14 @@ describe('McInput', () => {
                 fixture.debugElement.query(By.directive(McFormField)).nativeElement;
             const inputElement = fixture.debugElement.query(By.directive(McInput)).nativeElement;
 
-            expect(formFieldElement.classList.contains('mc-disabled'))
-                .toBe(false);
+            expect(formFieldElement.classList.contains('mc-disabled')).toBe(false);
             expect(inputElement.disabled).toBe(false);
 
             fixture.componentInstance.disabled = true;
             fixture.detectChanges();
 
             fixture.whenStable().then(() => {
-                expect(formFieldElement.classList.contains('mc-disabled'))
-                    .toBe(true);
+                expect(formFieldElement.classList.contains('mc-disabled')).toBe(true);
                 expect(inputElement.disabled).toBe(true);
             });
         }));
@@ -245,8 +272,136 @@ describe('McInput', () => {
         });
     });
 
-    describe('apperance', () => {
+    describe('validation', () => {
+        describe('ngModel', () => {
+            describe('standalone', () => {
+                it('should run validation (required)', fakeAsync(() => {
+                    const fixture = createComponent(McFormFieldWithStandaloneNgModel);
+                    fixture.detectChanges();
 
+                    const formFieldElement = fixture.debugElement.query(By.directive(McFormField)).nativeElement;
+                    expect(formFieldElement.classList.contains('ng-invalid')).toBe(true);
+                }));
+            });
+
+            describe('in form', () => {
+                it('should not run validation (required)', fakeAsync(() => {
+                    const fixture = createComponent(McFormFieldWithNgModelInForm);
+                    fixture.detectChanges();
+
+                    const formFieldElement = fixture.debugElement.query(By.directive(McFormField)).nativeElement;
+                    expect(formFieldElement.classList.contains('ng-valid')).toBe(true);
+                }));
+
+                it('should run validation after submit (required)', fakeAsync(() => {
+                    const fixture = createComponent(McFormFieldWithNgModelInForm);
+                    fixture.detectChanges();
+
+                    const formFieldElement = fixture.debugElement.query(By.directive(McFormField)).nativeElement;
+                    const submitButton = fixture.debugElement.query(By.css('button')).nativeElement;
+
+                    expect(formFieldElement.classList.contains('ng-valid')).toBe(true);
+
+                    const event = createMouseEvent('click');
+                    dispatchEvent(submitButton, event);
+                    flush();
+                    expect(formFieldElement.classList.contains('ng-invalid')).toBe(true);
+                }));
+            });
+        });
+
+
+        it('should has placeholder', fakeAsync(() => {
+            const fixture = createComponent(McInputForBehaviors);
+            fixture.detectChanges();
+
+            const testComponent = fixture.debugElement.componentInstance;
+
+            const inputElement = fixture.debugElement.query(By.directive(McInput)).nativeElement;
+
+            expect(inputElement.getAttribute('placeholder')).toBe(null);
+
+            testComponent.placeholder = 'placeholder';
+            fixture.detectChanges();
+
+            expect(inputElement.getAttribute('placeholder')).toBe('placeholder');
+
+            testComponent.placeholder = '';
+            fixture.detectChanges();
+
+            expect(inputElement.getAttribute('placeholder')).toBe('');
+
+        }));
+
+        it('should has cleaner', () => {
+            const fixture = createComponent(McFormFieldWithCleaner, [
+                McIconModule
+            ]);
+            fixture.detectChanges();
+
+            const testComponent = fixture.debugElement.componentInstance;
+
+            const formFieldElement =
+                fixture.debugElement.query(By.directive(McFormField)).nativeElement;
+            const inputElementDebug = fixture.debugElement.query(By.directive(McInput));
+            const inputElement = inputElementDebug.nativeElement;
+
+
+            expect(formFieldElement.querySelectorAll('.mc-form-field__cleaner').length)
+                .toBe(0);
+
+            inputElement.value = 'test';
+            dispatchFakeEvent(inputElement, 'input');
+
+            fixture.detectChanges();
+
+            expect(formFieldElement.querySelectorAll('.mc-form-field__cleaner').length)
+                .toBe(1);
+
+            const mcCleaner = fixture.debugElement.query(By.css('.mc-form-field__cleaner'));
+            const mcCleanerElement = mcCleaner.nativeElement;
+            mcCleanerElement.click();
+
+            fixture.detectChanges();
+
+            expect(formFieldElement.querySelectorAll('.mc-form-field__cleaner').length)
+                .toBe(0);
+            expect(testComponent.value).toBe(null);
+        });
+
+        it('with cleaner on keydown "ESC" should clear field', () => {
+            const fixture = createComponent(McFormFieldWithCleaner, [
+                McIconModule
+            ]);
+            const mcFormFieldDebug = fixture.debugElement.query(By.directive(McFormField));
+            const formFieldElement = mcFormFieldDebug.nativeElement;
+            const inputElementDebug = fixture.debugElement.query(By.directive(McInput));
+            const inputElement = inputElementDebug.nativeElement;
+
+            fixture.detectChanges();
+
+            const testComponent = fixture.debugElement.componentInstance;
+
+            inputElement.value = 'test';
+            dispatchFakeEvent(inputElement, 'input');
+            dispatchFakeEvent(inputElement, 'focus');
+
+            fixture.detectChanges();
+
+            expect(formFieldElement.querySelectorAll('.mc-form-field__cleaner').length)
+                .toBe(1);
+
+            dispatchKeyboardEvent(mcFormFieldDebug.nativeElement, 'keydown', ESCAPE);
+
+            fixture.detectChanges();
+
+            expect(formFieldElement.querySelectorAll('.mc-form-field__cleaner').length)
+                .toBe(0);
+            expect(testComponent.value).toBe(null);
+        });
+    });
+
+    describe('apperance', () => {
         it('should change font to monospace', () => {
             const fixture = createComponent(McInputWithMcInputMonospace);
             fixture.detectChanges();
@@ -261,13 +416,11 @@ describe('McInput', () => {
             const fixture = createComponent(McInputInvalid);
             fixture.detectChanges();
 
-            const formFieldElement =
-                fixture.debugElement.query(By.directive(McFormField)).nativeElement;
+            const formFieldElement = fixture.debugElement.query(By.directive(McFormField)).nativeElement;
             const inputElementDebug = fixture.debugElement.query(By.directive(McInput));
             const inputElement = inputElementDebug.nativeElement;
 
-            expect(formFieldElement.classList.contains('ng-invalid'))
-                .toBe(true);
+            expect(formFieldElement.classList.contains('ng-invalid')).toBe(true);
 
             inputElement.value = 'four';
             dispatchFakeEvent(inputElement, 'input');

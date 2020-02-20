@@ -18,6 +18,7 @@ import {
     NG_VALIDATORS,
     NgControl,
     NgForm,
+    NgModel,
     Validator
 } from '@angular/forms';
 import {
@@ -228,6 +229,7 @@ export class McInput extends McInputMixinBase implements McFormFieldControl<any>
         @Optional() @Inject(MC_VALIDATION) private mcValidation: McValidationOptions,
         @Optional() @Self() ngControl: NgControl,
         @Optional() @Self() public numberInput: McNumberInput,
+        @Optional() @Self() public ngModel: NgModel,
         @Optional() @Self() public formControlName: FormControlName,
         @Optional() parentForm: NgForm,
         @Optional() parentFormGroup: FormGroupDirective,
@@ -285,7 +287,7 @@ export class McInput extends McInputMixinBase implements McFormFieldControl<any>
         this.focusChanged(false);
 
         if (this.ngControl) {
-            this.ngControl.control!.updateValueAndValidity();
+            this.ngControl.control!.updateValueAndValidity({ emitEvent: false });
         }
     }
 
