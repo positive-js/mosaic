@@ -45,13 +45,13 @@ export function setMosaicValidation(component) {
     if (parentForm) {
         parentForm.ngSubmit.subscribe(() => {
             // tslint:disable-next-line: no-unnecessary-type-assertion
-            ngControl.control!.updateValueAndValidity();
+            ngControl.control!.updateValueAndValidity({ emitEvent: false });
         });
     }
 
     if (component.ngModel) {
         setMosaicValidationForModelControl(component, component.rawValidators, parentForm);
-    } else if (component.formControlName) {
+    } else if (component.formControlName || component.ngControl) {
         setMosaicValidationForFormControl(component, parentForm, ngControl);
     }
 }
@@ -92,7 +92,7 @@ export function setMosaicValidationForFormControl(component, parentForm: NgForm,
     ngControl.statusChanges!
         .subscribe(() => {
             // changed required validation logic
-            if (ngControl.invalid && !parentForm.submitted && ngControl.errors!.required) {
+            if (ngControl.invalid && (parentForm && !parentForm.submitted) && ngControl.errors!.required) {
                 setValidState(ngControl.control!, originalValidator!);
             }
 
