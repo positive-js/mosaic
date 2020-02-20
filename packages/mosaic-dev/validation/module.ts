@@ -1,5 +1,5 @@
 /* tslint:disable:no-console no-reserved-keywords */
-import { Component, NgModule, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, NgModule, ViewChild, ViewEncapsulation } from '@angular/core';
 import {
     AbstractControl, FormBuilder,
     FormControl,
@@ -122,10 +122,7 @@ export function ldapLoginValidator(loginRegex: RegExp): ValidatorFn {
     selector: 'app',
     template: require('./template.html'),
     encapsulation: ViewEncapsulation.None,
-    styleUrls: ['./styles.scss'],
-    providers: [
-        // { provide: MC_VALIDATION, useValue: { useValidation: false } }
-    ]
+    styleUrls: ['./styles.scss']
 })
 export class DemoComponent {
     reactiveTypeaheadItems: string[] = [];
@@ -133,6 +130,10 @@ export class DemoComponent {
     selectValue: string = '';
     treeSelectValue: string = '';
     typeaheadItems: string[] = [];
+
+    control = new FormControl('', [Validators.pattern('[a-zA-Z]*')]);
+
+    value = '';
 
     reactiveForm: FormGroup;
 
@@ -155,7 +156,7 @@ export class DemoComponent {
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
-    constructor(private formBuilder: FormBuilder) {
+    constructor(private formBuilder: FormBuilder, public changeDetectorRef: ChangeDetectorRef) {
         this.treeFlattener = new McTreeFlattener(
             this.transformer, this.getLevel, this.isExpandable, this.getChildren
         );
@@ -176,6 +177,9 @@ export class DemoComponent {
             reactiveTypeaheadValue: new FormControl([], [Validators.required])
         });
 
+        this.control.valueChanges.subscribe((value) => {
+            console.log('valueChanges: ', value); // tslint:disable-line:no-console
+        });
     }
 
     onSubmitReactiveForm(form: FormGroup) {
