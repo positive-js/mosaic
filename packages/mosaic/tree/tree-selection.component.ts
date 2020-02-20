@@ -282,7 +282,6 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
 
     onKeyDown(event: KeyboardEvent): void {
         this.keyManager.setFocusOrigin('keyboard');
-        console.log('onKeyDown: '); // tslint:disable-line:no-console
         // tslint:disable-next-line: deprecation
         const keyCode = event.keyCode;
 
