@@ -11,13 +11,10 @@ import {
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DateAdapter, MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
 import { COMMA, ENTER } from '@ptsecurity/cdk/keycodes';
 import { CdkTreeModule, FlatTreeControl } from '@ptsecurity/cdk/tree';
-import { MC_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@ptsecurity/mosaic-moment-adapter/adapter';
 import { McAutocompleteModule } from '@ptsecurity/mosaic/autocomplete';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
-import { MC_VALIDATION } from '@ptsecurity/mosaic/core';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
