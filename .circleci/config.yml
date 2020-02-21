@@ -67,6 +67,12 @@ jobs:
             - attach_workspace: *attach_options
             - run: yarn run linter:mosaic
 
+    lint_yaml:
+        <<: *job_defaults
+        steps:
+            - attach_workspace: *attach_options
+            - run: yarn run linter:yaml
+
     build_mosaic_docs:
         <<: *job_defaults
         steps:
@@ -193,6 +199,9 @@ workflows:
                   requires:
                       - install
             - lint_mosaic:
+                  requires:
+                      - install
+            - lint_yaml:
                   requires:
                       - install
             - build_cdk:
