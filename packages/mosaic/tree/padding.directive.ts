@@ -25,11 +25,11 @@ export class McTreeNodePadding<T> extends CdkTreeNodePadding<T> implements OnIni
     paddingIndent(): string | null {
         const nodeLevel = (this.treeNode.data && this.tree.treeControl.getLevel)
             ? this.tree.treeControl.getLevel(this.treeNode.data)
-            : null;
+            : 0;
 
         const level = this.level || nodeLevel;
 
-        return level ? `${(level * this._indent) + this.leftPadding}px` : `${this.baseLeftPadding}px`;
+        return level > 0 ? `${(level * this._indent) + this.leftPadding}px` : `${this.leftPadding}px`;
     }
 
     ngOnInit(): void {
