@@ -61,7 +61,6 @@ let uniqueIdCounter: number = 0;
     providers: [{ provide: CdkTreeNode, useExisting: McTreeOption }]
 })
 export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisable, AfterContentInit {
-
     readonly onFocus = new Subject<McTreeOptionEvent>();
 
     readonly onBlur = new Subject<McTreeOptionEvent>();
