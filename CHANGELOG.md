@@ -1,3 +1,10 @@
+## 8.4.1 "Fisheye" (2020-02-25)
+
+### Mosaic
+
+ * bug fix  **input:** input emits unexpected valueChanges (#UIM-366) ([#415](https://github.com/positive-js/mosaic/issues/415)) ([325c24f](https://github.com/positive-js/mosaic/commit/325c24f6fda769256762d1bc53ae64488a3986bf)), closes [#UIM-366](https://github.com/positive-js/mosaic/issues/UIM-366)
+ * bug fix  **tags:** incorrect validation (UIM-367) ([#416](https://github.com/positive-js/mosaic/issues/416)) ([b4b3e9a](https://github.com/positive-js/mosaic/commit/b4b3e9a4965f75707ebf660c1c938d3dc561058b))
+
 # 8.4.0 "Nightly Extravert" (2020-02-19)
 
 ### Mosaic
