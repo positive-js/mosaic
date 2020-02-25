@@ -10,7 +10,7 @@ import { execNodeTask } from '../utils/helpers';
 /* tslint:disable:no-var-requires */
 const madge = require('madge');
 
-/** Globs that matchall SCSS or CSS files that should be linted. */
+/** Globs that match all SCSS or CSS files that should be linted. */
 const styleGlobs = [
     'packages/**/*.+(css|scss)'
 ];
