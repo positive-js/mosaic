@@ -29,6 +29,8 @@ $mc-checkbox-mark-stroke-size: 2 / 15 * $mc-checkbox-size !default;
 }
 
 .mc-checkbox {
+    display: inline-block;
+
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
 
@@ -69,17 +71,18 @@ $mc-checkbox-mark-stroke-size: 2 / 15 * $mc-checkbox-size !default;
     vertical-align: middle;
     display: inline-flex;
     white-space: nowrap;
+
+    width: 100%;
 }
 
 .mc-checkbox-inner-container {
     display: inline-block;
     height: $mc-checkbox-size;
     line-height: 0;
-    margin: auto;
     margin-right: $mc-checkbox-item-spacing;
     order: 0;
     position: relative;
-    vertical-align: middle;
+    align-self: center;
     white-space: nowrap;
     width: $mc-checkbox-size;
     flex-shrink: 0;
