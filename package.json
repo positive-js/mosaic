@@ -215,7 +215,7 @@
         "server-dev:vertical-navbar": "npm run server-dev -- --env.component vertical-navbar"
     },
     "lint-staged": {
-        "*.yml": "linter:yaml"
+        "*.yml": "yamllint"
     },
     "pre-commit": "lint-staged",
     "husky": {
