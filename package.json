@@ -104,6 +104,7 @@
         "karma-sourcemap-loader": "^0.3.7",
         "karma-spec-reporter": "^0.0.32",
         "license-checker": "^16.0.0",
+        "lint-staged": "^10.0.8",
         "madge": "^3.3.0",
         "magic-string": "^0.22.5",
         "merge2": "^1.2.3",
@@ -111,6 +112,7 @@
         "moment": "^2.24.0",
         "node-sass": "^4.11.0",
         "postcss-loader": "^3.0.0",
+        "pre-commit": "^1.2.2",
         "raw-loader": "^0.5.1",
         "request": "^2.88.0",
         "resolve-bin": "^0.4.0",
@@ -162,6 +164,7 @@
         "docs:cleanup-preview": "ts-node --project ./scripts/tsconfig.deploy.json ./scripts/deploy/cleanup-preview.ts",
         "preinstall": "node ./tools/npm/check-npm.js",
         "publish": "ts-node --project ./scripts/tsconfig.deploy.json ./scripts/deploy/publish-artifacts.ts",
+        "lint-staged": "lint-staged",
         "linter:mosaic": "gulp tslint",
         "linter:styles": "gulp stylelint",
         "linter:yaml": "yamllint **/*.yml --ignore=node_modules/**/*.yml",
@@ -211,8 +214,12 @@
         "server-dev:validation": "npm run server-dev -- --env.component validation",
         "server-dev:vertical-navbar": "npm run server-dev -- --env.component vertical-navbar"
     },
+    "lint-staged": {
+        "*.yml": "linter:yaml"
+    },
     "husky": {
         "hooks": {
+            "pre-commit": "lint-staged",
             "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
         }
     },
