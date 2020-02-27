@@ -91,7 +91,7 @@
         "highlight.js": "^9.13.1",
         "html-webpack-plugin": "^3.2.0",
         "http-rewrite-middleware": "^0.1.6",
-        "husky": "^1.3.1",
+        "husky": "^4.2.3",
         "inquirer": "^6.4.1",
         "jasmine-core": "^3.3.0",
         "karma": "^4.2.0",
@@ -112,7 +112,6 @@
         "moment": "^2.24.0",
         "node-sass": "^4.11.0",
         "postcss-loader": "^3.0.0",
-        "pre-commit": "^1.2.2",
         "raw-loader": "^0.5.1",
         "request": "^2.88.0",
         "resolve-bin": "^0.4.0",
@@ -164,7 +163,6 @@
         "docs:cleanup-preview": "ts-node --project ./scripts/tsconfig.deploy.json ./scripts/deploy/cleanup-preview.ts",
         "preinstall": "node ./tools/npm/check-npm.js",
         "publish": "ts-node --project ./scripts/tsconfig.deploy.json ./scripts/deploy/publish-artifacts.ts",
-        "lint-staged": "lint-staged",
         "linter:mosaic": "gulp tslint",
         "linter:styles": "gulp stylelint",
         "linter:yaml": "yamllint **/*.yml --ignore=node_modules/**/*.yml",
@@ -214,18 +212,18 @@
         "server-dev:validation": "npm run server-dev -- --env.component validation",
         "server-dev:vertical-navbar": "npm run server-dev -- --env.component vertical-navbar"
     },
-    "lint-staged": {
-        "*.yml": "yamllint"
-    },
-    "pre-commit": "lint-staged",
     "husky": {
         "hooks": {
-            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+            "pre-commit": "lint-staged"
         }
     },
     "collective": {
         "type": "opencollective",
         "url": "https://opencollective.com/mosaic",
         "logo": "https://opencollective.com/mosaic/logo.txt"
+    },
+    "lint-staged": {
+        "*.yml": "yamllint"
     }
 }
