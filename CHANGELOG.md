@@ -1,3 +1,10 @@
+## 8.4.2 "Restive Horns" (2020-02-28)
+
+### Mosaic
+
+ * bug fix  **checkbox:** expanded area for click (#UIM-357) ([#420](https://github.com/positive-js/mosaic/issues/420)) ([1f0d164](https://github.com/positive-js/mosaic/commit/1f0d164e94464ecf166486b6858a799ad2f8fdb7)), closes [#UIM-357](https://github.com/positive-js/mosaic/issues/UIM-357)
+ * bug fix  **tree:** incorrect padding for root items (#UIM-372) ([#417](https://github.com/positive-js/mosaic/issues/417)) ([8e79e98](https://github.com/positive-js/mosaic/commit/8e79e98eaf41d720dbddb67275583d57a843df51)), closes [#UIM-372](https://github.com/positive-js/mosaic/issues/UIM-372)
+
 ## 8.4.1 "Fisheye" (2020-02-25)
 
 ### Mosaic
