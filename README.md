@@ -53,9 +53,7 @@ $ yarn run server-dev:button
 
 Thank you to all the people who have already contributed to Mosaic!
 
-<a href="https://github.com/positive-js/mosaic/graphs/contributors">Contributors Graphs</a>
-
-
+[![contributors](https://contributors-img.firebaseapp.com/image?repo=positive-js/mosaic)](https://github.com/positive-js/mosaic/graphs/contributors)
 
 
 **Inspired by AngularMaterial**
