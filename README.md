@@ -26,15 +26,12 @@ Mosaic components are the building blocks of Positive Technologies applications.
 * [Getting Started Guide][getting-started]
 * [Contributing][contributing]
 
-## Demo
-* [Storybook](https://positive-js.github.io/mosaic-storybook/) 
-
-## New Documentation
+## Documentation
 * [Mosaic](https://mosaic.ptsecurity.com/)
 
 ## 🚀 Getting started
 
-Before you start, make sure you have a recent version of [NodeJS](http://nodejs.org/) environment *>=8.0* with NPM *>=5.0*.
+Before you start, make sure you have a recent version of [NodeJS](http://nodejs.org/) environment *>=10.0* with NPM *>=6.0*.
 
 From the project folder, execute the following commands:
 
@@ -55,8 +52,6 @@ Thank you to all the people who have already contributed to Mosaic!
 
 [![contributors](https://contributors-img.firebaseapp.com/image?repo=positive-js/mosaic)](https://github.com/positive-js/mosaic/graphs/contributors)
 
-
-**Inspired by AngularMaterial**
 
 [getting-started]: docs/getting-started.md
 [contributing]: docs/guides/00-contributing.md
