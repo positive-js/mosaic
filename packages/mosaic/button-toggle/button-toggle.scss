@@ -49,6 +49,7 @@ $mc-button-toggle-border-radius: 3px;
     }
 }
 
+/* stylelint-disable no-descending-specificity */
 .mc-button-toggle-vertical {
     flex-direction: column;
 
@@ -93,6 +94,7 @@ $mc-button-toggle-border-radius: 3px;
         }
     }
 }
+/* stylelint-enable no-descending-specificity */
 
 .mc-button-toggle-standalone {
     box-shadow: none;

@@ -64,6 +64,7 @@
             }
         }
 
+        /* stylelint-disable no-descending-specificity */
         &.mc-link_underlined .mc-link__text {
             border-bottom-style: solid;
             border-bottom-width: 1px;
@@ -77,6 +78,7 @@
                 border-bottom-color: rgba($color_hover, 0.32);
             }
         }
+        /* stylelint-enable no-descending-specificity */
 
         &[disabled] {
             $color_disabled: mc-color($foreground, text-disabled);
