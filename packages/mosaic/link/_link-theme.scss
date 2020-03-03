@@ -50,11 +50,6 @@
             margin-right: 4px;
         }
 
-        &.mc-link_underlined .mc-link__text {
-            border-bottom-style: solid;
-            border-bottom-color: rgba($color, 0.32);
-        }
-
         &.mc-link_dashed .mc-link__text {
             border-bottom-style: dashed;
             border-bottom-width: 1px;
@@ -70,6 +65,7 @@
         }
 
         &.mc-link_underlined .mc-link__text {
+            border-bottom-style: solid;
             border-bottom-width: 1px;
             border-bottom-color: rgba($color, 0.32);
 

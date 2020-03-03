@@ -158,6 +158,14 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
     border-bottom-right-radius: $mc-select-panel-border-radius;
 
     padding: 4px 0;
+
+    // Override optgroup and option to scale based on font-size of the trigger.
+    .mc-optgroup-label,
+    .mc-tree-select-option {
+        font-size: inherit;
+        line-height: $mc-select-item-height;
+        height: $mc-select-item-height;
+    }
 }
 
 .mc-tree-select__content {
@@ -165,16 +173,6 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
 
     & .mc-tree-selection {
         height: 100%;
-    }
-}
-
-// Override optgroup and option to scale based on font-size of the trigger.
-.mc-tree-select__panel {
-    .mc-optgroup-label,
-    .mc-tree-select-option {
-        font-size: inherit;
-        line-height: $mc-select-item-height;
-        height: $mc-select-item-height;
     }
 }
 

@@ -72,16 +72,6 @@ $mc-form-field-border-size: 1px;
     }
 }
 
-.mc-form-field__cleaner {
-    .mc-cleaner {
-        position: absolute;
-
-        top: 0;
-        bottom: 0;
-        right: 0;
-    }
-}
-
 .mc-cleaner {
     display: flex;
 
@@ -97,6 +87,16 @@ $mc-form-field-border-size: 1px;
 
         width: 100%;
         height: 100%;
+    }
+}
+
+.mc-form-field__cleaner {
+    .mc-cleaner {
+        position: absolute;
+
+        top: 0;
+        bottom: 0;
+        right: 0;
     }
 }
 

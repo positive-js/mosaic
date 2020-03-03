@@ -5,6 +5,12 @@
     flex-direction: row;
 }
 
+.mc-tag-input {
+    border: none;
+    outline: none;
+    background: transparent;
+}
+
 .mc-tags-list__list-container {
     display: flex;
     flex-wrap: wrap;
@@ -29,10 +35,4 @@
     & .mc-cleaner {
         height: 30px;
     }
-}
-
-.mc-tag-input {
-    border: none;
-    outline: none;
-    background: transparent;
 }

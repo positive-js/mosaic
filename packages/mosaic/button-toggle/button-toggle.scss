@@ -15,12 +15,6 @@ $mc-button-toggle-border-radius: 3px;
     display: flex;
     flex-direction: row;
 
-    &:not(.mc-button-toggle-vertical) {
-        .mc-button-toggle:not([disabled]) + .mc-button-toggle:not([disabled]) {
-            margin-left: -$mc-button-toggle-border-size;
-        }
-    }
-
     .mc-button-toggle {
         &:first-of-type:not(:last-of-type) {
             > .mc-button,
@@ -45,6 +39,12 @@ $mc-button-toggle-border-radius: 3px;
 
         &[disabled] {
             outline: 0;
+        }
+    }
+
+    &:not(.mc-button-toggle-vertical) {
+        .mc-button-toggle:not([disabled]) + .mc-button-toggle:not([disabled]) {
+            margin-left: -$mc-button-toggle-border-size;
         }
     }
 }
