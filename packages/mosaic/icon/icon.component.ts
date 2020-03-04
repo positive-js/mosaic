@@ -29,7 +29,7 @@ export const McIconMixinBase: CanColorCtor & typeof McIconBase = mixinColor(McIc
 @Component({
     selector: `[mc-icon]`,
     template: '<ng-content></ng-content>',
-    styleUrls: ['./icon.css'],
+    styleUrls: ['icon.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     inputs: ['color']

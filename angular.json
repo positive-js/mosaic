@@ -121,7 +121,53 @@
                     }
                 }
             }
+        },
+        "dev-button": {
+            "projectType": "application",
+            "root": "packages/mosaic-dev/button",
+            "sourceRoot": "packages/mosaic-dev/button",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/mosaic-dev/button",
+                        "tsConfig": "packages/mosaic-dev/button/tsconfig.app.json",
+                        "index": "packages/mosaic-dev/index.html",
+                        "main": "packages/mosaic-dev/button/main.ts",
+                        "aot": true,
+                        "polyfills": "packages/mosaic-dev/polyfills.ts"
+                    },
+                    "configurations": {
+                        "production": {
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "vendorChunk": false,
+                            "statsJson": true
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "dev-button:build"
+                    }
+                }
+            },
+            "schematics": {}
         }
     },
-    "defaultProject": "mosaic-docs"
+    "defaultProject": "mosaic-docs",
+    "cli": {
+        "packageManager": "yarn",
+        "analytics": false
+    }
 }

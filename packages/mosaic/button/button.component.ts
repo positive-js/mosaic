@@ -84,7 +84,7 @@ export const McButtonMixinBase:
 @Component({
     selector: 'button[mc-button]',
     templateUrl: './button.component.html',
-    styleUrls: ['./button.css'],
+    styleUrls: ['./button.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     inputs: ['disabled', 'color'],
@@ -116,7 +116,7 @@ export class McButton extends McButtonMixinBase implements OnDestroy, CanDisable
 @Component({
     selector: 'a[mc-button]',
     templateUrl: './button.component.html',
-    styleUrls: ['./button.css'],
+    styleUrls: ['button.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     inputs: ['disabled', 'color'],

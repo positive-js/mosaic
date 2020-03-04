@@ -1,0 +1,13 @@
+{
+    "extends": "../../../tsconfig.cli",
+    "compilerOptions": {
+        "outDir": "../../dist/out-tsc"
+    },
+    "files": [
+        "module.ts",
+        "../polyfills.ts"
+    ],
+    "include": [
+        "**/*.ts"
+    ]
+}

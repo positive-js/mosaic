@@ -19,7 +19,7 @@ export type McPseudoCheckboxState = 'unchecked' | 'checked' | 'indeterminate';
 @Component({
     selector: 'mc-pseudo-checkbox',
     templateUrl: 'pseudo-checkbox.partial.html',
-    styleUrls: ['pseudo-checkbox.css'],
+    styleUrls: ['pseudo-checkbox.scss'],
     host: {
         class: 'mc-pseudo-checkbox',
         '[class.mc-indeterminate]': 'state === "indeterminate"',
