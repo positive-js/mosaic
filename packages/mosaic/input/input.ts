@@ -291,7 +291,7 @@ export class McInput extends McInputMixinBase implements McFormFieldControl<any>
             const control = this.ngControl.control;
 
             control.updateValueAndValidity({ emitEvent: false });
-            (control.statusChanges as EventEmitter<string>).emit(control!.status);
+            (control.statusChanges as EventEmitter<string>).emit(control.status);
         }
     }
 
