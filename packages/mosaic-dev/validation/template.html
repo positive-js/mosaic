@@ -62,7 +62,12 @@
         <br><br>
 
         <button mc-button>Submit</button>
+
+        <div *ngIf="reactiveForm.controls.reactiveInputValue.errors">
+            <div *ngIf="reactiveForm.controls.reactiveInputValue.errors?.required">required error</div>
+        </div>
     </form>
+
 
     <br><br>
 
