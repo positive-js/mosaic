@@ -1,5 +1,5 @@
 /* tslint:disable:no-console no-reserved-keywords */
-import { ChangeDetectorRef, Component, NgModule, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, NgModule, ViewEncapsulation } from '@angular/core';
 import {
     AbstractControl, FormBuilder,
     FormControl,
@@ -172,6 +172,10 @@ export class DemoComponent {
             reactiveSelectValue: new FormControl('', [Validators.required]),
             reactiveTreeSelectValue: new FormControl('', [Validators.required]),
             reactiveTypeaheadValue: new FormControl([], [Validators.required])
+        });
+
+        this.reactiveForm.valueChanges.subscribe((value) => {
+            console.log('reactiveForm valueChanges: ', value); // tslint:disable-line:no-console
         });
 
         this.control.valueChanges.subscribe((value) => {

@@ -5,6 +5,7 @@ import {
     Directive,
     DoCheck,
     ElementRef,
+    EventEmitter,
     Inject,
     Input,
     OnChanges,
@@ -286,8 +287,11 @@ export class McInput extends McInputMixinBase implements McFormFieldControl<any>
     onBlur(): void {
         this.focusChanged(false);
 
-        if (this.ngControl) {
-            this.ngControl.control!.updateValueAndValidity({ emitEvent: false });
+        if (this.ngControl && this.ngControl.control) {
+            const control = this.ngControl.control;
+
+            control.updateValueAndValidity({ emitEvent: false });
+            (control.statusChanges as EventEmitter<string>).emit(control!.status);
         }
     }
 

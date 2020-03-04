@@ -85,7 +85,7 @@ export function setMosaicValidationForFormControl(component, parentForm: NgForm,
 
     // changed required validation logic after initialization
     if (ngControl.invalid && ngControl.errors!.required) {
-        setValidState(ngControl.control!, originalValidator!);
+        Promise.resolve().then(() => setValidState(ngControl.control!, originalValidator!));
     }
 
     // check dynamic updates
