@@ -122,6 +122,29 @@
                 }
             }
         },
+        "cdk": {
+            "projectType": "library",
+            "root": "packages/cdk",
+            "sourceRoot": "packages/cdk",
+            "architect": {
+                "packagr": {
+                    "builder": "@angular-devkit/build-ng-packagr:build",
+                    "options": {
+                        "tsConfig": "packages/cdk/tsconfig.lib.json",
+                        "project": "packages/cdk/ng-package.json"
+                    }
+                },
+                "build": {
+                    "builder": "@ptsecurity/builders:packager",
+                    "options": {
+                        "buildTarget": "packagr",
+                        "releasePackageJson": "packages/cdk/package.json",
+                        "versionPlaceholder": "{{VERSION}}",
+                        "ngVersionPlaceholder": "{{NG_VERSION}}"
+                    }
+                }
+            }
+        },
         "dev-button": {
             "projectType": "application",
             "root": "packages/mosaic-dev/button",

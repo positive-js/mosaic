@@ -1,0 +1,10 @@
+{
+    "$schema": "../../node_modules/@angular-devkit/architect/src/builders-schema.json",
+    "builders": {
+        "packager": {
+            "implementation": "./packager/index",
+            "schema": "./packager/schema.json",
+            "description": "Packaging"
+        }
+    }
+}

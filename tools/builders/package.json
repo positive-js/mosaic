@@ -1,0 +1,6 @@
+{
+    "name": "@ptsecurity/builders",
+    "main": "index.js",
+    "typings": "index.d.ts",
+    "builders": "builders.json"
+}
