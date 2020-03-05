@@ -40,6 +40,12 @@
             @include mc-tag-color(map-get($tags, error));
         }
 
+        &:hover {
+            & .mc-tag-overlay {
+                background: mc-color($background, overlay-hovered);
+            }
+        }
+
         .mc-icon {
             color: map-get($foreground, icon);
 
@@ -63,12 +69,6 @@
             & .mc-icon {
                 color: map-get($foreground, icon);
                 cursor: default;
-            }
-        }
-
-        &:hover:not(.mc-disabled) {
-            & .mc-tag-overlay {
-                background: mc-color($background, overlay-hovered);
             }
         }
     }
