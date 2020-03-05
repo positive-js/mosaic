@@ -21,6 +21,21 @@
             color: map-get($params, hovered-icon-color);
         }
     }
+
+    &.mc-disabled {
+        border-color: map-get($params, state-disable_background);
+        background: map-get($params, state-disable_background);
+
+        color: map-get($params, state-disable_color);
+
+        & .mc-tag-overlay {
+            background: transparent;
+        }
+
+        & .mc-icon {
+            color: inherit;
+        }
+    }
 }
 
 
