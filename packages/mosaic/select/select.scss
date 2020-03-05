@@ -14,27 +14,6 @@ $mc-select-panel-border-radius: 3px !default;
 $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arrow-margin);
 
 
-
-.mc-select__trigger {
-    display: flex;
-    box-sizing: border-box;
-    position: relative;
-
-    height: 30px;
-
-    cursor: pointer;
-
-    // todo возможно нужно через JS
-    padding: {
-        right: 7px;
-        left: 15px;
-    };
-
-    &.mc-select__trigger_multiple {
-        padding-left: 7px;
-    }
-}
-
 .mc-select {
     box-sizing: border-box;
 
@@ -46,6 +25,26 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
     width: 100%;
 
     outline: none;
+
+    & .mc-select__trigger {
+        display: flex;
+        box-sizing: border-box;
+        position: relative;
+
+        height: 30px;
+
+        cursor: pointer;
+
+        // todo возможно нужно через JS
+        padding: {
+            right: 7px;
+            left: 15px;
+        };
+
+        &.mc-select__trigger_multiple {
+            padding-left: 7px;
+        }
+    }
 
     &.mc-disabled {
         & .mc-select__trigger {

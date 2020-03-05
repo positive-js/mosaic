@@ -34,6 +34,20 @@
                 }
             }
 
+            &.mc-focused {
+                &:not(.ng-invalid) .mc-form-field__container {
+                    $focused-color: map-get(map-get($theme, states), focused-color);
+
+                    border-color: $focused-color;
+                    box-shadow: 0 0 0 1px $focused-color;
+                }
+
+                &.ng-invalid .mc-form-field__container {
+                    box-shadow: 0 0 0 1px mc-color($error);
+                }
+            }
+
+            /* stylelint-disable no-descending-specificity */
             &.mc-disabled .mc-form-field__container {
                 border-color: mix(map-get($foreground, border), map-get($background, overlay-disabled));
 
@@ -46,17 +60,7 @@
                     color: mc-color($foreground, text-disabled);
                 }
             }
-
-            &.mc-focused:not(.ng-invalid) .mc-form-field__container {
-                $focused-color: map-get(map-get($theme, states), focused-color);
-
-                border-color: $focused-color;
-                box-shadow: 0 0 0 1px $focused-color;
-            }
-
-            &.ng-invalid.mc-focused .mc-form-field__container {
-                box-shadow: 0 0 0 1px mc-color($error);
-            }
+            /* stylelint-enable no-descending-specificity */
         }
     }
 
