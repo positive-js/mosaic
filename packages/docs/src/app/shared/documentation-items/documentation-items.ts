@@ -313,7 +313,7 @@ const DOCS: { [key: string]: DocCategory[] } = {
                     examples: ['date-types']
                 }
             ]
-        },
+        }
     ],
     [CDK]: [
 
