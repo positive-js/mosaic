@@ -26,6 +26,26 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
 
     outline: none;
 
+    & .mc-select__trigger {
+        display: flex;
+        box-sizing: border-box;
+        position: relative;
+
+        height: 30px;
+
+        cursor: pointer;
+
+        // todo возможно нужно через JS
+        padding: {
+            right: 7px;
+            left: 15px;
+        };
+
+        &.mc-select__trigger_multiple {
+            padding-left: 7px;
+        }
+    }
+
     &.mc-disabled {
         & .mc-select__trigger {
             @include user-select(none);
@@ -46,26 +66,6 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
     cursor: default;
     outline: none;
     padding: 0 16px;
-}
-
-.mc-select__trigger {
-    display: flex;
-    box-sizing: border-box;
-    position: relative;
-
-    height: 30px;
-
-    cursor: pointer;
-
-    // todo возможно нужно через JS
-    padding: {
-        right: 7px;
-        left: 15px;
-    };
-
-    &.mc-select__trigger_multiple {
-        padding-left: 7px;
-    }
 }
 
 .mc-select__matcher {
@@ -158,21 +158,19 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
     border-bottom-right-radius: $mc-select-panel-border-radius;
 
     padding: 4px 0;
-}
 
-.mc-select__content {
-    max-height: $mc-select-panel-max-height;
-    overflow: auto;
-}
-
-// Override optgroup and option to scale based on font-size of the trigger.
-.mc-select__panel {
+    // Override optgroup and option to scale based on font-size of the trigger.
     .mc-optgroup-label,
     .mc-option {
         font-size: inherit;
         line-height: $mc-select-item-height;
         height: $mc-select-item-height;
     }
+}
+
+.mc-select__content {
+    max-height: $mc-select-panel-max-height;
+    overflow: auto;
 }
 
 .mc-form-field-type-mc-select {

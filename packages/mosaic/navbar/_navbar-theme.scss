@@ -16,6 +16,12 @@
         }
     }
 
+    .mc-navbar-brand {
+        .mc-navbar-title {
+            opacity: 0.5;
+        }
+    }
+
     .mc-navbar-item {
         outline: 0;
 
@@ -46,12 +52,6 @@
             .mc-icon {
                 opacity: map-get($navbar, item_state-disabled_opacity);
             }
-        }
-    }
-
-    .mc-navbar-brand {
-        .mc-navbar-title {
-            opacity: 0.5;
         }
     }
 }
