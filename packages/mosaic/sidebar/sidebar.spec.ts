@@ -139,5 +139,5 @@ class SimpleSidebar {
 
     @ViewChild(McSidebar, { static: false }) sidebar: McSidebar;
 
-    onStateChanged($event): void {}
+    onStateChanged(): void {}
 }

@@ -1,9 +1,14 @@
 {
     "extends": "./tsconfig.json",
     "compilerOptions": {
-        "outDir": "../../dist/out-tsc/cdk-spec",
+        "outDir": "../../dist/out-tsc/mosaic-spec",
+        "types": [
+            "jasmine",
+            "node"
+        ],
         "paths": {
-            "@ptsecurity/cdk/*": ["./dist/cdk/*"]
+            "@ptsecurity/cdk/*": ["./dist/cdk/*"],
+            "@ptsecurity/mosaic/*": ["./dist/mosaic/*"]
         }
     },
     "files": [

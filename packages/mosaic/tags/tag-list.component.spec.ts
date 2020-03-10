@@ -601,14 +601,12 @@ describe('McTagList', () => {
 
     // todo need rethink this selection logic
     xdescribe('selection logic', () => {
-        let formField: HTMLElement;
         let nativeTags: HTMLElement[];
 
         beforeEach(() => {
             fixture = createComponent(BasicTagList);
             fixture.detectChanges();
 
-            formField = fixture.debugElement.query(By.css('.mc-form-field')).nativeElement;
             nativeTags = fixture.debugElement.queryAll(By.css('mc-tag'))
                 .map((tag) => tag.nativeElement);
 

@@ -173,6 +173,45 @@
                         "versionPlaceholder": "{{VERSION}}",
                         "ngVersionPlaceholder": "{{NG_VERSION}}"
                     }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "karmaConfig": "packages/mosaic/karma.conf.js",
+                        "main": "packages/mosaic/test.ts",
+                        "tsConfig": "packages/mosaic/tsconfig.spec.json"
+                    }
+                }
+            }
+        },
+        "mosaic-moment-adapter": {
+            "projectType": "library",
+            "root": "packages/mosaic-moment-adapter",
+            "sourceRoot": "packages/mosaic-moment-adapter",
+            "architect": {
+                "packagr": {
+                    "builder": "@angular-devkit/build-ng-packagr:build",
+                    "options": {
+                        "tsConfig": "packages/mosaic-moment-adapter/tsconfig.lib.json",
+                        "project": "packages/mosaic-moment-adapter/ng-package.json"
+                    }
+                },
+                "build": {
+                    "builder": "@ptsecurity/builders:packager",
+                    "options": {
+                        "buildTarget": "packagr",
+                        "releaseMosaicPackageJson": "packages/mosaic-moment-adapter/package.json",
+                        "versionPlaceholder": "{{VERSION}}",
+                        "ngVersionPlaceholder": "{{NG_VERSION}}"
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "karmaConfig": "packages/mosaic-moment-adapter/karma.conf.js",
+                        "main": "packages/mosaic-moment-adapter/test.ts",
+                        "tsConfig": "packages/mosaic-moment-adapter/tsconfig.spec.json"
+                    }
                 }
             }
         },

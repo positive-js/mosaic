@@ -1642,6 +1642,7 @@ describe('McAutocomplete', () => {
             zone.simulateZoneExit();
 
             expect(spy).toHaveBeenCalledWith(jasmine.any(McOptionSelectionChange));
+            // @ts-ignore
             subscription.unsubscribe();
         }));
 
