@@ -1,0 +1,21 @@
+<mc-tree-selection
+    [(ngModel)]="modelValue"
+    [dataSource]="dataSource"
+    [treeControl]="treeControl">
+
+    <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding [disabled]="node.name === 'tests'">
+        <mc-checkbox class= "tree-example-checkbox" [disabled]="node.name === 'tests'"
+                     [checked]="checklistSelection.isSelected(node)"
+                     (change)="fileSelectionToggle(node)"></mc-checkbox>
+        <span [innerHTML]="treeControl.getViewValue(node)"></span>
+    </mc-tree-option>
+
+    <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+        <mc-checkbox class= "tree-example-checkbox"
+                     [checked]="descendantsAllSelected(node)"
+                     [indeterminate]="descendantsPartiallySelected(node)"
+                     (change)="fileSelectionToggle(node)"></mc-checkbox>
+        <mc-tree-node-toggle [node]="node"></mc-tree-node-toggle>
+        <span [innerHTML]="treeControl.getViewValue(node)"></span>
+    </mc-tree-option>
+</mc-tree-selection>
