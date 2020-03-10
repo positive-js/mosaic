@@ -142,6 +142,14 @@
                         "versionPlaceholder": "{{VERSION}}",
                         "ngVersionPlaceholder": "{{NG_VERSION}}"
                     }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "karmaConfig": "packages/cdk/karma.conf.js",
+                        "main": "packages/cdk/test.ts",
+                        "tsConfig": "packages/cdk/tsconfig.spec.json"
+                    }
                 }
             }
         },
