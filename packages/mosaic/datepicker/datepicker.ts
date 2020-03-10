@@ -90,7 +90,7 @@ export const McDatepickerContentMixinBase: CanColorCtor & typeof McDatepickerCon
 @Component({
     selector: 'mc-datepicker__content',
     templateUrl: 'datepicker-content.html',
-    styleUrls: ['datepicker-content.css'],
+    styleUrls: ['datepicker-content.scss'],
     host: {
         class: 'mc-datepicker__content',
         '[@transformPanel]': '"enter"'

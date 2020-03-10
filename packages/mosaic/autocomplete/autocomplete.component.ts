@@ -53,7 +53,7 @@ export function MC_AUTOCOMPLETE_DEFAULT_OPTIONS_FACTORY(): McAutocompleteDefault
     selector: 'mc-autocomplete',
     exportAs: 'mcAutocomplete',
     templateUrl: 'autocomplete.html',
-    styleUrls: ['autocomplete.css'],
+    styleUrls: ['autocomplete.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: { class: 'mc-autocomplete' },

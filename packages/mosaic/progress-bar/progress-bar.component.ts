@@ -29,7 +29,7 @@ export const McProgressBarMixinBase:
 @Component({
     selector: 'mc-progress-bar',
     templateUrl: './progress-bar.component.html',
-    styleUrls: ['./progress-bar.css'],
+    styleUrls: ['./progress-bar.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {

@@ -58,7 +58,7 @@ import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
     animations: [ fadeAnimation ],
     templateUrl: './tooltip.component.html',
     preserveWhitespaces: false,
-    styleUrls: ['./tooltip.css'],
+    styleUrls: ['./tooltip.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {

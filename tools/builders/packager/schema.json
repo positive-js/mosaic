@@ -35,22 +35,6 @@
             "items": {
                 "$ref": "#/definitions/assetPattern"
             }
-        },
-        "assets": {
-            "type": "array",
-            "description": "List of static assets that should be copied to the bundle directory",
-            "default": [],
-            "items": {
-                "$ref": "#/definitions/assetPattern"
-            }
-        },
-        "additionalTargets": {
-            "type": "array",
-            "description": "List of additional targets that should be run",
-            "default": [],
-            "items": {
-                "type": "string"
-            }
         }
     },
     "additionalProperties": false,

@@ -58,7 +58,7 @@ export class McTabHeaderBase {}
 @Component({
     selector: 'mc-tab-header',
     templateUrl: 'tab-header.html',
-    styleUrls: ['tab-header.css'],
+    styleUrls: ['tab-header.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {

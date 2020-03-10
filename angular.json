@@ -138,7 +138,30 @@
                     "builder": "@ptsecurity/builders:packager",
                     "options": {
                         "buildTarget": "packagr",
-                        "releasePackageJson": "packages/cdk/package.json",
+                        "releaseCDKPackageJson": "packages/cdk/package.json",
+                        "versionPlaceholder": "{{VERSION}}",
+                        "ngVersionPlaceholder": "{{NG_VERSION}}"
+                    }
+                }
+            }
+        },
+        "mosaic": {
+            "projectType": "library",
+            "root": "packages/mosaic",
+            "sourceRoot": "packages/mosaic",
+            "architect": {
+                "packagr": {
+                    "builder": "@angular-devkit/build-ng-packagr:build",
+                    "options": {
+                        "tsConfig": "packages/mosaic/tsconfig.lib.json",
+                        "project": "packages/mosaic/ng-package.json"
+                    }
+                },
+                "build": {
+                    "builder": "@ptsecurity/builders:packager",
+                    "options": {
+                        "buildTarget": "packagr",
+                        "releaseMosaicPackageJson": "packages/mosaic/package.json",
                         "versionPlaceholder": "{{VERSION}}",
                         "ngVersionPlaceholder": "{{NG_VERSION}}"
                     }

@@ -1,53 +1,37 @@
 {
+    "buildOnSave": false,
+    "compileOnSave": false,
     "compilerOptions": {
-        "outDir": "./dist/packages/all",
+        "baseUrl": ".",
+        "rootDir": ".",
+        "declaration": true,
+        "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "module": "es2015",
+        "importHelpers": true,
+        "lib": [
+            "es2017",
+            "dom"
+        ],
+        "module": "esnext",
         "moduleResolution": "node",
         "noUnusedLocals": true,
         "noUnusedParameters": true,
-        "strictNullChecks": true,
-        "strictFunctionTypes": true,
+        "skipDefaultLibCheck": true,
         "skipLibCheck": true,
-        "target": "es2015",
-        "lib": [
-            "es5",
-            "es2015",
-            "dom"
-        ],
-        "baseUrl": "./packages",
-        "paths": {
-            "@ptsecurity/cdk/*": [
-                "./cdk/*"
-            ],
-            "@ptsecurity/mosaic/*": [
-                "./mosaic/*"
-            ],
-            "@ptsecurity/mosaic-moment-adapter/*": [
-                "./mosaic-moment-adapter/*"
-            ]
-        },
+        "sourceMap": true,
+        "strictNullChecks": true,
+        "target": "es5",
         "typeRoots": [
             "node_modules/@types"
         ],
-        "types": [
-            "jasmine",
-            "tslib",
-            "moment"
-        ],
-        "plugins": [
-            {
-                "name": "typescript-tslint-plugin",
-                "alwaysShowRuleFailuresAsWarnings": false,
-                "suppressWhileTypeErrorsPresent": false
-            }
-        ]
+        "paths": {
+            "@ptsecurity/cdk/keycodes": ["packages/cdk/keycodes/index.ts"],
+            "@ptsecurity/cdk/a11y": ["packages/cdk/a11y/index.ts"],
+            "@ptsecurity/mosaic/core": ["packages/mosaic/core/index.ts"]
+        }
     },
-    "include": [
-        "packages/**/*.ts",
-        "tools/**/*.ts"
-    ],
     "exclude": [
-        "node_modules/"
+        "node_modules",
+        "dist"
     ]
 }

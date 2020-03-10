@@ -1,22 +1,11 @@
-// Configuration for IDEs only.
 {
     "extends": "../../tsconfig.json",
     "compilerOptions": {
-        "rootDir": "..",
-        "baseUrl": ".",
-        "paths": {
-            "@ptsecurity/cdk/*": [
-                "../cdk/*"
-            ],
-            "@ptsecurity/mosaic/*": [
-                "./*"
-            ],
-            "@ptsecurity/mosaic-moment-adapter/*": [
-                "../mosaic-moment-adapter/*"
-            ]
-        }
+        "types": [
+            "node"
+        ]
     },
     "include": [
-        "./**/*.ts"
+        "**/*.ts"
     ]
 }

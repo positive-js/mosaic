@@ -94,7 +94,7 @@ export const McCheckboxMixinBase:
 @Component({
     selector: 'mc-checkbox',
     templateUrl: 'checkbox.html',
-    styleUrls: ['checkbox.css'],
+    styleUrls: ['checkbox.scss'],
     exportAs: 'mcCheckbox',
     host: {
         class: 'mc-checkbox',

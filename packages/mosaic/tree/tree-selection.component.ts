@@ -79,7 +79,7 @@ interface SelectionModelOption {
         '(keydown)': 'onKeyDown($event)',
         '(window:resize)': 'updateScrollSize()'
     },
-    styleUrls: ['./tree.css'],
+    styleUrls: ['./tree.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [

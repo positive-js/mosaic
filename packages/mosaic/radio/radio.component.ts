@@ -297,7 +297,7 @@ export const McRadioButtonMixinBase:
 @Component({
     selector: 'mc-radio-button',
     templateUrl: 'radio.component.html',
-    styleUrls: ['radio.css'],
+    styleUrls: ['radio.scss'],
     inputs: ['color', 'tabIndex'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,

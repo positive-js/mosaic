@@ -11,6 +11,4 @@ export interface IPackagerOptions {
     versionPlaceholder: string;
     ngVersionPlaceholder: string;
     styles: IPackagerAssetDef[];
-    assets: IPackagerAssetDef[];
-    additionalTargets: string[];
 }

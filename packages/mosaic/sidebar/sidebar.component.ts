@@ -54,7 +54,7 @@ export class McSidebarClosed {
     selector: 'mc-sidebar',
     exportAs: 'mcSidebar',
     templateUrl: 'sidebar.component.html',
-    styleUrls: ['./sidebar.css'],
+    styleUrls: ['./sidebar.scss'],
     host: {
         class: 'mc-sidebar',
         '[@state]': `{

@@ -162,7 +162,7 @@ export class McCalendarHeader<D> {
 @Component({
     selector: 'mc-calendar',
     templateUrl: 'calendar.html',
-    styleUrls: ['calendar.css'],
+    styleUrls: ['calendar.scss'],
     host: {
         class: 'mc-calendar'
     },

@@ -12,7 +12,7 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
         '[class.mc-divider-inset]': 'inset'
     },
     template: '',
-    styleUrls: ['divider.css'],
+    styleUrls: ['divider.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     preserveWhitespaces: false

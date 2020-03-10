@@ -89,7 +89,7 @@ export class McTagListChange {
         '[id]': 'uid'
     },
     providers: [{ provide: McFormFieldControl, useExisting: McTagList }],
-    styleUrls: ['tag-list.css'],
+    styleUrls: ['tag-list.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })

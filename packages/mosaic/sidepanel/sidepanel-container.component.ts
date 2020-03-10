@@ -30,7 +30,7 @@ export const MC_SIDEPANEL_WITH_SHADOW =
 @Component({
     selector: 'mc-sidepanel-container',
     templateUrl: './sidepanel-container.component.html',
-    styleUrls: ['./sidepanel.css'],
+    styleUrls: ['./sidepanel.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     animations: [mcSidepanelAnimations.sidepanelState],

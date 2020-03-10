@@ -30,7 +30,7 @@ export class McVerticalNavbarTitle {}
     selector: 'mc-vertical-navbar',
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './vertical-navbar.component.html',
-    styleUrls: ['./vertical-navbar.component.css'],
+    styleUrls: ['./vertical-navbar.component.scss'],
     encapsulation: ViewEncapsulation.None,
     animations: [
         toggleVerticalNavbarAnimation()

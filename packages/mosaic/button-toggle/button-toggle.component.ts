@@ -303,7 +303,7 @@ export class McButtonToggleGroup implements ControlValueAccessor, OnInit, AfterC
             <ng-content></ng-content>
         </button>
     `,
-    styleUrls: ['button-toggle.css'],
+    styleUrls: ['button-toggle.scss'],
     encapsulation: ViewEncapsulation.None,
     exportAs: 'mcButtonToggle',
     changeDetection: ChangeDetectionStrategy.OnPush,

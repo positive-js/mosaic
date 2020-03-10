@@ -133,7 +133,7 @@ const McTreeSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorSt
     selector: 'mc-tree-select',
     exportAs: 'mcTreeSelect',
     templateUrl: 'tree-select.html',
-    styleUrls: ['./tree-select.css'],
+    styleUrls: ['./tree-select.scss'],
     inputs: ['disabled'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,

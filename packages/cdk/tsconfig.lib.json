@@ -2,11 +2,6 @@
     "extends": "./tsconfig.json",
     "compilerOptions": {
         "outDir": "../../dist/out-tsc",
-        "baseUrl": ".",
-        "rootDirs": [
-            ".",
-            "../../dist/cdk"
-        ],
         "target": "es2015",
         "declaration": true,
         "inlineSources": true,
@@ -14,6 +9,20 @@
         "lib": [
             "dom",
             "es2018"
-        ]
+        ],
+        "paths": {
+            "@ptsecurity/*": ["dist/*"]
+        }
+
+    },
+    "angularCompilerOptions": {
+        "annotateForClosureCompiler": true,
+        "skipTemplateCodegen": true,
+        "strictMetadataEmit": true,
+        "fullTemplateTypeCheck": true,
+        "flatModuleId": "@ptsecurity/cdk",
+        "strictInjectionParameters": true,
+        "enableResourceInlining": true,
+        "enableIvy": false
     }
 }
