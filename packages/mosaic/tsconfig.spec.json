@@ -2,13 +2,10 @@
     "extends": "./tsconfig.json",
     "compilerOptions": {
         "outDir": "../../dist/out-tsc/mosaic-spec",
-        "types": [
-            "jasmine",
-            "node"
-        ],
         "paths": {
             "@ptsecurity/cdk/*": ["./dist/cdk/*"],
-            "@ptsecurity/mosaic/*": ["./dist/mosaic/*"]
+            "@ptsecurity/mosaic/*": ["./dist/mosaic/*"],
+            "@ptsecurity/mosaic-moment-adapter/*": ["./dist/mosaic-moment-adapter/*"]
         }
     },
     "files": [

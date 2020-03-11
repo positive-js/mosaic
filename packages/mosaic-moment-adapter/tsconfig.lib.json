@@ -10,14 +10,5 @@
             "dom",
             "es2018"
         ]
-    },
-    "angularCompilerOptions": {
-        "annotateForClosureCompiler": true,
-        "skipTemplateCodegen": true,
-        "strictMetadataEmit": true,
-        "flatModuleId": "@ptsecurity/mosaic-moment-adapter",
-        "strictInjectionParameters": true,
-        "enableResourceInlining": true,
-        "enableIvy": false
     }
 }

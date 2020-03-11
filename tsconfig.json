@@ -64,7 +64,7 @@
             "@ptsecurity/mosaic/tree-select": ["packages/mosaic/tree-select/index.ts"],
             "@ptsecurity/mosaic/vertical-navbar": ["packages/mosaic/vertical-navbar/index.ts"],
             "@ptsecurity/mosaic-moment-adapter": ["packages/mosaic-moment-adapter/index.ts"],
-            "@ptsecurity/mosaic-moment-adapter/adapter": ["packages/mosaic-moment-adapter/adapter/index.ts"]
+            "@ptsecurity/mosaic-moment-adapter/adapter": ["packages/mosaic-moment-adapter/index.ts"]
         }
     },
     "exclude": [

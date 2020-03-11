@@ -11,17 +11,8 @@
             "es2018"
         ],
         "paths": {
-            "@ptsecurity/cdk/*": [
-                "dist/cdk/*"
-            ]
+            "@ptsecurity/cdk/*": ["./dist/cdk/*"],
+            "@ptsecurity/mosaic-moment-adapter/*": ["./dist/mosaic-moment-adapter/*"]
         }
-    },
-    "angularCompilerOptions": {
-        "annotateForClosureCompiler": true,
-        "skipTemplateCodegen": true,
-        "strictMetadataEmit": true,
-        "strictInjectionParameters": true,
-        "enableResourceInlining": true,
-        "enableIvy": false
     }
 }

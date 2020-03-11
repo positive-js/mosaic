@@ -8,5 +8,14 @@
     },
     "include": [
         "**/*.ts"
-    ]
+    ],
+    "angularCompilerOptions": {
+        "annotateForClosureCompiler": true,
+        "skipTemplateCodegen": true,
+        "strictMetadataEmit": true,
+        "flatModuleId": "@ptsecurity/cdk",
+        "strictInjectionParameters": true,
+        "enableResourceInlining": true,
+        "enableIvy": false
+    }
 }

@@ -2,8 +2,17 @@
     "extends": "../../tsconfig.json",
     "compilerOptions": {
         "types": [
+            "jasmine",
             "node"
         ]
+    },
+    "angularCompilerOptions": {
+        "annotateForClosureCompiler": true,
+        "skipTemplateCodegen": true,
+        "strictMetadataEmit": true,
+        "strictInjectionParameters": true,
+        "enableResourceInlining": true,
+        "enableIvy": false
     },
     "include": [
         "**/*.ts"
