@@ -5,6 +5,8 @@
 /* tslint:disable:no-unbound-method */
 /* tslint:disable:prefer-for-of */
 
+// TODO: fix linter
+// tslint:disable
 import { Directionality } from '@angular/cdk/bidi';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Platform } from '@angular/cdk/platform';

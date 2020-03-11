@@ -7,13 +7,14 @@ import { NgPackagrBuilderOptions } from '@angular-devkit/build-ng-packagr';
 import { Schema as AngularJson } from '@angular/cli/lib/config/schema';
 import chalk from 'chalk';
 import { existsSync, promises as fs, writeFileSync } from 'fs';
-import { dirname, join, relative, resolve } from 'path';
-
-import { IPackagerOptions } from './schema';
 import { sync } from 'glob';
+import { dirname, join, relative, resolve } from 'path';
 import { parseDir } from 'sass-graph';
 
+import { IPackagerOptions } from './schema';
 
+
+// tslint:disable-next-line:max-func-body-length
 export async function packager(options: IPackagerOptions, context: BuilderContext): Promise<BuilderOutput> {
 
     const project = context.target !== undefined ? context.target.project : '';
@@ -174,7 +175,7 @@ function syncComponentsVersion(
 async function copyStyles(options: IPackagerOptions, context: BuilderContext): Promise<void> {
     for (const styleDef of options.styles) {
         const fileGlob = sync(styleDef.glob, {
-            cwd: join(context.workspaceRoot, styleDef.input),
+            cwd: join(context.workspaceRoot, styleDef.input)
         });
         const directories = fileGlob.map((path) =>
             join(context.workspaceRoot, styleDef.input, dirname(path))
@@ -206,7 +207,7 @@ async function copyAsset(path: string, context: BuilderContext, assetDef: IPacka
 
     await fs.copyFile(path, destination);
 }
-
+// tslint:disable
 export function syncNgVersion(
     releaseJson: IPackageJson,
     rootPackageJson: IPackageJson,
@@ -222,6 +223,7 @@ export function syncNgVersion(
 
     return updatedJson;
 }
+// tslint:enable
 
 async function tryJsonParse<T>(path: string): Promise<T> {
     try {

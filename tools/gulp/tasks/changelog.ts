@@ -20,9 +20,9 @@ const changelogOptions = {
 };
 
 const writerOpts = {
-    transform: (commit, context) => {
+    transform: (commit: any, context: any) => {
 
-        const allowTypes = {
+        const allowTypes: any = {
             feat: 'Features',
             fix: 'Bug Fixes',
             build: 'Build',
@@ -41,7 +41,7 @@ const writerOpts = {
 
         commit.type = modifiedType;
 
-        commit.notes.forEach((note) => {
+        commit.notes.forEach((note: any) => {
                 note.title = 'BREAKING CHANGES';
             });
 

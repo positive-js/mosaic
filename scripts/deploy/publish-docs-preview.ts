@@ -70,7 +70,7 @@ async function postGithubComment() {
         });
 
         const ptBotComment = comments.data
-            .filter(comment => comment.user.login === 'positivejs')
+            .filter((comment) => comment.user.login === 'positivejs')
             .pop();
 
         const body = `Preview docs changes for ${SHORT_SHA} at https://positive-js.github.io/mosaic-previews/pr${PR_NUMBER}-${SHORT_SHA}/`;

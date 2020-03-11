@@ -28,6 +28,7 @@
             "@ptsecurity/cdk/a11y": ["packages/cdk/a11y/index.ts"],
             "@ptsecurity/cdk/datetime": ["packages/cdk/datetime/index.ts"],
             "@ptsecurity/cdk/keycodes": ["packages/cdk/keycodes/index.ts"],
+            "@ptsecurity/cdk/testing": ["packages/cdk/testing/index.ts"],
             "@ptsecurity/cdk/tree": ["packages/cdk/tree/index.ts"],
             "@ptsecurity/mosaic/autocomplete": ["packages/mosaic/autocomplete/index.ts"],
             "@ptsecurity/mosaic/button": ["packages/mosaic/button/index.ts"],
@@ -62,7 +63,8 @@
             "@ptsecurity/mosaic/tree": ["packages/mosaic/tree/index.ts"],
             "@ptsecurity/mosaic/tree-select": ["packages/mosaic/tree-select/index.ts"],
             "@ptsecurity/mosaic/vertical-navbar": ["packages/mosaic/vertical-navbar/index.ts"],
-            "@ptsecurity/mosaic-moment-adapter": ["packages/mosaic-moment-adapter/index.ts"]
+            "@ptsecurity/mosaic-moment-adapter": ["packages/mosaic-moment-adapter/index.ts"],
+            "@ptsecurity/mosaic-moment-adapter/adapter": ["packages/mosaic-moment-adapter/adapter/index.ts"]
         }
     },
     "exclude": [
