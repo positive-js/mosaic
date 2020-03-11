@@ -19,7 +19,6 @@
         "annotateForClosureCompiler": true,
         "skipTemplateCodegen": true,
         "strictMetadataEmit": true,
-        "fullTemplateTypeCheck": true,
         "flatModuleId": "@ptsecurity/cdk",
         "strictInjectionParameters": true,
         "enableResourceInlining": true,

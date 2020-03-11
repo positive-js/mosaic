@@ -9,18 +9,12 @@
         "lib": [
             "dom",
             "es2018"
-        ],
-        "paths": {
-            "@ptsecurity/*": [
-                "dist/*"
-            ]
-        }
+        ]
     },
     "angularCompilerOptions": {
         "annotateForClosureCompiler": true,
         "skipTemplateCodegen": true,
         "strictMetadataEmit": true,
-        "fullTemplateTypeCheck": true,
         "flatModuleId": "@ptsecurity/mosaic-moment-adapter",
         "strictInjectionParameters": true,
         "enableResourceInlining": true,

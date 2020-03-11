@@ -8,7 +8,6 @@
         "strictMetadataEmit": true,
         "flatModuleOutFile": "index.js",
         "flatModuleId": "@ptsecurity/mosaic/select",
-        "skipTemplateCodegen": true,
-        "fullTemplateTypeCheck": true
+        "skipTemplateCodegen": true
     }
 }
