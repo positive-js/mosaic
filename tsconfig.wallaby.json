@@ -1,0 +1,59 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "es2015",
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "allowSyntheticDefaultImports": true,
+        "sourceMap": true,
+        "noEmitHelpers": true,
+        "importHelpers": true,
+        "strictNullChecks": true,
+        "lib": [
+            "es5",
+            "es2015",
+            "dom"
+        ],
+        "baseUrl": "./packages",
+        "paths": {
+            "@ptsecurity/cdk/*": [
+                "./cdk/*"
+            ],
+            "@ptsecurity/mosaic/*": [
+                "./mosaic/*"
+            ],
+            "@ptsecurity/mosaic-moment-adapter/*": [
+                "./mosaic-moment-adapter/*"
+            ]
+        },
+        "typeRoots": [
+            "node_modules/@types"
+        ],
+        "types": [
+            "jasmine",
+            "node",
+            "moment"
+        ]
+    },
+    "include": [
+        "./packages/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist",
+        "wallabyTest.ts",
+        "packages/**/*.spec.ts",
+        "packages/**/*._spec.ts",
+        "packages/**/*.e2e.ts",
+        "packages/mosaic-examples/**/*.*",
+        "packages/cdk/schematics/**/*.*",
+        "packages/mosaic/schematics/**/*.*",
+        "packages/docs/**/*.*",
+        "packages/dev-app/**/*.*"
+    ],
+    "angularCompilerOptions": {
+        "skipMetadataEmit": true,
+        "enableIvy": false
+    }
+}

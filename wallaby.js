@@ -3,7 +3,7 @@ const wallabyWebpack = require('wallaby-webpack');
 const path = require('path');
 
 const compilerOptions = Object.assign(
-    require('./tsconfig.webpack.json').compilerOptions
+    require('./tsconfig.wallaby.json').compilerOptions
 );
 
 compilerOptions.module = 'CommonJs';
@@ -13,18 +13,12 @@ module.exports = function (wallaby) {
 
     const webpackPostprocessor = wallabyWebpack({
         entryPatterns: [
-            'packages/wallabyTest.js',
+            'wallabyTest.js',
             'packages/**/*spec.js'
         ],
 
         module: {
             rules: [
-                {
-                    test: /\.js$/,
-                    enforce: 'post',
-                    use: [{ loader: path.resolve('./tools/webpack/ng2-sass-loader.js') }]
-                },
-
                 { test: /\.css$/, loader: 'raw-loader' },
                 { test: /\.html$/, loader: 'raw-loader' },
                 { test: /\.js$/, loader: 'angular2-template-loader', exclude: /node_modules/ },
@@ -54,7 +48,7 @@ module.exports = function (wallaby) {
 
     return {
         files: [
-            { pattern: 'packages/wallabyTest.ts', load: false },
+            { pattern: 'wallabyTest.ts', load: false },
             { pattern: 'packages/cdk/**/*.+(ts|css|scss|sass|html|json|svg)', load: false },
             { pattern: 'packages/mosaic/**/*.+(ts|css|scss|sass|html|json|svg)', load: false },
             { pattern: 'packages/mosaic-moment-adapter/**/*.+(ts|css|scss|sass|html|json|svg)', load: false },

@@ -54,6 +54,7 @@
         "@types/merge2": "^0.3.30",
         "@types/node": "^12.12.29",
         "@types/source-map": "^0.5.7",
+        "angular2-template-loader": "^0.6.2",
         "chalk": "^2.4.1",
         "conventional-changelog": "^3.1.10",
         "dgeni": "^0.4.12",

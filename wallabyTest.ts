@@ -1,7 +1,7 @@
-/* tslint:disable:no-import-side-effect ordered-imports */
+// tslint:disable:no-import-side-effect
+// tslint:disable:ordered-imports
+import 'core-js/es6/reflect';
 import 'core-js/es7/reflect';
-import 'core-js/es7/object';
-
 import 'zone.js/dist/zone';
 import 'zone.js/dist/zone-testing';
 
