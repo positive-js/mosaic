@@ -36,7 +36,7 @@ var_8: &attach_release_output
     attach_workspace:
         at: dist/
 
-var_9: &release_path "releases/**/*"
+var_9: &release_path "**/*"
 
 attach_options: &attach_options
     at: .
