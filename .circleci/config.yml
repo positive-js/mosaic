@@ -263,10 +263,6 @@ workflows:
                       - test_unit_cdk
                       - test_unit_mosaic-moment-adapter
 
-            - build_mosaic_docs:
-                  requires:
-                      - build_packages
-
             # 7 Group
 
             - sonar:
