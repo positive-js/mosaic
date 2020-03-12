@@ -133,6 +133,7 @@
         "build:docs": "gulp docs",
         "unit:mosaic": "ng test mosaic",
         "unit:cdk": "ng test cdk",
+        "unit:mosaic-moment-adapter": "ng test mosaic-moment-adapter",
         "changelog": "ts-node --project tools/release tools/release/changelog.ts",
         "docs:start": "ng serve mosaic-docs",
         "docs:prod-build": "ng build mosaic-docs",
