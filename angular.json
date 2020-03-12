@@ -218,6 +218,29 @@
                 }
             }
         },
+        "mosaic-examples": {
+            "projectType": "library",
+            "root": "packages/mosaic-examples",
+            "sourceRoot": "packages/mosaic-examples",
+            "architect": {
+                "packagr": {
+                    "builder": "@angular-devkit/build-ng-packagr:build",
+                    "options": {
+                        "tsConfig": "packages/mosaic-examples/tsconfig.lib.json",
+                        "project": "packages/mosaic-examples/ng-package.json"
+                    }
+                },
+                "build": {
+                    "builder": "@ptsecurity/builders:packager",
+                    "options": {
+                        "buildTarget": "packagr",
+                        "releaseMosaicPackageJson": "packages/mosaic-examples/package.json",
+                        "versionPlaceholder": "{{VERSION}}",
+                        "ngVersionPlaceholder": "{{NG_VERSION}}"
+                    }
+                }
+            }
+        },
         "dev-button": {
             "projectType": "application",
             "root": "packages/mosaic-dev/button",

@@ -1,11 +1,16 @@
 
 ## Development Setup
-1. generate dynamic examples (for Stackblitz)
+1. generate basic module
 ```bash
-yarn run build:mosaic-examples
+npx gulp build-examples-module
 ```
 
-2. generate `docs-content` folder
+2. generate dynamic examples (for Stackblitz)
+```
+npx ng build mosaic-examples
+```
+
+3. generate `docs-content` folder (dgeni)
 ```bash
 yarn run build:docs
 ```
