@@ -1,0 +1,30 @@
+@import '../../mosaic/core/visual/prebuilt/default-visual';
+
+@import '../../mosaic/core/theming/prebuilt/default-theme';
+//@import '../../mosaic/core/theming/prebuilt/dark-theme';
+
+ru-locale,
+en-locale {
+    display: block;
+}
+
+.number-input {
+    margin-top: 32px;
+    margin-bottom: 32px;
+
+    max-width: 200px;
+}
+
+.common-container {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.light-text-secondary {
+    color: #CCC;
+}
+
+.row-border {
+    padding: 8px;
+    border-bottom: 1px solid #CCC;
+}
