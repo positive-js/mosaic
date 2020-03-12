@@ -129,7 +129,7 @@
         "build:cdk": "ng build cdk",
         "build:mosaic-moment-adapter": "ng build mosaic-moment-adapter",
         "build:mosaic": "ng build mosaic",
-        "build:mosaic-examples": "gulp mosaic-examples:build-release",
+        "build:mosaic-examples": "gulp build-examples-module",
         "build:docs": "gulp docs",
         "unit:mosaic": "ng test mosaic",
         "unit:cdk": "ng test cdk",
