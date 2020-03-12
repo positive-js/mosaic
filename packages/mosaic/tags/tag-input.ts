@@ -144,17 +144,26 @@ export class McTagInput implements McTagTextControl, OnChanges {
 
     /** Checks to see if the blur should emit the (tagEnd) event. */
     blur() {
-        if (this.addOnBlur) {
-            this.emittagEnd();
-        }
-
         this.focused = false;
         // Blur the tag list if it is not focused
         if (!this._tagList.focused) {
+            this.triggerValidation();
+
             this._tagList.blur();
         }
 
+        // tslint:disable-next-line: no-unnecessary-type-assertion
+        if (this.addOnBlur && !(this.hasControl() && this.ngControl.invalid)) {
+            this.emittagEnd();
+        }
+
         this._tagList.stateChanges.next();
+    }
+
+    triggerValidation() {
+        if (!this.hasControl()) { return; }
+
+        (this.ngControl.statusChanges as EventEmitter<string | null>).emit(this.ngControl.status);
     }
 
     /** Checks to see if the (tagEnd) event needs to be emitted. */
@@ -201,6 +210,10 @@ export class McTagInput implements McTagTextControl, OnChanges {
     /** Focuses the input. */
     focus(): void {
         this.inputElement.focus();
+    }
+
+    private hasControl(): boolean {
+        return !!this.ngControl;
     }
 
     private setDefaultInputWidth() {
