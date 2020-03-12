@@ -1,3 +1,15 @@
+## 8.4.3 "Wistful" (2020-03-12)
+
+### Mosaic
+
+ * bug fix  **input:** errors in console after loading form with mc-validation (#UIM-376) ([#423](https://github.com/positive-js/mosaic/issues/423)) ([5160faa](https://github.com/positive-js/mosaic/commit/5160faa2fb27e2775a25d3045927e35d9c8fca07)), closes [#UIM-376](https://github.com/positive-js/mosaic/issues/UIM-376)
+ * bug fix  **popover:** mcVisibleChange emits only after hidding popover (#UIM-386) ([#425](https://github.com/positive-js/mosaic/issues/425)) ([d881c2e](https://github.com/positive-js/mosaic/commit/d881c2e65ddd8d1ac948d1ac0f88c2950c8a558c)), closes [#UIM-386](https://github.com/positive-js/mosaic/issues/UIM-386)
+
+### Docs
+
+ * bug fix  copy icon is clickable so cursor: pointer ([#421](https://github.com/positive-js/mosaic/issues/421)) ([2e9b7d5](https://github.com/positive-js/mosaic/commit/2e9b7d538d97699c2ffd99434d1399267e05b5b0))
+ * feature  added examples for number and date formatter (#UIM-395, #UIM-394) ([#428](https://github.com/positive-js/mosaic/issues/428)) ([ff9b0c7](https://github.com/positive-js/mosaic/commit/ff9b0c75fec51dc4524ecb60b6d80f3209875096)), closes [#UIM-395](https://github.com/positive-js/mosaic/issues/UIM-395) [#UIM-394](https://github.com/positive-js/mosaic/issues/UIM-394)
+
 ## 8.4.2 "Restive Horns" (2020-02-28)
 
 ### Mosaic
