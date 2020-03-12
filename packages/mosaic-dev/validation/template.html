@@ -53,6 +53,7 @@
                     <i mc-icon="mc-close-S_16" mcTagRemove></i>
                 </mc-tag>
                 <input placeholder="New tag..."
+                       formControlName="tagInputFormControl"
                        [mcTagInputFor]="inputTagList"
                        [mcTagInputSeparatorKeyCodes]="separatorKeysCodes"
                        (mcTagInputTokenEnd)="reactiveInputOnCreate($event)">
@@ -80,6 +81,7 @@
                 name="input"
                 mcInput
                 [(ngModel)]="inputValue"
+                pattern="[a-zA-Z]*"
                 placeholder="required pattern=[a-zA-Z]*" required>
         </mc-form-field>
 
