@@ -1,7 +1,7 @@
+import { A11yModule } from '@angular/cdk/a11y';
 import { PortalModule } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { A11yModule } from '@ptsecurity/cdk/a11y';
 import { McCommonModule } from '@ptsecurity/mosaic/core';
 
 import { McTab } from './tab';

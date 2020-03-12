@@ -1,6 +1,6 @@
 @import '../core/styles/common/vendor-prefixes';
 @import '../core/styles/common/layout';
-@import '../../cdk/a11y/a11y';
+@import '../../../node_modules/@angular/cdk/a11y';
 @import '../core/styles/common/groups';
 
 $mc-button-toggle-standard-padding: 0 12px !default;

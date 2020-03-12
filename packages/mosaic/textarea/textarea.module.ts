@@ -1,7 +1,7 @@
+import { A11yModule } from '@angular/cdk/a11y';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { A11yModule } from '@ptsecurity/cdk/a11y';
 import { McCommonModule } from '@ptsecurity/mosaic/core';
 
 import { McTextarea } from './textarea.component';
@@ -12,5 +12,4 @@ import { McTextarea } from './textarea.component';
     exports: [McTextarea],
     declarations: [McTextarea]
 })
-export class McTextareaModule {
-}
+export class McTextareaModule {}

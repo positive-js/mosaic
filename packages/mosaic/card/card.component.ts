@@ -1,3 +1,4 @@
+import { FocusMonitor } from '@angular/cdk/a11y';
 import {
     Output,
     ChangeDetectionStrategy,
@@ -6,7 +7,6 @@ import {
     OnDestroy, EventEmitter,
     ViewEncapsulation, HostBinding
 } from '@angular/core';
-import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { SPACE } from '@ptsecurity/cdk/keycodes';
 
 
