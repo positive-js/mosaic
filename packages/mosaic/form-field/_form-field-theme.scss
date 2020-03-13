@@ -23,13 +23,6 @@
                 border-color: mc-color($second, if($is-dark, lighter, darker));
             }
 
-            &.mc-focused:not(.ng-invalid) .mc-form-field__container {
-                $focused-color: map-get(map-get($theme, states), focused-color);
-
-                border-color: $focused-color;
-                box-shadow: 0 0 0 1px $focused-color;
-            }
-
             &.ng-invalid .mc-form-field__container {
                 background-color: if($is-dark, transparent, mc-color($error, lighter));
 
@@ -41,14 +34,25 @@
                 }
             }
 
-            &.ng-invalid.mc-focused .mc-form-field__container {
-                box-shadow: 0 0 0 1px mc-color($error);
+            &.mc-focused {
+                &:not(.ng-invalid) .mc-form-field__container {
+                    $focused-color: map-get(map-get($theme, states), focused-color);
+
+                    border-color: $focused-color;
+                    box-shadow: 0 0 0 1px $focused-color;
+                }
+
+                &.ng-invalid .mc-form-field__container {
+                    box-shadow: 0 0 0 1px mc-color($error);
+                }
             }
 
+            /* stylelint-disable no-descending-specificity */
             &.mc-disabled .mc-form-field__container {
                 border-color: mix(map-get($foreground, border), map-get($background, overlay-disabled));
 
-                background-color: mix(map-get($background, background-disabled), map-get($background, overlay-disabled));
+                background-color:
+                    mix(map-get($background, background-disabled), map-get($background, overlay-disabled));
 
                 .mc-icon,
                 .mc-input,
@@ -56,6 +60,7 @@
                     color: mc-color($foreground, text-disabled);
                 }
             }
+            /* stylelint-enable no-descending-specificity */
         }
     }
 

@@ -1,3 +1,4 @@
+import { FocusMonitor } from '@angular/cdk/a11y';
 import {
     Attribute,
     ChangeDetectionStrategy,
@@ -8,7 +9,6 @@ import {
     OnDestroy,
     ViewEncapsulation
 } from '@angular/core';
-import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import {
     CanColor,
     CanColorCtor,

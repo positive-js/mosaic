@@ -1,3 +1,4 @@
+import { FocusMonitor } from '@angular/cdk/a11y';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -7,7 +8,6 @@ import {
     ViewEncapsulation,
     Renderer2
 } from '@angular/core';
-import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { mixinColor, mixinDisabled, CanColor, CanDisable, CanDisableCtor, CanColorCtor } from '@ptsecurity/mosaic/core';
 
 

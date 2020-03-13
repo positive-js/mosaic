@@ -1,3 +1,4 @@
+import { FocusOrigin } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     ChangeDetectorRef,
@@ -13,7 +14,6 @@ import {
     AfterContentInit,
     NgZone
 } from '@angular/core';
-import { FocusOrigin } from '@ptsecurity/cdk/a11y';
 import { hasModifierKey } from '@ptsecurity/cdk/keycodes';
 import { CdkTreeNode } from '@ptsecurity/cdk/tree';
 import { CanDisable } from '@ptsecurity/mosaic/core';

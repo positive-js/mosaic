@@ -1,3 +1,4 @@
+import { FocusMonitor, FocusOrigin } from '@angular/cdk/a11y';
 import { Direction, Directionality } from '@angular/cdk/bidi';
 import {
     FlexibleConnectedPositionStrategy,
@@ -24,7 +25,6 @@ import {
     Self,
     ViewContainerRef
 } from '@angular/core';
-import { FocusMonitor, FocusOrigin } from '@ptsecurity/cdk/a11y';
 import { LEFT_ARROW, RIGHT_ARROW, SPACE, ENTER } from '@ptsecurity/cdk/keycodes';
 import { asapScheduler, merge, of as observableOf, Subscription } from 'rxjs';
 import { delay, filter, take, takeUntil } from 'rxjs/operators';

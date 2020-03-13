@@ -1,4 +1,4 @@
-import { FocusOrigin } from '../focus-monitor/focus-monitor';
+import { FocusOrigin } from '@angular/cdk/a11y';
 
 import { ListKeyManager, ListKeyManagerOption } from './list-key-manager';
 
