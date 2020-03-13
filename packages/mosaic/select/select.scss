@@ -1,7 +1,7 @@
 @import '../core/styles/common/vendor-prefixes';
 @import '../divider/divider';
 
-@import '~@angular/cdk/a11y';
+@import '../../../node_modules/@angular/cdk/a11y';
 
 $mc-select-arrow-size: 5px !default;
 $mc-select-arrow-margin: 4px !default;
