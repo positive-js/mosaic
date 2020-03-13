@@ -31,8 +31,10 @@ module.exports = () => {
         },
 
         junitReporter: {
-            outputDir: process.env.JUNIT_REPORT_PATH || 'dist/reports/junit',
-            outputFile: process.env.JUNIT_REPORT_NAME || 'test-results.xml',
+            outputDir: require('path').join(__dirname, process.env.JUNIT_REPORT_PATH) ||
+                       require('path').join(__dirname, 'dist/reports/junit'),
+            outputFile: require('path').join(__dirname, process.env.JUNIT_REPORT_NAME) ||
+                        require('path').join(__dirname, 'test-results.xml'),
             useBrowserName: false
         },
 
