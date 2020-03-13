@@ -1,7 +1,7 @@
 /* tslint:disable:no-magic-numbers */
 import { Component } from '@angular/core';
 import { DateAdapter, MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
-import { MomentDateAdapter } from '@ptsecurity/mosaic-moment-adapter';
+import { MomentDateAdapter } from '@ptsecurity/mosaic-moment-adapter/adapter';
 
 // Depending on whether rollup is used, moment needs to be imported differently.
 // Since Moment.js doesn't have a default export, we normally need to import using the `* as`
