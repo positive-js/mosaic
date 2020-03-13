@@ -1,7 +1,7 @@
 @import '../core/styles/common/vendor-prefixes';
 @import '../divider/divider';
 
-@import '../../cdk/a11y/a11y';
+@import '../../../node_modules/@angular/cdk/a11y';
 
 @import '../tree/tree';
 

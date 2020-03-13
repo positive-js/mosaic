@@ -1,3 +1,4 @@
+import { FocusMonitor } from '@angular/cdk/a11y';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -9,7 +10,6 @@ import {
     Optional,
     Self
 } from '@angular/core';
-import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { CanDisable, mixinDisabled, CanDisableCtor } from '@ptsecurity/mosaic/core';
 import { McDropdownTrigger } from '@ptsecurity/mosaic/dropdown';
 
