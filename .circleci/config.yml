@@ -146,8 +146,8 @@ jobs:
         <<: *job_defaults
         steps:
             - attach_workspace: *attach_options
-            - run: yarn run tslint:json
-            - run: yarn run stylelint:json
+            - run: yarn run linter:mosaic:json
+            - run: yarn run linter:styles:json
             - persist_to_workspace:
                   root: dist
                   paths:
