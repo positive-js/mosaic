@@ -41,6 +41,9 @@ var_9: &release_path "releases/**/*"
 attach_options: &attach_options
     at: .
 
+orbs:
+    sonarcloud: sonarsource/sonarcloud@1.0.1
+
 version: 2
 jobs:
     install:
@@ -133,6 +136,7 @@ jobs:
                   path: ./junit
             - store_artifacts:
                   path: ./junit
+            - sonarcloud/scan
 
     snapshot_publish:
         <<: *job_defaults
@@ -203,6 +207,7 @@ workflows:
                       - build_mosaic-moment-adapter
             # 3 Group
             - test_unit:
+                  context: sonarcloud
                   requires:
                       - build_cdk
                       - build_mosaic
