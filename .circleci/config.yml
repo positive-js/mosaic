@@ -64,7 +64,8 @@ jobs:
         <<: *job_defaults
         steps:
             - attach_workspace: *attach_options
-            - snyk/scan
+            - snyk/scan:
+                  fail-on-issues: false
 
     validate_licenses:
         <<: *job_defaults
