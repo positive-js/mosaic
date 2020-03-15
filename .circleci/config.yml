@@ -45,6 +45,7 @@ version: 2.1
 
 orbs:
     sonarcloud: sonarsource/sonarcloud@1.0.0
+    snyk: snyk/snyk@0.0.8
 
 jobs:
     install:
@@ -58,6 +59,12 @@ jobs:
                   paths:
                       - ./*
             - *save_cache
+
+    dependencies_audit:
+        <<: *job_defaults
+        steps:
+            - attach_workspace: *attach_options
+            - snyk/scan
 
     validate_licenses:
         <<: *job_defaults
@@ -221,6 +228,9 @@ workflows:
             # 1 Group
             - install
             # 2 Group
+            - dependencies_audit:
+                  requires:
+                      - install
             - validate_licenses:
                   requires:
                       - install
