@@ -137,6 +137,26 @@ jobs:
                   path: ./junit
             - store_artifacts:
                   path: ./junit
+            - persist_to_workspace:
+                  root: dist
+                  paths:
+                      - *release_path
+
+    linters:
+        <<: *job_defaults
+        steps:
+            - attach_workspace: *attach_options
+            - run: yarn run tslint:json
+            - run: yarn run stylelint:json
+            - persist_to_workspace:
+                  root: dist
+                  paths:
+                      - *release_path
+
+    sonar:
+        <<: *job_defaults
+        steps:
+            - attach_workspace: *attach_options
             - sonarcloud/scan
 
     snapshot_publish:
@@ -200,6 +220,9 @@ workflows:
             - build_mosaic:
                   requires:
                       - install
+            - linters:
+                  requires:
+                      - install
 
             - build_mosaic_docs:
                   requires:
@@ -208,7 +231,6 @@ workflows:
                       - build_mosaic-moment-adapter
             # 3 Group
             - test_unit:
-                  context: SonarCloud
                   requires:
                       - build_cdk
                       - build_mosaic
@@ -219,6 +241,14 @@ workflows:
                       - build_mosaic
                       - build_mosaic-moment-adapter
             # 4 Group
+            - sonar:
+                  context: SonarCloud
+                  requires:
+                      - linters
+                      - test_unit
+                      - build_cdk
+                      - build_mosaic
+                      - build_mosaic-moment-adapter
             - snapshot_publish:
                   requires:
                       - test_unit
