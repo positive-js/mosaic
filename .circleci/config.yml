@@ -140,7 +140,8 @@ jobs:
             - persist_to_workspace:
                   root: dist
                   paths:
-                      - *release_path
+                      - ./coverage/
+                      - ./reports/
 
     linters:
         <<: *job_defaults
