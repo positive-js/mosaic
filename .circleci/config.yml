@@ -42,7 +42,7 @@ attach_options: &attach_options
     at: .
 
 orbs:
-    sonarcloud: sonarsource/sonarcloud@1.0.1
+    sonarcloud: sonarsource/sonarcloud@1.0.0
 
 version: 2
 jobs:
