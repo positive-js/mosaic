@@ -207,7 +207,7 @@ workflows:
                       - build_mosaic-moment-adapter
             # 3 Group
             - test_unit:
-                  context: sonarcloud
+                  context: SonarCloud
                   requires:
                       - build_cdk
                       - build_mosaic
