@@ -193,7 +193,6 @@ workflows:
                   requires:
                       - install
             - build_mosaic:
-                  context: SonarCloud
                   requires:
                       - install
 
