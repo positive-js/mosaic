@@ -41,7 +41,11 @@ var_9: &release_path "releases/**/*"
 attach_options: &attach_options
     at: .
 
-version: 2
+version: 2.1
+
+orbs:
+    sonarcloud: sonarsource/sonarcloud@1.0.0
+
 jobs:
     install:
         <<: *job_defaults
@@ -145,6 +149,28 @@ jobs:
                   path: ./junit
             - store_artifacts:
                   path: ./junit
+            - persist_to_workspace:
+                  root: dist
+                  paths:
+                      - ./coverage/
+                      - ./reports/
+
+    linters:
+        <<: *job_defaults
+        steps:
+            - attach_workspace: *attach_options
+            - run: yarn run linter:mosaic:json || true
+            - run: yarn run linter:styles:json || true
+            - persist_to_workspace:
+                  root: dist
+                  paths:
+                      - ./reports
+
+    sonar:
+        <<: *job_defaults
+        steps:
+            - attach_workspace: *attach_options
+            - sonarcloud/scan
 
     snapshot_publish:
         <<: *job_defaults
@@ -213,6 +239,9 @@ workflows:
             - build_mosaic:
                   requires:
                       - install
+            - linters:
+                  requires:
+                      - install
 
             - build_mosaic_docs:
                   requires:
@@ -231,6 +260,14 @@ workflows:
                       - build_mosaic
                       - build_mosaic-moment-adapter
             # 4 Group
+            - sonar:
+                  context: SonarCloud
+                  requires:
+                      - linters
+                      - test_unit
+                      - build_cdk
+                      - build_mosaic
+                      - build_mosaic-moment-adapter
             - snapshot_publish:
                   requires:
                       - test_unit
