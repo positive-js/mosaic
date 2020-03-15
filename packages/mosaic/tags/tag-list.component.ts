@@ -417,13 +417,9 @@ export class McTagList extends McTagListMixinBase implements McFormFieldControl<
                 // has changed after it was checked" errors from Angular.
                 Promise.resolve().then(() => {
                     this.tagChanges.emit(this.tags.toArray());
-
-                    this.changeDetectorRef.markForCheck();
+                    this.stateChanges.next();
+                    this.propagateTagsChanges();
                 });
-
-                this.stateChanges.next();
-
-                this.propagateTagsChanges();
             });
     }
 
@@ -823,6 +819,8 @@ export class McTagList extends McTagListMixinBase implements McFormFieldControl<
             // receive focus.
             if (this.isValidIndex(tagIndex) && tag.hasFocus) {
                 this.lastDestroyedTagIndex = tagIndex;
+            } else if (this.isValidIndex(tagIndex) && !tag.hasFocus) {
+                this.focusInput();
             }
         });
     }
@@ -832,9 +830,7 @@ export class McTagList extends McTagListMixinBase implements McFormFieldControl<
         let currentElement = event.target as HTMLElement | null;
 
         while (currentElement && currentElement !== this.elementRef.nativeElement) {
-            if (currentElement.classList.contains('mc-tag')) {
-                return true;
-            }
+            if (currentElement.classList.contains('mc-tag')) { return true; }
 
             currentElement = currentElement.parentElement;
         }

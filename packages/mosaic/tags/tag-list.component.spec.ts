@@ -37,7 +37,7 @@ import {
     typeInElement,
     MockNgZone
 } from '@ptsecurity/cdk/testing';
-import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
+import { McFormField, McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { Subject } from 'rxjs';
 
 import { McInputModule } from '../input/index';
@@ -47,7 +47,7 @@ import { McTagInputEvent } from './tag-input';
 import { McTag } from './tag.component';
 
 
-describe('MatTagList', () => {
+describe('McTagList', () => {
     let fixture: ComponentFixture<any>;
     let tagListDebugElement: DebugElement;
     let tagListNativeElement: HTMLElement;
@@ -66,6 +66,10 @@ describe('MatTagList', () => {
 
             it('should add the `mc-tag-list` class', () => {
                 expect(tagListNativeElement.classList).toContain('mc-tag-list');
+            });
+
+            it('height should be 30px', () => {
+                expect(tagListNativeElement.getBoundingClientRect().height).toBe(30);
             });
 
             it('should not have the aria-selected attribute when is not selectable', () => {
@@ -483,9 +487,7 @@ describe('MatTagList', () => {
 
     describe('FormFieldTagList', () => {
 
-        beforeEach(() => {
-            setupInputList();
-        });
+        beforeEach(setupInputList);
 
         describe('keyboard behavior', () => {
             beforeEach(() => {
@@ -542,6 +544,11 @@ describe('MatTagList', () => {
                 });
 
             });
+        });
+
+        it('height should be 32px', () => {
+            const formFieldElement = fixture.debugElement.query(By.directive(McFormField)).nativeElement;
+            expect(formFieldElement.getBoundingClientRect().height).toBe(32);
         });
 
         it('should complete the stateChanges stream on destroy', () => {
@@ -1333,8 +1340,8 @@ class StandardTagList {
         <mc-form-field>
             <mc-tag-list #tagList>
                 <mc-tag *ngFor="let tag of tags" (removed)="remove(tag)">{{ tag }}</mc-tag>
+                <input name="test" [mcTagInputFor]="tagList"/>
             </mc-tag-list>
-            <input name="test" [mcTagInputFor]="tagList"/>
         </mc-form-field>
     `
 })

@@ -1,0 +1,55 @@
+<div class="mc-subheading">
+    <label>MC_LOCALE_ID: </label><span>{{ mcLocaleId | json }}</span>
+</div>
+
+<div>
+    <div class="layout-row row-border">
+        <div class="flex light-text-secondary">Params</div>
+        <div class="flex light-text-secondary">Formatted value</div>
+    </div>
+
+    <div class="layout-row row-border">
+        <div class="flex">-</div>
+        <div class="flex">{{ value | mcNumber }}</div>
+    </div>
+    <div class="layout-row row-border">
+        <div class="flex">digitsInfo: '5.5-5'</div>
+        <div class="flex">{{ value | mcNumber: '5.5-5' }}</div>
+    </div>
+    <div class="layout-row row-border">
+        <div class="flex">digitsInfo: '4.5-5'</div>
+        <div class="flex">{{ value | mcNumber: '4.5-5' }}</div>
+    </div>
+    <div class="layout-row row-border">
+        <div class="flex">digitsInfo: '4.0-2'</div>
+        <div class="flex">{{ value | mcNumber: '4.0-2' }}</div>
+    </div>
+    <div class="layout-row row-border">
+        <div class="flex">digitsInfo: '4.0-1'</div>
+        <div class="flex">{{ value | mcNumber: '4.0-1' }}</div>
+    </div>
+    <div class="layout-row row-border">
+        <div class="flex">digitsInfo: '4.0-0'</div>
+        <div class="flex">{{ value | mcNumber: '4.0-0' }}</div>
+    </div>
+    <div class="layout-row row-border">
+        <div class="flex">-</div>
+        <div class="flex">{{ 10000 | mcNumber }}</div>
+    </div>
+    <div class="layout-row row-border">
+        <div class="flex">-</div>
+        <div class="flex">{{ 1000000 | mcNumber }}</div>
+    </div>
+    <div class="layout-row row-border">
+        <div class="flex">-</div>
+        <div class="flex">{{ 10000000 | mcNumber }}</div>
+    </div>
+    <div class="layout-row row-border">
+        <div class="flex">-</div>
+        <div class="flex">{{ 100000000 | mcNumber }}</div>
+    </div>
+    <div class="layout-row row-border">
+        <div class="flex">locale {{ locale }}</div>
+        <div class="flex">{{ 1000 | mcNumber: '' : locale }}</div>
+    </div>
+</div>

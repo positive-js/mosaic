@@ -1,8 +1,37 @@
-## 8.3.2-beta.1 "Design Tokens" (2020-02-04)
+## 8.4.3 "Wistful" (2020-03-12)
 
 ### Mosaic
 
- * feature  **common:** rename params ([4a3fd35](https://github.com/positive-js/mosaic/commit/4a3fd35e64e03b6352372aa3f5cd97d84827ef8d))
+ * bug fix  **input:** errors in console after loading form with mc-validation (#UIM-376) ([#423](https://github.com/positive-js/mosaic/issues/423)) ([5160faa](https://github.com/positive-js/mosaic/commit/5160faa2fb27e2775a25d3045927e35d9c8fca07)), closes [#UIM-376](https://github.com/positive-js/mosaic/issues/UIM-376)
+ * bug fix  **popover:** mcVisibleChange emits only after hidding popover (#UIM-386) ([#425](https://github.com/positive-js/mosaic/issues/425)) ([d881c2e](https://github.com/positive-js/mosaic/commit/d881c2e65ddd8d1ac948d1ac0f88c2950c8a558c)), closes [#UIM-386](https://github.com/positive-js/mosaic/issues/UIM-386)
+
+### Docs
+
+ * bug fix  copy icon is clickable so cursor: pointer ([#421](https://github.com/positive-js/mosaic/issues/421)) ([2e9b7d5](https://github.com/positive-js/mosaic/commit/2e9b7d538d97699c2ffd99434d1399267e05b5b0))
+ * feature  added examples for number and date formatter (#UIM-395, #UIM-394) ([#428](https://github.com/positive-js/mosaic/issues/428)) ([ff9b0c7](https://github.com/positive-js/mosaic/commit/ff9b0c75fec51dc4524ecb60b6d80f3209875096)), closes [#UIM-395](https://github.com/positive-js/mosaic/issues/UIM-395) [#UIM-394](https://github.com/positive-js/mosaic/issues/UIM-394)
+
+## 8.4.2 "Restive Horns" (2020-02-28)
+
+### Mosaic
+
+ * bug fix  **checkbox:** expanded area for click (#UIM-357) ([#420](https://github.com/positive-js/mosaic/issues/420)) ([1f0d164](https://github.com/positive-js/mosaic/commit/1f0d164e94464ecf166486b6858a799ad2f8fdb7)), closes [#UIM-357](https://github.com/positive-js/mosaic/issues/UIM-357)
+ * bug fix  **tree:** incorrect padding for root items (#UIM-372) ([#417](https://github.com/positive-js/mosaic/issues/417)) ([8e79e98](https://github.com/positive-js/mosaic/commit/8e79e98eaf41d720dbddb67275583d57a843df51)), closes [#UIM-372](https://github.com/positive-js/mosaic/issues/UIM-372)
+
+## 8.4.1 "Fisheye" (2020-02-25)
+
+### Mosaic
+
+ * bug fix  **input:** input emits unexpected valueChanges (#UIM-366) ([#415](https://github.com/positive-js/mosaic/issues/415)) ([325c24f](https://github.com/positive-js/mosaic/commit/325c24f6fda769256762d1bc53ae64488a3986bf)), closes [#UIM-366](https://github.com/positive-js/mosaic/issues/UIM-366)
+ * bug fix  **tags:** incorrect validation (UIM-367) ([#416](https://github.com/positive-js/mosaic/issues/416)) ([b4b3e9a](https://github.com/positive-js/mosaic/commit/b4b3e9a4965f75707ebf660c1c938d3dc561058b))
+
+# 8.4.0 "Nightly Extravert" (2020-02-19)
+
+### Mosaic
+
+ * bug fix  **input:** errors with AoT (#UIM-370) ([#411](https://github.com/positive-js/mosaic/issues/411)) ([1cfdb42](https://github.com/positive-js/mosaic/commit/1cfdb423bf4d0246c20f44274ace4f5cc9a736c3)), closes [#UIM-370](https://github.com/positive-js/mosaic/issues/UIM-370)
+ * bug fix  **input:** input require ngModel (#UIM-361) ([#409](https://github.com/positive-js/mosaic/issues/409)) ([36a6e0a](https://github.com/positive-js/mosaic/commit/36a6e0a0a061b74b79a6b0f03a577e7b310203e3)), closes [#UIM-361](https://github.com/positive-js/mosaic/issues/UIM-361)
+ * bug fix  **tags:** input validation in tags-list (#UIM-368) ([#412](https://github.com/positive-js/mosaic/issues/412)) ([5b03230](https://github.com/positive-js/mosaic/commit/5b03230863692ee265975f337107afcfe1a86d0d)), closes [#UIM-368](https://github.com/positive-js/mosaic/issues/UIM-368)
+ * feature  **tree-select:** multiselect without checkbox + multiselect with shift and ctrl (#UIM-156) ([#400](https://github.com/positive-js/mosaic/issues/400)) ([99835cb](https://github.com/positive-js/mosaic/commit/99835cbb445a10ae1c55658fb83c6642ed225c3b)), closes [#UIM-156](https://github.com/positive-js/mosaic/issues/UIM-156)
 
 ### Docs
 

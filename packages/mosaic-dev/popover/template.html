@@ -35,7 +35,8 @@
         mcPopoverPlacement="bottomLeft"
         mcPopoverSize="large"
         [mcPopoverContent]="customContent"
-        [mcPopoverFooter]="customFooter">
+        [mcPopoverFooter]="customFooter"
+        (mcPopoverVisibleChange)="onPopoverVisibleChange()">
         bottomLeft
     </button>
     <button

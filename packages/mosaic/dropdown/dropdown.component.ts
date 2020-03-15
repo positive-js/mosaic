@@ -1,4 +1,5 @@
 import { AnimationEvent } from '@angular/animations';
+import { FocusOrigin } from '@angular/cdk/a11y';
 import { Direction } from '@angular/cdk/bidi';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
@@ -21,7 +22,7 @@ import {
     ViewEncapsulation,
     OnInit
 } from '@angular/core';
-import { FocusKeyManager, FocusOrigin } from '@ptsecurity/cdk/a11y';
+import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import { ESCAPE, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, UP_ARROW } from '@ptsecurity/cdk/keycodes';
 import { merge, Observable, Subject, Subscription } from 'rxjs';
 import { startWith, switchMap, take } from 'rxjs/operators';

@@ -21,7 +21,10 @@
     .code-copy__icon {
         color: $color;
 
-        &:hover { color: $color_hover; }
+        &:hover {
+            color: $color_hover;
+            cursor: pointer;
+        }
     }
 
     .docs-example-viewer__example {

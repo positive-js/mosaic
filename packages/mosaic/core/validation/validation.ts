@@ -33,7 +33,7 @@ function setValidState(control: AbstractControl, validator: ValidatorFn): void {
 /** This function do next:
  * - run validation on submitting parent form
  * - prevent validation in required validator if form doesn't submitted
- * - if control focused validation will be prevented
+ * - if control has focus validation will be prevented
  */
 export function setMosaicValidation(component) {
     const ngControl = component.ngControl;
@@ -45,13 +45,13 @@ export function setMosaicValidation(component) {
     if (parentForm) {
         parentForm.ngSubmit.subscribe(() => {
             // tslint:disable-next-line: no-unnecessary-type-assertion
-            ngControl.control!.updateValueAndValidity();
+            ngControl.control!.updateValueAndValidity({ emitEvent: false });
         });
     }
 
     if (component.ngModel) {
         setMosaicValidationForModelControl(component, component.rawValidators, parentForm);
-    } else if (component.formControlName) {
+    } else if (component.formControlName || component.ngControl) {
         setMosaicValidationForFormControl(component, parentForm, ngControl);
     }
 }
@@ -85,14 +85,14 @@ export function setMosaicValidationForFormControl(component, parentForm: NgForm,
 
     // changed required validation logic after initialization
     if (ngControl.invalid && ngControl.errors!.required) {
-        setValidState(ngControl.control!, originalValidator!);
+        Promise.resolve().then(() => setValidState(ngControl.control!, originalValidator!));
     }
 
     // check dynamic updates
     ngControl.statusChanges!
         .subscribe(() => {
             // changed required validation logic
-            if (ngControl.invalid && !parentForm.submitted && ngControl.errors!.required) {
+            if (ngControl.invalid && (parentForm && !parentForm.submitted) && ngControl.errors!.required) {
                 setValidState(ngControl.control!, originalValidator!);
             }
 

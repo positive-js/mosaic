@@ -1,5 +1,5 @@
 <div class="container">
-    <form [formGroup]="reactiveForm" (ngSubmit)="onSubmitReactiveForm(reactiveForm)" novalidate>
+    <form class="margin" [formGroup]="reactiveForm" (ngSubmit)="onSubmitReactiveForm(reactiveForm)" novalidate>
         <div>Reactive form</div>
         <br>
 
@@ -17,15 +17,6 @@
                 <mc-option value="Focused">Focused</mc-option>
                 <mc-option value="Selected">Selected</mc-option>
                 <mc-option value="Selected1">Selected1</mc-option>
-                <mc-option value="Selected2">Selected2</mc-option>
-                <mc-option value="Selected3">Selected3</mc-option>
-                <mc-option value="Selected4">Selected4</mc-option>
-                <mc-option value="Selected5">Selected5</mc-option>
-                <mc-option value="Selected6">Selected6</mc-option>
-                <mc-option value="Selected7">Selected7</mc-option>
-                <mc-option value="Selected8">Selected8</mc-option>
-                <mc-option value="Selected9">Selected9</mc-option>
-                <mc-option value="Selected10">Selected10</mc-option>
             </mc-select>
         </mc-form-field>
 
@@ -62,20 +53,29 @@
                     <i mc-icon="mc-close-S_16" mcTagRemove></i>
                 </mc-tag>
                 <input placeholder="New tag..."
+                       formControlName="tagInputFormControl"
                        [mcTagInputFor]="inputTagList"
                        [mcTagInputSeparatorKeyCodes]="separatorKeysCodes"
                        (mcTagInputTokenEnd)="reactiveInputOnCreate($event)">
             </mc-tag-list>
         </mc-form-field>
 
+        <div class="mc-form-field_error" *ngIf="reactiveForm.controls.reactiveTypeaheadValue.errors">
+            <div *ngIf="reactiveForm.controls.reactiveTypeaheadValue.errors?.required">error</div>
+        </div>
+
         <br><br>
 
         <button mc-button>Submit</button>
+
+        <div *ngIf="reactiveForm.controls.reactiveInputValue.errors">
+            <div *ngIf="reactiveForm.controls.reactiveInputValue.errors?.required">required error</div>
+        </div>
     </form>
 
     <br><br>
 
-    <form #form="ngForm" (ngSubmit)="onSubmitTemplateForm(form)" novalidate>
+    <form class="margin" #form="ngForm" (ngSubmit)="onSubmitTemplateForm(form)" novalidate>
         <div>Template form</div>
         <br>
 
@@ -84,7 +84,8 @@
                 name="input"
                 mcInput
                 [(ngModel)]="inputValue"
-                placeholder="required pattern=[a-zA-Z]*" required pattern="[a-zA-Z]*">
+                pattern="[a-zA-Z]*"
+                placeholder="required pattern=[a-zA-Z]*" required>
         </mc-form-field>
 
         <br><br>
@@ -97,15 +98,6 @@
                 <mc-option value="Focused">Focused</mc-option>
                 <mc-option value="Selected">Selected</mc-option>
                 <mc-option value="Selected1">Selected1</mc-option>
-                <mc-option value="Selected2">Selected2</mc-option>
-                <mc-option value="Selected3">Selected3</mc-option>
-                <mc-option value="Selected4">Selected4</mc-option>
-                <mc-option value="Selected5">Selected5</mc-option>
-                <mc-option value="Selected6">Selected6</mc-option>
-                <mc-option value="Selected7">Selected7</mc-option>
-                <mc-option value="Selected8">Selected8</mc-option>
-                <mc-option value="Selected9">Selected9</mc-option>
-                <mc-option value="Selected10">Selected10</mc-option>
             </mc-select>
         </mc-form-field>
 
@@ -150,6 +142,7 @@
             </mc-tag-list>
         </mc-form-field>
 
+
         <br>
         <br>
 
@@ -158,7 +151,7 @@
 
     <br><br>
 
-    <form [formGroup]="formWithCustomValidator"
+    <form class="margin" [formGroup]="formWithCustomValidator"
           (ngSubmit)="onSubmitFormWithCustomValidator(formWithCustomValidator)"
           novalidate>
         <div>formGroup with custom validator</div>
@@ -177,5 +170,31 @@
         <br><br>
 
         <button mc-button>Submit</button>
+
+        <div class="mc-form-field_error" *ngIf="formWithCustomValidator.controls.login.errors">
+            <div *ngIf="formWithCustomValidator.controls.login.errors?.required">error</div>
+        </div>
     </form>
+
+    <div class="margin">
+        <div>formControl</div>
+
+        <br>
+
+        <mc-form-field>
+            <input mcInput [formControl]="control" type="text" placeholder="Number MaxMin Step">
+        </mc-form-field>
+
+        <br><br>
+
+        <form #form="ngForm">
+            <mc-form-field>
+                <input mcInput [(ngModel)]="value" type="text" name="qwe" required>
+            </mc-form-field>
+
+            <br><br>
+
+            <button mc-button type="submit">submit</button>
+        </form>
+    </div>
 </div>

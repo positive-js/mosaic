@@ -42,14 +42,6 @@
             }
         }
 
-        & .mc-checkbox-input.cdk-keyboard-focused {
-            + .mc-checkbox-frame {
-                border-color: $state-focused_border-color;
-
-                box-shadow: $state-focused_shadow;
-            }
-        }
-
         &.mc-disabled {
             color: map-get($foreground, text-disabled);
 
@@ -62,6 +54,14 @@
                 & .mc-checkbox-mixedmark {
                     color: map-get($foreground, text-disabled);
                 }
+            }
+        }
+
+        & .mc-checkbox-input.cdk-keyboard-focused {
+            + .mc-checkbox-frame {
+                border-color: $state-focused_border-color;
+
+                box-shadow: $state-focused_shadow;
             }
         }
     }

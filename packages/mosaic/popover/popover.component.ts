@@ -82,14 +82,17 @@ export class McPopoverComponent {
     get mcTrigger(): string {
         return this._mcTrigger;
     }
+
     set mcTrigger(value: string) {
         this._mcTrigger = value;
     }
+
     private _mcTrigger: string = PopoverTriggers.Hover;
 
     get mcPlacement(): string {
         return this._mcPlacement;
     }
+
     set mcPlacement(value: string) {
         if (value !== this._mcPlacement) {
             this._mcPlacement = value;
@@ -98,11 +101,13 @@ export class McPopoverComponent {
             this._mcPlacement = 'top';
         }
     }
+
     private _mcPlacement: string = 'top';
 
     get mcPopoverSize(): string {
         return this.popoverSize;
     }
+
     set mcPopoverSize(value: string) {
         if (value !== this.popoverSize) {
             this.popoverSize = value;
@@ -110,11 +115,13 @@ export class McPopoverComponent {
             this.popoverSize = 'normal';
         }
     }
+
     private popoverSize: string;
 
     get mcVisible(): boolean {
         return this._mcVisible.value;
     }
+
     set mcVisible(value: boolean) {
         const visible = coerceBooleanProperty(value);
 
@@ -123,11 +130,13 @@ export class McPopoverComponent {
             this.mcVisibleChange.emit(visible);
         }
     }
+
     private _mcVisible: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     get classList() {
         return this._classList.join(' ');
     }
+
     set classList(value: string | string[]) {
         let list: string[] = [];
 
@@ -139,6 +148,7 @@ export class McPopoverComponent {
 
         this._classList = list;
     }
+
     private _classList: string[] = [];
 
     get getCssClassesList(): string {
@@ -660,6 +670,8 @@ export class McPopover implements OnInit, OnDestroy {
                         this.mcVisibleChange.emit(data);
                         this.isPopoverOpen = data;
                     });
+
+                this.mcVisibleChange.emit(this.popover.mcVisible);
 
                 this.popover.afterHidden()
                     .pipe(takeUntil(this.destroyed))

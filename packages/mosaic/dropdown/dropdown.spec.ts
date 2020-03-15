@@ -2,6 +2,7 @@
 // tslint:disable:prefer-array-literal
 // tslint:disable:no-empty
 
+import { FocusMonitor } from '@angular/cdk/a11y';
 import { Direction, Directionality } from '@angular/cdk/bidi';
 import { Overlay, OverlayContainer } from '@angular/cdk/overlay';
 import { ScrollDispatcher } from '@angular/cdk/scrolling';
@@ -22,7 +23,6 @@ import {
 import { ComponentFixture, fakeAsync, flush, inject, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { DOWN_ARROW, ESCAPE, LEFT_ARROW, RIGHT_ARROW, TAB } from '@ptsecurity/cdk/keycodes';
 import {
     createKeyboardEvent,

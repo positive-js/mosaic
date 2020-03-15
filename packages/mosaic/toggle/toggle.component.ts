@@ -1,4 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { FocusMonitor } from '@angular/cdk/a11y';
 import {
     Attribute,
     ChangeDetectionStrategy, ChangeDetectorRef,
@@ -8,7 +9,6 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import {
     ThemePalette,
     CanColor, CanColorCtor,
