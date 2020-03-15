@@ -41,10 +41,11 @@ var_9: &release_path "releases/**/*"
 attach_options: &attach_options
     at: .
 
+version: 2.1
+
 orbs:
     sonarcloud: sonarsource/sonarcloud@1.0.0
 
-version: 2
 jobs:
     install:
         <<: *job_defaults
