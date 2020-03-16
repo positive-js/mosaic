@@ -73,12 +73,6 @@ jobs:
             - attach_workspace: *attach_options
             - run: yarn run valid:lic
 
-    lint_mosaic:
-        <<: *job_defaults
-        steps:
-            - attach_workspace: *attach_options
-            - run: yarn run linter:mosaic
-
     lint_yaml:
         <<: *job_defaults
         steps:
@@ -158,10 +152,10 @@ jobs:
             - store_artifacts:
                   path: ./junit
             - persist_to_workspace:
-                  root: dist
+                  root: .
                   paths:
-                      - ./coverage/
-                      - ./reports/
+                      - ./dist/coverage/
+                      - ./dist/reports/
 
     linters:
         <<: *job_defaults
@@ -170,9 +164,9 @@ jobs:
             - run: yarn run linter:mosaic:json || true
             - run: yarn run linter:styles:json || true
             - persist_to_workspace:
-                  root: dist
+                  root: .
                   paths:
-                      - ./reports
+                      - ./dist/reports
 
     sonar:
         <<: *job_defaults
@@ -233,9 +227,6 @@ workflows:
                   requires:
                       - install
             - validate_licenses:
-                  requires:
-                      - install
-            - lint_mosaic:
                   requires:
                       - install
             - lint_yaml:
