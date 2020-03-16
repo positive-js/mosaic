@@ -17,6 +17,7 @@
     ],
     "angularCompilerOptions": {
         "annotateForClosureCompiler": true,
+        "allowSyntheticDefaultImports": true,
         "skipTemplateCodegen": true,
         "strictMetadataEmit": true,
         "flatModuleId": "@ptsecurity/mosaic-moment-adapter",
