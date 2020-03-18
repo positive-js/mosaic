@@ -1,7 +1,8 @@
 /* tslint:disable:no-console no-reserved-keywords */
-import { ChangeDetectorRef, Component, NgModule, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, NgModule, ViewEncapsulation } from '@angular/core';
 import {
-    AbstractControl, FormBuilder,
+    AbstractControl,
+    FormBuilder,
     FormControl,
     FormGroup,
     FormsModule, NgForm,
@@ -130,6 +131,9 @@ export class DemoComponent {
 
     control = new FormControl('', [Validators.pattern('[a-zA-Z]*')]);
 
+    inputControl = new FormControl('', [Validators.pattern('[a-zA-Z]*')]);
+    tagsControl = new FormControl([], Validators.required);
+
     value = '';
 
     reactiveForm: FormGroup;
@@ -171,11 +175,16 @@ export class DemoComponent {
             ]),
             reactiveSelectValue: new FormControl('', [Validators.required]),
             reactiveTreeSelectValue: new FormControl('', [Validators.required]),
-            reactiveTypeaheadValue: new FormControl([], [Validators.required])
+            reactiveTypeaheadValue: new FormControl([], Validators.required),
+            tagInputFormControl: new FormControl('', [Validators.pattern('[a-zA-Z]*')])
         });
 
-        this.control.valueChanges.subscribe((value) => {
-            console.log('valueChanges: ', value); // tslint:disable-line:no-console
+        this.reactiveForm.valueChanges.subscribe((value) => {
+            console.log('reactiveForm valueChanges: ', value); // tslint:disable-line:no-console
+        });
+        //
+        this.inputControl.valueChanges.subscribe((value) => {
+            console.log('inputControl valueChanges: ', value); // tslint:disable-line:no-console
         });
     }
 

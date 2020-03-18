@@ -34,12 +34,14 @@ mc-splitter.custom-color > mc-gutter:hover {
     color: black;
 }
 
+/* stylelint-disable no-descending-specificity */
 // custom gutter image
 mc-splitter.custom-gutter > mc-gutter {
     background-repeat: no-repeat;
     background-position: center;
     background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==");
 }
+/* stylelint-enable no-descending-specificity */
 
 mc-splitter.custom-gutter > mc-gutter > i {
     display: none;

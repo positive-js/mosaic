@@ -41,6 +41,10 @@ export class DemoComponent {
     onPopoverVisibleChangeLeft(update: boolean) {
         this.isPopoverVisibleLeft = update;
     }
+
+    onPopoverVisibleChange() {
+        console.log('onPopoverVisibleChange'); // tslint:disable-line:no-console
+    }
 }
 
 @NgModule({

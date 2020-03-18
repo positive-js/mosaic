@@ -1,6 +1,6 @@
+import { FocusMonitor } from '@angular/cdk/a11y';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 
 import { CdkNestedTreeNode } from './nested-node';
 import { CdkTreeNodeDef } from './node';

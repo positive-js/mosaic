@@ -53,15 +53,24 @@
                     <i mc-icon="mc-close-S_16" mcTagRemove></i>
                 </mc-tag>
                 <input placeholder="New tag..."
+                       formControlName="tagInputFormControl"
                        [mcTagInputFor]="inputTagList"
                        [mcTagInputSeparatorKeyCodes]="separatorKeysCodes"
                        (mcTagInputTokenEnd)="reactiveInputOnCreate($event)">
             </mc-tag-list>
         </mc-form-field>
 
+        <div class="mc-form-field_error" *ngIf="reactiveForm.controls.reactiveTypeaheadValue.errors">
+            <div *ngIf="reactiveForm.controls.reactiveTypeaheadValue.errors?.required">error</div>
+        </div>
+
         <br><br>
 
         <button mc-button>Submit</button>
+
+        <div *ngIf="reactiveForm.controls.reactiveInputValue.errors">
+            <div *ngIf="reactiveForm.controls.reactiveInputValue.errors?.required">required error</div>
+        </div>
     </form>
 
     <br><br>
@@ -75,6 +84,7 @@
                 name="input"
                 mcInput
                 [(ngModel)]="inputValue"
+                pattern="[a-zA-Z]*"
                 placeholder="required pattern=[a-zA-Z]*" required>
         </mc-form-field>
 
@@ -132,6 +142,7 @@
             </mc-tag-list>
         </mc-form-field>
 
+
         <br>
         <br>
 
@@ -159,6 +170,10 @@
         <br><br>
 
         <button mc-button>Submit</button>
+
+        <div class="mc-form-field_error" *ngIf="formWithCustomValidator.controls.login.errors">
+            <div *ngIf="formWithCustomValidator.controls.login.errors?.required">error</div>
+        </div>
     </form>
 
     <div class="margin">

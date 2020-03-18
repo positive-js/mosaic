@@ -1,9 +1,13 @@
 /* tslint:disable:naming-convention */
 // tslint:disable:no-console
-import { Component, NgModule, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, Input, NgModule, Optional, ViewEncapsulation } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { MC_LOCALE_ID, McFormattersModule } from '@ptsecurity/mosaic/core/formatters';
+import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
+import { McIconModule } from '@ptsecurity/mosaic/icon';
+import { McInputModule } from '@ptsecurity/mosaic/input';
 
 
 @Component({
@@ -13,8 +17,9 @@ import { MC_LOCALE_ID, McFormattersModule } from '@ptsecurity/mosaic/core/format
     encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent {
-    rawNumber = 1000.111;
+    value = 1000.123;
 }
+
 
 @Component({
     selector: 'ru-locale',
@@ -22,8 +27,11 @@ export class DemoComponent {
     encapsulation: ViewEncapsulation.None
 })
 export class WithRULocaleComponent {
-    rawNumber = 1000.111;
     locale = 'en';
+
+    @Input() value: number = 0;
+
+    constructor(@Optional() @Inject(MC_LOCALE_ID) public mcLocaleId: string) {}
 }
 
 @Component({
@@ -33,20 +41,27 @@ export class WithRULocaleComponent {
     providers: [{ provide: MC_LOCALE_ID, useValue: 'en' }]
 })
 export class WithENLocaleComponent {
-    rawNumber = 1000.111;
     locale = 'ru';
+
+    @Input() value: number = 0;
+
+    constructor(@Inject(MC_LOCALE_ID) public mcLocaleId: string) {}
 }
 
 
 @NgModule({
+    imports: [
+        BrowserModule,
+        McFormattersModule,
+        McInputModule,
+        McFormFieldModule,
+        FormsModule,
+        McIconModule
+    ],
     declarations: [
         DemoComponent,
         WithRULocaleComponent,
         WithENLocaleComponent
-    ],
-    imports: [
-        BrowserModule,
-        McFormattersModule
     ],
     bootstrap: [
         DemoComponent

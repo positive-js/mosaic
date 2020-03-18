@@ -12,15 +12,11 @@
     padding-right: 16px;
 }
 
-.container {
-    max-width: 1000px;
-}
-
-.light-text-secondary{
-    color: $light-text-secondary;
+.light-text-secondary {
+    color: #CCC;
 }
 
 .row-border {
     padding: 8px;
-    border-bottom: 1px solid $light-text-secondary;
+    border-bottom: 1px solid #CCC;
 }

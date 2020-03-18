@@ -294,6 +294,25 @@ const DOCS: { [key: string]: DocCategory[] } = {
                     examples: ['tags-list-types']
                 }
             ]
+        },
+        {
+            id: 'core/styles',
+            name: 'Formatters',
+            summary: 'styles',
+            items: [
+                {
+                    id: 'number-formatter',
+                    name: 'Number',
+                    summary: '',
+                    examples: ['number-types']
+                },
+                {
+                    id: 'date-formatter',
+                    name: 'Date',
+                    summary: '',
+                    examples: ['date-types']
+                }
+            ]
         }
     ],
     [CDK]: [

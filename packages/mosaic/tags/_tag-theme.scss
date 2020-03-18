@@ -64,8 +64,8 @@
             @include mc-tag-color(map-get($tags, error));
         }
 
-        &:hover:not(.mc-disabled),
-        &.mc-hovered:not(.mc-disabled){
+        &:hover,
+        &.mc-hovered {
             & .mc-tag-overlay {
                 background: mc-color($background, overlay-hovered);
             }
