@@ -1,4 +1,3 @@
-const { customLaunchers } = require('./tests/browser-providers');
 const { join } = require('path');
 const { constants } = require('karma');
 
@@ -46,7 +45,15 @@ module.exports = () => {
             properties: {} // key value pair of properties to add to the <properties> section of the report
         },
 
-        customLaunchers: customLaunchers,
+        customLaunchers: {
+            'ChromeHeadlessLocal': {
+                'base': 'ChromeHeadless',
+                'flags': [
+                    '--no-sandbox'
+                ],
+                'debug': true
+            }
+        },
 
         browsers: ['ChromeHeadlessLocal']
     };
