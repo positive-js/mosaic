@@ -73,7 +73,6 @@
         item_state-active_color: lighten(mc-color($primary, 700), 5%),
         item_state-hover_color: lighten(mc-color($primary, 700), 5%),
         item_state-progress_color: lighten(mc-color($primary, 800), 15%),
-        item_state-disabled_opacity: lighten(mc-color($primary, 800), 15%)
     );
 
     $popover: (
@@ -262,7 +261,6 @@
         item_state-active_color: lighten(mc-color($primary, 700), 5%),
         item_state-hover_color: lighten(mc-color($primary, 700), 5%),
         item_state-progress_color: lighten(mc-color($primary, 800), 15%),
-        item_state-disabled_opacity: lighten(mc-color($primary, 800), 15%),
     );
 
     $popover: (

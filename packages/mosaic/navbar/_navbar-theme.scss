@@ -50,7 +50,7 @@
         &[disabled] {
             .mc-navbar-title,
             .mc-icon {
-                opacity: map-get($navbar, item_state-disabled_opacity);
+                opacity: 0.3;
             }
         }
     }
