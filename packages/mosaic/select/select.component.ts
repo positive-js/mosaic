@@ -834,7 +834,7 @@ export class McSelect extends McSelectMixinBase implements
     }
 
     calculateHiddenItems(): void {
-        if (this.empty || !this.multiple) { return; }
+        if (this.customTrigger || this.empty || !this.multiple) { return; }
 
         let visibleItems: number = 0;
         const totalItemsWidth = this.getTotalItemsWidthInMatcher();
