@@ -6,10 +6,8 @@ import {
 import { NgPackagrBuilderOptions } from '@angular-devkit/build-ng-packagr';
 import { Schema as AngularJson } from '@angular/cli/lib/config/schema';
 import chalk from 'chalk';
-import { existsSync, promises as fs, writeFileSync } from 'fs';
-import { sync } from 'glob';
-import { dirname, join, relative, resolve } from 'path';
-import { parseDir } from 'sass-graph';
+import { promises as fs, writeFileSync } from 'fs';
+import { dirname, join, resolve } from 'path';
 
 import { IPackagerOptions } from './schema';
 
@@ -117,10 +115,6 @@ export async function packager(options: IPackagerOptions, context: BuilderContex
             chalk.green('Replaced all version placeholders in package.json file!')
         );
 
-        context.logger.info('Copying styles...');
-        await copyStyles(options, context);
-        context.logger.info(chalk.green('Copied styles!'));
-
         context.logger.info(chalk.green('Packaging done!'));
 
         return { success: buildResult.success };
@@ -145,17 +139,6 @@ interface IPackageJson {
     };
 }
 
-interface IPackagerAssetDef {
-    glob: string;
-    input: string;
-    output: string;
-}
-
-function parseAdditionalTargets(targetRef: string): { target: string; project: string } {
-    const [project, target] = targetRef.split(':');
-
-    return { project, target };
-}
 
 function syncComponentsVersion(
     releaseJson: IPackageJson, rootPackageJson: IPackageJson, placeholder: string): IPackageJson {
@@ -172,43 +155,8 @@ function syncComponentsVersion(
     return newPackageJson;
 }
 
-async function copyStyles(options: IPackagerOptions, context: BuilderContext): Promise<void> {
-    for (const styleDef of options.styles) {
-        const fileGlob = sync(styleDef.glob, {
-            cwd: join(context.workspaceRoot, styleDef.input)
-        });
-        const directories = fileGlob.map((path) =>
-            join(context.workspaceRoot, styleDef.input, dirname(path))
-        );
-        const uniqueDirectories = [...new Set(directories)];
-        const allStyleDependencies = uniqueDirectories.reduce((aggr: string[], dir) => {
-            return aggr.concat(Object.keys(parseDir(dir).index));
-        }, [] as string[]);
-
-        for (const stylesheetFilePath of allStyleDependencies) {
-            await copyAsset(stylesheetFilePath, context, styleDef);
-        }
-    }
-}
-
-async function copyAsset(path: string, context: BuilderContext, assetDef: IPackagerAssetDef): Promise<void> {
-
-    const relativePath = relative(join(context.workspaceRoot, assetDef.input), path);
-
-    const destination = join(
-        context.workspaceRoot,
-        assetDef.output,
-        relativePath
-    );
-
-    if (!existsSync(dirname(destination))) {
-        await fs.mkdir(dirname(destination), { recursive: true });
-    }
-
-    await fs.copyFile(path, destination);
-}
 // tslint:disable
-export function syncNgVersion(
+function syncNgVersion(
     releaseJson: IPackageJson,
     rootPackageJson: IPackageJson,
     placeholder: string

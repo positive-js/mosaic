@@ -1,16 +1,12 @@
 import { mkdirpSync, writeFileSync } from 'fs-extra';
-import { task, src, dest, series, parallel } from 'gulp';
+import { task, dest, series, parallel } from 'gulp';
 import { join } from 'path';
 import { Bundler } from 'scss-bundle';
 
 import { buildConfig, buildScssPipeline } from '../../packages';
 
 
-// tslint:disable-next-line:no-var-requires
-const gulpRename = require('gulp-rename');
-
 const sourceDir = 'packages/mosaic';
-const outputDir = 'dist/mosaic';
 
 /** Path to the directory where all releases are created. */
 const releasesDir = 'dist';
@@ -26,19 +22,11 @@ const releasePath = join(releasesDir, 'mosaic');
 const themingEntryPointPath = join(sourceDir, 'core', 'theming', '_all-theme.scss');
 // Output path for the scss theming bundle.
 const themingBundlePath = join(releasePath, '_theming.scss');
-// Matches all pre-built theme css files
-const prebuiltThemeGlob = join(outputDir, '**/theming/prebuilt/*.css?(.map)');
 
 
 const visualEntryPointPath = join(sourceDir, 'core', 'visual', '_all-visual.scss');
-const prebuiltVisualGlob = join(outputDir, '**/visual/prebuilt/*.css?(.map)');
 const visualBundlePath = join(releasePath, '_visual.scss');
 
-task('mosaic:copy-prebuilt-themes', () => {
-    return src(prebuiltThemeGlob)
-        .pipe(gulpRename({dirname: ''}))
-        .pipe(dest(join(releasePath, 'prebuilt-themes')));
-});
 
 /** Bundles all scss requires for theming into a single scss file in the root of the package. */
 task('mosaic:bundle-theming-scss', () => {
@@ -53,12 +41,6 @@ task('mosaic:bundle-theming-scss', () => {
     });
 });
 
-task('mosaic:copy-prebuilt-visual', () => {
-    return src(prebuiltVisualGlob)
-        .pipe(gulpRename({dirname: ''}))
-        .pipe(dest(join(releasePath, 'prebuilt-visual')));
-});
-
 task('mosaic:bundle-visual-scss', () => {
     // Instantiates the SCSS bundler and bundles all imports of the specified entry point SCSS file.
     // A glob of all SCSS files in the library will be passed to the bundler. The bundler takes an
@@ -71,16 +53,21 @@ task('mosaic:bundle-visual-scss', () => {
     });
 });
 
-task('mosaic:prebuilt-themes', series(
-    parallel(
-        'mosaic:copy-prebuilt-themes',
-        'mosaic:bundle-theming-scss',
-        'mosaic:copy-prebuilt-visual',
-        'mosaic:bundle-visual-scss'
-    )
-));
-
-task('mosaic:build:scss', () => {
-    return buildScssPipeline(sourceDir, true)
+task('mosaic:prebuilt-themes:scss', () => {
+    return buildScssPipeline('packages/mosaic/core/theming/prebuilt', true)
         .pipe(dest(join(releasePath, 'prebuilt-themes')));
 });
+
+task('mosaic:prebuilt-visual:scss', () => {
+    return buildScssPipeline('packages/mosaic/core/visual/prebuilt', true)
+        .pipe(dest(join(releasePath, 'prebuilt-visual')));
+});
+
+task('styles:built-all', series(
+    parallel(
+        'mosaic:bundle-theming-scss',
+        'mosaic:bundle-visual-scss',
+        'mosaic:prebuilt-themes:scss',
+        'mosaic:prebuilt-visual:scss'
+    )
+));
