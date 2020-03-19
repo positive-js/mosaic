@@ -4,4 +4,5 @@ import './tasks/example-module';
 
 import './tasks/lint';
 import './tasks/docs';
+import './tasks/mosaic-release';
 import './tasks/validate-licenses';
