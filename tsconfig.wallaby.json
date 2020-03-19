@@ -49,8 +49,7 @@
         "packages/mosaic-examples/**/*.*",
         "packages/cdk/schematics/**/*.*",
         "packages/mosaic/schematics/**/*.*",
-        "packages/docs/**/*.*",
-        "packages/dev-app/**/*.*"
+        "packages/docs/**/*.*"
     ],
     "angularCompilerOptions": {
         "skipMetadataEmit": true,
