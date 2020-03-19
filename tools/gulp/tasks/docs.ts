@@ -10,11 +10,10 @@ import { buildConfig } from '../../packages';
 const markdown = require('gulp-markdown');
 const transform = require('gulp-transform');
 const highlight = require('gulp-highlight-files');
-const htmlmin = require('gulp-htmlmin');
 const rename = require('gulp-rename');
 const flatten = require('gulp-flatten');
 const hljs = require('highlight.js');
-const dom  = require('gulp-dom');
+
 
 const { outputDir, packagesDir } = buildConfig;
 

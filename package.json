@@ -121,10 +121,6 @@
     },
     "scripts": {
         "ng": "ng",
-        "serve:dev-app": "gulp serve:devapp",
-        "ci:aot": "gulp ci:aot",
-        "build-dev-app:aot": "gulp build-aot",
-        "test:unit": "gulp ci:test",
         "valid:lic": "gulp validate-licenses",
         "build:cdk": "ng build cdk",
         "build:mosaic-moment-adapter": "ng build mosaic-moment-adapter",

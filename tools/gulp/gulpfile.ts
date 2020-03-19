@@ -4,5 +4,4 @@ import './tasks/example-module';
 
 import './tasks/lint';
 import './tasks/docs';
-import './tasks/changelog';
 import './tasks/validate-licenses';
