@@ -16,42 +16,45 @@ import { IPackagerOptions } from './schema';
 export async function packager(options: IPackagerOptions, context: BuilderContext): Promise<BuilderOutput> {
 
     const project = context.target !== undefined ? context.target.project : '';
-    context.logger.info(`Packaging ${project}...`);
+    context.logger.info(`📦 Packaging ${project}...`);
 
     const target: Target = {
         target: options.buildTarget,
         project
     };
+
     let ngPackagrBuilderOptions;
 
     try {
-        ngPackagrBuilderOptions = ((await context.getTargetOptions(
-            target
-        )) as unknown) as NgPackagrBuilderOptions;
+        ngPackagrBuilderOptions = ((await context.getTargetOptions(target)) as unknown) as NgPackagrBuilderOptions;
 
         if (ngPackagrBuilderOptions.project === undefined) {
             throw new Error(
-                'Error: Build target does not exist in angular.json'
+                '❌ Build target does not exist in angular.json'
             );
         }
+
     } catch (err) {
         context.logger.error(err);
 
-        return { success: false };
+        return {
+            error: err,
+            success: false
+        };
     }
 
     try {
-        context.logger.info('Reading angular.json file...');
+        context.logger.info('📖 angular.json file...');
         const angularJson = await tryJsonParse<AngularJson>(
             join(context.workspaceRoot, 'angular.json')
         );
 
         // get the package json
-        context.logger.info('Reading package.json file...');
+        context.logger.info('📖 package.json file...');
         const packageJson = await tryJsonParse<IPackageJson>(
             join(context.workspaceRoot, 'package.json')
         );
-
+        console.log('context.workspaceRoot: ', context.workspaceRoot);
         const projectRoot =
             angularJson.projects &&
             angularJson.projects[project] &&
@@ -59,7 +62,7 @@ export async function packager(options: IPackagerOptions, context: BuilderContex
 
         if (!projectRoot) {
             context.logger.error(
-                `Error: Could not find a root folder for the project ${project} in your angular.json file`
+                `❌ Could not find a root folder for the project ${project} in your angular.json file`
             );
 
             return { success: false };
@@ -74,55 +77,53 @@ export async function packager(options: IPackagerOptions, context: BuilderContex
             ngPackagrConfigPath
         );
 
-        // Determine the library destination
         const libraryDestination = resolve(
             dirname(ngPackagrConfigPath),
             ngPackagrConfig.dest
         );
 
-        // Start build
         const build = await context.scheduleTarget(target);
 
         const buildResult = await build.result;
 
-        // Path to the package json file that we are going to ship with the library
         const releasePackageJsonPath = join(libraryDestination, 'package.json');
         let releasePackageJson = await tryJsonParse<IPackageJson>(
             releasePackageJsonPath
         );
 
-        context.logger.info('Syncing components version for releasing...');
+        context.logger.info('Syncing Mosaic components version for releasing...');
         releasePackageJson = syncComponentsVersion(
             releasePackageJson,
             packageJson,
             options.versionPlaceholder
         );
 
-        context.logger.info('Syncing angular dependency versions for releasing...');
+        context.logger.info('Syncing Angular dependency versions for releasing...');
         releasePackageJson = syncNgVersion(
             releasePackageJson,
             packageJson,
             options.ngVersionPlaceholder
         );
 
+        console.log(releasePackageJson);
         writeFileSync(
             join(libraryDestination, 'package.json'),
             // tslint:disable-next-line:no-magic-numbers
             JSON.stringify(releasePackageJson, null, 4),
             { encoding: 'utf-8' }
         );
-        context.logger.info(
-            chalk.green('Replaced all version placeholders in package.json file!')
-        );
 
-        context.logger.info(chalk.green('Packaging done!'));
+        context.logger.info(chalk.green(' ✔ Packaging done!'));
 
         return { success: buildResult.success };
     } catch (error) {
         context.logger.error(error);
     }
 
-    return { success: false };
+    return {
+        error: 'Package failed',
+        success: false
+    };
 }
 
 interface INgPackagerJson {
@@ -141,7 +142,10 @@ interface IPackageJson {
 
 
 function syncComponentsVersion(
-    releaseJson: IPackageJson, rootPackageJson: IPackageJson, placeholder: string): IPackageJson {
+    releaseJson: IPackageJson,
+    rootPackageJson: IPackageJson,
+    placeholder: string
+): IPackageJson {
 
     const newPackageJson = { ...releaseJson };
 
@@ -150,6 +154,12 @@ function syncComponentsVersion(
         (!newPackageJson.version || newPackageJson.version.trim() === placeholder)
     ) {
         newPackageJson.version = rootPackageJson.version;
+
+        for (const [key, value] of Object.entries(releaseJson.peerDependencies!)) {
+            if (value.includes(placeholder)) {
+                newPackageJson.peerDependencies![key] = `^${newPackageJson.version}`;
+            }
+        }
     }
 
     return newPackageJson;

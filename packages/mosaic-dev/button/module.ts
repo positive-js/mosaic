@@ -1,5 +1,5 @@
 // tslint:disable:no-console
-import { Component, NgModule } from '@angular/core';
+import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
@@ -8,7 +8,8 @@ import { McIconModule } from '@ptsecurity/mosaic/icon';
 @Component({
     selector: 'app',
     templateUrl: 'template.html',
-    styleUrls: ['styles.scss']
+    styleUrls: ['styles.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class ButtonDemoComponent {}
 

@@ -1,6 +1,6 @@
 // tslint:disable:no-console
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, NgModule } from '@angular/core';
+import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -20,7 +20,8 @@ import { McLinkModule } from '../../mosaic/link';
             transition('false => true', animate('.5s')),
             transition('true => false', animate('.2s'))
         ])
-    ]
+    ],
+    encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent {
     // tslint:disable-next-line:no-magic-numbers
