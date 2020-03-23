@@ -2,7 +2,6 @@
 import { Component, NgModule, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McAutocompleteModule, McAutocompleteSelectedEvent } from '@ptsecurity/mosaic/autocomplete';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
@@ -15,7 +14,7 @@ import { map, startWith } from 'rxjs/operators';
 
 @Component({
     selector: 'app',
-    template: require('./template.html'),
+    templateUrl: './template.html',
     styleUrls: ['./styles.scss'],
     encapsulation: ViewEncapsulation.None
 })
@@ -68,8 +67,3 @@ export class DemoComponent implements OnInit {
     bootstrap: [DemoComponent]
 })
 export class DemoModule {}
-
-platformBrowserDynamic()
-    .bootstrapModule(DemoModule)
-    .catch((error) => console.error(error));
-

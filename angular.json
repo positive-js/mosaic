@@ -241,6 +241,88 @@
                 }
             }
         },
+        "dev-alert": {
+            "projectType": "application",
+            "root": "packages/mosaic-dev/alert",
+            "sourceRoot": "packages/mosaic-dev/alert",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/mosaic-dev/alert",
+                        "tsConfig": "packages/mosaic-dev/alert/tsconfig.app.json",
+                        "index": "packages/mosaic-dev/index.html",
+                        "main": "packages/mosaic-dev/alert/main.ts",
+                        "aot": true,
+                        "polyfills": "packages/mosaic-dev/polyfills.ts"
+                    },
+                    "configurations": {
+                        "production": {
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "vendorChunk": false,
+                            "statsJson": true
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "dev-alert:build"
+                    }
+                }
+            }
+        },
+        "dev-autocomplete": {
+            "projectType": "application",
+            "root": "packages/mosaic-dev/autocomplete",
+            "sourceRoot": "packages/mosaic-dev/autocomplete",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/mosaic-dev/autocomplete",
+                        "tsConfig": "packages/mosaic-dev/autocomplete/tsconfig.app.json",
+                        "index": "packages/mosaic-dev/index.html",
+                        "main": "packages/mosaic-dev/autocomplete/main.ts",
+                        "aot": true,
+                        "polyfills": "packages/mosaic-dev/polyfills.ts"
+                    },
+                    "configurations": {
+                        "production": {
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "vendorChunk": false,
+                            "statsJson": true
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "dev-autocomplete:build"
+                    }
+                }
+            }
+        },
         "dev-button": {
             "projectType": "application",
             "root": "packages/mosaic-dev/button",
@@ -280,9 +362,9 @@
                         "browserTarget": "dev-button:build"
                     }
                 }
-            },
-            "schematics": {}
+            }
         }
+
     },
     "defaultProject": "mosaic-docs",
     "cli": {
