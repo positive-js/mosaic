@@ -11,11 +11,11 @@
     </mc-tree-option>
 
     <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+        <mc-tree-node-toggle [node]="node"></mc-tree-node-toggle>
         <mc-checkbox class= "tree-example-checkbox"
                      [checked]="descendantsAllSelected(node)"
                      [indeterminate]="descendantsPartiallySelected(node)"
                      (change)="fileSelectionToggle(node)"></mc-checkbox>
-        <mc-tree-node-toggle [node]="node"></mc-tree-node-toggle>
         <span [innerHTML]="treeControl.getViewValue(node)"></span>
     </mc-tree-option>
 </mc-tree-selection>
