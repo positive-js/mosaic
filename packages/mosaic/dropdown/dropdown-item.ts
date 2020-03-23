@@ -1,3 +1,4 @@
+import { FocusMonitor, FocusOrigin } from '@angular/cdk/a11y';
 import { DOCUMENT } from '@angular/common';
 import {
     ChangeDetectionStrategy,
@@ -10,7 +11,7 @@ import {
     Input,
     ViewChild
 } from '@angular/core';
-import { IFocusableOption, FocusMonitor, FocusOrigin } from '@ptsecurity/cdk/a11y';
+import { IFocusableOption } from '@ptsecurity/cdk/a11y';
 import { CanDisable, CanDisableCtor, mixinDisabled } from '@ptsecurity/mosaic/core';
 import { Subject } from 'rxjs';
 

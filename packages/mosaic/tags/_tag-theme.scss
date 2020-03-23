@@ -12,6 +12,30 @@
         border-color: map-get($params, focused-state_color);
         box-shadow: 0 0 0 1px map-get($params, focused-state_color);
     }
+
+    & .mc-icon {
+        color: map-get($params, icon-color);
+
+        &:hover {
+            cursor: pointer;
+            color: map-get($params, hovered-icon-color);
+        }
+    }
+
+    &.mc-disabled {
+        border-color: map-get($params, state-disable_background);
+        background: map-get($params, state-disable_background);
+
+        color: map-get($params, state-disable_color);
+
+        & .mc-tag-overlay {
+            background: transparent;
+        }
+
+        & .mc-icon {
+            color: inherit;
+        }
+    }
 }
 
 
@@ -40,7 +64,8 @@
             @include mc-tag-color(map-get($tags, error));
         }
 
-        &:hover {
+        &:hover,
+        &.mc-hovered {
             & .mc-tag-overlay {
                 background: mc-color($background, overlay-hovered);
             }

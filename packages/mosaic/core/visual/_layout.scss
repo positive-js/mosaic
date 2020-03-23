@@ -58,7 +58,11 @@
             @if $s != '' { $suffix : '#{$s}-#{$i * 5}'; }
             @else        { $suffix : '#{$i * 5}';       }
 
-            $offsets : '.offset-#{$suffix}, .flex-offset-#{$suffix}, .layout-margin .flex-offset-#{$suffix}, .layout-margin .offset-#{$suffix}';
+            $offsets :
+                '.offset-#{$suffix}, ' +
+                '.flex-offset-#{$suffix}, ' +
+                '.layout-margin .flex-offset-#{$suffix}, ' +
+                '.layout-margin .offset-#{$suffix}';
         }
 
         #{$offsets} {
@@ -75,7 +79,11 @@
             @if $s != '' {  $suffix : '#{$s}-#{$i}';   }
             @else        {  $suffix : '#{$i}';         }
 
-            $offsets : '.offset-#{$suffix}, .flex-offset-#{$suffix}, .layout-margin .flex-offset-#{$suffix}, .layout-margin .offset-#{$suffix}';
+            $offsets :
+                '.offset-#{$suffix}, ' +
+                '.flex-offset-#{$suffix}, ' +
+                '.layout-margin .flex-offset-#{$suffix}, ' +
+                '.layout-margin .offset-#{$suffix}';
         }
 
         #{$offsets} {
@@ -91,7 +99,11 @@
             @if $s != '' {  $suffix : '#{$s}-#{$i}';   }
             @else        {  $suffix : '#{$i}';         }
 
-            $offsets : '.offset-#{$suffix}, .flex-offset-#{$suffix}, .layout-margin .flex-offset-#{$suffix}, .layout-margin .offset-#{$suffix}';
+            $offsets :
+                '.offset-#{$suffix}, ' +
+                '.flex-offset-#{$suffix}, ' +
+                '.layout-margin .flex-offset-#{$suffix}, ' +
+                '.layout-margin .offset-#{$suffix}';
         }
 
         #{$offsets} {
@@ -402,7 +414,6 @@
     .layout-padding-gt-lg  > *,
 
     .layout-padding        > .flex-gt-md,
-    .layout-padding        > .flex-lg,
     .layout-padding        > .flex-lg,
     .layout-padding        > .flex-gt-lg
     {

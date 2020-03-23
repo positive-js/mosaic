@@ -113,18 +113,30 @@
             background: mc-color($primary, 100),
             border-color: mc-color($primary, 100),
             focused-state_color: mc-color($primary),
+            icon-color: mix(mc-color($primary, 400), map-get($background, overlay-hovered)),
+            hovered-icon-color: mc-color($primary, darker),
+            state-disable_background: mix(mc-color($primary), transparent, 10%),
+            state-disable_color: mix(mc-color($primary), transparent, 50%),
         ),
 
         second: (
             background: mc-color($second, 100),
             border-color: mc-color($second, 100),
             focused-state_color: mc-color($primary),
+            icon-color: mix(mc-color($second, 400), map-get($background,  overlay-hovered)),
+            hovered-icon-color: mc-color($second, darker),
+            state-disable_background: mix(mc-color($second), transparent, 10%),
+            state-disable_color: mix(mc-color($second), transparent, 50%),
         ),
 
         error: (
             background: mc-color($error, 100),
             border-color: mc-color($error, 100),
-            focused-state_color: mc-color($error)
+            focused-state_color: mc-color($error),
+            icon-color: mix(mc-color($error, 400), map-get($background,  overlay-hovered)),
+            hovered-icon-color: mc-color($error, darker),
+            state-disable_background: mix(mc-color($error), transparent, 10%),
+            state-disable_color: mix(mc-color($error), transparent, 50%),
         )
     );
 
@@ -290,18 +302,30 @@
             background: mc-color($primary, 700),
             border-color: mc-color($primary, 700),
             focused-state_color: mc-color($primary),
+            icon-color: mix(mc-color($primary, 400), map-get($background, overlay-hovered)),
+            hovered-icon-color: mc-color($primary, lighter),
+            state-disable_background: mix(mc-color($primary), transparent, 10%),
+            state-disable_color: mix(mc-color($primary), transparent, 50%),
         ),
 
         second: (
             background: mc-color($second, 700),
             border-color: mc-color($second, 700),
             focused-state_color: mc-color($primary),
+            icon-color: mix(mc-color($second, 400), map-get($background,  overlay-hovered)),
+            hovered-icon-color: mc-color($second, lighter),
+            state-disable_background: mix(mc-color($second), transparent, 10%),
+            state-disable_color: mix(mc-color($second), transparent, 50%),
         ),
 
         error: (
             background: mc-color($error, 700),
             border-color: mc-color($error, 700),
-            focused-state_color: mc-color($error)
+            focused-state_color: mc-color($error),
+            icon-color: mix(mc-color($error, 400), map-get($background,  overlay-hovered)),
+            hovered-icon-color: mc-color($error, lighter),
+            state-disable_background: mix(mc-color($error), transparent, 10%),
+            state-disable_color: mix(mc-color($error), transparent, 50%),
         )
     );
 

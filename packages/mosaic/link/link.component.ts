@@ -1,3 +1,4 @@
+import { FocusMonitor } from '@angular/cdk/a11y';
 import {
     Input,
     ElementRef,
@@ -6,7 +7,6 @@ import {
     Directive,
     Attribute
 } from '@angular/core';
-import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import {
     CanDisable, CanDisableCtor,
     HasTabIndex, HasTabIndexCtor,

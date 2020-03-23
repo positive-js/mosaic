@@ -463,9 +463,7 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
         const endDateVariables = this.compileVariables(endDate, variables);
         endDateVariables.SAME_MONTH = sameMonth;
 
-        const bothCurrentYear =
-            startDateVariables.CURRENT_YEAR === 'yes' &&
-            endDateVariables.CURRENT_YEAR === 'yes';
+        const bothCurrentYear = startDateVariables.CURRENT_YEAR === 'yes' && endDateVariables.CURRENT_YEAR === 'yes';
         startDateVariables.CURRENT_YEAR = bothCurrentYear ? 'yes' : 'no';
         endDateVariables.CURRENT_YEAR = bothCurrentYear ? 'yes' : 'no';
 

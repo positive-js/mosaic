@@ -1,0 +1,15 @@
+<mc-form-field class="number-input">
+    <input mcInput [(ngModel)]="value" type="number" placeholder="Number">
+</mc-form-field>
+
+<div class="layout-row mc-body">
+    <div class="flex">
+        <h4 class="mc-subheading">with RU locale (default)</h4>
+        <ru-locale class="layout-padding-lg" [value]="value"></ru-locale>
+    </div>
+
+    <div class="flex">
+        <h4 class="mc-subheading">with EN locale</h4>
+        <en-locale class="layout-padding-lg" [value]="value"></en-locale>
+    </div>
+</div>

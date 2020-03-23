@@ -1,3 +1,4 @@
+import { FocusMonitor, FocusOrigin } from '@angular/cdk/a11y';
 import {
     AfterViewInit,
     Attribute,
@@ -16,7 +17,6 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { FocusMonitor, FocusOrigin } from '@ptsecurity/cdk/a11y';
 import {
     CanColor, CanColorCtor,
     CanDisable, CanDisableCtor,
