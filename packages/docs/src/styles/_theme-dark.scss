@@ -16,18 +16,18 @@ $dark-warning: mc-palette($mc-yellow, 200, 400, 700);
 $dark-theme: mc-dark-theme($dark-primary, $dark-second, $dark-error, $dark-info, $dark-success, $dark-warning);
 $dark-theme-red: mc-dark-theme($dark-primary-red, $dark-second, $dark-error, $dark-info, $dark-success, $dark-warning);
 $dark-theme-green: mc-dark-theme(
-        $dark-primary-green,
-        $dark-second,
-        $dark-error,
-        $dark-info,
-        $dark-success,
-        $dark-warning
+    $dark-primary-green,
+    $dark-second,
+    $dark-error,
+    $dark-info,
+    $dark-success,
+    $dark-warning
 );
 $dark-theme-yellow: mc-dark-theme(
-        $dark-primary-yellow,
-        $dark-second,
-        $dark-error,
-        $dark-info,
-        $dark-success,
-        $dark-warning
+    $dark-primary-yellow,
+    $dark-second,
+    $dark-error,
+    $dark-info,
+    $dark-success,
+    $dark-warning
 );

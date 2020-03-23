@@ -73,8 +73,8 @@ interface SelectionModelOption {
 
         '[attr.tabindex]': 'tabIndex',
 
-        '(focus)': 'focus()',
         '(blur)': 'blur()',
+        '(focus)': 'focus($event)',
 
         '(keydown)': 'onKeyDown($event)',
         '(window:resize)': 'updateScrollSize()'
@@ -265,8 +265,8 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
         this.destroy.complete();
     }
 
-    focus(): void {
-        if (this.renderedOptions.length === 0) { return; }
+    focus($event): void {
+        if (this.renderedOptions.length === 0 || this.isFocusReceivedFromNestedOption($event)) { return; }
 
         this.keyManager.setFirstItemActive();
     }
@@ -613,6 +613,12 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
 
     private canDeselectLast(option: McTreeOption): boolean {
         return !(this.noUnselectLast && this.selectionModel.selected.length === 1 && option.selected);
+    }
+
+    private isFocusReceivedFromNestedOption($event: FocusEvent) {
+        if (!$event || !$event.relatedTarget) { return false; }
+
+        return ($event.relatedTarget as HTMLElement).classList.contains('mc-tree-option');
     }
 }
 

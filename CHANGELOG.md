@@ -1,3 +1,13 @@
+## 8.4.4 "Walk Up Candlemas" (2020-03-19)
+
+### Mosaic
+
+ * bug fix  **datepicker:** fixing datapicker toggle button opacity ([#437](https://github.com/positive-js/mosaic/issues/437)) ([d4a28e4](https://github.com/positive-js/mosaic/commit/d4a28e45b94b6982fb7ebd62e18407320c12f7be))
+ * bug fix  **select:** error when use custom trigger (#UIM-398) ([#439](https://github.com/positive-js/mosaic/issues/439)) ([b278ccf](https://github.com/positive-js/mosaic/commit/b278ccf7d6428730b77fdd7b892dc8e8ab163cc7)), closes [#UIM-398](https://github.com/positive-js/mosaic/issues/UIM-398)
+ * bug fix  **tags:** fixed error "Expression has changed after it was checked" (#UIM-376) ([#432](https://github.com/positive-js/mosaic/issues/432)) ([7cb3f34](https://github.com/positive-js/mosaic/commit/7cb3f342d23c28ced87d64c5fe72f133b077fadb)), closes [#UIM-376](https://github.com/positive-js/mosaic/issues/UIM-376)
+ * bug fix  **tags:** validation in tag-input (#UIM-368) ([#430](https://github.com/positive-js/mosaic/issues/430)) ([e1b3971](https://github.com/positive-js/mosaic/commit/e1b397118ae5f2c8735b2f493a453f46267c6109)), closes [#UIM-368](https://github.com/positive-js/mosaic/issues/UIM-368)
+ * bug fix  **tree:** moved checkbox (#UIM-400) ([#438](https://github.com/positive-js/mosaic/issues/438)) ([5633950](https://github.com/positive-js/mosaic/commit/563395077d0a9ccd63855cf06d2b7e728086a7ae)), closes [#UIM-400](https://github.com/positive-js/mosaic/issues/UIM-400)
+
 ## 8.4.3 "Wistful" (2020-03-12)
 
 ### Mosaic

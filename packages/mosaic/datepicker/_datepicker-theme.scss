@@ -35,6 +35,7 @@ $mc-datepicker-today-fade-amount: 0.2;
         border-color: transparent;
         border-radius: 0;
         background: transparent;
+        opacity: 1;
 
         .mc-icon {
             color: map-get($foreground, icon);
