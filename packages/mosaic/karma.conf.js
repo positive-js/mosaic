@@ -10,11 +10,7 @@ module.exports = function(config) {
 
     config.set({
         coverageIstanbulReporter: {
-            'report-config': {
-                lcovonly: {
-                    file: 'mosaic.lcov.info'
-                }
-            }
+            dir: `${config.coverageIstanbulReporter.dir}/mosaic`
         },
     });
 };
