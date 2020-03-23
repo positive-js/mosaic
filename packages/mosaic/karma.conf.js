@@ -7,4 +7,14 @@ module.exports = function(config) {
     config.set({
         ...baseConfig
     });
+
+    config.set({
+        coverageIstanbulReporter: {
+            'report-config': {
+                lcovonly: {
+                    file: 'mosaic.lcov.info'
+                }
+            }
+        },
+    });
 };
