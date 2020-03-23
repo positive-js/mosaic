@@ -20,7 +20,7 @@ yarn run build:docs
 Start ng server documentation
 
 ```bash
-yarn run docs:start 
+yarn run docs:start
 ```
 
 Open app
