@@ -5,7 +5,7 @@ import { InjectionToken } from '@angular/core';
 // tslint:disable-next-line: naming-convention
 export interface McTagsDefaultOptions {
     /** The list of key codes that will trigger a chipEnd event. */
-    separatorKeyCodes: number[] | Set<number>;
+    separatorKeyCodes: number[];
 }
 
 /** Injection token to be used to override the default options for the chips module. */

@@ -11,7 +11,7 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { COMMA, ENTER } from '@ptsecurity/cdk/keycodes';
+import { COMMA, ENTER, SPACE, TAB } from '@ptsecurity/cdk/keycodes';
 import { McAutocompleteModule, McAutocompleteSelectedEvent } from '@ptsecurity/mosaic/autocomplete';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
@@ -43,7 +43,7 @@ export class DemoComponent implements AfterViewInit {
     autocompleteFilteredTagsByInput: string[] = [];
     autocompleteFilteredTags: any;
 
-    readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+    readonly separatorKeysCodes: number[] = [ENTER, SPACE, TAB, COMMA];
 
     @ViewChild('inputTagInput', {static: false}) inputTagInput: ElementRef<HTMLInputElement>;
     @ViewChild('inputTagList', {static: false}) inputTagList: McTagList;

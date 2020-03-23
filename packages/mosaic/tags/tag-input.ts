@@ -8,10 +8,11 @@ import {
     OnChanges,
     Optional,
     Output,
-    Renderer2, Self
+    Renderer2,
+    Self
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { hasModifierKey } from '@ptsecurity/cdk/keycodes';
+import { hasModifierKey, ENTER, TAB, SPACE, COMMA } from '@ptsecurity/cdk/keycodes';
 
 import { MC_TAGS_DEFAULT_OPTIONS, McTagsDefaultOptions } from './tag-default-options';
 import { McTagList } from './tag-list.component';
@@ -46,7 +47,8 @@ let nextUniqueId = 0;
         '(keydown)': 'keydown($event)',
         '(blur)': 'blur()',
         '(focus)': 'onFocus()',
-        '(input)': 'onInput()'
+        '(input)': 'onInput()',
+        '(paste)': 'onPaste($event)'
     }
 })
 export class McTagInput implements McTagTextControl, OnChanges {
@@ -59,7 +61,7 @@ export class McTagInput implements McTagTextControl, OnChanges {
      * Defaults to `[ENTER]`.
      */
     @Input('mcTagInputSeparatorKeyCodes')
-    separatorKeyCodes: number[] | Set<number> = this.defaultOptions.separatorKeyCodes;
+    separatorKeyCodes: number[] = this.defaultOptions.separatorKeyCodes;
 
     /** Emitted when a tag is to be added. */
     @Output('mcTagInputTokenEnd')
@@ -139,7 +141,7 @@ export class McTagInput implements McTagTextControl, OnChanges {
 
     /** Utility method to make host definition/tests more clear. */
     keydown(event?: KeyboardEvent) {
-        this.emittagEnd(event);
+        this.emitTagEnd(event);
     }
 
     /** Checks to see if the blur should emit the (tagEnd) event. */
@@ -154,7 +156,7 @@ export class McTagInput implements McTagTextControl, OnChanges {
 
         // tslint:disable-next-line: no-unnecessary-type-assertion
         if (this.addOnBlur && !(this.hasControl() && this.ngControl.invalid)) {
-            this.emittagEnd();
+            this.emitTagEnd();
         }
 
         this._tagList.stateChanges.next();
@@ -167,7 +169,7 @@ export class McTagInput implements McTagTextControl, OnChanges {
     }
 
     /** Checks to see if the (tagEnd) event needs to be emitted. */
-    emittagEnd(event?: KeyboardEvent) {
+    emitTagEnd(event?: KeyboardEvent) {
         if (!this.inputElement.value && !!event) {
             this._tagList.keydown(event);
         }
@@ -186,6 +188,37 @@ export class McTagInput implements McTagTextControl, OnChanges {
         this.updateInputWidth();
         // Let tag list know whenever the value changes.
         this._tagList.stateChanges.next();
+    }
+
+    onPaste($event: ClipboardEvent) {
+        if (!$event.clipboardData) { return; }
+
+        const data = $event.clipboardData.getData('text');
+
+        if (data && data.length === 0) { return; }
+
+        const items: string[] = [];
+
+        for (const key of this.separatorKeyCodes) {
+            const separator = this.separatorKeyToSymbol(key);
+
+            if (data.indexOf(separator) > -1) {
+                items.push(...data.split(separator));
+
+                break;
+            }
+        }
+
+        if (items.length === 0) {
+            items.push(data);
+        }
+
+        items.forEach((item) => this.tagEnd.emit({ input: this.inputElement, value: item }));
+
+        this.updateInputWidth();
+
+        $event.preventDefault();
+        $event.stopPropagation();
     }
 
     updateInputWidth(): void {
@@ -212,6 +245,19 @@ export class McTagInput implements McTagTextControl, OnChanges {
         this.inputElement.focus();
     }
 
+    private separatorKeyToSymbol(k): string {
+        const sep = {
+            [ENTER]: '\r\n',
+            [TAB]: '\t',
+            [SPACE]: ' ',
+            [COMMA]: ','
+        }[k];
+
+        if (sep) { return sep; }
+
+        return k;
+    }
+
     private hasControl(): boolean {
         return !!this.ngControl;
     }
@@ -224,10 +270,7 @@ export class McTagInput implements McTagTextControl, OnChanges {
     private isSeparatorKey(event: KeyboardEvent) {
         if (hasModifierKey(event)) { return false; }
 
-        const separators = this.separatorKeyCodes;
         // tslint:disable-next-line: deprecation
-        const keyCode = event.keyCode;
-
-        return Array.isArray(separators) ? separators.indexOf(keyCode) > -1 : separators.has(keyCode);
+        return this.separatorKeyCodes.indexOf(event.keyCode) > -1;
     }
 }
