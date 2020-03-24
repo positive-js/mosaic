@@ -153,7 +153,7 @@ describe('McTagInput', () => {
             const COMMA_EVENT = createKeyboardEvent('keydown', COMMA, inputNativeElement);
             spyOn(testTagInput, 'add');
 
-            tagInputDirective.separatorKeyCodes = new Set([COMMA]);
+            tagInputDirective.separatorKeyCodes = [COMMA];
             fixture.detectChanges();
 
             tagInputDirective.keydown(COMMA_EVENT);
