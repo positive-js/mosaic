@@ -202,7 +202,7 @@ export class McTagInput implements McTagTextControl, OnChanges {
         for (const key of this.separatorKeyCodes) {
             const separator = this.separatorKeyToSymbol(key);
 
-            if (data.indexOf(separator) > -1) {
+            if (data.search(separator) > -1) {
                 items.push(...data.split(separator));
 
                 break;
@@ -247,10 +247,10 @@ export class McTagInput implements McTagTextControl, OnChanges {
 
     private separatorKeyToSymbol(k): string {
         const sep = {
-            [ENTER]: '\r\n',
-            [TAB]: '\t',
-            [SPACE]: ' ',
-            [COMMA]: ','
+            [ENTER]: /\r?\n/,
+            [TAB]: /\t/,
+            [SPACE]: / /,
+            [COMMA]: /,/
         }[k];
 
         if (sep) { return sep; }
