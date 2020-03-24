@@ -3,7 +3,7 @@ import { task } from 'gulp';
 import * as path from 'path';
 
 import { generateExampleModule } from '../../example-module/generate-example-module';
-import { buildConfig } from '../../packages';
+import { buildConfig } from '../build-config';
 
 
 const {packagesDir} = buildConfig;

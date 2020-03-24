@@ -4,7 +4,7 @@ import { task, src, dest, series } from 'gulp';
 import * as path from 'path';
 
 import { apiDocsPackageConfig } from '../../dgeni/bin';
-import { buildConfig } from '../../packages';
+import { buildConfig } from '../build-config';
 
 
 const markdown = require('gulp-markdown');

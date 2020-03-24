@@ -18,7 +18,7 @@ publishPackage() {
     packageName=${1}
     packageRepo=${2}
 
-    buildDir="$(pwd)/dist/releases/${packageName}"
+    buildDir="$(pwd)/dist/${packageName}"
     buildVersion=$(node -pe "require('./package.json').version")
     branchName=$(git branch | sed -n '/\* /s///p' | awk -F'/' '{print $2}')
 

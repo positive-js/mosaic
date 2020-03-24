@@ -50,7 +50,7 @@ class PublishReleaseTask extends BaseReleaseTask {
             `https://github.com/${repositoryOwner}/${repositoryName}.git`));
 
         this.packageJsonPath = join(projectDir, 'package.json');
-        this.releaseOutputPath = join(projectDir, 'dist/releases');
+        this.releaseOutputPath = join(projectDir, 'dist');
 
         this.packageJson = JSON.parse(readFileSync(this.packageJsonPath, 'utf-8'));
         this.currentVersion = parseVersionName(this.packageJson.version);

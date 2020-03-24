@@ -3,7 +3,8 @@ import { task, dest, series, parallel } from 'gulp';
 import { join } from 'path';
 import { Bundler } from 'scss-bundle';
 
-import { buildConfig, buildScssPipeline } from '../../packages';
+import { buildConfig } from '../build-config';
+import { buildScssPipeline } from '../utils/build-scss-pipeline';
 
 
 const sourceDir = 'packages/mosaic';
