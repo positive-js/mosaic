@@ -1,4 +1,10 @@
+$mc-icons-font-path: "~@ptsecurity/mosaic-icons/dist/fonts";
 @import '~@ptsecurity/mosaic-icons/dist/styles/mc-icons';
 
 @import '../../mosaic/core/theming/prebuilt/default-theme';
 //@import '../../mosaic/core/theming/prebuilt/dark-theme';
+
+mc-tree-selection {
+    overflow-y: scroll;
+    height: 328px;
+}
