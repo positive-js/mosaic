@@ -54,7 +54,7 @@ export async function packager(options: IPackagerOptions, context: BuilderContex
         const packageJson = await tryJsonParse<IPackageJson>(
             join(context.workspaceRoot, 'package.json')
         );
-        console.log('context.workspaceRoot: ', context.workspaceRoot);
+
         const projectRoot =
             angularJson.projects &&
             angularJson.projects[project] &&
@@ -105,7 +105,6 @@ export async function packager(options: IPackagerOptions, context: BuilderContex
             options.ngVersionPlaceholder
         );
 
-        console.log(releasePackageJson);
         writeFileSync(
             join(libraryDestination, 'package.json'),
             // tslint:disable-next-line:no-magic-numbers
