@@ -8,7 +8,7 @@ import { McIconModule } from '@ptsecurity/mosaic/icon';
 @Component({
     selector: 'app',
     templateUrl: 'template.html',
-    styleUrls: ['styles.scss'],
+    styleUrls: ['../main.scss', 'styles.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class ButtonDemoComponent {}
@@ -26,4 +26,4 @@ export class ButtonDemoComponent {}
     entryComponents: [ ButtonDemoComponent ],
     bootstrap: [ ButtonDemoComponent ]
 })
-export class ButtonDemoModule {}
+export class DemoModule {}

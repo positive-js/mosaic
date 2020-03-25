@@ -7,4 +7,3 @@ platformBrowserDynamic()
     .bootstrapModule(DemoModule)
     // tslint:disable-next-line:no-console
     .catch((error) => console.error(error));
-

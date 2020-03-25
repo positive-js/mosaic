@@ -1,10 +1,10 @@
 {
     "extends": "../../../tsconfig.json",
     "compilerOptions": {
-        "outDir": "../../../dist/out-tsc"
+        "outDir": "../../dist/out-tsc"
     },
     "files": [
-        "main.ts",
+        "module.ts",
         "../polyfills.ts"
     ],
     "include": [

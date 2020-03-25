@@ -12,7 +12,7 @@ import { McLinkModule } from '../../mosaic/link';
 @Component({
     selector: 'app',
     templateUrl: './template.html',
-    styleUrls: ['./styles.scss'],
+    styleUrls: ['../main.scss', './styles.scss'],
     animations: [
         trigger('hideShowAnimator', [
             state('true' , style({ opacity: 1, display: '' })),

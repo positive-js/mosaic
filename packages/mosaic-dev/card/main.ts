@@ -1,10 +1,10 @@
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import { DemoModule } from './module';
+import { ButtonDemoModule } from './module';
 
 
 platformBrowserDynamic()
-    .bootstrapModule(DemoModule)
+    .bootstrapModule(ButtonDemoModule)
     // tslint:disable-next-line:no-console
     .catch((error) => console.error(error));
 
