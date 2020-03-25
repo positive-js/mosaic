@@ -4,6 +4,9 @@
 ### Multiple mode with checkboxes
 <!-- example(tree-multiple-checkbox) -->
 
+### Multiple mode with checkboxes with child selection
+<!-- example(tree-multiple-checklist) -->
+
 ### Multiple mode without checkboxes
 <!-- example(tree-multiple-keyboard) -->
 
