@@ -292,6 +292,12 @@ const DOCS: { [key: string]: DocCategory[] } = {
                     name: 'Tags list',
                     summary: '',
                     examples: ['tags-list-types']
+                },
+                {
+                    id: 'table',
+                    name: 'Table',
+                    summary: '',
+                    examples: ['table-types']
                 }
             ]
         },

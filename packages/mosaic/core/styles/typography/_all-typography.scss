@@ -24,6 +24,7 @@
 @import '../../../tree-select/tree-select-theme';
 @import '../../../tree/tree-theme';
 @import '../../../vertical-navbar/vertical-navbar-theme';
+@import '../../../table/table-theme';
 @import '../../option/option-theme';
 @import '../../option/optgroup-theme';
 
@@ -62,4 +63,5 @@
     @include mc-tree-select-typography($config);
     @include mc-tree-typography($config);
     @include mc-vertical-navbar-typography($config);
+    @include mc-table-typography($config);
 }

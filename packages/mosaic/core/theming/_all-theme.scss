@@ -23,6 +23,7 @@
 @import '../../sidepanel/sidepanel-theme';
 @import '../../splitter/splitter-theme';
 @import '../../splitter/splitter-theme';
+@import '../../table/table';
 @import '../../tabs/tabs-theme';
 @import '../../tags/tag-theme';
 @import '../../textarea/textarea-theme';
@@ -31,6 +32,7 @@
 @import '../../tree-select/tree-select-theme';
 @import '../../tree/tree-theme';
 @import '../../vertical-navbar/vertical-navbar-theme';
+@import '../../table/table-theme';
 @import '../option/option-theme';
 @import '../option/optgroup-theme';
 @import '../highlight/highlight-theme';
@@ -74,4 +76,5 @@
     @include mc-tree-theme($theme);
     @include mc-vertical-navbar-theme($theme);
     @include mc-highlight-theme($theme);
+    @include mc-table-theme($theme);
 }

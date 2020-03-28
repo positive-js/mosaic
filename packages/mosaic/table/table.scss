@@ -1,0 +1,43 @@
+.mc-table {
+    border-spacing: 0;
+
+    & > thead,
+    & > tbody,
+    & > tfoot {
+        & > tr {
+            & > th,
+            & > td {
+                padding: 8px 8px 7px;
+
+                vertical-align: baseline;
+                text-align: left;
+            }
+
+            & > th:first-child,
+            & > td:first-child {
+                padding-left: 16px;
+            }
+
+            & > th:last-child,
+            & > td:last-child {
+                padding-right: 16px;
+            }
+        }
+    }
+
+    & > thead {
+        & > tr > th {
+            padding-top: 8px;
+            padding-bottom: 7px;
+
+            border-bottom: 1px solid transparent;
+        }
+    }
+
+    & > tbody > tr {
+        & th,
+        & td {
+            border-bottom: 1px solid transparent;
+        }
+    }
+}
