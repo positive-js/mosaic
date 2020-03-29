@@ -10,7 +10,6 @@ import { map } from 'rxjs/operators';
     `,
     host: {
         class: 'mc-tree-node-toggle',
-        '(click)': 'toggle($event)',
         '[class.mc-disabled]': 'disabled',
         '[class.mc-opened]': 'iconState'
     },

@@ -19,7 +19,6 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { NodeDef, ViewData } from '@angular/core/esm2015/src/view';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import {
@@ -93,7 +92,9 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
 
     @ViewChild(CdkTreeNodeOutlet, { static: true }) nodeOutlet: CdkTreeNodeOutlet;
 
-    @ContentChildren(McTreeOption) renderedOptions: QueryList<T>;
+    @ContentChildren(McTreeOption, { descendants: true }) options: QueryList<T>;
+
+    renderedOptions = new QueryList<T>();
 
     keyManager: FocusKeyManager<T>;
 
@@ -178,6 +179,8 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
         return this.multipleMode === MultipleMode.CHECKBOX;
     }
 
+    private orderedValues: any[];
+
     private readonly destroy = new Subject<void>();
 
     private optionFocusSubscription: Subscription | null;
@@ -196,7 +199,7 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
         this.tabIndex = parseInt(tabIndex) || 0;
 
         if (multiple === MultipleMode.CHECKBOX || multiple === MultipleMode.KEYBOARD) {
-            this.multipleMode = multiple;
+            this.multipleMode = multiple as MultipleMode;
         } else if (multiple !== null) {
             this.multipleMode = MultipleMode.CHECKBOX;
         }
@@ -236,6 +239,21 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
             .subscribe(() => {
                 this.onChange(this.getSelectedValues());
 
+                this.renderedOptions.notifyOnChanges();
+            });
+
+        this.options.changes
+            .pipe(takeUntil(this.destroy))
+            .subscribe((options) => {
+                const orderedOptions = this.orderedValues.reduce((acc, value) => {
+                    return [...acc, options.find((option) => option.data === value)];
+                }, []);
+
+                this.updateScrollSize();
+
+                this.nodeOutlet.changeDetectorRef.detectChanges();
+
+                this.renderedOptions.reset(orderedOptions);
                 this.renderedOptions.notifyOnChanges();
             });
 
@@ -433,38 +451,7 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
     ): void {
         super.renderNodeChanges(data, dataDiffer, viewContainer, parentData);
 
-        const arrayOfInstances = [];
-        const changeDetectorRefs: any[] = [];
-
-        viewContainer._embeddedViews.forEach((view: ViewData) => {
-            const viewDef = view.def;
-
-            viewDef.nodes.forEach((node: NodeDef) => {
-                if (viewDef.nodeMatchedQueries === node.matchedQueryIds) {
-                    const nodeData: any = view.nodes[node.nodeIndex];
-
-                    arrayOfInstances.push(nodeData.instance as never);
-                    changeDetectorRefs.push(nodeData.instance.changeDetectorRef);
-                }
-            });
-        });
-
-        setTimeout(() => {
-            changeDetectorRefs.forEach((changeDetectorRef) => {
-                if (!changeDetectorRef.destroyed) {
-                    changeDetectorRef.detectChanges();
-                }
-            });
-        });
-
-        if (this.renderedOptions) {
-            this.renderedOptions.reset(arrayOfInstances);
-            this.renderedOptions.notifyOnChanges();
-        }
-
-        this.updateScrollSize();
-
-        this.nodeOutlet.changeDetectorRef.detectChanges();
+        this.orderedValues = data;
     }
 
     getHeight(): number {
@@ -494,7 +481,7 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
             throw getMcSelectNonArrayValueError();
         }
 
-        if (this.renderedOptions) {
+        if (this.options) {
             this.setOptionsFromValues(this.multiple ? value : [value]);
         }
     }
