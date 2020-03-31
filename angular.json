@@ -650,6 +650,47 @@
                     }
                 }
             }
+        },
+        "dev-tree-select": {
+            "projectType": "application",
+            "root": "packages/mosaic-dev/tree-select",
+            "sourceRoot": "packages/mosaic-dev/tree-select",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/mosaic-dev/tree-select",
+                        "tsConfig": "packages/mosaic-dev/tree-select/tsconfig.app.json",
+                        "index": "packages/mosaic-dev/index.html",
+                        "main": "packages/mosaic-dev/tree-select/main.ts",
+                        "aot": true,
+                        "polyfills": "packages/mosaic-dev/polyfills.ts"
+                    },
+                    "configurations": {
+                        "production": {
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "vendorChunk": false,
+                            "statsJson": true
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "dev-tree-select:build"
+                    }
+                }
+            }
         }
 
     },

@@ -96,7 +96,7 @@ export const DATA_OBJECT = {
 @Component({
     selector: 'app',
     templateUrl: './template.html',
-    styleUrls: ['./styles.scss'],
+    styleUrls: ['../main.scss', './styles.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent {

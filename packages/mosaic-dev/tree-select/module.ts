@@ -2,7 +2,6 @@
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CdkTreeModule, FlatTreeControl } from '@ptsecurity/cdk/tree';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
@@ -96,8 +95,8 @@ export const DATA_OBJECT = {
 
 @Component({
     selector: 'app',
-    template: require('./template.html'),
-    styleUrls: ['./styles.scss'],
+    templateUrl: './template.html',
+    styleUrls: ['../main.scss', './styles.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent {
@@ -141,7 +140,7 @@ export class DemoComponent {
 
     onSelectionChange($event: McTreeSelectChange) {
         console.log(`onSelectionChange: ${$event.value}`);
-        const treeSelect = $event.source;
+        // const treeSelect = $event.source;
 
         // if ($event.value.selected) {
         //     treeSelect.selectionModel.select(...treeSelect.tree.treeControl.getDescendants($event.value.data));
@@ -211,8 +210,3 @@ export class DemoComponent {
     ]
 })
 export class DemoModule {}
-
-platformBrowserDynamic()
-    .bootstrapModule(DemoModule)
-    .catch((error) => console.error(error));
-
