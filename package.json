@@ -202,6 +202,7 @@
         "server-dev:sidebar": "npm run server-dev -- --env.component sidebar",
         "server-dev:sidepanel": "npm run server-dev -- --env.component sidepanel",
         "server-dev:splitter": "npm run server-dev -- --env.component splitter",
+        "server-dev:table": "npm run server-dev -- --env.component table",
         "server-dev:tabs": "npm run server-dev -- --env.component tabs",
         "server-dev:tags": "npm run server-dev -- --env.component tags",
         "server-dev:textarea": "npm run server-dev -- --env.component textarea",
