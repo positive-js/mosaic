@@ -75,7 +75,7 @@
 
             & .mc-radio-button__inner-circle {
                 border-color: map-get($background, background-disabled);
-                background: map-get($foreground, icon);
+                background: map-get($foreground, text-disabled);
             }
         }
     }
