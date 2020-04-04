@@ -119,11 +119,11 @@
     },
     "scripts": {
         "ng": "ng",
-        "valid:lic": "gulp validate-licenses",
+        "valid:lic": "ts-node --project ./tools/validate-licenses/tsconfig.json ./tools/validate-licenses/validate-licenses.ts",
         "build:cdk": "ng build cdk",
         "build:mosaic-moment-adapter": "ng build mosaic-moment-adapter",
         "build:mosaic": "ng build mosaic",
-        "build:mosaic-examples-module": "gulp build-examples-module",
+        "build:mosaic-examples-module": "ts-node --project ./tools/example-module/tsconfig.json ./tools/example-module/index.ts",
         "build:mosaic-examples": "ng build mosaic-examples",
         "build:docs": "gulp docs",
         "styles:built-all": "gulp styles:built-all",

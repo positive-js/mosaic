@@ -1,6 +1,3 @@
-import { task } from 'gulp';
-
-
 /* tslint:disable:no-var-requires */
 const path = require('path');
 const spdxSatisfies = require('spdx-satisfies');
@@ -86,7 +83,7 @@ const enum ReturnCode {
 export function validateLicense(): Promise<number> {
 
     return new Promise<number>((resolve) => {
-        checker.init({start: path.join(__dirname, '../../../')}, (err: Error, json: any) => {
+        checker.init({start: path.join(__dirname, '../../')}, (err: Error, json: any) => {
             if (err) {
                 console.error(`Something happened:\n${err.message}`);
                 resolve(ReturnCode.Error);
@@ -126,7 +123,4 @@ export function validateLicense(): Promise<number> {
 
 }
 
-task('validate-licenses', async () => {
-
-    await validateLicense();
-});
+validateLicense();
