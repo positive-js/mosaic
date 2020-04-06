@@ -2,7 +2,7 @@
 ## Development Setup
 1. generate basic module
 ```bash
-npx gulp build-examples-module
+yarn run build:mosaic-examples-module
 ```
 
 2. generate dynamic examples (for Stackblitz)

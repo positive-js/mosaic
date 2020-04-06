@@ -154,7 +154,6 @@ task('copy-stackblitz-examples', () => {
 task('docs', series(
         'markdown-docs-mosaic',
         'build-highlighted-examples',
-        'build-examples-module',
         'api-docs',
         'copy-stackblitz-examples'
     )
