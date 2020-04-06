@@ -45,12 +45,12 @@
 @mixin cdk-high-contrast($target: active, $encapsulation: 'any') {
     @if ($target != 'active' and $target != 'black-on-white' and $target != 'white-on-black') {
         @error 'Unknown cdk-high-contrast value "#{$target}" provided. ' +
-           'Allowed values are "active", "black-on-white", and "white-on-black"';
+            'Allowed values are "active", "black-on-white", and "white-on-black"';
     }
 
     @if ($encapsulation != 'on' and $encapsulation != 'off' and $encapsulation != 'any') {
         @error 'Unknown cdk-high-contrast encapsulation "#{$encapsulation}" provided. ' +
-           'Allowed values are "on", "off", and "any"';
+            'Allowed values are "on", "off", and "any"';
     }
 
     // If the selector context has multiple parts, such as `.section, .region`, just doing

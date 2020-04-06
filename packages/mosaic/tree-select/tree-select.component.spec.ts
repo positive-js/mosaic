@@ -2240,7 +2240,7 @@ describe('McTreeSelect', () => {
                 fixture.detectChanges();
                 flush();
 
-                let options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-tree-option');
+                const options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-tree-option');
 
                 options[0].click();
                 fixture.detectChanges();

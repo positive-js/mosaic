@@ -10,15 +10,37 @@ const styleGlobs = [
     '--syntax', 'scss'
 ];
 
-const tsLintBaseFlags = ['-c', 'tslint.json', '--project', './tsconfig.json'];
+const tsLintBaseFlags = [
+    '--config', 'tslint.json',
+    '--project', './tsconfig.json'
+];
 
-task('tslint', execNodeTask('tslint', tsLintBaseFlags));
-task('tslint:json', execNodeTask('tslint',
-    [...tsLintBaseFlags, '--format', 'json', '--out', './dist/reports/tslint.json']));
+task('tslint',
+    execNodeTask(
+        'tslint',
+        tsLintBaseFlags
+    )
+);
 
-task('stylelint', execNodeTask('stylelint', [...styleGlobs]));
+task('tslint:json',
+    execNodeTask(
+        'tslint',
+        [...tsLintBaseFlags, '--format', 'json', '--out', './dist/reports/tslint.json']
+    )
+);
 
-task('stylelint:json', execNodeTask('stylelint',
-    [...styleGlobs, '-f', 'json', '--output-file', './dist/reports/stylelint.json']));
+task('stylelint',
+    execNodeTask(
+        'stylelint',
+        [...styleGlobs]
+    )
+);
+
+task('stylelint:json',
+    execNodeTask(
+        'stylelint',
+        [...styleGlobs, '-f', 'json', '--output-file', './dist/reports/stylelint.json']
+    )
+);
 
 task('tslint:fix', execNodeTask('tslint', [...tsLintBaseFlags, '--fix']));
