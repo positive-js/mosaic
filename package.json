@@ -181,7 +181,7 @@
         "server-dev:theme-picker": "ng serve dev-theme-picker",
         "server-dev:tree": "ng serve dev-tree",
         "server-dev:tree-select": "ng serve dev-tree-select",
-        "server-dev:typography": "ng serve dev-typography",
+        "server-dev:typography": "ngx` serve dev-typography",
         "server-dev:tooltip": "ng serve dev-tooltip",
         "server-dev:timepicker": "ng serve dev-timepicker",
         "server-dev:validation": "ng serve dev-validation",
