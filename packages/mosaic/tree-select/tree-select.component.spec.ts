@@ -69,10 +69,9 @@ import {
     McTreeFlatDataSource,
     McTreeFlattener,
     McTreeModule,
-    McTreeOption,
-    McTreeSelectionChange
+    McTreeOption
 } from '@ptsecurity/mosaic/tree';
-import { Observable, of as observableOf, Subject, Subscription } from 'rxjs';
+import { Observable, of as observableOf, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 
@@ -356,21 +355,13 @@ class ManySelects {
     template: `
         <div *ngIf="isShowing">
             <mc-form-field>
-                <mc-tree-select
-                    placeholder="Food I want to eat right now"
-                    [formControl]="control">
-
-                    <mc-tree-selection
-                        [dataSource]="dataSource"
-                        [treeControl]="treeControl">
-
+                <mc-tree-select placeholder="Food I want to eat right now" [formControl]="control">
+                    <mc-tree-selection [dataSource]="dataSource" [treeControl]="treeControl">
                         <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
                             {{ treeControl.getViewValue(node) }}
                         </mc-tree-option>
 
-                        <mc-tree-option
-                                                        *mcTreeNodeDef="let node; when: hasChild"
-                            mcTreeNodePadding>
+                        <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
                             <i mc-icon="mc-angle-S_16" mcTreeNodeToggle></i>
                             {{ treeControl.getViewValue(node) }}
                         </mc-tree-option>
@@ -1962,6 +1953,8 @@ describe('McTreeSelect', () => {
             }));
 
             it('should close the panel when an item is clicked', fakeAsync(() => {
+                expect(fixture.componentInstance.select.panelOpen).toBe(false);
+
                 trigger.click();
                 fixture.detectChanges();
                 flush();
@@ -2215,28 +2208,28 @@ describe('McTreeSelect', () => {
                 expect(fixture.componentInstance.select.selected).toBe(optionInstances[1]);
             }));
 
-            it('should deselect other options when one is selected', fakeAsync(() => {
+            it('should deselect other option when one is selected', fakeAsync(() => {
                 trigger.click();
                 fixture.detectChanges();
-                flush();
 
-                let options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-tree-option');
+                const options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-tree-option');
 
                 options[0].click();
                 fixture.detectChanges();
                 flush();
 
                 trigger.click();
+                options[1].click();
                 fixture.detectChanges();
                 flush();
 
-                options = overlayContainerElement.querySelectorAll('mc-tree-option');
-                expect(options[1].classList).not.toContain('mc-selected');
-                expect(options[2].classList).not.toContain('mc-selected');
+                trigger.click();
+                fixture.detectChanges();
+                flush();
 
                 const optionInstances = fixture.componentInstance.options.toArray();
-                expect(optionInstances[1].selected).toBe(false);
-                expect(optionInstances[2].selected).toBe(false);
+                expect(optionInstances[0].selected).toBe(false);
+                expect(optionInstances[1].selected).toBe(true);
             }));
 
             it('should deselect other options when one is programmatically selected', fakeAsync(() => {
@@ -2259,13 +2252,6 @@ describe('McTreeSelect', () => {
                 trigger.click();
                 fixture.detectChanges();
                 flush();
-
-                options = overlayContainerElement.querySelectorAll('mc-tree-option');
-
-                expect(options[0].classList)
-                    .not.toContain('mc-selected', 'Expected first option to no longer be selected');
-                expect(options[1].classList)
-                    .toContain('mc-selected', 'Expected second option to be selected');
 
                 const optionInstances = fixture.componentInstance.options.toArray();
 
@@ -2379,54 +2365,6 @@ describe('McTreeSelect', () => {
             it('should not throw if triggerValue accessed with no selected value', fakeAsync(() => {
                 expect(() => fixture.componentInstance.select.triggerValue).not.toThrow();
             }));
-
-            xit('should emit to `optionSelectionChanges` when an option is selected', fakeAsync(() => {
-                trigger.click();
-                fixture.detectChanges();
-                flush();
-
-                const spy = jasmine.createSpy('option selection spy');
-                const subscription = fixture.componentInstance.select.optionSelectionChanges.subscribe(spy);
-                const option = overlayContainerElement.querySelector('mc-tree-option') as HTMLElement;
-                option.click();
-                fixture.detectChanges();
-                flush();
-
-                expect(spy).toHaveBeenCalledWith(jasmine.any(McTreeSelectionChange));
-
-                subscription.unsubscribe();
-            }));
-
-            xit('should handle accessing `optionSelectionChanges` before the options are initialized',
-                fakeAsync(() => {
-                    fixture.destroy();
-                    fixture = TestBed.createComponent(BasicTreeSelect);
-
-                    const spy = jasmine.createSpy('option selection spy');
-                    let subscription: Subscription;
-
-                    expect(fixture.componentInstance.select.options).toBeFalsy();
-                    expect(() => {
-                        subscription = fixture.componentInstance.select.optionSelectionChanges.subscribe(spy);
-                    }).not.toThrow();
-
-                    fixture.detectChanges();
-                    trigger = fixture.debugElement.query(By.css('.mc-tree-select__trigger')).nativeElement;
-
-                    trigger.click();
-                    fixture.detectChanges();
-                    flush();
-
-                    const option = overlayContainerElement.querySelector('mc-tree-option') as HTMLElement;
-                    option.click();
-                    fixture.detectChanges();
-                    flush();
-
-                    expect(spy).toHaveBeenCalledWith(jasmine.any(McTreeSelectionChange));
-
-                    /* tslint:disable-next-line:no-unnecessary-type-assertion */
-                    subscription!.unsubscribe();
-                }));
         });
 
         describe('forms integration', () => {
@@ -2454,10 +2392,8 @@ describe('McTreeSelect', () => {
                 fixture.detectChanges();
                 flush();
 
-                const options = overlayContainerElement.querySelectorAll('mc-tree-option');
-                expect(options[0].classList)
-                    .toContain('mc-selected',
-                        `Expected option with the control's initial value to be selected.`);
+                const optionInstances = fixture.componentInstance.options.toArray();
+                expect(optionInstances[0].selected).toBe(true);
             }));
 
             it('should set the view value from the form', fakeAsync(() => {
@@ -2475,9 +2411,8 @@ describe('McTreeSelect', () => {
                 fixture.detectChanges();
                 flush();
 
-                const options = overlayContainerElement.querySelectorAll('mc-tree-option');
-                expect(options[0].classList).toContain(
-                    'mc-selected', `Expected option with the control's new value to be selected.`);
+                const optionInstances = fixture.componentInstance.options.toArray();
+                expect(optionInstances[0].selected).toBe(true);
             }));
 
             it('should update the form value when the view changes', fakeAsync(() => {
@@ -2878,9 +2813,8 @@ describe('McTreeSelect', () => {
     describe('with ngIf', () => {
         beforeEach(async(() => configureMcTreeSelectTestingModule([NgIfSelect])));
 
-        it('should handle nesting in an ngIf', fakeAsync(() => {
+        it('should handle nesting in an ngIf', () => {
             const fixture = TestBed.createComponent(NgIfSelect);
-            fixture.detectChanges();
 
             fixture.componentInstance.isShowing = true;
             fixture.detectChanges();
@@ -2890,7 +2824,6 @@ describe('McTreeSelect', () => {
 
             trigger.click();
             fixture.detectChanges();
-            flush();
 
             // todo fix
             // const value = fixture.debugElement.query(By.css('.mc-tree-select__matcher'));
@@ -2904,7 +2837,7 @@ describe('McTreeSelect', () => {
             expect(overlayContainerElement.textContent).toContain('rootNode_1');
             expect(overlayContainerElement.textContent).toContain('Pictures');
             expect(overlayContainerElement.textContent).toContain('Documents');
-        }));
+        });
     });
 
     describe('with multiple mc-select elements in one view', () => {
@@ -4404,12 +4337,7 @@ describe('McTreeSelect', () => {
             fixture.detectChanges();
             flush();
 
-            const optionNodes = overlayContainerElement.querySelectorAll('mc-tree-option');
-
             const optionInstances = testInstance.options.toArray();
-
-            expect(optionNodes[0].classList).toContain('mc-selected');
-            expect(optionNodes[4].classList).toContain('mc-selected');
 
             expect(optionInstances[0].selected).toBe(true);
             expect(optionInstances[4].selected).toBe(true);
@@ -4423,15 +4351,18 @@ describe('McTreeSelect', () => {
 
             options[0].click();
             fixture.detectChanges();
+            flush();
 
-            expect(options[0].classList).toContain('mc-selected');
+            const optionInstances = testInstance.options.toArray();
+
+            expect(optionInstances[0].selected).toBe(true);
 
             testInstance.control.setValue(['Applications']);
             fixture.detectChanges();
             flush();
 
-            expect(options[0].classList).not.toContain('mc-selected');
-            expect(options[4].classList).toContain('mc-selected');
+            expect(optionInstances[0].selected).toBe(false);
+            expect(optionInstances[4].selected).toBe(true);
         }));
 
         it('should not close the panel when clicking on options', fakeAsync(() => {

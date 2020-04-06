@@ -1,6 +1,6 @@
 /* tslint:disable:no-magic-numbers max-func-body-length no-reserved-keywords */
 import { Component, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, flush, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { createMouseEvent, dispatchEvent } from '@ptsecurity/cdk/testing';
 import { FlatTreeControl } from '@ptsecurity/cdk/tree';
@@ -305,12 +305,15 @@ describe('McTreeSelection', () => {
 
                     dispatchEvent(nodes[0], event);
                     fixture.detectChanges();
+                    flush();
 
                     dispatchEvent(nodes[2], event);
                     fixture.detectChanges();
+                    flush();
 
                     dispatchEvent(nodes[4], event);
                     fixture.detectChanges();
+                    flush();
                     component.tree.keyManager.setActiveItem(4);
 
                     expect(component.modelValue.length).toBe(3);

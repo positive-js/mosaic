@@ -95,17 +95,18 @@ export const DATA_OBJECT = {
 
 @Component({
     selector: 'app',
-    templateUrl: './template.html',
+    templateUrl: 'template.html',
     styleUrls: ['../main.scss', './styles.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent {
     disabledState: boolean = false;
+    ifValue: boolean = false;
 
     control = new FormControl(['rootNode_1']);
 
     // modelValue = 'Chrome';
-    modelValue: any[] = ['Applications', 'Documents', 'Calendar', 'Chrome'];
+    modelValue: any[] | null = ['Applications', 'Documents', 'Calendar', 'Chrome'];
 
     select: any;
 

@@ -37,7 +37,6 @@ export class McTreeNodeToggleComponent<T> extends CdkTreeNodeToggle<T> {
 @Directive({
     selector: '[mcTreeNodeToggle]',
     host: {
-        '(click)': 'toggle($event)',
         '[class.mc-disabled]': 'disabled'
     },
     providers: [{ provide: CdkTreeNodeToggle, useExisting: McTreeNodeToggleDirective }]

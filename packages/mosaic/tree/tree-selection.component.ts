@@ -180,6 +180,7 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
     }
 
     private orderedValues: any[];
+    private orderedOptions: any[];
 
     private readonly destroy = new Subject<void>();
 
@@ -239,7 +240,9 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
             .subscribe(() => {
                 this.onChange(this.getSelectedValues());
 
-                this.renderedOptions.notifyOnChanges();
+                if (this.renderedOptions.length) {
+                    this.renderedOptions.notifyOnChanges();
+                }
             });
 
         this.options.changes
@@ -249,29 +252,44 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
                     return [...acc, options.find((option) => option.data === value)];
                 }, []);
 
+                if (this.orderedOptions && (this.orderedOptions.length === orderedOptions.length)) {
+                    return;
+                }
+
                 this.updateScrollSize();
 
-                this.nodeOutlet.changeDetectorRef.detectChanges();
+                // this.nodeOutlet.changeDetectorRef.detectChanges();
 
+                this.orderedOptions = orderedOptions;
                 this.renderedOptions.reset(orderedOptions);
                 this.renderedOptions.notifyOnChanges();
+
             });
 
         this.renderedOptions.changes
             .pipe(takeUntil(this.destroy))
             .subscribe((options) => {
+                Promise.resolve().then(() => {
+                    options.forEach((option) => option.detectChanges());
+
+                    // Check to see if we need to update our tab index
+                    this.updateTabIndex();
+                });
+
                 this.resetOptions();
 
-                // Check to see if we need to update our tab index
-                this.updateTabIndex();
-
+                const selected = this.getSelectedValues();
                 // todo need to do optimisation
                 options.forEach((option) => {
-                    option.deselect();
+                    if (!selected.includes(option.value)) {
+                        option.deselect();
+                    }
 
-                    this.getSelectedValues().forEach((selectedValue) => {
+                    selected.forEach((selectedValue) => {
                         if (option.value === selectedValue) {
-                            option.select();
+                            Promise.resolve().then(() => {
+                                option.select();
+                            });
                         }
                     });
                 });
