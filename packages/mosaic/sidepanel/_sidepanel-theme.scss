@@ -55,7 +55,6 @@
     }
 
     .mc-sidepanel-footer {
-        border-top: 1px solid $divider-color;
         background-color: map-get($popup-common, footer_background-color);
     }
 }
