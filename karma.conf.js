@@ -26,6 +26,10 @@ module.exports = () => {
 
         reporters: ['dots', 'junit'],
 
+        files: [
+            { pattern: '../../dist/mosaic/prebuilt-themes/default-theme.css', included: true, watched: true },
+        ],
+
         port: 9876,
         colors: true,
         logLevel: constants.LOG_INFO,
@@ -52,6 +56,7 @@ module.exports = () => {
             'ChromeHeadlessLocal': {
                 'base': 'ChromeHeadless',
                 'flags': [
+                    '--window-size=1024,768',
                     '--no-sandbox'
                 ],
                 'debug': true
