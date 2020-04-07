@@ -548,7 +548,7 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
         if (this._tabIndex !== -1) {
             this._tabIndex = -1;
 
-            setTimeout(() => {
+            Promise.resolve().then(() => {
                 this._tabIndex = this.userTabIndex || 0;
                 this.changeDetectorRef.markForCheck();
             });

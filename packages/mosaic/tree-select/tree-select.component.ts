@@ -524,10 +524,10 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
 
         this.tags.changes
             .subscribe(() => {
-                setTimeout(() => this.calculateHiddenItems(), 0);
+                Promise.resolve().then(() => this.calculateHiddenItems());
             });
 
-        setTimeout(() => this.calculateHiddenItems(), 0);
+        Promise.resolve().then(() => this.calculateHiddenItems());
     }
 
     ngDoCheck() {
@@ -609,7 +609,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
 
         this._panelOpen = true;
 
-        setTimeout(() => this.highlightCorrectOption());
+        Promise.resolve().then(() => this.highlightCorrectOption());
 
         this.changeDetectorRef.markForCheck();
 
@@ -632,7 +632,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         this.changeDetectorRef.markForCheck();
         this.onTouched();
 
-        setTimeout(() => this.focus(), 0);
+        Promise.resolve().then(() => this.focus());
     }
 
     /**

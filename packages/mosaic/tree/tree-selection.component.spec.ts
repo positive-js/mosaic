@@ -64,6 +64,7 @@ describe('McTreeSelection', () => {
             beforeEach(() => {
                 configureMcTreeTestingModule([McTreeAppWithToggle]);
                 fixture = TestBed.createComponent(McTreeAppWithToggle);
+                fixture.detectChanges();
 
                 component = fixture.componentInstance;
                 treeElement = fixture.nativeElement.querySelector('mc-tree-selection');
@@ -71,13 +72,11 @@ describe('McTreeSelection', () => {
                 fixture.detectChanges();
             });
 
-            it('should expand/collapse the node', () => {
+            it('should expand/collapse the node', fakeAsync(() => {
                 expect(component.treeData.length).toBe(5);
 
                 expect(component.treeControl.expansionModel.selected.length)
                     .toBe(0, `Expect no expanded node`);
-
-                component.toggleRecursively = false;
 
                 expectFlatTreeToMatch(
                     treeElement,
@@ -87,6 +86,7 @@ describe('McTreeSelection', () => {
 
                 (getNodes(treeElement)[1].querySelectorAll('mc-tree-node-toggle')[0] as HTMLElement).click();
                 fixture.detectChanges();
+                flush();
 
                 expect(component.treeControl.expansionModel.selected.length)
                     .toBe(1, `Expect node expanded one level`);
@@ -105,6 +105,7 @@ describe('McTreeSelection', () => {
 
                 (getNodes(treeElement)[5].querySelectorAll('mc-tree-node-toggle')[0] as HTMLElement).click();
                 fixture.detectChanges();
+                flush();
 
                 expect(component.treeControl.expansionModel.selected.length).toBe(2, `Expect node expanded`);
                 expectFlatTreeToMatch(
@@ -125,6 +126,7 @@ describe('McTreeSelection', () => {
 
                 (getNodes(treeElement)[5].querySelectorAll('mc-tree-node-toggle')[0] as HTMLElement).click();
                 fixture.detectChanges();
+                flush();
 
                 expectFlatTreeToMatch(
                     treeElement,
@@ -138,7 +140,7 @@ describe('McTreeSelection', () => {
                     [`Downloads`],
                     [`Applications`]
                 );
-            });
+            }));
         });
 
         describe('with multipleMode is CTRL', () => {
@@ -246,11 +248,11 @@ describe('McTreeSelection', () => {
             });
 
             describe('when shift is pressed', () => {
-                it('should select nodes', fakeAsync(() => {
+                it('should select nodes', () => {
+                    fixture.detectChanges();
                     expect(component.modelValue.length).toBe(0);
 
                     const nodes = getNodes(treeElement);
-
                     const event = createMouseEvent('click');
 
                     (nodes[0] as HTMLElement).focus();
@@ -263,12 +265,12 @@ describe('McTreeSelection', () => {
 
                     targetNode.focus();
                     dispatchEvent(targetNode, event);
-                    fixture.detectChanges();
 
                     expect(component.modelValue.length).toBe(4);
-                }));
+                });
 
                 it('should deselect nodes', fakeAsync(() => {
+                    fixture.detectChanges();
                     expect(component.modelValue.length).toBe(0);
 
                     const nodes = getNodes(treeElement);
@@ -608,7 +610,6 @@ class SimpleMcTreeApp {
 })
 class McTreeAppMultiple {
     modelValue = [];
-    toggleRecursively: boolean = true;
     treeControl: FlatTreeControl<FileFlatNode>;
     treeFlattener: McTreeFlattener<FileNode, FileFlatNode>;
 
@@ -674,7 +675,6 @@ class McTreeAppMultiple {
     `
 })
 class McTreeAppWithToggle {
-    toggleRecursively: boolean = true;
     treeControl: FlatTreeControl<FileFlatNode>;
     treeFlattener: McTreeFlattener<FileNode, FileFlatNode>;
 

@@ -11,7 +11,8 @@ import { map } from 'rxjs/operators';
     host: {
         class: 'mc-tree-node-toggle',
         '[class.mc-disabled]': 'disabled',
-        '[class.mc-opened]': 'iconState'
+        '[class.mc-opened]': 'iconState',
+        '(click)': 'toggle($event)'
     },
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: CdkTreeNodeToggle, useExisting: McTreeNodeToggleComponent }]
