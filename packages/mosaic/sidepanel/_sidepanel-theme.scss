@@ -5,6 +5,7 @@
 @mixin mc-sidepanel-theme($theme) {
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
+    $is-dark: map-get($theme, is-dark);
 
     $divider-color: mc-color($foreground, divider);
 
@@ -55,6 +56,7 @@
     }
 
     .mc-sidepanel-footer {
+        border-top: 1px solid  if($is-dark, $divider-color, transparent);
         background-color: map-get($popup-common, footer_background-color);
     }
 }

@@ -6,12 +6,14 @@
 
 @mixin mc-popover-theme($theme) {
     $foreground: map-get($theme, foreground);
+    $is-dark: map-get($theme, is-dark);
 
     $popover: map-get(map-get($theme, components), popover);
 
     $background-color: map-get($popover, background-color);
     $footer_background-color: map-get($popover, footer_background-color);
     $border-color: map-get($popover, border-color);
+    $divider-color: map-get($foreground, divider);
 
     .mc-popover {
         border-color: $border-color;
@@ -24,7 +26,7 @@
     }
 
     .mc-popover__header {
-        border-bottom-color: map-get($foreground, divider);
+        border-bottom-color: $divider-color;
     }
 
     .mc-popover__header,
@@ -34,6 +36,7 @@
 
     .mc-popover__footer {
         background-color: $footer_background-color;
+        border-top-color: if($is-dark, $divider-color, transparent);
     }
 
     .mc-popover .mc-popover__arrow {
