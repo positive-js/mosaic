@@ -55,6 +55,7 @@
             "@ptsecurity/mosaic/sidebar": ["packages/mosaic/sidebar/index.ts"],
             "@ptsecurity/mosaic/sidepanel": ["packages/mosaic/sidepanel/index.ts"],
             "@ptsecurity/mosaic/splitter": ["packages/mosaic/splitter/index.ts"],
+            "@ptsecurity/mosaic/table": ["packages/mosaic/table/index.ts"],
             "@ptsecurity/mosaic/tabs": ["packages/mosaic/tabs/index.ts"],
             "@ptsecurity/mosaic/tags": ["packages/mosaic/tags/index.ts"],
             "@ptsecurity/mosaic/textarea": ["packages/mosaic/textarea/index.ts"],

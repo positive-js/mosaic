@@ -164,7 +164,7 @@ function syncComponentsVersion(
     return newPackageJson;
 }
 
-// tslint:disable
+
 function syncNgVersion(
     releaseJson: IPackageJson,
     rootPackageJson: IPackageJson,
@@ -180,7 +180,6 @@ function syncNgVersion(
 
     return updatedJson;
 }
-// tslint:enable
 
 async function tryJsonParse<T>(path: string): Promise<T> {
     try {

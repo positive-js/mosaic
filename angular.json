@@ -51,6 +51,31 @@
                         "scripts": []
                     },
                     "configurations": {
+                        "development": {
+                            "tsConfig": "packages/docs/tsconfig.dev.json",
+                            "fileReplacements": [
+                                {
+                                    "replace": "packages/docs/src/environments/environment.ts",
+                                    "with": "packages/docs/src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "aot": true,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "2mb",
+                                    "maximumError": "5mb"
+                                }
+                            ]
+                        },
                         "production": {
                             "tsConfig": "packages/docs/tsconfig.aot.json",
                             "fileReplacements": [
@@ -84,6 +109,9 @@
                         "browserTarget": "mosaic-docs:build"
                     },
                     "configurations": {
+                        "development": {
+                            "browserTarget": "mosaic-docs:build:development"
+                        },
                         "production": {
                             "browserTarget": "mosaic-docs:build:production"
                         }
