@@ -37,4 +37,4 @@ export class InputDemoComponent {
         InputDemoComponent
     ]
 })
-export class InputDemoModule {}
+export class DemoModule {}

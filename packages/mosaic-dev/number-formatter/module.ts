@@ -3,8 +3,7 @@
 import { Component, Inject, Input, NgModule, Optional, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { MC_LOCALE_ID, McFormattersModule } from '@ptsecurity/mosaic/core/formatters';
+import { MC_LOCALE_ID, McFormattersModule } from '@ptsecurity/mosaic/core';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
@@ -12,8 +11,8 @@ import { McInputModule } from '@ptsecurity/mosaic/input';
 
 @Component({
     selector: 'app',
-    template: require('./demo-template.html'),
-    styleUrls: ['./styles.scss'],
+    templateUrl: './demo-template.html',
+    styleUrls: ['../main.scss', './styles.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent {
@@ -23,7 +22,7 @@ export class DemoComponent {
 
 @Component({
     selector: 'ru-locale',
-    template: require('./formatters-template.html'),
+    templateUrl: './formatters-template.html',
     encapsulation: ViewEncapsulation.None
 })
 export class WithRULocaleComponent {
@@ -36,7 +35,7 @@ export class WithRULocaleComponent {
 
 @Component({
     selector: 'en-locale',
-    template: require('./formatters-template.html'),
+    templateUrl: './formatters-template.html',
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: MC_LOCALE_ID, useValue: 'en' }]
 })
@@ -67,9 +66,4 @@ export class WithENLocaleComponent {
         DemoComponent
     ]
 })
-export class FormattersDemoModule {}
-
-platformBrowserDynamic()
-    .bootstrapModule(FormattersDemoModule)
-    .catch((error) => console.error(error));
-
+export class DemoModule {}

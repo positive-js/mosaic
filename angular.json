@@ -527,47 +527,6 @@
                 }
             }
         },
-        "dev-date-formatter": {
-            "projectType": "application",
-            "root": "packages/mosaic-dev/date-formatter",
-            "sourceRoot": "packages/mosaic-dev/date-formatter",
-            "architect": {
-                "build": {
-                    "builder": "@angular-devkit/build-angular:browser",
-                    "options": {
-                        "outputPath": "dist/mosaic-dev/date-formatter",
-                        "tsConfig": "packages/mosaic-dev/date-formatter/tsconfig.app.json",
-                        "index": "packages/mosaic-dev/index.html",
-                        "main": "packages/mosaic-dev/date-formatter/main.ts",
-                        "aot": true,
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    }
-                },
-                "serve": {
-                    "builder": "@angular-devkit/build-angular:dev-server",
-                    "options": {
-                        "browserTarget": "dev-date-formatter:build"
-                    }
-                }
-            }
-        },
         "dev-checkbox": {
             "projectType": "application",
             "root": "packages/mosaic-dev/checkbox",
@@ -609,6 +568,211 @@
                 }
             }
         },
+        "dev-date-formatter": {
+            "projectType": "application",
+            "root": "packages/mosaic-dev/date-formatter",
+            "sourceRoot": "packages/mosaic-dev/date-formatter",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/mosaic-dev/date-formatter",
+                        "tsConfig": "packages/mosaic-dev/date-formatter/tsconfig.app.json",
+                        "index": "packages/mosaic-dev/index.html",
+                        "main": "packages/mosaic-dev/date-formatter/main.ts",
+                        "aot": true,
+                        "polyfills": "packages/mosaic-dev/polyfills.ts"
+                    },
+                    "configurations": {
+                        "production": {
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "vendorChunk": false,
+                            "statsJson": true
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "dev-date-formatter:build"
+                    }
+                }
+            }
+        },
+        "dev-datepicker": {
+            "projectType": "application",
+            "root": "packages/mosaic-dev/datepicker",
+            "sourceRoot": "packages/mosaic-dev/datepicker",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/mosaic-dev/datepicker",
+                        "tsConfig": "packages/mosaic-dev/datepicker/tsconfig.app.json",
+                        "index": "packages/mosaic-dev/index.html",
+                        "main": "packages/mosaic-dev/datepicker/main.ts",
+                        "aot": true,
+                        "polyfills": "packages/mosaic-dev/polyfills.ts"
+                    },
+                    "configurations": {
+                        "production": {
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "vendorChunk": false,
+                            "statsJson": true
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "dev-datepicker:build"
+                    }
+                }
+            }
+        },
+        "dev-dropdown": {
+            "projectType": "application",
+            "root": "packages/mosaic-dev/dropdown",
+            "sourceRoot": "packages/mosaic-dev/dropdown",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/mosaic-dev/dropdown",
+                        "tsConfig": "packages/mosaic-dev/dropdown/tsconfig.app.json",
+                        "index": "packages/mosaic-dev/index.html",
+                        "main": "packages/mosaic-dev/dropdown/main.ts",
+                        "aot": true,
+                        "polyfills": "packages/mosaic-dev/polyfills.ts"
+                    },
+                    "configurations": {
+                        "production": {
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "vendorChunk": false,
+                            "statsJson": true
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "dev-dropdown:build"
+                    }
+                }
+            }
+        },
+        "dev-flex-layout": {
+            "projectType": "application",
+            "root": "packages/mosaic-dev/flex-layout",
+            "sourceRoot": "packages/mosaic-dev/flex-layout",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/mosaic-dev/flex-layout",
+                        "tsConfig": "packages/mosaic-dev/flex-layout/tsconfig.app.json",
+                        "index": "packages/mosaic-dev/index.html",
+                        "main": "packages/mosaic-dev/flex-layout/main.ts",
+                        "aot": true,
+                        "polyfills": "packages/mosaic-dev/polyfills.ts"
+                    },
+                    "configurations": {
+                        "production": {
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "vendorChunk": false,
+                            "statsJson": true
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "dev-flex-layout:build"
+                    }
+                }
+            }
+        },
+        "dev-icon": {
+            "projectType": "application",
+            "root": "packages/mosaic-dev/icon",
+            "sourceRoot": "packages/mosaic-dev/icon",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/mosaic-dev/icon",
+                        "tsConfig": "packages/mosaic-dev/icon/tsconfig.app.json",
+                        "index": "packages/mosaic-dev/index.html",
+                        "main": "packages/mosaic-dev/icon/main.ts",
+                        "aot": true,
+                        "polyfills": "packages/mosaic-dev/polyfills.ts"
+                    },
+                    "configurations": {
+                        "production": {
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "vendorChunk": false,
+                            "statsJson": true
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "dev-icon:build"
+                    }
+                }
+            }
+        },
         "dev-input": {
             "projectType": "application",
             "root": "packages/mosaic-dev/input",
@@ -646,6 +810,170 @@
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
                         "browserTarget": "dev-input:build"
+                    }
+                }
+            }
+        },
+        "dev-link": {
+            "projectType": "application",
+            "root": "packages/mosaic-dev/link",
+            "sourceRoot": "packages/mosaic-dev/link",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/mosaic-dev/link",
+                        "tsConfig": "packages/mosaic-dev/link/tsconfig.app.json",
+                        "index": "packages/mosaic-dev/index.html",
+                        "main": "packages/mosaic-dev/link/main.ts",
+                        "aot": true,
+                        "polyfills": "packages/mosaic-dev/polyfills.ts"
+                    },
+                    "configurations": {
+                        "production": {
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "vendorChunk": false,
+                            "statsJson": true
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "dev-link:build"
+                    }
+                }
+            }
+        },
+        "dev-list": {
+            "projectType": "application",
+            "root": "packages/mosaic-dev/list",
+            "sourceRoot": "packages/mosaic-dev/list",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/mosaic-dev/list",
+                        "tsConfig": "packages/mosaic-dev/list/tsconfig.app.json",
+                        "index": "packages/mosaic-dev/index.html",
+                        "main": "packages/mosaic-dev/list/main.ts",
+                        "aot": true,
+                        "polyfills": "packages/mosaic-dev/polyfills.ts"
+                    },
+                    "configurations": {
+                        "production": {
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "vendorChunk": false,
+                            "statsJson": true
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "dev-list:build"
+                    }
+                }
+            }
+        },
+        "dev-modal": {
+            "projectType": "application",
+            "root": "packages/mosaic-dev/modal",
+            "sourceRoot": "packages/mosaic-dev/modal",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/mosaic-dev/modal",
+                        "tsConfig": "packages/mosaic-dev/modal/tsconfig.app.json",
+                        "index": "packages/mosaic-dev/index.html",
+                        "main": "packages/mosaic-dev/modal/main.ts",
+                        "aot": true,
+                        "polyfills": "packages/mosaic-dev/polyfills.ts"
+                    },
+                    "configurations": {
+                        "production": {
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "vendorChunk": false,
+                            "statsJson": true
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "dev-modal:build"
+                    }
+                }
+            }
+        },
+        "dev-number-formatter": {
+            "projectType": "application",
+            "root": "packages/mosaic-dev/number-formatter",
+            "sourceRoot": "packages/mosaic-dev/number-formatter",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/mosaic-dev/number-formatter",
+                        "tsConfig": "packages/mosaic-dev/number-formatter/tsconfig.app.json",
+                        "index": "packages/mosaic-dev/index.html",
+                        "main": "packages/mosaic-dev/number-formatter/main.ts",
+                        "aot": true,
+                        "polyfills": "packages/mosaic-dev/polyfills.ts"
+                    },
+                    "configurations": {
+                        "production": {
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "vendorChunk": false,
+                            "statsJson": true
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "dev-number-formatter:build"
                     }
                 }
             }
