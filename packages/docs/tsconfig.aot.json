@@ -2,6 +2,7 @@
     "extends": "./tsconfig.json",
     "compilerOptions": {
         "outDir": "./out-tsc/app",
+        "allowSyntheticDefaultImports": true,
         "paths": {
             "@ptsecurity/cdk/*": ["../../dist/cdk/*"],
             "@ptsecurity/mosaic/*": ["../../dist/mosaic/*"],

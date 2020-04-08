@@ -8,16 +8,6 @@
             "default": "packagr",
             "description": "The target used to build the library with the ng-packagr"
         },
-        "releaseCDKPackageJson": {
-            "type": "string",
-            "default": "packages/cdk/package.json",
-            "description": "The path to the CDK package.json"
-        },
-        "releaseMosaicPackageJson": {
-            "type": "string",
-            "default": "packages/mosaic/package.json",
-            "description": "The path to the Mosaic package.json"
-        },
         "versionPlaceholder": {
             "type": "string",
             "default": "{{VERSION}}",
@@ -27,14 +17,6 @@
             "type": "string",
             "default": "{{NG_VERSION}}",
             "description": "The placeholder string that gets replaced by the corresponding angular versions for the package in your package.json"
-        },
-        "styles": {
-            "type": "array",
-            "description": "List of root style files that should be copied to the bundle directory with all referenced files",
-            "default": [],
-            "items": {
-                "$ref": "#/definitions/assetPattern"
-            }
         }
     },
     "additionalProperties": false,

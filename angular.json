@@ -165,7 +165,6 @@
                     "builder": "@ptsecurity/builders:packager",
                     "options": {
                         "buildTarget": "packagr",
-                        "releaseCDKPackageJson": "packages/cdk/package.json",
                         "versionPlaceholder": "{{VERSION}}",
                         "ngVersionPlaceholder": "{{NG_VERSION}}"
                     }
@@ -197,7 +196,6 @@
                     "builder": "@ptsecurity/builders:packager",
                     "options": {
                         "buildTarget": "packagr",
-                        "releaseMosaicPackageJson": "packages/mosaic/package.json",
                         "versionPlaceholder": "{{VERSION}}",
                         "ngVersionPlaceholder": "{{NG_VERSION}}"
                     }
@@ -229,7 +227,6 @@
                     "builder": "@ptsecurity/builders:packager",
                     "options": {
                         "buildTarget": "packagr",
-                        "releaseMosaicPackageJson": "packages/mosaic-moment-adapter/package.json",
                         "versionPlaceholder": "{{VERSION}}",
                         "ngVersionPlaceholder": "{{NG_VERSION}}"
                     }
@@ -261,7 +258,6 @@
                     "builder": "@ptsecurity/builders:packager",
                     "options": {
                         "buildTarget": "packagr",
-                        "releaseMosaicPackageJson": "packages/mosaic-examples/package.json",
                         "versionPlaceholder": "{{VERSION}}",
                         "ngVersionPlaceholder": "{{NG_VERSION}}"
                     }
