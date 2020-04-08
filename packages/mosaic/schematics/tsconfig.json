@@ -19,18 +19,8 @@
             "jasmine",
             "node"
         ],
-        "baseUrl": ".",
-        "paths": {
-            "@ptsecurity/cdk/schematics": [
-                "../../cdk/schematics"
-            ]
-        }
+        "baseUrl": "."
     },
-    "references": [
-        {
-            "path": "../../cdk/schematics"
-        }
-    ],
     "exclude": [
         "**/*.spec.ts",
         // Exclude the test-setup utility files. Those should not be part of the output.

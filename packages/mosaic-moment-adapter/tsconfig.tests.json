@@ -16,7 +16,8 @@
         // Unset options inherited from tsconfig.build
         "annotateForClosureCompiler": false,
         "flatModuleOutFile": null,
-        "flatModuleId": null
+        "flatModuleId": null,
+        "enableIvy": false
     },
     "include": [
         "**/*.spec.ts",

@@ -9,6 +9,7 @@
         "flatModuleOutFile": "index.js",
         "flatModuleId": "@ptsecurity/mosaic/divider",
         "skipTemplateCodegen": true,
-        "fullTemplateTypeCheck": true
+        "fullTemplateTypeCheck": true,
+        "enableIvy": false
     }
 }

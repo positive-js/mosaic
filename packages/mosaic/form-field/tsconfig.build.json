@@ -9,6 +9,7 @@
         "flatModuleOutFile": "index.js",
         "flatModuleId": "@ptsecurity/mosaic/form-field",
         "skipTemplateCodegen": true,
-        "fullTemplateTypeCheck": true
+        "fullTemplateTypeCheck": true,
+        "enableIvy": false
     }
 }

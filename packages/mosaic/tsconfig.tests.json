@@ -16,7 +16,8 @@
         "strictMetadataEmit": true,
         "skipTemplateCodegen": true,
         "emitDecoratorMetadata": true,
-        "fullTemplateTypeCheck": true
+        "fullTemplateTypeCheck": true,
+        "enableIvy": false
     },
     "include": [
         "**/*.spec.ts",

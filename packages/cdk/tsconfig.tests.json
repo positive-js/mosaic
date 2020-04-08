@@ -21,14 +21,12 @@
         "skipTemplateCodegen": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "fullTemplateTypeCheck": true
+        "fullTemplateTypeCheck": true,
+        "enableIvy": false
     },
     "include": [
         // Include the index.ts for each secondary entry-point
         "./*/index.ts",
         "**/*.spec.ts"
-    ],
-    "exclude": [
-        "**/schematics/**/*.ts"
     ]
 }

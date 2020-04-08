@@ -1,4 +1,4 @@
-@import '../../../node_modules/@angular/cdk/a11y';
+@import '../../cdk/a11y/a11y';
 
 $mc-calendar-body-label-padding-start: 5% !default;
 // We don't want the label to jump around when we switch between month and year views, so we use

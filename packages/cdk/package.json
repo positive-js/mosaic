@@ -28,9 +28,5 @@
     "dependencies": {
         "tslib": "^1.7.1"
     },
-    "schematics": "./schematics/collection.json",
-    "ng-update": {
-        "migrations": "./schematics/migration.json"
-    },
     "sideEffects": false
 }

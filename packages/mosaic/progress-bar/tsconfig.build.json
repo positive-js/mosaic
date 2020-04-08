@@ -9,6 +9,7 @@
         "flatModuleOutFile": "index.js",
         "flatModuleId": "@ptsecurity/mosaic/progress-bar",
         "skipTemplateCodegen": true,
-        "fullTemplateTypeCheck": true
+        "fullTemplateTypeCheck": true,
+        "enableIvy": false
     }
 }

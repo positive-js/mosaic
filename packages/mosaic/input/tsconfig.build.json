@@ -9,6 +9,7 @@
         "flatModuleOutFile": "index.js",
         "flatModuleId": "@ptsecurity/mosaic/input",
         "skipTemplateCodegen": true,
-        "fullTemplateTypeCheck": true
+        "fullTemplateTypeCheck": true,
+        "enableIvy": false
     }
 }

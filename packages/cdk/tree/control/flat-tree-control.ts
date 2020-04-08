@@ -91,6 +91,7 @@ export class FlatTreeControl<T> extends BaseTreeControl<T> {
             filteredNodesWithTheirParents.add(filteredNode);
         });
 
+        // @ts-ignore
         this.filterModel.select(...Array.from(filteredNodesWithTheirParents));
 
         this.filterValue.next(value);

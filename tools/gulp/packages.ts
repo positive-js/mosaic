@@ -17,7 +17,7 @@ mosaicPackage.sourceDir = join(buildConfig.packagesDir, 'mosaic');
 mosaicPackage.hasSchematics = true;
 
 cdkPackage.copySecondaryEntryPointStylesToRoot = true;
-cdkPackage.hasSchematics = true;
+cdkPackage.hasSchematics = false;
 
 export const allBuildPackages = [
     cdkPackage,

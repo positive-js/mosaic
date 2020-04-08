@@ -50,6 +50,7 @@
         "flatModuleId": "@ptsecurity/mosaic-examples",
         "skipTemplateCodegen": true,
         // TODO: disabled for now due to @angular/forms
-        "fullTemplateTypeCheck": false
+        "fullTemplateTypeCheck": false,
+        "enableIvy": false
     }
 }

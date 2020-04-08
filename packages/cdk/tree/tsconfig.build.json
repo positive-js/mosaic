@@ -8,6 +8,7 @@
         "strictMetadataEmit": true,
         "flatModuleOutFile": "index.js",
         "flatModuleId": "@ptsecurity/cdk/tree",
-        "skipTemplateCodegen": true
+        "skipTemplateCodegen": true,
+        "enableIvy": false
     }
 }
