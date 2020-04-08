@@ -861,20 +861,20 @@ describe('McDatepicker', () => {
             it('should toggle the active state of the datepicker toggle', fakeAsync(() => {
                 const toggle = fixture.debugElement.query(By.css('mc-datepicker-toggle')).nativeElement;
 
-                expect(toggle.classList).not.toContain('mc-datepicker-toggle_active');
+                expect(toggle.classList).not.toContain('mc-active');
 
                 fixture.componentInstance.datepicker.open();
                 fixture.detectChanges();
                 flush();
 
-                expect(toggle.classList).toContain('mc-datepicker-toggle_active');
+                expect(toggle.classList).toContain('mc-active');
 
                 fixture.componentInstance.datepicker.close();
                 fixture.detectChanges();
                 flush();
                 fixture.detectChanges();
 
-                expect(toggle.classList).not.toContain('mc-datepicker-toggle_active');
+                expect(toggle.classList).not.toContain('mc-active');
             }));
         });
 

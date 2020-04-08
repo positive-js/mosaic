@@ -79,10 +79,9 @@ export class McTagListChange {
     templateUrl: 'tag-list.partial.html',
     host: {
         class: 'mc-tag-list',
-        '[attr.tabindex]': 'disabled ? null : _tabIndex',
         '[class.mc-disabled]': 'disabled',
         '[class.mc-invalid]': 'errorState',
-        '[class.mc-required]': 'required',
+        '[attr.tabindex]': 'disabled ? null : _tabIndex',
         '(focus)': 'focus()',
         '(blur)': 'blur()',
         '(keydown)': 'keydown($event)',

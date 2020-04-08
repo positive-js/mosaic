@@ -89,6 +89,7 @@ export const McDatepickerContentMixinBase: CanColorCtor & typeof McDatepickerCon
  */
 @Component({
     selector: 'mc-datepicker__content',
+    exportAs: 'mcDatepickerContent',
     templateUrl: 'datepicker-content.html',
     styleUrls: ['datepicker-content.scss'],
     host: {
@@ -99,7 +100,6 @@ export const McDatepickerContentMixinBase: CanColorCtor & typeof McDatepickerCon
         mcDatepickerAnimations.transformPanel,
         mcDatepickerAnimations.fadeInCalendar
     ],
-    exportAs: 'mcDatepickerContent',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     inputs: ['color']

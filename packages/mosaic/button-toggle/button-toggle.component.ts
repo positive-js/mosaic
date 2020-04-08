@@ -44,8 +44,8 @@ export class McButtonToggleChange {
         /** The MсButtonToggle that emits the event. */
         public source: McButtonToggle,
         /** The value assigned to the MсButtonToggle. */
-        public value: any) {
-    }
+        public value: any
+    ) {}
 }
 
 /** Exclusive selection button toggle group that behaves like a radio-button group. */
@@ -55,7 +55,7 @@ export class McButtonToggleChange {
     host: {
         role: 'group',
         class: 'mc-button-toggle-group',
-        '[class.mc-button-toggle-vertical]': 'vertical'
+        '[class.mc-button-toggle_vertical]': 'vertical'
     },
     exportAs: 'mcButtonToggleGroup'
 })

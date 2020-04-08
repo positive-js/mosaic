@@ -67,7 +67,7 @@ import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 })
 export class McTooltipComponent {
     prefix = 'mc-tooltip_placement';
-    positions: ConnectionPositionPair[] = [ ...DEFAULT_4_POSITIONS ];
+    positions: ConnectionPositionPair[] = [...DEFAULT_4_POSITIONS];
     classMap = {};
     isTitleString: boolean;
     showTid: any;
@@ -85,6 +85,7 @@ export class McTooltipComponent {
     get mcTitle(): string | TemplateRef<void> {
         return this._mcTitle;
     }
+
     set mcTitle(value: string | TemplateRef<void>) {
         this.isTitleString = !(value instanceof TemplateRef);
 
@@ -92,21 +93,25 @@ export class McTooltipComponent {
             this._mcTitle = value;
         }
     }
+
     private _mcTitle: string | TemplateRef<void>;
 
     @Input()
     get mcTrigger(): string {
         return this._mcTrigger;
     }
+
     set mcTrigger(value: string) {
         this._mcTrigger = value;
     }
+
     private _mcTrigger: string = 'hover';
 
     @Input()
     get mcPlacement(): string {
         return this._mcPlacement;
     }
+
     set mcPlacement(value: string) {
         if (value !== this._mcPlacement) {
             this._mcPlacement = value;
@@ -115,12 +120,14 @@ export class McTooltipComponent {
             this._mcPlacement = 'top';
         }
     }
+
     private _mcPlacement: string = 'top';
 
     @Input()
     get mcVisible(): boolean {
         return this._mcVisible.value;
     }
+
     set mcVisible(value: boolean) {
         const visible = coerceBooleanProperty(value);
 
@@ -130,6 +137,7 @@ export class McTooltipComponent {
             this.hide();
         }
     }
+
     private _mcVisible: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     /** Subject for notifying that the tooltip has been hidden from the view */
@@ -150,6 +158,7 @@ export class McTooltipComponent {
             if (this.mcTrigger !== 'manual') {
                 this.closeOnInteraction = true;
             }
+
             this.showTid = setTimeout(() => {
                 this._mcVisible.next(true);
                 this.mcVisibleChange.emit(true);

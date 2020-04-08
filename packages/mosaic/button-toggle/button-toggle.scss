@@ -42,7 +42,7 @@ $mc-button-toggle-border-radius: 3px;
         }
     }
 
-    &:not(.mc-button-toggle-vertical) {
+    &:not(.mc-button-toggle_vertical) {
         .mc-button-toggle:not([disabled]) + .mc-button-toggle:not([disabled]) {
             margin-left: -$mc-button-toggle-border-size;
         }
@@ -50,7 +50,7 @@ $mc-button-toggle-border-radius: 3px;
 }
 
 /* stylelint-disable no-descending-specificity */
-.mc-button-toggle-vertical {
+.mc-button-toggle_vertical {
     flex-direction: column;
 
     .mc-button-toggle + .mc-button-toggle {

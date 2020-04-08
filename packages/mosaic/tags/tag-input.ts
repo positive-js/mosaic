@@ -40,7 +40,7 @@ let nextUniqueId = 0;
     selector: 'input[mcTagInputFor]',
     exportAs: 'mcTagInput, mcTagInputFor',
     host: {
-        class: 'mc-tag-input mc-input-element',
+        class: 'mc-tag-input',
         '[id]': 'id',
         '[attr.disabled]': 'disabled || null',
         '[attr.placeholder]': 'placeholder || null',

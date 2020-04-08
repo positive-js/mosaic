@@ -56,11 +56,11 @@ export const McFormFieldMixinBase: CanColorCtor & typeof McFormFieldBase = mixin
     host: {
         class: 'mc-form-field',
         '[class.mc-form-field_invalid]': 'control.errorState',
-        '[class.mc-disabled]': 'control.disabled',
         '[class.mc-form-field_has-prefix]': 'hasPrefix',
         '[class.mc-form-field_has-suffix]': 'hasSuffix',
         '[class.mc-form-field_has-cleaner]': 'canShowCleaner',
         '[class.mc-form-field_has-stepper]': 'canShowStepper',
+        '[class.mc-disabled]': 'control.disabled',
         '[class.mc-focused]': 'control.focused',
         '[class.ng-untouched]': 'shouldForward("untouched")',
         '[class.ng-touched]': 'shouldForward("touched")',

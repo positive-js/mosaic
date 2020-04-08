@@ -36,9 +36,9 @@ export const McDropdownItemMixinBase: CanDisableCtor & typeof McDropdownItemBase
     host: {
         class: 'mc-dropdown__item',
         '[class.mc-dropdown__item_highlighted]': 'highlighted',
+        '[class.mc-disabled]': 'disabled',
         '[attr.role]': 'role',
         '[attr.tabindex]': 'getTabIndex()',
-        '[class.mc-disabled]': 'disabled',
         '(click)': 'checkDisabled($event)',
         '(mouseenter)': 'handleMouseEnter()'
     },

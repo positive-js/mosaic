@@ -305,7 +305,7 @@ export const McRadioButtonMixinBase:
     host: {
         class: 'mc-radio-button',
         '[attr.id]': 'id',
-        '[class.mc-checked]': 'checked',
+        '[class.mc-selected]': 'checked',
         '[class.mc-disabled]': 'disabled'
     }
 })

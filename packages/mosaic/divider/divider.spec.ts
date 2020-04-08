@@ -27,7 +27,7 @@ describe('McDivider', () => {
 
     const divider = fixture.debugElement.query(By.css('mc-divider'));
     expect(divider.nativeElement.className).toContain('mc-divider');
-    expect(divider.nativeElement.className).toContain('mc-divider-vertical');
+    expect(divider.nativeElement.className).toContain('mc-divider_vertical');
   });
 
   it('should apply inset class to inset divider', () => {
@@ -36,7 +36,7 @@ describe('McDivider', () => {
 
     const divider = fixture.debugElement.query(By.css('mc-divider'));
     expect(divider.nativeElement.className).toContain('mc-divider');
-    expect(divider.nativeElement.className).toContain('mc-divider-inset');
+    expect(divider.nativeElement.className).toContain('mc-divider_inset');
   });
 
   it('should apply inset and vertical classes to vertical inset divider', () => {
@@ -46,8 +46,8 @@ describe('McDivider', () => {
 
     const divider = fixture.debugElement.query(By.css('mc-divider'));
     expect(divider.nativeElement.className).toContain('mc-divider');
-    expect(divider.nativeElement.className).toContain('mc-divider-inset');
-    expect(divider.nativeElement.className).toContain('mc-divider-vertical');
+    expect(divider.nativeElement.className).toContain('mc-divider_inset');
+    expect(divider.nativeElement.className).toContain('mc-divider_vertical');
   });
 
   it('should add aria roles properly', () => {

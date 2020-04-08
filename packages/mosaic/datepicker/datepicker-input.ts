@@ -69,6 +69,7 @@ export class McDatepickerInputEvent<D> {
 /** Directive used to connect an input to a McDatepicker. */
 @Directive({
     selector: 'input[mcDatepicker]',
+    exportAs: 'mcDatepickerInput',
     providers: [
         MC_DATEPICKER_VALUE_ACCESSOR,
         MC_DATEPICKER_VALIDATORS,
@@ -84,8 +85,7 @@ export class McDatepickerInputEvent<D> {
         '(change)': 'onChange()',
         '(blur)': 'onBlur()',
         '(keydown)': 'onKeydown($event)'
-    },
-    exportAs: 'mcDatepickerInput'
+    }
 })
 export class McDatepickerInput<D> implements ControlValueAccessor, OnDestroy, Validator {
     /** The datepicker that this input is associated with. */

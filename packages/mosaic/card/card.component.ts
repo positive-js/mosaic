@@ -20,7 +20,7 @@ import { SPACE } from '@ptsecurity/cdk/keycodes';
     host: {
         class: 'mc-card',
         '[class.mc-card_readonly]': 'readonly',
-        '[class.mc-card_selected]': 'selected',
+        '[class.mc-selected]': 'selected',
         '(keydown)': 'onKeyDown($event)',
         '(click)': 'onClick($event)'
     }

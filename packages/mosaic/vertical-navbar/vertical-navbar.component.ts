@@ -37,12 +37,9 @@ export class McVerticalNavbarTitle {}
     ]
 })
 export class McVerticalNavbar {
-
     @Input() expanded: boolean = false;
 
-    constructor(
-        private cd: ChangeDetectorRef
-    ) {}
+    constructor(private cd: ChangeDetectorRef) {}
 
     toggle() {
         this.expanded = !this.expanded;

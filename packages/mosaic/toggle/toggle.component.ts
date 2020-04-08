@@ -46,9 +46,6 @@ export class McToggleChange {
     exportAs: 'mcToggle',
     templateUrl: './toggle.component.html',
     styleUrls: ['./toggle.scss'],
-    providers: [
-        {provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => McToggleComponent), multi: true}
-    ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     inputs: ['disabled', 'color', 'tabIndex'],
@@ -65,7 +62,10 @@ export class McToggleChange {
             state('false', style({ left: '1px' })),
             transition('true <=> false', animate('150ms'))
         ])
-    ]
+    ],
+    providers: [{
+        provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => McToggleComponent), multi: true
+    }]
 })
 export class McToggleComponent extends McToggleMixinBase
     implements ControlValueAccessor, CanColor, CanDisable, HasTabIndex {

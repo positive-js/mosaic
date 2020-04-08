@@ -77,7 +77,7 @@ describe('McMultiYearView', () => {
         });
 
         it('shows selected year if in same range', () => {
-            const selectedEl = multiYearViewNativeElement.querySelector('.mc-calendar__body_selected')!;
+            const selectedEl = multiYearViewNativeElement.querySelector('.mc-selected')!;
             expect(selectedEl.innerHTML.trim()).toBe('2020');
         });
 
@@ -85,7 +85,7 @@ describe('McMultiYearView', () => {
             testComponent.selected = moment([2040, 0, 10]);
             fixture.detectChanges();
 
-            const selectedEl = multiYearViewNativeElement.querySelector('.mc-calendar__body_selected');
+            const selectedEl = multiYearViewNativeElement.querySelector('.mc-selected');
             expect(selectedEl).toBeNull();
         });
 
@@ -94,7 +94,7 @@ describe('McMultiYearView', () => {
             (cellEls[cellEls.length - 1] as HTMLElement).click();
             fixture.detectChanges();
 
-            const selectedEl = multiYearViewNativeElement.querySelector('.mc-calendar__body_selected')!;
+            const selectedEl = multiYearViewNativeElement.querySelector('.mc-selected')!;
             expect(selectedEl.innerHTML.trim()).toBe('2039');
         });
 

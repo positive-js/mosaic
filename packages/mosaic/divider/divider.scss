@@ -20,13 +20,13 @@ $mc-divider-inset-margin: 80px;
     border-top-width: $mc-divider-width;
     border-top-style: solid;
 
-    &.mc-divider-vertical {
+    &.mc-divider_vertical {
         border-top: 0;
         border-right-width: $mc-divider-width;
         border-right-style: solid;
     }
 
-    &.mc-divider-inset {
+    &.mc-divider_inset {
         margin-left: $mc-divider-inset-margin;
 
         [dir='rtl'] & {
