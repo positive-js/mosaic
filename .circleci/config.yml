@@ -100,7 +100,7 @@ jobs:
                       echo 'export SHORT_GIT_HASH=$(git rev-parse --short $CIRCLE_SHA1)' >> $BASH_ENV
                       echo 'export CIRCLE_PULL_REQUEST_NUMBER=$(echo "$CIRCLE_PULL_REQUEST" | cut -d"/" -f7)' >> $BASH_ENV
                       source $BASH_ENV
-            - run: echo "$CIRCLE_PULL_REQUEST" | cut -d"/" -f7 && echo $CIRCLE_PULL_REQUEST_NUMBER
+            - run: printenv
             - run: yarn run build:mosaic-examples-module
             - run: yarn run build:mosaic-examples
             - run: yarn run build:docs
@@ -199,6 +199,7 @@ jobs:
             - *restore_cache
             - attach_workspace:
                   at: ~/mosaic
+            - run: printenv
             - run:
                   name: Setup Environment Variables
                   command: |
