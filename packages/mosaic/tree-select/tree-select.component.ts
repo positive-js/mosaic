@@ -138,12 +138,12 @@ const McTreeSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorSt
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '[attr.id]': 'id',
-        '[attr.tabindex]': 'tabIndex',
-
         class: 'mc-tree-select',
         '[class.mc-disabled]': 'disabled',
-        '[class.mc-select-invalid]': 'errorState',
+        '[class.mc-invalid]': 'errorState',
+
+        '[attr.id]': 'id',
+        '[attr.tabindex]': 'tabIndex',
 
         '(click)': 'toggle()',
         '(keydown)': 'handleKeydown($event)',

@@ -63,6 +63,7 @@ export class McTabHeaderBase {}
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         class: 'mc-tab-header',
+        // todo ?
         '[class.mc-tab-header__pagination-controls_enabled]':
             'showPaginationControls',
         '[class.mc-tab-header_rtl]': 'getLayoutDirection() == \'rtl\''

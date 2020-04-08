@@ -66,8 +66,7 @@ export class McTagTrailingIcon {}
 
 export class McTagBase {
     // tslint:disable-next-line:naming-convention
-    constructor(public _elementRef: ElementRef) {
-    }
+    constructor(public _elementRef: ElementRef) {}
 }
 
 // tslint:disable-next-line:naming-convention
@@ -90,7 +89,6 @@ export const McTagMixinBase: CanColorCtor & CanDisableCtor & typeof McTagBase = 
         '[class.mc-focused]': 'hasFocus',
         '[class.mc-tag-with-avatar]': 'avatar',
         '[class.mc-tag-with-trailing-icon]': 'trailingIcon || removeIcon',
-        '[class.mc-tag-disabled]': 'disabled',
         '[class.mc-disabled]': 'disabled',
 
         '(click)': 'handleClick($event)',

@@ -9,11 +9,11 @@ $mc-datepicker-selected-fade-amount: 0.6;
 $mc-datepicker-today-fade-amount: 0.2;
 
 @mixin _mc-datepicker-color($color) {
-    .mc-calendar__body_selected {
+    .mc-selected {
         background: $color;
     }
 
-    .mc-calendar__body_disabled > .mc-calendar__body_selected {
+    .mc-calendar__body_disabled > .mc-selected {
         background-color: fade-out($color, $mc-datepicker-selected-fade-amount);
     }
 }
@@ -55,7 +55,7 @@ $mc-datepicker-today-fade-amount: 0.2;
         border-color: transparent;
     }
 
-    .mc-calendar__body_disabled > .mc-calendar__body-cell-content:not(.mc-calendar__body_selected) {
+    .mc-calendar__body_disabled > .mc-calendar__body-cell-content:not(.mc-selected) {
         color: mc-color($foreground, text-disabled);
     }
 
@@ -70,7 +70,7 @@ $mc-datepicker-today-fade-amount: 0.2;
     }
 
     .mc-calendar__body-cell:not(.mc-calendar__body_disabled):hover {
-        & > .mc-calendar__body-cell-content:not(.mc-calendar__body_selected) {
+        & > .mc-calendar__body-cell-content:not(.mc-selected) {
             background-color: mc-color($second, A60);
         }
     }
@@ -96,7 +96,7 @@ $mc-datepicker-today-fade-amount: 0.2;
         color: mc-color($primary);
     }
 
-    .mc-calendar__body_disabled > .mc-calendar__body-today:not(.mc-calendar__body_selected) {
+    .mc-calendar__body_disabled > .mc-calendar__body-today:not(.mc-selected) {
         border-color: fade-out(mc-color($foreground, text), $mc-datepicker-today-fade-amount);
     }
 
@@ -112,7 +112,7 @@ $mc-datepicker-today-fade-amount: 0.2;
         }
     }
 
-    .mc-datepicker-toggle_active {
+    .mc-active {
         color: mc-color($primary);
 
         &.mc-warn {

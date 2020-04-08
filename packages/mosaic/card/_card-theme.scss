@@ -53,7 +53,7 @@
             background-color: map-get($popup-common, background);
         }
 
-        &.mc-card_selected {
+        &.mc-selected {
             background-color: $selected-color;
         }
 

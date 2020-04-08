@@ -31,7 +31,7 @@ describe('MсCard', () => {
         testComponent.selected = true;
         fixture.detectChanges();
 
-        expect(cardNativeElement.classList.contains('mc-card_selected')).toBe(true);
+        expect(cardNativeElement.classList.contains('mc-selected')).toBe(true);
     });
 
     it('should handle a click on the card', () => {

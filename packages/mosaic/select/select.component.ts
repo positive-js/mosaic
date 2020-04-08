@@ -212,7 +212,7 @@ export class McSelectTrigger {}
 
         class: 'mc-select',
         '[class.mc-disabled]': 'disabled',
-        '[class.mc-select-invalid]': 'errorState',
+        '[class.mc-invalid]': 'errorState',
 
         '(keydown)': 'handleKeydown($event)',
         '(focus)': 'onFocus()',

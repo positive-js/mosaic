@@ -82,7 +82,7 @@ mc-year-view {
 
 @include cdk-high-contrast {
     .mc-datepicker__popup:not(:empty),
-    .mc-calendar__body_selected {
+    .mc-selected {
         outline: solid 1px;
     }
 

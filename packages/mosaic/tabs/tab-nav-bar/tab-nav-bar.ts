@@ -45,12 +45,11 @@ export const McTabNavMixinBase: CanColorCtor &
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class McTabNav extends McTabNavMixinBase
-    implements CanColor {
-        constructor(elementRef: ElementRef) {
-            super(elementRef);
-        }
-     }
+export class McTabNav extends McTabNavMixinBase implements CanColor {
+    constructor(elementRef: ElementRef) {
+        super(elementRef);
+    }
+ }
 
 // Boilerplate for applying mixins to McTabLink.
 export class McTabLinkBase {}

@@ -22,11 +22,12 @@ let nextUniqueId = 0;
 
 
 export class McTextareaBase {
-    constructor(public defaultErrorStateMatcher: ErrorStateMatcher,
-                public parentForm: NgForm,
-                public parentFormGroup: FormGroupDirective,
-                public ngControl: NgControl) {
-    }
+    constructor(
+        public defaultErrorStateMatcher: ErrorStateMatcher,
+        public parentForm: NgForm,
+        public parentFormGroup: FormGroupDirective,
+        public ngControl: NgControl
+    ) {}
 }
 
 // tslint:disable-next-line:naming-convention

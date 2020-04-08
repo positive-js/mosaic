@@ -38,7 +38,7 @@
             }
         }
 
-        &.mc-checked {
+        &.mc-selected {
             & .mc-radio-button__outer-circle {
                 border-color: $outer-circle_checked-state_border-color;
                 background: white;

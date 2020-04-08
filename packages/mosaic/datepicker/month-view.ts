@@ -40,8 +40,8 @@ const DAYS_PER_WEEK = 7;
  */
 @Component({
     selector: 'mc-month-view',
-    templateUrl: 'month-view.html',
     exportAs: 'mcMonthView',
+    templateUrl: 'month-view.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })

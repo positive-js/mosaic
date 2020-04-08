@@ -58,7 +58,8 @@ export class McTimepickerBase {
         public defaultErrorStateMatcher: ErrorStateMatcher,
         public parentForm: NgForm,
         public parentFormGroup: FormGroupDirective,
-        public ngControl: NgControl) { }
+        public ngControl: NgControl
+    ) { }
 }
 
 // tslint:disable-next-line naming-convention
@@ -90,12 +91,10 @@ export const McTimepickerMixinBase:
 
         '(keydown)': 'onKeyDown($event)'
     },
-    providers: [
-        {
-            provide: McFormFieldControl,
-            useExisting: forwardRef(() => McTimepicker)
-        }
-    ]
+    providers: [{
+        provide: McFormFieldControl,
+        useExisting: forwardRef(() => McTimepicker)
+    }]
 })
 export class McTimepicker<D> extends McTimepickerMixinBase
     implements McFormFieldControl<any>, OnDestroy, DoCheck, CanUpdateErrorState, ControlValueAccessor {

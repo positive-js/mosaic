@@ -82,7 +82,7 @@ describe('McYearView', () => {
         });
 
         it('shows selected month if in same year', () => {
-            const selectedEl = yearViewNativeElement.querySelector('.mc-calendar__body_selected')!;
+            const selectedEl = yearViewNativeElement.querySelector('.mc-selected')!;
             expect(selectedEl.innerHTML.trim()).toBe('Mar');
         });
 
@@ -90,7 +90,7 @@ describe('McYearView', () => {
             testComponent.selected = moment([2016, 2, 10]);
             fixture.detectChanges();
 
-            const selectedEl = yearViewNativeElement.querySelector('.mc-calendar__body_selected');
+            const selectedEl = yearViewNativeElement.querySelector('.mc-selected');
             expect(selectedEl).toBeNull();
         });
 
@@ -99,7 +99,7 @@ describe('McYearView', () => {
             (cellEls[cellEls.length - 1] as HTMLElement).click();
             fixture.detectChanges();
 
-            const selectedEl = yearViewNativeElement.querySelector('.mc-calendar__body_selected')!;
+            const selectedEl = yearViewNativeElement.querySelector('.mc-selected')!;
             expect(selectedEl.innerHTML.trim()).toBe('Dec');
         });
 
