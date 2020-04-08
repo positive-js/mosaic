@@ -1,12 +1,7 @@
 {
     "extends": "./tsconfig.json",
     "compilerOptions": {
-        "outDir": "../../dist/out-tsc/mosaic-spec",
-        "paths": {
-            "@ptsecurity/cdk/*": ["./dist/cdk/*"],
-            "@ptsecurity/mosaic/*": ["./dist/mosaic/*"],
-            "@ptsecurity/mosaic-moment-adapter/*": ["./dist/mosaic-moment-adapter/*"]
-        }
+        "outDir": "../../dist/out-tsc/mosaic-spec"
     },
     "files": [
         "test.ts"

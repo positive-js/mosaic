@@ -68,9 +68,10 @@ import {
     McTreeFlatDataSource,
     McTreeFlattener,
     McTreeModule,
-    McTreeOption
+    McTreeOption,
+    McTreeSelectionChange
 } from '@ptsecurity/mosaic/tree';
-import { Observable, of as observableOf, Subject } from 'rxjs';
+import { Observable, of as observableOf, Subject, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 
@@ -1440,7 +1441,8 @@ describe('McTreeSelect', () => {
                     fixture = TestBed.createComponent(BasicTreeSelect);
                     fixture.detectChanges();
                     select = fixture.debugElement.query(By.css('mc-tree-select')).nativeElement;
-                    fixture.detectChanges();
+
+                    tick(100);
                 }));
 
                 it('should set the tabindex of the select to 0 by default', fakeAsync(() => {
@@ -1499,6 +1501,7 @@ describe('McTreeSelect', () => {
 
                     fixture.componentInstance.select.open();
                     fixture.detectChanges();
+                    flush();
 
                     const optionToClick = overlayContainerElement.querySelectorAll('mc-tree-option')[2] as HTMLElement;
                     optionToClick.click();
@@ -1508,6 +1511,7 @@ describe('McTreeSelect', () => {
                     expect(formControl.value).toBe(options[2].value);
 
                     dispatchKeyboardEvent(select, 'keydown', DOWN_ARROW);
+                    tick(10);
                     fixture.detectChanges();
 
                     expect(formControl.value).toBe(options[4].value);
@@ -1635,7 +1639,6 @@ describe('McTreeSelect', () => {
                         const instance = multiFixture.componentInstance;
 
                         multiFixture.detectChanges();
-                        multiFixture.detectChanges();
 
                         select = multiFixture.debugElement.query(By.css('mc-tree-select')).nativeElement;
 
@@ -1644,6 +1647,7 @@ describe('McTreeSelect', () => {
                         expect(instance.select.panelOpen).toBe(false, 'Expected panel to be closed.');
 
                         const event = dispatchKeyboardEvent(select, 'keydown', DOWN_ARROW);
+                        tick(10);
 
                         expect(instance.select.panelOpen).toBe(true, 'Expected panel to be open.');
                         expect(instance.control.value).toBe(initialValue, 'Expected value to stay the same.');
@@ -1657,7 +1661,6 @@ describe('McTreeSelect', () => {
                         const multiFixture = TestBed.createComponent(MultiSelect);
                         const instance = multiFixture.componentInstance;
 
-                        multiFixture.detectChanges();
                         multiFixture.detectChanges();
                         select = multiFixture.debugElement.query(By.css('mc-tree-select')).nativeElement;
 
@@ -1726,7 +1729,6 @@ describe('McTreeSelect', () => {
 
                     const multiFixture = TestBed.createComponent(MultiSelect);
                     multiFixture.detectChanges();
-                    multiFixture.detectChanges();
 
                     select = multiFixture.debugElement.query(By.css('mc-tree-select')).nativeElement;
                     multiFixture.componentInstance.select.open();
@@ -1739,6 +1741,7 @@ describe('McTreeSelect', () => {
                     expect(document.activeElement).toBe(options[2], 'Expected third option to be focused.');
 
                     multiFixture.componentInstance.control.setValue(['steak-0', 'sushi-7']);
+                    tick(10);
 
                     expect(document.activeElement)
                         .toBe(options[2], 'Expected fourth option to remain focused.');
@@ -1758,19 +1761,16 @@ describe('McTreeSelect', () => {
 
                 it('should not wrap selection after reaching the end of the options', fakeAsync(() => {
                     const lastOption = fixture.componentInstance.options.last;
-                    expect(lastOption.selected).toBe(false, 'Expected last option to be selected.');
 
                     fixture.componentInstance.options.forEach(() => {
                         dispatchKeyboardEvent(select, 'keydown', DOWN_ARROW);
+                        tick(10);
                     });
-                    fixture.detectChanges();
-                    flush();
 
                     expect(lastOption.selected).toBe(true, 'Expected last option to be selected.');
 
                     dispatchKeyboardEvent(select, 'keydown', DOWN_ARROW);
-                    fixture.detectChanges();
-                    flush();
+                    tick(10);
 
                     expect(lastOption.selected).toBe(true, 'Expected last option to stay selected.');
                 }));
@@ -1914,8 +1914,8 @@ describe('McTreeSelect', () => {
                 beforeEach(fakeAsync(() => {
                     fixture = TestBed.createComponent(BasicTreeSelect);
                     fixture.detectChanges();
+
                     trigger = fixture.debugElement.query(By.css('.mc-tree-select__trigger')).nativeElement;
-                    fixture.detectChanges();
 
                     trigger.click();
                     fixture.detectChanges();
@@ -1939,7 +1939,8 @@ describe('McTreeSelect', () => {
                 fixture = TestBed.createComponent(BasicTreeSelect);
                 fixture.detectChanges();
                 trigger = fixture.debugElement.query(By.css('.mc-tree-select__trigger')).nativeElement;
-                fixture.detectChanges();
+
+                tick(10);
             }));
 
             it('should not throw when attempting to open too early', () => {
@@ -1962,6 +1963,7 @@ describe('McTreeSelect', () => {
             it('should close the panel when an item is clicked', fakeAsync(() => {
                 trigger.click();
                 fixture.detectChanges();
+                flush();
 
                 const option = overlayContainerElement.querySelector('mc-tree-option') as HTMLElement;
                 option.click();
@@ -2161,7 +2163,8 @@ describe('McTreeSelect', () => {
                 fixture = TestBed.createComponent(BasicTreeSelect);
                 fixture.detectChanges();
                 trigger = fixture.debugElement.query(By.css('.mc-tree-select__trigger')).nativeElement;
-                fixture.detectChanges();
+
+                tick(10);
             }));
 
             it('should not focus the first option if no option is selected', fakeAsync(() => {
@@ -2175,8 +2178,9 @@ describe('McTreeSelect', () => {
             it('should select an option when it is clicked', fakeAsync(() => {
                 trigger.click();
                 fixture.detectChanges();
+                flush();
 
-                const option = overlayContainerElement.querySelector('mc-tree-option') as HTMLElement;
+                let option = overlayContainerElement.querySelector('mc-tree-option') as HTMLElement;
                 option.click();
                 fixture.detectChanges();
                 flush();
@@ -2185,6 +2189,9 @@ describe('McTreeSelect', () => {
                 fixture.detectChanges();
                 flush();
 
+                option = overlayContainerElement.querySelector('mc-tree-option') as HTMLElement;
+
+                expect(option.classList).toContain('mc-selected');
                 expect(fixture.componentInstance.options.first.selected).toBe(true);
                 expect(fixture.componentInstance.select.selectedValues)
                     .toBe(fixture.componentInstance.options.first.value);
@@ -2212,7 +2219,7 @@ describe('McTreeSelect', () => {
                 fixture.detectChanges();
                 flush();
 
-                const options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-tree-option');
+                let options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-tree-option');
 
                 options[0].click();
                 fixture.detectChanges();
@@ -2221,6 +2228,10 @@ describe('McTreeSelect', () => {
                 trigger.click();
                 fixture.detectChanges();
                 flush();
+
+                options = overlayContainerElement.querySelectorAll('mc-tree-option');
+                expect(options[1].classList).not.toContain('mc-selected');
+                expect(options[2].classList).not.toContain('mc-selected');
 
                 const optionInstances = fixture.componentInstance.options.toArray();
                 expect(optionInstances[1].selected).toBe(false);
@@ -2235,7 +2246,7 @@ describe('McTreeSelect', () => {
                 fixture.detectChanges();
                 flush();
 
-                const options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-tree-option');
+                let options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-tree-option');
 
                 options[0].click();
                 fixture.detectChanges();
@@ -2247,6 +2258,13 @@ describe('McTreeSelect', () => {
                 trigger.click();
                 fixture.detectChanges();
                 flush();
+
+                options = overlayContainerElement.querySelectorAll('mc-tree-option');
+
+                expect(options[0].classList)
+                    .not.toContain('mc-selected', 'Expected first option to no longer be selected');
+                expect(options[1].classList)
+                    .toContain('mc-selected', 'Expected second option to be selected');
 
                 const optionInstances = fixture.componentInstance.options.toArray();
 
@@ -2360,6 +2378,54 @@ describe('McTreeSelect', () => {
             it('should not throw if triggerValue accessed with no selected value', fakeAsync(() => {
                 expect(() => fixture.componentInstance.select.triggerValue).not.toThrow();
             }));
+
+            xit('should emit to `optionSelectionChanges` when an option is selected', fakeAsync(() => {
+                trigger.click();
+                fixture.detectChanges();
+                flush();
+
+                const spy = jasmine.createSpy('option selection spy');
+                const subscription = fixture.componentInstance.select.optionSelectionChanges.subscribe(spy);
+                const option = overlayContainerElement.querySelector('mc-tree-option') as HTMLElement;
+                option.click();
+                fixture.detectChanges();
+                flush();
+
+                expect(spy).toHaveBeenCalledWith(jasmine.any(McTreeSelectionChange));
+
+                subscription.unsubscribe();
+            }));
+
+            xit('should handle accessing `optionSelectionChanges` before the options are initialized',
+                fakeAsync(() => {
+                    fixture.destroy();
+                    fixture = TestBed.createComponent(BasicTreeSelect);
+
+                    const spy = jasmine.createSpy('option selection spy');
+                    let subscription: Subscription;
+
+                    expect(fixture.componentInstance.select.options).toBeFalsy();
+                    expect(() => {
+                        subscription = fixture.componentInstance.select.optionSelectionChanges.subscribe(spy);
+                    }).not.toThrow();
+
+                    fixture.detectChanges();
+                    trigger = fixture.debugElement.query(By.css('.mc-tree-select__trigger')).nativeElement;
+
+                    trigger.click();
+                    fixture.detectChanges();
+                    flush();
+
+                    const option = overlayContainerElement.querySelector('mc-tree-option') as HTMLElement;
+                    option.click();
+                    fixture.detectChanges();
+                    flush();
+
+                    expect(spy).toHaveBeenCalledWith(jasmine.any(McTreeSelectionChange));
+
+                    /* tslint:disable-next-line:no-unnecessary-type-assertion */
+                    subscription!.unsubscribe();
+                }));
         });
 
         describe('forms integration', () => {
@@ -2370,7 +2436,8 @@ describe('McTreeSelect', () => {
                 fixture = TestBed.createComponent(BasicTreeSelect);
                 fixture.detectChanges();
                 trigger = fixture.debugElement.query(By.css('.mc-tree-select__trigger')).nativeElement;
-                fixture.detectChanges();
+
+                tick(10);
             }));
 
             it('should take an initial view value with reactive forms', fakeAsync(() => {
@@ -2386,8 +2453,10 @@ describe('McTreeSelect', () => {
                 fixture.detectChanges();
                 flush();
 
-                const optionInstances = fixture.componentInstance.options.toArray();
-                expect(optionInstances[0].selected).toBe(true);
+                const options = overlayContainerElement.querySelectorAll('mc-tree-option');
+                expect(options[0].classList)
+                    .toContain('mc-selected',
+                        `Expected option with the control's initial value to be selected.`);
             }));
 
             it('should set the view value from the form', fakeAsync(() => {
@@ -2405,8 +2474,9 @@ describe('McTreeSelect', () => {
                 fixture.detectChanges();
                 flush();
 
-                const optionInstances = fixture.componentInstance.options.toArray();
-                expect(optionInstances[0].selected).toBe(true);
+                const options = overlayContainerElement.querySelectorAll('mc-tree-option');
+                expect(options[0].classList).toContain(
+                    'mc-selected', `Expected option with the control's new value to be selected.`);
             }));
 
             it('should update the form value when the view changes', fakeAsync(() => {
@@ -2716,15 +2786,19 @@ describe('McTreeSelect', () => {
         beforeEach(fakeAsync(() => {
             fixture = TestBed.createComponent(SelectWithChangeEvent);
             fixture.detectChanges();
+
             trigger = fixture.debugElement.query(By.css('.mc-tree-select__trigger')).nativeElement;
-            fixture.detectChanges();
+
+            tick(10);
         }));
 
         it('should emit an event when the selected option has changed', fakeAsync(() => {
             trigger.click();
+            tick(0);
             fixture.detectChanges();
 
             (overlayContainerElement.querySelector('mc-tree-option') as HTMLElement).click();
+            tick(0);
             fixture.detectChanges();
             flush();
 
@@ -2809,13 +2883,13 @@ describe('McTreeSelect', () => {
 
             fixture.componentInstance.isShowing = true;
             fixture.detectChanges();
-            fixture.detectChanges();
 
             const trigger = fixture.debugElement.query(By.css('.mc-tree-select__trigger')).nativeElement;
             trigger.style.width = '300px';
 
             trigger.click();
             fixture.detectChanges();
+            flush();
 
             // todo fix
             // const value = fixture.debugElement.query(By.css('.mc-tree-select__matcher'));
@@ -2842,12 +2916,12 @@ describe('McTreeSelect', () => {
         beforeEach(fakeAsync(() => {
             fixture = TestBed.createComponent(ManySelects);
             fixture.detectChanges();
-
             triggers = fixture.debugElement.queryAll(By.css('.mc-tree-select__trigger'));
-            fixture.detectChanges();
 
             triggers[0].nativeElement.click();
             fixture.detectChanges();
+            tick(10);
+
             flush();
 
             options = overlayContainerElement.querySelectorAll('mc-tree-option');
@@ -2952,7 +3026,6 @@ describe('McTreeSelect', () => {
         it('should set the width of the overlay if there is no placeholder', fakeAsync(() => {
             const fixture = TestBed.createComponent(BasicSelectNoPlaceholder);
 
-            fixture.detectChanges();
             fixture.detectChanges();
             const trigger = fixture.debugElement.query(By.css('.mc-tree-select__trigger')).nativeElement;
 
@@ -3327,7 +3400,6 @@ describe('McTreeSelect', () => {
             fixture.detectChanges();
             trigger = fixture.debugElement.query(By.css('.mc-tree-select__trigger')).nativeElement;
             formField = fixture.debugElement.query(By.css('.mc-form-field')).nativeElement;
-            fixture.detectChanges();
 
             trigger.click();
             fixture.detectChanges();
@@ -3420,9 +3492,8 @@ describe('McTreeSelect', () => {
 
         it('should set the value when options are clicked', fakeAsync(() => {
             const fixture = TestBed.createComponent(BasicSelectWithoutForms);
-            fixture.detectChanges();
-            fixture.detectChanges();
 
+            fixture.detectChanges();
             expect(fixture.componentInstance.selectedFood).toBeFalsy();
 
             const trigger = fixture.debugElement.query(By.css('.mc-tree-select__trigger')).nativeElement;
@@ -3441,6 +3512,7 @@ describe('McTreeSelect', () => {
 
             trigger.click();
             fixture.detectChanges();
+            flush();
 
             (overlayContainerElement.querySelectorAll('mc-tree-option')[2] as HTMLElement).click();
             fixture.detectChanges();
@@ -3473,9 +3545,8 @@ describe('McTreeSelect', () => {
 
         it('should reset the label when a null value is set', fakeAsync(() => {
             const fixture = TestBed.createComponent(BasicSelectWithoutForms);
-            fixture.detectChanges();
-            fixture.detectChanges();
 
+            fixture.detectChanges();
             expect(fixture.componentInstance.selectedFood).toBeFalsy();
 
             const trigger = fixture.debugElement.query(By.css('.mc-tree-select__trigger')).nativeElement;
@@ -3517,9 +3588,8 @@ describe('McTreeSelect', () => {
 
         it('should be able to select multiple values', fakeAsync(() => {
             const fixture = TestBed.createComponent(BasicSelectWithoutFormsMultiple);
-            fixture.detectChanges();
-            fixture.detectChanges();
 
+            fixture.detectChanges();
             expect(fixture.componentInstance.selectedFoods).toBeFalsy();
 
             const trigger = fixture.debugElement.query(By.css('.mc-tree-select__trigger')).nativeElement;
@@ -3560,9 +3630,8 @@ describe('McTreeSelect', () => {
 
         it('should restore focus to the host element', fakeAsync(() => {
             const fixture = TestBed.createComponent(BasicSelectWithoutForms);
-            fixture.detectChanges();
-            fixture.detectChanges();
 
+            fixture.detectChanges();
             fixture.debugElement.query(By.css('.mc-tree-select__trigger')).nativeElement.click();
             fixture.detectChanges();
             flush();
@@ -3598,9 +3667,6 @@ describe('McTreeSelect', () => {
 
         it('should update the data binding before emitting the change event', fakeAsync(() => {
             const fixture = TestBed.createComponent(BasicSelectWithoutForms);
-            fixture.detectChanges();
-            fixture.detectChanges();
-
             const instance = fixture.componentInstance;
             const spy = jasmine.createSpy('change spy');
 
@@ -3671,7 +3737,8 @@ describe('McTreeSelect', () => {
             fixture.detectChanges();
             trigger = fixture.debugElement.query(By.css('.mc-tree-select__trigger')).nativeElement;
             formField = fixture.debugElement.query(By.css('mc-form-field')).nativeElement;
-            fixture.detectChanges();
+
+            tick(10);
         }));
 
         /**
@@ -4026,6 +4093,7 @@ describe('McTreeSelect', () => {
             it('should stay within the viewport when overflowing on the right in ltr', fakeAsync(() => {
                 formField.style.right = '-100px';
                 trigger.click();
+                tick(10);
                 fixture.detectChanges();
                 flush();
 
@@ -4265,8 +4333,10 @@ describe('McTreeSelect', () => {
             fixture = TestBed.createComponent(MultiSelect);
             testInstance = fixture.componentInstance;
             fixture.detectChanges();
+
             trigger = fixture.debugElement.query(By.css('.mc-tree-select__trigger')).nativeElement;
-            fixture.detectChanges();
+
+            tick(10);
         }));
 
         it('should be able to select multiple values', fakeAsync(() => {
@@ -4333,7 +4403,12 @@ describe('McTreeSelect', () => {
             fixture.detectChanges();
             flush();
 
+            const optionNodes = overlayContainerElement.querySelectorAll('mc-tree-option');
+
             const optionInstances = testInstance.options.toArray();
+
+            expect(optionNodes[0].classList).toContain('mc-selected');
+            expect(optionNodes[4].classList).toContain('mc-selected');
 
             expect(optionInstances[0].selected).toBe(true);
             expect(optionInstances[4].selected).toBe(true);
@@ -4342,24 +4417,20 @@ describe('McTreeSelect', () => {
         it('should override the previously-selected value when setting an array', fakeAsync(() => {
             trigger.click();
             fixture.detectChanges();
-            flush();
 
             const options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-tree-option');
 
             options[0].click();
             fixture.detectChanges();
-            flush();
 
-            const optionInstances = testInstance.options.toArray();
-
-            expect(optionInstances[0].selected).toBe(true);
+            expect(options[0].classList).toContain('mc-selected');
 
             testInstance.control.setValue(['Applications']);
             fixture.detectChanges();
             flush();
 
-            expect(optionInstances[0].selected).toBe(false);
-            expect(optionInstances[4].selected).toBe(true);
+            expect(options[0].classList).not.toContain('mc-selected');
+            expect(options[4].classList).toContain('mc-selected');
         }));
 
         it('should not close the panel when clicking on options', fakeAsync(() => {

@@ -1,7 +1,9 @@
 @import '../core/styles/common/vendor-prefixes';
 @import '../divider/divider';
-@import '../tree/tree';
 
+@import '../../cdk/a11y/a11y';
+
+@import '../tree/tree';
 
 $mc-select-arrow-size: 5px !default;
 $mc-select-arrow-margin: 4px !default;

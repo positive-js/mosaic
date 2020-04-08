@@ -248,8 +248,4 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
     markForCheck() {
         this.changeDetectorRef.markForCheck();
     }
-
-    detectChanges() {
-        this.changeDetectorRef.detectChanges();
-    }
 }

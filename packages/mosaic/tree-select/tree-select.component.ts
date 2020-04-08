@@ -91,10 +91,11 @@ import {
 import { McCleaner, McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { McTag } from '@ptsecurity/mosaic/tags';
 import { McTreeSelection, McTreeOption } from '@ptsecurity/mosaic/tree';
-import { merge, Observable, Subject, Subscription } from 'rxjs';
+import { defer, merge, Observable, Subject } from 'rxjs';
 import {
     filter,
     map,
+    switchMap,
     take,
     takeUntil,
     distinctUntilChanged
@@ -269,7 +270,20 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
      * Function used to sort the values in a select in multiple mode.
      * Follows the same logic as `Array.prototype.sort`.
      */
-    @Input() sortComparator: (a: McTreeOption, b: McTreeOption, options: McTreeOption[]) => number;
+    @Input() sortComparator: (
+        a: McTreeOption, b: McTreeOption, options: McTreeOption[]
+    ) => number;
+
+    /** Combined stream of all of the child options' change events. */
+    readonly optionSelectionChanges: Observable<McTreeSelectChange> = defer(() => {
+        if (this.options) {
+            return merge(...this.options.map((option) => option.onSelectionChange));
+        }
+
+        return this.ngZone.onStable
+            .asObservable()
+            .pipe(take(1), switchMap(() => this.optionSelectionChanges));
+    }) as Observable<McTreeSelectChange>;
 
     @Input()
     get placeholder(): string {
@@ -390,8 +404,6 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         return this.cleaner && this.selectionModel.hasValue();
     }
 
-    private optionSelectionChangesSubscription: Subscription | null;
-
     private _panelOpen = false;
 
     private originalOnKeyDown: (event: KeyboardEvent) => void;
@@ -492,11 +504,12 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
             this.tempValues = null;
         }
 
-        this.options.changes
+        this.optionSelectionChanges
             .pipe(takeUntil(this.destroy))
-            .subscribe(() => {
-                this.dropSubscriptions();
-                this.listenToOptionsSelectionChanges();
+            .subscribe((event) => {
+                if (!this.multiple && this.panelOpen && event.isUserInput) {
+                    this.close();
+                }
             });
 
         this.tree.selectionChange
@@ -524,10 +537,10 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
 
         this.tags.changes
             .subscribe(() => {
-                Promise.resolve().then(() => this.calculateHiddenItems());
+                setTimeout(() => this.calculateHiddenItems(), 0);
             });
 
-        Promise.resolve().then(() => this.calculateHiddenItems());
+        setTimeout(() => this.calculateHiddenItems(), 0);
     }
 
     ngDoCheck() {
@@ -547,26 +560,6 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
 
         this.destroy.complete();
         this.stateChanges.complete();
-    }
-
-    listenToOptionsSelectionChanges() {
-        /** Combined stream of all of the child options' change events. */
-
-        this.optionSelectionChangesSubscription =
-            merge(...this.options.map((option) => option.onSelectionChange))
-            .pipe(takeUntil(this.destroy))
-            .subscribe((event) => {
-                if (!this.multiple && this.panelOpen && (event as McTreeSelectChange).isUserInput) {
-                    this.close();
-                }
-            });
-    }
-
-    dropSubscriptions() {
-        if (this.optionSelectionChangesSubscription) {
-            this.optionSelectionChangesSubscription.unsubscribe();
-            this.optionSelectionChangesSubscription = null;
-        }
     }
 
     @Input()
@@ -609,7 +602,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
 
         this._panelOpen = true;
 
-        Promise.resolve().then(() => this.highlightCorrectOption());
+        setTimeout(() => this.highlightCorrectOption());
 
         this.changeDetectorRef.markForCheck();
 
@@ -632,7 +625,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         this.changeDetectorRef.markForCheck();
         this.onTouched();
 
-        Promise.resolve().then(() => this.focus());
+        setTimeout(() => this.focus(), 0);
     }
 
     /**

@@ -11,11 +11,10 @@
     ],
     "angularCompilerOptions": {
         "annotateForClosureCompiler": true,
-        "skipTemplateCodegen": true,
         "strictMetadataEmit": true,
         "flatModuleId": "@ptsecurity/cdk",
-        "strictInjectionParameters": true,
-        "enableResourceInlining": true,
+        "skipTemplateCodegen": true,
+        "fullTemplateTypeCheck": true,
         "enableIvy": false
     }
 }
