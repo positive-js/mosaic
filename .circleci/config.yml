@@ -97,7 +97,7 @@ jobs:
                   name: Setup Environment Variables
                   command: |
                       echo 'export CI_PREVIEW=true' >> $BASH_ENV
-                      echo 'export SHORT_GIT_HASH=$(git rev-parse --short $CIRCLE_SHA1)' >> $BASH_ENV
+                      echo 'export SHORT_GIT_HASH=$(git rev-parse --short=7 $CIRCLE_SHA1)' >> $BASH_ENV
                       echo 'export CIRCLE_PULL_REQUEST_NUMBER=$(echo "$CIRCLE_PULL_REQUEST" | cut -d"/" -f7)' >> $BASH_ENV
                       source $BASH_ENV
             - run: printenv
@@ -204,7 +204,7 @@ jobs:
                   name: Setup Environment Variables
                   command: |
                       echo 'export CI_PREVIEW=true' >> $BASH_ENV
-                      echo 'export SHORT_GIT_HASH=$(git rev-parse --short $CIRCLE_SHA1)' >> $BASH_ENV
+                      echo 'export SHORT_GIT_HASH=$(git rev-parse --short=7 $CIRCLE_SHA1)' >> $BASH_ENV
                       echo 'export CIRCLE_PULL_REQUEST_NUMBER=$(echo "$CIRCLE_PULL_REQUEST" | cut -d"/" -f7)' >> $BASH_ENV
                       source $BASH_ENV
             - run: printenv
