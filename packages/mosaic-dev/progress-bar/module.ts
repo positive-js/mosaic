@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, ViewEncapsulation, NgModule, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { McProgressBarModule } from '../../mosaic/progress-bar/';
 
@@ -13,9 +12,9 @@ const MAX_PERCENT: number = 100;
 
 @Component({
     selector: 'app',
-    template: require('./template.html'),
+    templateUrl: './template.html',
     encapsulation: ViewEncapsulation.None,
-    styleUrls: ['./styles.scss']
+    styleUrls: ['../main.scss', './styles.scss']
 })
 export class ProgressBarDemoComponent implements OnDestroy {
     mode: string = 'determinate';
@@ -48,8 +47,4 @@ export class ProgressBarDemoComponent implements OnDestroy {
         ProgressBarDemoComponent
     ]
 })
-export class ProgressBarDemoModule {}
-
-platformBrowserDynamic()
-    .bootstrapModule(ProgressBarDemoModule);
-
+export class DemoModule {}
