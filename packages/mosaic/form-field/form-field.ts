@@ -98,6 +98,42 @@ export class McFormField extends McFormFieldMixinBase implements
 
     canCleanerClearByEsc: boolean = true;
 
+    get hasHint(): boolean {
+        return this.hint && this.hint.length > 0;
+    }
+
+    get hasSuffix(): boolean {
+        return this.suffix && this.suffix.length > 0;
+    }
+
+    get hasPrefix(): boolean {
+        return this.prefix && this.prefix.length > 0;
+    }
+
+    get hasCleaner(): boolean {
+        return !!this.cleaner;
+    }
+
+    get hasStepper(): boolean {
+        return !!this.stepper;
+    }
+
+    get canShowCleaner(): boolean {
+        return this.hasCleaner &&
+        this.control &&
+        this.control.ngControl
+            ? this.control.ngControl.value && !this.control.disabled
+            : false;
+    }
+
+    get disabled(): boolean {
+        return this.control && this.control.disabled;
+    }
+
+    get canShowStepper(): boolean {
+        return this.control && !this.disabled && (this.control.focused || this.hovered);
+    }
+
     // tslint:disable-next-line:naming-convention
     constructor(public _elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) {
         super(_elementRef);
@@ -195,42 +231,6 @@ export class McFormField extends McFormFieldMixinBase implements
         if (!this.control) {
             throw getMcFormFieldMissingControlError();
         }
-    }
-
-    get hasHint(): boolean {
-        return this.hint && this.hint.length > 0;
-    }
-
-    get hasSuffix(): boolean {
-        return this.suffix && this.suffix.length > 0;
-    }
-
-    get hasPrefix(): boolean {
-        return this.prefix && this.prefix.length > 0;
-    }
-
-    get hasCleaner(): boolean {
-        return !!this.cleaner;
-    }
-
-    get hasStepper(): boolean {
-        return !!this.stepper;
-    }
-
-    get canShowCleaner(): boolean {
-        return this.hasCleaner &&
-            this.control &&
-            this.control.ngControl
-                ? this.control.ngControl.value && !this.control.disabled
-                : false;
-    }
-
-    get disabled(): boolean {
-        return this.control && this.control.disabled;
-    }
-
-    get canShowStepper(): boolean {
-        return this.control && !this.disabled && (this.control.focused || this.hovered);
     }
 }
 

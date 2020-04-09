@@ -85,10 +85,7 @@ export class McTabGroupBase {
     constructor(public _elementRef: ElementRef) { }
 }
 // tslint:disable-next-line:naming-convention
-export const McTabGroupMixinBase:
-    CanColorCtor &
-    typeof McTabGroupBase =
-    mixinColor(mixinDisabled(McTabGroupBase));
+export const McTabGroupMixinBase: CanColorCtor & typeof McTabGroupBase = mixinColor(mixinDisabled(McTabGroupBase));
 
 /**
  * Tab-group component.  Supports basic tab pairs (label + content) and includes
@@ -101,7 +98,7 @@ export const McTabGroupMixinBase:
     styleUrls: ['tab-group.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    inputs: ['color'],
+    inputs: ['color', 'disabled'],
     host: {
         class: 'mc-tab-group',
         '[class.mc-tab-group_dynamic-height]': 'dynamicHeight',

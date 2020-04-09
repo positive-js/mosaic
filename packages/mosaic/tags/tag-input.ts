@@ -245,7 +245,7 @@ export class McTagInput implements McTagTextControl, OnChanges {
         this.inputElement.focus();
     }
 
-    private separatorKeyToSymbol(k): string {
+    private separatorKeyToSymbol(k): RegExp | string {
         const sep = {
             [ENTER]: /\r?\n/,
             [TAB]: /\t/,

@@ -56,8 +56,7 @@ export class McTagListBase {
         public parentForm: NgForm,
         public parentFormGroup: FormGroupDirective,
         public ngControl: NgControl
-    ) {
-    }
+    ) {}
 }
 
 // tslint:disable-next-line:naming-convention

@@ -78,7 +78,7 @@ export const McTagMixinBase: CanColorCtor & CanDisableCtor & typeof McTagBase = 
     exportAs: 'mcTag',
     templateUrl: 'tag.partial.html',
     styleUrls: ['./tag.scss'],
-    inputs: ['color', 'disabled'],
+    inputs: ['color'],
     host: {
         class: 'mc-tag',
 
@@ -203,6 +203,7 @@ export class McTag extends McTagMixinBase implements IFocusableOption, OnDestroy
         return this.disabled ? null : -1;
     }
 
+    @Input()
     get disabled() {
         return this._disabled;
     }

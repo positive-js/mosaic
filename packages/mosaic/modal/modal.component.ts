@@ -184,7 +184,6 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
             this.mcFooter = this.formatModalButtons(this.mcFooter as IModalButtonOptions<T>[]);
         }
 
-
         if (this.isComponent(this.mcComponent)) {
             this.createDynamicComponent(this.mcComponent);
         }

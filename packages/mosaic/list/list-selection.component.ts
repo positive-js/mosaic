@@ -66,12 +66,13 @@ export interface McOptionEvent {
     exportAs: 'mcListOption',
     selector: 'mc-list-option',
     host: {
-        '[attr.tabindex]': 'tabIndex',
-
         class: 'mc-list-option mc-no-select',
         '[class.mc-selected]': 'selected',
         '[class.mc-focused]': 'hasFocus',
         '[class.mc-disabled]': 'disabled',
+
+        '[attr.tabindex]': 'tabIndex',
+        '[attr.disabled]': 'disabled',
 
         '(focus)': 'focus()',
         '(blur)': 'blur()',

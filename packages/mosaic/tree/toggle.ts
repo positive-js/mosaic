@@ -11,6 +11,7 @@ import { map } from 'rxjs/operators';
     host: {
         class: 'mc-tree-node-toggle',
         '(click)': 'toggle($event)',
+        // todo ?
         '[class.mc-disabled]': 'disabled',
         '[class.mc-opened]': 'iconState'
     },
@@ -39,6 +40,7 @@ export class McTreeNodeToggleComponent<T> extends CdkTreeNodeToggle<T> {
     selector: '[mcTreeNodeToggle]',
     host: {
         '(click)': 'toggle($event)',
+        // todo ?
         '[class.mc-disabled]': 'disabled'
     },
     providers: [{ provide: CdkTreeNodeToggle, useExisting: McTreeNodeToggleDirective }]

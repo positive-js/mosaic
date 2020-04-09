@@ -39,7 +39,6 @@ export class McDatepickerToggleIcon {
         // consumer may have provided, while still being able to receive focus.
         '[attr.tabindex]': '-1',
         '[class.mc-active]': 'datepicker && datepicker.opened',
-        '[class.mc-warn]': 'datepicker && datepicker.color === "error"',
         '(focus)': 'button.focus()'
     },
     exportAs: 'mcDatepickerToggle',

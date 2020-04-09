@@ -307,11 +307,6 @@ export class McDatepickerInput<D> implements ControlValueAccessor, OnDestroy, Va
         this.dateChange.emit(new McDatepickerInputEvent(this, this.elementRef.nativeElement));
     }
 
-    /** Returns the palette used by the input's form field, if any. */
-    getThemePalette(): ThemePalette | undefined {
-        return this.formField ? this.formField.color : undefined;
-    }
-
     /** Handles blur events on the input. */
     onBlur() {
         // Reformat the input only if we have a valid value.

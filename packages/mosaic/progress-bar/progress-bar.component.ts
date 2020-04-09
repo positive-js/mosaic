@@ -22,9 +22,7 @@ export class McProgressBarBase {
 
 // tslint:disable-next-line:naming-convention
 export const McProgressBarMixinBase:
-    CanColorCtor &
-    typeof McProgressBarBase =
-        mixinColor(McProgressBarBase);
+    CanColorCtor & typeof McProgressBarBase = mixinColor(McProgressBarBase, ThemePalette.Primary);
 
 @Component({
     selector: 'mc-progress-bar',
@@ -32,6 +30,7 @@ export const McProgressBarMixinBase:
     styleUrls: ['./progress-bar.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
+    inputs: ['color'],
     host: {
         class: 'mc-progress-bar',
         '[attr.id]': 'id'
@@ -41,7 +40,6 @@ export class McProgressBar extends McProgressBarMixinBase implements CanColor {
     @Input() id: string = `mc-progress-bar-${idIterator++}`;
     @Input() value: number = 0;
     @Input() mode: ProgressBarMode = 'determinate';
-    @Input() color: ThemePalette = ThemePalette.Primary;
 
     constructor(elementRef: ElementRef) {
         super(elementRef);

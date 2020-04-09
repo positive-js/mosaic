@@ -69,7 +69,7 @@ export enum PopoverVisibility {
     }
 })
 export class McPopoverComponent {
-    positions: ConnectionPositionPair[] = [ ...EXTENDED_OVERLAY_POSITIONS ];
+    positions: ConnectionPositionPair[] = [...EXTENDED_OVERLAY_POSITIONS];
     availablePositions: any;
     popoverVisibility: PopoverVisibility = PopoverVisibility.Initial;
     closeOnInteraction: boolean = false;
@@ -448,9 +448,10 @@ export class McPopover implements OnInit, OnDestroy {
         private scrollDispatcher: ScrollDispatcher,
         private hostView: ViewContainerRef,
         @Inject(MC_POPOVER_SCROLL_STRATEGY) private scrollStrategy,
-        @Optional() private direction: Directionality) {
-            this.availablePositions = POSITION_MAP;
-        }
+        @Optional() private direction: Directionality
+    ) {
+        this.availablePositions = POSITION_MAP;
+    }
 
     /** Create the overlay config and position strategy */
     createOverlay(): OverlayRef {
@@ -464,7 +465,7 @@ export class McPopover implements OnInit, OnDestroy {
             .withTransformOriginOn('.mc-popover')
             .withFlexibleDimensions(false)
             .withViewportMargin(VIEWPORT_MARGIN)
-            .withPositions([ ...EXTENDED_OVERLAY_POSITIONS ]);
+            .withPositions([...EXTENDED_OVERLAY_POSITIONS]);
 
         const scrollableAncestors = this.scrollDispatcher
             .getAncestorScrollContainers(this.elementRef);
