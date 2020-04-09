@@ -8,11 +8,11 @@
     $foreground: map-get($theme, foreground);
     $is-dark: map-get($theme, is-dark);
 
-    $popover: map-get(map-get($theme, components), popover);
+    $popup-common: map-get(map-get($theme, components), popup-common);
 
-    $background-color: map-get($popover, background-color);
-    $footer_background-color: map-get($popover, footer_background-color);
-    $border-color: map-get($popover, border-color);
+    $background-color: map-get($popup-common, background);
+    $footer_background-color: if($is-dark, $background-color, map-get($popup-common, footer_background-color));
+    $border-color: map-get($popup-common, darker-border-color);
     $divider-color: map-get($foreground, divider);
 
     .mc-popover {

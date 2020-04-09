@@ -20,7 +20,7 @@
 
     .mc-modal {
         .mc-modal-content {
-            // почему у модалки такой бэкграунд ?
+            // У модалки должен быть фон background. Чтобы поповеры и дропдауны было видно поверх модалки
             background-color: map-get($background, background);
 
             box-shadow: map-get($modal, shadow);
