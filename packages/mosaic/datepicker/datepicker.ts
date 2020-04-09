@@ -16,7 +16,6 @@ import {
     ChangeDetectionStrategy,
     Component,
     ComponentRef,
-    ElementRef,
     EventEmitter,
     Inject,
     InjectionToken,
@@ -31,12 +30,6 @@ import {
 } from '@angular/core';
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
 import { ESCAPE, UP_ARROW } from '@ptsecurity/cdk/keycodes';
-import {
-    CanColor,
-    CanColorCtor,
-    mixinColor,
-    ThemePalette
-} from '@ptsecurity/mosaic/core';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { merge, Observable, Subject, Subscription } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
@@ -68,18 +61,6 @@ export const MC_DATEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER = {
     useFactory: MC_DATEPICKER_SCROLL_STRATEGY_FACTORY
 };
 
-// Boilerplate for applying mixins to McDatepickerContent.
-/** @docs-private */
-export class McDatepickerContentBase {
-    // tslint:disable-next-line:naming-convention
-    constructor(public _elementRef: ElementRef) {
-    }
-}
-
-// tslint:disable-next-line:naming-convention
-export const McDatepickerContentMixinBase: CanColorCtor & typeof McDatepickerContentBase =
-    mixinColor(McDatepickerContentBase);
-
 /**
  * Component used as the content for the datepicker dialog and popup. We use this instead of using
  * McCalendar directly as the content so we can control the initial focus. This also gives us a
@@ -101,24 +82,15 @@ export const McDatepickerContentMixinBase: CanColorCtor & typeof McDatepickerCon
         mcDatepickerAnimations.fadeInCalendar
     ],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    inputs: ['color']
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class McDatepickerContent<D> extends McDatepickerContentMixinBase
-    implements AfterViewInit, CanColor {
+export class McDatepickerContent<D> implements AfterViewInit {
 
     /** Reference to the internal calendar component. */
-    @ViewChild(McCalendar, {static: false}) calendar: McCalendar<D>;
+    @ViewChild(McCalendar, { static: false }) calendar: McCalendar<D>;
 
     /** Reference to the datepicker that created the overlay. */
     datepicker: McDatepicker<D>;
-
-    /** Whether the datepicker is above or below the input. */
-    isAbove: boolean;
-
-    constructor(elementRef: ElementRef) {
-        super(elementRef);
-    }
 
     ngAfterViewInit() {
         this.calendar.focusActiveCell();
@@ -136,9 +108,9 @@ export class McDatepickerContent<D> extends McDatepickerContentMixinBase
     exportAs: 'mcDatepicker',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: McFormFieldControl, useExisting: McDatepicker }]
+    providers: [{provide: McFormFieldControl, useExisting: McDatepicker }]
 })
-export class McDatepicker<D> implements OnDestroy, CanColor {
+export class McDatepicker<D> implements OnDestroy {
 
     /** The date to open the calendar to initially. */
     @Input()
@@ -150,18 +122,6 @@ export class McDatepicker<D> implements OnDestroy, CanColor {
 
     set startAt(value: D | null) {
         this._startAt = this.getValidDateOrNull(this.dateAdapter.deserialize(value));
-    }
-
-    /** Color palette to use on the datepicker's calendar. */
-    @Input()
-    get color(): ThemePalette {
-        // @ts-ignore:next-line
-        return this._color ||
-            (this.datepickerInput ? this.datepickerInput.getThemePalette() : undefined);
-    }
-
-    set color(value: ThemePalette) {
-        this._color = value;
     }
 
     /** Whether the datepicker pop-up should be disabled. */
@@ -273,7 +233,6 @@ export class McDatepicker<D> implements OnDestroy, CanColor {
     private _disabled: boolean;
     private _opened = false;
     private validSelected: D | null = null;
-    private _color: ThemePalette;
 
     /** A portal containing the calendar for this datepicker. */
     private calendarPortal: ComponentPortal<McDatepickerContent<D>>;
@@ -416,7 +375,6 @@ export class McDatepicker<D> implements OnDestroy, CanColor {
         if (!this.popupRef.hasAttached()) {
             this.popupComponentRef = this.popupRef.attach(this.calendarPortal);
             this.popupComponentRef.instance.datepicker = this;
-            this.setColor();
 
             // Update the position once the calendar has rendered.
             this.ngZone.onStable.asObservable().pipe(take(1)).subscribe(() => {
@@ -492,13 +450,5 @@ export class McDatepicker<D> implements OnDestroy, CanColor {
      */
     private getValidDateOrNull(obj: any): D | null {
         return (this.dateAdapter.isDateInstance(obj) && this.dateAdapter.isValid(obj)) ? obj : null;
-    }
-
-    /** Passes the current theme color along to the calendar overlay. */
-    private setColor(): void {
-        const color = this.color;
-        if (this.popupComponentRef) {
-            this.popupComponentRef.instance.color = color;
-        }
     }
 }

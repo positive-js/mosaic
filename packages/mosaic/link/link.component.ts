@@ -4,8 +4,7 @@ import {
     ElementRef,
     OnDestroy,
     ChangeDetectorRef,
-    Directive,
-    Attribute
+    Directive
 } from '@angular/core';
 import {
     CanDisable, CanDisableCtor,
@@ -21,13 +20,13 @@ export class McLinkBase {
 }
 
 // tslint:disable-next-line: naming-convention
-export const McLinkMixinBase: HasTabIndexCtor & CanDisableCtor & typeof McLinkBase
-    = mixinTabIndex(mixinDisabled(McLinkBase));
+export const McLinkMixinBase: HasTabIndexCtor & CanDisableCtor &
+    typeof McLinkBase = mixinTabIndex(mixinDisabled(McLinkBase));
 
 @Directive({
     selector: 'a.mc-link',
     exportAs: 'mcLink',
-    inputs: ['disabled'],
+    inputs: ['tabIndex'],
     host: {
         '[attr.disabled]': 'disabled || null',
         '[attr.tabindex]': 'tabIndex'
@@ -35,7 +34,6 @@ export const McLinkMixinBase: HasTabIndexCtor & CanDisableCtor & typeof McLinkBa
 })
 
 export class McLink extends McLinkMixinBase implements OnDestroy, HasTabIndex, CanDisable {
-
     @Input()
     get disabled() {
         return this._disabled;
@@ -55,12 +53,9 @@ export class McLink extends McLinkMixinBase implements OnDestroy, HasTabIndex, C
     constructor(
         elementRef: ElementRef,
         private focusMonitor: FocusMonitor,
-        private changeDetector: ChangeDetectorRef,
-        @Attribute('tabindex') tabIndex: string
+        private changeDetector: ChangeDetectorRef
     ) {
         super(elementRef);
-
-        this.tabIndex = parseInt(tabIndex) || 0;
 
         this.focusMonitor.monitor(elementRef.nativeElement, true);
     }

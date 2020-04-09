@@ -106,18 +106,10 @@ $mc-datepicker-today-fade-amount: 0.2;
         @include popup-params($theme);
 
         color: mc-color($foreground, text);
-
-        &.mc-warn {
-            @include _mc-datepicker-color(mc-color($error));
-        }
     }
 
     .mc-active {
         color: mc-color($primary);
-
-        &.mc-warn {
-            color: mc-color($error);
-        }
     }
 }
 

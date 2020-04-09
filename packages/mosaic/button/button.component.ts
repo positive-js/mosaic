@@ -75,10 +75,7 @@ export class McButtonBase {
 
 // tslint:disable-next-line:naming-convention
 export const McButtonMixinBase:
-    CanDisableCtor &
-    CanColorCtor &
-    typeof McButtonBase =
-        mixinColor(mixinDisabled(McButtonBase));
+    CanDisableCtor & CanColorCtor & typeof McButtonBase = mixinColor(mixinDisabled(McButtonBase));
 
 
 @Component({

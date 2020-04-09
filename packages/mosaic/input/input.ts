@@ -81,9 +81,9 @@ export const McInputMixinBase: CanUpdateErrorStateCtor & typeof McInputBase = mi
         '(focus)': 'focusChanged(true)',
         '(input)': 'onInput()'
     },
-    providers: [
-        { provide: McFormFieldControl, useExisting: McInput }
-    ]
+    providers: [{
+        provide: McFormFieldControl, useExisting: McInput
+    }]
 })
 export class McInput extends McInputMixinBase implements McFormFieldControl<any>, OnChanges, OnDestroy, DoCheck,
     CanUpdateErrorState, AfterContentInit, OnChanges {
@@ -365,5 +365,4 @@ export class McInput extends McInputMixinBase implements McFormFieldControl<any>
     exportAs: 'McInputMonospace',
     host: { class: 'mc-input_monospace' }
 })
-export class McInputMono {
-}
+export class McInputMono {}

@@ -74,7 +74,7 @@ export class McVerticalNavbarItem extends McVerticalNavbarMixinBase implements C
     }
 
     get hasDropdownAttached() {
-        return !! this.trigger;
+        return !!this.trigger;
     }
 
     ngOnDestroy() {

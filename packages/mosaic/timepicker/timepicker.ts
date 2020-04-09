@@ -59,7 +59,7 @@ export class McTimepickerBase {
         public parentForm: NgForm,
         public parentFormGroup: FormGroupDirective,
         public ngControl: NgControl
-    ) { }
+    ) {}
 }
 
 // tslint:disable-next-line naming-convention
@@ -75,8 +75,8 @@ export const McTimepickerMixinBase:
         // the native input element. Otherwise property bindings for those don't work.
         '[attr.id]': 'id',
         '[attr.placeholder]': 'placeholder',
-        '[disabled]': 'disabled',
-        '[required]': 'required',
+        '[attr.disabled]': 'disabled',
+        '[attr.required]': 'required',
         '[attr.time-format]': 'timeFormat',
         '[attr.min-time]': 'minTime',
         '[attr.max-time]': 'maxTime',

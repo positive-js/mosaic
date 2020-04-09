@@ -245,7 +245,10 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
     }
 
     ngAfterContentInit() {
-        this.keyManager = new FocusKeyManager<McDropdownItem>(this.items).withWrap().withTypeAhead();
+        this.keyManager = new FocusKeyManager<McDropdownItem>(this.items)
+            .withWrap()
+            .withTypeAhead();
+
         this.tabSubscription = this.keyManager.tabOut.subscribe(() => this.closed.emit('tab'));
     }
 

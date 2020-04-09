@@ -144,6 +144,7 @@ const McTreeSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorSt
 
         '[attr.id]': 'id',
         '[attr.tabindex]': 'tabIndex',
+        '[attr.disabled]': 'disabled || null',
 
         '(click)': 'toggle()',
         '(keydown)': 'handleKeydown($event)',
@@ -427,7 +428,6 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         private readonly ngZone: NgZone,
         private readonly renderer: Renderer2,
         defaultErrorStateMatcher: ErrorStateMatcher,
-        @Attribute('tabindex') tabIndex: string,
         @Inject(MC_SELECT_SCROLL_STRATEGY) private readonly scrollStrategyFactory,
         @Optional() @Inject(NG_VALIDATORS) public rawValidators: Validator[],
         @Optional() @Inject(MC_VALIDATION) private mcValidation: McValidationOptions,
@@ -446,8 +446,6 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
             // the `providers` to avoid running into a circular import.
             this.ngControl.valueAccessor = this;
         }
-
-        this.tabIndex = parseInt(tabIndex) || 0;
 
         // Force setter to be called in case id was not specified.
         this.id = this.id;

@@ -104,11 +104,11 @@ export class McAutocomplete implements AfterContentInit {
      * Takes classes set on the host mc-autocomplete element and applies them to the panel
      * inside the overlay container to allow for easy styling.
      */
+    @Input('class')
     get classList() {
         return this._classList;
     }
 
-    @Input('class')
     set classList(value: string) {
         if (value && value.length) {
             value.split(' ')

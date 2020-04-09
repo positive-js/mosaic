@@ -42,8 +42,8 @@ export const McTextareaMixinBase: CanUpdateErrorStateCtor & typeof McTextareaBas
         '[attr.id]': 'id',
         '[attr.placeholder]': 'placeholder',
         '[attr.aria-invalid]': 'errorState',
-        '[disabled]': 'disabled',
-        '[required]': 'required',
+        '[attr.disabled]': 'disabled',
+        '[attr.required]': 'required',
         '(blur)': 'focusChanged(false)',
         '(focus)': 'focusChanged(true)'
     },
@@ -158,13 +158,15 @@ export class McTextarea extends McTextareaMixinBase implements McFormFieldContro
     private freeRowsHeight: number = 0;
     private minHeight: number = 0;
 
-    constructor(protected elementRef: ElementRef,
-                @Optional() @Self() public ngControl: NgControl,
-                @Optional() parentForm: NgForm,
-                @Optional() parentFormGroup: FormGroupDirective,
-                defaultErrorStateMatcher: ErrorStateMatcher,
-                @Optional() @Self() @Inject(MC_TEXTAREA_VALUE_ACCESSOR) inputValueAccessor: any,
-                private ngZone: NgZone) {
+    constructor(
+        protected elementRef: ElementRef,
+        @Optional() @Self() public ngControl: NgControl,
+        @Optional() parentForm: NgForm,
+        @Optional() parentFormGroup: FormGroupDirective,
+        defaultErrorStateMatcher: ErrorStateMatcher,
+        @Optional() @Self() @Inject(MC_TEXTAREA_VALUE_ACCESSOR) inputValueAccessor: any,
+        private ngZone: NgZone
+    ) {
         super(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl);
         // If no input value accessor was explicitly specified, use the element as the textarea value
         // accessor.

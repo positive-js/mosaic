@@ -72,6 +72,7 @@ interface SelectionModelOption {
         class: 'mc-tree-selection',
 
         '[attr.tabindex]': 'tabIndex',
+        '[attr.disabled]': 'disabled || null',
 
         '(blur)': 'blur()',
         '(focus)': 'focus($event)',
@@ -188,15 +189,12 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
         private elementRef: ElementRef,
         differs: IterableDiffers,
         changeDetectorRef: ChangeDetectorRef,
-        @Attribute('tabindex') tabIndex: string,
         @Attribute('multiple') multiple: string
     ) {
         super(differs, changeDetectorRef);
 
-        this.tabIndex = parseInt(tabIndex) || 0;
-
         if (multiple === MultipleMode.CHECKBOX || multiple === MultipleMode.KEYBOARD) {
-            this.multipleMode = multiple;
+            this.multipleMode = multiple as MultipleMode;
         } else if (multiple !== null) {
             this.multipleMode = MultipleMode.CHECKBOX;
         }

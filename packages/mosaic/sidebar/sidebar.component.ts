@@ -99,7 +99,6 @@ export class McSidebar implements OnDestroy, OnInit, AfterContentInit {
 
     @ContentChild(McSidebarClosed, { static: false }) closedContent: McSidebarClosed;
 
-
     get animationState(): McSidebarAnimationState {
         return this._opened ? McSidebarAnimationState.Opened : McSidebarAnimationState.Closed;
     }

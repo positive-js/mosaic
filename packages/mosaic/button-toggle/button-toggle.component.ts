@@ -117,9 +117,7 @@ export class McButtonToggleGroup implements ControlValueAccessor, OnInit, AfterC
     set disabled(value: boolean) {
         this._disabled = coerceBooleanProperty(value);
 
-        if (!this.buttonToggles) {
-            return;
-        }
+        if (!this.buttonToggles) { return; }
 
         this.buttonToggles.forEach((toggle) => toggle.markForCheck());
     }
@@ -132,8 +130,7 @@ export class McButtonToggleGroup implements ControlValueAccessor, OnInit, AfterC
     @Output() readonly valueChange = new EventEmitter<any>();
 
     /** Event emitted when the group's value changes. */
-    @Output() readonly change: EventEmitter<McButtonToggleChange> =
-        new EventEmitter<McButtonToggleChange>();
+    @Output() readonly change: EventEmitter<McButtonToggleChange> = new EventEmitter<McButtonToggleChange>();
     private _vertical = false;
     private _multiple = false;
     private _disabled = false;
@@ -292,6 +289,7 @@ export class McButtonToggleGroup implements ControlValueAccessor, OnInit, AfterC
 /** Single button inside of a toggle group. */
 @Component({
     selector: 'mc-button-toggle',
+    exportAs: 'mcButtonToggle',
     template: `
         <button
             mc-button
@@ -305,7 +303,6 @@ export class McButtonToggleGroup implements ControlValueAccessor, OnInit, AfterC
     `,
     styleUrls: ['button-toggle.scss'],
     encapsulation: ViewEncapsulation.None,
-    exportAs: 'mcButtonToggle',
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         class: 'mc-button-toggle',
@@ -342,7 +339,7 @@ export class McButtonToggle implements OnInit, OnDestroy {
     // tslint:disable-next-line:no-reserved-keywords
     type: ToggleType;
 
-    @ViewChild(McButton, {static: false}) mcButton: McButton;
+    @ViewChild(McButton, { static: false }) mcButton: McButton;
 
     /** McButtonToggleGroup reads this to assign its own value. */
     @Input() value: any;
@@ -357,8 +354,7 @@ export class McButtonToggle implements OnInit, OnDestroy {
     set disabled(value: boolean) { this._disabled = coerceBooleanProperty(value); }
 
     /** Event emitted when the group value changes. */
-    @Output() readonly change: EventEmitter<McButtonToggleChange> =
-        new EventEmitter<McButtonToggleChange>();
+    @Output() readonly change: EventEmitter<McButtonToggleChange> = new EventEmitter<McButtonToggleChange>();
 
     private isSingleSelector = false;
     private _checked = false;

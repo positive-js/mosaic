@@ -1,19 +1,33 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { UniqueSelectionDispatcher } from '@angular/cdk/collections';
 import {
-    AfterContentInit, AfterViewInit,
+    AfterContentInit,
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
-    Component, ContentChildren, Directive, ElementRef, EventEmitter, forwardRef,
-    Input, OnDestroy, OnInit, Optional, Output, QueryList,
+    Component,
+    ContentChildren,
+    Directive,
+    ElementRef,
+    EventEmitter,
+    forwardRef,
+    Input,
+    OnDestroy,
+    OnInit,
+    Optional,
+    Output,
+    QueryList,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {
-    CanColor, CanColorCtor,
-    CanDisable, CanDisableCtor,
-    HasTabIndex, HasTabIndexCtor,
+    CanColor,
+    CanColorCtor,
+    CanDisable,
+    CanDisableCtor,
+    HasTabIndex,
+    HasTabIndexCtor,
     mixinColor,
     mixinDisabled,
     mixinTabIndex,
@@ -35,7 +49,10 @@ export class McRadioChange {
 
 // Boilerplate for applying mixins to McRadioGroup.
 /** @docs-private */
-export class McRadioGroupBase {}
+export class McRadioGroupBase {
+    // tslint:disable-next-line:naming-convention
+    constructor(public _elementRef: ElementRef) {}
+}
 // tslint:disable-next-line:naming-convention
 export const McRadioGroupMixinBase: CanDisableCtor & typeof McRadioGroupBase = mixinDisabled(McRadioGroupBase);
 
@@ -53,12 +70,11 @@ export const MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR: any = {
 @Directive({
     selector: 'mc-radio-group',
     exportAs: 'mcRadioGroup',
-    providers: [MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR],
     host: {
         role: 'radiogroup',
         class: 'mc-radio-group'
     },
-    inputs: ['disabled']
+    providers: [MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR]
 })
 export class McRadioGroup extends McRadioGroupMixinBase
     implements AfterContentInit, ControlValueAccessor, CanDisable {
@@ -156,10 +172,8 @@ export class McRadioGroup extends McRadioGroupMixinBase
     /** Whether the radio group is required. */
     private _required: boolean = false;
 
-    constructor(
-        private readonly _changeDetector: ChangeDetectorRef
-    ) {
-        super();
+    constructor(elementRef: ElementRef, private readonly _changeDetector: ChangeDetectorRef) {
+        super(elementRef);
     }
 
     /** The method to be called in order to update ngModel */
