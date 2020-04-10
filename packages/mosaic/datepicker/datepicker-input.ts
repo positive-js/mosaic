@@ -23,8 +23,6 @@ import {
 } from '@angular/forms';
 import { DateAdapter, MC_DATE_FORMATS, McDateFormats } from '@ptsecurity/cdk/datetime';
 import { DOWN_ARROW } from '@ptsecurity/cdk/keycodes';
-import { ThemePalette } from '@ptsecurity/mosaic/core';
-import { McFormField } from '@ptsecurity/mosaic/form-field';
 import { MC_INPUT_VALUE_ACCESSOR } from '@ptsecurity/mosaic/input';
 import { Subscription } from 'rxjs';
 
@@ -216,8 +214,7 @@ export class McDatepickerInput<D> implements ControlValueAccessor, OnDestroy, Va
     constructor(
         public elementRef: ElementRef<HTMLInputElement>,
         @Optional() public dateAdapter: DateAdapter<D>,
-        @Optional() @Inject(MC_DATE_FORMATS) private dateFormats: McDateFormats,
-        @Optional() private formField: McFormField
+        @Optional() @Inject(MC_DATE_FORMATS) private dateFormats: McDateFormats
     ) {
         this.validator = Validators.compose([
             this.parseValidator,
