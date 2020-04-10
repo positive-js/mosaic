@@ -918,48 +918,6 @@ describe('McDatepicker', () => {
 
         });
 
-        describe('datepicker inside mc-form-field', () => {
-            let fixture: ComponentFixture<FormFieldDatepicker>;
-            let testComponent: FormFieldDatepicker;
-
-            beforeEach(fakeAsync(() => {
-                fixture = createComponent(FormFieldDatepicker, [McMomentDateModule]);
-                fixture.detectChanges();
-                testComponent = fixture.componentInstance;
-            }));
-
-            afterEach(fakeAsync(() => {
-                testComponent.datepicker.close();
-                fixture.detectChanges();
-                flush();
-            }));
-
-            it('should pass the form field theme color to the overlay', fakeAsync(() => {
-                testComponent.formField.color = ThemePalette.Primary;
-                testComponent.datepicker.open();
-                fixture.detectChanges();
-                flush();
-
-                let contentEl = document.querySelector('.mc-datepicker__content')!;
-
-                expect(contentEl.classList).toContain('mc-primary');
-
-                testComponent.datepicker.close();
-                fixture.detectChanges();
-                flush();
-
-                testComponent.formField.color = ThemePalette.Error;
-                testComponent.datepicker.open();
-
-                contentEl = document.querySelector('.mc-datepicker__content')!;
-                fixture.detectChanges();
-                flush();
-
-                expect(contentEl.classList).toContain('mc-error');
-                expect(contentEl.classList).not.toContain('mc-primary');
-            }));
-        });
-
         describe('datepicker with min and max dates and validation', () => {
             let fixture: ComponentFixture<DatepickerWithMinAndMaxValidation>;
             let testComponent: DatepickerWithMinAndMaxValidation;
