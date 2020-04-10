@@ -42,7 +42,7 @@ export const McTextareaMixinBase: CanUpdateErrorStateCtor & typeof McTextareaBas
         '[attr.id]': 'id',
         '[attr.placeholder]': 'placeholder',
         '[attr.aria-invalid]': 'errorState',
-        '[attr.disabled]': 'disabled',
+        '[attr.disabled]': 'disabled || null',
         '[attr.required]': 'required',
         '(blur)': 'focusChanged(false)',
         '(focus)': 'focusChanged(true)'

@@ -72,7 +72,7 @@ export interface McOptionEvent {
         '[class.mc-disabled]': 'disabled',
 
         '[attr.tabindex]': 'tabIndex',
-        '[attr.disabled]': 'disabled',
+        '[attr.disabled]': 'disabled || null',
 
         '(focus)': 'focus()',
         '(blur)': 'blur()',
