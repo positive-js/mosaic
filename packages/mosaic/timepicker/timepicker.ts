@@ -75,7 +75,7 @@ export const McTimepickerMixinBase:
         // the native input element. Otherwise property bindings for those don't work.
         '[attr.id]': 'id',
         '[attr.placeholder]': 'placeholder',
-        '[attr.disabled]': 'disabled',
+        '[attr.disabled]': 'disabled || null',
         '[attr.required]': 'required',
         '[attr.time-format]': 'timeFormat',
         '[attr.min-time]': 'minTime',
