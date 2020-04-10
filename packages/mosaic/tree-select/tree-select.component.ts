@@ -9,7 +9,7 @@ import {
 } from '@angular/cdk/overlay';
 import {
     AfterContentInit,
-    AfterViewInit,
+    AfterViewInit, Attribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -386,10 +386,6 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         return this._focused || this._panelOpen;
     }
 
-    /**
-     * @deprecated Setter to be removed as this property is intended to be readonly.
-     * @breaking-change 8.0.0
-     */
     set focused(value: boolean) {
         this._focused = value;
     }
@@ -436,7 +432,8 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         @Optional() private readonly parentFormField: McFormField,
         @Optional() @Self() ngControl: NgControl,
         @Optional() @Self() public ngModel: NgModel,
-        @Optional() @Self() public formControlName: FormControlName
+        @Optional() @Self() public formControlName: FormControlName,
+        @Attribute('tabindex') tabIndex: string
     ) {
         super(elementRef, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl);
 
@@ -448,6 +445,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
 
         // Force setter to be called in case id was not specified.
         this.id = this.id;
+        this.tabIndex = parseInt(tabIndex) || 0;
     }
 
     ngOnInit() {

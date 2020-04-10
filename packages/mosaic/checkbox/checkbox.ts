@@ -1,6 +1,6 @@
 import { FocusMonitor, FocusOrigin } from '@angular/cdk/a11y';
 import {
-    AfterViewInit,
+    AfterViewInit, Attribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -237,11 +237,13 @@ export class McCheckbox extends McCheckboxMixinBase implements ControlValueAcces
         private _changeDetectorRef: ChangeDetectorRef,
         private _focusMonitor: FocusMonitor,
         @Optional() @Inject(MC_CHECKBOX_CLICK_ACTION)
-        private _clickAction: McCheckboxClickAction
+        private _clickAction: McCheckboxClickAction,
+        @Attribute('tabindex') tabIndex: string
     ) {
         super(elementRef);
 
         this.id = this.uniqueId;
+        this.tabIndex = parseInt(tabIndex) || 0;
     }
 
     /**
