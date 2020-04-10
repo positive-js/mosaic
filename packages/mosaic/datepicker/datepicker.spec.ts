@@ -24,7 +24,7 @@ import {
     dispatchMouseEvent
 } from '@ptsecurity/cdk/testing';
 import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
-import { McFormField, McFormFieldModule } from '@ptsecurity/mosaic/form-field';
+import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { Subject } from 'rxjs';
 
 import { McInputModule } from '../input/index';
@@ -1480,23 +1480,7 @@ class DatepickerWithToggle {
         <mc-datepicker #d></mc-datepicker>
     `
 })
-class DatepickerWithCustomIcon {
-}
-
-
-@Component({
-    template: `
-        <mc-form-field>
-            <input mcInput [mcDatepicker]="d">
-            <mc-datepicker #d></mc-datepicker>
-        </mc-form-field>
-    `
-})
-class FormFieldDatepicker {
-    @ViewChild('d', {static: false}) datepicker: McDatepicker<Moment>;
-    @ViewChild(McDatepickerInput, {static: false}) datepickerInput: McDatepickerInput<Moment>;
-    @ViewChild(McFormField, {static: false}) formField: McFormField;
-}
+class DatepickerWithCustomIcon {}
 
 
 @Component({
