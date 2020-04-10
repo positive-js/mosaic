@@ -45,7 +45,7 @@ export class McToggleChange {
     selector: 'mc-toggle',
     exportAs: 'mcToggle',
     templateUrl: './toggle.component.html',
-    styleUrls: ['./toggle.css'],
+    styleUrls: ['./toggle.scss'],
     providers: [
         {provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => McToggleComponent), multi: true}
     ],

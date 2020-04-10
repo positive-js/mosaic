@@ -23,8 +23,8 @@ function publishDocsPreview() {
     const REPO_DIR = `./tmp/mosaic-docs-preview`;
 
     const PR_NUMBER = getPrNumber(
-        process.env.CIRCLE_PR_NUMBER,
-        process.env.CIRCLE_PULL_REQUEST_NUMBER
+        process.env.CIRCLE_PR_NUMBER as string,
+        process.env.CIRCLE_PULL_REQUEST_NUMBER as string
     );
 
     const SHORT_SHA = process.env.SHORT_GIT_HASH;
@@ -47,8 +47,8 @@ function publishDocsPreview() {
 async function postGithubComment() {
 
     const PR_NUMBER = getPrNumber(
-        process.env.CIRCLE_PR_NUMBER,
-        process.env.CIRCLE_PULL_REQUEST_NUMBER
+        process.env.CIRCLE_PR_NUMBER as string,
+        process.env.CIRCLE_PULL_REQUEST_NUMBER as string
     );
     const owner = process.env.CIRCLE_PROJECT_USERNAME;
 
@@ -59,7 +59,8 @@ async function postGithubComment() {
         console.log('Start to create a comment');
         const auth = process.env.GITHUB_API_MOSAIC;
 
-        const githubApi: OctokitApi = new OctokitApi({
+        // @ts-ignore
+        const githubApi = new OctokitApi({
             auth
         });
 
@@ -70,7 +71,7 @@ async function postGithubComment() {
         });
 
         const ptBotComment = comments.data
-            .filter(comment => comment.user.login === 'positivejs')
+            .filter((comment) => comment.user.login === 'positivejs')
             .pop();
 
         const body = `Preview docs changes for ${SHORT_SHA} at https://positive-js.github.io/mosaic-previews/pr${PR_NUMBER}-${SHORT_SHA}/`;
@@ -124,6 +125,7 @@ function prepareAndPublish(
     process.chdir('../../');
 
     if (clean) {
+        // @ts-ignore
         execSync('rm -rf', [`${repoDir}/*`]);
     }
 

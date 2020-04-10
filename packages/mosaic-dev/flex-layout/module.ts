@@ -1,13 +1,11 @@
-// tslint:disable:no-console
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 
 @Component({
     selector: 'app',
-    template: require('./template.html'),
-    styleUrls: ['./styles.scss'],
+    templateUrl: './template.html',
+    styleUrls: ['../main.scss', './styles.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent {}
@@ -25,8 +23,3 @@ export class DemoComponent {}
     ]
 })
 export class DemoModule {}
-
-platformBrowserDynamic()
-    .bootstrapModule(DemoModule)
-    .catch((error) => console.error(error));
-

@@ -80,7 +80,7 @@ export function MC_DROPDOWN_DEFAULT_OPTIONS_FACTORY(): McDropdownDefaultOptions 
     selector: 'mc-dropdown',
     exportAs: 'mcDropdown',
     templateUrl: 'dropdown.html',
-    styleUrls: ['dropdown.css'],
+    styleUrls: ['dropdown.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     animations: [

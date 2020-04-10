@@ -546,7 +546,8 @@ describe('McTagList', () => {
             });
         });
 
-        it('height should be 32px', () => {
+        // TODO Expected pixels
+        xit('height should be 32px', () => {
             const formFieldElement = fixture.debugElement.query(By.directive(McFormField)).nativeElement;
             expect(formFieldElement.getBoundingClientRect().height).toBe(32);
         });
@@ -601,14 +602,12 @@ describe('McTagList', () => {
 
     // todo need rethink this selection logic
     xdescribe('selection logic', () => {
-        let formField: HTMLElement;
         let nativeTags: HTMLElement[];
 
         beforeEach(() => {
             fixture = createComponent(BasicTagList);
             fixture.detectChanges();
 
-            formField = fixture.debugElement.query(By.css('.mc-form-field')).nativeElement;
             nativeTags = fixture.debugElement.queryAll(By.css('mc-tag'))
                 .map((tag) => tag.nativeElement);
 

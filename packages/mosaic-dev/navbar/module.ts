@@ -1,7 +1,6 @@
 import { Component, NgModule, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McDropdownModule } from '@ptsecurity/mosaic/dropdown';
 
@@ -11,8 +10,8 @@ import { McNavbarModule, McNavbar } from '../../mosaic/navbar';
 
 @Component({
     selector: 'app',
-    template: require('./template.html'),
-    styleUrls: ['./styles.scss'],
+    templateUrl: './template.html',
+    styleUrls: ['../main.scss', './styles.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class NavbarDemoComponent {
@@ -61,9 +60,4 @@ export class NavbarDemoComponent {
         NavbarDemoComponent
     ]
 })
-export class NavbarDemoModule {}
-
-platformBrowserDynamic()
-    .bootstrapModule(NavbarDemoModule)
-    // tslint:disable-next-line:no-console
-    .catch((error) => console.error(error));
+export class DemoModule {}

@@ -1,6 +1,6 @@
 // todo пока не делаем, перенесено из материала, но у нас в доках таких простых списков нет.
 import {
-    AfterContentInit, ChangeDetectionStrategy, Component, ContentChildren, Directive, ElementRef, QueryList,
+    AfterContentInit, ChangeDetectionStrategy, Component, ContentChildren, ElementRef, QueryList,
     ViewEncapsulation
 } from '@angular/core';
 import { McLine, McLineSetter } from '@ptsecurity/mosaic/core';
@@ -12,7 +12,7 @@ export class McListBase {}
     selector: 'mc-list',
     host: { class: 'mc-list' },
     template: '<ng-content></ng-content>',
-    styleUrls: ['./list.css'],
+    styleUrls: ['./list.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
@@ -37,14 +37,14 @@ export class McListItemBase {}
 export class McListItem extends McListItemBase implements AfterContentInit {
     @ContentChildren(McLine) lines: QueryList<McLine>;
 
-    private lineSetter: McLineSetter;
 
     constructor(private _element: ElementRef) {
         super();
     }
 
     ngAfterContentInit() {
-        this.lineSetter = new McLineSetter(this.lines, this._element);
+        // tslint:disable-next-line:no-unused-expression
+        new McLineSetter(this.lines, this._element);
     }
 
     handleFocus() {

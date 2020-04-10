@@ -59,7 +59,7 @@ export enum PopoverVisibility {
     selector: 'mc-popover',
     templateUrl: './popover.component.html',
     preserveWhitespaces: false,
-    styleUrls: ['./popover.css'],
+    styleUrls: ['./popover.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     animations: [mcPopoverAnimations.popoverState],

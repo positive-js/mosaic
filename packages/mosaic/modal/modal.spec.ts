@@ -199,7 +199,7 @@ describe('McModal', () => {
             expect(spyCancel).toHaveBeenCalled();
         });
 
-        it('should process loading flag', fakeAsync((done) => {
+        it('should process loading flag', fakeAsync(() => {
             const isLoading = true;
             const modalRef = modalService.create({
                 mcFooter: [
@@ -259,11 +259,6 @@ describe('McModal', () => {
 // -------------------------------------------
 // | Testing Components
 // -------------------------------------------
-
-@Component({
-    template: `<div [style.width]="100 | toCssUnit" [style.height]="'100px' | toCssUnit" [style.top]="100 | toCssUnit:'pt'"></div>`
-})
-class TestCssUnitPipeComponent { }
 
 @Component({
     template: `Modal Content`

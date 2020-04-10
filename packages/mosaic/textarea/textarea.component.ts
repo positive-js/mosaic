@@ -20,7 +20,6 @@ export const MC_TEXTAREA_VALUE_ACCESSOR =
 
 let nextUniqueId = 0;
 
-const ROW_SEPARATOR = '\n';
 
 export class McTextareaBase {
     constructor(public defaultErrorStateMatcher: ErrorStateMatcher,
@@ -175,12 +174,8 @@ export class McTextarea extends McTextareaMixinBase implements McFormFieldContro
         // Force setter to be called in case id was not specified.
         this.id = this.id;
 
-        const growObserver = fromEvent(elementRef.nativeElement, 'input')
-            /*.pipe(
-                map((event: any) => this.getGrowHeight()),
-                // map((event: any) => event.target.scrollHeight),
-                distinctUntilChanged()
-            )*/;
+        const growObserver = fromEvent(elementRef.nativeElement, 'input');
+
         this.growSubscription = growObserver.subscribe(this.grow.bind(this));
     }
 
@@ -285,11 +280,4 @@ export class McTextarea extends McTextareaMixinBase implements McFormFieldContro
         return validity && validity.badInput;
     }
 
-    private getGrowHeight(): number {
-        const textarea = this.elementRef.nativeElement;
-        const outerHeight = parseInt(window.getComputedStyle(textarea).height!.toString(), 10);
-        const diff = outerHeight - textarea.clientHeight;
-
-        return Math.max(this.minHeight, +textarea.scrollHeight + diff);
-    }
 }

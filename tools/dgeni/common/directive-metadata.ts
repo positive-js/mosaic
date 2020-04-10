@@ -1,9 +1,12 @@
 import {
-  ArrayLiteralExpression,
-  CallExpression,
-  ObjectLiteralExpression,
-  PropertyAssignment,
-  StringLiteral, SyntaxKind
+    ArrayLiteralExpression,
+    CallExpression,
+    isCallExpression,
+    NodeArray,
+    ObjectLiteralExpression,
+    PropertyAssignment,
+    StringLiteral,
+    SyntaxKind
 } from 'typescript';
 
 import { CategorizedClassDoc } from './dgeni-definitions';
@@ -25,51 +28,46 @@ import { CategorizedClassDoc } from './dgeni-definitions';
  * ```
  */
 export function getDirectiveMetadata(classDoc: CategorizedClassDoc): Map<string, any> | null {
-  const declaration = classDoc.symbol.valueDeclaration;
+    const declaration = classDoc.symbol.valueDeclaration;
 
-  if (!declaration || !declaration.decorators) {
-    return null;
-  }
-
-  const directiveDecorator = declaration.decorators
-    .filter((decorator) => decorator.expression)
-    .filter((decorator) => (decorator.expression.kind as any) === SyntaxKind.CallExpression)
-    .find((decorator) => (decorator.expression as any).expression.getText() === 'Component' ||
-                       (decorator.expression as any).expression.getText() === 'Directive');
-
-  if (!directiveDecorator) {
-    return null;
-  }
-
-  // Since the actual decorator expression is by default a LeftHandSideExpression, and TypeScript
-  // doesn't allow a casting it to a CallExpression, we have to cast it to "any" before.
-  const expression = (directiveDecorator.expression as any) as CallExpression;
-
-  // The argument length of the CallExpression needs to be exactly one, because it's the single
-  // JSON object in the @Component/@Directive decorator.
-  if (expression.arguments.length !== 1) {
-    return null;
-  }
-
-  const objectExpression = expression.arguments[0] as ObjectLiteralExpression;
-  const resultMetadata = new Map<string, any>();
-
-  objectExpression.properties.forEach((prop: PropertyAssignment) => {
-
-    // Support ArrayLiteralExpression assignments in the directive metadata.
-    if (prop.initializer.kind === SyntaxKind.ArrayLiteralExpression) {
-      const arrayData = (prop.initializer as ArrayLiteralExpression).elements
-          .map((literal: StringLiteral) => literal.text);
-
-      resultMetadata.set(prop.name.getText(), arrayData);
+    if (!declaration || !declaration.decorators) {
+        return null;
     }
 
-    // Support normal StringLiteral and NoSubstitutionTemplateLiteral assignments
-    if (prop.initializer.kind === SyntaxKind.StringLiteral ||
-        prop.initializer.kind === SyntaxKind.NoSubstitutionTemplateLiteral) {
-      resultMetadata.set(prop.name.getText(), (prop.initializer as StringLiteral).text);
-    }
-  });
+    const expression = declaration.decorators
+        .filter((decorator) => decorator.expression && isCallExpression(decorator.expression))
+        .map((decorator) => decorator.expression as CallExpression)
+        .find((callExpression) => callExpression.expression.getText() === 'Component' ||
+            callExpression.expression.getText() === 'Directive');
 
-  return resultMetadata;
+    if (!expression) {
+        return null;
+    }
+
+    // The argument length of the CallExpression needs to be exactly one, because it's the single
+    // JSON object in the @Component/@Directive decorator.
+    if (expression.arguments.length !== 1) {
+        return null;
+    }
+
+    const objectExpression = expression.arguments[0] as ObjectLiteralExpression;
+    const resultMetadata = new Map<string, any>();
+
+    (objectExpression.properties as NodeArray<PropertyAssignment>).forEach((prop) => {
+        // Support ArrayLiteralExpression assignments in the directive metadata.
+        if (prop.initializer.kind === SyntaxKind.ArrayLiteralExpression) {
+            const arrayData = (prop.initializer as ArrayLiteralExpression).elements
+                .map((literal) => (literal as StringLiteral).text);
+
+            resultMetadata.set(prop.name.getText(), arrayData);
+        }
+
+        // Support normal StringLiteral and NoSubstitutionTemplateLiteral assignments
+        if (prop.initializer.kind === SyntaxKind.StringLiteral ||
+            prop.initializer.kind === SyntaxKind.NoSubstitutionTemplateLiteral) {
+            resultMetadata.set(prop.name.getText(), (prop.initializer as StringLiteral).text);
+        }
+    });
+
+    return resultMetadata;
 }

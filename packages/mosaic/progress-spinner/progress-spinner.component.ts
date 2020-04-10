@@ -31,7 +31,7 @@ const MAX_DASH_ARRAY = 273;
 @Component({
     selector: 'mc-progress-spinner',
     templateUrl: './progress-spinner.component.html',
-    styleUrls: ['./progress-spinner.css'],
+    styleUrls: ['./progress-spinner.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {

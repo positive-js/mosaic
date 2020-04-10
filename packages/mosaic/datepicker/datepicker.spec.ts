@@ -2,6 +2,9 @@
 // tslint:disable:no-unbound-method
 // tslint:disable:no-typeof-undefined
 // tslint:disable:no-empty
+
+// TODO: fix linter
+// tslint:disable
 import { Directionality } from '@angular/cdk/bidi';
 import { Overlay, OverlayContainer } from '@angular/cdk/overlay';
 import { ScrollDispatcher } from '@angular/cdk/scrolling';

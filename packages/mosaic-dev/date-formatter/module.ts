@@ -2,7 +2,6 @@
 // tslint:disable:no-magic-numbers
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { DateAdapter, MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
 import { McMomentDateModule, MomentDateAdapter } from '@ptsecurity/mosaic-moment-adapter/adapter';
 
@@ -12,6 +11,7 @@ import { McMomentDateModule, MomentDateAdapter } from '@ptsecurity/mosaic-moment
 // the `default as` syntax.
 // tslint:disable-next-line:ordered-imports
 import * as _moment from 'moment';
+// @ts-ignore
 // tslint:disable-next-line:no-duplicate-imports
 import { default as _rollupMoment, Moment } from 'moment';
 
@@ -20,8 +20,8 @@ const moment = _rollupMoment || _moment;
 
 @Component({
     selector: 'app',
-    template: require('./template.html'),
-    styleUrls: ['./styles.scss'],
+    templateUrl: 'template.html',
+    styleUrls: ['../main.scss', 'styles.scss'],
     encapsulation: ViewEncapsulation.None,
     providers: [
         { provide: MC_DATE_LOCALE, useValue: 'ru' },
@@ -291,7 +291,3 @@ export class DemoComponent {
     providers: []
 })
 export class DemoModule {}
-
-platformBrowserDynamic()
-    .bootstrapModule(DemoModule)
-    .catch((error) => console.error(error));

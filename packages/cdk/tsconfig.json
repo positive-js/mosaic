@@ -1,16 +1,20 @@
-// Configuration for IDEs only.
 {
     "extends": "../../tsconfig.json",
     "compilerOptions": {
-        "rootDir": "..",
-        "baseUrl": ".",
-        "paths": {
-            "@ptsecurity/cdk/*": [
-                "./*"
-            ]
-        }
+        "types": [
+            "node",
+            "jasmine"
+        ]
     },
     "include": [
-        "./**/*.ts"
-    ]
+        "**/*.ts"
+    ],
+    "angularCompilerOptions": {
+        "annotateForClosureCompiler": true,
+        "strictMetadataEmit": true,
+        "flatModuleId": "@ptsecurity/cdk",
+        "skipTemplateCodegen": true,
+        "fullTemplateTypeCheck": true,
+        "enableIvy": false
+    }
 }

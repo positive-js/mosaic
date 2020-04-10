@@ -52,7 +52,7 @@ export const McVerticalNavbarMixinBase: CanDisableCtor & typeof McVerticalNavbar
     templateUrl: './vertical-navbar-item.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    styleUrls: ['./vertical-navbar-item.component.css'],
+    styleUrls: ['./vertical-navbar-item.component.scss'],
     inputs: ['disabled'],
     host: {
         class: 'mc-vertical-navbar-item',

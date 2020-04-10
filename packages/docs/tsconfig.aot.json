@@ -2,14 +2,12 @@
     "extends": "./tsconfig.json",
     "compilerOptions": {
         "outDir": "./out-tsc/app",
+        "allowSyntheticDefaultImports": true,
         "paths": {
-            "@ptsecurity/cdk/*": ["../../dist/releases/cdk/*"],
-
-            "@ptsecurity/mosaic/*": ["../../dist/releases/mosaic/*"],
-
-            "@ptsecurity/mosaic-examples": ["../../dist/releases/mosaic-examples"],
-
-            "@ptsecurity/mosaic-moment-adapter": ["../../dist/releases/mosaic-moment-adapter"]
+            "@ptsecurity/cdk/*": ["../../dist/cdk/*"],
+            "@ptsecurity/mosaic/*": ["../../dist/mosaic/*"],
+            "@ptsecurity/mosaic-examples": ["../../dist/mosaic-examples"],
+            "@ptsecurity/mosaic-moment-adapter/*": ["../../dist/mosaic-moment-adapter/*"]
         }
     },
     "include": [

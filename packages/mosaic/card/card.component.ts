@@ -13,7 +13,7 @@ import { SPACE } from '@ptsecurity/cdk/keycodes';
 @Component({
     selector: 'mc-card',
     templateUrl: './card.component.html',
-    styleUrls: ['./card.component.css'],
+    styleUrls: ['./card.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     inputs: ['color'],

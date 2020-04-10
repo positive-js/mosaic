@@ -1,6 +1,5 @@
 <p align="center">
     <img src="https://i.ibb.co/fQNPgv6/logo-png-200.png" alt="positive_js_logo" border="0">
-    <img src="https://i.ibb.co/3kB49b4/cdk.png" alt="cdk" border="0">
 </p>
 
 [![npm version](https://badge.fury.io/js/%40ptsecurity%2Fmosaic.svg)](https://badge.fury.io/js/%40ptsecurity%2Fmosaic)
@@ -11,7 +10,7 @@
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/positive-js/mosaic/blob/master/LICENSE)
 
 
-# UI Components for Angular based on angular/cdk
+# UI Components for Angular
 
 Mosaic components are the building blocks of Positive Technologies applications.
 

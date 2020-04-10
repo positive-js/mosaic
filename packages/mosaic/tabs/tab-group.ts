@@ -98,7 +98,7 @@ export const McTabGroupMixinBase:
     selector: 'mc-tab-group',
     exportAs: 'mcTabGroup',
     templateUrl: 'tab-group.html',
-    styleUrls: ['tab-group.css'],
+    styleUrls: ['tab-group.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     inputs: ['color'],

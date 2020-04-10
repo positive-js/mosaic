@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter';
+import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McCheckboxModule } from '@ptsecurity/mosaic/checkbox';
 import { McDropdownModule } from '@ptsecurity/mosaic/dropdown';

@@ -7,7 +7,6 @@
 
 import { Directionality } from '@angular/cdk/bidi';
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { Platform } from '@angular/cdk/platform';
 import { ScrollDispatcher, ViewportRuler } from '@angular/cdk/scrolling';
 import {
     ChangeDetectionStrategy,
@@ -1386,7 +1385,6 @@ describe('McTreeSelect', () => {
     let dir: { value: 'ltr' | 'rtl' };
     const scrolledSubject: Subject<any> = new Subject();
     let viewportRuler: ViewportRuler;
-    let platform: Platform;
 
     /**
      * Configures the test module for McTreeSelect with the given declarations. This is broken out so
@@ -1414,10 +1412,9 @@ describe('McTreeSelect', () => {
             ]
         }).compileComponents();
 
-        inject([OverlayContainer, Platform], (oc: OverlayContainer, p: Platform) => {
+        inject([OverlayContainer], (oc: OverlayContainer) => {
             overlayContainer = oc;
             overlayContainerElement = oc.getContainerElement();
-            platform = p;
         })();
     }
 

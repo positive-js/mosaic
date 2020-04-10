@@ -54,7 +54,7 @@ export type McTabBodyOriginState = 'left' | 'right';
 @Component({
     selector: 'mc-tab-body',
     templateUrl: 'tab-body.html',
-    styleUrls: ['tab-body.css'],
+    styleUrls: ['tab-body.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     animations: [mcTabsAnimations.translateTab],

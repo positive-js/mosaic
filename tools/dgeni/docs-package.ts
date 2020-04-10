@@ -1,9 +1,9 @@
 /* tslint:disable:no-var-requires no-function-expression only-arrow-functions */
 // tslint:disable:no-invalid-template-strings
 import { Package } from 'dgeni';
-import { TypeFormatFlags } from 'dgeni-packages/node_modules/typescript';
 import { ReadTypeScriptModules } from 'dgeni-packages/typescript/processors/readTypeScriptModules';
 import { Host } from 'dgeni-packages/typescript/services/ts-host/host';
+import { TypeFormatFlags } from 'typescript';
 
 import { HighlightNunjucksExtension } from './nunjucks-tags/highlight';
 import { patchLogService } from './patch-log-service';

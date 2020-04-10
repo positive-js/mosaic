@@ -480,8 +480,6 @@ describe('McListSelection without forms', () => {
 
     describe('with option disabled', () => {
         let fixture: ComponentFixture<SelectionListWithDisabledOption>;
-        let listOptionEl: HTMLElement;
-        let listOption: McListOption;
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
@@ -495,10 +493,7 @@ describe('McListSelection without forms', () => {
         beforeEach(async(() => {
             fixture = TestBed.createComponent(SelectionListWithDisabledOption);
 
-            const listOptionDebug = fixture.debugElement.query(By.directive(McListOption));
-
-            listOption = listOptionDebug.componentInstance;
-            listOptionEl = listOptionDebug.nativeElement;
+            fixture.debugElement.query(By.directive(McListOption));
 
             fixture.detectChanges();
         }));

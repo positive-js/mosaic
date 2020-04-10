@@ -1,7 +1,7 @@
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { DOCUMENT } from '@angular/common';
 import {
-    AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef,
+    AfterViewInit, ChangeDetectorRef,
     Component,
     ComponentFactoryResolver,
     ComponentRef,
@@ -40,7 +40,7 @@ type AnimationState = 'enter' | 'leave' | null;
 @Component({
     selector: 'mc-modal',
     templateUrl: './modal.component.html',
-    styleUrls: ['./modal.css'],
+    styleUrls: ['./modal.scss'],
     encapsulation: ViewEncapsulation.None,
     host: {
         '(keydown)': 'onKeyDown($event)'

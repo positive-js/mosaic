@@ -2,19 +2,14 @@
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { FlatTreeControl } from '@ptsecurity/cdk/tree';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McCheckboxModule } from '@ptsecurity/mosaic/checkbox';
-import { McHighlightModule } from '@ptsecurity/mosaic/core/highlight';
+import { McHighlightModule } from '@ptsecurity/mosaic/core';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
-import {
-    McTreeFlatDataSource,
-    McTreeFlattener,
-    McTreeModule
-} from '@ptsecurity/mosaic/tree';
+import { McTreeFlatDataSource, McTreeFlattener, McTreeModule } from '@ptsecurity/mosaic/tree';
 
 
 export class FileNode {
@@ -100,8 +95,8 @@ export const DATA_OBJECT = {
 
 @Component({
     selector: 'app',
-    template: require('./template.html'),
-    styleUrls: ['./styles.scss'],
+    templateUrl: './template.html',
+    styleUrls: ['../main.scss', './styles.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent {
@@ -136,12 +131,12 @@ export class DemoComponent {
 
     hasChild(_: number, nodeData: FileFlatNode) { return nodeData.expandable; }
 
-    onNavigationChange() {
-        console.log('onNavigationChange');
+    onNavigationChange($event) {
+        console.log('onNavigationChange', $event);
     }
 
-    onSelectionChange() {
-        console.log('onSelectionChange');
+    onSelectionChange($event) {
+        console.log('onSelectionChange', $event);
     }
 
     private transformer = (node: FileNode, level: number, parent: any) => {
@@ -196,8 +191,3 @@ export class DemoComponent {
     bootstrap: [DemoComponent]
 })
 export class DemoModule {}
-
-platformBrowserDynamic()
-    .bootstrapModule(DemoModule)
-    .catch((error) => console.error(error));
-

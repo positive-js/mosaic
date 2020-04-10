@@ -42,7 +42,7 @@ export class McCalendarCell {
 @Component({
     selector: '[mc-calendar-body]',
     templateUrl: 'calendar-body.html',
-    styleUrls: ['calendar-body.css'],
+    styleUrls: ['calendar-body.scss'],
     host: {
         class: 'mc-calendar__body',
         role: 'grid',

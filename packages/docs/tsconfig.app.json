@@ -3,16 +3,10 @@
     "compilerOptions": {
         "outDir": "./out-tsc/app",
         "paths": {
-            "@ptsecurity/cdk/*": [
-                "../../dist/packages/cdk/*"
-            ],
-            "@ptsecurity/mosaic/*": [
-                "../../dist/packages/mosaic/*"
-            ],
-            "@ptsecurity/mosaic-examples": ["../../dist/packages/mosaic-examples"],
-            "@ptsecurity/mosaic-moment-adapter": [
-                "../../dist/packages/mosaic-moment-adapter/public-api.js"
-            ]
+            "@ptsecurity/cdk/*": ["../../dist/cdk/*"],
+            "@ptsecurity/mosaic/*": ["../../dist/mosaic/*"],
+            "@ptsecurity/mosaic-examples": ["../../dist/mosaic-examples"],
+            "@ptsecurity/mosaic-moment-adapter/*": ["../../dist/mosaic-moment-adapter/*"]
         }
     },
     "include": [

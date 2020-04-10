@@ -1,1 +1,1 @@
-export * from './adapter/index';
+export {};

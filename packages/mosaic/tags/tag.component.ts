@@ -78,7 +78,7 @@ export const McTagMixinBase: CanColorCtor & CanDisableCtor & typeof McTagBase = 
     selector: 'mc-tag, [mc-tag], mc-basic-tag, [mc-basic-tag]',
     exportAs: 'mcTag',
     templateUrl: 'tag.partial.html',
-    styleUrls: ['./tag.css'],
+    styleUrls: ['./tag.scss'],
     inputs: ['color', 'disabled'],
     host: {
         class: 'mc-tag',

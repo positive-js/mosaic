@@ -40,7 +40,7 @@ export const McTabNavMixinBase: CanColorCtor &
     exportAs: 'mcTabNavBar, mcTabNav',
     inputs: ['color'],
     templateUrl: 'tab-nav-bar.html',
-    styleUrls: ['tab-nav-bar.css'],
+    styleUrls: ['tab-nav-bar.scss'],
     host: { class: 'mc-tab-nav-bar' },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush

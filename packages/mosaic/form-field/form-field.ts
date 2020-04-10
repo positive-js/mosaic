@@ -49,9 +49,9 @@ export const McFormFieldMixinBase: CanColorCtor & typeof McFormFieldBase = mixin
     // The McInput styles are fairly minimal so it shouldn't be a big deal for people who
     // aren't using McInput.
     styleUrls: [
-        'form-field.css',
-        '../input/input.css',
-        '../textarea/textarea.css'
+        'form-field.scss',
+        '../input/input.scss',
+        '../textarea/textarea.scss'
     ],
     host: {
         class: 'mc-form-field',

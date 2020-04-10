@@ -66,8 +66,8 @@ export const MC_OPTION_PARENT_COMPONENT =
         '(click)': 'selectViaInteraction()',
         '(keydown)': 'handleKeydown($event)'
     },
-    styleUrls: ['./option.css'],
-    templateUrl: './option.html',
+    styleUrls: ['option.scss'],
+    templateUrl: 'option.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })

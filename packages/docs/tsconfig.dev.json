@@ -1,0 +1,59 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "outDir": "./out-tsc/app",
+        "allowSyntheticDefaultImports": true,
+        "paths": {
+            "@ptsecurity/cdk/a11y": ["../cdk/a11y/index.ts"],
+            "@ptsecurity/cdk/datetime": ["../cdk/datetime/index.ts"],
+            "@ptsecurity/cdk/keycodes": ["../cdk/keycodes/index.ts"],
+            "@ptsecurity/cdk/testing": ["../cdk/testing/index.ts"],
+            "@ptsecurity/cdk/tree": ["../cdk/tree/index.ts"],
+            "@ptsecurity/mosaic/autocomplete": ["../mosaic/autocomplete/index.ts"],
+            "@ptsecurity/mosaic/button": ["../mosaic/button/index.ts"],
+            "@ptsecurity/mosaic/button-toggle": ["../mosaic/button-toggle/index.ts"],
+            "@ptsecurity/mosaic/card": ["../mosaic/card/index.ts"],
+            "@ptsecurity/mosaic/checkbox": ["../mosaic/checkbox/index.ts"],
+            "@ptsecurity/mosaic/core": ["../mosaic/core/index.ts"],
+            "@ptsecurity/mosaic/datepicker": ["../mosaic/datepicker/index.ts"],
+            "@ptsecurity/mosaic/divider": ["../mosaic/divider/index.ts"],
+            "@ptsecurity/mosaic/dropdown": ["../mosaic/dropdown/index.ts"],
+            "@ptsecurity/mosaic/form-field": ["../mosaic/form-field/index.ts"],
+            "@ptsecurity/mosaic/icon": ["../mosaic/icon/index.ts"],
+            "@ptsecurity/mosaic/input": ["../mosaic/input/index.ts"],
+            "@ptsecurity/mosaic/link": ["../mosaic/link/index.ts"],
+            "@ptsecurity/mosaic/list": ["../mosaic/list/index.ts"],
+            "@ptsecurity/mosaic/modal": ["../mosaic/modal/index.ts"],
+            "@ptsecurity/mosaic/navbar": ["../mosaic/navbar/index.ts"],
+            "@ptsecurity/mosaic/popover": ["../mosaic/popover/index.ts"],
+            "@ptsecurity/mosaic/progress-bar": ["../mosaic/progress-bar/index.ts"],
+            "@ptsecurity/mosaic/progress-spinner": ["../mosaic/progress-spinner/index.ts"],
+            "@ptsecurity/mosaic/radio": ["../mosaic/radio/index.ts"],
+            "@ptsecurity/mosaic/select": ["../mosaic/select/index.ts"],
+            "@ptsecurity/mosaic/sidebar": ["../mosaic/sidebar/index.ts"],
+            "@ptsecurity/mosaic/sidepanel": ["../mosaic/sidepanel/index.ts"],
+            "@ptsecurity/mosaic/splitter": ["../mosaic/splitter/index.ts"],
+            "@ptsecurity/mosaic/table": ["../mosaic/table/index.ts"],
+            "@ptsecurity/mosaic/tabs": ["../mosaic/tabs/index.ts"],
+            "@ptsecurity/mosaic/tags": ["../mosaic/tags/index.ts"],
+            "@ptsecurity/mosaic/textarea": ["../mosaic/textarea/index.ts"],
+            "@ptsecurity/mosaic/timepicker": ["../mosaic/timepicker/index.ts"],
+            "@ptsecurity/mosaic/toggle": ["../mosaic/toggle/index.ts"],
+            "@ptsecurity/mosaic/tooltip": ["../mosaic/tooltip/index.ts"],
+            "@ptsecurity/mosaic/tree": ["../mosaic/tree/index.ts"],
+            "@ptsecurity/mosaic/tree-select": ["../mosaic/tree-select/index.ts"],
+            "@ptsecurity/mosaic/vertical-navbar": ["../mosaic/vertical-navbar/index.ts"],
+            "@ptsecurity/mosaic-moment-adapter": ["../mosaic-moment-adapter/index.ts"],
+            "@ptsecurity/mosaic-moment-adapter/adapter": ["../mosaic-moment-adapter/adapter/index.ts"],
+            "@ptsecurity/mosaic-examples": ["../mosaic-examples/index.ts"]
+        }
+    },
+    "include": [
+        "src/**/*.ts"
+    ],
+    "exclude": [
+        "src/test.ts",
+        "src/**/*.spec.ts",
+        "src/assets"
+    ]
+}

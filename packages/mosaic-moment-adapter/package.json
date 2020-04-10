@@ -1,29 +1,29 @@
 {
     "name": "@ptsecurity/mosaic-moment-adapter",
-    "version": "0.0.0-PLACEHOLDER",
+    "version": "{{VERSION}}",
     "description": "Mosaic Moment Adapter",
-    "main": "./bundles/mosaic-moment-adapter.umd.js",
-    "module": "./esm5/mosaic-moment-adapter.es5.js",
-    "es2015": "./esm2015/mosaic-moment-adapter.js",
-    "typings": "./mosaic-moment-adapter.d.ts",
     "repository": {
         "type": "git",
         "url": "https://github.com/positive-js/mosaic.git"
     },
+    "keywords": [
+        "moment",
+        "component",
+        "development",
+        "kit",
+        "mosaic"
+    ],
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/positive-js/mosaic/issues"
     },
     "homepage": "https://github.com/positive-js/mosaic#readme",
     "peerDependencies": {
-        "@angular/core": "0.0.0-NG",
-        "@angular/cdk": "0.0.0-NG",
-        "@ptsecurity/cdk": "0.0.0-PLACEHOLDER",
+        "@angular/core": "{{NG_VERSION}}",
+        "@angular/cdk": "{{NG_VERSION}}",
+        "@ptsecurity/cdk": "{{VERSION}}",
         "messageformat": "^2.0.5",
-        "moment": "^2.24.0"
-    },
-    "dependencies": {
+        "moment": "^2.24.0",
         "tslib": "^1.7.1"
-    },
-    "sideEffects": false
+    }
 }

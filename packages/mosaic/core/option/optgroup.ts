@@ -18,7 +18,7 @@ let uniqueOptgroupIdCounter = 0;
     selector: 'mc-optgroup',
     exportAs: 'mcOptgroup',
     templateUrl: 'optgroup.html',
-    styleUrls: ['./optgroup.css'],
+    styleUrls: ['./optgroup.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     inputs: ['disabled'],

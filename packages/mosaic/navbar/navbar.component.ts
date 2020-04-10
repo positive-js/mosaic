@@ -203,7 +203,7 @@ class CachedItemWidth {
             <ng-content select="[mc-navbar-container], mc-navbar-container"></ng-content>
         </nav>
     `,
-    styleUrls: ['./navbar.css'],
+    styleUrls: ['./navbar.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class McNavbar implements AfterViewInit, OnDestroy {

@@ -202,7 +202,7 @@ export class McSelectTrigger {}
     selector: 'mc-select',
     exportAs: 'mcSelect',
     templateUrl: 'select.html',
-    styleUrls: ['./select.css'],
+    styleUrls: ['./select.scss'],
     inputs: ['disabled'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,

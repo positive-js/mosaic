@@ -1,0 +1,11 @@
+{
+    "ngPackage": {
+        "lib": {
+            "entryFile": "index.ts",
+            "umdModuleIds": {
+                "@ptsecurity/cdk/a11y": "ng.cdk.a11y",
+                "@ptsecurity/cdk/keycodes": "ng.cdk.keycodes"
+            }
+        }
+    }
+}
