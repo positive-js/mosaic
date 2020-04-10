@@ -10,7 +10,6 @@ import {
 import {
     AfterContentInit,
     AfterViewInit,
-    Attribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
