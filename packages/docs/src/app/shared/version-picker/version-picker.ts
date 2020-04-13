@@ -16,7 +16,7 @@ export class VersionPicker {
     /** The currently running versin. */
     mosaicVersion = mosaicVersion;
     /** The possible versions of the doc site. */
-    docVersions = this.http.get(versionUrl);
+    docVersions: any = this.http.get(versionUrl);
 
     constructor(private http: HttpClient) {
     }
