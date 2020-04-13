@@ -86,7 +86,7 @@ export const McButtonMixinBase:
     encapsulation: ViewEncapsulation.None,
     inputs: ['disabled', 'color'],
     host: {
-        '[disabled]': 'disabled || null'
+        '[attr.disabled]': 'disabled || null'
     }
 })
 export class McButton extends McButtonMixinBase implements OnDestroy, CanDisable, CanColor {
