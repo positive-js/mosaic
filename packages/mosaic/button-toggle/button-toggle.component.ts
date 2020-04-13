@@ -296,7 +296,7 @@ export class McButtonToggleGroup implements ControlValueAccessor, OnInit, AfterC
             type="button"
             [class.mc-active]="checked"
             [disabled]="disabled"
-            [attr.tabindex]="disabled ? -1 : tabIndex"
+            [tabIndex]="tabIndex"
             (click)="onToggleClick()">
             <ng-content></ng-content>
         </button>
@@ -306,12 +306,7 @@ export class McButtonToggleGroup implements ControlValueAccessor, OnInit, AfterC
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         class: 'mc-button-toggle',
-        '[class.mc-button-toggle-standalone]': '!buttonToggleGroup',
-        // Always reset the tabindex to -1 so it doesn't conflict with the one on the `button`,
-        // but can still receive focus from things like cdkFocusInitial.
-        '[attr.tabindex]': '-1',
-        '[attr.disabled]': 'disabled || null',
-        '(focus)': 'focus()'
+        '[class.mc-button-toggle-standalone]': '!buttonToggleGroup'
     }
 })
 export class McButtonToggle implements OnInit, OnDestroy {
@@ -351,7 +346,10 @@ export class McButtonToggle implements OnInit, OnDestroy {
     get disabled(): boolean {
         return this._disabled || (this.buttonToggleGroup && this.buttonToggleGroup.disabled);
     }
-    set disabled(value: boolean) { this._disabled = coerceBooleanProperty(value); }
+
+    set disabled(value: boolean) {
+        this._disabled = coerceBooleanProperty(value);
+    }
 
     /** Event emitted when the group value changes. */
     @Output() readonly change: EventEmitter<McButtonToggleChange> = new EventEmitter<McButtonToggleChange>();
@@ -390,16 +388,9 @@ export class McButtonToggle implements OnInit, OnDestroy {
         }
     }
 
-    /** Focuses the button. */
-    focus(): void {
-        this.element.nativeElement.focus();
-    }
-
     /** Checks the button toggle due to an interaction with the underlying native button. */
     onToggleClick() {
-        if (this.disabled) {
-            return;
-        }
+        if (this.disabled) { return; }
 
         const newChecked = this.isSingleSelector ? true : !this._checked;
 

@@ -891,30 +891,14 @@ describe('McDatepicker', () => {
         });
 
         describe('datepicker with tabindex on mc-datepicker-toggle', () => {
-
-            it('should clear the tabindex from the mc-datepicker-toggle host', () => {
+            it('should forward tabindex from host to button', () => {
                 const fixture = createComponent(DatepickerWithTabindexOnToggle, [McMomentDateModule]);
                 fixture.detectChanges();
 
-                const host = fixture.nativeElement.querySelector('.mc-datepicker-toggle');
+                const button = fixture.nativeElement.querySelector('.mc-button');
 
-                expect(host.getAttribute('tabindex')).toBe('-1');
+                expect(button.getAttribute('tabindex')).toBe('7');
             });
-
-            it('should forward focus to the underlying button when the host is focused', () => {
-                const fixture = createComponent(DatepickerWithTabindexOnToggle, [McMomentDateModule]);
-                fixture.detectChanges();
-
-                const host = fixture.nativeElement.querySelector('.mc-datepicker-toggle');
-                const button = host.querySelector('button');
-
-                expect(document.activeElement).not.toBe(button);
-
-                host.focus();
-
-                expect(document.activeElement).toBe(button);
-            });
-
         });
 
         describe('datepicker with min and max dates and validation', () => {
@@ -1628,7 +1612,7 @@ class DelayedDatepicker {
 @Component({
     template: `
         <input [mcDatepicker]="d">
-        <mc-datepicker-toggle tabindex="7" [for]="d">
+        <mc-datepicker-toggle [tabIndex]="7" [for]="d">
             <div class="custom-icon" mcDatepickerToggleIcon></div>
         </mc-datepicker-toggle>
         <mc-datepicker #d></mc-datepicker>

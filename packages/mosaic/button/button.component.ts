@@ -6,7 +6,8 @@ import {
     ElementRef,
     OnDestroy,
     ViewEncapsulation,
-    Renderer2
+    Renderer2,
+    Input
 } from '@angular/core';
 import { mixinColor, mixinDisabled, CanColor, CanDisable, CanDisableCtor, CanColorCtor } from '@ptsecurity/mosaic/core';
 
@@ -27,10 +28,7 @@ export class McButtonCssStyler {
 
     private icons: HTMLElement[] = [];
 
-    constructor(
-        elementRef: ElementRef,
-        private renderer: Renderer2
-    ) {
+    constructor(elementRef: ElementRef, private renderer: Renderer2) {
         this.nativeElement = elementRef.nativeElement;
     }
 
@@ -118,12 +116,14 @@ export class McButton extends McButtonMixinBase implements OnDestroy, CanDisable
     encapsulation: ViewEncapsulation.None,
     inputs: ['disabled', 'color'],
     host: {
-        '[attr.tabindex]': 'disabled ? -1 : 0',
+        '[attr.tabindex]': 'disabled ? -1 : (tabIndex || 0)',
         '[attr.disabled]': 'disabled || null',
         '(click)': 'haltDisabledEvents($event)'
     }
 })
 export class McAnchor extends McButton {
+    @Input() tabIndex: number;
+
     constructor(focusMonitor: FocusMonitor, elementRef: ElementRef) {
         super(elementRef, focusMonitor);
     }

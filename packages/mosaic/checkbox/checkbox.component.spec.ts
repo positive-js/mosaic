@@ -27,7 +27,6 @@ describe('McCheckbox', () => {
                 CheckboxWithChangeEvent,
                 CheckboxWithFormControl,
                 CheckboxWithoutLabel,
-                CheckboxWithTabindexAttr,
                 CheckboxUsingViewChild
             ]
         });
@@ -655,19 +654,6 @@ describe('McCheckbox', () => {
 
     });
 
-    describe('with native tabindex attribute', () => {
-        it('should properly detect native tabindex attribute', fakeAsync(() => {
-            fixture = TestBed.createComponent(CheckboxWithTabindexAttr);
-            fixture.detectChanges();
-
-            const checkbox = fixture.debugElement
-                .query(By.directive(McCheckbox)).componentInstance as McCheckbox;
-
-            expect(checkbox.tabIndex)
-                .toBe(5, 'Expected tabIndex property to have been set based on the native attribute');
-        }));
-    });
-
     describe('using ViewChild', () => {
         let checkboxDebugElement: DebugElement;
         let checkboxNativeElement: HTMLElement;
@@ -1032,9 +1018,3 @@ class CheckboxWithoutLabel {
     label: string;
 }
 
-/** Test component with the native tabindex attribute. */
-@Component({
-    template: `<mc-checkbox tabindex="5"></mc-checkbox>`
-})
-class CheckboxWithTabindexAttr {
-}

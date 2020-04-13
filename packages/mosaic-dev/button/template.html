@@ -1,17 +1,17 @@
 <div>
-    <button mc-button>
+    <button mc-button [tabIndex]="1" disabled>
         <i mc-icon="mc-angle-down-L_16"></i>
     </button>&nbsp;
 
-    <button mc-button>
+    <button mc-button tabindex="3">
         <i mc-icon="mc-play_16"></i>
         default
     </button>&nbsp;
 
-    <button mc-button>
+    <a mc-button [tabIndex]="2" >
         default
         <i mc-icon="mc-angle-down-L_16"></i>
-    </button>&nbsp;
+    </a>&nbsp;
 
     <button mc-button>
         <i mc-icon="mc-play_16"></i>

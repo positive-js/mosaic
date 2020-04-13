@@ -149,7 +149,7 @@
         "server-dev:autocomplete": "ng serve dev-autocomplete",
         "server-dev:badge": "ng serve dev-badge",
         "server-dev:button": "ng serve dev-button",
-        "server-dev:button-toggle": "ng serve dev-toggle",
+        "server-dev:button-toggle": "ng serve dev-button-toggle",
         "server-dev:card": "ng serve dev-card",
         "server-dev:checkbox": "ng serve dev-checkbox",
         "server-dev:dateformatter": "ng serve dev-dateformatter",

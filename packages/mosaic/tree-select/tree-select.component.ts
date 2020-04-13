@@ -9,7 +9,8 @@ import {
 } from '@angular/cdk/overlay';
 import {
     AfterContentInit,
-    AfterViewInit, Attribute,
+    AfterViewInit,
+    Attribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
