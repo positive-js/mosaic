@@ -78,7 +78,7 @@ export class McDatepickerInputEvent<D> {
         '[attr.aria-owns]': '(datepicker?.opened && datepicker.id) || null',
         '[attr.min]': 'min ? dateAdapter.toIso8601(min) : null',
         '[attr.max]': 'max ? dateAdapter.toIso8601(max) : null',
-        '[disabled]': 'disabled',
+        '[attr.disabled]': 'disabled || null',
         '(input)': 'onInput($event.target.value)',
         '(change)': 'onChange()',
         '(blur)': 'onBlur()',
