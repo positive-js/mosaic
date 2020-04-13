@@ -417,10 +417,11 @@ describe('McListSelection without forms', () => {
 
         it('should properly handle native tabindex attribute', () => {
             const fixture = TestBed.createComponent(SelectionListWithTabindexAttr);
+            fixture.detectChanges();
             const selectionList = fixture.debugElement.query(By.directive(McListSelection));
 
             expect(selectionList.componentInstance.tabIndex)
-                .toBe(5, 'Expected the selection-list tabindex to be set to the attribute value.');
+                .toBe(5, 'Expected the selection-list tabindex to be set to the property value.');
         });
 
         it('should set tabindex to "-1" in disabled state', () => {
@@ -901,7 +902,7 @@ class SelectionListWithOnlyOneOption {}
 
 @Component({
     template: `
-        <mc-list-selection tabindex="5"></mc-list-selection>`
+        <mc-list-selection [tabIndex]="5"></mc-list-selection>`
 })
 class SelectionListWithTabindexAttr {}
 

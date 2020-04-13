@@ -56,13 +56,12 @@ export const McNavbarMixinBase: CanDisableCtor & typeof McNavbarItemBase = mixin
     inputs: ['disabled'],
     host: {
         class: 'mc-navbar-item',
-        '[attr.tabIndex]': 'disabled ? -1 : tabIndex',
+        '[attr.tabindex]': 'disabled ? -1 : tabIndex',
         '[attr.disabled]': 'disabled || null'
     }
 })
 export class McNavbarItem extends McNavbarMixinBase implements OnInit, OnDestroy, CanDisable {
-    @Input()
-    tabIndex: number = 0;
+    @Input() tabIndex: number = 0;
 
     @Input()
     set collapsedTitle(value: string) {

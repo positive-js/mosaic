@@ -37,8 +37,8 @@ export const McDropdownItemMixinBase: CanDisableCtor & typeof McDropdownItemBase
         '[class.mc-dropdown__item_highlighted]': 'highlighted',
         '[class.mc-disabled]': 'disabled',
         '[attr.role]': 'role',
-        '[attr.tabindex]': 'this.disabled ? -1 : 0',
-        '(click)': 'checkDisabled($event)',
+        '[attr.tabindex]': 'this.disabled ? -1 : (tabIndex || 0)',
+        '(click)': 'haltDisabledEvents($event)',
         '(mouseenter)': 'handleMouseEnter()'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -54,6 +54,8 @@ export class McDropdownItem extends McDropdownItemMixinBase implements IFocusabl
 
     /** ARIA role for the dropdown item. */
     @Input() role: 'menuitem' | 'menuitemradio' | 'menuitemcheckbox' = 'menuitem';
+
+    @Input() tabIndex: number;
 
     @ViewChild('content', { static: false }) content;
 
@@ -113,7 +115,7 @@ export class McDropdownItem extends McDropdownItemMixinBase implements IFocusabl
     }
 
     /** Prevents the default element actions if it is disabled. */
-    checkDisabled(event: MouseEvent): void {
+    haltDisabledEvents(event: MouseEvent): void {
         if (this.disabled) {
             event.preventDefault();
             event.stopPropagation();

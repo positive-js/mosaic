@@ -108,7 +108,7 @@ export class McDatepickerContent<D> implements AfterViewInit {
     exportAs: 'mcDatepicker',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [{provide: McFormFieldControl, useExisting: McDatepicker }]
+    providers: [{ provide: McFormFieldControl, useExisting: McDatepicker }]
 })
 export class McDatepicker<D> implements OnDestroy {
 
@@ -246,13 +246,15 @@ export class McDatepicker<D> implements OnDestroy {
     /** Subscription to value changes in the associated input element. */
     private inputSubscription = Subscription.EMPTY;
 
-    constructor(private overlay: Overlay,
-                private ngZone: NgZone,
-                private viewContainerRef: ViewContainerRef,
-                @Inject(MC_DATEPICKER_SCROLL_STRATEGY) scrollStrategy: any,
-                @Optional() private dateAdapter: DateAdapter<D>,
-                @Optional() private dir: Directionality,
-                @Optional() @Inject(DOCUMENT) private document: any) {
+    constructor(
+        private overlay: Overlay,
+        private ngZone: NgZone,
+        private viewContainerRef: ViewContainerRef,
+        @Inject(MC_DATEPICKER_SCROLL_STRATEGY) scrollStrategy: any,
+        @Optional() private dateAdapter: DateAdapter<D>,
+        @Optional() private dir: Directionality,
+        @Optional() @Inject(DOCUMENT) private document: any
+    ) {
         if (!this.dateAdapter) {
             throw createMissingDateImplError('DateAdapter');
         }

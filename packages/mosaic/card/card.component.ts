@@ -33,7 +33,7 @@ export const McCardBaseMixin: CanColorCtor & typeof McCardBase = mixinColor(McCa
         class: 'mc-card',
         '[class.mc-card_readonly]': 'readonly',
         '[class.mc-selected]': 'selected',
-        '[attr.tabIndex]': 'tabIndex',
+        '[attr.tabindex]': 'tabIndex',
         '(keydown)': 'onKeyDown($event)',
         '(click)': 'onClick($event)'
     }
@@ -81,10 +81,6 @@ export class McCard extends McCardBaseMixin implements OnDestroy {
         }
     }
 
-    private get hostElement() {
-        return this._elementRef.nativeElement;
-    }
-
     onKeyDown($event: KeyboardEvent) {
         // tslint:disable-next-line:deprecation
         switch ($event.keyCode) {
@@ -96,5 +92,9 @@ export class McCard extends McCardBaseMixin implements OnDestroy {
                 break;
             default:
         }
+    }
+
+    private get hostElement() {
+        return this._elementRef.nativeElement;
     }
 }

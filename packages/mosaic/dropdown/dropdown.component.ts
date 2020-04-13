@@ -205,7 +205,7 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
     @Input() backdropClass: string = this._defaultOptions.backdropClass;
 
     /** @docs-private */
-    @ViewChild(TemplateRef, {static: false}) templateRef: TemplateRef<any>;
+    @ViewChild(TemplateRef, { static: false }) templateRef: TemplateRef<any>;
 
     /**
      * List of the items inside of a dropdown.
@@ -216,7 +216,7 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
      * Dropdown content that will be rendered lazily.
      * @docs-private
      */
-    @ContentChild(McDropdownContent, {static: false}) lazyContent: McDropdownContent;
+    @ContentChild(McDropdownContent, { static: false }) lazyContent: McDropdownContent;
 
     /** Event emitted when the dropdown is closed. */
     @Output() readonly closed: EventEmitter<void | 'click' | 'keydown' | 'tab'> =
