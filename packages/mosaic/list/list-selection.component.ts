@@ -355,7 +355,7 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
         @Attribute('tabindex') tabIndex: string,
         @Attribute('auto-select') autoSelect: string,
         @Attribute('no-unselect') noUnselect: string,
-        @Attribute('multiple') multiple: string
+        @Attribute('multiple') multiple: MultipleMode
     ) {
         super();
 
