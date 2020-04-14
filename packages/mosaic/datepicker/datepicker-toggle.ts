@@ -24,8 +24,7 @@ import { McDatepickerIntl } from './datepicker-intl';
 @Directive({
     selector: '[mcDatepickerToggleIcon]'
 })
-export class McDatepickerToggleIcon {
-}
+export class McDatepickerToggleIcon {}
 
 
 @Component({

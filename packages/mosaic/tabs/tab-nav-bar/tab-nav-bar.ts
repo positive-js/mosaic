@@ -54,7 +54,7 @@ export class McTabNav extends McTabNavMixinBase implements CanColor {
 export class McTabLinkBase {}
 // tslint:disable-next-line:naming-convention
 export const McTabLinkMixinBase: HasTabIndexCtor & CanDisableCtor &
-    typeof McTabLinkBase = mixinTabIndex(mixinDisabled(McTabLinkBase), 0);
+    typeof McTabLinkBase = mixinTabIndex(mixinDisabled(McTabLinkBase));
 
 /**
  * Link inside of a `mc-tab-nav-bar`.

@@ -9,7 +9,16 @@ import {
     Renderer2,
     Input
 } from '@angular/core';
-import { mixinColor, mixinDisabled, CanColor, CanDisable, CanDisableCtor, CanColorCtor } from '@ptsecurity/mosaic/core';
+import {
+    mixinColor,
+    mixinDisabled,
+    mixinTabIndex,
+    CanColor,
+    CanDisable,
+    CanDisableCtor,
+    CanColorCtor,
+    HasTabIndexCtor
+} from '@ptsecurity/mosaic/core';
 
 
 @Directive({
@@ -72,8 +81,8 @@ export class McButtonBase {
 }
 
 // tslint:disable-next-line:naming-convention
-export const McButtonMixinBase:
-    CanDisableCtor & CanColorCtor & typeof McButtonBase = mixinColor(mixinDisabled(McButtonBase));
+export const McButtonMixinBase: HasTabIndexCtor & CanDisableCtor & CanColorCtor &
+    typeof McButtonBase = mixinTabIndex(mixinColor(mixinDisabled(McButtonBase)));
 
 
 @Component({
@@ -114,16 +123,14 @@ export class McButton extends McButtonMixinBase implements OnDestroy, CanDisable
     styleUrls: ['button.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    inputs: ['disabled', 'color'],
+    inputs: ['disabled', 'color', 'tabIndex'],
     host: {
-        '[attr.tabindex]': 'disabled ? -1 : (tabIndex || 0)',
+        '[attr.tabindex]': 'tabIndex',
         '[attr.disabled]': 'disabled || null',
         '(click)': 'haltDisabledEvents($event)'
     }
 })
 export class McAnchor extends McButton {
-    @Input() tabIndex: number;
-
     constructor(focusMonitor: FocusMonitor, elementRef: ElementRef) {
         super(elementRef, focusMonitor);
     }

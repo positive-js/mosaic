@@ -9,7 +9,7 @@ import {
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
-import { CanDisable, CanDisableCtor, mixinDisabled } from '@ptsecurity/mosaic/core';
+import { CanDisable, CanDisableCtor, HasTabIndexCtor, mixinDisabled, mixinTabIndex } from '@ptsecurity/mosaic/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
@@ -47,22 +47,21 @@ export class McNavbarItemBase {
 }
 
 // tslint:disable-next-line:naming-convention
-export const McNavbarMixinBase: CanDisableCtor & typeof McNavbarItemBase = mixinDisabled(McNavbarItemBase);
+export const McNavbarMixinBase:
+    HasTabIndexCtor & CanDisableCtor & typeof McNavbarItemBase = mixinTabIndex(mixinDisabled(McNavbarItemBase));
 
 @Component({
     selector: 'mc-navbar-item',
     template: `<ng-content></ng-content>`,
     encapsulation: ViewEncapsulation.None,
-    inputs: ['disabled'],
+    inputs: ['disabled', 'tabIndex'],
     host: {
         class: 'mc-navbar-item',
-        '[attr.tabindex]': 'disabled ? -1 : tabIndex',
+        '[attr.tabindex]': 'tabIndex',
         '[attr.disabled]': 'disabled || null'
     }
 })
 export class McNavbarItem extends McNavbarMixinBase implements OnInit, OnDestroy, CanDisable {
-    @Input() tabIndex: number = 0;
-
     @Input()
     set collapsedTitle(value: string) {
         this.elementRef.nativeElement.setAttribute('computedTitle', encodeURI(value));

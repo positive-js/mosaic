@@ -12,7 +12,7 @@ import {
     ViewChild
 } from '@angular/core';
 import { IFocusableOption } from '@ptsecurity/cdk/a11y';
-import { CanDisable, CanDisableCtor, mixinDisabled } from '@ptsecurity/mosaic/core';
+import { CanDisable, CanDisableCtor, HasTabIndexCtor, mixinDisabled, mixinTabIndex } from '@ptsecurity/mosaic/core';
 import { Subject } from 'rxjs';
 
 import { MC_DROPDOWN_PANEL, McDropdownPanel } from './dropdown-panel';
@@ -22,7 +22,8 @@ import { MC_DROPDOWN_PANEL, McDropdownPanel } from './dropdown-panel';
 /** @docs-private */
 export class McDropdownItemBase {}
 // tslint:disable-next-line:naming-convention
-export const McDropdownItemMixinBase: CanDisableCtor & typeof McDropdownItemBase = mixinDisabled(McDropdownItemBase);
+export const McDropdownItemMixinBase:
+    HasTabIndexCtor & CanDisableCtor & typeof McDropdownItemBase = mixinTabIndex(mixinDisabled(McDropdownItemBase));
 
 /**
  * This directive is intended to be used inside an mc-dropdown tag.
@@ -31,13 +32,13 @@ export const McDropdownItemMixinBase: CanDisableCtor & typeof McDropdownItemBase
 @Component({
     selector: 'mc-dropdown-item, [mc-dropdown-item]',
     exportAs: 'mcDropdownItem',
-    inputs: ['disabled'],
+    inputs: ['disabled', 'tabIndex'],
     host: {
         class: 'mc-dropdown__item',
         '[class.mc-dropdown__item_highlighted]': 'highlighted',
         '[class.mc-disabled]': 'disabled',
         '[attr.role]': 'role',
-        '[attr.tabindex]': 'this.disabled ? -1 : (tabIndex || 0)',
+        '[attr.tabindex]': 'tabIndex',
         '(click)': 'haltDisabledEvents($event)',
         '(mouseenter)': 'handleMouseEnter()'
     },
@@ -54,8 +55,6 @@ export class McDropdownItem extends McDropdownItemMixinBase implements IFocusabl
 
     /** ARIA role for the dropdown item. */
     @Input() role: 'menuitem' | 'menuitemradio' | 'menuitemcheckbox' = 'menuitem';
-
-    @Input() tabIndex: number;
 
     @ViewChild('content', { static: false }) content;
 

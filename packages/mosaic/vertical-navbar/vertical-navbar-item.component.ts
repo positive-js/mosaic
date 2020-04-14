@@ -43,7 +43,7 @@ class McVerticalNavbarItemBase {
 
 // tslint:disable-next-line:naming-convention
 export const McVerticalNavbarMixinBase: HasTabIndexCtor & CanDisableCtor & typeof McVerticalNavbarItemBase
-    = mixinTabIndex(mixinDisabled(McVerticalNavbarItemBase), 0);
+    = mixinTabIndex(mixinDisabled(McVerticalNavbarItemBase));
 
 
 @Component({

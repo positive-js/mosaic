@@ -274,7 +274,7 @@ export class McListSelectionBase {
 
 // tslint:disable-next-line:naming-convention
 export const McListSelectionMixinBase: CanDisableCtor & HasTabIndexCtor & typeof McListSelectionBase
-    = mixinTabIndex(mixinDisabled(McListSelectionBase), 0);
+    = mixinTabIndex(mixinDisabled(McListSelectionBase));
 
 @Component({
     exportAs: 'mcListSelection',

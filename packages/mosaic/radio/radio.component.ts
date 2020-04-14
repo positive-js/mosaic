@@ -302,10 +302,7 @@ export class McRadioButtonBase {
 
 // tslint:disable-next-line:naming-convention
 export const McRadioButtonMixinBase:
-    CanColorCtor &
-    HasTabIndexCtor &
-    typeof McRadioButtonBase =
-        mixinColor(mixinTabIndex(McRadioButtonBase));
+    CanColorCtor & HasTabIndexCtor & typeof McRadioButtonBase = mixinColor(mixinTabIndex(McRadioButtonBase));
 
 
 @Component({
