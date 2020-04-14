@@ -36,7 +36,12 @@ import {
     UP_ARROW
 } from '@ptsecurity/cdk/keycodes';
 import { CdkTree, CdkTreeNodeOutlet, FlatTreeControl } from '@ptsecurity/cdk/tree';
-import { CanDisable, getMcSelectNonArrayValueError, HasTabIndex, MultipleMode } from '@ptsecurity/mosaic/core';
+import {
+    CanDisable,
+    getMcSelectNonArrayValueError,
+    HasTabIndex,
+    MultipleMode
+} from '@ptsecurity/mosaic/core';
 import { merge, Observable, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -68,10 +73,12 @@ interface SelectionModelOption {
     selector: 'mc-tree-selection',
     exportAs: 'mcTreeSelection',
     template: '<ng-container cdkTreeNodeOutlet></ng-container>',
+    styleUrls: ['./tree.scss'],
     host: {
         class: 'mc-tree-selection',
 
         '[attr.tabindex]': 'tabIndex',
+        '[attr.disabled]': 'disabled || null',
 
         '(blur)': 'blur()',
         '(focus)': 'focus($event)',
@@ -79,7 +86,6 @@ interface SelectionModelOption {
         '(keydown)': 'onKeyDown($event)',
         '(window:resize)': 'updateScrollSize()'
     },
-    styleUrls: ['./tree.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
@@ -111,6 +117,17 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
 
     userTabIndex: number | null = null;
 
+    @Input()
+    get autoSelect(): boolean {
+        return this._autoSelect;
+    }
+
+    set autoSelect(value: boolean) {
+        this._autoSelect = coerceBooleanProperty(value);
+    }
+
+    private _autoSelect: boolean = true;
+
     get optionFocusChanges(): Observable<McTreeOptionEvent> {
         return merge(...this.renderedOptions.map((option) => option.onFocus));
     }
@@ -122,17 +139,6 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
     get multiple(): boolean {
         return !!this.multipleMode;
     }
-
-    @Input()
-    get autoSelect(): boolean {
-        return this._autoSelect;
-    }
-
-    set autoSelect(value: boolean) {
-        this._autoSelect = coerceBooleanProperty(value);
-    }
-
-    private _autoSelect: boolean = true;
 
     @Input()
     get noUnselectLast(): boolean {
@@ -164,7 +170,7 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
 
     @Input()
     get tabIndex(): any {
-        return this._tabIndex;
+        return this.disabled ? -1 : this._tabIndex;
     }
 
     set tabIndex(value: any) {
@@ -188,12 +194,9 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
         private elementRef: ElementRef,
         differs: IterableDiffers,
         changeDetectorRef: ChangeDetectorRef,
-        @Attribute('tabindex') tabIndex: string,
-        @Attribute('multiple') multiple: string
+        @Attribute('multiple') multiple: MultipleMode
     ) {
         super(differs, changeDetectorRef);
-
-        this.tabIndex = parseInt(tabIndex) || 0;
 
         if (multiple === MultipleMode.CHECKBOX || multiple === MultipleMode.KEYBOARD) {
             this.multipleMode = multiple;

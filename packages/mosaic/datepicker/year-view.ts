@@ -36,8 +36,8 @@ import { createMissingDateImplError } from './datepicker-errors';
  */
 @Component({
     selector: 'mc-year-view',
-    templateUrl: 'year-view.html',
     exportAs: 'mcYearView',
+    templateUrl: 'year-view.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })

@@ -1,7 +1,6 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     AfterContentInit,
-    Attribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -25,8 +24,7 @@ import { McDatepickerIntl } from './datepicker-intl';
 @Directive({
     selector: '[mcDatepickerToggleIcon]'
 })
-export class McDatepickerToggleIcon {
-}
+export class McDatepickerToggleIcon {}
 
 
 @Component({
@@ -35,12 +33,7 @@ export class McDatepickerToggleIcon {
     styleUrls: ['datepicker-toggle.scss'],
     host: {
         class: 'mc-datepicker-toggle',
-        // Always set the tabindex to -1 so that it doesn't overlap with any custom tabindex the
-        // consumer may have provided, while still being able to receive focus.
-        '[attr.tabindex]': '-1',
-        '[class.mc-datepicker-toggle_active]': 'datepicker && datepicker.opened',
-        '[class.mc-warn]': 'datepicker && datepicker.color === "error"',
-        '(focus)': 'button.focus()'
+        '[class.mc-active]': 'datepicker && datepicker.opened'
     },
     exportAs: 'mcDatepickerToggle',
     encapsulation: ViewEncapsulation.None,
@@ -73,14 +66,7 @@ export class McDatepickerToggle<D> implements AfterContentInit, OnChanges, OnDes
 
     private _disabled: boolean;
 
-    constructor(
-        public intl: McDatepickerIntl,
-        private changeDetectorRef: ChangeDetectorRef,
-        @Attribute('tabindex') defaultTabIndex: string
-    ) {
-        const parsedTabIndex = Number(defaultTabIndex);
-        this.tabIndex = (parsedTabIndex || parsedTabIndex === 0) ? parsedTabIndex : null;
-    }
+    constructor(public intl: McDatepickerIntl, private changeDetectorRef: ChangeDetectorRef) {}
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes.datepicker) {

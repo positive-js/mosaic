@@ -54,12 +54,14 @@ export function MC_AUTOCOMPLETE_DEFAULT_OPTIONS_FACTORY(): McAutocompleteDefault
     exportAs: 'mcAutocomplete',
     templateUrl: 'autocomplete.html',
     styleUrls: ['autocomplete.scss'],
+    host: {
+        class: 'mc-autocomplete'
+    },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    host: { class: 'mc-autocomplete' },
-    providers: [
-        { provide: MC_OPTION_PARENT_COMPONENT, useExisting: McAutocomplete }
-    ]
+    providers: [{
+        provide: MC_OPTION_PARENT_COMPONENT, useExisting: McAutocomplete
+    }]
 })
 export class McAutocomplete implements AfterContentInit {
     /** Unique ID to be used by autocomplete trigger's "aria-owns" property. */
@@ -102,11 +104,11 @@ export class McAutocomplete implements AfterContentInit {
      * Takes classes set on the host mc-autocomplete element and applies them to the panel
      * inside the overlay container to allow for easy styling.
      */
+    @Input('class')
     get classList() {
         return this._classList;
     }
 
-    @Input('class')
     set classList(value: string) {
         if (value && value.length) {
             value.split(' ')

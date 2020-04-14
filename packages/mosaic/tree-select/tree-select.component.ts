@@ -10,7 +10,6 @@ import {
 import {
     AfterContentInit,
     AfterViewInit,
-    Attribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -134,16 +133,17 @@ const McTreeSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorSt
     exportAs: 'mcTreeSelect',
     templateUrl: 'tree-select.html',
     styleUrls: ['./tree-select.scss'],
-    inputs: ['disabled'],
+    inputs: ['disabled', 'tabIndex'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '[attr.id]': 'id',
-        '[attr.tabindex]': 'tabIndex',
-
         class: 'mc-tree-select',
         '[class.mc-disabled]': 'disabled',
-        '[class.mc-select-invalid]': 'errorState',
+        '[class.mc-invalid]': 'errorState',
+
+        '[attr.id]': 'id',
+        '[attr.tabindex]': 'tabIndex',
+        '[attr.disabled]': 'disabled || null',
 
         '(click)': 'toggle()',
         '(keydown)': 'handleKeydown($event)',
@@ -270,9 +270,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
      * Function used to sort the values in a select in multiple mode.
      * Follows the same logic as `Array.prototype.sort`.
      */
-    @Input() sortComparator: (
-        a: McTreeOption, b: McTreeOption, options: McTreeOption[]
-    ) => number;
+    @Input() sortComparator: (a: McTreeOption, b: McTreeOption, options: McTreeOption[]) => number;
 
     /** Combined stream of all of the child options' change events. */
     readonly optionSelectionChanges: Observable<McTreeSelectChange> = defer(() => {
@@ -386,10 +384,6 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         return this._focused || this._panelOpen;
     }
 
-    /**
-     * @deprecated Setter to be removed as this property is intended to be readonly.
-     * @breaking-change 8.0.0
-     */
     set focused(value: boolean) {
         this._focused = value;
     }
@@ -427,7 +421,6 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         private readonly ngZone: NgZone,
         private readonly renderer: Renderer2,
         defaultErrorStateMatcher: ErrorStateMatcher,
-        @Attribute('tabindex') tabIndex: string,
         @Inject(MC_SELECT_SCROLL_STRATEGY) private readonly scrollStrategyFactory,
         @Optional() @Inject(NG_VALIDATORS) public rawValidators: Validator[],
         @Optional() @Inject(MC_VALIDATION) private mcValidation: McValidationOptions,
@@ -446,8 +439,6 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
             // the `providers` to avoid running into a circular import.
             this.ngControl.valueAccessor = this;
         }
-
-        this.tabIndex = parseInt(tabIndex) || 0;
 
         // Force setter to be called in case id was not specified.
         this.id = this.id;

@@ -56,11 +56,11 @@ export const McFormFieldMixinBase: CanColorCtor & typeof McFormFieldBase = mixin
     host: {
         class: 'mc-form-field',
         '[class.mc-form-field_invalid]': 'control.errorState',
-        '[class.mc-disabled]': 'control.disabled',
         '[class.mc-form-field_has-prefix]': 'hasPrefix',
         '[class.mc-form-field_has-suffix]': 'hasSuffix',
         '[class.mc-form-field_has-cleaner]': 'canShowCleaner',
         '[class.mc-form-field_has-stepper]': 'canShowStepper',
+        '[class.mc-disabled]': 'control.disabled',
         '[class.mc-focused]': 'control.focused',
         '[class.ng-untouched]': 'shouldForward("untouched")',
         '[class.ng-touched]': 'shouldForward("touched")',
@@ -97,6 +97,42 @@ export class McFormField extends McFormFieldMixinBase implements
     hovered: boolean = false;
 
     canCleanerClearByEsc: boolean = true;
+
+    get hasHint(): boolean {
+        return this.hint && this.hint.length > 0;
+    }
+
+    get hasSuffix(): boolean {
+        return this.suffix && this.suffix.length > 0;
+    }
+
+    get hasPrefix(): boolean {
+        return this.prefix && this.prefix.length > 0;
+    }
+
+    get hasCleaner(): boolean {
+        return !!this.cleaner;
+    }
+
+    get hasStepper(): boolean {
+        return !!this.stepper;
+    }
+
+    get canShowCleaner(): boolean {
+        return this.hasCleaner &&
+        this.control &&
+        this.control.ngControl
+            ? this.control.ngControl.value && !this.control.disabled
+            : false;
+    }
+
+    get disabled(): boolean {
+        return this.control && this.control.disabled;
+    }
+
+    get canShowStepper(): boolean {
+        return this.control && !this.disabled && (this.control.focused || this.hovered);
+    }
 
     // tslint:disable-next-line:naming-convention
     constructor(public _elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) {
@@ -195,42 +231,6 @@ export class McFormField extends McFormFieldMixinBase implements
         if (!this.control) {
             throw getMcFormFieldMissingControlError();
         }
-    }
-
-    get hasHint(): boolean {
-        return this.hint && this.hint.length > 0;
-    }
-
-    get hasSuffix(): boolean {
-        return this.suffix && this.suffix.length > 0;
-    }
-
-    get hasPrefix(): boolean {
-        return this.prefix && this.prefix.length > 0;
-    }
-
-    get hasCleaner(): boolean {
-        return !!this.cleaner;
-    }
-
-    get hasStepper(): boolean {
-        return !!this.stepper;
-    }
-
-    get canShowCleaner(): boolean {
-        return this.hasCleaner &&
-            this.control &&
-            this.control.ngControl
-                ? this.control.ngControl.value && !this.control.disabled
-                : false;
-    }
-
-    get disabled(): boolean {
-        return this.control && this.control.disabled;
-    }
-
-    get canShowStepper(): boolean {
-        return this.control && !this.disabled && (this.control.focused || this.hovered);
     }
 }
 

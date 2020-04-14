@@ -1,7 +1,6 @@
 import { FocusMonitor, FocusOrigin } from '@angular/cdk/a11y';
 import {
     AfterViewInit,
-    Attribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -18,9 +17,12 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {
-    CanColor, CanColorCtor,
-    CanDisable, CanDisableCtor,
-    HasTabIndex, HasTabIndexCtor,
+    CanColor,
+    CanColorCtor,
+    CanDisable,
+    CanDisableCtor,
+    HasTabIndex,
+    HasTabIndexCtor,
     mixinColor,
     mixinDisabled,
     mixinTabIndex,
@@ -71,8 +73,7 @@ export class McCheckboxChange {
 /** @docs-private */
 export class McCheckboxBase {
     // tslint:disable-next-line:naming-convention
-    constructor(public _elementRef: ElementRef) {
-    }
+    constructor(public _elementRef: ElementRef) {}
 }
 
 // tslint:disable-next-line:naming-convention
@@ -80,8 +81,7 @@ export const McCheckboxMixinBase:
     HasTabIndexCtor &
     CanColorCtor &
     CanDisableCtor &
-    typeof McCheckboxBase =
-        mixinTabIndex(mixinColor(mixinDisabled(McCheckboxBase)));
+    typeof McCheckboxBase = mixinTabIndex(mixinColor(mixinDisabled(McCheckboxBase)));
 
 
 /**
@@ -93,9 +93,9 @@ export const McCheckboxMixinBase:
  */
 @Component({
     selector: 'mc-checkbox',
+    exportAs: 'mcCheckbox',
     templateUrl: 'checkbox.html',
     styleUrls: ['checkbox.scss'],
-    exportAs: 'mcCheckbox',
     host: {
         class: 'mc-checkbox',
         '[id]': 'id',
@@ -134,8 +134,7 @@ export class McCheckbox extends McCheckboxMixinBase implements ControlValueAcces
     @Input() name: string | null = null;
 
     /** Event emitted when the checkbox's `checked` value changes. */
-    @Output() readonly change: EventEmitter<McCheckboxChange> =
-        new EventEmitter<McCheckboxChange>();
+    @Output() readonly change: EventEmitter<McCheckboxChange> = new EventEmitter<McCheckboxChange>();
 
     /** Event emitted when the checkbox's `indeterminate` value changes. */
     @Output() readonly indeterminateChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -144,13 +143,7 @@ export class McCheckbox extends McCheckboxMixinBase implements ControlValueAcces
     @Input() value: string;
 
     /** The native `<input type="checkbox">` element */
-    @ViewChild('input', {static: false}) inputElement: ElementRef;
-
-    private uniqueId: string = `mc-checkbox-${++nextUniqueId}`;
-
-    private currentAnimationClass: string = '';
-
-    private currentCheckState: TransitionCheckState = TransitionCheckState.Init;
+    @ViewChild('input', { static: false }) inputElement: ElementRef;
 
     /** Returns the unique id for the visual hidden input. */
     get inputId(): string {
@@ -168,35 +161,6 @@ export class McCheckbox extends McCheckboxMixinBase implements ControlValueAcces
     }
 
     private _required: boolean;
-// tslint:disable-next-line:naming-convention
-    constructor(_elementRef: ElementRef,
-                private _changeDetectorRef: ChangeDetectorRef,
-                private _focusMonitor: FocusMonitor,
-                @Attribute('tabindex') tabIndex: string,
-                @Optional() @Inject(MC_CHECKBOX_CLICK_ACTION)
-                private _clickAction: McCheckboxClickAction) {
-        super(_elementRef);
-
-        this.tabIndex = parseInt(tabIndex) || 0;
-        this.id = this.uniqueId;
-    }
-
-    /**
-     * Called when the checkbox is blurred. Needed to properly implement ControlValueAccessor.
-     * @docs-private
-     */
-    // tslint:disable-next-line:no-empty
-    onTouched: () => any = () => {};
-
-    ngAfterViewInit() {
-        this._focusMonitor
-            .monitor(this.inputElement.nativeElement)
-            .subscribe((focusOrigin) => this.onInputFocusChange(focusOrigin));
-    }
-
-    ngOnDestroy() {
-        this._focusMonitor.stopMonitoring(this.inputElement.nativeElement);
-    }
 
     /**
      * Whether the checkbox is checked.
@@ -255,11 +219,47 @@ export class McCheckbox extends McCheckboxMixinBase implements ControlValueAcces
                 this.transitionCheckState(
                     this.checked ? TransitionCheckState.Checked : TransitionCheckState.Unchecked);
             }
+
             this.indeterminateChange.emit(this._indeterminate);
         }
     }
 
     private _indeterminate: boolean = false;
+
+    private uniqueId: string = `mc-checkbox-${++nextUniqueId}`;
+
+    private currentAnimationClass: string = '';
+
+    private currentCheckState: TransitionCheckState = TransitionCheckState.Init;
+
+    constructor(
+        elementRef: ElementRef,
+        private _changeDetectorRef: ChangeDetectorRef,
+        private _focusMonitor: FocusMonitor,
+        @Optional() @Inject(MC_CHECKBOX_CLICK_ACTION)
+        private _clickAction: McCheckboxClickAction
+    ) {
+        super(elementRef);
+
+        this.id = this.uniqueId;
+    }
+
+    /**
+     * Called when the checkbox is blurred. Needed to properly implement ControlValueAccessor.
+     * @docs-private
+     */
+    // tslint:disable-next-line:no-empty
+    onTouched: () => any = () => {};
+
+    ngAfterViewInit() {
+        this._focusMonitor
+            .monitor(this.inputElement.nativeElement)
+            .subscribe((focusOrigin) => this.onInputFocusChange(focusOrigin));
+    }
+
+    ngOnDestroy() {
+        this._focusMonitor.stopMonitoring(this.inputElement.nativeElement);
+    }
 
     /** Method being called whenever the label text changes. */
     onLabelTextChange() {

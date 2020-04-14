@@ -7,7 +7,9 @@ import {
     ComponentRef,
     ElementRef,
     EmbeddedViewRef,
-    EventEmitter, Inject, InjectionToken,
+    EventEmitter,
+    Inject,
+    InjectionToken,
     OnDestroy,
     ViewChild,
     ViewEncapsulation
@@ -36,10 +38,10 @@ export const MC_SIDEPANEL_WITH_SHADOW =
     animations: [mcSidepanelAnimations.sidepanelState],
     host: {
         class: 'mc-sidepanel-container',
-        tabindex: '-1',
         role: 'dialog',
         'aria-modal': 'true',
         '[attr.id]': 'id',
+        '[attr.tabindex]': '-1',
         '[@state]': `{
             value: animationState,
             params: animationTransform
@@ -71,7 +73,8 @@ export class McSidepanelContainerComponent extends BasePortalOutlet implements O
         private changeDetectorRef: ChangeDetectorRef,
         public sidepanelConfig: McSidepanelConfig,
         @Inject(MC_SIDEPANEL_WITH_INDENT) public withIndent: boolean,
-        @Inject(MC_SIDEPANEL_WITH_SHADOW) public withShadow: boolean) {
+        @Inject(MC_SIDEPANEL_WITH_SHADOW) public withShadow: boolean
+    ) {
         super();
     }
 

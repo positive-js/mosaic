@@ -4,13 +4,12 @@ import {
     Component,
     Directive,
     ElementRef,
-    HostBinding,
     Input,
     OnDestroy,
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
-import { CanDisable, CanDisableCtor, mixinDisabled } from '@ptsecurity/mosaic/core';
+import { CanDisable, CanDisableCtor, HasTabIndexCtor, mixinDisabled, mixinTabIndex } from '@ptsecurity/mosaic/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
@@ -48,24 +47,21 @@ export class McNavbarItemBase {
 }
 
 // tslint:disable-next-line:naming-convention
-export const McNavbarMixinBase: CanDisableCtor & typeof McNavbarItemBase = mixinDisabled(McNavbarItemBase);
+export const McNavbarMixinBase:
+    HasTabIndexCtor & CanDisableCtor & typeof McNavbarItemBase = mixinTabIndex(mixinDisabled(McNavbarItemBase));
 
 @Component({
     selector: 'mc-navbar-item',
     template: `<ng-content></ng-content>`,
     encapsulation: ViewEncapsulation.None,
-    inputs: ['disabled'],
+    inputs: ['disabled', 'tabIndex'],
     host: {
-        '[attr.tabIndex]': 'disabled ? -1 : tabIndex',
-        '[attr.disabled]': 'disabled || null',
-        class: 'mc-navbar-item'
+        class: 'mc-navbar-item',
+        '[attr.tabindex]': 'tabIndex',
+        '[attr.disabled]': 'disabled || null'
     }
 })
 export class McNavbarItem extends McNavbarMixinBase implements OnInit, OnDestroy, CanDisable {
-
-    @Input()
-    tabIndex: number = 0;
-
     @Input()
     set collapsedTitle(value: string) {
         this.elementRef.nativeElement.setAttribute('computedTitle', encodeURI(value));
@@ -105,25 +101,21 @@ export class McNavbarItem extends McNavbarMixinBase implements OnInit, OnDestroy
 }
 
 @Directive({
-    selector: 'mc-navbar-container'
+    selector: 'mc-navbar-container',
+    host: {
+        '[class.mc-navbar-left]': 'this.position === "left"',
+        '[class.mc-navbar-right]': 'this.position !== "left"'
+    }
 })
 export class McNavbarContainer {
     @Input()
     position: McNavbarContainerPositionType = 'left';
-
-    @HostBinding('class')
-    get cssClasses(): string {
-        return this.position === 'left' ? 'mc-navbar-left' : 'mc-navbar-right';
-    }
 }
 
 class CollapsibleItem {
     private collapsed: boolean = false;
 
-    constructor(
-        public element: HTMLElement,
-        public width: number
-    ) {}
+    constructor(public element: HTMLElement, public width: number) {}
 
     processCollapsed(collapsed: boolean) {
         this.collapsed = collapsed;
@@ -142,7 +134,6 @@ class CollapsibleItem {
 }
 
 class CachedItemWidth {
-
     get canCollapse(): boolean {
         return this.itemsForCollapse.length > 0;
     }

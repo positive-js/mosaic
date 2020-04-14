@@ -424,12 +424,12 @@ describe('McTagList', () => {
                 it('should allow focus to escape when tabbing away', fakeAsync(() => {
                     tagListInstance.keyManager.onKeydown(createKeyboardEvent('keydown', TAB));
 
-                    expect(tagListInstance._tabIndex)
+                    expect(tagListInstance.tabIndex)
                         .toBe(-1, 'Expected tabIndex to be set to -1 temporarily.');
 
                     tick();
 
-                    expect(tagListInstance._tabIndex).toBe(0, 'Expected tabIndex to be reset back to 0');
+                    expect(tagListInstance.tabIndex).toBe(0, 'Expected tabIndex to be reset back to 0');
                 }));
 
                 it(`should use user defined tabIndex`, fakeAsync(() => {
@@ -437,17 +437,17 @@ describe('McTagList', () => {
 
                     fixture.detectChanges();
 
-                    expect(tagListInstance._tabIndex)
+                    expect(tagListInstance.tabIndex)
                         .toBe(4, 'Expected tabIndex to be set to user defined value 4.');
 
                     tagListInstance.keyManager.onKeydown(createKeyboardEvent('keydown', TAB));
 
-                    expect(tagListInstance._tabIndex)
+                    expect(tagListInstance.tabIndex)
                         .toBe(-1, 'Expected tabIndex to be set to -1 temporarily.');
 
                     tick();
 
-                    expect(tagListInstance._tabIndex).toBe(4, 'Expected tabIndex to be reset back to 4');
+                    expect(tagListInstance.tabIndex).toBe(4, 'Expected tabIndex to be reset back to 4');
                 }));
             });
 

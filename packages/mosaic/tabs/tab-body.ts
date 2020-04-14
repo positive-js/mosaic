@@ -106,15 +106,17 @@ export class McTabBody implements OnInit, OnDestroy {
     /** Subscription to the directionality change observable. */
     private dirChangeSubscription = Subscription.EMPTY;
 
-    constructor(private elementRef: ElementRef<HTMLElement>,
-                @Optional() private dir: Directionality,
-                changeDetectorRef: ChangeDetectorRef) {
-
+    constructor(
+        private elementRef: ElementRef<HTMLElement>,
+        @Optional() private dir: Directionality,
+        changeDetectorRef: ChangeDetectorRef
+    ) {
         if (this.dir && changeDetectorRef) {
-            this.dirChangeSubscription = this.dir.change.subscribe((direction: Direction) => {
-                this.computePositionAnimationState(direction);
-                changeDetectorRef.markForCheck();
-            });
+            this.dirChangeSubscription = this.dir.change
+                .subscribe((direction: Direction) => {
+                    this.computePositionAnimationState(direction);
+                    changeDetectorRef.markForCheck();
+                });
         }
     }
 
@@ -135,6 +137,7 @@ export class McTabBody implements OnInit, OnDestroy {
     onTranslateTabStarted(e: AnimationEvent): void {
         const isCentering = this.isCenterPosition(e.toState);
         this.beforeCentering.emit(isCentering);
+
         if (isCentering) {
             this.onCentering.emit(this.elementRef.nativeElement.clientHeight);
         }
@@ -158,9 +161,7 @@ export class McTabBody implements OnInit, OnDestroy {
 
     /** Whether the provided position state is considered center, regardless of origin. */
     isCenterPosition(position: McTabBodyPositionState | string): boolean {
-        return position === 'center' ||
-            position === 'left-origin-center' ||
-            position === 'right-origin-center';
+        return position === 'center' || position === 'left-origin-center' || position === 'right-origin-center';
     }
 
     /** Computes the position state that will be used for the tab-body animation trigger. */

@@ -56,8 +56,7 @@ export class McTagListBase {
         public parentForm: NgForm,
         public parentFormGroup: FormGroupDirective,
         public ngControl: NgControl
-    ) {
-    }
+    ) {}
 }
 
 // tslint:disable-next-line:naming-convention
@@ -77,21 +76,22 @@ export class McTagListChange {
     selector: 'mc-tag-list',
     exportAs: 'mcTagList',
     templateUrl: 'tag-list.partial.html',
+    styleUrls: ['tag-list.scss'],
     host: {
         class: 'mc-tag-list',
-        '[attr.tabindex]': 'disabled ? null : _tabIndex',
         '[class.mc-disabled]': 'disabled',
         '[class.mc-invalid]': 'errorState',
-        '[class.mc-required]': 'required',
+
+        '[attr.tabindex]': 'disabled ? null : tabIndex',
+        '[id]': 'uid',
+
         '(focus)': 'focus()',
         '(blur)': 'blur()',
-        '(keydown)': 'keydown($event)',
-        '[id]': 'uid'
+        '(keydown)': 'keydown($event)'
     },
-    providers: [{ provide: McFormFieldControl, useExisting: McTagList }],
-    styleUrls: ['tag-list.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [{ provide: McFormFieldControl, useExisting: McTagList }]
 })
 export class McTagList extends McTagListMixinBase implements McFormFieldControl<any>,
     ControlValueAccessor, AfterContentInit, DoCheck, OnInit, OnDestroy, CanUpdateErrorState {
@@ -260,10 +260,16 @@ export class McTagList extends McTagListMixinBase implements McFormFieldControl<
     }
 
     @Input()
+    get tabIndex(): number {
+        return this._tabIndex;
+    }
+
     set tabIndex(value: number) {
         this.userTabIndex = value;
         this._tabIndex = value;
     }
+
+    private _tabIndex = 0;
 
     /**
      * Event that emits whenever the raw value of the tag-list changes. This is here primarily
@@ -303,9 +309,6 @@ export class McTagList extends McTagListMixinBase implements McFormFieldControl<
         // Ivy will no longer match indirect descendants if it's left as false.
         descendants: true
     }) tags: QueryList<McTag>;
-
-    // tslint:disable-next-line: naming-convention orthodox-getter-and-setter
-    _tabIndex = 0;
 
     private _value: any;
 

@@ -8,8 +8,8 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
         class: 'mc-divider',
         role: 'separator',
         '[attr.aria-orientation]': 'vertical ? "vertical" : "horizontal"',
-        '[class.mc-divider-vertical]': 'vertical',
-        '[class.mc-divider-inset]': 'inset'
+        '[class.mc-divider_vertical]': 'vertical',
+        '[class.mc-divider_inset]': 'inset'
     },
     template: '',
     styleUrls: ['divider.scss'],

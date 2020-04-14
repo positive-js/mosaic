@@ -1,6 +1,5 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
 import {
-    Attribute,
     ChangeDetectionStrategy,
     Component,
     Directive,
@@ -45,12 +44,11 @@ export const McTabNavMixinBase: CanColorCtor &
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class McTabNav extends McTabNavMixinBase
-    implements CanColor {
-        constructor(elementRef: ElementRef) {
-            super(elementRef);
-        }
-     }
+export class McTabNav extends McTabNavMixinBase implements CanColor {
+    constructor(elementRef: ElementRef) {
+        super(elementRef);
+    }
+ }
 
 // Boilerplate for applying mixins to McTabLink.
 export class McTabLinkBase {}
@@ -69,7 +67,7 @@ export const McTabLinkMixinBase: HasTabIndexCtor & CanDisableCtor &
         class: 'mc-tab-link',
         '[attr.aria-current]': 'active',
         '[attr.aria-disabled]': 'disabled.toString()',
-        '[attr.tabIndex]': 'tabIndex',
+        '[attr.tabindex]': 'tabIndex',
         '[class.mc-disabled]': 'disabled',
         '[class.mc-active]': 'active'
     }
@@ -90,14 +88,9 @@ export class McTabLink extends McTabLinkMixinBase
     /** Whether the tab link is active or not. */
     protected isActive: boolean = false;
 
-    constructor(
-        public elementRef: ElementRef,
-        @Attribute('tabindex') tabIndex: string,
-        private focusMonitor: FocusMonitor
-    ) {
+    constructor(public elementRef: ElementRef, private focusMonitor: FocusMonitor) {
         super();
 
-        this.tabIndex = parseInt(tabIndex) || 0;
         this.focusMonitor.monitor(this.elementRef.nativeElement);
     }
 

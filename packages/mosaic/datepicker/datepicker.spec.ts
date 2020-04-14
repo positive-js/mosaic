@@ -24,8 +24,7 @@ import {
     dispatchMouseEvent
 } from '@ptsecurity/cdk/testing';
 import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
-import { ThemePalette } from '@ptsecurity/mosaic/core';
-import { McFormField, McFormFieldModule } from '@ptsecurity/mosaic/form-field';
+import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { Subject } from 'rxjs';
 
 import { McInputModule } from '../input/index';
@@ -861,20 +860,20 @@ describe('McDatepicker', () => {
             it('should toggle the active state of the datepicker toggle', fakeAsync(() => {
                 const toggle = fixture.debugElement.query(By.css('mc-datepicker-toggle')).nativeElement;
 
-                expect(toggle.classList).not.toContain('mc-datepicker-toggle_active');
+                expect(toggle.classList).not.toContain('mc-active');
 
                 fixture.componentInstance.datepicker.open();
                 fixture.detectChanges();
                 flush();
 
-                expect(toggle.classList).toContain('mc-datepicker-toggle_active');
+                expect(toggle.classList).toContain('mc-active');
 
                 fixture.componentInstance.datepicker.close();
                 fixture.detectChanges();
                 flush();
                 fixture.detectChanges();
 
-                expect(toggle.classList).not.toContain('mc-datepicker-toggle_active');
+                expect(toggle.classList).not.toContain('mc-active');
             }));
         });
 
@@ -892,72 +891,14 @@ describe('McDatepicker', () => {
         });
 
         describe('datepicker with tabindex on mc-datepicker-toggle', () => {
-
-            it('should clear the tabindex from the mc-datepicker-toggle host', () => {
+            it('should forward tabindex from host to button', () => {
                 const fixture = createComponent(DatepickerWithTabindexOnToggle, [McMomentDateModule]);
                 fixture.detectChanges();
 
-                const host = fixture.nativeElement.querySelector('.mc-datepicker-toggle');
+                const button = fixture.nativeElement.querySelector('.mc-button');
 
-                expect(host.getAttribute('tabindex')).toBe('-1');
+                expect(button.getAttribute('tabindex')).toBe('7');
             });
-
-            it('should forward focus to the underlying button when the host is focused', () => {
-                const fixture = createComponent(DatepickerWithTabindexOnToggle, [McMomentDateModule]);
-                fixture.detectChanges();
-
-                const host = fixture.nativeElement.querySelector('.mc-datepicker-toggle');
-                const button = host.querySelector('button');
-
-                expect(document.activeElement).not.toBe(button);
-
-                host.focus();
-
-                expect(document.activeElement).toBe(button);
-            });
-
-        });
-
-        describe('datepicker inside mc-form-field', () => {
-            let fixture: ComponentFixture<FormFieldDatepicker>;
-            let testComponent: FormFieldDatepicker;
-
-            beforeEach(fakeAsync(() => {
-                fixture = createComponent(FormFieldDatepicker, [McMomentDateModule]);
-                fixture.detectChanges();
-                testComponent = fixture.componentInstance;
-            }));
-
-            afterEach(fakeAsync(() => {
-                testComponent.datepicker.close();
-                fixture.detectChanges();
-                flush();
-            }));
-
-            it('should pass the form field theme color to the overlay', fakeAsync(() => {
-                testComponent.formField.color = ThemePalette.Primary;
-                testComponent.datepicker.open();
-                fixture.detectChanges();
-                flush();
-
-                let contentEl = document.querySelector('.mc-datepicker__content')!;
-
-                expect(contentEl.classList).toContain('mc-primary');
-
-                testComponent.datepicker.close();
-                fixture.detectChanges();
-                flush();
-
-                testComponent.formField.color = ThemePalette.Error;
-                testComponent.datepicker.open();
-
-                contentEl = document.querySelector('.mc-datepicker__content')!;
-                fixture.detectChanges();
-                flush();
-
-                expect(contentEl.classList).toContain('mc-error');
-                expect(contentEl.classList).not.toContain('mc-primary');
-            }));
         });
 
         describe('datepicker with min and max dates and validation', () => {
@@ -1523,23 +1464,7 @@ class DatepickerWithToggle {
         <mc-datepicker #d></mc-datepicker>
     `
 })
-class DatepickerWithCustomIcon {
-}
-
-
-@Component({
-    template: `
-        <mc-form-field>
-            <input mcInput [mcDatepicker]="d">
-            <mc-datepicker #d></mc-datepicker>
-        </mc-form-field>
-    `
-})
-class FormFieldDatepicker {
-    @ViewChild('d', {static: false}) datepicker: McDatepicker<Moment>;
-    @ViewChild(McDatepickerInput, {static: false}) datepickerInput: McDatepickerInput<Moment>;
-    @ViewChild(McFormField, {static: false}) formField: McFormField;
-}
+class DatepickerWithCustomIcon {}
 
 
 @Component({
@@ -1687,7 +1612,7 @@ class DelayedDatepicker {
 @Component({
     template: `
         <input [mcDatepicker]="d">
-        <mc-datepicker-toggle tabindex="7" [for]="d">
+        <mc-datepicker-toggle [tabIndex]="7" [for]="d">
             <div class="custom-icon" mcDatepickerToggleIcon></div>
         </mc-datepicker-toggle>
         <mc-datepicker #d></mc-datepicker>

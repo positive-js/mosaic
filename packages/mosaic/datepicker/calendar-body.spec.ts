@@ -58,7 +58,7 @@ describe('McCalendarBody', () => {
         });
 
         it('highlights selected', () => {
-            const selectedCell = calendarBodyNativeElement.querySelector('.mc-calendar__body_selected')!;
+            const selectedCell = calendarBodyNativeElement.querySelector('.mc-selected')!;
             expect(selectedCell).not.toBeNull();
             expect(selectedCell.innerHTML.trim()).toBe('4');
         });
@@ -93,7 +93,7 @@ describe('McCalendarBody', () => {
             fixture.detectChanges();
 
             expect(todayElement.classList)
-                .toContain('mc-calendar__body_selected', 'today should be selected');
+                .toContain('mc-selected', 'today should be selected');
         });
 
         it('should mark active date', () => {

@@ -66,12 +66,13 @@ export interface McOptionEvent {
     exportAs: 'mcListOption',
     selector: 'mc-list-option',
     host: {
-        '[attr.tabindex]': 'tabIndex',
-
         class: 'mc-list-option mc-no-select',
         '[class.mc-selected]': 'selected',
         '[class.mc-focused]': 'hasFocus',
         '[class.mc-disabled]': 'disabled',
+
+        '[attr.tabindex]': 'tabIndex',
+        '[attr.disabled]': 'disabled || null',
 
         '(focus)': 'focus()',
         '(blur)': 'blur()',
@@ -100,8 +101,10 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
 
     @Input()
     get disabled() {
-        return (this.listSelection && this.listSelection.disabled) || (this.group && this.group.disabled) ||
-            this._disabled;
+        const listSelectionDisabled = this.listSelection && this.listSelection.disabled;
+        const groupDisabled = this.group && this.group.disabled;
+
+        return listSelectionDisabled || groupDisabled || this._disabled;
     }
 
     set disabled(value: any) {
@@ -265,7 +268,9 @@ export class McListSelectionChange {
 }
 
 
-export class McListSelectionBase {}
+export class McListSelectionBase {
+    constructor(public elementRef: ElementRef) {}
+}
 
 // tslint:disable-next-line:naming-convention
 export const McListSelectionMixinBase: CanDisableCtor & HasTabIndexCtor & typeof McListSelectionBase
@@ -280,9 +285,10 @@ export const McListSelectionMixinBase: CanDisableCtor & HasTabIndexCtor & typeof
     encapsulation: ViewEncapsulation.None,
     inputs: ['disabled'],
     host: {
-        '[attr.tabindex]': 'tabIndex',
-
         class: 'mc-list-selection',
+
+        '[attr.tabindex]': 'tabIndex',
+        '[attr.disabled]': 'disabled || null',
 
         '(focus)': 'focus()',
         '(blur)': 'blur()',
@@ -299,8 +305,27 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
 
     @ContentChildren(McListOption, { descendants: true }) options: QueryList<McListOption>;
 
-    autoSelect: boolean;
-    noUnselect: boolean;
+    @Input()
+    get autoSelect(): boolean {
+        return this._autoSelect;
+    }
+
+    set autoSelect(value: boolean) {
+        this._autoSelect = coerceBooleanProperty(value);
+    }
+
+    private _autoSelect: boolean = true;
+
+    @Input()
+    get noUnselectLast(): boolean {
+        return this._noUnselectLast;
+    }
+
+    set noUnselectLast(value: boolean) {
+        this._noUnselectLast = coerceBooleanProperty(value);
+    }
+
+    private _noUnselectLast: boolean = true;
 
     multipleMode: MultipleMode | null;
 
@@ -312,14 +337,17 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
 
     @Input()
     get tabIndex(): any {
-        return this._tabIndex;
+        return this.disabled ? -1 : this._tabIndex;
     }
 
     set tabIndex(value: any) {
+        this.userTabIndex = value;
         this._tabIndex = value;
     }
 
     private _tabIndex = 0;
+
+    userTabIndex: number | null = null;
 
     get showCheckbox(): boolean {
         return this.multipleMode === MultipleMode.CHECKBOX;
@@ -349,17 +377,11 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
     private optionBlurSubscription: Subscription | null;
 
     constructor(
-        private element: ElementRef,
+        elementRef: ElementRef,
         private changeDetectorRef: ChangeDetectorRef,
-        @Attribute('tabindex') tabIndex: string,
-        @Attribute('auto-select') autoSelect: string,
-        @Attribute('no-unselect') noUnselect: string,
-        @Attribute('multiple') multiple: string
+        @Attribute('multiple') multiple: MultipleMode
     ) {
-        super();
-
-        this.autoSelect = autoSelect === null ? true : toBoolean(autoSelect);
-        this.noUnselect = noUnselect === null ? true : toBoolean(noUnselect);
+        super(elementRef);
 
         if (multiple === MultipleMode.CHECKBOX || multiple === MultipleMode.KEYBOARD) {
             this.multipleMode = multiple;
@@ -369,10 +391,8 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
 
         if (this.multipleMode === MultipleMode.CHECKBOX) {
             this.autoSelect = false;
-            this.noUnselect = false;
+            this.noUnselectLast = false;
         }
-
-        this._tabIndex = parseInt(tabIndex) || 0;
 
         this.selectionModel = new SelectionModel<McListOption>(this.multiple);
     }
@@ -391,7 +411,7 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
                 this._tabIndex = -1;
 
                 setTimeout(() => {
-                    this._tabIndex = 0;
+                    this._tabIndex = this.userTabIndex || 0;
                     this.changeDetectorRef.markForCheck();
                 });
             });
@@ -513,7 +533,7 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
             .forEach((renderedOption) => {
                 const isLastRenderedOption = renderedOption === this.keyManager.activeItem;
 
-                if (isLastRenderedOption && renderedOption.selected && this.noUnselect) { return; }
+                if (isLastRenderedOption && renderedOption.selected && this.noUnselectLast) { return; }
 
                 renderedOption.setSelected(!selectedOptionState);
             });
@@ -566,11 +586,11 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
     }
 
     canDeselectLast(listOption: McListOption): boolean {
-        return !(this.noUnselect && this.selectionModel.selected.length === 1 && listOption.selected);
+        return !(this.noUnselectLast && this.selectionModel.selected.length === 1 && listOption.selected);
     }
 
     getHeight(): number {
-        return this.element.nativeElement.getClientRects()[0].height;
+        return this.elementRef.nativeElement.getClientRects()[0].height;
     }
 
     // View to model callback that should be called if the list or its options lost focus.
@@ -657,7 +677,7 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
     }
 
     protected updateTabIndex(): void {
-        this._tabIndex = this.options.length === 0 ? -1 : 0;
+        this._tabIndex = this.userTabIndex || (this.options.length === 0 ? -1 : 0);
     }
 
     private resetOptions() {

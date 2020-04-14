@@ -8,9 +8,7 @@ import {
 } from '@angular/animations';
 
 
-export const mcTabsAnimations: {
-    readonly translateTab: AnimationTriggerMetadata;
-} = {
+export const mcTabsAnimations: { readonly translateTab: AnimationTriggerMetadata } = {
     /** Animation translates a tab along the X axis. */
     translateTab: trigger('translateTab', [
         // Note: transitions to `none` instead of 0, because some browsers might blur the content.

@@ -136,15 +136,16 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
 
     private hoverSubscription = Subscription.EMPTY;
 
-    constructor(private _overlay: Overlay,
-                private _element: ElementRef<HTMLElement>,
-                private _viewContainerRef: ViewContainerRef,
-                @Inject(MC_DROPDOWN_SCROLL_STRATEGY) private _scrollStrategy: any,
-                @Optional() private _parent: McDropdown,
-                @Optional() @Self() private _dropdownItemInstance: McDropdownItem,
-                @Optional() private _dir: Directionality,
-                private _focusMonitor?: FocusMonitor) {
-
+    constructor(
+        private _overlay: Overlay,
+        private _element: ElementRef<HTMLElement>,
+        private _viewContainerRef: ViewContainerRef,
+        @Inject(MC_DROPDOWN_SCROLL_STRATEGY) private _scrollStrategy: any,
+        @Optional() private _parent: McDropdown,
+        @Optional() @Self() private _dropdownItemInstance: McDropdownItem,
+        @Optional() private _dir: Directionality,
+        private _focusMonitor?: FocusMonitor
+    ) {
         _element.nativeElement.addEventListener('touchstart', this.handleTouchStart,
             passiveEventListenerOptions);
 

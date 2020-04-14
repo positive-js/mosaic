@@ -1,5 +1,4 @@
 
 module.exports = () => ({
-    autoDetect: true,
-    debug: false
+    autoDetect: true
 });

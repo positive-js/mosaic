@@ -2,7 +2,6 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 import {
     ChangeDetectionStrategy,
     Component,
-    Input,
     ViewEncapsulation,
     Directive,
     ElementRef,
@@ -10,7 +9,7 @@ import {
     Optional,
     Self
 } from '@angular/core';
-import { CanDisable, mixinDisabled, CanDisableCtor } from '@ptsecurity/mosaic/core';
+import { CanDisable, mixinDisabled, CanDisableCtor, mixinTabIndex, HasTabIndexCtor } from '@ptsecurity/mosaic/core';
 import { McDropdownTrigger } from '@ptsecurity/mosaic/dropdown';
 
 
@@ -43,8 +42,8 @@ class McVerticalNavbarItemBase {
 }
 
 // tslint:disable-next-line:naming-convention
-export const McVerticalNavbarMixinBase: CanDisableCtor & typeof McVerticalNavbarItemBase
-    = mixinDisabled(McVerticalNavbarItemBase);
+export const McVerticalNavbarMixinBase: HasTabIndexCtor & CanDisableCtor & typeof McVerticalNavbarItemBase
+    = mixinTabIndex(mixinDisabled(McVerticalNavbarItemBase));
 
 
 @Component({
@@ -53,15 +52,17 @@ export const McVerticalNavbarMixinBase: CanDisableCtor & typeof McVerticalNavbar
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrls: ['./vertical-navbar-item.component.scss'],
-    inputs: ['disabled'],
+    inputs: ['disabled', 'tabIndex'],
     host: {
         class: 'mc-vertical-navbar-item',
         '[attr.disabled]': 'disabled || null',
-        '[attr.tabindex]': 'disabled ? -1 : 0'
+        '[attr.tabindex]': 'tabIndex'
     }
 })
 export class McVerticalNavbarItem extends McVerticalNavbarMixinBase implements CanDisable, OnDestroy {
-    @Input() tabIndex: number = 0;
+    get hasDropdownAttached() {
+        return !!this.trigger;
+    }
 
     constructor(
         private element: ElementRef,
@@ -71,10 +72,6 @@ export class McVerticalNavbarItem extends McVerticalNavbarMixinBase implements C
         super(element);
 
         this.focusMonitor.monitor(this.element.nativeElement).subscribe();
-    }
-
-    get hasDropdownAttached() {
-        return !! this.trigger;
     }
 
     ngOnDestroy() {

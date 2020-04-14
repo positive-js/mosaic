@@ -3,11 +3,23 @@ import {
     Output,
     ChangeDetectionStrategy,
     Component,
-    ElementRef, Input,
-    OnDestroy, EventEmitter,
-    ViewEncapsulation, HostBinding
+    ElementRef,
+    Input,
+    OnDestroy,
+    EventEmitter,
+    ViewEncapsulation
 } from '@angular/core';
 import { SPACE } from '@ptsecurity/cdk/keycodes';
+import { CanColorCtor, mixinColor } from '@ptsecurity/mosaic/core';
+
+
+export class McCardBase {
+    // tslint:disable-next-line:naming-convention
+    constructor(public _elementRef: ElementRef) {}
+}
+
+// tslint:disable-next-line:naming-convention
+export const McCardBaseMixin: CanColorCtor & typeof McCardBase = mixinColor(McCardBase);
 
 
 @Component({
@@ -20,22 +32,13 @@ import { SPACE } from '@ptsecurity/cdk/keycodes';
     host: {
         class: 'mc-card',
         '[class.mc-card_readonly]': 'readonly',
-        '[class.mc-card_selected]': 'selected',
+        '[class.mc-selected]': 'selected',
+        '[attr.tabindex]': 'tabIndex',
         '(keydown)': 'onKeyDown($event)',
         '(click)': 'onClick($event)'
     }
 })
-export class McCard implements OnDestroy {
-    get tabIndex(): number | null {
-        return this.readonly ? null : this._tabIndex;
-    }
-
-    @HostBinding('attr.tabIndex')
-    @Input()
-    set tabIndex(value: number | null) {
-        this._tabIndex = value;
-    }
-
+export class McCard extends McCardBaseMixin implements OnDestroy {
     @Input()
     readonly = false;
 
@@ -45,9 +48,20 @@ export class McCard implements OnDestroy {
     @Output()
     selectedChange = new EventEmitter<boolean>();
 
+    @Input()
+    get tabIndex(): number | null {
+        return this.readonly ? null : this._tabIndex;
+    }
+
+    set tabIndex(value: number | null) {
+        this._tabIndex = value;
+    }
+
     private _tabIndex: number | null = 0;
 
-    constructor(private _elementRef: ElementRef, private _focusMonitor: FocusMonitor) {
+    constructor(elementRef: ElementRef, private _focusMonitor: FocusMonitor) {
+        super(elementRef);
+
         this._focusMonitor.monitor(this._elementRef.nativeElement, false);
     }
 
@@ -67,10 +81,6 @@ export class McCard implements OnDestroy {
         }
     }
 
-    private get hostElement() {
-        return this._elementRef.nativeElement;
-    }
-
     onKeyDown($event: KeyboardEvent) {
         // tslint:disable-next-line:deprecation
         switch ($event.keyCode) {
@@ -82,5 +92,9 @@ export class McCard implements OnDestroy {
                 break;
             default:
         }
+    }
+
+    private get hostElement() {
+        return this._elementRef.nativeElement;
     }
 }

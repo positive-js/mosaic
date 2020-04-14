@@ -161,12 +161,12 @@ export class McCalendarHeader<D> {
  */
 @Component({
     selector: 'mc-calendar',
+    exportAs: 'mcCalendar',
     templateUrl: 'calendar.html',
     styleUrls: ['calendar.scss'],
     host: {
         class: 'mc-calendar'
     },
-    exportAs: 'mcCalendar',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })

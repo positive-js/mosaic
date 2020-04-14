@@ -10,7 +10,7 @@ import { McButtonToggleModule } from '../../mosaic/button-toggle';
 @Component({
     selector: 'app',
     templateUrl: './template.html',
-    styleUrls: ['./styles.scss'],
+    styleUrls: ['../main.scss', './styles.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class ButtonToggleDemoComponent {

@@ -86,7 +86,7 @@ describe('McMonthView', () => {
         });
 
         it('shows selected date if in same month', () => {
-            const selectedEl = monthViewNativeElement.querySelector('.mc-calendar__body_selected')!;
+            const selectedEl = monthViewNativeElement.querySelector('.mc-selected')!;
             expect(selectedEl.innerHTML.trim()).toBe('10');
         });
 
@@ -94,7 +94,7 @@ describe('McMonthView', () => {
             testComponent.selected = moment([2017, 2, 10]);
             fixture.detectChanges();
 
-            const selectedEl = monthViewNativeElement.querySelector('.mc-calendar__body_selected');
+            const selectedEl = monthViewNativeElement.querySelector('.mc-selected');
             expect(selectedEl).toBeNull();
         });
 
@@ -103,7 +103,7 @@ describe('McMonthView', () => {
             (cellEls[cellEls.length - 1] as HTMLElement).click();
             fixture.detectChanges();
 
-            const selectedEl = monthViewNativeElement.querySelector('.mc-calendar__body_selected')!;
+            const selectedEl = monthViewNativeElement.querySelector('.mc-selected')!;
             expect(selectedEl.innerHTML.trim()).toBe('31');
         });
 

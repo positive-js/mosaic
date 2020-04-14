@@ -42,7 +42,7 @@
         [style.paddingTop]="cellPadding"
         [style.paddingBottom]="cellPadding">
         <div class="mc-calendar__body-cell-content"
-             [class.mc-calendar__body_selected]="selectedValue === item.value"
+             [class.mc-selected]="selectedValue === item.value"
              [class.mc-calendar__body-today]="todayValue === item.value">
             {{item.displayValue}}
         </div>
