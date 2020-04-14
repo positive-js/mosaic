@@ -6,8 +6,7 @@ import {
     ElementRef,
     OnDestroy,
     ViewEncapsulation,
-    Renderer2,
-    Input
+    Renderer2
 } from '@angular/core';
 import {
     mixinColor,

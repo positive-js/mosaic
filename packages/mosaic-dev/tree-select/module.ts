@@ -101,7 +101,6 @@ export const DATA_OBJECT = {
 })
 export class DemoComponent {
     disabledState: boolean = false;
-    ifValue: boolean = false;
 
     control = new FormControl(['rootNode_1']);
 

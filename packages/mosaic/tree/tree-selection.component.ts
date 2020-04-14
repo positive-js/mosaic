@@ -36,7 +36,12 @@ import {
     UP_ARROW
 } from '@ptsecurity/cdk/keycodes';
 import { CdkTree, CdkTreeNodeOutlet, FlatTreeControl } from '@ptsecurity/cdk/tree';
-import { CanDisable, getMcSelectNonArrayValueError, HasTabIndex, MultipleMode } from '@ptsecurity/mosaic/core';
+import {
+    CanDisable,
+    getMcSelectNonArrayValueError,
+    HasTabIndex,
+    MultipleMode
+} from '@ptsecurity/mosaic/core';
 import { merge, Observable, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -112,6 +117,17 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
 
     userTabIndex: number | null = null;
 
+    @Input()
+    get autoSelect(): boolean {
+        return this._autoSelect;
+    }
+
+    set autoSelect(value: boolean) {
+        this._autoSelect = coerceBooleanProperty(value);
+    }
+
+    private _autoSelect: boolean = true;
+
     get optionFocusChanges(): Observable<McTreeOptionEvent> {
         return merge(...this.renderedOptions.map((option) => option.onFocus));
     }
@@ -123,17 +139,6 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
     get multiple(): boolean {
         return !!this.multipleMode;
     }
-
-    @Input()
-    get autoSelect(): boolean {
-        return this._autoSelect;
-    }
-
-    set autoSelect(value: boolean) {
-        this._autoSelect = coerceBooleanProperty(value);
-    }
-
-    private _autoSelect: boolean = true;
 
     @Input()
     get noUnselectLast(): boolean {
@@ -189,12 +194,12 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
         private elementRef: ElementRef,
         differs: IterableDiffers,
         changeDetectorRef: ChangeDetectorRef,
-        @Attribute('multiple') multiple: string
+        @Attribute('multiple') multiple: MultipleMode
     ) {
         super(differs, changeDetectorRef);
 
         if (multiple === MultipleMode.CHECKBOX || multiple === MultipleMode.KEYBOARD) {
-            this.multipleMode = multiple as MultipleMode;
+            this.multipleMode = multiple;
         } else if (multiple !== null) {
             this.multipleMode = MultipleMode.CHECKBOX;
         }

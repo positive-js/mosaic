@@ -305,8 +305,27 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
 
     @ContentChildren(McListOption, { descendants: true }) options: QueryList<McListOption>;
 
-    autoSelect: boolean;
-    noUnselect: boolean;
+    @Input()
+    get autoSelect(): boolean {
+        return this._autoSelect;
+    }
+
+    set autoSelect(value: boolean) {
+        this._autoSelect = coerceBooleanProperty(value);
+    }
+
+    private _autoSelect: boolean = true;
+
+    @Input()
+    get noUnselectLast(): boolean {
+        return this._noUnselectLast;
+    }
+
+    set noUnselectLast(value: boolean) {
+        this._noUnselectLast = coerceBooleanProperty(value);
+    }
+
+    private _noUnselectLast: boolean = true;
 
     multipleMode: MultipleMode | null;
 
@@ -360,14 +379,9 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
     constructor(
         elementRef: ElementRef,
         private changeDetectorRef: ChangeDetectorRef,
-        @Attribute('auto-select') autoSelect: string,
-        @Attribute('no-unselect') noUnselect: string,
         @Attribute('multiple') multiple: MultipleMode
     ) {
         super(elementRef);
-
-        this.autoSelect = autoSelect === null ? true : toBoolean(autoSelect);
-        this.noUnselect = noUnselect === null ? true : toBoolean(noUnselect);
 
         if (multiple === MultipleMode.CHECKBOX || multiple === MultipleMode.KEYBOARD) {
             this.multipleMode = multiple;
@@ -377,7 +391,7 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
 
         if (this.multipleMode === MultipleMode.CHECKBOX) {
             this.autoSelect = false;
-            this.noUnselect = false;
+            this.noUnselectLast = false;
         }
 
         this.selectionModel = new SelectionModel<McListOption>(this.multiple);
@@ -519,7 +533,7 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
             .forEach((renderedOption) => {
                 const isLastRenderedOption = renderedOption === this.keyManager.activeItem;
 
-                if (isLastRenderedOption && renderedOption.selected && this.noUnselect) { return; }
+                if (isLastRenderedOption && renderedOption.selected && this.noUnselectLast) { return; }
 
                 renderedOption.setSelected(!selectedOptionState);
             });
@@ -572,7 +586,7 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
     }
 
     canDeselectLast(listOption: McListOption): boolean {
-        return !(this.noUnselect && this.selectionModel.selected.length === 1 && listOption.selected);
+        return !(this.noUnselectLast && this.selectionModel.selected.length === 1 && listOption.selected);
     }
 
     getHeight(): number {

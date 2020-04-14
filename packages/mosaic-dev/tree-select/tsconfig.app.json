@@ -3,6 +3,9 @@
     "compilerOptions": {
         "outDir": "../../dist/out-tsc"
     },
+    "angularCompilerOptions": {
+        "enableIvy": false
+    },
     "files": [
         "module.ts",
         "../polyfills.ts"

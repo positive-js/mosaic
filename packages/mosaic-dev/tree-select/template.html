@@ -9,11 +9,10 @@
 <button mc-button (click)="multiSelectSelectFormControl.setValue(null)">setValue(null)</button>
 <button mc-button (click)="multiSelectSelectFormControl.reset()">reset</button>
 <button mc-button (click)="multiSelectSelectFormControl.setValue(['Pictures'])">setValue</button>
-<button mc-button (click)="ifValue = !ifValue">ifValue</button>
 
 <br><br><br>
 
-<div class="dev-container" *ngIf="ifValue">
+<div class="dev-container">
     <mc-form-field>
         <mc-tree-select
             placeholder="this is placeholder"
