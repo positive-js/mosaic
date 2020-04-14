@@ -697,10 +697,10 @@ class MultiSelect {
     selector: 'select-with-plain-tabindex',
     template: `
         <mc-form-field>
-            <mc-tree-select tabindex="5"></mc-tree-select>
+            <mc-tree-select></mc-tree-select>
         </mc-form-field>`
 })
-class SelectWithPlainTabindex {}
+class EmptySelect {}
 
 @Component({
     selector: 'select-early-sibling-access',
@@ -2967,23 +2967,11 @@ describe('McTreeSelect', () => {
         }));
     });
 
-    describe('with tabindex', () => {
-        beforeEach(async(() => configureMcTreeSelectTestingModule([SelectWithPlainTabindex])));
-
-        it('should be able to set the tabindex via the native attribute', fakeAsync(() => {
-            const fixture = TestBed.createComponent(SelectWithPlainTabindex);
-            fixture.detectChanges();
-
-            const select = fixture.debugElement.query(By.css('mc-tree-select')).nativeElement;
-            expect(select.getAttribute('tabindex')).toBe('5');
-        }));
-    });
-
     describe('change events', () => {
-        beforeEach(async(() => configureMcTreeSelectTestingModule([SelectWithPlainTabindex])));
+        beforeEach(async(() => configureMcTreeSelectTestingModule([EmptySelect])));
 
         it('should complete the stateChanges stream on destroy', () => {
-            const fixture = TestBed.createComponent(SelectWithPlainTabindex);
+            const fixture = TestBed.createComponent(EmptySelect);
             fixture.detectChanges();
 
             const debugElement = fixture.debugElement.query(By.directive(McTreeSelect));

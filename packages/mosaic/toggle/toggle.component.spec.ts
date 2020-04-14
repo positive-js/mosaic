@@ -25,7 +25,6 @@ describe('McToggle', () => {
                 ToggleWithNameAttribute,
                 ToggleWithFormControl,
                 ToggleWithoutLabel,
-                ToggleWithTabindexAttr,
                 ToggleUsingViewChild
             ]
         });
@@ -324,19 +323,6 @@ describe('McToggle', () => {
 
     });
 
-    describe('with native tabindex attribute', () => {
-        it('should properly detect native tabindex attribute', fakeAsync(() => {
-            fixture = TestBed.createComponent(ToggleWithTabindexAttr);
-            fixture.detectChanges();
-
-            const toggle = fixture.debugElement
-                .query(By.directive(McToggleComponent)).componentInstance as McToggleComponent;
-
-            expect(toggle.tabIndex)
-                .toBe(5, 'Expected tabIndex property to have been set based on the native attribute');
-        }));
-    });
-
     describe('using ViewChild', () => {
         let toggleDebugElement: DebugElement;
         let toggleNativeElement: HTMLElement;
@@ -612,8 +598,3 @@ class ToggleWithFormControl {
 class ToggleWithoutLabel {
     label: string;
 }
-
-@Component({
-    template: `<mc-toggle tabindex="5"></mc-toggle>`
-})
-class ToggleWithTabindexAttr {}

@@ -388,6 +388,11 @@ export class McButtonToggle implements OnInit, OnDestroy {
         }
     }
 
+    /** Focuses the button. */
+    focus(): void {
+        this.element.nativeElement.focus();
+    }
+
     /** Checks the button toggle due to an interaction with the underlying native button. */
     onToggleClick() {
         if (this.disabled) { return; }

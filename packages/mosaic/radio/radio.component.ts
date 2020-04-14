@@ -460,7 +460,6 @@ export class McRadioButton extends McRadioButtonMixinBase
         private focusMonitor: FocusMonitor,
         private readonly _radioDispatcher: UniqueSelectionDispatcher
     ) {
-
         super(elementRef);
 
         this.id = this.uniqueId;

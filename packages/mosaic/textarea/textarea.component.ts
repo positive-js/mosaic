@@ -15,8 +15,7 @@ import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { fromEvent, Subscription, Subject } from 'rxjs';
 
 
-export const MC_TEXTAREA_VALUE_ACCESSOR =
-    new InjectionToken<{ value: any }>('MC_TEXTAREA_VALUE_ACCESSOR');
+export const MC_TEXTAREA_VALUE_ACCESSOR = new InjectionToken<{ value: any }>('MC_TEXTAREA_VALUE_ACCESSOR');
 
 let nextUniqueId = 0;
 
@@ -39,11 +38,13 @@ export const McTextareaMixinBase: CanUpdateErrorStateCtor & typeof McTextareaBas
     host: {
         class: 'mc-textarea',
         '[class.mc-textarea-resizable]': '!canGrow',
+
         '[attr.id]': 'id',
         '[attr.placeholder]': 'placeholder',
         '[attr.aria-invalid]': 'errorState',
         '[attr.disabled]': 'disabled || null',
         '[attr.required]': 'required',
+
         '(blur)': 'focusChanged(false)',
         '(focus)': 'focusChanged(true)'
     },

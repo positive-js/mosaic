@@ -1,6 +1,5 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
 import {
-    Attribute,
     ChangeDetectionStrategy,
     Component,
     Directive,
@@ -55,7 +54,7 @@ export class McTabNav extends McTabNavMixinBase implements CanColor {
 export class McTabLinkBase {}
 // tslint:disable-next-line:naming-convention
 export const McTabLinkMixinBase: HasTabIndexCtor & CanDisableCtor &
-    typeof McTabLinkBase = mixinTabIndex(mixinDisabled(McTabLinkBase));
+    typeof McTabLinkBase = mixinTabIndex(mixinDisabled(McTabLinkBase), 0);
 
 /**
  * Link inside of a `mc-tab-nav-bar`.
@@ -89,14 +88,9 @@ export class McTabLink extends McTabLinkMixinBase
     /** Whether the tab link is active or not. */
     protected isActive: boolean = false;
 
-    constructor(
-        public elementRef: ElementRef,
-        @Attribute('tabindex') tabIndex: string,
-        private focusMonitor: FocusMonitor
-    ) {
+    constructor(public elementRef: ElementRef, private focusMonitor: FocusMonitor) {
         super();
 
-        this.tabIndex = parseInt(tabIndex) || 0;
         this.focusMonitor.monitor(this.elementRef.nativeElement);
     }
 

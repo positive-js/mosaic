@@ -92,8 +92,7 @@ export const McTimepickerMixinBase:
         '(keydown)': 'onKeyDown($event)'
     },
     providers: [{
-        provide: McFormFieldControl,
-        useExisting: forwardRef(() => McTimepicker)
+        provide: McFormFieldControl, useExisting: forwardRef(() => McTimepicker)
     }]
 })
 export class McTimepicker<D> extends McTimepickerMixinBase

@@ -26,9 +26,7 @@ import { McTabLabel } from './tab-label';
 
 export class McTabBase {}
 // tslint:disable-next-line:naming-convention
-export const McTabMixinBase: CanDisableCtor & typeof McTabBase = mixinDisabled(
-    McTabBase
-);
+export const McTabMixinBase: CanDisableCtor & typeof McTabBase = mixinDisabled(McTabBase);
 
 @Component({
     selector: 'mc-tab',
@@ -41,15 +39,13 @@ export const McTabMixinBase: CanDisableCtor & typeof McTabBase = mixinDisabled(
     encapsulation: ViewEncapsulation.None,
     exportAs: 'mcTab'
 })
-export class McTab extends McTabMixinBase
-    implements OnInit, CanDisable, OnChanges, OnDestroy {
+export class McTab extends McTabMixinBase implements OnInit, CanDisable, OnChanges, OnDestroy {
     /** @docs-private */
     get content(): TemplatePortal | null {
         return this.contentPortal;
     }
     /** Content for the tab label given by `<ng-template mc-tab-label>`. */
-    @ContentChild(McTabLabel, {static: false})
-    templateLabel: McTabLabel;
+    @ContentChild(McTabLabel, { static: false }) templateLabel: McTabLabel;
 
     /**
      * Template provided in the tab content that will be used if present, used to enable lazy-loading
@@ -58,26 +54,22 @@ export class McTab extends McTabMixinBase
     explicitContent: TemplateRef<any>;
 
     /** Template inside the McTab view that contains an `<ng-content>`. */
-    @ViewChild(TemplateRef, {static: true})
+    @ViewChild(TemplateRef, { static: true })
     implicitContent: TemplateRef<any>;
 
     /** Plain text label for the tab, used when there is no template label. */
-    @Input('label')
-    textLabel: string = '';
+    @Input('label') textLabel: string = '';
 
-    @Input('tabId')
-    tabId: string;
+    @Input('tabId') tabId: string;
 
     /** Aria label for the tab. */
-    @Input('aria-label')
-    ariaLabel: string;
+    @Input('aria-label') ariaLabel: string;
 
     /**
      * Reference to the element that the tab is labelled by.
      * Will be cleared if `aria-label` is set at the same time.
      */
-    @Input('aria-labelledby')
-    ariaLabelledby: string;
+    @Input('aria-labelledby') ariaLabelledby: string;
 
     /** Emits whenever the internal state of the tab changes. */
     readonly stateChanges = new Subject<void>();
@@ -107,10 +99,7 @@ export class McTab extends McTabMixinBase
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        if (
-            changes.hasOwnProperty('textLabel') ||
-            changes.hasOwnProperty('disabled')
-        ) {
+        if (changes.hasOwnProperty('textLabel') || changes.hasOwnProperty('disabled')) {
             this.stateChanges.next();
         }
     }

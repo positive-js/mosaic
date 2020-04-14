@@ -415,11 +415,10 @@ class MultiSelect {
     selector: 'select-with-plain-tabindex',
     template: `
         <mc-form-field>
-            <mc-select tabindex="5"></mc-select>
+            <mc-select [tabIndex]="5"></mc-select>
         </mc-form-field>`
 })
-class SelectWithPlainTabindex {
-}
+class SelectWithPlainTabindex {}
 
 @Component({
     selector: 'select-early-sibling-access',
@@ -2497,18 +2496,6 @@ describe('McSelect', () => {
             expect(() => {
                 TestBed.createComponent(SelectWithErrorSibling).detectChanges();
             }).toThrowError(new RegExp('Oh no!', 'g'));
-        }));
-    });
-
-    describe('with tabindex', () => {
-        beforeEach(async(() => configureMcSelectTestingModule([SelectWithPlainTabindex])));
-
-        it('should be able to set the tabindex via the native attribute', fakeAsync(() => {
-            const fixture = TestBed.createComponent(SelectWithPlainTabindex);
-            fixture.detectChanges();
-
-            const select = fixture.debugElement.query(By.css('mc-select')).nativeElement;
-            expect(select.getAttribute('tabindex')).toBe('5');
         }));
     });
 

@@ -91,13 +91,7 @@ export class McTabHeader extends McTabHeaderBase
 
     /** When the focus index is set, we must manually send focus to the correct label */
     set focusIndex(value: number) {
-        if (
-            !this.isValidIndex(value) ||
-            this.focusIndex === value ||
-            !this.keyManager
-        ) {
-            return;
-        }
+        if (!this.isValidIndex(value) || this.focusIndex === value || !this.keyManager) { return; }
 
         this.keyManager.setActiveItem(value);
     }
@@ -118,12 +112,11 @@ export class McTabHeader extends McTabHeaderBase
         this.checkScrollingControls();
     }
 
-    @ContentChildren(McTabLabelWrapper)
-    labelWrappers: QueryList<McTabLabelWrapper>;
-    @ViewChild('tabListContainer', {static: true})
-    tabListContainer: ElementRef;
-    @ViewChild('tabList', {static: true})
-    tabList: ElementRef;
+    @ContentChildren(McTabLabelWrapper) labelWrappers: QueryList<McTabLabelWrapper>;
+
+    @ViewChild('tabListContainer', { static: true }) tabListContainer: ElementRef;
+
+    @ViewChild('tabList', { static: true }) tabList: ElementRef;
 
     /** Whether the controls for pagination should be displayed */
     showPaginationControls = false;

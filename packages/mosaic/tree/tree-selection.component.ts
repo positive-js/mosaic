@@ -68,6 +68,7 @@ interface SelectionModelOption {
     selector: 'mc-tree-selection',
     exportAs: 'mcTreeSelection',
     template: '<ng-container cdkTreeNodeOutlet></ng-container>',
+    styleUrls: ['./tree.scss'],
     host: {
         class: 'mc-tree-selection',
 
@@ -80,7 +81,6 @@ interface SelectionModelOption {
         '(keydown)': 'onKeyDown($event)',
         '(window:resize)': 'updateScrollSize()'
     },
-    styleUrls: ['./tree.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
@@ -165,7 +165,7 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
 
     @Input()
     get tabIndex(): any {
-        return this._tabIndex;
+        return this.disabled ? -1 : this._tabIndex;
     }
 
     set tabIndex(value: any) {

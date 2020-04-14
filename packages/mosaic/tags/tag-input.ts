@@ -41,9 +41,11 @@ let nextUniqueId = 0;
     exportAs: 'mcTagInput, mcTagInputFor',
     host: {
         class: 'mc-tag-input',
+
         '[id]': 'id',
         '[attr.disabled]': 'disabled || null',
         '[attr.placeholder]': 'placeholder || null',
+
         '(keydown)': 'keydown($event)',
         '(blur)': 'blur()',
         '(focus)': 'onFocus()',

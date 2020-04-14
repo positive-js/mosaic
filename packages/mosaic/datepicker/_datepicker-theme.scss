@@ -9,7 +9,7 @@ $mc-datepicker-selected-fade-amount: 0.6;
 $mc-datepicker-today-fade-amount: 0.2;
 
 @mixin _mc-datepicker-color($color) {
-    .mc-selected {
+    mc-calendar__body-cell-content.mc-selected {
         background: $color;
     }
 

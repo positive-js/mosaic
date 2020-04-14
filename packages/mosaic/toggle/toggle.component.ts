@@ -1,7 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { FocusMonitor } from '@angular/cdk/a11y';
 import {
-    Attribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -120,8 +119,7 @@ export class McToggleComponent extends McToggleMixinBase
 
     private _checked: boolean = false;
 
-    @Output() readonly change: EventEmitter<McToggleChange> =
-        new EventEmitter<McToggleChange>();
+    @Output() readonly change: EventEmitter<McToggleChange> = new EventEmitter<McToggleChange>();
 
     private uniqueId: string = `mc-toggle-${++nextUniqueId}`;
 
@@ -129,13 +127,11 @@ export class McToggleComponent extends McToggleMixinBase
         // tslint:disable-next-line:naming-convention
         public _elementRef: ElementRef,
         private _focusMonitor: FocusMonitor,
-        private _changeDetectorRef: ChangeDetectorRef,
-        @Attribute('tabindex') tabIndex: string
+        private _changeDetectorRef: ChangeDetectorRef
     ) {
         super(_elementRef);
 
         this.id =  this.uniqueId;
-        this.tabIndex = parseInt(tabIndex) || 0;
 
         this._focusMonitor.monitor(this._elementRef.nativeElement, true);
     }

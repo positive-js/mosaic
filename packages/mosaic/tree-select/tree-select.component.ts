@@ -10,7 +10,6 @@ import {
 import {
     AfterContentInit,
     AfterViewInit,
-    Attribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -134,7 +133,7 @@ const McTreeSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorSt
     exportAs: 'mcTreeSelect',
     templateUrl: 'tree-select.html',
     styleUrls: ['./tree-select.scss'],
-    inputs: ['disabled'],
+    inputs: ['disabled', 'tabIndex'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
@@ -271,9 +270,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
      * Function used to sort the values in a select in multiple mode.
      * Follows the same logic as `Array.prototype.sort`.
      */
-    @Input() sortComparator: (
-        a: McTreeOption, b: McTreeOption, options: McTreeOption[]
-    ) => number;
+    @Input() sortComparator: (a: McTreeOption, b: McTreeOption, options: McTreeOption[]) => number;
 
     /** Combined stream of all of the child options' change events. */
     readonly optionSelectionChanges: Observable<McTreeSelectChange> = defer(() => {
@@ -433,8 +430,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         @Optional() private readonly parentFormField: McFormField,
         @Optional() @Self() ngControl: NgControl,
         @Optional() @Self() public ngModel: NgModel,
-        @Optional() @Self() public formControlName: FormControlName,
-        @Attribute('tabindex') tabIndex: string
+        @Optional() @Self() public formControlName: FormControlName
     ) {
         super(elementRef, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl);
 
@@ -446,7 +442,6 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
 
         // Force setter to be called in case id was not specified.
         this.id = this.id;
-        this.tabIndex = parseInt(tabIndex) || 0;
     }
 
     ngOnInit() {

@@ -10,7 +10,6 @@ import {
 import {
     AfterContentInit,
     AfterViewInit,
-    Attribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -209,6 +208,7 @@ const McSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorStateC
     host: {
         '[attr.id]': 'id',
         '[attr.tabindex]': 'tabIndex',
+        '[attr.disabled]': 'disabled || null',
 
         class: 'mc-select',
         '[class.mc-disabled]': 'disabled',
@@ -505,8 +505,7 @@ export class McSelect extends McSelectMixinBase implements
         @Optional() @Self() public ngModel: NgModel,
         @Optional() @Self() public formControlName: FormControlName,
         @Inject(MC_SELECT_SCROLL_STRATEGY) private readonly _scrollStrategyFactory,
-        @Optional() @Inject(MC_VALIDATION) private mcValidation: McValidationOptions,
-        @Attribute('tabindex') tabIndex: string
+        @Optional() @Inject(MC_VALIDATION) private mcValidation: McValidationOptions
     ) {
         super(elementRef, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl);
 
@@ -518,7 +517,6 @@ export class McSelect extends McSelectMixinBase implements
 
         // Force setter to be called in case id was not specified.
         this.id = this.id;
-        this.tabIndex = parseInt(tabIndex) || 0;
     }
 
     ngOnInit() {
