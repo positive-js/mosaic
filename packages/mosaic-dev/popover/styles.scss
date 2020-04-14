@@ -18,8 +18,11 @@ app {
     padding: 0 10%;
 }
 
-.popover-485 {
+.popover-485.max-width-class {
     width: 485px;
+    .mc-popover {
+        max-width: 485px;
+    }
 }
 
 

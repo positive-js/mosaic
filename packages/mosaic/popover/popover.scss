@@ -42,7 +42,7 @@ $mc-popover-large-width: 640px;
     max-width: $mc-popover-small-width;
 
     .mc-popover {
-        max-width: $mc-popover-small-width !important;
+        max-width: $mc-popover-small-width;
     }
 }
 
@@ -50,7 +50,7 @@ $mc-popover-large-width: 640px;
     max-width: $mc-popover-normal-width;
 
     .mc-popover {
-        max-width: $mc-popover-normal-width !important;
+        max-width: $mc-popover-normal-width;
     }
 }
 
@@ -58,7 +58,7 @@ $mc-popover-large-width: 640px;
     max-width: $mc-popover-large-width;
 
     .mc-popover {
-        max-width: $mc-popover-large-width !important;
+        max-width: $mc-popover-large-width;
     }
 }
 

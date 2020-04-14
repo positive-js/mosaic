@@ -11,9 +11,9 @@ import { McIconModule } from '../../mosaic/icon/';
 /* tslint:disable:no-trailing-whitespace */
 @Component({
     selector: 'app',
-    styleUrls: ['../main.scss', './styles.css'],
+    styleUrls: ['../main.scss', './styles.scss'],
     encapsulation: ViewEncapsulation.None,
-    template: require('./template.html')
+    templateUrl: './template.html'
 })
 export class DemoComponent {
     popoverActiveStage: number;
