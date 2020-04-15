@@ -1,3 +1,26 @@
+# 9.0.0-beta.1 "Synergy Quarantined" (2020-04-15)
+
+### Mosaic
+
+ * bug fix  **dropdown:** disabled item should prevent click event (#UIM-315) ([#396](https://github.com/positive-js/mosaic/issues/396)) ([#397](https://github.com/positive-js/mosaic/issues/397)) ([2766b80](https://github.com/positive-js/mosaic/commit/2766b804ea3a5d79f82c19214883cab293741130)), closes [#UIM-315](https://github.com/positive-js/mosaic/issues/UIM-315)
+ * bug fix  **navbar:** fixing navbar disabled item opacity (#UIM-396) ([#440](https://github.com/positive-js/mosaic/issues/440)) ([a939bb4](https://github.com/positive-js/mosaic/commit/a939bb425800c7d3d505897aab29d7af519a1cac)), closes [#UIM-396](https://github.com/positive-js/mosaic/issues/UIM-396)
+ * bug fix  **radio:** fixing disabled form icon's and basic border's colors (#UIM-396) ([#446](https://github.com/positive-js/mosaic/issues/446)) ([65bf750](https://github.com/positive-js/mosaic/commit/65bf750d1504d680fdc81cb9e28959f3958fe4f3)), closes [#UIM-396](https://github.com/positive-js/mosaic/issues/UIM-396)
+ * bug fix  **tags:** fixing tag's icons color ([#424](https://github.com/positive-js/mosaic/issues/424)) ([ac3bb32](https://github.com/positive-js/mosaic/commit/ac3bb3202f079c1aeffa28369d52a051b274c1b9))
+ * bug fix  **tags:** incorrect height (#UIM-365) ([#414](https://github.com/positive-js/mosaic/issues/414)) ([b9d5f55](https://github.com/positive-js/mosaic/commit/b9d5f55255dbb06b299e48ee570cd0551f89b300)), closes [#UIM-365](https://github.com/positive-js/mosaic/issues/UIM-365)
+ * bug fix  **tags:** paste does not work (UIM-403) ([#445](https://github.com/positive-js/mosaic/issues/445)) ([c9d54b9](https://github.com/positive-js/mosaic/commit/c9d54b934e78ad54f0a51224fc5d1b6eb8b6dbc4))
+ * bug fix  **tree:** unnexpected focus on scroll (#UIM-375) ([#442](https://github.com/positive-js/mosaic/issues/442)) ([f69e972](https://github.com/positive-js/mosaic/commit/f69e97221fdc1a682e28d90a678b149eac2ccf8a)), closes [#UIM-375](https://github.com/positive-js/mosaic/issues/UIM-375)
+ * feature  **build:** migration to Angular 9 and adding angular-cli (#UIM-380) ([#441](https://github.com/positive-js/mosaic/issues/441)) ([19c4bc3](https://github.com/positive-js/mosaic/commit/19c4bc35079c595986e9880808884f3b9b2f8020)), closes [#UIM-380](https://github.com/positive-js/mosaic/issues/UIM-380)
+ * feature  **button:** added white frame for focusing state (#UIM-145) ([#426](https://github.com/positive-js/mosaic/issues/426)) ([98ce670](https://github.com/positive-js/mosaic/commit/98ce670a2fb9430b9d7b38bd9539ba4f0e1a4668)), closes [#UIM-145](https://github.com/positive-js/mosaic/issues/UIM-145)
+ * feature  **chore:** deleted aria-describer and use focus-monitor from angular cdk (#UIM-381) ([#431](https://github.com/positive-js/mosaic/issues/431)) ([cb14d40](https://github.com/positive-js/mosaic/commit/cb14d40b4abdd278210b75955ca0e007a1c90dcc)), closes [#UIM-381](https://github.com/positive-js/mosaic/issues/UIM-381)
+ * feature  **refactor:** unified styles and input parameters (#UIM-384, #UIM-385) ([#451](https://github.com/positive-js/mosaic/issues/451)) ([814516c](https://github.com/positive-js/mosaic/commit/814516c73b8332e2f6394b2203c10a8dffd22128)), closes [#UIM-384](https://github.com/positive-js/mosaic/issues/UIM-384) [#UIM-385](https://github.com/positive-js/mosaic/issues/UIM-385)
+ * feature  **table:** added component table (#UIM-188) ([#444](https://github.com/positive-js/mosaic/issues/444)) ([a1b7831](https://github.com/positive-js/mosaic/commit/a1b7831e2028108eb66dba44f864f9e78b8c98e3)), closes [#UIM-188](https://github.com/positive-js/mosaic/issues/UIM-188)
+ * feature  **visual:** reworked parameters for theming (#UIM-258) ([#387](https://github.com/positive-js/mosaic/issues/387)) ([e305b3c](https://github.com/positive-js/mosaic/commit/e305b3cf3ae0ad7372e8de7605683da35b637f73)), closes [#UIM-258](https://github.com/positive-js/mosaic/issues/UIM-258) [#UIM-315](https://github.com/positive-js/mosaic/issues/UIM-315)
+
+### Docs
+
+ * bug fix  angular version for stackblitz ([edb2e20](https://github.com/positive-js/mosaic/commit/edb2e2027a5a3435924e593958d8f1f859342e7d))
+ * feature  adding checklist tree example  (#UIM-391) ([#429](https://github.com/positive-js/mosaic/issues/429)) ([bd494a7](https://github.com/positive-js/mosaic/commit/bd494a7108d0dabdf5a149adcd6036ad596880a7)), closes [#UIM-391](https://github.com/positive-js/mosaic/issues/UIM-391)
+
 ## 8.4.4 "Walk Up Candlemas" (2020-03-19)
 
 ### Mosaic

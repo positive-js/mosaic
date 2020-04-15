@@ -1,4 +1,4 @@
-import * as OctokitApi from '@octokit/rest';
+import { Octokit } from '@octokit/rest';
 import { execSync } from 'child_process';
 
 import { CONFIG } from '../../tools/release/config';
@@ -10,7 +10,7 @@ async function cleanupDocsPreviews() {
     const repoDir = `./tmp/docs-preview-cleanup`;
 
     // @ts-ignore
-    const octokit = new OctokitApi({
+    const octokit = new Octokit({
         type: 'token',
         token: CONFIG.github.token
     });

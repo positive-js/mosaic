@@ -170,10 +170,11 @@ class PublishReleaseTask extends BaseReleaseTask {
         const binDir = join(this.projectDir, 'node_modules/.bin');
         const spawnOptions = {cwd: binDir, stdio: 'inherit'};
 
-        execSync('gulp clean', spawnOptions);
-        execSync('gulp cdk:build-release', spawnOptions);
-        execSync('gulp mosaic-moment-adapter:build-release', spawnOptions);
-        execSync('gulp mosaic:build-release', spawnOptions);
+        execSync('rm -rf dist', spawnOptions);
+        execSync('yarn run build:cdk', spawnOptions);
+        execSync('yarn run build:mosaic-moment-adapter', spawnOptions);
+        execSync('yarn run build:mosaic', spawnOptions);
+        execSync('yarn run styles:built-all', spawnOptions);
     }
 
     /** Checks the release output by running the release-output validations. */

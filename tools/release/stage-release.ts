@@ -1,5 +1,5 @@
 // tslint:disable:no-console
-import * as OctokitApi from '@octokit/rest';
+import { Octokit } from '@octokit/rest';
 import chalk from 'chalk';
 import { readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
@@ -50,7 +50,7 @@ class StageReleaseTask extends BaseReleaseTask {
     git: GitClient;
 
     /** Octokit API instance that can be used to make Github API calls. */
-    githubApi: OctokitApi;
+    githubApi: Octokit;
 
     tabSpaces = 4;
 
@@ -73,7 +73,7 @@ class StageReleaseTask extends BaseReleaseTask {
             process.exit(1);
         }
 
-        this.githubApi = new OctokitApi({
+        this.githubApi = new Octokit({
             type: 'token',
             token: CONFIG.github.token
         });

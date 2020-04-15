@@ -32,6 +32,7 @@ export async function promptForNewVersion(currentVersion: Version): Promise<Vers
         if (allowedPrereleaseChoices) {
             versionChoices.push({
                 value: 'new-prerelease-label',
+                // @ts-ignore
                 name: `New pre-release (${allowedPrereleaseChoices.map((c) => c.value).join(', ')})`
             });
         }

@@ -1,5 +1,5 @@
 /* tslint:disable:no-console */
-import * as OctokitApi from '@octokit/rest';
+import { Octokit } from '@octokit/rest';
 import { execSync } from 'child_process';
 import { join } from 'path';
 
@@ -60,7 +60,7 @@ async function postGithubComment() {
         const auth = process.env.GITHUB_API_MOSAIC;
 
         // @ts-ignore
-        const githubApi = new OctokitApi({
+        const githubApi = new Octokit({
             auth
         });
 
