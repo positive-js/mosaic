@@ -7,11 +7,11 @@
     $background: map-get($theme, background);
     $is-dark: map-get($theme, is-dark);
 
-    $divider-color: mc-color($foreground, divider);
-
     $popup-common: map-get(map-get($theme, components), popup-common);
 
     $sidepanel: map-get(map-get($theme, components), sidepanel);
+
+    $divider-color: mc-color($popup-common, divider-color);
 
     .mc-sidepanel-content {
         background-color: map-get($background, background);

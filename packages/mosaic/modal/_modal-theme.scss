@@ -16,7 +16,7 @@
 
     $modal: map-get(map-get($theme, components), modal);
 
-    $divider-color: mc-color($foreground, divider);
+    $divider-color: mc-color($popup-common, divider-color);
 
     .mc-modal {
         .mc-modal-content {

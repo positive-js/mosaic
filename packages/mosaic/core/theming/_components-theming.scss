@@ -12,6 +12,7 @@
         shadow: 0 3px 3px 0 mc-color($second, A200),
         darker-border-color: map-get($foreground, text-disabled),
         border-color: mc-color($second),
+        divider-color: mc-color($second, 200),
 
         background: map-get($background, background-popup),
         footer_background-color: map-get($background, background-popup-footer)
@@ -192,6 +193,7 @@
         shadow: 0 3px 3px 0 mc-color($second, A200),
         darker-border-color: map-get($background, background),
         border-color: mc-color($second),
+        divider-color: mc-color($foreground, divider),
 
         background: map-get($background, background-popup),
         footer_background-color: map-get($background, background-popup-footer)
