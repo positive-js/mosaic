@@ -4,17 +4,16 @@ import { task, src, dest, series } from 'gulp';
 import * as path from 'path';
 
 import { apiDocsPackageConfig } from '../../dgeni/bin';
-import { buildConfig } from '../../packages';
+import { buildConfig } from '../build-config';
 
 
 const markdown = require('gulp-markdown');
 const transform = require('gulp-transform');
 const highlight = require('gulp-highlight-files');
-const htmlmin = require('gulp-htmlmin');
 const rename = require('gulp-rename');
 const flatten = require('gulp-flatten');
 const hljs = require('highlight.js');
-const dom  = require('gulp-dom');
+
 
 const { outputDir, packagesDir } = buildConfig;
 
@@ -155,7 +154,6 @@ task('copy-stackblitz-examples', () => {
 task('docs', series(
         'markdown-docs-mosaic',
         'build-highlighted-examples',
-        'build-examples-module',
         'api-docs',
         'copy-stackblitz-examples'
     )

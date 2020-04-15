@@ -3,7 +3,6 @@
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CdkTreeModule, FlatTreeControl } from '@ptsecurity/cdk/tree';
 import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
@@ -55,8 +54,8 @@ const MAX_PERCENT: number = 100;
 
 @Component({
     selector: 'app',
-    template: require('./template.html'),
-    styleUrls: ['./styles.scss'],
+    templateUrl: './template.html',
+    styleUrls: ['../main.scss', './styles.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent {
@@ -65,7 +64,20 @@ export class DemoComponent {
     disabled: boolean = false;
     labelPosition = 'after';
 
+    valueBigOn: boolean = true;
+    valueSmallOn: boolean = true;
+
+    value: any;
+    min: any;
+
+    numberValue: number | null = null;
+
     buttonToggleModelResult: string;
+
+    s1 = false;
+    s2 = false;
+    s3 = false;
+    s4 = false;
 
     typesOfShoes = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
 
@@ -238,7 +250,3 @@ export class DemoComponent {
     ]
 })
 export class DemoModule {}
-
-platformBrowserDynamic()
-    .bootstrapModule(DemoModule)
-    .catch((error) => console.error(error));

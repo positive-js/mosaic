@@ -30,19 +30,16 @@ export class McVerticalNavbarTitle {}
     selector: 'mc-vertical-navbar',
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './vertical-navbar.component.html',
-    styleUrls: ['./vertical-navbar.component.css'],
+    styleUrls: ['./vertical-navbar.component.scss'],
     encapsulation: ViewEncapsulation.None,
     animations: [
         toggleVerticalNavbarAnimation()
     ]
 })
 export class McVerticalNavbar {
-
     @Input() expanded: boolean = false;
 
-    constructor(
-        private cd: ChangeDetectorRef
-    ) {}
+    constructor(private cd: ChangeDetectorRef) {}
 
     toggle() {
         this.expanded = !this.expanded;

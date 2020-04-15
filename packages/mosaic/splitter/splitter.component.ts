@@ -128,7 +128,7 @@ export class McGutterDirective implements OnInit {
         class: 'mc-splitter'
     },
     preserveWhitespaces: false,
-    styleUrls: ['splitter.css'],
+    styleUrls: ['splitter.scss'],
     templateUrl: './splitter.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush

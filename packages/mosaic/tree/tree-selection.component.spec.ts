@@ -1,6 +1,6 @@
 /* tslint:disable:no-magic-numbers max-func-body-length no-reserved-keywords */
 import { Component, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { createMouseEvent, dispatchEvent } from '@ptsecurity/cdk/testing';
 import { FlatTreeControl } from '@ptsecurity/cdk/tree';

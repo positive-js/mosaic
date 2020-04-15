@@ -26,11 +26,11 @@ const mosaicDateAdaptersPackages = globSync(join(packagePath, 'mosaic-moment-ada
 const mosaicPackages = globSync(join(packagePath, 'mosaic', '*/'))
     .map((packagePath) => basename(packagePath));
 
-export const apiDocsPackageConfig = apiDocsPackage.config((readTypeScriptModules: ReadTypeScriptModules,
-                                                           tsParser: TsParser,
-                                                           templateFinder: any,
-                                                           writeFilesProcessor: any,
-                                                           readFilesProcessor: any) => {
+export const apiDocsPackageConfig: any = apiDocsPackage.config((readTypeScriptModules: ReadTypeScriptModules,
+                                                                tsParser: TsParser,
+                                                                templateFinder: any,
+                                                                writeFilesProcessor: any,
+                                                                readFilesProcessor: any) => {
 
     // Set the base path for the "readFilesProcessor" to the execroot. This is necessary because
     // otherwise the "writeFilesProcessor" is not able to write to the specified output path.

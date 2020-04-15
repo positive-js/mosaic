@@ -1,16 +1,28 @@
-// Configuration for IDEs only.
 {
     "extends": "../../tsconfig.json",
     "compilerOptions": {
         // Needed for Moment.js since it doesn't have a default export.
         "allowSyntheticDefaultImports": true,
-        "rootDir": "..",
-        "baseUrl": ".",
+        "types": [
+            "node",
+            "jasmine"
+        ],
         "paths": {
-            "@ptsecurity/cdk/*": ["../cdk/*"]
+            "@ptsecurity/cdk/*": ["./dist/cdk/*"],
+            "@ptsecurity/mosaic/*": ["./dist/mosaic/*"]
         }
     },
     "include": [
         "./**/*.ts"
-    ]
+    ],
+    "angularCompilerOptions": {
+        "annotateForClosureCompiler": true,
+        "allowSyntheticDefaultImports": true,
+        "skipTemplateCodegen": true,
+        "strictMetadataEmit": true,
+        "flatModuleId": "@ptsecurity/mosaic-moment-adapter",
+        "strictInjectionParameters": true,
+        "enableResourceInlining": true,
+        "enableIvy": false
+    }
 }

@@ -1,8 +1,10 @@
 # To validate changes, use an online parser, eg.
 # http://yaml-online-parser.appspot.com/
 
-var_1: &default_docker_image circleci/node:10.17-browsers
-var_2: &cache_key mosaic-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}-0.10.2
+version: 2.1
+
+var_1: &default_docker_image circleci/node:12.13-browsers
+var_2: &cache_key mosaic-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}-9.1.0
 
 var_3: &job_defaults
     working_directory: ~/mosaic
@@ -23,144 +25,48 @@ var_4: &checkout_code
         # which we want. See https://discuss.circleci.com/t/1662
         post: git pull --ff-only origin "refs/pull/${CI_PULL_REQUEST//*pull\//}/merge"
 
-var_6: &save_cache
-    save_cache:
-        key: *cache_key
-        paths:
-            - "node_modules"
-
-var_7: &yarn_install
-    run: yarn install --frozen-lockfile --non-interactive
-
-var_8: &attach_release_output
-    attach_workspace:
-        at: dist/
-
-var_9: &release_path "releases/**/*"
-
-attach_options: &attach_options
-    at: .
-
-version: 2.1
-
 orbs:
     sonarcloud: sonarsource/sonarcloud@1.0.0
     snyk: snyk/snyk@0.0.8
 
 jobs:
+
     install:
         <<: *job_defaults
         steps:
-            - *checkout_code
+            - checkout
             - *restore_cache
-            - *yarn_install
-            - persist_to_workspace:
-                  root: .
+            - run: yarn install --frozen-lockfile --non-interactive
+            - save_cache:
+                  key: *cache_key
                   paths:
-                      - ./*
-            - *save_cache
+                      - ~/.cache/yarn
+                      - node_modules
+            - persist_to_workspace:
+                  root: ~/mosaic
+                  paths:
+                      - .
 
     dependencies_audit:
         <<: *job_defaults
         steps:
-            - attach_workspace: *attach_options
+            - attach_workspace:
+                  at: ~/mosaic
             - snyk/scan:
                   fail-on-issues: false
 
     validate_licenses:
         <<: *job_defaults
         steps:
-            - attach_workspace: *attach_options
+            - attach_workspace:
+                  at: ~/mosaic
             - run: yarn run valid:lic
-
-    lint_yaml:
-        <<: *job_defaults
-        steps:
-            - attach_workspace: *attach_options
-            - run: yarn run linter:yaml
-
-    build_mosaic_docs:
-        <<: *job_defaults
-        steps:
-            - attach_workspace: *attach_options
-            - run:
-                  name: Setup Environment Variables
-                  command: |
-                      echo 'export CI_PREVIEW=true' >> $BASH_ENV
-                      echo 'export SHORT_GIT_HASH=$(git rev-parse --short $CIRCLE_SHA1)' >> $BASH_ENV
-                      echo 'export CIRCLE_PULL_REQUEST_NUMBER=$(echo "$CIRCLE_PULL_REQUEST" | cut -d"/" -f7)' >> $BASH_ENV
-                      source $BASH_ENV
-            - run: echo "$CIRCLE_PULL_REQUEST" | cut -d"/" -f7 && echo $CIRCLE_PULL_REQUEST_NUMBER
-            - run: printenv
-            - run: yarn run build:docs
-            - run: yarn run build:mosaic-examples
-            - run: yarn run docs:prod-build --progress false --base-href /mosaic-previews/pr$CIRCLE_PULL_REQUEST_NUMBER-$SHORT_GIT_HASH/ --output-path dist/releases/mosaic-docs/pr$CIRCLE_PULL_REQUEST_NUMBER-$SHORT_GIT_HASH/
-            - persist_to_workspace:
-                  root: dist
-                  paths:
-                      - *release_path
-
-    build_mosaic:
-        <<: *job_defaults
-        steps:
-            - attach_workspace: *attach_options
-            - run: yarn run build:mosaic
-            - persist_to_workspace:
-                  root: dist
-                  paths:
-                      - *release_path
-
-    build_cdk:
-        <<: *job_defaults
-        steps:
-            - attach_workspace: *attach_options
-            - run: yarn run build:cdk
-            - persist_to_workspace:
-                  root: dist
-                  paths:
-                      - *release_path
-
-    build_mosaic-moment-adapter:
-        <<: *job_defaults
-        steps:
-            - attach_workspace: *attach_options
-            - run: yarn run build:mosaic-moment-adapter
-            - persist_to_workspace:
-                  root: dist
-                  paths:
-                      - *release_path
-
-    build_dev_app_aot:
-        <<: *job_defaults
-        steps:
-            - *attach_release_output
-            - attach_workspace: *attach_options
-            - run: yarn run ci:aot
-
-    test_unit:
-        <<: *job_defaults
-        steps:
-            - attach_workspace: *attach_options
-            - run:
-                  command: yarn run test:unit
-                  environment:
-                      JUNIT_REPORT_PATH: ./junit/
-                      JUNIT_REPORT_NAME: test-results.xml
-                  when: always
-            - store_test_results:
-                  path: ./junit
-            - store_artifacts:
-                  path: ./junit
-            - persist_to_workspace:
-                  root: .
-                  paths:
-                      - ./dist/coverage/
-                      - ./dist/reports/
 
     linters:
         <<: *job_defaults
         steps:
-            - attach_workspace: *attach_options
+            - attach_workspace:
+                  at: ~/mosaic
             - run: yarn run linter:mosaic:json
             - run: yarn run linter:styles:json
             - persist_to_workspace:
@@ -168,10 +74,107 @@ jobs:
                   paths:
                       - ./dist/reports
 
+    build_packages:
+        <<: *job_defaults
+        steps:
+            - attach_workspace:
+                  at: ~/mosaic
+            - run: yarn run build:cdk
+            - run: yarn run build:mosaic-moment-adapter
+            - run: yarn run build:mosaic
+            - run: yarn run styles:built-all
+            - persist_to_workspace:
+                  root: ~/mosaic
+                  paths:
+                      - .
+
+    build_mosaic_docs:
+        <<: *job_defaults
+        steps:
+            - attach_workspace:
+                  at: ~/mosaic
+            - run:
+                  name: Setup Environment Variables
+                  command: |
+                      echo 'export CI_PREVIEW=true' >> $BASH_ENV
+                      echo 'export SHORT_GIT_HASH=$(git rev-parse --short=7 $CIRCLE_SHA1)' >> $BASH_ENV
+                      echo 'export CIRCLE_PULL_REQUEST_NUMBER=$(echo "$CIRCLE_PULL_REQUEST" | cut -d"/" -f7)' >> $BASH_ENV
+                      source $BASH_ENV
+            - run: printenv
+            - run: yarn run build:mosaic-examples-module
+            - run: yarn run build:mosaic-examples
+            - run: yarn run build:docs
+            - run: yarn run docs:prod-build --progress false --base-href /mosaic-previews/pr$CIRCLE_PULL_REQUEST_NUMBER-$SHORT_GIT_HASH/ --output-path dist/releases/mosaic-docs/pr$CIRCLE_PULL_REQUEST_NUMBER-$SHORT_GIT_HASH/
+            - persist_to_workspace:
+                  root: ~/mosaic
+                  paths:
+                      - .
+
+    test_unit_cdk:
+        <<: *job_defaults
+        steps:
+            - attach_workspace:
+                  at: ~/mosaic
+            - run:
+                  command: yarn run unit:cdk
+                  environment:
+                      JUNIT_REPORT_PATH: junit/
+                      JUNIT_REPORT_NAME: test-results.xml
+                  when: always
+            - store_test_results:
+                  path: junit
+            - store_artifacts:
+                  path: junit
+            - persist_to_workspace:
+                  root: .
+                  paths:
+                      - ./dist/coverage
+
+    test_unit_mosaic:
+        <<: *job_defaults
+        steps:
+            - attach_workspace:
+                  at: ~/mosaic
+            - run:
+                  command: yarn run unit:mosaic
+                  environment:
+                      JUNIT_REPORT_PATH: junit/
+                      JUNIT_REPORT_NAME: test-results.xml
+                  when: always
+            - store_test_results:
+                  path: junit
+            - store_artifacts:
+                  path: junit
+            - persist_to_workspace:
+                  root: .
+                  paths:
+                      - ./dist/coverage
+
+    test_unit_mosaic-moment-adapter:
+        <<: *job_defaults
+        steps:
+            - attach_workspace:
+                  at: ~/mosaic
+            - run:
+                  command: yarn run unit:mosaic-moment-adapter
+                  environment:
+                      JUNIT_REPORT_PATH: junit/
+                      JUNIT_REPORT_NAME: test-results.xml
+                  when: always
+            - store_test_results:
+                  path: junit
+            - store_artifacts:
+                  path: junit
+            - persist_to_workspace:
+                  root: .
+                  paths:
+                      - ./dist/coverage
+
     sonar:
         <<: *job_defaults
         steps:
-            - attach_workspace: *attach_options
+            - attach_workspace:
+                  at: ~/mosaic
             - sonarcloud/scan
 
     snapshot_publish:
@@ -179,8 +182,8 @@ jobs:
         steps:
             - *checkout_code
             - *restore_cache
-            - *attach_release_output
-            - attach_workspace: *attach_options
+            - attach_workspace:
+                  at: ~/mosaic
             - add_ssh_keys:
                   fingerprints:
                       - "c3:de:eb:9c:82:70:a8:23:f3:4e:92:b8:07:d2:22:df"
@@ -194,16 +197,17 @@ jobs:
                       - "c3:de:eb:9c:82:70:a8:23:f3:4e:92:b8:07:d2:22:df"
             - *checkout_code
             - *restore_cache
-            - *attach_release_output
-            - run:
-                name: Setup Environment Variables
-                command: |
-                    echo 'export CI_PREVIEW=true' >> $BASH_ENV
-                    echo 'export SHORT_GIT_HASH=$(git rev-parse --short $CIRCLE_SHA1)' >> $BASH_ENV
-                    echo 'export CIRCLE_PULL_REQUEST_NUMBER=$(echo "$CIRCLE_PULL_REQUEST" | cut -d"/" -f7)' >> $BASH_ENV
-                    source $BASH_ENV
+            - attach_workspace:
+                  at: ~/mosaic
             - run: printenv
-            - run: yarn run build:docs
+            - run:
+                  name: Setup Environment Variables
+                  command: |
+                      echo 'export CI_PREVIEW=true' >> $BASH_ENV
+                      echo 'export SHORT_GIT_HASH=$(git rev-parse --short=7 $CIRCLE_SHA1)' >> $BASH_ENV
+                      echo 'export CIRCLE_PULL_REQUEST_NUMBER=$(echo "$CIRCLE_PULL_REQUEST" | cut -d"/" -f7)' >> $BASH_ENV
+                      source $BASH_ENV
+            - run: printenv
             - run: yarn run docs:publish-preview
 
     cleanup_preview_mosaic_docs:
@@ -222,6 +226,7 @@ workflows:
         jobs:
             # 1 Group
             - install
+
             # 2 Group
             - dependencies_audit:
                   requires:
@@ -229,53 +234,50 @@ workflows:
             - validate_licenses:
                   requires:
                       - install
-            - lint_yaml:
-                  requires:
-                      - install
-            - build_cdk:
-                  requires:
-                      - install
-            - build_mosaic-moment-adapter:
-                  requires:
-                      - install
-            - build_mosaic:
-                  requires:
-                      - install
             - linters:
                   requires:
                       - install
 
+            # 3 Group
+            - build_packages:
+                  requires:
+                      - validate_licenses
+                      - linters
+                      - dependencies_audit
+
+            # 6 Group
+            - test_unit_cdk:
+                  requires:
+                      - build_packages
+
+            - test_unit_mosaic-moment-adapter:
+                  requires:
+                      - build_packages
+
+            - test_unit_mosaic:
+                  requires:
+                      - build_packages
+
             - build_mosaic_docs:
                   requires:
-                      - build_cdk
-                      - build_mosaic
-                      - build_mosaic-moment-adapter
-            # 3 Group
-            - test_unit:
-                  requires:
-                      - build_cdk
-                      - build_mosaic
-                      - build_mosaic-moment-adapter
-            - build_dev_app_aot:
-                  requires:
-                      - build_cdk
-                      - build_mosaic
-                      - build_mosaic-moment-adapter
-            # 4 Group
+                      - test_unit_mosaic
+                      - test_unit_cdk
+                      - test_unit_mosaic-moment-adapter
+
+            # 7 Group
+
             - sonar:
                   context: SonarCloud
                   requires:
-                      - linters
-                      - test_unit
-                      - build_cdk
-                      - build_mosaic
-                      - build_mosaic-moment-adapter
+                      - test_unit_cdk
+                      - test_unit_mosaic-moment-adapter
+                      - test_unit_mosaic
+
             - snapshot_publish:
                   requires:
-                      - test_unit
-                      - build_cdk
-                      - build_mosaic
-                      - build_mosaic-moment-adapter
+                      - test_unit_cdk
+                      - test_unit_mosaic-moment-adapter
+                      - test_unit_mosaic
                   filters:
                       branches:
                           only:
@@ -284,7 +286,7 @@ workflows:
             - preview_mosaic_docs:
                   requires:
                       - build_mosaic_docs
-                      - test_unit
+
             - cleanup_preview_mosaic_docs:
                   requires:
                       - install

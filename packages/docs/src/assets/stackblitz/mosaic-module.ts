@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CdkTreeModule } from '@ptsecurity/cdk/tree';
-import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter';
+import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McCheckboxModule } from '@ptsecurity/mosaic/checkbox';
 import { McHighlightModule, McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';

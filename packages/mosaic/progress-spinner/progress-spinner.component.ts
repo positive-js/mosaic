@@ -22,18 +22,17 @@ export class McProgressSpinnerBase {
 
 // tslint:disable-next-line:naming-convention
 export const McProgressSpinnerMixinBase:
-    CanColorCtor &
-    typeof McProgressSpinnerBase =
-        mixinColor(McProgressSpinnerBase);
+    CanColorCtor & typeof McProgressSpinnerBase = mixinColor(McProgressSpinnerBase, ThemePalette.Primary);
 
 const MAX_DASH_ARRAY = 273;
 
 @Component({
     selector: 'mc-progress-spinner',
     templateUrl: './progress-spinner.component.html',
-    styleUrls: ['./progress-spinner.css'],
+    styleUrls: ['./progress-spinner.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
+    inputs: ['color'],
     host: {
         class: 'mc-progress-spinner',
         '[attr.id]': 'id'
@@ -43,7 +42,6 @@ export class McProgressSpinner extends McProgressSpinnerMixinBase implements Can
     @Input() id: string = `mc-progress-spinner-${idIterator++}`;
     @Input() value: number = 0;
     @Input() mode: ProgressSpinnerMode = 'determinate';
-    @Input() color: ThemePalette = ThemePalette.Primary;
 
     constructor(elementRef: ElementRef) {
         super(elementRef);

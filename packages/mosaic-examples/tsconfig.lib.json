@@ -1,0 +1,19 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "outDir": "../../dist/out-tsc",
+        "target": "es2015",
+        "declaration": true,
+        "inlineSources": true,
+        "types": [],
+        "lib": [
+            "dom",
+            "es2018"
+        ],
+        "paths": {
+            "@ptsecurity/cdk/*": ["./dist/cdk/*"],
+            "@ptsecurity/mosaic/*": ["./dist/mosaic/*"],
+            "@ptsecurity/mosaic-moment-adapter/*": ["./dist/mosaic-moment-adapter/*"]
+        }
+    }
+}

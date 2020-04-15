@@ -54,7 +54,7 @@ export class McSidebarClosed {
     selector: 'mc-sidebar',
     exportAs: 'mcSidebar',
     templateUrl: 'sidebar.component.html',
-    styleUrls: ['./sidebar.css'],
+    styleUrls: ['./sidebar.scss'],
     host: {
         class: 'mc-sidebar',
         '[@state]': `{
@@ -98,7 +98,6 @@ export class McSidebar implements OnDestroy, OnInit, AfterContentInit {
     @ContentChild(McSidebarOpened, { static: false }) openedContent: McSidebarOpened;
 
     @ContentChild(McSidebarClosed, { static: false }) closedContent: McSidebarClosed;
-
 
     get animationState(): McSidebarAnimationState {
         return this._opened ? McSidebarAnimationState.Opened : McSidebarAnimationState.Closed;

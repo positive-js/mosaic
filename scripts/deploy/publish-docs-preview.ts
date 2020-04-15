@@ -1,9 +1,13 @@
 /* tslint:disable:no-console */
-import * as OctokitApi from '@octokit/rest';
+import { Octokit } from '@octokit/rest';
 import { execSync } from 'child_process';
 import { join } from 'path';
 
+// tslint:disable-next-line:blank-lines
 import { GitClient } from '../../tools/release/git/git-client';
+
+import IssuesListCommentsParams = Octokit.IssuesListCommentsParams;
+import IssuesCreateCommentParams = Octokit.IssuesCreateCommentParams;
 
 
 // tslint:disable-next-line:naming-convention
@@ -23,8 +27,8 @@ function publishDocsPreview() {
     const REPO_DIR = `./tmp/mosaic-docs-preview`;
 
     const PR_NUMBER = getPrNumber(
-        process.env.CIRCLE_PR_NUMBER,
-        process.env.CIRCLE_PULL_REQUEST_NUMBER
+        process.env.CIRCLE_PR_NUMBER as string,
+        process.env.CIRCLE_PULL_REQUEST_NUMBER as string
     );
 
     const SHORT_SHA = process.env.SHORT_GIT_HASH;
@@ -47,30 +51,34 @@ function publishDocsPreview() {
 async function postGithubComment() {
 
     const PR_NUMBER = getPrNumber(
-        process.env.CIRCLE_PR_NUMBER,
-        process.env.CIRCLE_PULL_REQUEST_NUMBER
+        process.env.CIRCLE_PR_NUMBER as string,
+        process.env.CIRCLE_PULL_REQUEST_NUMBER as string
     );
     const owner = process.env.CIRCLE_PROJECT_USERNAME;
 
     if (PR_NUMBER && owner === 'positive-js') {
         const SHORT_SHA = process.env.SHORT_GIT_HASH;
-        const repo = process.env.CIRCLE_PROJECT_REPONAME;
+        const repo = process.env.CIRCLE_PROJECT_REPONAME as string;
 
         console.log('Start to create a comment');
         const auth = process.env.GITHUB_API_MOSAIC;
 
-        const githubApi: OctokitApi = new OctokitApi({
+        // @ts-ignore
+        const githubApi = new Octokit({
             auth
         });
 
-        const comments: { data: any[] } = await githubApi.issues.listComments({
+        const issuesListCommentsParams: IssuesListCommentsParams = {
             owner,
             repo,
+            // @ts-ignore
             issue_number: PR_NUMBER
-        });
+        };
+
+        const comments: { data: any[] } = await githubApi.issues.listComments(issuesListCommentsParams);
 
         const ptBotComment = comments.data
-            .filter(comment => comment.user.login === 'positivejs')
+            .filter((comment) => comment.user.login === 'positivejs')
             .pop();
 
         const body = `Preview docs changes for ${SHORT_SHA} at https://positive-js.github.io/mosaic-previews/pr${PR_NUMBER}-${SHORT_SHA}/`;
@@ -84,12 +92,15 @@ async function postGithubComment() {
             });
         } else {
 
-            await githubApi.issues.createComment({
+            const issuesCreateCommentParams: IssuesCreateCommentParams = {
                 owner,
                 repo,
+                // @ts-ignore
                 issue_number: PR_NUMBER,
                 body
-            });
+            };
+
+            await githubApi.issues.createComment(issuesCreateCommentParams);
         }
     }
 }
@@ -124,6 +135,7 @@ function prepareAndPublish(
     process.chdir('../../');
 
     if (clean) {
+        // @ts-ignore
         execSync('rm -rf', [`${repoDir}/*`]);
     }
 

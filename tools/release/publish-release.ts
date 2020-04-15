@@ -1,7 +1,7 @@
 // tslint:disable:no-console
 
 import chalk from 'chalk';
-import { execSync } from 'child_process';
+import { execSync, ExecSyncOptions } from 'child_process';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 
@@ -50,7 +50,7 @@ class PublishReleaseTask extends BaseReleaseTask {
             `https://github.com/${repositoryOwner}/${repositoryName}.git`));
 
         this.packageJsonPath = join(projectDir, 'package.json');
-        this.releaseOutputPath = join(projectDir, 'dist/releases');
+        this.releaseOutputPath = join(projectDir, 'dist');
 
         this.packageJson = JSON.parse(readFileSync(this.packageJsonPath, 'utf-8'));
         this.currentVersion = parseVersionName(this.packageJson.version);
@@ -168,12 +168,13 @@ class PublishReleaseTask extends BaseReleaseTask {
     /** Builds all release packages that should be published. */
     private buildReleasePackages() {
         const binDir = join(this.projectDir, 'node_modules/.bin');
-        const spawnOptions = {cwd: binDir, stdio: 'inherit'};
+        const spawnOptions: ExecSyncOptions = {cwd: binDir, stdio: 'inherit'};
 
-        execSync('gulp clean', spawnOptions);
-        execSync('gulp cdk:build-release', spawnOptions);
-        execSync('gulp mosaic-moment-adapter:build-release', spawnOptions);
-        execSync('gulp mosaic:build-release', spawnOptions);
+        execSync('rm -rf dist', spawnOptions);
+        execSync('yarn run build:cdk', spawnOptions);
+        execSync('yarn run build:mosaic-moment-adapter', spawnOptions);
+        execSync('yarn run build:mosaic', spawnOptions);
+        execSync('yarn run styles:built-all', spawnOptions);
     }
 
     /** Checks the release output by running the release-output validations. */

@@ -23,8 +23,7 @@ describe('McTabNavBar', () => {
             declarations: [
                 SimpleTabNavBarTestApp,
                 TabLinkWithNgIf,
-                TabLinkWithTabIndexBinding,
-                TabLinkWithNativeTabindexAttr
+                TabLinkWithTabIndexBinding
             ],
             providers: [
                 {
@@ -205,20 +204,6 @@ describe('McTabNavBar', () => {
         });
     });
 
-    it('should support the native tabindex attribute', () => {
-        const fixture = TestBed.createComponent(TabLinkWithNativeTabindexAttr);
-        fixture.detectChanges();
-
-        const tabLink = fixture.debugElement
-            .query(By.directive(McTabLink))
-            .injector.get<McTabLink>(McTabLink);
-
-        expect(tabLink.tabIndex).toBe(
-            5,
-            'Expected the tabIndex to be set from the native tabindex attribute.'
-        );
-    });
-
     it('should support binding to the tabIndex', () => {
         const fixture = TestBed.createComponent(TabLinkWithTabIndexBinding);
         fixture.detectChanges();
@@ -288,12 +273,3 @@ class TabLinkWithNgIf {
 class TabLinkWithTabIndexBinding {
     tabIndex = 0;
 }
-
-@Component({
-    template: `
-        <nav mc-tab-nav-bar>
-            <a mc-tab-link tabindex="5">Link</a>
-        </nav>
-    `
-})
-class TabLinkWithNativeTabindexAttr {}

@@ -15,19 +15,18 @@ import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { fromEvent, Subscription, Subject } from 'rxjs';
 
 
-export const MC_TEXTAREA_VALUE_ACCESSOR =
-    new InjectionToken<{ value: any }>('MC_TEXTAREA_VALUE_ACCESSOR');
+export const MC_TEXTAREA_VALUE_ACCESSOR = new InjectionToken<{ value: any }>('MC_TEXTAREA_VALUE_ACCESSOR');
 
 let nextUniqueId = 0;
 
-const ROW_SEPARATOR = '\n';
 
 export class McTextareaBase {
-    constructor(public defaultErrorStateMatcher: ErrorStateMatcher,
-                public parentForm: NgForm,
-                public parentFormGroup: FormGroupDirective,
-                public ngControl: NgControl) {
-    }
+    constructor(
+        public defaultErrorStateMatcher: ErrorStateMatcher,
+        public parentForm: NgForm,
+        public parentFormGroup: FormGroupDirective,
+        public ngControl: NgControl
+    ) {}
 }
 
 // tslint:disable-next-line:naming-convention
@@ -39,11 +38,13 @@ export const McTextareaMixinBase: CanUpdateErrorStateCtor & typeof McTextareaBas
     host: {
         class: 'mc-textarea',
         '[class.mc-textarea-resizable]': '!canGrow',
+
         '[attr.id]': 'id',
         '[attr.placeholder]': 'placeholder',
         '[attr.aria-invalid]': 'errorState',
-        '[disabled]': 'disabled',
-        '[required]': 'required',
+        '[attr.disabled]': 'disabled || null',
+        '[attr.required]': 'required',
+
         '(blur)': 'focusChanged(false)',
         '(focus)': 'focusChanged(true)'
     },
@@ -158,13 +159,15 @@ export class McTextarea extends McTextareaMixinBase implements McFormFieldContro
     private freeRowsHeight: number = 0;
     private minHeight: number = 0;
 
-    constructor(protected elementRef: ElementRef,
-                @Optional() @Self() public ngControl: NgControl,
-                @Optional() parentForm: NgForm,
-                @Optional() parentFormGroup: FormGroupDirective,
-                defaultErrorStateMatcher: ErrorStateMatcher,
-                @Optional() @Self() @Inject(MC_TEXTAREA_VALUE_ACCESSOR) inputValueAccessor: any,
-                private ngZone: NgZone) {
+    constructor(
+        protected elementRef: ElementRef,
+        @Optional() @Self() public ngControl: NgControl,
+        @Optional() parentForm: NgForm,
+        @Optional() parentFormGroup: FormGroupDirective,
+        defaultErrorStateMatcher: ErrorStateMatcher,
+        @Optional() @Self() @Inject(MC_TEXTAREA_VALUE_ACCESSOR) inputValueAccessor: any,
+        private ngZone: NgZone
+    ) {
         super(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl);
         // If no input value accessor was explicitly specified, use the element as the textarea value
         // accessor.
@@ -175,12 +178,8 @@ export class McTextarea extends McTextareaMixinBase implements McFormFieldContro
         // Force setter to be called in case id was not specified.
         this.id = this.id;
 
-        const growObserver = fromEvent(elementRef.nativeElement, 'input')
-            /*.pipe(
-                map((event: any) => this.getGrowHeight()),
-                // map((event: any) => event.target.scrollHeight),
-                distinctUntilChanged()
-            )*/;
+        const growObserver = fromEvent(elementRef.nativeElement, 'input');
+
         this.growSubscription = growObserver.subscribe(this.grow.bind(this));
     }
 
@@ -285,11 +284,4 @@ export class McTextarea extends McTextareaMixinBase implements McFormFieldContro
         return validity && validity.badInput;
     }
 
-    private getGrowHeight(): number {
-        const textarea = this.elementRef.nativeElement;
-        const outerHeight = parseInt(window.getComputedStyle(textarea).height!.toString(), 10);
-        const diff = outerHeight - textarea.clientHeight;
-
-        return Math.max(this.minHeight, +textarea.scrollHeight + diff);
-    }
 }

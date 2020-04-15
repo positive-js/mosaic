@@ -90,7 +90,7 @@ $mc-list-item-inset-divider-offset: 72px;
 
         font-size: $icon-size;
 
-        ~ .mc-divider-inset {
+        ~ .mc-divider_inset {
             @include mc-inset-divider-offset($icon-size + (2 * $mc-list-icon-padding), $mc-list-side-padding);
         }
     }
@@ -110,7 +110,7 @@ $mc-list-item-inset-divider-offset: 72px;
             margin-right: 0;
         }
 
-        &.mc-divider-inset {
+        &.mc-divider_inset {
             position: absolute; // necessary to override card styles
         }
     }

@@ -1,37 +1,29 @@
 // tslint:disable:no-console
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
-
-import { McButtonModule } from '../../mosaic/button';
 
 
 @Component({
     selector: 'app',
-    template: require('./template.html'),
-    styleUrls: ['./styles.scss'],
+    templateUrl: 'template.html',
+    styleUrls: ['../main.scss', 'styles.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class ButtonDemoComponent {}
 
 
 @NgModule({
-    declarations: [
-        ButtonDemoComponent
-    ],
     imports: [
         BrowserModule,
         McButtonModule,
         McIconModule
     ],
-    bootstrap: [
+    declarations: [
         ButtonDemoComponent
-    ]
+    ],
+    entryComponents: [ ButtonDemoComponent ],
+    bootstrap: [ ButtonDemoComponent ]
 })
-export class ButtonDemoModule {}
-
-platformBrowserDynamic()
-    .bootstrapModule(ButtonDemoModule)
-    .catch((error) => console.error(error));
-
+export class DemoModule {}

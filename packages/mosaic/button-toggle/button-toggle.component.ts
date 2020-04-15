@@ -44,8 +44,8 @@ export class McButtonToggleChange {
         /** The MсButtonToggle that emits the event. */
         public source: McButtonToggle,
         /** The value assigned to the MсButtonToggle. */
-        public value: any) {
-    }
+        public value: any
+    ) {}
 }
 
 /** Exclusive selection button toggle group that behaves like a radio-button group. */
@@ -55,7 +55,7 @@ export class McButtonToggleChange {
     host: {
         role: 'group',
         class: 'mc-button-toggle-group',
-        '[class.mc-button-toggle-vertical]': 'vertical'
+        '[class.mc-button-toggle_vertical]': 'vertical'
     },
     exportAs: 'mcButtonToggleGroup'
 })
@@ -117,9 +117,7 @@ export class McButtonToggleGroup implements ControlValueAccessor, OnInit, AfterC
     set disabled(value: boolean) {
         this._disabled = coerceBooleanProperty(value);
 
-        if (!this.buttonToggles) {
-            return;
-        }
+        if (!this.buttonToggles) { return; }
 
         this.buttonToggles.forEach((toggle) => toggle.markForCheck());
     }
@@ -132,8 +130,7 @@ export class McButtonToggleGroup implements ControlValueAccessor, OnInit, AfterC
     @Output() readonly valueChange = new EventEmitter<any>();
 
     /** Event emitted when the group's value changes. */
-    @Output() readonly change: EventEmitter<McButtonToggleChange> =
-        new EventEmitter<McButtonToggleChange>();
+    @Output() readonly change: EventEmitter<McButtonToggleChange> = new EventEmitter<McButtonToggleChange>();
     private _vertical = false;
     private _multiple = false;
     private _disabled = false;
@@ -292,29 +289,24 @@ export class McButtonToggleGroup implements ControlValueAccessor, OnInit, AfterC
 /** Single button inside of a toggle group. */
 @Component({
     selector: 'mc-button-toggle',
+    exportAs: 'mcButtonToggle',
     template: `
         <button
             mc-button
             type="button"
             [class.mc-active]="checked"
             [disabled]="disabled"
-            [attr.tabindex]="disabled ? -1 : tabIndex"
+            [tabIndex]="tabIndex"
             (click)="onToggleClick()">
             <ng-content></ng-content>
         </button>
     `,
-    styleUrls: ['button-toggle.css'],
+    styleUrls: ['button-toggle.scss'],
     encapsulation: ViewEncapsulation.None,
-    exportAs: 'mcButtonToggle',
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         class: 'mc-button-toggle',
-        '[class.mc-button-toggle-standalone]': '!buttonToggleGroup',
-        // Always reset the tabindex to -1 so it doesn't conflict with the one on the `button`,
-        // but can still receive focus from things like cdkFocusInitial.
-        '[attr.tabindex]': '-1',
-        '[attr.disabled]': 'disabled || null',
-        '(focus)': 'focus()'
+        '[class.mc-button-toggle-standalone]': '!buttonToggleGroup'
     }
 })
 export class McButtonToggle implements OnInit, OnDestroy {
@@ -342,7 +334,7 @@ export class McButtonToggle implements OnInit, OnDestroy {
     // tslint:disable-next-line:no-reserved-keywords
     type: ToggleType;
 
-    @ViewChild(McButton, {static: false}) mcButton: McButton;
+    @ViewChild(McButton, { static: false }) mcButton: McButton;
 
     /** McButtonToggleGroup reads this to assign its own value. */
     @Input() value: any;
@@ -354,11 +346,13 @@ export class McButtonToggle implements OnInit, OnDestroy {
     get disabled(): boolean {
         return this._disabled || (this.buttonToggleGroup && this.buttonToggleGroup.disabled);
     }
-    set disabled(value: boolean) { this._disabled = coerceBooleanProperty(value); }
+
+    set disabled(value: boolean) {
+        this._disabled = coerceBooleanProperty(value);
+    }
 
     /** Event emitted when the group value changes. */
-    @Output() readonly change: EventEmitter<McButtonToggleChange> =
-        new EventEmitter<McButtonToggleChange>();
+    @Output() readonly change: EventEmitter<McButtonToggleChange> = new EventEmitter<McButtonToggleChange>();
 
     private isSingleSelector = false;
     private _checked = false;
@@ -401,9 +395,7 @@ export class McButtonToggle implements OnInit, OnDestroy {
 
     /** Checks the button toggle due to an interaction with the underlying native button. */
     onToggleClick() {
-        if (this.disabled) {
-            return;
-        }
+        if (this.disabled) { return; }
 
         const newChecked = this.isSingleSelector ? true : !this._checked;
 

@@ -41,8 +41,8 @@ export const yearsPerRow = 4;
  */
 @Component({
     selector: 'mc-multi-year-view',
-    templateUrl: 'multi-year-view.html',
     exportAs: 'mcMultiYearView',
+    templateUrl: 'multi-year-view.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })

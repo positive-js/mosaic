@@ -1,0 +1,19 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "outDir": "../../dist/out-tsc/cdk-spec",
+        "paths": {
+            "@ptsecurity/cdk/*": ["./dist/cdk/*"]
+        }
+    },
+    "files": [
+        "test.ts"
+    ],
+    "include": [
+        "**/*.spec.ts",
+        "./*/index.ts"
+    ],
+    "exclude": [
+        "schematics/**/*.ts"
+    ]
+}

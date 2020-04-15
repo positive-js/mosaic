@@ -8,7 +8,16 @@ import {
     ViewEncapsulation,
     Renderer2
 } from '@angular/core';
-import { mixinColor, mixinDisabled, CanColor, CanDisable, CanDisableCtor, CanColorCtor } from '@ptsecurity/mosaic/core';
+import {
+    mixinColor,
+    mixinDisabled,
+    mixinTabIndex,
+    CanColor,
+    CanDisable,
+    CanDisableCtor,
+    CanColorCtor,
+    HasTabIndexCtor
+} from '@ptsecurity/mosaic/core';
 
 
 @Directive({
@@ -27,10 +36,7 @@ export class McButtonCssStyler {
 
     private icons: HTMLElement[] = [];
 
-    constructor(
-        elementRef: ElementRef,
-        private renderer: Renderer2
-    ) {
+    constructor(elementRef: ElementRef, private renderer: Renderer2) {
         this.nativeElement = elementRef.nativeElement;
     }
 
@@ -74,22 +80,19 @@ export class McButtonBase {
 }
 
 // tslint:disable-next-line:naming-convention
-export const McButtonMixinBase:
-    CanDisableCtor &
-    CanColorCtor &
-    typeof McButtonBase =
-        mixinColor(mixinDisabled(McButtonBase));
+export const McButtonMixinBase: HasTabIndexCtor & CanDisableCtor & CanColorCtor &
+    typeof McButtonBase = mixinTabIndex(mixinColor(mixinDisabled(McButtonBase)));
 
 
 @Component({
     selector: 'button[mc-button]',
     templateUrl: './button.component.html',
-    styleUrls: ['./button.css'],
+    styleUrls: ['./button.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     inputs: ['disabled', 'color'],
     host: {
-        '[disabled]': 'disabled || null'
+        '[attr.disabled]': 'disabled || null'
     }
 })
 export class McButton extends McButtonMixinBase implements OnDestroy, CanDisable, CanColor {
@@ -116,12 +119,12 @@ export class McButton extends McButtonMixinBase implements OnDestroy, CanDisable
 @Component({
     selector: 'a[mc-button]',
     templateUrl: './button.component.html',
-    styleUrls: ['./button.css'],
+    styleUrls: ['button.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    inputs: ['disabled', 'color'],
+    inputs: ['disabled', 'color', 'tabIndex'],
     host: {
-        '[attr.tabindex]': 'disabled ? -1 : 0',
+        '[attr.tabindex]': 'tabIndex',
         '[attr.disabled]': 'disabled || null',
         '(click)': 'haltDisabledEvents($event)'
     }

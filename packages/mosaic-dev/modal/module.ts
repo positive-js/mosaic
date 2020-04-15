@@ -1,10 +1,8 @@
 import { Component, Input, NgModule, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-
-import { McButtonModule } from '../../mosaic/button/';
-import { McIconModule } from '../../mosaic/icon';
-import { McModalModule, McModalRef, McModalService } from '../../mosaic/modal';
+import { McButtonModule } from '@ptsecurity/mosaic/button';
+import { McIconModule } from '@ptsecurity/mosaic/icon';
+import { McModalModule, McModalRef, McModalService } from '@ptsecurity/mosaic/modal';
 
 
 // tslint:disable:no-console
@@ -12,8 +10,8 @@ import { McModalModule, McModalRef, McModalService } from '../../mosaic/modal';
 // tslint:disable:no-unnecessary-class
 @Component({
     selector: 'app',
-    template: require('./template.html'),
-    styleUrls: ['./styles.scss'],
+    templateUrl: './template.html',
+    styleUrls: ['../main.scss', './styles.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class ModalDemoComponent {
@@ -75,7 +73,6 @@ export class ModalDemoComponent {
 
     createComponentModal() {
         let isLoading = false;
-        let isDisabled = false;
         const isShown = false;
 
         const modal = this.modalService.create({
@@ -108,9 +105,9 @@ export class ModalDemoComponent {
 
             isLoading = true;
             setTimeout(() => isLoading = false, 3000);
-
-            isDisabled = true;
-            setTimeout(() => isDisabled = false, 2000);
+            //
+            // let isDisabled = true;
+            // setTimeout(() => isDisabled = false, 2000);
 
             // isShown = true;
             // setTimeout(() => isShown = false, 4000);
@@ -250,8 +247,3 @@ export class McModalFullCustomComponent {
     ]
 })
 export class DemoModule {}
-
-platformBrowserDynamic()
-    .bootstrapModule(DemoModule)
-    .catch((error) => console.error(error));
-

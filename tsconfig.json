@@ -1,53 +1,76 @@
 {
+    "buildOnSave": false,
+    "compileOnSave": false,
     "compilerOptions": {
-        "outDir": "./dist/packages/all",
+        "baseUrl": ".",
+        "rootDir": ".",
+        "declaration": true,
+        "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
+        "importHelpers": true,
+        "lib": [
+            "es2015",
+            "dom"
+        ],
         "module": "es2015",
         "moduleResolution": "node",
         "noUnusedLocals": true,
         "noUnusedParameters": true,
+        "skipLibCheck": true,
+        "sourceMap": true,
         "strictNullChecks": true,
         "strictFunctionTypes": true,
-        "skipLibCheck": true,
-        "target": "es2015",
-        "lib": [
-            "es5",
-            "es2015",
-            "dom"
-        ],
-        "baseUrl": "./packages",
-        "paths": {
-            "@ptsecurity/cdk/*": [
-                "./cdk/*"
-            ],
-            "@ptsecurity/mosaic/*": [
-                "./mosaic/*"
-            ],
-            "@ptsecurity/mosaic-moment-adapter/*": [
-                "./mosaic-moment-adapter/*"
-            ]
-        },
+        "stripInternal": false,
+        "target": "es5",
         "typeRoots": [
             "node_modules/@types"
         ],
-        "types": [
-            "jasmine",
-            "tslib",
-            "moment"
-        ],
-        "plugins": [
-            {
-                "name": "typescript-tslint-plugin",
-                "alwaysShowRuleFailuresAsWarnings": false,
-                "suppressWhileTypeErrorsPresent": false
-            }
-        ]
+        "paths": {
+            "@ptsecurity/cdk/a11y": ["packages/cdk/a11y/index.ts"],
+            "@ptsecurity/cdk/datetime": ["packages/cdk/datetime/index.ts"],
+            "@ptsecurity/cdk/keycodes": ["packages/cdk/keycodes/index.ts"],
+            "@ptsecurity/cdk/testing": ["packages/cdk/testing/index.ts"],
+            "@ptsecurity/cdk/tree": ["packages/cdk/tree/index.ts"],
+            "@ptsecurity/mosaic/autocomplete": ["packages/mosaic/autocomplete/index.ts"],
+            "@ptsecurity/mosaic/button": ["packages/mosaic/button/index.ts"],
+            "@ptsecurity/mosaic/button-toggle": ["packages/mosaic/button-toggle/index.ts"],
+            "@ptsecurity/mosaic/card": ["packages/mosaic/card/index.ts"],
+            "@ptsecurity/mosaic/checkbox": ["packages/mosaic/checkbox/index.ts"],
+            "@ptsecurity/mosaic/core": ["packages/mosaic/core/index.ts"],
+            "@ptsecurity/mosaic/datepicker": ["packages/mosaic/datepicker/index.ts"],
+            "@ptsecurity/mosaic/divider": ["packages/mosaic/divider/index.ts"],
+            "@ptsecurity/mosaic/dropdown": ["packages/mosaic/dropdown/index.ts"],
+            "@ptsecurity/mosaic/form-field": ["packages/mosaic/form-field/index.ts"],
+            "@ptsecurity/mosaic/icon": ["packages/mosaic/icon/index.ts"],
+            "@ptsecurity/mosaic/input": ["packages/mosaic/input/index.ts"],
+            "@ptsecurity/mosaic/link": ["packages/mosaic/link/index.ts"],
+            "@ptsecurity/mosaic/list": ["packages/mosaic/list/index.ts"],
+            "@ptsecurity/mosaic/modal": ["packages/mosaic/modal/index.ts"],
+            "@ptsecurity/mosaic/navbar": ["packages/mosaic/navbar/index.ts"],
+            "@ptsecurity/mosaic/popover": ["packages/mosaic/popover/index.ts"],
+            "@ptsecurity/mosaic/progress-bar": ["packages/mosaic/progress-bar/index.ts"],
+            "@ptsecurity/mosaic/progress-spinner": ["packages/mosaic/progress-spinner/index.ts"],
+            "@ptsecurity/mosaic/radio": ["packages/mosaic/radio/index.ts"],
+            "@ptsecurity/mosaic/select": ["packages/mosaic/select/index.ts"],
+            "@ptsecurity/mosaic/sidebar": ["packages/mosaic/sidebar/index.ts"],
+            "@ptsecurity/mosaic/sidepanel": ["packages/mosaic/sidepanel/index.ts"],
+            "@ptsecurity/mosaic/splitter": ["packages/mosaic/splitter/index.ts"],
+            "@ptsecurity/mosaic/table": ["packages/mosaic/table/index.ts"],
+            "@ptsecurity/mosaic/tabs": ["packages/mosaic/tabs/index.ts"],
+            "@ptsecurity/mosaic/tags": ["packages/mosaic/tags/index.ts"],
+            "@ptsecurity/mosaic/textarea": ["packages/mosaic/textarea/index.ts"],
+            "@ptsecurity/mosaic/timepicker": ["packages/mosaic/timepicker/index.ts"],
+            "@ptsecurity/mosaic/toggle": ["packages/mosaic/toggle/index.ts"],
+            "@ptsecurity/mosaic/tooltip": ["packages/mosaic/tooltip/index.ts"],
+            "@ptsecurity/mosaic/tree": ["packages/mosaic/tree/index.ts"],
+            "@ptsecurity/mosaic/tree-select": ["packages/mosaic/tree-select/index.ts"],
+            "@ptsecurity/mosaic/vertical-navbar": ["packages/mosaic/vertical-navbar/index.ts"],
+            "@ptsecurity/mosaic-moment-adapter": ["packages/mosaic-moment-adapter/index.ts"],
+            "@ptsecurity/mosaic-moment-adapter/adapter": ["packages/mosaic-moment-adapter/adapter/index.ts"]
+        }
     },
-    "include": [
-        "packages/**/*.ts",
-        "tools/**/*.ts"
-    ],
     "exclude": [
-        "node_modules/"
+        "node_modules",
+        "dist"
     ]
 }

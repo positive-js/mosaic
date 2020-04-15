@@ -1,4 +1,4 @@
-import * as OctokitApi from '@octokit/rest';
+import { Octokit } from '@octokit/rest';
 import { execSync } from 'child_process';
 
 import { CONFIG } from '../../tools/release/config';
@@ -9,13 +9,15 @@ async function cleanupDocsPreviews() {
     const repoUrl = 'git@github.com:positive-js/mosaic-previews.git';
     const repoDir = `./tmp/docs-preview-cleanup`;
 
-    const octokit: OctokitApi = new OctokitApi({
+    // @ts-ignore
+    const octokit = new Octokit({
         type: 'token',
         token: CONFIG.github.token
     });
 
     const q = 'repo:positive-js/mosaic is:pr is:closed';
 
+    // tslint:disable-next-line
     const { data }: { data: { items: any[] } } = await octokit.search.issuesAndPullRequests({
         q,
         per_page: 100
@@ -31,10 +33,12 @@ async function cleanupDocsPreviews() {
         []
     );
 
-    console.log("PRs to remove: ", prsToRemove);
+    // tslint:disable-next-line:no-console
+    console.log('PRs to remove: ', prsToRemove);
 
     execSync(`rm -rf "${repoDir}"`);
     execSync(`mkdir -p "${repoDir}"`);
+    // tslint:disable-next-line
     await process.chdir(`${repoDir}`);
 
     execSync(`git init`);

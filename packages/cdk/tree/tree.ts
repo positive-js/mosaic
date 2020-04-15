@@ -207,7 +207,7 @@ export class CdkTree<T> implements AfterContentChecked, CollectionViewer, OnDest
         // Otherwise, use the level of parent node.
         if (this.treeControl.getLevel) {
             context.level = this.treeControl.getLevel(nodeData);
-        /* tslint:disable-next-line:no-typeof-undefined */
+            /* tslint:disable-next-line:no-typeof-undefined */
         } else if (typeof parentData !== 'undefined' && this.levels.has(parentData)) {
             context.level = this.levels.get(parentData)! + 1;
         } else {

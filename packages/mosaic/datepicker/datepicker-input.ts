@@ -23,8 +23,6 @@ import {
 } from '@angular/forms';
 import { DateAdapter, MC_DATE_FORMATS, McDateFormats } from '@ptsecurity/cdk/datetime';
 import { DOWN_ARROW } from '@ptsecurity/cdk/keycodes';
-import { ThemePalette } from '@ptsecurity/mosaic/core';
-import { McFormField } from '@ptsecurity/mosaic/form-field';
 import { MC_INPUT_VALUE_ACCESSOR } from '@ptsecurity/mosaic/input';
 import { Subscription } from 'rxjs';
 
@@ -69,6 +67,7 @@ export class McDatepickerInputEvent<D> {
 /** Directive used to connect an input to a McDatepicker. */
 @Directive({
     selector: 'input[mcDatepicker]',
+    exportAs: 'mcDatepickerInput',
     providers: [
         MC_DATEPICKER_VALUE_ACCESSOR,
         MC_DATEPICKER_VALIDATORS,
@@ -79,13 +78,12 @@ export class McDatepickerInputEvent<D> {
         '[attr.aria-owns]': '(datepicker?.opened && datepicker.id) || null',
         '[attr.min]': 'min ? dateAdapter.toIso8601(min) : null',
         '[attr.max]': 'max ? dateAdapter.toIso8601(max) : null',
-        '[disabled]': 'disabled',
+        '[attr.disabled]': 'disabled || null',
         '(input)': 'onInput($event.target.value)',
         '(change)': 'onChange()',
         '(blur)': 'onBlur()',
         '(keydown)': 'onKeydown($event)'
-    },
-    exportAs: 'mcDatepickerInput'
+    }
 })
 export class McDatepickerInput<D> implements ControlValueAccessor, OnDestroy, Validator {
     /** The datepicker that this input is associated with. */
@@ -216,8 +214,7 @@ export class McDatepickerInput<D> implements ControlValueAccessor, OnDestroy, Va
     constructor(
         public elementRef: ElementRef<HTMLInputElement>,
         @Optional() public dateAdapter: DateAdapter<D>,
-        @Optional() @Inject(MC_DATE_FORMATS) private dateFormats: McDateFormats,
-        @Optional() private formField: McFormField
+        @Optional() @Inject(MC_DATE_FORMATS) private dateFormats: McDateFormats
     ) {
         this.validator = Validators.compose([
             this.parseValidator,
@@ -305,11 +302,6 @@ export class McDatepickerInput<D> implements ControlValueAccessor, OnDestroy, Va
 
     onChange() {
         this.dateChange.emit(new McDatepickerInputEvent(this, this.elementRef.nativeElement));
-    }
-
-    /** Returns the palette used by the input's form field, if any. */
-    getThemePalette(): ThemePalette | undefined {
-        return this.formField ? this.formField.color : undefined;
     }
 
     /** Handles blur events on the input. */

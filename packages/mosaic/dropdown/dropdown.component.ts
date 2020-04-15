@@ -80,7 +80,7 @@ export function MC_DROPDOWN_DEFAULT_OPTIONS_FACTORY(): McDropdownDefaultOptions 
     selector: 'mc-dropdown',
     exportAs: 'mcDropdown',
     templateUrl: 'dropdown.html',
-    styleUrls: ['dropdown.css'],
+    styleUrls: ['dropdown.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     animations: [
@@ -205,7 +205,7 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
     @Input() backdropClass: string = this._defaultOptions.backdropClass;
 
     /** @docs-private */
-    @ViewChild(TemplateRef, {static: false}) templateRef: TemplateRef<any>;
+    @ViewChild(TemplateRef, { static: false }) templateRef: TemplateRef<any>;
 
     /**
      * List of the items inside of a dropdown.
@@ -216,7 +216,7 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
      * Dropdown content that will be rendered lazily.
      * @docs-private
      */
-    @ContentChild(McDropdownContent, {static: false}) lazyContent: McDropdownContent;
+    @ContentChild(McDropdownContent, { static: false }) lazyContent: McDropdownContent;
 
     /** Event emitted when the dropdown is closed. */
     @Output() readonly closed: EventEmitter<void | 'click' | 'keydown' | 'tab'> =
@@ -245,7 +245,10 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
     }
 
     ngAfterContentInit() {
-        this.keyManager = new FocusKeyManager<McDropdownItem>(this.items).withWrap().withTypeAhead();
+        this.keyManager = new FocusKeyManager<McDropdownItem>(this.items)
+            .withWrap()
+            .withTypeAhead();
+
         this.tabSubscription = this.keyManager.tabOut.subscribe(() => this.closed.emit('tab'));
     }
 

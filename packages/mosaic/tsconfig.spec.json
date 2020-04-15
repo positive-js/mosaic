@@ -1,0 +1,16 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "outDir": "../../dist/out-tsc/mosaic-spec"
+    },
+    "files": [
+        "test.ts"
+    ],
+    "include": [
+        "**/*.spec.ts",
+        "./*/index.ts"
+    ],
+    "exclude": [
+        "schematics/**/*.ts"
+    ]
+}

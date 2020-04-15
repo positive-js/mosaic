@@ -10,7 +10,6 @@ import {
 import {
     AfterContentInit,
     AfterViewInit,
-    Attribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -117,21 +116,6 @@ export class McSelectChange {
     constructor(public source: McSelect, public value: any) {}
 }
 
-export class McSelectBase {
-    constructor(
-        public elementRef: ElementRef,
-        public defaultErrorStateMatcher: ErrorStateMatcher,
-        public parentForm: NgForm,
-        public parentFormGroup: FormGroupDirective,
-        public ngControl: NgControl
-    ) {}
-}
-
-// tslint:disable-next-line:naming-convention
-const McSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorStateCtor &
-    typeof McSelectBase = mixinTabIndex(mixinDisabled(mixinErrorState(McSelectBase)));
-
-
 @Directive({
     selector: '[mcSelectSearch]',
     exportAs: 'mcSelectSearch',
@@ -198,21 +182,37 @@ export class McSelectSearchEmptyResult {}
 export class McSelectTrigger {}
 
 
+export class McSelectBase {
+    constructor(
+        public elementRef: ElementRef,
+        public defaultErrorStateMatcher: ErrorStateMatcher,
+        public parentForm: NgForm,
+        public parentFormGroup: FormGroupDirective,
+        public ngControl: NgControl
+    ) {}
+}
+
+// tslint:disable-next-line:naming-convention
+const McSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorStateCtor &
+    typeof McSelectBase = mixinTabIndex(mixinDisabled(mixinErrorState(McSelectBase)));
+
+
 @Component({
     selector: 'mc-select',
     exportAs: 'mcSelect',
     templateUrl: 'select.html',
-    styleUrls: ['./select.css'],
-    inputs: ['disabled'],
+    styleUrls: ['./select.scss'],
+    inputs: ['disabled', 'tabIndex'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[attr.id]': 'id',
-        '[tabindex]': 'tabIndex',
+        '[attr.tabindex]': 'tabIndex',
+        '[attr.disabled]': 'disabled || null',
 
         class: 'mc-select',
         '[class.mc-disabled]': 'disabled',
-        '[class.mc-select-invalid]': 'errorState',
+        '[class.mc-invalid]': 'errorState',
 
         '(keydown)': 'handleKeydown($event)',
         '(focus)': 'onFocus()',
@@ -460,10 +460,6 @@ export class McSelect extends McSelectMixinBase implements
         return this._focused || this._panelOpen;
     }
 
-    /**
-     * @deprecated Setter to be removed as this property is intended to be readonly.
-     * @breaking-change 8.0.0
-     */
     set focused(value: boolean) {
         this._focused = value;
     }
@@ -508,7 +504,6 @@ export class McSelect extends McSelectMixinBase implements
         @Self() @Optional() ngControl: NgControl,
         @Optional() @Self() public ngModel: NgModel,
         @Optional() @Self() public formControlName: FormControlName,
-        @Attribute('tabindex') tabIndex: string,
         @Inject(MC_SELECT_SCROLL_STRATEGY) private readonly _scrollStrategyFactory,
         @Optional() @Inject(MC_VALIDATION) private mcValidation: McValidationOptions
     ) {
@@ -519,8 +514,6 @@ export class McSelect extends McSelectMixinBase implements
             // the `providers` to avoid running into a circular import.
             this.ngControl.valueAccessor = this;
         }
-
-        this.tabIndex = parseInt(tabIndex) || 0;
 
         // Force setter to be called in case id was not specified.
         this.id = this.id;

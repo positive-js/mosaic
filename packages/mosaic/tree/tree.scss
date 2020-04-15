@@ -41,6 +41,8 @@ $mc-tree-node-padding: 16px;
 .mc-tree-node-toggle {
     margin-right: 4px;
 
+    cursor: pointer;
+
     & .mc-icon {
         transform: rotate(-90deg);
     }
@@ -51,7 +53,7 @@ $mc-tree-node-padding: 16px;
         }
     }
 
-    &.mc-disabled {
+    &[disabled] {
         cursor: default;
     }
 }

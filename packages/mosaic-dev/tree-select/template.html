@@ -1,9 +1,9 @@
 <br><br><br><br><br><br><br>
-<div style="height: 20px">{{ multiSelectSelectFormControl.value | json }}</div>
+<div style="height: 20px">{{ modelValue | json }}</div>
 
 <button mc-button (click)="disabledState = !disabledState">disable</button>&nbsp;
-<button mc-button (click)="modelValue = 'Application'">setValue: incorrect array</button>&nbsp;
-<button mc-button (click)="modelValue = 'Applications'">setValue: correct array</button>&nbsp;
+<!--<button mc-button (click)="modelValue = 'Application'">setValue: incorrect array</button>&nbsp;-->
+<!--<button mc-button (click)="modelValue = 'Applications'">setValue: correct array</button>&nbsp;-->
 <button mc-button (click)="modelValue = null">modelValue = null</button>
 
 <button mc-button (click)="multiSelectSelectFormControl.setValue(null)">setValue(null)</button>
@@ -15,10 +15,8 @@
 <div class="dev-container">
     <mc-form-field>
         <mc-tree-select
-            [multiple]="true"
-            [disabled]="disabledState"
             placeholder="this is placeholder"
-            [(ngModel)]="modelValue"
+            [formControl]="control"
             [hiddenItemsTextFormatter]="hiddenItemsTextFormatter"
             (selectionChange)="onSelectionChange($event)">
 

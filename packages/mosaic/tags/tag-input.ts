@@ -40,10 +40,12 @@ let nextUniqueId = 0;
     selector: 'input[mcTagInputFor]',
     exportAs: 'mcTagInput, mcTagInputFor',
     host: {
-        class: 'mc-tag-input mc-input-element',
+        class: 'mc-tag-input',
+
         '[id]': 'id',
         '[attr.disabled]': 'disabled || null',
         '[attr.placeholder]': 'placeholder || null',
+
         '(keydown)': 'keydown($event)',
         '(blur)': 'blur()',
         '(focus)': 'onFocus()',
@@ -245,7 +247,7 @@ export class McTagInput implements McTagTextControl, OnChanges {
         this.inputElement.focus();
     }
 
-    private separatorKeyToSymbol(k): string {
+    private separatorKeyToSymbol(k): RegExp | string {
         const sep = {
             [ENTER]: /\r?\n/,
             [TAB]: /\t/,

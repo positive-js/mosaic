@@ -1,15 +1,13 @@
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-
-import { McIconModule } from '../../mosaic/icon';
-import { McLinkModule } from '../../mosaic/link';
+import { McIconModule } from '@ptsecurity/mosaic/icon';
+import { McLinkModule } from '@ptsecurity/mosaic/link';
 
 
 @Component({
     selector: 'app',
-    template: require('./template.html'),
-    styleUrls: ['./styles.scss'],
+    templateUrl: './template.html',
+    styleUrls: ['../main.scss', './styles.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent {}
@@ -30,8 +28,3 @@ export class DemoComponent {}
     ]
 })
 export class DemoModule {}
-
-platformBrowserDynamic()
-    .bootstrapModule(DemoModule)
-    /* tslint:disable:no-console */
-    .catch((error) => console.error(error));

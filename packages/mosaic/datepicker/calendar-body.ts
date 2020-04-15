@@ -41,14 +41,14 @@ export class McCalendarCell {
  */
 @Component({
     selector: '[mc-calendar-body]',
+    exportAs: 'mcCalendarBody',
     templateUrl: 'calendar-body.html',
-    styleUrls: ['calendar-body.css'],
+    styleUrls: ['calendar-body.scss'],
     host: {
         class: 'mc-calendar__body',
         role: 'grid',
         'aria-readonly': 'true'
     },
-    exportAs: 'mcCalendarBody',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })

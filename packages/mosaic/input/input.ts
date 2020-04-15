@@ -75,15 +75,15 @@ export const McInputMixinBase: CanUpdateErrorStateCtor & typeof McInputBase = mi
         // the native input element. Otherwise property bindings for those don't work.
         '[attr.id]': 'id',
         '[attr.placeholder]': 'placeholder',
-        '[disabled]': 'disabled',
+        '[attr.disabled]': 'disabled || null',
         '[required]': 'required',
         '(blur)': 'onBlur()',
         '(focus)': 'focusChanged(true)',
         '(input)': 'onInput()'
     },
-    providers: [
-        { provide: McFormFieldControl, useExisting: McInput }
-    ]
+    providers: [{
+        provide: McFormFieldControl, useExisting: McInput
+    }]
 })
 export class McInput extends McInputMixinBase implements McFormFieldControl<any>, OnChanges, OnDestroy, DoCheck,
     CanUpdateErrorState, AfterContentInit, OnChanges {
@@ -365,5 +365,4 @@ export class McInput extends McInputMixinBase implements McFormFieldControl<any>
     exportAs: 'McInputMonospace',
     host: { class: 'mc-input_monospace' }
 })
-export class McInputMono {
-}
+export class McInputMono {}

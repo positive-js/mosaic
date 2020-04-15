@@ -1,26 +1,21 @@
 // todo пока не делаем, перенесено из материала, но у нас в доках таких простых списков нет.
 import {
-    AfterContentInit, ChangeDetectionStrategy, Component, ContentChildren, Directive, ElementRef, QueryList,
+    AfterContentInit, ChangeDetectionStrategy, Component, ContentChildren, ElementRef, QueryList,
     ViewEncapsulation
 } from '@angular/core';
 import { McLine, McLineSetter } from '@ptsecurity/mosaic/core';
 
 
-export class McListBase {}
-
 @Component({
     selector: 'mc-list',
     host: { class: 'mc-list' },
     template: '<ng-content></ng-content>',
-    styleUrls: ['./list.css'],
+    styleUrls: ['./list.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class McList extends McListBase {}
+export class McList {}
 
-
-// Boilerplate for applying mixins to McListItem.
-export class McListItemBase {}
 
 @Component({
     selector: 'mc-list-item, a[mc-list-item]',
@@ -34,28 +29,25 @@ export class McListItemBase {}
     preserveWhitespaces: false,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class McListItem extends McListItemBase implements AfterContentInit {
+export class McListItem implements AfterContentInit {
     @ContentChildren(McLine) lines: QueryList<McLine>;
 
-    private lineSetter: McLineSetter;
-
-    constructor(private _element: ElementRef) {
-        super();
-    }
+    constructor(private elementRef: ElementRef) {}
 
     ngAfterContentInit() {
-        this.lineSetter = new McLineSetter(this.lines, this._element);
+        // tslint:disable-next-line:no-unused-expression
+        new McLineSetter(this.lines, this.elementRef);
     }
 
     handleFocus() {
-        this._element.nativeElement.classList.add('mc-focused');
+        this.elementRef.nativeElement.classList.add('mc-focused');
     }
 
     handleBlur() {
-        this._element.nativeElement.classList.remove('mc-focused');
+        this.elementRef.nativeElement.classList.remove('mc-focused');
     }
 
     getHostElement(): HTMLElement {
-        return this._element.nativeElement;
+        return this.elementRef.nativeElement;
     }
 }

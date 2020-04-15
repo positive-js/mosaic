@@ -2,7 +2,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { McButtonModule } from '../../mosaic/button';
@@ -12,9 +11,8 @@ import { McLinkModule } from '../../mosaic/link';
 
 @Component({
     selector: 'app',
-    template: require('./template.html'),
-    styleUrls: ['./styles.scss'],
-    encapsulation: ViewEncapsulation.None,
+    templateUrl: './template.html',
+    styleUrls: ['../main.scss', './styles.scss'],
     animations: [
         trigger('hideShowAnimator', [
             state('true' , style({ opacity: 1, display: '' })),
@@ -22,7 +20,8 @@ import { McLinkModule } from '../../mosaic/link';
             transition('false => true', animate('.5s')),
             transition('true => false', animate('.2s'))
         ])
-    ]
+    ],
+    encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent {
     // tslint:disable-next-line:no-magic-numbers
@@ -55,7 +54,3 @@ export class DemoComponent {
     ]
 })
 export class DemoModule {}
-
-platformBrowserDynamic()
-    .bootstrapModule(DemoModule)
-    .catch((error) => console.error(error));

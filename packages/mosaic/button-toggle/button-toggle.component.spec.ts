@@ -284,12 +284,12 @@ describe('McButtonToggle without forms', () => {
         });
 
         it('should change the vertical state', () => {
-            expect(groupNativeElement.classList).not.toContain('mc-button-toggle-vertical');
+            expect(groupNativeElement.classList).not.toContain('mc-button-toggle_vertical');
 
             groupInstance.vertical = true;
             fixture.detectChanges();
 
-            expect(groupNativeElement.classList).toContain('mc-button-toggle-vertical');
+            expect(groupNativeElement.classList).toContain('mc-button-toggle_vertical');
         });
 
         it('should emit a change event from button toggles', fakeAsync(() => {
@@ -477,12 +477,12 @@ describe('McButtonToggle without forms', () => {
         });
 
         it('should change the vertical state', () => {
-            expect(groupNativeElement.classList).not.toContain('mc-button-toggle-vertical');
+            expect(groupNativeElement.classList).not.toContain('mc-button-toggle_vertical');
 
             groupInstance.vertical = true;
             fixture.detectChanges();
 
-            expect(groupNativeElement.classList).toContain('mc-button-toggle-vertical');
+            expect(groupNativeElement.classList).toContain('mc-button-toggle_vertical');
         });
 
         it('should deselect a button toggle when selected twice', fakeAsync(() => {
