@@ -3,7 +3,11 @@ import { Octokit } from '@octokit/rest';
 import { execSync } from 'child_process';
 import { join } from 'path';
 
+// tslint:disable-next-line:blank-lines
 import { GitClient } from '../../tools/release/git/git-client';
+
+import IssuesListCommentsParams = Octokit.IssuesListCommentsParams;
+import IssuesCreateCommentParams = Octokit.IssuesCreateCommentParams;
 
 
 // tslint:disable-next-line:naming-convention
@@ -54,7 +58,7 @@ async function postGithubComment() {
 
     if (PR_NUMBER && owner === 'positive-js') {
         const SHORT_SHA = process.env.SHORT_GIT_HASH;
-        const repo = process.env.CIRCLE_PROJECT_REPONAME;
+        const repo = process.env.CIRCLE_PROJECT_REPONAME as string;
 
         console.log('Start to create a comment');
         const auth = process.env.GITHUB_API_MOSAIC;
@@ -64,11 +68,14 @@ async function postGithubComment() {
             auth
         });
 
-        const comments: { data: any[] } = await githubApi.issues.listComments({
+        const issuesListCommentsParams: IssuesListCommentsParams = {
             owner,
             repo,
+            // @ts-ignore
             issue_number: PR_NUMBER
-        });
+        };
+
+        const comments: { data: any[] } = await githubApi.issues.listComments(issuesListCommentsParams);
 
         const ptBotComment = comments.data
             .filter((comment) => comment.user.login === 'positivejs')
@@ -85,12 +92,15 @@ async function postGithubComment() {
             });
         } else {
 
-            await githubApi.issues.createComment({
+            const issuesCreateCommentParams: IssuesCreateCommentParams = {
                 owner,
                 repo,
+                // @ts-ignore
                 issue_number: PR_NUMBER,
                 body
-            });
+            };
+
+            await githubApi.issues.createComment(issuesCreateCommentParams);
         }
     }
 }

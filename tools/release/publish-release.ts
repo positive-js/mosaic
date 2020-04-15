@@ -1,7 +1,7 @@
 // tslint:disable:no-console
 
 import chalk from 'chalk';
-import { execSync } from 'child_process';
+import { execSync, ExecSyncOptions } from 'child_process';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 
@@ -168,7 +168,7 @@ class PublishReleaseTask extends BaseReleaseTask {
     /** Builds all release packages that should be published. */
     private buildReleasePackages() {
         const binDir = join(this.projectDir, 'node_modules/.bin');
-        const spawnOptions = {cwd: binDir, stdio: 'inherit'};
+        const spawnOptions: ExecSyncOptions = {cwd: binDir, stdio: 'inherit'};
 
         execSync('rm -rf dist', spawnOptions);
         execSync('yarn run build:cdk', spawnOptions);
