@@ -1,4 +1,4 @@
-import { highlightCodeBlock } from '../../highlight-files/highlight-code-block';
+import { highlightCodeBlock } from './highlight-code-block';
 
 
 /**
