@@ -242,7 +242,6 @@ workflows:
             - build_packages:
                   requires:
                       - validate_licenses
-                      - linters
                       - dependencies_audit
 
             # 6 Group
