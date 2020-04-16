@@ -9,17 +9,18 @@
 
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
+    $is-dark: map-get($theme, is-dark);
 
     $popup-common: map-get(map-get($theme, components), popup-common);
     $footer_background-color: map-get($popup-common, footer_background-color);
 
     $modal: map-get(map-get($theme, components), modal);
 
-    $divider-color: mc-color($foreground, divider);
+    $divider-color: mc-color($popup-common, divider-color);
 
     .mc-modal {
         .mc-modal-content {
-            // почему у модалки такой бэкграунд ?
+            // У модалки должен быть фон background. Чтобы поповеры и дропдауны было видно поверх модалки
             background-color: map-get($background, background);
 
             box-shadow: map-get($modal, shadow);
@@ -34,7 +35,7 @@
         }
 
         .mc-modal-footer {
-            border-top: 1px solid $divider-color;
+            border-top: 1px solid if($is-dark, $divider-color, transparent);
             background-color: $footer_background-color;
         }
 
@@ -55,7 +56,7 @@
 
     .mc-confirm {
         .mc-confirm-btns {
-            border-top: 1px solid $divider-color;
+            border-top: 1px solid if($is-dark, $divider-color, transparent);
             background-color: $footer_background-color;
         }
     }

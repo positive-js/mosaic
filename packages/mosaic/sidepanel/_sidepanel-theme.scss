@@ -5,12 +5,13 @@
 @mixin mc-sidepanel-theme($theme) {
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
-
-    $divider-color: mc-color($foreground, divider);
+    $is-dark: map-get($theme, is-dark);
 
     $popup-common: map-get(map-get($theme, components), popup-common);
 
     $sidepanel: map-get(map-get($theme, components), sidepanel);
+
+    $divider-color: mc-color($popup-common, divider-color);
 
     .mc-sidepanel-content {
         background-color: map-get($background, background);
@@ -55,7 +56,7 @@
     }
 
     .mc-sidepanel-footer {
-        border-top: 1px solid $divider-color;
+        border-top: 1px solid  if($is-dark, $divider-color, transparent);
         background-color: map-get($popup-common, footer_background-color);
     }
 }

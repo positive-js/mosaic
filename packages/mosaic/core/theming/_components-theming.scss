@@ -11,9 +11,10 @@
     $popup-common: (
         shadow: 0 3px 3px 0 mc-color($second, A200),
         border-color: mc-color($second),
-        background: white,
+        divider-color: mc-color($second, 200),
 
-        footer_background-color: map-get($second, 60)
+        background: map-get($background, background-popup),
+        footer_background-color: map-get($background, background-popup-footer)
     );
 
     $button: (
@@ -77,10 +78,7 @@
     );
 
     $popover: (
-        background-color: map-get($background, background),
-        border-color: map-get($foreground, text-disabled),
-
-        footer_background-color: map-get($background, background-disabled),
+        border-color: map-get($foreground, border),
     );
 
     $progress-bar: (
@@ -198,9 +196,10 @@
     $popup-common: (
         shadow: 0 3px 3px 0 mc-color($second, A200),
         border-color: mc-color($second),
-        background: map-get($mc-grey, 700),
+        divider-color: mc-color($foreground, divider),
 
-        footer_background-color: transparent,
+        background: map-get($background, background-popup),
+        footer_background-color: map-get($background, background-popup-footer)
     );
 
     $button: (
@@ -266,10 +265,7 @@
     );
 
     $popover: (
-        background-color: map-get($background, background),
-        border-color: map-get($background, background),
-
-        footer_background-color: map-get($background, background-disabled),
+        border-color: mc-color($second, 700),
     );
 
     $progress-bar: (
