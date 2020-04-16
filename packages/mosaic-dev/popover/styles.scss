@@ -26,6 +26,10 @@ app {
 
 .popover-485 {
     width: 485px;
+
+    .mc-popover {
+        max-width: 485px !important;
+    }
 }
 
 
