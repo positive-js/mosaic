@@ -1,6 +1,5 @@
 // tslint:disable:no-console
-
-import chalk from 'chalk';
+import { green, red, yellow, bold, italic } from 'chalk';
 import { execSync, ExecSyncOptions } from 'child_process';
 import { readFileSync } from 'fs';
 import { join } from 'path';
@@ -56,7 +55,7 @@ class PublishReleaseTask extends BaseReleaseTask {
         this.currentVersion = parseVersionName(this.packageJson.version);
 
         if (!this.currentVersion) {
-            console.error(chalk.red(`Cannot parse current version in ${chalk.italic('package.json')}. Please ` +
+            console.error(red(`Cannot parse current version in ${italic('package.json')}. Please ` +
                 `make sure "${this.packageJson.version}" is a valid Semver version.`));
             process.exit(1);
         }
@@ -64,9 +63,9 @@ class PublishReleaseTask extends BaseReleaseTask {
 
     async run() {
         console.log();
-        console.log(chalk.green('-----------------------------------------'));
-        console.log(chalk.green(chalk.bold('  Mosaic release script')));
-        console.log(chalk.green('-----------------------------------------'));
+        console.log(green('-----------------------------------------'));
+        console.log(green(bold('  Mosaic release script')));
+        console.log(green('-----------------------------------------'));
         console.log();
 
         const newVersion = this.currentVersion;
@@ -100,7 +99,7 @@ class PublishReleaseTask extends BaseReleaseTask {
         this.checkNpmAuthentication();
 
         this.buildReleasePackages();
-        console.info(chalk.green(`  ✓   Built the release output.`));
+        console.info(green(`  ✓   Built the release output.`));
 
         this.checkReleaseOutput();
 
@@ -109,7 +108,7 @@ class PublishReleaseTask extends BaseReleaseTask {
             join(this.projectDir, CHANGELOG_FILE_NAME), newVersionName);
 
         if (!extractedReleaseNotes) {
-            console.error(chalk.red(`  ✘   Could not find release notes in the changelog.`));
+            console.error(red(`  ✘   Could not find release notes in the changelog.`));
             process.exit(1);
         }
 
@@ -136,18 +135,18 @@ class PublishReleaseTask extends BaseReleaseTask {
         });
 
         console.log();
-        console.info(chalk.green(chalk.bold(`  ✓   Published all packages successfully`)));
+        console.info(green(bold(`  ✓   Published all packages successfully`)));
 
         // Always log out of npm after releasing to prevent unintentional changes to
         // any packages.
         if (npmLogout()) {
-            console.info(chalk.green(`  ✓   Logged out of npm`));
+            console.info(green(`  ✓   Logged out of npm`));
         } else {
-            console.error(chalk.red(`  ✘   Could not log out of NPM. Please manually log out!`));
+            console.error(red(`  ✘   Could not log out of NPM. Please manually log out!`));
         }
 
-        console.info(chalk.yellow(`  ⚠   Please draft a new release of the version on Github.`));
-        console.info(chalk.yellow(`      ${newReleaseUrl}`));
+        console.info(yellow(`  ⚠   Please draft a new release of the version on Github.`));
+        console.info(yellow(`      ${newReleaseUrl}`));
 
         notify(npmDistTag, newVersionName);
     }
@@ -158,9 +157,9 @@ class PublishReleaseTask extends BaseReleaseTask {
      */
     private verifyLastCommitVersionBump() {
         if (!/chore: bump version/.test(this.git.getCommitTitle('HEAD'))) {
-            console.error(chalk.red(`  ✘   The latest commit of the current branch does not seem to be a ` +
+            console.error(red(`  ✘   The latest commit of the current branch does not seem to be a ` +
                 `version bump.`));
-            console.error(chalk.red(`      Please stage the release using the staging script.`));
+            console.error(red(`      Please stage the release using the staging script.`));
             process.exit(1);
         }
     }
@@ -190,7 +189,7 @@ class PublishReleaseTask extends BaseReleaseTask {
         // In case any release validation did not pass, abort the publishing because
         // the issues need to be resolved before publishing.
         if (hasFailed) {
-            console.error(chalk.red(`  ✘   Release output does not pass all release validations. Please fix ` +
+            console.error(red(`  ✘   Release output does not pass all release validations. Please fix ` +
                 `all failures or reach out to the team.`));
             process.exit(1);
         }
@@ -204,7 +203,7 @@ class PublishReleaseTask extends BaseReleaseTask {
         if (!await this.promptConfirm(
             'Are you sure that you want to release a stable version to the "next" tag?')) {
             console.log();
-            console.log(chalk.yellow('Aborting publish...'));
+            console.log(yellow('Aborting publish...'));
             process.exit(0);
         }
     }
@@ -216,7 +215,7 @@ class PublishReleaseTask extends BaseReleaseTask {
     private async promptConfirmReleasePublish() {
         if (!await this.promptConfirm('Are you sure that you want to release now?')) {
             console.log();
-            console.log(chalk.yellow('Aborting publish...'));
+            console.log(yellow('Aborting publish...'));
             process.exit(0);
         }
     }
@@ -229,7 +228,7 @@ class PublishReleaseTask extends BaseReleaseTask {
         if (!await this.promptConfirm(
             'File .env not found or invalid. Are you sure that you want to release without notification')) {
             console.log();
-            console.log(chalk.yellow('Aborting publish...'));
+            console.log(yellow('Aborting publish...'));
             process.exit(0);
         }
     }
@@ -241,13 +240,13 @@ class PublishReleaseTask extends BaseReleaseTask {
      */
     private checkNpmAuthentication() {
         if (isNpmAuthenticated()) {
-            console.info(chalk.green(`  ✓   NPM is authenticated.`));
+            console.info(green(`  ✓   NPM is authenticated.`));
 
             return;
         }
 
         let failedAuthentication = false;
-        console.log(chalk.yellow(`  ⚠   NPM is currently not authenticated. Running "npm login"..`));
+        console.log(yellow(`  ⚠   NPM is currently not authenticated. Running "npm login"..`));
 
         for (let i = 0; i < MAX_NPM_LOGIN_TRIES; i++) {
             if (npmLoginInteractive()) {
@@ -257,32 +256,32 @@ class PublishReleaseTask extends BaseReleaseTask {
             }
 
             failedAuthentication = true;
-            console.error(chalk.red(`  ✘   Could not authenticate successfully. Please try again.`));
+            console.error(red(`  ✘   Could not authenticate successfully. Please try again.`));
         }
 
         if (failedAuthentication) {
-            console.error(chalk.red(`  ✘   Could not authenticate after ${MAX_NPM_LOGIN_TRIES} tries. ` +
+            console.error(red(`  ✘   Could not authenticate after ${MAX_NPM_LOGIN_TRIES} tries. ` +
                 `Exiting..`));
             process.exit(1);
         }
 
-        console.info(chalk.green(`  ✓   Successfully authenticated NPM.`));
+        console.info(green(`  ✓   Successfully authenticated NPM.`));
     }
 
     /** Publishes the specified package within the given NPM dist tag. */
     private publishPackageToNpm(packageName: string, npmDistTag: string) {
-        console.info(chalk.green(`  ⭮   Publishing "${packageName}"..`));
+        console.info(green(`  ⭮   Publishing "${packageName}"..`));
 
         const errorOutput = npmPublish(join(this.releaseOutputPath, packageName), npmDistTag);
 
         if (errorOutput) {
-            console.error(chalk.red(`  ✘   An error occurred while publishing "${packageName}".`));
-            console.error(chalk.red(`      Please check the terminal output and reach out to the team.`));
-            console.error(chalk.red(`\n${errorOutput}`));
+            console.error(red(`  ✘   An error occurred while publishing "${packageName}".`));
+            console.error(red(`      Please check the terminal output and reach out to the team.`));
+            console.error(red(`\n${errorOutput}`));
             process.exit(1);
         }
 
-        console.info(chalk.green(`  ✓   Successfully published "${packageName}"`));
+        console.info(green(`  ✓   Successfully published "${packageName}"`));
     }
 
     /** Creates the specified release tag locally. */
@@ -291,17 +290,17 @@ class PublishReleaseTask extends BaseReleaseTask {
             const expectedSha = this.git.getLocalCommitSha('HEAD');
 
             if (this.git.getShaOfLocalTag(tagName) !== expectedSha) {
-                console.error(chalk.red(`  ✘   Tag "${tagName}" already exists locally, but does not refer ` +
+                console.error(red(`  ✘   Tag "${tagName}" already exists locally, but does not refer ` +
                     `to the version bump commit. Please delete the tag if you want to proceed.`));
                 process.exit(1);
             }
 
-            console.info(chalk.green(`  ✓   Release tag already exists: "${chalk.italic(tagName)}"`));
+            console.info(green(`  ✓   Release tag already exists: "${italic(tagName)}"`));
         } else if (this.git.createTag('HEAD', tagName, releaseNotes)) {
-            console.info(chalk.green(`  ✓   Created release tag: "${chalk.italic(tagName)}"`));
+            console.info(green(`  ✓   Created release tag: "${italic(tagName)}"`));
         } else {
-            console.error(chalk.red(`  ✘   Could not create the "${tagName}" tag.`));
-            console.error(chalk.red(`      Please make sure there is no existing tag with the same name.`));
+            console.error(red(`  ✘   Could not create the "${tagName}" tag.`));
+            console.error(red(`      Please make sure there is no existing tag with the same name.`));
             process.exit(1);
         }
     }
@@ -314,25 +313,25 @@ class PublishReleaseTask extends BaseReleaseTask {
         // The remote tag SHA is empty if the tag does not exist in the remote repository.
         if (remoteTagSha) {
             if (remoteTagSha !== expectedSha) {
-                console.error(chalk.red(`  ✘   Tag "${tagName}" already exists on the remote, but does not ` +
+                console.error(red(`  ✘   Tag "${tagName}" already exists on the remote, but does not ` +
                     `refer to the version bump commit.`));
-                console.error(chalk.red(`      Please delete the tag on the remote if you want to proceed.`));
+                console.error(red(`      Please delete the tag on the remote if you want to proceed.`));
                 process.exit(1);
             }
 
-            console.info(chalk.green(`  ✓   Release tag already exists remotely: "${chalk.italic(tagName)}"`));
+            console.info(green(`  ✓   Release tag already exists remotely: "${italic(tagName)}"`));
 
             return;
         }
 
         if (!this.git.pushTagToRemote(tagName, upstreamRemote)) {
-            console.error(chalk.red(`  ✘   Could not push the "${tagName}" tag upstream.`));
-            console.error(chalk.red(`      Please make sure you have permission to push to the ` +
+            console.error(red(`  ✘   Could not push the "${tagName}" tag upstream.`));
+            console.error(red(`      Please make sure you have permission to push to the ` +
                 `"${this.git.remoteGitUrl}" remote.`));
             process.exit(1);
         }
 
-        console.info(chalk.green(`  ✓   Pushed release tag upstream.`));
+        console.info(green(`  ✓   Pushed release tag upstream.`));
     }
 
     /**
@@ -343,7 +342,7 @@ class PublishReleaseTask extends BaseReleaseTask {
         const remoteName = this.git.hasRemote('upstream') ?
             'upstream' : await promptForUpstreamRemote(this.git.getAvailableRemotes());
 
-        console.info(chalk.green(`  ✓   Using the "${remoteName}" remote for pushing changes upstream.`));
+        console.info(green(`  ✓   Using the "${remoteName}" remote for pushing changes upstream.`));
 
         return remoteName;
     }

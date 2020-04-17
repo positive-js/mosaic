@@ -1,5 +1,5 @@
 // tslint:disable:no-console
-import chalk from 'chalk';
+import { red, italic, yellow, green } from 'chalk';
 import { prompt } from 'inquirer';
 
 import { GitClient } from './git/git-client';
@@ -23,7 +23,7 @@ export class BaseReleaseTask {
     // If current branch already matches one of the allowed publish branches, just continue
     // by exiting this function and returning the currently used publish branch.
     if (allowedBranches.includes(currentBranchName)) {
-      console.log(chalk.green(`  ✓   Using the "${chalk.italic(currentBranchName)}" branch.`));
+      console.log(green(`  ✓   Using the "${italic(currentBranchName)}" branch.`));
 
       return currentBranchName;
     }
@@ -31,8 +31,8 @@ export class BaseReleaseTask {
     // In case there are multiple allowed publish branches for this version, we just
     // exit and let the user decide which branch they want to release from.
     if (allowedBranches.length !== 1) {
-      console.warn(chalk.yellow('  ✘   You are not on an allowed publish branch.'));
-      console.warn(chalk.yellow(`      Please switch to one of the following branches: ` +
+      console.warn(yellow('  ✘   You are not on an allowed publish branch.'));
+      console.warn(yellow(`      Please switch to one of the following branches: ` +
         `${allowedBranches.join(', ')}`));
       process.exit(0);
     }
@@ -42,14 +42,14 @@ export class BaseReleaseTask {
     const defaultPublishBranch = allowedBranches[0];
 
     if (!this.git.checkoutBranch(defaultPublishBranch)) {
-      console.error(chalk.red(`  ✘   Could not switch to the "${chalk.italic(defaultPublishBranch)}" ` +
+      console.error(red(`  ✘   Could not switch to the "${italic(defaultPublishBranch)}" ` +
         `branch.`));
-      console.error(chalk.red(`      Please ensure that the branch exists or manually switch to the ` +
+      console.error(red(`      Please ensure that the branch exists or manually switch to the ` +
         `branch.`));
       process.exit(1);
     }
 
-    console.log(chalk.green(`  ✓   Switched to the "${chalk.italic(defaultPublishBranch)}" branch.`));
+    console.log(green(`  ✓   Switched to the "${italic(defaultPublishBranch)}" branch.`));
   }
 
   /** Verifies that the local branch is up to date with the given publish branch. */
@@ -59,8 +59,8 @@ export class BaseReleaseTask {
 
     // Check if the current branch is in sync with the remote branch.
     if (upstreamCommitSha !== localCommitSha) {
-      console.error(chalk.red(`  ✘ The current branch is not in sync with the remote branch. Please ` +
-        `make sure your local branch "${chalk.italic(publishBranch)}" is up to date.`));
+      console.error(red(`  ✘ The current branch is not in sync with the remote branch. Please ` +
+        `make sure your local branch "${italic(publishBranch)}" is up to date.`));
       process.exit(1);
     }
   }
@@ -68,7 +68,7 @@ export class BaseReleaseTask {
   /** Verifies that there are no uncommitted changes in the project. */
   protected verifyNoUncommittedChanges() {
     if (this.git.hasUncommittedChanges()) {
-      console.error(chalk.red(`  ✘   There are changes which are not committed and should be ` +
+      console.error(red(`  ✘   There are changes which are not committed and should be ` +
         `discarded.`));
     }
   }

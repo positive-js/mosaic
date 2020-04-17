@@ -5,7 +5,7 @@ import {
 } from '@angular-devkit/architect';
 import { NgPackagrBuilderOptions } from '@angular-devkit/build-ng-packagr';
 import { Schema as AngularJson } from '@angular/cli/lib/config/schema';
-import chalk from 'chalk';
+import { green } from 'chalk';
 import { promises as fs, writeFileSync } from 'fs';
 import { dirname, join, resolve } from 'path';
 
@@ -112,7 +112,7 @@ export async function packager(options: IPackagerOptions, context: BuilderContex
             { encoding: 'utf-8' }
         );
 
-        context.logger.info(chalk.green(' ✔ Packaging done!'));
+        context.logger.info(green(' ✔ Packaging done!'));
 
         return { success: buildResult.success };
     } catch (error) {

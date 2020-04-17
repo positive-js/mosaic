@@ -1,4 +1,4 @@
-import chalk from 'chalk';
+import { green, red } from 'chalk';
 import * as dotenv from 'dotenv';
 import { join } from 'path';
 import * as request from 'request';
@@ -34,12 +34,12 @@ export function notify(tag, version) {
     }, (error, response) => {
         if (error || response.statusCode !== HTTP_CODE_OK) {
             // tslint:disable-next-line:no-console
-            console.error(chalk.red(`  ✘   Could not post notification in Mattermost.`));
+            console.error(red(`  ✘   Could not post notification in Mattermost.`));
 
             return;
         }
 
-        console.info(chalk.green(`  ✓   Notification is posted in Mattermost.`));
+        console.info(green(`  ✓   Notification is posted in Mattermost.`));
     });
 }
 
