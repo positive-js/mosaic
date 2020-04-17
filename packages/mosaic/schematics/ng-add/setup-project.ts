@@ -7,7 +7,7 @@ import {
 } from '@angular/cdk/schematics';
 import { getWorkspace } from '@schematics/angular/utility/config';
 import { getAppModulePath } from '@schematics/angular/utility/ng-ast-utils';
-import chalk from 'chalk';
+import { red, bold, italic } from 'chalk';
 
 import { addRobotoFonts } from './fonts/roboto-fonts';
 import { Schema } from './schema';
@@ -47,8 +47,8 @@ function addAnimationsModule(options: Schema) {
 
         if (options.animations) {
             if (hasNgModuleImport(host, appModulePath, noopAnimationsModuleName)) {
-                console.warn(chalk.red(`Could not set up "${chalk.bold(browserAnimationsModuleName)}" ` +
-                    `because "${chalk.bold(noopAnimationsModuleName)}" is already imported. Please manually ` +
+                console.warn(red(`Could not set up "${bold(browserAnimationsModuleName)}" ` +
+                    `because "${bold(noopAnimationsModuleName)}" is already imported. Please manually ` +
                     `set up browser animations.`));
 
                 return;
@@ -74,8 +74,8 @@ function addMosaicAppStyles(options: Schema) {
         const styleFilePath = getProjectStyleFile(project);
 
         if (!styleFilePath) {
-            console.warn(chalk.red(`Could not find the default style file for this project.`));
-            console.warn(chalk.red(`Please consider manually setting up the Roboto font in your CSS.`));
+            console.warn(red(`Could not find the default style file for this project.`));
+            console.warn(red(`Please consider manually setting up the Roboto font in your CSS.`));
 
             return;
         }
@@ -83,9 +83,9 @@ function addMosaicAppStyles(options: Schema) {
         const buffer = host.read(styleFilePath);
 
         if (!buffer) {
-            console.warn(chalk.red(`Could not read the default style file within the project ` +
-                `(${chalk.italic(styleFilePath)})`));
-            console.warn(chalk.red(`Please consider manually setting up the Robot font.`));
+            console.warn(red(`Could not read the default style file within the project ` +
+                `(${italic(styleFilePath)})`));
+            console.warn(red(`Please consider manually setting up the Robot font.`));
 
             return;
         }

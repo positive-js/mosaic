@@ -4,7 +4,7 @@ import { SchematicsException, Tree } from '@angular-devkit/schematics';
 import { getProjectFromWorkspace, getProjectStyleFile, getProjectTargetOptions } from '@angular/cdk/schematics';
 import { InsertChange } from '@schematics/angular/utility/change';
 import { getWorkspace } from '@schematics/angular/utility/config';
-import chalk from 'chalk';
+import { yellow, bold, red } from 'chalk';
 import { join } from 'path';
 
 import { Schema } from '../schema';
@@ -63,8 +63,8 @@ function insertCustomTheme(project: WorkspaceProject, projectName: string, host:
         const customThemePath = normalize(join(project.sourceRoot, defaultCustomThemeFilename));
 
         if (host.exists(customThemePath)) {
-            console.warn(chalk.yellow(`Cannot create a custom Mosaic theme because
-                ${chalk.bold(customThemePath)} already exists. Skipping custom theme generation.`));
+            console.warn(yellow(`Cannot create a custom Mosaic theme because
+                ${bold(customThemePath)} already exists. Skipping custom theme generation.`));
 
             return;
         }
@@ -137,10 +137,10 @@ function addThemeStyleToTarget(project: WorkspaceProject, targetName: 'test' | '
             // theme because these files can contain custom styles, while prebuilt themes are
             // always packaged and considered replaceable.
             if (stylePath.includes(defaultCustomThemeFilename)) {
-                console.warn(chalk.red(`Could not add the selected theme to the CLI project configuration ` +
+                console.warn(red(`Could not add the selected theme to the CLI project configuration ` +
                     `because there is already a custom theme file referenced.`));
-                console.warn(chalk.red(`Please manually add the following style file to your configuration:`));
-                console.warn(chalk.yellow(`    ${chalk.bold(assetPath)}`));
+                console.warn(red(`Please manually add the following style file to your configuration:`));
+                console.warn(yellow(`    ${bold(assetPath)}`));
 
                 return;
             } else if (stylePath.includes(prebuiltThemePathSegment)) {
