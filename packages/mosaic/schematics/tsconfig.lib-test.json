@@ -1,0 +1,10 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "outDir": "../../../dist/schematics-test",
+        "module": "commonjs",
+        "target": "es2015",
+        "declaration": true,
+        "inlineSources": true
+    }
+}

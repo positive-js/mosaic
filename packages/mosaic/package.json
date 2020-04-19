@@ -27,5 +27,11 @@
         "@ptsecurity/mosaic-icons": "^3.0.0",
         "tslib": "^1.7.1"
     },
-    "schematics": "./schematics/collection.json"
+    "schematics": "./schematics/collection.json",
+    "ng-update": {
+        "migrations": "./schematics/migration.json",
+        "packageGroup": [
+            "@ptsecurity/mosaic"
+        ]
+    }
 }

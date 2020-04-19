@@ -1,0 +1,10 @@
+{
+    "$schema": "../../../node_modules/@angular-devkit/schematics/collection-schema.json",
+    "schematics": {
+        "update-9.0.0": {
+            "version": "9.0.0",
+            "description": "Updates Mosaic to 9.0.0",
+            "factory": "./ng-update/index#updateToV9"
+        }
+    }
+}

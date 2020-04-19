@@ -197,7 +197,8 @@
                     "options": {
                         "buildTarget": "packagr",
                         "versionPlaceholder": "{{VERSION}}",
-                        "ngVersionPlaceholder": "{{NG_VERSION}}"
+                        "ngVersionPlaceholder": "{{NG_VERSION}}",
+                        "additionalTargets": ["schematics:build"]
                     }
                 },
                 "test": {
@@ -260,6 +261,20 @@
                         "buildTarget": "packagr",
                         "versionPlaceholder": "{{VERSION}}",
                         "ngVersionPlaceholder": "{{NG_VERSION}}"
+                    }
+                }
+            }
+        },
+        "schematics": {
+            "projectType": "library",
+            "root": "packages/mosaic/schematics",
+            "sourceRoot": "packages/mosaic/schematics",
+            "architect": {
+                "build": {
+                    "builder": "@ptsecurity/builders:typescript",
+                    "options": {
+                        "tsConfig": "packages/mosaic/schematics/tsconfig.lib.json",
+                        "outDir": "dist/mosaic/schematics"
                     }
                 }
             }
