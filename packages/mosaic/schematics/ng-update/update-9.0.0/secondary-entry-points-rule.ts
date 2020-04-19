@@ -80,7 +80,6 @@ export class SecondaryEntryPointsRule extends MigrationRule<null> {
 
             if (!moduleName) {
 
-                console.log(`"${element.getText()}" was not found in the Mosaic library.`);
                 this.createFailureAtNode(
                     element, `"${element.getText()}" was not found in the Mosaic library.`);
 

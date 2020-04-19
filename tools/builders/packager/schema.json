@@ -17,6 +17,14 @@
             "type": "string",
             "default": "{{NG_VERSION}}",
             "description": "The placeholder string that gets replaced by the corresponding angular versions for the package in your package.json"
+        },
+        "additionalTargets": {
+            "type": "array",
+            "description": "List of additional targets that should be run",
+            "default": [],
+            "items": {
+                "type": "string"
+            }
         }
     },
     "additionalProperties": false,
