@@ -9,22 +9,20 @@ import {
 } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { COMMA, ENTER, SPACE, TAB } from '@ptsecurity/cdk/keycodes';
 import { McAutocompleteModule, McAutocompleteSelectedEvent } from '@ptsecurity/mosaic/autocomplete';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
-import { McTagList, McTagsModule } from '@ptsecurity/mosaic/tags';
-import { McTagInputEvent } from '@ptsecurity/mosaic/tags/tag-input';
+import { McTagList, McTagsModule, McTagInputEvent } from '@ptsecurity/mosaic/tags';
 import { merge } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 
 @Component({
     selector: 'app',
-    template: require('./template.html'),
-    styleUrls: ['./styles.scss'],
+    templateUrl: 'template.html',
+    styleUrls: ['../main.scss', 'styles.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent implements AfterViewInit {
@@ -188,7 +186,4 @@ export class DemoComponent implements AfterViewInit {
 })
 export class DemoModule {}
 
-platformBrowserDynamic()
-    .bootstrapModule(DemoModule)
-    .catch((error) => console.error(error));
 

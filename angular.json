@@ -1198,6 +1198,47 @@
                 }
             }
         },
+        "dev-tags": {
+            "projectType": "application",
+            "root": "packages/mosaic-dev/tags",
+            "sourceRoot": "packages/mosaic-dev/tags",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/mosaic-dev/tags",
+                        "tsConfig": "packages/mosaic-dev/tags/tsconfig.app.json",
+                        "index": "packages/mosaic-dev/index.html",
+                        "main": "packages/mosaic-dev/tags/main.ts",
+                        "aot": true,
+                        "polyfills": "packages/mosaic-dev/polyfills.ts"
+                    },
+                    "configurations": {
+                        "production": {
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "vendorChunk": false,
+                            "statsJson": true
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "dev-tags:build"
+                    }
+                }
+            }
+        },
         "dev-tree": {
             "projectType": "application",
             "root": "packages/mosaic-dev/tree",
