@@ -150,6 +150,14 @@ jobs:
                   paths:
                       - ./dist/coverage
 
+    test_unit_schematics:
+        <<: *job_defaults
+        steps:
+            - attach_workspace:
+                  at: ~/mosaic
+            - run: yarn run build:schematics-test
+            - run: yarn run unit:schematics
+
     test_unit_mosaic-moment-adapter:
         <<: *job_defaults
         steps:
@@ -254,6 +262,10 @@ workflows:
                       - build_packages
 
             - test_unit_mosaic:
+                  requires:
+                      - build_packages
+
+            - test_unit_schematics:
                   requires:
                       - build_packages
 

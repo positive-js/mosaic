@@ -282,6 +282,20 @@
                 }
             }
         },
+        "schematics-test": {
+            "projectType": "library",
+            "root": "packages/mosaic/schematics",
+            "sourceRoot": "packages/mosaic/schematics",
+            "architect": {
+                "build": {
+                    "builder": "@ptsecurity/builders:typescript",
+                    "options": {
+                        "tsConfig": "packages/mosaic/schematics/tsconfig.lib-test.json",
+                        "outDir": "dist/schematics-test"
+                    }
+                }
+            }
+        },
         "dev-alert": {
             "projectType": "application",
             "root": "packages/mosaic-dev/alert",

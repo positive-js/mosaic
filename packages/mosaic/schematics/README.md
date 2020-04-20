@@ -30,5 +30,6 @@ project with all its dependencies
 
 ### Testing
 
-To run the unit tests with jest you can leverage the angular CLI with:
-`ng test schematics` or in the watch mode `ng test schematics --watch`
+To run the unit tests with Jasmine:
+* Build Schematics `ng build schematics`
+* Run tests `yarn run unit:schematics`
