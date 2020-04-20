@@ -62,12 +62,14 @@
     );
 
     $modal: (
+        mask-background: rgba(0, 0, 0, 0.5),
         shadow: (0 0 0 1px mc-color($second, 300), 0 6px 12px 0 rgba(0, 0, 0, 0.5))
     );
 
     $navbar: (
         background-color: mc-color($primary, 700),
         color: mc-color($primary, 100),
+        opacity: 0.5,
 
         item_color: mc-color($primary, 100),
 
@@ -249,12 +251,14 @@
     $datepicker: ();
 
     $modal: (
+        mask-background: rgba(0, 0, 0, 0.5),
         shadow: (0 0 0 1px mc-color($second, 800), 0 6px 12px 0 rgba(0, 0, 0, 0.5))
     );
 
     $navbar: (
         background-color: mc-color($primary, 700),
         color: mc-color($primary, 100),
+        opacity: 0.5,
 
         item_color: mc-color($primary, 100),
 
