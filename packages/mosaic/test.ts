@@ -61,6 +61,6 @@ function patchTestBedToDestroyFixturesAfterEveryTest(testBedInstance: TestBed) {
 
 declare const require: any;
 
-const context = require.context('./', true, /\.spec\.ts$/);
+const context = require.context('./', true, /^((?!schematics).)*\.spec.ts$/);
 
 context.keys().map(context);
