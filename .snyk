@@ -2,18 +2,6 @@
 version: v1.13.5
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
-  SNYK-JS-USERAGENT-174737:
-    - karma > useragent:
-        reason: нет версии для обновления
-        expires: '2020-05-20T05:33:14.378Z'
-  'npm:ua-parser-js:20180227':
-    - browser-sync > ua-parser-js:
-        reason: нет версии для обновления
-        expires: '2019-10-30T10:00:11.916Z'
-  SNYK-JS-MARKED-451341:
-    - gulp-markdown > marked:
-        reason: затратно править файлы документации
-        expires: '2019-10-30T12:28:17.125Z'
   SNYK-JS-NODESASS-542662:
     - gulp-sass > node-sass:
         reason: None given
@@ -211,4 +199,8 @@ ignore:
     - gulp-sass > node-sass > sass-graph > yargs > yargs-parser:
         reason: None given
         expires: '2020-05-20T05:33:14.378Z'
+  SNYK-JS-USERAGENT-174737:
+    - karma > useragent:
+        reason: None given
+        expires: '2020-05-20T06:18:28.658Z'
 patch: {}
