@@ -44,7 +44,7 @@ let nextUniqueId = 0;
         '[id]': 'id',
         '[attr.disabled]': 'disabled || null',
         '[attr.placeholder]': 'placeholder || null',
-        '(keydown)': 'keydown($event)',
+        '(keydown)': 'onKeydown($event)',
         '(blur)': 'blur()',
         '(focus)': 'onFocus()',
         '(input)': 'onInput()',
@@ -140,8 +140,17 @@ export class McTagInput implements McTagTextControl, OnChanges {
     }
 
     /** Utility method to make host definition/tests more clear. */
-    keydown(event?: KeyboardEvent) {
-        this.emitTagEnd(event);
+    onKeydown(event: KeyboardEvent) {
+        if (!this.inputElement.value) {
+            this._tagList.keydown(event);
+        }
+
+        if (this.isSeparatorKey(event)) {
+            this.emitTagEnd();
+
+            event.preventDefault();
+        }
+
     }
 
     /** Checks to see if the blur should emit the (tagEnd) event. */
@@ -155,7 +164,7 @@ export class McTagInput implements McTagTextControl, OnChanges {
         }
 
         // tslint:disable-next-line: no-unnecessary-type-assertion
-        if (this.addOnBlur && !(this.hasControl() && this.ngControl.invalid)) {
+        if (this.addOnBlur) {
             this.emitTagEnd();
         }
 
@@ -169,18 +178,10 @@ export class McTagInput implements McTagTextControl, OnChanges {
     }
 
     /** Checks to see if the (tagEnd) event needs to be emitted. */
-    emitTagEnd(event?: KeyboardEvent) {
-        if (!this.inputElement.value && !!event) {
-            this._tagList.keydown(event);
-        }
-
-        if (!event || this.isSeparatorKey(event)) {
+    emitTagEnd() {
+        if (!this.hasControl() || (this.hasControl() && !this.ngControl.invalid)) {
             this.tagEnd.emit({ input: this.inputElement, value: this.inputElement.value });
             this.updateInputWidth();
-
-            if (event) {
-                event.preventDefault();
-            }
         }
     }
 
