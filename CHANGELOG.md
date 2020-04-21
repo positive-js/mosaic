@@ -1,3 +1,17 @@
+## 8.4.5 "Timeless Sence" (2020-04-21)
+
+### Mosaic
+
+ * bug fix  **popover:** Popover max width update, fixing start issue (UIM-424) ([#452](https://github.com/positive-js/mosaic/issues/452)) ([a7e4a17](https://github.com/positive-js/mosaic/commit/a7e4a17ae76fa64d058f6de79ceffadf40b92a3b))
+ * bug fix  **tags:** handling keydown and emitTagEnd (#UIM-368) ([#456](https://github.com/positive-js/mosaic/issues/456)) ([b9d48cd](https://github.com/positive-js/mosaic/commit/b9d48cd45c1d17042c64abee37f95d7fdb9a02f9)), closes [#UIM-368](https://github.com/positive-js/mosaic/issues/UIM-368)
+ * bug fix  **tags:** paste does not work (UIM-403) ([#445](https://github.com/positive-js/mosaic/issues/445)) ([db1d3a3](https://github.com/positive-js/mosaic/commit/db1d3a369e39bb683279edee0b945b9e66e4bb43))
+ * bug fix  **tree:** unnexpected focus on scroll (#UIM-375) ([#442](https://github.com/positive-js/mosaic/issues/442)) ([e40a119](https://github.com/positive-js/mosaic/commit/e40a119314f2c1f541e84a30876665fe8aa36814)), closes [#UIM-375](https://github.com/positive-js/mosaic/issues/UIM-375)
+
+### Docs
+
+ * bug fix  angular version for stackblitz ([90ee01f](https://github.com/positive-js/mosaic/commit/90ee01f756b418a7e54125bb2f52a315b49db057))
+ * feature  adding checklist tree example  (#UIM-391) ([#429](https://github.com/positive-js/mosaic/issues/429)) ([bfaaa8e](https://github.com/positive-js/mosaic/commit/bfaaa8e83e2cd8cfa357568b20cee3b018ae5413)), closes [#UIM-391](https://github.com/positive-js/mosaic/issues/UIM-391)
+
 ## 8.4.4 "Walk Up Candlemas" (2020-03-19)
 
 ### Mosaic
