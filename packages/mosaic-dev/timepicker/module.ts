@@ -3,9 +3,8 @@ import {
     NgModule,
     ViewEncapsulation
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McTimepickerModule } from '@ptsecurity/mosaic/timepicker';
@@ -28,13 +27,22 @@ const moment = _rollupMoment || _moment;
 
 @Component({
     selector: 'app',
-    styleUrls: ['./styles.css'],
-    template: require('./template.html'),
+    styleUrls: ['../main.scss', 'styles.scss'],
+    templateUrl: 'template.html',
     encapsulation: ViewEncapsulation.None
 })
 export class TimepickerDemoComponent {
     timeValue: Moment = moment('2000-10-01 12:00:00');
     isDisabled: boolean = false;
+
+    timeFormat = 'HH:mm';
+    testForm: FormGroup;
+
+    constructor(private fb: FormBuilder) {
+        this.testForm = this.fb.group({
+            time: [moment('2000-10-01 12:00:00')]
+        });
+    }
 
     toggleDisable() {
         this.isDisabled = !this.isDisabled;
@@ -52,15 +60,12 @@ export class TimepickerDemoComponent {
         McFormFieldModule,
         McButtonModule,
         McIconModule,
-        McMomentDateModule
+        McMomentDateModule,
+        ReactiveFormsModule
     ],
     bootstrap: [
         TimepickerDemoComponent
     ]
 })
-export class TimepickerDemoModule {}
+export class DemoModule {}
 
-
-platformBrowserDynamic()
-    .bootstrapModule(TimepickerDemoModule)
-    .catch((error) => console.error(error)); // tslint:disable-line no-console

@@ -1239,6 +1239,47 @@
                 }
             }
         },
+        "dev-timepicker": {
+            "projectType": "application",
+            "root": "packages/mosaic-dev/timepicker",
+            "sourceRoot": "packages/mosaic-dev/timepicker",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/mosaic-dev/timepicker",
+                        "tsConfig": "packages/mosaic-dev/timepicker/tsconfig.app.json",
+                        "index": "packages/mosaic-dev/index.html",
+                        "main": "packages/mosaic-dev/timepicker/main.ts",
+                        "aot": true,
+                        "polyfills": "packages/mosaic-dev/polyfills.ts"
+                    },
+                    "configurations": {
+                        "production": {
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "vendorChunk": false,
+                            "statsJson": true
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "dev-timepicker:build"
+                    }
+                }
+            }
+        },
         "dev-tree": {
             "projectType": "application",
             "root": "packages/mosaic-dev/tree",
