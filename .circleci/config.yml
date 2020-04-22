@@ -88,7 +88,7 @@ jobs:
                   paths:
                       - .
 
-    build_mosaic_docs:
+    build_mosaic_docs_for_preview:
         <<: *job_defaults
         steps:
             - attach_workspace:
@@ -100,7 +100,6 @@ jobs:
                       echo 'export SHORT_GIT_HASH=$(git rev-parse --short=7 $CIRCLE_SHA1)' >> $BASH_ENV
                       echo 'export CIRCLE_PULL_REQUEST_NUMBER=$(echo "$CIRCLE_PULL_REQUEST" | cut -d"/" -f7)' >> $BASH_ENV
                       source $BASH_ENV
-            - run: printenv
             - run: yarn run build:mosaic-examples-module
             - run: yarn run build:mosaic-examples
             - run: yarn run build:docs
@@ -178,6 +177,20 @@ jobs:
                   paths:
                       - ./dist/coverage
 
+    deploy-docs-next:
+        <<: *job_defaults
+        steps:
+            - attach_workspace:
+                at: ~/mosaic
+            - run: yarn run build:mosaic-examples-module
+            - run: yarn run build:mosaic-examples
+            - run: yarn run build:docs
+            - run: yarn run docs:prod-build:aot
+            - run:
+                name: Deploy "Next" version of Docs
+                command: npx firebase deploy --only hosting:next --token=$FIREBASE_DEPLOY_TOKEN
+
+
     sonar:
         <<: *job_defaults
         steps:
@@ -235,7 +248,7 @@ workflows:
             # 1 Group
             - install
 
-            # 2 Group
+            # 2 Group Validators
             - dependencies_audit:
                   requires:
                       - install
@@ -246,13 +259,13 @@ workflows:
                   requires:
                       - install
 
-            # 3 Group
+            # 3 Group Build All Packages
             - build_packages:
                   requires:
                       - validate_licenses
                       - dependencies_audit
 
-            # 6 Group
+            # 6 Group Unit Tests
             - test_unit_cdk:
                   requires:
                       - build_packages
@@ -269,11 +282,16 @@ workflows:
                   requires:
                       - build_packages
 
-            - build_mosaic_docs:
+            - build_mosaic_docs_for_preview:
                   requires:
                       - test_unit_mosaic
                       - test_unit_cdk
                       - test_unit_mosaic-moment-adapter
+                      - test_unit_schematics
+                  filters:
+                      branches:
+                          ignore:
+                              - master
 
             # 7 Group
 
@@ -283,12 +301,25 @@ workflows:
                       - test_unit_cdk
                       - test_unit_mosaic-moment-adapter
                       - test_unit_mosaic
+                      - test_unit_schematics
 
             - snapshot_publish:
                   requires:
                       - test_unit_cdk
                       - test_unit_mosaic-moment-adapter
                       - test_unit_mosaic
+                      - test_unit_schematics
+                  filters:
+                      branches:
+                          only:
+                              - master
+
+            - deploy-docs-next:
+                  requires:
+                      - test_unit_mosaic
+                      - test_unit_cdk
+                      - test_unit_mosaic-moment-adapter
+                      - test_unit_schematics
                   filters:
                       branches:
                           only:
@@ -296,7 +327,11 @@ workflows:
 
             - preview_mosaic_docs:
                   requires:
-                      - build_mosaic_docs
+                      - build_mosaic_docs_for_preview
+                  filters:
+                      branches:
+                          ignore:
+                              - master
 
             - cleanup_preview_mosaic_docs:
                   requires:

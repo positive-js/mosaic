@@ -8,8 +8,17 @@
                 "stable": [
                     "mosaic-stable"
                 ],
+                "next": [
+                    "mosaic-next"
+                ],
                 "v8": [
                     "mosaic-v8"
+                ],
+                "v9": [
+                    "mosaic-v9"
+                ],
+                "v10": [
+                    "mosaic-v10"
                 ]
             }
         }
