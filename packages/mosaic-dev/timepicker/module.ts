@@ -3,7 +3,7 @@ import {
     NgModule,
     ViewEncapsulation
 } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
@@ -32,7 +32,9 @@ const moment = _rollupMoment || _moment;
     encapsulation: ViewEncapsulation.None
 })
 export class TimepickerDemoComponent {
-    timeValue: Moment = moment('2000-10-01 12:00:00');
+    minDate = moment('2020-04-22 12:00:00');
+    maxDate = moment('2000-10-01 15:00:00');
+    timeValue = new FormControl(moment('2000-10-01 12:00:00'), Validators.min(this.minDate));
     isDisabled: boolean = false;
 
     timeFormat = 'HH:mm';
