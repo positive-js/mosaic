@@ -1,0 +1,15 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "outDir": "../../../dist/out-tsc",
+        "module": "commonjs",
+        "target": "es2015",
+        "declaration": true,
+        "inlineSources": true
+    },
+    "exclude": [
+        "**/*.spec.ts",
+        "testing/**/*.ts",
+        "ng-update/test-cases/**/*"
+    ]
+}

@@ -4,3 +4,4 @@
 import './tasks/lint';
 import './tasks/docs';
 import './tasks/styles';
+import './tasks/schematic';

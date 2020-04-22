@@ -1,6 +1,6 @@
 /* tslint:disable:naming-convention */
 // tslint:disable:no-console
-import chalk from 'chalk';
+import { green, yellow, bold } from 'chalk';
 import { createReadStream, createWriteStream, readFileSync } from 'fs';
 import { prompt } from 'inquirer';
 import { join } from 'path';
@@ -130,7 +130,7 @@ function createChangelogWriterOptions(changelogPath: string, presetWriterOptions
                     // Filter out duplicate commits. Note that we cannot compare the SHA because the commits
                     // will have a different SHA if they are being cherry-picked into a different branch.
                     if (existingChangelogContent.includes(commit.subject)) {
-                        console.log(chalk.yellow(`  ↺   Skipping duplicate: "${chalk.bold(commit.header)}"`));
+                        console.log(yellow(`  ↺   Skipping duplicate: "${bold(commit.header)}"`));
 
                         return false;
                     }
@@ -238,7 +238,7 @@ String.prototype.capitalize = function() {
 /** Entry-point for generating the changelog when called through the CLI. */
 if (require.main === module) {
     promptAndGenerateChangelog(join(__dirname, '../../CHANGELOG.md')).then(() => {
-        console.log(chalk.green('  ✓   Successfully updated the changelog.'));
+        console.log(green('  ✓   Successfully updated the changelog.'));
     });
 }
 

@@ -5,7 +5,7 @@ import {
 } from '@angular-devkit/architect';
 import { NgPackagrBuilderOptions } from '@angular-devkit/build-ng-packagr';
 import { Schema as AngularJson } from '@angular/cli/lib/config/schema';
-import chalk from 'chalk';
+import { green } from 'chalk';
 import { promises as fs, writeFileSync } from 'fs';
 import { dirname, join, resolve } from 'path';
 
@@ -112,7 +112,22 @@ export async function packager(options: IPackagerOptions, context: BuilderContex
             { encoding: 'utf-8' }
         );
 
-        context.logger.info(chalk.green(' ✔ Packaging done!'));
+        for (const additionalTargetName of options.additionalTargets) {
+
+            context.logger.info(`Running additional target: ${additionalTargetName}`);
+
+            const additionalTargetBuild = await context.scheduleTarget(
+                parseAdditionalTargets(additionalTargetName)
+            );
+
+            const additionalTargetBuildResult = await additionalTargetBuild.result;
+
+            if (!additionalTargetBuildResult.success) {
+                throw new Error(`Running target '${additionalTargetName}' failed!`);
+            }
+        }
+
+        context.logger.info(green(' ✔ Packaging done!'));
 
         return { success: buildResult.success };
     } catch (error) {
@@ -187,5 +202,11 @@ async function tryJsonParse<T>(path: string): Promise<T> {
     } catch (err) {
         throw new Error(`Error while parsing json file at ${path}`);
     }
+}
+
+function parseAdditionalTargets(targetRef: string): { target: string; project: string } {
+    const [project, target] = targetRef.split(':');
+
+    return { project, target };
 }
 

@@ -2,16 +2,205 @@
 version: v1.13.5
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
+  SNYK-JS-NODESASS-542662:
+    - gulp-sass > node-sass:
+        reason: None given
+        expires: '2020-05-20T05:33:14.376Z'
+  SNYK-JS-MINIMIST-559764:
+    - madge > detective-less > gonzales-pe > minimist:
+        reason: None given
+        expires: '2020-05-20T05:33:14.376Z'
+    - madge > detective-sass > gonzales-pe > minimist:
+        reason: None given
+        expires: '2020-05-20T05:33:14.376Z'
+    - madge > detective-scss > gonzales-pe > minimist:
+        reason: None given
+        expires: '2020-05-20T05:33:14.376Z'
+    - madge > dependency-tree > precinct > detective-less > gonzales-pe > minimist:
+        reason: None given
+        expires: '2020-05-20T05:33:14.376Z'
+    - madge > dependency-tree > precinct > detective-sass > gonzales-pe > minimist:
+        reason: None given
+        expires: '2020-05-20T05:33:14.377Z'
+    - madge > dependency-tree > precinct > detective-scss > gonzales-pe > minimist:
+        reason: None given
+        expires: '2020-05-20T05:33:14.377Z'
+    - dgeni > optimist > minimist:
+        reason: None given
+        expires: '2020-05-20T05:33:14.377Z'
+    - karma > optimist > minimist:
+        reason: None given
+        expires: '2020-05-20T05:33:14.377Z'
+    - dgeni-packages > dgeni > optimist > minimist:
+        reason: None given
+        expires: '2020-05-20T05:33:14.377Z'
+    - conventional-changelog > conventional-changelog-core > conventional-changelog-writer > handlebars > optimist > minimist:
+        reason: None given
+        expires: '2020-05-20T05:33:14.377Z'
+  SNYK-JS-DOTPROP-543489:
+    - conventional-changelog > conventional-changelog-angular > compare-func > dot-prop:
+        reason: None given
+        expires: '2020-05-20T05:33:14.377Z'
+    - conventional-changelog > conventional-changelog-conventionalcommits > compare-func > dot-prop:
+        reason: None given
+        expires: '2020-05-20T05:33:14.377Z'
+    - conventional-changelog > conventional-changelog-jshint > compare-func > dot-prop:
+        reason: None given
+        expires: '2020-05-20T05:33:14.377Z'
+    - conventional-changelog > conventional-changelog-core > conventional-changelog-writer > compare-func > dot-prop:
+        reason: None given
+        expires: '2020-05-20T05:33:14.377Z'
+    - '@commitlint/cli > @commitlint/lint > @commitlint/parse > conventional-changelog-angular > compare-func > dot-prop':
+        reason: None given
+        expires: '2020-05-20T05:33:14.377Z'
+    - firebase-tools > update-notifier > configstore > dot-prop:
+        reason: None given
+        expires: '2020-05-20T05:33:14.377Z'
+    - firebase-tools > superstatic > update-notifier > configstore > dot-prop:
+        reason: None given
+        expires: '2020-05-20T05:33:14.377Z'
+  SNYK-JS-NODESASS-535497:
+    - gulp-sass > node-sass:
+        reason: None given
+        expires: '2020-05-20T05:33:14.377Z'
+    - node-sass:
+        reason: None given
+        expires: '2020-05-20T05:33:14.378Z'
+  SNYK-JS-NODESASS-535498:
+    - gulp-sass > node-sass:
+        reason: None given
+        expires: '2020-05-20T05:33:14.377Z'
+    - node-sass:
+        reason: None given
+        expires: '2020-05-20T05:33:14.378Z'
+  SNYK-JS-NODESASS-535502:
+    - gulp-sass > node-sass:
+        reason: None given
+        expires: '2020-05-20T05:33:14.377Z'
+    - node-sass:
+        reason: None given
+        expires: '2020-05-20T05:33:14.378Z'
+  SNYK-JS-NODESASS-540956:
+    - gulp-sass > node-sass:
+        reason: None given
+        expires: '2020-05-20T05:33:14.377Z'
+    - node-sass:
+        reason: None given
+        expires: '2020-05-20T05:33:14.378Z'
+  SNYK-JS-NODESASS-540958:
+    - gulp-sass > node-sass:
+        reason: None given
+        expires: '2020-05-20T05:33:14.377Z'
+    - node-sass:
+        reason: None given
+        expires: '2020-05-20T05:33:14.378Z'
+  SNYK-JS-NODESASS-540964:
+    - gulp-sass > node-sass:
+        reason: None given
+        expires: '2020-05-20T05:33:14.377Z'
+    - node-sass:
+        reason: None given
+        expires: '2020-05-20T05:33:14.378Z'
+  SNYK-JS-NODESASS-540974:
+    - gulp-sass > node-sass:
+        reason: None given
+        expires: '2020-05-20T05:33:14.377Z'
+    - node-sass:
+        reason: None given
+        expires: '2020-05-20T05:33:14.378Z'
+  SNYK-JS-NODESASS-540978:
+    - gulp-sass > node-sass:
+        reason: None given
+        expires: '2020-05-20T05:33:14.377Z'
+    - node-sass:
+        reason: None given
+        expires: '2020-05-20T05:33:14.378Z'
+  SNYK-JS-NODESASS-540980:
+    - gulp-sass > node-sass:
+        reason: None given
+        expires: '2020-05-20T05:33:14.377Z'
+    - node-sass:
+        reason: None given
+        expires: '2020-05-20T05:33:14.378Z'
+  SNYK-JS-NODESASS-540990:
+    - gulp-sass > node-sass:
+        reason: None given
+        expires: '2020-05-20T05:33:14.377Z'
+    - node-sass:
+        reason: None given
+        expires: '2020-05-20T05:33:14.378Z'
+  SNYK-JS-NODESASS-540992:
+    - gulp-sass > node-sass:
+        reason: None given
+        expires: '2020-05-20T05:33:14.377Z'
+    - node-sass:
+        reason: None given
+        expires: '2020-05-20T05:33:14.378Z'
+  SNYK-JS-NODESASS-540994:
+    - gulp-sass > node-sass:
+        reason: None given
+        expires: '2020-05-20T05:33:14.378Z'
+    - node-sass:
+        reason: None given
+        expires: '2020-05-20T05:33:14.378Z'
+  SNYK-JS-NODESASS-540996:
+    - gulp-sass > node-sass:
+        reason: None given
+        expires: '2020-05-20T05:33:14.378Z'
+    - node-sass:
+        reason: None given
+        expires: '2020-05-20T05:33:14.378Z'
+  SNYK-JS-NODESASS-540998:
+    - gulp-sass > node-sass:
+        reason: None given
+        expires: '2020-05-20T05:33:14.378Z'
+    - node-sass:
+        reason: None given
+        expires: '2020-05-20T05:33:14.378Z'
+  SNYK-JS-NODESASS-541000:
+    - gulp-sass > node-sass:
+        reason: None given
+        expires: '2020-05-20T05:33:14.378Z'
+    - node-sass:
+        reason: None given
+        expires: '2020-05-20T05:33:14.378Z'
+  SNYK-JS-NODESASS-541002:
+    - gulp-sass > node-sass:
+        reason: None given
+        expires: '2020-05-20T05:33:14.378Z'
+    - node-sass:
+        reason: None given
+        expires: '2020-05-20T05:33:14.378Z'
+  SNYK-JS-YARGSPARSER-560381:
+    - '@angular-devkit/build-angular > webpack-dev-server > yargs > yargs-parser':
+        reason: None given
+        expires: '2020-05-20T05:33:14.378Z'
+    - '@commitlint/cli > meow > yargs-parser':
+        reason: None given
+        expires: '2020-05-20T05:33:14.378Z'
+    - conventional-changelog > conventional-changelog-core > conventional-changelog-writer > meow > yargs-parser:
+        reason: None given
+        expires: '2020-05-20T05:33:14.378Z'
+    - conventional-changelog > conventional-changelog-core > conventional-commits-parser > meow > yargs-parser:
+        reason: None given
+        expires: '2020-05-20T05:33:14.378Z'
+    - conventional-changelog > conventional-changelog-core > git-semver-tags > meow > yargs-parser:
+        reason: None given
+        expires: '2020-05-20T05:33:14.378Z'
+    - gulp-cli > yargs > yargs-parser:
+        reason: None given
+        expires: '2020-05-20T05:33:14.378Z'
+    - gulp > gulp-cli > yargs > yargs-parser:
+        reason: None given
+        expires: '2020-05-20T05:33:14.378Z'
+    - node-sass > sass-graph > yargs > yargs-parser:
+        reason: None given
+        expires: '2020-05-20T05:33:14.378Z'
+    - gulp-sass > node-sass > sass-graph > yargs > yargs-parser:
+        reason: None given
+        expires: '2020-05-20T05:33:14.378Z'
   SNYK-JS-USERAGENT-174737:
     - karma > useragent:
-        reason: нет версии для обновления
-        expires: '2019-10-30T10:00:11.916Z'
-  'npm:ua-parser-js:20180227':
-    - browser-sync > ua-parser-js:
-        reason: нет версии для обновления
-        expires: '2019-10-30T10:00:11.916Z'
-  SNYK-JS-MARKED-451341:
-    - gulp-markdown > marked:
-        reason: затратно править файлы документации
-        expires: '2019-10-30T12:28:17.125Z'
+        reason: None given
+        expires: '2020-05-20T06:18:28.658Z'
 patch: {}

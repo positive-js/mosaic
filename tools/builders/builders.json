@@ -5,6 +5,11 @@
             "implementation": "./packager",
             "schema": "./packager/schema.json",
             "description": "Packaging"
+        },
+        "typescript": {
+            "implementation": "./typescript",
+            "schema": "./typescript/schema.json",
+            "description": "Compiles typescript files using tsc"
         }
     }
 }

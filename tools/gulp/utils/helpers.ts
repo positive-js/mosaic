@@ -1,9 +1,14 @@
 // tslint:disable:no-var-requires
 import * as child_process from 'child_process';
+import { src, TaskFunction } from 'gulp';
 
 
+const gulpClean = require('gulp-clean');
 const resolveBin = require('resolve-bin');
 
+export function cleanTask(glob: string | string[]): TaskFunction {
+    return () => src(glob, { read: false, allowEmpty: true }).pipe(gulpClean(null));
+}
 
 export function execTask(binPath: string, args: string[], options: IExecTaskOptions = {}) {
     return (done: (err?: string) => void) => {

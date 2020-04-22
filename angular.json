@@ -197,7 +197,8 @@
                     "options": {
                         "buildTarget": "packagr",
                         "versionPlaceholder": "{{VERSION}}",
-                        "ngVersionPlaceholder": "{{NG_VERSION}}"
+                        "ngVersionPlaceholder": "{{NG_VERSION}}",
+                        "additionalTargets": ["schematics:build"]
                     }
                 },
                 "test": {
@@ -208,6 +209,9 @@
                         "tsConfig": "packages/mosaic/tsconfig.spec.json",
                         "codeCoverage": true
                     }
+                },
+                "configurations": {
+                    "production": {}
                 }
             }
         },
@@ -260,6 +264,34 @@
                         "buildTarget": "packagr",
                         "versionPlaceholder": "{{VERSION}}",
                         "ngVersionPlaceholder": "{{NG_VERSION}}"
+                    }
+                }
+            }
+        },
+        "schematics": {
+            "projectType": "library",
+            "root": "packages/mosaic/schematics",
+            "sourceRoot": "packages/mosaic/schematics",
+            "architect": {
+                "build": {
+                    "builder": "@ptsecurity/builders:typescript",
+                    "options": {
+                        "tsConfig": "packages/mosaic/schematics/tsconfig.lib.json",
+                        "outDir": "dist/mosaic/schematics"
+                    }
+                }
+            }
+        },
+        "schematics-test": {
+            "projectType": "library",
+            "root": "packages/mosaic/schematics",
+            "sourceRoot": "packages/mosaic/schematics",
+            "architect": {
+                "build": {
+                    "builder": "@ptsecurity/builders:typescript",
+                    "options": {
+                        "tsConfig": "packages/mosaic/schematics/tsconfig.lib-test.json",
+                        "outDir": "dist/schematics-test"
                     }
                 }
             }
@@ -1162,6 +1194,47 @@
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
                         "browserTarget": "dev-progress-bar:build"
+                    }
+                }
+            }
+        },
+        "dev-tags": {
+            "projectType": "application",
+            "root": "packages/mosaic-dev/tags",
+            "sourceRoot": "packages/mosaic-dev/tags",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/mosaic-dev/tags",
+                        "tsConfig": "packages/mosaic-dev/tags/tsconfig.app.json",
+                        "index": "packages/mosaic-dev/index.html",
+                        "main": "packages/mosaic-dev/tags/main.ts",
+                        "aot": true,
+                        "polyfills": "packages/mosaic-dev/polyfills.ts"
+                    },
+                    "configurations": {
+                        "production": {
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "vendorChunk": false,
+                            "statsJson": true
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "dev-tags:build"
                     }
                 }
             }

@@ -11,6 +11,7 @@
         "./*/index.ts"
     ],
     "exclude": [
-        "schematics/**/*.ts"
+        "schematics/**/*.ts",
+        "schematics/**/*.spec.ts"
     ]
 }

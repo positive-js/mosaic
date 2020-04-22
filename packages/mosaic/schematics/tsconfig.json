@@ -1,39 +1,21 @@
 {
+    "extends": "../../../tsconfig.json",
     "compilerOptions": {
-        "lib": [
-            "es2017"
-        ],
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "outDir": "../../../dist/packages/mosaic/schematics",
-        "noEmitOnError": false,
-        "strictNullChecks": true,
-        "skipDefaultLibCheck": true,
-        "noUnusedLocals": false,
-        "noUnusedParameters": false,
-        "skipLibCheck": true,
-        "sourceMap": true,
-        "declaration": true,
+        "rootDir": ".",
+        "resolveJsonModule": true,
+        "downlevelIteration": true,
         "target": "es6",
         "types": [
-            "jasmine",
-            "node"
-        ],
-        "baseUrl": ".",
-        "paths": {
-            "@ptsecurity/cdk/schematics": [
-                "../../cdk/schematics"
-            ]
-        }
+            "node",
+            "jasmine"
+        ]
     },
-    "references": [
-        {
-            "path": "../../cdk/schematics"
-        }
+    "files": [
+        "./collection.json",
+        "./migration.json"
     ],
-    "exclude": [
-        "**/*.spec.ts",
-        // Exclude the test-setup utility files. Those should not be part of the output.
-        "test-setup/**/*.ts"
+    "include": [
+        "**/*.ts",
+        "**/*.json"
     ]
 }

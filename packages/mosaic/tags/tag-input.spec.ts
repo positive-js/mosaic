@@ -60,7 +60,7 @@ describe('McTagInput', () => {
 
             spyOn(testTagInput, 'add');
 
-            tagInputDirective.keydown(ENTER_EVENT);
+            tagInputDirective.onKeydown(ENTER_EVENT);
             expect(testTagInput.add).toHaveBeenCalled();
         });
 
@@ -134,7 +134,7 @@ describe('McTagInput', () => {
             tagInputDirective.separatorKeyCodes = [COMMA];
             fixture.detectChanges();
 
-            tagInputDirective.keydown(ENTER_EVENT);
+            tagInputDirective.onKeydown(ENTER_EVENT);
             expect(testTagInput.add).not.toHaveBeenCalled();
         });
 
@@ -145,7 +145,7 @@ describe('McTagInput', () => {
             tagInputDirective.separatorKeyCodes = [COMMA];
             fixture.detectChanges();
 
-            tagInputDirective.keydown(COMMA_EVENT);
+            tagInputDirective.onKeydown(COMMA_EVENT);
             expect(testTagInput.add).toHaveBeenCalled();
         });
 
@@ -156,7 +156,7 @@ describe('McTagInput', () => {
             tagInputDirective.separatorKeyCodes = [COMMA];
             fixture.detectChanges();
 
-            tagInputDirective.keydown(COMMA_EVENT);
+            tagInputDirective.onKeydown(COMMA_EVENT);
             expect(testTagInput.add).toHaveBeenCalled();
         });
 
@@ -187,7 +187,7 @@ describe('McTagInput', () => {
             spyOn(testTagInput, 'add');
             fixture.detectChanges();
 
-            tagInputDirective.keydown(createKeyboardEvent('keydown', COMMA, inputNativeElement));
+            tagInputDirective.onKeydown(createKeyboardEvent('keydown', COMMA, inputNativeElement));
             expect(testTagInput.add).toHaveBeenCalled();
         });
 
@@ -199,7 +199,7 @@ describe('McTagInput', () => {
             tagInputDirective.separatorKeyCodes = [ENTER];
             fixture.detectChanges();
 
-            tagInputDirective.keydown(ENTER_EVENT);
+            tagInputDirective.onKeydown(ENTER_EVENT);
             expect(testTagInput.add).not.toHaveBeenCalled();
         });
     });
