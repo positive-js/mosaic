@@ -34,7 +34,8 @@ const moment = _rollupMoment || _moment;
 export class TimepickerDemoComponent {
     minDate = moment('2020-04-22 12:00:00');
     maxDate = moment('2000-10-01 15:00:00');
-    timeValue = new FormControl(moment('2000-10-01 12:00:00'), Validators.min(this.minDate));
+    // timeValue = new FormControl(moment('2000-10-01 12:00:00'), Validators.min(this.minDate));
+    timeValue = new FormControl(moment('2000-10-01 12:00:00'));
     isDisabled: boolean = false;
 
     timeFormat = 'HH:mm';

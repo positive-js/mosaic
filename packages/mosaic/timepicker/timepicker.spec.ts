@@ -18,8 +18,6 @@ import * as _moment from 'moment';
 import { default as _rollupMoment, Moment } from 'moment';
 
 import {
-    ARROW_DOWN_KEYCODE,
-    ARROW_UP_KEYCODE,
     McTimepicker,
     McTimepickerModule
 } from './index';

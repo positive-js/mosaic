@@ -1,6 +1,5 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
-    AfterContentInit,
     Directive,
     ElementRef,
     forwardRef,
@@ -14,7 +13,6 @@ import {
     ControlValueAccessor,
     NG_VALIDATORS,
     NG_VALUE_ACCESSOR,
-    NgControl,
     ValidationErrors,
     Validator,
     ValidatorFn,
@@ -26,10 +24,6 @@ import { McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { noop, Subject } from 'rxjs';
 
 import {
-    ARROW_DOWN_KEYCODE,
-    ARROW_LEFT_KEYCODE,
-    ARROW_RIGHT_KEYCODE,
-    ARROW_UP_KEYCODE,
     DEFAULT_TIME_FORMAT,
     HOURS_PER_DAY,
     HOURS_MINUTES_REGEXP,
@@ -88,7 +82,7 @@ let uniqueComponentIdSuffix: number = 0;
         { provide: McFormFieldControl, useExisting: McTimepicker }
     ]
 })
-export class McTimepicker<D> implements AfterContentInit, McFormFieldControl<D>, OnDestroy, ControlValueAccessor, Validator {
+export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, ControlValueAccessor, Validator {
     /**
      * Implemented as part of McFormFieldControl.
      * @docs-private
@@ -112,10 +106,11 @@ export class McTimepicker<D> implements AfterContentInit, McFormFieldControl<D>,
      * @docs-private
      */
     @Input() placeholder: string;
+    private lastValueValid = false;
 
     @Input()
     get disabled(): boolean {
-        return !!this._disabled;
+        return this._disabled;
     }
 
     set disabled(value: boolean) {
@@ -171,7 +166,9 @@ export class McTimepicker<D> implements AfterContentInit, McFormFieldControl<D>,
 
         this.placeholder = TIMEFORMAT_PLACEHOLDERS[this._format];
 
-        setTimeout(() => this.applyInputChanges({ doTimestringReformat: true }));
+        if (this.value) {
+            this.updateView();
+        }
     }
 
     private _format: TimeFormats;
@@ -206,44 +203,30 @@ export class McTimepicker<D> implements AfterContentInit, McFormFieldControl<D>,
     }
 
     set value(value: D | null) {
-        console.log('value');
-        this._value = this.getValidDateOrNull(this.dateAdapter.deserialize(value));
+        let newValue = this.dateAdapter.deserialize(value);
+        this.lastValueValid = !newValue || this.dateAdapter.isValid(newValue);
+        newValue = this.getValidDateOrNull(newValue);
+        const oldDate = this.value;
+        this._value = newValue;
 
-        this.renderer.setProperty(
-            this.elementRef.nativeElement,
-            'value',
-            this.getTimeStringFromDate(value, this.format)
-        );
+        // if (!this.dateAdapter.sameDate(oldDate, newValue)) {
+        //     this.valueChange.emit(value);
+        // }
+
+        this.updateView();
     }
 
     private _value: D | null;
 
     readonly errorState: boolean;
 
-    get ngControl(): NgControl | null {
-        return this._ngControl;
-    }
-
-    set ngControl(value: NgControl | null) {
-        this._ngControl = value;
-    }
-
-    private _ngControl: NgControl | null;
-
     private readonly uid = `mc-timepicker-${uniqueComponentIdSuffix++}`;
-    private readonly inputValueAccessor: { value: any };
+    private validator: ValidatorFn | null;
 
-    private originalValue: any;
     private previousNativeValue: any;
-    private currentDateTimeInput: D | undefined;
 
     private onChange: (value: any) => void;
     private onTouched: () => void;
-
-    /** The combined form control validator for this input. */
-    private validator: ValidatorFn | null = Validators.compose(
-        [this.parseValidator, this.minTimeValidator, this.maxTimeValidator]
-    );
 
     constructor(
         private readonly elementRef: ElementRef,
@@ -258,6 +241,8 @@ export class McTimepicker<D> implements AfterContentInit, McFormFieldControl<D>,
             throw Error(`McTimepicker: No provider found for DateAdapter. You must import one of the existing ` +
                 `modules at your application root or provide a custom implementation or use exists ones.`);
         }
+
+        this.validator = Validators.compose([this.parseValidator, this.minValidator, this.maxValidator]);
 
         this.previousNativeValue = this._value;
         this.onChange = noop;
@@ -285,7 +270,6 @@ export class McTimepicker<D> implements AfterContentInit, McFormFieldControl<D>,
     }
 
     onBlur() {
-        this.applyInputChanges();
         this.focusChanged(false);
     }
 
@@ -300,41 +284,39 @@ export class McTimepicker<D> implements AfterContentInit, McFormFieldControl<D>,
     }
 
     onInput() {
+        console.log('onInput');
         const initialCursorStart: number = this.elementRef.nativeElement.selectionStart;
         const initialCursorEnd: number = this.elementRef.nativeElement.selectionEnd;
         let isAutocompleteTriggered: boolean = false;
 
-        const {
-            hoursOnly,
-            hoursAndMinutes,
-            hoursAndMinutesAndSeconds
-        } = this.getParsedTimeParts(this.elementRef.nativeElement._value);
+        const { hoursOnly, hoursAndMinutes, hoursAndMinutesAndSeconds } = this.getParsedTimeParts(
+            this.elementRef.nativeElement.value
+        );
 
         // tslint:disable no-magic-numbers
-        if (hoursOnly &&
-            hoursOnly[1] &&
-            hoursOnly[1].length === 2) {
+        if (hoursOnly && hoursOnly[1] && hoursOnly[1].length === 2) {
             isAutocompleteTriggered = true;
-        } else if (hoursAndMinutes &&
-            hoursAndMinutes[1].length === 1 &&
-            hoursAndMinutes[2] &&
-            hoursAndMinutes[2].length === 2) {
+        } else if (
+            hoursAndMinutes && hoursAndMinutes[1].length === 1 && hoursAndMinutes[2] && hoursAndMinutes[2].length === 2
+        ) {
             isAutocompleteTriggered = true;
-        } else if (hoursAndMinutesAndSeconds &&
+        } else if (
+            hoursAndMinutesAndSeconds &&
             hoursAndMinutesAndSeconds[1].length === 2 &&
             hoursAndMinutesAndSeconds[2].length === 2 &&
             hoursAndMinutesAndSeconds[3] &&
-            hoursAndMinutesAndSeconds[3].length === 2) {
+            hoursAndMinutesAndSeconds[3].length === 2
+        ) {
             isAutocompleteTriggered = true;
         }
         // tslint:enable no-magic-numbers
 
-        this.applyInputChanges({ doTimestringReformat: isAutocompleteTriggered });
+        if (isAutocompleteTriggered) {
+            this.applyInputChanges();
 
-        this.elementRef.nativeElement.selectionStart = initialCursorStart;
-        this.elementRef.nativeElement.selectionEnd = initialCursorEnd;
+            this.elementRef.nativeElement.selectionStart = initialCursorStart;
+            this.elementRef.nativeElement.selectionEnd = initialCursorEnd;
 
-        if (isAutocompleteTriggered && this._ngControl.errors === null) {
             this.createSelectionOfTimeComponentInInput(initialCursorStart + 1);
         }
     }
@@ -356,14 +338,16 @@ export class McTimepicker<D> implements AfterContentInit, McFormFieldControl<D>,
     }
 
     onKeyDown(event: KeyboardEvent): void {
-        const keyCode: number = parseInt(event.key);
+        const keyCode = event.keyCode;
 
         if ([UP_ARROW, DOWN_ARROW].includes(keyCode)) {
-            this.upDownTimeByArrowKeys(event);
+            event.preventDefault();
+
+            this.verticalArrowKeyHandler(keyCode);
         }
 
         if ([LEFT_ARROW, RIGHT_ARROW].includes(keyCode)) {
-            this.switchSelectionBetweenTimeparts(event);
+            this.horizontalArrowKeyHandler(keyCode);
         }
     }
 
@@ -372,7 +356,6 @@ export class McTimepicker<D> implements AfterContentInit, McFormFieldControl<D>,
         return this.validator ? this.validator(control) : null;
     }
 
-    /** @docs-private */
     registerOnValidatorChange(fn: () => void): void {
         this.validatorOnChange = fn;
     }
@@ -400,13 +383,12 @@ export class McTimepicker<D> implements AfterContentInit, McFormFieldControl<D>,
         return validity && validity.badInput;
     }
 
-    private applyInputChanges(applyParams: { changedTime?: D; doTimestringReformat?: boolean } = {}): void {
-        const { changedTime, doTimestringReformat = true } = applyParams;
-        const timeToApply: D | undefined = changedTime ||
-            this.getDateFromTimeString(this.elementRef.nativeElement._value);
-        this.currentDateTimeInput = timeToApply;
+    private applyInputChanges(): void {
+        console.log('applyInputChanges');
 
-        if (doTimestringReformat && timeToApply !== undefined) {
+        const timeToApply = this.getDateFromTimeString(this.elementRef.nativeElement.value);
+
+        if (timeToApply) {
             const selectionStart: number = this.elementRef.nativeElement.selectionStart;
             const selectionEnd: number = this.elementRef.nativeElement.selectionEnd;
             this.renderer.setProperty(
@@ -418,42 +400,52 @@ export class McTimepicker<D> implements AfterContentInit, McFormFieldControl<D>,
             this.elementRef.nativeElement.selectionEnd = selectionEnd;
         }
 
-        // (<FormControl> this.ngControl.control).updateValueAndValidity();
-        const result = timeToApply !== undefined ? timeToApply : null;
-        this.onChange(result);
+        this.onChange(timeToApply);
         this.stateChanges.next();
     }
 
-    private upDownTimeByArrowKeys(event: KeyboardEvent): void {
-        event.preventDefault();
+    private verticalArrowKeyHandler(keyCode: number): void {
+        console.log('upDownTimeByArrowKeys');
+        if (!this.value) { return; }
 
-        let changedTime: D | undefined = this.currentDateTimeInput;
-        if (changedTime !== undefined) {
-            const cursorPos = this.elementRef.nativeElement.selectionStart;
+        let changedTime;
 
-            const modifiedTimePart = this.getTimeEditMetrics(cursorPos)
-                .modifiedTimePart;
-            const keyCode: string = this.getKeyCode(event);
-            if (keyCode === ARROW_UP_KEYCODE) { changedTime = this.incrementTime(changedTime, modifiedTimePart); }
-            if (keyCode === ARROW_DOWN_KEYCODE) { changedTime = this.decrementTime(changedTime, modifiedTimePart); }
-            this.applyInputChanges({ changedTime });
-            this.createSelectionOfTimeComponentInInput(cursorPos);
+        const cursorPos = this.elementRef.nativeElement.selectionStart;
+        const newEditParams = this.getTimeEditMetrics(cursorPos);
+
+        if (keyCode === UP_ARROW) {
+            changedTime = this.incrementTime(this.value, newEditParams.modifiedTimePart);
         }
+
+        if (keyCode === DOWN_ARROW) {
+            changedTime = this.decrementTime(this.value, newEditParams.modifiedTimePart);
+        }
+
+        this.value = changedTime;
+
+        this.elementRef.nativeElement.selectionStart = newEditParams.cursorStartPosition;
+        this.elementRef.nativeElement.selectionEnd = newEditParams.cursorEndPosition;
+
+        this.onChange(changedTime);
+        this.stateChanges.next();
     }
 
-    private switchSelectionBetweenTimeparts(event: KeyboardEvent): void {
-        const changedTime: D | undefined = this.currentDateTimeInput;
-        const keyCode: string = this.getKeyCode(event);
+    private horizontalArrowKeyHandler(keyCode: number): void {
+        console.log('switchSelectionBetweenTimeparts');
+        if (!this.value) { return; }
 
-        if (changedTime !== undefined) {
-            let cursorPos: number = this.elementRef.nativeElement.selectionStart;
-            if (keyCode === ARROW_LEFT_KEYCODE) {
-                cursorPos = this.getCursorPositionOfPrevTimePartStart(cursorPos, this.elementRef.nativeElement._value);
-            } else if (keyCode === ARROW_RIGHT_KEYCODE) {
-                cursorPos = this.getCursorPositionOfNextTimePartStart(cursorPos, this.elementRef.nativeElement._value);
-            }
-            this.createSelectionOfTimeComponentInInput(cursorPos);
+        let cursorPos: number = this.elementRef.nativeElement.selectionStart;
+        const value = this.elementRef.nativeElement.value;
+
+        if (keyCode === LEFT_ARROW) {
+            cursorPos = cursorPos === 0 ? value.length : cursorPos - 1;
+        } else if (keyCode === RIGHT_ARROW) {
+            const nextDividerPos: number = value.indexOf(':', cursorPos);
+
+            cursorPos = nextDividerPos ? nextDividerPos + 1 : 0;
         }
+
+        this.createSelectionOfTimeComponentInInput(cursorPos);
     }
 
     private createSelectionOfTimeComponentInInput(cursorPos: number): void {
@@ -465,7 +457,9 @@ export class McTimepicker<D> implements AfterContentInit, McFormFieldControl<D>,
     }
 
     private incrementTime(dateVal: D, whatToIncrement: TimeParts = TimeParts.seconds): D {
-        let { hours, minutes, seconds } = this.getTimeDigitsFromDate(dateVal);
+        let hours = this.dateAdapter.getHours(dateVal);
+        let minutes = this.dateAdapter.getMinutes(dateVal);
+        let seconds = this.dateAdapter.getSeconds(dateVal);
 
         switch (whatToIncrement) {
             case TimeParts.hours:
@@ -486,14 +480,21 @@ export class McTimepicker<D> implements AfterContentInit, McFormFieldControl<D>,
 
         if (hours > HOURS_PER_DAY) { hours = 0; }
 
-        return <D> this.getDateFromTimeDigits(hours, minutes, seconds);
+        return this.dateAdapter.createDateTime(
+            this.dateAdapter.getYear(this.value),
+            this.dateAdapter.getMonth(this.value),
+            this.dateAdapter.getDate(this.value),
+            hours,
+            minutes,
+            seconds,
+            this.dateAdapter.getMilliseconds(this.value)
+        );
     }
 
-    /**
-     * @description Decrement part of time
-     */
     private decrementTime(dateVal: D, whatToDecrement: TimeParts = TimeParts.seconds): D {
-        let { hours, minutes, seconds } = this.getTimeDigitsFromDate(dateVal);
+        let hours = this.dateAdapter.getHours(dateVal);
+        let minutes = this.dateAdapter.getMinutes(dateVal);
+        let seconds = this.dateAdapter.getSeconds(dateVal);
 
         switch (whatToDecrement) {
             case TimeParts.hours:
@@ -514,19 +515,15 @@ export class McTimepicker<D> implements AfterContentInit, McFormFieldControl<D>,
 
         if (hours < 0) { hours = HOURS_PER_DAY; }
 
-        return this.getDateFromTimeDigits(hours, minutes, seconds) as D;
-    }
-
-    private getCursorPositionOfPrevTimePartStart(cursorPos: number, timeString: string): number {
-        return cursorPos === 0 ? timeString.length : cursorPos - 1;
-    }
-
-    private getCursorPositionOfNextTimePartStart(
-        cursorPos: number, timeString: string, timeDevider: string = ':'
-    ): number {
-        const nextDividerPos: number = timeString.indexOf(timeDevider, cursorPos);
-
-        return nextDividerPos !== undefined ? nextDividerPos + 1 : 0;
+        return this.dateAdapter.createDateTime(
+            this.dateAdapter.getYear(this.value),
+            this.dateAdapter.getMonth(this.value),
+            this.dateAdapter.getDate(this.value),
+            hours,
+            minutes,
+            seconds,
+            this.dateAdapter.getMilliseconds(this.value)
+        );
     }
 
     /**
@@ -538,10 +535,11 @@ export class McTimepicker<D> implements AfterContentInit, McFormFieldControl<D>,
         cursorStartPosition: number;
         cursorEndPosition: number;
     } {
-        const timeString: string = this.elementRef.nativeElement._value;
+        const timeString: string = this.elementRef.nativeElement.value;
         let modifiedTimePart: TimeParts;
         let cursorStartPosition: number;
         let cursorEndPosition: number;
+
         const hoursIndex = 0;
         const minutesIndex = timeString.indexOf(':', hoursIndex + 1);
         const secondsIndex = minutesIndex !== -1 ? timeString.indexOf(':', minutesIndex + 1) : -1;
@@ -560,18 +558,14 @@ export class McTimepicker<D> implements AfterContentInit, McFormFieldControl<D>,
             cursorEndPosition = minutesIndex !== -1 ? minutesIndex : timeString.length;
         }
 
-        return {
-            modifiedTimePart,
-            cursorStartPosition,
-            cursorEndPosition
-        };
+        return { modifiedTimePart, cursorStartPosition, cursorEndPosition };
     }
 
     /**
      * @description Create time string for displaying inside input element of UI
      */
     private getTimeStringFromDate(value: D, timeFormat: TimeFormats = DEFAULT_TIME_FORMAT): string {
-        if (value === undefined || value === null) { return ''; }
+        if (!this.dateAdapter.isValid(value)) { return ''; }
 
         return this.dateAdapter.format(value, timeFormat);
     }
@@ -588,9 +582,7 @@ export class McTimepicker<D> implements AfterContentInit, McFormFieldControl<D>,
             'H:m:s'
         ]);
 
-        const convertedTimeString = momentWrappedTime !== null
-            ? momentWrappedTime.format('H:m:s')
-            : '';
+        const convertedTimeString = momentWrappedTime !== null ? momentWrappedTime.format('H:m:s') : '';
 
         const hoursAndMinutesAndSeconds = convertedTimeString.match(HOURS_MINUTES_SECONDS_REGEXP);
         const hoursAndMinutes = convertedTimeString.match(HOURS_MINUTES_REGEXP);
@@ -603,20 +595,15 @@ export class McTimepicker<D> implements AfterContentInit, McFormFieldControl<D>,
         };
     }
 
-    /**
-     * @description Create Date object from separate parts of time
-     */
-    private getDateFromTimeDigits(hours: number, minutes: number, seconds: number = 0): D | undefined {
-        return this.getDateFromTimeString(`${hours}:${minutes}:${seconds}`);
-    }
-
-    private getDateFromTimeString(timeString: string): D | undefined {
-        if (timeString === undefined) { return; }
+    private getDateFromTimeString(timeString: string): D | null {
+        if (!timeString) { return; }
 
         const { hoursOnly, hoursAndMinutes, hoursAndMinutesAndSeconds } = this.getParsedTimeParts(timeString);
 
-        if (timeString.trim().length === 0 ||
-            hoursOnly === null && hoursAndMinutes === null && hoursAndMinutesAndSeconds === null) {
+        if (
+            timeString.trim().length === 0 ||
+            (hoursOnly === null && hoursAndMinutes === null && hoursAndMinutesAndSeconds === null)
+        ) {
             return;
         }
 
@@ -636,73 +623,49 @@ export class McTimepicker<D> implements AfterContentInit, McFormFieldControl<D>,
             seconds = Number(hoursAndMinutesAndSeconds[3]);
         }
 
-        const resultDate: D = this.dateAdapter.createDateTime(
-            this.dateAdapter.getYear(this.originalValue),
-            this.dateAdapter.getMonth(this.originalValue),
-            this.dateAdapter.getDate(this.originalValue),
+        const resultDate = this.dateAdapter.createDateTime(
+            this.dateAdapter.getYear(this.value),
+            this.dateAdapter.getMonth(this.value),
+            this.dateAdapter.getDate(this.value),
             hours,
             minutes,
             seconds,
-            0
+            this.dateAdapter.getMilliseconds(this.value)
         );
 
-        return this.dateAdapter.isValid(resultDate) ? resultDate : undefined;
+        return this.getValidDateOrNull(resultDate);
     }
 
-    private getTimeDigitsFromDate(dateVal: D): { hours: number; minutes: number; seconds: number } {
-        return {
-            hours: this.dateAdapter.getHours(dateVal),
-            minutes: this.dateAdapter.getMinutes(dateVal),
-            seconds: this.dateAdapter.getSeconds(dateVal)
-        };
+    private parseValidator: ValidatorFn = (): ValidationErrors | null => {
+        return this.lastValueValid ? null : { mcTimepickerParse: { text: this.elementRef.nativeElement.value } };
     }
 
-    private parseValidator(): ValidationErrors | null {
-        return this.currentDateTimeInput === undefined ?
-            { mcTimepickerParse: { text: this.elementRef.nativeElement._value } } :
-            null;
+    private minValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+        const controlValue = this.getValidDateOrNull(this.dateAdapter.deserialize(control.value));
+
+        return (!this.min || !controlValue || this.dateAdapter.compareDate(this.min, controlValue) <= 0) ?
+            null :
+            { mcTimepickerLowerThenMintime: { min: this.min, actual: controlValue } };
     }
 
-    private minTimeValidator(): ValidationErrors | null {
-        if (this.min && this.currentDateTimeInput !== undefined && this.isTimeLowerThenMin(this.currentDateTimeInput)) {
-            return { mcTimepickerLowerThenMintime: { text: this.elementRef.nativeElement._value } };
-        }
+    private maxValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+        const controlValue = this.getValidDateOrNull(this.dateAdapter.deserialize(control.value));
 
-        return null;
-    }
-
-    private maxTimeValidator(): ValidationErrors | null {
-        if (
-            this.max &&
-            this.currentDateTimeInput !== undefined &&
-            this.isTimeGreaterThenMax(this.currentDateTimeInput)
-        ) {
-            return { mcTimepickerHigherThenMaxtime: { text: this.elementRef.nativeElement._value } };
-        }
-
-        return null;
-    }
-
-    private isTimeLowerThenMin(timeToCompare: D): boolean {
-        if (timeToCompare === undefined || timeToCompare ===  null || this.min === null) { return false; }
-
-        return this.dateAdapter.compareDateTime(timeToCompare, this.getDateFromTimeString(this.minTime)) < 0;
-    }
-
-    private isTimeGreaterThenMax(timeToCompare: D): boolean {
-        if (timeToCompare === undefined || timeToCompare ===  null || this.max === null) { return false; }
-
-        return this.dateAdapter.compareDateTime(timeToCompare, this.getDateFromTimeString(this.max)) >= 0;
+        return (!this.max || !controlValue || this.dateAdapter.compareDate(this.max, controlValue) >= 0) ?
+            null :
+            { mcTimepickerHigherThenMaxtime: { max: this.max, actual: controlValue } };
     }
 
     private getValidDateOrNull(obj: any): D | null {
         return (this.dateAdapter.isDateInstance(obj) && this.dateAdapter.isValid(obj)) ? obj : null;
     }
 
+    private updateView() {
+        const formattedValue = this.getTimeStringFromDate(this.value, this.format);
+
+        this.renderer.setProperty(this.elementRef.nativeElement, 'value', formattedValue);
+    }
+
     // tslint:disable-next-line:no-empty
     private validatorOnChange = () => {};
-
-    ngAfterContentInit(): void {
-        console.log('ngAfterContentInit');
-    }
 }

@@ -12,10 +12,12 @@
 <!--               [disabled]="isDisabled">-->
 <!--    </mc-form-field>-->
 
-    <div>{{ timeValue.value.toISOString() }}</div>
+    <div>{{ timeValue.value ? timeValue.value.toISOString() : null }}</div>
+    <div>{{ timeValue.errors }}</div>
+
     <mc-form-field>
         <i mcPrefix mc-icon="mc-clock_16"></i>
-        <input mcTimepicker [formControl]='timeValue' time-format="HH:mm">
+        <input mcTimepicker [formControl]="timeValue" [format]="'HH:mm'">
     </mc-form-field>
 
 </div>
