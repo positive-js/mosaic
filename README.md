@@ -25,12 +25,17 @@ Mosaic components are the building blocks of Positive Technologies applications.
 * [Getting Started Guide][getting-started]
 * [Contributing][contributing]
 
-## Documentation
-* [Mosaic](https://mosaic.ptsecurity.com/)
+### Components Docs Site
+Versions of this site are also available for
+- [Latest Stable Version](https://mosaic.ptsecurity.com)
+- [Next Version (from `master`)](https://next.mosaic.ptsecurity.com)
+- [v8](https://v8.mosaic.ptsecurity.com)
+- [v9](https://v9.mosaic.ptsecurity.com)
+
 
 ## 🚀 Getting started
 
-Before you start, make sure you have a recent version of [NodeJS](http://nodejs.org/) environment *>=10.0* with NPM *>=6.0*.
+Before you start, make sure you have a recent version of [NodeJS](http://nodejs.org/) environment *>=12.0* with Yarn *>=1.0*.
 
 From the project folder, execute the following commands:
 
