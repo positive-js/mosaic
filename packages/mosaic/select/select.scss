@@ -4,7 +4,7 @@
 
 $mc-select-arrow-size: 5px !default;
 $mc-select-arrow-margin: 4px !default;
-$mc-select-panel-max-height: 224px !default;
+$mc-select-panel-max-height: 232px !default;
 $mc-select-item-height: 32px !default;
 
 $mc-select-panel-border-width: 1px !default;
@@ -156,8 +156,6 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
     border-bottom-left-radius: $mc-select-panel-border-radius;
     border-bottom-right-radius: $mc-select-panel-border-radius;
 
-    padding: 4px 0;
-
     // Override optgroup and option to scale based on font-size of the trigger.
     .mc-optgroup-label,
     .mc-option {
@@ -169,6 +167,7 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
 
 .mc-select__content {
     max-height: $mc-select-panel-max-height;
+    padding: 4px 0;
     overflow: auto;
 }
 
