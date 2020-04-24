@@ -59,7 +59,7 @@
             &[disabled] {
                 .mc-vertical-navbar__title,
                 .mc-icon {
-                    opacity: 0.3;
+                    opacity: map-get(map-get($theme, states), disabled-opacity);
                 }
             }
         }

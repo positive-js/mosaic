@@ -54,6 +54,10 @@
         }
     }
 
+    .mc-modal-mask {
+        background-color: map-get($modal, mask-background);
+    }
+
     .mc-confirm {
         .mc-confirm-btns {
             border-top: 1px solid if($is-dark, $divider-color, transparent);
