@@ -18,9 +18,9 @@ export const TIMEFORMAT_PLACEHOLDERS: { [timeFormat: string]: string } = {
 export const DEFAULT_TIME_FORMAT: TimeFormats = TimeFormats.HHmm;
 
 export const HOURS_MINUTES_SECONDS_REGEXP =
-    new RegExp(/^([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]|[0-9]):([0-5][0-9]|[0-9])?$/);
-export const HOURS_MINUTES_REGEXP = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]|[0-9])?$/;
-export const HOURS_ONLY_REGEXP = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):?$/;
+    new RegExp(/^([0-1][0-9]|2[0-3]):?([0-5][0-9]):?([0-5][0-9])?$/);
+export const HOURS_MINUTES_REGEXP = /^([0-1][0-9]|2[0-3]):?([0-5][0-9])?$/;
+export const HOURS_ONLY_REGEXP = /^([0-1][0-9]|2[0-3]):?$/;
 
 export const SECONDS_PER_MINUTE: number = 59;
 export const MINUTES_PER_HOUR: number = 59;

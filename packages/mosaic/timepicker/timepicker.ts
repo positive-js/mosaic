@@ -19,7 +19,16 @@ import {
     Validators
 } from '@angular/forms';
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
-import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@ptsecurity/cdk/keycodes';
+import {
+    BACKSPACE,
+    DELETE,
+    DOWN_ARROW,
+    ENTER,
+    hasModifierKey,
+    LEFT_ARROW,
+    RIGHT_ARROW,
+    UP_ARROW
+} from '@ptsecurity/cdk/keycodes';
 import { McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { noop, Subject } from 'rxjs';
 
@@ -71,7 +80,6 @@ let uniqueComponentIdSuffix: number = 0;
         '(blur)': 'onBlur()',
         '(focus)': 'focusChanged(true)',
 
-        '(input)': 'onInput()',
         '(paste)': 'onPaste($event)',
 
         '(keydown)': 'onKeyDown($event)'
@@ -88,6 +96,10 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
      * @docs-private
      */
     readonly stateChanges: Subject<void> = new Subject<void>();
+
+    readonly ngControl = null;
+
+    readonly errorState: boolean;
 
     /**
      * Implemented as part of McFormFieldControl.
@@ -218,9 +230,36 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
 
     private _value: D | null;
 
-    readonly errorState: boolean;
+    get viewValue(): string {
+        return this.elementRef.nativeElement.value;
+    }
+
+    /**
+     * Implemented as part of McFormFieldControl.
+     * @docs-private
+     */
+    get empty(): boolean {
+        return !this.viewValue && !this.isBadInput();
+    }
+
+    get selectionStart(): number | null {
+        return this.elementRef.nativeElement.selectionStart;
+    }
+
+    set selectionStart(value: number | null) {
+        this.elementRef.nativeElement.selectionStart = value;
+    }
+
+    get selectionEnd(): number | null {
+        return this.elementRef.nativeElement.selectionEnd;
+    }
+
+    set selectionEnd(value: number | null) {
+        this.elementRef.nativeElement.selectionEnd = value;
+    }
 
     private readonly uid = `mc-timepicker-${uniqueComponentIdSuffix++}`;
+
     private validator: ValidatorFn | null;
 
     private previousNativeValue: any;
@@ -277,56 +316,35 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
         $event.preventDefault();
         const clipboardUserInput: string = $event.clipboardData.getData('text');
 
-        if (this.getDateFromTimeString(clipboardUserInput) === undefined) { return; }
+        if (!this.getDateFromTimeString(clipboardUserInput)) { return; }
 
-        this.elementRef.nativeElement._value = clipboardUserInput;
+        this.elementRef.nativeElement.value = clipboardUserInput;
         this.onInput();
     }
 
     onInput() {
         console.log('onInput');
-        const initialCursorStart: number = this.elementRef.nativeElement.selectionStart;
-        const initialCursorEnd: number = this.elementRef.nativeElement.selectionEnd;
-        let isAutocompleteTriggered: boolean = false;
+        const timeToApply = this.getDateFromTimeString(this.viewValue);
 
-        const { hoursOnly, hoursAndMinutes, hoursAndMinutesAndSeconds } = this.getParsedTimeParts(
-            this.elementRef.nativeElement.value
-        );
+        if (timeToApply) {
+            const selectionStart = this.selectionStart;
+            const selectionEnd = this.selectionEnd;
 
-        // tslint:disable no-magic-numbers
-        if (hoursOnly && hoursOnly[1] && hoursOnly[1].length === 2) {
-            isAutocompleteTriggered = true;
-        } else if (
-            hoursAndMinutes && hoursAndMinutes[1].length === 1 && hoursAndMinutes[2] && hoursAndMinutes[2].length === 2
-        ) {
-            isAutocompleteTriggered = true;
-        } else if (
-            hoursAndMinutesAndSeconds &&
-            hoursAndMinutesAndSeconds[1].length === 2 &&
-            hoursAndMinutesAndSeconds[2].length === 2 &&
-            hoursAndMinutesAndSeconds[3] &&
-            hoursAndMinutesAndSeconds[3].length === 2
-        ) {
-            isAutocompleteTriggered = true;
+            this.renderer.setProperty(
+                this.elementRef.nativeElement,
+                'value',
+                this.getTimeStringFromDate(timeToApply, this.format)
+            );
+
+            this.selectionStart = selectionStart;
+            this.selectionEnd = selectionEnd;
+
+            this.createSelectionOfTimeComponentInInput(selectionStart + 1);
         }
-        // tslint:enable no-magic-numbers
 
-        if (isAutocompleteTriggered) {
-            this.applyInputChanges();
+        this.onChange(timeToApply);
+        this.stateChanges.next();
 
-            this.elementRef.nativeElement.selectionStart = initialCursorStart;
-            this.elementRef.nativeElement.selectionEnd = initialCursorEnd;
-
-            this.createSelectionOfTimeComponentInInput(initialCursorStart + 1);
-        }
-    }
-
-    /**
-     * Implemented as part of McFormFieldControl.
-     * @docs-private
-     */
-    get empty(): boolean {
-        return !this.elementRef.nativeElement._value && !this.isBadInput();
     }
 
     /**
@@ -338,21 +356,27 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
     }
 
     onKeyDown(event: KeyboardEvent): void {
+        console.log('onKeyDown');
         const keyCode = event.keyCode;
 
-        if ([UP_ARROW, DOWN_ARROW].includes(keyCode)) {
+        if (hasModifierKey(event) || [BACKSPACE, DELETE].includes(keyCode)) {
+            return;
+        } else if ([UP_ARROW, DOWN_ARROW].includes(keyCode)) {
             event.preventDefault();
 
             this.verticalArrowKeyHandler(keyCode);
+
+            return;
+        } else if ([LEFT_ARROW, RIGHT_ARROW].includes(keyCode)) {
+            this.horizontalArrowKeyHandler(keyCode);
+
+            return;
         }
 
-        if ([LEFT_ARROW, RIGHT_ARROW].includes(keyCode)) {
-            this.horizontalArrowKeyHandler(keyCode);
-        }
+        setTimeout(() => this.onInput());
     }
 
     validate(control: AbstractControl): ValidationErrors | null {
-        console.log('validate');
         return this.validator ? this.validator(control) : null;
     }
 
@@ -385,23 +409,6 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
 
     private applyInputChanges(): void {
         console.log('applyInputChanges');
-
-        const timeToApply = this.getDateFromTimeString(this.elementRef.nativeElement.value);
-
-        if (timeToApply) {
-            const selectionStart: number = this.elementRef.nativeElement.selectionStart;
-            const selectionEnd: number = this.elementRef.nativeElement.selectionEnd;
-            this.renderer.setProperty(
-                this.elementRef.nativeElement,
-                'value',
-                this.getTimeStringFromDate(timeToApply, this.format)
-            );
-            this.elementRef.nativeElement.selectionStart = selectionStart;
-            this.elementRef.nativeElement.selectionEnd = selectionEnd;
-        }
-
-        this.onChange(timeToApply);
-        this.stateChanges.next();
     }
 
     private verticalArrowKeyHandler(keyCode: number): void {
@@ -410,8 +417,7 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
 
         let changedTime;
 
-        const cursorPos = this.elementRef.nativeElement.selectionStart;
-        const newEditParams = this.getTimeEditMetrics(cursorPos);
+        const newEditParams = this.getTimeEditMetrics(this.selectionStart as number);
 
         if (keyCode === UP_ARROW) {
             changedTime = this.incrementTime(this.value, newEditParams.modifiedTimePart);
@@ -423,8 +429,8 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
 
         this.value = changedTime;
 
-        this.elementRef.nativeElement.selectionStart = newEditParams.cursorStartPosition;
-        this.elementRef.nativeElement.selectionEnd = newEditParams.cursorEndPosition;
+        this.selectionStart = newEditParams.cursorStartPosition;
+        this.selectionEnd = newEditParams.cursorEndPosition;
 
         this.onChange(changedTime);
         this.stateChanges.next();
@@ -434,13 +440,12 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
         console.log('switchSelectionBetweenTimeparts');
         if (!this.value) { return; }
 
-        let cursorPos: number = this.elementRef.nativeElement.selectionStart;
-        const value = this.elementRef.nativeElement.value;
+        let cursorPos = this.selectionStart as number;
 
         if (keyCode === LEFT_ARROW) {
-            cursorPos = cursorPos === 0 ? value.length : cursorPos - 1;
+            cursorPos = cursorPos === 0 ? this.viewValue.length : cursorPos - 1;
         } else if (keyCode === RIGHT_ARROW) {
-            const nextDividerPos: number = value.indexOf(':', cursorPos);
+            const nextDividerPos: number = this.viewValue.indexOf(':', cursorPos);
 
             cursorPos = nextDividerPos ? nextDividerPos + 1 : 0;
         }
@@ -451,8 +456,9 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
     private createSelectionOfTimeComponentInInput(cursorPos: number): void {
         setTimeout(() => {
             const newEditParams = this.getTimeEditMetrics(cursorPos);
-            this.elementRef.nativeElement.selectionStart = newEditParams.cursorStartPosition;
-            this.elementRef.nativeElement.selectionEnd = newEditParams.cursorEndPosition;
+
+            this.selectionStart = newEditParams.cursorStartPosition;
+            this.selectionEnd = newEditParams.cursorEndPosition;
         });
     }
 
@@ -535,7 +541,7 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
         cursorStartPosition: number;
         cursorEndPosition: number;
     } {
-        const timeString: string = this.elementRef.nativeElement.value;
+        const timeString: string = this.viewValue;
         let modifiedTimePart: TimeParts;
         let cursorStartPosition: number;
         let cursorEndPosition: number;
@@ -564,50 +570,31 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
     /**
      * @description Create time string for displaying inside input element of UI
      */
-    private getTimeStringFromDate(value: D, timeFormat: TimeFormats = DEFAULT_TIME_FORMAT): string {
-        if (!this.dateAdapter.isValid(value)) { return ''; }
+    private getTimeStringFromDate(value: D | null, timeFormat: TimeFormats = DEFAULT_TIME_FORMAT): string {
+        if (!value || !this.dateAdapter.isValid(value)) { return ''; }
 
         return this.dateAdapter.format(value, timeFormat);
     }
 
     private getParsedTimeParts(timeString: string): {
-        hoursOnly: any;
-        hoursAndMinutes: any;
-        hoursAndMinutesAndSeconds: any;
+        hoursOnly: RegExpMatchArray | null;
+        hoursAndMinutes: RegExpMatchArray | null;
+        hoursAndMinutesAndSeconds: RegExpMatchArray | null;
     } {
-        const momentWrappedTime = this.dateAdapter.parse(timeString, [
-            'h:m a',
-            'h:m:s a',
-            'H:m',
-            'H:m:s'
-        ]);
-
-        const convertedTimeString = momentWrappedTime !== null ? momentWrappedTime.format('H:m:s') : '';
-
-        const hoursAndMinutesAndSeconds = convertedTimeString.match(HOURS_MINUTES_SECONDS_REGEXP);
-        const hoursAndMinutes = convertedTimeString.match(HOURS_MINUTES_REGEXP);
-        const hoursOnly = convertedTimeString.match(HOURS_ONLY_REGEXP);
-
         return {
-            hoursOnly,
-            hoursAndMinutes,
-            hoursAndMinutesAndSeconds
+            hoursOnly: timeString.match(HOURS_ONLY_REGEXP),
+            hoursAndMinutes: timeString.match(HOURS_MINUTES_REGEXP),
+            hoursAndMinutesAndSeconds: timeString.match(HOURS_MINUTES_SECONDS_REGEXP)
         };
     }
 
     private getDateFromTimeString(timeString: string): D | null {
-        if (!timeString) { return; }
+        if (!timeString) { return null; }
 
         const { hoursOnly, hoursAndMinutes, hoursAndMinutesAndSeconds } = this.getParsedTimeParts(timeString);
 
-        if (
-            timeString.trim().length === 0 ||
-            (hoursOnly === null && hoursAndMinutes === null && hoursAndMinutesAndSeconds === null)
-        ) {
-            return;
-        }
+        if ((!hoursOnly && !hoursAndMinutes && !hoursAndMinutesAndSeconds)) { return null; }
 
-        // tslint:disable no-magic-numbers
         let hours: number = 0;
         let minutes: number = 0;
         let seconds: number = 0;
@@ -616,10 +603,13 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
             hours = Number(hoursOnly[1]);
         } else if (hoursAndMinutes) {
             hours = Number(hoursAndMinutes[1]);
+            // tslint:disable no-magic-numbers
             minutes = Number(hoursAndMinutes[2]);
         } else if (hoursAndMinutesAndSeconds) {
             hours = Number(hoursAndMinutesAndSeconds[1]);
+            // tslint:disable no-magic-numbers
             minutes = Number(hoursAndMinutesAndSeconds[2]);
+            // tslint:disable no-magic-numbers
             seconds = Number(hoursAndMinutesAndSeconds[3]);
         }
 
@@ -637,7 +627,7 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
     }
 
     private parseValidator: ValidatorFn = (): ValidationErrors | null => {
-        return this.lastValueValid ? null : { mcTimepickerParse: { text: this.elementRef.nativeElement.value } };
+        return this.lastValueValid ? null : { mcTimepickerParse: { text: this.viewValue } };
     }
 
     private minValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
@@ -645,7 +635,7 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
 
         return (!this.min || !controlValue || this.dateAdapter.compareDate(this.min, controlValue) <= 0) ?
             null :
-            { mcTimepickerLowerThenMintime: { min: this.min, actual: controlValue } };
+            { mcTimepickerLowerThenMin: { min: this.min, actual: controlValue } };
     }
 
     private maxValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
@@ -653,7 +643,7 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
 
         return (!this.max || !controlValue || this.dateAdapter.compareDate(this.max, controlValue) >= 0) ?
             null :
-            { mcTimepickerHigherThenMaxtime: { max: this.max, actual: controlValue } };
+            { mcTimepickerHigherThenMax: { max: this.max, actual: controlValue } };
     }
 
     private getValidDateOrNull(obj: any): D | null {

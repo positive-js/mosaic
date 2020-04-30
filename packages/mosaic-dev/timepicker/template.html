@@ -12,12 +12,21 @@
 <!--               [disabled]="isDisabled">-->
 <!--    </mc-form-field>-->
 
-    <div>{{ timeValue.value ? timeValue.value.toISOString() : null }}</div>
-    <div>{{ timeValue.errors }}</div>
+    <div>{{ formControlValue.value ? formControlValue.value.toISOString() : null }}</div>
+    <div>{{ formControlValue.errors }}</div>
+
+    <br><br>
 
     <mc-form-field>
         <i mcPrefix mc-icon="mc-clock_16"></i>
-        <input mcTimepicker [formControl]="timeValue" [format]="'HH:mm'">
+        <input mcTimepicker [formControl]="formControlValue" [format]="'HH:mm'">
+    </mc-form-field>
+
+    <br><br><br>
+
+    <mc-form-field>
+        <i mcPrefix mc-icon="mc-clock_16"></i>
+        <input mcTimepicker [(ngModel)]="ngModelValue" [format]="'HH:mm'">
     </mc-form-field>
 
 </div>
