@@ -1,4 +1,4 @@
-import { RuleUpgradeData } from '@angular/cdk/schematics';
+import { UpgradeData } from '@angular/cdk/schematics';
 
 import {
     attributeSelectors,
@@ -13,7 +13,7 @@ import {
 } from './data';
 
 
-export const mosaicUpgradeData: RuleUpgradeData = {
+export const mosaicUpgradeData: UpgradeData = {
     attributeSelectors,
     classNames,
     constructorChecks,

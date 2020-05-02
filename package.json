@@ -94,7 +94,7 @@
         "magic-string": "^0.22.5",
         "merge2": "^1.2.3",
         "messageformat": "^2.0.5",
-        "moment": "^2.24.0",
+        "moment": "~2.23.0",
         "ng-packagr": "^9.0.2",
         "node-sass": "^4.11.0",
         "request": "^2.88.0",

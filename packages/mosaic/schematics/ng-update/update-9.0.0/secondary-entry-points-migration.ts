@@ -1,4 +1,4 @@
-import { MigrationRule, TargetVersion } from '@angular/cdk/schematics';
+import { Migration, TargetVersion } from '@angular/cdk/schematics';
 import * as ts from 'typescript';
 
 
@@ -19,12 +19,13 @@ const MOSAIC_AC_FILEPATH_REGEX = new RegExp(
 // tslint:disable-next-line:no-var-requires
 const ENTRY_POINT_MAPPINGS: {[name: string]: string} = require('./mosaic-symbols.json');
 
-export class SecondaryEntryPointsRule extends MigrationRule<null> {
+
+export class SecondaryEntryPointsMigration extends Migration<null> {
 
     printer = ts.createPrinter();
 
     // Only enable this rule if the migration targets version 8.
-    ruleEnabled = this.targetVersion === TargetVersion.V8 || this.targetVersion === TargetVersion.V9;
+    enabled = this.targetVersion === TargetVersion.V8 || this.targetVersion === TargetVersion.V9;
 
     // tslint:disable-next-line:max-func-body-length
     visitNode(declaration: ts.Node): void {
@@ -124,7 +125,7 @@ export class SecondaryEntryPointsRule extends MigrationRule<null> {
             return;
         }
 
-        const recorder = this.getUpdateRecorder(declaration.moduleSpecifier.getSourceFile().fileName);
+        const recorder = this.fileSystem.edit(declaration.moduleSpecifier.getSourceFile().fileName);
 
         // Perform the replacement that switches the primary entry-point import to
         // the individual secondary entry-point imports.

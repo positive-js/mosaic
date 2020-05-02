@@ -1,20 +1,20 @@
 import { Rule, SchematicContext } from '@angular-devkit/schematics';
-import { createUpgradeRule, TargetVersion } from '@angular/cdk/schematics';
+import { createMigrationSchematicRule, NullableDevkitMigration, TargetVersion } from '@angular/cdk/schematics';
 import { green, yellow } from 'chalk';
 
-import { SecondaryEntryPointsRule } from './update-9.0.0/secondary-entry-points-rule';
+import { SecondaryEntryPointsMigration } from './update-9.0.0/secondary-entry-points-migration';
 import { mosaicUpgradeData } from './upgrade-data';
 
 
-const mosaicMigrationRules = [
-    SecondaryEntryPointsRule
+const mosaicMigrations: NullableDevkitMigration[]  = [
+    // @ts-ignore
+    SecondaryEntryPointsMigration
 ];
 
 export function updateToV9(): Rule {
-    return createUpgradeRule(
-        TargetVersion.V9, mosaicMigrationRules, mosaicUpgradeData, onMigrationComplete);
+    return createMigrationSchematicRule(
+        TargetVersion.V9, mosaicMigrations, mosaicUpgradeData, onMigrationComplete);
 }
-
 
 function onMigrationComplete(context: SchematicContext, targetVersion: TargetVersion, hasFailures: boolean): void {
 
