@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.13.5
+version: v1.14.1
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
   SNYK-JS-NODESASS-542662:
@@ -203,4 +203,188 @@ ignore:
     - karma > useragent:
         reason: None given
         expires: '2020-05-20T06:18:28.658Z'
-patch: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-567746:
+    - dgeni > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - dgeni-packages > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - firebase-tools > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - gulp-transform > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - inquirer > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - karma > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - node-sass > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - snyk > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - stylelint > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - stylelint-scss > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - wallaby-webpack > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - '@commitlint/cli > @commitlint/load > lodash':
+        patched: '2020-05-02T02:25:14.859Z'
+    - '@angular-devkit/build-angular > webpack-merge > lodash':
+        patched: '2020-05-02T02:25:14.859Z'
+    - '@angular/cli > inquirer > lodash':
+        patched: '2020-05-02T02:25:14.859Z'
+    - conventional-changelog > conventional-changelog-conventionalcommits > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - conventional-changelog > conventional-changelog-core > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - dgeni-packages > dgeni > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - dgeni-packages > catharsis > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - firebase-tools > inquirer > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - firebase-tools > superstatic > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - node-sass > sass-graph > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - gulp-sass > node-sass > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - snyk > inquirer > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - snyk > @snyk/dep-graph > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - snyk > snyk-config > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - snyk > snyk-mvn-plugin > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - snyk > snyk-nodejs-lockfile-parser > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - snyk > snyk-nuget-plugin > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - stylelint > postcss-reporter > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - stylelint > table > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - '@commitlint/cli > @commitlint/load > @commitlint/resolve-extends > lodash':
+        patched: '2020-05-02T02:25:14.859Z'
+    - karma-coverage > istanbul-lib-instrument > @babel/core > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - stylelint > postcss-jsx > @babel/core > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - '@angular-devkit/build-angular > source-map-loader > async > lodash':
+        patched: '2020-05-02T02:25:14.859Z'
+    - firebase-tools > portfinder > async > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - firebase-tools > archiver > async > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - firebase-tools > google-auto-auth > async > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - karma-coverage-istanbul-reporter > istanbul-api > async > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - '@angular-devkit/build-angular > webpack-dev-server > http-proxy-middleware > lodash':
+        patched: '2020-05-02T02:25:14.859Z'
+    - conventional-changelog > conventional-changelog-core > conventional-changelog-writer > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - conventional-changelog > conventional-changelog-core > conventional-commits-parser > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - firebase-tools > superstatic > nash > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - node-sass > gaze > globule > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - gulp-sass > node-sass > sass-graph > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - karma > log4js > streamroller > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - madge > detective-typescript > @typescript-eslint/typescript-estree > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - snyk > @snyk/dep-graph > graphlib > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - snyk > snyk-go-plugin > graphlib > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - snyk > snyk-nodejs-lockfile-parser > graphlib > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - snyk > @snyk/snyk-cocoapods-plugin > @snyk/dep-graph > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - snyk > snyk-nuget-plugin > dotnet-deps-parser > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - snyk > snyk-php-plugin > @snyk/composer-lockfile-parser > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - '@commitlint/cli > @commitlint/lint > @commitlint/rules > @commitlint/ensure > lodash':
+        patched: '2020-05-02T02:25:14.859Z'
+    - karma-coverage > istanbul-lib-instrument > @babel/core > @babel/helper-module-transforms > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - stylelint > postcss-jsx > @babel/core > @babel/helper-module-transforms > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - karma-coverage-istanbul-reporter > istanbul-api > istanbul-lib-instrument > @babel/traverse > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - '@angular-devkit/build-angular > @jsdevtools/coverage-istanbul-loader > istanbul-lib-instrument > @babel/core > lodash':
+        patched: '2020-05-02T02:25:14.859Z'
+    - '@angular-devkit/build-angular > webpack-dev-server > portfinder > async > lodash':
+        patched: '2020-05-02T02:25:14.859Z'
+    - karma > log4js > streamroller > async > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - '@commitlint/cli > @commitlint/lint > @commitlint/parse > conventional-commits-parser > lodash':
+        patched: '2020-05-02T02:25:14.859Z'
+    - firebase-tools > superstatic > glob-slasher > toxic > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - gulp-sass > node-sass > gaze > globule > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - snyk > @snyk/snyk-cocoapods-plugin > @snyk/dep-graph > graphlib > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - snyk > @snyk/snyk-cocoapods-plugin > @snyk/cocoapods-lockfile-parser > @snyk/ruby-semver > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - '@angular-devkit/build-angular > @babel/preset-env > @babel/plugin-transform-unicode-regex > @babel/helper-create-regexp-features-plugin > @babel/helper-regex > lodash':
+        patched: '2020-05-02T02:25:14.859Z'
+    - karma-coverage > istanbul-lib-instrument > @babel/core > @babel/helpers > @babel/traverse > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - stylelint > postcss-jsx > @babel/core > @babel/helpers > @babel/traverse > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - karma-coverage-istanbul-reporter > istanbul-api > istanbul-lib-instrument > @babel/traverse > @babel/generator > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - '@angular-devkit/build-angular > @jsdevtools/coverage-istanbul-loader > istanbul-lib-instrument > @babel/core > @babel/helper-module-transforms > lodash':
+        patched: '2020-05-02T02:25:14.859Z'
+    - madge > dependency-tree > precinct > detective-typescript > @typescript-eslint/typescript-estree > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - snyk > @snyk/snyk-cocoapods-plugin > @snyk/cocoapods-lockfile-parser > @snyk/dep-graph > graphlib > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - '@angular-devkit/build-angular > @babel/preset-env > @babel/preset-modules > @babel/plugin-transform-dotall-regex > @babel/helper-create-regexp-features-plugin > @babel/helper-regex > lodash':
+        patched: '2020-05-02T02:25:14.859Z'
+    - karma-coverage > istanbul-lib-instrument > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - stylelint > postcss-jsx > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - '@angular-devkit/build-angular > @jsdevtools/coverage-istanbul-loader > istanbul-lib-instrument > @babel/core > @babel/helpers > @babel/traverse > lodash':
+        patched: '2020-05-02T02:25:14.859Z'
+    - karma-coverage-istanbul-reporter > istanbul-api > istanbul-lib-instrument > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - '@angular-devkit/build-angular > @babel/preset-env > @babel/plugin-transform-exponentiation-operator > @babel/helper-builder-binary-assignment-operator-visitor > @babel/helper-explode-assignable-expression > @babel/traverse > @babel/generator > lodash':
+        patched: '2020-05-02T02:25:14.859Z'
+    - karma-coverage > istanbul-lib-instrument > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > @babel/generator > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - stylelint > postcss-jsx > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > @babel/generator > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - '@angular-devkit/build-angular > @jsdevtools/coverage-istanbul-loader > istanbul-lib-instrument > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > lodash':
+        patched: '2020-05-02T02:25:14.859Z'
+    - karma-coverage-istanbul-reporter > istanbul-api > istanbul-lib-instrument > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - karma-coverage > istanbul-lib-instrument > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - stylelint > postcss-jsx > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - '@angular-devkit/build-angular > @babel/preset-env > @babel/plugin-transform-exponentiation-operator > @babel/helper-builder-binary-assignment-operator-visitor > @babel/helper-explode-assignable-expression > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash':
+        patched: '2020-05-02T02:25:14.859Z'
+    - '@angular-devkit/build-angular > @jsdevtools/coverage-istanbul-loader > istanbul-lib-instrument > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > @babel/generator > lodash':
+        patched: '2020-05-02T02:25:14.859Z'
+    - '@angular-devkit/build-angular > @jsdevtools/coverage-istanbul-loader > istanbul-lib-instrument > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash':
+        patched: '2020-05-02T02:25:14.859Z'
+    - karma-coverage > istanbul-lib-instrument > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - stylelint > postcss-jsx > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash:
+        patched: '2020-05-02T02:25:14.859Z'
+    - '@angular-devkit/build-angular > @babel/preset-env > @babel/plugin-transform-exponentiation-operator > @babel/helper-builder-binary-assignment-operator-visitor > @babel/helper-explode-assignable-expression > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash':
+        patched: '2020-05-02T02:25:14.859Z'
+    - '@angular-devkit/build-angular > @jsdevtools/coverage-istanbul-loader > istanbul-lib-instrument > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash':
+        patched: '2020-05-02T02:25:14.859Z'
+    - '@commitlint/cli > lodash':
+        patched: '2020-05-02T02:25:14.859Z'
