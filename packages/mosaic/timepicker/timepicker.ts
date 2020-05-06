@@ -356,6 +356,7 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
     }
 
     onKeyDown(event: KeyboardEvent): void {
+        // tslint:disable-next-line: deprecation
         const keyCode = event.keyCode;
 
         if (hasModifierKey(event) || [BACKSPACE, DELETE].includes(keyCode)) {
