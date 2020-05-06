@@ -13,20 +13,27 @@
 <!--    </mc-form-field>-->
 
     <div>{{ formControlValue.value ? formControlValue.value.toISOString() : null }}</div>
-    <div>{{ formControlValue.errors }}</div>
 
     <br><br>
 
+    <div>Validation state: {{ reactiveFormControlValue.errors | json }}</div>
     <mc-form-field>
         <i mcPrefix mc-icon="mc-clock_16"></i>
-        <input mcTimepicker [formControl]="formControlValue" [format]="'HH:mm'">
+        <input mcTimepicker [formControl]="reactiveFormControlValue" [max]="maxDate">
+    </mc-form-field>
+
+    <br><br><br>
+
+    <div>Validation state: {{ formControlValue.errors | json }}</div>
+    <mc-form-field>
+        <i mcPrefix mc-icon="mc-clock_16"></i>
+        <input mcTimepicker [formControl]="formControlValue" [max]="maxDate" [min]="minDate">
     </mc-form-field>
 
     <br><br><br>
 
     <mc-form-field>
         <i mcPrefix mc-icon="mc-clock_16"></i>
-        <input mcTimepicker [(ngModel)]="ngModelValue" [format]="'HH:mm'">
+        <input mcTimepicker [(ngModel)]="ngModelValue" [format]="'HH:mm:ss'" [max]="maxDate" [min]="minDate">
     </mc-form-field>
-
 </div>

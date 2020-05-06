@@ -3,7 +3,15 @@ import {
     NgModule,
     ViewEncapsulation
 } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+    AbstractControl,
+    FormBuilder,
+    FormControl,
+    FormGroup,
+    FormsModule,
+    ReactiveFormsModule,
+    ValidatorFn
+} from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
@@ -25,6 +33,10 @@ import { default as _rollupMoment, Moment } from 'moment';
 
 const moment = _rollupMoment || _moment;
 
+export function customValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => ({ customValidator: { value: control.value } });
+}
+
 @Component({
     selector: 'app',
     styleUrls: ['../main.scss', 'styles.scss'],
@@ -32,11 +44,11 @@ const moment = _rollupMoment || _moment;
     encapsulation: ViewEncapsulation.None
 })
 export class TimepickerDemoComponent {
-    minDate = moment('2020-04-22 12:00:00');
-    maxDate = moment('2000-10-01 15:00:00');
-    // formControlValue = new FormControl(moment('2000-10-01 12:00:00'), Validators.min(this.minDate));
-    formControlValue = new FormControl(moment('2000-10-01 12:00:00'));
-    ngModelValue = moment('2000-10-01 15:00:00');
+    minDate = moment('2020-05-06 12:00:00');
+    maxDate = moment('2020-05-06 15:00:00');
+    reactiveFormControlValue = new FormControl(moment('2000-10-01 12:00:00'), customValidator());
+    formControlValue = new FormControl(moment('2020-05-06 12:00:00'));
+    ngModelValue = moment('2020-05-06 13:00:00');
 
     isDisabled: boolean = false;
 
