@@ -8,6 +8,9 @@ export const SELECT_PANEL_MAX_HEIGHT = 224;
 /** The panel's padding on the x-axis */
 export const SELECT_PANEL_PADDING_X = 1;
 
+/** The panel's padding on the x-axis to adjust panel width to  select borders */
+export const SELECT_PANEL_BORDER_PADDING_X = 2;
+
 /** The panel's x axis padding if it is indented (e.g. there is an option group). */
 /* tslint:disable-next-line:no-magic-numbers */
 export const SELECT_PANEL_INDENT_PADDING_X = SELECT_PANEL_PADDING_X * 2;
