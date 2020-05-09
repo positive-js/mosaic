@@ -13,6 +13,7 @@ import {
     Optional,
     Output,
     QueryList,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { ENTER, SPACE } from '@ptsecurity/cdk/keycodes';
@@ -74,6 +75,10 @@ export const MC_OPTION_PARENT_COMPONENT =
 export class McOption implements AfterViewChecked, OnDestroy {
     /** The form value of the option. */
     @Input() value: any;
+
+    @ViewChild('optionText', {static: false}) optionTextElement: ElementRef<HTMLInputElement>;
+
+    title = '';
 
     @Input()
     get showCheckbox() {
@@ -152,6 +157,7 @@ export class McOption implements AfterViewChecked, OnDestroy {
     ) {}
 
     ngAfterViewChecked() {
+        this.updateTitle();
         // Since parent components could be using the option's label to display the selected values
         // (e.g. `mc-select`) and they don't have a way of knowing if the option's label has changed
         // we have to check for changes in the DOM ourselves and dispatch an event. These checks are
@@ -263,6 +269,24 @@ export class McOption implements AfterViewChecked, OnDestroy {
 
     getHostElement(): HTMLElement {
         return this.element.nativeElement;
+    }
+
+    // Checks if option text doesn't fit into span
+    getTitle(): string {
+        const isTitleShown = this.optionTextElement
+            && this.optionTextElement.nativeElement.scrollWidth > this.optionTextElement.nativeElement.offsetWidth;
+
+        return isTitleShown ? this.optionTextElement.nativeElement.textContent || '' : '';
+    }
+
+    // Updates the title if it changed
+    updateTitle() {
+        const newTitle = this.getTitle();
+
+        if (this.title !== newTitle) {
+            this.title = newTitle;
+            this.changeDetectorRef.markForCheck();
+        }
     }
 
     /** Emits the selection change event. */
