@@ -5,6 +5,7 @@
 $mc-select-arrow-size: 5px !default;
 $mc-select-arrow-margin: 4px !default;
 $mc-select-panel-max-height: 232px !default;
+$mc-select-panel-max-width: 640px !default;
 $mc-select-item-height: 32px !default;
 
 $mc-select-panel-border-width: 1px !default;
@@ -145,6 +146,7 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
 
 .mc-select__panel {
     min-width: 100%; // prevents some animation twitching and test inconsistencies in IE11
+    max-width: $mc-select-panel-max-width;
 
     overflow: hidden;
 
