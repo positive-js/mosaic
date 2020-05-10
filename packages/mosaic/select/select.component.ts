@@ -491,7 +491,6 @@ export class McSelect extends McSelectMixinBase implements
     private readonly destroy = new Subject<void>();
 
     constructor(
-        private readonly _viewportRuler: ViewportRuler,
         private readonly _changeDetectorRef: ChangeDetectorRef,
         private readonly _ngZone: NgZone,
         private readonly _renderer: Renderer2,
