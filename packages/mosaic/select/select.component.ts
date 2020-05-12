@@ -3,10 +3,7 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { SelectionModel } from '@angular/cdk/collections';
-import {
-    CdkConnectedOverlay,
-    ViewportRuler
-} from '@angular/cdk/overlay';
+import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import {
     AfterContentInit,
     AfterViewInit,
