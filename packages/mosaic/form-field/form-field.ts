@@ -77,7 +77,6 @@ export const McFormFieldMixinBase: CanColorCtor & typeof McFormFieldBase = mixin
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-
 export class McFormField extends McFormFieldMixinBase implements
     AfterContentInit, AfterContentChecked, AfterViewInit, CanColor {
 
