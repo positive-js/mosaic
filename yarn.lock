@@ -1441,10 +1441,10 @@
   resolved "https://registry.yarnpkg.com/@ptsecurity/commitlint-config/-/commitlint-config-1.0.0.tgz#3939ccb03de8a0f2165d6185de0de794d2851ccc"
   integrity sha512-Cih2McIfrIkZL6iTvkzRVhPSjersHixQ8wbbWnTNG3s4pu0l7Kd0Fh4lL+vqIKMK8Wxibb2SG7RnMb6Ax6uVWw==
 
-"@ptsecurity/mosaic-icons@~3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@ptsecurity/mosaic-icons/-/mosaic-icons-3.0.0.tgz#748fc893df6c2dedba0af29dfad8d08b836acf4c"
-  integrity sha512-MN1N+2fCz1UuvNUSlsRT+bgBIevPf5maOJCz2QKMNip82l8s+CrViKSyCTTVd6LjlxCzL51xTq582UGoPlhuYg==
+"@ptsecurity/mosaic-icons@~5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@ptsecurity/mosaic-icons/-/mosaic-icons-5.0.0.tgz#7a3995f37c2a585614fee014a50501295842def6"
+  integrity sha512-1DOq2IEn8O/7cnqdFUXpmX0m36G6lPlxJFBPrUxCTPBoTIIo6XGVZyC4Ozqz8cVi95UR3/Z+Bb5RCZLiYLIUWw==
 
 "@ptsecurity/tslint-config@^0.13.1":
   version "0.13.1"
