@@ -24,7 +24,7 @@
         "@angular/forms": "{{NG_VERSION}}",
         "@ptsecurity/cdk": "{{VERSION}}",
         "@ptsecurity/mosaic-moment-adapter": "{{VERSION}}",
-        "@ptsecurity/mosaic-icons": "^3.0.0",
+        "@ptsecurity/mosaic-icons": "^5.0.0",
         "tslib": "^1.7.1"
     },
     "schematics": "./schematics/collection.json",
