@@ -7,19 +7,17 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
-import { MC_SIDEPANEL_DATA, McSidepanelPosition, McSidepanelService } from '@ptsecurity/mosaic/sidepanel';
-import { McSidepanelModule } from '@ptsecurity/mosaic/sidepanel/sidepanel.module';
+import { MC_SIDEPANEL_DATA, McSidepanelPosition, McSidepanelService, McSidepanelModule } from '@ptsecurity/mosaic/sidepanel';
 
 
 // tslint:disable:no-console
 @Component({
     selector: 'app',
-    template: require('./template.html'),
-    styleUrls: ['./styles.scss'],
+    templateUrl: './template.html',
+    styleUrls: ['../main.scss', './styles.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class SidepanelDemoComponent {
@@ -104,8 +102,3 @@ export class ExampleSidepanelComponent {
     ]
 })
 export class DemoModule {}
-
-platformBrowserDynamic()
-    .bootstrapModule(DemoModule)
-    .catch((error) => console.error(error));
-

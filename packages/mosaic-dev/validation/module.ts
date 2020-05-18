@@ -10,7 +10,6 @@ import {
     Validators
 } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { COMMA, ENTER } from '@ptsecurity/cdk/keycodes';
 import { CdkTreeModule, FlatTreeControl } from '@ptsecurity/cdk/tree';
@@ -118,9 +117,9 @@ export function ldapLoginValidator(loginRegex: RegExp): ValidatorFn {
 
 @Component({
     selector: 'app',
-    template: require('./template.html'),
-    encapsulation: ViewEncapsulation.None,
-    styleUrls: ['./styles.scss']
+    templateUrl: './template.html',
+    styleUrls: ['../main.scss', './styles.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent {
     reactiveTypeaheadItems: string[] = [];
@@ -301,9 +300,3 @@ export class DemoComponent {
     bootstrap: [DemoComponent]
 })
 export class DemoModule {}
-
-// tslint:disable:no-console
-platformBrowserDynamic()
-    .bootstrapModule(DemoModule)
-    .catch((error) => console.error(error));
-

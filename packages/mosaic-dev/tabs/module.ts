@@ -2,7 +2,6 @@
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { FormsModule, FormControl } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Observable, Observer } from 'rxjs';
 
@@ -21,8 +20,8 @@ export interface IExampleTab {
 
 @Component({
     selector: 'app',
-    template: require('./template.html'),
-    styleUrls: ['./styles.scss'],
+    templateUrl: './template.html',
+    styleUrls: ['../main.scss', './styles.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class TabsDemoComponent {
@@ -79,7 +78,7 @@ export class TabsDemoComponent {
     }
 
     selectedTabChange($event: any) {
-        console.log('selectedTabChange');
+        console.log('selectedTabChange Event:', $event);
     }
 }
 
@@ -103,9 +102,4 @@ export class TabsDemoComponent {
         TabsDemoComponent
     ]
 })
-export class TabsDemoModule { }
-
-platformBrowserDynamic()
-    .bootstrapModule(TabsDemoModule)
-    .catch((error) => console.error(error));
-
+export class DemoModule {}

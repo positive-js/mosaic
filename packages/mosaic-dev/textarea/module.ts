@@ -1,7 +1,6 @@
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { McTextareaModule } from '@ptsecurity/mosaic/textarea';
 
 import { McFormFieldModule } from '../../mosaic/form-field';
@@ -9,9 +8,9 @@ import { McFormFieldModule } from '../../mosaic/form-field';
 
 @Component({
     selector: 'app',
-    template: require('./template.html'),
+    templateUrl: './template.html',
     encapsulation: ViewEncapsulation.None,
-    styleUrls: ['./styles.scss']
+    styleUrls: ['../main.scss', './styles.scss']
 })
 export class DemoComponent {
     value: string;
@@ -33,9 +32,3 @@ export class DemoComponent {
     ]
 })
 export class DemoModule {}
-
-// tslint:disable:no-console
-platformBrowserDynamic()
-    .bootstrapModule(DemoModule)
-    .catch((error) => console.error(error));
-
