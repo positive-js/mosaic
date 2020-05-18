@@ -34,7 +34,7 @@ export class TabsDemoComponent {
     tabLoadTimes: Date[] = [];
 
     links = ['First', 'Second', 'Third'];
-    activeLink = this.links[0];
+    activeLink: any = this.links[0];
     background = '';
 
     constructor() {
