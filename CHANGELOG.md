@@ -1,3 +1,10 @@
+# 9.0.0 "Oloroso" (2020-05-18)
+
+### Mosaic
+
+ * feature  **input:** replace cleaner icon #UIM-442 ([#461](https://github.com/positive-js/mosaic/issues/461)) ([a2e6975](https://github.com/positive-js/mosaic/commit/a2e69751893566ad91753545b77e6a5e904cdd76)), closes [#UIM-442](https://github.com/positive-js/mosaic/issues/UIM-442)
+ * feature  **timepicker:** timepicker in reactive forms (#UIM-429) ([#459](https://github.com/positive-js/mosaic/issues/459)) ([37706f6](https://github.com/positive-js/mosaic/commit/37706f668209fcd566c2ba27c98310204c550961)), closes [#UIM-429](https://github.com/positive-js/mosaic/issues/UIM-429)
+
 # 9.0.0-beta.2 "Cask of Amontillado" (2020-05-06)
 
 ### Mosaic
