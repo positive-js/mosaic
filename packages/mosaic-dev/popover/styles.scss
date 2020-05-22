@@ -19,25 +19,7 @@ app {
 }
 
 .popover-485 {
-    width: 485px;
-
     .mc-popover {
         max-width: 485px !important;
     }
-}
-
-
-button.step {
-    display: inline-block;
-    width: 30%;
-    min-width: 100px;
-}
-
-.trigger-button {
-    width: 130px;
-    margin: 15px;
-}
-
-button.with-margin {
-    margin: 0 5%;
 }
