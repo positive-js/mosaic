@@ -112,7 +112,7 @@ $mc-popover-large-width: 640px;
 .mc-popover_placement-left-top,
 .mc-popover_placement-left-bottom {
     .mc-popover {
-        margin-left: -$popover-distance;
+        margin-right: $popover-distance;
     }
 }
 
