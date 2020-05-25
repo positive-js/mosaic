@@ -78,8 +78,6 @@ export class McOption implements AfterViewChecked, OnDestroy {
 
     @ViewChild('optionText', {static: false}) optionTextElement: ElementRef<HTMLInputElement>;
 
-    title = '';
-
     @Input()
     get showCheckbox() {
         return this._showCheckbox === undefined ? this.multiple : this._showCheckbox;
@@ -97,6 +95,15 @@ export class McOption implements AfterViewChecked, OnDestroy {
 
     /** Emits when the state of the option changes and any parents have to be notified. */
     readonly stateChanges = new Subject<void>();
+
+    get title() {
+        const newTitle = this.getTitle();
+        this._title = newTitle || undefined;
+
+        return this._title;
+    }
+
+    private _title: string | undefined;
 
     /**
      * The displayed value of the option. It is necessary to show the selected option in the
@@ -272,11 +279,14 @@ export class McOption implements AfterViewChecked, OnDestroy {
     }
 
     // Checks if option text doesn't fit into span
-    getTitle(): string {
-        const isTitleShown = this.optionTextElement
-            && this.optionTextElement.nativeElement.scrollWidth > this.optionTextElement.nativeElement.offsetWidth;
+    isTitleShown(): boolean {
+        return this.optionTextElement
+            && this.optionTextElement.nativeElement.scrollWidth > this.getHostElement().offsetWidth;
+    }
 
-        return isTitleShown ? this.optionTextElement.nativeElement.textContent || '' : '';
+    getTitle(): string {
+        return this.isTitleShown() ? this.optionTextElement.nativeElement.textContent || '' : '';
+
     }
 
     // Updates the title if it changed
@@ -284,7 +294,6 @@ export class McOption implements AfterViewChecked, OnDestroy {
         const newTitle = this.getTitle();
 
         if (this.title !== newTitle) {
-            this.title = newTitle;
             this.changeDetectorRef.markForCheck();
         }
     }
