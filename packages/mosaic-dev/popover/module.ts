@@ -6,6 +6,10 @@ import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McPopoverModule } from '@ptsecurity/mosaic/popover';
 
 import { McIconModule } from '../../mosaic/icon/';
+import { FormsModule } from '@angular/forms';
+import { McInputModule } from '@ptsecurity/mosaic/input';
+import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
+import { McSelectModule } from '@ptsecurity/mosaic/select';
 
 
 /* tslint:disable:no-trailing-whitespace */
@@ -19,6 +23,31 @@ export class DemoComponent {
     popoverActiveStage: number;
 
     isPopoverVisibleLeft: boolean = false;
+
+    ELEMENTS = {
+        BUTTON: 'button',
+        INPUT: 'input',
+        ICON: 'icon'
+    };
+
+    TRIGGERS = {
+        CLICK: 'click',
+        FOCUS: 'focus',
+        HOVER: 'hover'
+    };
+
+    SIZE = {
+        LARGE: 'large',
+        NORMAL: 'normal',
+        SMALL: 'small'
+    };
+
+    selectedElement: string = 'button';
+    selectedPlacement: string = 'top';
+    selectedTrigger: string = 'click';
+    selectedSize: string = 'normal';
+    layoutClass: string = 'flex layout-row layout-align-start-center';
+    content: string = 'button text';
 
     constructor() {
         this.popoverActiveStage = 1;
@@ -44,6 +73,21 @@ export class DemoComponent {
     onPopoverVisibleChange() {
         console.log('onPopoverVisibleChange'); // tslint:disable-line:no-console
     }
+
+    setPlacement(placement: string) {
+        console.log(placement);
+        this.selectedPlacement = placement;
+    }
+
+
+    showElement(): string {
+        return this.selectedElement;
+    }
+
+    activated(value: string): boolean {
+        console.log(value, this.selectedPlacement);
+        return this.selectedPlacement === value;
+    }
 }
 
 @NgModule({
@@ -54,9 +98,13 @@ export class DemoComponent {
         BrowserModule,
         BrowserAnimationsModule,
         A11yModule,
+        FormsModule,
+        McFormFieldModule,
+        McSelectModule,
         McPopoverModule,
         McButtonModule,
-        McIconModule
+        McIconModule,
+        McInputModule
     ],
     bootstrap: [
         DemoComponent

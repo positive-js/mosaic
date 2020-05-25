@@ -440,6 +440,10 @@ export class McPopover implements OnInit, OnDestroy {
 
     private manualListeners = new Map<string, EventListenerOrEventListenerObject>();
     private readonly destroyed = new Subject<void>();
+    // @ts-ignore
+    private readonly resizeObserver = new ResizeObserver(() => {
+        setTimeout(() => this.updatePosition());
+    });
 
     constructor(
         private overlay: Overlay,
@@ -681,12 +685,16 @@ export class McPopover implements OnInit, OnDestroy {
 
             this.updatePosition();
             this.popover.show();
+            this.resizeObserver
+                .observe(document.querySelector('.mc-popover__container'));
         }
     }
 
     hide(): void {
         if (this.popover) {
             this.popover.hide();
+            this.resizeObserver
+                .unobserve(document.querySelector('.mc-popover__container'));
         }
     }
 
@@ -703,21 +711,22 @@ export class McPopover implements OnInit, OnDestroy {
         position.withPositions([
             {...origin.main, ...overlay.main},
             {...origin.fallback, ...overlay.fallback}
-        ]);
+        ]).withPush(true);
 
-        //
-        // FIXME: Необходимо в некоторых моментах форсировать позиционировать только после рендеринга всего контента
-        //
         if (reapplyPosition) {
             setTimeout(() => {
                 position.reapplyLastPosition();
+            });
+        } else {
+            setTimeout( () => {
+                position.apply();
             });
         }
     }
 
     /**
      * Returns the origin position and a fallback position based on the user's position preference.
-     * The fallback position is the inverse of the origin (e.g. `'below' -> 'above'`).
+     * The fallback position is the inverse of the origin (e.g. `'top' -> 'bottom'`).
      */
     getOrigin(): {main: OriginConnectionPosition; fallback: OriginConnectionPosition} {
         let originPosition: OriginConnectionPosition;
