@@ -1,15 +1,16 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
+import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
+import { McInputModule } from '@ptsecurity/mosaic/input';
 import { McPopoverModule } from '@ptsecurity/mosaic/popover';
+import { McSelectModule } from '@ptsecurity/mosaic/select';
+import { McSplitterModule } from '@ptsecurity/mosaic/splitter';
 
 import { McIconModule } from '../../mosaic/icon/';
-import { FormsModule } from '@angular/forms';
-import { McInputModule } from '@ptsecurity/mosaic/input';
-import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
-import { McSelectModule } from '@ptsecurity/mosaic/select';
 
 
 /* tslint:disable:no-trailing-whitespace */
@@ -23,6 +24,8 @@ export class DemoComponent {
     popoverActiveStage: number;
 
     isPopoverVisibleLeft: boolean = false;
+
+    activatedPosition: string = '';
 
     ELEMENTS = {
         BUTTON: 'button',
@@ -46,7 +49,7 @@ export class DemoComponent {
     selectedPlacement: string = 'top';
     selectedTrigger: string = 'click';
     selectedSize: string = 'normal';
-    layoutClass: string = 'flex layout-row layout-align-start-center';
+    layoutClass: string = 'flex-65 layout-row layout-align-center-center';
     content: string = 'button text';
 
     constructor() {
@@ -62,31 +65,34 @@ export class DemoComponent {
         this.popoverActiveStage += direction;
     }
 
-    changePopoverVisibilityLeft() {
-        this.isPopoverVisibleLeft = !this.isPopoverVisibleLeft;
+    onPopoverVisibleChange($event) {
+        if (!$event) {
+            this.activatedPosition = '';
+        }
     }
 
-    onPopoverVisibleChangeLeft(update: boolean) {
-        this.isPopoverVisibleLeft = update;
-    }
-
-    onPopoverVisibleChange() {
-        console.log('onPopoverVisibleChange'); // tslint:disable-line:no-console
+    onStrategyPlacementChange(event) {
+        this.activatedPosition = event;
     }
 
     setPlacement(placement: string) {
-        console.log(placement);
         this.selectedPlacement = placement;
     }
-
 
     showElement(): string {
         return this.selectedElement;
     }
 
     activated(value: string): boolean {
-        console.log(value, this.selectedPlacement);
         return this.selectedPlacement === value;
+    }
+
+    isActual(value: string): boolean {
+        return this.activatedPosition === value && this.selectedPlacement !== this.activatedPosition;
+    }
+
+    get isFallbackActivated(): boolean {
+        return this.selectedPlacement !== this.activatedPosition && this.activatedPosition !== '';
     }
 }
 
@@ -104,7 +110,8 @@ export class DemoComponent {
         McPopoverModule,
         McButtonModule,
         McIconModule,
-        McInputModule
+        McInputModule,
+        McSplitterModule
     ],
     bootstrap: [
         DemoComponent

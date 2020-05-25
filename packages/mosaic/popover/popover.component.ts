@@ -35,7 +35,19 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
-import { EXTENDED_OVERLAY_POSITIONS, POSITION_MAP, POSITION_TO_CSS_MAP } from '@ptsecurity/mosaic/core';
+import {
+    BOTTOM_LEFT_POSITION_PRIORITY,
+    BOTTOM_POSITION_PRIORITY, BOTTOM_RIGHT_POSITION_PRIORITY,
+    EXTENDED_OVERLAY_POSITIONS, LEFT_BOTTOM_POSITION_PRIORITY, LEFT_POSITION_PRIORITY, LEFT_TOP_POSITION_PRIORITY,
+    POSITION_MAP,
+    POSITION_TO_CSS_MAP,
+    RIGHT_BOTTOM_POSITION_PRIORITY,
+    RIGHT_POSITION_PRIORITY,
+    RIGHT_TOP_POSITION_PRIORITY,
+    TOP_LEFT_POSITION_PRIORITY,
+    TOP_POSITION_PRIORITY,
+    TOP_RIGHT_POSITION_PRIORITY
+} from '@ptsecurity/mosaic/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
@@ -288,6 +300,9 @@ export class McPopover implements OnInit, OnDestroy {
 
     @Output('mcPopoverVisibleChange') mcVisibleChange = new EventEmitter<boolean>();
 
+    @Output('mcPopoverPositionStrategyPlacementChange')
+    mcPositionStrategyPlacementChange: EventEmitter<string> = new EventEmitter();
+
     @Input('mcPopoverHeader')
     get mcHeader(): string | TemplateRef<any> {
         return this._mcHeader;
@@ -536,6 +551,7 @@ export class McPopover implements OnInit, OnDestroy {
             return false;
         });
         this.updateCompValue('mcPlacement', updatedPlacement);
+        this.mcPositionStrategyPlacementChange.emit(updatedPlacement);
 
         if (this.popover) {
             this.updateCompValue('classList', this.classList);
@@ -705,20 +721,14 @@ export class McPopover implements OnInit, OnDestroy {
         }
         const position =
             this.overlayRef.getConfig().positionStrategy as FlexibleConnectedPositionStrategy;
-        const origin = this.getOrigin();
-        const overlay = this.getOverlayPosition();
-
-        position.withPositions([
-            {...origin.main, ...overlay.main},
-            {...origin.fallback, ...overlay.fallback}
-        ]).withPush(true);
+        position.withPositions(this.getPrioritizedPositions()).withPush(true);
 
         if (reapplyPosition) {
             setTimeout(() => {
                 position.reapplyLastPosition();
             });
         } else {
-            setTimeout( () => {
+            setTimeout(() => {
                 position.apply();
             });
         }
@@ -728,7 +738,11 @@ export class McPopover implements OnInit, OnDestroy {
      * Returns the origin position and a fallback position based on the user's position preference.
      * The fallback position is the inverse of the origin (e.g. `'top' -> 'bottom'`).
      */
-    getOrigin(): {main: OriginConnectionPosition; fallback: OriginConnectionPosition} {
+    getOrigin(): {
+        main: OriginConnectionPosition;
+        fallback: OriginConnectionPosition;
+        alternative: OriginConnectionPosition;
+    } {
         let originPosition: OriginConnectionPosition;
         const originXPosition = this.getOriginXaxis();
         const originYPosition = this.getOriginYaxis();
@@ -738,7 +752,8 @@ export class McPopover implements OnInit, OnDestroy {
 
         return {
             main: originPosition,
-            fallback: {originX: x, originY: y}
+            fallback: {originX: x, originY: y},
+            alternative: {originX: 'end', originY: 'top'}
         };
     }
 
@@ -778,7 +793,11 @@ export class McPopover implements OnInit, OnDestroy {
     }
 
     /** Returns the overlay position and a fallback position based on the user's preference */
-    getOverlayPosition(): {main: OverlayConnectionPosition; fallback: OverlayConnectionPosition} {
+    getOverlayPosition(): {
+        main: OverlayConnectionPosition;
+        fallback: OverlayConnectionPosition;
+        alternative: OverlayConnectionPosition;
+    } {
         const position = this.mcPlacement;
         let overlayPosition: OverlayConnectionPosition;
         if (this.availablePositions[position]) {
@@ -794,7 +813,8 @@ export class McPopover implements OnInit, OnDestroy {
 
         return {
             main: overlayPosition,
-            fallback: {overlayX: x, overlayY: y}
+            fallback: {overlayX: x, overlayY: y},
+            alternative: {overlayX: 'end', overlayY: 'bottom'}
         };
     }
 
@@ -817,5 +837,23 @@ export class McPopover implements OnInit, OnDestroy {
         }
 
         return {x: newX, y: newY};
+    }
+
+    private getPrioritizedPositions() {
+        switch (this.mcPlacement) {
+            case 'top': return TOP_POSITION_PRIORITY;
+            case 'topLeft': return TOP_LEFT_POSITION_PRIORITY;
+            case 'topRight': return TOP_RIGHT_POSITION_PRIORITY;
+            case 'bottom': return BOTTOM_POSITION_PRIORITY;
+            case 'bottomLeft': return BOTTOM_LEFT_POSITION_PRIORITY;
+            case 'bottomRight': return BOTTOM_RIGHT_POSITION_PRIORITY;
+            case 'rightTop': return RIGHT_TOP_POSITION_PRIORITY;
+            case 'right': return RIGHT_POSITION_PRIORITY;
+            case 'rightBottom': return RIGHT_BOTTOM_POSITION_PRIORITY;
+            case 'leftBottom': return LEFT_BOTTOM_POSITION_PRIORITY;
+            case 'left': return LEFT_POSITION_PRIORITY;
+            case 'leftTop': return LEFT_TOP_POSITION_PRIORITY;
+            default: return [POSITION_MAP.top];
+        }
     }
 }

@@ -98,6 +98,114 @@ export const EXTENDED_OVERLAY_POSITIONS = objectValues([
     POSITION_MAP.left, POSITION_MAP.leftTop, POSITION_MAP.leftBottom
 ]);
 
+export const TOP_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.top,
+    POSITION_MAP.bottom,
+    POSITION_MAP.topLeft,
+    POSITION_MAP.topRight,
+    POSITION_MAP.bottomLeft,
+    POSITION_MAP.bottomRight
+]);
+
+export const BOTTOM_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.bottom,
+    POSITION_MAP.top,
+    POSITION_MAP.bottomLeft,
+    POSITION_MAP.bottomRight,
+    POSITION_MAP.topLeft,
+    POSITION_MAP.topRight
+]);
+
+export const RIGHT_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.right,
+    POSITION_MAP.left,
+    POSITION_MAP.rightTop,
+    POSITION_MAP.rightBottom,
+    POSITION_MAP.leftTop,
+    POSITION_MAP.leftBottom
+]);
+
+export const LEFT_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.left,
+    POSITION_MAP.right,
+    POSITION_MAP.leftTop,
+    POSITION_MAP.leftBottom,
+    POSITION_MAP.rigthTop,
+    POSITION_MAP.rightBottom
+]);
+
+export const RIGHT_TOP_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.rightTop,
+    POSITION_MAP.right,
+    POSITION_MAP.rightBottom,
+    POSITION_MAP.leftBottom,
+    POSITION_MAP.left,
+    POSITION_MAP.leftTop
+]);
+
+export const RIGHT_BOTTOM_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.rightBottom,
+    POSITION_MAP.leftBottom,
+    POSITION_MAP.left,
+    POSITION_MAP.leftTop,
+    POSITION_MAP.rightTop,
+    POSITION_MAP.right
+]);
+
+export const LEFT_TOP_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.leftTop,
+    POSITION_MAP.rightTop,
+    POSITION_MAP.right,
+    POSITION_MAP.rightBottom,
+    POSITION_MAP.left,
+    POSITION_MAP.leftBottom
+]);
+
+export const LEFT_BOTTOM_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.leftBottom,
+    POSITION_MAP.left,
+    POSITION_MAP.leftTop,
+    POSITION_MAP.rightTop,
+    POSITION_MAP.right,
+    POSITION_MAP.rightBottom
+]);
+
+export const TOP_LEFT_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.topLeft,
+    POSITION_MAP.top,
+    POSITION_MAP.topRight,
+    POSITION_MAP.bottomRight,
+    POSITION_MAP.bottom,
+    POSITION_MAP.bottomLeft
+]);
+
+export const TOP_RIGHT_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.topRight,
+    POSITION_MAP.bottomRight,
+    POSITION_MAP.bottom,
+    POSITION_MAP.bottomLeft,
+    POSITION_MAP.topLeft,
+    POSITION_MAP.top
+]);
+
+export const BOTTOM_RIGHT_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.bottomRight,
+    POSITION_MAP.bottom,
+    POSITION_MAP.bottomLeft,
+    POSITION_MAP.topLeft,
+    POSITION_MAP.top,
+    POSITION_MAP.topRight
+]);
+
+export const BOTTOM_LEFT_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.bottomLeft,
+    POSITION_MAP.topLeft,
+    POSITION_MAP.top,
+    POSITION_MAP.topRight,
+    POSITION_MAP.bottomRight,
+    POSITION_MAP.bottom
+]);
+
 export const POSITION_TO_CSS_MAP: {[key: string]: string} = {
     top: 'top',
     topLeft: 'top-left',

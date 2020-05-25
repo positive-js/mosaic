@@ -10,15 +10,45 @@ body, html {
 app {
     height: 100%;
     width: 100%;
-    display: flex;
-    flex: 1 1 100%;
-    flex-flow: column;
-    justify-content: center;
-    align-items: stretch;
-    padding: 0 10%;
+
+    .actual {
+        animation: blink-animation 1s steps(5, start) infinite;
+        -webkit-animation: blink-animation 1s steps(5, start) infinite;
+    }
+    @keyframes blink-animation {
+        to {
+            visibility: hidden;
+        }
+    }
+    @-webkit-keyframes blink-animation {
+        to {
+            visibility: hidden;
+        }
+    }
+
+    .red {
+        color: red;
+    }
+
+    .container {
+        width: 100%;
+        height: 100%;
+        padding: 1%;
+    }
+
+    .config {
+        height: 50%;
+        width: 100%;
+    }
+
+    .result {
+        border-top: solid 2px #56d1ff;
+        height: 50%;
+        width: 100%;
+    }
 
     .padding-32 {
-        padding: 32px;
+        padding: 12px;
     }
 
     .visual-box {
