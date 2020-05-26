@@ -574,7 +574,7 @@ export class McPopover implements OnInit, OnDestroy {
 
         const verticalOffset = this.hostView.element.nativeElement.clientHeight / 2; // tslint:disable-line
         const anchorElementWidth = this.hostView.element.nativeElement.clientWidth; // tslint:disable-line
-        const anchorElementHeight = verticalOffset * 2;
+        const anchorElementHeight = verticalOffset * 2; // tslint:disable-line
 
         if (updatedPlacement === 'rightTop' || updatedPlacement === 'leftTop') {
             const currentContainer = this.overlayRef.overlayElement.style.top || '0px';
@@ -787,6 +787,7 @@ export class McPopover implements OnInit, OnDestroy {
         if (this.mcPlacementPriority) {
             return this.getPriorityPlacementStrategy(this.mcPlacementPriority);
         }
+
         return POSITION_PRIORITY_STRATEGY[this.mcPlacement];
     }
 }
