@@ -568,28 +568,34 @@ export class McPopover implements OnInit, OnDestroy {
             this.overlayRef = this.createOverlay();
         }
 
-        const verticalOffset = this.hostView.element.nativeElement.clientHeight / 2; // tslint:disable-line
-        const horizontalOffset = this.hostView.element.nativeElement.clientWidth / 2; // tslint:disable-line
+        const elementHeight = this.hostView.element.nativeElement.clientHeight;
+        const elementWidth = this.hostView.element.nativeElement.clientWidth;
+        const verticalOffset = elementHeight / 2; // tslint:disable-line
+        const horizontalOffset = elementWidth / 2; // tslint:disable-line
 
-        if (updatedPlacement === 'rightTop' || updatedPlacement === 'leftTop') {
+        if ((updatedPlacement === 'rightTop' || updatedPlacement === 'leftTop')
+            && elementHeight <= POPOVER_ARROW_BORDER_DISTANCE) {
             const currentContainer = this.overlayRef.overlayElement.style.top || '0px';
             this.overlayRef.overlayElement.style.top =
                 `${parseInt(currentContainer.split('px')[0], 10) + verticalOffset - POPOVER_ARROW_BORDER_DISTANCE}px`; // tslint:disable-line
         }
 
-        if (updatedPlacement === 'rightBottom' || updatedPlacement === 'leftBottom') {
+        if ((updatedPlacement === 'rightBottom' || updatedPlacement === 'leftBottom')
+            && elementHeight <= POPOVER_ARROW_BORDER_DISTANCE) {
             const currentContainer = this.overlayRef.overlayElement.style.bottom || '0px';
             this.overlayRef.overlayElement.style.bottom =
                 `${parseInt(currentContainer.split('px')[0], 10) + verticalOffset - POPOVER_ARROW_BORDER_DISTANCE}px`; // tslint:disable-line
         }
 
-        if (updatedPlacement === 'topRight' || updatedPlacement === 'bottomRight') {
+        if ((updatedPlacement === 'topRight' || updatedPlacement === 'bottomRight')
+            && elementWidth <= POPOVER_ARROW_BORDER_DISTANCE) {
             const currentContainer = this.overlayRef.overlayElement.style.right || '0px';
             this.overlayRef.overlayElement.style.right =
                 `${parseInt(currentContainer.split('px')[0], 10) + horizontalOffset - POPOVER_ARROW_BORDER_DISTANCE}px`; // tslint:disable-line
         }
 
-        if (updatedPlacement === 'topLeft' || updatedPlacement === 'bottomLeft') {
+        if ((updatedPlacement === 'topLeft' || updatedPlacement === 'bottomLeft')
+            && elementWidth <= POPOVER_ARROW_BORDER_DISTANCE) {
             const currentContainer = this.overlayRef.overlayElement.style.left || '0px';
             this.overlayRef.overlayElement.style.left =
                 `${parseInt(currentContainer.split('px')[0], 10) + horizontalOffset - POPOVER_ARROW_BORDER_DISTANCE}px`; // tslint:disable-line
