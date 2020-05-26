@@ -66,7 +66,7 @@
 
             <label for="layout"
                    class="flex mc-form-label">
-                Choose popover size
+                Choose layout content placement
             </label>
             <mc-form-field id="layout" class="padding-32">
                 <mc-select [(value)]="layoutClass" [placeholder]="'Select layout'">
@@ -85,7 +85,7 @@
         <div class="flex flex-35 layout-align-center-center">
             <label for="trigger"
                    class="flex mc-form-label">
-                Choose popover arrow placement - popover mcPlacement
+                Choose popover arrow placement - popover mcPlacement and placement priority strategy
             </label>
             <div class="visual-box">
                 <div (click)="setPlacement('topLeft')"
@@ -161,6 +161,22 @@
                      }"
                      class="visual-box--clickable visual-box_placement-left-top"></div>
             </div>
+            <mc-form-field>
+                <mc-select multiple [(value)]="multipleSelected">
+                    <mc-option value="top" disabled>Top</mc-option>
+                    <mc-option value="topLeft">TopLeft</mc-option>
+                    <mc-option value="topRight">TopRight</mc-option>
+                    <mc-option value="bottom">Bottom</mc-option>
+                    <mc-option value="bottomLeft">BottomLeft</mc-option>
+                    <mc-option value="bottomRight">BottomRight</mc-option>
+                    <mc-option value="right">Right</mc-option>
+                    <mc-option value="rightTop">RightTop</mc-option>
+                    <mc-option value="rightBottom">RightBottom</mc-option>
+                    <mc-option value="left">Left</mc-option>
+                    <mc-option value="leftTop">LeftTop</mc-option>
+                    <mc-option value="leftBottom">LeftBottom</mc-option>
+                </mc-select>
+            </mc-form-field>
         </div>
         <div class="flex-30">
             <h3>Configuration:</h3>
@@ -171,6 +187,7 @@
                 <li>Popover anchored element: {{selectedElement}}</li>
                 <li *ngIf="this.isFallbackActivated" class="actual red">Popover activated fallback position: {{activatedPosition}}</li>
                 <li>Layout positioning: {{layoutClass}}</li>
+                <li *ngIf="multipleSelected">Placement priority order: {{multipleSelected}}</li>
             </ul>
 
         </div>
@@ -178,12 +195,13 @@
 
     <div class="{{layoutClass}} result">
         <div [ngSwitch]="showElement()">
-            <button mc-button
+            <button mc-button class="proove"
                     *ngSwitchCase="ELEMENTS.BUTTON"
                     mcPopover
                     mcPopoverClass="popover-485"
                     mcPopoverHeader="Header text"
                     [mcPopoverPlacement]="selectedPlacement"
+                    [mcPopoverPlacementPriority]="multipleSelected"
                     [mcPopoverSize]="selectedSize"
                     [mcPopoverTrigger]="selectedTrigger"
                     [mcPopoverContent]="customContent"
@@ -191,7 +209,7 @@
                     (mcPopoverPositionStrategyPlacementChange)="onStrategyPlacementChange($event)"
                     (mcPopoverVisibleChange)="onPopoverVisibleChange($event)"
             >
-                <span [innerText]="content"></span>
+                Button
             </button>
             <mc-form-field *ngSwitchCase="ELEMENTS.INPUT">
                 <input mcInput
@@ -201,11 +219,13 @@
                        mcPopoverClass="popover-485"
                        mcPopoverHeader="Lorem ipsum"
                        [mcPopoverPlacement]="selectedPlacement"
+                       [mcPopoverPlacementPriority]="multipleSelected"
                        [mcPopoverSize]="selectedSize"
                        [mcPopoverTrigger]="selectedTrigger"
                        [mcPopoverContent]="customContent"
                        [mcPopoverFooter]="customFooter"
-                       (mcPopoverVisibleChange)="onPopoverVisibleChange()"
+                       (mcPopoverPositionStrategyPlacementChange)="onStrategyPlacementChange($event)"
+                       (mcPopoverVisibleChange)="onPopoverVisibleChange($event)"
                 >
             </mc-form-field>
             <div *ngSwitchCase="ELEMENTS.ICON">
@@ -214,155 +234,16 @@
                    mcPopoverClass="popover-485"
                    mcPopoverHeader="Header text"
                    [mcPopoverPlacement]="selectedPlacement"
+                   [mcPopoverPlacementPriority]="multipleSelected"
                    [mcPopoverSize]="selectedSize"
                    [mcPopoverTrigger]="selectedTrigger"
                    [mcPopoverContent]="customContent"
                    [mcPopoverFooter]="customFooter"
-                   (mcPopoverVisibleChange)="onPopoverVisibleChange()"
+                   (mcPopoverPositionStrategyPlacementChange)="onStrategyPlacementChange($event)"
+                   (mcPopoverVisibleChange)="onPopoverVisibleChange($event)"
                 ></i>
             </div>
         </div>
     </div>
 
-    <!--<section class="flex layout-row layout-align-center-center layout-align-space-around">-->
-    <!--    <button-->
-    <!--        mc-button-->
-    <!--        mcPopover-->
-    <!--        mcPopoverClass="popover-485"-->
-    <!--        mcPopoverHeader="Lorem ipsum"-->
-    <!--        mcPopoverPlacement="bottomLeft"-->
-    <!--        mcPopoverSize="large"-->
-    <!--        [mcPopoverContent]="customContent"-->
-    <!--        [mcPopoverFooter]="customFooter"-->
-    <!--        (mcPopoverVisibleChange)="onPopoverVisibleChange()">-->
-    <!--        bottomLeft-->
-    <!--    </button>-->
-    <!--    <button-->
-    <!--        mc-button-->
-    <!--        mcPopover-->
-    <!--        mcPopoverClass="popover-485 max-width-class"-->
-    <!--        mcPopoverHeader="Lorem ipsum"-->
-    <!--        mcPopoverPlacement="bottom"-->
-    <!--        mcPopoverSize="small"-->
-    <!--        [mcPopoverContent]="customContent"-->
-    <!--        [mcPopoverFooter]="customFooter">-->
-    <!--        bottom-->
-    <!--    </button>-->
-    <!--    <button-->
-    <!--        mc-button-->
-    <!--        mcPopover-->
-    <!--        mcPopoverTrigger="focus"-->
-    <!--        mcPopoverClass="popover-485"-->
-    <!--        mcPopoverHeader="Lorem ipsum"-->
-    <!--        [mcPopoverContent]="customContent">-->
-    <!--        mcPopoverTrigger="focus"-->
-    <!--    </button>-->
-    <!--</section>-->
-
-    <!--<section class="flex layout-row layout-align-stretch-center">-->
-    <!--    <section class="flex layout-column layout-align-space-between-start">-->
-    <!--        <button-->
-    <!--            mc-button-->
-    <!--            mcPopover-->
-    <!--            mcPopoverClass="popover-485"-->
-    <!--            mcPopoverHeader="Lorem ipsum"-->
-    <!--            mcPopoverPlacement="rightTop"-->
-    <!--            [mcPopoverContent]="customContent"-->
-    <!--            [mcPopoverFooter]="customFooter">-->
-    <!--            rightTop-->
-    <!--        </button>-->
-    <!--        <button-->
-    <!--            mc-button-->
-    <!--            mcPopover-->
-    <!--            mcPopoverClass="popover-485"-->
-    <!--            mcPopoverHeader="Lorem ipsum"-->
-    <!--            mcPopoverPlacement="right"-->
-    <!--            [mcPopoverContent]="customContent"-->
-    <!--            [mcPopoverFooter]="customFooter">-->
-    <!--            right-->
-    <!--        </button>-->
-    <!--        <span-->
-    <!--            mcPopover-->
-    <!--            mcPopoverTrigger="click"-->
-    <!--            mcPopoverClass="popover-485"-->
-    <!--            mcPopoverHeader="Lorem ipsum"-->
-    <!--            mcPopoverPlacement="rightBottom"-->
-    <!--            [mcPopoverContent]="customContent"-->
-    <!--            [mcPopoverFooter]="customFooter">-->
-    <!--            rightBottom <i class="mc-disabled" mc-icon="mc-folder-opened_16"></i>-->
-    <!--        </span>-->
-    <!--        <button #test1 mcPopover mcPopoverTrigger="hover" mcPopoverContent="_TEST1">BUTTON</button>-->
-    <!--    </section>-->
-
-    <!--    <section class="flex layout-column layout-align-space-between-end">-->
-    <!--        <button-->
-    <!--            mc-button-->
-    <!--            mcPopover-->
-    <!--            mcPopoverClass="popover-485"-->
-    <!--            mcPopoverHeader="Lorem ipsum"-->
-    <!--            mcPopoverPlacement="leftTop"-->
-    <!--            [mcPopoverContent]="customContent"-->
-    <!--            [mcPopoverFooter]="customFooter">-->
-    <!--            leftTop-->
-    <!--        </button>-->
-    <!--        <button-->
-    <!--            mc-button-->
-    <!--            mcPopover-->
-    <!--            mcPopoverTrigger="manual"-->
-    <!--            mcPopoverClass="popover-485"-->
-    <!--            [mcPopoverVisible]="isPopoverVisibleLeft"-->
-    <!--            mcPopoverHeader="Lorem ipsum"-->
-    <!--            mcPopoverPlacement="left"-->
-    <!--            [mcPopoverContent]="customContent"-->
-    <!--            [mcPopoverFooter]="customFooter"-->
-    <!--            (mcPopoverVisibleChange)="onPopoverVisibleChangeLeft($event)"-->
-    <!--            (click)="changePopoverVisibilityLeft()">-->
-    <!--            manual left-->
-    <!--        </button>-->
-    <!--        <button-->
-    <!--            mc-button-->
-    <!--            mcPopover-->
-    <!--            mcPopoverClass="popover-485"-->
-    <!--            mcPopoverHeader="Lorem ipsum"-->
-    <!--            mcPopoverPlacement="leftBottom"-->
-    <!--            [mcPopoverContent]="customContent"-->
-    <!--            [mcPopoverFooter]="customFooter">-->
-    <!--            leftBottom-->
-    <!--        </button>-->
-    <!--    </section>-->
-    <!--</section>-->
-
-    <!--<section class="flex layout-row layout-align-center-center layout-align-space-around">-->
-    <!--    <button-->
-    <!--        mc-button-->
-    <!--        mcPopover-->
-    <!--        mcPopoverClass="popover-485"-->
-    <!--        mcPopoverHeader="Lorem ipsum"-->
-    <!--        mcPopoverPlacement="topLeft"-->
-    <!--        [mcPopoverContent]="customContent"-->
-    <!--        [mcPopoverFooter]="customFooter">-->
-    <!--        topLeft-->
-    <!--    </button>-->
-    <!--    <button-->
-    <!--        mc-button-->
-    <!--        mcPopover-->
-    <!--        mcPopoverTrigger="hover"-->
-    <!--        mcPopoverClass="popover-485"-->
-    <!--        mcPopoverHeader="Lorem ipsum"-->
-    <!--        mcPopoverPlacement="top"-->
-    <!--        [mcPopoverContent]="customContent"-->
-    <!--        [mcPopoverFooter]="customFooter">-->
-    <!--        top hover-->
-    <!--    </button>-->
-    <!--    <span-->
-    <!--        mcPopover-->
-    <!--        mcPopoverTrigger="hover"-->
-    <!--        mcPopoverClass="popover-485"-->
-    <!--        mcPopoverHeader="Lorem ipsum"-->
-    <!--        mcPopoverPlacement="topRight"-->
-    <!--        [mcPopoverContent]="customContent"-->
-    <!--        [mcPopoverFooter]="customFooter">-->
-    <!--        <i class="mc-disabled" mc-icon="mc-folder-opened_16"></i>-->
-    <!--    </span>-->
-<!--</section>-->
 </div>

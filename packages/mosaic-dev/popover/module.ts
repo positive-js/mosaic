@@ -46,11 +46,13 @@ export class DemoComponent {
     };
 
     selectedElement: string = 'button';
-    selectedPlacement: string = 'top';
+    selectedPlacement: string = 'left';
     selectedTrigger: string = 'click';
     selectedSize: string = 'normal';
     layoutClass: string = 'flex-65 layout-row layout-align-center-center';
     content: string = 'button text';
+    userDefinedPlacementPriority: string[] = ['bottom', 'right'];
+    multipleSelected: string[] = [];
 
     constructor() {
         this.popoverActiveStage = 1;

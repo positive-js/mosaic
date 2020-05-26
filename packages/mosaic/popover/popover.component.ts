@@ -5,14 +5,10 @@ import {
     ConnectedOverlayPositionChange,
     ConnectionPositionPair,
     FlexibleConnectedPositionStrategy,
-    HorizontalConnectionPos,
-    OriginConnectionPosition,
     Overlay,
-    OverlayConnectionPosition,
     OverlayRef,
     ScrollDispatcher,
-    ScrollStrategy,
-    VerticalConnectionPos
+    ScrollStrategy
 } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import {
@@ -36,19 +32,11 @@ import {
 } from '@angular/core';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
 import {
-    BOTTOM_LEFT_POSITION_PRIORITY,
-    BOTTOM_POSITION_PRIORITY, BOTTOM_RIGHT_POSITION_PRIORITY,
-    EXTENDED_OVERLAY_POSITIONS, LEFT_BOTTOM_POSITION_PRIORITY, LEFT_POSITION_PRIORITY, LEFT_TOP_POSITION_PRIORITY,
-    POSITION_MAP,
-    POSITION_TO_CSS_MAP,
-    RIGHT_BOTTOM_POSITION_PRIORITY,
-    RIGHT_POSITION_PRIORITY,
-    RIGHT_TOP_POSITION_PRIORITY,
-    TOP_LEFT_POSITION_PRIORITY,
-    TOP_POSITION_PRIORITY,
-    TOP_RIGHT_POSITION_PRIORITY
+    EXTENDED_OVERLAY_POSITIONS,
+    POSITION_MAP, POSITION_PRIORITY_STRATEGY,
+    POSITION_TO_CSS_MAP
 } from '@ptsecurity/mosaic/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
 import { mcPopoverAnimations } from './popover-animations';
@@ -193,6 +181,8 @@ export class McPopoverComponent {
         if (this.isNonEmptyContent()) {
             this.closeOnInteraction = true;
             this.popoverVisibility = PopoverVisibility.Visible;
+            this._mcVisible.next(true);
+            this.mcVisibleChange.emit(true);
             // Mark for check so if any parent component has set the
             // ChangeDetectionStrategy to OnPush it will be checked anyways
             this.markForCheck();
@@ -201,6 +191,7 @@ export class McPopoverComponent {
 
     hide(): void {
         this.popoverVisibility = PopoverVisibility.Hidden;
+        this._mcVisible.next(false);
         this.mcVisibleChange.emit(false);
 
         // Mark for check so if any parent component has set the
@@ -295,7 +286,7 @@ export class McPopover implements OnInit, OnDestroy {
     isDynamicPopover = false;
     overlayRef: OverlayRef | null;
     portal: ComponentPortal<McPopoverComponent>;
-    availablePositions: any;
+    availablePositions: { [key: string]: ConnectionPositionPair };
     popover: McPopoverComponent | null;
 
     @Output('mcPopoverVisibleChange') mcVisibleChange = new EventEmitter<boolean>();
@@ -388,6 +379,7 @@ export class McPopover implements OnInit, OnDestroy {
         } else {
             this._mcTrigger = PopoverTriggers.Click;
         }
+        this.resetListeners();
     }
 
     private _mcTrigger: string = PopoverTriggers.Click;
@@ -405,6 +397,19 @@ export class McPopover implements OnInit, OnDestroy {
         }
     }
     private popoverSize: string = 'normal';
+
+    @Input('mcPopoverPlacementPriority')
+    get mcPlacementPriority() {
+        return this._mcPlacementPriority;
+    }
+    set mcPlacementPriority(value) {
+        if (value && value.length > 0) {
+            this._mcPlacementPriority = value;
+        } else {
+            this._mcPlacementPriority = null;
+        }
+    }
+    private _mcPlacementPriority: string | string[] | null = null;
 
     @Input('mcPopoverPlacement')
     get mcPlacement(): string {
@@ -437,13 +442,16 @@ export class McPopover implements OnInit, OnDestroy {
 
     set mcVisible(externalValue: boolean) {
         const value = coerceBooleanProperty(externalValue);
-        this._mcVisible = value;
-        this.updateCompValue('mcVisible', value);
 
-        if (value) {
-            this.show();
-        } else {
-            this.hide();
+        if (this._mcVisible !== value) {
+            this._mcVisible = value;
+            this.updateCompValue('mcVisible', value);
+
+            if (value) {
+                this.show();
+            } else {
+                this.hide();
+            }
         }
     }
 
@@ -459,6 +467,7 @@ export class McPopover implements OnInit, OnDestroy {
     private readonly resizeObserver = new ResizeObserver(() => {
         setTimeout(() => this.updatePosition());
     });
+    private backDropSubscription: Subscription;
 
     constructor(
         private overlay: Overlay,
@@ -475,7 +484,7 @@ export class McPopover implements OnInit, OnDestroy {
     /** Create the overlay config and position strategy */
     createOverlay(): OverlayRef {
         if (this.overlayRef) {
-            return this.overlayRef;
+            this.overlayRef.dispose();
         }
 
         // Create connected position strategy that listens for scroll events to reposition.
@@ -491,7 +500,9 @@ export class McPopover implements OnInit, OnDestroy {
 
         strategy.withScrollableContainers(scrollableAncestors);
 
-        strategy.positionChanges.pipe(takeUntil(this.destroyed)).subscribe((change) => {
+        strategy.positionChanges
+            .pipe(takeUntil(this.destroyed))
+            .subscribe((change) => {
             if (this.popover) {
                 this.onPositionChange(change);
                 if (change.scrollableViewProperties.isOverlayClipped && this.popover.mcVisible) {
@@ -511,14 +522,7 @@ export class McPopover implements OnInit, OnDestroy {
             backdropClass: 'no-class'
         });
 
-        if (this.mcTrigger === PopoverTriggers.Click) {
-            this.overlayRef.backdropClick()
-                .subscribe(() => {
-                    if (!this.popover) { return; }
-
-                    this.popover.hide();
-                });
-        }
+        this.updateOverlayBackdropClick();
 
         this.updatePosition();
 
@@ -530,10 +534,10 @@ export class McPopover implements OnInit, OnDestroy {
     }
 
     detach() {
-        if (this.overlayRef && this.overlayRef.hasAttached() && this.popover) {
+        if (this.overlayRef && this.overlayRef.hasAttached()) {
             this.overlayRef.detach();
-            this.popover = null;
         }
+        this.popover = null;
     }
 
     onPositionChange($event: ConnectedOverlayPositionChange): void {
@@ -550,49 +554,56 @@ export class McPopover implements OnInit, OnDestroy {
 
             return false;
         });
-        this.updateCompValue('mcPlacement', updatedPlacement);
-        this.mcPositionStrategyPlacementChange.emit(updatedPlacement);
+        if (updatedPlacement !== this.mcPlacement) {
+            this.updateCompValue('mcPlacement', updatedPlacement);
+            this.mcPositionStrategyPlacementChange.emit(updatedPlacement);
+        }
 
         if (this.popover) {
             this.updateCompValue('classList', this.classList);
             this.popover.markForCheck();
         }
 
-        this.handlePositionUpdate();
+        this.handlePositionUpdate(updatedPlacement);
     }
 
-    handlePositionUpdate() {
+    handlePositionUpdate(updatedPlacement: string) {
         if (!this.overlayRef) {
             this.overlayRef = this.createOverlay();
         }
 
         const verticalOffset = this.hostView.element.nativeElement.clientHeight / 2; // tslint:disable-line
         const anchorElementWidth = this.hostView.element.nativeElement.clientWidth; // tslint:disable-line
+        const anchorElementHeight = verticalOffset * 2;
 
-        if (this.mcPlacement === 'rightTop' || this.mcPlacement === 'leftTop') {
+        if (updatedPlacement === 'rightTop' || updatedPlacement === 'leftTop') {
             const currentContainer = this.overlayRef.overlayElement.style.top || '0px';
             this.overlayRef.overlayElement.style.top =
                 `${parseInt(currentContainer.split('px')[0], 10) + verticalOffset - 20}px`; // tslint:disable-line
         }
 
-        if (this.mcPlacement === 'rightBottom' || this.mcPlacement === 'leftBottom') {
+        if (updatedPlacement === 'rightBottom' || updatedPlacement === 'leftBottom') {
             const currentContainer = this.overlayRef.overlayElement.style.bottom || '0px';
             this.overlayRef.overlayElement.style.bottom =
                 `${parseInt(currentContainer.split('px')[0], 10) + verticalOffset - 22}px`; // tslint:disable-line
         }
 
-        if ((this.mcPlacement === 'topRight' || this.mcPlacement === 'bottomRight') &&
-            anchorElementWidth < MIN_ANCHOR_ELEMENT_WIDTH) {
+        if (updatedPlacement === 'topRight' || updatedPlacement === 'bottomRight') {
             const currentContainer = this.overlayRef.overlayElement.style.right || '0px';
+            if (anchorElementWidth < MIN_ANCHOR_ELEMENT_WIDTH || anchorElementHeight < MIN_ANCHOR_ELEMENT_WIDTH) {
+                return;
+            }
             this.overlayRef.overlayElement.style.right =
-                `${parseInt(currentContainer.split('px')[0], 10) - 18}px`; // tslint:disable-line
+                `${parseInt(currentContainer.split('px')[0], 10) + anchorElementWidth / 2 - 18}px`; // tslint:disable-line
         }
 
-        if ((this.mcPlacement === 'topLeft' || this.mcPlacement === 'bottomLeft') &&
-            anchorElementWidth < MIN_ANCHOR_ELEMENT_WIDTH) {
+        if (updatedPlacement === 'topLeft' || updatedPlacement === 'bottomLeft') {
             const currentContainer = this.overlayRef.overlayElement.style.left || '0px';
+            if (anchorElementWidth < MIN_ANCHOR_ELEMENT_WIDTH || anchorElementHeight < MIN_ANCHOR_ELEMENT_WIDTH) {
+                return;
+            }
             this.overlayRef.overlayElement.style.left =
-                `${parseInt(currentContainer.split('px')[0], 10) - 20}px`; // tslint:disable-line
+                `${parseInt(currentContainer.split('px')[0], 10) + anchorElementWidth / 2 - 20}px`; // tslint:disable-line
         }
     }
 
@@ -659,15 +670,29 @@ export class McPopover implements OnInit, OnDestroy {
         }
     }
 
+    resetListeners() {
+        if (this.manualListeners.size) {
+            this.manualListeners.forEach((listener, event) => {
+                this.elementRef.nativeElement.removeEventListener(event, listener);
+            });
+            this.manualListeners.clear();
+            this.initElementRefListeners();
+        }
+    }
+
     show(): void {
         if (!this.disabled) {
             if (!this.popover) {
-                const overlayRef = this.createOverlay();
                 this.detach();
+                const overlayRef = this.createOverlay();
 
                 this.portal = this.portal || new ComponentPortal(McPopoverComponent, this.hostView);
 
                 this.popover = overlayRef.attach(this.portal).instance;
+                this.popover.afterHidden()
+                    .pipe(takeUntil(this.destroyed))
+                    .subscribe(() => this.detach());
+
                 this.isDynamicPopover = true;
                 const properties = [
                     'mcPlacement',
@@ -691,12 +716,6 @@ export class McPopover implements OnInit, OnDestroy {
                         this.mcVisibleChange.emit(data);
                         this.isPopoverOpen = data;
                     });
-
-                this.mcVisibleChange.emit(this.popover.mcVisible);
-
-                this.popover.afterHidden()
-                    .pipe(takeUntil(this.destroyed))
-                    .subscribe(() => this.detach());
             }
 
             this.updatePosition();
@@ -711,6 +730,20 @@ export class McPopover implements OnInit, OnDestroy {
             this.popover.hide();
             this.resizeObserver
                 .unobserve(document.querySelector('.mc-popover__container'));
+        }
+    }
+
+    updateOverlayBackdropClick() {
+        if (this.mcTrigger === PopoverTriggers.Click && this.overlayRef) {
+            this.backDropSubscription = this.overlayRef.backdropClick()
+                .subscribe(() => {
+                    if (!this.popover) { return; }
+
+                    this.popover.hide();
+                });
+        } else if (this.backDropSubscription && this.overlayRef) {
+            this.backDropSubscription.unsubscribe();
+            this.overlayRef.detachBackdrop();
         }
     }
 
@@ -734,126 +767,26 @@ export class McPopover implements OnInit, OnDestroy {
         }
     }
 
-    /**
-     * Returns the origin position and a fallback position based on the user's position preference.
-     * The fallback position is the inverse of the origin (e.g. `'top' -> 'bottom'`).
-     */
-    getOrigin(): {
-        main: OriginConnectionPosition;
-        fallback: OriginConnectionPosition;
-        alternative: OriginConnectionPosition;
-    } {
-        let originPosition: OriginConnectionPosition;
-        const originXPosition = this.getOriginXaxis();
-        const originYPosition = this.getOriginYaxis();
-        originPosition = {originX: originXPosition, originY: originYPosition};
-
-        const {x, y} = this.invertPosition(originPosition.originX, originPosition.originY);
-
-        return {
-            main: originPosition,
-            fallback: {originX: x, originY: y},
-            alternative: {originX: 'end', originY: 'top'}
-        };
-    }
-
-    getOriginXaxis(): HorizontalConnectionPos {
-        const position = this.mcPlacement;
-        let origX: HorizontalConnectionPos;
-        const isLtr = !this.direction || this.direction.value === 'ltr';
-        if (position === 'top' || position === 'bottom') {
-            origX = 'center';
-        } else if (position.toLowerCase().includes('right') && !isLtr ||
-            position.toLowerCase().includes('left') && isLtr) {
-            origX = 'start';
-        } else if (position.toLowerCase().includes('right') && isLtr ||
-            position.toLowerCase().includes('left') && !isLtr) {
-            origX = 'end';
-        } else {
-            throw getMcPopoverInvalidPositionError(position);
+    private getPriorityPlacementStrategy(value: string | string[]): ConnectionPositionPair[] {
+        const result: ConnectionPositionPair[] = [];
+        const possiblePositions = Object.keys(this.availablePositions);
+        if (Array.isArray(value)) {
+            value.forEach((position: string) => {
+                if (possiblePositions.includes(position)) {
+                    result.push(this.availablePositions[position]);
+                }
+            });
+        } else if (possiblePositions.includes(value)) {
+            result.push(this.availablePositions[value]);
         }
 
-        return origX;
-    }
-
-    getOriginYaxis(): VerticalConnectionPos {
-        const position = this.mcPlacement;
-        let origY: VerticalConnectionPos;
-        if (position === 'right' || position === 'left') {
-            origY = 'center';
-        } else if (position.toLowerCase().includes('top')) {
-            origY = 'top';
-        } else if (position.toLowerCase().includes('bottom')) {
-            origY = 'bottom';
-        } else {
-            throw getMcPopoverInvalidPositionError(position);
-        }
-
-        return origY;
-    }
-
-    /** Returns the overlay position and a fallback position based on the user's preference */
-    getOverlayPosition(): {
-        main: OverlayConnectionPosition;
-        fallback: OverlayConnectionPosition;
-        alternative: OverlayConnectionPosition;
-    } {
-        const position = this.mcPlacement;
-        let overlayPosition: OverlayConnectionPosition;
-        if (this.availablePositions[position]) {
-            overlayPosition = {
-                overlayX : this.availablePositions[position].overlayX,
-                overlayY: this.availablePositions[position].overlayY
-            };
-        } else {
-            throw getMcPopoverInvalidPositionError(position);
-        }
-
-        const {x, y} = this.invertPosition(overlayPosition.overlayX, overlayPosition.overlayY);
-
-        return {
-            main: overlayPosition,
-            fallback: {overlayX: x, overlayY: y},
-            alternative: {overlayX: 'end', overlayY: 'bottom'}
-        };
-    }
-
-    /** Inverts an overlay position. */
-    private invertPosition(x: HorizontalConnectionPos, y: VerticalConnectionPos) {
-        let newX: HorizontalConnectionPos = x;
-        let newY: VerticalConnectionPos = y;
-        if (this.mcPlacement === 'top' || this.mcPlacement === 'bottom') {
-            if (y === 'top') {
-                newY = 'bottom';
-            } else if (y === 'bottom') {
-                newY = 'top';
-            }
-        } else {
-            if (x === 'end') {
-                newX = 'start';
-            } else if (x === 'start') {
-                newX = 'end';
-            }
-        }
-
-        return {x: newX, y: newY};
+        return result;
     }
 
     private getPrioritizedPositions() {
-        switch (this.mcPlacement) {
-            case 'top': return TOP_POSITION_PRIORITY;
-            case 'topLeft': return TOP_LEFT_POSITION_PRIORITY;
-            case 'topRight': return TOP_RIGHT_POSITION_PRIORITY;
-            case 'bottom': return BOTTOM_POSITION_PRIORITY;
-            case 'bottomLeft': return BOTTOM_LEFT_POSITION_PRIORITY;
-            case 'bottomRight': return BOTTOM_RIGHT_POSITION_PRIORITY;
-            case 'rightTop': return RIGHT_TOP_POSITION_PRIORITY;
-            case 'right': return RIGHT_POSITION_PRIORITY;
-            case 'rightBottom': return RIGHT_BOTTOM_POSITION_PRIORITY;
-            case 'leftBottom': return LEFT_BOTTOM_POSITION_PRIORITY;
-            case 'left': return LEFT_POSITION_PRIORITY;
-            case 'leftTop': return LEFT_TOP_POSITION_PRIORITY;
-            default: return [POSITION_MAP.top];
+        if (this.mcPlacementPriority) {
+            return this.getPriorityPlacementStrategy(this.mcPlacementPriority);
         }
+        return POSITION_PRIORITY_STRATEGY[this.mcPlacement];
     }
 }
