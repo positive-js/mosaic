@@ -537,6 +537,7 @@ export class McPopover implements OnInit, OnDestroy {
     }
 
     onPositionChange($event: ConnectedOverlayPositionChange): void {
+        console.trace();
         let updatedPlacement = this.mcPlacement;
         Object.keys(this.availablePositions).some((key) => {
             if ($event.connectionPair.originX === this.availablePositions[key].originX &&
@@ -713,7 +714,6 @@ export class McPopover implements OnInit, OnDestroy {
                     });
             }
 
-            this.updatePosition();
             this.popover.show();
             this.resizeObserver
                 .observe(document.querySelector('.mc-popover__container'));
@@ -754,10 +754,6 @@ export class McPopover implements OnInit, OnDestroy {
         if (reapplyPosition) {
             setTimeout(() => {
                 position.reapplyLastPosition();
-            });
-        } else {
-            setTimeout(() => {
-                position.apply();
             });
         }
     }
