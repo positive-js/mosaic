@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
+import { McCheckboxModule } from '@ptsecurity/mosaic/checkbox';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McInputModule } from '@ptsecurity/mosaic/input';
 import { McPopoverModule } from '@ptsecurity/mosaic/popover';
@@ -22,6 +23,7 @@ import { McIconModule } from '../../mosaic/icon/';
 })
 export class DemoComponent {
     popoverActiveStage: number;
+    selectedOrder: boolean;
 
     isPopoverVisibleLeft: boolean = false;
 
@@ -93,6 +95,15 @@ export class DemoComponent {
         return this.activatedPosition === value && this.selectedPlacement !== this.activatedPosition;
     }
 
+    getOrder(forElement: string) {
+        if (forElement === 'config') {
+            return this.selectedOrder ? {order: 2} : {order: 1};
+        }
+        if (forElement === 'result') {
+            return this.selectedOrder ? {order: 1} : {order: 2};
+        }
+    }
+
     get isFallbackActivated(): boolean {
         return this.selectedPlacement !== this.activatedPosition && this.activatedPosition !== '';
     }
@@ -113,7 +124,8 @@ export class DemoComponent {
         McButtonModule,
         McIconModule,
         McInputModule,
-        McSplitterModule
+        McSplitterModule,
+        McCheckboxModule
     ],
     bootstrap: [
         DemoComponent

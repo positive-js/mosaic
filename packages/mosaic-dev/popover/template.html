@@ -26,8 +26,11 @@
         </div>
     </ng-template>
 
-    <div class="flex-35 layout-row layou-align-start-start config">
+    <div class="flex-35 layout-row layou-align-start-start config" [style]="getOrder('config')">
         <div class="flex-35">
+            <label for="order">Inverse layout order</label>
+            <mc-checkbox id="order" [(ngModel)]="selectedOrder">Yes/No</mc-checkbox>
+            <br/>
             <label for="element"
                    class="flex mc-form-label">
                 Choose element for popover binding
@@ -193,7 +196,7 @@
         </div>
     </div>
 
-    <div class="{{layoutClass}} result">
+    <div class="{{layoutClass}} result" [style]="getOrder('result')">
         <div [ngSwitch]="showElement()">
             <button mc-button class="proove"
                     *ngSwitchCase="ELEMENTS.BUTTON"

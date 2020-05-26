@@ -266,11 +266,7 @@ export function getMcPopoverInvalidPositionError(position: string) {
 }
 
 const VIEWPORT_MARGIN: number = 8;
-/** @docs-private
- * Minimal width of anchor element should be equal or greater than popover arrow width plus arrow offset right/left
- * MIN_ANCHOR_ELEMENT_WIDTH used for positioning update inside handlePositionUpdate()
- */
-const MIN_ANCHOR_ELEMENT_WIDTH: number = 40;
+const POPOVER_ARROW_BORDER_DISTANCE: number = 28; // tslint:disable-line
 
 @Directive({
     selector: '[mcPopover]',
@@ -573,37 +569,30 @@ export class McPopover implements OnInit, OnDestroy {
         }
 
         const verticalOffset = this.hostView.element.nativeElement.clientHeight / 2; // tslint:disable-line
-        const anchorElementWidth = this.hostView.element.nativeElement.clientWidth; // tslint:disable-line
-        const anchorElementHeight = verticalOffset * 2; // tslint:disable-line
+        const horizontalOffset = this.hostView.element.nativeElement.clientWidth / 2; // tslint:disable-line
 
         if (updatedPlacement === 'rightTop' || updatedPlacement === 'leftTop') {
             const currentContainer = this.overlayRef.overlayElement.style.top || '0px';
             this.overlayRef.overlayElement.style.top =
-                `${parseInt(currentContainer.split('px')[0], 10) + verticalOffset - 20}px`; // tslint:disable-line
+                `${parseInt(currentContainer.split('px')[0], 10) + verticalOffset - POPOVER_ARROW_BORDER_DISTANCE}px`; // tslint:disable-line
         }
 
         if (updatedPlacement === 'rightBottom' || updatedPlacement === 'leftBottom') {
             const currentContainer = this.overlayRef.overlayElement.style.bottom || '0px';
             this.overlayRef.overlayElement.style.bottom =
-                `${parseInt(currentContainer.split('px')[0], 10) + verticalOffset - 22}px`; // tslint:disable-line
+                `${parseInt(currentContainer.split('px')[0], 10) + verticalOffset - POPOVER_ARROW_BORDER_DISTANCE}px`; // tslint:disable-line
         }
 
         if (updatedPlacement === 'topRight' || updatedPlacement === 'bottomRight') {
             const currentContainer = this.overlayRef.overlayElement.style.right || '0px';
-            if (anchorElementWidth < MIN_ANCHOR_ELEMENT_WIDTH || anchorElementHeight < MIN_ANCHOR_ELEMENT_WIDTH) {
-                return;
-            }
             this.overlayRef.overlayElement.style.right =
-                `${parseInt(currentContainer.split('px')[0], 10) + anchorElementWidth / 2 - 18}px`; // tslint:disable-line
+                `${parseInt(currentContainer.split('px')[0], 10) + horizontalOffset - POPOVER_ARROW_BORDER_DISTANCE}px`; // tslint:disable-line
         }
 
         if (updatedPlacement === 'topLeft' || updatedPlacement === 'bottomLeft') {
             const currentContainer = this.overlayRef.overlayElement.style.left || '0px';
-            if (anchorElementWidth < MIN_ANCHOR_ELEMENT_WIDTH || anchorElementHeight < MIN_ANCHOR_ELEMENT_WIDTH) {
-                return;
-            }
             this.overlayRef.overlayElement.style.left =
-                `${parseInt(currentContainer.split('px')[0], 10) + anchorElementWidth / 2 - 20}px`; // tslint:disable-line
+                `${parseInt(currentContainer.split('px')[0], 10) + horizontalOffset - POPOVER_ARROW_BORDER_DISTANCE}px`; // tslint:disable-line
         }
     }
 
