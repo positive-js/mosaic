@@ -537,7 +537,6 @@ export class McPopover implements OnInit, OnDestroy {
     }
 
     onPositionChange($event: ConnectedOverlayPositionChange): void {
-        console.trace();
         let updatedPlacement = this.mcPlacement;
         Object.keys(this.availablePositions).some((key) => {
             if ($event.connectionPair.originX === this.availablePositions[key].originX &&
