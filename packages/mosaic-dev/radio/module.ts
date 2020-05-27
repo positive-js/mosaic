@@ -2,17 +2,16 @@
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { McRadioChange, McRadioModule } from '@ptsecurity/mosaic/radio';
 
-import { McRadioChange, McRadioModule } from '../../mosaic/radio';
 import { ThemePickerModule } from '../theme-picker';
 
 
 @Component({
     selector: 'app',
-    styleUrls: ['./styles.css'],
+    styleUrls: ['../main.scss', './styles.css'],
     encapsulation: ViewEncapsulation.None,
-    template: require('./template.html')
+    templateUrl: './template.html'
 })
 export class DemoComponent {
     favoriteFruit: string;
@@ -50,9 +49,4 @@ export class DemoComponent {
         DemoComponent
     ]
 })
-export class DemoModule {
-}
-
-platformBrowserDynamic()
-    .bootstrapModule(DemoModule)
-    .catch((error) => console.error(error));
+export class DemoModule {}

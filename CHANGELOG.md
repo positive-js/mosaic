@@ -1,3 +1,24 @@
+# 9.0.0 "Oloroso" (2020-05-18)
+
+### Mosaic
+
+ * feature  **input:** replace cleaner icon #UIM-442 ([#461](https://github.com/positive-js/mosaic/issues/461)) ([a2e6975](https://github.com/positive-js/mosaic/commit/a2e69751893566ad91753545b77e6a5e904cdd76)), closes [#UIM-442](https://github.com/positive-js/mosaic/issues/UIM-442)
+ * feature  **timepicker:** timepicker in reactive forms (#UIM-429) ([#459](https://github.com/positive-js/mosaic/issues/459)) ([37706f6](https://github.com/positive-js/mosaic/commit/37706f668209fcd566c2ba27c98310204c550961)), closes [#UIM-429](https://github.com/positive-js/mosaic/issues/UIM-429)
+
+# 9.0.0-beta.2 "Cask of Amontillado" (2020-05-06)
+
+### Mosaic
+
+ * bug fix  dependencies audit ([#248](https://github.com/positive-js/mosaic/issues/248)) ([#454](https://github.com/positive-js/mosaic/issues/454)) ([6f92b21](https://github.com/positive-js/mosaic/commit/6f92b2174355d087635b0f791f2c9a69dd499073))
+ * bug fix  unknown unit pica ([#453](https://github.com/positive-js/mosaic/issues/453)) ([1ee1985](https://github.com/positive-js/mosaic/commit/1ee1985498ed6ff2d87d0e9aa41633d842c17b08))
+ * bug fix  **common:** removing unnecessary borders and fixing popover's background (#UIM-396) ([#449](https://github.com/positive-js/mosaic/issues/449)) ([91edafd](https://github.com/positive-js/mosaic/commit/91edafda2556a6e9c69e99157bf337bf167f9e81)), closes [#UIM-396](https://github.com/positive-js/mosaic/issues/UIM-396)
+ * feature  **common:** moving components opacity to _components-theming.scss ([#455](https://github.com/positive-js/mosaic/issues/455)) ([8142733](https://github.com/positive-js/mosaic/commit/81427338d4a23081f2d7967841089df6db653d29))
+ * feature  **schematics:** migration rule for imports ([605b6da](https://github.com/positive-js/mosaic/commit/605b6daaf1228e4520f4d78fe59af00972be4b17))
+
+### Docs
+
+ * bug fix  fix light theme in dev docs ([#457](https://github.com/positive-js/mosaic/issues/457)) ([f7874e8](https://github.com/positive-js/mosaic/commit/f7874e8ed2564c6a35190987bb3d27fecd2ae4e7))
+
 ## 8.4.5 "Timeless Sence" (2020-04-21)
 
 ### Mosaic

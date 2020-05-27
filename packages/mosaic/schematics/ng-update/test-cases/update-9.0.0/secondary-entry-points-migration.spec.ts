@@ -19,15 +19,15 @@ describe('v9 Mosaic imports', () => {
         } = await createTestCaseSetup(
             'update-9.0.0',
             migrationCollection,
-            [require.resolve('./secondary-entry-points-rule_input.fixture')]
+            [require.resolve('./secondary-entry-points-migration_input.fixture')]
         );
 
         if (runFixers) {
             await runFixers();
         }
 
-        expect(appTree.readContent('projects/lib-testing/src/tests/secondary-entry-points-rule_input.ts'))
-            .toBe(readFileContent(require.resolve('./secondary-entry-points-rule_expected_output.fixture')));
+        expect(appTree.readContent('projects/lib-testing/src/tests/secondary-entry-points-migration_input.ts'))
+            .toBe(readFileContent(require.resolve('./secondary-entry-points-migration_expected_output.fixture')));
 
         removeTempDir();
     });

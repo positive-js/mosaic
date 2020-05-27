@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 
 /**
- * @title Navbar
+ * @title Tabs
  */
 @Component({
     selector: 'tabs-overview-example',

@@ -1,20 +1,12 @@
-@import '~@ptsecurity/mosaic-icons/dist/styles/mc-icons';
-
-@import '../../mosaic/core/theming/prebuilt/default-theme';
-//@import '../../mosaic/core/theming/prebuilt/dark-theme';
-
-
 body {
     margin: 0;
 }
-
 
 .toggle-button {
     position: absolute !important;
     right: 50px;
     top: 50px;
 }
-
 
 .user-menu {
     display: flex;

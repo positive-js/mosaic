@@ -190,6 +190,32 @@ jobs:
                 name: Deploy "Next" version of Docs
                 command: npx firebase deploy --only hosting:next --token=$FIREBASE_DEPLOY_TOKEN
 
+    deploy-docs-v9:
+        <<: *job_defaults
+        steps:
+            - attach_workspace:
+                  at: ~/mosaic
+            - run: yarn run build:mosaic-examples-module
+            - run: yarn run build:mosaic-examples
+            - run: yarn run build:docs
+            - run: yarn run docs:prod-build:aot
+            - run:
+                  name: Deploy "Next" version of Docs
+                  command: npx firebase deploy --only hosting:v9 --token=$FIREBASE_DEPLOY_TOKEN
+
+    deploy-docs-latest:
+        <<: *job_defaults
+        steps:
+            -   attach_workspace:
+                    at: ~/mosaic
+            -   run: yarn run build:mosaic-examples-module
+            -   run: yarn run build:mosaic-examples
+            -   run: yarn run build:docs
+            -   run: yarn run docs:prod-build:aot
+            -   run:
+                    name: Deploy "Next" version of Docs
+                    command: npx firebase deploy --only hosting:stable --token=$FIREBASE_DEPLOY_TOKEN
+
 
     sonar:
         <<: *job_defaults
@@ -292,6 +318,8 @@ workflows:
                       branches:
                           ignore:
                               - master
+                              # x.0.x, x.x.x, etc.
+                              - /\d+\.\d+\.x/
 
             # 7 Group
 
@@ -325,6 +353,34 @@ workflows:
                           only:
                               - master
 
+            - deploy-docs-v9:
+                  requires:
+                      - test_unit_mosaic
+                      - test_unit_cdk
+                      - test_unit_mosaic-moment-adapter
+                      - test_unit_schematics
+                  filters:
+                      branches:
+                          ignore: /.*/
+                      tags:
+                          only:
+                              # x.0.x, x.x.x, etc.
+                              - /9.\d+\.x/
+
+            - deploy-docs-latest:
+                  requires:
+                      - test_unit_mosaic
+                      - test_unit_cdk
+                      - test_unit_mosaic-moment-adapter
+                      - test_unit_schematics
+                  filters:
+                      branches:
+                          ignore: /.*/
+                      tags:
+                          only:
+                              # x.0.x, x.x.x, etc.
+                              - /9.\d+\.x/
+
             - preview_mosaic_docs:
                   requires:
                       - build_mosaic_docs_for_preview
@@ -332,6 +388,8 @@ workflows:
                       branches:
                           ignore:
                               - master
+                              # x.0.x, x.x.x, etc.
+                              - /\d+\.\d+\.x/
 
             - cleanup_preview_mosaic_docs:
                   requires:

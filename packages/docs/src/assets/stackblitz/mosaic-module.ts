@@ -17,6 +17,7 @@ import { McProgressSpinnerModule } from '@ptsecurity/mosaic/progress-spinner';
 import { McRadioModule } from '@ptsecurity/mosaic/radio';
 import { McSelectModule } from '@ptsecurity/mosaic/select';
 import { McSidepanelModule } from '@ptsecurity/mosaic/sidepanel';
+import { McTabsModule } from '@ptsecurity/mosaic/tabs';
 import { McTimepickerModule } from '@ptsecurity/mosaic/timepicker';
 import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 import { McTreeModule } from '@ptsecurity/mosaic/tree';
@@ -49,7 +50,8 @@ import { McTreeSelectModule } from '@ptsecurity/mosaic/tree-select';
         ReactiveFormsModule,
         McTreeSelectModule,
         McToolTipModule,
-        McPopoverModule
+        McPopoverModule,
+        McTabsModule
     ]
 })
 export class DemoMosaicModule {}

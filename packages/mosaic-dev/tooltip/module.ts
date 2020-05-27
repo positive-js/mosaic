@@ -1,7 +1,6 @@
 import { Component, NgModule, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
@@ -14,9 +13,9 @@ import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 /* tslint:disable:no-trailing-whitespace */
 @Component({
     selector: 'app',
-    styleUrls: ['./styles.css'],
+    styleUrls: ['../main.scss', './styles.css'],
     encapsulation: ViewEncapsulation.None,
-    template: require('./template.html')
+    templateUrl: './template.html'
 })
 export class DemoComponent {
 
@@ -82,7 +81,3 @@ export class DemoComponent {
 })
 export class DemoModule {
 }
-
-platformBrowserDynamic()
-    .bootstrapModule(DemoModule)
-    .catch((error) => console.error(error)); // tslint:disable-line

@@ -2,7 +2,6 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { McDropdownModule } from '@ptsecurity/mosaic/dropdown';
@@ -14,8 +13,8 @@ import { McVerticalNavbarModule } from '../../mosaic/vertical-navbar/';
 
 @Component({
     selector: 'app',
-    template: require('./template.html'),
-    styleUrls: ['./styles.scss'],
+    templateUrl: './template.html',
+    styleUrls: ['../main.scss', './styles.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class VerticalNavbarDemoComponent {}
@@ -44,9 +43,4 @@ export class VerticalNavbarDemoComponent {}
         {provide: APP_BASE_HREF, useValue : '/' }
     ]
 })
-export class NavbarDemoModule {}
-
-platformBrowserDynamic()
-    .bootstrapModule(NavbarDemoModule)
-    .catch((error) => console.error(error));
-
+export class DemoModule {}
