@@ -96,14 +96,7 @@ export class McOption implements AfterViewChecked, OnDestroy {
     /** Emits when the state of the option changes and any parents have to be notified. */
     readonly stateChanges = new Subject<void>();
 
-    get title() {
-        const newTitle = this.getTitle();
-        this._title = newTitle || undefined;
-
-        return this._title;
-    }
-
-    private _title: string | undefined;
+    title: string = '';
 
     /**
      * The displayed value of the option. It is necessary to show the selected option in the
@@ -291,9 +284,10 @@ export class McOption implements AfterViewChecked, OnDestroy {
 
     // Updates the title if it changed
     updateTitle() {
-        const newTitle = this.getTitle();
+        const newTitle = this.isTitleShown() ? this.getTitle() : '';
 
         if (this.title !== newTitle) {
+            this.title = newTitle;
             this.changeDetectorRef.detectChanges();
         }
     }
