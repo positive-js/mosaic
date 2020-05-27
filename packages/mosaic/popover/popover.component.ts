@@ -266,7 +266,7 @@ export function getMcPopoverInvalidPositionError(position: string) {
 }
 
 const VIEWPORT_MARGIN: number = 8;
-const POPOVER_ARROW_BORDER_DISTANCE: number = 28; // tslint:disable-line
+const POPOVER_ARROW_BORDER_DISTANCE: number = 20; // tslint:disable-line
 
 @Directive({
     selector: '[mcPopover]',
@@ -459,10 +459,6 @@ export class McPopover implements OnInit, OnDestroy {
 
     private manualListeners = new Map<string, EventListenerOrEventListenerObject>();
     private readonly destroyed = new Subject<void>();
-    // @ts-ignore
-    private readonly resizeObserver = new ResizeObserver(() => {
-        setTimeout(() => this.updatePosition());
-    });
     private backDropSubscription: Subscription;
 
     constructor(
@@ -570,32 +566,28 @@ export class McPopover implements OnInit, OnDestroy {
 
         const elementHeight = this.hostView.element.nativeElement.clientHeight;
         const elementWidth = this.hostView.element.nativeElement.clientWidth;
-        const verticalOffset = elementHeight / 2; // tslint:disable-line
-        const horizontalOffset = elementWidth / 2; // tslint:disable-line
+        const verticalOffset = Math.floor(elementHeight / 2); // tslint:disable-line
+        const horizontalOffset = Math.floor(elementWidth / 2 - 6); // tslint:disable-line
 
-        if ((updatedPlacement === 'rightTop' || updatedPlacement === 'leftTop')
-            && elementHeight <= POPOVER_ARROW_BORDER_DISTANCE) {
+        if (updatedPlacement === 'rightTop' || updatedPlacement === 'leftTop') {
             const currentContainer = this.overlayRef.overlayElement.style.top || '0px';
             this.overlayRef.overlayElement.style.top =
                 `${parseInt(currentContainer.split('px')[0], 10) + verticalOffset - POPOVER_ARROW_BORDER_DISTANCE}px`; // tslint:disable-line
         }
 
-        if ((updatedPlacement === 'rightBottom' || updatedPlacement === 'leftBottom')
-            && elementHeight <= POPOVER_ARROW_BORDER_DISTANCE) {
+        if (updatedPlacement === 'rightBottom' || updatedPlacement === 'leftBottom') {
             const currentContainer = this.overlayRef.overlayElement.style.bottom || '0px';
             this.overlayRef.overlayElement.style.bottom =
                 `${parseInt(currentContainer.split('px')[0], 10) + verticalOffset - POPOVER_ARROW_BORDER_DISTANCE}px`; // tslint:disable-line
         }
 
-        if ((updatedPlacement === 'topRight' || updatedPlacement === 'bottomRight')
-            && elementWidth <= POPOVER_ARROW_BORDER_DISTANCE) {
+        if (updatedPlacement === 'topRight' || updatedPlacement === 'bottomRight') {
             const currentContainer = this.overlayRef.overlayElement.style.right || '0px';
             this.overlayRef.overlayElement.style.right =
                 `${parseInt(currentContainer.split('px')[0], 10) + horizontalOffset - POPOVER_ARROW_BORDER_DISTANCE}px`; // tslint:disable-line
         }
 
-        if ((updatedPlacement === 'topLeft' || updatedPlacement === 'bottomLeft')
-            && elementWidth <= POPOVER_ARROW_BORDER_DISTANCE) {
+        if (updatedPlacement === 'topLeft' || updatedPlacement === 'bottomLeft') {
             const currentContainer = this.overlayRef.overlayElement.style.left || '0px';
             this.overlayRef.overlayElement.style.left =
                 `${parseInt(currentContainer.split('px')[0], 10) + horizontalOffset - POPOVER_ARROW_BORDER_DISTANCE}px`; // tslint:disable-line
@@ -714,16 +706,12 @@ export class McPopover implements OnInit, OnDestroy {
             }
 
             this.popover.show();
-            this.resizeObserver
-                .observe(document.querySelector('.mc-popover__container'));
         }
     }
 
     hide(): void {
         if (this.popover) {
             this.popover.hide();
-            this.resizeObserver
-                .unobserve(document.querySelector('.mc-popover__container'));
         }
     }
 
