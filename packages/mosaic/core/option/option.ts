@@ -294,7 +294,7 @@ export class McOption implements AfterViewChecked, OnDestroy {
         const newTitle = this.getTitle();
 
         if (this.title !== newTitle) {
-            this.changeDetectorRef.markForCheck();
+            this.changeDetectorRef.detectChanges();
         }
     }
 
