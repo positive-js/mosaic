@@ -8,7 +8,7 @@ $z-index-popover: 1060;
 $popover-max-width: 240px;
 $border-radius-base: 4px;
 $popover-arrow-width: 6px;
-$popover-distance: $popover-arrow-width + 4px;
+$popover-distance: $popover-arrow-width * 2;
 $popover-arrow-distance: -($popover-arrow-width + 2px);
 $border-size: 1px;
 
