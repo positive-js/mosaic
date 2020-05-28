@@ -1,3 +1,10 @@
+# 8.5.0 "Gossamer Polynesian" (2020-05-28)
+
+### Mosaic
+
+ * bug fix  **popover:** margin for left position #UIM-445 ([#465](https://github.com/positive-js/mosaic/issues/465)) ([1a56e2b](https://github.com/positive-js/mosaic/commit/1a56e2bc1edc496b645153cb398f2226f82689aa)), closes [#UIM-445](https://github.com/positive-js/mosaic/issues/UIM-445)
+ * feature  **popover:** positioning and dev-example updates (UIM-447) ([#467](https://github.com/positive-js/mosaic/issues/467)) ([6ffff00](https://github.com/positive-js/mosaic/commit/6ffff006f59201bac3742f237087ade042c4a7bb))
+
 ## 8.4.5 "Timeless Sence" (2020-04-21)
 
 ### Mosaic
