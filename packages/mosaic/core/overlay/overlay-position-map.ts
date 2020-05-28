@@ -240,6 +240,13 @@ export const POSITION_TO_CSS_MAP: {[key: string]: string} = {
     bottomRight: 'bottom-right'
 };
 
+export const DEFAULT_4_POSITIONS_TO_CSS_MAP: {[key: string]: string} = {
+    top: 'top',
+    bottom: 'bottom',
+    right: 'right',
+    left: 'left'
+};
+
 function arrayMap<T, S>(array: T[], iteratee: (item: T, index: number, arr: T[]) => S): S[] {
     let index = -1;
     const length = array == null ? 0 : array.length;

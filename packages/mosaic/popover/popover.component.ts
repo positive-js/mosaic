@@ -32,6 +32,7 @@ import {
 } from '@angular/core';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
 import {
+    DEFAULT_4_POSITIONS_TO_CSS_MAP,
     EXTENDED_OVERLAY_POSITIONS,
     POSITION_MAP, POSITION_PRIORITY_STRATEGY,
     POSITION_TO_CSS_MAP
@@ -283,6 +284,7 @@ export class McPopover implements OnInit, OnDestroy {
     overlayRef: OverlayRef | null;
     portal: ComponentPortal<McPopoverComponent>;
     availablePositions: { [key: string]: ConnectionPositionPair };
+    defaultPositionsMap: { [key: string]: string};
     popover: McPopoverComponent | null;
 
     @Output('mcPopoverVisibleChange') mcVisibleChange = new EventEmitter<boolean>();
@@ -471,6 +473,7 @@ export class McPopover implements OnInit, OnDestroy {
         @Optional() private direction: Directionality
     ) {
         this.availablePositions = POSITION_MAP;
+        this.defaultPositionsMap = DEFAULT_4_POSITIONS_TO_CSS_MAP;
     }
 
     /** Create the overlay config and position strategy */
@@ -555,7 +558,9 @@ export class McPopover implements OnInit, OnDestroy {
             this.popover.markForCheck();
         }
 
-        this.handlePositionUpdate(updatedPlacement);
+        if (!this.defaultPositionsMap[updatedPlacement]) {
+            this.handlePositionUpdate(updatedPlacement);
+        }
     }
 
     handlePositionUpdate(updatedPlacement: string) {
@@ -563,34 +568,27 @@ export class McPopover implements OnInit, OnDestroy {
             this.overlayRef = this.createOverlay();
         }
 
+        const currentContainer = this.overlayRef.overlayElement.style;
         const elementHeight = this.hostView.element.nativeElement.clientHeight;
         const elementWidth = this.hostView.element.nativeElement.clientWidth;
         const verticalOffset = Math.floor(elementHeight / 2); // tslint:disable-line
         const horizontalOffset = Math.floor(elementWidth / 2 - 6); // tslint:disable-line
+        const offsets = {
+            top: verticalOffset,
+            bottom: verticalOffset,
+            right: horizontalOffset,
+            left: horizontalOffset
+        };
 
-        if (updatedPlacement === 'rightTop' || updatedPlacement === 'leftTop') {
-            const currentContainer = this.overlayRef.overlayElement.style.top || '0px';
-            this.overlayRef.overlayElement.style.top =
-                `${parseInt(currentContainer.split('px')[0], 10) + verticalOffset - POPOVER_ARROW_BORDER_DISTANCE}px`; // tslint:disable-line
+        const styleProperty = updatedPlacement.split(/(?=[A-Z])/)[1].toLowerCase();
+
+        if (!this.overlayRef.overlayElement.style[styleProperty]) {
+            this.overlayRef.overlayElement.style[styleProperty] = '0px';
         }
 
-        if (updatedPlacement === 'rightBottom' || updatedPlacement === 'leftBottom') {
-            const currentContainer = this.overlayRef.overlayElement.style.bottom || '0px';
-            this.overlayRef.overlayElement.style.bottom =
-                `${parseInt(currentContainer.split('px')[0], 10) + verticalOffset - POPOVER_ARROW_BORDER_DISTANCE}px`; // tslint:disable-line
-        }
-
-        if (updatedPlacement === 'topRight' || updatedPlacement === 'bottomRight') {
-            const currentContainer = this.overlayRef.overlayElement.style.right || '0px';
-            this.overlayRef.overlayElement.style.right =
-                `${parseInt(currentContainer.split('px')[0], 10) + horizontalOffset - POPOVER_ARROW_BORDER_DISTANCE}px`; // tslint:disable-line
-        }
-
-        if (updatedPlacement === 'topLeft' || updatedPlacement === 'bottomLeft') {
-            const currentContainer = this.overlayRef.overlayElement.style.left || '0px';
-            this.overlayRef.overlayElement.style.left =
-                `${parseInt(currentContainer.split('px')[0], 10) + horizontalOffset - POPOVER_ARROW_BORDER_DISTANCE}px`; // tslint:disable-line
-        }
+        this.overlayRef.overlayElement.style[styleProperty] =
+            `${parseInt(currentContainer[styleProperty].split('px')[0], 10) +
+            offsets[styleProperty] - POPOVER_ARROW_BORDER_DISTANCE}px`;
     }
 
     // tslint:disable-next-line:no-any
