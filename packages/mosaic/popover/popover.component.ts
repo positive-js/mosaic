@@ -759,11 +759,11 @@ export class McPopover implements OnInit, OnDestroy {
         const possiblePositions = Object.keys(this.availablePositions);
         if (Array.isArray(value)) {
             value.forEach((position: string) => {
-                if (possiblePositions.includes(position)) {
+                if (possiblePositions.indexOf(position) > -1) {
                     result.push(this.availablePositions[position]);
                 }
             });
-        } else if (possiblePositions.includes(value)) {
+        } else if (possiblePositions.indexOf(value) > -1) {
             result.push(this.availablePositions[value]);
         }
 
