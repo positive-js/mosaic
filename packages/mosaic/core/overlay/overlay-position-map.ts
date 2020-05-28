@@ -172,6 +172,7 @@ export const LEFT_BOTTOM_POSITION_PRIORITY = objectValues([
 
 export const TOP_LEFT_POSITION_PRIORITY = objectValues([
     POSITION_MAP.topLeft,
+    POSITION_MAP.topRight,
     POSITION_MAP.bottomLeft,
     POSITION_MAP.bottom,
     POSITION_MAP.bottomRight,
@@ -181,6 +182,7 @@ export const TOP_LEFT_POSITION_PRIORITY = objectValues([
 
 export const TOP_RIGHT_POSITION_PRIORITY = objectValues([
     POSITION_MAP.topRight,
+    POSITION_MAP.topLeft,
     POSITION_MAP.bottomRight,
     POSITION_MAP.bottom,
     POSITION_MAP.bottomLeft,
@@ -190,6 +192,7 @@ export const TOP_RIGHT_POSITION_PRIORITY = objectValues([
 
 export const BOTTOM_RIGHT_POSITION_PRIORITY = objectValues([
     POSITION_MAP.bottomRight,
+    POSITION_MAP.bottomLeft,
     POSITION_MAP.topRight,
     POSITION_MAP.top,
     POSITION_MAP.topLeft,
@@ -199,6 +202,7 @@ export const BOTTOM_RIGHT_POSITION_PRIORITY = objectValues([
 
 export const BOTTOM_LEFT_POSITION_PRIORITY = objectValues([
     POSITION_MAP.bottomLeft,
+    POSITION_MAP.bottomRight,
     POSITION_MAP.topLeft,
     POSITION_MAP.top,
     POSITION_MAP.topRight,
