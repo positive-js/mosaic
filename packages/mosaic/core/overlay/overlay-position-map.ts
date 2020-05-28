@@ -98,6 +98,133 @@ export const EXTENDED_OVERLAY_POSITIONS = objectValues([
     POSITION_MAP.left, POSITION_MAP.leftTop, POSITION_MAP.leftBottom
 ]);
 
+export const TOP_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.top,
+    POSITION_MAP.bottom,
+    POSITION_MAP.rightBottom,
+    POSITION_MAP.leftBottom,
+    POSITION_MAP.bottomLeft,
+    POSITION_MAP.bottomRight
+]);
+
+export const BOTTOM_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.bottom,
+    POSITION_MAP.top,
+    POSITION_MAP.topLeft,
+    POSITION_MAP.topRight,
+    POSITION_MAP.rightBottom,
+    POSITION_MAP.leftBottom
+]);
+
+export const RIGHT_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.right,
+    POSITION_MAP.left,
+    POSITION_MAP.leftTop,
+    POSITION_MAP.leftBottom,
+    POSITION_MAP.top,
+    POSITION_MAP.bottom
+]);
+
+export const LEFT_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.left,
+    POSITION_MAP.right,
+    POSITION_MAP.rightTop,
+    POSITION_MAP.rightBottom,
+    POSITION_MAP.top,
+    POSITION_MAP.bottom
+]);
+
+export const RIGHT_TOP_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.rightTop,
+    POSITION_MAP.leftTop,
+    POSITION_MAP.left,
+    POSITION_MAP.leftBottom,
+    POSITION_MAP.topLeft,
+    POSITION_MAP.bottomLeft
+]);
+
+export const RIGHT_BOTTOM_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.rightBottom,
+    POSITION_MAP.leftBottom,
+    POSITION_MAP.left,
+    POSITION_MAP.leftTop,
+    POSITION_MAP.topLeft,
+    POSITION_MAP.bottomLeft
+]);
+
+export const LEFT_TOP_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.leftTop,
+    POSITION_MAP.rightTop,
+    POSITION_MAP.right,
+    POSITION_MAP.rightBottom,
+    POSITION_MAP.topRight,
+    POSITION_MAP.bottomRight
+]);
+
+export const LEFT_BOTTOM_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.leftBottom,
+    POSITION_MAP.rightBottom,
+    POSITION_MAP.right,
+    POSITION_MAP.rightTop,
+    POSITION_MAP.topRight,
+    POSITION_MAP.bottomRight
+]);
+
+export const TOP_LEFT_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.topLeft,
+    POSITION_MAP.topRight,
+    POSITION_MAP.bottomLeft,
+    POSITION_MAP.bottom,
+    POSITION_MAP.bottomRight,
+    POSITION_MAP.leftBottom,
+    POSITION_MAP.rightBottom
+]);
+
+export const TOP_RIGHT_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.topRight,
+    POSITION_MAP.topLeft,
+    POSITION_MAP.bottomRight,
+    POSITION_MAP.bottom,
+    POSITION_MAP.bottomLeft,
+    POSITION_MAP.leftBottom,
+    POSITION_MAP.rightBottom
+]);
+
+export const BOTTOM_RIGHT_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.bottomRight,
+    POSITION_MAP.bottomLeft,
+    POSITION_MAP.topRight,
+    POSITION_MAP.top,
+    POSITION_MAP.topLeft,
+    POSITION_MAP.leftTop,
+    POSITION_MAP.rightTop
+]);
+
+export const BOTTOM_LEFT_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.bottomLeft,
+    POSITION_MAP.bottomRight,
+    POSITION_MAP.topLeft,
+    POSITION_MAP.top,
+    POSITION_MAP.topRight,
+    POSITION_MAP.rightTop,
+    POSITION_MAP.leftTop
+]);
+
+export const POSITION_PRIORITY_STRATEGY = {
+    top: TOP_POSITION_PRIORITY,
+    topLeft: TOP_LEFT_POSITION_PRIORITY,
+    topRight: TOP_RIGHT_POSITION_PRIORITY,
+    bottom: BOTTOM_POSITION_PRIORITY,
+    bottomLeft: BOTTOM_LEFT_POSITION_PRIORITY,
+    bottomRight: BOTTOM_RIGHT_POSITION_PRIORITY,
+    left: LEFT_POSITION_PRIORITY,
+    leftTop: LEFT_TOP_POSITION_PRIORITY,
+    leftBottom: LEFT_BOTTOM_POSITION_PRIORITY,
+    right: RIGHT_POSITION_PRIORITY,
+    rightTop: RIGHT_TOP_POSITION_PRIORITY,
+    rightBottom: RIGHT_BOTTOM_POSITION_PRIORITY
+};
+
 export const POSITION_TO_CSS_MAP: {[key: string]: string} = {
     top: 'top',
     topLeft: 'top-left',
@@ -111,6 +238,13 @@ export const POSITION_TO_CSS_MAP: {[key: string]: string} = {
     bottom: 'bottom',
     bottomLeft: 'bottom-left',
     bottomRight: 'bottom-right'
+};
+
+export const DEFAULT_4_POSITIONS_TO_CSS_MAP: {[key: string]: string} = {
+    top: 'top',
+    bottom: 'bottom',
+    right: 'right',
+    left: 'left'
 };
 
 function arrayMap<T, S>(array: T[], iteratee: (item: T, index: number, arr: T[]) => S): S[] {
