@@ -533,6 +533,7 @@ export class McPopover implements OnInit, OnDestroy {
     }
 
     onPositionChange($event: ConnectedOverlayPositionChange): void {
+        console.log('position change');
         let updatedPlacement = this.mcPlacement;
         Object.keys(this.availablePositions).some((key) => {
             if ($event.connectionPair.originX === this.availablePositions[key].originX &&
@@ -546,10 +547,9 @@ export class McPopover implements OnInit, OnDestroy {
 
             return false;
         });
-        if (updatedPlacement !== this.mcPlacement) {
-            this.updateCompValue('mcPlacement', updatedPlacement);
-            this.mcPositionStrategyPlacementChange.emit(updatedPlacement);
-        }
+
+        this.updateCompValue('mcPlacement', updatedPlacement);
+        this.mcPositionStrategyPlacementChange.emit(updatedPlacement);
 
         if (this.popover) {
             this.updateCompValue('classList', this.classList);
@@ -655,6 +655,18 @@ export class McPopover implements OnInit, OnDestroy {
                     this.elementRef.nativeElement.addEventListener(event, listener);
                 });
         }
+    }
+
+    registerResizeHandler() {
+        // The resize handler is currently responsible for detecting slider dimension
+        // changes and therefore doesn't cause a value change that needs to be propagated.
+        this.ngZone.runOutsideAngular(() => {
+            window.addEventListener('resize', this.resizeListener);
+        });
+    }
+
+    deregisterResizeHandler() {
+        window.removeEventListener('resize', this.resizeListener);
     }
 
     resetListeners() {
@@ -768,4 +780,6 @@ export class McPopover implements OnInit, OnDestroy {
 
         return POSITION_PRIORITY_STRATEGY[this.mcPlacement];
     }
+
+    private resizeListener = () => this.updatePosition();
 }
