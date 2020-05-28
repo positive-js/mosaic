@@ -571,9 +571,9 @@ export class McPopover implements OnInit, OnDestroy {
         const currentContainer = this.overlayRef.overlayElement.style;
         const elementHeight = this.hostView.element.nativeElement.clientHeight;
         const elementWidth = this.hostView.element.nativeElement.clientWidth;
-        const verticalOffset = Math.floor(elementHeight / 2); // tslint:disable-line
-        const horizontalOffset = Math.floor(elementWidth / 2 - 6); // tslint:disable-line
-        const offsets = {
+        const verticalOffset: number = Math.floor(elementHeight / 2); // tslint:disable-line
+        const horizontalOffset: number = Math.floor(elementWidth / 2 - 6); // tslint:disable-line
+        const offsets: { [key: string]: number} = {
             top: verticalOffset,
             bottom: verticalOffset,
             right: horizontalOffset,
