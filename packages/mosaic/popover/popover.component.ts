@@ -267,7 +267,7 @@ export function getMcPopoverInvalidPositionError(position: string) {
 }
 
 const VIEWPORT_MARGIN: number = 8;
-const POPOVER_ARROW_BORDER_DISTANCE: number = 22; // tslint:disable-line
+const POPOVER_ARROW_BORDER_DISTANCE: number = 20; // tslint:disable-line
 const ANCHOR_MIN_HEIGHT_WIDTH: number = 40;
 
 @Directive({
@@ -577,8 +577,8 @@ export class McPopover implements OnInit, OnDestroy {
         const offsets: { [key: string]: number} = {
             top: verticalOffset,
             bottom: verticalOffset,
-            right: horizontalOffset + 8,
-            left: horizontalOffset + 8
+            right: horizontalOffset,
+            left: horizontalOffset
         };
 
         const styleProperty = updatedPlacement.split(/(?=[A-Z])/)[1].toLowerCase();
