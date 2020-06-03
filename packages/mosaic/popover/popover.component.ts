@@ -268,7 +268,7 @@ export function getMcPopoverInvalidPositionError(position: string) {
 
 const VIEWPORT_MARGIN: number = 8;
 const POPOVER_ARROW_BORDER_DISTANCE: number = 20; // tslint:disable-line
-const ANCHOR_MIN_HEIGHT_WIDTH: number = 40;
+const ANCHOR_MIN_HEIGHT_WIDTH: number = 44; // tslint:disable-line
 
 @Directive({
     selector: '[mcPopover]',
