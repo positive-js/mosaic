@@ -267,7 +267,8 @@ export function getMcPopoverInvalidPositionError(position: string) {
 }
 
 const VIEWPORT_MARGIN: number = 8;
-const POPOVER_ARROW_BORDER_DISTANCE: number = 20; // tslint:disable-line
+const POPOVER_ARROW_BORDER_DISTANCE: number = 22; // tslint:disable-line
+const ANCHOR_MIN_HEIGHT_WIDTH: number = 40;
 
 @Directive({
     selector: '[mcPopover]',
@@ -576,11 +577,18 @@ export class McPopover implements OnInit, OnDestroy {
         const offsets: { [key: string]: number} = {
             top: verticalOffset,
             bottom: verticalOffset,
-            right: horizontalOffset,
-            left: horizontalOffset
+            right: horizontalOffset + 8,
+            left: horizontalOffset + 8
         };
 
         const styleProperty = updatedPlacement.split(/(?=[A-Z])/)[1].toLowerCase();
+
+        if (((styleProperty === 'top' || styleProperty === 'bottom') &&
+            elementHeight > ANCHOR_MIN_HEIGHT_WIDTH) ||
+            ((styleProperty === 'left' || styleProperty === 'right') &&
+            elementWidth > ANCHOR_MIN_HEIGHT_WIDTH)) {
+            return;
+        }
 
         if (!this.overlayRef.overlayElement.style[styleProperty]) {
             this.overlayRef.overlayElement.style[styleProperty] = '0px';
