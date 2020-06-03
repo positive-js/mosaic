@@ -267,7 +267,16 @@ export function getMcPopoverInvalidPositionError(position: string) {
 }
 
 const VIEWPORT_MARGIN: number = 8;
+
+/* Constant distance between popover container border
+*  corner according to popover placement and middle of arrow
+* */
 const POPOVER_ARROW_BORDER_DISTANCE: number = 20; // tslint:disable-line
+
+/* Constant value for min height and width of anchor element used for popover.
+*  Set as POPOVER_ARROW_BORDER_DISTANCE multiplied by 2
+*  plus 2px border for both sides of element. Used in check of position management.
+* */
 const ANCHOR_MIN_HEIGHT_WIDTH: number = 44; // tslint:disable-line
 
 @Directive({
