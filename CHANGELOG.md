@@ -1,3 +1,9 @@
+## 9.1.1 "Beau Monde" (2020-06-03)
+
+### Mosaic
+
+ * feature  **popover:** behavior and design ([#472](https://github.com/positive-js/mosaic/issues/472)) #UIM-457 ([417899f](https://github.com/positive-js/mosaic/commit/417899feee4564c3a989d0273c95966e2e080ee1)), closes [#UIM-457](https://github.com/positive-js/mosaic/issues/UIM-457)
+
 # 9.1.0 "Cask of Oloroso" (2020-05-28)
 
 ### Mosaic
