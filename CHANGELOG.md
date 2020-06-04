@@ -1,3 +1,9 @@
+## 8.5.1 "Honorific" (2020-06-04)
+
+### Mosaic
+
+ * feature  **popover:** behavior and design ([#472](https://github.com/positive-js/mosaic/issues/472)) #UIM-457 ([6f7bf76](https://github.com/positive-js/mosaic/commit/6f7bf76925fdca5b93010122e4a4b8f32829d4f1)), closes [#UIM-457](https://github.com/positive-js/mosaic/issues/UIM-457)
+
 # 8.5.0 "Gossamer Polynesian" (2020-05-28)
 
 ### Mosaic
