@@ -13,7 +13,7 @@ import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 /* tslint:disable:no-trailing-whitespace */
 @Component({
     selector: 'app',
-    styleUrls: ['../main.scss', './styles.css'],
+    styleUrls: ['../main.scss', './styles.scss'],
     encapsulation: ViewEncapsulation.None,
     templateUrl: './template.html'
 })

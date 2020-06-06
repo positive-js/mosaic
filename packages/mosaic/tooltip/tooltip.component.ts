@@ -112,6 +112,16 @@ export class McTooltipComponent {
         }
     }
 
+    @Input()
+    get mcTooltipClass(): string {
+        return this._mcTooltipClass;
+    }
+
+    set mcTooltipClass(value: string) {
+        this._mcTooltipClass = value;
+    }
+
+    private _mcTooltipClass: string;
     private _mcPlacement: string = 'top';
 
     @Input()
@@ -178,7 +188,10 @@ export class McTooltipComponent {
     }
 
     setClassMap(): void {
-        this.classMap = `${this.prefix}-${this.mcPlacement}`;
+        this.classMap = {
+            [`${this.prefix}-${this.mcPlacement}`]: true,
+            [this.mcTooltipClass]: true
+        };
     }
 
     isContentEmpty(): boolean {
@@ -329,19 +342,20 @@ export class McTooltip implements OnInit, OnDestroy {
     private _mcPlacement: string = 'top';
 
     @Input('mcTooltipClass')
-    get mcTooltipClass() {
+    get mcTooltipClass(): string {
         return this._mcTooltipClass;
     }
 
-    set mсTooltipClass(value: string | string[] | Set<string> | {[key: string]: any}) {
-        this._mcTooltipClass = value;
-
-        if (this.tooltip) {
-            this.tooltip.setClassMap();
+    set mcTooltipClass(value: string) {
+        if (value) {
+            this._mcTooltipClass = value;
+            this.updateCompValue('mcTooltipClass', value);
+        } else {
+            this._mcTooltipClass = '';
         }
     }
 
-    private _mcTooltipClass: string | string[] | Set<string> | {[key: string]: any};
+    private _mcTooltipClass: string;
 
     @Input('mcVisible')
     get mcVisible(): boolean {
@@ -559,7 +573,7 @@ export class McTooltip implements OnInit, OnDestroy {
                     'mcTooltipDisabled',
                     'mcMouseEnterDelay',
                     'mcMouseLeaveDelay',
-                    'mсTooltipClass'
+                    'mcTooltipClass'
                 ];
                 properties.forEach((property) => this.updateCompValue(property, this[ property ]));
                 this.tooltip.mcVisibleChange.pipe(takeUntil(this.$unsubscribe), distinctUntilChanged())
