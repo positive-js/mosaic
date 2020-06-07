@@ -111,6 +111,14 @@ export class NavbarComponent {
         this.colorSwitch = new NavbarProperty(this.activeColorProperty);
         this.themeSwitch = new NavbarProperty(this.themeProperty);
         this.languageSwitch = new NavbarProperty(this.languageProperty);
+
+        this.colorAutomaticTheme.addEventListener('change', (e) => {
+            if (e.matches) {
+                this.themeProperty.data[0].className = 'theme-default';
+            } else {
+                this.themeProperty.data[0].className = 'theme-dark';
+            }
+        });
     }
 
     goToVersion(i: number) {
