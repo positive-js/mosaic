@@ -83,6 +83,12 @@ export class NavbarComponent {
         property: 'PT_theme',
         data: [
             {
+                theme: 'auto',
+                name: 'Автоматическое переключение',
+                className: this.colorAutomaticTheme.matches ? 'theme-default' : 'theme-dark',
+                selected: false
+            },
+            {
                 theme: 'default',
                 name: 'Светлая тема',
                 className: 'theme-default',
