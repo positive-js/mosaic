@@ -278,7 +278,6 @@ export class McTimepicker<D> extends McTimepickerMixinBase
             // To avoid cyclic dependency https://stackoverflow.com/a/49578414
             const control = this.ngControl.control as FormControl;
             const myValidators = [
-                () => this.parseValidator(),
                 () => this.minTimeValidator(),
                 () => this.maxTimeValidator()
             ];
@@ -718,12 +717,6 @@ export class McTimepicker<D> extends McTimepickerMixinBase
             minutes: this.dateAdapter.getMinutes(dateVal),
             seconds: this.dateAdapter.getSeconds(dateVal)
         };
-    }
-
-    private parseValidator(): ValidationErrors | null {
-        return this.currentDateTimeInput === undefined ?
-            { mcTimepickerParse: { text: this.elementRef.nativeElement.value } } :
-            null;
     }
 
     private minTimeValidator(): ValidationErrors | null {
