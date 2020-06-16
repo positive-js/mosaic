@@ -1,3 +1,17 @@
+## 9.1.1 "Beau Monde" (2020-06-03)
+
+### Mosaic
+
+ * feature  **popover:** behavior and design ([#472](https://github.com/positive-js/mosaic/issues/472)) #UIM-457 ([417899f](https://github.com/positive-js/mosaic/commit/417899feee4564c3a989d0273c95966e2e080ee1)), closes [#UIM-457](https://github.com/positive-js/mosaic/issues/UIM-457)
+
+# 9.1.0 "Cask of Oloroso" (2020-05-28)
+
+### Mosaic
+
+ * bug fix  **popover:** margin for left position #UIM-445 ([#465](https://github.com/positive-js/mosaic/issues/465)) ([f324155](https://github.com/positive-js/mosaic/commit/f32415519387008826b31ab40c8833197b4e701f)), closes [#UIM-445](https://github.com/positive-js/mosaic/issues/UIM-445)
+ * bug fix  **visual:** Maked text of class name more visible on the dark theme ([#468](https://github.com/positive-js/mosaic/issues/468)) ([345e264](https://github.com/positive-js/mosaic/commit/345e264b62a78064378b3d2613a10e4a01ad2b6c))
+ * feature  **popover:** positioning and dev-example updates (UIM-447) ([#467](https://github.com/positive-js/mosaic/issues/467)) ([702ad2a](https://github.com/positive-js/mosaic/commit/702ad2ad49c7c1a2b8d896901a28df72610be73c))
+
 # 9.0.0 "Oloroso" (2020-05-18)
 
 ### Mosaic

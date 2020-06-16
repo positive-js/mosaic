@@ -7,8 +7,8 @@
 $z-index-popover: 1060;
 $popover-max-width: 240px;
 $border-radius-base: 4px;
-$popover-arrow-width: 6px;
-$popover-distance: $popover-arrow-width + 4px;
+$popover-arrow-width: 4px;
+$popover-distance: $popover-arrow-width * 2;
 $popover-arrow-distance: -($popover-arrow-width + 2px);
 $border-size: 1px;
 
@@ -151,7 +151,7 @@ $mc-popover-large-width: 640px;
 
 .mc-popover_placement-right-top .mc-popover__arrow {
     left: $popover-arrow-distance;
-    top: 20px;
+    top: 18px;
     margin-top: -$popover-arrow-width;
 }
 
@@ -169,7 +169,7 @@ $mc-popover-large-width: 640px;
 
 .mc-popover_placement-left-top .mc-popover__arrow {
     right: $popover-arrow-distance;
-    top: 20px;
+    top: 18px;
     margin-top: -$popover-arrow-width;
 }
 

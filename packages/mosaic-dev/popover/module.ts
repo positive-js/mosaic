@@ -1,9 +1,15 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
+import { McCheckboxModule } from '@ptsecurity/mosaic/checkbox';
+import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
+import { McInputModule } from '@ptsecurity/mosaic/input';
 import { McPopoverModule } from '@ptsecurity/mosaic/popover';
+import { McSelectModule } from '@ptsecurity/mosaic/select';
+import { McSplitterModule } from '@ptsecurity/mosaic/splitter';
 
 import { McIconModule } from '../../mosaic/icon/';
 
@@ -17,8 +23,38 @@ import { McIconModule } from '../../mosaic/icon/';
 })
 export class DemoComponent {
     popoverActiveStage: number;
+    selectedOrder: boolean;
 
     isPopoverVisibleLeft: boolean = false;
+
+    activatedPosition: string = '';
+
+    ELEMENTS = {
+        BUTTON: 'button',
+        INPUT: 'input',
+        ICON: 'icon'
+    };
+
+    TRIGGERS = {
+        CLICK: 'click',
+        FOCUS: 'focus',
+        HOVER: 'hover'
+    };
+
+    SIZE = {
+        LARGE: 'large',
+        NORMAL: 'normal',
+        SMALL: 'small'
+    };
+
+    selectedElement: string = 'button';
+    selectedPlacement: string = 'left';
+    selectedTrigger: string = 'click';
+    selectedSize: string = 'normal';
+    layoutClass: string = 'flex-65 layout-row layout-align-center-center';
+    content: string = 'button text';
+    userDefinedPlacementPriority: string[] = ['bottom', 'right'];
+    multipleSelected: string[] = [];
 
     constructor() {
         this.popoverActiveStage = 1;
@@ -33,16 +69,43 @@ export class DemoComponent {
         this.popoverActiveStage += direction;
     }
 
-    changePopoverVisibilityLeft() {
-        this.isPopoverVisibleLeft = !this.isPopoverVisibleLeft;
+    onPopoverVisibleChange($event) {
+        if (!$event) {
+            this.activatedPosition = '';
+        }
     }
 
-    onPopoverVisibleChangeLeft(update: boolean) {
-        this.isPopoverVisibleLeft = update;
+    onStrategyPlacementChange(event) {
+        this.activatedPosition = event;
     }
 
-    onPopoverVisibleChange() {
-        console.log('onPopoverVisibleChange'); // tslint:disable-line:no-console
+    setPlacement(placement: string) {
+        this.selectedPlacement = placement;
+    }
+
+    showElement(): string {
+        return this.selectedElement;
+    }
+
+    activated(value: string): boolean {
+        return this.selectedPlacement === value;
+    }
+
+    isActual(value: string): boolean {
+        return this.activatedPosition === value && this.selectedPlacement !== this.activatedPosition;
+    }
+
+    getOrder(forElement: string) {
+        if (forElement === 'config') {
+            return this.selectedOrder ? {order: 2} : {order: 1};
+        }
+        if (forElement === 'result') {
+            return this.selectedOrder ? {order: 1} : {order: 2};
+        }
+    }
+
+    get isFallbackActivated(): boolean {
+        return this.selectedPlacement !== this.activatedPosition && this.activatedPosition !== '';
     }
 }
 
@@ -54,9 +117,15 @@ export class DemoComponent {
         BrowserModule,
         BrowserAnimationsModule,
         A11yModule,
+        FormsModule,
+        McFormFieldModule,
+        McSelectModule,
         McPopoverModule,
         McButtonModule,
-        McIconModule
+        McIconModule,
+        McInputModule,
+        McSplitterModule,
+        McCheckboxModule
     ],
     bootstrap: [
         DemoComponent
