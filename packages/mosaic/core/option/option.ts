@@ -13,7 +13,6 @@ import {
     Optional,
     Output,
     QueryList,
-    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { ENTER, SPACE } from '@ptsecurity/cdk/keycodes';
@@ -76,8 +75,6 @@ export class McOption implements AfterViewChecked, OnDestroy {
     /** The form value of the option. */
     @Input() value: any;
 
-    @ViewChild('optionText', {static: false}) optionTextElement: ElementRef<HTMLInputElement>;
-
     @Input()
     get showCheckbox() {
         return this._showCheckbox === undefined ? this.multiple : this._showCheckbox;
@@ -95,8 +92,6 @@ export class McOption implements AfterViewChecked, OnDestroy {
 
     /** Emits when the state of the option changes and any parents have to be notified. */
     readonly stateChanges = new Subject<void>();
-
-    title: string = '';
 
     /**
      * The displayed value of the option. It is necessary to show the selected option in the
@@ -157,7 +152,6 @@ export class McOption implements AfterViewChecked, OnDestroy {
     ) {}
 
     ngAfterViewChecked() {
-        this.updateTitle();
         // Since parent components could be using the option's label to display the selected values
         // (e.g. `mc-select`) and they don't have a way of knowing if the option's label has changed
         // we have to check for changes in the DOM ourselves and dispatch an event. These checks are
@@ -269,27 +263,6 @@ export class McOption implements AfterViewChecked, OnDestroy {
 
     getHostElement(): HTMLElement {
         return this.element.nativeElement;
-    }
-
-    // Checks if option text doesn't fit into span
-    isTitleShown(): boolean {
-        return this.optionTextElement
-            && this.optionTextElement.nativeElement.scrollWidth > this.getHostElement().offsetWidth;
-    }
-
-    getTitle(): string {
-        return this.isTitleShown() ? this.optionTextElement.nativeElement.textContent || '' : '';
-
-    }
-
-    // Updates the title if it changed
-    updateTitle() {
-        const newTitle = this.isTitleShown() ? this.getTitle() : '';
-
-        if (this.title !== newTitle) {
-            this.title = newTitle;
-            this.changeDetectorRef.detectChanges();
-        }
     }
 
     /** Emits the selection change event. */

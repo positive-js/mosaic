@@ -77,7 +77,6 @@ import {
     mixinTabIndex,
     mcSelectAnimations,
 
-    SELECT_PANEL_BORDER_PADDING_X,
     SELECT_PANEL_INDENT_PADDING_X,
     SELECT_PANEL_MAX_HEIGHT,
     SELECT_PANEL_PADDING_X,
@@ -1225,7 +1224,7 @@ export class McSelect extends McSelectMixinBase implements
 
         const overlayRect = this.getOverlayRect();
         // Window width without scrollbar
-        const windowWidth = this.getWindowWidth();
+        const windowWidth = this.getBackdropWidth();
         const isRtl = this.isRtl();
         /* tslint:disable-next-line:no-magic-numbers */
         const paddingWidth = SELECT_PANEL_PADDING_X * 2;
@@ -1245,7 +1244,7 @@ export class McSelect extends McSelectMixinBase implements
 
         // If the element overflows on either side, reduce the offset to allow it to fit.
         if (leftOverflow > 0 || rightOverflow > 0) {
-            [offsetX, overlayMaxWidth] = this.calculateOverlayPosition(overlayRect, windowWidth, offsetX);
+            [offsetX, overlayMaxWidth] = this.calculateOverlayXPosition(overlayRect, windowWidth, offsetX);
             this.overlayDir.overlayRef.overlayElement.style.maxWidth = `${overlayMaxWidth}px`;
         }
 
@@ -1256,7 +1255,7 @@ export class McSelect extends McSelectMixinBase implements
         this.overlayDir.overlayRef.updatePosition();
     }
 
-    private calculateOverlayPosition(overlayRect, windowWidth, basicOffsetX) {
+    private calculateOverlayXPosition(overlayRect, windowWidth, basicOffsetX) {
         let offsetX = basicOffsetX;
         const leftIndent = this.triggerRect.left;
         const rightIndent = windowWidth - this.triggerRect.right;
@@ -1265,7 +1264,7 @@ export class McSelect extends McSelectMixinBase implements
 
         let maxDropdownWidth: number;
         let overlayMaxWidth: number;
-        const triggerWidth = this.triggerRect.width + SELECT_PANEL_BORDER_PADDING_X;
+        const triggerWidth = this.triggerRect.width + SELECT_PANEL_INDENT_PADDING_X;
 
         if (isRightDirection) {
             maxDropdownWidth = rightIndent + triggerWidth - SELECT_PANEL_VIEWPORT_PADDING;
@@ -1279,7 +1278,7 @@ export class McSelect extends McSelectMixinBase implements
                 leftOffset = this.triggerRect.right - overlayMaxWidth;
             } else {
                 overlayMaxWidth = maxDropdownWidth;
-                leftOffset = this.triggerRect.right - (overlayMaxWidth - SELECT_PANEL_BORDER_PADDING_X);
+                leftOffset = this.triggerRect.right - (overlayMaxWidth - SELECT_PANEL_INDENT_PADDING_X);
             }
             offsetX -= this.triggerRect.left - leftOffset;
         }
@@ -1297,7 +1296,7 @@ export class McSelect extends McSelectMixinBase implements
         return this.overlayDir.overlayRef.overlayElement.getBoundingClientRect();
     }
 
-    private getWindowWidth() {
+    private getBackdropWidth() {
         return this.scrollStrategy._overlayRef.backdropElement.clientWidth;
     }
 
