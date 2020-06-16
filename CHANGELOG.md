@@ -1,3 +1,9 @@
+## 8.5.2 "Arty Numeracy" (2020-06-16)
+
+### Mosaic
+
+ * bug fix  **timepicker:** remove parseValidator (#UIM-464) ([#476](https://github.com/positive-js/mosaic/issues/476)) ([0d38236](https://github.com/positive-js/mosaic/commit/0d38236e2e07ae406d85e32dac0b7c3885ebc87b)), closes [#UIM-464](https://github.com/positive-js/mosaic/issues/UIM-464)
+
 ## 8.5.1 "Honorific" (2020-06-04)
 
 ### Mosaic
