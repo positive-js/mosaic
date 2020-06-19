@@ -157,7 +157,6 @@
         "server-dev:button-toggle": "ng serve dev-button-toggle --port 3003",
         "server-dev:card": "ng serve dev-card --port 3003",
         "server-dev:checkbox": "ng serve dev-checkbox --port 3003",
-        "server-dev:dateformatter": "ng serve dev-dateformatter --port 3003",
         "server-dev:datepicker": "ng serve dev-datepicker --port 3003",
         "server-dev:date-formatter": "ng serve dev-date-formatter --port 3003",
         "server-dev:dropdown": "ng serve dev-dropdown --port 3003",
