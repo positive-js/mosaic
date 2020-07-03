@@ -42,7 +42,7 @@ export class NavbarProperty {
         }
     }
 
-    updateTemplate(i: number) {
+    private updateTemplate(i: number) {
         if (this.currentValue) {
             for (const color of this.data) {
                 document.body.classList.remove(color.className);
@@ -52,7 +52,7 @@ export class NavbarProperty {
         }
     }
 
-    updateSelected(i: number) {
+    private updateSelected(i: number) {
         if (this.data[i]) {
             this.data.forEach((color) => {
                 color.selected = false;
