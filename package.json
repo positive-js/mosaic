@@ -188,7 +188,7 @@
         "server-dev:tooltip": "ng serve dev-tooltip --port 3003",
         "server-dev:timepicker": "ng serve dev-timepicker --port 3003",
         "server-dev:validation": "ng serve dev-validation --port 3003",
-        "server-dev:vertical-navbar": "ng serve dev-vertical-navba --port 3003r"
+        "server-dev:vertical-navbar": "ng serve dev-vertical-navbar --port 3003"
     },
     "husky": {
         "hooks": {
