@@ -38,6 +38,9 @@ export class NavbarComponent {
         }
     ];
 
+    // To add for checking of current color theme of OS preferences
+    colorAutomaticTheme: any = window.matchMedia('(prefers-color-scheme: light)');
+
     private activeColorProperty: INavbarProperty = {
         property: 'PT_color',
         data: [
