@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { mosaicVersion } from '../../shared/version/version';
 
 import { INavbarProperty, NavbarProperty } from './navbar-property';
+import { ThemeService } from './theme.service';
 
 
 @Component({
@@ -10,7 +12,7 @@ import { INavbarProperty, NavbarProperty } from './navbar-property';
     templateUrl: './navbar.template.html',
     styleUrls: ['./navbar.scss']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit, OnDestroy {
     mosaicVersion = mosaicVersion;
 
     /*To add navbar property create new private property of type INavbarProperty
@@ -37,6 +39,12 @@ export class NavbarComponent {
             link: '//v8.mosaic.ptsecurity.com'
         }
     ];
+
+    // To add for checking of current color theme of OS preferences
+    colorAutomaticTheme: any = window.matchMedia('(prefers-color-scheme: light)');
+
+    // To add for dynamically switching of automatic theme
+    themingSubscription: Subscription;
 
     private activeColorProperty: INavbarProperty = {
         property: 'PT_color',
@@ -80,6 +88,12 @@ export class NavbarComponent {
         property: 'PT_theme',
         data: [
             {
+                theme: 'auto',
+                name: 'Автоматическое переключение',
+                className: this.colorAutomaticTheme.matches ? 'theme-default' : 'theme-dark',
+                selected: false
+            },
+            {
                 theme: 'default',
                 name: 'Светлая тема',
                 className: 'theme-default',
@@ -96,12 +110,33 @@ export class NavbarComponent {
         updateSelected: true
     };
 
-    constructor() {
+    constructor(private themeService: ThemeService) {
         this.setSelectedVersion();
 
         this.colorSwitch = new NavbarProperty(this.activeColorProperty);
         this.themeSwitch = new NavbarProperty(this.themeProperty);
         this.languageSwitch = new NavbarProperty(this.languageProperty);
+
+        this.colorAutomaticTheme.addEventListener('change', (e) => {
+            if (e.matches) {
+                this.themeProperty.data[0].className = 'theme-default';
+            } else {
+                this.themeProperty.data[0].className = 'theme-dark';
+            }
+        });
+    }
+
+    ngOnInit() {
+        this.themingSubscription = this.themeService.currentTheme.subscribe((theme: string) => {
+            if (this.themeSwitch.data[0].selected) {
+            this.themeSwitch.data[0].className = theme;
+            this.themeSwitch.setValue(0);
+          }
+        });
+    }
+
+    ngOnDestroy() {
+        this.themingSubscription.unsubscribe();
     }
 
     goToVersion(i: number) {
