@@ -15,7 +15,7 @@ export class ThemeService {
   currentTheme = new BehaviorSubject(Themes.Default);
 
   constructor(private ref: ApplicationRef) {
-    const isLightTheme: boolean = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+    const isLightTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
 
     isLightTheme ? this.currentTheme.next(Themes.Default) : this.currentTheme.next(Themes.Dark);
 
@@ -35,4 +35,3 @@ export class ThemeService {
     return this.currentTheme.getValue();
   }
 }
-

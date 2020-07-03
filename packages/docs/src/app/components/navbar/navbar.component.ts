@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { mosaicVersion } from '../../shared/version/version';
 
 import { INavbarProperty, NavbarProperty } from './navbar-property';
+import { ThemeService } from './theme.service';
 
 
 @Component({
@@ -10,7 +12,7 @@ import { INavbarProperty, NavbarProperty } from './navbar-property';
     templateUrl: './navbar.template.html',
     styleUrls: ['./navbar.scss']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit, OnDestroy {
     mosaicVersion = mosaicVersion;
 
     /*To add navbar property create new private property of type INavbarProperty
@@ -40,6 +42,9 @@ export class NavbarComponent {
 
     // To add for checking of current color theme of OS preferences
     colorAutomaticTheme: any = window.matchMedia('(prefers-color-scheme: light)');
+
+    // To add for dynamically switching of automatic theme
+    themingSubscription: Subscription;
 
     private activeColorProperty: INavbarProperty = {
         property: 'PT_color',
@@ -105,7 +110,7 @@ export class NavbarComponent {
         updateSelected: true
     };
 
-    constructor() {
+    constructor(private themeService: ThemeService) {
         this.setSelectedVersion();
 
         this.colorSwitch = new NavbarProperty(this.activeColorProperty);
@@ -119,6 +124,19 @@ export class NavbarComponent {
                 this.themeProperty.data[0].className = 'theme-dark';
             }
         });
+    }
+
+    ngOnInit() {
+        this.themingSubscription = this.themeService.currentTheme.subscribe((theme: string) => {
+            if (this.themeSwitch.data[0].selected) {
+            this.themeSwitch.data[0].className = theme;
+            this.themeSwitch.setValue(0);
+          }
+        });
+    }
+
+    ngOnDestroy() {
+        this.themingSubscription.unsubscribe();
     }
 
     goToVersion(i: number) {
