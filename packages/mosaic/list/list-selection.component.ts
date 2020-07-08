@@ -502,11 +502,6 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
             this.setSelectedOptions(option);
         } else if (ctrlKey) {
             if (!this.canDeselectLast(option)) { return; }
-        } else {
-            // if (this.autoSelect) {
-            //     // this.options.forEach((item) => item.setSelected(false));
-            //     option.setSelected(true);
-            // }
         }
 
         this.emitChangeEvent(option);

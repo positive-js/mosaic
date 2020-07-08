@@ -12,9 +12,9 @@
 
 <!--<br><br><br>-->
 
-<h5>multiple selection</h5>
+<h2>Multiple selection: Keyboard</h2>
 <mc-list-selection
-    multiple="checkbox"
+    multiple="keyboard"
     autoSelect
     [(ngModel)]="multipleSelected"
     (selectionChange)="onSelectionChange($event)">
@@ -27,7 +27,40 @@
 <br>
 <div>multipleSelected: {{ multipleSelected }}</div>
 
-<!--<br><br><br>-->
+<br><br><br>
+
+<h2>Multiple selection: Checkbox</h2>
+<mc-list-selection
+    multiple="checkbox"
+    autoSelect
+    [(ngModel)]="multipleSelectedCheckbox"
+    (selectionChange)="onSelectionChange($event)">
+    <mc-list-option value="Normal">Normal</mc-list-option>
+    <mc-list-option value="Hovered">Hovered</mc-list-option>
+    <mc-list-option value="Focused">Focused</mc-list-option>
+    <mc-list-option value="Disabled">Disabled</mc-list-option>
+    <mc-list-option value="Selected">Selected</mc-list-option>
+</mc-list-selection>
+<br>
+<div>multipleSelectedCheckbox: {{ multipleSelectedCheckbox }}</div>
+
+<br><br><br>
+
+<h2>Single selection</h2>
+<mc-list-selection
+    autoSelect
+    [(ngModel)]="singleSelected"
+    (selectionChange)="onSelectionChange($event)">
+    <mc-list-option value="Normal">Normal</mc-list-option>
+    <mc-list-option value="Hovered">Hovered</mc-list-option>
+    <mc-list-option value="Focused">Focused</mc-list-option>
+    <mc-list-option value="Disabled">Disabled</mc-list-option>
+    <mc-list-option value="Selected">Selected</mc-list-option>
+</mc-list-selection>
+<br>
+<div>singleSelected: {{ singleSelected }}</div>
+
+<br><br><br>
 
 <!--<h5>vertical scroll</h5>-->
 <!--<mc-list-selection style="height: 160px; overflow-y: scroll">-->
