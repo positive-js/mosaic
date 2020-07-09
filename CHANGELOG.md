@@ -1,3 +1,9 @@
+## 9.1.2 "Field Trip" (2020-07-09)
+
+### Mosaic
+
+ * bug fix  **list:** checkbox selection #UIM-462 ([#484](https://github.com/positive-js/mosaic/issues/484)) ([3219c55](https://github.com/positive-js/mosaic/commit/3219c555e35a5dbfcdd940f138520cf8416d28af)), closes [#UIM-462](https://github.com/positive-js/mosaic/issues/UIM-462)
+
 ## 9.1.1 "Beau Monde" (2020-06-03)
 
 ### Mosaic
