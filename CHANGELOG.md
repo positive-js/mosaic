@@ -1,3 +1,9 @@
+## 8.5.3 "Planed Vase" (2020-07-09)
+
+### Mosaic
+
+ * bug fix  **list:** checkbox selection #UIM-462 ([#484](https://github.com/positive-js/mosaic/issues/484)) ([e4a9f13](https://github.com/positive-js/mosaic/commit/e4a9f13b1ecb9b692ed19f7b1b9a203fcbad7922)), closes [#UIM-462](https://github.com/positive-js/mosaic/issues/UIM-462)
+
 ## 8.5.2 "Arty Numeracy" (2020-06-16)
 
 ### Mosaic
