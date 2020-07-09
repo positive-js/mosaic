@@ -16,6 +16,8 @@ import { McListModule, McListSelectionChange } from '@ptsecurity/mosaic/list';
 export class DemoComponent {
     typesOfShoes = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
     multipleSelected = ['Boots', 'Clogs'];
+    multipleSelectedCheckbox = [];
+    singleSelected = [];
 
     folders = [
         {
