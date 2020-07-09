@@ -493,7 +493,7 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
                     this.selectionModel.toggle(option);
                 }
 
-                if (this.multipleMode === MultipleMode.KEYBOARD) {
+                if (this.multipleMode === MultipleMode.KEYBOARD || !this.multiple) {
                     this.options.forEach((item) => item.setSelected(false));
                     option.setSelected(true);
                 }
@@ -509,6 +509,12 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
             this.setSelectedOptions(option);
         } else if (ctrlKey) {
             if (!this.canDeselectLast(option)) { return; }
+        } else {
+
+            if (this.multipleMode === MultipleMode.KEYBOARD || !this.multiple) {
+                this.options.forEach((item) => item.setSelected(false));
+                option.setSelected(true);
+            }
         }
 
         this.emitChangeEvent(option);
