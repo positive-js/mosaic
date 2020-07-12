@@ -91,13 +91,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
                 theme: 'auto',
                 name: 'Автоматическое переключение',
                 className: this.colorAutomaticTheme.matches ? 'theme-default' : 'theme-dark',
-                selected: false
+                selected: true
             },
             {
                 theme: 'default',
                 name: 'Светлая тема',
                 className: 'theme-default',
-                selected: true
+                selected: false
             },
             {
                 theme: 'dark',
