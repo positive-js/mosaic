@@ -1,3 +1,9 @@
+## 8.5.4 "Fledged" (2020-07-14)
+
+### Mosaic
+
+ * bug fix  **list:** selection for checkbox ([273edbd](https://github.com/positive-js/mosaic/commit/273edbd500968e859602940381023f40caffdcd9))
+
 ## 8.5.3 "Planed Vase" (2020-07-09)
 
 ### Mosaic
