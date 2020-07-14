@@ -368,7 +368,6 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
         }
 
         if (this.multipleMode === MultipleMode.CHECKBOX) {
-            this.autoSelect = false;
             this.noUnselect = false;
         }
 

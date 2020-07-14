@@ -15,7 +15,7 @@
 <h2>Multiple selection: Keyboard</h2>
 <mc-list-selection
     multiple="keyboard"
-    autoSelect
+    auto-select="true"
     [(ngModel)]="multipleSelected"
     (selectionChange)="onSelectionChange($event)">
     <mc-list-option value="Normal">Normal</mc-list-option>
@@ -32,7 +32,7 @@
 <h2>Multiple selection: Checkbox</h2>
 <mc-list-selection
     multiple="checkbox"
-    autoSelect
+    auto-select="true"
     [(ngModel)]="multipleSelectedCheckbox"
     (selectionChange)="onSelectionChange($event)">
     <mc-list-option value="Normal">Normal</mc-list-option>
@@ -48,7 +48,7 @@
 
 <h2>Single selection</h2>
 <mc-list-selection
-    autoSelect
+    auto-select="true"
     [(ngModel)]="singleSelected"
     (selectionChange)="onSelectionChange($event)">
     <mc-list-option value="Normal">Normal</mc-list-option>
@@ -59,32 +59,3 @@
 </mc-list-selection>
 <br>
 <div>singleSelected: {{ singleSelected }}</div>
-
-<br><br><br>
-
-<!--<h5>vertical scroll</h5>-->
-<!--<mc-list-selection style="height: 160px; overflow-y: scroll">-->
-    <!--<mc-list-option value="Disabled" disabled>Disabled</mc-list-option>-->
-    <!--<mc-list-option value="Normal">Normal</mc-list-option>-->
-    <!--<mc-list-option value="Hovered" class="mc-hovered">Hovered</mc-list-option>-->
-    <!--<mc-list-option value="Focused" class="mc-focused">Focused</mc-list-option>-->
-    <!--<mc-list-option value="Selected" class="mc-selected">Selected</mc-list-option>-->
-    <!--<mc-list-option value="Progress" class="mc-progress">Progress</mc-list-option>-->
-
-    <!--<mc-list-option *ngFor="let shoe of typesOfShoes">{{ shoe }}</mc-list-option>-->
-<!--</mc-list-selection>-->
-
-
-<!--<br><br><br>-->
-
-<!--<h5>horizontal scroll</h5>-->
-<!--<mc-list-selection style="display: flex; width: 500px; height: 50px; overflow-x: scroll" horizontal>-->
-    <!--<mc-list-option value="Disabled" disabled>Disabled</mc-list-option>-->
-    <!--<mc-list-option value="Normal">Normal</mc-list-option>-->
-    <!--<mc-list-option value="Hovered" class="mc-hovered">Hovered</mc-list-option>-->
-    <!--<mc-list-option value="Focused" class="mc-focused">Focused</mc-list-option>-->
-    <!--<mc-list-option value="Selected" class="mc-selected">Selected</mc-list-option>-->
-    <!--<mc-list-option value="Progress" class="mc-progress">Progress</mc-list-option>-->
-
-    <!--<mc-list-option *ngFor="let shoe of typesOfShoes">{{ shoe }}</mc-list-option>-->
-<!--</mc-list-selection>-->
