@@ -42,7 +42,20 @@
     <mc-list-option value="Selected">Selected</mc-list-option>
 </mc-list-selection>
 <br>
-<div>multipleSelectedCheckbox: {{ multipleSelectedCheckbox }}</div>
+<div>multipleSelectedCheckbox: {{ multipleSelectedCheckbox|json }}</div>
+
+<br><br><br>
+
+<h2>Multiple selection with Async: Checkbox</h2>
+<mc-list-selection
+    multiple="checkbox"
+    autoSelect
+    [(ngModel)]="multipleSelected"
+    (selectionChange)="onSelectionChange($event)">
+    <mc-list-option *ngFor="let shoe of asyncUpdate$ | async " [value]="shoe" >{{shoe}}</mc-list-option>
+</mc-list-selection>
+<br>
+<div>multipleSelectedCheckbox: {{ multipleSelected|json }}</div>
 
 <br><br><br>
 
@@ -61,6 +74,7 @@
 <div>singleSelected: {{ singleSelected }}</div>
 
 <br><br><br>
+
 
 <!--<h5>vertical scroll</h5>-->
 <!--<mc-list-selection style="height: 160px; overflow-y: scroll">-->
