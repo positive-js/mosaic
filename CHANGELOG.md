@@ -1,3 +1,9 @@
+## 8.5.5 "Rectilinear" (2020-07-20)
+
+### Mosaic
+
+ * bug fix  **list:** options not selected when async updated value (#UIM-472) ([#487](https://github.com/positive-js/mosaic/issues/487)) ([76a9b08](https://github.com/positive-js/mosaic/commit/76a9b08956c49a3829d77d0d3ad88a68362d452b)), closes [#UIM-472](https://github.com/positive-js/mosaic/issues/UIM-472)
+
 ## 8.5.4 "Fledged" (2020-07-14)
 
 ### Mosaic
