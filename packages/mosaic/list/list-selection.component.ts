@@ -97,7 +97,22 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
     // Whether the label should appear before or after the checkbox. Defaults to 'after'
     @Input() checkboxPosition: 'before' | 'after';
 
-    @Input() value: any;
+    /**
+     * This is set to true after the first OnChanges cycle so we don't clear the value of `selected`
+     * in the first cycle.
+     */
+    private inputsInitialized = false;
+
+    @Input()
+    get value(): any { return this._value; }
+    set value(newValue: any) {
+        if (this.selected && newValue !== this.value && this.inputsInitialized) {
+            this.selected = false;
+        }
+
+        this._value = newValue;
+    }
+    private _value: any;
 
     @Input()
     get disabled() {
@@ -159,21 +174,27 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
     ) {}
 
     ngOnInit() {
-        if (this._selected) {
-            // List options that are selected at initialization can't be reported properly to the form
-            // control. This is because it takes some time until the selection-list knows about all
-            // available options. Also it can happen that the ControlValueAccessor has an initial value
-            // that should be used instead. Deferring the value change report to the next tick ensures
-            // that the form control value is not being overwritten.
-            const wasSelected = this._selected;
+        const list = this.listSelection;
 
-            Promise.resolve().then(() => {
-                if (this._selected || wasSelected) {
-                    this.selected = true;
-                    this.changeDetector.markForCheck();
-                }
-            });
+        if (list._value && list._value.some((value) => list.compareWith(value, this._value))) {
+            this.setSelected(true);
         }
+
+        const wasSelected = this._selected;
+
+        // List options that are selected at initialization can't be reported properly to the form
+        // control. This is because it takes some time until the selection-list knows about all
+        // available options. Also it can happen that the ControlValueAccessor has an initial value
+        // that should be used instead. Deferring the value change report to the next tick ensures
+        // that the form control value is not being overwritten.
+        Promise.resolve().then(() => {
+            if (this._selected || wasSelected) {
+                this.selected = true;
+                this.changeDetector.markForCheck();
+            }
+        });
+
+        this.inputsInitialized = true;
     }
 
     ngOnDestroy(): void {
@@ -366,8 +387,8 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
         return merge(...this.options.map((option) => option.onBlur));
     }
 
-    // Used for storing the values that were assigned before the options were initialized.
-    private tempValues: string[] | null;
+    // tslint:disable-next-line:orthodox-getter-and-setter naming-convention
+    _value: string[] | null;
 
     /** Emits whenever the component is destroyed. */
     private readonly destroyed = new Subject<void>();
@@ -397,6 +418,13 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
         this.selectionModel = new SelectionModel<McListOption>(this.multiple);
     }
 
+    /**
+     * Function used for comparing an option against the selected value when determining which
+     * options should appear as selected. The first argument is the value of an options. The second
+     * one is a value from the selected value. A boolean must be returned.
+     */
+    @Input() compareWith: (o1: any, o2: any) => boolean = (a1, a2) => a1 === a2;
+
     ngAfterContentInit(): void {
         this.horizontal = toBoolean(this.horizontal);
 
@@ -416,9 +444,8 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
                 });
             });
 
-        if (this.tempValues) {
-            this.setOptionsFromValues(this.tempValues);
-            this.tempValues = null;
+        if (this._value) {
+            this.setOptionsFromValues(this._value);
         }
 
         this.selectionModel.changed
@@ -548,10 +575,10 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
 
     // Implemented as part of ControlValueAccessor.
     writeValue(values: string[]): void {
+        this._value = values;
+
         if (this.options) {
             this.setOptionsFromValues(values || []);
-        } else {
-            this.tempValues = values;
         }
     }
 
@@ -674,7 +701,9 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
     // Reports a value change to the ControlValueAccessor
     reportValueChange() {
         if (this.options) {
-            this.onChange(this.getSelectedOptionValues());
+            const value = this.getSelectedOptionValues();
+            this.onChange(value);
+            this._value = value;
         }
     }
 
