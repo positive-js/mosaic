@@ -1,10 +1,12 @@
 // tslint:disable:no-console
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { McCheckboxModule } from '@ptsecurity/mosaic/checkbox';
 import { McListModule, McListSelectionChange } from '@ptsecurity/mosaic/list';
+import { of } from 'rxjs';
+import { debounceTime, startWith, switchMap } from 'rxjs/operators';
 
 
 @Component({
@@ -16,33 +18,19 @@ import { McListModule, McListSelectionChange } from '@ptsecurity/mosaic/list';
 export class DemoComponent {
     typesOfShoes = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
     multipleSelected = ['Boots', 'Clogs'];
-    multipleSelectedCheckbox = [];
+    multipleSelectedCheckbox: string[] = [];
     singleSelected = [];
 
-    folders = [
-        {
-            name: 'Photos',
-            updated: new Date('1/1/16')
-        },
-        {
-            name: 'Recipes',
-            updated: new Date('1/17/16')
-        },
-        {
-            name: 'Work',
-            updated: new Date('1/28/16')
-        }
-    ];
-    notes = [
-        {
-            name: 'Vacation Itinerary',
-            updated: new Date('2/20/16')
-        },
-        {
-            name: 'Kitchen Remodel',
-            updated: new Date('1/18/16')
-        }
-    ];
+    asyncUpdate = new FormControl();
+
+    asyncUpdate$ = this.asyncUpdate.valueChanges.pipe(
+        startWith(null),
+        // tslint:disable-next-line:no-magic-numbers
+        debounceTime(3000),
+        switchMap(() => {
+            return of(this.typesOfShoes);
+        })
+    );
 
     onSelectionChange($event: McListSelectionChange) {
         console.log(`onSelectionChange: ${$event.option.value}`);
