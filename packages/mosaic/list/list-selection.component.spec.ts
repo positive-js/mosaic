@@ -3,7 +3,7 @@
 // tslint:disable:max-func-body-length
 // tslint:disable:no-empty
 
-import { Component, DebugElement, ChangeDetectionStrategy } from '@angular/core';
+import { Component, DebugElement, ChangeDetectionStrategy, QueryList, ViewChildren } from '@angular/core';
 import { async, ComponentFixture, fakeAsync, TestBed, tick, flush } from '@angular/core/testing';
 import { FormControl, FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -802,8 +802,45 @@ xdescribe('McListSelection with forms', () => {
             expect(option.componentInstance.selected).toBe(true);
         }));
     });
+
+    describe('with custom compare function', () => {
+        it('should use a custom comparator to determine which options are selected', fakeAsync(() => {
+            const fixture = TestBed.createComponent(SelectionListWithCustomComparator);
+            const testComponent = fixture.componentInstance;
+
+            testComponent.compareWith = jasmine.createSpy('comparator', (o1: any, o2: any) => {
+                return o1 && o2 && o1.id === o2.id;
+            }).and.callThrough();
+
+            testComponent.selectedOptions = [{id: 2, label: 'Two'}];
+            fixture.detectChanges();
+            tick();
+
+            expect(testComponent.compareWith).toHaveBeenCalled();
+            expect(testComponent.optionInstances.toArray()[1].selected).toBe(true);
+        }));
+    });
 });
 
+
+@Component({
+    template: `
+    <mat-selection-list [(ngModel)]="selectedOptions" [compareWith]="compareWith">
+      <mat-list-option *ngFor="let option of options" [value]="option">
+        {{option.label}}
+      </mat-list-option>
+    </mat-selection-list>`
+})
+class SelectionListWithCustomComparator {
+    @ViewChildren(McListOption) optionInstances: QueryList<McListOption>;
+    selectedOptions: { id: number; label: string }[] = [];
+    compareWith?: (o1: any, o2: any) => boolean;
+    options = [
+        {id: 1, label: 'One'},
+        {id: 2, label: 'Two'},
+        {id: 3, label: 'Three'}
+    ];
+}
 
 @Component({
     template: `
