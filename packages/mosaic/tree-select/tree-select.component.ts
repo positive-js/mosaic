@@ -911,11 +911,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
             const hasDeselectedOptions = this.options.some((option) => !option.selected);
 
             this.options.forEach((option) => {
-                if (hasDeselectedOptions && !option.disabled) {
-                    option.select();
-                } else {
-                    option.deselect();
-                }
+                hasDeselectedOptions && !option.disabled ? option.select() : option.deselect();
             });
         } else {
             const previouslyFocusedIndex = this.tree.keyManager.activeItemIndex;
