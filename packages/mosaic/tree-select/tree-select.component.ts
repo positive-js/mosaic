@@ -876,6 +876,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         /* tslint:disable-next-line */
         const keyCode = event.keyCode;
         const isArrowKey = keyCode === DOWN_ARROW || keyCode === UP_ARROW;
+        const isOpenKey = keyCode === ENTER || keyCode === SPACE;
 
         if (isArrowKey && event.altKey) {
             // Close the select on ALT + arrow key to match the native <select>
@@ -900,7 +901,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
             event.preventDefault();
 
             this.tree.keyManager.setNextPageItemActive();
-        } else if ((keyCode === ENTER || keyCode === SPACE) && this.tree.keyManager.activeItem) {
+        } else if (isOpenKey && this.tree.keyManager.activeItem) {
             event.preventDefault();
 
             this.autoSelect ? this.close() : this.selectionModel.toggle(this.tree.keyManager.activeItem.data);
