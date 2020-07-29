@@ -878,59 +878,70 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         const isArrowKey = keyCode === DOWN_ARROW || keyCode === UP_ARROW;
         const isOpenKey = keyCode === ENTER || keyCode === SPACE;
 
-        if (isArrowKey && event.altKey) {
-            // Close the select on ALT + arrow key to match the native <select>
-            event.preventDefault();
+        switch (true) {
+            case isArrowKey && event.altKey:
+                // Close the select on ALT + arrow key to match the native <select>
+                event.preventDefault();
 
-            this.close();
-        } else if (keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW) {
-            return this.originalOnKeyDown.call(this.tree, event);
-        } else if (keyCode === HOME) {
-            event.preventDefault();
+                this.close();
+                break;
 
-            this.tree.keyManager.setFirstItemActive();
-        } else if (keyCode === END) {
-            event.preventDefault();
+            case keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW:
+                return this.originalOnKeyDown.call(this.tree, event);
 
-            this.tree.keyManager.setLastItemActive();
-        } else if (keyCode === PAGE_UP) {
-            event.preventDefault();
+            case keyCode === HOME:
+                event.preventDefault();
 
-            this.tree.keyManager.setPreviousPageItemActive();
-        } else if (keyCode === PAGE_DOWN) {
-            event.preventDefault();
+                this.tree.keyManager.setFirstItemActive();
+                break;
+            case keyCode === END:
+                event.preventDefault();
 
-            this.tree.keyManager.setNextPageItemActive();
-        } else if (isOpenKey && this.tree.keyManager.activeItem) {
+                this.tree.keyManager.setLastItemActive();
+                break;
+            case keyCode === PAGE_UP:
+                event.preventDefault();
+
+                this.tree.keyManager.setPreviousPageItemActive();
+                break;
+            case keyCode === PAGE_DOWN:
+                event.preventDefault();
+
+                this.tree.keyManager.setNextPageItemActive();
+                break;
+            case this.multiple && keyCode === A && event.ctrlKey:
+                event.preventDefault();
+
+                const hasDeselectedOptions = this.options.some((option) => !option.selected);
+
+                this.options.forEach((option) => {
+                    hasDeselectedOptions && !option.disabled ? option.select() : option.deselect();
+                });
+                break;
+            default:
+                const previouslyFocusedIndex = this.tree.keyManager.activeItemIndex;
+
+                this.tree.keyManager.setFocusOrigin('keyboard');
+                this.tree.keyManager.onKeydown(event);
+
+                if (
+                    this.multiple && isArrowKey && event.shiftKey && this.tree.keyManager.activeItem &&
+                    this.tree.keyManager.activeItemIndex !== previouslyFocusedIndex
+                ) {
+                    this.tree.keyManager.activeItem.selectViaInteraction(event);
+                }
+
+                if (this.autoSelect && this.tree.keyManager.activeItem) {
+                    this.tree.setSelectedOptionsByKey(
+                        this.tree.keyManager.activeItem, hasModifierKey(event, 'shiftKey'), hasModifierKey(event, 'ctrlKey')
+                    );
+                }
+        }
+
+        if (isOpenKey && this.tree.keyManager.activeItem) {
             event.preventDefault();
 
             this.autoSelect ? this.close() : this.selectionModel.toggle(this.tree.keyManager.activeItem.data);
-        } else if (this.multiple && keyCode === A && event.ctrlKey) {
-            event.preventDefault();
-
-            const hasDeselectedOptions = this.options.some((option) => !option.selected);
-
-            this.options.forEach((option) => {
-                hasDeselectedOptions && !option.disabled ? option.select() : option.deselect();
-            });
-        } else {
-            const previouslyFocusedIndex = this.tree.keyManager.activeItemIndex;
-
-            this.tree.keyManager.setFocusOrigin('keyboard');
-            this.tree.keyManager.onKeydown(event);
-
-            if (
-                this.multiple && isArrowKey && event.shiftKey && this.tree.keyManager.activeItem &&
-                this.tree.keyManager.activeItemIndex !== previouslyFocusedIndex
-            ) {
-                this.tree.keyManager.activeItem.selectViaInteraction(event);
-            }
-
-            if (this.autoSelect && this.tree.keyManager.activeItem) {
-                this.tree.setSelectedOptionsByKey(
-                    this.tree.keyManager.activeItem, hasModifierKey(event, 'shiftKey'), hasModifierKey(event, 'ctrlKey')
-                );
-            }
         }
     }
 
