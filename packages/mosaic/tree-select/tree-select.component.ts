@@ -903,11 +903,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         } else if ((keyCode === ENTER || keyCode === SPACE) && this.tree.keyManager.activeItem) {
             event.preventDefault();
 
-            if (!this.autoSelect) {
-                this.selectionModel.toggle(this.tree.keyManager.activeItem.data);
-            } else {
-                this.close();
-            }
+            !this.autoSelect ? this.selectionModel.toggle(this.tree.keyManager.activeItem.data): this.close();
         } else if (this.multiple && keyCode === A && event.ctrlKey) {
             event.preventDefault();
 
