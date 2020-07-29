@@ -269,11 +269,7 @@ export class McSplitterComponent implements OnInit {
         this.areas.some((item, index) => {
             if (item.area === area) {
                 indexToRemove = index;
-
-                return true;
             }
-
-            return false;
         });
 
         if (indexToRemove === -1) {
