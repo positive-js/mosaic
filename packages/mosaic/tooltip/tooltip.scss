@@ -50,7 +50,7 @@ $tooltip-distance: $tooltip-arrow-width + 4px;
     text-align: left;
     text-decoration: none;
     border-radius: $border-radius-base;
-    min-height: 16px; // 16px for font + 16px for padding = total 32px
+    min-height: 32px; // 16px for font + 16px for padding = total 32px
     height: fit-content;
     vertical-align: center;
 }

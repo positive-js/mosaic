@@ -65,8 +65,23 @@
         <div class="flex-45 flex-column">
             <span class="mc-title">Change placement</span>
 
+            <mc-form-field>
+                <input mcInput
+                       #titleSource
+                       class="mc-textarea_monospace"
+                />
+            </mc-form-field>
+
+            <mc-form-field *ngIf="show">
+                <input mcInput
+                       #titleSource
+                       class="mc-textarea_monospace"
+                />
+            </mc-form-field>
+
             <mc-form-field
-                mcTooltip="{{title}}"
+                mcTooltip
+                [mcTitle]="getTitle"
                 #tooltipRef="mcTooltip"
                 mcTrigger="manual"
                 mcPlacement="{{tooltipPosition}}">
@@ -79,6 +94,7 @@
 
             <button mc-button (click)="updatePosition(positionSource.value)">Update</button>
             <button mc-button (click)="toggleTooltipExternal(tooltipRef.isTooltipOpen)">Trigger</button>
+            <button mc-button (click)="updateTitle()">Title upd</button>
         </div>
     </div>
 </section>

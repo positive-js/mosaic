@@ -30,7 +30,6 @@ import {
     OnInit,
     Optional,
     Output,
-    TemplateRef,
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
@@ -73,19 +72,15 @@ export class McTooltipComponent {
     @Input() mcMouseLeaveDelay = 0;
 
     @Input()
-    get mcTitle(): string | TemplateRef<void> {
+    get mcTitle(): string {
         return this._mcTitle;
     }
 
-    set mcTitle(value: string | TemplateRef<void>) {
-        this.isTitleString = !(value instanceof TemplateRef);
-
-        if (this.isTitleString) {
-            this._mcTitle = value;
-        }
+    set mcTitle(value: string) {
+        this._mcTitle = value;
     }
 
-    private _mcTitle: string | TemplateRef<void>;
+    private _mcTitle: string;
 
     @Input()
     get mcTrigger(): string {
@@ -505,6 +500,7 @@ export class McTooltip implements OnInit, OnDestroy {
     updateCompValue(key: string, value: any): void {
         if (this.isDynamicTooltip && value && this.tooltip) {
             this.tooltip[key] = value;
+            this.tooltip.markForCheck();
         }
     }
 
