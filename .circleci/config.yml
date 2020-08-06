@@ -12,22 +12,47 @@ var_3: &job_defaults
         - image: *default_docker_image
 
 # Restores the cache that could be available for the current Yarn lock file.
-var_5: &restore_cache
+var_4: &restore_cache
     restore_cache:
         key: *cache_key
 
 # After checkout, rebase on top of master.
 # Similar to travis behavior, but not quite the same.
 # See https://discuss.circleci.com/t/1662
-var_4: &checkout_code
+var_5: &checkout_code
     checkout:
         # After checkout, rebase on top of master. By default, PRs are not rebased on top of master,
         # which we want. See https://discuss.circleci.com/t/1662
         post: git pull --ff-only origin "refs/pull/${CI_PULL_REQUEST//*pull\//}/merge"
 
+var_6: &only_for_maintainers
+    branches:
+        # ignore from forks
+        ignore: /^pull\/.*$/
+
+var_7: &only_master
+    branches:
+        only:
+            - master
+
+var_8: &ignore_release_branches
+    branches:
+        ignore:
+            - master
+            # x.0.x, x.x.x, etc.
+            - /\d+\.\d+\.x/
+
+var_9: &only_latest_tag
+    branches:
+        ignore: /.*/
+    tags:
+        only:
+            # x.0.x, x.x.x, etc.
+            - /9.\d+\.x/
+
 orbs:
-    sonarcloud: sonarsource/sonarcloud@1.0.0
-    snyk: snyk/snyk@0.0.8
+    sonarcloud: sonarsource/sonarcloud@1.0.2
+    snyk: snyk/snyk@0.0.10
 
 jobs:
 
@@ -278,9 +303,13 @@ workflows:
             - dependencies_audit:
                   requires:
                       - install
+                  filters:
+                      <<: *only_for_maintainers
+
             - validate_licenses:
                   requires:
                       - install
+
             - linters:
                   requires:
                       - install
@@ -315,11 +344,7 @@ workflows:
                       - test_unit_mosaic-moment-adapter
                       - test_unit_schematics
                   filters:
-                      branches:
-                          ignore:
-                              - master
-                              # x.0.x, x.x.x, etc.
-                              - /\d+\.\d+\.x/
+                      <<: *ignore_release_branches
 
             # 7 Group
 
@@ -330,6 +355,8 @@ workflows:
                       - test_unit_mosaic-moment-adapter
                       - test_unit_mosaic
                       - test_unit_schematics
+                  filters:
+                      <<: *only_for_maintainers
 
             - snapshot_publish:
                   requires:
@@ -338,9 +365,7 @@ workflows:
                       - test_unit_mosaic
                       - test_unit_schematics
                   filters:
-                      branches:
-                          only:
-                              - master
+                      <<: *only_master
 
             - deploy-docs-next:
                   requires:
@@ -349,9 +374,7 @@ workflows:
                       - test_unit_mosaic-moment-adapter
                       - test_unit_schematics
                   filters:
-                      branches:
-                          only:
-                              - master
+                      <<: *only_master
 
             - deploy-docs-v9:
                   requires:
@@ -360,12 +383,7 @@ workflows:
                       - test_unit_mosaic-moment-adapter
                       - test_unit_schematics
                   filters:
-                      branches:
-                          ignore: /.*/
-                      tags:
-                          only:
-                              # x.0.x, x.x.x, etc.
-                              - /9.\d+\.x/
+                      <<: *only_latest_tag
 
             - deploy-docs-latest:
                   requires:
@@ -374,26 +392,16 @@ workflows:
                       - test_unit_mosaic-moment-adapter
                       - test_unit_schematics
                   filters:
-                      branches:
-                          ignore: /.*/
-                      tags:
-                          only:
-                              # x.0.x, x.x.x, etc.
-                              - /9.\d+\.x/
+                      <<: *only_latest_tag
 
             - preview_mosaic_docs:
                   requires:
                       - build_mosaic_docs_for_preview
                   filters:
-                      branches:
-                          ignore:
-                              - master
-                              # x.0.x, x.x.x, etc.
-                              - /\d+\.\d+\.x/
+                      <<: *ignore_release_branches
 
             - cleanup_preview_mosaic_docs:
                   requires:
                       - install
                   filters:
-                      branches:
-                          only: master
+                      <<: *only_master
