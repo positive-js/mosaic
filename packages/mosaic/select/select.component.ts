@@ -148,8 +148,10 @@ export class McSelectSearch implements AfterContentInit, OnDestroy {
             throw Error('McSelectSearch does not work without ngControl');
         }
 
-        this.searchChangesSubscription = this.input.ngControl.valueChanges!.subscribe(() => {
-            this.isSearchChanged = true;
+        Promise.resolve().then(() => {
+            this.searchChangesSubscription = this.input.ngControl.valueChanges!.subscribe(() => {
+                this.isSearchChanged = true;
+            });
         });
     }
 
@@ -1090,7 +1092,7 @@ export class McSelect extends McSelectMixinBase implements
                 this.onSelect(event.source, event.isUserInput);
 
                 if (this.search && this.search.isSearchChanged) {
-                    Promise.resolve().then(() => this.keyManager.setFirstItemActive());
+                    Promise.resolve().then(() => this.keyManager.updateActiveItem(0));
 
                     this.search.isSearchChanged = false;
                 }
