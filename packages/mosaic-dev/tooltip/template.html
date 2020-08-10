@@ -1,35 +1,35 @@
 <section class="container flex-100 layout-row layout-align-start-center">
         <div class="flex layout-column layout-align-center-center container-item">
             <span class="mc-title">Focus</span>
-            <button 
+            <button
                     mc-button
                     mcTooltip="One two three"
                     mcTitle="Download file"
                     mcTrigger="hover"
                     >Simple</button>
-            <button 
+            <button
                 mc-button
                 mcTooltip
                 mcTitle="Удалить файл"
                 mcTrigger="focus"
                 mcPlacement="top">top</button>
-            <button 
+            <button
                 mc-button
                 mcTooltip="Подсказка может занимать две и более строк"
                 mcTrigger="focus"
                 mcPlacement="right"
                 mcTooltipDisabled>disabled</button>
-            <button 
+            <button
                 mc-button
                 mcTooltip="PDQL-запрос фильтра содержит ошибки"
                 mcTrigger="focus"
                 mcPlacement="left">left</button>
-            <button 
+            <button
                 mc-button
                 mcTooltip="PDQL-запрос фильтра содержит ошибки. Uncaught SyntaxError: Unexpected string"
                 mcTrigger="focus"
                 mcPlacement="bottom">bottom</button>
-            <button 
+            <button
                     mc-button
                     mcTooltip="Обновить"
                     mcTrigger="focus"
@@ -38,25 +38,25 @@
         </div>
         <div class="flex layout-column layout-align-center-center container-item">
             <span class="mc-title">Hover</span>
-            <button 
+            <button
                     mc-button
                     mcTooltip="Показать\Скрыть"
                     mcPlacement="top">top</button>
-            <button 
+            <button
                     mc-button
                     mcTooltip="Активировать записи"
                     mcPlacement="right">right</button>
-            <button 
+            <button
                     mc-button
                     mcTooltip="PDQL-запрос фильтра содержит ошибки
                                 испральве запрос"
                     mcPlacement="left">left</button>
-            <button 
+            <button
                     mc-button
                     mcTooltip="Обновить"
                     mcPlacement="bottom"
                     mcVisible="true">bottom</button>
-            <button 
+            <button
                     mc-button
                     mcTooltip="Обновить"
                     mcPlacement="bottom"
@@ -66,20 +66,43 @@
         <div class="flex-45 flex-column flex-offset-10">
             <h3>Change placement</h3>
 
+            <mc-form-field>
+                <input mcInput
+                       #titleSource
+                       class="mc-textarea_monospace"
+                />
+            </mc-form-field>
+
+            <ng-template #titleSourceTest>
+                <mc-form-field >
+                    <input mcInput
+                           class="mc-textarea_monospace"
+                    />
+                </mc-form-field>
+            </ng-template>
+
+            <mc-form-field *ngIf="show">
+                <input mcInput
+                       class="mc-textarea_monospace"
+                />
+            </mc-form-field>
+
             <mc-form-field
-                mcTooltip="{{title}}"
+                mcTooltip
+                [mcTitle]="titleModel"
                 #tooltipRef="mcTooltip"
                 mcTrigger="manual"
                 mcPlacement="{{tooltipPosition}}">
                 <input mcInput
                        #positionSource
                        class="mc-textarea_monospace"
-                       [value]="'Add position here.'"
+                       [value]="'top'"
                 />
             </mc-form-field>
 
-            <button (click)="updatePosition(positionSource.value)">Update</button>
-            <button (click)="toggleTooltipExternal(tooltipRef.isTooltipOpen)">Trigger</button>
-    </div>
+            <button mc-button (click)="updatePosition(positionSource.value)">Update</button>
+            <button mc-button (click)="toggleTooltipExternal(tooltipRef.isTooltipOpen)">Trigger</button>
+            <button mc-button (click)="updateTitle()">Title upd</button>
+        </div>
     </div>
 </section>
