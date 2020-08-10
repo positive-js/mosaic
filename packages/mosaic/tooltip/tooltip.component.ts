@@ -73,19 +73,15 @@ export class McTooltipComponent {
     @Input() mcMouseLeaveDelay = 0;
 
     @Input()
-    get mcTitle(): string | TemplateRef<void> {
+    get mcTitle(): string | TemplateRef<any> {
         return this._mcTitle;
     }
 
-    set mcTitle(value: string | TemplateRef<void>) {
-        this.isTitleString = !(value instanceof TemplateRef);
-
-        if (this.isTitleString) {
-            this._mcTitle = value;
-        }
+    set mcTitle(value: string | TemplateRef<any>) {
+        this._mcTitle = value;
     }
 
-    private _mcTitle: string | TemplateRef<void>;
+    private _mcTitle: string | TemplateRef<any>;
 
     @Input()
     get mcTrigger(): string {
@@ -212,6 +208,14 @@ export class McTooltipComponent {
             this.hide();
         }
     }
+
+    get isTemplateRef(): boolean {
+        return this.mcTitle instanceof TemplateRef;
+    }
+
+    get isNonEmptyString(): boolean {
+        return typeof this.mcTitle === 'string' && this._mcTitle !== '';
+    }
 }
 
 export const MC_TOOLTIP_SCROLL_STRATEGY =
@@ -257,19 +261,19 @@ export class McTooltip implements OnInit, OnDestroy {
     private $unsubscribe = new Subject<void>();
 
     @Input('mcTooltip')
-    get mcTitle(): string {
+    get mcTitle(): string | TemplateRef<any> {
         return this._mcTitle;
     }
 
-    set mcTitle(title: string) {
+    set mcTitle(title: string | TemplateRef<any>) {
         this._mcTitle = title;
         this.updateCompValue('mcTitle', title);
     }
 
-    private _mcTitle: string;
+    private _mcTitle: string | TemplateRef<any>;
 
     @Input('mcTitle')
-    set setTitle(title: string) {
+    set setTitle(title: string | TemplateRef<any>) {
         this.mcTitle = title;
     }
 
@@ -337,6 +341,7 @@ export class McTooltip implements OnInit, OnDestroy {
         } else {
             this._mcPlacement = 'top';
         }
+        this.updatePosition();
     }
 
     private _mcPlacement: string = 'top';
@@ -505,6 +510,7 @@ export class McTooltip implements OnInit, OnDestroy {
     updateCompValue(key: string, value: any): void {
         if (this.isDynamicTooltip && value && this.tooltip) {
             this.tooltip[key] = value;
+            this.tooltip.markForCheck();
         }
     }
 
@@ -608,6 +614,11 @@ export class McTooltip implements OnInit, OnDestroy {
             { ...origin.main, ...overlay.main },
             { ...origin.fallback, ...overlay.fallback }
         ]);
+
+        if (this.tooltip) {
+            position.apply();
+            window.dispatchEvent(new Event('resize'));
+        }
     }
 
     /**

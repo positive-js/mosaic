@@ -1,4 +1,4 @@
-import { Component, NgModule, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, NgModule, OnInit, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,16 +17,29 @@ import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
     encapsulation: ViewEncapsulation.None,
     templateUrl: './template.html'
 })
-export class DemoComponent {
+export class DemoComponent implements OnInit {
 
     @ViewChild('manualTooltip', {static: false}) manualTooltip: any;
     @ViewChild('tooltip', {static: false}) tooltip: any;
     @ViewChild('tooltipRef', {static: false}) tooltipRef: any;
+    @ViewChild('titleSource') titleSource: any;
+    @ViewChild('titleSourceTest') titleSourceTest: TemplateRef<any>;
 
     triggerTooltip: boolean = false;
-    tooltipPosition: string = 'left';
+    show: boolean = true;
+    counter = 0;
+    tooltipPosition: string = 'top';
     title: string = 'Default text';
+    titleModel: string | TemplateRef<any> = '';
     availablePositions: string[] = ['top', 'bottom', 'left', 'right'];
+
+    get getTitle(): string | TemplateRef<any> {
+        return this.titleModel;
+    }
+
+    ngOnInit(): void {
+        this.counter = 0;
+    }
 
     toggleTooltip() {
         if (!this.tooltip.isTooltipOpen) {
@@ -57,6 +70,12 @@ export class DemoComponent {
         if (this.availablePositions.indexOf(pos) > -1) {
             this.tooltipPosition = pos;
         }
+
+        this.titleModel = this.titleSourceTest;
+    }
+
+    updateTitle() {
+        this.titleModel = this.titleSource.nativeElement.value;
     }
 }
 
