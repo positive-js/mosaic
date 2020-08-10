@@ -4,7 +4,10 @@
     <div class="mc-tooltip-content">
         <div class="mc-tooltip-arrow"></div>
         <div class="mc-tooltip-inner">
-            <span [innerText]="mcTitle"></span>
+            <ng-container *ngIf="isTemplateRef" [ngTemplateOutlet]="mcTitle"></ng-container>
+            <ng-container *ngIf="isNonEmptyString">
+                <div [innerHTML]="mcTitle"></div>
+            </ng-container>
         </div>
     </div>
 </div>

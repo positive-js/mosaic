@@ -72,23 +72,30 @@
                 />
             </mc-form-field>
 
+            <ng-template #titleSourceTest>
+                <mc-form-field >
+                    <input mcInput
+                           class="mc-textarea_monospace"
+                    />
+                </mc-form-field>
+            </ng-template>
+
             <mc-form-field *ngIf="show">
                 <input mcInput
-                       #titleSource
                        class="mc-textarea_monospace"
                 />
             </mc-form-field>
 
             <mc-form-field
                 mcTooltip
-                [mcTitle]="getTitle"
+                [mcTitle]="titleModel"
                 #tooltipRef="mcTooltip"
                 mcTrigger="manual"
                 mcPlacement="{{tooltipPosition}}">
                     <input mcInput
                            #positionSource
                            class="mc-textarea_monospace"
-                           [value]="'left'"
+                           [value]="'top'"
                     />
             </mc-form-field>
 

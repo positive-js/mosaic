@@ -1,4 +1,4 @@
-import { Component, NgModule, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, NgModule, OnInit, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,24 +23,21 @@ export class DemoComponent implements OnInit {
     @ViewChild('tooltip', {static: false}) tooltip: any;
     @ViewChild('tooltipRef', {static: false}) tooltipRef: any;
     @ViewChild('titleSource') titleSource: any;
+    @ViewChild('titleSourceTest') titleSourceTest: TemplateRef<any>;
 
     triggerTooltip: boolean = false;
     show: boolean = true;
     counter = 0;
-    tooltipPosition: string = 'left';
+    tooltipPosition: string = 'top';
     title: string = 'Default text';
-    titleModel: string = '';
+    titleModel: string | TemplateRef<any> = '';
     availablePositions: string[] = ['top', 'bottom', 'left', 'right'];
 
-    get getTitle(): string {
+    get getTitle(): string | TemplateRef<any>{
         return this.titleModel;
     }
     ngOnInit(): void {
         this.counter = 0;
-        setInterval(() => {
-            this.counter += 1;
-            this.titleModel = this.counter.toString();
-        }, 1000);
     }
 
     toggleTooltip() {
@@ -72,10 +69,12 @@ export class DemoComponent implements OnInit {
         if (this.availablePositions.indexOf(pos) > -1) {
             this.tooltipPosition = pos;
         }
+
+        this.titleModel = this.titleSourceTest;
     }
 
     updateTitle() {
-        this.show = !this.show;
+        this.titleModel = this.titleSource.nativeElement.value;
     }
 }
 
