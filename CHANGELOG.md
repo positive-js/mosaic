@@ -1,3 +1,17 @@
+## 9.1.3 "Novel Seque" (2020-08-10)
+
+### Mosaic
+
+ * bug fix  **datepicker:** set point for class mc-calendar__body-cell-content ([#488](https://github.com/positive-js/mosaic/issues/488)) ([f3e5d40](https://github.com/positive-js/mosaic/commit/f3e5d4023c0aa41ce6b19ee8b936e38ede74ac7f))
+ * bug fix  **list:** options not selected when async updated value (#UIM-472) ([#485](https://github.com/positive-js/mosaic/issues/485)) ([913cbce](https://github.com/positive-js/mosaic/commit/913cbce6b0997911662a611dc4e3da10be2a61b0)), closes [#UIM-472](https://github.com/positive-js/mosaic/issues/UIM-472)
+ * bug fix  **select:** select lose selected element after selection with search (#UIM-475) ([#494](https://github.com/positive-js/mosaic/issues/494)) ([c2acfde](https://github.com/positive-js/mosaic/commit/c2acfde6427db1e9131e6d9448010ddb407a5b20)), closes [#UIM-475](https://github.com/positive-js/mosaic/issues/UIM-475)
+ * bug fix  **tooltip:** Title does not react on value change (#UIM-482) ([0f06533](https://github.com/positive-js/mosaic/commit/0f065336119ed05c439413c8752fbbc7beb507ae)), closes [#UIM-482](https://github.com/positive-js/mosaic/issues/UIM-482)
+ * feature  **navbar:** maked automatic switching in the choice of the theme (#UIM-463) ([#482](https://github.com/positive-js/mosaic/issues/482)) ([474dbe9](https://github.com/positive-js/mosaic/commit/474dbe9c024374dd88a1fa970db4fb8efcaf95b8)), closes [#UIM-463](https://github.com/positive-js/mosaic/issues/UIM-463)
+
+### Docs
+
+ * bug fix  packages versions, visual-styles.css ([6a2a27e](https://github.com/positive-js/mosaic/commit/6a2a27e7cf3d090fafa31a4a0e62cf9008488102))
+
 ## 9.1.2 "Field Trip" (2020-07-09)
 
 ### Mosaic
