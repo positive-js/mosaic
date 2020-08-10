@@ -33,9 +33,10 @@ export class DemoComponent implements OnInit {
     titleModel: string | TemplateRef<any> = '';
     availablePositions: string[] = ['top', 'bottom', 'left', 'right'];
 
-    get getTitle(): string | TemplateRef<any>{
+    get getTitle(): string | TemplateRef<any> {
         return this.titleModel;
     }
+
     ngOnInit(): void {
         this.counter = 0;
     }
