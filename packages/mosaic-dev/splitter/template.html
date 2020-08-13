@@ -9,7 +9,7 @@
 
     <h2 class="mc-h2">Horizontal</h2>
 
-    <mc-splitter class="horizontal-block" [direction]="'horizontal'">
+    <mc-splitter class="horizontal-block" [direction]="DIRECTION.Horizontal">
         <div mc-splitter-area>first</div>
         <div mc-splitter-area class="flex">second</div>
         <div mc-splitter-area>third</div>
@@ -19,7 +19,7 @@
 
     <h2 class="mc-h2">Vertical</h2>
 
-    <mc-splitter class="vertical-block" [direction]="'vertical'">
+    <mc-splitter class="vertical-block" [direction]="DIRECTION.Vertical">
         <div mc-splitter-area>first</div>
         <div mc-splitter-area class="flex">second</div>
         <div mc-splitter-area>third</div>
@@ -39,7 +39,7 @@
 
     <h2 class="mc-h2">Disabled</h2>
 
-    <mc-splitter class="horizontal-block" [direction]="'horizontal'" disabled>
+    <mc-splitter class="horizontal-block" [direction]="DIRECTION.Horizontal" disabled>
         <div mc-splitter-area>first</div>
         <div mc-splitter-area class="flex">second</div>
         <div mc-splitter-area>third</div>
@@ -54,7 +54,8 @@
 
     <h2 class="mc-h2">Hidden gutters</h2>
 
-    <mc-splitter class="horizontal-block" [direction]="'horizontal'" [hideGutters]="guttersVisibility">
+    <mc-splitter class="horizontal-block" [direction]="DIRECTION.Horizontal"
+                                          [hideGutters]="guttersVisibility">
         <div mc-splitter-area>first</div>
         <div mc-splitter-area class="flex">second</div>
         <div mc-splitter-area>third</div>
@@ -77,7 +78,7 @@
     <mc-splitter class="horizontal-block custom-color">
         <div mc-splitter-area>first</div>
         <div mc-splitter-area class="flex">
-            <mc-splitter class="custom-color" [direction]="'vertical'">
+            <mc-splitter class="custom-color" [direction]="DIRECTION.Vertical">
                 <div mc-splitter-area>top</div>
                 <div mc-splitter-area>center</div>
                 <div mc-splitter-area>bottom</div>
