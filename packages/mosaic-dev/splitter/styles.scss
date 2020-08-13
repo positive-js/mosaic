@@ -1,9 +1,6 @@
-@import '~@ptsecurity/mosaic-icons/dist/styles/mc-icons';
 @import '../../mosaic/core/visual/prebuilt/default-visual';
 
-//@import '../../mosaic/core/theming/prebuilt/default-theme';
-@import '../../mosaic/core/theming/prebuilt/dark-theme';
-
+@import '../../mosaic/core/theming/prebuilt/default-theme';
 
 .container {
     margin: 8px;
@@ -21,6 +18,10 @@
 
 .min-width-enabled {
     min-width: 200px;
+}
+
+div[mc-splitter-area] {
+    background: #c5c0c0
 }
 
 // custom color
