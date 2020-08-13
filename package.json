@@ -22,7 +22,7 @@
         "@angular/core": "^9.1.0",
         "@angular/forms": "^9.1.0",
         "@angular/platform-browser": "^9.1.0",
-        "@ptsecurity/mosaic-icons": "~5.0.0",
+        "@ptsecurity/mosaic-icons": "^5.0.0",
         "core-js": "^2.6.0",
         "rxjs": "^6.5.5",
         "systemjs": "0.19.43",
