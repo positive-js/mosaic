@@ -42,7 +42,7 @@ const enum StyleProperty {
     Width = 'width'
 }
 
-export const enum Direction {
+export enum Direction {
     Horizontal = 'horizontal',
     Vertical = 'vertical'
 }

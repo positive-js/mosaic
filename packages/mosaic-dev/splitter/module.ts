@@ -3,7 +3,7 @@ import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 
-import { McSplitterModule } from '../../mosaic/splitter';
+import { Direction, McSplitterModule } from '../../mosaic/splitter';
 
 
 @Component({
@@ -14,6 +14,8 @@ import { McSplitterModule } from '../../mosaic/splitter';
 })
 export class DemoComponent {
     guttersVisibility = true;
+
+    DIRECTION = Direction;
 
     toggleVisibility() {
         this.guttersVisibility = !this.guttersVisibility;
