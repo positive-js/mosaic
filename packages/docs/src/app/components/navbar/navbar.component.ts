@@ -117,13 +117,30 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.themeSwitch = new NavbarProperty(this.themeProperty);
         this.languageSwitch = new NavbarProperty(this.languageProperty);
 
-        this.colorAutomaticTheme.addEventListener('change', (e) => {
-            if (e.matches) {
-                this.themeProperty.data[0].className = 'theme-default';
-            } else {
-                this.themeProperty.data[0].className = 'theme-dark';
+        try {
+            // Chrome & Firefox
+            this.colorAutomaticTheme.addEventListener('change', (e) => {
+                if (e.matches) {
+                    this.themeProperty.data[0].className = 'theme-default';
+                } else {
+                    this.themeProperty.data[0].className = 'theme-dark';
+                }
+            });
+        } catch (err) {
+            try {
+                // Safari
+                this.colorAutomaticTheme.addListener((e) => {
+                    if (e.matches) {
+                        this.themeProperty.data[0].className = 'theme-default';
+                    } else {
+                        this.themeProperty.data[0].className = 'theme-dark';
+                    }
+                });
+            } catch (errSafari) {
+                // tslint:disable-next-line:no-console
+                console.error(errSafari);
             }
-        });
+        }
     }
 
     ngOnInit() {
