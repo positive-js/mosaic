@@ -1,3 +1,11 @@
+## 9.1.4 "Unthinkable" (2020-08-14)
+
+### Mosaic
+
+ * bug fix  **button:** correct focus border for buttons in dark theme ([#497](https://github.com/positive-js/mosaic/issues/497)) ([e7306bf](https://github.com/positive-js/mosaic/commit/e7306bf4e55b75a0ce2ccf51b26c4faa846477e2))
+ * bug fix  **splitter:** Error in the declaration of the enum Direction #UIM-430 ([#498](https://github.com/positive-js/mosaic/issues/498)) ([3d6745e](https://github.com/positive-js/mosaic/commit/3d6745ee513cb50e51e3e1f83690e30b092f4969)), closes [#UIM-430](https://github.com/positive-js/mosaic/issues/UIM-430)
+ * bug fix  **toggle:** Each click on the toggle emits two events instead of one #UIM-476 ([#499](https://github.com/positive-js/mosaic/issues/499)) ([419bdc2](https://github.com/positive-js/mosaic/commit/419bdc2d3d0e6ad52692db4aa3be3e620945cdd0)), closes [#UIM-476](https://github.com/positive-js/mosaic/issues/UIM-476)
+
 ## 9.1.3 "Novel Seque" (2020-08-10)
 
 ### Mosaic
