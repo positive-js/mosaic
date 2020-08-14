@@ -1,7 +1,8 @@
-<label [attr.for]="inputId" class="mc-toggle-layout" #label>
+<label [attr.for]="inputId" class="mc-toggle-layout">
     <div class="mc-toggle__container" [class.left]="labelPosition === 'left'">
         <input #input
                type="checkbox"
+               role="switch"
                class="mc-toggle-input cdk-visually-hidden"
                [id]="inputId"
                [checked]="checked"
@@ -13,7 +14,7 @@
                [attr.aria-labelledby]="ariaLabelledby"
                [attr.aria-checked]="getAriaChecked()"
                (click)="onInputClick($event)"
-               (change)="onInteractionEvent($event)"/>
+               (change)="onChangeEvent($event)"/>
         <div class="mc-toggle-bar-container">
             <div class="mc-toggle__overlay"></div>
             <div class="mc-toggle-bar">
