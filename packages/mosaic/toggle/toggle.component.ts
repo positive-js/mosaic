@@ -147,8 +147,11 @@ export class McToggleComponent extends McToggleMixinBase
         return this.checked;
     }
 
-    onInteractionEvent(event: Event) {
+    onChangeEvent(event: Event) {
         event.stopPropagation();
+
+        this.updateModelValue();
+        this.emitChangeEvent();
     }
 
     onLabelTextChange() {
@@ -157,8 +160,6 @@ export class McToggleComponent extends McToggleMixinBase
 
     onInputClick(event: MouseEvent) {
         event.stopPropagation();
-        this.updateModelValue();
-        this.emitChangeEvent();
     }
 
     writeValue(value: any) {
@@ -185,7 +186,6 @@ export class McToggleComponent extends McToggleMixinBase
 
     private updateModelValue() {
         this._checked = !this.checked;
-        this.onChangeCallback(this.checked);
         this.onTouchedCallback();
     }
 

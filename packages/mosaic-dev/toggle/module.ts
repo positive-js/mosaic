@@ -1,6 +1,6 @@
 // tslint:disable:no-console
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,6 +23,13 @@ export class DemoComponent {
     valueBigOn: boolean = true;
 
     disabled: boolean = false;
+
+    toggleControl = new FormControl(true);
+
+    constructor() {
+        // tslint:disable-next-line
+        this.toggleControl.valueChanges.subscribe(console.log);
+    }
 }
 
 
@@ -35,7 +42,8 @@ export class DemoComponent {
         BrowserAnimationsModule,
         FormsModule,
         McToggleModule,
-        McButtonModule
+        McButtonModule,
+        ReactiveFormsModule
     ],
     bootstrap: [
         DemoComponent
