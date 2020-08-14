@@ -3,8 +3,8 @@ import { BehaviorSubject } from 'rxjs';
 
 
 export enum Themes {
-  Default = 'theme-default',
-  Dark = 'theme-dark'
+    Default = 'theme-default',
+    Dark = 'theme-dark'
 }
 
 @Injectable({
@@ -12,26 +12,44 @@ export enum Themes {
 })
 
 export class ThemeService {
-  currentTheme = new BehaviorSubject(Themes.Default);
+    currentTheme = new BehaviorSubject(Themes.Default);
 
-  constructor(private ref: ApplicationRef) {
-    const isLightTheme: boolean = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+    constructor(private ref: ApplicationRef) {
+        const isLightTheme: boolean = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
 
-    isLightTheme ? this.currentTheme.next(Themes.Default) : this.currentTheme.next(Themes.Dark);
+        isLightTheme ? this.currentTheme.next(Themes.Default) : this.currentTheme.next(Themes.Dark);
 
-    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
-      const turnOn = e.matches;
-      this.currentTheme.next(turnOn ? Themes.Default : Themes.Dark);
+        const prefersColorTheme: any = window.matchMedia('(prefers-color-scheme: light)');
 
-      this.ref.tick();
-    });
-  }
+        try {
+            // Chrome & Firefox
+            prefersColorTheme.addEventListener('change', (e) => {
+                const turnOn = e.matches;
+                this.currentTheme.next(turnOn ? Themes.Default : Themes.Dark);
 
-  setTheme(value) {
-    this.currentTheme.next(value);
-  }
+                this.ref.tick();
+            });
+        } catch (err) {
+            try {
+                // Safari
+                prefersColorTheme.addListener((e) => {
+                    const turnOn = e.matches;
+                    this.currentTheme.next(turnOn ? Themes.Default : Themes.Dark);
 
-  getTheme() {
-    return this.currentTheme.getValue();
-  }
+                    this.ref.tick();
+                });
+            } catch (errSafari) {
+                // tslint:disable-next-line:no-console
+                console.error(errSafari);
+            }
+        }
+    }
+
+    setTheme(value) {
+        this.currentTheme.next(value);
+    }
+
+    getTheme() {
+        return this.currentTheme.getValue();
+    }
 }
