@@ -2,12 +2,6 @@
         <div class="flex layout-column layout-align-center-center container-item">
             <span class="mc-title">Focus</span>
             <button
-                    mc-button
-                    mcTooltip="One two three"
-                    mcTitle="Download file"
-                    mcTrigger="hover"
-                    >Simple</button>
-            <button
                 mc-button
                 mcTooltip
                 mcTitle="Удалить файл"
@@ -17,8 +11,7 @@
                 mc-button
                 mcTooltip="Подсказка может занимать две и более строк"
                 mcTrigger="focus"
-                mcPlacement="right"
-                mcTooltipDisabled>disabled</button>
+                mcPlacement="right">right</button>
             <button
                 mc-button
                 mcTooltip="PDQL-запрос фильтра содержит ошибки"
@@ -55,7 +48,13 @@
                     mc-button
                     mcTooltip="Обновить"
                     mcPlacement="bottom"
-                    mcVisible="true">bottom</button>
+                    mcVisible="true">bottom Visible</button>
+            <button
+                mc-button
+                mcTooltip="Tooltip Class"
+                mcPlacement="bottom"
+                mcTooltipClass="customTooltipClass"
+                >TooltipClass</button>
             <button
                     mc-button
                     mcTooltip="Обновить"
@@ -63,8 +62,8 @@
                     [mcTooltipDisabled]="true">disabled</button>
         </div>
     <div class="flex layout-row layout-align-center-center">
-        <div class="flex-45 flex-column flex-offset-10">
-            <h3>Change placement</h3>
+        <div class="flex-45 flex-column">
+            <span class="mc-title">Change placement</span>
 
             <mc-form-field>
                 <input mcInput
@@ -93,11 +92,11 @@
                 #tooltipRef="mcTooltip"
                 mcTrigger="manual"
                 mcPlacement="{{tooltipPosition}}">
-                <input mcInput
-                       #positionSource
-                       class="mc-textarea_monospace"
-                       [value]="'top'"
-                />
+                    <input mcInput
+                           #positionSource
+                           class="mc-textarea_monospace"
+                           [value]="'top'"
+                    />
             </mc-form-field>
 
             <button mc-button (click)="updatePosition(positionSource.value)">Update</button>

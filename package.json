@@ -22,7 +22,7 @@
         "@angular/core": "^9.1.0",
         "@angular/forms": "^9.1.0",
         "@angular/platform-browser": "^9.1.0",
-        "@ptsecurity/mosaic-icons": "~5.0.0",
+        "@ptsecurity/mosaic-icons": "^5.0.0",
         "core-js": "^2.6.0",
         "rxjs": "^6.5.5",
         "systemjs": "0.19.43",
@@ -30,11 +30,11 @@
         "zone.js": "~0.10.3"
     },
     "devDependencies": {
-        "@angular-devkit/build-angular": "~0.901.7",
+        "@angular-devkit/build-angular": "~0.901.12",
         "@angular-devkit/build-ng-packagr": "^0.901.1",
         "@angular-devkit/core": "^9.1.0",
         "@angular-devkit/schematics": "^9.1.1",
-        "@angular/cli": "^9.1.0",
+        "@angular/cli": "^9.1.12",
         "@angular/compiler-cli": "^9.1.0",
         "@angular/platform-browser-dynamic": "^9.1.0",
         "@angular/platform-server": "^9.1.0",
@@ -70,7 +70,7 @@
         "gulp-flatten": "^0.3.1",
         "gulp-highlight-files": "^0.0.6",
         "gulp-if": "^2.0.2",
-        "gulp-markdown": "5.0.0",
+        "gulp-markdown": "5.1.0",
         "gulp-rename": "^2.0.0",
         "gulp-sass": "^4.0.2",
         "gulp-transform": "^2.0.0",
@@ -157,7 +157,6 @@
         "server-dev:button-toggle": "ng serve dev-button-toggle --port 3003",
         "server-dev:card": "ng serve dev-card --port 3003",
         "server-dev:checkbox": "ng serve dev-checkbox --port 3003",
-        "server-dev:dateformatter": "ng serve dev-dateformatter --port 3003",
         "server-dev:datepicker": "ng serve dev-datepicker --port 3003",
         "server-dev:date-formatter": "ng serve dev-date-formatter --port 3003",
         "server-dev:dropdown": "ng serve dev-dropdown --port 3003",
@@ -189,7 +188,7 @@
         "server-dev:tooltip": "ng serve dev-tooltip --port 3003",
         "server-dev:timepicker": "ng serve dev-timepicker --port 3003",
         "server-dev:validation": "ng serve dev-validation --port 3003",
-        "server-dev:vertical-navbar": "ng serve dev-vertical-navba --port 3003r"
+        "server-dev:vertical-navbar": "ng serve dev-vertical-navbar --port 3003"
     },
     "husky": {
         "hooks": {

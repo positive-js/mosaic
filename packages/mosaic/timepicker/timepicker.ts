@@ -620,7 +620,7 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
     }
 
     private parseValidator: ValidatorFn = (): ValidationErrors | null => {
-        return this.lastValueValid ? null : { mcTimepickerParse: { text: this.viewValue } };
+        return this.empty || this.lastValueValid ? null : { mcTimepickerParse: { text: this.viewValue } };
     }
 
     private minValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {

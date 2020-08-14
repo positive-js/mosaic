@@ -3,10 +3,7 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { SelectionModel } from '@angular/cdk/collections';
-import {
-    CdkConnectedOverlay,
-    ViewportRuler
-} from '@angular/cdk/overlay';
+import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -492,7 +489,6 @@ export class McSelect extends McSelectMixinBase implements
     private readonly destroy = new Subject<void>();
 
     constructor(
-        private readonly _viewportRuler: ViewportRuler,
         private readonly _changeDetectorRef: ChangeDetectorRef,
         private readonly _ngZone: NgZone,
         private readonly _renderer: Renderer2,
@@ -537,7 +533,6 @@ export class McSelect extends McSelectMixinBase implements
                 } else {
                     this.openedChange.emit(false);
                     this.panelDoneAnimating = false;
-                    this.overlayDir.offsetX = 0;
                     this._changeDetectorRef.markForCheck();
                 }
             });
@@ -795,7 +790,7 @@ export class McSelect extends McSelectMixinBase implements
             .pipe(take(1))
             .subscribe(() => {
                 this._changeDetectorRef.detectChanges();
-                this.calculateOverlayOffsetX();
+                this.setOverlayPosition();
                 this.optionsContainer.nativeElement.scrollTop = this.scrollTop;
 
                 this.updateScrollSize();
@@ -1226,13 +1221,17 @@ export class McSelect extends McSelectMixinBase implements
      * can't be calculated until the panel has been attached, because we need to know the
      * content width in order to constrain the panel within the viewport.
      */
-    private calculateOverlayOffsetX(): void {
-        const overlayRect = this.overlayDir.overlayRef.overlayElement.getBoundingClientRect();
-        const viewportSize = this._viewportRuler.getViewportSize();
+    private setOverlayPosition(): void {
+        this.resetOverlay();
+
+        const overlayRect = this.getOverlayRect();
+        // Window width without scrollbar
+        const windowWidth = this.getBackdropWidth();
         const isRtl = this.isRtl();
         /* tslint:disable-next-line:no-magic-numbers */
         const paddingWidth = SELECT_PANEL_PADDING_X * 2;
         let offsetX: number;
+        let overlayMaxWidth: number;
 
         const selected = this.selectionModel.selected[0] || this.options.first;
         offsetX = selected && selected.group ? SELECT_PANEL_INDENT_PADDING_X : SELECT_PANEL_PADDING_X;
@@ -1240,16 +1239,15 @@ export class McSelect extends McSelectMixinBase implements
         // Invert the offset in LTR.
         if (!isRtl) { offsetX *= -1; }
 
-        // Determine how much the select overflows on each side.
+        // Determine if select overflows on either side.
         const leftOverflow = 0 - (overlayRect.left + offsetX - (isRtl ? paddingWidth : 0));
-        const rightOverflow = overlayRect.right + offsetX - viewportSize.width
+        const rightOverflow = overlayRect.right + offsetX - windowWidth
             + (isRtl ? 0 : paddingWidth);
 
         // If the element overflows on either side, reduce the offset to allow it to fit.
-        if (leftOverflow > 0) {
-            offsetX += leftOverflow + SELECT_PANEL_VIEWPORT_PADDING;
-        } else if (rightOverflow > 0) {
-            offsetX -= rightOverflow + SELECT_PANEL_VIEWPORT_PADDING;
+        if (leftOverflow > 0 || rightOverflow > 0) {
+            [offsetX, overlayMaxWidth] = this.calculateOverlayXPosition(overlayRect, windowWidth, offsetX);
+            this.overlayDir.overlayRef.overlayElement.style.maxWidth = `${overlayMaxWidth}px`;
         }
 
         // Set the offset directly in order to avoid having to go through change detection and
@@ -1257,6 +1255,51 @@ export class McSelect extends McSelectMixinBase implements
         // blurry content in some browsers.
         this.overlayDir.offsetX = Math.round(offsetX);
         this.overlayDir.overlayRef.updatePosition();
+    }
+
+    private calculateOverlayXPosition(overlayRect, windowWidth, basicOffsetX) {
+        let offsetX = basicOffsetX;
+        const leftIndent = this.triggerRect.left;
+        const rightIndent = windowWidth - this.triggerRect.right;
+        // Setting direction of dropdown expansion
+        const isRightDirection = leftIndent <= rightIndent;
+
+        let maxDropdownWidth: number;
+        let overlayMaxWidth: number;
+        const triggerWidth = this.triggerRect.width + SELECT_PANEL_INDENT_PADDING_X;
+
+        if (isRightDirection) {
+            maxDropdownWidth = rightIndent + triggerWidth - SELECT_PANEL_VIEWPORT_PADDING;
+            overlayMaxWidth = overlayRect.width < maxDropdownWidth ? overlayRect.width : maxDropdownWidth;
+        } else {
+            let leftOffset;
+            maxDropdownWidth = leftIndent + triggerWidth - SELECT_PANEL_VIEWPORT_PADDING;
+
+            if (overlayRect.width < maxDropdownWidth) {
+                overlayMaxWidth = overlayRect.width;
+                leftOffset = this.triggerRect.right - overlayMaxWidth;
+            } else {
+                overlayMaxWidth = maxDropdownWidth;
+                leftOffset = this.triggerRect.right - (overlayMaxWidth - SELECT_PANEL_INDENT_PADDING_X);
+            }
+            offsetX -= this.triggerRect.left - leftOffset;
+        }
+
+        return [offsetX, overlayMaxWidth];
+    }
+
+    private resetOverlay() {
+        this.overlayDir.offsetX = 0;
+        this.overlayDir.overlayRef.overlayElement.style.maxWidth = 'unset';
+        this.overlayDir.overlayRef.updatePosition();
+    }
+
+    private getOverlayRect() {
+        return this.overlayDir.overlayRef.overlayElement.getBoundingClientRect();
+    }
+
+    private getBackdropWidth() {
+        return this.scrollStrategy._overlayRef.backdropElement.clientWidth;
     }
 
     /** Comparison function to specify which option is displayed. Defaults to object equality. */
