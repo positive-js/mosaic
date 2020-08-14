@@ -1,5 +1,7 @@
 <div class="container">
     <h1>Toggles</h1>
+    <mc-toggle class="mc-toggle_small" [formControl]="toggleControl"></mc-toggle>
+    <pre>value = {{toggleControl.value | json}}</pre>
 
     <div class="control-buttons-container">
         <button mc-button (click)="disabled = false">Set Enabled</button>
