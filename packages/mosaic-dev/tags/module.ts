@@ -11,7 +11,7 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { COMMA, ENTER, SPACE, TAB } from '@ptsecurity/cdk/keycodes';
-import { McAutocompleteModule, McAutocompleteSelectedEvent } from '@ptsecurity/mosaic/autocomplete';
+import { McAutocomplete, McAutocompleteModule, McAutocompleteSelectedEvent } from '@ptsecurity/mosaic/autocomplete';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McTagList, McTagsModule, McTagInputEvent } from '@ptsecurity/mosaic/tags';
@@ -48,6 +48,7 @@ export class DemoComponent implements AfterViewInit {
 
     @ViewChild('autocompleteTagInput', {static: false}) autocompleteTagInput: ElementRef<HTMLInputElement>;
     @ViewChild('autocompleteTagList', {static: false}) autocompleteTagList: McTagList;
+    @ViewChild('autocomplete', {static: false}) autocomplete: McAutocomplete;
 
     @ViewChild('enterTagInput', {static: false}) enterTagInput: ElementRef<HTMLInputElement>;
     @ViewChild('enterInputTagList', {static: false}) enterInputTagList: McTagList;
@@ -79,19 +80,6 @@ export class DemoComponent implements AfterViewInit {
         this.inputTags.length = 0;
     }
 
-    autocompleteOnCreate(event: McTagInputEvent): void {
-        const input = event.input;
-        const value = event.value;
-
-        if ((value || '').trim()) {
-            this.autocompleteSelectedTags.push(value.trim());
-        }
-
-        if (input) {
-            input.value = '';
-        }
-    }
-
     inputOnCreate(event: McTagInputEvent): void {
         const input = event.input;
         const value = event.value;
@@ -118,7 +106,40 @@ export class DemoComponent implements AfterViewInit {
         }
     }
 
+    autocompleteOnCreate(event: McTagInputEvent): void {
+        const input = event.input;
+        const value = event.value;
+
+        if ((value || '').trim()) {
+            const isOptionSelected = this.autocomplete.options.some((option) => option.selected);
+            if (!isOptionSelected) {
+                this.autocompleteSelectedTags.push(value.trim());
+            }
+        }
+
+        // Reset the input value
+        if (input) {
+            input.value = '';
+        }
+
+        this.tagCtrl.setValue(null);
+    }
+
+    addOnBlurFunc(event: FocusEvent) {
+        const target: HTMLElement = event.relatedTarget as HTMLElement;
+
+        if (!target || target.tagName !== 'MC-OPTION') {
+            const mcTagEvent: McTagInputEvent = {
+                input: this.autocompleteTagInput.nativeElement,
+                value : this.autocompleteTagInput.nativeElement.value
+            };
+
+            this.autocompleteOnCreate(mcTagEvent);
+        }
+    }
+
     autocompleteOnSelect(event: McAutocompleteSelectedEvent): void {
+        event.option.deselect();
         if (event.option.value.new) {
             this.autocompleteSelectedTags.push(event.option.value.value);
         } else {
