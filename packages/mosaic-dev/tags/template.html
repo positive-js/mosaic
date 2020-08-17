@@ -39,12 +39,13 @@
                 {{ tag }}
                 <i mc-icon="mc-close-S_16" mcTagRemove></i>
             </mc-tag>
-            <input placeholder="New tag..."
+            <input placeholder="Новый тег..."
                    #autocompleteTagInput
                    [formControl]="tagCtrl"
                    [mcAutocomplete]="autocomplete"
+                   [mcTagInputAddOnBlur]="false"
                    [mcTagInputFor]="autocompleteTagList"
-                   (mcTagInputTokenEnd)="autocompleteOnCreate($event)">
+                   (blur)="addOnBlurFunc($event)">
         </mc-tag-list>
         <mc-autocomplete #autocomplete (optionSelected)="autocompleteOnSelect($event)">
             <mc-option *ngIf="autocompleteTagInput.value" [value]="{ new: true, value: autocompleteTagInput.value }">
