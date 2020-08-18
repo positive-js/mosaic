@@ -326,6 +326,7 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
 
     onInput() {
         const newTimeObj = this.getDateFromTimeString(this.viewValue);
+        this.lastValueValid = !!newTimeObj;
 
         if (!newTimeObj) { return; }
 
