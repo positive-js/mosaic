@@ -328,7 +328,11 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
         const newTimeObj = this.getDateFromTimeString(this.viewValue);
         this.lastValueValid = !!newTimeObj;
 
-        if (!newTimeObj) { return; }
+        if (!newTimeObj) {
+            this.control.updateValueAndValidity();
+
+            return;
+        }
 
         const selectionStart = this.selectionStart;
         const selectionEnd = this.selectionEnd;
@@ -360,7 +364,7 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
         // tslint:disable-next-line: deprecation
         const keyCode = event.keyCode;
 
-        if (hasModifierKey(event) || [BACKSPACE, DELETE].includes(keyCode)) {
+        if (hasModifierKey(event)) {
             return;
         } else if ([UP_ARROW, DOWN_ARROW].includes(keyCode)) {
             event.preventDefault();
