@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.13.5
+version: v1.14.1
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
   SNYK-JS-NODESASS-542662:
@@ -10,9 +10,15 @@ ignore:
     - madge > detective-less > gonzales-pe > minimist:
         reason: None given
         expires: '2020-05-20T05:33:14.376Z'
+      dgeni > optimist > minimist:
+        reason: None given
+        expires: '2020-09-18T10:24:16.033Z'
     - madge > detective-sass > gonzales-pe > minimist:
         reason: None given
         expires: '2020-05-20T05:33:14.376Z'
+      dgeni-packages > dgeni > optimist > minimist:
+        reason: None given
+        expires: '2020-09-18T10:24:16.033Z'
     - madge > detective-scss > gonzales-pe > minimist:
         reason: None given
         expires: '2020-05-20T05:33:14.376Z'
@@ -41,9 +47,15 @@ ignore:
     - conventional-changelog > conventional-changelog-angular > compare-func > dot-prop:
         reason: None given
         expires: '2020-05-20T05:33:14.377Z'
+      firebase-tools > update-notifier > configstore > dot-prop:
+        reason: None given
+        expires: '2020-09-18T10:24:16.031Z'
     - conventional-changelog > conventional-changelog-conventionalcommits > compare-func > dot-prop:
         reason: None given
         expires: '2020-05-20T05:33:14.377Z'
+      firebase-tools > superstatic > update-notifier > configstore > dot-prop:
+        reason: None given
+        expires: '2020-09-18T10:24:16.031Z'
     - conventional-changelog > conventional-changelog-jshint > compare-func > dot-prop:
         reason: None given
         expires: '2020-05-20T05:33:14.377Z'
@@ -62,119 +74,122 @@ ignore:
   SNYK-JS-NODESASS-535497:
     - gulp-sass > node-sass:
         reason: None given
-        expires: '2020-05-20T05:33:14.377Z'
+        expires: '2020-09-18T10:24:16.033Z'
     - node-sass:
         reason: None given
-        expires: '2020-05-20T05:33:14.378Z'
+        expires: '2020-09-18T10:24:16.033Z'
   SNYK-JS-NODESASS-535498:
     - gulp-sass > node-sass:
         reason: None given
-        expires: '2020-05-20T05:33:14.377Z'
+        expires: '2020-09-18T10:24:16.033Z'
     - node-sass:
         reason: None given
-        expires: '2020-05-20T05:33:14.378Z'
+        expires: '2020-09-18T10:24:16.033Z'
   SNYK-JS-NODESASS-535502:
     - gulp-sass > node-sass:
         reason: None given
-        expires: '2020-05-20T05:33:14.377Z'
+        expires: '2020-09-18T10:24:16.033Z'
     - node-sass:
         reason: None given
-        expires: '2020-05-20T05:33:14.378Z'
+        expires: '2020-09-18T10:24:16.033Z'
   SNYK-JS-NODESASS-540956:
     - gulp-sass > node-sass:
         reason: None given
-        expires: '2020-05-20T05:33:14.377Z'
+        expires: '2020-09-18T10:24:16.033Z'
     - node-sass:
         reason: None given
-        expires: '2020-05-20T05:33:14.378Z'
+        expires: '2020-09-18T10:24:16.033Z'
   SNYK-JS-NODESASS-540958:
     - gulp-sass > node-sass:
         reason: None given
-        expires: '2020-05-20T05:33:14.377Z'
+        expires: '2020-09-18T10:24:16.033Z'
     - node-sass:
         reason: None given
-        expires: '2020-05-20T05:33:14.378Z'
+        expires: '2020-09-18T10:24:16.033Z'
   SNYK-JS-NODESASS-540964:
     - gulp-sass > node-sass:
         reason: None given
-        expires: '2020-05-20T05:33:14.377Z'
+        expires: '2020-09-18T10:24:16.033Z'
     - node-sass:
         reason: None given
-        expires: '2020-05-20T05:33:14.378Z'
+        expires: '2020-09-18T10:24:16.033Z'
   SNYK-JS-NODESASS-540974:
     - gulp-sass > node-sass:
         reason: None given
-        expires: '2020-05-20T05:33:14.377Z'
+        expires: '2020-09-18T10:24:16.033Z'
     - node-sass:
         reason: None given
-        expires: '2020-05-20T05:33:14.378Z'
+        expires: '2020-09-18T10:24:16.033Z'
   SNYK-JS-NODESASS-540978:
     - gulp-sass > node-sass:
         reason: None given
-        expires: '2020-05-20T05:33:14.377Z'
+        expires: '2020-09-18T10:24:16.033Z'
     - node-sass:
         reason: None given
-        expires: '2020-05-20T05:33:14.378Z'
+        expires: '2020-09-18T10:24:16.033Z'
   SNYK-JS-NODESASS-540980:
     - gulp-sass > node-sass:
         reason: None given
-        expires: '2020-05-20T05:33:14.377Z'
+        expires: '2020-09-18T10:24:16.033Z'
     - node-sass:
         reason: None given
-        expires: '2020-05-20T05:33:14.378Z'
+        expires: '2020-09-18T10:24:16.033Z'
   SNYK-JS-NODESASS-540990:
     - gulp-sass > node-sass:
         reason: None given
-        expires: '2020-05-20T05:33:14.377Z'
+        expires: '2020-09-18T10:24:16.033Z'
     - node-sass:
         reason: None given
-        expires: '2020-05-20T05:33:14.378Z'
+        expires: '2020-09-18T10:24:16.033Z'
   SNYK-JS-NODESASS-540992:
     - gulp-sass > node-sass:
         reason: None given
-        expires: '2020-05-20T05:33:14.377Z'
+        expires: '2020-09-18T10:24:16.033Z'
     - node-sass:
         reason: None given
-        expires: '2020-05-20T05:33:14.378Z'
+        expires: '2020-09-18T10:24:16.033Z'
   SNYK-JS-NODESASS-540994:
     - gulp-sass > node-sass:
         reason: None given
-        expires: '2020-05-20T05:33:14.378Z'
+        expires: '2020-09-18T10:24:16.033Z'
     - node-sass:
         reason: None given
-        expires: '2020-05-20T05:33:14.378Z'
+        expires: '2020-09-18T10:24:16.033Z'
   SNYK-JS-NODESASS-540996:
     - gulp-sass > node-sass:
         reason: None given
-        expires: '2020-05-20T05:33:14.378Z'
+        expires: '2020-09-18T10:24:16.033Z'
     - node-sass:
         reason: None given
-        expires: '2020-05-20T05:33:14.378Z'
+        expires: '2020-09-18T10:24:16.033Z'
   SNYK-JS-NODESASS-540998:
     - gulp-sass > node-sass:
         reason: None given
-        expires: '2020-05-20T05:33:14.378Z'
+        expires: '2020-09-18T10:24:16.033Z'
     - node-sass:
         reason: None given
-        expires: '2020-05-20T05:33:14.378Z'
+        expires: '2020-09-18T10:24:16.033Z'
   SNYK-JS-NODESASS-541000:
     - gulp-sass > node-sass:
         reason: None given
-        expires: '2020-05-20T05:33:14.378Z'
+        expires: '2020-09-18T10:24:16.033Z'
     - node-sass:
         reason: None given
-        expires: '2020-05-20T05:33:14.378Z'
+        expires: '2020-09-18T10:24:16.033Z'
   SNYK-JS-NODESASS-541002:
     - gulp-sass > node-sass:
         reason: None given
-        expires: '2020-05-20T05:33:14.378Z'
+        expires: '2020-09-18T10:24:16.033Z'
     - node-sass:
         reason: None given
-        expires: '2020-05-20T05:33:14.378Z'
+        expires: '2020-09-18T10:24:16.033Z'
   SNYK-JS-YARGSPARSER-560381:
     - '@angular-devkit/build-angular > webpack-dev-server > yargs > yargs-parser':
         reason: None given
         expires: '2020-05-20T05:33:14.378Z'
+      gulp-sass > node-sass > sass-graph > yargs > yargs-parser:
+        reason: None given
+        expires: '2020-09-18T10:24:16.033Z'
     - '@commitlint/cli > meow > yargs-parser':
         reason: None given
         expires: '2020-05-20T05:33:14.378Z'
@@ -203,4 +218,73 @@ ignore:
     - karma > useragent:
         reason: None given
         expires: '2020-05-20T06:18:28.658Z'
+  SNYK-JS-LODASH-590103:
+    - '@angular-devkit/build-angular > webpack-dev-server > http-proxy-middleware > lodash':
+        reason: None given
+        expires: '2020-09-18T10:24:16.031Z'
+    - firebase-tools > superstatic > lodash:
+        reason: None given
+        expires: '2020-09-18T10:24:16.031Z'
+    - firebase-tools > superstatic > nash > lodash:
+        reason: None given
+        expires: '2020-09-18T10:24:16.032Z'
+    - firebase-tools > inquirer > lodash:
+        reason: None given
+        expires: '2020-09-18T10:24:16.032Z'
+    - gulp-sass > node-sass > sass-graph > lodash:
+        reason: None given
+        expires: '2020-09-18T10:24:16.032Z'
+    - gulp-sass > node-sass > gaze > globule > lodash:
+        reason: None given
+        expires: '2020-09-18T10:24:16.032Z'
+    - gulp-sass > lodash:
+        reason: None given
+        expires: '2020-09-18T10:24:16.032Z'
+    - gulp-transform > lodash:
+        reason: None given
+        expires: '2020-09-18T10:24:16.032Z'
+    - inquirer > lodash:
+        reason: None given
+        expires: '2020-09-18T10:24:16.032Z'
+    - node-sass > sass-graph > lodash:
+        reason: None given
+        expires: '2020-09-18T10:24:16.032Z'
+    - node-sass > gaze > globule > lodash:
+        reason: None given
+        expires: '2020-09-18T10:24:16.032Z'
+    - stylelint > postcss-reporter > lodash:
+        reason: None given
+        expires: '2020-09-18T10:24:16.032Z'
+  SNYK-JS-LODASH-567746:
+    - firebase-tools > superstatic > lodash:
+        reason: None given
+        expires: '2020-09-18T10:24:16.031Z'
+    - firebase-tools > superstatic > nash > lodash:
+        reason: None given
+        expires: '2020-09-18T10:24:16.032Z'
+    - gulp-sass > node-sass > sass-graph > lodash:
+        reason: None given
+        expires: '2020-09-18T10:24:16.032Z'
+    - gulp-sass > node-sass > gaze > globule > lodash:
+        reason: None given
+        expires: '2020-09-18T10:24:16.032Z'
+    - gulp-transform > lodash:
+        reason: None given
+        expires: '2020-09-18T10:24:16.032Z'
+    - inquirer > lodash:
+        reason: None given
+        expires: '2020-09-18T10:24:16.032Z'
+    - node-sass > sass-graph > lodash:
+        reason: None given
+        expires: '2020-09-18T10:24:16.032Z'
+    - node-sass > gaze > globule > lodash:
+        reason: None given
+        expires: '2020-09-18T10:24:16.032Z'
+  SNYK-JS-MARKED-584281:
+    - dgeni-packages > marked:
+        reason: None given
+        expires: '2020-09-18T10:24:16.032Z'
+    - firebase-tools > marked:
+        reason: None given
+        expires: '2020-09-18T10:24:16.032Z'
 patch: {}
