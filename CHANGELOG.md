@@ -1,3 +1,11 @@
+## 8.5.6 "Selected Blaze" (2020-08-19)
+
+### Mosaic
+
+ * bug fix  **select:** select lose selected element after selection with search (#UIM-475) ([#494](https://github.com/positive-js/mosaic/issues/494)) ([5c55038](https://github.com/positive-js/mosaic/commit/5c55038abc951266aa1fecf446374fe659ef6deb)), closes [#UIM-475](https://github.com/positive-js/mosaic/issues/UIM-475)
+ * bug fix  **splitter:** Error in the declaration of the enum Direction #UIM-430 ([#498](https://github.com/positive-js/mosaic/issues/498)) ([fc2b0ad](https://github.com/positive-js/mosaic/commit/fc2b0ad533505ef714291e28a30a0074a353f332)), closes [#UIM-430](https://github.com/positive-js/mosaic/issues/UIM-430)
+ * bug fix  **toggle:** Each click on the toggle emits two events instead of one #UIM-476 ([#499](https://github.com/positive-js/mosaic/issues/499)) ([3aa7e67](https://github.com/positive-js/mosaic/commit/3aa7e6777058986361ec5e412538d6fba5932c1d)), closes [#UIM-476](https://github.com/positive-js/mosaic/issues/UIM-476)
+
 ## 8.5.5 "Rectilinear" (2020-07-20)
 
 ### Mosaic
