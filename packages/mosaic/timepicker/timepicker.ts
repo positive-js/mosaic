@@ -20,8 +20,6 @@ import {
 } from '@angular/forms';
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
 import {
-    BACKSPACE,
-    DELETE,
     DOWN_ARROW,
     hasModifierKey,
     LEFT_ARROW,
