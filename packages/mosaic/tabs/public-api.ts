@@ -13,3 +13,4 @@ export { McTabLabel } from './tab-label';
 export { McTabNav, McTabLink } from './tab-nav-bar/index';
 export { McTabContent } from './tab-content';
 export * from './tabs-animations';
+export { MC_TABS_CONFIG, IMcTabsConfig } from './tab-config';

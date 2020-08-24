@@ -273,19 +273,15 @@ export class McTabHeader extends McTabHeaderBase
         // We need to diff the text content of the header, because the MutationObserver callback
         // will fire even if the text content didn't change which is inefficient and is prone
         // to infinite loops if a poorly constructed expression is passed in.
-
         if (textContent !== this.currentTextContent) {
-            this.currentTextContent = textContent;
-
-            const zoneCallback = () => {
-                this.updatePagination();
-                this.changeDetectorRef.markForCheck();
-            };
+            this.currentTextContent = textContent || '';
 
             // The content observer runs outside the `NgZone` by default, which
             // means that we need to bring the callback back in ourselves.
-            // TODO: Remove null check for `_ngZone` once it's a required parameter.
-            this.ngZone ? this.ngZone.run(zoneCallback) : zoneCallback();
+            this.ngZone.run(() => {
+                this.updatePagination();
+                this.changeDetectorRef.markForCheck();
+            });
         }
     }
 

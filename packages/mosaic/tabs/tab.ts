@@ -20,7 +20,7 @@ import {
 } from '@ptsecurity/mosaic/core';
 import { Subject } from 'rxjs';
 
-import { McTabContent } from './tab-content';
+import {MC_TAB_CONTENT, McTabContent} from './tab-content';
 import { McTabLabel } from './tab-label';
 
 
@@ -30,10 +30,7 @@ export const McTabMixinBase: CanDisableCtor & typeof McTabBase = mixinDisabled(M
 
 @Component({
     selector: 'mc-tab',
-    // Create a template for the content of the <mc-tab> so that we can grab a reference to this
-    // TemplateRef and use it in a Portal to render the tab content in the appropriate place in the
-    // tab-group.
-    template: '<ng-template><ng-content></ng-content></ng-template>',
+    templateUrl: 'tab.html',
     inputs: ['disabled'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
@@ -50,7 +47,7 @@ export class McTab extends McTabMixinBase implements OnInit, CanDisable, OnChang
     /**
      * Template provided in the tab content that will be used if present, used to enable lazy-loading
      */
-    @ContentChild(McTabContent, { read: TemplateRef, static: true })
+    @ContentChild(MC_TAB_CONTENT as any, { read: TemplateRef, static: true })
     explicitContent: TemplateRef<any>;
 
     /** Template inside the McTab view that contains an `<ng-content>`. */

@@ -14,11 +14,12 @@ import {
     QueryList,
     ViewChild,
     ViewEncapsulation,
-    InjectionToken,
     Inject,
     Optional,
-    Directive, Attribute
+    Directive,
+    Attribute
 } from '@angular/core';
+import { ANIMATION_MODULE_TYPE } from '@angular/platform-browser/animations';
 import {
     CanColor,
     CanColorCtor,
@@ -28,6 +29,7 @@ import {
 import { merge, Subscription } from 'rxjs';
 
 import { McTab } from './tab';
+import { IMcTabsConfig, MC_TABS_CONFIG } from './tab-config';
 import { McTabHeader } from './tab-header';
 
 
@@ -68,15 +70,6 @@ export class McTabChangeEvent {
 
 /** Possible positions for the tab header. */
 export type McTabHeaderPosition = 'above' | 'below';
-
-/** Object that can be used to configure the default options for the tabs module. */
-export interface IMcTabsConfig {
-    /** Duration for the tab animation. Must be a valid CSS value (e.g. 600ms). */
-    animationDuration?: string;
-}
-
-/** Injection token that can be used to provide the default options the tabs module. */
-export const MC_TABS_CONFIG = new InjectionToken<string>('MC_TABS_CONFIG');
 
 // Boilerplate for applying mixins to McTabGroup.
 /** @docs-private */
@@ -130,8 +123,21 @@ export class McTabGroup extends McTabGroupMixinBase implements AfterContentInit,
     /** Position of the tab header. */
     @Input() headerPosition: McTabHeaderPosition = 'above';
 
-    /** Duration for the tab animation. Must be a valid CSS value (e.g. 600ms). */
-    @Input() animationDuration: string;
+    /** Duration for the tab animation. Will be normalized to milliseconds if no units are set. */
+    @Input()
+    get animationDuration(): string { return this._animationDuration; }
+    set animationDuration(value: string) {
+        // tslint:disable-next-line:prefer-template
+        this._animationDuration = /^\d+$/.test(value) ? value + 'ms' : value;
+    }
+    private _animationDuration: string;
+
+    /**
+     * Whether pagination should be disabled. This can be used to avoid unnecessary
+     * layout recalculations if it's known that pagination won't be required.
+     */
+    @Input()
+    disablePagination: boolean;
 
     /** Output to enable support for two-way binding on `[(selectedIndex)]` */
     @Output() readonly selectedIndexChange: EventEmitter<number> = new EventEmitter<number>();
@@ -167,15 +173,20 @@ export class McTabGroup extends McTabGroupMixinBase implements AfterContentInit,
         elementRef: ElementRef,
         private changeDetectorRef: ChangeDetectorRef,
         @Attribute('mc-light-tabs') lightTabs: string,
-        @Inject(MC_TABS_CONFIG) @Optional() defaultConfig?: IMcTabsConfig
+        @Inject(MC_TABS_CONFIG) @Optional() defaultConfig?: IMcTabsConfig,
+        @Optional() @Inject(ANIMATION_MODULE_TYPE) public animationMode?: string
     ) {
         super(elementRef);
 
         this.lightTab = coerceBooleanProperty(lightTabs);
 
         this.groupId = nextId++;
+
         this.animationDuration = defaultConfig && defaultConfig.animationDuration ?
-            defaultConfig.animationDuration : '0ms';
+            defaultConfig.animationDuration : '500ms';
+
+        this.disablePagination = defaultConfig && defaultConfig.disablePagination != null ?
+            defaultConfig.disablePagination : false;
     }
 
     /**

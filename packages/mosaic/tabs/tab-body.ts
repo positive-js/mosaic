@@ -161,7 +161,9 @@ export class McTabBody implements OnInit, OnDestroy {
 
     /** Whether the provided position state is considered center, regardless of origin. */
     isCenterPosition(position: McTabBodyPositionState | string): boolean {
-        return position === 'center' || position === 'left-origin-center' || position === 'right-origin-center';
+        return position === 'center' ||
+            position === 'left-origin-center' ||
+            position === 'right-origin-center';
     }
 
     /** Computes the position state that will be used for the tab-body animation trigger. */

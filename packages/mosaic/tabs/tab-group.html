@@ -1,5 +1,5 @@
 <mc-tab-header #tabHeader
-               [selectedIndex]="selectedIndex"
+               [selectedIndex]="selectedIndex || 0"
                (indexFocused)="focusChanged($event)"
                (selectFocusedIndex)="selectedIndex = $event">
     <div role="tab"
