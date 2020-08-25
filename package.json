@@ -114,7 +114,7 @@
         "yaml-lint": "^1.2.4"
     },
     "resolutions": {
-        "dgeni-packages/typescript": "3.8.3"
+        "dgeni-packages/typescript": "3.9.7"
     },
     "scripts": {
         "ng": "ng",
