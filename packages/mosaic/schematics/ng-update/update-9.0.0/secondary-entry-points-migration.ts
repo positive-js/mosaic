@@ -26,7 +26,7 @@ export class SecondaryEntryPointsMigration extends Migration<null> {
     printer = ts.createPrinter();
 
     // Only enable this rule if the migration targets version 8.
-    enabled = this.targetVersion === TargetVersion.V8 || this.ttsHost.typeFormatFlagsargetVersion === TargetVersion.V9;
+    enabled = this.targetVersion === TargetVersion.V8 || this.targetVersion === TargetVersion.V9;
 
     // tslint:disable-next-line:max-func-body-length
     visitNode(declaration: ts.Node): void {
