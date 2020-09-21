@@ -10,7 +10,6 @@ import { map } from 'rxjs/operators';
     `,
     host: {
         class: 'mc-tree-node-toggle',
-        '(click)': 'toggle($event)',
         '[class.mc-opened]': 'iconState',
         '[attr.disabled]': 'disabled || null'
     },
@@ -38,7 +37,6 @@ export class McTreeNodeToggleComponent<T> extends CdkTreeNodeToggle<T> {
 @Directive({
     selector: '[mcTreeNodeToggle]',
     host: {
-        '(click)': 'toggle($event)',
         '[attr.disabled]': 'disabled || null'
     },
     providers: [{ provide: CdkTreeNodeToggle, useExisting: McTreeNodeToggleDirective }]
