@@ -20,8 +20,6 @@ import {
 } from '@angular/forms';
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
 import {
-    BACKSPACE,
-    DELETE,
     DOWN_ARROW,
     hasModifierKey,
     LEFT_ARROW,
@@ -326,8 +324,13 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
 
     onInput() {
         const newTimeObj = this.getDateFromTimeString(this.viewValue);
+        this.lastValueValid = !!newTimeObj;
 
-        if (!newTimeObj) { return; }
+        if (!newTimeObj) {
+            this.control.updateValueAndValidity();
+
+            return;
+        }
 
         const selectionStart = this.selectionStart;
         const selectionEnd = this.selectionEnd;
@@ -359,7 +362,7 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
         // tslint:disable-next-line: deprecation
         const keyCode = event.keyCode;
 
-        if (hasModifierKey(event) || [BACKSPACE, DELETE].includes(keyCode)) {
+        if (hasModifierKey(event)) {
             return;
         } else if ([UP_ARROW, DOWN_ARROW].includes(keyCode)) {
             event.preventDefault();
