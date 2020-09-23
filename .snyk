@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.14.1
+version: v1.19.0
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
   SNYK-JS-NODESASS-542662:
@@ -10,15 +10,9 @@ ignore:
     - madge > detective-less > gonzales-pe > minimist:
         reason: None given
         expires: '2020-05-20T05:33:14.376Z'
-      dgeni > optimist > minimist:
-        reason: None given
-        expires: '2020-09-18T10:24:16.033Z'
     - madge > detective-sass > gonzales-pe > minimist:
         reason: None given
         expires: '2020-05-20T05:33:14.376Z'
-      dgeni-packages > dgeni > optimist > minimist:
-        reason: None given
-        expires: '2020-09-18T10:24:16.033Z'
     - madge > detective-scss > gonzales-pe > minimist:
         reason: None given
         expires: '2020-05-20T05:33:14.376Z'
@@ -43,19 +37,19 @@ ignore:
     - conventional-changelog > conventional-changelog-core > conventional-changelog-writer > handlebars > optimist > minimist:
         reason: None given
         expires: '2020-05-20T05:33:14.377Z'
+    - dgeni > optimist > minimist:
+        reason: None given
+        expires: '2020-09-18T10:24:16.033Z'
+    - dgeni-packages > dgeni > optimist > minimist:
+        reason: None given
+        expires: '2020-09-18T10:24:16.033Z'
   SNYK-JS-DOTPROP-543489:
     - conventional-changelog > conventional-changelog-angular > compare-func > dot-prop:
         reason: None given
         expires: '2020-05-20T05:33:14.377Z'
-      firebase-tools > update-notifier > configstore > dot-prop:
-        reason: None given
-        expires: '2020-09-18T10:24:16.031Z'
     - conventional-changelog > conventional-changelog-conventionalcommits > compare-func > dot-prop:
         reason: None given
         expires: '2020-05-20T05:33:14.377Z'
-      firebase-tools > superstatic > update-notifier > configstore > dot-prop:
-        reason: None given
-        expires: '2020-09-18T10:24:16.031Z'
     - conventional-changelog > conventional-changelog-jshint > compare-func > dot-prop:
         reason: None given
         expires: '2020-05-20T05:33:14.377Z'
@@ -71,6 +65,12 @@ ignore:
     - firebase-tools > superstatic > update-notifier > configstore > dot-prop:
         reason: None given
         expires: '2020-05-20T05:33:14.377Z'
+    - firebase-tools > update-notifier > configstore > dot-prop:
+        reason: None given
+        expires: '2020-09-18T10:24:16.031Z'
+    - firebase-tools > superstatic > update-notifier > configstore > dot-prop:
+        reason: None given
+        expires: '2020-09-18T10:24:16.031Z'
   SNYK-JS-NODESASS-535497:
     - gulp-sass > node-sass:
         reason: None given
@@ -187,9 +187,6 @@ ignore:
     - '@angular-devkit/build-angular > webpack-dev-server > yargs > yargs-parser':
         reason: None given
         expires: '2020-05-20T05:33:14.378Z'
-      gulp-sass > node-sass > sass-graph > yargs > yargs-parser:
-        reason: None given
-        expires: '2020-09-18T10:24:16.033Z'
     - '@commitlint/cli > meow > yargs-parser':
         reason: None given
         expires: '2020-05-20T05:33:14.378Z'
@@ -214,6 +211,9 @@ ignore:
     - gulp-sass > node-sass > sass-graph > yargs > yargs-parser:
         reason: None given
         expires: '2020-05-20T05:33:14.378Z'
+    - gulp-sass > node-sass > sass-graph > yargs > yargs-parser:
+        reason: None given
+        expires: '2020-09-18T10:24:16.033Z'
   SNYK-JS-USERAGENT-174737:
     - karma > useragent:
         reason: None given
@@ -287,4 +287,22 @@ ignore:
     - firebase-tools > marked:
         reason: None given
         expires: '2020-09-18T10:24:16.032Z'
-patch: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-567746:
+    - gulp-transform > lodash:
+        patched: '2020-09-19T02:25:36.939Z'
+    - inquirer > lodash:
+        patched: '2020-09-19T02:25:36.939Z'
+    - firebase-tools > superstatic > lodash:
+        patched: '2020-09-19T02:25:36.939Z'
+    - node-sass > sass-graph > lodash:
+        patched: '2020-09-19T02:25:36.939Z'
+    - firebase-tools > superstatic > nash > lodash:
+        patched: '2020-09-19T02:25:36.939Z'
+    - node-sass > gaze > globule > lodash:
+        patched: '2020-09-19T02:25:36.939Z'
+    - gulp-sass > node-sass > sass-graph > lodash:
+        patched: '2020-09-19T02:25:36.939Z'
+    - gulp-sass > node-sass > gaze > globule > lodash:
+        patched: '2020-09-19T02:25:36.939Z'
