@@ -16,10 +16,9 @@ import {
     IterableDiffers,
     Output,
     QueryList,
-    ViewChild,
+    ViewChild, ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { NodeDef, ViewData } from '@angular/core/esm2015/src/view';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import {
@@ -99,7 +98,9 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
 
     @ViewChild(CdkTreeNodeOutlet, { static: true }) nodeOutlet: CdkTreeNodeOutlet;
 
-    @ContentChildren(McTreeOption) renderedOptions: QueryList<T>;
+    @ContentChildren(McTreeOption) unorderedOptions: QueryList<T>;
+
+    renderedOptions = new QueryList<T>();
 
     keyManager: FocusKeyManager<T>;
 
@@ -116,6 +117,8 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
     multipleMode: MultipleMode | null = null;
 
     userTabIndex: number | null = null;
+
+    private sortedNodes: T[] = [];
 
     @Input()
     get autoSelect(): boolean {
@@ -213,6 +216,8 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
     }
 
     ngAfterContentInit(): void {
+        this.unorderedOptions.changes.subscribe(this.updateRenderedOptions);
+
         this.keyManager = new FocusKeyManager<T>(this.renderedOptions)
             .withVerticalOrientation(true)
             .withHorizontalOrientation(null);
@@ -431,39 +436,12 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
     renderNodeChanges(
         data: T[],
         dataDiffer: IterableDiffer<T> = this.dataDiffer,
-        viewContainer: any = this.nodeOutlet.viewContainer,
+        viewContainer: ViewContainerRef = this.nodeOutlet.viewContainer,
         parentData?: T
     ): void {
         super.renderNodeChanges(data, dataDiffer, viewContainer, parentData);
 
-        const arrayOfInstances = [];
-        const changeDetectorRefs: any[] = [];
-
-        viewContainer._embeddedViews.forEach((view: ViewData) => {
-            const viewDef = view.def;
-
-            viewDef.nodes.forEach((node: NodeDef) => {
-                if (viewDef.nodeMatchedQueries === node.matchedQueryIds) {
-                    const nodeData: any = view.nodes[node.nodeIndex];
-
-                    arrayOfInstances.push(nodeData.instance as never);
-                    changeDetectorRefs.push(nodeData.instance.changeDetectorRef);
-                }
-            });
-        });
-
-        setTimeout(() => {
-            changeDetectorRefs.forEach((changeDetectorRef) => {
-                if (!changeDetectorRef.destroyed) {
-                    changeDetectorRef.detectChanges();
-                }
-            });
-        });
-
-        if (this.renderedOptions) {
-            this.renderedOptions.reset(arrayOfInstances);
-            this.renderedOptions.notifyOnChanges();
-        }
+        this.sortedNodes = this.getSortedNodes(viewContainer);
 
         this.updateScrollSize();
 
@@ -497,7 +475,7 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
             throw getMcSelectNonArrayValueError();
         }
 
-        if (this.renderedOptions) {
+        if (this.renderedOptions.length) {
             this.setOptionsFromValues(this.multiple ? value : [value]);
         }
     }
@@ -540,6 +518,33 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
 
     protected updateTabIndex(): void {
         this._tabIndex = this.renderedOptions.length === 0 ? -1 : 0;
+    }
+
+    private updateRenderedOptions = () => {
+        const orderedOptions: T[] = [];
+
+        this.sortedNodes.forEach((node) => {
+            const found = this.unorderedOptions.find((option) => option.value === this.treeControl.getValue(node));
+
+            if (found) {
+                orderedOptions.push(found);
+            }
+        });
+
+        this.renderedOptions.reset(orderedOptions);
+        this.renderedOptions.notifyOnChanges();
+    }
+
+    private getSortedNodes(viewContainer: ViewContainerRef) {
+        const array: T[] = [];
+
+        for (let i = 0; i < viewContainer.length; i++) {
+            const viewRef = viewContainer.get(i) as any;
+
+            array.push(viewRef.context.$implicit);
+        }
+
+        return array;
     }
 
     private allowFocusEscape() {
@@ -603,7 +608,7 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
     }
 
     private markOptionsForCheck() {
-        if (this.renderedOptions) {
+        if (this.renderedOptions.length) {
             this.renderedOptions.forEach((option) => option.markForCheck());
         }
     }

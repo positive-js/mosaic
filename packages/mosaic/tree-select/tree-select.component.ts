@@ -97,7 +97,8 @@ import {
     switchMap,
     take,
     takeUntil,
-    distinctUntilChanged
+    distinctUntilChanged,
+    startWith
 } from 'rxjs/operators';
 
 
@@ -275,7 +276,10 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     /** Combined stream of all of the child options' change events. */
     readonly optionSelectionChanges: Observable<McTreeSelectChange> = defer(() => {
         if (this.options) {
-            return merge(...this.options.map((option) => option.onSelectionChange));
+            return this.options.changes.pipe(
+                startWith(this.options),
+                switchMap(() => merge(...this.options.map((option) => option.onSelectionChange)))
+            );
         }
 
         return this.ngZone.onStable
