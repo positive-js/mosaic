@@ -1732,6 +1732,7 @@ describe('McTreeSelect', () => {
 
                     const multiFixture = TestBed.createComponent(MultiSelect);
                     multiFixture.detectChanges();
+                    multiFixture.detectChanges();
 
                     select = multiFixture.debugElement.query(By.css('mc-tree-select')).nativeElement;
                     multiFixture.componentInstance.select.open();
@@ -2895,6 +2896,7 @@ describe('McTreeSelect', () => {
 
         it('should handle nesting in an ngIf', fakeAsync(() => {
             fixture.componentInstance.isShowing = true;
+            fixture.detectChanges();
             fixture.detectChanges();
 
             const trigger = fixture.debugElement.query(By.css('.mc-tree-select__trigger')).nativeElement;
