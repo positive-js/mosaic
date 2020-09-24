@@ -9,7 +9,7 @@ import { mosaicVersion } from '../version/version';
 const STACKBLITZ_URL = 'https://run.stackblitz.com/api/angular/v1';
 
 const COPYRIGHT =
-    `Copyright 2019 Positive Technologies. All Rights Reserved.
+    `Copyright 2020 Positive Technologies. All Rights Reserved.
     Use of this source code is governed by an MIT-style license.`;
 
 /**
@@ -40,7 +40,7 @@ const angularVersion = '^9.0.0';
 const dependencies = {
     '@ptsecurity/cdk': mosaicVersion,
     '@ptsecurity/mosaic': mosaicVersion,
-    '@ptsecurity/mosaic-icons': '~5.0.0',
+    '@ptsecurity/mosaic-icons': '^5.0.0',
     '@ptsecurity/mosaic-moment-adapter': mosaicVersion,
     '@angular/cdk': angularVersion,
     '@angular/animations': angularVersion,

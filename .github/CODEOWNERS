@@ -1,0 +1,12 @@
+# CDK
+/packages/cdk/*                                       @Fost @lskramarov
+
+# Docs
+/packages/docs/*                                      @Fost
+
+# Mosaic
+/packages/mosaic/*                                    @Fost @lskramarov
+/packages/mosaic/timepicker/*                         @Fost @lskramarov @RistiCore
+
+# Moment Adapter
+/packages/mosaic-moment-adapter/*                     @Fost @lskramarov

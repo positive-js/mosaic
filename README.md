@@ -48,6 +48,14 @@ $ yarn install
 $ yarn run server-dev:button
 ```
 
+## Contribution
+You would like to help us – its cool!
+
+See our:
+[guide for developers](https://github.com/positive-js/mosaic/blob/master/DEVELOPMENT.md)
+and
+[contribution guidelines](https://github.com/positive-js/mosaic/blob/master/CONTRIBUTING.md)
+
 ## Credits
 
 ### Contributors
