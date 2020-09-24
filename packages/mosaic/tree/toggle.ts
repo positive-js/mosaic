@@ -1,5 +1,5 @@
 import { Component, Directive, Input, ViewEncapsulation } from '@angular/core';
-import { CdkTree, CdkTreeNode, CdkTreeNodeToggle } from '@ptsecurity/cdk/tree';
+import { CdkTree, CdkTreeNode } from '@ptsecurity/cdk/tree';
 import { map } from 'rxjs/operators';
 
 
@@ -10,47 +10,80 @@ import { map } from 'rxjs/operators';
     `,
     host: {
         class: 'mc-tree-node-toggle',
-        '(click)': 'toggle($event)',
         '[class.mc-opened]': 'iconState',
-        '[attr.disabled]': 'disabled || null'
+        '[attr.disabled]': 'disabled || null',
+        '(click)': 'toggle($event)'
     },
-    encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: CdkTreeNodeToggle, useExisting: McTreeNodeToggleComponent }]
+    encapsulation: ViewEncapsulation.None
 })
-export class McTreeNodeToggleComponent<T> extends CdkTreeNodeToggle<T> {
+export class McTreeNodeToggleComponent<T> {
     disabled: boolean = false;
 
     @Input() node: T;
+
+    @Input('cdkTreeNodeToggleRecursive')
+    get recursive(): boolean {
+        return this._recursive;
+    }
+
+    set recursive(value: boolean) {
+        this._recursive = value;
+    }
+
+    private _recursive = false;
 
     get iconState(): any {
         return this.disabled || this.tree.treeControl.isExpanded(this.node);
     }
 
-    constructor(tree: CdkTree<T>, treeNode: CdkTreeNode<T>) {
-        super(tree, treeNode);
-
+    constructor(private tree: CdkTree<T>, private treeNode: CdkTreeNode<T>) {
         this.tree.treeControl.filterValue
             .pipe(map((value) => value.length > 0))
             .subscribe((state: boolean) => this.disabled = state);
+    }
+
+    toggle(event: Event): void {
+        this.recursive
+            ? this.tree.treeControl.toggleDescendants(this.treeNode.data)
+            : this.tree.treeControl.toggle(this.treeNode.data);
+
+        event.stopPropagation();
     }
 }
 
 @Directive({
     selector: '[mcTreeNodeToggle]',
     host: {
-        '(click)': 'toggle($event)',
-        '[attr.disabled]': 'disabled || null'
-    },
-    providers: [{ provide: CdkTreeNodeToggle, useExisting: McTreeNodeToggleDirective }]
+        '[attr.disabled]': 'disabled || null',
+        '(click)': 'toggle($event)'
+    }
 })
-export class McTreeNodeToggleDirective<T> extends CdkTreeNodeToggle<T> {
+export class McTreeNodeToggleDirective<T> {
     disabled: boolean = false;
 
-    constructor(tree: CdkTree<T>, treeNode: CdkTreeNode<T>) {
-        super(tree, treeNode);
+    @Input('cdkTreeNodeToggleRecursive')
+    get recursive(): boolean {
+        return this._recursive;
+    }
+
+    set recursive(value: boolean) {
+        this._recursive = value;
+    }
+
+    private _recursive = false;
+
+    constructor(private tree: CdkTree<T>, private treeNode: CdkTreeNode<T>) {
 
         this.tree.treeControl.filterValue
             .pipe(map((value) => value.length > 0))
             .subscribe((state: boolean) => this.disabled = state);
+    }
+
+    toggle(event: Event): void {
+        this.recursive
+            ? this.tree.treeControl.toggleDescendants(this.treeNode.data)
+            : this.tree.treeControl.toggle(this.treeNode.data);
+
+        event.stopPropagation();
     }
 }

@@ -253,10 +253,11 @@ describe('McTreeSelection', () => {
 
                     const event = createMouseEvent('click');
 
+                    fixture.detectChanges();
+
                     (nodes[0] as HTMLElement).focus();
                     dispatchEvent(nodes[0], event);
                     expect(component.modelValue.length).toBe(1);
-
                     const targetNode: HTMLElement = nodes[3] as HTMLElement;
 
                     Object.defineProperty(event, 'shiftKey', { get: () => true });
@@ -276,6 +277,7 @@ describe('McTreeSelection', () => {
                     let event = createMouseEvent('click');
                     Object.defineProperty(event, 'ctrlKey', { get: () => true });
 
+                    fixture.detectChanges();
                     component.tree.renderedOptions.toArray().forEach((option, index) => {
                         if (index < 3) {option.selected = true; }
                     });
