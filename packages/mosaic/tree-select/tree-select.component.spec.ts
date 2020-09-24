@@ -2236,7 +2236,6 @@ describe('McTreeSelect', () => {
                 tick(10);
 
                 options = overlayContainerElement.querySelectorAll('mc-tree-option');
-                console.log(options.length);
                 expect(options[1].classList).not.toContain('mc-selected');
                 expect(options[2].classList).not.toContain('mc-selected');
 
@@ -2884,7 +2883,7 @@ describe('McTreeSelect', () => {
     });
 
     describe('with ngIf', () => {
-        let fixture: ComponentFixture<NgIfSelect>
+        let fixture: ComponentFixture<NgIfSelect>;
 
         beforeEach(async(() => {
             configureMcTreeSelectTestingModule([NgIfSelect]);
@@ -3542,7 +3541,7 @@ describe('McTreeSelect', () => {
 
         // todo fix
         xit('should mark options as selected when the value is set', fakeAsync(() => {
-            const fixture = TestBed.createComponent(BasicSelectWithoutForms);
+            fixture = TestBed.createComponent(BasicSelectWithoutForms);
 
             fixture.detectChanges();
             fixture.componentInstance.selectedFood = 'sandwich-2';
@@ -3583,7 +3582,7 @@ describe('McTreeSelect', () => {
 
         // todo fix
         xit('should reflect the preselected value', fakeAsync(() => {
-            const fixture = TestBed.createComponent(BasicSelectWithoutFormsPreselected);
+            fixture = TestBed.createComponent(BasicSelectWithoutFormsPreselected);
 
             fixture.detectChanges();
 
@@ -3601,43 +3600,43 @@ describe('McTreeSelect', () => {
         }));
 
         it('should be able to select multiple values', fakeAsync(() => {
-            const fixture = TestBed.createComponent(BasicSelectWithoutFormsMultiple);
-            fixture.detectChanges();
-            fixture.detectChanges();
+            const localFixture = TestBed.createComponent(BasicSelectWithoutFormsMultiple);
+            localFixture.detectChanges();
+            localFixture.detectChanges();
 
-            expect(fixture.componentInstance.selectedFoods).toBeFalsy();
+            expect(localFixture.componentInstance.selectedFoods).toBeFalsy();
 
-            const trigger = fixture.debugElement.query(By.css('.mc-tree-select__trigger')).nativeElement;
+            const trigger = localFixture.debugElement.query(By.css('.mc-tree-select__trigger')).nativeElement;
 
             trigger.click();
-            fixture.detectChanges();
+            localFixture.detectChanges();
             flush();
 
             const options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-tree-option');
 
             options[0].click();
-            fixture.detectChanges();
+            localFixture.detectChanges();
             flush();
 
-            expect(fixture.componentInstance.selectedFoods).toEqual(['rootNode_1']);
-            expect(fixture.componentInstance.select.value).toEqual(['rootNode_1']);
+            expect(localFixture.componentInstance.selectedFoods).toEqual(['rootNode_1']);
+            expect(localFixture.componentInstance.select.value).toEqual(['rootNode_1']);
             expect(trigger.textContent).toContain('rootNode_1');
 
             options[2].click();
-            fixture.detectChanges();
+            localFixture.detectChanges();
             flush();
 
-            expect(fixture.componentInstance.selectedFoods).toEqual(['rootNode_1', 'Documents']);
-            expect(fixture.componentInstance.select.value).toEqual(['rootNode_1', 'Documents']);
+            expect(localFixture.componentInstance.selectedFoods).toEqual(['rootNode_1', 'Documents']);
+            expect(localFixture.componentInstance.select.value).toEqual(['rootNode_1', 'Documents']);
             expect(trigger.textContent).toContain('rootNode_1');
             expect(trigger.textContent).toContain('Documents');
 
             options[1].click();
-            fixture.detectChanges();
+            localFixture.detectChanges();
             flush();
 
-            expect(fixture.componentInstance.selectedFoods).toEqual(['rootNode_1', 'Documents', 'Pictures']);
-            expect(fixture.componentInstance.select.value).toEqual(['rootNode_1', 'Documents', 'Pictures']);
+            expect(localFixture.componentInstance.selectedFoods).toEqual(['rootNode_1', 'Documents', 'Pictures']);
+            expect(localFixture.componentInstance.select.value).toEqual(['rootNode_1', 'Documents', 'Pictures']);
             expect(trigger.textContent).toContain('rootNode_1');
             expect(trigger.textContent).toContain('Pictures');
             expect(trigger.textContent).toContain('Documents');
@@ -3659,7 +3658,7 @@ describe('McTreeSelect', () => {
 
         // excluded because tree-select works not like select
         xit('should not restore focus to the host element when clicking outside', fakeAsync(() => {
-            const fixture = TestBed.createComponent(BasicSelectWithoutForms);
+            fixture = TestBed.createComponent(BasicSelectWithoutForms);
             const select = fixture.debugElement.nativeElement.querySelector('mc-tree-select');
 
             fixture.detectChanges();

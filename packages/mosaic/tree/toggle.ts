@@ -32,14 +32,6 @@ export class McTreeNodeToggleComponent<T> {
 
     private _recursive = false;
 
-    toggle(event: Event): void {
-        this.recursive
-            ? this.tree.treeControl.toggleDescendants(this.treeNode.data)
-            : this.tree.treeControl.toggle(this.treeNode.data);
-
-        event.stopPropagation();
-    }
-
     get iconState(): any {
         return this.disabled || this.tree.treeControl.isExpanded(this.node);
     }
@@ -48,6 +40,14 @@ export class McTreeNodeToggleComponent<T> {
         this.tree.treeControl.filterValue
             .pipe(map((value) => value.length > 0))
             .subscribe((state: boolean) => this.disabled = state);
+    }
+
+    toggle(event: Event): void {
+        this.recursive
+            ? this.tree.treeControl.toggleDescendants(this.treeNode.data)
+            : this.tree.treeControl.toggle(this.treeNode.data);
+
+        event.stopPropagation();
     }
 }
 
@@ -78,7 +78,6 @@ export class McTreeNodeToggleDirective<T> {
             .pipe(map((value) => value.length > 0))
             .subscribe((state: boolean) => this.disabled = state);
     }
-
 
     toggle(event: Event): void {
         this.recursive
