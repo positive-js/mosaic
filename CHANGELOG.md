@@ -1,3 +1,14 @@
+## 9.1.5 "Cantankerous Markup" (2020-10-05)
+
+### Mosaic
+
+ * bug fix  **timepicker:** Incorrect validation behavior (#UIM-485) ([#503](https://github.com/positive-js/mosaic/issues/503)) ([2b80cca](https://github.com/positive-js/mosaic/commit/2b80cca3a6df51a23051bcf8e90510735f45af96)), closes [#UIM-485](https://github.com/positive-js/mosaic/issues/UIM-485)
+ * bug fix  **tree:** mc-tree does not work with ivy (#UIM-499) ([#509](https://github.com/positive-js/mosaic/issues/509)) ([a345f79](https://github.com/positive-js/mosaic/commit/a345f798154b4fa8975d2427403e64eb9bffcf4c)), closes [#UIM-499](https://github.com/positive-js/mosaic/issues/UIM-499)
+
+### Docs
+
+ * bug fix  detect dark/light mode theme for Safari ([f8769fc](https://github.com/positive-js/mosaic/commit/f8769fc699b7a39de3d2b20b3f41b327dd3073ed))
+
 ## 9.1.4 "Unthinkable" (2020-08-14)
 
 ### Mosaic
