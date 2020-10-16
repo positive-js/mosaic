@@ -4,7 +4,7 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { PlatformModule } from '@angular/cdk/platform';
 import { Component, DebugElement, ViewChild } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ENTER, COMMA } from '@ptsecurity/cdk/keycodes';
@@ -26,7 +26,7 @@ describe('McTagInput', () => {
     let tagInputDirective: McTagInput;
     const dir = 'ltr';
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [PlatformModule, McTagsModule, McFormFieldModule, NoopAnimationsModule],
             declarations: [TestTagInput],
@@ -44,7 +44,7 @@ describe('McTagInput', () => {
         TestBed.compileComponents();
     }));
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         fixture = TestBed.createComponent(TestTagInput);
         testTagInput = fixture.debugElement.componentInstance;
         fixture.detectChanges();

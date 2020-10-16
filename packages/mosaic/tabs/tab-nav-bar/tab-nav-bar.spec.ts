@@ -2,7 +2,7 @@
 import { Direction, Directionality } from '@angular/cdk/bidi';
 import { Component, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import {
-    async,
+    waitForAsync,
     ComponentFixture,
     TestBed
 } from '@angular/core/testing';
@@ -16,7 +16,7 @@ describe('McTabNavBar', () => {
     const dir: Direction = 'ltr';
     let dirChange: Subject<Direction>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         dirChange = new Subject();
         TestBed.configureTestingModule({
             imports: [McTabsModule],

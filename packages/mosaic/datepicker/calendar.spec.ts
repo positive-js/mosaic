@@ -2,7 +2,7 @@
 // tslint:disable:no-unbound-method
 import { Directionality } from '@angular/cdk/bidi';
 import { Component, NgZone } from '@angular/core';
-import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
 import { ENTER, RIGHT_ARROW, SPACE } from '@ptsecurity/cdk/keycodes';
@@ -35,7 +35,7 @@ const moment = _rollupMoment || _moment;
 describe('McCalendar', () => {
     let zone: MockNgZone;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [
                 McMomentDateModule,

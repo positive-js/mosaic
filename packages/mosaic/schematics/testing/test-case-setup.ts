@@ -3,7 +3,7 @@ import { TempScopedNodeJsSyncHost } from '@angular-devkit/core/node/testing';
 import * as virtualFs from '@angular-devkit/core/src/virtual-fs/host';
 import { HostTree, Tree } from '@angular-devkit/schematics';
 import { SchematicTestRunner, UnitTestTree } from '@angular-devkit/schematics/testing';
-import { readFileSync, rmdirSync } from 'fs';
+import { readFileSync, rmdirSync } from 'fs-extra';
 import { basename, extname } from 'path';
 
 

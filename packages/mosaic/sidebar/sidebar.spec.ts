@@ -2,7 +2,7 @@
 /* tslint:disable:mocha-no-side-effect-code */
 /* tslint:disable:no-empty */
 import { Component, ViewChild } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -10,7 +10,7 @@ import { McSidebar, McSidebarModule, SidebarPositions } from './index';
 
 
 describe('Sidebar', () => {
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [
                 NoopAnimationsModule,
@@ -29,7 +29,7 @@ describe('Sidebar', () => {
         let testComponent: SimpleSidebar;
         let sidebarComponent: McSidebar;
 
-        beforeEach(async(() => {
+        beforeEach(waitForAsync(() => {
             fixture = TestBed.createComponent(SimpleSidebar);
             fixture.detectChanges();
 

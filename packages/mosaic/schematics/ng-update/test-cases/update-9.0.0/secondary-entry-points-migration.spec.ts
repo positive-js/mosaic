@@ -9,8 +9,8 @@ const migrationCollection = require.resolve('../../../migration.json');
 
 describe('v9 Mosaic imports', () => {
 
-    it('should re-map top-level Mosaic imports to the proper entry points when top-level ' +
-        '@ptsecurity/mosaic package does not exist',async () => {
+    xit('should re-map top-level Mosaic imports to the proper entry points when top-level ' +
+        '@ptsecurity/mosaic package does not exist', async () => {
 
         const {
             runFixers,

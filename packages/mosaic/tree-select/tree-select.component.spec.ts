@@ -18,7 +18,7 @@ import {
     ViewChildren
 } from '@angular/core';
 import {
-    async,
+    waitForAsync,
     ComponentFixture,
     fakeAsync,
     flush,
@@ -1423,7 +1423,7 @@ describe('McTreeSelect', () => {
     });
 
     describe('core', () => {
-        beforeEach(async(() => {
+        beforeEach(waitForAsync(() => {
             configureMcTreeSelectTestingModule([
                 BasicTreeSelect,
                 MultiSelect,
@@ -2760,7 +2760,7 @@ describe('McTreeSelect', () => {
     });
 
     describe('when initialized without options', () => {
-        beforeEach(async(() => configureMcTreeSelectTestingModule([SelectInitWithoutOptions])));
+        beforeEach(waitForAsync(() => configureMcTreeSelectTestingModule([SelectInitWithoutOptions])));
 
         // todo fix
         xit('should select the proper option when option list is initialized later', fakeAsync(() => {
@@ -2785,7 +2785,7 @@ describe('McTreeSelect', () => {
     });
 
     describe('with a selectionChange event handler', () => {
-        beforeEach(async(() => configureMcTreeSelectTestingModule([SelectWithChangeEvent])));
+        beforeEach(waitForAsync(() => configureMcTreeSelectTestingModule([SelectWithChangeEvent])));
 
         let fixture: ComponentFixture<SelectWithChangeEvent>;
         let trigger: HTMLElement;
@@ -2839,7 +2839,7 @@ describe('McTreeSelect', () => {
     });
 
     describe('with ngModel', () => {
-        beforeEach(async(() => configureMcTreeSelectTestingModule([NgModelSelect])));
+        beforeEach(waitForAsync(() => configureMcTreeSelectTestingModule([NgModelSelect])));
 
         it('should disable itself when control is disabled using the property', fakeAsync(() => {
             const fixture = TestBed.createComponent(NgModelSelect);
@@ -2885,7 +2885,7 @@ describe('McTreeSelect', () => {
     describe('with ngIf', () => {
         let fixture: ComponentFixture<NgIfSelect>;
 
-        beforeEach(async(() => {
+        beforeEach(waitForAsync(() => {
             configureMcTreeSelectTestingModule([NgIfSelect]);
 
             fixture = TestBed.createComponent(NgIfSelect);
@@ -2921,7 +2921,7 @@ describe('McTreeSelect', () => {
     });
 
     describe('with multiple mc-select elements in one view', () => {
-        beforeEach(async(() => configureMcTreeSelectTestingModule([ManySelects])));
+        beforeEach(waitForAsync(() => configureMcTreeSelectTestingModule([ManySelects])));
 
         let fixture: ComponentFixture<ManySelects>;
         let triggers: DebugElement[];
@@ -2968,7 +2968,7 @@ describe('McTreeSelect', () => {
     });
 
     describe('with a sibling component that throws an error', () => {
-        beforeEach(async(() => configureMcTreeSelectTestingModule([
+        beforeEach(waitForAsync(() => configureMcTreeSelectTestingModule([
             SelectWithErrorSibling,
             ThrowsErrorOnInit
         ])));
@@ -2983,7 +2983,7 @@ describe('McTreeSelect', () => {
     });
 
     describe('change events', () => {
-        beforeEach(async(() => configureMcTreeSelectTestingModule([EmptySelect])));
+        beforeEach(waitForAsync(() => configureMcTreeSelectTestingModule([EmptySelect])));
 
         it('should complete the stateChanges stream on destroy', () => {
             const fixture = TestBed.createComponent(EmptySelect);
@@ -3002,7 +3002,7 @@ describe('McTreeSelect', () => {
     });
 
     describe('when initially hidden', () => {
-        beforeEach(async(() => configureMcTreeSelectTestingModule([BasicSelectInitiallyHidden])));
+        beforeEach(waitForAsync(() => configureMcTreeSelectTestingModule([BasicSelectInitiallyHidden])));
 
         it('should set the width of the overlay if the element was hidden initially', fakeAsync(() => {
             const fixture = TestBed.createComponent(BasicSelectInitiallyHidden);
@@ -3026,7 +3026,7 @@ describe('McTreeSelect', () => {
     describe('with no placeholder', () => {
         let fixture: ComponentFixture<BasicSelectNoPlaceholder>;
 
-        beforeEach(async(() => {
+        beforeEach(waitForAsync(() => {
             configureMcTreeSelectTestingModule([BasicSelectNoPlaceholder]);
 
             fixture = TestBed.createComponent(BasicSelectNoPlaceholder);
@@ -3048,7 +3048,7 @@ describe('McTreeSelect', () => {
 
     // todo fix
     xdescribe('with theming', () => {
-        beforeEach(async(() => configureMcTreeSelectTestingModule([BasicSelectWithTheming])));
+        beforeEach(waitForAsync(() => configureMcTreeSelectTestingModule([BasicSelectWithTheming])));
 
         let fixture: ComponentFixture<BasicSelectWithTheming>;
 
@@ -3069,7 +3069,7 @@ describe('McTreeSelect', () => {
     });
 
     describe('when invalid inside a form', () => {
-        beforeEach(async(() => configureMcTreeSelectTestingModule([InvalidSelectInForm])));
+        beforeEach(waitForAsync(() => configureMcTreeSelectTestingModule([InvalidSelectInForm])));
 
         it('should not throw SelectionModel errors in addition to ngModel errors', fakeAsync(() => {
             const fixture = TestBed.createComponent(InvalidSelectInForm);
@@ -3084,7 +3084,7 @@ describe('McTreeSelect', () => {
 
     // todo fix
     xdescribe('with ngModel using compareWith', () => {
-        beforeEach(async(() => configureMcTreeSelectTestingModule([NgModelCompareWithSelect])));
+        beforeEach(waitForAsync(() => configureMcTreeSelectTestingModule([NgModelCompareWithSelect])));
 
         let fixture: ComponentFixture<NgModelCompareWithSelect>;
         let instance: NgModelCompareWithSelect;
@@ -3151,7 +3151,7 @@ describe('McTreeSelect', () => {
 
     // todo fix
     xdescribe(`when the select's value is accessed on initialization`, () => {
-        beforeEach(async(() => configureMcTreeSelectTestingModule([SelectEarlyAccessSibling])));
+        beforeEach(waitForAsync(() => configureMcTreeSelectTestingModule([SelectEarlyAccessSibling])));
 
         it('should not throw when trying to access the selected value on init', fakeAsync(() => {
             expect(() => { TestBed.createComponent(SelectEarlyAccessSibling).detectChanges(); }).not.toThrow();
@@ -3159,7 +3159,7 @@ describe('McTreeSelect', () => {
     });
 
     describe('inside of a form group', () => {
-        beforeEach(async(() => configureMcTreeSelectTestingModule([SelectInsideFormGroup])));
+        beforeEach(waitForAsync(() => configureMcTreeSelectTestingModule([SelectInsideFormGroup])));
 
         let fixture: ComponentFixture<SelectInsideFormGroup>;
         let testComponent: SelectInsideFormGroup;
@@ -3263,7 +3263,7 @@ describe('McTreeSelect', () => {
     });
 
     describe('with custom error behavior', () => {
-        beforeEach(async(() => configureMcTreeSelectTestingModule([CustomErrorBehaviorSelect])));
+        beforeEach(waitForAsync(() => configureMcTreeSelectTestingModule([CustomErrorBehaviorSelect])));
 
         it('should be able to override the error matching behavior via an @Input', fakeAsync(() => {
             const fixture = TestBed.createComponent(CustomErrorBehaviorSelect);
@@ -3286,7 +3286,7 @@ describe('McTreeSelect', () => {
 
     // todo fix
     xdescribe('with preselected array values', () => {
-        beforeEach(async(() => configureMcTreeSelectTestingModule([
+        beforeEach(waitForAsync(() => configureMcTreeSelectTestingModule([
             SingleSelectWithPreselectedArrayValues
         ])));
 
@@ -3303,7 +3303,7 @@ describe('McTreeSelect', () => {
     });
 
     describe('with custom value accessor', () => {
-        beforeEach(async(() => configureMcTreeSelectTestingModule([
+        beforeEach(waitForAsync(() => configureMcTreeSelectTestingModule([
             CompWithCustomSelect,
             CustomSelectAccessor
         ])));
@@ -3321,7 +3321,7 @@ describe('McTreeSelect', () => {
 
     // todo оставлено как тех долг
     xdescribe('with a falsy value', () => {
-        beforeEach(async(() => configureMcTreeSelectTestingModule([FalsyValueSelect])));
+        beforeEach(waitForAsync(() => configureMcTreeSelectTestingModule([FalsyValueSelect])));
 
         it('should be able to programmatically select a falsy option', fakeAsync(() => {
             const fixture = TestBed.createComponent(FalsyValueSelect);
@@ -3340,7 +3340,7 @@ describe('McTreeSelect', () => {
     });
 
     describe('with OnPush', () => {
-        beforeEach(async(() => configureMcTreeSelectTestingModule([
+        beforeEach(waitForAsync(() => configureMcTreeSelectTestingModule([
             BasicSelectOnPush,
             BasicSelectOnPushPreselected
         ])));
@@ -3378,7 +3378,7 @@ describe('McTreeSelect', () => {
     });
 
     describe('with custom trigger', () => {
-        beforeEach(async(() => configureMcTreeSelectTestingModule([SelectWithCustomTrigger])));
+        beforeEach(waitForAsync(() => configureMcTreeSelectTestingModule([SelectWithCustomTrigger])));
 
         it('should allow the user to customize the label', fakeAsync(() => {
             const fixture = TestBed.createComponent(SelectWithCustomTrigger);
@@ -3396,7 +3396,7 @@ describe('McTreeSelect', () => {
     });
 
     describe('when resetting the value by setting null or undefined', () => {
-        beforeEach(async(() => configureMcTreeSelectTestingModule([ResetValuesSelect])));
+        beforeEach(waitForAsync(() => configureMcTreeSelectTestingModule([ResetValuesSelect])));
 
         let fixture: ComponentFixture<ResetValuesSelect>;
         let trigger: HTMLElement;
@@ -3496,7 +3496,7 @@ describe('McTreeSelect', () => {
     describe('without Angular forms', () => {
         let fixture: ComponentFixture<BasicSelectWithoutForms>;
 
-        beforeEach(async(() => {
+        beforeEach(waitForAsync(() => {
             configureMcTreeSelectTestingModule([
                 BasicSelectWithoutForms,
                 BasicSelectWithoutFormsPreselected,
@@ -3699,7 +3699,7 @@ describe('McTreeSelect', () => {
     });
 
     describe('with option centering disabled', () => {
-        beforeEach(async(() => configureMcTreeSelectTestingModule([SelectWithoutOptionCentering])));
+        beforeEach(waitForAsync(() => configureMcTreeSelectTestingModule([SelectWithoutOptionCentering])));
 
         let fixture: ComponentFixture<SelectWithoutOptionCentering>;
         let trigger: HTMLElement;
@@ -3729,7 +3729,7 @@ describe('McTreeSelect', () => {
     });
 
     describe('positioning', () => {
-        beforeEach(async(() => configureMcTreeSelectTestingModule([
+        beforeEach(waitForAsync(() => configureMcTreeSelectTestingModule([
             BasicTreeSelect,
             MultiSelect
         ])));
@@ -4334,7 +4334,7 @@ describe('McTreeSelect', () => {
     });
 
     describe('with multiple selection', () => {
-        beforeEach(async(() => configureMcTreeSelectTestingModule([MultiSelect])));
+        beforeEach(waitForAsync(() => configureMcTreeSelectTestingModule([MultiSelect])));
 
         let fixture: ComponentFixture<MultiSelect>;
         let testInstance: MultiSelect;
