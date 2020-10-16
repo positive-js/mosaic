@@ -22,7 +22,9 @@
         "@angular/common": "{{NG_VERSION}}",
         "@ptsecurity/cdk": "{{VERSION}}",
         "@ptsecurity/mosaic": "{{VERSION}}",
-        "@ptsecurity/mosaic-moment-adapter": "{{VERSION}}",
-        "tslib": "^1.7.1"
+        "@ptsecurity/mosaic-moment-adapter": "{{VERSION}}"
+    },
+    "dependencies": {
+        "tslib": "^2.0.1"
     }
 }

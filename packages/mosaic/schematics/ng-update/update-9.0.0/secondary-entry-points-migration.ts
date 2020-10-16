@@ -20,6 +20,7 @@ const MOSAIC_AC_FILEPATH_REGEX = new RegExp(
 const ENTRY_POINT_MAPPINGS: {[name: string]: string} = require('./mosaic-symbols.json');
 
 
+// tslint:disable-next-line:no-null-keyword
 export class SecondaryEntryPointsMigration extends Migration<null> {
 
     printer = ts.createPrinter();
@@ -77,6 +78,7 @@ export class SecondaryEntryPointsMigration extends Migration<null> {
             const elementName = element.propertyName ? element.propertyName : element.name;
 
             const moduleName = resolveModuleName(elementName, this.typeChecker) ||
+                // tslint:disable-next-line:no-null-keyword
                 ENTRY_POINT_MAPPINGS[elementName.text] || null;
 
             if (!moduleName) {
@@ -125,7 +127,10 @@ export class SecondaryEntryPointsMigration extends Migration<null> {
             return;
         }
 
-        const recorder = this.fileSystem.edit(declaration.moduleSpecifier.getSourceFile().fileName);
+        const filePath = this.fileSystem.resolve(
+            declaration.moduleSpecifier.getSourceFile().fileName);
+
+        const recorder = this.fileSystem.edit(filePath);
 
         // Perform the replacement that switches the primary entry-point import to
         // the individual secondary entry-point imports.
@@ -174,6 +179,7 @@ function resolveModuleName(node: ts.Identifier, typeChecker: ts.TypeChecker) {
     // the symbol, add failure to report that the given symbol can't be found.
     if (!symbol ||
         !(symbol.valueDeclaration || (symbol.declarations && symbol.declarations.length !== 0))) {
+        // tslint:disable-next-line:no-null-keyword
         return null;
     }
 
@@ -188,5 +194,6 @@ function resolveModuleName(node: ts.Identifier, typeChecker: ts.TypeChecker) {
     // elements are analyzed.
     const matches = sourceFile.match(MOSAIC_AC_FILEPATH_REGEX);
 
+    // tslint:disable-next-line:no-null-keyword
     return matches ? matches[1] : null;
 }

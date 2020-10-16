@@ -20,7 +20,9 @@
     "homepage": "https://github.com/positive-js/mosaic#readme",
     "peerDependencies": {
         "@angular/core": "{{NG_VERSION}}",
-        "@angular/common": "{{NG_VERSION}}",
-        "tslib": "^1.7.1"
+        "@angular/common": "{{NG_VERSION}}"
+    },
+    "dependencies": {
+        "tslib": "^2.0.1"
     }
 }
