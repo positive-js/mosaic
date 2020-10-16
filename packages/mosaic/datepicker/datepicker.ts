@@ -147,11 +147,7 @@ export class McDatepicker<D> implements OnDestroy {
     }
 
     set opened(value: boolean) {
-        if (value) {
-            this.open();
-        } else {
-            this.close();
-        }
+        coerceBooleanProperty(value) ? this.open() : this.close();
     }
 
     /** The currently selected date. */
