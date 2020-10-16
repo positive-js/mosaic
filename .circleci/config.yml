@@ -8,8 +8,6 @@ var_2: &cache_key mosaic-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}-9.1.0
 
 var_3: &job_defaults
     working_directory: ~/mosaic
-    context:
-        - docker-hub
     docker:
         - image: *default_docker_image
           auth:
@@ -302,7 +300,9 @@ workflows:
     default_workflow:
         jobs:
             # 1 Group
-            - install
+            - install:
+                  context:
+                      - docker-hub
 
             # 2 Group Validators
             - dependencies_audit:
@@ -312,37 +312,53 @@ workflows:
                       <<: *only_for_maintainers
 
             - validate_licenses:
+                  context:
+                      - docker-hub
                   requires:
                       - install
 
             - linters:
+                  context:
+                      - docker-hub
                   requires:
                       - install
 
             # 3 Group Build All Packages
             - build_packages:
+                  context:
+                      - docker-hub
                   requires:
                       - validate_licenses
                       - dependencies_audit
 
             # 6 Group Unit Tests
             - test_unit_cdk:
+                  context:
+                      - docker-hub
                   requires:
                       - build_packages
 
             - test_unit_mosaic-moment-adapter:
+                  context:
+                      - docker-hub
                   requires:
                       - build_packages
 
             - test_unit_mosaic:
+                  context:
+                      - docker-hub
                   requires:
                       - build_packages
 
             - test_unit_schematics:
+                  context:
+                      - docker-hub
                   requires:
                       - build_packages
 
             - build_mosaic_docs_for_preview:
+                  context:
+                      - docker-hub
                   requires:
                       - test_unit_mosaic
                       - test_unit_cdk
@@ -373,6 +389,8 @@ workflows:
                       <<: *only_master
 
             - deploy-docs-next:
+                  context:
+                      - docker-hub
                   requires:
                       - test_unit_mosaic
                       - test_unit_cdk
@@ -382,6 +400,8 @@ workflows:
                       <<: *only_master
 
             - deploy-docs-v9:
+                  context:
+                      - docker-hub
                   requires:
                       - test_unit_mosaic
                       - test_unit_cdk
@@ -391,6 +411,8 @@ workflows:
                       <<: *only_latest_tag
 
             - deploy-docs-latest:
+                  context:
+                      - docker-hub
                   requires:
                       - test_unit_mosaic
                       - test_unit_cdk
@@ -400,12 +422,16 @@ workflows:
                       <<: *only_latest_tag
 
             - preview_mosaic_docs:
+                  context:
+                      - docker-hub
                   requires:
                       - build_mosaic_docs_for_preview
                   filters:
                       <<: *ignore_release_branches
 
             - cleanup_preview_mosaic_docs:
+                  context:
+                      - docker-hub
                   requires:
                       - install
                   filters:
