@@ -400,13 +400,15 @@ export class McAutocompleteTrigger implements ControlValueAccessor, OnDestroy {
             fromEvent(this.document, 'touchend') as Observable<TouchEvent>
         )
             .pipe(filter((event) => {
+
                 const clickTarget = event.target as HTMLElement;
-                const formField = this.formField ?
-                    this.formField._elementRef.nativeElement : null;
+                const formField = this.formField ? this.formField._elementRef.nativeElement : null;
+                const customOrigin = this.connectedTo ? this.connectedTo.elementRef.nativeElement : null;
 
                 return this.overlayAttached &&
                     clickTarget !== this.elementRef.nativeElement &&
                     (!formField || !formField.contains(clickTarget)) &&
+                    (!customOrigin || !customOrigin.contains(clickTarget)) &&
                     (!!this.overlayRef && !this.overlayRef.overlayElement.contains(clickTarget));
             }));
     }
@@ -640,7 +642,7 @@ export class McAutocompleteTrigger implements ControlValueAccessor, OnDestroy {
         return this.positionStrategy;
     }
 
-    private getConnectedElement(): ElementRef {
+    private getConnectedElement(): ElementRef<HTMLElement> {
         if (this.connectedTo) {
             return this.connectedTo.elementRef;
         }
