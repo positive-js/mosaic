@@ -8,8 +8,13 @@ var_2: &cache_key mosaic-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}-9.1.0
 
 var_3: &job_defaults
     working_directory: ~/mosaic
+    context:
+        - docker-hub
     docker:
         - image: *default_docker_image
+          auth:
+              username: $DOCKER_HUB_USERNAME
+              password: $DOCKER_HUB_PASSWORD
 
 # Restores the cache that could be available for the current Yarn lock file.
 var_4: &restore_cache
