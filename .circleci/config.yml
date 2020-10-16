@@ -306,6 +306,8 @@ workflows:
 
             # 2 Group Validators
             - dependencies_audit:
+                  context:
+                      - docker-hub
                   requires:
                       - install
                   filters:
@@ -370,7 +372,9 @@ workflows:
             # 7 Group
 
             - sonar:
-                  context: SonarCloud
+                  context:
+                      - SonarCloud
+                      - docker-hub
                   requires:
                       - test_unit_cdk
                       - test_unit_mosaic-moment-adapter
@@ -380,6 +384,8 @@ workflows:
                       <<: *only_for_maintainers
 
             - snapshot_publish:
+                  context:
+                      - docker-hub
                   requires:
                       - test_unit_cdk
                       - test_unit_mosaic-moment-adapter
