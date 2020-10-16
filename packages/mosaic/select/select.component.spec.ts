@@ -21,7 +21,7 @@ import {
     ViewChildren
 } from '@angular/core';
 import {
-    async,
+    waitForAsync,
     ComponentFixture,
     fakeAsync,
     flush,
@@ -905,7 +905,7 @@ describe('McSelect', () => {
     });
 
     describe('core', () => {
-        beforeEach(async(() => {
+        beforeEach(waitForAsync(() => {
             configureMcSelectTestingModule([
                 BasicSelect,
                 MultiSelect,
@@ -2237,7 +2237,7 @@ describe('McSelect', () => {
     });
 
     describe('with a search', () => {
-        beforeEach(async(() => configureMcSelectTestingModule([SelectWithSearch])));
+        beforeEach(waitForAsync(() => configureMcSelectTestingModule([SelectWithSearch])));
 
         let fixture: ComponentFixture<SelectWithSearch>;
         let trigger: HTMLElement;
@@ -2320,7 +2320,7 @@ describe('McSelect', () => {
     });
 
     describe('with a selectionChange event handler', () => {
-        beforeEach(async(() => configureMcSelectTestingModule([SelectWithChangeEvent])));
+        beforeEach(waitForAsync(() => configureMcSelectTestingModule([SelectWithChangeEvent])));
 
         let fixture: ComponentFixture<SelectWithChangeEvent>;
         let trigger: HTMLElement;
@@ -2364,7 +2364,7 @@ describe('McSelect', () => {
     });
 
     describe('with ngModel', () => {
-        beforeEach(async(() => configureMcSelectTestingModule([NgModelSelect])));
+        beforeEach(waitForAsync(() => configureMcSelectTestingModule([NgModelSelect])));
 
         it('should disable itself when control is disabled using the property', fakeAsync(() => {
             const fixture = TestBed.createComponent(NgModelSelect);
@@ -2408,7 +2408,7 @@ describe('McSelect', () => {
     });
 
     describe('with ngIf', () => {
-        beforeEach(async(() => configureMcSelectTestingModule([NgIfSelect])));
+        beforeEach(waitForAsync(() => configureMcSelectTestingModule([NgIfSelect])));
 
         it('should handle nesting in an ngIf', fakeAsync(() => {
             const fixture = TestBed.createComponent(NgIfSelect);
@@ -2439,7 +2439,7 @@ describe('McSelect', () => {
     });
 
     describe('with multiple mc-select elements in one view', () => {
-        beforeEach(async(() => configureMcSelectTestingModule([ManySelects])));
+        beforeEach(waitForAsync(() => configureMcSelectTestingModule([ManySelects])));
 
         let fixture: ComponentFixture<ManySelects>;
         let triggers: DebugElement[];
@@ -2484,7 +2484,7 @@ describe('McSelect', () => {
     });
 
     describe('with a sibling component that throws an error', () => {
-        beforeEach(async(() => configureMcSelectTestingModule([
+        beforeEach(waitForAsync(() => configureMcSelectTestingModule([
             SelectWithErrorSibling,
             ThrowsErrorOnInit
         ])));
@@ -2499,7 +2499,7 @@ describe('McSelect', () => {
     });
 
     describe('change events', () => {
-        beforeEach(async(() => configureMcSelectTestingModule([SelectWithPlainTabindex])));
+        beforeEach(waitForAsync(() => configureMcSelectTestingModule([SelectWithPlainTabindex])));
 
         it('should complete the stateChanges stream on destroy', () => {
             const fixture = TestBed.createComponent(SelectWithPlainTabindex);
@@ -2518,7 +2518,7 @@ describe('McSelect', () => {
     });
 
     describe('when initially hidden', () => {
-        beforeEach(async(() => configureMcSelectTestingModule([BasicSelectInitiallyHidden])));
+        beforeEach(waitForAsync(() => configureMcSelectTestingModule([BasicSelectInitiallyHidden])));
 
         it('should set the width of the overlay if the element was hidden initially', fakeAsync(() => {
             const fixture = TestBed.createComponent(BasicSelectInitiallyHidden);
@@ -2539,7 +2539,7 @@ describe('McSelect', () => {
     });
 
     describe('with no placeholder', () => {
-        beforeEach(async(() => configureMcSelectTestingModule([BasicSelectNoPlaceholder])));
+        beforeEach(waitForAsync(() => configureMcSelectTestingModule([BasicSelectNoPlaceholder])));
 
         it('should set the width of the overlay if there is no placeholder', fakeAsync(() => {
             const fixture = TestBed.createComponent(BasicSelectNoPlaceholder);
@@ -2557,7 +2557,7 @@ describe('McSelect', () => {
     });
 
     describe('with theming', () => {
-        beforeEach(async(() => configureMcSelectTestingModule([BasicSelectWithTheming])));
+        beforeEach(waitForAsync(() => configureMcSelectTestingModule([BasicSelectWithTheming])));
 
         let fixture: ComponentFixture<BasicSelectWithTheming>;
 
@@ -2578,7 +2578,7 @@ describe('McSelect', () => {
     });
 
     describe('when invalid inside a form', () => {
-        beforeEach(async(() => configureMcSelectTestingModule([InvalidSelectInForm])));
+        beforeEach(waitForAsync(() => configureMcSelectTestingModule([InvalidSelectInForm])));
 
         it('should not throw SelectionModel errors in addition to ngModel errors', fakeAsync(() => {
             const fixture = TestBed.createComponent(InvalidSelectInForm);
@@ -2592,7 +2592,7 @@ describe('McSelect', () => {
     });
 
     describe('with ngModel using compareWith', () => {
-        beforeEach(async(() => configureMcSelectTestingModule([NgModelCompareWithSelect])));
+        beforeEach(waitForAsync(() => configureMcSelectTestingModule([NgModelCompareWithSelect])));
 
         let fixture: ComponentFixture<NgModelCompareWithSelect>;
         let instance: NgModelCompareWithSelect;
@@ -2658,7 +2658,7 @@ describe('McSelect', () => {
     });
 
     describe(`when the select's value is accessed on initialization`, () => {
-        beforeEach(async(() => configureMcSelectTestingModule([SelectEarlyAccessSibling])));
+        beforeEach(waitForAsync(() => configureMcSelectTestingModule([SelectEarlyAccessSibling])));
 
         it('should not throw when trying to access the selected value on init', fakeAsync(() => {
             expect(() => {
@@ -2668,7 +2668,7 @@ describe('McSelect', () => {
     });
 
     describe('inside of a form group', () => {
-        beforeEach(async(() => configureMcSelectTestingModule([SelectInsideFormGroup])));
+        beforeEach(waitForAsync(() => configureMcSelectTestingModule([SelectInsideFormGroup])));
 
         let fixture: ComponentFixture<SelectInsideFormGroup>;
         let testComponent: SelectInsideFormGroup;
@@ -2760,7 +2760,7 @@ describe('McSelect', () => {
     });
 
     describe('with custom error behavior', () => {
-        beforeEach(async(() => configureMcSelectTestingModule([CustomErrorBehaviorSelect])));
+        beforeEach(waitForAsync(() => configureMcSelectTestingModule([CustomErrorBehaviorSelect])));
 
         it('should be able to override the error matching behavior via an @Input', fakeAsync(() => {
             const fixture = TestBed.createComponent(CustomErrorBehaviorSelect);
@@ -2781,7 +2781,7 @@ describe('McSelect', () => {
     });
 
     describe('with preselected array values', () => {
-        beforeEach(async(() => configureMcSelectTestingModule([
+        beforeEach(waitForAsync(() => configureMcSelectTestingModule([
             SingleSelectWithPreselectedArrayValues
         ])));
 
@@ -2798,7 +2798,7 @@ describe('McSelect', () => {
     });
 
     describe('with custom value accessor', () => {
-        beforeEach(async(() => configureMcSelectTestingModule([
+        beforeEach(waitForAsync(() => configureMcSelectTestingModule([
             CompWithCustomSelect,
             CustomSelectAccessor
         ])));
@@ -2815,7 +2815,7 @@ describe('McSelect', () => {
     });
 
     describe('with a falsy value', () => {
-        beforeEach(async(() => configureMcSelectTestingModule([FalsyValueSelect])));
+        beforeEach(waitForAsync(() => configureMcSelectTestingModule([FalsyValueSelect])));
 
         it('should be able to programmatically select a falsy option', fakeAsync(() => {
             const fixture = TestBed.createComponent(FalsyValueSelect);
@@ -2834,7 +2834,7 @@ describe('McSelect', () => {
     });
 
     describe('with OnPush', () => {
-        beforeEach(async(() => configureMcSelectTestingModule([
+        beforeEach(waitForAsync(() => configureMcSelectTestingModule([
             BasicSelectOnPush,
             BasicSelectOnPushPreselected
         ])));
@@ -2870,7 +2870,7 @@ describe('McSelect', () => {
     });
 
     describe('with custom trigger', () => {
-        beforeEach(async(() => configureMcSelectTestingModule([SelectWithCustomTrigger])));
+        beforeEach(waitForAsync(() => configureMcSelectTestingModule([SelectWithCustomTrigger])));
 
         xit('should allow the user to customize the label', fakeAsync(() => {
             const fixture = TestBed.createComponent(SelectWithCustomTrigger);
@@ -2887,7 +2887,7 @@ describe('McSelect', () => {
     });
 
     describe('when reseting the value by setting null or undefined', () => {
-        beforeEach(async(() => configureMcSelectTestingModule([ResetValuesSelect])));
+        beforeEach(waitForAsync(() => configureMcSelectTestingModule([ResetValuesSelect])));
 
         let fixture: ComponentFixture<ResetValuesSelect>;
         let trigger: HTMLElement;
@@ -2978,7 +2978,7 @@ describe('McSelect', () => {
     });
 
     describe('without Angular forms', () => {
-        beforeEach(async(() => configureMcSelectTestingModule([
+        beforeEach(waitForAsync(() => configureMcSelectTestingModule([
             BasicSelectWithoutForms,
             BasicSelectWithoutFormsPreselected,
             BasicSelectWithoutFormsMultiple
@@ -3178,7 +3178,7 @@ describe('McSelect', () => {
     });
 
     describe('with option centering disabled', () => {
-        beforeEach(async(() => configureMcSelectTestingModule([
+        beforeEach(waitForAsync(() => configureMcSelectTestingModule([
             SelectWithoutOptionCentering
         ])));
 
@@ -3209,7 +3209,7 @@ describe('McSelect', () => {
     });
 
     describe('positioning', () => {
-        beforeEach(async(() => configureMcSelectTestingModule([
+        beforeEach(waitForAsync(() => configureMcSelectTestingModule([
             BasicSelect,
             MultiSelect,
             SelectWithGroups
@@ -3938,7 +3938,7 @@ describe('McSelect', () => {
     });
 
     describe('with multiple selection', () => {
-        beforeEach(async(() => configureMcSelectTestingModule([MultiSelect])));
+        beforeEach(waitForAsync(() => configureMcSelectTestingModule([MultiSelect])));
 
         let fixture: ComponentFixture<MultiSelect>;
         let testInstance: MultiSelect;

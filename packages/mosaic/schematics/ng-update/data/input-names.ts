@@ -9,7 +9,7 @@ export const inputNames: VersionChanges<InputNameUpgradeData> = {
                 {
                     replace: 'min-time',
                     replaceWith: 'min',
-                    whitelist:
+                    limitedTo:
                         {
                             attributes: ['mcTimepicker']
                         }
@@ -17,7 +17,7 @@ export const inputNames: VersionChanges<InputNameUpgradeData> = {
                 {
                     replace: 'max-time',
                     replaceWith: 'max',
-                    whitelist:
+                    limitedTo:
                         {
                             attributes: ['mcTimepicker']
                         }
@@ -25,7 +25,7 @@ export const inputNames: VersionChanges<InputNameUpgradeData> = {
                 {
                     replace: 'time-format',
                     replaceWith: 'format',
-                    whitelist:
+                    limitedTo:
                         {
                             attributes: ['mcTimepicker']
                         }

@@ -1,6 +1,6 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, EventEmitter, NgModule } from '@angular/core';
-import { async, ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 
 import { McModalControlService } from './modal-control.service';
@@ -19,7 +19,7 @@ describe('McModal', () => {
     let overlayContainer: OverlayContainer;
     let overlayContainerElement: HTMLElement;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [ ModalTestModule ]
         });

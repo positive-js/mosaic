@@ -3,7 +3,7 @@ import { TempScopedNodeJsSyncHost } from '@angular-devkit/core/node/testing';
 import * as virtualFs from '@angular-devkit/core/src/virtual-fs/host';
 import { HostTree, Tree } from '@angular-devkit/schematics';
 import { SchematicTestRunner, UnitTestTree } from '@angular-devkit/schematics/testing';
-import { readFileSync, rmdirSync } from 'fs';
+import { readFileSync, rmdirSync } from 'fs-extra';
 import { basename, extname } from 'path';
 
 
@@ -40,7 +40,7 @@ export async function createTestApp(
 
 export async function createFileSystemTestApp(runner: SchematicTestRunner): Promise<ITestCaseSetup> {
     const tempFileSystemHost = new TempScopedNodeJsSyncHost();
-    const hostTree = new HostTree(tempFileSystemHost);
+    const hostTree = new HostTree(tempFileSystemHost as any);
 
     const appTree: UnitTestTree = await createTestApp(
         runner,
@@ -122,7 +122,7 @@ export async function createTestCaseSetup(
     // files won't be part of the program and cannot be migrated.
     testAppTsconfig.include.push('src/**/*.ts');
 
-    // tslint:disable-next-line:no-magic-numbers
+    // tslint:disable-next-line:no-magic-numbers no-null-keyword
     writeFile(testAppTsconfigPath, JSON.stringify(testAppTsconfig, null, 4));
 
     // tslint:disable-next-line:only-arrow-functions no-function-expression

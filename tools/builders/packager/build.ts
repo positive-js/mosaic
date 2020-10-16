@@ -26,6 +26,7 @@ export async function packager(options: IPackagerOptions, context: BuilderContex
     let ngPackagrBuilderOptions;
 
     try {
+        // tslint:disable-next-line:deprecation
         ngPackagrBuilderOptions = ((await context.getTargetOptions(target)) as unknown) as NgPackagrBuilderOptions;
 
         if (ngPackagrBuilderOptions.project === undefined) {

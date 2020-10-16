@@ -1,6 +1,6 @@
 // tslint:disable: no-empty
 import { Component, DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { McTag, McTagsModule } from './index';
@@ -12,7 +12,7 @@ describe('Tag Remove', () => {
     let chipDebugElement: DebugElement;
     let chipNativeElement: HTMLElement;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [McTagsModule],
             declarations: [TestTag]
@@ -21,7 +21,7 @@ describe('Tag Remove', () => {
         TestBed.compileComponents();
     }));
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         fixture = TestBed.createComponent(TestTag);
         testTag = fixture.debugElement.componentInstance;
         fixture.detectChanges();

@@ -2,7 +2,7 @@
 // tslint:disable:no-empty
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { LEFT_ARROW } from '@ptsecurity/cdk/keycodes';
@@ -81,7 +81,7 @@ describe('McTabGroup', () => {
         }));
 
         // Note: needs to be `async` in order to fail when we expect it to.
-        it('should set to correct tab on fast change', async(() => {
+        it('should set to correct tab on fast change', waitForAsync(() => {
             const component = fixture.componentInstance;
             component.selectedIndex = 0;
             fixture.detectChanges();

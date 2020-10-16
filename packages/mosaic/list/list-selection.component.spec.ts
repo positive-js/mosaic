@@ -4,7 +4,7 @@
 // tslint:disable:no-empty
 
 import { Component, DebugElement, ChangeDetectionStrategy, QueryList, ViewChildren } from '@angular/core';
-import { async, ComponentFixture, fakeAsync, TestBed, tick, flush } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, flush, waitForAsync } from '@angular/core/testing';
 import { FormControl, FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { DOWN_ARROW, SPACE, ENTER, UP_ARROW, HOME, END } from '@ptsecurity/cdk/keycodes';
@@ -29,7 +29,7 @@ describe('McListSelection without forms', () => {
         let listOptions: DebugElement[];
         let selectionList: DebugElement;
 
-        beforeEach(async(() => {
+        beforeEach(waitForAsync(() => {
             TestBed.configureTestingModule({
                 imports: [McListModule],
                 declarations: [
@@ -44,7 +44,7 @@ describe('McListSelection without forms', () => {
         }));
 
 
-        beforeEach(async(() => {
+        beforeEach(waitForAsync(() => {
             fixture = TestBed.createComponent(SelectionListWithListOptions);
             fixture.detectChanges();
 
@@ -378,7 +378,7 @@ describe('McListSelection without forms', () => {
         let listItemEl: DebugElement;
         let selectionList: DebugElement;
 
-        beforeEach(async(() => {
+        beforeEach(waitForAsync(() => {
             TestBed.configureTestingModule({
                 imports: [McListModule],
                 declarations: [SelectionListWithSelectedOption]
@@ -387,7 +387,7 @@ describe('McListSelection without forms', () => {
             TestBed.compileComponents();
         }));
 
-        beforeEach(async(() => {
+        beforeEach(waitForAsync(() => {
             fixture = TestBed.createComponent(SelectionListWithSelectedOption);
             listItemEl = fixture.debugElement.query(By.directive(McListOption));
             selectionList = fixture.debugElement.query(By.directive(McListSelection));
@@ -403,7 +403,7 @@ describe('McListSelection without forms', () => {
 
     describe('with tabindex', () => {
 
-        beforeEach(async(() => {
+        beforeEach(waitForAsync(() => {
             TestBed.configureTestingModule({
                 imports: [McListModule],
                 declarations: [
@@ -444,7 +444,7 @@ describe('McListSelection without forms', () => {
         let listOption: DebugElement;
         let listItemEl: DebugElement;
 
-        beforeEach(async(() => {
+        beforeEach(waitForAsync(() => {
             TestBed.configureTestingModule({
                 imports: [McListModule],
                 declarations: [
@@ -458,7 +458,7 @@ describe('McListSelection without forms', () => {
             TestBed.compileComponents();
         }));
 
-        beforeEach(async(() => {
+        beforeEach(waitForAsync(() => {
             fixture = TestBed.createComponent(SelectionListWithOnlyOneOption);
             listOption = fixture.debugElement.query(By.directive(McListOption));
             listItemEl = fixture.debugElement.query(By.css('.mc-list-option'));
@@ -482,7 +482,7 @@ describe('McListSelection without forms', () => {
     describe('with option disabled', () => {
         let fixture: ComponentFixture<SelectionListWithDisabledOption>;
 
-        beforeEach(async(() => {
+        beforeEach(waitForAsync(() => {
             TestBed.configureTestingModule({
                 imports: [McListModule],
                 declarations: [SelectionListWithDisabledOption]
@@ -491,7 +491,7 @@ describe('McListSelection without forms', () => {
             TestBed.compileComponents();
         }));
 
-        beforeEach(async(() => {
+        beforeEach(waitForAsync(() => {
             fixture = TestBed.createComponent(SelectionListWithDisabledOption);
 
             fixture.debugElement.query(By.directive(McListOption));
@@ -505,7 +505,7 @@ describe('McListSelection without forms', () => {
         let listOption: DebugElement[];
         let selectionList: DebugElement;
 
-        beforeEach(async(() => {
+        beforeEach(waitForAsync(() => {
             TestBed.configureTestingModule({
                 imports: [McListModule],
                 declarations: [
@@ -519,7 +519,7 @@ describe('McListSelection without forms', () => {
             TestBed.compileComponents();
         }));
 
-        beforeEach(async(() => {
+        beforeEach(waitForAsync(() => {
             fixture = TestBed.createComponent(SelectionListWithListDisabled);
             listOption = fixture.debugElement.queryAll(By.directive(McListOption));
             selectionList = fixture.debugElement.query(By.directive(McListSelection));
@@ -545,7 +545,7 @@ describe('McListSelection without forms', () => {
     describe('with checkbox position after', () => {
         let fixture: ComponentFixture<SelectionListWithCheckboxPositionAfter>;
 
-        beforeEach(async(() => {
+        beforeEach(waitForAsync(() => {
             TestBed.configureTestingModule({
                 imports: [McListModule],
                 declarations: [
@@ -559,7 +559,7 @@ describe('McListSelection without forms', () => {
             TestBed.compileComponents();
         }));
 
-        beforeEach(async(() => {
+        beforeEach(waitForAsync(() => {
             fixture = TestBed.createComponent(SelectionListWithCheckboxPositionAfter);
             fixture.detectChanges();
         }));
@@ -573,7 +573,7 @@ describe('McListSelection without forms', () => {
 
 xdescribe('McListSelection with forms', () => {
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [McListModule, FormsModule, ReactiveFormsModule],
             declarations: [

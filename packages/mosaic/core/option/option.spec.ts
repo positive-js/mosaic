@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { async, TestBed } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { McOption, McOptionModule } from './index';
@@ -12,7 +12,7 @@ class OptionWithDisable {
 
 describe('McOption component', () => {
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [McOptionModule],
             declarations: [OptionWithDisable]

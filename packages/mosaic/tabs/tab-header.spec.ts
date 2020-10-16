@@ -5,7 +5,7 @@ import { ScrollingModule, ViewportRuler } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import {
-    async,
+    waitForAsync,
     ComponentFixture,
     discardPeriodicTasks,
     fakeAsync,
@@ -36,7 +36,7 @@ describe('McTabHeader', () => {
     let fixture: ComponentFixture<SimpleTabHeaderApp>;
     let appComponent: SimpleTabHeaderApp;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         change = new Subject();
         dir = 'ltr';
         TestBed.configureTestingModule({
