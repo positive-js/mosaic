@@ -55,8 +55,6 @@ export interface McDropdownDefaultOptions {
 
     /** Whether the dropdown has a backdrop. */
     hasBackdrop?: boolean;
-
-    closeOnOutsideClick?: boolean;
 }
 
 /** Injection token to be used to override the default options for `mc-dropdown`. */
@@ -152,14 +150,6 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
     set hasBackdrop(value: boolean | undefined) {
         this._hasBackdrop = coerceBooleanProperty(value);
     }
-
-    /** Close menu when an outside click is detected */
-    @Input()
-    get closeOnOutsideClick(): boolean | undefined { return this._closeOnOutsideClick; }
-    set closeOnOutsideClick(value: boolean | undefined) {
-        this._closeOnOutsideClick = coerceBooleanProperty(value);
-    }
-    private _closeOnOutsideClick: boolean | undefined = this._defaultOptions.closeOnOutsideClick;
 
     /**
      * This method takes classes set on the host mc-dropdown element and applies them on the

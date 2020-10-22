@@ -29,7 +29,6 @@ export interface McDropdownPanel<T = any> {
     lazyContent?: McDropdownContent;
     backdropClass?: string;
     hasBackdrop?: boolean;
-    closeOnOutsideClick?: boolean;
     focusFirstItem(origin?: FocusOrigin): void;
     resetActiveItem(): void;
     setPositionClasses?(x: DropdownPositionX, y: DropdownPositionY): void;

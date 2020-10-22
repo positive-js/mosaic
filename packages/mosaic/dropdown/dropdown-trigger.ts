@@ -136,8 +136,6 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
 
     private hoverSubscription = Subscription.EMPTY;
 
-    private outsidePointerEventsSubscription = Subscription.EMPTY;
-
     constructor(
         private _overlay: Overlay,
         private _element: ElementRef<HTMLElement>,
@@ -193,15 +191,6 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
 
         const overlayRef = this.createOverlay();
         const overlayConfig = overlayRef.getConfig();
-
-        // Listen for outside click and close the menu when it occurs
-        if (this.dropdown.closeOnOutsideClick) {
-            this.outsidePointerEventsSubscription = overlayRef.outsidePointerEvents().subscribe(() => {
-                if (this.dropdownOpened) {
-                    this.close();
-                }
-            });
-        }
 
         this.setPosition(overlayConfig.positionStrategy as FlexibleConnectedPositionStrategy);
         overlayConfig.hasBackdrop = this.dropdown.hasBackdrop == null ? !this.triggersNestedDropdown() :
@@ -488,7 +477,6 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
     private cleanUpSubscriptions(): void {
         this.closeSubscription.unsubscribe();
         this.hoverSubscription.unsubscribe();
-        this.outsidePointerEventsSubscription.unsubscribe();
     }
 
     /** Returns a stream that emits whenever an action that should close the dropdown occurs. */
