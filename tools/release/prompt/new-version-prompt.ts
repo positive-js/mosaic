@@ -1,4 +1,4 @@
-import { ChoiceType, prompt, Question } from 'inquirer';
+import { ListChoiceOptions, prompt, Separator, SeparatorOptions } from 'inquirer';
 
 import { createNewVersion, ReleaseType } from '../version-name/create-version';
 import { parseVersionName, Version } from '../version-name/parse-version';
@@ -19,7 +19,8 @@ interface IVersionPromptAnswers {
  */
 export async function promptForNewVersion(currentVersion: Version): Promise<Version> {
     const allowedPrereleaseChoices = determineAllowedPrereleaseLabels(currentVersion);
-    const versionChoices: ChoiceType[] = [];
+    const versionChoices: (ListChoiceOptions | SeparatorOptions)[] = [];
+    const currentVersionName = currentVersion.format();
 
     if (currentVersion.prereleaseLabel) {
         versionChoices.push(
@@ -32,7 +33,6 @@ export async function promptForNewVersion(currentVersion: Version): Promise<Vers
         if (allowedPrereleaseChoices) {
             versionChoices.push({
                 value: 'new-prerelease-label',
-                // @ts-ignore
                 name: `New pre-release (${allowedPrereleaseChoices.map((c) => c.value).join(', ')})`
             });
         }
@@ -42,7 +42,11 @@ export async function promptForNewVersion(currentVersion: Version): Promise<Vers
             createVersionChoice(currentVersion, 'minor', 'Minor release'),
             createVersionChoice(currentVersion, 'patch', 'Patch release'));
     }
-    const questions: Question[] = [{
+
+    versionChoices.push(new Separator(),
+        {name: `Use current version (${currentVersionName})`, value: currentVersionName});
+
+    const answers = await prompt<IVersionPromptAnswers>([{
         type: 'list',
         name: 'proposedVersion',
         message: `What's the type of the new release?`,
@@ -63,16 +67,11 @@ export async function promptForNewVersion(currentVersion: Version): Promise<Vers
             // Only prompt for selecting a pre-release label if the current release is a pre-release,
             // or the existing pre-release label should be changed.
             isPrerelease || proposedVersion === 'new-prerelease-label'
-    }];
+    }]);
 
-    const answers = await prompt<IVersionPromptAnswers>(questions);
-
-    // In case the new version just changes the pre-release label, we base the new version
-    // on top of the current version. Otherwise, we use the proposed version from the
-    // prompt answers.
     const newVersion = answers.proposedVersion === 'new-prerelease-label' ?
         currentVersion.clone() :
-        parseVersionName(answers.proposedVersion);
+        parseVersionName(answers.proposedVersion)!;
 
     if (answers.prereleaseLabel) {
         newVersion.prereleaseLabel = answers.prereleaseLabel;

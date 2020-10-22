@@ -1,5 +1,3 @@
-import { ChoiceType } from 'inquirer';
-
 import { Version } from '../version-name/parse-version';
 
 
@@ -16,7 +14,7 @@ const RC_CHOICE = {value: 'rc', name: 'Release candidate'};
  * Determines all allowed pre-release labels for a given version. For example, a
  * release-candidate version cannot be changed to an alpha or beta pre-release.
  */
-export function determineAllowedPrereleaseLabels(version: Version): ChoiceType[] {
+export function determineAllowedPrereleaseLabels(version: Version) {
     const {prereleaseLabel} = version;
 
     if (!prereleaseLabel) {
