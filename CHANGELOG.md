@@ -1,3 +1,22 @@
+# 10.0.0 "Moscatel" (2020-10-22)
+
+### Mosaic
+
+ * bug fix  **autocomplete:** don't close when clicking inside custom origin (#UIM-515) ([75fbefc](https://github.com/positive-js/mosaic/commit/75fbefc92ad4026f3b57b3b3114c2eecf31976cb)), closes [#UIM-515](https://github.com/positive-js/mosaic/issues/UIM-515)
+ * bug fix  **datepicker:** add coercion for opened input (#UIM-516) ([b0a8e84](https://github.com/positive-js/mosaic/commit/b0a8e84f528901ed9cb682482362eea32e528f8b)), closes [#UIM-516](https://github.com/positive-js/mosaic/issues/UIM-516)
+ * bug fix  **select:** fixing select dropdown position ([#460](https://github.com/positive-js/mosaic/issues/460)) ([5cdef10](https://github.com/positive-js/mosaic/commit/5cdef10c2dafa8e2bced474e2b56c0ceb974ad7b))
+ * bug fix  **tags:** tags are incorrectly added to mc-tag-list with autocomplete #UIM-486 ([#501](https://github.com/positive-js/mosaic/issues/501)) ([468b6d3](https://github.com/positive-js/mosaic/commit/468b6d3979fce46ae72b448280ac40fe10019825)), closes [#UIM-486](https://github.com/positive-js/mosaic/issues/UIM-486)
+ * bug fix  **timepicker:** fix parseValidator (#UIM-464) ([#478](https://github.com/positive-js/mosaic/issues/478)) ([af8951f](https://github.com/positive-js/mosaic/commit/af8951f329b9b3b25a3efd900e0f9d1d458ce61f)), closes [#UIM-464](https://github.com/positive-js/mosaic/issues/UIM-464)
+ * bug fix  **tooltip:** mcTooltipClass – for specify custom css class #UIM-460 ([#473](https://github.com/positive-js/mosaic/issues/473)) ([3942aeb](https://github.com/positive-js/mosaic/commit/3942aeb925a278eca68290c1386e26018a930646)), closes [#UIM-460](https://github.com/positive-js/mosaic/issues/UIM-460)
+ * bug fix  **tooltip:** Title does not react on value change (#UIM-482) ([#495](https://github.com/positive-js/mosaic/issues/495)) ([a5e64ff](https://github.com/positive-js/mosaic/commit/a5e64ffb54aea3e8136fedc18ecb2d4bc63d939f)), closes [#UIM-482](https://github.com/positive-js/mosaic/issues/UIM-482)
+ * bug fix  package json scripts mistype ([#483](https://github.com/positive-js/mosaic/issues/483)) ([2e5942d](https://github.com/positive-js/mosaic/commit/2e5942d845da416bbff55df62d9863f74af4ab12))
+ * bug fix  package.json & yarn.lock to reduce vulnerabilities ([#477](https://github.com/positive-js/mosaic/issues/477)) ([ff2432a](https://github.com/positive-js/mosaic/commit/ff2432ad4c40e6920771a117054e7061e05ee729))
+ * bug fix  package.json & yarn.lock to reduce vulnerabilities ([#489](https://github.com/positive-js/mosaic/issues/489)) ([8cae6e5](https://github.com/positive-js/mosaic/commit/8cae6e5b79132919442d72a92ad1f47fc02a4e9e))
+ * bug fix  package.json & yarn.lock to reduce vulnerabilities ([#492](https://github.com/positive-js/mosaic/issues/492)) ([a948975](https://github.com/positive-js/mosaic/commit/a9489752806d330e0a12bc058f8c5f11c6b801a3))
+ * bug fix  package.json, yarn.lock & .snyk to reduce vulnerabilities ([#508](https://github.com/positive-js/mosaic/issues/508)) ([cb3702e](https://github.com/positive-js/mosaic/commit/cb3702e7d7c5e1d5be2ce19d42da7a544b72b667))
+ * feature  Authenticated pulls to docker ([#512](https://github.com/positive-js/mosaic/issues/512)) ([a633db7](https://github.com/positive-js/mosaic/commit/a633db7077a86b2525498babe7611b54b2c562a3))
+ * feature  update to Angular 10 ([#513](https://github.com/positive-js/mosaic/issues/513)) ([c622210](https://github.com/positive-js/mosaic/commit/c62221035580ee7fb24d2fa92339f991ea9159c8))
+
 ## 9.1.5 "Cantankerous Markup" (2020-10-05)
 
 ### Mosaic
