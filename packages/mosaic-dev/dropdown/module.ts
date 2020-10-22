@@ -16,6 +16,16 @@ import { McLinkModule } from '@ptsecurity/mosaic/link';
 })
 export class DemoComponent {
     someValue = 'Lazy Value';
+
+    isDropdownOpen: boolean = false;
+
+    dropdownOpened() {
+        this.isDropdownOpen = true;
+    }
+
+    dropdownClosed() {
+        this.isDropdownOpen = false;
+    }
 }
 
 @NgModule({
