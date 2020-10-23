@@ -496,14 +496,16 @@ export class McTooltip implements OnInit, OnDestroy {
         }
 
         if (this.mcPlacement === 'right' || this.mcPlacement === 'left') {
-            const pos =
-                (this.overlayRef.overlayElement.clientHeight -
-                    this.hostView.element.nativeElement.clientHeight) / 2; // tslint:disable-line
-            const currentContainer = this.overlayRef.overlayElement.style.top || '0px';
+            const halfDelimeter = 2;
+            const currentContainerPositionTop = parseInt(this.hostView.element.nativeElement.offsetTop, 10);
+            const currentContainerHeight = this.hostView.element.nativeElement.clientHeight;
+            const tooltipHeight = this.overlayRef.overlayElement.clientHeight;
             this.overlayRef.overlayElement.style.top =
-                `${parseInt(currentContainer.split('px')[0], 10) + pos - 1}px`;
-            // TODO: обновлять положение стрелки\указателя\"дятла"
+                `${
+                    (currentContainerPositionTop + (currentContainerHeight / halfDelimeter)) - tooltipHeight / halfDelimeter
+                }px`;
         }
+        // TODO: обновлять положение стрелки\указателя\"дятла"
     }
 
     // tslint:disable-next-line:no-any
