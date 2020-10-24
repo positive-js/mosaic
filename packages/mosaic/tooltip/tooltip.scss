@@ -70,13 +70,11 @@ $tooltip-distance: $tooltip-arrow-width + 4px;
 
 .mc-tooltip_placement-right .mc-tooltip-arrow {
     left: $tooltip-distance - $tooltip-arrow-width;
-    top: 16px;
     margin-top: -$tooltip-arrow-width;
 }
 
 .mc-tooltip_placement-left .mc-tooltip-arrow {
     right: $tooltip-distance - $tooltip-arrow-width;
-    top: 16px;
     margin-top: -$tooltip-arrow-width;
 }
 

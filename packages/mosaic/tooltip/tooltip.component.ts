@@ -498,14 +498,19 @@ export class McTooltip implements OnInit, OnDestroy {
         if (this.mcPlacement === 'right' || this.mcPlacement === 'left') {
             const halfDelimeter = 2;
             const currentContainerPositionTop = parseInt(this.hostView.element.nativeElement.offsetTop, 10);
-            const currentContainerHeight = this.hostView.element.nativeElement.clientHeight;
-            const tooltipHeight = this.overlayRef.overlayElement.clientHeight;
+            const currentContainerHeightHalfed = this.hostView.element.nativeElement.clientHeight / halfDelimeter;
+            const tooltipHeightHalfed = this.overlayRef.overlayElement.clientHeight / halfDelimeter;
+            const arrowElemRef = this.getTooltipArrowElem();
+
             this.overlayRef.overlayElement.style.top =
                 `${
-                    (currentContainerPositionTop + (currentContainerHeight / halfDelimeter)) - tooltipHeight / halfDelimeter
+                    (currentContainerPositionTop + currentContainerHeightHalfed) - tooltipHeightHalfed
                 }px`;
+
+            if (arrowElemRef) {
+                arrowElemRef.setAttribute('style', `top: ${tooltipHeightHalfed}px`);
+            }
         }
-        // TODO: обновлять положение стрелки\указателя\"дятла"
     }
 
     // tslint:disable-next-line:no-any
@@ -707,5 +712,11 @@ export class McTooltip implements OnInit, OnDestroy {
         }
 
         return { x: newX, y: newY };
+    }
+
+    private getTooltipArrowElem() {
+        const arrowClassName = 'mc-tooltip-arrow';
+
+        return this.overlayRef?.overlayElement.getElementsByClassName(arrowClassName)[0];
     }
 }
