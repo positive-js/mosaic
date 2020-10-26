@@ -1,3 +1,9 @@
+## 10.0.1 "Warring Zade" (2020-10-26)
+
+### Mosaic
+
+ * bug fix  **build:** build for typescript 4 (#UIM-520) ([#515](https://github.com/positive-js/mosaic/issues/515)) ([dc95a1a](https://github.com/positive-js/mosaic/commit/dc95a1a1b2b2b506cbac6dfa9097baa90453fc30)), closes [#UIM-520](https://github.com/positive-js/mosaic/issues/UIM-520)
+
 # 10.0.0 "Moscatel" (2020-10-22)
 
 ### Mosaic
