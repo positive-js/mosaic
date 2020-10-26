@@ -7,13 +7,16 @@ import { CdkTreeNodePadding } from '@ptsecurity/cdk/tree';
     providers: [{ provide: CdkTreeNodePadding, useExisting: McTreeNodePadding }]
 })
 export class McTreeNodePadding<T> extends CdkTreeNodePadding<T> implements OnInit {
-    @Input('mcTreeNodePadding') level: number;
 
-    @Input('mcTreeNodePaddingIndent') indent: number;
+    @Input('mcTreeNodePadding')
+    get level(): number { return this._level; }
+    set level(value: number) { this.setLevelInput(value); }
+
+    @Input('mcTreeNodePaddingIndent')
+    get indent(): number | string { return this._indent; }
+    set indent(indent: number | string) { this.setIndentInput(indent); }
 
     baseLeftPadding: number = 12;
-    /* tslint:disable-next-line:naming-convention orthodox-getter-and-setter*/
-    _indent: number = 20;
 
     withIcon: boolean;
     iconWidth: number = 20;
