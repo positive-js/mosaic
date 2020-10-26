@@ -12,10 +12,13 @@ export interface HasTabIndex {
 export type HasTabIndexCtor = Constructor<HasTabIndex>;
 
 // Mixin to augment a directive with a `tabIndex` property.
-export function mixinTabIndex<T extends AbstractConstructor<CanDisable>>(base: T, defaultTabIndex = 0): HasTabIndexCtor & T {
+export function mixinTabIndex<T extends AbstractConstructor<CanDisable>>(base: T, defaultTabIndex = 0):
+    HasTabIndexCtor & T {
     // Note: We cast `base` to `unknown` and then `Constructor`. It could be an abstract class,
     // but given we `extend` it from another class, we can assume a constructor being accessible.
+    // tslint:disable-next-line:naming-convention
     abstract class Mixin extends (base as unknown as Constructor<CanDisable>) {
+        // tslint:disable-next-line:orthodox-getter-and-setter
         private _tabIndex: number = defaultTabIndex;
         defaultTabIndex = defaultTabIndex;
 
