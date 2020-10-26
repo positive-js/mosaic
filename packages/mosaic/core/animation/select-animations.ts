@@ -59,14 +59,6 @@ export const mcSelectAnimations: {
 };
 
 
-/**
- * @deprecated
- * @breaking-change 7.0.0
- */
 export const transformPanel = mcSelectAnimations.transformPanel;
 
-/**
- * @deprecated
- * @breaking-change 7.0.0
- */
 export const fadeInContent = mcSelectAnimations.fadeInContent;
