@@ -1,10 +1,14 @@
 import { Directionality } from '@angular/cdk/bidi';
+import { coerceNumberProperty } from '@angular/cdk/coercion';
 import { Directive, ElementRef, Input, OnDestroy, Optional, Renderer2 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { CdkTree, CdkTreeNode } from './tree';
 
+
+/** Regex used to split a string on its CSS units. */
+const cssUnitPattern = /([A-Za-z%]+)$/;
 
 /**
  * Indent for the children tree dataNodes.
@@ -14,34 +18,24 @@ import { CdkTree, CdkTreeNode } from './tree';
     selector: '[cdkTreeNodePadding]'
 })
 export class CdkTreeNodePadding<T> implements OnDestroy {
+
     /** The level of depth of the tree node. The padding will be `level * indent` pixels. */
     @Input('cdkTreeNodePadding')
-    get level(): number {
-        return this._level;
-    }
+    get level(): number { return this._level; }
+    set level(value: number) { this.setLevelInput(value); }
 
-    set level(value: number) {
-        this._level = value;
-
-        this.setPadding();
-    }
-
-    /* tslint:disable-next-line:naming-convention */
-    protected _level: number;
+    /* tslint:disable-next-line:naming-convention orthodox-getter-and-setter */
+    _level: number;
 
     @Input('cdkTreeNodePaddingIndent')
-    get indent(): number {
-        return this._indent;
-    }
+    get indent(): number | string { return this._indent; }
+    set indent(indent: number | string) { this.setIndentInput(indent); }
 
-    set indent(value: number) {
-        this._indent = value;
+    /* tslint:disable-next-line:naming-convention orthodox-getter-and-setter */
+    _indent: number = 20;
 
-        this.setPadding();
-    }
-
-    /* tslint:disable-next-line:naming-convention */
-    protected _indent: number;
+    /** CSS units used for the indentation value. */
+    indentUnits = 'px';
 
     private destroyed = new Subject<void>();
 
@@ -63,6 +57,42 @@ export class CdkTreeNodePadding<T> implements OnDestroy {
     ngOnDestroy() {
         this.destroyed.next();
         this.destroyed.complete();
+    }
+
+    /**
+     * This has been extracted to a util because of TS 4 and VE.
+     * View Engine doesn't support property rename inheritance.
+     * TS 4.0 doesn't allow properties to override accessors or vice-versa.
+     * @docs-private
+     */
+    // tslint:disable-next-line:naming-convention
+    protected setLevelInput(value: number) {
+        // Set to null as the fallback value so that _setPadding can fall back to the node level if the
+        // consumer set the directive as `cdkTreeNodePadding=""`. We still want to take this value if
+        // they set 0 explicitly.
+        this._level = coerceNumberProperty(value, null)!;
+        this.setPadding();
+    }
+
+    /**
+     * This has been extracted to a util because of TS 4 and VE.
+     * View Engine doesn't support property rename inheritance.
+     * TS 4.0 doesn't allow properties to override accessors or vice-versa.
+     * @docs-private
+     */
+    protected setIndentInput(indent: number | string) {
+        let value = indent;
+        let units = 'px';
+
+        if (typeof indent === 'string') {
+            const parts = indent.split(cssUnitPattern);
+            value = parts[0];
+            units = parts[1] || units;
+        }
+
+        this.indentUnits = units;
+        this._indent = coerceNumberProperty(value);
+        this.setPadding();
     }
 
     /** The padding indent value for the tree node. Returns a string with px numbers if not null. */

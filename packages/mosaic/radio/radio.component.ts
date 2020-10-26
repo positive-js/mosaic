@@ -290,11 +290,12 @@ export class McRadioGroup extends McRadioGroupMixinBase
 
 // Boilerplate for applying mixins to McRadioButton.
 /** @docs-private */
-export class McRadioButtonBase {
+// tslint:disable-next-line:naming-convention
+abstract class McRadioButtonBase {
     // Since the disabled property is manually defined for the McRadioButton and isn't set up in
     // the mixin base class. To be able to use the tabindex mixin, a disabled property must be
     // defined to properly work.
-    disabled: boolean;
+    abstract disabled: boolean;
 
     // tslint:disable-next-line:naming-convention
     constructor(public _elementRef: ElementRef) {}

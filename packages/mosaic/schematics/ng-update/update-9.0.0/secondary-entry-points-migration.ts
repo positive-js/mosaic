@@ -1,3 +1,4 @@
+// tslint:disable
 import { Migration, TargetVersion } from '@angular/cdk/schematics';
 import * as ts from 'typescript';
 
