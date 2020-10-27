@@ -44,10 +44,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
 
-export enum ArrowPlacements {
-    Center = 'center',
-    Default = 'default'
-}
+export type ArrowPlacements = 'default' | VerticalConnectionPos;
 
 @Component({
     selector: 'mc-tooltip-component',
@@ -152,7 +149,7 @@ export class McTooltipComponent {
         this._mcArrowPlacement = value;
     }
 
-    private _mcArrowPlacement: ArrowPlacements = ArrowPlacements.Default;
+    private _mcArrowPlacement: ArrowPlacements = 'default';
 
     /** Subject for notifying that the tooltip has been hidden from the view */
     private readonly onHideSubject: Subject<any> = new Subject();
@@ -410,7 +407,7 @@ export class McTooltip implements OnInit, OnDestroy {
         this._mcArrowPlacement = value;
     }
 
-    private _mcArrowPlacement: ArrowPlacements = ArrowPlacements.Default;
+    private _mcArrowPlacement: ArrowPlacements = 'default';
 
     @HostBinding('class.mc-tooltip-open')
     get isOpen(): boolean {
@@ -524,15 +521,14 @@ export class McTooltip implements OnInit, OnDestroy {
         }
 
         if (this.mcPlacement === 'right' || this.mcPlacement === 'left') {
-            if (this.mcArrowPlacement === ArrowPlacements.Center) {
+            if (this.mcArrowPlacement === 'center') {
                 const halfDelimeter = 2;
                 const arrowElemRef = this.getTooltipArrowElem();
                 const currentContainerPositionTop = parseInt(this.hostView.element.nativeElement.offsetTop, 10);
                 const currentContainerHeightHalfed = this.hostView.element.nativeElement.clientHeight / halfDelimeter;
                 const tooltipHeightHalfed = this.overlayRef.overlayElement.clientHeight / halfDelimeter;
 
-                this.overlayRef.overlayElement.style.top =
-                `${
+                this.overlayRef.overlayElement.style.top = `${
                     (currentContainerPositionTop + currentContainerHeightHalfed) - tooltipHeightHalfed
                 }px`;
 
@@ -541,10 +537,7 @@ export class McTooltip implements OnInit, OnDestroy {
                 }
             } else {
                 const defaultTooltipPlacementTop = parseInt(this.overlayRef.overlayElement.style.top || '0px', 10);
-                this.overlayRef.overlayElement.style.top =
-                `${
-                    defaultTooltipPlacementTop
-                }px`;
+                this.overlayRef.overlayElement.style.top = `${defaultTooltipPlacementTop}px`;
             }
         }
     }
