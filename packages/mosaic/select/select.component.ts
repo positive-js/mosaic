@@ -59,8 +59,6 @@ import {
     PAGE_DOWN
 } from '@ptsecurity/cdk/keycodes';
 import {
-    countGroupLabelsBeforeOption,
-    getOptionScrollPosition,
     CanDisable,
     CanDisableCtor,
     CanUpdateErrorState,
@@ -78,7 +76,6 @@ import {
     mcSelectAnimations,
 
     SELECT_PANEL_INDENT_PADDING_X,
-    SELECT_PANEL_MAX_HEIGHT,
     SELECT_PANEL_PADDING_X,
     SELECT_PANEL_VIEWPORT_PADDING,
     MC_SELECT_SCROLL_STRATEGY,
@@ -644,6 +641,8 @@ export class McSelect extends McSelectMixinBase implements
         this._ngZone.onStable.asObservable()
             .pipe(take(1))
             .subscribe(() => {
+                this.scrollActiveOptionIntoView();
+
                 if (this.triggerFontSize && this.overlayDir.overlayRef && this.overlayDir.overlayRef.overlayElement) {
                     this.overlayDir.overlayRef.overlayElement.style.fontSize = `${this.triggerFontSize}px`;
                 }
@@ -1203,15 +1202,9 @@ export class McSelect extends McSelectMixinBase implements
 
     /** Scrolls the active option into view. */
     private scrollActiveOptionIntoView(): void {
-        const activeOptionIndex = this.keyManager.activeItemIndex || 0;
-        const labelCount = countGroupLabelsBeforeOption(activeOptionIndex, this.options, this.optionGroups);
+        if (!this.keyManager.activeItem) { return; }
 
-        this.optionsContainer.nativeElement.scrollTop = getOptionScrollPosition(
-            activeOptionIndex + labelCount,
-            this.getItemHeight(),
-            this.optionsContainer.nativeElement.scrollTop,
-            SELECT_PANEL_MAX_HEIGHT
-        );
+        this.keyManager.activeItem.focus();
     }
 
     /**

@@ -2278,6 +2278,7 @@ describe('McSelect', () => {
 
             inputElementDebug.triggerEventHandler('input', { target: inputElementDebug.nativeElement });
             fixture.detectChanges();
+            flush();
 
             const optionsTexts = fixture.debugElement.queryAll(By.css('mc-option'))
                 .map((el) => el.nativeElement.innerText);
