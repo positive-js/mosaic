@@ -59,8 +59,6 @@ import {
     PAGE_DOWN
 } from '@ptsecurity/cdk/keycodes';
 import {
-    countGroupLabelsBeforeOption,
-    getOptionScrollPosition,
     CanDisable,
     CanDisableCtor,
     CanUpdateErrorState,
@@ -78,7 +76,6 @@ import {
     mcSelectAnimations,
 
     SELECT_PANEL_INDENT_PADDING_X,
-    SELECT_PANEL_MAX_HEIGHT,
     SELECT_PANEL_PADDING_X,
     SELECT_PANEL_VIEWPORT_PADDING,
     MC_SELECT_SCROLL_STRATEGY,
@@ -644,6 +641,8 @@ export class McSelect extends McSelectMixinBase implements
         this._ngZone.onStable.asObservable()
             .pipe(take(1))
             .subscribe(() => {
+                this.scrollActiveOptionIntoView();
+
                 if (this.triggerFontSize && this.overlayDir.overlayRef && this.overlayDir.overlayRef.overlayElement) {
                     this.overlayDir.overlayRef.overlayElement.style.fontSize = `${this.triggerFontSize}px`;
                 }
@@ -936,7 +935,6 @@ export class McSelect extends McSelectMixinBase implements
         /* tslint:disable-next-line */
         const keyCode = event.keyCode;
         const isArrowKey = keyCode === DOWN_ARROW || keyCode === UP_ARROW;
-        const manager = this.keyManager;
 
         if (isArrowKey && event.altKey) {
             // Close the select on ALT + arrow key to match the native <select>
@@ -945,22 +943,22 @@ export class McSelect extends McSelectMixinBase implements
         } else if (keyCode === HOME) {
             event.preventDefault();
 
-            manager.setFirstItemActive();
+            this.keyManager.setFirstItemActive();
         } else if (keyCode === END) {
             event.preventDefault();
 
-            manager.setLastItemActive();
+            this.keyManager.setLastItemActive();
         } else if (keyCode === PAGE_UP) {
             event.preventDefault();
 
-            manager.setPreviousPageItemActive();
+            this.keyManager.setPreviousPageItemActive();
         } else if (keyCode === PAGE_DOWN) {
             event.preventDefault();
 
-            manager.setNextPageItemActive();
-        } else if ((keyCode === ENTER || keyCode === SPACE) && manager.activeItem) {
+            this.keyManager.setNextPageItemActive();
+        } else if ((keyCode === ENTER || keyCode === SPACE) && this.keyManager.activeItem) {
             event.preventDefault();
-            manager.activeItem.selectViaInteraction();
+            this.keyManager.activeItem.selectViaInteraction();
         } else if (this._multiple && keyCode === A && event.ctrlKey) {
             event.preventDefault();
             const hasDeselectedOptions = this.options.some((option) => !option.selected);
@@ -972,13 +970,13 @@ export class McSelect extends McSelectMixinBase implements
                 }
             });
         } else {
-            const previouslyFocusedIndex = manager.activeItemIndex;
+            const previouslyFocusedIndex = this.keyManager.activeItemIndex;
 
-            manager.onKeydown(event);
+            this.keyManager.onKeydown(event);
 
-            if (this._multiple && isArrowKey && event.shiftKey && manager.activeItem &&
-                manager.activeItemIndex !== previouslyFocusedIndex) {
-                manager.activeItem.selectViaInteraction();
+            if (this._multiple && isArrowKey && event.shiftKey && this.keyManager.activeItem &&
+                this.keyManager.activeItemIndex !== previouslyFocusedIndex) {
+                this.keyManager.activeItem.selectViaInteraction();
             }
         }
     }
@@ -1203,15 +1201,9 @@ export class McSelect extends McSelectMixinBase implements
 
     /** Scrolls the active option into view. */
     private scrollActiveOptionIntoView(): void {
-        const activeOptionIndex = this.keyManager.activeItemIndex || 0;
-        const labelCount = countGroupLabelsBeforeOption(activeOptionIndex, this.options, this.optionGroups);
+        if (!this.keyManager.activeItem) { return; }
 
-        this.optionsContainer.nativeElement.scrollTop = getOptionScrollPosition(
-            activeOptionIndex + labelCount,
-            this.getItemHeight(),
-            this.optionsContainer.nativeElement.scrollTop,
-            SELECT_PANEL_MAX_HEIGHT
-        );
+        this.keyManager.activeItem.focus();
     }
 
     /**
