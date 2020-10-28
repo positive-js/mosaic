@@ -583,7 +583,7 @@ class SelectWithGroups {
     template: `
         <mc-form-field>
             <mc-select placeholder="Pokemon" [formControl]="control">
-                <mc-optgroup *ngFor="let group of pokemonTypes" [label]="group.name">
+                <mc-optgroup *ngFor="let group of pokemonTypes" [label]="group.name" [disabled]="group.disabled">
                     <ng-container *ngFor="let pokemon of group.pokemon">
                         <mc-option [value]="pokemon.value">{{ pokemon.viewValue }}</mc-option>
                     </ng-container>
@@ -2158,8 +2158,7 @@ describe('McSelect', () => {
                     dispatchKeyboardEvent(host, 'keydown', DOWN_ARROW);
                 }
 
-                // <option index * height> - <panel height> = 16 * 32 - 224 = 288
-                expect(panel.scrollTop).toBe(288, 'Expected scroll to be at the 16th option.');
+                expect(panel.scrollTop).toBe(316, 'Expected scroll to be at the 16th option.');
             }));
 
             it('should scroll up to the active option', fakeAsync(() => {
@@ -2172,8 +2171,7 @@ describe('McSelect', () => {
                     dispatchKeyboardEvent(host, 'keydown', UP_ARROW);
                 }
 
-                // <option index * height> = 9 * 32 = 432
-                expect(panel.scrollTop).toBe(288, 'Expected scroll to be at the 9th option.');
+                expect(panel.scrollTop).toBe(252, 'Expected scroll to be at the 9th option.');
             }));
 
             it('should skip option group labels', fakeAsync(() => {
@@ -2195,8 +2193,7 @@ describe('McSelect', () => {
 
                 // Note that we press down 5 times, but it will skip
                 // 3 options because the second group is disabled.
-                // <(option index + group labels) * height> - <panel height> = (9 + 3) * 32 - 224 = 160
-                expect(panel.scrollTop).toBe(160, 'Expected scroll to be at the 9th option.');
+                expect(panel.scrollTop).toBe(188, 'Expected scroll to be at the 9th option.');
             }));
 
             it('should scroll top the top when pressing HOME', fakeAsync(() => {
@@ -2217,8 +2214,7 @@ describe('McSelect', () => {
                 dispatchKeyboardEvent(host, 'keydown', END);
                 fixture.detectChanges();
 
-                // <option amount> * <option height> - <panel height> = 30 * 32 - 228 = 736
-                expect(panel.scrollTop).toBe(736, 'Expected panel to be scrolled to the bottom');
+                expect(panel.scrollTop).toBe(728, 'Expected panel to be scrolled to the bottom');
             }));
 
             it('should scroll to the active option when typing', fakeAsync(() => {
@@ -2230,8 +2226,7 @@ describe('McSelect', () => {
                 }
                 flush();
 
-                // <option index * height> - <panel height> = 16 * 32 - 224 = 288
-                expect(panel.scrollTop).toBe(288, 'Expected scroll to be at the 16th option.');
+                expect(panel.scrollTop).toBe(316, 'Expected scroll to be at the 16th option.');
             }));
 
         });
@@ -2279,6 +2274,7 @@ describe('McSelect', () => {
 
             inputElementDebug.triggerEventHandler('input', { target: inputElementDebug.nativeElement });
             fixture.detectChanges();
+            flush();
 
             const optionsTexts = fixture.debugElement.queryAll(By.css('mc-option'))
                 .map((el) => el.nativeElement.innerText);
@@ -3144,7 +3140,7 @@ describe('McSelect', () => {
             fixture.detectChanges();
             flush();
 
-            expect(document.activeElement).toBe(select, 'Expected trigger to be focused.');
+            expect(document.activeElement?.classList).toContain('mc-option', 'Expected option to be focused.');
 
             select.blur(); // Blur manually since the programmatic click might not do it.
             (overlayContainerElement.querySelector('.cdk-overlay-backdrop') as HTMLElement).click();
