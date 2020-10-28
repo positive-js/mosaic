@@ -957,7 +957,6 @@ export class McSelect extends McSelectMixinBase implements
 
             this.keyManager.setNextPageItemActive();
         } else if ((keyCode === ENTER || keyCode === SPACE) && this.keyManager.activeItem) {
-            console.log('keyCode === ENTER || keyCode === SPACE');
             event.preventDefault();
             this.keyManager.activeItem.selectViaInteraction();
         } else if (this._multiple && keyCode === A && event.ctrlKey) {
