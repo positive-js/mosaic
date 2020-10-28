@@ -167,6 +167,11 @@ export class McSelectSearch implements AfterContentInit, OnDestroy {
                 event.stopPropagation();
             }
         }
+
+        // tslint:disable-next-line:deprecation
+        if ([SPACE, HOME, END].includes(event.keyCode)) {
+            event.stopPropagation();
+        }
     }
 }
 
@@ -742,12 +747,12 @@ export class McSelect extends McSelectMixinBase implements
     }
 
     handleKeydown(event: KeyboardEvent): void {
-        if (!this.disabled) {
-            if (this.panelOpen) {
-                this.handleOpenKeydown(event);
-            } else {
-                this.handleClosedKeydown(event);
-            }
+        if (this.disabled) { return; }
+
+        if (this.panelOpen) {
+            this.handleOpenKeydown(event);
+        } else {
+            this.handleClosedKeydown(event);
         }
     }
 
@@ -982,6 +987,10 @@ export class McSelect extends McSelectMixinBase implements
             if (this._multiple && isArrowKey && event.shiftKey && this.keyManager.activeItem &&
                 this.keyManager.activeItemIndex !== previouslyFocusedIndex) {
                 this.keyManager.activeItem.selectViaInteraction();
+            }
+
+            if (this.search) {
+                this.search.focus();
             }
         }
     }
