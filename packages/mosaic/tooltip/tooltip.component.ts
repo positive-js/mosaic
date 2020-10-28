@@ -44,7 +44,13 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
 
-export type ArrowPlacements = 'default' | VerticalConnectionPos;
+export enum ArrowPlacements {
+    Top = 'top',
+    Center = 'center',
+    Bottom = 'bottom',
+    Right = 'right',
+    Left = 'left'
+}
 
 @Component({
     selector: 'mc-tooltip-component',
@@ -149,7 +155,7 @@ export class McTooltipComponent {
         this._mcArrowPlacement = value;
     }
 
-    private _mcArrowPlacement: ArrowPlacements = 'default';
+    private _mcArrowPlacement: ArrowPlacements;
 
     /** Subject for notifying that the tooltip has been hidden from the view */
     private readonly onHideSubject: Subject<any> = new Subject();
@@ -407,7 +413,7 @@ export class McTooltip implements OnInit, OnDestroy {
         this._mcArrowPlacement = value;
     }
 
-    private _mcArrowPlacement: ArrowPlacements = 'default';
+    private _mcArrowPlacement: ArrowPlacements;
 
     @HostBinding('class.mc-tooltip-open')
     get isOpen(): boolean {
@@ -521,19 +527,22 @@ export class McTooltip implements OnInit, OnDestroy {
         }
 
         if (this.mcPlacement === 'right' || this.mcPlacement === 'left') {
-            if (this.mcArrowPlacement === 'center') {
-                const halfDelimeter = 2;
-                const arrowElemRef = this.getTooltipArrowElem();
-                const currentContainerPositionTop = parseInt(this.hostView.element.nativeElement.offsetTop, 10);
-                const currentContainerHeightHalfed = this.hostView.element.nativeElement.clientHeight / halfDelimeter;
-                const tooltipHeightHalfed = this.overlayRef.overlayElement.clientHeight / halfDelimeter;
+            if (this.mcArrowPlacement) {
+                if (this.mcArrowPlacement === ArrowPlacements.Center) {
+                    const halfDelimeter = 2;
+                    const arrowElemRef = this.getTooltipArrowElem();
+                    const currentContainerPositionTop = parseInt(this.hostView.element.nativeElement.offsetTop, 10);
+                    const currentContainerHeightHalfed =
+                        this.hostView.element.nativeElement.clientHeight / halfDelimeter;
+                    const tooltipHeightHalfed = this.overlayRef.overlayElement.clientHeight / halfDelimeter;
 
-                this.overlayRef.overlayElement.style.top = `${
-                    (currentContainerPositionTop + currentContainerHeightHalfed) - tooltipHeightHalfed
-                }px`;
+                    this.overlayRef.overlayElement.style.top = `${
+                        (currentContainerPositionTop + currentContainerHeightHalfed) - tooltipHeightHalfed
+                    }px`;
 
-                if (arrowElemRef) {
-                    arrowElemRef.setAttribute('style', `top: ${tooltipHeightHalfed}px`);
+                    if (arrowElemRef) {
+                        arrowElemRef.setAttribute('style', `top: ${tooltipHeightHalfed}px`);
+                    }
                 }
             } else {
                 const defaultTooltipPlacementTop = parseInt(this.overlayRef.overlayElement.style.top || '0px', 10);
