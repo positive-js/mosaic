@@ -527,13 +527,15 @@ export class McTooltip implements OnInit, OnDestroy {
         }
 
         if (this.mcPlacement === 'right' || this.mcPlacement === 'left') {
+            const halfDelimeter = 2;
+            const overlayElemHeight = this.overlayRef.overlayElement.clientHeight;
+            const currentContainerHeight = this.hostView.element.nativeElement.clientHeight;
+
             if (this.mcArrowPlacement === ArrowPlacements.Center) {
-                const halfDelimeter = 2;
                 const arrowElemRef = this.getTooltipArrowElem();
                 const currentContainerPositionTop = parseInt(this.hostView.element.nativeElement.offsetTop, 10);
-                const currentContainerHeightHalfed =
-                    this.hostView.element.nativeElement.clientHeight / halfDelimeter;
-                const tooltipHeightHalfed = this.overlayRef.overlayElement.clientHeight / halfDelimeter;
+                const currentContainerHeightHalfed = currentContainerHeight / halfDelimeter;
+                const tooltipHeightHalfed = overlayElemHeight / halfDelimeter;
 
                 this.overlayRef.overlayElement.style.top = `${
                     (currentContainerPositionTop + currentContainerHeightHalfed) - tooltipHeightHalfed
@@ -543,8 +545,10 @@ export class McTooltip implements OnInit, OnDestroy {
                     arrowElemRef.setAttribute('style', `top: ${tooltipHeightHalfed}px`);
                 }
             } else {
+                const pos = (overlayElemHeight - currentContainerHeight) / halfDelimeter;
                 const defaultTooltipPlacementTop = parseInt(this.overlayRef.overlayElement.style.top || '0px', 10);
-                this.overlayRef.overlayElement.style.top = `${defaultTooltipPlacementTop}px`;
+
+                this.overlayRef.overlayElement.style.top = `${defaultTooltipPlacementTop + pos - 1}px`;
             }
         }
     }
