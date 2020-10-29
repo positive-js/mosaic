@@ -346,6 +346,7 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
 
         this.createSelectionOfTimeComponentInInput((selectionStart as number) + 1);
 
+        this.value = newTimeObj;
         this.onChange(newTimeObj);
         this.stateChanges.next();
     }
@@ -363,20 +364,16 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
         const keyCode = event.keyCode;
 
         if (hasModifierKey(event)) {
-            return;
+            noop();
         } else if ([UP_ARROW, DOWN_ARROW].includes(keyCode)) {
             event.preventDefault();
 
             this.verticalArrowKeyHandler(keyCode);
-
-            return;
         } else if ([LEFT_ARROW, RIGHT_ARROW].includes(keyCode)) {
             this.horizontalArrowKeyHandler(keyCode);
-
-            return;
+        } else {
+            setTimeout(() => this.onInput());
         }
-
-        setTimeout(() => this.onInput());
     }
 
     validate(control: AbstractControl): ValidationErrors | null {
