@@ -1,3 +1,11 @@
+## 9.1.6 "Horrific Gaslighting" (2020-10-29)
+
+### Mosaic
+
+ * bug fix  **select:** select with search does' t let type a space (#UIM-478) ([#517](https://github.com/positive-js/mosaic/issues/517)) ([fbe3ce0](https://github.com/positive-js/mosaic/commit/fbe3ce0ff16b26486f39297f9444213410011d23)), closes [#UIM-478](https://github.com/positive-js/mosaic/issues/UIM-478)
+ * bug fix  **select:** viewport does not scroll to selected element (#UIM-496) ([#516](https://github.com/positive-js/mosaic/issues/516)) ([f345812](https://github.com/positive-js/mosaic/commit/f3458126ea4786c49fd073476b73567820de3405)), closes [#UIM-496](https://github.com/positive-js/mosaic/issues/UIM-496)
+ * bug fix  **timepicker:** value does't change with keyboard input (#UIM-494) ([#518](https://github.com/positive-js/mosaic/issues/518)) ([a72d809](https://github.com/positive-js/mosaic/commit/a72d809014a04222df232ce97ad7c8b2935cc267)), closes [#UIM-494](https://github.com/positive-js/mosaic/issues/UIM-494)
+
 ## 9.1.5 "Cantankerous Markup" (2020-10-05)
 
 ### Mosaic
