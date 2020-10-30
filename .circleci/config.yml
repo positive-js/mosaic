@@ -10,6 +10,9 @@ var_3: &job_defaults
     working_directory: ~/mosaic
     docker:
         - image: *default_docker_image
+          auth:
+              username: $DOCKER_HUB_USERNAME
+              password: $DOCKER_HUB_TOKEN
 
 # Restores the cache that could be available for the current Yarn lock file.
 var_4: &restore_cache
@@ -349,7 +352,9 @@ workflows:
             # 7 Group
 
             - sonar:
-                  context: SonarCloud
+
+                  context:
+                      - SonarCloud
                   requires:
                       - test_unit_cdk
                       - test_unit_mosaic-moment-adapter
