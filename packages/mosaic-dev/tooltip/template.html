@@ -48,8 +48,8 @@
                     mcPlacement="right">right</button>
             <button
                     mc-button
-                    mcTooltip="PDQL-запрос фильтра содержит ошибки
-                                испральве запрос"
+                    mcTooltip="PDQL-запрос фильтра содержит ошибки,
+                                исправьте запрос"
                     mcPlacement="left">left</button>
             <button
                     mc-button
@@ -61,6 +61,34 @@
                     mcTooltip="Обновить"
                     mcPlacement="bottom"
                     [mcTooltipDisabled]="true">disabled</button>
+        </div>
+        <div class="flex layout-column layout-align-center-center container-item">                <span class="mc-title">Arrow placement for left and right</span>
+                <button
+                    mc-button
+                    mcTooltip="PDQL-запрос фильтра содержит ошибки, исправьте запрос"
+                    mcPlacement="left">
+                        left default
+                </button>
+                <button
+                    mc-button
+                    mcTooltip="PDQL-запрос фильтра содержит ошибки, исправьте запрос"
+                    mcPlacement="right">
+                        right default
+                </button>
+                <button
+                    mc-button
+                    mcArrowPlacement="center"
+                    mcTooltip="PDQL-запрос фильтра содержит ошибки, исправьте запрос"
+                    mcPlacement="left">
+                        left center
+                </button>
+                <button
+                    mc-button
+                    mcArrowPlacement="center"
+                    mcTooltip="PDQL-запрос фильтра содержит ошибки, исправьте запрос"
+                    mcPlacement="right">
+                        right center
+                </button>
         </div>
     <div class="flex layout-row layout-align-center-center">
         <div class="flex-45 flex-column flex-offset-10">
