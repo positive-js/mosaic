@@ -44,6 +44,14 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
 
+export enum ArrowPlacements {
+    Top = 'top',
+    Center = 'center',
+    Bottom = 'bottom',
+    Right = 'right',
+    Left = 'left'
+}
+
 @Component({
     selector: 'mc-tooltip-component',
     animations: [fadeAnimation],
@@ -108,6 +116,8 @@ export class McTooltipComponent {
         }
     }
 
+    private _mcPlacement: string = 'top';
+
     @Input()
     get mcTooltipClass(): string {
         return this._mcTooltipClass;
@@ -118,7 +128,6 @@ export class McTooltipComponent {
     }
 
     private _mcTooltipClass: string;
-    private _mcPlacement: string = 'top';
 
     @Input()
     get mcVisible(): boolean {
@@ -136,6 +145,17 @@ export class McTooltipComponent {
     }
 
     private _mcVisible: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+    @Input()
+    get mcArrowPlacement(): ArrowPlacements {
+        return this._mcArrowPlacement;
+    }
+
+    set mcArrowPlacement(value: ArrowPlacements) {
+        this._mcArrowPlacement = value;
+    }
+
+    private _mcArrowPlacement: ArrowPlacements;
 
     /** Subject for notifying that the tooltip has been hidden from the view */
     private readonly onHideSubject: Subject<any> = new Subject();
@@ -384,6 +404,17 @@ export class McTooltip implements OnInit, OnDestroy {
 
     private _mcVisible: boolean;
 
+    @Input('mcArrowPlacement')
+    get mcArrowPlacement(): ArrowPlacements {
+        return this._mcArrowPlacement;
+    }
+
+    set mcArrowPlacement(value: ArrowPlacements) {
+        this._mcArrowPlacement = value;
+    }
+
+    private _mcArrowPlacement: ArrowPlacements;
+
     @HostBinding('class.mc-tooltip-open')
     get isOpen(): boolean {
         return this.isTooltipOpen;
@@ -496,13 +527,29 @@ export class McTooltip implements OnInit, OnDestroy {
         }
 
         if (this.mcPlacement === 'right' || this.mcPlacement === 'left') {
-            const pos =
-                (this.overlayRef.overlayElement.clientHeight -
-                    this.hostView.element.nativeElement.clientHeight) / 2; // tslint:disable-line
-            const currentContainer = this.overlayRef.overlayElement.style.top || '0px';
-            this.overlayRef.overlayElement.style.top =
-                `${parseInt(currentContainer.split('px')[0], 10) + pos - 1}px`;
-            // TODO: обновлять положение стрелки\указателя\"дятла"
+            const halfDelimeter = 2;
+            const overlayElemHeight = this.overlayRef.overlayElement.clientHeight;
+            const currentContainerHeight = this.hostView.element.nativeElement.clientHeight;
+
+            if (this.mcArrowPlacement === ArrowPlacements.Center) {
+                const arrowElemRef = this.getTooltipArrowElem();
+                const currentContainerPositionTop = parseInt(this.hostView.element.nativeElement.offsetTop, 10);
+                const currentContainerHeightHalfed = currentContainerHeight / halfDelimeter;
+                const tooltipHeightHalfed = overlayElemHeight / halfDelimeter;
+
+                this.overlayRef.overlayElement.style.top = `${
+                    (currentContainerPositionTop + currentContainerHeightHalfed) - tooltipHeightHalfed + 1
+                }px`;
+
+                if (arrowElemRef) {
+                    arrowElemRef.setAttribute('style', `top: ${tooltipHeightHalfed - 1}px`);
+                }
+            } else {
+                const pos = (overlayElemHeight - currentContainerHeight) / halfDelimeter;
+                const defaultTooltipPlacementTop = parseInt(this.overlayRef.overlayElement.style.top || '0px', 10);
+
+                this.overlayRef.overlayElement.style.top = `${defaultTooltipPlacementTop + pos - 1}px`;
+            }
         }
     }
 
@@ -547,7 +594,7 @@ export class McTooltip implements OnInit, OnDestroy {
         if (this.mcTrigger === 'hover') {
             this.manualListeners
                 .set('mouseenter', () => this.show())
-                .set('mouseleave', () => this.hide())
+                // .set('mouseleave', () => this.hide())
                 .forEach((listener, event) => this.elementRef.nativeElement.addEventListener(event, listener));
         }
 
@@ -705,5 +752,11 @@ export class McTooltip implements OnInit, OnDestroy {
         }
 
         return { x: newX, y: newY };
+    }
+
+    private getTooltipArrowElem() {
+        const arrowClassName = 'mc-tooltip-arrow';
+
+        return this.overlayRef?.overlayElement.getElementsByClassName(arrowClassName)[0];
     }
 }
