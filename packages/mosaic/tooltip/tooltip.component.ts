@@ -538,11 +538,11 @@ export class McTooltip implements OnInit, OnDestroy {
                 const tooltipHeightHalfed = overlayElemHeight / halfDelimeter;
 
                 this.overlayRef.overlayElement.style.top = `${
-                    (currentContainerPositionTop + currentContainerHeightHalfed) - tooltipHeightHalfed
+                    (currentContainerPositionTop + currentContainerHeightHalfed) - tooltipHeightHalfed + 1
                 }px`;
 
                 if (arrowElemRef) {
-                    arrowElemRef.setAttribute('style', `top: ${tooltipHeightHalfed}px`);
+                    arrowElemRef.setAttribute('style', `top: ${tooltipHeightHalfed - 1}px`);
                 }
             } else {
                 const pos = (overlayElemHeight - currentContainerHeight) / halfDelimeter;
@@ -594,7 +594,7 @@ export class McTooltip implements OnInit, OnDestroy {
         if (this.mcTrigger === 'hover') {
             this.manualListeners
                 .set('mouseenter', () => this.show())
-                .set('mouseleave', () => this.hide())
+                // .set('mouseleave', () => this.hide())
                 .forEach((listener, event) => this.elementRef.nativeElement.addEventListener(event, listener));
         }
 
