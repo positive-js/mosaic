@@ -10,22 +10,6 @@
                     "destination": "/index.html"
                 }
             ],
-            "headers": [
-                {
-                    // Hashed CSS/JS files...
-                    "source": "**/*.+([0-9a-f]).@(css|js)",
-                    "headers": [
-                        {"key": "Cache-Control", "value": "max-age=2592000"}  // 30 days
-                    ]
-                },
-                {
-                    // Images, fonts, (non-hashed) CSS/JS files.
-                    "source": "**/*.@(gif|jpg|jpeg|png|svg|webp|js|css|eot|otf|ttf|ttc|woff|woff2)",
-                    "headers": [
-                        {"key": "Cache-Control", "value": "max-age=86400"}  // 1 day
-                    ]
-                }
-            ],
             "ignore": [
                 "firebase.json",
                 "**/node_modules/**",
@@ -40,22 +24,6 @@
                 {
                     "source": "**/!(*.*)",
                     "destination": "/index.html"
-                }
-            ],
-            "headers": [
-                {
-                    // Hashed CSS/JS files...
-                    "source": "**/*.+([0-9a-f]).@(css|js)",
-                    "headers": [
-                        {"key": "Cache-Control", "value": "max-age=2592000"}  // 30 days
-                    ]
-                },
-                {
-                    // Images, fonts, (non-hashed) CSS/JS files.
-                    "source": "**/*.@(gif|jpg|jpeg|png|svg|webp|js|css|eot|otf|ttf|ttc|woff|woff2)",
-                    "headers": [
-                        {"key": "Cache-Control", "value": "max-age=86400"}  // 1 day
-                    ]
                 }
             ],
             "ignore": [
@@ -74,22 +42,6 @@
                     "destination": "/index.html"
                 }
             ],
-            "headers": [
-                {
-                    // Hashed CSS/JS files...
-                    "source": "**/*.+([0-9a-f]).@(css|js)",
-                    "headers": [
-                        {"key": "Cache-Control", "value": "max-age=2592000"}  // 30 days
-                    ]
-                },
-                {
-                    // Images, fonts, (non-hashed) CSS/JS files.
-                    "source": "**/*.@(gif|jpg|jpeg|png|svg|webp|js|css|eot|otf|ttf|ttc|woff|woff2)",
-                    "headers": [
-                        {"key": "Cache-Control", "value": "max-age=86400"}  // 1 day
-                    ]
-                }
-            ],
             "ignore": [
                 "firebase.json",
                 "**/node_modules/**",
@@ -106,22 +58,6 @@
                     "destination": "/index.html"
                 }
             ],
-            "headers": [
-                {
-                    // Hashed CSS/JS files...
-                    "source": "**/*.+([0-9a-f]).@(css|js)",
-                    "headers": [
-                        {"key": "Cache-Control", "value": "max-age=2592000"}  // 30 days
-                    ]
-                },
-                {
-                    // Images, fonts, (non-hashed) CSS/JS files.
-                    "source": "**/*.@(gif|jpg|jpeg|png|svg|webp|js|css|eot|otf|ttf|ttc|woff|woff2)",
-                    "headers": [
-                        {"key": "Cache-Control", "value": "max-age=86400"}  // 1 day
-                    ]
-                }
-            ],
             "ignore": [
                 "firebase.json",
                 "**/node_modules/**",
@@ -136,22 +72,6 @@
                 {
                     "source": "**/!(*.*)",
                     "destination": "/index.html"
-                }
-            ],
-            "headers": [
-                {
-                    // Hashed CSS/JS files...
-                    "source": "**/*.+([0-9a-f]).@(css|js)",
-                    "headers": [
-                        {"key": "Cache-Control", "value": "max-age=2592000"}  // 30 days
-                    ]
-                },
-                {
-                    // Images, fonts, (non-hashed) CSS/JS files.
-                    "source": "**/*.@(gif|jpg|jpeg|png|svg|webp|js|css|eot|otf|ttf|ttc|woff|woff2)",
-                    "headers": [
-                        {"key": "Cache-Control", "value": "max-age=86400"}  // 1 day
-                    ]
                 }
             ],
             "ignore": [
