@@ -403,6 +403,7 @@ workflows:
                       - build_mosaic_docs_for_preview
                   filters:
                       <<: *ignore_release_branches
+                      <<: *only_for_maintainers
 
             - cleanup_preview_mosaic_docs:
                   requires:
