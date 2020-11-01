@@ -32,17 +32,12 @@ Generate `docs-content` folder (dgeni)
 yarn run build:docs
 ```
 
+Generate basic module
+```bash
+yarn run build:mosaic-examples-module
+```
+
 Start ng server documentation as dev (source components from packages)
 ```bash
 yarn run docs:start:dev
-```
-
-Start ng server documentation as prod (source components from dist)
-```bash
-yarn run docs:start:prod
-```
-
-Open app
-```
-http://localhost:4200/
 ```
