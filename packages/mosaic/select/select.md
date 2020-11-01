@@ -1,4 +1,4 @@
-#### With default parameters
+### With default parameters
 <!-- example(select-overview) -->
 
 ### Multiple select
