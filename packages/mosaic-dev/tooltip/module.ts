@@ -7,7 +7,7 @@ import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McInputModule } from '@ptsecurity/mosaic/input';
 import { McListModule } from '@ptsecurity/mosaic/list';
 import { McRadioModule } from '@ptsecurity/mosaic/radio';
-import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
+import {ArrowPlacements, McToolTipModule} from '@ptsecurity/mosaic/tooltip';
 
 
 /* tslint:disable:no-trailing-whitespace */
@@ -32,6 +32,8 @@ export class DemoComponent implements OnInit {
     title: string = 'Default text';
     titleModel: string | TemplateRef<any> = '';
     availablePositions: string[] = ['top', 'bottom', 'left', 'right'];
+
+    arrowPos = ArrowPlacements;
 
     get getTitle(): string | TemplateRef<any> {
         return this.titleModel;
