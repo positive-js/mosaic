@@ -533,16 +533,16 @@ export class McTooltip implements OnInit, OnDestroy {
 
             if (this.mcArrowPlacement === ArrowPlacements.Center) {
                 const arrowElemRef = this.getTooltipArrowElem();
-                const currentContainerPositionTop = this.hostView.element.nativeElement.getBoundingClientRect().top;
-                const currentContainerHeightHalfed = currentContainerHeight / halfDelimiter;
-                const tooltipHeightHalfed = overlayElemHeight / halfDelimiter;
+                const containerPositionTop: number = this.hostView.element.nativeElement.getBoundingClientRect().top;
+                const halfOfContainerHeight = currentContainerHeight / halfDelimiter;
+                const halfOfTooltipHeight = overlayElemHeight / halfDelimiter;
 
                 this.overlayRef.overlayElement.style.top = `${
-                    (currentContainerPositionTop + currentContainerHeightHalfed) - tooltipHeightHalfed + 1
+                    (containerPositionTop + halfOfContainerHeight) - halfOfTooltipHeight + 1
                 }px`;
 
                 if (arrowElemRef) {
-                    arrowElemRef.setAttribute('style', `top: ${tooltipHeightHalfed - 1}px`);
+                    arrowElemRef.setAttribute('style', `top: ${halfOfTooltipHeight - 1}px`);
                 }
             } else {
                 const pos = (overlayElemHeight - currentContainerHeight) / halfDelimiter;
