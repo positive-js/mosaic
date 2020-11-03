@@ -1,3 +1,12 @@
+# 9.2.0 "Wildflower" (2020-11-03)
+
+### Mosaic
+
+ * bug fix  **tooltip:** element create overlay after init (#UIM-523) ([c967eb4](https://github.com/positive-js/mosaic/commit/c967eb4e90be794c3d2c2e997f78ce0359f049ac)), closes [#UIM-523](https://github.com/positive-js/mosaic/issues/UIM-523)
+ * bug fix  **tooltip:** fixed tests for tooltips (#UIM-511) ([#520](https://github.com/positive-js/mosaic/issues/520)) ([02a306e](https://github.com/positive-js/mosaic/commit/02a306ee361e4e9a8738db436ee3392652d899da)), closes [#UIM-511](https://github.com/positive-js/mosaic/issues/UIM-511)
+ * bug fix  **tooltip:** wrong positioning (#UIM-522) ([#522](https://github.com/positive-js/mosaic/issues/522)) ([5843a7c](https://github.com/positive-js/mosaic/commit/5843a7c48ea929c5463163d99272137ac70c9a07)), closes [#UIM-522](https://github.com/positive-js/mosaic/issues/UIM-522)
+ * bug fix  updated positioning logic in tooltips (#UIM-511) ([#514](https://github.com/positive-js/mosaic/issues/514)) ([c00900e](https://github.com/positive-js/mosaic/commit/c00900e75576bab08e0c3e4c6c34e13c34d698d4)), closes [#UIM-511](https://github.com/positive-js/mosaic/issues/UIM-511)
+
 ## 9.1.6 "Horrific Gaslighting" (2020-10-29)
 
 ### Mosaic
