@@ -1,3 +1,15 @@
+## 10.0.2 "Firefly" (2020-11-03)
+
+### Mosaic
+
+ * bug fix  **select:** select with search does' t let type a space (#UIM-478) ([#517](https://github.com/positive-js/mosaic/issues/517)) ([871f1c0](https://github.com/positive-js/mosaic/commit/871f1c0c5a88950bfdc3942ab6fdc4861aa1c6cb)), closes [#UIM-478](https://github.com/positive-js/mosaic/issues/UIM-478)
+ * bug fix  **select:** viewport does not scroll to selected element (#UIM-496) ([#516](https://github.com/positive-js/mosaic/issues/516)) ([c31549d](https://github.com/positive-js/mosaic/commit/c31549dcd25bcc7fe21bbf5f0636d784d26e469a)), closes [#UIM-496](https://github.com/positive-js/mosaic/issues/UIM-496) [#UIM-496](https://github.com/positive-js/mosaic/issues/UIM-496)
+ * bug fix  **timepicker:** value does't change with keyboard input (#UIM-494) ([#518](https://github.com/positive-js/mosaic/issues/518)) ([2cd8564](https://github.com/positive-js/mosaic/commit/2cd8564f7446ffbf6f187014073f376c0850fc24)), closes [#UIM-494](https://github.com/positive-js/mosaic/issues/UIM-494)
+ * bug fix  **tooltip:** element create overlay after init (#UIM-523) ([#523](https://github.com/positive-js/mosaic/issues/523)) ([0b55f7e](https://github.com/positive-js/mosaic/commit/0b55f7e4edf19367b8580f2d66fe0af136c3313e)), closes [#UIM-523](https://github.com/positive-js/mosaic/issues/UIM-523)
+ * bug fix  **tooltip:** fixed tests for tooltips (#UIM-511) ([#520](https://github.com/positive-js/mosaic/issues/520)) ([f91d638](https://github.com/positive-js/mosaic/commit/f91d638b6ccfc0e4e121ebdc60cddd7752d36546)), closes [#UIM-511](https://github.com/positive-js/mosaic/issues/UIM-511)
+ * bug fix  **tooltip:** wrong positioning (#UIM-522) ([#522](https://github.com/positive-js/mosaic/issues/522)) ([fcfdd3a](https://github.com/positive-js/mosaic/commit/fcfdd3ae4ccb7af41b90703ab8255895d4b80181)), closes [#UIM-522](https://github.com/positive-js/mosaic/issues/UIM-522)
+ * bug fix  updated positioning logic in tooltips (#UIM-511) ([#514](https://github.com/positive-js/mosaic/issues/514)) ([849923c](https://github.com/positive-js/mosaic/commit/849923c65cf88dce7a0909b45e3c02fc082e6779)), closes [#UIM-511](https://github.com/positive-js/mosaic/issues/UIM-511)
+
 ## 10.0.1 "Warring Zade" (2020-10-26)
 
 ### Mosaic
