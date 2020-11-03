@@ -539,25 +539,25 @@ export class McTooltip implements OnInit, OnDestroy {
         this.overlayRef = this.createOverlay();
 
         if (this.mcPlacement === 'right' || this.mcPlacement === 'left') {
-            const halfDelimeter = 2;
+            const halfDelimiter = 2;
             const overlayElemHeight = this.overlayRef.overlayElement.clientHeight;
             const currentContainerHeight = this.hostView.element.nativeElement.clientHeight;
 
             if (this.mcArrowPlacement === ArrowPlacements.Center) {
                 const arrowElemRef = this.getTooltipArrowElem();
-                const currentContainerPositionTop = parseInt(this.hostView.element.nativeElement.offsetTop, 10);
-                const currentContainerHeightHalfed = currentContainerHeight / halfDelimeter;
-                const tooltipHeightHalfed = overlayElemHeight / halfDelimeter;
+                const containerPositionTop: number = this.hostView.element.nativeElement.getBoundingClientRect().top;
+                const halfOfContainerHeight = currentContainerHeight / halfDelimiter;
+                const halfOfTooltipHeight = overlayElemHeight / halfDelimiter;
 
                 this.overlayRef.overlayElement.style.top = `${
-                    (currentContainerPositionTop + currentContainerHeightHalfed) - tooltipHeightHalfed + 1
+                    (containerPositionTop + halfOfContainerHeight) - halfOfTooltipHeight + 1
                 }px`;
 
                 if (arrowElemRef) {
-                    arrowElemRef.setAttribute('style', `top: ${tooltipHeightHalfed - 1}px`);
+                    arrowElemRef.setAttribute('style', `top: ${halfOfTooltipHeight - 1}px`);
                 }
             } else {
-                const pos = (overlayElemHeight - currentContainerHeight) / halfDelimeter;
+                const pos = (overlayElemHeight - currentContainerHeight) / halfDelimiter;
                 const defaultTooltipPlacementTop = parseInt(this.overlayRef.overlayElement.style.top || '0px', 10);
 
                 this.overlayRef.overlayElement.style.top = `${defaultTooltipPlacementTop + pos - 1}px`;
