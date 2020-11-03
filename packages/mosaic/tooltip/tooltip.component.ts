@@ -21,7 +21,6 @@ import {
     Directive,
     ElementRef,
     EventEmitter,
-    HostBinding,
     Inject,
     InjectionToken,
     Input,
