@@ -43,13 +43,16 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
 
-export enum ArrowPlacements {
-    Top = 'top',
-    Center = 'center',
-    Bottom = 'bottom',
-    Right = 'right',
-    Left = 'left'
-}
+export type ArrowPlacements = HorizontalConnectionPos | VerticalConnectionPos;
+
+// tslint:disable-next-line:naming-convention
+export const ArrowPlacements = {
+    Top: 'top' as ArrowPlacements,
+    Center: 'center' as ArrowPlacements,
+    Bottom: 'bottom' as ArrowPlacements,
+    Right: 'right' as ArrowPlacements,
+    Left: 'left' as ArrowPlacements
+};
 
 @Component({
     selector: 'mc-tooltip-component',

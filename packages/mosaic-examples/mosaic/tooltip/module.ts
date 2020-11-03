@@ -4,11 +4,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 
+import { TooltipArrowPlacementExample } from './tooltip-arrow-placement/tooltip-arrow-placement-example';
 import { TooltipOverviewExample } from './tooltip-overview/tooltip-overview-example';
 
 
 const EXAMPLES = [
-    TooltipOverviewExample
+    TooltipOverviewExample,
+    TooltipArrowPlacementExample
 ];
 
 @NgModule({
