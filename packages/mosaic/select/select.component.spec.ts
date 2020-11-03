@@ -3580,7 +3580,7 @@ describe('McSelect', () => {
                 }));
         });
 
-        describe('limited space to open horizontally', () => {
+        xdescribe('limited space to open horizontally', () => {
             beforeEach(fakeAsync(() => {
                 formField.style.position = 'absolute';
                 formField.style.top = '200px';
