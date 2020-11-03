@@ -1,3 +1,9 @@
+## 9.2.1 "Frosty Night" (2020-11-03)
+
+### Mosaic
+
+ * bug fix  **select:** fixing select dropdown position ([f568b3d](https://github.com/positive-js/mosaic/commit/f568b3dbe17c9f55be93bb50a35260fe7dcfe211))
+
 # 9.2.0 "Wildflower" (2020-11-03)
 
 ### Mosaic
