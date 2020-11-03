@@ -206,7 +206,10 @@ export class McTooltipComponent {
     }
 
     setClassMap(): void {
-        this.classMap = `${this.prefix}-${this.mcPlacement}`;
+        this.classMap = {
+            [`${this.prefix}-${this.mcPlacement}`]: true,
+            [this.mcTooltipClass]: true
+        };
     }
 
     isContentEmpty(): boolean {
@@ -376,15 +379,16 @@ export class McTooltip implements OnInit, OnDestroy {
         return this._mcTooltipClass;
     }
 
-    set mсTooltipClass(value: string | string[] | Set<string> | {[key: string]: any}) {
-        this._mcTooltipClass = value;
-
-        if (this.tooltip) {
-            this.tooltip.setClassMap();
+    set mcTooltipClass(value: string) {
+        if (value) {
+            this._mcTooltipClass = value;
+            this.updateCompValue('mcTooltipClass', value);
+        } else {
+            this._mcTooltipClass = '';
         }
     }
 
-    private _mcTooltipClass: string | string[] | Set<string> | {[key: string]: any};
+    private _mcTooltipClass: string;
 
     @Input()
     get mcVisible(): boolean {
