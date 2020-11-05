@@ -4351,6 +4351,19 @@ describe('McTreeSelect', () => {
             fixture.detectChanges();
         }));
 
+        it('should render checkboxes', fakeAsync(() => {
+            trigger.click();
+            fixture.detectChanges();
+            flush();
+
+            const options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-tree-option');
+
+            options.forEach((option) => {
+                expect(option.querySelector('mc-pseudo-checkbox')).not.toBeNull();
+            });
+
+        }));
+
         it('should be able to select multiple values', fakeAsync(() => {
             trigger.click();
             fixture.detectChanges();

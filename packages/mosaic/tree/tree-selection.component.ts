@@ -264,6 +264,8 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
                             option.select();
                         }
                     });
+
+                    option.changeDetectorRef.detectChanges();
                 });
             });
     }
