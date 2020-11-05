@@ -1,7 +1,7 @@
 FROM node:12-alpine
 
 COPY ./package.json /pr-labeler/package.json
-COPY ./package-lock.json /pr-labeler/package-lock.json
+COPY ./yarn.lock /pr-labeler/yarn.lock
 COPY ./tsconfig.json /pr-labeler/tsconfig.json
 COPY ./entrypoint.sh /entrypoint.sh
 
