@@ -1,0 +1,14 @@
+name: "Pull Request Labeler"
+on:
+  pull_request:
+    types: [labeled]
+jobs:
+  pull_request_labeler:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - uses: ./tools/pr-labeler
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
