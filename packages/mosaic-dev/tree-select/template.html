@@ -16,6 +16,7 @@
     <mc-form-field>
         <mc-tree-select
             placeholder="this is placeholder"
+            [multiple]="true"
             [formControl]="control"
             [hiddenItemsTextFormatter]="hiddenItemsTextFormatter"
             (selectionChange)="onSelectionChange($event)">
