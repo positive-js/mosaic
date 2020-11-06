@@ -1,3 +1,10 @@
+## 9.2.2 "Orange Boat" (2020-11-06)
+
+### Mosaic
+
+ * bug fix  **select, tree-select:** select and tree-select does' t fire openedChange event (#UIM-469) ([#528](https://github.com/positive-js/mosaic/issues/528)) ([4c219d8](https://github.com/positive-js/mosaic/commit/4c219d874ad1da7ec589f91df538a283dd3727b8)), closes [#UIM-469](https://github.com/positive-js/mosaic/issues/UIM-469)
+ * bug fix  **tree-select:** option does' t render checkbox (#UIM-527) ([#524](https://github.com/positive-js/mosaic/issues/524)) ([6a6740d](https://github.com/positive-js/mosaic/commit/6a6740d80cd252d40ec1f88496d87760a83877b7)), closes [#UIM-527](https://github.com/positive-js/mosaic/issues/UIM-527)
+
 ## 9.2.1 "Frosty Night" (2020-11-03)
 
 ### Mosaic
