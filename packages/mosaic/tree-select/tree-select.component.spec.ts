@@ -242,6 +242,58 @@ class BasicTreeSelect {
 }
 
 @Component({
+    selector: 'basic-events',
+    template: `
+        <mc-form-field>
+            <mc-tree-select (openedChange)="openedChangeListener($event)"
+                            (opened)="openedListener()"
+                            (closed)="closedListener()">
+                <mc-tree-selection
+                    [dataSource]="dataSource"
+                    [treeControl]="treeControl">
+                    <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+                        {{ treeControl.getViewValue(node) }}
+                    </mc-tree-option>
+
+                    <mc-tree-option
+                        *mcTreeNodeDef="let node; when: hasChild"
+                        mcTreeNodePadding
+                        [disabled]="node.name === 'Downloads'">
+
+                        <i mc-icon="mc-angle-down-S_16" mcTreeNodeToggle></i>
+                        {{ treeControl.getViewValue(node) }}
+                    </mc-tree-option>
+                </mc-tree-selection>
+            </mc-tree-select>
+        </mc-form-field>
+    `
+})
+class BasicEvents {
+    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable, getValue, getValue);
+    treeFlattener = new McTreeFlattener(transformer, getLevel, isExpandable, getChildren);
+
+    dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
+
+    openedChangeListener = jasmine.createSpy('McTreeSelect openedChange listener');
+    openedListener = jasmine.createSpy('McTreeSelect opened listener');
+    closedListener = jasmine.createSpy('McTreeSelect closed listener');
+
+    @ViewChild(McTreeSelect, { static: true }) select: McTreeSelect;
+
+    constructor() {
+        this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
+
+        // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
+        // file node as children.
+        this.dataSource.data = buildFileTree(TREE_DATA, 0);
+    }
+
+    hasChild(_: number, nodeData: FileFlatNode) {
+        return nodeData.expandable;
+    }
+}
+
+@Component({
     selector: 'ng-model-select',
     template: `
         <mc-form-field>
@@ -1426,6 +1478,7 @@ describe('McTreeSelect', () => {
         beforeEach(waitForAsync(() => {
             configureMcTreeSelectTestingModule([
                 BasicTreeSelect,
+                BasicEvents,
                 MultiSelect,
                 SelectWithFormFieldLabel,
                 SelectWithChangeEvent
@@ -2756,6 +2809,73 @@ describe('McTreeSelect', () => {
                 expect(panel.scrollTop).toBe(288, 'Expected scroll to be at the 16th option.');
             }));
 
+        });
+
+        describe('Events', () => {
+            let fixture: ComponentFixture<BasicEvents>;
+            let trigger: HTMLElement;
+
+            beforeEach(fakeAsync(() => {
+                fixture = TestBed.createComponent(BasicEvents);
+                fixture.detectChanges();
+                fixture.detectChanges();
+
+                trigger = fixture.debugElement.query(By.css('.mc-tree-select__trigger')).nativeElement;
+
+                tick(10);
+            }));
+
+            it('should fire openedChange event on open select', fakeAsync(() => {
+                expect(fixture.componentInstance.openedChangeListener).not.toHaveBeenCalled();
+
+                trigger.click();
+                fixture.detectChanges();
+                flush();
+
+                expect(fixture.componentInstance.openedChangeListener).toHaveBeenCalled();
+            }));
+
+            it('should fire openedChange event on close select', fakeAsync(() => {
+                expect(fixture.componentInstance.openedChangeListener).not.toHaveBeenCalled();
+
+                trigger.click();
+                fixture.detectChanges();
+                flush();
+
+                expect(fixture.componentInstance.openedChangeListener).toHaveBeenCalled();
+
+                (overlayContainerElement.querySelector('.cdk-overlay-backdrop') as HTMLElement).click();
+                fixture.detectChanges();
+                flush();
+
+                expect(fixture.componentInstance.openedChangeListener).toHaveBeenCalledTimes(2);
+            }));
+
+            it('should fire opened event on open select', fakeAsync(() => {
+                expect(fixture.componentInstance.openedListener).not.toHaveBeenCalled();
+
+                trigger.click();
+                fixture.detectChanges();
+                flush();
+
+                expect(fixture.componentInstance.openedListener).toHaveBeenCalled();
+            }));
+
+            it('should fire closed event on close select', fakeAsync(() => {
+                expect(fixture.componentInstance.closedListener).not.toHaveBeenCalled();
+
+                trigger.click();
+                fixture.detectChanges();
+                flush();
+
+                expect(fixture.componentInstance.closedListener).not.toHaveBeenCalled();
+
+                (overlayContainerElement.querySelector('.cdk-overlay-backdrop') as HTMLElement).click();
+                fixture.detectChanges();
+                flush();
+
+                expect(fixture.componentInstance.closedListener).toHaveBeenCalled();
+            }));
         });
     });
 
