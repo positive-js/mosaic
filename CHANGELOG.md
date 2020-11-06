@@ -1,3 +1,10 @@
+## 10.0.3 "Tiny Cake" (2020-11-06)
+
+### Mosaic
+
+ * bug fix  **select, tree-select:** does' t fire openedChange event (#UIM-469) ([#528](https://github.com/positive-js/mosaic/issues/528)) ([53cd6f6](https://github.com/positive-js/mosaic/commit/53cd6f62f890792c275d57858414ff2d67252850)), closes [#UIM-469](https://github.com/positive-js/mosaic/issues/UIM-469)
+ * bug fix  **tree-select:** option does' t render checkbox (#UIM-527) ([#524](https://github.com/positive-js/mosaic/issues/524)) ([01fdbae](https://github.com/positive-js/mosaic/commit/01fdbae3b9027086b0ba8316eac78b8a7c1acdfd)), closes [#UIM-527](https://github.com/positive-js/mosaic/issues/UIM-527)
+
 ## 10.0.2 "Firefly" (2020-11-03)
 
 ### Mosaic
