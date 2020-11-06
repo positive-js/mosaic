@@ -134,8 +134,43 @@ class BasicSelect {
     tabIndexOverride: number;
     panelClass = ['custom-one', 'custom-two'];
 
-    @ViewChild(McSelect, {static: true}) select: McSelect;
+    @ViewChild(McSelect, { static: true }) select: McSelect;
     @ViewChildren(McOption) options: QueryList<McOption>;
+}
+
+@Component({
+    selector: 'basic-events',
+    template: `
+        <mc-form-field>
+            <mc-select
+                (openedChange)="openedChangeListener($event)"
+                (opened)="openedListener()"
+                (closed)="closedListener()">
+
+                <mc-option *ngFor="let food of foods" [value]="food.value" [disabled]="food.disabled">
+                    {{ food.viewValue }}
+                </mc-option>
+            </mc-select>
+        </mc-form-field>
+    `
+})
+class BasicEvents {
+    foods: any[] = [
+        { value: 'steak-0', viewValue: 'Steak' },
+        { value: 'pizza-1', viewValue: 'Pizza' },
+        { value: 'tacos-2', viewValue: 'Tacos', disabled: true },
+        { value: 'sandwich-3', viewValue: 'Sandwich' },
+        { value: 'chips-4', viewValue: 'Chips' },
+        { value: 'eggs-5', viewValue: 'Eggs' },
+        { value: 'pasta-6', viewValue: 'Pasta' },
+        { value: 'sushi-7', viewValue: 'Sushi' }
+    ];
+
+    @ViewChild(McSelect, { static: true }) select: McSelect;
+
+    openedChangeListener = jasmine.createSpy('McSelect openedChange listener');
+    openedListener = jasmine.createSpy('McSelect opened listener');
+    closedListener = jasmine.createSpy('McSelect closed listener');
 }
 
 @Component({
@@ -909,6 +944,7 @@ describe('McSelect', () => {
         beforeEach(async(() => {
             configureMcSelectTestingModule([
                 BasicSelect,
+                BasicEvents,
                 MultiSelect,
                 SelectWithGroups,
                 SelectWithGroupsAndNgContainer,
@@ -1603,7 +1639,6 @@ describe('McSelect', () => {
                 /* tslint:disable-next-line:deprecation */
                 expect(selectInstance.focused).toBe(true, 'Expected select element to remain focused.');
             }));
-
         });
 
         describe('selection logic', () => {
@@ -2228,7 +2263,72 @@ describe('McSelect', () => {
 
                 expect(panel.scrollTop).toBe(316, 'Expected scroll to be at the 16th option.');
             }));
+        });
 
+        describe('Events', () => {
+            let fixture: ComponentFixture<BasicEvents>;
+            let trigger: HTMLElement;
+
+            beforeEach(fakeAsync(() => {
+                fixture = TestBed.createComponent(BasicEvents);
+
+                fixture.detectChanges();
+                flush();
+
+                trigger = fixture.debugElement.query(By.css('.mc-select__trigger')).nativeElement;
+            }));
+
+            it('should fire openedChange event on open select', fakeAsync(() => {
+                expect(fixture.componentInstance.openedChangeListener).not.toHaveBeenCalled();
+
+                trigger.click();
+                fixture.detectChanges();
+                flush();
+
+                expect(fixture.componentInstance.openedChangeListener).toHaveBeenCalled();
+            }));
+
+            it('should fire openedChange event on close select', fakeAsync(() => {
+                expect(fixture.componentInstance.openedChangeListener).not.toHaveBeenCalled();
+
+                trigger.click();
+                fixture.detectChanges();
+                flush();
+
+                expect(fixture.componentInstance.openedChangeListener).toHaveBeenCalled();
+
+                (overlayContainerElement.querySelector('.cdk-overlay-backdrop') as HTMLElement).click();
+                fixture.detectChanges();
+                flush();
+
+                expect(fixture.componentInstance.openedChangeListener).toHaveBeenCalledTimes(2);
+            }));
+
+            it('should fire opened event on open select', fakeAsync(() => {
+                expect(fixture.componentInstance.openedListener).not.toHaveBeenCalled();
+
+                trigger.click();
+                fixture.detectChanges();
+                flush();
+
+                expect(fixture.componentInstance.openedListener).toHaveBeenCalled();
+            }));
+
+            it('should fire closed event on close select', fakeAsync(() => {
+                expect(fixture.componentInstance.closedListener).not.toHaveBeenCalled();
+
+                trigger.click();
+                fixture.detectChanges();
+                flush();
+
+                expect(fixture.componentInstance.closedListener).not.toHaveBeenCalled();
+
+                (overlayContainerElement.querySelector('.cdk-overlay-backdrop') as HTMLElement).click();
+                fixture.detectChanges();
+                flush();
+
+                expect(fixture.componentInstance.closedListener).toHaveBeenCalled();
+            }));
         });
     });
 

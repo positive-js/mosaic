@@ -5,8 +5,6 @@ import {
     style,
     transition,
     trigger,
-    query,
-    animateChild,
     group
 } from '@angular/animations';
 
@@ -36,7 +34,6 @@ export const mcSelectAnimations: {
             opacity: 0
         })),
         transition('void => *', group([
-            query('@fadeInContent', animateChild()),
             animate('150ms cubic-bezier(0.25, 0.8, 0.25, 1)')
         ])),
         transition('* => void', [

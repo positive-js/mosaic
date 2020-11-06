@@ -153,6 +153,18 @@ export class DemoComponent {
         return `${hiddenItemsText} ${hiddenItems}`;
     }
 
+    openedChange($event) {
+        console.log('openedChange: ', $event);
+    }
+
+    opened($event) {
+        console.log('opened: ', $event);
+    }
+
+    closed($event) {
+        console.log('closed: ', $event);
+    }
+
     private transformer = (node: FileNode, level: number, parent: any) => {
         const flatNode = new FileFlatNode();
 
