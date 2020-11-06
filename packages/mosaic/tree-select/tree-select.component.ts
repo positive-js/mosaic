@@ -182,9 +182,6 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     /** The value of the select panel's transform-origin property. */
     transformOrigin: string = 'top';
 
-    /** Whether the panel's animation is done. */
-    panelDoneAnimating: boolean = false;
-
     /** Emits when the panel element is finished transforming in. */
     panelDoneAnimatingStream = new Subject<string>();
 
@@ -462,7 +459,6 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
                     this.openedChange.emit(true);
                 } else {
                     this.openedChange.emit(false);
-                    this.panelDoneAnimating = false;
                     this.overlayDir.offsetX = 0;
                     this.changeDetectorRef.markForCheck();
                 }
@@ -709,15 +705,6 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
                 this.handleClosedKeydown(event);
             }
         }
-    }
-
-    /**
-     * When the panel content is done fading in, the panelDoneAnimating property is
-     * set so the proper class can be added to the panel.
-     */
-    onFadeInDone() {
-        this.panelDoneAnimating = this.panelOpen;
-        this.changeDetectorRef.markForCheck();
     }
 
     onFocus() {

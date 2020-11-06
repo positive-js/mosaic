@@ -32,7 +32,11 @@
     {{singleSelectedWithSearch}}
 
     <mc-form-field>
-        <mc-select [(value)]="singleSelectedWithSearch">
+        <mc-select
+            [(value)]="singleSelectedWithSearch"
+            (openedChange)="openedChange($event)"
+            (opened)="opened($event)"
+            (closed)="closed($event)">
             <mc-form-field mcFormFieldWithoutBorders mcSelectSearch>
                 <i mcPrefix mc-icon="mc-search_16"></i>
                 <input mcInput [formControl]="searchCtrl" type="text" placeholder="Search"/>
