@@ -53,9 +53,7 @@
         #panel
         class="mc-select__panel {{ getPanelTheme() }}"
         [ngClass]="panelClass"
-        (@transformPanel.done)="panelDoneAnimatingStream.next($event.toState)"
         [style.transformOrigin]="transformOrigin"
-        [class.mc-select-panel-done-animcing]="panelDoneAnimating"
         [style.font-size.px]="triggerFontSize"
         (keydown)="handleKeydown($event)">
 
@@ -66,7 +64,7 @@
         <div #optionsContainer
              class="mc-select__content"
              [@fadeInContent]="'showing'"
-             (@fadeInContent.done)="onFadeInDone()">
+             (@fadeInContent.done)="panelDoneAnimatingStream.next($event.toState)">
 
             <div *ngIf="isEmptySearchResult" class="mc-select__no-options-message">
                 <ng-content select="[mc-select-search-empty-result]"></ng-content>

@@ -255,9 +255,6 @@ export class McSelect extends McSelectMixinBase implements
     /** The value of the select panel's transform-origin property. */
     transformOrigin: string = 'top';
 
-    /** Whether the panel's animation is done. */
-    panelDoneAnimating: boolean = false;
-
     /** Emits when the panel element is finished transforming in. */
     panelDoneAnimatingStream = new Subject<string>();
 
@@ -531,10 +528,12 @@ export class McSelect extends McSelectMixinBase implements
             .subscribe(() => {
                 if (this.panelOpen) {
                     this.scrollTop = 0;
+
+                    if (this.search) { this.search.focus(); }
+
                     this.openedChange.emit(true);
                 } else {
                     this.openedChange.emit(false);
-                    this.panelDoneAnimating = false;
                     this._changeDetectorRef.markForCheck();
                 }
             });
@@ -748,19 +747,6 @@ export class McSelect extends McSelectMixinBase implements
             this.handleOpenKeydown(event);
         } else {
             this.handleClosedKeydown(event);
-        }
-    }
-
-    /**
-     * When the panel content is done fading in, the panelDoneAnimating property is
-     * set so the proper class can be added to the panel.
-     */
-    onFadeInDone(): void {
-        this.panelDoneAnimating = this.panelOpen;
-        this._changeDetectorRef.markForCheck();
-
-        if (this.search && this._panelOpen) {
-            this.search.focus();
         }
     }
 

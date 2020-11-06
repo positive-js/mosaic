@@ -63,6 +63,18 @@ export class DemoComponent implements OnInit {
         return `${hiddenItemsText} ${hiddenItems}`;
     }
 
+    openedChange($event) {
+        console.log('openedChange: ', $event);
+    }
+
+    opened($event) {
+        console.log('opened: ', $event);
+    }
+
+    closed($event) {
+        console.log('closed: ', $event);
+    }
+
     private getFilteredOptions(value): string[] {
         const searchFilter = (value && value.new) ? value.value : value;
 

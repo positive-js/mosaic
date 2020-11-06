@@ -18,7 +18,10 @@
             placeholder="this is placeholder"
             [formControl]="control"
             [hiddenItemsTextFormatter]="hiddenItemsTextFormatter"
-            (selectionChange)="onSelectionChange($event)">
+            (selectionChange)="onSelectionChange($event)"
+            (openedChange)="openedChange($event)"
+            (opened)="opened($event)"
+            (closed)="closed($event)">
 
             <mc-tree-selection
                 [dataSource]="dataSource"
