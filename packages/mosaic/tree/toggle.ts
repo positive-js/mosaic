@@ -38,7 +38,7 @@ export class McTreeNodeToggleComponent<T> {
 
     constructor(private tree: CdkTree<T>, private treeNode: CdkTreeNode<T>) {
         this.tree.treeControl.filterValue
-            .pipe(map((value) => value.length > 0))
+            .pipe(map((value) => value?.length > 0))
             .subscribe((state: boolean) => this.disabled = state);
     }
 
