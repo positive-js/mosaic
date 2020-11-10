@@ -68,11 +68,22 @@
             border-color: transparent;
             background-color: transparent;
 
+            &:hover,
+            &.mc-hover {
+                & .mc-button-overlay {
+                    background: map-get($background, overlay-hovered);
+                }
+            }
+
             &:active,
             &.mc-active {
                 border-color: transparent;
                 background-color: transparent;
                 box-shadow: none;
+
+                & .mc-button-overlay {
+                    background: map-get($background, overlay-active);
+                }
             }
 
             &.mc-disabled,
