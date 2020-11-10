@@ -179,6 +179,7 @@ $mc-light-theme-background: (
     background-disabled:        map-get($mc-grey, 60),
 
     overlay-hovered:            rgba(black, 0.05),
+    overlay-active:             rgba(black, 0.1),
     overlay-disabled:           rgba(white, 0.3)
 );
 
@@ -189,5 +190,6 @@ $mc-dark-theme-background: (
     background-disabled:        map-get($mc-grey, 600),
 
     overlay-hovered:            rgba(white, 0.05),
+    overlay-active:             rgba(white, 0.1),
     overlay-disabled:           rgba(black, 0.2)
 );
