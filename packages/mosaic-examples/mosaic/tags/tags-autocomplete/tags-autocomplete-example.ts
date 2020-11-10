@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { McAutocompleteSelectedEvent } from '@ptsecurity/mosaic/autocomplete';
+import { McAutocomplete, McAutocompleteSelectedEvent } from '@ptsecurity/mosaic/autocomplete';
 import { McTagInputEvent, McTagList } from '@ptsecurity/mosaic/tags';
 import { merge } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -17,6 +17,7 @@ import { map } from 'rxjs/operators';
 export class TagsAutocompleteExample {
     @ViewChild('tagList', { static: false }) tagList: McTagList;
     @ViewChild('tagInput', { static: false }) tagInput: ElementRef<HTMLInputElement>;
+    @ViewChild('autocomplete', { static: false }) autocomplete: McAutocomplete;
 
     control = new FormControl();
 
@@ -49,20 +50,40 @@ export class TagsAutocompleteExample {
         );
     }
 
+    addOnBlurFunc(event: FocusEvent) {
+        const target: HTMLElement = event.relatedTarget as HTMLElement;
+
+        if (!target || target.tagName !== 'MC-OPTION') {
+            const mcTagEvent: McTagInputEvent = {
+                input: this.tagInput.nativeElement,
+                value : this.tagInput.nativeElement.value
+            };
+
+            this.onCreate(mcTagEvent);
+        }
+    }
+
     onCreate(event: McTagInputEvent): void {
         const input = event.input;
         const value = event.value;
 
         if ((value || '').trim()) {
-            this.selectedTags.push(value.trim());
+            const isOptionSelected = this.autocomplete.options.some((option) => option.selected);
+            if (!isOptionSelected) {
+                this.selectedTags.push(value.trim());
+            }
         }
 
         if (input) {
             input.value = '';
         }
+
+        this.control.setValue(null);
     }
 
     onSelect(event: McAutocompleteSelectedEvent): void {
+        event.option.deselect();
+
         if (event.option.value.new) {
             this.selectedTags.push(event.option.value.value);
         } else {

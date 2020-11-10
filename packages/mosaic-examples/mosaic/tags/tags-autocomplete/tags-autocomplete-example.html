@@ -9,7 +9,9 @@
                [formControl]="control"
                [mcAutocomplete]="autocomplete"
                [mcTagInputFor]="tagList"
-               (mcTagInputTokenEnd)="onCreate($event)">
+               (mcTagInputTokenEnd)="onCreate($event)"
+               [mcTagInputAddOnBlur]="false"
+               (blur)="addOnBlurFunc($event)">
     </mc-tag-list>
     <mc-autocomplete #autocomplete (optionSelected)="onSelect($event)">
         <mc-option *ngIf="tagInput.value" [value]="{ new: true, value: tagInput.value }">
