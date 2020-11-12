@@ -194,7 +194,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
 
         this.setPosition(overlayConfig.positionStrategy as FlexibleConnectedPositionStrategy);
 
-        overlayConfig.hasBackdrop = this.dropdown.hasBackdrop == null ? !this.triggersNestedDropdown() :
+        overlayConfig.hasBackdrop = this.dropdown.hasBackdrop ? !this.triggersNestedDropdown() :
             this.dropdown.hasBackdrop;
 
         overlayRef.attach(this.getPortal());
