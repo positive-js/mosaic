@@ -1232,24 +1232,26 @@ describe('McDropdown', () => {
                 .toBe(1, 'Expected to remain at one open dropdown');
         }));
 
-
-        it('should open a nested dropdown when its trigger is clicked', () => {
+        it('should open a nested dropdown when its trigger is clicked', fakeAsync(() => {
             compileTestComponent();
             instance.rootTriggerEl.nativeElement.click();
             fixture.detectChanges();
+            flush();
             expect(overlay.querySelectorAll(PANEL_SELECTOR).length).toBe(1, 'Expected one open dropdown');
 
             const levelOneTrigger = overlay.querySelector('#level-one-trigger')! as HTMLElement;
 
             levelOneTrigger.click();
             fixture.detectChanges();
+            flush();
             expect(overlay.querySelectorAll(PANEL_SELECTOR).length).toBe(2, 'Expected two open dropdowns');
 
             levelOneTrigger.click();
+            flush();
             fixture.detectChanges();
             expect(overlay.querySelectorAll(PANEL_SELECTOR).length)
                 .toBe(2, 'Expected repeat clicks not to close the dropdown.');
-        });
+        }));
 
         it('should open and close a nested dropdown with arrow keys in ltr', fakeAsync(() => {
             compileTestComponent();
@@ -1714,7 +1716,8 @@ describe('McDropdown default overrides', () => {
             class="custom-one custom-two"
             (closed)="closeCallback($event)"
             [backdropClass]="backdropClass"
-        >
+            [hasBackdrop]="true">
+
             <button mc-dropdown-item> Item </button>
             <button mc-dropdown-item disabled> Disabled </button>
             <button mc-dropdown-item>
@@ -1827,7 +1830,7 @@ class CustomDropdown {
             #alternateTrigger="mcDropdownTrigger">Toggle alternate dropdown
         </button>
 
-        <mc-dropdown #root="mcDropdown" (closed)="rootCloseCallback($event)">
+        <mc-dropdown #root="mcDropdown" (closed)="rootCloseCallback($event)" [hasBackdrop]="true">
             <button mc-dropdown-item
                     id="level-one-trigger"
                     [mcDropdownTriggerFor]="levelOne"
@@ -1842,7 +1845,7 @@ class CustomDropdown {
             </button>
         </mc-dropdown>
 
-        <mc-dropdown #levelOne="mcDropdown" (closed)="levelOneCloseCallback($event)">
+        <mc-dropdown #levelOne="mcDropdown" (closed)="levelOneCloseCallback($event)" [hasBackdrop]="true">
             <button mc-dropdown-item>Four</button>
             <button mc-dropdown-item
                     id="level-two-trigger"
@@ -1852,13 +1855,13 @@ class CustomDropdown {
             <button mc-dropdown-item>Six</button>
         </mc-dropdown>
 
-        <mc-dropdown #levelTwo="mcDropdown" (closed)="levelTwoCloseCallback($event)">
+        <mc-dropdown #levelTwo="mcDropdown" (closed)="levelTwoCloseCallback($event)" [hasBackdrop]="true">
             <button mc-dropdown-item>Seven</button>
             <button mc-dropdown-item>Eight</button>
             <button mc-dropdown-item>Nine</button>
         </mc-dropdown>
 
-        <mc-dropdown #lazy="mcDropdown">
+        <mc-dropdown #lazy="mcDropdown" [hasBackdrop]="true">
             <button mc-dropdown-item>Ten</button>
             <button mc-dropdown-item>Eleven</button>
             <button mc-dropdown-item>Twelve</button>

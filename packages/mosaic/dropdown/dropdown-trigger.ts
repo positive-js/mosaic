@@ -193,8 +193,10 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
         const overlayConfig = overlayRef.getConfig();
 
         this.setPosition(overlayConfig.positionStrategy as FlexibleConnectedPositionStrategy);
-        overlayConfig.hasBackdrop = this.dropdown.hasBackdrop == null ? !this.triggersNestedDropdown() :
+
+        overlayConfig.hasBackdrop = this.dropdown.hasBackdrop ? !this.triggersNestedDropdown() :
             this.dropdown.hasBackdrop;
+
         overlayRef.attach(this.getPortal());
 
         if (this.dropdown.lazyContent) {
@@ -482,6 +484,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
     /** Returns a stream that emits whenever an action that should close the dropdown occurs. */
     private closingActions() {
         const backdrop = this.overlayRef!.backdropClick();
+        const outsidePointerEvents = this.overlayRef!.outsidePointerEvents();
         const detachments = this.overlayRef!.detachments();
         const parentClose = this._parent ? this._parent.closed : observableOf();
         const hover = this._parent ? this._parent.hovered().pipe(
@@ -489,7 +492,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
             filter(() => this._opened)
         ) : observableOf();
 
-        return merge(backdrop, parentClose, hover, detachments);
+        return merge(backdrop, outsidePointerEvents, parentClose, hover, detachments);
     }
 
     /** Handles the cases where the user hovers over the trigger. */

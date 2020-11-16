@@ -54,7 +54,7 @@ export interface McDropdownDefaultOptions {
     backdropClass: string;
 
     /** Whether the dropdown has a backdrop. */
-    hasBackdrop?: boolean;
+    hasBackdrop: boolean;
 }
 
 /** Injection token to be used to override the default options for `mc-dropdown`. */
@@ -72,7 +72,8 @@ export function MC_DROPDOWN_DEFAULT_OPTIONS_FACTORY(): McDropdownDefaultOptions 
         overlapTriggerY: false,
         xPosition: 'after',
         yPosition: 'below',
-        backdropClass: 'cdk-overlay-transparent-backdrop'
+        backdropClass: 'cdk-overlay-transparent-backdrop',
+        hasBackdrop: false
     };
 }
 
@@ -143,11 +144,11 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
 
     /** Whether the dropdown has a backdrop. */
     @Input()
-    get hasBackdrop(): boolean | undefined {
+    get hasBackdrop(): boolean {
         return this._hasBackdrop;
     }
 
-    set hasBackdrop(value: boolean | undefined) {
+    set hasBackdrop(value: boolean) {
         this._hasBackdrop = coerceBooleanProperty(value);
     }
 
@@ -177,11 +178,12 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
             this._elementRef.nativeElement.className = '';
         }
     }
+
     private _xPosition: DropdownPositionX = this._defaultOptions.xPosition;
     private _yPosition: DropdownPositionY = this._defaultOptions.yPosition;
     private _overlapTriggerX: boolean = this._defaultOptions.overlapTriggerX;
     private _overlapTriggerY: boolean = this._defaultOptions.overlapTriggerY;
-    private _hasBackdrop: boolean | undefined = this._defaultOptions.hasBackdrop;
+    private _hasBackdrop: boolean = this._defaultOptions.hasBackdrop;
 
     /** Config object to be passed into the dropdown's ngClass */
     classList: { [key: string]: boolean } = {};
