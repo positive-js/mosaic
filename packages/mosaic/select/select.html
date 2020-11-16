@@ -38,8 +38,8 @@
 <ng-template
     cdk-connected-overlay
     cdkConnectedOverlayLockPosition
-    cdkConnectedOverlayHasBackdrop
-    cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+    [cdkConnectedOverlayHasBackdrop]="hasBackdrop"
+    [cdkConnectedOverlayBackdropClass]="backdropClass"
     [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
     [cdkConnectedOverlayOrigin]="origin"
     [cdkConnectedOverlayOpen]="panelOpen"
