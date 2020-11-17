@@ -90,7 +90,7 @@ import {
 import { McCleaner, McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { McTag } from '@ptsecurity/mosaic/tags';
 import { McTreeSelection, McTreeOption } from '@ptsecurity/mosaic/tree';
-import { defer, merge, Observable, Subject } from 'rxjs';
+import { defer, merge, Observable, Subject, Subscription } from 'rxjs';
 import {
     filter,
     map,
@@ -261,6 +261,8 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     /** Classes to be passed to the select panel. Supports the same syntax as `ngClass`. */
     @Input() panelClass: string | string[] | Set<string> | { [key: string]: any };
 
+    @Input() backdropClass: string = 'cdk-overlay-transparent-backdrop';
+
     /** Object used to control when error messages are shown. */
     @Input() errorStateMatcher: ErrorStateMatcher;
 
@@ -380,6 +382,17 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
 
     private _id: string;
 
+    @Input()
+    get hasBackdrop(): boolean {
+        return this._hasBackdrop;
+    }
+
+    set hasBackdrop(value: boolean) {
+        this._hasBackdrop = coerceBooleanProperty(value);
+    }
+
+    private _hasBackdrop: boolean = false;
+
     /** Whether the select is focused. */
     get focused(): boolean {
         return this._focused || this._panelOpen;
@@ -398,6 +411,8 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     get canShowCleaner(): boolean {
         return this.cleaner && this.selectionModel.hasValue();
     }
+
+    private closeSubscription = Subscription.EMPTY;
 
     private _panelOpen = false;
 
@@ -548,9 +563,9 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
 
     ngOnDestroy() {
         this.destroy.next();
-
         this.destroy.complete();
         this.stateChanges.complete();
+        this.closeSubscription.unsubscribe();
     }
 
     @Input()
@@ -740,6 +755,9 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
 
                 this.tree.updateScrollSize();
             });
+
+        this.closeSubscription = this.closingActions()
+            .subscribe(() => this.close());
     }
 
     /** Returns the theme to be used on the panel. */
@@ -812,6 +830,14 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         }
 
         this.changeDetectorRef.markForCheck();
+    }
+
+    private closingActions() {
+        const backdrop = this.overlayDir.overlayRef!.backdropClick();
+        const outsidePointerEvents = this.overlayDir.overlayRef!.outsidePointerEvents();
+        const detachments = this.overlayDir.overlayRef!.detachments();
+
+        return merge(backdrop, outsidePointerEvents, detachments);
     }
 
     private getTotalItemsWidthInMatcher(): number {
