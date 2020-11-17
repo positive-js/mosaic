@@ -2038,10 +2038,7 @@ describe('McTreeSelect', () => {
                 fixture.detectChanges();
                 flush();
 
-                const backdrop =
-                    overlayContainerElement.querySelector('.cdk-overlay-backdrop') as HTMLElement;
-
-                backdrop.click();
+                document.body.click();
                 fixture.detectChanges();
                 flush();
 
@@ -2616,9 +2613,7 @@ describe('McTreeSelect', () => {
                 expect(fixture.componentInstance.control.touched)
                     .toEqual(false, `Expected the control to stay untouched when menu opened.`);
 
-                const backdrop =
-                    overlayContainerElement.querySelector('.cdk-overlay-backdrop') as HTMLElement;
-                backdrop.click();
+                document.body.click();
                 dispatchFakeEvent(trigger, 'blur');
                 fixture.detectChanges();
                 flush();
@@ -2844,7 +2839,7 @@ describe('McTreeSelect', () => {
 
                 expect(fixture.componentInstance.openedChangeListener).toHaveBeenCalled();
 
-                (overlayContainerElement.querySelector('.cdk-overlay-backdrop') as HTMLElement).click();
+                document.body.click();
                 fixture.detectChanges();
                 flush();
 
@@ -2870,7 +2865,7 @@ describe('McTreeSelect', () => {
 
                 expect(fixture.componentInstance.closedListener).not.toHaveBeenCalled();
 
-                (overlayContainerElement.querySelector('.cdk-overlay-backdrop') as HTMLElement).click();
+                document.body.click();
                 fixture.detectChanges();
                 flush();
 
@@ -3069,9 +3064,7 @@ describe('McTreeSelect', () => {
                 .toContain('mc-tree-option', `Expected option ID to have the correct prefix.`);
             expect(options[0].id).not.toEqual(options[1].id, `Expected option IDs to be unique.`);
 
-            const backdrop =
-                overlayContainerElement.querySelector('.cdk-overlay-backdrop') as HTMLElement;
-            backdrop.click();
+            document.body.click();
             fixture.detectChanges();
             flush();
 
