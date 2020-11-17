@@ -317,6 +317,8 @@ export class McSelect extends McSelectMixinBase implements
     /** Classes to be passed to the select panel. Supports the same syntax as `ngClass`. */
     @Input() panelClass: string | string[] | Set<string> | { [key: string]: any };
 
+    @Input() backdropClass: string = 'cdk-overlay-transparent-backdrop';
+
     /** Object used to control when error messages are shown. */
     @Input() errorStateMatcher: ErrorStateMatcher;
 
@@ -360,6 +362,17 @@ export class McSelect extends McSelectMixinBase implements
      * @docs-private
      */
     @Output() readonly valueChange: EventEmitter<any> = new EventEmitter<any>();
+
+    @Input()
+    get hasBackdrop(): boolean {
+        return this._hasBackdrop;
+    }
+
+    set hasBackdrop(value: boolean) {
+        this._hasBackdrop = coerceBooleanProperty(value);
+    }
+
+    private _hasBackdrop: boolean = false;
 
     @Input()
     get placeholder(): string {
@@ -478,6 +491,32 @@ export class McSelect extends McSelectMixinBase implements
         return this.cleaner && this.selectionModel.hasValue();
     }
 
+    get selected(): McOption | McOption[] {
+        return this.multiple ? this.selectionModel.selected : this.selectionModel.selected[0];
+    }
+
+    get triggerValue(): string {
+        if (this.empty) { return ''; }
+
+        return this.selectionModel.selected[0].viewValue;
+    }
+
+    get triggerValues(): McOption[] {
+        if (this.empty) { return []; }
+
+        const selectedOptions = this.selectionModel.selected;
+
+        if (this.isRtl()) { selectedOptions.reverse(); }
+
+        return selectedOptions;
+    }
+
+    get empty(): boolean {
+        return !this.selectionModel || this.selectionModel.isEmpty();
+    }
+
+    private closeSubscription = Subscription.EMPTY;
+
     /** The scroll position of the overlay panel, calculated to center the selected option. */
     private scrollTop = 0;
 
@@ -584,6 +623,7 @@ export class McSelect extends McSelectMixinBase implements
         this.destroy.next();
         this.destroy.complete();
         this.stateChanges.complete();
+        this.closeSubscription.unsubscribe();
     }
 
     @Input()
@@ -607,15 +647,15 @@ export class McSelect extends McSelectMixinBase implements
     onTouched = () => {};
 
     resetSearch(): void {
-        if (this.search) {
-            this.search.reset();
-            /*
-            todo the incorrect behaviour of keyManager is possible here
-            to avoid first item selection (to provide correct options flipping on closed select)
-            we should process options update like it is the first options appearance
-             */
-            this.search.isSearchChanged = false;
-        }
+        if (!this.search) { return; }
+
+        this.search.reset();
+        /*
+        todo the incorrect behaviour of keyManager is possible here
+        to avoid first item selection (to provide correct options flipping on closed select)
+        we should process options update like it is the first options appearance
+        */
+        this.search.isSearchChanged = false;
     }
 
     /** Toggles the overlay panel open or closed. */
@@ -712,30 +752,6 @@ export class McSelect extends McSelectMixinBase implements
         this.stateChanges.next();
     }
 
-    get selected(): McOption | McOption[] {
-        return this.multiple ? this.selectionModel.selected : this.selectionModel.selected[0];
-    }
-
-    get triggerValue(): string {
-        if (this.empty) { return ''; }
-
-        return this.selectionModel.selected[0].viewValue;
-    }
-
-    get triggerValues(): McOption[] {
-        if (this.empty) { return []; }
-
-        const selectedOptions = this.selectionModel.selected;
-
-        if (this.isRtl()) { selectedOptions.reverse(); }
-
-        return selectedOptions;
-    }
-
-    get empty(): boolean {
-        return !this.selectionModel || this.selectionModel.isEmpty();
-    }
-
     isRtl(): boolean {
         return this._dir ? this._dir.value === 'rtl' : false;
     }
@@ -785,6 +801,9 @@ export class McSelect extends McSelectMixinBase implements
 
                 this.updateScrollSize();
             });
+
+        this.closeSubscription = this.closingActions()
+            .subscribe(() => this.close());
     }
 
     /** Returns the theme to be used on the panel. */
@@ -859,6 +878,14 @@ export class McSelect extends McSelectMixinBase implements
 
     getItemHeight(): number {
         return this.options.first ? this.options.first.getHeight() : 0;
+    }
+
+    private closingActions() {
+        const backdrop = this.overlayDir.overlayRef!.backdropClick();
+        const outsidePointerEvents = this.overlayDir.overlayRef!.outsidePointerEvents();
+        const detachments = this.overlayDir.overlayRef!.detachments();
+
+        return merge(backdrop, outsidePointerEvents, detachments);
     }
 
     private getHeightOfOptionsContainer(): number {
@@ -1213,7 +1240,7 @@ export class McSelect extends McSelectMixinBase implements
 
         const overlayRect = this.getOverlayRect();
         // Window width without scrollbar
-        const windowWidth = this.getBackdropWidth();
+        const windowWidth = this.getOverlayWidth();
         const isRtl = this.isRtl();
         /* tslint:disable-next-line:no-magic-numbers */
         const paddingWidth = SELECT_PANEL_PADDING_X * 2;
@@ -1285,8 +1312,8 @@ export class McSelect extends McSelectMixinBase implements
         return this.overlayDir.overlayRef.overlayElement.getBoundingClientRect();
     }
 
-    private getBackdropWidth() {
-        return this.scrollStrategy._overlayRef.backdropElement.clientWidth;
+    private getOverlayWidth() {
+        return this.scrollStrategy._overlayRef.hostElement.clientWidth;
     }
 
     /** Comparison function to specify which option is displayed. Defaults to object equality. */

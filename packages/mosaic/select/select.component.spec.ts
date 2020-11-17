@@ -1461,10 +1461,7 @@ describe('McSelect', () => {
                 fixture.detectChanges();
                 flush();
 
-                const backdrop =
-                    overlayContainerElement.querySelector('.cdk-overlay-backdrop') as HTMLElement;
-
-                backdrop.click();
+                document.body.click();
                 fixture.detectChanges();
                 flush();
 
@@ -2033,9 +2030,7 @@ describe('McSelect', () => {
                 expect(fixture.componentInstance.control.touched)
                     .toEqual(false, `Expected the control to stay untouched when menu opened.`);
 
-                const backdrop =
-                    overlayContainerElement.querySelector('.cdk-overlay-backdrop') as HTMLElement;
-                backdrop.click();
+                document.body.click();
                 dispatchFakeEvent(trigger, 'blur');
                 fixture.detectChanges();
                 flush();
@@ -2296,7 +2291,7 @@ describe('McSelect', () => {
 
                 expect(fixture.componentInstance.openedChangeListener).toHaveBeenCalled();
 
-                (overlayContainerElement.querySelector('.cdk-overlay-backdrop') as HTMLElement).click();
+                document.body.click();
                 fixture.detectChanges();
                 flush();
 
@@ -2322,7 +2317,7 @@ describe('McSelect', () => {
 
                 expect(fixture.componentInstance.closedListener).not.toHaveBeenCalled();
 
-                (overlayContainerElement.querySelector('.cdk-overlay-backdrop') as HTMLElement).click();
+                document.body.click();
                 fixture.detectChanges();
                 flush();
 
@@ -2560,9 +2555,7 @@ describe('McSelect', () => {
                 .toContain('mc-option', `Expected option ID to have the correct prefix.`);
             expect(options[0].id).not.toEqual(options[1].id, `Expected option IDs to be unique.`);
 
-            const backdrop =
-                overlayContainerElement.querySelector('.cdk-overlay-backdrop') as HTMLElement;
-            backdrop.click();
+            document.body.click();
             fixture.detectChanges();
             flush();
 
@@ -3242,7 +3235,7 @@ describe('McSelect', () => {
             expect(document.activeElement?.classList).toContain('mc-option', 'Expected option to be focused.');
 
             select.blur(); // Blur manually since the programmatic click might not do it.
-            (overlayContainerElement.querySelector('.cdk-overlay-backdrop') as HTMLElement).click();
+            document.body.click();
             fixture.detectChanges();
             flush();
 
