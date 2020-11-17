@@ -111,6 +111,16 @@ export class McDatepickerContent<D> implements AfterViewInit {
     providers: [{ provide: McFormFieldControl, useExisting: McDatepicker }]
 })
 export class McDatepicker<D> implements OnDestroy {
+    @Input()
+    get hasBackdrop(): boolean {
+        return this._hasBackdrop;
+    }
+
+    set hasBackdrop(value: boolean) {
+        this._hasBackdrop = coerceBooleanProperty(value);
+    }
+
+    private _hasBackdrop: boolean = false;
 
     /** The date to open the calendar to initially. */
     @Input()
@@ -173,7 +183,6 @@ export class McDatepicker<D> implements OnDestroy {
         return this.datepickerInput && this.datepickerInput.dateFilter;
     }
 
-
     get value(): D | null {
         return this.selected;
     }
@@ -201,6 +210,8 @@ export class McDatepicker<D> implements OnDestroy {
 
     /** Function that can be used to add custom CSS classes to dates. */
     @Input() dateClass: (date: D) => McCalendarCellCssClasses;
+
+    @Input() backdropClass: string = 'cdk-overlay-transparent-backdrop';
 
     /** Emits when the datepicker has been opened. */
     @Output('opened') openedStream: EventEmitter<void> = new EventEmitter<void>();
@@ -242,6 +253,8 @@ export class McDatepicker<D> implements OnDestroy {
     /** Subscription to value changes in the associated input element. */
     private inputSubscription = Subscription.EMPTY;
 
+    private closeSubscription = Subscription.EMPTY;
+
     constructor(
         private overlay: Overlay,
         private ngZone: NgZone,
@@ -261,6 +274,7 @@ export class McDatepicker<D> implements OnDestroy {
     ngOnDestroy() {
         this.close();
         this.inputSubscription.unsubscribe();
+        this.closeSubscription.unsubscribe();
         this.disabledChange.complete();
 
         if (this.popupRef) {
@@ -273,6 +287,7 @@ export class McDatepicker<D> implements OnDestroy {
     select(date: D): void {
         const oldValue = this.selected;
         this.selected = date;
+
         if (!this.dateAdapter.sameDate(oldValue, this.selected)) {
             this.selectedChanged.next(date);
         }
@@ -296,6 +311,7 @@ export class McDatepicker<D> implements OnDestroy {
         if (this.datepickerInput) {
             throw Error('A McDatepicker can only be associated with a single input.');
         }
+
         this.datepickerInput = input;
         this.inputSubscription =
             this.datepickerInput.valueChange.subscribe((value: D | null) => this.selected = value);
@@ -303,12 +319,12 @@ export class McDatepicker<D> implements OnDestroy {
 
     /** Open the calendar. */
     open(): void {
-        if (this._opened || this.disabled) {
-            return;
-        }
+        if (this._opened || this.disabled) { return; }
+
         if (!this.datepickerInput) {
             throw Error('Attempted to open an McDatepicker with no associated input.');
         }
+
         if (this.document) {
             this.focusedElementBeforeOpen = this.document.activeElement;
         }
@@ -321,9 +337,7 @@ export class McDatepicker<D> implements OnDestroy {
 
     /** Close the calendar. */
     close(): void {
-        if (!this._opened) {
-            return;
-        }
+        if (!this._opened) { return; }
 
         if (this.popupRef && this.popupRef.hasAttached()) {
             this.popupRef.detach();
@@ -362,8 +376,9 @@ export class McDatepicker<D> implements OnDestroy {
     /** Open the calendar as a popup. */
     private openAsPopup(): void {
         if (!this.calendarPortal) {
-            this.calendarPortal = new ComponentPortal<McDatepickerContent<D>>(McDatepickerContent,
-                this.viewContainerRef);
+            this.calendarPortal = new ComponentPortal<McDatepickerContent<D>>(
+                McDatepickerContent, this.viewContainerRef
+            );
         }
 
         if (!this.popupRef) {
@@ -375,9 +390,9 @@ export class McDatepicker<D> implements OnDestroy {
             this.popupComponentRef.instance.datepicker = this;
 
             // Update the position once the calendar has rendered.
-            this.ngZone.onStable.asObservable().pipe(take(1)).subscribe(() => {
-                this.popupRef.updatePosition();
-            });
+            this.ngZone.onStable.asObservable()
+                .pipe(take(1))
+                .subscribe(() => this.popupRef.updatePosition());
         }
     }
 
@@ -385,8 +400,8 @@ export class McDatepicker<D> implements OnDestroy {
     private createPopup(): void {
         const overlayConfig = new OverlayConfig({
             positionStrategy: this.createPopupPositionStrategy(),
-            hasBackdrop: true,
-            backdropClass: 'mc-overlay-transparent-backdrop',
+            hasBackdrop: this.hasBackdrop,
+            backdropClass: this.backdropClass,
             direction: this.dir,
             scrollStrategy: this.scrollStrategy(),
             panelClass: 'mc-datepicker__popup'
@@ -395,15 +410,21 @@ export class McDatepicker<D> implements OnDestroy {
         this.popupRef = this.overlay.create(overlayConfig);
         this.popupRef.overlayElement.setAttribute('role', 'dialog');
 
-        merge(
+        this.closeSubscription = this.closingActions()
+            .subscribe(() => this.close());
+    }
+
+    private closingActions() {
+        return merge(
             this.popupRef.backdropClick(),
+            this.popupRef.outsidePointerEvents(),
             this.popupRef.detachments(),
             this.popupRef.keydownEvents().pipe(filter((event) => {
                 // Closing on alt + up is only valid when there's an input associated with the datepicker.
                 // tslint:disable-next-line:deprecation
                 return event.keyCode === ESCAPE || (this.datepickerInput && event.altKey && event.keyCode === UP_ARROW);
             }))
-        ).subscribe(() => this.close());
+        );
     }
 
     /** Create the popup PositionStrategy. */

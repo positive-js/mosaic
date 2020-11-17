@@ -291,9 +291,8 @@ describe('McDatepicker', () => {
 
                 const spy = jasmine.createSpy('close event spy');
                 const subscription = testComponent.datepicker.closedStream.subscribe(spy);
-                const backdrop = document.querySelector('.cdk-overlay-backdrop')! as HTMLElement;
 
-                backdrop.click();
+                document.body.click();
                 fixture.detectChanges();
                 flush();
 
