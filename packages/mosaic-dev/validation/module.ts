@@ -20,6 +20,7 @@ import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
 import { McSelectModule } from '@ptsecurity/mosaic/select';
 import { McTagInputEvent, McTagsModule } from '@ptsecurity/mosaic/tags';
+import { McTextareaModule } from '@ptsecurity/mosaic/textarea';
 import { McTreeFlatDataSource, McTreeFlattener, McTreeModule } from '@ptsecurity/mosaic/tree';
 import { McTreeSelectModule } from '@ptsecurity/mosaic/tree-select';
 
@@ -118,10 +119,20 @@ export function ldapLoginValidator(loginRegex: RegExp): ValidatorFn {
 @Component({
     selector: 'app',
     templateUrl: './template.html',
-    styleUrls: ['../main.scss', './styles.scss'],
+    styleUrls: ['./styles.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent {
+    feedbackForm: FormGroup;
+    feedbackFormWithHints: FormGroup;
+    globalErrorForm: FormGroup;
+    smallForm: FormGroup;
+
+    showServerErrors: boolean = false;
+    inProgress: boolean = false;
+
+    ipAddress: FormControl;
+
     reactiveTypeaheadItems: string[] = [];
     inputValue: string = '';
     selectValue: string = '';
@@ -157,6 +168,41 @@ export class DemoComponent {
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
     constructor(private formBuilder: FormBuilder, public changeDetectorRef: ChangeDetectorRef) {
+        this.feedbackFormWithHints = new FormGroup({
+            firstName: new FormControl('', [Validators.required]),
+            lastName: new FormControl('', [Validators.required]),
+            thirdName: new FormControl('', [Validators.required]),
+            email: new FormControl('', [Validators.required, Validators.email]),
+            reason: new FormControl('', [Validators.required]),
+            rating: new FormControl('', [Validators.required]),
+            comment: new FormControl('')
+        });
+
+        this.feedbackForm = new FormGroup({
+            firstName: new FormControl('', [Validators.required]),
+            lastName: new FormControl('', [Validators.required]),
+            thirdName: new FormControl('', [Validators.required]),
+            email: new FormControl('', [Validators.required, Validators.email]),
+            reason: new FormControl('', [Validators.required]),
+            rating: new FormControl('', [Validators.required]),
+            comment: new FormControl('')
+        });
+
+        this.globalErrorForm = new FormGroup({
+            firstName: new FormControl(''),
+            lastName: new FormControl(''),
+            thirdName: new FormControl('')
+        });
+
+        this.smallForm = new FormGroup({
+            firstName: new FormControl('')
+        });
+
+        this.ipAddress = new FormControl(
+            '',
+            [Validators.pattern('^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$')]
+        );
+
         this.treeFlattener = new McTreeFlattener(
             this.transformer, this.getLevel, this.isExpandable, this.getChildren
         );
@@ -190,6 +236,23 @@ export class DemoComponent {
     onSubmitReactiveForm(form: FormGroup) {
         console.log('onSubmitReactiveForm: ', form);
     }
+
+    onSubmitFeedbackForm(form: FormGroup) {
+        console.log('onSubmitReactiveForm: ', form);
+    }
+
+    submitGlobalErrorForm() {
+        this.showServerErrors = false;
+        this.inProgress = true;
+
+        setTimeout(() => {
+            this.showServerErrors = true;
+            this.inProgress = false;
+        // tslint:disable-next-line:no-magic-numbers
+        }, 1000);
+    }
+
+    smallForm() {}
 
     onSubmitTemplateForm(form: NgForm) {
         console.log('onSubmitTemplateForm: ', form);
@@ -290,6 +353,7 @@ export class DemoComponent {
         McAutocompleteModule,
         McTagsModule,
         McInputModule,
+        McTextareaModule,
         McSelectModule,
         McTreeModule,
         CdkTreeModule,
