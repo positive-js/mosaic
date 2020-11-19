@@ -125,6 +125,8 @@ function emptyFormValidator(): ValidatorFn {
     };
 }
 
+const IP_PATTERN = '^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$';
+
 @Component({
     selector: 'app',
     templateUrl: './template.html',
@@ -137,6 +139,7 @@ export class DemoComponent {
     globalErrorForm: FormGroup;
     smallForm: FormGroup;
     checkOnFlyForm: FormGroup;
+    compositeForm: FormGroup;
 
     @ViewChild('tooltip', { static: false }) tooltip: any;
 
@@ -215,10 +218,12 @@ export class DemoComponent {
             folderName: new FormControl('')
         });
 
-        this.ipAddress = new FormControl(
-            '',
-            [Validators.pattern('^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$')]
-        );
+        this.compositeForm = new FormGroup({
+            start: new FormControl('', [Validators.pattern(IP_PATTERN)]),
+            end: new FormControl('', [Validators.pattern(IP_PATTERN)])
+        });
+
+        this.ipAddress = new FormControl('', [Validators.pattern(IP_PATTERN)]);
 
         this.treeFlattener = new McTreeFlattener(
             this.transformer, this.getLevel, this.isExpandable, this.getChildren

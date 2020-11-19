@@ -436,3 +436,21 @@
 <br><br><br><br><br>
 
 Составные поля
+
+<div class="layout-margin">
+    <form class="dev-form layout-row" [formGroup]="compositeForm" novalidate>
+        <div class="dev-column layout-margin">
+            <div class="dev-label">Начало диапазона</div>
+            <mc-form-field>
+                <input mcInput formControlName="start">
+            </mc-form-field>
+        </div>
+
+        <div class="dev-column layout-margin">
+            <div class="dev-label">Окончание</div>
+            <mc-form-field>
+                <input mcInput formControlName="end">
+            </mc-form-field>
+        </div>
+    </form>
+</div>
