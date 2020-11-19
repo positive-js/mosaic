@@ -5,8 +5,11 @@ import {
     FormBuilder,
     FormControl,
     FormGroup,
-    FormsModule, NgForm,
-    ReactiveFormsModule, ValidatorFn,
+    FormsModule,
+    NgForm,
+    ReactiveFormsModule,
+    ValidationErrors,
+    ValidatorFn,
     Validators
 } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -116,8 +119,10 @@ export function ldapLoginValidator(loginRegex: RegExp): ValidatorFn {
     };
 }
 
-function emptyFormValidator(g: FormGroup) {
-    return g.controls.firstName.value && g.controls.lastName.value ? null : { empty: true };
+function emptyFormValidator(): ValidatorFn {
+    return (g: AbstractControl | FormGroup): ValidationErrors | null => {
+        return g.get('firstName')?.value && g.get('lastName')?.value ? null : { empty: true };
+    };
 }
 
 @Component({
@@ -204,7 +209,7 @@ export class DemoComponent {
         this.smallForm = new FormGroup({
             firstName: new FormControl('', Validators.required),
             lastName: new FormControl('', Validators.required)
-        }, emptyFormValidator);
+        }, emptyFormValidator());
 
         this.checkOnFlyForm = new FormGroup({
             folderName: new FormControl('')
