@@ -344,12 +344,16 @@
 
 По уходу с поля
 <div class="layout-margin dev-width">
-    <div class="dev-label">IP-адрес</div>
-    <mc-form-field>
-        <input mcInput [formControl]="ipAddress">
-        <mc-hint class="dev-hint" *ngIf="ipAddress.invalid">IP-адрес не соответствует стандартам RFC</mc-hint>
-    </mc-form-field>
+    <div class="dev-row">
+        <div class="dev-label">IP-адрес</div>
+        <mc-form-field>
+            <input mcInput [formControl]="ipAddress">
+            <mc-hint class="dev-hint" *ngIf="ipAddress.invalid">IP-адрес не соответствует стандартам RFC</mc-hint>
+        </mc-form-field>
+    </div>
 </div>
+
+<br><br><br><br><br>
 
 Глобальная ошибка
 <div class="layout-margin dev-width">
@@ -387,9 +391,11 @@
     </form>
 </div>
 
+<br><br><br><br><br>
+
 Обязательные поля на небольших формах
 <div class="layout-margin dev-width">
-    <form class="dev-form" [formGroup]="smallForm" (ngSubmit)="smallForm()" novalidate>
+    <form class="dev-form" [formGroup]="smallForm" novalidate>
         <div class="dev-row">
             <div class="dev-label">Имя</div>
             <mc-form-field>
@@ -397,6 +403,36 @@
             </mc-form-field>
         </div>
 
-        <button mc-button color="primary" type="submit" [disabled]="inProgress">Отправить</button>
+        <div class="dev-row">
+            <div class="dev-label">Фамилия</div>
+            <mc-form-field>
+                <input mcInput formControlName="lastName">
+            </mc-form-field>
+        </div>
+
+        <button mc-button color="primary" type="submit" [disabled]="smallForm.errors?.empty">Отправить</button>
     </form>
 </div>
+
+<br><br><br><br><br>
+
+Во время ввода значения
+<div class="layout-margin dev-width">
+    <form class="dev-form" [formGroup]="checkOnFlyForm" novalidate>
+        <div class="dev-row">
+            <div class="dev-label">Название папки</div>
+            <mc-form-field
+                mcTooltip
+                [mcTitle]="'Только цифры'"
+                #tooltip="mcTooltip"
+                mcTrigger="manual"
+                mcPlacement="bottom">
+                <input mcInput formControlName="folderName" (input)="onInput($event)">
+            </mc-form-field>
+        </div>
+    </form>
+</div>
+
+<br><br><br><br><br>
+
+Составные поля

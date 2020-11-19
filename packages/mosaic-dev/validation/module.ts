@@ -1,5 +1,5 @@
 /* tslint:disable:no-console no-reserved-keywords */
-import { ChangeDetectorRef, Component, NgModule, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, NgModule, ViewChild, ViewEncapsulation } from '@angular/core';
 import {
     AbstractControl,
     FormBuilder,
@@ -21,6 +21,7 @@ import { McInputModule } from '@ptsecurity/mosaic/input';
 import { McSelectModule } from '@ptsecurity/mosaic/select';
 import { McTagInputEvent, McTagsModule } from '@ptsecurity/mosaic/tags';
 import { McTextareaModule } from '@ptsecurity/mosaic/textarea';
+import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 import { McTreeFlatDataSource, McTreeFlattener, McTreeModule } from '@ptsecurity/mosaic/tree';
 import { McTreeSelectModule } from '@ptsecurity/mosaic/tree-select';
 
@@ -115,6 +116,9 @@ export function ldapLoginValidator(loginRegex: RegExp): ValidatorFn {
     };
 }
 
+function emptyFormValidator(g: FormGroup) {
+    return g.controls.firstName.value && g.controls.lastName.value ? null : { empty: true };
+}
 
 @Component({
     selector: 'app',
@@ -127,6 +131,9 @@ export class DemoComponent {
     feedbackFormWithHints: FormGroup;
     globalErrorForm: FormGroup;
     smallForm: FormGroup;
+    checkOnFlyForm: FormGroup;
+
+    @ViewChild('tooltip', { static: false }) tooltip: any;
 
     showServerErrors: boolean = false;
     inProgress: boolean = false;
@@ -195,7 +202,12 @@ export class DemoComponent {
         });
 
         this.smallForm = new FormGroup({
-            firstName: new FormControl('')
+            firstName: new FormControl('', Validators.required),
+            lastName: new FormControl('', Validators.required)
+        }, emptyFormValidator);
+
+        this.checkOnFlyForm = new FormGroup({
+            folderName: new FormControl('')
         });
 
         this.ipAddress = new FormControl(
@@ -241,6 +253,20 @@ export class DemoComponent {
         console.log('onSubmitReactiveForm: ', form);
     }
 
+    onInput(event) {
+        const regex = /^\d+$/g;
+
+        if (!regex.test(event.target.value)) {
+            event.target.value = event.target.value.replace(/\D+/g, '');
+
+            if (!this.tooltip.isTooltipOpen) {
+                this.tooltip.show();
+
+                setTimeout(() => this.tooltip.hide(), 3000);
+            }
+        }
+    }
+
     submitGlobalErrorForm() {
         this.showServerErrors = false;
         this.inProgress = true;
@@ -251,8 +277,6 @@ export class DemoComponent {
         // tslint:disable-next-line:no-magic-numbers
         }, 1000);
     }
-
-    smallForm() {}
 
     onSubmitTemplateForm(form: NgForm) {
         console.log('onSubmitTemplateForm: ', form);
@@ -350,6 +374,7 @@ export class DemoComponent {
         ReactiveFormsModule,
         FormsModule,
         McButtonModule,
+        McToolTipModule,
         McAutocompleteModule,
         McTagsModule,
         McInputModule,
