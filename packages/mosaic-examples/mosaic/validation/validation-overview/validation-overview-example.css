@@ -1,0 +1,41 @@
+
+.dev-form {
+    color: #999999
+}
+
+.dev-row {
+    margin-bottom: 16px;
+}
+
+.dev-label {
+    margin-bottom: 4px;
+}
+
+.dev-width {
+    width: 400px;
+}
+
+.dev-column {
+    width: 200px;
+}
+
+.dev-hint {
+    color: #E76E5C;
+}
+
+.dev-composite-form {
+    width: 600px;
+}
+
+.dev-column {
+    margin-right: 16px;
+}
+
+.layout-row {
+    margin-bottom: 4px;
+}
+
+.validation-error {
+    background-color: #FCEFEC;
+}
+

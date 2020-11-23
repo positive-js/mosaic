@@ -319,6 +319,19 @@ const DOCS: { [key: string]: DocCategory[] } = {
                     examples: ['date-types']
                 }
             ]
+        },
+        {
+            id: 'core/styles',
+            name: 'Validation',
+            summary: 'styles',
+            items: [
+                {
+                    id: 'validation',
+                    name: 'Validation',
+                    summary: '',
+                    examples: ['validation-types']
+                }
+            ]
         }
     ],
     [CDK]: [
