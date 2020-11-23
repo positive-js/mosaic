@@ -49,3 +49,21 @@ header {
 .dev-hint {
     color: mc-color($error);
 }
+
+.dev-composite-form {
+    width: 600px;
+
+    .dev-column {
+        margin-right: 16px;
+    }
+
+    .layout-row {
+        margin-bottom: 4px;
+    }
+
+    &.validation-error {
+        $is-dark: map-get($theme, is-dark);
+
+        background-color: mc-color($error, if($is-dark, darker, lighter));;
+    }
+}
