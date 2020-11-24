@@ -15,10 +15,6 @@
     width: 400px;
 }
 
-.dev-column {
-    width: 200px;
-}
-
 .dev-hint {
     color: #E76E5C;
 }
@@ -28,6 +24,7 @@
 }
 
 .dev-column {
+    width: 200px;
     margin-right: 16px;
 }
 
