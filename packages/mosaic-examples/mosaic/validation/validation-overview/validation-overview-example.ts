@@ -1,5 +1,6 @@
 import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { noop } from 'rxjs';
 
 
 function emptyFormValidator(): ValidatorFn {
@@ -10,7 +11,6 @@ function emptyFormValidator(): ValidatorFn {
 
 function compositeFormValidator(): ValidatorFn {
     return (g: AbstractControl | FormGroup): ValidationErrors | null => {
-        console.log('compositeFormValidator');
         const start = g.get('start')?.value;
         const end = g.get('end')?.value;
 
@@ -95,7 +95,7 @@ export class ValidationOverviewExample {
     }
 
     onSubmitFeedbackForm(form: FormGroup) {
-        console.log('onSubmitReactiveForm: ', form);
+        noop();
     }
 
     onInput(event) {
@@ -107,6 +107,7 @@ export class ValidationOverviewExample {
             if (!this.tooltip.isTooltipOpen) {
                 this.tooltip.show();
 
+                // tslint:disable-next-line:no-magic-numbers
                 setTimeout(() => this.tooltip.hide(), 3000);
             }
         }
