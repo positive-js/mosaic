@@ -1,12 +1,15 @@
 /* tslint:disable:no-console no-reserved-keywords */
-import { ChangeDetectorRef, Component, NgModule, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, NgModule, ViewChild, ViewEncapsulation } from '@angular/core';
 import {
     AbstractControl,
     FormBuilder,
     FormControl,
     FormGroup,
-    FormsModule, NgForm,
-    ReactiveFormsModule, ValidatorFn,
+    FormsModule,
+    NgForm,
+    ReactiveFormsModule,
+    ValidationErrors,
+    ValidatorFn,
     Validators
 } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -20,6 +23,8 @@ import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
 import { McSelectModule } from '@ptsecurity/mosaic/select';
 import { McTagInputEvent, McTagsModule } from '@ptsecurity/mosaic/tags';
+import { McTextareaModule } from '@ptsecurity/mosaic/textarea';
+import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 import { McTreeFlatDataSource, McTreeFlattener, McTreeModule } from '@ptsecurity/mosaic/tree';
 import { McTreeSelectModule } from '@ptsecurity/mosaic/tree-select';
 
@@ -114,11 +119,10 @@ export function ldapLoginValidator(loginRegex: RegExp): ValidatorFn {
     };
 }
 
-
 @Component({
     selector: 'app',
     templateUrl: './template.html',
-    styleUrls: ['../main.scss', './styles.scss'],
+    styleUrls: ['./styles.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent {
@@ -287,9 +291,11 @@ export class DemoComponent {
         ReactiveFormsModule,
         FormsModule,
         McButtonModule,
+        McToolTipModule,
         McAutocompleteModule,
         McTagsModule,
         McInputModule,
+        McTextareaModule,
         McSelectModule,
         McTreeModule,
         CdkTreeModule,

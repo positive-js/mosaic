@@ -459,8 +459,8 @@ export class McTagList extends McTagListMixinBase implements McFormFieldControl<
         this.tagInput = inputElement;
 
         // todo need rethink about it
-        if (this.ngControl && inputElement.ngControl) {
-            inputElement.ngControl.statusChanges!
+        if (this.ngControl && inputElement.ngControl?.statusChanges) {
+            inputElement.ngControl.statusChanges
                 .subscribe(() => this.ngControl.control!.setErrors(inputElement.ngControl!.errors));
         }
     }
