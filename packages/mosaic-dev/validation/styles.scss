@@ -1,3 +1,10 @@
+@import '../main.scss';
+
+@import '../../mosaic/core/visual/all-visual';
+
+
+@include mosaic-visual();
+
 .container {
     display: flex;
     flex-direction: row;
