@@ -1,6 +1,5 @@
 import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { noop } from 'rxjs';
 
 
 function emptyFormValidator(): ValidatorFn {
@@ -29,6 +28,9 @@ function compositeFormValidator(): ValidatorFn {
 
 const IP_PATTERN = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/;
 
+/**
+ * @title Validation
+ */
 @Component({
     selector: 'validation-overview-example',
     templateUrl: 'validation-overview-example.html',
@@ -92,10 +94,6 @@ export class ValidationOverviewExample {
         }, compositeFormValidator());
 
         this.ipAddress = new FormControl('', [Validators.pattern(IP_PATTERN)]);
-    }
-
-    onSubmitFeedbackForm(form: FormGroup) {
-        noop();
     }
 
     onInput(event) {
