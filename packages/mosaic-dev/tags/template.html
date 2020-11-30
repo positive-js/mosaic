@@ -45,6 +45,7 @@
                    [mcAutocomplete]="autocomplete"
                    [mcTagInputAddOnBlur]="false"
                    [mcTagInputFor]="autocompleteTagList"
+                   (mcTagInputTokenEnd)="autocompleteOnCreate($event)"
                    (blur)="addOnBlurFunc($event)">
         </mc-tag-list>
         <mc-autocomplete #autocomplete (optionSelected)="autocompleteOnSelect($event)">
