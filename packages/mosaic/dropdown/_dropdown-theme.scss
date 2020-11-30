@@ -1,6 +1,7 @@
 @import '../core/theming/theming';
 @import '../core/styles/typography/typography-utils';
 @import '../core/styles/common/popup';
+@import '../core/styles/common/vendor-prefixes';
 
 
 @mixin mc-dropdown-theme($theme) {
@@ -14,6 +15,8 @@
     }
 
     .mc-dropdown__item {
+        @include user-select(text);
+
         color: mc-color($foreground, text);
 
         background: transparent;
