@@ -10,8 +10,17 @@ import { McTextareaModule } from '@ptsecurity/mosaic/textarea';
 import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 
 import {
+    ValidationCompositeOverviewExample
+} from './validation-composite-overview/validation-composite-overview-example';
+import {
+    ValidationGlobalOverviewExample
+} from './validation-global-overview/validation-global-overview-example';
+import { ValidationOnBlurOverviewExample } from './validation-on-blur-overview/validation-on-blur-overview-example';
+import { ValidationOnTypeOverviewExample } from './validation-on-type-overview/validation-on-type-overview-example';
+import {
     ValidationOverviewExample
 } from './validation-overview/validation-overview-example';
+import { ValidationSmallOverviewExample } from './validation-small-overview/validation-small-overview-example';
 
 
 @NgModule({
@@ -27,7 +36,21 @@ import {
         McButtonModule,
         McTextareaModule
     ],
-    declarations: [ValidationOverviewExample],
-    exports: [ValidationOverviewExample]
+    declarations: [
+        ValidationOverviewExample,
+        ValidationCompositeOverviewExample,
+        ValidationGlobalOverviewExample,
+        ValidationOnBlurOverviewExample,
+        ValidationOnTypeOverviewExample,
+        ValidationSmallOverviewExample
+    ],
+    exports: [
+        ValidationOverviewExample,
+        ValidationCompositeOverviewExample,
+        ValidationGlobalOverviewExample,
+        ValidationOnBlurOverviewExample,
+        ValidationOnTypeOverviewExample,
+        ValidationSmallOverviewExample
+    ]
 })
 export class ValidationExamplesModule {}

@@ -1,0 +1,15 @@
+<div class="layout-margin dev-width">
+    <form class="dev-form" [formGroup]="checkOnFlyForm" novalidate>
+        <div class="dev-row">
+            <div class="dev-label">Название папки</div>
+            <mc-form-field
+                mcTooltip
+                [mcTitle]="'Только цифры'"
+                #tooltip="mcTooltip"
+                mcTrigger="manual"
+                mcPlacement="bottom">
+                <input mcInput formControlName="folderName" (input)="onInput($event)">
+            </mc-form-field>
+        </div>
+    </form>
+</div>

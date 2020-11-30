@@ -1,0 +1,9 @@
+<div class="layout-margin dev-width">
+    <div class="dev-row">
+        <div class="dev-label">IP-адрес</div>
+        <mc-form-field>
+            <input mcInput [formControl]="ipAddress">
+            <mc-hint class="dev-hint" *ngIf="ipAddress.invalid">IP-адрес не соответствует стандартам RFC</mc-hint>
+        </mc-form-field>
+    </div>
+</div>
