@@ -31,6 +31,7 @@ Versions of this site are also available for
 - [Next Version (from `master`)](https://next.mosaic.ptsecurity.com)
 - [v8](https://v8.mosaic.ptsecurity.com)
 - [v9](https://v9.mosaic.ptsecurity.com)
+- [v10](https://v10.mosaic.ptsecurity.com/)
 
 
 ## 🚀 Getting started
