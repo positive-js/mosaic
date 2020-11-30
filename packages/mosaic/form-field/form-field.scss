@@ -16,7 +16,11 @@ $mc-form-field-border-size: 1px;
     }
 }
 
-.mc-form-field__hint {
+.mc-hint {
+    display: block;
+}
+
+.mc-form-field__hint > .mc-hint {
     margin-top: 4px;
 }
 
