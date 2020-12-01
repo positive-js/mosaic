@@ -1,52 +1,52 @@
 <div class="layout-row layout-margin">
-    <div class="dev-width">
+    <div class="docs-width">
         С текстом ошибок
-        <form class="dev-form" [formGroup]="feedbackFormWithHints" novalidate>
-            <div class="dev-row">
-                <div class="dev-label">Имя</div>
+        <form class="docs-form" [formGroup]="feedbackFormWithHints" novalidate>
+            <div class="docs-row">
+                <div class="docs-label">Имя</div>
                 <mc-form-field>
                     <input mcInput formControlName="firstName">
-                    <mc-hint class="dev-hint" *ngIf="feedbackFormWithHints.controls.firstName.invalid">Укажите ваше имя</mc-hint>
+                    <mc-hint class="mc-caption docs-hint" *ngIf="feedbackFormWithHints.controls.firstName.invalid">Укажите ваше имя</mc-hint>
                 </mc-form-field>
             </div>
 
-            <div class="dev-row">
-                <div class="dev-label">Фамилия</div>
+            <div class="docs-row">
+                <div class="docs-label">Фамилия</div>
                 <mc-form-field>
                     <input mcInput formControlName="lastName">
-                    <mc-hint class="dev-hint" *ngIf="feedbackFormWithHints.controls.lastName.invalid">Укажите вашу фамилию</mc-hint>
+                    <mc-hint class="mc-caption docs-hint" *ngIf="feedbackFormWithHints.controls.lastName.invalid">Укажите вашу фамилию</mc-hint>
                 </mc-form-field>
             </div>
 
-            <div class="dev-row">
-                <div class="dev-label">Отчество</div>
+            <div class="docs-row">
+                <div class="docs-label">Отчество</div>
                 <mc-form-field>
                     <input mcInput formControlName="thirdName" placeholder="Необязательно">
                 </mc-form-field>
             </div>
 
-            <div class="dev-row">
-                <div class="dev-label">Адрес эл. почты</div>
+            <div class="docs-row">
+                <div class="docs-label">Адрес эл. почты</div>
                 <mc-form-field>
                     <input mcInput formControlName="email">
-                    <mc-hint class="dev-hint" *ngIf="feedbackFormWithHints.controls.email.invalid">Оставьте свой адрес эл. почты</mc-hint>
+                    <mc-hint class="mc-caption docs-hint" *ngIf="feedbackFormWithHints.controls.email.invalid">Оставьте свой адрес эл. почты</mc-hint>
                 </mc-form-field>
             </div>
 
-            <div class="dev-row">
-                <div class="dev-label">Причина обращения</div>
+            <div class="docs-row">
+                <div class="docs-label">Причина обращения</div>
                 <mc-form-field>
                     <mc-select formControlName="reason">
                         <mc-option value="1">1</mc-option>
                         <mc-option value="2">2</mc-option>
                         <mc-option value="3">3</mc-option>
                     </mc-select>
-                    <mc-hint class="dev-hint" *ngIf="feedbackFormWithHints.controls.reason.invalid">Укажите причину обращения</mc-hint>
+                    <mc-hint class="mc-caption docs-hint" *ngIf="feedbackFormWithHints.controls.reason.invalid">Укажите причину обращения</mc-hint>
                 </mc-form-field>
             </div>
 
-            <div class="dev-row">
-                <div class="dev-label">Ваша оценка</div>
+            <div class="docs-row">
+                <div class="docs-label">Ваша оценка</div>
                 <mc-form-field>
                     <mc-select formControlName="rating">
                         <mc-option value="1">1</mc-option>
@@ -54,12 +54,12 @@
                         <mc-option value="3">3</mc-option>
                     </mc-select>
 
-                    <mc-hint class="dev-hint" *ngIf="feedbackFormWithHints.controls.rating.invalid">Дайте оценку работы наших специалистов</mc-hint>
+                    <mc-hint class="mc-caption docs-hint" *ngIf="feedbackFormWithHints.controls.rating.invalid">Дайте оценку работы наших специалистов</mc-hint>
                 </mc-form-field>
             </div>
 
-            <div class="dev-row">
-                <div class="dev-label">Комментарий</div>
+            <div class="docs-row">
+                <div class="docs-label">Комментарий</div>
                 <mc-form-field>
                     <textarea mcTextarea formControlName="comment"></textarea>
                 </mc-form-field>
@@ -69,39 +69,39 @@
         </form>
     </div>
 
-    <div class="dev-width">
+    <div class="docs-width">
         Без текста ошибок
-        <form class="dev-form" [formGroup]="feedbackForm" novalidate>
-            <div class="dev-row">
-                <div class="dev-label">Имя</div>
+        <form class="docs-form" [formGroup]="feedbackForm" novalidate>
+            <div class="docs-row">
+                <div class="docs-label">Имя</div>
                 <mc-form-field>
                     <input mcInput formControlName="firstName">
                 </mc-form-field>
             </div>
 
-            <div class="dev-row">
-                <div class="dev-label">Фамилия</div>
+            <div class="docs-row">
+                <div class="docs-label">Фамилия</div>
                 <mc-form-field>
                     <input mcInput formControlName="lastName">
                 </mc-form-field>
             </div>
 
-            <div class="dev-row">
-                <div class="dev-label">Отчество</div>
+            <div class="docs-row">
+                <div class="docs-label">Отчество</div>
                 <mc-form-field>
                     <input mcInput formControlName="thirdName" placeholder="Необязательно">
                 </mc-form-field>
             </div>
 
-            <div class="dev-row">
-                <div class="dev-label">Адрес эл. почты</div>
+            <div class="docs-row">
+                <div class="docs-label">Адрес эл. почты</div>
                 <mc-form-field>
                     <input mcInput formControlName="email">
                 </mc-form-field>
             </div>
 
-            <div class="dev-row">
-                <div class="dev-label">Причина обращения</div>
+            <div class="docs-row">
+                <div class="docs-label">Причина обращения</div>
                 <mc-form-field>
                     <mc-select formControlName="reason">
                         <mc-option value="1">1</mc-option>
@@ -111,8 +111,8 @@
                 </mc-form-field>
             </div>
 
-            <div class="dev-row">
-                <div class="dev-label">Ваша оценка</div>
+            <div class="docs-row">
+                <div class="docs-label">Ваша оценка</div>
                 <mc-form-field>
                     <mc-select formControlName="rating">
                         <mc-option value="1">1</mc-option>
@@ -122,8 +122,8 @@
                 </mc-form-field>
             </div>
 
-            <div class="dev-row">
-                <div class="dev-label">Комментарий</div>
+            <div class="docs-row">
+                <div class="docs-label">Комментарий</div>
                 <mc-form-field>
                     <textarea mcTextarea formControlName="comment"></textarea>
                 </mc-form-field>
