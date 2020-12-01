@@ -1,25 +1,17 @@
 import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
-
-function emptyFormValidator(): ValidatorFn {
-    return (g: AbstractControl | FormGroup): ValidationErrors | null => {
-        return g.get('firstName')?.value && g.get('lastName')?.value ? null : { empty: true };
-    };
-}
-
-const IP_PATTERN = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/;
 
 /**
- * @title Validation
+ * @title validation-on-type
  */
 @Component({
-    selector: 'validation-on-type-overview-example',
-    templateUrl: 'validation-on-type-overview-example.html',
-    styleUrls: ['validation-on-type-overview-example.css'],
+    selector: 'validation-on-type-example',
+    templateUrl: 'validation-on-type-example.html',
+    styleUrls: ['validation-on-type-example.css'],
     encapsulation: ViewEncapsulation.None
 })
-export class ValidationOnTypeOverviewExample {
+export class ValidationOnTypeExample {
     checkOnFlyForm: FormGroup;
 
     @ViewChild('tooltip', { static: false }) tooltip: any;

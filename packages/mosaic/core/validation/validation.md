@@ -2,16 +2,16 @@
 <!-- example(validation-overview) -->
 
 ### По уходу с поля
-<!-- example(validation-on-blur-overview) -->
+<!-- example(validation-on-blur) -->
 
 ### Глобальная ошибка
-<!-- example(validation-global-overview) -->
+<!-- example(validation-global) -->
 
 ### Обязательные поля на небольших формах
-<!-- example(validation-small-overview) -->
+<!-- example(validation-small) -->
 
 ### Во время ввода значения
-<!-- example(validation-on-type-overview) -->
+<!-- example(validation-on-type) -->
 
 ### Составные поля
-<!-- example(validation-composite-overview) -->
+<!-- example(validation-composite) -->

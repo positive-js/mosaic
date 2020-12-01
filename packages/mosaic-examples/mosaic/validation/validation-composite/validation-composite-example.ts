@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
 
@@ -23,15 +23,15 @@ function compositeFormValidator(): ValidatorFn {
 const IP_PATTERN = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/;
 
 /**
- * @title Validation
+ * @title validation-composite
  */
 @Component({
-    selector: 'validation-composite-overview-example',
-    templateUrl: 'validation-composite-overview-example.html',
-    styleUrls: ['validation-composite-overview-example.css'],
+    selector: 'validation-composite-example',
+    templateUrl: 'validation-composite-example.html',
+    styleUrls: ['validation-composite-example.css'],
     encapsulation: ViewEncapsulation.None
 })
-export class ValidationCompositeOverviewExample {
+export class ValidationCompositeExample {
     compositeForm: FormGroup;
 
     constructor() {

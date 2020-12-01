@@ -3,20 +3,18 @@ import { FormControl, FormGroup } from '@angular/forms';
 
 
 /**
- * @title Validation
+ * @title validation-global
  */
 @Component({
-    selector: 'validation-global-overview-example',
-    templateUrl: 'validation-global-overview-example.html',
-    styleUrls: ['validation-global-overview-example.css'],
+    selector: 'validation-global-example',
+    templateUrl: 'validation-global-example.html',
+    styleUrls: ['validation-global-example.css'],
     encapsulation: ViewEncapsulation.None
 })
-export class ValidationGlobalOverviewExample {
+export class ValidationGlobalExample {
     globalErrorForm: FormGroup;
     showServerErrors: boolean = false;
     inProgress: boolean = false;
-
-    ipAddress: FormControl;
 
     constructor() {
         this.globalErrorForm = new FormGroup({

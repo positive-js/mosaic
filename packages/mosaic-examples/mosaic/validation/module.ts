@@ -9,18 +9,12 @@ import { McSelectModule } from '@ptsecurity/mosaic/select';
 import { McTextareaModule } from '@ptsecurity/mosaic/textarea';
 import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 
-import {
-    ValidationCompositeOverviewExample
-} from './validation-composite-overview/validation-composite-overview-example';
-import {
-    ValidationGlobalOverviewExample
-} from './validation-global-overview/validation-global-overview-example';
-import { ValidationOnBlurOverviewExample } from './validation-on-blur-overview/validation-on-blur-overview-example';
-import { ValidationOnTypeOverviewExample } from './validation-on-type-overview/validation-on-type-overview-example';
-import {
-    ValidationOverviewExample
-} from './validation-overview/validation-overview-example';
-import { ValidationSmallOverviewExample } from './validation-small-overview/validation-small-overview-example';
+import { ValidationCompositeExample } from './validation-composite/validation-composite-example';
+import { ValidationGlobalExample } from './validation-global/validation-global-example';
+import { ValidationOnBlurExample } from './validation-on-blur/validation-on-blur-example';
+import { ValidationOnTypeExample } from './validation-on-type/validation-on-type-example';
+import { ValidationOverviewExample } from './validation-overview/validation-overview-example';
+import { ValidationSmallExample } from './validation-small/validation-small-example';
 
 
 @NgModule({
@@ -38,19 +32,19 @@ import { ValidationSmallOverviewExample } from './validation-small-overview/vali
     ],
     declarations: [
         ValidationOverviewExample,
-        ValidationCompositeOverviewExample,
-        ValidationGlobalOverviewExample,
-        ValidationOnBlurOverviewExample,
-        ValidationOnTypeOverviewExample,
-        ValidationSmallOverviewExample
+        ValidationCompositeExample,
+        ValidationGlobalExample,
+        ValidationOnBlurExample,
+        ValidationOnTypeExample,
+        ValidationSmallExample
     ],
     exports: [
         ValidationOverviewExample,
-        ValidationCompositeOverviewExample,
-        ValidationGlobalOverviewExample,
-        ValidationOnBlurOverviewExample,
-        ValidationOnTypeOverviewExample,
-        ValidationSmallOverviewExample
+        ValidationCompositeExample,
+        ValidationGlobalExample,
+        ValidationOnBlurExample,
+        ValidationOnTypeExample,
+        ValidationSmallExample
     ]
 })
 export class ValidationExamplesModule {}

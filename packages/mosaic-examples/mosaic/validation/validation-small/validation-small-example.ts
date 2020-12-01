@@ -10,15 +10,15 @@ function emptyFormValidator(): ValidatorFn {
 
 
 /**
- * @title Validation
+ * @title validation-small
  */
 @Component({
-    selector: 'validation-small-overview-example',
-    templateUrl: 'validation-small-overview-example.html',
-    styleUrls: ['validation-small-overview-example.css'],
+    selector: 'validation-small-example',
+    templateUrl: 'validation-small-example.html',
+    styleUrls: ['validation-small-example.css'],
     encapsulation: ViewEncapsulation.None
 })
-export class ValidationSmallOverviewExample {
+export class ValidationSmallExample {
     smallForm: FormGroup;
 
     constructor() {

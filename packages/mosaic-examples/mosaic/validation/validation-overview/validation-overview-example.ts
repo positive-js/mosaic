@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 
 /**
- * @title Validation
+ * @title validation-overview
  */
 @Component({
     selector: 'validation-overview-example',

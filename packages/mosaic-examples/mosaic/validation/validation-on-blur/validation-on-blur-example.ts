@@ -1,19 +1,19 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 
 
 const IP_PATTERN = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/;
 
 /**
- * @title Validation
+ * @title validation-on-blur
  */
 @Component({
-    selector: 'validation-on-blur-overview-example',
-    templateUrl: 'validation-on-blur-overview-example.html',
-    styleUrls: ['validation-on-blur-overview-example.css'],
+    selector: 'validation-on-blur-example',
+    templateUrl: 'validation-on-blur-example.html',
+    styleUrls: ['validation-on-blur-example.css'],
     encapsulation: ViewEncapsulation.None
 })
-export class ValidationOnBlurOverviewExample {
+export class ValidationOnBlurExample {
     ipAddress: FormControl;
 
     constructor() {

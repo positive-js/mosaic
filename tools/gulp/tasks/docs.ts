@@ -99,7 +99,7 @@ task('markdown-docs-mosaic', () => {
     markdown.marked.Renderer.prototype.heading = (text: string, level: number): string => {
         // tslint:disable-next-line:no-magic-numbers
         if (level === 3 || level === 4) {
-            const escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
+            const escapedText = text.toLowerCase().replace(/\s/g, '-');
 
             return `
         <div class="docs-header-link docs-header-link_${level}">
