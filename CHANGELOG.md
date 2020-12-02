@@ -1,3 +1,19 @@
+# 9.3.0 "Firefly" (2020-12-02)
+
+### Mosaic
+
+ * bug fix  **dropdown:** copy/paste doesn't work (#UIM-541) ([#541](https://github.com/positive-js/mosaic/issues/541)) ([7e2db1e](https://github.com/positive-js/mosaic/commit/7e2db1e0e2f2a397353c9c9013b84878ea102fba)), closes [#UIM-541](https://github.com/positive-js/mosaic/issues/UIM-541)
+ * bug fix  **form-field:** form-field render hint with empty tag (#UIM-542) ([0eb8a33](https://github.com/positive-js/mosaic/commit/0eb8a336af090560cd24bbba96ec150b5cd51096)), closes [#UIM-542](https://github.com/positive-js/mosaic/issues/UIM-542)
+ * bug fix  **tags:** tags are incorrectly added to mc-tag-list with autocomplete #UIM-486 ([#501](https://github.com/positive-js/mosaic/issues/501)) ([b25182e](https://github.com/positive-js/mosaic/commit/b25182e1de9486d0512c32708247bbba3ad0baa7)), closes [#UIM-486](https://github.com/positive-js/mosaic/issues/UIM-486)
+ * bug fix  **tree:** filterValue have to work with null value (#UIM-529) ([#529](https://github.com/positive-js/mosaic/issues/529)) ([f43fe5d](https://github.com/positive-js/mosaic/commit/f43fe5d099ccfddc04365f991fe77c1c956cff9f)), closes [#UIM-529](https://github.com/positive-js/mosaic/issues/UIM-529)
+ * feature  **button:** added active state for transparent style (#UIM-489) ([#530](https://github.com/positive-js/mosaic/issues/530)) ([fa8c339](https://github.com/positive-js/mosaic/commit/fa8c33967b8fbc45457a17cb0d092fc1b68a0d16)), closes [#UIM-489](https://github.com/positive-js/mosaic/issues/UIM-489)
+
+### Docs
+
+ * bug fix  Autocomplete with active search - selection incorrect (#UIM-518) ([#531](https://github.com/positive-js/mosaic/issues/531)) ([caa97f6](https://github.com/positive-js/mosaic/commit/caa97f61deb1992562d72166316edc7daab13da5)), closes [#UIM-518](https://github.com/positive-js/mosaic/issues/UIM-518)
+ * bug fix  Autocomplete with copy & paste (#UIM-540) ([#540](https://github.com/positive-js/mosaic/issues/540)) ([1b30b97](https://github.com/positive-js/mosaic/commit/1b30b97f9115150fed12f38390193995660dedd5)), closes [#UIM-540](https://github.com/positive-js/mosaic/issues/UIM-540)
+ * feature  added examples for validation (#UIM-528) ([#538](https://github.com/positive-js/mosaic/issues/538)) ([3652434](https://github.com/positive-js/mosaic/commit/3652434c4b386a2ff643bde1f945fa13a8ddb2ee)), closes [#UIM-528](https://github.com/positive-js/mosaic/issues/UIM-528) [#UIM-528](https://github.com/positive-js/mosaic/issues/UIM-528)
+
 ## 9.2.2 "Orange Boat" (2020-11-06)
 
 ### Mosaic
