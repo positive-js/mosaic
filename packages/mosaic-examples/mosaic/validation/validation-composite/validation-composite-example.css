@@ -12,6 +12,8 @@
 
 .docs-composite-form {
     width: 600px;
+
+    margin-bottom: 40px;
 }
 
 .docs-column {
@@ -21,4 +23,8 @@
 
 .layout-row {
     margin-bottom: 4px;
+}
+
+.validation-error {
+    background-color: #FCEFEC;
 }
