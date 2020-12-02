@@ -1,0 +1,24 @@
+{
+    "source": [
+        "packages/mosaic/design-tokens/properties/**/*.json",
+        "packages/mosaic/design-tokens/components/**/*.json"
+    ],
+    "platforms": {
+        "scss": {
+            "transformGroup": "scss",
+            "buildPath": "packages/mosaic/design-tokens/",
+            "files": [{
+                "destination": "tokens.scss",
+                "format": "scss/variables"
+            }]
+        },
+        "js": {
+            "transformGroup": "js",
+            "buildPath": "packages/mosaic/design-tokens/",
+            "files": [{
+                "destination": "tokens.js",
+                "format": "javascript/es6"
+            }]
+        }
+    }
+}
