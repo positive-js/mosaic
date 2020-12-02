@@ -1,0 +1,30 @@
+.docs-form {
+    color: #999999
+}
+
+.docs-label {
+    margin-bottom: 4px;
+}
+
+.docs-hint {
+    color: #E76E5C;
+}
+
+.docs-composite-form {
+    width: 600px;
+
+    margin-bottom: 40px;
+}
+
+.docs-column {
+    width: 200px;
+    margin-right: 16px;
+}
+
+.layout-row {
+    margin-bottom: 4px;
+}
+
+.validation-error {
+    background-color: #FCEFEC;
+}

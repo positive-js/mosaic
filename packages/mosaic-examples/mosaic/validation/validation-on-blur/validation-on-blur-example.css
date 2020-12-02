@@ -1,7 +1,3 @@
-.docs-form {
-    color: #999999
-}
-
 .docs-row {
     margin-bottom: 16px;
 }
@@ -16,8 +12,4 @@
 
 .docs-hint {
     color: #E76E5C;
-}
-
-.layout-row {
-    margin-bottom: 4px;
 }

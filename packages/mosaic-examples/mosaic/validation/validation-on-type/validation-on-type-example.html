@@ -1,0 +1,16 @@
+<div class="layout-margin docs-width">
+    <form class="docs-form" [formGroup]="checkOnFlyForm" novalidate>
+        <div class="docs-row">
+            <div class="docs-label">Название папки</div>
+            <mc-form-field
+                mcTooltip
+                [mcTitle]="'Только цифры'"
+                [mcMouseEnterDelay]="10"
+                #tooltip="mcTooltip"
+                mcTrigger="manual"
+                mcPlacement="bottom">
+                <input mcInput formControlName="folderName" (input)="onInput($event)">
+            </mc-form-field>
+        </div>
+    </form>
+</div>
