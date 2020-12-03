@@ -22,20 +22,45 @@
         background-color: $background-color;
     }
 
-    .mc-tooltip_placement-top .mc-tooltip-arrow {
-        border-top-color: $background-color;
-    }
+    .mc-tooltip.mc-tooltip_warning {
+        $warning: map_get($theme, warning);
 
-    .mc-tooltip_placement-right .mc-tooltip-arrow {
-        border-right-color: $background-color;
-    }
+        $background-color: mc-color($warning, 60);
+        $border-color: mc-color($warning, 200);
 
-    .mc-tooltip_placement-left .mc-tooltip-arrow {
-        border-left-color: $background-color;
-    }
+        .mc-tooltip-arrow {
+            border: 1px solid $border-color;
 
-    .mc-tooltip_placement-bottom .mc-tooltip-arrow {
-        border-bottom-color: $background-color;
+            background-color: $background-color;
+        }
+
+        .mc-tooltip-inner {
+            color: $color;
+
+            box-shadow: $shadow;
+            border: 1px solid $border-color;
+            background-color: $background-color;
+        }
+
+        &.mc-tooltip_placement-top .mc-tooltip-arrow {
+            border-top-color: transparent;
+            border-left-color: transparent;
+        }
+
+        &.mc-tooltip_placement-right .mc-tooltip-arrow {
+            border-right-color: transparent;
+            border-top-color: transparent;
+        }
+
+        &.mc-tooltip_placement-left .mc-tooltip-arrow {
+            border-left-color: transparent;
+            border-bottom-color: transparent;
+        }
+
+        &.mc-tooltip_placement-bottom .mc-tooltip-arrow {
+            border-bottom-color: transparent;
+            border-right-color: transparent;
+        }
     }
 }
 

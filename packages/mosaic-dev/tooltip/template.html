@@ -1,94 +1,96 @@
 <section class="container flex-100 layout-row layout-align-start-center">
-        <div class="flex layout-column layout-align-center-center container-item">
-            <span class="mc-title">Focus</span>
-            <button
+    <div class="flex layout-column layout-align-center-center container-item">
+        <span class="mc-title">Focus</span>
+        <button
+            mc-button
+            mcTooltip
+            mcTitle="Удалить файл"
+            mcTrigger="focus"
+            mcPlacement="top">top</button>
+        <button
+            mc-button
+            mcTooltip="Подсказка может занимать две и более строк"
+            mcTrigger="focus"
+            mcPlacement="right">right</button>
+        <button
+            mc-button
+            mcTooltip="PDQL-запрос фильтра содержит ошибки"
+            mcTrigger="focus"
+            mcPlacement="left">left</button>
+        <button
+            mc-button
+            mcTooltip="PDQL-запрос фильтра содержит ошибки. Uncaught SyntaxError: Unexpected string"
+            mcTrigger="focus"
+            mcPlacement="bottom">bottom</button>
+        <button
                 mc-button
-                mcTooltip
-                mcTitle="Удалить файл"
+                mcTooltip="Обновить"
                 mcTrigger="focus"
-                mcPlacement="top">top</button>
-            <button
-                mc-button
-                mcTooltip="Подсказка может занимать две и более строк"
-                mcTrigger="focus"
-                mcPlacement="right">right</button>
-            <button
-                mc-button
-                mcTooltip="PDQL-запрос фильтра содержит ошибки"
-                mcTrigger="focus"
-                mcPlacement="left">left</button>
-            <button
-                mc-button
-                mcTooltip="PDQL-запрос фильтра содержит ошибки. Uncaught SyntaxError: Unexpected string"
-                mcTrigger="focus"
-                mcPlacement="bottom">bottom</button>
-            <button
-                    mc-button
-                    mcTooltip="Обновить"
-                    mcTrigger="focus"
-                    mcPlacement="bottom"
-                    [mcTooltipDisabled]="true">disabled</button>
-        </div>
-        <div class="flex layout-column layout-align-center-center container-item">
-            <span class="mc-title">Hover</span>
-            <button
-                    mc-button
-                    mcTooltip="Показать\Скрыть"
-                    mcPlacement="top">top</button>
-            <button
-                    mc-button
-                    mcTooltip="Активировать записи"
-                    mcPlacement="right">right</button>
-            <button
-                    mc-button
-                    mcTooltip="PDQL-запрос фильтра содержит ошибки,
-                                исправьте запрос"
-                    mcPlacement="left">left</button>
-            <button
-                    mc-button
-                    mcTooltip="Обновить"
-                    mcPlacement="bottom"
-                    mcVisible="true">bottom Visible</button>
-            <button
-                mc-button
-                mcTooltip="Tooltip Class"
                 mcPlacement="bottom"
-                mcTooltipClass="customTooltipClass"
-                >TooltipClass</button>
+                [mcTooltipDisabled]="true">disabled</button>
+    </div>
+    <div class="flex layout-column layout-align-center-center container-item">
+        <span class="mc-title">Hover</span>
+        <button
+                mc-button
+                mcTooltip="Показать\Скрыть"
+                mcPlacement="top">top</button>
+        <button
+                mc-button
+                mcTooltip="Активировать записи"
+                mcPlacement="right">right</button>
+        <button
+                mc-button
+                mcTooltip="PDQL-запрос фильтра содержит ошибки,
+                            исправьте запрос"
+                mcPlacement="left">left</button>
+        <button
+                mc-button
+                mcTooltip="Обновить"
+                mcPlacement="bottom"
+                mcVisible="true">bottom Visible</button>
+        <button
+            mc-button
+            mcTooltip="Tooltip Class"
+            mcPlacement="bottom"
+            mcTooltipClass="customTooltipClass"
+            >TooltipClass</button>
+        <button
+                mc-button
+                mcTooltip="Обновить"
+                mcPlacement="bottom"
+                [mcTooltipDisabled]="true">disabled</button>
+    </div>
+    <div class="flex layout-column layout-align-center-center container-item">
+        <span class="mc-title">Arrow placement for left and right</span>
             <button
-                    mc-button
-                    mcTooltip="Обновить"
-                    mcPlacement="bottom"
-                    [mcTooltipDisabled]="true">disabled</button>
-        </div>
-        <div class="flex layout-column layout-align-center-center container-item">                <span class="mc-title">Arrow placement for left and right</span>
-                <button
-                    mc-button
-                    mcTooltip="PDQL-запрос фильтра содержит ошибки, исправьте запрос"
-                    mcPlacement="left">
-                        left default
-                </button>
-                <button
-                    mc-button
-                    mcTooltip="PDQL-запрос фильтра содержит ошибки, исправьте запрос"
-                    mcPlacement="right">
-                        right default
-                </button>
-                <button
-                    mc-button
-                    mcArrowPlacement="center"
-                    mcTooltip="PDQL-запрос фильтра содержит ошибки, исправьте запрос"
-                    mcPlacement="left">
-                        left center
-                </button>
-                <button
-                    mc-button
-                    mcArrowPlacement="{{arrowPos.Center}}"
-                    mcTooltip="PDQL-запрос фильтра содержит ошибки, исправьте запрос"
-                    mcPlacement="right">
-                        right center
-                </button>
-        </div>
+                mc-button
+                mcTooltip="PDQL-запрос фильтра содержит ошибки, исправьте запрос"
+                mcPlacement="left">
+                    left default
+            </button>
+            <button
+                mc-button
+                mcTooltip="PDQL-запрос фильтра содержит ошибки, исправьте запрос"
+                mcPlacement="right">
+                    right default
+            </button>
+            <button
+                mc-button
+                mcArrowPlacement="center"
+                mcTooltip="PDQL-запрос фильтра содержит ошибки, исправьте запрос"
+                mcPlacement="left">
+                    left center
+            </button>
+            <button
+                mc-button
+                mcArrowPlacement="{{arrowPos.Center}}"
+                mcTooltip="PDQL-запрос фильтра содержит ошибки, исправьте запрос"
+                mcPlacement="right">
+                    right center
+            </button>
+    </div>
+
     <div class="flex layout-row layout-align-center-center">
         <div class="flex-45 flex-column">
             <span class="mc-title">Change placement</span>
@@ -116,15 +118,13 @@
 
             <mc-form-field
                 mcTooltip
+                mcTooltipClass="mc-tooltip_warning"
                 [mcTitle]="titleModel"
                 #tooltipRef="mcTooltip"
                 mcTrigger="manual"
                 mcPlacement="{{tooltipPosition}}">
-                    <input mcInput
-                           #positionSource
-                           class="mc-textarea_monospace"
-                           [value]="'top'"
-                    />
+
+                    <input mcInput #positionSource class="mc-textarea_monospace" [value]="'top'"/>
             </mc-form-field>
 
             <button mc-button (click)="updatePosition(positionSource.value)">Update</button>
