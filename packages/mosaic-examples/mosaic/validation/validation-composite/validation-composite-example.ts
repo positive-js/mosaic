@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
 
