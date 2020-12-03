@@ -1,9 +1,16 @@
-Проверка во время ввода значения
-<div class="layout-margin docs-composite-form" [class.validation-error]="compositeFormWithOnTypeChecking.errors?.range">
-    <form class="docs-form" [formGroup]="compositeFormWithOnTypeChecking" novalidate>
+<div class="mc-headline">Проверка во время ввода значения</div>
+
+<div class="docs-composite-form">
+    <div class="mc-subheading">Диапазоны IP-адресов</div>
+
+    <form class="docs-form"
+          [formGroup]="compositeFormWithOnTypeChecking"
+          [class.validation-error]="compositeFormWithOnTypeChecking.errors?.range"
+          novalidate>
+
         <div class="layout-row">
             <div class="docs-column">
-                <div class="docs-label">Начало диапазона</div>
+                <div class="mc-caption docs-label">Начало диапазона</div>
                 <mc-form-field
                     mcTooltip
                     [mcTitle]="'Только цифры и точки'"
@@ -12,11 +19,13 @@
                     mcTrigger="manual"
                     mcPlacement="bottom">
                     <input mcInput formControlName="start" (input)="onInputStart($event)">
+
+                    <mc-cleaner></mc-cleaner>
                 </mc-form-field>
             </div>
 
             <div class="docs-column">
-                <div class="docs-label">Окончание</div>
+                <div class="mc-caption docs-label">Окончание</div>
                 <mc-form-field
                     mcTooltip
                     [mcTitle]="'Только цифры и точки'"
@@ -25,6 +34,8 @@
                     mcTrigger="manual"
                     mcPlacement="bottom">
                     <input mcInput formControlName="end" (input)="onInputEnd($event)">
+
+                    <mc-cleaner></mc-cleaner>
                 </mc-form-field>
             </div>
         </div>
@@ -33,24 +44,33 @@
     </form>
 </div>
 
+<div class="mc-headline">Проверка по уходу с поля</div>
 
-Проверка по уходу с поля
-<div class="layout-margin docs-composite-form" [class.validation-error]="compositeFormWithOnBlurChecking.errors?.range">
-    <form class="docs-form" [formGroup]="compositeFormWithOnBlurChecking" novalidate>
+<div class="docs-composite-form">
+    <div class="mc-subheading">Диапазоны IP-адресов</div>
+
+    <form class="docs-form"
+          [formGroup]="compositeFormWithOnBlurChecking"
+          [class.validation-error]="compositeFormWithOnBlurChecking.errors?.range"
+          novalidate>
         <div class="layout-row">
             <div class="docs-column">
-                <div class="docs-label">Начало диапазона</div>
+                <div class="mc-caption docs-label">Начало диапазона</div>
                 <mc-form-field>
                     <input mcInput formControlName="start">
                     <mc-hint class="mc-caption docs-hint" *ngIf="compositeFormWithOnBlurChecking.controls.start.invalid">IP-адрес не соответствует стандартам RFC</mc-hint>
+
+                    <mc-cleaner></mc-cleaner>
                 </mc-form-field>
             </div>
 
             <div class="docs-column">
-                <div class="docs-label">Окончание</div>
+                <div class="mc-caption docs-label">Окончание</div>
                 <mc-form-field>
                     <input mcInput formControlName="end">
                     <mc-hint class="mc-caption docs-hint" *ngIf="compositeFormWithOnBlurChecking.controls.end.invalid">IP-адрес не соответствует стандартам RFC</mc-hint>
+
+                    <mc-cleaner></mc-cleaner>
                 </mc-form-field>
             </div>
         </div>

@@ -8,8 +8,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
     selector: 'validation-overview-example',
     templateUrl: 'validation-overview-example.html',
-    styleUrls: ['validation-overview-example.css'],
-    encapsulation: ViewEncapsulation.None
+    styleUrls: ['validation-overview-example.css']
 })
 export class ValidationOverviewExample {
     feedbackForm: FormGroup;

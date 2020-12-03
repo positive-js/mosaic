@@ -1,17 +1,15 @@
-.docs-form {
-    color: #999999
-}
-
 .docs-row {
     margin-bottom: 16px;
 }
 
 .docs-label {
     margin-bottom: 4px;
+
+    color: #999
 }
 
 .docs-width {
-    width: 400px;
+    width: 332px;
 }
 
 .docs-hint {
@@ -20,4 +18,16 @@
 
 .layout-row {
     margin-bottom: 4px;
+}
+
+.docs-margin {
+    margin: 8px 8px 32px;
+}
+
+.mc-headline {
+    margin-bottom: 68px;
+}
+
+.mc-subheading {
+    margin-bottom: 16px;
 }

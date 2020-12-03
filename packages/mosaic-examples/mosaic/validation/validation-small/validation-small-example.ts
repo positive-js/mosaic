@@ -15,8 +15,7 @@ function emptyFormValidator(): ValidatorFn {
 @Component({
     selector: 'validation-small-example',
     templateUrl: 'validation-small-example.html',
-    styleUrls: ['validation-small-example.css'],
-    encapsulation: ViewEncapsulation.None
+    styleUrls: ['validation-small-example.css']
 })
 export class ValidationSmallExample {
     smallForm: FormGroup;

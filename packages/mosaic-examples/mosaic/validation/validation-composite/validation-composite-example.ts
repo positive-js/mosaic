@@ -28,8 +28,7 @@ const IP_PATTERN = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-
 @Component({
     selector: 'validation-composite-example',
     templateUrl: 'validation-composite-example.html',
-    styleUrls: ['validation-composite-example.css'],
-    encapsulation: ViewEncapsulation.None
+    styleUrls: ['validation-composite-example.css']
 })
 export class ValidationCompositeExample {
     compositeFormWithOnTypeChecking: FormGroup;
@@ -54,7 +53,7 @@ export class ValidationCompositeExample {
         const regex = /^[\d\.]+$/g;
 
         if (!regex.test(event.target.value)) {
-            event.target.value = event.target.value.replace(/\D+/g, '');
+            event.target.value = event.target.value.replace(/[^\d\.]+/g, '');
 
             if (!this.startTooltip.isTooltipOpen) {
                 this.startTooltip.show();
@@ -69,7 +68,7 @@ export class ValidationCompositeExample {
         const regex = /^[\d\.]+$/g;
 
         if (!regex.test(event.target.value)) {
-            event.target.value = event.target.value.replace(/\D+/g, '');
+            event.target.value = event.target.value.replace(/[^\d\.]+/g, '');
 
             if (!this.endTooltip.isTooltipOpen) {
                 this.endTooltip.show();

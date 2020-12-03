@@ -8,8 +8,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 @Component({
     selector: 'validation-on-type-example',
     templateUrl: 'validation-on-type-example.html',
-    styleUrls: ['validation-on-type-example.css'],
-    encapsulation: ViewEncapsulation.None
+    styleUrls: ['validation-on-type-example.css']
 })
 export class ValidationOnTypeExample {
     checkOnFlyForm: FormGroup;
@@ -23,10 +22,10 @@ export class ValidationOnTypeExample {
     }
 
     onInput(event) {
-        const regex = /^\d+$/g;
+        const regex = /^[\d\w]+$/g;
 
         if (!regex.test(event.target.value)) {
-            event.target.value = event.target.value.replace(/\D+/g, '');
+            event.target.value = event.target.value.replace(/[^\d\w]+/g, '');
 
             if (!this.tooltip.isTooltipOpen) {
                 this.tooltip.show();
