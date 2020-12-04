@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
 
-function compositeFormValidator(): ValidatorFn {
+function groupValidator(): ValidatorFn {
     return (g: AbstractControl | FormGroup): ValidationErrors | null => {
         const start = g.get('start')?.value;
         const end = g.get('end')?.value;
@@ -18,6 +18,10 @@ function compositeFormValidator(): ValidatorFn {
 
         return null;
     };
+}
+
+function fieldValidator(regex: RegExp): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => regex.test(control.value) ? { pattern: true } : null;
 }
 
 const IP_PATTERN = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/;
@@ -39,14 +43,14 @@ export class ValidationCompositeExample {
 
     constructor() {
         this.compositeFormWithOnTypeChecking = new FormGroup({
-            start: new FormControl('', [Validators.pattern(IP_PATTERN)]),
-            end: new FormControl('', [Validators.pattern(IP_PATTERN)])
-        }, compositeFormValidator());
+            start: new FormControl('', [fieldValidator(IP_PATTERN)]),
+            end: new FormControl('', [fieldValidator(IP_PATTERN)])
+        }, groupValidator());
 
         this.compositeFormWithOnBlurChecking = new FormGroup({
             start: new FormControl('', [Validators.pattern(IP_PATTERN)]),
             end: new FormControl('', [Validators.pattern(IP_PATTERN)])
-        }, compositeFormValidator());
+        }, groupValidator());
     }
 
     onInputStart(event) {

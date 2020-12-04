@@ -5,7 +5,7 @@
 }
 
 .docs-hint {
-    color: #E76E5C;
+    color: #E04D36;
 }
 
 .docs-composite-form {
@@ -25,6 +25,7 @@
 
 .validation-error {
     background-color: #FCEFEC;
+    border-radius: 4px;
 }
 
 .mc-subheading {
