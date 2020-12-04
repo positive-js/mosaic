@@ -59,6 +59,10 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
         & .mc-tree-select__placeholder {
             margin-left: 8px;
         }
+
+        & .mc-tag.mc-disabled .mc-tag__text {
+            margin-right: 7px;
+        }
     }
 }
 /* stylelint-enable no-descending-specificity */

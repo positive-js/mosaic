@@ -698,10 +698,12 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         return this.tree.treeControl.getViewValue(this.selected);
     }
 
-    get triggerValues(): string[] {
+    get triggerValues(): McTreeOption[] {
         if (this.empty) { return []; }
 
-        return this.selected;
+        return this.selectedValues
+            .map((value) => this.tree.renderedOptions.find((option) => option.value === value))
+            .filter((option) => option);
     }
 
     get empty(): boolean {
@@ -781,9 +783,8 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     onRemoveSelectedOption(selectedOption: any, $event) {
         $event.stopPropagation();
 
-        if (this.disabled) { return; }
-
-        this.selectionModel.deselect(selectedOption);
+        this.selectionModel
+            .deselect(this.selected.find((value) => this.tree.treeControl.getValue(value) === selectedOption.value));
 
         this.onChange(this.selectedValues);
     }
