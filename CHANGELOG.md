@@ -1,3 +1,19 @@
+## 10.0.4 "Snowy Bread" (2020-12-04)
+
+### Mosaic
+
+ * bug fix  **dropdown:** copy/paste doesn't work (#UIM-541) ([#541](https://github.com/positive-js/mosaic/issues/541)) ([6635569](https://github.com/positive-js/mosaic/commit/663556978943f8d66c24e5597d0b52e81c8ea3ac)), closes [#UIM-541](https://github.com/positive-js/mosaic/issues/UIM-541)
+ * bug fix  **form-field:** form-field render hint with empty tag (#UIM-542) ([#542](https://github.com/positive-js/mosaic/issues/542)) ([bae5f98](https://github.com/positive-js/mosaic/commit/bae5f9805bd96d49201f16a66f1131369dc54eb8)), closes [#UIM-542](https://github.com/positive-js/mosaic/issues/UIM-542)
+ * bug fix  **tree:** filterValue have to work with null value (#UIM-529) ([#529](https://github.com/positive-js/mosaic/issues/529)) ([096df46](https://github.com/positive-js/mosaic/commit/096df465c8eafe6a022918e618843a7c219808c5)), closes [#UIM-529](https://github.com/positive-js/mosaic/issues/UIM-529)
+ * feature  **button:** added active state for transparent style (#UIM-489) ([#530](https://github.com/positive-js/mosaic/issues/530)) ([d319a1e](https://github.com/positive-js/mosaic/commit/d319a1ee79b9eae237e86865f3f1a028ead17426)), closes [#UIM-489](https://github.com/positive-js/mosaic/issues/UIM-489)
+
+### Docs
+
+ * bug fix  Autocomplete with active search - selection incorrect (#UIM-518) ([#531](https://github.com/positive-js/mosaic/issues/531)) ([b8fd585](https://github.com/positive-js/mosaic/commit/b8fd5856cf0f270c39376b5cd9992120b80530aa)), closes [#UIM-518](https://github.com/positive-js/mosaic/issues/UIM-518)
+ * bug fix  Autocomplete with copy & paste (#UIM-540) ([#540](https://github.com/positive-js/mosaic/issues/540)) ([a208214](https://github.com/positive-js/mosaic/commit/a2082149fbbd2584e93ff2b9256861a173e5076f)), closes [#UIM-540](https://github.com/positive-js/mosaic/issues/UIM-540)
+ * feature  added examples for validation (#UIM-528) ([#538](https://github.com/positive-js/mosaic/issues/538)) ([3090dc2](https://github.com/positive-js/mosaic/commit/3090dc21894208a6fe5ff91633c9d8d320e7e58e)), closes [#UIM-528](https://github.com/positive-js/mosaic/issues/UIM-528) [#UIM-528](https://github.com/positive-js/mosaic/issues/UIM-528)
+ * feature  need split examples of validation (#UIM-543) ([#543](https://github.com/positive-js/mosaic/issues/543)) ([a96e612](https://github.com/positive-js/mosaic/commit/a96e61253dc429468a9369a9465eb956365d373f)), closes [#UIM-543](https://github.com/positive-js/mosaic/issues/UIM-543) [#UIM-543](https://github.com/positive-js/mosaic/issues/UIM-543)
+
 ## 10.0.3 "Tiny Cake" (2020-11-06)
 
 ### Mosaic
