@@ -43,6 +43,10 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
 
         &.mc-select__trigger_multiple {
             padding-left: 7px;
+
+            & .mc-tag.mc-disabled .mc-tag__text {
+                margin-right: 7px;
+            }
         }
     }
 

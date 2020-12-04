@@ -22,7 +22,7 @@ import { OPTIONS } from './options';
 })
 export class DemoComponent implements OnInit {
     singleSelected = '';
-    multipleSelected = ['Normal', 'Hovered', 'Selected', 'Selected1'];
+    multipleSelected = ['Disabled', 'Normal', 'Hovered', 'Selected', 'Selected1'];
 
     singleSelectedWithSearch = 'Moscow';
     multipleSelectedWithSearch = ['Dzerzhinsk', 'Pskov'];
