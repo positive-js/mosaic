@@ -1,8 +1,9 @@
-import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { Component, ViewChild } from '@angular/core';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { McTooltip } from '@ptsecurity/mosaic/tooltip';
 
 
-function compositeFormValidator(): ValidatorFn {
+function groupValidator(): ValidatorFn {
     return (g: AbstractControl | FormGroup): ValidationErrors | null => {
         const start = g.get('start')?.value;
         const end = g.get('end')?.value;
@@ -20,6 +21,14 @@ function compositeFormValidator(): ValidatorFn {
     };
 }
 
+function fieldValidator(regex: RegExp): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+        if (!control.value) { return null; }
+
+        return regex.test(control.value) ? null : { pattern: true };
+    };
+}
+
 const IP_PATTERN = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/;
 
 /**
@@ -28,54 +37,33 @@ const IP_PATTERN = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-
 @Component({
     selector: 'validation-composite-example',
     templateUrl: 'validation-composite-example.html',
-    styleUrls: ['validation-composite-example.css'],
-    encapsulation: ViewEncapsulation.None
+    styleUrls: ['validation-composite-example.css']
 })
 export class ValidationCompositeExample {
-    compositeFormWithOnTypeChecking: FormGroup;
-    compositeFormWithOnBlurChecking: FormGroup;
+    compositeFormGroup: FormGroup;
 
     @ViewChild('startTooltip', { static: false }) startTooltip: any;
     @ViewChild('endTooltip', { static: false }) endTooltip: any;
 
     constructor() {
-        this.compositeFormWithOnTypeChecking = new FormGroup({
-            start: new FormControl('', [Validators.pattern(IP_PATTERN)]),
-            end: new FormControl('', [Validators.pattern(IP_PATTERN)])
-        }, compositeFormValidator());
-
-        this.compositeFormWithOnBlurChecking = new FormGroup({
-            start: new FormControl('', [Validators.pattern(IP_PATTERN)]),
-            end: new FormControl('', [Validators.pattern(IP_PATTERN)])
-        }, compositeFormValidator());
+        this.compositeFormGroup = new FormGroup({
+            start: new FormControl('', [fieldValidator(IP_PATTERN)]),
+            end: new FormControl('', [fieldValidator(IP_PATTERN)])
+        }, { updateOn: 'blur', validators: [groupValidator()] });
     }
 
-    onInputStart(event) {
+    onInput(event, tooltip: McTooltip, controlName: string) {
         const regex = /^[\d\.]+$/g;
 
         if (!regex.test(event.target.value)) {
-            event.target.value = event.target.value.replace(/\D+/g, '');
+            const newValue = event.target.value.replace(/[^\d\.]+/g, '');
+            this.compositeFormGroup.controls[controlName].setValue(newValue);
 
-            if (!this.startTooltip.isTooltipOpen) {
-                this.startTooltip.show();
-
-                // tslint:disable-next-line:no-magic-numbers
-                setTimeout(() => this.startTooltip.hide(), 3000);
-            }
-        }
-    }
-
-    onInputEnd(event) {
-        const regex = /^[\d\.]+$/g;
-
-        if (!regex.test(event.target.value)) {
-            event.target.value = event.target.value.replace(/\D+/g, '');
-
-            if (!this.endTooltip.isTooltipOpen) {
-                this.endTooltip.show();
+            if (!tooltip.isTooltipOpen) {
+                tooltip.show();
 
                 // tslint:disable-next-line:no-magic-numbers
-                setTimeout(() => this.endTooltip.hide(), 3000);
+                setTimeout(() => tooltip.hide(), 3000);
             }
         }
     }

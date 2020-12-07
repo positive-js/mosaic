@@ -25,6 +25,7 @@
     .mc-tooltip.mc-tooltip_warning {
         $warning: map_get($theme, warning);
 
+        $color: map-get($mc-grey, 700);
         $background-color: mc-color($warning, 60);
         $border-color: mc-color($warning, 200);
 

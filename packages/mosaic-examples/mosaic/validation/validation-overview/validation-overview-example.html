@@ -1,9 +1,12 @@
-<div class="layout-row layout-margin">
+<div class="docs-margin">
     <div class="docs-width">
-        С текстом ошибок
-        <form class="docs-form" [formGroup]="feedbackFormWithHints" novalidate>
+        <div class="mc-headline">Вариация с текстами ошибок</div>
+
+        <div class="mc-subheading">Форма обратной связи</div>
+
+        <form [formGroup]="feedbackFormWithHints" novalidate>
             <div class="docs-row">
-                <div class="docs-label">Имя</div>
+                <div class="mc-caption docs-label">Имя</div>
                 <mc-form-field>
                     <input mcInput formControlName="firstName">
                     <mc-hint class="mc-caption docs-hint" *ngIf="feedbackFormWithHints.controls.firstName.invalid">Укажите ваше имя</mc-hint>
@@ -11,7 +14,7 @@
             </div>
 
             <div class="docs-row">
-                <div class="docs-label">Фамилия</div>
+                <div class="mc-caption docs-label">Фамилия</div>
                 <mc-form-field>
                     <input mcInput formControlName="lastName">
                     <mc-hint class="mc-caption docs-hint" *ngIf="feedbackFormWithHints.controls.lastName.invalid">Укажите вашу фамилию</mc-hint>
@@ -19,14 +22,14 @@
             </div>
 
             <div class="docs-row">
-                <div class="docs-label">Отчество</div>
+                <div class="mc-caption docs-label">Отчество</div>
                 <mc-form-field>
                     <input mcInput formControlName="thirdName" placeholder="Необязательно">
                 </mc-form-field>
             </div>
 
             <div class="docs-row">
-                <div class="docs-label">Адрес эл. почты</div>
+                <div class="mc-caption docs-label">Адрес эл. почты</div>
                 <mc-form-field>
                     <input mcInput formControlName="email">
                     <mc-hint class="mc-caption docs-hint" *ngIf="feedbackFormWithHints.controls.email.invalid">Оставьте свой адрес эл. почты</mc-hint>
@@ -34,7 +37,7 @@
             </div>
 
             <div class="docs-row">
-                <div class="docs-label">Причина обращения</div>
+                <div class="mc-caption docs-label">Причина обращения</div>
                 <mc-form-field>
                     <mc-select formControlName="reason">
                         <mc-option value="1">1</mc-option>
@@ -46,7 +49,7 @@
             </div>
 
             <div class="docs-row">
-                <div class="docs-label">Ваша оценка</div>
+                <div class="mc-caption docs-label">Ваша оценка</div>
                 <mc-form-field>
                     <mc-select formControlName="rating">
                         <mc-option value="1">1</mc-option>
@@ -59,7 +62,7 @@
             </div>
 
             <div class="docs-row">
-                <div class="docs-label">Комментарий</div>
+                <div class="mc-caption docs-label">Комментарий</div>
                 <mc-form-field>
                     <textarea mcTextarea formControlName="comment"></textarea>
                 </mc-form-field>
@@ -68,40 +71,45 @@
             <button mc-button color="primary" type="submit">Отправить</button>
         </form>
     </div>
+</div>
 
+<div class="docs-margin">
     <div class="docs-width">
-        Без текста ошибок
-        <form class="docs-form" [formGroup]="feedbackForm" novalidate>
+        <div class="mc-headline">Вариация без текста ошибок</div>
+
+        <div class="mc-subheading">Форма обратной связи</div>
+
+        <form [formGroup]="feedbackForm" novalidate>
             <div class="docs-row">
-                <div class="docs-label">Имя</div>
+                <div class="mc-caption docs-label">Имя</div>
                 <mc-form-field>
                     <input mcInput formControlName="firstName">
                 </mc-form-field>
             </div>
 
             <div class="docs-row">
-                <div class="docs-label">Фамилия</div>
+                <div class="mc-caption docs-label">Фамилия</div>
                 <mc-form-field>
                     <input mcInput formControlName="lastName">
                 </mc-form-field>
             </div>
 
             <div class="docs-row">
-                <div class="docs-label">Отчество</div>
+                <div class="mc-caption docs-label">Отчество</div>
                 <mc-form-field>
                     <input mcInput formControlName="thirdName" placeholder="Необязательно">
                 </mc-form-field>
             </div>
 
             <div class="docs-row">
-                <div class="docs-label">Адрес эл. почты</div>
+                <div class="mc-caption docs-label">Адрес эл. почты</div>
                 <mc-form-field>
                     <input mcInput formControlName="email">
                 </mc-form-field>
             </div>
 
             <div class="docs-row">
-                <div class="docs-label">Причина обращения</div>
+                <div class="mc-caption docs-label">Причина обращения</div>
                 <mc-form-field>
                     <mc-select formControlName="reason">
                         <mc-option value="1">1</mc-option>
@@ -112,7 +120,7 @@
             </div>
 
             <div class="docs-row">
-                <div class="docs-label">Ваша оценка</div>
+                <div class="mc-caption docs-label">Ваша оценка</div>
                 <mc-form-field>
                     <mc-select formControlName="rating">
                         <mc-option value="1">1</mc-option>
@@ -123,7 +131,7 @@
             </div>
 
             <div class="docs-row">
-                <div class="docs-label">Комментарий</div>
+                <div class="mc-caption docs-label">Комментарий</div>
                 <mc-form-field>
                     <textarea mcTextarea formControlName="comment"></textarea>
                 </mc-form-field>

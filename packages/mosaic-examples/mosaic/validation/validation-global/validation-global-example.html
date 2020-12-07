@@ -1,22 +1,22 @@
 <div class="layout-margin docs-width">
     <div class="mc-alert mc-alert_error" *ngIf="showServerErrors">
         <i mc-icon="mc-info_16" color="error" class="mc-alert__icon"></i>
-        <div>
-            <div><b>Не удается получить ответ от сервера</b></div>
+        <div class="mc-body">
+            <div class="mc-subheading docs-subheading"><b>Не удается получить ответ от сервера</b></div>
             При попытке отправить данные сервер не ответил, попробуйте снова
         </div>
     </div>
 
-    <form class="docs-form" [formGroup]="globalErrorForm" (ngSubmit)="submitGlobalErrorForm()" novalidate>
+    <form [formGroup]="globalErrorForm" (ngSubmit)="submitGlobalErrorForm()" novalidate>
         <div class="docs-row">
-            <div class="docs-label">Имя</div>
+            <div class="mc-caption docs-label">Имя</div>
             <mc-form-field>
                 <input mcInput formControlName="firstName">
             </mc-form-field>
         </div>
 
         <div class="docs-row">
-            <div class="docs-label">Фамилия</div>
+            <div class="mc-caption docs-label">Фамилия</div>
             <mc-form-field>
                 <input mcInput formControlName="lastName">
             </mc-form-field>

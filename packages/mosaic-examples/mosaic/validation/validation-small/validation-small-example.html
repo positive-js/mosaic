@@ -1,14 +1,14 @@
 <div class="layout-margin docs-width">
-    <form class="docs-form" [formGroup]="smallForm" novalidate>
+    <form [formGroup]="smallForm" novalidate>
         <div class="docs-row">
-            <div class="docs-label">Имя</div>
+            <div class="mc-caption docs-label">Имя</div>
             <mc-form-field>
                 <input mcInput formControlName="firstName">
             </mc-form-field>
         </div>
 
         <div class="docs-row">
-            <div class="docs-label">Фамилия</div>
+            <div class="mc-caption docs-label">Фамилия</div>
             <mc-form-field>
                 <input mcInput formControlName="lastName">
             </mc-form-field>

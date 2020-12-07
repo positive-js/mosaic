@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 
@@ -8,8 +8,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 @Component({
     selector: 'validation-global-example',
     templateUrl: 'validation-global-example.html',
-    styleUrls: ['validation-global-example.css'],
-    encapsulation: ViewEncapsulation.None
+    styleUrls: ['validation-global-example.css']
 })
 export class ValidationGlobalExample {
     globalErrorForm: FormGroup;

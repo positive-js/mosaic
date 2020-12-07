@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 
@@ -8,8 +8,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 @Component({
     selector: 'validation-on-type-example',
     templateUrl: 'validation-on-type-example.html',
-    styleUrls: ['validation-on-type-example.css'],
-    encapsulation: ViewEncapsulation.None
+    styleUrls: ['validation-on-type-example.css']
 })
 export class ValidationOnTypeExample {
     checkOnFlyForm: FormGroup;
@@ -23,10 +22,11 @@ export class ValidationOnTypeExample {
     }
 
     onInput(event) {
-        const regex = /^\d+$/g;
+        const regex = /^[\d\w]+$/g;
 
         if (!regex.test(event.target.value)) {
-            event.target.value = event.target.value.replace(/\D+/g, '');
+            const newValue = event.target.value.replace(/[^\d\w]+/g, '');
+            this.checkOnFlyForm.controls.folderName.setValue(newValue);
 
             if (!this.tooltip.isTooltipOpen) {
                 this.tooltip.show();

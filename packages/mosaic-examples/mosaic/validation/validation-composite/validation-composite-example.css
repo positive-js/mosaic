@@ -1,19 +1,17 @@
-.docs-form {
-    color: #999999
-}
-
 .docs-label {
     margin-bottom: 4px;
+
+    color: #999
 }
 
 .docs-hint {
-    color: #E76E5C;
+    color: #E04D36;
 }
 
 .docs-composite-form {
-    width: 600px;
+    width: 500px;
 
-    margin-bottom: 40px;
+    margin: 8px 8px 40px;
 }
 
 .docs-column {
@@ -27,4 +25,13 @@
 
 .validation-error {
     background-color: #FCEFEC;
+    border-radius: 4px;
+}
+
+.mc-subheading {
+    margin-bottom: 16px;
+}
+
+.docs-form {
+    padding: 8px;
 }
