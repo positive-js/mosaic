@@ -1,11 +1,9 @@
-<div class="mc-headline">Проверка во время ввода значения</div>
-
 <div class="docs-composite-form">
     <div class="mc-subheading">Диапазоны IP-адресов</div>
 
     <form class="docs-form"
-          [formGroup]="compositeFormWithOnTypeChecking"
-          [class.validation-error]="compositeFormWithOnTypeChecking.errors?.range"
+          [formGroup]="compositeFormGroup"
+          [class.validation-error]="compositeFormGroup.errors?.range"
           novalidate>
 
         <div class="layout-row">
@@ -19,7 +17,12 @@
                     #startTooltip="mcTooltip"
                     mcTrigger="manual"
                     mcPlacement="bottom">
-                    <input mcInput formControlName="start" (input)="onInputStart($event)">
+                    <input mcInput formControlName="start" (input)="onInput($event, startTooltip, 'start')">
+
+                    <mc-hint class="mc-caption docs-hint"
+                             *ngIf="compositeFormGroup.controls.start.invalid">
+                        IP-адрес не соответствует стандартам RFC
+                    </mc-hint>
 
                     <mc-cleaner></mc-cleaner>
                 </mc-form-field>
@@ -35,48 +38,21 @@
                     #endTooltip="mcTooltip"
                     mcTrigger="manual"
                     mcPlacement="bottom">
-                    <input mcInput formControlName="end" (input)="onInputEnd($event)">
+                    <input mcInput formControlName="end" (input)="onInput($event, endTooltip, 'end')">
+
+                    <mc-hint class="mc-caption docs-hint"
+                             *ngIf="compositeFormGroup.controls.end.invalid">
+                        IP-адрес не соответствует стандартам RFC
+                    </mc-hint>
 
                     <mc-cleaner></mc-cleaner>
                 </mc-form-field>
             </div>
         </div>
 
-        <mc-hint class="mc-caption docs-hint" *ngIf="compositeFormWithOnTypeChecking.errors?.range">IP-адрес окончания диапазона должен быть больше, чем IP-адрес начала</mc-hint>
-    </form>
-</div>
-
-<div class="mc-headline">Проверка по уходу с поля</div>
-
-<div class="docs-composite-form">
-    <div class="mc-subheading">Диапазоны IP-адресов</div>
-
-    <form class="docs-form"
-          [formGroup]="compositeFormWithOnBlurChecking"
-          [class.validation-error]="compositeFormWithOnBlurChecking.errors?.range"
-          novalidate>
-        <div class="layout-row">
-            <div class="docs-column">
-                <div class="mc-caption docs-label">Начало диапазона</div>
-                <mc-form-field>
-                    <input mcInput formControlName="start">
-                    <mc-hint class="mc-caption docs-hint" *ngIf="compositeFormWithOnBlurChecking.controls.start.invalid">IP-адрес не соответствует стандартам RFC</mc-hint>
-
-                    <mc-cleaner></mc-cleaner>
-                </mc-form-field>
-            </div>
-
-            <div class="docs-column">
-                <div class="mc-caption docs-label">Окончание</div>
-                <mc-form-field>
-                    <input mcInput formControlName="end">
-                    <mc-hint class="mc-caption docs-hint" *ngIf="compositeFormWithOnBlurChecking.controls.end.invalid">IP-адрес не соответствует стандартам RFC</mc-hint>
-
-                    <mc-cleaner></mc-cleaner>
-                </mc-form-field>
-            </div>
-        </div>
-
-        <mc-hint class="mc-caption docs-hint" *ngIf="compositeFormWithOnBlurChecking.errors?.range">IP-адрес окончания диапазона должен быть больше, чем IP-адрес начала</mc-hint>
+        <mc-hint class="mc-caption docs-hint"
+                 *ngIf="compositeFormGroup.errors?.range">
+            IP-адрес окончания диапазона должен быть больше, чем IP-адрес начала
+        </mc-hint>
     </form>
 </div>
