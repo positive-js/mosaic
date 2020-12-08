@@ -89,21 +89,19 @@ export class McDatepickerInput<D> implements ControlValueAccessor, OnDestroy, Va
     /** The datepicker that this input is associated with. */
     @Input()
     set mcDatepicker(value: McDatepicker<D>) {
-        if (!value) {
-            return;
-        }
+        if (!value) { return; }
 
         this.datepicker = value;
         this.datepicker.registerInput(this);
         this.datepickerSubscription.unsubscribe();
 
-        this.datepickerSubscription = this.datepicker.selectedChanged.subscribe((selected: D) => {
-            this.value = selected;
-            this.cvaOnChange(selected);
-            this.onTouched();
-            this.dateInput.emit(new McDatepickerInputEvent(this, this.elementRef.nativeElement));
-            this.dateChange.emit(new McDatepickerInputEvent(this, this.elementRef.nativeElement));
-        });
+        this.datepickerSubscription = this.datepicker.selectedChanged
+            .subscribe((selected: D) => {
+                this.value = selected;
+                this.cvaOnChange(selected);
+                this.onTouched();
+                this.dateChange.emit(new McDatepickerInputEvent(this, this.elementRef.nativeElement));
+            });
     }
 
     /** Function that can be used to filter out dates within the datepicker. */
@@ -232,9 +230,8 @@ export class McDatepickerInput<D> implements ControlValueAccessor, OnDestroy, Va
         }
 
         // Update the displayed date when the locale changes.
-        this.localeSubscription = dateAdapter.localeChanges.subscribe(() => {
-            this.value = this.value;
-        });
+        this.localeSubscription = dateAdapter.localeChanges
+            .subscribe(() => this.value = this.value);
     }
 
     onTouched = () => {

@@ -1,13 +1,12 @@
 <div class="container">
     <label>Default datepicker toggle</label>
     <mc-form-field>
-        <input mcInput [(ngModel)]="date" [mcDatepicker]="myDatepicker1" />
+        <input mcInput [(ngModel)]="date" [mcDatepicker]="myDatepicker1"/>
         <mc-datepicker-toggle [tabIndex]="7" mcSuffix [for]="myDatepicker1"></mc-datepicker-toggle>
         <mc-datepicker #myDatepicker1></mc-datepicker>
     </mc-form-field>
 
-    <br/>
-    <br/>
+    <br/><br/>
 
     <label>Datepicker toggle with custom icon</label>
     <mc-form-field>
@@ -18,8 +17,7 @@
         <mc-datepicker #myDatepicker2></mc-datepicker>
     </mc-form-field>
 
-    <br/>
-    <br/>
+    <br/><br/>
 
     <label>Datepicker with multi year view</label>
     <mc-form-field>
@@ -30,8 +28,7 @@
         <mc-datepicker #myDatepicker3 startView="multi-year"></mc-datepicker>
     </mc-form-field>
 
-    <br/>
-    <br/>
+    <br/><br/>
 
     <label>Datepicker disabled</label>
     <mc-form-field>
@@ -42,8 +39,7 @@
         <mc-datepicker disabled #myDatepicker4 startView="multi-year"></mc-datepicker>
     </mc-form-field>
 
-    <br/>
-    <br/>
+    <br/><br/>
 
     <label>Datepicker with disabled input</label>
     <mc-form-field>
@@ -54,8 +50,7 @@
         <mc-datepicker #myDatepicker5 ></mc-datepicker>
     </mc-form-field>
 
-    <br/>
-    <br/>
+    <br/><br/>
 
     <label>Datepicker with readonly input</label>
     <mc-form-field>
@@ -66,8 +61,7 @@
         <mc-datepicker #myDatepicker6 ></mc-datepicker>
     </mc-form-field>
 
-    <br/>
-    <br/>
+    <br/><br/>
 
     <label>Datepicker with some dates disabled</label>
     <mc-form-field>
@@ -81,5 +75,4 @@
         </mc-datepicker-toggle>
         <mc-datepicker #myDatepicker7></mc-datepicker>
     </mc-form-field>
-
 </div>
