@@ -1,2 +1,4 @@
-#### With default parameters
 <!-- example(popover-overview) -->
+
+### Using instance
+<!-- example(popover-instance) -->
