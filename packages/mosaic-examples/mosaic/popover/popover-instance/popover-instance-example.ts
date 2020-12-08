@@ -16,7 +16,6 @@ export class PopoverInstanceExample {
     togglePopover($event) {
         $event.stopPropagation();
 
-        console.log('togglePopover');
         if (this.popover.isOpen) {
             this.popover.hide();
         } else {

@@ -542,7 +542,7 @@ export class McPopover implements OnInit, OnDestroy {
 
         this.closeSubscription = this.closingActions()
             // need for close popover on trigger click, because popover fire unexpected events: hide and then show
-            // todo need fix it 
+            // todo need fix it
             .pipe(delay(0))
             .subscribe(() => this.hide());
 
