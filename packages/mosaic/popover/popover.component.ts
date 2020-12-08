@@ -38,7 +38,7 @@ import {
     POSITION_TO_CSS_MAP
 } from '@ptsecurity/mosaic/core';
 import { BehaviorSubject, merge, Observable, Subject, Subscription } from 'rxjs';
-import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { delay, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
 import { mcPopoverAnimations } from './popover-animations';
 
@@ -97,7 +97,7 @@ export class McPopoverComponent {
     set mcPlacement(value: string) {
         if (value !== this._mcPlacement) {
             this._mcPlacement = value;
-            this.positions.unshift(POSITION_MAP[ this.mcPlacement ]);
+            this.positions.unshift(POSITION_MAP[this.mcPlacement]);
         } else if (!value) {
             this._mcPlacement = 'top';
         }
@@ -138,7 +138,7 @@ export class McPopoverComponent {
         return this._classList.join(' ');
     }
 
-    set classList(value: string | string[]) {
+    set classList(value: string) {
         let list: string[] = [];
 
         if (Array.isArray(value)) {
@@ -541,6 +541,9 @@ export class McPopover implements OnInit, OnDestroy {
         });
 
         this.closeSubscription = this.closingActions()
+            // need for close popover on trigger click, because popover fire unexpected events: hide and then show
+            // todo need fix it
+            .pipe(delay(0))
             .subscribe(() => this.hide());
 
         this.updatePosition();
@@ -597,7 +600,7 @@ export class McPopover implements OnInit, OnDestroy {
         const elementWidth = this.hostView.element.nativeElement.clientWidth;
         const verticalOffset: number = Math.floor(elementHeight / 2); // tslint:disable-line
         const horizontalOffset: number = Math.floor(elementWidth / 2 - 6); // tslint:disable-line
-        const offsets: { [key: string]: number} = {
+        const offsets: { [key: string]: number } = {
             top: verticalOffset,
             bottom: verticalOffset,
             right: horizontalOffset,
@@ -762,14 +765,12 @@ export class McPopover implements OnInit, OnDestroy {
         if (!this.overlayRef) {
             this.overlayRef = this.createOverlay();
         }
-        const position =
-            this.overlayRef.getConfig().positionStrategy as FlexibleConnectedPositionStrategy;
+
+        const position = this.overlayRef.getConfig().positionStrategy as FlexibleConnectedPositionStrategy;
         position.withPositions(this.getPrioritizedPositions()).withPush(true);
 
         if (reapplyPosition) {
-            setTimeout(() => {
-                position.reapplyLastPosition();
-            });
+            setTimeout(() => position.reapplyLastPosition());
         }
     }
 

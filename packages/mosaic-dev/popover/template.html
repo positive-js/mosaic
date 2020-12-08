@@ -18,11 +18,15 @@
             <button class="step"
                     mc-button
                     color="primary"
-                    (click)="changeStep(-1)">&larr; Назад</button>
+                    (click)="changeStep(-1)">
+                &larr; Назад
+            </button>
             <button class="step"
                     mc-button
                     color="primary"
-                    (click)="changeStep(1)">Дальше &rarr;</button>
+                    (click)="changeStep(1)">
+                Дальше &rarr;
+            </button>
         </div>
     </ng-template>
 
@@ -31,8 +35,7 @@
             <label for="order">Inverse layout order</label>
             <mc-checkbox id="order" [(ngModel)]="selectedOrder">Yes/No</mc-checkbox>
             <br/>
-            <label for="element"
-                   class="flex mc-form-label">
+            <label for="element" class="flex mc-form-label">
                 Choose element for popover binding
             </label>
             <mc-form-field id="element" class="padding-32">
@@ -43,8 +46,7 @@
                 </mc-select>
             </mc-form-field>
 
-            <label for="trigger"
-                   class="flex mc-form-label">
+            <label for="trigger" class="flex mc-form-label">
                 Choose popover trigger
             </label>
             <mc-form-field id="trigger" class="padding-32">
@@ -55,8 +57,7 @@
                 </mc-select>
             </mc-form-field>
 
-            <label for="size"
-                   class="flex mc-form-label">
+            <label for="size" class="flex mc-form-label">
                 Choose popover size
             </label>
             <mc-form-field id="size" class="padding-32">
@@ -67,8 +68,7 @@
                 </mc-select>
             </mc-form-field>
 
-            <label for="layout"
-                   class="flex mc-form-label">
+            <label for="layout" class="flex mc-form-label">
                 Choose layout content placement
             </label>
             <mc-form-field id="layout" class="padding-32">
@@ -86,8 +86,7 @@
             </mc-form-field>
         </div>
         <div class="flex flex-35 layout-align-center-center">
-            <label for="trigger"
-                   class="flex mc-form-label">
+            <label for="trigger" class="flex mc-form-label">
                 Choose popover arrow placement - popover mcPlacement and placement priority strategy
             </label>
             <div class="visual-box">
@@ -192,7 +191,6 @@
                 <li>Layout positioning: {{layoutClass}}</li>
                 <li *ngIf="multipleSelected">Placement priority order: {{multipleSelected}}</li>
             </ul>
-
         </div>
     </div>
 
@@ -210,8 +208,7 @@
                     [mcPopoverContent]="customContent"
                     [mcPopoverFooter]="customFooter"
                     (mcPopoverPositionStrategyPlacementChange)="onStrategyPlacementChange($event)"
-                    (mcPopoverVisibleChange)="onPopoverVisibleChange($event)"
-            >
+                    (mcPopoverVisibleChange)="onPopoverVisibleChange($event)">
                 Button
             </button>
             <mc-form-field *ngSwitchCase="ELEMENTS.INPUT">
@@ -228,8 +225,7 @@
                        [mcPopoverContent]="customContent"
                        [mcPopoverFooter]="customFooter"
                        (mcPopoverPositionStrategyPlacementChange)="onStrategyPlacementChange($event)"
-                       (mcPopoverVisibleChange)="onPopoverVisibleChange($event)"
-                >
+                       (mcPopoverVisibleChange)="onPopoverVisibleChange($event)">
             </mc-form-field>
             <div *ngSwitchCase="ELEMENTS.ICON">
                 <i mc-icon="mc-calendar_16"
@@ -243,10 +239,9 @@
                    [mcPopoverContent]="customContent"
                    [mcPopoverFooter]="customFooter"
                    (mcPopoverPositionStrategyPlacementChange)="onStrategyPlacementChange($event)"
-                   (mcPopoverVisibleChange)="onPopoverVisibleChange($event)"
-                ></i>
+                   (mcPopoverVisibleChange)="onPopoverVisibleChange($event)">
+                </i>
             </div>
         </div>
     </div>
-
 </div>
