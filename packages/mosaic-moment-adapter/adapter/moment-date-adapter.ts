@@ -68,7 +68,6 @@ function range<T>(length: number, valueFunction: (index: number) => T): T[] {
 
 @Injectable()
 export class MomentDateAdapter extends DateAdapter<Moment> {
-
     private messageformat: MessageFormat;
 
     private readonly invalidDateErrorText: string = 'Invalid date';
@@ -91,8 +90,7 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
 
     constructor(
         @Optional() @Inject(MC_DATE_LOCALE) dateLocale: string,
-        @Optional() @Inject(MC_MOMENT_DATE_ADAPTER_OPTIONS)
-        private options?: IMcMomentDateAdapterOptions
+        @Optional() @Inject(MC_MOMENT_DATE_ADAPTER_OPTIONS) private options?: IMcMomentDateAdapterOptions
     ) {
         super();
 
@@ -131,6 +129,18 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
             shortDaysOfWeek: momentLocaleData.weekdaysShort(),
             narrowDaysOfWeek: momentLocaleData.weekdaysMin()
         };
+    }
+
+    getLocaleData() {
+        return this.localeData;
+    }
+
+    setLocaleData(localeData): void {
+        this.localeData = localeData;
+    }
+
+    updateLocaleData(localeData): void {
+        this.localeData = { ...this.localeData, ...localeData };
     }
 
     getYear(date: Moment): number {
@@ -179,13 +189,9 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
     }
 
     getDayOfWeekNames(style: 'long' | 'short' | 'narrow'): string[] {
-        if (style === 'long') {
-            return this.localeData.longDaysOfWeek;
-        }
+        if (style === 'long') { return this.localeData.longDaysOfWeek; }
 
-        if (style === 'short') {
-            return this.localeData.shortDaysOfWeek;
-        }
+        if (style === 'short') { return this.localeData.shortDaysOfWeek; }
 
         return this.localeData.narrowDaysOfWeek;
     }
@@ -228,7 +234,13 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
     }
 
     createDateTime(
-        year: number, month: number, date: number, hours: number, minutes: number, seconds: number, milliseconds: number
+        year: number,
+        month: number,
+        date: number,
+        hours: number,
+        minutes: number,
+        seconds: number,
+        milliseconds: number
     ): Moment {
         const newDate = this.createDate(year, month, date);
 
@@ -247,9 +259,7 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
     parse(value: any, parseFormat: string | string[]): Moment | null {
         if (value) {
             if (value && typeof value === 'string') {
-                if (this.options && this.options.findDateFormat) {
-                    return this.findFormat(value);
-                }
+                if (this.options && this.options.findDateFormat) { return this.findFormat(value); }
 
                 return parseFormat
                     ? this.createMoment(value, parseFormat, this.locale)
@@ -297,12 +307,14 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
             // Note: assumes that cloning also sets the correct locale.
             return this.clone(value);
         }
+
         if (typeof value === 'string') {
             if (!value) {
                 return null;
             }
             date = this.createMoment(value, moment.ISO_8601).locale(this.locale);
         }
+
         if (date && this.isValid(date)) {
             return this.createMoment(date).locale(this.locale);
         }
@@ -494,9 +506,7 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
         endDateVariables.SAME_MONTH = sameMonth;
         endDateVariables.SAME_DAY = sameDay;
 
-        const bothCurrentYear =
-            startDateVariables.CURRENT_YEAR === 'yes' &&
-            endDateVariables.CURRENT_YEAR === 'yes';
+        const bothCurrentYear = startDateVariables.CURRENT_YEAR === 'yes' && endDateVariables.CURRENT_YEAR === 'yes';
         startDateVariables.CURRENT_YEAR = bothCurrentYear ? 'yes' : 'no';
         endDateVariables.CURRENT_YEAR = bothCurrentYear ? 'yes' : 'no';
 
@@ -593,16 +603,12 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
     }
 
     private findFormat(value: string): Moment | null {
-        if (!value) {
-            return null;
-        }
+        if (!value) { return null; }
 
         // default test - iso
         const isoDate =  this.createMoment(value, moment.ISO_8601, this.locale);
 
-        if (isoDate.isValid()) {
-            return isoDate;
-        }
+        if (isoDate.isValid()) { return isoDate; }
 
         if (this.isNumeric(value)) {
             // unix time sec
@@ -660,16 +666,12 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
                 // US vs UK
                 const parts = value.split('/');
                 const datePartsCount = 3;
-                if (parts.length !== datePartsCount) {
-                    return null;
-                }
+                if (parts.length !== datePartsCount) { return null; }
 
                 const firstPart = parts[0].trim();
                 const secondPart = parts[1].trim();
 
-                if (!this.isNumeric(firstPart) || !this.isNumeric(secondPart)) {
-                    return null;
-                }
+                if (!this.isNumeric(firstPart) || !this.isNumeric(secondPart)) { return null; }
 
                 const monthsInYears = 12;
 
@@ -677,16 +679,12 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
                 const canSecondByMonth = +secondPart <= monthsInYears;
 
                 // first two parts cannot be month
-                if (!canFirstBeMonth && !canSecondByMonth) {
-                    return null;
-                }
+                if (!canFirstBeMonth && !canSecondByMonth) { return null; }
 
                 const canDetermineWhereMonth = canFirstBeMonth && canSecondByMonth;
 
-                if (canDetermineWhereMonth) {
-                    // use US format by default
-                    return this.createMoment(value, 'MM/DD/YYYY', this.locale);
-                }
+                // use US format by default
+                if (canDetermineWhereMonth) { return this.createMoment(value, 'MM/DD/YYYY', this.locale); }
 
                 return canFirstBeMonth && !canSecondByMonth
                     ? this.createMoment(value, 'MM/DD/YYYY', this.locale)
@@ -699,9 +697,7 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
     private parseWithDash(value: string): Moment | null {
         // leading year vs finishing year
         const parts = value.split('-');
-        if (parts[0].length === 0) {
-            return null;
-        }
+        if (parts[0].length === 0) { return null; }
 
         const maxDayOrMonthCharsCount = 2;
 
