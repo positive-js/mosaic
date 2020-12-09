@@ -1074,12 +1074,13 @@ describe('McDatepicker', () => {
                 expect(testComponent.onDateInput).not.toHaveBeenCalled();
             });
 
-            it('should fire dateChange and dateInput events when user selects calendar date',
+            it('should fire dateInput event when user selects calendar date',
                 fakeAsync(() => {
                     expect(testComponent.onChange).not.toHaveBeenCalled();
-                    expect(testComponent.onDateChange).not.toHaveBeenCalled();
                     expect(testComponent.onInput).not.toHaveBeenCalled();
                     expect(testComponent.onDateInput).not.toHaveBeenCalled();
+
+                    expect(testComponent.onDateChange).not.toHaveBeenCalled();
 
                     testComponent.datepicker.open();
                     fixture.detectChanges();
@@ -1090,9 +1091,10 @@ describe('McDatepicker', () => {
                     flush();
 
                     expect(testComponent.onChange).not.toHaveBeenCalled();
-                    expect(testComponent.onDateChange).toHaveBeenCalled();
                     expect(testComponent.onInput).not.toHaveBeenCalled();
-                    expect(testComponent.onDateInput).toHaveBeenCalled();
+                    expect(testComponent.onDateInput).not.toHaveBeenCalled();
+
+                    expect(testComponent.onDateChange).toHaveBeenCalled();
                 })
             );
 

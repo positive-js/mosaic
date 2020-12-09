@@ -31,7 +31,7 @@ import {
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
 import { ESCAPE, UP_ARROW } from '@ptsecurity/cdk/keycodes';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
-import { merge, Observable, Subject, Subscription } from 'rxjs';
+import { merge, Subject, Subscription } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 
 import { McCalendar } from './calendar';
@@ -228,7 +228,7 @@ export class McDatepicker<D> implements OnDestroy {
     /** The input element this datepicker is associated with. */
     datepickerInput: McDatepickerInput<D>;
 
-    readonly stateChanges: Observable<void> = new Subject<void>();
+    readonly stateChanges: Subject<void> = new Subject<void>();
 
     /** Emits when the datepicker is disabled. */
     readonly disabledChange = new Subject<boolean>();
@@ -313,8 +313,8 @@ export class McDatepicker<D> implements OnDestroy {
         }
 
         this.datepickerInput = input;
-        this.inputSubscription =
-            this.datepickerInput.valueChange.subscribe((value: D | null) => this.selected = value);
+        this.inputSubscription = this.datepickerInput.valueChange
+            .subscribe((value: D | null) => this.selected = value);
     }
 
     /** Open the calendar. */

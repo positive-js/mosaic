@@ -1,6 +1,12 @@
 // tslint:disable:no-console
 // tslint:disable:no-magic-numbers
-import { Component, NgModule, ViewEncapsulation } from '@angular/core';
+import {
+    AfterViewInit,
+    Component,
+    NgModule,
+    ViewChild,
+    ViewEncapsulation
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -10,7 +16,7 @@ import {
     McMomentDateModule,
     MomentDateAdapter
 } from '@ptsecurity/mosaic-moment-adapter/adapter';
-import { McDatepickerModule } from '@ptsecurity/mosaic/datepicker';
+import { McDatepicker, McDatepickerModule } from '@ptsecurity/mosaic/datepicker';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
@@ -39,15 +45,29 @@ const moment = _rollupMoment || _moment;
         { provide: DateAdapter, useClass: MomentDateAdapter, deps: [ MC_DATE_LOCALE, MC_MOMENT_DATE_ADAPTER_OPTIONS ] }
     ]
 })
-export class DemoComponent {
+export class DemoComponent implements AfterViewInit {
     date = moment([2019, 0, 24]);
     minDate = moment([2015, 0, 1]);
     maxDate = moment([2020, 0, 1]);
+
+    @ViewChild(McDatepicker) datepicker: McDatepicker<any>;
 
     myFilter(date: Moment): boolean {
         const day = date.day();
 
         return day !== 0 && day !== 6;
+    }
+
+    ngAfterViewInit(): void {
+        this.datepicker.selectedChanged
+            .subscribe(() => {
+                console.log('this.datepicker.selectedChanged');
+            });
+
+        this.datepicker.datepickerInput.dateInput
+            .subscribe(() => {
+                console.log('this.datepickerInput.dateInput');
+            });
     }
 }
 
