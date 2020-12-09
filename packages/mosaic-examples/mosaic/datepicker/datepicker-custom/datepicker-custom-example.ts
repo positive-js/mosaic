@@ -25,7 +25,7 @@ const moment = _rollupMoment || momentImported;
         { provide: MC_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { findDateFormat: true } },
         {
             provide: MC_DATE_FORMATS,
-            useFactory: () => {
+            useFactory() {
                 const dateFormats = { ...MC_MOMENT_DATE_FORMATS } as unknown as McDateFormats;
 
                 dateFormats.display.dateInput = 'DD.MM.YYYY';
@@ -35,7 +35,7 @@ const moment = _rollupMoment || momentImported;
         },
         {
             provide: DateAdapter,
-            useFactory: (locale: string) => {
+            useFactory(locale: string) {
                 const dateAdapter = new MomentDateAdapter(locale);
                 dateAdapter.updateLocaleData({ firstDayOfWeek: 1 });
 
