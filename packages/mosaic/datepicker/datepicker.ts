@@ -85,7 +85,6 @@ export const MC_DATEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER = {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class McDatepickerContent<D> implements AfterViewInit {
-
     /** Reference to the internal calendar component. */
     @ViewChild(McCalendar, { static: false }) calendar: McCalendar<D>;
 
@@ -127,8 +126,7 @@ export class McDatepicker<D> implements OnDestroy {
     /** Whether the datepicker pop-up should be disabled. */
     @Input()
     get disabled(): boolean {
-        return this._disabled === undefined && this.datepickerInput ?
-            this.datepickerInput.disabled : !!this._disabled;
+        return this._disabled === undefined && this.datepickerInput ? this.datepickerInput.disabled : this._disabled;
     }
 
     set disabled(value: boolean) {

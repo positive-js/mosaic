@@ -1,0 +1,8 @@
+.example-datepicker-group {
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.example-datepicker {
+    margin-bottom: 10px;
+}
