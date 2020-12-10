@@ -90,7 +90,7 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
 
     constructor(
         @Optional() @Inject(MC_DATE_LOCALE) dateLocale: string,
-        @Optional() @Inject(MC_MOMENT_DATE_ADAPTER_OPTIONS) private options?: IMcMomentDateAdapterOptions
+        @Optional() @Inject(MC_MOMENT_DATE_ADAPTER_OPTIONS) private readonly options?: IMcMomentDateAdapterOptions
     ) {
         super();
 
