@@ -1,5 +1,4 @@
-// tslint:disable:no-console
-// tslint:disable:no-magic-numbers
+// tslint:disable:no-console no-magic-numbers
 import {
     AfterViewInit,
     Component,
@@ -10,9 +9,10 @@ import {
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DateAdapter, MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
+import { DateAdapter, MC_DATE_FORMATS, MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
 import {
     MC_MOMENT_DATE_ADAPTER_OPTIONS,
+    MC_MOMENT_DATE_FORMATS,
     McMomentDateModule,
     MomentDateAdapter
 } from '@ptsecurity/mosaic-moment-adapter/adapter';
@@ -40,9 +40,28 @@ const moment = _rollupMoment || _moment;
     styleUrls: ['../main.scss', './styles.scss'],
     encapsulation: ViewEncapsulation.None,
     providers: [
-        { provide: MC_DATE_LOCALE, useValue: 'ru' },
+        { provide: MC_DATE_LOCALE, useValue: 'en' },
         { provide: MC_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { findDateFormat: true } },
-        { provide: DateAdapter, useClass: MomentDateAdapter, deps: [ MC_DATE_LOCALE, MC_MOMENT_DATE_ADAPTER_OPTIONS ] }
+        {
+            provide: MC_DATE_FORMATS,
+            useFactory: () => {
+                const dateFormats: any = { ...MC_MOMENT_DATE_FORMATS };
+
+                dateFormats.display.dateInput = 'DD.MM.YYYY';
+
+                return dateFormats;
+            }
+        },
+        {
+            provide: DateAdapter,
+            useFactory: (locale: string) => {
+                const dateAdapter = new MomentDateAdapter(locale);
+                dateAdapter.updateLocaleData({ firstDayOfWeek: 1 });
+
+                return dateAdapter;
+            },
+            deps: [MC_DATE_LOCALE, MC_MOMENT_DATE_ADAPTER_OPTIONS]
+        }
     ]
 })
 export class DemoComponent implements AfterViewInit {

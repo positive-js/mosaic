@@ -8,6 +8,7 @@ import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
 import { McRadioModule } from '@ptsecurity/mosaic/radio';
 
+import { DatepickerCustomExample } from './datepicker-custom/datepicker-custom-example';
 import { DatepickerDisabledExample } from './datepicker-disabled/datepicker-disabled-example';
 import { DatepickerLanguageExample } from './datepicker-language/datepicker-language-example';
 import { DatepickerOverviewExample } from './datepicker-overview/datepicker-overview-example';
@@ -20,7 +21,8 @@ const EXAMPLES = [
     DatepickerLanguageExample,
     DatepickerOverviewExample,
     DatepickerToggleExample,
-    DatepickerYearExample
+    DatepickerYearExample,
+    DatepickerCustomExample
 ];
 
 
