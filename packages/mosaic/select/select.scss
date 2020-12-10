@@ -5,6 +5,7 @@
 $mc-select-arrow-size: 5px !default;
 $mc-select-arrow-margin: 4px !default;
 $mc-select-panel-max-height: 232px !default;
+$mc-select-panel-vertical-padding: 4px !default;
 $mc-select-panel-max-width: 640px !default;
 $mc-select-item-height: 32px !default;
 
@@ -173,8 +174,15 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
 
 .mc-select__content {
     max-height: $mc-select-panel-max-height;
-    padding: 4px 0;
+    padding: $mc-select-panel-vertical-padding 0;
     overflow: auto;
+
+    & .cdk-virtual-scroll-viewport {
+        $paddings: ($mc-select-panel-vertical-padding * 2);
+
+        min-height: $mc-select-panel-max-height - $paddings;
+        max-height: $mc-select-panel-max-height - $paddings;
+    }
 }
 
 .mc-form-field-type-mc-select {

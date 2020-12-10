@@ -9,3 +9,6 @@
 
 ### With groups
 <!-- example(select-groups) -->
+
+### With cdk-virtual-scroll-viewport
+<!-- example(select-virtual-scroll) -->
