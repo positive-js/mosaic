@@ -1,3 +1,4 @@
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
@@ -9,13 +10,15 @@ import { SelectGroupsExample } from './select-groups/select-groups-example';
 import { SelectMultipleOverviewExample } from './select-multiple-overview/select-multiple-overview-example';
 import { SelectOverviewExample } from './select-overview/select-overview-example';
 import { SelectSearchOverviewExample } from './select-search-overview/select-search-overview-example';
+import { SelectVirtualScrollExample } from './select-virtual-scroll/select-virtual-scroll-example';
 
 
 const EXAMPLES = [
     SelectOverviewExample,
     SelectMultipleOverviewExample,
     SelectSearchOverviewExample,
-    SelectGroupsExample
+    SelectGroupsExample,
+    SelectVirtualScrollExample
 ];
 
 @NgModule({
@@ -25,7 +28,8 @@ const EXAMPLES = [
         McFormFieldModule,
         McSelectModule,
         McInputModule,
-        McIconModule
+        McIconModule,
+        ScrollingModule
     ],
     declarations: EXAMPLES,
     exports: EXAMPLES
