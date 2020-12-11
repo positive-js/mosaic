@@ -1,0 +1,13 @@
+<section class="docs-container" cdkScrollable>
+    <div class="docs-wrapper">
+        <button
+            mc-button
+            (click)="toggleTooltip(tooltip.isTooltipOpen)"
+            mcTooltip="tooltip text"
+            mcTrigger="manual"
+            #tooltip="mcTooltip"
+            mcPlacement="right">
+            toggle tooltip
+        </button>
+    </div>
+</section>
