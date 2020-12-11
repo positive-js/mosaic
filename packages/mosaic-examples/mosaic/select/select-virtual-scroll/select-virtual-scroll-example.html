@@ -1,0 +1,17 @@
+<mc-form-field>
+    <mc-select (openedChange)="openedChange($event)">
+        <mc-cleaner></mc-cleaner>
+
+        <cdk-virtual-scroll-viewport
+            [itemSize]="32"
+            [minBufferPx]="100"
+            [maxBufferPx]="400">
+
+            <mc-option
+                *cdkVirtualFor="let option of options; templateCacheSize: 0"
+                [value]="option">
+                {{ option }}
+            </mc-option>
+        </cdk-virtual-scroll-viewport>
+    </mc-select>
+</mc-form-field>

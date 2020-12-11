@@ -1,5 +1,7 @@
 /* tslint:disable:no-console */
-import { Component, NgModule, OnInit, ViewEncapsulation } from '@angular/core';
+import { ListRange } from '@angular/cdk/collections';
+import { CdkVirtualScrollViewport, ScrollingModule } from '@angular/cdk/scrolling';
+import { Component, NgModule, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -41,6 +43,10 @@ export class DemoComponent implements OnInit {
 
     options: string[] = OPTIONS.sort();
 
+    initialRange: ListRange = { start: 0, end: 7 } as unknown as ListRange;
+
+    @ViewChild(CdkVirtualScrollViewport) cdkVirtualScrollViewport: CdkVirtualScrollViewport;
+
     ngOnInit(): void {
         this.filteredOptions = merge(
             of(OPTIONS),
@@ -55,16 +61,20 @@ export class DemoComponent implements OnInit {
         );
     }
 
+    openedChange(opened) {
+        console.log('openedChange: ', opened);
+        if (!opened) {
+            this.cdkVirtualScrollViewport.setRenderedContentOffset(0);
+            this.cdkVirtualScrollViewport.setRenderedRange(this.initialRange);
+        }
+    }
+
     onSelectionChange($event: McSelectChange) {
         console.log(`onSelectionChange: ${$event.value}`);
     }
 
     hiddenItemsTextFormatter(hiddenItemsText: string, hiddenItems: number): string {
         return `${hiddenItemsText} ${hiddenItems}`;
-    }
-
-    openedChange($event) {
-        console.log('openedChange: ', $event);
     }
 
     opened($event) {
@@ -87,13 +97,12 @@ export class DemoComponent implements OnInit {
 
 
 @NgModule({
-    declarations: [
-        DemoComponent
-    ],
+    declarations: [DemoComponent],
     imports: [
         BrowserAnimationsModule,
         BrowserModule,
         FormsModule,
+        ScrollingModule,
         McSelectModule,
 
         McButtonModule,
@@ -102,8 +111,6 @@ export class DemoComponent implements OnInit {
         McIconModule,
         ReactiveFormsModule
     ],
-    bootstrap: [
-        DemoComponent
-    ]
+    bootstrap: [DemoComponent]
 })
 export class DemoModule {}
