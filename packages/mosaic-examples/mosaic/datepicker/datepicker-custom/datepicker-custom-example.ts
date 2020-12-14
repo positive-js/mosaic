@@ -11,6 +11,24 @@ import * as momentImported from 'moment';
 import { default as _rollupMoment } from 'moment';
 
 
+// @dynamic
+export function mcDateAdapterFactory(locale: string) {
+    const dateAdapter = new MomentDateAdapter(locale);
+    dateAdapter.updateLocaleData({ firstDayOfWeek: 1 });
+
+    return dateAdapter;
+}
+
+// @dynamic
+export function mcDateFormatsFactory() {
+    const dateFormats = { ...MC_MOMENT_DATE_FORMATS } as unknown as McDateFormats;
+
+    dateFormats.display.dateInput = 'DD.MM.YYYY';
+
+    return dateFormats;
+}
+
+
 // tslint:disable-next-line
 const moment = _rollupMoment || momentImported;
 /**
@@ -25,23 +43,12 @@ const moment = _rollupMoment || momentImported;
         { provide: MC_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { findDateFormat: true } },
         {
             provide: MC_DATE_FORMATS,
-            useFactory() {
-                const dateFormats = { ...MC_MOMENT_DATE_FORMATS } as unknown as McDateFormats;
-
-                dateFormats.display.dateInput = 'DD.MM.YYYY';
-
-                return dateFormats;
-            }
+            useFactory: mcDateFormatsFactory
         },
         {
             provide: DateAdapter,
-            useFactory(locale: string) {
-                const dateAdapter = new MomentDateAdapter(locale);
-                dateAdapter.updateLocaleData({ firstDayOfWeek: 1 });
-
-                return dateAdapter;
-            },
-            deps: [MC_DATE_LOCALE, MC_MOMENT_DATE_ADAPTER_OPTIONS]
+            useFactory: mcDateAdapterFactory,
+            deps: [MC_DATE_LOCALE]
         }
     ]
 })
