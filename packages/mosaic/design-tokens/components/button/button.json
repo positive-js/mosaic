@@ -1,18 +1,92 @@
 {
     "component": {
         "button": {
-            "padding": { "value": "{size.padding.medium.value}" },
-            "font-size": { "value": 2 },
-            "text-align": { "value": "center" },
+            "color": {
+                "active": {
+                    "shadow": {
+                        "value": "inset 0 1px 2px 0 rgba(black, 0.2)"
+                    }
+                },
 
-            "primary": {
-                "background-color": { "value": "hsl(10, 80, 50)" },
-                "color": { "value": "{color.font.inverse.value}" }
+                "primary": {
+                    "color": {
+                        "value": "{color.primary.default-contrast.value}"
+                    },
+                    "border-color": {
+                        "value": "map-get($primary, 560)"
+                    },
+                    "background": {
+                        "value": "map-get($primary, 500)"
+                    },
+                    "icon-color": {
+                        "value": "{color.primary.default-contrast.value}"
+                    },
+
+                    "active": {
+                        "border-color": {
+                            "value": "mc-color($primary, 560)",
+                            "comment": "darken(mc-color($primary, 560), 5)"
+                        },
+                        "background": {
+                            "value": "mc-color($primary, 500)",
+                            "comment": "darken(mc-color($primary, 560), 5)"
+                        }
+                    }
+                },
+                "second": {
+                    "border-color": {
+                        "value": "{color.foreground.border.value}"
+                    },
+                    "background": {
+                        "value": "{color.background.background-disabled.value}"
+                    },
+                    "color": {
+                        "value": "{color.foreground.text.value}"
+                    },
+                    "icon-color": {
+                        "value": "{color.foreground.text-less-contrast.value}"
+                    },
+
+                    "active": {
+                        "border-color": {
+                            "value": "{color.foreground.border.value}",
+                            "comment": "darken(mc-color($foreground, border), 5)"
+                        },
+                        "background": {
+                            "value": "{color.background.background-disabled.value}",
+                            "comment": "darken(map-get($background, background-disabled), 5"
+                        }
+                    }
+                },
+
+                "error": {
+                    "border-color": {
+                        "value": "{color.foreground.border.value}"
+                    },
+                    "background": {
+                        "value": "{color.background.background-disabled.value}"
+                    },
+                    "color": {
+                        "value": "{color.error.default.value}"
+                    },
+                    "icon-color": {
+                        "value": "mc-color($error, 400)"
+                    },
+
+                    "active": {
+                        "border-color": {
+                            "value": "{color.foreground.border.value}",
+                            "comment": "darken(mc-color($foreground, border), 5)"
+                        },
+                        "background": {
+                            "value": "{color.background.background-disabled.value}",
+                            "comment": "darken(map-get($background, background-disabled), 5"
+                        }
+                    }
+                }
             },
+            "size": {
 
-            "secondary": {
-                "background-color": { "value": "{color.background.primary.value}" },
-                "color": { "value": "{color.font.link.value}" }
             }
         }
     }

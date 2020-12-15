@@ -7,10 +7,16 @@
         "scss": {
             "transformGroup": "scss",
             "buildPath": "packages/mosaic/design-tokens/",
-            "files": [{
-                "destination": "tokens.scss",
-                "format": "scss/variables"
-            }]
+            "files": [
+                {
+                    "destination": "_variables.scss",
+                    "format": "scss/variables"
+                },
+                {
+                    "destination": "palette.scss",
+                    "format": "scss/variables"
+                }
+            ]
         },
         "js": {
             "transformGroup": "js",

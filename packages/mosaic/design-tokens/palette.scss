@@ -1,0 +1,72 @@
+
+// Do not edit directly
+// Generated on Tue, 15 Dec 2020 13:02:39 GMT
+
+$color-primary-default: #57A4D7;
+$color-primary-lighter: #338FCC;
+$color-primary-darker: #206EA2;
+$color-primary-default-contrast: white;
+$color-primary-lighter-contrast: white;
+$color-primary-darker-contrast: white;
+$color-second-default: #E6E6E6;
+$color-second-lighter: #B3B3B3;
+$color-second-darker: #999999;
+$color-second-default-contrast: #4D4D4D;
+$color-second-lighter-contrast: #4D4D4D;
+$color-second-darker-contrast: white;
+$color-error-default: #FCEFEC;
+$color-error-lighter: #E76E5C;
+$color-error-darker: #E04D36;
+$color-error-default-contrast: #4D4D4D;
+$color-error-lighter-contrast: white;
+$color-error-darker-contrast: white;
+$color-info-default: #EBF4FB;
+$color-info-lighter: #AAD1EC;
+$color-info-darker: #57A4D7;
+$color-info-default-contrast: #4D4D4D;
+$color-info-lighter-contrast: #4D4D4D;
+$color-info-darker-contrast: white;
+$color-success-default: #EDF8E9;
+$color-success-lighter: #B4DEA4;
+$color-success-darker: #6FBA53;
+$color-success-default-contrast: #4D4D4D;
+$color-success-lighter-contrast: #4D4D4D;
+$color-success-darker-contrast: white;
+$color-warning-default: #FCF5E8;
+$color-warning-lighter: #F0D49B;
+$color-warning-darker: #DFA739;
+$color-warning-default-contrast: #4D4D4D;
+$color-warning-lighter-contrast: white;
+$color-warning-darker-contrast: white;
+$color-foreground-text: #4D4D4D;
+$color-foreground-text-less-contrast: #999999;
+$color-foreground-text-disabled: #B3B3B3;
+$color-foreground-divider: #E6E6E6;
+$color-foreground-border: #B3B3B3;
+$color-foreground-icon: #999999;
+$color-background-background: #ffffff;
+$color-background-background-popup: #ffffff;
+$color-background-background-popup-footer: #F0F0F0;
+$color-background-background-disabled: #F0F0F0;
+$color-background-overlay-hovered: #000000;
+$color-background-overlay-active: #000000;
+$color-background-overlay-disabled: #000000;
+$component-button-color-active-shadow: inset 0 1px 2px 0 rgba(black, 0.2);
+$component-button-color-primary-color: white;
+$component-button-color-primary-border-color: map-get($primary, 560);
+$component-button-color-primary-background: map-get($primary, 500);
+$component-button-color-primary-icon-color: white;
+$component-button-color-primary-active-border-color: mc-color($primary, 560); // darken(mc-color($primary, 560), 5)
+$component-button-color-primary-active-background: mc-color($primary, 500); // darken(mc-color($primary, 560), 5)
+$component-button-color-second-border-color: #B3B3B3;
+$component-button-color-second-background: #F0F0F0;
+$component-button-color-second-color: #4D4D4D;
+$component-button-color-second-icon-color: #999999;
+$component-button-color-second-active-border-color: #B3B3B3; // darken(mc-color($foreground, border), 5)
+$component-button-color-second-active-background: #F0F0F0; // darken(map-get($background, background-disabled), 5
+$component-button-color-error-border-color: #B3B3B3;
+$component-button-color-error-background: #F0F0F0;
+$component-button-color-error-color: #FCEFEC;
+$component-button-color-error-icon-color: mc-color($error, 400);
+$component-button-color-error-active-border-color: #B3B3B3; // darken(mc-color($foreground, border), 5)
+$component-button-color-error-active-background: #F0F0F0; // darken(map-get($background, background-disabled), 5
