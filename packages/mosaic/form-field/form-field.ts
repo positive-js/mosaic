@@ -17,8 +17,8 @@ import {
 import { NgControl } from '@angular/forms';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
 import { CanColor, CanColorCtor, mixinColor } from '@ptsecurity/mosaic/core';
-import {EMPTY, merge, Subject} from 'rxjs';
-import {startWith, takeUntil} from 'rxjs/operators';
+import { EMPTY, merge, Subject } from 'rxjs';
+import { startWith, takeUntil } from 'rxjs/operators';
 
 import { McCleaner } from './cleaner';
 import { McFormFieldControl } from './form-field-control';
@@ -171,9 +171,7 @@ export class McFormField extends McFormFieldMixinBase implements
             .pipe(
                 takeUntil(this.$unsubscribe)
             )
-            .subscribe(() => {
-                this._changeDetectorRef.markForCheck()
-            });
+            .subscribe(() => this._changeDetectorRef.markForCheck());
     }
 
     ngAfterContentChecked() {
@@ -233,16 +231,16 @@ export class McFormField extends McFormFieldMixinBase implements
         return ngControl && ngControl[prop];
     }
 
+    ngOnDestroy(): void {
+        this.$unsubscribe.next();
+        this.$unsubscribe.complete();
+    }
+
     /** Throws an error if the form field's control is missing. */
     protected validateControlChild() {
         if (!this.control) {
             throw getMcFormFieldMissingControlError();
         }
-    }
-
-    ngOnDestroy(): void {
-        this.$unsubscribe.next();
-        this.$unsubscribe.complete();
     }
 }
 
