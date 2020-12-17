@@ -9,6 +9,7 @@ import {
     ContentChildren,
     Directive,
     ElementRef,
+    OnDestroy,
     QueryList,
     ViewChild,
     ViewEncapsulation
@@ -16,8 +17,8 @@ import {
 import { NgControl } from '@angular/forms';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
 import { CanColor, CanColorCtor, mixinColor } from '@ptsecurity/mosaic/core';
-import { EMPTY, merge } from 'rxjs';
-import { startWith } from 'rxjs/operators';
+import { EMPTY, merge, Subject } from 'rxjs';
+import { startWith, takeUntil } from 'rxjs/operators';
 
 import { McCleaner } from './cleaner';
 import { McFormFieldControl } from './form-field-control';
@@ -78,7 +79,7 @@ export const McFormFieldMixinBase: CanColorCtor & typeof McFormFieldBase = mixin
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class McFormField extends McFormFieldMixinBase implements
-    AfterContentInit, AfterContentChecked, AfterViewInit, CanColor {
+    AfterContentInit, AfterContentChecked, AfterViewInit, CanColor, OnDestroy {
 
     @ContentChild(McFormFieldControl, { static: false }) control: McFormFieldControl<any>;
     @ContentChild(McStepper, { static: false }) stepper: McStepper;
@@ -96,6 +97,8 @@ export class McFormField extends McFormFieldMixinBase implements
     hovered: boolean = false;
 
     canCleanerClearByEsc: boolean = true;
+
+    private $unsubscribe = new Subject<void>();
 
     get hasHint(): boolean {
         return this.hint && this.hint.length > 0;
@@ -165,6 +168,9 @@ export class McFormField extends McFormFieldMixinBase implements
         const valueChanges = this.control.ngControl && this.control.ngControl.valueChanges || EMPTY;
 
         merge(valueChanges)
+            .pipe(
+                takeUntil(this.$unsubscribe)
+            )
             .subscribe(() => this._changeDetectorRef.markForCheck());
     }
 
@@ -223,6 +229,11 @@ export class McFormField extends McFormFieldMixinBase implements
         const ngControl = this.control ? this.control.ngControl : null;
 
         return ngControl && ngControl[prop];
+    }
+
+    ngOnDestroy(): void {
+        this.$unsubscribe.next();
+        this.$unsubscribe.complete();
     }
 
     /** Throws an error if the form field's control is missing. */
