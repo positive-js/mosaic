@@ -1,14 +1,5 @@
 @import '../core/styles/common/button';
 
-$mc-button-margin: 0 !default;
-
-$mc-button-padding: 5px 15px;
-
-$mc-icon-button-padding: 5px 7px;
-
-$mc-icon-button-text-padding: 15px;
-$mc-icon-button-icon-padding: 7px;
-
 
 %mc-button-base {
     @include mc-button-reset();
@@ -25,8 +16,6 @@ $mc-icon-button-icon-padding: 7px;
     text-align: center;
 
     vertical-align: baseline;
-
-    margin: $mc-button-margin;
 
     border: $mc-button-border-size solid transparent;
     border-radius: $mc-button-border-radius;

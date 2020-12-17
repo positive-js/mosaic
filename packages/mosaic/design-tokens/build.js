@@ -1,64 +1,58 @@
 const StyleDictionary = require('style-dictionary');
 
+
+function getMapFromObj(object) {
+    const result = Object.keys(object)
+        .map((key) => {
+            if (key === 'contrast') {
+                return `${key}: ${getMapFromObj(object[key])}`
+            }
+
+            return `${key}: ${object[key].value},\n`
+        })
+        .join('');
+
+    return `(\n${result}\n)`
+}
+
 console.log('Build started...');
 console.log('\n==============================================');
 
 
-// REGISTER THE CUSTOM TRANFORMS
-
 StyleDictionary.registerTransform({
-    name: 'mc-transform/scss/palette', // notice: the name is an override of an existing predefined method (yes, you can do it)
-    type: 'name',
-    matcher: function (prop) {
-        // this is an example of a possible filter (based on the "cti" values) to show how a "matcher" works
-        return prop.attributes.category === 'palette';
-    },
-    transformer: function (prop) {
-        return `${ prop.value }px`;
-    }
-});
-
-StyleDictionary.registerTransform({
-    name: 'mc-transform/scss/color', // notice: the name is an override of an existing predefined method (yes, you can do it)
-    type: 'name',
-    matcher: function (prop) {
-        // this is an example of a possible filter (based on the "cti" values) to show how a "matcher" works
-        return prop.attributes.category === 'color';
-    },
-    transformer: function (prop) {
-        return `${ prop.value }px`;
-    }
+    name: 'mc-attribute/palette', // notice: the name is an override of an existing predefined method (yes, you can do it)
+    type: 'attribute',
+    matcher: (prop) => prop.name === 'palette',
+    transformer: (prop) => ({ palette: prop.value })
 });
 
 
 StyleDictionary.registerFormat({
-    name: 'mc-format/scss/map-deep',
-    formatter: function(dictionary, config) {
-        return JSON.stringify(dictionary.properties, null, 2);
+    name: 'mc-scss/palette',
+    formatter: function(dictionary) {
+        return dictionary.allProperties
+            .map((prop) => `\$${prop.name}: ${getMapFromObj(prop.value)};\n`)
+            .join('\n');
     }
 })
 
-// REGISTER THE CUSTOM TRANFORM GROUPS
-
-// if you want to see what a pre-defined group contains, uncomment the next line:
-// console.log(StyleDictionary.transformGroup['group_name']);
-
 StyleDictionary.registerTransformGroup({
-    name: 'mosaic/scss',
-    // notice: here the "size/px" transform is not the pre-defined one, but the custom one we have declared above
+    name: 'mc/scss',
     transforms: [
         'attribute/cti',
-        'mc-transform/scss/palette',
-        'mc-transform/scss/color'
+        'mc-attribute/palette',
+        'name/cti/kebab'
     ]
 });
 
 StyleDictionary.registerFilter({
-    name: 'isColor',
-    matcher: function(prop) {
-        console.log('prop:', prop);
-        return prop.attributes.category === 'colors';
-    }
+    name: 'palette',
+    matcher: (prop) => prop.attributes.palette
+})
+
+StyleDictionary.registerFilter({
+    name: 'notPalette',
+    matcher: (prop) => !prop.attributes.palette
 })
 
 

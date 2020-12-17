@@ -5,16 +5,18 @@
     ],
     "platforms": {
         "scss": {
-            "transformGroup": "scss",
+            "transformGroup": "mc/scss",
             "buildPath": "packages/mosaic/design-tokens/",
             "files": [
                 {
                     "destination": "_variables.scss",
-                    "format": "scss/variables"
+                    "format": "scss/variables",
+                    "filter": "notPalette"
                 },
                 {
-                    "destination": "palette.scss",
-                    "format": "scss/variables"
+                    "destination": "_palette.scss",
+                    "format": "mc-scss/palette",
+                    "filter": "palette"
                 }
             ]
         },

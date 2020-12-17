@@ -1,0 +1,113 @@
+{
+    "button": {
+        "color": {
+            "active": {
+                "shadow": {
+                    "value": "inset 0 1px 2px 0 rgba(black, 0.2)"
+                }
+            },
+
+            "primary": {
+                "color": {
+                    "value": "{color.primary.default-contrast.value}"
+                },
+                "border-color": {
+                    "value": "{color.primary.palette.value.560.value}"
+                },
+                "background": {
+                    "value": "{color.primary.palette.value.500.value}"
+                },
+                "icon-color": {
+                    "value": "{color.primary.default-contrast.value}"
+                },
+
+                "active": {
+                    "border-color": {
+                        "value": "{palette.blue.560.value}",
+                        "comment": "darken(mc-color($primary, 560), 5)"
+                    },
+                    "background": {
+                        "value": "{palette.blue.500.value}",
+                        "comment": "darken(mc-color($primary, 560), 5)"
+                    }
+                }
+            },
+            "second": {
+                "border-color": {
+                    "value": "{color.foreground.border.value}"
+                },
+                "background": {
+                    "value": "{color.background.background-disabled.value}"
+                },
+                "color": {
+                    "value": "{color.foreground.text.value}"
+                },
+                "icon-color": {
+                    "value": "{color.foreground.text-less-contrast.value}"
+                },
+
+                "active": {
+                    "border-color": {
+                        "value": "{color.foreground.border.value}",
+                        "comment": "darken(mc-color($foreground, border), 5)"
+                    },
+                    "background": {
+                        "value": "{color.background.background-disabled.value}",
+                        "comment": "darken(map-get($background, background-disabled), 5"
+                    }
+                }
+            },
+
+            "error": {
+                "border-color": {
+                    "value": "{color.foreground.border.value}"
+                },
+                "background": {
+                    "value": "{color.background.background-disabled.value}"
+                },
+                "color": {
+                    "value": "{color.error.default.value}"
+                },
+                "icon-color": {
+                    "value": "{color.error.palette.value.400.value}"
+                },
+
+                "active": {
+                    "border-color": {
+                        "value": "{color.foreground.border.value}",
+                        "comment": "darken(mc-color($foreground, border), 5)"
+                    },
+                    "background": {
+                        "value": "{color.background.background-disabled.value}",
+                        "comment": "darken(map-get($background, background-disabled), 5"
+                    }
+                }
+            }
+        },
+        "size": {
+            "padding": {
+                "value": "5px 15px"
+            }
+        },
+        "font": {
+
+        }
+    },
+    "icon-button": {
+        "size": {
+            "border": {
+                "width": { "value": "1px" },
+                "radius": { "value": "3px" }
+            },
+            "padding": {
+                "value": "5px 7px"
+            },
+            "text-padding": {
+                "value": "5px 7px"
+            },
+            "icon-padding": {
+                "value": "5px 15px"
+            }
+        }
+    }
+}

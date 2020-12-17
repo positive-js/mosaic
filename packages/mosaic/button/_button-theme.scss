@@ -1,26 +1,30 @@
-@mixin mc-button-color($params) {
-    color: map-get($params, color);
-    border-color: map-get($params, border-color);
-    background: map-get($params, background);
+@import '../design-tokens/index';
+
+
+@mixin mc-button-color(
+    $color,
+    $border-color,
+    $background,
+    $icon-color,
+    $state-active_border-color,
+    $state-active_background
+) {
+    color: $color;
+    border-color: $border-color;
+    background: $background;
 
     .mc-icon {
-        color: map-get($params, icon-color);
+        color: $icon-color;
     }
 
     &:active,
     &.mc-active {
-        border-color: map-get($params, state-active_border-color);
-        background: map-get($params, state-active_background);
+        border-color: $state-active_border-color;
+        background: $state-active_background;
     }
 }
 
 @mixin mc-button-theme($theme) {
-    $background: map-get($theme, background);
-
-    $button: map-get(map-get($theme, components), button);
-
-    $state-active_shadow: map-get($button, state-active_shadow);
-
     .mc-button-overlay {
         background: transparent;
     }
@@ -30,37 +34,56 @@
         -webkit-font-smoothing: antialiased;
 
         &.mc-primary {
-            @include mc-button-color(map-get($button, primary));
+            @include mc-button-color(
+                $button-color-primary-color,
+                $button-color-primary-border-color,
+                $button-color-primary-background,
+                $button-color-primary-icon-color,
+                $button-color-primary-active-border-color,
+                $button-color-primary-active-background
+            );
         }
 
         &.mc-second {
-            @include mc-button-color(map-get($button, second));
+            @include mc-button-color(
+                $button-color-second-color,
+                $button-color-second-border-color,
+                $button-color-second-background,
+                $button-color-second-icon-color,
+                $button-color-second-active-border-color,
+                $button-color-second-active-background
+            );
         }
 
         &.mc-error {
-            @include mc-button-color(map-get($button, error));
+            @include mc-button-color(
+                $button-color-error-color,
+                $button-color-error-border-color,
+                $button-color-error-background,
+                $button-color-error-icon-color,
+                $button-color-error-active-border-color,
+                $button-color-error-active-background
+            );
         }
 
         &:hover,
         &.mc-hover {
             & .mc-button-overlay {
-                background: map-get($background, overlay-hovered);
+                background: $color-background-overlay-hovered;
             }
         }
 
         &:active,
         &.mc-active {
-            box-shadow: $state-active_shadow;
+            box-shadow: $button-color-active-shadow;
         }
 
         &.mc-primary,
         &.mc-second,
         &.mc-error {
             &.cdk-keyboard-focused {
-                $focused-color: map-get(map-get($theme, states), focused-color);
-
-                border-color: $focused-color;
-                box-shadow: inset 0 0 0 1px map-get($background, background), 0 0 0 1px $focused-color;
+                border-color: $globals-states-focused-color;
+                box-shadow: inset 0 0 0 1px $color-background-background, 0 0 0 1px $globals-states-focused-color;
             }
         }
 
@@ -71,7 +94,7 @@
             &:hover,
             &.mc-hover {
                 & .mc-button-overlay {
-                    background: map-get($background, overlay-hovered);
+                    background: $color-background-overlay-hovered;
                 }
             }
 
@@ -82,7 +105,7 @@
                 box-shadow: none;
 
                 & .mc-button-overlay {
-                    background: map-get($background, overlay-active);
+                    background: $color-background-overlay-active;
                 }
             }
 
@@ -94,7 +117,7 @@
 
         &.mc-disabled,
         &[disabled] {
-            opacity: map-get(map-get($theme, states), disabled-opacity);
+            opacity: $globals-states-disabled-opacity;
         }
     }
 }

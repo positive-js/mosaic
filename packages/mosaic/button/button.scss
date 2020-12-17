@@ -1,12 +1,14 @@
 @import '../core/styles/common/layout';
 
+@import '../design-tokens/index';
+
 @import 'button-base';
 
 
 .mc-button {
     @extend %mc-button-base;
 
-    padding: $mc-button-padding;
+    padding: $button-size-padding;
 }
 
 .mc-light-button {
@@ -16,14 +18,14 @@
 .mc-icon-button {
     @extend %mc-button-base;
 
-    padding: $mc-icon-button-padding;
+    padding: $icon-button-size-padding;
 
     &.mc-icon-button_left {
-        padding-right: $mc-icon-button-text-padding;
+        padding-right: $icon-button-size-text-padding;
     }
 
     &.mc-icon-button_right {
-        padding-left: $mc-icon-button-text-padding;
+        padding-left: $icon-button-size-text-padding;
     }
 
     .mc-button-wrapper {
@@ -35,11 +37,11 @@
         }
 
         .mc-icon_left {
-            margin-right: $mc-icon-button-icon-padding;
+            margin-right: $icon-button-size-icon-padding;
         }
 
         .mc-icon_right {
-            margin-left: $mc-icon-button-icon-padding;
+            margin-left: $icon-button-size-icon-padding;
         }
     }
 }
