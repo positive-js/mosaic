@@ -1,3 +1,16 @@
+# 9.4.0 "Cold Lake" (2020-12-18)
+
+### Mosaic
+
+ * bug fix  **form-field:** Unsubscribe in the form field (#UIM-553) ([#555](https://github.com/positive-js/mosaic/issues/555)) ([e86f45f](https://github.com/positive-js/mosaic/commit/e86f45f7f5a8923a4222105fd60898159e610789)), closes [#UIM-553](https://github.com/positive-js/mosaic/issues/UIM-553)
+ * feature  **datepicker:** added ability to use custom localeData (#UIM-506) ([#551](https://github.com/positive-js/mosaic/issues/551)) ([e74cbb6](https://github.com/positive-js/mosaic/commit/e74cbb695c4ff5ae183eb2a9f71cc1a365588e07)), closes [#UIM-506](https://github.com/positive-js/mosaic/issues/UIM-506)
+ * feature  **select:** added ability to use cdk-virtual-scroll-viewport (#UIM-3) ([#552](https://github.com/positive-js/mosaic/issues/552)) ([fb872f1](https://github.com/positive-js/mosaic/commit/fb872f1739bebecd73ffb244580e4a3700332e46)), closes [#UIM-3](https://github.com/positive-js/mosaic/issues/UIM-3)
+
+### Docs
+
+ * bug fix  error in datePicker example (#UIM-551) ([#554](https://github.com/positive-js/mosaic/issues/554)) ([70ae153](https://github.com/positive-js/mosaic/commit/70ae153575209267e6fb24ab787f8dbd13934b7d)), closes [#UIM-551](https://github.com/positive-js/mosaic/issues/UIM-551)
+ * feature  added example with scrollable tooltip (#UIM-498) ([#553](https://github.com/positive-js/mosaic/issues/553)) ([63bc3e9](https://github.com/positive-js/mosaic/commit/63bc3e9917959acbbea48e017e5fa6b1f4d187f1)), closes [#UIM-498](https://github.com/positive-js/mosaic/issues/UIM-498)
+
 # 9.3.0 "Firefly" (2020-12-02)
 
 ### Mosaic
