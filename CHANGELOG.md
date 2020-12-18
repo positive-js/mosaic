@@ -1,3 +1,27 @@
+# 10.1.0 "Wild Moon" (2020-12-18)
+
+### Mosaic
+
+ * bug fix  **form-field:** Unsubscribe in the form field (#UIM-553) ([#555](https://github.com/positive-js/mosaic/issues/555)) ([0289018](https://github.com/positive-js/mosaic/commit/0289018c7c3b4b9b5554a46e6f07bcc17549f942)), closes [#UIM-553](https://github.com/positive-js/mosaic/issues/UIM-553)
+ * bug fix  **popover:** added examples for popover and fixed closing (#UIM-545) ([#549](https://github.com/positive-js/mosaic/issues/549)) ([320452e](https://github.com/positive-js/mosaic/commit/320452e6f606ee031a83d1b54e5cbafa3d1beae5)), closes [#UIM-545](https://github.com/positive-js/mosaic/issues/UIM-545) [#UIM-545](https://github.com/positive-js/mosaic/issues/UIM-545)
+ * bug fix  package.json & yarn.lock to reduce vulnerabilities ([#539](https://github.com/positive-js/mosaic/issues/539)) ([023b5d5](https://github.com/positive-js/mosaic/commit/023b5d5ad643ce939ea77d14949590c6764a169f))
+ * feature  **datepicker:** added ability to use custom localeData (#UIM-506) ([#551](https://github.com/positive-js/mosaic/issues/551)) ([20d0405](https://github.com/positive-js/mosaic/commit/20d0405ba811472bc167380c39e66e3bf3d02198)), closes [#UIM-506](https://github.com/positive-js/mosaic/issues/UIM-506) [#UIM-506](https://github.com/positive-js/mosaic/issues/UIM-506)
+ * feature  **datepicker:** by default backdrop disabled and added parameter for it (#UIM-539) ([#536](https://github.com/positive-js/mosaic/issues/536)) ([58a5f20](https://github.com/positive-js/mosaic/commit/58a5f2009a368f39bee6d47ce1a92ab7e21f8dce)), closes [#UIM-539](https://github.com/positive-js/mosaic/issues/UIM-539)
+ * feature  **datepicker:** separate events for input and select date (#UIM-505) ([#550](https://github.com/positive-js/mosaic/issues/550)) ([8f9b8a8](https://github.com/positive-js/mosaic/commit/8f9b8a8fdd17d769f14808d5d164ef471c1fbc04)), closes [#UIM-505](https://github.com/positive-js/mosaic/issues/UIM-505) [#UIM-505](https://github.com/positive-js/mosaic/issues/UIM-505)
+ * feature  **dropdown:** by default backdrop disabled (#UIM-531) ([#532](https://github.com/positive-js/mosaic/issues/532)) ([2480d95](https://github.com/positive-js/mosaic/commit/2480d958b16eb9a39717e1b8756948193a94535f)), closes [#UIM-531](https://github.com/positive-js/mosaic/issues/UIM-531)
+ * feature  **popover:** by default backdrop disabled and added parameter for it (#UIM-538) ([#535](https://github.com/positive-js/mosaic/issues/535)) ([ebc0ef2](https://github.com/positive-js/mosaic/commit/ebc0ef25b687ebece5ac999fdf4e343932ffb5cd)), closes [#UIM-538](https://github.com/positive-js/mosaic/issues/UIM-538)
+ * feature  **select:** added ability to use cdk-virtual-scroll-viewport (#UIM-3) ([#552](https://github.com/positive-js/mosaic/issues/552)) ([df8fcf3](https://github.com/positive-js/mosaic/commit/df8fcf3c368a5bb3311df87840be6aa4eb54ccb0)), closes [#UIM-3](https://github.com/positive-js/mosaic/issues/UIM-3)
+ * feature  **select:** by default backdrop disabled and added parameter for it (#UIM-536) ([#533](https://github.com/positive-js/mosaic/issues/533)) ([57fb3a5](https://github.com/positive-js/mosaic/commit/57fb3a5301620bdc9b7fc038a897b282edee8d24)), closes [#UIM-536](https://github.com/positive-js/mosaic/issues/UIM-536)
+ * feature  **select, tree-select:** can add disabled items in trigger (#UIM-17) ([#546](https://github.com/positive-js/mosaic/issues/546)) ([4f6208b](https://github.com/positive-js/mosaic/commit/4f6208bf0dba464ac0fc771b84542dd2fe20eb3b)), closes [#UIM-17](https://github.com/positive-js/mosaic/issues/UIM-17) [#UIM-17](https://github.com/positive-js/mosaic/issues/UIM-17) [#UIM-17](https://github.com/positive-js/mosaic/issues/UIM-17)
+ * feature  **tooltip:** added warning style (#UIM-503) ([#545](https://github.com/positive-js/mosaic/issues/545)) ([f028049](https://github.com/positive-js/mosaic/commit/f0280494cf37674ef08b824e299ff95fab413f3c)), closes [#UIM-503](https://github.com/positive-js/mosaic/issues/UIM-503) [#UIM-503](https://github.com/positive-js/mosaic/issues/UIM-503)
+ * feature  **tree-select:** by default backdrop disabled and added parameter for it (#UIM-537) ([#534](https://github.com/positive-js/mosaic/issues/534)) ([8dace1f](https://github.com/positive-js/mosaic/commit/8dace1ff5c2a97ed4fdc7e4f4e07e94748a6d3a5)), closes [#UIM-537](https://github.com/positive-js/mosaic/issues/UIM-537)
+
+### Docs
+
+ * bug fix  error in datePicker example (#UIM-551) ([#554](https://github.com/positive-js/mosaic/issues/554)) ([ae15b1f](https://github.com/positive-js/mosaic/commit/ae15b1fd89c92694c49c12a9dd337d414b4e3f9d)), closes [#UIM-551](https://github.com/positive-js/mosaic/issues/UIM-551)
+ * bug fix  updated after getting sketch (#UIM-543) ([#544](https://github.com/positive-js/mosaic/issues/544)) ([d8bc6ce](https://github.com/positive-js/mosaic/commit/d8bc6cef6287fc732aac65e18729feeb68a264a9)), closes [#UIM-543](https://github.com/positive-js/mosaic/issues/UIM-543) [#UIM-543](https://github.com/positive-js/mosaic/issues/UIM-543)
+ * feature  added example with scrollable tooltip (#UIM-498) ([#553](https://github.com/positive-js/mosaic/issues/553)) ([71cc7d4](https://github.com/positive-js/mosaic/commit/71cc7d4abf9c34034afdd02ac384a31e04692b16)), closes [#UIM-498](https://github.com/positive-js/mosaic/issues/UIM-498)
+
 ## 10.0.4 "Snowy Bread" (2020-12-04)
 
 ### Mosaic
