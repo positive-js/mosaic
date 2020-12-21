@@ -3,28 +3,129 @@
 
 
 @function mc-typography-config(
-    $font-family:   map-get(map-get($fonts, base), font-family),
-    $font-family-mono:   map-get(map-get($fonts, monospace), font-family),
+    $font-family: map-get(map-get($fonts, base), font-family),
+    $font-family-mono: map-get(map-get($fonts, monospace), font-family),
 
-    $display-1:     mc-typography-level(56px, 76px, -0.4px),
-    $display-2:     mc-typography-level(45px, 56px),
-    $display-3:     mc-typography-level(34px, 44px, 0.25px),
-
-    $headline:      mc-typography-level(24px, 32px),
-    $title:         mc-typography-level(20px, 28px, 0.15px, 500),
-    $subheading:    mc-typography-level(15px, 20px, 0.15px, 700),
-
-    $body:          mc-typography-level(15px, 20px, 0.15px),
-    $body-strong:   mc-typography-level(15px, 20px, 0.15px, 500),
-    $body-caps:     mc-typography-level(15px, 20px, 1.7px, normal, $font-family, uppercase),
-    $body-mono:     mc-typography-level(15px, 20px, normal, normal, $font-family-mono),
-
-    $caption:       mc-typography-level(13px, 16px, 0.25px),
-    $caption-caps:  mc-typography-level(13px, 16px, 1.5px, normal, $font-family, uppercase),
-    $caption-mono:  mc-typography-level(13px, 16px, normal, normal, $font-family-mono),
-
-    $small-text:    mc-typography-level(13px, 16px, 0.25px),
-    $extra-small-text:    mc-typography-level(11px, 16px, 0.22px)
+    $display-1: mc-typography-level(
+        $typography-display-1-font-size,
+        $typography-display-1-line-height,
+        $typography-display-1-letter-spacing,
+        $typography-display-1-font-weight,
+        $typography-display-1-font-family,
+        $typography-display-1-text-transform
+    ),
+    $display-2: mc-typography-level(
+        $typography-display-2-font-size,
+        $typography-display-2-line-height,
+        $typography-display-2-letter-spacing,
+        $typography-display-2-font-weight,
+        $typography-display-2-font-family,
+        $typography-display-2-text-transform
+    ),
+    $display-3: mc-typography-level(
+        $typography-display-3-font-size,
+        $typography-display-3-line-height,
+        $typography-display-3-letter-spacing,
+        $typography-display-3-font-weight,
+        $typography-display-3-font-family,
+        $typography-display-3-text-transform
+    ),
+    $headline: mc-typography-level(
+        $typography-headline-font-size,
+        $typography-headline-line-height,
+        $typography-headline-letter-spacing,
+        $typography-headline-font-weight,
+        $typography-headline-font-family,
+        $typography-headline-text-transform
+    ),
+    $title: mc-typography-level(
+        $typography-title-font-size,
+        $typography-title-line-height,
+        $typography-title-letter-spacing,
+        $typography-title-font-weight,
+        $typography-title-font-family,
+        $typography-title-text-transform
+    ),
+    $subheading: mc-typography-level(
+        $typography-subheading-font-size,
+        $typography-subheading-line-height,
+        $typography-subheading-letter-spacing,
+        $typography-subheading-font-weight,
+        $typography-subheading-font-family,
+        $typography-subheading-text-transform
+    ),
+    $body: mc-typography-level(
+        $typography-body-font-size,
+        $typography-body-line-height,
+        $typography-body-letter-spacing,
+        $typography-body-font-weight,
+        $typography-body-font-family,
+        $typography-body-text-transform
+    ),
+    $body-strong: mc-typography-level(
+        $typography-body-strong-font-size,
+        $typography-body-strong-line-height,
+        $typography-body-strong-letter-spacing,
+        $typography-body-strong-font-weight,
+        $typography-body-strong-font-family,
+        $typography-body-strong-text-transform
+    ),
+    $body-caps: mc-typography-level(
+        $typography-body-caps-font-size,
+        $typography-body-caps-line-height,
+        $typography-body-caps-letter-spacing,
+        $typography-body-caps-font-weight,
+        $typography-body-caps-font-family,
+        $typography-body-caps-text-transform
+    ),
+    $body-mono: mc-typography-level(
+        $typography-body-mono-font-size,
+        $typography-body-mono-line-height,
+        $typography-body-mono-letter-spacing,
+        $typography-body-mono-font-weight,
+        $typography-body-mono-font-family,
+        $typography-body-mono-text-transform
+    ),
+    $caption: mc-typography-level(
+        $typography-caption-font-size,
+        $typography-caption-line-height,
+        $typography-caption-letter-spacing,
+        $typography-caption-font-weight,
+        $typography-caption-font-family,
+        $typography-caption-text-transform
+    ),
+    $caption-caps: mc-typography-level(
+        $typography-caption-caps-font-size,
+        $typography-caption-caps-line-height,
+        $typography-caption-caps-letter-spacing,
+        $typography-caption-caps-font-weight,
+        $typography-caption-caps-font-family,
+        $typography-caption-caps-text-transform
+    ),
+    $caption-mono: mc-typography-level(
+        $typography-caption-mono-font-size,
+        $typography-caption-mono-line-height,
+        $typography-caption-mono-letter-spacing,
+        $typography-caption-mono-font-weight,
+        $typography-caption-mono-font-family,
+        $typography-caption-mono-text-transform
+    ),
+    $small-text: mc-typography-level(
+        $typography-small-text-font-size,
+        $typography-small-text-line-height,
+        $typography-small-text-letter-spacing,
+        $typography-small-text-font-weight,
+        $typography-small-text-font-family,
+        $typography-small-text-text-transform
+    ),
+    $extra-small-text: mc-typography-level(
+        $typography-extra-small-text-font-size,
+        $typography-extra-small-text-line-height,
+        $typography-extra-small-text-letter-spacing,
+        $typography-extra-small-text-font-weight,
+        $typography-extra-small-text-font-family,
+        $typography-extra-small-text-text-transform
+    )
 ) {
 
     $config: (
