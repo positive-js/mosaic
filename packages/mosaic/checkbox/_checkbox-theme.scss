@@ -1,22 +1,9 @@
-@import '../core/theming/theming';
+@import '../design-tokens/index';
 @import '../core/styles/typography/typography-utils';
-@import '../core/styles/variables';
 
 @mixin mc-checkbox-theme($theme) {
-    $foreground: map-get($theme, foreground);
-    $background: map-get($theme, background);
-
-    $checkbox: map-get(map-get($theme, components), checkbox);
-
-    $border-color: map-get($checkbox, border-color);
-    $state-checked_border-color: map-get($checkbox, state-checked_border-color);
-    $state-checked_background: map-get($checkbox, state-checked_background);
-
-    $state-focused_shadow: map-get($checkbox, state-focused_shadow);
-    $state-focused_border-color: map-get($checkbox, state-focused_border-color);
-
     .mc-checkbox-frame {
-        border-color: $border-color;
+        border-color: $checkbox-color-border-color;
 
         & .mc-checkbox-checkmark,
         & .mc-checkbox-mixedmark {
@@ -25,43 +12,43 @@
     }
 
     .mc-checkbox {
-        color: map-get($foreground, text);
+        color: $color-foreground-text;
 
         &:hover {
             .mc-checkbox-frame {
-                background: map-get($background, overlay-hovered);
+                background: $color-background-overlay-hovered;
             }
         }
 
         &.mc-checked,
         &.mc-indeterminate {
             .mc-checkbox-frame {
-                border-color: $state-checked_border-color;
+                border-color: $checkbox-color-states-checked-border-color;
 
-                background: $state-checked_background;
+                background: $checkbox-color-states-checked-background;
             }
         }
 
         &.mc-disabled {
-            color: map-get($foreground, text-disabled);
+            color: $color-foreground-text-disabled;
 
             .mc-checkbox-frame {
-                border-color: map-get($foreground, text-disabled);
+                border-color: $color-foreground-text-disabled;
 
-                background-color: map-get($background, background-disabled);
+                background-color: $color-background-background-disabled;
 
                 & .mc-checkbox-checkmark,
                 & .mc-checkbox-mixedmark {
-                    color: map-get($foreground, text-disabled);
+                    color: $color-foreground-text-disabled;
                 }
             }
         }
 
         & .mc-checkbox-input.cdk-keyboard-focused {
             + .mc-checkbox-frame {
-                border-color: $state-focused_border-color;
+                border-color: $checkbox-color-states-focused-border-color;
 
-                box-shadow: $state-focused_shadow;
+                box-shadow: $checkbox-color-states-focused-shadow;
             }
         }
     }

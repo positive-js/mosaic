@@ -1,6 +1,6 @@
 
 // Do not edit directly
-// Generated on Mon, 21 Dec 2020 12:08:08 GMT
+// Generated on Mon, 21 Dec 2020 12:56:12 GMT
 
 $color-primary-lighter: #57A4D7;
 $color-primary-default: #338FCC;
@@ -273,7 +273,6 @@ $typography-extra-small-text-letter-spacing: 0.22px;
 $typography-extra-small-text-font-weight: normal;
 $typography-extra-small-text-font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
 $typography-extra-small-text-text-transform: null;
-$autocomplete-color-padding: 4px 0;
 $autocomplete-size-panel-padding: 4px 0;
 $autocomplete-size-panel-max-height: 256px;
 $autocomplete-size-panel-border-radius: 3px;
@@ -304,6 +303,15 @@ $icon-button-size-border-radius: 3px;
 $icon-button-size-padding: 5px 7px;
 $icon-button-size-text-padding: 5px 7px;
 $icon-button-size-icon-padding: 5px 15px;
+$checkbox-color-border-color: #B3B3B3;
+$checkbox-color-states-checked-border-color: #206EA2;
+$checkbox-color-states-checked-background: #338FCC;
+$checkbox-color-states-focused-border-color: #206EA2;
+$checkbox-color-states-focused-shadow: inset 0 0 0 1px white, 0 0 0 1px #206EA2;
+$checkbox-size-width: 16px;
+$checkbox-size-padding: 24px;
+$checkbox-size-border-width: 1px;
+$checkbox-size-toggle-box-shadow: inset 0 0 1px 0 rgba(0, 0, 0, 0.2);
 $popup-common-color-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
 $popup-common-color-border-color: #B3B3B3;
 $popup-common-color-divider-color: #CCCCCC;

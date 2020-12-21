@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 21 Dec 2020 12:08:08 GMT
+ * Generated on Mon, 21 Dec 2020 12:56:12 GMT
  */
 
 export const ColorPrimaryLighter = "#57A4D7";
@@ -280,7 +280,6 @@ export const TypographyExtraSmallTextLetterSpacing = "0.22px";
 export const TypographyExtraSmallTextFontWeight = "normal";
 export const TypographyExtraSmallTextFontFamily = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
 export const TypographyExtraSmallTextTextTransform = "null";
-export const AutocompleteColorPadding = "4px 0";
 export const AutocompleteSizePanelPadding = "4px 0";
 export const AutocompleteSizePanelMaxHeight = "256px";
 export const AutocompleteSizePanelBorderRadius = "3px";
@@ -311,6 +310,15 @@ export const IconButtonSizeBorderRadius = "3px";
 export const IconButtonSizePadding = "5px 7px";
 export const IconButtonSizeTextPadding = "5px 7px";
 export const IconButtonSizeIconPadding = "5px 15px";
+export const CheckboxColorBorderColor = "#B3B3B3";
+export const CheckboxColorStatesCheckedBorderColor = "#206EA2";
+export const CheckboxColorStatesCheckedBackground = "#338FCC";
+export const CheckboxColorStatesFocusedBorderColor = "#206EA2";
+export const CheckboxColorStatesFocusedShadow = "inset 0 0 0 1px #ffffff, 0 0 0 1px #206EA2";
+export const CheckboxSizeWidth = "16px";
+export const CheckboxSizePadding = "24px";
+export const CheckboxSizeBorderWidth = "1px";
+export const CheckboxSizeToggleBoxShadow = "inset 0 0 1px 0 rgba(0, 0, 0, 0.2)";
 export const PopupCommonColorShadow = "0 3px 3px 0 rgba(0, 0, 0, 0.2)";
 export const PopupCommonColorBorderColor = "#B3B3B3";
 export const PopupCommonColorDividerColor = "#CCCCCC";

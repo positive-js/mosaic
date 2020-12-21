@@ -1,0 +1,24 @@
+{
+    "checkbox": {
+        "color": {
+            "border-color": { "value": "{color.second.default.value}" },
+            "states": {
+                "checked": {
+                    "border-color": { "value": "{color.primary.darker.value}" },
+                    "background": { "value": "{color.primary.default.value}" }
+                },
+                "focused": {
+                    "border-color": { "value": "{color.primary.darker.value}" },
+                    "shadow": { "value": "inset 0 0 0 1px {color.background.background.value}, 0 0 0 1px {color.primary.darker.value}" }
+                }
+            }
+        },
+        "size": {
+            "width": { "value": "16px" },
+            "padding": { "value": "24px" },
+            "border-width": { "value": "1px" },
+            "toggle-box-shadow": { "value": "inset 0 0 1px 0 rgba(0, 0, 0, 0.2)" }
+        },
+        "font": {}
+    }
+}
