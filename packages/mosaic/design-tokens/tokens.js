@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 18 Dec 2020 12:44:02 GMT
+ * Generated on Mon, 21 Dec 2020 08:42:09 GMT
  */
 
 export const ColorPrimaryLighter = "#57A4D7";
@@ -305,3 +305,8 @@ export const IconButtonSizeBorderRadius = "3px";
 export const IconButtonSizePadding = "5px 7px";
 export const IconButtonSizeTextPadding = "5px 7px";
 export const IconButtonSizeIconPadding = "5px 15px";
+export const PopupCommonColorShadow = "0 3px 3px 0 rgba(0, 0, 0, 0.2)";
+export const PopupCommonColorBorderColor = "#B3B3B3";
+export const PopupCommonColorDividerColor = "#CCCCCC";
+export const PopupCommonColorBackground = "#ffffff";
+export const PopupCommonColorFooterBackgroundColor = "#F0F0F0";

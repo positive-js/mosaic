@@ -1,8 +1,11 @@
+@import '../../../design-tokens/index';
+
+
 @mixin popup-params($theme) {
     $popup-common: map-get(map-get($theme, components), popup-common);
 
-    box-shadow: map-get($popup-common, shadow);
-    border-color: map-get($popup-common, border-color);
+    box-shadow: $popup-common-color-shadow;
+    border-color: $popup-common-color-border-color;
 
-    background-color: map-get($popup-common, background);
+    background-color: $popup-common-color-background;
 }
