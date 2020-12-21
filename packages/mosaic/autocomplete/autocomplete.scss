@@ -1,11 +1,6 @@
 @import '../../cdk/a11y/a11y';
+@import '../design-tokens/index';
 
-
-/**
- * The max-height of the panel, currently matching mc-select value.
- */
-$mc-autocomplete-panel-max-height: 256px !default;
-$mc-autocomplete-panel-border-radius: 3px !default;
 
 .mc-autocomplete-trigger {
     text-overflow: ellipsis;
@@ -25,17 +20,17 @@ $mc-autocomplete-panel-border-radius: 3px !default;
     width: 100%;
     max-width: none;
 
-    max-height: $mc-autocomplete-panel-max-height;
+    max-height: $autocomplete-size-panel-max-height;
 
     border: {
         width: 1px;
         style: solid;
     }
 
-    border-bottom-left-radius: $mc-autocomplete-panel-border-radius;
-    border-bottom-right-radius: $mc-autocomplete-panel-border-radius;
+    border-bottom-left-radius: $autocomplete-size-panel-border-radius;
+    border-bottom-right-radius: $autocomplete-size-panel-border-radius;
 
-    padding: 4px 0;
+    padding: $autocomplete-size-panel-padding;
 
     &.mc-autocomplete_visible {
         visibility: visible;
@@ -46,9 +41,7 @@ $mc-autocomplete-panel-border-radius: 3px !default;
     }
 
     .mc-autocomplete-panel-above & {
-        border-radius: 0;
-        border-top-left-radius: $mc-autocomplete-panel-border-radius;
-        border-top-right-radius: $mc-autocomplete-panel-border-radius;
+        border-radius: $autocomplete-size-panel-border-radius $autocomplete-size-panel-border-radius 0 0;
     }
 
     // We need to offset horizontal dividers by their height, because

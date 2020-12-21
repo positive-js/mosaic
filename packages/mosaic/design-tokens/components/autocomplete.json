@@ -1,15 +1,11 @@
 {
-    "button": {
-        "color": {
-            "active": {
-                "shadow": {
-                    "value": "inset 0 1px 2px 0 rgba(black, 0.2)"
-                }
-            }
-        },
+    "autocomplete": {
+        "color": {},
         "size": {
-            "padding": {
-                "value": "5px 15px"
+            "panel": {
+                "padding": { "value": "4px 0" },
+                "max-height": { "value": "256px" },
+                "border-radius": { "value": "3px" }
             }
         },
         "font": {
