@@ -1,72 +1,73 @@
+@import '../design-tokens/index';
 @import '../core/theming/theming';
 @import '../core/theming/palette';
 
 
-@mixin card-type($color, $second, $is-dark) {
+@mixin card-type($color, $background, $shadow-color) {
     box-shadow:
-        inset -1px 0 0 0 mc-color($second, if($is-dark, darker, lighter)),
-        inset 0 1px 0 0 mc-color($second, if($is-dark, darker, lighter)),
-        inset 0 -1px 0 0 mc-color($second, if($is-dark, darker, lighter));
+        inset -1px 0 0 0 $shadow-color,
+        inset 0 1px 0 0 $shadow-color,
+        inset 0 -1px 0 0 $shadow-color;
 
-    background-color: mc-color($color, if($is-dark, darker, lighter));
+    background-color: $background;
 
-    border-left-color: mc-color($color);
+    border-left-color: $color;
 }
 
 @mixin mc-card-theme($theme) {
-    $second: map-get($theme, second);
-    $error: map-get($theme, error);
-
-    $info: map-get($theme, info);
-    $success: map-get($theme, success);
-    $warning: map-get($theme, warning);
-
     $is-dark: map-get($theme, is-dark);
 
-    $background: map-get($theme, background);
-    $foreground: map-get($theme, foreground);
-
-    $selected-color: map-get(map-get($theme, states), selected-color);
-
     .mc-card {
-        color: map-get($foreground, text);
+        color: $color-foreground-text;
 
         &.mc-card_info {
-            @include card-type($info, $second, $is-dark);
+            @if($is-dark) {
+                @include card-type($color-info-default, $color-info-darker, $color-second-darker);
+            } @else {
+                @include card-type($color-info-default, $color-info-lighter, $color-second-lighter);
+            }
         }
 
         &.mc-card_warning {
-            @include card-type($warning, $second, $is-dark);
+            @if($is-dark) {
+                @include card-type($color-warning-default, $color-warning-darker, $color-second-darker);
+            } @else {
+                @include card-type($color-warning-default, $color-warning-lighter, $color-second-lighter);
+            }
         }
 
         &.mc-card_success {
-            @include card-type($success, $second, $is-dark);
+            @if($is-dark) {
+                @include card-type($color-success-default, $color-success-darker, $color-second-darker);
+            } @else {
+                @include card-type($color-success-default, $color-success-lighter, $color-second-lighter);
+            }
         }
 
         &.mc-card_error {
-            @include card-type($error, $second, $is-dark);
+            @if($is-dark) {
+                @include card-type($color-error-default, $color-error-darker, $color-second-darker);
+            } @else {
+                @include card-type($color-error-default, $color-error-lighter, $color-second-lighter);
+            }
         }
 
         &.mc-card_white {
-            $popup-common: map-get(map-get($theme, components), popup-common);
-
-            background-color: map-get($popup-common, background);
+            background-color: $popup-common-color-background;
         }
 
         &.mc-selected {
-            background-color: $selected-color;
+            background-color: $globals-states-selected-color;
         }
 
         &:not(.mc-card_readonly):hover {
             .mc-card__overlay {
-                background: map-get($background, overlay-hovered);
+                background: $color-background-overlay-hovered;
             }
         }
 
         &.cdk-keyboard-focused {
-            $focused-color: map-get(map-get($theme, states), focused-color);
-
-            box-shadow: 0 0 0 2px $focused-color;
+            box-shadow: 0 0 0 2px $globals-states-focused-color;
         }
     }
 }
