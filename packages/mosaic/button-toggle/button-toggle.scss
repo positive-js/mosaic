@@ -1,14 +1,8 @@
+@import '../design-tokens/index';
 @import '../core/styles/common/vendor-prefixes';
 @import '../core/styles/common/layout';
 @import '../../cdk/a11y/a11y';
 @import '../core/styles/common/groups';
-
-$mc-button-toggle-standard-padding: 0 12px !default;
-$mc-button-toggle-standard-height: 20px !default;
-$mc-button-toggle-standard-border-radius: 2px !default;
-
-$mc-button-toggle-border-size: 1px;
-$mc-button-toggle-border-radius: 3px;
 
 
 .mc-button-toggle-group {
@@ -44,7 +38,7 @@ $mc-button-toggle-border-radius: 3px;
 
     &:not(.mc-button-toggle_vertical) {
         .mc-button-toggle:not([disabled]) + .mc-button-toggle:not([disabled]) {
-            margin-left: -$mc-button-toggle-border-size;
+            margin-left: -$button-toggle-size-border-size;
         }
     }
 }
@@ -59,7 +53,7 @@ $mc-button-toggle-border-radius: 3px;
     }
 
     .mc-button-toggle:not([disabled]) + .mc-button-toggle:not([disabled]) {
-        margin-top: -$mc-button-toggle-border-size;
+        margin-top: -$button-toggle-size-border-size;
     }
 
     .mc-button-toggle {
@@ -73,7 +67,7 @@ $mc-button-toggle-border-radius: 3px;
             > .mc-icon-button {
                 @include border-bottom-radius(0);
 
-                border-top-right-radius: $mc-button-toggle-border-radius;
+                border-top-right-radius: $button-toggle-size-border-radius;
             }
         }
 
@@ -82,7 +76,7 @@ $mc-button-toggle-border-radius: 3px;
             > .mc-icon-button {
                 @include border-top-radius(0);
 
-                border-bottom-left-radius: $mc-button-toggle-border-radius;
+                border-bottom-left-radius: $button-toggle-size-border-radius;
             }
         }
 

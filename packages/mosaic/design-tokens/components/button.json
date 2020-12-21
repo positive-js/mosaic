@@ -6,7 +6,6 @@
                     "value": "inset 0 1px 2px 0 rgba(black, 0.2)"
                 }
             },
-
             "primary": {
                 "color": {
                     "value": "{color.primary.default-contrast.value}"
@@ -57,7 +56,6 @@
                     }
                 }
             },
-
             "error": {
                 "border-color": {
                     "value": "{color.foreground.border.value}"
@@ -89,9 +87,7 @@
                 "value": "5px 15px"
             }
         },
-        "font": {
-
-        }
+        "font": {}
     },
     "icon-button": {
         "size": {
