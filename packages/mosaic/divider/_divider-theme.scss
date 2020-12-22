@@ -1,16 +1,12 @@
-@import '../core/theming/palette';
-@import '../core/theming/theming';
+@import '../design-tokens/index';
 
 
 @mixin mc-divider-theme($theme) {
-    $foreground: map-get($theme, foreground);
-    $color: mc-color($foreground, divider);
-
     .mc-divider {
-        border-top-color: $color;
+        border-top-color: $color-foreground-divider;
     }
 
     .mc-divider_vertical {
-        border-right-color: $color;
+        border-right-color: $color-foreground-divider;
     }
 }

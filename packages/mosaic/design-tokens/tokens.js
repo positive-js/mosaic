@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 22 Dec 2020 10:02:55 GMT
+ * Generated on Tue, 22 Dec 2020 10:21:52 GMT
  */
 
 export const ColorPrimaryLighter = "#57A4D7";
@@ -336,3 +336,5 @@ export const DatepickerCalendarSizeDividerWidth = "1px";
 export const DatepickerCalendarSizeIconBorderWidth = "2px";
 export const DatepickerCalendarSizeIconPrevIconTransform = "translateX(2px) rotate(-45deg)";
 export const DatepickerCalendarSizeIconNexIconTransform = "translateX(-2px) rotate(45deg)";
+export const DividerSizeWidth = "1px";
+export const DividerSizeInsetMargin = "80px";
