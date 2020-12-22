@@ -3,61 +3,52 @@
 @import '../core/styles/variables';
 
 @mixin mc-form-field-theme($theme) {
-    $second: map-get($theme, second);
-    $error: map-get($theme, error);
-
-    $foreground: map-get($theme, foreground);
-    $background: map-get($theme, background);
-
     $is-dark: map-get($theme, is-dark);
 
     .mc-form-field {
-        background-color: map-get($background, background);
+        background-color: $color-background-background;
 
         &:not(.mc-form-field_without-borders) {
             .mc-form-field__container {
-                border-color: mc-color($second);
+                border-color: $color-second-default;
             }
 
             &:hover .mc-form-field__container {
-                border-color: mc-color($second, if($is-dark, lighter, darker));
+                border-color: if($is-dark, $color-second-lighter, $color-second-darker);
             }
 
             &.ng-invalid .mc-form-field__container {
-                background-color: if($is-dark, transparent, mc-color($error, lighter));
+                background-color: if($is-dark, transparent, $color-error-lighter);
 
-                border-color: mc-color($error);
+                border-color: $color-error-default;
 
                 .mc-input,
                 .mc-textarea {
-                    color: mc-color($error);
+                    color: $color-error-default;
                 }
             }
 
             &.mc-focused {
                 &:not(.ng-invalid) .mc-form-field__container {
-                    $focused-color: map-get(map-get($theme, states), focused-color);
-
-                    border-color: $focused-color;
-                    box-shadow: 0 0 0 1px $focused-color;
+                    border-color: $globals-states-focused-color;
+                    box-shadow: 0 0 0 1px $globals-states-focused-color;
                 }
 
                 &.ng-invalid .mc-form-field__container {
-                    box-shadow: 0 0 0 1px mc-color($error);
+                    box-shadow: 0 0 0 1px $color-error-default;
                 }
             }
 
             /* stylelint-disable no-descending-specificity */
             &.mc-disabled .mc-form-field__container {
-                border-color: mix(map-get($foreground, border), map-get($background, overlay-disabled));
+                border-color: mix($color-foreground-border, $color-background-overlay-disabled);
 
-                background-color:
-                    mix(map-get($background, background-disabled), map-get($background, overlay-disabled));
+                background-color: mix($color-background-background-disabled, $color-background-overlay-disabled);
 
                 .mc-icon,
                 .mc-input,
                 .mc-textarea {
-                    color: mc-color($foreground, text-disabled);
+                    color: $color-foreground-text-disabled;
                 }
             }
             /* stylelint-enable no-descending-specificity */
@@ -65,7 +56,7 @@
     }
 
     .mc-form-field__hint {
-        color: mc-color($foreground, text-less-contrast);
+        color: $color-foreground-text-less-contrast;
     }
 }
 

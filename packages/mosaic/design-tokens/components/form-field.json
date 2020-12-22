@@ -1,0 +1,22 @@
+{
+    "form-field": {
+        "color": {},
+        "size": {
+            "border": {
+                "width": { "value": "1px" },
+                "radius": { "value": "3px" }
+            },
+            "button": {
+                "width": { "value": "32px" }
+            }
+        },
+        "font": {}
+    },
+    "form-field-hint": {
+        "color": {},
+        "size": {
+            "margin-top": { "value": "4px" }
+        },
+        "font": {}
+    }
+}

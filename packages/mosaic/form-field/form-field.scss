@@ -1,11 +1,11 @@
-$mc-form-field-border-radius: 3px;
-$mc-form-field-border-size: 1px;
+@import '../design-tokens/index';
+
 
 .mc-form-field {
     position: relative;
     display: inline-block;
     width: 100%;
-    border-radius: $mc-form-field-border-radius;
+    border-radius: $form-field-size-border-radius;
 
     &:hover {
         z-index: 1;
@@ -21,16 +21,16 @@ $mc-form-field-border-size: 1px;
 }
 
 .mc-form-field__hint > .mc-hint {
-    margin-top: 4px;
+    margin-top: $form-field-hint-size-margin-top;
 }
 
 .mc-form-field__container {
     position: relative;
 
-    border-width: $mc-form-field-border-size;
+    border-width: $form-field-size-border-width;
     border-style: solid;
     border-color: transparent;
-    border-radius: $mc-form-field-border-radius;
+    border-radius: $form-field-size-border-radius;
 }
 
 .mc-form-field_without-borders .mc-form-field__container {
@@ -64,20 +64,20 @@ $mc-form-field-border-size: 1px;
 .mc-form-field_has-cleaner,
 .mc-form-field_has-stepper {
     .mc-input {
-        padding-right: 32px;
+        padding-right: $form-field-size-button-width;
     }
 }
 
 .mc-form-field_has-prefix {
     .mc-input {
-        padding-left: 32px;
+        padding-left: $form-field-size-button-width;
     }
 }
 
 .mc-cleaner {
     display: flex;
 
-    width: 32px;
+    width: $form-field-size-button-width;
     height: 100%;
 
     cursor: pointer;
@@ -114,12 +114,12 @@ mc-stepper {
     bottom: 0;
     right: 0;
 
-    width: 32px;
+    width: $form-field-size-button-width;
 
     .mc-stepper-step-up,
     .mc-stepper-step-down {
         cursor: pointer;
-        width: 32px;
+        width: $form-field-size-button-width;
         text-align: center;
     }
 

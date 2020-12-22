@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 22 Dec 2020 10:34:19 GMT
+ * Generated on Tue, 22 Dec 2020 11:41:01 GMT
  */
 
 export const ColorPrimaryLighter = "#57A4D7";
@@ -343,3 +343,7 @@ export const DropdownTriggerSizePaddingLeft = "16px";
 export const DropdownPanelSizePadding = "4px 0";
 export const DropdownPanelSizeBorderWidth = "1px";
 export const DropdownPanelSizeBorderRadius = "3px";
+export const FormFieldSizeBorderWidth = "1px";
+export const FormFieldSizeBorderRadius = "3px";
+export const FormFieldSizeButtonWidth = "32px";
+export const FormFieldHintSizeMarginTop = "4px";

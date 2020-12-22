@@ -127,7 +127,7 @@
         "build:mosaic-examples": "ng build mosaic-examples",
         "build:schematics": "ng build schematics",
         "build:schematics-test": "ng build schematics-test",
-        "build:tokens": "node_modules/.bin/style-dictionary build --config ./packages/mosaic/design-tokens/config.json",
+        "build:tokens": "node ./packages/mosaic/design-tokens/build.js",
         "build:docs": "gulp docs",
         "styles:built-all": "gulp styles:built-all",
         "unit:cdk": "ng test cdk",
