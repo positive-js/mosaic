@@ -1,15 +1,10 @@
-@import '../core/theming/theming';
+@import '../design-tokens/index';
 @import '../core/styles/typography/typography-utils';
 @import '../core/styles/common/popup';
 @import '../core/styles/common/vendor-prefixes';
 
 
 @mixin mc-dropdown-theme($theme) {
-    $foreground: map-get($theme, foreground);
-    $background: map-get($theme, background);
-
-    $selected-color: map-get(map-get($theme, states), selected-color);
-
     .mc-dropdown__panel {
         @include popup-params($theme);
     }
@@ -17,18 +12,16 @@
     .mc-dropdown__item {
         @include user-select(text);
 
-        color: mc-color($foreground, text);
+        color: $color-foreground-text;
 
         background: transparent;
 
         &:hover {
-            background: mc-color($background, overlay-hovered);
+            background: $color-background-overlay-hovered;
         }
 
         &.cdk-keyboard-focused {
-            $focused-color: map-get(map-get($theme, states), focused-color);
-
-            outline: $focused-color solid 2px;
+            outline: $globals-states-focused-color solid 2px;
             outline-offset: -2px;
 
             &.mc-link {
@@ -37,23 +30,23 @@
         }
 
         &.mc-selected {
-            background: $selected-color;
+            background: $globals-states-selected-color;
         }
 
         &[disabled],
         &.mc-disabled {
-            color: mc-color($foreground, text-disabled);
+            color: $color-foreground-text-disabled;
 
             background: transparent;
         }
 
         .mc-dropdown__item-caption {
-            color: mc-color($foreground, text-less-contrast);
+            color: $color-foreground-text-less-contrast;
         }
     }
 
     .mc-dropdown__item_highlighted:not([disabled]):not(.mc-disabled) {
-        background: mc-color($background, overlay-hovered);
+        background: $color-background-overlay-hovered;
     }
 }
 

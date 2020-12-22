@@ -1,5 +1,5 @@
-$mc-dropdown-panel-border-width: 1px !default;
-$mc-dropdown-panel-border-radius: 3px !default;
+@import '../design-tokens/index';
+
 
 .mc-dropdown__item {
     display: flex;
@@ -12,7 +12,7 @@ $mc-dropdown-panel-border-radius: 3px !default;
     border: 1px solid transparent;
     outline: none;
 
-    padding: 5px 15px;
+    padding: $dropdown-item-size-padding;
 
     text-align: left;
     white-space: nowrap;
@@ -28,7 +28,7 @@ $mc-dropdown-panel-border-radius: 3px !default;
 
 .mc-dropdown__trigger {
     margin-left: auto;
-    padding-left: 16px;
+    padding-left: $dropdown-trigger-size-padding-left;
 }
 
 .mc-dropdown__panel {
@@ -39,14 +39,14 @@ $mc-dropdown-panel-border-radius: 3px !default;
     margin-top: -1px;
 
     border: {
-        width: $mc-dropdown-panel-border-width;
+        width: $dropdown-panel-size-border-width;
         style: solid;
     }
 
-    border-bottom-left-radius: $mc-dropdown-panel-border-radius;
-    border-bottom-right-radius: $mc-dropdown-panel-border-radius;
+    border-bottom-left-radius: $dropdown-panel-size-border-radius;
+    border-bottom-right-radius: $dropdown-panel-size-border-radius;
 
-    padding: 4px 0;
+    padding: $dropdown-panel-size-padding;
 }
 
 .mc-dropdown__content {

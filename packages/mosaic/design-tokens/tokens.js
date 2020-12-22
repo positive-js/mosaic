@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 22 Dec 2020 10:21:52 GMT
+ * Generated on Tue, 22 Dec 2020 10:34:19 GMT
  */
 
 export const ColorPrimaryLighter = "#57A4D7";
@@ -338,3 +338,8 @@ export const DatepickerCalendarSizeIconPrevIconTransform = "translateX(2px) rota
 export const DatepickerCalendarSizeIconNexIconTransform = "translateX(-2px) rotate(45deg)";
 export const DividerSizeWidth = "1px";
 export const DividerSizeInsetMargin = "80px";
+export const DropdownItemSizePadding = "5px 15px";
+export const DropdownTriggerSizePaddingLeft = "16px";
+export const DropdownPanelSizePadding = "4px 0";
+export const DropdownPanelSizeBorderWidth = "1px";
+export const DropdownPanelSizeBorderRadius = "3px";
