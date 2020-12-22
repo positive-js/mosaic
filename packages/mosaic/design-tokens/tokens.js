@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 21 Dec 2020 12:56:12 GMT
+ * Generated on Tue, 22 Dec 2020 10:02:55 GMT
  */
 
 export const ColorPrimaryLighter = "#57A4D7";
@@ -324,3 +324,15 @@ export const PopupCommonColorBorderColor = "#B3B3B3";
 export const PopupCommonColorDividerColor = "#CCCCCC";
 export const PopupCommonColorBackground = "#ffffff";
 export const PopupCommonColorFooterBackgroundColor = "#F0F0F0";
+export const DatepickerToggleSizeWidth = "30px";
+export const DatepickerToggleSizeHeight = "30px";
+export const DatepickerBodySizeLabelPaddingSide = "33% / 7";
+export const DatepickerBodySizeCellMinSize = "32px";
+export const DatepickerBodySizeCellMargin = "5%";
+export const DatepickerBodySizeCellPadding = "8px";
+export const DatepickerBodySizeCellBorderWidth = "1px";
+export const DatepickerCalendarSizePadding = "8px";
+export const DatepickerCalendarSizeDividerWidth = "1px";
+export const DatepickerCalendarSizeIconBorderWidth = "2px";
+export const DatepickerCalendarSizeIconPrevIconTransform = "translateX(2px) rotate(-45deg)";
+export const DatepickerCalendarSizeIconNexIconTransform = "translateX(-2px) rotate(45deg)";

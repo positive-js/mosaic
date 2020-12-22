@@ -1,0 +1,38 @@
+{
+    "datepicker-toggle": {
+        "color": {},
+        "size": {
+            "width": { "value": "30px" },
+            "height": { "value": "30px" }
+        },
+        "font": {}
+    },
+    "datepicker-body": {
+        "color": {},
+        "size": {
+            "label": {
+                "padding-side": { "value": "33% / 7" }
+            },
+            "cell": {
+                "min-size": { "value": "32px" },
+                "margin": { "value": "5%" },
+                "padding": { "value": "8px" },
+                "border-width": { "value": "1px" }
+            }
+        },
+        "font": {}
+    },
+    "datepicker-calendar": {
+        "color": {},
+        "size": {
+            "padding": { "value": "8px" },
+            "divider-width": { "value": "1px" },
+            "icon": {
+                "border-width": { "value": "2px" },
+                "prev-icon-transform": { "value": "translateX(2px) rotate(-45deg)" },
+                "nex-icon-transform": { "value": "translateX(-2px) rotate(45deg)" }
+            }
+        },
+        "font": {}
+    }
+}

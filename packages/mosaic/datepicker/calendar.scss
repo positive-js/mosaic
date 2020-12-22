@@ -1,20 +1,5 @@
+@import '../design-tokens/index';
 @import '../core/styles/common/layout';
-
-$mc-calendar-padding: 8px !default;
-$mc-calendar-header-divider-width: 1px !default;
-$mc-calendar-controls-vertical-padding: 5%;
-// We use the same padding as the month / year label, but subtract 16px since there is padding
-// between the edge of the button and the text. This ensures that the button text lines up with
-// the month / year label text.
-$mc-calendar-controls-side-margin: calc(33% / 7 - 16px);
-
-$mc-calendar-arrow-size: 5px !default;
-$mc-calendar-arrow-disabled-opacity: 0.5 !default;
-
-$mc-calendar-prev-next-icon-border-width: 2px;
-$mc-calendar-prev-next-icon-margin: 15.5px;
-$mc-calendar-prev-icon-transform: translateX(2px) rotate(-45deg);
-$mc-calendar-next-icon-transform: translateX(-2px) rotate(45deg);
 
 
 .mc-calendar {
@@ -22,17 +7,16 @@ $mc-calendar-next-icon-transform: translateX(-2px) rotate(45deg);
 }
 
 .mc-calendar__header {
-    padding: $mc-calendar-padding $mc-calendar-padding 0 $mc-calendar-padding;
+    padding: $datepicker-calendar-size-padding $datepicker-calendar-size-padding 0 $datepicker-calendar-size-padding;
 }
 
 .mc-calendar__content {
-    padding: 0 $mc-calendar-padding $mc-calendar-padding $mc-calendar-padding;
+    padding: 0 $datepicker-calendar-size-padding $datepicker-calendar-size-padding $datepicker-calendar-size-padding;
     outline: none;
 }
 
 .mc-calendar__controls {
     display: flex;
-    margin: $mc-calendar-controls-vertical-padding $mc-calendar-controls-side-margin;
 }
 
 .mc-calendar-spacer {
@@ -44,13 +28,13 @@ $mc-calendar-next-icon-transform: translateX(-2px) rotate(45deg);
 }
 
 .mc-calendar__previous-button::after {
-    border-left-width: $mc-calendar-prev-next-icon-border-width;
-    transform: $mc-calendar-prev-icon-transform;
+    border-left-width: $datepicker-calendar-size-icon-border-width;
+    transform: $datepicker-calendar-size-icon-prev-icon-transform;
 }
 
 .mc-calendar__next-button::after {
-    border-right-width: $mc-calendar-prev-next-icon-border-width;
-    transform: $mc-calendar-next-icon-transform;
+    border-right-width: $datepicker-calendar-size-icon-border-width;
+    transform: $datepicker-calendar-size-icon-nex-icon-transform;
 }
 
 .mc-calendar__table {
@@ -61,12 +45,12 @@ $mc-calendar-next-icon-transform: translateX(-2px) rotate(45deg);
 
 .mc-calendar__table-header th {
     text-align: center;
-    padding: 0 0 $mc-calendar-padding 0;
+    padding: 0 0 $datepicker-calendar-size-padding 0;
 }
 
 .mc-calendar__table-header-divider {
     position: relative;
-    height: $mc-calendar-header-divider-width;
+    height: $datepicker-calendar-size-divider-width;
 
     // We use an absolutely positioned pseudo-element as the divider line for the table header so we
     // can extend it all the way to the edge of the calendar.
@@ -74,8 +58,8 @@ $mc-calendar-next-icon-transform: translateX(-2px) rotate(45deg);
         content: '';
         position: absolute;
         top: 0;
-        left: -$mc-calendar-padding;
-        right: -$mc-calendar-padding;
-        height: $mc-calendar-header-divider-width;
+        left: -$datepicker-calendar-size-padding;
+        right: -$datepicker-calendar-size-padding;
+        height: $datepicker-calendar-size-divider-width;
     }
 }

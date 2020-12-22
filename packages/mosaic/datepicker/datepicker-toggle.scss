@@ -1,13 +1,13 @@
-$mc-datepicker-toggle-width: 30px;
-$mc-datepicker-toggle-height: 30px;
+@import '../design-tokens/index';
+
 
 .mc-datepicker-toggle:focus {
     outline: 0;
 }
 
 .mc-datepicker-toggle__button.mc-icon-button {
-    width: $mc-datepicker-toggle-width;
-    height: $mc-datepicker-toggle-height;
+    width: $datepicker-toggle-size-width;
+    height: $datepicker-toggle-size-height;
     margin-left: 2px;
 }
 

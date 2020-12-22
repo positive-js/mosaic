@@ -1,7 +1,8 @@
-$mc-datepicker-calendar-padding: 8px;
+@import './calendar';
+
 $mc-datepicker-non-touch-calendar-cell-size: 40px;
 $mc-datepicker-non-touch-calendar-width:
-        $mc-datepicker-non-touch-calendar-cell-size * 7 + $mc-datepicker-calendar-padding * 2;
+        $mc-datepicker-non-touch-calendar-cell-size * 7 + $datepicker-calendar-size-padding * 2;
 // Based on the natural height of the calendar in a month with 6 rows of dates
 // (largest the calendar will get).
 $mc-datepicker-non-touch-calendar-height: 344px;
