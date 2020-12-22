@@ -1,13 +1,12 @@
+@import '../design-tokens/index';
 @import '../core/styles/common/input';
 
-$mc-input-width: 100%;
-$mc-input-min-height: 30px;
 
 %mc-input-field-base {
     @include mc-reset-input();
 
     box-sizing: border-box;
-    padding: 5px 16px;
-    width: $mc-input-width;
-    min-height: $mc-input-min-height; // for IE11
+    padding: $input-size-padding;
+    width: $input-size-width;
+    min-height: $input-size-min-height; // for IE11
 }

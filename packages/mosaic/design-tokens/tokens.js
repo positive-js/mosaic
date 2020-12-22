@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 22 Dec 2020 11:41:01 GMT
+ * Generated on Tue, 22 Dec 2020 12:46:26 GMT
  */
 
 export const ColorPrimaryLighter = "#57A4D7";
@@ -347,3 +347,6 @@ export const FormFieldSizeBorderWidth = "1px";
 export const FormFieldSizeBorderRadius = "3px";
 export const FormFieldSizeButtonWidth = "32px";
 export const FormFieldHintSizeMarginTop = "4px";
+export const InputSizePadding = "5px 16px";
+export const InputSizeWidth = "100%";
+export const InputSizeMinHeight = "30px";
