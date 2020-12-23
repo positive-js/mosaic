@@ -74,6 +74,8 @@ export class AbsoluteDateFormatterExample {
         absoluteShort.dateTime.notCurrentYear = this.dateAdapter.absoluteShortDateTime(
             moment().subtract(1, 'years')
         );
+        absoluteShort.dateTime.milliseconds = this.dateAdapter.absoluteShortDateTime(moment(), { milliseconds: true });
+        absoluteShort.dateTime.microseconds = this.dateAdapter.absoluteShortDateTime(moment(), { microseconds: true });
     }
 
     private populateAbsoluteLong(locale: string) {
@@ -87,5 +89,7 @@ export class AbsoluteDateFormatterExample {
         absoluteLong.dateTime.notCurrentYear = this.dateAdapter.absoluteLongDateTime(
             moment().subtract(1, 'years')
         );
+        absoluteLong.dateTime.milliseconds = this.dateAdapter.absoluteLongDateTime(moment(), { milliseconds: true });
+        absoluteLong.dateTime.microseconds = this.dateAdapter.absoluteLongDateTime(moment(), { microseconds: true });
     }
 }

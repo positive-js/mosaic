@@ -598,6 +598,8 @@ describe('MomentDateAdapter formatter', () => {
         const SHORT_MONTH = 'MMM';
         const DAY = 'D';
         const TIME = 'HH:mm';
+        const MILLISECONDS = ',SSS';
+        const MICROSECONDS = ',SSSSSS';
 
         const DASH = '\u2013';
         const LONG_DASH = '\u202F\u2014\u2009';
@@ -738,6 +740,20 @@ describe('MomentDateAdapter formatter', () => {
                         date.format(`${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`)
                     );
                 });
+
+                it('absoluteShortDateTime with milliseconds', () => {
+                    const date = moment();
+                    expect(adapter.absoluteShortDateTime(date, { milliseconds: true })).toBe(
+                        date.format(`${DAY_SHORT_MONTH}, ${TIME}${MILLISECONDS}`)
+                    );
+                });
+
+                it('absoluteShortDateTime with microseconds', () => {
+                    const date = moment();
+                    expect(adapter.absoluteShortDateTime(date, { microseconds: true })).toBe(
+                        date.format(`${DAY_SHORT_MONTH}, ${TIME}${MICROSECONDS}`)
+                    );
+                });
             });
 
             describe('Absolute long (absoluteLongDate/Time method)', () => {
@@ -761,6 +777,18 @@ describe('MomentDateAdapter formatter', () => {
                     expect(adapter.absoluteLongDateTime(date)).toBe(
                         date.format(`${DAY_MONTH} ${YEAR}, ${TIME}`)
                     );
+                });
+
+                it('absoluteLongDateTime with milliseconds', () => {
+                    const date = moment();
+                    expect(adapter.absoluteLongDateTime(date, { milliseconds: true }))
+                        .toBe(date.format(`${DAY_MONTH}, ${TIME}${MILLISECONDS}`));
+                });
+
+                it('absoluteLongDateTime with microseconds', () => {
+                    const date = moment();
+                    expect(adapter.absoluteLongDateTime(date, { microseconds: true }))
+                        .toBe(date.format(`${DAY_MONTH}, ${TIME}${MICROSECONDS}`));
                 });
             });
         });
@@ -1292,6 +1320,8 @@ describe('MomentDateAdapter formatter', () => {
         const SHORT_MONTH = 'MMM';
         const DAY = 'D';
         const TIME = 'HH:mm';
+        const MILLISECONDS = '.SSS';
+        const MICROSECONDS = '.SSSSSS';
 
         const DASH = '\u2013';
         const LONG_DASH = '\u202F\u2013\u2009';
@@ -1437,6 +1467,20 @@ describe('MomentDateAdapter formatter', () => {
                         date.format(`${DAY_SHORT_MONTH}, ${YEAR}, ${TIME}`)
                     );
                 });
+
+                it('absoluteShortDateTime with milliseconds', () => {
+                    const date = moment();
+                    expect(adapter.absoluteShortDateTime(date, { milliseconds: true })).toBe(
+                        date.format(`${DAY_SHORT_MONTH}, ${TIME}${MILLISECONDS}`)
+                    );
+                });
+
+                it('absoluteShortDateTime with microseconds', () => {
+                    const date = moment();
+                    expect(adapter.absoluteShortDateTime(date, { microseconds: true })).toBe(
+                        date.format(`${DAY_SHORT_MONTH}, ${TIME}${MICROSECONDS}`)
+                    );
+                });
             });
 
             describe('Absolute long (absoluteLongDate/Time method)', () => {
@@ -1460,6 +1504,18 @@ describe('MomentDateAdapter formatter', () => {
                     expect(adapter.absoluteLongDateTime(date)).toBe(
                         date.format(`${DAY_MONTH}, ${YEAR}, ${TIME}`)
                     );
+                });
+
+                it('absoluteLongDateTime with milliseconds', () => {
+                    const date = moment();
+                    expect(adapter.absoluteLongDateTime(date, { milliseconds: true }))
+                        .toBe(date.format(`${DAY_MONTH}, ${TIME}${MILLISECONDS}`));
+                });
+
+                it('absoluteLongDateTime with microseconds', () => {
+                    const date = moment();
+                    expect(adapter.absoluteLongDateTime(date, { microseconds: true }))
+                        .toBe(date.format(`${DAY_MONTH}, ${TIME}${MICROSECONDS}`));
                 });
             });
         });
