@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Thu, 24 Dec 2020 13:06:47 GMT
+ * Generated on Thu, 24 Dec 2020 13:36:32 GMT
  */
 
 export const ColorPrimaryLighter = "#57A4D7";
@@ -398,3 +398,5 @@ export const PopoverFooterSizeMarginTop = "8px";
 export const ProgressBarColorBackground = "#F0F0F0";
 export const ProgressBarSizeHeight = "4px";
 export const ProgressSpinnerSizeSize = "16px";
+export const RadioSizeSize = "14px";
+export const RadioSizePadding = "24px"; // Padding between radio inputs and their labels

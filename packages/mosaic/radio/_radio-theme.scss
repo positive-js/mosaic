@@ -1,81 +1,66 @@
-@import '../core/theming/theming';
+@import '../design-tokens/index';
 @import '../core/styles/typography/typography-utils';
 
 
 @mixin mc-radio-theme($theme) {
-    $foreground: map-get($theme, foreground);
-    $background: map-get($theme, background);
-
-    $radio: map-get(map-get($theme, components), radio);
-
-    $outer-circle_border-color: map-get($radio, outer-circle_border-color);
-    $inner-circle_border-color: map-get($radio, inner-circle_border-color);
-
-    $outer-circle_checked-state_border-color: map-get($radio, outer-circle_checked-state_border-color);
-    $inner-circle_checked-state_border-color: map-get($radio, inner-circle_checked-state_border-color);
-
-    $outer-circle_focused-state_border-color: map-get($radio, outer-circle_focused-state_border-color);
-    $outer-circle_focused-state_shadow: map-get($radio, outer-circle_focused-state_shadow);
-    $inner-circle_focused-state_shadow: map-get($radio, inner-circle_focused-state_shadow);
-
     .mc-radio-group {
-        color: map-get($foreground, text);
+        color: $color-foreground-text;
     }
 
     .mc-radio-button {
         & .mc-radio-button__outer-circle {
-            border-color: $outer-circle_border-color;
-            background: map-get($background, background);
+            border-color: $color-second-default;
+            background: $color-background-background;
         }
 
         & .mc-radio-button__inner-circle {
-            border-color: $inner-circle_border-color;
+            border-color: transparent;
         }
 
         &:hover {
             & .mc-radio-button__outer-circle {
-                background: map-get($background, overlay-hovered);
+                background: $color-background-overlay-hovered;
             }
         }
 
         &.mc-selected {
             & .mc-radio-button__outer-circle {
-                border-color: $outer-circle_checked-state_border-color;
+                border-color: $color-primary-default;
                 background: white;
             }
 
             & .mc-radio-button__inner-circle {
                 display: block;
-                border-color: $inner-circle_checked-state_border-color;
+                border-color: $color-primary-default
             }
         }
 
         &.cdk-keyboard-focused {
             & .mc-radio-button__outer-circle {
-                border-color: $outer-circle_focused-state_border-color;
-                box-shadow: $outer-circle_focused-state_shadow;
+                border-color: $globals-states-focused-color;
+                box-shadow: 0 0 0 2px $globals-states-focused-color;
             }
 
             & .mc-radio-button__inner-circle {
-                box-shadow: $inner-circle_focused-state_shadow;
+                box-shadow: 0 0 0 1px $color-background-background;
             }
         }
 
         &.mc-disabled {
-            color: map-get($foreground, text-disabled);
+            color: $color-foreground-text-disabled;
 
             & .mc-radio-label {
                 cursor: default;
             }
 
             & .mc-radio-button__outer-circle {
-                border-color: map-get($foreground, border);
-                background: map-get($background, background-disabled);
+                border-color: $color-foreground-border;
+                background: $color-background-background-disabled;
             }
 
             & .mc-radio-button__inner-circle {
-                border-color: map-get($background, background-disabled);
-                background: map-get($foreground, text-disabled);
+                border-color: $color-background-background-disabled;
+                background: $color-foreground-text-disabled;
             }
         }
     }

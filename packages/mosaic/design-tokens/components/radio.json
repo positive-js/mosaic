@@ -1,0 +1,13 @@
+{
+    "radio": {
+        "color": {},
+        "size": {
+            "size": { "value": "14px" },
+            "padding": {
+                "value": "24px",
+                "comment": "Padding between radio inputs and their labels"
+            }
+        },
+        "font": {}
+    }
+}
