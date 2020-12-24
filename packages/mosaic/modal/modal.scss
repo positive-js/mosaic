@@ -1,5 +1,6 @@
 @import '../core/styles/variables';
-@import './modal-animation';
+@import '../design-tokens/index';
+
 @import './modal-confirm';
 
 
@@ -8,13 +9,13 @@
 
     position: relative;
 
-    top: 48px;
+    top: $modal-size-top;
 
     width: auto;
 
     margin: 0 auto;
 
-    padding: 0 0 24px 0;
+    padding: $modal-size-padding;
 
     list-style: none;
 
@@ -34,8 +35,8 @@
         top: 0;
         right: 0;
 
-        width: 56px;
-        height: 56px;
+        width: $modal-size-close-width;
+        height: $modal-size-close-width;
     }
 }
 
@@ -61,30 +62,38 @@
 .mc-modal-content {
     position: relative;
 
-    border-radius: 4px;
+    border-radius: $modal-size-border-radius;
 
     background-clip: padding-box;
     background-color: white;
 }
 
 .mc-modal-header {
-    padding: 14px 16px;
     display: block;
-    border-radius: 4px 4px 0 0;
+
+    border-radius: $modal-header-size-border-radius;
+
+    padding: $modal-header-size-padding;
 }
 
 .mc-modal-body {
     display: block;
-    padding: 16px 24px 24px 24px;
-    max-height: calc(100vh - 260px);
-    word-wrap: break-word;
     overflow-y: auto;
+
+    max-height: $modal-body-size-max-height;
+
+    padding: $modal-body-size-padding;
+
+    word-wrap: break-word;
 }
 
 .mc-modal-footer {
     display: block;
-    padding: 16px 16px;
-    border-radius: 0 0 4px 4px;
+
+    border-radius: $modal-footer-size-border-radius;
+
+    padding: $modal-footer-size-padding;
+
     text-align: right;
 
     button + button {
@@ -97,6 +106,7 @@
     position: fixed;
 
     z-index: $zindex-modal-mask;
+
     top: 0;
     right: 0;
     left: 0;

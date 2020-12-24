@@ -1,6 +1,6 @@
 
 // Do not edit directly
-// Generated on Thu, 24 Dec 2020 09:14:23 GMT
+// Generated on Thu, 24 Dec 2020 10:34:48 GMT
 
 $color-primary-lighter: #57A4D7;
 $color-primary-default: #338FCC;
@@ -350,3 +350,17 @@ $list-size-two-line-height: 72px;
 $list-size-three-line-height: 88px;
 $list-size-multi-line-padding: 16px;
 $list-size-icon-width: 24px;
+$modal-color-shadow: (0 0 0 1px #B3B3B3, 0 6px 12px 0 rgba(0, 0, 0, 0.5));
+$modal-color-background-mask: rgba(0, 0, 0, 0.5);
+$modal-size-top: 48px;
+$modal-size-padding: 0 0 24px;
+$modal-size-close-width: 56px;
+$modal-size-border-radius: 4px;
+$modal-size-border-width: 1px;
+$modal-header-size-border-radius: 4px 4px 0 0;
+$modal-header-size-padding: 14px 16px;
+$modal-body-size-max-height: calc(100vh - 260px);
+$modal-body-size-padding: 16px 24px 24px;
+$modal-footer-size-border-radius: 0 0 4px 4px;
+$modal-footer-size-padding: 16px;
+$modal-confirm-size-padding: 24px;

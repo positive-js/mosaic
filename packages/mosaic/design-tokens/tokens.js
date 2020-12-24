@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Thu, 24 Dec 2020 09:14:23 GMT
+ * Generated on Thu, 24 Dec 2020 10:34:48 GMT
  */
 
 export const ColorPrimaryLighter = "#57A4D7";
@@ -357,3 +357,17 @@ export const ListSizeTwoLineHeight = "72px";
 export const ListSizeThreeLineHeight = "88px";
 export const ListSizeMultiLinePadding = "16px";
 export const ListSizeIconWidth = "24px";
+export const ModalColorShadow = "(0 0 0 1px #B3B3B3, 0 6px 12px 0 rgba(0, 0, 0, 0.5))";
+export const ModalColorBackgroundMask = "rgba(0, 0, 0, 0.5)";
+export const ModalSizeTop = "48px";
+export const ModalSizePadding = "0 0 24px";
+export const ModalSizeCloseWidth = "56px";
+export const ModalSizeBorderRadius = "4px";
+export const ModalSizeBorderWidth = "1px";
+export const ModalHeaderSizeBorderRadius = "4px 4px 0 0";
+export const ModalHeaderSizePadding = "14px 16px";
+export const ModalBodySizeMaxHeight = "calc(100vh - 260px)";
+export const ModalBodySizePadding = "16px 24px 24px";
+export const ModalFooterSizeBorderRadius = "0 0 4px 4px";
+export const ModalFooterSizePadding = "16px";
+export const ModalConfirmSizePadding = "24px";

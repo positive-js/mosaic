@@ -1,0 +1,47 @@
+{
+    "modal": {
+        "color": {
+            "shadow": { "value": "(0 0 0 1px {color.second.palette.value.300.value}, 0 6px 12px 0 rgba(0, 0, 0, 0.5))" },
+            "background-mask": { "value": "rgba(0, 0, 0, 0.5)" }
+        },
+        "size": {
+            "top": { "value": "48px" },
+            "padding": { "value": "0 0 24px" },
+            "close-width": { "value": "56px" },
+            "border-radius": { "value": "4px" },
+            "border-width": { "value": "1px" }
+        },
+        "font": {}
+    },
+    "modal-header": {
+        "color": {},
+        "size": {
+            "border-radius": { "value": "4px 4px 0 0" },
+            "padding": { "value": "14px 16px" }
+        },
+        "font": {}
+    },
+    "modal-body": {
+        "color": {},
+        "size": {
+            "max-height": { "value": "calc(100vh - 260px)" },
+            "padding": { "value": "16px 24px 24px" }
+        },
+        "font": {}
+    },
+    "modal-footer": {
+        "color": {},
+        "size": {
+            "border-radius": { "value": "0 0 4px 4px" },
+            "padding": { "value": "16px" }
+        },
+        "font": {}
+    },
+    "modal-confirm": {
+        "color": {},
+        "size": {
+            "padding": { "value": "24px" }
+        },
+        "font": {}
+    }
+}

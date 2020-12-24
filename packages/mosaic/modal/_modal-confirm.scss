@@ -1,3 +1,5 @@
+@import '../design-tokens/index';
+
 
 .mc-confirm {
     .mc-modal-header {
@@ -9,7 +11,7 @@
     }
 
     .mc-modal-body {
-        padding: 24px;
+        padding: $modal-confirm-size-padding;
     }
 
     // TODO
@@ -36,11 +38,11 @@
     }
 
     .mc-confirm-btns {
-        border-radius: 0 0 4px 4px;
+        border-radius: $modal-footer-size-border-radius;
         text-align: right;
 
         button + button {
-            margin: 16px 16px 16px;
+            margin: 16px;
         }
     }
 }
