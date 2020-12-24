@@ -1,4 +1,6 @@
+@import '../design-tokens/index';
 @import '../core/styles/functions/_timing.scss';
+
 
 @keyframes mc-progress-bar-indeterminate {
     0% {
@@ -12,7 +14,7 @@
 
 .mc-progress-bar {
     display: block;
-    height: 4px;
+    height: $progress-bar-size-height;
     overflow: hidden;
 
     &__inner {

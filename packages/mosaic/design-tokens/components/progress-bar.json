@@ -1,0 +1,11 @@
+{
+    "progress-bar": {
+        "color": {
+            "background": { "value": "{color.second.palette.value.60.value}" }
+        },
+        "size": {
+            "height": { "value": "4px" }
+        },
+        "font": {}
+    }
+}
