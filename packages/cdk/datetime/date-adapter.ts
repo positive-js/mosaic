@@ -49,6 +49,11 @@ export interface IFormatterRelativeTemplate {
     BEFORE_YESTERDAY: string;
 }
 
+export interface IAbsoluteDateTimeOptions {
+    milliseconds?: boolean;
+    microseconds?: boolean;
+}
+
 /** Adapts type `D` to be usable as a date by cdk-based components that work with dates. */
 // tslint:disable-next-line:naming-convention
 export abstract class DateAdapter<D> {
@@ -303,9 +308,17 @@ export abstract class DateAdapter<D> {
      * @param date - date
      * @param params - parameters
      * @param datetime - should time be shown as well
+     * @param milliseconds - should time with milliseconds be shown as well
+     * @param microseconds - should time with microseconds be shown as well
      * @returns absolute date in common format
      */
-    abstract absoluteDate(date: Moment, params: IFormatterAbsoluteTemplate, datetime: boolean): string;
+    abstract absoluteDate(
+        date: Moment,
+        params: IFormatterAbsoluteTemplate,
+        datetime: boolean,
+        milliseconds: boolean,
+        microseconds: boolean
+    ): string;
 
     /**
      * @param date - date
@@ -315,9 +328,10 @@ export abstract class DateAdapter<D> {
 
     /**
      * @param date - date
+     * @param options - AbsoluteDateTimeOptions
      * @returns absolute date in short format with time
      */
-    abstract absoluteShortDateTime(date: Moment): string;
+    abstract absoluteShortDateTime(date: Moment, options?: IAbsoluteDateTimeOptions): string;
 
     /**
      * @param date - date
@@ -343,9 +357,10 @@ export abstract class DateAdapter<D> {
 
     /**
      * @param date - date
+     * @param options - AbsoluteDateTimeOptions
      * @returns absolute date in long format with time
      */
-    abstract absoluteLongDateTime(date: Moment): string;
+    abstract absoluteLongDateTime(date: Moment, options?: IAbsoluteDateTimeOptions): string;
 
     /**
      * @param startDate - start date
