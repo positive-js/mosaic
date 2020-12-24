@@ -1,26 +1,19 @@
-
-$mc-navbar-h-padding: 0px;
-$mc-navbar-height: 48px;
-$mc-navbar-item-h-padding: 16px;
-$mc-navbar-brand-h-padding: 12px;
-$mc-navbar-brand-margin-right: 24px;
-$mc-navbar-title-icon-space: 8px;
+@import '../design-tokens/index';
 
 
 %mc-navbar-container-base {
-    height: 100%;
     display: flex;
     flex-shrink: 0;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
+    height: 100%;
 }
 
 %mc-nav-bar-base {
     position: relative;
-    height: $mc-navbar-height;
-
-    padding: 0 $mc-navbar-h-padding;
+    height: $navbar-size-height;
 
     display: flex;
     flex-direction: row;
@@ -28,7 +21,7 @@ $mc-navbar-title-icon-space: 8px;
     align-items: center;
 
     [mc-icon] + mc-navbar-title {
-        margin-left: $mc-navbar-title-icon-space;
+        margin-left: $navbar-size-icon-margin-left;
     }
 
     [mc-icon] {
@@ -37,7 +30,7 @@ $mc-navbar-title-icon-space: 8px;
     }
 
     mc-navbar-title:not(.mc-navbar-collapsed-title) + [mc-icon] {
-        margin-left: $mc-navbar-title-icon-space;
+        margin-left: $navbar-size-icon-margin-left;
     }
 }
 
@@ -46,18 +39,18 @@ $mc-navbar-title-icon-space: 8px;
     position: relative;
     display: flex;
     align-items: center;
-    padding-left: $mc-navbar-item-h-padding;
-    padding-right: $mc-navbar-item-h-padding;
+    padding-left: $navbar-item-size-padding;
+    padding-right: $navbar-item-size-padding;
 }
 
 %mc-navbar-brand-base {
     @extend %mc-navbar-item-base;
     padding-left: 0;
-    padding-right: $mc-navbar-brand-h-padding;
-    margin-right: $mc-navbar-brand-margin-right;
+    padding-right: $navbar-brand-size-padding;
+    margin-right: $navbar-brand-size-margin-right;
 
     .mc-navbar-title {
-        padding-left: $mc-navbar-brand-h-padding;
+        padding-left: $navbar-brand-size-padding;
         padding-right: 0;
     }
 }

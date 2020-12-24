@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Thu, 24 Dec 2020 10:34:48 GMT
+ * Generated on Thu, 24 Dec 2020 12:09:56 GMT
  */
 
 export const ColorPrimaryLighter = "#57A4D7";
@@ -371,3 +371,16 @@ export const ModalBodySizePadding = "16px 24px 24px";
 export const ModalFooterSizeBorderRadius = "0 0 4px 4px";
 export const ModalFooterSizePadding = "16px";
 export const ModalConfirmSizePadding = "24px";
+export const NavbarColorBackground = "#114E77";
+export const NavbarColorColor = "#D8EAF7";
+export const NavbarColorOpacity = 0.5;
+export const NavbarSizeHeight = "48px";
+export const NavbarSizeIconMarginLeft = "8px";
+export const NavbarItemColorColor = "#D8EAF7";
+export const NavbarItemColorStatesActive = "#206EA2"; // lighten(mc-color($primary, 700), 5%)
+export const NavbarItemColorStatesHover = "#206EA2"; // lighten(mc-color($primary, 700), 5%)
+export const NavbarItemColorStatesProgress = "#07314D"; // lighten(mc-color($primary, 800), 5%)
+export const NavbarItemColorStatesDisabledOpacity = 0.3;
+export const NavbarItemSizePadding = "16px";
+export const NavbarBrandSizePadding = "12px";
+export const NavbarBrandSizeMarginRight = "24px";

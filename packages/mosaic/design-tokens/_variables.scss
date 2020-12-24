@@ -1,6 +1,6 @@
 
 // Do not edit directly
-// Generated on Thu, 24 Dec 2020 10:34:48 GMT
+// Generated on Thu, 24 Dec 2020 12:09:56 GMT
 
 $color-primary-lighter: #57A4D7;
 $color-primary-default: #338FCC;
@@ -364,3 +364,16 @@ $modal-body-size-padding: 16px 24px 24px;
 $modal-footer-size-border-radius: 0 0 4px 4px;
 $modal-footer-size-padding: 16px;
 $modal-confirm-size-padding: 24px;
+$navbar-color-background: #114E77;
+$navbar-color-color: #D8EAF7;
+$navbar-color-opacity: 0.5;
+$navbar-size-height: 48px;
+$navbar-size-icon-margin-left: 8px;
+$navbar-item-color-color: #D8EAF7;
+$navbar-item-color-states-active: #206EA2; // lighten(mc-color($primary, 700), 5%)
+$navbar-item-color-states-hover: #206EA2; // lighten(mc-color($primary, 700), 5%)
+$navbar-item-color-states-progress: #07314D; // lighten(mc-color($primary, 800), 5%)
+$navbar-item-color-states-disabled-opacity: 0.3;
+$navbar-item-size-padding: 16px;
+$navbar-brand-size-padding: 12px;
+$navbar-brand-size-margin-right: 24px;

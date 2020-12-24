@@ -3,54 +3,50 @@
 
 
 @mixin mc-navbar-theme($theme) {
-    $focused-color: map-get(map-get($theme, states), focused-color);
-
-    $navbar: map-get(map-get($theme, components), navbar);
-
     .mc-navbar {
-        background-color: map-get($navbar, background-color);
+        background-color: $navbar-color-background;
 
         .mc-navbar-title,
         .mc-icon {
-            color: map-get($navbar, color);
+            color: $navbar-color-color;
         }
     }
 
     .mc-navbar-brand {
         .mc-navbar-title {
-            opacity: map-get($navbar, opacity);
+            opacity: $navbar-color-opacity;
         }
     }
 
     .mc-navbar-item {
         outline: 0;
 
-        color: map-get($navbar, item_color);
+        color: $navbar-item-color-color;
 
         &:not([disabled]) {
             outline: 0;
 
             &.cdk-keyboard-focused {
-                box-shadow: inset 0 0 0 2px $focused-color;
+                box-shadow: inset 0 0 0 2px $globals-states-focused-color;
             }
         }
 
         &.mc-navbar-item-active {
-            background-color: map-get($navbar, item_state-active_color);
+            background-color: $navbar-item-color-states-active;
         }
 
         &:hover:not([disabled]):not(.mc-progress) {
-            background-color: map-get($navbar, item_state-hover_color);
+            background-color: $navbar-item-color-states-hover;
         }
 
         &.mc-progress:hover:not([disabled]) {
-            background-color: map-get($navbar, item_state-progress_color);
+            background-color: $navbar-item-color-states-progress;
         }
 
         &[disabled] {
             .mc-navbar-title,
             .mc-icon {
-                opacity: map-get($navbar, item_state-disabled_opacity);
+                opacity: $navbar-item-color-states-disabled-opacity;
             }
         }
     }
