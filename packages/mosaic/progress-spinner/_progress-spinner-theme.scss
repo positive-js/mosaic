@@ -1,23 +1,18 @@
-@import '../core/theming/theming';
-@import '../core/theming/palette';
+@import '../design-tokens/index';
 
 
 @mixin mc-progress-spinner-theme($theme) {
-    $primary: map-get($theme, primary);
-    $second: map-get($theme, second);
-    $error: map-get($theme, error);
-
     .mc-progress-spinner {
         &.mc-primary .mc-progress-spinner__circle {
-            stroke: mc-color($primary);
+            stroke: $color-primary-default;
         }
 
         &.mc-second .mc-progress-spinner__circle {
-            stroke: mc-color($second);
+            stroke: $color-second-default;
         }
 
         &.mc-error .mc-progress-spinner__circle {
-            stroke: mc-color($error);
+            stroke: $color-error-default;
         }
     }
 }

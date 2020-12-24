@@ -1,4 +1,6 @@
+@import '../design-tokens/index';
 @import '../core/styles/functions/_timing.scss';
+
 
 @keyframes mc-progress-spinner-indeterminate {
     100% {
@@ -8,8 +10,8 @@
 
 .mc-progress-spinner {
     display: inline-block;
-    width: 16px;
-    height: 16px;
+    width: $progress-spinner-size-size;
+    height: $progress-spinner-size-size;
     overflow: hidden;
 
     &__circle {

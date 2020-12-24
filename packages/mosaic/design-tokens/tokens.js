@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Thu, 24 Dec 2020 12:51:02 GMT
+ * Generated on Thu, 24 Dec 2020 13:06:47 GMT
  */
 
 export const ColorPrimaryLighter = "#57A4D7";
@@ -397,3 +397,4 @@ export const PopoverFooterSizePadding = "12px 16px";
 export const PopoverFooterSizeMarginTop = "8px";
 export const ProgressBarColorBackground = "#F0F0F0";
 export const ProgressBarSizeHeight = "4px";
+export const ProgressSpinnerSizeSize = "16px";
