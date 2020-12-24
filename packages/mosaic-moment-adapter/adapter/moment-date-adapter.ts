@@ -5,7 +5,8 @@ import {
     MC_DATE_LOCALE,
     IFormatterRangeTemplate,
     IFormatterRelativeTemplate,
-    IFormatterAbsoluteTemplate
+    IFormatterAbsoluteTemplate,
+    IAbsoluteDateTimeOptions
 } from '@ptsecurity/cdk/datetime';
 import * as MessageFormat from 'messageformat';
 // Depending on whether rollup is used, moment needs to be imported differently.
@@ -378,29 +379,51 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
         return this.relativeDate(date, this.formatterConfig.relativeTemplates.long);
     }
 
-    absoluteDate(date: Moment, params: IFormatterAbsoluteTemplate, datetime = false): string {
+    absoluteDate(
+        date: Moment,
+        params: IFormatterAbsoluteTemplate,
+        datetime = false,
+        milliseconds = false,
+        microseconds = false
+    ): string {
         if (!this.isDateInstance(date)) { throw new Error(this.invalidDateErrorText); }
 
-        const variables = {...this.formatterConfig.variables, ...params.variables};
+        const variables = this.compileVariables(date, { ...this.formatterConfig.variables, ...params.variables });
+
+        variables.SHOW_MILLISECONDS = milliseconds ? 'yes' : 'no';
+        variables.SHOW_MICROSECONDS = microseconds ? 'yes' : 'no';
+
         const template = datetime ? params.DATETIME : params.DATE;
 
-        return this.messageformat.compile(template)(this.compileVariables(date, variables));
+        return this.messageformat.compile(template)(variables);
     }
 
     absoluteShortDate(date: Moment): string {
         return this.absoluteDate(date, this.formatterConfig.absoluteTemplates.short);
     }
 
-    absoluteShortDateTime(date: Moment): string {
-        return this.absoluteDate(date, this.formatterConfig.absoluteTemplates.short, true);
+    absoluteShortDateTime(date: Moment, options?: IAbsoluteDateTimeOptions): string {
+        return this.absoluteDate(
+            date,
+            this.formatterConfig.absoluteTemplates.short,
+            true,
+            options?.milliseconds,
+            options?.microseconds
+        );
     }
 
     absoluteLongDate(date: Moment): string {
         return this.absoluteDate(date, this.formatterConfig.absoluteTemplates.long);
     }
 
-    absoluteLongDateTime(date: Moment): string {
-        return this.absoluteDate(date, this.formatterConfig.absoluteTemplates.long, true);
+    absoluteLongDateTime(date: Moment, options?: IAbsoluteDateTimeOptions): string {
+        return this.absoluteDate(
+            date,
+            this.formatterConfig.absoluteTemplates.long,
+            true,
+            options?.milliseconds,
+            options?.microseconds
+        );
     }
 
     openedRangeDate(startDate: Moment | null, endDate: Moment | null, template: IFormatterRangeTemplate) {
