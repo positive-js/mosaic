@@ -1,47 +1,33 @@
-@import '../core/theming/theming';
-@import '../core/theming/palette';
+@import '../design-tokens/index';
 @import '../core/styles/typography/typography-utils';
-
-// TODO: Its only for testing colors
-@import '../core/theming/palette';
-
-@import '../core/styles/common/list';
 
 
 @mixin mc-list-theme($theme) {
-    $foreground: map-get($theme, foreground);
-    $background: map-get($theme, background);
-
-    $states: map-get($theme, states);
-    $selected-color: map-get($states, selected-color);
-    $focused-color: map-get($states, focused-color);
-
-    .mc-list-item {
-        color: mc-color($foreground, text);
+    .mc-list-item,
+    .mc-list-option {
+        color: $color-foreground-text;
     }
 
     .mc-list-option {
         outline: none;
 
-        color: mc-color($foreground, text);
-
         &:hover {
-            background: mc-color($background, overlay-hovered);
+            background: $color-background-overlay-hovered;
         }
 
         &.mc-focused {
-            border-color: $focused-color;
+            border-color: $globals-states-focused-color;
         }
 
         &.mc-selected {
-            background: $selected-color;
+            background: $globals-states-selected-color;
         }
 
         &.mc-disabled,
         &[disabled] {
             background: transparent;
 
-            color: mc-color($foreground, text-disabled);
+            color: $color-foreground-text-disabled;
         }
     }
 }

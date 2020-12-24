@@ -1,8 +1,6 @@
-@import '../core/styles/common/list';
-@import '../divider/divider';
+@import '../design-tokens/index';
 
 @import 'list-base';
-@import 'list-theme';
 
 
 .mc-list,
@@ -15,11 +13,11 @@
 .mc-list-item,
 .mc-list-option {
     @include mc-list-item-base(
-        $mc-list-base-height,
-        $mc-list-two-line-height,
-        $mc-list-three-line-height,
-        $mc-list-multi-line-padding,
-        $mc-list-icon-size
+        $list-size-item-height,
+        $list-size-two-line-height,
+        $list-size-three-line-height,
+        $list-size-multi-line-padding,
+        $list-size-icon-width
     );
 
     & .mc-pseudo-checkbox {

@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 22 Dec 2020 12:46:26 GMT
+ * Generated on Thu, 24 Dec 2020 09:14:23 GMT
  */
 
 export const ColorPrimaryLighter = "#57A4D7";
@@ -61,8 +61,8 @@ export const ColorBackgroundOverlayDisabled = "#000000";
 export const FontFamilyBase = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
 export const FontFamilyMonospace = "'Roboto Mono', 'Consolas', 'Menlo', 'Monaco', monospace";
 export const GlobalsStatesFocusedColor = "#338FCC";
-export const GlobalsStatesSelectedColor = "#114E77";
-export const GlobalsStatesPressedShadow = "inset 1px 2px 2px 0 rgba(black, 0.2)";
+export const GlobalsStatesSelectedColor = "#D8EAF7";
+export const GlobalsStatesPressedShadow = "inset 0 1px 2px 0 rgba(black, 0.2)";
 export const GlobalsStatesDisabledOpacity = 0.3;
 export const PaletteBlue40 = "#F5FAFD";
 export const PaletteBlue60 = "#EBF4FB";
@@ -350,3 +350,10 @@ export const FormFieldHintSizeMarginTop = "4px";
 export const InputSizePadding = "5px 16px";
 export const InputSizeWidth = "100%";
 export const InputSizeMinHeight = "30px";
+export const ListSizeSidePadding = "15px";
+export const ListSizeIconPadding = "4px";
+export const ListSizeItemHeight = "28px";
+export const ListSizeTwoLineHeight = "72px";
+export const ListSizeThreeLineHeight = "88px";
+export const ListSizeMultiLinePadding = "16px";
+export const ListSizeIconWidth = "24px";

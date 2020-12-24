@@ -1,6 +1,6 @@
 
 // Do not edit directly
-// Generated on Tue, 22 Dec 2020 12:46:26 GMT
+// Generated on Thu, 24 Dec 2020 09:14:23 GMT
 
 $color-primary-lighter: #57A4D7;
 $color-primary-default: #338FCC;
@@ -54,8 +54,8 @@ $color-background-overlay-disabled: rgba(white, 0.3);
 $font-family-base: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
 $font-family-monospace: 'Roboto Mono', 'Consolas', 'Menlo', 'Monaco', monospace;
 $globals-states-focused-color: #338FCC;
-$globals-states-selected-color: #114E77;
-$globals-states-pressed-shadow: inset 1px 2px 2px 0 rgba(black, 0.2);
+$globals-states-selected-color: #D8EAF7;
+$globals-states-pressed-shadow: inset 0 1px 2px 0 rgba(black, 0.2);
 $globals-states-disabled-opacity: 0.3;
 $palette-blue-40: #F5FAFD;
 $palette-blue-60: #EBF4FB;
@@ -343,3 +343,10 @@ $form-field-hint-size-margin-top: 4px;
 $input-size-padding: 5px 16px;
 $input-size-width: 100%;
 $input-size-min-height: 30px;
+$list-size-side-padding: 15px;
+$list-size-icon-padding: 4px;
+$list-size-item-height: 28px;
+$list-size-two-line-height: 72px;
+$list-size-three-line-height: 88px;
+$list-size-multi-line-padding: 16px;
+$list-size-icon-width: 24px;

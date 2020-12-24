@@ -1,3 +1,6 @@
+@import '../design-tokens/index';
+
+
 // This mixin provides the correct offset for an inset divider based on the
 // size of the parent class (e.g. avatar vs icon)
 @mixin mc-inset-divider-offset($offset, $padding) {

@@ -1,21 +1,7 @@
+@import '../design-tokens/index';
 @import '../core/styles/common/list';
+@import '../divider/divider';
 
-$mc-list-top-padding: 0;
-
-$mc-list-side-padding: 15px;
-$mc-list-icon-padding: 4px;
-
-// height for single-line lists
-$mc-list-base-height: 28px;
-
-// spec requires two- and three-line lists be taller
-$mc-list-two-line-height: 72px;
-$mc-list-three-line-height: 88px;
-$mc-list-multi-line-padding: 16px;
-
-$mc-list-icon-size: 24px;
-
-$mc-list-item-inset-divider-offset: 72px;
 
 // This mixin provides all list-item styles, changing font size and height
 // based on whether the list is in dense mode.
@@ -37,7 +23,7 @@ $mc-list-item-inset-divider-offset: 72px;
 
         height: 100%;
 
-        padding: 0 $mc-list-side-padding;
+        padding: 0 $list-size-side-padding;
     }
 
     &.mc-2-line {
@@ -86,12 +72,12 @@ $mc-list-item-inset-divider-offset: 72px;
 
         border-radius: 50%;
 
-        padding: $mc-list-icon-padding;
+        padding: $list-size-icon-padding;
 
         font-size: $icon-size;
 
         ~ .mc-divider_inset {
-            @include mc-inset-divider-offset($icon-size + (2 * $mc-list-icon-padding), $mc-list-side-padding);
+            @include mc-inset-divider-offset($icon-size + (2 * $list-size-icon-padding), $list-size-side-padding);
         }
     }
 
