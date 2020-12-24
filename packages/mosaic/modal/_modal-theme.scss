@@ -26,7 +26,7 @@
         .mc-modal-footer {
             border-top: $modal-size-border-width solid $border-color;
 
-            background-color: $popup-common-color-footer-background-color;
+            background-color: $popup-common-color-footer-background;
         }
 
         .mc-modal-close {
@@ -52,7 +52,7 @@
         .mc-confirm-btns {
             border-top: $modal-size-border-width solid $border-color;
 
-            background-color: $popup-common-color-footer-background-color;
+            background-color: $popup-common-color-footer-background;
         }
     }
 }

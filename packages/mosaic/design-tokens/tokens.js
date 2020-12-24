@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Thu, 24 Dec 2020 12:09:56 GMT
+ * Generated on Thu, 24 Dec 2020 12:42:33 GMT
  */
 
 export const ColorPrimaryLighter = "#57A4D7";
@@ -323,7 +323,7 @@ export const PopupCommonColorShadow = "0 3px 3px 0 rgba(0, 0, 0, 0.2)";
 export const PopupCommonColorBorderColor = "#B3B3B3";
 export const PopupCommonColorDividerColor = "#CCCCCC";
 export const PopupCommonColorBackground = "#ffffff";
-export const PopupCommonColorFooterBackgroundColor = "#F0F0F0";
+export const PopupCommonColorFooterBackground = "#F0F0F0";
 export const DatepickerToggleSizeWidth = "30px";
 export const DatepickerToggleSizeHeight = "30px";
 export const DatepickerBodySizeLabelPaddingSide = "33% / 7";
@@ -384,3 +384,14 @@ export const NavbarItemColorStatesDisabledOpacity = 0.3;
 export const NavbarItemSizePadding = "16px";
 export const NavbarBrandSizePadding = "12px";
 export const NavbarBrandSizeMarginRight = "24px";
+export const PopoverColorBorderColor = "#B3B3B3";
+export const PopoverSizePadding = "16px";
+export const PopoverSizeBorderWidth = "1px";
+export const PopoverSizeBorderRadius = "4px";
+export const PopoverSizeArrowWidth = "4px";
+export const PopoverSizeSmallWidth = "200px";
+export const PopoverSizeNormalWidth = "400px";
+export const PopoverSizeLargeWidth = "640px";
+export const PopoverHeaderSizePadding = "10px 16px";
+export const PopoverFooterSizePadding = "12px 16px";
+export const PopoverFooterSizeMarginTop = "8px";

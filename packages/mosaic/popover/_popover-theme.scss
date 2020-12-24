@@ -1,55 +1,47 @@
-@import '../core/theming/theming';
 @import '../core/styles/typography/typography-utils';
 
 @import '../core/styles/common/animation';
 
 
 @mixin mc-popover-theme($theme) {
-    $foreground: map-get($theme, foreground);
     $is-dark: map-get($theme, is-dark);
 
-    $popup-common: map-get(map-get($theme, components), popup-common);
-    $popover: map-get(map-get($theme, components), popover);
-
-    $background-color: map-get($popup-common, background);
-    $footer_background-color: if($is-dark, $background-color, map-get($popup-common, footer_background-color));
-    $border-color: map-get($popover, border-color);
-    $divider-color: map-get($popup-common, divider-color);
+    $footer_background-color: if($is-dark, $popup-common-color-background, $popup-common-color-footer-background);
 
     .mc-popover {
-        border-color: $border-color;
+        border-color: $popover-color-border-color;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     }
 
     .mc-popover__container {
-        color: map-get($foreground, text);
-        background-color: $background-color;
+        color: $color-foreground-text;
+        background-color: $popup-common-color-background;
     }
 
     .mc-popover__header {
-        border-bottom-color: $divider-color;
+        border-bottom-color: $popup-common-color-divider-color;
     }
 
     .mc-popover__header,
     .mc-popover__content {
-        background-color: $background-color;
+        background-color: $popup-common-color-background;
     }
 
     .mc-popover__footer {
         background-color: $footer_background-color;
-        border-top-color: if($is-dark, $divider-color, transparent);
+        border-top-color: if($is-dark, $popup-common-color-divider-color, transparent);
     }
 
     .mc-popover .mc-popover__arrow {
-        border-color: $border-color;
+        border-color: $popover-color-border-color;
     }
 
     .mc-popover_placement-top .mc-popover__arrow,
     .mc-popover_placement-top-left .mc-popover__arrow,
     .mc-popover_placement-top-right .mc-popover__arrow {
-        background-color: $background-color;
-        border-top-color: $background-color;
-        border-left-color: $background-color;
+        background-color: $popup-common-color-background;
+        border-top-color: $popup-common-color-background;
+        border-left-color: $popup-common-color-background;
     }
 
     .mc-popover_placement-top .mc-popover__arrow.mc-popover__arrow_with-footer,
@@ -63,9 +55,9 @@
     .mc-popover_placement-right .mc-popover__arrow,
     .mc-popover_placement-right-top .mc-popover__arrow,
     .mc-popover_placement-right-bottom .mc-popover__arrow {
-        background-color: $background-color;
-        border-top-color: $background-color;
-        border-right-color: $background-color;
+        background-color: $popup-common-color-background;
+        border-top-color: $popup-common-color-background;
+        border-right-color: $popup-common-color-background;
     }
 
     .mc-popover_placement-right-bottom .mc-popover__arrow.mc-popover__arrow_with-footer {
@@ -77,9 +69,9 @@
     .mc-popover_placement-left .mc-popover__arrow,
     .mc-popover_placement-left-top .mc-popover__arrow,
     .mc-popover_placement-left-bottom .mc-popover__arrow {
-        background-color: $background-color;
-        border-bottom-color: $background-color;
-        border-left-color: $background-color;
+        background-color: $popup-common-color-background;
+        border-bottom-color: $popup-common-color-background;
+        border-left-color: $popup-common-color-background;
     }
 
     .mc-popover_placement-left-bottom .mc-popover__arrow.mc-popover__arrow_with-footer {
@@ -94,9 +86,9 @@
     .mc-popover_placement-bottom .mc-popover__arrow.mc-popover__arrow_with-footer,
     .mc-popover_placement-bottom-left .mc-popover__arrow.mc-popover__arrow_with-footer,
     .mc-popover_placement-bottom-right .mc-popover__arrow.mc-popover__arrow_with-footer {
-        background-color: $background-color;
-        border-right-color: $background-color;
-        border-bottom-color: $background-color;
+        background-color: $popup-common-color-background;
+        border-right-color: $popup-common-color-background;
+        border-bottom-color: $popup-common-color-background;
     }
 }
 

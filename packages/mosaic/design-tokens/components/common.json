@@ -5,7 +5,7 @@
             "border-color": { "value": "{color.second.default.value}" },
             "divider-color": { "value": "{color.second.palette.value.200.value}" },
             "background": { "value": "{color.background.background-popup.value}" },
-            "footer_background-color": { "value": "{color.background.background-popup-footer.value}" }
+            "footer-background": { "value": "{color.background.background-popup-footer.value}" }
         },
         "size": {},
         "font": {}

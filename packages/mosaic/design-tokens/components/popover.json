@@ -1,0 +1,33 @@
+{
+    "popover": {
+        "color": {
+            "border-color": { "value": "{color.foreground.border.value}" }
+        },
+        "size": {
+            "padding": { "value": "16px" },
+            "border-width": { "value": "1px" },
+            "border-radius": { "value": "4px" },
+            "arrow-width": { "value": "4px" },
+
+            "small-width": { "value": "200px" },
+            "normal-width": { "value": "400px" },
+            "large-width": { "value": "640px" }
+        },
+        "font": {}
+    },
+    "popover-header": {
+        "color": {},
+        "size": {
+            "padding": { "value": "10px 16px" }
+        },
+        "font": {}
+    },
+    "popover-footer": {
+        "color": {},
+        "size": {
+            "padding": { "value": "12px 16px" },
+            "margin-top": { "value": "8px" }
+        },
+        "font": {}
+    }
+}
