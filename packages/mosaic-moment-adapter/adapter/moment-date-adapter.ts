@@ -382,9 +382,9 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
     absoluteDate(
         date: Moment,
         params: IFormatterAbsoluteTemplate,
-        datetime: boolean = false,
-        milliseconds: boolean = false,
-        microseconds: boolean = false
+        datetime = false,
+        milliseconds = false,
+        microseconds = false
     ): string {
         if (!this.isDateInstance(date)) { throw new Error(this.invalidDateErrorText); }
 

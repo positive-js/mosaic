@@ -59,11 +59,41 @@ export const ruRU: IFormatterConfig = {
     absoluteTemplates: {
         short: {
             DATE: '{CURRENT_YEAR, select, yes{{SHORT_DATE}} other{{SHORT_DATE} {YEAR}}}',
-            DATETIME: '{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE} {YEAR}, {TIME}}}{SHOW_MILLISECONDS, select, yes{{MILLISECONDS}} other{}}{SHOW_MICROSECONDS, select, yes{{MICROSECONDS}} other{}}'
+            DATETIME: `{
+                CURRENT_YEAR,
+                select,
+                    yes{{SHORT_DATE}, {TIME}}
+                    other{{SHORT_DATE} {YEAR}, {TIME}}
+            }{
+                SHOW_MILLISECONDS,
+                select,
+                    yes{{MILLISECONDS}}
+                    other{}
+            }{
+                SHOW_MICROSECONDS,
+                select,
+                    yes{{MICROSECONDS}}
+                    other{}
+            }`
         },
         long: {
             DATE: '{CURRENT_YEAR, select, yes{{DATE}} other{{DATE} {YEAR}}}',
-            DATETIME: '{CURRENT_YEAR, select, yes{{DATE}, {TIME}} other{{DATE} {YEAR}, {TIME}}}{SHOW_MILLISECONDS, select, yes{{MILLISECONDS}} other{}}{SHOW_MICROSECONDS, select, yes{{MICROSECONDS}} other{}}'
+            DATETIME: `{
+                CURRENT_YEAR,
+                select,
+                    yes{{DATE}, {TIME}}
+                    other{{DATE} {YEAR}, {TIME}}
+            }{
+                SHOW_MILLISECONDS,
+                select,
+                    yes{{MILLISECONDS}}
+                    other{}
+            }{
+                SHOW_MICROSECONDS,
+                select,
+                    yes{{MICROSECONDS}}
+                    other{}
+            }`
         }
     },
     rangeTemplates: {
