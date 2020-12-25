@@ -1,30 +1,24 @@
-@import '../core/theming/theming';
-@import '../core/theming/palette';
 @import '../core/styles/typography/typography-utils';
 @import '../core/styles/common/popup';
 
 
 @mixin mc-select-theme($theme) {
-    $error: map-get($theme, error);
-
     $foreground: map-get($theme, foreground);
 
-    $popup-common: map-get(map-get($theme, components), popup-common);
-
     .mc-select {
-        color: map-get($foreground, text);
+        color: $color-foreground-text;
 
         &.ng-invalid {
-            color: mc-color($error);
+            color: $color-error-default;
         }
 
         &.mc-disabled {
-            color: mc-color($foreground, text-disabled);
+            color: $color-foreground-text-disabled;
         }
     }
 
     .mc-select__placeholder {
-        color: map-get($foreground, text-disabled);
+        color: $color-foreground-text-disabled;
     }
 
     .mc-select__panel {
@@ -32,11 +26,11 @@
     }
 
     .mc-select__search-container {
-        border-bottom-color: map-get($popup-common, border-color);
+        border-bottom-color: $popup-common-color-border-color;
     }
 
     .mc-select__no-options-message {
-        color: mc-color($foreground, text-less-contrast);
+        color: $color-foreground-text-less-contrast;
     }
 }
 

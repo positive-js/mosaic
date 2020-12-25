@@ -1,0 +1,22 @@
+{
+    "select": {
+        "color": {},
+        "size": {
+            "height": { "value": "30px" },
+            "padding": { "value": "0 7px 0 15px" },
+            "padding-left-multiple": { "value": "7px" }
+        },
+        "font": {}
+    },
+    "select-panel": {
+        "color": {},
+        "size": {
+            "max-height": { "value": "232px" },
+            "max-width": { "value": "640px" },
+            "vertical-padding": { "value": "4px" },
+            "border-width": { "value": "1px" },
+            "border-radius": { "value": "3px" }
+        },
+        "font": {}
+    }
+}

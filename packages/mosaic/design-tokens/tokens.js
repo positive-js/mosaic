@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Thu, 24 Dec 2020 13:36:32 GMT
+ * Generated on Fri, 25 Dec 2020 09:47:02 GMT
  */
 
 export const ColorPrimaryLighter = "#57A4D7";
@@ -400,3 +400,12 @@ export const ProgressBarSizeHeight = "4px";
 export const ProgressSpinnerSizeSize = "16px";
 export const RadioSizeSize = "14px";
 export const RadioSizePadding = "24px"; // Padding between radio inputs and their labels
+export const SelectSizeHeight = "30px";
+export const SelectSizePadding = "0 7px 0 15px";
+export const SelectSizePaddingLeftMultiple = "7px";
+export const SelectPanelSizeMaxHeight = "232px";
+export const SelectPanelSizeMaxWidth = "640px";
+export const SelectPanelSizeVerticalPadding = "4px";
+export const SelectPanelSizeBorderWidth = "1px";
+export const SelectPanelSizeBorderRadius = "3px";
+export const SelectItemSizeHeight = "32px";

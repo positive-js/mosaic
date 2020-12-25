@@ -1,18 +1,5 @@
+@import '../design-tokens/index';
 @import '../core/styles/common/vendor-prefixes';
-@import '../divider/divider';
-
-
-$mc-select-arrow-size: 5px !default;
-$mc-select-arrow-margin: 4px !default;
-$mc-select-panel-max-height: 232px !default;
-$mc-select-panel-vertical-padding: 4px !default;
-$mc-select-panel-max-width: 640px !default;
-$mc-select-item-height: 32px !default;
-
-$mc-select-panel-border-width: 1px !default;
-$mc-select-panel-border-radius: 3px !default;
-
-$mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arrow-margin);
 
 
 .mc-select {
@@ -32,18 +19,14 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
         box-sizing: border-box;
         position: relative;
 
-        height: 30px;
+        height: $select-size-height;
 
         cursor: pointer;
 
-        // todo возможно нужно через JS
-        padding: {
-            right: 7px;
-            left: 15px;
-        };
+        padding: $select-size-padding;
 
         &.mc-select__trigger_multiple {
-            padding-left: 7px;
+            padding-left: $select-size-padding-left-multiple;
 
             & .mc-tag.mc-disabled .mc-tag__text {
                 margin-right: 7px;
@@ -65,9 +48,12 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
     flex-direction: row;
     align-items: center;
     box-sizing: border-box;
+
     position: relative;
+
     max-width: 100%;
     height: 32px;
+
     cursor: default;
     outline: none;
     padding: 0 16px;
@@ -97,9 +83,6 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
 
     max-height: 28px;
 
-    margin: 0;
-    padding-left: 0;
-
     & .mc-tag {
         margin-right: 4px;
     }
@@ -121,19 +104,6 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
     }
 }
 
-.mc-select__match-item {
-    display: flex;
-
-    border: 1px solid transparent;
-    border-radius: 3px;
-
-    padding-left: 7px;
-
-    margin-right: 4px;
-
-    max-width: 100%;
-}
-
 .mc-select__arrow-wrapper {
     align-self: center;
 
@@ -151,47 +121,43 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
 
 .mc-select__panel {
     min-width: 100%; // prevents some animation twitching and test inconsistencies in IE11
-    max-width: $mc-select-panel-max-width;
+    max-width: $select-panel-size-max-width;
 
     overflow: hidden;
 
     border: {
-        width: $mc-select-panel-border-width;
+        width: $select-panel-size-border-width;
         style: solid;
     }
 
-    border-bottom-left-radius: $mc-select-panel-border-radius;
-    border-bottom-right-radius: $mc-select-panel-border-radius;
+    border-bottom-left-radius: $select-panel-size-border-radius;
+    border-bottom-right-radius: $select-panel-size-border-radius;
 
     // Override optgroup and option to scale based on font-size of the trigger.
     .mc-optgroup-label,
     .mc-option {
         font-size: inherit;
-        line-height: $mc-select-item-height;
-        height: $mc-select-item-height;
+        line-height: $select-item-size-height;
+        height: $select-item-size-height;
     }
 }
 
 .mc-select__content {
-    max-height: $mc-select-panel-max-height;
-    padding: $mc-select-panel-vertical-padding 0;
+    max-height: $select-panel-size-max-height;
+    padding: $select-panel-size-vertical-padding 0;
     overflow: auto;
 
     & .cdk-virtual-scroll-viewport {
-        $paddings: ($mc-select-panel-vertical-padding * 2);
+        $paddings: ($select-panel-size-vertical-padding * 2);
 
-        min-height: $mc-select-panel-max-height - $paddings;
-        max-height: $mc-select-panel-max-height - $paddings;
+        min-height: $select-panel-size-max-height - $paddings;
+        max-height: $select-panel-size-max-height - $paddings;
     }
 }
 
 .mc-form-field-type-mc-select {
     &:not(.mc-disabled) .mc-form-field-flex {
         cursor: pointer;
-    }
-
-    .mc-form-field-label {
-        width: calc(100% - #{$mc-select-placeholder-arrow-space});
     }
 }
 
@@ -201,30 +167,3 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
         style: solid;
     }
 }
-
-//.mc-select__placeholder {
-//    // Delay the transition until the label has animced about a third of the way through, in
-//    // order to prevent the placeholder from overlapping for a split second.
-//    transition: color $swift-ease-out-duration $swift-ease-out-duration / 3
-//    $swift-ease-out-timing-function;
-//
-//    ._mc-animcion-noopable & {
-//        transition: none;
-//    }
-//
-//    .mc-form-field-hide-placeholder & {
-//        color: transparent;
-//
-//        // Overwrite browser specific CSS properties that can overwrite the `color` property.
-//        // Some developers seem to use this approach to easily overwrite the placeholder / label color.
-//        -webkit-text-fill-color: transparent;
-//
-//        // Remove the transition to prevent the placeholder
-//        // from overlapping when the label comes back down.
-//        transition: none;
-//        // Prevents the '...' from showing on the parent element.
-//        display: block;
-//    }
-//}
-
-
