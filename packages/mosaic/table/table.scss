@@ -1,3 +1,6 @@
+@import '../design-tokens/index';
+
+
 .mc-table {
     border-spacing: 0;
 
@@ -7,7 +10,12 @@
         & > tr {
             & > th,
             & > td {
-                padding: 8px 8px 7px;
+                padding: {
+                    top: $table-color-row-padding-vertical;
+                    right: ($table-color-row-padding-horizontal / 2);
+                    bottom: ($table-color-row-padding-vertical - $table-color-border-width);
+                    left: ($table-color-row-padding-horizontal / 2)
+                };
 
                 vertical-align: baseline;
                 text-align: left;
@@ -15,12 +23,12 @@
 
             & > th:first-child,
             & > td:first-child {
-                padding-left: 16px;
+                padding-left: $table-color-row-padding-horizontal;
             }
 
             & > th:last-child,
             & > td:last-child {
-                padding-right: 16px;
+                padding-right: $table-color-row-padding-horizontal;
             }
         }
     }
@@ -28,17 +36,19 @@
     /* stylelint-disable no-descending-specificity */
     & > thead {
         & > tr > th {
-            padding-top: 8px;
-            padding-bottom: 7px;
+            padding: {
+                top: $table-color-row-padding-vertical;
+                bottom: ($table-color-row-padding-vertical - $table-color-border-width);
+            }
 
-            border-bottom: 1px solid transparent;
+            border-bottom: $table-color-border-width solid transparent;
         }
     }
 
     & > tbody > tr {
         & th,
         & td {
-            border-bottom: 1px solid transparent;
+            border-bottom: $table-color-border-width solid transparent;
         }
     }
     /* stylelint-enable no-descending-specificity */

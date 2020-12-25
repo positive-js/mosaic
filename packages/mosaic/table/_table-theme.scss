@@ -1,25 +1,25 @@
-@mixin mc-table-theme($theme) {
-    $foreground: map-get($theme, foreground);
-    $background: map-get($theme, background);
+@import '../design-tokens/index';
 
+
+@mixin mc-table-theme($theme) {
     .mc-table {
         & > thead {
-            color: mc-color($foreground, text-less-contrast);
+            color: $color-foreground-text-less-contrast;
 
             & > tr > th {
-                border-color: mc-color($foreground, divider);
+                border-color: $color-foreground-divider;
             }
         }
 
         & > tbody {
             & > tr {
                 &:hover {
-                    background-color: mc-color($background, overlay-hovered);
+                    background-color: $color-background-overlay-hovered;
                 }
 
                 & > th,
                 & > td {
-                    color: mc-color($foreground, text);
+                    color: $color-foreground-text;
                 }
             }
         }
@@ -28,7 +28,7 @@
             & > tbody > tr {
                 & th,
                 & td {
-                    border-color: mc-color($foreground, divider);
+                    border-color: $color-foreground-divider;
                 }
             }
         }

@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 25 Dec 2020 11:10:41 GMT
+ * Generated on Fri, 25 Dec 2020 11:38:44 GMT
  */
 
 export const ColorPrimaryLighter = "#57A4D7";
@@ -414,3 +414,6 @@ export const SidepanelColorBorder = "#B3B3B3";
 export const SidepanelHeaderSizePadding = "14px 16px";
 export const SidepanelHeaderSizeClosePadding = "0 0 0 8px";
 export const SidepanelFooterSizePadding = "16px";
+export const TableColorBorderWidth = "1px";
+export const TableColorRowPaddingVertical = "8px";
+export const TableColorRowPaddingHorizontal = "16px";
