@@ -1,3 +1,4 @@
+@import '../design-tokens/index';
 @import '../core/styles/common/button';
 
 
@@ -17,8 +18,8 @@
 
     vertical-align: baseline;
 
-    border: $mc-button-border-size solid transparent;
-    border-radius: $mc-button-border-radius;
+    border: $button-size-border-width solid transparent;
+    border-radius: $button-size-border-radius;
 
     &::-moz-focus-inner {
         border: 0;

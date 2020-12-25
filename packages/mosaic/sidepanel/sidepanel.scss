@@ -1,3 +1,4 @@
+@import '../design-tokens/index';
 @import '../core/styles/common/button';
 @import '../core/styles/common/list';
 
@@ -108,7 +109,7 @@
 }
 
 .mc-sidepanel-header {
-    padding: 14px 16px;
+    padding: $sidepanel-header-size-padding;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
@@ -118,7 +119,7 @@
     .mc-sidepanel-close {
         @include mc-button-reset();
         background: transparent;
-        padding: 0 0 0 8px;
+        padding: $sidepanel-header-size-close-padding;
     }
 }
 
@@ -136,7 +137,7 @@
 }
 
 .mc-sidepanel-footer {
-    padding: 16px;
+    padding: $sidepanel-footer-size-padding;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;

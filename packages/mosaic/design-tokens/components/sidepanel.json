@@ -1,0 +1,24 @@
+{
+    "sidepanel": {
+        "color": {
+            "border": { "value": "{color.second.palette.value.300.value}" }
+        },
+        "size": {},
+        "font": {}
+    },
+    "sidepanel-header": {
+        "color": {},
+        "size": {
+            "padding": { "value": "14px 16px" },
+            "close-padding": { "value": "0 0 0 8px" }
+        },
+        "font": {}
+    },
+    "sidepanel-footer": {
+        "color": {},
+        "size": {
+            "padding": { "value": "16px" }
+        },
+        "font": {}
+    }
+}

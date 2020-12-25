@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 25 Dec 2020 09:47:02 GMT
+ * Generated on Fri, 25 Dec 2020 11:10:41 GMT
  */
 
 export const ColorPrimaryLighter = "#57A4D7";
@@ -305,6 +305,8 @@ export const ButtonColorErrorIconColor = "#E76E5C";
 export const ButtonColorErrorActiveBorderColor = "#B3B3B3"; // darken(mc-color($foreground, border), 5)
 export const ButtonColorErrorActiveBackground = "#F0F0F0"; // darken(map-get($background, background-disabled), 5
 export const ButtonSizePadding = "5px 15px";
+export const ButtonSizeBorderWidth = "1px";
+export const ButtonSizeBorderRadius = "3px";
 export const IconButtonSizeBorderWidth = "1px";
 export const IconButtonSizeBorderRadius = "3px";
 export const IconButtonSizePadding = "5px 7px";
@@ -408,4 +410,7 @@ export const SelectPanelSizeMaxWidth = "640px";
 export const SelectPanelSizeVerticalPadding = "4px";
 export const SelectPanelSizeBorderWidth = "1px";
 export const SelectPanelSizeBorderRadius = "3px";
-export const SelectItemSizeHeight = "32px";
+export const SidepanelColorBorder = "#B3B3B3";
+export const SidepanelHeaderSizePadding = "14px 16px";
+export const SidepanelHeaderSizeClosePadding = "0 0 0 8px";
+export const SidepanelFooterSizePadding = "16px";

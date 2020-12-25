@@ -1,4 +1,5 @@
 @import '../design-tokens/index';
+@import '../core/option/option';
 @import '../core/styles/common/vendor-prefixes';
 
 
@@ -137,8 +138,8 @@
     .mc-optgroup-label,
     .mc-option {
         font-size: inherit;
-        line-height: $select-item-size-height;
-        height: $select-item-size-height;
+        line-height: $mc-option-item-height;
+        height: $mc-option-item-height;
     }
 }
 

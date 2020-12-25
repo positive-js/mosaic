@@ -1,6 +1,6 @@
 
 // Do not edit directly
-// Generated on Fri, 25 Dec 2020 09:47:02 GMT
+// Generated on Fri, 25 Dec 2020 11:10:41 GMT
 
 $color-primary-lighter: #57A4D7;
 $color-primary-default: #338FCC;
@@ -298,6 +298,8 @@ $button-color-error-icon-color: #E76E5C;
 $button-color-error-active-border-color: #B3B3B3; // darken(mc-color($foreground, border), 5)
 $button-color-error-active-background: #F0F0F0; // darken(map-get($background, background-disabled), 5
 $button-size-padding: 5px 15px;
+$button-size-border-width: 1px;
+$button-size-border-radius: 3px;
 $icon-button-size-border-width: 1px;
 $icon-button-size-border-radius: 3px;
 $icon-button-size-padding: 5px 7px;
@@ -401,4 +403,7 @@ $select-panel-size-max-width: 640px;
 $select-panel-size-vertical-padding: 4px;
 $select-panel-size-border-width: 1px;
 $select-panel-size-border-radius: 3px;
-$select-item-size-height: 32px;
+$sidepanel-color-border: #B3B3B3;
+$sidepanel-header-size-padding: 14px 16px;
+$sidepanel-header-size-close-padding: 0 0 0 8px;
+$sidepanel-footer-size-padding: 16px;

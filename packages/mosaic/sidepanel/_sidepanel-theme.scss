@@ -3,25 +3,17 @@
 
 
 @mixin mc-sidepanel-theme($theme) {
-    $foreground: map-get($theme, foreground);
-    $background: map-get($theme, background);
     $is-dark: map-get($theme, is-dark);
 
-    $popup-common: map-get(map-get($theme, components), popup-common);
-
-    $sidepanel: map-get(map-get($theme, components), sidepanel);
-
-    $divider-color: mc-color($popup-common, divider-color);
-
     .mc-sidepanel-content {
-        background-color: map-get($background, background);
+        background-color: $color-background-background;
     }
 
     .mc-sidepanel-container_shadowed {
         &.mc-sidepanel-container_right {
             .mc-sidepanel-content {
                 box-shadow:
-                    0 0 0 1px map-get($sidepanel, border_color),
+                    0 0 0 1px $sidepanel-color-border,
                     -6px 0 12px 0 rgba(0, 0, 0, 0.24);
             }
         }
@@ -29,7 +21,7 @@
         &.mc-sidepanel-container_left {
             .mc-sidepanel-content {
                 box-shadow:
-                    0 0 0 1px map-get($sidepanel, border_color),
+                    0 0 0 1px $sidepanel-color-border,
                     6px 0 12px 0 rgba(0, 0, 0, 0.24);
             }
         }
@@ -37,7 +29,7 @@
         &.mc-sidepanel-container_bottom {
             .mc-sidepanel-content {
                 box-shadow:
-                    0 0 0 1px map-get($sidepanel, border_color),
+                    0 0 0 1px $sidepanel-color-border,
                     0 -6px 12px 0 rgba(0, 0, 0, 0.24);
             }
         }
@@ -45,19 +37,19 @@
         &.mc-sidepanel-container_top {
             .mc-sidepanel-content {
                 box-shadow:
-                    0 0 0 1px map-get($sidepanel, border_color),
+                    0 0 0 1px $sidepanel-color-border,
                     0 6px 12px 0 rgba(0, 0, 0, 0.24);
             }
         }
     }
 
     .mc-sidepanel-header {
-        border-bottom: 1px solid $divider-color;
+        border-bottom: 1px solid $popup-common-color-divider-color;
     }
 
     .mc-sidepanel-footer {
-        border-top: 1px solid  if($is-dark, $divider-color, transparent);
-        background-color: map-get($popup-common, footer_background-color);
+        border-top: 1px solid  if($is-dark, $popup-common-color-divider-color, transparent);
+        background-color: $popup-common-color-footer-background;
     }
 }
 

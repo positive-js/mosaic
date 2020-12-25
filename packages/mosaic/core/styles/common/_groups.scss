@@ -1,3 +1,4 @@
+@import '../../../design-tokens/index';
 @import 'vendor-prefixes';
 @import 'button';
 
@@ -41,7 +42,7 @@
     }
 
     .mc-group-item + .mc-group-item {
-        margin-left: -$mc-button-border-size;
+        margin-left: -$button-size-border-width;
     }
 
     & > .mc-group-item:first-child:not(:last-child) {
@@ -78,7 +79,7 @@
         &:first-child:not(:last-child) {
             @include border-bottom-radius(0);
 
-            border-top-right-radius: $mc-button-border-radius;
+            border-top-right-radius: $button-size-border-radius;
 
             > .mc-form-field__container {
                 @include border-bottom-radius(0);
@@ -88,7 +89,7 @@
         &:last-child:not(:first-child) {
             @include border-top-radius(0);
 
-            border-bottom-left-radius: $mc-button-border-radius;
+            border-bottom-left-radius: $button-size-border-radius;
 
             > .mc-form-field__container {
                 @include border-top-radius(0);
@@ -105,7 +106,7 @@
     }
 
     .mc-group-item + .mc-group-item {
-        margin-top: -$mc-button-border-size;
+        margin-top: -$button-size-border-width;
     }
     /* stylelint-enable no-descending-specificity */
 }
