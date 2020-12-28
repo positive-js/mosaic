@@ -1,71 +1,57 @@
+@import '../design-tokens/index';
 @import '../core/theming/theming';
 @import '../core/styles/typography/typography-utils';
 
 
 @mixin mc-toggle-theme($theme) {
-    $primary: map-get($theme, primary);
-    $error: map-get($theme, error);
-
-    $background: map-get($theme, background);
-    $foreground: map-get($theme, foreground);
-
-    $toggle: map-get(map-get($theme, components), toggle);
-
-    $border-color: map-get($toggle, border-color);
-    $background_color: map-get($toggle, background);
-    $circle_border-color: map-get($toggle, circle_border-color);
-    $circle_background: map-get($toggle, circle_background);
-
-    $focused-state_color: map-get($toggle, focused-state_color);
-
     .mc-toggle {
-        color: map-get($foreground, text);
+        color: $color-foreground-text;
 
         .mc-toggle-bar {
-            border-color: $border-color;
+            border-color: $toggle-color-border;
 
-            background: $background_color;
+            background: $toggle-color-background;
         }
 
         .mc-toggle__circle {
-            border-color: $circle_border-color;
+            border-color: $toggle-color-circle-border;
 
-            background: $circle_background;
+            background: $toggle-color-circle-background;
         }
 
         &:hover {
             & .mc-toggle__overlay {
-                background: map-get($background, overlay-hovered);
+                background: $color-background-overlay-hovered;
             }
         }
 
         &.cdk-keyboard-focused {
             & .mc-toggle__overlay {
-                box-shadow: $focused-state_color;
+                box-shadow: $toggle-color-state-focused;
             }
         }
 
         &.mc-active {
             &.mc-primary {
                 .mc-toggle-bar {
-                    border-color: mc-color($primary);
-                    background: mc-color($primary);
+                    border-color: $color-primary-default;
+                    background: $color-primary-default;
                 }
             }
 
             &.mc-error {
                 .mc-toggle-bar {
-                    border-color: mc-color($error);
-                    background: mc-color($error);
+                    border-color: $color-error-default;
+                    background: $color-error-default;
                 }
             }
         }
 
         &.mc-disabled {
-            color: map-get($foreground, text-disabled);
+            color: $color-foreground-text-disabled;
 
             & .mc-toggle__overlay {
-                background: map-get($background, overlay-disabled);
+                background: $color-background-overlay-disabled;
             }
         }
     }

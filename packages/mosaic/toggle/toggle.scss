@@ -1,12 +1,5 @@
-$toggle-height: 16px;
-$toggle-width: 28px;
-$toggle-border-radius: 9px;
+@import '../design-tokens/index';
 
-$small-toggle-height: 14px;
-$small-toggle-width: 24px;
-$small-toggle-border-radius: 8px;
-
-$label-margin: 8px;
 
 .mc-toggle {
     display: inline-block;
@@ -49,11 +42,11 @@ $label-margin: 8px;
 
 .mc-toggle__content {
     &.left {
-        margin-right: $label-margin;
+        margin-right: $toggle-size-label-margin;
     }
 
     &.right {
-        margin-left: $label-margin;
+        margin-left: $toggle-size-label-margin;
     }
 }
 
@@ -81,39 +74,39 @@ $label-margin: 8px;
 
 .mc-toggle:not(.mc-toggle_small) {
     .mc-toggle-bar {
-        height: $toggle-height;
-        width: $toggle-width;
-        border-radius: $toggle-border-radius;
+        height: $toggle-size-height;
+        width: $toggle-size-width;
+        border-radius: $toggle-size-border-radius;
     }
 
     .mc-toggle__overlay {
-        border-radius: $toggle-border-radius;
-        height: $toggle-height;
-        width: $toggle-width;
+        border-radius: $toggle-size-border-radius;
+        height: $toggle-size-height;
+        width: $toggle-size-width;
     }
 
     .mc-toggle__circle {
-        height: $toggle-height;
-        width: $toggle-height;
+        height: $toggle-size-height;
+        width: $toggle-size-height;
     }
 }
 
 .mc-toggle.mc-toggle_small {
     .mc-toggle-bar {
-        height: $small-toggle-height;
-        width: $small-toggle-width;
-        border-radius: $small-toggle-border-radius;
+        height: $toggle-small-size-height;
+        width: $toggle-small-size-width;
+        border-radius: $toggle-small-size-border-radius;
     }
 
     .mc-toggle__overlay {
-        border-radius: $small-toggle-border-radius;
-        height: $small-toggle-height;
-        width: $small-toggle-width;
+        border-radius: $toggle-small-size-border-radius;
+        height: $toggle-small-size-height;
+        width: $toggle-small-size-width;
     }
 
     .mc-toggle__circle {
-        height: $small-toggle-height;
-        width: $small-toggle-height;
+        height: $toggle-small-size-height;
+        width: $toggle-small-size-height;
     }
 }
 

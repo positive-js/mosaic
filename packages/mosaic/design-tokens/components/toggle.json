@@ -1,0 +1,30 @@
+{
+    "toggle": {
+        "color": {
+            "border": { "value": "{color.foreground.border.value}" },
+            "background": {
+                "value": "linear-gradient(to bottom, {color.second.lighter.value}, {color.background.background-disabled.value})"
+            },
+            "circle-border": { "value": "{color.foreground.border.value}" },
+            "circle-background": { "value": "linear-gradient(to bottom, white, {color.second.lighter.value})" },
+
+            "state-focused": { "value": "inset 0 0 0 1px {color.background.background.value}, 0 0 0 2px {color.primary.default.value}" }
+        },
+        "size": {
+            "height": { "value": "16px" },
+            "width": { "value": "28px" },
+            "border-radius": { "value": "9px" },
+            "label-margin": { "value": "8px" }
+        },
+        "font": {}
+    },
+    "toggle-small": {
+        "color": {},
+        "size": {
+            "height": { "value": "14px" },
+            "width": { "value": "24px" },
+            "border-radius": { "value": "8px" }
+        },
+        "font": {}
+    }
+}

@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 28 Dec 2020 10:44:26 GMT
+ * Generated on Mon, 28 Dec 2020 11:06:57 GMT
  */
 
 export const ColorPrimaryLighter = "#57A4D7";
@@ -457,3 +457,15 @@ export const TagInputSizeHeight = "22px";
 export const TagInputSizeMargin = "2px 4px";
 export const TextareaSizeMinHeight = "50px";
 export const TextareaSizePadding = "5px 16px";
+export const ToggleColorBorder = "#B3B3B3";
+export const ToggleColorBackground = "linear-gradient(to bottom, #E6E6E6, #F0F0F0)";
+export const ToggleColorCircleBorder = "#B3B3B3";
+export const ToggleColorCircleBackground = "linear-gradient(to bottom, white, #E6E6E6)";
+export const ToggleColorStateFocused = "inset 0 0 0 1px #ffffff, 0 0 0 2px #338FCC";
+export const ToggleSizeHeight = "16px";
+export const ToggleSizeWidth = "28px";
+export const ToggleSizeBorderRadius = "9px";
+export const ToggleSizeLabelMargin = "8px";
+export const ToggleSmallSizeHeight = "14px";
+export const ToggleSmallSizeWidth = "24px";
+export const ToggleSmallSizeBorderRadius = "8px";
