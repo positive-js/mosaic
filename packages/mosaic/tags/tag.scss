@@ -1,28 +1,20 @@
 @import 'tag-theme';
 
 
-$mc-tag-border-width: 1px;
-$mc-tag-border-radius: 4px;
-
-$mc-tag-height: 24px;
-
-$mc-tag-icon-padding: 3px;
-
-
 .mc-tag {
     position: relative;
 
     display: inline-block;
     overflow: hidden;
 
-    margin: 2px;
+    margin: $tags-size-margin;
 
-    height: $mc-tag-height;
+    height: $tags-size-height;
 
     border: {
-        width: $mc-tag-border-width;
+        width: $tags-size-border-width;
         style: solid;
-        radius: $mc-tag-border-radius;
+        radius: $tags-size-border-radius;
     }
 
     cursor: default;
@@ -32,11 +24,11 @@ $mc-tag-icon-padding: 3px;
     box-sizing: border-box;
 
     &.mc-left-icon {
-        padding-left: $mc-tag-icon-padding;
+        padding-left: $tags-size-icon-padding;
     }
 
     &.mc-right-icon {
-        padding-right: $mc-tag-icon-padding;
+        padding-right: $tags-size-icon-padding;
     }
 }
 
@@ -55,16 +47,16 @@ $mc-tag-icon-padding: 3px;
 
         flex-shrink: 0;
 
-        width: $mc-tag-height;
-        height: $mc-tag-height;
+        width: $tags-size-height;
+        height: $tags-size-height;
     }
 
     .mc-icon_left {
-        margin-right: $mc-tag-icon-padding;
+        margin-right: $tags-size-icon-padding;
     }
 
     .mc-icon_right {
-        margin-left: $mc-tag-icon-padding;
+        margin-left: $tags-size-icon-padding;
     }
 }
 
@@ -81,7 +73,7 @@ $mc-tag-icon-padding: 3px;
 }
 
 .mc-tag__text {
-    margin-left: 7px;
+    margin-left: $tags-size-text-margin;
 
     text-overflow: ellipsis;
     white-space: nowrap;

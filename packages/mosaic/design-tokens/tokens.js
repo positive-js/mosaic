@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 28 Dec 2020 08:32:21 GMT
+ * Generated on Mon, 28 Dec 2020 10:39:02 GMT
  */
 
 export const ColorPrimaryLighter = "#57A4D7";
@@ -424,3 +424,37 @@ export const TabsSizeHighlightHeight = "4px";
 export const TabsSizePaddingHorizontal = "16px";
 export const TabsSizeBorderWidth = "1px";
 export const TabsSizeBorderRadius = "3px";
+export const TagsColorPrimaryBackground = "#D8EAF7";
+export const TagsColorPrimaryBorder = "#D8EAF7";
+export const TagsColorPrimaryIcon = "mix(#57A4D7, #000000)";
+export const TagsColorPrimaryIconHovered = "#206EA2";
+export const TagsColorPrimaryStateFocused = "#338FCC";
+export const TagsColorPrimaryStateDisabled = "mix(#338FCC, transparent, 50%)";
+export const TagsColorPrimaryStateDisabledBackground = "mix(#338FCC, transparent, 10%)";
+export const TagsColorSecondBackground = "#E6E6E6";
+export const TagsColorSecondBorder = "#E6E6E6";
+export const TagsColorSecondIcon = "mix(#999999, #000000)";
+export const TagsColorSecondIconHovered = "#999999";
+export const TagsColorSecondStateFocused = "#338FCC";
+export const TagsColorSecondStateDisabled = "mix(#B3B3B3, transparent, 50%)";
+export const TagsColorSecondStateDisabledBackground = "mix(#B3B3B3, transparent, 10%)";
+export const TagsColorErrorBackground = "#FADEDA";
+export const TagsColorErrorBorder = "#FADEDA";
+export const TagsColorErrorIcon = "mix(#E76E5C, #000000)";
+export const TagsColorErrorIconHovered = "#E04D36";
+export const TagsColorErrorStateFocused = "#E76E5C";
+export const TagsColorErrorStateDisabled = "mix(#E76E5C, transparent, 50%)";
+export const TagsColorErrorStateDisabledBackground = "mix(#E76E5C, transparent, 10%)";
+export const TagsSizeMargin = "2px";
+export const TagsSizeHeight = "24px";
+export const TagsSizeBorderWidth = "1px";
+export const TagsSizeBorderRadius = "4px";
+export const TagsSizeIconPadding = "3px";
+export const TagsSizeTextMargin = "7px";
+export const TagListSizePadding = "1px 6px";
+export const TagListSizeMinHeight = "28px";
+export const TagInputSizeHeight = "22px";
+export const TagInputSizeMargin = "2px 4px";
+export const TextareaSizePadding = "5px 16px";
+export const TextareaSizeWidth = "100%";
+export const TextareaSizeMinHeight = "30px";

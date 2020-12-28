@@ -1,6 +1,6 @@
 
 // Do not edit directly
-// Generated on Mon, 28 Dec 2020 08:32:21 GMT
+// Generated on Mon, 28 Dec 2020 10:39:02 GMT
 
 $color-primary-lighter: #57A4D7;
 $color-primary-default: #338FCC;
@@ -417,3 +417,37 @@ $tabs-size-highlight-height: 4px;
 $tabs-size-padding-horizontal: 16px;
 $tabs-size-border-width: 1px;
 $tabs-size-border-radius: 3px;
+$tags-color-primary-background: #D8EAF7;
+$tags-color-primary-border: #D8EAF7;
+$tags-color-primary-icon: mix(#57A4D7, rgba(black, 0.05));
+$tags-color-primary-icon-hovered: #206EA2;
+$tags-color-primary-state-focused: #338FCC;
+$tags-color-primary-state-disabled: mix(#338FCC, transparent, 50%);
+$tags-color-primary-state-disabled-background: mix(#338FCC, transparent, 10%);
+$tags-color-second-background: #E6E6E6;
+$tags-color-second-border: #E6E6E6;
+$tags-color-second-icon: mix(#999999, rgba(black, 0.05));
+$tags-color-second-icon-hovered: #999999;
+$tags-color-second-state-focused: #338FCC;
+$tags-color-second-state-disabled: mix(#B3B3B3, transparent, 50%);
+$tags-color-second-state-disabled-background: mix(#B3B3B3, transparent, 10%);
+$tags-color-error-background: #FADEDA;
+$tags-color-error-border: #FADEDA;
+$tags-color-error-icon: mix(#E76E5C, rgba(black, 0.05));
+$tags-color-error-icon-hovered: #E04D36;
+$tags-color-error-state-focused: #E76E5C;
+$tags-color-error-state-disabled: mix(#E76E5C, transparent, 50%);
+$tags-color-error-state-disabled-background: mix(#E76E5C, transparent, 10%);
+$tags-size-margin: 2px;
+$tags-size-height: 24px;
+$tags-size-border-width: 1px;
+$tags-size-border-radius: 4px;
+$tags-size-icon-padding: 3px;
+$tags-size-text-margin: 7px;
+$tag-list-size-padding: 1px 6px;
+$tag-list-size-min-height: 28px;
+$tag-input-size-height: 22px;
+$tag-input-size-margin: 2px 4px;
+$textarea-size-padding: 5px 16px;
+$textarea-size-width: 100%;
+$textarea-size-min-height: 30px;
