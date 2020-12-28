@@ -1,40 +1,31 @@
-@import '../core/theming/palette';
-@import '../core/theming/theming';
+@import '../design-tokens/index';
 @import '../core/styles/typography/typography-utils';
 
 
 @mixin mc-tree-theme($theme) {
-    $background: map-get($theme, background);
-    $foreground: map-get($theme, foreground);
-
-    $selected-color: map-get(map-get($theme, states), selected-color);
-    $focused-color: map-get(map-get($theme, states), focused-color);
-
-    .mc-tree-selection {
-        &:focus {
-            outline: none;
-        }
+    .mc-tree-selection:focus {
+        outline: none;
     }
 
     .mc-tree-option {
-        color: mc-color($foreground, text);
+        color: $color-foreground-text;
 
         &:hover {
-            background-color: mc-color($background, overlay-hovered);
+            background-color: $color-background-overlay-hovered;
         }
 
         &.mc-focused {
-            border-color: $focused-color;
+            border-color: $globals-states-focused-color;
         }
 
         &.mc-selected {
-            background: $selected-color;
+            background: $globals-states-selected-color;
         }
 
         &[disabled] {
             background-color: transparent;
 
-            color: mc-color($foreground, text-disabled);
+            color: $color-foreground-text-disabled;
         }
     }
 }

@@ -1,8 +1,4 @@
-$mc-tree-node-border-height: 2px;
-
-$mc-tree-node-height: 28px;
-
-$mc-tree-node-padding: 16px;
+@import '../design-tokens/index';
 
 
 .mc-tree-selection {
@@ -13,11 +9,11 @@ $mc-tree-node-padding: 16px;
     display: flex;
     align-items: center;
 
-    height: $mc-tree-node-height;
+    height: $tree-size-node-height;
 
     word-wrap: break-word;
 
-    border: $mc-tree-node-border-height solid transparent;
+    border: $tree-size-border-width solid transparent;
 
     & > .mc-icon {
         margin-right: 4px;

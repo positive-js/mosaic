@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 28 Dec 2020 11:45:40 GMT
+ * Generated on Mon, 28 Dec 2020 12:21:24 GMT
  */
 
 export const ColorPrimaryLighter = "#57A4D7";
@@ -479,3 +479,7 @@ export const TooltipSizeArrowSize = "12px";
 export const TooltipSizeArrowWidth = "5px";
 export const TooltipSizePadding = "8px 16px";
 export const TooltipSizeDistance = "5px + 4px";
+export const TreeColorBackground = "#4D4D4D";
+export const TreeSizeBorderWidth = "2px";
+export const TreeSizeNodeHeight = "28px";
+export const TreeSizeNodePadding = "28px";
