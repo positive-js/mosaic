@@ -1,22 +1,22 @@
+@import '../design-tokens/index';
 @import '../core/theming/theming';
 @import '../core/styles/typography/typography-utils';
 
-@mixin mc-textarea-theme($theme) {
-    $foreground: map-get($theme, foreground);
 
+@mixin mc-textarea-theme($theme) {
     .mc-textarea {
-        color: map-get($foreground, text);
+        color: $color-foreground-text;
 
         &::placeholder {
-            color: map-get($foreground, text-disabled);
+            color: $color-foreground-text-disabled;
         }
 
         &::-ms-input-placeholder {
-            color: map-get($foreground, text-disabled);
+            color: $color-foreground-text-disabled;
         }
 
         &::-webkit-input-placeholder {
-            color: map-get($foreground, text-disabled);
+            color: $color-foreground-text-disabled;
         }
     }
 }

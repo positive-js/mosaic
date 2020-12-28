@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 28 Dec 2020 10:39:02 GMT
+ * Generated on Mon, 28 Dec 2020 10:44:26 GMT
  */
 
 export const ColorPrimaryLighter = "#57A4D7";
@@ -455,6 +455,5 @@ export const TagListSizePadding = "1px 6px";
 export const TagListSizeMinHeight = "28px";
 export const TagInputSizeHeight = "22px";
 export const TagInputSizeMargin = "2px 4px";
+export const TextareaSizeMinHeight = "50px";
 export const TextareaSizePadding = "5px 16px";
-export const TextareaSizeWidth = "100%";
-export const TextareaSizeMinHeight = "30px";

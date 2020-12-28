@@ -1,6 +1,5 @@
 @import 'textarea-base';
 
-$mc-text-area-min-height: 50px; // 2 lines
 
 .mc-textarea {
     @extend %mc-textarea-base;
@@ -16,7 +15,7 @@ $mc-text-area-min-height: 50px; // 2 lines
 
     &.mc-textarea-resizable {
         resize: vertical;
-        min-height: $mc-text-area-min-height;
+        min-height: $textarea-size-min-height;
     }
 }
 
