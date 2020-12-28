@@ -1,14 +1,8 @@
+@import '../design-tokens/index';
 @import '../core/styles/common/layout';
 
 
-$mc-tab-border-radius: 3px;
-$mc-tab-border-width: 1px;
-$mc-tab-border-radius-focus: $mc-tab-border-radius;
-$mc-tab-border-width-focus: $mc-tab-border-width + 1px;
-
-$mc-tab-padding-horizontal: 16px;
-
-$mc-tab-height: 40px;
+$mc-tab-border-width-focus: $tabs-size-border-width * 2;
 
 %tab-pseudo {
     display: block;
@@ -25,7 +19,7 @@ $mc-tab-height: 40px;
     justify-content: center;
     align-items: center;
 
-    height: $mc-tab-height;
+    height: $tabs-size-height;
 
     text-align: center;
     white-space: nowrap;
@@ -33,14 +27,14 @@ $mc-tab-height: 40px;
     cursor: pointer;
 
     padding: {
-        right: $mc-tab-padding-horizontal;
-        left: $mc-tab-padding-horizontal;
+        right: $tabs-size-padding-horizontal;
+        left: $tabs-size-padding-horizontal;
     }
 
     outline: none;
 
     border-bottom: {
-        width: $mc-tab-border-width;
+        width: $tabs-size-border-width;
         style: solid;
     }
 
@@ -50,16 +44,16 @@ $mc-tab-height: 40px;
         &:after {
             @extend %tab-pseudo;
 
-            top: - $mc-tab-border-width-focus;
-            right: - $mc-tab-border-width;
-            bottom: - $mc-tab-border-width;
-            left: - $mc-tab-border-width;
+            top: -$mc-tab-border-width-focus;
+            right: -$tabs-size-border-width;
+            bottom: -$tabs-size-border-width;
+            left: -$tabs-size-border-width;
             border: {
                 width: $mc-tab-border-width-focus;
                 style: solid;
                 top: {
-                    left-radius: $mc-tab-border-radius-focus;
-                    right-radius: $mc-tab-border-radius-focus;
+                    left-radius: $tabs-size-border-radius;
+                    right-radius: $tabs-size-border-radius;
                 }
                 bottom: none;
             }
@@ -86,19 +80,19 @@ $mc-tab-height: 40px;
     @include tab-label-common();
 
     border-top: {
-        width: $mc-tab-border-width;
+        width: $tabs-size-border-width;
 
         style: solid;
-        left-radius: $mc-tab-border-radius;
-        right-radius: $mc-tab-border-radius;
+        left-radius: $tabs-size-border-radius;
+        right-radius: $tabs-size-border-radius;
     }
 
     &.mc-active {
-        padding-right: $mc-tab-padding-horizontal - $mc-tab-border-width;
-        padding-left: $mc-tab-padding-horizontal - $mc-tab-border-width;
+        padding-right: $tabs-size-padding-horizontal - $tabs-size-border-width;
+        padding-left: $tabs-size-padding-horizontal - $tabs-size-border-width;
 
         border: {
-            width: $mc-tab-border-width;
+            width: $tabs-size-border-width;
             style: solid;
         }
 
@@ -113,24 +107,22 @@ $mc-tab-height: 40px;
 
     .mc-tab-overlay {
         border-top: {
-            width: $mc-tab-border-width;
+            width: $tabs-size-border-width;
 
             style: solid;
             color: transparent;
-            left-radius: $mc-tab-border-radius;
-            right-radius: $mc-tab-border-radius;
+            left-radius: $tabs-size-border-radius;
+            right-radius: $tabs-size-border-radius;
         }
     }
 }
 
 %tab-light-pseudo-highlight-border {
-    $mc-tab-border-highlight-width: 4px;
-
     @extend %tab-pseudo;
 
-    bottom: - $mc-tab-border-width;
+    bottom: -$tabs-size-border-width;
     left: 0;
-    height: $mc-tab-border-highlight-width;
+    height: $tabs-size-highlight-height;
     right: 0;
 }
 
@@ -146,13 +138,13 @@ $mc-tab-height: 40px;
 
     &.cdk-keyboard-focused + :hover {
         &:before {
-            left: $mc-tab-border-width-focus - $mc-tab-border-width;
+            left: $mc-tab-border-width-focus - $tabs-size-border-width;
         }
     }
 
     &.cdk-keyboard-focused {
         &:after {
-            top: - $mc-tab-border-width;
+            top: -$tabs-size-border-width;
         }
     }
 

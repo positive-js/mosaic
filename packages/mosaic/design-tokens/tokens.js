@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 25 Dec 2020 11:38:44 GMT
+ * Generated on Mon, 28 Dec 2020 08:32:21 GMT
  */
 
 export const ColorPrimaryLighter = "#57A4D7";
@@ -417,3 +417,10 @@ export const SidepanelFooterSizePadding = "16px";
 export const TableColorBorderWidth = "1px";
 export const TableColorRowPaddingVertical = "8px";
 export const TableColorRowPaddingHorizontal = "16px";
+export const TabsColorBorder = "#B3B3B3";
+export const TabsColorStateActive = "#338FCC";
+export const TabsSizeHeight = "40px";
+export const TabsSizeHighlightHeight = "4px";
+export const TabsSizePaddingHorizontal = "16px";
+export const TabsSizeBorderWidth = "1px";
+export const TabsSizeBorderRadius = "3px";

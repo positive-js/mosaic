@@ -1,0 +1,16 @@
+{
+    "tabs": {
+        "color": {
+            "border": { "value": "{color.second.palette.value.300.value}" },
+            "state-active": { "value": "{color.primary.default.value}" }
+        },
+        "size": {
+            "height": { "value": "40px" },
+            "highlight-height": { "value": "4px" },
+            "padding-horizontal": { "value": "16px" },
+            "border-width": { "value": "1px" },
+            "border-radius": { "value": "3px" }
+        },
+        "font": {}
+    }
+}
