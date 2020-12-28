@@ -1,14 +1,6 @@
-@import '../core/theming/theming';
-@import '../core/styles/typography/typography-utils';
-@import '../core/styles/common/animation';
-@import '../core/styles/common/overlay';
+@import '../design-tokens/index';
+@import '../core/styles/variables';
 
-
-$zindex-tooltip: 1060;
-$tooltip-max-width: 240px;
-$border-radius-base: 3px;
-$tooltip-arrow-width: 5px;
-$tooltip-distance: $tooltip-arrow-width + 4px;
 
 .mc-tooltip {
     display: block;
@@ -18,70 +10,67 @@ $tooltip-distance: $tooltip-arrow-width + 4px;
 
     position: relative;
 
-    margin: 0;
-    padding: 0;
-
     z-index: $zindex-tooltip;
 
-    max-width: $tooltip-max-width;
+    max-width: $tooltip-size-max-width;
 
     list-style: none;
     white-space: pre-line;
 }
 
 .mc-tooltip_placement-top {
-    padding-bottom: $tooltip-distance;
+    padding-bottom: $tooltip-size-distance;
 }
 
 .mc-tooltip_placement-right {
-    padding-left: $tooltip-distance;
+    padding-left: $tooltip-size-distance;
 }
 
 .mc-tooltip_placement-bottom {
-    padding-top: $tooltip-distance;
+    padding-top: $tooltip-size-distance;
 }
 
 .mc-tooltip_placement-left {
-    padding-right: $tooltip-distance;
+    padding-right: $tooltip-size-distance;
 }
 
 .mc-tooltip-inner {
-    padding: 8px 16px;
+    padding: $tooltip-size-padding;
     text-align: left;
     text-decoration: none;
-    border-radius: $border-radius-base;
-    min-height: 32px; // 16px for font + 16px for padding = total 32px
+    border-radius: $tooltip-size-border-radius;
+    min-height: $tooltip-size-min-height;
     height: fit-content;
     vertical-align: center;
 }
 
 .mc-tooltip-arrow {
     position: absolute;
-    width: 12px;
-    height: 12px;
+    width: $tooltip-size-arrow-size;
+    height: $tooltip-size-arrow-size;
     transform: rotate(45deg);
 }
 
 .mc-tooltip_placement-top .mc-tooltip-arrow {
-    bottom: $tooltip-distance - $tooltip-arrow-width;
+    bottom: $tooltip-size-distance - $tooltip-size-arrow-width;
     left: 50%;
-    margin-left: -$tooltip-arrow-width;
+    margin-left: -$tooltip-size-arrow-width;
 }
 
 .mc-tooltip_placement-right .mc-tooltip-arrow {
-    left: $tooltip-distance - $tooltip-arrow-width;
+    left: $tooltip-size-distance - $tooltip-size-arrow-width;
     top: 16px;
-    margin-top: -$tooltip-arrow-width;
+    margin-top: -$tooltip-size-arrow-width;
 }
 
 .mc-tooltip_placement-left .mc-tooltip-arrow {
-    right: $tooltip-distance - $tooltip-arrow-width;
+    right: $tooltip-size-distance - $tooltip-size-arrow-width;
     top: 16px;
-    margin-top: -$tooltip-arrow-width;
+    margin-top: -$tooltip-size-arrow-width;
 }
 
 .mc-tooltip_placement-bottom .mc-tooltip-arrow {
-    top: $tooltip-distance - $tooltip-arrow-width;
+    top: $tooltip-size-distance - $tooltip-size-arrow-width;
     left: 50%;
-    margin-left: -$tooltip-arrow-width;
+    margin-left: -$tooltip-size-arrow-width;
 }

@@ -1,0 +1,22 @@
+{
+    "tooltip": {
+        "color": {
+            "background": { "value": "{color.second.palette.value.700.value}" },
+            "color": { "value": "{color.second.palette.value.contrast.700.value}" },
+            "shadow": { "value": "0 2px 4px 0 rgba(0, 0, 0, 0.2)" }
+        },
+        "size": {
+            "max-width": { "value": "240px" },
+            "min-height": {
+                "value": "32px",
+                "comment": "16px for font + 16px for padding = total 32px"
+            },
+            "border-radius": { "value": "3px" },
+            "arrow-size": { "value": "12px" },
+            "arrow-width": { "value": "5px" },
+            "padding": { "value": "8px 16px" },
+            "distance": { "value": "{tooltip.size.arrow-width.value} + 4px" }
+        },
+        "font": {}
+    }
+}

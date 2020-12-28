@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 28 Dec 2020 11:06:57 GMT
+ * Generated on Mon, 28 Dec 2020 11:45:40 GMT
  */
 
 export const ColorPrimaryLighter = "#57A4D7";
@@ -469,3 +469,13 @@ export const ToggleSizeLabelMargin = "8px";
 export const ToggleSmallSizeHeight = "14px";
 export const ToggleSmallSizeWidth = "24px";
 export const ToggleSmallSizeBorderRadius = "8px";
+export const TooltipColorBackground = "#4D4D4D";
+export const TooltipColorColor = "white";
+export const TooltipColorShadow = "0 2px 4px 0 rgba(0, 0, 0, 0.2)";
+export const TooltipSizeMaxWidth = "240px";
+export const TooltipSizeMinHeight = "32px"; // 16px for font + 16px for padding = total 32px
+export const TooltipSizeBorderRadius = "3px";
+export const TooltipSizeArrowSize = "12px";
+export const TooltipSizeArrowWidth = "5px";
+export const TooltipSizePadding = "8px 16px";
+export const TooltipSizeDistance = "5px + 4px";

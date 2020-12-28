@@ -1,47 +1,38 @@
-@import '../core/theming/theming';
+@import '../design-tokens/index';
 @import '../core/styles/typography/typography-utils';
-
-@import '../core/styles/common/animation';
+@import '../core/theming/theming';
 
 
 @mixin mc-tooltip-theme($theme) {
-    $tooltip: map-get(map-get($theme, components), tooltip);
-
-    $shadow: map-get($tooltip, shadow);
-    $background-color: map-get($tooltip, background-color);
-    $color: map-get($tooltip, color);
-
     .mc-tooltip-inner {
-        color: $color;
+        color: $tooltip-color-color;
 
-        box-shadow: $shadow;
-        background-color: $background-color;
+        box-shadow: $tooltip-color-shadow;
+        background-color: $tooltip-color-background;
     }
 
     .mc-tooltip .mc-tooltip-arrow {
-        background-color: $background-color;
+        background-color: $tooltip-color-background;
     }
 
     .mc-tooltip.mc-tooltip_warning {
-        $warning: map_get($theme, warning);
-
-        $color: map-get($mc-grey, 700);
-        $background-color: mc-color($warning, 60);
-        $border-color: mc-color($warning, 200);
+        $color: $palette-grey-700;
+        $tooltip-color-background: mc-color($color-warning-palette, 60);
+        $border-color: mc-color($color-warning-palette, 200);
 
         .mc-tooltip-arrow {
             border: 1px solid transparent;
 
-            background-color: $background-color;
+            background-color: $tooltip-color-background;
         }
 
         .mc-tooltip-inner {
-            box-shadow: $shadow;
+            box-shadow: $tooltip-color-shadow;
             border: 1px solid $border-color;
 
             color: $color;
 
-            background-color: $background-color;
+            background-color: $tooltip-color-background;
         }
 
         &.mc-tooltip_placement-top .mc-tooltip-arrow {
