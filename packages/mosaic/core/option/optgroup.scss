@@ -1,8 +1,9 @@
+@import '../../design-tokens/index';
 @import '../styles/common/vendor-prefixes';
 
 
 .mc-optgroup-label {
-    padding-left: 17px;
+    padding-left: $optgroup-size-padding-left;
 
     @include user-select(none);
 

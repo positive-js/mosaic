@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 29 Dec 2020 09:13:56 GMT
+ * Generated on Tue, 29 Dec 2020 09:37:35 GMT
  */
 
 export const ColorPrimaryLighter = "#57A4D7";
@@ -386,6 +386,10 @@ export const NavbarItemColorStatesDisabledOpacity = 0.3;
 export const NavbarItemSizePadding = "16px";
 export const NavbarBrandSizePadding = "12px";
 export const NavbarBrandSizeMarginRight = "24px";
+export const OptgroupSizePaddingLeft = "17px";
+export const OptionSizePadding = "0 16px";
+export const OptionSizeHeight = "32px";
+export const OptionSizeBorderWidth = "2px";
 export const PopoverColorBorderColor = "#B3B3B3";
 export const PopoverSizePadding = "16px";
 export const PopoverSizeBorderWidth = "1px";

@@ -1,37 +1,29 @@
-@import '../theming/palette';
-@import '../theming/theming';
+@import '../../design-tokens/index';
 @import '../styles/typography/typography-utils';
 
 
 @mixin mc-option-theme($theme) {
-    $primary: map-get($theme, primary);
-
-    $foreground: map-get($theme, foreground);
-    $background: map-get($theme, background);
-
-    $selected-color: map-get(map-get($theme, states), selected-color);
-
     .mc-option {
-        color: mc-color($foreground, text);
+        color: $color-foreground-text;
 
         &:hover:not(.mc-disabled) {
             .mc-option-overlay {
-                background: mc-color($background, overlay-hovered);
+                background: $color-background-overlay-hovered;
             }
         }
 
         &.mc-active {
-            border-color: mc-color($primary);
+            border-color: $color-primary-default;
         }
 
         &.mc-selected {
-            background: $selected-color;
+            background: $globals-states-selected-color;
         }
 
         &.mc-disabled {
             background: transparent;
 
-            color: mc-color($foreground, text-disabled);
+            color: $color-foreground-text-disabled;
         }
     }
 }

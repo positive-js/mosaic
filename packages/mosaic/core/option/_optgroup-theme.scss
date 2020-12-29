@@ -1,17 +1,14 @@
-@import '../theming/palette';
-@import '../theming/theming';
+@import '../../design-tokens/index';
 @import '../styles/typography/typography-utils';
 
 
 @mixin mc-optgroup-theme($theme) {
-    $foreground: map-get($theme, foreground);
-
     .mc-optgroup-label {
-        color: mc-color($foreground, text);
+        color: $color-foreground-text;
     }
 
     .mc-disabled .mc-optgroup-label {
-        color: mc-color($foreground, text-disabled);
+        color: $color-foreground-text-disabled;
     }
 }
 

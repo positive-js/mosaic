@@ -1,7 +1,5 @@
+@import '../../design-tokens/index';
 @import '../styles/common/vendor-prefixes';
-
-$mc-option-padding: 0 16px;
-$mc-option-item-height: 32px;
 
 
 .mc-option {
@@ -15,15 +13,15 @@ $mc-option-item-height: 32px;
 
     max-width: 100%;
 
-    height: $mc-option-item-height;
+    height: $option-size-height;
 
-    border: 2px solid transparent;
+    border: $option-size-border-width solid transparent;
 
     cursor: pointer;
 
     outline: none;
 
-    padding: $mc-option-padding;
+    padding: $option-size-padding;
 
     -webkit-tap-highlight-color: transparent;
 
@@ -38,10 +36,10 @@ $mc-option-item-height: 32px;
     & .mc-option-overlay {
         position: absolute;
 
-        top: -2px;
-        left: -2px;
-        right: -2px;
-        bottom: -2px;
+        top: -$option-size-border-width;
+        left: -$option-size-border-width;
+        right: -$option-size-border-width;
+        bottom: -$option-size-border-width;
 
         pointer-events: none;
         border-radius: inherit;

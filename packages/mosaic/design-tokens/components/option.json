@@ -1,0 +1,11 @@
+{
+    "option": {
+        "color": {},
+        "size": {
+            "padding": { "value": "0 16px" },
+            "height": { "value": "32px" },
+            "border-width": { "value": "2px" }
+        },
+        "font": {}
+    }
+}
