@@ -1,65 +1,54 @@
-@import '../core/theming/theming';
+@import '../design-tokens/index';
 @import '../core/styles/typography/typography-utils';
 
+
 @mixin mc-vertical-navbar-theme($theme) {
-    $focused-color: map-get(map-get($theme, states), focused-color);
-
-    $navbar: map-get(map-get($theme, components), vertical-navbar);
-
-    $color: map-get($navbar, color);
-    $background-color: map-get($navbar, background-color);
-    $toggle-button_color: map-get($navbar, toggle-button_color);
-
-    $state-hover_background-color: map-get($navbar, state-hover_background-color);
-    $state-active_background-color: map-get($navbar, state-active_background-color);
-    $state-progress_background-color: map-get($navbar, state-progress_background-color);
-
     .mc-vertical-navbar {
-        background-color: $background-color;
+        background-color: $vertical-navbar-color-background;
 
         :focus {
             outline: 0;
         }
 
         .cdk-keyboard-focused {
-            outline: 2px solid $focused-color;
+            outline: 2px solid $globals-states-focused-color;
             outline-offset: -2px;
         }
 
         .mc-vertical-navbar__toggle-button {
-            color: $toggle-button_color;
+            color: $vertical-navbar-color-toggle-button;
         }
 
         .mc-vertical-navbar__header,
         .mc-vertical-navbar__toggle-button {
             &:hover {
-                background-color: $state-hover_background-color;
+                background-color: $vertical-navbar-color-state-hovered-background;
             }
         }
 
         .mc-vertical-navbar__title {
-            color: $color;
+            color: $vertical-navbar-color-color;
         }
 
         .mc-vertical-navbar-item {
-            color: $color;
+            color: $vertical-navbar-color-color;
 
             &.mc-vertical-navbar__item_active {
-                background-color: $state-active_background-color;
+                background-color: $vertical-navbar-color-state-active-background;
             }
 
             &:hover:not([disabled]):not(.mc-progress) {
-                background-color: $state-hover_background-color;
+                background-color: $vertical-navbar-color-state-hovered-background;
             }
 
             &.mc-progress:hover:not([disabled]) {
-                background-color: $state-progress_background-color;
+                background-color: $vertical-navbar-color-state-progress-background;
             }
 
             &[disabled] {
                 .mc-vertical-navbar__title,
                 .mc-icon {
-                    opacity: map-get(map-get($theme, states), disabled-opacity);
+                    opacity: $globals-states-disabled-opacity;
                 }
             }
         }

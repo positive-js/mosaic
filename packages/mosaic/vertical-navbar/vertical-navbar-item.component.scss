@@ -1,9 +1,9 @@
-@import 'vertical-navbar-theme';
+@import '../design-tokens/index';
 
 
 .mc-vertical-navbar__badge {
     position: absolute;
-    width: 64px;
+    width: $navbar-badge-size-width;
     top: 0;
     left: 0;
 
@@ -15,10 +15,10 @@
 }
 
 .mc-vertical-navbar__item-icon {
-    margin-right: 16px;
+    margin-right: $vertical-navbar-item-size-icon-margin-right;
 
     .mc-icon {
-        font-size: 32px;
+        font-size: $vertical-navbar-item-font-icon-size;
     }
 }
 
@@ -28,27 +28,34 @@
 
 .mc-vertical-navbar__item-dropdown-icon {
     margin-left: auto;
-    padding-left: 16px;
+    padding-left: $vertical-navbar-item-size-padding-horizontal;
 }
 
-mc-vertical-navbar-item, a[mc-vertical-navbar-item] {
-    height: 64px;
-    margin: 1px 0;
-    width: 100%;
-    position: relative;
+mc-vertical-navbar-item,
+a[mc-vertical-navbar-item] {
     display: flex;
     align-items: center;
     box-sizing: border-box;
+
+    position: relative;
+
+    margin: $vertical-navbar-item-size-margin;
+
+    width: 100%;
+    height: $vertical-navbar-item-size-height;
+
     cursor: pointer;
     text-decoration: none;
 
     .mc-vertical-navbar__item {
-        padding-left: 16px;
-        padding-right: 16px;
         display: flex;
         align-items: center;
+
         width: 100%;
         height: 100%;
+
+        padding-left: $vertical-navbar-item-size-padding-horizontal;
+        padding-right: $vertical-navbar-item-size-padding-horizontal;
     }
 
     &.mc-progress {

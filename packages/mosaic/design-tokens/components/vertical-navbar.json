@@ -1,0 +1,33 @@
+{
+    "vertical-navbar": {
+        "color": {
+            "background": { "value": "{color.primary.palette.value.700.value}" },
+            "color": { "value": "{color.primary.palette.value.contrast.700.value}" },
+            "toggle-button": { "value": "{color.primary.palette.value.contrast.700.value}" },
+            "state-hovered-background": { "value": "lighten({color.primary.palette.value.700.value}, 5%)" },
+            "state-active-background": { "value": "lighten({color.primary.palette.value.700.value}, 5%)" },
+            "state-progress-background": { "value": "lighten({color.primary.palette.value.800.value}, 15%)" }
+        },
+        "size": {},
+        "font": {}
+    },
+    "vertical-navbar-item": {
+        "color": {},
+        "size": {
+            "height": { "value": "64px" },
+            "margin": { "value": "1px 0" },
+            "padding-horizontal": { "value": "16px" },
+            "icon-margin-right": { "value": "16px" }
+        },
+        "font": {
+            "icon-size": { "value": "32px" }
+        }
+    },
+    "navbar-badge": {
+        "color": {},
+        "size": {
+            "width": { "value": "64px" }
+        },
+        "font": {}
+    }
+}

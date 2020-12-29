@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 28 Dec 2020 12:21:24 GMT
+ * Generated on Tue, 29 Dec 2020 09:13:56 GMT
  */
 
 export const ColorPrimaryLighter = "#57A4D7";
@@ -482,4 +482,15 @@ export const TooltipSizeDistance = "5px + 4px";
 export const TreeColorBackground = "#4D4D4D";
 export const TreeSizeBorderWidth = "2px";
 export const TreeSizeNodeHeight = "28px";
-export const TreeSizeNodePadding = "28px";
+export const VerticalNavbarColorBackground = "#114E77";
+export const VerticalNavbarColorColor = "white";
+export const VerticalNavbarColorToggleButton = "white";
+export const VerticalNavbarColorStateHoveredBackground = "lighten(#114E77, 5%)";
+export const VerticalNavbarColorStateActiveBackground = "lighten(#114E77, 5%)";
+export const VerticalNavbarColorStateProgressBackground = "lighten(#07314D, 15%)";
+export const VerticalNavbarItemSizeHeight = "64px";
+export const VerticalNavbarItemSizeMargin = "1px 0";
+export const VerticalNavbarItemSizePaddingHorizontal = "16px";
+export const VerticalNavbarItemSizeIconMarginRight = "16px";
+export const VerticalNavbarItemFontIconSize = "32px";
+export const NavbarBadgeSizeWidth = "64px";
