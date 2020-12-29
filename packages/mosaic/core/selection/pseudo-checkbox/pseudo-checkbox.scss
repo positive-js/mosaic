@@ -1,11 +1,4 @@
-@import '../../styles/common/checkbox';
-
-
-// Padding inside of a pseudo checkbox.
-$_mc-pseudo-checkbox-padding: $mc-checkbox-border-width * 2;
-
-// Size of the checkmark in a pseudo checkbox.
-$_mc-pseudo-checkmark-size: $mc-checkbox-size - (2 * $_mc-pseudo-checkbox-padding);
+@import '../../../design-tokens/index';
 
 
 .mc-pseudo-checkbox {
@@ -13,12 +6,12 @@ $_mc-pseudo-checkmark-size: $mc-checkbox-size - (2 * $_mc-pseudo-checkbox-paddin
     display: inline-block;
     box-sizing: border-box;
 
-    width: $mc-checkbox-size;
-    height: $mc-checkbox-size;
+    width: $checkbox-size-width;
+    height: $checkbox-size-width;
 
     border: {
         radius: 3px;
-        width: $mc-checkbox-border-width;
+        width: $checkbox-size-border-width;
         style: solid;
     }
 
@@ -32,8 +25,8 @@ $_mc-pseudo-checkmark-size: $mc-checkbox-size - (2 * $_mc-pseudo-checkbox-paddin
         display: none;
 
         position: absolute;
-        top: -$mc-checkbox-border-width;
-        left: -$mc-checkbox-border-width;
+        top: -$checkbox-size-border-width;
+        left: -$checkbox-size-border-width;
     }
 
     &.mc-pseudo-checkbox-checked,

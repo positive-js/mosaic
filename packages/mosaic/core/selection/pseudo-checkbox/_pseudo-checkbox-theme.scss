@@ -1,18 +1,12 @@
-@import '../../theming/theming';
+@import '../../../design-tokens/index';
 
 
 @mixin mc-pseudo-checkbox-theme($theme) {
-    $primary: map-get($theme, primary);
-    $second: map-get($theme, second);
-
-    $background: map-get($theme, background);
-    $foreground: map-get($theme, foreground);
-
     $is-dark: map-get($theme, is-dark);
 
     .mc-pseudo-checkbox {
-        border-color: mc-color($second);
-        background-color: map-get($background, background);
+        border-color: $color-second-default;
+        background-color: $color-background-background;
 
         & .mc-checkbox-checkmark,
         & .mc-checkbox-mixedmark {
@@ -20,19 +14,19 @@
         }
 
         &.mc-checked {
-            border-color: mc-color($primary, if($is-dark, lighter, darker));
+            border-color: if($is-dark, $color-primary-lighter, $color-primary-darker);
 
-            background: if($is-dark, mc-color($primary, 600), mc-color($primary));
+            background: if($is-dark, map-get($color-primary-palette, 600), $color-primary-default);
         }
 
         &.mc-disabled {
-            border-color: map-get($foreground, border);
+            border-color: $color-foreground-border;
 
-            background-color: map-get($background, background-disabled);
+            background-color: $color-background-background-disabled;
 
             .mc-checkbox-checkmark,
             .mc-checkbox-mixedmark {
-                color: map-get($foreground, text-disabled);
+                color: $color-foreground-text-disabled;
             }
         }
     }
