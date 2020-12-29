@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 29 Dec 2020 09:37:35 GMT
+ * Generated on Tue, 29 Dec 2020 12:11:11 GMT
  */
 
 export const ColorPrimaryLighter = "#57A4D7";
@@ -280,6 +280,11 @@ export const TypographyExtraSmallTextLetterSpacing = "0.22px";
 export const TypographyExtraSmallTextFontWeight = "normal";
 export const TypographyExtraSmallTextFontFamily = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
 export const TypographyExtraSmallTextTextTransform = "null";
+export const AlertSizePadding = "13px 15px";
+export const AlertSizePaddingSmall = "11px 15px";
+export const AlertSizeRightPaddingDismissible = "15px";
+export const AlertSizeBorderWidth = "1px";
+export const AlertSizeBorderRadius = "4px";
 export const AutocompleteSizePanelPadding = "4px 0";
 export const AutocompleteSizePanelMaxHeight = "256px";
 export const AutocompleteSizePanelBorderRadius = "3px";

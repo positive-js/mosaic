@@ -1,0 +1,14 @@
+{
+    "alert": {
+        "color": {},
+        "size": {
+            "padding": { "value": "13px 15px" },
+            "padding-small": { "value": "11px 15px" },
+            "right-padding-dismissible": { "value": "15px" },
+
+            "border-width": { "value": "1px" },
+            "border-radius": { "value": "4px" }
+        },
+        "font": {}
+    }
+}
