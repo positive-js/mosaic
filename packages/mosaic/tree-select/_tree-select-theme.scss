@@ -1,28 +1,23 @@
-@import '../core/theming/theming';
-@import '../core/theming/palette';
+@import '../design-tokens/index';
 @import '../core/styles/typography/typography-utils';
 @import '../core/styles/common/popup';
 
 
 @mixin mc-tree-select-theme($theme) {
-    $error: map-get($theme, error);
-
-    $foreground: map-get($theme, foreground);
-
     .mc-tree-select {
-        color: map-get($foreground, text);
+        color: $color-foreground-text;
 
         &.ng-invalid {
-            color: mc-color($error);
+            color: $color-error-default;
         }
 
         &.mc-disabled {
-            color: mc-color($foreground, text-disabled);
+            color: $color-foreground-text-disabled;
         }
     }
 
     .mc-tree-select__placeholder {
-        color: mc-color($foreground, text-disabled);
+        color: $color-foreground-text-disabled;
     }
 
     .mc-tree-select__panel {

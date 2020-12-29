@@ -1,19 +1,6 @@
+@import '../design-tokens/index';
+@import '../core/option/option';
 @import '../core/styles/common/vendor-prefixes';
-@import '../divider/divider';
-
-@import '../../cdk/a11y/a11y';
-
-@import '../tree/tree';
-
-$mc-select-arrow-size: 5px !default;
-$mc-select-arrow-margin: 4px !default;
-$mc-select-panel-max-height: 224px !default;
-$mc-select-item-height: 32px !default;
-
-$mc-select-panel-border-width: 1px !default;
-$mc-select-panel-border-radius: 3px !default;
-
-$mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arrow-margin);
 
 
 .mc-tree-select {
@@ -43,18 +30,14 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
     box-sizing: border-box;
     position: relative;
 
-    height: 30px;
+    height: $select-size-height;
 
     cursor: pointer;
 
-    // todo возможно нужно через JS
-    padding: {
-        right: 7px;
-        left: 15px;
-    };
+    padding: $select-size-padding;
 
     &.mc-tree-select__trigger_multiple {
-        padding-left: 7px;
+        padding-left: $select-size-padding-left-multiple;
 
         & .mc-tree-select__placeholder {
             margin-left: 8px;
@@ -96,9 +79,6 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
     overflow: hidden;
 
     max-height: 28px;
-
-    margin: 0;
-    padding-left: 0;
 
     & .mc-tag {
         margin-right: 4px;
@@ -150,18 +130,18 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
 }
 
 .mc-tree-select__panel {
-    max-height: $mc-select-panel-max-height;
+    max-height: $select-panel-size-max-height;
     min-width: 100%; // prevents some animcion twitching and test inconsistencies in IE11
 
     overflow: auto;
 
     border: {
-        width: $mc-select-panel-border-width;
+        width: $select-panel-size-border-width;
         style: solid;
     }
 
-    border-bottom-left-radius: $mc-select-panel-border-radius;
-    border-bottom-right-radius: $mc-select-panel-border-radius;
+    border-bottom-left-radius: $select-panel-size-border-radius;
+    border-bottom-right-radius: $select-panel-size-border-radius;
 
     padding: 4px 0;
 
@@ -169,8 +149,8 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
     .mc-optgroup-label,
     .mc-tree-select-option {
         font-size: inherit;
-        line-height: $mc-select-item-height;
-        height: $mc-select-item-height;
+        line-height: $mc-option-item-height;
+        height: $mc-option-item-height;
     }
 }
 
@@ -186,35 +166,4 @@ $mc-select-placeholder-arrow-space: 2 * ($mc-select-arrow-size + $mc-select-arro
     &:not(.mc-disabled) .mc-form-field-flex {
         cursor: pointer;
     }
-
-    .mc-form-field-label {
-        width: calc(100% - #{$mc-select-placeholder-arrow-space});
-    }
 }
-
-//.mc-tree-select__placeholder {
-//    // Delay the transition until the label has animced about a third of the way through, in
-//    // order to prevent the placeholder from overlapping for a split second.
-//    transition: color $swift-ease-out-duration $swift-ease-out-duration / 3
-//    $swift-ease-out-timing-function;
-//
-//    ._mc-animcion-noopable & {
-//        transition: none;
-//    }
-//
-//    .mc-form-field-hide-placeholder & {
-//        color: transparent;
-//
-//        // Overwrite browser specific CSS properties that can overwrite the `color` property.
-//        // Some developers seem to use this approach to easily overwrite the placeholder / label color.
-//        -webkit-text-fill-color: transparent;
-//
-//        // Remove the transition to prevent the placeholder
-//        // from overlapping when the label comes back down.
-//        transition: none;
-//        // Prevents the '...' from showing on the parent element.
-//        display: block;
-//    }
-//}
-
-
