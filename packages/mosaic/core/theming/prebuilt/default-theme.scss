@@ -1,13 +1,13 @@
 @import '../all-theme';
 
 
-$primary: mc-palette($mc-blue, 400, 500, 600);
-$second: mc-palette($mc-grey, 100, 300, 400);
-$error: mc-palette($mc-red, 60, 400, 500);
+$primary: mc-palette($color-blue-palette, 400, 500, 600);
+$second: mc-palette($color-grey-palette, 100, 300, 400);
+$error: mc-palette($color-red-palette, 60, 400, 500);
 
-$info: mc-palette($mc-blue, 60, 200, 400);
-$success: mc-palette($mc-green, 60, 200, 400);
-$warning: mc-palette($mc-yellow, 60, 200, 400);
+$info: mc-palette($color-blue-palette, 60, 200, 400);
+$success: mc-palette($color-green-palette, 60, 200, 400);
+$warning: mc-palette($color-yellow-palette, 60, 200, 400);
 
 $theme: mc-light-theme($primary, $second, $error, $info, $success, $warning);
 

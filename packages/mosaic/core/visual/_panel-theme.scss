@@ -1,13 +1,12 @@
+@import '../../design-tokens/index';
 @import '../theming/theming';
-@import '../theming/palette';
+
 
 @mixin mc-panel-theme($theme) {
-    $background: map-get($theme, background);
-
     $is-dark: map-get($theme, is-dark);
 
     .mc-panel {
-        background-color: map-get($background, background);
-        border: 1px solid map-get($mc-grey, if($is-dark, 700, 60));
+        background-color: $color-background-background;
+        border: 1px solid map-get($color-second-palette, if($is-dark, 700, 60));
     }
 }

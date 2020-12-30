@@ -151,5 +151,23 @@
                 "A100": { "value": "#4D4D4D" }
             }
         }
+    },
+
+    "color": {
+        "blue": {
+            "palette": { "value": "{palette.blue}" }
+        },
+        "green": {
+            "palette": { "value": "{palette.green}" }
+        },
+        "red": {
+            "palette": { "value": "{palette.red}" }
+        },
+        "grey": {
+            "palette": { "value": "{palette.grey}" }
+        },
+        "yellow": {
+            "palette": { "value": "{palette.yellow}" }
+        }
     }
 }

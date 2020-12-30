@@ -1,7 +1,6 @@
 @import '../core/theming/theming';
 @import '../core/styles/typography/typography-utils';
 
-@import '../core/theming/palette';
 
 @mixin mc-tag-color($background, $border, $icon, $icon-hovered, $focused, $disabled, $disabled-background ) {
     background: $background;

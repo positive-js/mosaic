@@ -1,4 +1,4 @@
-@import 'palette';
+@import '../../design-tokens/index';
 @import 'components-theming';
 
 
@@ -40,15 +40,7 @@
     @return rgba($color, $opacity);
 }
 
-@function mc-light-theme(
-    $primary,
-    $second,
-    $error,
-
-    $info: mc-palette($mc-blue),
-    $success: mc-palette($mc-green),
-    $warning: mc-palette($mc-yellow)
-) {
+@function mc-light-theme($primary, $second, $error, $info, $success, $warning) {
     $states: (
         focused-color: mc-color($primary),
         selected-color: mc-color($primary, 100),
@@ -76,15 +68,7 @@
     @return map_merge($theme, (components: mc-light-theme-components($theme)));
 }
 
-@function mc-dark-theme(
-    $primary,
-    $second,
-    $error,
-
-    $info: mc-palette($mc-blue),
-    $success: mc-palette($mc-green),
-    $warning: mc-palette($mc-yellow)
-) {
+@function mc-dark-theme($primary, $second, $error, $info, $success, $warning) {
     $states: (
         focused-color: mc-color($primary),
         selected-color: mc-color($primary, 700),
