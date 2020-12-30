@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 29 Dec 2020 12:11:11 GMT
+ * Generated on Wed, 30 Dec 2020 07:58:33 GMT
  */
 
 export const ColorPrimaryLighter = "#57A4D7";
@@ -288,6 +288,10 @@ export const AlertSizeBorderRadius = "4px";
 export const AutocompleteSizePanelPadding = "4px 0";
 export const AutocompleteSizePanelMaxHeight = "256px";
 export const AutocompleteSizePanelBorderRadius = "3px";
+export const BadgeSizeMinWidth = "10px";
+export const BadgeSizePadding = "4px 8px";
+export const BadgeSizeBorderWidth = "1px";
+export const BadgeSizeBorderRadius = "4px";
 export const ButtonToggleSizeBorderSize = "1px";
 export const ButtonToggleSizeBorderRadius = "3px";
 export const ButtonColorActiveShadow = "inset 0 1px 2px 0 rgba(black, 0.2)";

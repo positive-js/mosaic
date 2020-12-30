@@ -1,5 +1,4 @@
-@import '../theming/theming';
-@import '../theming/palette';
+@import '../../design-tokens/index';
 @import '../styles/typography/typography-utils';
 
 
@@ -8,14 +7,14 @@
 
     vertical-align: middle;
 
-    min-width: 10px;
+    min-width: $badge-size-min-width;
 
-    padding: 4px 8px;
+    padding: $badge-size-padding;
 
     border: {
-        width: 1px;
+        width: $badge-size-border-width;
         style: solid;
-        radius: 4px;
+        radius: $badge-size-border-radius;
     }
 
     text-align: center;
@@ -23,66 +22,56 @@
 }
 
 
-@mixin mc-badge-color($color, $is-dark) {
+@mixin mc-badge-color($palette, $is-dark) {
     color: white;
 
-    $color: mc-color($color, if($is-dark, 700, 500));
+    $color: map-get($palette, if($is-dark, 700, 500));
 
     border-color: $color;
     background-color: $color;
 }
 
 @mixin mc-badge-theme($theme) {
-    $primary: map-get($theme, primary);
-    $second: map-get($theme, second);
-    $error: map-get($theme, error);
-    $warning: map-get($theme, warning);
-    $success: map-get($theme, success);
-    $info: map-get($theme, info);
-
-    $foreground: map-get($theme, foreground);
-
     $is-dark: map-get($theme, is-dark);
 
     .mc-badge {
-        color: map-get($foreground, text);
-        border-color: mc-color($second, 400);
+        color: $color-foreground-text;
+        border-color: map-get($color-second-palette, 400);
     }
 
     .mc-badge_light {
-        $color: mc-color($second, if($is-dark, 400, 100));
+        $color: map-get($color-second-palette, if($is-dark, 400, 100));
 
         border-color: $color;
         background-color: $color;
     }
 
     .mc-badge_second {
-        @include mc-badge-color($second, $is-dark);
+        @include mc-badge-color($color-second-palette, $is-dark);
     }
 
     .mc-badge_primary {
-        @include mc-badge-color($primary, $is-dark);
+        @include mc-badge-color($color-primary-palette, $is-dark);
     }
 
     .mc-badge_error {
-        @include mc-badge-color($error, $is-dark);
+        @include mc-badge-color($color-error-palette, $is-dark);
     }
 
     .mc-badge_info {
-        @include mc-badge-color($info, $is-dark);
+        @include mc-badge-color($color-info-palette, $is-dark);
     }
 
     .mc-badge_success {
-        @include mc-badge-color($success, $is-dark);
+        @include mc-badge-color($color-success-palette, $is-dark);
     }
 
     .mc-badge_warning {
-        @include mc-badge-color($warning, $is-dark);
+        @include mc-badge-color($color-warning-palette, $is-dark);
     }
 }
 
 @mixin mc-badge-typography($config) {
-
     .mc-badge {
         @include mc-typography-level-to-styles($config, caption);
     }
