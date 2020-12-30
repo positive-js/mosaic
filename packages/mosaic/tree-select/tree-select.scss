@@ -78,7 +78,7 @@
 
     overflow: hidden;
 
-    max-height: 28px;
+    max-height: $select-size-height - $select-panel-size-border-width;
 
     & .mc-tag {
         margin-right: 4px;
@@ -149,8 +149,8 @@
     .mc-optgroup-label,
     .mc-tree-select-option {
         font-size: inherit;
-        line-height: $mc-option-item-height;
-        height: $mc-option-item-height;
+        line-height: $option-size-height;
+        height: $option-size-height;
     }
 }
 
