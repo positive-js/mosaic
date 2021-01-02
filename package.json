@@ -74,7 +74,7 @@
         "gulp-sass": "^4.0.2",
         "gulp-transform": "^2.0.0",
         "highlight.js": "^10.4.1",
-        "husky": "^4.2.3",
+        "husky": "^5.0.0",
         "inquirer": "^6.5.2",
         "jasmine": "^3.5.0",
         "jasmine-core": "^3.5.0",
