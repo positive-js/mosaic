@@ -1,6 +1,10 @@
 {
     "tabs": {
-        "color": {
+        "lightColor": {
+            "border": { "value": "{lightColor.second.palette.value.300.value}" },
+            "state-active": { "value": "{lightColor.primary.default.value}" }
+        },
+        "darkColor": {
             "border": { "value": "{lightColor.second.palette.value.300.value}" },
             "state-active": { "value": "{lightColor.primary.default.value}" }
         },

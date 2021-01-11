@@ -1,6 +1,11 @@
 {
     "navbar": {
-        "color": {
+        "lightColor": {
+            "background": { "value": "{lightColor.primary.palette.value.700.value}" },
+            "color": { "value": "{lightColor.primary.palette.value.100.value}" },
+            "opacity": { "value": 0.5 }
+        },
+        "darkColor": {
             "background": { "value": "{lightColor.primary.palette.value.700.value}" },
             "color": { "value": "{lightColor.primary.palette.value.100.value}" },
             "opacity": { "value": 0.5 }
@@ -12,7 +17,7 @@
         "font": {}
     },
     "navbar-item": {
-        "color": {
+        "lightColor": {
             "color": { "value": "{lightColor.primary.palette.value.100.value}" },
 
             "states": {
@@ -30,7 +35,25 @@
                 },
                 "disabled-opacity": { "value": 0.3 }
             }
+        },
+        "darkColor": {
+            "color": { "value": "{lightColor.primary.palette.value.100.value}" },
 
+            "states": {
+                "active": {
+                    "value": "{lightColor.primary.palette.value.600.value}",
+                    "comment": "lighten(mc-color($primary, 700), 5%)"
+                },
+                "hover": {
+                    "value": "{lightColor.primary.palette.value.600.value}",
+                    "comment": "lighten(mc-color($primary, 700), 5%)"
+                },
+                "progress": {
+                    "value": "{lightColor.primary.palette.value.800.value}",
+                    "comment": "lighten(mc-color($primary, 800), 5%)"
+                },
+                "disabled-opacity": { "value": 0.3 }
+            }
         },
         "size": {
             "padding": { "value": "16px" }

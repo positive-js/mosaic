@@ -1,11 +1,18 @@
 {
     "popup-common": {
-        "color": {
+        "lightColor": {
             "shadow": { "value": "0 3px 3px 0 {lightColor.second.palette.value.A200.value}" },
             "border": { "value": "{lightColor.second.default.value}" },
             "divider": { "value": "{lightColor.second.palette.value.200.value}" },
             "background": { "value": "{lightColor.background.background-popup.value}" },
             "footer-background": { "value": "{lightColor.background.background-popup-footer.value}" }
+        },
+        "darkColor": {
+            "shadow": { "value": "0 3px 3px 0 {darkColor.second.palette.value.A200.value}" },
+            "border": { "value": "{darkColor.second.default.value}" },
+            "divider": { "value": "{darkColor.foreground.divider.value}" },
+            "background": { "value": "{darkColor.background.background-popup.value}" },
+            "footer-background": { "value": "{darkColor.background.background-popup-footer.value}" }
         },
         "size": {},
         "font": {}

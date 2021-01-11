@@ -1,6 +1,6 @@
 
 // Do not edit directly
-// Generated on Mon, 11 Jan 2021 08:28:46 GMT
+// Generated on Mon, 11 Jan 2021 12:21:44 GMT
 
 $light-color-primary-lighter: #57A4D7;
 $light-color-primary-default: #338FCC;
@@ -340,25 +340,44 @@ $badge-size-border-width: 1px;
 $badge-size-border-radius: 4px;
 $button-toggle-size-border-size: 1px;
 $button-toggle-size-border-radius: 3px;
-$button-color-active-shadow: inset 0 1px 2px 0 rgba(black, 0.2);
-$button-color-primary-color: white;
-$button-color-primary-border-color: #277BB3;
-$button-color-primary-background: #338FCC;
-$button-color-primary-icon-color: white;
-$button-color-primary-active-border-color: #277BB3; // darken(mc-color($primary, 560), 5)
-$button-color-primary-active-background: #338FCC; // darken(mc-color($primary, 560), 5)
-$button-color-second-border-color: #B3B3B3;
-$button-color-second-background: #F0F0F0;
-$button-color-second-color: #4D4D4D;
-$button-color-second-icon-color: #999999;
-$button-color-second-active-border-color: #B3B3B3; // darken(mc-color($foreground, border), 5)
-$button-color-second-active-background: #F0F0F0; // darken(map-get($background, background-disabled), 5
-$button-color-error-border-color: #B3B3B3;
-$button-color-error-background: #F0F0F0;
-$button-color-error-color: #E76E5C;
-$button-color-error-icon-color: #E76E5C;
-$button-color-error-active-border-color: #B3B3B3; // darken(mc-color($foreground, border), 5)
-$button-color-error-active-background: #F0F0F0; // darken(map-get($background, background-disabled), 5
+$button-light-color-active-shadow: inset 0 1px 2px 0 rgba(black, 0.2);
+$button-light-color-primary-color: white;
+$button-light-color-primary-border: #277BB3;
+$button-light-color-primary-background: #338FCC;
+$button-light-color-primary-icon: white;
+$button-light-color-primary-active-border: #277BB3; // darken(mc-color($primary, 560), 5)
+$button-light-color-primary-active-background: #338FCC; // darken(mc-color($primary, 560), 5)
+$button-light-color-second-border: #B3B3B3;
+$button-light-color-second-background: #F0F0F0;
+$button-light-color-second-color: #4D4D4D;
+$button-light-color-second-icon: #999999;
+$button-light-color-second-active-border: #B3B3B3; // darken(mc-color($foreground, border), 5)
+$button-light-color-second-active-background: #F0F0F0; // darken(map-get($background, background-disabled), 5
+$button-light-color-error-border: #B3B3B3;
+$button-light-color-error-background: #F0F0F0;
+$button-light-color-error-color: #E76E5C;
+$button-light-color-error-icon: #E76E5C;
+$button-light-color-error-active-border: #B3B3B3; // darken(mc-color($foreground, border), 5)
+$button-light-color-error-active-background: #F0F0F0; // darken(map-get($background, background-disabled), 5
+$button-dark-color-active-shadow: inset 0 1px 2px 0 rgba(black, 0.2);
+$button-dark-color-primary-color: white;
+$button-dark-color-primary-border: #277BB3;
+$button-dark-color-primary-background: #338FCC;
+$button-dark-color-primary-icon: white;
+$button-dark-color-primary-active-border: #277BB3; // darken(mc-color($primary, 560), 5)
+$button-dark-color-primary-active-background: #338FCC; // darken(mc-color($primary, 560), 5)
+$button-dark-color-second-border: #B3B3B3;
+$button-dark-color-second-background: #F0F0F0;
+$button-dark-color-second-color: #4D4D4D;
+$button-dark-color-second-icon: #999999;
+$button-dark-color-second-active-border: #B3B3B3; // darken(mc-color($foreground, border), 5)
+$button-dark-color-second-active-background: #F0F0F0; // darken(map-get($background, background-disabled), 5
+$button-dark-color-error-border: #B3B3B3;
+$button-dark-color-error-background: #F0F0F0;
+$button-dark-color-error-color: #E76E5C;
+$button-dark-color-error-icon: #E76E5C;
+$button-dark-color-error-active-border: #B3B3B3; // darken(mc-color($foreground, border), 5)
+$button-dark-color-error-active-background: #F0F0F0; // darken(map-get($background, background-disabled), 5
 $button-size-padding: 5px 15px;
 $button-size-border-width: 1px;
 $button-size-border-radius: 3px;
@@ -367,20 +386,30 @@ $icon-button-size-border-radius: 3px;
 $icon-button-size-padding: 5px 7px;
 $icon-button-size-text-padding: 5px 7px;
 $icon-button-size-icon-padding: 5px 15px;
-$checkbox-color-border-color: #B3B3B3;
-$checkbox-color-states-checked-border-color: #206EA2;
-$checkbox-color-states-checked-background: #338FCC;
-$checkbox-color-states-focused-border-color: #206EA2;
-$checkbox-color-states-focused-shadow: inset 0 0 0 1px white, 0 0 0 1px #206EA2;
+$checkbox-light-color-border: #B3B3B3;
+$checkbox-light-color-states-checked-border: #206EA2;
+$checkbox-light-color-states-checked-background: #338FCC;
+$checkbox-light-color-states-focused-border: #206EA2;
+$checkbox-light-color-states-focused-shadow: inset 0 0 0 1px white, 0 0 0 1px #206EA2;
+$checkbox-dark-color-border: #B3B3B3;
+$checkbox-dark-color-states-checked-border: #206EA2;
+$checkbox-dark-color-states-checked-background: #338FCC;
+$checkbox-dark-color-states-focused-border: #206EA2;
+$checkbox-dark-color-states-focused-shadow: inset 0 0 0 1px white, 0 0 0 1px #206EA2;
 $checkbox-size-width: 16px;
 $checkbox-size-padding: 24px;
 $checkbox-size-border-width: 1px;
 $checkbox-size-toggle-box-shadow: inset 0 0 1px 0 rgba(0, 0, 0, 0.2);
-$popup-common-color-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
-$popup-common-color-border-color: #B3B3B3;
-$popup-common-color-divider-color: #CCCCCC;
-$popup-common-color-background: white;
-$popup-common-color-footer-background: #F0F0F0;
+$popup-common-light-color-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
+$popup-common-light-color-border: #B3B3B3;
+$popup-common-light-color-divider: #CCCCCC;
+$popup-common-light-color-background: white;
+$popup-common-light-color-footer-background: #F0F0F0;
+$popup-common-dark-color-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
+$popup-common-dark-color-border: #999999;
+$popup-common-dark-color-divider: #666666;
+$popup-common-dark-color-background: #4D4D4D;
+$popup-common-dark-color-footer-background: transparent;
 $datepicker-toggle-size-width: 30px;
 $datepicker-toggle-size-height: 30px;
 $datepicker-body-size-label-padding-side: 33% / 7;
@@ -414,8 +443,10 @@ $list-size-two-line-height: 72px;
 $list-size-three-line-height: 88px;
 $list-size-multi-line-padding: 16px;
 $list-size-icon-width: 24px;
-$modal-color-shadow: (0 0 0 1px #B3B3B3, 0 6px 12px 0 rgba(0, 0, 0, 0.5));
-$modal-color-background-mask: rgba(0, 0, 0, 0.5);
+$modal-light-color-shadow: (0 0 0 1px #B3B3B3, 0 6px 12px 0 rgba(0, 0, 0, 0.5));
+$modal-light-color-background-mask: rgba(0, 0, 0, 0.5);
+$modal-dark-color-shadow: (0 0 0 1px #B3B3B3, 0 6px 12px 0 rgba(0, 0, 0, 0.5));
+$modal-dark-color-background-mask: rgba(0, 0, 0, 0.5);
 $modal-size-top: 48px;
 $modal-size-padding: 0 0 24px;
 $modal-size-close-width: 56px;
@@ -428,16 +459,24 @@ $modal-body-size-padding: 16px 24px 24px;
 $modal-footer-size-border-radius: 0 0 4px 4px;
 $modal-footer-size-padding: 16px;
 $modal-confirm-size-padding: 24px;
-$navbar-color-background: #114E77;
-$navbar-color-color: #D8EAF7;
-$navbar-color-opacity: 0.5;
+$navbar-light-color-background: #114E77;
+$navbar-light-color-color: #D8EAF7;
+$navbar-light-color-opacity: 0.5;
+$navbar-dark-color-background: #114E77;
+$navbar-dark-color-color: #D8EAF7;
+$navbar-dark-color-opacity: 0.5;
 $navbar-size-height: 48px;
 $navbar-size-icon-margin-left: 8px;
-$navbar-item-color-color: #D8EAF7;
-$navbar-item-color-states-active: #206EA2; // lighten(mc-color($primary, 700), 5%)
-$navbar-item-color-states-hover: #206EA2; // lighten(mc-color($primary, 700), 5%)
-$navbar-item-color-states-progress: #07314D; // lighten(mc-color($primary, 800), 5%)
-$navbar-item-color-states-disabled-opacity: 0.3;
+$navbar-item-light-color-color: #D8EAF7;
+$navbar-item-light-color-states-active: #206EA2; // lighten(mc-color($primary, 700), 5%)
+$navbar-item-light-color-states-hover: #206EA2; // lighten(mc-color($primary, 700), 5%)
+$navbar-item-light-color-states-progress: #07314D; // lighten(mc-color($primary, 800), 5%)
+$navbar-item-light-color-states-disabled-opacity: 0.3;
+$navbar-item-dark-color-color: #D8EAF7;
+$navbar-item-dark-color-states-active: #206EA2; // lighten(mc-color($primary, 700), 5%)
+$navbar-item-dark-color-states-hover: #206EA2; // lighten(mc-color($primary, 700), 5%)
+$navbar-item-dark-color-states-progress: #07314D; // lighten(mc-color($primary, 800), 5%)
+$navbar-item-dark-color-states-disabled-opacity: 0.3;
 $navbar-item-size-padding: 16px;
 $navbar-brand-size-padding: 12px;
 $navbar-brand-size-margin-right: 24px;
@@ -445,7 +484,8 @@ $optgroup-size-padding-left: 17px;
 $option-size-padding: 0 16px;
 $option-size-height: 32px;
 $option-size-border-width: 2px;
-$popover-color-border-color: #B3B3B3;
+$popover-light-color-border: #B3B3B3;
+$popover-dark-color-border: #B3B3B3;
 $popover-size-padding: 16px;
 $popover-size-border-width: 1px;
 $popover-size-border-radius: 4px;
@@ -456,9 +496,24 @@ $popover-size-large-width: 640px;
 $popover-header-size-padding: 10px 16px;
 $popover-footer-size-padding: 12px 16px;
 $popover-footer-size-margin-top: 8px;
-$progress-bar-color-background: #F0F0F0;
+$progress-bar-light-color-background: #F0F0F0;
+$progress-bar-dark-color-background: #F0F0F0;
 $progress-bar-size-height: 4px;
 $progress-spinner-size-size: 16px;
+$radio-light-color-outer-circle-border: #B3B3B3;
+$radio-light-color-inner-circle-border: transparent;
+$radio-light-color-outer-circle-checked-state-border: #338FCC;
+$radio-light-color-outer-circle-focused-state-border: #338FCC;
+$radio-light-color-outer-circle-focused-state-shadow: 0 0 0 2px #B3B3B3;
+$radio-light-color-inner-circle-checked-state-border: #338FCC;
+$radio-light-color-inner-circle-focused-state-shadow: 0 0 0 1px white;
+$radio-dark-color-outer-circle-border: #B3B3B3;
+$radio-dark-color-inner-circle-border: transparent;
+$radio-dark-color-outer-circle-checked-state-border: #338FCC;
+$radio-dark-color-outer-circle-focused-state-border: #338FCC;
+$radio-dark-color-outer-circle-focused-state-shadow: 0 0 0 2px #B3B3B3;
+$radio-dark-color-inner-circle-checked-state-border: #338FCC;
+$radio-dark-color-inner-circle-focused-state-shadow: 0 0 0 1px white;
 $radio-size-size: 14px;
 $radio-size-padding: 24px; // Padding between radio inputs and their labels
 $select-size-height: 30px;
@@ -469,41 +524,65 @@ $select-panel-size-max-width: 640px;
 $select-panel-size-vertical-padding: 4px;
 $select-panel-size-border-width: 1px;
 $select-panel-size-border-radius: 3px;
-$sidepanel-color-border: #B3B3B3;
+$sidepanel-light-color-border: #B3B3B3;
+$sidepanel-dark-color-border: #B3B3B3;
 $sidepanel-header-size-padding: 14px 16px;
 $sidepanel-header-size-close-padding: 0 0 0 8px;
 $sidepanel-footer-size-padding: 16px;
 $table-color-border-width: 1px;
 $table-color-row-padding-vertical: 8px;
 $table-color-row-padding-horizontal: 16px;
-$tabs-color-border: #B3B3B3;
-$tabs-color-state-active: #338FCC;
+$tabs-light-color-border: #B3B3B3;
+$tabs-light-color-state-active: #338FCC;
+$tabs-dark-color-border: #B3B3B3;
+$tabs-dark-color-state-active: #338FCC;
 $tabs-size-height: 40px;
 $tabs-size-highlight-height: 4px;
 $tabs-size-padding-horizontal: 16px;
 $tabs-size-border-width: 1px;
 $tabs-size-border-radius: 3px;
-$tags-color-primary-background: #D8EAF7;
-$tags-color-primary-border: #D8EAF7;
-$tags-color-primary-icon: mix(#57A4D7, rgba(black, 0.05));
-$tags-color-primary-icon-hovered: #206EA2;
-$tags-color-primary-state-focused: #338FCC;
-$tags-color-primary-state-disabled: mix(#338FCC, transparent, 50%);
-$tags-color-primary-state-disabled-background: mix(#338FCC, transparent, 10%);
-$tags-color-second-background: #E6E6E6;
-$tags-color-second-border: #E6E6E6;
-$tags-color-second-icon: mix(#999999, rgba(black, 0.05));
-$tags-color-second-icon-hovered: #999999;
-$tags-color-second-state-focused: #338FCC;
-$tags-color-second-state-disabled: mix(#B3B3B3, transparent, 50%);
-$tags-color-second-state-disabled-background: mix(#B3B3B3, transparent, 10%);
-$tags-color-error-background: #FADEDA;
-$tags-color-error-border: #FADEDA;
-$tags-color-error-icon: mix(#E76E5C, rgba(black, 0.05));
-$tags-color-error-icon-hovered: #E04D36;
-$tags-color-error-state-focused: #E76E5C;
-$tags-color-error-state-disabled: mix(#E76E5C, transparent, 50%);
-$tags-color-error-state-disabled-background: mix(#E76E5C, transparent, 10%);
+$tags-light-color-primary-background: #D8EAF7;
+$tags-light-color-primary-border: #D8EAF7;
+$tags-light-color-primary-icon: mix(#57A4D7, rgba(black, 0.05));
+$tags-light-color-primary-icon-hovered: #206EA2;
+$tags-light-color-primary-state-focused: #338FCC;
+$tags-light-color-primary-state-disabled: mix(#338FCC, transparent, 50%);
+$tags-light-color-primary-state-disabled-background: mix(#338FCC, transparent, 10%);
+$tags-light-color-second-background: #E6E6E6;
+$tags-light-color-second-border: #E6E6E6;
+$tags-light-color-second-icon: mix(#999999, rgba(black, 0.05));
+$tags-light-color-second-icon-hovered: #999999;
+$tags-light-color-second-state-focused: #338FCC;
+$tags-light-color-second-state-disabled: mix(#B3B3B3, transparent, 50%);
+$tags-light-color-second-state-disabled-background: mix(#B3B3B3, transparent, 10%);
+$tags-light-color-error-background: #FADEDA;
+$tags-light-color-error-border: #FADEDA;
+$tags-light-color-error-icon: mix(#E76E5C, rgba(black, 0.05));
+$tags-light-color-error-icon-hovered: #E04D36;
+$tags-light-color-error-state-focused: #E76E5C;
+$tags-light-color-error-state-disabled: mix(#E76E5C, transparent, 50%);
+$tags-light-color-error-state-disabled-background: mix(#E76E5C, transparent, 10%);
+$tags-dark-color-primary-background: #D8EAF7;
+$tags-dark-color-primary-border: #D8EAF7;
+$tags-dark-color-primary-icon: mix(#57A4D7, rgba(black, 0.05));
+$tags-dark-color-primary-icon-hovered: #206EA2;
+$tags-dark-color-primary-state-focused: #338FCC;
+$tags-dark-color-primary-state-disabled: mix(#338FCC, transparent, 50%);
+$tags-dark-color-primary-state-disabled-background: mix(#338FCC, transparent, 10%);
+$tags-dark-color-second-background: #E6E6E6;
+$tags-dark-color-second-border: #E6E6E6;
+$tags-dark-color-second-icon: mix(#999999, rgba(black, 0.05));
+$tags-dark-color-second-icon-hovered: #999999;
+$tags-dark-color-second-state-focused: #338FCC;
+$tags-dark-color-second-state-disabled: mix(#B3B3B3, transparent, 50%);
+$tags-dark-color-second-state-disabled-background: mix(#B3B3B3, transparent, 10%);
+$tags-dark-color-error-background: #FADEDA;
+$tags-dark-color-error-border: #FADEDA;
+$tags-dark-color-error-icon: mix(#E76E5C, rgba(black, 0.05));
+$tags-dark-color-error-icon-hovered: #E04D36;
+$tags-dark-color-error-state-focused: #E76E5C;
+$tags-dark-color-error-state-disabled: mix(#E76E5C, transparent, 50%);
+$tags-dark-color-error-state-disabled-background: mix(#E76E5C, transparent, 10%);
 $tags-size-margin: 2px;
 $tags-size-height: 24px;
 $tags-size-border-width: 1px;
@@ -516,11 +595,16 @@ $tag-input-size-height: 22px;
 $tag-input-size-margin: 2px 4px;
 $textarea-size-min-height: 50px;
 $textarea-size-padding: 5px 16px;
-$toggle-color-border: #B3B3B3;
-$toggle-color-background: linear-gradient(to bottom, #E6E6E6, #F0F0F0);
-$toggle-color-circle-border: #B3B3B3;
-$toggle-color-circle-background: linear-gradient(to bottom, white, #E6E6E6);
-$toggle-color-state-focused: inset 0 0 0 1px white, 0 0 0 2px #338FCC;
+$toggle-light-color-border: #B3B3B3;
+$toggle-light-color-background: linear-gradient(to bottom, #E6E6E6, #F0F0F0);
+$toggle-light-color-circle-border: #B3B3B3;
+$toggle-light-color-circle-background: linear-gradient(to bottom, white, #E6E6E6);
+$toggle-light-color-state-focused: inset 0 0 0 1px white, 0 0 0 2px #338FCC;
+$toggle-dark-color-border: #B3B3B3;
+$toggle-dark-color-background: linear-gradient(to bottom, #E6E6E6, #F0F0F0);
+$toggle-dark-color-circle-border: #B3B3B3;
+$toggle-dark-color-circle-background: linear-gradient(to bottom, white, #E6E6E6);
+$toggle-dark-color-state-focused: inset 0 0 0 1px white, 0 0 0 2px #338FCC;
 $toggle-size-height: 16px;
 $toggle-size-width: 28px;
 $toggle-size-border-radius: 9px;
@@ -528,9 +612,12 @@ $toggle-size-label-margin: 8px;
 $toggle-small-size-height: 14px;
 $toggle-small-size-width: 24px;
 $toggle-small-size-border-radius: 8px;
-$tooltip-color-background: #4D4D4D;
-$tooltip-color-color: white;
-$tooltip-color-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+$tooltip-light-color-background: #4D4D4D;
+$tooltip-light-color-color: white;
+$tooltip-light-color-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+$tooltip-dark-color-background: #4D4D4D;
+$tooltip-dark-color-color: white;
+$tooltip-dark-color-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 $tooltip-size-max-width: 240px;
 $tooltip-size-min-height: 32px; // 16px for font + 16px for padding = total 32px
 $tooltip-size-border-radius: 3px;
@@ -541,12 +628,18 @@ $tooltip-size-distance: 5px + 4px;
 $tree-color-background: #4D4D4D;
 $tree-size-border-width: 2px;
 $tree-size-node-height: 28px;
-$vertical-navbar-color-background: #114E77;
-$vertical-navbar-color-color: white;
-$vertical-navbar-color-toggle-button: white;
-$vertical-navbar-color-state-hovered-background: lighten(#114E77, 5%);
-$vertical-navbar-color-state-active-background: lighten(#114E77, 5%);
-$vertical-navbar-color-state-progress-background: lighten(#07314D, 15%);
+$vertical-navbar-light-color-background: #114E77;
+$vertical-navbar-light-color-color: white;
+$vertical-navbar-light-color-toggle-button: white;
+$vertical-navbar-light-color-state-hovered-background: lighten(#114E77, 5%);
+$vertical-navbar-light-color-state-active-background: lighten(#114E77, 5%);
+$vertical-navbar-light-color-state-progress-background: lighten(#07314D, 15%);
+$vertical-navbar-dark-color-background: #114E77;
+$vertical-navbar-dark-color-color: white;
+$vertical-navbar-dark-color-toggle-button: white;
+$vertical-navbar-dark-color-state-hovered-background: lighten(#114E77, 5%);
+$vertical-navbar-dark-color-state-active-background: lighten(#114E77, 5%);
+$vertical-navbar-dark-color-state-progress-background: lighten(#07314D, 15%);
 $vertical-navbar-item-size-height: 64px;
 $vertical-navbar-item-size-margin: 1px 0;
 $vertical-navbar-item-size-padding-horizontal: 16px;
