@@ -1,11 +1,11 @@
 {
     "popup-common": {
         "color": {
-            "shadow": { "value": "0 3px 3px 0 {color.second.palette.value.A200.value}" },
-            "border-color": { "value": "{color.second.default.value}" },
-            "divider-color": { "value": "{color.second.palette.value.200.value}" },
-            "background": { "value": "{color.background.background-popup.value}" },
-            "footer-background": { "value": "{color.background.background-popup-footer.value}" }
+            "shadow": { "value": "0 3px 3px 0 {light-color.second.palette.value.A200.value}" },
+            "border-color": { "value": "{light-color.second.default.value}" },
+            "divider-color": { "value": "{light-color.second.palette.value.200.value}" },
+            "background": { "value": "{light-color.background.background-popup.value}" },
+            "footer-background": { "value": "{light-color.background.background-popup-footer.value}" }
         },
         "size": {},
         "font": {}

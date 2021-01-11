@@ -1,8 +1,8 @@
 {
     "tabs": {
         "color": {
-            "border": { "value": "{color.second.palette.value.300.value}" },
-            "state-active": { "value": "{color.primary.default.value}" }
+            "border": { "value": "{light-color.second.palette.value.300.value}" },
+            "state-active": { "value": "{light-color.primary.default.value}" }
         },
         "size": {
             "height": { "value": "40px" },

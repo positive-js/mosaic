@@ -1,7 +1,7 @@
 {
     "sidepanel": {
         "color": {
-            "border": { "value": "{color.second.palette.value.300.value}" }
+            "border": { "value": "{light-color.second.palette.value.300.value}" }
         },
         "size": {},
         "font": {}
