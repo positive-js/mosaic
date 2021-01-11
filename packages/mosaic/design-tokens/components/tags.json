@@ -2,31 +2,31 @@
     "tags": {
         "color": {
             "primary": {
-                "background": { "value": "{light-color.primary.palette.value.100.value}" },
-                "border": { "value": "{light-color.primary.palette.value.100.value}" },
-                "icon": { "value": "mix({light-color.primary.palette.value.400.value}, {light-color.background.overlay-hovered.value})" },
-                "icon-hovered": { "value": "{light-color.primary.darker.value}" },
-                "state-focused": { "value": "{light-color.primary.default.value}" },
-                "state-disabled": { "value": "mix({light-color.primary.default.value}, transparent, 50%)" },
-                "state-disabled-background": { "value": "mix({light-color.primary.default.value}, transparent, 10%)" }
+                "background": { "value": "{lightColor.primary.palette.value.100.value}" },
+                "border": { "value": "{lightColor.primary.palette.value.100.value}" },
+                "icon": { "value": "mix({lightColor.primary.palette.value.400.value}, {lightColor.background.overlay-hovered.value})" },
+                "icon-hovered": { "value": "{lightColor.primary.darker.value}" },
+                "state-focused": { "value": "{lightColor.primary.default.value}" },
+                "state-disabled": { "value": "mix({lightColor.primary.default.value}, transparent, 50%)" },
+                "state-disabled-background": { "value": "mix({lightColor.primary.default.value}, transparent, 10%)" }
             },
             "second": {
-                "background": { "value": "{light-color.second.palette.value.100.value}" },
-                "border": { "value": "{light-color.second.palette.value.100.value}" },
-                "icon": { "value": "mix({light-color.second.palette.value.400.value}, {light-color.background.overlay-hovered.value})" },
-                "icon-hovered": { "value": "{light-color.second.darker.value}" },
-                "state-focused": { "value": "{light-color.primary.default.value}" },
-                "state-disabled": { "value": "mix({light-color.second.default.value}, transparent, 50%)" },
-                "state-disabled-background": { "value": "mix({light-color.second.default.value}, transparent, 10%)" }
+                "background": { "value": "{lightColor.second.palette.value.100.value}" },
+                "border": { "value": "{lightColor.second.palette.value.100.value}" },
+                "icon": { "value": "mix({lightColor.second.palette.value.400.value}, {lightColor.background.overlay-hovered.value})" },
+                "icon-hovered": { "value": "{lightColor.second.darker.value}" },
+                "state-focused": { "value": "{lightColor.primary.default.value}" },
+                "state-disabled": { "value": "mix({lightColor.second.default.value}, transparent, 50%)" },
+                "state-disabled-background": { "value": "mix({lightColor.second.default.value}, transparent, 10%)" }
             },
             "error": {
-                "background": { "value": "{light-color.error.palette.value.100.value}" },
-                "border": { "value": "{light-color.error.palette.value.100.value}" },
-                "icon": { "value": "mix({light-color.error.palette.value.400.value}, {light-color.background.overlay-hovered.value})" },
-                "icon-hovered": { "value": "{light-color.error.darker.value}" },
-                "state-focused": { "value": "{light-color.error.default.value}" },
-                "state-disabled": { "value": "mix({light-color.error.default.value}, transparent, 50%)" },
-                "state-disabled-background": { "value": "mix({light-color.error.default.value}, transparent, 10%)" }
+                "background": { "value": "{lightColor.error.palette.value.100.value}" },
+                "border": { "value": "{lightColor.error.palette.value.100.value}" },
+                "icon": { "value": "mix({lightColor.error.palette.value.400.value}, {lightColor.background.overlay-hovered.value})" },
+                "icon-hovered": { "value": "{lightColor.error.darker.value}" },
+                "state-focused": { "value": "{lightColor.error.default.value}" },
+                "state-disabled": { "value": "mix({lightColor.error.default.value}, transparent, 50%)" },
+                "state-disabled-background": { "value": "mix({lightColor.error.default.value}, transparent, 10%)" }
             }
         },
         "size": {

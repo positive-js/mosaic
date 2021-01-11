@@ -8,16 +8,16 @@
             },
             "primary": {
                 "color": {
-                    "value": "{light-color.primary.default-contrast.value}"
+                    "value": "{lightColor.primary.default-contrast.value}"
                 },
                 "border-color": {
-                    "value": "{light-color.primary.palette.value.560.value}"
+                    "value": "{lightColor.primary.palette.value.560.value}"
                 },
                 "background": {
-                    "value": "{light-color.primary.palette.value.500.value}"
+                    "value": "{lightColor.primary.palette.value.500.value}"
                 },
                 "icon-color": {
-                    "value": "{light-color.primary.default-contrast.value}"
+                    "value": "{lightColor.primary.default-contrast.value}"
                 },
 
                 "active": {
@@ -33,50 +33,50 @@
             },
             "second": {
                 "border-color": {
-                    "value": "{light-color.foreground.border.value}"
+                    "value": "{lightColor.foreground.border.value}"
                 },
                 "background": {
-                    "value": "{light-color.background.background-disabled.value}"
+                    "value": "{lightColor.background.background-disabled.value}"
                 },
                 "color": {
-                    "value": "{light-color.foreground.text.value}"
+                    "value": "{lightColor.foreground.text.value}"
                 },
                 "icon-color": {
-                    "value": "{light-color.foreground.text-less-contrast.value}"
+                    "value": "{lightColor.foreground.text-less-contrast.value}"
                 },
 
                 "active": {
                     "border-color": {
-                        "value": "{light-color.foreground.border.value}",
+                        "value": "{lightColor.foreground.border.value}",
                         "comment": "darken(mc-color($foreground, border), 5)"
                     },
                     "background": {
-                        "value": "{light-color.background.background-disabled.value}",
+                        "value": "{lightColor.background.background-disabled.value}",
                         "comment": "darken(map-get($background, background-disabled), 5"
                     }
                 }
             },
             "error": {
                 "border-color": {
-                    "value": "{light-color.foreground.border.value}"
+                    "value": "{lightColor.foreground.border.value}"
                 },
                 "background": {
-                    "value": "{light-color.background.background-disabled.value}"
+                    "value": "{lightColor.background.background-disabled.value}"
                 },
                 "color": {
-                    "value": "{light-color.error.default.value}"
+                    "value": "{lightColor.error.default.value}"
                 },
                 "icon-color": {
-                    "value": "{light-color.error.palette.value.400.value}"
+                    "value": "{lightColor.error.palette.value.400.value}"
                 },
 
                 "active": {
                     "border-color": {
-                        "value": "{light-color.foreground.border.value}",
+                        "value": "{lightColor.foreground.border.value}",
                         "comment": "darken(mc-color($foreground, border), 5)"
                     },
                     "background": {
-                        "value": "{light-color.background.background-disabled.value}",
+                        "value": "{lightColor.background.background-disabled.value}",
                         "comment": "darken(map-get($background, background-disabled), 5"
                     }
                 }

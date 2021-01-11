@@ -1,7 +1,7 @@
 {
     "popover": {
         "color": {
-            "border-color": { "value": "{light-color.foreground.border.value}" }
+            "border-color": { "value": "{lightColor.foreground.border.value}" }
         },
         "size": {
             "padding": { "value": "16px" },

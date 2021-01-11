@@ -1,8 +1,8 @@
 {
     "navbar": {
         "color": {
-            "background": { "value": "{light-color.primary.palette.value.700.value}" },
-            "color": { "value": "{light-color.primary.palette.value.100.value}" },
+            "background": { "value": "{lightColor.primary.palette.value.700.value}" },
+            "color": { "value": "{lightColor.primary.palette.value.100.value}" },
             "opacity": { "value": 0.5 }
         },
         "size": {
@@ -13,19 +13,19 @@
     },
     "navbar-item": {
         "color": {
-            "color": { "value": "{light-color.primary.palette.value.100.value}" },
+            "color": { "value": "{lightColor.primary.palette.value.100.value}" },
 
             "states": {
                 "active": {
-                    "value": "{light-color.primary.palette.value.600.value}",
+                    "value": "{lightColor.primary.palette.value.600.value}",
                     "comment": "lighten(mc-color($primary, 700), 5%)"
                 },
                 "hover": {
-                    "value": "{light-color.primary.palette.value.600.value}",
+                    "value": "{lightColor.primary.palette.value.600.value}",
                     "comment": "lighten(mc-color($primary, 700), 5%)"
                 },
                 "progress": {
-                    "value": "{light-color.primary.palette.value.800.value}",
+                    "value": "{lightColor.primary.palette.value.800.value}",
                     "comment": "lighten(mc-color($primary, 800), 5%)"
                 },
                 "disabled-opacity": { "value": 0.3 }

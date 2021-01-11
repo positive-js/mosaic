@@ -1,14 +1,14 @@
 {
     "toggle": {
         "color": {
-            "border": { "value": "{light-color.foreground.border.value}" },
+            "border": { "value": "{lightColor.foreground.border.value}" },
             "background": {
-                "value": "linear-gradient(to bottom, {light-color.second.lighter.value}, {light-color.background.background-disabled.value})"
+                "value": "linear-gradient(to bottom, {lightColor.second.lighter.value}, {lightColor.background.background-disabled.value})"
             },
-            "circle-border": { "value": "{light-color.foreground.border.value}" },
-            "circle-background": { "value": "linear-gradient(to bottom, white, {light-color.second.lighter.value})" },
+            "circle-border": { "value": "{lightColor.foreground.border.value}" },
+            "circle-background": { "value": "linear-gradient(to bottom, white, {lightColor.second.lighter.value})" },
 
-            "state-focused": { "value": "inset 0 0 0 1px {light-color.background.background.value}, 0 0 0 2px {light-color.primary.default.value}" }
+            "state-focused": { "value": "inset 0 0 0 1px {lightColor.background.background.value}, 0 0 0 2px {lightColor.primary.default.value}" }
         },
         "size": {
             "height": { "value": "16px" },

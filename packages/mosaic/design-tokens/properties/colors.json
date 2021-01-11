@@ -1,5 +1,5 @@
 {
-    "light-color": {
+    "lightColor": {
         "primary": {
             "lighter": { "value": "{palette.blue.400.value}" },
             "default": { "value": "{palette.blue.500.value}" },
@@ -85,13 +85,13 @@
             "overlay-disabled": { "value": "rgba(white, 0.3)" }
         },
         "states": {
-            "focused-color": { "value": "{light-color.primary.default.value}" },
-            "selected-color": { "value": "{light-color.primary.palette.value.100.value}" },
+            "focused-color": { "value": "{lightColor.primary.default.value}" },
+            "selected-color": { "value": "{lightColor.primary.palette.value.100.value}" },
             "pressed-shadow": { "value": "inset 0 1px 2px 0 rgba(black, 0.2)" },
             "disabled-opacity": { "value": 0.3 }
         }
     },
-    "dark-color": {
+    "darkColor": {
         "primary": {
             "lighter": { "value": "{palette.blue.300.value}" },
             "default": { "value": "{palette.blue.400.value}" },
@@ -177,8 +177,8 @@
             "overlay-disabled": { "value": "rgba(white, 0.2)" }
         },
         "states": {
-            "focused-color": { "value": "{light-color.primary.default.value}" },
-            "selected-color": { "value": "{light-color.primary.palette.value.700.value}" },
+            "focused-color": { "value": "{lightColor.primary.default.value}" },
+            "selected-color": { "value": "{lightColor.primary.palette.value.700.value}" },
             "pressed-shadow": { "value": "inset 1px 2px 2px 0 rgba(black, 0.2)" },
             "disabled-opacity": { "value": 0.3 }
         }

@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 11 Jan 2021 08:28:46 GMT
+ * Generated on Mon, 11 Jan 2021 09:31:23 GMT
  */
 
 export const LightColorPrimaryLighter = "#57A4D7";
@@ -395,8 +395,8 @@ export const CheckboxSizePadding = "24px";
 export const CheckboxSizeBorderWidth = "1px";
 export const CheckboxSizeToggleBoxShadow = "inset 0 0 1px 0 rgba(0, 0, 0, 0.2)";
 export const PopupCommonColorShadow = "0 3px 3px 0 rgba(0, 0, 0, 0.2)";
-export const PopupCommonColorBorderColor = "#B3B3B3";
-export const PopupCommonColorDividerColor = "#CCCCCC";
+export const PopupCommonColorBorder = "#B3B3B3";
+export const PopupCommonColorDivider = "#CCCCCC";
 export const PopupCommonColorBackground = "white";
 export const PopupCommonColorFooterBackground = "#F0F0F0";
 export const DatepickerToggleSizeWidth = "30px";

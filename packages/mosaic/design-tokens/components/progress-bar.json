@@ -1,7 +1,7 @@
 {
     "progress-bar": {
         "color": {
-            "background": { "value": "{light-color.second.palette.value.60.value}" }
+            "background": { "value": "{lightColor.second.palette.value.60.value}" }
         },
         "size": {
             "height": { "value": "4px" }

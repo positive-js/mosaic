@@ -1,7 +1,7 @@
 {
     "modal": {
         "color": {
-            "shadow": { "value": "(0 0 0 1px {light-color.second.palette.value.300.value}, 0 6px 12px 0 rgba(0, 0, 0, 0.5))" },
+            "shadow": { "value": "(0 0 0 1px {lightColor.second.palette.value.300.value}, 0 6px 12px 0 rgba(0, 0, 0, 0.5))" },
             "background-mask": { "value": "rgba(0, 0, 0, 0.5)" }
         },
         "size": {
