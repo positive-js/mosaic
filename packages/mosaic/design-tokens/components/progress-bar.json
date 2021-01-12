@@ -1,8 +1,14 @@
 {
     "progress-bar": {
-        "lightColor": { "background": { "value": "{lightColor.second.palette.value.60.value}" } },
-        "darkColor": { "background": { "value": "{lightColor.second.palette.value.60.value}" } },
-        "size": { "height": { "value": "4px" } },
+        "lightColor": {
+            "background": { "value": "{lightColor.second.palette.value.60.value}" }
+        },
+        "darkColor": {
+            "background": { "value": "{darkColor.second.palette.value.600.value}" }
+        },
+        "size": {
+            "height": { "value": "4px" }
+        },
         "font": {}
     }
 }

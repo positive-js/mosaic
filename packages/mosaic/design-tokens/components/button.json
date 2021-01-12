@@ -12,12 +12,10 @@
 
                 "active": {
                     "border": {
-                        "value": "{palette.blue.560.value}",
-                        "comment": "darken(mc-color($primary, 560), 5)"
+                        "value": "darken({lightColor.primary.palette.value.560.value}, 5)"
                     },
                     "background": {
-                        "value": "{palette.blue.500.value}",
-                        "comment": "darken(mc-color($primary, 560), 5)"
+                        "value": "darken({lightColor.primary.palette.value.500.value}, 5)"
                     }
                 }
             },
@@ -29,12 +27,10 @@
 
                 "active": {
                     "border": {
-                        "value": "{lightColor.foreground.border.value}",
-                        "comment": "darken(mc-color($foreground, border), 5)"
+                        "value": "darken({lightColor.foreground.border.value}, 5)"
                     },
                     "background": {
-                        "value": "{lightColor.background.background-disabled.value}",
-                        "comment": "darken(map-get($background, background-disabled), 5"
+                        "value": "darken({lightColor.background.background-disabled.value}, 5)"
                     }
                 }
             },
@@ -46,68 +42,60 @@
 
                 "active": {
                     "border": {
-                        "value": "{lightColor.foreground.border.value}",
-                        "comment": "darken(mc-color($foreground, border), 5)"
+                        "value": "darken({lightColor.foreground.border.value}, 5)"
                     },
                     "background": {
-                        "value": "{lightColor.background.background-disabled.value}",
-                        "comment": "darken(map-get($background, background-disabled), 5"
+                        "value": "darken({lightColor.background.background-disabled.value}, 5)"
                     }
                 }
             }
         },
         "darkColor": {
             "active": {
-                "shadow": { "value": "inset 0 1px 2px 0 rgba(black, 0.2)" }
+                "shadow": { "value": "inset 1px 2px 2px 0 rgba(black, 0.2)" }
             },
             "primary": {
-                "color": { "value": "{lightColor.primary.default-contrast.value}" },
-                "border": { "value": "{lightColor.primary.palette.value.560.value}" },
-                "background": { "value": "{lightColor.primary.palette.value.500.value}" },
-                "icon": { "value": "{lightColor.primary.default-contrast.value}" },
+                "color": { "value": "{darkColor.primary.default-contrast.value}" },
+                "border": { "value": "{darkColor.primary.palette.value.560.value}" },
+                "background": { "value": "{darkColor.primary.palette.value.500.value}" },
+                "icon": { "value": "{darkColor.primary.default-contrast.value}" },
 
                 "active": {
                     "border": {
-                        "value": "{palette.blue.560.value}",
-                        "comment": "darken(mc-color($primary, 560), 5)"
+                        "value": "darken({darkColor.primary.palette.value.560.value}, 5)"
                     },
                     "background": {
-                        "value": "{palette.blue.500.value}",
-                        "comment": "darken(mc-color($primary, 560), 5)"
+                        "value": "darken({darkColor.primary.default.value}, 5)"
                     }
                 }
             },
             "second": {
-                "border": { "value": "{lightColor.foreground.border.value}" },
-                "background": { "value": "{lightColor.background.background-disabled.value}" },
-                "color": { "value": "{lightColor.foreground.text.value}" },
-                "icon": { "value": "{lightColor.foreground.text-less-contrast.value}" },
+                "border": { "value": "{darkColor.foreground.border.value}" },
+                "background": { "value": "{darkColor.background.background-disabled.value}" },
+                "color": { "value": "{darkColor.foreground.text.value}" },
+                "icon": { "value": "{darkColor.foreground.text-less-contrast.value}" },
 
                 "active": {
                     "border": {
-                        "value": "{lightColor.foreground.border.value}",
-                        "comment": "darken(mc-color($foreground, border), 5)"
+                        "value": "darken({darkColor.foreground.border.value}, 5)"
                     },
                     "background": {
-                        "value": "{lightColor.background.background-disabled.value}",
-                        "comment": "darken(map-get($background, background-disabled), 5"
+                        "value": "darken({darkColor.background.background-disabled.value}, 5)"
                     }
                 }
             },
             "error": {
-                "border": { "value": "{lightColor.foreground.border.value}" },
-                "background": { "value": "{lightColor.background.background-disabled.value}" },
-                "color": { "value": "{lightColor.error.default.value}" },
-                "icon": { "value": "{lightColor.error.palette.value.400.value}" },
+                "border": { "value": "{darkColor.foreground.border.value}" },
+                "background": { "value": "{darkColor.background.background-disabled.value}" },
+                "color": { "value": "{darkColor.error.default.value}" },
+                "icon": { "value": "{darkColor.error.palette.value.400.value}" },
 
                 "active": {
                     "border": {
-                        "value": "{lightColor.foreground.border.value}",
-                        "comment": "darken(mc-color($foreground, border), 5)"
+                        "value": "darken({darkColor.foreground.border.value}, 5)"
                     },
                     "background": {
-                        "value": "{lightColor.background.background-disabled.value}",
-                        "comment": "darken(map-get($background, background-disabled), 5"
+                        "value": "darken({darkColor.background.background-disabled.value}, 5)"
                     }
                 }
             }

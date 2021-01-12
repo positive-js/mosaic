@@ -14,15 +14,15 @@
             }
         },
         "darkColor": {
-            "border": { "value": "{lightColor.second.default.value}" },
+            "border": { "value": "{darkColor.second.default.value}" },
             "states": {
                 "checked": {
-                    "border": { "value": "{lightColor.primary.darker.value}" },
-                    "background": { "value": "{lightColor.primary.default.value}" }
+                    "border": { "value": "{darkColor.primary.lighter.value}" },
+                    "background": { "value": "{darkColor.primary.palette.value.600.value}" }
                 },
                 "focused": {
-                    "border": { "value": "{lightColor.primary.darker.value}" },
-                    "shadow": { "value": "inset 0 0 0 1px {lightColor.background.background.value}, 0 0 0 1px {lightColor.primary.darker.value}" }
+                    "border": { "value": "{darkColor.primary.default.value}" },
+                    "shadow": { "value": "inset 0 0 0 1px {darkColor.background.background.value}, 0 0 0 1px {darkColor.primary.default.value}" }
                 }
             }
         },

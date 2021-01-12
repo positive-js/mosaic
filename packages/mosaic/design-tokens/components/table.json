@@ -1,13 +1,13 @@
 {
     "table": {
-        "color": {
+        "color": {},
+        "size": {
             "border-width": { "value": "1px" },
             "row-padding": {
                 "vertical": { "value": "8px" },
                 "horizontal": { "value": "16px" }
             }
         },
-        "size": {},
         "font": {}
     }
 }

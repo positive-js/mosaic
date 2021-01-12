@@ -5,8 +5,8 @@
             "state-active": { "value": "{lightColor.primary.default.value}" }
         },
         "darkColor": {
-            "border": { "value": "{lightColor.second.palette.value.300.value}" },
-            "state-active": { "value": "{lightColor.primary.default.value}" }
+            "border": { "value": "{darkColor.second.palette.value.300.value}" },
+            "state-active": { "value": "{darkColor.primary.default.value}" }
         },
         "size": {
             "height": { "value": "40px" },

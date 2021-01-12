@@ -1,7 +1,11 @@
 {
     "sidepanel": {
-        "lightColor": { "border": { "value": "{lightColor.second.palette.value.300.value}" } },
-        "darkColor": { "border": { "value": "{lightColor.second.palette.value.300.value}" } },
+        "lightColor": {
+            "border": { "value": "{lightColor.second.palette.value.300.value}" }
+        },
+        "darkColor": {
+            "border": { "value": "{darkColor.second.palette.value.800.value}" }
+        },
         "size": {},
         "font": {}
     },

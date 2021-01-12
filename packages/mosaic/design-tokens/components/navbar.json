@@ -6,8 +6,8 @@
             "opacity": { "value": 0.5 }
         },
         "darkColor": {
-            "background": { "value": "{lightColor.primary.palette.value.700.value}" },
-            "color": { "value": "{lightColor.primary.palette.value.100.value}" },
+            "background": { "value": "{darkColor.primary.palette.value.700.value}" },
+            "color": { "value": "{darkColor.primary.palette.value.100.value}" },
             "opacity": { "value": 0.5 }
         },
         "size": {
@@ -21,37 +21,19 @@
             "color": { "value": "{lightColor.primary.palette.value.100.value}" },
 
             "states": {
-                "active": {
-                    "value": "{lightColor.primary.palette.value.600.value}",
-                    "comment": "lighten(mc-color($primary, 700), 5%)"
-                },
-                "hover": {
-                    "value": "{lightColor.primary.palette.value.600.value}",
-                    "comment": "lighten(mc-color($primary, 700), 5%)"
-                },
-                "progress": {
-                    "value": "{lightColor.primary.palette.value.800.value}",
-                    "comment": "lighten(mc-color($primary, 800), 5%)"
-                },
+                "active": { "value": "lighten({lightColor.primary.palette.value.600.value}, 5%)" },
+                "hover": { "value": "lighten({lightColor.primary.palette.value.600.value}, 5%)" },
+                "progress": { "value": "lighten({lightColor.primary.palette.value.800.value}, 5%)" },
                 "disabled-opacity": { "value": 0.3 }
             }
         },
         "darkColor": {
-            "color": { "value": "{lightColor.primary.palette.value.100.value}" },
+            "color": { "value": "{darkColor.primary.palette.value.100.value}" },
 
             "states": {
-                "active": {
-                    "value": "{lightColor.primary.palette.value.600.value}",
-                    "comment": "lighten(mc-color($primary, 700), 5%)"
-                },
-                "hover": {
-                    "value": "{lightColor.primary.palette.value.600.value}",
-                    "comment": "lighten(mc-color($primary, 700), 5%)"
-                },
-                "progress": {
-                    "value": "{lightColor.primary.palette.value.800.value}",
-                    "comment": "lighten(mc-color($primary, 800), 5%)"
-                },
+                "active": { "value": "lighten({darkColor.primary.palette.value.700.value}, 5%)" },
+                "hover": { "value": "lighten({darkColor.primary.palette.value.700.value}, 5%)" },
+                "progress": { "value": "lighten({darkColor.primary.palette.value.800.value}, 15%)" },
                 "disabled-opacity": { "value": 0.3 }
             }
         },

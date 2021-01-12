@@ -12,15 +12,15 @@
             "inner-circle_focused-state_shadow": { "value": "0 0 0 1px {lightColor.background.background.value}" }
         },
         "darkColor": {
-            "outer-circle_border": { "value": "{lightColor.second.default.value}" },
+            "outer-circle_border": { "value": "{darkColor.second.default.value}" },
             "inner-circle_border": { "value": "transparent" },
 
-            "outer-circle_checked-state_border": { "value": "{lightColor.primary.default.value}" },
-            "outer-circle_focused-state_border": { "value": "{lightColor.states.focused-color.value}" },
-            "outer-circle_focused-state_shadow": { "value": "0 0 0 2px {lightColor.second.default.value}" },
+            "outer-circle_checked-state_border": { "value": "{darkColor.primary.default.value}" },
+            "outer-circle_focused-state_border": { "value": "{darkColor.states.focused-color.value}" },
+            "outer-circle_focused-state_shadow": { "value": "0 0 0 2px {darkColor.states.focused-color.value}" },
 
-            "inner-circle_checked-state_border": { "value": "{lightColor.primary.default.value}" },
-            "inner-circle_focused-state_shadow": { "value": "0 0 0 1px {lightColor.background.background.value}" }
+            "inner-circle_checked-state_border": { "value": "{darkColor.primary.palette.value.600.value}" },
+            "inner-circle_focused-state_shadow": { "value": "0 0 0 1px {darkColor.background.background.value}" }
         },
         "size": {
             "size": { "value": "14px" },

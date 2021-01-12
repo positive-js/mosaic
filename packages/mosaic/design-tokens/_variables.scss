@@ -1,6 +1,6 @@
 
 // Do not edit directly
-// Generated on Mon, 11 Jan 2021 12:21:44 GMT
+// Generated on Tue, 12 Jan 2021 07:37:59 GMT
 
 $light-color-primary-lighter: #57A4D7;
 $light-color-primary-default: #338FCC;
@@ -345,39 +345,39 @@ $button-light-color-primary-color: white;
 $button-light-color-primary-border: #277BB3;
 $button-light-color-primary-background: #338FCC;
 $button-light-color-primary-icon: white;
-$button-light-color-primary-active-border: #277BB3; // darken(mc-color($primary, 560), 5)
-$button-light-color-primary-active-background: #338FCC; // darken(mc-color($primary, 560), 5)
+$button-light-color-primary-active-border: darken(#277BB3, 5);
+$button-light-color-primary-active-background: darken(#338FCC, 5);
 $button-light-color-second-border: #B3B3B3;
 $button-light-color-second-background: #F0F0F0;
 $button-light-color-second-color: #4D4D4D;
 $button-light-color-second-icon: #999999;
-$button-light-color-second-active-border: #B3B3B3; // darken(mc-color($foreground, border), 5)
-$button-light-color-second-active-background: #F0F0F0; // darken(map-get($background, background-disabled), 5
+$button-light-color-second-active-border: darken(#B3B3B3, 5);
+$button-light-color-second-active-background: darken(#F0F0F0, 5);
 $button-light-color-error-border: #B3B3B3;
 $button-light-color-error-background: #F0F0F0;
 $button-light-color-error-color: #E76E5C;
 $button-light-color-error-icon: #E76E5C;
-$button-light-color-error-active-border: #B3B3B3; // darken(mc-color($foreground, border), 5)
-$button-light-color-error-active-background: #F0F0F0; // darken(map-get($background, background-disabled), 5
-$button-dark-color-active-shadow: inset 0 1px 2px 0 rgba(black, 0.2);
+$button-light-color-error-active-border: darken(#B3B3B3, 5);
+$button-light-color-error-active-background: darken(#F0F0F0, 5);
+$button-dark-color-active-shadow: inset 1px 2px 2px 0 rgba(black, 0.2);
 $button-dark-color-primary-color: white;
 $button-dark-color-primary-border: #277BB3;
 $button-dark-color-primary-background: #338FCC;
 $button-dark-color-primary-icon: white;
-$button-dark-color-primary-active-border: #277BB3; // darken(mc-color($primary, 560), 5)
-$button-dark-color-primary-active-background: #338FCC; // darken(mc-color($primary, 560), 5)
-$button-dark-color-second-border: #B3B3B3;
-$button-dark-color-second-background: #F0F0F0;
-$button-dark-color-second-color: #4D4D4D;
+$button-dark-color-primary-active-border: darken(#277BB3, 5);
+$button-dark-color-primary-active-background: darken(#57A4D7, 5);
+$button-dark-color-second-border: #808080;
+$button-dark-color-second-background: #666666;
+$button-dark-color-second-color: #F0F0F0;
 $button-dark-color-second-icon: #999999;
-$button-dark-color-second-active-border: #B3B3B3; // darken(mc-color($foreground, border), 5)
-$button-dark-color-second-active-background: #F0F0F0; // darken(map-get($background, background-disabled), 5
-$button-dark-color-error-border: #B3B3B3;
-$button-dark-color-error-background: #F0F0F0;
+$button-dark-color-second-active-border: darken(#808080, 5);
+$button-dark-color-second-active-background: darken(#666666, 5);
+$button-dark-color-error-border: #808080;
+$button-dark-color-error-background: #666666;
 $button-dark-color-error-color: #E76E5C;
 $button-dark-color-error-icon: #E76E5C;
-$button-dark-color-error-active-border: #B3B3B3; // darken(mc-color($foreground, border), 5)
-$button-dark-color-error-active-background: #F0F0F0; // darken(map-get($background, background-disabled), 5
+$button-dark-color-error-active-border: darken(#808080, 5);
+$button-dark-color-error-active-background: darken(#666666, 5);
 $button-size-padding: 5px 15px;
 $button-size-border-width: 1px;
 $button-size-border-radius: 3px;
@@ -391,11 +391,11 @@ $checkbox-light-color-states-checked-border: #206EA2;
 $checkbox-light-color-states-checked-background: #338FCC;
 $checkbox-light-color-states-focused-border: #206EA2;
 $checkbox-light-color-states-focused-shadow: inset 0 0 0 1px white, 0 0 0 1px #206EA2;
-$checkbox-dark-color-border: #B3B3B3;
-$checkbox-dark-color-states-checked-border: #206EA2;
-$checkbox-dark-color-states-checked-background: #338FCC;
-$checkbox-dark-color-states-focused-border: #206EA2;
-$checkbox-dark-color-states-focused-shadow: inset 0 0 0 1px white, 0 0 0 1px #206EA2;
+$checkbox-dark-color-border: #999999;
+$checkbox-dark-color-states-checked-border: #7FBAE1;
+$checkbox-dark-color-states-checked-background: #206EA2;
+$checkbox-dark-color-states-focused-border: #57A4D7;
+$checkbox-dark-color-states-focused-shadow: inset 0 0 0 1px #333333, 0 0 0 1px #57A4D7;
 $checkbox-size-width: 16px;
 $checkbox-size-padding: 24px;
 $checkbox-size-border-width: 1px;
@@ -445,7 +445,7 @@ $list-size-multi-line-padding: 16px;
 $list-size-icon-width: 24px;
 $modal-light-color-shadow: (0 0 0 1px #B3B3B3, 0 6px 12px 0 rgba(0, 0, 0, 0.5));
 $modal-light-color-background-mask: rgba(0, 0, 0, 0.5);
-$modal-dark-color-shadow: (0 0 0 1px #B3B3B3, 0 6px 12px 0 rgba(0, 0, 0, 0.5));
+$modal-dark-color-shadow: (0 0 0 1px #333333, 0 6px 12px 0 rgba(0, 0, 0, 0.5));
 $modal-dark-color-background-mask: rgba(0, 0, 0, 0.5);
 $modal-size-top: 48px;
 $modal-size-padding: 0 0 24px;
@@ -468,14 +468,14 @@ $navbar-dark-color-opacity: 0.5;
 $navbar-size-height: 48px;
 $navbar-size-icon-margin-left: 8px;
 $navbar-item-light-color-color: #D8EAF7;
-$navbar-item-light-color-states-active: #206EA2; // lighten(mc-color($primary, 700), 5%)
-$navbar-item-light-color-states-hover: #206EA2; // lighten(mc-color($primary, 700), 5%)
-$navbar-item-light-color-states-progress: #07314D; // lighten(mc-color($primary, 800), 5%)
+$navbar-item-light-color-states-active: lighten(#206EA2, 5%);
+$navbar-item-light-color-states-hover: lighten(#206EA2, 5%);
+$navbar-item-light-color-states-progress: lighten(#07314D, 5%);
 $navbar-item-light-color-states-disabled-opacity: 0.3;
 $navbar-item-dark-color-color: #D8EAF7;
-$navbar-item-dark-color-states-active: #206EA2; // lighten(mc-color($primary, 700), 5%)
-$navbar-item-dark-color-states-hover: #206EA2; // lighten(mc-color($primary, 700), 5%)
-$navbar-item-dark-color-states-progress: #07314D; // lighten(mc-color($primary, 800), 5%)
+$navbar-item-dark-color-states-active: lighten(#114E77, 5%);
+$navbar-item-dark-color-states-hover: lighten(#114E77, 5%);
+$navbar-item-dark-color-states-progress: lighten(#07314D, 15%);
 $navbar-item-dark-color-states-disabled-opacity: 0.3;
 $navbar-item-size-padding: 16px;
 $navbar-brand-size-padding: 12px;
@@ -485,7 +485,7 @@ $option-size-padding: 0 16px;
 $option-size-height: 32px;
 $option-size-border-width: 2px;
 $popover-light-color-border: #B3B3B3;
-$popover-dark-color-border: #B3B3B3;
+$popover-dark-color-border: #4D4D4D;
 $popover-size-padding: 16px;
 $popover-size-border-width: 1px;
 $popover-size-border-radius: 4px;
@@ -497,7 +497,7 @@ $popover-header-size-padding: 10px 16px;
 $popover-footer-size-padding: 12px 16px;
 $popover-footer-size-margin-top: 8px;
 $progress-bar-light-color-background: #F0F0F0;
-$progress-bar-dark-color-background: #F0F0F0;
+$progress-bar-dark-color-background: #666666;
 $progress-bar-size-height: 4px;
 $progress-spinner-size-size: 16px;
 $radio-light-color-outer-circle-border: #B3B3B3;
@@ -507,13 +507,13 @@ $radio-light-color-outer-circle-focused-state-border: #338FCC;
 $radio-light-color-outer-circle-focused-state-shadow: 0 0 0 2px #B3B3B3;
 $radio-light-color-inner-circle-checked-state-border: #338FCC;
 $radio-light-color-inner-circle-focused-state-shadow: 0 0 0 1px white;
-$radio-dark-color-outer-circle-border: #B3B3B3;
+$radio-dark-color-outer-circle-border: #999999;
 $radio-dark-color-inner-circle-border: transparent;
-$radio-dark-color-outer-circle-checked-state-border: #338FCC;
+$radio-dark-color-outer-circle-checked-state-border: #57A4D7;
 $radio-dark-color-outer-circle-focused-state-border: #338FCC;
-$radio-dark-color-outer-circle-focused-state-shadow: 0 0 0 2px #B3B3B3;
-$radio-dark-color-inner-circle-checked-state-border: #338FCC;
-$radio-dark-color-inner-circle-focused-state-shadow: 0 0 0 1px white;
+$radio-dark-color-outer-circle-focused-state-shadow: 0 0 0 2px #338FCC;
+$radio-dark-color-inner-circle-checked-state-border: #206EA2;
+$radio-dark-color-inner-circle-focused-state-shadow: 0 0 0 1px #333333;
 $radio-size-size: 14px;
 $radio-size-padding: 24px; // Padding between radio inputs and their labels
 $select-size-height: 30px;
@@ -525,17 +525,17 @@ $select-panel-size-vertical-padding: 4px;
 $select-panel-size-border-width: 1px;
 $select-panel-size-border-radius: 3px;
 $sidepanel-light-color-border: #B3B3B3;
-$sidepanel-dark-color-border: #B3B3B3;
+$sidepanel-dark-color-border: #333333;
 $sidepanel-header-size-padding: 14px 16px;
 $sidepanel-header-size-close-padding: 0 0 0 8px;
 $sidepanel-footer-size-padding: 16px;
-$table-color-border-width: 1px;
-$table-color-row-padding-vertical: 8px;
-$table-color-row-padding-horizontal: 16px;
+$table-size-border-width: 1px;
+$table-size-row-padding-vertical: 8px;
+$table-size-row-padding-horizontal: 16px;
 $tabs-light-color-border: #B3B3B3;
 $tabs-light-color-state-active: #338FCC;
 $tabs-dark-color-border: #B3B3B3;
-$tabs-dark-color-state-active: #338FCC;
+$tabs-dark-color-state-active: #57A4D7;
 $tabs-size-height: 40px;
 $tabs-size-highlight-height: 4px;
 $tabs-size-padding-horizontal: 16px;
@@ -562,24 +562,24 @@ $tags-light-color-error-icon-hovered: #E04D36;
 $tags-light-color-error-state-focused: #E76E5C;
 $tags-light-color-error-state-disabled: mix(#E76E5C, transparent, 50%);
 $tags-light-color-error-state-disabled-background: mix(#E76E5C, transparent, 10%);
-$tags-dark-color-primary-background: #D8EAF7;
-$tags-dark-color-primary-border: #D8EAF7;
+$tags-dark-color-primary-background: #114E77;
+$tags-dark-color-primary-border: #114E77;
 $tags-dark-color-primary-icon: mix(#57A4D7, rgba(black, 0.05));
-$tags-dark-color-primary-icon-hovered: #206EA2;
-$tags-dark-color-primary-state-focused: #338FCC;
-$tags-dark-color-primary-state-disabled: mix(#338FCC, transparent, 50%);
-$tags-dark-color-primary-state-disabled-background: mix(#338FCC, transparent, 10%);
-$tags-dark-color-second-background: #E6E6E6;
-$tags-dark-color-second-border: #E6E6E6;
+$tags-dark-color-primary-icon-hovered: #338FCC;
+$tags-dark-color-primary-state-focused: #7FBAE1;
+$tags-dark-color-primary-state-disabled: mix(#57A4D7, transparent, 50%);
+$tags-dark-color-primary-state-disabled-background: mix(#57A4D7, transparent, 10%);
+$tags-dark-color-second-background: #4D4D4D;
+$tags-dark-color-second-border: #4D4D4D;
 $tags-dark-color-second-icon: mix(#999999, rgba(black, 0.05));
-$tags-dark-color-second-icon-hovered: #999999;
-$tags-dark-color-second-state-focused: #338FCC;
-$tags-dark-color-second-state-disabled: mix(#B3B3B3, transparent, 50%);
-$tags-dark-color-second-state-disabled-background: mix(#B3B3B3, transparent, 10%);
-$tags-dark-color-error-background: #FADEDA;
-$tags-dark-color-error-border: #FADEDA;
+$tags-dark-color-second-icon-hovered: #CCCCCC;
+$tags-dark-color-second-state-focused: #57A4D7;
+$tags-dark-color-second-state-disabled: mix(#999999, transparent, 50%);
+$tags-dark-color-second-state-disabled-background: mix(#999999, transparent, 10%);
+$tags-dark-color-error-background: #832112;
+$tags-dark-color-error-border: #832112;
 $tags-dark-color-error-icon: mix(#E76E5C, rgba(black, 0.05));
-$tags-dark-color-error-icon-hovered: #E04D36;
+$tags-dark-color-error-icon-hovered: #F4B7AE;
 $tags-dark-color-error-state-focused: #E76E5C;
 $tags-dark-color-error-state-disabled: mix(#E76E5C, transparent, 50%);
 $tags-dark-color-error-state-disabled-background: mix(#E76E5C, transparent, 10%);
@@ -600,11 +600,11 @@ $toggle-light-color-background: linear-gradient(to bottom, #E6E6E6, #F0F0F0);
 $toggle-light-color-circle-border: #B3B3B3;
 $toggle-light-color-circle-background: linear-gradient(to bottom, white, #E6E6E6);
 $toggle-light-color-state-focused: inset 0 0 0 1px white, 0 0 0 2px #338FCC;
-$toggle-dark-color-border: #B3B3B3;
-$toggle-dark-color-background: linear-gradient(to bottom, #E6E6E6, #F0F0F0);
-$toggle-dark-color-circle-border: #B3B3B3;
-$toggle-dark-color-circle-background: linear-gradient(to bottom, white, #E6E6E6);
-$toggle-dark-color-state-focused: inset 0 0 0 1px white, 0 0 0 2px #338FCC;
+$toggle-dark-color-border: #808080;
+$toggle-dark-color-background: #333333;
+$toggle-dark-color-circle-border: #808080;
+$toggle-dark-color-circle-background: white;
+$toggle-dark-color-state-focused: inset 0 0 0 1px #333333, 0 0 0 2px #57A4D7;
 $toggle-size-height: 16px;
 $toggle-size-width: 28px;
 $toggle-size-border-radius: 9px;
@@ -615,7 +615,7 @@ $toggle-small-size-border-radius: 8px;
 $tooltip-light-color-background: #4D4D4D;
 $tooltip-light-color-color: white;
 $tooltip-light-color-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-$tooltip-dark-color-background: #4D4D4D;
+$tooltip-dark-color-background: white;
 $tooltip-dark-color-color: white;
 $tooltip-dark-color-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 $tooltip-size-max-width: 240px;
