@@ -1,15 +1,19 @@
-@import '../design-tokens/index';
 @import '../core/styles/common/popup';
+@import '../core/theming/theming';
 
 
 @mixin mc-autocomplete-theme($theme) {
+    $foreground: map-get($theme, foreground);
+
     .mc-autocomplete-panel {
         @include popup-params($theme);
 
-        color: $color-foreground-text;
+        color: mc-color($foreground, text);
 
         .mc-selected {
-            background-color: $popup-common-color-background;
+            $popup: map-get(map-get($theme, components), popup);
+
+            background-color: map-get($popup, background);
         }
     }
 }

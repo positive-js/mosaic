@@ -2,13 +2,13 @@
 
 
 @function mc-light-theme-components($theme) {
-    $popup-common: (
-        shadow: $popup-common-light-color-shadow,
-        border: $popup-common-light-color-border,
-        divider: $popup-common-light-color-divider,
+    $popup: (
+        shadow: $popup-light-color-shadow,
+        border: $popup-light-color-border,
+        divider: $popup-light-color-divider,
 
-        background: $popup-common-light-color-background,
-        footer_background: $popup-common-light-color-footer-background
+        background: $popup-light-color-background,
+        footer-background: $popup-light-color-footer-background
     );
 
     $button: (
@@ -48,15 +48,15 @@
     $checkbox: (
         border: $checkbox-light-color-border,
 
-        state-checked_border-color: $checkbox-light-color-states-checked-border,
-        state-checked_background: $checkbox-light-color-states-checked-background,
+        state-checked-border: $checkbox-light-color-states-checked-border,
+        state-checked-background: $checkbox-light-color-states-checked-background,
 
-        state-focused_border-color: $checkbox-light-color-states-focused-border,
-        state-focused_shadow: $checkbox-light-color-states-focused-shadow
+        state-focused-border: $checkbox-light-color-states-focused-border,
+        state-focused-shadow: $checkbox-light-color-states-focused-shadow
     );
 
     $modal: (
-        mask-background: $modal-light-color-background-mask,
+        background-mask: $modal-light-color-background-mask,
         shadow: $modal-light-color-shadow
     );
 
@@ -64,13 +64,15 @@
         background: $navbar-light-color-background,
         color: $navbar-light-color-color,
         opacity: $navbar-light-color-opacity,
+    );
 
-        item_color: $navbar-item-light-color-color,
+    $navbar-item: (
+        color: $navbar-item-light-color-color,
 
-        item_state-active: $navbar-item-light-color-states-active,
-        item_state-hover: $navbar-item-light-color-states-hover,
-        item_state-progress: $navbar-item-light-color-states-progress,
-        item_state-disabled_opacity: $navbar-item-light-color-states-disabled-opacity,
+        state-active: $navbar-item-light-color-states-active,
+        state-hover: $navbar-item-light-color-states-hover,
+        state-progress: $navbar-item-light-color-states-progress,
+        state-disabled-opacity: $navbar-item-light-color-states-disabled-opacity,
     );
 
     $popover: (
@@ -160,11 +162,12 @@
     );
 
     @return (
-        popup-common: $popup-common,
+        popup: $popup,
         button: $button,
         checkbox: $checkbox,
         modal: $modal,
         navbar: $navbar,
+        navbar-item: $navbar-item,
         popover: $popover,
         progress-bar: $progress-bar,
         radio: $radio,
@@ -178,13 +181,13 @@
 }
 
 @function mc-dark-theme-components($theme) {
-    $popup-common: (
-        shadow: $popup-common-dark-color-shadow,
-        border: $popup-common-dark-color-border,
-        divider: $popup-common-dark-color-divider,
+    $popup: (
+        shadow: $popup-dark-color-shadow,
+        border: $popup-dark-color-border,
+        divider: $popup-dark-color-divider,
 
-        background: $popup-common-dark-color-background,
-        footer_background: $popup-common-dark-color-footer-background
+        background: $popup-dark-color-background,
+        footer-background: $popup-dark-color-footer-background
     );
 
     $button: (
@@ -224,15 +227,15 @@
     $checkbox: (
         border: $checkbox-dark-color-border,
 
-        state-checked_border-color: $checkbox-dark-color-states-checked-border,
-        state-checked_background: $checkbox-dark-color-states-checked-background,
+        state-checked-border: $checkbox-dark-color-states-checked-border,
+        state-checked-background: $checkbox-dark-color-states-checked-background,
 
-        state-focused_border-color: $checkbox-dark-color-states-focused-border,
-        state-focused_shadow: $checkbox-dark-color-states-focused-shadow
+        state-focused-border: $checkbox-dark-color-states-focused-border,
+        state-focused-shadow: $checkbox-dark-color-states-focused-shadow
     );
 
     $modal: (
-        mask-background: $modal-dark-color-background-mask,
+        background-mask: $modal-dark-color-background-mask,
         shadow: $modal-dark-color-shadow
     );
 
@@ -240,13 +243,15 @@
         background: $navbar-dark-color-background,
         color: $navbar-dark-color-color,
         opacity: $navbar-dark-color-opacity,
+    );
 
-        item_color: $navbar-item-dark-color-color,
+    $navbar-item: (
+        color: $navbar-item-dark-color-color,
 
-        item_state-active: $navbar-item-dark-color-states-active,
-        item_state-hover: $navbar-item-dark-color-states-hover,
-        item_state-progress: $navbar-item-dark-color-states-progress,
-        item_state-disabled_opacity: $navbar-item-dark-color-states-disabled-opacity,
+        state-active: $navbar-item-dark-color-states-active,
+        state-hover: $navbar-item-dark-color-states-hover,
+        state-progress: $navbar-item-dark-color-states-progress,
+        state-disabled-opacity: $navbar-item-dark-color-states-disabled-opacity,
     );
 
     $popover: (
@@ -336,11 +341,12 @@
     );
 
     @return (
-        popup-common: $popup-common,
+        popup: $popup,
         button: $button,
         checkbox: $checkbox,
         modal: $modal,
         navbar: $navbar,
+        navbar-item: $navbar-item,
         popover: $popover,
         progress-bar: $progress-bar,
         radio: $radio,

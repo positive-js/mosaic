@@ -6,11 +6,11 @@
     $is-dark: map-get($theme, is-dark);
 
     .mc-form-field {
-        background-color: $color-background-background;
+        background-color: map-get($background, background);
 
         &:not(.mc-form-field_without-borders) {
             .mc-form-field__container {
-                border-color: $color-second-default;
+                border-color: mc-color($second);
             }
 
             &:hover .mc-form-field__container {
@@ -20,35 +20,35 @@
             &.ng-invalid .mc-form-field__container {
                 background-color: if($is-dark, transparent, $color-error-lighter);
 
-                border-color: $color-error-default;
+                border-color: mc-color($error);
 
                 .mc-input,
                 .mc-textarea {
-                    color: $color-error-default;
+                    color: mc-color($error);
                 }
             }
 
             &.mc-focused {
                 &:not(.ng-invalid) .mc-form-field__container {
-                    border-color: $globals-states-focused-color;
-                    box-shadow: 0 0 0 1px $globals-states-focused-color;
+                    border-color: map-get(map-get($theme, states), focused-color);
+                    box-shadow: 0 0 0 1px map-get(map-get($theme, states), focused-color);
                 }
 
                 &.ng-invalid .mc-form-field__container {
-                    box-shadow: 0 0 0 1px $color-error-default;
+                    box-shadow: 0 0 0 1px mc-color($error);
                 }
             }
 
             /* stylelint-disable no-descending-specificity */
             &.mc-disabled .mc-form-field__container {
-                border-color: mix($color-foreground-border, $color-background-overlay-disabled);
+                border-color: mix(map-get($foreground, border), mc-color($background, overlay-disabled));
 
-                background-color: mix($color-background-background-disabled, $color-background-overlay-disabled);
+                background-color: mix(map-get($background, background-disabled), mc-color($background, overlay-disabled));
 
                 .mc-icon,
                 .mc-input,
                 .mc-textarea {
-                    color: $color-foreground-text-disabled;
+                    color: map-get($foreground, text-disabled);
                 }
             }
             /* stylelint-enable no-descending-specificity */

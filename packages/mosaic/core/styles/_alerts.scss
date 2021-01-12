@@ -83,12 +83,12 @@
     }
 
     .mc-alert {
-        color: $color-foreground-text;
+        color: map-get($foreground, text);
     }
 
     .mc-alert_error {
         @if($is-dark) {
-            @include alert-theme($color-error-darker, $color-error-darker, $color-error-default);
+            @include alert-theme($color-error-darker, $color-error-darker, mc-color($error));
         } @else {
             @include alert-theme(
                 $color-error-lighter, map-get($color-error-palette, 200), map-get($color-error-palette, 400)
@@ -122,7 +122,7 @@
 
     .mc-alert:not(.mc-alert_error):not(.mc-alert_warning):not(.mc-alert_success):not(.mc-alert_info) {
         @if($is-dark) {
-            @include alert-theme($color-second-darker, $color-second-darker, $color-second-default);
+            @include alert-theme($color-second-darker, $color-second-darker, mc-color($second));
         } @else {
             @include alert-theme(
                 $color-second-lighter, map-get($color-second-palette, 200), map-get($color-second-palette, 400)

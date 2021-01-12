@@ -4,16 +4,16 @@
 
 @mixin mc-option-theme($theme) {
     .mc-option {
-        color: $color-foreground-text;
+        color: map-get($foreground, text);
 
         &:hover:not(.mc-disabled) {
             .mc-option-overlay {
-                background: $color-background-overlay-hovered;
+                background: map-get($background, overlay-hovered);
             }
         }
 
         &.mc-active {
-            border-color: $color-primary-default;
+            border-color: mc-color($primary);
         }
 
         &.mc-selected {
@@ -23,7 +23,7 @@
         &.mc-disabled {
             background: transparent;
 
-            color: $color-foreground-text-disabled;
+            color: map-get($foreground, text-disabled);
         }
     }
 }

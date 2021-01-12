@@ -17,7 +17,7 @@
     $is-dark: map-get($theme, is-dark);
 
     .mc-card {
-        color: $color-foreground-text;
+        color: map-get($foreground, text);
 
         &.mc-card_info {
             @if($is-dark) {
@@ -45,14 +45,14 @@
 
         &.mc-card_error {
             @if($is-dark) {
-                @include card-type($color-error-default, $color-error-darker, $color-second-darker);
+                @include card-type(mc-color($error), $color-error-darker, $color-second-darker);
             } @else {
-                @include card-type($color-error-default, $color-error-lighter, $color-second-lighter);
+                @include card-type(mc-color($error), $color-error-lighter, $color-second-lighter);
             }
         }
 
         &.mc-card_white {
-            background-color: $popup-common-color-background;
+            background-color: map-get($popup, background);
         }
 
         &.mc-selected {
@@ -61,12 +61,12 @@
 
         &:not(.mc-card_readonly):hover {
             .mc-card__overlay {
-                background: $color-background-overlay-hovered;
+                background: map-get($background, overlay-hovered);
             }
         }
 
         &.cdk-keyboard-focused {
-            box-shadow: 0 0 0 2px $globals-states-focused-color;
+            box-shadow: 0 0 0 2px map-get(map-get($theme, states), focused-color);
         }
     }
 }

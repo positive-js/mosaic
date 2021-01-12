@@ -7,10 +7,10 @@
 
     // Дефолтные серые иконки default-icon: лупа в поле, иконки дропдаунов v, все иконки вне полей.
     .mc-icon:not(.mc-icon_light) {
-        color: $color-foreground-icon;
+        color: mc-color($foreground, icon);
 
         &.mc-primary {
-            color: mix($color-foreground-icon, $primary-color, 30%);
+            color: mix(mc-color($foreground, icon), $primary-color, 30%);
 
             &[disabled],
             &.mc-disabled {
@@ -23,23 +23,23 @@
 
             &[disabled],
             &.mc-disabled {
-                color: $color-second-default;
+                color: mc-color($second);
             }
         }
 
         &.mc-error {
-            color: mix($color-foreground-icon, $color-error-default, 30%);
+            color: mix(mc-color($foreground, icon), mc-color($error), 30%);
 
             &[disabled],
             &.mc-disabled {
-                color: $color-error-default;
+                color: mc-color($error);
             }
         }
 
         &:not(.mc-primary):not(.mc-second):not(.mc-error) {
             &[disabled],
             &.mc-disabled {
-                color: $color-second-default;
+                color: mc-color($second);
 
                 cursor: default;
             }
@@ -58,18 +58,18 @@
         }
 
         &.mc-second {
-            color: $color-second-default;
+            color: mc-color($second);
 
             &:hover {
-                color: mix($color-foreground-text, $color-second-default, 90%);
+                color: mix($color-foreground-text, mc-color($second), 90%);
             }
         }
 
         &.mc-error {
-            color: $color-error-default;
+            color: mc-color($error);
 
             &:hover {
-                color: mix($color-foreground-text, $color-error-default);
+                color: mix($color-foreground-text, mc-color($error));
             }
         }
     }

@@ -12,16 +12,16 @@
     .mc-dropdown__item {
         @include user-select(text);
 
-        color: $color-foreground-text;
+        color: map-get($foreground, text);
 
         background: transparent;
 
         &:hover {
-            background: $color-background-overlay-hovered;
+            background: map-get($background, overlay-hovered);
         }
 
         &.cdk-keyboard-focused {
-            outline: $globals-states-focused-color solid 2px;
+            outline: map-get(map-get($theme, states), focused-color) solid 2px;
             outline-offset: -2px;
 
             &.mc-link {
@@ -35,7 +35,7 @@
 
         &[disabled],
         &.mc-disabled {
-            color: $color-foreground-text-disabled;
+            color: map-get($foreground, text-disabled);
 
             background: transparent;
         }
@@ -46,7 +46,7 @@
     }
 
     .mc-dropdown__item_highlighted:not([disabled]):not(.mc-disabled) {
-        background: $color-background-overlay-hovered;
+        background: map-get($background, overlay-hovered);
     }
 }
 

@@ -1,20 +1,26 @@
-@import '../design-tokens/index';
+@import "../core/theming/theming";
 
 
 @mixin mc-progress-bar-theme($theme) {
+    $primary: map-get($theme, primary);
+    $second: map-get($theme, second);
+    $error: map-get($theme, error);
+
+    $progress-bar: map-get(map-get($theme, components), progress-bar);
+
     .mc-progress-bar {
-        background-color: $progress-bar-color-background;
+        background-color: map-get($progress-bar, background);
 
         &.mc-primary .mc-progress-bar__line {
-            background-color: $color-primary-default;
+            background-color: mc-color($primary);
         }
 
         &.mc-second .mc-progress-bar__line {
-            background-color: $color-second-default;
+            background-color: mc-color($second);
         }
 
         &.mc-error .mc-progress-bar__line {
-            background-color: $color-error-default;
+            background-color: mc-color($error);
         }
     }
 }

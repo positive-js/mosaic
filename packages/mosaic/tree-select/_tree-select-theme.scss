@@ -5,19 +5,19 @@
 
 @mixin mc-tree-select-theme($theme) {
     .mc-tree-select {
-        color: $color-foreground-text;
+        color: map-get($foreground, text);
 
         &.ng-invalid {
-            color: $color-error-default;
+            color: mc-color($error);
         }
 
         &.mc-disabled {
-            color: $color-foreground-text-disabled;
+            color: map-get($foreground, text-disabled);
         }
     }
 
     .mc-tree-select__placeholder {
-        color: $color-foreground-text-disabled;
+        color: map-get($foreground, text-disabled);
     }
 
     .mc-tree-select__panel {

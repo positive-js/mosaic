@@ -6,7 +6,7 @@
     $is-dark: map-get($theme, is-dark);
 
     .mc-panel {
-        background-color: $color-background-background;
+        background-color: map-get($background, background);
         border: 1px solid map-get($color-second-palette, if($is-dark, 700, 60));
     }
 }

@@ -4,11 +4,11 @@
 
 @mixin mc-optgroup-theme($theme) {
     .mc-optgroup-label {
-        color: $color-foreground-text;
+        color: map-get($foreground, text);
     }
 
     .mc-disabled .mc-optgroup-label {
-        color: $color-foreground-text-disabled;
+        color: map-get($foreground, text-disabled);
     }
 }
 

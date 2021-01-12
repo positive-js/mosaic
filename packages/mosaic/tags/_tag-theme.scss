@@ -2,30 +2,30 @@
 @import '../core/styles/typography/typography-utils';
 
 
-@mixin mc-tag-color($background, $border, $icon, $icon-hovered, $focused, $disabled, $disabled-background ) {
-    background: $background;
-    border-color: $border;
+@mixin mc-tag-color($params) {
+    background: map-get($params, background);
+    border-color: map-get($params, border);
 
     &.mc-active,
     &.mc-focused {
-        border-color: $focused;
-        box-shadow: 0 0 0 1px $focused;
+        border-color: map-get($params, focused);
+        box-shadow: 0 0 0 1px map-get($params, focused);
     }
 
     & .mc-icon {
-        color: $icon;
+        color: map-get($params, icon);
 
         &:hover {
             cursor: pointer;
-            color: $icon-hovered;
+            color: map-get($params, icon_hovered);
         }
     }
 
     &.mc-disabled {
-        border-color: $disabled-background;
-        background: $disabled-background;
+        border-color: map-get($params, background_disabled);
+        background: map-get($params, background_disabled);
 
-        color: $disabled;
+        color: map-get($params, disabled);
 
         & .mc-tag-overlay {
             background: transparent;
@@ -39,56 +39,39 @@
 
 
 @mixin mc-tag-theme($theme) {
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    $primary: map-get($theme, primary);
+    $second: map-get($theme, second);
+    $error: map-get($theme, error);
+
     $tags: map-get(map-get($theme, components), tags);
 
     .mc-tag {
-        color: $color-foreground-text;
+        color: map-get($foreground, text);
 
         &.mc-primary {
-            @include mc-tag-color(
-                $tags-color-primary-background,
-                $tags-color-primary-border,
-                $tags-color-primary-icon,
-                $tags-color-primary-icon-hovered,
-                $tags-color-primary-state-focused,
-                $tags-color-primary-state-disabled,
-                $tags-color-primary-state-disabled-background
-            );
+            @include mc-tag-color(map-get($tags, primary));
         }
 
         &.mc-second {
-            @include mc-tag-color(
-                $tags-color-second-background,
-                $tags-color-second-border,
-                $tags-color-second-icon,
-                $tags-color-second-icon-hovered,
-                $tags-color-second-state-focused,
-                $tags-color-second-state-disabled,
-                $tags-color-second-state-disabled-background
-            );
+            @include mc-tag-color(map-get($tags, second));
         }
 
         &.mc-error {
-            @include mc-tag-color(
-                $tags-color-error-background,
-                $tags-color-error-border,
-                $tags-color-error-icon,
-                $tags-color-error-icon-hovered,
-                $tags-color-error-state-focused,
-                $tags-color-error-state-disabled,
-                $tags-color-error-state-disabled-background
-            );
+            @include mc-tag-color(map-get($tags, error));
         }
 
         &:hover,
         &.mc-hovered {
             & .mc-tag-overlay {
-                background: $color-background-overlay-hovered;
+                background: map-get($background, overlay-hovered);
             }
         }
 
         .mc-icon {
-            color: $color-foreground-icon;
+            color: mc-color($foreground, icon);
 
             &:hover {
                 cursor: pointer;
@@ -97,36 +80,36 @@
         }
 
         &.mc-disabled {
-            color: $color-foreground-text-disabled;
+            color: map-get($foreground, text-disabled);
 
             border-color: transparent;
 
-            background-color: $color-background-background-disabled;
+            background-color: map-get($background, background-disabled);
 
             & .mc-tag-overlay {
-                background: $color-background-overlay-disabled;
+                background: mc-color($background, overlay-disabled);
             }
 
             & .mc-icon {
-                color: $color-foreground-icon;
+                color: mc-color($foreground, icon);
                 cursor: default;
             }
         }
     }
 
     .mc-tag-input {
-        color: $color-foreground-text;
+        color: map-get($foreground, text);
 
         &::placeholder {
-            color: $color-foreground-text-disabled;
+            color: map-get($foreground, text-disabled);
         }
 
         &::-ms-input-placeholder {
-            color: $color-foreground-text-disabled;
+            color: map-get($foreground, text-disabled);
         }
 
         &::-webkit-input-placeholder {
-            color: $color-foreground-text-disabled;
+            color: map-get($foreground, text-disabled);
         }
     }
 }

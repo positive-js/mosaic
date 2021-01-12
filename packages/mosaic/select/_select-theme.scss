@@ -6,19 +6,19 @@
     $foreground: map-get($theme, foreground);
 
     .mc-select {
-        color: $color-foreground-text;
+        color: map-get($foreground, text);
 
         &.ng-invalid {
-            color: $color-error-default;
+            color: mc-color($error);
         }
 
         &.mc-disabled {
-            color: $color-foreground-text-disabled;
+            color: map-get($foreground, text-disabled);
         }
     }
 
     .mc-select__placeholder {
-        color: $color-foreground-text-disabled;
+        color: map-get($foreground, text-disabled);
     }
 
     .mc-select__panel {
@@ -26,7 +26,7 @@
     }
 
     .mc-select__search-container {
-        border-bottom-color: $popup-common-color-border-color;
+        border-bottom-color: map-get($popup, border);
     }
 
     .mc-select__no-options-message {

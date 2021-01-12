@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 12 Jan 2021 07:37:59 GMT
+ * Generated on Tue, 12 Jan 2021 08:47:55 GMT
  */
 
 export const LightColorPrimaryLighter = "#57A4D7";
@@ -418,16 +418,16 @@ export const CheckboxSizeWidth = "16px";
 export const CheckboxSizePadding = "24px";
 export const CheckboxSizeBorderWidth = "1px";
 export const CheckboxSizeToggleBoxShadow = "inset 0 0 1px 0 rgba(0, 0, 0, 0.2)";
-export const PopupCommonLightColorShadow = "0 3px 3px 0 rgba(0, 0, 0, 0.2)";
-export const PopupCommonLightColorBorder = "#B3B3B3";
-export const PopupCommonLightColorDivider = "#CCCCCC";
-export const PopupCommonLightColorBackground = "white";
-export const PopupCommonLightColorFooterBackground = "#F0F0F0";
-export const PopupCommonDarkColorShadow = "0 3px 3px 0 rgba(0, 0, 0, 0.2)";
-export const PopupCommonDarkColorBorder = "#999999";
-export const PopupCommonDarkColorDivider = "#666666";
-export const PopupCommonDarkColorBackground = "#4D4D4D";
-export const PopupCommonDarkColorFooterBackground = "transparent";
+export const PopupLightColorShadow = "0 3px 3px 0 rgba(0, 0, 0, 0.2)";
+export const PopupLightColorBorder = "#B3B3B3";
+export const PopupLightColorDivider = "#CCCCCC";
+export const PopupLightColorBackground = "white";
+export const PopupLightColorFooterBackground = "#F0F0F0";
+export const PopupDarkColorShadow = "0 3px 3px 0 rgba(0, 0, 0, 0.2)";
+export const PopupDarkColorBorder = "#999999";
+export const PopupDarkColorDivider = "#666666";
+export const PopupDarkColorBackground = "#4D4D4D";
+export const PopupDarkColorFooterBackground = "transparent";
 export const DatepickerToggleSizeWidth = "30px";
 export const DatepickerToggleSizeHeight = "30px";
 export const DatepickerBodySizeLabelPaddingSide = "33% / 7";

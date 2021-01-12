@@ -1,24 +1,30 @@
-@import '../design-tokens/index';
 @import '../core/styles/typography/typography-utils';
 @import '../core/theming/theming';
 
 
 @mixin mc-tooltip-theme($theme) {
-    .mc-tooltip-inner {
-        color: $tooltip-color-color;
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
 
-        box-shadow: $tooltip-color-shadow;
-        background-color: $tooltip-color-background;
+    $warning: map-get($theme, warning);
+
+    $tooltip: map-get(map-get($theme, components), tooltip);
+
+    .mc-tooltip-inner {
+        color: map-get($tooltip, color);
+
+        box-shadow: map-get($tooltip, shadow);
+        background-color: map-get($tooltip, background);
     }
 
     .mc-tooltip .mc-tooltip-arrow {
-        background-color: $tooltip-color-background;
+        background-color: map-get($tooltip, background);
     }
 
     .mc-tooltip.mc-tooltip_warning {
         $color: $palette-grey-700;
-        $tooltip-color-background: mc-color($color-warning-palette, 60);
-        $border-color: mc-color($color-warning-palette, 200);
+        $tooltip-color-background: mc-color($warning, 60);
+        $border-color: mc-color($warning, 200);
 
         .mc-tooltip-arrow {
             border: 1px solid transparent;
@@ -27,7 +33,7 @@
         }
 
         .mc-tooltip-inner {
-            box-shadow: $tooltip-color-shadow;
+            box-shadow: map-get($tooltip, shadow);
             border: 1px solid $border-color;
 
             color: $color;

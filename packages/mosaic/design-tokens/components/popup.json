@@ -1,5 +1,5 @@
 {
-    "popup-common": {
+    "popup": {
         "lightColor": {
             "shadow": { "value": "0 3px 3px 0 {lightColor.second.palette.value.A200.value}" },
             "border": { "value": "{lightColor.second.default.value}" },

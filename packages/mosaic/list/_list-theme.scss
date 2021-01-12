@@ -5,18 +5,18 @@
 @mixin mc-list-theme($theme) {
     .mc-list-item,
     .mc-list-option {
-        color: $color-foreground-text;
+        color: map-get($foreground, text);
     }
 
     .mc-list-option {
         outline: none;
 
         &:hover {
-            background: $color-background-overlay-hovered;
+            background: map-get($background, overlay-hovered);
         }
 
         &.mc-focused {
-            border-color: $globals-states-focused-color;
+            border-color: map-get(map-get($theme, states), focused-color);
         }
 
         &.mc-selected {
@@ -27,7 +27,7 @@
         &[disabled] {
             background: transparent;
 
-            color: $color-foreground-text-disabled;
+            color: map-get($foreground, text-disabled);
         }
     }
 }

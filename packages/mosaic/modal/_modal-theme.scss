@@ -1,32 +1,36 @@
 @import '../core/styles/typography/typography-utils';
-
 @import '../core/styles/common/animation';
 
 
 @mixin mc-modal-theme($theme) {
-    $is-dark: map-get($theme, is-dark);
-    $border-color: if($is-dark, $popup-common-color-divider-color, transparent);
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    $modal: map-get(map-get($theme, components), modal);
+    $popup: map-get(map-get($theme, components), popup);
+
+    $border-color: if(map-get($theme, is-dark), map-get($popup, divider), transparent);
 
     .mc-modal {
         .mc-modal-content {
             // У модалки должен быть фон background. Чтобы поповеры и дропдауны было видно поверх модалки
-            background-color: $color-background-background;
+            background-color: map-get($background, background);
 
-            box-shadow: $modal-color-shadow;
+            box-shadow: map-get($modal, shadow);
         }
 
         .mc-modal-title {
-            color: $color-foreground-text;
+            color: map-get($foreground, text);
         }
 
         .mc-modal-header {
-            border-bottom: $modal-size-border-width solid $popup-common-color-divider-color;
+            border-bottom: $modal-size-border-width solid map-get($popup, divider-color);
         }
 
         .mc-modal-footer {
             border-top: $modal-size-border-width solid $border-color;
 
-            background-color: $popup-common-color-footer-background;
+            background-color: map-get($popup, footer-background);
         }
 
         .mc-modal-close {
@@ -34,7 +38,7 @@
 
             &:hover {
                 .mc-button-overlay {
-                    background: $color-background-overlay-hovered;
+                    background: map-get($background, overlay-hovered);
                 }
 
                 .mc-icon {
@@ -45,14 +49,14 @@
     }
 
     .mc-modal-mask {
-        background-color: $modal-color-background-mask;
+        background-color: map-get($modal, background-mask);
     }
 
     .mc-confirm {
         .mc-confirm-btns {
             border-top: $modal-size-border-width solid $border-color;
 
-            background-color: $popup-common-color-footer-background;
+            background-color: map-get($popup, footer-background);
         }
     }
 }

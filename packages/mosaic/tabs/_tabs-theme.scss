@@ -1,35 +1,40 @@
-@import '../design-tokens/index';
+@import "../core/theming/theming";
 
 
 @mixin mc-tabs-theme($theme) {
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    $tabs: map-get(map-get($theme, components), tabs);
+
     .mc-tab-label,
     .mc-tab-light-label,
     .mc-tab-link {
-        color: $color-foreground-text;
+        color: map-get($foreground, text);
 
-        border-bottom-color: $tabs-color-border;
+        border-bottom-color: map-get($tabs, border);
 
         & .mc-tab-overlay {
             background: transparent;
         }
 
         &:hover .mc-tab-overlay {
-            background: $color-background-overlay-hovered;
+            background: map-get($background, overlay-hovered);
         }
 
         &.cdk-keyboard-focused:after {
-            border-color: $globals-states-focused-color;
+            border-color: map-get(map-get($theme, states), focused-color);
         }
 
         &.mc-disabled {
-            color: $color-foreground-text-disabled;
+            color: map-get($foreground, text-disabled);
 
             cursor: default;
 
-            background: $color-background-background-disabled;
+            background: map-get($background, background-disabled);
 
             & .mc-tab-overlay {
-                background: $color-background-overlay-disabled;
+                background: map-get($background, overlay-disabled);
             }
         }
     }
@@ -37,12 +42,12 @@
     .mc-tab-label {
         border: {
             top-color: transparent;
-            bottom-color: $tabs-color-border;
+            bottom-color: map-get($tabs, border);
         }
 
         &.mc-active {
             border: {
-                color: $tabs-color-border;
+                color: map-get($tabs, border);
                 bottom-color: transparent;
             }
 
@@ -58,13 +63,13 @@
             border-bottom-color: transparent;
 
             &:before {
-                background-color: $tabs-color-border;
+                background-color: map-get($tabs, border);
             }
         }
 
         &.mc-active {
             &:before {
-                background-color: $tabs-color-state-active;
+                background-color: map-get($tabs, state-active);
             }
 
             & .mc-tab-overlay {
@@ -74,7 +79,7 @@
 
         &.mc-disabled {
             &:before {
-                background-color: $tabs-color-border;
+                background-color: map-get($tabs, border);
             }
         }
     }

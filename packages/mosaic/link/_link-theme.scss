@@ -8,7 +8,7 @@
     $color_hover: if($is-dark, $color-primary-lighter, $color-primary-darker);
 
     .mc-link {
-        color: $color-primary-default;
+        color: mc-color($primary);
 
         text-decoration: none;
 
@@ -19,7 +19,7 @@
         }
 
         &:visited {
-            color: $color-primary-default;
+            color: mc-color($primary);
         }
 
         &:hover {
@@ -27,7 +27,7 @@
         }
 
         &.cdk-keyboard-focused {
-            outline: $globals-states-focused-color solid 2px;
+            outline: map-get(map-get($theme, states), focused-color) solid 2px;
             outline-offset: 2px;
         }
 
@@ -46,10 +46,10 @@
         &.mc-link_dashed .mc-link__text {
             border-bottom-style: dashed;
             border-bottom-width: 1px;
-            border-bottom-color: rgba($color-primary-default, 0.5);
+            border-bottom-color: rgba(mc-color($primary), 0.5);
 
             &:visited {
-                border-bottom-color: rgba($color-primary-default, 0.5);
+                border-bottom-color: rgba(mc-color($primary), 0.5);
             }
 
             &:hover {
@@ -61,10 +61,10 @@
         &.mc-link_underlined .mc-link__text {
             border-bottom-style: solid;
             border-bottom-width: 1px;
-            border-bottom-color: rgba($color-primary-default, 0.32);
+            border-bottom-color: rgba(mc-color($primary), 0.32);
 
             &:visited {
-                border-bottom-color: rgba($color-primary-default, 0.32);
+                border-bottom-color: rgba(mc-color($primary), 0.32);
             }
 
             &:hover {
@@ -74,17 +74,17 @@
         /* stylelint-enable no-descending-specificity */
 
         &[disabled] {
-            color: $color-foreground-text-disabled;
+            color: map-get($foreground, text-disabled);
 
             cursor: default;
             pointer-events: none;
 
             &.mc-link_underlined .mc-link__text {
-                border-bottom-color: rgba($color-foreground-text-disabled, 0.64);
+                border-bottom-color: rgba(map-get($foreground, text-disabled), 0.64);
             }
 
             &.mc-link_dashed .mc-link__text {
-                border-bottom-color: $color-foreground-text-disabled;
+                border-bottom-color: map-get($foreground, text-disabled);
             }
         }
     }

@@ -3,50 +3,54 @@
 
 
 @mixin mc-navbar-theme($theme) {
+    $navbar: map-get(map-get($theme, components), navbar);
+
     .mc-navbar {
-        background-color: $navbar-color-background;
+        background-color: map-get($navbar, background);
 
         .mc-navbar-title,
         .mc-icon {
-            color: $navbar-color-color;
+            color: map-get($navbar, color);
         }
     }
 
     .mc-navbar-brand {
         .mc-navbar-title {
-            opacity: $navbar-color-opacity;
+            opacity: map-get($navbar, opacity);
         }
     }
 
     .mc-navbar-item {
+        $navbar-item: map-get(map-get($theme, components), navbar-item);
+
         outline: 0;
 
-        color: $navbar-item-color-color;
+        color: map-get($navbar-item, color);
 
         &:not([disabled]) {
             outline: 0;
 
             &.cdk-keyboard-focused {
-                box-shadow: inset 0 0 0 2px $globals-states-focused-color;
+                box-shadow: inset 0 0 0 2px map-get(map-get($theme, states), focused-color);
             }
         }
 
         &.mc-navbar-item-active {
-            background-color: $navbar-item-color-states-active;
+            background-color: map-get($navbar-item, states-active);
         }
 
         &:hover:not([disabled]):not(.mc-progress) {
-            background-color: $navbar-item-color-states-hover;
+            background-color: map-get($navbar-item, states-hover);
         }
 
         &.mc-progress:hover:not([disabled]) {
-            background-color: $navbar-item-color-states-progress;
+            background-color: map-get($navbar-item, states-progress);
         }
 
         &[disabled] {
             .mc-navbar-title,
             .mc-icon {
-                opacity: $navbar-item-color-states-disabled-opacity;
+                opacity: map-get($navbar-item, states-disabled-opacity);
             }
         }
     }

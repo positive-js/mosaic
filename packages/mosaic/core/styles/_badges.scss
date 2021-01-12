@@ -35,7 +35,7 @@
     $is-dark: map-get($theme, is-dark);
 
     .mc-badge {
-        color: $color-foreground-text;
+        color: map-get($foreground, text);
         border-color: map-get($color-second-palette, 400);
     }
 

@@ -5,18 +5,18 @@
 
 @mixin mc-textarea-theme($theme) {
     .mc-textarea {
-        color: $color-foreground-text;
+        color: map-get($foreground, text);
 
         &::placeholder {
-            color: $color-foreground-text-disabled;
+            color: map-get($foreground, text-disabled);
         }
 
         &::-ms-input-placeholder {
-            color: $color-foreground-text-disabled;
+            color: map-get($foreground, text-disabled);
         }
 
         &::-webkit-input-placeholder {
-            color: $color-foreground-text-disabled;
+            color: map-get($foreground, text-disabled);
         }
     }
 }

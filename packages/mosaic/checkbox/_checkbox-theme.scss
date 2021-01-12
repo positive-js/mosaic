@@ -12,11 +12,11 @@
     }
 
     .mc-checkbox {
-        color: $color-foreground-text;
+        color: map-get($foreground, text);
 
         &:hover {
             .mc-checkbox-frame {
-                background: $color-background-overlay-hovered;
+                background: map-get($background, overlay-hovered);
             }
         }
 
@@ -30,16 +30,16 @@
         }
 
         &.mc-disabled {
-            color: $color-foreground-text-disabled;
+            color: map-get($foreground, text-disabled);
 
             .mc-checkbox-frame {
-                border-color: $color-foreground-text-disabled;
+                border-color: map-get($foreground, text-disabled);
 
-                background-color: $color-background-background-disabled;
+                background-color: map-get($background, background-disabled);
 
                 & .mc-checkbox-checkmark,
                 & .mc-checkbox-mixedmark {
-                    color: $color-foreground-text-disabled;
+                    color: map-get($foreground, text-disabled);
                 }
             }
         }

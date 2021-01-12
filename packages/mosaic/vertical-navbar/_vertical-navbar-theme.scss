@@ -1,54 +1,55 @@
-@import '../design-tokens/index';
 @import '../core/styles/typography/typography-utils';
 
 
 @mixin mc-vertical-navbar-theme($theme) {
+    $vertical-navbar: map-get(map-get($theme, components), vertical-navbar);
+
     .mc-vertical-navbar {
-        background-color: $vertical-navbar-color-background;
+        background-color: map-get($vertical-navbar, background);
 
         :focus {
             outline: 0;
         }
 
         .cdk-keyboard-focused {
-            outline: 2px solid $globals-states-focused-color;
+            outline: 2px solid map-get(map-get($theme, states), focused-color);
             outline-offset: -2px;
         }
 
         .mc-vertical-navbar__toggle-button {
-            color: $vertical-navbar-color-toggle-button;
+            color: map-get($vertical-navbar, toggle-button);
         }
 
         .mc-vertical-navbar__header,
         .mc-vertical-navbar__toggle-button {
             &:hover {
-                background-color: $vertical-navbar-color-state-hovered-background;
+                background-color: map-get($vertical-navbar, background_hovered);
             }
         }
 
         .mc-vertical-navbar__title {
-            color: $vertical-navbar-color-color;
+            color: map-get($vertical-navbar, color);
         }
 
         .mc-vertical-navbar-item {
-            color: $vertical-navbar-color-color;
+            color: map-get($vertical-navbar, color);
 
             &.mc-vertical-navbar__item_active {
-                background-color: $vertical-navbar-color-state-active-background;
+                background-color: map-get($vertical-navbar, background_active);
             }
 
             &:hover:not([disabled]):not(.mc-progress) {
-                background-color: $vertical-navbar-color-state-hovered-background;
+                background-color: map-get($vertical-navbar, background_hovered);
             }
 
             &.mc-progress:hover:not([disabled]) {
-                background-color: $vertical-navbar-color-state-progress-background;
+                background-color: map-get($vertical-navbar, background_progress);
             }
 
             &[disabled] {
                 .mc-vertical-navbar__title,
                 .mc-icon {
-                    opacity: $globals-states-disabled-opacity;
+                    opacity: map-get(map-get($theme, states), disabled-opacity);
                 }
             }
         }

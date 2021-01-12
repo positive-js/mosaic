@@ -14,12 +14,12 @@
         & > tbody {
             & > tr {
                 &:hover {
-                    background-color: $color-background-overlay-hovered;
+                    background-color: map-get($background, overlay-hovered);
                 }
 
                 & > th,
                 & > td {
-                    color: $color-foreground-text;
+                    color: map-get($foreground, text);
                 }
             }
         }
