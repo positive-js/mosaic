@@ -1,13 +1,25 @@
 @import '../all-theme';
 
 
-$primary: mc-palette($color-blue-palette, 300, 400, 500);
-$second: mc-palette($color-grey-palette, 200, 400, 700);
-$error: mc-palette($color-red-palette, 200, 400, 700);
+$primary: mc-palette(
+    $dark-color-primary-palette, $dark-color-primary-lighter, $dark-color-primary-default, $dark-color-primary-darker
+);
+$second: mc-palette(
+    $dark-color-second-palette, $dark-color-second-lighter, $dark-color-second-default, $dark-color-second-darker
+);
+$error: mc-palette(
+    $dark-color-error-palette, $dark-color-error-lighter, $dark-color-error-default, $dark-color-error-darker
+);
 
-$info: mc-palette($color-blue-palette, 200, 400, 700);
-$success: mc-palette($color-green-palette, 200, 400, 700);
-$warning: mc-palette($color-yellow-palette, 200, 400, 700);
+$info: mc-palette(
+    $dark-color-info-palette, $dark-color-info-lighter, $dark-color-info-default, $dark-color-info-darker
+);
+$success: mc-palette(
+    $dark-color-success-palette, $dark-color-success-lighter, $dark-color-success-default, $dark-color-success-darker
+);
+$warning: mc-palette(
+    $dark-color-warning-palette, $dark-color-warning-lighter, $dark-color-warning-default, $dark-color-warning-darker
+);
 
 $theme: mc-dark-theme($primary, $second, $error, $info, $success, $warning);
 

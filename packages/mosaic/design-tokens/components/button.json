@@ -5,10 +5,10 @@
                 "shadow": { "value": "inset 0 1px 2px 0 rgba(black, 0.2)" }
             },
             "primary": {
-                "color": { "value": "{lightColor.primary.default-contrast.value}" },
+                "color": { "value": "{lightColor.primary.palette.value.contrast.500.value}" },
                 "border": { "value": "{lightColor.primary.palette.value.560.value}" },
                 "background": { "value": "{lightColor.primary.palette.value.500.value}" },
-                "icon": { "value": "{lightColor.primary.default-contrast.value}" },
+                "icon": { "value": "{lightColor.primary.palette.value.contrast.500.value}" },
 
                 "active": {
                     "border": {
@@ -55,10 +55,10 @@
                 "shadow": { "value": "inset 1px 2px 2px 0 rgba(black, 0.2)" }
             },
             "primary": {
-                "color": { "value": "{darkColor.primary.default-contrast.value}" },
+                "color": { "value": "{darkColor.primary.palette.value.contrast.500.value}" },
                 "border": { "value": "{darkColor.primary.palette.value.560.value}" },
                 "background": { "value": "{darkColor.primary.palette.value.500.value}" },
-                "icon": { "value": "{darkColor.primary.default-contrast.value}" },
+                "icon": { "value": "{darkColor.primary.palette.value.contrast.500.value}" },
 
                 "active": {
                     "border": {

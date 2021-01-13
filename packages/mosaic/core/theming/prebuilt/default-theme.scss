@@ -1,13 +1,25 @@
 @import '../all-theme';
 
 
-$primary: mc-palette($color-blue-palette, 400, 500, 600);
-$second: mc-palette($color-grey-palette, 100, 300, 400);
-$error: mc-palette($color-red-palette, 60, 400, 500);
+$primary: mc-palette(
+    $light-color-primary-palette, $light-color-primary-lighter, $light-color-primary-default, $light-color-primary-darker
+);
+$second: mc-palette(
+    $light-color-second-palette, $light-color-second-lighter, $light-color-second-default, $light-color-second-darker
+);
+$error: mc-palette(
+    $light-color-error-palette, $light-color-error-lighter, $light-color-error-default, $light-color-error-darker
+);
 
-$info: mc-palette($color-blue-palette, 60, 200, 400);
-$success: mc-palette($color-green-palette, 60, 200, 400);
-$warning: mc-palette($color-yellow-palette, 60, 200, 400);
+$info: mc-palette(
+    $light-color-info-palette, $light-color-info-lighter, $light-color-info-default, $light-color-info-darker
+);
+$success: mc-palette(
+    $light-color-success-palette, $light-color-success-lighter, $light-color-success-default, $light-color-success-darker
+);
+$warning: mc-palette(
+    $light-color-warning-palette, $light-color-warning-lighter, $light-color-warning-default, $light-color-warning-darker
+);
 
 $theme: mc-light-theme($primary, $second, $error, $info, $success, $warning);
 
