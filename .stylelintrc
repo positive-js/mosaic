@@ -18,5 +18,10 @@
         "number-leading-zero": ["always", {
             "message": "zero before dot"
         }]
-    }
+    },
+    "ignoreFiles": [
+        "packages/mosaic/design-tokens/_palette.scss",
+        "packages/mosaic/design-tokens/_variables.scss",
+        "packages/mosaic/design-tokens/tokens.js"
+    ]
 }

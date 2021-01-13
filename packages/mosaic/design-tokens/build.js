@@ -20,7 +20,7 @@ console.log('\n==============================================');
 
 
 StyleDictionary.registerTransform({
-    name: 'mc-attribute/palette', // notice: the name is an override of an existing predefined method (yes, you can do it)
+    name: 'mc-attribute/palette',
     type: 'attribute',
     matcher: (prop) => prop.name === 'palette',
     transformer: (prop) => ({ palette: prop.value })
@@ -59,7 +59,7 @@ StyleDictionary.registerFilter({
 // APPLY THE CONFIGURATION
 // IMPORTANT: the registration of custom transforms
 // needs to be done _before_ applying the configuration
-StyleDictionaryExtended = StyleDictionary.extend(__dirname + '/config.json');
+const StyleDictionaryExtended = StyleDictionary.extend(__dirname + '/config.json');
 
 
 // FINALLY, BUILD ALL THE PLATFORMS

@@ -2,7 +2,10 @@
 
 
 $primary: mc-palette(
-    $light-color-primary-palette, $light-color-primary-lighter, $light-color-primary-default, $light-color-primary-darker
+    $light-color-primary-palette,
+    $light-color-primary-lighter,
+    $light-color-primary-default,
+    $light-color-primary-darker
 );
 $second: mc-palette(
     $light-color-second-palette, $light-color-second-lighter, $light-color-second-default, $light-color-second-darker
@@ -15,10 +18,16 @@ $info: mc-palette(
     $light-color-info-palette, $light-color-info-lighter, $light-color-info-default, $light-color-info-darker
 );
 $success: mc-palette(
-    $light-color-success-palette, $light-color-success-lighter, $light-color-success-default, $light-color-success-darker
+    $light-color-success-palette,
+    $light-color-success-lighter,
+    $light-color-success-default,
+    $light-color-success-darker
 );
 $warning: mc-palette(
-    $light-color-warning-palette, $light-color-warning-lighter, $light-color-warning-default, $light-color-warning-darker
+    $light-color-warning-palette,
+    $light-color-warning-lighter,
+    $light-color-warning-default,
+    $light-color-warning-darker
 );
 
 $theme: mc-light-theme($primary, $second, $error, $info, $success, $warning);

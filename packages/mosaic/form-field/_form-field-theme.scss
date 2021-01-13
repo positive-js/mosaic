@@ -50,7 +50,9 @@
             &.mc-disabled .mc-form-field__container {
                 border-color: mix(map-get($foreground, border), mc-color($background, overlay-disabled));
 
-                background-color: mix(map-get($background, background-disabled), mc-color($background, overlay-disabled));
+                background-color: mix(
+                    map-get($background, background-disabled), mc-color($background, overlay-disabled)
+                );
 
                 .mc-icon,
                 .mc-input,
