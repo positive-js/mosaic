@@ -1,8 +1,10 @@
-@import '../../design-tokens/index';
+@import '../theming/theming';
 @import '../styles/typography/typography-utils';
 
 
 @mixin mc-optgroup-theme($theme) {
+    $foreground: map-get($theme, foreground);
+
     .mc-optgroup-label {
         color: map-get($foreground, text);
     }

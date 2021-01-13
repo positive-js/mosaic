@@ -1,8 +1,10 @@
-@import '../design-tokens/index';
 @import '../core/styles/typography/typography-utils';
 
 
 @mixin mc-list-theme($theme) {
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
     .mc-list-item,
     .mc-list-option {
         color: map-get($foreground, text);
@@ -20,7 +22,7 @@
         }
 
         &.mc-selected {
-            background: $globals-states-selected-color;
+            background: map-get(map-get($theme, states), selected-color);
         }
 
         &.mc-disabled,

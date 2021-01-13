@@ -1,10 +1,12 @@
-@import '../design-tokens/index';
 @import '../core/styles/typography/typography-utils';
 @import '../core/styles/common/popup';
 @import '../core/styles/common/vendor-prefixes';
 
 
 @mixin mc-dropdown-theme($theme) {
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
     .mc-dropdown__panel {
         @include popup-params($theme);
     }
@@ -30,7 +32,7 @@
         }
 
         &.mc-selected {
-            background: $globals-states-selected-color;
+            background: map-get(map-get($theme, states), selected-color);
         }
 
         &[disabled],
@@ -41,7 +43,7 @@
         }
 
         .mc-dropdown__item-caption {
-            color: $color-foreground-text-less-contrast;
+            color: map-get($foreground, text-less-contrast);
         }
     }
 

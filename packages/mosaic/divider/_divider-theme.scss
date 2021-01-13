@@ -1,12 +1,11 @@
-@import '../design-tokens/index';
-
-
 @mixin mc-divider-theme($theme) {
+    $foreground: map-get($theme, foreground);
+
     .mc-divider {
-        border-top-color: $color-foreground-divider;
+        border-top-color: map-get($foreground, divider);
     }
 
     .mc-divider_vertical {
-        border-right-color: $color-foreground-divider;
+        border-right-color: map-get($foreground, divider);
     }
 }

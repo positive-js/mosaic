@@ -2,7 +2,14 @@
 @import '../core/styles/typography/typography-utils';
 @import '../core/styles/variables';
 
+
 @mixin mc-form-field-theme($theme) {
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    $second: map-get($theme, second);
+    $error: map-get($theme, error);
+
     $is-dark: map-get($theme, is-dark);
 
     .mc-form-field {
@@ -14,11 +21,11 @@
             }
 
             &:hover .mc-form-field__container {
-                border-color: if($is-dark, $color-second-lighter, $color-second-darker);
+                border-color: if($is-dark, mc-color($second, lighter), mc-color($second, darker));
             }
 
             &.ng-invalid .mc-form-field__container {
-                background-color: if($is-dark, transparent, $color-error-lighter);
+                background-color: if($is-dark, transparent, mc-color($error, lighter));
 
                 border-color: mc-color($error);
 
@@ -56,7 +63,7 @@
     }
 
     .mc-form-field__hint {
-        color: $color-foreground-text-less-contrast;
+        color: map-get($foreground, text-less-contrast);
     }
 }
 

@@ -1,9 +1,15 @@
-@import '../design-tokens/index';
+@import '../core/theming/theming';
 @import '../core/styles/typography/typography-utils';
 
 
 @mixin mc-icon-theme($theme) {
-    $primary-color: map-get($color-primary-palette, 400);
+    $foreground: map-get($theme, foreground);
+
+    $primary: map-get($theme, primary);
+    $second: map-get($theme, second);
+    $error: map-get($theme, error);
+
+    $primary-color: mc-color($primary, 400);
 
     // Дефолтные серые иконки default-icon: лупа в поле, иконки дропдаунов v, все иконки вне полей.
     .mc-icon:not(.mc-icon_light) {
@@ -19,7 +25,7 @@
         }
 
         &.mc-second {
-            color: $color-foreground-text-less-contrast;
+            color: map-get($foreground, text-less-contrast);
 
             &[disabled],
             &.mc-disabled {
@@ -53,7 +59,7 @@
             color: $primary-color;
 
             &:hover {
-                color: mix($color-foreground-text, $primary-color);
+                color: mix(map-get($foreground, text), $primary-color);
             }
         }
 
@@ -61,7 +67,7 @@
             color: mc-color($second);
 
             &:hover {
-                color: mix($color-foreground-text, mc-color($second), 90%);
+                color: mix(map-get($foreground, text), mc-color($second), 90%);
             }
         }
 
@@ -69,7 +75,7 @@
             color: mc-color($error);
 
             &:hover {
-                color: mix($color-foreground-text, mc-color($error));
+                color: mix(map-get($foreground, text), mc-color($error));
             }
         }
     }

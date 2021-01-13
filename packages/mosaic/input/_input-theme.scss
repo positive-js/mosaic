@@ -1,7 +1,10 @@
 @import '../core/theming/theming';
 @import '../core/styles/typography/typography-utils';
 
+
 @mixin mc-input-theme($theme) {
+    $foreground: map-get($theme, foreground);
+
     .mc-input {
         color: map-get($foreground, text);
 

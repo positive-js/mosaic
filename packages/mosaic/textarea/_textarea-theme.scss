@@ -1,9 +1,10 @@
-@import '../design-tokens/index';
 @import '../core/theming/theming';
 @import '../core/styles/typography/typography-utils';
 
 
 @mixin mc-textarea-theme($theme) {
+    $foreground: map-get($theme, foreground);
+
     .mc-textarea {
         color: map-get($foreground, text);
 

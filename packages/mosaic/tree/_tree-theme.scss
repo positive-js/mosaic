@@ -1,8 +1,10 @@
-@import '../design-tokens/index';
 @import '../core/styles/typography/typography-utils';
 
 
 @mixin mc-tree-theme($theme) {
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
     .mc-tree-selection:focus {
         outline: none;
     }
@@ -19,7 +21,7 @@
         }
 
         &.mc-selected {
-            background: $globals-states-selected-color;
+            background: map-get(map-get($theme, states), selected-color);
         }
 
         &[disabled] {

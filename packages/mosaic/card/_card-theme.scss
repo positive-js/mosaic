@@ -14,6 +14,17 @@
 }
 
 @mixin mc-card-theme($theme) {
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    $second: map-get($theme, second);
+    $error: map-get($theme, error);
+    $info: map-get($theme, info);
+    $warning: map-get($theme, warning);
+    $success: map-get($theme, success);
+
+    $popup: map-get(map-get($theme, components), popup);
+
     $is-dark: map-get($theme, is-dark);
 
     .mc-card {
@@ -21,33 +32,33 @@
 
         &.mc-card_info {
             @if($is-dark) {
-                @include card-type($color-info-default, $color-info-darker, $color-second-darker);
+                @include card-type(mc-color($info), mc-color($info, darker), mc-color($second, darker));
             } @else {
-                @include card-type($color-info-default, $color-info-lighter, $color-second-lighter);
+                @include card-type(mc-color($info), mc-color($info, lighter), mc-color($second, lighter));
             }
         }
 
         &.mc-card_warning {
             @if($is-dark) {
-                @include card-type($color-warning-default, $color-warning-darker, $color-second-darker);
+                @include card-type(mc-color($warning), mc-color($warning, darker), mc-color($second, darker));
             } @else {
-                @include card-type($color-warning-default, $color-warning-lighter, $color-second-lighter);
+                @include card-type(mc-color($warning), mc-color($warning, lighter), mc-color($second, lighter));
             }
         }
 
         &.mc-card_success {
             @if($is-dark) {
-                @include card-type($color-success-default, $color-success-darker, $color-second-darker);
+                @include card-type(mc-color($success), mc-color($success, darker), mc-color($second, darker));
             } @else {
-                @include card-type($color-success-default, $color-success-lighter, $color-second-lighter);
+                @include card-type(mc-color($success), mc-color($success, lighter), mc-color($second, lighter));
             }
         }
 
         &.mc-card_error {
             @if($is-dark) {
-                @include card-type(mc-color($error), $color-error-darker, $color-second-darker);
+                @include card-type(mc-color($error), mc-color($error, darker), mc-color($second, darker));
             } @else {
-                @include card-type(mc-color($error), $color-error-lighter, $color-second-lighter);
+                @include card-type(mc-color($error), mc-color($error, lighter), mc-color($second, lighter));
             }
         }
 
@@ -56,7 +67,7 @@
         }
 
         &.mc-selected {
-            background-color: $globals-states-selected-color;
+            background-color: map-get(map-get($theme, states), selected-color);
         }
 
         &:not(.mc-card_readonly):hover {

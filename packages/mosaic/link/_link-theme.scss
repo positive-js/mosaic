@@ -3,9 +3,13 @@
 
 
 @mixin mc-link-theme($theme) {
+    $foreground: map-get($theme, foreground);
+
+    $primary: map-get($theme, primary);
+
     $is-dark: map-get($theme, is-dark);
 
-    $color_hover: if($is-dark, $color-primary-lighter, $color-primary-darker);
+    $color_hover: mc-color($primary, if($is-dark, lighter, darker));
 
     .mc-link {
         color: mc-color($primary);

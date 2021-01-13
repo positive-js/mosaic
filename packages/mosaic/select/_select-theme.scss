@@ -1,9 +1,14 @@
+@import '../core/theming/theming';
 @import '../core/styles/typography/typography-utils';
 @import '../core/styles/common/popup';
 
 
 @mixin mc-select-theme($theme) {
     $foreground: map-get($theme, foreground);
+
+    $error: map-get($theme, error);
+
+    $popup: map-get(map-get($theme, components), popup);
 
     .mc-select {
         color: map-get($foreground, text);
@@ -30,7 +35,7 @@
     }
 
     .mc-select__no-options-message {
-        color: $color-foreground-text-less-contrast;
+        color: map-get($foreground, text-less-contrast);
     }
 }
 

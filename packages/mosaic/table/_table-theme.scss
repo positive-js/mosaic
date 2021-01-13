@@ -1,13 +1,16 @@
-@import '../design-tokens/index';
+@import '../core/styles/typography/typography-utils';
 
 
 @mixin mc-table-theme($theme) {
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
     .mc-table {
         & > thead {
-            color: $color-foreground-text-less-contrast;
+            color: map-get($foreground, text-less-contrast);
 
             & > tr > th {
-                border-color: $color-foreground-divider;
+                border-color: map-get($foreground, divider);
             }
         }
 
@@ -28,7 +31,7 @@
             & > tbody > tr {
                 & th,
                 & td {
-                    border-color: $color-foreground-divider;
+                    border-color: map-get($foreground, divider);
                 }
             }
         }

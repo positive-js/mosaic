@@ -1,9 +1,13 @@
-@import '../design-tokens/index';
+@import '../core/theming/theming';
 @import '../core/styles/typography/typography-utils';
 @import '../core/styles/common/popup';
 
 
 @mixin mc-tree-select-theme($theme) {
+    $foreground: map-get($theme, foreground);
+
+    $error: map-get($theme, error);
+
     .mc-tree-select {
         color: map-get($foreground, text);
 

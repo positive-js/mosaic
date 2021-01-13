@@ -1,9 +1,15 @@
-@import '../design-tokens/index';
 @import '../core/styles/typography/typography-utils';
 
 @mixin mc-checkbox-theme($theme) {
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    $primary: map-get($theme, primary);
+
+    $checkbox: map-get(map-get($theme, components), checkbox);
+
     .mc-checkbox-frame {
-        border-color: $checkbox-color-border-color;
+        border-color: map-get($checkbox, border);
 
         & .mc-checkbox-checkmark,
         & .mc-checkbox-mixedmark {
@@ -23,9 +29,9 @@
         &.mc-checked,
         &.mc-indeterminate {
             .mc-checkbox-frame {
-                border-color: $checkbox-color-states-checked-border-color;
+                border-color: map-get($checkbox, state-checked-border);
 
-                background: $checkbox-color-states-checked-background;
+                background: map-get($checkbox, state-checked-background);
             }
         }
 
@@ -46,9 +52,9 @@
 
         & .mc-checkbox-input.cdk-keyboard-focused {
             + .mc-checkbox-frame {
-                border-color: $checkbox-color-states-focused-border-color;
+                border-color: map-get($checkbox, state-focused-border);
 
-                box-shadow: $checkbox-color-states-focused-shadow;
+                box-shadow: map-get($checkbox, state-focused-shadow);
             }
         }
     }

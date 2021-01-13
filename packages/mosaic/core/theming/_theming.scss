@@ -43,7 +43,7 @@
 @function mc-light-theme($primary, $second, $error, $info, $success, $warning) {
     $states: (
         focused-color: $light-color-states-focused-color,
-        selected-color: $light-color-states-focused-color,
+        selected-color: $light-color-states-selected-color,
         pressed-shadow: $light-color-states-pressed-shadow,
         disabled-opacity: $light-color-states-disabled-opacity
     );
