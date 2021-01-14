@@ -33,7 +33,7 @@
             "error": {
                 "border": { "value": "{light-color.foreground.border.value}" },
                 "background": { "value": "{light-color.background.background-disabled.value}" },
-                "color": { "value": "{light-color.error.default.value}" },
+                "color": { "value": "{light-color.error.palette.value.400.value}" },
                 "icon": { "value": "{light-color.error.palette.value.400.value}" },
 
                 "states": {
@@ -57,7 +57,7 @@
                 "states": {
                     "active": {
                         "border": { "value": "darken({dark-color.primary.palette.value.560.value}, 5)" },
-                        "background": { "value": "darken({dark-color.primary.default.value}, 5)" }
+                        "background": { "value": "darken({dark-color.primary.palette.value.400.value}, 5)" }
                     }
                 }
             },
@@ -77,7 +77,7 @@
             "error": {
                 "border": { "value": "{dark-color.foreground.border.value}" },
                 "background": { "value": "{dark-color.background.background-disabled.value}" },
-                "color": { "value": "{dark-color.error.default.value}" },
+                "color": { "value": "{dark-color.error.palette.value.400.value}" },
                 "icon": { "value": "{dark-color.error.palette.value.400.value}" },
 
                 "states": {

@@ -2,11 +2,11 @@
     "tabs": {
         "light-color": {
             "border": { "value": "{light-color.second.palette.value.300.value}" },
-            "state-active": { "value": "{light-color.primary.default.value}" }
+            "state-active": { "value": "{light-color.primary.palette.value.500.value}" }
         },
         "dark-color": {
             "border": { "value": "{dark-color.second.palette.value.300.value}" },
-            "state-active": { "value": "{dark-color.primary.default.value}" }
+            "state-active": { "value": "{dark-color.primary.palette.value.400.value}" }
         },
         "size": {
             "height": { "value": "40px" },
