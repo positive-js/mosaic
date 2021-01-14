@@ -2,7 +2,7 @@
     "list": {
         "color": {},
         "size": {
-            "side-padding": { "value": "15px" },
+            "horizontal-padding": { "value": "15px" },
             "icon-padding": { "value": "4px" },
 
             "item-height": { "value": "28px" },

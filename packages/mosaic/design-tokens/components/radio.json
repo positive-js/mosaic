@@ -1,26 +1,38 @@
 {
     "radio": {
-        "lightColor": {
-            "outer-circle_border": { "value": "{lightColor.second.default.value}" },
-            "inner-circle_border": { "value": "transparent" },
+        "light-color": {
+            "outer-circle-border": { "value": "{light-color.second.default.value}" },
+            "inner-circle-border": { "value": "transparent" },
 
-            "outer-circle_checked-state_border": { "value": "{lightColor.primary.default.value}" },
-            "outer-circle_focused-state_border": { "value": "{lightColor.states.focused-color.value}" },
-            "outer-circle_focused-state_shadow": { "value": "0 0 0 2px {lightColor.second.default.value}" },
+            "states": {
+                "checked": {
+                    "outer-circle-border": { "value": "{light-color.primary.default.value}" },
+                    "inner-circle-border": { "value": "{light-color.primary.default.value}" }
 
-            "inner-circle_checked-state_border": { "value": "{lightColor.primary.default.value}" },
-            "inner-circle_focused-state_shadow": { "value": "0 0 0 1px {lightColor.background.background.value}" }
+                },
+                "focused": {
+                    "outer-circle-border": { "value": "{light-color.states.focused-color.value}" },
+                    "outer-circle-shadow": { "value": "0 0 0 2px {light-color.second.default.value}" },
+                    "inner-circle-shadow": { "value": "0 0 0 1px {light-color.background.background.value}" }
+                }
+            }
         },
-        "darkColor": {
-            "outer-circle_border": { "value": "{darkColor.second.default.value}" },
-            "inner-circle_border": { "value": "transparent" },
+        "dark-color": {
+            "outer-circle-border": { "value": "{dark-color.second.default.value}" },
+            "inner-circle-border": { "value": "transparent" },
 
-            "outer-circle_checked-state_border": { "value": "{darkColor.primary.default.value}" },
-            "outer-circle_focused-state_border": { "value": "{darkColor.states.focused-color.value}" },
-            "outer-circle_focused-state_shadow": { "value": "0 0 0 2px {darkColor.states.focused-color.value}" },
+            "states": {
+                "checked": {
+                    "outer-circle-border": { "value": "{dark-color.primary.default.value}" },
+                    "inner-circle-border": { "value": "{dark-color.primary.palette.value.600.value}" }
+                },
+                "focused": {
+                    "outer-circle-border": { "value": "{dark-color.states.focused-color.value}" },
+                    "outer-circle-shadow": { "value": "0 0 0 2px {dark-color.states.focused-color.value}" },
 
-            "inner-circle_checked-state_border": { "value": "{darkColor.primary.palette.value.600.value}" },
-            "inner-circle_focused-state_shadow": { "value": "0 0 0 1px {darkColor.background.background.value}" }
+                    "inner-circle-shadow": { "value": "0 0 0 1px {dark-color.background.background.value}" }
+                }
+            }
         },
         "size": {
             "size": { "value": "14px" },

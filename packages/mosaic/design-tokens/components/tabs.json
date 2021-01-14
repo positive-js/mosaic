@@ -1,12 +1,12 @@
 {
     "tabs": {
-        "lightColor": {
-            "border": { "value": "{lightColor.second.palette.value.300.value}" },
-            "state-active": { "value": "{lightColor.primary.default.value}" }
+        "light-color": {
+            "border": { "value": "{light-color.second.palette.value.300.value}" },
+            "state-active": { "value": "{light-color.primary.default.value}" }
         },
-        "darkColor": {
-            "border": { "value": "{darkColor.second.palette.value.300.value}" },
-            "state-active": { "value": "{darkColor.primary.default.value}" }
+        "dark-color": {
+            "border": { "value": "{dark-color.second.palette.value.300.value}" },
+            "state-active": { "value": "{dark-color.primary.default.value}" }
         },
         "size": {
             "height": { "value": "40px" },

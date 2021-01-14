@@ -1,13 +1,13 @@
 {
     "navbar": {
-        "lightColor": {
-            "background": { "value": "{lightColor.primary.palette.value.700.value}" },
-            "color": { "value": "{lightColor.primary.palette.value.100.value}" },
+        "light-color": {
+            "background": { "value": "{light-color.primary.palette.value.700.value}" },
+            "text": { "value": "{light-color.primary.palette.value.100.value}" },
             "opacity": { "value": 0.5 }
         },
-        "darkColor": {
-            "background": { "value": "{darkColor.primary.palette.value.700.value}" },
-            "color": { "value": "{darkColor.primary.palette.value.100.value}" },
+        "dark-color": {
+            "background": { "value": "{dark-color.primary.palette.value.700.value}" },
+            "text": { "value": "{dark-color.primary.palette.value.100.value}" },
             "opacity": { "value": 0.5 }
         },
         "size": {
@@ -17,23 +17,23 @@
         "font": {}
     },
     "navbar-item": {
-        "lightColor": {
-            "color": { "value": "{lightColor.primary.palette.value.100.value}" },
+        "light-color": {
+            "text": { "value": "{light-color.primary.palette.value.100.value}" },
 
             "states": {
-                "active": { "value": "lighten({lightColor.primary.palette.value.600.value}, 5%)" },
-                "hover": { "value": "lighten({lightColor.primary.palette.value.600.value}, 5%)" },
-                "progress": { "value": "lighten({lightColor.primary.palette.value.800.value}, 5%)" },
+                "active": { "value": "lighten({light-color.primary.palette.value.600.value}, 5%)" },
+                "hover": { "value": "lighten({light-color.primary.palette.value.600.value}, 5%)" },
+                "progress": { "value": "lighten({light-color.primary.palette.value.800.value}, 5%)" },
                 "disabled-opacity": { "value": 0.3 }
             }
         },
-        "darkColor": {
-            "color": { "value": "{darkColor.primary.palette.value.100.value}" },
+        "dark-color": {
+            "text": { "value": "{dark-color.primary.palette.value.100.value}" },
 
             "states": {
-                "active": { "value": "lighten({darkColor.primary.palette.value.700.value}, 5%)" },
-                "hover": { "value": "lighten({darkColor.primary.palette.value.700.value}, 5%)" },
-                "progress": { "value": "lighten({darkColor.primary.palette.value.800.value}, 15%)" },
+                "active": { "value": "lighten({dark-color.primary.palette.value.700.value}, 5%)" },
+                "hover": { "value": "lighten({dark-color.primary.palette.value.700.value}, 5%)" },
+                "progress": { "value": "lighten({dark-color.primary.palette.value.800.value}, 15%)" },
                 "disabled-opacity": { "value": 0.3 }
             }
         },

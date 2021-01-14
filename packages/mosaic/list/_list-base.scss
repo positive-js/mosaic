@@ -23,7 +23,7 @@
 
         height: 100%;
 
-        padding: 0 $list-size-side-padding;
+        padding: 0 $list-size-horizontal-padding;
     }
 
     &.mc-2-line {
@@ -77,7 +77,7 @@
         font-size: $icon-size;
 
         ~ .mc-divider_inset {
-            @include mc-inset-divider-offset($icon-size + (2 * $list-size-icon-padding), $list-size-side-padding);
+            @include mc-inset-divider-offset($icon-size + (2 * $list-size-icon-padding), $list-size-horizontal-padding);
         }
     }
 

@@ -20,8 +20,8 @@
             background: $button-light-color-primary-background,
             icon: $button-light-color-primary-icon,
 
-            active_border: $button-light-color-primary-active-border,
-            active_background: $button-light-color-primary-active-background
+            active_border: $button-light-color-primary-states-active-border,
+            active_background: $button-light-color-primary-states-active-background
         ),
 
         second: (
@@ -30,8 +30,8 @@
             background: $button-light-color-second-background,
             icon: $button-light-color-second-icon,
 
-            active_border: $button-light-color-second-active-border,
-            active_background: $button-light-color-second-active-background
+            active_border: $button-light-color-second-states-active-border,
+            active_background: $button-light-color-second-states-active-background
         ),
 
         error: (
@@ -40,8 +40,8 @@
             background: $button-light-color-error-background,
             icon: $button-light-color-error-icon,
 
-            active_border: $button-light-color-error-active-border,
-            active_background: $button-light-color-error-active-background
+            active_border: $button-light-color-error-states-active-border,
+            active_background: $button-light-color-error-states-active-background
         )
     );
 
@@ -62,12 +62,12 @@
 
     $navbar: (
         background: $navbar-light-color-background,
-        color: $navbar-light-color-color,
+        color: $navbar-light-color-text,
         opacity: $navbar-light-color-opacity,
     );
 
     $navbar-item: (
-        color: $navbar-item-light-color-color,
+        color: $navbar-item-light-color-text,
 
         state-active: $navbar-item-light-color-states-active,
         state-hover: $navbar-item-light-color-states-hover,
@@ -87,12 +87,12 @@
         outer-circle_border: $radio-light-color-outer-circle-border,
         inner-circle_border: $radio-light-color-inner-circle-border,
 
-        outer-circle_checked-state_border: $radio-light-color-outer-circle-checked-state-border,
-        outer-circle_focused-state_border: $radio-light-color-outer-circle-focused-state-border,
-        outer-circle_focused-state_shadow: $radio-light-color-outer-circle-focused-state-shadow,
+        outer-circle_checked-state_border: $radio-light-color-states-checked-outer-circle-border,
+        outer-circle_focused-state_border: $radio-light-color-states-focused-outer-circle-border,
+        outer-circle_focused-state_shadow: $radio-light-color-states-focused-outer-circle-shadow,
 
-        inner-circle_checked-state_border: $radio-light-color-inner-circle-checked-state-border,
-        inner-circle_focused-state_shadow: $radio-light-color-inner-circle-focused-state-shadow
+        inner-circle_checked-state_border: $radio-light-color-states-checked-inner-circle-border,
+        inner-circle_focused-state_shadow: $radio-light-color-states-focused-inner-circle-shadow
     );
 
     $sidepanel: (
@@ -108,29 +108,29 @@
         primary: (
             border: $tags-light-color-primary-border,
             background: $tags-light-color-primary-background,
-            background_disabled: $tags-light-color-primary-state-disabled,
+            background_disabled: $tags-light-color-primary-states-disabled-background,
             icon: $tags-light-color-primary-icon,
-            icon_hovered: $tags-light-color-primary-icon-hovered,
-            focused: $tags-light-color-primary-state-focused,
-            disabled: $tags-light-color-primary-state-disabled
+            icon_hovered: $tags-light-color-primary-states-hovered-icon,
+            focused: $tags-light-color-primary-states-focused,
+            disabled: $tags-light-color-primary-states-disabled-text
         ),
         second: (
             border: $tags-light-color-second-border,
             background: $tags-light-color-second-background,
-            background_disabled: $tags-light-color-second-state-disabled,
+            background_disabled: $tags-light-color-second-states-disabled-background,
             icon: $tags-light-color-second-icon,
-            icon_hovered: $tags-light-color-second-icon-hovered,
-            focused: $tags-light-color-second-state-focused,
-            disabled: $tags-light-color-second-state-disabled
+            icon_hovered: $tags-light-color-second-states-hovered-icon,
+            focused: $tags-light-color-second-states-focused,
+            disabled: $tags-light-color-second-states-disabled-text
         ),
         error: (
             border: $tags-light-color-error-border,
             background: $tags-light-color-error-background,
-            background_disabled: $tags-light-color-error-state-disabled,
+            background_disabled: $tags-light-color-error-states-disabled-background,
             icon: $tags-light-color-error-icon,
-            icon_hovered: $tags-light-color-error-icon-hovered,
-            focused: $tags-light-color-error-state-focused,
-            disabled: $tags-light-color-error-state-disabled
+            icon_hovered: $tags-light-color-error-states-hovered-icon,
+            focused: $tags-light-color-error-states-focused,
+            disabled: $tags-light-color-error-states-disabled-text
         )
     );
 
@@ -141,24 +141,24 @@
         circle_border: $toggle-light-color-circle-border,
         circle_background: $toggle-light-color-circle-background,
 
-        focused: $toggle-light-color-state-focused
+        focused: $toggle-light-color-states-focused-shadow
     );
 
     $tooltip: (
         background: $tooltip-light-color-background,
-        color: $tooltip-light-color-color,
+        color: $tooltip-light-color-text,
         shadow: $tooltip-light-color-shadow
     );
 
     $vertical-navbar: (
         background: $vertical-navbar-light-color-background,
-        color: $vertical-navbar-light-color-color,
+        color: $vertical-navbar-light-color-text,
 
         toggle-button: $vertical-navbar-light-color-toggle-button,
 
-        background_hovered: $vertical-navbar-light-color-state-hovered-background,
-        background_active: $vertical-navbar-light-color-state-active-background,
-        background_progress: $vertical-navbar-light-color-state-progress-background
+        background_hovered: $vertical-navbar-light-color-states-hovered-background,
+        background_active: $vertical-navbar-light-color-states-active-background,
+        background_progress: $vertical-navbar-light-color-states-progress-background
     );
 
     @return (
@@ -199,8 +199,8 @@
             background: $button-dark-color-primary-background,
             icon: $button-dark-color-primary-icon,
 
-            active_border: $button-dark-color-primary-active-border,
-            active_background: $button-dark-color-primary-active-background
+            active_border: $button-dark-color-primary-states-active-border,
+            active_background: $button-dark-color-primary-states-active-background
         ),
 
         second: (
@@ -209,8 +209,8 @@
             background: $button-dark-color-second-background,
             icon: $button-dark-color-second-icon,
 
-            active_border: $button-dark-color-second-active-border,
-            active_background: $button-dark-color-second-active-background
+            active_border: $button-dark-color-second-states-active-border,
+            active_background: $button-dark-color-second-states-active-background
         ),
 
         error: (
@@ -219,8 +219,8 @@
             background: $button-dark-color-error-background,
             icon: $button-dark-color-error-icon,
 
-            active_border: $button-dark-color-error-active-border,
-            active_background: $button-dark-color-error-active-background
+            active_border: $button-dark-color-error-states-active-border,
+            active_background: $button-dark-color-error-states-active-background
         )
     );
 
@@ -241,12 +241,12 @@
 
     $navbar: (
         background: $navbar-dark-color-background,
-        color: $navbar-dark-color-color,
+        color: $navbar-dark-color-text,
         opacity: $navbar-dark-color-opacity,
     );
 
     $navbar-item: (
-        color: $navbar-item-dark-color-color,
+        color: $navbar-item-dark-color-text,
 
         state-active: $navbar-item-dark-color-states-active,
         state-hover: $navbar-item-dark-color-states-hover,
@@ -266,12 +266,12 @@
         outer-circle_border: $radio-dark-color-outer-circle-border,
         inner-circle_border: $radio-dark-color-inner-circle-border,
 
-        outer-circle_checked-state_border: $radio-dark-color-outer-circle-checked-state-border,
-        outer-circle_focused-state_border: $radio-dark-color-outer-circle-focused-state-border,
-        outer-circle_focused-state_shadow: $radio-dark-color-outer-circle-focused-state-shadow,
+        outer-circle_checked-state_border: $radio-dark-color-states-checked-outer-circle-border,
+        outer-circle_focused-state_border: $radio-dark-color-states-focused-outer-circle-border,
+        outer-circle_focused-state_shadow: $radio-dark-color-states-focused-outer-circle-shadow,
 
-        inner-circle_checked-state_border: $radio-dark-color-inner-circle-checked-state-border,
-        inner-circle_focused-state_shadow: $radio-dark-color-inner-circle-focused-state-shadow
+        inner-circle_checked-state_border: $radio-dark-color-states-checked-inner-circle-border,
+        inner-circle_focused-state_shadow: $radio-dark-color-states-focused-inner-circle-shadow
     );
 
     $sidepanel: (
@@ -287,29 +287,29 @@
         primary: (
             border: $tags-dark-color-primary-border,
             background: $tags-dark-color-primary-background,
-            background_disabled: $tags-dark-color-primary-state-disabled,
+            background_disabled: $tags-dark-color-primary-states-disabled-background,
             icon: $tags-dark-color-primary-icon,
-            icon_hovered: $tags-dark-color-primary-icon-hovered,
-            focused: $tags-dark-color-primary-state-focused,
-            disabled: $tags-dark-color-primary-state-disabled
+            icon_hovered: $tags-dark-color-primary-states-hovered-icon,
+            focused: $tags-dark-color-primary-states-focused,
+            disabled: $tags-dark-color-primary-states-disabled-text
         ),
         second: (
             border: $tags-dark-color-second-border,
             background: $tags-dark-color-second-background,
-            background_disabled: $tags-dark-color-second-state-disabled,
+            background_disabled: $tags-dark-color-second-states-disabled-background,
             icon: $tags-dark-color-second-icon,
-            icon_hovered: $tags-dark-color-second-icon-hovered,
-            focused: $tags-dark-color-second-state-focused,
-            disabled: $tags-dark-color-second-state-disabled
+            icon_hovered: $tags-dark-color-second-states-hovered-icon,
+            focused: $tags-dark-color-second-states-focused,
+            disabled: $tags-dark-color-second-states-disabled-text
         ),
         error: (
             border: $tags-dark-color-error-border,
             background: $tags-dark-color-error-background,
-            background_disabled: $tags-dark-color-error-state-disabled,
+            background_disabled: $tags-dark-color-error-states-disabled-background,
             icon: $tags-dark-color-error-icon,
-            icon_hovered: $tags-dark-color-error-icon-hovered,
-            focused: $tags-dark-color-error-state-focused,
-            disabled: $tags-dark-color-error-state-disabled
+            icon_hovered: $tags-dark-color-error-states-hovered-icon,
+            focused: $tags-dark-color-error-states-focused,
+            disabled: $tags-dark-color-error-states-disabled-text
         )
     );
 
@@ -320,24 +320,24 @@
         circle_border: $toggle-dark-color-circle-border,
         circle_background: $toggle-dark-color-circle-background,
 
-        focused: $toggle-dark-color-state-focused
+        focused: $toggle-dark-color-states-focused-shadow
     );
 
     $tooltip: (
         background: $tooltip-dark-color-background,
-        color: $tooltip-dark-color-color,
+        color: $tooltip-dark-color-text,
         shadow: $tooltip-dark-color-shadow
     );
 
     $vertical-navbar: (
         background: $vertical-navbar-dark-color-background,
-        color: $vertical-navbar-dark-color-color,
+        color: $vertical-navbar-dark-color-text,
 
         toggle-button: $vertical-navbar-dark-color-toggle-button,
 
-        background_hovered: $vertical-navbar-dark-color-state-hovered-background,
-        background_active: $vertical-navbar-dark-color-state-active-background,
-        background_progress: $vertical-navbar-dark-color-state-progress-background
+        background_hovered: $vertical-navbar-dark-color-states-hovered-background,
+        background_active: $vertical-navbar-dark-color-states-active-background,
+        background_progress: $vertical-navbar-dark-color-states-progress-background
     );
 
     @return (

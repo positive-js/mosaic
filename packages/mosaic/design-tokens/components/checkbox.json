@@ -1,28 +1,28 @@
 {
     "checkbox": {
-        "lightColor": {
-            "border": { "value": "{lightColor.second.default.value}" },
+        "light-color": {
+            "border": { "value": "{light-color.second.default.value}" },
             "states": {
                 "checked": {
-                    "border": { "value": "{lightColor.primary.darker.value}" },
-                    "background": { "value": "{lightColor.primary.default.value}" }
+                    "border": { "value": "{light-color.primary.darker.value}" },
+                    "background": { "value": "{light-color.primary.default.value}" }
                 },
                 "focused": {
-                    "border": { "value": "{lightColor.primary.darker.value}" },
-                    "shadow": { "value": "inset 0 0 0 1px {lightColor.background.background.value}, 0 0 0 1px {lightColor.primary.darker.value}" }
+                    "border": { "value": "{light-color.primary.darker.value}" },
+                    "shadow": { "value": "inset 0 0 0 1px {light-color.background.background.value}, 0 0 0 1px {light-color.primary.darker.value}" }
                 }
             }
         },
-        "darkColor": {
-            "border": { "value": "{darkColor.second.default.value}" },
+        "dark-color": {
+            "border": { "value": "{dark-color.second.default.value}" },
             "states": {
                 "checked": {
-                    "border": { "value": "{darkColor.primary.lighter.value}" },
-                    "background": { "value": "{darkColor.primary.palette.value.600.value}" }
+                    "border": { "value": "{dark-color.primary.lighter.value}" },
+                    "background": { "value": "{dark-color.primary.palette.value.600.value}" }
                 },
                 "focused": {
-                    "border": { "value": "{darkColor.primary.default.value}" },
-                    "shadow": { "value": "inset 0 0 0 1px {darkColor.background.background.value}, 0 0 0 1px {darkColor.primary.default.value}" }
+                    "border": { "value": "{dark-color.primary.default.value}" },
+                    "shadow": { "value": "inset 0 0 0 1px {dark-color.background.background.value}, 0 0 0 1px {dark-color.primary.default.value}" }
                 }
             }
         },
