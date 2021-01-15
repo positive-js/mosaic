@@ -15752,10 +15752,10 @@ strip-json-comments@~2.0.1:
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
   integrity sha1-PFMZQukIwml8DsNEhYwobHygpgo=
 
-style-dictionary@^2.10.2:
-  version "2.10.2"
-  resolved "https://registry.yarnpkg.com/style-dictionary/-/style-dictionary-2.10.2.tgz#9150dfcdc1492e1cd5f0f0a73e2bc6ada349c09b"
-  integrity sha512-1GgtokijUl46tFXFGMmGPioO9xMzTBcCRfufYUZ61OxYRUEDT93M7Y9YxD+udgrHN2pYRrS/CiToM4jARBTccQ==
+style-dictionary@^3.0.0-rc.2:
+  version "3.0.0-rc.2"
+  resolved "https://registry.yarnpkg.com/style-dictionary/-/style-dictionary-3.0.0-rc.2.tgz#969527068ff1b10500e3817316dc9c5c353cea0c"
+  integrity sha512-iW2zuJZGOAsMLW7GupNY9JRATdLQkoIceV875HgSeFQf4fcha3DfXYlpW3QQKf9Bt98auOYCZ5zCb3qmmAFD3A==
   dependencies:
     chalk "^4.0.0"
     commander "^5.1.0"
