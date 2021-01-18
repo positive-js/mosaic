@@ -63,6 +63,10 @@ export class McDatepickerInputEvent<D> {
     }
 }
 
+const maxYearForCurrentCentury = 30;
+const previousCentury = 1900;
+const currentCentury = 2000;
+
 
 /** Directive used to connect an input to a McDatepicker. */
 @Directive({
@@ -351,8 +355,21 @@ export class McDatepickerInput<D> implements ControlValueAccessor, OnDestroy, Va
 
     /** Formats a value and sets it on the input element. */
     private formatValue(value: D | null) {
-        this.elementRef.nativeElement.value =
-            value ? this.dateAdapter.format(value, this.dateFormats.display.dateInput) : '';
+        let newValue = '';
+
+        if (value) {
+            const parsedYear = value.year();
+
+            if (parsedYear < (currentCentury - previousCentury)) {
+                const century = parsedYear < maxYearForCurrentCentury ? currentCentury : previousCentury;
+
+                value.year(century + parsedYear);
+            }
+
+            newValue = this.dateAdapter.format(value, this.dateFormats.display.dateInput);
+        }
+
+        this.elementRef.nativeElement.value = newValue;
     }
 
     /**

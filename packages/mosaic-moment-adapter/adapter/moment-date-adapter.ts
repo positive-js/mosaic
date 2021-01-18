@@ -67,6 +67,11 @@ function range<T>(length: number, valueFunction: (index: number) => T): T[] {
     return valuesArray;
 }
 
+// disable moment "Parsing two digit years" https://momentjs.com/docs/#/parsing/string-format/
+function parseTwoDigitYear(yearString) {
+    return parseInt(yearString);
+}
+
 @Injectable()
 export class MomentDateAdapter extends DateAdapter<Moment> {
     private messageformat: MessageFormat;
@@ -98,6 +103,8 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
         this.setLocale(dateLocale || moment.locale());
 
         this.configureTranslator(this.locale);
+
+        moment.parseTwoDigitYear = parseTwoDigitYear;
     }
 
     setLocale(locale: string): void {
