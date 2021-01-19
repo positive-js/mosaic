@@ -381,6 +381,9 @@ describe('MomentDateAdapter', () => {
 
 describe('MomentDateAdapter findDateFormat = true', () => {
     let adapter: MomentDateAdapter;
+    const date = new Date(2019, 5, 3);
+    const dateWithFullYear = new Date(0, 5, 3);
+    dateWithFullYear.setFullYear(19);
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
@@ -410,43 +413,44 @@ describe('MomentDateAdapter findDateFormat = true', () => {
         adapter.setLocale('ru');
         // finishing year
         expect(adapter.parse('03-06-2019', '')!.toDate())
-            .toEqual(new Date(2019, 5, 3));
+            .toEqual(date);
+
         expect(adapter.parse('03-06-19', '')!.toDate())
-            .toEqual(new Date(2019, 5, 3));
+            .toEqual(dateWithFullYear);
         // leading year
         expect(adapter.parse('2019-06-03', '')!.toDate())
-            .toEqual(new Date(2019, 5, 3));
+            .toEqual(date);
 
         adapter.setLocale('en');
         // finishing year
         expect(adapter.parse('03-06-2019', '')!.toDate())
-            .toEqual(new Date(2019, 5, 3));
+            .toEqual(date);
         // short year
         expect(adapter.parse('03-06-19', '')!.toDate())
-            .toEqual(new Date(2019, 5, 3));
+            .toEqual(dateWithFullYear);
 
         // leading year
         expect(adapter.parse('2019-06-03', '')!.toDate())
-            .toEqual(new Date(2019, 5, 3));
+            .toEqual(date);
 
     });
 
     it('should parse slashed date', () => {
         adapter.setLocale('ru');
         expect(adapter.parse('03/06/2019', '')!.toDate())
-            .toEqual(new Date(2019, 5, 3));
+            .toEqual(date);
         // short year
         expect(adapter.parse('03/06/19', '')!.toDate())
-            .toEqual(new Date(2019, 5, 3));
+            .toEqual(dateWithFullYear);
 
         adapter.setLocale('en');
         // US by default
-        expect(adapter.parse('03/06/2019', '')!.toDate())
-            .toEqual(new Date(2019, 2, 6));
+        expect(adapter.parse('06/03/2019', '')!.toDate())
+            .toEqual(date);
 
         // short year
-        expect(adapter.parse('03/06/19', '')!.toDate())
-            .toEqual(new Date(2019, 2, 6));
+        expect(adapter.parse('06/03/19', '')!.toDate())
+            .toEqual(dateWithFullYear);
 
         // month order guessing
         expect(adapter.parse('23/06/2019', '')!.toDate())
@@ -456,34 +460,34 @@ describe('MomentDateAdapter findDateFormat = true', () => {
     it('should parse doted date', () => {
         adapter.setLocale('ru');
         expect(adapter.parse('03.06.2019', '')!.toDate())
-            .toEqual(new Date(2019, 5, 3));
+            .toEqual(date);
         expect(adapter.parse('03.06.19', '')!.toDate())
-            .toEqual(new Date(2019, 5, 3));
+            .toEqual(dateWithFullYear);
 
         adapter.setLocale('en');
         expect(adapter.parse('03.06.2019', '')!.toDate())
-            .toEqual(new Date(2019, 5, 3));
+            .toEqual(date);
         expect(adapter.parse('03.06.19', '')!.toDate())
-            .toEqual(new Date(2019, 5, 3));
+            .toEqual(dateWithFullYear);
     });
 
     it('should parse long formatted date', () => {
         adapter.setLocale('ru');
         expect(adapter.parse('3 июня 2019', '')!.toDate())
-            .toEqual(new Date(2019, 5, 3));
+            .toEqual(date);
 
         expect(adapter.parse('6 фев 2019', '')!.toDate())
             .toEqual(new Date(2019, 1, 6));
 
         adapter.setLocale('en');
         expect(adapter.parse('June 3rd 2019', '')!.toDate())
-            .toEqual(new Date(2019, 5, 3));
+            .toEqual(date);
 
         expect(adapter.parse('Feb 6th 2019', '')!.toDate())
             .toEqual(new Date(2019, 1, 6));
 
         expect(adapter.parse('3 June 2019', '')!.toDate())
-            .toEqual(new Date(2019, 5, 3));
+            .toEqual(date);
 
         expect(adapter.parse('6 Feb 2019', '')!.toDate())
             .toEqual(new Date(2019, 1, 6));
