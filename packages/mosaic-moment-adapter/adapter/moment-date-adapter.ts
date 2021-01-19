@@ -265,19 +265,17 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
     }
 
     parse(value: any, parseFormat: string | string[]): Moment | null {
-        if (value) {
-            if (value && typeof value === 'string') {
-                if (this.options && this.options.findDateFormat) { return this.findFormat(value); }
+        if (!value) { return null; }
 
-                return parseFormat
-                    ? this.createMoment(value, parseFormat, this.locale)
-                    : this.createMoment(value).locale(this.locale);
-            }
+        if (value && typeof value === 'string') {
+            if (this.options && this.options.findDateFormat) { return this.findFormat(value); }
 
-            return this.createMoment(value).locale(this.locale);
+            return parseFormat
+                ? this.createMoment(value, parseFormat, this.locale)
+                : this.createMoment(value).locale(this.locale);
         }
 
-        return null;
+        return this.createMoment(value).locale(this.locale);
     }
 
     format(date: Moment, displayFormat: string): string {

@@ -289,7 +289,10 @@ export class McDatepickerInput<D> implements ControlValueAccessor, OnDestroy, Va
     }
 
     onInput(value: string) {
-        let date = this.dateAdapter.parse(value, this.dateFormats.parse.dateInput);
+        const formattedValue = this.formatUserInput(value);
+
+        let date = this.dateAdapter.parse(formattedValue, this.dateFormats.parse.dateInput);
+
         this.lastValueValid = !date || this.dateAdapter.isValid(date);
         date = this.getValidDateOrNull(date);
 
@@ -313,6 +316,32 @@ export class McDatepickerInput<D> implements ControlValueAccessor, OnDestroy, Va
         }
 
         this.onTouched();
+    }
+
+    private formatUserInput(value: string) {
+        let formattedValue = value;
+
+        const delimiter = this.dateAdapter
+            .format(this.dateAdapter.today(), this.dateFormats.parse.dateInput)
+            .replace(/\d/g, '')
+            .trim()
+            .charAt(0);
+
+        const firstPartPattern = /^([1-9])\W$/;
+        if (firstPartPattern.test(value)) {
+            formattedValue = value.replace(firstPartPattern, `0$1${delimiter}`);
+        }
+
+        const secondPartPattern = /^(\d\d.)([1-9])\W$/;
+        if (secondPartPattern.test(value)) {
+            formattedValue = value.replace(secondPartPattern, `$10$2${delimiter}`);
+        }
+
+        if (formattedValue !== value) {
+            this.elementRef.nativeElement.value = formattedValue;
+        }
+
+        return formattedValue;
     }
 
     private cvaOnChange: (value: any) => void = () => {
