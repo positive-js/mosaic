@@ -355,21 +355,27 @@ export class McDatepickerInput<D> implements ControlValueAccessor, OnDestroy, Va
 
     /** Formats a value and sets it on the input element. */
     private formatValue(value: D | null) {
-        let newValue = '';
+        let formattedValue = '';
 
         if (value) {
-            const parsedYear = value.year();
+            const parsedYear = this.dateAdapter.getYear(value);
 
             if (parsedYear < (currentCentury - previousCentury)) {
                 const century = parsedYear < maxYearForCurrentCentury ? currentCentury : previousCentury;
 
-                value.year(century + parsedYear);
-            }
+                const newValue = this.dateAdapter.createDate(
+                    century + parsedYear,
+                    this.dateAdapter.getMonth(value),
+                    this.dateAdapter.getDate(value)
+                );
 
-            newValue = this.dateAdapter.format(value, this.dateFormats.display.dateInput);
+                formattedValue = this.dateAdapter.format(newValue, this.dateFormats.display.dateInput);
+            } else {
+                formattedValue = this.dateAdapter.format(value, this.dateFormats.display.dateInput);
+            }
         }
 
-        this.elementRef.nativeElement.value = newValue;
+        this.elementRef.nativeElement.value = formattedValue;
     }
 
     /**
