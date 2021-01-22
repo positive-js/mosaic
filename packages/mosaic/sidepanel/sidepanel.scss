@@ -109,7 +109,7 @@
 }
 
 .mc-sidepanel-header {
-    padding: $sidepanel-header-size-padding;
+    padding: var(--mc-sidepanel-header-size-padding, $sidepanel-header-size-padding);
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
@@ -119,7 +119,7 @@
     .mc-sidepanel-close {
         @include mc-button-reset();
         background: transparent;
-        padding: $sidepanel-header-size-close-padding;
+        padding: var(--mc-sidepanel-header-size-close-padding, $sidepanel-header-size-close-padding);
     }
 }
 
@@ -137,7 +137,7 @@
 }
 
 .mc-sidepanel-footer {
-    padding: $sidepanel-footer-size-padding;
+    padding: var(--mc-sidepanel-footer-size-padding, $sidepanel-footer-size-padding);
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;

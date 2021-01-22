@@ -13,15 +13,15 @@
 
     max-width: 100%;
 
-    height: $option-size-height;
+    height: var(--mc-option-size-height, $option-size-height);
 
-    border: $option-size-border-width solid transparent;
+    border: var(--mc-option-size-border-width, $option-size-border-width) solid transparent;
 
     cursor: pointer;
 
     outline: none;
 
-    padding: $option-size-padding;
+    padding: var(--mc-option-size-padding, $option-size-padding);
 
     -webkit-tap-highlight-color: transparent;
 
@@ -36,10 +36,10 @@
     & .mc-option-overlay {
         position: absolute;
 
-        top: -$option-size-border-width;
-        left: -$option-size-border-width;
-        right: -$option-size-border-width;
-        bottom: -$option-size-border-width;
+        top: calc(-1 * var(--mc-option-size-border-width, #{$option-size-border-width}));
+        left: calc(-1 * var(--mc-option-size-border-width, #{$option-size-border-width}));
+        right: calc(-1 * var(--mc-option-size-border-width, #{$option-size-border-width}));
+        bottom: calc(-1 * var(--mc-option-size-border-width, #{$option-size-border-width}));
 
         pointer-events: none;
         border-radius: inherit;

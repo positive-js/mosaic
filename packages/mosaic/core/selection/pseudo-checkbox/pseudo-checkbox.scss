@@ -6,12 +6,12 @@
     display: inline-block;
     box-sizing: border-box;
 
-    width: $checkbox-size-width;
-    height: $checkbox-size-width;
+    width: var(--mc-checkbox-size-width, $checkbox-size-width);
+    height: var(--mc-checkbox-size-width, $checkbox-size-width);
 
     border: {
         radius: 3px;
-        width: $checkbox-size-border-width;
+        width: var(--mc-checkbox-size-border-width, $checkbox-size-border-width);
         style: solid;
     }
 
@@ -25,8 +25,8 @@
         display: none;
 
         position: absolute;
-        top: -$checkbox-size-border-width;
-        left: -$checkbox-size-border-width;
+        top: calc(-1 * var(--mc-checkbox-size-border-width, #{$checkbox-size-border-width}));
+        left: calc(-1 * var(--mc-checkbox-size-border-width, #{$checkbox-size-border-width}));
     }
 
     &.mc-pseudo-checkbox-checked,

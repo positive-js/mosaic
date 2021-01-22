@@ -15,7 +15,7 @@
 
     &.mc-textarea-resizable {
         resize: vertical;
-        min-height: $textarea-size-min-height;
+        min-height: var(--mc-textarea-size-min-height, $textarea-size-min-height);
     }
 }
 

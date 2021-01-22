@@ -7,11 +7,19 @@
 }
 
 .mc-calendar__header {
-    padding: $datepicker-calendar-size-padding $datepicker-calendar-size-padding 0 $datepicker-calendar-size-padding;
+    padding:
+        var(--mc-datepicker-calendar-size-padding, $datepicker-calendar-size-padding)
+        var(--mc-datepicker-calendar-size-padding, $datepicker-calendar-size-padding)
+        0
+        var(--mc-datepicker-calendar-size-padding, $datepicker-calendar-size-padding);
 }
 
 .mc-calendar__content {
-    padding: 0 $datepicker-calendar-size-padding $datepicker-calendar-size-padding $datepicker-calendar-size-padding;
+    padding:
+        0
+        var(--mc-datepicker-calendar-size-padding, $datepicker-calendar-size-padding)
+        var(--mc-datepicker-calendar-size-padding, $datepicker-calendar-size-padding)
+        var(--mc-datepicker-calendar-size-padding, $datepicker-calendar-size-padding);
     outline: none;
 }
 
@@ -28,13 +36,17 @@
 }
 
 .mc-calendar__previous-button::after {
-    border-left-width: $datepicker-calendar-size-icon-border-width;
-    transform: $datepicker-calendar-size-icon-prev-icon-transform;
+    border-left-width:
+        var(--mc-datepicker-calendar-size-icon-border-width, $datepicker-calendar-size-icon-border-width);
+    transform:
+        var(--mc-datepicker-calendar-size-icon-prev-icon-transform, $datepicker-calendar-size-icon-prev-icon-transform);
 }
 
 .mc-calendar__next-button::after {
-    border-right-width: $datepicker-calendar-size-icon-border-width;
-    transform: $datepicker-calendar-size-icon-nex-icon-transform;
+    border-right-width:
+        var(--mc-datepicker-calendar-size-icon-border-width, $datepicker-calendar-size-icon-border-width);
+    transform:
+        var(--mc-datepicker-calendar-size-icon-nex-icon-transform, $datepicker-calendar-size-icon-nex-icon-transform);
 }
 
 .mc-calendar__table {
@@ -45,12 +57,12 @@
 
 .mc-calendar__table-header th {
     text-align: center;
-    padding: 0 0 $datepicker-calendar-size-padding 0;
+    padding: 0 0 var(--mc-datepicker-calendar-size-padding, $datepicker-calendar-size-padding) 0;
 }
 
 .mc-calendar__table-header-divider {
     position: relative;
-    height: $datepicker-calendar-size-divider-width;
+    height: var(--mc-datepicker-calendar-size-divider-width, $datepicker-calendar-size-divider-width);
 
     // We use an absolutely positioned pseudo-element as the divider line for the table header so we
     // can extend it all the way to the edge of the calendar.
@@ -58,8 +70,8 @@
         content: '';
         position: absolute;
         top: 0;
-        left: -$datepicker-calendar-size-padding;
-        right: -$datepicker-calendar-size-padding;
-        height: $datepicker-calendar-size-divider-width;
+        left: calc(-1 * var(--mc-datepicker-calendar-size-padding, #{$datepicker-calendar-size-padding}));
+        right: calc(-1 * var(--mc-datepicker-calendar-size-padding, #{$datepicker-calendar-size-padding}));
+        height: var(--mc-datepicker-calendar-size-divider-width, $datepicker-calendar-size-divider-width);
     }
 }

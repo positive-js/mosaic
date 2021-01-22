@@ -42,11 +42,11 @@
 
 .mc-toggle__content {
     &.left {
-        margin-right: $toggle-size-label-margin;
+        margin-right: var(--mc-toggle-size-label-margin, $toggle-size-label-margin);
     }
 
     &.right {
-        margin-left: $toggle-size-label-margin;
+        margin-left: var(--mc-toggle-size-label-margin, $toggle-size-label-margin);
     }
 }
 
@@ -74,39 +74,39 @@
 
 .mc-toggle:not(.mc-toggle_small) {
     .mc-toggle-bar {
-        height: $toggle-size-height;
-        width: $toggle-size-width;
-        border-radius: $toggle-size-border-radius;
+        height: var(--mc-toggle-size-height, $toggle-size-height);
+        width: var(--mc-toggle-size-width, $toggle-size-width);
+        border-radius: var(--mc-toggle-size-border-radius, $toggle-size-border-radius);
     }
 
     .mc-toggle__overlay {
-        border-radius: $toggle-size-border-radius;
-        height: $toggle-size-height;
-        width: $toggle-size-width;
+        border-radius: var(--mc-toggle-size-border-radius, $toggle-size-border-radius);
+        height: var(--mc-toggle-size-height, $toggle-size-height);
+        width: var(--mc-toggle-size-width, $toggle-size-width);
     }
 
     .mc-toggle__circle {
-        height: $toggle-size-height;
-        width: $toggle-size-height;
+        height: var(--mc-toggle-size-height, $toggle-size-height);
+        width: var(--mc-toggle-size-height, $toggle-size-height);
     }
 }
 
 .mc-toggle.mc-toggle_small {
     .mc-toggle-bar {
-        height: $toggle-small-size-height;
-        width: $toggle-small-size-width;
-        border-radius: $toggle-small-size-border-radius;
+        height: var(--mc-toggle-small-size-height, $toggle-small-size-height);
+        width: var(--mc-toggle-small-size-width, $toggle-small-size-width);
+        border-radius: var(--mc-toggle-small-size-border-radius, $toggle-small-size-border-radius);
     }
 
     .mc-toggle__overlay {
-        border-radius: $toggle-small-size-border-radius;
-        height: $toggle-small-size-height;
-        width: $toggle-small-size-width;
+        border-radius: var(--mc-toggle-small-size-border-radius, $toggle-small-size-border-radius);
+        height: var(--mc-toggle-small-size-height, $toggle-small-size-height);
+        width: var(--mc-toggle-small-size-width, $toggle-small-size-width);
     }
 
     .mc-toggle__circle {
-        height: $toggle-small-size-height;
-        width: $toggle-small-size-height;
+        height: var(--mc-toggle-small-size-height, $toggle-small-size-height);
+        width: var(--mc-toggle-small-size-height, $toggle-small-size-height);
     }
 }
 

@@ -18,17 +18,17 @@
     flex: 1 1 100%;
 
     min-width: 0;
-    min-height: $tag-list-size-min-height;
+    min-height: var(--mc-tag-list-size-min-height, $tag-list-size-min-height);
 
-    padding: $tag-list-size-padding;
+    padding: var(--mc-tag-list-size-padding, $tag-list-size-padding);
 
     & .mc-tag-input {
         max-width: 100%;
 
         flex: 1 1 auto;
 
-        height: $tag-input-size-height;
-        margin: $tag-input-size-margin;
+        height: var(--mc-tag-input-size-height, $tag-input-size-height);
+        margin: var(--mc-tag-input-size-margin, $tag-input-size-margin);
     }
 }
 

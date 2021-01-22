@@ -6,8 +6,8 @@
 }
 
 .mc-datepicker-toggle__button.mc-icon-button {
-    width: $datepicker-toggle-size-width;
-    height: $datepicker-toggle-size-height;
+    width: var(--mc-datepicker-toggle-size-width, $datepicker-toggle-size-width);
+    height: var(--mc-datepicker-toggle-size-height, $datepicker-toggle-size-height);
     margin-left: 2px;
 }
 

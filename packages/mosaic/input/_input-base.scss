@@ -6,7 +6,7 @@
     @include mc-reset-input();
 
     box-sizing: border-box;
-    padding: $input-size-padding;
-    width: $input-size-width;
-    min-height: $input-size-min-height; // for IE11
+    padding: var(--mc-input-size-padding, $input-size-padding);
+    width: var(--mc-input-size-width, $input-size-width);
+    min-height: var(--mc-input-size-min-height, $input-size-min-height); // for IE11
 }

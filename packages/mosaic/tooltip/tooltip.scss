@@ -12,65 +12,73 @@
 
     z-index: $zindex-tooltip;
 
-    max-width: $tooltip-size-max-width;
+    max-width: var(--mc-tooltip-size-max-width, $tooltip-size-max-width);
 
     list-style: none;
     white-space: pre-line;
 }
 
 .mc-tooltip_placement-top {
-    padding-bottom: $tooltip-size-distance;
+    padding-bottom: var(--mc-tooltip-size-distance, $tooltip-size-distance);
 }
 
 .mc-tooltip_placement-right {
-    padding-left: $tooltip-size-distance;
+    padding-left: var(--mc-tooltip-size-distance, $tooltip-size-distance);
 }
 
 .mc-tooltip_placement-bottom {
-    padding-top: $tooltip-size-distance;
+    padding-top: var(--mc-tooltip-size-distance, $tooltip-size-distance);
 }
 
 .mc-tooltip_placement-left {
-    padding-right: $tooltip-size-distance;
+    padding-right: var(--mc-tooltip-size-distance, $tooltip-size-distance);
 }
 
 .mc-tooltip-inner {
-    padding: $tooltip-size-padding;
+    padding: var(--mc-tooltip-size-padding, $tooltip-size-padding);
     text-align: left;
     text-decoration: none;
-    border-radius: $tooltip-size-border-radius;
-    min-height: $tooltip-size-min-height;
+    border-radius: var(--mc-tooltip-size-border-radius, $tooltip-size-border-radius);
+    min-height: var(--mc-tooltip-size-min-height, $tooltip-size-min-height);
     height: fit-content;
     vertical-align: center;
 }
 
 .mc-tooltip-arrow {
     position: absolute;
-    width: $tooltip-size-arrow-size;
-    height: $tooltip-size-arrow-size;
+    width: var(--mc-tooltip-size-arrow-size, $tooltip-size-arrow-size);
+    height: var(--mc-tooltip-size-arrow-size, $tooltip-size-arrow-size);
     transform: rotate(45deg);
 }
 
 .mc-tooltip_placement-top .mc-tooltip-arrow {
-    bottom: $tooltip-size-distance - $tooltip-size-arrow-width;
+    bottom:
+        var(--mc-tooltip-size-distance, $tooltip-size-distance) -
+        var(--mc-tooltip-size-arrow-width, $tooltip-size-arrow-width);
     left: 50%;
-    margin-left: -$tooltip-size-arrow-width;
+    margin-left: calc(-1 * var(--mc-tooltip-size-arrow-width, #{$tooltip-size-arrow-width}));
 }
 
 .mc-tooltip_placement-right .mc-tooltip-arrow {
-    left: $tooltip-size-distance - $tooltip-size-arrow-width;
+    left:
+        var(--mc-tooltip-size-distance, $tooltip-size-distance) -
+        var(--mc-tooltip-size-arrow-width, $tooltip-size-arrow-width);
     top: 16px;
-    margin-top: -$tooltip-size-arrow-width;
+    margin-top: calc(-1 * var(--mc-tooltip-size-arrow-width, #{$tooltip-size-arrow-width}));
 }
 
 .mc-tooltip_placement-left .mc-tooltip-arrow {
-    right: $tooltip-size-distance - $tooltip-size-arrow-width;
+    right:
+        var(--mc-tooltip-size-distance, $tooltip-size-distance) -
+        var(--mc-tooltip-size-arrow-width, $tooltip-size-arrow-width);
     top: 16px;
-    margin-top: -$tooltip-size-arrow-width;
+    margin-top: calc(-1 * var(--mc-tooltip-size-arrow-width, #{$tooltip-size-arrow-width}));
 }
 
 .mc-tooltip_placement-bottom .mc-tooltip-arrow {
-    top: $tooltip-size-distance - $tooltip-size-arrow-width;
+    top:
+        var(--mc-tooltip-size-distance, $tooltip-size-distance) -
+        var(--mc-tooltip-size-arrow-width, $tooltip-size-arrow-width);
     left: 50%;
-    margin-left: -$tooltip-size-arrow-width;
+    margin-left: calc(-1 * var(--mc-tooltip-size-arrow-width, #{$tooltip-size-arrow-width}));
 }

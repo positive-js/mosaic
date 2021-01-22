@@ -2,11 +2,12 @@
 @import '../../cdk/a11y/a11y';
 
 
-$mc-calendar-body-cell-content-size: 100% - $datepicker-body-size-cell-margin * 2 !default;
+$mc-calendar-body-cell-content-size:
+    100% - var(--mc-datepicker-body-size-cell-margin, #{$datepicker-body-size-cell-margin}) * 2;
 
 
 .mc-calendar__body {
-    min-width: 7 * $datepicker-body-size-cell-min-size;
+    min-width: 7 * var(--mc-datepicker-body-size-cell-min-size, $datepicker-body-size-cell-min-size);
 }
 
 .mc-calendar__body-label {
@@ -17,8 +18,8 @@ $mc-calendar-body-cell-content-size: 100% - $datepicker-body-size-cell-margin * 
     // the same amount of padding regardless of the number of columns. We align the header label with
     // the one third mark of the first cell, this was chosen somewhat arbitrarily to make it look
     // roughly like the mock. Half way is too far since the cell text is center aligned.
-    padding-left: $datepicker-body-size-label-padding-side;
-    padding-right: $datepicker-body-size-label-padding-side;
+    padding-left: var(--mc-datepicker-body-size-label-padding-side, $datepicker-body-size-label-padding-side);
+    padding-right: var(--mc-datepicker-body-size-label-padding-side, $datepicker-body-size-label-padding-side);
 }
 
 .mc-calendar__body-cell {
@@ -36,10 +37,10 @@ $mc-calendar-body-cell-content-size: 100% - $datepicker-body-size-cell-margin * 
 
 .mc-calendar__body-cell-content {
     position: absolute;
-    top: $datepicker-body-size-cell-margin;
-    left: $datepicker-body-size-cell-margin;
+    top: var(--mc-datepicker-body-size-cell-margin, $datepicker-body-size-cell-margin);
+    left: var(--mc-datepicker-body-size-cell-margin, $datepicker-body-size-cell-margin);
 
-    padding: $datepicker-body-size-cell-padding;
+    padding: var(--mc-datepicker-body-size-cell-padding, $datepicker-body-size-cell-padding);
 
     display: flex;
     align-items: center;
@@ -52,7 +53,7 @@ $mc-calendar-body-cell-content-size: 100% - $datepicker-body-size-cell-margin * 
     // Prevents text being off-center on Android.
     line-height: 1;
 
-    border-width: $datepicker-body-size-cell-border-width;
+    border-width: var(--mc-datepicker-body-size-cell-border-width, $datepicker-body-size-cell-border-width);
     border-style: solid;
 
     @include cdk-high-contrast {

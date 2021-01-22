@@ -24,17 +24,18 @@
         }
 
         .mc-modal-header {
-            border-bottom: $modal-size-border-width solid map-get($popup, divider-color);
+            border-bottom:
+                var(--mc-modal-size-border-width, $modal-size-border-width) solid map-get($popup, divider-color);
         }
 
         .mc-modal-footer {
-            border-top: $modal-size-border-width solid $border-color;
+            border-top: var(--mc-modal-size-border-width, $modal-size-border-width) solid $border-color;
 
             background-color: map-get($popup, footer-background);
         }
 
         .mc-modal-close {
-            border: $modal-size-border-width solid transparent;
+            border: var(--mc-modal-size-border-width, $modal-size-border-width) solid transparent;
 
             &:hover {
                 .mc-button-overlay {
@@ -54,7 +55,7 @@
 
     .mc-confirm {
         .mc-confirm-btns {
-            border-top: $modal-size-border-width solid $border-color;
+            border-top: var(--mc-modal-size-border-width, $modal-size-border-width) solid $border-color;
 
             background-color: map-get($popup, footer-background);
         }

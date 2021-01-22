@@ -30,14 +30,14 @@
     box-sizing: border-box;
     position: relative;
 
-    height: $select-size-height;
+    height: var(--mc-select-size-height, $select-size-height);
 
     cursor: pointer;
 
-    padding: $select-size-padding;
+    padding: var(--mc-select-size-padding, $select-size-padding);
 
     &.mc-tree-select__trigger_multiple {
-        padding-left: $select-size-padding-left-multiple;
+        padding-left: var(--mc-select-size-padding, $select-size-padding)-left-multiple;
 
         & .mc-tree-select__placeholder {
             margin-left: 8px;
@@ -78,7 +78,9 @@
 
     overflow: hidden;
 
-    max-height: $select-size-height - $select-panel-size-border-width;
+    max-height:
+        var(--mc-select-size-height, $select-size-height) -
+        var(--mc-select-panel-size-border-width, $select-panel-size-border-width);
 
     & .mc-tag {
         margin-right: 4px;
@@ -130,18 +132,18 @@
 }
 
 .mc-tree-select__panel {
-    max-height: $select-panel-size-max-height;
+    max-height: var(--mc-select-panel-size-max-height, $select-panel-size-max-height);
     min-width: 100%; // prevents some animcion twitching and test inconsistencies in IE11
 
     overflow: auto;
 
     border: {
-        width: $select-panel-size-border-width;
+        width: var(--mc-select-panel-size-border-width, $select-panel-size-border-width);
         style: solid;
     }
 
-    border-bottom-left-radius: $select-panel-size-border-radius;
-    border-bottom-right-radius: $select-panel-size-border-radius;
+    border-bottom-left-radius: var(--mc-select-panel-size-border-radius, $select-panel-size-border-radius);
+    border-bottom-right-radius: var(--mc-select-panel-size-border-radius, $select-panel-size-border-radius);
 
     padding: 4px 0;
 
@@ -149,8 +151,8 @@
     .mc-optgroup-label,
     .mc-tree-select-option {
         font-size: inherit;
-        line-height: $option-size-height;
-        height: $option-size-height;
+        line-height: var(--mc-option-size-height, $option-size-height);
+        height: var(--mc-option-size-height, $option-size-height);
     }
 }
 

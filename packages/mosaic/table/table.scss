@@ -11,10 +11,13 @@
             & > th,
             & > td {
                 padding: {
-                    top: $table-size-row-padding-vertical;
-                    right: ($table-size-row-padding-horizontal / 2);
-                    bottom: ($table-size-row-padding-vertical - $table-size-border-width);
-                    left: ($table-size-row-padding-horizontal / 2)
+                    top: var(--mc-table-size-row-padding-vertical, $table-size-row-padding-vertical);
+                    right: (var(--mc-table-size-row-padding-horizontal, $table-size-row-padding-horizontal) / 2);
+                    bottom: (
+                        var(--mc-table-size-row-padding-vertical, $table-size-row-padding-vertical) -
+                        var(--mc-table-size-border-width, $table-size-border-width)
+                    );
+                    left: (var(--mc-table-size-row-padding-horizontal, $table-size-row-padding-horizontal) / 2)
                 };
 
                 vertical-align: baseline;
@@ -23,12 +26,12 @@
 
             & > th:first-child,
             & > td:first-child {
-                padding-left: $table-size-row-padding-horizontal;
+                padding-left: var(--mc-table-size-row-padding-horizontal, $table-size-row-padding-horizontal);
             }
 
             & > th:last-child,
             & > td:last-child {
-                padding-right: $table-size-row-padding-horizontal;
+                padding-right: var(--mc-table-size-row-padding-horizontal, $table-size-row-padding-horizontal);
             }
         }
     }
@@ -37,18 +40,21 @@
     & > thead {
         & > tr > th {
             padding: {
-                top: $table-size-row-padding-vertical;
-                bottom: ($table-size-row-padding-vertical - $table-size-border-width);
+                top: var(--mc-table-size-row-padding-vertical, $table-size-row-padding-vertical);
+                bottom: (
+                    var(--mc-table-size-row-padding-vertical, $table-size-row-padding-vertical) -
+                    var(--mc-table-size-border-width, $table-size-border-width)
+                );
             }
 
-            border-bottom: $table-size-border-width solid transparent;
+            border-bottom: var(--mc-table-size-border-width, $table-size-border-width) solid transparent;
         }
     }
 
     & > tbody > tr {
         & th,
         & td {
-            border-bottom: $table-size-border-width solid transparent;
+            border-bottom: var(--mc-table-size-border-width, $table-size-border-width) solid transparent;
         }
     }
     /* stylelint-enable no-descending-specificity */

@@ -10,8 +10,8 @@
 
 .mc-progress-spinner {
     display: inline-block;
-    width: $progress-spinner-size-size;
-    height: $progress-spinner-size-size;
+    width: var(--mc-progress-spinner-size-size, $progress-spinner-size-size);
+    height: var(--mc-progress-spinner-size-size, $progress-spinner-size-size);
     overflow: hidden;
 
     &__circle {

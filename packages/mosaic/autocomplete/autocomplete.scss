@@ -20,17 +20,17 @@
     width: 100%;
     max-width: none;
 
-    max-height: $autocomplete-size-panel-max-height;
+    max-height: var(--mc-autocomplete-size-panel-max-height, $autocomplete-size-panel-max-height);
 
     border: {
         width: 1px;
         style: solid;
     }
 
-    border-bottom-left-radius: $autocomplete-size-panel-border-radius;
-    border-bottom-right-radius: $autocomplete-size-panel-border-radius;
+    border-bottom-left-radius: var(--mc-autocomplete-size-panel-border-radius, $autocomplete-size-panel-border-radius);
+    border-bottom-right-radius: var(--mc-autocomplete-size-panel-border-radius, $autocomplete-size-panel-border-radius);
 
-    padding: $autocomplete-size-panel-padding;
+    padding: var(--mc-autocomplete-size-panel-padding, $autocomplete-size-panel-padding);
 
     &.mc-autocomplete_visible {
         visibility: visible;
@@ -41,7 +41,10 @@
     }
 
     .mc-autocomplete-panel-above & {
-        border-radius: $autocomplete-size-panel-border-radius $autocomplete-size-panel-border-radius 0 0;
+        border-radius:
+            var(--mc-autocomplete-size-panel-border-radius, $autocomplete-size-panel-border-radius)
+            var(--mc-autocomplete-size-panel-border-radius, $autocomplete-size-panel-border-radius)
+            0 0;
     }
 
     // We need to offset horizontal dividers by their height, because

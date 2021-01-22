@@ -7,14 +7,14 @@
     display: inline-block;
     overflow: hidden;
 
-    margin: $tags-size-margin;
+    margin: var(--mc-tags-size-margin, $tags-size-margin);
 
-    height: $tags-size-height;
+    height: var(--mc-tags-size-height, $tags-size-height);
 
     border: {
-        width: $tags-size-border-width;
+        width: var(--mc-tags-size-border-width, $tags-size-border-width);
         style: solid;
-        radius: $tags-size-border-radius;
+        radius: var(--mc-tags-size-border-radius, $tags-size-border-radius);
     }
 
     cursor: default;
@@ -24,11 +24,11 @@
     box-sizing: border-box;
 
     &.mc-left-icon {
-        padding-left: $tags-size-icon-padding;
+        padding-left: var(--mc-tags-size-icon-padding, $tags-size-icon-padding);
     }
 
     &.mc-right-icon {
-        padding-right: $tags-size-icon-padding;
+        padding-right: var(--mc-tags-size-icon-padding, $tags-size-icon-padding);
     }
 }
 
@@ -47,16 +47,16 @@
 
         flex-shrink: 0;
 
-        width: $tags-size-height;
-        height: $tags-size-height;
+        width: var(--mc-tags-size-height, $tags-size-height);
+        height: var(--mc-tags-size-height, $tags-size-height);
     }
 
     .mc-icon_left {
-        margin-right: $tags-size-icon-padding;
+        margin-right: var(--mc-tags-size-icon-padding, $tags-size-icon-padding);
     }
 
     .mc-icon_right {
-        margin-left: $tags-size-icon-padding;
+        margin-left: var(--mc-tags-size-icon-padding, $tags-size-icon-padding);
     }
 }
 
@@ -73,7 +73,7 @@
 }
 
 .mc-tag__text {
-    margin-left: $tags-size-text-margin;
+    margin-left: var(--mc-tags-size-text-margin, $tags-size-text-margin);
 
     text-overflow: ellipsis;
     white-space: nowrap;

@@ -13,5 +13,5 @@
     width: 100%;
 
     box-sizing: border-box;
-    padding: $textarea-size-padding;
+    padding: var(--mc-textarea-size-padding, $textarea-size-padding);
 }

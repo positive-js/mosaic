@@ -12,7 +12,7 @@
     border: 1px solid transparent;
     outline: none;
 
-    padding: $dropdown-item-size-padding;
+    padding: var(--mc-dropdown-item-size-padding, $dropdown-item-size-padding);
 
     text-align: left;
     white-space: nowrap;
@@ -28,7 +28,7 @@
 
 .mc-dropdown__trigger {
     margin-left: auto;
-    padding-left: $dropdown-trigger-size-padding-left;
+    padding-left: var(--mc-dropdown-trigger-size-padding-left, $dropdown-trigger-size-padding-left);
 }
 
 .mc-dropdown__panel {
@@ -39,14 +39,14 @@
     margin-top: -1px;
 
     border: {
-        width: $dropdown-panel-size-border-width;
+        width: var(--mc-dropdown-panel-size-border-width, $dropdown-panel-size-border-width);
         style: solid;
     }
 
-    border-bottom-left-radius: $dropdown-panel-size-border-radius;
-    border-bottom-right-radius: $dropdown-panel-size-border-radius;
+    border-bottom-left-radius: var(--mc-dropdown-panel-size-border-radius, $dropdown-panel-size-border-radius);
+    border-bottom-right-radius: var(--mc-dropdown-panel-size-border-radius, $dropdown-panel-size-border-radius);
 
-    padding: $dropdown-panel-size-padding;
+    padding: var(--mc-dropdown-panel-size-padding, $dropdown-panel-size-padding);
 }
 
 .mc-dropdown__content {

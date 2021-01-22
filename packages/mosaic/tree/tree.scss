@@ -9,11 +9,11 @@
     display: flex;
     align-items: center;
 
-    height: $tree-size-node-height;
+    height: var(--mc-tree-size-node-height, $tree-size-node-height);
 
     word-wrap: break-word;
 
-    border: $tree-size-border-width solid transparent;
+    border: var(--mc-tree-size-border-width, $tree-size-border-width) solid transparent;
 
     & > .mc-icon {
         margin-right: 4px;

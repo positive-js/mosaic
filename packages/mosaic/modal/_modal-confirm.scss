@@ -11,7 +11,7 @@
     }
 
     .mc-modal-body {
-        padding: $modal-confirm-size-padding;
+        padding: var(--mc-modal-confirm-size-padding, $modal-confirm-size-padding);
     }
 
     // TODO
@@ -38,7 +38,7 @@
     }
 
     .mc-confirm-btns {
-        border-radius: $modal-footer-size-border-radius;
+        border-radius: var(--mc-modal-footer-size-border-radius, $modal-footer-size-border-radius);
         text-align: right;
 
         button + button {

@@ -18,8 +18,8 @@
 
     vertical-align: baseline;
 
-    border: $button-size-border-width solid transparent;
-    border-radius: $button-size-border-radius;
+    border: var(--mc-button-size-border-width, $button-size-border-width) solid transparent;
+    border-radius: var(--mc-button-size-border-radius, $button-size-border-radius);
 
     &::-moz-focus-inner {
         border: 0;

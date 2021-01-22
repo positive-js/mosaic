@@ -9,13 +9,13 @@
 
     position: relative;
 
-    top: $modal-size-top;
+    top: var(--mc-modal-size-top, $modal-size-top);
 
     width: auto;
 
     margin: 0 auto;
 
-    padding: $modal-size-padding;
+    padding: var(--mc-modal-size-padding, $modal-size-padding);
 
     list-style: none;
 
@@ -35,8 +35,8 @@
         top: 0;
         right: 0;
 
-        width: $modal-size-close-width;
-        height: $modal-size-close-width;
+        width: var(--mc-modal-size-close-width, $modal-size-close-width);
+        height: var(--mc-modal-size-close-width, $modal-size-close-width);
     }
 }
 
@@ -62,7 +62,7 @@
 .mc-modal-content {
     position: relative;
 
-    border-radius: $modal-size-border-radius;
+    border-radius: var(--mc-modal-size-border-radius, $modal-size-border-radius);
 
     background-clip: padding-box;
     background-color: white;
@@ -71,18 +71,18 @@
 .mc-modal-header {
     display: block;
 
-    border-radius: $modal-header-size-border-radius;
+    border-radius: var(--mc-modal-header-size-border-radius, $modal-header-size-border-radius);
 
-    padding: $modal-header-size-padding;
+    padding: var(--mc-modal-header-size-padding, $modal-header-size-padding);
 }
 
 .mc-modal-body {
     display: block;
     overflow-y: auto;
 
-    max-height: $modal-body-size-max-height;
+    max-height: var(--mc-modal-body-size-max-height, $modal-body-size-max-height);
 
-    padding: $modal-body-size-padding;
+    padding: var(--mc-modal-body-size-padding, $modal-body-size-padding);
 
     word-wrap: break-word;
 }
@@ -90,9 +90,9 @@
 .mc-modal-footer {
     display: block;
 
-    border-radius: $modal-footer-size-border-radius;
+    border-radius: var(--mc-modal-footer-size-border-radius, $modal-footer-size-border-radius);
 
-    padding: $modal-footer-size-padding;
+    padding: var(--mc-modal-footer-size-padding, $modal-footer-size-padding);
 
     text-align: right;
 

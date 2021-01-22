@@ -3,7 +3,7 @@
 
 
 .mc-optgroup-label {
-    padding-left: $optgroup-size-padding-left;
+    padding-left: var(--mc-optgroup-size-padding-left, $optgroup-size-padding-left);
 
     @include user-select(none);
 

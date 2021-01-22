@@ -23,7 +23,7 @@
 
         height: 100%;
 
-        padding: 0 $list-size-horizontal-padding;
+        padding: 0 var(--mc-list-size-horizontal-padding, $list-size-horizontal-padding);
     }
 
     &.mc-2-line {
@@ -72,7 +72,7 @@
 
         border-radius: 50%;
 
-        padding: $list-size-icon-padding;
+        padding: var(--mc-list-size-icon-padding, $list-size-icon-padding);
 
         font-size: $icon-size;
 

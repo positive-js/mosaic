@@ -2,7 +2,7 @@
 @import '../core/styles/common/layout';
 
 
-$mc-tab-border-width-focus: $tabs-size-border-width * 2;
+$mc-tab-border-width-focus: var(--mc-tabs-size-border-width, $tabs-size-border-width) * 2;
 
 %tab-pseudo {
     display: block;
@@ -19,7 +19,7 @@ $mc-tab-border-width-focus: $tabs-size-border-width * 2;
     justify-content: center;
     align-items: center;
 
-    height: $tabs-size-height;
+    height: var(--mc-tabs-size-height, $tabs-size-height);
 
     text-align: center;
     white-space: nowrap;
@@ -27,14 +27,14 @@ $mc-tab-border-width-focus: $tabs-size-border-width * 2;
     cursor: pointer;
 
     padding: {
-        right: $tabs-size-padding-horizontal;
-        left: $tabs-size-padding-horizontal;
+        right: var(--mc-tabs-size-padding-horizontal, $tabs-size-padding-horizontal);
+        left: var(--mc-tabs-size-padding-horizontal, $tabs-size-padding-horizontal);
     }
 
     outline: none;
 
     border-bottom: {
-        width: $tabs-size-border-width;
+        width: var(--mc-tabs-size-border-width, $tabs-size-border-width);
         style: solid;
     }
 
@@ -45,15 +45,15 @@ $mc-tab-border-width-focus: $tabs-size-border-width * 2;
             @extend %tab-pseudo;
 
             top: -$mc-tab-border-width-focus;
-            right: -$tabs-size-border-width;
-            bottom: -$tabs-size-border-width;
-            left: -$tabs-size-border-width;
+            right: calc(-1 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
+            bottom: calc(-1 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
+            left: calc(-1 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
             border: {
                 width: $mc-tab-border-width-focus;
                 style: solid;
                 top: {
-                    left-radius: $tabs-size-border-radius;
-                    right-radius: $tabs-size-border-radius;
+                    left-radius: var(--mc-tabs-size-border-radius, $tabs-size-border-radius);
+                    right-radius: var(--mc-tabs-size-border-radius, $tabs-size-border-radius);
                 }
                 bottom: none;
             }
@@ -80,19 +80,25 @@ $mc-tab-border-width-focus: $tabs-size-border-width * 2;
     @include tab-label-common();
 
     border-top: {
-        width: $tabs-size-border-width;
+        width: var(--mc-tabs-size-border-width, $tabs-size-border-width);
 
         style: solid;
-        left-radius: $tabs-size-border-radius;
-        right-radius: $tabs-size-border-radius;
+        left-radius: var(--mc-tabs-size-border-radius, $tabs-size-border-radius);
+        right-radius: var(--mc-tabs-size-border-radius, $tabs-size-border-radius);
     }
 
     &.mc-active {
-        padding-right: $tabs-size-padding-horizontal - $tabs-size-border-width;
-        padding-left: $tabs-size-padding-horizontal - $tabs-size-border-width;
+        padding-right: calc(
+            var(--mc-tabs-size-padding-horizontal, #{$tabs-size-padding-horizontal}) -
+            var(--mc-tabs-size-border-width, #{$tabs-size-border-width})
+        );
+        padding-left: calc(
+            var(--mc-tabs-size-padding-horizontal, #{$tabs-size-padding-horizontal}) -
+            var(--mc-tabs-size-border-width, #{$tabs-size-border-width})
+        );
 
         border: {
-            width: $tabs-size-border-width;
+            width: var(--mc-tabs-size-border-width, $tabs-size-border-width);
             style: solid;
         }
 
@@ -107,12 +113,12 @@ $mc-tab-border-width-focus: $tabs-size-border-width * 2;
 
     .mc-tab-overlay {
         border-top: {
-            width: $tabs-size-border-width;
+            width: var(--mc-tabs-size-border-width, $tabs-size-border-width);
 
             style: solid;
             color: transparent;
-            left-radius: $tabs-size-border-radius;
-            right-radius: $tabs-size-border-radius;
+            left-radius: var(--mc-tabs-size-border-radius, $tabs-size-border-radius);
+            right-radius: var(--mc-tabs-size-border-radius, $tabs-size-border-radius);
         }
     }
 }
@@ -120,9 +126,9 @@ $mc-tab-border-width-focus: $tabs-size-border-width * 2;
 %tab-light-pseudo-highlight-border {
     @extend %tab-pseudo;
 
-    bottom: -$tabs-size-border-width;
+    bottom: calc(-1 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
     left: 0;
-    height: $tabs-size-highlight-height;
+    height: var(--mc-tabs-size-highlight-height, $tabs-size-highlight-height);
     right: 0;
 }
 
@@ -138,13 +144,13 @@ $mc-tab-border-width-focus: $tabs-size-border-width * 2;
 
     &.cdk-keyboard-focused + :hover {
         &:before {
-            left: $mc-tab-border-width-focus - $tabs-size-border-width;
+            left: calc(#{$mc-tab-border-width-focus} - var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
         }
     }
 
     &.cdk-keyboard-focused {
         &:after {
-            top: -$tabs-size-border-width;
+            top: calc(-1 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
         }
     }
 

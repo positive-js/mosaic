@@ -3,18 +3,9 @@
 @import '../core/styles/variables';
 
 // The amount of spacing between the checkbox and its label.
-$mc-checkbox-item-spacing: $checkbox-size-padding - $checkbox-size-width;
-
-// The width of the line used to draw the checkmark / mixedmark.
-$mc-checkbox-mark-stroke-size: 2 / 15 * $checkbox-size-width !default;
-
-
-// Applied to elements that are considered "marks" within the checkbox, e.g. the checkmark and
-// the mixedmark.
-%mc-checkbox-mark {
-    $width-padding-inset: 2 * $checkbox-size-border-width;
-    width: calc(100% - #{$width-padding-inset});
-}
+$mc-checkbox-item-spacing: calc(
+    var(--mc-checkbox-size-padding, #{$checkbox-size-padding}) - var(--mc-checkbox-size-width, #{$checkbox-size-width})
+);
 
 // Applied to elements that appear to make up the outer box of the checkmark, such as the frame
 // that contains the border and the actual background element that contains the marks.
@@ -43,10 +34,10 @@ $mc-checkbox-mark-stroke-size: 2 / 15 * $checkbox-size-width !default;
 
     background-color: transparent;
     border: {
-        width: $checkbox-size-border-width;
+        width: var(--mc-checkbox-size-border-width, $checkbox-size-border-width);
         style: solid;
     }
-    box-shadow: $checkbox-size-toggle-box-shadow;
+    box-shadow: var(--mc-checkbox-size-toggle-box-shadow, $checkbox-size-toggle-box-shadow);
 }
 
 .mc-checkbox {
@@ -98,14 +89,14 @@ $mc-checkbox-mark-stroke-size: 2 / 15 * $checkbox-size-width !default;
 
 .mc-checkbox-inner-container {
     display: inline-block;
-    height: $checkbox-size-width;
+    height: var(--mc-checkbox-size-width, $checkbox-size-width);
     line-height: 0;
     margin-right: $mc-checkbox-item-spacing;
     order: 0;
     position: relative;
     align-self: center;
     white-space: nowrap;
-    width: $checkbox-size-width;
+    width: var(--mc-checkbox-size-width, $checkbox-size-width);
     flex-shrink: 0;
 
     [dir='rtl'] & {

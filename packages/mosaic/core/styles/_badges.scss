@@ -8,14 +8,14 @@
 
     vertical-align: middle;
 
-    min-width: $badge-size-min-width;
+    min-width: var(--mc-badge-size-min-width, $badge-size-min-width);
 
-    padding: $badge-size-padding;
+    padding: var(--mc-badge-size-padding, $badge-size-padding);
 
     border: {
-        width: $badge-size-border-width;
+        width: var(--mc-badge-size-border-width, $badge-size-border-width);
         style: solid;
-        radius: $badge-size-border-radius;
+        radius: var(--mc-badge-size-border-radius, $badge-size-border-radius);
     }
 
     text-align: center;

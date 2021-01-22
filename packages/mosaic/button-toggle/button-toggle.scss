@@ -38,7 +38,7 @@
 
     &:not(.mc-button-toggle_vertical) {
         .mc-button-toggle:not([disabled]) + .mc-button-toggle:not([disabled]) {
-            margin-left: -$button-toggle-size-border-size;
+            margin-left: calc(-1 * var(--mc-button-toggle-size-border-size, #{$button-toggle-size-border-size}));
         }
     }
 }
@@ -53,7 +53,7 @@
     }
 
     .mc-button-toggle:not([disabled]) + .mc-button-toggle:not([disabled]) {
-        margin-top: -$button-toggle-size-border-size;
+        margin-top: calc(-1 * var(--mc-button-toggle-size-border-size, #{$button-toggle-size-border-size}));
     }
 
     .mc-button-toggle {
@@ -67,7 +67,7 @@
             > .mc-icon-button {
                 @include border-bottom-radius(0);
 
-                border-top-right-radius: $button-toggle-size-border-radius;
+                border-top-right-radius: var(--mc-button-toggle-size-border-radius, $button-toggle-size-border-radius);
             }
         }
 
@@ -76,7 +76,8 @@
             > .mc-icon-button {
                 @include border-top-radius(0);
 
-                border-bottom-left-radius: $button-toggle-size-border-radius;
+                border-bottom-left-radius:
+                    var(--mc-button-toggle-size-border-radius, $button-toggle-size-border-radius);
             }
         }
 

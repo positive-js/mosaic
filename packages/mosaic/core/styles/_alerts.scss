@@ -9,8 +9,8 @@
     vertical-align: top;
     text-align: left;
 
-    border: $alert-size-border-width solid transparent;
-    border-radius: $alert-size-border-radius;
+    border: var(--mc-alert-size-border-width, $alert-size-border-width) solid transparent;
+    border-radius: var(--mc-alert-size-border-radius, $alert-size-border-radius);
 
     .mc-link {
         padding-left: 0;
@@ -21,15 +21,15 @@
     }
 
     &:not(.mc-alert_small) {
-        padding: $alert-size-padding;
+        padding: var(--mc-alert-size-padding, $alert-size-padding);
     }
 
     &.mc-alert_small {
-        padding: $alert-size-padding-small;
+        padding: var(--mc-alert-size-padding-small, $alert-size-padding-small);
     }
 
     &.mc-alert_dismissible {
-        padding-right: $alert-size-right-padding-dismissible;
+        padding-right: var(--mc-alert-size-right-padding-dismissible, $alert-size-right-padding-dismissible);
     }
 }
 

@@ -14,7 +14,7 @@
 
 .mc-progress-bar {
     display: block;
-    height: $progress-bar-size-height;
+    height: var(--mc-progress-bar-size-height, $progress-bar-size-height);
     overflow: hidden;
 
     &__inner {

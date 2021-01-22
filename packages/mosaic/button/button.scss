@@ -8,7 +8,7 @@
 .mc-button {
     @extend %mc-button-base;
 
-    padding: $button-size-padding;
+    padding: var(--mc-button-size-padding, $button-size-padding);
 }
 
 .mc-light-button {
@@ -18,14 +18,14 @@
 .mc-icon-button {
     @extend %mc-button-base;
 
-    padding: $icon-button-size-padding;
+    padding: var(--mc-icon-button-size-padding, $icon-button-size-padding);
 
     &.mc-icon-button_left {
-        padding-right: $icon-button-size-text-padding;
+        padding: var(--mc-icon-button-size-text-padding, $icon-button-size-text-padding);
     }
 
     &.mc-icon-button_right {
-        padding-left: $icon-button-size-text-padding;
+        padding: var(--mc-icon-button-size-text-padding, $icon-button-size-text-padding);
     }
 
     .mc-button-wrapper {
@@ -37,11 +37,11 @@
         }
 
         .mc-icon_left {
-            margin-right: $icon-button-size-icon-padding;
+            margin-right: var(--mc-icon-button-size-icon-padding, $icon-button-size-icon-padding);
         }
 
         .mc-icon_right {
-            margin-left: $icon-button-size-icon-padding;
+            margin-left: var(--mc-icon-button-size-icon-padding, $icon-button-size-icon-padding);
         }
     }
 }

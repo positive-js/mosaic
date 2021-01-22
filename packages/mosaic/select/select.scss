@@ -20,14 +20,14 @@
         box-sizing: border-box;
         position: relative;
 
-        height: $select-size-height;
+        height: var(--mc-select-size-height, $select-size-height);
 
         cursor: pointer;
 
-        padding: $select-size-padding;
+        padding: var(--mc-select-size-padding, $select-size-padding);
 
         &.mc-select__trigger_multiple {
-            padding-left: $select-size-padding-left-multiple;
+            padding-left: var(--mc-select-size-padding, $select-size-padding)-left-multiple;
 
             & .mc-tag.mc-disabled .mc-tag__text {
                 margin-right: 7px;
@@ -53,11 +53,11 @@
     position: relative;
 
     max-width: 100%;
-    height: $option-size-height;
+    height: var(--mc-option-size-height, $option-size-height);
 
     cursor: default;
     outline: none;
-    padding: $option-size-padding;
+    padding: var(--mc-option-size-padding, $option-size-padding);
 }
 
 .mc-select__matcher {
@@ -82,7 +82,9 @@
 
     overflow: hidden;
 
-    max-height: $select-size-height - $select-panel-size-border-width;
+    max-height:
+        var(--mc-select-size-height, $select-size-height) -
+        var(--mc-select-panel-size-border-width, $select-panel-size-border-width);
 
     & .mc-tag {
         margin-right: 4px;
@@ -122,37 +124,37 @@
 
 .mc-select__panel {
     min-width: 100%; // prevents some animation twitching and test inconsistencies in IE11
-    max-width: $select-panel-size-max-width;
+    max-width: var(--mc-select-panel-size-max-width, $select-panel-size-max-width);
 
     overflow: hidden;
 
     border: {
-        width: $select-panel-size-border-width;
+        width: var(--mc-select-panel-size-border-width, $select-panel-size-border-width);
         style: solid;
     }
 
-    border-bottom-left-radius: $select-panel-size-border-radius;
-    border-bottom-right-radius: $select-panel-size-border-radius;
+    border-bottom-left-radius: var(--mc-select-panel-size-border-radius, $select-panel-size-border-radius);
+    border-bottom-right-radius: var(--mc-select-panel-size-border-radius, $select-panel-size-border-radius);
 
     // Override optgroup and option to scale based on font-size of the trigger.
     .mc-optgroup-label,
     .mc-option {
         font-size: inherit;
-        line-height: $option-size-height;
-        height: $option-size-height;
+        line-height: var(--mc-option-size-height, $option-size-height);
+        height: var(--mc-option-size-height, $option-size-height);
     }
 }
 
 .mc-select__content {
-    max-height: $select-panel-size-max-height;
-    padding: $select-panel-size-vertical-padding 0;
+    max-height: var(--mc-select-panel-size-max-height, $select-panel-size-max-height);
+    padding: var(--mc-select-panel-size-vertical-padding, $select-panel-size-vertical-padding) 0;
     overflow: auto;
 
     & .cdk-virtual-scroll-viewport {
         $paddings: ($select-panel-size-vertical-padding * 2);
 
-        min-height: $select-panel-size-max-height - $paddings;
-        max-height: $select-panel-size-max-height - $paddings;
+        min-height: var(--mc-select-panel-size-max-height, $select-panel-size-max-height) - $paddings;
+        max-height: var(--mc-select-panel-size-max-height, $select-panel-size-max-height) - $paddings;
     }
 }
 
