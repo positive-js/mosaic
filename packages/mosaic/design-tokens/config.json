@@ -20,6 +20,18 @@
                 }
             ]
         },
+        "css": {
+            "transformGroup": "mc/css",
+            "buildPath": "packages/mosaic/design-tokens/",
+            "files": [
+                {
+                    "destination": "tokens.css",
+                    "format": "css/variables",
+                    "filter": "notPalette",
+                    "prefix": "mc"
+                }
+            ]
+        },
         "js": {
             "transformGroup": "js",
             "buildPath": "packages/mosaic/design-tokens/",

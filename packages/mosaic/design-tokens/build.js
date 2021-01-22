@@ -26,6 +26,16 @@ StyleDictionary.registerTransform({
     transformer: (prop) => ({ palette: prop.value })
 });
 
+StyleDictionary.registerTransform({
+    name: 'mc/prefix',
+    type: 'attribute',
+    transformer: (prop, options) => {
+        let prefix = options.files[0].prefix ? `${options.files[0].prefix}-` : '';
+
+        prop.name = `${prefix}${prop.name}`;
+    }
+});
+
 
 StyleDictionary.registerFormat({
     name: 'mc-scss/palette',
@@ -42,6 +52,17 @@ StyleDictionary.registerTransformGroup({
         'attribute/cti',
         'mc-attribute/palette',
         'name/cti/kebab'
+    ]
+});
+
+StyleDictionary.registerTransformGroup({
+    name: 'mc/css',
+    transforms: [
+        'attribute/cti',
+        'mc-attribute/palette',
+        'name/cti/kebab',
+        'color/css',
+        'mc/prefix'
     ]
 });
 
