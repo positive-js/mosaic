@@ -66,23 +66,19 @@
     }
 }
 
-@mixin alert-theme($background, $border, $icon) {
-    background-color: $background;
-    border-color: $border;
+@mixin alert-theme($alert) {
+    background-color: map-get($alert, background);
+    border-color: map-get($alert, border);
 
     .mc-alert__icon {
-        color: $icon;
+        color: map-get($alert, icon);
     }
 }
 
 @mixin mc-alert-theme($theme) {
     $foreground: map-get($theme, foreground);
 
-    $info: map-get($theme, info);
-    $second: map-get($theme, second);
-    $error: map-get($theme, error);
-    $warning: map-get($theme, warning);
-    $success: map-get($theme, success);
+    $alert: map-get(map-get($theme, components), alert);
 
     $is-dark: map-get($theme, is-dark);
 
@@ -95,43 +91,23 @@
     }
 
     .mc-alert_error {
-        @if($is-dark) {
-            @include alert-theme(mc-color($error, darker), mc-color($error, darker), mc-color($error));
-        } @else {
-            @include alert-theme(mc-color($error, lighter), mc-color($error, 200), mc-color($error, 400));
-        }
+        @include alert-theme(map-get($alert, error));
     }
 
     .mc-alert_warning {
-        @if($is-dark) {
-            @include alert-theme(mc-color($warning, darker), mc-color($warning, darker), mc-color($warning));
-        } @else {
-            @include alert-theme(mc-color($warning, lighter), mc-color($warning), mc-color($warning, darker));
-        }
+        @include alert-theme(map-get($alert, warning));
     }
 
     .mc-alert_success {
-        @if($is-dark) {
-            @include alert-theme(mc-color($success, darker), mc-color($success, darker), mc-color($success));
-        } @else {
-            @include alert-theme(mc-color($success, lighter), mc-color($success), mc-color($success, darker));
-        }
+        @include alert-theme(map-get($alert, success));
     }
 
     .mc-alert_info {
-        @if($is-dark) {
-            @include alert-theme(mc-color($info, darker), mc-color($info, darker), mc-color($info));
-        } @else {
-            @include alert-theme(mc-color($info, lighter), mc-color($info), mc-color($info, darker));
-        }
+        @include alert-theme(map-get($alert, info));
     }
 
     .mc-alert:not(.mc-alert_error):not(.mc-alert_warning):not(.mc-alert_success):not(.mc-alert_info) {
-        @if($is-dark) {
-            @include alert-theme(mc-color($second, darker), mc-color($second, darker), mc-color($second));
-        } @else {
-            @include alert-theme(mc-color($second, lighter), mc-color($second, 200), mc-color($second, 400));
-        }
+        @include alert-theme(map-get($alert, default));
     }
 }
 

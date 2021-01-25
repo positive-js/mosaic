@@ -1,44 +1,32 @@
 {
     "light-color": {
         "primary": {
-            "lighter": { "value": 400 },
-            "default": { "value": 500 },
-            "darker": { "value": 600 },
+            "default": { "value": "{palette.blue.500.value}" },
 
             "palette": { "value": "{palette.blue}" }
         },
         "second": {
-            "lighter": { "value": 100 },
-            "default": { "value": 300 },
-            "darker": { "value": 400 },
+            "default": { "value": "{palette.grey.300.value}" },
 
             "palette": { "value": "{palette.grey}" }
         },
         "error": {
-            "lighter": { "value": 60 },
-            "default": { "value": 400 },
-            "darker": { "value": 500 },
+            "default": { "value": "{palette.red.400.value}" },
 
             "palette": { "value": "{palette.red}" }
         },
         "info": {
-            "lighter": { "value": 60 },
-            "default": { "value": 200 },
-            "darker": { "value": 400 },
+            "default": { "value": "{palette.blue.200.value}" },
 
             "palette": { "value": "{palette.blue}" }
         },
         "success": {
-            "lighter": { "value": 60 },
-            "default": { "value": 200 },
-            "darker": { "value": 400 },
+            "default": { "value": "{palette.green.200.value}" },
 
             "palette": { "value": "{palette.green}" }
         },
         "warning": {
-            "lighter": { "value": 60 },
-            "default": { "value": 200 },
-            "darker": { "value": 400 },
+            "default": { "value": "{palette.yellow.200.value}" },
 
             "palette": { "value": "{palette.yellow}" }
         },
@@ -67,44 +55,32 @@
     },
     "dark-color": {
         "primary": {
-            "lighter": { "value": 300 },
-            "default": { "value": 400 },
-            "darker": { "value": 500 },
+            "default": { "value": "{palette.blue.400.value}" },
 
             "palette": { "value": "{palette.blue}" }
         },
         "second": {
-            "lighter": { "value": 200 },
-            "default": { "value": 400 },
-            "darker": { "value": 700 },
+            "default": { "value": "{palette.grey.400.value}" },
 
             "palette": { "value": "{palette.grey}" }
         },
         "error": {
-            "lighter": { "value": 200 },
-            "default": { "value": 400 },
-            "darker": { "value": 700 },
+            "default": { "value": "{palette.red.400.value}" },
 
             "palette": { "value": "{palette.red}" }
         },
         "info": {
-            "lighter": { "value": 200 },
-            "default": { "value": 400 },
-            "darker": { "value": 700 },
+            "default": { "value": "{palette.blue.400.value}" },
 
             "palette": { "value": "{palette.blue}" }
         },
         "success": {
-            "lighter": { "value": 200 },
-            "default": { "value": 400 },
-            "darker": { "value": 700 },
+            "default": { "value": "{palette.green.400.value}" },
 
             "palette": { "value": "{palette.green}" }
         },
         "warning": {
-            "lighter": { "value": 200 },
-            "default": { "value": 400 },
-            "darker": { "value": 700 },
+            "default": { "value": "{palette.yellow.400.value}" },
 
             "palette": { "value": "{palette.yellow}" }
         },
@@ -125,8 +101,8 @@
             "overlay-disabled": { "value": "rgba(white, 0.2)" }
         },
         "states": {
-            "focused-color": { "value": "{light-color.primary.palette.value.400.value}" },
-            "selected-color": { "value": "{light-color.primary.palette.value.700.value}" },
+            "focused-color": { "value": "{dark-color.primary.palette.value.400.value}" },
+            "selected-color": { "value": "{dark-color.primary.palette.value.700.value}" },
             "pressed-shadow": { "value": "inset 1px 2px 2px 0 rgba(black, 0.2)" },
             "disabled-opacity": { "value": 0.3 }
         }

@@ -6,22 +6,12 @@
     @return map-get(map-get($palette, contrast), $hue);
 }
 
-@function mc-palette($base-palette, $lighter: 100, $default: 500, $darker: 700) {
-    $result: map_merge($base-palette, (
-        default: map-get($base-palette, $default),
-        lighter: map-get($base-palette, $lighter),
-        darker:  map-get($base-palette, $darker),
-
-        default-contrast: mc-contrast($base-palette, $default),
-        lighter-contrast: mc-contrast($base-palette, $lighter),
-        darker-contrast:  mc-contrast($base-palette, $darker)
-    ));
+@function mc-palette($base-palette, $default) {
+    $result: map_merge($base-palette, (default: $default));
 
     // For each hue in the palette, add a "-contrast" color to the map.
     @each $hue, $color in $base-palette {
-        $result: map_merge($result, (
-            '#{$hue}-contrast': mc-contrast($base-palette, $hue)
-        ));
+        $result: map_merge($result, ('#{$hue}-contrast': mc-contrast($base-palette, $hue)));
     }
 
     @return $result;

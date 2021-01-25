@@ -1,27 +1,15 @@
 /**
  * Do not edit directly
- * Generated on Mon, 25 Jan 2021 07:28:33 GMT
+ * Generated on Mon, 25 Jan 2021 08:55:01 GMT
  */
 
 :root {
-  --mc-light-color-primary-lighter: 400;
-  --mc-light-color-primary-default: 500;
-  --mc-light-color-primary-darker: 600;
-  --mc-light-color-second-lighter: 100;
-  --mc-light-color-second-default: 300;
-  --mc-light-color-second-darker: 400;
-  --mc-light-color-error-lighter: 60;
-  --mc-light-color-error-default: 400;
-  --mc-light-color-error-darker: 500;
-  --mc-light-color-info-lighter: 60;
-  --mc-light-color-info-default: 200;
-  --mc-light-color-info-darker: 400;
-  --mc-light-color-success-lighter: 60;
-  --mc-light-color-success-default: 200;
-  --mc-light-color-success-darker: 400;
-  --mc-light-color-warning-lighter: 60;
-  --mc-light-color-warning-default: 200;
-  --mc-light-color-warning-darker: 400;
+  --mc-light-color-primary-default: #338FCC;
+  --mc-light-color-second-default: #B3B3B3;
+  --mc-light-color-error-default: #E76E5C;
+  --mc-light-color-info-default: #AAD1EC;
+  --mc-light-color-success-default: #B4DEA4;
+  --mc-light-color-warning-default: #F0D49B;
   --mc-light-color-foreground-text: #4D4D4D;
   --mc-light-color-foreground-text-less-contrast: #999999;
   --mc-light-color-foreground-text-disabled: #B3B3B3;
@@ -37,24 +25,12 @@
   --mc-light-color-states-selected-color: #D8EAF7;
   --mc-light-color-states-pressed-shadow: inset 0 1px 2px 0 rgba(black, 0.2);
   --mc-light-color-states-disabled-opacity: 0.3;
-  --mc-dark-color-primary-lighter: 300;
-  --mc-dark-color-primary-default: 400;
-  --mc-dark-color-primary-darker: 500;
-  --mc-dark-color-second-lighter: 200;
-  --mc-dark-color-second-default: 400;
-  --mc-dark-color-second-darker: 700;
-  --mc-dark-color-error-lighter: 200;
-  --mc-dark-color-error-default: 400;
-  --mc-dark-color-error-darker: 700;
-  --mc-dark-color-info-lighter: 200;
-  --mc-dark-color-info-default: 400;
-  --mc-dark-color-info-darker: 700;
-  --mc-dark-color-success-lighter: 200;
-  --mc-dark-color-success-default: 400;
-  --mc-dark-color-success-darker: 700;
-  --mc-dark-color-warning-lighter: 200;
-  --mc-dark-color-warning-default: 400;
-  --mc-dark-color-warning-darker: 700;
+  --mc-dark-color-primary-default: #57A4D7;
+  --mc-dark-color-second-default: #999999;
+  --mc-dark-color-error-default: #E76E5C;
+  --mc-dark-color-info-default: #57A4D7;
+  --mc-dark-color-success-default: #6FBA53;
+  --mc-dark-color-warning-default: #DFA739;
   --mc-dark-color-foreground-text: #F0F0F0;
   --mc-dark-color-foreground-text-less-contrast: #999999;
   --mc-dark-color-foreground-text-disabled: #999999;
@@ -293,6 +269,36 @@
   --mc-typography-extra-small-text-font-weight: normal;
   --mc-typography-extra-small-text-font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
   --mc-typography-extra-small-text-text-transform: null;
+  --mc-alert-light-color-error-background: #F4B7AE;
+  --mc-alert-light-color-error-border: #E76E5C;
+  --mc-alert-light-color-error-icon: #E76E5C;
+  --mc-alert-light-color-warning-background: #F0D49B;
+  --mc-alert-light-color-warning-border: #F0D49B;
+  --mc-alert-light-color-warning-icon: #F0D49B;
+  --mc-alert-light-color-success-background: #B4DEA4;
+  --mc-alert-light-color-success-border: #B4DEA4;
+  --mc-alert-light-color-success-icon: #B4DEA4;
+  --mc-alert-light-color-info-background: #AAD1EC;
+  --mc-alert-light-color-info-border: #AAD1EC;
+  --mc-alert-light-color-info-icon: #AAD1EC;
+  --mc-alert-light-color-default-background: #CCCCCC;
+  --mc-alert-light-color-default-border: #B3B3B3;
+  --mc-alert-light-color-default-icon: #CCCCCC;
+  --mc-alert-dark-color-error-background: #832112;
+  --mc-alert-dark-color-error-border: #832112;
+  --mc-alert-dark-color-error-icon: #E76E5C;
+  --mc-alert-dark-color-warning-background: #7D5504;
+  --mc-alert-dark-color-warning-border: #7D5504;
+  --mc-alert-dark-color-warning-icon: #DFA739;
+  --mc-alert-dark-color-success-background: #276211;
+  --mc-alert-dark-color-success-border: #276211;
+  --mc-alert-dark-color-success-icon: #6FBA53;
+  --mc-alert-dark-color-info-background: #114E77;
+  --mc-alert-dark-color-info-border: #114E77;
+  --mc-alert-dark-color-info-icon: #57A4D7;
+  --mc-alert-dark-color-default-background: #4D4D4D;
+  --mc-alert-dark-color-default-border: #4D4D4D;
+  --mc-alert-dark-color-default-icon: #999999;
   --mc-alert-size-padding: 13px 15px;
   --mc-alert-size-padding-small: 11px 15px;
   --mc-alert-size-right-padding-dismissible: 15px;

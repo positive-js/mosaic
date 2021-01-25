@@ -2,6 +2,34 @@
 
 
 @function mc-light-theme-components($theme) {
+    $alert: (
+        error: (
+            background: $alert-light-color-error-background,
+            border: $alert-light-color-error-border,
+            icon: $alert-light-color-error-icon
+        ),
+        warning: (
+            background: $alert-light-color-warning-background,
+            border: $alert-light-color-warning-border,
+            icon: $alert-light-color-warning-icon
+        ),
+        success: (
+            background: $alert-light-color-success-background,
+            border: $alert-light-color-success-border,
+            icon: $alert-light-color-success-icon
+        ),
+        info: (
+            background: $alert-light-color-info-background,
+            border: $alert-light-color-info-border,
+            icon: $alert-light-color-info-icon
+        ),
+        default: (
+            background: $alert-light-color-default-background,
+            border: $alert-light-color-default-border,
+            icon: $alert-light-color-default-icon
+        ),
+    );
+
     $popup: (
         shadow: $popup-light-color-shadow,
         border: $popup-light-color-border,
@@ -162,6 +190,7 @@
     );
 
     @return (
+        alert: $alert,
         popup: $popup,
         button: $button,
         checkbox: $checkbox,
@@ -181,6 +210,34 @@
 }
 
 @function mc-dark-theme-components($theme) {
+    $alert: (
+        error: (
+            background: $alert-dark-color-error-background,
+            border: $alert-dark-color-error-border,
+            icon: $alert-dark-color-error-icon
+        ),
+        warning: (
+            background: $alert-dark-color-warning-background,
+            border: $alert-dark-color-warning-border,
+            icon: $alert-dark-color-warning-icon
+        ),
+        success: (
+            background: $alert-dark-color-success-background,
+            border: $alert-dark-color-success-border,
+            icon: $alert-dark-color-success-icon
+        ),
+        info: (
+            background: $alert-dark-color-info-background,
+            border: $alert-dark-color-info-border,
+            icon: $alert-dark-color-info-icon
+        ),
+        default: (
+            background: $alert-dark-color-default-background,
+            border: $alert-dark-color-default-border,
+            icon: $alert-dark-color-default-icon
+        ),
+    );
+
     $popup: (
         shadow: $popup-dark-color-shadow,
         border: $popup-dark-color-border,
@@ -341,6 +398,7 @@
     );
 
     @return (
+        alert: $alert,
         popup: $popup,
         button: $button,
         checkbox: $checkbox,
