@@ -4,15 +4,15 @@
             "shadow": { "value": "0 3px 3px 0 {light-color.second.palette.value.A200.value}" },
             "border": { "value": "{light-color.second.palette.value.300.value}" },
             "divider": { "value": "{light-color.second.palette.value.200.value}" },
-            "background": { "value": "{light-color.background.background-popup.value}" },
-            "footer-background": { "value": "{light-color.background.background-popup-footer.value}" }
+            "background": { "value": "white" },
+            "footer-background": { "value": "{light-color.second.palette.value.60.value}" }
         },
         "dark-color": {
             "shadow": { "value": "0 3px 3px 0 {dark-color.second.palette.value.A200.value}" },
             "border": { "value": "{dark-color.second.palette.value.400.value}" },
             "divider": { "value": "{dark-color.foreground.divider.value}" },
-            "background": { "value": "{dark-color.background.background-popup.value}" },
-            "footer-background": { "value": "{dark-color.background.background-popup-footer.value}" }
+            "background": { "value": "{dark-color.second.palette.value.700.value}" },
+            "footer-background": { "value": "transparent" }
         },
         "size": {},
         "font": {}

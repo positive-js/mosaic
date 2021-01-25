@@ -52,8 +52,6 @@
         },
         "background": {
             "background": { "value": "white" },
-            "background-popup": { "value": "white" },
-            "background-popup-footer": { "value": "{palette.grey.60.value}" },
             "background-disabled": { "value": "{palette.grey.60.value}" },
 
             "overlay-hovered": { "value": "rgba(black, 0.05)" },
@@ -120,8 +118,6 @@
         },
         "background": {
             "background": { "value": "{palette.grey.800.value}" },
-            "background-popup": { "value": "{palette.grey.700.value}" },
-            "background-popup-footer": { "value": "transparent" },
             "background-disabled": { "value": "{palette.grey.600.value}" },
 
             "overlay-hovered": { "value": "rgba(black, 0.05)" },

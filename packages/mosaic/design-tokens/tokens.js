@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 22 Jan 2021 08:38:21 GMT
+ * Generated on Mon, 25 Jan 2021 07:28:33 GMT
  */
 
 export const LightColorPrimaryLighter = 400;
@@ -34,8 +34,6 @@ export const LightColorForegroundDivider = "#E6E6E6";
 export const LightColorForegroundBorder = "#B3B3B3";
 export const LightColorForegroundIcon = "#999999";
 export const LightColorBackgroundBackground = "white";
-export const LightColorBackgroundBackgroundPopup = "white";
-export const LightColorBackgroundBackgroundPopupFooter = "#F0F0F0";
 export const LightColorBackgroundBackgroundDisabled = "#F0F0F0";
 export const LightColorBackgroundOverlayHovered = "rgba(black, 0.05)";
 export const LightColorBackgroundOverlayActive = "rgba(black, 0.1)";
@@ -75,8 +73,6 @@ export const DarkColorForegroundDivider = "#666666";
 export const DarkColorForegroundBorder = "#808080";
 export const DarkColorForegroundIcon = "#999999";
 export const DarkColorBackgroundBackground = "#333333";
-export const DarkColorBackgroundBackgroundPopup = "#4D4D4D";
-export const DarkColorBackgroundBackgroundPopupFooter = "transparent";
 export const DarkColorBackgroundBackgroundDisabled = "#666666";
 export const DarkColorBackgroundOverlayHovered = "rgba(black, 0.05)";
 export const DarkColorBackgroundOverlayActive = "rgba(black, 0.1)";

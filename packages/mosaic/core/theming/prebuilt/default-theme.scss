@@ -7,9 +7,11 @@ $primary: mc-palette(
     $light-color-primary-default,
     $light-color-primary-darker
 );
+
 $second: mc-palette(
     $light-color-second-palette, $light-color-second-lighter, $light-color-second-default, $light-color-second-darker
 );
+
 $error: mc-palette(
     $light-color-error-palette, $light-color-error-lighter, $light-color-error-default, $light-color-error-darker
 );
@@ -17,12 +19,14 @@ $error: mc-palette(
 $info: mc-palette(
     $light-color-info-palette, $light-color-info-lighter, $light-color-info-default, $light-color-info-darker
 );
+
 $success: mc-palette(
     $light-color-success-palette,
     $light-color-success-lighter,
     $light-color-success-default,
     $light-color-success-darker
 );
+
 $warning: mc-palette(
     $light-color-warning-palette,
     $light-color-warning-lighter,

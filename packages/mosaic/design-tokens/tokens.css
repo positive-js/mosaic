@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 22 Jan 2021 08:38:21 GMT
+ * Generated on Mon, 25 Jan 2021 07:28:33 GMT
  */
 
 :root {
@@ -29,8 +29,6 @@
   --mc-light-color-foreground-border: #B3B3B3;
   --mc-light-color-foreground-icon: #999999;
   --mc-light-color-background-background: white;
-  --mc-light-color-background-background-popup: white;
-  --mc-light-color-background-background-popup-footer: #F0F0F0;
   --mc-light-color-background-background-disabled: #F0F0F0;
   --mc-light-color-background-overlay-hovered: rgba(black, 0.05);
   --mc-light-color-background-overlay-active: rgba(black, 0.1);
@@ -64,8 +62,6 @@
   --mc-dark-color-foreground-border: #808080;
   --mc-dark-color-foreground-icon: #999999;
   --mc-dark-color-background-background: #333333;
-  --mc-dark-color-background-background-popup: #4D4D4D;
-  --mc-dark-color-background-background-popup-footer: transparent;
   --mc-dark-color-background-background-disabled: #666666;
   --mc-dark-color-background-overlay-hovered: rgba(black, 0.05);
   --mc-dark-color-background-overlay-active: rgba(black, 0.1);
