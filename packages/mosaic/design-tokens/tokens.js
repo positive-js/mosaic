@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 25 Jan 2021 08:55:01 GMT
+ * Generated on Mon, 25 Jan 2021 11:58:46 GMT
  */
 
 export const LightColorPrimaryDefault = "#338FCC";
@@ -370,6 +370,31 @@ export const IconButtonSizeBorderRadius = "3px";
 export const IconButtonSizePadding = "5px 7px";
 export const IconButtonSizeTextPadding = "5px 7px";
 export const IconButtonSizeIconPadding = "5px 15px";
+export const CardLightColorErrorVerticalLine = "#E76E5C";
+export const CardLightColorErrorBackground = "#FCEFEC";
+export const CardLightColorErrorShadow = "#E6E6E6";
+export const CardLightColorWarningVerticalLine = "#F0D49B";
+export const CardLightColorWarningBackground = "#FCF5E8";
+export const CardLightColorWarningShadow = "#E6E6E6";
+export const CardLightColorSuccessVerticalLine = "#B4DEA4";
+export const CardLightColorSuccessBackground = "#EDF8E9";
+export const CardLightColorSuccessShadow = "#E6E6E6";
+export const CardLightColorInfoVerticalLine = "#AAD1EC";
+export const CardLightColorInfoBackground = "#EBF4FB";
+export const CardLightColorInfoShadow = "#E6E6E6";
+export const CardDarkColorErrorVerticalLine = "#E76E5C";
+export const CardDarkColorErrorBackground = "#832112";
+export const CardDarkColorErrorShadow = "#4D4D4D";
+export const CardDarkColorWarningVerticalLine = "#DFA739";
+export const CardDarkColorWarningBackground = "#7D5504";
+export const CardDarkColorWarningShadow = "#4D4D4D";
+export const CardDarkColorSuccessVerticalLine = "#6FBA53";
+export const CardDarkColorSuccessBackground = "#276211";
+export const CardDarkColorSuccessShadow = "#4D4D4D";
+export const CardDarkColorInfoVerticalLine = "#57A4D7";
+export const CardDarkColorInfoBackground = "#114E77";
+export const CardDarkColorInfoShadow = "#4D4D4D";
+export const CardSizeVerticalLine = "4px";
 export const CheckboxLightColorBorder = "#B3B3B3";
 export const CheckboxLightColorStatesCheckedBorder = "#206EA2";
 export const CheckboxLightColorStatesCheckedBackground = "#338FCC";

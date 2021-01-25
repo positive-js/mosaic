@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 25 Jan 2021 08:55:01 GMT
+ * Generated on Mon, 25 Jan 2021 11:58:46 GMT
  */
 
 :root {
@@ -359,6 +359,31 @@
   --mc-icon-button-size-padding: 5px 7px;
   --mc-icon-button-size-text-padding: 5px 7px;
   --mc-icon-button-size-icon-padding: 5px 15px;
+  --mc-card-light-color-error-vertical-line: #E76E5C;
+  --mc-card-light-color-error-background: #FCEFEC;
+  --mc-card-light-color-error-shadow: #E6E6E6;
+  --mc-card-light-color-warning-vertical-line: #F0D49B;
+  --mc-card-light-color-warning-background: #FCF5E8;
+  --mc-card-light-color-warning-shadow: #E6E6E6;
+  --mc-card-light-color-success-vertical-line: #B4DEA4;
+  --mc-card-light-color-success-background: #EDF8E9;
+  --mc-card-light-color-success-shadow: #E6E6E6;
+  --mc-card-light-color-info-vertical-line: #AAD1EC;
+  --mc-card-light-color-info-background: #EBF4FB;
+  --mc-card-light-color-info-shadow: #E6E6E6;
+  --mc-card-dark-color-error-vertical-line: #E76E5C;
+  --mc-card-dark-color-error-background: #832112;
+  --mc-card-dark-color-error-shadow: #4D4D4D;
+  --mc-card-dark-color-warning-vertical-line: #DFA739;
+  --mc-card-dark-color-warning-background: #7D5504;
+  --mc-card-dark-color-warning-shadow: #4D4D4D;
+  --mc-card-dark-color-success-vertical-line: #6FBA53;
+  --mc-card-dark-color-success-background: #276211;
+  --mc-card-dark-color-success-shadow: #4D4D4D;
+  --mc-card-dark-color-info-vertical-line: #57A4D7;
+  --mc-card-dark-color-info-background: #114E77;
+  --mc-card-dark-color-info-shadow: #4D4D4D;
+  --mc-card-size-vertical-line: 4px;
   --mc-checkbox-light-color-border: #B3B3B3;
   --mc-checkbox-light-color-states-checked-border: #206EA2;
   --mc-checkbox-light-color-states-checked-background: #338FCC;

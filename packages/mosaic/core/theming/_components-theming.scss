@@ -73,6 +73,29 @@
         )
     );
 
+    $card: (
+        error: (
+            vertical-line: $card-light-color-error-vertical-line,
+            background: $card-light-color-error-background,
+            shadow: $card-light-color-error-shadow
+        ),
+        warning: (
+            vertical-line: $card-light-color-warning-vertical-line,
+            background: $card-light-color-warning-background,
+            shadow: $card-light-color-warning-shadow
+        ),
+        success: (
+            vertical-line: $card-light-color-success-vertical-line,
+            background: $card-light-color-success-background,
+            shadow: $card-light-color-success-shadow
+        ),
+        info: (
+            vertical-line: $card-light-color-info-vertical-line,
+            background: $card-light-color-info-background,
+            shadow: $card-light-color-info-shadow
+        )
+    );
+
     $checkbox: (
         border: $checkbox-light-color-border,
 
@@ -193,6 +216,7 @@
         alert: $alert,
         popup: $popup,
         button: $button,
+        card: $card,
         checkbox: $checkbox,
         modal: $modal,
         navbar: $navbar,
@@ -278,6 +302,29 @@
 
             active_border: $button-dark-color-error-states-active-border,
             active_background: $button-dark-color-error-states-active-background
+        )
+    );
+
+    $card: (
+        error: (
+            vertical-line: $card-dark-color-error-vertical-line,
+            background: $card-dark-color-error-background,
+            shadow: $card-dark-color-error-shadow
+        ),
+        warning: (
+            vertical-line: $card-dark-color-warning-vertical-line,
+            background: $card-dark-color-warning-background,
+            shadow: $card-dark-color-warning-shadow
+        ),
+        success: (
+            vertical-line: $card-dark-color-success-vertical-line,
+            background: $card-dark-color-success-background,
+            shadow: $card-dark-color-success-shadow
+        ),
+        info: (
+            vertical-line: $card-dark-color-info-vertical-line,
+            background: $card-dark-color-info-background,
+            shadow: $card-dark-color-info-shadow
         )
     );
 
@@ -401,6 +448,7 @@
         alert: $alert,
         popup: $popup,
         button: $button,
+        card: $card,
         checkbox: $checkbox,
         modal: $modal,
         navbar: $navbar,

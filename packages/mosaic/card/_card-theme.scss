@@ -2,27 +2,22 @@
 @import '../core/theming/theming';
 
 
-@mixin card-type($color, $background, $shadow-color) {
+@mixin card-type($card) {
     box-shadow:
-        inset -1px 0 0 0 $shadow-color,
-        inset 0 1px 0 0 $shadow-color,
-        inset 0 -1px 0 0 $shadow-color;
+        inset -1px 0 0 0 map-get($card, shadow-color),
+        inset 0 1px 0 0 map-get($card, shadow-color),
+        inset 0 -1px 0 0 map-get($card, shadow-color);
 
-    background-color: $background;
+    background-color: map-get($card, background);
 
-    border-left-color: $color;
+    border-left-color: map-get($card, vertical-line);
 }
 
 @mixin mc-card-theme($theme) {
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    $second: map-get($theme, second);
-    $error: map-get($theme, error);
-    $info: map-get($theme, info);
-    $warning: map-get($theme, warning);
-    $success: map-get($theme, success);
-
+    $card: map-get(map-get($theme, components), card);
     $popup: map-get(map-get($theme, components), popup);
 
     $is-dark: map-get($theme, is-dark);
@@ -30,36 +25,20 @@
     .mc-card {
         color: map-get($foreground, text);
 
-        &.mc-card_info {
-            @if($is-dark) {
-                @include card-type(mc-color($info), mc-color($info, darker), mc-color($second, darker));
-            } @else {
-                @include card-type(mc-color($info), mc-color($info, lighter), mc-color($second, lighter));
-            }
+        &.mc-card_error {
+            @include card-type(map-get($card, error));
         }
 
         &.mc-card_warning {
-            @if($is-dark) {
-                @include card-type(mc-color($warning), mc-color($warning, darker), mc-color($second, darker));
-            } @else {
-                @include card-type(mc-color($warning), mc-color($warning, lighter), mc-color($second, lighter));
-            }
+            @include card-type(map-get($card, warning));
         }
 
         &.mc-card_success {
-            @if($is-dark) {
-                @include card-type(mc-color($success), mc-color($success, darker), mc-color($second, darker));
-            } @else {
-                @include card-type(mc-color($success), mc-color($success, lighter), mc-color($second, lighter));
-            }
+            @include card-type(map-get($card, success));
         }
 
-        &.mc-card_error {
-            @if($is-dark) {
-                @include card-type(mc-color($error), mc-color($error, darker), mc-color($second, darker));
-            } @else {
-                @include card-type(mc-color($error), mc-color($error, lighter), mc-color($second, lighter));
-            }
+        &.mc-card_info {
+            @include card-type(map-get($card, info));
         }
 
         &.mc-card_white {

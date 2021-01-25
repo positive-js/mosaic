@@ -15,7 +15,7 @@
     }
 
     border-left: {
-        width: 4px;
+        width: var(--mc-card-size-vertical-line, $card-size-vertical-line);
         style: solid;
         color: transparent;
     };

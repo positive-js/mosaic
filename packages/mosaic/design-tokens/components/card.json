@@ -1,0 +1,52 @@
+{
+    "card": {
+        "light-color": {
+            "error": {
+                "vertical-line": { "value": "{light-color.error.default.value}" },
+                "background": { "value": "{light-color.error.palette.value.60.value}" },
+                "shadow": { "value": "{light-color.second.palette.value.100.value}" }
+            },
+            "warning": {
+                "vertical-line": { "value": "{light-color.warning.default.value}" },
+                "background": { "value": "{light-color.warning.palette.value.60.value}" },
+                "shadow": { "value": "{light-color.second.palette.value.100.value}" }
+            },
+            "success": {
+                "vertical-line": { "value": "{light-color.success.default.value}" },
+                "background": { "value": "{light-color.success.palette.value.60.value}" },
+                "shadow": { "value": "{light-color.second.palette.value.100.value}" }
+            },
+            "info": {
+                "vertical-line": { "value": "{light-color.info.default.value}" },
+                "background": { "value": "{light-color.info.palette.value.60.value}" },
+                "shadow": { "value": "{light-color.second.palette.value.100.value}" }
+            }
+        },
+        "dark-color": {
+            "error": {
+                "vertical-line": { "value": "{dark-color.error.default.value}" },
+                "background": { "value": "{dark-color.error.palette.value.700.value}" },
+                "shadow": { "value": "{dark-color.second.palette.value.700.value}" }
+            },
+            "warning": {
+                "vertical-line": { "value": "{dark-color.warning.default.value}" },
+                "background": { "value": "{dark-color.warning.palette.value.700.value}" },
+                "shadow": { "value": "{dark-color.second.palette.value.700.value}" }
+            },
+            "success": {
+                "vertical-line": { "value": "{dark-color.success.default.value}" },
+                "background": { "value": "{dark-color.success.palette.value.700.value}" },
+                "shadow": { "value": "{dark-color.second.palette.value.700.value}" }
+            },
+            "info": {
+                "vertical-line": { "value": "{dark-color.info.default.value}" },
+                "background": { "value": "{dark-color.info.palette.value.700.value}" },
+                "shadow": { "value": "{dark-color.second.palette.value.700.value}" }
+            }
+        },
+        "size": {
+            "vertical-line": { "value": "4px" }
+        },
+        "font": {}
+    }
+}
