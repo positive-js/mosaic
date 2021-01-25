@@ -1,0 +1,20 @@
+{
+    "link": {
+        "light-color": {
+            "states": {
+                "hover": {
+                    "border": { "value": "{light-color.primary.palette.value.600.value}" }
+                }
+            }
+        },
+        "dark-color": {
+            "states": {
+                "hover": {
+                    "border": { "value": "{dark-color.primary.palette.value.300.value}" }
+                }
+            }
+        },
+        "size": {},
+        "font": {}
+    }
+}

@@ -7,9 +7,9 @@
 
     $primary: map-get($theme, primary);
 
-    $is-dark: map-get($theme, is-dark);
+    $link: map-get(map-get($theme, components), link);
 
-    $color_hover: mc-color($primary, if($is-dark, lighter, darker));
+    $color_hover: map-get(map-get($link, hover), border);
 
     .mc-link {
         color: mc-color($primary);

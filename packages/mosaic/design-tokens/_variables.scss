@@ -1,6 +1,6 @@
 
 // Do not edit directly
-// Generated on Mon, 25 Jan 2021 11:58:46 GMT
+// Generated on Mon, 25 Jan 2021 13:26:32 GMT
 
 $light-color-primary-default: #338FCC;
 $light-color-second-default: #B3B3B3;
@@ -267,19 +267,19 @@ $typography-extra-small-text-letter-spacing: 0.22px;
 $typography-extra-small-text-font-weight: normal;
 $typography-extra-small-text-font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
 $typography-extra-small-text-text-transform: null;
-$alert-light-color-error-background: #F4B7AE;
+$alert-light-color-error-background: #FCEFEC;
 $alert-light-color-error-border: #E76E5C;
 $alert-light-color-error-icon: #E76E5C;
-$alert-light-color-warning-background: #F0D49B;
+$alert-light-color-warning-background: #FCF5E8;
 $alert-light-color-warning-border: #F0D49B;
 $alert-light-color-warning-icon: #F0D49B;
-$alert-light-color-success-background: #B4DEA4;
+$alert-light-color-success-background: #EDF8E9;
 $alert-light-color-success-border: #B4DEA4;
 $alert-light-color-success-icon: #B4DEA4;
-$alert-light-color-info-background: #AAD1EC;
+$alert-light-color-info-background: #EBF4FB;
 $alert-light-color-info-border: #AAD1EC;
 $alert-light-color-info-icon: #AAD1EC;
-$alert-light-color-default-background: #CCCCCC;
+$alert-light-color-default-background: #F0F0F0;
 $alert-light-color-default-border: #B3B3B3;
 $alert-light-color-default-icon: #CCCCCC;
 $alert-dark-color-error-background: #832112;
@@ -415,6 +415,16 @@ $dropdown-trigger-size-padding-left: 16px;
 $dropdown-panel-size-padding: 4px 0;
 $dropdown-panel-size-border-width: 1px;
 $dropdown-panel-size-border-radius: 3px;
+$form-field-light-color-border: #B3B3B3;
+$form-field-light-color-background: white;
+$form-field-light-color-states-hover-border: #999999;
+$form-field-light-color-states-invalid-border: #E76E5C;
+$form-field-light-color-states-invalid-background: transparent;
+$form-field-dark-color-border: #999999;
+$form-field-dark-color-background: #333333;
+$form-field-dark-color-states-hover-border: #CCCCCC;
+$form-field-dark-color-states-invalid-border: #E76E5C;
+$form-field-dark-color-states-invalid-background: transparent;
 $form-field-size-border-width: 1px;
 $form-field-size-border-radius: 3px;
 $form-field-size-button-width: 32px;
@@ -422,6 +432,8 @@ $form-field-hint-size-margin-top: 4px;
 $input-size-padding: 5px 16px;
 $input-size-width: 100%;
 $input-size-min-height: 30px;
+$link-light-color-states-hover-border: #206EA2;
+$link-dark-color-states-hover-border: #7FBAE1;
 $list-size-horizontal-padding: 15px;
 $list-size-icon-padding: 4px;
 $list-size-item-height: 28px;

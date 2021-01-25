@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 25 Jan 2021 11:58:46 GMT
+ * Generated on Mon, 25 Jan 2021 13:26:32 GMT
  */
 
 :root {
@@ -269,19 +269,19 @@
   --mc-typography-extra-small-text-font-weight: normal;
   --mc-typography-extra-small-text-font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
   --mc-typography-extra-small-text-text-transform: null;
-  --mc-alert-light-color-error-background: #F4B7AE;
+  --mc-alert-light-color-error-background: #FCEFEC;
   --mc-alert-light-color-error-border: #E76E5C;
   --mc-alert-light-color-error-icon: #E76E5C;
-  --mc-alert-light-color-warning-background: #F0D49B;
+  --mc-alert-light-color-warning-background: #FCF5E8;
   --mc-alert-light-color-warning-border: #F0D49B;
   --mc-alert-light-color-warning-icon: #F0D49B;
-  --mc-alert-light-color-success-background: #B4DEA4;
+  --mc-alert-light-color-success-background: #EDF8E9;
   --mc-alert-light-color-success-border: #B4DEA4;
   --mc-alert-light-color-success-icon: #B4DEA4;
-  --mc-alert-light-color-info-background: #AAD1EC;
+  --mc-alert-light-color-info-background: #EBF4FB;
   --mc-alert-light-color-info-border: #AAD1EC;
   --mc-alert-light-color-info-icon: #AAD1EC;
-  --mc-alert-light-color-default-background: #CCCCCC;
+  --mc-alert-light-color-default-background: #F0F0F0;
   --mc-alert-light-color-default-border: #B3B3B3;
   --mc-alert-light-color-default-icon: #CCCCCC;
   --mc-alert-dark-color-error-background: #832112;
@@ -417,6 +417,16 @@
   --mc-dropdown-panel-size-padding: 4px 0;
   --mc-dropdown-panel-size-border-width: 1px;
   --mc-dropdown-panel-size-border-radius: 3px;
+  --mc-form-field-light-color-border: #B3B3B3;
+  --mc-form-field-light-color-background: white;
+  --mc-form-field-light-color-states-hover-border: #999999;
+  --mc-form-field-light-color-states-invalid-border: #E76E5C;
+  --mc-form-field-light-color-states-invalid-background: transparent;
+  --mc-form-field-dark-color-border: #999999;
+  --mc-form-field-dark-color-background: #333333;
+  --mc-form-field-dark-color-states-hover-border: #CCCCCC;
+  --mc-form-field-dark-color-states-invalid-border: #E76E5C;
+  --mc-form-field-dark-color-states-invalid-background: transparent;
   --mc-form-field-size-border-width: 1px;
   --mc-form-field-size-border-radius: 3px;
   --mc-form-field-size-button-width: 32px;
@@ -424,6 +434,8 @@
   --mc-input-size-padding: 5px 16px;
   --mc-input-size-width: 100%;
   --mc-input-size-min-height: 30px;
+  --mc-link-light-color-states-hover-border: #206EA2;
+  --mc-link-dark-color-states-hover-border: #7FBAE1;
   --mc-list-size-horizontal-padding: 15px;
   --mc-list-size-icon-padding: 4px;
   --mc-list-size-item-height: 28px;

@@ -2,27 +2,27 @@
     "alert": {
         "light-color": {
             "error": {
-                "background": { "value": "{light-color.error.palette.value.200.value}" },
+                "background": { "value": "{light-color.error.palette.value.60.value}" },
                 "border": { "value": "{light-color.error.default.value}" },
                 "icon": { "value": "{light-color.error.default.value}" }
             },
             "warning": {
-                "background": { "value": "{light-color.warning.palette.value.200.value}" },
+                "background": { "value": "{light-color.warning.palette.value.60.value}" },
                 "border": { "value": "{light-color.warning.default.value}" },
                 "icon": { "value": "{light-color.warning.default.value}" }
             },
             "success": {
-                "background": { "value": "{light-color.success.palette.value.200.value}" },
+                "background": { "value": "{light-color.success.palette.value.60.value}" },
                 "border": { "value": "{light-color.success.default.value}" },
                 "icon": { "value": "{light-color.success.default.value}" }
             },
             "info": {
-                "background": { "value": "{light-color.info.palette.value.200.value}" },
+                "background": { "value": "{light-color.info.palette.value.60.value}" },
                 "border": { "value": "{light-color.info.default.value}" },
                 "icon": { "value": "{light-color.info.default.value}" }
             },
             "default": {
-                "background": { "value": "{light-color.second.palette.value.200.value}" },
+                "background": { "value": "{light-color.second.palette.value.60.value}" },
                 "border": { "value": "{light-color.second.default.value}" },
                 "icon": { "value": "{light-color.second.palette.value.200.value}" }
             }

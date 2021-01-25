@@ -10,24 +10,23 @@
     $second: map-get($theme, second);
     $error: map-get($theme, error);
 
-    $is-dark: map-get($theme, is-dark);
+    $form-field: map-get(map-get($theme, components), form-field);
 
     .mc-form-field {
-        background-color: map-get($background, background);
+        background-color: map-get($form-field, background);
 
         &:not(.mc-form-field_without-borders) {
             .mc-form-field__container {
-                border-color: mc-color($second);
+                border-color: map-get($form-field, border);
             }
 
             &:hover .mc-form-field__container {
-                border-color: if($is-dark, mc-color($second, lighter), mc-color($second, darker));
+                border-color: map-get(map-get($form-field, hover), border);
             }
 
             &.ng-invalid .mc-form-field__container {
-                background-color: if($is-dark, transparent, mc-color($error, lighter));
-
-                border-color: mc-color($error);
+                border-color: map-get(map-get($form-field, invalid), border);
+                background-color: map-get(map-get($form-field, invalid), background);
 
                 .mc-input,
                 .mc-textarea {

@@ -106,6 +106,26 @@
         state-focused-shadow: $checkbox-light-color-states-focused-shadow
     );
 
+
+    $form-field: (
+        border: $form-field-light-color-border,
+        background: $form-field-light-color-background,
+
+        hover: (
+            border: $form-field-light-color-states-hover-border,
+        ),
+        invalid: (
+            border: $form-field-light-color-states-invalid-border,
+            background: $form-field-light-color-states-invalid-background,
+        )
+    );
+
+    $link: (
+        hover: (
+            border: $link-light-color-states-hover-border
+        )
+    );
+
     $modal: (
         background-mask: $modal-light-color-background-mask,
         shadow: $modal-light-color-shadow
@@ -218,6 +238,8 @@
         button: $button,
         card: $card,
         checkbox: $checkbox,
+        form-field: $form-field,
+        link: $link,
         modal: $modal,
         navbar: $navbar,
         navbar-item: $navbar-item,
@@ -338,6 +360,25 @@
         state-focused-shadow: $checkbox-dark-color-states-focused-shadow
     );
 
+    $form-field: (
+        border: $form-field-dark-color-border,
+        background: $form-field-dark-color-background,
+
+        hover: (
+            border: $form-field-dark-color-states-hover-border,
+        ),
+        invalid: (
+            border: $form-field-dark-color-states-invalid-border,
+            background: $form-field-dark-color-states-invalid-background,
+        )
+    );
+
+    $link: (
+        hover: (
+            border: $link-dark-color-states-hover-border,
+        )
+    );
+
     $modal: (
         background-mask: $modal-dark-color-background-mask,
         shadow: $modal-dark-color-shadow
@@ -450,6 +491,8 @@
         button: $button,
         card: $card,
         checkbox: $checkbox,
+        form-field: $form-field,
+        link: $link,
         modal: $modal,
         navbar: $navbar,
         navbar-item: $navbar-item,

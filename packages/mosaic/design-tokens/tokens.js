@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 25 Jan 2021 11:58:46 GMT
+ * Generated on Mon, 25 Jan 2021 13:26:32 GMT
  */
 
 export const LightColorPrimaryDefault = "#338FCC";
@@ -280,19 +280,19 @@ export const TypographyExtraSmallTextLetterSpacing = "0.22px";
 export const TypographyExtraSmallTextFontWeight = "normal";
 export const TypographyExtraSmallTextFontFamily = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
 export const TypographyExtraSmallTextTextTransform = "null";
-export const AlertLightColorErrorBackground = "#F4B7AE";
+export const AlertLightColorErrorBackground = "#FCEFEC";
 export const AlertLightColorErrorBorder = "#E76E5C";
 export const AlertLightColorErrorIcon = "#E76E5C";
-export const AlertLightColorWarningBackground = "#F0D49B";
+export const AlertLightColorWarningBackground = "#FCF5E8";
 export const AlertLightColorWarningBorder = "#F0D49B";
 export const AlertLightColorWarningIcon = "#F0D49B";
-export const AlertLightColorSuccessBackground = "#B4DEA4";
+export const AlertLightColorSuccessBackground = "#EDF8E9";
 export const AlertLightColorSuccessBorder = "#B4DEA4";
 export const AlertLightColorSuccessIcon = "#B4DEA4";
-export const AlertLightColorInfoBackground = "#AAD1EC";
+export const AlertLightColorInfoBackground = "#EBF4FB";
 export const AlertLightColorInfoBorder = "#AAD1EC";
 export const AlertLightColorInfoIcon = "#AAD1EC";
-export const AlertLightColorDefaultBackground = "#CCCCCC";
+export const AlertLightColorDefaultBackground = "#F0F0F0";
 export const AlertLightColorDefaultBorder = "#B3B3B3";
 export const AlertLightColorDefaultIcon = "#CCCCCC";
 export const AlertDarkColorErrorBackground = "#832112";
@@ -428,6 +428,16 @@ export const DropdownTriggerSizePaddingLeft = "16px";
 export const DropdownPanelSizePadding = "4px 0";
 export const DropdownPanelSizeBorderWidth = "1px";
 export const DropdownPanelSizeBorderRadius = "3px";
+export const FormFieldLightColorBorder = "#B3B3B3";
+export const FormFieldLightColorBackground = "white";
+export const FormFieldLightColorStatesHoverBorder = "#999999";
+export const FormFieldLightColorStatesInvalidBorder = "#E76E5C";
+export const FormFieldLightColorStatesInvalidBackground = "transparent";
+export const FormFieldDarkColorBorder = "#999999";
+export const FormFieldDarkColorBackground = "#333333";
+export const FormFieldDarkColorStatesHoverBorder = "#CCCCCC";
+export const FormFieldDarkColorStatesInvalidBorder = "#E76E5C";
+export const FormFieldDarkColorStatesInvalidBackground = "transparent";
 export const FormFieldSizeBorderWidth = "1px";
 export const FormFieldSizeBorderRadius = "3px";
 export const FormFieldSizeButtonWidth = "32px";
@@ -435,6 +445,8 @@ export const FormFieldHintSizeMarginTop = "4px";
 export const InputSizePadding = "5px 16px";
 export const InputSizeWidth = "100%";
 export const InputSizeMinHeight = "30px";
+export const LinkLightColorStatesHoverBorder = "#206EA2";
+export const LinkDarkColorStatesHoverBorder = "#7FBAE1";
 export const ListSizeHorizontalPadding = "15px";
 export const ListSizeIconPadding = "4px";
 export const ListSizeItemHeight = "28px";
