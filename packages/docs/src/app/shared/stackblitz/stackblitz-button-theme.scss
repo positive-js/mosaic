@@ -6,7 +6,10 @@
     $is-dark: map-get($theme, is-dark);
 
     $color: mc-color($primary);
-    $color_hover: mc-color($primary, if($is-dark, lighter, darker));
+
+    $link: map-get(map-get($theme, components), link);
+    $color_hover: map-get(map-get($link, hover), border);
+
     $color_disabled: mc-color($foreground, text-disabled);
 
     .stackblitz__link {

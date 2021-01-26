@@ -9,7 +9,10 @@
     $background-color: mc-color($background, background);
     $less-contrast-text: mc-color($foreground, text-less-contrast);
     $color: mc-color($primary);
-    $color_hover: mc-color($primary, if($is-dark, lighter, darker));
+
+    $link: map-get(map-get($theme, components), link);
+    $color_hover: map-get(map-get($link, hover), border);
+
     $border-color: mc-color($second, 300);
 
     .docs-footer {

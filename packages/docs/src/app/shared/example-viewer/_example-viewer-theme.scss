@@ -3,7 +3,10 @@
     $foreground: map-get($theme, foreground);
     $color: mc-color($primary);
     $is-dark: map-get($theme, is-dark);
-    $color_hover: mc-color($primary, if($is-dark, lighter, darker));
+
+    $link: map-get(map-get($theme, components), link);
+    $color_hover: map-get(map-get($link, hover), border);
+
     $error: map-get($theme, error);
     $error-border: mc-color($error, 200);
     $error-background: mc-color($error, 60);

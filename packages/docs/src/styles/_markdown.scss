@@ -123,7 +123,10 @@
 
     $text: mc-color($foreground, text);
     $color: mc-color($primary);
-    $color_hover: mc-color($primary, if($is-dark, lighter, darker));
+
+    $link: map-get(map-get($theme, components), link);
+    $color_hover: map-get(map-get($link, hover), border);
+
     $color_disabled: mc-color($foreground, text-disabled);
     $fg-default: mc-color($foreground, text);
     $th-color: mc-color($second, 400);
