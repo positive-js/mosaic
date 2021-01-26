@@ -42,7 +42,7 @@
             "background": { "value": "white" },
             "background-disabled": { "value": "{palette.grey.60.value}" },
 
-            "overlay-hovered": { "value": "rgba(black, 0.05)" },
+            "overlay-hover": { "value": "rgba(black, 0.05)" },
             "overlay-active": { "value": "rgba(black, 0.1)" },
             "overlay-disabled": { "value": "rgba(white, 0.3)" }
         },
@@ -96,7 +96,7 @@
             "background": { "value": "{palette.grey.800.value}" },
             "background-disabled": { "value": "{palette.grey.600.value}" },
 
-            "overlay-hovered": { "value": "rgba(black, 0.05)" },
+            "overlay-hover": { "value": "rgba(black, 0.05)" },
             "overlay-active": { "value": "rgba(black, 0.1)" },
             "overlay-disabled": { "value": "rgba(white, 0.2)" }
         },

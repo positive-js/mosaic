@@ -13,7 +13,7 @@
         color: map-get($foreground, text);
 
         &:hover {
-            background-color: map-get($background, overlay-hovered);
+            background-color: map-get($background, overlay-hover);
         }
 
         &.mc-focused {

@@ -5,14 +5,10 @@
 @mixin mc-link-theme($theme) {
     $foreground: map-get($theme, foreground);
 
-    $primary: map-get($theme, primary);
-
     $link: map-get(map-get($theme, components), link);
 
-    $color_hover: map-get(map-get($link, hover), border);
-
     .mc-link {
-        color: mc-color($primary);
+        color: map-get($link, text);
 
         text-decoration: none;
 
@@ -23,15 +19,15 @@
         }
 
         &:visited {
-            color: mc-color($primary);
+            color: map-get($link, text);
         }
 
         &:hover {
-            color: $color_hover;
+            color: map-get($link, state-hover-text);
         }
 
         &.cdk-keyboard-focused {
-            outline: map-get(map-get($theme, states), focused-color) solid 2px;
+            outline: map-get($link, state-focused-outline) solid 2px;
             outline-offset: 2px;
         }
 
@@ -48,31 +44,35 @@
         }
 
         &.mc-link_dashed .mc-link__text {
+            $dashed-link: map-get($link, dashed);
+
             border-bottom-style: dashed;
             border-bottom-width: 1px;
-            border-bottom-color: rgba(mc-color($primary), 0.5);
+            border-bottom-color: map-get($link, border-bottom);
 
             &:visited {
-                border-bottom-color: rgba(mc-color($primary), 0.5);
+                border-bottom-color: map-get($link, border-bottom);
             }
 
             &:hover {
-                border-bottom-color: rgba($color_hover, 0.5);
+                border-bottom-color: map-get($link, state-hover-border-bottom);
             }
         }
 
         /* stylelint-disable no-descending-specificity */
         &.mc-link_underlined .mc-link__text {
+            $underlined-link: map-get($link, underlined);
+
             border-bottom-style: solid;
             border-bottom-width: 1px;
-            border-bottom-color: rgba(mc-color($primary), 0.32);
+            border-bottom-color: map-get($link, border-bottom);
 
             &:visited {
-                border-bottom-color: rgba(mc-color($primary), 0.32);
+                border-bottom-color: map-get($link, border-bottom);
             }
 
             &:hover {
-                border-bottom-color: rgba($color_hover, 0.32);
+                border-bottom-color: map-get($link, state-hover-border-bottom);
             }
         }
         /* stylelint-enable no-descending-specificity */

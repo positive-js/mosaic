@@ -24,7 +24,7 @@
 
         &:hover {
             & .mc-radio-button__outer-circle {
-                background: map-get($background, overlay-hovered);
+                background: map-get($background, overlay-hover);
             }
         }
 

@@ -50,7 +50,7 @@
     $background: (
         background:                 $light-color-background-background,
         background-disabled:        $light-color-background-background-disabled,
-        overlay-hovered:            $light-color-background-overlay-hovered,
+        overlay-hover:            $light-color-background-overlay-hover,
         overlay-active:             $light-color-background-overlay-active,
         overlay-disabled:           $light-color-background-overlay-disabled
     );
@@ -86,7 +86,7 @@
     $background: (
         background:                 $dark-color-background-background,
         background-disabled:        $dark-color-background-background-disabled,
-        overlay-hovered:            $dark-color-background-overlay-hovered,
+        overlay-hover:              $dark-color-background-overlay-hover,
         overlay-active:             $dark-color-background-overlay-active,
         overlay-disabled:           $dark-color-background-overlay-disabled
     );

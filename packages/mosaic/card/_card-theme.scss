@@ -51,7 +51,7 @@
 
         &:not(.mc-card_readonly):hover {
             .mc-card__overlay {
-                background: map-get($background, overlay-hovered);
+                background: map-get($background, overlay-hover);
             }
         }
 

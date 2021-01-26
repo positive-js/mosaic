@@ -19,7 +19,7 @@
         background: transparent;
 
         &:hover {
-            background: map-get($background, overlay-hovered);
+            background: map-get($background, overlay-hover);
         }
 
         &.cdk-keyboard-focused {
@@ -48,7 +48,7 @@
     }
 
     .mc-dropdown__item_highlighted:not([disabled]):not(.mc-disabled) {
-        background: map-get($background, overlay-hovered);
+        background: map-get($background, overlay-hover);
     }
 }
 

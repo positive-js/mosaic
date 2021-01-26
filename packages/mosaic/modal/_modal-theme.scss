@@ -39,7 +39,7 @@
 
             &:hover {
                 .mc-button-overlay {
-                    background: map-get($background, overlay-hovered);
+                    background: map-get($background, overlay-hover);
                 }
 
                 .mc-icon {

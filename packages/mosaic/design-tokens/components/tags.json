@@ -4,9 +4,9 @@
             "primary": {
                 "background": { "value": "{light-color.primary.palette.value.100.value}" },
                 "border": { "value": "{light-color.primary.palette.value.100.value}" },
-                "icon": { "value": "mix({light-color.primary.palette.value.400.value}, {light-color.background.overlay-hovered.value})" },
+                "icon": { "value": "mix({light-color.primary.palette.value.400.value}, {light-color.background.overlay-hover.value})" },
                 "states":  {
-                    "hovered": {
+                    "hover": {
                         "icon": { "value": "{light-color.primary.palette.value.600.value}" }
                     },
                     "focused":{ "value": "{light-color.primary.palette.value.500.value}" },
@@ -19,9 +19,9 @@
             "second": {
                 "background": { "value": "{light-color.second.palette.value.100.value}" },
                 "border": { "value": "{light-color.second.palette.value.100.value}" },
-                "icon": { "value": "mix({light-color.second.palette.value.400.value}, {light-color.background.overlay-hovered.value})" },
+                "icon": { "value": "mix({light-color.second.palette.value.400.value}, {light-color.background.overlay-hover.value})" },
                 "states": {
-                    "hovered": {
+                    "hover": {
                         "icon": { "value": "{light-color.second.palette.value.400.value}" }
                     },
                     "focused": { "value": "{light-color.primary.palette.value.500.value}" },
@@ -34,9 +34,9 @@
             "error": {
                 "background": { "value": "{light-color.error.palette.value.100.value}" },
                 "border": { "value": "{light-color.error.palette.value.100.value}" },
-                "icon": { "value": "mix({light-color.error.palette.value.400.value}, {light-color.background.overlay-hovered.value})" },
+                "icon": { "value": "mix({light-color.error.palette.value.400.value}, {light-color.background.overlay-hover.value})" },
                 "states": {
-                    "hovered": {
+                    "hover": {
                         "icon": { "value": "{light-color.error.palette.value.500.value}" }
                     },
                     "focused": { "value": "{light-color.error.palette.value.400.value}" },
@@ -51,9 +51,9 @@
             "primary": {
                 "background": { "value": "{dark-color.primary.palette.value.700.value}" },
                 "border": { "value": "{dark-color.primary.palette.value.700.value}" },
-                "icon": { "value": "mix({dark-color.primary.palette.value.400.value}, {dark-color.background.overlay-hovered.value})" },
+                "icon": { "value": "mix({dark-color.primary.palette.value.400.value}, {dark-color.background.overlay-hover.value})" },
                 "states": {
-                    "hovered": {
+                    "hover": {
                         "icon": { "value": "{dark-color.primary.palette.value.500.value}" }
                     },
                     "focused": { "value": "{dark-color.primary.palette.value.400.value}" },
@@ -66,9 +66,9 @@
             "second": {
                 "background": { "value": "{dark-color.second.palette.value.700.value}" },
                 "border": { "value": "{dark-color.second.palette.value.700.value}" },
-                "icon": { "value": "mix({dark-color.second.palette.value.400.value}, {dark-color.background.overlay-hovered.value})" },
+                "icon": { "value": "mix({dark-color.second.palette.value.400.value}, {dark-color.background.overlay-hover.value})" },
                 "states": {
-                    "hovered": {
+                    "hover": {
                         "icon": { "value": "{dark-color.second.palette.value.100.value}" }
                     },
                     "focused": { "value": "{dark-color.primary.palette.value.400.value}" },
@@ -81,9 +81,9 @@
             "error": {
                 "background": { "value": "{dark-color.error.palette.value.700.value}" },
                 "border": { "value": "{dark-color.error.palette.value.700.value}" },
-                "icon": { "value": "mix({dark-color.error.palette.value.400.value}, {dark-color.background.overlay-hovered.value})" },
+                "icon": { "value": "mix({dark-color.error.palette.value.400.value}, {dark-color.background.overlay-hover.value})" },
                 "states": {
-                    "hovered": {
+                    "hover": {
                         "icon": { "value": "{dark-color.error.palette.value.200.value}" }
                     },
                     "focused": { "value": "{dark-color.error.palette.value.400.value}" },

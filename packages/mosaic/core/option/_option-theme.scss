@@ -13,7 +13,7 @@
 
         &:hover:not(.mc-disabled) {
             .mc-option-overlay {
-                background: map-get($background, overlay-hovered);
+                background: map-get($background, overlay-hover);
             }
         }
 

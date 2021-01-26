@@ -22,7 +22,7 @@
 
         &:hover {
             .mc-checkbox-frame {
-                background: map-get($background, overlay-hovered);
+                background: map-get($background, overlay-hover);
             }
         }
 

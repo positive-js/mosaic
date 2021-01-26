@@ -3,16 +3,15 @@
     $second: map-get($theme, second);
     $foreground: map-get($theme, foreground);
 
-    $is-dark: map-get($theme, is-dark);
-
     $color: mc-color($primary);
 
     $link: map-get(map-get($theme, components), link);
-    $color_hover: map-get(map-get($link, hover), border);
 
     $color_disabled: mc-color($foreground, text-disabled);
 
     .stackblitz__link {
+        $underlined-link: map-get($link, underlined);
+
         color: $color;
         border-bottom: 1px solid rgba($color, 0.5);
 
@@ -25,7 +24,7 @@
         }
 
         &:hover {
-            color: $color_hover;
+            color: map-get($underlined-link, state-hover-text);;
             border-bottom-color: rgba($color_hover, 0.5);
         }
 

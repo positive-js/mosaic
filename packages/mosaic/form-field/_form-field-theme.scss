@@ -21,12 +21,12 @@
             }
 
             &:hover .mc-form-field__container {
-                border-color: map-get(map-get($form-field, hover), border);
+                border-color: map-get($form-field, state-hover-border);
             }
 
             &.ng-invalid .mc-form-field__container {
-                border-color: map-get(map-get($form-field, invalid), border);
-                background-color: map-get(map-get($form-field, invalid), background);
+                border-color: map-get($form-field, state-invalid-border);
+                background-color: map-get($form-field, state-invalid-background);
 
                 .mc-input,
                 .mc-textarea {

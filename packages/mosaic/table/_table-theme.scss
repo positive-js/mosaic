@@ -17,7 +17,7 @@
         & > tbody {
             & > tr {
                 &:hover {
-                    background-color: map-get($background, overlay-hovered);
+                    background-color: map-get($background, overlay-hover);
                 }
 
                 & > th,

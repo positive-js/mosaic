@@ -111,18 +111,25 @@
         border: $form-field-light-color-border,
         background: $form-field-light-color-background,
 
-        hover: (
-            border: $form-field-light-color-states-hover-border,
-        ),
-        invalid: (
-            border: $form-field-light-color-states-invalid-border,
-            background: $form-field-light-color-states-invalid-background,
-        )
+        state-hover-border: $form-field-light-color-states-hover-border,
+        state-invalid-border: $form-field-light-color-states-invalid-border,
+        state-invalid-background: $form-field-light-color-states-invalid-background
     );
 
     $link: (
-        hover: (
-            border: $link-light-color-states-hover-border
+        text: $link-light-color-text,
+
+        state-hover-border: $link-light-color-state-hover-text,
+        state-focused-outline: $link-light-color-state-focused-outline,
+
+        dashed: (
+            border-bottom: $link-light-color-dashed-border-bottom,
+            state-hover-border-bottom: $link-light-color-dashed-state-hover-border-bottom
+        ),
+
+        underlined: (
+            border-bottom: $link-light-color-underlined-border-bottom,
+            state-hover-border-bottom: $link-light-color-underlined-state-hover-border-bottom
         )
     );
 
@@ -181,7 +188,7 @@
             background: $tags-light-color-primary-background,
             background_disabled: $tags-light-color-primary-states-disabled-background,
             icon: $tags-light-color-primary-icon,
-            icon_hovered: $tags-light-color-primary-states-hovered-icon,
+            icon_hover: $tags-light-color-primary-states-hover-icon,
             focused: $tags-light-color-primary-states-focused,
             disabled: $tags-light-color-primary-states-disabled-text
         ),
@@ -190,7 +197,7 @@
             background: $tags-light-color-second-background,
             background_disabled: $tags-light-color-second-states-disabled-background,
             icon: $tags-light-color-second-icon,
-            icon_hovered: $tags-light-color-second-states-hovered-icon,
+            icon_hover: $tags-light-color-second-states-hover-icon,
             focused: $tags-light-color-second-states-focused,
             disabled: $tags-light-color-second-states-disabled-text
         ),
@@ -199,7 +206,7 @@
             background: $tags-light-color-error-background,
             background_disabled: $tags-light-color-error-states-disabled-background,
             icon: $tags-light-color-error-icon,
-            icon_hovered: $tags-light-color-error-states-hovered-icon,
+            icon_hover: $tags-light-color-error-states-hover-icon,
             focused: $tags-light-color-error-states-focused,
             disabled: $tags-light-color-error-states-disabled-text
         )
@@ -227,7 +234,7 @@
 
         toggle-button: $vertical-navbar-light-color-toggle-button,
 
-        background_hovered: $vertical-navbar-light-color-states-hovered-background,
+        background_hover: $vertical-navbar-light-color-states-hover-background,
         background_active: $vertical-navbar-light-color-states-active-background,
         background_progress: $vertical-navbar-light-color-states-progress-background
     );
@@ -364,18 +371,25 @@
         border: $form-field-dark-color-border,
         background: $form-field-dark-color-background,
 
-        hover: (
-            border: $form-field-dark-color-states-hover-border,
-        ),
-        invalid: (
-            border: $form-field-dark-color-states-invalid-border,
-            background: $form-field-dark-color-states-invalid-background,
-        )
+        state-hover-border: $form-field-dark-color-states-hover-border,
+        state-invalid-border: $form-field-dark-color-states-invalid-border,
+        state-invalid-background: $form-field-dark-color-states-invalid-background
     );
 
     $link: (
-        hover: (
-            border: $link-dark-color-states-hover-border,
+        text: $link-dark-color-text,
+
+        state-hover-text: $link-dark-color-state-hover-text,
+        state-focused-outline: $link-dark-color-state-focused-outline,
+
+        dashed: (
+            border-bottom: $link-dark-color-dashed-border-bottom,
+            state-hover-border-bottom: $link-dark-color-dashed-state-hover-border-bottom
+        ),
+
+        underlined: (
+            border-bottom: $link-dark-color-underlined-border-bottom,
+            state-hover-border-bottom: $link-dark-color-underlined-state-hover-border-bottom
         )
     );
 
@@ -434,7 +448,7 @@
             background: $tags-dark-color-primary-background,
             background_disabled: $tags-dark-color-primary-states-disabled-background,
             icon: $tags-dark-color-primary-icon,
-            icon_hovered: $tags-dark-color-primary-states-hovered-icon,
+            icon_hovered: $tags-dark-color-primary-states-hover-icon,
             focused: $tags-dark-color-primary-states-focused,
             disabled: $tags-dark-color-primary-states-disabled-text
         ),
@@ -443,7 +457,7 @@
             background: $tags-dark-color-second-background,
             background_disabled: $tags-dark-color-second-states-disabled-background,
             icon: $tags-dark-color-second-icon,
-            icon_hovered: $tags-dark-color-second-states-hovered-icon,
+            icon_hovered: $tags-dark-color-second-states-hover-icon,
             focused: $tags-dark-color-second-states-focused,
             disabled: $tags-dark-color-second-states-disabled-text
         ),
@@ -452,7 +466,7 @@
             background: $tags-dark-color-error-background,
             background_disabled: $tags-dark-color-error-states-disabled-background,
             icon: $tags-dark-color-error-icon,
-            icon_hovered: $tags-dark-color-error-states-hovered-icon,
+            icon_hovered: $tags-dark-color-error-states-hover-icon,
             focused: $tags-dark-color-error-states-focused,
             disabled: $tags-dark-color-error-states-disabled-text
         )
@@ -480,7 +494,7 @@
 
         toggle-button: $vertical-navbar-dark-color-toggle-button,
 
-        background_hovered: $vertical-navbar-dark-color-states-hovered-background,
+        background_hovered: $vertical-navbar-dark-color-states-hover-background,
         background_active: $vertical-navbar-dark-color-states-active-background,
         background_progress: $vertical-navbar-dark-color-states-progress-background
     );

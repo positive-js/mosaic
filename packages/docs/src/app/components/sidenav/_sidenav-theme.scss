@@ -5,7 +5,7 @@
     $is-dark: map-get($theme, is-dark);
     $background-color: mc-color($second, if($is-dark, 700, 40));
     $text: mc-color($foreground, text);
-    $hover-color: mc-color($background, overlay-hovered);
+    $hover-color: mc-color($background, overlay-hover);
 
     .nav {
         background-color: $background-color;

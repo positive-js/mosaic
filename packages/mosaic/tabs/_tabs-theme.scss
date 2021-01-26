@@ -20,7 +20,7 @@
         }
 
         &:hover .mc-tab-overlay {
-            background: map-get($background, overlay-hovered);
+            background: map-get($background, overlay-hover);
         }
 
         &.cdk-keyboard-focused:after {

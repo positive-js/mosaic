@@ -8,7 +8,7 @@
                 "active": {
                     "background": { "value": "lighten({light-color.primary.palette.value.700.value}, 5%)" }
                 },
-                "hovered": {
+                "hover": {
                     "background": { "value": "lighten({light-color.primary.palette.value.700.value}, 5%)" }
                 },
                 "progress": {
@@ -24,7 +24,7 @@
                 "active": {
                     "background": { "value": "lighten({dark-color.primary.palette.value.700.value}, 5%)" }
                 },
-                "hovered": {
+                "hover": {
                     "background": { "value": "lighten({dark-color.primary.palette.value.700.value}, 5%)" }
                 },
                 "progress": {

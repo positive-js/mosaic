@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 25 Jan 2021 13:26:32 GMT
+ * Generated on Tue, 26 Jan 2021 09:13:50 GMT
  */
 
 :root {
@@ -18,7 +18,7 @@
   --mc-light-color-foreground-icon: #999999;
   --mc-light-color-background-background: white;
   --mc-light-color-background-background-disabled: #F0F0F0;
-  --mc-light-color-background-overlay-hovered: rgba(black, 0.05);
+  --mc-light-color-background-overlay-hover: rgba(black, 0.05);
   --mc-light-color-background-overlay-active: rgba(black, 0.1);
   --mc-light-color-background-overlay-disabled: rgba(white, 0.3);
   --mc-light-color-states-focused-color: #338FCC;
@@ -39,7 +39,7 @@
   --mc-dark-color-foreground-icon: #999999;
   --mc-dark-color-background-background: #333333;
   --mc-dark-color-background-background-disabled: #666666;
-  --mc-dark-color-background-overlay-hovered: rgba(black, 0.05);
+  --mc-dark-color-background-overlay-hover: rgba(black, 0.05);
   --mc-dark-color-background-overlay-active: rgba(black, 0.1);
   --mc-dark-color-background-overlay-disabled: rgba(white, 0.2);
   --mc-dark-color-states-focused-color: #57A4D7;
@@ -434,8 +434,20 @@
   --mc-input-size-padding: 5px 16px;
   --mc-input-size-width: 100%;
   --mc-input-size-min-height: 30px;
-  --mc-link-light-color-states-hover-border: #206EA2;
-  --mc-link-dark-color-states-hover-border: #7FBAE1;
+  --mc-link-light-color-text: #338FCC;
+  --mc-link-light-color-state-hover-text: #206EA2;
+  --mc-link-light-color-state-focused-outline: #338FCC;
+  --mc-link-light-color-dashed-border-bottom: rgba(#338FCC, 0.5);
+  --mc-link-light-color-dashed-state-hover-border-bottom: rgba(#206EA2, 0.5);
+  --mc-link-light-color-underlined-border-bottom: rgba(#338FCC, 0.32);
+  --mc-link-light-color-underlined-state-hover-border-bottom: rgba(#206EA2, 0.32);
+  --mc-link-dark-color-text: #338FCC;
+  --mc-link-dark-color-state-hover-text: #7FBAE1;
+  --mc-link-dark-color-state-focused-outline: #57A4D7;
+  --mc-link-dark-color-dashed-border-bottom: rgba(#338FCC, 0.5);
+  --mc-link-dark-color-dashed-state-hover-border-bottom: rgba(#7FBAE1, 0.5);
+  --mc-link-dark-color-underlined-border-bottom: rgba(#338FCC, 0.32);
+  --mc-link-dark-color-underlined-state-hover-border-bottom: rgba(#7FBAE1, 0.32);
   --mc-list-size-horizontal-padding: 15px;
   --mc-list-size-icon-padding: 4px;
   --mc-list-size-item-height: 28px;
@@ -554,42 +566,42 @@
   --mc-tags-light-color-primary-background: #D8EAF7;
   --mc-tags-light-color-primary-border: #D8EAF7;
   --mc-tags-light-color-primary-icon: mix(#57A4D7, rgba(black, 0.05));
-  --mc-tags-light-color-primary-states-hovered-icon: #206EA2;
+  --mc-tags-light-color-primary-states-hover-icon: #206EA2;
   --mc-tags-light-color-primary-states-focused: #338FCC;
   --mc-tags-light-color-primary-states-disabled-text: mix(#338FCC, transparent, 50%);
   --mc-tags-light-color-primary-states-disabled-background: mix(#338FCC, transparent, 10%);
   --mc-tags-light-color-second-background: #E6E6E6;
   --mc-tags-light-color-second-border: #E6E6E6;
   --mc-tags-light-color-second-icon: mix(#999999, rgba(black, 0.05));
-  --mc-tags-light-color-second-states-hovered-icon: #999999;
+  --mc-tags-light-color-second-states-hover-icon: #999999;
   --mc-tags-light-color-second-states-focused: #338FCC;
   --mc-tags-light-color-second-states-disabled-text: mix(#B3B3B3, transparent, 50%);
   --mc-tags-light-color-second-states-disabled-background: mix(#B3B3B3, transparent, 10%);
   --mc-tags-light-color-error-background: #FADEDA;
   --mc-tags-light-color-error-border: #FADEDA;
   --mc-tags-light-color-error-icon: mix(#E76E5C, rgba(black, 0.05));
-  --mc-tags-light-color-error-states-hovered-icon: #E04D36;
+  --mc-tags-light-color-error-states-hover-icon: #E04D36;
   --mc-tags-light-color-error-states-focused: #E76E5C;
   --mc-tags-light-color-error-states-disabled-text: mix(#E76E5C, transparent, 50%);
   --mc-tags-light-color-error-states-disabled-background: mix(#E76E5C, transparent, 10%);
   --mc-tags-dark-color-primary-background: #114E77;
   --mc-tags-dark-color-primary-border: #114E77;
   --mc-tags-dark-color-primary-icon: mix(#57A4D7, rgba(black, 0.05));
-  --mc-tags-dark-color-primary-states-hovered-icon: #338FCC;
+  --mc-tags-dark-color-primary-states-hover-icon: #338FCC;
   --mc-tags-dark-color-primary-states-focused: #57A4D7;
   --mc-tags-dark-color-primary-states-disabled-text: mix(#57A4D7, transparent, 50%);
   --mc-tags-dark-color-primary-states-disabled-background: mix(#57A4D7, transparent, 10%);
   --mc-tags-dark-color-second-background: #4D4D4D;
   --mc-tags-dark-color-second-border: #4D4D4D;
   --mc-tags-dark-color-second-icon: mix(#999999, rgba(black, 0.05));
-  --mc-tags-dark-color-second-states-hovered-icon: #E6E6E6;
+  --mc-tags-dark-color-second-states-hover-icon: #E6E6E6;
   --mc-tags-dark-color-second-states-focused: #57A4D7;
   --mc-tags-dark-color-second-states-disabled-text: mix(#999999, transparent, 50%);
   --mc-tags-dark-color-second-states-disabled-background: mix(#999999, transparent, 10%);
   --mc-tags-dark-color-error-background: #832112;
   --mc-tags-dark-color-error-border: #832112;
   --mc-tags-dark-color-error-icon: mix(#E76E5C, rgba(black, 0.05));
-  --mc-tags-dark-color-error-states-hovered-icon: #F4B7AE;
+  --mc-tags-dark-color-error-states-hover-icon: #F4B7AE;
   --mc-tags-dark-color-error-states-focused: #E76E5C;
   --mc-tags-dark-color-error-states-disabled-text: mix(#E76E5C, transparent, 50%);
   --mc-tags-dark-color-error-states-disabled-background: mix(#E76E5C, transparent, 10%);
@@ -642,13 +654,13 @@
   --mc-vertical-navbar-light-color-text: white;
   --mc-vertical-navbar-light-color-toggle-button: white;
   --mc-vertical-navbar-light-color-states-active-background: lighten(#114E77, 5%);
-  --mc-vertical-navbar-light-color-states-hovered-background: lighten(#114E77, 5%);
+  --mc-vertical-navbar-light-color-states-hover-background: lighten(#114E77, 5%);
   --mc-vertical-navbar-light-color-states-progress-background: lighten(#07314D, 15%);
   --mc-vertical-navbar-dark-color-background: #114E77;
   --mc-vertical-navbar-dark-color-text: white;
   --mc-vertical-navbar-dark-color-toggle-button: white;
   --mc-vertical-navbar-dark-color-states-active-background: lighten(#114E77, 5%);
-  --mc-vertical-navbar-dark-color-states-hovered-background: lighten(#114E77, 5%);
+  --mc-vertical-navbar-dark-color-states-hover-background: lighten(#114E77, 5%);
   --mc-vertical-navbar-dark-color-states-progress-background: lighten(#07314D, 15%);
   --mc-vertical-navbar-item-size-height: 64px;
   --mc-vertical-navbar-item-size-margin: 1px 0;
