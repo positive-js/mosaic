@@ -210,6 +210,41 @@ describe('McTimepicker', () => {
 
             expect(testComponent.ngModel.valid).toBeFalse();
         });
+
+        it('Convert user input (add lead zero)', fakeAsync(() => {
+            testComponent.timeFormat = 'HH:mm:ss';
+            fixture.detectChanges();
+
+            inputElementDebug.nativeElement.value = '1*';
+            dispatchFakeEvent(inputElementDebug.nativeElement, 'keydown');
+            tick(1);
+
+            expect(inputElementDebug.nativeElement.value).toEqual('01:00:00');
+
+            inputElementDebug.nativeElement.value = '01:1*';
+            dispatchFakeEvent(inputElementDebug.nativeElement, 'keydown');
+            tick(1);
+
+            expect(inputElementDebug.nativeElement.value).toEqual('01:01:00');
+
+            inputElementDebug.nativeElement.value = '01:01:1*';
+            dispatchFakeEvent(inputElementDebug.nativeElement, 'keydown');
+            tick(1);
+
+            expect(inputElementDebug.nativeElement.value).toEqual('01:01:01');
+
+            inputElementDebug.nativeElement.value = '01:1*:10';
+            dispatchFakeEvent(inputElementDebug.nativeElement, 'keydown');
+            tick(1);
+
+            expect(inputElementDebug.nativeElement.value).toEqual('01:01:10');
+
+            inputElementDebug.nativeElement.value = '1*:10:10';
+            dispatchFakeEvent(inputElementDebug.nativeElement, 'keydown');
+            tick(1);
+
+            expect(inputElementDebug.nativeElement.value).toEqual('01:10:10');
+        }));
     });
 
     describe('Paste value from clipboard', () => {
