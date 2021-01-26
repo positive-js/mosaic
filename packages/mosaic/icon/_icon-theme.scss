@@ -16,7 +16,8 @@
         color: mc-color($foreground, icon);
 
         &.mc-primary {
-            color: mix(mc-color($foreground, icon), $primary-color, 30%);
+            // todo color: mix(mc-color($foreground, icon), $primary-color, 30%);
+            color: mc-color($foreground, icon);
 
             &[disabled],
             &.mc-disabled {
@@ -34,7 +35,8 @@
         }
 
         &.mc-error {
-            color: mix(mc-color($foreground, icon), mc-color($error), 30%);
+            // todo color: mix(mc-color($foreground, icon), mc-color($error), 30%);
+            color: mc-color($foreground, icon);
 
             &[disabled],
             &.mc-disabled {
@@ -59,7 +61,8 @@
             color: $primary-color;
 
             &:hover {
-                color: mix(map-get($foreground, text), $primary-color);
+                // todo color: mix(map-get($foreground, text), $primary-color);
+                color: map-get($foreground, text);
             }
         }
 
@@ -67,7 +70,8 @@
             color: mc-color($second);
 
             &:hover {
-                color: mix(map-get($foreground, text), mc-color($second), 90%);
+                //todo color: mix(map-get($foreground, text), mc-color($second), 90%);
+                color: map-get($foreground, text);
             }
         }
 
@@ -75,7 +79,8 @@
             color: mc-color($error);
 
             &:hover {
-                color: mix(map-get($foreground, text), mc-color($error));
+                // todo color: mix(map-get($foreground, text), mc-color($error));
+                color: map-get($foreground, text);
             }
         }
     }

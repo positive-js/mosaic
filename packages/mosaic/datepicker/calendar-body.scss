@@ -2,12 +2,11 @@
 @import '../../cdk/a11y/a11y';
 
 
-$mc-calendar-body-cell-content-size:
-    100% - var(--mc-datepicker-body-size-cell-margin, #{$datepicker-body-size-cell-margin}) * 2;
+$mc-calendar-body-cell-content-size: 100% - $datepicker-body-size-cell-margin * 2;
 
 
 .mc-calendar__body {
-    min-width: 7 * var(--mc-datepicker-body-size-cell-min-size, $datepicker-body-size-cell-min-size);
+    min-width: calc(7 * var(--mc-datepicker-body-size-cell-min-size, $datepicker-body-size-cell-min-size));
 }
 
 .mc-calendar__body-label {

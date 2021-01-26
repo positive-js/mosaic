@@ -12,12 +12,14 @@ $mc-datepicker-today-fade-amount: 0.2;
     }
 
     .mc-calendar__body_disabled > .mc-selected {
-        background-color: fade-out($color, $mc-datepicker-selected-fade-amount);
+        // todo background-color: fade-out($color, $mc-datepicker-selected-fade-amount);
+        background-color: $color;
     }
 }
 
 @mixin mc-datepicker-theme($theme) {
     $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
 
     $primary: map-get($theme, primary);
     $second: map-get($theme, second);
@@ -90,7 +92,8 @@ $mc-datepicker-today-fade-amount: 0.2;
     }
 
     .mc-calendar__body_disabled > .mc-calendar__body-today:not(.mc-selected) {
-        border-color: fade-out(map-get($foreground, text), $mc-datepicker-today-fade-amount);
+        // todo border-color: fade-out(map-get($foreground, text), $mc-datepicker-today-fade-amount);
+        border-color: map-get($background, background-disabled);
     }
 
     @include _mc-datepicker-color(map-get(map-get($theme, states), selected-color));

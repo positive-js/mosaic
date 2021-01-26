@@ -47,11 +47,13 @@
 
             /* stylelint-disable no-descending-specificity */
             &.mc-disabled .mc-form-field__container {
-                border-color: mix(map-get($foreground, border), mc-color($background, overlay-disabled));
+                // todo border-color: mix(map-get($foreground, border), mc-color($background, overlay-disabled));
+                border-color: map-get($foreground, text-disabled);
 
-                background-color: mix(
-                    map-get($background, background-disabled), mc-color($background, overlay-disabled)
-                );
+                // todo background-color: mix(
+                //    map-get($background, background-disabled), mc-color($background, overlay-disabled)
+                //);
+                background-color: map-get($background, background-disabled);
 
                 .mc-icon,
                 .mc-input,

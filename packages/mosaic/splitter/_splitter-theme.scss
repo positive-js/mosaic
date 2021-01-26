@@ -6,7 +6,9 @@
 
         &:hover,
         &.mc-gutter_dragged {
-            background-color: mix(map-get($background, background-disabled), map-get($background, overlay-hover));
+            // todo
+            // background-color: mix(map-get($background, background-disabled), map-get($background, overlay-hover));
+            background-color: map-get($background, background-disabled);
         }
 
         &.mc-gutter_vertical {
@@ -14,7 +16,8 @@
         }
 
         &[disabled] {
-            background-color: mix(mc-color($background, overlay-disabled), map-get($background, overlay-hover));
+            // todo background-color: mix(mc-color($background, overlay-disabled), map-get($background, overlay-hover));
+            background-color: mc-color($background, overlay-disabled);
 
             cursor: default;
         }
