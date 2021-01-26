@@ -236,7 +236,7 @@ export class McTooltipComponent {
     }
 
     get isNonEmptyString(): boolean {
-        return typeof this.mcTitle === 'string' && this._mcTitle !== '';
+        return (typeof this.mcTitle === 'string' || typeof this.mcTitle === 'number') && this._mcTitle !== '';
     }
 }
 
