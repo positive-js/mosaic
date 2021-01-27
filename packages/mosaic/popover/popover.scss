@@ -6,8 +6,8 @@
 @import '../core/styles/common/overlay';
 
 
-$popover-distance: var(--mc-popover-size-arrow-width, $popover-size-arrow-width) * 2;
-$popover-arrow-distance: -(var(--mc-popover-size-arrow-width, $popover-size-arrow-width) + 2px);
+$popover-distance: calc(var(--mc-popover-size-arrow-width, $popover-size-arrow-width) * 2);
+$popover-arrow-distance: calc(-1 * (var(--mc-popover-size-arrow-width, $popover-size-arrow-width) + 2px));
 
 .mc-popover {
     position: relative;

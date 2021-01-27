@@ -11,7 +11,7 @@
     $color: mc-color($primary);
 
     $link: map-get(map-get($theme, components), link);
-    $color_hover: map-get(map-get($link, hover), border);
+    $color_hover: map-get($link, state-hover-text);
 
     $border-color: mc-color($second, 300);
 

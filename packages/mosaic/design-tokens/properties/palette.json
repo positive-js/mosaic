@@ -154,12 +154,10 @@
     },
 
     "color": {
-        "palette": {
-            "blue": { "value": "{palette.blue}" },
-            "green": { "value": "{palette.green}" },
-            "red": { "value": "{palette.red}" },
-            "grey": { "value": "{palette.grey}" },
-            "yellow": { "value": "{palette.yellow}" }
-        }
+        "blue": { "palette": { "value": "{palette.blue}" } },
+        "green": { "palette": { "value": "{palette.green}" } },
+        "red": { "palette": { "value": "{palette.red}" } },
+        "grey": { "palette": { "value": "{palette.grey}" } },
+        "yellow": { "palette": { "value": "{palette.yellow}" } }
     }
 }

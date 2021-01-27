@@ -27,7 +27,6 @@ $typography: mc-typography-config();
 @include mc-anchors-typography($typography);
 @include mc-navbar-typography($typography);
 @include docs-markdown-typography($typography);
-@include docs-stackblitz-typography($typography);
 @include example-viewer-typography($typography);
 
 @mixin docs-component-theme($theme) {

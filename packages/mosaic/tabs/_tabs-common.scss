@@ -2,7 +2,7 @@
 @import '../core/styles/common/layout';
 
 
-$mc-tab-border-width-focus: var(--mc-tabs-size-border-width, $tabs-size-border-width) * 2;
+$mc-tab-border-width-focus: calc(var(--mc-tabs-size-border-width, $tabs-size-border-width) * 2);
 
 %tab-pseudo {
     display: block;

@@ -9,13 +9,6 @@
 @import 'styles/typography/all-typography';
 
 
-@function getCSSVar($args...) {
-    // this function need for generate CSS variable and lets to avoid copy/paste of token
-    @each $key, $value in keywords($args) {
-        @return unquote('var(--mc-#{$key}, #{$value})');
-    }
-}
-
 // Mixin that renders all of the core styles that are not theme-dependent.
 @mixin mc-core($typography-config: null) {
     @include mosaic-typography($typography-config);

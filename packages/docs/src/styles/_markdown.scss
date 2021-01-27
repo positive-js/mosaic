@@ -125,7 +125,7 @@
     $color: mc-color($primary);
 
     $link: map-get(map-get($theme, components), link);
-    $color_hover: map-get(map-get($link, hover), border);
+    $color_hover: map-get($link, state-hover-text);
 
     $color_disabled: mc-color($foreground, text-disabled);
     $fg-default: mc-color($foreground, text);
@@ -139,7 +139,7 @@
     .docs-markdown__pre .docs-markdown__code,
     .docs-markdown-code-block {
         //colors from solarized and Darcula color schemes
-        background:  if($is-dark, #2b2b2b, #fdf6e3);
+        background: if($is-dark, #2b2b2b, #fdf6e3);
         color: if($is-dark, #bababa, #657b83);
     }
 

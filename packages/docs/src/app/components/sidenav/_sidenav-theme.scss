@@ -20,14 +20,21 @@
             }
         }
 
-        &__trigger-icon { color: $text; }
+        &__trigger-icon {
+            color: $text;
+        }
 
         &__item {
-
             & .nav__item-selected,
-            &:hover { background: $hover-color; }
+            &:hover {
+                background: $hover-color;
+            }
 
-            &:active, &:focus, & .nav__item-link:focus { background: $hover-color; }
+            &:active,
+            &:focus,
+            & .nav__item-link:focus {
+                background: $hover-color;
+            }
 
         }
     }

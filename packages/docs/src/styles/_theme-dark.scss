@@ -1,23 +1,26 @@
 @import "../../../mosaic/design-tokens/palette";
+@import "../../../mosaic/design-tokens/variables";
 
 
 // -----------------------------------------------------------------------------------------------------
 // @ Define a dark theme
 // -----------------------------------------------------------------------------------------------------
-$dark-primary: mc-palette($color-palette-blue, 300, 400, 500);
-$dark-primary-red: mc-palette($color-palette-red, 400, 500, 600);
-$dark-primary-green: mc-palette($color-palette-green, 400, 500, 600);
-$dark-primary-yellow: mc-palette($color-palette-yellow, 400, 500, 600);
+$dark-primary: mc-palette($color-blue-palette, $palette-blue-400);
+$dark-primary-red: mc-palette($color-red-palette, $palette-red-500);
+$dark-primary-green: mc-palette($color-green-palette, $palette-green-500);
+$dark-primary-yellow: mc-palette($color-yellow-palette, $palette-yellow-500);
 
-$dark-second: mc-palette($color-palette-grey, 200, 400, 700);
-$dark-error: mc-palette($color-palette-red, 200, 400, 700);
+$dark-second: mc-palette($color-grey-palette, $palette-grey-400);
+$dark-error: mc-palette($color-red-palette, $palette-red-400);
 
-$dark-info: mc-palette($color-palette-blue, 200, 400, 700);
-$dark-success: mc-palette($color-palette-green, 200, 400, 700);
-$dark-warning: mc-palette($color-palette-yellow, 200, 400, 700);
+$dark-info: mc-palette($color-blue-palette, $palette-blue-400);
+$dark-success: mc-palette($color-green-palette, $palette-green-400);
+$dark-warning: mc-palette($color-yellow-palette, $palette-yellow-400);
 
 $dark-theme: mc-dark-theme($dark-primary, $dark-second, $dark-error, $dark-info, $dark-success, $dark-warning);
+
 $dark-theme-red: mc-dark-theme($dark-primary-red, $dark-second, $dark-error, $dark-info, $dark-success, $dark-warning);
+
 $dark-theme-green: mc-dark-theme(
     $dark-primary-green,
     $dark-second,

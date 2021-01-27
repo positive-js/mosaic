@@ -2,318 +2,241 @@
 
 
 @function mc-light-theme-components($theme) {
-
     $alert: (
         error: (
-            background: getCSSVar($alert-light-color-error-background: $alert-light-color-error-background),
-            border: getCSSVar($alert-light-color-error-border: $alert-light-color-error-border),
-            icon: getCSSVar($alert-light-color-error-icon: $alert-light-color-error-icon)
+            background: $alert-light-color-error-background,
+            border: $alert-light-color-error-border,
+            icon: $alert-light-color-error-icon
         ),
         warning: (
-            background: getCSSVar($alert-light-color-warning-background: $alert-light-color-warning-background),
-            border: getCSSVar($alert-light-color-warning-border: $alert-light-color-warning-border),
-            icon: getCSSVar($alert-light-color-warning-icon: $alert-light-color-warning-icon)
+            background: $alert-light-color-warning-background,
+            border: $alert-light-color-warning-border,
+            icon: $alert-light-color-warning-icon
         ),
         success: (
-            background: getCSSVar($alert-light-color-success-background: $alert-light-color-success-background),
-            border: getCSSVar($alert-light-color-success-border: $alert-light-color-success-border),
-            icon: getCSSVar($alert-light-color-success-icon: $alert-light-color-success-icon)
+            background: $alert-light-color-success-background,
+            border: $alert-light-color-success-border,
+            icon: $alert-light-color-success-icon
         ),
         info: (
-            background: getCSSVar($alert-light-color-info-background: $alert-light-color-info-background),
-            border: getCSSVar($alert-light-color-info-border: $alert-light-color-info-border),
-            icon: getCSSVar($alert-light-color-info-icon: $alert-light-color-info-icon)
+            background: $alert-light-color-info-background,
+            border: $alert-light-color-info-border,
+            icon: $alert-light-color-info-icon
         ),
         default: (
-            background: getCSSVar($alert-light-color-default-background: $alert-light-color-default-background),
-            border: getCSSVar($alert-light-color-default-border: $alert-light-color-default-border),
-            icon: getCSSVar($alert-light-color-default-icon: $alert-light-color-default-icon)
+            background: $alert-light-color-default-background,
+            border: $alert-light-color-default-border,
+            icon: $alert-light-color-default-icon
         ),
     );
 
     $popup: (
-        shadow: getCSSVar($popup-light-color-shadow: $popup-light-color-shadow),
-        border: getCSSVar($popup-light-color-border: $popup-light-color-border),
-        divider: getCSSVar($popup-light-color-divider: $popup-light-color-divider),
+        shadow: $popup-light-color-shadow,
+        border: $popup-light-color-border,
+        divider: $popup-light-color-divider,
 
-        background: getCSSVar($popup-light-color-background: $popup-light-color-background),
-        footer-background: getCSSVar($popup-light-color-footer-background: $popup-light-color-footer-background)
+        background: $popup-light-color-background,
+        footer-background: $popup-light-color-footer-background
     );
 
     $button: (
-        state-active_shadow: getCSSVar($button-light-color-active-shadow: $button-light-color-active-shadow),
+        state-active_shadow: $button-light-color-active-shadow,
 
         primary: (
-            color: getCSSVar($button-light-color-primary-color: $button-light-color-primary-color),
-            border: getCSSVar($button-light-color-primary-border: $button-light-color-primary-border),
-            background: getCSSVar($button-light-color-primary-background: $button-light-color-primary-background),
-            icon: getCSSVar($button-light-color-primary-icon: $button-light-color-primary-icon),
+            color: $button-light-color-primary-color,
+            border: $button-light-color-primary-border,
+            background: $button-light-color-primary-background,
+            icon: $button-light-color-primary-icon,
 
-            active_border: getCSSVar(
-                $button-light-color-primary-states-active-border: $button-light-color-primary-states-active-border
-            ),
-            active_background: getCSSVar(
-                $button-light-color-primary-states-active-background:
-                $button-light-color-primary-states-active-background
-            )
+            active_border: $button-light-color-primary-states-active-border,
+            active_background: $button-light-color-primary-states-active-background
         ),
 
         second: (
-            color: getCSSVar($button-light-color-second-color: $button-light-color-second-color),
-            border: getCSSVar($button-light-color-second-border: $button-light-color-second-border),
-            background: getCSSVar($button-light-color-second-background: $button-light-color-second-background),
-            icon: getCSSVar($button-light-color-second-icon: $button-light-color-second-icon),
+            color: $button-light-color-second-color,
+            border: $button-light-color-second-border,
+            background: $button-light-color-second-background,
+            icon: $button-light-color-second-icon,
 
-            active_border: getCSSVar(
-                $button-light-color-second-states-active-border: $button-light-color-second-states-active-border
-            ),
-            active_background: getCSSVar(
-                $button-light-color-second-states-active-background: $button-light-color-second-states-active-background
-            )
+            active_border: $button-light-color-second-states-active-border,
+            active_background: $button-light-color-second-states-active-background
         ),
 
         error: (
-            color: getCSSVar($button-light-color-error-color: $button-light-color-error-color),
-            border: getCSSVar($button-light-color-error-border: $button-light-color-error-border),
-            background: getCSSVar($button-light-color-error-background: $button-light-color-error-background),
-            icon: getCSSVar($button-light-color-error-icon: $button-light-color-error-icon),
+            color: $button-light-color-error-color,
+            border: $button-light-color-error-border,
+            background: $button-light-color-error-background,
+            icon: $button-light-color-error-icon,
 
-            active_border: getCSSVar(
-                $button-light-color-error-states-active-border: $button-light-color-error-states-active-border
-            ),
-            active_background: getCSSVar(
-                $button-light-color-error-states-active-background: $button-light-color-error-states-active-background
-            )
+            active_border: $button-light-color-error-states-active-border,
+            active_background: $button-light-color-error-states-active-background
         )
     );
 
     $card: (
         error: (
-            vertical-line: getCSSVar($card-light-color-error-vertical-line: $card-light-color-error-vertical-line),
-            background: getCSSVar($card-light-color-error-background: $card-light-color-error-background),
-            shadow: getCSSVar($card-light-color-error-shadow: $card-light-color-error-shadow)
+            vertical-line: $card-light-color-error-vertical-line,
+            background: $card-light-color-error-background,
+            shadow: $card-light-color-error-shadow
         ),
         warning: (
-            vertical-line: getCSSVar($card-light-color-warning-vertical-line: $card-light-color-warning-vertical-line),
-            background: getCSSVar($card-light-color-warning-background: $card-light-color-warning-background),
-            shadow: getCSSVar($card-light-color-warning-shadow: $card-light-color-warning-shadow)
+            vertical-line: $card-light-color-warning-vertical-line,
+            background: $card-light-color-warning-background,
+            shadow: $card-light-color-warning-shadow
         ),
         success: (
-            vertical-line: getCSSVar($card-light-color-success-vertical-line: $card-light-color-success-vertical-line),
-            background: getCSSVar($card-light-color-success-background: $card-light-color-success-background),
-            shadow: getCSSVar($card-light-color-success-shadow: $card-light-color-success-shadow)
+            vertical-line: $card-light-color-success-vertical-line,
+            background: $card-light-color-success-background,
+            shadow: $card-light-color-success-shadow
         ),
         info: (
-            vertical-line: getCSSVar($card-light-color-info-vertical-line: $card-light-color-info-vertical-line),
-            background: getCSSVar($card-light-color-info-background: $card-light-color-info-background),
-            shadow: getCSSVar($card-light-color-info-shadow: $card-light-color-info-shadow)
+            vertical-line: $card-light-color-info-vertical-line,
+            background: $card-light-color-info-background,
+            shadow: $card-light-color-info-shadow
         )
     );
 
     $checkbox: (
-        border: getCSSVar($checkbox-light-color-border: $checkbox-light-color-border),
+        border: $checkbox-light-color-border,
 
-        state-checked-border: getCSSVar(
-            $checkbox-light-color-states-checked-border: $checkbox-light-color-states-checked-border
-        ),
-        state-checked-background: getCSSVar(
-            $checkbox-light-color-states-checked-background: $checkbox-light-color-states-checked-background
-        ),
+        state-checked-border: $checkbox-light-color-states-checked-border,
+        state-checked-background: $checkbox-light-color-states-checked-background,
 
-        state-focused-border: getCSSVar(
-            $checkbox-light-color-states-focused-border: $checkbox-light-color-states-focused-border
-        ),
-        state-focused-shadow: getCSSVar(
-            $checkbox-light-color-states-focused-shadow: $checkbox-light-color-states-focused-shadow
-        )
+        state-focused-border: $checkbox-light-color-states-focused-border,
+        state-focused-shadow: $checkbox-light-color-states-focused-shadow
     );
 
 
     $form-field: (
-        border: getCSSVar($form-field-light-color-border: $form-field-light-color-border),
-        background: getCSSVar($form-field-light-color-background: $form-field-light-color-background),
+        border: $form-field-light-color-border,
+        background: $form-field-light-color-background,
 
-        state-hover-border: getCSSVar(
-            $form-field-light-color-states-hover-border: $form-field-light-color-states-hover-border
-        ),
-        state-invalid-border: getCSSVar(
-            $form-field-light-color-states-invalid-border: $form-field-light-color-states-invalid-border
-        ),
-        state-invalid-background: getCSSVar(
-            $form-field-light-color-states-invalid-background: $form-field-light-color-states-invalid-background
-        )
+        state-hover-border: $form-field-light-color-states-hover-border,
+        state-invalid-border: $form-field-light-color-states-invalid-border,
+        state-invalid-background: $form-field-light-color-states-invalid-background
     );
 
     $link: (
-        text: getCSSVar($link-light-color-text: $link-light-color-text),
+        text: $link-light-color-text,
 
-        state-hover-border: getCSSVar($link-light-color-state-hover-text: $link-light-color-state-hover-text),
-        state-focused-outline: getCSSVar(
-            $link-light-color-state-focused-outline: $link-light-color-state-focused-outline
-        ),
+        state-hover-text: $link-light-color-state-hover-text,
+        state-focused-outline: $link-light-color-state-focused-outline,
 
         dashed: (
-            border-bottom: getCSSVar($link-light-color-dashed-border-bottom: $link-light-color-dashed-border-bottom),
-            state-hover-border-bottom: getCSSVar(
-                $link-light-color-dashed-state-hover-border-bottom: $link-light-color-dashed-state-hover-border-bottom
-            )
+            border-bottom: $link-light-color-dashed-border-bottom,
+            state-hover-border-bottom: $link-light-color-dashed-state-hover-border-bottom
         ),
 
         underlined: (
-            border-bottom: getCSSVar(
-                $link-light-color-underlined-border-bottom: $link-light-color-underlined-border-bottom
-            ),
-            state-hover-border-bottom: getCSSVar(
-                $link-light-color-underlined-state-hover-border-bottom:
-                $link-light-color-underlined-state-hover-border-bottom
-            )
+            border-bottom: $link-light-color-underlined-border-bottom,
+            state-hover-border-bottom: $link-light-color-underlined-state-hover-border-bottom
         )
     );
 
     $modal: (
-        background-mask: getCSSVar($modal-light-color-background-mask: $modal-light-color-background-mask),
-        shadow: getCSSVar($modal-light-color-shadow: $modal-light-color-shadow)
+        background-mask: $modal-light-color-background-mask,
+        shadow: $modal-light-color-shadow
     );
 
     $navbar: (
-        background: getCSSVar($navbar-light-color-background: $navbar-light-color-background),
-        color: getCSSVar($navbar-light-color-text: $navbar-light-color-text),
-        opacity: getCSSVar($navbar-light-color-opacity: $navbar-light-color-opacity),
+        background: $navbar-light-color-background,
+        color: $navbar-light-color-text,
+        opacity: $navbar-light-color-opacity,
     );
 
     $navbar-item: (
-        color: getCSSVar($navbar-item-light-color-text: $navbar-item-light-color-text),
+        color: $navbar-item-light-color-text,
 
-        state-active: getCSSVar($navbar-item-light-color-states-active: $navbar-item-light-color-states-active),
-        state-hover: getCSSVar($navbar-item-light-color-states-hover: $navbar-item-light-color-states-hover),
-        state-progress: getCSSVar(
-            $navbar-item-light-color-states-progress: $navbar-item-light-color-states-progress
-        ),
-        state-disabled-opacity: getCSSVar(
-            $navbar-item-light-color-states-disabled-opacity: $navbar-item-light-color-states-disabled-opacity
-        ),
+        state-active: $navbar-item-light-color-states-active,
+        state-hover: $navbar-item-light-color-states-hover,
+        state-progress: $navbar-item-light-color-states-progress,
+        state-disabled-opacity: $navbar-item-light-color-states-disabled-opacity,
     );
 
     $popover: (
-        border: getCSSVar($popover-light-color-border: $popover-light-color-border)
+        border: $popover-light-color-border
     );
 
     $progress-bar: (
-        background: getCSSVar($progress-bar-light-color-background: $progress-bar-light-color-background)
+        background: $progress-bar-light-color-background
     );
 
     $radio: (
-        outer-circle_border: getCSSVar($radio-light-color-outer-circle-border: $radio-light-color-outer-circle-border),
-        inner-circle_border: getCSSVar($radio-light-color-inner-circle-border: $radio-light-color-inner-circle-border),
+        outer-circle_border: $radio-light-color-outer-circle-border,
+        inner-circle_border: $radio-light-color-inner-circle-border,
 
-        outer-circle_checked-state_border: getCSSVar(
-            $radio-light-color-states-checked-outer-circle-border: $radio-light-color-states-checked-outer-circle-border
-        ),
-        outer-circle_focused-state_border: getCSSVar(
-            $radio-light-color-states-focused-outer-circle-border: $radio-light-color-states-focused-outer-circle-border
-        ),
-        outer-circle_focused-state_shadow: getCSSVar(
-            $radio-light-color-states-focused-outer-circle-shadow: $radio-light-color-states-focused-outer-circle-shadow
-        ),
+        outer-circle_checked-state_border: $radio-light-color-states-checked-outer-circle-border,
+        outer-circle_focused-state_border: $radio-light-color-states-focused-outer-circle-border,
+        outer-circle_focused-state_shadow: $radio-light-color-states-focused-outer-circle-shadow,
 
-        inner-circle_checked-state_border: getCSSVar(
-            $radio-light-color-states-checked-inner-circle-border: $radio-light-color-states-checked-inner-circle-border
-        ),
-        inner-circle_focused-state_shadow: getCSSVar(
-            $radio-light-color-states-focused-inner-circle-shadow: $radio-light-color-states-focused-inner-circle-shadow
-        )
+        inner-circle_checked-state_border: $radio-light-color-states-checked-inner-circle-border,
+        inner-circle_focused-state_shadow: $radio-light-color-states-focused-inner-circle-shadow
     );
 
     $sidepanel: (
-        border: getCSSVar($sidepanel-light-color-border: $sidepanel-light-color-border)
+        border: $sidepanel-light-color-border
     );
 
     $tabs: (
-        border: getCSSVar($tabs-light-color-border: $tabs-light-color-border),
-        state-active: getCSSVar($tabs-light-color-state-active: $tabs-light-color-state-active)
+        border: $tabs-light-color-border,
+        state-active: $tabs-light-color-state-active
     );
 
     $tags: (
         primary: (
-            border: getCSSVar($tags-light-color-primary-border: $tags-light-color-primary-border),
-            background: getCSSVar($tags-light-color-primary-background: $tags-light-color-primary-background),
-            background_disabled: getCSSVar(
-                $tags-light-color-primary-states-disabled-background:
-                $tags-light-color-primary-states-disabled-background
-            ),
-            icon: getCSSVar($tags-light-color-primary-icon: $tags-light-color-primary-icon),
-            icon_hover: getCSSVar(
-                $tags-light-color-primary-states-hover-icon: $tags-light-color-primary-states-hover-icon
-            ),
-            focused: getCSSVar($tags-light-color-primary-states-focused: $tags-light-color-primary-states-focused),
-            disabled: getCSSVar(
-                $tags-light-color-primary-states-disabled-text: $tags-light-color-primary-states-disabled-text
-            )
+            border: $tags-light-color-primary-border,
+            background: $tags-light-color-primary-background,
+            background_disabled: $tags-light-color-primary-states-disabled-background,
+            icon: $tags-light-color-primary-icon,
+            icon_hover: $tags-light-color-primary-states-hover-icon,
+            focused: $tags-light-color-primary-states-focused,
+            disabled: $tags-light-color-primary-states-disabled-text
         ),
         second: (
-            border: getCSSVar($tags-light-color-second-border: $tags-light-color-second-border),
-            background: getCSSVar($tags-light-color-second-background: $tags-light-color-second-background),
-            background_disabled: getCSSVar(
-                $tags-light-color-second-states-disabled-background: $tags-light-color-second-states-disabled-background
-            ),
-            icon: getCSSVar($tags-light-color-second-icon: $tags-light-color-second-icon),
-            icon_hover: getCSSVar(
-                $tags-light-color-second-states-hover-icon: $tags-light-color-second-states-hover-icon
-            ),
-            focused: getCSSVar($tags-light-color-second-states-focused: $tags-light-color-second-states-focused),
-            disabled: getCSSVar(
-                $tags-light-color-second-states-disabled-text: $tags-light-color-second-states-disabled-text
-            )
+            border: $tags-light-color-second-border,
+            background: $tags-light-color-second-background,
+            background_disabled: $tags-light-color-second-states-disabled-background,
+            icon: $tags-light-color-second-icon,
+            icon_hover: $tags-light-color-second-states-hover-icon,
+            focused: $tags-light-color-second-states-focused,
+            disabled: $tags-light-color-second-states-disabled-text
         ),
         error: (
-            border: getCSSVar($tags-light-color-error-border: $tags-light-color-error-border),
-            background: getCSSVar($tags-light-color-error-background: $tags-light-color-error-background),
-            background_disabled: getCSSVar(
-                $tags-light-color-error-states-disabled-background: $tags-light-color-error-states-disabled-background
-            ),
-            icon: getCSSVar($tags-light-color-error-icon: $tags-light-color-error-icon),
-            icon_hover: getCSSVar($tags-light-color-error-states-hover-icon: $tags-light-color-error-states-hover-icon),
-            focused: getCSSVar($tags-light-color-error-states-focused: $tags-light-color-error-states-focused),
-            disabled: getCSSVar(
-                $tags-light-color-error-states-disabled-text: $tags-light-color-error-states-disabled-text
-            )
+            border: $tags-light-color-error-border,
+            background: $tags-light-color-error-background,
+            background_disabled: $tags-light-color-error-states-disabled-background,
+            icon: $tags-light-color-error-icon,
+            icon_hover: $tags-light-color-error-states-hover-icon,
+            focused: $tags-light-color-error-states-focused,
+            disabled: $tags-light-color-error-states-disabled-text
         )
     );
 
     $toggle: (
-        border: getCSSVar($toggle-light-color-border: $toggle-light-color-border),
-        background: getCSSVar($toggle-light-color-background: $toggle-light-color-background),
+        border: $toggle-light-color-border,
+        background: $toggle-light-color-background,
 
-        circle_border: getCSSVar($toggle-light-color-circle-border: $toggle-light-color-circle-border),
-        circle_background: getCSSVar($toggle-light-color-circle-background: $toggle-light-color-circle-background),
+        circle_border: $toggle-light-color-circle-border,
+        circle_background: $toggle-light-color-circle-background,
 
-        focused: getCSSVar($toggle-light-color-states-focused-shadow: $toggle-light-color-states-focused-shadow)
+        focused: $toggle-light-color-states-focused-shadow
     );
 
     $tooltip: (
-        background: getCSSVar($tooltip-light-color-background: $tooltip-light-color-background),
-        color: getCSSVar($tooltip-light-color-text: $tooltip-light-color-text),
-        shadow: getCSSVar($tooltip-light-color-shadow: $tooltip-light-color-shadow)
+        background: $tooltip-light-color-background,
+        color: $tooltip-light-color-text,
+        shadow: $tooltip-light-color-shadow
     );
 
     $vertical-navbar: (
-        background: getCSSVar($vertical-navbar-light-color-background: $vertical-navbar-light-color-background),
-        color: getCSSVar($vertical-navbar-light-color-text: $vertical-navbar-light-color-text),
+        background: $vertical-navbar-light-color-background,
+        color: $vertical-navbar-light-color-text,
 
-        toggle-button: getCSSVar(
-            $vertical-navbar-light-color-toggle-button: $vertical-navbar-light-color-toggle-button
-        ),
+        toggle-button: $vertical-navbar-light-color-toggle-button,
 
-        background_hover: getCSSVar(
-            $vertical-navbar-light-color-states-hover-background: $vertical-navbar-light-color-states-hover-background
-        ),
-        background_active: getCSSVar(
-            $vertical-navbar-light-color-states-active-background: $vertical-navbar-light-color-states-active-background
-        ),
-        background_progress: getCSSVar(
-            $vertical-navbar-light-color-states-progress-background:
-            $vertical-navbar-light-color-states-progress-background
-        )
+        background_hover: $vertical-navbar-light-color-states-hover-background,
+        background_active: $vertical-navbar-light-color-states-active-background,
+        background_progress: $vertical-navbar-light-color-states-progress-background
     );
 
     @return (
@@ -342,320 +265,238 @@
 @function mc-dark-theme-components($theme) {
     $alert: (
         error: (
-            background: getCSSVar($alert-dark-color-error-background: $alert-dark-color-error-background),
-            border: getCSSVar($alert-dark-color-error-border: $alert-dark-color-error-border),
-            icon: getCSSVar($alert-dark-color-error-icon: $alert-dark-color-error-icon)
+            background: $alert-dark-color-error-background,
+            border: $alert-dark-color-error-border,
+            icon: $alert-dark-color-error-icon
         ),
         warning: (
-            background: getCSSVar($alert-dark-color-warning-background: $alert-dark-color-warning-background),
-            border: getCSSVar($alert-dark-color-warning-border: $alert-dark-color-warning-border),
-            icon: getCSSVar($alert-dark-color-warning-icon: $alert-dark-color-warning-icon)
+            background: $alert-dark-color-warning-background,
+            border: $alert-dark-color-warning-border,
+            icon: $alert-dark-color-warning-icon
         ),
         success: (
-            background: getCSSVar($alert-dark-color-success-background: $alert-dark-color-success-background),
-            border: getCSSVar($alert-dark-color-success-border: $alert-dark-color-success-border),
-            icon: getCSSVar($alert-dark-color-success-icon: $alert-dark-color-success-icon)
+            background: $alert-dark-color-success-background,
+            border: $alert-dark-color-success-border,
+            icon: $alert-dark-color-success-icon
         ),
         info: (
-            background: getCSSVar($alert-dark-color-info-background: $alert-dark-color-info-background),
-            border: getCSSVar($alert-dark-color-info-border: $alert-dark-color-info-border),
-            icon: getCSSVar($alert-dark-color-info-icon: $alert-dark-color-info-icon)
+            background: $alert-dark-color-info-background,
+            border: $alert-dark-color-info-border,
+            icon: $alert-dark-color-info-icon
         ),
         default: (
-            background: getCSSVar($alert-dark-color-default-background: $alert-dark-color-default-background),
-            border: getCSSVar($alert-dark-color-default-border: $alert-dark-color-default-border),
-            icon: getCSSVar($alert-dark-color-default-icon: $alert-dark-color-default-icon)
+            background: $alert-dark-color-default-background,
+            border: $alert-dark-color-default-border,
+            icon: $alert-dark-color-default-icon
         ),
     );
 
     $popup: (
-        shadow: getCSSVar($popup-dark-color-shadow: $popup-dark-color-shadow),
-        border: getCSSVar($popup-dark-color-border: $popup-dark-color-border),
-        divider: getCSSVar($popup-dark-color-divider: $popup-dark-color-divider),
+        shadow: $popup-dark-color-shadow,
+        border: $popup-dark-color-border,
+        divider: $popup-dark-color-divider,
 
-        background: getCSSVar($popup-dark-color-background: $popup-dark-color-background),
-        footer-background: getCSSVar($popup-dark-color-footer-background: $popup-dark-color-footer-background)
+        background: $popup-dark-color-background,
+        footer-background: $popup-dark-color-footer-background
     );
 
     $button: (
-        state-active_shadow: getCSSVar($button-dark-color-active-shadow: $button-dark-color-active-shadow),
+        state-active_shadow: $button-dark-color-active-shadow,
 
         primary: (
-            color: getCSSVar($button-dark-color-primary-color: $button-dark-color-primary-color),
-            border: getCSSVar($button-dark-color-primary-border: $button-dark-color-primary-border),
-            background: getCSSVar($button-dark-color-primary-background: $button-dark-color-primary-background),
-            icon: getCSSVar($button-dark-color-primary-icon: $button-dark-color-primary-icon),
+            color: $button-dark-color-primary-color,
+            border: $button-dark-color-primary-border,
+            background: $button-dark-color-primary-background,
+            icon: $button-dark-color-primary-icon,
 
-            active_border: getCSSVar(
-                $button-dark-color-primary-states-active-border: $button-dark-color-primary-states-active-border
-            ),
-            active_background: getCSSVar(
-                $button-dark-color-primary-states-active-background: $button-dark-color-primary-states-active-background
-            )
+            active_border: $button-dark-color-primary-states-active-border,
+            active_background: $button-dark-color-primary-states-active-background
         ),
 
         second: (
-            color: getCSSVar($button-dark-color-second-color: $button-dark-color-second-color),
-            border: getCSSVar($button-dark-color-second-border: $button-dark-color-second-border),
-            background: getCSSVar($button-dark-color-second-background: $button-dark-color-second-background),
-            icon: getCSSVar($button-dark-color-second-icon: $button-dark-color-second-icon),
+            color: $button-dark-color-second-color,
+            border: $button-dark-color-second-border,
+            background: $button-dark-color-second-background,
+            icon: $button-dark-color-second-icon,
 
-            active_border: getCSSVar(
-                $button-dark-color-second-states-active-border: $button-dark-color-second-states-active-border
-            ),
-            active_background: getCSSVar(
-                $button-dark-color-second-states-active-background: $button-dark-color-second-states-active-background
-            )
+            active_border: $button-dark-color-second-states-active-border,
+            active_background: $button-dark-color-second-states-active-background
         ),
 
         error: (
-            color: getCSSVar($button-dark-color-error-color: $button-dark-color-error-color),
-            border: getCSSVar($button-dark-color-error-border: $button-dark-color-error-border),
-            background: getCSSVar($button-dark-color-error-background: $button-dark-color-error-background),
-            icon: getCSSVar($button-dark-color-error-icon: $button-dark-color-error-icon),
+            color: $button-dark-color-error-color,
+            border: $button-dark-color-error-border,
+            background: $button-dark-color-error-background,
+            icon: $button-dark-color-error-icon,
 
-            active_border: getCSSVar(
-                $button-dark-color-error-states-active-border: $button-dark-color-error-states-active-border
-            ),
-            active_background: getCSSVar(
-                $button-dark-color-error-states-active-background: $button-dark-color-error-states-active-background
-            )
+            active_border: $button-dark-color-error-states-active-border,
+            active_background: $button-dark-color-error-states-active-background
         )
     );
 
     $card: (
         error: (
-            vertical-line: getCSSVar($card-dark-color-error-vertical-line: $card-dark-color-error-vertical-line),
-            background: getCSSVar($card-dark-color-error-background: $card-dark-color-error-background),
-            shadow: getCSSVar($card-dark-color-error-shadow: $card-dark-color-error-shadow)
+            vertical-line: $card-dark-color-error-vertical-line,
+            background: $card-dark-color-error-background,
+            shadow: $card-dark-color-error-shadow
         ),
         warning: (
-            vertical-line: getCSSVar($card-dark-color-warning-vertical-line: $card-dark-color-warning-vertical-line),
-            background: getCSSVar($card-dark-color-warning-background: $card-dark-color-warning-background),
-            shadow: getCSSVar($card-dark-color-warning-shadow: $card-dark-color-warning-shadow)
+            vertical-line: $card-dark-color-warning-vertical-line,
+            background: $card-dark-color-warning-background,
+            shadow: $card-dark-color-warning-shadow
         ),
         success: (
-            vertical-line: getCSSVar($card-dark-color-success-vertical-line: $card-dark-color-success-vertical-line),
-            background: getCSSVar($card-dark-color-success-background: $card-dark-color-success-background),
-            shadow: getCSSVar($card-dark-color-success-shadow: $card-dark-color-success-shadow)
+            vertical-line: $card-dark-color-success-vertical-line,
+            background: $card-dark-color-success-background,
+            shadow: $card-dark-color-success-shadow
         ),
         info: (
-            vertical-line: getCSSVar($card-dark-color-info-vertical-line: $card-dark-color-info-vertical-line),
-            background: getCSSVar($card-dark-color-info-background: $card-dark-color-info-background),
-            shadow: getCSSVar($card-dark-color-info-shadow: $card-dark-color-info-shadow)
+            vertical-line: $card-dark-color-info-vertical-line,
+            background: $card-dark-color-info-background,
+            shadow: $card-dark-color-info-shadow
         )
     );
 
     $checkbox: (
-        border: getCSSVar($checkbox-dark-color-border: $checkbox-dark-color-border),
+        border: $checkbox-dark-color-border,
 
-        state-checked-border: getCSSVar(
-            $checkbox-dark-color-states-checked-border: $checkbox-dark-color-states-checked-border
-        ),
-        state-checked-background: getCSSVar(
-            $checkbox-dark-color-states-checked-background: $checkbox-dark-color-states-checked-background
-        ),
+        state-checked-border: $checkbox-dark-color-states-checked-border,
+        state-checked-background: $checkbox-dark-color-states-checked-background,
 
-        state-focused-border: getCSSVar(
-            $checkbox-dark-color-states-focused-border: $checkbox-dark-color-states-focused-border
-        ),
-        state-focused-shadow: getCSSVar(
-            $checkbox-dark-color-states-focused-shadow: $checkbox-dark-color-states-focused-shadow
-        )
+        state-focused-border: $checkbox-dark-color-states-focused-border,
+        state-focused-shadow: $checkbox-dark-color-states-focused-shadow
     );
 
     $form-field: (
-        border: getCSSVar($form-field-dark-color-border: $form-field-dark-color-border),
-        background: getCSSVar($form-field-dark-color-background: $form-field-dark-color-background),
+        border: $form-field-dark-color-border,
+        background: $form-field-dark-color-background,
 
-        state-hover-border: getCSSVar(
-            $form-field-dark-color-states-hover-border,$form-field-dark-color-states-hover-border
-        ),
-        state-invalid-border: getCSSVar(
-            $form-field-dark-color-states-invalid-border: $form-field-dark-color-states-invalid-border
-        ),
-        state-invalid-background: getCSSVar(
-            $form-field-dark-color-states-invalid-background: $form-field-dark-color-states-invalid-background
-        )
+        state-hover-border: $form-field-dark-color-states-hover-border,
+        state-invalid-border: $form-field-dark-color-states-invalid-border,
+        state-invalid-background: $form-field-dark-color-states-invalid-background
     );
 
     $link: (
-        text: getCSSVar($link-dark-color-text: $link-dark-color-text),
+        text: $link-dark-color-text,
 
-        state-hover-text: getCSSVar($link-dark-color-state-hover-text: $link-dark-color-state-hover-text),
-        state-focused-outline: getCSSVar(
-            $link-dark-color-state-focused-outline: $link-dark-color-state-focused-outline
-        ),
+        state-hover-text: $link-dark-color-state-hover-text,
+        state-focused-outline: $link-dark-color-state-focused-outline,
 
         dashed: (
-            border-bottom: getCSSVar(
-                $link-dark-color-dashed-border-bottom: $link-dark-color-dashed-border-bottom
-            ),
-            state-hover-border-bottom: getCSSVar(
-                $link-dark-color-dashed-state-hover-border-bottom: $link-dark-color-dashed-state-hover-border-bottom
-            )
+            border-bottom: $link-dark-color-dashed-border-bottom,
+            state-hover-border-bottom: $link-dark-color-dashed-state-hover-border-bottom
         ),
 
         underlined: (
-            border-bottom: getCSSVar(
-                $link-dark-color-underlined-border-bottom: $link-dark-color-underlined-border-bottom
-            ),
-            state-hover-border-bottom: getCSSVar(
-                $link-dark-color-underlined-state-hover-border-bottom:
-                $link-dark-color-underlined-state-hover-border-bottom
-            )
+            border-bottom: $link-dark-color-underlined-border-bottom,
+            state-hover-border-bottom: $link-dark-color-underlined-state-hover-border-bottom
         )
     );
 
     $modal: (
-        background-mask: getCSSVar($modal-dark-color-background-mask: $modal-dark-color-background-mask),
-        shadow: getCSSVar($modal-dark-color-shadow: $modal-dark-color-shadow)
+        background-mask: $modal-dark-color-background-mask,
+        shadow: $modal-dark-color-shadow
     );
 
     $navbar: (
-        background: getCSSVar($navbar-dark-color-background: $navbar-dark-color-background),
-        color: getCSSVar($navbar-dark-color-text: $navbar-dark-color-text),
-        opacity: getCSSVar($navbar-dark-color-opacity: $navbar-dark-color-opacity),
+        background: $navbar-dark-color-background,
+        color: $navbar-dark-color-text,
+        opacity: $navbar-dark-color-opacity,
     );
 
     $navbar-item: (
-        color: getCSSVar($navbar-item-dark-color-text: $navbar-item-dark-color-text),
+        color: $navbar-item-dark-color-text,
 
-        state-active: getCSSVar($navbar-item-dark-color-states-active: $navbar-item-dark-color-states-active),
-        state-hover: getCSSVar($navbar-item-dark-color-states-hover: $navbar-item-dark-color-states-hover),
-        state-progress: getCSSVar(
-            $navbar-item-dark-color-states-progress: $navbar-item-dark-color-states-progress
-        ),
-        state-disabled-opacity: getCSSVar(
-            $navbar-item-dark-color-states-disabled-opacity: $navbar-item-dark-color-states-disabled-opacity
-        ),
+        state-active: $navbar-item-dark-color-states-active,
+        state-hover: $navbar-item-dark-color-states-hover,
+        state-progress: $navbar-item-dark-color-states-progress,
+        state-disabled-opacity: $navbar-item-dark-color-states-disabled-opacity,
     );
 
     $popover: (
-        border: getCSSVar($popover-dark-color-border: $popover-dark-color-border)
+        border: $popover-dark-color-border
     );
 
     $progress-bar: (
-        background: getCSSVar($progress-bar-dark-color-background: $progress-bar-dark-color-background)
+        background: $progress-bar-dark-color-background
     );
 
     $radio: (
-        outer-circle_border: getCSSVar(
-            $radio-dark-color-outer-circle-border: $radio-dark-color-outer-circle-border
-        ),
-        inner-circle_border: getCSSVar(
-            $radio-dark-color-inner-circle-border: $radio-dark-color-inner-circle-border
-        ),
+        outer-circle_border: $radio-dark-color-outer-circle-border,
+        inner-circle_border: $radio-dark-color-inner-circle-border,
 
-        outer-circle_checked-state_border: getCSSVar(
-            $radio-dark-color-states-checked-outer-circle-border: $radio-dark-color-states-checked-outer-circle-border
-        ),
-        outer-circle_focused-state_border: getCSSVar(
-            $radio-dark-color-states-focused-outer-circle-border: $radio-dark-color-states-focused-outer-circle-border
-        ),
-        outer-circle_focused-state_shadow: getCSSVar(
-            $radio-dark-color-states-focused-outer-circle-shadow: $radio-dark-color-states-focused-outer-circle-shadow
-        ),
+        outer-circle_checked-state_border: $radio-dark-color-states-checked-outer-circle-border,
+        outer-circle_focused-state_border: $radio-dark-color-states-focused-outer-circle-border,
+        outer-circle_focused-state_shadow: $radio-dark-color-states-focused-outer-circle-shadow,
 
-        inner-circle_checked-state_border: getCSSVar(
-            $radio-dark-color-states-checked-inner-circle-border: $radio-dark-color-states-checked-inner-circle-border
-        ),
-        inner-circle_focused-state_shadow: getCSSVar(
-            $radio-dark-color-states-focused-inner-circle-shadow: $radio-dark-color-states-focused-inner-circle-shadow
-        )
+        inner-circle_checked-state_border: $radio-dark-color-states-checked-inner-circle-border,
+        inner-circle_focused-state_shadow: $radio-dark-color-states-focused-inner-circle-shadow
     );
 
     $sidepanel: (
-        border: getCSSVar($sidepanel-dark-color-border: $sidepanel-dark-color-border)
+        border: $sidepanel-dark-color-border
     );
 
     $tabs: (
-        border: getCSSVar($tabs-dark-color-border: $tabs-dark-color-border),
-        state-active: getCSSVar($tabs-dark-color-state-active: $tabs-dark-color-state-active)
+        border: $tabs-dark-color-border,
+        state-active: $tabs-dark-color-state-active
     );
 
     $tags: (
         primary: (
-            border: getCSSVar($tags-dark-color-primary-border: $tags-dark-color-primary-border),
-            background: getCSSVar($tags-dark-color-primary-background: $tags-dark-color-primary-background),
-            background_disabled: getCSSVar(
-                $tags-dark-color-primary-states-disabled-background: $tags-dark-color-primary-states-disabled-background
-            ),
-            icon: getCSSVar($tags-dark-color-primary-icon: $tags-dark-color-primary-icon),
-            icon_hovered: getCSSVar(
-                $tags-dark-color-primary-states-hover-icon: $tags-dark-color-primary-states-hover-icon
-            ),
-            focused: getCSSVar($tags-dark-color-primary-states-focused: $tags-dark-color-primary-states-focused),
-            disabled: getCSSVar(
-                $tags-dark-color-primary-states-disabled-text: $tags-dark-color-primary-states-disabled-text
-            )
+            border: $tags-dark-color-primary-border,
+            background: $tags-dark-color-primary-background,
+            background_disabled: $tags-dark-color-primary-states-disabled-background,
+            icon: $tags-dark-color-primary-icon,
+            icon_hovered: $tags-dark-color-primary-states-hover-icon,
+            focused: $tags-dark-color-primary-states-focused,
+            disabled: $tags-dark-color-primary-states-disabled-text
         ),
         second: (
-            border: getCSSVar($tags-dark-color-second-border: $tags-dark-color-second-border),
-            background: getCSSVar($tags-dark-color-second-background: $tags-dark-color-second-background),
-            background_disabled: getCSSVar(
-                $tags-dark-color-second-states-disabled-background: $tags-dark-color-second-states-disabled-background
-            ),
-            icon: getCSSVar($tags-dark-color-second-icon: $tags-dark-color-second-icon),
-            icon_hovered: getCSSVar(
-                $tags-dark-color-second-states-hover-icon: $tags-dark-color-second-states-hover-icon
-            ),
-            focused: getCSSVar($tags-dark-color-second-states-focused: $tags-dark-color-second-states-focused),
-            disabled: getCSSVar(
-                $tags-dark-color-second-states-disabled-text: $tags-dark-color-second-states-disabled-text
-            )
+            border: $tags-dark-color-second-border,
+            background: $tags-dark-color-second-background,
+            background_disabled: $tags-dark-color-second-states-disabled-background,
+            icon: $tags-dark-color-second-icon,
+            icon_hovered: $tags-dark-color-second-states-hover-icon,
+            focused: $tags-dark-color-second-states-focused,
+            disabled: $tags-dark-color-second-states-disabled-text
         ),
         error: (
-            border: getCSSVar($tags-dark-color-error-border: $tags-dark-color-error-border),
-            background: getCSSVar($tags-dark-color-error-background: $tags-dark-color-error-background),
-            background_disabled: getCSSVar(
-                $tags-dark-color-error-states-disabled-background: $tags-dark-color-error-states-disabled-background
-            ),
-            icon: getCSSVar($tags-dark-color-error-icon: $tags-dark-color-error-icon),
-            icon_hovered: getCSSVar(
-                $tags-dark-color-error-states-hover-icon: $tags-dark-color-error-states-hover-icon
-            ),
-            focused: getCSSVar($tags-dark-color-error-states-focused: $tags-dark-color-error-states-focused),
-            disabled: getCSSVar(
-                $tags-dark-color-error-states-disabled-text: $tags-dark-color-error-states-disabled-text
-            )
+            border: $tags-dark-color-error-border,
+            background: $tags-dark-color-error-background,
+            background_disabled: $tags-dark-color-error-states-disabled-background,
+            icon: $tags-dark-color-error-icon,
+            icon_hovered: $tags-dark-color-error-states-hover-icon,
+            focused: $tags-dark-color-error-states-focused,
+            disabled: $tags-dark-color-error-states-disabled-text
         )
     );
 
     $toggle: (
-        border: getCSSVar($toggle-dark-color-border: $toggle-dark-color-border),
-        background: getCSSVar($toggle-dark-color-background: $toggle-dark-color-background),
+        border: $toggle-dark-color-border,
+        background: $toggle-dark-color-background,
 
-        circle_border: getCSSVar($toggle-dark-color-circle-border: $toggle-dark-color-circle-border),
-        circle_background: getCSSVar($toggle-dark-color-circle-background: $toggle-dark-color-circle-background),
+        circle_border: $toggle-dark-color-circle-border,
+        circle_background: $toggle-dark-color-circle-background,
 
-        focused: getCSSVar($toggle-dark-color-states-focused-shadow: $toggle-dark-color-states-focused-shadow)
+        focused: $toggle-dark-color-states-focused-shadow
     );
 
     $tooltip: (
-        background: getCSSVar($tooltip-dark-color-background: $tooltip-dark-color-background),
-        color: getCSSVar($tooltip-dark-color-text: $tooltip-dark-color-text),
-        shadow: getCSSVar($tooltip-dark-color-shadow: $tooltip-dark-color-shadow)
+        background: $tooltip-dark-color-background,
+        color: $tooltip-dark-color-text,
+        shadow: $tooltip-dark-color-shadow
     );
 
     $vertical-navbar: (
-        background: getCSSVar($vertical-navbar-dark-color-background: $vertical-navbar-dark-color-background),
-        color: getCSSVar($vertical-navbar-dark-color-text: $vertical-navbar-dark-color-text),
+        background: $vertical-navbar-dark-color-background,
+        color: $vertical-navbar-dark-color-text,
 
-        toggle-button: getCSSVar(
-            $vertical-navbar-dark-color-toggle-button: $vertical-navbar-dark-color-toggle-button
-        ),
+        toggle-button: $vertical-navbar-dark-color-toggle-button,
 
-        background_hovered: getCSSVar(
-            $vertical-navbar-dark-color-states-hover-background: $vertical-navbar-dark-color-states-hover-background
-        ),
-        background_active: getCSSVar(
-            $vertical-navbar-dark-color-states-active-background: $vertical-navbar-dark-color-states-active-background
-        ),
-        background_progress: getCSSVar(
-            $vertical-navbar-dark-color-states-progress-background,
-            $vertical-navbar-dark-color-states-progress-background
-        )
+        background_hovered: $vertical-navbar-dark-color-states-hover-background,
+        background_active: $vertical-navbar-dark-color-states-active-background,
+        background_progress: $vertical-navbar-dark-color-states-progress-background
     );
 
     @return (
