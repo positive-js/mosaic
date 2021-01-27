@@ -1,7 +1,7 @@
 {
     "source": [
-        "packages/mosaic/design-tokens/properties/**/*.json",
-        "packages/mosaic/design-tokens/components/**/*.json"
+        "packages/mosaic/design-tokens/properties/**/*.json5",
+        "packages/mosaic/design-tokens/components/**/*.json5"
     ],
     "platforms": {
         "scss": {
