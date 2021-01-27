@@ -6,7 +6,6 @@
     "platforms": {
         "scss": {
             "transformGroup": "mc/scss",
-            "buildPath": "packages/mosaic/design-tokens/",
             "files": [
                 {
                     "destination": "_variables.scss",
@@ -22,7 +21,6 @@
         },
         "css": {
             "transformGroup": "mc/css",
-            "buildPath": "packages/mosaic/design-tokens/",
             "files": [
                 {
                     "destination": "tokens.css",
@@ -34,7 +32,6 @@
         },
         "js": {
             "transformGroup": "js",
-            "buildPath": "packages/mosaic/design-tokens/",
             "files": [{
                 "destination": "tokens.js",
                 "format": "javascript/es6"

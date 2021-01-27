@@ -82,6 +82,11 @@ StyleDictionary.registerFilter({
 // needs to be done _before_ applying the configuration
 const StyleDictionaryExtended = StyleDictionary.extend(__dirname + '/config.json');
 
+const buildPath = process.argv[2];
+
+StyleDictionaryExtended.options.platforms.scss.buildPath = buildPath;
+StyleDictionaryExtended.options.platforms.css.buildPath = buildPath;
+StyleDictionaryExtended.options.platforms.js.buildPath = buildPath;
 
 // FINALLY, BUILD ALL THE PLATFORMS
 StyleDictionaryExtended.buildAllPlatforms();
