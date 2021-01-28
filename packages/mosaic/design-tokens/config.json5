@@ -23,7 +23,7 @@
             "transformGroup": "mc/css",
             "files": [
                 {
-                    "destination": "tokens.css",
+                    "destination": "css-tokens.css",
                     "format": "css/variables",
                     "filter": "notPalette",
                     "prefix": "mc"
