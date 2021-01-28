@@ -1,13 +1,13 @@
 {
     "navbar": {
-        "light-color": {
-            "background": { "value": "{light-color.primary.palette.value.700.value}" },
-            "text": { "value": "{light-color.primary.palette.value.100.value}" },
+        "light-color-scheme": {
+            "background": { "value": "{light-color-scheme.primary.palette.value.700.value}" },
+            "text": { "value": "{light-color-scheme.primary.palette.value.100.value}" },
             "opacity": { "value": 0.5 }
         },
-        "dark-color": {
-            "background": { "value": "{dark-color.primary.palette.value.700.value}" },
-            "text": { "value": "{dark-color.primary.palette.value.100.value}" },
+        "dark-color-scheme": {
+            "background": { "value": "{dark-color-scheme.primary.palette.value.700.value}" },
+            "text": { "value": "{dark-color-scheme.primary.palette.value.100.value}" },
             "opacity": { "value": 0.5 }
         },
         "size": {
@@ -17,23 +17,23 @@
         "font": {}
     },
     "navbar-item": {
-        "light-color": {
-            "text": { "value": "{light-color.primary.palette.value.100.value}" },
+        "light-color-scheme": {
+            "text": { "value": "{light-color-scheme.primary.palette.value.100.value}" },
 
             "states": {
-                "active": { "value": "lighten({light-color.primary.palette.value.600.value}, 5%)" },
-                "hover": { "value": "lighten({light-color.primary.palette.value.600.value}, 5%)" },
-                "progress": { "value": "lighten({light-color.primary.palette.value.800.value}, 5%)" },
+                "active": { "value": "lighten({light-color-scheme.primary.palette.value.600.value}, 5%)" },
+                "hover": { "value": "lighten({light-color-scheme.primary.palette.value.600.value}, 5%)" },
+                "progress": { "value": "lighten({light-color-scheme.primary.palette.value.800.value}, 5%)" },
                 "disabled-opacity": { "value": 0.3 }
             }
         },
-        "dark-color": {
-            "text": { "value": "{dark-color.primary.palette.value.100.value}" },
+        "dark-color-scheme": {
+            "text": { "value": "{dark-color-scheme.primary.palette.value.100.value}" },
 
             "states": {
-                "active": { "value": "lighten({dark-color.primary.palette.value.700.value}, 5%)" },
-                "hover": { "value": "lighten({dark-color.primary.palette.value.700.value}, 5%)" },
-                "progress": { "value": "lighten({dark-color.primary.palette.value.800.value}, 15%)" },
+                "active": { "value": "lighten({dark-color-scheme.primary.palette.value.700.value}, 5%)" },
+                "hover": { "value": "lighten({dark-color-scheme.primary.palette.value.700.value}, 5%)" },
+                "progress": { "value": "lighten({dark-color-scheme.primary.palette.value.800.value}, 15%)" },
                 "disabled-opacity": { "value": 0.3 }
             }
         },

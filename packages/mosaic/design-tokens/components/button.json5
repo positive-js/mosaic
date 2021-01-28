@@ -1,89 +1,89 @@
 {
     "button": {
-        "light-color": {
+        "light-color-scheme": {
             "active": {
                 "shadow": { "value": "inset 0 1px 2px 0 rgba(black, 0.2)" }
             },
             "primary": {
-                "color": { "value": "{light-color.primary.palette.value.contrast.500.value}" },
-                "border": { "value": "{light-color.primary.palette.value.560.value}" },
-                "background": { "value": "{light-color.primary.palette.value.500.value}" },
-                "icon": { "value": "{light-color.primary.palette.value.contrast.500.value}" },
+                "color": { "value": "{light-color-scheme.primary.palette.value.contrast.500.value}" },
+                "border": { "value": "{light-color-scheme.primary.palette.value.560.value}" },
+                "background": { "value": "{light-color-scheme.primary.palette.value.500.value}" },
+                "icon": { "value": "{light-color-scheme.primary.palette.value.contrast.500.value}" },
 
                 "states": {
                     "active": {
-                        "border": { "value": "darken({light-color.primary.palette.value.560.value}, 5)" },
-                        "background": { "value": "darken({light-color.primary.palette.value.500.value}, 5)" }
+                        "border": { "value": "darken({light-color-scheme.primary.palette.value.560.value}, 5)" },
+                        "background": { "value": "darken({light-color-scheme.primary.palette.value.500.value}, 5)" }
                     }
                 }
             },
             "second": {
-                "border": { "value": "{light-color.foreground.border.value}" },
-                "background": { "value": "{light-color.background.background-disabled.value}" },
-                "color": { "value": "{light-color.foreground.text.value}" },
-                "icon": { "value": "{light-color.foreground.text-less-contrast.value}" },
+                "border": { "value": "{light-color-scheme.foreground.border.value}" },
+                "background": { "value": "{light-color-scheme.background.background-disabled.value}" },
+                "color": { "value": "{light-color-scheme.foreground.text.value}" },
+                "icon": { "value": "{light-color-scheme.foreground.text-less-contrast.value}" },
 
                 "states": {
                     "active": {
-                        "border": { "value": "darken({light-color.foreground.border.value}, 5)" },
-                        "background": { "value": "darken({light-color.background.background-disabled.value}, 5)" }
+                        "border": { "value": "darken({light-color-scheme.foreground.border.value}, 5)" },
+                        "background": { "value": "darken({light-color-scheme.background.background-disabled.value}, 5)" }
                     }
                 }
             },
             "error": {
-                "border": { "value": "{light-color.foreground.border.value}" },
-                "background": { "value": "{light-color.background.background-disabled.value}" },
-                "color": { "value": "{light-color.error.palette.value.400.value}" },
-                "icon": { "value": "{light-color.error.palette.value.400.value}" },
+                "border": { "value": "{light-color-scheme.foreground.border.value}" },
+                "background": { "value": "{light-color-scheme.background.background-disabled.value}" },
+                "color": { "value": "{light-color-scheme.error.palette.value.400.value}" },
+                "icon": { "value": "{light-color-scheme.error.palette.value.400.value}" },
 
                 "states": {
                     "active": {
-                        "border": { "value": "darken({light-color.foreground.border.value}, 5)" },
-                        "background": { "value": "darken({light-color.background.background-disabled.value}, 5)" }
+                        "border": { "value": "darken({light-color-scheme.foreground.border.value}, 5)" },
+                        "background": { "value": "darken({light-color-scheme.background.background-disabled.value}, 5)" }
                     }
                 }
             }
         },
-        "dark-color": {
+        "dark-color-scheme": {
             "active": {
                 "shadow": { "value": "inset 1px 2px 2px 0 rgba(black, 0.2)" }
             },
             "primary": {
-                "color": { "value": "{dark-color.primary.palette.value.contrast.500.value}" },
-                "border": { "value": "{dark-color.primary.palette.value.560.value}" },
-                "background": { "value": "{dark-color.primary.palette.value.500.value}" },
-                "icon": { "value": "{dark-color.primary.palette.value.contrast.500.value}" },
+                "color": { "value": "{dark-color-scheme.primary.palette.value.contrast.500.value}" },
+                "border": { "value": "{dark-color-scheme.primary.palette.value.560.value}" },
+                "background": { "value": "{dark-color-scheme.primary.palette.value.500.value}" },
+                "icon": { "value": "{dark-color-scheme.primary.palette.value.contrast.500.value}" },
 
                 "states": {
                     "active": {
-                        "border": { "value": "darken({dark-color.primary.palette.value.560.value}, 5)" },
-                        "background": { "value": "darken({dark-color.primary.palette.value.400.value}, 5)" }
+                        "border": { "value": "darken({dark-color-scheme.primary.palette.value.560.value}, 5)" },
+                        "background": { "value": "darken({dark-color-scheme.primary.palette.value.400.value}, 5)" }
                     }
                 }
             },
             "second": {
-                "border": { "value": "{dark-color.foreground.border.value}" },
-                "background": { "value": "{dark-color.background.background-disabled.value}" },
-                "color": { "value": "{dark-color.foreground.text.value}" },
-                "icon": { "value": "{dark-color.foreground.text-less-contrast.value}" },
+                "border": { "value": "{dark-color-scheme.foreground.border.value}" },
+                "background": { "value": "{dark-color-scheme.background.background-disabled.value}" },
+                "color": { "value": "{dark-color-scheme.foreground.text.value}" },
+                "icon": { "value": "{dark-color-scheme.foreground.text-less-contrast.value}" },
 
                 "states": {
                     "active": {
-                        "border": { "value": "darken({dark-color.foreground.border.value}, 5)" },
-                        "background": { "value": "darken({dark-color.background.background-disabled.value}, 5)" }
+                        "border": { "value": "darken({dark-color-scheme.foreground.border.value}, 5)" },
+                        "background": { "value": "darken({dark-color-scheme.background.background-disabled.value}, 5)" }
                     }
                 }
             },
             "error": {
-                "border": { "value": "{dark-color.foreground.border.value}" },
-                "background": { "value": "{dark-color.background.background-disabled.value}" },
-                "color": { "value": "{dark-color.error.palette.value.400.value}" },
-                "icon": { "value": "{dark-color.error.palette.value.400.value}" },
+                "border": { "value": "{dark-color-scheme.foreground.border.value}" },
+                "background": { "value": "{dark-color-scheme.background.background-disabled.value}" },
+                "color": { "value": "{dark-color-scheme.error.palette.value.400.value}" },
+                "icon": { "value": "{dark-color-scheme.error.palette.value.400.value}" },
 
                 "states": {
                     "active": {
-                        "border": { "value": "darken({dark-color.foreground.border.value}, 5)" },
-                        "background": { "value": "darken({dark-color.background.background-disabled.value}, 5)" }
+                        "border": { "value": "darken({dark-color-scheme.foreground.border.value}, 5)" },
+                        "background": { "value": "darken({dark-color-scheme.background.background-disabled.value}, 5)" }
                     }
                 }
             }

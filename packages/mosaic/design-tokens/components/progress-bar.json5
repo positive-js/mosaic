@@ -1,10 +1,10 @@
 {
     "progress-bar": {
-        "light-color": {
-            "background": { "value": "{light-color.second.palette.value.60.value}" }
+        "light-color-scheme": {
+            "background": { "value": "{light-color-scheme.second.palette.value.60.value}" }
         },
-        "dark-color": {
-            "background": { "value": "{dark-color.second.palette.value.600.value}" }
+        "dark-color-scheme": {
+            "background": { "value": "{dark-color-scheme.second.palette.value.600.value}" }
         },
         "size": {
             "height": { "value": "4px" }

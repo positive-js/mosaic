@@ -4,239 +4,239 @@
 @function mc-light-theme-components($theme) {
     $alert: (
         error: (
-            background: $alert-light-color-error-background,
-            border: $alert-light-color-error-border,
-            icon: $alert-light-color-error-icon
+            background: $alert-light-color-scheme-error-background,
+            border: $alert-light-color-scheme-error-border,
+            icon: $alert-light-color-scheme-error-icon
         ),
         warning: (
-            background: $alert-light-color-warning-background,
-            border: $alert-light-color-warning-border,
-            icon: $alert-light-color-warning-icon
+            background: $alert-light-color-scheme-warning-background,
+            border: $alert-light-color-scheme-warning-border,
+            icon: $alert-light-color-scheme-warning-icon
         ),
         success: (
-            background: $alert-light-color-success-background,
-            border: $alert-light-color-success-border,
-            icon: $alert-light-color-success-icon
+            background: $alert-light-color-scheme-success-background,
+            border: $alert-light-color-scheme-success-border,
+            icon: $alert-light-color-scheme-success-icon
         ),
         info: (
-            background: $alert-light-color-info-background,
-            border: $alert-light-color-info-border,
-            icon: $alert-light-color-info-icon
+            background: $alert-light-color-scheme-info-background,
+            border: $alert-light-color-scheme-info-border,
+            icon: $alert-light-color-scheme-info-icon
         ),
         default: (
-            background: $alert-light-color-default-background,
-            border: $alert-light-color-default-border,
-            icon: $alert-light-color-default-icon
+            background: $alert-light-color-scheme-default-background,
+            border: $alert-light-color-scheme-default-border,
+            icon: $alert-light-color-scheme-default-icon
         ),
     );
 
     $popup: (
-        shadow: $popup-light-color-shadow,
-        border: $popup-light-color-border,
-        divider: $popup-light-color-divider,
+        shadow: $popup-light-color-scheme-shadow,
+        border: $popup-light-color-scheme-border,
+        divider: $popup-light-color-scheme-divider,
 
-        background: $popup-light-color-background,
-        footer-background: $popup-light-color-footer-background
+        background: $popup-light-color-scheme-background,
+        footer-background: $popup-light-color-scheme-footer-background
     );
 
     $button: (
-        state-active_shadow: $button-light-color-active-shadow,
+        state-active_shadow: $button-light-color-scheme-active-shadow,
 
         primary: (
-            color: $button-light-color-primary-color,
-            border: $button-light-color-primary-border,
-            background: $button-light-color-primary-background,
-            icon: $button-light-color-primary-icon,
+            color: $button-light-color-scheme-primary-color,
+            border: $button-light-color-scheme-primary-border,
+            background: $button-light-color-scheme-primary-background,
+            icon: $button-light-color-scheme-primary-icon,
 
-            active_border: $button-light-color-primary-states-active-border,
-            active_background: $button-light-color-primary-states-active-background
+            active_border: $button-light-color-scheme-primary-states-active-border,
+            active_background: $button-light-color-scheme-primary-states-active-background
         ),
 
         second: (
-            color: $button-light-color-second-color,
-            border: $button-light-color-second-border,
-            background: $button-light-color-second-background,
-            icon: $button-light-color-second-icon,
+            color: $button-light-color-scheme-second-color,
+            border: $button-light-color-scheme-second-border,
+            background: $button-light-color-scheme-second-background,
+            icon: $button-light-color-scheme-second-icon,
 
-            active_border: $button-light-color-second-states-active-border,
-            active_background: $button-light-color-second-states-active-background
+            active_border: $button-light-color-scheme-second-states-active-border,
+            active_background: $button-light-color-scheme-second-states-active-background
         ),
 
         error: (
-            color: $button-light-color-error-color,
-            border: $button-light-color-error-border,
-            background: $button-light-color-error-background,
-            icon: $button-light-color-error-icon,
+            color: $button-light-color-scheme-error-color,
+            border: $button-light-color-scheme-error-border,
+            background: $button-light-color-scheme-error-background,
+            icon: $button-light-color-scheme-error-icon,
 
-            active_border: $button-light-color-error-states-active-border,
-            active_background: $button-light-color-error-states-active-background
+            active_border: $button-light-color-scheme-error-states-active-border,
+            active_background: $button-light-color-scheme-error-states-active-background
         )
     );
 
     $card: (
         error: (
-            vertical-line: $card-light-color-error-vertical-line,
-            background: $card-light-color-error-background,
-            shadow: $card-light-color-error-shadow
+            vertical-line: $card-light-color-scheme-error-vertical-line,
+            background: $card-light-color-scheme-error-background,
+            shadow: $card-light-color-scheme-error-shadow
         ),
         warning: (
-            vertical-line: $card-light-color-warning-vertical-line,
-            background: $card-light-color-warning-background,
-            shadow: $card-light-color-warning-shadow
+            vertical-line: $card-light-color-scheme-warning-vertical-line,
+            background: $card-light-color-scheme-warning-background,
+            shadow: $card-light-color-scheme-warning-shadow
         ),
         success: (
-            vertical-line: $card-light-color-success-vertical-line,
-            background: $card-light-color-success-background,
-            shadow: $card-light-color-success-shadow
+            vertical-line: $card-light-color-scheme-success-vertical-line,
+            background: $card-light-color-scheme-success-background,
+            shadow: $card-light-color-scheme-success-shadow
         ),
         info: (
-            vertical-line: $card-light-color-info-vertical-line,
-            background: $card-light-color-info-background,
-            shadow: $card-light-color-info-shadow
+            vertical-line: $card-light-color-scheme-info-vertical-line,
+            background: $card-light-color-scheme-info-background,
+            shadow: $card-light-color-scheme-info-shadow
         )
     );
 
     $checkbox: (
-        border: $checkbox-light-color-border,
+        border: $checkbox-light-color-scheme-border,
 
-        state-checked-border: $checkbox-light-color-states-checked-border,
-        state-checked-background: $checkbox-light-color-states-checked-background,
+        state-checked-border: $checkbox-light-color-scheme-states-checked-border,
+        state-checked-background: $checkbox-light-color-scheme-states-checked-background,
 
-        state-focused-border: $checkbox-light-color-states-focused-border,
-        state-focused-shadow: $checkbox-light-color-states-focused-shadow
+        state-focused-border: $checkbox-light-color-scheme-states-focused-border,
+        state-focused-shadow: $checkbox-light-color-scheme-states-focused-shadow
     );
 
 
     $form-field: (
-        border: $form-field-light-color-border,
-        background: $form-field-light-color-background,
+        border: $form-field-light-color-scheme-border,
+        background: $form-field-light-color-scheme-background,
 
-        state-hover-border: $form-field-light-color-states-hover-border,
-        state-invalid-border: $form-field-light-color-states-invalid-border,
-        state-invalid-background: $form-field-light-color-states-invalid-background
+        state-hover-border: $form-field-light-color-scheme-states-hover-border,
+        state-invalid-border: $form-field-light-color-scheme-states-invalid-border,
+        state-invalid-background: $form-field-light-color-scheme-states-invalid-background
     );
 
     $link: (
-        text: $link-light-color-text,
+        text: $link-light-color-scheme-text,
 
-        state-hover-text: $link-light-color-state-hover-text,
-        state-focused-outline: $link-light-color-state-focused-outline,
+        state-hover-text: $link-light-color-scheme-state-hover-text,
+        state-focused-outline: $link-light-color-scheme-state-focused-outline,
 
         dashed: (
-            border-bottom: $link-light-color-dashed-border-bottom,
-            state-hover-border-bottom: $link-light-color-dashed-state-hover-border-bottom
+            border-bottom: $link-light-color-scheme-dashed-border-bottom,
+            state-hover-border-bottom: $link-light-color-scheme-dashed-state-hover-border-bottom
         ),
 
         underlined: (
-            border-bottom: $link-light-color-underlined-border-bottom,
-            state-hover-border-bottom: $link-light-color-underlined-state-hover-border-bottom
+            border-bottom: $link-light-color-scheme-underlined-border-bottom,
+            state-hover-border-bottom: $link-light-color-scheme-underlined-state-hover-border-bottom
         )
     );
 
     $modal: (
-        background-mask: $modal-light-color-background-mask,
-        shadow: $modal-light-color-shadow
+        background-mask: $modal-light-color-scheme-background-mask,
+        shadow: $modal-light-color-scheme-shadow
     );
 
     $navbar: (
-        background: $navbar-light-color-background,
-        color: $navbar-light-color-text,
-        opacity: $navbar-light-color-opacity,
+        background: $navbar-light-color-scheme-background,
+        color: $navbar-light-color-scheme-text,
+        opacity: $navbar-light-color-scheme-opacity,
     );
 
     $navbar-item: (
-        color: $navbar-item-light-color-text,
+        color: $navbar-item-light-color-scheme-text,
 
-        state-active: $navbar-item-light-color-states-active,
-        state-hover: $navbar-item-light-color-states-hover,
-        state-progress: $navbar-item-light-color-states-progress,
-        state-disabled-opacity: $navbar-item-light-color-states-disabled-opacity,
+        state-active: $navbar-item-light-color-scheme-states-active,
+        state-hover: $navbar-item-light-color-scheme-states-hover,
+        state-progress: $navbar-item-light-color-scheme-states-progress,
+        state-disabled-opacity: $navbar-item-light-color-scheme-states-disabled-opacity,
     );
 
     $popover: (
-        border: $popover-light-color-border
+        border: $popover-light-color-scheme-border
     );
 
     $progress-bar: (
-        background: $progress-bar-light-color-background
+        background: $progress-bar-light-color-scheme-background
     );
 
     $radio: (
-        outer-circle_border: $radio-light-color-outer-circle-border,
-        inner-circle_border: $radio-light-color-inner-circle-border,
+        outer-circle_border: $radio-light-color-scheme-outer-circle-border,
+        inner-circle_border: $radio-light-color-scheme-inner-circle-border,
 
-        outer-circle_checked-state_border: $radio-light-color-states-checked-outer-circle-border,
-        outer-circle_focused-state_border: $radio-light-color-states-focused-outer-circle-border,
-        outer-circle_focused-state_shadow: $radio-light-color-states-focused-outer-circle-shadow,
+        outer-circle_checked-state_border: $radio-light-color-scheme-states-checked-outer-circle-border,
+        outer-circle_focused-state_border: $radio-light-color-scheme-states-focused-outer-circle-border,
+        outer-circle_focused-state_shadow: $radio-light-color-scheme-states-focused-outer-circle-shadow,
 
-        inner-circle_checked-state_border: $radio-light-color-states-checked-inner-circle-border,
-        inner-circle_focused-state_shadow: $radio-light-color-states-focused-inner-circle-shadow
+        inner-circle_checked-state_border: $radio-light-color-scheme-states-checked-inner-circle-border,
+        inner-circle_focused-state_shadow: $radio-light-color-scheme-states-focused-inner-circle-shadow
     );
 
     $sidepanel: (
-        border: $sidepanel-light-color-border
+        border: $sidepanel-light-color-scheme-border
     );
 
     $tabs: (
-        border: $tabs-light-color-border,
-        state-active: $tabs-light-color-state-active
+        border: $tabs-light-color-scheme-border,
+        state-active: $tabs-light-color-scheme-state-active
     );
 
     $tags: (
         primary: (
-            border: $tags-light-color-primary-border,
-            background: $tags-light-color-primary-background,
-            background_disabled: $tags-light-color-primary-states-disabled-background,
-            icon: $tags-light-color-primary-icon,
-            icon_hover: $tags-light-color-primary-states-hover-icon,
-            focused: $tags-light-color-primary-states-focused,
-            disabled: $tags-light-color-primary-states-disabled-text
+            border: $tags-light-color-scheme-primary-border,
+            background: $tags-light-color-scheme-primary-background,
+            background_disabled: $tags-light-color-scheme-primary-states-disabled-background,
+            icon: $tags-light-color-scheme-primary-icon,
+            icon_hover: $tags-light-color-scheme-primary-states-hover-icon,
+            focused: $tags-light-color-scheme-primary-states-focused,
+            disabled: $tags-light-color-scheme-primary-states-disabled-text
         ),
         second: (
-            border: $tags-light-color-second-border,
-            background: $tags-light-color-second-background,
-            background_disabled: $tags-light-color-second-states-disabled-background,
-            icon: $tags-light-color-second-icon,
-            icon_hover: $tags-light-color-second-states-hover-icon,
-            focused: $tags-light-color-second-states-focused,
-            disabled: $tags-light-color-second-states-disabled-text
+            border: $tags-light-color-scheme-second-border,
+            background: $tags-light-color-scheme-second-background,
+            background_disabled: $tags-light-color-scheme-second-states-disabled-background,
+            icon: $tags-light-color-scheme-second-icon,
+            icon_hover: $tags-light-color-scheme-second-states-hover-icon,
+            focused: $tags-light-color-scheme-second-states-focused,
+            disabled: $tags-light-color-scheme-second-states-disabled-text
         ),
         error: (
-            border: $tags-light-color-error-border,
-            background: $tags-light-color-error-background,
-            background_disabled: $tags-light-color-error-states-disabled-background,
-            icon: $tags-light-color-error-icon,
-            icon_hover: $tags-light-color-error-states-hover-icon,
-            focused: $tags-light-color-error-states-focused,
-            disabled: $tags-light-color-error-states-disabled-text
+            border: $tags-light-color-scheme-error-border,
+            background: $tags-light-color-scheme-error-background,
+            background_disabled: $tags-light-color-scheme-error-states-disabled-background,
+            icon: $tags-light-color-scheme-error-icon,
+            icon_hover: $tags-light-color-scheme-error-states-hover-icon,
+            focused: $tags-light-color-scheme-error-states-focused,
+            disabled: $tags-light-color-scheme-error-states-disabled-text
         )
     );
 
     $toggle: (
-        border: $toggle-light-color-border,
-        background: $toggle-light-color-background,
+        border: $toggle-light-color-scheme-border,
+        background: $toggle-light-color-scheme-background,
 
-        circle_border: $toggle-light-color-circle-border,
-        circle_background: $toggle-light-color-circle-background,
+        circle_border: $toggle-light-color-scheme-circle-border,
+        circle_background: $toggle-light-color-scheme-circle-background,
 
-        focused: $toggle-light-color-states-focused-shadow
+        focused: $toggle-light-color-scheme-states-focused-shadow
     );
 
     $tooltip: (
-        background: $tooltip-light-color-background,
-        color: $tooltip-light-color-text,
-        shadow: $tooltip-light-color-shadow
+        background: $tooltip-light-color-scheme-background,
+        color: $tooltip-light-color-scheme-text,
+        shadow: $tooltip-light-color-scheme-shadow
     );
 
     $vertical-navbar: (
-        background: $vertical-navbar-light-color-background,
-        color: $vertical-navbar-light-color-text,
+        background: $vertical-navbar-light-color-scheme-background,
+        color: $vertical-navbar-light-color-scheme-text,
 
-        toggle-button: $vertical-navbar-light-color-toggle-button,
+        toggle-button: $vertical-navbar-light-color-scheme-toggle-button,
 
-        background_hover: $vertical-navbar-light-color-states-hover-background,
-        background_active: $vertical-navbar-light-color-states-active-background,
-        background_progress: $vertical-navbar-light-color-states-progress-background
+        background_hover: $vertical-navbar-light-color-scheme-states-hover-background,
+        background_active: $vertical-navbar-light-color-scheme-states-active-background,
+        background_progress: $vertical-navbar-light-color-scheme-states-progress-background
     );
 
     @return (
@@ -265,238 +265,238 @@
 @function mc-dark-theme-components($theme) {
     $alert: (
         error: (
-            background: $alert-dark-color-error-background,
-            border: $alert-dark-color-error-border,
-            icon: $alert-dark-color-error-icon
+            background: $alert-dark-color-scheme-error-background,
+            border: $alert-dark-color-scheme-error-border,
+            icon: $alert-dark-color-scheme-error-icon
         ),
         warning: (
-            background: $alert-dark-color-warning-background,
-            border: $alert-dark-color-warning-border,
-            icon: $alert-dark-color-warning-icon
+            background: $alert-dark-color-scheme-warning-background,
+            border: $alert-dark-color-scheme-warning-border,
+            icon: $alert-dark-color-scheme-warning-icon
         ),
         success: (
-            background: $alert-dark-color-success-background,
-            border: $alert-dark-color-success-border,
-            icon: $alert-dark-color-success-icon
+            background: $alert-dark-color-scheme-success-background,
+            border: $alert-dark-color-scheme-success-border,
+            icon: $alert-dark-color-scheme-success-icon
         ),
         info: (
-            background: $alert-dark-color-info-background,
-            border: $alert-dark-color-info-border,
-            icon: $alert-dark-color-info-icon
+            background: $alert-dark-color-scheme-info-background,
+            border: $alert-dark-color-scheme-info-border,
+            icon: $alert-dark-color-scheme-info-icon
         ),
         default: (
-            background: $alert-dark-color-default-background,
-            border: $alert-dark-color-default-border,
-            icon: $alert-dark-color-default-icon
+            background: $alert-dark-color-scheme-default-background,
+            border: $alert-dark-color-scheme-default-border,
+            icon: $alert-dark-color-scheme-default-icon
         ),
     );
 
     $popup: (
-        shadow: $popup-dark-color-shadow,
-        border: $popup-dark-color-border,
-        divider: $popup-dark-color-divider,
+        shadow: $popup-dark-color-scheme-shadow,
+        border: $popup-dark-color-scheme-border,
+        divider: $popup-dark-color-scheme-divider,
 
-        background: $popup-dark-color-background,
-        footer-background: $popup-dark-color-footer-background
+        background: $popup-dark-color-scheme-background,
+        footer-background: $popup-dark-color-scheme-footer-background
     );
 
     $button: (
-        state-active_shadow: $button-dark-color-active-shadow,
+        state-active_shadow: $button-dark-color-scheme-active-shadow,
 
         primary: (
-            color: $button-dark-color-primary-color,
-            border: $button-dark-color-primary-border,
-            background: $button-dark-color-primary-background,
-            icon: $button-dark-color-primary-icon,
+            color: $button-dark-color-scheme-primary-color,
+            border: $button-dark-color-scheme-primary-border,
+            background: $button-dark-color-scheme-primary-background,
+            icon: $button-dark-color-scheme-primary-icon,
 
-            active_border: $button-dark-color-primary-states-active-border,
-            active_background: $button-dark-color-primary-states-active-background
+            active_border: $button-dark-color-scheme-primary-states-active-border,
+            active_background: $button-dark-color-scheme-primary-states-active-background
         ),
 
         second: (
-            color: $button-dark-color-second-color,
-            border: $button-dark-color-second-border,
-            background: $button-dark-color-second-background,
-            icon: $button-dark-color-second-icon,
+            color: $button-dark-color-scheme-second-color,
+            border: $button-dark-color-scheme-second-border,
+            background: $button-dark-color-scheme-second-background,
+            icon: $button-dark-color-scheme-second-icon,
 
-            active_border: $button-dark-color-second-states-active-border,
-            active_background: $button-dark-color-second-states-active-background
+            active_border: $button-dark-color-scheme-second-states-active-border,
+            active_background: $button-dark-color-scheme-second-states-active-background
         ),
 
         error: (
-            color: $button-dark-color-error-color,
-            border: $button-dark-color-error-border,
-            background: $button-dark-color-error-background,
-            icon: $button-dark-color-error-icon,
+            color: $button-dark-color-scheme-error-color,
+            border: $button-dark-color-scheme-error-border,
+            background: $button-dark-color-scheme-error-background,
+            icon: $button-dark-color-scheme-error-icon,
 
-            active_border: $button-dark-color-error-states-active-border,
-            active_background: $button-dark-color-error-states-active-background
+            active_border: $button-dark-color-scheme-error-states-active-border,
+            active_background: $button-dark-color-scheme-error-states-active-background
         )
     );
 
     $card: (
         error: (
-            vertical-line: $card-dark-color-error-vertical-line,
-            background: $card-dark-color-error-background,
-            shadow: $card-dark-color-error-shadow
+            vertical-line: $card-dark-color-scheme-error-vertical-line,
+            background: $card-dark-color-scheme-error-background,
+            shadow: $card-dark-color-scheme-error-shadow
         ),
         warning: (
-            vertical-line: $card-dark-color-warning-vertical-line,
-            background: $card-dark-color-warning-background,
-            shadow: $card-dark-color-warning-shadow
+            vertical-line: $card-dark-color-scheme-warning-vertical-line,
+            background: $card-dark-color-scheme-warning-background,
+            shadow: $card-dark-color-scheme-warning-shadow
         ),
         success: (
-            vertical-line: $card-dark-color-success-vertical-line,
-            background: $card-dark-color-success-background,
-            shadow: $card-dark-color-success-shadow
+            vertical-line: $card-dark-color-scheme-success-vertical-line,
+            background: $card-dark-color-scheme-success-background,
+            shadow: $card-dark-color-scheme-success-shadow
         ),
         info: (
-            vertical-line: $card-dark-color-info-vertical-line,
-            background: $card-dark-color-info-background,
-            shadow: $card-dark-color-info-shadow
+            vertical-line: $card-dark-color-scheme-info-vertical-line,
+            background: $card-dark-color-scheme-info-background,
+            shadow: $card-dark-color-scheme-info-shadow
         )
     );
 
     $checkbox: (
-        border: $checkbox-dark-color-border,
+        border: $checkbox-dark-color-scheme-border,
 
-        state-checked-border: $checkbox-dark-color-states-checked-border,
-        state-checked-background: $checkbox-dark-color-states-checked-background,
+        state-checked-border: $checkbox-dark-color-scheme-states-checked-border,
+        state-checked-background: $checkbox-dark-color-scheme-states-checked-background,
 
-        state-focused-border: $checkbox-dark-color-states-focused-border,
-        state-focused-shadow: $checkbox-dark-color-states-focused-shadow
+        state-focused-border: $checkbox-dark-color-scheme-states-focused-border,
+        state-focused-shadow: $checkbox-dark-color-scheme-states-focused-shadow
     );
 
     $form-field: (
-        border: $form-field-dark-color-border,
-        background: $form-field-dark-color-background,
+        border: $form-field-dark-color-scheme-border,
+        background: $form-field-dark-color-scheme-background,
 
-        state-hover-border: $form-field-dark-color-states-hover-border,
-        state-invalid-border: $form-field-dark-color-states-invalid-border,
-        state-invalid-background: $form-field-dark-color-states-invalid-background
+        state-hover-border: $form-field-dark-color-scheme-states-hover-border,
+        state-invalid-border: $form-field-dark-color-scheme-states-invalid-border,
+        state-invalid-background: $form-field-dark-color-scheme-states-invalid-background
     );
 
     $link: (
-        text: $link-dark-color-text,
+        text: $link-dark-color-scheme-text,
 
-        state-hover-text: $link-dark-color-state-hover-text,
-        state-focused-outline: $link-dark-color-state-focused-outline,
+        state-hover-text: $link-dark-color-scheme-state-hover-text,
+        state-focused-outline: $link-dark-color-scheme-state-focused-outline,
 
         dashed: (
-            border-bottom: $link-dark-color-dashed-border-bottom,
-            state-hover-border-bottom: $link-dark-color-dashed-state-hover-border-bottom
+            border-bottom: $link-dark-color-scheme-dashed-border-bottom,
+            state-hover-border-bottom: $link-dark-color-scheme-dashed-state-hover-border-bottom
         ),
 
         underlined: (
-            border-bottom: $link-dark-color-underlined-border-bottom,
-            state-hover-border-bottom: $link-dark-color-underlined-state-hover-border-bottom
+            border-bottom: $link-dark-color-scheme-underlined-border-bottom,
+            state-hover-border-bottom: $link-dark-color-scheme-underlined-state-hover-border-bottom
         )
     );
 
     $modal: (
-        background-mask: $modal-dark-color-background-mask,
-        shadow: $modal-dark-color-shadow
+        background-mask: $modal-dark-color-scheme-background-mask,
+        shadow: $modal-dark-color-scheme-shadow
     );
 
     $navbar: (
-        background: $navbar-dark-color-background,
-        color: $navbar-dark-color-text,
-        opacity: $navbar-dark-color-opacity,
+        background: $navbar-dark-color-scheme-background,
+        color: $navbar-dark-color-scheme-text,
+        opacity: $navbar-dark-color-scheme-opacity,
     );
 
     $navbar-item: (
-        color: $navbar-item-dark-color-text,
+        color: $navbar-item-dark-color-scheme-text,
 
-        state-active: $navbar-item-dark-color-states-active,
-        state-hover: $navbar-item-dark-color-states-hover,
-        state-progress: $navbar-item-dark-color-states-progress,
-        state-disabled-opacity: $navbar-item-dark-color-states-disabled-opacity,
+        state-active: $navbar-item-dark-color-scheme-states-active,
+        state-hover: $navbar-item-dark-color-scheme-states-hover,
+        state-progress: $navbar-item-dark-color-scheme-states-progress,
+        state-disabled-opacity: $navbar-item-dark-color-scheme-states-disabled-opacity,
     );
 
     $popover: (
-        border: $popover-dark-color-border
+        border: $popover-dark-color-scheme-border
     );
 
     $progress-bar: (
-        background: $progress-bar-dark-color-background
+        background: $progress-bar-dark-color-scheme-background
     );
 
     $radio: (
-        outer-circle_border: $radio-dark-color-outer-circle-border,
-        inner-circle_border: $radio-dark-color-inner-circle-border,
+        outer-circle_border: $radio-dark-color-scheme-outer-circle-border,
+        inner-circle_border: $radio-dark-color-scheme-inner-circle-border,
 
-        outer-circle_checked-state_border: $radio-dark-color-states-checked-outer-circle-border,
-        outer-circle_focused-state_border: $radio-dark-color-states-focused-outer-circle-border,
-        outer-circle_focused-state_shadow: $radio-dark-color-states-focused-outer-circle-shadow,
+        outer-circle_checked-state_border: $radio-dark-color-scheme-states-checked-outer-circle-border,
+        outer-circle_focused-state_border: $radio-dark-color-scheme-states-focused-outer-circle-border,
+        outer-circle_focused-state_shadow: $radio-dark-color-scheme-states-focused-outer-circle-shadow,
 
-        inner-circle_checked-state_border: $radio-dark-color-states-checked-inner-circle-border,
-        inner-circle_focused-state_shadow: $radio-dark-color-states-focused-inner-circle-shadow
+        inner-circle_checked-state_border: $radio-dark-color-scheme-states-checked-inner-circle-border,
+        inner-circle_focused-state_shadow: $radio-dark-color-scheme-states-focused-inner-circle-shadow
     );
 
     $sidepanel: (
-        border: $sidepanel-dark-color-border
+        border: $sidepanel-dark-color-scheme-border
     );
 
     $tabs: (
-        border: $tabs-dark-color-border,
-        state-active: $tabs-dark-color-state-active
+        border: $tabs-dark-color-scheme-border,
+        state-active: $tabs-dark-color-scheme-state-active
     );
 
     $tags: (
         primary: (
-            border: $tags-dark-color-primary-border,
-            background: $tags-dark-color-primary-background,
-            background_disabled: $tags-dark-color-primary-states-disabled-background,
-            icon: $tags-dark-color-primary-icon,
-            icon_hovered: $tags-dark-color-primary-states-hover-icon,
-            focused: $tags-dark-color-primary-states-focused,
-            disabled: $tags-dark-color-primary-states-disabled-text
+            border: $tags-dark-color-scheme-primary-border,
+            background: $tags-dark-color-scheme-primary-background,
+            background_disabled: $tags-dark-color-scheme-primary-states-disabled-background,
+            icon: $tags-dark-color-scheme-primary-icon,
+            icon_hovered: $tags-dark-color-scheme-primary-states-hover-icon,
+            focused: $tags-dark-color-scheme-primary-states-focused,
+            disabled: $tags-dark-color-scheme-primary-states-disabled-text
         ),
         second: (
-            border: $tags-dark-color-second-border,
-            background: $tags-dark-color-second-background,
-            background_disabled: $tags-dark-color-second-states-disabled-background,
-            icon: $tags-dark-color-second-icon,
-            icon_hovered: $tags-dark-color-second-states-hover-icon,
-            focused: $tags-dark-color-second-states-focused,
-            disabled: $tags-dark-color-second-states-disabled-text
+            border: $tags-dark-color-scheme-second-border,
+            background: $tags-dark-color-scheme-second-background,
+            background_disabled: $tags-dark-color-scheme-second-states-disabled-background,
+            icon: $tags-dark-color-scheme-second-icon,
+            icon_hovered: $tags-dark-color-scheme-second-states-hover-icon,
+            focused: $tags-dark-color-scheme-second-states-focused,
+            disabled: $tags-dark-color-scheme-second-states-disabled-text
         ),
         error: (
-            border: $tags-dark-color-error-border,
-            background: $tags-dark-color-error-background,
-            background_disabled: $tags-dark-color-error-states-disabled-background,
-            icon: $tags-dark-color-error-icon,
-            icon_hovered: $tags-dark-color-error-states-hover-icon,
-            focused: $tags-dark-color-error-states-focused,
-            disabled: $tags-dark-color-error-states-disabled-text
+            border: $tags-dark-color-scheme-error-border,
+            background: $tags-dark-color-scheme-error-background,
+            background_disabled: $tags-dark-color-scheme-error-states-disabled-background,
+            icon: $tags-dark-color-scheme-error-icon,
+            icon_hovered: $tags-dark-color-scheme-error-states-hover-icon,
+            focused: $tags-dark-color-scheme-error-states-focused,
+            disabled: $tags-dark-color-scheme-error-states-disabled-text
         )
     );
 
     $toggle: (
-        border: $toggle-dark-color-border,
-        background: $toggle-dark-color-background,
+        border: $toggle-dark-color-scheme-border,
+        background: $toggle-dark-color-scheme-background,
 
-        circle_border: $toggle-dark-color-circle-border,
-        circle_background: $toggle-dark-color-circle-background,
+        circle_border: $toggle-dark-color-scheme-circle-border,
+        circle_background: $toggle-dark-color-scheme-circle-background,
 
-        focused: $toggle-dark-color-states-focused-shadow
+        focused: $toggle-dark-color-scheme-states-focused-shadow
     );
 
     $tooltip: (
-        background: $tooltip-dark-color-background,
-        color: $tooltip-dark-color-text,
-        shadow: $tooltip-dark-color-shadow
+        background: $tooltip-dark-color-scheme-background,
+        color: $tooltip-dark-color-scheme-text,
+        shadow: $tooltip-dark-color-scheme-shadow
     );
 
     $vertical-navbar: (
-        background: $vertical-navbar-dark-color-background,
-        color: $vertical-navbar-dark-color-text,
+        background: $vertical-navbar-dark-color-scheme-background,
+        color: $vertical-navbar-dark-color-scheme-text,
 
-        toggle-button: $vertical-navbar-dark-color-toggle-button,
+        toggle-button: $vertical-navbar-dark-color-scheme-toggle-button,
 
-        background_hovered: $vertical-navbar-dark-color-states-hover-background,
-        background_active: $vertical-navbar-dark-color-states-active-background,
-        background_progress: $vertical-navbar-dark-color-states-progress-background
+        background_hovered: $vertical-navbar-dark-color-scheme-states-hover-background,
+        background_active: $vertical-navbar-dark-color-scheme-states-active-background,
+        background_progress: $vertical-navbar-dark-color-scheme-states-progress-background
     );
 
     @return (

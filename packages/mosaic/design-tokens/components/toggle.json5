@@ -1,33 +1,33 @@
 {
     "toggle": {
-        "light-color": {
-            "border": { "value": "{light-color.foreground.border.value}" },
+        "light-color-scheme": {
+            "border": { "value": "{light-color-scheme.foreground.border.value}" },
             "background": {
-                "value": "linear-gradient(to bottom, {light-color.second.palette.value.100.value}, {light-color.background.background-disabled.value})"
+                "value": "linear-gradient(to bottom, {light-color-scheme.second.palette.value.100.value}, {light-color-scheme.background.background-disabled.value})"
             },
-            "circle-border": { "value": "{light-color.foreground.border.value}" },
-            "circle-background": { "value": "linear-gradient(to bottom, white, {light-color.second.palette.value.100.value})" },
+            "circle-border": { "value": "{light-color-scheme.foreground.border.value}" },
+            "circle-background": { "value": "linear-gradient(to bottom, white, {light-color-scheme.second.palette.value.100.value})" },
 
             "states": {
                 "focused": {
                     "shadow": {
-                        "value": "inset 0 0 0 1px {light-color.background.background.value}, 0 0 0 2px {light-color.primary.palette.value.500.value}"
+                        "value": "inset 0 0 0 1px {light-color-scheme.background.background.value}, 0 0 0 2px {light-color-scheme.primary.palette.value.500.value}"
                     }
                 }
             }
         },
-        "dark-color": {
-            "border": { "value": "{dark-color.foreground.border.value}" },
+        "dark-color-scheme": {
+            "border": { "value": "{dark-color-scheme.foreground.border.value}" },
             "background": {
-                "value": "{dark-color.background.background.value}"
+                "value": "{dark-color-scheme.background.background.value}"
             },
-            "circle-border": { "value": "{dark-color.foreground.border.value}" },
+            "circle-border": { "value": "{dark-color-scheme.foreground.border.value}" },
             "circle-background": { "value": "white" },
 
             "states": {
                 "focused": {
                     "shadow": {
-                        "value": "inset 0 0 0 1px {dark-color.background.background.value}, 0 0 0 2px {dark-color.primary.palette.value.400.value}"
+                        "value": "inset 0 0 0 1px {dark-color-scheme.background.background.value}, 0 0 0 2px {dark-color-scheme.primary.palette.value.400.value}"
                     }
                 }
             }

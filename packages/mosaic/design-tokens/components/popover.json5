@@ -1,10 +1,10 @@
 {
     "popover": {
-        "light-color": {
-            "border": { "value": "{light-color.foreground.border.value}" }
+        "light-color-scheme": {
+            "border": { "value": "{light-color-scheme.foreground.border.value}" }
         },
-        "dark-color": {
-            "border": { "value": "{dark-color.second.palette.value.700.value}" }
+        "dark-color-scheme": {
+            "border": { "value": "{dark-color-scheme.second.palette.value.700.value}" }
         },
         "size": {
             "padding": { "value": "16px" },

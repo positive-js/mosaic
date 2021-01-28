@@ -1,13 +1,13 @@
 {
     "tooltip": {
-        "light-color": {
-            "background": { "value": "{light-color.second.palette.value.700.value}" },
-            "text": { "value": "{light-color.second.palette.value.contrast.700.value}" },
+        "light-color-scheme": {
+            "background": { "value": "{light-color-scheme.second.palette.value.700.value}" },
+            "text": { "value": "{light-color-scheme.second.palette.value.contrast.700.value}" },
             "shadow": { "value": "0 2px 4px 0 rgba(0, 0, 0, 0.2)" }
         },
-        "dark-color": {
+        "dark-color-scheme": {
             "background": { "value": "white" },
-            "text": { "value": "{dark-color.second.palette.value.contrast.700.value}" },
+            "text": { "value": "{dark-color-scheme.second.palette.value.contrast.700.value}" },
             "shadow": { "value": "0 2px 4px 0 rgba(0, 0, 0, 0.2)" }
         },
         "size": {

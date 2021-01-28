@@ -1,7 +1,7 @@
 {
     "tree": {
         "color": {
-            "background": { "value": "{light-color.second.palette.value.700.value}" }
+            "background": { "value": "{light-color-scheme.second.palette.value.700.value}" }
         },
         "size": {
             "border-width": { "value": "2px" },

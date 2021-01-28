@@ -1,13 +1,13 @@
 @import '../all-theme';
 
 
-$primary: mc-palette($dark-color-primary-palette, $dark-color-primary-default);
-$second: mc-palette($dark-color-second-palette, $dark-color-second-default);
-$error: mc-palette($dark-color-error-palette, $dark-color-error-default);
+$primary: mc-palette($dark-color-scheme-primary-palette, $dark-color-scheme-primary-default);
+$second: mc-palette($dark-color-scheme-second-palette, $dark-color-scheme-second-default);
+$error: mc-palette($dark-color-scheme-error-palette, $dark-color-scheme-error-default);
 
-$info: mc-palette($dark-color-info-palette, $dark-color-info-default);
-$success: mc-palette($dark-color-success-palette, $dark-color-success-default);
-$warning: mc-palette($dark-color-warning-palette, $dark-color-warning-default);
+$info: mc-palette($dark-color-scheme-info-palette, $dark-color-scheme-info-default);
+$success: mc-palette($dark-color-scheme-success-palette, $dark-color-scheme-success-default);
+$warning: mc-palette($dark-color-scheme-warning-palette, $dark-color-scheme-warning-default);
 
 $theme: mc-dark-theme($primary, $second, $error, $info, $success, $warning);
 

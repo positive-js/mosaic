@@ -1,34 +1,34 @@
 {
     "vertical-navbar": {
-        "light-color": {
-            "background": { "value": "{light-color.primary.palette.value.700.value}" },
-            "text": { "value": "{light-color.primary.palette.value.contrast.700.value}" },
-            "toggle-button": { "value": "{light-color.primary.palette.value.contrast.700.value}" },
+        "light-color-scheme": {
+            "background": { "value": "{light-color-scheme.primary.palette.value.700.value}" },
+            "text": { "value": "{light-color-scheme.primary.palette.value.contrast.700.value}" },
+            "toggle-button": { "value": "{light-color-scheme.primary.palette.value.contrast.700.value}" },
             "states": {
                 "active": {
-                    "background": { "value": "lighten({light-color.primary.palette.value.700.value}, 5%)" }
+                    "background": { "value": "lighten({light-color-scheme.primary.palette.value.700.value}, 5%)" }
                 },
                 "hover": {
-                    "background": { "value": "lighten({light-color.primary.palette.value.700.value}, 5%)" }
+                    "background": { "value": "lighten({light-color-scheme.primary.palette.value.700.value}, 5%)" }
                 },
                 "progress": {
-                    "background": { "value": "lighten({light-color.primary.palette.value.800.value}, 15%)" }
+                    "background": { "value": "lighten({light-color-scheme.primary.palette.value.800.value}, 15%)" }
                 }
             }
         },
-        "dark-color": {
-            "background": { "value": "{dark-color.primary.palette.value.700.value}" },
-            "text": { "value": "{dark-color.primary.palette.value.contrast.700.value}" },
-            "toggle-button": { "value": "{dark-color.primary.palette.value.contrast.700.value}" },
+        "dark-color-scheme": {
+            "background": { "value": "{dark-color-scheme.primary.palette.value.700.value}" },
+            "text": { "value": "{dark-color-scheme.primary.palette.value.contrast.700.value}" },
+            "toggle-button": { "value": "{dark-color-scheme.primary.palette.value.contrast.700.value}" },
             "states": {
                 "active": {
-                    "background": { "value": "lighten({dark-color.primary.palette.value.700.value}, 5%)" }
+                    "background": { "value": "lighten({dark-color-scheme.primary.palette.value.700.value}, 5%)" }
                 },
                 "hover": {
-                    "background": { "value": "lighten({dark-color.primary.palette.value.700.value}, 5%)" }
+                    "background": { "value": "lighten({dark-color-scheme.primary.palette.value.700.value}, 5%)" }
                 },
                 "progress": {
-                    "background": { "value": "lighten({dark-color.primary.palette.value.800.value}, 15%)" }
+                    "background": { "value": "lighten({dark-color-scheme.primary.palette.value.800.value}, 15%)" }
                 }
             }
         },

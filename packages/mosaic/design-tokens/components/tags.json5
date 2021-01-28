@@ -1,95 +1,95 @@
 {
     "tags": {
-        "light-color": {
+        "light-color-scheme": {
             "primary": {
-                "background": { "value": "{light-color.primary.palette.value.100.value}" },
-                "border": { "value": "{light-color.primary.palette.value.100.value}" },
-                "icon": { "value": "mix({light-color.primary.palette.value.400.value}, {light-color.background.overlay-hover.value})" },
+                "background": { "value": "{light-color-scheme.primary.palette.value.100.value}" },
+                "border": { "value": "{light-color-scheme.primary.palette.value.100.value}" },
+                "icon": { "value": "mix({light-color-scheme.primary.palette.value.400.value}, {light-color-scheme.background.overlay-hover.value})" },
                 "states":  {
                     "hover": {
-                        "icon": { "value": "{light-color.primary.palette.value.600.value}" }
+                        "icon": { "value": "{light-color-scheme.primary.palette.value.600.value}" }
                     },
-                    "focused":{ "value": "{light-color.primary.palette.value.500.value}" },
+                    "focused":{ "value": "{light-color-scheme.primary.palette.value.500.value}" },
                     "disabled": {
-                        "text": { "value": "mix({light-color.primary.palette.value.500.value}, transparent, 50%)" },
-                        "background": { "value": "mix({light-color.primary.palette.value.500.value}, transparent, 10%)" }
+                        "text": { "value": "mix({light-color-scheme.primary.palette.value.500.value}, transparent, 50%)" },
+                        "background": { "value": "mix({light-color-scheme.primary.palette.value.500.value}, transparent, 10%)" }
                     }
                 }
             },
             "second": {
-                "background": { "value": "{light-color.second.palette.value.100.value}" },
-                "border": { "value": "{light-color.second.palette.value.100.value}" },
-                "icon": { "value": "mix({light-color.second.palette.value.400.value}, {light-color.background.overlay-hover.value})" },
+                "background": { "value": "{light-color-scheme.second.palette.value.100.value}" },
+                "border": { "value": "{light-color-scheme.second.palette.value.100.value}" },
+                "icon": { "value": "mix({light-color-scheme.second.palette.value.400.value}, {light-color-scheme.background.overlay-hover.value})" },
                 "states": {
                     "hover": {
-                        "icon": { "value": "{light-color.second.palette.value.400.value}" }
+                        "icon": { "value": "{light-color-scheme.second.palette.value.400.value}" }
                     },
-                    "focused": { "value": "{light-color.primary.palette.value.500.value}" },
+                    "focused": { "value": "{light-color-scheme.primary.palette.value.500.value}" },
                     "disabled": {
-                        "text": { "value": "mix({light-color.second.palette.value.300.value}, transparent, 50%)" },
-                        "background": { "value": "mix({light-color.second.palette.value.300.value}, transparent, 10%)" }
+                        "text": { "value": "mix({light-color-scheme.second.palette.value.300.value}, transparent, 50%)" },
+                        "background": { "value": "mix({light-color-scheme.second.palette.value.300.value}, transparent, 10%)" }
                     }
                 }
             },
             "error": {
-                "background": { "value": "{light-color.error.palette.value.100.value}" },
-                "border": { "value": "{light-color.error.palette.value.100.value}" },
-                "icon": { "value": "mix({light-color.error.palette.value.400.value}, {light-color.background.overlay-hover.value})" },
+                "background": { "value": "{light-color-scheme.error.palette.value.100.value}" },
+                "border": { "value": "{light-color-scheme.error.palette.value.100.value}" },
+                "icon": { "value": "mix({light-color-scheme.error.palette.value.400.value}, {light-color-scheme.background.overlay-hover.value})" },
                 "states": {
                     "hover": {
-                        "icon": { "value": "{light-color.error.palette.value.500.value}" }
+                        "icon": { "value": "{light-color-scheme.error.palette.value.500.value}" }
                     },
-                    "focused": { "value": "{light-color.error.palette.value.400.value}" },
+                    "focused": { "value": "{light-color-scheme.error.palette.value.400.value}" },
                     "disabled": {
-                        "text": { "value": "mix({light-color.error.palette.value.400.value}, transparent, 50%)" },
-                        "background": { "value": "mix({light-color.error.palette.value.400.value}, transparent, 10%)" }
+                        "text": { "value": "mix({light-color-scheme.error.palette.value.400.value}, transparent, 50%)" },
+                        "background": { "value": "mix({light-color-scheme.error.palette.value.400.value}, transparent, 10%)" }
                     }
                 }
             }
         },
-        "dark-color": {
+        "dark-color-scheme": {
             "primary": {
-                "background": { "value": "{dark-color.primary.palette.value.700.value}" },
-                "border": { "value": "{dark-color.primary.palette.value.700.value}" },
-                "icon": { "value": "mix({dark-color.primary.palette.value.400.value}, {dark-color.background.overlay-hover.value})" },
+                "background": { "value": "{dark-color-scheme.primary.palette.value.700.value}" },
+                "border": { "value": "{dark-color-scheme.primary.palette.value.700.value}" },
+                "icon": { "value": "mix({dark-color-scheme.primary.palette.value.400.value}, {dark-color-scheme.background.overlay-hover.value})" },
                 "states": {
                     "hover": {
-                        "icon": { "value": "{dark-color.primary.palette.value.500.value}" }
+                        "icon": { "value": "{dark-color-scheme.primary.palette.value.500.value}" }
                     },
-                    "focused": { "value": "{dark-color.primary.palette.value.400.value}" },
+                    "focused": { "value": "{dark-color-scheme.primary.palette.value.400.value}" },
                     "disabled": {
-                        "text": { "value": "mix({dark-color.primary.palette.value.400.value}, transparent, 50%)" },
-                        "background": { "value": "mix({dark-color.primary.palette.value.400.value}, transparent, 10%)" }
+                        "text": { "value": "mix({dark-color-scheme.primary.palette.value.400.value}, transparent, 50%)" },
+                        "background": { "value": "mix({dark-color-scheme.primary.palette.value.400.value}, transparent, 10%)" }
                     }
                 }
             },
             "second": {
-                "background": { "value": "{dark-color.second.palette.value.700.value}" },
-                "border": { "value": "{dark-color.second.palette.value.700.value}" },
-                "icon": { "value": "mix({dark-color.second.palette.value.400.value}, {dark-color.background.overlay-hover.value})" },
+                "background": { "value": "{dark-color-scheme.second.palette.value.700.value}" },
+                "border": { "value": "{dark-color-scheme.second.palette.value.700.value}" },
+                "icon": { "value": "mix({dark-color-scheme.second.palette.value.400.value}, {dark-color-scheme.background.overlay-hover.value})" },
                 "states": {
                     "hover": {
-                        "icon": { "value": "{dark-color.second.palette.value.100.value}" }
+                        "icon": { "value": "{dark-color-scheme.second.palette.value.100.value}" }
                     },
-                    "focused": { "value": "{dark-color.primary.palette.value.400.value}" },
+                    "focused": { "value": "{dark-color-scheme.primary.palette.value.400.value}" },
                     "disabled": {
-                        "text": { "value": "mix({dark-color.second.palette.value.400.value}, transparent, 50%)" },
-                        "background": { "value": "mix({dark-color.second.palette.value.400.value}, transparent, 10%)" }
+                        "text": { "value": "mix({dark-color-scheme.second.palette.value.400.value}, transparent, 50%)" },
+                        "background": { "value": "mix({dark-color-scheme.second.palette.value.400.value}, transparent, 10%)" }
                     }
                 }
             },
             "error": {
-                "background": { "value": "{dark-color.error.palette.value.700.value}" },
-                "border": { "value": "{dark-color.error.palette.value.700.value}" },
-                "icon": { "value": "mix({dark-color.error.palette.value.400.value}, {dark-color.background.overlay-hover.value})" },
+                "background": { "value": "{dark-color-scheme.error.palette.value.700.value}" },
+                "border": { "value": "{dark-color-scheme.error.palette.value.700.value}" },
+                "icon": { "value": "mix({dark-color-scheme.error.palette.value.400.value}, {dark-color-scheme.background.overlay-hover.value})" },
                 "states": {
                     "hover": {
-                        "icon": { "value": "{dark-color.error.palette.value.200.value}" }
+                        "icon": { "value": "{dark-color-scheme.error.palette.value.200.value}" }
                     },
-                    "focused": { "value": "{dark-color.error.palette.value.400.value}" },
+                    "focused": { "value": "{dark-color-scheme.error.palette.value.400.value}" },
                     "disabled": {
-                        "text": { "value": "mix({dark-color.error.palette.value.400.value}, transparent, 50%)" },
-                        "background": { "value": "mix({dark-color.error.palette.value.400.value}, transparent, 10%)" }
+                        "text": { "value": "mix({dark-color-scheme.error.palette.value.400.value}, transparent, 50%)" },
+                        "background": { "value": "mix({dark-color-scheme.error.palette.value.400.value}, transparent, 10%)" }
                     }
                 }
             }

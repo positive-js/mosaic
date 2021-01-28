@@ -32,27 +32,27 @@
 
 @function mc-light-theme($primary, $second, $error, $info, $success, $warning) {
     $states: (
-        focused-color: $light-color-states-focused-color,
-        selected-color: $light-color-states-selected-color,
-        pressed-shadow: $light-color-states-pressed-shadow,
-        disabled-opacity: $light-color-states-disabled-opacity
+        focused-color: $light-color-scheme-states-focused-color,
+        selected-color: $light-color-scheme-states-selected-color,
+        pressed-shadow: $light-color-scheme-states-pressed-shadow,
+        disabled-opacity: $light-color-scheme-states-disabled-opacity
     );
 
     $foreground: (
-        text: $light-color-foreground-text,
-        text-less-contrast: $light-color-foreground-text-less-contrast,
-        text-disabled: $light-color-foreground-text_disabled,
-        divider: $light-color-foreground-divider,
-        border: $light-color-foreground-border,
-        icon: $light-color-foreground-icon,
+        text: $light-color-scheme-foreground-text,
+        text-less-contrast: $light-color-scheme-foreground-text-less-contrast,
+        text-disabled: $light-color-scheme-foreground-text_disabled,
+        divider: $light-color-scheme-foreground-divider,
+        border: $light-color-scheme-foreground-border,
+        icon: $light-color-scheme-foreground-icon,
     );
 
     $background: (
-        background: $light-color-background-background,
-        background-disabled: $light-color-background-background-disabled,
-        overlay-hover: $light-color-background-overlay-hover,
-        overlay-active: $light-color-background-overlay-active,
-        overlay-disabled: $light-color-background-overlay-disabled
+        background: $light-color-scheme-background-background,
+        background-disabled: $light-color-scheme-background-background-disabled,
+        overlay-hover: $light-color-scheme-background-overlay-hover,
+        overlay-active: $light-color-scheme-background-overlay-active,
+        overlay-disabled: $light-color-scheme-background-overlay-disabled
     );
 
     $theme: (
@@ -77,27 +77,27 @@
 
 @function mc-dark-theme($primary, $second, $error, $info, $success, $warning) {
     $states: (
-        focused-color: $dark-color-states-focused-color,
-        selected-color: $dark-color-states-focused-color,
-        pressed-shadow: $dark-color-states-pressed-shadow,
-        disabled-opacity: $dark-color-states-disabled-opacity
+        focused-color: $dark-color-scheme-states-focused-color,
+        selected-color: $dark-color-scheme-states-focused-color,
+        pressed-shadow: $dark-color-scheme-states-pressed-shadow,
+        disabled-opacity: $dark-color-scheme-states-disabled-opacity
     );
 
     $background: (
-        background: $dark-color-background-background,
-        background-disabled: $dark-color-background-background-disabled,
-        overlay-hover: $dark-color-background-overlay-hover,
-        overlay-active: $dark-color-background-overlay-active,
-        overlay-disabled: $dark-color-background-overlay-disabled
+        background: $dark-color-scheme-background-background,
+        background-disabled: $dark-color-scheme-background-background-disabled,
+        overlay-hover: $dark-color-scheme-background-overlay-hover,
+        overlay-active: $dark-color-scheme-background-overlay-active,
+        overlay-disabled: $dark-color-scheme-background-overlay-disabled
     );
 
     $foreground: (
-        text: $dark-color-foreground-text,
-        text-less-contrast: $dark-color-foreground-text-less-contrast,
-        text-disabled: $dark-color-foreground-text_disabled,
-        divider: $dark-color-foreground-divider,
-        border: $dark-color-foreground-border,
-        icon: $dark-color-foreground-icon,
+        text: $dark-color-scheme-foreground-text,
+        text-less-contrast: $dark-color-scheme-foreground-text-less-contrast,
+        text-disabled: $dark-color-scheme-foreground-text_disabled,
+        divider: $dark-color-scheme-foreground-divider,
+        border: $dark-color-scheme-foreground-border,
+        icon: $dark-color-scheme-foreground-icon,
     );
 
     $theme: (
