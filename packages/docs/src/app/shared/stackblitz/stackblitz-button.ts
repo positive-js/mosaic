@@ -1,8 +1,8 @@
 import { Component, Input, NgModule } from '@angular/core';
 import { ExampleData } from '@ptsecurity/mosaic-examples';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
-import { McLink, McLinkModule } from '../../../../../mosaic/link';
 
+import { McLinkModule } from '../../../../../mosaic/link';
 
 import { StackblitzWriter } from './stackblitz-writer';
 
