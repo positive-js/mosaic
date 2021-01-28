@@ -23,6 +23,6 @@
         "packages/mosaic/design-tokens/_palette.scss",
         "packages/mosaic/design-tokens/_variables.scss",
         "packages/mosaic/design-tokens/tokens.js",
-        "packages/mosaic/design-tokens/tokens.css"
+        "packages/mosaic/design-tokens/css-tokens.css"
     ]
 }
