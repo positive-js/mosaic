@@ -1,5 +1,16 @@
 @import 'styles/common/animation';
+@import 'styles/common/button';
+@import 'styles/common/clearfix';
 @import 'styles/common/groups';
+@import 'styles/common/input';
+@import 'styles/common/layout';
+@import 'styles/common/list';
+@import 'styles/common/overlay';
+@import 'styles/common/popup';
+@import 'styles/common/rtl';
+@import 'styles/common/scrollbar';
+@import 'styles/common/size';
+@import 'styles/common/vendor-prefixes';
 
 @import '../../cdk/a11y/a11y';
 @import '../../../node_modules/@angular/cdk/overlay';
