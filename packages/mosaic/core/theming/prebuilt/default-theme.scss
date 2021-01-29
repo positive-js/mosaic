@@ -1,19 +1,7 @@
 @import '../all-theme';
 
 
-$primary: mc-palette($light-color-scheme-primary-palette, $light-color-scheme-primary-default);
-
-$second: mc-palette($light-color-scheme-second-palette, $light-color-scheme-second-default);
-
-$error: mc-palette($light-color-scheme-error-palette, $light-color-scheme-error-default);
-
-$info: mc-palette($light-color-scheme-info-palette, $light-color-scheme-info-default);
-
-$success: mc-palette($light-color-scheme-success-palette, $light-color-scheme-success-default);
-
-$warning: mc-palette($light-color-scheme-warning-palette, $light-color-scheme-warning-default);
-
-$theme: mc-light-theme($primary, $second, $error, $info, $success, $warning);
+$theme: mc-light-theme();
 
 // Include all typography for the components.
 @include mc-core();

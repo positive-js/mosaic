@@ -1,15 +1,7 @@
 @import '../all-theme';
 
 
-$primary: mc-palette($dark-color-scheme-primary-palette, $dark-color-scheme-primary-default);
-$second: mc-palette($dark-color-scheme-second-palette, $dark-color-scheme-second-default);
-$error: mc-palette($dark-color-scheme-error-palette, $dark-color-scheme-error-default);
-
-$info: mc-palette($dark-color-scheme-info-palette, $dark-color-scheme-info-default);
-$success: mc-palette($dark-color-scheme-success-palette, $dark-color-scheme-success-default);
-$warning: mc-palette($dark-color-scheme-warning-palette, $dark-color-scheme-warning-default);
-
-$theme: mc-dark-theme($primary, $second, $error, $info, $success, $warning);
+$theme: mc-dark-theme();
 
 // Include all typography for the components.
 @include mc-core();
