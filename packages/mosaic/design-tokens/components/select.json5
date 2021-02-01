@@ -1,6 +1,5 @@
 {
     "select": {
-        "color": {},
         "size": {
             "height": { "value": "30px" },
             "padding": { "value": "0 7px 0 15px" },
@@ -9,7 +8,6 @@
         "font": {}
     },
     "select-panel": {
-        "color": {},
         "size": {
             "max-height": { "value": "232px" },
             "max-width": { "value": "640px" },

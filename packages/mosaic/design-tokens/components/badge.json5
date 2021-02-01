@@ -1,6 +1,5 @@
 {
     "badge": {
-        "color": {},
         "size": {
             "min-width": { "value": "10px" },
             "padding": { "value": "4px 8px" },

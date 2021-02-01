@@ -41,7 +41,6 @@
         "font": {}
     },
     "toggle-small": {
-        "color": {},
         "size": {
             "height": { "value": "14px" },
             "width": { "value": "24px" },

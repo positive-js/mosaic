@@ -43,7 +43,6 @@
         "font": {}
     },
     "navbar-brand": {
-        "color": {},
         "size": {
             "padding": { "value": "12px" },
             "margin-right": { "value": "24px" }

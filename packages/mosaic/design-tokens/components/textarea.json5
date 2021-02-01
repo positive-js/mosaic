@@ -1,6 +1,5 @@
 {
     "textarea": {
-        "color": {},
         "size": {
             "min-height": { "value": "50px" },
             "padding": { "value": "5px 16px" }

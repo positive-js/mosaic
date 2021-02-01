@@ -22,7 +22,6 @@
         "font": {}
     },
     "modal-header": {
-        "color": {},
         "size": {
             "border-radius": { "value": "4px 4px 0 0" },
             "padding": { "value": "14px 16px" }
@@ -30,7 +29,6 @@
         "font": {}
     },
     "modal-body": {
-        "color": {},
         "size": {
             "max-height": { "value": "calc(100vh - 260px)" },
             "padding": { "value": "16px 24px 24px" }
@@ -38,7 +36,6 @@
         "font": {}
     },
     "modal-footer": {
-        "color": {},
         "size": {
             "border-radius": { "value": "0 0 4px 4px" },
             "padding": { "value": "16px" }
@@ -46,7 +43,6 @@
         "font": {}
     },
     "modal-confirm": {
-        "color": {},
         "size": {
             "padding": { "value": "24px" }
         },

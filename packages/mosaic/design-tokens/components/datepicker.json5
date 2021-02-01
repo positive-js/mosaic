@@ -1,6 +1,5 @@
 {
     "datepicker-toggle": {
-        "color": {},
         "size": {
             "width": { "value": "30px" },
             "height": { "value": "30px" }
@@ -8,7 +7,6 @@
         "font": {}
     },
     "datepicker-body": {
-        "color": {},
         "size": {
             "label": {
                 "padding-side": { "value": "33% / 7" }
@@ -23,7 +21,6 @@
         "font": {}
     },
     "datepicker-calendar": {
-        "color": {},
         "size": {
             "padding": { "value": "8px" },
             "divider-width": { "value": "1px" },

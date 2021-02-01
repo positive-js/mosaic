@@ -36,7 +36,6 @@
         "font": {}
     },
     "vertical-navbar-item": {
-        "color": {},
         "size": {
             "height": { "value": "64px" },
             "margin": { "value": "1px 0" },
@@ -48,7 +47,6 @@
         }
     },
     "navbar-badge": {
-        "color": {},
         "size": {
             "width": { "value": "64px" }
         },

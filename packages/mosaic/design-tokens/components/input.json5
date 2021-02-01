@@ -1,6 +1,5 @@
 {
     "input": {
-        "color": {},
         "size": {
             "padding": { "value": "5px 16px" },
             "width": { "value": "100%" },

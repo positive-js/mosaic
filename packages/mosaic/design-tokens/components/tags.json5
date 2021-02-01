@@ -105,7 +105,6 @@
         "font": {}
     },
     "tag-list": {
-        "color": {},
         "size": {
             "padding": { "value": "1px 6px" },
             "min-height": { "value": "28px" }
@@ -113,7 +112,6 @@
         "font": {}
     },
     "tag-input": {
-        "color": {},
         "size": {
             "height": { "value": "22px" },
             "margin": { "value": "2px 4px" }

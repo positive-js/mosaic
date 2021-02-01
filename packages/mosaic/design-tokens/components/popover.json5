@@ -19,14 +19,12 @@
         "font": {}
     },
     "popover-header": {
-        "color": {},
         "size": {
             "padding": { "value": "10px 16px" }
         },
         "font": {}
     },
     "popover-footer": {
-        "color": {},
         "size": {
             "padding": { "value": "12px 16px" },
             "margin-top": { "value": "8px" }

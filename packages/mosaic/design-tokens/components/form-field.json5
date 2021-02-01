@@ -40,7 +40,6 @@
         "font": {}
     },
     "form-field-hint": {
-        "color": {},
         "size": {
             "margin-top": { "value": "4px" }
         },

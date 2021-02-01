@@ -1,20 +1,17 @@
 {
     "dropdown-item": {
-        "color": {},
         "size": {
             "padding": { "value": "5px 15px" }
         },
         "font": {}
     },
     "dropdown-trigger": {
-        "color": {},
         "size": {
             "padding-left": { "value": "16px" }
         },
         "font": {}
     },
     "dropdown-panel": {
-        "color": {},
         "size": {
             "padding": { "value": "4px 0" },
             "border": {
