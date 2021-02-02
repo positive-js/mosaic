@@ -1,40 +1,46 @@
 {
-    "source": [
-        "packages/mosaic/design-tokens/properties/**/*.json5",
-        "packages/mosaic/design-tokens/components/**/*.json5"
+    source: [
+        'packages/mosaic/design-tokens/properties/**/*.json5',
+        'packages/mosaic/design-tokens/components/**/*.json5'
     ],
-    "platforms": {
-        "scss": {
-            "transformGroup": "mc/scss",
-            "files": [
+    platforms: {
+        scss: {
+            transformGroup: 'mc/scss',
+            files: [
                 {
-                    "destination": "_variables.scss",
-                    "format": "scss/variables",
-                    "filter": "notPalette"
+                    destination: '_variables.scss',
+                    format: 'scss/variables',
+                    filter: 'color'
                 },
                 {
-                    "destination": "_palette.scss",
-                    "format": "mc-scss/palette",
-                    "filter": "palette"
-                }
-            ]
-        },
-        "css": {
-            "transformGroup": "mc/css",
-            "files": [
+                    destination: '_palette.scss',
+                    format: 'mc-scss/palette',
+                    filter: 'palette'
+                },
                 {
-                    "destination": "css-tokens.css",
-                    "format": "css/variables",
-                    "filter": "notPalette",
-                    "prefix": "mc"
+                    destination: '_typography.scss',
+                    format: 'scss/map-deep',
+                    mapName: 'mosaic',
+                    filter: 'typography'
                 }
             ]
         },
-        "js": {
-            "transformGroup": "js",
-            "files": [{
-                "destination": "tokens.js",
-                "format": "javascript/es6"
+        css: {
+            transformGroup: 'mc/css',
+            files: [
+                {
+                    destination: 'css-tokens.css',
+                    format: 'css/variables',
+                    filter: 'color',
+                    prefix: 'mc'
+                }
+            ]
+        },
+        js: {
+            transformGroup: 'js',
+            files: [{
+                destination: 'tokens.js',
+                format: 'javascript/es6'
             }]
         }
     }

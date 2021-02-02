@@ -1,8 +1,7 @@
 {
-    "progress-spinner": {
-        "size": {
-            "size": { "value": "16px" }
-        },
-        "font": {}
+    'progress-spinner': {
+        size: {
+            size: { value: '16px' }
+        }
     }
 }

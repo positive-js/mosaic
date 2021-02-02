@@ -111,36 +111,19 @@ $mc-datepicker-today-fade-amount: 0.2;
 
 @mixin mc-datepicker-typography($config) {
     .mc-calendar {
-        font-family: mc-font-family($config);
-    }
-
-    .mc-calendar__body {
-        font-size: mc-font-size($config, body);
-    }
-
-    .mc-calendar__period-button {
-        font: {
-            size: mc-font-size($config, body);
-            weight: mc-font-weight($config, body);
-        }
-    }
-
-    .mc-calendar__body-label {
-        font: {
-            size: mc-font-size($config, body-strong);
-            weight: mc-font-weight($config, body-strong);
-        }
+        @include mc-typography-level-to-styles($config, $datepicker-calendar-font-default);
     }
 
     .mc-calendar__table-header th {
-        font: {
-            size: mc-font-size($config, caption);
-            weight: mc-font-weight($config, body);
-        }
+        @include mc-typography-level-to-styles($config, $datepicker-calendar-font-header);
+    }
+
+    .mc-calendar__body-label {
+        @include mc-typography-level-to-styles($config, $datepicker-body-font-label);
         line-height: mc-font-size($config, caption);
     }
 
     .mc-calendar__body-today {
-        font-weight: mc-font-weight($config, body-strong);
+        @include mc-typography-level-to-styles($config, $datepicker-body-font-today);
     }
 }

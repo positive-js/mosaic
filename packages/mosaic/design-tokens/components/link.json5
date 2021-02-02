@@ -1,58 +1,59 @@
 {
-    "link": {
-        "light-color-scheme": {
-            "text": { "value": "{light-color-scheme.primary.default.value}" },
+    link: {
+        'light-color-scheme': {
+            text: { value: '{light-color-scheme.primary.default.value}' },
 
-            "state-hover": {
-                "text": { "value": "{light-color-scheme.primary.palette.value.600.value}" }
+            'state-hover': {
+                text: { value: '{light-color-scheme.primary.palette.value.600.value}' }
             },
-            "state-focused": {
-                "outline": { "value": "{light-color-scheme.states.focused-color.value}" }
+            'state-focused': {
+                outline: { value: '{light-color-scheme.states.focused-color.value}' }
             },
 
-            "dashed": {
-                "border-bottom": { "value": "rgba({light-color-scheme.primary.default.value}, 0.5)" },
+            dashed: {
+                'border-bottom': { value: 'rgba({light-color-scheme.primary.default.value}, 0.5)' },
 
-                "state-hover": {
-                    "border-bottom": { "value": "rgba({light-color-scheme.primary.palette.value.600.value}, 0.5)" }
+                'state-hover': {
+                    'border-bottom': { value: 'rgba({light-color-scheme.primary.palette.value.600.value}, 0.5)' }
                 }
             },
 
-            "underlined": {
-                "border-bottom": { "value": "rgba({light-color-scheme.primary.default.value}, 0.32)" },
+            underlined: {
+                'border-bottom': { value: 'rgba({light-color-scheme.primary.default.value}, 0.32)' },
 
-                "state-hover": {
-                    "border-bottom": { "value": "rgba({light-color-scheme.primary.palette.value.600.value}, 0.32)" }
-                }
-            }
-        },
-        "dark-color-scheme": {
-            "text": { "value": "{light-color-scheme.primary.default.value}" },
-
-            "state-hover": {
-                "text": { "value": "{dark-color-scheme.primary.palette.value.300.value}" }
-            },
-
-            "state-focused": {
-                "outline": { "value": "{dark-color-scheme.states.focused-color.value}" }
-            },
-
-            "dashed": {
-                "border-bottom": { "value": "rgba({light-color-scheme.primary.default.value}, 0.5)" },
-
-                "state-hover": {
-                    "border-bottom": { "value": "rgba({light-color-scheme.primary.palette.value.300.value}, 0.5)" }
-                }
-            },
-            "underlined": {
-                "border-bottom": { "value": "rgba({light-color-scheme.primary.default.value}, 0.32)" },
-
-                "state-hover": {
-                    "border-bottom": { "value": "rgba({light-color-scheme.primary.palette.value.300.value}, 0.32)" }
+                'state-hover': {
+                    'border-bottom': { value: 'rgba({light-color-scheme.primary.palette.value.600.value}, 0.32)' }
                 }
             }
         },
-        "size": {},
-        "font": {}
+        'dark-color-scheme': {
+            text: { value: '{light-color-scheme.primary.default.value}' },
+
+            'state-hover': {
+                text: { value: '{dark-color-scheme.primary.palette.value.300.value}' }
+            },
+
+            'state-focused': {
+                outline: { value: '{dark-color-scheme.states.focused-color.value}' }
+            },
+
+            dashed: {
+                'border-bottom': { value: 'rgba({light-color-scheme.primary.default.value}, 0.5)' },
+
+                'state-hover': {
+                    'border-bottom': { value: 'rgba({light-color-scheme.primary.palette.value.300.value}, 0.5)' }
+                }
+            },
+            underlined: {
+                'border-bottom': { value: 'rgba({light-color-scheme.primary.default.value}, 0.32)' },
+
+                'state-hover': {
+                    'border-bottom': { value: 'rgba({light-color-scheme.primary.palette.value.300.value}, 0.32)' }
+                }
+            }
+        },
+        font: {
+            default: { value: 'body' }
+        }
     }
 }

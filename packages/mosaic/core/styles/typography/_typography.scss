@@ -4,150 +4,30 @@
 
 @function mc-typography-config(
     $font-family: map-get(map-get($fonts, base), font-family),
-    $font-family-mono: map-get(map-get($fonts, monospace), font-family),
-
-    $display-1: mc-typography-level(
-        $typography-display-1-font-size,
-        $typography-display-1-line-height,
-        $typography-display-1-letter-spacing,
-        $typography-display-1-font-weight,
-        $typography-display-1-font-family,
-        $typography-display-1-text-transform
-    ),
-    $display-2: mc-typography-level(
-        $typography-display-2-font-size,
-        $typography-display-2-line-height,
-        $typography-display-2-letter-spacing,
-        $typography-display-2-font-weight,
-        $typography-display-2-font-family,
-        $typography-display-2-text-transform
-    ),
-    $display-3: mc-typography-level(
-        $typography-display-3-font-size,
-        $typography-display-3-line-height,
-        $typography-display-3-letter-spacing,
-        $typography-display-3-font-weight,
-        $typography-display-3-font-family,
-        $typography-display-3-text-transform
-    ),
-    $headline: mc-typography-level(
-        $typography-headline-font-size,
-        $typography-headline-line-height,
-        $typography-headline-letter-spacing,
-        $typography-headline-font-weight,
-        $typography-headline-font-family,
-        $typography-headline-text-transform
-    ),
-    $title: mc-typography-level(
-        $typography-title-font-size,
-        $typography-title-line-height,
-        $typography-title-letter-spacing,
-        $typography-title-font-weight,
-        $typography-title-font-family,
-        $typography-title-text-transform
-    ),
-    $subheading: mc-typography-level(
-        $typography-subheading-font-size,
-        $typography-subheading-line-height,
-        $typography-subheading-letter-spacing,
-        $typography-subheading-font-weight,
-        $typography-subheading-font-family,
-        $typography-subheading-text-transform
-    ),
-    $body: mc-typography-level(
-        $typography-body-font-size,
-        $typography-body-line-height,
-        $typography-body-letter-spacing,
-        $typography-body-font-weight,
-        $typography-body-font-family,
-        $typography-body-text-transform
-    ),
-    $body-strong: mc-typography-level(
-        $typography-body-strong-font-size,
-        $typography-body-strong-line-height,
-        $typography-body-strong-letter-spacing,
-        $typography-body-strong-font-weight,
-        $typography-body-strong-font-family,
-        $typography-body-strong-text-transform
-    ),
-    $body-caps: mc-typography-level(
-        $typography-body-caps-font-size,
-        $typography-body-caps-line-height,
-        $typography-body-caps-letter-spacing,
-        $typography-body-caps-font-weight,
-        $typography-body-caps-font-family,
-        $typography-body-caps-text-transform
-    ),
-    $body-mono: mc-typography-level(
-        $typography-body-mono-font-size,
-        $typography-body-mono-line-height,
-        $typography-body-mono-letter-spacing,
-        $typography-body-mono-font-weight,
-        $typography-body-mono-font-family,
-        $typography-body-mono-text-transform
-    ),
-    $caption: mc-typography-level(
-        $typography-caption-font-size,
-        $typography-caption-line-height,
-        $typography-caption-letter-spacing,
-        $typography-caption-font-weight,
-        $typography-caption-font-family,
-        $typography-caption-text-transform
-    ),
-    $caption-caps: mc-typography-level(
-        $typography-caption-caps-font-size,
-        $typography-caption-caps-line-height,
-        $typography-caption-caps-letter-spacing,
-        $typography-caption-caps-font-weight,
-        $typography-caption-caps-font-family,
-        $typography-caption-caps-text-transform
-    ),
-    $caption-mono: mc-typography-level(
-        $typography-caption-mono-font-size,
-        $typography-caption-mono-line-height,
-        $typography-caption-mono-letter-spacing,
-        $typography-caption-mono-font-weight,
-        $typography-caption-mono-font-family,
-        $typography-caption-mono-text-transform
-    ),
-    $small-text: mc-typography-level(
-        $typography-small-text-font-size,
-        $typography-small-text-line-height,
-        $typography-small-text-letter-spacing,
-        $typography-small-text-font-weight,
-        $typography-small-text-font-family,
-        $typography-small-text-text-transform
-    ),
-    $extra-small-text: mc-typography-level(
-        $typography-extra-small-text-font-size,
-        $typography-extra-small-text-line-height,
-        $typography-extra-small-text-letter-spacing,
-        $typography-extra-small-text-font-weight,
-        $typography-extra-small-text-font-family,
-        $typography-extra-small-text-text-transform
-    )
+    $font-family-mono: map-get(map-get($fonts, monospace), font-family)
 ) {
+    $typography: map-get($mosaic, typography);
 
     $config: (
-        display-1:      $display-1,
-        display-2:      $display-2,
-        display-3:      $display-3,
+        display-1:          map-get($typography, display-1),
+        display-2:          map-get($typography, display-2),
+        display-3:          map-get($typography, display-3),
 
-        headline:       $headline,
-        subheading:     $subheading,
-        title:          $title,
+        headline:           map-get($typography, headline),
+        subheading:         map-get($typography, subheading),
+        title:              map-get($typography, title),
 
-        body:           $body,
-        body-strong:    $body-strong,
-        body-caps:      $body-caps,
-        body-mono:      $body-mono,
+        body:               map-get($typography, body),
+        body-strong:        map-get($typography, body-strong),
+        body-caps:          map-get($typography, body-caps),
+        body-mono:          map-get($typography, body-mono),
 
-        caption:        $caption,
-        caption-caps:   $caption-caps,
-        caption-mono:   $caption-mono,
+        caption:            map-get($typography, caption),
+        caption-caps:       map-get($typography, caption-caps),
+        caption-mono:       map-get($typography, caption-mono),
 
-        small-text:     $small-text,
-        extra-small-text: $extra-small-text
+        small-text:         map-get($typography, small-text),
+        extra-small-text:   map-get($typography, extra-small-text)
     );
 
     @each $key, $level in $config {

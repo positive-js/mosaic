@@ -1,24 +1,25 @@
 {
-    "dropdown-item": {
-        "size": {
-            "padding": { "value": "5px 15px" }
+    'dropdown-item': {
+        size: {
+            padding: { value: '5px 15px' }
         },
-        "font": {}
+        font: {
+            default: { value: 'body' },
+            caption: { value: 'caption' }
+        }
     },
-    "dropdown-trigger": {
-        "size": {
-            "padding-left": { "value": "16px" }
-        },
-        "font": {}
+    'dropdown-trigger': {
+        size: {
+            'padding-left': { value: '16px' }
+        }
     },
-    "dropdown-panel": {
-        "size": {
-            "padding": { "value": "4px 0" },
-            "border": {
-                "width": {"value": "1px" },
-                "radius": {"value": "3px" }
+    'dropdown-panel': {
+        size: {
+            padding: { value: '4px 0' },
+            border: {
+                width: { value: '1px' },
+                radius: { value: '3px' }
             }
-        },
-        "font": {}
+        }
     }
 }

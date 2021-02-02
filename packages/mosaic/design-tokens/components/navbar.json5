@@ -1,52 +1,55 @@
 {
-    "navbar": {
-        "light-color-scheme": {
-            "background": { "value": "{light-color-scheme.primary.palette.value.700.value}" },
-            "text": { "value": "{light-color-scheme.primary.palette.value.100.value}" },
-            "opacity": { "value": 0.5 }
+    navbar: {
+        'light-color-scheme': {
+            background: { value: '{light-color-scheme.primary.palette.value.700.value}' },
+            text: { value: '{light-color-scheme.primary.palette.value.100.value}' },
+            opacity: { value: 0.5 }
         },
-        "dark-color-scheme": {
-            "background": { "value": "{dark-color-scheme.primary.palette.value.700.value}" },
-            "text": { "value": "{dark-color-scheme.primary.palette.value.100.value}" },
-            "opacity": { "value": 0.5 }
+        'dark-color-scheme': {
+            background: { value: '{dark-color-scheme.primary.palette.value.700.value}' },
+            text: { value: '{dark-color-scheme.primary.palette.value.100.value}' },
+            opacity: { value: 0.5 }
         },
-        "size": {
-            "height": { "value": "48px" },
-            "icon-margin-left": { "value": "8px" }
+        size: {
+            height: { value: '48px' },
+            'icon-margin-left': { value: '8px' }
         },
-        "font": {}
+        font: {
+            title: { value: 'body' }
+        }
     },
-    "navbar-item": {
-        "light-color-scheme": {
-            "text": { "value": "{light-color-scheme.primary.palette.value.100.value}" },
+    'navbar-item': {
+        'light-color-scheme': {
+            text: { value: '{light-color-scheme.primary.palette.value.100.value}' },
 
-            "states": {
-                "active": { "value": "lighten({light-color-scheme.primary.palette.value.600.value}, 5%)" },
-                "hover": { "value": "lighten({light-color-scheme.primary.palette.value.600.value}, 5%)" },
-                "progress": { "value": "lighten({light-color-scheme.primary.palette.value.800.value}, 5%)" },
-                "disabled-opacity": { "value": 0.3 }
+            states: {
+                active: { value: 'lighten({light-color-scheme.primary.palette.value.600.value}, 5%)' },
+                hover: { value: 'lighten({light-color-scheme.primary.palette.value.600.value}, 5%)' },
+                progress: { value: 'lighten({light-color-scheme.primary.palette.value.800.value}, 5%)' },
+                'disabled-opacity': { value: 0.3 }
             }
         },
-        "dark-color-scheme": {
-            "text": { "value": "{dark-color-scheme.primary.palette.value.100.value}" },
+        'dark-color-scheme': {
+            text: { value: '{dark-color-scheme.primary.palette.value.100.value}' },
 
-            "states": {
-                "active": { "value": "lighten({dark-color-scheme.primary.palette.value.700.value}, 5%)" },
-                "hover": { "value": "lighten({dark-color-scheme.primary.palette.value.700.value}, 5%)" },
-                "progress": { "value": "lighten({dark-color-scheme.primary.palette.value.800.value}, 15%)" },
-                "disabled-opacity": { "value": 0.3 }
+            states: {
+                active: { value: 'lighten({dark-color-scheme.primary.palette.value.700.value}, 5%)' },
+                hover: { value: 'lighten({dark-color-scheme.primary.palette.value.700.value}, 5%)' },
+                progress: { value: 'lighten({dark-color-scheme.primary.palette.value.800.value}, 15%)' },
+                'disabled-opacity': { value: 0.3 }
             }
         },
-        "size": {
-            "padding": { "value": "16px" }
-        },
-        "font": {}
+        size: {
+            padding: { value: '16px' }
+        }
     },
-    "navbar-brand": {
-        "size": {
-            "padding": { "value": "12px" },
-            "margin-right": { "value": "24px" }
+    'navbar-brand': {
+        size: {
+            padding: { value: '12px' },
+            'margin-right': { value: '24px' }
         },
-        "font": {}
+        font: {
+            title: { value: 'title' }
+        }
     }
 }

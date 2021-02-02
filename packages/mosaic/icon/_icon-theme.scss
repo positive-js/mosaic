@@ -86,13 +86,3 @@
     }
 }
 
-@mixin mc-icon-typography($config) {
-    .mc-icon {
-        font: {
-            size:   mc-font-size($config, button);
-            family: mc-font-family($config, button);
-            weight: mc-font-weight($config, button);
-        }
-    }
-}
-

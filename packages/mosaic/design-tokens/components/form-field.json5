@@ -1,48 +1,52 @@
 {
-    "form-field": {
-        "light-color-scheme": {
-            "border": { "value": "{light-color-scheme.second.default.value}" },
-            "background": { "value": "{light-color-scheme.background.background.value}" },
+    'form-field': {
+        'light-color-scheme': {
+            border: { value: '{light-color-scheme.second.default.value}' },
+            background: { value: '{light-color-scheme.background.background.value}' },
 
-            "states": {
-                "hover": {
-                    "border": { "value": "{light-color-scheme.second.palette.value.400.value}" }
+            states: {
+                hover: {
+                    border: { value: '{light-color-scheme.second.palette.value.400.value}' }
                 },
-                "invalid": {
-                    "border": { "value": "{light-color-scheme.error.default.value}" },
-                    "background": { "value": "transparent" }
+                invalid: {
+                    border: { value: '{light-color-scheme.error.default.value}' },
+                    background: { value: 'transparent' }
                 }
             }
         },
-        "dark-color-scheme": {
-            "border": { "value": "{dark-color-scheme.second.default.value}" },
-            "background": { "value": "{dark-color-scheme.background.background.value}" },
+        'dark-color-scheme': {
+            border: { value: '{dark-color-scheme.second.default.value}' },
+            background: { value: '{dark-color-scheme.background.background.value}' },
 
-            "states": {
-                "hover": {
-                    "border": { "value": "{dark-color-scheme.second.palette.value.200.value}" }
+            states: {
+                hover: {
+                    border: { value: '{dark-color-scheme.second.palette.value.200.value}' }
                 },
-                "invalid": {
-                    "border": { "value": "{dark-color-scheme.error.default.value}" },
-                    "background": { "value": "transparent" }
+                invalid: {
+                    border: { value: '{dark-color-scheme.error.default.value}' },
+                    background: { value: 'transparent' }
                 }
             }
         },
-        "size": {
-            "border": {
-                "width": { "value": "1px" },
-                "radius": { "value": "3px" }
+        size: {
+            border: {
+                width: { value: '1px' },
+                radius: { value: '3px' }
             },
-            "button": {
-                "width": { "value": "32px" }
+            button: {
+                width: { value: '32px' }
             }
         },
-        "font": {}
+        font: {
+            default: { value: 'body' }
+        }
     },
-    "form-field-hint": {
-        "size": {
-            "margin-top": { "value": "4px" }
+    'form-field-hint': {
+        size: {
+            'margin-top': { value: '4px' }
         },
-        "font": {}
+        font: {
+            default: { value: 'caption' }
+        }
     }
 }

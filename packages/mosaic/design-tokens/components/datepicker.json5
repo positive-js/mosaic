@@ -1,35 +1,40 @@
 {
-    "datepicker-toggle": {
-        "size": {
-            "width": { "value": "30px" },
-            "height": { "value": "30px" }
-        },
-        "font": {}
+    'datepicker-toggle': {
+        size: {
+            width: { value: '30px' },
+            height: { value: '30px' }
+        }
     },
-    "datepicker-body": {
-        "size": {
-            "label": {
-                "padding-side": { "value": "33% / 7" }
+    'datepicker-body': {
+        size: {
+            label: {
+                'padding-side': { value: '33% / 7' }
             },
-            "cell": {
-                "min-size": { "value": "32px" },
-                "margin": { "value": "5%" },
-                "padding": { "value": "8px" },
-                "border-width": { "value": "1px" }
+            cell: {
+                'min-size': { value: '32px' },
+                margin: { value: '5%' },
+                padding: { value: '8px' },
+                'border-width': { value: '1px' }
             }
         },
-        "font": {}
+        font: {
+            label: { value: 'body-strong' },
+            today: { value: 'body-strong' }
+        }
     },
-    "datepicker-calendar": {
-        "size": {
-            "padding": { "value": "8px" },
-            "divider-width": { "value": "1px" },
-            "icon": {
-                "border-width": { "value": "2px" },
-                "prev-icon-transform": { "value": "translateX(2px) rotate(-45deg)" },
-                "nex-icon-transform": { "value": "translateX(-2px) rotate(45deg)" }
+    'datepicker-calendar': {
+        size: {
+            padding: { value: '8px' },
+            'divider-width': { value: '1px' },
+            icon: {
+                'border-width': { value: '2px' },
+                'prev-icon-transform': { value: 'translateX(2px) rotate(-45deg)' },
+                'nex-icon-transform': { value: 'translateX(-2px) rotate(45deg)' }
             }
         },
-        "font": {}
+        font: {
+            default: { value: 'body' },
+            header: { value: 'caption' }
+        }
     }
 }

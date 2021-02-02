@@ -4,9 +4,9 @@
 
 @mixin card-type($card) {
     box-shadow:
-        inset -1px 0 0 0 map-get($card, shadow-color),
-        inset 0 1px 0 0 map-get($card, shadow-color),
-        inset 0 -1px 0 0 map-get($card, shadow-color);
+        inset -1px 0 0 0 map-get($card, shadow),
+        inset 0 1px 0 0 map-get($card, shadow),
+        inset 0 -1px 0 0 map-get($card, shadow);
 
     background-color: map-get($card, background);
 

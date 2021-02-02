@@ -1,11 +1,14 @@
 {
-    "badge": {
-        "size": {
-            "min-width": { "value": "10px" },
-            "padding": { "value": "4px 8px" },
-            "border-width": { "value": "1px" },
-            "border-radius": { "value": "4px" }
+    badge: {
+        size: {
+            'min-width': { value: '10px' },
+            padding: { value: '4px 8px' },
+            'border-width': { value: '1px' },
+            'border-radius': { value: '4px' }
         },
-        "font": {}
+        font: {
+            default: { value: 'body' },
+            caps: { value: 'caption' }
+        }
     }
 }

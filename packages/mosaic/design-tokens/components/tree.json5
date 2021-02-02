@@ -1,12 +1,11 @@
 {
-    "tree": {
-        "color": {
-            "background": { "value": "{light-color-scheme.second.palette.value.700.value}" }
+    tree: {
+        size: {
+            'border-width': { value: '2px' },
+            'node-height': { value: '28px' }
         },
-        "size": {
-            "border-width": { "value": "2px" },
-            "node-height": { "value": "28px" }
-        },
-        "font": {}
+        font: {
+            node: { value: 'body' }
+        }
     }
 }

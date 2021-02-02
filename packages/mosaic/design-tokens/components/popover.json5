@@ -1,34 +1,40 @@
 {
-    "popover": {
-        "light-color-scheme": {
-            "border": { "value": "{light-color-scheme.foreground.border.value}" }
+    popover: {
+        'light-color-scheme': {
+            border: { value: '{light-color-scheme.foreground.border.value}' }
         },
-        "dark-color-scheme": {
-            "border": { "value": "{dark-color-scheme.second.palette.value.700.value}" }
+        'dark-color-scheme': {
+            border: { value: '{dark-color-scheme.second.palette.value.700.value}' }
         },
-        "size": {
-            "padding": { "value": "16px" },
-            "border-width": { "value": "1px" },
-            "border-radius": { "value": "4px" },
-            "arrow-width": { "value": "4px" },
+        size: {
+            padding: { value: '16px' },
+            'border-width': { value: '1px' },
+            'border-radius': { value: '4px' },
+            'arrow-width': { value: '4px' },
 
-            "small-width": { "value": "200px" },
-            "normal-width": { "value": "400px" },
-            "large-width": { "value": "640px" }
+            'small-width': { value: '200px' },
+            'normal-width': { value: '400px' },
+            'large-width': { value: '640px' }
         },
-        "font": {}
+        font: {
+            default: { value: 'body' }
+        }
     },
-    "popover-header": {
-        "size": {
-            "padding": { "value": "10px 16px" }
+    'popover-header': {
+        size: {
+            padding: { value: '10px 16px' }
         },
-        "font": {}
+        font: {
+            default: { value: 'subheading' }
+        }
     },
-    "popover-footer": {
-        "size": {
-            "padding": { "value": "12px 16px" },
-            "margin-top": { "value": "8px" }
+    'popover-footer': {
+        size: {
+            padding: { value: '12px 16px' },
+            'margin-top': { value: '8px' }
         },
-        "font": {}
+        font: {
+            default: { value: 'body' }
+        }
     }
 }

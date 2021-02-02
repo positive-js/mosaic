@@ -1,12 +1,15 @@
 {
-    "table": {
-        "size": {
-            "border-width": { "value": "1px" },
-            "row-padding": {
-                "vertical": { "value": "8px" },
-                "horizontal": { "value": "16px" }
+    table: {
+        size: {
+            'border-width': { value: '1px' },
+            'row-padding': {
+                vertical: { value: '8px' },
+                horizontal: { value: '16px' }
             }
         },
-        "font": {}
+        font: {
+            header: { value: 'caption' },
+            body: { value: 'body' }
+        }
     }
 }

@@ -1,20 +1,24 @@
 {
-    "select": {
-        "size": {
-            "height": { "value": "30px" },
-            "padding": { "value": "0 7px 0 15px" },
-            "padding-left-multiple": { "value": "7px" }
+    select: {
+        size: {
+            height: { value: '30px' },
+            padding: { value: '0 7px 0 15px' },
+            'padding-left-multiple': { value: '7px' }
         },
-        "font": {}
+        font: {
+            default: { value: 'body' }
+        }
     },
-    "select-panel": {
-        "size": {
-            "max-height": { "value": "232px" },
-            "max-width": { "value": "640px" },
-            "vertical-padding": { "value": "4px" },
-            "border-width": { "value": "1px" },
-            "border-radius": { "value": "3px" }
+    'select-panel': {
+        size: {
+            'max-height': { value: '232px' },
+            'max-width': { value: '640px' },
+            'vertical-padding': { value: '4px' },
+            'border-width': { value: '1px' },
+            'border-radius': { value: '3px' }
         },
-        "font": {}
+        font: {
+            default: { value: 'body' }
+        }
     }
 }

@@ -1,0 +1,221 @@
+
+/*
+  Do not edit directly
+  Generated on Tue, 02 Feb 2021 12:59:30 GMT
+*/
+
+$typography-display-1-font-size: 56px !default;
+$typography-display-1-line-height: 76px !default;
+$typography-display-1-letter-spacing: -0.4px !default;
+$typography-display-1-font-weight: normal !default;
+$typography-display-1-font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !default;
+$typography-display-1-text-transform: null !default;
+$typography-display-2-font-size: 45px !default;
+$typography-display-2-line-height: 56px !default;
+$typography-display-2-letter-spacing: normal !default;
+$typography-display-2-font-weight: normal !default;
+$typography-display-2-font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !default;
+$typography-display-2-text-transform: null !default;
+$typography-display-3-font-size: 34px !default;
+$typography-display-3-line-height: 44px !default;
+$typography-display-3-letter-spacing: 0.25px !default;
+$typography-display-3-font-weight: normal !default;
+$typography-display-3-font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !default;
+$typography-display-3-text-transform: null !default;
+$typography-headline-font-size: 24px !default;
+$typography-headline-line-height: 32px !default;
+$typography-headline-letter-spacing: normal !default;
+$typography-headline-font-weight: normal !default;
+$typography-headline-font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !default;
+$typography-headline-text-transform: null !default;
+$typography-title-font-size: 20px !default;
+$typography-title-line-height: 28px !default;
+$typography-title-letter-spacing: 0.15px !default;
+$typography-title-font-weight: 500 !default;
+$typography-title-font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !default;
+$typography-title-text-transform: null !default;
+$typography-subheading-font-size: 15px !default;
+$typography-subheading-line-height: 20px !default;
+$typography-subheading-letter-spacing: 0.15px !default;
+$typography-subheading-font-weight: 700 !default;
+$typography-subheading-font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !default;
+$typography-subheading-text-transform: null !default;
+$typography-body-font-size: 15px !default;
+$typography-body-line-height: 20px !default;
+$typography-body-letter-spacing: 0.15px !default;
+$typography-body-font-weight: normal !default;
+$typography-body-font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !default;
+$typography-body-text-transform: null !default;
+$typography-body-strong-font-size: 15px !default;
+$typography-body-strong-line-height: 20px !default;
+$typography-body-strong-letter-spacing: 0.15px !default;
+$typography-body-strong-font-weight: 500 !default;
+$typography-body-strong-font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !default;
+$typography-body-strong-text-transform: null !default;
+$typography-body-caps-font-size: 15px !default;
+$typography-body-caps-line-height: 20px !default;
+$typography-body-caps-letter-spacing: 1.7px !default;
+$typography-body-caps-font-weight: normal !default;
+$typography-body-caps-font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !default;
+$typography-body-caps-text-transform: uppercase !default;
+$typography-body-mono-font-size: 15px !default;
+$typography-body-mono-line-height: 20px !default;
+$typography-body-mono-letter-spacing: normal !default;
+$typography-body-mono-font-weight: normal !default;
+$typography-body-mono-font-family: 'Roboto Mono', 'Consolas', 'Menlo', 'Monaco', monospace !default;
+$typography-body-mono-text-transform: null !default;
+$typography-caption-font-size: 13px !default;
+$typography-caption-line-height: 16px !default;
+$typography-caption-letter-spacing: 0.25px !default;
+$typography-caption-font-weight: normal !default;
+$typography-caption-font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !default;
+$typography-caption-text-transform: null !default;
+$typography-caption-caps-font-size: 13px !default;
+$typography-caption-caps-line-height: 16px !default;
+$typography-caption-caps-letter-spacing: 1.5px !default;
+$typography-caption-caps-font-weight: normal !default;
+$typography-caption-caps-font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !default;
+$typography-caption-caps-text-transform: uppercase !default;
+$typography-caption-mono-font-size: 13px !default;
+$typography-caption-mono-line-height: 16px !default;
+$typography-caption-mono-letter-spacing: normal !default;
+$typography-caption-mono-font-weight: normal !default;
+$typography-caption-mono-font-family: 'Roboto Mono', 'Consolas', 'Menlo', 'Monaco', monospace !default;
+$typography-caption-mono-text-transform: null !default;
+$typography-small-text-font-size: 13px !default;
+$typography-small-text-line-height: 16px !default;
+$typography-small-text-letter-spacing: 0.25px !default;
+$typography-small-text-font-weight: normal !default;
+$typography-small-text-font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !default;
+$typography-small-text-text-transform: null !default;
+$typography-extra-small-text-font-size: 11px !default;
+$typography-extra-small-text-line-height: 16px !default;
+$typography-extra-small-text-letter-spacing: 0.22px !default;
+$typography-extra-small-text-font-weight: normal !default;
+$typography-extra-small-text-font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !default;
+$typography-extra-small-text-text-transform: null !default;
+
+$mosaic: (
+  'typography': (
+    'display-1': (
+      'font-size': $typography-display-1-font-size,
+      'line-height': $typography-display-1-line-height,
+      'letter-spacing': $typography-display-1-letter-spacing,
+      'font-weight': $typography-display-1-font-weight,
+      'font-family': $typography-display-1-font-family,
+      'text-transform': $typography-display-1-text-transform
+    ),
+    'display-2': (
+      'font-size': $typography-display-2-font-size,
+      'line-height': $typography-display-2-line-height,
+      'letter-spacing': $typography-display-2-letter-spacing,
+      'font-weight': $typography-display-2-font-weight,
+      'font-family': $typography-display-2-font-family,
+      'text-transform': $typography-display-2-text-transform
+    ),
+    'display-3': (
+      'font-size': $typography-display-3-font-size,
+      'line-height': $typography-display-3-line-height,
+      'letter-spacing': $typography-display-3-letter-spacing,
+      'font-weight': $typography-display-3-font-weight,
+      'font-family': $typography-display-3-font-family,
+      'text-transform': $typography-display-3-text-transform
+    ),
+    'headline': (
+      'font-size': $typography-headline-font-size,
+      'line-height': $typography-headline-line-height,
+      'letter-spacing': $typography-headline-letter-spacing,
+      'font-weight': $typography-headline-font-weight,
+      'font-family': $typography-headline-font-family,
+      'text-transform': $typography-headline-text-transform
+    ),
+    'title': (
+      'font-size': $typography-title-font-size,
+      'line-height': $typography-title-line-height,
+      'letter-spacing': $typography-title-letter-spacing,
+      'font-weight': $typography-title-font-weight,
+      'font-family': $typography-title-font-family,
+      'text-transform': $typography-title-text-transform
+    ),
+    'subheading': (
+      'font-size': $typography-subheading-font-size,
+      'line-height': $typography-subheading-line-height,
+      'letter-spacing': $typography-subheading-letter-spacing,
+      'font-weight': $typography-subheading-font-weight,
+      'font-family': $typography-subheading-font-family,
+      'text-transform': $typography-subheading-text-transform
+    ),
+    'body': (
+      'font-size': $typography-body-font-size,
+      'line-height': $typography-body-line-height,
+      'letter-spacing': $typography-body-letter-spacing,
+      'font-weight': $typography-body-font-weight,
+      'font-family': $typography-body-font-family,
+      'text-transform': $typography-body-text-transform
+    ),
+    'body-strong': (
+      'font-size': $typography-body-strong-font-size,
+      'line-height': $typography-body-strong-line-height,
+      'letter-spacing': $typography-body-strong-letter-spacing,
+      'font-weight': $typography-body-strong-font-weight,
+      'font-family': $typography-body-strong-font-family,
+      'text-transform': $typography-body-strong-text-transform
+    ),
+    'body-caps': (
+      'font-size': $typography-body-caps-font-size,
+      'line-height': $typography-body-caps-line-height,
+      'letter-spacing': $typography-body-caps-letter-spacing,
+      'font-weight': $typography-body-caps-font-weight,
+      'font-family': $typography-body-caps-font-family,
+      'text-transform': $typography-body-caps-text-transform
+    ),
+    'body-mono': (
+      'font-size': $typography-body-mono-font-size,
+      'line-height': $typography-body-mono-line-height,
+      'letter-spacing': $typography-body-mono-letter-spacing,
+      'font-weight': $typography-body-mono-font-weight,
+      'font-family': $typography-body-mono-font-family,
+      'text-transform': $typography-body-mono-text-transform
+    ),
+    'caption': (
+      'font-size': $typography-caption-font-size,
+      'line-height': $typography-caption-line-height,
+      'letter-spacing': $typography-caption-letter-spacing,
+      'font-weight': $typography-caption-font-weight,
+      'font-family': $typography-caption-font-family,
+      'text-transform': $typography-caption-text-transform
+    ),
+    'caption-caps': (
+      'font-size': $typography-caption-caps-font-size,
+      'line-height': $typography-caption-caps-line-height,
+      'letter-spacing': $typography-caption-caps-letter-spacing,
+      'font-weight': $typography-caption-caps-font-weight,
+      'font-family': $typography-caption-caps-font-family,
+      'text-transform': $typography-caption-caps-text-transform
+    ),
+    'caption-mono': (
+      'font-size': $typography-caption-mono-font-size,
+      'line-height': $typography-caption-mono-line-height,
+      'letter-spacing': $typography-caption-mono-letter-spacing,
+      'font-weight': $typography-caption-mono-font-weight,
+      'font-family': $typography-caption-mono-font-family,
+      'text-transform': $typography-caption-mono-text-transform
+    ),
+    'small-text': (
+      'font-size': $typography-small-text-font-size,
+      'line-height': $typography-small-text-line-height,
+      'letter-spacing': $typography-small-text-letter-spacing,
+      'font-weight': $typography-small-text-font-weight,
+      'font-family': $typography-small-text-font-family,
+      'text-transform': $typography-small-text-text-transform
+    ),
+    'extra-small-text': (
+      'font-size': $typography-extra-small-text-font-size,
+      'line-height': $typography-extra-small-text-line-height,
+      'letter-spacing': $typography-extra-small-text-letter-spacing,
+      'font-weight': $typography-extra-small-text-font-weight,
+      'font-family': $typography-extra-small-text-font-family,
+      'text-transform': $typography-extra-small-text-text-transform
+    )
+  )
+);

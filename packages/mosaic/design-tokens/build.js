@@ -23,7 +23,14 @@ StyleDictionary.registerTransform({
     name: 'mc-attribute/palette',
     type: 'attribute',
     matcher: (prop) => prop.name === 'palette',
-    transformer: (prop) => ({ palette: prop.value })
+    transformer: (prop) => ({ palette: true })
+});
+
+StyleDictionary.registerTransform({
+    name: 'mc-attribute/typography',
+    type: 'attribute',
+    matcher: (prop) => prop.attributes.category === 'typography',
+    transformer: (prop) => ({ typography: true })
 });
 
 StyleDictionary.registerTransform({
@@ -51,6 +58,7 @@ StyleDictionary.registerTransformGroup({
     transforms: [
         'attribute/cti',
         'mc-attribute/palette',
+        'mc-attribute/typography',
         'name/cti/kebab'
     ]
 });
@@ -72,10 +80,14 @@ StyleDictionary.registerFilter({
 })
 
 StyleDictionary.registerFilter({
-    name: 'notPalette',
-    matcher: (prop) => !prop.attributes.palette
+    name: 'typography',
+    matcher: (prop) => prop.attributes.typography
 })
 
+StyleDictionary.registerFilter({
+    name: 'color',
+    matcher: (prop) => !prop.attributes.palette && !prop.attributes.typography
+})
 
 // APPLY THE CONFIGURATION
 // IMPORTANT: the registration of custom transforms
