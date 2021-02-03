@@ -133,7 +133,9 @@ export class McFormField extends McFormFieldMixinBase implements
     }
 
     get canShowStepper(): boolean {
-        return this.control && !this.disabled && (this.control.focused || this.hovered);
+        return this.hasStepper &&
+            !this.disabled &&
+            (this.control?.focused || this.hovered);
     }
 
     // tslint:disable-next-line:naming-convention
