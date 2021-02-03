@@ -30,15 +30,22 @@
     @return rgba($color, $opacity);
 }
 
-@function mc-light-theme() {
-    $primary: mc-palette($light-color-scheme-primary-palette, $light-color-scheme-primary-default);
-    $second: mc-palette($light-color-scheme-second-palette, $light-color-scheme-second-default);
-    $error: mc-palette($light-color-scheme-error-palette, $light-color-scheme-error-default);
+$light-primary: mc-palette($light-color-scheme-primary-palette, $light-color-scheme-primary-default);
+$light-second: mc-palette($light-color-scheme-second-palette, $light-color-scheme-second-default);
+$light-error: mc-palette($light-color-scheme-error-palette, $light-color-scheme-error-default);
 
-    $info: mc-palette($light-color-scheme-info-palette, $light-color-scheme-info-default);
-    $success: mc-palette($light-color-scheme-success-palette, $light-color-scheme-success-default);
-    $warning: mc-palette($light-color-scheme-warning-palette, $light-color-scheme-warning-default);
+$light-info: mc-palette($light-color-scheme-info-palette, $light-color-scheme-info-default);
+$light-success: mc-palette($light-color-scheme-success-palette, $light-color-scheme-success-default);
+$light-warning: mc-palette($light-color-scheme-warning-palette, $light-color-scheme-warning-default);
 
+@function mc-light-theme(
+    $primary: $light-primary,
+    $second: $light-second,
+    $error: $light-error,
+    $info: $light-info,
+    $success: $light-success,
+    $warning: $light-warning
+) {
     $states: (
         focused-color: $light-color-scheme-states-focused-color,
         selected-color: $light-color-scheme-states-selected-color,
@@ -83,15 +90,22 @@
     @return map_merge($theme, (components: mc-light-theme-components($theme)));
 }
 
-@function mc-dark-theme() {
-    $primary: mc-palette($dark-color-scheme-primary-palette, $dark-color-scheme-primary-default);
-    $second: mc-palette($dark-color-scheme-second-palette, $dark-color-scheme-second-default);
-    $error: mc-palette($dark-color-scheme-error-palette, $dark-color-scheme-error-default);
+$dark-primary: mc-palette($dark-color-scheme-primary-palette, $dark-color-scheme-primary-default);
+$dark-second: mc-palette($dark-color-scheme-second-palette, $dark-color-scheme-second-default);
+$dark-error: mc-palette($dark-color-scheme-error-palette, $dark-color-scheme-error-default);
 
-    $info: mc-palette($dark-color-scheme-info-palette, $dark-color-scheme-info-default);
-    $success: mc-palette($dark-color-scheme-success-palette, $dark-color-scheme-success-default);
-    $warning: mc-palette($dark-color-scheme-warning-palette, $dark-color-scheme-warning-default);
+$dark-info: mc-palette($dark-color-scheme-info-palette, $dark-color-scheme-info-default);
+$dark-success: mc-palette($dark-color-scheme-success-palette, $dark-color-scheme-success-default);
+$dark-warning: mc-palette($dark-color-scheme-warning-palette, $dark-color-scheme-warning-default);
 
+@function mc-dark-theme(
+    $primary: $dark-primary,
+    $second: $dark-second,
+    $error: $dark-error,
+    $info: $dark-info,
+    $success: $dark-success,
+    $warning: $dark-warning
+) {
     $states: (
         focused-color: $dark-color-scheme-states-focused-color,
         selected-color: $dark-color-scheme-states-focused-color,
