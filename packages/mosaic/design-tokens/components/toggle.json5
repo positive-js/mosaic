@@ -36,7 +36,7 @@
             height: { value: '16px' },
             width: { value: '28px' },
             'border-radius': { value: '9px' },
-            'label-margin': { value: '8px' }
+            'label-margin': { value: '{margin.iconText_M-horizontal}' }
         },
         font: {
             default: { value: 'body' }

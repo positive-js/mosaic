@@ -34,6 +34,13 @@ StyleDictionary.registerTransform({
 });
 
 StyleDictionary.registerTransform({
+    name: 'mc-attribute/size',
+    type: 'attribute',
+    matcher: (prop) => prop.attributes.type === 'size',
+    transformer: (prop) => ({ size: true })
+});
+
+StyleDictionary.registerTransform({
     name: 'mc/prefix',
     type: 'attribute',
     transformer: (prop, options) => {
@@ -67,7 +74,7 @@ StyleDictionary.registerTransformGroup({
     name: 'mc/css',
     transforms: [
         'attribute/cti',
-        'mc-attribute/palette',
+        'mc-attribute/size',
         'name/cti/kebab',
         'color/css',
         'mc/prefix'
@@ -87,6 +94,11 @@ StyleDictionary.registerFilter({
 StyleDictionary.registerFilter({
     name: 'color',
     matcher: (prop) => !prop.attributes.palette && !prop.attributes.typography
+})
+
+StyleDictionary.registerFilter({
+    name: 'size',
+    matcher: (prop) => prop.attributes.size
 })
 
 // APPLY THE CONFIGURATION

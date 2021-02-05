@@ -2,8 +2,9 @@
     select: {
         size: {
             height: { value: '30px' },
-            padding: { value: '0 7px 0 15px' },
-            'padding-left-multiple': { value: '7px' }
+            'left-padding': { value: '{padding.control-horizontal}' },
+            'right-padding': { value: '8px' },
+            'left-padding-multiple': { value: '8px' }
         },
         font: {
             default: { value: 'body' }

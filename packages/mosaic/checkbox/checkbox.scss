@@ -2,10 +2,6 @@
 @import '../core/styles/common/layout';
 @import '../core/styles/variables';
 
-// The amount of spacing between the checkbox and its label.
-$mc-checkbox-item-spacing: calc(
-    var(--mc-checkbox-size-padding, #{$checkbox-size-padding}) - var(--mc-checkbox-size-width, #{$checkbox-size-width})
-);
 
 // Applied to elements that appear to make up the outer box of the checkmark, such as the frame
 // that contains the border and the actual background element that contains the marks.
@@ -91,7 +87,7 @@ $mc-checkbox-item-spacing: calc(
     display: inline-block;
     height: var(--mc-checkbox-size-width, $checkbox-size-width);
     line-height: 0;
-    margin-right: $mc-checkbox-item-spacing;
+    margin-right: $checkbox-size-label-margin;
     order: 0;
     position: relative;
     align-self: center;
@@ -101,7 +97,7 @@ $mc-checkbox-item-spacing: calc(
 
     [dir='rtl'] & {
         margin: {
-            left: $mc-checkbox-item-spacing;
+            left: $checkbox-size-label-margin;
             right: auto;
         }
     }
@@ -118,14 +114,14 @@ $mc-checkbox-item-spacing: calc(
     .mc-checkbox-inner-container {
         order: 1;
         margin: {
-            left: $mc-checkbox-item-spacing;
+            left: $checkbox-size-label-margin;
             right: auto;
         }
 
         [dir='rtl'] & {
             margin: {
                 left: auto;
-                right: $mc-checkbox-item-spacing;
+                right: $checkbox-size-label-margin;
             }
         }
     }

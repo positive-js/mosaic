@@ -36,10 +36,7 @@
         },
         size: {
             size: { value: '14px' },
-            padding: {
-                value: '24px',
-                comment: 'Padding between radio inputs and their labels'
-            }
+            'label-margin': { value: '{margin.iconText_M-horizontal}' }
         },
         font: {
             default: { value: 'body' }

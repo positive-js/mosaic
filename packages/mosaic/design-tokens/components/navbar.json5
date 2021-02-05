@@ -11,8 +11,8 @@
             opacity: { value: 0.5 }
         },
         size: {
-            height: { value: '48px' },
-            'icon-margin-left': { value: '8px' }
+            height: { value: '{size.panel-height}' },
+            'icon-margin': { value: '{margin.iconText_M-horizontal}' }
         },
         font: {
             title: { value: 'body' }
@@ -40,7 +40,7 @@
             }
         },
         size: {
-            padding: { value: '16px' }
+            padding: { value: '{padding.control-horizontal}' }
         }
     },
     'navbar-brand': {

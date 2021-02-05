@@ -41,7 +41,7 @@
     'modal-footer': {
         size: {
             'border-radius': { value: '0 0 4px 4px' },
-            padding: { value: '16px' }
+            padding: { value: '16px {padding.headerFooter-horizontal}' }
         }
     },
     'modal-confirm': {

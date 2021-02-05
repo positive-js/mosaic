@@ -1,14 +1,20 @@
 @import '../core/styles/common/layout';
-
 @import '../design-tokens/tokens';
-
 @import 'button-base';
 
 
 .mc-button {
     @extend %mc-button-base;
 
-    padding: var(--mc-button-size-padding, $button-size-padding);
+    padding:
+        calc(
+            var(--mc-button-size-vertical-padding, #{$button-size-vertical-padding}) -
+            var(--mc-button-size-border-width, #{$button-size-border-width})
+        )
+        calc(
+            var(--mc-button-size-horizontal-padding, #{$button-size-horizontal-padding}) -
+            var(--mc-button-size-border-width, #{$button-size-border-width})
+        );
 }
 
 .mc-light-button {
@@ -18,14 +24,28 @@
 .mc-icon-button {
     @extend %mc-button-base;
 
-    padding: var(--mc-icon-button-size-padding, $icon-button-size-padding);
+    padding:
+        calc(
+            var(--mc-icon-button-size-vertical-padding, #{$icon-button-size-vertical-padding}) -
+            var(--mc-button-size-border-width, #{$button-size-border-width})
+        )
+        calc(
+            var(--mc-icon-button-size-horizontal-padding, #{$icon-button-size-horizontal-padding}) -
+            var(--mc-button-size-border-width, #{$button-size-border-width})
+        );
 
     &.mc-icon-button_left {
-        padding: var(--mc-icon-button-size-text-padding, $icon-button-size-text-padding);
+        padding-right: calc(
+            var(--mc-icon-button-size-icon-horizontal-padding, #{$icon-button-size-icon-horizontal-padding}) -
+            var(--mc-button-size-border-width, #{$button-size-border-width})
+        );
     }
 
     &.mc-icon-button_right {
-        padding: var(--mc-icon-button-size-text-padding, $icon-button-size-text-padding);
+        padding-left: calc(
+            var(--mc-icon-button-size-icon-horizontal-padding, #{$icon-button-size-icon-horizontal-padding}) -
+            var(--mc-button-size-border-width, #{$button-size-border-width})
+        );
     }
 
     .mc-button-wrapper {
@@ -37,11 +57,11 @@
         }
 
         .mc-icon_left {
-            margin-right: var(--mc-icon-button-size-icon-padding, $icon-button-size-icon-padding);
+            margin-right: var(--mc-icon-button-size-icon-padding, $icon-button-size-horizontal-padding);
         }
 
         .mc-icon_right {
-            margin-left: var(--mc-icon-button-size-icon-padding, $icon-button-size-icon-padding);
+            margin-left: var(--mc-icon-button-size-icon-padding, $icon-button-size-horizontal-padding);
         }
     }
 }

@@ -2,7 +2,7 @@
     badge: {
         size: {
             'min-width': { value: '10px' },
-            padding: { value: '4px 8px' },
+            padding: { value: '4px {padding.badge_tag-horizontal}' },
             'border-width': { value: '1px' },
             'border-radius': { value: '4px' }
         },

@@ -10,7 +10,7 @@
     },
     'dropdown-trigger': {
         size: {
-            'padding-left': { value: '16px' }
+            'padding-left': { value: '{padding.control-horizontal}' }
         }
     },
     'dropdown-panel': {

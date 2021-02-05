@@ -24,8 +24,9 @@
         }
 
         .mc-modal-header {
-            border-bottom:
-                var(--mc-modal-size-border-width, $modal-size-border-width) solid map-get($popup, divider-color);
+            border-bottom-width: var(--mc-modal-size-border-width, $modal-size-border-width);
+            border-bottom-style: solid;
+            border-bottom-color: map-get($popup, divider);
         }
 
         .mc-modal-footer {

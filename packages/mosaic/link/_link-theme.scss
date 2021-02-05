@@ -36,11 +36,11 @@
         }
 
         & .mc-link__text:not(:first-child) {
-            margin-left: 4px;
+            margin-left: $link-size-icon-margin;
         }
 
         & .mc-link__text:not(:last-child) {
-            margin-right: 4px;
+            margin-right: $link-size-icon-margin;
         }
 
         &.mc-link_dashed .mc-link__text {

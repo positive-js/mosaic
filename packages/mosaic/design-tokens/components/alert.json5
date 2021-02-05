@@ -55,12 +55,19 @@
             }
         },
         size: {
-            padding: { value: '13px 15px' },
-            'padding-small': { value: '11px 15px' },
-            'right-padding-dismissible': { value: '15px' },
-
             'border-width': { value: '1px' },
-            'border-radius': { value: '4px' }
+            'border-radius': { value: '4px' },
+
+            'horizontal-padding': { value: '{padding.control-horizontal}' },
+            'vertical-padding': { value: '13px' },
+
+            'icon-margin': { value: '{margin.iconText_M-horizontal}' },
+
+            'close-button-width': { value: '16px' },
+
+            small: {
+                'vertical-padding': { value: '11px' }
+            }
         },
         font: {
             default: {

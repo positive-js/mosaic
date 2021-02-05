@@ -96,11 +96,11 @@
         },
         size: {
             margin: { value: '2px' },
-            height: { value: '24px' },
+            height: { value: '{size.badge_tag-height}' },
             'border-width': { value: '1px' },
             'border-radius': { value: '4px' },
             'icon-padding': { value: '3px' },
-            'text-margin': { value: '7px' }
+            'text-margin': { value: '{padding.badge_tag-horizontal}' }
         },
         font: {
             default: { value: 'caption' },

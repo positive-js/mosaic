@@ -26,7 +26,7 @@
     order: 0;
     line-height: inherit;
 
-    padding-left: var(--mc-radio-size-padding, $radio-size-padding);
+    padding-left: var(--mc-radio-size-padding, $radio-size-label-margin);
     padding-right: 0;
 
     .mc-radio-button__outer-circle,
@@ -67,7 +67,7 @@
     }
 
     [dir='rtl'] & {
-        padding-right: var(--mc-radio-size-padding, $radio-size-padding);
+        padding-right: var(--mc-radio-size-padding, $radio-size-label-margin);
         padding-left: 0;
     }
 }

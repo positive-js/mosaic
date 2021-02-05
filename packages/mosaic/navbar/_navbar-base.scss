@@ -21,7 +21,7 @@
     align-items: center;
 
     [mc-icon] + mc-navbar-title {
-        margin-left: var(--mc-navbar-size-icon-margin-left, $navbar-size-icon-margin-left);
+        margin-left: var(--mc-navbar-size-icon-margin-left, $navbar-size-icon-margin);
     }
 
     [mc-icon] {
@@ -30,7 +30,7 @@
     }
 
     mc-navbar-title:not(.mc-navbar-collapsed-title) + [mc-icon] {
-        margin-left: var(--mc-navbar-size-icon-margin-left, $navbar-size-icon-margin-left);
+        margin-left: var(--mc-navbar-size-icon-margin-left, $navbar-size-icon-margin);
     }
 }
 

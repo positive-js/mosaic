@@ -1,10 +1,10 @@
 {
     list: {
         size: {
-            'horizontal-padding': { value: '15px' },
+            'horizontal-padding': { value: '{padding.control-horizontal}' },
             'icon-padding': { value: '4px' },
 
-            'item-height': { value: '28px' },
+            'item-height': { value: '{size.option-height}' },
 
             'two-line-height': { value: '72px' },
             'three-line-height': { value: '88px' },

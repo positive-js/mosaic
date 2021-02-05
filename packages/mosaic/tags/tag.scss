@@ -73,7 +73,10 @@
 }
 
 .mc-tag__text {
-    margin-left: var(--mc-tags-size-text-margin, $tags-size-text-margin);
+    margin-left: calc(
+        var(--mc-tags-size-text-margin, #{$tags-size-text-margin}) -
+        var(--mc-tags-size-border-width, #{$tags-size-border-width})
+    );
 
     text-overflow: ellipsis;
     white-space: nowrap;

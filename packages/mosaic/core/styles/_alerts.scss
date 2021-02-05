@@ -17,19 +17,39 @@
     }
 
     .mc-alert__icon {
-        margin-right: 8px;
+        margin-right: var(--mc-alert-size-icon-margin, $alert-size-icon-margin);
     }
 
+    padding: {
+        right: calc(
+            var(--mc-alert-size-horizontal-padding, #{$alert-size-horizontal-padding}) -
+            var(--mc-alert-size-border-width, #{$alert-size-border-width})
+        );
+        left: calc(
+            var(--mc-alert-size-horizontal-padding, #{$alert-size-horizontal-padding}) -
+            var(--mc-alert-size-border-width, #{$alert-size-border-width})
+        );
+    };
+
     &:not(.mc-alert_small) {
-        padding: var(--mc-alert-size-padding, $alert-size-padding);
+        padding: {
+            top: var(--mc-alert-size-vertical-padding, $alert-size-vertical-padding);
+            bottom: var(--mc-alert-size-vertical-padding, $alert-size-vertical-padding);
+        };
     }
 
     &.mc-alert_small {
-        padding: var(--mc-alert-size-padding-small, $alert-size-padding-small);
+        padding: {
+            top: var(--mc-alert-size-small-vertical-padding, $alert-size-small-vertical-padding);
+            bottom: var(--mc-alert-size-small-vertical-padding, $alert-size-small-vertical-padding);
+        };
     }
 
     &.mc-alert_dismissible {
-        padding-right: var(--mc-alert-size-right-padding-dismissible, $alert-size-right-padding-dismissible);
+        padding-right: calc(
+            var(--mc-alert-size-right-padding-dismissible, #{$alert-size-close-button-width}) +
+            var(--mc-alert-size-horizontal-padding, #{$alert-size-horizontal-padding})
+        );
     }
 }
 

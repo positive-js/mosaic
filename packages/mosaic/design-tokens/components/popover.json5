@@ -30,7 +30,7 @@
     },
     'popover-footer': {
         size: {
-            padding: { value: '12px 16px' },
+            padding: { value: '12px {padding.headerFooter-horizontal}' },
             'margin-top': { value: '8px' }
         },
         font: {

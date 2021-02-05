@@ -24,10 +24,20 @@
 
         cursor: pointer;
 
-        padding: var(--mc-select-size-padding, $select-size-padding);
+        padding-left: calc(
+            var(--mc-select-size-left-padding, #{$select-size-left-padding}) -
+            var(--mc-form-field-size-border-width, #{$form-field-size-border-width})
+        );
+        padding-right: calc(
+            var(--mc-select-size-right-padding, #{$select-size-right-padding}) -
+            var(--mc-form-field-size-border-width, #{$form-field-size-border-width})
+        );
 
         &.mc-select__trigger_multiple {
-            padding-left: var(--mc-select-size-padding, $select-size-padding)-left-multiple;
+            padding-left: calc(
+                var(--mc-select-size-left-padding-multiple, #{$select-size-left-padding-multiple}) -
+                var(--mc-form-field-size-border-width, #{$form-field-size-border-width})
+            );
 
             & .mc-tag.mc-disabled .mc-tag__text {
                 margin-right: 7px;

@@ -52,6 +52,9 @@
                 }
             }
         },
+        size: {
+            'icon-margin': { value: '{margin.iconText_S-horizontal}' }
+        },
         font: {
             default: { value: 'body' }
         }

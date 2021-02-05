@@ -31,7 +31,7 @@
                 {
                     destination: 'css-tokens.css',
                     format: 'css/variables',
-                    filter: 'color',
+                    filter: 'size',
                     prefix: 'mc'
                 }
             ]
