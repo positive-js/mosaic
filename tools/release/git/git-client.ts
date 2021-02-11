@@ -12,7 +12,7 @@ export class GitClient {
     constructor(public projectDir: string, public remoteGitUrl: string) {}
 
     /** Gets the currently checked out branch for the project directory. */
-    getCurrentBranch() {
+    getCurrentBranch(): string {
         return this.spawnGitProcess(['symbolic-ref', '--short', 'HEAD']).stdout.trim();
     }
 
