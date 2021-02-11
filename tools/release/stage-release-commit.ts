@@ -7,12 +7,12 @@ import { join } from 'path';
 import { BaseReleaseTask } from './base-release-task';
 import { promptAndGenerateChangelog } from './changelog';
 import { CONFIG } from './config';
+import { extractReleaseNotes } from './extract-release-notes';
 import { GitClient } from './git/git-client';
 import { getGithubBranchCommitsUrl } from './git/github-urls';
 import { promptForNewVersion } from './prompt/new-version-prompt';
+import { promptForUpstreamRemote } from './prompt/upstream-remote-prompt';
 import { parseVersionName, Version } from './version-name/parse-version';
-import {promptForUpstreamRemote} from './prompt/upstream-remote-prompt';
-import {extractReleaseNotes} from './extract-release-notes';
 
 
 /** Default filename for the changelog. */
