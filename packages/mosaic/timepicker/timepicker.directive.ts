@@ -64,15 +64,17 @@ let uniqueComponentIdSuffix: number = 0;
 
 @Directive({
     selector: 'input[mcTimepicker]',
-    exportAs: 'mcTimepickerInput',
+    exportAs: 'mcTimepicker',
     host: {
-        class: 'mc-timepicker mc-input',
+        class: 'mc-input mc-timepicker',
         // Native input properties that are overwritten by Angular inputs need to be synced with
         // the native input element. Otherwise property bindings for those don't work.
         '[attr.id]': 'id',
         '[attr.placeholder]': 'placeholder',
         '[attr.disabled]': 'disabled || null',
         '[attr.required]': 'required',
+        '[class.mc-timepicker_short]': 'isShortFormat',
+        '[class.mc-timepicker_full]': 'isFullFormat',
 
         '(blur)': 'onBlur()',
         '(focus)': 'focusChanged(true)',
@@ -222,6 +224,14 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
     }
 
     private _value: D | null;
+
+    get isFullFormat(): boolean {
+        return this.format === TimeFormats.HHmmss;
+    }
+
+    get isShortFormat(): boolean {
+        return this.format === TimeFormats.HHmm;
+    }
 
     get viewValue(): string {
         return this.elementRef.nativeElement.value;
