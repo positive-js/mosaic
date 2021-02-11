@@ -11,6 +11,8 @@ import { GitClient } from './git/git-client';
 import { getGithubBranchCommitsUrl } from './git/github-urls';
 import { promptForNewVersion } from './prompt/new-version-prompt';
 import { parseVersionName, Version } from './version-name/parse-version';
+import {promptForUpstreamRemote} from './prompt/upstream-remote-prompt';
+import {extractReleaseNotes} from './extract-release-notes';
 
 
 /** Default filename for the changelog. */
@@ -114,8 +116,87 @@ class StageReleaseCommitTask extends BaseReleaseTask {
 
         console.info();
         console.info(green(`  ✓   Created the staging commit for: "${newVersionName}".`));
-        console.info(green(`  ✓   Please push the changes and submit a PR on GitHub.`));
         console.info();
+
+        const upstreamRemote = await this.getProjectUpstreamRemote();
+
+        // Extract the release notes for the new version from the changelog file.
+        const extractedReleaseNotes = extractReleaseNotes(
+            join(this.projectDir, CHANGELOG_FILE_NAME), newVersionName);
+
+        if (!extractedReleaseNotes) {
+            console.error(red(`  ✘   Could not find release notes in the changelog.`));
+            process.exit(1);
+        }
+
+        const { releaseNotes } = extractedReleaseNotes;
+
+        // Create and push the release tag before publishing to NPM.
+        this.createReleaseTag(newVersionName, releaseNotes);
+        this.pushReleaseTag(newVersionName, upstreamRemote);
+
+        console.info();
+        console.info(green(`  ✓   The Release Tag was pushed.`));
+        console.info();
+    }
+
+    /** Creates the specified release tag locally. */
+    private createReleaseTag(tagName: string, releaseNotes: string) {
+        if (this.git.hasLocalTag(tagName)) {
+            const expectedSha = this.git.getLocalCommitSha('HEAD');
+
+            if (this.git.getShaOfLocalTag(tagName) !== expectedSha) {
+                console.error(red(`  ✘   Tag "${tagName}" already exists locally, but does not refer ` +
+                    `to the version bump commit. Please delete the tag if you want to proceed.`));
+                process.exit(1);
+            }
+
+            console.info(green(`  ✓   Release tag already exists: "${italic(tagName)}"`));
+        } else if (this.git.createTag('HEAD', tagName, releaseNotes)) {
+            console.info(green(`  ✓   Created release tag: "${italic(tagName)}"`));
+        } else {
+            console.error(red(`  ✘   Could not create the "${tagName}" tag.`));
+            console.error(red(`      Please make sure there is no existing tag with the same name.`));
+            process.exit(1);
+        }
+    }
+
+    /** Pushes the release tag to the remote repository. */
+    private pushReleaseTag(tagName: string, upstreamRemote: string) {
+        const remoteTagSha = this.git.getShaOfRemoteTag(tagName);
+        const expectedSha = this.git.getLocalCommitSha('HEAD');
+
+        // The remote tag SHA is empty if the tag does not exist in the remote repository.
+        if (remoteTagSha) {
+            if (remoteTagSha !== expectedSha) {
+                console.error(red(`  ✘   Tag "${tagName}" already exists on the remote, but does not ` +
+                    `refer to the version bump commit.`));
+                console.error(red(`      Please delete the tag on the remote if you want to proceed.`));
+                process.exit(1);
+            }
+
+            console.info(green(`  ✓   Release tag already exists remotely: "${italic(tagName)}"`));
+
+            return;
+        }
+
+        if (!this.git.pushTagToRemote(tagName, upstreamRemote)) {
+            console.error(red(`  ✘   Could not push the "${tagName}" tag upstream.`));
+            console.error(red(`      Please make sure you have permission to push to the ` +
+                `"${this.git.remoteGitUrl}" remote.`));
+            process.exit(1);
+        }
+
+        console.info(green(`  ✓   Pushed release tag upstream.`));
+    }
+
+    private async getProjectUpstreamRemote() {
+        const remoteName = this.git.hasRemote('upstream') ?
+            'upstream' : await promptForUpstreamRemote(this.git.getAvailableRemotes());
+
+        console.info(green(`  ✓   Using the "${remoteName}" remote for pushing changes upstream.`));
+
+        return remoteName;
     }
 
     /** Updates the version of the project package.json and writes the changes to disk. */
