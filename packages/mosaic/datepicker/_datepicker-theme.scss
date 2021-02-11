@@ -141,6 +141,7 @@ $mc-datepicker-today-fade-amount: 0.2;
             size: mc-font-size($config, caption);
             weight: mc-font-weight($config, body);
         }
+        line-height: mc-font-size($config, caption);
     }
 
     .mc-calendar__body-today {
