@@ -5,4 +5,5 @@
 
 .example-button {
     margin-bottom: 10px;
+    align-self: start;
 }
