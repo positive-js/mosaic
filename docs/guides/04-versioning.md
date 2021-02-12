@@ -1,6 +1,7 @@
 # Versioning
 
-For the sake of keeping things simple, refer to the [Semver spec](semver-org) for anything this document does not cover.
+For the sake of keeping things simple, refer to the [Semver spec](semver-org)
+for anything this document does not cover.
 
 ## Versioning semver
 
@@ -10,7 +11,8 @@ For the sake of keeping things simple, refer to the [Semver spec](semver-org) fo
   - Change named exports exposed via the main entry point.
   - Changes in CSS that can affect layout outside of a component.
   - Upgrade peer dependencies.
-  - You've made a visual change in a component that could affect someone using the public API. Box sizing could affect positioning, or child content.
+  - You've made a visual change in a component that could affect someone using the public API.
+    Box sizing could affect positioning, or child content.
 
 2. **MINOR** version when
   - Anything that has a leading underscore.
