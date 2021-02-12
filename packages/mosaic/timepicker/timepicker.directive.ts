@@ -61,6 +61,9 @@ export const MC_TIMEPICKER_VALIDATORS: any = {
 
 let uniqueComponentIdSuffix: number = 0;
 
+const shortFormatSize: number = 3;
+const fullFormatSize: number = 6;
+
 
 @Directive({
     selector: 'input[mcTimepicker]',
@@ -73,8 +76,7 @@ let uniqueComponentIdSuffix: number = 0;
         '[attr.placeholder]': 'placeholder',
         '[attr.disabled]': 'disabled || null',
         '[attr.required]': 'required',
-        '[class.mc-timepicker_short]': 'isShortFormat',
-        '[class.mc-timepicker_full]': 'isFullFormat',
+        '[attr.size]': 'getSize()',
 
         '(blur)': 'onBlur()',
         '(focus)': 'focusChanged(true)',
@@ -273,9 +275,9 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
     private onTouched: () => void;
 
     constructor(
-        private readonly elementRef: ElementRef,
+        private elementRef: ElementRef,
         @Optional() private dateAdapter: DateAdapter<any>,
-        private readonly renderer: Renderer2
+        private renderer: Renderer2
     ) {
         if (!this.dateAdapter) {
             throw Error(`McTimepicker: No provider found for DateAdapter. You must import one of the existing ` +
@@ -296,6 +298,10 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
         this.stateChanges.complete();
     }
 
+    getSize(): number {
+        return this.isFullFormat ? fullFormatSize : shortFormatSize;
+    }
+
     focus(): void {
         this.elementRef.nativeElement.focus();
     }
@@ -310,8 +316,8 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
 
     onBlur() {
         this.lastValueValid = !!this.getDateFromTimeString(this.viewValue);
-        this.control.updateValueAndValidity();
         this.focusChanged(false);
+        this.control.updateValueAndValidity();
     }
 
     onPaste($event) {
@@ -644,7 +650,8 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
     }
 
     private parseValidator: ValidatorFn = (): ValidationErrors | null => {
-        return this.empty || this.lastValueValid ? null : { mcTimepickerParse: { text: this.viewValue } };
+        console.log('parseValidator');
+        return this.focused || this.empty || this.lastValueValid ? null : { mcTimepickerParse: { text: this.viewValue } };
     }
 
     private minValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {

@@ -1,33 +1,12 @@
-$base-left-padding: 15px;
-$with-icon-left-padding: 31px;
+@import '../form-field/form-field';
 
-$right-padding: 19px;
+
+$right-padding: 20px;
 
 .mc-timepicker {
-    padding-right: 20px;
+    padding-right: $right-padding - $mc-form-field-border-size;
 }
 
 .mc-form-field-type-mc-timepicker {
     width: auto;
-
-    $right-padding_short: ($right-padding - 2);
-    $right-padding_full: ($right-padding - 5);
-
-    & .mc-timepicker.mc-timepicker_short {
-        width: calc(5ch + #{$base-left-padding + $right-padding_short});
-    }
-
-    & .mc-timepicker.mc-timepicker_full {
-        width: calc(8ch + #{$base-left-padding + $right-padding_full});
-    }
-
-    &.mc-form-field_has-prefix {
-        & .mc-timepicker.mc-timepicker_short {
-            width: calc(5ch + #{$with-icon-left-padding + $right-padding_short});
-        }
-
-        & .mc-timepicker.mc-timepicker_full {
-            width: calc(8ch + #{$with-icon-left-padding + $right-padding_full});
-        }
-    }
 }

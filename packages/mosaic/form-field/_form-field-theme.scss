@@ -24,12 +24,20 @@
                 border-color: map-get($form-field, state-hover-border);
             }
 
-            &.ng-invalid .mc-form-field__container {
+            &.ng-invalid {
+                & .mc-form-field__container {
                 border-color: map-get($form-field, state-invalid-border);
+                    background-color: if($is-dark, transparent, mc-color($error, lighter));
                 background-color: map-get($form-field, state-invalid-background);
 
-                .mc-input,
-                .mc-textarea {
+                    border-color: mc-color($error);
+                    .mc-input,
+                    .mc-textarea {
+                        color: mc-color($error);
+                    }
+                }
+
+                & .mc-form-field__hint {
                     color: mc-color($error);
                 }
             }
