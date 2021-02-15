@@ -13,9 +13,11 @@ import {
     ValidatorFn
 } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McTimepickerModule } from '@ptsecurity/mosaic/timepicker';
+import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 
 import { McButtonModule } from '../../mosaic/button';
 import { McIconModule } from '../../mosaic/icon';
@@ -59,10 +61,19 @@ export class TimepickerDemoComponent {
         this.testForm = this.fb.group({
             time: [moment('2000-10-01 12:00:00')]
         });
+
+        this.reactiveFormControlValue.statusChanges
+            .subscribe((value) => {
+                console.log('this.reactiveFormControlValue.statusChanges: ', value); // tslint:disable-line:no-console
+            });
     }
 
     toggleDisable() {
         this.isDisabled = !this.isDisabled;
+    }
+
+    onBadInput() {
+        console.log('onBadInput: '); // tslint:disable-line:no-console
     }
 }
 
@@ -72,8 +83,10 @@ export class TimepickerDemoComponent {
     ],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         FormsModule,
         McTimepickerModule,
+        McToolTipModule,
         McFormFieldModule,
         McButtonModule,
         McIconModule,

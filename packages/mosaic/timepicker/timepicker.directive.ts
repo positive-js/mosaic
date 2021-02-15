@@ -2,10 +2,12 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     Directive,
     ElementRef,
+    EventEmitter,
     forwardRef,
     Input,
     OnDestroy,
     Optional,
+    Output,
     Renderer2
 } from '@angular/core';
 import {
@@ -27,6 +29,7 @@ import {
     UP_ARROW
 } from '@ptsecurity/cdk/keycodes';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
+import { McTooltip } from '@ptsecurity/mosaic/tooltip';
 import { noop, Subject } from 'rxjs';
 
 import {
@@ -63,6 +66,9 @@ let uniqueComponentIdSuffix: number = 0;
 
 const shortFormatSize: number = 3;
 const fullFormatSize: number = 6;
+
+const validationTooltipShowDelay: number = 10;
+const validationTooltipHideDelay: number = 3000;
 
 
 @Directive({
@@ -227,6 +233,27 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
 
     private _value: D | null;
 
+    @Input('mcValidationTooltip')
+    set validationTooltip(tooltip: McTooltip) {
+        if (!tooltip) { return; }
+
+        tooltip.mcMouseEnterDelay = validationTooltipShowDelay;
+        tooltip.mcTrigger = 'manual';
+        tooltip.mcTooltipClass = 'mc-tooltip_warning';
+
+        tooltip.initElementRefListeners();
+
+        this.badInput.subscribe(() => {
+            if (!tooltip.isTooltipOpen) {
+                tooltip.show();
+
+                setTimeout(() => tooltip.hide(), validationTooltipHideDelay);
+            }
+        });
+    }
+
+    @Output() readonly badInput: EventEmitter<any> = new EventEmitter<any>();
+
     get isFullFormat(): boolean {
         return this.format === TimeFormats.HHmmss;
     }
@@ -327,19 +354,19 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
 
         $event.preventDefault();
 
-        this.renderer.setProperty(
-            this.elementRef.nativeElement,
-            'value',
-            this.getTimeStringFromDate(newTimeObj, this.format)
-        );
+        this.setViewValue(this.getTimeStringFromDate(newTimeObj, this.format));
 
         this.value = newTimeObj;
         this.onChange(newTimeObj);
         this.stateChanges.next();
     }
 
-    onInput() {
+    onInput = () => {
         const formattedValue = this.formatUserInput(this.viewValue);
+
+        this.filterUserInput(formattedValue);
+
+        console.log('formattedValue: ', formattedValue); // tslint:disable-line:no-console
 
         const newTimeObj = this.getDateFromTimeString(formattedValue);
         this.lastValueValid = !!newTimeObj;
@@ -353,11 +380,7 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
         const selectionStart = this.selectionStart;
         const selectionEnd = this.selectionEnd;
 
-        this.renderer.setProperty(
-            this.elementRef.nativeElement,
-            'value',
-            this.getTimeStringFromDate(newTimeObj, this.format)
-        );
+        this.setViewValue(this.getTimeStringFromDate(newTimeObj, this.format));
 
         this.selectionStart = selectionStart;
         this.selectionEnd = selectionEnd;
@@ -390,7 +413,7 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
         } else if ([LEFT_ARROW, RIGHT_ARROW].includes(keyCode)) {
             this.horizontalArrowKeyHandler(keyCode);
         } else {
-            setTimeout(() => this.onInput());
+            setTimeout(this.onInput);
         }
     }
 
@@ -421,15 +444,36 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
     }
 
     private formatUserInput(value: string): string {
-        const match: RegExpMatchArray | null = value.match(/(\d\d:){0,2}(?<number>[0-9])(?<symbol>\W)(:\d\d){0,2}$/);
+        const matchForReplaceSymbols = value.match(/(\d\d:){0,2}(?<number>[0-9])(?<symbol>\W)(:\d\d){0,2}$/);
 
-        if (match && match.groups) {
-            const { number, symbol } = match.groups;
+        if (matchForReplaceSymbols && matchForReplaceSymbols.groups) {
+            const { number, symbol } = matchForReplaceSymbols.groups;
+
+            return value.replace(number + symbol, `0${number}`);
+        }
+
+        const matchForReplaceNumbers = value.match(/^(?<hours>\d{0,2}):?(?<minutes>\d{0,2}):?(?<seconds>\d{0,2})$/);
+
+        if (matchForReplaceNumbers && matchForReplaceNumbers.groups) {
+            console.log('matchForReplaceNumbers: '); // tslint:disable-line:no-console
+            const { hours, minutes, seconds } = matchForReplaceNumbers.groups;
 
             return value.replace(number + symbol, `0${number}`);
         }
 
         return value;
+    }
+
+    private filterUserInput(value: string) {
+        const matchForPrevent: RegExpMatchArray | null = value.match(/(?<symbol>\D)$/);
+
+        if (matchForPrevent && matchForPrevent.groups) {
+            const { symbol } = matchForPrevent.groups;
+
+            this.badInput.emit();
+
+            this.setViewValue(value.replace(symbol, ''));
+        }
     }
 
     /** Checks whether the input is invalid based on the native validation. */
@@ -650,7 +694,6 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
     }
 
     private parseValidator: ValidatorFn = (): ValidationErrors | null => {
-        console.log('parseValidator');
         return this.focused || this.empty || this.lastValueValid ? null : { mcTimepickerParse: { text: this.viewValue } };
     }
 
@@ -687,10 +730,14 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
         return (this.dateAdapter.isDateInstance(obj) && this.dateAdapter.isValid(obj)) ? obj : null;
     }
 
+    private setViewValue(value: string) {
+        this.renderer.setProperty(this.elementRef.nativeElement, 'value', value);
+    }
+
     private updateView() {
         const formattedValue = this.getTimeStringFromDate(this.value, this.format);
 
-        this.renderer.setProperty(this.elementRef.nativeElement, 'value', formattedValue);
+        this.setViewValue(formattedValue);
     }
 
     private setControl(control: AbstractControl) {
