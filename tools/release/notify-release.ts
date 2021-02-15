@@ -5,7 +5,6 @@ import * as request from 'request';
 
 import { extractReleaseNotes } from './extract-release-notes';
 import { CHANGELOG_FILE_NAME } from './stage-release';
-import { DotenvConfigOutput } from 'dotenv';
 
 
 const HTTP_CODE_OK = 200;
@@ -15,7 +14,7 @@ export function notify(version) {
         return;
     }
 
-    const result: DotenvConfigOutput = dotenv.config();
+    const result = dotenv.config();
 
     const url = result.parsed!.MATTERMOST_ENDPOINT_URL;
     const channel = result.parsed!.MATTERMOST_CHANNEL;

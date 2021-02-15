@@ -1,9 +1,10 @@
 import { npmPublish } from './npm/npm-client';
 
 
-describe('Publish NPM package', () => {
+// tslint:disable-next-line:mocha-no-side-effect-code no-var-requires
+const childProcess = require('child_process');
 
-    const childProcess = require('child_process');
+describe('Publish NPM package', () => {
 
     beforeEach(() => {
         spyOn(childProcess, 'spawnSync').and.returnValues({

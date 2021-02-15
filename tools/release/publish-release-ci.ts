@@ -1,6 +1,7 @@
 // tslint:disable:no-console
 import { Octokit } from '@octokit/rest';
 import { bold, cyan, green, italic, red } from 'chalk';
+import { config as dotenvConfig } from 'dotenv';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 
@@ -12,7 +13,6 @@ import { npmPublish } from './npm/npm-client';
 import { checkReleasePackage } from './release-output/check-packages';
 import { releasePackages } from './release-output/release-packages';
 import { parseVersionName, Version } from './version-name/parse-version';
-import { config as dotenvConfig } from 'dotenv';
 
 
 // tslint:disable-next-line:naming-convention
