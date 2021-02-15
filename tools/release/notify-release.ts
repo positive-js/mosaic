@@ -11,7 +11,7 @@ import { DotenvConfigOutput } from 'dotenv';
 const HTTP_CODE_OK = 200;
 
 export function notify(version) {
-    if (!verifyNotificationPossibility()) {
+    if (process.env.DEBUG || !verifyNotificationPossibility()) {
         return;
     }
 

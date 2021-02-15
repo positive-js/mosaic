@@ -12,6 +12,7 @@ import { npmPublish } from './npm/npm-client';
 import { checkReleasePackage } from './release-output/check-packages';
 import { releasePackages } from './release-output/release-packages';
 import { parseVersionName, Version } from './version-name/parse-version';
+import { config as dotenvConfig } from 'dotenv';
 
 
 // tslint:disable-next-line:naming-convention
@@ -66,7 +67,12 @@ class PublishReleaseCITask extends BaseReleaseTask {
     async run() {
         console.log();
         console.log(cyan('-----------------------------------------'));
-        console.log(cyan('  Mosaic CI release script'));
+
+        if (process.env.DEBUG) {
+            console.log(red(' [DEBUG MODE] Mosaic CI release script'));
+        } else {
+            console.log(cyan('  Mosaic CI release script'));
+        }
         console.log(cyan('-----------------------------------------'));
         console.log();
 
@@ -125,5 +131,6 @@ class PublishReleaseCITask extends BaseReleaseTask {
 
 /** Entry-point for the create release script. */
 if (require.main === module) {
+    dotenvConfig();
     new PublishReleaseCITask(join(__dirname, '../../'), 'positive-js', 'mosaic').run();
 }
