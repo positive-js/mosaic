@@ -152,7 +152,7 @@ class StageReleaseCommitTask extends BaseReleaseTask {
             }
 
             console.info(green(`  ✓   Release tag already exists: "${italic(tagName)}"`));
-        } else if (this.git.createTag('HEAD', tagName, releaseNotes)) {
+        } else if (this.git.createTag(tagName, releaseNotes)) {
             console.info(green(`  ✓   Created release tag: "${italic(tagName)}"`));
         } else {
             console.error(red(`  ✘   Could not create the "${tagName}" tag.`));

@@ -67,7 +67,7 @@ export class GitClient {
     }
 
     /** Creates a tag for the specified commit reference. */
-    createTag(commitRef: string, tagName: string, message: string): boolean {
+    createTag(tagName: string, message: string): boolean {
         return this.spawnGitProcess(['tag', tagName, '-m', message]).status === 0;
     }
 
