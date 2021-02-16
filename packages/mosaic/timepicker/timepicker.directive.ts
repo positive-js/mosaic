@@ -348,11 +348,16 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
     }
 
     onPaste($event) {
-        const newTimeObj = this.getDateFromTimeString($event.clipboardData.getData('text'));
+        console.log('onPaste: '); // tslint:disable-line:no-console
+        let value = $event.clipboardData.getData('text');
 
-        if (!newTimeObj) { return; }
+        value = this.formatUserInputOnBlur(value);
+
+        const newTimeObj = this.getDateFromTimeString(value);
 
         $event.preventDefault();
+
+        if (!newTimeObj) { return; }
 
         this.setViewValue(this.getTimeStringFromDate(newTimeObj, this.format));
 
@@ -443,25 +448,57 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
         this.disabled = isDisabled;
     }
 
+    private formatUserInputOnBlur(value: string) {
+        const matchForReplaceSymbols = value.match(/^.+(?<symbol>[\W]).+$/);
+
+        if (matchForReplaceSymbols && matchForReplaceSymbols.groups) {
+            const { symbol } = matchForReplaceSymbols.groups;
+
+            const newValue = value.replaceAll(symbol, ':');
+
+            this.setViewValue(newValue);
+
+            return newValue;
+        }
+
+        return value;
+    }
+
     private formatUserInput(value: string): string {
+        let formattedValue: string = value;
+
         const matchForReplaceSymbols = value.match(/(\d\d:){0,2}(?<number>[0-9])(?<symbol>\W)(:\d\d){0,2}$/);
 
         if (matchForReplaceSymbols && matchForReplaceSymbols.groups) {
             const { number, symbol } = matchForReplaceSymbols.groups;
 
-            return value.replace(number + symbol, `0${number}`);
+            formattedValue = value.replace(number + symbol, `0${number}`);
         }
 
-        const matchForReplaceNumbers = value.match(/^(?<hours>\d{0,2}):?(?<minutes>\d{0,2}):?(?<seconds>\d{0,2})$/);
+        const matchForReplaceNumbers = value.match(/^(?<hours>\d{0,3}):?(?<minutes>\d{0,3}):?(?<seconds>\d{0,3})$/);
 
         if (matchForReplaceNumbers && matchForReplaceNumbers.groups) {
-            console.log('matchForReplaceNumbers: '); // tslint:disable-line:no-console
             const { hours, minutes, seconds } = matchForReplaceNumbers.groups;
 
-            return value.replace(number + symbol, `0${number}`);
+            // tslint:disable-next-line:no-magic-numbers
+            if (hours.length === 1 && parseInt(hours) > 2) {
+                formattedValue = `0${formattedValue}`;
+            }
+
+            if (hours.length && parseInt(hours) > HOURS_PER_DAY) {
+                formattedValue = formattedValue.replace(hours, HOURS_PER_DAY.toString());
+            }
+
+            if (minutes.length && parseInt(minutes) > MINUTES_PER_HOUR) {
+                formattedValue = formattedValue.replace(minutes, MINUTES_PER_HOUR.toString());
+            }
+
+            if (seconds.length && parseInt(seconds) > SECONDS_PER_MINUTE) {
+                formattedValue = formattedValue.replace(seconds, SECONDS_PER_MINUTE.toString());
+            }
         }
 
-        return value;
+        return formattedValue;
     }
 
     private filterUserInput(value: string) {
