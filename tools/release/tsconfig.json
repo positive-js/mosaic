@@ -1,11 +1,21 @@
 {
+    "extends": "../../tsconfig.json",
     "compilerOptions": {
-        "outDir": "../../dist/tools/release",
-        "lib": [
-            "es2016"
-        ],
+        "rootDir": ".",
+        "target": "esnext",
+        "module": "commonjs",
+        "strictNullChecks": false,
         "types": [
-            "node"
+            "node",
+            "jasmine"
         ]
-    }
+    },
+    "include": [
+        "**/*.ts"
+    ],
+    "references": [
+        {
+            "path": "./tsconfig.spec.json"
+        }
+    ]
 }

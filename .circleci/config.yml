@@ -264,6 +264,15 @@ jobs:
                       - "c3:de:eb:9c:82:70:a8:23:f3:4e:92:b8:07:d2:22:df"
             - run: ./scripts/deploy/publish-artifacts.sh
 
+    release_publish:
+        <<: *job_defaults
+        steps:
+            - *checkout_code
+            - *restore_cache
+            -   attach_workspace:
+                    at: ~/mosaic
+            - run: yarn run release:publish:ci
+
     preview_mosaic_docs:
         <<: *job_defaults
         steps:
@@ -361,6 +370,18 @@ workflows:
                       - test_unit_schematics
                   filters:
                       <<: *only_for_maintainers
+
+            - release_publish:
+                  requires:
+                      - test_unit_cdk
+                      - test_unit_mosaic-moment-adapter
+                      - test_unit_mosaic
+                      - test_unit_schematics
+                  filters:
+                      branches:
+                          ignore: /.*/
+                      tags:
+                          only: /^\d+\.\d+\.\d+$/
 
             - snapshot_publish:
                   requires:
