@@ -659,7 +659,7 @@ describe('MomentDateAdapter formatter', () => {
                 it('before yesterday (other year)', () => {
                     const date = moment().year(2015).subtract(49, 'hours');
                     expect(adapter.relativeShortDate(date)).toBe(
-                        date.format(`${DAY}${NBSP}${SHORT_MONTH}, ${YEAR}`)
+                        date.format(`${DAY}${NBSP}${SHORT_MONTH} ${YEAR}`)
                     );
                 });
             });
@@ -706,7 +706,7 @@ describe('MomentDateAdapter formatter', () => {
 
                 it('before yesterday (other year)', () => {
                     const date = moment().year(2015).subtract(49, 'hours');
-                    expect(adapter.relativeLongDate(date)).toBe(date.format(`${DAY_MONTH}, ${YEAR}`));
+                    expect(adapter.relativeLongDate(date)).toBe(date.format(`${DAY_MONTH} ${YEAR}`));
                 });
             });
         });
