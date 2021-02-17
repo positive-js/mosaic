@@ -49,7 +49,7 @@ export class TimepickerDemoComponent {
     reactiveFormControlValue = new FormControl(moment('2000-10-01 12:00:00'), customValidator());
     formControlValue = new FormControl(moment('2020-05-06 12:00:00'));
     ngModelValue = moment('2020-05-06 13:00:00');
-    ngModelValueAdv = moment('2020-05-06 13:00:00.677');
+    ngModelValueAdv = moment('2020-05-06 13:00:00.577');
 
     isDisabled: boolean = false;
 
