@@ -53,6 +53,12 @@ var_9: &only_latest_tag
             # x.0.x, x.x.x, etc.
             - /9.\d+\.x/
 
+var_10: &filter_by_release_tag
+    branches:
+        ignore: /.*/
+    tags:
+        only: /^\d+\.\d+\.\d+$/
+
 orbs:
     sonarcloud: sonarsource/sonarcloud@1.0.2
     snyk: snyk/snyk@0.0.10
@@ -269,9 +275,10 @@ jobs:
         steps:
             - *checkout_code
             - *restore_cache
-            -   attach_workspace:
-                    at: ~/mosaic
-            - run: yarn run release:publish:ci
+            - attach_workspace:
+                  at: ~/mosaic
+            - run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+            - run: npm run release:publish:ci
 
     preview_mosaic_docs:
         <<: *job_defaults
@@ -306,8 +313,28 @@ jobs:
 
 workflows:
     version: 2
+
+    tagged_workflow:
+        jobs:
+            - install:
+                  filters:
+                      <<: *filter_by_release_tag
+
+            - build_packages:
+                  requires:
+                      - install
+                  filters:
+                      <<: *filter_by_release_tag
+
+            - release_publish:
+                  requires:
+                      - build_packages
+                  filters:
+                      <<: *filter_by_release_tag
+
     default_workflow:
         jobs:
+
             # 1 Group
             - install
 
@@ -370,18 +397,6 @@ workflows:
                       - test_unit_schematics
                   filters:
                       <<: *only_for_maintainers
-
-            - release_publish:
-                  requires:
-                      - test_unit_cdk
-                      - test_unit_mosaic-moment-adapter
-                      - test_unit_mosaic
-                      - test_unit_schematics
-                  filters:
-                      branches:
-                          ignore: /.*/
-                      tags:
-                          only: /^\d+\.\d+\.\d+$/
 
             - snapshot_publish:
                   requires:

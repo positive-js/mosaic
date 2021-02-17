@@ -2,6 +2,7 @@
 
 ### Mosaic
 
+ * bug fix  **build:** regex for trigger ci ([3896ae4](https://github.com/positive-js/mosaic/commit/3896ae477dbf46206b4839d010165807f6b10d51))
  * bug fix  **datepicker:** Line-height changes (#UIM-399) ([#569](https://github.com/positive-js/mosaic/issues/569)) ([7e50e39](https://github.com/positive-js/mosaic/commit/7e50e39bcf6c293ceac6439fea9abffac12d305a)), closes [#UIM-399](https://github.com/positive-js/mosaic/issues/UIM-399)
  * bug fix  **form-field:** no need add class mc-form-field_has-stepper (#UIM-563) ([#567](https://github.com/positive-js/mosaic/issues/567)) ([62851e3](https://github.com/positive-js/mosaic/commit/62851e3314ea5afc3a3a3373a8c1628af9eb5959)), closes [#UIM-563](https://github.com/positive-js/mosaic/issues/UIM-563)
  * bug fix  **formatter:** Date-formatter comma (#UIM-454) ([#571](https://github.com/positive-js/mosaic/issues/571)) ([d9ec7b1](https://github.com/positive-js/mosaic/commit/d9ec7b12bab842230ca1ba343297fffa8ebe788c)), closes [#UIM-454](https://github.com/positive-js/mosaic/issues/UIM-454) [#UIM-454](https://github.com/positive-js/mosaic/issues/UIM-454) [#UIM-454](https://github.com/positive-js/mosaic/issues/UIM-454)

@@ -130,9 +130,11 @@ class StageReleaseCommitTask extends BaseReleaseTask {
         }
 
         const { releaseNotes } = extractedReleaseNotes;
+        const branchName = this.git.getCurrentBranch();
 
         // Create and push the release tag before publishing to NPM.
         this.createReleaseTag(newVersionName, releaseNotes);
+        this.git.pushBranchToRemote(upstreamRemote, branchName);
         this.pushReleaseTag(newVersionName, upstreamRemote);
 
         console.info();

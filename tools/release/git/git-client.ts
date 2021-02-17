@@ -95,6 +95,11 @@ export class GitClient {
         return this.spawnGitProcess(['push', remoteName, `refs/tags/${tagName}`]).status === 0;
     }
 
+    /** Push committed changes to remote */
+    pushBranchToRemote(remoteName, branchName: string): boolean {
+        return this.spawnGitProcess(['push', remoteName, branchName]).status === 0;
+    }
+
     /** Checks whether the given remote has been set up. */
     hasRemote(remoteName: string): boolean {
         return this.spawnGitProcess(['remote', 'get-url', remoteName], false).status === 0;
