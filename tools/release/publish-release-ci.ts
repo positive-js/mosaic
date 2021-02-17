@@ -86,9 +86,13 @@ class PublishReleaseCITask extends BaseReleaseTask {
 
         console.log();
         console.info(green(bold(`  ✓   Published all packages successfully`)));
+        console.log();
 
-        const newVersionName = this.currentVersion.format();
-        notify(newVersionName);
+        if (!process.env.DEBUG) {
+            console.info(green(bold(`  ✓   Notification to Mattermost`)));
+            const newVersionName = this.currentVersion.format();
+            notify(newVersionName);
+        }
     }
 
     /** Publishes the specified package within the given NPM dist tag. */
