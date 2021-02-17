@@ -1,27 +1,23 @@
 @import '../core/theming/theming';
 @import '../core/styles/typography/typography-utils';
 
-@import '../core/theming/palette';
-
 
 @mixin mc-icon-theme($theme) {
+    $foreground: map-get($theme, foreground);
+
     $primary: map-get($theme, primary);
     $second: map-get($theme, second);
     $error: map-get($theme, error);
 
-    $foreground: map-get($theme, foreground);
-    $background: map-get($theme, background);
-
     $primary-color: mc-color($primary, 400);
-    $second-color: mc-color($second);
-    $error-color: mc-color($error);
 
     // Дефолтные серые иконки default-icon: лупа в поле, иконки дропдаунов v, все иконки вне полей.
     .mc-icon:not(.mc-icon_light) {
-        color: map-get($foreground, icon);
+        color: mc-color($foreground, icon);
 
         &.mc-primary {
-            color: mix(map-get($foreground, icon), $primary-color, 30%);
+            // todo color: mix(mc-color($foreground, icon), $primary-color, 30%);
+            color: mc-color($foreground, icon);
 
             &[disabled],
             &.mc-disabled {
@@ -39,11 +35,12 @@
         }
 
         &.mc-error {
-            color: mix(map-get($foreground, icon), $error-color, 30%);
+            // todo color: mix(mc-color($foreground, icon), mc-color($error), 30%);
+            color: mc-color($foreground, icon);
 
             &[disabled],
             &.mc-disabled {
-                color: $error-color;
+                color: mc-color($error);
             }
         }
 
@@ -64,34 +61,27 @@
             color: $primary-color;
 
             &:hover {
-                color: mix(map-get($foreground, text), $primary-color);
+                // todo color: mix(map-get($foreground, text), $primary-color);
+                color: map-get($foreground, text);
             }
         }
 
         &.mc-second {
-            color: $second-color;
+            color: mc-color($second);
 
             &:hover {
-                color: mix(map-get($foreground, text), $second-color, 90%);
+                //todo color: mix(map-get($foreground, text), mc-color($second), 90%);
+                color: map-get($foreground, text);
             }
         }
 
         &.mc-error {
-            color: $error-color;
+            color: mc-color($error);
 
             &:hover {
-                color: mix(map-get($foreground, text), $error-color);
+                // todo color: mix(map-get($foreground, text), mc-color($error));
+                color: map-get($foreground, text);
             }
-        }
-    }
-}
-
-@mixin mc-icon-typography($config) {
-    .mc-icon {
-        font: {
-            size:   mc-font-size($config, button);
-            family: mc-font-family($config, button);
-            weight: mc-font-weight($config, button);
         }
     }
 }

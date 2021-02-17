@@ -1,3 +1,6 @@
+@import '../design-tokens/tokens';
+
+
 .mc-table {
     border-spacing: 0;
 
@@ -7,7 +10,15 @@
         & > tr {
             & > th,
             & > td {
-                padding: 8px 8px 7px;
+                padding: {
+                    top: var(--mc-table-size-row-padding-vertical, $table-size-row-padding-vertical);
+                    right: (var(--mc-table-size-row-padding-horizontal, $table-size-row-padding-horizontal) / 2);
+                    bottom: (
+                        var(--mc-table-size-row-padding-vertical, $table-size-row-padding-vertical) -
+                        var(--mc-table-size-border-width, $table-size-border-width)
+                    );
+                    left: (var(--mc-table-size-row-padding-horizontal, $table-size-row-padding-horizontal) / 2)
+                };
 
                 vertical-align: baseline;
                 text-align: left;
@@ -15,12 +26,12 @@
 
             & > th:first-child,
             & > td:first-child {
-                padding-left: 16px;
+                padding-left: var(--mc-table-size-row-padding-horizontal, $table-size-row-padding-horizontal);
             }
 
             & > th:last-child,
             & > td:last-child {
-                padding-right: 16px;
+                padding-right: var(--mc-table-size-row-padding-horizontal, $table-size-row-padding-horizontal);
             }
         }
     }
@@ -28,17 +39,22 @@
     /* stylelint-disable no-descending-specificity */
     & > thead {
         & > tr > th {
-            padding-top: 8px;
-            padding-bottom: 7px;
+            padding: {
+                top: var(--mc-table-size-row-padding-vertical, $table-size-row-padding-vertical);
+                bottom: (
+                    var(--mc-table-size-row-padding-vertical, $table-size-row-padding-vertical) -
+                    var(--mc-table-size-border-width, $table-size-border-width)
+                );
+            }
 
-            border-bottom: 1px solid transparent;
+            border-bottom: var(--mc-table-size-border-width, $table-size-border-width) solid transparent;
         }
     }
 
     & > tbody > tr {
         & th,
         & td {
-            border-bottom: 1px solid transparent;
+            border-bottom: var(--mc-table-size-border-width, $table-size-border-width) solid transparent;
         }
     }
     /* stylelint-enable no-descending-specificity */

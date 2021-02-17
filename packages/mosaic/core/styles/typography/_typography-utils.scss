@@ -1,4 +1,5 @@
 @import 'variables';
+@import '../../../design-tokens/tokens';
 
 
 @function mc-typography-level(
@@ -60,7 +61,7 @@
     $font-weight: mc-font-weight($config, $level);
     $line-height: mc-line-height($config, $level);
     $font-family: mc-font-family($config, $level);
-    $text-transform: mc-font-family($config, $level);
+    $text-transform: mc-text-transform($config, $level);
 
     font: $font-weight #{$font-size}/#{$line-height} $font-family;
     letter-spacing: mc-letter-spacing($config, $level);

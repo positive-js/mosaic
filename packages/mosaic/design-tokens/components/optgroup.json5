@@ -1,0 +1,10 @@
+{
+    optgroup: {
+        size: {
+            'padding-left': { value: '17px' }
+        },
+        font: {
+            default: { value: 'subheading' }
+        }
+    }
+}

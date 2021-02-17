@@ -2,31 +2,31 @@
 @import '../core/styles/typography/typography-utils';
 @import '../core/styles/variables';
 
-@mixin mc-form-field-theme($theme) {
-    $second: map-get($theme, second);
-    $error: map-get($theme, error);
 
+@mixin mc-form-field-theme($theme) {
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    $is-dark: map-get($theme, is-dark);
+    $second: map-get($theme, second);
+    $error: map-get($theme, error);
+
+    $form-field: map-get(map-get($theme, components), form-field);
 
     .mc-form-field {
-        background-color: map-get($background, background);
+        background-color: map-get($form-field, background);
 
         &:not(.mc-form-field_without-borders) {
             .mc-form-field__container {
-                border-color: mc-color($second);
+                border-color: map-get($form-field, border);
             }
 
             &:hover .mc-form-field__container {
-                border-color: mc-color($second, if($is-dark, lighter, darker));
+                border-color: map-get($form-field, state-hover-border);
             }
 
             &.ng-invalid .mc-form-field__container {
-                background-color: if($is-dark, transparent, mc-color($error, lighter));
-
-                border-color: mc-color($error);
+                border-color: map-get($form-field, state-invalid-border);
+                background-color: map-get($form-field, state-invalid-background);
 
                 .mc-input,
                 .mc-textarea {
@@ -36,10 +36,8 @@
 
             &.mc-focused {
                 &:not(.ng-invalid) .mc-form-field__container {
-                    $focused-color: map-get(map-get($theme, states), focused-color);
-
-                    border-color: $focused-color;
-                    box-shadow: 0 0 0 1px $focused-color;
+                    border-color: map-get(map-get($theme, states), focused-color);
+                    box-shadow: 0 0 0 1px map-get(map-get($theme, states), focused-color);
                 }
 
                 &.ng-invalid .mc-form-field__container {
@@ -49,15 +47,18 @@
 
             /* stylelint-disable no-descending-specificity */
             &.mc-disabled .mc-form-field__container {
-                border-color: mix(map-get($foreground, border), map-get($background, overlay-disabled));
+                // todo border-color: mix(map-get($foreground, border), mc-color($background, overlay-disabled));
+                border-color: map-get($foreground, text-disabled);
 
-                background-color:
-                    mix(map-get($background, background-disabled), map-get($background, overlay-disabled));
+                // todo background-color: mix(
+                //    map-get($background, background-disabled), mc-color($background, overlay-disabled)
+                //);
+                background-color: map-get($background, background-disabled);
 
                 .mc-icon,
                 .mc-input,
                 .mc-textarea {
-                    color: mc-color($foreground, text-disabled);
+                    color: map-get($foreground, text-disabled);
                 }
             }
             /* stylelint-enable no-descending-specificity */
@@ -65,16 +66,16 @@
     }
 
     .mc-form-field__hint {
-        color: mc-color($foreground, text-less-contrast);
+        color: map-get($foreground, text-less-contrast);
     }
 }
 
 @mixin mc-form-field-typography($config) {
     .mc-form-field {
-        @include mc-typography-level-to-styles($config, body);
+        @include mc-typography-level-to-styles($config, $form-field-font-default);
     }
 
     .mc-form-field__hint {
-        @include mc-typography-level-to-styles($config, caption);
+        @include mc-typography-level-to-styles($config, $form-field-hint-font-default);
     }
 }
