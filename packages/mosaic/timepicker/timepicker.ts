@@ -34,13 +34,15 @@ import {
     HOURS_PER_DAY,
     HOURS_MINUTES_REGEXP,
     HOURS_MINUTES_SECONDS_REGEXP,
+    HOURS_MINUTES_SECONDS_MILLISECONDS_REGEXP,
     HOURS_ONLY_REGEXP,
     MINUTES_PER_HOUR,
     SECONDS_PER_MINUTE,
     TIMEFORMAT_PLACEHOLDERS,
     TimeFormats,
     TimeParts,
-    AM_PM_FORMAT_REGEXP
+    AM_PM_FORMAT_REGEXP,
+    MILLISECONDS_PER_SECONDS
 } from './timepicker.constants';
 
 
@@ -455,8 +457,10 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
         if (keyCode === LEFT_ARROW) {
             cursorPos = cursorPos === 0 ? this.viewValue.length : cursorPos - 1;
         } else if (keyCode === RIGHT_ARROW) {
-            const nextDividerPos: number = this.viewValue.indexOf(':', cursorPos);
-
+            let nextDividerPos: number = this.viewValue.indexOf(':', cursorPos);
+            if (nextDividerPos === -1) {
+                nextDividerPos = this.viewValue.indexOf('.', cursorPos);
+            }
             cursorPos = nextDividerPos ? nextDividerPos + 1 : 0;
         }
 
@@ -476,6 +480,7 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
         let hours = this.dateAdapter.getHours(dateVal);
         let minutes = this.dateAdapter.getMinutes(dateVal);
         let seconds = this.dateAdapter.getSeconds(dateVal);
+        let milliseconds = this.dateAdapter.getMilliseconds(dateVal);
 
         switch (whatToIncrement) {
             case TimeParts.hours:
@@ -487,8 +492,12 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
             case TimeParts.seconds:
                 seconds++;
                 break;
+            case TimeParts.milliseconds:
+                milliseconds++;
+                break;
             default:
         }
+        if (milliseconds > MILLISECONDS_PER_SECONDS) { milliseconds = 0; }
 
         if (seconds > SECONDS_PER_MINUTE) { seconds = 0; }
 
@@ -503,7 +512,7 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
             hours,
             minutes,
             seconds,
-            this.dateAdapter.getMilliseconds(this.value)
+            milliseconds
         );
     }
 
@@ -511,6 +520,7 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
         let hours = this.dateAdapter.getHours(dateVal);
         let minutes = this.dateAdapter.getMinutes(dateVal);
         let seconds = this.dateAdapter.getSeconds(dateVal);
+        let milliseconds = this.dateAdapter.getMilliseconds(dateVal);
 
         switch (whatToDecrement) {
             case TimeParts.hours:
@@ -522,8 +532,13 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
             case TimeParts.seconds:
                 seconds--;
                 break;
+            case TimeParts.milliseconds:
+                milliseconds--;
+                break;
             default:
         }
+
+        if (milliseconds < 0) { milliseconds = MILLISECONDS_PER_SECONDS; }
 
         if (seconds < 0) { seconds = SECONDS_PER_MINUTE; }
 
@@ -538,7 +553,7 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
             hours,
             minutes,
             seconds,
-            this.dateAdapter.getMilliseconds(this.value)
+            milliseconds
         );
     }
 
@@ -559,11 +574,16 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
         const hoursIndex = 0;
         const minutesIndex = timeString.indexOf(':', hoursIndex + 1);
         const secondsIndex = minutesIndex !== -1 ? timeString.indexOf(':', minutesIndex + 1) : -1;
+        const millisecondsIndex = secondsIndex !== -1 ? timeString.indexOf('.', secondsIndex + 1) : -1;
 
-        if (secondsIndex !== -1 && cursorPosition > secondsIndex) {
+        if (millisecondsIndex !== -1 && cursorPosition > millisecondsIndex) {
+            modifiedTimePart = TimeParts.milliseconds;
+            cursorStartPosition = millisecondsIndex + 1;
+            cursorEndPosition = timeString.length;
+        } else if (secondsIndex !== -1 && cursorPosition > secondsIndex) {
             modifiedTimePart = TimeParts.seconds;
             cursorStartPosition = secondsIndex + 1;
-            cursorEndPosition = timeString.length;
+            cursorEndPosition = millisecondsIndex > -1 ? millisecondsIndex : timeString.length;
         } else if (minutesIndex !== -1 && cursorPosition > minutesIndex) {
             modifiedTimePart = TimeParts.minutes;
             cursorStartPosition = minutesIndex + 1;
@@ -589,6 +609,7 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
     private getDateFromTimeString(timeString: string): D | null {
         if (!timeString) { return null; }
 
+        const hoursAndMinutesAndSecondsAndMilliseconds = timeString.match(HOURS_MINUTES_SECONDS_MILLISECONDS_REGEXP);
         const hoursAndMinutesAndSeconds = timeString.match(HOURS_MINUTES_SECONDS_REGEXP);
         const hoursAndMinutes = timeString.match(HOURS_MINUTES_REGEXP);
         const hoursOnly = timeString.match(HOURS_ONLY_REGEXP);
@@ -597,6 +618,7 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
         let hours: number = 0;
         let minutes: number = 0;
         let seconds: number = 0;
+        let milliseconds: number = 0;
 
         // tslint:disable:no-magic-numbers
         if (hoursAndMinutesInAmPm) {
@@ -606,6 +628,11 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
             if (/[p]/i.test(hoursAndMinutesInAmPm[3]) || (/[a]/i.test(hoursAndMinutesInAmPm[3]) && hours === 12)) {
                 hours += 12;
             }
+        } else if (hoursAndMinutesAndSecondsAndMilliseconds) {
+            hours = Number(hoursAndMinutesAndSecondsAndMilliseconds[1]);
+            minutes = Number(hoursAndMinutesAndSecondsAndMilliseconds[2]);
+            seconds = Number(hoursAndMinutesAndSecondsAndMilliseconds[3]);
+            milliseconds = Number(hoursAndMinutesAndSecondsAndMilliseconds[4]);
         } else if (hoursAndMinutesAndSeconds) {
             hours = Number(hoursAndMinutesAndSeconds[1]);
             minutes = Number(hoursAndMinutesAndSeconds[2]);
@@ -627,7 +654,7 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
             hours,
             minutes,
             seconds,
-            this.dateAdapter.getMilliseconds(this.value)
+            milliseconds
         );
 
         return this.getValidDateOrNull(resultDate);
@@ -661,6 +688,8 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
             return result;
         } else if (TimeFormats.HHmmss === this.format) {
             return result || this.dateAdapter.getSeconds(first) - this.dateAdapter.getSeconds(second);
+        }  else if (TimeFormats.HHmmssSSS === this.format) {
+            return result || this.dateAdapter.getMilliseconds(first) - this.dateAdapter.getMilliseconds(second);
         } else {
             throw Error(`Unknown format: ${this.format}`);
         }
