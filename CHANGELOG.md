@@ -1,3 +1,19 @@
+# 10.2.0 "White Dioxide" (2021-02-17)
+
+### Mosaic
+
+ * bug fix  **datepicker:** Line-height changes (#UIM-399) ([#569](https://github.com/positive-js/mosaic/issues/569)) ([7e50e39](https://github.com/positive-js/mosaic/commit/7e50e39bcf6c293ceac6439fea9abffac12d305a)), closes [#UIM-399](https://github.com/positive-js/mosaic/issues/UIM-399)
+ * bug fix  **form-field:** no need add class mc-form-field_has-stepper (#UIM-563) ([#567](https://github.com/positive-js/mosaic/issues/567)) ([62851e3](https://github.com/positive-js/mosaic/commit/62851e3314ea5afc3a3a3373a8c1628af9eb5959)), closes [#UIM-563](https://github.com/positive-js/mosaic/issues/UIM-563)
+ * bug fix  **formatter:** Date-formatter comma (#UIM-454) ([#571](https://github.com/positive-js/mosaic/issues/571)) ([d9ec7b1](https://github.com/positive-js/mosaic/commit/d9ec7b12bab842230ca1ba343297fffa8ebe788c)), closes [#UIM-454](https://github.com/positive-js/mosaic/issues/UIM-454) [#UIM-454](https://github.com/positive-js/mosaic/issues/UIM-454) [#UIM-454](https://github.com/positive-js/mosaic/issues/UIM-454)
+ * bug fix  **tooltip:** added type number (#UIM-557) ([#566](https://github.com/positive-js/mosaic/issues/566)) ([3e564fc](https://github.com/positive-js/mosaic/commit/3e564fc5df84988669c62da62ba0deaba14179ac)), closes [#UIM-557](https://github.com/positive-js/mosaic/issues/UIM-557)
+ * bug fix  removed unused typescript-tslint-plugin ([#561](https://github.com/positive-js/mosaic/issues/561)) ([f4b8fc8](https://github.com/positive-js/mosaic/commit/f4b8fc84cedc7362fc35cd54bf76fa579821e149))
+ * feature  **date-adapter:** added milliseconds and microseconds for absolute dates (#UIM-446) ([#557](https://github.com/positive-js/mosaic/issues/557)) ([4de2a6d](https://github.com/positive-js/mosaic/commit/4de2a6d8c120309bd32dd8587492de2ffa75c503)), closes [#UIM-446](https://github.com/positive-js/mosaic/issues/UIM-446) [#UIM-446](https://github.com/positive-js/mosaic/issues/UIM-446)
+ * feature  **timepicker:** added smart parsing (#UIM-510) ([#564](https://github.com/positive-js/mosaic/issues/564)) ([db4d1c0](https://github.com/positive-js/mosaic/commit/db4d1c0c995f460d036c4cb2a289624180cee609)), closes [#UIM-510](https://github.com/positive-js/mosaic/issues/UIM-510)
+
+### Docs
+
+ * bug fix  Size dependence on the checkbox (#UIM-432) ([#568](https://github.com/positive-js/mosaic/issues/568)) ([d7a6f34](https://github.com/positive-js/mosaic/commit/d7a6f349b8ea29f212044056b19907edb468fe36)), closes [#UIM-432](https://github.com/positive-js/mosaic/issues/UIM-432)
+
 # 10.1.0 "Wild Moon" (2020-12-18)
 
 ### Mosaic
