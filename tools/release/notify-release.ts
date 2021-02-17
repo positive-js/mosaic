@@ -10,14 +10,14 @@ import { CHANGELOG_FILE_NAME } from './stage-release';
 const HTTP_CODE_OK = 200;
 
 export function notify(version) {
-    if (process.env.DEBUG || !verifyNotificationPossibility()) {
+    if (!verifyNotificationPossibility()) {
         return;
     }
 
     const result = dotenv.config();
 
-    const url = result.parsed!.MATTERMOST_ENDPOINT_URL;
-    const channel = result.parsed!.MATTERMOST_CHANNEL;
+    const url = result.parsed.MATTERMOST_ENDPOINT_URL;
+    const channel = result.parsed.MATTERMOST_CHANNEL;
 
     const headers = { 'Content-Type': 'application/json' };
     const body = {
@@ -46,7 +46,7 @@ export function notify(version) {
 export function verifyNotificationPossibility() {
     const result = dotenv.config();
 
-    return !result.error && result.parsed!.MATTERMOST_ENDPOINT_URL && result.parsed!.MATTERMOST_CHANNEL;
+    return !result.error && result.parsed.MATTERMOST_ENDPOINT_URL && result.parsed.MATTERMOST_CHANNEL;
 }
 
 function prepareChangeLog(version) {
