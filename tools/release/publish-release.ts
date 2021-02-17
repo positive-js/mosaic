@@ -148,7 +148,7 @@ class PublishReleaseTask extends BaseReleaseTask {
         console.info(yellow(`  ⚠   Please draft a new release of the version on Github.`));
         console.info(yellow(`      ${newReleaseUrl}`));
 
-        notify(npmDistTag, newVersionName);
+        notify(newVersionName);
     }
 
     /**
@@ -296,7 +296,7 @@ class PublishReleaseTask extends BaseReleaseTask {
             }
 
             console.info(green(`  ✓   Release tag already exists: "${italic(tagName)}"`));
-        } else if (this.git.createTag('HEAD', tagName, releaseNotes)) {
+        } else if (this.git.createTag(tagName, releaseNotes)) {
             console.info(green(`  ✓   Created release tag: "${italic(tagName)}"`));
         } else {
             console.error(red(`  ✘   Could not create the "${tagName}" tag.`));
