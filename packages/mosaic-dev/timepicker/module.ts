@@ -71,10 +71,6 @@ export class TimepickerDemoComponent {
     toggleDisable() {
         this.isDisabled = !this.isDisabled;
     }
-
-    onBadInput() {
-        console.log('onBadInput: '); // tslint:disable-line:no-console
-    }
 }
 
 @NgModule({
