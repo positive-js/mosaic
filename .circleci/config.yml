@@ -321,8 +321,7 @@ workflows:
             # 3 Group Build All Packages
             - build_packages:
                   requires:
-                      - validate_licenses
-                      - dependencies_audit
+                      - install
 
             # 6 Group Unit Tests
             - test_unit_cdk:
