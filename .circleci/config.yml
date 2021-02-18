@@ -45,14 +45,6 @@ var_8: &ignore_release_branches
             # x.0.x, x.x.x, etc.
             - /\d+\.\d+\.x/
 
-var_9: &only_latest_tag
-    branches:
-        ignore: /.*/
-    tags:
-        only:
-            # x.0.x, x.x.x, etc.
-            - /9.\d+\.x/
-
 var_10: &filter_by_release_tag
     branches:
         ignore: /.*/
@@ -224,33 +216,6 @@ jobs:
                 name: Deploy "Next" version of Docs
                 command: npx firebase deploy --only hosting:next --token=$FIREBASE_DEPLOY_TOKEN
 
-    deploy-docs-v9:
-        <<: *job_defaults
-        steps:
-            - attach_workspace:
-                  at: ~/mosaic
-            - run: yarn run build:mosaic-examples-module
-            - run: yarn run build:mosaic-examples
-            - run: yarn run build:docs
-            - run: yarn run docs:prod-build:aot
-            - run:
-                  name: Deploy "Next" version of Docs
-                  command: npx firebase deploy --only hosting:v9 --token=$FIREBASE_DEPLOY_TOKEN
-
-    deploy-docs-latest:
-        <<: *job_defaults
-        steps:
-            -   attach_workspace:
-                    at: ~/mosaic
-            -   run: yarn run build:mosaic-examples-module
-            -   run: yarn run build:mosaic-examples
-            -   run: yarn run build:docs
-            -   run: yarn run docs:prod-build:aot
-            -   run:
-                    name: Deploy "Next" version of Docs
-                    command: npx firebase deploy --only hosting:stable --token=$FIREBASE_DEPLOY_TOKEN
-
-
     sonar:
         <<: *job_defaults
         steps:
@@ -314,7 +279,7 @@ jobs:
 workflows:
     version: 2
 
-    tagged_workflow:
+    tagged_release_workflow:
         jobs:
             - install:
                   filters:
@@ -415,24 +380,6 @@ workflows:
                       - test_unit_schematics
                   filters:
                       <<: *only_master
-
-            - deploy-docs-v9:
-                  requires:
-                      - test_unit_mosaic
-                      - test_unit_cdk
-                      - test_unit_mosaic-moment-adapter
-                      - test_unit_schematics
-                  filters:
-                      <<: *only_latest_tag
-
-            - deploy-docs-latest:
-                  requires:
-                      - test_unit_mosaic
-                      - test_unit_cdk
-                      - test_unit_mosaic-moment-adapter
-                      - test_unit_schematics
-                  filters:
-                      <<: *only_latest_tag
 
             - preview_mosaic_docs:
                   requires:
