@@ -17,6 +17,16 @@
     <br><br>
 
     <div>Validation state: {{ reactiveFormControlValue.errors | json }}</div>
+    <mc-form-field>
+        <i mcPrefix mc-icon="mc-clock_16"></i>
+        <input
+            mcTimepicker
+            [formControl]="reactiveFormControlValue"
+            [max]="maxDate"
+            [format]="'HH:mm'">
+        <mc-hint class="mc-caption" *ngIf="reactiveFormControlValue.errors?.mcTimepickerParse">Только цифры</mc-hint>
+    </mc-form-field>
+
     <mc-form-field
         mcTooltip
         [mcTitle]="'Только цифры'"
@@ -26,16 +36,6 @@
             mcTimepicker
             [formControl]="reactiveFormControlValue"
             [mcValidationTooltip]="tooltip"
-            [max]="maxDate"
-            [format]="'HH:mm'">
-        <mc-hint class="mc-caption" *ngIf="reactiveFormControlValue.errors?.mcTimepickerParse">Только цифры</mc-hint>
-    </mc-form-field>
-
-    <mc-form-field>
-        <i mcPrefix mc-icon="mc-clock_16"></i>
-        <input
-            mcTimepicker
-            [formControl]="reactiveFormControlValue"
             [max]="maxDate"
             [format]="'HH:mm:ss'">
     </mc-form-field>

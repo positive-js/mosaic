@@ -61,11 +61,6 @@ export class TimepickerDemoComponent {
         this.testForm = this.fb.group({
             time: [moment('2000-10-01 12:00:00')]
         });
-
-        this.reactiveFormControlValue.statusChanges
-            .subscribe((value) => {
-                console.log('this.reactiveFormControlValue.statusChanges: ', value); // tslint:disable-line:no-console
-            });
     }
 
     toggleDisable() {

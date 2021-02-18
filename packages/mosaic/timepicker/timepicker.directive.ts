@@ -7,6 +7,7 @@ import {
     Input,
     OnDestroy,
     Optional,
+    Output,
     Renderer2
 } from '@angular/core';
 import {
@@ -25,13 +26,17 @@ import {
     UP_ARROW,
     HOME,
     END,
-    hasModifierKey,
-    isLetterKey,
     LEFT_ARROW,
     RIGHT_ARROW,
     PAGE_DOWN,
     PAGE_UP,
-    SPACE
+    SPACE,
+    DELETE,
+    hasModifierKey,
+    isLetterKey,
+    isHorizontalMovement,
+    isVerticalMovement,
+    BACKSPACE
 } from '@ptsecurity/cdk/keycodes';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { McTooltip } from '@ptsecurity/mosaic/tooltip';
@@ -88,6 +93,7 @@ const validationTooltipHideDelay: number = 3000;
         '[attr.disabled]': 'disabled || null',
         '[attr.required]': 'required',
         '[attr.size]': 'getSize()',
+        '[attr.autocomplete]': '"off"',
 
         '(blur)': 'onBlur()',
         '(focus)': 'focusChanged(true)',
@@ -237,7 +243,6 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
 
     @Input()
     set mcValidationTooltip(tooltip: McTooltip) {
-        console.log('mcValidationTooltip: '); // tslint:disable-line:no-console
         if (!tooltip) { return; }
 
         tooltip.mcMouseEnterDelay = validationTooltipShowDelay;
@@ -254,6 +259,8 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
             setTimeout(() => tooltip.hide(), validationTooltipHideDelay);
         });
     }
+
+    @Output incorrectInput = new EventEmitter<void>();
 
     get isFullFormat(): boolean {
         return this.format === TimeFormats.HHmmss;
@@ -302,8 +309,6 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
     private lastValueValid = false;
 
     private control: AbstractControl;
-
-    private incorrectInput = new EventEmitter<any>();
 
     private onChange: (value: any) => void;
     private onTouched: () => void;
@@ -411,13 +416,16 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
         // tslint:disable-next-line: deprecation
         const keyCode = event.keyCode;
 
-        if (isLetterKey(event)) {
+        if (isLetterKey(event) && !event.ctrlKey) {
             event.preventDefault();
 
             this.incorrectInput.emit();
-        } else if (hasModifierKey(event)) {
+        } else if (
+            (hasModifierKey(event) && (isVerticalMovement(keyCode) || isHorizontalMovement(keyCode))) ||
+            [DELETE, BACKSPACE].includes(keyCode)
+        ) {
             noop();
-        } else if (SPACE === keyCode) {
+        } else if (keyCode === SPACE) {
             this.spaceHandler(event);
         } else if ([HOME, PAGE_UP].includes(keyCode)) {
             this.createSelectionOfTimeComponentInInput(0);
@@ -461,6 +469,8 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
     }
 
     private formatUserPaste(value: string) {
+        if (value.match(AM_PM_FORMAT_REGEXP)) { return value; }
+
         const match: RegExpMatchArray | null = value.match(/^.+(?<symbol>[\W]).+$/);
 
         if (match?.groups) {
@@ -483,7 +493,7 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
     private replaceSymbols(value: string): string {
         let formattedValue: string = value;
 
-        const match: RegExpMatchArray | null = value.match(/(\d\d:){0,2}(?<number>[0-9])(?<symbol>\W)(:\d\d){0,2}$/);
+        const match: RegExpMatchArray | null = value.match(/^(\d\d:){0,2}(?<number>[0-9])(?<symbol>\W)(:\d\d){0,2}$/);
 
         if (match?.groups) {
             const { number, symbol } = match.groups;
@@ -524,10 +534,10 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
     }
 
     private filterUserInput(value: string, event: KeyboardEvent) {
-        if (/\D/.test(event.key)) {
-            this.incorrectInput.emit();
+        if (/^\D$/.test(event.key)) {
+            const position = this.selectionStart as number;
 
-            this.setViewValue(value.replace(event.key, ''));
+            this.setViewValue(value.substring(0, position - 1) + value.substring(position));
         }
     }
 
@@ -542,10 +552,8 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
         event.preventDefault();
 
         if (this.selectionStart === this.selectionEnd) {
-            const arr = Array.from(this.viewValue);
-            arr.splice(this.selectionStart as number, 0, event.key);
-
-            const value = arr.join('');
+            const position = this.selectionStart as number;
+            const value = [this.viewValue.slice(0, position), event.key, this.viewValue.slice(position)].join('');
             const formattedValue = this.replaceSymbols(value);
 
             if (value !== formattedValue) {
@@ -553,10 +561,6 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
 
                 setTimeout(() => this.onInput(event));
             }
-
-            console.log('this.selectionStart === this.selectionEnd: '); // tslint:disable-line:no-console
-            // this.setViewValue(`${this.viewValue} `);
-            // setTimeout(() => this.onInput(event));
         } else if (this.selectionStart !== this.selectionEnd) {
 
             let cursorPos = this.selectionStart as number;

@@ -90,14 +90,14 @@ describe('McTimepicker', () => {
 
         it('Placeholder set on default timeFormat', () => {
             fixture.detectChanges();
-            expect(inputElementDebug.nativeElement.placeholder).toBe('  :  ');
+            expect(inputElementDebug.nativeElement.placeholder).toBe('чч:мм');
         });
 
         it('Correct placeholder set for non-default time format', () => {
             testComponent.timeFormat = 'HH:mm:ss';
             fixture.detectChanges();
 
-            expect(inputElementDebug.nativeElement.placeholder).toBe('  :  :  ');
+            expect(inputElementDebug.nativeElement.placeholder).toBe('чч:мм:сс');
         });
     });
 
