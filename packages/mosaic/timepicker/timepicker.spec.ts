@@ -8,7 +8,7 @@ import {
 } from '@angular/core/testing';
 import { FormsModule, NgModel } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { DOWN_ARROW, ONE, TWO, UP_ARROW } from '@ptsecurity/cdk/keycodes';
+import { DOWN_ARROW, ONE, SPACE, TWO, UP_ARROW } from '@ptsecurity/cdk/keycodes';
 import { createKeyboardEvent, dispatchFakeEvent, dispatchEvent } from '@ptsecurity/cdk/testing';
 import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
@@ -73,7 +73,6 @@ describe('McTimepicker', () => {
 
         fixture.detectChanges();
     }));
-
 
     describe('Core attributes support', () => {
         it('Timepicker disabled state switching on/off', () => {
@@ -435,20 +434,60 @@ describe('McTimepicker', () => {
 
     describe('Keyboard value control', () => {
         beforeEach(fakeAsync(() => {
-            testComponent.timeValue = moment('1970-01-01 23:00:08');
-            testComponent.timeFormat = 'HH:mm';
+            testComponent.timeValue = moment('1970-01-01 23:00:00');
+            testComponent.timeFormat = 'HH:mm:ss';
             fixture.detectChanges();
         }));
 
+        it('Should ignore SPACE keyDown', fakeAsync(() => {
+            expect(inputElementDebug.nativeElement.value).toBe('23:00:00');
+
+            const spaceEvent: KeyboardEvent = createKeyboardEvent('keydown', SPACE);
+            dispatchEvent(inputElementDebug.nativeElement, spaceEvent);
+            tick(1);
+
+            expect(inputElementDebug.nativeElement.value).toBe('23:00:00');
+        }));
+
+        it('Input hours above max', fakeAsync(() => {
+            expect(inputElementDebug.nativeElement.value).toBe('23:00:00');
+
+            inputElementDebug.nativeElement.value = '24';
+            dispatchFakeEvent(inputElementDebug.nativeElement, 'keydown');
+            tick(1);
+
+            expect(inputElementDebug.nativeElement.value).toBe('23:00:00');
+        }));
+
+        it('Input minutes above max', fakeAsync(() => {
+            expect(inputElementDebug.nativeElement.value).toBe('23:00:00');
+
+            inputElementDebug.nativeElement.value = '23:99';
+            dispatchFakeEvent(inputElementDebug.nativeElement, 'keydown');
+            tick(1);
+
+            expect(inputElementDebug.nativeElement.value).toBe('23:59:00');
+        }));
+
+        it('Input seconds above max', fakeAsync(() => {
+            expect(inputElementDebug.nativeElement.value).toBe('23:00:00');
+
+            inputElementDebug.nativeElement.value = '23:00:99';
+            dispatchFakeEvent(inputElementDebug.nativeElement, 'keydown');
+            tick(1);
+
+            expect(inputElementDebug.nativeElement.value).toBe('23:00:59');
+        }));
+
         it('Increase hours by ArrowUp key and cycle from max to min', fakeAsync(() => {
-            expect(inputElementDebug.nativeElement.value).toBe('23:00');
+            expect(inputElementDebug.nativeElement.value).toBe('23:00:00');
 
             inputElementDebug.nativeElement.selectionStart = 1;
             inputElementDebug.triggerEventHandler('keydown', { preventDefault: () => null, keyCode: UP_ARROW });
 
             tick(1);
             fixture.detectChanges();
-            expect(inputElementDebug.nativeElement.value).toBe('00:00');
+            expect(inputElementDebug.nativeElement.value).toBe('00:00:00');
         }));
 
         it('Decrease minutes by ArrowDown key and cycle from min to max', fakeAsync(() => {
@@ -457,7 +496,7 @@ describe('McTimepicker', () => {
             tick(1);
             fixture.detectChanges();
 
-            expect(inputElementDebug.nativeElement.value).toBe('23:59', 'Arrow-Down key decrement not working');
+            expect(inputElementDebug.nativeElement.value).toBe('23:59:00', 'Arrow-Down key decrement not working');
         }));
 
         it('Manual keyboard input digit-by-digit', () => {
@@ -473,7 +512,7 @@ describe('McTimepicker', () => {
             dispatchFakeEvent(inputNativeElement, 'input');
             fixture.detectChanges();
 
-            expect(inputNativeElement.value).toBe('1:00', 'Failed key-by-key input on 1st key');
+            expect(inputNativeElement.value).toBe('1:00:00', 'Failed key-by-key input on 1st key');
 
             const key2PressEvent: KeyboardEvent = createKeyboardEvent('keydown', TWO);
             dispatchEvent(inputNativeElement, key2PressEvent);
@@ -485,7 +524,7 @@ describe('McTimepicker', () => {
             dispatchFakeEvent(inputNativeElement, 'input');
             fixture.detectChanges();
 
-            expect(inputNativeElement.value).toBe('12:00', 'Failed key-by-key input on 2nd key');
+            expect(inputNativeElement.value).toBe('12:00:00', 'Failed key-by-key input on 2nd key');
         });
     });
 });
