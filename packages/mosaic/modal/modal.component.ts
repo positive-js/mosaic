@@ -227,11 +227,11 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
             }
         }
         const footer = this.getMcFooter();
-        if (footer){
+        if (footer) {
             const buttons = Array.from(footer.getElementsByTagName('button'));
             if (buttons) {
                 const primaryBtn = buttons.find((item) => item.className.indexOf('mc-primary') !== -1);
-                if (primaryBtn){
+                if (primaryBtn) {
                     primaryBtn.focus();
                 } else {
                     buttons[0].focus();
@@ -317,11 +317,12 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
             this.close();
             event.preventDefault();
         }
+        // tslint:disable-next-line:deprecation .key isn't supported in Edge
         if (event.ctrlKey && event.keyCode === ENTER) {
-            if (this.mcFooter){
+            if (this.mcFooter) {
                 if (this.isModalButtons(this.mcFooter)) {
                     const mcFooter = this.mcFooter as IModalButtonOptions<T>[];
-                    if (mcFooter.length === 1){
+                    if (mcFooter.length === 1) {
                         this.onButtonClick(mcFooter[0]);
                     } else {
                         const btnPrimary = mcFooter.find((item) => item.type === 'primary');
@@ -340,7 +341,7 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
                             const button = buttons.find(
                                 (item) => item.className.indexOf('mc-primary') !== -1
                             );
-                            if (button){
+                            if (button) {
                                 button.click();
                             }
                         }
