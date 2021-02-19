@@ -23,7 +23,7 @@ import {
     ViewChildren,
     ViewContainerRef, ViewEncapsulation
 } from '@angular/core';
-import { ESCAPE } from '@ptsecurity/cdk/keycodes';
+import { ESCAPE, ENTER } from '@ptsecurity/cdk/keycodes';
 import { Observable } from 'rxjs';
 
 import { McModalControlService } from './modal-control.service';
@@ -226,6 +226,20 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
                 break;
             }
         }
+        const footer = this.getMcFooter();
+        if (footer){
+            const buttons = Array.from(footer.getElementsByTagName('button'));
+            if (buttons) {
+                const primaryBtn = buttons.find((item) => item.className.indexOf('mc-primary') !== -1);
+                if (primaryBtn){
+                    primaryBtn.focus();
+                } else {
+                    buttons[0].focus();
+                }
+            }
+        } else {
+            this.getElement().getElementsByTagName('button')[0]?.focus();
+        }
     }
 
     ngOnDestroy() {
@@ -275,6 +289,10 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
         return this.elementRef && this.elementRef.nativeElement;
     }
 
+    getMcFooter(): HTMLElement | null {
+        return this.getElement().getElementsByClassName('mc-modal-footer').item(0) as HTMLElement;
+    }
+
     onClickMask($event: MouseEvent) {
         if (
             this.mcMask &&
@@ -297,6 +315,41 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
         if (event.keyCode === ESCAPE && this.container && (this.container instanceof OverlayRef)) {
 
             this.close();
+            event.preventDefault();
+        }
+        if (event.ctrlKey && event.keyCode === ENTER) {
+            if (this.mcFooter){
+                if (this.isModalButtons(this.mcFooter)) {
+                    const mcFooter = this.mcFooter as IModalButtonOptions<T>[];
+                    if (mcFooter.length === 1){
+                        this.onButtonClick(mcFooter[0]);
+                    } else {
+                        const btnPrimary = mcFooter.find((item) => item.type === 'primary');
+                        if (btnPrimary) {
+                            this.onButtonClick(btnPrimary);
+                        }
+                    }
+                }
+                if (this.isTemplateRef(this.mcFooter) || this.isNonEmptyString(this.mcFooter)) {
+                    const footer = this.getMcFooter();
+                    if (footer) {
+                        const buttons = Array.from(footer.getElementsByTagName('button'));
+                        if (buttons.length === 1) {
+                            buttons[0].click();
+                        } else {
+                            const button = buttons.find(
+                                (item) => item.className.indexOf('mc-primary') !== -1
+                            );
+                            if (button){
+                                button.click();
+                            }
+                        }
+                    }
+                }
+                this.triggerOk();
+            } else {
+                this.close();
+            }
             event.preventDefault();
         }
     }
