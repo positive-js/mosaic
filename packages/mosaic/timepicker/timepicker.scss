@@ -1,10 +1,11 @@
-@import '../form-field/form-field';
+@import '../design-tokens/tokens';
 
-
-$right-padding: 20px;
 
 .mc-timepicker {
-    padding-right: $right-padding - $mc-form-field-border-size;
+    padding-right: calc(
+        var(--mc-timepicker-size-padding-right, #{$timepicker-size-padding-right}) -
+        var(--mc-form-field-size-border-width, #{$form-field-size-border-width})
+    );
 }
 
 .mc-form-field-type-mc-timepicker {
