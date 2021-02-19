@@ -15,6 +15,10 @@
     .mc-form-field {
         background-color: map-get($form-field, background);
 
+        & .mc-form-field__hint {
+            color: map-get($foreground, text-less-contrast);
+        }
+
         &:not(.mc-form-field_without-borders) {
             .mc-form-field__container {
                 border-color: map-get($form-field, border);
@@ -69,10 +73,6 @@
             }
             /* stylelint-enable no-descending-specificity */
         }
-    }
-
-    .mc-form-field__hint {
-        color: map-get($foreground, text-less-contrast);
     }
 }
 
