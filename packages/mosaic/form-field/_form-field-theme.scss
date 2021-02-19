@@ -26,11 +26,9 @@
 
             &.ng-invalid {
                 & .mc-form-field__container {
-                border-color: map-get($form-field, state-invalid-border);
-                    background-color: if($is-dark, transparent, mc-color($error, lighter));
-                background-color: map-get($form-field, state-invalid-background);
+                    border-color: map-get($form-field, state-invalid-border);
+                    background-color: map-get($form-field, state-invalid-background);
 
-                    border-color: mc-color($error);
                     .mc-input,
                     .mc-textarea {
                         color: mc-color($error);

@@ -39,7 +39,6 @@
     text-align: left;
     text-decoration: none;
     border-radius: var(--mc-tooltip-size-border-radius, $tooltip-size-border-radius);
-    min-height: var(--mc-tooltip-size-min-height, $tooltip-size-min-height);
     height: fit-content;
     vertical-align: center;
 }

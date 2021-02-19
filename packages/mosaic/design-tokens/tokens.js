@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 05 Feb 2021 11:12:28 GMT
+ * Generated on Fri, 19 Feb 2021 10:15:28 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
@@ -702,7 +702,6 @@ export const TooltipDarkColorSchemeBackground = "white";
 export const TooltipDarkColorSchemeText = "white";
 export const TooltipDarkColorSchemeShadow = "0 2px 4px 0 rgba(0, 0, 0, 0.2)";
 export const TooltipSizeMaxWidth = "240px";
-export const TooltipSizeMinHeight = "32px"; // 16px for font + 16px for padding = total 32px
 export const TooltipSizeBorderRadius = "3px";
 export const TooltipSizeArrowSize = "12px";
 export const TooltipSizeArrowWidth = "5px";
