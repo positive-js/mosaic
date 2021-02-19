@@ -260,7 +260,7 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
         });
     }
 
-    @Output incorrectInput = new EventEmitter<void>();
+    @Output() incorrectInput = new EventEmitter<void>();
 
     get isFullFormat(): boolean {
         return this.format === TimeFormats.HHmmss;
