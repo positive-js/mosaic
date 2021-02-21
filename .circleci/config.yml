@@ -45,6 +45,14 @@ var_8: &ignore_release_branches
             # x.0.x, x.x.x, etc.
             - /\d+\.\d+\.x/
 
+var_9: &preview_only_for_maintainers
+    branches:
+        ignore:
+            # ignore from forks
+            - /^pull\/.*$/
+            - /\d+\.\d+\.x/
+            - master
+
 var_10: &filter_by_release_tag
     branches:
         ignore: /.*/
@@ -384,8 +392,7 @@ workflows:
                   requires:
                       - build_mosaic_docs_for_preview
                   filters:
-                      <<: *ignore_release_branches
-                      <<: *only_for_maintainers
+                      <<: *preview_only_for_maintainers
 
             - cleanup_preview_mosaic_docs:
                   requires:
