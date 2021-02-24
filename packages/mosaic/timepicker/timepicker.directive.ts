@@ -34,8 +34,6 @@ import {
     DELETE,
     hasModifierKey,
     isLetterKey,
-    isHorizontalMovement,
-    isVerticalMovement,
     BACKSPACE
 } from '@ptsecurity/cdk/keycodes';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
@@ -74,8 +72,8 @@ export const MC_TIMEPICKER_VALIDATORS: any = {
 
 let uniqueComponentIdSuffix: number = 0;
 
-const shortFormatSize: number = 3;
-const fullFormatSize: number = 6;
+const shortFormatSize: number = 5;
+const fullFormatSize: number = 8;
 
 const validationTooltipShowDelay: number = 10;
 const validationTooltipHideDelay: number = 3000;
@@ -262,6 +260,10 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
 
     @Output() incorrectInput = new EventEmitter<void>();
 
+    get hasSelection(): boolean {
+        return this.selectionStart !== this.selectionEnd;
+    }
+
     get isFullFormat(): boolean {
         return this.format === TimeFormats.HHmmss;
     }
@@ -375,10 +377,8 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
         this.stateChanges.next();
     }
 
-    onInput(event: KeyboardEvent) {
+    onInput = () => {
         const formattedValue = this.formatUserInput(this.viewValue);
-
-        this.filterUserInput(formattedValue, event);
 
         const newTimeObj = this.getDateFromTimeString(formattedValue);
         this.lastValueValid = !!newTimeObj;
@@ -421,12 +421,11 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
 
             this.incorrectInput.emit();
         } else if (
-            (hasModifierKey(event) && (isVerticalMovement(keyCode) || isHorizontalMovement(keyCode))) ||
-            [DELETE, BACKSPACE].includes(keyCode)
+            hasModifierKey(event) || [DELETE, BACKSPACE].includes(keyCode)
         ) {
             noop();
         } else if (keyCode === SPACE) {
-            this.spaceHandler(event);
+            this.spaceKeyHandler(event);
         } else if ([HOME, PAGE_UP].includes(keyCode)) {
             this.createSelectionOfTimeComponentInInput(0);
         } else if ([END, PAGE_DOWN].includes(keyCode)) {
@@ -437,8 +436,21 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
             this.verticalArrowKeyHandler(keyCode);
         } else if ([LEFT_ARROW, RIGHT_ARROW].includes(keyCode)) {
             this.horizontalArrowKeyHandler(keyCode);
+        } else if (/^\D$/.test(event.key)) {
+            event.preventDefault();
+
+            const newValue = this.getNewValue(event.key, this.selectionStart as number);
+            const formattedValue = this.replaceSymbols(newValue);
+
+            if (newValue !== formattedValue) {
+                this.setViewValue(formattedValue);
+
+                setTimeout(this.onInput);
+            } else {
+                this.incorrectInput.emit();
+            }
         } else {
-            setTimeout(() => this.onInput(event));
+            setTimeout(this.onInput);
         }
     }
 
@@ -470,6 +482,8 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
 
     private formatUserPaste(value: string) {
         if (value.match(AM_PM_FORMAT_REGEXP)) { return value; }
+
+        console.log('formatUserPaste: '); // tslint:disable-line:no-console
 
         const match: RegExpMatchArray | null = value.match(/^.+(?<symbol>[\W]).+$/);
 
@@ -507,15 +521,10 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
     private replaceNumbers(value: string): string {
         let formattedValue: string = value;
 
-        const match: RegExpMatchArray | null = value.match(/^(?<hours>\d{0,3}):?(?<minutes>\d{0,3}):?(?<seconds>\d{0,3})$/);
+        const match: RegExpMatchArray | null = value.match(/^(?<hours>\d{0,4}):?(?<minutes>\d{0,4}):?(?<seconds>\d{0,4})$/);
 
         if (match?.groups) {
             const { hours, minutes, seconds } = match.groups;
-
-            // tslint:disable-next-line:no-magic-numbers
-            if (hours.length === 1 && parseInt(hours) > 2) {
-                formattedValue = `0${formattedValue}`;
-            }
 
             if (hours.length && parseInt(hours) > HOURS_PER_DAY) {
                 formattedValue = formattedValue.replace(hours, HOURS_PER_DAY.toString());
@@ -533,14 +542,6 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
         return formattedValue;
     }
 
-    private filterUserInput(value: string, event: KeyboardEvent) {
-        if (/^\D$/.test(event.key)) {
-            const position = this.selectionStart as number;
-
-            this.setViewValue(value.substring(0, position - 1) + value.substring(position));
-        }
-    }
-
     /** Checks whether the input is invalid based on the native validation. */
     private isBadInput(): boolean {
         const validity = (<HTMLInputElement> this.elementRef.nativeElement).validity;
@@ -548,18 +549,17 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
         return validity && validity.badInput;
     }
 
-    private spaceHandler(event: KeyboardEvent) {
+    private spaceKeyHandler(event: KeyboardEvent) {
         event.preventDefault();
 
         if (this.selectionStart === this.selectionEnd) {
-            const position = this.selectionStart as number;
-            const value = [this.viewValue.slice(0, position), event.key, this.viewValue.slice(position)].join('');
+            const value = this.getNewValue(event.key, this.selectionStart as number);
             const formattedValue = this.replaceSymbols(value);
 
             if (value !== formattedValue) {
                 this.setViewValue(formattedValue);
 
-                setTimeout(() => this.onInput(event));
+                setTimeout(this.onInput);
             }
         } else if (this.selectionStart !== this.selectionEnd) {
 
@@ -571,6 +571,10 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
 
             this.createSelectionOfTimeComponentInInput(cursorPos);
         }
+    }
+
+    private getNewValue(key: string, position: number) {
+        return [this.viewValue.slice(0, position), key, this.viewValue.slice(position)].join('');
     }
 
     private verticalArrowKeyHandler(keyCode: number): void {

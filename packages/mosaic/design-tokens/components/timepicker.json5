@@ -1,7 +1,7 @@
 {
     'timepicker': {
         size: {
-            'padding-right': { value: '20px' }
+            'padding-right': { value: '16px' }
         }
     }
 }

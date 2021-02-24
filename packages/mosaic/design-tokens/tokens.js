@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 19 Feb 2021 10:23:21 GMT
+ * Generated on Wed, 24 Feb 2021 10:23:59 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
@@ -676,7 +676,7 @@ export const TextareaSizeMinHeight = "50px";
 export const TextareaSizePadding = "5px 16px";
 export const TextareaFontDefault = "body";
 export const TextareaFontMono = "body-mono";
-export const TimepickerSizePaddingRight = "20px";
+export const TimepickerSizePaddingRight = "16px";
 export const ToggleLightColorSchemeBorder = "#B3B3B3";
 export const ToggleLightColorSchemeBackground = "linear-gradient(to bottom, #E6E6E6, #F0F0F0)";
 export const ToggleLightColorSchemeCircleBorder = "#B3B3B3";
