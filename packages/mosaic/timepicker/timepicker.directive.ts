@@ -32,9 +32,11 @@ import {
     PAGE_UP,
     SPACE,
     DELETE,
+    BACKSPACE,
     hasModifierKey,
     isLetterKey,
-    BACKSPACE
+    isVerticalMovement,
+    isHorizontalMovement
 } from '@ptsecurity/cdk/keycodes';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { McTooltip } from '@ptsecurity/mosaic/tooltip';
@@ -421,7 +423,9 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
 
             this.incorrectInput.emit();
         } else if (
-            hasModifierKey(event) || [DELETE, BACKSPACE].includes(keyCode)
+            (hasModifierKey(event) && (isVerticalMovement(keyCode) || isHorizontalMovement(keyCode))) ||
+            event.ctrlKey || event.metaKey ||
+            [DELETE, BACKSPACE].includes(keyCode)
         ) {
             noop();
         } else if (keyCode === SPACE) {
