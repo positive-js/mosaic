@@ -483,21 +483,21 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
     private formatUserPaste(value: string) {
         if (value.match(AM_PM_FORMAT_REGEXP)) { return value; }
 
-        console.log('formatUserPaste: '); // tslint:disable-line:no-console
+        const match: RegExpMatchArray | null = value.match(
+            /^(\D+)?(?<hours>\d+)?(\D+)?(\D+)?(?<minutes>\d+)?(\D+)?(\D+)?(?<seconds>\d+)?(\D+)?$/
+        );
 
-        const match: RegExpMatchArray | null = value.match(/^.+(?<symbol>[\W]).+$/);
+        if (!match?.groups?.hours) {
+            this.setViewValue(value);
 
-        if (match?.groups) {
-            const { symbol } = match.groups;
-
-            const newValue = value.replace(new RegExp(`\\${symbol}`, 'g'), ':');
-
-            this.setViewValue(newValue);
-
-            return newValue;
+            return value;
         }
 
-        return value;
+        return this.replaceNumbers(Object.values(match.groups)
+            // tslint:disable-next-line:no-magic-numbers
+            .map((group) => (group || '').padStart(2, '0'))
+            .join(':')
+        );
     }
 
     private formatUserInput(value: string): string {
