@@ -16,7 +16,7 @@
 
 #### Кнопки с иконками
 Кнопки состоят из иконки и могут содержать текст.
-Чтобы создать кнопку с иконкой, добавьте элемент `<i mc-icon ="icon_name"> </ i>` в `<button mc-icon-button>`, 
+Чтобы создать кнопку с иконкой, добавьте элемент `<i mc-icon ="icon_name"> </ i>` в `<button mc-button>`, 
 где `"icon_name"` - это имя [Mosaic icon](https://github.com/positive-js/mosaic-icons).
 
 <!-- example(button-icon) -->
