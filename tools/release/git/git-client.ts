@@ -96,7 +96,7 @@ export class GitClient {
     }
 
     /** Push committed changes to remote */
-    pushBranchToRemote(remoteName, branchName: string): boolean {
+    pushBranchToRemote(remoteName: string, branchName: string): boolean {
         return this.spawnGitProcess(['push', remoteName, branchName]).status === 0;
     }
 
