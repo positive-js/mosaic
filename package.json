@@ -38,7 +38,7 @@
         "@angular/platform-browser-dynamic": "^10.1.6",
         "@angular/platform-server": "^10.1.6",
         "@angular/router": "^10.1.6",
-        "@commitlint/cli": "8.1.0",
+        "@commitlint/cli": "9.0.0",
         "@commitlint/config-conventional": "^7.5.0",
         "@octokit/rest": "^16.2.0",
         "@ptsecurity/commitlint-config": "^1.0.0",
