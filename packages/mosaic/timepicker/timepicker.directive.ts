@@ -418,7 +418,7 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
         // tslint:disable-next-line: deprecation
         const keyCode = event.keyCode;
 
-        if (isLetterKey(event) && !event.ctrlKey) {
+        if (isLetterKey(event) && !event.ctrlKey && !event.metaKey) {
             event.preventDefault();
 
             this.incorrectInput.emit();
