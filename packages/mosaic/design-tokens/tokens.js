@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 05 Feb 2021 11:12:28 GMT
+ * Generated on Wed, 24 Feb 2021 10:23:59 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
@@ -676,6 +676,7 @@ export const TextareaSizeMinHeight = "50px";
 export const TextareaSizePadding = "5px 16px";
 export const TextareaFontDefault = "body";
 export const TextareaFontMono = "body-mono";
+export const TimepickerSizePaddingRight = "16px";
 export const ToggleLightColorSchemeBorder = "#B3B3B3";
 export const ToggleLightColorSchemeBackground = "linear-gradient(to bottom, #E6E6E6, #F0F0F0)";
 export const ToggleLightColorSchemeCircleBorder = "#B3B3B3";
@@ -702,7 +703,6 @@ export const TooltipDarkColorSchemeBackground = "white";
 export const TooltipDarkColorSchemeText = "white";
 export const TooltipDarkColorSchemeShadow = "0 2px 4px 0 rgba(0, 0, 0, 0.2)";
 export const TooltipSizeMaxWidth = "240px";
-export const TooltipSizeMinHeight = "32px"; // 16px for font + 16px for padding = total 32px
 export const TooltipSizeBorderRadius = "3px";
 export const TooltipSizeArrowSize = "12px";
 export const TooltipSizeArrowWidth = "5px";

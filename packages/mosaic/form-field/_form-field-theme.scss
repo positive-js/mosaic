@@ -15,6 +15,10 @@
     .mc-form-field {
         background-color: map-get($form-field, background);
 
+        & .mc-form-field__hint {
+            color: map-get($foreground, text-less-contrast);
+        }
+
         &:not(.mc-form-field_without-borders) {
             .mc-form-field__container {
                 border-color: map-get($form-field, border);
@@ -24,12 +28,18 @@
                 border-color: map-get($form-field, state-hover-border);
             }
 
-            &.ng-invalid .mc-form-field__container {
-                border-color: map-get($form-field, state-invalid-border);
-                background-color: map-get($form-field, state-invalid-background);
+            &.ng-invalid {
+                & .mc-form-field__container {
+                    border-color: map-get($form-field, state-invalid-border);
+                    background-color: map-get($form-field, state-invalid-background);
 
-                .mc-input,
-                .mc-textarea {
+                    .mc-input,
+                    .mc-textarea {
+                        color: mc-color($error);
+                    }
+                }
+
+                & .mc-form-field__hint {
                     color: mc-color($error);
                 }
             }
@@ -63,10 +73,6 @@
             }
             /* stylelint-enable no-descending-specificity */
         }
-    }
-
-    .mc-form-field__hint {
-        color: map-get($foreground, text-less-contrast);
     }
 }
 

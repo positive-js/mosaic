@@ -2,20 +2,25 @@
     <div class="example-timepicker-element">
         <label for="Time"
                class="flex-35 mc-form-label">Выберите время между min и max</label>
-        <mc-form-field >
+        <mc-form-field
+            mcTooltip
+            [mcTitle]="'Только цифры'"
+            #tooltip="mcTooltip">
+
             <i mcPrefix mc-icon="mc-clock_16"></i>
             <input mcTimepicker
                    id="Time"
                    [min]="getStartTime()"
                    [max]="getEndTime()"
-                   [(ngModel)]="time">
+                   [(ngModel)]="time"
+                   [mcValidationTooltip]="tooltip">
         </mc-form-field>
     </div>
 
     <div class="example-timepicker-element">
         <label for="startTime"
                class="flex-35 mc-form-label">min</label>
-        <mc-form-field >
+        <mc-form-field>
             <input mcTimepicker
                    id="startTime"
                    [(ngModel)]="startTime">
@@ -25,7 +30,7 @@
     <div class="example-timepicker-element">
         <label for="endTime"
                class="flex-35 mc-form-label">max</label>
-        <mc-form-field >
+        <mc-form-field>
             <input mcTimepicker
                    id="endTime"
                    [(ngModel)]="endTime">

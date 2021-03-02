@@ -587,6 +587,8 @@ export class McTooltip implements OnInit, OnDestroy {
     }
 
     initElementRefListeners() {
+        this.clearListeners();
+
         if (this.mcTrigger === 'hover') {
             this.manualListeners
                 .set('mouseenter', () => this.show())
@@ -600,6 +602,14 @@ export class McTooltip implements OnInit, OnDestroy {
                 .set('blur', () => this.hide())
                 .forEach((listener, event) => this.elementRef.nativeElement.addEventListener(event, listener));
         }
+    }
+
+    clearListeners() {
+        this.manualListeners.forEach((listener, event) => {
+            this.elementRef.nativeElement.removeEventListener(event, listener);
+        });
+
+        this.manualListeners.clear();
     }
 
     show(): void {

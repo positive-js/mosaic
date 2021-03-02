@@ -39,7 +39,6 @@
     text-align: left;
     text-decoration: none;
     border-radius: var(--mc-tooltip-size-border-radius, $tooltip-size-border-radius);
-    min-height: var(--mc-tooltip-size-min-height, $tooltip-size-min-height);
     height: fit-content;
     vertical-align: center;
 }
@@ -52,33 +51,37 @@
 }
 
 .mc-tooltip_placement-top .mc-tooltip-arrow {
-    bottom:
-        var(--mc-tooltip-size-distance, $tooltip-size-distance) -
-        var(--mc-tooltip-size-arrow-width, $tooltip-size-arrow-width);
+    bottom: calc(
+        var(--mc-tooltip-size-distance, #{$tooltip-size-distance}) -
+        var(--mc-tooltip-size-arrow-width, #{$tooltip-size-arrow-width})
+    );
     left: 50%;
     margin-left: calc(-1 * var(--mc-tooltip-size-arrow-width, #{$tooltip-size-arrow-width}));
 }
 
 .mc-tooltip_placement-right .mc-tooltip-arrow {
-    left:
-        var(--mc-tooltip-size-distance, $tooltip-size-distance) -
-        var(--mc-tooltip-size-arrow-width, $tooltip-size-arrow-width);
+    left: calc(
+        var(--mc-tooltip-size-distance, #{$tooltip-size-distance}) -
+        var(--mc-tooltip-size-arrow-width, #{$tooltip-size-arrow-width})
+    );
     top: 16px;
     margin-top: calc(-1 * var(--mc-tooltip-size-arrow-width, #{$tooltip-size-arrow-width}));
 }
 
 .mc-tooltip_placement-left .mc-tooltip-arrow {
-    right:
-        var(--mc-tooltip-size-distance, $tooltip-size-distance) -
-        var(--mc-tooltip-size-arrow-width, $tooltip-size-arrow-width);
+    right: calc(
+        var(--mc-tooltip-size-distance, #{$tooltip-size-distance}) -
+        var(--mc-tooltip-size-arrow-width, #{$tooltip-size-arrow-width})
+    );
     top: 16px;
     margin-top: calc(-1 * var(--mc-tooltip-size-arrow-width, #{$tooltip-size-arrow-width}));
 }
 
 .mc-tooltip_placement-bottom .mc-tooltip-arrow {
-    top:
-        var(--mc-tooltip-size-distance, $tooltip-size-distance) -
-        var(--mc-tooltip-size-arrow-width, $tooltip-size-arrow-width);
+    top: calc(
+        var(--mc-tooltip-size-distance, #{$tooltip-size-distance}) -
+        var(--mc-tooltip-size-arrow-width, #{$tooltip-size-arrow-width})
+    );
     left: 50%;
     margin-left: calc(-1 * var(--mc-tooltip-size-arrow-width, #{$tooltip-size-arrow-width}));
 }

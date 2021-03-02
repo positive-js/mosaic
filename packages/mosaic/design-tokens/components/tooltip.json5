@@ -12,10 +12,6 @@
         },
         size: {
             'max-width': { value: '240px' },
-            'min-height': {
-                value: '32px',
-                comment: '16px for font + 16px for padding = total 32px'
-            },
             'border-radius': { value: '3px' },
             'arrow-size': { value: '12px' },
             'arrow-width': { value: '5px' },

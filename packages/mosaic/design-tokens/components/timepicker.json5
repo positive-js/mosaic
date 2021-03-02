@@ -1,0 +1,7 @@
+{
+    'timepicker': {
+        size: {
+            'padding-right': { value: '16px' }
+        }
+    }
+}
