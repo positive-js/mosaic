@@ -447,10 +447,15 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
         this.changeAnimationState(isVisible ? 'enter' : 'leave');
 
         // Return when animation is over
-        return new Promise((resolve) => window.setTimeout(() => {
-            this.changeAnimationState(null);
-            resolve();
-        }, MODAL_ANIMATE_DURATION));
+        return new Promise((resolve) => {
+            return window.setTimeout(
+                () => {
+                    this.changeAnimationState(null);
+                    resolve();
+                },
+                MODAL_ANIMATE_DURATION
+            );
+        });
     }
 
     private formatModalButtons(buttons: IModalButtonOptions<T>[]): IModalButtonOptions<T>[] {
@@ -522,5 +527,8 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
 
 function isPromise(obj: {} | void): boolean {
     // tslint:disable-next-line: no-unbound-method
-    return !!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof (obj as Promise<{}>).then === 'function' && typeof (obj as Promise<{}>).catch === 'function';
+    return !!obj &&
+        (typeof obj === 'object' || typeof obj === 'function') &&
+        typeof (obj as Promise<{}>).then === 'function' &&
+        typeof (obj as Promise<{}>).catch === 'function';
 }

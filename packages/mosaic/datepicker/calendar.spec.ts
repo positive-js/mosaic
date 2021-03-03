@@ -146,17 +146,22 @@ describe('McCalendar', () => {
             expect(normalizedYear.year()).toEqual(2017);
         });
 
-        it('should re-render when the i18n labels have changed',
-            inject([McDatepickerIntl], (intl: McDatepickerIntl) => {
-                const button = fixture.debugElement.nativeElement
-                    .querySelector('.mc-calendar__period-button');
+        it(
+            'should re-render when the i18n labels have changed',
+            inject(
+                [McDatepickerIntl],
+                (intl: McDatepickerIntl) => {
+                    const button = fixture.debugElement.nativeElement
+                        .querySelector('.mc-calendar__period-button');
 
-                intl.switchToMultiYearViewLabel = 'Go to multi-year view?';
-                intl.changes.next();
-                fixture.detectChanges();
+                    intl.switchToMultiYearViewLabel = 'Go to multi-year view?';
+                    intl.changes.next();
+                    fixture.detectChanges();
 
-                expect(button.getAttribute('aria-label')).toBe('Go to multi-year view?');
-            }));
+                    expect(button.getAttribute('aria-label')).toBe('Go to multi-year view?');
+                }
+            )
+        );
 
         it('should set all buttons to be `type="button"`', () => {
             const invalidButtons = calendarElement.querySelectorAll('button:not([type="button"])');

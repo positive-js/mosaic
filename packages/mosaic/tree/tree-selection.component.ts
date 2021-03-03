@@ -507,9 +507,12 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
     setOptionsFromValues(values: any[]): void {
         this.selectionModel.clear();
 
-        const valuesToSelect = values.reduce((result, value) => {
-            return this.treeControl.hasValue(value) ? [...result, this.treeControl.hasValue(value)] : [...result];
-        }, []);
+        const valuesToSelect = values.reduce(
+            (result, value) => {
+                return this.treeControl.hasValue(value) ? [...result, this.treeControl.hasValue(value)] : [...result];
+            },
+            []
+        );
 
         this.selectionModel.select(...valuesToSelect);
     }

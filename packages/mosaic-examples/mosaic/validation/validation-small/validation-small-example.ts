@@ -21,9 +21,12 @@ export class ValidationSmallExample {
     smallForm: FormGroup;
 
     constructor() {
-        this.smallForm = new FormGroup({
-            firstName: new FormControl('', Validators.required),
-            lastName: new FormControl('', Validators.required)
-        }, emptyFormValidator());
+        this.smallForm = new FormGroup(
+            {
+                firstName: new FormControl('', Validators.required),
+                lastName: new FormControl('', Validators.required)
+            },
+            emptyFormValidator()
+        );
     }
 }

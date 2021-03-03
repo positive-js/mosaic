@@ -117,11 +117,14 @@ export class ModalDemoComponent {
         modal.afterClose.subscribe((result) => console.log('[afterClose] The result is:', result));
 
         // delay until modal instance created
-        setTimeout(() => {
-            const instance = modal.getContentComponent();
-            instance.subtitle = 'sub title is changed';
-            modal.markForCheck();
-        }, 2000);
+        setTimeout(
+            () => {
+                const instance = modal.getContentComponent();
+                instance.subtitle = 'sub title is changed';
+                modal.markForCheck();
+            },
+            2000
+        );
     }
 
     openAndCloseAll() {

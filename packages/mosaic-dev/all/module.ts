@@ -141,9 +141,10 @@ export class DemoComponent {
     treeFlattener: McTreeFlattener<FileNode, FileFlatNode>;
 
     constructor(private modalService: McModalService) {
-        setInterval(() => {
-            this.percent = (this.percent + STEP) % (MAX_PERCENT + STEP);
-        }, INTERVAL);
+        setInterval(
+            () => this.percent = (this.percent + STEP) % (MAX_PERCENT + STEP),
+            INTERVAL
+        );
 
         this.treeFlattener = new McTreeFlattener(
             this.transformer, this.getLevel, this.isExpandable, this.getChildren

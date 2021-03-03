@@ -244,31 +244,33 @@ describe('McTagList', () => {
                     expect(tagListInstance.keyManager.activeItemIndex).toEqual(-1);
                 });
 
-                it('should move focus to the last tag when the focused tag was deleted inside a' +
-                    'component with animations', fakeAsync(() => {
-                    fixture.destroy();
-                    TestBed.resetTestingModule();
-                    fixture = createComponent(StandardTagListWithAnimations, [], BrowserAnimationsModule);
-                    fixture.detectChanges();
+                it(
+                    'should move focus to the last tag when the focused tag was deleted inside a component with animations',
+                    fakeAsync(() => {
+                        fixture.destroy();
+                        TestBed.resetTestingModule();
+                        fixture = createComponent(StandardTagListWithAnimations, [], BrowserAnimationsModule);
+                        fixture.detectChanges();
 
-                    tagListDebugElement = fixture.debugElement.query(By.directive(McTagList));
-                    tagListNativeElement = tagListDebugElement.nativeElement;
-                    tagListInstance = tagListDebugElement.componentInstance;
-                    testComponent = fixture.debugElement.componentInstance;
-                    tags = tagListInstance.tags;
+                        tagListDebugElement = fixture.debugElement.query(By.directive(McTagList));
+                        tagListNativeElement = tagListDebugElement.nativeElement;
+                        tagListInstance = tagListDebugElement.componentInstance;
+                        testComponent = fixture.debugElement.componentInstance;
+                        tags = tagListInstance.tags;
 
-                    tags.last.focus();
-                    flush();
-                    fixture.detectChanges();
+                        tags.last.focus();
+                        flush();
+                        fixture.detectChanges();
 
-                    expect(tagListInstance.keyManager.activeItemIndex).toBe(tags.length - 1);
+                        expect(tagListInstance.keyManager.activeItemIndex).toBe(tags.length - 1);
 
-                    dispatchKeyboardEvent(tags.last._elementRef.nativeElement, 'keydown', BACKSPACE);
-                    fixture.detectChanges();
-                    tick(500);
+                        dispatchKeyboardEvent(tags.last._elementRef.nativeElement, 'keydown', BACKSPACE);
+                        fixture.detectChanges();
+                        tick(500);
 
-                    expect(tagListInstance.keyManager.activeItemIndex).toBe(tags.length - 1);
-                }));
+                        expect(tagListInstance.keyManager.activeItemIndex).toBe(tags.length - 1);
+                    })
+                );
 
             });
         });
@@ -1209,7 +1211,8 @@ describe('McTagList', () => {
             });
         }));
 
-        it('should hide the errors and show the hints once the tag list becomes valid',
+        it(
+            'should hide the errors and show the hints once the tag list becomes valid',
             fakeAsync(() => {
                 errorTestComponent.formControl.markAsTouched();
                 fixture.detectChanges();
@@ -1226,15 +1229,18 @@ describe('McTagList', () => {
                     fixture.detectChanges();
 
                     fixture.whenStable().then(() => {
-                        expect(containerEl.classList).not.toContain('mc-form-field-invalid',
-                            'Expected container not to have the invalid class when valid.');
+                        expect(containerEl.classList).not.toContain(
+                            'mc-form-field-invalid',
+                            'Expected container not to have the invalid class when valid.'
+                        );
                         expect(containerEl.querySelectorAll('mc-error').length)
                             .toBe(0, 'Expected no error messages when the input is valid.');
                         expect(containerEl.querySelectorAll('mc-hint').length)
                             .toBe(1, 'Expected one hint to be shown once the input is valid.');
                     });
                 });
-            }));
+            })
+        );
 
         it('should set the proper role on the error messages', () => {
             errorTestComponent.formControl.markAsTouched();

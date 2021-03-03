@@ -3,21 +3,23 @@
 export function createMouseEvent(type: string, x = 0, y = 0, button = 0) {
     const event = document.createEvent('MouseEvent');
 
-    event.initMouseEvent(type,
-        false, /* canBubble */
-        false, /* cancelable */
+    event.initMouseEvent(
+        type,
+        false,
+        false,
         window, /* view */
-        0, /* detail */
+        0,
         x, /* screenX */
         y, /* screenY */
         x, /* clientX */
         y, /* clientY */
-        false, /* ctrlKey */
-        false, /* altKey */
-        false, /* shiftKey */
-        false, /* metaKey */
+        false,
+        false,
+        false,
+        false,
         button, /* button */
-        null /* relatedTarget */);
+        null
+    );
 
     return event;
 }
@@ -63,7 +65,7 @@ export function createKeyboardEvent(type: string, keyCode: number, target?: Elem
     });
 
     // IE won't set `defaultPrevented` on synthetic events so we need to do it manually.
-    event.preventDefault = function() {
+    event.preventDefault = function () {
         Object.defineProperty(event, 'defaultPrevented', { get: () => true });
 
         return originalPreventDefault.apply(this, arguments);

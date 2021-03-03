@@ -1529,22 +1529,28 @@ describe('McTreeSelect', () => {
                     dispatchKeyboardEvent(select, 'keydown', DOWN_ARROW);
 
                     expect(options[0].selected).toBe(true, 'Expected first option to be selected.');
-                    expect(formControl.value).toBe(options[0].value,
-                        'Expected value from first option to have been set on the model.');
+                    expect(formControl.value).toBe(
+                        options[0].value,
+                        'Expected value from first option to have been set on the model.'
+                    );
 
                     dispatchKeyboardEvent(select, 'keydown', DOWN_ARROW);
                     dispatchKeyboardEvent(select, 'keydown', DOWN_ARROW);
 
                     // Note that the third option is skipped, because it is disabled.
                     expect(options[3].selected).toBe(true, 'Expected fourth option to be selected.');
-                    expect(formControl.value).toBe(options[3].value,
-                        'Expected value from fourth option to have been set on the model.');
+                    expect(formControl.value).toBe(
+                        options[3].value,
+                        'Expected value from fourth option to have been set on the model.'
+                    );
 
                     dispatchKeyboardEvent(select, 'keydown', UP_ARROW);
 
                     expect(options[1].selected).toBe(true, 'Expected second option to be selected.');
-                    expect(formControl.value).toBe(options[1].value,
-                        'Expected value from second option to have been set on the model.');
+                    expect(formControl.value).toBe(
+                        options[1].value,
+                        'Expected value from second option to have been set on the model.'
+                    );
                 }));
 
                 it('should resume focus from selected item after selecting via click', fakeAsync(() => {
@@ -1580,22 +1586,28 @@ describe('McTreeSelect', () => {
                     dispatchKeyboardEvent(select, 'keydown', RIGHT_ARROW);
 
                     expect(options[0].selected).toBe(true, 'Expected first option to be selected.');
-                    expect(formControl.value).toBe(options[0].value,
-                        'Expected value from first option to have been set on the model.');
+                    expect(formControl.value).toBe(
+                        options[0].value,
+                        'Expected value from first option to have been set on the model.'
+                    );
 
                     dispatchKeyboardEvent(select, 'keydown', RIGHT_ARROW);
                     dispatchKeyboardEvent(select, 'keydown', RIGHT_ARROW);
 
                     // Note that the third option is skipped, because it is disabled.
                     expect(options[3].selected).toBe(true, 'Expected fourth option to be selected.');
-                    expect(formControl.value).toBe(options[3].value,
-                        'Expected value from fourth option to have been set on the model.');
+                    expect(formControl.value).toBe(
+                        options[3].value,
+                        'Expected value from fourth option to have been set on the model.'
+                    );
 
                     dispatchKeyboardEvent(select, 'keydown', LEFT_ARROW);
 
                     expect(options[1].selected).toBe(true, 'Expected second option to be selected.');
-                    expect(formControl.value).toBe(options[1].value,
-                        'Expected value from second option to have been set on the model.');
+                    expect(formControl.value).toBe(
+                        options[1].value,
+                        'Expected value from second option to have been set on the model.'
+                    );
                 }));
 
                 it('should open a single-selection select using ALT + DOWN_ARROW', fakeAsync(() => {
@@ -1674,18 +1686,23 @@ describe('McTreeSelect', () => {
                     tick(200);
 
                     expect(options[1].selected).toBe(true, 'Expected second option to be selected.');
-                    expect(formControl.value).toBe(options[1].value,
-                        'Expected value from second option to have been set on the model.');
+                    expect(formControl.value).toBe(
+                        options[1].value,
+                        'Expected value from second option to have been set on the model.'
+                    );
 
                     dispatchEvent(select, createKeyboardEvent('keydown', 69, undefined, 'e'));
                     tick(200);
 
                     expect(options[5].selected).toBe(true, 'Expected sixth option to be selected.');
-                    expect(formControl.value).toBe(options[5].value,
-                        'Expected value from sixth option to have been set on the model.');
+                    expect(formControl.value).toBe(
+                        options[5].value,
+                        'Expected value from sixth option to have been set on the model.'
+                    );
                 }));
 
-                it('should open the panel when pressing a vertical arrow key on a closed multiple select',
+                it(
+                    'should open the panel when pressing a vertical arrow key on a closed multiple select',
                     fakeAsync(() => {
                         fixture.destroy();
 
@@ -1707,9 +1724,11 @@ describe('McTreeSelect', () => {
                         expect(instance.select.panelOpen).toBe(true, 'Expected panel to be open.');
                         expect(instance.control.value).toBe(initialValue, 'Expected value to stay the same.');
                         expect(event.defaultPrevented).toBe(true, 'Expected default to be prevented.');
-                    }));
+                    })
+                );
 
-                it('should open the panel when pressing a horizontal arrow key on closed multiple select',
+                it(
+                    'should open the panel when pressing a horizontal arrow key on closed multiple select',
                     fakeAsync(() => {
                         fixture.destroy();
 
@@ -1730,7 +1749,8 @@ describe('McTreeSelect', () => {
                         expect(instance.select.panelOpen).toBe(true, 'Expected panel to be open.');
                         expect(instance.control.value).toBe(initialValue, 'Expected value to stay the same.');
                         expect(event.defaultPrevented).toBe(true, 'Expected default to be prevented.');
-                    }));
+                    })
+                );
 
                 it('should do nothing when typing on a closed multi-select', fakeAsync(() => {
                     fixture.destroy();
@@ -1765,7 +1785,8 @@ describe('McTreeSelect', () => {
                     expect(formControl.pristine).toBe(true, 'Expected form control to stay clean.');
                 }));
 
-                it('should continue from the selected option when the value is set programmatically',
+                it(
+                    'should continue from the selected option when the value is set programmatically',
                     fakeAsync(() => {
                         const formControl = fixture.componentInstance.control;
 
@@ -1777,32 +1798,35 @@ describe('McTreeSelect', () => {
                         expect(formControl.value).toBe('Documents');
                         expect(fixture.componentInstance.select.tree.keyManager.activeItem!.value)
                             .toBe('Documents');
-                    }));
+                    })
+                );
 
-                it('should not shift focus when the selected options are updated programmatically ' +
-                    'in a multi select', fakeAsync(() => {
-                    fixture.destroy();
+                it(
+                    'should not shift focus when the selected options are updated programmatically in a multi select',
+                    fakeAsync(() => {
+                        fixture.destroy();
 
-                    const multiFixture = TestBed.createComponent(MultiSelect);
-                    multiFixture.detectChanges();
-                    multiFixture.detectChanges();
+                        const multiFixture = TestBed.createComponent(MultiSelect);
+                        multiFixture.detectChanges();
+                        multiFixture.detectChanges();
 
-                    select = multiFixture.debugElement.query(By.css('mc-tree-select')).nativeElement;
-                    multiFixture.componentInstance.select.open();
-                    multiFixture.detectChanges();
-                    flush();
+                        select = multiFixture.debugElement.query(By.css('mc-tree-select')).nativeElement;
+                        multiFixture.componentInstance.select.open();
+                        multiFixture.detectChanges();
+                        flush();
 
-                    const options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-tree-option');
+                        const options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-tree-option');
 
-                    options[2].focus();
-                    expect(document.activeElement).toBe(options[2], 'Expected third option to be focused.');
+                        options[2].focus();
+                        expect(document.activeElement).toBe(options[2], 'Expected third option to be focused.');
 
-                    multiFixture.componentInstance.control.setValue(['steak-0', 'sushi-7']);
-                    tick(10);
+                        multiFixture.componentInstance.control.setValue(['steak-0', 'sushi-7']);
+                        tick(10);
 
-                    expect(document.activeElement)
-                        .toBe(options[2], 'Expected fourth option to remain focused.');
-                }));
+                        expect(document.activeElement)
+                            .toBe(options[2], 'Expected fourth option to remain focused.');
+                    })
+                );
 
                 it('should not cycle through the options if the control is disabled', fakeAsync(() => {
                     const formControl = fixture.componentInstance.control;
@@ -2188,27 +2212,29 @@ describe('McTreeSelect', () => {
                 expect(event.defaultPrevented).toBe(true);
             }));
 
-            it('should not consider itself as blurred if the trigger loses focus while the ' +
-                'panel is still open', fakeAsync(() => {
-                const selectElement = fixture.nativeElement.querySelector('.mc-tree-select');
-                const selectInstance = fixture.componentInstance.select;
+            it(
+                'should not consider itself as blurred if the trigger loses focus while the panel is still open',
+                fakeAsync(() => {
+                    const selectElement = fixture.nativeElement.querySelector('.mc-tree-select');
+                    const selectInstance = fixture.componentInstance.select;
 
-                dispatchFakeEvent(selectElement, 'focus');
-                fixture.detectChanges();
+                    dispatchFakeEvent(selectElement, 'focus');
+                    fixture.detectChanges();
 
-                /* tslint:disable-next-line:deprecation */
-                expect(selectInstance.focused).toBe(true, 'Expected select to be focused.');
+                    /* tslint:disable-next-line:deprecation */
+                    expect(selectInstance.focused).toBe(true, 'Expected select to be focused.');
 
-                selectInstance.open();
-                fixture.detectChanges();
-                flush();
-                dispatchFakeEvent(selectElement, 'blur');
-                fixture.detectChanges();
-                tick(10);
+                    selectInstance.open();
+                    fixture.detectChanges();
+                    flush();
+                    dispatchFakeEvent(selectElement, 'blur');
+                    fixture.detectChanges();
+                    tick(10);
 
-                /* tslint:disable-next-line:deprecation */
-                expect(selectInstance.focused).toBe(true, 'Expected select element to remain focused.');
-            }));
+                    /* tslint:disable-next-line:deprecation */
+                    expect(selectInstance.focused).toBe(true, 'Expected select element to remain focused.');
+                })
+            );
         });
 
         describe('selection logic', () => {
@@ -2512,8 +2538,10 @@ describe('McTreeSelect', () => {
 
                 const options = overlayContainerElement.querySelectorAll('mc-tree-option');
                 expect(options[0].classList)
-                    .toContain('mc-selected',
-                        `Expected option with the control's initial value to be selected.`);
+                    .toContain(
+                        'mc-selected',
+                        `Expected option with the control's initial value to be selected.`
+                    );
             }));
 
             it('should set the view value from the form', fakeAsync(() => {
@@ -3503,8 +3531,10 @@ describe('McTreeSelect', () => {
 
             const label = fixture.debugElement.query(By.css('.mc-tree-select__matcher')).nativeElement;
 
-            expect(label.textContent).toContain('sdaolnwoD',
-                'Expected the displayed text to be "Pizza" in reverse.');
+            expect(label.textContent).toContain(
+                'sdaolnwoD',
+                'Expected the displayed text to be "Pizza" in reverse.'
+            );
         }));
     });
 
@@ -3593,7 +3623,8 @@ describe('McTreeSelect', () => {
             expect(trigger.textContent).toContain('Falsy');
         }));
 
-        it('should not consider the reset values as selected when resetting the form control',
+        it(
+            'should not consider the reset values as selected when resetting the form control',
             fakeAsync(() => {
                 fixture.componentInstance.control.reset();
                 fixture.detectChanges();
@@ -3603,7 +3634,8 @@ describe('McTreeSelect', () => {
                 expect(fixture.componentInstance.select.selected).toBeFalsy();
                 expect(trigger.textContent).not.toContain('Null');
                 expect(trigger.textContent).not.toContain('Undefined');
-            }));
+            })
+        );
     });
 
     describe('without Angular forms', () => {
@@ -3901,8 +3933,10 @@ describe('McTreeSelect', () => {
 
             // Because the origin depends on the Y axis offset, we also have to
             // round down and check that the difference is within a pixel.
-            expect(Math.abs(expectedOrigin - origin) < 2).toBe(true,
-                `Expected panel animation to originate in the center of option ${index}.`);
+            expect(Math.abs(expectedOrigin - origin) < 2).toBe(
+                true,
+                `Expected panel animation to originate in the center of option ${index}.`
+            );
         }
 
         describe('ample space to open', () => {
@@ -4045,8 +4079,10 @@ describe('McTreeSelect', () => {
                     const scrollContainer = document.querySelector('.cdk-overlay-pane .mc-tree-select__panel')!;
 
                     expect(Math.ceil(scrollContainer.scrollTop))
-                        .toEqual(Math.ceil(idealScrollTop + 5),
-                            `Expected panel to adjust scroll position to fit in viewport.`);
+                        .toEqual(
+                            Math.ceil(idealScrollTop + 5),
+                            `Expected panel to adjust scroll position to fit in viewport.`
+                        );
 
                     checkTriggerAlignedWithOption(4);
                 }));
@@ -4197,8 +4233,11 @@ describe('McTreeSelect', () => {
 
                 const panelLeft = document.querySelector('.mc-tree-select__panel')!.getBoundingClientRect().left;
 
-                expect(panelLeft).toBeGreaterThan(0,
-                    `Expected select panel to be inside the viewport in ltr.`);
+                expect(panelLeft)
+                    .toBeGreaterThan(
+                    0,
+                    `Expected select panel to be inside the viewport in ltr.`
+                    );
             }));
 
             it('should stay within the viewport when overflowing on the left in rtl', fakeAsync(() => {
@@ -4210,8 +4249,11 @@ describe('McTreeSelect', () => {
 
                 const panelLeft = document.querySelector('.mc-tree-select__panel')!.getBoundingClientRect().left;
 
-                expect(panelLeft).toBeGreaterThan(0,
-                    `Expected select panel to be inside the viewport in rtl.`);
+                expect(panelLeft)
+                    .toBeGreaterThan(
+                        0,
+                        `Expected select panel to be inside the viewport in rtl.`
+                    );
             }));
 
             it('should stay within the viewport when overflowing on the right in ltr', fakeAsync(() => {
@@ -4224,8 +4266,11 @@ describe('McTreeSelect', () => {
                 const viewportRect = viewportRuler.getViewportRect().right;
                 const panelRight = document.querySelector('.mc-tree-select__panel')!.getBoundingClientRect().right;
 
-                expect(viewportRect - panelRight).toBeGreaterThan(0,
-                    `Expected select panel to be inside the viewport in ltr.`);
+                expect(viewportRect - panelRight)
+                    .toBeGreaterThan(
+                        0,
+                        `Expected select panel to be inside the viewport in ltr.`
+                    );
             }));
 
             xit('should stay within the viewport when overflowing on the right in rtl', fakeAsync(() => {
@@ -4238,8 +4283,11 @@ describe('McTreeSelect', () => {
                 const viewportRect = viewportRuler.getViewportRect().right;
                 const panelRight = document.querySelector('.mc-tree-select__panel')!.getBoundingClientRect().right;
 
-                expect(viewportRect - panelRight).toBeGreaterThan(0,
-                    `Expected select panel to be inside the viewport in rtl.`);
+                expect(viewportRect - panelRight)
+                    .toBeGreaterThan(
+                        0,
+                        `Expected select panel to be inside the viewport in rtl.`
+                    );
             }));
 
             // todo fix
@@ -4264,8 +4312,11 @@ describe('McTreeSelect', () => {
 
                 panelLeft = document.querySelector('.mc-tree-select__panel')!.getBoundingClientRect().left;
 
-                expect(panelLeft).toBeGreaterThanOrEqual(0,
-                    `Expected select panel continue being inside the viewport.`);
+                expect(panelLeft)
+                    .toBeGreaterThanOrEqual(
+                        0,
+                        `Expected select panel continue being inside the viewport.`
+                    );
             }));
         });
 
@@ -4375,8 +4426,11 @@ describe('McTreeSelect', () => {
 
                 // Each option is 32px wider than the trigger, so it must be adjusted 16px
                 // to ensure the text overlaps correctly.
-                expect(Math.floor(firstOptionLeft)).toEqual(Math.floor(triggerLeft - 16),
-                    `Expected trigger to align with the selected option on the x-axis in LTR.`);
+                expect(Math.floor(firstOptionLeft))
+                    .toEqual(
+                        Math.floor(triggerLeft - 16),
+                        `Expected trigger to align with the selected option on the x-axis in LTR.`
+                    );
             }));
 
             it('should align the trigger and the selected option on the x-axis in rtl', fakeAsync(() => {
@@ -4394,8 +4448,10 @@ describe('McTreeSelect', () => {
                 // Each option is 32px wider than the trigger, so it must be adjusted 16px
                 // to ensure the text overlaps correctly.
                 expect(Math.floor(firstOptionRight))
-                    .toEqual(Math.floor(triggerRight + 16),
-                        `Expected trigger to align with the selected option on the x-axis in RTL.`);
+                    .toEqual(
+                        Math.floor(triggerRight + 16),
+                        `Expected trigger to align with the selected option on the x-axis in RTL.`
+                    );
             }));
         });
 
@@ -4424,8 +4480,10 @@ describe('McTreeSelect', () => {
 
                 // 44px accounts for the checkbox size, margin and the panel's padding.
                 expect(Math.floor(firstOptionLeft))
-                    .toEqual(Math.floor(triggerLeft - 44),
-                        `Expected trigger label to align along x-axis, accounting for the checkbox.`);
+                    .toEqual(
+                        Math.floor(triggerLeft - 44),
+                        `Expected trigger label to align along x-axis, accounting for the checkbox.`
+                    );
             }));
 
             it('should adjust for the checkbox in rtl', fakeAsync(() => {
@@ -4440,8 +4498,10 @@ describe('McTreeSelect', () => {
 
                 // 44px accounts for the checkbox size, margin and the panel's padding.
                 expect(Math.floor(firstOptionRight))
-                    .toEqual(Math.floor(triggerRight + 44),
-                        `Expected trigger label to align along x-axis, accounting for the checkbox.`);
+                    .toEqual(
+                        Math.floor(triggerRight + 44),
+                        `Expected trigger label to align along x-axis, accounting for the checkbox.`
+                    );
             }));
         });
     });
@@ -4686,14 +4746,19 @@ describe('McTreeSelect', () => {
             flush();
 
             expect(testInstance.options.toArray().every((option: any) => option.multiple))
-                .toBe(true,
-                    'Expected `multiple` to have been added to initial set of options.');
+                .toBe(
+                    true,
+                    'Expected `multiple` to have been added to initial set of options.'
+                );
 
             // testInstance.dataSource.data.push({ name: 'cake-8', type: 'app' });
             fixture.detectChanges();
 
-            expect(testInstance.options.toArray().every((option) => !!option.multiple)).toBe(true,
-                'Expected `multiple` to have been set on dynamically-added option.');
+            expect(testInstance.options.toArray().every((option) => !!option.multiple))
+                .toBe(
+                    true,
+                    'Expected `multiple` to have been set on dynamically-added option.'
+                );
         }));
 
         it('should update the active item index on click', fakeAsync(() => {

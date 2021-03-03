@@ -46,23 +46,29 @@ function inlineExampleModuleTemplate(parsedData: AnalyzedExamples): string {
         ...exampleModules.map(({name, sourcePath}) => createImportDeclaration(sourcePath, [name]))
     ].join('');
     const quotePlaceholder = '◬';
-    const exampleList = exampleMetadata.reduce((result, data) => {
-        return result.concat(data.component).concat(data.additionalComponents);
-    }, [] as string[]);
+    const exampleList = exampleMetadata.reduce(
+        (result, data) => {
+            return result.concat(data.component).concat(data.additionalComponents);
+        },
+        [] as string[]
+    );
 
-    const exampleComponents = exampleMetadata.reduce((result, data) => {
-        result[data.id] = {
-            title: data.title,
-            // Since we use JSON.stringify to output the data below, the `component` will be wrapped
-            // in quotes, whereas we want a reference to the class. Add placeholder characters next to
-            // where the quotes will be so that we can strip them away afterwards.
-            component: `${quotePlaceholder}${data.component}${quotePlaceholder}`,
-            additionalFiles: data.additionalFiles,
-            selectorName: data.selectorName.join(', ')
-        };
+    const exampleComponents = exampleMetadata.reduce(
+        (result, data) => {
+            result[data.id] = {
+                title: data.title,
+                // Since we use JSON.stringify to output the data below, the `component` will be wrapped
+                // in quotes, whereas we want a reference to the class. Add placeholder characters next to
+                // where the quotes will be so that we can strip them away afterwards.
+                component: `${quotePlaceholder}${data.component}${quotePlaceholder}`,
+                additionalFiles: data.additionalFiles,
+                selectorName: data.selectorName.join(', ')
+            };
 
-        return result;
-    }, {} as any);
+            return result;
+        },
+        {} as any
+    );
 
     return fs.readFileSync(require.resolve('./example-module.template'), 'utf8')
         .replace(/\${exampleImports}/g, exampleImports)

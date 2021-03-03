@@ -178,14 +178,17 @@ export class McTooltipComponent {
                 this.closeOnInteraction = true;
             }
 
-            this.showTid = setTimeout(() => {
-                this._mcVisible.next(true);
-                this.mcVisibleChange.emit(true);
+            this.showTid = setTimeout(
+                () => {
+                    this._mcVisible.next(true);
+                    this.mcVisibleChange.emit(true);
 
-                // Mark for check so if any parent component has set the
-                // ChangeDetectionStrategy to OnPush it will be checked anyways
-                this.markForCheck();
-            }, this.mcMouseEnterDelay);
+                    // Mark for check so if any parent component has set the
+                    // ChangeDetectionStrategy to OnPush it will be checked anyways
+                    this.markForCheck();
+                },
+                this.mcMouseEnterDelay
+            );
         }
     }
 
@@ -194,15 +197,18 @@ export class McTooltipComponent {
             clearTimeout(this.showTid);
         }
 
-        this.hideTid = setTimeout(() => {
-            this._mcVisible.next(false);
-            this.mcVisibleChange.emit(false);
-            this.onHideSubject.next();
+        this.hideTid = setTimeout(
+            () => {
+                this._mcVisible.next(false);
+                this.mcVisibleChange.emit(false);
+                this.onHideSubject.next();
 
-            // Mark for check so if any parent component has set the
-            // ChangeDetectionStrategy to OnPush it will be checked anyways
-            this.markForCheck();
-        }, this.mcMouseLeaveDelay);
+                // Mark for check so if any parent component has set the
+                // ChangeDetectionStrategy to OnPush it will be checked anyways
+                this.markForCheck();
+            },
+            this.mcMouseLeaveDelay
+        );
     }
 
     setClassMap(): void {

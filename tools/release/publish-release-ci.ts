@@ -36,13 +36,12 @@ class PublishReleaseCITask extends BaseReleaseTask {
     /** Path to the release output of the project. */
     releaseOutputPath: string;
 
-    constructor(public projectDir: string,
-                public repositoryOwner: string,
-                public repositoryName: string) {
-
-        super(new GitClient(projectDir,
-            `https://github.com/${repositoryOwner}/${repositoryName}.git`));
-
+    constructor(
+        public projectDir: string,
+        public repositoryOwner: string,
+        public repositoryName: string
+    ) {
+        super(new GitClient(projectDir, `https://github.com/${repositoryOwner}/${repositoryName}.git`));
         console.log(this.projectDir);
 
         this.releaseOutputPath = join(projectDir, 'dist');
