@@ -18,7 +18,7 @@
 **Please tell us about your environment:**
 
 - Mosaic version: x.x.x
-- Browser: [all | Chrome XX | Firefox XX | IE XX | Edge XX | Safari XX ]
+- Browser: [all | Chrome XX | Firefox XX | Edge XX | Safari XX ]
 
 
 **Other information**
