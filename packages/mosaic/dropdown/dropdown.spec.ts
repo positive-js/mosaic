@@ -1074,7 +1074,7 @@ describe('McDropdown', () => {
             fixture.componentInstance.dropdown.closed.subscribe(emitCallback, null, completeCallback);
             fixture.destroy();
 
-            expect(emitCallback).toHaveBeenCalledWith();
+            expect(emitCallback).toHaveBeenCalled();
             expect(emitCallback).toHaveBeenCalledTimes(1);
             expect(completeCallback).toHaveBeenCalled();
         });
@@ -1746,7 +1746,7 @@ describe('McDropdown default overrides', () => {
     template: `
         <button [mcDropdownTriggerFor]="dropdown" #triggerEl>Toggle dropdown</button>
         <mc-dropdown
-            #dropdown
+            #dropdown="mcDropdown"
             class="custom-one custom-two"
             (closed)="closeCallback($event)"
             [backdropClass]="backdropClass"
@@ -1775,7 +1775,7 @@ class SimpleDropdown {
 @Component({
     template: `
         <button [mcDropdownTriggerFor]="dropdown" #triggerEl>Toggle dropdown</button>
-        <mc-dropdown [xPosition]="xPosition" [yPosition]="yPosition" #dropdown>
+        <mc-dropdown [xPosition]="xPosition" [yPosition]="yPosition" #dropdown="mcDropdown">
             <button mc-dropdown-item> Positioned Content </button>
         </mc-dropdown>
     `
@@ -1796,7 +1796,7 @@ interface TestableDropdown {
 @Component({
     template: `
         <button [mcDropdownTriggerFor]="dropdown" #triggerEl>Toggle dropdown</button>
-        <mc-dropdown [overlapTriggerY]="overlapTriggerY" #dropdown>
+        <mc-dropdown [overlapTriggerY]="overlapTriggerY" #dropdown="mcDropdown">
             <button mc-dropdown-item> Not overlapped Content</button>
         </mc-dropdown>
     `
@@ -1855,47 +1855,47 @@ class CustomDropdown {
     template: `
         <button
             [mcDropdownTriggerFor]="root"
-            #rootTrigger
+            #rootTrigger="mcDropdownTrigger"
             #rootTriggerEl>Toggle dropdown
         </button>
 
         <button
             [mcDropdownTriggerFor]="levelTwo"
-            #alternateTrigger>Toggle alternate dropdown
+            #alternateTrigger="mcDropdownTrigger">Toggle alternate dropdown
         </button>
 
-        <mc-dropdown #root (closed)="rootCloseCallback($event)" [hasBackdrop]="true">
+        <mc-dropdown #root="mcDropdown" (closed)="rootCloseCallback($event)" [hasBackdrop]="true">
             <button mc-dropdown-item
                     id="level-one-trigger"
                     [mcDropdownTriggerFor]="levelOne"
-                    #levelOneTrigger>One
+                    #levelOneTrigger="mcDropdownTrigger">One
             </button>
             <button mc-dropdown-item>Two</button>
             <button mc-dropdown-item
                     *ngIf="showLazy"
                     id="lazy-trigger"
                     [mcDropdownTriggerFor]="lazy"
-                    #lazyTrigger>Three
+                    #lazyTrigger="mcDropdownTrigger">Three
             </button>
         </mc-dropdown>
 
-        <mc-dropdown #levelOne (closed)="levelOneCloseCallback($event)" [hasBackdrop]="true">
+        <mc-dropdown #levelOne="mcDropdown" (closed)="levelOneCloseCallback($event)" [hasBackdrop]="true">
             <button mc-dropdown-item>Four</button>
             <button mc-dropdown-item
                     id="level-two-trigger"
                     [mcDropdownTriggerFor]="levelTwo"
-                    #levelTwoTrigger>Five
+                    #levelTwoTrigger="mcDropdownTrigger">Five
             </button>
             <button mc-dropdown-item>Six</button>
         </mc-dropdown>
 
-        <mc-dropdown #levelTwo (closed)="levelTwoCloseCallback($event)" [hasBackdrop]="true">
+        <mc-dropdown #levelTwo="mcDropdown" (closed)="levelTwoCloseCallback($event)" [hasBackdrop]="true">
             <button mc-dropdown-item>Seven</button>
             <button mc-dropdown-item>Eight</button>
             <button mc-dropdown-item>Nine</button>
         </mc-dropdown>
 
-        <mc-dropdown #lazy [hasBackdrop]="true">
+        <mc-dropdown #lazy="mcDropdown" [hasBackdrop]="true">
             <button mc-dropdown-item>Ten</button>
             <button mc-dropdown-item>Eleven</button>
             <button mc-dropdown-item>Twelve</button>
@@ -1925,7 +1925,7 @@ class NestedDropdown {
 @Component({
     template: `
         <button [mcDropdownTriggerFor]="root" #rootTriggerEl>Toggle dropdown</button>
-        <mc-dropdown #root>
+        <mc-dropdown #root="mcDropdown">
             <button
                 mc-dropdown-item
                 class="level-one-trigger"
@@ -1934,7 +1934,7 @@ class NestedDropdown {
             </button>
         </mc-dropdown>
 
-        <mc-dropdown #levelOne>
+        <mc-dropdown #levelOne="mcDropdown">
             <button mc-dropdown-item>Four</button>
             <button mc-dropdown-item>Five</button>
         </mc-dropdown>
@@ -1942,6 +1942,7 @@ class NestedDropdown {
 })
 class NestedDropdownRepeater {
     @ViewChild('rootTriggerEl', {static: false}) rootTriggerEl: ElementRef<HTMLElement>;
+    // @ViewChild('levelOneTrigger', {static: false}) levelOneTrigger: McDropdownTrigger;
 
     items = ['one', 'two', 'three'];
 }
@@ -1951,10 +1952,10 @@ class NestedDropdownRepeater {
     template: `
         <button [mcDropdownTriggerFor]="root" #rootTriggerEl>Toggle dropdown</button>
 
-        <mc-dropdown #root>
+        <mc-dropdown #root="mcDropdown">
             <button mc-dropdown-item class="level-one-trigger" [mcDropdownTriggerFor]="levelOne">One</button>
 
-            <mc-dropdown #levelOne>
+            <mc-dropdown #levelOne="mcDropdown">
                 <button mc-dropdown-item class="level-two-item">Two</button>
             </mc-dropdown>
         </mc-dropdown>
@@ -1975,7 +1976,7 @@ class FakeIcon {}
 @Component({
     template: `
         <button [mcDropdownTriggerFor]="dropdown" #triggerEl>Toggle dropdown</button>
-        <mc-dropdown #dropdown>
+        <mc-dropdown #dropdown="mcDropdown">
             <ng-template mcDropdownContent>
                 <button mc-dropdown-item>Item</button>
                 <button mc-dropdown-item>Another item</button>
@@ -1995,14 +1996,14 @@ class SimpleLazyDropdown {
         <button
             [mcDropdownTriggerFor]="dropdown"
             [mcDropdownTriggerData]="{label: 'one'}"
-            #triggerOne>One
+            #triggerOne="mcDropdownTrigger">One
         </button>
         <button
             [mcDropdownTriggerFor]="dropdown"
             [mcDropdownTriggerData]="{label: 'two'}"
-            #triggerTwo>Two
+            #triggerTwo="mcDropdownTrigger">Two
         </button>
-        <mc-dropdown #dropdown>
+        <mc-dropdown #dropdown="mcDropdown">
             <ng-template let-label="label" mcDropdownContent>
                 <button mc-dropdown-item>{{label}}</button>
             </ng-template>
@@ -2018,11 +2019,11 @@ class LazyDropdownWithContext {
 @Component({
     template: `
         <button [mcDropdownTriggerFor]="one">Toggle dropdown</button>
-        <mc-dropdown #one>
+        <mc-dropdown #one="mcDropdown">
             <button mc-dropdown-item>One</button>
         </mc-dropdown>
 
-        <mc-dropdown #two>
+        <mc-dropdown #two="mcDropdown">
             <button mc-dropdown-item>Two</button>
         </mc-dropdown>
     `
@@ -2038,7 +2039,7 @@ class DynamicPanelDropdown {
     template: `
         <button [mcDropdownTriggerFor]="dropdown">Toggle dropdown</button>
 
-        <mc-dropdown #dropdown>
+        <mc-dropdown #dropdown="mcDropdown">
             <button mc-dropdown-item role="menuitemcheckbox" aria-checked="true">Checked</button>
             <button mc-dropdown-item role="menuitemcheckbox" aria-checked="false">Not checked</button>
         </mc-dropdown>
