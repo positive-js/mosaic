@@ -22,7 +22,7 @@ import {
     Type
 } from '@angular/core';
 import {
-    async,
+    waitForAsync,
     ComponentFixture,
     fakeAsync,
     flush,
@@ -169,7 +169,7 @@ describe('McAutocomplete', () => {
         });
 
         it('should show the panel when the first open is after the initial zone stabilization',
-            async(() => {
+            waitForAsync(() => {
                 // Note that we're running outside the Angular zone, in order to be able
                 // to test properly without the subscription from `_subscribeToClosingActions`
                 // giving us a false positive.
