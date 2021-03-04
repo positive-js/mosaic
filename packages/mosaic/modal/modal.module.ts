@@ -8,7 +8,7 @@ import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { CssUnitPipe } from './css-unit.pipe';
 import { McModalControlService } from './modal-control.service';
 import { McModalComponent } from './modal.component';
-import { McModalBody, McModalFooter, McModalTitle } from './modal.directive';
+import { McModalBody, McModalFooter, McModalTitle, McModalMainAction } from './modal.directive';
 import { McModalService } from './modal.service';
 
 
@@ -25,7 +25,8 @@ import { McModalService } from './modal.service';
         McModalTitle,
         McModalBody,
         McModalFooter,
-        CssUnitPipe
+        CssUnitPipe,
+        McModalMainAction
     ],
     entryComponents: [McModalComponent],
     providers: [McModalControlService, McModalService]
