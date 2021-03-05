@@ -47,7 +47,6 @@ export function createTouchEvent(type: string, pageX = 0, pageY = 0) {
 // tslint:disable-next-line:no-reserved-keywords
 export function createKeyboardEvent(type: string, keyCode: number, target?: Element, key?: string) {
     const event = document.createEvent('KeyboardEvent') as any;
-    const originalPreventDefault = event.preventDefault;
 
     // Firefox does not support `initKeyboardEvent`, but supports `initKeyEvent`.
     if (event.initKeyEvent) {
