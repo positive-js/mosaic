@@ -7,6 +7,8 @@ import { McModalControlService } from './modal-control.service';
 import { McModalRef } from './modal-ref.class';
 import { McModalModule } from './modal.module';
 import { McModalService } from './modal.service';
+//import {createKeyboardEvent} from "@ptsecurity/cdk/testing";
+import { ENTER} from "@ptsecurity/cdk/keycodes";
 
 
 // tslint:disable:no-magic-numbers
@@ -252,6 +254,59 @@ describe('McModal', () => {
 
             expect(modalRef.getElement().querySelectorAll('[disabled]').length).toBe(1);
         }));
+
+        it('should called function on hotkey ctrl+enter. mcFooter is array ', () => {
+            const spyOk = jasmine.createSpy('ok spy');
+            const modalRef = modalService.create({
+                mcFooter: [
+                    {
+                        label: 'button 1',
+                        type: 'primary',
+                        mcModalMainAction: true,
+                        onClick: spyOk
+                    }
+                ]
+            });
+            fixture.detectChanges();
+
+            const event = document.createEvent('KeyboardEvent') as any;
+            event.initKeyboardEvent('keydown', true, true, window, 0, 0, 0, '', false);
+
+            Object.defineProperties(event, {
+                keyCode: { get: () => ENTER },
+                ctrlKey: { get: () => true }
+            });
+
+            modalRef.getElement().dispatchEvent(event);
+
+            fixture.detectChanges();
+            expect(spyOk).toHaveBeenCalled();
+        })
+
+        it('should called function on hotkey ctrl+enter. modal type is confirm ', () => {
+            const spyOk = jasmine.createSpy('ok spy');
+            const modalRef = modalService.success({
+                mcContent   : 'Сохранить сделанные изменения?',
+                mcOkText    : 'Сохранить',
+                mcCancelText: 'Отмена',
+                mcOnOk      : spyOk
+            });
+            fixture.detectChanges();
+
+            const event = document.createEvent('KeyboardEvent') as any;
+            event.initKeyboardEvent('keydown', true, true, window, 0, 0, 0, '', false);
+
+            Object.defineProperties(event, {
+                keyCode: { get: () => ENTER },
+                ctrlKey: { get: () => true }
+            });
+
+            modalRef.getElement().dispatchEvent(event);
+
+            fixture.detectChanges();
+            expect(spyOk).toHaveBeenCalled();
+        })
+
     });
 });
 
