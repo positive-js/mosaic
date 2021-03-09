@@ -13,7 +13,7 @@
 @import 'styles/common/vendor-prefixes';
 
 @import '../../cdk/a11y/a11y';
-@import '../../../node_modules/@angular/cdk/overlay';
+@import '../../../node_modules/@angular/cdk/overlay/overlay';
 
 @import './selection/pseudo-checkbox/pseudo-checkbox-theme';
 

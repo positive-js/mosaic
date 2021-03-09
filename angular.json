@@ -160,7 +160,7 @@
             "sourceRoot": "packages/cdk",
             "architect": {
                 "packagr": {
-                    "builder": "@angular-devkit/build-ng-packagr:build",
+                    "builder": "@angular-devkit/build-angular:ng-packagr",
                     "options": {
                         "tsConfig": "packages/cdk/tsconfig.lib.json",
                         "project": "packages/cdk/ng-package.json"
@@ -191,7 +191,7 @@
             "sourceRoot": "packages/mosaic",
             "architect": {
                 "packagr": {
-                    "builder": "@angular-devkit/build-ng-packagr:build",
+                    "builder": "@angular-devkit/build-angular:ng-packagr",
                     "options": {
                         "tsConfig": "packages/mosaic/tsconfig.lib.json",
                         "project": "packages/mosaic/ng-package.json"
@@ -226,7 +226,7 @@
             "sourceRoot": "packages/mosaic-moment-adapter",
             "architect": {
                 "packagr": {
-                    "builder": "@angular-devkit/build-ng-packagr:build",
+                    "builder": "@angular-devkit/build-angular:ng-packagr",
                     "options": {
                         "tsConfig": "packages/mosaic-moment-adapter/tsconfig.lib.json",
                         "project": "packages/mosaic-moment-adapter/ng-package.json"
@@ -257,7 +257,7 @@
             "sourceRoot": "packages/mosaic-examples",
             "architect": {
                 "packagr": {
-                    "builder": "@angular-devkit/build-ng-packagr:build",
+                    "builder": "@angular-devkit/build-angular:ng-packagr",
                     "options": {
                         "tsConfig": "packages/mosaic-examples/tsconfig.lib.json",
                         "project": "packages/mosaic-examples/ng-package.json"

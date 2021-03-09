@@ -8,9 +8,6 @@
 
     display: inline-block;
 
-    // Fix IE aligning - default align in IE is baseline, not the middle of element
-    vertical-align: top;
-
     width: 100%;
 
     outline: none;
@@ -88,9 +85,10 @@
 
     overflow: hidden;
 
-    max-height:
-        var(--mc-select-size-height, $select-size-height) -
-        var(--mc-select-panel-size-border-width, $select-panel-size-border-width);
+    max-height: calc(
+        var(--mc-select-size-height, #{$select-size-height}) -
+        var(--mc-select-panel-size-border-width, #{$select-panel-size-border-width})
+    );
 
     & .mc-tag {
         margin-right: 4px;

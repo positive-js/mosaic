@@ -38,12 +38,12 @@ class StageReleaseCommitTask extends BaseReleaseTask {
 
     tabSpaces = 4;
 
-    constructor(public projectDir: string,
-                public repositoryOwner: string,
-                public repositoryName: string) {
-
-        super(new GitClient(projectDir,
-            `https://github.com/${repositoryOwner}/${repositoryName}.git`));
+    constructor(
+        public projectDir: string,
+        public repositoryOwner: string,
+        public repositoryName: string
+    ) {
+        super(new GitClient(projectDir, `https://github.com/${repositoryOwner}/${repositoryName}.git`));
 
         console.log(this.projectDir);
 

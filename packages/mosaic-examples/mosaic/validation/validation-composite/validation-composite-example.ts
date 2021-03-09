@@ -46,10 +46,13 @@ export class ValidationCompositeExample {
     @ViewChild('endTooltip', { static: false }) endTooltip: any;
 
     constructor() {
-        this.compositeFormGroup = new FormGroup({
-            start: new FormControl('', [fieldValidator(IP_PATTERN)]),
-            end: new FormControl('', [fieldValidator(IP_PATTERN)])
-        }, { updateOn: 'blur', validators: [groupValidator()] });
+        this.compositeFormGroup = new FormGroup(
+            {
+                start: new FormControl('', [fieldValidator(IP_PATTERN)]),
+                end: new FormControl('', [fieldValidator(IP_PATTERN)])
+            },
+            { updateOn: 'blur', validators: [groupValidator()] }
+        );
     }
 
     onInput(event, tooltip: McTooltip, controlName: string) {

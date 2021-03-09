@@ -6,18 +6,20 @@ export enum McSidebarAnimationState {
     Closed = 'closed'
 }
 
-export const mcSidebarAnimations: {
-    readonly sidebarState: AnimationTriggerMetadata;
-} = {
+export const mcSidebarAnimations: { readonly sidebarState: AnimationTriggerMetadata } = {
     sidebarState: trigger('state', [
-        state('opened', style({
+        state(
+            'opened',
+            style({
                 minWidth: '{{ openedStateMinWidth }}',
                 width: '{{ openedStateWidth }}',
                 maxWidth: '{{ openedStateMaxWidth }}'
             }),
             { params: { openedStateMinWidth: '', openedStateWidth: '', openedStateMaxWidth: '' }}
         ),
-        state('closed', style({
+        state(
+            'closed',
+            style({
                 minWidth: '{{ closedStateWidth }}',
                 width: '{{ closedStateWidth }}',
                 maxWidth: '{{ closedStateWidth }}'

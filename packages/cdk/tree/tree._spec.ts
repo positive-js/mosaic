@@ -71,21 +71,27 @@ xdescribe('CdkTree', () => {
                 expect(dataSource.data.length).toBe(3);
 
                 let data = dataSource.data;
-                expectFlatTreeToMatch(treeElement, 28,
+                expectFlatTreeToMatch(
+                    treeElement,
+                    28,
                     [`${data[0].pizzaTopping} - ${data[0].pizzaCheese} + ${data[0].pizzaBase}`],
                     [`${data[1].pizzaTopping} - ${data[1].pizzaCheese} + ${data[1].pizzaBase}`],
-                    [`${data[2].pizzaTopping} - ${data[2].pizzaCheese} + ${data[2].pizzaBase}`]);
+                    [`${data[2].pizzaTopping} - ${data[2].pizzaCheese} + ${data[2].pizzaBase}`]
+                );
 
                 dataSource.addData(2);
                 fixture.detectChanges();
 
                 data = dataSource.data;
                 expect(data.length).toBe(4);
-                expectFlatTreeToMatch(treeElement, 28,
+                expectFlatTreeToMatch(
+                    treeElement,
+                    28,
                     [`${data[0].pizzaTopping} - ${data[0].pizzaCheese} + ${data[0].pizzaBase}`],
                     [`${data[1].pizzaTopping} - ${data[1].pizzaCheese} + ${data[1].pizzaBase}`],
                     [`${data[2].pizzaTopping} - ${data[2].pizzaCheese} + ${data[2].pizzaBase}`],
-                    [_, `${data[3].pizzaTopping} - ${data[3].pizzaCheese} + ${data[3].pizzaBase}`]);
+                    [_, `${data[3].pizzaTopping} - ${data[3].pizzaCheese} + ${data[3].pizzaBase}`]
+                );
             });
         });
 
@@ -118,12 +124,14 @@ xdescribe('CdkTree', () => {
 
                 data = dataSource.data;
                 expect(data.length).toBe(4);
-                expectFlatTreeToMatch(treeElement, 40,
+                expectFlatTreeToMatch(
+                    treeElement,
+                    40,
                     [`${data[0].pizzaTopping} - ${data[0].pizzaCheese} + ${data[0].pizzaBase}`],
                     [`${data[1].pizzaTopping} - ${data[1].pizzaCheese} + ${data[1].pizzaBase}`],
                     [`${data[2].pizzaTopping} - ${data[2].pizzaCheese} + ${data[2].pizzaBase}`],
-                    [_, `${data[3].pizzaTopping} - ${data[3].pizzaCheese} + ${data[3].pizzaBase}`]);
-
+                    [_, `${data[3].pizzaTopping} - ${data[3].pizzaCheese} + ${data[3].pizzaBase}`]
+                );
 
                 (getNodes(treeElement)[2] as HTMLElement).click();
                 fixture.detectChanges();
@@ -151,11 +159,14 @@ xdescribe('CdkTree', () => {
 
                 data = dataSource.data;
                 expect(data.length).toBe(4);
-                expectFlatTreeToMatch(treeElement, 40,
+                expectFlatTreeToMatch(
+                    treeElement,
+                    40,
                     [`${data[0].pizzaTopping} - ${data[0].pizzaCheese} + ${data[0].pizzaBase}`],
                     [`${data[1].pizzaTopping} - ${data[1].pizzaCheese} + ${data[1].pizzaBase}`],
                     [`${data[2].pizzaTopping} - ${data[2].pizzaCheese} + ${data[2].pizzaBase}`],
-                    [_, `${data[3].pizzaTopping} - ${data[3].pizzaCheese} + ${data[3].pizzaBase}`]);
+                    [_, `${data[3].pizzaTopping} - ${data[3].pizzaCheese} + ${data[3].pizzaBase}`]
+                );
 
                 (getNodes(treeElement)[2] as HTMLElement).click();
                 fixture.detectChanges();
@@ -195,10 +206,13 @@ xdescribe('CdkTree', () => {
                 expect(dataSource.data.length).toBe(3);
 
                 let data = dataSource.data;
-                expectFlatTreeToMatch(treeElement, 28,
+                expectFlatTreeToMatch(
+                    treeElement,
+                    28,
                     [`[topping_1] - [cheese_1] + [base_1]`],
                     [`[topping_2] - [cheese_2] + [base_2]`],
-                    [`[topping_3] - [cheese_3] + [base_3]`]);
+                    [`[topping_3] - [cheese_3] + [base_3]`]
+                );
 
                 dataSource.addChild(data[1]);
                 fixture.detectChanges();
@@ -206,11 +220,14 @@ xdescribe('CdkTree', () => {
                 treeElement = fixture.nativeElement.querySelector('cdk-tree');
                 data = dataSource.data;
                 expect(data.length).toBe(4);
-                expectFlatTreeToMatch(treeElement, 28,
+                expectFlatTreeToMatch(
+                    treeElement,
+                    28,
                     [`[topping_1] - [cheese_1] + [base_1]`],
                     [`[topping_2] - [cheese_2] + [base_2]`],
                     [_, `topping_4 - cheese_4 + base_4`],
-                    [`[topping_3] - [cheese_3] + [base_3]`]);
+                    [`[topping_3] - [cheese_3] + [base_3]`]
+                );
             });
         });
 
@@ -234,10 +251,13 @@ xdescribe('CdkTree', () => {
                 expect(dataSource.data.length).toBe(3);
 
                 let data = dataSource.data;
-                expectFlatTreeToMatch(treeElement, 28,
+                expectFlatTreeToMatch(
+                    treeElement,
+                    28,
                     [`[topping_1] - [cheese_1] + [base_1]`],
                     [`[topping_2] - [cheese_2] + [base_2]`],
-                    [`[topping_3] - [cheese_3] + [base_3]`]);
+                    [`[topping_3] - [cheese_3] + [base_3]`]
+                );
 
                 dataSource.addChild(data[1]);
                 fixture.detectChanges();
@@ -245,11 +265,14 @@ xdescribe('CdkTree', () => {
                 treeElement = fixture.nativeElement.querySelector('cdk-tree');
                 data = dataSource.data;
                 expect(data.length).toBe(4);
-                expectFlatTreeToMatch(treeElement, 28,
+                expectFlatTreeToMatch(
+                    treeElement,
+                    28,
                     [`[topping_1] - [cheese_1] + [base_1]`],
                     [`[topping_2] - [cheese_2] + [base_2]`],
                     [_, `[topping_4] - [cheese_4] + [base_4]`],
-                    [`[topping_3] - [cheese_3] + [base_3]`]);
+                    [`[topping_3] - [cheese_3] + [base_3]`]
+                );
             });
         });
 
@@ -273,10 +296,13 @@ xdescribe('CdkTree', () => {
                 expect(dataSource.data.length).toBe(3);
 
                 let data = dataSource.data;
-                expectFlatTreeToMatch(treeElement, 28,
+                expectFlatTreeToMatch(
+                    treeElement,
+                    28,
                     [`[topping_1] - [cheese_1] + [base_1]`],
                     [`[topping_2] - [cheese_2] + [base_2]`],
-                    [`[topping_3] - [cheese_3] + [base_3]`]);
+                    [`[topping_3] - [cheese_3] + [base_3]`]
+                );
 
                 dataSource.addChild(data[1]);
                 fixture.detectChanges();
@@ -284,11 +310,14 @@ xdescribe('CdkTree', () => {
                 treeElement = fixture.nativeElement.querySelector('cdk-tree');
                 data = dataSource.data;
                 expect(data.length).toBe(4);
-                expectFlatTreeToMatch(treeElement, 28,
+                expectFlatTreeToMatch(
+                    treeElement,
+                    28,
                     [`[topping_1] - [cheese_1] + [base_1]`],
                     [`[topping_2] - [cheese_2] + [base_2]`],
                     [_, `[topping_4] - [cheese_4] + [base_4]`],
-                    [`[topping_3] - [cheese_3] + [base_3]`]);
+                    [`[topping_3] - [cheese_3] + [base_3]`]
+                );
             });
         });
 
@@ -425,10 +454,12 @@ xdescribe('CdkTree', () => {
                 expect(dataSource.data.length).toBe(3);
 
                 let data = dataSource.data;
-                expectNestedTreeToMatch(treeElement,
+                expectNestedTreeToMatch(
+                    treeElement,
                     [`${data[0].pizzaTopping} - ${data[0].pizzaCheese} + ${data[0].pizzaBase}`],
                     [`${data[1].pizzaTopping} - ${data[1].pizzaCheese} + ${data[1].pizzaBase}`],
-                    [`${data[2].pizzaTopping} - ${data[2].pizzaCheese} + ${data[2].pizzaBase}`]);
+                    [`${data[2].pizzaTopping} - ${data[2].pizzaCheese} + ${data[2].pizzaBase}`]
+                );
 
                 dataSource.addChild(data[1], false);
                 fixture.detectChanges();
@@ -436,11 +467,13 @@ xdescribe('CdkTree', () => {
                 treeElement = fixture.nativeElement.querySelector('cdk-tree');
                 data = dataSource.data;
                 expect(data.length).toBe(3);
-                expectNestedTreeToMatch(treeElement,
+                expectNestedTreeToMatch(
+                    treeElement,
                     [`topping_1 - cheese_1 + base_1`],
                     [`topping_2 - cheese_2 + base_2`],
                     [_, `topping_4 - cheese_4 + base_4`],
-                    [`topping_3 - cheese_3 + base_3`]);
+                    [`topping_3 - cheese_3 + base_3`]
+                );
             });
 
             it('with nested child data', () => {
@@ -452,24 +485,28 @@ xdescribe('CdkTree', () => {
                 fixture.detectChanges();
 
                 expect(data.length).toBe(3);
-                expectNestedTreeToMatch(treeElement,
+                expectNestedTreeToMatch(
+                    treeElement,
                     [`topping_1 - cheese_1 + base_1`],
                     [`topping_2 - cheese_2 + base_2`],
                     [_, `topping_4 - cheese_4 + base_4`],
                     [_, _, `topping_5 - cheese_5 + base_5`],
-                    [`topping_3 - cheese_3 + base_3`]);
+                    [`topping_3 - cheese_3 + base_3`]
+                );
 
                 dataSource.addChild(child, false);
                 fixture.detectChanges();
 
                 expect(data.length).toBe(3);
-                expectNestedTreeToMatch(treeElement,
+                expectNestedTreeToMatch(
+                    treeElement,
                     [`topping_1 - cheese_1 + base_1`],
                     [`topping_2 - cheese_2 + base_2`],
                     [_, `topping_4 - cheese_4 + base_4`],
                     [_, _, `topping_5 - cheese_5 + base_5`],
                     [_, _, `topping_6 - cheese_6 + base_6`],
-                    [`topping_3 - cheese_3 + base_3`]);
+                    [`topping_3 - cheese_3 + base_3`]
+                );
             });
         });
 
@@ -493,10 +530,12 @@ xdescribe('CdkTree', () => {
                 expect(dataSource.data.length).toBe(3);
 
                 let data = dataSource.data;
-                expectNestedTreeToMatch(treeElement,
+                expectNestedTreeToMatch(
+                    treeElement,
                     [`topping_1 - cheese_1 + base_1`],
                     [`>> topping_2 - cheese_2 + base_2`],
-                    [`topping_3 - cheese_3 + base_3`]);
+                    [`topping_3 - cheese_3 + base_3`]
+                );
 
                 dataSource.addChild(data[1], false);
                 fixture.detectChanges();
@@ -504,11 +543,13 @@ xdescribe('CdkTree', () => {
                 treeElement = fixture.nativeElement.querySelector('cdk-tree');
                 data = dataSource.data;
                 expect(data.length).toBe(3);
-                expectNestedTreeToMatch(treeElement,
+                expectNestedTreeToMatch(
+                    treeElement,
                     [`topping_1 - cheese_1 + base_1`],
                     [`>> topping_2 - cheese_2 + base_2`],
                     [_, `topping_4 - cheese_4 + base_4`],
-                    [`topping_3 - cheese_3 + base_3`]);
+                    [`topping_3 - cheese_3 + base_3`]
+                );
             });
         });
 
@@ -536,10 +577,12 @@ xdescribe('CdkTree', () => {
 
                 fixture.detectChanges();
 
-                expectNestedTreeToMatch(treeElement,
+                expectNestedTreeToMatch(
+                    treeElement,
                     [`topping_1 - cheese_1 + base_1`],
                     [`topping_2 - cheese_2 + base_2`],
-                    [`topping_3 - cheese_3 + base_3`]);
+                    [`topping_3 - cheese_3 + base_3`]
+                );
 
                 fixture.detectChanges();
 
@@ -548,19 +591,23 @@ xdescribe('CdkTree', () => {
 
                 expect(component.treeControl.expansionModel.selected.length)
                     .toBe(1, `Expect node expanded`);
-                expectNestedTreeToMatch(treeElement,
+                expectNestedTreeToMatch(
+                    treeElement,
                     [`topping_1 - cheese_1 + base_1`],
                     [`topping_2 - cheese_2 + base_2`],
                     [_, `topping_4 - cheese_4 + base_4`],
-                    [`topping_3 - cheese_3 + base_3`]);
+                    [`topping_3 - cheese_3 + base_3`]
+                );
 
                 (getNodes(treeElement)[1] as HTMLElement).click();
                 fixture.detectChanges();
 
-                expectNestedTreeToMatch(treeElement,
+                expectNestedTreeToMatch(
+                    treeElement,
                     [`topping_1 - cheese_1 + base_1`],
                     [`topping_2 - cheese_2 + base_2`],
-                    [`topping_3 - cheese_3 + base_3`]);
+                    [`topping_3 - cheese_3 + base_3`]
+                );
                 expect(component.treeControl.expansionModel.selected.length)
                     .toBe(0, `Expect node collapsed`);
 
@@ -569,11 +616,13 @@ xdescribe('CdkTree', () => {
 
                 expect(component.treeControl.expansionModel.selected.length)
                     .toBe(1, `Expect node expanded`);
-                expectNestedTreeToMatch(treeElement,
+                expectNestedTreeToMatch(
+                    treeElement,
                     [`topping_1 - cheese_1 + base_1`],
                     [`topping_2 - cheese_2 + base_2`],
                     [_, `topping_4 - cheese_4 + base_4`],
-                    [`topping_3 - cheese_3 + base_3`]);
+                    [`topping_3 - cheese_3 + base_3`]
+                );
             });
 
             it('should expand/collapse the node recursively', () => {
@@ -582,32 +631,38 @@ xdescribe('CdkTree', () => {
                 dataSource.addChild(child, false);
                 fixture.detectChanges();
 
-                expectNestedTreeToMatch(treeElement,
+                expectNestedTreeToMatch(
+                    treeElement,
                     [`topping_1 - cheese_1 + base_1`],
                     [`topping_2 - cheese_2 + base_2`],
-                    [`topping_3 - cheese_3 + base_3`]);
+                    [`topping_3 - cheese_3 + base_3`]
+                );
 
                 (getNodes(treeElement)[1] as HTMLElement).click();
                 fixture.detectChanges();
 
                 expect(component.treeControl.expansionModel.selected.length)
                     .toBe(3, `Expect node expanded`);
-                expectNestedTreeToMatch(treeElement,
+                expectNestedTreeToMatch(
+                    treeElement,
                     [`topping_1 - cheese_1 + base_1`],
                     [`topping_2 - cheese_2 + base_2`],
                     [_, `topping_4 - cheese_4 + base_4`],
                     [_, _, `topping_5 - cheese_5 + base_5`],
-                    [`topping_3 - cheese_3 + base_3`]);
+                    [`topping_3 - cheese_3 + base_3`]
+                );
 
                 (getNodes(treeElement)[1] as HTMLElement).click();
                 fixture.detectChanges();
 
                 expect(component.treeControl.expansionModel.selected.length)
                     .toBe(0, `Expect node collapsed`);
-                expectNestedTreeToMatch(treeElement,
+                expectNestedTreeToMatch(
+                    treeElement,
                     [`topping_1 - cheese_1 + base_1`],
                     [`topping_2 - cheese_2 + base_2`],
-                    [`topping_3 - cheese_3 + base_3`]);
+                    [`topping_3 - cheese_3 + base_3`]
+                );
             });
         });
 
@@ -631,20 +686,24 @@ xdescribe('CdkTree', () => {
                 expect(dataSource.data.length).toBe(3);
 
                 const data = dataSource.data;
-                expectNestedTreeToMatch(treeElement,
+                expectNestedTreeToMatch(
+                    treeElement,
                     [`[topping_1] - [cheese_1] + [base_1]`],
                     [`[topping_2] - [cheese_2] + [base_2]`],
-                    [`[topping_3] - [cheese_3] + [base_3]`]);
+                    [`[topping_3] - [cheese_3] + [base_3]`]
+                );
 
                 dataSource.addChild(data[1], false);
                 fixture.detectChanges();
 
                 treeElement = fixture.nativeElement.querySelector('cdk-tree');
-                expectNestedTreeToMatch(treeElement,
+                expectNestedTreeToMatch(
+                    treeElement,
                     [`[topping_1] - [cheese_1] + [base_1]`],
                     [`[topping_2] - [cheese_2] + [base_2]`],
                     [_, `[topping_4] - [cheese_4] + [base_4]`],
-                    [`[topping_3] - [cheese_3] + [base_3]`]);
+                    [`[topping_3] - [cheese_3] + [base_3]`]
+                );
             });
         });
 
@@ -668,20 +727,24 @@ xdescribe('CdkTree', () => {
                 expect(dataSource.data.length).toBe(3);
 
                 const data = dataSource.data;
-                expectNestedTreeToMatch(treeElement,
+                expectNestedTreeToMatch(
+                    treeElement,
                     [`[topping_1] - [cheese_1] + [base_1]`],
                     [`[topping_2] - [cheese_2] + [base_2]`],
-                    [`[topping_3] - [cheese_3] + [base_3]`]);
+                    [`[topping_3] - [cheese_3] + [base_3]`]
+                );
 
                 dataSource.addChild(data[1], false);
                 fixture.detectChanges();
 
                 treeElement = fixture.nativeElement.querySelector('cdk-tree');
-                expectNestedTreeToMatch(treeElement,
+                expectNestedTreeToMatch(
+                    treeElement,
                     [`[topping_1] - [cheese_1] + [base_1]`],
                     [`[topping_2] - [cheese_2] + [base_2]`],
                     [_, `[topping_4] - [cheese_4] + [base_4]`],
-                    [`[topping_3] - [cheese_3] + [base_3]`]);
+                    [`[topping_3] - [cheese_3] + [base_3]`]
+                );
             });
         });
 
@@ -927,9 +990,15 @@ class FakeDataSource extends DataSource<TestData> {
 
     addChild(parent: TestData, isFlat: boolean = true) {
         const nextIndex = ++this.dataIndex;
-        const child = new TestData(`topping_${nextIndex}`, `cheese_${nextIndex}`, `base_${nextIndex}`,
-            parent.level + 1);
+        const child = new TestData(
+            `topping_${nextIndex}`,
+            `cheese_${nextIndex}`,
+            `base_${nextIndex}`,
+            parent.level + 1
+        );
+
         parent.children.push(child);
+
         if (isFlat) {
             const copiedData = this.data.slice();
             copiedData.splice(this.data.indexOf(parent) + 1, 0, child);
@@ -1422,11 +1491,12 @@ class DepthNestedCdkTreeApp {
 
     treeControl: TreeControl<TestData>;
 
-    dataSource: FakeDataSource = new FakeDataSource(this.treeControl);
+    dataSource: FakeDataSource;
 
     @ViewChild(CdkTree, {static: false}) tree: CdkTree<TestData>;
 
     constructor() {
+        this.dataSource = new FakeDataSource(this.treeControl);
         this.treeControl = new NestedTreeControl(this.getChildren);
     }
 

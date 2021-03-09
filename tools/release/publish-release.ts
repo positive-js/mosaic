@@ -42,11 +42,12 @@ class PublishReleaseTask extends BaseReleaseTask {
     /** Instance of a wrapper that can execute Git commands. */
     git: GitClient;
 
-    constructor(public projectDir: string,
-                public repositoryOwner: string,
-                public repositoryName: string) {
-        super(new GitClient(projectDir,
-            `https://github.com/${repositoryOwner}/${repositoryName}.git`));
+    constructor(
+        public projectDir: string,
+        public repositoryOwner: string,
+        public repositoryName: string
+    ) {
+        super(new GitClient(projectDir, `https://github.com/${repositoryOwner}/${repositoryName}.git`));
 
         this.packageJsonPath = join(projectDir, 'package.json');
         this.releaseOutputPath = join(projectDir, 'dist');

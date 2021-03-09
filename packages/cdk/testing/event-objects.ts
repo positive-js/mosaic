@@ -3,21 +3,23 @@
 export function createMouseEvent(type: string, x = 0, y = 0, button = 0) {
     const event = document.createEvent('MouseEvent');
 
-    event.initMouseEvent(type,
-        false, /* canBubble */
-        false, /* cancelable */
+    event.initMouseEvent(
+        type,
+        false,
+        false,
         window, /* view */
-        0, /* detail */
+        0,
         x, /* screenX */
         y, /* screenY */
         x, /* clientX */
         y, /* clientY */
-        false, /* ctrlKey */
-        false, /* altKey */
-        false, /* shiftKey */
-        false, /* metaKey */
+        false,
+        false,
+        false,
+        false,
         button, /* button */
-        null /* relatedTarget */);
+        null
+    );
 
     return event;
 }
@@ -45,7 +47,6 @@ export function createTouchEvent(type: string, pageX = 0, pageY = 0) {
 // tslint:disable-next-line:no-reserved-keywords
 export function createKeyboardEvent(type: string, keyCode: number, target?: Element, key?: string) {
     const event = document.createEvent('KeyboardEvent') as any;
-    const originalPreventDefault = event.preventDefault;
 
     // Firefox does not support `initKeyboardEvent`, but supports `initKeyEvent`.
     if (event.initKeyEvent) {
@@ -61,13 +62,6 @@ export function createKeyboardEvent(type: string, keyCode: number, target?: Elem
         key: { get: () => key },
         target: { get: () => target }
     });
-
-    // IE won't set `defaultPrevented` on synthetic events so we need to do it manually.
-    event.preventDefault = function() {
-        Object.defineProperty(event, 'defaultPrevented', { get: () => true });
-
-        return originalPreventDefault.apply(this, arguments);
-    };
 
     return event;
 }

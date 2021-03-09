@@ -347,9 +347,11 @@ describe('McDropdown', () => {
     });
 
     it('should set the panel direction based on the trigger direction', () => {
-        const fixture = createComponent(SimpleDropdown, [{
-            provide: Directionality, useFactory: () => ({value: 'rtl'})}
-        ], [FakeIcon]);
+        const fixture = createComponent(
+            SimpleDropdown,
+            [{ provide: Directionality, useFactory: () => ({value: 'rtl'})}],
+            [FakeIcon]
+        );
 
         fixture.detectChanges();
         fixture.componentInstance.trigger.open();
@@ -362,9 +364,11 @@ describe('McDropdown', () => {
 
     it('should update the panel direction if the trigger direction changes', () => {
         const dirProvider = {value: 'rtl'};
-        const fixture = createComponent(SimpleDropdown, [{
-            provide: Directionality, useFactory: () => dirProvider}
-        ], [FakeIcon]);
+        const fixture = createComponent(
+            SimpleDropdown,
+            [{ provide: Directionality, useFactory: () => dirProvider}],
+            [FakeIcon]
+        );
 
         fixture.detectChanges();
         fixture.componentInstance.trigger.open();
@@ -493,16 +497,18 @@ describe('McDropdown', () => {
     it('should close the dropdown when using the CloseScrollStrategy', fakeAsync(() => {
         // tslint:disable-next-line
         const scrolledSubject = new Subject();
-        const fixture = createComponent(SimpleDropdown,  [
-            {
-                provide: ScrollDispatcher, useFactory: () => ({scrolled: () => scrolledSubject})
-            },
-            {
-                provide: MC_DROPDOWN_SCROLL_STRATEGY,
-                deps: [Overlay],
-                useFactory: (overlay: Overlay) => () => overlay.scrollStrategies.close()
-            }
-        ], [FakeIcon]);
+        const fixture = createComponent(
+            SimpleDropdown,
+            [
+                { provide: ScrollDispatcher, useFactory: () => ({scrolled: () => scrolledSubject}) },
+                {
+                    provide: MC_DROPDOWN_SCROLL_STRATEGY,
+                    deps: [Overlay],
+                    useFactory: (overlay: Overlay) => () => overlay.scrollStrategies.close()
+                }
+            ],
+            [FakeIcon]
+        );
 
         fixture.detectChanges();
 
@@ -808,13 +814,17 @@ describe('McDropdown', () => {
             // To find the overlay left, subtract the dropdown width from the origin's right side.
             const expectedLeft = triggerRect.right - overlayRect.width;
             expect(Math.floor(overlayRect.left))
-                .toBe(Math.floor(expectedLeft),
-                    `Expected dropdown to open in "before" position if "after" position wouldn't fit.`);
+                .toBe(
+                    Math.floor(expectedLeft),
+                    `Expected dropdown to open in "before" position if "after" position wouldn't fit.`
+                );
 
             // The y-position of the overlay should be unaffected, as it can already fit vertically
             expect(Math.floor(overlayRect.top))
-                .toBe(Math.floor(triggerRect.bottom),
-                    `Expected dropdown top position to be unchanged if it can fit in the viewport.`);
+                .toBe(
+                    Math.floor(triggerRect.bottom),
+                    `Expected dropdown top position to be unchanged if it can fit in the viewport.`
+                );
         });
 
         it('should fall back to "above" mode if "below" mode would not fit on screen', () => {
@@ -834,13 +844,17 @@ describe('McDropdown', () => {
             const overlayRect = overlayPane.getBoundingClientRect();
 
             expect(Math.floor(overlayRect.bottom))
-                .toBe(Math.floor(triggerRect.top),
-                    `Expected dropdown to open in "above" position if "below" position wouldn't fit.`);
+                .toBe(
+                    Math.floor(triggerRect.top),
+                    `Expected dropdown to open in "above" position if "below" position wouldn't fit.`
+                );
 
             // The x-position of the overlay should be unaffected, as it can already fit horizontally
             expect(Math.floor(overlayRect.left))
-                .toBe(Math.floor(triggerRect.left),
-                    `Expected dropdown x position to be unchanged if it can fit in the viewport.`);
+                .toBe(
+                    Math.floor(triggerRect.left),
+                    `Expected dropdown x position to be unchanged if it can fit in the viewport.`
+                );
         });
 
         it('should re-position dropdown on both axes if both defaults would not fit', () => {
@@ -863,12 +877,16 @@ describe('McDropdown', () => {
             const expectedLeft = triggerRect.right - overlayRect.width;
 
             expect(Math.floor(overlayRect.left))
-                .toBe(Math.floor(expectedLeft),
-                    `Expected dropdown to open in "before" position if "after" position wouldn't fit.`);
+                .toBe(
+                    Math.floor(expectedLeft),
+                    `Expected dropdown to open in "before" position if "after" position wouldn't fit.`
+                );
 
             expect(Math.floor(overlayRect.bottom))
-                .toBe(Math.floor(triggerRect.top),
-                    `Expected dropdown to open in "above" position if "below" position wouldn't fit.`);
+                .toBe(
+                    Math.floor(triggerRect.top),
+                    `Expected dropdown to open in "above" position if "below" position wouldn't fit.`
+                );
         });
 
         it('should re-position a dropdown with custom position set', () => {
@@ -885,14 +903,18 @@ describe('McDropdown', () => {
             // As designated "before" position won't fit on screen, the dropdown should fall back
             // to "after" mode, where the left sides of the overlay and trigger are aligned.
             expect(Math.floor(overlayRect.left))
-                .toBe(Math.floor(triggerRect.left),
-                    `Expected dropdown to open in "after" position if "before" position wouldn't fit.`);
+                .toBe(
+                    Math.floor(triggerRect.left),
+                    `Expected dropdown to open in "after" position if "before" position wouldn't fit.`
+                );
 
             // As designated "above" position won't fit on screen, the dropdown should fall back
             // to "below" mode, where the top edges of the overlay and trigger are aligned.
             expect(Math.floor(overlayRect.top))
-                .toBe(Math.floor(triggerRect.bottom),
-                    `Expected dropdown to open in "below" position if "above" position wouldn't fit.`);
+                .toBe(
+                    Math.floor(triggerRect.bottom),
+                    `Expected dropdown to open in "below" position if "above" position wouldn't fit.`
+                );
         });
 
         function getOverlayPane(): HTMLElement {
@@ -956,8 +978,10 @@ describe('McDropdown', () => {
 
                 // Since the dropdown is overlaying the trigger, the overlay top should be the trigger top.
                 expect(Math.floor(subject.overlayRect.top))
-                    .toBe(Math.floor(subject.triggerRect.top),
-                        `Expected dropdown to open in default "below" position.`);
+                    .toBe(
+                        Math.floor(subject.triggerRect.top),
+                        `Expected dropdown to open in default "below" position.`
+                    );
             });
         });
 
@@ -971,8 +995,10 @@ describe('McDropdown', () => {
 
                 // Since the dropdown is below the trigger, the overlay top should be the trigger bottom.
                 expect(Math.floor(subject.overlayRect.top))
-                    .toBe(Math.floor(subject.triggerRect.bottom),
-                        `Expected dropdown to open directly below the trigger.`);
+                    .toBe(
+                        Math.floor(subject.triggerRect.bottom),
+                        `Expected dropdown to open directly below the trigger.`
+                    );
             });
 
             it('supports above position fall back', () => {
@@ -984,8 +1010,10 @@ describe('McDropdown', () => {
 
                 // Since the dropdown is above the trigger, the overlay bottom should be the trigger top.
                 expect(Math.floor(subject.overlayRect.bottom))
-                    .toBe(Math.floor(subject.triggerRect.top),
-                        `Expected dropdown to open in "above" position if "below" position wouldn't fit.`);
+                    .toBe(
+                        Math.floor(subject.triggerRect.top),
+                        `Expected dropdown to open in "above" position if "below" position wouldn't fit.`
+                    );
             });
 
             it('repositions the origin to be below, so the dropdown opens from the trigger', () => {
@@ -1046,7 +1074,7 @@ describe('McDropdown', () => {
             fixture.componentInstance.dropdown.closed.subscribe(emitCallback, null, completeCallback);
             fixture.destroy();
 
-            expect(emitCallback).toHaveBeenCalledWith(undefined);
+            expect(emitCallback).toHaveBeenCalled();
             expect(emitCallback).toHaveBeenCalledTimes(1);
             expect(completeCallback).toHaveBeenCalled();
         });
@@ -1611,52 +1639,58 @@ describe('McDropdown', () => {
             expect(overlay.querySelectorAll(PANEL_SELECTOR).length).toBe(2, 'Expected two open dropdowns');
         }));
 
-        it('should be able to open a nested dropdown through an item that is not a direct descendant ' +
-            'of the panel', fakeAsync(() => {
-            const nestedFixture = createComponent(NestedDropdownDeclaredInsideParentDropdown);
-            overlay = overlayContainerElement;
+        it(
+            'should be able to open a nested dropdown through an item that is not a direct descendant of the panel',
+            fakeAsync(() => {
+                const nestedFixture = createComponent(NestedDropdownDeclaredInsideParentDropdown);
 
-            nestedFixture.detectChanges();
-            nestedFixture.componentInstance.rootTriggerEl.nativeElement.click();
-            nestedFixture.detectChanges();
-            tick(500);
-            expect(overlay.querySelectorAll(PANEL_SELECTOR).length)
-                .toBe(1, 'Expected one open dropdown');
+                overlay = overlayContainerElement;
 
-            dispatchMouseEvent(overlay.querySelector('.level-one-trigger')!, 'mouseenter');
-            nestedFixture.detectChanges();
-            tick(500);
+                nestedFixture.detectChanges();
+                nestedFixture.componentInstance.rootTriggerEl.nativeElement.click();
+                nestedFixture.detectChanges();
+                tick(500);
+                expect(overlay.querySelectorAll(PANEL_SELECTOR).length)
+                    .toBe(1, 'Expected one open dropdown');
 
-            expect(overlay.querySelectorAll(PANEL_SELECTOR).length)
-                .toBe(2, 'Expected two open dropdowns');
-        }));
+                dispatchMouseEvent(overlay.querySelector('.level-one-trigger')!, 'mouseenter');
+                nestedFixture.detectChanges();
+                tick(500);
 
-        it('should not close when hovering over a dropdown item inside a nested dropdown panel that is declared' +
-            'inside the root dropdown', fakeAsync(() => {
-            const nestedFixture = createComponent(NestedDropdownDeclaredInsideParentDropdown);
-            overlay = overlayContainerElement;
+                expect(overlay.querySelectorAll(PANEL_SELECTOR).length)
+                    .toBe(2, 'Expected two open dropdowns');
+            })
+        );
 
-            nestedFixture.detectChanges();
-            nestedFixture.componentInstance.rootTriggerEl.nativeElement.click();
-            nestedFixture.detectChanges();
-            tick(500);
-            expect(overlay.querySelectorAll(PANEL_SELECTOR).length)
-                .toBe(1, 'Expected one open dropdown');
+        it(
+            'should not close when hovering over a dropdown item inside a nested dropdown panel that is declared inside the root dropdown',
+            fakeAsync(() => {
+                const nestedFixture = createComponent(NestedDropdownDeclaredInsideParentDropdown);
 
-            dispatchMouseEvent(overlay.querySelector('.level-one-trigger')!, 'mouseenter');
-            nestedFixture.detectChanges();
-            tick(500);
+                overlay = overlayContainerElement;
 
-            expect(overlay.querySelectorAll(PANEL_SELECTOR).length)
-                .toBe(2, 'Expected two open dropdowns');
+                nestedFixture.detectChanges();
+                nestedFixture.componentInstance.rootTriggerEl.nativeElement.click();
+                nestedFixture.detectChanges();
+                tick(500);
+                expect(overlay.querySelectorAll(PANEL_SELECTOR).length)
+                    .toBe(1, 'Expected one open dropdown');
 
-            dispatchMouseEvent(overlay.querySelector('.level-two-item')!, 'mouseenter');
-            nestedFixture.detectChanges();
-            tick(500);
+                dispatchMouseEvent(overlay.querySelector('.level-one-trigger')!, 'mouseenter');
+                nestedFixture.detectChanges();
+                tick(500);
 
-            expect(overlay.querySelectorAll(PANEL_SELECTOR).length)
-                .toBe(2, 'Expected two open dropdowns to remain');
-        }));
+                expect(overlay.querySelectorAll(PANEL_SELECTOR).length)
+                    .toBe(2, 'Expected two open dropdowns');
+
+                dispatchMouseEvent(overlay.querySelector('.level-two-item')!, 'mouseenter');
+                nestedFixture.detectChanges();
+                tick(500);
+
+                expect(overlay.querySelectorAll(PANEL_SELECTOR).length)
+                    .toBe(2, 'Expected two open dropdowns to remain');
+            })
+        );
 
         it('should not re-focus a child dropdown trigger when hovering another trigger', fakeAsync(() => {
             compileTestComponent();
@@ -1734,7 +1768,7 @@ class SimpleDropdown {
     @ViewChild(McDropdown, {static: false}) dropdown: McDropdown;
     @ViewChildren(McDropdownItem) items: QueryList<McDropdownItem>;
     extraItems: string[] = [];
-    closeCallback = jasmine.createSpy('dropdown closed callback');
+    closeCallback = jasmine.createSpy('dropdown closed callback', (name: string | undefined) => name);
     backdropClass: string;
 }
 
@@ -1908,7 +1942,7 @@ class NestedDropdown {
 })
 class NestedDropdownRepeater {
     @ViewChild('rootTriggerEl', {static: false}) rootTriggerEl: ElementRef<HTMLElement>;
-    @ViewChild('levelOneTrigger', {static: false}) levelOneTrigger: McDropdownTrigger;
+    // @ViewChild('levelOneTrigger', {static: false}) levelOneTrigger: McDropdownTrigger;
 
     items = ['one', 'two', 'three'];
 }

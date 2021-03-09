@@ -27,12 +27,14 @@ describe('McModal', () => {
         TestBed.compileComponents();
     }));
 
-    beforeEach(inject([ McModalService, OverlayContainer ],
+    beforeEach(inject(
+        [McModalService, OverlayContainer],
         (ms: McModalService, oc: OverlayContainer) => {
-        modalService = ms;
-        overlayContainer = oc;
-        overlayContainerElement = oc.getContainerElement();
-    }));
+                modalService = ms;
+                overlayContainer = oc;
+                overlayContainerElement = oc.getContainerElement();
+        }
+    ));
 
     afterEach(() => {
         overlayContainer.ngOnDestroy();

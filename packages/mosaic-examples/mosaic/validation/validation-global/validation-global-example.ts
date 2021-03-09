@@ -27,10 +27,13 @@ export class ValidationGlobalExample {
         this.showServerErrors = false;
         this.inProgress = true;
 
-        setTimeout(() => {
-            this.showServerErrors = true;
-            this.inProgress = false;
+        setTimeout(
+            () => {
+                this.showServerErrors = true;
+                this.inProgress = false;
+            },
             // tslint:disable-next-line:no-magic-numbers
-        }, 1000);
+            1000
+        );
     }
 }

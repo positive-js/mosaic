@@ -180,18 +180,20 @@ describe('Tags', () => {
                 subscription.unsubscribe();
             });
 
-            it('should not dispatch `selectionChange` event when selecting a selected tag via ' +
-                'user interaction', () => {
-                tagInstance.select();
+            it(
+                'should not dispatch `selectionChange` event when selecting a selected tag via user interaction',
+                () => {
+                    tagInstance.select();
 
-                const spy = jasmine.createSpy('selectionChange spy');
-                const subscription = tagInstance.selectionChange.subscribe(spy);
+                    const spy = jasmine.createSpy('selectionChange spy');
+                    const subscription = tagInstance.selectionChange.subscribe(spy);
 
-                tagInstance.selectViaInteraction();
+                    tagInstance.selectViaInteraction();
 
-                expect(spy).not.toHaveBeenCalled();
-                subscription.unsubscribe();
-            });
+                    expect(spy).not.toHaveBeenCalled();
+                    subscription.unsubscribe();
+                }
+            );
 
             it('should not dispatch `selectionChange` through setter if the value did not change', () => {
                 tagInstance.selected = false;

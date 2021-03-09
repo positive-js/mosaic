@@ -39,13 +39,16 @@ export class TabsDemoComponent {
 
     constructor() {
         this.asyncTabs = new Observable((observer: Observer<IExampleTab[]>) => {
-            setTimeout(() => {
-                observer.next([
-                    { label: 'First', content: 'Content 1' },
-                    { label: 'Second', content: 'Content 2' },
-                    { label: 'Third', content: 'Content 3' }
-                ]);
-            }, this.timeout);
+            setTimeout(
+                () => {
+                    observer.next([
+                        { label: 'First', content: 'Content 1' },
+                        { label: 'Second', content: 'Content 2' },
+                        { label: 'Third', content: 'Content 3' }
+                    ]);
+                },
+                this.timeout
+            );
         });
     }
 

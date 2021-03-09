@@ -174,23 +174,25 @@ describe('MсRadio', () => {
             expect(spies[1]).toHaveBeenCalledTimes(1);
         });
 
-        it(`should not emit a change event from the radio group when change group value
-        programmatically`, () => {
-            expect(groupInstance.value).toBeFalsy();
+        it(
+            `should not emit a change event from the radio group when change group value programmatically`,
+            () => {
+                expect(groupInstance.value).toBeFalsy();
 
-            const changeSpy = jasmine.createSpy('radio-group change listener');
-            groupInstance.change.subscribe(changeSpy);
+                const changeSpy = jasmine.createSpy('radio-group change listener');
+                groupInstance.change.subscribe(changeSpy);
 
-            radioLabelElements[0].click();
-            fixture.detectChanges();
+                radioLabelElements[0].click();
+                fixture.detectChanges();
 
-            expect(changeSpy).toHaveBeenCalledTimes(1);
+                expect(changeSpy).toHaveBeenCalledTimes(1);
 
-            groupInstance.value = 'water';
-            fixture.detectChanges();
+                groupInstance.value = 'water';
+                fixture.detectChanges();
 
-            expect(changeSpy).toHaveBeenCalledTimes(1);
-        });
+                expect(changeSpy).toHaveBeenCalledTimes(1);
+            }
+        );
 
         it('should update the group and radios when updating the group value', () => {
             expect(groupInstance.value).toBeFalsy();
@@ -222,26 +224,28 @@ describe('MсRadio', () => {
             expect(radioInstances.every((radio) => !radio.checked)).toBe(true);
         });
 
-        it(`should update the group's selected radio to null when unchecking that radio
-        programmatically`, () => {
-            const changeSpy = jasmine.createSpy('radio-group change listener');
-            groupInstance.change.subscribe(changeSpy);
-            radioInstances[0].checked = true;
+        it(
+            `should update the group's selected radio to null when unchecking that radio programmatically`,
+            () => {
+                const changeSpy = jasmine.createSpy('radio-group change listener');
+                groupInstance.change.subscribe(changeSpy);
+                radioInstances[0].checked = true;
 
-            fixture.detectChanges();
+                fixture.detectChanges();
 
-            expect(changeSpy).not.toHaveBeenCalled();
-            expect(groupInstance.value).toBeTruthy();
+                expect(changeSpy).not.toHaveBeenCalled();
+                expect(groupInstance.value).toBeTruthy();
 
-            radioInstances[0].checked = false;
+                radioInstances[0].checked = false;
 
-            fixture.detectChanges();
+                fixture.detectChanges();
 
-            expect(changeSpy).not.toHaveBeenCalled();
-            expect(groupInstance.value).toBeFalsy();
-            expect(radioInstances.every((radio) => !radio.checked)).toBe(true);
-            expect(groupInstance.selected).toBeNull();
-        });
+                expect(changeSpy).not.toHaveBeenCalled();
+                expect(groupInstance.value).toBeFalsy();
+                expect(radioInstances.every((radio) => !radio.checked)).toBe(true);
+                expect(groupInstance.selected).toBeNull();
+            }
+        );
 
         it('should not fire a change event from the group when a radio checked state changes', () => {
             const changeSpy = jasmine.createSpy('radio-group change listener');
