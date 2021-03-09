@@ -1,6 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component } from '@angular/core';
-import { ViewEncapsulation } from '@schematics/angular/component/schema';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 import { DocumentationItems } from '../../shared/documentation-items/documentation-items';
 
