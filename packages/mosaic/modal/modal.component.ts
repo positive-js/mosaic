@@ -310,17 +310,9 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
             if (this.mcModalType === 'confirm') {
                 this.triggerOk();
             }
-            if (this.isModalButtons(this.mcFooter)) {
-                const mcFooter = this.mcFooter as IModalButtonOptions<T>[];
-                const modalMainAction = mcFooter.find(
-                    (item) => item.mcModalMainAction
-                );
-                if (modalMainAction) {
-                    this.onButtonClick(modalMainAction);
-                }
-            } else {
-                (this.getElement().querySelector('[mc-modal-main-action]') as HTMLElement)?.click();
-            }
+
+            (this.getElement().querySelector('[mc-modal-main-action]') as HTMLElement)?.click();
+
             event.preventDefault();
         }
     }
