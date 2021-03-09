@@ -26,7 +26,7 @@ sidepanelRef.close('I was closed');
 Note that multiple sidepanels can be open at a time. Any component contained inside of a sidepanel
 can inject the `McSidepanelRef` as well.
 
-###Specifying global configuration defaults
+### Specifying global configuration defaults
 Default sidepanel options can be specified by providing an instance of `McSidepanelConfig`
 for `MC_SIDEPANEL_DEFAULT_OPTIONS` in your application's root module.
 
@@ -38,7 +38,7 @@ for `MC_SIDEPANEL_DEFAULT_OPTIONS` in your application's root module.
 })
 ```
 
-###Sharing data with the sidepanel component
+### Sharing data with the sidepanel component
 If you want to pass in some data to the sidepanel, you can do so by using `data` property
 in configuration:
 
@@ -62,7 +62,8 @@ export class ExampleSidepanelComponent {
 }
 ```
 
-### Configuring sidepanel content via `entryComponents`
+### Configuring sidepanel content via entryComponents
+
 `McSidepanelService` instantiates components at run-time. In order for it to work,
 the Angular compiler needs extra information to create the necessary `ComponentFactory`
 for your sidepanel content component.
