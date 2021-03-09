@@ -1,4 +1,4 @@
-import {Directive} from '@angular/core';
+import { Directive } from '@angular/core';
 
 
 @Directive({
@@ -28,5 +28,4 @@ export class McModalFooter {}
 @Directive({
     selector: `[mc-modal-main-action]`
 })
-export class McModalMainAction {
-}
+export class McModalMainAction {}

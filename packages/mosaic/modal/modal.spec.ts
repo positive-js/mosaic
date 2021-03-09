@@ -1,14 +1,13 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, EventEmitter, NgModule } from '@angular/core';
 import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { ENTER } from '@ptsecurity/cdk/keycodes';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 
 import { McModalControlService } from './modal-control.service';
 import { McModalRef } from './modal-ref.class';
 import { McModalModule } from './modal.module';
 import { McModalService } from './modal.service';
-//import {createKeyboardEvent} from "@ptsecurity/cdk/testing";
-import { ENTER} from "@ptsecurity/cdk/keycodes";
 
 
 // tslint:disable:no-magic-numbers
@@ -255,12 +254,13 @@ describe('McModal', () => {
             expect(modalRef.getElement().querySelectorAll('[disabled]').length).toBe(1);
         }));
 
-        it('should called function on hotkey ctrl+enter. mcFooter is array ', () => {
+        it('should called function on hotkey ctrl+enter. mcFooter is array ', fakeAsync(() => {
             const spyOk = jasmine.createSpy('ok spy');
             const modalRef = modalService.create({
+                mcContent: TestModalContentComponent,
                 mcFooter: [
                     {
-                        label: 'button 1',
+                        label: 'Test label',
                         type: 'primary',
                         mcModalMainAction: true,
                         onClick: spyOk
@@ -268,6 +268,7 @@ describe('McModal', () => {
                 ]
             });
             fixture.detectChanges();
+            tick(600);
 
             const event = document.createEvent('KeyboardEvent') as any;
             event.initKeyboardEvent('keydown', true, true, window, 0, 0, 0, '', false);
@@ -280,8 +281,9 @@ describe('McModal', () => {
             modalRef.getElement().dispatchEvent(event);
 
             fixture.detectChanges();
+            tick(600);
             expect(spyOk).toHaveBeenCalled();
-        })
+        }));
 
         it('should called function on hotkey ctrl+enter. modal type is confirm ', () => {
             const spyOk = jasmine.createSpy('ok spy');
@@ -305,7 +307,7 @@ describe('McModal', () => {
 
             fixture.detectChanges();
             expect(spyOk).toHaveBeenCalled();
-        })
+        });
 
     });
 });
