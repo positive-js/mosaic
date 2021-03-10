@@ -10,7 +10,8 @@ Radio-buttons обычно должны располагаться внутри 
 Отдельные radio-buttons внутри радиогруппы унаследуют «имя» группы.
 
 
-### Использование с `@angular/forms`
+### Использование с @angular/forms
+
 `<mc-radio-group>` совместимо с `@angular/forms` и поддерживает `FormsModule`
 и `ReactiveFormsModule`.
 

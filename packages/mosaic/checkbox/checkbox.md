@@ -18,7 +18,8 @@ Label описывает значение, которое будет выбра�
 [`aria-label`](https://www.w3.org/TR/wai-aria/states_and_properties#aria-label) или 
 [`aria-labelledby`](https://www.w3.org/TR/wai-aria/states_and_properties#aria-labelledby).
 
-### Использование с `@angular/forms`
+### Использование с @angular/forms
+
 `<mc-checkbox>` совместим `@angular/forms` и поддерживает `FormsModule` 
 и `ReactiveFormsModule`.
 
@@ -60,11 +61,11 @@ providers: [
 
 Возможные значения:
 
-#### `noop`
+#### noop
 
-#### `check`
+#### check
 
-#### `check-indeterminate`
+#### check-indeterminate
 
 ### Theming  
 Цвет `<mc-checkbox>` можно изменить с помощью свойства `color`. По умолчанию checkboxes
