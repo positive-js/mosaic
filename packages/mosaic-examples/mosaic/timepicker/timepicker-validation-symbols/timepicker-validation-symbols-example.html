@@ -1,0 +1,9 @@
+<form novalidate>
+    <div class="docs-row">
+        <div class="mc-caption docs-label">Введите время</div>
+        <mc-form-field>
+            <i mcPrefix mc-icon="mc-clock_16"></i>
+            <input mcTimepicker [(ngModel)]="time" [format]="'HH:mm'"  >
+        </mc-form-field>
+    </div>
+</form>
