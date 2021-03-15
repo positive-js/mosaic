@@ -23,7 +23,7 @@ import {
     ViewChildren,
     ViewContainerRef, ViewEncapsulation
 } from '@angular/core';
-import { ESCAPE } from '@ptsecurity/cdk/keycodes';
+import { ESCAPE, ENTER } from '@ptsecurity/cdk/keycodes';
 import { Observable } from 'rxjs';
 
 import { McModalControlService } from './modal-control.service';
@@ -218,6 +218,7 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
         if (this.contentComponentRef) {
             this.bodyContainer.insert(this.contentComponentRef.hostView);
         }
+        this.getElement().getElementsByTagName('button')[0]?.focus();
 
         for (const autoFocusedButton of this.autoFocusedButtons.toArray()) {
             if (autoFocusedButton.nativeElement.autofocus) {
@@ -226,6 +227,7 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
                 break;
             }
         }
+
     }
 
     ngOnDestroy() {
@@ -275,6 +277,10 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
         return this.elementRef && this.elementRef.nativeElement;
     }
 
+    getMcFooter(): HTMLElement {
+        return this.getElement().getElementsByClassName('mc-modal-footer').item(0) as HTMLElement;
+    }
+
     onClickMask($event: MouseEvent) {
         if (
             this.mcMask &&
@@ -297,6 +303,16 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
         if (event.keyCode === ESCAPE && this.container && (this.container instanceof OverlayRef)) {
 
             this.close();
+            event.preventDefault();
+        }
+        // tslint:disable-next-line:deprecation .key isn't supported in Edge
+        if (event.ctrlKey && event.keyCode === ENTER) {
+            if (this.mcModalType === 'confirm') {
+                this.triggerOk();
+            }
+
+            (this.getElement().querySelector('[mc-modal-main-action]') as HTMLElement)?.click();
+
             event.preventDefault();
         }
     }

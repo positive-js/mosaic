@@ -66,6 +66,7 @@ export interface IModalButtonOptions<T = any> {
     disabled?: boolean | ((this: IModalButtonOptions<T>, contentComponentInstance?: T) => boolean);
 
     autoFocus?: boolean;
+    mcModalMainAction?: boolean;
 
     onClick?(this: IModalButtonOptions<T>, contentComponentInstance?: T): (void | {}) | Promise<(void | {})>;
 }

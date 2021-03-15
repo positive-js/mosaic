@@ -24,3 +24,8 @@ export class McModalBody {}
     }
 })
 export class McModalFooter {}
+
+@Directive({
+    selector: `[mc-modal-main-action]`
+})
+export class McModalMainAction {}

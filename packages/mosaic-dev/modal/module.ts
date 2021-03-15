@@ -85,6 +85,7 @@ export class ModalDemoComponent {
             mcFooter: [{
                 label: 'button 1',
                 type: 'primary',
+                mcModalMainAction: true,
                 loading: () => isLoading,
                 onClick: (componentInstance: any) => {
                     componentInstance.title = 'title in inner component is changed';
