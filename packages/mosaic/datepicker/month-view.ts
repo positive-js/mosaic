@@ -208,13 +208,16 @@ export class McMonthView<D> implements AfterContentInit {
                 this.activeDate = this.dateAdapter.addCalendarDays(this._activeDate, 7);
                 break;
             case HOME:
-                this.activeDate = this.dateAdapter.addCalendarDays(this._activeDate,
-                    1 - this.dateAdapter.getDate(this._activeDate));
+                this.activeDate = this.dateAdapter.addCalendarDays(
+                    this._activeDate,
+                    1 - this.dateAdapter.getDate(this._activeDate)
+                );
                 break;
             case END:
-                this.activeDate = this.dateAdapter.addCalendarDays(this._activeDate,
-                    (this.dateAdapter.getNumDaysInMonth(this._activeDate) -
-                        this.dateAdapter.getDate(this._activeDate)));
+                this.activeDate = this.dateAdapter.addCalendarDays(
+                    this._activeDate,
+                    (this.dateAdapter.getNumDaysInMonth(this._activeDate) - this.dateAdapter.getDate(this._activeDate))
+                );
                 break;
             case PAGE_UP:
                 this.activeDate = event.altKey ?
@@ -259,8 +262,12 @@ export class McMonthView<D> implements AfterContentInit {
 
         this.monthLabel = this.monthLabel[0].toLocaleUpperCase() + this.monthLabel.substr(1);
 
-        const firstOfMonth = this.dateAdapter.createDate(this.dateAdapter.getYear(this.activeDate),
-            this.dateAdapter.getMonth(this.activeDate), 1);
+        const firstOfMonth = this.dateAdapter.createDate(
+            this.dateAdapter.getYear(this.activeDate),
+            this.dateAdapter.getMonth(this.activeDate),
+            1
+        );
+
         this.firstWeekOffset =
             (DAYS_PER_WEEK + this.dateAdapter.getDayOfWeek(firstOfMonth) -
                 this.dateAdapter.getFirstDayOfWeek()) % DAYS_PER_WEEK;

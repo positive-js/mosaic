@@ -1,4 +1,4 @@
-@import 'palette';
+@import '../../design-tokens/tokens';
 @import 'components-theming';
 
 
@@ -6,22 +6,12 @@
     @return map-get(map-get($palette, contrast), $hue);
 }
 
-@function mc-palette($base-palette, $lighter: 100, $default: 500, $darker: 700) {
-    $result: map_merge($base-palette, (
-        default: map-get($base-palette, $default),
-        lighter: map-get($base-palette, $lighter),
-        darker:  map-get($base-palette, $darker),
-
-        default-contrast: mc-contrast($base-palette, $default),
-        lighter-contrast: mc-contrast($base-palette, $lighter),
-        darker-contrast:  mc-contrast($base-palette, $darker)
-    ));
+@function mc-palette($base-palette, $default) {
+    $result: map_merge($base-palette, (default: $default));
 
     // For each hue in the palette, add a "-contrast" color to the map.
     @each $hue, $color in $base-palette {
-        $result: map_merge($result, (
-            '#{$hue}-contrast': mc-contrast($base-palette, $hue)
-        ));
+        $result: map_merge($result, ('#{$hue}-contrast': mc-contrast($base-palette, $hue)));
     }
 
     @return $result;
@@ -40,20 +30,44 @@
     @return rgba($color, $opacity);
 }
 
-@function mc-light-theme(
-    $primary,
-    $second,
-    $error,
+$light-primary: mc-palette($light-color-scheme-primary-palette, $light-color-scheme-primary-default);
+$light-second: mc-palette($light-color-scheme-second-palette, $light-color-scheme-second-default);
+$light-error: mc-palette($light-color-scheme-error-palette, $light-color-scheme-error-default);
 
-    $info: mc-palette($mc-blue),
-    $success: mc-palette($mc-green),
-    $warning: mc-palette($mc-yellow)
+$light-info: mc-palette($light-color-scheme-info-palette, $light-color-scheme-info-default);
+$light-success: mc-palette($light-color-scheme-success-palette, $light-color-scheme-success-default);
+$light-warning: mc-palette($light-color-scheme-warning-palette, $light-color-scheme-warning-default);
+
+@function mc-light-theme(
+    $primary: $light-primary,
+    $second: $light-second,
+    $error: $light-error,
+    $info: $light-info,
+    $success: $light-success,
+    $warning: $light-warning
 ) {
     $states: (
-        focused-color: mc-color($primary),
-        selected-color: mc-color($primary, 100),
-        pressed-shadow: inset 0 1px 2px 0 rgba(black, 0.2),
-        disabled-opacity: 0.3
+        focused-color: $light-color-scheme-states-focused-color,
+        selected-color: $light-color-scheme-states-selected-color,
+        pressed-shadow: $light-color-scheme-states-pressed-shadow,
+        disabled-opacity: $light-color-scheme-states-disabled-opacity
+    );
+
+    $foreground: (
+        text: $light-color-scheme-foreground-text,
+        text-less-contrast: $light-color-scheme-foreground-text-less-contrast,
+        text-disabled: $light-color-scheme-foreground-text_disabled,
+        divider: $light-color-scheme-foreground-divider,
+        border: $light-color-scheme-foreground-border,
+        icon: $light-color-scheme-foreground-icon,
+    );
+
+    $background: (
+        background: $light-color-scheme-background-background,
+        background-disabled: $light-color-scheme-background-background-disabled,
+        overlay-hover: $light-color-scheme-background-overlay-hover,
+        overlay-active: $light-color-scheme-background-overlay-active,
+        overlay-disabled: $light-color-scheme-background-overlay-disabled
     );
 
     $theme: (
@@ -63,8 +77,8 @@
         second: $second,
         error: $error,
 
-        foreground: $mc-light-theme-foreground,
-        background: $mc-light-theme-background,
+        foreground: $foreground,
+        background: $background,
 
         warning: $warning,
         success: $success,
@@ -76,20 +90,44 @@
     @return map_merge($theme, (components: mc-light-theme-components($theme)));
 }
 
-@function mc-dark-theme(
-    $primary,
-    $second,
-    $error,
+$dark-primary: mc-palette($dark-color-scheme-primary-palette, $dark-color-scheme-primary-default);
+$dark-second: mc-palette($dark-color-scheme-second-palette, $dark-color-scheme-second-default);
+$dark-error: mc-palette($dark-color-scheme-error-palette, $dark-color-scheme-error-default);
 
-    $info: mc-palette($mc-blue),
-    $success: mc-palette($mc-green),
-    $warning: mc-palette($mc-yellow)
+$dark-info: mc-palette($dark-color-scheme-info-palette, $dark-color-scheme-info-default);
+$dark-success: mc-palette($dark-color-scheme-success-palette, $dark-color-scheme-success-default);
+$dark-warning: mc-palette($dark-color-scheme-warning-palette, $dark-color-scheme-warning-default);
+
+@function mc-dark-theme(
+    $primary: $dark-primary,
+    $second: $dark-second,
+    $error: $dark-error,
+    $info: $dark-info,
+    $success: $dark-success,
+    $warning: $dark-warning
 ) {
     $states: (
-        focused-color: mc-color($primary),
-        selected-color: mc-color($primary, 700),
-        pressed-shadow: inset 1px 2px 2px 0 rgba(black, 0.2),
-        disabled-opacity: 0.3
+        focused-color: $dark-color-scheme-states-focused-color,
+        selected-color: $dark-color-scheme-states-focused-color,
+        pressed-shadow: $dark-color-scheme-states-pressed-shadow,
+        disabled-opacity: $dark-color-scheme-states-disabled-opacity
+    );
+
+    $background: (
+        background: $dark-color-scheme-background-background,
+        background-disabled: $dark-color-scheme-background-background-disabled,
+        overlay-hover: $dark-color-scheme-background-overlay-hover,
+        overlay-active: $dark-color-scheme-background-overlay-active,
+        overlay-disabled: $dark-color-scheme-background-overlay-disabled
+    );
+
+    $foreground: (
+        text: $dark-color-scheme-foreground-text,
+        text-less-contrast: $dark-color-scheme-foreground-text-less-contrast,
+        text-disabled: $dark-color-scheme-foreground-text_disabled,
+        divider: $dark-color-scheme-foreground-divider,
+        border: $dark-color-scheme-foreground-border,
+        icon: $dark-color-scheme-foreground-icon,
     );
 
     $theme: (
@@ -99,8 +137,8 @@
         second: $second,
         error: $error,
 
-        foreground: $mc-dark-theme-foreground,
-        background: $mc-dark-theme-background,
+        foreground: $foreground,
+        background: $background,
 
         warning: $warning,
         success: $success,

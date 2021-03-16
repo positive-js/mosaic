@@ -43,8 +43,10 @@ export async function promptForNewVersion(currentVersion: Version): Promise<Vers
             createVersionChoice(currentVersion, 'patch', 'Patch release'));
     }
 
-    versionChoices.push(new Separator(),
-        {name: `Use current version (${currentVersionName})`, value: currentVersionName});
+    versionChoices.push(
+        new Separator(),
+        { name: `Use current version (${currentVersionName})`, value: currentVersionName }
+    );
 
     const answers = await prompt<IVersionPromptAnswers>([{
         type: 'list',

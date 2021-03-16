@@ -1,0 +1,13 @@
+@import '../design-tokens/tokens';
+
+
+.mc-timepicker {
+    padding-right: calc(
+        var(--mc-timepicker-size-padding-right, #{$timepicker-size-padding-right}) -
+        var(--mc-form-field-size-border-width, #{$form-field-size-border-width})
+    );
+}
+
+.mc-form-field-type-mc-timepicker {
+    width: auto;
+}

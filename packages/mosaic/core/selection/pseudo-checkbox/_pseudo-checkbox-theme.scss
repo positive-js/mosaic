@@ -2,13 +2,12 @@
 
 
 @mixin mc-pseudo-checkbox-theme($theme) {
-    $primary: map-get($theme, primary);
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
     $second: map-get($theme, second);
 
-    $background: map-get($theme, background);
-    $foreground: map-get($theme, foreground);
-
-    $is-dark: map-get($theme, is-dark);
+    $checkbox: map-get(map-get($theme, components), checkbox);
 
     .mc-pseudo-checkbox {
         border-color: mc-color($second);
@@ -20,9 +19,9 @@
         }
 
         &.mc-checked {
-            border-color: mc-color($primary, if($is-dark, lighter, darker));
+            border-color: map-get($checkbox, state-checked-border);
 
-            background: if($is-dark, mc-color($primary, 600), mc-color($primary));
+            background: map-get($checkbox, state-checked-background);
         }
 
         &.mc-disabled {

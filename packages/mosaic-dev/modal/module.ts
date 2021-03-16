@@ -85,6 +85,7 @@ export class ModalDemoComponent {
             mcFooter: [{
                 label: 'button 1',
                 type: 'primary',
+                mcModalMainAction: true,
                 loading: () => isLoading,
                 onClick: (componentInstance: any) => {
                     componentInstance.title = 'title in inner component is changed';
@@ -117,11 +118,14 @@ export class ModalDemoComponent {
         modal.afterClose.subscribe((result) => console.log('[afterClose] The result is:', result));
 
         // delay until modal instance created
-        setTimeout(() => {
-            const instance = modal.getContentComponent();
-            instance.subtitle = 'sub title is changed';
-            modal.markForCheck();
-        }, 2000);
+        setTimeout(
+            () => {
+                const instance = modal.getContentComponent();
+                instance.subtitle = 'sub title is changed';
+                modal.markForCheck();
+            },
+            2000
+        );
     }
 
     openAndCloseAll() {

@@ -124,7 +124,8 @@ describe('McButtonToggle with forms', () => {
             expect(selected.value).toBe(groupInstance.value);
         });
 
-        it('should have the correct FormControl state initially and after interaction',
+        it(
+            'should have the correct FormControl state initially and after interaction',
             fakeAsync(() => {
                 expect(groupNgModel.valid).toBe(true);
                 expect(groupNgModel.pristine).toBe(true);
@@ -146,7 +147,8 @@ describe('McButtonToggle with forms', () => {
                 expect(groupNgModel.valid).toBe(true);
                 expect(groupNgModel.pristine).toBe(false);
                 expect(groupNgModel.touched).toBe(true);
-            }));
+            })
+        );
 
         it('should update the ngModel value when selecting a button toggle', fakeAsync(() => {
             innerButtons[1].click();
@@ -593,22 +595,24 @@ describe('McButtonToggle without forms', () => {
         expect(fixture.componentInstance.toggles.toArray()[1].checked).toBe(true);
     });
 
-    it('should maintain the selected state when the value and toggles are swapped out at ' +
-        'the same time', () => {
-        const fixture = TestBed.createComponent(RepeatedButtonTogglesWithPreselectedValue);
-        fixture.detectChanges();
+    it(
+        'should maintain the selected state when the value and toggles are swapped out at the same time',
+        () => {
+            const fixture = TestBed.createComponent(RepeatedButtonTogglesWithPreselectedValue);
+            fixture.detectChanges();
 
-        expect(fixture.componentInstance.toggleGroup.value).toBe('Two');
-        expect(fixture.componentInstance.toggles.toArray()[1].checked).toBe(true);
+            expect(fixture.componentInstance.toggleGroup.value).toBe('Two');
+            expect(fixture.componentInstance.toggles.toArray()[1].checked).toBe(true);
 
-        fixture.componentInstance.possibleValues = ['Five', 'Six', 'Seven'];
-        fixture.componentInstance.value = 'Seven';
-        fixture.detectChanges();
+            fixture.componentInstance.possibleValues = ['Five', 'Six', 'Seven'];
+            fixture.componentInstance.value = 'Seven';
+            fixture.detectChanges();
 
-        expect(fixture.componentInstance.toggleGroup.value).toBe('Seven');
-        // tslint:disable-next-line:no-magic-numbers
-        expect(fixture.componentInstance.toggles.toArray()[2].checked).toBe(true);
-    });
+            expect(fixture.componentInstance.toggleGroup.value).toBe('Seven');
+            // tslint:disable-next-line:no-magic-numbers
+            expect(fixture.componentInstance.toggles.toArray()[2].checked).toBe(true);
+        }
+    );
 
     it('should select falsy button toggle value in multiple selection', () => {
         const fixture = TestBed.createComponent(FalsyButtonTogglesInsideButtonToggleGroupMultiple);

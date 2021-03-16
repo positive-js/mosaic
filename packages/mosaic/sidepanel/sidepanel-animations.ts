@@ -19,21 +19,25 @@ export const mcSidepanelTransformAnimation: Record<McSidepanelPosition, { in: st
     bottom: { in: 'translateY(100%)', out: 'translateY(0%)' }
 };
 
-export const mcSidepanelAnimations: {
-    readonly sidepanelState: AnimationTriggerMetadata;
-} = {
+export const mcSidepanelAnimations: { readonly sidepanelState: AnimationTriggerMetadata } = {
     sidepanelState: trigger('state', [
-        state('hidden',
+        state(
+            'hidden',
             style({ transform: '{{transformIn}}' }),
             { params: { transformIn: mcSidepanelTransformAnimation[McSidepanelPosition.Right].in }}
         ),
-        state('visible',
+        state(
+            'visible',
             style({ transform: '{{transformOut}}' }),
             { params: { transformOut: mcSidepanelTransformAnimation[McSidepanelPosition.Right].out }}
         ),
-        transition('visible => void, visible => hidden',
-            animate(`200ms ${AnimationCurves.AccelerationCurve}`)),
-        transition('void => visible',
-            animate(`200ms ${AnimationCurves.DecelerationCurve}`))
+        transition(
+            'visible => void, visible => hidden',
+            animate(`200ms ${AnimationCurves.AccelerationCurve}`)
+        ),
+        transition(
+            'void => visible',
+            animate(`200ms ${AnimationCurves.DecelerationCurve}`)
+        )
     ])
 };

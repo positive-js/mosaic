@@ -1,4 +1,3 @@
-@import '../../mosaic/core/theming/theming';
 @import '../../mosaic/core/theming/all-theme';
 @import '../../mosaic/core/visual/all-visual';
 
@@ -17,6 +16,11 @@
 @import 'app/shared/example-viewer/example-viewer-theme';
 @import 'highlightjs/material-dark';
 
+@import './styles/default-theme/theme';
+@import './styles/red-theme/theme';
+@import './styles/green-theme/theme';
+@import './styles/yellow-theme/theme';
+
 // Include all typography for the components.
 @include mc-core();
 
@@ -27,11 +31,9 @@ $typography: mc-typography-config();
 @include mc-anchors-typography($typography);
 @include mc-navbar-typography($typography);
 @include docs-markdown-typography($typography);
-@include docs-stackblitz-typography($typography);
 @include example-viewer-typography($typography);
 
 @mixin docs-component-theme($theme) {
-    @include mosaic-theme($theme);
     @include layouts_for_breakpoint();
     @include layout-padding-margin();
     @include mosaic-docs-app-theme($theme);
@@ -49,56 +51,53 @@ $typography: mc-typography-config();
 
 // Include all theme styles for the components.
 
-@import './styles/theme-default';
-@import './styles/theme-dark';
-
-.theme-default {
+@mixin docs-theme($theme) {
     $background: map-get($theme, background);
     $foreground: map-get($theme, foreground);
 
     background: mc-color($background, background);
     color: mc-color($foreground, text);
 
+    @include mosaic-theme($theme);
+    @include docs-component-theme($theme);
+}
+
+
+.theme-default {
     &.active-blue {
-        @include docs-component-theme($theme);
+        @include docs-theme($default-theme);
     }
 
     &.active-red {
-        @include docs-component-theme($theme-red);
+        @include docs-theme($theme-red);
     }
 
     &.active-green {
-        @include docs-component-theme($theme-green);
+        @include docs-theme($theme-green);
     }
 
     &.active-yellow {
-        @include docs-component-theme($theme-yellow);
+        @include docs-theme($theme-yellow);
     }
 }
 
 .theme-dark {
-    $background: map-get($dark-theme, background);
-    $foreground: map-get($dark-theme, foreground);
-
-    background: mc-color($background, background);
-    color: mc-color($foreground, text);
-
     @include material-dark();
 
     &.active-blue {
-        @include docs-component-theme($dark-theme);
+        @include docs-theme($default-dark-theme);
     }
 
     &.active-red {
-        @include docs-component-theme($dark-theme-red);
+        @include docs-theme($dark-theme-red);
     }
 
     &.active-green {
-        @include docs-component-theme($dark-theme-green);
+        @include docs-theme($dark-theme-green);
     }
 
     &.active-yellow {
-        @include docs-component-theme($dark-theme-yellow);
+        @include docs-theme($dark-theme-yellow);
     }
 }
 

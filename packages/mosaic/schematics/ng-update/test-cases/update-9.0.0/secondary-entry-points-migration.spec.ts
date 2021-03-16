@@ -9,28 +9,30 @@ const migrationCollection = require.resolve('../../../migration.json');
 
 describe('v9 Mosaic imports', () => {
 
-    xit('should re-map top-level Mosaic imports to the proper entry points when top-level ' +
-        '@ptsecurity/mosaic package does not exist', async () => {
+    xit(
+        'should re-map top-level Mosaic imports to the proper entry points when top-level @ptsecurity/mosaic package does not exist',
+        async () => {
 
-        const {
-            runFixers,
-            appTree,
-            removeTempDir
-        } = await createTestCaseSetup(
-            'update-9.0.0',
-            migrationCollection,
-            [require.resolve('./secondary-entry-points-migration_input.fixture')]
-        );
+            const {
+                runFixers,
+                appTree,
+                removeTempDir
+            } = await createTestCaseSetup(
+                'update-9.0.0',
+                migrationCollection,
+                [require.resolve('./secondary-entry-points-migration_input.fixture')]
+            );
 
-        if (runFixers) {
-            await runFixers();
+            if (runFixers) {
+                await runFixers();
+            }
+
+            expect(appTree.readContent('projects/lib-testing/src/tests/secondary-entry-points-migration_input.ts'))
+                .toBe(readFileContent(require.resolve('./secondary-entry-points-migration_expected_output.fixture')));
+
+            removeTempDir();
         }
-
-        expect(appTree.readContent('projects/lib-testing/src/tests/secondary-entry-points-migration_input.ts'))
-            .toBe(readFileContent(require.resolve('./secondary-entry-points-migration_expected_output.fixture')));
-
-        removeTempDir();
-    });
+    );
 });
 
 export function readFileContent(filePath: string): string {

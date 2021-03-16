@@ -146,8 +146,11 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
         @Optional() private _dir: Directionality,
         private _focusMonitor?: FocusMonitor
     ) {
-        _element.nativeElement.addEventListener('touchstart', this.handleTouchStart,
-            passiveEventListenerOptions);
+        _element.nativeElement.addEventListener(
+            'touchstart',
+            this.handleTouchStart,
+            passiveEventListenerOptions
+        );
 
         if (_dropdownItemInstance) {
             _dropdownItemInstance.triggersNestedDropdown = this.triggersNestedDropdown();
@@ -165,8 +168,11 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
             this.overlayRef = null;
         }
 
-        this._element.nativeElement.removeEventListener('touchstart', this.handleTouchStart,
-            passiveEventListenerOptions);
+        this._element.nativeElement.removeEventListener(
+            'touchstart',
+            this.handleTouchStart,
+            passiveEventListenerOptions
+        );
 
         this.cleanUpSubscriptions();
         this.closeSubscription.unsubscribe();

@@ -187,12 +187,16 @@ export class McYearView<D> implements AfterContentInit {
                 this.activeDate = this.dateAdapter.addCalendarMonths(this._activeDate, VERTICAL_SHIFT);
                 break;
             case HOME:
-                this.activeDate = this.dateAdapter.addCalendarMonths(this._activeDate,
-                    -this.dateAdapter.getMonth(this._activeDate));
+                this.activeDate = this.dateAdapter.addCalendarMonths(
+                    this._activeDate,
+                    -this.dateAdapter.getMonth(this._activeDate)
+                );
                 break;
             case END:
-                this.activeDate = this.dateAdapter.addCalendarMonths(this._activeDate,
-                    MAX_MONTH_INDEX - this.dateAdapter.getMonth(this._activeDate));
+                this.activeDate = this.dateAdapter.addCalendarMonths(
+                    this._activeDate,
+                    MAX_MONTH_INDEX - this.dateAdapter.getMonth(this._activeDate)
+                );
                 break;
             case PAGE_UP:
                 this.activeDate =

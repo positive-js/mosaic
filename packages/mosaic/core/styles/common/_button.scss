@@ -1,8 +1,5 @@
 @import 'vendor-prefixes';
 
-$mc-button-border-size: 1px;
-$mc-button-border-radius: 3px;
-
 
 @mixin mc-button-reset {
     @include user-select(none);

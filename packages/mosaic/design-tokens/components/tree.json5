@@ -1,0 +1,11 @@
+{
+    tree: {
+        size: {
+            'border-width': { value: '2px' },
+            'node-height': { value: '{size.option-height}' }
+        },
+        font: {
+            node: { value: 'body' }
+        }
+    }
+}

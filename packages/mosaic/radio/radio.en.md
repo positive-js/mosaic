@@ -10,7 +10,8 @@ would make that impossible (e.g., radio-buttons inside of table cells). The radi
 Individual radio-buttons inside of a radio-group will inherit the `name` of the group.
 
 
-### Use with `@angular/forms`
+### Use with @angular/forms
+
 `<mc-radio-group>` is compatible with `@angular/forms` and supports both `FormsModule`
 and `ReactiveFormsModule`.
 

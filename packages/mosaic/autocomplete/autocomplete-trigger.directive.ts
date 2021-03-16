@@ -435,8 +435,10 @@ export class McAutocompleteTrigger implements ControlValueAccessor, OnDestroy {
      */
     private scrollToOption(): void {
         const index = this.autocomplete.keyManager.activeItemIndex || 0;
-        const labelCount = countGroupLabelsBeforeOption(index,
-            this.autocomplete.options, this.autocomplete.optionGroups);
+        const labelCount = countGroupLabelsBeforeOption(
+            index,
+            this.autocomplete.options, this.autocomplete.optionGroups
+        );
 
         const newScrollPosition = getOptionScrollPosition(
             index + labelCount,

@@ -1,7 +1,5 @@
-$mc-radio-size: 14px !default;
+@import '../design-tokens/tokens';
 
-// Padding between radio inputs and their labels
-$mc-toggle-padding: 26px !default;
 
 // Top-level host container.
 .mc-radio-button {
@@ -28,7 +26,10 @@ $mc-toggle-padding: 26px !default;
     order: 0;
     line-height: inherit;
 
-    padding-left: $mc-toggle-padding;
+    padding-left: calc(
+        var(--mc-radio-size-size, #{$radio-size-size}) +
+        var(--mc-radio-size-padding, #{$radio-size-label-margin})
+    );
     padding-right: 0;
 
     .mc-radio-button__outer-circle,
@@ -48,8 +49,8 @@ $mc-toggle-padding: 26px !default;
         left: 0;
         top: calc(50% - 8px);
 
-        width: $mc-radio-size;
-        height: $mc-radio-size;
+        width: var(--mc-radio-size-size, $radio-size-size);
+        height: var(--mc-radio-size-size, $radio-size-size);
 
         border: {
             width: 1px;
@@ -69,7 +70,7 @@ $mc-toggle-padding: 26px !default;
     }
 
     [dir='rtl'] & {
-        padding-right: $mc-toggle-padding;
+        padding-right: var(--mc-radio-size-padding, $radio-size-label-margin);
         padding-left: 0;
     }
 }

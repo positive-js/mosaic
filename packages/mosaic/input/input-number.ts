@@ -1,4 +1,3 @@
-import { Platform } from '@angular/cdk/platform';
 import {
     Attribute,
     Directive,
@@ -85,7 +84,6 @@ export class McNumberInput {
     }
 
     constructor(
-        private platform: Platform ,
         private elementRef: ElementRef,
         @Optional() @Self() private ngControl: NgControl,
         @Attribute('step') step: string,
@@ -132,18 +130,12 @@ export class McNumberInput {
         const isNumber = (e) => (e.keyCode >= ZERO && e.keyCode <= NINE) ||
             (e.keyCode >= NUMPAD_ZERO && e.keyCode <= NUMPAD_NINE);
 
-        const isIEPeriod = (e) => e.key === '.' || e.key === 'Decimal';
-        const isNotIEPeriod = (e) => e.key === '.' || e.key === ',';
+        const isPeriod = (e) => e.key === '.' || e.key === ',';
 
         const minuses = [NUMPAD_MINUS, DASH, FF_MINUS];
         const serviceKeys = [DELETE, BACKSPACE, TAB, ESCAPE, ENTER];
         const arrows = [LEFT_ARROW, RIGHT_ARROW];
         const allowedKeys =  [HOME, END].concat(arrows).concat(serviceKeys).concat(minuses);
-
-        // Decimal is for IE
-        const isPeriod = (e) => this.platform.EDGE || this.platform.TRIDENT
-            ? isIEPeriod(e)
-            : isNotIEPeriod(e);
 
         if (allowedKeys.indexOf(keyCode) !== -1 ||
             isCtrlA(event) ||

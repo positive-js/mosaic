@@ -9,7 +9,7 @@ import { CHANGELOG_FILE_NAME } from './stage-release';
 
 const HTTP_CODE_OK = 200;
 
-export function notify(tag, version) {
+export function notify(version) {
     if (!verifyNotificationPossibility()) {
         return;
     }
@@ -27,20 +27,19 @@ export function notify(tag, version) {
         text: `#### [![Mosaic Logo](https://i.ibb.co/fQNPgv6/logo-png-200.png =32x32)osaic](https://github.com/positive-js/mosaic/tree/\${tag}) was published. \n ${prepareChangeLog(version)}`
     };
 
-    request.post({
-        url,
-        headers,
-        body: JSON.stringify(body)
-    }, (error, response) => {
-        if (error || response.statusCode !== HTTP_CODE_OK) {
-            // tslint:disable-next-line:no-console
-            console.error(red(`  ✘   Could not post notification in Mattermost.`));
+    request.post(
+        { url, headers, body: JSON.stringify(body) },
+        (error, response) => {
+            if (error || response.statusCode !== HTTP_CODE_OK) {
+                // tslint:disable-next-line:no-console
+                console.error(red(`  ✘   Could not post notification in Mattermost.`));
 
-            return;
+                return;
+            }
+
+            console.info(green(`  ✓   Notification is posted in Mattermost.`));
         }
-
-        console.info(green(`  ✓   Notification is posted in Mattermost.`));
-    });
+    );
 }
 
 export function verifyNotificationPossibility() {

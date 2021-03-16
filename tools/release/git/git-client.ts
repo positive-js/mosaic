@@ -12,7 +12,7 @@ export class GitClient {
     constructor(public projectDir: string, public remoteGitUrl: string) {}
 
     /** Gets the currently checked out branch for the project directory. */
-    getCurrentBranch() {
+    getCurrentBranch(): string {
         return this.spawnGitProcess(['symbolic-ref', '--short', 'HEAD']).stdout.trim();
     }
 
@@ -67,7 +67,7 @@ export class GitClient {
     }
 
     /** Creates a tag for the specified commit reference. */
-    createTag(commitRef: string, tagName: string, message: string): boolean {
+    createTag(tagName: string, message: string): boolean {
         return this.spawnGitProcess(['tag', tagName, '-m', message]).status === 0;
     }
 
@@ -93,6 +93,11 @@ export class GitClient {
     /** Pushes the specified tag to the remote git repository. */
     pushTagToRemote(tagName: string, remoteName: string = this.remoteGitUrl): boolean {
         return this.spawnGitProcess(['push', remoteName, `refs/tags/${tagName}`]).status === 0;
+    }
+
+    /** Push committed changes to remote */
+    pushBranchToRemote(remoteName: string, branchName: string): boolean {
+        return this.spawnGitProcess(['push', remoteName, branchName]).status === 0;
     }
 
     /** Checks whether the given remote has been set up. */

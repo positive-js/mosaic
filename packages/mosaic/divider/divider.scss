@@ -1,12 +1,13 @@
-$mc-divider-width: 1px;
-$mc-divider-inset-margin: 80px;
+@import '../design-tokens/tokens';
+
 
 // This mixin provides the correct offset for an inset divider based on the
 // size of the parent class (e.g. avatar vs icon)
 @mixin mc-inset-divider-offset($offset, $padding) {
-    $mc-inset-divider-offset: #{(2 * $padding) + $offset};
+    $mc-inset-divider-offset: (2 * $padding) + $offset;
+
     margin-left: $mc-inset-divider-offset;
-    width: calc(100% - #{$mc-inset-divider-offset});
+    width: 100% - $mc-inset-divider-offset;
 
     [dir='rtl'] & {
         margin-left: auto;
@@ -17,21 +18,21 @@ $mc-divider-inset-margin: 80px;
 .mc-divider {
     display: block;
     margin: 0;
-    border-top-width: $mc-divider-width;
+    border-top-width: var(--mc-divider-size-width, $divider-size-width);
     border-top-style: solid;
 
     &.mc-divider_vertical {
         border-top: 0;
-        border-right-width: $mc-divider-width;
+        border-right-width: var(--mc-divider-size-width, $divider-size-width);
         border-right-style: solid;
     }
 
     &.mc-divider_inset {
-        margin-left: $mc-divider-inset-margin;
+        margin-left: var(--mc-divider-size-inset-margin, $divider-size-inset-margin);
 
         [dir='rtl'] & {
             margin-left: auto;
-            margin-right: $mc-divider-inset-margin;
+            margin-right: var(--mc-divider-size-inset-margin, $divider-size-inset-margin);
         }
     }
 }

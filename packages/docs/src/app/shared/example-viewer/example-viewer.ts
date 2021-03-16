@@ -97,9 +97,9 @@ export class ExampleViewer {
         document.execCommand('copy');
         sel.removeAllRanges();
         event.target.parentNode.classList.add(this.codeCopySuccessClass);
-        setTimeout(() => {
-            event.target.parentNode.classList.remove(this.codeCopySuccessClass);
-        }, this.codeCopyDelay);
+        setTimeout(
+            () => event.target.parentNode.classList.remove(this.codeCopySuccessClass), this.codeCopyDelay
+        );
     }
 
     private resolveHighlightedExampleFile(fileName: string) {

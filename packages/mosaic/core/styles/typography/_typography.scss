@@ -3,50 +3,31 @@
 
 
 @function mc-typography-config(
-    $font-family:   map-get(map-get($fonts, base), font-family),
-    $font-family-mono:   map-get(map-get($fonts, monospace), font-family),
-
-    $display-1:     mc-typography-level(56px, 76px, -0.4px),
-    $display-2:     mc-typography-level(45px, 56px),
-    $display-3:     mc-typography-level(34px, 44px, 0.25px),
-
-    $headline:      mc-typography-level(24px, 32px),
-    $title:         mc-typography-level(20px, 28px, 0.15px, 500),
-    $subheading:    mc-typography-level(15px, 20px, 0.15px, 700),
-
-    $body:          mc-typography-level(15px, 20px, 0.15px),
-    $body-strong:   mc-typography-level(15px, 20px, 0.15px, 500),
-    $body-caps:     mc-typography-level(15px, 20px, 1.7px, normal, $font-family, uppercase),
-    $body-mono:     mc-typography-level(15px, 20px, normal, normal, $font-family-mono),
-
-    $caption:       mc-typography-level(13px, 16px, 0.25px),
-    $caption-caps:  mc-typography-level(13px, 16px, 1.5px, normal, $font-family, uppercase),
-    $caption-mono:  mc-typography-level(13px, 16px, normal, normal, $font-family-mono),
-
-    $small-text:    mc-typography-level(13px, 16px, 0.25px),
-    $extra-small-text:    mc-typography-level(11px, 16px, 0.22px)
+    $font-family: map-get(map-get($fonts, base), font-family),
+    $font-family-mono: map-get(map-get($fonts, monospace), font-family)
 ) {
+    $typography: map-get($mosaic, typography);
 
     $config: (
-        display-1:      $display-1,
-        display-2:      $display-2,
-        display-3:      $display-3,
+        display-1:          map-get($typography, display-1),
+        display-2:          map-get($typography, display-2),
+        display-3:          map-get($typography, display-3),
 
-        headline:       $headline,
-        subheading:     $subheading,
-        title:          $title,
+        headline:           map-get($typography, headline),
+        subheading:         map-get($typography, subheading),
+        title:              map-get($typography, title),
 
-        body:           $body,
-        body-strong:    $body-strong,
-        body-caps:      $body-caps,
-        body-mono:      $body-mono,
+        body:               map-get($typography, body),
+        body-strong:        map-get($typography, body-strong),
+        body-caps:          map-get($typography, body-caps),
+        body-mono:          map-get($typography, body-mono),
 
-        caption:        $caption,
-        caption-caps:   $caption-caps,
-        caption-mono:   $caption-mono,
+        caption:            map-get($typography, caption),
+        caption-caps:       map-get($typography, caption-caps),
+        caption-mono:       map-get($typography, caption-mono),
 
-        small-text:     $small-text,
-        extra-small-text: $extra-small-text
+        small-text:         map-get($typography, small-text),
+        extra-small-text:   map-get($typography, extra-small-text)
     );
 
     @each $key, $level in $config {
