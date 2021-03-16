@@ -4,21 +4,25 @@
         <td>Normal</td>
     </tr>
     <tr>
-        <td><a class="mc-link" [disabled]="true" href="" tabindex="10"><span class="mc-link__text">Сохранить</span></a></td>
-        <td><a class="mc-link"><span class="mc-link__text">Сохранить</span></a></td>
-    </tr>
-    <tr>
-        <td><a class="mc-link mc-link_dashed" [disabled]="true" href=""><span class="mc-link__text">Сохранить</span></a></td>
-        <td><a class="mc-link mc-link_dashed"><span class="mc-link__text">Сохранить</span></a></td>
-    </tr>
-    <tr>
         <td>
-            <a class="mc-link mc-link_underlined" [disabled]="true" href="">
+            <a href="http://localhost:3003/" mc-link [disabled]="true">
                 <span class="mc-link__text">Сохранить</span>
             </a>
         </td>
         <td>
-            <a class="mc-link mc-link_underlined" href="">
+            <a href="http://localhost:3003/" mc-link>
+                <span class="mc-link__text">Сохранить</span>
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="http://localhost:3003/" mc-link underlined [disabled]="true">
+                <span class="mc-link__text">Сохранить</span>
+            </a>
+        </td>
+        <td>
+            <a href="http://localhost:3003/" mc-link underlined>
                 <span class="mc-link__text">Сохранить</span>
             </a>
         </td>
@@ -26,40 +30,26 @@
     </tr>
     <tr>
         <td>
-            <a class="mc-link" [disabled]="true" href="">
+            <a href="http://localhost:3003/" mc-link [disabled]="true">
                 <span class="mc-link__text">Сохранить</span>
                 <i mc-icon="mc-angle-down-L_16" class="mc-link__icon"></i>
             </a>
         </td>
         <td>
-            <a class="mc-link">
-                <span class="mc-link__text">Сохранить</span>
-                <i mc-icon="mc-angle-down-L_16" class="mc-link__icon"></i>
-            </a>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a class="mc-link mc-link_dashed" [disabled]="true" href="">
-                <span class="mc-link__text ">Сохранить</span>
-                <i mc-icon="mc-angle-down-L_16" class="mc-link__icon"></i>
-            </a>
-        </td>
-        <td>
-            <a class="mc-link mc-link_dashed">
+            <a href="http://localhost:3003/" mc-link>
                 <span class="mc-link__text">Сохранить</span>
                 <i mc-icon="mc-angle-down-L_16" class="mc-link__icon"></i>
             </a>
         </td>
     </tr>
     <tr>
-        <td><a class="mc-link mc-link_dashed" [disabled]="true" href="">
+        <td><a href="http://localhost:3003/" mc-link underlined [disabled]="true">
             <i mc-icon="mc-calendar_16" class="mc-link__icon"></i>
             <span class="mc-link__text">Сохранить</span>
             <i mc-icon="mc-angle-down-L_16" class="mc-link__icon"></i>
         </a>
         </td>
-        <td><a class="mc-link mc-link_dashed" >
+        <td><a href="http://localhost:3003/" mc-link underlined>
             <i mc-icon="mc-calendar_16" class="mc-link__icon"></i>
             <span class="mc-link__text">Сохранить</span>
             <i mc-icon="mc-angle-down-L_16" class="mc-link__icon"></i>
@@ -68,7 +58,7 @@
     </tr>
     <tr>
         <td>
-            <a class="mc-link mc-link_underlined" [disabled]="true">
+            <a href="http://localhost:3003/" mc-link underlined [disabled]="true">
                 <i mc-icon="mc-calendar_16" class="mc-link__icon"></i>
                 <span class="mc-link__text">В западной традиции рыбой выступает фрагмент латинского текста из философского трактата Цицерона «О пределах добра и зла», написанного в 45 году до нашей эры. Впервые этот текст был применен для набора шрифтовых образцов неизвестным печатником еще в XVI веке.</span>
                 <i mc-icon="mc-angle-down-L_16" class="mc-link__icon"></i>
@@ -76,30 +66,31 @@
         </td>
         <td>
             В
-            <a class="mc-link mc-link_underlined" href="">
+            <a href="http://localhost:3003/" mc-link underlined>
                 <span class="mc-link__text">западной традиции</span>
             </a>
             рыбой выступает фрагмент латинского текста из философского трактата Цицерона
-            <a class="mc-link mc-link_underlined" href="">
+            <a href="http://localhost:3003/" mc-link underlined>
                 <span class="mc-link__text">«О пределах добра и зла», написанного в 45 году до нашей эры.</span>
             </a>
-            <a class="mc-link mc-link_underlined" href="">
+            <a href="http://localhost:3003/" mc-link underlined>
                 <span class="mc-link__text">Впервые этот текст был применен для набора шрифтовых образцов неизвестным печатником еще в XVI веке.</span>
             </a>
         </td>
     </tr>
     <tr>
-        <td><a class="mc-link mc-link_dashed" [disabled]="true" href="">
-            <i mc-icon="mc-calendar_16" class="mc-link__icon"></i>
-            <span class="mc-link__text">В западной традиции рыбой выступает фрагмент латинского текста из философского трактата Цицерона «О пределах добра и зла», написанного в 45 году до нашей эры. Впервые этот текст был применен для набора шрифтовых образцов неизвестным печатником еще в XVI веке.</span>
-            <i mc-icon="mc-angle-down-L_16" class="mc-link__icon"></i>
-        </a>
+        <td>
+            <span mc-link pseudo [disabled]="true">
+                <i mc-icon="mc-calendar_16" class="mc-link__icon"></i>
+                <span class="mc-link__text">Сохранить (pseudo)</span>
+            </span>
         </td>
-        <td><a class="mc-link mc-link_dashed" >
-            <i mc-icon="mc-calendar_16" class="mc-link__icon"></i>
-            <span class="mc-link__text">В западной традиции рыбой выступает фрагмент латинского текста из философского трактата Цицерона «О пределах добра и зла», написанного в 45 году до нашей эры. Впервые этот текст был применен для набора шрифтовых образцов неизвестным печатником еще в XVI веке.</span>
-            <i mc-icon="mc-angle-down-L_16" class="mc-link__icon"></i>
-        </a>
+
+        <td>
+            <span mc-link pseudo>
+                <i mc-icon="mc-calendar_16" class="mc-link__icon"></i>
+                <span class="mc-link__text">Сохранить (pseudo)</span>
+            </span>
         </td>
     </tr>
 </table>

@@ -106,7 +106,6 @@
         state-focused-shadow: $checkbox-light-color-scheme-states-focused-shadow
     );
 
-
     $form-field: (
         border: $form-field-light-color-scheme-border,
         background: $form-field-light-color-scheme-background,
@@ -120,12 +119,8 @@
         text: $link-light-color-scheme-text,
 
         state-hover-text: $link-light-color-scheme-state-hover-text,
+        state-active-text: $link-light-color-scheme-state-active-text,
         state-focused-outline: $link-light-color-scheme-state-focused-outline,
-
-        dashed: (
-            border-bottom: $link-light-color-scheme-dashed-border-bottom,
-            state-hover-border-bottom: $link-light-color-scheme-dashed-state-hover-border-bottom
-        ),
 
         underlined: (
             border-bottom: $link-light-color-scheme-underlined-border-bottom,
@@ -380,12 +375,8 @@
         text: $link-dark-color-scheme-text,
 
         state-hover-text: $link-dark-color-scheme-state-hover-text,
+        state-active-text: $link-dark-color-scheme-state-active-text,
         state-focused-outline: $link-dark-color-scheme-state-focused-outline,
-
-        dashed: (
-            border-bottom: $link-dark-color-scheme-dashed-border-bottom,
-            state-hover-border-bottom: $link-dark-color-scheme-dashed-state-hover-border-bottom
-        ),
 
         underlined: (
             border-bottom: $link-dark-color-scheme-underlined-border-bottom,

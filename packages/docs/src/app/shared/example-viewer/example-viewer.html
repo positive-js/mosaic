@@ -27,7 +27,7 @@
              [class.docs-example-source__switcher_hide]="isSwitcherHidden">
             <div  [class.docs-example-source__show]="true"
                   [class.docs-example-source__hide]="isSourceShown">
-                <span class="mc-link mc-link_dashed" (click)="toggleSourceView()"
+                <span mc-link underlined (click)="toggleSourceView()"
                    [ngClass]="{'mc-active' : active, 'mc-focused': focus}">
                     <span class="mc-link__text">Показать полностью</span>
                     <i class="mc mc-angle-down-M_16"></i>
@@ -35,7 +35,7 @@
             </div>
             <div [class.docs-example-source__show]="true"
                  [class.docs-example-source__hide]="!isSourceShown">
-                <span class="mc-link mc-link_dashed" (click)="toggleSourceView()"
+                <span mc-link underlined (click)="toggleSourceView()"
                    [ngClass]="{'mc-active' : active, 'mc-focused': focus}">
                     <span class="mc-link__text">Свернуть</span>
                     <i class="mc mc-angle-up-M_16"></i>

@@ -6,6 +6,7 @@
     $foreground: map-get($theme, foreground);
 
     $link: map-get(map-get($theme, components), link);
+    $underlined-link: map-get($link, underlined);
 
     .mc-link {
         color: map-get($link, text);
@@ -26,6 +27,10 @@
             color: map-get($link, state-hover-text);
         }
 
+        &:active {
+            color: map-get($link, state-active-text);
+        }
+
         &.cdk-keyboard-focused {
             outline: map-get($link, state-focused-outline) solid 2px;
             outline-offset: 2px;
@@ -43,36 +48,32 @@
             margin-right: $link-size-icon-margin;
         }
 
-        &.mc-link_dashed .mc-link__text {
-            $dashed-link: map-get($link, dashed);
-
-            border-bottom-style: dashed;
-            border-bottom-width: 1px;
-            border-bottom-color: map-get($link, border-bottom);
-
-            &:visited {
-                border-bottom-color: map-get($link, border-bottom);
+        /* stylelint-disable no-descending-specificity */
+        &.mc-link_underlined {
+            & .mc-link__text {
+                border-bottom-style: solid;
+                border-bottom-width: 1px;
+                border-bottom-color: map-get($underlined-link, border-bottom);
             }
 
-            &:hover {
-                border-bottom-color: map-get($link, state-hover-border-bottom);
+            &:visited .mc-link__text {
+                border-bottom-color: map-get($underlined-link, border-bottom);
+            }
+
+            &:hover .mc-link__text {
+                border-bottom-color: map-get($underlined-link, state-hover-border-bottom);
             }
         }
 
-        /* stylelint-disable no-descending-specificity */
-        &.mc-link_underlined .mc-link__text {
-            $underlined-link: map-get($link, underlined);
-
-            border-bottom-style: solid;
-            border-bottom-width: 1px;
-            border-bottom-color: map-get($link, border-bottom);
-
-            &:visited {
-                border-bottom-color: map-get($link, border-bottom);
+        &.mc-link_pseudo {
+            & .mc-link__text {
+                border-bottom-style: solid;
+                border-bottom-width: 1px;
+                border-bottom-color: transparent;
             }
 
-            &:hover {
-                border-bottom-color: map-get($link, state-hover-border-bottom);
+            &:hover .mc-link__text {
+                border-bottom-color: map-get($underlined-link, border-bottom);
             }
         }
         /* stylelint-enable no-descending-specificity */
@@ -85,10 +86,6 @@
 
             &.mc-link_underlined .mc-link__text {
                 border-bottom-color: rgba(map-get($foreground, text-disabled), 0.64);
-            }
-
-            &.mc-link_dashed .mc-link__text {
-                border-bottom-color: map-get($foreground, text-disabled);
             }
         }
     }

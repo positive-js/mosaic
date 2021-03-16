@@ -7,27 +7,30 @@ import {
     Directive
 } from '@angular/core';
 import {
-    CanDisable, CanDisableCtor,
-    HasTabIndex, HasTabIndexCtor,
+    CanDisable,
+    CanDisableCtor,
+    HasTabIndex,
+    HasTabIndexCtor,
     mixinDisabled,
     mixinTabIndex,
     toBoolean
 } from '@ptsecurity/mosaic/core';
 
 
-export class McLinkBase {
-    constructor(public elementRef: ElementRef) {}
-}
+export class McLinkBase {}
 
 // tslint:disable-next-line: naming-convention
 export const McLinkMixinBase: HasTabIndexCtor & CanDisableCtor &
     typeof McLinkBase = mixinTabIndex(mixinDisabled(McLinkBase));
 
 @Directive({
-    selector: 'a.mc-link',
+    selector: '[mc-link]',
     exportAs: 'mcLink',
     inputs: ['tabIndex'],
     host: {
+        class: 'mc-link',
+        '[class.mc-link_underlined]': 'underlined',
+        '[class.mc-link_pseudo]': 'pseudo',
         '[attr.disabled]': 'disabled || null',
         '[attr.tabindex]': 'tabIndex'
     }
@@ -50,12 +53,34 @@ export class McLink extends McLinkMixinBase implements OnDestroy, HasTabIndex, C
 
     private _disabled = false;
 
+    @Input()
+    get pseudo() {
+        return this._pseudo;
+    }
+
+    set pseudo(value: any) {
+        this._pseudo = toBoolean(value);
+    }
+
+    private _pseudo = false;
+
+    @Input()
+    get underlined() {
+        return this._underlined;
+    }
+
+    set underlined(value: any) {
+        this._underlined = toBoolean(value);
+    }
+
+    private _underlined = false;
+
     constructor(
-        elementRef: ElementRef,
+        private elementRef: ElementRef,
         private focusMonitor: FocusMonitor,
         private changeDetector: ChangeDetectorRef
     ) {
-        super(elementRef);
+        super();
 
         this.focusMonitor.monitor(elementRef.nativeElement, true);
     }
