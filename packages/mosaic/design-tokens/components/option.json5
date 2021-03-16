@@ -3,7 +3,8 @@
         size: {
             padding: { value: '0 16px' },
             height: { value: '32px' },
-            'border-width': { value: '2px' }
+            'border-width': { value: '2px' },
+            'padding-right': { value: '16px'}
         },
         font: {
             default: { value: 'body' }

@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Wed, 24 Feb 2021 10:23:59 GMT
+ * Generated on Tue, 16 Mar 2021 14:45:52 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
@@ -535,6 +535,7 @@ export const OptgroupFontDefault = "subheading";
 export const OptionSizePadding = "0 16px";
 export const OptionSizeHeight = "32px";
 export const OptionSizeBorderWidth = "2px";
+export const OptionSizePaddingRight = "16px";
 export const OptionFontDefault = "body";
 export const PopoverLightColorSchemeBorder = "#B3B3B3";
 export const PopoverDarkColorSchemeBorder = "#4D4D4D";
