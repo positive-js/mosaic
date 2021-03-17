@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 16 Mar 2021 14:45:52 GMT
+ * Generated on Wed, 17 Mar 2021 07:43:45 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
@@ -532,10 +532,9 @@ export const NavbarBrandSizeMarginRight = "24px";
 export const NavbarBrandFontTitle = "title";
 export const OptgroupSizePaddingLeft = "17px";
 export const OptgroupFontDefault = "subheading";
-export const OptionSizePadding = "0 16px";
+export const OptionSizeHorizontalPadding = "16px";
 export const OptionSizeHeight = "32px";
 export const OptionSizeBorderWidth = "2px";
-export const OptionSizePaddingRight = "16px";
 export const OptionFontDefault = "body";
 export const PopoverLightColorSchemeBorder = "#B3B3B3";
 export const PopoverDarkColorSchemeBorder = "#4D4D4D";
@@ -710,6 +709,7 @@ export const TooltipSizeArrowWidth = "5px";
 export const TooltipSizePadding = "8px 16px";
 export const TooltipSizeDistance = "5px + 4px";
 export const TooltipFontDefault = "caption";
+export const TreeSizePaddingRight = "16px";
 export const TreeSizeBorderWidth = "2px";
 export const TreeSizeNodeHeight = "28px";
 export const TreeFontNode = "body";

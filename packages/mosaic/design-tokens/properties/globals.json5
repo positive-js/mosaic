@@ -16,6 +16,7 @@
     },
     padding: {
         'control-horizontal': '16px',
+        'option-horizontal': '16px',
         'badge_tag-horizontal': '8px',
         'header-right': '8px',
         'headerFooter-horizontal': '16px',

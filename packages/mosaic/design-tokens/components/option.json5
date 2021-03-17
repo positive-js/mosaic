@@ -1,10 +1,9 @@
 {
     option: {
         size: {
-            padding: { value: '0 16px' },
+            'horizontal-padding': { value: '{padding.option-horizontal}' },
             height: { value: '32px' },
-            'border-width': { value: '2px' },
-            'padding-right': { value: '16px'}
+            'border-width': { value: '2px' }
         },
         font: {
             default: { value: 'body' }

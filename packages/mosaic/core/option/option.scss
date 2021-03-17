@@ -21,7 +21,8 @@
 
     outline: none;
 
-    padding: var(--mc-option-size-padding, $option-size-padding);
+    padding-left: var(--mc-option-size-horizontal-padding, $option-size-horizontal-padding);
+    padding-right: var(--mc-option-size-horizontal-padding, $option-size-horizontal-padding);
 
     -webkit-tap-highlight-color: transparent;
 

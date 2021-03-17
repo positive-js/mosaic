@@ -8,7 +8,8 @@
 .mc-tree-option {
     display: flex;
     align-items: center;
-    padding-right: var(--mc-option-size-padding-right, $option-size-padding-right);
+
+    padding-right: var(--mc-tree-size-padding-right, $tree-size-padding-right);
 
     height: var(--mc-tree-size-node-height, $tree-size-node-height);
 
