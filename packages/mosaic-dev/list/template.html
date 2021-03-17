@@ -32,7 +32,6 @@
 <h2>Multiple selection: Checkbox</h2>
 <mc-list-selection
     multiple="checkbox"
-    autoSelect
     [(ngModel)]="multipleSelectedCheckbox"
     (selectionChange)="onSelectionChange($event)">
     <mc-list-option value="Normal">Normal</mc-list-option>
@@ -49,7 +48,6 @@
 <h2>Multiple selection with Async: Checkbox</h2>
 <mc-list-selection
     multiple="checkbox"
-    autoSelect
     [(ngModel)]="multipleSelected"
     (selectionChange)="onSelectionChange($event)">
     <mc-list-option *ngFor="let shoe of asyncUpdate$ | async " [value]="shoe" >{{shoe}}</mc-list-option>

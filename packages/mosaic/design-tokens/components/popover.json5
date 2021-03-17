@@ -1,0 +1,40 @@
+{
+    popover: {
+        'light-color-scheme': {
+            border: { value: '{light-color-scheme.foreground.border.value}' }
+        },
+        'dark-color-scheme': {
+            border: { value: '{dark-color-scheme.second.palette.value.700.value}' }
+        },
+        size: {
+            padding: { value: '16px' },
+            'border-width': { value: '1px' },
+            'border-radius': { value: '4px' },
+            'arrow-width': { value: '4px' },
+
+            'small-width': { value: '200px' },
+            'normal-width': { value: '400px' },
+            'large-width': { value: '640px' }
+        },
+        font: {
+            default: { value: 'body' }
+        }
+    },
+    'popover-header': {
+        size: {
+            padding: { value: '10px 16px' }
+        },
+        font: {
+            default: { value: 'subheading' }
+        }
+    },
+    'popover-footer': {
+        size: {
+            padding: { value: '12px {padding.headerFooter-horizontal}' },
+            'margin-top': { value: '8px' }
+        },
+        font: {
+            default: { value: 'body' }
+        }
+    }
+}

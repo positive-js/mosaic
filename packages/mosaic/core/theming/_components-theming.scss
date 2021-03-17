@@ -1,178 +1,255 @@
+@import "../../design-tokens/tokens";
+
+
 @function mc-light-theme-components($theme) {
-    $foreground: map-get($theme, foreground);
-    $background: map-get($theme, background);
+    $alert: (
+        error: (
+            background: $alert-light-color-scheme-error-background,
+            border: $alert-light-color-scheme-error-border,
+            icon: $alert-light-color-scheme-error-icon
+        ),
+        warning: (
+            background: $alert-light-color-scheme-warning-background,
+            border: $alert-light-color-scheme-warning-border,
+            icon: $alert-light-color-scheme-warning-icon
+        ),
+        success: (
+            background: $alert-light-color-scheme-success-background,
+            border: $alert-light-color-scheme-success-border,
+            icon: $alert-light-color-scheme-success-icon
+        ),
+        info: (
+            background: $alert-light-color-scheme-info-background,
+            border: $alert-light-color-scheme-info-border,
+            icon: $alert-light-color-scheme-info-icon
+        ),
+        default: (
+            background: $alert-light-color-scheme-default-background,
+            border: $alert-light-color-scheme-default-border,
+            icon: $alert-light-color-scheme-default-icon
+        ),
+    );
 
-    $primary: map-get($theme, primary);
-    $second: map-get($theme, second);
-    $error: map-get($theme, error);
+    $popup: (
+        shadow: $popup-light-color-scheme-shadow,
+        border: $popup-light-color-scheme-border,
+        divider: $popup-light-color-scheme-divider,
 
-    $focused-color: map-get(map-get($theme, states), focused-color);
-
-    $popup-common: (
-        shadow: 0 3px 3px 0 mc-color($second, A200),
-        border-color: mc-color($second),
-        divider-color: mc-color($second, 200),
-
-        background: map-get($background, background-popup),
-        footer_background-color: map-get($background, background-popup-footer)
+        background: $popup-light-color-scheme-background,
+        footer-background: $popup-light-color-scheme-footer-background
     );
 
     $button: (
-        state-active_shadow: inset 0 1px 2px 0 rgba(black, 0.2),
+        state-active_shadow: $button-light-color-scheme-active-shadow,
 
         primary: (
-            color: mc-contrast($primary, 500),
-            border-color: map-get($primary, 560),
-            background: map-get($primary, 500),
-            icon-color: mc-contrast($primary, 500),
+            color: $button-light-color-scheme-primary-color,
+            border: $button-light-color-scheme-primary-border,
+            background: $button-light-color-scheme-primary-background,
+            icon: $button-light-color-scheme-primary-icon,
 
-            state-active_border-color: darken(mc-color($primary, 560), 5),
-            state-active_background: darken(mc-color($primary, 500), 5)
+            active_border: $button-light-color-scheme-primary-states-active-border,
+            active_background: $button-light-color-scheme-primary-states-active-background
         ),
 
         second: (
-            border-color: mc-color($foreground, border),
-            background: map-get($background, background-disabled),
-            color: map-get($foreground, text),
-            icon-color: map-get($foreground, text-less-contrast),
+            color: $button-light-color-scheme-second-color,
+            border: $button-light-color-scheme-second-border,
+            background: $button-light-color-scheme-second-background,
+            icon: $button-light-color-scheme-second-icon,
 
-            state-active_border-color: darken(mc-color($foreground, border), 5),
-            state-active_background: darken(map-get($background, background-disabled), 5)
+            active_border: $button-light-color-scheme-second-states-active-border,
+            active_background: $button-light-color-scheme-second-states-active-background
         ),
 
         error: (
-            border-color: mc-color($foreground, border),
-            background: map-get($background, background-disabled),
-            color: mc-color($error),
-            icon-color: mc-color($error, 400),
+            color: $button-light-color-scheme-error-color,
+            border: $button-light-color-scheme-error-border,
+            background: $button-light-color-scheme-error-background,
+            icon: $button-light-color-scheme-error-icon,
 
-            state-active_border-color: darken(mc-color($foreground, border), 5),
-            state-active_background: darken(map-get($background, background-disabled), 5)
+            active_border: $button-light-color-scheme-error-states-active-border,
+            active_background: $button-light-color-scheme-error-states-active-background
+        )
+    );
+
+    $card: (
+        error: (
+            vertical-line: $card-light-color-scheme-error-vertical-line,
+            background: $card-light-color-scheme-error-background,
+            shadow: $card-light-color-scheme-error-shadow
+        ),
+        warning: (
+            vertical-line: $card-light-color-scheme-warning-vertical-line,
+            background: $card-light-color-scheme-warning-background,
+            shadow: $card-light-color-scheme-warning-shadow
+        ),
+        success: (
+            vertical-line: $card-light-color-scheme-success-vertical-line,
+            background: $card-light-color-scheme-success-background,
+            shadow: $card-light-color-scheme-success-shadow
+        ),
+        info: (
+            vertical-line: $card-light-color-scheme-info-vertical-line,
+            background: $card-light-color-scheme-info-background,
+            shadow: $card-light-color-scheme-info-shadow
         )
     );
 
     $checkbox: (
-        border-color: mc-color($second),
+        border: $checkbox-light-color-scheme-border,
 
-        state-checked_border-color: mc-color($primary, darker),
-        state-checked_background: mc-color($primary),
+        state-checked-border: $checkbox-light-color-scheme-states-checked-border,
+        state-checked-background: $checkbox-light-color-scheme-states-checked-background,
 
-        state-focused_border-color: mc-color($primary),
-        state-focused_shadow: (inset 0 0 0 1px map-get($background, background), 0 0 0 1px mc-color($primary))
+        state-focused-border: $checkbox-light-color-scheme-states-focused-border,
+        state-focused-shadow: $checkbox-light-color-scheme-states-focused-shadow
+    );
+
+
+    $form-field: (
+        border: $form-field-light-color-scheme-border,
+        background: $form-field-light-color-scheme-background,
+
+        state-hover-border: $form-field-light-color-scheme-states-hover-border,
+        state-invalid-border: $form-field-light-color-scheme-states-invalid-border,
+        state-invalid-background: $form-field-light-color-scheme-states-invalid-background
+    );
+
+    $link: (
+        text: $link-light-color-scheme-text,
+
+        state-hover-text: $link-light-color-scheme-state-hover-text,
+        state-focused-outline: $link-light-color-scheme-state-focused-outline,
+
+        dashed: (
+            border-bottom: $link-light-color-scheme-dashed-border-bottom,
+            state-hover-border-bottom: $link-light-color-scheme-dashed-state-hover-border-bottom
+        ),
+
+        underlined: (
+            border-bottom: $link-light-color-scheme-underlined-border-bottom,
+            state-hover-border-bottom: $link-light-color-scheme-underlined-state-hover-border-bottom
+        )
     );
 
     $modal: (
-        mask-background: rgba(0, 0, 0, 0.5),
-        shadow: (0 0 0 1px mc-color($second, 300), 0 6px 12px 0 rgba(0, 0, 0, 0.5))
+        background-mask: $modal-light-color-scheme-background-mask,
+        shadow: $modal-light-color-scheme-shadow
     );
 
     $navbar: (
-        background-color: mc-color($primary, 700),
-        color: mc-color($primary, 100),
-        opacity: 0.5,
+        background: $navbar-light-color-scheme-background,
+        color: $navbar-light-color-scheme-text,
+        opacity: $navbar-light-color-scheme-opacity,
+    );
 
-        item_color: mc-color($primary, 100),
+    $navbar-item: (
+        color: $navbar-item-light-color-scheme-text,
 
-        item_state-active_color: lighten(mc-color($primary, 700), 5%),
-        item_state-hover_color: lighten(mc-color($primary, 700), 5%),
-        item_state-progress_color: lighten(mc-color($primary, 800), 15%),
-        item_state-disabled_opacity: 0.3,
+        state-active: $navbar-item-light-color-scheme-states-active,
+        state-hover: $navbar-item-light-color-scheme-states-hover,
+        state-progress: $navbar-item-light-color-scheme-states-progress,
+        state-disabled-opacity: $navbar-item-light-color-scheme-states-disabled-opacity,
     );
 
     $popover: (
-        border-color: map-get($foreground, border),
+        border: $popover-light-color-scheme-border
     );
 
     $progress-bar: (
-        background: mc-color($second, 60),
+        background: $progress-bar-light-color-scheme-background
     );
 
     $radio: (
-        outer-circle_border-color: mc-color($second),
-        inner-circle_border-color: transparent,
+        outer-circle_border: $radio-light-color-scheme-outer-circle-border,
+        inner-circle_border: $radio-light-color-scheme-inner-circle-border,
 
-        outer-circle_checked-state_border-color: mc-color($primary),
-        outer-circle_focused-state_border-color: $focused-color,
-        outer-circle_focused-state_shadow: 0 0 0 2px $focused-color,
+        outer-circle_checked-state_border: $radio-light-color-scheme-states-checked-outer-circle-border,
+        outer-circle_focused-state_border: $radio-light-color-scheme-states-focused-outer-circle-border,
+        outer-circle_focused-state_shadow: $radio-light-color-scheme-states-focused-outer-circle-shadow,
 
-        inner-circle_checked-state_border-color: mc-color($primary),
-        inner-circle_focused-state_shadow: 0 0 0 1px map-get($background, background)
+        inner-circle_checked-state_border: $radio-light-color-scheme-states-checked-inner-circle-border,
+        inner-circle_focused-state_shadow: $radio-light-color-scheme-states-focused-inner-circle-shadow
     );
 
     $sidepanel: (
-        border_color: mc-color($second, 300)
+        border: $sidepanel-light-color-scheme-border
     );
 
     $tabs: (
-        border-color: mc-color($second, 300),
-        state-active_color: mc-color($primary),
+        border: $tabs-light-color-scheme-border,
+        state-active: $tabs-light-color-scheme-state-active
     );
 
     $tags: (
         primary: (
-            background: mc-color($primary, 100),
-            border-color: mc-color($primary, 100),
-            focused-state_color: mc-color($primary),
-            icon-color: mix(mc-color($primary, 400), map-get($background, overlay-hovered)),
-            hovered-icon-color: mc-color($primary, darker),
-            state-disable_background: mix(mc-color($primary), transparent, 10%),
-            state-disable_color: mix(mc-color($primary), transparent, 50%),
+            border: $tags-light-color-scheme-primary-border,
+            background: $tags-light-color-scheme-primary-background,
+            background_disabled: $tags-light-color-scheme-primary-states-disabled-background,
+            icon: $tags-light-color-scheme-primary-icon,
+            icon_hover: $tags-light-color-scheme-primary-states-hover-icon,
+            focused: $tags-light-color-scheme-primary-states-focused,
+            disabled: $tags-light-color-scheme-primary-states-disabled-text
         ),
-
         second: (
-            background: mc-color($second, 100),
-            border-color: mc-color($second, 100),
-            focused-state_color: mc-color($primary),
-            icon-color: mix(mc-color($second, 400), map-get($background,  overlay-hovered)),
-            hovered-icon-color: mc-color($second, darker),
-            state-disable_background: mix(mc-color($second), transparent, 10%),
-            state-disable_color: mix(mc-color($second), transparent, 50%),
+            border: $tags-light-color-scheme-second-border,
+            background: $tags-light-color-scheme-second-background,
+            background_disabled: $tags-light-color-scheme-second-states-disabled-background,
+            icon: $tags-light-color-scheme-second-icon,
+            icon_hover: $tags-light-color-scheme-second-states-hover-icon,
+            focused: $tags-light-color-scheme-second-states-focused,
+            disabled: $tags-light-color-scheme-second-states-disabled-text
         ),
-
         error: (
-            background: mc-color($error, 100),
-            border-color: mc-color($error, 100),
-            focused-state_color: mc-color($error),
-            icon-color: mix(mc-color($error, 400), map-get($background,  overlay-hovered)),
-            hovered-icon-color: mc-color($error, darker),
-            state-disable_background: mix(mc-color($error), transparent, 10%),
-            state-disable_color: mix(mc-color($error), transparent, 50%),
+            border: $tags-light-color-scheme-error-border,
+            background: $tags-light-color-scheme-error-background,
+            background_disabled: $tags-light-color-scheme-error-states-disabled-background,
+            icon: $tags-light-color-scheme-error-icon,
+            icon_hover: $tags-light-color-scheme-error-states-hover-icon,
+            focused: $tags-light-color-scheme-error-states-focused,
+            disabled: $tags-light-color-scheme-error-states-disabled-text
         )
     );
 
     $toggle: (
-        border-color: mc-color($foreground, border),
-        background: linear-gradient(to bottom, mc-color($second, lighter), mc-color($background, background-disabled)),
+        border: $toggle-light-color-scheme-border,
+        background: $toggle-light-color-scheme-background,
 
-        circle_border-color: mc-color($foreground, border),
-        circle_background: linear-gradient(to bottom, white, mc-color($second, lighter)),
+        circle_border: $toggle-light-color-scheme-circle-border,
+        circle_background: $toggle-light-color-scheme-circle-background,
 
-        focused-state_color: (inset 0 0 0 1px map-get($background, background), 0 0 0 2px mc-color($primary))
+        focused: $toggle-light-color-scheme-states-focused-shadow
     );
 
     $tooltip: (
-        background-color: map-get($second, 700),
-        color: mc-contrast($second, 700),
-        shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2)
+        background: $tooltip-light-color-scheme-background,
+        color: $tooltip-light-color-scheme-text,
+        shadow: $tooltip-light-color-scheme-shadow
     );
 
     $vertical-navbar: (
-        background-color: mc-color($primary, 700),
-        color: mc-contrast($primary, 700),
+        background: $vertical-navbar-light-color-scheme-background,
+        color: $vertical-navbar-light-color-scheme-text,
 
-        toggle-button_color: mc-contrast($primary, 700),
+        toggle-button: $vertical-navbar-light-color-scheme-toggle-button,
 
-        state-hover_background-color: lighten(mc-color($primary, 700), 5%),
-        state-active_background-color: lighten(mc-color($primary, 700), 5%),
-        state-progress_background-color: lighten(mc-color($primary, 800), 15%)
+        background_hover: $vertical-navbar-light-color-scheme-states-hover-background,
+        background_active: $vertical-navbar-light-color-scheme-states-active-background,
+        background_progress: $vertical-navbar-light-color-scheme-states-progress-background
     );
 
     @return (
-        popup-common: $popup-common,
+        alert: $alert,
+        popup: $popup,
         button: $button,
+        card: $card,
         checkbox: $checkbox,
+        form-field: $form-field,
+        link: $link,
         modal: $modal,
         navbar: $navbar,
+        navbar-item: $navbar-item,
         popover: $popover,
         progress-bar: $progress-bar,
         radio: $radio,
@@ -186,182 +263,253 @@
 }
 
 @function mc-dark-theme-components($theme) {
-    $foreground: map-get($theme, foreground);
-    $background: map-get($theme, background);
+    $alert: (
+        error: (
+            background: $alert-dark-color-scheme-error-background,
+            border: $alert-dark-color-scheme-error-border,
+            icon: $alert-dark-color-scheme-error-icon
+        ),
+        warning: (
+            background: $alert-dark-color-scheme-warning-background,
+            border: $alert-dark-color-scheme-warning-border,
+            icon: $alert-dark-color-scheme-warning-icon
+        ),
+        success: (
+            background: $alert-dark-color-scheme-success-background,
+            border: $alert-dark-color-scheme-success-border,
+            icon: $alert-dark-color-scheme-success-icon
+        ),
+        info: (
+            background: $alert-dark-color-scheme-info-background,
+            border: $alert-dark-color-scheme-info-border,
+            icon: $alert-dark-color-scheme-info-icon
+        ),
+        default: (
+            background: $alert-dark-color-scheme-default-background,
+            border: $alert-dark-color-scheme-default-border,
+            icon: $alert-dark-color-scheme-default-icon
+        ),
+    );
 
-    $primary: map-get($theme, primary);
-    $second: map-get($theme, second);
-    $error: map-get($theme, error);
+    $popup: (
+        shadow: $popup-dark-color-scheme-shadow,
+        border: $popup-dark-color-scheme-border,
+        divider: $popup-dark-color-scheme-divider,
 
-    $focused-color: map-get(map-get($theme, states), focused-color);
-
-    $popup-common: (
-        shadow: 0 3px 3px 0 mc-color($second, A200),
-        border-color: mc-color($second),
-        divider-color: mc-color($foreground, divider),
-
-        background: map-get($background, background-popup),
-        footer_background-color: map-get($background, background-popup-footer)
+        background: $popup-dark-color-scheme-background,
+        footer-background: $popup-dark-color-scheme-footer-background
     );
 
     $button: (
-        state-active_shadow: inset 1px 2px 2px 0 rgba(black, 0.2),
+        state-active_shadow: $button-dark-color-scheme-active-shadow,
 
         primary: (
-            color: mc-contrast($primary, 500),
-            border-color: map-get($primary, 560),
-            background: map-get($primary, 500),
-            icon-color: mc-contrast($primary, 500),
+            color: $button-dark-color-scheme-primary-color,
+            border: $button-dark-color-scheme-primary-border,
+            background: $button-dark-color-scheme-primary-background,
+            icon: $button-dark-color-scheme-primary-icon,
 
-            state-active_border-color: darken(mc-color($primary, 560), 5),
-            state-active_background: darken(mc-color($primary, 500), 5),
+            active_border: $button-dark-color-scheme-primary-states-active-border,
+            active_background: $button-dark-color-scheme-primary-states-active-background
         ),
 
         second: (
-            color: map-get($foreground, text),
-            border-color: mc-color($foreground, border),
-            background: map-get($background, background-disabled),
-            icon-color: map-get($foreground, text-less-contrast),
+            color: $button-dark-color-scheme-second-color,
+            border: $button-dark-color-scheme-second-border,
+            background: $button-dark-color-scheme-second-background,
+            icon: $button-dark-color-scheme-second-icon,
 
-            state-active_border-color: darken(mc-color($foreground, border), 5),
-            state-active_background: darken(map-get($background, background-disabled), 5),
+            active_border: $button-dark-color-scheme-second-states-active-border,
+            active_background: $button-dark-color-scheme-second-states-active-background
         ),
 
         error: (
-            color: mc-color($error),
-            border-color: mc-color($foreground, border),
-            background: map-get($background, background-disabled),
-            icon-color: mc-color($error, 400),
+            color: $button-dark-color-scheme-error-color,
+            border: $button-dark-color-scheme-error-border,
+            background: $button-dark-color-scheme-error-background,
+            icon: $button-dark-color-scheme-error-icon,
 
-            state-active_border-color: darken(mc-color($foreground, border), 5),
-            state-active_background: darken(map-get($background, background-disabled), 5)
+            active_border: $button-dark-color-scheme-error-states-active-border,
+            active_background: $button-dark-color-scheme-error-states-active-background
+        )
+    );
+
+    $card: (
+        error: (
+            vertical-line: $card-dark-color-scheme-error-vertical-line,
+            background: $card-dark-color-scheme-error-background,
+            shadow: $card-dark-color-scheme-error-shadow
+        ),
+        warning: (
+            vertical-line: $card-dark-color-scheme-warning-vertical-line,
+            background: $card-dark-color-scheme-warning-background,
+            shadow: $card-dark-color-scheme-warning-shadow
+        ),
+        success: (
+            vertical-line: $card-dark-color-scheme-success-vertical-line,
+            background: $card-dark-color-scheme-success-background,
+            shadow: $card-dark-color-scheme-success-shadow
+        ),
+        info: (
+            vertical-line: $card-dark-color-scheme-info-vertical-line,
+            background: $card-dark-color-scheme-info-background,
+            shadow: $card-dark-color-scheme-info-shadow
         )
     );
 
     $checkbox: (
-        border-color: mc-color($second),
+        border: $checkbox-dark-color-scheme-border,
 
-        state-checked_border-color: mc-color($primary, lighter),
-        state-checked_background: mc-color($primary, 600),
+        state-checked-border: $checkbox-dark-color-scheme-states-checked-border,
+        state-checked-background: $checkbox-dark-color-scheme-states-checked-background,
 
-        state-focused_border-color: mc-color($primary),
-        state-focused_shadow: (inset 0 0 0 1px map-get($background, background), 0 0 0 1px mc-color($primary))
+        state-focused-border: $checkbox-dark-color-scheme-states-focused-border,
+        state-focused-shadow: $checkbox-dark-color-scheme-states-focused-shadow
     );
 
-    $datepicker: ();
+    $form-field: (
+        border: $form-field-dark-color-scheme-border,
+        background: $form-field-dark-color-scheme-background,
+
+        state-hover-border: $form-field-dark-color-scheme-states-hover-border,
+        state-invalid-border: $form-field-dark-color-scheme-states-invalid-border,
+        state-invalid-background: $form-field-dark-color-scheme-states-invalid-background
+    );
+
+    $link: (
+        text: $link-dark-color-scheme-text,
+
+        state-hover-text: $link-dark-color-scheme-state-hover-text,
+        state-focused-outline: $link-dark-color-scheme-state-focused-outline,
+
+        dashed: (
+            border-bottom: $link-dark-color-scheme-dashed-border-bottom,
+            state-hover-border-bottom: $link-dark-color-scheme-dashed-state-hover-border-bottom
+        ),
+
+        underlined: (
+            border-bottom: $link-dark-color-scheme-underlined-border-bottom,
+            state-hover-border-bottom: $link-dark-color-scheme-underlined-state-hover-border-bottom
+        )
+    );
 
     $modal: (
-        mask-background: rgba(0, 0, 0, 0.5),
-        shadow: (0 0 0 1px mc-color($second, 800), 0 6px 12px 0 rgba(0, 0, 0, 0.5))
+        background-mask: $modal-dark-color-scheme-background-mask,
+        shadow: $modal-dark-color-scheme-shadow
     );
 
     $navbar: (
-        background-color: mc-color($primary, 700),
-        color: mc-color($primary, 100),
-        opacity: 0.5,
+        background: $navbar-dark-color-scheme-background,
+        color: $navbar-dark-color-scheme-text,
+        opacity: $navbar-dark-color-scheme-opacity,
+    );
 
-        item_color: mc-color($primary, 100),
+    $navbar-item: (
+        color: $navbar-item-dark-color-scheme-text,
 
-        item_state-active_color: lighten(mc-color($primary, 700), 5%),
-        item_state-hover_color: lighten(mc-color($primary, 700), 5%),
-        item_state-progress_color: lighten(mc-color($primary, 800), 15%),
-        item_state-disabled_opacity: 0.3,
+        state-active: $navbar-item-dark-color-scheme-states-active,
+        state-hover: $navbar-item-dark-color-scheme-states-hover,
+        state-progress: $navbar-item-dark-color-scheme-states-progress,
+        state-disabled-opacity: $navbar-item-dark-color-scheme-states-disabled-opacity,
     );
 
     $popover: (
-        border-color: mc-color($second, 700),
+        border: $popover-dark-color-scheme-border
     );
 
     $progress-bar: (
-        background-color: mc-color($second, 600),
+        background: $progress-bar-dark-color-scheme-background
     );
 
     $radio: (
-        outer-circle_border-color: mc-color($second),
-        inner-circle_border-color: transparent,
+        outer-circle_border: $radio-dark-color-scheme-outer-circle-border,
+        inner-circle_border: $radio-dark-color-scheme-inner-circle-border,
 
-        outer-circle_checked-state_border-color: mc-color($primary),
-        outer-circle_focused-state_border-color: $focused-color,
-        outer-circle_focused-state_shadow: 0 0 0 2px $focused-color,
+        outer-circle_checked-state_border: $radio-dark-color-scheme-states-checked-outer-circle-border,
+        outer-circle_focused-state_border: $radio-dark-color-scheme-states-focused-outer-circle-border,
+        outer-circle_focused-state_shadow: $radio-dark-color-scheme-states-focused-outer-circle-shadow,
 
-        inner-circle_checked-state_border-color: mc-color($primary, 600),
-        inner-circle_focused-state_shadow: 0 0 0 1px map-get($background, background)
+        inner-circle_checked-state_border: $radio-dark-color-scheme-states-checked-inner-circle-border,
+        inner-circle_focused-state_shadow: $radio-dark-color-scheme-states-focused-inner-circle-shadow
     );
 
     $sidepanel: (
-        border_color: mc-color($second, 800),
+        border: $sidepanel-dark-color-scheme-border
     );
 
     $tabs: (
-        border-color: mc-color($second, 300),
-        state-active_color: mc-color($primary),
+        border: $tabs-dark-color-scheme-border,
+        state-active: $tabs-dark-color-scheme-state-active
     );
 
     $tags: (
         primary: (
-            background: mc-color($primary, 700),
-            border-color: mc-color($primary, 700),
-            focused-state_color: mc-color($primary),
-            icon-color: mix(mc-color($primary, 400), map-get($background, overlay-hovered)),
-            hovered-icon-color: mc-color($primary, lighter),
-            state-disable_background: mix(mc-color($primary), transparent, 10%),
-            state-disable_color: mix(mc-color($primary), transparent, 50%),
+            border: $tags-dark-color-scheme-primary-border,
+            background: $tags-dark-color-scheme-primary-background,
+            background_disabled: $tags-dark-color-scheme-primary-states-disabled-background,
+            icon: $tags-dark-color-scheme-primary-icon,
+            icon_hovered: $tags-dark-color-scheme-primary-states-hover-icon,
+            focused: $tags-dark-color-scheme-primary-states-focused,
+            disabled: $tags-dark-color-scheme-primary-states-disabled-text
         ),
-
         second: (
-            background: mc-color($second, 700),
-            border-color: mc-color($second, 700),
-            focused-state_color: mc-color($primary),
-            icon-color: mix(mc-color($second, 400), map-get($background,  overlay-hovered)),
-            hovered-icon-color: mc-color($second, lighter),
-            state-disable_background: mix(mc-color($second), transparent, 10%),
-            state-disable_color: mix(mc-color($second), transparent, 50%),
+            border: $tags-dark-color-scheme-second-border,
+            background: $tags-dark-color-scheme-second-background,
+            background_disabled: $tags-dark-color-scheme-second-states-disabled-background,
+            icon: $tags-dark-color-scheme-second-icon,
+            icon_hovered: $tags-dark-color-scheme-second-states-hover-icon,
+            focused: $tags-dark-color-scheme-second-states-focused,
+            disabled: $tags-dark-color-scheme-second-states-disabled-text
         ),
-
         error: (
-            background: mc-color($error, 700),
-            border-color: mc-color($error, 700),
-            focused-state_color: mc-color($error),
-            icon-color: mix(mc-color($error, 400), map-get($background,  overlay-hovered)),
-            hovered-icon-color: mc-color($error, lighter),
-            state-disable_background: mix(mc-color($error), transparent, 10%),
-            state-disable_color: mix(mc-color($error), transparent, 50%),
+            border: $tags-dark-color-scheme-error-border,
+            background: $tags-dark-color-scheme-error-background,
+            background_disabled: $tags-dark-color-scheme-error-states-disabled-background,
+            icon: $tags-dark-color-scheme-error-icon,
+            icon_hovered: $tags-dark-color-scheme-error-states-hover-icon,
+            focused: $tags-dark-color-scheme-error-states-focused,
+            disabled: $tags-dark-color-scheme-error-states-disabled-text
         )
     );
 
     $toggle: (
-        border-color: mc-color($foreground, border),
-        background: map-get($background, background),
+        border: $toggle-dark-color-scheme-border,
+        background: $toggle-dark-color-scheme-background,
 
-        circle_border-color: mc-color($foreground, border),
-        circle_background: white,
+        circle_border: $toggle-dark-color-scheme-circle-border,
+        circle_background: $toggle-dark-color-scheme-circle-background,
 
-        focused-state_color: (inset 0 0 0 1px map-get($background, background), 0 0 0 2px mc-color($primary)),
+        focused: $toggle-dark-color-scheme-states-focused-shadow
     );
 
     $tooltip: (
-        background-color: white,
-        color: mc-color($second, 700),
-        shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2)
+        background: $tooltip-dark-color-scheme-background,
+        color: $tooltip-dark-color-scheme-text,
+        shadow: $tooltip-dark-color-scheme-shadow
     );
 
     $vertical-navbar: (
-        background-color: mc-color($primary, 700),
-        color: mc-contrast($primary, 700),
+        background: $vertical-navbar-dark-color-scheme-background,
+        color: $vertical-navbar-dark-color-scheme-text,
 
-        toggle-button_color: mc-contrast($primary, 700),
+        toggle-button: $vertical-navbar-dark-color-scheme-toggle-button,
 
-        state-hover_background-color: lighten(mc-color($primary, 700), 5%),
-        state-active_background-color: lighten(mc-color($primary, 700), 5%),
-        state-progress_background-color: lighten(mc-color($primary, 800), 15%),
+        background_hovered: $vertical-navbar-dark-color-scheme-states-hover-background,
+        background_active: $vertical-navbar-dark-color-scheme-states-active-background,
+        background_progress: $vertical-navbar-dark-color-scheme-states-progress-background
     );
 
     @return (
-        popup-common: $popup-common,
+        alert: $alert,
+        popup: $popup,
         button: $button,
+        card: $card,
         checkbox: $checkbox,
+        form-field: $form-field,
+        link: $link,
         modal: $modal,
         navbar: $navbar,
+        navbar-item: $navbar-item,
         popover: $popover,
         progress-bar: $progress-bar,
         radio: $radio,

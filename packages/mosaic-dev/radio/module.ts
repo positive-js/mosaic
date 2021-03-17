@@ -9,7 +9,7 @@ import { ThemePickerModule } from '../theme-picker';
 
 @Component({
     selector: 'app',
-    styleUrls: ['../main.scss', './styles.css'],
+    styleUrls: ['../main.scss', './styles.scss'],
     encapsulation: ViewEncapsulation.None,
     templateUrl: './template.html'
 })

@@ -13,9 +13,11 @@ import {
     ValidatorFn
 } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McTimepickerModule } from '@ptsecurity/mosaic/timepicker';
+import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 
 import { McButtonModule } from '../../mosaic/button';
 import { McIconModule } from '../../mosaic/icon';
@@ -46,7 +48,7 @@ export function customValidator(): ValidatorFn {
 export class TimepickerDemoComponent {
     minDate = moment('2020-05-06 12:00:00');
     maxDate = moment('2020-05-06 15:00:00');
-    reactiveFormControlValue = new FormControl(moment('2000-10-01 12:00:00'), customValidator());
+    reactiveFormControlValue = new FormControl(moment('2000-10-01 12:00:00'));
     formControlValue = new FormControl(moment('2020-05-06 12:00:00'));
     ngModelValue = moment('2020-05-06 13:00:00');
 
@@ -72,8 +74,10 @@ export class TimepickerDemoComponent {
     ],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         FormsModule,
         McTimepickerModule,
+        McToolTipModule,
         McFormFieldModule,
         McButtonModule,
         McIconModule,

@@ -162,8 +162,9 @@ export class McMultiYearView<D> implements AfterContentInit {
         const month = this.dateAdapter.getMonth(this.activeDate);
         const daysInMonth =
             this.dateAdapter.getNumDaysInMonth(this.dateAdapter.createDate(year, month, 1));
-        this.selectedChange.emit(this.dateAdapter.createDate(year, month,
-            Math.min(this.dateAdapter.getDate(this.activeDate), daysInMonth)));
+        this.selectedChange.emit(
+            this.dateAdapter.createDate(year, month, Math.min(this.dateAdapter.getDate(this.activeDate), daysInMonth))
+        );
     }
 
     /** Handles keydown events on the calendar body when calendar is in multi-year view. */
@@ -190,12 +191,16 @@ export class McMultiYearView<D> implements AfterContentInit {
                 this.activeDate = this.dateAdapter.addCalendarYears(this._activeDate, yearsPerRow);
                 break;
             case HOME:
-                this.activeDate = this.dateAdapter.addCalendarYears(this._activeDate,
-                    -this.dateAdapter.getYear(this._activeDate) % yearsPerPage);
+                this.activeDate = this.dateAdapter.addCalendarYears(
+                    this._activeDate,
+                    -this.dateAdapter.getYear(this._activeDate) % yearsPerPage
+                );
                 break;
             case END:
-                this.activeDate = this.dateAdapter.addCalendarYears(this._activeDate,
-                    yearsPerPage - this.dateAdapter.getYear(this._activeDate) % yearsPerPage - 1);
+                this.activeDate = this.dateAdapter.addCalendarYears(
+                    this._activeDate,
+                    yearsPerPage - this.dateAdapter.getYear(this._activeDate) % yearsPerPage - 1
+                );
                 break;
             case PAGE_UP:
                 this.activeDate =

@@ -90,11 +90,15 @@ export class McNavbarItem extends McNavbarMixinBase implements OnInit, OnDestroy
 
         events.forEach((event) => this.elementRef.nativeElement.removeEventListener('click', event));
 
-        this.elementRef.nativeElement.addEventListener('click', (event: MouseEvent) => {
-            if (this.elementRef.nativeElement.hasAttribute('disabled')) {
-                event.stopImmediatePropagation();
-            }
-        }, true);
+        this.elementRef.nativeElement.addEventListener(
+            'click',
+            (event: MouseEvent) => {
+                if (this.elementRef.nativeElement.hasAttribute('disabled')) {
+                    event.stopImmediatePropagation();
+                }
+            },
+            true
+        );
 
         events.forEach((event) => this.elementRef.nativeElement.addEventListener('click', event));
     }

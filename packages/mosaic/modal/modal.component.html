@@ -88,6 +88,7 @@
                         mc-button
                         #autoFocusedButton
                         [attr.autofocus]="button.autoFocus"
+                        [attr.mc-modal-main-action]="button.mcModalMainAction"
                         *ngIf="getButtonCallableProp(button, 'show')"
                         [disabled]="getButtonCallableProp(button, 'disabled')"
                         [class.mc-progress]="getButtonCallableProp(button, 'loading')"

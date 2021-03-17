@@ -22,9 +22,7 @@ export class ProgressBarDemoComponent implements OnDestroy {
     intervalId: number;
 
     constructor() {
-        setInterval(() => {
-            this.percent = (this.percent + STEP) % (MAX_PERCENT + STEP);
-        }, INTERVAL);
+        setInterval(() => this.percent = (this.percent + STEP) % (MAX_PERCENT + STEP), INTERVAL);
     }
 
     ngOnDestroy() {

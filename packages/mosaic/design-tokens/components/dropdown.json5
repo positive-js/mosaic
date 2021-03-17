@@ -1,0 +1,25 @@
+{
+    'dropdown-item': {
+        size: {
+            padding: { value: '5px 15px' }
+        },
+        font: {
+            default: { value: 'body' },
+            caption: { value: 'caption' }
+        }
+    },
+    'dropdown-trigger': {
+        size: {
+            'padding-left': { value: '{padding.control-horizontal}' }
+        }
+    },
+    'dropdown-panel': {
+        size: {
+            padding: { value: '4px 0' },
+            border: {
+                width: { value: '1px' },
+                radius: { value: '3px' }
+            }
+        }
+    }
+}

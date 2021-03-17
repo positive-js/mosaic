@@ -16,14 +16,16 @@ const licensesWhitelist = [
     'BSD-3-Clause',
     'BSD-4-Clause',
 
-    'CC0-1.0',
-
     // All CC-BY licenses have a full copyright grant and attribution section.
     'CC-BY-3.0',
     'CC-BY-4.0',
 
+    'GPL-3.0',
+
     // Have a full copyright grant. Validated by opensource team.
     'Unlicense',
+    '0BSD',
+    'CC0-1.0',
 
     // Have a full copyright grant. Validated by opensource team.
     'Unlicense',
@@ -53,25 +55,22 @@ const ignoredPackages = [
     'bitsyntax@0.0.4',
     'pako@1.0.6', // (MIT AND Zlib)
     'jsonify@0.0.0',
+    // Custom
     'cycle@1.0.3',
+    'buffers@0.1.1',
 
-    'node-html-encoder@0.0.2', // Custom lic
-
-    // Apache?
-    'es6-templates@0.2.3',
-    'true-case-path@1.0.2'
+    // Apache
+    'didyoumean@1.2.1'
 ];
 
 
 // Check if a license is accepted by an array of accepted licenses
 function passesSpdx(licenses: string[], accepted: string[]) {
-    return accepted.some((l) => {
-        try {
-            return spdxSatisfies(licenses.join(' AND '), l);
-        } catch (_) {
-            return false;
-        }
-    });
+    try {
+        return spdxSatisfies(licenses.join(' AND '), accepted.join(' OR '));
+    } catch (_) {
+        return false;
+    }
 }
 
 const enum ReturnCode {
@@ -83,10 +82,12 @@ const enum ReturnCode {
 export function validateLicense(): Promise<number> {
 
     return new Promise<number>((resolve) => {
-        checker.init({start: path.join(__dirname, '../../')}, (err: Error, json: any) => {
+        checker.init({start: path.join(__dirname, '../../'), excludePrivatePackages: true}, (err: Error, json: any) => {
+
             if (err) {
                 console.error(`Something happened:\n${err.message}`);
                 resolve(ReturnCode.Error);
+                process.exit(ReturnCode.Error);
             } else {
                 console.log(`Testing ${Object.keys(json).length} packages.\n`);
 
@@ -113,9 +114,11 @@ export function validateLicense(): Promise<number> {
 
                     console.error(`\n${badLicensePackages.length} total packages with invalid licenses.`);
                     resolve(ReturnCode.INVALID_LIC);
+                    process.exit(ReturnCode.INVALID_LIC);
                 } else {
                     console.log('All package licenses are valid.');
                     resolve(ReturnCode.Success);
+                    process.exit(ReturnCode.Success);
                 }
             }
         });
@@ -123,4 +126,6 @@ export function validateLicense(): Promise<number> {
 
 }
 
-validateLicense();
+if (require.main === module) {
+    validateLicense();
+}

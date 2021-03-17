@@ -37,7 +37,6 @@
     @include mc-base-typography($config);
 
     @include mc-alert-typography($config);
-    @include mc-autocomplete-typography($config);
     @include mc-badge-typography($config);
     @include mc-button-typography($config);
     @include mc-checkbox-typography($config);

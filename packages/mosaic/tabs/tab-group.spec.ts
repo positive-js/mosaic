@@ -86,18 +86,22 @@ describe('McTabGroup', () => {
             component.selectedIndex = 0;
             fixture.detectChanges();
 
-            setTimeout(() => {
-                component.selectedIndex = 1;
-                fixture.detectChanges();
-
-                setTimeout(() => {
-                    component.selectedIndex = 0;
+            setTimeout(
+                () => {
+                    component.selectedIndex = 1;
                     fixture.detectChanges();
-                    fixture.whenStable().then(() => {
-                        expect(component.selectedIndex).toBe(0);
-                    });
-                }, 1);
-            }, 1);
+
+                    setTimeout(
+                        () => {
+                            component.selectedIndex = 0;
+                            fixture.detectChanges();
+                            fixture.whenStable().then(() => expect(component.selectedIndex).toBe(0));
+                        },
+                        1
+                    );
+                },
+                1
+            );
         }));
 
         it('should change tabs based on selectedIndex', fakeAsync(() => {
@@ -332,7 +336,8 @@ describe('McTabGroup', () => {
             fixture.detectChanges();
         }));
 
-        it('should be able to add a new tab, select it, and have correct origin position',
+        it(
+            'should be able to add a new tab, select it, and have correct origin position',
             fakeAsync(() => {
                 const component: McTabGroup =
                     fixture.debugElement.query(By.css('mc-tab-group')).componentInstance;

@@ -42,11 +42,12 @@ class PublishReleaseTask extends BaseReleaseTask {
     /** Instance of a wrapper that can execute Git commands. */
     git: GitClient;
 
-    constructor(public projectDir: string,
-                public repositoryOwner: string,
-                public repositoryName: string) {
-        super(new GitClient(projectDir,
-            `https://github.com/${repositoryOwner}/${repositoryName}.git`));
+    constructor(
+        public projectDir: string,
+        public repositoryOwner: string,
+        public repositoryName: string
+    ) {
+        super(new GitClient(projectDir, `https://github.com/${repositoryOwner}/${repositoryName}.git`));
 
         this.packageJsonPath = join(projectDir, 'package.json');
         this.releaseOutputPath = join(projectDir, 'dist');
@@ -148,7 +149,7 @@ class PublishReleaseTask extends BaseReleaseTask {
         console.info(yellow(`  ⚠   Please draft a new release of the version on Github.`));
         console.info(yellow(`      ${newReleaseUrl}`));
 
-        notify(npmDistTag, newVersionName);
+        notify(newVersionName);
     }
 
     /**
@@ -296,7 +297,7 @@ class PublishReleaseTask extends BaseReleaseTask {
             }
 
             console.info(green(`  ✓   Release tag already exists: "${italic(tagName)}"`));
-        } else if (this.git.createTag('HEAD', tagName, releaseNotes)) {
+        } else if (this.git.createTag(tagName, releaseNotes)) {
             console.info(green(`  ✓   Created release tag: "${italic(tagName)}"`));
         } else {
             console.error(red(`  ✘   Could not create the "${tagName}" tag.`));

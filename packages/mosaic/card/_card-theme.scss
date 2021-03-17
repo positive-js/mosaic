@@ -1,72 +1,62 @@
+@import '../design-tokens/tokens';
 @import '../core/theming/theming';
-@import '../core/theming/palette';
 
 
-@mixin card-type($color, $second, $is-dark) {
+@mixin card-type($card) {
     box-shadow:
-        inset -1px 0 0 0 mc-color($second, if($is-dark, darker, lighter)),
-        inset 0 1px 0 0 mc-color($second, if($is-dark, darker, lighter)),
-        inset 0 -1px 0 0 mc-color($second, if($is-dark, darker, lighter));
+        inset -1px 0 0 0 map-get($card, shadow),
+        inset 0 1px 0 0 map-get($card, shadow),
+        inset 0 -1px 0 0 map-get($card, shadow);
 
-    background-color: mc-color($color, if($is-dark, darker, lighter));
+    background-color: map-get($card, background);
 
-    border-left-color: mc-color($color);
+    border-left-color: map-get($card, vertical-line);
 }
 
 @mixin mc-card-theme($theme) {
-    $second: map-get($theme, second);
-    $error: map-get($theme, error);
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
 
-    $info: map-get($theme, info);
-    $success: map-get($theme, success);
-    $warning: map-get($theme, warning);
+    $card: map-get(map-get($theme, components), card);
+    $popup: map-get(map-get($theme, components), popup);
 
     $is-dark: map-get($theme, is-dark);
-
-    $background: map-get($theme, background);
-    $foreground: map-get($theme, foreground);
-
-    $selected-color: map-get(map-get($theme, states), selected-color);
 
     .mc-card {
         color: map-get($foreground, text);
 
-        &.mc-card_info {
-            @include card-type($info, $second, $is-dark);
+        &.mc-card_error {
+            @include card-type(map-get($card, error));
         }
 
         &.mc-card_warning {
-            @include card-type($warning, $second, $is-dark);
+            @include card-type(map-get($card, warning));
         }
 
         &.mc-card_success {
-            @include card-type($success, $second, $is-dark);
+            @include card-type(map-get($card, success));
         }
 
-        &.mc-card_error {
-            @include card-type($error, $second, $is-dark);
+        &.mc-card_info {
+            @include card-type(map-get($card, info));
         }
 
         &.mc-card_white {
-            $popup-common: map-get(map-get($theme, components), popup-common);
-
-            background-color: map-get($popup-common, background);
+            background-color: map-get($popup, background);
         }
 
         &.mc-selected {
-            background-color: $selected-color;
+            background-color: map-get(map-get($theme, states), selected-color);
         }
 
         &:not(.mc-card_readonly):hover {
             .mc-card__overlay {
-                background: map-get($background, overlay-hovered);
+                background: map-get($background, overlay-hover);
             }
         }
 
         &.cdk-keyboard-focused {
-            $focused-color: map-get(map-get($theme, states), focused-color);
-
-            box-shadow: 0 0 0 2px $focused-color;
+            box-shadow: 0 0 0 2px map-get(map-get($theme, states), focused-color);
         }
     }
 }

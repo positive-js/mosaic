@@ -1,5 +1,6 @@
-@import '../core/theming/theming';
 @import '../core/styles/common/popup';
+@import '../core/theming/theming';
+
 
 @mixin mc-autocomplete-theme($theme) {
     $foreground: map-get($theme, foreground);
@@ -10,11 +11,9 @@
         color: mc-color($foreground, text);
 
         .mc-selected {
-            $popup-common: map-get(map-get($theme, components), popup-common);
+            $popup: map-get(map-get($theme, components), popup);
 
-            background-color: map-get($popup-common, background);
+            background-color: map-get($popup, background);
         }
     }
 }
-
-@mixin mc-autocomplete-typography($config) {}

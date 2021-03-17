@@ -15,7 +15,8 @@ If you don't want the label to appear next to the checkbox, you can use
 [`aria-labelledby`](https://www.w3.org/TR/wai-aria/states_and_properties#aria-labelledby) to 
 specify an appropriate label.
 
-### Use with `@angular/forms`
+### Use with @angular/forms
+
 `<mc-checkbox>` is compatible with `@angular/forms` and supports both `FormsModule` 
 and `ReactiveFormsModule`.
 
@@ -55,16 +56,16 @@ providers: [
 
 The possible values are:
 
-#### `noop`
+#### noop
 Do not change the `checked` value or `indeterminate` value. Developers have the power to
 implement customized click actions.
 
-#### `check`
+#### check
 Toggle `checked` value of the checkbox, ignore `indeterminate` value. If the
 checkbox is in `indeterminate` state, the checkbox will display as an `indeterminate` checkbox
 regardless the `checked` value.
 
-#### `check-indeterminate`
+#### check-indeterminate
 Default behavior of `mc-checkbox`. Always set `indeterminate` to `false`
 when user click on the `mc-checkbox`.
 This matches the behavior of native `<input type="checkbox">`.

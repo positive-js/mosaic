@@ -2,10 +2,12 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     Directive,
     ElementRef,
+    EventEmitter,
     forwardRef,
     Input,
     OnDestroy,
     Optional,
+    Output,
     Renderer2
 } from '@angular/core';
 import {
@@ -21,12 +23,23 @@ import {
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
 import {
     DOWN_ARROW,
-    hasModifierKey,
+    UP_ARROW,
+    HOME,
+    END,
     LEFT_ARROW,
     RIGHT_ARROW,
-    UP_ARROW
+    PAGE_DOWN,
+    PAGE_UP,
+    SPACE,
+    DELETE,
+    BACKSPACE,
+    hasModifierKey,
+    isLetterKey,
+    isVerticalMovement,
+    isHorizontalMovement
 } from '@ptsecurity/cdk/keycodes';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
+import { McTooltip } from '@ptsecurity/mosaic/tooltip';
 import { noop, Subject } from 'rxjs';
 
 import {
@@ -61,18 +74,26 @@ export const MC_TIMEPICKER_VALIDATORS: any = {
 
 let uniqueComponentIdSuffix: number = 0;
 
+const shortFormatSize: number = 5;
+const fullFormatSize: number = 8;
+
+const validationTooltipShowDelay: number = 10;
+const validationTooltipHideDelay: number = 3000;
+
 
 @Directive({
     selector: 'input[mcTimepicker]',
-    exportAs: 'mcTimepickerInput',
+    exportAs: 'mcTimepicker',
     host: {
-        class: 'mc-timepicker mc-input',
+        class: 'mc-input mc-timepicker',
         // Native input properties that are overwritten by Angular inputs need to be synced with
         // the native input element. Otherwise property bindings for those don't work.
         '[attr.id]': 'id',
         '[attr.placeholder]': 'placeholder',
         '[attr.disabled]': 'disabled || null',
         '[attr.required]': 'required',
+        '[attr.size]': 'getSize()',
+        '[attr.autocomplete]': '"off"',
 
         '(blur)': 'onBlur()',
         '(focus)': 'focusChanged(true)',
@@ -113,9 +134,6 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
      * @docs-private
      */
     @Input() placeholder: string;
-    private lastValueValid = false;
-
-    private control: AbstractControl;
 
     @Input()
     get disabled(): boolean {
@@ -223,6 +241,39 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
 
     private _value: D | null;
 
+    @Input()
+    set mcValidationTooltip(tooltip: McTooltip) {
+        if (!tooltip) { return; }
+
+        tooltip.mcMouseEnterDelay = validationTooltipShowDelay;
+        tooltip.mcTrigger = 'manual';
+        tooltip.mcTooltipClass = 'mc-tooltip_warning';
+
+        tooltip.initElementRefListeners();
+
+        this.incorrectInput.subscribe(() => {
+            if (tooltip.isTooltipOpen) { return; }
+
+            tooltip.show();
+
+            setTimeout(() => tooltip.hide(), validationTooltipHideDelay);
+        });
+    }
+
+    @Output() incorrectInput = new EventEmitter<void>();
+
+    get hasSelection(): boolean {
+        return this.selectionStart !== this.selectionEnd;
+    }
+
+    get isFullFormat(): boolean {
+        return this.format === TimeFormats.HHmmss;
+    }
+
+    get isShortFormat(): boolean {
+        return this.format === TimeFormats.HHmm;
+    }
+
     get viewValue(): string {
         return this.elementRef.nativeElement.value;
     }
@@ -257,15 +308,19 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
 
     private readonly uid = `mc-timepicker-${uniqueComponentIdSuffix++}`;
 
-    private validator: ValidatorFn | null;
+    private readonly validator: ValidatorFn | null;
+
+    private lastValueValid = false;
+
+    private control: AbstractControl;
 
     private onChange: (value: any) => void;
     private onTouched: () => void;
 
     constructor(
-        private readonly elementRef: ElementRef,
+        private elementRef: ElementRef,
         @Optional() private dateAdapter: DateAdapter<any>,
-        private readonly renderer: Renderer2
+        private renderer: Renderer2
     ) {
         if (!this.dateAdapter) {
             throw Error(`McTimepicker: No provider found for DateAdapter. You must import one of the existing ` +
@@ -286,6 +341,10 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
         this.stateChanges.complete();
     }
 
+    getSize(): number {
+        return this.isFullFormat ? fullFormatSize : shortFormatSize;
+    }
+
     focus(): void {
         this.elementRef.nativeElement.focus();
     }
@@ -300,29 +359,27 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
 
     onBlur() {
         this.lastValueValid = !!this.getDateFromTimeString(this.viewValue);
-        this.control.updateValueAndValidity();
         this.focusChanged(false);
+        this.control.updateValueAndValidity();
     }
 
     onPaste($event) {
-        const newTimeObj = this.getDateFromTimeString($event.clipboardData.getData('text'));
+        $event.preventDefault();
+
+        const value = this.formatUserPaste($event.clipboardData.getData('text'));
+
+        const newTimeObj = this.getDateFromTimeString(value);
 
         if (!newTimeObj) { return; }
 
-        $event.preventDefault();
-
-        this.renderer.setProperty(
-            this.elementRef.nativeElement,
-            'value',
-            this.getTimeStringFromDate(newTimeObj, this.format)
-        );
+        this.setViewValue(this.getTimeStringFromDate(newTimeObj, this.format));
 
         this.value = newTimeObj;
         this.onChange(newTimeObj);
         this.stateChanges.next();
     }
 
-    onInput() {
+    onInput = () => {
         const formattedValue = this.formatUserInput(this.viewValue);
 
         const newTimeObj = this.getDateFromTimeString(formattedValue);
@@ -337,11 +394,7 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
         const selectionStart = this.selectionStart;
         const selectionEnd = this.selectionEnd;
 
-        this.renderer.setProperty(
-            this.elementRef.nativeElement,
-            'value',
-            this.getTimeStringFromDate(newTimeObj, this.format)
-        );
+        this.setViewValue(this.getTimeStringFromDate(newTimeObj, this.format));
 
         this.selectionStart = selectionStart;
         this.selectionEnd = selectionEnd;
@@ -365,16 +418,43 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
         // tslint:disable-next-line: deprecation
         const keyCode = event.keyCode;
 
-        if (hasModifierKey(event)) {
+        if (isLetterKey(event) && !event.ctrlKey && !event.metaKey) {
+            event.preventDefault();
+
+            this.incorrectInput.emit();
+        } else if (
+            (hasModifierKey(event) && (isVerticalMovement(keyCode) || isHorizontalMovement(keyCode))) ||
+            event.ctrlKey || event.metaKey ||
+            [DELETE, BACKSPACE].includes(keyCode)
+        ) {
             noop();
+        } else if (keyCode === SPACE) {
+            this.spaceKeyHandler(event);
+        } else if ([HOME, PAGE_UP].includes(keyCode)) {
+            this.createSelectionOfTimeComponentInInput(0);
+        } else if ([END, PAGE_DOWN].includes(keyCode)) {
+            this.createSelectionOfTimeComponentInInput(this.viewValue.length);
         } else if ([UP_ARROW, DOWN_ARROW].includes(keyCode)) {
             event.preventDefault();
 
             this.verticalArrowKeyHandler(keyCode);
         } else if ([LEFT_ARROW, RIGHT_ARROW].includes(keyCode)) {
             this.horizontalArrowKeyHandler(keyCode);
+        } else if (/^\D$/.test(event.key)) {
+            event.preventDefault();
+
+            const newValue = this.getNewValue(event.key, this.selectionStart as number);
+            const formattedValue = this.replaceSymbols(newValue);
+
+            if (newValue !== formattedValue) {
+                this.setViewValue(formattedValue);
+
+                setTimeout(this.onInput);
+            } else {
+                this.incorrectInput.emit();
+            }
         } else {
-            setTimeout(() => this.onInput());
+            setTimeout(this.onInput);
         }
     }
 
@@ -404,16 +484,66 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
         this.disabled = isDisabled;
     }
 
-    private formatUserInput(value: string): string {
-        const match: RegExpMatchArray | null = value.match(/(\d\d:){0,2}(?<number>[0-9])(?<symbol>\W)(:\d\d){0,2}$/);
+    private formatUserPaste(value: string) {
+        if (value.match(AM_PM_FORMAT_REGEXP)) { return value; }
 
-        if (match && match.groups) {
-            const { number, symbol } = match.groups;
+        const match: RegExpMatchArray | null = value.match(
+            /^(\D+)?(?<hours>\d+)?(\D+)?(\D+)?(?<minutes>\d+)?(\D+)?(\D+)?(?<seconds>\d+)?(\D+)?$/
+        );
 
-            return value.replace(number + symbol, `0${number}`);
+        if (!match?.groups?.hours) {
+            this.setViewValue(value);
+
+            return value;
         }
 
-        return value;
+        return this.replaceNumbers(Object.values(match.groups)
+            // tslint:disable-next-line:no-magic-numbers
+            .map((group) => (group || '').padStart(2, '0'))
+            .join(':')
+        );
+    }
+
+    private formatUserInput(value: string): string {
+        return this.replaceNumbers(this.replaceSymbols(value));
+    }
+
+    private replaceSymbols(value: string): string {
+        let formattedValue: string = value;
+
+        const match: RegExpMatchArray | null = value.match(/^(\d\d:){0,2}(?<number>[0-9])(?<symbol>\W)(:\d\d){0,2}$/);
+
+        if (match?.groups) {
+            const { number, symbol } = match.groups;
+
+            formattedValue = value.replace(number + symbol, `0${number}`);
+        }
+
+        return formattedValue;
+    }
+
+    private replaceNumbers(value: string): string {
+        let formattedValue: string = value;
+
+        const match: RegExpMatchArray | null = value.match(/^(?<hours>\d{0,4}):?(?<minutes>\d{0,4}):?(?<seconds>\d{0,4})$/);
+
+        if (match?.groups) {
+            const { hours, minutes, seconds } = match.groups;
+
+            if (hours.length && parseInt(hours) > HOURS_PER_DAY) {
+                formattedValue = formattedValue.replace(hours, HOURS_PER_DAY.toString());
+            }
+
+            if (minutes.length && parseInt(minutes) > MINUTES_PER_HOUR) {
+                formattedValue = formattedValue.replace(minutes, MINUTES_PER_HOUR.toString());
+            }
+
+            if (seconds.length && parseInt(seconds) > SECONDS_PER_MINUTE) {
+                formattedValue = formattedValue.replace(seconds, SECONDS_PER_MINUTE.toString());
+            }
+        }
+
+        return formattedValue;
     }
 
     /** Checks whether the input is invalid based on the native validation. */
@@ -421,6 +551,34 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
         const validity = (<HTMLInputElement> this.elementRef.nativeElement).validity;
 
         return validity && validity.badInput;
+    }
+
+    private spaceKeyHandler(event: KeyboardEvent) {
+        event.preventDefault();
+
+        if (this.selectionStart === this.selectionEnd) {
+            const value = this.getNewValue(event.key, this.selectionStart as number);
+            const formattedValue = this.replaceSymbols(value);
+
+            if (value !== formattedValue) {
+                this.setViewValue(formattedValue);
+
+                setTimeout(this.onInput);
+            }
+        } else if (this.selectionStart !== this.selectionEnd) {
+
+            let cursorPos = this.selectionStart as number;
+
+            const nextDividerPos: number = this.viewValue.indexOf(':', cursorPos);
+
+            cursorPos = nextDividerPos ? nextDividerPos + 1 : 0;
+
+            this.createSelectionOfTimeComponentInInput(cursorPos);
+        }
+    }
+
+    private getNewValue(key: string, position: number) {
+        return [this.viewValue.slice(0, position), key, this.viewValue.slice(position)].join('');
     }
 
     private verticalArrowKeyHandler(keyCode: number): void {
@@ -634,7 +792,9 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
     }
 
     private parseValidator: ValidatorFn = (): ValidationErrors | null => {
-        return this.empty || this.lastValueValid ? null : { mcTimepickerParse: { text: this.viewValue } };
+        return this.focused ||
+            this.empty ||
+            this.lastValueValid ? null : { mcTimepickerParse: { text: this.viewValue } };
     }
 
     private minValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
@@ -670,10 +830,14 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
         return (this.dateAdapter.isDateInstance(obj) && this.dateAdapter.isValid(obj)) ? obj : null;
     }
 
+    private setViewValue(value: string) {
+        this.renderer.setProperty(this.elementRef.nativeElement, 'value', value);
+    }
+
     private updateView() {
         const formattedValue = this.getTimeStringFromDate(this.value, this.format);
 
-        this.renderer.setProperty(this.elementRef.nativeElement, 'value', formattedValue);
+        this.setViewValue(formattedValue);
     }
 
     private setControl(control: AbstractControl) {

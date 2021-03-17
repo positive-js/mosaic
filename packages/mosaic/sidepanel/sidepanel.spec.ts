@@ -24,12 +24,14 @@ describe('McSidepanelService', () => {
         TestBed.compileComponents();
     }));
 
-    beforeEach(inject([McSidepanelService, OverlayContainer],
+    beforeEach(inject(
+        [McSidepanelService, OverlayContainer],
         (ss: McSidepanelService, oc: OverlayContainer) => {
-            sidepanelService = ss;
-            overlayContainer = oc;
-            overlayContainerElement = oc.getContainerElement();
-        }));
+                sidepanelService = ss;
+                overlayContainer = oc;
+                overlayContainerElement = oc.getContainerElement();
+            }
+    ));
 
     afterEach(() => {
         overlayContainer.ngOnDestroy();

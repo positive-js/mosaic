@@ -18,5 +18,24 @@
         "number-leading-zero": ["always", {
             "message": "zero before dot"
         }]
-    }
+    },
+    "ignoreFiles": [
+        "packages/mosaic/design-tokens/_palette.scss",
+        "packages/mosaic/design-tokens/_variables.scss",
+        "packages/mosaic/design-tokens/_typography.scss",
+        "packages/mosaic/design-tokens/tokens.js",
+        "packages/mosaic/design-tokens/css-tokens.css",
+        "packages/docs/src/styles/default-theme/_palette.scss",
+        "packages/docs/src/styles/default-theme/_variables.scss",
+        "packages/docs/src/styles/default-theme/_typography.scss",
+        "packages/docs/src/styles/green-theme/_palette.scss",
+        "packages/docs/src/styles/green-theme/_variables.scss",
+        "packages/docs/src/styles/green-theme/_typography.scss",
+        "packages/docs/src/styles/red-theme/_palette.scss",
+        "packages/docs/src/styles/red-theme/_variables.scss",
+        "packages/docs/src/styles/red-theme/_typography.scss",
+        "packages/docs/src/styles/yellow-theme/_palette.scss",
+        "packages/docs/src/styles/yellow-theme/_variables.scss",
+        "packages/docs/src/styles/yellow-theme/_typography.scss"
+    ]
 }

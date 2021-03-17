@@ -34,9 +34,10 @@ describe('MomentDateAdapter', () => {
 
         assertValidDate = (d: moment.Moment | null, valid: boolean) => {
             expect(adapter.isDateInstance(d)).not.toBeNull(`Expected ${d} to be a date instance`);
-            expect(adapter.isValid(d!)).toBe(valid,
-                `Expected ${d} to be ${valid ? 'valid' : 'invalid'},` +
-                ` but was ${valid ? 'invalid' : 'valid'}`);
+            expect(adapter.isValid(d!)).toBe(
+                valid,
+                `Expected ${d} to be ${valid ? 'valid' : 'invalid'}, but was ${valid ? 'invalid' : 'valid'}`
+            );
         };
     }));
 
@@ -659,7 +660,7 @@ describe('MomentDateAdapter formatter', () => {
                 it('before yesterday (other year)', () => {
                     const date = moment().year(2015).subtract(49, 'hours');
                     expect(adapter.relativeShortDate(date)).toBe(
-                        date.format(`${DAY}${NBSP}${SHORT_MONTH}, ${YEAR}`)
+                        date.format(`${DAY}${NBSP}${SHORT_MONTH} ${YEAR}`)
                     );
                 });
             });
@@ -706,7 +707,7 @@ describe('MomentDateAdapter formatter', () => {
 
                 it('before yesterday (other year)', () => {
                     const date = moment().year(2015).subtract(49, 'hours');
-                    expect(adapter.relativeLongDate(date)).toBe(date.format(`${DAY_MONTH}, ${YEAR}`));
+                    expect(adapter.relativeLongDate(date)).toBe(date.format(`${DAY_MONTH} ${YEAR}`));
                 });
             });
         });

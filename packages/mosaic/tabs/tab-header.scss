@@ -76,7 +76,8 @@
     }
 }
 
-.mc-tab-label, .mc-tab-light-label {
+.mc-tab-label,
+.mc-tab-light-label {
     .mc-tab-group_stretch-labels & {
         flex-basis: 0;
         flex-grow: 1;

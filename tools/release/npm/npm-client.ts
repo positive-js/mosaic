@@ -1,4 +1,6 @@
 import { spawnSync } from 'child_process';
+import * as fs from 'fs';
+import { join } from 'path';
 
 
 /**
@@ -31,17 +33,30 @@ export function npmLoginInteractive(): boolean {
 
 /** Runs NPM publish within a specified directory */
 export function npmPublish(packagePath: string, distTag: string): string | null {
-    const result = spawnSync('npm', ['publish', '--access', 'public', '--tag', distTag], {
+
+    const command = ['publish', '--access', 'public', '--tag', distTag];
+
+    if (process.env.DEBUG) {
+        command.push('--dry-run');
+    }
+
+    createNpmrcFile(packagePath);
+
+    const result = spawnSync('npm', command, {
         cwd: packagePath,
-        shell: true,
-        env: npmClientEnvironment
+        shell: true
     });
 
-    // We only want to return an error if the exit code is not zero. NPM by default prints the
-    // logging messages to "stdout" and therefore just checking for "stdout" is not reliable.
     if (result.status !== 0) {
         return result.stderr.toString();
     }
+}
+
+export function createNpmrcFile(folder: string) {
+    const content = `//registry.npmjs.org/:_authToken=${process.env.NPM_TOKEN}`;
+    const filePath = join(folder, '.npmrc');
+
+    fs.writeFileSync(filePath, content, { encoding: 'utf-8', flag: 'w' });
 }
 
 /** Log out of npm. */

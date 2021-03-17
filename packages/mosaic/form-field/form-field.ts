@@ -52,6 +52,7 @@ export const McFormFieldMixinBase: CanColorCtor & typeof McFormFieldBase = mixin
     styleUrls: [
         'form-field.scss',
         '../input/input.scss',
+        '../timepicker/timepicker.scss',
         '../textarea/textarea.scss'
     ],
     host: {
@@ -170,9 +171,7 @@ export class McFormField extends McFormFieldMixinBase implements
         const valueChanges = this.control.ngControl && this.control.ngControl.valueChanges || EMPTY;
 
         merge(valueChanges)
-            .pipe(
-                takeUntil(this.$unsubscribe)
-            )
+            .pipe(takeUntil(this.$unsubscribe))
             .subscribe(() => this._changeDetectorRef.markForCheck());
     }
 

@@ -32,7 +32,7 @@ sidepanelRef.close('I was closed');
 Заметьте, что за раз можно открыть несколько боковых панелей. Любой компонент, содержащийся внутри боковой панели
 также может использовать `McSidepanelRef`.
 
-###Specifying global configuration defaults
+### Specifying global configuration defaults
 Свойства боковых панелей по-умолчанию можно определить передав экземпляра класса `McSidepanelConfig`
 в `MC_SIDEPANEL_DEFAULT_OPTIONS` в корневом модуле вашего приложения.
 
@@ -44,7 +44,7 @@ sidepanelRef.close('I was closed');
 })
 ```
 
-###Sharing data with the sidepanel component
+### Sharing data with the sidepanel component
 Если вы хотите передать некоторые данные в боковую панель, нужно использовать в конфигурации свойство `data`:
 
 ```ts
@@ -67,7 +67,8 @@ export class ExampleSidepanelComponent {
 }
 ```
 
-### Configuring sidepanel content via `entryComponents`
+### Configuring sidepanel content via entryComponents
+
 `McSidepanelService` создает экземпляры компонентов во время выполнения. Чтобы это работало,
 кампилятору Angular нужна дополнительная информация для создания `ComponentFactory`
 для вашего компонента контента боковой панели.

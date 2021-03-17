@@ -201,20 +201,26 @@ export class StackblitzWriter {
 
             // Replace `declarations: [MosaicDocsExample]`
             // will be replaced as `declarations: [ButtonDemo]`
-            fileContent = fileContent.replace(/declarations: \[MosaicDocsExample\]/g,
-                `declarations: [${data.componentName}]`);
+            fileContent = fileContent.replace(
+                /declarations: \[MosaicDocsExample\]/g,
+                `declarations: [${data.componentName}]`
+            );
 
             // Replace `entryComponents: [MosaicDocsExample]`
             // will be replaced as `entryComponents: [DialogContent]`
-            fileContent = fileContent.replace(/entryComponents: \[MosaicDocsExample\]/g,
-                `entryComponents: [${data.componentName}]`);
+            fileContent = fileContent.replace(
+                /entryComponents: \[MosaicDocsExample\]/g,
+                `entryComponents: [${data.componentName}]`
+            );
 
             // Replace `bootstrap: [MosaicDocsExample]`
             // will be replaced as `bootstrap: [ButtonDemo]`
             // This assumes the first component listed in the main component
             const componentList = (data.componentName || '').split(',')[0];
-            fileContent = fileContent.replace(/bootstrap: \[MosaicDocsExample\]/g,
-                `bootstrap: [${componentList}]`);
+            fileContent = fileContent.replace(
+                /bootstrap: \[MosaicDocsExample\]/g,
+                `bootstrap: [${componentList}]`
+            );
 
             fileContent = fileContent.replace(/mosaic-docs-example/g, data.indexFilename);
         }

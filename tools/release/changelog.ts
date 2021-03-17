@@ -57,16 +57,17 @@ export async function prependChangelogFromLatestTag(changelogPath: string, relea
     const angularPresetWriterOptions = await require('conventional-changelog-angular/writer-opts');
 
     const outputStream: Readable = conventionalChangelog(
-        /* core options */ {preset: 'angular'},
-        /* context options */ {title: releaseName},
-        /* raw-commits options */ null,
-        /* commit parser options */ {
+        { preset: 'angular' } /* core options */,
+        { title: releaseName }, /* context options */
+        null,
+        {   /* commit parser options */
             // Expansion of the convention-changelog-angular preset to extract the package
             // name from the commit message.
             headerPattern: /^(\w*)(?:\((?:([^/]+)\/)?(.*)\))?: (.*)$/,
             headerCorrespondence: ['type', 'package', 'scope', 'subject']
         },
-        /* writer options */ createChangelogWriterOptions(changelogPath, angularPresetWriterOptions));
+        createChangelogWriterOptions(changelogPath, angularPresetWriterOptions) /* writer options */
+    );
 
     // Stream for reading the existing changelog. This is necessary because we want to
     // actually prepend the new changelog to the existing one.
@@ -137,6 +138,7 @@ function createChangelogWriterOptions(changelogPath: string, presetWriterOptions
 
                     if (!commit.package && commit.scope) {
                         const matchingPackage = allPackages.find((pkgName) => pkgName === commit.scope);
+
                         if (matchingPackage) {
                             commit.scope = null;
                             commit.package = matchingPackage;
@@ -151,6 +153,7 @@ function createChangelogWriterOptions(changelogPath: string, presetWriterOptions
                     if (!packageGroups[packageName]) {
                         packageGroups[packageName] = {commits: [], breakingChanges: [], deprecations: []};
                     }
+
                     const packageGroup = packageGroups[packageName];
 
                     // Collect all notes of the commit. Either breaking change or deprecation notes.

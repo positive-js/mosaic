@@ -1,6 +1,7 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, EventEmitter, NgModule } from '@angular/core';
 import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { ENTER } from '@ptsecurity/cdk/keycodes';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 
 import { McModalControlService } from './modal-control.service';
@@ -27,12 +28,14 @@ describe('McModal', () => {
         TestBed.compileComponents();
     }));
 
-    beforeEach(inject([ McModalService, OverlayContainer ],
+    beforeEach(inject(
+        [McModalService, OverlayContainer],
         (ms: McModalService, oc: OverlayContainer) => {
-        modalService = ms;
-        overlayContainer = oc;
-        overlayContainerElement = oc.getContainerElement();
-    }));
+                modalService = ms;
+                overlayContainer = oc;
+                overlayContainerElement = oc.getContainerElement();
+        }
+    ));
 
     afterEach(() => {
         overlayContainer.ngOnDestroy();
@@ -252,6 +255,62 @@ describe('McModal', () => {
 
             expect(modalRef.getElement().querySelectorAll('[disabled]').length).toBe(1);
         }));
+
+        it('should called function on hotkey ctrl+enter. mcFooter is array ', fakeAsync(() => {
+            const spyOk = jasmine.createSpy('ok spy');
+            const modalRef = modalService.create({
+                mcContent: TestModalContentComponent,
+                mcFooter: [
+                    {
+                        label: 'Test label',
+                        type: 'primary',
+                        mcModalMainAction: true,
+                        onClick: spyOk
+                    }
+                ]
+            });
+            fixture.detectChanges();
+            tick(600);
+
+            const event = document.createEvent('KeyboardEvent') as any;
+            event.initKeyboardEvent('keydown', true, true, window, 0, 0, 0, '', false);
+
+            Object.defineProperties(event, {
+                keyCode: { get: () => ENTER },
+                ctrlKey: { get: () => true }
+            });
+
+            modalRef.getElement().dispatchEvent(event);
+
+            fixture.detectChanges();
+            tick(600);
+            expect(spyOk).toHaveBeenCalled();
+        }));
+
+        it('should called function on hotkey ctrl+enter. modal type is confirm ', () => {
+            const spyOk = jasmine.createSpy('ok spy');
+            const modalRef = modalService.success({
+                mcContent   : 'Сохранить сделанные изменения?',
+                mcOkText    : 'Сохранить',
+                mcCancelText: 'Отмена',
+                mcOnOk      : spyOk
+            });
+            fixture.detectChanges();
+
+            const event = document.createEvent('KeyboardEvent') as any;
+            event.initKeyboardEvent('keydown', true, true, window, 0, 0, 0, '', false);
+
+            Object.defineProperties(event, {
+                keyCode: { get: () => ENTER },
+                ctrlKey: { get: () => true }
+            });
+
+            modalRef.getElement().dispatchEvent(event);
+
+            fixture.detectChanges();
+            expect(spyOk).toHaveBeenCalled();
+        });
+
     });
 });
 

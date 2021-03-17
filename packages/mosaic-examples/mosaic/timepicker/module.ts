@@ -9,6 +9,7 @@ import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
 import { McSelectModule } from '@ptsecurity/mosaic/select';
 import { McTimepickerModule } from '@ptsecurity/mosaic/timepicker';
+import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 
 import { TimepickerOverviewExample } from './timepicker-overview/timepicker-overview-example';
 import { TimepickerRangeExample } from './timepicker-range/timepicker-range-example';
@@ -30,6 +31,7 @@ const EXAMPLES = [
         CommonModule,
         FormsModule,
         McMomentDateModule,
+        McToolTipModule,
         McCheckboxModule,
         McSelectModule,
         McTimepickerModule,

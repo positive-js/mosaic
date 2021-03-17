@@ -149,9 +149,10 @@ export class ComponentOverviewComponent implements OnDestroy {
 
         copyBlock.classList.add('docs-markdown-code-block_success');
 
-        setTimeout(() => {
-            copyBlock.classList.remove('docs-markdown-code-block_success');
-        }, codeCopyAnimationTime);
+        setTimeout(
+            () => copyBlock.classList.remove('docs-markdown-code-block_success'),
+            codeCopyAnimationTime
+        );
     }
 
     showDocumentLostAlert() {

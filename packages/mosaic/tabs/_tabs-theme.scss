@@ -1,41 +1,41 @@
+@import '../core/styles/typography/typography-utils';
+@import "../core/theming/theming";
+
+
 @mixin mc-tabs-theme($theme) {
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    $focused-color: map-get(map-get($theme, states), focused-color);
-
     $tabs: map-get(map-get($theme, components), tabs);
-    $border-color: map-get($tabs, border-color);
-    $state-active_color: map-get($tabs, state-active_color);
 
     .mc-tab-label,
     .mc-tab-light-label,
     .mc-tab-link {
-        color: mc-color($foreground, text);
+        color: map-get($foreground, text);
 
-        border-bottom-color: $border-color;
+        border-bottom-color: map-get($tabs, border);
 
         & .mc-tab-overlay {
             background: transparent;
         }
 
         &:hover .mc-tab-overlay {
-            background: mc-color($background, overlay-hovered);
+            background: map-get($background, overlay-hover);
         }
 
         &.cdk-keyboard-focused:after {
-            border-color: $focused-color;
+            border-color: map-get(map-get($theme, states), focused-color);
         }
 
         &.mc-disabled {
-            color: mc-color($foreground, text-disabled);
+            color: map-get($foreground, text-disabled);
 
             cursor: default;
 
-            background: mc-color($background, background-disabled);
+            background: map-get($background, background-disabled);
 
             & .mc-tab-overlay {
-                background: mc-color($background, overlay-disabled);
+                background: map-get($background, overlay-disabled);
             }
         }
     }
@@ -43,12 +43,12 @@
     .mc-tab-label {
         border: {
             top-color: transparent;
-            bottom-color: $border-color;
+            bottom-color: map-get($tabs, border);
         }
 
         &.mc-active {
             border: {
-                color: $border-color;
+                color: map-get($tabs, border);
                 bottom-color: transparent;
             }
 
@@ -64,13 +64,13 @@
             border-bottom-color: transparent;
 
             &:before {
-                background-color: $border-color;
+                background-color: map-get($tabs, border);
             }
         }
 
         &.mc-active {
             &:before {
-                background-color: $state-active_color;
+                background-color: map-get($tabs, state-active);
             }
 
             & .mc-tab-overlay {
@@ -80,7 +80,7 @@
 
         &.mc-disabled {
             &:before {
-                background-color: $border-color;
+                background-color: map-get($tabs, border);
             }
         }
     }
@@ -90,6 +90,6 @@
     .mc-tab-label,
     .mc-tab-light-label,
     .mc-tab-link {
-        @include mc-typography-level-to-styles($config, body);
+        @include mc-typography-level-to-styles($config, $tabs-font-default);
     }
 }

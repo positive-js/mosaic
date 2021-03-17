@@ -11,8 +11,8 @@ export enum TimeFormats {
 }
 
 export const TIMEFORMAT_PLACEHOLDERS: { [timeFormat: string]: string } = {
-    [TimeFormats.HHmmss]: '  :  :  ',
-    [TimeFormats.HHmm]: '  :  '
+    [TimeFormats.HHmmss]: 'чч:мм:сс',
+    [TimeFormats.HHmm]: 'чч:мм'
 };
 
 export const DEFAULT_TIME_FORMAT: TimeFormats = TimeFormats.HHmm;
