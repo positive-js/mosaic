@@ -4,7 +4,8 @@ import {
     ElementRef,
     OnDestroy,
     ChangeDetectorRef,
-    Directive
+    Directive,
+    ContentChild
 } from '@angular/core';
 import {
     CanDisable,
@@ -15,6 +16,7 @@ import {
     mixinTabIndex,
     toBoolean
 } from '@ptsecurity/mosaic/core';
+import { McIcon } from '@ptsecurity/mosaic/icon';
 
 
 export class McLinkBase {}
@@ -31,6 +33,8 @@ export const McLinkMixinBase: HasTabIndexCtor & CanDisableCtor &
         class: 'mc-link',
         '[class.mc-link_underlined]': 'underlined',
         '[class.mc-link_pseudo]': 'pseudo',
+        '[class.mc-text-only]': '!hasIcon',
+        '[class.mc-text-with-icon]': 'hasIcon',
         '[attr.disabled]': 'disabled || null',
         '[attr.tabindex]': 'tabIndex'
     }
@@ -74,6 +78,12 @@ export class McLink extends McLinkMixinBase implements OnDestroy, HasTabIndex, C
     }
 
     private _underlined = false;
+
+    get hasIcon(): boolean {
+        return !!this.icon;
+    }
+
+    @ContentChild(McIcon) icon: McIcon;
 
     constructor(
         private elementRef: ElementRef,

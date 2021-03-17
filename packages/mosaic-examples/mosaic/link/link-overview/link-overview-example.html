@@ -1,22 +1,37 @@
-<div style="padding: 10px;">
-    <a href="#" mc-link underlined
-       [ngClass]="{'mc-active' : active}">
-        <span class="mc-link__text">Сохранить</span>
+<div class="docs-padding">
+    <a href="/link/overview" mc-link>Отчет сканирования</a>
+</div>
+
+<div class="docs-padding">
+    <a href="/link/overview" mc-link underlined>Отчет сканирования</a>
+</div>
+
+<div class="docs-padding">
+    <a href="/link/overview" target="_blank" mc-link>
+        <span class="mc-link__text">Отчет сканирования</span>
+        <i mc-icon="mc-new-tab_16"></i>
     </a>
 </div>
 
-<div style="padding: 10px;">
-    <a href="#" mc-link underlined [disabled]="disabled">
-        <span class="mc-link__text">Сохранить</span>
-        <i mc-icon="mc-angle-L_16" class="mc-link__icon"></i>
+<div class="docs-padding">
+    <a href="https://www.google.com/" mc-link>
+        <span class="mc-link__text">Отчет сканирования</span>
+        <i mc-icon="mc-external-link_16"></i>
     </a>
 </div>
 
-<div style="padding: 10px;">
-    <a href="#" mc-link underlined [disabled]="disabled"
-       [ngClass]="{'mc-focused': focus}">
-        <i mc-icon="mc-calendar_16" class="mc-link__icon"></i>
-        <span class="mc-link__text">Сохранить</span>
-        <i mc-icon="mc-angle-L_16" class="mc-link__icon"></i>
+<div class="docs-padding">
+    <a href="/link/overview" mc-link [disabled]="disabled">
+        <i mc-icon="mc-calendar_16"></i>
+        <span class="mc-link__text">Отчет сканирования</span>
+        <i mc-icon="mc-external-link_16"></i>
+    </a>
+</div>
+
+<div class="docs-padding">
+    <a href="/link/overview" mc-link underlined [disabled]="disabled">
+        <i mc-icon="mc-calendar_16"></i>
+        <span class="mc-link__text">Отчет сканирования</span>
+        <i mc-icon="mc-external-link_16"></i>
     </a>
 </div>

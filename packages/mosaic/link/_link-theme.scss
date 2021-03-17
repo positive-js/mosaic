@@ -9,10 +9,10 @@
     $underlined-link: map-get($link, underlined);
 
     .mc-link {
+        display: inline-block;
+
         color: map-get($link, text);
-
         text-decoration: none;
-
         cursor: pointer;
 
         &:focus {
@@ -36,7 +36,7 @@
             outline-offset: 2px;
         }
 
-        & .mc-link__icon {
+        & .mc-icon {
             color: inherit;
         }
 
@@ -50,30 +50,50 @@
 
         /* stylelint-disable no-descending-specificity */
         &.mc-link_underlined {
-            & .mc-link__text {
+            &.mc-text-only,
+            &.mc-text-with-icon .mc-link__text {
                 border-bottom-style: solid;
                 border-bottom-width: 1px;
                 border-bottom-color: map-get($underlined-link, border-bottom);
             }
 
-            &:visited .mc-link__text {
-                border-bottom-color: map-get($underlined-link, border-bottom);
+            &:visited {
+                &.mc-text-only,
+                &.mc-text-with-icon .mc-link__text {
+                    border-bottom-color: map-get($underlined-link, state-visited-border-bottom);
+                }
             }
 
-            &:hover .mc-link__text {
-                border-bottom-color: map-get($underlined-link, state-hover-border-bottom);
+            &:hover {
+                &.mc-text-only,
+                &.mc-text-with-icon .mc-link__text {
+                    border-bottom-color: map-get($underlined-link, state-hover-border-bottom);
+                }
+            }
+
+            &[disabled] {
+                &.mc-text-only,
+                &.mc-text-with-icon .mc-link__text {
+                    border-bottom-color: map-get($foreground, text-disabled);
+                }
             }
         }
 
         &.mc-link_pseudo {
-            & .mc-link__text {
+            display: inline;
+
+            &.mc-text-only,
+            &.mc-text-with-icon .mc-link__text {
                 border-bottom-style: solid;
                 border-bottom-width: 1px;
                 border-bottom-color: transparent;
             }
 
-            &:hover .mc-link__text {
-                border-bottom-color: map-get($underlined-link, border-bottom);
+            &:hover {
+                &.mc-text-only,
+                &.mc-text-with-icon .mc-link__text {
+                    border-bottom-color: map-get($underlined-link, state-hover-border-bottom);
+                }
             }
         }
         /* stylelint-enable no-descending-specificity */
@@ -83,10 +103,6 @@
 
             cursor: default;
             pointer-events: none;
-
-            &.mc-link_underlined .mc-link__text {
-                border-bottom-color: rgba(map-get($foreground, text-disabled), 0.64);
-            }
         }
     }
 }

@@ -118,12 +118,14 @@
     $link: (
         text: $link-light-color-scheme-text,
 
-        state-hover-text: $link-light-color-scheme-state-hover-text,
-        state-active-text: $link-light-color-scheme-state-active-text,
+        state-visited: $link-light-color-scheme-state-visited,
+        state-active-text: $link-light-color-scheme-state-active,
+        state-hover-text: $link-light-color-scheme-state-hover,
         state-focused-outline: $link-light-color-scheme-state-focused-outline,
 
         underlined: (
             border-bottom: $link-light-color-scheme-underlined-border-bottom,
+            state-visited-border-bottom: $link-light-color-scheme-underlined-state-visited-border-bottom,
             state-hover-border-bottom: $link-light-color-scheme-underlined-state-hover-border-bottom
         )
     );
@@ -374,12 +376,14 @@
     $link: (
         text: $link-dark-color-scheme-text,
 
-        state-hover-text: $link-dark-color-scheme-state-hover-text,
-        state-active-text: $link-dark-color-scheme-state-active-text,
+        state-visited: $link-dark-color-scheme-state-visited,
+        state-active-text: $link-dark-color-scheme-state-active,
+        state-hover-text: $link-dark-color-scheme-state-hover,
         state-focused-outline: $link-dark-color-scheme-state-focused-outline,
 
         underlined: (
             border-bottom: $link-dark-color-scheme-underlined-border-bottom,
+            state-visited-border-bottom: $link-dark-color-scheme-underlined-state-visited-border-bottom,
             state-hover-border-bottom: $link-dark-color-scheme-underlined-state-hover-border-bottom
         )
     );
