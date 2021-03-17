@@ -1,7 +1,7 @@
 {
     list: {
         size: {
-            'horizontal-padding': { value: '{padding.control-horizontal}' },
+            'horizontal-padding': { value: '{padding.option-horizontal}' },
             'icon-padding': { value: '4px' },
 
             'item-height': { value: '{size.option-height}' },

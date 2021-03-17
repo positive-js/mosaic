@@ -1,7 +1,7 @@
 {
     option: {
         size: {
-            padding: { value: '0 16px' },
+            'horizontal-padding': { value: '{padding.option-horizontal}' },
             height: { value: '32px' },
             'border-width': { value: '2px' }
         },
