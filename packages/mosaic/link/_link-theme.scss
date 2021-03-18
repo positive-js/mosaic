@@ -105,6 +105,24 @@
             pointer-events: none;
         }
     }
+
+    @media print {
+        .mc-link_print:not([disabled]) {
+            color: map-get($foreground, text);
+
+            &.mc-text-only,
+            &.mc-text-with-icon .mc-link__text {
+                border-bottom: none;
+            }
+
+            &::after {
+                color: map-get($foreground, text);
+
+                content: ":\a" attr(print);
+                white-space: pre;
+            }
+        }
+    }
 }
 
 @mixin mc-link-typography($config) {

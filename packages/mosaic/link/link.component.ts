@@ -25,6 +25,8 @@ export class McLinkBase {}
 export const McLinkMixinBase: HasTabIndexCtor & CanDisableCtor &
     typeof McLinkBase = mixinTabIndex(mixinDisabled(McLinkBase));
 
+export const baseURLRegex = /^http(s)?:\/\//;
+
 @Directive({
     selector: '[mc-link]',
     exportAs: 'mcLink',
@@ -33,10 +35,12 @@ export const McLinkMixinBase: HasTabIndexCtor & CanDisableCtor &
         class: 'mc-link',
         '[class.mc-link_underlined]': 'underlined',
         '[class.mc-link_pseudo]': 'pseudo',
+        '[class.mc-link_print]': 'printMode',
         '[class.mc-text-only]': '!hasIcon',
         '[class.mc-text-with-icon]': 'hasIcon',
         '[attr.disabled]': 'disabled || null',
-        '[attr.tabindex]': 'tabIndex'
+        '[attr.tabindex]': 'tabIndex',
+        '[attr.print]': 'print'
     }
 })
 
@@ -82,6 +86,21 @@ export class McLink extends McLinkMixinBase implements OnDestroy, HasTabIndex, C
     get hasIcon(): boolean {
         return !!this.icon;
     }
+
+    @Input()
+    get print() {
+        return this._print || this.getHostElement().href?.replace(baseURLRegex, '');
+    }
+
+    set print(value: any) {
+        this.printMode = toBoolean(value);
+
+        this._print = value;
+    }
+
+    private _print: string;
+
+    printMode: boolean;
 
     @ContentChild(McIcon) icon: McIcon;
 
