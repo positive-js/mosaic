@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { fakeAsync, TestBed } from '@angular/core/testing';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 
-import { McLink, McLinkModule } from './index';
+import { McLinkModule } from './index';
 
 
 describe('McLink', () => {
