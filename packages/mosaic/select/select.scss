@@ -85,15 +85,20 @@
     }
 }
 
-.mc-select__match-list {
+.mc-select__multiple-matcher {
+    display: flex;
+    width: 100%;
+}
+
+.mc-select__match-list{
     display: flex;
     flex-wrap: wrap;
-
     overflow: hidden;
 
-    max-height:
-        var(--mc-select-size-height, $select-size-height) -
-        var(--mc-select-panel-size-border-width, $select-panel-size-border-width);
+    max-height: calc(
+        var(--mc-select-size-height, #{$select-size-height}) -
+        var(--mc-select-panel-size-border-width, #{$select-panel-size-border-width})
+    );
 
     & .mc-tag {
         margin-right: 4px;

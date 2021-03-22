@@ -9,17 +9,19 @@
         <span *ngSwitchCase="false" [ngSwitch]="!!customTrigger">
             <div *ngSwitchDefault [ngSwitch]="multiple" class="mc-select__match-container">
                 <span *ngSwitchCase="false" class="mc-select__matcher-text">{{ triggerValue }}</span>
-                <div *ngSwitchCase="true" class="mc-select__match-list">
-                    <mc-tag *ngFor="let option of triggerValues"
-                            [disabled]="option.disabled || disabled"
-                            [selectable]="false"
-                            [class.mc-error]="errorState">
-                        {{ option.viewValue }}
-                        <i mc-icon="mc-close-S_16"
-                           *ngIf="!option.disabled && !disabled"
-                           (click)="onRemoveMatcherItem(option, $event)">
-                        </i>
-                    </mc-tag>
+                <div *ngSwitchCase="true" class="mc-select__multiple-matcher">
+                    <div class="mc-select__match-list">
+                        <mc-tag *ngFor="let option of triggerValues"
+                                [disabled]="option.disabled || disabled"
+                                [selectable]="false"
+                                [class.mc-error]="errorState">
+                                {{ option.viewValue }}
+                            <i mc-icon="mc-close-S_16"
+                               *ngIf="!option.disabled && !disabled"
+                               (click)="onRemoveMatcherItem(option, $event)">
+                            </i>
+                        </mc-tag>
+                    </div>
                 </div>
                 <div class="mc-select__match-hidden-text" [style.display]="hiddenItems > 0 ? 'block' : 'none'">
                     {{ hiddenItemsTextFormatter(hiddenItemsText, hiddenItems) }}
