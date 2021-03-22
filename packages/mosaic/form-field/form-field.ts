@@ -53,6 +53,7 @@ export const McFormFieldMixinBase: CanColorCtor & typeof McFormFieldBase = mixin
         'form-field.scss',
         '../input/input.scss',
         '../timepicker/timepicker.scss',
+        '../datepicker/datepicker-input.scss',
         '../textarea/textarea.scss'
     ],
     host: {

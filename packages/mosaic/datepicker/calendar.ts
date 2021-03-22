@@ -43,12 +43,13 @@ export type McCalendarView = 'month' | 'year' | 'multi-year';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class McCalendarHeader<D> {
-    constructor(private intl: McDatepickerIntl,
-                @Inject(forwardRef(() => McCalendar)) public calendar: McCalendar<D>,
-                @Optional() private dateAdapter: DateAdapter<D>,
-                @Optional() @Inject(MC_DATE_FORMATS) private dateFormats: McDateFormats,
-                changeDetectorRef: ChangeDetectorRef) {
-
+    constructor(
+        private intl: McDatepickerIntl,
+        @Inject(forwardRef(() => McCalendar)) public calendar: McCalendar<D>,
+        @Optional() private dateAdapter: DateAdapter<D>,
+        @Optional() @Inject(MC_DATE_FORMATS) private dateFormats: McDateFormats,
+        changeDetectorRef: ChangeDetectorRef
+    ) {
         this.calendar.stateChanges.subscribe(() => changeDetectorRef.markForCheck());
     }
 
@@ -125,18 +126,14 @@ export class McCalendarHeader<D> {
 
     /** Whether the previous period button is enabled. */
     previousEnabled(): boolean {
-        if (!this.calendar.minDate) {
-            return true;
-        }
+        if (!this.calendar.minDate) { return true; }
 
-        return !this.calendar.minDate ||
-            !this.isSameView(this.calendar.activeDate, this.calendar.minDate);
+        return !this.calendar.minDate || !this.isSameView(this.calendar.activeDate, this.calendar.minDate);
     }
 
     /** Whether the next period button is enabled. */
     nextEnabled(): boolean {
-        return !this.calendar.maxDate ||
-            !this.isSameView(this.calendar.activeDate, this.calendar.maxDate);
+        return !this.calendar.maxDate || !this.isSameView(this.calendar.activeDate, this.calendar.maxDate);
     }
 
     /** Whether the two dates represent the same view in the current view mode (month or year). */
@@ -145,6 +142,7 @@ export class McCalendarHeader<D> {
             return this.dateAdapter.getYear(date1) === this.dateAdapter.getYear(date2) &&
                 this.dateAdapter.getMonth(date1) === this.dateAdapter.getMonth(date2);
         }
+
         if (this.calendar.currentView === 'year') {
             return this.dateAdapter.getYear(date1) === this.dateAdapter.getYear(date2);
         }

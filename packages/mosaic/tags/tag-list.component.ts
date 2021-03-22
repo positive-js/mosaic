@@ -96,7 +96,7 @@ export class McTagListChange {
 export class McTagList extends McTagListMixinBase implements McFormFieldControl<any>,
     ControlValueAccessor, AfterContentInit, DoCheck, OnInit, OnDestroy, CanUpdateErrorState {
 
-    readonly controlType: string = 'mc-tag-list';
+    readonly controlType: string = 'tag-list';
 
     /** Combined stream of all of the child tags' selection change events. */
     get tagSelectionChanges(): Observable<McTagSelectionChange> {

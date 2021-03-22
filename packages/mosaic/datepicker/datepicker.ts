@@ -357,8 +357,7 @@ export class McDatepicker<D> implements OnDestroy {
             }
         };
 
-        if (this.focusedElementBeforeOpen &&
-            typeof this.focusedElementBeforeOpen.focus === 'function') {
+        if (this.focusedElementBeforeOpen && typeof this.focusedElementBeforeOpen.focus === 'function') {
             // Because IE moves focus asynchronously, we can't count on it being restored before we've
             // marked the datepicker as closed. If the event fires out of sequence and the element that
             // we're refocusing opens the datepicker on focus, the user could be stuck with not being
@@ -369,6 +368,10 @@ export class McDatepicker<D> implements OnDestroy {
         } else {
             completeClose();
         }
+    }
+
+    toggle(): void {
+        this._opened ? this.close() : this.open();
     }
 
     /** Open the calendar as a popup. */

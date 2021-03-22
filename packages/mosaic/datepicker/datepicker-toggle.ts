@@ -40,7 +40,6 @@ export class McDatepickerToggleIcon {}
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class McDatepickerToggle<D> implements AfterContentInit, OnChanges, OnDestroy {
-
     /** Whether the toggle button is disabled. */
     @Input()
     get disabled(): boolean {
@@ -58,10 +57,10 @@ export class McDatepickerToggle<D> implements AfterContentInit, OnChanges, OnDes
     @Input() tabIndex: number | null;
 
     /** Custom icon set by the consumer. */
-    @ContentChild(McDatepickerToggleIcon, {static: false}) customIcon: McDatepickerToggleIcon;
+    @ContentChild(McDatepickerToggleIcon, { static: false }) customIcon: McDatepickerToggleIcon;
 
     /** Underlying button element. */
-    @ViewChild('button', {static: false}) button: McButton;
+    @ViewChild('button', { static: false }) button: McButton;
     private stateChanges = Subscription.EMPTY;
 
     private _disabled: boolean;

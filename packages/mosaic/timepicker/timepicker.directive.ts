@@ -108,7 +108,7 @@ const validationTooltipHideDelay: number = 3000;
         { provide: McFormFieldControl, useExisting: McTimepicker }
     ]
 })
-export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, ControlValueAccessor, Validator {
+export class McTimepicker<D> implements McFormFieldControl<D>, ControlValueAccessor, Validator, OnDestroy {
     /**
      * Implemented as part of McFormFieldControl.
      * @docs-private
@@ -127,7 +127,7 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
      * Implemented as part of McFormFieldControl.
      * @docs-private
      */
-    controlType: string = 'mc-timepicker';
+    controlType: string = 'timepicker';
 
     /**
      * Implemented as part of McFormFieldControl.

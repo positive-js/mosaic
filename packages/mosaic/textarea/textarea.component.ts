@@ -74,7 +74,7 @@ export class McTextarea extends McTextareaMixinBase implements McFormFieldContro
      * Implemented as part of McFormFieldControl.
      * @docs-private
      */
-    controlType: string = 'mc-textarea';
+    controlType: string = 'textarea';
 
     /**
      * Implemented as part of McFormFieldControl.

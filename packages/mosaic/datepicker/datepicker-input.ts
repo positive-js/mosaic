@@ -23,8 +23,8 @@ import {
 } from '@angular/forms';
 import { DateAdapter, MC_DATE_FORMATS, McDateFormats } from '@ptsecurity/cdk/datetime';
 import { DOWN_ARROW } from '@ptsecurity/cdk/keycodes';
-import { MC_INPUT_VALUE_ACCESSOR } from '@ptsecurity/mosaic/input';
-import { Subscription } from 'rxjs';
+import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
+import { Subject, Subscription } from 'rxjs';
 
 import { McDatepicker } from './datepicker';
 import { createMissingDateImplError } from './datepicker-errors';
@@ -58,10 +58,13 @@ export class McDatepickerInputEvent<D> {
         /** Reference to the datepicker input component that emitted the event. */
         public target: McDatepickerInput<D>,
         /** Reference to the native input element associated with the datepicker input. */
-        public targetElement: HTMLElement) {
+        public targetElement: HTMLElement
+    ) {
         this.value = this.target.value;
     }
 }
+
+let uniqueComponentIdSuffix: number = 0;
 
 
 /** Directive used to connect an input to a McDatepicker. */
@@ -71,25 +74,66 @@ export class McDatepickerInputEvent<D> {
     providers: [
         MC_DATEPICKER_VALUE_ACCESSOR,
         MC_DATEPICKER_VALIDATORS,
-        { provide: MC_INPUT_VALUE_ACCESSOR, useExisting: McDatepickerInput }
+        { provide: McFormFieldControl, useExisting: McDatepickerInput }
     ],
     host: {
-        '[attr.aria-haspopup]': 'true',
-        '[attr.aria-owns]': '(datepicker?.opened && datepicker.id) || null',
+        class: 'mc-input mc-datepicker',
+        '[attr.placeholder]': 'placeholder',
+        '[attr.required]': 'required',
+        '[attr.disabled]': 'disabled || null',
         '[attr.min]': 'min ? dateAdapter.toIso8601(min) : null',
         '[attr.max]': 'max ? dateAdapter.toIso8601(max) : null',
-        '[attr.disabled]': 'disabled || null',
+        '[attr.size]': 'getSize()',
+        '[attr.autocomplete]': '"off"',
+
         '(input)': 'onInput($event.target.value)',
+        '(paste)': 'onPaste($event)',
         '(change)': 'onChange()',
+
+        '(focus)': 'focusChanged(true)',
         '(blur)': 'onBlur()',
+
         '(keydown)': 'onKeydown($event)'
     }
 })
-export class McDatepickerInput<D> implements ControlValueAccessor, OnDestroy, Validator {
+export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValueAccessor, Validator, OnDestroy {
+    readonly stateChanges: Subject<void> = new Subject<void>();
+
+    readonly errorState: boolean;
+
+    controlType: string = 'datepicker';
+
+    focused: boolean = false;
+
+    datepicker: McDatepicker<D>;
+
+    dateFilter: (date: D | null) => boolean;
+
+    /** Emits when the value changes (either due to user input or programmatic change). */
+    valueChange = new EventEmitter<D | null>();
+
+    /** Emits when the disabled state has changed */
+    disabledChange = new EventEmitter<boolean>();
+
+    @Input() placeholder: string;
+
+    @Input()
+    get required(): boolean {
+        return this._required;
+    }
+
+    set required(value: boolean) {
+        this._required = coerceBooleanProperty(value);
+    }
+
+    private _required: boolean;
+
     /** The datepicker that this input is associated with. */
     @Input()
     set mcDatepicker(value: McDatepicker<D>) {
-        if (!value) { return; }
+        if (!value) {
+            return;
+        }
 
         this.datepicker = value;
         this.datepicker.registerInput(this);
@@ -132,6 +176,8 @@ export class McDatepickerInput<D> implements ControlValueAccessor, OnDestroy, Va
         }
     }
 
+    private _value: D | null;
+
     /** The minimum valid date. */
     @Input()
     get min(): D | null {
@@ -142,6 +188,8 @@ export class McDatepickerInput<D> implements ControlValueAccessor, OnDestroy, Va
         this._min = this.getValidDateOrNull(this.dateAdapter.deserialize(value));
         this.validatorOnChange();
     }
+
+    private _min: D | null;
 
     /** The maximum valid date. */
     @Input()
@@ -154,10 +202,12 @@ export class McDatepickerInput<D> implements ControlValueAccessor, OnDestroy, Va
         this.validatorOnChange();
     }
 
+    private _max: D | null;
+
     /** Whether the datepicker-input is disabled. */
     @Input()
     get disabled(): boolean {
-        return !!this._disabled;
+        return this._disabled;
     }
 
     set disabled(value: boolean) {
@@ -178,8 +228,18 @@ export class McDatepickerInput<D> implements ControlValueAccessor, OnDestroy, Va
         }
     }
 
-    datepicker: McDatepicker<D>;
-    dateFilter: (date: D | null) => boolean;
+    private _disabled: boolean;
+
+    @Input()
+    get id(): string {
+        return this._id;
+    }
+
+    set id(value: string) {
+        this._id = value || this.uid;
+    }
+
+    private _id: string;
 
     /** Emits when a `change` event is fired on this `<input>`. */
     @Output() readonly dateChange: EventEmitter<McDatepickerInputEvent<D>> =
@@ -189,15 +249,20 @@ export class McDatepickerInput<D> implements ControlValueAccessor, OnDestroy, Va
     @Output() readonly dateInput: EventEmitter<McDatepickerInputEvent<D>> =
         new EventEmitter<McDatepickerInputEvent<D>>();
 
-    /** Emits when the value changes (either due to user input or programmatic change). */
-    valueChange = new EventEmitter<D | null>();
+    get empty(): boolean {
+        return !this.viewValue && !this.isBadInput();
+    }
 
-    /** Emits when the disabled state has changed */
-    disabledChange = new EventEmitter<boolean>();
-    private _value: D | null;
-    private _min: D | null;
-    private _max: D | null;
-    private _disabled: boolean;
+    get viewValue(): string {
+        return this.elementRef.nativeElement.value;
+    }
+
+    get ngControl(): any {
+        return this.control;
+    }
+
+    private control: AbstractControl;
+    private readonly uid = `mc-datepicker-${uniqueComponentIdSuffix++}`;
 
     private datepickerSubscription = Subscription.EMPTY;
 
@@ -234,8 +299,23 @@ export class McDatepickerInput<D> implements ControlValueAccessor, OnDestroy, Va
             .subscribe(() => this.value = this.value);
     }
 
-    onTouched = () => {
+    onContainerClick() {
+        this.focus();
     }
+
+    focus(): void {
+        this.elementRef.nativeElement.focus();
+    }
+
+    focusChanged(isFocused: boolean): void {
+        if (isFocused !== this.focused) {
+            this.focused = isFocused;
+            this.onTouched();
+            this.stateChanges.next();
+        }
+    }
+
+    onTouched = () => {};
 
     ngOnDestroy() {
         this.datepickerSubscription.unsubscribe();
@@ -250,8 +330,10 @@ export class McDatepickerInput<D> implements ControlValueAccessor, OnDestroy, Va
     }
 
     /** @docs-private */
-    validate(c: AbstractControl): ValidationErrors | null {
-        return this.validator ? this.validator(c) : null;
+    validate(control: AbstractControl): ValidationErrors | null {
+        this.setControl(control);
+
+        return this.validator ? this.validator(control) : null;
     }
 
     // Implemented as part of ControlValueAccessor.
@@ -308,14 +390,29 @@ export class McDatepickerInput<D> implements ControlValueAccessor, OnDestroy, Va
             this.formatValue(this.value);
         }
 
-        this.onTouched();
+        this.focusChanged(false);
     }
 
-    private cvaOnChange: (value: any) => void = () => {
+    onPaste($event) {
+        console.log('todo: ', $event); // tslint:disable-line:no-console
     }
 
-    private validatorOnChange = () => {
+    getSize(): number {
+        // todo maybe here need count length of mask
+        // tslint:disable-next-line:no-magic-numbers
+        return 10;
     }
+
+    /** Checks whether the input is invalid based on the native validation. */
+    private isBadInput(): boolean {
+        const validity = (<HTMLInputElement> this.elementRef.nativeElement).validity;
+
+        return validity && validity.badInput;
+    }
+
+    private cvaOnChange: (value: any) => void = () => {};
+
+    private validatorOnChange = () => {};
 
     /** The form control validator for whether the input parses. */
     private parseValidator: ValidatorFn = (): ValidationErrors | null => {
@@ -361,5 +458,11 @@ export class McDatepickerInput<D> implements ControlValueAccessor, OnDestroy, Va
      */
     private getValidDateOrNull(obj: any): D | null {
         return (this.dateAdapter.isDateInstance(obj) && this.dateAdapter.isValid(obj)) ? obj : null;
+    }
+
+    private setControl(control: AbstractControl) {
+        if (!this.control) {
+            this.control = control;
+        }
     }
 }
