@@ -8,6 +8,7 @@ import { buildScssPipeline } from '../utils/build-scss-pipeline';
 
 
 const sourceDir = 'packages/mosaic';
+const sourceDirProductComponents = 'packages/product-components';
 
 /** Path to the directory where all releases are created. */
 const releasesDir = 'dist';
@@ -19,10 +20,15 @@ const allScssDedupeGlob = join(buildConfig.packagesDir, '**/*.scss');
 
 // Path to the release output of mosaic.
 const releasePath = join(releasesDir, 'mosaic');
+const releasePathProductComponents = join(releasesDir, 'product-components');
+
 // The entry-point for the scss theming bundle.
 const themingEntryPointPath = join(sourceDir, 'core', 'theming', '_all-theme.scss');
+const themingEntryPointPathProductComponents = join(sourceDirProductComponents, 'core', 'theming', '_all-theme.scss');
+
 // Output path for the scss theming bundle.
 const themingBundlePath = join(releasePath, '_theming.scss');
+const themingBundlePathProductComponents = join(releasePathProductComponents, '_theming.scss');
 
 
 const visualEntryPointPath = join(sourceDir, 'core', 'visual', '_all-visual.scss');
@@ -39,6 +45,14 @@ task('mosaic:bundle-theming-scss', () => {
         // this task finishes.
         mkdirpSync(releasePath);
         writeFileSync(themingBundlePath, result.bundledContent);
+    });
+});
+
+task('product-components:bundle-theming-scss', () => {
+
+    return new Bundler().bundle(themingEntryPointPathProductComponents, [allScssDedupeGlob]).then((result) => {
+        mkdirpSync(releasePathProductComponents);
+        writeFileSync(themingBundlePathProductComponents, result.bundledContent);
     });
 });
 

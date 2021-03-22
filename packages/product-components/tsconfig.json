@@ -1,0 +1,20 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "types": [
+            "jasmine",
+            "node"
+        ]
+    },
+    "angularCompilerOptions": {
+        "annotateForClosureCompiler": true,
+        "strictMetadataEmit": true,
+        "flatModuleId": "@ptsecurity/product-components",
+        "skipTemplateCodegen": true,
+        "fullTemplateTypeCheck": true,
+        "enableIvy": false
+    },
+    "include": [
+        "**/*.ts"
+    ]
+}

@@ -1,0 +1,21 @@
+@mixin sites-tree-hamburger-theme($foreground) {
+    $text-color: map-get($foreground, text);
+    $text-less-contrast: map-get($foreground, text-less-contrast);
+    $divider: map-get($foreground, divider);
+
+    .sites-tree-menu-item {
+        color: $text-color;
+    }
+
+    .sites-tree-menu-item__description {
+        color: $text-less-contrast;
+    }
+
+    .sites-tree-hamburger__divider {
+        background-color: $divider;
+    }
+
+    .sites-tree-hamburger__search-button-wrap {
+        color: $text-color;
+    }
+}

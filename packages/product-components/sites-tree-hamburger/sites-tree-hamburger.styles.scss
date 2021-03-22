@@ -1,0 +1,40 @@
+.sites-tree-hamburger {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+}
+
+.sites-tree-hamburger__dropdown {
+    min-width: 290px !important;
+}
+
+.sites-tree-hamburger__divider {
+    height: 1px;
+    margin: 4px 0;
+    padding: 0;
+}
+
+.sites-tree-hamburger__search-button-wrap {
+    padding: 10px 16px 10px 18px;
+    font-weight: bold;
+
+    .search-icon {
+        cursor: pointer;
+    }
+}
+
+.sites-tree-hamburger__search-input_hidden {
+    display: none;
+}
+
+.sites-tree-hamburger__search {
+    padding: 4px 16px;
+}
+
+.sites-tree-hamburger__search_nothing-found {
+    height: 28px;
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+}

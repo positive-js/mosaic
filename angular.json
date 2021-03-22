@@ -301,6 +301,40 @@
                 }
             }
         },
+        "product-components": {
+            "projectType": "library",
+            "root": "packages/product-components",
+            "sourceRoot": "packages/product-components",
+            "architect": {
+                "packagr": {
+                    "builder": "@angular-devkit/build-ng-packagr:build",
+                    "options": {
+                        "tsConfig": "packages/product-components/tsconfig.lib.json",
+                        "project": "packages/product-components/ng-package.json"
+                    }
+                },
+                "build": {
+                    "builder": "@ptsecurity/builders:packager",
+                    "options": {
+                        "buildTarget": "packagr",
+                        "versionPlaceholder": "{{VERSION}}",
+                        "ngVersionPlaceholder": "{{NG_VERSION}}"
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "karmaConfig": "packages/product-components/karma.conf.js",
+                        "main": "packages/product-components/test.ts",
+                        "tsConfig": "packages/product-components/tsconfig.spec.json",
+                        "codeCoverage": true
+                    }
+                },
+                "configurations": {
+                    "production": {}
+                }
+            }
+        },
         "schematics": {
             "projectType": "library",
             "root": "packages/mosaic/schematics",

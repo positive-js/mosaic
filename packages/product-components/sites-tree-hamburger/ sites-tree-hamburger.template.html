@@ -1,0 +1,97 @@
+<div [mcDropdownTriggerFor]="sitesTreeDropdown" class="sites-tree-hamburger">
+    <i mc-icon="mc-bento_16"></i>
+
+    <mc-dropdown class="sites-tree-hamburger__dropdown" #sitesTreeDropdown>
+        <mc-list-selection (selectionChange)="onSelectionChangedInList()"
+                           [(ngModel)]="selectedAppIdInList">
+            <mc-list-option *ngIf="!isSingleInstallation" disabled>
+                <span class="sites-tree-menu-item">{{currentSite.name}}
+                    <span *ngIf="currentSite.id === mainSite.id" class="sites-tree-menu-item__description">
+                        <ng-container *ngTemplateOutlet="mainSiteTitle"></ng-container>
+                    </span>
+                </span>
+
+            </mc-list-option>
+
+            <mc-list-option *ngFor="let application of appsOfCurrentSite" [value]="application.id">
+                <a [href]="application.endpoint" class="mc-link">
+                    <span class="mc-link__text">{{application.displayName}}</span>
+
+                    <span *ngIf="hasMaxPatrol10Alias(application)" class="sites-tree-menu-item__description">
+                        {{application.alias}}
+                    </span>
+                </a>
+            </mc-list-option>
+        </mc-list-selection>
+
+        <ng-container *ngIf="!isSingleInstallation">
+            <div class="sites-tree-hamburger__divider"></div>
+
+            <div class="layout-row layout-align-space-between sites-tree-hamburger__search-button-wrap"
+                 [class.sites-tree-hamburger__search-input_hidden]="isShowingSearchInput"
+                 (click)="handlerClose($event)">
+                <ng-container *ngTemplateOutlet="otherAppsTitle"></ng-container>
+                <div (click)="toggleSearchInput()" class="search-icon">
+                    <i mc-icon="mc-search_16" mcPrefix></i>
+                </div>
+            </div>
+        </ng-container>
+
+        <div class="layout-column">
+            <div class="sites-tree-hamburger__search"
+                 [hidden]="!isShowingSearchInput"
+                 (click)="handlerClose($event)">
+                <mc-form-field>
+                    <i mc-icon="mc-search_16" mcPrefix></i>
+
+                    <input type="text"
+                           mcInput
+                           e2e-id="txtSiteFilter"
+                           autocomplete="off"
+                           [placeholder]="searchPlaceholder"
+                           [ngModel]="filterValue"
+                           (ngModelChange)="onFilterChange($event)"
+                           (click)="handlerClose($event)">
+                    <i mc-icon="mc-close-M_16" mcSuffix (click)="toggleSearchInput()"></i>
+
+                    <mc-cleaner (click)="resetFilter($event)"></mc-cleaner>
+                </mc-form-field>
+            </div>
+
+            <div *ngIf="nothingFound" class="sites-tree-hamburger__search_nothing-found">
+                <ng-container *ngTemplateOutlet="searchNothingFound"></ng-container>
+            </div>
+
+            <mc-tree-selection [treeControl]="treeControl"
+                               [dataSource]="dataSource"
+                               [(ngModel)]="selectedAppIdInTree"
+                               (click)="handlerClose($event)"
+                               (selectionChange)="onSelectionChangedInTree()">
+                <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+                    <a [href]="node.link" class="mc-link">
+                        <span [innerHTML]="highlightText(node.name, treeControl.filterValue.value)"
+                              class="mc-link__text">
+                        </span>
+
+                        <span *ngIf="hasMaxPatrol10Alias(node)"
+                              class="sites-tree-menu-item__description">
+                            {{node.alias}}
+                        </span>
+                    </a>
+                </mc-tree-option>
+
+                <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" [disabled]="node.name" mcTreeNodePadding>
+                    <mc-tree-node-toggle [node]="node"></mc-tree-node-toggle>
+
+                    <span [innerHTML]="highlightText(node.name, treeControl.filterValue.value)"
+                          class="sites-tree-menu-item">
+                    </span>&nbsp;
+
+                    <span *ngIf="mainSite.id === node.id" class="sites-tree-menu-item__description">
+                        <ng-container *ngTemplateOutlet="mainSiteTitle"></ng-container>
+                    </span>
+                </mc-tree-option>
+            </mc-tree-selection>
+        </div>
+    </mc-dropdown>
+</div>

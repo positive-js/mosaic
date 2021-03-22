@@ -1,0 +1,30 @@
+{
+    "name": "@ptsecurity/product-components",
+    "version": "{{VERSION}}",
+    "description": "Mosaic Product Components",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/positive-js/mosaic.git"
+    },
+    "keywords": [
+        "angular",
+        "mosaic",
+        "components",
+        "products",
+        "ptsecurity"
+    ],
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/positive-js/mosaic/issues"
+    },
+    "homepage": "https://github.com/positive-js/mosaic#readme",
+    "peerDependencies": {
+        "@ptsecurity/cdk": "{{VERSION}}",
+        "@ptsecurity/mosaic": "{{VERSION}}",
+        "@ptsecurity/mosaic-moment-adapter": "{{VERSION}}",
+        "@ptsecurity/mosaic-icons": "^5.0.0"
+    },
+    "dependencies": {
+        "tslib": "^2.0.1"
+    }
+}

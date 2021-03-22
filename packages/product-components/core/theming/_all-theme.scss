@@ -1,0 +1,8 @@
+// Import all the theming
+@import '../../sites-tree-hamburger/ sites-tree-hamburger.theme';
+
+
+@mixin product-components($theme) {
+
+    @include sites-tree-hamburger-theme();
+}
