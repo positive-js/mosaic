@@ -14,11 +14,11 @@
                             [disabled]="option.disabled || disabled"
                             [selectable]="false"
                             [class.mc-error]="errorState">
-                                {{ option.viewValue }}
+                        {{ option.viewValue }}
                         <i mc-icon="mc-close-S_16"
                            *ngIf="!option.disabled && !disabled"
                            (click)="onRemoveMatcherItem(option, $event)">
-                            </i>
+                        </i>
                     </mc-tag>
                 </div>
                 <div class="mc-select__match-hidden-text" [style.display]="hiddenItems > 0 ? 'block' : 'none'">
