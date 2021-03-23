@@ -33,7 +33,8 @@ export const baseURLRegex = /^http(s)?:\/\//;
     inputs: ['tabIndex'],
     host: {
         class: 'mc-link',
-        '[class.mc-link_underlined]': 'underlined',
+        '[class.mc-link_no-underline]': 'noUnderline',
+        '[class.mc-link_use-visited]': 'useVisited',
         '[class.mc-link_pseudo]': 'pseudo',
         '[class.mc-link_print]': 'printMode',
         '[class.mc-text-only]': '!hasIcon',
@@ -73,15 +74,26 @@ export class McLink extends McLinkMixinBase implements OnDestroy, HasTabIndex, C
     private _pseudo = false;
 
     @Input()
-    get underlined() {
-        return this._underlined;
+    get noUnderline() {
+        return this._noUnderline;
     }
 
-    set underlined(value: any) {
-        this._underlined = toBoolean(value);
+    set noUnderline(value: any) {
+        this._noUnderline = toBoolean(value);
     }
 
-    private _underlined = false;
+    private _noUnderline = false;
+
+    @Input()
+    get useVisited() {
+        return this._useVisited;
+    }
+
+    set useVisited(value: any) {
+        this._useVisited = toBoolean(value);
+    }
+
+    private _useVisited = false;
 
     get hasIcon(): boolean {
         return !!this.icon;

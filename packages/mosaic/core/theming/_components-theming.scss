@@ -117,17 +117,17 @@
 
     $link: (
         text: $link-light-color-scheme-text,
+        border-bottom: $link-light-color-scheme-border-bottom,
 
-        state-visited: $link-light-color-scheme-state-visited,
+        state-visited-text: $link-light-color-scheme-state-visited-text,
+        state-visited-border-bottom: $link-light-color-scheme-state-visited-border-bottom,
+
+        state-hover-text: $link-light-color-scheme-state-hover-text,
+        state-hover-border-bottom: $link-light-color-scheme-state-hover-border-bottom,
+
         state-active-text: $link-light-color-scheme-state-active,
-        state-hover-text: $link-light-color-scheme-state-hover,
-        state-focused-outline: $link-light-color-scheme-state-focused-outline,
 
-        underlined: (
-            border-bottom: $link-light-color-scheme-underlined-border-bottom,
-            state-visited-border-bottom: $link-light-color-scheme-underlined-state-visited-border-bottom,
-            state-hover-border-bottom: $link-light-color-scheme-underlined-state-hover-border-bottom
-        )
+        state-focused-outline: $link-light-color-scheme-state-focused-outline
     );
 
     $modal: (
@@ -375,17 +375,17 @@
 
     $link: (
         text: $link-dark-color-scheme-text,
+        border-bottom: $link-dark-color-scheme-border-bottom,
 
-        state-visited: $link-dark-color-scheme-state-visited,
+        state-visited-text: $link-dark-color-scheme-state-visited-text,
+        state-visited-border-bottom: $link-dark-color-scheme-state-visited-border-bottom,
+
+        state-hover-text: $link-dark-color-scheme-state-hover-text,
+        state-hover-border-bottom: $link-dark-color-scheme-state-hover-border-bottom,
+
         state-active-text: $link-dark-color-scheme-state-active,
-        state-hover-text: $link-dark-color-scheme-state-hover,
-        state-focused-outline: $link-dark-color-scheme-state-focused-outline,
 
-        underlined: (
-            border-bottom: $link-dark-color-scheme-underlined-border-bottom,
-            state-visited-border-bottom: $link-dark-color-scheme-underlined-state-visited-border-bottom,
-            state-hover-border-bottom: $link-dark-color-scheme-underlined-state-hover-border-bottom
-        )
+        state-focused-outline: $link-dark-color-scheme-state-focused-outline
     );
 
     $modal: (

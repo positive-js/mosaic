@@ -1,6 +1,6 @@
 
 // Do not edit directly
-// Generated on Wed, 17 Mar 2021 08:42:29 GMT
+// Generated on Tue, 23 Mar 2021 13:11:13 GMT
 
 $light-color-scheme-primary-default: #338FCC;
 $light-color-scheme-second-default: #B3B3B3;
@@ -358,22 +358,26 @@ $input-size-min-height: 30px;
 $input-font-default: body;
 $input-font-monospace: body-mono;
 $link-light-color-scheme-text: #338FCC;
-$link-light-color-scheme-state-visited: #338FCC;
+$link-light-color-scheme-border-bottom: rgba(#338FCC, 0.32);
+$link-light-color-scheme-state-visited-text: #6A2795;
+$link-light-color-scheme-state-visited-border-bottom: rgba(106, 39, 149, 0.32);
+$link-light-color-scheme-state-hover-text: #206EA2;
+$link-light-color-scheme-state-hover-border-bottom: rgba(#206EA2, 0.32);
 $link-light-color-scheme-state-active: #114E77;
-$link-light-color-scheme-state-hover: #206EA2;
 $link-light-color-scheme-state-focused-outline: #338FCC;
-$link-light-color-scheme-underlined-border-bottom: rgba(#338FCC, 0.32);
-$link-light-color-scheme-underlined-state-visited-border-bottom: rgba(#338FCC, 0.32);
-$link-light-color-scheme-underlined-state-hover-border-bottom: rgba(#206EA2, 0.32);
 $link-dark-color-scheme-text: #57A4D7;
-$link-dark-color-scheme-state-visited: #57A4D7;
+$link-dark-color-scheme-border-bottom: rgba(#57A4D7, 0.32);
+$link-dark-color-scheme-state-visited-text: #6A2795;
+$link-dark-color-scheme-state-visited-border-bottom: rgba(106, 39, 149, 0.32);
+$link-dark-color-scheme-state-hover-text: #7FBAE1;
+$link-dark-color-scheme-state-hover-border-bottom: rgba(#7FBAE1, 0.32);
 $link-dark-color-scheme-state-active: #7FBAE1;
-$link-dark-color-scheme-state-hover: #7FBAE1;
 $link-dark-color-scheme-state-focused-outline: #57A4D7;
-$link-dark-color-scheme-underlined-border-bottom: rgba(#57A4D7, 0.32);
-$link-dark-color-scheme-underlined-state-visited-border-bottom: rgba(#57A4D7, 0.32);
-$link-dark-color-scheme-underlined-state-hover-border-bottom: rgba(#7FBAE1, 0.32);
 $link-size-icon-margin: 4px;
+$link-size-state-focused-outline-offset: 2px;
+$link-size-state-focused-outline-width: 2px;
+$link-animation-transition: color ease-out 300ms;
+$link-animation-state-hover-transition: color 0ms;
 $link-font-default: body;
 $list-size-horizontal-padding: 16px;
 $list-size-icon-padding: 4px;

@@ -6,7 +6,6 @@
     $foreground: map-get($theme, foreground);
 
     $link: map-get(map-get($theme, components), link);
-    $underlined-link: map-get($link, underlined);
 
     .mc-link {
         display: inline-block;
@@ -14,6 +13,8 @@
         color: map-get($link, text);
         text-decoration: none;
         cursor: pointer;
+
+        transition: $link-animation-transition;
 
         &:focus {
             outline: none;
@@ -23,8 +24,15 @@
             color: map-get($link, text);
         }
 
+        /* stylelint-disable no-descending-specificity */
         &:hover {
             color: map-get($link, state-hover-text);
+            transition: $link-animation-state-hover-transition;
+
+            &.mc-text-only,
+            &.mc-text-with-icon .mc-link__text {
+                border-bottom-color: map-get($link, state-hover-border-bottom);
+            }
         }
 
         &:active {
@@ -32,50 +40,29 @@
         }
 
         &.cdk-keyboard-focused {
-            outline: map-get($link, state-focused-outline) solid 2px;
-            outline-offset: 2px;
+            outline: map-get($link, state-focused-outline) solid $link-size-state-focused-outline-width;
+
+            outline-offset: $link-size-state-focused-outline-offset;
         }
 
         & .mc-icon {
             color: inherit;
         }
 
-        & .mc-link__text:not(:first-child) {
-            margin-left: $link-size-icon-margin;
+        &.mc-text-only,
+        &.mc-text-with-icon .mc-link__text {
+            border-bottom-style: solid;
+            border-bottom-width: 1px;
+            border-bottom-color: map-get($link, border-bottom);
         }
 
-        & .mc-link__text:not(:last-child) {
-            margin-right: $link-size-icon-margin;
-        }
-
-        /* stylelint-disable no-descending-specificity */
-        &.mc-link_underlined {
-            &.mc-text-only,
-            &.mc-text-with-icon .mc-link__text {
-                border-bottom-style: solid;
-                border-bottom-width: 1px;
-                border-bottom-color: map-get($underlined-link, border-bottom);
+        &.mc-text-with-icon .mc-link__text {
+            &:not(:first-child) {
+                margin-left: $link-size-icon-margin;
             }
 
-            &:visited {
-                &.mc-text-only,
-                &.mc-text-with-icon .mc-link__text {
-                    border-bottom-color: map-get($underlined-link, state-visited-border-bottom);
-                }
-            }
-
-            &:hover {
-                &.mc-text-only,
-                &.mc-text-with-icon .mc-link__text {
-                    border-bottom-color: map-get($underlined-link, state-hover-border-bottom);
-                }
-            }
-
-            &[disabled] {
-                &.mc-text-only,
-                &.mc-text-with-icon .mc-link__text {
-                    border-bottom-color: map-get($foreground, text-disabled);
-                }
+            &:not(:last-child) {
+                margin-right: $link-size-icon-margin;
             }
         }
 
@@ -84,26 +71,43 @@
 
             &.mc-text-only,
             &.mc-text-with-icon .mc-link__text {
-                border-bottom-style: solid;
-                border-bottom-width: 1px;
                 border-bottom-color: transparent;
             }
 
             &:hover {
                 &.mc-text-only,
                 &.mc-text-with-icon .mc-link__text {
-                    border-bottom-color: map-get($underlined-link, state-hover-border-bottom);
+                    border-bottom-color: map-get($link, state-hover-border-bottom);
+                }
+            }
+
+            &[disabled] {
+                &.mc-text-only,
+                &.mc-text-with-icon .mc-link__text {
+                    border-bottom-color: transparent;
                 }
             }
         }
-        /* stylelint-enable no-descending-specificity */
+
+        &.mc-link_no-underline {
+            &.mc-text-only,
+            &.mc-text-with-icon .mc-link__text {
+                border-bottom-color: transparent;
+            }
+        }
 
         &[disabled] {
             color: map-get($foreground, text-disabled);
 
             cursor: default;
             pointer-events: none;
+
+            &.mc-text-only,
+            &.mc-text-with-icon .mc-link__text {
+                border-bottom-color: inherit;
+            }
         }
+        /* stylelint-enable no-descending-specificity */
     }
 
     @media print {

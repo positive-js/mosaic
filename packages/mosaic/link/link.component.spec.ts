@@ -14,7 +14,7 @@ describe('McLink', () => {
                 McLinkIconTestApp,
                 McLinkPrintTestApp,
                 McLinkPseudoTestApp,
-                McLinkUnderlinedTestApp
+                McLinkNoUnderlineTestApp
             ]
         });
 
@@ -65,13 +65,13 @@ describe('McLink', () => {
         expect(link.classList).toContain('mc-link_pseudo');
     });
 
-    it('should has .mc-link_underlined', () => {
-        const fixture = TestBed.createComponent(McLinkUnderlinedTestApp);
+    it('should has .mc-link_no-underline', () => {
+        const fixture = TestBed.createComponent(McLinkNoUnderlineTestApp);
         fixture.detectChanges();
 
         const link = fixture.nativeElement.querySelector('[mc-link]');
 
-        expect(link.classList).toContain('mc-link_underlined');
+        expect(link.classList).toContain('mc-link_no-underline');
     });
 });
 
@@ -114,9 +114,9 @@ class McLinkIconTestApp {}
 class McLinkPseudoTestApp {}
 
 @Component({
-    selector: 'mc-link-underlined-test-app',
+    selector: 'mc-link-no-underline-test-app',
     template: `
-        <a href="http://localhost:3003/" mc-link underlined>Отчет сканирования</a>
+        <a href="http://localhost:3003/" mc-link noUnderline>Отчет сканирования</a>
     `
 })
-class McLinkUnderlinedTestApp {}
+class McLinkNoUnderlineTestApp {}

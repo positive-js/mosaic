@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Wed, 17 Mar 2021 07:43:45 GMT
+ * Generated on Tue, 23 Mar 2021 11:11:57 GMT
  */
 
 :root {
@@ -59,6 +59,8 @@
   --mc-input-size-width: 100%;
   --mc-input-size-min-height: 30px;
   --mc-link-size-icon-margin: 4px;
+  --mc-link-size-state-focused-outline-offset: 2px;
+  --mc-link-size-state-focused-outline-width: 2px;
   --mc-list-size-horizontal-padding: 16px;
   --mc-list-size-icon-padding: 4px;
   --mc-list-size-item-height: 28px;
