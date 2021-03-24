@@ -2,112 +2,142 @@
 @import '../core/styles/typography/typography-utils';
 
 
-@mixin mc-link-theme($theme) {
-    $foreground: map-get($theme, foreground);
+@mixin mc-link($foreground, $link) {
+    display: inline-block;
 
-    $link: map-get(map-get($theme, components), link);
+    color: map-get($link, text);
+    text-decoration: none;
+    cursor: pointer;
 
-    .mc-link {
-        display: inline-block;
+    transition: $link-animation-transition;
 
-        color: map-get($link, text);
-        text-decoration: none;
-        cursor: pointer;
+    &:focus {
+        outline: none;
+    }
 
-        transition: $link-animation-transition;
+    /* stylelint-disable no-descending-specificity */
+    &:hover {
+        color: map-get($link, state-hover-text);
+        transition: $link-animation-state-hover-transition;
 
-        &:focus {
-            outline: none;
+        &.mc-text-only,
+        &.mc-text-with-icon .mc-link__text {
+            border-bottom-color: map-get($link, state-hover-border-bottom);
         }
 
-        &:visited {
-            color: map-get($link, text);
-        }
-
-        /* stylelint-disable no-descending-specificity */
-        &:hover {
+        & .mc-icon {
             color: map-get($link, state-hover-text);
-            transition: $link-animation-state-hover-transition;
+        }
+    }
 
+    &:active {
+        color: map-get($link, state-active-text);
+    }
+
+    &.cdk-keyboard-focused {
+        outline: map-get($link, state-focused-outline) solid $link-size-state-focused-outline-width;
+
+        outline-offset: $link-size-state-focused-outline-offset;
+    }
+
+    & .mc-icon {
+        color: inherit;
+    }
+
+    &.mc-text-only,
+    &.mc-text-with-icon .mc-link__text {
+        border-bottom-style: solid;
+        border-bottom-width: 1px;
+        border-bottom-color: map-get($link, border-bottom);
+    }
+
+    &.mc-text-with-icon .mc-link__text {
+        &:not(:first-child) {
+            margin-left: $link-size-icon-margin;
+        }
+
+        &:not(:last-child) {
+            margin-right: $link-size-icon-margin;
+        }
+    }
+
+    &.mc-link_pseudo {
+        display: inline;
+
+        &.mc-text-only,
+        &.mc-text-with-icon .mc-link__text {
+            border-bottom-color: transparent;
+        }
+
+        &:hover {
             &.mc-text-only,
             &.mc-text-with-icon .mc-link__text {
                 border-bottom-color: map-get($link, state-hover-border-bottom);
             }
         }
 
-        &:active {
-            color: map-get($link, state-active-text);
+        &[disabled] {
+            &.mc-text-only,
+            &.mc-text-with-icon .mc-link__text {
+                border-bottom-color: transparent;
+            }
         }
+    }
 
-        &.cdk-keyboard-focused {
-            outline: map-get($link, state-focused-outline) solid $link-size-state-focused-outline-width;
-
-            outline-offset: $link-size-state-focused-outline-offset;
+    &.mc-link_no-underline {
+        &.mc-text-only,
+        &.mc-text-with-icon .mc-link__text {
+            border-bottom-color: transparent;
         }
+    }
 
-        & .mc-icon {
-            color: inherit;
-        }
+    &[disabled] {
+        color: map-get($foreground, text-disabled);
+
+        cursor: default;
+        pointer-events: none;
 
         &.mc-text-only,
         &.mc-text-with-icon .mc-link__text {
-            border-bottom-style: solid;
-            border-bottom-width: 1px;
-            border-bottom-color: map-get($link, border-bottom);
+            border-bottom-color: inherit;
         }
 
-        &.mc-text-with-icon .mc-link__text {
-            &:not(:first-child) {
-                margin-left: $link-size-icon-margin;
-            }
-
-            &:not(:last-child) {
-                margin-right: $link-size-icon-margin;
-            }
-        }
-
-        &.mc-link_pseudo {
-            display: inline;
-
-            &.mc-text-only,
-            &.mc-text-with-icon .mc-link__text {
-                border-bottom-color: transparent;
-            }
-
-            &:hover {
-                &.mc-text-only,
-                &.mc-text-with-icon .mc-link__text {
-                    border-bottom-color: map-get($link, state-hover-border-bottom);
-                }
-            }
-
-            &[disabled] {
-                &.mc-text-only,
-                &.mc-text-with-icon .mc-link__text {
-                    border-bottom-color: transparent;
-                }
-            }
-        }
-
-        &.mc-link_no-underline {
-            &.mc-text-only,
-            &.mc-text-with-icon .mc-link__text {
-                border-bottom-color: transparent;
-            }
-        }
-
-        &[disabled] {
+        & .mc-icon {
             color: map-get($foreground, text-disabled);
-
-            cursor: default;
-            pointer-events: none;
-
-            &.mc-text-only,
-            &.mc-text-with-icon .mc-link__text {
-                border-bottom-color: inherit;
-            }
         }
         /* stylelint-enable no-descending-specificity */
+    }
+}
+
+
+@mixin mc-link-theme($theme) {
+    $foreground: map-get($theme, foreground);
+
+    $link: map-get(map-get($theme, components), link);
+
+    .mc-link:not(.mc-link_use-visited) {
+        &:visited {
+            color: map-get($link, text);
+        }
+
+        @include mc-link($foreground, $link);
+    }
+
+    .mc-link.mc-link_use-visited {
+        &:visited {
+            color: map-get($link, state-visited-text);
+
+            &.mc-text-only,
+            &.mc-text-with-icon .mc-link__text {
+                border-bottom-color: map-get($link, state-visited-border-bottom);
+            }
+
+            & .mc-icon {
+                color: map-get($link, state-visited-text);
+            }
+        }
+
+        @include mc-link($foreground, $link);
     }
 
     @media print {
