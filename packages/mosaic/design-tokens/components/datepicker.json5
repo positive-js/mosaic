@@ -24,8 +24,13 @@
     },
     'datepicker-calendar': {
         size: {
-            padding: { value: '8px' },
+            'padding-top': { value: '16px' },
+            'padding-horizontal': { value: '8px' },
+            'padding-bottom': { value: '8px' },
+            'padding-blocks': { value: '12px' },
+
             'divider-width': { value: '1px' },
+
             icon: {
                 'border-width': { value: '2px' },
                 'prev-icon-transform': { value: 'translateX(2px) rotate(-45deg)' },

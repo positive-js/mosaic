@@ -2,20 +2,10 @@
 
 $mc-datepicker-non-touch-calendar-cell-size: 40px;
 $mc-datepicker-non-touch-calendar-width:
-    $mc-datepicker-non-touch-calendar-cell-size * 7 + $datepicker-calendar-size-padding * 2;
+    $mc-datepicker-non-touch-calendar-cell-size * 7 + $datepicker-calendar-size-padding-horizontal * 2;
 // Based on the natural height of the calendar in a month with 6 rows of dates
 // (largest the calendar will get).
-$mc-datepicker-non-touch-calendar-height: 344px;
-
-// Ideally the calendar would have a constant aspect ratio, no matter its size, and we would base
-// these measurements off the aspect ratio. Unfortunately, the aspect ratio does change a little as
-// the calendar grows, since some of the elements have pixel-based sizes. These numbers have been
-// chosen to minimize extra whitespace at larger sizes, while still ensuring we won't need
-// scrollbars at smaller sizes.
-$mc-datepicker-touch-landscape-width: 64vh;
-$mc-datepicker-touch-landscape-height: 80vh;
-$mc-datepicker-touch-portrait-width: 80vw;
-$mc-datepicker-touch-portrait-height: 100vw;
+$mc-datepicker-non-touch-calendar-height: 340px;
 
 
 .mc-datepicker__content {
@@ -26,6 +16,7 @@ $mc-datepicker-touch-portrait-height: 100vw;
         style: solid;
     }
 
+
     .mc-calendar {
         width: $mc-datepicker-non-touch-calendar-width;
         height: $mc-datepicker-non-touch-calendar-height;
@@ -34,19 +25,5 @@ $mc-datepicker-touch-portrait-height: 100vw;
     .mc-calendar__next-button[disabled],
     .mc-calendar__previous-button[disabled] {
         border: 0;
-    }
-}
-
-@media all and (orientation: landscape) {
-    .mc-calendar {
-        width: $mc-datepicker-touch-landscape-width;
-        height: $mc-datepicker-touch-landscape-height;
-    }
-}
-
-@media all and (orientation: portrait) {
-    .mc-calendar {
-        width: $mc-datepicker-touch-portrait-width;
-        height: $mc-datepicker-touch-portrait-height;
     }
 }

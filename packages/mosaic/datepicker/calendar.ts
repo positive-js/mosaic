@@ -39,6 +39,9 @@ export type McCalendarView = 'month' | 'year' | 'multi-year';
     selector: 'mc-calendar-header',
     templateUrl: 'calendar-header.html',
     exportAs: 'mcCalendarHeader',
+    host: {
+        class: 'mc-calendar-header'
+    },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })

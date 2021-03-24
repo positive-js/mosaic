@@ -1,11 +1,11 @@
 <table class="mc-calendar__table">
     <thead class="mc-calendar__table-header">
-    <tr>
-        <th *ngFor="let day of weekdays" [attr.aria-label]="day.long">{{day.narrow}}</th>
-    </tr>
-    <tr>
-        <th class="mc-calendar__table-header-divider" colspan="7" aria-hidden="true"></th>
-    </tr>
+        <tr>
+            <th *ngFor="let day of weekdays" [attr.aria-label]="day.long">{{day.narrow}}</th>
+        </tr>
+        <tr>
+            <th class="mc-calendar__table-header-divider" colspan="7" aria-hidden="true"></th>
+        </tr>
     </thead>
     <tbody mc-calendar-body
            [label]="monthLabel"

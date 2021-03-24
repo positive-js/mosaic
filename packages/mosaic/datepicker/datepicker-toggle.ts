@@ -43,7 +43,7 @@ export class McDatepickerToggle<D> implements AfterContentInit, OnChanges, OnDes
     /** Whether the toggle button is disabled. */
     @Input()
     get disabled(): boolean {
-        return this._disabled === undefined ? this.datepicker.disabled : !!this._disabled;
+        return this._disabled === undefined ? this.datepicker.disabled : this._disabled;
     }
 
     set disabled(value: boolean) {
@@ -90,13 +90,16 @@ export class McDatepickerToggle<D> implements AfterContentInit, OnChanges, OnDes
 
     private watchStateChanges() {
         const datepickerDisabled = this.datepicker ? this.datepicker.disabledChange : observableOf();
+
         const inputDisabled = this.datepicker && this.datepicker.datepickerInput ?
             this.datepicker.datepickerInput.disabledChange : observableOf();
+
         const datepickerToggled = this.datepicker ?
             merge(this.datepicker.openedStream, this.datepicker.closedStream) :
             observableOf();
 
         this.stateChanges.unsubscribe();
+
         this.stateChanges = merge(
             this.intl.changes,
             datepickerDisabled,

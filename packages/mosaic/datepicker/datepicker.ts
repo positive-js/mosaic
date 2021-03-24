@@ -92,7 +92,7 @@ export class McDatepickerContent<D> implements AfterViewInit {
     datepicker: McDatepicker<D>;
 
     ngAfterViewInit() {
-        this.calendar.focusActiveCell();
+        // this.calendar.focusActiveCell();
     }
 }
 

@@ -39,7 +39,10 @@
   --mc-datepicker-body-size-cell-margin: 5%;
   --mc-datepicker-body-size-cell-padding: 8px;
   --mc-datepicker-body-size-cell-border-width: 1px;
-  --mc-datepicker-calendar-size-padding: 8px;
+  --mc-datepicker-calendar-size-padding-top: 16px;
+  --mc-datepicker-calendar-size-padding-horizontal: 8px;
+  --mc-datepicker-calendar-size-padding-bottom: 8px;
+  --mc-datepicker-calendar-size-padding-blocks: 12px;
   --mc-datepicker-calendar-size-divider-width: 1px;
   --mc-datepicker-calendar-size-icon-border-width: 2px;
   --mc-datepicker-calendar-size-icon-prev-icon-transform: translateX(2px) rotate(-45deg);

@@ -1,27 +1,28 @@
-<div class="mc-calendar__header">
-    <div class="mc-calendar__controls">
-        <button mc-button type="button" class="mc-calendar__period-button"
-                (click)="currentPeriodClicked()" [attr.aria-label]="periodButtonLabel">
-            {{periodButtonText}}
-            <i class="mc mc-icon"
-               [class.mc-angle-up-M_16]="calendar.currentView !== 'month'"
-               [class.mc-angle-down-M_16]="calendar.currentView === 'month'"></i>
-        </button>
+<button mc-button
+        class="mc-button_transparent mc-calendar__period-button"
+        (click)="currentPeriodClicked()">
+    {{ periodButtonText }}
 
-        <div class="mc-calendar-spacer"></div>
+    <i class="mc mc-icon"
+       [class.mc-angle-up-M_16]="calendar.currentView !== 'month'"
+       [class.mc-angle-down-M_16]="calendar.currentView === 'month'">
+    </i>
+</button>
 
-        <ng-content></ng-content>
+<div class="mc-calendar-spacer"></div>
 
-        <button mc-button type="button" class="mc-calendar__previous-button"
-                [disabled]="!previousEnabled()" (click)="previousClicked()"
-                [attr.aria-label]="prevButtonLabel">
-            <i mc-icon="mc-angle-left-L_16"></i>
-        </button>
+<button mc-button
+        class="mc-button_transparent mc-calendar__previous-button"
+        [disabled]="!previousEnabled()"
+        (click)="previousClicked()">
 
-        <button mc-button type="button" class="mc-calendar__next-button"
-                [disabled]="!nextEnabled()" (click)="nextClicked()"
-                [attr.aria-label]="nextButtonLabel">
-            <i mc-icon="mc-angle-right-L_16"></i>
-        </button>
-    </div>
-</div>
+    <i mc-icon="mc-angle-left-L_16"></i>
+</button>
+
+<button mc-button
+        class="mc-button_transparent mc-calendar__next-button"
+        [disabled]="!nextEnabled()"
+        (click)="nextClicked()">
+
+    <i mc-icon="mc-angle-right-L_16"></i>
+</button>
