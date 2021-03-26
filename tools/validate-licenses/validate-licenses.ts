@@ -58,6 +58,7 @@ const ignoredPackages = [
     // Custom
     'cycle@1.0.3',
     'buffers@0.1.1',
+    'deep-freeze@0.0.1',
 
     // Apache
     'didyoumean@1.2.1'

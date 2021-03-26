@@ -4,7 +4,7 @@
 version: 2.1
 
 var_1: &default_docker_image circleci/node:12.13-browsers
-var_2: &cache_key mosaic-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}-9.1.0
+var_2: &cache_key mosaic-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}-11.0.0
 
 var_3: &job_defaults
     working_directory: ~/mosaic
