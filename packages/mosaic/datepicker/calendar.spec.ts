@@ -14,7 +14,7 @@ import {
 } from '@ptsecurity/cdk/testing';
 import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 
-import { McCalendar } from './calendar';
+import { McCalendar } from './calendar.component';
 import { McDatepickerIntl } from './datepicker-intl';
 import { McDatepickerModule } from './datepicker-module';
 

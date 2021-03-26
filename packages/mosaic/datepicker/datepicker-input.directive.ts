@@ -22,13 +22,28 @@ import {
     Validators
 } from '@angular/forms';
 import { DateAdapter, MC_DATE_FORMATS, McDateFormats } from '@ptsecurity/cdk/datetime';
-import { DOWN_ARROW } from '@ptsecurity/cdk/keycodes';
+import {
+    BACKSPACE,
+    DELETE,
+    DOWN_ARROW, END,
+    hasModifierKey, HOME,
+    isHorizontalMovement,
+    isLetterKey,
+    isVerticalMovement, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, SPACE, UP_ARROW
+} from '@ptsecurity/cdk/keycodes';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
-import { Subject, Subscription } from 'rxjs';
+import { noop, Subject, Subscription } from 'rxjs';
 
-import { McDatepicker } from './datepicker';
 import { createMissingDateImplError } from './datepicker-errors';
+import { McDatepicker } from './datepicker.component';
 
+
+// tslint:disable:naming-convention
+export enum DateParts {
+    year,
+    month,
+    date
+}
 
 /** @docs-private */
 export const MC_DATEPICKER_VALUE_ACCESSOR: any = {
@@ -86,14 +101,14 @@ let uniqueComponentIdSuffix: number = 0;
         '[attr.size]': 'getSize()',
         '[attr.autocomplete]': '"off"',
 
-        '(input)': 'onInput($event.target.value)',
+        // '(input)': 'onInput($event.target.value)',
         '(paste)': 'onPaste($event)',
         '(change)': 'onChange()',
 
         '(focus)': 'focusChanged(true)',
         '(blur)': 'onBlur()',
 
-        '(keydown)': 'onKeydown($event)'
+        '(keydown)': 'onKeyDown($event)'
     }
 })
 export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValueAccessor, Validator, OnDestroy {
@@ -131,9 +146,7 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
     /** The datepicker that this input is associated with. */
     @Input()
     set mcDatepicker(value: McDatepicker<D>) {
-        if (!value) {
-            return;
-        }
+        if (!value) { return; }
 
         this.datepicker = value;
         this.datepicker.registerInput(this);
@@ -261,6 +274,22 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
         return this.control;
     }
 
+    get selectionStart(): number | null {
+        return this.elementRef.nativeElement.selectionStart;
+    }
+
+    set selectionStart(value: number | null) {
+        this.elementRef.nativeElement.selectionStart = value;
+    }
+
+    get selectionEnd(): number | null {
+        return this.elementRef.nativeElement.selectionEnd;
+    }
+
+    set selectionEnd(value: number | null) {
+        this.elementRef.nativeElement.selectionEnd = value;
+    }
+
     private control: AbstractControl;
     private readonly uid = `mc-datepicker-${uniqueComponentIdSuffix++}`;
 
@@ -356,28 +385,72 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
         this.disabled = isDisabled;
     }
 
-    onKeydown(event: KeyboardEvent) {
-        // tslint:disable-next-line:deprecation
-        const isAltDownArrow = event.altKey && event.keyCode === DOWN_ARROW;
+    onKeyDown(event: KeyboardEvent): void {
+        // tslint:disable-next-line: deprecation
+        const keyCode = event.keyCode;
 
-        if (this.datepicker && isAltDownArrow && !this.elementRef.nativeElement.readOnly) {
-            this.datepicker.open();
+        if (isLetterKey(event) && !event.ctrlKey && !event.metaKey) {
             event.preventDefault();
+
+            // this.incorrectInput.emit();
+        } else if (
+            (hasModifierKey(event) && (isVerticalMovement(keyCode) || isHorizontalMovement(keyCode))) ||
+            event.ctrlKey || event.metaKey ||
+            [DELETE, BACKSPACE].includes(keyCode)
+        ) {
+            noop();
+        } else if (keyCode === SPACE) {
+            // this.spaceKeyHandler(event);
+        } else if ([HOME, PAGE_UP].includes(keyCode)) {
+            // this.createSelectionOfTimeComponentInInput(0);
+        } else if ([END, PAGE_DOWN].includes(keyCode)) {
+            // this.createSelectionOfTimeComponentInInput(this.viewValue.length);
+        } else if ([UP_ARROW, DOWN_ARROW].includes(keyCode)) {
+            event.preventDefault();
+
+            this.verticalArrowKeyHandler(keyCode);
+        } else if ([LEFT_ARROW, RIGHT_ARROW].includes(keyCode)) {
+            // this.horizontalArrowKeyHandler(keyCode);
+        } else if (/^\D$/.test(event.key)) {
+            event.preventDefault();
+
+            // const newValue = this.getNewValue(event.key, this.selectionStart as number);
+            // const formattedValue = this.replaceSymbols(newValue);
+            //
+            // if (newValue !== formattedValue) {
+            //     this.setViewValue(formattedValue);
+            //
+            //     setTimeout(this.onInput);
+            // } else {
+            //     this.incorrectInput.emit();
+            // }
+        } else {
+            // setTimeout(this.onInput);
         }
     }
 
-    onInput(value: string) {
-        let date = this.dateAdapter.parse(value, this.dateFormats.parse.dateInput);
-        this.lastValueValid = !date || this.dateAdapter.isValid(date);
-        date = this.getValidDateOrNull(date);
+    // onKeydown(event: KeyboardEvent) {
+    //     // tslint:disable-next-line:deprecation
+    //     const isAltDownArrow = event.altKey && event.keyCode === DOWN_ARROW;
+    //
+    //     if (this.datepicker && isAltDownArrow && !this.elementRef.nativeElement.readOnly) {
+    //         this.datepicker.open();
+    //         event.preventDefault();
+    //     }
+    // }
 
-        if (!this.dateAdapter.sameDate(date, this._value)) {
-            this._value = date;
-            this.cvaOnChange(date);
-            this.valueChange.emit(date);
-            this.dateInput.emit(new McDatepickerInputEvent(this, this.elementRef.nativeElement));
-        }
-    }
+    // onInput(value: string) {
+    //     let date = this.dateAdapter.parse(value, this.dateFormats.parse.dateInput);
+    //     this.lastValueValid = !date || this.dateAdapter.isValid(date);
+    //     date = this.getValidDateOrNull(date);
+    //
+    //     if (!this.dateAdapter.sameDate(date, this._value)) {
+    //         this._value = date;
+    //         this.cvaOnChange(date);
+    //         this.valueChange.emit(date);
+    //         this.dateInput.emit(new McDatepickerInputEvent(this, this.elementRef.nativeElement));
+    //     }
+    // }
 
     onChange() {
         this.dateChange.emit(new McDatepickerInputEvent(this, this.elementRef.nativeElement));
@@ -401,6 +474,133 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
         // todo maybe here need count length of mask
         // tslint:disable-next-line:no-magic-numbers
         return 10;
+    }
+
+    private getTimeEditMetrics(cursorPosition: number): {
+        modifiedTimePart: DateParts;
+        cursorStartPosition: number;
+        cursorEndPosition: number;
+    } {
+        const timeString: string = this.viewValue;
+        let modifiedTimePart: DateParts;
+        let cursorStartPosition: number;
+        let cursorEndPosition: number;
+
+        const hoursIndex = 0;
+        const minutesIndex = timeString.indexOf('.', hoursIndex + 1);
+        const secondsIndex = minutesIndex !== -1 ? timeString.indexOf('.', minutesIndex + 1) : -1;
+
+        if (secondsIndex !== -1 && cursorPosition > secondsIndex) {
+            modifiedTimePart = DateParts.date;
+            cursorStartPosition = secondsIndex + 1;
+            cursorEndPosition = timeString.length;
+        } else if (minutesIndex !== -1 && cursorPosition > minutesIndex) {
+            modifiedTimePart = DateParts.month;
+            cursorStartPosition = minutesIndex + 1;
+            cursorEndPosition = secondsIndex > -1 ? secondsIndex : timeString.length;
+        } else {
+            modifiedTimePart = DateParts.year;
+            cursorStartPosition = hoursIndex;
+            cursorEndPosition = minutesIndex !== -1 ? minutesIndex : timeString.length;
+        }
+
+        return { modifiedTimePart, cursorStartPosition, cursorEndPosition };
+    }
+
+    private incrementTime(dateVal: D, whatToIncrement: DateParts = DateParts.date): D {
+        console.log('incrementTime: '); // tslint:disable-line:no-console
+        let year = this.dateAdapter.getYear(dateVal);
+        let month = this.dateAdapter.getMonth(dateVal);
+        let date = this.dateAdapter.getDate(dateVal);
+
+        switch (whatToIncrement) {
+            case DateParts.date:
+                year++;
+                break;
+            case DateParts.month:
+                month++;
+                break;
+            case DateParts.year:
+                date++;
+                break;
+            default:
+        }
+
+        // if (date > SECONDS_PER_MINUTE) { date = 0; }
+        //
+        // if (month > MINUTES_PER_HOUR) { month = 0; }
+        //
+        // if (date > HOURS_PER_DAY) { date = 0; }
+
+        return this.dateAdapter.createDateTime(
+            year,
+            month,
+            date,
+            this.dateAdapter.getHours(this.value as D),
+            this.dateAdapter.getMinutes(this.value as D),
+            this.dateAdapter.getSeconds(this.value as D),
+            this.dateAdapter.getMilliseconds(this.value as D)
+        );
+    }
+
+    private decrementTime(dateVal: D, whatToDecrement: DateParts = DateParts.date): D {
+        console.log('decrementTime: '); // tslint:disable-line:no-console
+        let year = this.dateAdapter.getYear(dateVal);
+        let month = this.dateAdapter.getMonth(dateVal);
+        let date = this.dateAdapter.getDate(dateVal);
+
+        switch (whatToDecrement) {
+            case DateParts.date:
+                year--;
+                break;
+            case DateParts.month:
+                month--;
+                break;
+            case DateParts.year:
+                date--;
+                break;
+            default:
+        }
+
+        // if (date < 0) { date = SECONDS_PER_MINUTE; }
+        //
+        // if (month < 0) { month = MINUTES_PER_HOUR; }
+        //
+        // if (year < 0) { year = HOURS_PER_DAY; }
+
+        return this.dateAdapter.createDateTime(
+            year,
+            month,
+            date,
+            this.dateAdapter.getHours(this.value as D),
+            this.dateAdapter.getMinutes(this.value as D),
+            this.dateAdapter.getSeconds(this.value as D),
+            this.dateAdapter.getMilliseconds(this.value as D)
+        );
+    }
+
+    private verticalArrowKeyHandler(keyCode: number): void {
+        if (!this.value) { return; }
+
+        let changedTime;
+
+        const newEditParams = this.getTimeEditMetrics(this.selectionStart as number);
+
+        if (keyCode === UP_ARROW) {
+            changedTime = this.incrementTime(this.value, newEditParams.modifiedTimePart);
+        }
+
+        if (keyCode === DOWN_ARROW) {
+            changedTime = this.decrementTime(this.value, newEditParams.modifiedTimePart);
+        }
+
+        this.value = changedTime;
+
+        this.selectionStart = newEditParams.cursorStartPosition;
+        this.selectionEnd = newEditParams.cursorEndPosition;
+
+        this.onChange();
+        this.stateChanges.next();
     }
 
     /** Checks whether the input is invalid based on the native validation. */

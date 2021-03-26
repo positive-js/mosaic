@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { McCalendarBody, McCalendarCell, McCalendarCellCssClasses } from './calendar-body';
+import { McCalendarBody, McCalendarCell, McCalendarCellCssClasses } from './calendar-body.component';
 
 
 describe('McCalendarBody', () => {

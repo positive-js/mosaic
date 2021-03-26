@@ -30,8 +30,7 @@ export class McCalendarCell {
         public ariaLabel: string,
         public enabled: boolean,
         public cssClasses?: McCalendarCellCssClasses
-    ) {
-    }
+    ) {}
 }
 
 
@@ -92,8 +91,7 @@ export class McCalendarBody implements OnChanges {
     /** Width of an individual cell. */
     cellWidth: string;
 
-    constructor(private elementRef: ElementRef<HTMLElement>, private ngZone: NgZone) {
-    }
+    constructor(private elementRef: ElementRef<HTMLElement>, private ngZone: NgZone) {}
 
     cellClicked(cell: McCalendarCell): void {
         if (cell.enabled) {

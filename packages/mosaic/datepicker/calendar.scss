@@ -56,24 +56,26 @@
 .mc-calendar__table-header th {
     text-align: center;
     height: 30px;
-}
 
-.mc-calendar__table-header-divider {
-    position: relative;
-    height: var(--mc-datepicker-calendar-size-divider-width, $datepicker-calendar-size-divider-width);
+    &.mc-calendar__table-header-divider {
+        position: relative;
+        height: calc(
+            var(--mc-datepicker-calendar-size-padding-blocks, #{$datepicker-calendar-size-padding-blocks}) - 2px
+        );
 
-    // We use an absolutely positioned pseudo-element as the divider line for the table header so we
-    // can extend it all the way to the edge of the calendar.
-    &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: calc(
-            -1 * var(--mc-datepicker-calendar-size-padding-horizontal, #{$datepicker-calendar-size-padding-horizontal})
-        );
-        right: calc(
-            -1 * var(--mc-datepicker-calendar-size-padding-horizontal, #{$datepicker-calendar-size-padding-horizontal})
-        );
-        height: var(--mc-datepicker-calendar-size-divider-width, $datepicker-calendar-size-divider-width);
+        $horizontal-padding: $datepicker-calendar-size-padding-horizontal;
+
+        // We use an absolutely positioned pseudo-element as the divider line for the table header so we
+        // can extend it all the way to the edge of the calendar.
+        &::after {
+            content: '';
+
+            position: absolute;
+            top: 0;
+            left: calc(-1 * var(--mc-datepicker-calendar-size-padding-horizontal, #{$horizontal-padding}));
+            right: calc(-1 * var(--mc-datepicker-calendar-size-padding-horizontal, #{$horizontal-padding}));
+
+            height: var(--mc-datepicker-calendar-size-divider-width, $datepicker-calendar-size-divider-width);
+        }
     }
 }

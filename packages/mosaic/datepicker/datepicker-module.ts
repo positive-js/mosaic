@@ -6,19 +6,19 @@ import { NgModule } from '@angular/core';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 
-import { McCalendar, McCalendarHeader } from './calendar';
-import { McCalendarBody } from './calendar-body';
+import { McCalendar, McCalendarHeader } from './calendar.component';
+import { McCalendarBody } from './calendar-body.component';
 import {
     McDatepicker,
     McDatepickerContent,
     MC_DATEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER
-} from './datepicker';
-import { McDatepickerInput } from './datepicker-input';
+} from './datepicker.component';
+import { McDatepickerInput } from './datepicker-input.directive';
 import { McDatepickerIntl } from './datepicker-intl';
-import { McDatepickerToggle, McDatepickerToggleIcon } from './datepicker-toggle';
-import { McMonthView } from './month-view';
-import { McMultiYearView } from './multi-year-view';
-import { McYearView } from './year-view';
+import { McDatepickerToggle, McDatepickerToggleIcon } from './datepicker-toggle.component';
+import { McMonthView } from './month-view.component';
+import { McMultiYearView } from './multi-year-view.component';
+import { McYearView } from './year-view.component';
 
 
 @NgModule({

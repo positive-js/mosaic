@@ -34,11 +34,11 @@ import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { merge, Subject, Subscription } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 
-import { McCalendar } from './calendar';
-import { McCalendarCellCssClasses } from './calendar-body';
+import { McCalendar } from './calendar.component';
+import { McCalendarCellCssClasses } from './calendar-body.component';
 import { mcDatepickerAnimations } from './datepicker-animations';
 import { createMissingDateImplError } from './datepicker-errors';
-import { McDatepickerInput } from './datepicker-input';
+import { McDatepickerInput } from './datepicker-input.directive';
 
 
 /** Used to generate a unique ID for each datepicker instance. */

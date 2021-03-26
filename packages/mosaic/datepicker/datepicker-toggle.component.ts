@@ -16,7 +16,7 @@ import {
 import { McButton } from '@ptsecurity/mosaic/button';
 import { merge, of as observableOf, Subscription } from 'rxjs';
 
-import { McDatepicker } from './datepicker';
+import { McDatepicker } from './datepicker.component';
 import { McDatepickerIntl } from './datepicker-intl';
 
 

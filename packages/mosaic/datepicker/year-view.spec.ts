@@ -16,8 +16,8 @@ import {
 import { dispatchFakeEvent, dispatchKeyboardEvent } from '@ptsecurity/cdk/testing';
 import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 
-import { McCalendarBody } from './calendar-body';
-import { McYearView } from './year-view';
+import { McCalendarBody } from './calendar-body.component';
+import { McYearView } from './year-view.component';
 
 // Depending on whether rollup is used, moment needs to be imported differently.
 // Since Moment.js doesn't have a default export, we normally need to import using the `* as`

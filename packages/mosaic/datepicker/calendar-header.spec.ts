@@ -5,10 +5,10 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 
-import { McCalendar } from './calendar';
+import { McCalendar } from './calendar.component';
 import { McDatepickerIntl } from './datepicker-intl';
 import { McDatepickerModule } from './datepicker-module';
-import { yearsPerPage } from './multi-year-view';
+import { yearsPerPage } from './multi-year-view.component';
 
 // Depending on whether rollup is used, moment needs to be imported differently.
 // Since Moment.js doesn't have a default export, we normally need to import using the `* as`

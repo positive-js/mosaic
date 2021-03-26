@@ -29,9 +29,9 @@ import { Subject } from 'rxjs';
 
 import { McInputModule } from '../input/index';
 
-import { McDatepicker } from './datepicker';
-import { McDatepickerInput } from './datepicker-input';
-import { McDatepickerToggle } from './datepicker-toggle';
+import { McDatepicker } from './datepicker.component';
+import { McDatepickerInput } from './datepicker-input.directive';
+import { McDatepickerToggle } from './datepicker-toggle.component';
 import { MC_DATEPICKER_SCROLL_STRATEGY, McDatepickerIntl, McDatepickerModule } from './index';
 
 // tslint:disable-next-line:ordered-imports

@@ -1,4 +1,5 @@
 <button mc-button
+        [tabindex]="'-1'"
         class="mc-button_transparent mc-calendar__period-button"
         (click)="currentPeriodClicked()">
     {{ periodButtonText }}
@@ -12,6 +13,7 @@
 <div class="mc-calendar-spacer"></div>
 
 <button mc-button
+        [tabindex]="'-1'"
         class="mc-button_transparent mc-calendar__previous-button"
         [disabled]="!previousEnabled()"
         (click)="previousClicked()">
@@ -20,6 +22,7 @@
 </button>
 
 <button mc-button
+        [tabindex]="'-1'"
         class="mc-button_transparent mc-calendar__next-button"
         [disabled]="!nextEnabled()"
         (click)="nextClicked()">

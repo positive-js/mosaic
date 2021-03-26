@@ -20,12 +20,12 @@ import {
 import { DateAdapter, MC_DATE_FORMATS, McDateFormats } from '@ptsecurity/cdk/datetime';
 import { Subject, Subscription } from 'rxjs';
 
-import { McCalendarCellCssClasses } from './calendar-body';
+import { McCalendarCellCssClasses } from './calendar-body.component';
 import { createMissingDateImplError } from './datepicker-errors';
 import { McDatepickerIntl } from './datepicker-intl';
-import { McMonthView } from './month-view';
-import { McMultiYearView, yearsPerPage } from './multi-year-view';
-import { McYearView } from './year-view';
+import { McMonthView } from './month-view.component';
+import { McMultiYearView, yearsPerPage } from './multi-year-view.component';
+import { McYearView } from './year-view.component';
 
 
 /**

@@ -26,7 +26,7 @@ import {
     SPACE
 } from '@ptsecurity/cdk/keycodes';
 
-import { McCalendarBody, McCalendarCell } from './calendar-body';
+import { McCalendarBody, McCalendarCell } from './calendar-body.component';
 import { createMissingDateImplError } from './datepicker-errors';
 
 
