@@ -2,93 +2,158 @@
 @import '../core/styles/typography/typography-utils';
 
 
+@mixin mc-link($foreground, $link) {
+    display: inline-block;
+
+    color: map-get($link, text);
+    text-decoration: none;
+    cursor: pointer;
+
+    transition: $link-animation-transition;
+
+    &:focus {
+        outline: none;
+    }
+
+    /* stylelint-disable no-descending-specificity */
+    &:hover {
+        color: map-get($link, state-hover-text);
+        transition: $link-animation-state-hover-transition;
+
+        &.mc-text-only,
+        &.mc-text-with-icon .mc-link__text {
+            border-bottom-color: map-get($link, state-hover-border-bottom);
+        }
+
+        & .mc-icon {
+            color: map-get($link, state-hover-text);
+        }
+    }
+
+    &:active {
+        color: map-get($link, state-active-text);
+    }
+
+    &.cdk-keyboard-focused {
+        outline: map-get($link, state-focused-outline) solid $link-size-state-focused-outline-width;
+
+        outline-offset: $link-size-state-focused-outline-offset;
+    }
+
+    & .mc-icon {
+        color: inherit;
+    }
+
+    &.mc-text-only,
+    &.mc-text-with-icon .mc-link__text {
+        border-bottom-style: solid;
+        border-bottom-width: 1px;
+        border-bottom-color: map-get($link, border-bottom);
+    }
+
+    &.mc-text-with-icon .mc-link__text {
+        &:not(:first-child) {
+            margin-left: $link-size-icon-margin;
+        }
+
+        &:not(:last-child) {
+            margin-right: $link-size-icon-margin;
+        }
+    }
+
+    &.mc-link_pseudo {
+        display: inline;
+
+        &.mc-text-only,
+        &.mc-text-with-icon .mc-link__text {
+            border-bottom-color: transparent;
+        }
+
+        &:hover {
+            &.mc-text-only,
+            &.mc-text-with-icon .mc-link__text {
+                border-bottom-color: map-get($link, state-hover-border-bottom);
+            }
+        }
+
+        &[disabled] {
+            &.mc-text-only,
+            &.mc-text-with-icon .mc-link__text {
+                border-bottom-color: transparent;
+            }
+        }
+    }
+
+    &.mc-link_no-underline {
+        &.mc-text-only,
+        &.mc-text-with-icon .mc-link__text {
+            border-bottom-color: transparent;
+        }
+    }
+
+    &[disabled] {
+        color: map-get($foreground, text-disabled);
+
+        cursor: default;
+        pointer-events: none;
+
+        &.mc-text-only,
+        &.mc-text-with-icon .mc-link__text {
+            border-bottom-color: inherit;
+        }
+
+        & .mc-icon {
+            color: map-get($foreground, text-disabled);
+        }
+        /* stylelint-enable no-descending-specificity */
+    }
+}
+
+
 @mixin mc-link-theme($theme) {
     $foreground: map-get($theme, foreground);
 
     $link: map-get(map-get($theme, components), link);
 
-    .mc-link {
-        color: map-get($link, text);
-
-        text-decoration: none;
-
-        cursor: pointer;
-
-        &:focus {
-            outline: none;
-        }
-
+    .mc-link:not(.mc-link_use-visited) {
         &:visited {
             color: map-get($link, text);
         }
 
-        &:hover {
-            color: map-get($link, state-hover-text);
-        }
+        @include mc-link($foreground, $link);
+    }
 
-        &.cdk-keyboard-focused {
-            outline: map-get($link, state-focused-outline) solid 2px;
-            outline-offset: 2px;
-        }
+    .mc-link.mc-link_use-visited {
+        &:visited {
+            color: map-get($link, state-visited-text);
 
-        & .mc-link__icon {
-            color: inherit;
-        }
-
-        & .mc-link__text:not(:first-child) {
-            margin-left: $link-size-icon-margin;
-        }
-
-        & .mc-link__text:not(:last-child) {
-            margin-right: $link-size-icon-margin;
-        }
-
-        &.mc-link_dashed .mc-link__text {
-            $dashed-link: map-get($link, dashed);
-
-            border-bottom-style: dashed;
-            border-bottom-width: 1px;
-            border-bottom-color: map-get($link, border-bottom);
-
-            &:visited {
-                border-bottom-color: map-get($link, border-bottom);
+            &.mc-text-only,
+            &.mc-text-with-icon .mc-link__text {
+                border-bottom-color: map-get($link, state-visited-border-bottom);
             }
 
-            &:hover {
-                border-bottom-color: map-get($link, state-hover-border-bottom);
+            & .mc-icon {
+                color: map-get($link, state-visited-text);
             }
         }
 
-        /* stylelint-disable no-descending-specificity */
-        &.mc-link_underlined .mc-link__text {
-            $underlined-link: map-get($link, underlined);
+        @include mc-link($foreground, $link);
+    }
 
-            border-bottom-style: solid;
-            border-bottom-width: 1px;
-            border-bottom-color: map-get($link, border-bottom);
+    @media print {
+        .mc-link_print:not([disabled]) {
+            color: map-get($foreground, text);
 
-            &:visited {
-                border-bottom-color: map-get($link, border-bottom);
+            &.mc-text-only,
+            &.mc-text-with-icon .mc-link__text {
+                border-bottom: none;
             }
 
-            &:hover {
-                border-bottom-color: map-get($link, state-hover-border-bottom);
-            }
-        }
-        /* stylelint-enable no-descending-specificity */
+            &::after {
+                color: map-get($foreground, text);
 
-        &[disabled] {
-            color: map-get($foreground, text-disabled);
-
-            cursor: default;
-            pointer-events: none;
-
-            &.mc-link_underlined .mc-link__text {
-                border-bottom-color: rgba(map-get($foreground, text-disabled), 0.64);
-            }
-
-            &.mc-link_dashed .mc-link__text {
-                border-bottom-color: map-get($foreground, text-disabled);
+                content: ":\a" attr(print);
+                white-space: pre;
             }
         }
     }

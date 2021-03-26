@@ -46,6 +46,9 @@
 
         <mc-tree-node-toggle [node]="node"></mc-tree-node-toggle>
 
-        <span [innerHTML]="treeControl.getViewValue(node) | mcHighlight : treeControl.filterValue.value"></span>
+        <div>
+            <i mc-icon="mc-close-M_16"></i>
+            <span [innerHTML]="treeControl.getViewValue(node) | mcHighlight : treeControl.filterValue.value"></span>
+        </div>
     </mc-tree-option>
 </mc-tree-selection>

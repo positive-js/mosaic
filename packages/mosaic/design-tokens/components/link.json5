@@ -2,58 +2,52 @@
     link: {
         'light-color-scheme': {
             text: { value: '{light-color-scheme.primary.default.value}' },
+            'border-bottom': { value: 'rgba({light-color-scheme.primary.default.value}, 0.32)' },
 
-            'state-hover': {
-                text: { value: '{light-color-scheme.primary.palette.value.600.value}' }
+            'state-visited': {
+                'text': { value: '#6A2795' },
+                'border-bottom': { value: 'rgba(106, 39, 149, 0.32)' }
             },
+            'state-hover': {
+                'text': { value: '{light-color-scheme.primary.palette.value.600.value}' },
+                'border-bottom': { value: 'rgba({light-color-scheme.primary.palette.value.600.value}, 0.32)' }
+            },
+
+            'state-active': { value: '{light-color-scheme.primary.palette.value.700.value}' },
+
             'state-focused': {
                 outline: { value: '{light-color-scheme.states.focused-color.value}' }
-            },
-
-            dashed: {
-                'border-bottom': { value: 'rgba({light-color-scheme.primary.default.value}, 0.5)' },
-
-                'state-hover': {
-                    'border-bottom': { value: 'rgba({light-color-scheme.primary.palette.value.600.value}, 0.5)' }
-                }
-            },
-
-            underlined: {
-                'border-bottom': { value: 'rgba({light-color-scheme.primary.default.value}, 0.32)' },
-
-                'state-hover': {
-                    'border-bottom': { value: 'rgba({light-color-scheme.primary.palette.value.600.value}, 0.32)' }
-                }
             }
         },
         'dark-color-scheme': {
-            text: { value: '{light-color-scheme.primary.default.value}' },
+            text: { value: '{dark-color-scheme.primary.default.value}' },
+            'border-bottom': { value: 'rgba({dark-color-scheme.primary.default.value}, 0.32)' },
 
-            'state-hover': {
-                text: { value: '{dark-color-scheme.primary.palette.value.300.value}' }
+            'state-visited': {
+                'text': { value: '#6A2795' },
+                'border-bottom': { value: 'rgba(106, 39, 149, 0.32)' }
             },
-
+            'state-hover': {
+                'text': { value: '{dark-color-scheme.primary.palette.value.300.value}' },
+                'border-bottom': { value: 'rgba({dark-color-scheme.primary.palette.value.300.value}, 0.32)' }
+            },
+            'state-active': { value: '{dark-color-scheme.primary.palette.value.300.value}' },
             'state-focused': {
                 outline: { value: '{dark-color-scheme.states.focused-color.value}' }
-            },
-
-            dashed: {
-                'border-bottom': { value: 'rgba({light-color-scheme.primary.default.value}, 0.5)' },
-
-                'state-hover': {
-                    'border-bottom': { value: 'rgba({light-color-scheme.primary.palette.value.300.value}, 0.5)' }
-                }
-            },
-            underlined: {
-                'border-bottom': { value: 'rgba({light-color-scheme.primary.default.value}, 0.32)' },
-
-                'state-hover': {
-                    'border-bottom': { value: 'rgba({light-color-scheme.primary.palette.value.300.value}, 0.32)' }
-                }
             }
         },
         size: {
-            'icon-margin': { value: '{margin.iconText_S-horizontal}' }
+            'icon-margin': { value: '{margin.iconText_S-horizontal}' },
+            'state-focused': {
+                'outline-offset': { value: '2px' },
+                'outline-width': { value: '2px' }
+            }
+        },
+        animation: {
+            'transition': { value: 'color ease-out 300ms' },
+            'state-hover': {
+                'transition': { value: 'color 0ms' }
+            }
         },
         font: {
             default: { value: 'body' }

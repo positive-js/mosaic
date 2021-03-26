@@ -106,7 +106,6 @@
         state-focused-shadow: $checkbox-light-color-scheme-states-focused-shadow
     );
 
-
     $form-field: (
         border: $form-field-light-color-scheme-border,
         background: $form-field-light-color-scheme-background,
@@ -118,19 +117,17 @@
 
     $link: (
         text: $link-light-color-scheme-text,
+        border-bottom: $link-light-color-scheme-border-bottom,
+
+        state-visited-text: $link-light-color-scheme-state-visited-text,
+        state-visited-border-bottom: $link-light-color-scheme-state-visited-border-bottom,
 
         state-hover-text: $link-light-color-scheme-state-hover-text,
-        state-focused-outline: $link-light-color-scheme-state-focused-outline,
+        state-hover-border-bottom: $link-light-color-scheme-state-hover-border-bottom,
 
-        dashed: (
-            border-bottom: $link-light-color-scheme-dashed-border-bottom,
-            state-hover-border-bottom: $link-light-color-scheme-dashed-state-hover-border-bottom
-        ),
+        state-active-text: $link-light-color-scheme-state-active,
 
-        underlined: (
-            border-bottom: $link-light-color-scheme-underlined-border-bottom,
-            state-hover-border-bottom: $link-light-color-scheme-underlined-state-hover-border-bottom
-        )
+        state-focused-outline: $link-light-color-scheme-state-focused-outline
     );
 
     $modal: (
@@ -378,19 +375,17 @@
 
     $link: (
         text: $link-dark-color-scheme-text,
+        border-bottom: $link-dark-color-scheme-border-bottom,
+
+        state-visited-text: $link-dark-color-scheme-state-visited-text,
+        state-visited-border-bottom: $link-dark-color-scheme-state-visited-border-bottom,
 
         state-hover-text: $link-dark-color-scheme-state-hover-text,
-        state-focused-outline: $link-dark-color-scheme-state-focused-outline,
+        state-hover-border-bottom: $link-dark-color-scheme-state-hover-border-bottom,
 
-        dashed: (
-            border-bottom: $link-dark-color-scheme-dashed-border-bottom,
-            state-hover-border-bottom: $link-dark-color-scheme-dashed-state-hover-border-bottom
-        ),
+        state-active-text: $link-dark-color-scheme-state-active,
 
-        underlined: (
-            border-bottom: $link-dark-color-scheme-underlined-border-bottom,
-            state-hover-border-bottom: $link-dark-color-scheme-underlined-state-hover-border-bottom
-        )
+        state-focused-outline: $link-dark-color-scheme-state-focused-outline
     );
 
     $modal: (

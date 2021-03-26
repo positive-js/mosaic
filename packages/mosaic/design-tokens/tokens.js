@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Wed, 17 Mar 2021 07:43:45 GMT
+ * Generated on Tue, 23 Mar 2021 13:11:13 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
@@ -466,20 +466,26 @@ export const InputSizeMinHeight = "30px";
 export const InputFontDefault = "body";
 export const InputFontMonospace = "body-mono";
 export const LinkLightColorSchemeText = "#338FCC";
+export const LinkLightColorSchemeBorderBottom = "rgba(#338FCC, 0.32)";
+export const LinkLightColorSchemeStateVisitedText = "#6A2795";
+export const LinkLightColorSchemeStateVisitedBorderBottom = "rgba(106, 39, 149, 0.32)";
 export const LinkLightColorSchemeStateHoverText = "#206EA2";
+export const LinkLightColorSchemeStateHoverBorderBottom = "rgba(#206EA2, 0.32)";
+export const LinkLightColorSchemeStateActive = "#114E77";
 export const LinkLightColorSchemeStateFocusedOutline = "#338FCC";
-export const LinkLightColorSchemeDashedBorderBottom = "rgba(#338FCC, 0.5)";
-export const LinkLightColorSchemeDashedStateHoverBorderBottom = "rgba(#206EA2, 0.5)";
-export const LinkLightColorSchemeUnderlinedBorderBottom = "rgba(#338FCC, 0.32)";
-export const LinkLightColorSchemeUnderlinedStateHoverBorderBottom = "rgba(#206EA2, 0.32)";
-export const LinkDarkColorSchemeText = "#338FCC";
+export const LinkDarkColorSchemeText = "#57A4D7";
+export const LinkDarkColorSchemeBorderBottom = "rgba(#57A4D7, 0.32)";
+export const LinkDarkColorSchemeStateVisitedText = "#6A2795";
+export const LinkDarkColorSchemeStateVisitedBorderBottom = "rgba(106, 39, 149, 0.32)";
 export const LinkDarkColorSchemeStateHoverText = "#7FBAE1";
+export const LinkDarkColorSchemeStateHoverBorderBottom = "rgba(#7FBAE1, 0.32)";
+export const LinkDarkColorSchemeStateActive = "#7FBAE1";
 export const LinkDarkColorSchemeStateFocusedOutline = "#57A4D7";
-export const LinkDarkColorSchemeDashedBorderBottom = "rgba(#338FCC, 0.5)";
-export const LinkDarkColorSchemeDashedStateHoverBorderBottom = "rgba(#7FBAE1, 0.5)";
-export const LinkDarkColorSchemeUnderlinedBorderBottom = "rgba(#338FCC, 0.32)";
-export const LinkDarkColorSchemeUnderlinedStateHoverBorderBottom = "rgba(#7FBAE1, 0.32)";
 export const LinkSizeIconMargin = "4px";
+export const LinkSizeStateFocusedOutlineOffset = "2px";
+export const LinkSizeStateFocusedOutlineWidth = "2px";
+export const LinkAnimationTransition = "color ease-out 300ms";
+export const LinkAnimationStateHoverTransition = "color 0ms";
 export const LinkFontDefault = "body";
 export const ListSizeHorizontalPadding = "16px";
 export const ListSizeIconPadding = "4px";

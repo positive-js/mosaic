@@ -1,20 +1,27 @@
-<div style="padding: 10px;">
-    <a class="mc-link mc-link_dashed"
-       [ngClass]="{'mc-active' : active}">
-        <span class="mc-link__text">Сохранить</span>
-    </a>
+<div class="docs-padding">
+    <span mc-link pseudo>Отчет сканирования</span>
 </div>
-<div style="padding: 10px;">
-    <a class="mc-link mc-link_dashed" [disabled]="disabled">
-        <span class="mc-link__text">Сохранить</span>
-        <i mc-icon="mc-angle-L_16" class="mc-link__icon"></i>
-    </a>
+
+<div class="docs-padding">
+    <span mc-link pseudo>
+        <i mc-icon="mc-calendar_16"></i>
+        <span class="mc-link__text">Отчет сканирования</span>
+    </span>
 </div>
-<div style="padding: 10px;">
-    <a class="mc-link mc-link_dashed" [disabled]="disabled"
-       [ngClass]="{'mc-focused': focus}">
-        <i mc-icon="mc-calendar_16" class="mc-link__icon"></i>
-        <span class="mc-link__text">Сохранить</span>
-        <i mc-icon="mc-angle-L_16" class="mc-link__icon"></i>
-    </a>
+
+<div class="docs-padding">
+    <span mc-link pseudo [disabled]="disabled">
+        <i mc-icon="mc-calendar_16"></i>
+        <span class="mc-link__text">Отчет сканирования</span>
+    </span>
+</div>
+
+<div class="docs-padding fixed-width">
+    В
+    <span mc-link pseudo>западной традиции</span>
+    рыбой выступает фрагмент латинского текста из философского трактата Цицерона
+    <span mc-link pseudo>«О пределах добра и зла», написанного в 45 году до нашей эры.</span>
+    <span mc-link pseudo>
+        Впервые этот текст был применен для набора шрифтовых образцов неизвестным печатником еще в XVI веке.
+    </span>
 </div>
