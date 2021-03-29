@@ -283,6 +283,7 @@ export class McDatepicker<D> implements OnDestroy {
 
     /** Selects the given date */
     select(date: D): void {
+        console.log('select: '); // tslint:disable-line:no-console
         const oldValue = this.selected;
         this.selected = date;
 
@@ -312,7 +313,20 @@ export class McDatepicker<D> implements OnDestroy {
 
         this.datepickerInput = input;
         this.inputSubscription = this.datepickerInput.valueChange
-            .subscribe((value: D | null) => this.selected = value);
+            .subscribe((value: D | null) => {
+                console.log('this.selected = value: '); // tslint:disable-line:no-console
+
+                this.select(value as D);
+                // this.selectedChanged.next(value as D);
+
+                this.selected = value;
+                // @ts-ignore
+                if (this.popupComponentRef) {
+                    this.popupComponentRef.instance.calendar.monthView.init();
+                    this.popupComponentRef.instance.calendar.activeDate = value as D;
+                }
+                // this.popupComponentRef?.instance.calendar.yearView.init();
+            });
     }
 
     /** Open the calendar. */
@@ -409,7 +423,6 @@ export class McDatepicker<D> implements OnDestroy {
         });
 
         this.popupRef = this.overlay.create(overlayConfig);
-        this.popupRef.overlayElement.setAttribute('role', 'dialog');
 
         this.closeSubscription = this.closingActions()
             .subscribe(() => this.close());

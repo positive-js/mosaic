@@ -45,6 +45,8 @@ export enum DateParts {
     date
 }
 
+export const divider = '.';
+
 /** @docs-private */
 export const MC_DATEPICKER_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
@@ -410,7 +412,7 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
 
             this.verticalArrowKeyHandler(keyCode);
         } else if ([LEFT_ARROW, RIGHT_ARROW].includes(keyCode)) {
-            // this.horizontalArrowKeyHandler(keyCode);
+            this.horizontalArrowKeyHandler(keyCode);
         } else if (/^\D$/.test(event.key)) {
             event.preventDefault();
 
@@ -487,8 +489,8 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
         let cursorEndPosition: number;
 
         const hoursIndex = 0;
-        const minutesIndex = timeString.indexOf('.', hoursIndex + 1);
-        const secondsIndex = minutesIndex !== -1 ? timeString.indexOf('.', minutesIndex + 1) : -1;
+        const minutesIndex = timeString.indexOf(divider, hoursIndex + 1);
+        const secondsIndex = minutesIndex !== -1 ? timeString.indexOf(divider, minutesIndex + 1) : -1;
 
         if (secondsIndex !== -1 && cursorPosition > secondsIndex) {
             modifiedTimePart = DateParts.date;
@@ -507,7 +509,7 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
         return { modifiedTimePart, cursorStartPosition, cursorEndPosition };
     }
 
-    private incrementTime(dateVal: D, whatToIncrement: DateParts = DateParts.date): D {
+    private incrementTime(dateVal: D, whatToIncrement: DateParts): D {
         console.log('incrementTime: '); // tslint:disable-line:no-console
         let year = this.dateAdapter.getYear(dateVal);
         let month = this.dateAdapter.getMonth(dateVal);
@@ -519,18 +521,21 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
                 break;
             case DateParts.month:
                 month++;
+
+                // tslint:disable-next-line:no-magic-numbers
+                if (month > 11) { month = 0; }
+
                 break;
             case DateParts.year:
                 date++;
+
+                if (date > this.dateAdapter.getNumDaysInMonth(dateVal)) {
+                    date = 1;
+                }
+
                 break;
             default:
         }
-
-        // if (date > SECONDS_PER_MINUTE) { date = 0; }
-        //
-        // if (month > MINUTES_PER_HOUR) { month = 0; }
-        //
-        // if (date > HOURS_PER_DAY) { date = 0; }
 
         return this.dateAdapter.createDateTime(
             year,
@@ -543,7 +548,7 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
         );
     }
 
-    private decrementTime(dateVal: D, whatToDecrement: DateParts = DateParts.date): D {
+    private decrementTime(dateVal: D, whatToDecrement: DateParts): D {
         console.log('decrementTime: '); // tslint:disable-line:no-console
         let year = this.dateAdapter.getYear(dateVal);
         let month = this.dateAdapter.getMonth(dateVal);
@@ -555,18 +560,19 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
                 break;
             case DateParts.month:
                 month--;
+
+                // tslint:disable-next-line:no-magic-numbers
+                if (month < 0) { month = 11; }
+
                 break;
             case DateParts.year:
                 date--;
+
+                if (date < 1) { date = this.dateAdapter.getNumDaysInMonth(dateVal); }
+
                 break;
             default:
         }
-
-        // if (date < 0) { date = SECONDS_PER_MINUTE; }
-        //
-        // if (month < 0) { month = MINUTES_PER_HOUR; }
-        //
-        // if (year < 0) { year = HOURS_PER_DAY; }
 
         return this.dateAdapter.createDateTime(
             year,
@@ -601,6 +607,31 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
 
         this.onChange();
         this.stateChanges.next();
+    }
+
+    private horizontalArrowKeyHandler(keyCode: number): void {
+        if (!this.value) { return; }
+
+        let cursorPos = this.selectionStart as number;
+
+        if (keyCode === LEFT_ARROW) {
+            cursorPos = cursorPos === 0 ? this.viewValue.length : cursorPos - 1;
+        } else if (keyCode === RIGHT_ARROW) {
+            const nextDividerPos: number = this.viewValue.indexOf(divider, cursorPos);
+
+            cursorPos = nextDividerPos ? nextDividerPos + 1 : 0;
+        }
+
+        this.createSelectionOfTimeComponentInInput(cursorPos);
+    }
+
+    private createSelectionOfTimeComponentInInput(cursorPos: number): void {
+        setTimeout(() => {
+            const newEditParams = this.getTimeEditMetrics(cursorPos);
+
+            this.selectionStart = newEditParams.cursorStartPosition;
+            this.selectionEnd = newEditParams.cursorEndPosition;
+        });
     }
 
     /** Checks whether the input is invalid based on the native validation. */
