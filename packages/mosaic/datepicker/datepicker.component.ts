@@ -29,13 +29,12 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
-import { ESCAPE, UP_ARROW } from '@ptsecurity/cdk/keycodes';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { merge, Subject, Subscription } from 'rxjs';
-import { filter, take } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 
-import { McCalendar } from './calendar.component';
 import { McCalendarCellCssClasses } from './calendar-body.component';
+import { McCalendar } from './calendar.component';
 import { mcDatepickerAnimations } from './datepicker-animations';
 import { createMissingDateImplError } from './datepicker-errors';
 import { McDatepickerInput } from './datepicker-input.directive';
@@ -133,6 +132,8 @@ export class McDatepicker<D> implements OnDestroy {
         this._startAt = this.getValidDateOrNull(this.dateAdapter.deserialize(value));
     }
 
+    private _startAt: D | null;
+
     /** Whether the datepicker pop-up should be disabled. */
     @Input()
     get disabled(): boolean {
@@ -148,6 +149,8 @@ export class McDatepicker<D> implements OnDestroy {
         }
     }
 
+    private _disabled: boolean;
+
     /** Whether the calendar is open. */
     @Input()
     get opened(): boolean {
@@ -157,6 +160,8 @@ export class McDatepicker<D> implements OnDestroy {
     set opened(value: boolean) {
         coerceBooleanProperty(value) ? this.open() : this.close();
     }
+
+    private _opened = false;
 
     /** The currently selected date. */
     get selected(): D | null {
@@ -234,9 +239,6 @@ export class McDatepicker<D> implements OnDestroy {
     /** Emits new selected date when selected date changes. */
     readonly selectedChanged = new Subject<D>();
     private scrollStrategy: () => ScrollStrategy;
-    private _startAt: D | null;
-    private _disabled: boolean;
-    private _opened = false;
     private validSelected: D | null = null;
 
     /** A portal containing the calendar for this datepicker. */
@@ -344,8 +346,10 @@ export class McDatepicker<D> implements OnDestroy {
     }
 
     /** Close the calendar. */
-    close(): void {
+    close(restoreFocus: boolean = true): void {
         if (!this._opened) { return; }
+
+        console.log('close: '); // tslint:disable-line:no-console
 
         if (this.popupRef && this.popupRef.hasAttached()) {
             this.popupRef.detach();
@@ -363,7 +367,9 @@ export class McDatepicker<D> implements OnDestroy {
                 this.closedStream.emit();
                 this.focusedElementBeforeOpen = null;
 
-                this.datepickerInput.elementRef.nativeElement.focus();
+                if (restoreFocus) {
+                    this.datepickerInput.elementRef.nativeElement.focus();
+                }
             }
         };
 
@@ -373,7 +379,10 @@ export class McDatepicker<D> implements OnDestroy {
             // we're refocusing opens the datepicker on focus, the user could be stuck with not being
             // able to close the calendar at all. We work around it by making the logic, that marks
             // the datepicker as closed, async as well.
-            this.focusedElementBeforeOpen.focus();
+            if (restoreFocus) {
+                this.focusedElementBeforeOpen.focus();
+            }
+
             setTimeout(completeClose);
         } else {
             completeClose();
@@ -381,6 +390,8 @@ export class McDatepicker<D> implements OnDestroy {
     }
 
     toggle(): void {
+        if (this.datepickerInput.isReadOnly) { return; }
+
         this._opened ? this.close() : this.open();
     }
 
@@ -427,13 +438,7 @@ export class McDatepicker<D> implements OnDestroy {
     private closingActions() {
         return merge(
             this.popupRef.backdropClick(),
-            this.popupRef.outsidePointerEvents(),
-            this.popupRef.detachments(),
-            this.popupRef.keydownEvents().pipe(filter((event) => {
-                // Closing on alt + up is only valid when there's an input associated with the datepicker.
-                // tslint:disable-next-line:deprecation
-                return event.keyCode === ESCAPE || (this.datepickerInput && event.altKey && event.keyCode === UP_ARROW);
-            }))
+            this.popupRef.outsidePointerEvents()
         );
     }
 

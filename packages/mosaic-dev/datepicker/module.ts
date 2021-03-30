@@ -20,6 +20,7 @@ import { McDatepicker, McDatepickerModule } from '@ptsecurity/mosaic/datepicker'
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
+import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 
 // Depending on whether rollup is used, moment needs to be imported differently.
 // Since Moment.js doesn't have a default export, we normally need to import using the `* as`
@@ -82,31 +83,23 @@ export class DemoComponent implements AfterViewInit {
             .subscribe(() => {
                 console.log('this.datepicker.selectedChanged');
             });
-
-        this.datepicker.datepickerInput.dateInput
-            .subscribe(() => {
-                console.log('this.datepickerInput.dateInput');
-            });
     }
 }
 
 @NgModule({
-    declarations: [
-        DemoComponent
-    ],
+    declarations: [DemoComponent],
     imports: [
         BrowserAnimationsModule,
         BrowserModule,
         FormsModule,
         McFormFieldModule,
+        McToolTipModule,
         McDatepickerModule,
         McMomentDateModule,
         McInputModule,
         McIconModule
     ],
-    bootstrap: [
-        DemoComponent
-    ],
+    bootstrap: [DemoComponent],
     providers: []
 })
 export class DemoModule {}

@@ -25,14 +25,27 @@ import { DateAdapter, MC_DATE_FORMATS, McDateFormats } from '@ptsecurity/cdk/dat
 import {
     BACKSPACE,
     DELETE,
-    DOWN_ARROW, END,
-    hasModifierKey, HOME,
+    UP_ARROW,
+    RIGHT_ARROW,
+    DOWN_ARROW,
+    LEFT_ARROW,
+    END,
+    PAGE_DOWN,
+    HOME,
+    PAGE_UP,
+    ENTER,
+    SPACE,
+    TAB,
+    ESCAPE,
+    hasModifierKey,
     isHorizontalMovement,
     isLetterKey,
-    isVerticalMovement, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, SPACE, UP_ARROW
+    isVerticalMovement
 } from '@ptsecurity/cdk/keycodes';
+import { validationTooltipHideDelay, validationTooltipShowDelay } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
-import { noop, Subject, Subscription } from 'rxjs';
+import { McTooltip } from '@ptsecurity/mosaic/tooltip';
+import { Subject, Subscription } from 'rxjs';
 
 import { createMissingDateImplError } from './datepicker-errors';
 import { McDatepicker } from './datepicker.component';
@@ -177,17 +190,18 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
     }
 
     set value(value: D | null) {
-        // tslint:disable-next-line:no-parameter-reassignment
-        value = this.dateAdapter.deserialize(value);
-        this.lastValueValid = !value || this.dateAdapter.isValid(value);
-        // tslint:disable-next-line:no-parameter-reassignment
-        value = this.getValidDateOrNull(value);
-        const oldDate = this.value;
-        this._value = value;
-        this.formatValue(value);
+        let newValue = this.dateAdapter.deserialize(value);
 
-        if (!this.dateAdapter.sameDate(oldDate, value)) {
-            this.valueChange.emit(value);
+        this.lastValueValid = !newValue || this.dateAdapter.isValid(newValue);
+
+        newValue = this.getValidDateOrNull(newValue);
+
+        const oldDate = this.value;
+        this._value = newValue;
+        this.formatValue(newValue);
+
+        if (!this.dateAdapter.sameDate(oldDate, newValue)) {
+            this.valueChange.emit(newValue);
         }
     }
 
@@ -256,13 +270,32 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
 
     private _id: string;
 
+    @Input()
+    set mcValidationTooltip(tooltip: McTooltip) {
+        if (!tooltip) { return; }
+
+        tooltip.mcMouseEnterDelay = validationTooltipShowDelay;
+        tooltip.mcTrigger = 'manual';
+        tooltip.mcTooltipClass = 'mc-tooltip_warning';
+
+        tooltip.initElementRefListeners();
+
+        this.incorrectInput.subscribe(() => {
+            if (tooltip.isTooltipOpen) { return; }
+
+            tooltip.show();
+
+            setTimeout(() => tooltip.hide(), validationTooltipHideDelay);
+        });
+    }
+
+    @Output() incorrectInput = new EventEmitter<void>();
+
     /** Emits when a `change` event is fired on this `<input>`. */
-    @Output() readonly dateChange: EventEmitter<McDatepickerInputEvent<D>> =
-        new EventEmitter<McDatepickerInputEvent<D>>();
+    @Output() readonly dateChange = new EventEmitter<McDatepickerInputEvent<D>>();
 
     /** Emits when an `input` event is fired on this `<input>`. */
-    @Output() readonly dateInput: EventEmitter<McDatepickerInputEvent<D>> =
-        new EventEmitter<McDatepickerInputEvent<D>>();
+    @Output() readonly dateInput = new EventEmitter<McDatepickerInputEvent<D>>();
 
     get empty(): boolean {
         return !this.viewValue && !this.isBadInput();
@@ -290,6 +323,10 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
 
     set selectionEnd(value: number | null) {
         this.elementRef.nativeElement.selectionEnd = value;
+    }
+
+    get isReadOnly(): boolean {
+        return this.elementRef.nativeElement.readOnly;
     }
 
     private control: AbstractControl;
@@ -388,31 +425,36 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
     }
 
     onKeyDown(event: KeyboardEvent): void {
+        if (this.isReadOnly) { return; }
+
         // tslint:disable-next-line: deprecation
         const keyCode = event.keyCode;
 
         if (isLetterKey(event) && !event.ctrlKey && !event.metaKey) {
             event.preventDefault();
 
-            // this.incorrectInput.emit();
+            this.incorrectInput.emit();
+        } else if (
+            (event.altKey && [UP_ARROW, DOWN_ARROW].includes(keyCode)) ||
+            [ENTER, TAB, ESCAPE].includes(keyCode)
+        ) {
+            this.datepickerStateHandler(keyCode);
         } else if (
             (hasModifierKey(event) && (isVerticalMovement(keyCode) || isHorizontalMovement(keyCode))) ||
             event.ctrlKey || event.metaKey ||
             [DELETE, BACKSPACE].includes(keyCode)
         ) {
-            noop();
+            return;
         } else if (keyCode === SPACE) {
             // this.spaceKeyHandler(event);
-        } else if ([HOME, PAGE_UP].includes(keyCode)) {
-            // this.createSelectionOfTimeComponentInInput(0);
-        } else if ([END, PAGE_DOWN].includes(keyCode)) {
-            // this.createSelectionOfTimeComponentInInput(this.viewValue.length);
         } else if ([UP_ARROW, DOWN_ARROW].includes(keyCode)) {
             event.preventDefault();
 
             this.verticalArrowKeyHandler(keyCode);
-        } else if ([LEFT_ARROW, RIGHT_ARROW].includes(keyCode)) {
-            this.horizontalArrowKeyHandler(keyCode);
+        } else if ([LEFT_ARROW, RIGHT_ARROW, HOME, PAGE_UP, END, PAGE_DOWN].includes(keyCode)) {
+            event.preventDefault();
+
+            this.changeCaretPosition(keyCode);
         } else if (/^\D$/.test(event.key)) {
             event.preventDefault();
 
@@ -430,16 +472,6 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
             // setTimeout(this.onInput);
         }
     }
-
-    // onKeydown(event: KeyboardEvent) {
-    //     // tslint:disable-next-line:deprecation
-    //     const isAltDownArrow = event.altKey && event.keyCode === DOWN_ARROW;
-    //
-    //     if (this.datepicker && isAltDownArrow && !this.elementRef.nativeElement.readOnly) {
-    //         this.datepicker.open();
-    //         event.preventDefault();
-    //     }
-    // }
 
     // onInput(value: string) {
     //     let date = this.dateAdapter.parse(value, this.dateFormats.parse.dateInput);
@@ -609,12 +641,16 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
         this.stateChanges.next();
     }
 
-    private horizontalArrowKeyHandler(keyCode: number): void {
+    private changeCaretPosition(keyCode: number): void {
         if (!this.value) { return; }
 
         let cursorPos = this.selectionStart as number;
 
-        if (keyCode === LEFT_ARROW) {
+        if ([HOME, PAGE_UP].includes(keyCode)) {
+            cursorPos = 0;
+        } else if ([END, PAGE_DOWN].includes(keyCode)) {
+            cursorPos = this.viewValue.length;
+        } else if (keyCode === LEFT_ARROW) {
             cursorPos = cursorPos === 0 ? this.viewValue.length : cursorPos - 1;
         } else if (keyCode === RIGHT_ARROW) {
             const nextDividerPos: number = this.viewValue.indexOf(divider, cursorPos);
@@ -694,6 +730,16 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
     private setControl(control: AbstractControl) {
         if (!this.control) {
             this.control = control;
+        }
+    }
+
+    private datepickerStateHandler(keyCode: number) {
+        if ([ENTER, DOWN_ARROW].includes(keyCode)) {
+            this.datepicker.open();
+        } else if (keyCode === TAB) {
+            this.datepicker.close(false);
+        } else if ([UP_ARROW, ESCAPE].includes(keyCode)) {
+            this.datepicker.close();
         }
     }
 }
