@@ -316,16 +316,12 @@ export class McDatepicker<D> implements OnDestroy {
             .subscribe((value: D | null) => {
                 console.log('this.selected = value: '); // tslint:disable-line:no-console
 
-                this.select(value as D);
-                // this.selectedChanged.next(value as D);
-
                 this.selected = value;
                 // @ts-ignore
                 if (this.popupComponentRef) {
                     this.popupComponentRef.instance.calendar.monthView.init();
                     this.popupComponentRef.instance.calendar.activeDate = value as D;
                 }
-                // this.popupComponentRef?.instance.calendar.yearView.init();
             });
     }
 

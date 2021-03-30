@@ -105,7 +105,11 @@ export class McCalendarHeader<D> {
 
     /** Handles user clicks on the period label. */
     currentPeriodClicked(): void {
-        this.calendar.currentView = this.calendar.currentView === 'month' ? 'multi-year' : 'month';
+        if (['month', 'multi-year'].includes(this.calendar.currentView)) {
+            this.calendar.currentView = 'year';
+        } else if (this.calendar.currentView === 'year') {
+            this.calendar.currentView = 'month';
+        }
     }
 
     /** Handles user clicks on the previous button. */

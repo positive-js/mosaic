@@ -147,16 +147,21 @@ export class McYearView<D> implements AfterContentInit {
 
     /** Handles when a new month is selected. */
     onMonthSelected(month: number) {
-        const normalizedDate =
-            this.dateAdapter.createDate(this.dateAdapter.getYear(this.activeDate), month, 1);
+        const year = this.dateAdapter.getYear(this.activeDate);
+
+        const normalizedDate = this.dateAdapter.createDate(year, month, 1);
 
         this.monthSelected.emit(normalizedDate);
 
         const daysInMonth = this.dateAdapter.getNumDaysInMonth(normalizedDate);
 
-        this.selectedChange.emit(this.dateAdapter.createDate(
-            this.dateAdapter.getYear(this.activeDate), month,
-            Math.min(this.dateAdapter.getDate(this.activeDate), daysInMonth)));
+        this.selectedChange.emit(
+            this.dateAdapter.createDate(
+                year,
+                month,
+                Math.min(this.dateAdapter.getDate(this.activeDate), daysInMonth)
+            )
+        );
     }
 
     /** Handles keydown events on the calendar body when calendar is in year view. */

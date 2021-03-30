@@ -21,7 +21,7 @@
         [maxDate]="maxDate"
         [minDate]="minDate"
         (monthSelected)="monthSelectedInYearView($event)"
-        (selectedChange)="goToDateInView($event, 'month')">
+        (selectedChange)="goToDateInView($event, 'multi-year')">
     </mc-year-view>
 
     <mc-multi-year-view
@@ -32,6 +32,6 @@
         [maxDate]="maxDate"
         [minDate]="minDate"
         (yearSelected)="yearSelectedInMultiYearView($event)"
-        (selectedChange)="goToDateInView($event, 'year')">
+        (selectedChange)="goToDateInView($event, 'month')">
     </mc-multi-year-view>
 </div>
