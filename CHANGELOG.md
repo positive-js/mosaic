@@ -1,3 +1,35 @@
+# 11.0.0 "Quadratic Sentiments" (2021-03-30)
+
+### Mosaic
+
+ * bug fix  **select:** fixed multiple selection hidden items (#UIM-580) ([#591](https://github.com/positive-js/mosaic/issues/591)) ([d232499](https://github.com/positive-js/mosaic/commit/d232499022a86e6760e7defda5d6b8f0c51261dd)), closes [#UIM-580](https://github.com/positive-js/mosaic/issues/UIM-580) [#UIM-580](https://github.com/positive-js/mosaic/issues/UIM-580)
+ * bug fix  add right padding for tree-option (#UIM-577) ([#589](https://github.com/positive-js/mosaic/issues/589)) ([2d67ad7](https://github.com/positive-js/mosaic/commit/2d67ad7ab8bb8262277c659a7315eae11b71ba7b)), closes [#UIM-577](https://github.com/positive-js/mosaic/issues/UIM-577) [#UIM-577](https://github.com/positive-js/mosaic/issues/UIM-577) [#UIM-577](https://github.com/positive-js/mosaic/issues/UIM-577)
+ * bug fix  package.json & yarn.lock to reduce vulnerabilities ([#588](https://github.com/positive-js/mosaic/issues/588)) ([bee20f2](https://github.com/positive-js/mosaic/commit/bee20f2c4fdd4efaf2f1c4da37cfa3a8c5d28f0b))
+ * bug fix  **build:** correct configuration for circleci tags ([6785e63](https://github.com/positive-js/mosaic/commit/6785e6350cae319b4a1aeec86294ff732ec4a22a))
+ * bug fix  **datepicker:** Line-height changes (#UIM-399) ([#569](https://github.com/positive-js/mosaic/issues/569)) ([7e50e39](https://github.com/positive-js/mosaic/commit/7e50e39bcf6c293ceac6439fea9abffac12d305a)), closes [#UIM-399](https://github.com/positive-js/mosaic/issues/UIM-399)
+ * bug fix  **form-field:** no need add class mc-form-field_has-stepper (#UIM-563) ([#567](https://github.com/positive-js/mosaic/issues/567)) ([62851e3](https://github.com/positive-js/mosaic/commit/62851e3314ea5afc3a3a3373a8c1628af9eb5959)), closes [#UIM-563](https://github.com/positive-js/mosaic/issues/UIM-563)
+ * bug fix  **formatter:** Date-formatter comma (#UIM-454) ([#571](https://github.com/positive-js/mosaic/issues/571)) ([f97983c](https://github.com/positive-js/mosaic/commit/f97983cf3fa8f8728f1ffdfdbc0945cbaece208c)), closes [#UIM-454](https://github.com/positive-js/mosaic/issues/UIM-454) [#UIM-454](https://github.com/positive-js/mosaic/issues/UIM-454) [#UIM-454](https://github.com/positive-js/mosaic/issues/UIM-454)
+ * bug fix  **list:** multiple selection works wrong (#UIM-589) ([#577](https://github.com/positive-js/mosaic/issues/577)) ([4e0492a](https://github.com/positive-js/mosaic/commit/4e0492af269639b78a84d3e0f136f231b1742265)), closes [#UIM-589](https://github.com/positive-js/mosaic/issues/UIM-589) [#UIM-589](https://github.com/positive-js/mosaic/issues/UIM-589)
+ * bug fix  **radio:** fixed left padding ([#584](https://github.com/positive-js/mosaic/issues/584)) ([aa4cce3](https://github.com/positive-js/mosaic/commit/aa4cce352a372fb036cfbcaa54607d61493f714d))
+ * bug fix  **tooltip:** added type number (#UIM-557) ([#566](https://github.com/positive-js/mosaic/issues/566)) ([3e564fc](https://github.com/positive-js/mosaic/commit/3e564fc5df84988669c62da62ba0deaba14179ac)), closes [#UIM-557](https://github.com/positive-js/mosaic/issues/UIM-557)
+ * bug fix  removed unused typescript-tslint-plugin ([#561](https://github.com/positive-js/mosaic/issues/561)) ([f4b8fc8](https://github.com/positive-js/mosaic/commit/f4b8fc84cedc7362fc35cd54bf76fa579821e149))
+ * feature  **date-adapter:** added milliseconds and microseconds for absolute dates (#UIM-446) ([#557](https://github.com/positive-js/mosaic/issues/557)) ([4de2a6d](https://github.com/positive-js/mosaic/commit/4de2a6d8c120309bd32dd8587492de2ffa75c503)), closes [#UIM-446](https://github.com/positive-js/mosaic/issues/UIM-446) [#UIM-446](https://github.com/positive-js/mosaic/issues/UIM-446)
+ * feature  **link:** implementation by guideline (#UIM-583) ([#590](https://github.com/positive-js/mosaic/issues/590)) ([bd2be80](https://github.com/positive-js/mosaic/commit/bd2be803c910a497770373f69f7f04ffc2eb1baa)), closes [#UIM-583](https://github.com/positive-js/mosaic/issues/UIM-583) [#UIM-583](https://github.com/positive-js/mosaic/issues/UIM-583)
+ * feature  **modal:** implementation by guideline hotkey ctrl+enter (#UIM-441) ([#576](https://github.com/positive-js/mosaic/issues/576)) ([0039790](https://github.com/positive-js/mosaic/commit/003979030abfd3874aa128b7b12f64a71a6f6e5d)), closes [#UIM-441](https://github.com/positive-js/mosaic/issues/UIM-441) [#UIM-441](https://github.com/positive-js/mosaic/issues/UIM-441)
+ * feature  **styles:** added design-tokens (#UIM-433) ([#560](https://github.com/positive-js/mosaic/issues/560)) ([7438db4](https://github.com/positive-js/mosaic/commit/7438db4991124b2a869aa38bdc0f1f77e6c74d25)), closes [#UIM-433](https://github.com/positive-js/mosaic/issues/UIM-433)
+ * feature  **timepicker:** added smart parsing (#UIM-510) ([#564](https://github.com/positive-js/mosaic/issues/564)) ([db4d1c0](https://github.com/positive-js/mosaic/commit/db4d1c0c995f460d036c4cb2a289624180cee609)), closes [#UIM-510](https://github.com/positive-js/mosaic/issues/UIM-510)
+ * feature  **timepicker:** implementation by guideline (#UIM-502) ([#575](https://github.com/positive-js/mosaic/issues/575)) ([1d0f970](https://github.com/positive-js/mosaic/commit/1d0f97040ff7ee20a32212bfcdb3bafff02d299c)), closes [#UIM-502](https://github.com/positive-js/mosaic/issues/UIM-502)
+ * revert  changes in notify ([d3a2184](https://github.com/positive-js/mosaic/commit/d3a2184ce2f7c20005ad7554dd72cf16fb10fbc2))
+
+### Docs
+
+ * bug fix  added mc-cleaner (#UIM-580) ([#574](https://github.com/positive-js/mosaic/issues/574)) ([4960dc2](https://github.com/positive-js/mosaic/commit/4960dc25cde57eb3e3abc3271d5e8b739830b5c5)), closes [#UIM-580](https://github.com/positive-js/mosaic/issues/UIM-580)
+ * bug fix  fixed button description ([4e1d188](https://github.com/positive-js/mosaic/commit/4e1d18843dd7b7f58877d3434de3f5b0b52db439))
+ * bug fix  fixed links for sidepanel, checkbox and radio (#UIM-578) ([#583](https://github.com/positive-js/mosaic/issues/583)) ([a17f1d6](https://github.com/positive-js/mosaic/commit/a17f1d6a9030abae22060766a5507e751b8c5a1c)), closes [#UIM-578](https://github.com/positive-js/mosaic/issues/UIM-578)
+ * bug fix  fixed theming (#UIM-594) ([#582](https://github.com/positive-js/mosaic/issues/582)) ([119df94](https://github.com/positive-js/mosaic/commit/119df94657f311389a2d2d07683b8eedc86e29df)), closes [#UIM-594](https://github.com/positive-js/mosaic/issues/UIM-594)
+ * bug fix  Size dependence on the checkbox (#UIM-432) ([#568](https://github.com/positive-js/mosaic/issues/568)) ([d7a6f34](https://github.com/positive-js/mosaic/commit/d7a6f349b8ea29f212044056b19907edb468fe36)), closes [#UIM-432](https://github.com/positive-js/mosaic/issues/UIM-432)
+ * feature  update timepicker docs with wiki docs ([#586](https://github.com/positive-js/mosaic/issues/586)) ([675572f](https://github.com/positive-js/mosaic/commit/675572f7dfa58ddf0eb1d2733de018f309a98596)), closes [#UIM-590](https://github.com/positive-js/mosaic/issues/UIM-590)
+
 # 10.1.0 "Wild Moon" (2020-12-18)
 
 ### Mosaic
