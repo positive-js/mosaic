@@ -19,7 +19,7 @@
                 },
                 {
                     destination: '_typography.scss',
-                    format: 'scss/map-deep',
+                    format: 'mc-scss/typography',
                     mapName: 'mosaic',
                     filter: 'typography'
                 }
