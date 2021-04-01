@@ -88,10 +88,13 @@ StyleDictionary.registerFormat({
         string = dictionary.allProperties
             .map((prop) => {
                 let output = '';
-                output += '$' + prop.name + ': ' + (prop.attributes.category==='asset' ? '"'+prop.value+'"' : prop.value) + ';'
+
+                const value = prop.attributes.category === 'asset' ? `"${ prop.value }"` : prop.value;
+
+                output += `$${ prop.name }: ${ value };`
 
                 if (prop.comment) {
-                    output += ' // ' + prop.comment;
+                    output += ` // ${ prop.comment }`;
                 }
 
                 output += '\n';
