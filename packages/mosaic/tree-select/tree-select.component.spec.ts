@@ -119,15 +119,16 @@ const TREE_DATA_RESET = {
         November: 'pdf',
         October: 'pdf'
     },
-    null: '',
-    false: '',
-    undefined: ''
+    'Null': null,
+    'Falsy': false,
+    'Undefined': undefined
 };
 
 class FileNode {
     children: FileNode[];
     name: string;
     type: any;
+    value: any;
 }
 
 class FileFlatNode {
@@ -135,6 +136,7 @@ class FileFlatNode {
     type: any;
     level: number;
     expandable: boolean;
+    value: any;
 }
 
 /**
@@ -163,6 +165,29 @@ function buildFileTree(value: any, level: number): FileNode[] {
 
     return data;
 }
+function buildFileTreeWithValues(value: any, level: number): FileNode[] {
+    const data: any[] = [];
+
+    for (const k of Object.keys(value)) {
+        const v = value[k];
+        const node = new FileNode();
+
+        node.name = `${k}`;
+
+        if (v === null || v === false || v === undefined) {
+            node.value = v;
+        }
+        else if (typeof v === 'object') {
+                 node.children = buildFileTree(v, level + 1);
+               } else {
+            node.value = v;
+        }
+
+        data.push(node);
+    }
+
+    return data;
+}
 
 import { McTreeSelectModule, McTreeSelect } from './index';
 
@@ -184,6 +209,8 @@ const transformer = (node: FileNode, level: number) => {
 const getLevel = (node: FileFlatNode) => node.level;
 
 const getValue = (node: FileFlatNode) => node.name;
+
+const getVal = (node: FileFlatNode) => node.value;
 
 const isExpandable = (node: FileFlatNode) => node.expandable;
 
@@ -932,7 +959,7 @@ class ResetValuesSelect {
 
     @ViewChild(McTreeSelect, { static: false }) select: McTreeSelect;
 
-    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable, getValue, getValue);
+    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable, getVal, getValue);
     treeFlattener = new McTreeFlattener(transformer, getLevel, isExpandable, getChildren);
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
@@ -942,7 +969,7 @@ class ResetValuesSelect {
 
         // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
         // file node as children.
-        this.dataSource.data = buildFileTree(TREE_DATA_RESET, 0);
+        this.dataSource.data = buildFileTreeWithValues(TREE_DATA_RESET, 0);
     }
 
     hasChild(_: number, nodeData: FileFlatNode) {
@@ -3610,7 +3637,7 @@ describe('McTreeSelect', () => {
         }));
 
         xit('should reset when an option with an undefined value is selected', fakeAsync(() => {
-            options[0].click();
+            options[4].click();
             fixture.detectChanges();
             flush();
 
@@ -3620,18 +3647,19 @@ describe('McTreeSelect', () => {
             expect(trigger.textContent).not.toContain('Undefined');
         }));
 
-        // todo fix
-        xit('should reset when an option with a null value is selected', fakeAsync(() => {
+
+        it('should reset when an option with a null value is selected', fakeAsync(() => {
+            // @ts-ignore
+            fixture.componentInstance.select.options.get(2).value = null;
             options[2].click();
             fixture.detectChanges();
             flush();
 
-            expect(fixture.componentInstance.control.value).toContain('null');
             expect(formField.classList).not.toContain('mc-form-field-should-float');
             expect(trigger.textContent).not.toContain('null');
         }));
 
-        // todo fix
+        // todo fix ?
         xit('should reset when a blank option is selected', fakeAsync(() => {
             options[6].click();
             fixture.detectChanges();
@@ -3643,8 +3671,7 @@ describe('McTreeSelect', () => {
             expect(trigger.textContent).not.toContain('None');
         }));
 
-        // todo fix
-        xit('should not mark the reset option as selected ', fakeAsync(() => {
+        it('should not mark the reset option as selected ', fakeAsync(() => {
             options[4].click();
             fixture.detectChanges();
             flush();
@@ -3664,7 +3691,7 @@ describe('McTreeSelect', () => {
 
             expect(fixture.componentInstance.control.value).toBe(false);
             expect(fixture.componentInstance.select.selected).toBeTruthy();
-            expect(trigger.textContent).toContain('false');
+            expect(trigger.textContent).toContain('Falsy');
         }));
 
         it(
@@ -3772,17 +3799,22 @@ describe('McTreeSelect', () => {
             expect(trigger.textContent).not.toContain('rootNode_1');
         }));
 
-        // todo fix
-        xit('should reflect the preselected value', fakeAsync(() => {
+
+        it('should reflect the preselected value', fakeAsync(() => {
             fixture = TestBed.createComponent(BasicSelectWithoutFormsPreselected);
 
             fixture.detectChanges();
 
             const trigger = fixture.debugElement.query(By.css('.mc-tree-select__trigger')).nativeElement;
             fixture.detectChanges();
-            expect(trigger.textContent).toContain('Pizza');
+            tick(600);
 
+
+            expect(trigger.textContent).toContain('Pictures');
             trigger.click();
+            fixture.detectChanges();
+
+            flush();
             fixture.detectChanges();
 
             const option = overlayContainerElement.querySelectorAll('mc-tree-option')[1];
