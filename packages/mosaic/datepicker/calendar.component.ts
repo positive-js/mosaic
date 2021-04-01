@@ -60,7 +60,7 @@ export class McCalendarHeader<D> {
     get periodButtonText(): string {
         if (this.calendar.currentView === 'month') {
             const label = this.dateAdapter
-                .format(this.calendar.activeDate, this.dateFormats.display.monthYearLabel);
+                .format(this.calendar.activeDate, this.dateFormats.monthYearLabel);
 
             return label[0].toLocaleUpperCase() + label.substr(1);
         }

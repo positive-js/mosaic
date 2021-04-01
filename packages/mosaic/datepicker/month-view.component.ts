@@ -297,7 +297,7 @@ export class McMonthView<D> implements AfterContentInit {
                 this.dateAdapter.getYear(this.activeDate),
                 this.dateAdapter.getMonth(this.activeDate), i + 1);
             const enabled = this.shouldEnableDate(date);
-            const ariaLabel = this.dateAdapter.format(date, this.dateFormats.display.dateA11yLabel);
+            const ariaLabel = this.dateAdapter.format(date, this.dateFormats.dateA11yLabel);
             const cellClasses = this.dateClass ? this.dateClass(date) : undefined;
 
             this.weeks[this.weeks.length - 1]

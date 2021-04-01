@@ -48,7 +48,7 @@ const moment = _rollupMoment || _moment;
             useFactory: () => {
                 const dateFormats: any = { ...MC_MOMENT_DATE_FORMATS };
 
-                dateFormats.display.dateInput = 'DD.MM.YYYY';
+                dateFormats.dateInput = 'DD.MM.YYYY';
 
                 return dateFormats;
             }

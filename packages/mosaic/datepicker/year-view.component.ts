@@ -262,7 +262,7 @@ export class McYearView<D> implements AfterContentInit {
     private createCellForMonth(month: number, monthName: string) {
         const ariaLabel = this.dateAdapter.format(
             this.dateAdapter.createDate(this.dateAdapter.getYear(this.activeDate), month, 1),
-            this.dateFormats.display.monthYearA11yLabel);
+            this.dateFormats.monthYearA11yLabel);
 
         const newMonthName = monthName[0].toLocaleUpperCase() + monthName.substr(1);
 
