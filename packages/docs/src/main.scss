@@ -21,10 +21,11 @@
 @import './styles/green-theme/theme';
 @import './styles/yellow-theme/theme';
 
-// Include all typography for the components.
-@include mc-core();
 
 $typography: mc-typography-config();
+
+// Include all typography for the components.
+@include mc-core($typography);
 
 @include mc-footer-typography($typography);
 @include mc-sidenav-typography($typography);
