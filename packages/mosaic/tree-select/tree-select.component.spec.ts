@@ -119,9 +119,9 @@ const TREE_DATA_RESET = {
         November: 'pdf',
         October: 'pdf'
     },
-    'Null': null,
-    'Falsy': false,
-    'Undefined': undefined
+    'Null-option': null,
+    'Falsy-option': false,
+    'Undefined-option': undefined
 };
 
 class FileNode {
@@ -176,10 +176,9 @@ function buildFileTreeWithValues(value: any, level: number): FileNode[] {
 
         if (v === null || v === false || v === undefined) {
             node.value = v;
-        }
-        else if (typeof v === 'object') {
+        } else if (typeof v === 'object') {
                  node.children = buildFileTree(v, level + 1);
-               } else {
+        } else {
             node.value = v;
         }
 
@@ -3644,7 +3643,7 @@ describe('McTreeSelect', () => {
             expect(fixture.componentInstance.control.value).toBeUndefined();
             expect(fixture.componentInstance.select.selected).toBeFalsy();
             expect(formField.classList).not.toContain('mc-form-field-should-float');
-            expect(trigger.textContent).not.toContain('Undefined');
+            expect(trigger.textContent).not.toContain('Undefined-option');
         }));
 
 
@@ -3656,7 +3655,7 @@ describe('McTreeSelect', () => {
             flush();
 
             expect(formField.classList).not.toContain('mc-form-field-should-float');
-            expect(trigger.textContent).not.toContain('null');
+            expect(trigger.textContent).not.toContain('Null-option');
         }));
 
         // todo fix ?
@@ -3691,7 +3690,7 @@ describe('McTreeSelect', () => {
 
             expect(fixture.componentInstance.control.value).toBe(false);
             expect(fixture.componentInstance.select.selected).toBeTruthy();
-            expect(trigger.textContent).toContain('Falsy');
+            expect(trigger.textContent).toContain('Falsy-option');
         }));
 
         it(
@@ -3704,7 +3703,7 @@ describe('McTreeSelect', () => {
                 expect(fixture.componentInstance.control.value).toBeNull();
                 expect(fixture.componentInstance.select.selected).toBeFalsy();
                 expect(trigger.textContent).not.toContain('Null');
-                expect(trigger.textContent).not.toContain('Undefined');
+                expect(trigger.textContent).not.toContain('Undefined-option');
             })
         );
     });
