@@ -79,6 +79,22 @@
                 "**/node_modules/**",
                 "tmp"
             ]
+        },
+        {
+            "target": "v11",
+            "public": "dist/releases/mosaic-docs",
+            "cleanUrls": true,
+            "rewrites": [
+                {
+                    "source": "**/!(*.*)",
+                    "destination": "/index.html"
+                }
+            ],
+            "ignore": [
+                "firebase.json",
+                "**/node_modules/**",
+                "tmp"
+            ]
         }
     ]
 }
