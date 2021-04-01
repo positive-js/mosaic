@@ -7,6 +7,7 @@
 @import '../../card/card-theme';
 @import '../../checkbox/checkbox-theme';
 @import '../../datepicker/datepicker-theme';
+@import '../../divider/divider-theme';
 @import '../../dropdown/dropdown-theme';
 @import '../../form-field/form-field-theme';
 @import '../../icon/icon-theme';
@@ -49,6 +50,7 @@
     @include mc-card-theme($theme);
     @include mc-checkbox-theme($theme);
     @include mc-datepicker-theme($theme);
+    @include mc-divider-theme($theme);
     @include mc-dropdown-theme($theme);
     @include mc-form-field-theme($theme);
     @include mc-icon-theme($theme);
