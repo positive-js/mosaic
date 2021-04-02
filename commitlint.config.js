@@ -13,6 +13,7 @@ const scope_types = [
     'chore',
     'common',
     'datepicker',
+    'divider',
     'docs',
     'dropdown',
     'overlay',
