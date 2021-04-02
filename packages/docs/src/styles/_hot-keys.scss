@@ -1,0 +1,35 @@
+@mixin hot-key-Button-theme($theme) {
+    $foreground: map-get($theme, foreground);
+
+    .hot-key-Button {
+        @if(map-get($theme, is-dark)) {
+            color: mc-color($foreground, text);
+            border-color: #808080;
+
+            box-shadow: inset 0 4px 4px 0 rgba(0, 0, 0, 0.15);
+        } @else {
+            color: mc-color($foreground, text);
+            border-color: #D8D9DB;
+
+            box-shadow: inset 0 4px 4px 0 rgba(0, 0, 0, 0.04);
+        }
+    }
+}
+
+.hot-key-Button {
+    display: inline-block;
+    min-width: 32px;
+    max-height: 32px;
+
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 8px;
+
+    padding: 7px;
+
+    font-family: 'Inter';
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: -0.14px;
+    text-align: center;
+}
