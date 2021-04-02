@@ -36,21 +36,21 @@
         }
 
         &.mc-navbar-item-active {
-            background-color: map-get($navbar-item, states-active);
+            background-color: map-get($navbar-item, state-active);
         }
 
         &:hover:not([disabled]):not(.mc-progress) {
-            background-color: map-get($navbar-item, states-hover);
+            background-color: map-get($navbar-item, state-hover);
         }
 
         &.mc-progress:hover:not([disabled]) {
-            background-color: map-get($navbar-item, states-progress);
+            background-color: map-get($navbar-item, state-progress);
         }
 
         &[disabled] {
             .mc-navbar-title,
             .mc-icon {
-                opacity: map-get($navbar-item, states-disabled-opacity);
+                opacity: map-get($navbar-item, state-disabled-opacity);
             }
         }
     }
