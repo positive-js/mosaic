@@ -6,12 +6,12 @@
             color: mc-color($foreground, text);
             border-color: #808080;
 
-            box-shadow: inset 0 4px 4px 0 rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.15);
         } @else {
             color: mc-color($foreground, text);
             border-color: #D8D9DB;
 
-            box-shadow: inset 0 4px 4px 0 rgba(0, 0, 0, 0.04);
+            box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.04);
         }
     }
 }
