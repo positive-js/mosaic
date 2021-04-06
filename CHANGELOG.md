@@ -1,3 +1,11 @@
+## 11.0.1 "Malthusian Plays" (2021-04-06)
+
+### Mosaic
+
+ * bug fix  package.json & yarn.lock to reduce vulnerabilities ([#599](https://github.com/positive-js/mosaic/issues/599)) ([17af6f0](https://github.com/positive-js/mosaic/commit/17af6f0a8bdcf89fc8e22b1a5dd0d1fe819876d0))
+ * bug fix  **divider:** add using divider theme (#UIM-614) ([#598](https://github.com/positive-js/mosaic/issues/598)) ([c06fd28](https://github.com/positive-js/mosaic/commit/c06fd28347175e1b5db199f530909ee019eb9ccc)), closes [#UIM-614](https://github.com/positive-js/mosaic/issues/UIM-614)
+ * bug fix  **navbar:** fix navbar-item states theme (#UIM-613) ([#597](https://github.com/positive-js/mosaic/issues/597)) ([975c2a8](https://github.com/positive-js/mosaic/commit/975c2a8501c92c1d6c1108b659f4822229ff2eab)), closes [#UIM-613](https://github.com/positive-js/mosaic/issues/UIM-613)
+
 # 11.0.0 "Quadratic Sentiments" (2021-03-30)
 
 ### Mosaic
