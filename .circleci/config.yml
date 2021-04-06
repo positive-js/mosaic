@@ -59,6 +59,13 @@ var_10: &filter_by_release_tag
     tags:
         only: /^\d+\.\d+\.\d+$/
 
+var_11: &docs_stable_version
+    branches:
+        ignore: /.*/
+    tags:
+        only: /11\.\d+\.\d+$/
+
+
 orbs:
     sonarcloud: sonarsource/sonarcloud@1.0.2
     snyk: snyk/snyk@0.0.10
@@ -224,6 +231,19 @@ jobs:
                 name: Deploy "Next" version of Docs
                 command: npx firebase deploy --only hosting:next --token=$FIREBASE_DEPLOY_TOKEN
 
+    deploy-docs-stable:
+        <<: *job_defaults
+        steps:
+            - attach_workspace:
+                at: ~/mosaic
+            - run: yarn run build:mosaic-examples-module
+            - run: yarn run build:mosaic-examples
+            - run: yarn run build:docs
+            - run: yarn run docs:prod-build:aot
+            - run:
+                name: Deploy "Latest Stable" version of Docs
+                command: npx firebase deploy --only hosting:stable --token=$FIREBASE_DEPLOY_TOKEN
+
     sonar:
         <<: *job_defaults
         steps:
@@ -304,6 +324,23 @@ workflows:
                       - build_packages
                   filters:
                       <<: *filter_by_release_tag
+
+    docs_stable_publish_workflow:
+        jobs:
+            - install:
+                  filters: *docs_stable_version
+
+            - build_packages:
+                  requires:
+                      - install
+                  filters:
+                      <<: *docs_stable_version
+
+            - deploy-docs-stable:
+                  requires:
+                      - build_packages
+                  filters:
+                      <<: *docs_stable_version
 
     default_workflow:
         jobs:
