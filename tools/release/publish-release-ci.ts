@@ -88,8 +88,9 @@ class PublishReleaseCITask extends BaseReleaseTask {
         console.log();
 
         if (!process.env.DEBUG) {
-            console.info(green(bold(`  ✓   Notification to Mattermost`)));
             const newVersionName = this.currentVersion.format();
+
+            console.info(green(bold(`  ✓   Notification to Mattermost, version: ${newVersionName}`)));
             notify(newVersionName);
         }
     }

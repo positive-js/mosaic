@@ -9,15 +9,15 @@ import { CHANGELOG_FILE_NAME } from './stage-release';
 
 const HTTP_CODE_OK = 200;
 
+dotenv.config();
+
 export function notify(version) {
     if (!verifyNotificationPossibility()) {
         return;
     }
 
-    const result = dotenv.config();
-
-    const url = result.parsed.MATTERMOST_ENDPOINT_URL;
-    const channel = result.parsed.MATTERMOST_CHANNEL;
+    const url = process.env.MATTERMOST_ENDPOINT_URL;
+    const channel = process.env.MATTERMOST_CHANNEL;
 
     const headers = { 'Content-Type': 'application/json' };
     const body = {
@@ -43,9 +43,7 @@ export function notify(version) {
 }
 
 export function verifyNotificationPossibility() {
-    const result = dotenv.config();
-
-    return !result.error && result.parsed.MATTERMOST_ENDPOINT_URL && result.parsed.MATTERMOST_CHANNEL;
+    return process.env.MATTERMOST_ENDPOINT_URL && process.env.MATTERMOST_CHANNEL;
 }
 
 function prepareChangeLog(version) {
@@ -54,3 +52,5 @@ function prepareChangeLog(version) {
 
     return extractedReleaseNotes.releaseNotes.replace(/"/g, '');
 }
+
+notify('11.0.1');
