@@ -4,14 +4,17 @@ import { bold, cyan, green, italic, red } from 'chalk';
 import { config as dotenvConfig } from 'dotenv';
 import { readFileSync } from 'fs';
 import { join } from 'path';
+import * as request from 'request';
 
 import { BaseReleaseTask } from './base-release-task';
 import { CONFIG } from './config';
+import { extractReleaseNotes } from './extract-release-notes';
 import { GitClient } from './git/git-client';
 import { notify } from './notify-release';
 import { npmPublish } from './npm/npm-client';
 import { checkReleasePackage } from './release-output/check-packages';
 import { releasePackages } from './release-output/release-packages';
+import { CHANGELOG_FILE_NAME } from './stage-release';
 import { parseVersionName, Version } from './version-name/parse-version';
 
 
@@ -87,12 +90,67 @@ class PublishReleaseCITask extends BaseReleaseTask {
         console.info(green(bold(`  ✓   Published all packages successfully`)));
         console.log();
 
-        if (!process.env.DEBUG) {
-            const newVersionName = this.currentVersion.format();
+        const newVersionName = this.currentVersion.format();
 
+        const extractedReleaseNotes = extractReleaseNotes(
+            join(this.projectDir, CHANGELOG_FILE_NAME), newVersionName);
+
+        if (!extractedReleaseNotes) {
+            console.error(red(`  ✘   Could not find release notes in the changelog.`));
+            process.exit(1);
+        }
+
+        const { releaseNotes, releaseTitle } = extractedReleaseNotes;
+
+        this.publishGithubReleaseNotes({
+            owner: this.repositoryOwner,
+            repository: this.repositoryName,
+            tagName: newVersionName,
+            releaseTitle,
+            body: releaseNotes
+        });
+
+        if (!process.env.DEBUG) {
             console.info(green(bold(`  ✓   Notification to Mattermost, version: ${newVersionName}`)));
             notify(newVersionName);
         }
+    }
+
+    private publishGithubReleaseNotes(options: {
+        owner: string; repository: string;
+        tagName: string; releaseTitle: string; body: string;
+    }) {
+
+        const url = `https://github.com/${options.owner}/${options.repository}/releases`;
+        const headers = {
+            Authorization: `token ${CONFIG.github.token}`
+        };
+
+        const branchName = this.git.getCurrentBranch();
+
+        const body = {
+            tag_name: options.tagName,
+            target_commitish: branchName,
+            name: options.releaseTitle,
+            body: options.body,
+            draft: false,
+            prerelease: false
+        };
+
+        request.post(
+            { url, headers, json: true, body },
+            (error, response) => {
+                // tslint:disable-next-line:no-magic-numbers
+                if (error || response.statusCode !== 200) {
+                    // tslint:disable-next-line:no-console
+                    console.error(red(`  ✘   Could not post notification in Mattermost.`));
+
+                    return;
+                }
+
+                console.info(green(`  ✓   Notification is posted in Mattermost.`));
+            }
+        );
     }
 
     /** Publishes the specified package within the given NPM dist tag. */
