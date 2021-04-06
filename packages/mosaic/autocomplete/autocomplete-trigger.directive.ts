@@ -665,7 +665,11 @@ export class McAutocompleteTrigger implements ControlValueAccessor, OnDestroy {
      * correct options, or to 0 if the consumer opted into it.
      */
     private resetActiveItem(): void {
-        this.autocomplete.keyManager.setActiveItem(this.autocomplete.autoActiveFirstOption ? 0 : -1);
+        if (this.autocomplete.autoActiveFirstOption) {
+            this.autocomplete.keyManager.setFirstItemActive();
+        } else {
+            this.autocomplete.keyManager.setActiveItem(-1);
+        }
     }
 
     private canOpen(): boolean {
