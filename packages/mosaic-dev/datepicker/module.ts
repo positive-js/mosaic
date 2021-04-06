@@ -48,7 +48,8 @@ const moment = _rollupMoment || _moment;
             useFactory: () => {
                 const dateFormats: any = { ...MC_MOMENT_DATE_FORMATS };
 
-                dateFormats.dateInput = 'DD.MM.YYYY';
+                // dateFormats.dateInput = 'DD.MM.YYYY';
+                dateFormats.dateInput = 'MM.DD.YYYY';
 
                 return dateFormats;
             }
@@ -66,7 +67,8 @@ const moment = _rollupMoment || _moment;
     ]
 })
 export class DemoComponent implements AfterViewInit {
-    date = moment([2019, 0, 24]);
+    // date = moment([2019, 0, 24]);
+    date = null;
     minDate = moment([2015, 0, 1]);
     maxDate = moment([2020, 0, 1]);
 

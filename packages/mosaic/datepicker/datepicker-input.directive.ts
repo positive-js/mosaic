@@ -563,17 +563,10 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
     }
 
     private replaceSymbols(value: string): string {
-        let formattedValue: string = value;
-
-        const match: RegExpMatchArray | null = value.match(/^(\d\d:){0,2}(?<number>[0-9])(?<symbol>\W)(:\d\d){0,2}$/);
-
-        if (match?.groups) {
-            const { number, symbol } = match.groups;
-
-            formattedValue = value.replace(number + symbol, `0${number}`);
-        }
-
-        return formattedValue;
+        return value
+            .split(this.separator)
+            .map((part: string) => part.replace(/^([0-9])\W$/, '0$1'))
+            .join(this.separator);
     }
 
     private formatUserInput(value: string): string {
@@ -608,49 +601,33 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
 
     private getDateFromString(timeString: string): D | null {
         console.log('getDateFromString: '); // tslint:disable-line:no-console
-        if (!timeString) { return null; }
+        if (!timeString || timeString.length < 2) { return null; }
 
-        let resultDate;
+        const defaultValue = this.value || this.dateAdapter.today();
 
-        if (this.firstDigit === DateParts.day) {
-            if (timeString.length < 2) { return null; }
+        let year = this.dateAdapter.getYear(defaultValue);
+        let month = this.dateAdapter.getMonth(defaultValue);
+        let day = this.dateAdapter.getDate(defaultValue);
+        const hours = this.dateAdapter.getHours(defaultValue);
+        const minutes = this.dateAdapter.getMinutes(defaultValue);
+        const seconds = this.dateAdapter.getSeconds(defaultValue);
+        const milliseconds = this.dateAdapter.getMilliseconds(defaultValue);
 
-            resultDate = this.dateAdapter.createDateTime(
-                this.dateAdapter.getYear(this.value as D),
-                this.dateAdapter.getMonth(this.value as D),
-                timeString as number,
-                this.dateAdapter.getHours(this.value as D),
-                this.dateAdapter.getMinutes(this.value as D),
-                this.dateAdapter.getSeconds(this.value as D),
-                this.dateAdapter.getMilliseconds(this.value as D)
-            );
-        } else if (this.firstDigit === DateParts.month) {
-            if (timeString.length < 2) { return null; }
-
-            resultDate = this.dateAdapter.createDateTime(
-                this.dateAdapter.getYear(this.value as D),
-                timeString as number,
-                this.dateAdapter.getDate(this.value as D),
-                this.dateAdapter.getHours(this.value as D),
-                this.dateAdapter.getMinutes(this.value as D),
-                this.dateAdapter.getSeconds(this.value as D),
-                this.dateAdapter.getMilliseconds(this.value as D)
-            );
-        } else if (this.firstDigit === DateParts.year) {
-            if (timeString.length < 2) { return null; }
-
-            resultDate = this.dateAdapter.createDateTime(
-                timeString as number,
-                this.dateAdapter.getMonth(this.value as D),
-                this.dateAdapter.getDate(this.value as D),
-                this.dateAdapter.getHours(this.value as D),
-                this.dateAdapter.getMinutes(this.value as D),
-                this.dateAdapter.getSeconds(this.value as D),
-                this.dateAdapter.getMilliseconds(this.value as D)
-            );
+        if (timeString.length === 2) {
+            if (this.firstDigit === DateParts.day) {
+                day = parseInt(timeString);
+            } else if (this.firstDigit === DateParts.month) {
+                month = parseInt(timeString) - 1;
+            } else if (this.firstDigit === DateParts.year) {
+                year = parseInt(timeString);
+            }
+        } else if (timeString.length < this.dateFormats.dateInput.length) {
+            return null;
         }
 
-        return this.getValidDateOrNull(resultDate);
+        return this.getValidDateOrNull(
+            this.dateAdapter.createDateTime(year, month, day, hours, minutes, seconds, milliseconds)
+        );
     }
 
     private getTimeStringFromDate(value: D | null, timeFormat: string): string {
