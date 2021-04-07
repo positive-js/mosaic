@@ -1,3 +1,10 @@
+## 11.0.2 "Flection" (2021-04-07)
+
+### Mosaic
+
+ * bug fix  **typography:** need generate _typography.scss without '!default' (UIM-611) ([#596](https://github.com/positive-js/mosaic/issues/596)) ([b56249f](https://github.com/positive-js/mosaic/commit/b56249fd9fa7bae5301a46516b7dc28055872285))
+ * bug fix  env variables for notification ([7913e3a](https://github.com/positive-js/mosaic/commit/7913e3af1429c4db7a033b6a526ee42f28c86df3))
+
 ## 11.0.1 "Malthusian Plays" (2021-04-06)
 
 ### Mosaic
