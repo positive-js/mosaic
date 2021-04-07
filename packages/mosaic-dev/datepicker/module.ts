@@ -50,6 +50,7 @@ const moment = _rollupMoment || _moment;
 
                 // dateFormats.dateInput = 'DD.MM.YYYY';
                 dateFormats.dateInput = 'MM.DD.YYYY';
+                // dateFormats.dateInput = 'YYYY.MM.DD';
 
                 return dateFormats;
             }
