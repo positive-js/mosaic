@@ -2236,6 +2236,40 @@ describe('McAutocomplete', () => {
         expect(fixture.componentInstance.trigger.panelOpen).toBe(true);
     });
 
+    describe('Option selection with disabled items', () => {
+        let fixture: ComponentFixture<AutocompleteWithDisabledItems>;
+
+        beforeEach(() => {
+            fixture = createComponent(AutocompleteWithDisabledItems);
+            fixture.detectChanges();
+        });
+
+        it('should not autofocus on first item when it disabled', () => {
+            fixture.componentInstance.trigger.autocomplete.autoActiveFirstOption = true;
+            fixture.componentInstance.trigger.openPanel();
+            fixture.detectChanges();
+            zone.simulateZoneExit();
+            fixture.detectChanges();
+
+            expect(overlayContainerElement.querySelectorAll('mc-option')[1].classList)
+                .toContain('mc-active', 'Expected second option to be highlighted.');
+        });
+
+        it('should not autofocus on first and second item when it disabled', () => {
+            fixture.componentInstance.states[1].disabled = true;
+
+            fixture.componentInstance.trigger.autocomplete.autoActiveFirstOption = true;
+            fixture.componentInstance.trigger.openPanel();
+            fixture.detectChanges();
+            zone.simulateZoneExit();
+            fixture.detectChanges();
+
+            expect(overlayContainerElement.querySelectorAll('mc-option')[2].classList)
+                .toContain('mc-active', 'Expected second option to be highlighted.');
+        });
+
+    });
+
 });
 
 @Component({
@@ -2621,3 +2655,35 @@ class AutocompleteWithNativeAutocompleteAttribute {
     template: '<input [mcAutocomplete]="null" mcAutocompleteDisabled>'
 })
 class InputWithoutAutocompleteAndDisabled {}
+
+@Component({
+    template: `
+        <mc-form-field>
+            <input mcInput placeholder="States" [mcAutocomplete]="auto" [(ngModel)]="selectedState">
+        </mc-form-field>
+
+        <mc-autocomplete #auto="mcAutocomplete">
+            <mc-option *ngFor="let state of states" [value]="state.code" [disabled]="state.disabled">
+                <span>{{ state.name }}</span>
+            </mc-option>
+        </mc-autocomplete>
+    `
+})
+class AutocompleteWithDisabledItems {
+    @ViewChild(McAutocompleteTrigger, {static: true}) trigger: McAutocompleteTrigger;
+
+    selectedState: string;
+    states = [
+        { code: 'AL', name: 'Alabama', disabled: true },
+        { code: 'CA', name: 'California' },
+        { code: 'FL', name: 'Florida' },
+        { code: 'KS', name: 'Kansas' },
+        { code: 'MA', name: 'Massachusetts' },
+        { code: 'NY', name: 'New York' },
+        { code: 'OR', name: 'Oregon' },
+        { code: 'PA', name: 'Pennsylvania' },
+        { code: 'TN', name: 'Tennessee' },
+        { code: 'VA', name: 'Virginia' },
+        { code: 'WY', name: 'Wyoming' }
+    ];
+}
