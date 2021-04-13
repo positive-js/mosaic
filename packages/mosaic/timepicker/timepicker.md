@@ -17,7 +17,7 @@
 Маска ввода бывает в двух вариациях, с возможностью ввести время в формате:
 
 <br>
-<div class="mc-alert">
+<div class="mc-alert mc-alert_info">
     <i class="mc mc-icon mc-info-o_16 mc-alert__icon"></i>
     Нужную вариацию выбирают дизайнер и аналитик в зависимости от задачи
 </div>

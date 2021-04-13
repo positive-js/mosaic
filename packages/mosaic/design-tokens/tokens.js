@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 23 Mar 2021 13:11:13 GMT
+ * Generated on Tue, 13 Apr 2021 08:07:57 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
@@ -285,13 +285,13 @@ export const AlertLightColorSchemeErrorBorder = "#E76E5C";
 export const AlertLightColorSchemeErrorIcon = "#E76E5C";
 export const AlertLightColorSchemeWarningBackground = "#FCF5E8";
 export const AlertLightColorSchemeWarningBorder = "#F0D49B";
-export const AlertLightColorSchemeWarningIcon = "#F0D49B";
+export const AlertLightColorSchemeWarningIcon = "#DFA739";
 export const AlertLightColorSchemeSuccessBackground = "#EDF8E9";
 export const AlertLightColorSchemeSuccessBorder = "#B4DEA4";
-export const AlertLightColorSchemeSuccessIcon = "#B4DEA4";
+export const AlertLightColorSchemeSuccessIcon = "#6FBA53";
 export const AlertLightColorSchemeInfoBackground = "#EBF4FB";
 export const AlertLightColorSchemeInfoBorder = "#AAD1EC";
-export const AlertLightColorSchemeInfoIcon = "#AAD1EC";
+export const AlertLightColorSchemeInfoIcon = "#57A4D7";
 export const AlertLightColorSchemeDefaultBackground = "#F0F0F0";
 export const AlertLightColorSchemeDefaultBorder = "#B3B3B3";
 export const AlertLightColorSchemeDefaultIcon = "#CCCCCC";

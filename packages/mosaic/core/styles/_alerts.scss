@@ -90,7 +90,7 @@
     background-color: map-get($alert, background);
     border-color: map-get($alert, border);
 
-    .mc-alert__icon {
+    .mc-icon.mc-alert__icon {
         color: map-get($alert, icon);
     }
 }
