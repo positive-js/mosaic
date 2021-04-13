@@ -1,8 +1,10 @@
-<form novalidate>
-    <div class="docs-row">
-        <mc-form-field>
-            <i mcPrefix mc-icon="mc-clock_16"></i>
-            <input mcTimepicker [(ngModel)]="time" [format]="'HH:mm'"  >
-        </mc-form-field>
-    </div>
-</form>
+<div class="docs-row">
+    <mc-form-field
+        mcTooltip
+        [mcTitle]="'Только цифры'"
+        #tooltip="mcTooltip">
+
+        <i mcPrefix mc-icon="mc-clock_16"></i>
+        <input mcTimepicker [(ngModel)]="time" [format]="'HH:mm'" [mcValidationTooltip]="tooltip">
+    </mc-form-field>
+</div>

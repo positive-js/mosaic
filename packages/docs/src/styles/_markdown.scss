@@ -198,18 +198,22 @@
 
 @mixin docs-markdown-typography($config) {
 
-    .docs-header-link {
-        &_3 {
-            @include mc-typography-level-to-styles($config, headline);
-        }
+    .docs-header-link_3 {
+        @include mc-typography-level-to-styles($config, headline);
+    }
 
-        &_4 {
-            @include mc-typography-level-to-styles($config, body-strong);
-        }
+    .docs-header-link_4 {
+        @include mc-typography-level-to-styles($config, title);
+    }
+
+    .docs-header-link_5 {
+        @include mc-typography-level-to-styles($config, subheading);
     }
 
     .docs-markdown {
-        &__p, &__a, &__tr {
+        &__p,
+        &__a,
+        &__tr {
             @include mc-typography-level-to-styles($config, body);
         }
 
