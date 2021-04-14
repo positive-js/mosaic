@@ -6,7 +6,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DateAdapter, MC_DATE_FORMATS, MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
@@ -70,6 +70,7 @@ const moment = _rollupMoment || _moment;
 export class DemoComponent implements AfterViewInit {
     // date = moment([2019, 0, 24]);
     date = null;
+    formControlValue = new FormControl(moment('2020-05-06 12:00:00'));
     minDate = moment([2015, 0, 1]);
     maxDate = moment([2020, 0, 1]);
 
@@ -95,6 +96,7 @@ export class DemoComponent implements AfterViewInit {
         BrowserAnimationsModule,
         BrowserModule,
         FormsModule,
+        ReactiveFormsModule,
         McFormFieldModule,
         McToolTipModule,
         McDatepickerModule,

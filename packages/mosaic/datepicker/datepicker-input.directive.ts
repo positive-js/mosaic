@@ -61,10 +61,71 @@ export enum DateParts {
 }
 
 export class DateDigit {
-    constructor(public value: DateParts, public start: number, public length: number) {}
+    maxDays: number = 31;
+    maxMonth: number = 11;
+
+    parse: (value: string) => number;
+
+    constructor(public value: DateParts, public start: number, public length: number) {
+        if (value === DateParts.day) {
+            this.parse = this.parseDay;
+        } else if (value === DateParts.month) {
+            this.parse = this.parseMonth;
+        } else if (value === DateParts.year) {
+            this.parse = this.parseYear;
+        }
+    }
 
     get end(): number {
         return this.start + this.length;
+    }
+
+    get isDay(): boolean {
+        return this.value === DateParts.day;
+    }
+
+    get isMonth(): boolean {
+        return this.value === DateParts.month;
+    }
+
+    get isYear(): boolean {
+        return this.value === DateParts.year;
+    }
+
+    get fullName(): string {
+        if (this.isDay) { return 'date'; }
+
+        if (this.isMonth) { return 'month'; }
+
+        if (this.isYear) { return 'year'; }
+    }
+
+    private parseDay(value: string): number {
+        const parsedValue: number = parseInt(value);
+
+        if (parsedValue === 0) { return 1; }
+
+        if (parsedValue > this.maxDays) { return this.maxDays; }
+
+        return parsedValue;
+    }
+
+    private parseMonth(value: string): number {
+        const parsedValue: number = parseInt(value);
+
+        if (parsedValue === 0) { return 1; }
+
+        if (parsedValue > this.maxMonth) { return this.maxMonth; }
+
+        return parsedValue - 1;
+    }
+
+    private parseYear(value: string): number {
+        const parsedValue: number = parseInt(value);
+
+        if (parsedValue === 0) { return 1; }
+
+        return parsedValue;
     }
 }
 
@@ -355,7 +416,7 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
     private secondDigit: DateDigit;
     private thirdDigit: DateDigit;
 
-    private defaultValue: D;
+    private separatorPositions: number[];
 
     constructor(
         public elementRef: ElementRef<HTMLInputElement>,
@@ -379,9 +440,12 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
         }
 
         this.separator = dateFormats.dateInput.match(/[aA-zZ]+(?<separator>\W|\D)[aA-zZ]+/).groups.separator;
+        console.log('this.separator =: '); // tslint:disable-line:no-console
+        this.separatorPositions = dateFormats.dateInput
+            .split('')
+            .reduce((acc, item, index) => this.separator === item ? [...acc, index + 1] : acc, []);
 
         this.getDigitPositions(dateFormats.dateInput);
-        this.createDefaultValue();
 
         // Update the displayed date when the locale changes.
         this.localeSubscription = dateAdapter.localeChanges
@@ -486,10 +550,7 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
             if (newValue !== formattedValue) {
                 this.setViewValue(formattedValue, true);
 
-                setTimeout(() => {
-                    this.onInput();
-                    this.selectNextDigit(this.selectionEnd + 1);
-                });
+                setTimeout(this.onInput);
             } else {
                 this.incorrectInput.emit();
             }
@@ -499,6 +560,7 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
     }
 
     onInput = () => {
+        this.correctCursorPosition();
         console.log('onInput: '); // tslint:disable-line:no-console
         const formattedValue = this.replaceSymbols(this.viewValue);
 
@@ -513,25 +575,79 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
 
         this.setViewValue(this.getTimeStringFromDate(newTimeObj, this.dateFormats.dateInput), true);
 
-        this.selectDigitByCursor((this.selectionStart as number) + 1);
+        this.selectNextDigitByCursor((this.selectionStart as number));
 
-        this.value = newTimeObj;
-        this.onChange();
-        this.stateChanges.next();
+        if (!this.dateAdapter.sameDate(newTimeObj, this.value)) {
+            this._value = newTimeObj;
+            this.cvaOnChange(newTimeObj);
+            this.valueChange.emit(newTimeObj);
+            this.dateInput.emit(new McDatepickerInputEvent(this, this.elementRef.nativeElement));
+            this.control.updateValueAndValidity();
+        }
     }
 
-    // onInput(value: string) {
-    //     let date = this.dateAdapter.parse(value, this.dateFormats.parse.dateInput);
-    //     this.lastValueValid = !date || this.dateAdapter.isValid(date);
-    //     date = this.getValidDateOrNull(date);
-    //
-    //     if (!this.dateAdapter.sameDate(date, this._value)) {
-    //         this._value = date;
-    //         this.cvaOnChange(date);
-    //         this.valueChange.emit(date);
-    //         this.dateInput.emit(new McDatepickerInputEvent(this, this.elementRef.nativeElement));
-    //     }
-    // }
+    parseOnBlur = () => {
+        console.log('parseOnBlur: '); // tslint:disable-line:no-console
+
+        if (!this.viewValue) { return null; }
+
+        const defaultValue = this.getDefaultValue();
+
+        const date = {
+            year: this.dateAdapter.getYear(defaultValue),
+            month: this.dateAdapter.getMonth(defaultValue),
+            date: this.dateAdapter.getDate(defaultValue),
+            hours: this.dateAdapter.getHours(defaultValue),
+            minutes: this.dateAdapter.getMinutes(defaultValue),
+            seconds: this.dateAdapter.getSeconds(defaultValue),
+            milliseconds: this.dateAdapter.getMilliseconds(defaultValue)
+        };
+
+        const viewDigits: number[] = this.viewValue
+            .split(this.separator)
+            .map((value: string) => parseInt(value))
+            .filter((value) => value);
+
+        const [firsViewDigit, secondViewDigit, thirdViewDigit] = viewDigits;
+
+        // tslint:disable-next-line:no-magic-numbers
+        if (viewDigits.length != 3) {
+            return setTimeout(() => this.control.updateValueAndValidity());
+        } else {
+            if (
+                firsViewDigit.length < this.firstDigit.length ||
+                secondViewDigit.length < this.secondDigit.length ||
+                thirdViewDigit.length < this.thirdDigit.length
+            ) {
+                this.control.updateValueAndValidity();
+            }
+
+            date[this.firstDigit.fullName] = this.firstDigit.parse(firsViewDigit);
+            date[this.secondDigit.fullName] = this.secondDigit.parse(secondViewDigit);
+            date[this.thirdDigit.fullName] = this.thirdDigit.parse(thirdViewDigit);
+        }
+
+        const newTimeObj = this.getValidDateOrNull(this.dateAdapter.createDateTime(
+            date.year, date.month, date.date, date.hours, date.minutes, date.seconds, date.milliseconds
+        ));
+
+
+
+
+        this.lastValueValid = !!newTimeObj;
+
+        this.control.updateValueAndValidity();
+
+        this.setViewValue(this.getTimeStringFromDate(newTimeObj, this.dateFormats.dateInput), true);
+
+        if (!this.dateAdapter.sameDate(newTimeObj, this.value)) {
+            this._value = newTimeObj;
+            this.cvaOnChange(newTimeObj);
+            this.valueChange.emit(newTimeObj);
+            this.dateInput.emit(new McDatepickerInputEvent(this, this.elementRef.nativeElement));
+            this.control.updateValueAndValidity();
+        }
+    }
 
     onChange() {
         this.dateChange.emit(new McDatepickerInputEvent(this, this.elementRef.nativeElement));
@@ -539,11 +655,9 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
 
     /** Handles blur events on the input. */
     onBlur() {
+        console.log('onBlur: '); // tslint:disable-line:no-console
         // Reformat the input only if we have a valid value.
-        if (this.value) {
-            // this.onInput();
-            this.formatValue(this.value);
-        }
+        this.parseOnBlur();
 
         this.focusChanged(false);
     }
@@ -596,7 +710,7 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
     private replaceSymbols(value: string): string {
         return value
             .split(this.separator)
-            .map((part: string) => part.replace(/^([0-9])\W$/, '0$1'))
+            .map((part: string) => part.replace(/^([0-9]+)\W$/, '0$1'))
             .join(this.separator);
     }
 
@@ -605,74 +719,56 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
 
         const defaultValue = this.getDefaultValue();
 
-        let year = this.dateAdapter.getYear(defaultValue);
-        let month = this.dateAdapter.getMonth(defaultValue);
-        let day = this.dateAdapter.getDate(defaultValue);
-        const hours = this.dateAdapter.getHours(defaultValue);
-        const minutes = this.dateAdapter.getMinutes(defaultValue);
-        const seconds = this.dateAdapter.getSeconds(defaultValue);
-        const milliseconds = this.dateAdapter.getMilliseconds(defaultValue);
+        const date = {
+            year: this.dateAdapter.getYear(defaultValue),
+            month: this.dateAdapter.getMonth(defaultValue),
+            date: this.dateAdapter.getDate(defaultValue),
+            hours: this.dateAdapter.getHours(defaultValue),
+            minutes: this.dateAdapter.getMinutes(defaultValue),
+            seconds: this.dateAdapter.getSeconds(defaultValue),
+            milliseconds: this.dateAdapter.getMilliseconds(defaultValue)
+        };
 
-        if (timeString.length === this.firstDigit.length) {
-            if (this.firstDigit.value === DateParts.day) {
-                day = parseInt(timeString);
+        const viewDigits: string[] = timeString
+            .split(this.separator)
+            .map((value: string) => value);
 
-                if (day > this.dateAdapter.getNumDaysInMonth(defaultValue)) {
-                    day = this.dateAdapter.getDate(this.defaultValue);
-                    month = this.dateAdapter.getMonth(this.defaultValue);
-                    year = this.dateAdapter.getYear(this.defaultValue);
-                }
-            } else if (this.firstDigit.value === DateParts.month) {
-                month = this.checkMonth(timeString);
-            } else if (this.firstDigit.value === DateParts.year) {
-                year = parseInt(timeString);
+        const [firsViewDigit, secondViewDigit, thirdViewDigit] = viewDigits;
+
+        if (viewDigits.length === 1) {
+            if (firsViewDigit.length < this.firstDigit.length) { return null; }
+
+            date[this.firstDigit.fullName] = this.firstDigit.parse(firsViewDigit);
+        // tslint:disable-next-line:no-magic-numbers
+        } else if (viewDigits.length === 2) {
+            if (firsViewDigit.length < this.firstDigit.length || secondViewDigit.length < this.secondDigit.length) {
+                return null;
             }
-        } else if (timeString.length < this.dateFormats.dateInput.length) {
-            return null;
+
+            date[this.firstDigit.fullName] = this.firstDigit.parse(firsViewDigit);
+            date[this.secondDigit.fullName] = this.secondDigit.parse(secondViewDigit);
+        // tslint:disable-next-line:no-magic-numbers
+        } else if (viewDigits.length === 3) {
+            if (
+                firsViewDigit.length < this.firstDigit.length ||
+                secondViewDigit.length < this.secondDigit.length ||
+                thirdViewDigit.length < this.thirdDigit.length
+            ) { return null; }
+
+            date[this.firstDigit.fullName] = this.firstDigit.parse(firsViewDigit);
+            date[this.secondDigit.fullName] = this.secondDigit.parse(secondViewDigit);
+            date[this.thirdDigit.fullName] = this.thirdDigit.parse(thirdViewDigit);
         } else {
-            const digits: number[] = timeString
-                .split(this.separator)
-                .map((value: string) => parseInt(value));
-
-            day = digits[this.getDatePartPosition(DateParts.day)];
-            month = digits[this.getDatePartPosition(DateParts.month)];
-            year = digits[this.getDatePartPosition(DateParts.year)];
-
-            month = this.checkMonth(month as string);
-
-            day = this.checkDay(day, month, year);
+            return null;
         }
 
-        return this.getValidDateOrNull(
-            this.dateAdapter.createDateTime(year, month, day, hours, minutes, seconds, milliseconds)
-        );
-    }
-
-    private checkMonth(month: string): number {
-        const newMonth = parseInt(month);
-
-        const countOfMonth = this.dateAdapter.getMonthNames('short').length;
-
-        return (newMonth > countOfMonth ? countOfMonth : newMonth) - 1;
-    }
-
-    private checkDay(day: number, month: number, year: number): number {
-        const lastDay = this.getLastDayFor(year, month);
-
-        if (day > lastDay) {
-            return lastDay;
-        }
-
-        return day;
+        return this.getValidDateOrNull(this.dateAdapter.createDateTime(
+            date.year, date.month, date.date, date.hours, date.minutes, date.seconds, date.milliseconds
+        ));
     }
 
     private getDefaultValue() {
-        return this.value || this.defaultValue;
-    }
-
-    private createDefaultValue() {
-        // tslint:disable-next-line:no-magic-numbers
-        this.defaultValue = this.dateAdapter.createDate(2000, 0, 1);
+        return this.value || this.dateAdapter.today();
     }
 
     private getTimeStringFromDate(value: D | null, timeFormat: string): string {
@@ -830,6 +926,16 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
         });
     }
 
+    private selectNextDigitByCursor(cursorPos: number): void {
+        setTimeout(() => {
+            const [, , endPositionOfCurrentDigit] = this.getDateEditMetrics(cursorPos);
+            const [, selectionStart, selectionEnd] = this.getDateEditMetrics(endPositionOfCurrentDigit + 1);
+
+            this.selectionStart = selectionStart;
+            this.selectionEnd = selectionEnd;
+        });
+    }
+
     private selectNextDigit(cursorPos: number, cycle: boolean = false): void {
         setTimeout(() => {
             const lastValue = cycle ? 0 : cursorPos;
@@ -857,8 +963,9 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
 
     /** The form control validator for whether the input parses. */
     private parseValidator: ValidatorFn = (): ValidationErrors | null => {
-        return this.lastValueValid ?
-            null : { mcDatepickerParse: { text: this.elementRef.nativeElement.value } };
+        return this.focused ||
+            this.empty ||
+            this.lastValueValid ? null : { mcDatepickerParse: { text: this.elementRef.nativeElement.value } };
     }
 
     /** The form control validator for the min date. */
@@ -951,10 +1058,6 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
         }
     }
 
-    private getDatePartPosition(part: DateParts): number {
-        return [this.firstDigit.value, this.secondDigit.value, this.thirdDigit.value].indexOf(part);
-    }
-
     private createDate(year: number, month: number, day: number): D {
         return this.dateAdapter.createDateTime(
             year,
@@ -965,5 +1068,11 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
             this.dateAdapter.getSeconds(this.value as D),
             this.dateAdapter.getMilliseconds(this.value as D)
         );
+    }
+
+    private correctCursorPosition() {
+        if (this.selectionStart && this.separatorPositions.includes(this.selectionStart)) {
+            this.selectionStart = this.selectionStart - 1;
+        }
     }
 }

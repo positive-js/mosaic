@@ -1,10 +1,14 @@
+<div>Validation state: {{ formControlValue.errors | json }}</div>
+
 <div class="container">
     <label>Default datepicker toggle</label>
     <mc-form-field (click)="myDatepicker1.toggle()"
                    mcTooltip
                    [mcTitle]="'Только цифры'"
                    #tooltip="mcTooltip">
-        <input [(ngModel)]="date" [mcDatepicker]="myDatepicker1" [mcValidationTooltip]="tooltip"/>
+        <input [formControl]="formControlValue"
+               [mcDatepicker]="myDatepicker1"
+               [mcValidationTooltip]="tooltip"/>
 <!--        <mc-datepicker-toggle [tabIndex]="7" mcSuffix [for]="myDatepicker1"></mc-datepicker-toggle>-->
         <i mc-icon="mc-calendar_16" mcSuffix></i>
         <mc-datepicker #myDatepicker1></mc-datepicker>
