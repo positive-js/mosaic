@@ -244,6 +244,10 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
 
     ngOnInit() {
         this.setPositionClasses();
+        this.animationDone.subscribe(() => {
+            this.keyManager.setFocusOrigin('keyboard');
+            this.keyManager.setFirstItemActive();
+        });
     }
 
     ngAfterContentInit() {
