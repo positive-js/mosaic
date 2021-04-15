@@ -440,7 +440,6 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
         }
 
         this.separator = dateFormats.dateInput.match(/[aA-zZ]+(?<separator>\W|\D)[aA-zZ]+/).groups.separator;
-        console.log('this.separator =: '); // tslint:disable-line:no-console
         this.separatorPositions = dateFormats.dateInput
             .split('')
             .reduce((acc, item, index) => this.separator === item ? [...acc, index + 1] : acc, []);
@@ -541,7 +540,6 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
 
             this.changeCaretPosition(keyCode);
         } else if (/^\D$/.test(event.key)) {
-            console.log('/^\\D$/.test(event.key): '); // tslint:disable-line:no-console
             event.preventDefault();
 
             const newValue = this.getNewValue(event.key, this.selectionStart as number);
@@ -561,7 +559,6 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
 
     onInput = () => {
         this.correctCursorPosition();
-        console.log('onInput: '); // tslint:disable-line:no-console
         const formattedValue = this.replaceSymbols(this.viewValue);
 
         const newTimeObj = this.getDateFromString(formattedValue);
@@ -569,6 +566,7 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
 
         if (!newTimeObj) {
             this.control.updateValueAndValidity();
+            this._value = null;
 
             return;
         }
@@ -582,71 +580,65 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
             this.cvaOnChange(newTimeObj);
             this.valueChange.emit(newTimeObj);
             this.dateInput.emit(new McDatepickerInputEvent(this, this.elementRef.nativeElement));
-            this.control.updateValueAndValidity();
         }
+
+        this.control.updateValueAndValidity();
     }
 
     parseOnBlur = () => {
-        console.log('parseOnBlur: '); // tslint:disable-line:no-console
-
         if (!this.viewValue) { return null; }
 
-        const defaultValue = this.getDefaultValue();
+        const date = this.getDefaultValue();
 
-        const date = {
-            year: this.dateAdapter.getYear(defaultValue),
-            month: this.dateAdapter.getMonth(defaultValue),
-            date: this.dateAdapter.getDate(defaultValue),
-            hours: this.dateAdapter.getHours(defaultValue),
-            minutes: this.dateAdapter.getMinutes(defaultValue),
-            seconds: this.dateAdapter.getSeconds(defaultValue),
-            milliseconds: this.dateAdapter.getMilliseconds(defaultValue)
-        };
-
-        const viewDigits: number[] = this.viewValue
+        const viewDigits: string[] = this.viewValue
             .split(this.separator)
-            .map((value: string) => parseInt(value))
+            .map((value: string) => value)
             .filter((value) => value);
 
         const [firsViewDigit, secondViewDigit, thirdViewDigit] = viewDigits;
 
         // tslint:disable-next-line:no-magic-numbers
-        if (viewDigits.length != 3) {
-            return setTimeout(() => this.control.updateValueAndValidity());
-        } else {
-            if (
-                firsViewDigit.length < this.firstDigit.length ||
-                secondViewDigit.length < this.secondDigit.length ||
-                thirdViewDigit.length < this.thirdDigit.length
-            ) {
-                this.control.updateValueAndValidity();
-            }
+        if (viewDigits.length !== 3) {
+            this.lastValueValid = false;
+            this._value = null;
 
-            date[this.firstDigit.fullName] = this.firstDigit.parse(firsViewDigit);
-            date[this.secondDigit.fullName] = this.secondDigit.parse(secondViewDigit);
-            date[this.thirdDigit.fullName] = this.thirdDigit.parse(thirdViewDigit);
+            return setTimeout(() => this.control.updateValueAndValidity());
+        }
+
+        date[this.firstDigit.fullName] = this.firstDigit.parse(firsViewDigit);
+        date[this.secondDigit.fullName] = this.secondDigit.parse(secondViewDigit);
+        date[this.thirdDigit.fullName] = this.thirdDigit.parse(thirdViewDigit);
+
+        const [digitWithYear, viewDigitWithYear] = [this.firstDigit, this.secondDigit, this.thirdDigit]
+            .reduce((acc, digit, index) => digit.value === DateParts.year ? [digit, viewDigits[index]] : acc, []);
+
+        // tslint:disable-next-line:no-magic-numbers
+        if (viewDigitWithYear.length < 3) {
+            // tslint:disable-next-line:no-magic-numbers
+            date.year += date.year < 30 ? 2000 : 1900;
+        } else if (viewDigitWithYear.length < digitWithYear.length) {
+            this.lastValueValid = false;
+            this._value = null;
+
+            return setTimeout(() => this.control.updateValueAndValidity());
         }
 
         const newTimeObj = this.getValidDateOrNull(this.dateAdapter.createDateTime(
             date.year, date.month, date.date, date.hours, date.minutes, date.seconds, date.milliseconds
         ));
 
-
-
-
         this.lastValueValid = !!newTimeObj;
 
-        this.control.updateValueAndValidity();
-
-        this.setViewValue(this.getTimeStringFromDate(newTimeObj, this.dateFormats.dateInput), true);
-
         if (!this.dateAdapter.sameDate(newTimeObj, this.value)) {
+            this.setViewValue(this.getTimeStringFromDate(newTimeObj, this.dateFormats.dateInput), true);
+
             this._value = newTimeObj;
             this.cvaOnChange(newTimeObj);
             this.valueChange.emit(newTimeObj);
             this.dateInput.emit(new McDatepickerInputEvent(this, this.elementRef.nativeElement));
-            this.control.updateValueAndValidity();
         }
+
+        this.control.updateValueAndValidity();
     }
 
     onChange() {
@@ -655,7 +647,6 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
 
     /** Handles blur events on the input. */
     onBlur() {
-        console.log('onBlur: '); // tslint:disable-line:no-console
         // Reformat the input only if we have a valid value.
         this.parseOnBlur();
 
@@ -717,17 +708,7 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
     private getDateFromString(timeString: string): D | null {
         if (!timeString || timeString.length < this.firstDigit.length) { return null; }
 
-        const defaultValue = this.getDefaultValue();
-
-        const date = {
-            year: this.dateAdapter.getYear(defaultValue),
-            month: this.dateAdapter.getMonth(defaultValue),
-            date: this.dateAdapter.getDate(defaultValue),
-            hours: this.dateAdapter.getHours(defaultValue),
-            minutes: this.dateAdapter.getMinutes(defaultValue),
-            seconds: this.dateAdapter.getSeconds(defaultValue),
-            milliseconds: this.dateAdapter.getMilliseconds(defaultValue)
-        };
+        const date = this.getDefaultValue();
 
         const viewDigits: string[] = timeString
             .split(this.separator)
@@ -768,7 +749,17 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
     }
 
     private getDefaultValue() {
-        return this.value || this.dateAdapter.today();
+        const defaultValue = this.value || this.dateAdapter.today();
+
+        return {
+            year: this.dateAdapter.getYear(defaultValue),
+            month: this.dateAdapter.getMonth(defaultValue),
+            date: this.dateAdapter.getDate(defaultValue),
+            hours: this.dateAdapter.getHours(defaultValue),
+            minutes: this.dateAdapter.getMinutes(defaultValue),
+            seconds: this.dateAdapter.getSeconds(defaultValue),
+            milliseconds: this.dateAdapter.getMilliseconds(defaultValue)
+        };
     }
 
     private getTimeStringFromDate(value: D | null, timeFormat: string): string {
