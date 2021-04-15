@@ -328,7 +328,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
         this.dropdown.parent = this.triggersNestedDropdown() ? this._parent : undefined;
         this.dropdown.direction = this.dir;
         this.setIsOpened(true);
-        this.dropdown.focusFirstItem(this.openedBy || 'program');
+        this.dropdown.focusFirstItem(this.openedBy || 'keyboard');
     }
 
     /**
