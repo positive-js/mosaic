@@ -325,7 +325,7 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
         }
     }
 
-    private _disabled: boolean;
+    private _disabled: boolean = false;
 
     @Input()
     get id(): string {

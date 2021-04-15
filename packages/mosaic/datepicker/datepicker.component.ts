@@ -316,8 +316,6 @@ export class McDatepicker<D> implements OnDestroy {
         this.datepickerInput = input;
         this.inputSubscription = this.datepickerInput.valueChange
             .subscribe((value: D | null) => {
-                console.log('this.selected = value: '); // tslint:disable-line:no-console
-
                 this.selected = value;
                 // @ts-ignore
                 if (this.popupComponentRef) {
