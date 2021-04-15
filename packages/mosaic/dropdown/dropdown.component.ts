@@ -305,14 +305,12 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
      */
     focusFirstItem(origin: FocusOrigin = 'program'): void {
         // When the content is rendered lazily, it takes a bit before the items are inside the DOM.
-        if (origin === 'keyboard') {
-            if (this.lazyContent) {
-                this._ngZone.onStable.asObservable()
-                    .pipe(take(1))
-                    .subscribe(() => this.keyManager.setFocusOrigin(origin).setFirstItemActive());
-            } else {
-                this.keyManager.setFocusOrigin(origin).setFirstItemActive();
-            }
+        if (this.lazyContent) {
+            this._ngZone.onStable.asObservable()
+                .pipe(take(1))
+                .subscribe(() => this.keyManager.setFocusOrigin(origin).setFirstItemActive());
+        } else {
+            this.keyManager.setFocusOrigin(origin).setFirstItemActive();
         }
     }
 

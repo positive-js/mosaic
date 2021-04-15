@@ -164,6 +164,7 @@ describe('McDropdown', () => {
         fixture.componentInstance.trigger.close();
         fixture.detectChanges();
         tick(500);
+        fixture.detectChanges();
 
         expect(document.activeElement).toBe(triggerEl);
     }));
@@ -774,7 +775,7 @@ describe('McDropdown', () => {
             expect(panel.classList).not.toContain('mc-dropdown-above');
         });
 
-        it('should default to the "below" and "after" positions', () => {
+        it('should default to the "below" and "before" positions', () => {
             overlayContainer.ngOnDestroy();
             fixture.destroy();
             TestBed.resetTestingModule();
@@ -787,7 +788,7 @@ describe('McDropdown', () => {
             const panel = overlayContainerElement.querySelector(PANEL_SELECTOR) as HTMLElement;
 
             expect(panel.classList).toContain('mc-dropdown-below');
-            expect(panel.classList).toContain('mc-dropdown-after');
+            expect(panel.classList).toContain('mc-dropdown-before');
         });
     });
 

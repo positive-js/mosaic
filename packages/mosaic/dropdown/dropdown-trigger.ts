@@ -108,7 +108,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
 
     // Tracking input type is necessary so it's possible to only auto-focus
     // the first item of the list when the dropdown is opened via the keyboard
-    openedBy: 'mouse' | 'touch' | null = null;
+    openedBy: 'mouse' | 'touch' | 'keyboard' | null = null;
 
     /** Data to be passed along to any lazily-rendered content. */
     @Input('mcDropdownTriggerData') data: any;
@@ -253,6 +253,8 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
         // tslint:disable-next-line:deprecation
         const keyCode = event.key || event.keyCode;
 
+        this.openedBy = 'keyboard';
+
         if (keyCode === SPACE || keyCode === ENTER) {
             this.open();
         }
@@ -328,7 +330,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
         this.dropdown.parent = this.triggersNestedDropdown() ? this._parent : undefined;
         this.dropdown.direction = this.dir;
         this.setIsOpened(true);
-        this.dropdown.focusFirstItem(this.openedBy || 'keyboard');
+        this.dropdown.focusFirstItem(this.openedBy);
     }
 
     /**
