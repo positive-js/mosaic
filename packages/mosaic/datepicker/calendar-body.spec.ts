@@ -63,15 +63,6 @@ describe('McCalendarBody', () => {
             expect(selectedCell.innerHTML.trim()).toBe('4');
         });
 
-        it('should set aria-selected correctly', () => {
-            const selectedCells = cellEls.filter((c) => c.getAttribute('aria-selected') === 'true');
-            const deselectedCells = cellEls.filter((c) => c.getAttribute('aria-selected') === 'false');
-
-            expect(selectedCells.length).toBe(1, 'Expected one cell to be marked as selected.');
-            expect(deselectedCells.length)
-                .toBe(cellEls.length - 1, 'Expected remaining cells to be marked as deselected.');
-        });
-
         it('places label in first row if space is available', () => {
             testComponent.rows[0] = testComponent.rows[0].slice(3);
             testComponent.rows = testComponent.rows.slice();

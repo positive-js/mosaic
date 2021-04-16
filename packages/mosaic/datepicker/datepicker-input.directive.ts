@@ -508,6 +508,7 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
         this.disabled = isDisabled;
     }
 
+    // tslint:disable-next-line:cyclomatic-complexity
     onKeyDown(event: KeyboardEvent): void {
         if (this.isReadOnly) { return; }
 
@@ -518,11 +519,16 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
             event.preventDefault();
 
             this.incorrectInput.emit();
-        } else if (
-            (event.altKey && [UP_ARROW, DOWN_ARROW].includes(keyCode)) ||
-            [TAB, ESCAPE].includes(keyCode)
-        ) {
-            this.datepickerStateHandler(keyCode);
+        } else if (event.altKey && keyCode === DOWN_ARROW) {
+            event.preventDefault();
+
+            this.datepicker.open();
+        } else if ((event.altKey && keyCode === UP_ARROW) || keyCode === ESCAPE) {
+            event.preventDefault();
+
+            this.datepicker.close();
+        } else if (keyCode === TAB) {
+            this.datepicker.close(false);
         } else if (
             (hasModifierKey(event) && (isVerticalMovement(keyCode) || isHorizontalMovement(keyCode))) ||
             event.ctrlKey || event.metaKey ||
@@ -668,13 +674,9 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
 
         if (this.selectionStart === this.selectionEnd) {
             const value = this.getNewValue(event.key, this.selectionStart as number);
-            const formattedValue = this.replaceSymbols(value);
+            this.setViewValue(value);
 
-            if (value !== formattedValue) {
-                this.setViewValue(formattedValue);
-
-                setTimeout(this.onInput);
-            }
+            setTimeout(this.onInput);
         } else if (this.selectionStart !== this.selectionEnd) {
             this.selectNextDigit(this.selectionStart as number, true);
         }
@@ -1003,16 +1005,6 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
     private setControl(control: AbstractControl) {
         if (!this.control) {
             this.control = control;
-        }
-    }
-
-    private datepickerStateHandler(keyCode: number) {
-        if ([DOWN_ARROW].includes(keyCode)) {
-            this.datepicker.open();
-        } else if (keyCode === TAB) {
-            this.datepicker.close(false);
-        } else if ([UP_ARROW, ESCAPE].includes(keyCode)) {
-            this.datepicker.close();
         }
     }
 

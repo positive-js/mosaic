@@ -78,7 +78,7 @@ describe('McCalendarHeader', () => {
             periodButton.click();
             fixture.detectChanges();
 
-            expect(calendarInstance.currentView).toBe('multi-year');
+            expect(calendarInstance.currentView).toBe('year');
 
             periodButton.click();
             fixture.detectChanges();
@@ -104,13 +104,8 @@ describe('McCalendarHeader', () => {
             periodButton.click();
             fixture.detectChanges();
 
-            expect(calendarInstance.currentView).toBe('multi-year');
-            expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2017, 0, 31));
-
-            (calendarElement.querySelector('.mc-calendar__body_active') as HTMLElement).click();
-            fixture.detectChanges();
-
             expect(calendarInstance.currentView).toBe('year');
+            expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2017, 0, 31));
 
             nextButton.click();
             fixture.detectChanges();
@@ -127,8 +122,13 @@ describe('McCalendarHeader', () => {
             periodButton.click();
             fixture.detectChanges();
 
-            expect(calendarInstance.currentView).toBe('multi-year');
+            expect(calendarInstance.currentView).toBe('year');
             expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2017, 0, 31));
+
+            (calendarElement.querySelector('.mc-calendar__body_active') as HTMLElement).click();
+            fixture.detectChanges();
+
+            expect(calendarInstance.currentView).toBe('multi-year');
 
             nextButton.click();
             fixture.detectChanges();
@@ -145,18 +145,17 @@ describe('McCalendarHeader', () => {
             periodButton.click();
             fixture.detectChanges();
 
-            expect(calendarInstance.currentView).toBe('multi-year');
-            expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2017, 0, 31));
-
-            const yearCells = calendarElement.querySelectorAll('.mc-calendar__body-cell');
-            (yearCells[0] as HTMLElement).click();
-            fixture.detectChanges();
-
             expect(calendarInstance.currentView).toBe('year');
-            expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2016, 0, 31));
+            expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2017, 0, 31));
 
             const monthCells = calendarElement.querySelectorAll('.mc-calendar__body-cell');
             (monthCells[monthCells.length - 1] as HTMLElement).click();
+            fixture.detectChanges();
+
+            expect(calendarInstance.currentView).toBe('multi-year');
+
+            const yearCells = calendarElement.querySelectorAll('.mc-calendar__body-cell');
+            (yearCells[0] as HTMLElement).click();
             fixture.detectChanges();
 
             expect(calendarInstance.currentView).toBe('month');
