@@ -1,0 +1,11 @@
+td {
+    padding: 16px;
+}
+
+.warning {
+    color: #F0D49B !important;
+}
+
+.ok {
+    color: #B79A45 !important;
+}

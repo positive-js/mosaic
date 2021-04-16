@@ -1,0 +1,9 @@
+.docs-padding {
+    padding: 16px;
+}
+.fixed-width {
+    width: 275px;
+}
+.inline{
+    display: inline !important;
+}
