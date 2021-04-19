@@ -285,7 +285,6 @@ export class McDatepicker<D> implements OnDestroy {
 
     /** Selects the given date */
     select(date: D): void {
-        console.log('select: '); // tslint:disable-line:no-console
         const oldValue = this.selected;
         this.selected = date;
 
@@ -346,8 +345,6 @@ export class McDatepicker<D> implements OnDestroy {
     /** Close the calendar. */
     close(restoreFocus: boolean = true): void {
         if (!this._opened) { return; }
-
-        console.log('close: '); // tslint:disable-line:no-console
 
         if (this.popupRef && this.popupRef.hasAttached()) {
             this.popupRef.detach();

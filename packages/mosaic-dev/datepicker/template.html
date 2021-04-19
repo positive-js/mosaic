@@ -1,5 +1,19 @@
 <div>Validation state: {{ formControlValue.errors | json }}</div>
 
+
+<mc-radio-group
+    class="example-radio-group"
+    (change)="setFormat($event)">
+    <mc-radio-button *ngFor="let language of languageList"
+                     [value]="language"
+                     [checked]="language.name === selectedLanguage"
+                     class="example-radio-button">
+        {{ language.name }}
+    </mc-radio-button>
+</mc-radio-group>
+
+<br><br><br>
+
 <div class="container">
     <label>Default datepicker toggle</label>
     <mc-form-field (click)="myDatepicker1.toggle()"

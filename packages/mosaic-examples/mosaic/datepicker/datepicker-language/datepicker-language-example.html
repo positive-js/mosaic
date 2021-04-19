@@ -1,21 +1,28 @@
 <mc-radio-group
     class="example-radio-group"
-    (change)="useLanguage($event)">
+    (change)="setFormat($event)">
     <mc-radio-button *ngFor="let language of languageList"
                      [value]="language"
-                     [checked]="language === 'en'"
+                     [checked]="language.name === selectedLanguage"
                      class="example-radio-button">
-        {{ language }}
+        {{ language.name }}
     </mc-radio-button>
 </mc-radio-group>
 
-<mc-form-field>
-    <input mcInput [(ngModel)]="selectedDate" [mcDatepicker]="picker" />
-    <mc-datepicker-toggle tabindex="7" mcSuffix [for]="picker"></mc-datepicker-toggle>
+<br>
+
+<mc-form-field
+    (click)="picker.toggle()"
+    mcTooltip
+    [mcTitle]="'Только цифры'"
+    #tooltip="mcTooltip">
+
+    <input [formControl]="selectedDate" [mcDatepicker]="picker" [mcValidationTooltip]="tooltip"/>
+    <i mc-icon="mc-calendar_16" mcSuffix></i>
     <mc-datepicker #picker></mc-datepicker>
 </mc-form-field>
 
 <div>
     <h3>Date</h3>
-    <p>{{selectedDate}}</p>
+    <p>{{ selectedDate.value }}</p>
 </div>

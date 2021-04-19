@@ -1,5 +1,10 @@
-<mc-form-field>
-    <input mcInput [(ngModel)]="date" [mcDatepicker]="myDatepicker" />
-    <mc-datepicker-toggle tabindex="7" mcSuffix [for]="myDatepicker"></mc-datepicker-toggle>
+<mc-form-field
+    (click)="myDatepicker.toggle()"
+    mcTooltip
+    [mcTitle]="'Только цифры'"
+    #tooltip="mcTooltip">
+
+    <input [(ngModel)]="date" [mcDatepicker]="myDatepicker" [mcValidationTooltip]="tooltip"/>
+    <i mc-icon="mc-calendar_16" mcSuffix></i>
     <mc-datepicker #myDatepicker></mc-datepicker>
 </mc-form-field>

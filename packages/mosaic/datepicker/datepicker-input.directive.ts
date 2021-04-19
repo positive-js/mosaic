@@ -420,9 +420,9 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
 
     constructor(
         public elementRef: ElementRef<HTMLInputElement>,
-        @Optional() public dateAdapter: DateAdapter<D>,
+        private dateAdapter: DateAdapter<D>,
         private renderer: Renderer2,
-        @Optional() @Inject(MC_DATE_FORMATS) private dateFormats: McDateFormats
+        @Inject(MC_DATE_FORMATS) private dateFormats: McDateFormats
     ) {
         this.validator = Validators.compose([
             this.parseValidator,

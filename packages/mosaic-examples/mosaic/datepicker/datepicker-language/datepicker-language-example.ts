@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { DateAdapter } from '@ptsecurity/cdk/datetime';
+import { Component, Inject } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { MC_DATE_FORMATS, McDateFormats } from '@ptsecurity/cdk/datetime';
 import { McRadioChange } from '@ptsecurity/mosaic/radio';
+import * as _moment from 'moment';
+// @ts-ignore
+// tslint:disable-next-line:no-duplicate-imports
+import { default as _rollupMoment, Moment } from 'moment';
 
 
-enum Languages {
-    EN = 'en',
-    DE = 'de',
-    FR = 'fr',
-    RU = 'ru'
-}
+const moment = _rollupMoment || _moment;
+
+
 /**
  * @title Multy language datepicker
  */
@@ -17,18 +19,22 @@ enum Languages {
     templateUrl: 'datepicker-language-example.html',
     styleUrls: ['datepicker-language-example.css']
 })
-export class DatepickerLanguageExample  implements OnInit {
-    selectedDate: Date = new Date();
-    languageList: string[] = [];
+export class DatepickerLanguageExample {
+    selectedDate = new FormControl(moment('2020-05-06 12:00:00'));
+    languageList = [
+        { name: 'EN', format: 'DD/MM/YYYY' },
+        { name: 'DE', format: 'DD-MM-YYYY' },
+        { name: 'FR', format: 'DD/MM/YYYY' },
+        { name: 'RU', format: 'DD.MM.YYYY' }
+    ];
+    selectedLanguage = 'EN';
 
-    constructor(private dateAdapter: DateAdapter<any>) {}
+    constructor(@Inject(MC_DATE_FORMATS) private dateFormats: McDateFormats) {}
 
-    ngOnInit() {
-        this.languageList = Object.keys(Languages).filter(String);
-        this.dateAdapter.setLocale(this.languageList[0]);
-    }
+    setFormat($event: McRadioChange): void {
+        this.dateFormats.dateInput = $event.value.format;
+        this.selectedLanguage = $event.value.name;
 
-    useLanguage($event: McRadioChange): void {
-        this.dateAdapter.setLocale($event.value);
+        this.selectedDate.setValue(this.selectedDate.value);
     }
 }

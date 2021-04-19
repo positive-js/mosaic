@@ -1,7 +1,13 @@
 <div class="example-datepicker-group">
-    <mc-form-field class="example-datepicker">
-        <input mcInput [mcDatepicker]="datepicker" />
-        <mc-datepicker-toggle mcSuffix [for]="datepicker"></mc-datepicker-toggle>
+    <mc-form-field
+        class="example-datepicker"
+        (click)="datepicker.toggle()"
+        mcTooltip
+        [mcTitle]="'Только цифры'"
+        #tooltip="mcTooltip">
+
+        <input [mcDatepicker]="datepicker" [mcValidationTooltip]="tooltip"/>
+        <i mc-icon="mc-calendar_16" mcSuffix></i>
         <mc-datepicker #datepicker></mc-datepicker>
     </mc-form-field>
 </div>

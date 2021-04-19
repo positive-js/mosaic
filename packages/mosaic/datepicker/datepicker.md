@@ -3,9 +3,6 @@
 ### Locales
 <!-- example(datepicker-language) -->
 
-### toggle
-<!-- example(datepicker-toggle) -->
-
 ### startView
 <!-- example(datepicker-year) -->
 

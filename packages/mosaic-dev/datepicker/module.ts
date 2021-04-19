@@ -2,6 +2,7 @@
 import {
     AfterViewInit,
     Component,
+    Inject,
     NgModule,
     ViewChild,
     ViewEncapsulation
@@ -9,7 +10,7 @@ import {
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DateAdapter, MC_DATE_FORMATS, MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
+import { DateAdapter, MC_DATE_FORMATS, MC_DATE_LOCALE, McDateFormats } from '@ptsecurity/cdk/datetime';
 import {
     MC_MOMENT_DATE_ADAPTER_OPTIONS,
     MC_MOMENT_DATE_FORMATS,
@@ -20,6 +21,7 @@ import { McDatepicker, McDatepickerModule } from '@ptsecurity/mosaic/datepicker'
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
+import { McRadioChange, McRadioModule } from '@ptsecurity/mosaic/radio';
 import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 
 // Depending on whether rollup is used, moment needs to be imported differently.
@@ -35,6 +37,7 @@ import { default as _rollupMoment, Moment } from 'moment';
 
 const moment = _rollupMoment || _moment;
 
+
 @Component({
     selector: 'app',
     templateUrl: './template.html',
@@ -49,7 +52,7 @@ const moment = _rollupMoment || _moment;
                 const dateFormats: any = { ...MC_MOMENT_DATE_FORMATS };
 
                 // dateFormats.dateInput = 'DD.MM.YYYY';
-                dateFormats.dateInput = 'MM.DD.YYYY';
+                dateFormats.dateInput = 'DD/MM/YYYY';
                 // dateFormats.dateInput = 'YYYY.MM.DD';
 
                 return dateFormats;
@@ -74,7 +77,24 @@ export class DemoComponent implements AfterViewInit {
     minDate = moment([2015, 0, 1]);
     maxDate = moment([2020, 0, 1]);
 
+    languageList = [
+        { name: 'EN', format: 'DD/MM/YYYY' },
+        { name: 'DE', format: 'DD-MM-YYYY' },
+        { name: 'FR', format: 'DD/MM/YYYY' },
+        { name: 'RU', format: 'DD.MM.YYYY' }
+    ];
+    selectedLanguage = 'EN';
+
     @ViewChild(McDatepicker) datepicker: McDatepicker<any>;
+
+    constructor(@Inject(MC_DATE_FORMATS) private dateFormats: McDateFormats) {}
+
+    setFormat($event: McRadioChange): void {
+        this.dateFormats.dateInput = $event.value.format;
+        this.selectedLanguage = $event.value.name;
+
+        this.formControlValue.setValue(this.formControlValue.value);
+    }
 
     myFilter(date: Moment): boolean {
         const day = date.day();
@@ -102,7 +122,8 @@ export class DemoComponent implements AfterViewInit {
         McDatepickerModule,
         McMomentDateModule,
         McInputModule,
-        McIconModule
+        McIconModule,
+        McRadioModule
     ],
     bootstrap: [DemoComponent],
     providers: []

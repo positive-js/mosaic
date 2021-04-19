@@ -1,33 +1,58 @@
 <div class=".example-datepicker-group">
-    <label>Datepicker disabled</label>
-    <mc-form-field class="example-datepicker">
-        <input mcInput [mcDatepicker]="myDatepicker1" />
-        <mc-datepicker-toggle tabindex="7" mcSuffix [for]="myDatepicker1"></mc-datepicker-toggle>
-        <mc-datepicker disabled #myDatepicker1 startView="multi-year"></mc-datepicker>
-    </mc-form-field>
+    <div>
+        <label>Datepicker disabled</label>
+        <br>
+        <mc-form-field
+            class="example-datepicker"
+            (click)="myDatepicker1.toggle()"
+            mcTooltip
+            [mcTitle]="'Только цифры'"
+            #tooltip1="mcTooltip">
 
-    <label>Datepicker with disabled input</label>
-    <mc-form-field class="example-datepicker">
-        <input mcInput [mcDatepicker]="myDatepicker2" disabled/>
-        <mc-datepicker-toggle tabindex="7" mcSuffix [for]="myDatepicker2"></mc-datepicker-toggle>
-        <mc-datepicker #myDatepicker2></mc-datepicker>
-    </mc-form-field>
+            <input [ngModel]="date" [mcDatepicker]="myDatepicker1" [mcValidationTooltip]="tooltip1"/>
+            <i mc-icon="mc-calendar_16" mcSuffix></i>
+            <mc-datepicker disabled #myDatepicker1 startView="multi-year"></mc-datepicker>
+        </mc-form-field>
+    </div>
 
-    <label>Datepicker with readonly input</label>
-    <mc-form-field class="example-datepicker">
-        <input mcInput [mcDatepicker]="myDatepicker3" readonly/>
-        <mc-datepicker-toggle tabindex="7" mcSuffix [for]="myDatepicker3"></mc-datepicker-toggle>
-        <mc-datepicker #myDatepicker3></mc-datepicker>
-    </mc-form-field>
+    <div>
+        <label>Datepicker with disabled input</label>
+        <br>
+        <mc-form-field class="example-datepicker" (click)="myDatepicker1.toggle()">
+            <input [ngModel]="date" [mcDatepicker]="myDatepicker2" disabled/>
+            <i mc-icon="mc-calendar_16" mcSuffix></i>
+            <mc-datepicker #myDatepicker2></mc-datepicker>
+        </mc-form-field>
+    </div>
 
-    <label>Datepicker with some dates disabled</label>
-    <mc-form-field class="example-datepicker">
-        <input mcInput
-               [mcDatepicker]="myDatepicker4"
-               [mcDatepickerFilter]="myFilter"
-               [min]="minDate"
-               [max]="maxDate"/>
-        <mc-datepicker-toggle tabindex="7" mcSuffix [for]="myDatepicker4"></mc-datepicker-toggle>
-        <mc-datepicker #myDatepicker4></mc-datepicker>
-    </mc-form-field>
+    <div>
+        <label>Datepicker with readonly input</label>
+        <br>
+        <mc-form-field class="example-datepicker" (click)="myDatepicker3.toggle()">
+            <input [ngModel]="date" [mcDatepicker]="myDatepicker3" readonly/>
+            <i mc-icon="mc-calendar_16" mcSuffix></i>
+            <mc-datepicker #myDatepicker3></mc-datepicker>
+        </mc-form-field>
+    </div>
+
+    <div>
+        <label>Datepicker with some dates disabled</label>
+        <br>
+        <mc-form-field
+            class="example-datepicker"
+            (click)="myDatepicker4.toggle()"
+            mcTooltip
+            [mcTitle]="'Только цифры'"
+            #tooltip4="mcTooltip">
+
+            <input [ngModel]="date"
+                   [mcDatepicker]="myDatepicker4"
+                   [mcDatepickerFilter]="myFilter"
+                   [mcValidationTooltip]="tooltip4"
+                   [min]="minDate"
+                   [max]="maxDate"/>
+            <i mc-icon="mc-calendar_16" mcSuffix></i>
+            <mc-datepicker #myDatepicker4></mc-datepicker>
+        </mc-form-field>
+    </div>
 </div>
