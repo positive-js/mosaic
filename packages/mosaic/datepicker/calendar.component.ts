@@ -121,20 +121,22 @@ export class McCalendarHeader<D> {
         if (this.calendar.currentView === McCalendarView.Month) {
             this.calendar.activeDate = this.dateAdapter.addCalendarMonths(this.calendar.activeDate, -1);
         } else {
-            const years = this.calendar.currentView === McCalendarView.Year ? -1 : -yearsPerPage;
-
-            this.calendar.activeDate = this.dateAdapter.addCalendarYears(this.calendar.activeDate, years);
+            this.calendar.activeDate = this.dateAdapter.addCalendarYears(
+                this.calendar.activeDate,
+                this.calendar.currentView === McCalendarView.Year ? -1 : -yearsPerPage
+            );
         }
     }
 
     /** Handles user clicks on the next button. */
     nextClicked(): void {
-        if (this.calendar.currentView === McCalendarView.Year) {
+        if (this.calendar.currentView === McCalendarView.Month) {
             this.calendar.activeDate = this.dateAdapter.addCalendarMonths(this.calendar.activeDate, 1);
         } else {
-            const years = this.calendar.currentView === (McCalendarView.Year as McCalendarView) ? 1 : yearsPerPage;
-
-            this.calendar.activeDate = this.dateAdapter.addCalendarYears(this.calendar.activeDate, years);
+            this.calendar.activeDate = this.dateAdapter.addCalendarYears(
+                this.calendar.activeDate,
+                this.calendar.currentView === McCalendarView.Year ? 1 : yearsPerPage
+            );
         }
     }
 
