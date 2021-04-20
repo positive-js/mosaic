@@ -2,6 +2,8 @@ td {
     padding: 16px;
 }
 
+/*Цвета ссылок должны браться как переменные из необходмой темы*/
+
 .warning {
     color: #F0D49B !important;
     border-bottom: 1px solid #F0D49B !important;
