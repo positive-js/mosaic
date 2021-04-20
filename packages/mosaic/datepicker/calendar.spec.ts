@@ -5,7 +5,7 @@ import { Component, NgZone } from '@angular/core';
 import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
-import { ENTER, RIGHT_ARROW, SPACE } from '@ptsecurity/cdk/keycodes';
+import { ENTER } from '@ptsecurity/cdk/keycodes';
 import {
     dispatchFakeEvent,
     dispatchKeyboardEvent,

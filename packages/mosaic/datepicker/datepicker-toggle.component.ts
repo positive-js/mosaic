@@ -16,8 +16,8 @@ import {
 import { McButton } from '@ptsecurity/mosaic/button';
 import { merge, of as observableOf, Subscription } from 'rxjs';
 
-import { McDatepicker } from './datepicker.component';
 import { McDatepickerIntl } from './datepicker-intl';
+import { McDatepicker } from './datepicker.component';
 
 
 /** Can be used to override the icon of a `mcDatepickerToggle`. */

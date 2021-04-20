@@ -442,7 +442,7 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
         this.separator = dateFormats.dateInput.match(/[aA-zZ]+(?<separator>\W|\D)[aA-zZ]+/).groups.separator;
         this.separatorPositions = dateFormats.dateInput
             .split('')
-            .reduce((acc, item, index) => this.separator === item ? [...acc, index + 1] : acc, []);
+            .reduce((acc, item, index: number) => this.separator === item ? [...acc, index + 1] : acc, []);
 
         this.getDigitPositions(dateFormats.dateInput);
 
