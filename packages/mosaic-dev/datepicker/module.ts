@@ -87,7 +87,7 @@ export class DemoComponent implements AfterViewInit {
 
     @ViewChild(McDatepicker) datepicker: McDatepicker<any>;
 
-    constructor(@Inject(MC_DATE_FORMATS) private dateFormats: McDateFormats) {}
+    constructor(@Inject(MC_DATE_FORMATS) private readonly dateFormats: McDateFormats) {}
 
     setFormat($event: McRadioChange): void {
         this.dateFormats.dateInput = $event.value.format;

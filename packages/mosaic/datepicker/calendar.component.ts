@@ -32,7 +32,11 @@ import { McYearView } from './year-view.component';
  * Possible views for the calendar.
  * @docs-private
  */
-export type McCalendarView = 'month' | 'year' | 'multi-year';
+export enum McCalendarView {
+    Month = 'month',
+    Year = 'year',
+    MultiYear = 'multi-year'
+}
 
 /** Default header for McCalendar */
 @Component({
@@ -47,10 +51,10 @@ export type McCalendarView = 'month' | 'year' | 'multi-year';
 })
 export class McCalendarHeader<D> {
     constructor(
-        private intl: McDatepickerIntl,
+        private readonly intl: McDatepickerIntl,
         @Inject(forwardRef(() => McCalendar)) public calendar: McCalendar<D>,
-        @Optional() private dateAdapter: DateAdapter<D>,
-        @Optional() @Inject(MC_DATE_FORMATS) private dateFormats: McDateFormats,
+        @Optional() private readonly dateAdapter: DateAdapter<D>,
+        @Optional() @Inject(MC_DATE_FORMATS) private readonly dateFormats: McDateFormats,
         changeDetectorRef: ChangeDetectorRef
     ) {
         this.calendar.stateChanges.subscribe(() => changeDetectorRef.markForCheck());
@@ -58,14 +62,14 @@ export class McCalendarHeader<D> {
 
     /** The label for the current calendar view. */
     get periodButtonText(): string {
-        if (this.calendar.currentView === 'month') {
+        if (this.calendar.currentView === McCalendarView.Month) {
             const label = this.dateAdapter
                 .format(this.calendar.activeDate, this.dateFormats.monthYearLabel);
 
             return label[0].toLocaleUpperCase() + label.substr(1);
         }
 
-        if (this.calendar.currentView === 'year') {
+        if (this.calendar.currentView === McCalendarView.Year) {
             return this.dateAdapter.getYearName(this.calendar.activeDate);
         }
 
@@ -81,54 +85,57 @@ export class McCalendarHeader<D> {
     }
 
     get periodButtonLabel(): string {
-        return this.calendar.currentView === 'month' ?
+        return this.calendar.currentView === McCalendarView.Month ?
             this.intl.switchToMultiYearViewLabel : this.intl.switchToMonthViewLabel;
     }
 
     /** The label for the previous button. */
     get prevButtonLabel(): string {
         return {
-            month: this.intl.prevMonthLabel,
-            year: this.intl.prevYearLabel,
-            'multi-year': this.intl.prevMultiYearLabel
+            [McCalendarView.Month]: this.intl.prevMonthLabel,
+            [McCalendarView.Year]: this.intl.prevYearLabel,
+            [McCalendarView.MultiYear]: this.intl.prevMultiYearLabel
         }[this.calendar.currentView];
     }
 
     /** The label for the next button. */
     get nextButtonLabel(): string {
         return {
-            month: this.intl.nextMonthLabel,
-            year: this.intl.nextYearLabel,
-            'multi-year': this.intl.nextMultiYearLabel
+            [McCalendarView.Month]: this.intl.nextMonthLabel,
+            [McCalendarView.Year]: this.intl.nextYearLabel,
+            [McCalendarView.MultiYear]: this.intl.nextMultiYearLabel
         }[this.calendar.currentView];
     }
 
     /** Handles user clicks on the period label. */
     currentPeriodClicked(): void {
-        if (['month', 'multi-year'].includes(this.calendar.currentView)) {
-            this.calendar.currentView = 'year';
-        } else if (this.calendar.currentView === 'year') {
-            this.calendar.currentView = 'month';
+        if (([McCalendarView.Month, McCalendarView.MultiYear] as McCalendarView[]).includes(this.calendar.currentView)) {
+            this.calendar.currentView = McCalendarView.Year;
+        } else if (this.calendar.currentView === McCalendarView.Year) {
+            this.calendar.currentView = McCalendarView.Month;
         }
     }
 
     /** Handles user clicks on the previous button. */
     previousClicked(): void {
-        this.calendar.activeDate = this.calendar.currentView === 'month' ?
-            this.dateAdapter.addCalendarMonths(this.calendar.activeDate, -1) :
-            this.dateAdapter.addCalendarYears(
-                this.calendar.activeDate, this.calendar.currentView === 'year' ? -1 : -yearsPerPage
-            );
+        if (this.calendar.currentView === McCalendarView.Month) {
+            this.calendar.activeDate = this.dateAdapter.addCalendarMonths(this.calendar.activeDate, -1);
+        } else {
+            const years = this.calendar.currentView === McCalendarView.Year ? -1 : -yearsPerPage;
+
+            this.calendar.activeDate = this.dateAdapter.addCalendarYears(this.calendar.activeDate, years);
+        }
     }
 
     /** Handles user clicks on the next button. */
     nextClicked(): void {
-        this.calendar.activeDate = this.calendar.currentView === 'month' ?
-            this.dateAdapter.addCalendarMonths(this.calendar.activeDate, 1) :
-            this.dateAdapter.addCalendarYears(
-                this.calendar.activeDate,
-                this.calendar.currentView === 'year' ? 1 : yearsPerPage
-            );
+        if (this.calendar.currentView === McCalendarView.Year) {
+            this.calendar.activeDate = this.dateAdapter.addCalendarMonths(this.calendar.activeDate, 1);
+        } else {
+            const years = this.calendar.currentView === (McCalendarView.Year as McCalendarView) ? 1 : yearsPerPage;
+
+            this.calendar.activeDate = this.dateAdapter.addCalendarYears(this.calendar.activeDate, years);
+        }
     }
 
     /** Whether the previous period button is enabled. */
@@ -145,12 +152,12 @@ export class McCalendarHeader<D> {
 
     /** Whether the two dates represent the same view in the current view mode (month or year). */
     private isSameView(date1: D, date2: D): boolean {
-        if (this.calendar.currentView === 'month') {
+        if (this.calendar.currentView === McCalendarView.Month) {
             return this.dateAdapter.getYear(date1) === this.dateAdapter.getYear(date2) &&
                 this.dateAdapter.getMonth(date1) === this.dateAdapter.getMonth(date2);
         }
 
-        if (this.calendar.currentView === 'year') {
+        if (this.calendar.currentView === McCalendarView.Year) {
             return this.dateAdapter.getYear(date1) === this.dateAdapter.getYear(date2);
         }
 
@@ -247,7 +254,7 @@ export class McCalendar<D> implements AfterContentInit, AfterViewChecked, OnDest
     calendarHeaderPortal: Portal<any>;
 
     /** Whether the calendar should be started in month or year view. */
-    @Input() startView: McCalendarView = 'month';
+    @Input() startView: McCalendarView = McCalendarView.Month;
 
     /** Function used to filter which dates are selectable. */
     @Input() dateFilter: (date: D) => boolean;
@@ -287,7 +294,7 @@ export class McCalendar<D> implements AfterContentInit, AfterViewChecked, OnDest
      */
     stateChanges = new Subject<void>();
 
-    private intlChanges: Subscription;
+    private readonly intlChanges: Subscription;
 
     /**
      * Used for scheduling that focus should be moved to the active cell on the next tick.
@@ -304,8 +311,8 @@ export class McCalendar<D> implements AfterContentInit, AfterViewChecked, OnDest
 
     constructor(
         intl: McDatepickerIntl,
-        @Optional() private dateAdapter: DateAdapter<D>,
-        @Optional() @Inject(MC_DATE_FORMATS) private dateFormats: McDateFormats,
+        @Optional() private readonly dateAdapter: DateAdapter<D>,
+        @Optional() @Inject(MC_DATE_FORMATS) private readonly dateFormats: McDateFormats,
         private changeDetectorRef: ChangeDetectorRef
     ) {
         if (!this.dateAdapter) {
@@ -365,8 +372,8 @@ export class McCalendar<D> implements AfterContentInit, AfterViewChecked, OnDest
 
     /** Updates today's date after an update of the active date */
     updateTodaysDate() {
-        const view = this.currentView === 'month' ? this.monthView :
-            (this.currentView === 'year' ? this.yearView : this.multiYearView);
+        const view = this.currentView === McCalendarView.Month ? this.monthView :
+            (this.currentView === McCalendarView.Year ? this.yearView : this.multiYearView);
 
         view.ngAfterContentInit();
     }
@@ -393,9 +400,9 @@ export class McCalendar<D> implements AfterContentInit, AfterViewChecked, OnDest
     }
 
     /** Handles year/month selection in the multi-year/year views. */
-    goToDateInView(date: D, view: 'month' | 'year' | 'multi-year'): void {
+    goToDateInView(date: D, view: McCalendarView | string): void {
         this.activeDate = date;
-        this.currentView = view;
+        this.currentView = view as McCalendarView;
     }
 
     /**

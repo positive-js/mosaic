@@ -10,8 +10,8 @@ import {
 } from '@angular/forms';
 
 
-export const validationTooltipShowDelay: number = 10;
-export const validationTooltipHideDelay: number = 3000;
+export const validationTooltipShowDelay = 10;
+export const validationTooltipHideDelay = 3000;
 
 
 // tslint:disable-next-line:naming-convention

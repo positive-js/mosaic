@@ -141,7 +141,7 @@ export class McMonthView<D> implements AfterContentInit {
 
     constructor(
         private changeDetectorRef: ChangeDetectorRef,
-        @Optional() @Inject(MC_DATE_FORMATS) private dateFormats: McDateFormats,
+        @Optional() @Inject(MC_DATE_FORMATS) private readonly dateFormats: McDateFormats,
         @Optional() public dateAdapter: DateAdapter<D>,
         @Optional() private dir?: Directionality
     ) {
@@ -288,14 +288,21 @@ export class McMonthView<D> implements AfterContentInit {
 
         this.weeks = [[]];
 
-        for (let i = 0, cell = this.firstWeekOffset; i < daysInMonth; i++, cell++) {
+        let cell = this.firstWeekOffset;
+
+        for (let i = 0; i < daysInMonth; i++) {
+            cell++;
+
             if (cell === DAYS_PER_WEEK) {
                 this.weeks.push([]);
                 cell = 0;
             }
+
             const date = this.dateAdapter.createDate(
                 this.dateAdapter.getYear(this.activeDate),
-                this.dateAdapter.getMonth(this.activeDate), i + 1);
+                this.dateAdapter.getMonth(this.activeDate),
+                i + 1
+            );
             const enabled = this.shouldEnableDate(date);
             const ariaLabel = this.dateAdapter.format(date, this.dateFormats.dateA11yLabel);
             const cellClasses = this.dateClass ? this.dateClass(date) : undefined;

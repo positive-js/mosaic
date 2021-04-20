@@ -34,7 +34,7 @@ import { merge, Subject, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import { McCalendarCellCssClasses } from './calendar-body.component';
-import { McCalendar } from './calendar.component';
+import { McCalendar, McCalendarView } from './calendar.component';
 import { mcDatepickerAnimations } from './datepicker-animations';
 import { createMissingDateImplError } from './datepicker-errors';
 import { McDatepickerInput } from './datepicker-input.directive';
@@ -194,7 +194,7 @@ export class McDatepicker<D> implements OnDestroy {
     @Input() calendarHeaderComponent: ComponentType<any>;
 
     /** The view that the calendar should start in. */
-    @Input() startView: 'month' | 'year' | 'multi-year' = 'month';
+    @Input() startView: McCalendarView = McCalendarView.Month;
 
     /**
      * Emits selected year in multiyear view.
@@ -260,7 +260,7 @@ export class McDatepicker<D> implements OnDestroy {
         private ngZone: NgZone,
         private viewContainerRef: ViewContainerRef,
         @Inject(MC_DATEPICKER_SCROLL_STRATEGY) scrollStrategy: any,
-        @Optional() private dateAdapter: DateAdapter<D>,
+        @Optional() private readonly dateAdapter: DateAdapter<D>,
         @Optional() private dir: Directionality,
         @Optional() @Inject(DOCUMENT) private document: any
     ) {

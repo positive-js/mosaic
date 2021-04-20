@@ -14,7 +14,7 @@ import {
 } from '@ptsecurity/cdk/testing';
 import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 
-import { McCalendar } from './calendar.component';
+import { McCalendar, McCalendarView } from './calendar.component';
 import { McDatepickerIntl } from './datepicker-intl';
 import { McDatepickerModule } from './datepicker-module';
 
@@ -99,7 +99,7 @@ describe('McCalendar', () => {
         }));
 
         it('should be in month view with specified month active', () => {
-            expect(calendarInstance.currentView).toBe('month');
+            expect(calendarInstance.currentView).toBe(McCalendarView.Month);
             expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2017, 0, 31));
         });
 
@@ -108,7 +108,7 @@ describe('McCalendar', () => {
             (monthCells[monthCells.length - 1] as HTMLElement).click();
             fixture.detectChanges();
 
-            expect(calendarInstance.currentView).toBe('month');
+            expect(calendarInstance.currentView).toBe(McCalendarView.Month);
             expect(testComponent.selected.toDate()).toEqual(new Date(2017, 0, 31));
         });
 
@@ -116,7 +116,7 @@ describe('McCalendar', () => {
             periodButton.click();
             fixture.detectChanges();
 
-            expect(calendarInstance.currentView).toBe('year');
+            expect(calendarInstance.currentView).toBe(McCalendarView.Year);
             expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2017, 0, 31));
 
             (calendarElement.querySelector('.mc-calendar__body_active') as HTMLElement).click();
@@ -130,13 +130,13 @@ describe('McCalendar', () => {
             periodButton.click();
             fixture.detectChanges();
 
-            expect(calendarInstance.currentView).toBe('year');
+            expect(calendarInstance.currentView).toBe(McCalendarView.Year);
             expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2017, 0, 31));
 
             (calendarElement.querySelector('.mc-calendar__body_active') as HTMLElement).click();
             fixture.detectChanges();
 
-            expect(calendarInstance.currentView).toBe('multi-year');
+            expect(calendarInstance.currentView).toBe(McCalendarView.MultiYear);
 
             (calendarElement.querySelector('.mc-calendar__body_active') as HTMLElement).click();
             fixture.detectChanges();
@@ -192,7 +192,7 @@ describe('McCalendar', () => {
 
                     expect(activeCell.focus).not.toHaveBeenCalled();
 
-                    calendarInstance.currentView = 'multi-year';
+                    calendarInstance.currentView = McCalendarView.MultiYear;
                     fixture.detectChanges();
                     zone.simulateZoneExit();
 
@@ -430,7 +430,7 @@ describe('McCalendar', () => {
             });
 
             it('should not allow selection of disabled date in month view', () => {
-                expect(calendarInstance.currentView).toBe('month');
+                expect(calendarInstance.currentView).toBe(McCalendarView.Month);
                 expect(calendarInstance.activeDate.toDate()).toEqual(new Date(2017, 0, 1));
 
                 dispatchKeyboardEvent(tableBodyEl, 'keydown', ENTER);
@@ -450,13 +450,13 @@ describe('McCalendar', () => {
                 calendarInstance.activeDate = moment([2017, 10, 1]);
                 fixture.detectChanges();
 
-                expect(calendarInstance.currentView).toBe('multi-year');
+                expect(calendarInstance.currentView).toBe(McCalendarView.MultiYear);
 
                 tableBodyEl = calendarElement.querySelector('.mc-calendar__body') as HTMLElement;
                 dispatchKeyboardEvent(tableBodyEl, 'keydown', ENTER);
                 fixture.detectChanges();
 
-                expect(calendarInstance.currentView).toBe('month');
+                expect(calendarInstance.currentView).toBe(McCalendarView.Month);
                 expect(testComponent.selected).toBeUndefined();
             });
         });

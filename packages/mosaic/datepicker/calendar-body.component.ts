@@ -91,7 +91,7 @@ export class McCalendarBody implements OnChanges {
     /** Width of an individual cell. */
     cellWidth: string;
 
-    constructor(private elementRef: ElementRef<HTMLElement>, private ngZone: NgZone) {}
+    constructor(private readonly elementRef: ElementRef<HTMLElement>, private readonly ngZone: NgZone) {}
 
     cellClicked(cell: McCalendarCell): void {
         if (cell.enabled) {

@@ -126,7 +126,7 @@ export class McYearView<D> implements AfterContentInit {
 
     constructor(
         private changeDetectorRef: ChangeDetectorRef,
-        @Optional() @Inject(MC_DATE_FORMATS) private dateFormats: McDateFormats,
+        @Optional() @Inject(MC_DATE_FORMATS) private readonly dateFormats: McDateFormats,
         @Optional() public dateAdapter: DateAdapter<D>,
         @Optional() private dir?: Directionality
     ) {

@@ -61,8 +61,8 @@ export enum DateParts {
 }
 
 export class DateDigit {
-    maxDays: number = 31;
-    maxMonth: number = 11;
+    maxDays = 31;
+    maxMonth = 11;
 
     parse: (value: string) => number;
 
@@ -163,7 +163,7 @@ export class McDatepickerInputEvent<D> {
     }
 }
 
-let uniqueComponentIdSuffix: number = 0;
+let uniqueComponentIdSuffix = 0;
 
 
 /** Directive used to connect an input to a McDatepicker. */
@@ -408,9 +408,9 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
     private lastValueValid = false;
 
     /** The combined form control validator for this input. */
-    private validator: ValidatorFn | null;
+    private readonly validator: ValidatorFn | null;
 
-    private separator: string;
+    private readonly separator: string;
 
     private firstDigit: DateDigit;
     private secondDigit: DateDigit;
@@ -420,9 +420,9 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
 
     constructor(
         public elementRef: ElementRef<HTMLInputElement>,
-        private renderer: Renderer2,
-        @Optional() private dateAdapter: DateAdapter<D>,
-        @Optional() @Inject(MC_DATE_FORMATS) private dateFormats: McDateFormats
+        private readonly renderer: Renderer2,
+        @Optional() private readonly dateAdapter: DateAdapter<D>,
+        @Optional() @Inject(MC_DATE_FORMATS) private readonly dateFormats: McDateFormats
     ) {
         this.validator = Validators.compose([
             this.parseValidator,
@@ -508,32 +508,27 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
         this.disabled = isDisabled;
     }
 
-    // tslint:disable-next-line:cyclomatic-complexity
     onKeyDown(event: KeyboardEvent): void {
         if (this.isReadOnly) { return; }
 
         // tslint:disable-next-line: deprecation
         const keyCode = event.keyCode;
 
-        if (isLetterKey(event) && !event.ctrlKey && !event.metaKey) {
+        if (this.isLetterKey(event)) {
             event.preventDefault();
 
             this.incorrectInput.emit();
-        } else if (event.altKey && keyCode === DOWN_ARROW) {
+        } else if (this.isKeyForOpen(event)) {
             event.preventDefault();
 
             this.datepicker.open();
-        } else if ((event.altKey && keyCode === UP_ARROW) || keyCode === ESCAPE) {
+        } else if (this.isKeyForClose(event)) {
             event.preventDefault();
 
             this.datepicker.close();
         } else if (keyCode === TAB) {
             this.datepicker.close(false);
-        } else if (
-            (hasModifierKey(event) && (isVerticalMovement(keyCode) || isHorizontalMovement(keyCode))) ||
-            event.ctrlKey || event.metaKey ||
-            [DELETE, BACKSPACE].includes(keyCode)
-        ) {
+        } else if (this.isKeyForByPass(event)) {
             return;
         } else if (keyCode === SPACE) {
             this.spaceKeyHandler(event);
@@ -667,6 +662,29 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
         // todo maybe here need count length of mask
         // tslint:disable-next-line:no-magic-numbers
         return 10;
+    }
+
+    private isKeyForClose(event: KeyboardEvent): boolean {
+        // tslint:disable-next-line: deprecation
+        return (event.altKey && event.keyCode === UP_ARROW) || event.keyCode === ESCAPE;
+    }
+
+    private isKeyForOpen(event: KeyboardEvent): boolean {
+        // tslint:disable-next-line: deprecation
+        return event.altKey && event.keyCode === DOWN_ARROW;
+    }
+
+    private isLetterKey(event: KeyboardEvent): boolean {
+        return isLetterKey(event) && !event.ctrlKey && !event.metaKey;
+    }
+
+    private isKeyForByPass(event: KeyboardEvent): boolean {
+        // tslint:disable-next-line: deprecation
+        return (hasModifierKey(event) && (isVerticalMovement(event.keyCode) || isHorizontalMovement(event.keyCode))) ||
+            event.ctrlKey ||
+            event.metaKey ||
+            // tslint:disable-next-line: deprecation
+            [DELETE, BACKSPACE].includes(event.keyCode);
     }
 
     private spaceKeyHandler(event: KeyboardEvent) {
