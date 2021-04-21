@@ -17,12 +17,20 @@
     text-align: left;
     white-space: nowrap;
 
-    &:not([disabled]):not(.mc-disabled){
+    &:not([disabled]):not(.mc-disabled) {
         cursor: pointer;
     }
 
     .mc-dropdown__item-caption {
         margin-top: 4px;
+    }
+
+    .docs-navbar-version__num {
+        margin-right: 4px;
+    }
+
+    & > div {
+        width: 100%;
     }
 }
 
