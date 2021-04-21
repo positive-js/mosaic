@@ -15,8 +15,8 @@
                     (click)="goToVersion(i)" [class.mc-selected]="version.selected"
                     [class.docs-navbar-version_bold]="version.number.length < 4">
                 <span class="docs-navbar-version__item">
-                    <span class="docs-navbar-version__num">{{version.number}}</span>
-                    <span class="docs-navbar-version__date">{{version.date}}</span>
+                    <span class="docs-navbar-version__num flex-50">{{version.number}}</span>
+                    <span class="docs-navbar-version__date flex-50">{{version.date}}</span>
                 </span>
             </button>
         </mc-dropdown>

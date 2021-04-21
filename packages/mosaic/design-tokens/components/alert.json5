@@ -9,17 +9,17 @@
             warning: {
                 background: { value: '{light-color-scheme.warning.palette.value.60.value}' },
                 border: { value: '{light-color-scheme.warning.default.value}' },
-                icon: { value: '{light-color-scheme.warning.default.value}' }
+                icon: { value: '{light-color-scheme.warning.palette.value.400.value}' }
             },
             success: {
                 background: { value: '{light-color-scheme.success.palette.value.60.value}' },
                 border: { value: '{light-color-scheme.success.default.value}' },
-                icon: { value: '{light-color-scheme.success.default.value}' }
+                icon: { value: '{light-color-scheme.success.palette.value.400.value}' }
             },
             info: {
                 background: { value: '{light-color-scheme.info.palette.value.60.value}' },
                 border: { value: '{light-color-scheme.info.default.value}' },
-                icon: { value: '{light-color-scheme.info.default.value}' }
+                icon: { value: '{light-color-scheme.info.palette.value.400.value}' }
             },
             default: {
                 background: { value: '{light-color-scheme.second.palette.value.60.value}' },

@@ -164,6 +164,7 @@ describe('McDropdown', () => {
         fixture.componentInstance.trigger.close();
         fixture.detectChanges();
         tick(500);
+        fixture.detectChanges();
 
         expect(document.activeElement).toBe(triggerEl);
     }));
