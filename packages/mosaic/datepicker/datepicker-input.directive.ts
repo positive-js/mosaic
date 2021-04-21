@@ -576,14 +576,7 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
 
         this.selectNextDigitByCursor((this.selectionStart as number));
 
-        if (!this.dateAdapter.sameDate(newTimeObj, this.value)) {
-            this._value = newTimeObj;
-            this.cvaOnChange(newTimeObj);
-            this.valueChange.emit(newTimeObj);
-            this.dateInput.emit(new McDatepickerInputEvent(this, this.elementRef.nativeElement));
-        }
-
-        this.control.updateValueAndValidity();
+        this.updateValue(newTimeObj);
     }
 
     parseOnBlur = () => {
@@ -630,16 +623,9 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
 
         this.lastValueValid = !!newTimeObj;
 
-        if (!this.dateAdapter.sameDate(newTimeObj, this.value)) {
-            this.setViewValue(this.getTimeStringFromDate(newTimeObj, this.dateFormats.dateInput), true);
+        this.setViewValue(this.getTimeStringFromDate(newTimeObj, this.dateFormats.dateInput), true);
 
-            this._value = newTimeObj;
-            this.cvaOnChange(newTimeObj);
-            this.valueChange.emit(newTimeObj);
-            this.dateInput.emit(new McDatepickerInputEvent(this, this.elementRef.nativeElement));
-        }
-
-        this.control.updateValueAndValidity();
+        this.updateValue(newTimeObj);
     }
 
     onChange() {
@@ -655,13 +641,48 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
     }
 
     onPaste($event) {
-        console.log('todo: ', $event); // tslint:disable-line:no-console
+        $event.preventDefault();
+
+        const rawValue = $event.clipboardData.getData('text');
+
+        const match: RegExpMatchArray | null = rawValue.match(/^(?<first>\d+)\W(?<second>\d+)\W(?<third>\d+)$/);
+
+        if (!match?.groups?.first || !match?.groups?.second || !match?.groups?.third) {
+            this.setViewValue(rawValue);
+
+            return rawValue;
+        }
+
+        const value = [match.groups.first, match.groups.second, match.groups.third].join(this.separator);
+
+        const newTimeObj = this.getDateFromString(value);
+
+        if (!newTimeObj) {
+            this.setViewValue(value);
+
+            return value;
+        }
+
+        this.setViewValue(this.getTimeStringFromDate(newTimeObj, this.dateFormats.dateInput));
+
+        this.updateValue(newTimeObj);
     }
 
     getSize(): number {
         // todo maybe here need count length of mask
         // tslint:disable-next-line:no-magic-numbers
         return 10;
+    }
+
+    private updateValue(newValue: D) {
+        if (!this.dateAdapter.sameDate(newValue, this.value)) {
+            this._value = newValue;
+            this.cvaOnChange(newValue);
+            this.valueChange.emit(newValue);
+            this.dateInput.emit(new McDatepickerInputEvent(this, this.elementRef.nativeElement));
+        }
+
+        this.control.updateValueAndValidity();
     }
 
     private isKeyForClose(event: KeyboardEvent): boolean {
@@ -739,7 +760,9 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
         if (viewDigits.length === 1) {
             if (firsViewDigit.length < this.firstDigit.length) { return null; }
 
+
             date[this.firstDigit.fullName] = this.firstDigit.parse(firsViewDigit);
+            date.month = 0;
         // tslint:disable-next-line:no-magic-numbers
         } else if (viewDigits.length === 2) {
             if (firsViewDigit.length < this.firstDigit.length || secondViewDigit.length < this.secondDigit.length) {

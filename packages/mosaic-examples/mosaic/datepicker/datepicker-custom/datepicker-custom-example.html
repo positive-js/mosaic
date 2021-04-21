@@ -6,7 +6,10 @@
         [mcTitle]="'Только цифры'"
         #tooltip="mcTooltip">
 
-        <input [mcDatepicker]="datepicker" [mcValidationTooltip]="tooltip"/>
+        <input
+            [mcDatepicker]="datepicker"
+            [placeholder]="'дд.мм.гггг'"
+            [mcValidationTooltip]="tooltip"/>
         <i mc-icon="mc-calendar_16" mcSuffix></i>
         <mc-datepicker #datepicker></mc-datepicker>
     </mc-form-field>

@@ -63,8 +63,7 @@ export class McCalendarHeader<D> {
     /** The label for the current calendar view. */
     get periodButtonText(): string {
         if (this.calendar.currentView === McCalendarView.Month) {
-            const label = this.dateAdapter
-                .format(this.calendar.activeDate, this.dateFormats.monthYearLabel);
+            const label = this.dateAdapter.format(this.calendar.activeDate, this.dateFormats.monthYearLabel);
 
             return label[0].toLocaleUpperCase() + label.substr(1);
         }
@@ -76,10 +75,12 @@ export class McCalendarHeader<D> {
         const activeYear = this.dateAdapter.getYear(this.calendar.activeDate);
         const firstYearInView = this.dateAdapter.getYearName(
             // tslint:disable-next-line:no-magic-numbers
-            this.dateAdapter.createDate(activeYear - activeYear % 24, 0, 1));
+            this.dateAdapter.createDate(activeYear - activeYear % 24, 0, 1)
+        );
         const lastYearInView = this.dateAdapter.getYearName(
             // tslint:disable-next-line:no-magic-numbers
-            this.dateAdapter.createDate(activeYear + yearsPerPage - 1 - activeYear % 24, 0, 1));
+            this.dateAdapter.createDate(activeYear + yearsPerPage - 1 - activeYear % 24, 0, 1)
+        );
 
         return `${firstYearInView} \u2013 ${lastYearInView}`;
     }
@@ -153,19 +154,21 @@ export class McCalendarHeader<D> {
     }
 
     /** Whether the two dates represent the same view in the current view mode (month or year). */
-    private isSameView(date1: D, date2: D): boolean {
+    private isSameView(firstDate: D, secondDate: D): boolean {
+        const firstYear = this.dateAdapter.getYear(firstDate);
+        const secondYear = this.dateAdapter.getYear(secondDate);
+
+        const firstMonth = this.dateAdapter.getMonth(firstDate);
+        const secondMonth = this.dateAdapter.getMonth(secondDate);
+
         if (this.calendar.currentView === McCalendarView.Month) {
-            return this.dateAdapter.getYear(date1) === this.dateAdapter.getYear(date2) &&
-                this.dateAdapter.getMonth(date1) === this.dateAdapter.getMonth(date2);
+            return firstYear === secondYear && firstMonth === secondMonth;
         }
 
-        if (this.calendar.currentView === McCalendarView.Year) {
-            return this.dateAdapter.getYear(date1) === this.dateAdapter.getYear(date2);
-        }
+        if (this.calendar.currentView === McCalendarView.Year) { return firstYear === secondYear; }
 
         // Otherwise we are in 'multi-year' view.
-        return Math.floor(this.dateAdapter.getYear(date1) / yearsPerPage) ===
-            Math.floor(this.dateAdapter.getYear(date2) / yearsPerPage);
+        return Math.floor(firstYear / yearsPerPage) === Math.floor(secondYear / yearsPerPage);
     }
 }
 

@@ -78,12 +78,11 @@ export class DemoComponent implements AfterViewInit {
     maxDate = moment([2020, 0, 1]);
 
     languageList = [
-        { name: 'EN', format: 'DD/MM/YYYY' },
-        { name: 'DE', format: 'DD-MM-YYYY' },
-        { name: 'FR', format: 'DD/MM/YYYY' },
-        { name: 'RU', format: 'DD.MM.YYYY' }
+        { name: 'EN', format: 'DD/MM/YYYY', placeholder: 'дд/мм/гггг' },
+        { name: 'DE', format: 'DD-MM-YYYY', placeholder: 'дд-мм-гггг' },
+        { name: 'RU', format: 'DD.MM.YYYY', placeholder: 'дд.мм.гггг' }
     ];
-    selectedLanguage = 'EN';
+    selectedLanguage: any = this.languageList[0];
 
     @ViewChild(McDatepicker) datepicker: McDatepicker<any>;
 
@@ -91,7 +90,7 @@ export class DemoComponent implements AfterViewInit {
 
     setFormat($event: McRadioChange): void {
         this.dateFormats.dateInput = $event.value.format;
-        this.selectedLanguage = $event.value.name;
+        this.selectedLanguage = this.languageList.find(({ name }) => name === $event.value.name);
 
         this.formControlValue.setValue(this.formControlValue.value);
     }

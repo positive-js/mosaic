@@ -9,7 +9,11 @@
             [mcTitle]="'Только цифры'"
             #tooltip1="mcTooltip">
 
-            <input [ngModel]="date" [mcDatepicker]="myDatepicker1" [mcValidationTooltip]="tooltip1"/>
+            <input
+                [ngModel]="date"
+                [placeholder]="'дд.мм.гггг'"
+                [mcDatepicker]="myDatepicker1"
+                [mcValidationTooltip]="tooltip1"/>
             <i mc-icon="mc-calendar_16" mcSuffix></i>
             <mc-datepicker disabled #myDatepicker1 startView="multi-year"></mc-datepicker>
         </mc-form-field>
@@ -19,7 +23,11 @@
         <label>Datepicker with disabled input</label>
         <br>
         <mc-form-field class="example-datepicker" (click)="myDatepicker1.toggle()">
-            <input [ngModel]="date" [mcDatepicker]="myDatepicker2" disabled/>
+            <input
+                [ngModel]="date"
+                [placeholder]="'дд.мм.гггг'"
+                [mcDatepicker]="myDatepicker2"
+                disabled/>
             <i mc-icon="mc-calendar_16" mcSuffix></i>
             <mc-datepicker #myDatepicker2></mc-datepicker>
         </mc-form-field>
@@ -29,7 +37,11 @@
         <label>Datepicker with readonly input</label>
         <br>
         <mc-form-field class="example-datepicker" (click)="myDatepicker3.toggle()">
-            <input [ngModel]="date" [mcDatepicker]="myDatepicker3" readonly/>
+            <input
+                [ngModel]="date"
+                [placeholder]="'дд.мм.гггг'"
+                [mcDatepicker]="myDatepicker3"
+                readonly/>
             <i mc-icon="mc-calendar_16" mcSuffix></i>
             <mc-datepicker #myDatepicker3></mc-datepicker>
         </mc-form-field>
@@ -46,6 +58,7 @@
             #tooltip4="mcTooltip">
 
             <input [ngModel]="date"
+                   [placeholder]="'дд.мм.гггг'"
                    [mcDatepicker]="myDatepicker4"
                    [mcDatepickerFilter]="myFilter"
                    [mcValidationTooltip]="tooltip4"

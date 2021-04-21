@@ -3,7 +3,7 @@
     (change)="setFormat($event)">
     <mc-radio-button *ngFor="let language of languageList"
                      [value]="language"
-                     [checked]="language.name === selectedLanguage"
+                     [checked]="language.name === selectedLanguage.name"
                      class="example-radio-button">
         {{ language.name }}
     </mc-radio-button>
@@ -17,7 +17,11 @@
     [mcTitle]="'Только цифры'"
     #tooltip="mcTooltip">
 
-    <input [formControl]="selectedDate" [mcDatepicker]="picker" [mcValidationTooltip]="tooltip"/>
+    <input
+        [formControl]="selectedDate"
+        [placeholder]="selectedLanguage.placeholder"
+        [mcDatepicker]="picker"
+        [mcValidationTooltip]="tooltip"/>
     <i mc-icon="mc-calendar_16" mcSuffix></i>
     <mc-datepicker #picker></mc-datepicker>
 </mc-form-field>
