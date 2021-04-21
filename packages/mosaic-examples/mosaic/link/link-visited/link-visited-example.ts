@@ -10,5 +10,5 @@ import { Component } from '@angular/core';
     styleUrls: ['link-visited-example.css']
 })
 export class LinkVisitedExample {
-    visited = true;
+    visited = false;
 }
