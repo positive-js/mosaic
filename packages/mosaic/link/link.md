@@ -82,8 +82,8 @@ cvedetails.com/cve/CVE-2019-1020010/
 
 | Клавиша | Действие |
 | ----- | ----- |
-| <img src="./assets/images/link/space-or-return.jpg" width="113"> | Переход по ссылке |
-| <img src="./assets/images/link/shift+f10.jpg" width="107"> | Открыть контекстное меню (для ссылок) |
+| <span class="hot-key-Button">Space</span> \ <span class="hot-key-Button">⏎</span> | Переход по ссылке |
+| <span class="hot-key-Button">Shift</span> + <span class="hot-key-Button">F10</span>   | Открыть контекстное меню (для ссылок) |
 |  | *Применимо только для Windows |
 
 ### Дизайн и анимация
