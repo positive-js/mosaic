@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 13 Apr 2021 08:07:57 GMT
+ * Generated on Fri, 23 Apr 2021 07:57:17 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
@@ -475,8 +475,8 @@ export const LinkLightColorSchemeStateActive = "#114E77";
 export const LinkLightColorSchemeStateFocusedOutline = "#338FCC";
 export const LinkDarkColorSchemeText = "#57A4D7";
 export const LinkDarkColorSchemeBorderBottom = "rgba(#57A4D7, 0.32)";
-export const LinkDarkColorSchemeStateVisitedText = "#6A2795";
-export const LinkDarkColorSchemeStateVisitedBorderBottom = "rgba(106, 39, 149, 0.32)";
+export const LinkDarkColorSchemeStateVisitedText = "#a23ee2";
+export const LinkDarkColorSchemeStateVisitedBorderBottom = "rgba(162, 62, 226, 0.32)";
 export const LinkDarkColorSchemeStateHoverText = "#7FBAE1";
 export const LinkDarkColorSchemeStateHoverBorderBottom = "rgba(#7FBAE1, 0.32)";
 export const LinkDarkColorSchemeStateActive = "#7FBAE1";
