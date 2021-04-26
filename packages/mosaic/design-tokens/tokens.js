@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 23 Apr 2021 07:57:17 GMT
+ * Generated on Mon, 26 Apr 2021 12:11:44 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
@@ -438,6 +438,7 @@ export const DatepickerCalendarSizeIconPrevIconTransform = "translateX(2px) rota
 export const DatepickerCalendarSizeIconNexIconTransform = "translateX(-2px) rotate(45deg)";
 export const DatepickerCalendarFontDefault = "body";
 export const DatepickerCalendarFontHeader = "caption";
+export const DatepickerInputSizeWidth = "130px";
 export const DividerSizeWidth = "1px";
 export const DividerSizeInsetMargin = "80px";
 export const DropdownItemSizePadding = "5px 15px";

@@ -54,13 +54,13 @@ import { McDatepicker } from './datepicker.component';
 
 
 // tslint:disable:naming-convention
-export enum DateParts {
+enum DateParts {
     year = 'y',
     month = 'm',
     day = 'd'
 }
 
-export class DateDigit {
+class DateDigit {
     maxDays = 31;
     maxMonth = 11;
 
@@ -182,7 +182,6 @@ let uniqueComponentIdSuffix = 0;
         '[attr.disabled]': 'disabled || null',
         '[attr.min]': 'min ? dateAdapter.toIso8601(min) : null',
         '[attr.max]': 'max ? dateAdapter.toIso8601(max) : null',
-        '[attr.size]': 'getSize()',
         '[attr.autocomplete]': '"off"',
 
         '(paste)': 'onPaste($event)',
@@ -410,7 +409,7 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
     /** The combined form control validator for this input. */
     private readonly validator: ValidatorFn | null;
 
-    private readonly separator: string;
+    private separator: string;
 
     private firstDigit: DateDigit;
     private secondDigit: DateDigit;
@@ -439,16 +438,10 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
             throw createMissingDateImplError('MC_DATE_FORMATS');
         }
 
-        this.separator = dateFormats.dateInput.match(/[aA-zZ]+(?<separator>\W|\D)[aA-zZ]+/).groups.separator;
-        this.separatorPositions = dateFormats.dateInput
-            .split('')
-            .reduce((acc, item, index: number) => this.separator === item ? [...acc, index + 1] : acc, []);
+        this.setFormat(dateFormats.dateInput);
 
-        this.getDigitPositions(dateFormats.dateInput);
-
-        // Update the displayed date when the locale changes.
         this.localeSubscription = dateAdapter.localeChanges
-            .subscribe(() => this.value = this.value);
+            .subscribe(this.updateLocaleParams);
     }
 
     onContainerClick() {
@@ -668,10 +661,19 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
         this.updateValue(newTimeObj);
     }
 
-    getSize(): number {
-        // todo maybe here need count length of mask
-        // tslint:disable-next-line:no-magic-numbers
-        return 10;
+    private updateLocaleParams = () => {
+        this.setFormat(this.dateFormats.dateInput);
+
+        this.value = this.value;
+    }
+
+    private setFormat(format: string): void {
+        this.separator = format.match(/[aA-zZ]+(?<separator>\W|\D)[aA-zZ]+/)!.groups.separator;
+        this.separatorPositions = format
+            .split('')
+            .reduce((acc, item, index: number) => this.separator === item ? [...acc, index + 1] : acc, []);
+
+        this.getDigitPositions(format);
     }
 
     private updateValue(newValue: D) {

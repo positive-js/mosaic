@@ -1,3 +1,10 @@
+@import '../design-tokens/tokens';
+
+
 .mc-form-field-type-datepicker {
     width: auto;
+}
+
+.mc-datepicker {
+    width: var(--mc-datepicker-input-size-width, $datepicker-input-size-width);
 }

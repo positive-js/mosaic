@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 23 Apr 2021 07:57:17 GMT
+ * Generated on Mon, 26 Apr 2021 12:11:44 GMT
  */
 
 :root {
@@ -47,6 +47,7 @@
   --mc-datepicker-calendar-size-icon-border-width: 2px;
   --mc-datepicker-calendar-size-icon-prev-icon-transform: translateX(2px) rotate(-45deg);
   --mc-datepicker-calendar-size-icon-nex-icon-transform: translateX(-2px) rotate(45deg);
+  --mc-datepicker-input-size-width: 130px;
   --mc-divider-size-width: 1px;
   --mc-divider-size-inset-margin: 80px;
   --mc-dropdown-item-size-padding: 5px 15px;

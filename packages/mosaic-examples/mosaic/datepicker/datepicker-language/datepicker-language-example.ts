@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MC_DATE_FORMATS, McDateFormats } from '@ptsecurity/cdk/datetime';
+import { DateAdapter, MC_DATE_FORMATS, McDateFormats } from '@ptsecurity/cdk/datetime';
 import { MC_MOMENT_DATE_FORMATS } from '@ptsecurity/mosaic-moment-adapter/adapter';
 import { McRadioChange } from '@ptsecurity/mosaic/radio';
 import * as _moment from 'moment';
@@ -42,12 +42,20 @@ export class DatepickerLanguageExample {
 
     selectedLanguage: any = this.languageList[0];
 
-    constructor(@Inject(MC_DATE_FORMATS) private dateFormats: McDateFormats) {}
+    constructor(
+        private dateAdapter: DateAdapter<any>,
+        @Inject(MC_DATE_FORMATS) private dateFormats: McDateFormats
+    ) {}
+
+    ngOnInit() {
+        this.dateAdapter.setLocale(this.languageList[0].name);
+    }
 
     setFormat($event: McRadioChange): void {
         this.dateFormats.dateInput = $event.value.format;
         this.selectedLanguage = this.languageList.find(({ name }) => name === $event.value.name);
 
         this.selectedDate.setValue(this.selectedDate.value);
+        this.dateAdapter.setLocale($event.value.name);
     }
 }

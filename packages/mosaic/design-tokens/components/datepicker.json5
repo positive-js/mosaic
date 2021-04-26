@@ -41,5 +41,8 @@
             default: { value: 'body' },
             header: { value: 'caption' }
         }
+    },
+    'datepicker-input': {
+        size: { 'width': { value: '130px' } }
     }
 }

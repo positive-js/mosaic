@@ -86,13 +86,21 @@ export class DemoComponent implements AfterViewInit {
 
     @ViewChild(McDatepicker) datepicker: McDatepicker<any>;
 
-    constructor(@Inject(MC_DATE_FORMATS) private readonly dateFormats: McDateFormats) {}
+    constructor(
+        private dateAdapter: DateAdapter<any>,
+        @Inject(MC_DATE_FORMATS) private readonly dateFormats: McDateFormats
+    ) {}
+
+    ngOnInit() {
+        this.dateAdapter.setLocale(this.languageList[0].name);
+    }
 
     setFormat($event: McRadioChange): void {
         this.dateFormats.dateInput = $event.value.format;
         this.selectedLanguage = this.languageList.find(({ name }) => name === $event.value.name);
 
         this.formControlValue.setValue(this.formControlValue.value);
+        this.dateAdapter.setLocale($event.value.name);
     }
 
     myFilter(date: Moment): boolean {
