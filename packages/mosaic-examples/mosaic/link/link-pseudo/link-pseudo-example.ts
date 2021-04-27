@@ -10,7 +10,4 @@ import { Component } from '@angular/core';
     styleUrls: ['link-pseudo-example.css']
 })
 export class LinkPseudoExample {
-    active = true;
-    focus = true;
-    disabled = true;
 }

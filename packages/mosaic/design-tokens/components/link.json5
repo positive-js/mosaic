@@ -24,8 +24,8 @@
             'border-bottom': { value: 'rgba({dark-color-scheme.primary.default.value}, 0.32)' },
 
             'state-visited': {
-                'text': { value: '#6A2795' },
-                'border-bottom': { value: 'rgba(106, 39, 149, 0.32)' }
+                'text': { value: '#a23ee2' },
+                'border-bottom': { value: 'rgba(162, 62, 226, 0.32)' }
             },
             'state-hover': {
                 'text': { value: '{dark-color-scheme.primary.palette.value.300.value}' },
