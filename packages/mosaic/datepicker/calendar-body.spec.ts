@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { McCalendarBody, McCalendarCell, McCalendarCellCssClasses } from './calendar-body';
+import { McCalendarBody, McCalendarCell, McCalendarCellCssClasses } from './calendar-body.component';
 
 
 describe('McCalendarBody', () => {
@@ -61,15 +61,6 @@ describe('McCalendarBody', () => {
             const selectedCell = calendarBodyNativeElement.querySelector('.mc-selected')!;
             expect(selectedCell).not.toBeNull();
             expect(selectedCell.innerHTML.trim()).toBe('4');
-        });
-
-        it('should set aria-selected correctly', () => {
-            const selectedCells = cellEls.filter((c) => c.getAttribute('aria-selected') === 'true');
-            const deselectedCells = cellEls.filter((c) => c.getAttribute('aria-selected') === 'false');
-
-            expect(selectedCells.length).toBe(1, 'Expected one cell to be marked as selected.');
-            expect(deselectedCells.length)
-                .toBe(cellEls.length - 1, 'Expected remaining cells to be marked as deselected.');
         });
 
         it('places label in first row if space is available', () => {

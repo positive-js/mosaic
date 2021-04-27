@@ -2,14 +2,15 @@
 import {
     AfterViewInit,
     Component,
+    Inject,
     NgModule,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DateAdapter, MC_DATE_FORMATS, MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
+import { DateAdapter, MC_DATE_FORMATS, MC_DATE_LOCALE, McDateFormats } from '@ptsecurity/cdk/datetime';
 import {
     MC_MOMENT_DATE_ADAPTER_OPTIONS,
     MC_MOMENT_DATE_FORMATS,
@@ -20,6 +21,8 @@ import { McDatepicker, McDatepickerModule } from '@ptsecurity/mosaic/datepicker'
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
+import { McRadioChange, McRadioModule } from '@ptsecurity/mosaic/radio';
+import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 
 // Depending on whether rollup is used, moment needs to be imported differently.
 // Since Moment.js doesn't have a default export, we normally need to import using the `* as`
@@ -34,6 +37,7 @@ import { default as _rollupMoment, Moment } from 'moment';
 
 const moment = _rollupMoment || _moment;
 
+
 @Component({
     selector: 'app',
     templateUrl: './template.html',
@@ -47,7 +51,9 @@ const moment = _rollupMoment || _moment;
             useFactory: () => {
                 const dateFormats: any = { ...MC_MOMENT_DATE_FORMATS };
 
-                dateFormats.display.dateInput = 'DD.MM.YYYY';
+                // dateFormats.dateInput = 'DD.MM.YYYY';
+                dateFormats.dateInput = 'DD/MM/YYYY';
+                // dateFormats.dateInput = 'YYYY.MM.DD';
 
                 return dateFormats;
             }
@@ -65,11 +71,37 @@ const moment = _rollupMoment || _moment;
     ]
 })
 export class DemoComponent implements AfterViewInit {
-    date = moment([2019, 0, 24]);
+    // date = moment([2019, 0, 24]);
+    date = null;
+    formControlValue = new FormControl(moment('2020-05-06 12:00:00'));
     minDate = moment([2015, 0, 1]);
     maxDate = moment([2020, 0, 1]);
 
+    languageList = [
+        { name: 'EN', format: 'DD/MM/YYYY', placeholder: 'дд/мм/гггг' },
+        { name: 'DE', format: 'DD-MM-YYYY', placeholder: 'дд-мм-гггг' },
+        { name: 'RU', format: 'DD.MM.YYYY', placeholder: 'дд.мм.гггг' }
+    ];
+    selectedLanguage: any = this.languageList[0];
+
     @ViewChild(McDatepicker) datepicker: McDatepicker<any>;
+
+    constructor(
+        private dateAdapter: DateAdapter<any>,
+        @Inject(MC_DATE_FORMATS) private readonly dateFormats: McDateFormats
+    ) {}
+
+    ngOnInit() {
+        this.dateAdapter.setLocale(this.languageList[0].name);
+    }
+
+    setFormat($event: McRadioChange): void {
+        this.dateFormats.dateInput = $event.value.format;
+        this.selectedLanguage = this.languageList.find(({ name }) => name === $event.value.name);
+
+        this.formControlValue.setValue(this.formControlValue.value);
+        this.dateAdapter.setLocale($event.value.name);
+    }
 
     myFilter(date: Moment): boolean {
         const day = date.day();
@@ -82,31 +114,25 @@ export class DemoComponent implements AfterViewInit {
             .subscribe(() => {
                 console.log('this.datepicker.selectedChanged');
             });
-
-        this.datepicker.datepickerInput.dateInput
-            .subscribe(() => {
-                console.log('this.datepickerInput.dateInput');
-            });
     }
 }
 
 @NgModule({
-    declarations: [
-        DemoComponent
-    ],
+    declarations: [DemoComponent],
     imports: [
         BrowserAnimationsModule,
         BrowserModule,
         FormsModule,
+        ReactiveFormsModule,
         McFormFieldModule,
+        McToolTipModule,
         McDatepickerModule,
         McMomentDateModule,
         McInputModule,
-        McIconModule
+        McIconModule,
+        McRadioModule
     ],
-    bootstrap: [
-        DemoComponent
-    ],
+    bootstrap: [DemoComponent],
     providers: []
 })
 export class DemoModule {}

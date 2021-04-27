@@ -26,7 +26,7 @@ import {
     SPACE
 } from '@ptsecurity/cdk/keycodes';
 
-import { McCalendarBody, McCalendarCell } from './calendar-body';
+import { McCalendarBody, McCalendarCell } from './calendar-body.component';
 import { createMissingDateImplError } from './datepicker-errors';
 
 
@@ -126,7 +126,7 @@ export class McYearView<D> implements AfterContentInit {
 
     constructor(
         private changeDetectorRef: ChangeDetectorRef,
-        @Optional() @Inject(MC_DATE_FORMATS) private dateFormats: McDateFormats,
+        @Optional() @Inject(MC_DATE_FORMATS) private readonly dateFormats: McDateFormats,
         @Optional() public dateAdapter: DateAdapter<D>,
         @Optional() private dir?: Directionality
     ) {
@@ -147,16 +147,21 @@ export class McYearView<D> implements AfterContentInit {
 
     /** Handles when a new month is selected. */
     onMonthSelected(month: number) {
-        const normalizedDate =
-            this.dateAdapter.createDate(this.dateAdapter.getYear(this.activeDate), month, 1);
+        const year = this.dateAdapter.getYear(this.activeDate);
+
+        const normalizedDate = this.dateAdapter.createDate(year, month, 1);
 
         this.monthSelected.emit(normalizedDate);
 
         const daysInMonth = this.dateAdapter.getNumDaysInMonth(normalizedDate);
 
-        this.selectedChange.emit(this.dateAdapter.createDate(
-            this.dateAdapter.getYear(this.activeDate), month,
-            Math.min(this.dateAdapter.getDate(this.activeDate), daysInMonth)));
+        this.selectedChange.emit(
+            this.dateAdapter.createDate(
+                year,
+                month,
+                Math.min(this.dateAdapter.getDate(this.activeDate), daysInMonth)
+            )
+        );
     }
 
     /** Handles keydown events on the calendar body when calendar is in year view. */
@@ -257,7 +262,7 @@ export class McYearView<D> implements AfterContentInit {
     private createCellForMonth(month: number, monthName: string) {
         const ariaLabel = this.dateAdapter.format(
             this.dateAdapter.createDate(this.dateAdapter.getYear(this.activeDate), month, 1),
-            this.dateFormats.display.monthYearA11yLabel);
+            this.dateFormats.monthYearA11yLabel);
 
         const newMonthName = monthName[0].toLocaleUpperCase() + monthName.substr(1);
 

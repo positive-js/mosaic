@@ -29,16 +29,15 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
-import { ESCAPE, UP_ARROW } from '@ptsecurity/cdk/keycodes';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { merge, Subject, Subscription } from 'rxjs';
-import { filter, take } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 
-import { McCalendar } from './calendar';
-import { McCalendarCellCssClasses } from './calendar-body';
+import { McCalendarCellCssClasses } from './calendar-body.component';
+import { McCalendar, McCalendarView } from './calendar.component';
 import { mcDatepickerAnimations } from './datepicker-animations';
 import { createMissingDateImplError } from './datepicker-errors';
-import { McDatepickerInput } from './datepicker-input';
+import { McDatepickerInput } from './datepicker-input.directive';
 
 
 /** Used to generate a unique ID for each datepicker instance. */
@@ -92,7 +91,7 @@ export class McDatepickerContent<D> implements AfterViewInit {
     datepicker: McDatepicker<D>;
 
     ngAfterViewInit() {
-        this.calendar.focusActiveCell();
+        // this.calendar.focusActiveCell();
     }
 }
 
@@ -133,6 +132,8 @@ export class McDatepicker<D> implements OnDestroy {
         this._startAt = this.getValidDateOrNull(this.dateAdapter.deserialize(value));
     }
 
+    private _startAt: D | null;
+
     /** Whether the datepicker pop-up should be disabled. */
     @Input()
     get disabled(): boolean {
@@ -148,6 +149,8 @@ export class McDatepicker<D> implements OnDestroy {
         }
     }
 
+    private _disabled: boolean;
+
     /** Whether the calendar is open. */
     @Input()
     get opened(): boolean {
@@ -157,6 +160,8 @@ export class McDatepicker<D> implements OnDestroy {
     set opened(value: boolean) {
         coerceBooleanProperty(value) ? this.open() : this.close();
     }
+
+    private _opened = false;
 
     /** The currently selected date. */
     get selected(): D | null {
@@ -189,7 +194,7 @@ export class McDatepicker<D> implements OnDestroy {
     @Input() calendarHeaderComponent: ComponentType<any>;
 
     /** The view that the calendar should start in. */
-    @Input() startView: 'month' | 'year' | 'multi-year' = 'month';
+    @Input() startView: McCalendarView = McCalendarView.Month;
 
     /**
      * Emits selected year in multiyear view.
@@ -234,9 +239,6 @@ export class McDatepicker<D> implements OnDestroy {
     /** Emits new selected date when selected date changes. */
     readonly selectedChanged = new Subject<D>();
     private scrollStrategy: () => ScrollStrategy;
-    private _startAt: D | null;
-    private _disabled: boolean;
-    private _opened = false;
     private validSelected: D | null = null;
 
     /** A portal containing the calendar for this datepicker. */
@@ -258,7 +260,7 @@ export class McDatepicker<D> implements OnDestroy {
         private ngZone: NgZone,
         private viewContainerRef: ViewContainerRef,
         @Inject(MC_DATEPICKER_SCROLL_STRATEGY) scrollStrategy: any,
-        @Optional() private dateAdapter: DateAdapter<D>,
+        @Optional() private readonly dateAdapter: DateAdapter<D>,
         @Optional() private dir: Directionality,
         @Optional() @Inject(DOCUMENT) private document: any
     ) {
@@ -312,7 +314,14 @@ export class McDatepicker<D> implements OnDestroy {
 
         this.datepickerInput = input;
         this.inputSubscription = this.datepickerInput.valueChange
-            .subscribe((value: D | null) => this.selected = value);
+            .subscribe((value: D | null) => {
+                this.selected = value;
+                // @ts-ignore
+                if (this.popupComponentRef) {
+                    this.popupComponentRef.instance.calendar.monthView.init();
+                    this.popupComponentRef.instance.calendar.activeDate = value as D;
+                }
+            });
     }
 
     /** Open the calendar. */
@@ -334,7 +343,7 @@ export class McDatepicker<D> implements OnDestroy {
     }
 
     /** Close the calendar. */
-    close(): void {
+    close(restoreFocus: boolean = true): void {
         if (!this._opened) { return; }
 
         if (this.popupRef && this.popupRef.hasAttached()) {
@@ -353,22 +362,32 @@ export class McDatepicker<D> implements OnDestroy {
                 this.closedStream.emit();
                 this.focusedElementBeforeOpen = null;
 
-                this.datepickerInput.elementRef.nativeElement.focus();
+                if (restoreFocus) {
+                    this.datepickerInput.elementRef.nativeElement.focus();
+                }
             }
         };
 
-        if (this.focusedElementBeforeOpen &&
-            typeof this.focusedElementBeforeOpen.focus === 'function') {
+        if (this.focusedElementBeforeOpen && typeof this.focusedElementBeforeOpen.focus === 'function') {
             // Because IE moves focus asynchronously, we can't count on it being restored before we've
             // marked the datepicker as closed. If the event fires out of sequence and the element that
             // we're refocusing opens the datepicker on focus, the user could be stuck with not being
             // able to close the calendar at all. We work around it by making the logic, that marks
             // the datepicker as closed, async as well.
-            this.focusedElementBeforeOpen.focus();
+            if (restoreFocus) {
+                this.focusedElementBeforeOpen.focus();
+            }
+
             setTimeout(completeClose);
         } else {
             completeClose();
         }
+    }
+
+    toggle(): void {
+        if (this.datepickerInput.isReadOnly) { return; }
+
+        this._opened ? this.close() : this.open();
     }
 
     /** Open the calendar as a popup. */
@@ -406,7 +425,6 @@ export class McDatepicker<D> implements OnDestroy {
         });
 
         this.popupRef = this.overlay.create(overlayConfig);
-        this.popupRef.overlayElement.setAttribute('role', 'dialog');
 
         this.closeSubscription = this.closingActions()
             .subscribe(() => this.close());
@@ -415,13 +433,7 @@ export class McDatepicker<D> implements OnDestroy {
     private closingActions() {
         return merge(
             this.popupRef.backdropClick(),
-            this.popupRef.outsidePointerEvents(),
-            this.popupRef.detachments(),
-            this.popupRef.keydownEvents().pipe(filter((event) => {
-                // Closing on alt + up is only valid when there's an input associated with the datepicker.
-                // tslint:disable-next-line:deprecation
-                return event.keyCode === ESCAPE || (this.datepickerInput && event.altKey && event.keyCode === UP_ARROW);
-            }))
+            this.popupRef.outsidePointerEvents()
         );
     }
 

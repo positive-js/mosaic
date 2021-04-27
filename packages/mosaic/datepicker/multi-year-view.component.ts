@@ -26,7 +26,7 @@ import {
     SPACE
 } from '@ptsecurity/cdk/keycodes';
 
-import { McCalendarBody, McCalendarCell } from './calendar-body';
+import { McCalendarBody, McCalendarCell } from './calendar-body.component';
 import { createMissingDateImplError } from './datepicker-errors';
 
 
@@ -125,7 +125,7 @@ export class McMultiYearView<D> implements AfterContentInit {
     private _maxDate: D | null;
 
     constructor(
-        private changeDetectorRef: ChangeDetectorRef,
+        private readonly changeDetectorRef: ChangeDetectorRef,
         @Optional() public dateAdapter: DateAdapter<D>,
         @Optional() private dir?: Directionality
     ) {

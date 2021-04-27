@@ -16,8 +16,8 @@ import {
 import { McButton } from '@ptsecurity/mosaic/button';
 import { merge, of as observableOf, Subscription } from 'rxjs';
 
-import { McDatepicker } from './datepicker';
 import { McDatepickerIntl } from './datepicker-intl';
+import { McDatepicker } from './datepicker.component';
 
 
 /** Can be used to override the icon of a `mcDatepickerToggle`. */
@@ -40,11 +40,10 @@ export class McDatepickerToggleIcon {}
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class McDatepickerToggle<D> implements AfterContentInit, OnChanges, OnDestroy {
-
     /** Whether the toggle button is disabled. */
     @Input()
     get disabled(): boolean {
-        return this._disabled === undefined ? this.datepicker.disabled : !!this._disabled;
+        return this._disabled === undefined ? this.datepicker.disabled : this._disabled;
     }
 
     set disabled(value: boolean) {
@@ -58,10 +57,10 @@ export class McDatepickerToggle<D> implements AfterContentInit, OnChanges, OnDes
     @Input() tabIndex: number | null;
 
     /** Custom icon set by the consumer. */
-    @ContentChild(McDatepickerToggleIcon, {static: false}) customIcon: McDatepickerToggleIcon;
+    @ContentChild(McDatepickerToggleIcon, { static: false }) customIcon: McDatepickerToggleIcon;
 
     /** Underlying button element. */
-    @ViewChild('button', {static: false}) button: McButton;
+    @ViewChild('button', { static: false }) button: McButton;
     private stateChanges = Subscription.EMPTY;
 
     private _disabled: boolean;
@@ -91,13 +90,16 @@ export class McDatepickerToggle<D> implements AfterContentInit, OnChanges, OnDes
 
     private watchStateChanges() {
         const datepickerDisabled = this.datepicker ? this.datepicker.disabledChange : observableOf();
+
         const inputDisabled = this.datepicker && this.datepicker.datepickerInput ?
             this.datepicker.datepickerInput.disabledChange : observableOf();
+
         const datepickerToggled = this.datepicker ?
             merge(this.datepicker.openedStream, this.datepicker.closedStream) :
             observableOf();
 
         this.stateChanges.unsubscribe();
+
         this.stateChanges = merge(
             this.intl.changes,
             datepickerDisabled,

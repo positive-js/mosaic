@@ -38,6 +38,7 @@ import {
     isVerticalMovement,
     isHorizontalMovement
 } from '@ptsecurity/cdk/keycodes';
+import { validationTooltipHideDelay, validationTooltipShowDelay } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { McTooltip } from '@ptsecurity/mosaic/tooltip';
 import { noop, Subject } from 'rxjs';
@@ -77,9 +78,6 @@ let uniqueComponentIdSuffix: number = 0;
 const shortFormatSize: number = 5;
 const fullFormatSize: number = 8;
 
-const validationTooltipShowDelay: number = 10;
-const validationTooltipHideDelay: number = 3000;
-
 
 @Directive({
     selector: 'input[mcTimepicker]',
@@ -108,7 +106,7 @@ const validationTooltipHideDelay: number = 3000;
         { provide: McFormFieldControl, useExisting: McTimepicker }
     ]
 })
-export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, ControlValueAccessor, Validator {
+export class McTimepicker<D> implements McFormFieldControl<D>, ControlValueAccessor, Validator, OnDestroy {
     /**
      * Implemented as part of McFormFieldControl.
      * @docs-private
@@ -127,7 +125,7 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
      * Implemented as part of McFormFieldControl.
      * @docs-private
      */
-    controlType: string = 'mc-timepicker';
+    controlType: string = 'timepicker';
 
     /**
      * Implemented as part of McFormFieldControl.

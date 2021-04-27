@@ -166,7 +166,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     CanDisable, HasTabIndex, McFormFieldControl<McTreeOption>, CanUpdateErrorState {
 
     /** A name for this control that can be used by `mc-form-field`. */
-    controlType = 'mc-select';
+    controlType = 'select';
 
     hiddenItems: number = 0;
 

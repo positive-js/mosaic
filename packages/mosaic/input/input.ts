@@ -107,7 +107,7 @@ export class McInput extends McInputMixinBase implements McFormFieldControl<any>
      * Implemented as part of McFormFieldControl.
      * @docs-private
      */
-    controlType: string = 'mc-input';
+    controlType: string = 'input';
 
     /**
      * Implemented as part of McFormFieldControl.

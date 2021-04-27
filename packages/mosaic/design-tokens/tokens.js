@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 23 Apr 2021 07:57:17 GMT
+ * Generated on Mon, 26 Apr 2021 12:11:44 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
@@ -428,13 +428,17 @@ export const DatepickerBodySizeCellPadding = "8px";
 export const DatepickerBodySizeCellBorderWidth = "1px";
 export const DatepickerBodyFontLabel = "body-strong";
 export const DatepickerBodyFontToday = "body-strong";
-export const DatepickerCalendarSizePadding = "8px";
+export const DatepickerCalendarSizePaddingTop = "16px";
+export const DatepickerCalendarSizePaddingHorizontal = "8px";
+export const DatepickerCalendarSizePaddingBottom = "8px";
+export const DatepickerCalendarSizePaddingBlocks = "12px";
 export const DatepickerCalendarSizeDividerWidth = "1px";
 export const DatepickerCalendarSizeIconBorderWidth = "2px";
 export const DatepickerCalendarSizeIconPrevIconTransform = "translateX(2px) rotate(-45deg)";
 export const DatepickerCalendarSizeIconNexIconTransform = "translateX(-2px) rotate(45deg)";
 export const DatepickerCalendarFontDefault = "body";
 export const DatepickerCalendarFontHeader = "caption";
+export const DatepickerInputSizeWidth = "130px";
 export const DividerSizeWidth = "1px";
 export const DividerSizeInsetMargin = "80px";
 export const DropdownItemSizePadding = "5px 15px";

@@ -6,8 +6,7 @@
 // TODO: fix linter
 // tslint:disable
 import { Directionality } from '@angular/cdk/bidi';
-import { Overlay, OverlayContainer } from '@angular/cdk/overlay';
-import { ScrollDispatcher } from '@angular/cdk/scrolling';
+import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, FactoryProvider, Type, ValueProvider, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, flush, inject, TestBed } from '@angular/core/testing';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -15,7 +14,7 @@ import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
-import { DOWN_ARROW, ENTER, ESCAPE, UP_ARROW } from '@ptsecurity/cdk/keycodes';
+import { DOWN_ARROW, ENTER, ESCAPE, ONE, SPACE, UP_ARROW } from '@ptsecurity/cdk/keycodes';
 import {
     createKeyboardEvent,
     dispatchEvent,
@@ -25,14 +24,13 @@ import {
 } from '@ptsecurity/cdk/testing';
 import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
-import { Subject } from 'rxjs';
 
 import { McInputModule } from '../input/index';
 
-import { McDatepicker } from './datepicker';
-import { McDatepickerInput } from './datepicker-input';
-import { McDatepickerToggle } from './datepicker-toggle';
-import { MC_DATEPICKER_SCROLL_STRATEGY, McDatepickerIntl, McDatepickerModule } from './index';
+import { McDatepicker } from './datepicker.component';
+import { McDatepickerInput } from './datepicker-input.directive';
+import { McDatepickerToggle } from './datepicker-toggle.component';
+import { McDatepickerIntl, McDatepickerModule } from './index';
 
 // tslint:disable-next-line:ordered-imports
 import * as _moment from 'moment';
@@ -170,7 +168,7 @@ describe('McDatepicker', () => {
                 fixture.detectChanges();
                 flush();
 
-                expect(parseInt(getComputedStyle(popup).height as string)).toBe(0);
+                expect(getComputedStyle(popup).height).toBe('');
             }));
 
             it('should close the popup when pressing ESCAPE', fakeAsync(() => {
@@ -179,21 +177,11 @@ describe('McDatepicker', () => {
 
                 expect(testComponent.datepicker.opened).toBe(true, 'Expected datepicker to be open.');
 
-                dispatchKeyboardEvent(document.body, 'keydown', ESCAPE);
+                dispatchKeyboardEvent(fixture.nativeElement.querySelector('input'), 'keydown', ESCAPE);
                 fixture.detectChanges();
                 flush();
 
                 expect(testComponent.datepicker.opened).toBe(false, 'Expected datepicker to be closed.');
-            }));
-
-            it('should set the proper role on the popup', fakeAsync(() => {
-                testComponent.datepicker.open();
-                fixture.detectChanges();
-                flush();
-
-                const popup = document.querySelector('.cdk-overlay-pane')!;
-                expect(popup).toBeTruthy();
-                expect(popup.getAttribute('role')).toBe('dialog');
             }));
 
             it('clicking the currently selected date should close the calendar ' +
@@ -255,22 +243,6 @@ describe('McDatepicker', () => {
                 expect(testComponent.datepicker.startAt).toEqual(moment([2020, 0, 1]));
             });
 
-            it('input should aria-owns calendar after opened', fakeAsync(() => {
-                const inputEl = fixture.debugElement.query(By.css('input')).nativeElement;
-                expect(inputEl.getAttribute('aria-owns')).toBeNull();
-
-                testComponent.datepicker.open();
-                fixture.detectChanges();
-                flush();
-
-                const ownedElementId = inputEl.getAttribute('aria-owns');
-                expect(ownedElementId).not.toBeNull();
-
-                const ownedElement = document.getElementById(ownedElementId);
-                expect(ownedElement).not.toBeNull();
-                expect((ownedElement as Element).tagName.toLowerCase()).toBe('mc-calendar');
-            }));
-
             it('should not throw when given wrong data type', () => {
                 testComponent.date = '1/1/2017' as any;
 
@@ -303,26 +275,12 @@ describe('McDatepicker', () => {
 
             it('should reset the datepicker when it is closed externally',
                 fakeAsync(inject([OverlayContainer], (oldOverlayContainer: OverlayContainer) => {
-
                     // Destroy the old container manually since resetting the testing module won't do it.
                     oldOverlayContainer.ngOnDestroy();
                     TestBed.resetTestingModule();
 
-                    // tslint:disable-next-line:no-inferred-empty-object-type
-                    const scrolledSubject = new Subject();
-
                     // Stub out a `CloseScrollStrategy` so we can trigger a detachment via the `OverlayRef`.
-                    fixture = createComponent(StandardDatepicker, [McMomentDateModule], [
-                        {
-                            provide: ScrollDispatcher,
-                            useValue: { scrolled: () => scrolledSubject }
-                        },
-                        {
-                            provide: MC_DATEPICKER_SCROLL_STRATEGY,
-                            deps: [Overlay],
-                            useFactory: (overlay: Overlay) => () => overlay.scrollStrategies.close()
-                        }
-                    ]);
+                    fixture = createComponent(StandardDatepicker, [McMomentDateModule]);
 
                     fixture.detectChanges();
                     testComponent = fixture.componentInstance;
@@ -332,7 +290,7 @@ describe('McDatepicker', () => {
 
                     expect(testComponent.datepicker.opened).toBe(true);
 
-                    scrolledSubject.next();
+                    document.body.click();
                     flush();
                     fixture.detectChanges();
 
@@ -340,7 +298,9 @@ describe('McDatepicker', () => {
                 }))
             );
 
-            it('should close the datpeicker using ALT + UP_ARROW', fakeAsync(() => {
+            it('should close the datepicker using ALT + UP_ARROW', fakeAsync(() => {
+                const inputEl = fixture.debugElement.query(By.css('input')).nativeElement;
+
                 testComponent.datepicker.open();
                 fixture.detectChanges();
                 flush();
@@ -350,20 +310,23 @@ describe('McDatepicker', () => {
                 const event = createKeyboardEvent('keydown', UP_ARROW);
                 Object.defineProperty(event, 'altKey', { get: () => true });
 
-                dispatchEvent(document.body, event);
+                dispatchEvent(inputEl, event);
                 fixture.detectChanges();
                 flush();
 
                 expect(testComponent.datepicker.opened).toBe(false);
+                expect(event.defaultPrevented).toBe(true);
             }));
 
             it('should open the datepicker using ALT + DOWN_ARROW', fakeAsync(() => {
+                const inputEl = fixture.debugElement.query(By.css('input')).nativeElement;
+
                 expect(testComponent.datepicker.opened).toBe(false);
 
                 const event = createKeyboardEvent('keydown', DOWN_ARROW);
                 Object.defineProperty(event, 'altKey', { get: () => true });
 
-                dispatchEvent(fixture.nativeElement.querySelector('input'), event);
+                dispatchEvent(inputEl, event);
                 fixture.detectChanges();
                 flush();
 
@@ -388,7 +351,6 @@ describe('McDatepicker', () => {
                 expect(testComponent.datepicker.opened).toBe(false);
                 expect(event.defaultPrevented).toBe(false);
             }));
-
         });
 
         describe('datepicker with too many inputs', () => {
@@ -626,17 +588,19 @@ describe('McDatepicker', () => {
                 expect(testComponent.datepickerInput.value).toEqual(selected);
             }));
 
-            it('should mark input dirty after input event', () => {
+            it('should mark input dirty after input', fakeAsync(() => {
                 const inputEl = fixture.debugElement.query(By.css('input')).nativeElement;
 
                 expect(inputEl.classList).toContain('ng-pristine');
 
-                inputEl.value = '01-01-2001';
-                dispatchFakeEvent(inputEl, 'input');
+                inputEl.value = '01.01.2001';
+                dispatchKeyboardEvent(inputEl, 'keydown', SPACE);
+                fixture.detectChanges();
+                flush();
                 fixture.detectChanges();
 
                 expect(inputEl.classList).toContain('ng-dirty');
-            });
+            }));
 
             it('should mark input dirty after date selected', fakeAsync(() => {
                 const inputEl = fixture.debugElement.query(By.css('input')).nativeElement;
@@ -664,19 +628,16 @@ describe('McDatepicker', () => {
                 expect(inputEl.classList).toContain('ng-pristine');
             }));
 
-            it('should mark input touched on blur', () => {
+            it('should mark input touched on focus', () => {
                 const inputEl = fixture.debugElement.query(By.css('input')).nativeElement;
 
                 expect(inputEl.classList).toContain('ng-untouched');
+                expect(inputEl.classList).not.toContain('ng-touched');
 
                 dispatchFakeEvent(inputEl, 'focus');
                 fixture.detectChanges();
 
-                expect(inputEl.classList).toContain('ng-untouched');
-
-                dispatchFakeEvent(inputEl, 'blur');
-                fixture.detectChanges();
-
+                expect(inputEl.classList).not.toContain('ng-untouched');
                 expect(inputEl.classList).toContain('ng-touched');
             });
 
@@ -822,13 +783,13 @@ describe('McDatepicker', () => {
                 expect(toggle.getAttribute('type')).toBe('button');
             });
 
-            it('should restore focus to the toggle after the calendar is closed', () => {
-                const toggle = fixture.debugElement.query(By.css('button')).nativeElement;
+            it('should not change focus on open/close calendar', () => {
+                const input = fixture.debugElement.query(By.css('input')).nativeElement;
 
                 fixture.detectChanges();
 
-                toggle.focus();
-                expect(document.activeElement).toBe(toggle, 'Expected toggle to be focused.');
+                input.focus();
+                expect(document.activeElement).toBe(input, 'Expected input to be focused.');
 
                 fixture.componentInstance.datepicker.open();
                 fixture.detectChanges();
@@ -836,13 +797,11 @@ describe('McDatepicker', () => {
                 const pane = document.querySelector('.cdk-overlay-pane')!;
 
                 expect(pane).toBeTruthy('Expected calendar to be open.');
-                expect(pane.contains(document.activeElement))
-                    .toBe(true, 'Expected focus to be inside the calendar.');
 
                 fixture.componentInstance.datepicker.close();
                 fixture.detectChanges();
 
-                expect(document.activeElement).toBe(toggle, 'Expected focus to be restored to toggle.');
+                expect(document.activeElement).toBe(input, 'Expected focus to be restored to input.');
             });
 
             it('should re-render when the i18n labels change',
@@ -1033,7 +992,6 @@ describe('McDatepicker', () => {
                 inputEl = fixture.debugElement.query(By.css('input')).nativeElement;
 
                 spyOn(testComponent, 'onChange');
-                spyOn(testComponent, 'onInput');
                 spyOn(testComponent, 'onDateChange');
                 spyOn(testComponent, 'onDateInput');
             }));
@@ -1043,26 +1001,24 @@ describe('McDatepicker', () => {
                 fixture.detectChanges();
             }));
 
-            it('should fire input and dateInput events when user types input', () => {
+            it('should fire input and dateInput events when user types input', fakeAsync(() => {
                 expect(testComponent.onChange).not.toHaveBeenCalled();
                 expect(testComponent.onDateChange).not.toHaveBeenCalled();
-                expect(testComponent.onInput).not.toHaveBeenCalled();
                 expect(testComponent.onDateInput).not.toHaveBeenCalled();
 
-                inputEl.value = '2001-01-01';
-                dispatchFakeEvent(inputEl, 'input');
+                inputEl.value = '01-01-200';
+                dispatchKeyboardEvent(inputEl, 'keydown', ONE);
                 fixture.detectChanges();
+                flush();
 
                 expect(testComponent.onChange).not.toHaveBeenCalled();
                 expect(testComponent.onDateChange).not.toHaveBeenCalled();
-                expect(testComponent.onInput).toHaveBeenCalled();
                 expect(testComponent.onDateInput).toHaveBeenCalled();
-            });
+            }));
 
             it('should fire change and dateChange events when user commits typed input', () => {
                 expect(testComponent.onChange).not.toHaveBeenCalled();
                 expect(testComponent.onDateChange).not.toHaveBeenCalled();
-                expect(testComponent.onInput).not.toHaveBeenCalled();
                 expect(testComponent.onDateInput).not.toHaveBeenCalled();
 
                 dispatchFakeEvent(inputEl, 'change');
@@ -1070,14 +1026,12 @@ describe('McDatepicker', () => {
 
                 expect(testComponent.onChange).toHaveBeenCalled();
                 expect(testComponent.onDateChange).toHaveBeenCalled();
-                expect(testComponent.onInput).not.toHaveBeenCalled();
                 expect(testComponent.onDateInput).not.toHaveBeenCalled();
             });
 
             it('should fire dateInput event when user selects calendar date',
                 fakeAsync(() => {
                     expect(testComponent.onChange).not.toHaveBeenCalled();
-                    expect(testComponent.onInput).not.toHaveBeenCalled();
                     expect(testComponent.onDateInput).not.toHaveBeenCalled();
 
                     expect(testComponent.onDateChange).not.toHaveBeenCalled();
@@ -1091,28 +1045,28 @@ describe('McDatepicker', () => {
                     flush();
 
                     expect(testComponent.onChange).not.toHaveBeenCalled();
-                    expect(testComponent.onInput).not.toHaveBeenCalled();
                     expect(testComponent.onDateInput).not.toHaveBeenCalled();
 
                     expect(testComponent.onDateChange).toHaveBeenCalled();
                 })
             );
 
-            it('should not fire the dateInput event if the value has not changed', () => {
+            it('should not fire the dateInput event if the value has not changed', fakeAsync(() => {
                 expect(testComponent.onDateInput).not.toHaveBeenCalled();
 
-                inputEl.value = '12/12/2012';
-                dispatchFakeEvent(inputEl, 'input');
+                inputEl.value = '12/12/201';
+                dispatchKeyboardEvent(inputEl, 'keydown', ONE);
                 fixture.detectChanges();
+                flush();
 
                 expect(testComponent.onDateInput).toHaveBeenCalledTimes(1);
 
-                dispatchFakeEvent(inputEl, 'input');
+                dispatchKeyboardEvent(inputEl, 'keydown', ONE);
                 fixture.detectChanges();
+                flush();
 
                 expect(testComponent.onDateInput).toHaveBeenCalledTimes(1);
-            });
-
+            }));
         });
 
         describe('with ISO 8601 strings as input', () => {
@@ -1256,7 +1210,6 @@ describe('McDatepicker', () => {
                 expect(overlay.getAttribute('dir')).toBe('rtl');
             }));
         });
-
     });
 
     describe('with missing DateAdapter and MC_DATE_FORMATS', () => {
@@ -1333,7 +1286,6 @@ describe('McDatepicker', () => {
             expect(document.querySelector('.custom-element')).toBeTruthy();
         }));
     });
-
 });
 
 
@@ -1347,8 +1299,8 @@ class StandardDatepicker {
     opened = false;
     disabled = false;
     date: Moment | null = moment([2020, 0, 1]);
-    @ViewChild('d', {static: false}) datepicker: McDatepicker<Moment>;
-    @ViewChild(McDatepickerInput, {static: false}) datepickerInput: McDatepickerInput<Moment>;
+    @ViewChild('d', { static: false }) datepicker: McDatepicker<Moment>;
+    @ViewChild(McDatepickerInput, { static: false }) datepickerInput: McDatepickerInput<Moment>;
 }
 
 
@@ -1358,8 +1310,7 @@ class StandardDatepicker {
         <mc-datepicker #d></mc-datepicker>
     `
 })
-class MultiInputDatepicker {
-}
+class MultiInputDatepicker {}
 
 
 @Component({
@@ -1367,7 +1318,7 @@ class MultiInputDatepicker {
         <mc-datepicker #d></mc-datepicker>`
 })
 class NoInputDatepicker {
-    @ViewChild('d', {static: false}) datepicker: McDatepicker<Moment>;
+    @ViewChild('d', { static: false }) datepicker: McDatepicker<Moment>;
 }
 
 
@@ -1380,7 +1331,7 @@ class NoInputDatepicker {
 class DatepickerWithStartAt {
     date = moment([2020, 0, 1]);
     startDate = moment([2010, 0, 1]);
-    @ViewChild('d', {static: false}) datepicker: McDatepicker<Moment>;
+    @ViewChild('d', { static: false }) datepicker: McDatepicker<Moment>;
 }
 
 
@@ -1392,10 +1343,9 @@ class DatepickerWithStartAt {
 })
 class DatepickerWithStartViewYear {
     date = moment([2020, 0, 1]);
-    @ViewChild('d', {static: false}) datepicker: McDatepicker<Moment>;
+    @ViewChild('d', { static: false }) datepicker: McDatepicker<Moment>;
 
-    onYearSelection() {
-    }
+    onYearSelection() {}
 }
 
 
@@ -1408,10 +1358,9 @@ class DatepickerWithStartViewYear {
 })
 class DatepickerWithStartViewMultiYear {
     date = moment([2020, 0, 1]);
-    @ViewChild('d', {static: false}) datepicker: McDatepicker<Moment>;
+    @ViewChild('d', { static: false }) datepicker: McDatepicker<Moment>;
 
-    onMultiYearSelection() {
-    }
+    onMultiYearSelection() {}
 }
 
 
@@ -1423,8 +1372,8 @@ class DatepickerWithStartViewMultiYear {
 })
 class DatepickerWithNgModel {
     selected: Moment | null = null;
-    @ViewChild('d', {static: false}) datepicker: McDatepicker<Moment>;
-    @ViewChild(McDatepickerInput, {static: false}) datepickerInput: McDatepickerInput<Moment>;
+    @ViewChild('d', { static: false }) datepicker: McDatepicker<Moment>;
+    @ViewChild(McDatepickerInput, { static: false }) datepickerInput: McDatepickerInput<Moment>;
 }
 
 
@@ -1437,9 +1386,9 @@ class DatepickerWithNgModel {
 })
 class DatepickerWithFormControl {
     formControl = new FormControl();
-    @ViewChild('d', {static: false}) datepicker: McDatepicker<Moment>;
-    @ViewChild(McDatepickerInput, {static: false}) datepickerInput: McDatepickerInput<Moment>;
-    @ViewChild(McDatepickerToggle, {static: false}) datepickerToggle: McDatepickerToggle<Moment>;
+    @ViewChild('d', { static: false }) datepicker: McDatepicker<Moment>;
+    @ViewChild(McDatepickerInput, { static: false }) datepickerInput: McDatepickerInput<Moment>;
+    @ViewChild(McDatepickerToggle, { static: false }) datepickerToggle: McDatepickerToggle<Moment>;
 }
 
 
@@ -1451,8 +1400,8 @@ class DatepickerWithFormControl {
     `
 })
 class DatepickerWithToggle {
-    @ViewChild('d', {static: false}) datepicker: McDatepicker<Moment>;
-    @ViewChild(McDatepickerInput, {static: false}) input: McDatepickerInput<Moment>;
+    @ViewChild('d', { static: false }) datepicker: McDatepicker<Moment>;
+    @ViewChild(McDatepickerInput, { static: false }) input: McDatepickerInput<Moment>;
 }
 
 
@@ -1476,7 +1425,7 @@ class DatepickerWithCustomIcon {}
     `
 })
 class DatepickerWithMinAndMaxValidation {
-    @ViewChild('d', {static: false}) datepicker: McDatepicker<Moment>;
+    @ViewChild('d', { static: false }) datepicker: McDatepicker<Moment>;
     date: Moment | null;
     minDate = moment([2010, 0, 1]);
     maxDate = moment([2020, 0, 1]);
@@ -1491,7 +1440,7 @@ class DatepickerWithMinAndMaxValidation {
     `
 })
 class DatepickerWithFilterAndValidation {
-    @ViewChild('d', {static: false}) datepicker: McDatepicker<Moment>;
+    @ViewChild('d', { static: false }) datepicker: McDatepicker<Moment>;
     date: Moment;
     filter = (date: Moment) => date.date() !== 1;
 }
@@ -1499,25 +1448,20 @@ class DatepickerWithFilterAndValidation {
 
 @Component({
     template: `
-        <input [mcDatepicker]="d" (change)="onChange()" (input)="onInput()"
-               (dateChange)="onDateChange()" (dateInput)="onDateInput()">
+        <input [mcDatepicker]="d" (change)="onChange()" [(ngModel)]="value" (dateChange)="onDateChange()"
+               (dateInput)="onDateInput()">
         <mc-datepicker #d></mc-datepicker>
     `
 })
 class DatepickerWithChangeAndInputEvents {
-    @ViewChild('d', {static: false}) datepicker: McDatepicker<Moment>;
+    value = null;
+    @ViewChild('d', { static: false }) datepicker: McDatepicker<Moment>;
 
-    onChange() {
-    }
+    onChange() {}
 
-    onInput() {
-    }
+    onDateChange() {}
 
-    onDateChange() {
-    }
-
-    onDateInput() {
-    }
+    onDateInput() {}
 }
 
 
@@ -1529,8 +1473,8 @@ class DatepickerWithChangeAndInputEvents {
 })
 class DatepickerWithi18n {
     date: Moment | null = moment([2010, 0, 1]);
-    @ViewChild('d', {static: false}) datepicker: McDatepicker<Moment>;
-    @ViewChild(McDatepickerInput, {static: false}) datepickerInput: McDatepickerInput<Moment>;
+    @ViewChild('d', { static: false }) datepicker: McDatepicker<Moment>;
+    @ViewChild(McDatepickerInput, { static: false }) datepickerInput: McDatepickerInput<Moment>;
 }
 
 
@@ -1544,10 +1488,10 @@ class DatepickerWithi18n {
 class DatepickerWithISOStrings {
     value = new Date(2017, 5, 1).toISOString();
     min = new Date(2017, 0, 1).toISOString();
-    max = new Date (2017, 11, 31).toISOString();
+    max = new Date(2017, 11, 31).toISOString();
     startAt = new Date(2017, 6, 1).toISOString();
-    @ViewChild('d', {static: false}) datepicker: McDatepicker<Moment>;
-    @ViewChild(McDatepickerInput, {static: false}) datepickerInput: McDatepickerInput<Moment>;
+    @ViewChild('d', { static: false }) datepicker: McDatepicker<Moment>;
+    @ViewChild(McDatepickerInput, { static: false }) datepickerInput: McDatepickerInput<Moment>;
 }
 
 
@@ -1561,7 +1505,7 @@ class DatepickerWithEvents {
     selected: Moment | null = null;
     openedSpy = jasmine.createSpy('opened spy');
     closedSpy = jasmine.createSpy('closed spy');
-    @ViewChild('d', {static: false}) datepicker: McDatepicker<Moment>;
+    @ViewChild('d', { static: false }) datepicker: McDatepicker<Moment>;
 }
 
 
@@ -1572,7 +1516,7 @@ class DatepickerWithEvents {
     `
 })
 class DatepickerOpeningOnFocus {
-    @ViewChild(McDatepicker, {static: false}) datepicker: McDatepicker<Moment>;
+    @ViewChild(McDatepicker, { static: false }) datepicker: McDatepicker<Moment>;
 }
 
 
@@ -1583,7 +1527,7 @@ class DatepickerOpeningOnFocus {
     `
 })
 class DatepickerWithCustomHeader {
-    @ViewChild('ch', {static: false}) datepicker: McDatepicker<Moment>;
+    @ViewChild('ch', { static: false }) datepicker: McDatepicker<Moment>;
     customHeaderForDatePicker = CustomHeaderForDatepicker;
 }
 
@@ -1593,8 +1537,7 @@ class DatepickerWithCustomHeader {
         <mc-calendar-header></mc-calendar-header>
     `
 })
-class CustomHeaderForDatepicker {
-}
+class CustomHeaderForDatepicker {}
 
 @Component({
     template: `
@@ -1603,8 +1546,8 @@ class CustomHeaderForDatepicker {
     `
 })
 class DelayedDatepicker {
-    @ViewChild('d', {static: false}) datepicker: McDatepicker<Moment>;
-    @ViewChild(McDatepickerInput, {static: false}) datepickerInput: McDatepickerInput<Moment>;
+    @ViewChild('d', { static: false }) datepicker: McDatepicker<Moment>;
+    @ViewChild(McDatepickerInput, { static: false }) datepickerInput: McDatepickerInput<Moment>;
     date: Moment | null;
     assignedDatepicker: McDatepicker<Moment>;
 }
@@ -1619,5 +1562,4 @@ class DelayedDatepicker {
         <mc-datepicker #d></mc-datepicker>
     `
 })
-class DatepickerWithTabindexOnToggle {
-}
+class DatepickerWithTabindexOnToggle {}

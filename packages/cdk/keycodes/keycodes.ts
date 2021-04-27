@@ -130,7 +130,7 @@ export function hasModifierKey(event: KeyboardEvent | MouseEvent, ...modifiers: 
     return event.altKey || event.shiftKey || event.ctrlKey || event.metaKey;
 }
 
-export function isControl(event) {
+export function isControl(event): boolean {
     const keyCode = event.which;
     switch (keyCode) {
         case SHIFT:
@@ -142,52 +142,52 @@ export function isControl(event) {
     }
 }
 
-export function isNumberKey(event) {
+export function isNumberKey(event): boolean {
     const keyCode = event.which ? event.which : event;
 
     return keyCode >= 49 && keyCode <= 57;
 }
 
-export function isLetterKey(event) {
+export function isLetterKey(event): boolean {
     const keyCode = event.which ? event.which : event;
 
     return keyCode >= 65 && keyCode <= 90;
 }
 
-export function isFunctionKey(event) {
+export function isFunctionKey(event): boolean {
     const keyCode = event.which ? event.which : event;
 
     return keyCode >= 112 && keyCode <= 123;
 }
 
-export function isVerticalMovement(event) {
-    return ~[UP_ARROW, DOWN_ARROW, PAGE_DOWN, PAGE_UP, HOME, END].indexOf(event);
+export function isVerticalMovement(event): boolean {
+    return [UP_ARROW, DOWN_ARROW, PAGE_DOWN, PAGE_UP, HOME, END].indexOf(event) !== -1;
 }
 
-export function isHorizontalMovement(event) {
-    return ~[LEFT_ARROW, RIGHT_ARROW, BACKSPACE, DELETE].indexOf(event);
+export function isHorizontalMovement(event): boolean {
+    return [LEFT_ARROW, RIGHT_ARROW, BACKSPACE, DELETE].indexOf(event) !== -1;
 }
 
-export function isSelectAll(event) {
+export function isSelectAll(event): boolean {
     return event.ctrlKey && event.keyCode === 65;
 }
 
-export function isCopy(event) {
+export function isCopy(event): boolean {
     return event.ctrlKey && event.keyCode === 67;
 }
 
-export function isInput(event) {
+export function isInput(event): boolean {
     return event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA';
 }
 
-export function isLeftBracket(event) {
+export function isLeftBracket(event): boolean {
     return event.code === 'BracketLeft';
 }
 
-export function isRightBracket(event) {
+export function isRightBracket(event): boolean {
     return event.code === 'BracketRight';
 }
 
-export function isDigit(event) {
+export function isDigit(event): boolean {
     return [48, 49, 50, 51, 52, 53, 54, 55, 56, 57].indexOf(event.which) !== -1;
 }

@@ -234,7 +234,7 @@ export class McSelect extends McSelectMixinBase implements
     HasTabIndex, McFormFieldControl<any>, CanUpdateErrorState {
 
     /** A name for this control that can be used by `mc-form-field`. */
-    controlType = 'mc-select';
+    controlType = 'select';
 
     hiddenItems: number = 0;
 

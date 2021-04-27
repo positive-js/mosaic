@@ -40,11 +40,11 @@ $mc-datepicker-today-fade-amount: 0.2;
     }
 
     .mc-calendar__table-header-divider::after {
-        background: map-get($foreground, border);
+        background: map-get($foreground, divider);
     }
 
     .mc-calendar__body-label {
-        color: mc-color($foreground, icon);
+        color: map-get($foreground, text);
     }
 
     .mc-calendar__body-cell-content {
@@ -67,23 +67,6 @@ $mc-datepicker-today-fade-amount: 0.2;
     .mc-calendar__body-cell:not(.mc-calendar__body_disabled):hover {
         & > .mc-calendar__body-cell-content:not(.mc-selected) {
             background-color: mc-color($second, A60);
-        }
-    }
-
-    .mc-calendar__controls {
-        .mc-button,
-        .mc-icon-button {
-            border-radius: 0;
-            border-color: transparent;
-            background-color: transparent;
-
-            .mc-button-overlay {
-                z-index: -1;
-            }
-
-            &:hover {
-                background: mc-color($second, A60);
-            }
         }
     }
 

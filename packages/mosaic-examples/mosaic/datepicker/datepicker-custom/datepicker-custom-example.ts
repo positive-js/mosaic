@@ -23,7 +23,7 @@ export function mcDateAdapterFactory(locale: string) {
 export function mcDateFormatsFactory() {
     const dateFormats = { ...MC_MOMENT_DATE_FORMATS } as unknown as McDateFormats;
 
-    dateFormats.display.dateInput = 'DD.MM.YYYY';
+    dateFormats.dateInput = 'DD.MM.YYYY';
 
     return dateFormats;
 }
