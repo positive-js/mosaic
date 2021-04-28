@@ -1,3 +1,16 @@
+## 11.0.3 "Unsustainable Industrialist" (2021-04-28)
+
+### Mosaic
+
+ * bug fix  **autocomplete:** disabled items should not be auto activated (#UIM-615) ([#603](https://github.com/positive-js/mosaic/issues/603)) ([69f6f58](https://github.com/positive-js/mosaic/commit/69f6f58d76b0b4c215546fce0db098565f6f46b3)), closes [#UIM-615](https://github.com/positive-js/mosaic/issues/UIM-615)
+ * bug fix  **dropdown:** focus on opening (UIM-564) ([#604](https://github.com/positive-js/mosaic/issues/604)) ([c2cbeda](https://github.com/positive-js/mosaic/commit/c2cbeda2618c82eb3cbc7ac306d8293109f87b4e))
+ * bug fix  **popover:** fixed displaying arrow (#UIM-625) ([#607](https://github.com/positive-js/mosaic/issues/607)) ([acfcee8](https://github.com/positive-js/mosaic/commit/acfcee8f5048e71d44340b618d028d044b349934)), closes [#UIM-625](https://github.com/positive-js/mosaic/issues/UIM-625)
+ * bug fix  **tree:** fixed tests (#UIM-599) ([#592](https://github.com/positive-js/mosaic/issues/592)) ([70c99a5](https://github.com/positive-js/mosaic/commit/70c99a5877b7dbf46c2a7d5579c84b6c6c7b509a)), closes [#UIM-599](https://github.com/positive-js/mosaic/issues/UIM-599)
+
+### Docs
+
+ * bug fix  fixed version switch (#UIM-624) ([#606](https://github.com/positive-js/mosaic/issues/606)) ([84c22f3](https://github.com/positive-js/mosaic/commit/84c22f366aa483a495eb9f8c420d4e2bdfa64d00)), closes [#UIM-624](https://github.com/positive-js/mosaic/issues/UIM-624) [#UIM-624](https://github.com/positive-js/mosaic/issues/UIM-624) [#UIM-624](https://github.com/positive-js/mosaic/issues/UIM-624)
+
 ## 11.0.2 "Flection" (2021-04-07)
 
 ### Mosaic
