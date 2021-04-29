@@ -10,22 +10,10 @@ import {
 } from '@ptsecurity/cdk/datetime';
 import { DateTime } from 'luxon';
 import * as MessageFormat from 'messageformat';
-// Depending on whether rollup is used, moment needs to be imported differently.
-// Since Moment.js doesn't have a default export, we normally need to import using the `* as`
-// syntax. However, rollup creates a synthetic default module and we thus need to import it using
-// the `default as` syntax.
-import * as _moment from 'moment';
-// tslint:disable:no-duplicate-imports
-// @ts-ignore (look at tsconfig)
-import { default as _rollupMoment, Moment } from 'moment';
-import { unitOfTime } from 'moment';
 
 import { enUS } from './locales/en-US';
 import { ruRU } from './locales/ru-RU';
 import { IFormatterConfig } from './locales/IFormatterConfig';
-
-
-const moment = _rollupMoment || _moment;
 
 
 /** Configurable options for {@see LuxonDateAdapter}. */
@@ -36,11 +24,6 @@ export interface McLuxonDateAdapterOptions {
      * {@default false}
      */
     useUtc: boolean;
-    /**
-     * whether should parse method try guess date format
-     * {@default false}
-     */
-    findDateFormat: boolean;
 }
 
 /** InjectionToken for moment date adapter to configure options. */
@@ -53,10 +36,7 @@ export const MC_LUXON_DATE_ADAPTER_OPTIONS = new InjectionToken<McLuxonDateAdapt
 /** @docs-private */
 // tslint:disable:naming-convention
 export function MC_LUXON_DATE_ADAPTER_OPTIONS_FACTORY(): McLuxonDateAdapterOptions {
-    return {
-        useUtc: false,
-        findDateFormat: false
-    };
+    return { useUtc: false };
 }
 
 /** Creates an array and fills it with values. */
@@ -79,7 +59,7 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     private formatterConfig: IFormatterConfig;
 
     private get momentWithLocale(): DateTime {
-        return moment().locale(this.locale);
+        return DateTime.now().setLocale(this.locale);
     }
 
     private localeData: {
@@ -93,46 +73,46 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     };
 
     constructor(
-        @Optional() @Inject(MC_DATE_LOCALE) dateLocale: string,
+        @Inject(MC_DATE_LOCALE) dateLocale: string,
         @Optional() @Inject(MC_LUXON_DATE_ADAPTER_OPTIONS) private readonly options?: McLuxonDateAdapterOptions
     ) {
         super();
 
-        this.setLocale(dateLocale || moment.locale());
+        this.setLocale(dateLocale);
 
         this.configureTranslator(this.locale);
     }
 
     setLocale(locale: string): void {
         super.setLocale(locale);
-
-        let momentLocaleData = moment.localeData(locale);
-
-        // This is our customs translations
-        const i18nLocals = ['en', 'ru'];
-
-        if (i18nLocals.indexOf(locale) !== -1) {
-            this.formatterConfig = locale === 'en' ? enUS : ruRU;
-
-            momentLocaleData = moment.updateLocale(locale, {
-                monthsShort: {
-                    format: this.formatterConfig.monthNames.short.formatted,
-                    standalone: this.formatterConfig.monthNames.short.standalone
-                },
-                weekdaysShort: this.formatterConfig.dayOfWeekNames.short,
-                weekdays: this.formatterConfig.dayOfWeekNames.long
-            });
-        }
-
-        this.localeData = {
-            firstDayOfWeek: momentLocaleData.firstDayOfWeek(),
-            longMonths: momentLocaleData.months(),
-            shortMonths: momentLocaleData.monthsShort(),
-            dates: range(31, (i) => this.createDate(2017, 0, i + 1).format('D')),
-            longDaysOfWeek: momentLocaleData.weekdays(),
-            shortDaysOfWeek: momentLocaleData.weekdaysShort(),
-            narrowDaysOfWeek: momentLocaleData.weekdaysMin()
-        };
+        //
+        // let momentLocaleData = moment.localeData(locale);
+        //
+        // // This is our customs translations
+        // const i18nLocals = ['en', 'ru'];
+        //
+        // if (i18nLocals.indexOf(locale) !== -1) {
+        //     this.formatterConfig = locale === 'en' ? enUS : ruRU;
+        //
+        //     momentLocaleData = moment.updateLocale(locale, {
+        //         monthsShort: {
+        //             format: this.formatterConfig.monthNames.short.formatted,
+        //             standalone: this.formatterConfig.monthNames.short.standalone
+        //         },
+        //         weekdaysShort: this.formatterConfig.dayOfWeekNames.short,
+        //         weekdays: this.formatterConfig.dayOfWeekNames.long
+        //     });
+        // }
+        //
+        // this.localeData = {
+        //     firstDayOfWeek: momentLocaleData.firstDayOfWeek(),
+        //     longMonths: momentLocaleData.months(),
+        //     shortMonths: momentLocaleData.monthsShort(),
+        //     dates: range(31, (i) => this.createDate(2017, 0, i + 1).format('D')),
+        //     longDaysOfWeek: momentLocaleData.weekdays(),
+        //     shortDaysOfWeek: momentLocaleData.weekdaysShort(),
+        //     narrowDaysOfWeek: momentLocaleData.weekdaysMin()
+        // };
     }
 
     getLocaleData() {
@@ -148,31 +128,31 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     }
 
     getYear(date: DateTime): number {
-        return this.clone(date).year();
+        return this.clone(date).year;
     }
 
     getMonth(date: DateTime): number {
-        return this.clone(date).month();
+        return this.clone(date).month;
     }
 
     getDate(date: DateTime): number {
-        return this.clone(date).date();
+        return this.clone(date).day;
     }
 
     getHours(date: DateTime): number {
-        return this.clone(date).hours();
+        return this.clone(date).hour;
     }
 
     getMinutes(date: DateTime): number {
-        return this.clone(date).minutes();
+        return this.clone(date).minute;
     }
 
     getSeconds(date: DateTime): number {
-        return this.clone(date).seconds();
+        return this.clone(date).second;
     }
 
     getMilliseconds(date: DateTime): number {
-        return this.clone(date).milliseconds();
+        return this.clone(date).millisecond;
     }
 
     getTime(date: DateTime): number {
@@ -180,7 +160,7 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     }
 
     getDayOfWeek(date: DateTime): number {
-        return this.clone(date).day();
+        return this.clone(date).weekday;
     }
 
     getMonthNames(style: 'long' | 'short' | 'narrow'): string[] {
@@ -209,7 +189,7 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     }
 
     getNumDaysInMonth(date: DateTime): number {
-        return this.clone(date).daysInMonth();
+        return this.clone(date).daysInMonth;
     }
 
     clone(date: DateTime): DateTime {
@@ -227,7 +207,7 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
             throw Error(`Invalid date "${date}". Date has to be greater than 0.`);
         }
 
-        const result = this.createMoment({year, month, date}).locale(this.locale);
+        const result = this.create({year, month, date}).locale(this.locale);
 
         // If the result isn't valid, the date must have been out of bounds for this month.
         if (!result.isValid()) {
@@ -257,20 +237,18 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     }
 
     today(): DateTime {
-        return this.createMoment().locale(this.locale);
+        return this.create().locale(this.locale);
     }
 
     parse(value: any, parseFormat: string | string[]): DateTime | null {
         if (value) {
             if (value && typeof value === 'string') {
-                if (this.options && this.options.findDateFormat) { return this.findFormat(value); }
-
                 return parseFormat
-                    ? this.createMoment(value, parseFormat, this.locale)
-                    : this.createMoment(value).locale(this.locale);
+                    ? this.create(value, parseFormat, this.locale)
+                    : this.create(value).locale(this.locale);
             }
 
-            return this.createMoment(value).locale(this.locale);
+            return this.create(value).locale(this.locale);
         }
 
         return null;
@@ -306,7 +284,7 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     deserialize(value: any): DateTime | null {
         let date;
         if (value instanceof Date) {
-            date = this.createMoment(value).locale(this.locale);
+            date = this.create(value).locale(this.locale);
         } else if (this.isDateInstance(value)) {
             // Note: assumes that cloning also sets the correct locale.
             return this.clone(value);
@@ -316,11 +294,11 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
             if (!value) {
                 return null;
             }
-            date = this.createMoment(value, moment.ISO_8601).locale(this.locale);
+            date = this.create(value, moment.ISO_8601).locale(this.locale);
         }
 
         if (date && this.isValid(date)) {
-            return this.createMoment(date).locale(this.locale);
+            return this.create(date).locale(this.locale);
         }
 
         return super.deserialize(value);
@@ -590,8 +568,8 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     }
 
     /** Creates a Moment instance while respecting the current UTC settings. */
-    private createMoment(...args: any[]): DateTime {
-        return (this.options && this.options.useUtc) ? moment.utc(...args) : moment(...args);
+    private create(...args: any[]): DateTime {
+        return (this.options && this.options.useUtc) ? DateTime.utc(...args) : DateTime.now(...args);
     }
 
     private compileVariables(date: DateTime, variables: any): any {
@@ -622,118 +600,5 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
 
     private configureTranslator(locale: string): void {
         this.messageformat = new MessageFormat(locale);
-    }
-
-    private isNumeric(value: any): boolean {
-        return !isNaN(parseFloat(value)) && isFinite(value);
-    }
-
-    private findFormat(value: string): DateTime | null {
-        if (!value) { return null; }
-
-        // default test - iso
-        const isoDate =  this.createMoment(value, moment.ISO_8601, this.locale);
-
-        if (isoDate.isValid()) { return isoDate; }
-
-        if (this.isNumeric(value)) {
-            // unix time sec
-            return this.createMoment(value, 'X', this.locale);
-        }
-
-        // long months naming: D MMM YYYY, MMM Do YYYY with short case support
-        if (
-            /^\d{1,2}\s\S+\s(\d{2}|\d{4})$/.test(value.trim()) ||
-            /^\S+\s\d{1,2}[a-z]{2}\s(\d{2}|\d{4})$/.test(value.trim())
-        ) {
-            return this.parseWithSpace(value);
-        }
-
-        // slash notation: DD/MM/YYYY, MM/DD/YYYY with short case support
-        if (/^\d{1,2}\/\d{1,2}\/(\d{2}|\d{4})$/.test(value)) {
-            return this.parseWithSlash(value);
-        }
-
-        // dash notation: DD-MM-YYYY, YYYY-DD-MM with short case support
-        if (/(^(\d{1,2}|\d{4})-\d{1,2}-\d{1,2}$)|(^\d{1,2}-\d{1,2}-(\d{2}|\d{4})$)/.test(value)) {
-           return this.parseWithDash(value);
-        }
-
-        // dot notation: DD.MM.YYYY with short case support
-        if (/^\d{1,2}\.\d{1,2}\.(\d{2}|\d{4})$/.test(value)) {
-            return this.parseWithDot(value);
-        }
-
-        return null;
-    }
-
-    private parseWithSpace(value: string): DateTime | null {
-        switch (this.locale) {
-            case 'ru':
-                return this.createMoment(value, 'DD MMMM YYYY', this.locale);
-            case 'en':
-                // 16 Feb 2019 vs Feb 16th 2019, covers Feb and February cases
-                if (this.isNumeric(value[0])) {
-                    return this.createMoment(value, 'D MMMM YYYY', this.locale);
-                }
-
-                return this.createMoment(value, 'MMMM Do YYYY', this.locale);
-            default:
-                throw new Error(`Locale ${this.locale} is not supported`);
-        }
-    }
-
-    private parseWithSlash(value: string): DateTime | null {
-        switch (this.locale) {
-            case 'ru':
-                return this.createMoment(value, 'DD/MM/YYYY', this.locale);
-            // todo do we use generalized locales? en vs en-US; until not we try to guess
-            case 'en':
-                // US vs UK
-                const parts = value.split('/');
-                const datePartsCount = 3;
-                if (parts.length !== datePartsCount) { return null; }
-
-                const firstPart = parts[0].trim();
-                const secondPart = parts[1].trim();
-
-                if (!this.isNumeric(firstPart) || !this.isNumeric(secondPart)) { return null; }
-
-                const monthsInYears = 12;
-
-                const canFirstBeMonth = +firstPart <= monthsInYears;
-                const canSecondByMonth = +secondPart <= monthsInYears;
-
-                // first two parts cannot be month
-                if (!canFirstBeMonth && !canSecondByMonth) { return null; }
-
-                const canDetermineWhereMonth = canFirstBeMonth && canSecondByMonth;
-
-                // use US format by default
-                if (canDetermineWhereMonth) { return this.createMoment(value, 'MM/DD/YYYY', this.locale); }
-
-                return canFirstBeMonth && !canSecondByMonth
-                    ? this.createMoment(value, 'MM/DD/YYYY', this.locale)
-                    : this.createMoment(value, 'DD/MM/YYYY', this.locale);
-            default:
-                throw new Error(`Locale ${this.locale} is not supported`);
-        }
-    }
-
-    private parseWithDash(value: string): DateTime | null {
-        // leading year vs finishing year
-        const parts = value.split('-');
-        if (parts[0].length === 0) { return null; }
-
-        const maxDayOrMonthCharsCount = 2;
-
-        return parts[0].length <= maxDayOrMonthCharsCount
-            ? this.createMoment(value, 'DD-MM-YYYY', this.locale)
-            : this.createMoment(value, 'YYYY-MM-DD', this.locale);
-    }
-
-    private parseWithDot(value: string): DateTime | null {
-        // covers two cases YYYY and YY (for current year)
-        return this.createMoment(value, 'DD.MM.YYYY', this.locale);
     }
 }
