@@ -1,5 +1,4 @@
 import { inject, InjectionToken, LOCALE_ID } from '@angular/core';
-import { Moment } from 'moment';
 import { Observable, Subject } from 'rxjs';
 
 
@@ -290,19 +289,19 @@ export abstract class DateAdapter<D> {
      * @param template - template
      * @returns relative date by template
      */
-    abstract relativeDate(date: Moment, template: IFormatterRelativeTemplate): string;
+    abstract relativeDate(date: D, template: IFormatterRelativeTemplate): string;
 
     /**
      * @param date - date
      * @returns relative date in short format
      */
-    abstract relativeShortDate(date: Moment): string;
+    abstract relativeShortDate(date: D): string;
 
     /**
      * @param date - date
      * @returns relative date in long format
      */
-    abstract relativeLongDate(date: Moment): string;
+    abstract relativeLongDate(date: D): string;
 
     /**
      * @param date - date
@@ -313,7 +312,7 @@ export abstract class DateAdapter<D> {
      * @returns absolute date in common format
      */
     abstract absoluteDate(
-        date: Moment,
+        date: D,
         params: IFormatterAbsoluteTemplate,
         datetime: boolean,
         milliseconds: boolean,
@@ -324,20 +323,20 @@ export abstract class DateAdapter<D> {
      * @param date - date
      * @returns absolute date in short format
      */
-    abstract absoluteShortDate(date: Moment): string;
+    abstract absoluteShortDate(date: D): string;
 
     /**
      * @param date - date
      * @param options - AbsoluteDateTimeOptions
      * @returns absolute date in short format with time
      */
-    abstract absoluteShortDateTime(date: Moment, options?: IAbsoluteDateTimeOptions): string;
+    abstract absoluteShortDateTime(date: D, options?: IAbsoluteDateTimeOptions): string;
 
     /**
      * @param date - date
      * @returns absolute date in long format
      */
-    abstract absoluteLongDate(date: Moment): string;
+    abstract absoluteLongDate(date: D): string;
 
     /**
      * @param startDate - start date
@@ -345,7 +344,7 @@ export abstract class DateAdapter<D> {
      * @param template - template
      * @returns opened date
      */
-    abstract openedRangeDate(startDate: Moment, endDate: Moment, template: IFormatterRangeTemplate): string;
+    abstract openedRangeDate(startDate: D, endDate: D, template: IFormatterRangeTemplate): string;
 
     /**
      * @param startDate - start date
@@ -353,14 +352,14 @@ export abstract class DateAdapter<D> {
      * @param template - template
      * @returns opened date
      */
-    abstract openedRangeDateTime(startDate: Moment, endDate: Moment, template: IFormatterRangeTemplate): string;
+    abstract openedRangeDateTime(startDate: D, endDate: D, template: IFormatterRangeTemplate): string;
 
     /**
      * @param date - date
      * @param options - AbsoluteDateTimeOptions
      * @returns absolute date in long format with time
      */
-    abstract absoluteLongDateTime(date: Moment, options?: IAbsoluteDateTimeOptions): string;
+    abstract absoluteLongDateTime(date: D, options?: IAbsoluteDateTimeOptions): string;
 
     /**
      * @param startDate - start date
@@ -368,7 +367,7 @@ export abstract class DateAdapter<D> {
      * @param template - template
      * @returns range date in template format
      */
-    abstract rangeDate(startDate: Moment, endDate: Moment, template: IFormatterRangeTemplate): string;
+    abstract rangeDate(startDate: D, endDate: D, template: IFormatterRangeTemplate): string;
 
     /**
      * @param startDate - start date
@@ -376,42 +375,42 @@ export abstract class DateAdapter<D> {
      * @param template - template
      * @returns range date in template format with time
      */
-    abstract rangeDateTime(startDate: Moment, endDate: Moment, template: IFormatterRangeTemplate): string;
+    abstract rangeDateTime(startDate: D, endDate: D, template: IFormatterRangeTemplate): string;
 
     /**
      * @param startDate - start date
      * @param endDate - end date
      * @returns range date in short format
      */
-    abstract rangeShortDate(startDate: Moment, endDate: Moment): string;
+    abstract rangeShortDate(startDate: D, endDate: D): string;
 
     /**
      * @param startDate - start date
      * @param endDate - end date
      * @returns range date in short format with time
      */
-    abstract rangeShortDateTime(startDate: Moment, endDate: Moment): string;
+    abstract rangeShortDateTime(startDate: D, endDate: D): string;
 
     /**
      * @param startDate - start date
      * @param endDate - end date
      * @returns range date in long format
      */
-    abstract rangeLongDate(startDate: Moment, endDate: Moment): string;
+    abstract rangeLongDate(startDate: D, endDate: D): string;
 
     /**
      * @param startDate - start date
      * @param endDate - end date
      * @returns range date in long format with time
      */
-    abstract rangeLongDateTime(startDate: Moment, endDate: Moment): string;
+    abstract rangeLongDateTime(startDate: D, endDate: D): string;
 
     /**
      * @param startDate - start date
      * @param endDate - end date
      * @returns range middle date with time
      */
-    abstract rangeMiddleDateTime(startDate: Moment, endDate: Moment): string;
+    abstract rangeMiddleDateTime(startDate: D, endDate: D): string;
 
     /**
      * Attempts to deserialize a value to a valid date object. This is different from parsing in that

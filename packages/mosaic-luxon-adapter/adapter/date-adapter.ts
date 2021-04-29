@@ -8,11 +8,9 @@ import {
     IFormatterAbsoluteTemplate,
     IAbsoluteDateTimeOptions
 } from '@ptsecurity/cdk/datetime';
-import { DateTime } from 'luxon';
+import { DateTime, DurationUnit } from 'luxon';
 import * as MessageFormat from 'messageformat';
 
-import { enUS } from './locales/en-US';
-import { ruRU } from './locales/ru-RU';
 import { IFormatterConfig } from './locales/IFormatterConfig';
 
 
@@ -39,16 +37,6 @@ export function MC_LUXON_DATE_ADAPTER_OPTIONS_FACTORY(): McLuxonDateAdapterOptio
     return { useUtc: false };
 }
 
-/** Creates an array and fills it with values. */
-function range<T>(length: number, valueFunction: (index: number) => T): T[] {
-    const valuesArray = Array(length);
-
-    for (let i = 0; i < length; i++) {
-        valuesArray[i] = valueFunction(i);
-    }
-
-    return valuesArray;
-}
 
 @Injectable()
 export class LuxonDateAdapter extends DateAdapter<DateTime> {
@@ -128,31 +116,31 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     }
 
     getYear(date: DateTime): number {
-        return this.clone(date).year;
+        return date.year;
     }
 
     getMonth(date: DateTime): number {
-        return this.clone(date).month;
+        return date.month;
     }
 
     getDate(date: DateTime): number {
-        return this.clone(date).day;
+        return date.day;
     }
 
     getHours(date: DateTime): number {
-        return this.clone(date).hour;
+        return date.hour;
     }
 
     getMinutes(date: DateTime): number {
-        return this.clone(date).minute;
+        return date.minute;
     }
 
     getSeconds(date: DateTime): number {
-        return this.clone(date).second;
+        return date.second;
     }
 
     getMilliseconds(date: DateTime): number {
-        return this.clone(date).millisecond;
+        return date.millisecond;
     }
 
     getTime(date: DateTime): number {
@@ -160,11 +148,10 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     }
 
     getDayOfWeek(date: DateTime): number {
-        return this.clone(date).weekday;
+        return date.weekday;
     }
 
     getMonthNames(style: 'long' | 'short' | 'narrow'): string[] {
-        // Moment.js doesn't support narrow month names
         return style === 'long' ? this.localeData.longMonths : this.localeData.shortMonths;
     }
 
@@ -181,7 +168,7 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     }
 
     getYearName(date: DateTime): string {
-        return this.clone(date).format('YYYY');
+        return date.toFormat('YYYY');
     }
 
     getFirstDayOfWeek(): number {
@@ -189,11 +176,11 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     }
 
     getNumDaysInMonth(date: DateTime): number {
-        return this.clone(date).daysInMonth;
+        return date.daysInMonth;
     }
 
     clone(date: DateTime): DateTime {
-        return date.clone().locale(this.locale);
+        return date.setLocale(this.locale);
     }
 
     createDate(year: number, month: number, date: number): DateTime {
@@ -207,10 +194,10 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
             throw Error(`Invalid date "${date}". Date has to be greater than 0.`);
         }
 
-        const result = this.create({year, month, date}).locale(this.locale);
+        const result = this.create({year, month, date}).setLocale(this.locale);
 
         // If the result isn't valid, the date must have been out of bounds for this month.
-        if (!result.isValid()) {
+        if (!result.isValid) {
             throw Error(`Invalid date "${date}" for month with index "${month}".`);
         }
 
@@ -228,16 +215,16 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     ): DateTime {
         const newDate = this.createDate(year, month, date);
 
-        newDate.hours(hours);
-        newDate.minutes(minutes);
-        newDate.seconds(seconds);
-        newDate.milliseconds(milliseconds);
+        newDate.hour = hours;
+        newDate.minute = minutes;
+        newDate.second = seconds;
+        newDate.millisecond = milliseconds;
 
         return newDate;
     }
 
     today(): DateTime {
-        return this.create().locale(this.locale);
+        return this.create().setLocale(this.locale);
     }
 
     parse(value: any, parseFormat: string | string[]): DateTime | null {
@@ -245,75 +232,75 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
             if (value && typeof value === 'string') {
                 return parseFormat
                     ? this.create(value, parseFormat, this.locale)
-                    : this.create(value).locale(this.locale);
+                    : this.create(value).setLocale(this.locale);
             }
 
-            return this.create(value).locale(this.locale);
+            return this.create(value).setLocale(this.locale);
         }
 
         return null;
     }
 
     format(date: DateTime, displayFormat: string): string {
-        // tslint:disable:no-parameter-reassignment
-        date = this.clone(date);
         if (!this.isValid(date)) {
             throw Error('MomentDateAdapter: Cannot format invalid date.');
         }
 
-        return date.format(displayFormat);
+        return date.toFormat(displayFormat);
     }
 
     addCalendarYears(date: DateTime, years: number): DateTime {
-        return this.clone(date).add({ years });
+        return date.plus({ years });
     }
 
     addCalendarMonths(date: DateTime, months: number): DateTime {
-        return this.clone(date).add({ months });
+        return date.plus({ months });
     }
 
     addCalendarDays(date: DateTime, days: number): DateTime {
-        return this.clone(date).add({ days });
+        return date.plus({ days });
     }
 
     toIso8601(date: DateTime): string {
-        return this.clone(date).format();
+        return date.toISO();
     }
 
     /** https://www.ietf.org/rfc/rfc3339.txt */
     deserialize(value: any): DateTime | null {
         let date;
         if (value instanceof Date) {
-            date = this.create(value).locale(this.locale);
+            date = this.create(value).setLocale(this.locale);
         } else if (this.isDateInstance(value)) {
             // Note: assumes that cloning also sets the correct locale.
-            return this.clone(value);
+            return value;
         }
 
         if (typeof value === 'string') {
             if (!value) {
                 return null;
             }
-            date = this.create(value, moment.ISO_8601).locale(this.locale);
+            date = DateTime.fromISO(value).setLocale(this.locale);
         }
 
         if (date && this.isValid(date)) {
-            return this.create(date).locale(this.locale);
+            return this.create(date).setLocale(this.locale);
         }
 
         return super.deserialize(value);
     }
 
     isDateInstance(obj: any): boolean {
-        return moment.isMoment(obj);
+        return DateTime.isDateTime(obj);
     }
 
     isValid(date: DateTime): boolean {
-        return this.clone(date).isValid();
+        return date.isValid;
     }
 
     invalid(): DateTime {
-        return moment.invalid();
+    // что это ?
+    //     return moment.invalid();
+        return DateTime.now();
     }
 
     relativeDate(date: DateTime, template: IFormatterRelativeTemplate): string {
@@ -321,11 +308,11 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
 
         const now = this.momentWithLocale;
 
-        const totalSeconds = now.diff(date, 'seconds');
-        const totalMinutes = now.diff(date, 'minutes');
+        const totalSeconds = now.diff(date, 'seconds').milliseconds;
+        const totalMinutes = now.diff(date, 'minutes').milliseconds;
 
-        const isToday = now.isSame(date, 'day');
-        const isYesterday = now.add(-1, 'days').isSame(date, 'day');
+        const isToday = now.hasSame(date, 'day');
+        const isYesterday = now.plus({ days: -1 }).hasSame(date, 'day');
 
         const templateVariables = {...this.formatterConfig.variables, ...template.variables};
         const variables = this.compileVariables(date, templateVariables);
@@ -408,7 +395,7 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     }
 
     openedRangeDate(startDate: DateTime | null, endDate: DateTime | null, template: IFormatterRangeTemplate) {
-        if (!moment.isMoment(startDate) && !moment.isMoment(endDate)) {
+        if (!DateTime.isDateTime(startDate) && !DateTime.isDateTime(endDate)) {
             throw new Error(this.invalidDateErrorText);
         }
 
@@ -437,7 +424,7 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     }
 
     openedRangeDateTime(startDate: DateTime | null, endDate: DateTime | null, template: IFormatterRangeTemplate) {
-        if (!moment.isMoment(startDate) && !moment.isMoment(endDate)) {
+        if (!DateTime.isDateTime(startDate) && !DateTime.isDateTime(endDate)) {
             throw new Error(this.invalidDateErrorText);
         }
 
@@ -569,7 +556,7 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
 
     /** Creates a Moment instance while respecting the current UTC settings. */
     private create(...args: any[]): DateTime {
-        return (this.options && this.options.useUtc) ? DateTime.utc(...args) : DateTime.now(...args);
+        return (this.options && this.options.useUtc) ? DateTime.utc(...args) : DateTime.local(...args);
     }
 
     private compileVariables(date: DateTime, variables: any): any {
@@ -582,7 +569,7 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
             }
 
             const value = variables[key];
-            compiledVariables[key] = date.format(value);
+            compiledVariables[key] = date.toFormat(value);
         }
 
         compiledVariables.CURRENT_YEAR = this.isCurrentYear(date);
@@ -591,11 +578,11 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     }
 
     private isCurrentYear(value: DateTime): 'yes' | 'no' {
-        return this.momentWithLocale.isSame(value, 'year') ? 'yes' : 'no';
+        return this.momentWithLocale.hasSame(value, 'year') ? 'yes' : 'no';
     }
 
-    private isSame(unit: unitOfTime.StartOf, startDate: DateTime, endDate: DateTime): string {
-        return startDate.isSame(endDate, unit) ? 'yes' : 'no';
+    private isSame(unit: DurationUnit, startDate: DateTime, endDate: DateTime): string {
+        return startDate.hasSame(endDate, unit) ? 'yes' : 'no';
     }
 
     private configureTranslator(locale: string): void {
