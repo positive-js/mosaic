@@ -1,0 +1,31 @@
+{
+    "name": "@ptsecurity/mosaic-luxon-adapter",
+    "version": "{{VERSION}}",
+    "description": "Mosaic Luxon Adapter",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/positive-js/mosaic.git"
+    },
+    "keywords": [
+        "moment",
+        "component",
+        "development",
+        "kit",
+        "mosaic"
+    ],
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/positive-js/mosaic/issues"
+    },
+    "homepage": "https://github.com/positive-js/mosaic#readme",
+    "peerDependencies": {
+        "@angular/core": "{{NG_VERSION}}",
+        "@angular/cdk": "{{NG_VERSION}}",
+        "@ptsecurity/cdk": "{{VERSION}}",
+        "messageformat": "^2.0.5",
+        "moment": "^2.24.0"
+    },
+    "dependencies": {
+        "tslib": "^2.0.1"
+    }
+}

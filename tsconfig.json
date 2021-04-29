@@ -65,7 +65,9 @@
             "@ptsecurity/mosaic/tree": ["packages/mosaic/tree/index.ts"],
             "@ptsecurity/mosaic/tree-select": ["packages/mosaic/tree-select/index.ts"],
             "@ptsecurity/mosaic/vertical-navbar": ["packages/mosaic/vertical-navbar/index.ts"],
+            "@ptsecurity/mosaic-luxon-adapter": ["packages/mosaic-luxon-adapter/index.ts"],
             "@ptsecurity/mosaic-moment-adapter": ["packages/mosaic-moment-adapter/index.ts"],
+            "@ptsecurity/mosaic-luxon-adapter/adapter": ["packages/mosaic-luxon-adapter/adapter/index.ts"],
             "@ptsecurity/mosaic-moment-adapter/adapter": ["packages/mosaic-moment-adapter/adapter/index.ts"]
         }
     },

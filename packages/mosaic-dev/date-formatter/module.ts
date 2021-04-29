@@ -3,20 +3,8 @@
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { DateAdapter, MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
-import { McMomentDateModule, MomentDateAdapter } from '@ptsecurity/mosaic-moment-adapter/adapter';
+import { LuxonDateAdapter, McLuxonDateModule } from '@ptsecurity/mosaic-luxon-adapter/adapter';
 
-// Depending on whether rollup is used, moment needs to be imported differently.
-// Since Moment.js doesn't have a default export, we normally need to import using the `* as`
-// syntax. However, rollup creates a synthetic default module and we thus need to import it using
-// the `default as` syntax.
-// tslint:disable-next-line:ordered-imports
-import * as _moment from 'moment';
-// @ts-ignore
-// tslint:disable-next-line:no-duplicate-imports
-import { default as _rollupMoment, Moment } from 'moment';
-
-
-const moment = _rollupMoment || _moment;
 
 @Component({
     selector: 'app',
@@ -25,7 +13,7 @@ const moment = _rollupMoment || _moment;
     encapsulation: ViewEncapsulation.None,
     providers: [
         { provide: MC_DATE_LOCALE, useValue: 'ru' },
-        { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MC_DATE_LOCALE] }
+        { provide: DateAdapter, useClass: LuxonDateAdapter, deps: [MC_DATE_LOCALE] }
     ]
 })
 export class DemoComponent {
@@ -289,7 +277,7 @@ export class DemoComponent {
     declarations: [DemoComponent],
     imports: [
         BrowserModule,
-        McMomentDateModule
+        McLuxonDateModule
     ],
     bootstrap: [DemoComponent],
     providers: []
