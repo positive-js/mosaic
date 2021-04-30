@@ -2,37 +2,29 @@
 // tslint:disable:mocha-no-side-effect-code
 import { LOCALE_ID } from '@angular/core';
 import { inject, TestBed, waitForAsync } from '@angular/core/testing';
-import {
-    DateAdapter,
-    MC_DATE_LOCALE
-} from '@ptsecurity/cdk/datetime';
-import * as moment from 'moment';
-// tslint:disable-next-line:no-duplicate-imports
-import { Moment } from 'moment';
+import { DateAdapter, MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
+import { DateTime } from 'luxon';
 
-import { MC_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateModule } from './index';
-import { MomentDateAdapter } from './date-adapter';
+import { LuxonDateAdapter } from './date-adapter';
+import { LuxonDateModule } from './index';
 
 
 // tslint:disable:one-variable-per-declaration
 const JAN = 0, FEB = 1, MAR = 2, DEC = 11;
 
-describe('MomentDateAdapter', () => {
-    let adapter: MomentDateAdapter;
-    let assertValidDate: (d: moment.Moment | null, valid: boolean) => void;
+describe('LuxonDateAdapter', () => {
+    let adapter: LuxonDateAdapter;
+    let assertValidDate: (d: DateTime | null, valid: boolean) => void;
 
     beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [MomentDateModule]
-        }).compileComponents();
+        TestBed.configureTestingModule({ imports: [LuxonDateModule] }).compileComponents();
     }));
 
-    beforeEach(inject([DateAdapter], (dateAdapter: MomentDateAdapter) => {
-        moment.locale('en');
+    beforeEach(inject([DateAdapter], (dateAdapter: LuxonDateAdapter) => {
         adapter = dateAdapter;
         adapter.setLocale('en');
 
-        assertValidDate = (d: moment.Moment | null, valid: boolean) => {
+        assertValidDate = (d: DateTime | null, valid: boolean) => {
             expect(adapter.isDateInstance(d)).not.toBeNull(`Expected ${d} to be a date instance`);
             expect(adapter.isValid(d!)).toBe(
                 valid,
@@ -42,24 +34,24 @@ describe('MomentDateAdapter', () => {
     }));
 
     it('should get year', () => {
-        expect(adapter.getYear(moment([2017,  JAN,  1]))).toBe(2017);
+        expect(adapter.getYear(DateTime.local(2017,  1,  1))).toBe(2017);
     });
 
     it('should get month', () => {
-        expect(adapter.getMonth(moment([2017,  JAN,  1]))).toBe(0);
+        expect(adapter.getMonth(DateTime.local(2017,  1,  1))).toBe(1);
     });
 
     it('should get date', () => {
-        expect(adapter.getDate(moment([2017,  JAN,  1]))).toBe(1);
+        expect(adapter.getDate(DateTime.local(2017,  1,  1))).toBe(1);
     });
 
     it('should get day of week', () => {
-        expect(adapter.getDayOfWeek(moment([2017,  JAN,  1]))).toBe(0);
+        expect(adapter.getDayOfWeek(DateTime.local(2017,  1,  1))).toBe(7);
     });
 
     it('should get same day of week in a locale with a different first day of the week', () => {
         adapter.setLocale('fr');
-        expect(adapter.getDayOfWeek(moment([2017,  JAN,  1]))).toBe(0);
+        expect(adapter.getDayOfWeek(DateTime.local(2017,  1,  1))).toBe(7);
     });
 
     it('should get long month names', () => {
@@ -231,7 +223,7 @@ describe('MomentDateAdapter', () => {
         expect(d).not.toBeNull();
         expect(adapter.isDateInstance(d))
             .toBe(true, 'Expected string to have been fed through Date.parse');
-        expect(adapter.isValid(d as moment.Moment))
+        expect(adapter.isValid(d as DateTime))
             .toBe(false, 'Expected to parse as "invalid date" object');
     });
 
@@ -242,7 +234,7 @@ describe('MomentDateAdapter', () => {
 
     it('should throw when attempting to format invalid date', () => {
         expect(() => adapter.format(moment(NaN), 'MM/DD/YYYY'))
-            .toThrowError(/MomentDateAdapter: Cannot format invalid date\./);
+            .toThrowError(/LuxonDateAdapter: Cannot format invalid date\./);
     });
 
     it('should add years', () => {
@@ -380,12 +372,12 @@ describe('MomentDateAdapter', () => {
     });
 });
 
-describe('MomentDateAdapter findDateFormat = true', () => {
-    let adapter: MomentDateAdapter;
+describe('LuxonDateAdapter findDateFormat = true', () => {
+    let adapter: LuxonDateAdapter;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [MomentDateModule],
+            imports: [LuxonDateModule],
             providers: [{
                 provide: MC_MOMENT_DATE_ADAPTER_OPTIONS,
                 useValue: {findDateFormat: true}
@@ -393,7 +385,7 @@ describe('MomentDateAdapter findDateFormat = true', () => {
         }).compileComponents();
     }));
 
-    beforeEach(inject([DateAdapter], (dateAdapter: MomentDateAdapter) => {
+    beforeEach(inject([DateAdapter], (dateAdapter: LuxonDateAdapter) => {
         moment.locale('en');
         adapter = dateAdapter;
         adapter.setLocale('en');
@@ -499,17 +491,17 @@ describe('MomentDateAdapter findDateFormat = true', () => {
     });
 });
 
-describe('MomentDateAdapter with MC_DATE_LOCALE override', () => {
-    let adapter: MomentDateAdapter;
+describe('LuxonDateAdapter with MC_DATE_LOCALE override', () => {
+    let adapter: LuxonDateAdapter;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [ MomentDateModule ],
+            imports: [ LuxonDateModule ],
             providers: [{ provide: MC_DATE_LOCALE, useValue: 'ja-JP' }]
         }).compileComponents();
     }));
 
-    beforeEach(inject([DateAdapter], (d: MomentDateAdapter) => {
+    beforeEach(inject([DateAdapter], (d: LuxonDateAdapter) => {
         adapter = d;
     }));
 
@@ -518,17 +510,17 @@ describe('MomentDateAdapter with MC_DATE_LOCALE override', () => {
     });
 });
 
-describe('MomentDateAdapter with LOCALE_ID override', () => {
-    let adapter: MomentDateAdapter;
+describe('LuxonDateAdapter with LOCALE_ID override', () => {
+    let adapter: LuxonDateAdapter;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [MomentDateModule],
+            imports: [LuxonDateModule],
             providers: [{ provide: LOCALE_ID, useValue: 'fr' }]
         }).compileComponents();
     }));
 
-    beforeEach(inject([DateAdapter], (d: MomentDateAdapter) => {
+    beforeEach(inject([DateAdapter], (d: LuxonDateAdapter) => {
         adapter = d;
     }));
 
@@ -537,12 +529,12 @@ describe('MomentDateAdapter with LOCALE_ID override', () => {
     });
 });
 
-describe('MomentDateAdapter with MC_MOMENT_DATE_ADAPTER_OPTIONS override', () => {
-    let adapter: MomentDateAdapter;
+describe('LuxonDateAdapter with MC_MOMENT_DATE_ADAPTER_OPTIONS override', () => {
+    let adapter: LuxonDateAdapter;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [MomentDateModule],
+            imports: [LuxonDateModule],
             providers: [{
                 provide: MC_MOMENT_DATE_ADAPTER_OPTIONS,
                 useValue: {useUtc: true}
@@ -550,7 +542,7 @@ describe('MomentDateAdapter with MC_MOMENT_DATE_ADAPTER_OPTIONS override', () =>
         }).compileComponents();
     }));
 
-    beforeEach(inject([DateAdapter], (d: MomentDateAdapter) => {
+    beforeEach(inject([DateAdapter], (d: LuxonDateAdapter) => {
         adapter = d;
     }));
 
@@ -574,17 +566,17 @@ describe('MomentDateAdapter with MC_MOMENT_DATE_ADAPTER_OPTIONS override', () =>
 
 });
 
-describe('MomentDateAdapter formatter', () => {
-    let adapter: MomentDateAdapter;
+describe('LuxonDateAdapter formatter', () => {
+    let adapter: LuxonDateAdapter;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [MomentDateModule],
+            imports: [LuxonDateModule],
             providers: [{ provide: LOCALE_ID, useValue: 'ru' }]
         }).compileComponents();
     }));
 
-    beforeEach(inject([DateAdapter], (d: MomentDateAdapter) => {
+    beforeEach(inject([DateAdapter], (d: LuxonDateAdapter) => {
         adapter = d;
     }));
 
