@@ -60,7 +60,7 @@ export abstract class DateAdapter<D> {
     protected locale: any;
 
     /** A stream that emits when the locale changes. */
-    get localeChanges(): Observable<void> {
+    get localeChanges(): Observable<any> {
         return this._localeChanges;
     }
 
