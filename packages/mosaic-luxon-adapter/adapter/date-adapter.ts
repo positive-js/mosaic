@@ -11,7 +11,9 @@ import {
 import { DateTime, DurationUnit } from 'luxon';
 import * as MessageFormat from 'messageformat';
 
-import { IFormatterConfig } from './locales/IFormatterConfig';
+// todo
+import { enUS } from './locales/en-US';
+import { ruRU } from './locales/ru-RU';
 
 
 /** Configurable options for {@see LuxonDateAdapter}. */
@@ -44,9 +46,9 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
 
     private readonly invalidDateErrorText: string = 'Invalid date';
 
-    private formatterConfig: IFormatterConfig;
+    private formatterConfig: any;
 
-    private get momentWithLocale(): DateTime {
+    private get withLocale(): DateTime {
         return DateTime.now().setLocale(this.locale);
     }
 
@@ -74,6 +76,8 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
 
     setLocale(locale: string): void {
         super.setLocale(locale);
+        this.formatterConfig = locale === 'en' ? enUS : ruRU;
+
         //
         // let momentLocaleData = moment.localeData(locale);
         //
@@ -307,13 +311,12 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     relativeDate(date: DateTime, template: IFormatterRelativeTemplate): string {
         if (!this.isDateInstance(date)) { throw new Error(this.invalidDateErrorText); }
 
-        const now = this.momentWithLocale;
 
-        const totalSeconds = now.diff(date, 'seconds').milliseconds;
-        const totalMinutes = now.diff(date, 'minutes').milliseconds;
+        const totalSeconds = Math.abs(date.diffNow('seconds').seconds);
+        const totalMinutes = Math.floor(Math.abs(date.diffNow('minutes').minutes));
 
-        const isToday = now.hasSame(date, 'day');
-        const isYesterday = now.plus({ days: -1 }).hasSame(date, 'day');
+        const isToday = DateTime.now().hasSame(date, 'day');
+        const isYesterday = DateTime.now().minus({ days: 1 }).hasSame(date, 'day');
 
         const templateVariables = {...this.formatterConfig.variables, ...template.variables};
         const variables = this.compileVariables(date, templateVariables);
@@ -570,7 +573,7 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
             }
 
             const value = variables[key];
-            compiledVariables[key] = date.toFormat(value);
+            compiledVariables[key] = date.toFormat(value, { locale: this.locale });
         }
 
         compiledVariables.CURRENT_YEAR = this.isCurrentYear(date);
@@ -579,7 +582,7 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     }
 
     private isCurrentYear(value: DateTime): 'yes' | 'no' {
-        return this.momentWithLocale.hasSame(value, 'year') ? 'yes' : 'no';
+        return this.withLocale.hasSame(value, 'year') ? 'yes' : 'no';
     }
 
     private isSame(unit: DurationUnit, startDate: DateTime, endDate: DateTime): string {
