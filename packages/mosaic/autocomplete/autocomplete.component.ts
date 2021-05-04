@@ -145,6 +145,17 @@ export class McAutocomplete implements AfterContentInit {
 
     private _isOpen: boolean = false;
 
+    @Input()
+    get autoOpenOnFocus(): boolean {
+        return this._autoOpenOnFocus;
+    }
+
+    set autoOpenOnFocus(value: boolean) {
+        this._autoOpenOnFocus = value;
+    }
+
+    private _autoOpenOnFocus: boolean = true;
+
     constructor(
         private changeDetectorRef: ChangeDetectorRef,
         private elementRef: ElementRef<HTMLElement>,
