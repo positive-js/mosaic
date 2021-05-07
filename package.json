@@ -66,7 +66,7 @@
         "gulp-clean-css": "^3.10.0",
         "gulp-cli": "^2.0.1",
         "gulp-flatten": "^0.3.1",
-        "gulp-highlight-files": "^0.0.6",
+        "gulp-highlight-files": "^0.0.7",
         "gulp-if": "^2.0.2",
         "gulp-markdown": "5.1.0",
         "gulp-rename": "^2.0.0",

@@ -8145,14 +8145,14 @@ gulp-flatten@^0.3.1:
     gulp-util "^3.0.7"
     through2 "^2.0.0"
 
-gulp-highlight-files@^0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/gulp-highlight-files/-/gulp-highlight-files-0.0.6.tgz#78451ec7328405a9f9ac3fb22c96032c425051ab"
-  integrity sha512-B6YVkd7Evf3lAiWGGWN7FeFlx4vlJIm+i9BLAZojHueZ15CKscWvZiBMNKNKOrdQ57XxtOLk9fE/epqhb8v2Nw==
+gulp-highlight-files@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/gulp-highlight-files/-/gulp-highlight-files-0.0.7.tgz#e92748c80f1e7c30175738d8ba2a0d5f852cb3cf"
+  integrity sha512-91IJBIYywpVGnLZjPLgnzNG3DlC+LhI2D/zGVkrKk2uzIAoYd+EPJfpPpd29oUygkOlYXG1T3WS5x6KbeSqs0w==
   dependencies:
-    gulp-util "^3.0.8"
-    highlight.js "^9.12.0"
-    through2 "^2.0.3"
+    highlight.js "^10.7.2"
+    plugin-error "1.0.1"
+    through2 "^4.0.2"
 
 gulp-if@^2.0.2:
   version "2.0.2"
@@ -8501,10 +8501,10 @@ highlight.js@^10.4.1:
   resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-10.7.1.tgz#a8ec4152db24ea630c90927d6cae2a45f8ecb955"
   integrity sha512-S6G97tHGqJ/U8DsXcEdnACbirtbx58Bx9CzIVeYli8OuswCfYI/LsXH2EiGcoGio1KAC3x4mmUwulOllJ2ZyRA==
 
-highlight.js@^9.12.0:
-  version "9.18.3"
-  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.18.3.tgz#a1a0a2028d5e3149e2380f8a865ee8516703d634"
-  integrity sha512-zBZAmhSupHIl5sITeMqIJnYCDfAEc3Gdkqj65wC1lpI468MMQeeQkhcIAvk+RylAkxrCcI9xy9piHiXeQ1BdzQ==
+highlight.js@^10.7.2:
+  version "10.7.2"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-10.7.2.tgz#89319b861edc66c48854ed1e6da21ea89f847360"
+  integrity sha512-oFLl873u4usRM9K63j4ME9u3etNF0PLiJhSQ8rdfuL51Wn3zkD6drf9ZW0dOzjnZI22YYG24z30JcmfCZjMgYg==
 
 hmac-drbg@^1.0.1:
   version "1.0.1"
