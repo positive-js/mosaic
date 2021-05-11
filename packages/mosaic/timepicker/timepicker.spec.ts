@@ -200,7 +200,7 @@ describe('McTimepicker', () => {
 
         it('Should run validation on blur', () => {
             expect(testComponent.ngModel.valid).toBeTrue();
-            inputElementDebug.nativeElement.value = '19:08:0888';
+            inputElementDebug.nativeElement.value = '1';
 
             inputElementDebug.triggerEventHandler(
                 'blur',

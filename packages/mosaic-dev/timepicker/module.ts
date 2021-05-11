@@ -61,10 +61,18 @@ export class TimepickerDemoComponent {
         this.testForm = this.fb.group({
             time: [moment('2000-10-01 12:00:00')]
         });
+
+        this.reactiveFormControlValue.valueChanges.subscribe((value) => {
+            console.log('this.reactiveFormControlValue:', value); // tslint:disable-line:no-console
+        });
     }
 
     toggleDisable() {
         this.isDisabled = !this.isDisabled;
+    }
+
+    ngModelChange(value: any) {
+        console.log('ngModelChange: ', value); // tslint:disable-line:no-console
     }
 }
 

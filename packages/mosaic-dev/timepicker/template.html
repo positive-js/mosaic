@@ -34,7 +34,8 @@
         <i mcPrefix mc-icon="mc-clock_16"></i>
         <input
             mcTimepicker
-            [formControl]="reactiveFormControlValue"
+            [ngModel]="ngModelValue"
+            (ngModelChange)="ngModelChange($event)"
             [mcValidationTooltip]="tooltip"
             [max]="maxDate"
             [format]="'HH:mm:ss'">
