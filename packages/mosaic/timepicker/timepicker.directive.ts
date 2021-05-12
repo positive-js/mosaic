@@ -358,9 +358,9 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
     }
 
     onBlur() {
-        this.lastValueValid = !!this.getDateFromTimeString(this.viewValue);
         this.focusChanged(false);
-        this.control.updateValueAndValidity();
+
+        this.onInput();
     }
 
     onPaste($event) {
@@ -386,7 +386,7 @@ export class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, Contro
         this.lastValueValid = !!newTimeObj;
 
         if (!newTimeObj) {
-            this.control.updateValueAndValidity();
+            this.onChange(null);
 
             return;
         }
