@@ -78,6 +78,18 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
         super.setLocale(locale);
         this.formatterConfig = locale === 'en' ? enUS : ruRU;
 
+        // const localeData: {
+        //     firstDayOfWeek: number;
+        //     longMonths: string[];
+        //     shortMonths: string[];
+        //     dates: string[];
+        //     longDaysOfWeek: string[];
+        //     shortDaysOfWeek: string[];
+        //     narrowDaysOfWeek: string[];
+        // };
+
+        // this.updateLocaleData();
+
         //
         // let momentLocaleData = moment.localeData(locale);
         //
@@ -120,41 +132,23 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
         this.localeData = { ...this.localeData, ...localeData };
     }
 
-    getYear(date: DateTime): number {
-        return date.year;
-    }
+    getYear(date: DateTime): number { return date.year; }
 
-    getMonth(date: DateTime): number {
-        return date.month;
-    }
+    getMonth(date: DateTime): number { return date.month; }
 
-    getDate(date: DateTime): number {
-        return date.day;
-    }
+    getDate(date: DateTime): number { return date.day; }
 
-    getHours(date: DateTime): number {
-        return date.hour;
-    }
+    getHours(date: DateTime): number { return date.hour; }
 
-    getMinutes(date: DateTime): number {
-        return date.minute;
-    }
+    getMinutes(date: DateTime): number { return date.minute; }
 
-    getSeconds(date: DateTime): number {
-        return date.second;
-    }
+    getSeconds(date: DateTime): number { return date.second; }
 
-    getMilliseconds(date: DateTime): number {
-        return date.millisecond;
-    }
+    getMilliseconds(date: DateTime): number { return date.millisecond; }
 
-    getTime(date: DateTime): number {
-        return date.valueOf();
-    }
+    getTime(date: DateTime): number { return date.valueOf(); }
 
-    getDayOfWeek(date: DateTime): number {
-        return date.weekday;
-    }
+    getDayOfWeek(date: DateTime): number { return date.weekday; }
 
     getMonthNames(style: 'long' | 'short' | 'narrow'): string[] {
         return style === 'long' ? this.localeData.longMonths : this.localeData.shortMonths;
@@ -173,7 +167,7 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     }
 
     getYearName(date: DateTime): string {
-        return date.toFormat('YYYY');
+        return date.toFormat('yyyy');
     }
 
     getFirstDayOfWeek(): number {
@@ -191,7 +185,7 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     createDate(year: number, month: number, date: number): DateTime {
         // Moment.js will create an invalid date if any of the components are out of bounds, but we
         // explicitly check each case so we can throw more descriptive errors.
-        if (month < 0 || month > 11) {
+        if (month < 1 || month > 12) {
             throw Error(`Invalid month index "${month}". Month index has to be between 0 and 11.`);
         }
 
@@ -199,7 +193,7 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
             throw Error(`Invalid date "${date}". Date has to be greater than 0.`);
         }
 
-        const result = this.create({year, month, date}).setLocale(this.locale);
+        const result = this.create(year, month, date).setLocale(this.locale);
 
         // If the result isn't valid, the date must have been out of bounds for this month.
         if (!result.isValid) {
@@ -229,14 +223,14 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     }
 
     today(): DateTime {
-        return this.create().setLocale(this.locale);
+        return (this.options && this.options.useUtc ? DateTime.utc() : DateTime.local()).setLocale(this.locale);
     }
 
-    parse(value: any, parseFormat: string | string[]): DateTime | null {
+    parse(value: any, parseFormat: string): DateTime | null {
         if (value) {
-            if (value && typeof value === 'string') {
+            if (typeof value === 'string') {
                 return parseFormat
-                    ? this.create(value, parseFormat, this.locale)
+                    ? DateTime.fromFormat(value, parseFormat, { locale: this.locale })
                     : this.create(value).setLocale(this.locale);
             }
 
@@ -272,24 +266,18 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
 
     /** https://www.ietf.org/rfc/rfc3339.txt */
     deserialize(value: any): DateTime | null {
+        if (this.isDateInstance(value)) { return value.setLocale(this.locale); }
+
         let date;
         if (value instanceof Date) {
-            date = this.create(value).setLocale(this.locale);
-        } else if (this.isDateInstance(value)) {
-            // Note: assumes that cloning also sets the correct locale.
-            return value;
-        }
+            date = DateTime.fromJSDate(value).setLocale(this.locale);
+        } else if (typeof value === 'string') {
+            if (!value) { return null; }
 
-        if (typeof value === 'string') {
-            if (!value) {
-                return null;
-            }
             date = DateTime.fromISO(value).setLocale(this.locale);
         }
 
-        if (date && this.isValid(date)) {
-            return this.create(date).setLocale(this.locale);
-        }
+        if (date && this.isValid(date)) { return date; }
 
         return super.deserialize(value);
     }
@@ -303,9 +291,7 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     }
 
     invalid(): DateTime {
-    // todo что это ?
-    //     return moment.invalid();
-        return DateTime.now();
+        return DateTime.fromObject({ month: 0 });
     }
 
     relativeDate(date: DateTime, template: IFormatterRelativeTemplate): string {
@@ -558,7 +544,17 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
         return this.rangeDateTime(startDate, endDate, this.formatterConfig.rangeTemplates.closedRange.middle);
     }
 
-    /** Creates a Moment instance while respecting the current UTC settings. */
+    private toLocalFormat(date: DateTime, value): string {
+        console.log('toLocalFormat: ', this.locale); // tslint:disable-line:no-console
+        if (value === 'MMM') {
+            console.log('here: ', date.toFormat(value, { locale: this.locale }).replace('.', '')); // tslint:disable-line:no-console
+            return date.toFormat(value, { locale: this.locale }).replace('.', '');
+        }
+
+        return date.toFormat(value, { locale: this.locale });
+    }
+
+    /** Creates a DateTime instance while respecting the current UTC settings. */
     private create(...args: any[]): DateTime {
         return (this.options && this.options.useUtc) ? DateTime.utc(...args) : DateTime.local(...args);
     }
@@ -568,12 +564,10 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
 
         // tslint:disable-next-line:no-for-in
         for (const key in variables) {
-            if (!variables.hasOwnProperty(key)) {
-                continue;
-            }
+            if (!variables.hasOwnProperty(key)) { continue; }
 
             const value = variables[key];
-            compiledVariables[key] = date.toFormat(value, { locale: this.locale });
+            compiledVariables[key] = this.toLocalFormat(date, value);
         }
 
         compiledVariables.CURRENT_YEAR = this.isCurrentYear(date);

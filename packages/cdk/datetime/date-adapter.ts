@@ -425,9 +425,7 @@ export abstract class DateAdapter<D> {
      *     deserialized into a null date (e.g. the empty string), or an invalid date.
      */
     deserialize(value: any): D | null {
-        if (value == null || this.isDateInstance(value) && this.isValid(value)) {
-            return value;
-        }
+        if (value == null || this.isDateInstance(value) && this.isValid(value)) { return value; }
 
         return this.invalid();
     }
@@ -482,6 +480,7 @@ export abstract class DateAdapter<D> {
         if (first && second) {
             const firstValid = this.isValid(first);
             const secondValid = this.isValid(second);
+
             if (firstValid && secondValid) {
                 return !this.compareDate(first, second);
             }
@@ -501,12 +500,9 @@ export abstract class DateAdapter<D> {
      *     otherwise `date`.
      */
     clampDate(date: D, min?: D | null, max?: D | null): D {
-        if (min && this.compareDate(date, min) < 0) {
-            return min;
-        }
-        if (max && this.compareDate(date, max) > 0) {
-            return max;
-        }
+        if (min && this.compareDate(date, min) < 0) { return min; }
+
+        if (max && this.compareDate(date, max) > 0) { return max; }
 
         return date;
     }
