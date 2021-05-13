@@ -6,12 +6,12 @@ export const enUS = {
         MINUTES: 'm',
         TIME: 'HH:mm',
 
-        DAY: 'D',
+        DAY: 'd',
         MONTH: 'MMM',
         YEAR: 'yyyy',
 
-        DATE: 'MMMM\u00A0D',
-        SHORT_DATE: 'MMM\u00A0D',
+        DATE: 'MMMM\u00A0d',
+        SHORT_DATE: 'MMM\u00A0d',
 
         DASH: '\u2013',
         LONG_DASH: '\u202F\u2013\u2009',

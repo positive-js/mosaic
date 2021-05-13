@@ -179,7 +179,7 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     }
 
     clone(date: DateTime): DateTime {
-        return date.setLocale(this.locale);
+        return date.setLocale(date.locale);
     }
 
     createDate(year: number, month: number, date: number): DateTime {
@@ -223,15 +223,18 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     }
 
     today(): DateTime {
-        return (this.options && this.options.useUtc ? DateTime.utc() : DateTime.local()).setLocale(this.locale);
+        return (this.options && this.options.useUtc ? DateTime.utc() : DateTime.local())
+            .setLocale(this.locale);
     }
 
-    parse(value: any, parseFormat: string): DateTime | null {
+    parse(value: any, parseFormat?: string): DateTime | null {
         if (value) {
             if (typeof value === 'string') {
                 return parseFormat
                     ? DateTime.fromFormat(value, parseFormat, { locale: this.locale })
                     : this.create(value).setLocale(this.locale);
+            } else if (typeof value === 'number') {
+                return DateTime.fromMillis(value, { locale: this.locale });
             }
 
             return this.create(value).setLocale(this.locale);
@@ -297,7 +300,6 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     relativeDate(date: DateTime, template: IFormatterRelativeTemplate): string {
         if (!this.isDateInstance(date)) { throw new Error(this.invalidDateErrorText); }
 
-
         const totalSeconds = Math.abs(date.diffNow('seconds').seconds);
         const totalMinutes = Math.floor(Math.abs(date.diffNow('minutes').minutes));
 
@@ -311,17 +313,13 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
         if (totalSeconds <= 59) { // seconds ago
             variables.SECONDS_PASSED = totalSeconds;
             newTemplate = template.SECONDS_AGO;
-
         } else if (totalMinutes <= 59) { // minutes ago
             variables.MINUTES_PASSED = totalMinutes;
             newTemplate = template.MINUTES_AGO;
-
-        } else if (isToday) { // today
+        } else if (isToday) {
             newTemplate = template.TODAY;
-
-        } else if (isYesterday) { // yesterday
+        } else if (isYesterday) {
             newTemplate = template.YESTERDAY;
-
         } else { // before yesterday
             newTemplate = template.BEFORE_YESTERDAY;
         }
@@ -545,9 +543,7 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     }
 
     private toLocalFormat(date: DateTime, value): string {
-        console.log('toLocalFormat: ', this.locale); // tslint:disable-line:no-console
         if (value === 'MMM') {
-            console.log('here: ', date.toFormat(value, { locale: this.locale }).replace('.', '')); // tslint:disable-line:no-console
             return date.toFormat(value, { locale: this.locale }).replace('.', '');
         }
 

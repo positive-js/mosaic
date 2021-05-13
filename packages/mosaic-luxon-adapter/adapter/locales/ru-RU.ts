@@ -6,12 +6,12 @@ export const ruRU = {
         MINUTES: 'm',
         TIME: 'HH:mm',
 
-        DAY: 'D',
+        DAY: 'd',
         MONTH: 'MMM',
         YEAR: 'yyyy',
 
-        DATE: 'D\u00A0MMMM',
-        SHORT_DATE: 'D\u00A0MMM',
+        DATE: 'd\u00A0MMMM',
+        SHORT_DATE: 'd\u00A0MMM',
 
         DASH: '\u2013',
         LONG_DASH: '\u202F\u2014\u2009',
