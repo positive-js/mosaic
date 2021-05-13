@@ -2,7 +2,6 @@ export const ruRU = {
     variables: {
         SECONDS: 's',
         MILLISECONDS: ',SSS',
-        MICROSECONDS: ',u',
         MINUTES: 'm',
         TIME: 'HH:mm',
 
@@ -48,11 +47,6 @@ export const ruRU = {
                 select,
                     yes{{MILLISECONDS}}
                     other{}
-            }{
-                SHOW_MICROSECONDS,
-                select,
-                    yes{{MICROSECONDS}}
-                    other{}
             }`
         },
         long: {
@@ -66,11 +60,6 @@ export const ruRU = {
                 SHOW_MILLISECONDS,
                 select,
                     yes{{MILLISECONDS}}
-                    other{}
-            }{
-                SHOW_MICROSECONDS,
-                select,
-                    yes{{MICROSECONDS}}
                     other{}
             }`
         }

@@ -1,10 +1,19 @@
 // tslint:disable:no-console
 // tslint:disable:no-magic-numbers
+import { registerLocaleData } from '@angular/common';
+import ru from '@angular/common/locales/ru';
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { DateAdapter, MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
 import { LuxonDateAdapter, McLuxonDateModule } from '@ptsecurity/mosaic-luxon-adapter/adapter';
 import { DateTime } from 'luxon';
+
+
+registerLocaleData(ru);
+
+
+// @ts-ignore
+window.DateTime = DateTime;
 
 
 @Component({
@@ -225,7 +234,7 @@ export class DemoComponent {
         relativeShort.minutesAgo = this.dateAdapter.relativeShortDate(now.minus({ minute: 1 }));
         relativeShort.today = this.dateAdapter.relativeShortDate(now.minus({ hours: 1 }));
         relativeShort.yesterday = this.dateAdapter.relativeShortDate(now.minus({ days: 1 }));
-        relativeShort.beforeYesterdayCurrentYear = this.dateAdapter.relativeShortDate(now.minus({ days: 1 }));
+        relativeShort.beforeYesterdayCurrentYear = this.dateAdapter.relativeShortDate(now.minus({ days: 2 }));
         relativeShort.beforeYesterdayNotCurrentYear = this.dateAdapter.relativeShortDate(
             now.minus({ years: 1, days: 2 })
         );

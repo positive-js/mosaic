@@ -1,4 +1,5 @@
 // tslint:disable:no-magic-numbers
+import { getLocaleFirstDayOfWeek } from '@angular/common';
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import {
     DateAdapter,
@@ -8,7 +9,7 @@ import {
     IFormatterAbsoluteTemplate,
     IAbsoluteDateTimeOptions
 } from '@ptsecurity/cdk/datetime';
-import { DateTime, DurationUnit } from 'luxon';
+import { DateTime, DurationUnit, Info } from 'luxon';
 import * as MessageFormat from 'messageformat';
 
 // todo
@@ -78,17 +79,18 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
         super.setLocale(locale);
         this.formatterConfig = locale === 'en' ? enUS : ruRU;
 
-        // const localeData: {
-        //     firstDayOfWeek: number;
-        //     longMonths: string[];
-        //     shortMonths: string[];
-        //     dates: string[];
-        //     longDaysOfWeek: string[];
-        //     shortDaysOfWeek: string[];
-        //     narrowDaysOfWeek: string[];
-        // };
+        const options = { locale: this.locale };
+        const localeData: any = {
+            longMonths: Info.monthsFormat('long', options),
+            shortMonths: Info.monthsFormat('short', options).map((item) => item.replace('.', '')),
+            dates: [],
+            narrowDaysOfWeek: Info.weekdaysFormat('narrow', options),
+            shortDaysOfWeek: Info.weekdaysFormat('short', options),
+            longDaysOfWeek: Info.weekdaysFormat('long', options),
+            firstDayOfWeek: getLocaleFirstDayOfWeek(this.locale)
+        };
 
-        // this.updateLocaleData();
+        this.updateLocaleData(localeData);
 
         //
         // let momentLocaleData = moment.localeData(locale);

@@ -2,7 +2,6 @@ export const enUS = {
     variables: {
         SECONDS: 's',
         MILLISECONDS: '.SSS',
-        MICROSECONDS: '.u',
         MINUTES: 'm',
         TIME: 'HH:mm',
 
@@ -47,11 +46,6 @@ export const enUS = {
                 select,
                     yes{{MILLISECONDS}}
                     other{}
-            }{
-                SHOW_MICROSECONDS,
-                    select,
-                        yes{{MICROSECONDS}}
-                        other{}
             }`
         },
         long: {
@@ -65,11 +59,6 @@ export const enUS = {
                 SHOW_MILLISECONDS,
                 select,
                     yes{{MILLISECONDS}}
-                    other{}
-            }{
-                SHOW_MICROSECONDS,
-                select,
-                    yes{{MICROSECONDS}}
                     other{}
             }`
         }

@@ -1,5 +1,10 @@
 // tslint:disable:no-magic-numbers
 // tslint:disable:mocha-no-side-effect-code
+import { registerLocaleData } from '@angular/common';
+import arAE from '@angular/common/locales/ar-AE';
+import fr from '@angular/common/locales/fr';
+import ja from '@angular/common/locales/ja';
+import ru from '@angular/common/locales/ru';
 import { LOCALE_ID } from '@angular/core';
 import { inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { DateAdapter, MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
@@ -7,6 +12,12 @@ import { DateTime } from 'luxon';
 
 import { LuxonDateAdapter, MC_LUXON_DATE_ADAPTER_OPTIONS } from './date-adapter';
 import { LuxonDateModule } from './index';
+
+
+registerLocaleData(arAE);
+registerLocaleData(fr);
+registerLocaleData(ja);
+registerLocaleData(ru);
 
 
 describe('LuxonDateAdapter', () => {
