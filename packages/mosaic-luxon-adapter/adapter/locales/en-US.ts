@@ -17,6 +17,27 @@ export const enUS = {
 
         NBSP: '\u00A0'
     },
+
+    monthNames: {
+        long: [
+            'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+            'October', 'November', 'December'
+        ],
+        short: {
+            standalone: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            formatted: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        },
+        narrow: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D']
+    },
+
+    dayOfWeekNames: {
+        long: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+        short: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        narrow: ['M', 'T', 'W', 'T', 'F', 'S', 'S']
+    },
+
+    firstDayOfWeek: 6,
+
     relativeTemplates: {
         short: {
             SECONDS_AGO: 'Just now',

@@ -40,6 +40,9 @@ export function MC_LUXON_DATE_ADAPTER_OPTIONS_FACTORY(): McLuxonDateAdapterOptio
     return { useUtc: false };
 }
 
+// This is our customs translations
+const i18nLocals = ['en', 'ru'];
+
 
 @Injectable()
 export class LuxonDateAdapter extends DateAdapter<DateTime> {
@@ -48,10 +51,6 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     private readonly invalidDateErrorText: string = 'Invalid date';
 
     private formatterConfig: any;
-
-    private get withLocale(): DateTime {
-        return DateTime.now().setLocale(this.locale);
-    }
 
     // todo
     private localeData: {
@@ -71,55 +70,45 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
         super();
 
         this.setLocale(dateLocale);
-
-        this.configureTranslator(this.locale);
     }
 
     setLocale(locale: string): void {
         super.setLocale(locale);
-        this.formatterConfig = locale === 'en' ? enUS : ruRU;
 
-        const options = { locale: this.locale };
-        const localeData: any = {
-            longMonths: Info.monthsFormat('long', options),
-            shortMonths: Info.monthsFormat('short', options).map((item) => item.replace('.', '')),
-            dates: [],
-            narrowDaysOfWeek: Info.weekdaysFormat('narrow', options),
-            shortDaysOfWeek: Info.weekdaysFormat('short', options),
-            longDaysOfWeek: Info.weekdaysFormat('long', options),
-            firstDayOfWeek: getLocaleFirstDayOfWeek(this.locale)
+        this.configureFormatter(locale);
+
+        let localeData: any = {
+            dates: Array(31).fill(null).map((_, i) => this.createDate(2000, 1, i + 1).toFormat('d')),
         };
 
-        this.updateLocaleData(localeData);
+        if (i18nLocals.includes(locale)) {
+            this.formatterConfig = locale === 'en' ? enUS : ruRU;
 
-        //
-        // let momentLocaleData = moment.localeData(locale);
-        //
-        // // This is our customs translations
-        // const i18nLocals = ['en', 'ru'];
-        //
-        // if (i18nLocals.indexOf(locale) !== -1) {
-        //     this.formatterConfig = locale === 'en' ? enUS : ruRU;
-        //
-        //     momentLocaleData = moment.updateLocale(locale, {
-        //         monthsShort: {
-        //             format: this.formatterConfig.monthNames.short.formatted,
-        //             standalone: this.formatterConfig.monthNames.short.standalone
-        //         },
-        //         weekdaysShort: this.formatterConfig.dayOfWeekNames.short,
-        //         weekdays: this.formatterConfig.dayOfWeekNames.long
-        //     });
-        // }
-        //
-        // this.localeData = {
-        //     firstDayOfWeek: momentLocaleData.firstDayOfWeek(),
-        //     longMonths: momentLocaleData.months(),
-        //     shortMonths: momentLocaleData.monthsShort(),
-        //     dates: range(31, (i) => this.createDate(2017, 0, i + 1).format('D')),
-        //     longDaysOfWeek: momentLocaleData.weekdays(),
-        //     shortDaysOfWeek: momentLocaleData.weekdaysShort(),
-        //     narrowDaysOfWeek: momentLocaleData.weekdaysMin()
-        // };
+            localeData = {
+                ...localeData,
+                firstDayOfWeek: this.formatterConfig.firstDayOfWeek,
+
+                longMonths: this.formatterConfig.monthNames.long,
+                shortMonths: this.formatterConfig.monthNames.short.standalone,
+
+                narrowDaysOfWeek: this.formatterConfig.dayOfWeekNames.narrow,
+                shortDaysOfWeek: this.formatterConfig.dayOfWeekNames.short,
+                longDaysOfWeek: this.formatterConfig.dayOfWeekNames.long
+            };
+        } else {
+            const options = { locale };
+            localeData = {
+                ...localeData,
+                firstDayOfWeek: getLocaleFirstDayOfWeek(locale),
+                longMonths: Info.monthsFormat('long', options),
+                shortMonths: Info.monthsFormat('short', options),
+                narrowDaysOfWeek: Info.weekdaysFormat('narrow', options),
+                shortDaysOfWeek: Info.weekdaysFormat('short', options),
+                longDaysOfWeek: Info.weekdaysFormat('long', options)
+            };
+        }
+
+        this.updateLocaleData(localeData);
     }
 
     getLocaleData() {
@@ -185,10 +174,8 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     }
 
     createDate(year: number, month: number, date: number): DateTime {
-        // Moment.js will create an invalid date if any of the components are out of bounds, but we
-        // explicitly check each case so we can throw more descriptive errors.
         if (month < 1 || month > 12) {
-            throw Error(`Invalid month index "${month}". Month index has to be between 0 and 11.`);
+            throw Error(`Invalid month index "${month}". Month index has to be between 1 and 12.`);
         }
 
         if (date < 1) {
@@ -247,7 +234,7 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
 
     format(date: DateTime, displayFormat: string): string {
         if (!this.isValid(date)) {
-            throw Error('MomentDateAdapter: Cannot format invalid date.');
+            throw Error('DateTime: Cannot format invalid date.');
         }
 
         return date.toFormat(displayFormat);
@@ -491,11 +478,13 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
         startDateVariables.CURRENT_YEAR = bothCurrentYear ? 'yes' : 'no';
         endDateVariables.CURRENT_YEAR = bothCurrentYear ? 'yes' : 'no';
 
-        const params = {...variables,
+        const params = {
+            ...variables,
             START_DATETIME: this.messageformat.compile(template.START_DATETIME)(startDateVariables),
             END_DATETIME: this.messageformat.compile(template.END_DATETIME)(endDateVariables),
             SAME_MONTH: sameMonth,
-            SAME_DAY: sameDay};
+            SAME_DAY: sameDay
+        };
 
         return this.messageformat.compile(template.DATETIME)(params);
     }
@@ -544,12 +533,15 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
         return this.rangeDateTime(startDate, endDate, this.formatterConfig.rangeTemplates.closedRange.middle);
     }
 
-    private toLocalFormat(date: DateTime, value): string {
-        if (value === 'MMM') {
-            return date.toFormat(value, { locale: this.locale }).replace('.', '');
+    private toLocalFormat(date: DateTime, value: string): string {
+        const options = { locale: this.locale };
+
+        if (value.search('MMM') !== -1) {
+            console.log('value: ', value); // tslint:disable-line:no-console
+            return date.toFormat(value, options).replace(/(\W)\./, '$1');
         }
 
-        return date.toFormat(value, { locale: this.locale });
+        return date.toFormat(value, options);
     }
 
     /** Creates a DateTime instance while respecting the current UTC settings. */
@@ -574,14 +566,14 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     }
 
     private isCurrentYear(value: DateTime): 'yes' | 'no' {
-        return this.withLocale.hasSame(value, 'year') ? 'yes' : 'no';
+        return this.today().hasSame(value, 'year') ? 'yes' : 'no';
     }
 
     private isSame(unit: DurationUnit, startDate: DateTime, endDate: DateTime): string {
         return startDate.hasSame(endDate, unit) ? 'yes' : 'no';
     }
 
-    private configureTranslator(locale: string): void {
+    private configureFormatter(locale: string): void {
         this.messageformat = new MessageFormat(locale);
     }
 }

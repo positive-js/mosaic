@@ -23,6 +23,8 @@ export interface IFormatterConfig {
         narrow: string[];
     };
 
+    firstDayOfWeek?: number;
+
     relativeTemplates: {
         short: IFormatterRelativeTemplate;
         long: IFormatterRelativeTemplate;

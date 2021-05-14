@@ -89,7 +89,7 @@ describe('LuxonDateAdapter', () => {
         const NBSP = '\u00A0';
 
         const shortMonthNames = Array(12).fill(null)
-            .map((item, index) => DateTime.fromObject({ month: index + 1 }))
+            .map((_, index) => adapter.today().set({ month: index + 1 }))
             .map((date) => adapter.absoluteShortDate(date))
             // '9 декабря' => ['9', 'декабря'] => 'декабря'
             .map((formattedDate) => formattedDate.split(NBSP)[1]);
@@ -136,33 +136,33 @@ describe('LuxonDateAdapter', () => {
         adapter.setLocale('ru');
 
         expect(adapter.getDayOfWeekNames('long'))
-            .toEqual(['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота']);
+            .toEqual(['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье']);
     });
 
     it('should get long day of week names for en', () => {
         adapter.setLocale('en');
 
         expect(adapter.getDayOfWeekNames('long'))
-            .toEqual(['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']);
+            .toEqual(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']);
     });
 
     it('should get short day of week names', () => {
         expect(adapter.getDayOfWeekNames('short'))
-            .toEqual(['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']);
+            .toEqual(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']);
     });
 
     it('should get day of week names in a different locale', () => {
         adapter.setLocale('ja-JP');
 
         expect(adapter.getDayOfWeekNames('long'))
-            .toEqual(['日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日']);
+            .toEqual(['月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日', '日曜日']);
     });
 
     it('should get day of week names in a different locale', () => {
         adapter.setLocale('ru');
 
         expect(adapter.getDayOfWeekNames('long'))
-            .toEqual(['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота']);
+            .toEqual(['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье']);
     });
 
     it('should get year name', () => {
@@ -188,7 +188,7 @@ describe('LuxonDateAdapter', () => {
         adapter.setLocale('ru');
 
         expect(adapter.getFirstDayOfWeek())
-            .toBe(1);
+            .toBe(0);
     });
 
     it('should create DateTime date', () => {
@@ -257,8 +257,8 @@ describe('LuxonDateAdapter', () => {
     });
 
     it('should throw when attempting to format invalid date', () => {
-        expect(() => adapter.format(DateTime.local(NaN), 'L/d/yyyy'))
-            .toThrowError(/LuxonDateAdapter: Cannot format invalid date\./);
+        expect(() => adapter.format(DateTime.local(2001, 0, 0), 'L/d/yyyy'))
+            .toThrowError('DateTime: Cannot format invalid date.');
     });
 
     it('should add years', () => {
@@ -594,7 +594,8 @@ describe('LuxonDateAdapter formatter', () => {
                 });
 
                 it('before yesterday, less than 48 hours ago', () => {
-                    const date = adapter.today().minus({ hours: 47 })
+                    const date = adapter.today()
+                        .minus({ hours: 47 })
                         .minus({ minutes: 59 })
                         .minus({ seconds: 59 });
 
