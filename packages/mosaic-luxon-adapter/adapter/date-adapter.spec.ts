@@ -91,7 +91,7 @@ describe('LuxonDateAdapter', () => {
         const shortMonthNames = Array(12).fill(null)
             .map((_, index) => adapter.today().set({ month: index + 1 }))
             .map((date) => adapter.absoluteShortDate(date))
-            // '9 декабря' => ['9', 'декабря'] => 'декабря'
+            // '9 дек' => ['9', 'дек'] => 'дек'
             .map((formattedDate) => formattedDate.split(NBSP)[1]);
 
         console.log('shortMonthNames: ', shortMonthNames); // tslint:disable-line:no-console
@@ -606,7 +606,7 @@ describe('LuxonDateAdapter formatter', () => {
                 it('before yesterday (other year)', () => {
                     const date = adapter.createDate(2015, 1, 1).minus({ hours: 49 });
                     expect(adapter.relativeShortDate(date))
-                        .toBe(date.toFormat(`${DAY}${NBSP}${SHORT_MONTH} ${YEAR}`));
+                        .toBe(adapter.format(date, `${DAY}${NBSP}${SHORT_MONTH} ${YEAR}`));
                 });
             });
 
@@ -673,7 +673,7 @@ describe('LuxonDateAdapter formatter', () => {
                     const date = adapter.createDate(2015, 1, 1);
 
                     expect(adapter.absoluteShortDate(date))
-                        .toBe(date.toFormat(`${DAY_SHORT_MONTH} ${YEAR}`));
+                        .toBe(adapter.format(date, `${DAY_SHORT_MONTH} ${YEAR}`));
                 });
 
                 it('absoluteShortDateTime', () => {
@@ -687,7 +687,7 @@ describe('LuxonDateAdapter formatter', () => {
                     const date = adapter.createDate(2015, 1, 1);
 
                     expect(adapter.absoluteShortDateTime(date))
-                        .toBe(date.toFormat(`${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`));
+                        .toBe(adapter.format(date, `${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`));
                 });
 
                 it('absoluteShortDateTime with milliseconds', () => {
@@ -764,8 +764,8 @@ describe('LuxonDateAdapter formatter', () => {
                         startDate.month = 1;
                         const endDate = startDate.plus({ months: 1 });
 
-                        const startString: string = startDate.toFormat(startDateFormat);
-                        const endString: string = endDate.toFormat(endDateFormat);
+                        const startString: string = adapter.format(startDate, startDateFormat);
+                        const endString: string = adapter.format(endDate, endDateFormat);
 
                         expect(adapter.rangeShortDate(startDate, endDate))
                             .toBe(`${startString}${LONG_DASH}${endString}`);
@@ -839,8 +839,8 @@ describe('LuxonDateAdapter formatter', () => {
                         startDate.month = 1;
                         const endDate = startDate.plus({ months: 1 });
 
-                        const startString: string = startDate.toFormat(startDateFormat);
-                        const endString: string = endDate.toFormat(endDateFormat);
+                        const startString: string = adapter.format(startDate, startDateFormat);
+                        const endString: string = adapter.format(endDate, endDateFormat);
 
                         expect(adapter.rangeShortDateTime(startDate, endDate))
                             .toBe(`${startString}${LONG_DASH}${endString}`);
