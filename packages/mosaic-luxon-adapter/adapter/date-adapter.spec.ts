@@ -556,48 +556,41 @@ describe('LuxonDateAdapter formatter', () => {
             describe('Relative short (relativeShortDate method)', () => {
                 it('secondsAgo', () => {
                     const date = adapter.today().minus({ seconds: 1.7 });
+
                     expect(adapter.relativeShortDate(date))
                         .toBe(`Только что`);
                 });
 
                 it('minutesAgo', () => {
                     const date = adapter.today().minus({ minutes: 1.5 });
+
                     expect(adapter.relativeShortDate(date))
                         .toBe(`1${NBSP}мин назад`);
                 });
 
                 it('today', () => {
                     const date = adapter.today().minus({ hours: 1 });
+
                     expect(adapter.relativeShortDate(date))
                         .toBe(date.toFormat(TIME));
                 });
 
-                it('yesterday, more than 24 hours ago', () => {
-                    const date = adapter.today().minus({ hours: 25 });
-                    expect(adapter.relativeShortDate(date))
-                        .toBe(`Вчера, ${date.toFormat(TIME)}`);
-                });
-
-                it('yesterday, less than 24 hours ago', () => {
+                it('yesterday', () => {
                     const date = adapter.today()
-                        .minus({ hours: 23 })
-                        .minus({ minutes: 59 })
-                        .minus({ seconds: 59 });
+                        .minus({ days: 1 });
+
                     expect(adapter.relativeShortDate(date))
                         .toBe(`Вчера, ${date.toFormat(TIME)}`);
                 });
 
-                it('before yesterday, more than 48 hours ago', () => {
-                    const date = adapter.today().minus({ hours: 49 });
+                it('before yesterday, more than 2 days ago', () => {
+                    let date = adapter.today()
+                        .minus({ days: 2 });
+
                     expect(adapter.relativeShortDate(date))
                         .toBe(date.toFormat(`${DAY}${NBSP}${SHORT_MONTH}, ${TIME}`));
-                });
 
-                it('before yesterday, less than 48 hours ago', () => {
-                    const date = adapter.today()
-                        .minus({ hours: 47 })
-                        .minus({ minutes: 59 })
-                        .minus({ seconds: 59 });
+                    date = adapter.today().minus({ days: 5 });
 
                     expect(adapter.relativeShortDate(date))
                         .toBe(date.toFormat(`${DAY}${NBSP}${SHORT_MONTH}, ${TIME}`));
@@ -612,45 +605,49 @@ describe('LuxonDateAdapter formatter', () => {
 
             describe('Relative long (relativeLongDate method)', () => {
                 it('secondsAgo', () => {
-                    const date = adapter.today().minus({ seconds: 1 });
-                    expect(adapter.relativeLongDate(date)).toBe(`Только что`);
+                    const date = adapter.today()
+                        .minus({ seconds: 1 });
+
+                    expect(adapter.relativeLongDate(date))
+                        .toBe(`Только что`);
                 });
 
                 it('minutesAgo', () => {
-                    const date = adapter.today().minus({ minutes: 1 });
-                    expect(adapter.relativeLongDate(date)).toBe(`1${NBSP}минуту назад`);
+                    const date = adapter.today()
+                        .minus({ minutes: 1 });
+
+                    expect(adapter.relativeLongDate(date))
+                        .toBe(`1${NBSP}минуту назад`);
                 });
 
                 it('today', () => {
-                    const date = adapter.today().minus({ hours: 1 });
-                    expect(adapter.relativeLongDate(date)).toBe(date.toFormat(TIME));
-                });
-
-                it('yesterday, more than 24 hours ago', () => {
-                    const date = adapter.today().minus({ hours: 25 });
-                    expect(adapter.relativeLongDate(date)).toBe(`Вчера, ${date.toFormat(TIME)}`);
-                });
-
-                it('yesterday, less than 24 hours ago', () => {
                     const date = adapter.today()
-                        .minus({ hours: 23 })
-                        .minus({ minutes: 59 })
-                        .minus({ seconds: 59 });
+                        .minus({ hours: 1 });
 
-                    expect(adapter.relativeLongDate(date)).toBe(`Вчера, ${date.toFormat(TIME)}`);
+                    expect(adapter.relativeLongDate(date))
+                        .toBe(date.toFormat(TIME));
                 });
 
-                it('before yesterday, more than 48 hours ago', () => {
-                    const date = adapter.today().minus({ hours: 49 });
-                    expect(adapter.relativeLongDate(date)).toBe(date.toFormat(`${DAY_MONTH}, ${TIME}`));
-                });
-
-                it('before yesterday, less than 48 hours ago', () => {
+                it('yesterday', () => {
                     const date = adapter.today()
-                        .minus({ hours: 47 })
-                        .minus({ minutes: 59 })
-                        .minus({ seconds: 59 });
-                    expect(adapter.relativeLongDate(date)).toBe(date.toFormat(`${DAY_MONTH}, ${TIME}`));
+                        .minus({ days: 1 });
+
+                    expect(adapter.relativeLongDate(date))
+                        .toBe(`Вчера, ${date.toFormat(TIME)}`);
+                });
+
+                it('before yesterday, more than 2 days ago', () => {
+                    let date = adapter.today()
+                        .minus({ days: 2 });
+
+                    expect(adapter.relativeLongDate(date))
+                        .toBe(date.toFormat(`${DAY_MONTH}, ${TIME}`));
+
+                    date = adapter.today()
+                        .minus({ days: 5 });
+
+                    expect(adapter.relativeLongDate(date))
+                        .toBe(date.toFormat(`${DAY_MONTH}, ${TIME}`));
                 });
 
                 it('before yesterday (other year)', () => {
@@ -1292,34 +1289,23 @@ describe('LuxonDateAdapter formatter', () => {
                         .toBe(date.toFormat(TIME));
                 });
 
-                it('yesterday, more than 24 hours ago', () => {
-                    const date = adapter.today().minus({ hours: 25 });
-                    expect(adapter.relativeShortDate(date))
-                        .toBe(`Yesterday, ${date.toFormat(TIME)}`);
-                });
-
-                it('yesterday, less than 24 hours ago', () => {
+                it('yesterday', () => {
                     const date = adapter.today()
-                        .minus({ hours: 23 })
-                        .minus({ minutes: 59 })
-                        .minus({ seconds: 59 });
+                        .minus({ days: 1 });
 
                     expect(adapter.relativeShortDate(date))
                         .toBe(`Yesterday, ${date.toFormat(TIME)}`);
                 });
 
-                it('before yesterday, more than 48 hours ago', () => {
-                    const date = adapter.today().minus({ hours: 49 });
+                it('before yesterday, more than 2 days ago', () => {
+                    let date = adapter.today()
+                        .minus({ days: 2 });
 
                     expect(adapter.relativeShortDate(date))
                         .toBe(date.toFormat(`${SHORT_MONTH}${NBSP}${DAY}, ${TIME}`));
-                });
 
-                it('before yesterday, less than 48 hours ago', () => {
-                    const date = adapter.today()
-                        .minus({ hours: 47 })
-                        .minus({ minutes: 59 })
-                        .minus({ seconds: 59 });
+                    date = adapter.today()
+                        .minus({ days: 5 });
 
                     expect(adapter.relativeShortDate(date))
                         .toBe(date.toFormat(`${SHORT_MONTH}${NBSP}${DAY}, ${TIME}`));
@@ -1353,47 +1339,29 @@ describe('LuxonDateAdapter formatter', () => {
                         .toBe(date.toFormat(TIME));
                 });
 
-                it('yesterday, more than 24 hours ago', () => {
-                    const date = adapter.today().minus({ hours: 25 });
-                    expect(adapter.relativeLongDate(date))
-                        .toBe(`Yesterday, ${date.toFormat(TIME)}`);
-                });
-
-                it('yesterday, less than 24 hours ago', () => {
+                it('yesterday', () => {
                     const date = adapter.today()
-                        .minus({ hours: 23 })
-                        .minus({ minutes: 59 })
-                        .minus({ seconds: 59 });
+                        .minus({ days: 1 });
 
                     expect(adapter.relativeLongDate(date))
                         .toBe(`Yesterday, ${date.toFormat(TIME)}`);
                 });
 
-                it('before yesterday, more than 48 hours ago', () => {
-                    const date = adapter.today()
-                        .minus({ hours: 49 })
-                        .minus({ minutes: 59 })
-                        .minus({ seconds: 59 });
+                it('before yesterday, more than 2 days ago', () => {
+                    let date = adapter.today()
+                        .minus({ days: 2 });
 
                     expect(adapter.relativeLongDate(date))
                         .toBe(date.toFormat(`${DAY_MONTH}, ${TIME}`));
-                });
 
-                it('before yesterday, less than 48 hours ago', () => {
-                    const date = adapter.today()
-                        .minus({ hours: 47 })
-                        .minus({ minutes: 59 })
-                        .minus({ seconds: 59 });
-
+                    date = adapter.today()
+                        .minus({ days: 5 });
                     expect(adapter.relativeLongDate(date))
                         .toBe(date.toFormat(`${DAY_MONTH}, ${TIME}`));
                 });
 
                 it('before yesterday (other year)', () => {
-                    const date = adapter.createDate(2015, 1, 1)
-                        .minus({ hours: 49 })
-                        .minus({ minutes: 59 })
-                        .minus({ seconds: 59 });
+                    const date = adapter.createDate(2015, 1, 1);
 
                     expect(adapter.relativeLongDate(date))
                         .toBe(date.toFormat(`${DAY_MONTH}, ${YEAR}`));

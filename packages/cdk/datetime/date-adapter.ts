@@ -412,6 +412,10 @@ export abstract class DateAdapter<D> {
      */
     abstract rangeMiddleDateTime(startDate: D, endDate: D): string;
 
+    abstract hasSame(startDate: D, endDate: D, unit: string): boolean;
+
+    abstract diffNow(date: D, unit: string): number;
+
     /**
      * Attempts to deserialize a value to a valid date object. This is different from parsing in that
      * deserialize should only accept non-ambiguous, locale-independent formats (e.g. a ISO 8601
