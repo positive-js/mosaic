@@ -14,48 +14,34 @@ export function MC_DATE_LOCALE_FACTORY(): string {
     return inject(LOCALE_ID);
 }
 
-/**
- * interface for absolute date or datetime formatter template
- */
-export interface IFormatterAbsoluteTemplate {
-    variables?: { [name: string]: string };
-    DATE: string;
-    DATETIME: string;
+// tslint:disable-next-line:naming-convention
+export interface DateAdapterConfig {
+    variables: { [name: string]: string };
+
+    monthNames: {
+        long: string[];
+        short: {
+            standalone: string[];
+            formatted: string[];
+        };
+        narrow: string[];
+    };
+
+    dayOfWeekNames: {
+        long: string[];
+        short: string[];
+        narrow: string[];
+    };
+
+    firstDayOfWeek: number;
 }
 
-/**
- * interface for range date or datetime formatter template
- */
-export interface IFormatterRangeTemplate {
-    variables?: { [name: string]: string };
-    START_DATE: string;
-    END_DATE: string;
-    DATE: string;
-    START_DATETIME: string;
-    END_DATETIME: string;
-    DATETIME: string;
-}
-
-/**
- * interface for relative date or datetime formatter template
- */
-export interface IFormatterRelativeTemplate {
-    variables?: { [name: string]: string };
-    SECONDS_AGO: string;
-    MINUTES_AGO: string;
-    TODAY: string;
-    YESTERDAY: string;
-    BEFORE_YESTERDAY: string;
-}
-
-export interface IAbsoluteDateTimeOptions {
-    milliseconds?: boolean;
-    microseconds?: boolean;
-}
 
 /** Adapts type `D` to be usable as a date by cdk-based components that work with dates. */
 // tslint:disable-next-line:naming-convention
 export abstract class DateAdapter<D> {
+    config: DateAdapterConfig;
+
     /** The locale to use for all dates. */
     protected locale: any;
 
@@ -284,137 +270,117 @@ export abstract class DateAdapter<D> {
      */
     abstract invalid(): D;
 
-    /**
-     * @param date - date
-     * @param template - template
-     * @returns relative date by template
-     */
-    abstract relativeDate(date: D, template: IFormatterRelativeTemplate): string;
+    abstract hasSame(startDate: D, endDate: D, unit): boolean;
+
+    abstract diffNow(date: D, unit): number;
 
     /**
-     * @param date - date
-     * @returns relative date in short format
+     * @deprecated Moved in `DateFormatter`.
+     * @breaking-change 13.0.0
+     */
+    abstract relativeDate(date: D, template): string;
+
+    /**
+     * @deprecated Moved in `DateFormatter`.
+     * @breaking-change 13.0.0
      */
     abstract relativeShortDate(date: D): string;
 
     /**
-     * @param date - date
-     * @returns relative date in long format
+     * @deprecated Moved in `DateFormatter`.
+     * @breaking-change 13.0.0
      */
     abstract relativeLongDate(date: D): string;
 
     /**
-     * @param date - date
-     * @param params - parameters
-     * @param datetime - should time be shown as well
-     * @param milliseconds - should time with milliseconds be shown as well
-     * @param microseconds - should time with microseconds be shown as well
-     * @returns absolute date in common format
+     * @deprecated Moved in `DateFormatter`.
+     * @breaking-change 13.0.0
      */
     abstract absoluteDate(
         date: D,
-        params: IFormatterAbsoluteTemplate,
+        params,
         datetime: boolean,
         milliseconds: boolean,
         microseconds: boolean
     ): string;
 
     /**
-     * @param date - date
-     * @returns absolute date in short format
+     * @deprecated Moved in `DateFormatter`.
+     * @breaking-change 13.0.0
      */
     abstract absoluteShortDate(date: D): string;
 
     /**
-     * @param date - date
-     * @param options - AbsoluteDateTimeOptions
-     * @returns absolute date in short format with time
+     * @deprecated Moved in `DateFormatter`.
+     * @breaking-change 13.0.0
      */
-    abstract absoluteShortDateTime(date: D, options?: IAbsoluteDateTimeOptions): string;
+    abstract absoluteShortDateTime(date: D, options?): string;
 
     /**
-     * @param date - date
-     * @returns absolute date in long format
+     * @deprecated Moved in `DateFormatter`.
+     * @breaking-change 13.0.0
      */
     abstract absoluteLongDate(date: D): string;
 
     /**
-     * @param startDate - start date
-     * @param endDate - end date
-     * @param template - template
-     * @returns opened date
+     * @deprecated Moved in `DateFormatter`.
+     * @breaking-change 13.0.0
      */
-    abstract openedRangeDate(startDate: D, endDate: D, template: IFormatterRangeTemplate): string;
+    abstract openedRangeDate(startDate: D, endDate: D, template): string;
 
     /**
-     * @param startDate - start date
-     * @param endDate - end date
-     * @param template - template
-     * @returns opened date
+     * @deprecated Moved in `DateFormatter`.
+     * @breaking-change 13.0.0
      */
-    abstract openedRangeDateTime(startDate: D, endDate: D, template: IFormatterRangeTemplate): string;
+    abstract openedRangeDateTime(startDate: D, endDate: D, template): string;
 
     /**
-     * @param date - date
-     * @param options - AbsoluteDateTimeOptions
-     * @returns absolute date in long format with time
+     * @deprecated Moved in `DateFormatter`.
+     * @breaking-change 13.0.0
      */
-    abstract absoluteLongDateTime(date: D, options?: IAbsoluteDateTimeOptions): string;
+    abstract absoluteLongDateTime(date: D, options?): string;
 
     /**
-     * @param startDate - start date
-     * @param endDate - end date
-     * @param template - template
-     * @returns range date in template format
+     * @deprecated Moved in `DateFormatter`.
+     * @breaking-change 13.0.0
      */
-    abstract rangeDate(startDate: D, endDate: D, template: IFormatterRangeTemplate): string;
+    abstract rangeDate(startDate: D, endDate: D, template): string;
 
     /**
-     * @param startDate - start date
-     * @param endDate - end date
-     * @param template - template
-     * @returns range date in template format with time
+     * @deprecated Moved in `DateFormatter`.
+     * @breaking-change 13.0.0
      */
-    abstract rangeDateTime(startDate: D, endDate: D, template: IFormatterRangeTemplate): string;
+    abstract rangeDateTime(startDate: D, endDate: D, template): string;
 
     /**
-     * @param startDate - start date
-     * @param endDate - end date
-     * @returns range date in short format
+     * @deprecated Moved in `DateFormatter`.
+     * @breaking-change 13.0.0
      */
     abstract rangeShortDate(startDate: D, endDate: D): string;
 
     /**
-     * @param startDate - start date
-     * @param endDate - end date
-     * @returns range date in short format with time
+     * @deprecated Moved in `DateFormatter`.
+     * @breaking-change 13.0.0
      */
     abstract rangeShortDateTime(startDate: D, endDate: D): string;
 
     /**
-     * @param startDate - start date
-     * @param endDate - end date
-     * @returns range date in long format
+     * @deprecated Moved in `DateFormatter`.
+     * @breaking-change 13.0.0
      */
     abstract rangeLongDate(startDate: D, endDate: D): string;
 
     /**
-     * @param startDate - start date
-     * @param endDate - end date
-     * @returns range date in long format with time
+     * @deprecated Moved in `DateFormatter`.
+     * @breaking-change 13.0.0
      */
     abstract rangeLongDateTime(startDate: D, endDate: D): string;
 
     /**
-     * @param startDate - start date
-     * @param endDate - end date
-     * @returns range middle date with time
+     * @deprecated Moved in `DateFormatter`.
+     * @breaking-change 13.0.0
      */
     abstract rangeMiddleDateTime(startDate: D, endDate: D): string;
-
-    abstract hasSame(startDate: D, endDate: D, unit: string): boolean;
-
-    abstract diffNow(date: D, unit: string): number;
 
     /**
      * Attempts to deserialize a value to a valid date object. This is different from parsing in that
@@ -457,7 +423,7 @@ export abstract class DateAdapter<D> {
     }
 
     /**
-     * Compares two datetimes.
+     * Compares two dates.
      * @param first The first date to compare.
      * @param second The second date to compare.
      * @returns 0 if the dates are equal, a number less than 0 if the first date is earlier,

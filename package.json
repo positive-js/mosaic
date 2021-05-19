@@ -166,6 +166,8 @@
         "server-dev:checkbox": "ng serve dev-checkbox --port 3003",
         "server-dev:datepicker": "ng serve dev-datepicker --port 3003",
         "server-dev:date-formatter": "ng serve dev-date-formatter --port 3003",
+        "server-dev:date-formatter-luxon": "ng serve dev-date-formatter-luxon --port 3003",
+        "server-dev:date-formatter-moment": "ng serve dev-date-formatter-moment --port 3003",
         "server-dev:dropdown": "ng serve dev-dropdown --port 3003",
         "server-dev:icon": "ng serve dev-icon --port 3003",
         "server-dev:input": "ng serve dev-input --port 3003",

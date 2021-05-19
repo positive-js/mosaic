@@ -1,19 +1,12 @@
 // tslint:disable:no-magic-numbers
 import { getLocaleFirstDayOfWeek } from '@angular/common';
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
-import {
-    MC_DATE_LOCALE,
-    IFormatterRangeTemplate,
-    IFormatterRelativeTemplate,
-    IFormatterAbsoluteTemplate,
-    IAbsoluteDateTimeOptions
-} from '@ptsecurity/cdk/datetime';
+import { MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
+import { DateFormatter } from '@ptsecurity/mosaic/core';
 import { DateTime, DateTimeOptions, DurationUnit, Info, LocaleOptions } from 'luxon';
-import * as MessageFormat from 'messageformat';
 
-import { DateAdapter } from '../../cdk/datetime';
+import { DateAdapter, DateAdapterConfig } from '../../cdk/datetime';
 
-// todo
 import { enUS } from './locales/en-US';
 import { ruRU } from './locales/ru-RU';
 
@@ -44,272 +37,24 @@ export function MC_LUXON_DATE_ADAPTER_OPTIONS_FACTORY(): McLuxonDateAdapterOptio
 // This is our customs translations
 const i18nLocals = ['en', 'ru'];
 
-class DateFormatter<D> {
-    config: any;
 
-    private readonly invalidDateErrorText: string = 'Invalid date';
+// @ts-ignore
+function DeprecatedMethod(target: any, key: string, descriptor: PropertyDescriptor) {
+    const origin = descriptor.value;
 
-    private messageFormat: MessageFormat;
+    // tslint:disable-next-line:no-function-expression only-arrow-functions
+    descriptor.value = function(...args: any[]) {
+        console.warn(
+            `Found use of deprecated method ${key}, it was moved in DateFormatter. ` +
+            `The deprecated method will be removed in 13.0.0.`
+        );
 
-    constructor(readonly adapter: DateAdapter<D>, locale: string) {
-        this.config = locale === 'en' ? enUS : ruRU;
+        return origin.apply(this, args);
+    };
 
-        this.messageFormat = new MessageFormat(locale);
-    }
-
-    relativeDate(date: D, template: IFormatterRelativeTemplate): string {
-        if (!this.adapter.isDateInstance(date)) { throw new Error(this.invalidDateErrorText); }
-
-        const totalSeconds = Math.abs(this.adapter.diffNow(date, 'seconds'));
-        const totalMinutes = Math.floor(Math.abs(this.adapter.diffNow(date, 'minutes')));
-
-        const isToday = this.adapter.hasSame(this.adapter.today(), date, 'days');
-        const isYesterday = this.adapter.diffNow(date, 'days') <= -1 && this.adapter.diffNow(date, 'days') > -2;
-
-        const templateVariables = {...this.config.variables, ...template.variables};
-        const variables = this.compileVariables(date, templateVariables);
-        let newTemplate;
-
-        if (totalSeconds <= 59) { // seconds ago
-            variables.SECONDS_PASSED = totalSeconds;
-            newTemplate = template.SECONDS_AGO;
-        } else if (totalMinutes <= 59) { // minutes ago
-            variables.MINUTES_PASSED = totalMinutes;
-            newTemplate = template.MINUTES_AGO;
-        } else if (isToday) {
-            newTemplate = template.TODAY;
-        } else if (isYesterday) {
-            newTemplate = template.YESTERDAY;
-        } else { // before yesterday
-            newTemplate = template.BEFORE_YESTERDAY;
-        }
-
-        return this.messageFormat.compile(newTemplate)(variables);
-    }
-
-    relativeShortDate(date: D): string {
-        return this.relativeDate(date, this.config.relativeTemplates.short);
-    }
-
-    relativeLongDate(date: D): string {
-        return this.relativeDate(date, this.config.relativeTemplates.long);
-    }
-
-    absoluteDate(
-        date: D,
-        params: IFormatterAbsoluteTemplate,
-        datetime = false,
-        milliseconds = false
-    ): string {
-        if (!this.adapter.isDateInstance(date)) { throw new Error(this.invalidDateErrorText); }
-
-        const variables = this.compileVariables(date, { ...this.config.variables, ...params.variables });
-
-        variables.SHOW_MILLISECONDS = milliseconds ? 'yes' : 'no';
-
-        const template = datetime ? params.DATETIME : params.DATE;
-
-        return this.messageFormat.compile(template)(variables);
-    }
-
-    absoluteShortDate(date: D): string {
-        return this.absoluteDate(date, this.config.absoluteTemplates.short);
-    }
-
-    absoluteShortDateTime(date: D, options?: IAbsoluteDateTimeOptions): string {
-        return this.absoluteDate(date, this.config.absoluteTemplates.short, true, options?.milliseconds);
-    }
-
-    absoluteLongDate(date: D): string {
-        return this.absoluteDate(date, this.config.absoluteTemplates.long);
-    }
-
-    absoluteLongDateTime(date: D, options?: IAbsoluteDateTimeOptions): string {
-        return this.absoluteDate(date, this.config.absoluteTemplates.long, true, options?.milliseconds);
-    }
-
-    openedRangeDate(startDate: D | null, endDate: D | null, template: IFormatterRangeTemplate) {
-        if (!this.adapter.isDateInstance(startDate) && !this.adapter.isDateInstance(endDate)) {
-            throw new Error(this.invalidDateErrorText);
-        }
-
-        const variables = { ...this.config.variables, ...template.variables };
-        let params = {};
-
-        if (startDate) {
-            const startDateVariables = this.compileVariables(startDate, variables);
-
-            params = {
-                ...variables,
-                START_DATE: this.messageFormat.compile(template.START_DATE)(startDateVariables),
-                RANGE_TYPE: 'onlyStart'
-            };
-        } else if (endDate) {
-            const endDateVariables = this.compileVariables(endDate, variables);
-
-            params = {
-                ...variables,
-                END_DATE: this.messageFormat.compile(template.END_DATE)(endDateVariables),
-                RANGE_TYPE: 'onlyEnd'
-            };
-        }
-
-        return this.messageFormat.compile(template.DATE)(params);
-    }
-
-    openedRangeDateTime(startDate: D | null, endDate: D | null, template: IFormatterRangeTemplate) {
-        if (!this.adapter.isDateInstance(startDate) && !this.adapter.isDateInstance(endDate)) {
-            throw new Error(this.invalidDateErrorText);
-        }
-
-        const variables = { ...this.config.variables, ...template.variables };
-        let params = {};
-
-        if (startDate) {
-            const startDateVariables = this.compileVariables(startDate, variables);
-
-            params = {
-                ...variables,
-                START_DATETIME: this.messageFormat.compile(template.START_DATETIME)(startDateVariables),
-                RANGE_TYPE: 'onlyStart'
-            };
-        } else if (endDate) {
-            const endDateVariables = this.compileVariables(endDate, variables);
-
-            params = {
-                ...variables,
-                END_DATETIME: this.messageFormat.compile(template.END_DATETIME)(endDateVariables),
-                RANGE_TYPE: 'onlyEnd'
-            };
-        }
-
-        return this.messageFormat.compile(template.DATETIME)(params);
-    }
-
-    rangeDate(startDate: D, endDate: D, template: IFormatterRangeTemplate): string {
-        if (!this.adapter.isDateInstance(startDate) || !this.adapter.isDateInstance(endDate)) {
-            throw new Error(this.invalidDateErrorText);
-        }
-
-        const variables = { ...this.config.variables, ...template.variables };
-        const sameMonth = this.hasSame(startDate, endDate, 'month');
-
-        const startDateVariables = this.compileVariables(startDate, variables);
-        startDateVariables.SAME_MONTH = sameMonth;
-
-        const endDateVariables = this.compileVariables(endDate, variables);
-        endDateVariables.SAME_MONTH = sameMonth;
-
-        const bothCurrentYear = startDateVariables.CURRENT_YEAR === 'yes' && endDateVariables.CURRENT_YEAR === 'yes';
-        startDateVariables.CURRENT_YEAR = bothCurrentYear ? 'yes' : 'no';
-        endDateVariables.CURRENT_YEAR = bothCurrentYear ? 'yes' : 'no';
-
-        const params = {
-            ...variables,
-            START_DATE: this.messageFormat.compile(template.START_DATE)(startDateVariables),
-            END_DATE: this.messageFormat.compile(template.END_DATE)(endDateVariables),
-            SAME_MONTH: sameMonth
-        };
-
-        return this.messageFormat.compile(template.DATE)(params);
-    }
-
-    rangeDateTime(startDate: D, endDate: D, template: IFormatterRangeTemplate): string {
-        if (!this.adapter.isDateInstance(startDate) || !this.adapter.isDateInstance(endDate)) {
-            throw new Error(this.invalidDateErrorText);
-        }
-
-        const variables = {...this.config.variables, ...template.variables};
-        const sameMonth = this.hasSame(startDate, endDate, 'month');
-        const sameDay = this.hasSame(startDate, endDate, 'day');
-
-        const startDateVariables = this.compileVariables(startDate, variables);
-        startDateVariables.SAME_MONTH = sameMonth;
-        startDateVariables.SAME_DAY = sameDay;
-
-        const endDateVariables = this.compileVariables(endDate, variables);
-        endDateVariables.SAME_MONTH = sameMonth;
-        endDateVariables.SAME_DAY = sameDay;
-
-        const bothCurrentYear = startDateVariables.CURRENT_YEAR === 'yes' && endDateVariables.CURRENT_YEAR === 'yes';
-        startDateVariables.CURRENT_YEAR = bothCurrentYear ? 'yes' : 'no';
-        endDateVariables.CURRENT_YEAR = bothCurrentYear ? 'yes' : 'no';
-
-        const params = {
-            ...variables,
-            START_DATETIME: this.messageFormat.compile(template.START_DATETIME)(startDateVariables),
-            END_DATETIME: this.messageFormat.compile(template.END_DATETIME)(endDateVariables),
-            SAME_MONTH: sameMonth,
-            SAME_DAY: sameDay
-        };
-
-        return this.messageFormat.compile(template.DATETIME)(params);
-    }
-
-    rangeShortDate(startDate: D | null, endDate?: D): string {
-        const rangeTemplates = this.config.rangeTemplates;
-
-        if (startDate && endDate) {
-            return this.rangeDate(startDate, endDate, rangeTemplates.closedRange.short);
-        }
-
-        return this.openedRangeDate(startDate, endDate || null, rangeTemplates.openedRange.short);
-    }
-
-    rangeShortDateTime(startDate: D | null, endDate?: D): string {
-        const rangeTemplates = this.config.rangeTemplates;
-
-        if (startDate && endDate) {
-            return this.rangeDateTime(startDate, endDate, rangeTemplates.closedRange.short);
-        }
-
-        return this.openedRangeDateTime(startDate, endDate || null, rangeTemplates.openedRange.short);
-    }
-
-    rangeLongDate(startDate: D | null, endDate?: D): string {
-        const rangeTemplates = this.config.rangeTemplates;
-
-        if (startDate && endDate) {
-            return this.rangeDate(startDate, endDate, rangeTemplates.closedRange.long);
-        }
-
-        return this.openedRangeDate(startDate, endDate || null, rangeTemplates.openedRange.long);
-    }
-
-    rangeLongDateTime(startDate: D | null, endDate?: D): string {
-        const rangeTemplates = this.config.rangeTemplates;
-
-        if (startDate && endDate) {
-            return this.rangeDateTime(startDate, endDate, rangeTemplates.closedRange.long);
-        }
-
-        return this.openedRangeDateTime(startDate, endDate || null, rangeTemplates.openedRange.long);
-    }
-
-    rangeMiddleDateTime(startDate: D, endDate: D): string {
-        return this.rangeDateTime(startDate, endDate, this.config.rangeTemplates.closedRange.middle);
-    }
-
-    private compileVariables(date: D, variables: any): any {
-        const compiledVariables: any = {};
-
-        // tslint:disable-next-line:no-for-in
-        for (const key in variables) {
-            if (!variables.hasOwnProperty(key)) { continue; }
-
-            const value = variables[key];
-            compiledVariables[key] = this.adapter.format(date, value);
-        }
-
-        compiledVariables.CURRENT_YEAR = this.hasSame(date, this.adapter.today(), 'year');
-
-        return compiledVariables;
-    }
-
-    private hasSame(startDate: D, endDate: D, unit: DurationUnit): string {
-        return this.adapter.hasSame(startDate, endDate, unit) ? 'yes' : 'no';
-    }
+    return descriptor;
 }
+
 
 @Injectable()
 export class LuxonDateAdapter extends DateAdapter<DateTime> {
@@ -340,6 +85,8 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     setLocale(locale: string): void {
         super.setLocale(locale);
 
+        this.config = (locale === 'en' ? enUS : ruRU) as DateAdapterConfig;
+
         this.dateFormatter = new DateFormatter<DateTime>(this, locale);
 
         this.localeOptions = { locale };
@@ -357,14 +104,14 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
         if (i18nLocals.includes(locale)) {
             localeData = {
                 ...localeData,
-                firstDayOfWeek: this.dateFormatter.config.firstDayOfWeek,
+                firstDayOfWeek: this.config.firstDayOfWeek,
 
-                longMonths: this.dateFormatter.config.monthNames.long,
-                shortMonths: this.dateFormatter.config.monthNames.short.standalone,
+                longMonths: this.config.monthNames.long,
+                shortMonths: this.config.monthNames.short.standalone,
 
-                narrowDaysOfWeek: this.dateFormatter.config.dayOfWeekNames.narrow,
-                shortDaysOfWeek: this.dateFormatter.config.dayOfWeekNames.short,
-                longDaysOfWeek: this.dateFormatter.config.dayOfWeekNames.long
+                narrowDaysOfWeek: this.config.dayOfWeekNames.narrow,
+                shortDaysOfWeek: this.config.dayOfWeekNames.short,
+                longDaysOfWeek: this.config.dayOfWeekNames.long
             };
         } else {
             const options = { locale };
@@ -572,70 +319,87 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
         return date.diffNow(unit)[unit];
     }
 
-    absoluteDate(date: DateTime, params: IFormatterAbsoluteTemplate, datetime: boolean, milliseconds: boolean): string {
+    @DeprecatedMethod
+    absoluteDate(date: DateTime, params, datetime: boolean, milliseconds: boolean): string {
         return this.dateFormatter.absoluteDate(date, params, datetime, milliseconds);
     }
 
+    @DeprecatedMethod
     absoluteLongDate(date: DateTime): string {
         return this.dateFormatter.absoluteLongDate(date);
     }
 
-    absoluteLongDateTime(date: DateTime, options?: IAbsoluteDateTimeOptions): string {
+    @DeprecatedMethod
+    absoluteLongDateTime(date: DateTime, options?): string {
         return this.dateFormatter.absoluteLongDateTime(date, options);
     }
 
+    @DeprecatedMethod
     absoluteShortDate(date: DateTime): string {
         return this.dateFormatter.absoluteShortDate(date);
     }
 
-    absoluteShortDateTime(date: DateTime, options?: IAbsoluteDateTimeOptions): string {
+    @DeprecatedMethod
+    absoluteShortDateTime(date: DateTime, options?): string {
         return this.dateFormatter.absoluteShortDateTime(date, options);
     }
 
-    openedRangeDate(startDate: DateTime, endDate: DateTime, template: IFormatterRangeTemplate): string {
+    @DeprecatedMethod
+    openedRangeDate(startDate: DateTime, endDate: DateTime, template): string {
         return this.dateFormatter.openedRangeDate(startDate, endDate, template);
     }
 
-    openedRangeDateTime(startDate: DateTime, endDate: DateTime, template: IFormatterRangeTemplate): string {
+    @DeprecatedMethod
+    openedRangeDateTime(startDate: DateTime, endDate: DateTime, template): string {
         return this.dateFormatter.openedRangeDateTime(startDate, endDate, template);
     }
 
-    rangeDate(startDate: DateTime, endDate: DateTime, template: IFormatterRangeTemplate): string {
+    @DeprecatedMethod
+    rangeDate(startDate: DateTime, endDate: DateTime, template): string {
         return this.dateFormatter.rangeDate(startDate, endDate, template);
     }
 
-    rangeDateTime(startDate: DateTime, endDate: DateTime, template: IFormatterRangeTemplate): string {
+    @DeprecatedMethod
+    rangeDateTime(startDate: DateTime, endDate: DateTime, template): string {
         return this.dateFormatter.rangeDateTime(startDate, endDate, template);
     }
 
+    @DeprecatedMethod
     rangeLongDate(startDate: DateTime, endDate: DateTime): string {
         return this.dateFormatter.rangeLongDate(startDate, endDate);
     }
 
+    @DeprecatedMethod
     rangeLongDateTime(startDate: DateTime, endDate: DateTime): string {
         return this.dateFormatter.rangeLongDateTime(startDate, endDate);
     }
 
+    @DeprecatedMethod
     rangeMiddleDateTime(startDate: DateTime, endDate: DateTime): string {
         return this.dateFormatter.rangeMiddleDateTime(startDate, endDate);
     }
 
+    @DeprecatedMethod
     rangeShortDate(startDate: DateTime, endDate: DateTime): string {
         return this.dateFormatter.rangeShortDate(startDate, endDate);
     }
 
+    @DeprecatedMethod
     rangeShortDateTime(startDate: DateTime, endDate: DateTime): string {
         return this.dateFormatter.rangeShortDateTime(startDate, endDate);
     }
 
-    relativeDate(date: DateTime, template: IFormatterRelativeTemplate): string {
+    @DeprecatedMethod
+    relativeDate(date: DateTime, template): string {
         return this.dateFormatter.relativeDate(date, template);
     }
 
+    @DeprecatedMethod
     relativeLongDate(date: DateTime): string {
         return this.dateFormatter.relativeLongDate(date);
     }
 
+    @DeprecatedMethod
     relativeShortDate(date: DateTime): string {
         return this.dateFormatter.relativeShortDate(date);
     }
@@ -650,11 +414,11 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     private formatShortMonthForRULocale(date: DateTime, displayFormat: string, options: LocaleOptions) {
         return date
             .toFormat(displayFormat, options)
-            .replace('февр', this.dateFormatter.config.monthNames.short.formatted[1])
-            .replace('июн', this.dateFormatter.config.monthNames.short.formatted[5])
-            .replace('июл', this.dateFormatter.config.monthNames.short.formatted[6])
-            .replace('сент', this.dateFormatter.config.monthNames.short.formatted[8])
-            .replace('нояб', this.dateFormatter.config.monthNames.short.formatted[10])
+            .replace('февр', this.config.monthNames.short.formatted[1])
+            .replace('июн', this.config.monthNames.short.formatted[5])
+            .replace('июл', this.config.monthNames.short.formatted[6])
+            .replace('сент', this.config.monthNames.short.formatted[8])
+            .replace('нояб', this.config.monthNames.short.formatted[10])
             .replace(/(\W)\./, '$1');
     }
 }

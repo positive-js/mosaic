@@ -748,13 +748,6 @@ describe('MomentDateAdapter formatter', () => {
                         date.format(`${DAY_SHORT_MONTH}, ${TIME}${MILLISECONDS}`)
                     );
                 });
-
-                it('absoluteShortDateTime with microseconds', () => {
-                    const date = moment();
-                    expect(adapter.absoluteShortDateTime(date, { microseconds: true })).toBe(
-                        date.format(`${DAY_SHORT_MONTH}, ${TIME}${MICROSECONDS}`)
-                    );
-                });
             });
 
             describe('Absolute long (absoluteLongDate/Time method)', () => {
@@ -784,12 +777,6 @@ describe('MomentDateAdapter formatter', () => {
                     const date = moment();
                     expect(adapter.absoluteLongDateTime(date, { milliseconds: true }))
                         .toBe(date.format(`${DAY_MONTH}, ${TIME}${MILLISECONDS}`));
-                });
-
-                it('absoluteLongDateTime with microseconds', () => {
-                    const date = moment();
-                    expect(adapter.absoluteLongDateTime(date, { microseconds: true }))
-                        .toBe(date.format(`${DAY_MONTH}, ${TIME}${MICROSECONDS}`));
                 });
             });
         });
@@ -1475,13 +1462,6 @@ describe('MomentDateAdapter formatter', () => {
                         date.format(`${DAY_SHORT_MONTH}, ${TIME}${MILLISECONDS}`)
                     );
                 });
-
-                it('absoluteShortDateTime with microseconds', () => {
-                    const date = moment();
-                    expect(adapter.absoluteShortDateTime(date, { microseconds: true })).toBe(
-                        date.format(`${DAY_SHORT_MONTH}, ${TIME}${MICROSECONDS}`)
-                    );
-                });
             });
 
             describe('Absolute long (absoluteLongDate/Time method)', () => {
@@ -1511,12 +1491,6 @@ describe('MomentDateAdapter formatter', () => {
                     const date = moment();
                     expect(adapter.absoluteLongDateTime(date, { milliseconds: true }))
                         .toBe(date.format(`${DAY_MONTH}, ${TIME}${MILLISECONDS}`));
-                });
-
-                it('absoluteLongDateTime with microseconds', () => {
-                    const date = moment();
-                    expect(adapter.absoluteLongDateTime(date, { microseconds: true }))
-                        .toBe(date.format(`${DAY_MONTH}, ${TIME}${MICROSECONDS}`));
                 });
             });
         });
