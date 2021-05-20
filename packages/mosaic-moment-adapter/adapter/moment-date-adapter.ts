@@ -326,7 +326,7 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
     }
 
     diffNow(date: Moment, unit: unitOfTime.Diff): number {
-        return this.today().diff(date, unit);
+        return date.diff(this.today(), unit);
     }
 
     @DeprecatedMethod
@@ -416,7 +416,7 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
 
     /** Creates a Moment instance while respecting the current UTC settings. */
     private createMoment(...args: any[]): Moment {
-        return (this.options && this.options.useUtc) ? moment.utc(...args) : moment(...args);
+        return this.options?.useUtc ? moment.utc(...args) : moment(...args);
     }
 
     private isNumeric(value: any): boolean {
