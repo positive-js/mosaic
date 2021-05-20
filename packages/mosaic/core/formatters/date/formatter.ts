@@ -1,7 +1,6 @@
 // tslint:disable:no-magic-numbers
 import { Inject, Injectable } from '@angular/core';
 import { DateAdapter, MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
-import { DurationUnit } from 'luxon';
 import * as MessageFormat from 'messageformat';
 
 import { enUS } from './templates/en-US';
@@ -433,7 +432,7 @@ export class DateFormatter<D> {
         return compiledVariables;
     }
 
-    private hasSame(startDate: D, endDate: D, unit: DurationUnit): string {
+    private hasSame(startDate: D, endDate: D, unit: string): string {
         return this.adapter.hasSame(startDate, endDate, unit) ? 'yes' : 'no';
     }
 }

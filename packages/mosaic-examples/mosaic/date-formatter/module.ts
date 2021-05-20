@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
+import { McLuxonDateModule } from '@ptsecurity/mosaic-luxon-adapter/adapter';
 
 import { AbsoluteDateFormatterExample } from './absolute-date-formatter/absolute-date-formatter-example';
 import { RangeDateFormatterExample } from './range-date-formatter/range-date-formatter-example';
@@ -14,7 +14,10 @@ const EXAMPLES = [
 ];
 
 @NgModule({
-    imports: [CommonModule, McMomentDateModule],
+    imports: [
+        CommonModule,
+        McLuxonDateModule
+    ],
     declarations: EXAMPLES,
     exports: EXAMPLES
 })

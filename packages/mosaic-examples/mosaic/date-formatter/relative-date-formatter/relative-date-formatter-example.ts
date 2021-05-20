@@ -1,19 +1,10 @@
 /* tslint:disable:no-magic-numbers */
 import { Component } from '@angular/core';
 import { DateAdapter, MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
-import { MomentDateAdapter } from '@ptsecurity/mosaic-moment-adapter/adapter';
+import { LuxonDateAdapter } from '@ptsecurity/mosaic-luxon-adapter/adapter';
+import { DateFormatter } from '@ptsecurity/mosaic/core';
+import { DateTime } from 'luxon';
 
-// Depending on whether rollup is used, moment needs to be imported differently.
-// Since Moment.js doesn't have a default export, we normally need to import using the `* as`
-// syntax. However, rollup creates a synthetic default module and we thus need to import it using
-// the `default as` syntax.
-// tslint:disable-next-line:ordered-imports
-import * as _moment from 'moment';
-// tslint:disable-next-line:no-duplicate-imports
-import { default as _rollupMoment, Moment } from 'moment';
-
-
-const moment = _rollupMoment || _moment;
 
 /**
  * @title Basic progress relative-date-formatter
@@ -24,7 +15,8 @@ const moment = _rollupMoment || _moment;
     styleUrls: ['relative-date-formatter-example.css'],
     providers: [
         { provide: MC_DATE_LOCALE, useValue: 'ru' },
-        { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MC_DATE_LOCALE] }
+        { provide: DateAdapter, useClass: LuxonDateAdapter, deps: [MC_DATE_LOCALE] },
+        { provide: DateFormatter, deps: [DateAdapter, MC_DATE_LOCALE] }
     ]
 })
 export class RelativeDateFormatterExample {
@@ -43,7 +35,7 @@ export class RelativeDateFormatterExample {
         }
     };
 
-    constructor(private dateAdapter: DateAdapter<Moment>) {
+    constructor(private formatter: DateFormatter<DateTime>, private adapter: DateAdapter<DateTime>) {
         this.populateRelativeLong('ru');
         this.populateRelativeLong('en');
 
@@ -52,36 +44,34 @@ export class RelativeDateFormatterExample {
     }
 
     private populateRelativeShort(locale: string) {
-        this.dateAdapter.setLocale(locale);
+        this.formatter.setLocale(locale);
 
         const relativeShort = this.formats[locale].relative.short;
+        const now = this.adapter.today();
 
-        relativeShort.secondsAgo = this.dateAdapter.relativeShortDate(moment().subtract(1, 'seconds'));
-        relativeShort.minutesAgo = this.dateAdapter.relativeShortDate(moment().subtract(1, 'minutes'));
-        relativeShort.today = this.dateAdapter.relativeShortDate(moment().subtract(1, 'hours'));
-        relativeShort.yesterday = this.dateAdapter.relativeShortDate(moment().subtract(1, 'days'));
-        relativeShort.beforeYesterdayCurrentYear = this.dateAdapter.relativeShortDate(
-            moment().subtract(2, 'days')
-        );
-        relativeShort.beforeYesterdayNotCurrentYear = this.dateAdapter.relativeShortDate(
-            moment().subtract(1, 'years').subtract(2, 'days')
+        relativeShort.secondsAgo = this.formatter.relativeShortDate(now.minus({ seconds: 1 }));
+        relativeShort.minutesAgo = this.formatter.relativeShortDate(now.minus({ minute: 1 }));
+        relativeShort.today = this.formatter.relativeShortDate(now.minus({ hours: 1 }));
+        relativeShort.yesterday = this.formatter.relativeShortDate(now.minus({ days: 1 }));
+        relativeShort.beforeYesterdayCurrentYear = this.formatter.relativeShortDate(now.minus({ days: 2 }));
+        relativeShort.beforeYesterdayNotCurrentYear = this.formatter.relativeShortDate(
+            now.minus({ years: 1, days: 2 })
         );
     }
 
     private populateRelativeLong(locale: string) {
-        this.dateAdapter.setLocale(locale);
+        this.formatter.setLocale(locale);
 
         const relativeLong = this.formats[locale].relative.long;
+        const now = this.adapter.today();
 
-        relativeLong.secondsAgo = this.dateAdapter.relativeLongDate(moment().subtract(1, 'seconds'));
-        relativeLong.minutesAgo = this.dateAdapter.relativeLongDate(moment().subtract(1, 'minutes'));
-        relativeLong.today = this.dateAdapter.relativeLongDate(moment().subtract(1, 'hours'));
-        relativeLong.yesterday = this.dateAdapter.relativeLongDate(moment().subtract(1, 'days'));
-        relativeLong.beforeYesterdayCurrentYear = this.dateAdapter.relativeLongDate(
-            moment().subtract(2, 'days')
-        );
-        relativeLong.beforeYesterdayNotCurrentYear = this.dateAdapter.relativeLongDate(
-            moment().subtract(1, 'years').subtract(2, 'days')
+        relativeLong.secondsAgo = this.formatter.relativeLongDate(now.minus({ seconds: 1 }));
+        relativeLong.minutesAgo = this.formatter.relativeLongDate(now.minus({ minute: 1 }));
+        relativeLong.today = this.formatter.relativeLongDate(now.minus({ hours: 1 }));
+        relativeLong.yesterday = this.formatter.relativeLongDate(now.minus({ days: 1 }));
+        relativeLong.beforeYesterdayCurrentYear = this.formatter.relativeLongDate(now.minus({ days: 2 }));
+        relativeLong.beforeYesterdayNotCurrentYear = this.formatter.relativeLongDate(
+            now.minus({ years: 1, days: 2 })
         );
     }
 }

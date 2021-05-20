@@ -80,7 +80,10 @@ export class DemoComponent {
         }
     };
 
-    constructor(private dateFormatter: DateFormatter<DateTime>) {
+    constructor(
+        private dateFormatter: DateFormatter<DateTime>,
+        private dateAdapter: DateAdapter<DateTime>
+    ) {
         this.populateAbsoluteLong('ru');
         this.populateAbsoluteLong('en');
 
@@ -107,7 +110,7 @@ export class DemoComponent {
         this.dateFormatter.setLocale(locale);
 
         const shortRange = this[locale].range.short;
-        const now = DateTime.now();
+        const now = this.dateAdapter.today();
 
         shortRange.date.currentMonth = this.dateFormatter.rangeShortDate(now.set({ day: 1 }), now.set({ day: 10 }));
         shortRange.date.notCurrentYear = this.dateFormatter.rangeShortDate(
@@ -148,7 +151,7 @@ export class DemoComponent {
         this.dateFormatter.setLocale(locale);
 
         const middleRange = this[locale].range.middle;
-        const now = DateTime.now();
+        const now = this.dateAdapter.today();
 
         middleRange.dateTime.currentYear = this.dateFormatter.rangeMiddleDateTime(
             now.set({ day: 1 }),
@@ -180,7 +183,7 @@ export class DemoComponent {
         this.dateFormatter.setLocale(locale);
 
         const longRange = this[locale].range.long;
-        const now = DateTime.now();
+        const now = this.dateAdapter.today();
 
         longRange.date.currentMonth = this.dateFormatter.rangeLongDate(now.set({ day: 1 }), now.set({ day: 10 }));
         longRange.date.notCurrentYear = this.dateFormatter.rangeLongDate(
@@ -221,7 +224,7 @@ export class DemoComponent {
         this.dateFormatter.setLocale(locale);
 
         const relativeShort = this[locale].relative.short;
-        const now = DateTime.now();
+        const now = this.dateAdapter.today();
 
         relativeShort.secondsAgo = this.dateFormatter.relativeShortDate(now.minus({ seconds: 1 }));
         relativeShort.minutesAgo = this.dateFormatter.relativeShortDate(now.minus({ minute: 1 }));
@@ -237,7 +240,7 @@ export class DemoComponent {
         this.dateFormatter.setLocale(locale);
 
         const relativeLong = this[locale].relative.long;
-        const now = DateTime.now();
+        const now = this.dateAdapter.today();
 
         relativeLong.secondsAgo = this.dateFormatter.relativeLongDate(now.minus({ seconds: 1 }));
         relativeLong.minutesAgo = this.dateFormatter.relativeLongDate(now.minus({ minute: 1 }));
@@ -253,7 +256,7 @@ export class DemoComponent {
         this.dateFormatter.setLocale(locale);
 
         const absoluteShort = this[locale].absolute.short;
-        const now = DateTime.now();
+        const now = this.dateAdapter.today();
 
         absoluteShort.date.currentYear = this.dateFormatter.absoluteShortDate(now);
         absoluteShort.date.notCurrentYear = this.dateFormatter.absoluteShortDate(now.minus({ years: 1 }));
@@ -266,7 +269,7 @@ export class DemoComponent {
         this.dateFormatter.setLocale(locale);
 
         const absoluteLong = this[locale].absolute.long;
-        const now = DateTime.now();
+        const now = this.dateAdapter.today();
 
         absoluteLong.date.currentYear = this.dateFormatter.absoluteLongDate(now);
         absoluteLong.date.notCurrentYear = this.dateFormatter.absoluteLongDate(now.minus({ years: 1 }));
@@ -278,9 +281,7 @@ export class DemoComponent {
 
 @NgModule({
     declarations: [DemoComponent],
-    imports: [
-        BrowserModule
-    ],
+    imports: [BrowserModule],
     bootstrap: [DemoComponent],
     providers: []
 })

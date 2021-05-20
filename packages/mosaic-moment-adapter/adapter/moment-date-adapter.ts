@@ -1,6 +1,10 @@
 // tslint:disable:no-magic-numbers
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
-import { MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
+import {
+    DateAdapter,
+    DateAdapterConfig,
+    MC_DATE_LOCALE
+} from '@ptsecurity/cdk/datetime';
 import { DateFormatter } from '@ptsecurity/mosaic/core';
 // Depending on whether rollup is used, moment needs to be imported differently.
 // Since Moment.js doesn't have a default export, we normally need to import using the `* as`
@@ -10,8 +14,6 @@ import * as _moment from 'moment';
 // tslint:disable:no-duplicate-imports
 // @ts-ignore (look at tsconfig)
 import { default as _rollupMoment, Moment, unitOfTime } from 'moment';
-
-import { DateAdapter, DateAdapterConfig } from '../../cdk/datetime';
 
 import { enUS } from './locales/en-US';
 import { ruRU } from './locales/ru-RU';
@@ -61,7 +63,7 @@ function range<T>(length: number, valueFunction: (index: number) => T): T[] {
 }
 
 // @ts-ignore
-function DeprecatedMethod(target: any, key: string, descriptor: PropertyDescriptor) {
+export function DeprecatedMethod(target: any, key: string, descriptor: PropertyDescriptor) {
     const origin = descriptor.value;
 
     // tslint:disable-next-line:no-function-expression only-arrow-functions

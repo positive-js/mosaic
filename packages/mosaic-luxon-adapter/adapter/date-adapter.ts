@@ -1,11 +1,13 @@
 // tslint:disable:no-magic-numbers
 import { getLocaleFirstDayOfWeek } from '@angular/common';
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
-import { MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
+import {
+    DateAdapter,
+    DateAdapterConfig,
+    MC_DATE_LOCALE
+} from '@ptsecurity/cdk/datetime';
 import { DateFormatter } from '@ptsecurity/mosaic/core';
 import { DateTime, DateTimeOptions, DurationUnit, Info, LocaleOptions } from 'luxon';
-
-import { DateAdapter, DateAdapterConfig } from '../../cdk/datetime';
 
 import { enUS } from './locales/en-US';
 import { ruRU } from './locales/ru-RU';
@@ -39,7 +41,7 @@ const i18nLocals = ['en', 'ru'];
 
 
 // @ts-ignore
-function DeprecatedMethod(target: any, key: string, descriptor: PropertyDescriptor) {
+export function DeprecatedMethod(target: any, key: string, descriptor: PropertyDescriptor) {
     const origin = descriptor.value;
 
     // tslint:disable-next-line:no-function-expression only-arrow-functions
