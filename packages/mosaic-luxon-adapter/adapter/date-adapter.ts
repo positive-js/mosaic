@@ -360,12 +360,12 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     }
 
     @DeprecatedMethod
-    rangeLongDate(startDate: DateTime, endDate: DateTime): string {
+    rangeLongDate(startDate: DateTime | null, endDate?: DateTime): string {
         return this.dateFormatter.rangeLongDate(startDate, endDate);
     }
 
     @DeprecatedMethod
-    rangeLongDateTime(startDate: DateTime, endDate: DateTime): string {
+    rangeLongDateTime(startDate: DateTime | null, endDate?: DateTime): string {
         return this.dateFormatter.rangeLongDateTime(startDate, endDate);
     }
 
@@ -375,12 +375,12 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     }
 
     @DeprecatedMethod
-    rangeShortDate(startDate: DateTime, endDate: DateTime): string {
+    rangeShortDate(startDate: DateTime | null, endDate?: DateTime): string {
         return this.dateFormatter.rangeShortDate(startDate, endDate);
     }
 
     @DeprecatedMethod
-    rangeShortDateTime(startDate: DateTime, endDate: DateTime): string {
+    rangeShortDateTime(startDate: DateTime | null, endDate?: DateTime): string {
         return this.dateFormatter.rangeShortDateTime(startDate, endDate);
     }
 

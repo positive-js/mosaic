@@ -600,7 +600,6 @@ describe('MomentDateAdapter formatter', () => {
         const DAY = 'D';
         const TIME = 'HH:mm';
         const MILLISECONDS = ',SSS';
-        const MICROSECONDS = ',SSSSSS';
 
         const DASH = '\u2013';
         const LONG_DASH = '\u202F\u2014\u2009';
@@ -1279,7 +1278,6 @@ describe('MomentDateAdapter formatter', () => {
         const DAY = 'D';
         const TIME = 'HH:mm';
         const MILLISECONDS = '.SSS';
-        const MICROSECONDS = '.SSSSSS';
 
         const DASH = '\u2013';
         const LONG_DASH = '\u202F\u2013\u2009';

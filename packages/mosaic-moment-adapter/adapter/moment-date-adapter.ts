@@ -376,12 +376,12 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
     }
 
     @DeprecatedMethod
-    rangeLongDate(startDate: Moment, endDate: Moment): string {
+    rangeLongDate(startDate: Moment | null, endDate?: Moment): string {
         return this.dateFormatter.rangeLongDate(startDate, endDate);
     }
 
     @DeprecatedMethod
-    rangeLongDateTime(startDate: Moment, endDate: Moment): string {
+    rangeLongDateTime(startDate: Moment | null, endDate?: Moment): string {
         return this.dateFormatter.rangeLongDateTime(startDate, endDate);
     }
 
@@ -391,12 +391,12 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
     }
 
     @DeprecatedMethod
-    rangeShortDate(startDate: Moment, endDate: Moment): string {
+    rangeShortDate(startDate: Moment | null, endDate?: Moment): string {
         return this.dateFormatter.rangeShortDate(startDate, endDate);
     }
 
     @DeprecatedMethod
-    rangeShortDateTime(startDate: Moment, endDate: Moment): string {
+    rangeShortDateTime(startDate: Moment | null, endDate?: Moment): string {
         return this.dateFormatter.rangeShortDateTime(startDate, endDate);
     }
 
