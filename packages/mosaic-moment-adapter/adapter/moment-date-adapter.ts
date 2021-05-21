@@ -2,7 +2,6 @@
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import {
     DateAdapter,
-    DateAdapterConfig,
     MC_DATE_LOCALE
 } from '@ptsecurity/cdk/datetime';
 import { DateFormatter } from '@ptsecurity/mosaic/core';
@@ -107,7 +106,7 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
         super.setLocale(locale);
 
         this.dateFormatter = new DateFormatter<Moment>(this, locale);
-        this.config = (locale === 'en' ? enUS : ruRU) as DateAdapterConfig;
+        this.config = locale === 'en' ? enUS : ruRU;
 
         let momentLocaleData = moment.localeData(locale);
 
@@ -199,7 +198,7 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
         return date.clone().locale(this.locale);
     }
 
-    createDate(year: number, month: number, date: number): Moment {
+    createDate(year: number, month: number = 0, date: number = 1): Moment {
         // Moment.js will create an invalid date if any of the components are out of bounds, but we
         // explicitly check each case so we can throw more descriptive errors.
         if (month < 0 || month > 11) {

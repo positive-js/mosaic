@@ -13,7 +13,8 @@
         "paths": {
             "@ptsecurity/cdk/*": ["./dist/cdk/*"],
             "@ptsecurity/mosaic/*": ["./dist/mosaic/*"],
-            "@ptsecurity/mosaic-moment-adapter/*": ["./dist/mosaic-moment-adapter/*"]
+            "@ptsecurity/mosaic-moment-adapter/*": ["./dist/mosaic-moment-adapter/*"],
+            "@ptsecurity/mosaic-luxon-adapter/*": ["./dist/mosaic-luxon-adapter/*"]
         }
     }
 }

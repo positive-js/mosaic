@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
-import * as momentImported from 'moment';
-// @ts-ignore
-// tslint:disable-next-line:no-duplicate-imports
-import { default as _rollupMoment } from 'moment';
+import { DateAdapter } from '@ptsecurity/cdk/datetime';
+import { DateTime } from 'luxon';
 
 
-// tslint:disable-next-line
-const moment = _rollupMoment || momentImported;
 /**
  * @title Timepicker range
  */
@@ -16,18 +12,23 @@ const moment = _rollupMoment || momentImported;
     styleUrls: ['timepicker-range-example.css']
 })
 export class TimepickerRangeExample {
-    moment = moment;
     format = 'HH:mm:ss';
 
-    startTime = this.moment().startOf('day');
-    endTime = this.moment();
-    time = this.moment().startOf('hour');
+    startTime: DateTime;
+    endTime: DateTime;
+    time: DateTime;
+
+    constructor(private adapter: DateAdapter<DateTime>) {
+        this.startTime = this.adapter.today().startOf('day');
+        this.endTime = this.adapter.today();
+        this.time = this.adapter.today().startOf('hour');
+    }
 
     getStartTime() {
-        return this.startTime ? this.startTime.format(this.format) : '';
+        return this.startTime ? this.startTime.toFormat(this.format) : '';
     }
 
     getEndTime() {
-        return this.endTime ? this.endTime.format(this.format) : '';
+        return this.endTime ? this.endTime.toFormat(this.format) : '';
     }
 }

@@ -3,7 +3,6 @@ import { getLocaleFirstDayOfWeek } from '@angular/common';
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import {
     DateAdapter,
-    DateAdapterConfig,
     MC_DATE_LOCALE
 } from '@ptsecurity/cdk/datetime';
 import { DateFormatter } from '@ptsecurity/mosaic/core';
@@ -87,7 +86,7 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     setLocale(locale: string): void {
         super.setLocale(locale);
 
-        this.config = (locale === 'en' ? enUS : ruRU) as DateAdapterConfig;
+        this.config = locale === 'en' ? enUS : ruRU;
 
         this.dateFormatter = new DateFormatter<DateTime>(this, locale);
 
@@ -193,7 +192,7 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
         return date.setLocale(date.locale);
     }
 
-    createDate(year: number, month: number, day: number): DateTime {
+    createDate(year: number, month: number = 1, day: number = 1): DateTime {
         if (month < 1 || month > 12) {
             throw Error(`Invalid month index "${month}". Month index has to be between 1 and 12.`);
         }
@@ -216,19 +215,12 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
         year: number,
         month: number,
         date: number,
-        hours: number,
-        minutes: number,
-        seconds: number,
-        milliseconds: number
+        hour: number,
+        minute: number,
+        second: number,
+        millisecond: number
     ): DateTime {
-        const newDate = this.createDate(year, month, date);
-
-        newDate.hour = hours;
-        newDate.minute = minutes;
-        newDate.second = seconds;
-        newDate.millisecond = milliseconds;
-
-        return newDate;
+        return this.createDate(year, month, date).set({ hour, minute, second, millisecond });
     }
 
     today(): DateTime {

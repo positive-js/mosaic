@@ -22,7 +22,8 @@
         "@angular/common": "{{NG_VERSION}}",
         "@ptsecurity/cdk": "{{VERSION}}",
         "@ptsecurity/mosaic": "{{VERSION}}",
-        "@ptsecurity/mosaic-moment-adapter": "{{VERSION}}"
+        "@ptsecurity/mosaic-moment-adapter": "{{VERSION}}",
+        "@ptsecurity/mosaic-luxon-adapter": "{{VERSION}}"
     },
     "dependencies": {
         "tslib": "^2.0.1"

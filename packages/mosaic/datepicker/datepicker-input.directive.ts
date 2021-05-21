@@ -867,7 +867,7 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
     }
 
     private getLastDayFor(year: number, month: number): number {
-        return this.dateAdapter.getNumDaysInMonth(this.createDate(year, month, 1));
+        return this.dateAdapter.getNumDaysInMonth(this.createDate(year, month));
     }
 
     private decrementDate(dateVal: D, whatToDecrement: DateParts): D {

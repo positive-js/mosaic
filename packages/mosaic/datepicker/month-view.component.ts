@@ -264,8 +264,7 @@ export class McMonthView<D> implements AfterContentInit {
 
         const firstOfMonth = this.dateAdapter.createDate(
             this.dateAdapter.getYear(this.activeDate),
-            this.dateAdapter.getMonth(this.activeDate),
-            1
+            this.dateAdapter.getMonth(this.activeDate)
         );
 
         this.firstWeekOffset =

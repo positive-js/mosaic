@@ -1,19 +1,15 @@
 import { Component } from '@angular/core';
 import { DateAdapter, MC_DATE_FORMATS, MC_DATE_LOCALE, McDateFormats } from '@ptsecurity/cdk/datetime';
 import {
-    MC_MOMENT_DATE_ADAPTER_OPTIONS,
-    MC_MOMENT_DATE_FORMATS,
-    MomentDateAdapter
-} from '@ptsecurity/mosaic-moment-adapter/adapter';
-import * as momentImported from 'moment';
-// @ts-ignore
-// tslint:disable-next-line:no-duplicate-imports
-import { default as _rollupMoment } from 'moment';
+    LuxonDateAdapter,
+    MC_LUXON_DATE_FORMATS
+} from '@ptsecurity/mosaic-luxon-adapter/adapter';
+import { DateTime } from 'luxon';
 
 
 // @dynamic
 export function mcDateAdapterFactory(locale: string) {
-    const dateAdapter = new MomentDateAdapter(locale);
+    const dateAdapter = new LuxonDateAdapter(locale);
     dateAdapter.updateLocaleData({ firstDayOfWeek: 1 });
 
     return dateAdapter;
@@ -21,16 +17,14 @@ export function mcDateAdapterFactory(locale: string) {
 
 // @dynamic
 export function mcDateFormatsFactory() {
-    const dateFormats = { ...MC_MOMENT_DATE_FORMATS } as unknown as McDateFormats;
+    const dateFormats = { ...MC_LUXON_DATE_FORMATS } as unknown as McDateFormats;
 
-    dateFormats.dateInput = 'DD.MM.YYYY';
+    dateFormats.dateInput = 'dd.MM.yyyy';
 
     return dateFormats;
 }
 
 
-// tslint:disable-next-line
-const moment = _rollupMoment || momentImported;
 /**
  * @title Custom localeData and format datepicker
  */
@@ -40,7 +34,6 @@ const moment = _rollupMoment || momentImported;
     styleUrls: ['datepicker-custom-example.css'],
     providers: [
         { provide: MC_DATE_LOCALE, useValue: 'en' },
-        { provide: MC_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { findDateFormat: true } },
         {
             provide: MC_DATE_FORMATS,
             useFactory: mcDateFormatsFactory
@@ -54,7 +47,13 @@ const moment = _rollupMoment || momentImported;
 })
 export class DatepickerCustomExample {
     sunday = 6;
-    date = moment();
-    minDate = moment().subtract(1, 'year');
-    maxDate = moment().add(1, 'years');
+    date: DateTime;
+    minDate: DateTime;
+    maxDate: DateTime;
+
+    constructor(private adapter: DateAdapter<DateTime>) {
+        this.date = this.adapter.today();
+        this.minDate = this.adapter.today().minus({ year: 1 });
+        this.maxDate = this.adapter.today().plus({ year: 1 });
+    }
 }

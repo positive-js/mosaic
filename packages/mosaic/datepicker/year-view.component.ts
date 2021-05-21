@@ -149,7 +149,7 @@ export class McYearView<D> implements AfterContentInit {
     onMonthSelected(month: number) {
         const year = this.dateAdapter.getYear(this.activeDate);
 
-        const normalizedDate = this.dateAdapter.createDate(year, month, 1);
+        const normalizedDate = this.dateAdapter.createDate(year, month);
 
         this.monthSelected.emit(normalizedDate);
 
@@ -261,7 +261,7 @@ export class McYearView<D> implements AfterContentInit {
     /** Creates an McCalendarCell for the given month. */
     private createCellForMonth(month: number, monthName: string) {
         const ariaLabel = this.dateAdapter.format(
-            this.dateAdapter.createDate(this.dateAdapter.getYear(this.activeDate), month, 1),
+            this.dateAdapter.createDate(this.dateAdapter.getYear(this.activeDate), month),
             this.dateFormats.monthYearA11yLabel);
 
         const newMonthName = monthName[0].toLocaleUpperCase() + monthName.substr(1);
@@ -285,7 +285,7 @@ export class McYearView<D> implements AfterContentInit {
             return true;
         }
 
-        const firstOfMonth = this.dateAdapter.createDate(activeYear, month, 1);
+        const firstOfMonth = this.dateAdapter.createDate(activeYear, month);
 
         // If any date in the month is enabled count the month as enabled.
         for (let date = firstOfMonth; this.dateAdapter.getMonth(date) === month;

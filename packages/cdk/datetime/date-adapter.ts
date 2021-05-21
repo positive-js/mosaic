@@ -170,7 +170,7 @@ export abstract class DateAdapter<D> {
      * @param date The date of month of the date. Must be an integer 1 - length of the given month.
      * @returns The new date, or null if invalid.
      */
-    abstract createDate(year: number, month: number, date: number): D;
+    abstract createDate(year: number, month?: number, date?: number): D;
 
     /**
      * Creates a date time with the given year, month, date, hours, minutes, seconds and milliseconds.
