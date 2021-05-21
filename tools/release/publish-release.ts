@@ -172,8 +172,9 @@ class PublishReleaseTask extends BaseReleaseTask {
 
         execSync('rm -rf dist', spawnOptions);
         execSync('yarn run build:cdk', spawnOptions);
-        execSync('yarn run build:mosaic-moment-adapter', spawnOptions);
         execSync('yarn run build:mosaic', spawnOptions);
+        execSync('yarn run build:mosaic-luxon-adapter', spawnOptions);
+        execSync('yarn run build:mosaic-moment-adapter', spawnOptions);
         execSync('yarn run styles:built-all', spawnOptions);
     }
 

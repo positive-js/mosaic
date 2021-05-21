@@ -121,8 +121,9 @@ jobs:
             - attach_workspace:
                   at: ~/mosaic
             - run: yarn run build:cdk
-            - run: yarn run build:mosaic-moment-adapter
             - run: yarn run build:mosaic
+            - run: yarn run build:mosaic-luxon-adapter
+            - run: yarn run build:mosaic-moment-adapter
             - run: yarn run styles:built-all
             - persist_to_workspace:
                   root: ~/mosaic
