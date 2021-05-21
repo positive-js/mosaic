@@ -15,8 +15,7 @@ import { DateTime } from 'luxon';
     styleUrls: ['absolute-date-formatter-example.css'],
     providers: [
         { provide: MC_DATE_LOCALE, useValue: 'ru' },
-        { provide: DateAdapter, useClass: LuxonDateAdapter, deps: [MC_DATE_LOCALE] },
-        { provide: DateFormatter, deps: [DateAdapter, MC_DATE_LOCALE] }
+        { provide: DateAdapter, useClass: LuxonDateAdapter, deps: [MC_DATE_LOCALE] }
     ]
 })
 export class AbsoluteDateFormatterExample {
@@ -47,7 +46,7 @@ export class AbsoluteDateFormatterExample {
         }
     };
 
-    constructor(private formatter: DateFormatter<DateTime>, private adapter: DateAdapter<DateTime>) {
+    constructor(private adapter: DateAdapter<DateTime>, private formatter: DateFormatter<DateTime>) {
         this.populateAbsoluteLong('ru');
         this.populateAbsoluteLong('en');
 
@@ -57,6 +56,7 @@ export class AbsoluteDateFormatterExample {
 
     private populateAbsoluteShort(locale: string) {
         this.formatter.setLocale(locale);
+        this.adapter.setLocale(locale);
 
         const now = this.adapter.today();
 
@@ -71,6 +71,7 @@ export class AbsoluteDateFormatterExample {
 
     private populateAbsoluteLong(locale: string) {
         this.formatter.setLocale(locale);
+        this.adapter.setLocale(locale);
 
         const now = this.adapter.today();
 

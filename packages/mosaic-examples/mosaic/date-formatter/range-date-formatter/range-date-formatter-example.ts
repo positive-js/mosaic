@@ -15,8 +15,7 @@ import { DateTime } from 'luxon';
     styleUrls: ['range-date-formatter-example.css'],
     providers: [
         { provide: MC_DATE_LOCALE, useValue: 'ru' },
-        { provide: DateAdapter, useClass: LuxonDateAdapter, deps: [MC_DATE_LOCALE] },
-        { provide: DateFormatter, deps: [DateAdapter, MC_DATE_LOCALE] }
+        { provide: DateAdapter, useClass: LuxonDateAdapter, deps: [MC_DATE_LOCALE] }
     ]
 })
 export class RangeDateFormatterExample {
@@ -53,7 +52,7 @@ export class RangeDateFormatterExample {
         }
     };
 
-    constructor(private formatter: DateFormatter<DateTime>, private adapter: DateAdapter<DateTime>) {
+    constructor(private adapter: DateAdapter<DateTime>, private formatter: DateFormatter<DateTime>) {
         this.populateRangeLong('ru');
         this.populateRangeLong('en');
 
@@ -66,6 +65,7 @@ export class RangeDateFormatterExample {
 
     private populateRangeShort(locale: string) {
         this.formatter.setLocale(locale);
+        this.adapter.setLocale(locale);
 
         const shortRange = this.formats[locale].range.short;
         const now = this.adapter.today();
@@ -107,6 +107,7 @@ export class RangeDateFormatterExample {
 
     private populateRangeMiddle(locale: string) {
         this.formatter.setLocale(locale);
+        this.adapter.setLocale(locale);
 
         const middleRange = this.formats[locale].range.middle;
         const now = this.adapter.today();
@@ -135,11 +136,11 @@ export class RangeDateFormatterExample {
             now.set({ month: 1, day: 1, hour: 10, minute: 14 }),
             now.set({ month: 1, day: 1 }).plus({ years: 1 }).set({ hour: 11, minute: 28 })
         );
-
     }
 
     private populateRangeLong(locale: string) {
         this.formatter.setLocale(locale);
+        this.adapter.setLocale(locale);
 
         const longRange = this.formats[locale].range.long;
         const now = this.adapter.today();

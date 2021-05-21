@@ -15,8 +15,7 @@ import { DateTime } from 'luxon';
     styleUrls: ['relative-date-formatter-example.css'],
     providers: [
         { provide: MC_DATE_LOCALE, useValue: 'ru' },
-        { provide: DateAdapter, useClass: LuxonDateAdapter, deps: [MC_DATE_LOCALE] },
-        { provide: DateFormatter, deps: [DateAdapter, MC_DATE_LOCALE] }
+        { provide: DateAdapter, useClass: LuxonDateAdapter, deps: [MC_DATE_LOCALE] }
     ]
 })
 export class RelativeDateFormatterExample {
@@ -35,7 +34,7 @@ export class RelativeDateFormatterExample {
         }
     };
 
-    constructor(private formatter: DateFormatter<DateTime>, private adapter: DateAdapter<DateTime>) {
+    constructor(private adapter: DateAdapter<DateTime>, private formatter: DateFormatter<DateTime>) {
         this.populateRelativeLong('ru');
         this.populateRelativeLong('en');
 
@@ -45,6 +44,7 @@ export class RelativeDateFormatterExample {
 
     private populateRelativeShort(locale: string) {
         this.formatter.setLocale(locale);
+        this.adapter.setLocale(locale);
 
         const relativeShort = this.formats[locale].relative.short;
         const now = this.adapter.today();
@@ -61,6 +61,7 @@ export class RelativeDateFormatterExample {
 
     private populateRelativeLong(locale: string) {
         this.formatter.setLocale(locale);
+        this.adapter.setLocale(locale);
 
         const relativeLong = this.formats[locale].relative.long;
         const now = this.adapter.today();
