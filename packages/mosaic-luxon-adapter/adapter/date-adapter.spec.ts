@@ -1,5 +1,6 @@
 // tslint:disable:no-magic-numbers
 // tslint:disable:mocha-no-side-effect-code
+/* tslint:disable:match-default-export-name */
 import { registerLocaleData } from '@angular/common';
 import arAE from '@angular/common/locales/ar-AE';
 import fr from '@angular/common/locales/fr';

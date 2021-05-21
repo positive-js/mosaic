@@ -1,3 +1,4 @@
+/* tslint:disable:match-default-export-name */
 // tslint:disable:no-console no-magic-numbers
 import { registerLocaleData } from '@angular/common';
 import de from '@angular/common/locales/de';

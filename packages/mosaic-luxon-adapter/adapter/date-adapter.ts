@@ -1,4 +1,5 @@
 // tslint:disable:no-magic-numbers
+// tslint:disable:deprecation
 import { getLocaleFirstDayOfWeek } from '@angular/common';
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import {

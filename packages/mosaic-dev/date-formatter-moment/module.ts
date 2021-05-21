@@ -1,5 +1,6 @@
 // tslint:disable:no-console
 // tslint:disable:no-magic-numbers
+// tslint:disable:deprecation
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { DateAdapter, MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
