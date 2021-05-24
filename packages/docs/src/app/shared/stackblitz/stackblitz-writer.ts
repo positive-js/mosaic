@@ -35,12 +35,12 @@ const TEMPLATE_FILES = [
 ];
 
 const TAGS: string[] = ['angular', 'mosaic', 'example'];
-const angularVersion = '^9.0.0';
+const angularVersion = '^11.0.0';
 
 const dependencies = {
     '@ptsecurity/cdk': mosaicVersion,
     '@ptsecurity/mosaic': mosaicVersion,
-    '@ptsecurity/mosaic-icons': '^5.0.0',
+    '@ptsecurity/mosaic-icons': '^5.3.0',
     '@ptsecurity/mosaic-moment-adapter': mosaicVersion,
     '@angular/cdk': angularVersion,
     '@angular/animations': angularVersion,
@@ -51,11 +51,10 @@ const dependencies = {
     '@angular/platform-browser': angularVersion,
     '@angular/platform-browser-dynamic': angularVersion,
     '@angular/router': angularVersion,
-    'core-js': '^2.4.1',
+    'core-js': '^3.6.5',
     rxjs: '^6.5.0',
-    'web-animations-js': '^2.3.1',
     messageformat: '^2.0.5',
-    tslib: '^1.10.0',
+    tslib: '^2.0.1',
     'zone.js': '~0.10.3',
     moment: '^2.24.0'
 };
