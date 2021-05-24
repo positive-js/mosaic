@@ -102,6 +102,10 @@ export class DemoComponent implements AfterViewInit {
                 console.log('this.datepicker.selectedChanged');
             });
     }
+
+    onDateChange() {
+        console.log('onDateChange: '); // tslint:disable-line:no-console
+    }
 }
 
 @NgModule({

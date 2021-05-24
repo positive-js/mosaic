@@ -42,6 +42,9 @@ export interface DateAdapterConfig {
 export abstract class DateAdapter<D> {
     config: DateAdapterConfig;
 
+    firstMonth: number;
+    abstract lastMonth: number;
+
     /** The locale to use for all dates. */
     protected locale: any;
 

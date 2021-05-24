@@ -81,6 +81,13 @@ export function DeprecatedMethod(target: any, key: string, descriptor: PropertyD
 
 @Injectable()
 export class MomentDateAdapter extends DateAdapter<Moment> {
+    firstMonth: number = 0;
+
+    get lastMonth(): number {
+        // tslint:disable-next-line:binary-expression-operand-order no-magic-numbers
+        return 11 + this.firstMonth;
+    }
+
     private dateFormatter: DateFormatter<Moment>;
 
     private localeData: {
@@ -128,7 +135,7 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
             firstDayOfWeek: this.config.firstDayOfWeek,
             longMonths: momentLocaleData.months(),
             shortMonths: momentLocaleData.monthsShort(),
-            dates: range(31, (i) => this.createDate(2017, 0, i + 1).format('D')),
+            dates: range(31, (i) => this.createDate(2017, this.firstMonth, i + 1).format('D')),
             longDaysOfWeek: momentLocaleData.weekdays(),
             shortDaysOfWeek: momentLocaleData.weekdaysShort(),
             narrowDaysOfWeek: momentLocaleData.weekdaysMin()
@@ -201,8 +208,11 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
     createDate(year: number, month: number = 0, date: number = 1): Moment {
         // Moment.js will create an invalid date if any of the components are out of bounds, but we
         // explicitly check each case so we can throw more descriptive errors.
-        if (month < 0 || month > 11) {
-            throw Error(`Invalid month index "${month}". Month index has to be between 0 and 11.`);
+        if (month < this.firstMonth || month > this.lastMonth) {
+            throw Error(
+                `Invalid month index "${month}".
+                Month index has to be between ${this.firstMonth} and ${this.lastMonth}.`
+            );
         }
 
         if (date < 1) {

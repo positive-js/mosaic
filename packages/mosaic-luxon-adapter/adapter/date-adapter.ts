@@ -60,6 +60,13 @@ export function DeprecatedMethod(target: any, key: string, descriptor: PropertyD
 
 @Injectable()
 export class LuxonDateAdapter extends DateAdapter<DateTime> {
+    firstMonth: number = 1;
+
+    get lastMonth(): number {
+        // tslint:disable-next-line:binary-expression-operand-order no-magic-numbers
+        return 11 + this.firstMonth;
+    }
+
     private localeOptions: LocaleOptions;
     private dateTimeOptions: DateTimeOptions;
     private dateFormatter: DateFormatter<DateTime>;
@@ -194,8 +201,11 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     }
 
     createDate(year: number, month: number = 1, day: number = 1): DateTime {
-        if (month < 1 || month > 12) {
-            throw Error(`Invalid month index "${month}". Month index has to be between 1 and 12.`);
+        if (month < this.firstMonth || month > this.lastMonth) {
+            throw Error(
+                `Invalid month index "${month}".
+                Month index has to be between ${this.firstMonth} and ${this.lastMonth}.`
+            );
         }
 
         if (day < 1) {

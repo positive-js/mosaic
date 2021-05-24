@@ -12,7 +12,6 @@ import {
 import { ComponentPortal, ComponentType } from '@angular/cdk/portal';
 import { DOCUMENT } from '@angular/common';
 import {
-    AfterViewInit,
     ChangeDetectionStrategy,
     Component,
     ComponentRef,
@@ -83,16 +82,12 @@ export const MC_DATEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER = {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class McDatepickerContent<D> implements AfterViewInit {
+export class McDatepickerContent<D> {
     /** Reference to the internal calendar component. */
     @ViewChild(McCalendar, { static: false }) calendar: McCalendar<D>;
 
     /** Reference to the datepicker that created the overlay. */
     datepicker: McDatepicker<D>;
-
-    ngAfterViewInit() {
-        // this.calendar.focusActiveCell();
-    }
 }
 
 
@@ -318,7 +313,7 @@ export class McDatepicker<D> implements OnDestroy {
                 this.selected = value;
                 // @ts-ignore
                 if (this.popupComponentRef) {
-                    this.popupComponentRef.instance.calendar.monthView.init();
+                    this.popupComponentRef.instance.calendar.monthView?.init();
                     this.popupComponentRef.instance.calendar.activeDate = value as D;
                 }
             });

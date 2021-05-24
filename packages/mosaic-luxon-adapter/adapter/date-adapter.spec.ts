@@ -167,14 +167,14 @@ describe('LuxonDateAdapter', () => {
     });
 
     it('should get year name', () => {
-        expect(adapter.getYearName(adapter.createDate(2017,  1,  1)))
+        expect(adapter.getYearName(adapter.createDate(2017)))
             .toBe('2017');
     });
 
     it('should get year name in a different locale', () => {
         adapter.setLocale('ar-AE');
 
-        expect(adapter.getYearName(adapter.createDate(2017,  1,  1)))
+        expect(adapter.getYearName(adapter.createDate(2017)))
             .toBe('٢٠١٧');
     });
 
@@ -193,13 +193,13 @@ describe('LuxonDateAdapter', () => {
     });
 
     it('should create DateTime date', () => {
-        expect(adapter.createDate(2017, 1, 1).toString())
-            .toEqual(adapter.createDate(2017,  1,  1).toString());
+        expect(adapter.createDate(2017).toString())
+            .toEqual(adapter.createDate(2017).toString());
     });
 
     it('should not create DateTime date with month over/under-flow', () => {
-        expect(() => adapter.createDate(2017, 12 + 1, 1)).toThrow();
-        expect(() => adapter.createDate(2017, 1 - 1, 1)).toThrow();
+        expect(() => adapter.createDate(2017, 12 + 1)).toThrow();
+        expect(() => adapter.createDate(2017, 1 - 1)).toThrow();
     });
 
     it('should not create DateTime date with date over/under-flow', () => {
@@ -208,11 +208,11 @@ describe('LuxonDateAdapter', () => {
     });
 
     it('should create DateTime date with low year number', () => {
-        expect(adapter.createDate(-1, 1, 1).year).toBe(-1);
-        expect(adapter.createDate(0, 1, 1).year).toBe(0);
-        expect(adapter.createDate(50, 1, 1).year).toBe(50);
-        expect(adapter.createDate(99, 1, 1).year).toBe(99);
-        expect(adapter.createDate(100, 1, 1).year).toBe(100);
+        expect(adapter.createDate(-1).year).toBe(-1);
+        expect(adapter.createDate(0).year).toBe(0);
+        expect(adapter.createDate(50).year).toBe(50);
+        expect(adapter.createDate(99).year).toBe(99);
+        expect(adapter.createDate(100).year).toBe(100);
     });
 
     it('should not create DateTime date in utc format', () => {
@@ -305,36 +305,36 @@ describe('LuxonDateAdapter', () => {
     });
 
     it('should compare dates', () => {
-        expect(adapter.compareDate(adapter.createDate(2017, 1, 1), adapter.createDate(2017, 1, 2))).toBeLessThan(0);
-        expect(adapter.compareDate(adapter.createDate(2017, 1, 1), adapter.createDate(2017, 2, 1))).toBeLessThan(0);
-        expect(adapter.compareDate(adapter.createDate(2017, 1, 1), adapter.createDate(2018, 1, 1))).toBeLessThan(0);
-        expect(adapter.compareDate(adapter.createDate(2017, 1, 1), adapter.createDate(2017, 1, 1))).toBe(0);
-        expect(adapter.compareDate(adapter.createDate(2018, 1, 1), adapter.createDate(2017, 1, 1))).toBeGreaterThan(0);
-        expect(adapter.compareDate(adapter.createDate(2017, 2, 1), adapter.createDate(2017, 1, 1))).toBeGreaterThan(0);
-        expect(adapter.compareDate(adapter.createDate(2017, 1, 2), adapter.createDate(2017, 1, 1))).toBeGreaterThan(0);
+        expect(adapter.compareDate(adapter.createDate(2017), adapter.createDate(2017, 1, 2))).toBeLessThan(0);
+        expect(adapter.compareDate(adapter.createDate(2017), adapter.createDate(2017, 2, 1))).toBeLessThan(0);
+        expect(adapter.compareDate(adapter.createDate(2017), adapter.createDate(2018))).toBeLessThan(0);
+        expect(adapter.compareDate(adapter.createDate(2017), adapter.createDate(2017))).toBe(0);
+        expect(adapter.compareDate(adapter.createDate(2018), adapter.createDate(2017))).toBeGreaterThan(0);
+        expect(adapter.compareDate(adapter.createDate(2017, 2, 1), adapter.createDate(2017))).toBeGreaterThan(0);
+        expect(adapter.compareDate(adapter.createDate(2017, 1, 2), adapter.createDate(2017))).toBeGreaterThan(0);
     });
 
     it('should clamp date at lower bound', () => {
         expect(adapter.clampDate(
-            adapter.createDate(2017, 1, 1),
-            adapter.createDate(2018, 1, 1),
-            adapter.createDate(2019, 1, 1))
-        ).toEqual(adapter.createDate(2018, 1, 1));
+            adapter.createDate(2017),
+            adapter.createDate(2018),
+            adapter.createDate(2019))
+        ).toEqual(adapter.createDate(2018));
     });
 
     it('should clamp date at upper bound', () => {
         expect(adapter.clampDate(
-            adapter.createDate(2020, 1, 1),
-            adapter.createDate(2018, 1, 1),
-            adapter.createDate(2019, 1, 1))
-        ).toEqual(adapter.createDate(2019, 1, 1));
+            adapter.createDate(2020),
+            adapter.createDate(2018),
+            adapter.createDate(2019))
+        ).toEqual(adapter.createDate(2019));
     });
 
     it('should clamp date already within bounds', () => {
         expect(adapter.clampDate(
             adapter.createDate(2018, 2, 1),
-            adapter.createDate(2018, 1, 1),
-            adapter.createDate(2019, 1, 1))
+            adapter.createDate(2018),
+            adapter.createDate(2019))
         ).toEqual(adapter.createDate(2018, 2, 1));
     });
 
@@ -381,7 +381,7 @@ describe('LuxonDateAdapter', () => {
     });
 
     it('should clone the date when deserializing a DateTime date', () => {
-        const date = adapter.createDate(2017,  1,  1);
+        const date = adapter.createDate(2017);
 
         expect(adapter.deserialize(date).toString())
             .toEqual(date.toString());
@@ -417,7 +417,7 @@ describe('LuxonDateAdapter', () => {
     it('returned DateTime should have correct locale', () => {
         adapter.setLocale('ja-JP');
 
-        expect(adapter.createDate(2017, 1, 1).locale)
+        expect(adapter.createDate(2017).locale)
             .toBe('ja-JP');
         expect(adapter.today().locale)
             .toBe('ja-JP');
@@ -598,7 +598,7 @@ describe('LuxonDateAdapter formatter', () => {
                 });
 
                 it('before yesterday (other year)', () => {
-                    const date = adapter.createDate(2015, 1, 1).minus({ hours: 49 });
+                    const date = adapter.createDate(2015).minus({ hours: 49 });
                     expect(adapter.relativeShortDate(date))
                         .toBe(adapter.format(date, `${DAY}${NBSP}${SHORT_MONTH} ${YEAR}`));
                 });
@@ -652,7 +652,7 @@ describe('LuxonDateAdapter formatter', () => {
                 });
 
                 it('before yesterday (other year)', () => {
-                    const date = adapter.createDate(2015, 1, 1).minus({ hours: 49 });
+                    const date = adapter.createDate(2015).minus({ hours: 49 });
                     expect(adapter.relativeLongDate(date)).toBe(date.toFormat(`${DAY_MONTH} ${YEAR}`));
                 });
             });
@@ -668,7 +668,7 @@ describe('LuxonDateAdapter formatter', () => {
                 });
 
                 it('absoluteShortDate (other year)', () => {
-                    const date = adapter.createDate(2015, 1, 1);
+                    const date = adapter.createDate(2015);
 
                     expect(adapter.absoluteShortDate(date))
                         .toBe(adapter.format(date, `${DAY_SHORT_MONTH} ${YEAR}`));
@@ -682,7 +682,7 @@ describe('LuxonDateAdapter formatter', () => {
                 });
 
                 it('absoluteShortDateTime (other year)', () => {
-                    const date = adapter.createDate(2015, 1, 1);
+                    const date = adapter.createDate(2015);
 
                     expect(adapter.absoluteShortDateTime(date))
                         .toBe(adapter.format(date, `${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`));
@@ -705,7 +705,7 @@ describe('LuxonDateAdapter formatter', () => {
                 });
 
                 it('absoluteLongDate (other year)', () => {
-                    const date = adapter.createDate(2015, 1, 1);
+                    const date = adapter.createDate(2015);
 
                     expect(adapter.absoluteLongDate(date))
                         .toBe(date.toFormat(`${DAY_MONTH} ${YEAR}`));
@@ -719,7 +719,7 @@ describe('LuxonDateAdapter formatter', () => {
                 });
 
                 it('absoluteLongDateTime (other year)', () => {
-                    const date = adapter.createDate(2015, 1, 1);
+                    const date = adapter.createDate(2015);
 
                     expect(adapter.absoluteLongDateTime(date))
                         .toBe(date.toFormat(`${DAY_MONTH} ${YEAR}, ${TIME}`));
@@ -746,8 +746,7 @@ describe('LuxonDateAdapter formatter', () => {
                     });
 
                     it('rangeShortDate', () => {
-                        const startDate = adapter.today();
-                        startDate.day = 1;
+                        const startDate = adapter.today().set({ day: 1 });
                         const endDate = startDate.plus({ days: 10 });
 
                         const startString: string = startDate.toFormat(`${DAY}`);
@@ -758,8 +757,7 @@ describe('LuxonDateAdapter formatter', () => {
                     });
 
                     it('rangeShortDate (other month)', () => {
-                        const startDate = adapter.today();
-                        startDate.month = 1;
+                        const startDate = adapter.today().set({ month: 1 });
                         const endDate = startDate.plus({ months: 1 });
 
                         const startString: string = adapter.format(startDate, startDateFormat);
@@ -799,8 +797,7 @@ describe('LuxonDateAdapter formatter', () => {
                     });
 
                     it('rangeShortDateTime', () => {
-                        const startDate = adapter.today();
-                        startDate.day = 1;
+                        const startDate = adapter.today().set({ day: 1 });
                         const endDate = startDate.plus({ days: 10 });
 
                         const startString: string = startDate.toFormat(startDateFormat);
@@ -833,8 +830,7 @@ describe('LuxonDateAdapter formatter', () => {
                     });
 
                     it('rangeShortDateTime (other month)', () => {
-                        const startDate = adapter.today();
-                        startDate.month = 1;
+                        const startDate = adapter.today().set({ month: 1 });
                         const endDate = startDate.plus({ months: 1 });
 
                         const startString: string = adapter.format(startDate, startDateFormat);
@@ -874,8 +870,7 @@ describe('LuxonDateAdapter formatter', () => {
                     });
 
                     it('rangeLongDate', () => {
-                        const startDate = adapter.today();
-                        startDate.day = 1;
+                        const startDate = adapter.today().set({ day: 1 });
                         const endDate = startDate.plus({ days: 10 });
 
                         const startString: string = startDate.toFormat(`${DAY}`);
@@ -886,8 +881,7 @@ describe('LuxonDateAdapter formatter', () => {
                     });
 
                     it('rangeLongDate (other month)', () => {
-                        const startDate = adapter.today();
-                        startDate.month = 1;
+                        const startDate = adapter.today().set({ month: 1 });
                         const endDate = startDate.plus({ months: 1 });
 
                         const startString: string = startDate.toFormat(startDateFormat);
@@ -909,7 +903,7 @@ describe('LuxonDateAdapter formatter', () => {
                     });
 
                     it('rangeLongDate (endDate is other year)', () => {
-                        const startDate = adapter.createDate(2015, 1, 1);
+                        const startDate = adapter.createDate(2015);
                         const endDate = startDate.plus({ years: 1 });
 
                         const startString: string = startDate.toFormat(`${startDateFormat} ${YEAR}`);
@@ -927,8 +921,7 @@ describe('LuxonDateAdapter formatter', () => {
                     });
 
                     it('rangeLongDateTime', () => {
-                        const startDate = adapter.today();
-                        startDate.day = 1;
+                        const startDate = adapter.today().set({ day: 1 });
                         const endDate = startDate.plus({ days: 10 });
 
                         const startString: string = startDate.toFormat(startDateFormat);
@@ -965,8 +958,7 @@ describe('LuxonDateAdapter formatter', () => {
                     });
 
                     it('rangeLongDateTime (other month)', () => {
-                        const startDate = adapter.today();
-                        startDate.month = 1;
+                        const startDate = adapter.today().set({ month: 1 });
                         const endDate = startDate.plus({ months: 1 });
 
                         const startString: string = startDate.toFormat(startDateFormat);
@@ -988,7 +980,7 @@ describe('LuxonDateAdapter formatter', () => {
                     });
 
                     it('rangeLongDateTime (endDate is other year)', () => {
-                        const startDate = adapter.createDate(2015, 1, 1);
+                        const startDate = adapter.createDate(2015);
                         const endDate = startDate.plus({ years: 1 });
 
                         const startString: string = startDate.toFormat(`${DAY_MONTH} ${YEAR}, ${TIME}`);
@@ -1006,8 +998,7 @@ describe('LuxonDateAdapter formatter', () => {
                     });
 
                     it('rangeMiddleDateTime', () => {
-                        const startDate = adapter.today();
-                        startDate.day = 1;
+                        const startDate = adapter.today().set({ day: 1 });
                         const endDate = startDate.plus({ days: 10 });
 
                         const startString: string = startDate.toFormat(startDateFormat);
@@ -1040,8 +1031,7 @@ describe('LuxonDateAdapter formatter', () => {
                     });
 
                     it('rangeMiddleDateTime (other month)', () => {
-                        const startDate = adapter.today();
-                        startDate.month = 1;
+                        const startDate = adapter.today().set({ month: 1 });
                         const endDate = startDate.plus({ months: 1 });
 
                         const startString: string = startDate.toFormat(startDateFormat);
@@ -1063,7 +1053,7 @@ describe('LuxonDateAdapter formatter', () => {
                     });
 
                     it('rangeMiddleDateTime (endDate is other year)', () => {
-                        const startDate = adapter.createDate(2015, 1, 1);
+                        const startDate = adapter.createDate(2015);
                         const endDate = startDate.plus({ years: 1 });
 
                         const startString: string = startDate.toFormat(`${DAY_MONTH} ${YEAR}, ${TIME}`);
@@ -1313,7 +1303,7 @@ describe('LuxonDateAdapter formatter', () => {
                 });
 
                 it('before yesterday (other year)', () => {
-                    const date = adapter.createDate(2015, 1, 1)
+                    const date = adapter.createDate(2015)
                         .minus({ hours: 49 });
 
                     expect(adapter.relativeShortDate(date))
@@ -1362,7 +1352,7 @@ describe('LuxonDateAdapter formatter', () => {
                 });
 
                 it('before yesterday (other year)', () => {
-                    const date = adapter.createDate(2015, 1, 1);
+                    const date = adapter.createDate(2015);
 
                     expect(adapter.relativeLongDate(date))
                         .toBe(date.toFormat(`${DAY_MONTH}, ${YEAR}`));
@@ -1380,7 +1370,7 @@ describe('LuxonDateAdapter formatter', () => {
                 });
 
                 it('absoluteShortDate (other year)', () => {
-                    const date = adapter.createDate(2015, 1, 1);
+                    const date = adapter.createDate(2015);
 
                     expect(adapter.absoluteShortDate(date))
                         .toBe(date.toFormat(`${DAY_SHORT_MONTH}, ${YEAR}`));
@@ -1394,7 +1384,7 @@ describe('LuxonDateAdapter formatter', () => {
                 });
 
                 it('absoluteShortDateTime (other year)', () => {
-                    const date = adapter.createDate(2015, 1, 1);
+                    const date = adapter.createDate(2015);
 
                     expect(adapter.absoluteShortDateTime(date))
                         .toBe(date.toFormat(`${DAY_SHORT_MONTH}, ${YEAR}, ${TIME}`));
@@ -1417,7 +1407,7 @@ describe('LuxonDateAdapter formatter', () => {
                 });
 
                 it('absoluteLongDate (other year)', () => {
-                    const date = adapter.createDate(2015, 1, 1);
+                    const date = adapter.createDate(2015);
 
                     expect(adapter.absoluteLongDate(date))
                         .toBe(date.toFormat(`${DAY_MONTH}, ${YEAR}`));
@@ -1431,7 +1421,7 @@ describe('LuxonDateAdapter formatter', () => {
                 });
 
                 it('absoluteLongDateTime (other year)', () => {
-                    const date = adapter.createDate(2015, 1, 1);
+                    const date = adapter.createDate(2015);
 
                     expect(adapter.absoluteLongDateTime(date))
                         .toBe(date.toFormat(`${DAY_MONTH}, ${YEAR}, ${TIME}`));
@@ -1458,8 +1448,7 @@ describe('LuxonDateAdapter formatter', () => {
                     });
 
                     it('rangeShortDate', () => {
-                        const startDate = adapter.today();
-                        startDate.day = 1;
+                        const startDate = adapter.today().set({ day: 1 });
                         const endDate = startDate.plus({ days: 10 });
 
                         const startString: string = startDate.toFormat(startDateFormat);
@@ -1470,8 +1459,7 @@ describe('LuxonDateAdapter formatter', () => {
                     });
 
                     it('rangeShortDate (other month)', () => {
-                        const startDate = adapter.today();
-                        startDate.month = 1;
+                        const startDate = adapter.today().set({ month: 1 });
                         const endDate = startDate.plus({ months: 1 });
 
                         const startString: string = startDate.toFormat(startDateFormat);
@@ -1511,8 +1499,7 @@ describe('LuxonDateAdapter formatter', () => {
                     });
 
                     it('rangeShortDateTime', () => {
-                        const startDate = adapter.today();
-                        startDate.day = 1;
+                        const startDate = adapter.today().set({ day: 1 });
                         const endDate = startDate.plus({ days: 10 });
 
                         const startString: string = startDate.toFormat(startDateFormat);
@@ -1545,8 +1532,7 @@ describe('LuxonDateAdapter formatter', () => {
                     });
 
                     it('rangeShortDateTime (other month)', () => {
-                        const startDate = adapter.today();
-                        startDate.month = 1;
+                        const startDate = adapter.today().set({ month: 1 });
                         const endDate = startDate.plus({ months: 1 });
 
                         const startString: string = startDate.toFormat(startDateFormat);
@@ -1586,8 +1572,7 @@ describe('LuxonDateAdapter formatter', () => {
                     });
 
                     it('rangeLongDate', () => {
-                        const startDate = adapter.today();
-                        startDate.day = 1;
+                        const startDate = adapter.today().set({ day: 1 });
                         const endDate = startDate.plus({ days: 10 });
 
                         const startString: string = startDate.toFormat(startDateFormat);
@@ -1598,8 +1583,7 @@ describe('LuxonDateAdapter formatter', () => {
                     });
 
                     it('rangeLongDate (other month)', () => {
-                        const startDate = adapter.today();
-                        startDate.month = 1;
+                        const startDate = adapter.today().set({ month: 1 });
                         const endDate = startDate.plus({ months: 1 });
 
                         const startString: string = startDate.toFormat(startDateFormat);
@@ -1621,7 +1605,7 @@ describe('LuxonDateAdapter formatter', () => {
                     });
 
                     it('rangeLongDate (endDate is other year)', () => {
-                        const startDate = adapter.createDate(2015, 1, 1);
+                        const startDate = adapter.createDate(2015);
                         const endDate = startDate.plus({ years: 1 });
 
                         const startString: string = startDate.toFormat(`${startDateFormat}, ${YEAR}`);
@@ -1639,8 +1623,7 @@ describe('LuxonDateAdapter formatter', () => {
                     });
 
                     it('rangeLongDateTime', () => {
-                        const startDate = adapter.today();
-                        startDate.day = 1;
+                        const startDate = adapter.today().set({ day: 1 });
                         const endDate = startDate.plus({ days: 10 });
 
                         const startString: string = startDate.toFormat(startDateFormat);
@@ -1673,8 +1656,7 @@ describe('LuxonDateAdapter formatter', () => {
                     });
 
                     it('rangeLongDateTime (other month)', () => {
-                        const startDate = adapter.today();
-                        startDate.month = 1;
+                        const startDate = adapter.today().set({ month: 1 });
                         const endDate = startDate.plus({ months: 1 });
 
                         const startString: string = startDate.toFormat(startDateFormat);
@@ -1696,7 +1678,7 @@ describe('LuxonDateAdapter formatter', () => {
                     });
 
                     it('rangeLongDateTime (endDate is other year)', () => {
-                        const startDate = adapter.createDate(2015, 1, 1);
+                        const startDate = adapter.createDate(2015);
                         const endDate = startDate.plus({ years: 1 });
 
                         const startString: string = startDate.toFormat(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
@@ -1714,8 +1696,7 @@ describe('LuxonDateAdapter formatter', () => {
                     });
 
                     it('rangeMiddleDateTime', () => {
-                        const startDate = adapter.today();
-                        startDate.day = 1;
+                        const startDate = adapter.today().set({ day: 1 });
                         const endDate = startDate.plus({ days: 10 });
 
                         const startString: string = startDate.toFormat(startDateFormat);
@@ -1748,8 +1729,7 @@ describe('LuxonDateAdapter formatter', () => {
                     });
 
                     it('rangeMiddleDateTime (other month)', () => {
-                        const startDate = adapter.today();
-                        startDate.month = 1;
+                        const startDate = adapter.today().set({ month: 1 });
                         const endDate = startDate.plus({ months: 1 });
 
                         const startString: string = startDate.toFormat(startDateFormat);
@@ -1771,7 +1751,7 @@ describe('LuxonDateAdapter formatter', () => {
                     });
 
                     it('rangeMiddleDateTime (endDate is other year)', () => {
-                        const startDate = adapter.createDate(2015, 1, 1);
+                        const startDate = adapter.createDate(2015);
                         const endDate = startDate.plus({ years: 1 });
 
                         const startString = startDate.toFormat(`${DAY_MONTH}, ${YEAR}, ${TIME}`);

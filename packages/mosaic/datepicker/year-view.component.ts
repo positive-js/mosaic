@@ -239,8 +239,11 @@ export class McYearView<D> implements AfterContentInit {
 
         // First row of months only contains 5 elements so we can fit the year label on the same row.
         // tslint:disable-next-line:no-magic-numbers
-        this.months = [[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11]].map((row) => row.map(
-            (month) => this.createCellForMonth(month, monthNames[month])));
+        this.months = [[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11]]
+            .map((row) => row.map((month) =>
+                this.createCellForMonth(month + this.dateAdapter.firstMonth, monthNames[month]))
+            );
+
         this.changeDetectorRef.markForCheck();
     }
 
@@ -262,7 +265,8 @@ export class McYearView<D> implements AfterContentInit {
     private createCellForMonth(month: number, monthName: string) {
         const ariaLabel = this.dateAdapter.format(
             this.dateAdapter.createDate(this.dateAdapter.getYear(this.activeDate), month),
-            this.dateFormats.monthYearA11yLabel);
+            this.dateFormats.monthYearA11yLabel
+        );
 
         const newMonthName = monthName[0].toLocaleUpperCase() + monthName.substr(1);
 
