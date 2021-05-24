@@ -219,6 +219,26 @@ jobs:
                   paths:
                       - ./dist/coverage
 
+    test_unit_mosaic-luxon-adapter:
+        <<: *job_defaults
+        steps:
+            - attach_workspace:
+                  at: ~/mosaic
+            - run:
+                  command: yarn run unit:mosaic-luxon-adapter
+                  environment:
+                      JUNIT_REPORT_PATH: junit/
+                      JUNIT_REPORT_NAME: test-results.xml
+                  when: always
+            - store_test_results:
+                  path: junit
+            - store_artifacts:
+                  path: junit
+            - persist_to_workspace:
+                  root: .
+                  paths:
+                      - ./dist/coverage
+
     deploy-docs-next:
         <<: *job_defaults
         steps:
@@ -378,6 +398,10 @@ workflows:
                   requires:
                       - build_packages
 
+            - test_unit_mosaic-luxon-adapter:
+                  requires:
+                      - build_packages
+
             - test_unit_mosaic:
                   requires:
                       - build_packages
@@ -391,6 +415,7 @@ workflows:
                       - test_unit_mosaic
                       - test_unit_cdk
                       - test_unit_mosaic-moment-adapter
+                      - test_unit_mosaic-luxon-adapter
                       - test_unit_schematics
                   filters:
                       <<: *ignore_release_branches
@@ -403,6 +428,7 @@ workflows:
                   requires:
                       - test_unit_cdk
                       - test_unit_mosaic-moment-adapter
+                      - test_unit_mosaic-luxon-adapter
                       - test_unit_mosaic
                       - test_unit_schematics
                   filters:
@@ -412,6 +438,7 @@ workflows:
                   requires:
                       - test_unit_cdk
                       - test_unit_mosaic-moment-adapter
+                      - test_unit_mosaic-luxon-adapter
                       - test_unit_mosaic
                       - test_unit_schematics
                   filters:
@@ -422,6 +449,7 @@ workflows:
                       - test_unit_mosaic
                       - test_unit_cdk
                       - test_unit_mosaic-moment-adapter
+                      - test_unit_mosaic-luxon-adapter
                       - test_unit_schematics
                   filters:
                       <<: *only_master
