@@ -383,7 +383,7 @@ describe('LuxonDateAdapter', () => {
     it('should clone the date when deserializing a DateTime date', () => {
         const date = adapter.createDate(2017);
 
-        expect(adapter.deserialize(date).toString())
+        expect(adapter.deserialize(date)?.toString())
             .toEqual(date.toString());
         expect(adapter.deserialize(date))
             .not.toBe(date);
@@ -394,9 +394,9 @@ describe('LuxonDateAdapter', () => {
 
         expect(adapter.deserialize('1985-04-12T23:20:50.52Z')!.locale)
             .toBe('ja');
-        expect(adapter.deserialize(new Date()).locale)
+        expect(adapter.deserialize(new Date())?.locale)
             .toBe('ja');
-        expect(adapter.deserialize(adapter.today()).locale)
+        expect(adapter.deserialize(adapter.today())?.locale)
             .toBe('ja');
     });
 
@@ -423,7 +423,7 @@ describe('LuxonDateAdapter', () => {
             .toBe('ja-JP');
         expect(adapter.clone(adapter.today()).locale)
             .toBe('ja-JP');
-        expect(adapter.parse('1/1/2017', 'L/d/yyyy').locale)
+        expect(adapter.parse('1/1/2017', 'L/d/yyyy')?.locale)
             .toBe('ja-JP');
         expect(adapter.addCalendarDays(adapter.today(), 1).locale)
             .toBe('ja-JP');
