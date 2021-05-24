@@ -214,10 +214,8 @@ describe('LuxonDateAdapter', () => {
     });
 
     it('should not create DateTime date in utc format', () => {
-        adapter.setLocale('ru');
-
-        expect(adapter.createDate(2017, 1, 5).zoneName)
-            .not.toEqual('UTC');
+        expect(adapter.createDate(2017).zone.universal)
+            .toBe(false);
     });
 
     it('should get today\'s date', () => {
@@ -406,12 +404,12 @@ describe('LuxonDateAdapter', () => {
 
     it('setLocale should not modify global DateTime locale', () => {
         expect(DateTime.now().locale)
-            .toBe('ru');
+            .not.toBe('ja-JP');
 
         adapter.setLocale('ja-JP');
 
         expect(DateTime.now().locale)
-            .toBe('ru');
+            .not.toBe('ja-JP');
     });
 
     it('returned DateTime should have correct locale', () => {
@@ -492,23 +490,23 @@ describe('LuxonDateAdapter with MC_MOMENT_DATE_ADAPTER_OPTIONS override', () => 
 
     describe('use UTC', () => {
         it('should create date in UTC', () => {
-            expect(adapter.createDate(2017, 1, 5).zoneName)
-                .toBe('UTC');
+            expect(adapter.createDate(2017).zone.universal)
+                .toBe(true);
         });
 
         it('should create today in UTC', () => {
-            expect(adapter.today().zoneName)
-                .toBe('UTC');
+            expect(adapter.today().zone.universal)
+                .toBe(true);
         });
 
         it('should parse dates to UTC', () => {
-            expect(adapter.parse('1/2/2017', 'L/d/yyyy')!.zoneName)
-                .toBe('UTC');
+            expect(adapter.parse('1/2/2017', 'L/d/yyyy')!.zone.universal)
+                .toBe(true);
         });
 
         it('should return UTC date when deserializing', () => {
-            expect(adapter.deserialize('1985-04-12T23:20:50.52Z')!.zoneName)
-                .toBe('UTC');
+            expect(adapter.deserialize('1985-04-12T23:20:50.52Z')!.zone.universal)
+                .toBe(true);
         });
     });
 });
