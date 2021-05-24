@@ -35,7 +35,7 @@ const TEMPLATE_FILES = [
 ];
 
 const TAGS: string[] = ['angular', 'mosaic', 'example'];
-const angularVersion = '^9.0.0';
+const angularVersion = '^10.0.0';
 
 const dependencies = {
     '@ptsecurity/cdk': mosaicVersion,
@@ -51,9 +51,8 @@ const dependencies = {
     '@angular/platform-browser': angularVersion,
     '@angular/platform-browser-dynamic': angularVersion,
     '@angular/router': angularVersion,
-    'core-js': '^2.4.1',
+    'core-js': '^3.6.5',
     rxjs: '^6.5.0',
-    'web-animations-js': '^2.3.1',
     messageformat: '^2.0.5',
     tslib: '^1.10.0',
     'zone.js': '~0.10.3',
