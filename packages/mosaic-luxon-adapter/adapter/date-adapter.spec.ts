@@ -95,8 +95,6 @@ describe('LuxonDateAdapter', () => {
             // '9 дек' => ['9', 'дек'] => 'дек'
             .map((formattedDate) => formattedDate.split(NBSP)[1]);
 
-        console.log('shortMonthNames: ', shortMonthNames); // tslint:disable-line:no-console
-
         expect(shortMonthNames)
             .toEqual(['янв', 'фев', 'мар', 'апр', 'мая', 'июня', 'июля', 'авг', 'сен', 'окт', 'ноя', 'дек']);
     });
@@ -194,7 +192,7 @@ describe('LuxonDateAdapter', () => {
 
     it('should create DateTime date', () => {
         expect(adapter.createDate(2017).toString())
-            .toEqual(adapter.createDate(2017).toString());
+            .toEqual(DateTime.local(2017, 1, 1).toString());
     });
 
     it('should not create DateTime date with month over/under-flow', () => {
@@ -216,6 +214,8 @@ describe('LuxonDateAdapter', () => {
     });
 
     it('should not create DateTime date in utc format', () => {
+        adapter.setLocale('ru');
+
         expect(adapter.createDate(2017, 1, 5).zoneName)
             .not.toEqual('UTC');
     });
@@ -511,7 +511,6 @@ describe('LuxonDateAdapter with MC_MOMENT_DATE_ADAPTER_OPTIONS override', () => 
                 .toBe('UTC');
         });
     });
-
 });
 
 describe('LuxonDateAdapter formatter', () => {

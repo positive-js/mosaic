@@ -427,9 +427,9 @@ workflows:
                       - SonarCloud
                   requires:
                       - test_unit_cdk
+                      - test_unit_mosaic
                       - test_unit_mosaic-moment-adapter
                       - test_unit_mosaic-luxon-adapter
-                      - test_unit_mosaic
                       - test_unit_schematics
                   filters:
                       <<: *only_for_maintainers
@@ -437,9 +437,9 @@ workflows:
             - snapshot_publish:
                   requires:
                       - test_unit_cdk
+                      - test_unit_mosaic
                       - test_unit_mosaic-moment-adapter
                       - test_unit_mosaic-luxon-adapter
-                      - test_unit_mosaic
                       - test_unit_schematics
                   filters:
                       <<: *only_master

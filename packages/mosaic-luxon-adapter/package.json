@@ -21,8 +21,7 @@
     "peerDependencies": {
         "@angular/core": "{{NG_VERSION}}",
         "@angular/cdk": "{{NG_VERSION}}",
-        "@ptsecurity/cdk": "{{VERSION}}",
-        "messageformat": "^2.0.5"
+        "@ptsecurity/cdk": "{{VERSION}}"
     },
     "dependencies": {
         "tslib": "^2.0.1"
