@@ -115,6 +115,11 @@
         state-invalid-background: $form-field-light-color-scheme-states-invalid-background
     );
 
+    $forms: (
+        label: $forms-light-color-scheme-label,
+        legend: $forms-light-color-scheme-legend,
+    );
+
     $link: (
         text: $link-light-color-scheme-text,
         border-bottom: $link-light-color-scheme-border-bottom,
@@ -243,6 +248,7 @@
         card: $card,
         checkbox: $checkbox,
         form-field: $form-field,
+        forms: $forms,
         link: $link,
         modal: $modal,
         navbar: $navbar,
@@ -255,7 +261,7 @@
         tags: $tags,
         toggle: $toggle,
         tooltip: $tooltip,
-        vertical-navbar: $vertical-navbar,
+        vertical-navbar: $vertical-navbar
     );
 }
 
@@ -371,6 +377,11 @@
         state-hover-border: $form-field-dark-color-scheme-states-hover-border,
         state-invalid-border: $form-field-dark-color-scheme-states-invalid-border,
         state-invalid-background: $form-field-dark-color-scheme-states-invalid-background
+    );
+
+    $forms: (
+        label: $forms-dark-color-scheme-label,
+        legend: $forms-dark-color-scheme-legend,
     );
 
     $link: (
@@ -501,6 +512,7 @@
         card: $card,
         checkbox: $checkbox,
         form-field: $form-field,
+        $forms: $forms,
         link: $link,
         modal: $modal,
         navbar: $navbar,
@@ -513,6 +525,6 @@
         tags: $tags,
         toggle: $toggle,
         tooltip: $tooltip,
-        vertical-navbar: $vertical-navbar,
+        vertical-navbar: $vertical-navbar
     );
 }

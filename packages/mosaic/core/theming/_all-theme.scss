@@ -2,6 +2,7 @@
 @import '../core';
 @import '../styles/badges';
 @import '../styles/alerts';
+@import '../styles/forms';
 @import '../../autocomplete/autocomplete-theme';
 @import '../../button/button-theme';
 @import '../../card/card-theme';
@@ -53,6 +54,7 @@
     @include mc-divider-theme($theme);
     @include mc-dropdown-theme($theme);
     @include mc-form-field-theme($theme);
+    @include mc-forms-theme($theme);
     @include mc-icon-theme($theme);
     @include mc-input-theme($theme);
     @include mc-link-theme($theme);

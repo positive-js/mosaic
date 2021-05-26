@@ -1,5 +1,6 @@
 @import './typography';
 @import '../alerts';
+@import '../forms';
 @import '../badges';
 @import '../../../autocomplete/autocomplete-theme';
 @import '../../../button/button-theme';
@@ -43,6 +44,7 @@
     @include mc-datepicker-typography($config);
     @include mc-dropdown-typography($config);
     @include mc-form-field-typography($config);
+    @include mc-forms-typography($config);
     @include mc-input-typography($config);
     @include mc-link-typography($config);
     @include mc-list-typography($config);

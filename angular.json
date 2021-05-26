@@ -752,6 +752,47 @@
                 }
             }
         },
+        "dev-forms": {
+            "projectType": "application",
+            "root": "packages/mosaic-dev/forms",
+            "sourceRoot": "packages/mosaic-dev/forms",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/mosaic-dev/forms",
+                        "tsConfig": "packages/mosaic-dev/forms/tsconfig.app.json",
+                        "index": "packages/mosaic-dev/index.html",
+                        "main": "packages/mosaic-dev/forms/main.ts",
+                        "aot": true,
+                        "polyfills": "packages/mosaic-dev/polyfills.ts"
+                    },
+                    "configurations": {
+                        "production": {
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "vendorChunk": false,
+                            "statsJson": true
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "dev-forms:build"
+                    }
+                }
+            }
+        },
         "dev-flex-layout": {
             "projectType": "application",
             "root": "packages/mosaic-dev/flex-layout",

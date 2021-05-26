@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 26 Apr 2021 12:11:44 GMT
+ * Generated on Wed, 26 May 2021 09:17:30 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
@@ -464,6 +464,22 @@ export const FormFieldSizeButtonWidth = "32px";
 export const FormFieldFontDefault = "body";
 export const FormFieldHintSizeMarginTop = "4px";
 export const FormFieldHintFontDefault = "caption";
+export const FormsLightColorSchemeLabel = "#999999";
+export const FormsLightColorSchemeLegend = "#4D4D4D";
+export const FormsDarkColorSchemeLabel = "#999999";
+export const FormsDarkColorSchemeLegend = "#F0F0F0";
+export const FormsSizeDefaultRowMarginBottom = "20px";
+export const FormsSizeDefaultLabelPaddingTop = "6px";
+export const FormsSizeDefaultControlPaddingLeft = "16px";
+export const FormsSizeDefaultLegendMarginTop = "32px";
+export const FormsSizeDefaultLegendMarginBottom = "16px";
+export const FormsSizeVerticalRowMarginBottom = "16px";
+export const FormsSizeVerticalLabelPaddingTop = "0";
+export const FormsSizeVerticalControlPaddingLeft = "24px";
+export const FormsSizeVerticalLegendMarginTop = "32px";
+export const FormsSizeVerticalLegendMarginBottom = "12px";
+export const FormsFontDefaultLabel = "body";
+export const FormsFontDefaultLegend = "subheading";
 export const InputSizePadding = "5px 16px";
 export const InputSizeWidth = "100%";
 export const InputSizeMinHeight = "30px";
