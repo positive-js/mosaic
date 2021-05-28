@@ -14,6 +14,8 @@
             > .mc-button,
             > .mc-icon-button {
                 @include border-right-radius(0);
+                @include border-left-radius(
+                    var(--mc-button-toggle-size-border-radius, $button-toggle-size-border-radius));
             }
         }
 
@@ -21,6 +23,8 @@
             > .mc-button,
             > .mc-icon-button {
                 @include border-left-radius(0);
+                @include border-right-radius(
+                    var(--mc-button-toggle-size-border-radius, $button-toggle-size-border-radius));
             }
         }
 
@@ -66,8 +70,8 @@
             > .mc-button,
             > .mc-icon-button {
                 @include border-bottom-radius(0);
-
-                border-top-right-radius: var(--mc-button-toggle-size-border-radius, $button-toggle-size-border-radius);
+                @include border-top-radius(
+                    var(--mc-button-toggle-size-border-radius, $button-toggle-size-border-radius));
             }
         }
 
@@ -76,8 +80,8 @@
             > .mc-icon-button {
                 @include border-top-radius(0);
 
-                border-bottom-left-radius:
-                    var(--mc-button-toggle-size-border-radius, $button-toggle-size-border-radius);
+                @include border-bottom-radius(
+                    var(--mc-button-toggle-size-border-radius, $button-toggle-size-border-radius));
             }
         }
 
