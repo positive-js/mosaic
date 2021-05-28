@@ -3,3 +3,6 @@
 
 ### Multiple
 <!-- example(button-toggle-multiple-overview) -->
+
+### Vertical
+<!-- example(button-toggle-vertical-overview) -->

@@ -1,0 +1,18 @@
+<mc-button-toggle-group class="vertical-group" #verticalGroup="mcButtonToggleGroup" [vertical]="true">
+    <mc-button-toggle value="1">
+        button 1
+    </mc-button-toggle>
+    <mc-button-toggle value="2">
+        button 2
+    </mc-button-toggle>
+    <mc-button-toggle value="3">
+        button 3
+    </mc-button-toggle>
+    <mc-button-toggle value="4">
+        button 4
+    </mc-button-toggle>
+</mc-button-toggle-group>
+
+<br><br><br>
+
+<div>Selected value: {{ verticalGroup.value }}</div>

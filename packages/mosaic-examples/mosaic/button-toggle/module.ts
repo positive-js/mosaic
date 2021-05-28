@@ -6,11 +6,13 @@ import {
     ButtonToggleMultipleOverviewExample
 } from './button-toggle-multiple-overview/button-toggle-multiple-overview-example';
 import { ButtonToggleOverviewExample } from './button-toggle-overview/button-toggle-overview-example';
+import { ButtonToggleVerticalOverviewExample } from './button-toggle-vertical-overview/button-toggle-vertical-overview-example';
 
 
 const EXAMPLES = [
     ButtonToggleOverviewExample,
-    ButtonToggleMultipleOverviewExample
+    ButtonToggleMultipleOverviewExample,
+    ButtonToggleVerticalOverviewExample
 ];
 
 @NgModule({
