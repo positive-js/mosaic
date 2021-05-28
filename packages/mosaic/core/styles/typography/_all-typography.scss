@@ -1,7 +1,9 @@
 @import './typography';
 @import '../alerts';
-@import '../forms';
 @import '../badges';
+@import '../../forms/forms-theme';
+@import '../../option/option-theme';
+@import '../../option/optgroup-theme';
 @import '../../../autocomplete/autocomplete-theme';
 @import '../../../button/button-theme';
 @import '../../../checkbox/checkbox-theme';
@@ -26,8 +28,6 @@
 @import '../../../tree/tree-theme';
 @import '../../../vertical-navbar/vertical-navbar-theme';
 @import '../../../table/table-theme';
-@import '../../option/option-theme';
-@import '../../option/optgroup-theme';
 
 
 @mixin mosaic-typography($config: null) {
