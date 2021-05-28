@@ -46,7 +46,7 @@
 
     .mc-badge {
         color: map-get($foreground, text);
-        border-color: mc-color($second, 400);
+        border-color: map-get($foreground, border);
     }
 
     .mc-badge_light {
