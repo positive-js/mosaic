@@ -63,10 +63,10 @@
     }
 }
 
-//.mc-form__fieldset.mc-form_horizontal {
-//    flex-direction: row;
-//
-//    & .mc-form__row:not(:first-child) {
-//        padding-left: var(--mc-forms-size-vertical-control-padding-left, #{$forms-size-vertical-control-padding-left});
-//    }
-//}
+.mc-form__fieldset.mc-horizontal {
+    flex-direction: row;
+
+    & .mc-form__row:not(:first-child) {
+        padding-left: var(--mc-forms-size-vertical-control-padding-left, #{$forms-size-vertical-control-padding-left});
+    }
+}

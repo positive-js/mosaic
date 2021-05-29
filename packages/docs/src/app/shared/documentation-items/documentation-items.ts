@@ -332,6 +332,19 @@ const DOCS: { [key: string]: DocCategory[] } = {
                     examples: ['validation-types']
                 }
             ]
+        },
+        {
+            id: 'core/styles',
+            name: 'Forms',
+            summary: 'styles',
+            items: [
+                {
+                    id: 'forms',
+                    name: 'Forms',
+                    summary: '',
+                    examples: ['forms-types']
+                }
+            ]
         }
     ],
     [CDK]: [

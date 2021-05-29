@@ -1,27 +1,18 @@
 import { NgModule } from '@angular/core';
 
 import {
-    McFormElement,
-    McFormFieldSet,
-    McFormHorizontal,
-    McFormRow,
-    McFormVertical
+    McForm,
+    McFormElement
 } from './forms.directive';
 
 
 @NgModule({
     exports: [
-        McFormHorizontal,
-        McFormVertical,
-        McFormRow,
-        McFormFieldSet,
+        McForm,
         McFormElement
     ],
     declarations: [
-        McFormHorizontal,
-        McFormVertical,
-        McFormRow,
-        McFormFieldSet,
+        McForm,
         McFormElement
     ]
 })
