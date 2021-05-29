@@ -93,7 +93,7 @@
         "merge2": "^1.2.3",
         "messageformat": "^2.0.5",
         "moment": "~2.23.0",
-        "ng-packagr": "^11.2.4",
+        "ng-packagr": "^12.0.0",
         "request": "^2.88.0",
         "resolve-bin": "^0.4.0",
         "sass": "^1.32.6",
