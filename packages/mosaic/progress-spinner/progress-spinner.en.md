@@ -39,9 +39,9 @@ Default: 'primary'
 Set theming of element
 
 ```html
-<mc-progress-spinner color="primary"></mc-progress-spinner>
-<mc-progress-spinner color="second"></mc-progress-spinner>
-<mc-progress-spinner color="error"></mc-progress-spinner>
+<mc-progress-spinner [color]="'primary'"></mc-progress-spinner>
+<mc-progress-spinner [color]="'second'"></mc-progress-spinner>
+<mc-progress-spinner [color]="'error'"></mc-progress-spinner>
 ```
 
 ### Theming
