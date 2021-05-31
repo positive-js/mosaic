@@ -1,5 +1,5 @@
 /* tslint:disable:no-magic-numbers */
-import { Component, ContentChildren, QueryList } from '@angular/core';
+import { Component } from '@angular/core';
 import { TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { McFormElement, McFormsModule } from '@ptsecurity/mosaic/core';
