@@ -179,7 +179,7 @@ export class McModalLongCustomComponent {
       <h4>{{ subtitle }}</h4>
       <p>
         <span>Get Modal instance in component</span>
-        <button mc-button color="primary" (click)="destroyModal()">destroy modal in the component</button>
+        <button mc-button [color]="'primary'" (click)="destroyModal()">destroy modal in the component</button>
       </p>
     </div>
   `
@@ -207,12 +207,12 @@ export class McModalCustomComponent {
             <h4>{{ subtitle }}</h4>
             <p>
                 <span>Get Modal instance in component</span>
-                <button mc-button color="primary" (click)="destroyModal()">destroy modal in the component</button>
+                <button mc-button [color]="'primary'" (click)="destroyModal()">destroy modal in the component</button>
             </p>
         </mc-modal-body>
 
         <div mc-modal-footer>
-            <button mc-button color="primary" >Save</button>
+            <button mc-button [color]="'primary'" >Save</button>
             <button mc-button autofocus>Close</button>
         </div>
   `

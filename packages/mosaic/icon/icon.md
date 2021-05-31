@@ -35,7 +35,7 @@ import { McIconModule } from '@ptsecurity/mosaic';
 1. Добавить атрибут `[color]`, используя следующие значения: *primary*, *second*, *error*.
 
 ```
-<i mc-icon="mc-gear_16" color="primary"></i>
+<i mc-icon="mc-gear_16" [color]="'primary'"></i>
 ```
 
 2. Более простой способ

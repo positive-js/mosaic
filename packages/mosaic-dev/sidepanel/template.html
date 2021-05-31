@@ -2,11 +2,11 @@
     <p class="mc-headline">Sidepanel demo</p>
 
     <div class="layout-row">
-        <button mc-button color="primary" (click)="openComponentSidepanel()">
+        <button mc-button [color]="'primary'" (click)="openComponentSidepanel()">
             <span>Open component sidepanel</span>
         </button>
 
-        <button class="template-button" mc-button color="primary" (click)="openTemplateSidepanel()">
+        <button class="template-button" mc-button [color]="'primary'" (click)="openTemplateSidepanel()">
             <span>Open template sidepanel</span>
         </button>
     </div>
@@ -24,16 +24,16 @@
         </mc-sidepanel-body>
         <mc-sidepanel-footer>
             <mc-sidepanel-actions align="left">
-                <button mc-button color="primary" (click)="openTemplateSidepanel()">
+                <button mc-button [color]="'primary'" (click)="openTemplateSidepanel()">
                     <span>Open another sidepanel</span>
                 </button>
             </mc-sidepanel-actions>
             <mc-sidepanel-actions align="right">
-                <button mc-button color="primary" (click)="openTemplateSidepanel()">
+                <button mc-button [color]="'primary'" (click)="openTemplateSidepanel()">
                     <span>Open another sidepanel</span>
                 </button>
 
-                <button mc-button color="second" mc-sidepanel-close>
+                <button mc-button [color]="'second'" mc-sidepanel-close>
                     <span>Close</span>
                 </button>
             </mc-sidepanel-actions>

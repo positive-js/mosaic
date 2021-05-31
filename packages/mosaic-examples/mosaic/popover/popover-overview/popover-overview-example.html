@@ -17,13 +17,13 @@
         <div class="flex-100 layout-row layout-align-space-between-center" cdkTrapFocus="true" cdkTrapFocusAutoCapture="true">
             <button class="step"
                     mc-button
-                    color="primary"
+                    [color]="'primary'"
                     (click)="changeStep(-1)">
                 &larr; Назад
             </button>
             <button class="step"
                     mc-button
-                    color="primary"
+                    [color]="'primary'"
                     (click)="changeStep(1)">
                 Дальше &rarr;
             </button>

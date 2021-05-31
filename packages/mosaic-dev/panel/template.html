@@ -15,7 +15,7 @@
                     <h1 class="mc-display-3 title">Some title</h1>
                 </div>
                 <div class="mc-panel__actions">
-                    <button mc-button color="primary">
+                    <button mc-button [color]="'primary'">
                         <i mc-icon="mc-angle-down-L_16"></i>
                     </button>
                 </div>
@@ -29,7 +29,7 @@
             </div>
             <div class="mc-panel__footer">
                 <div class="buttons-container">
-                    <button mc-button color="primary">Save</button>
+                    <button mc-button [color]="'primary'">Save</button>
                     <button mc-button class="footer-button">Cancel</button>
                 </div>
             </div>
@@ -81,13 +81,13 @@
                 <h1 class="mc-display-3 title">Narwhals</h1>
             </div>
             <div class="mc-panel__actions">
-                <button mc-button color="primary">
+                <button mc-button [color]="'primary'">
                     <i mc-icon="mc-gear_16"></i>
                 </button>
                 <button mc-button class="narwhals__action">
                     <i mc-icon="mc-hamburger_16"></i>
                 </button>
-                <button mc-button color="error" class="narwhals__action">
+                <button mc-button [color]="'error'" class="narwhals__action">
                     <i mc-icon="mc-close-S_16"></i>
                 </button>
             </div>
@@ -115,7 +115,7 @@
         </div>
         <div class="mc-panel__footer narwhals__footer">
             <span class="mc-small-text">Today narwhals made to smile 57 people</span>
-            <button mc-button color="primary">New narwhal</button>
+            <button mc-button [color]="'primary'">New narwhal</button>
         </div>
     </div>
 </div>

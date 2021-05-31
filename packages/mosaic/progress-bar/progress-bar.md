@@ -40,9 +40,9 @@
 Это свойство задает тему элемента.
 
 ```html
-<mc-progress-bar color="primary"></mc-progress-bar>
-<mc-progress-bar color="second"></mc-progress-bar>
-<mc-progress-bar color="error"></mc-progress-bar>
+<mc-progress-bar [color]="'primary'"></mc-progress-bar>
+<mc-progress-bar [color]="'second'"></mc-progress-bar>
+<mc-progress-bar [color]="'error'"></mc-progress-bar>
 ```
 
 ### Theming

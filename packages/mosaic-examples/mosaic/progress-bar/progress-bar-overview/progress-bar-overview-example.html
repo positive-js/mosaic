@@ -1,7 +1,7 @@
 <div class="example-progress-bar-group">
-    <mc-progress-bar class="example-progress-bar" [value]="percent" color="primary"></mc-progress-bar>
-    <mc-progress-bar class="example-progress-bar" [value]="percent" color="second"></mc-progress-bar>
-    <mc-progress-bar class="example-progress-bar" [value]="percent" color="error"></mc-progress-bar>
+    <mc-progress-bar class="example-progress-bar" [value]="percent" [color]="'primary'"></mc-progress-bar>
+    <mc-progress-bar class="example-progress-bar" [value]="percent" [color]="'second'"></mc-progress-bar>
+    <mc-progress-bar class="example-progress-bar" [value]="percent" [color]="'error'"></mc-progress-bar>
     <mc-form-field>
         <input mcInput [(ngModel)]="percent" type="number" min="0" max="100" step="5">
         <mc-stepper></mc-stepper>

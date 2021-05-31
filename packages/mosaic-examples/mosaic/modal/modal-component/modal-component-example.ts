@@ -47,12 +47,12 @@ export class ModalComponentExample {
             <h4>{{ subtitle }}</h4>
             <p>
                 <span>Get Modal instance in component</span>
-                <button mc-button color="primary" (click)="destroyModal('close')">destroy modal in the component</button>
+                <button mc-button [color]="'primary'" (click)="destroyModal('close')">destroy modal in the component</button>
             </p>
         </mc-modal-body>
 
         <div mc-modal-footer>
-            <button mc-button color="primary" (click)="destroyModal('save')">Save</button>
+            <button mc-button [color]="'primary'" (click)="destroyModal('save')">Save</button>
             <button mc-button autofocus (click)="destroyModal('close')">Close</button>
         </div>
   `
