@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DateTime } from 'luxon';
 
 
 /**
@@ -10,5 +11,5 @@ import { Component } from '@angular/core';
     styleUrls: ['datepicker-overview-example.css']
 })
 export class DatepickerOverviewExample {
-    date: Date;
+    date: DateTime;
 }

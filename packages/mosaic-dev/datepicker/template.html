@@ -24,10 +24,11 @@
         <input [formControl]="formControlValue"
                [placeholder]="selectedLanguage.placeholder"
                [mcDatepicker]="myDatepicker1"
-               [mcValidationTooltip]="tooltip"/>
+               [mcValidationTooltip]="tooltip"
+               (dateChange)="onDateChange()"/>
 <!--        <mc-datepicker-toggle [tabIndex]="7" mcSuffix [for]="myDatepicker1"></mc-datepicker-toggle>-->
         <i mc-icon="mc-calendar_16" mcSuffix></i>
-        <mc-datepicker #myDatepicker1></mc-datepicker>
+        <mc-datepicker #myDatepicker1 [startView]="'multi-year'"></mc-datepicker>
     </mc-form-field>
 
     <br/><br/>

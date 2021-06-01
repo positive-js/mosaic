@@ -257,15 +257,13 @@ export class McMonthView<D> implements AfterContentInit {
     init() {
         this.selectedDate = this.getDateInCurrentMonth(this.selected);
         this.todayDate = this.getDateInCurrentMonth(this.dateAdapter.today());
-        this.monthLabel =
-            this.dateAdapter.getMonthNames('short')[this.dateAdapter.getMonth(this.activeDate)];
+        this.monthLabel = this.dateAdapter.getMonthNames('short')[this.dateAdapter.getMonth(this.activeDate) - this.dateAdapter.firstMonth];
 
         this.monthLabel = this.monthLabel[0].toLocaleUpperCase() + this.monthLabel.substr(1);
 
         const firstOfMonth = this.dateAdapter.createDate(
             this.dateAdapter.getYear(this.activeDate),
-            this.dateAdapter.getMonth(this.activeDate),
-            1
+            this.dateAdapter.getMonth(this.activeDate)
         );
 
         this.firstWeekOffset =

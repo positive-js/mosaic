@@ -121,8 +121,9 @@ jobs:
             - attach_workspace:
                   at: ~/mosaic
             - run: yarn run build:cdk
-            - run: yarn run build:mosaic-moment-adapter
             - run: yarn run build:mosaic
+            - run: yarn run build:mosaic-luxon-adapter
+            - run: yarn run build:mosaic-moment-adapter
             - run: yarn run styles:built-all
             - persist_to_workspace:
                   root: ~/mosaic
@@ -205,6 +206,26 @@ jobs:
                   at: ~/mosaic
             - run:
                   command: yarn run unit:mosaic-moment-adapter
+                  environment:
+                      JUNIT_REPORT_PATH: junit/
+                      JUNIT_REPORT_NAME: test-results.xml
+                  when: always
+            - store_test_results:
+                  path: junit
+            - store_artifacts:
+                  path: junit
+            - persist_to_workspace:
+                  root: .
+                  paths:
+                      - ./dist/coverage
+
+    test_unit_mosaic-luxon-adapter:
+        <<: *job_defaults
+        steps:
+            - attach_workspace:
+                  at: ~/mosaic
+            - run:
+                  command: yarn run unit:mosaic-luxon-adapter
                   environment:
                       JUNIT_REPORT_PATH: junit/
                       JUNIT_REPORT_NAME: test-results.xml
@@ -377,6 +398,10 @@ workflows:
                   requires:
                       - build_packages
 
+            - test_unit_mosaic-luxon-adapter:
+                  requires:
+                      - build_packages
+
             - test_unit_mosaic:
                   requires:
                       - build_packages
@@ -390,6 +415,7 @@ workflows:
                       - test_unit_mosaic
                       - test_unit_cdk
                       - test_unit_mosaic-moment-adapter
+                      - test_unit_mosaic-luxon-adapter
                       - test_unit_schematics
                   filters:
                       <<: *ignore_release_branches
@@ -401,8 +427,9 @@ workflows:
                       - SonarCloud
                   requires:
                       - test_unit_cdk
-                      - test_unit_mosaic-moment-adapter
                       - test_unit_mosaic
+                      - test_unit_mosaic-moment-adapter
+                      - test_unit_mosaic-luxon-adapter
                       - test_unit_schematics
                   filters:
                       <<: *only_for_maintainers
@@ -410,8 +437,9 @@ workflows:
             - snapshot_publish:
                   requires:
                       - test_unit_cdk
-                      - test_unit_mosaic-moment-adapter
                       - test_unit_mosaic
+                      - test_unit_mosaic-moment-adapter
+                      - test_unit_mosaic-luxon-adapter
                       - test_unit_schematics
                   filters:
                       <<: *only_master
@@ -421,6 +449,7 @@ workflows:
                       - test_unit_mosaic
                       - test_unit_cdk
                       - test_unit_mosaic-moment-adapter
+                      - test_unit_mosaic-luxon-adapter
                       - test_unit_schematics
                   filters:
                       <<: *only_master

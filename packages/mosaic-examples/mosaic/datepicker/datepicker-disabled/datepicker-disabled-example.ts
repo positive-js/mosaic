@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
-import * as momentImported from 'moment';
-// @ts-ignore
-// tslint:disable-next-line:no-duplicate-imports
-import { default as _rollupMoment, Moment } from 'moment';
+import { DateAdapter } from '@ptsecurity/cdk/datetime';
+import { DateTime } from 'luxon';
 
 
-// tslint:disable-next-line
-const moment = _rollupMoment || momentImported;
 /**
  * @title Disabled datepicker
  */
@@ -17,13 +13,18 @@ const moment = _rollupMoment || momentImported;
 })
 export class DatepickerDisabledExample {
     sunday = 6;
-    date = moment();
-    minDate = moment().subtract(1, 'year');
-    maxDate = moment().add(1, 'years');
 
-    myFilter(date: Moment): boolean {
-        const day = date.day();
+    date: DateTime;
+    minDate: DateTime;
+    maxDate: DateTime;
 
-        return day !== 0 && day !== this.sunday;
+    constructor(private adapter: DateAdapter<DateTime>) {
+        this.date = this.adapter.today();
+        this.minDate = this.adapter.today().minus({ year: 1 });
+        this.maxDate = this.adapter.today().plus({ year: 1 });
+    }
+
+    myFilter(date: DateTime): boolean {
+        return date.day !== 0 && date.day !== this.sunday;
     }
 }

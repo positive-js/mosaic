@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
-import * as momentImported from 'moment';
-// @ts-ignore
-// tslint:disable-next-line:no-duplicate-imports
-import { default as _rollupMoment } from 'moment';
+import { DateAdapter } from '@ptsecurity/cdk/datetime';
+import { DateTime } from 'luxon';
 
 
-// tslint:disable-next-line
-const moment = _rollupMoment || momentImported;
 /**
  * @title Timepicker overview
  */
@@ -18,9 +14,12 @@ const moment = _rollupMoment || momentImported;
 export class TimepickerOverviewExample {
     isDisabled = false;
     isIconVisible = true;
-    moment = moment;
 
-    value = this.moment();
+    value: DateTime;
 
     timeFormat = 'HH:mm';
+
+    constructor(private adapter: DateAdapter<DateTime>) {
+        this.value = this.adapter.today();
+    }
 }

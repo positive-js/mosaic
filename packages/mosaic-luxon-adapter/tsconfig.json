@@ -1,0 +1,26 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "types": [
+            "node",
+            "jasmine"
+        ],
+        "paths": {
+            "@ptsecurity/cdk/*": ["./dist/cdk/*"],
+            "@ptsecurity/mosaic/*": ["./dist/mosaic/*"]
+        }
+    },
+    "include": [
+        "./**/*.ts"
+    ],
+    "angularCompilerOptions": {
+        "annotateForClosureCompiler": true,
+        "allowSyntheticDefaultImports": true,
+        "skipTemplateCodegen": true,
+        "strictMetadataEmit": true,
+        "flatModuleId": "@ptsecurity/mosaic-luxon-adapter",
+        "strictInjectionParameters": true,
+        "enableResourceInlining": true,
+        "enableIvy": false
+    }
+}

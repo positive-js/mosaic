@@ -24,6 +24,7 @@
         "@angular/forms": "{{NG_VERSION}}",
         "@ptsecurity/cdk": "{{VERSION}}",
         "@ptsecurity/mosaic-moment-adapter": "{{VERSION}}",
+        "@ptsecurity/mosaic-luxon-adapter": "{{VERSION}}",
         "@ptsecurity/mosaic-icons": "^5.0.0"
     },
     "dependencies": {

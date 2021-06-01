@@ -6,7 +6,8 @@
             "@ptsecurity/cdk/*": ["../../dist/cdk/*"],
             "@ptsecurity/mosaic/*": ["../../dist/mosaic/*"],
             "@ptsecurity/mosaic-examples": ["../../dist/mosaic-examples"],
-            "@ptsecurity/mosaic-moment-adapter/*": ["../../dist/mosaic-moment-adapter/*"]
+            "@ptsecurity/mosaic-moment-adapter/*": ["../../dist/mosaic-moment-adapter/*"],
+            "@ptsecurity/mosaic-luxon-adapter/*": ["../../dist/mosaic-luxon-adapter/*"]
         }
     },
     "include": [

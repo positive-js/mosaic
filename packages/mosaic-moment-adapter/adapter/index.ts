@@ -9,13 +9,11 @@ export * from './moment-date-adapter';
 export * from './moment-date-formats';
 
 @NgModule({
-    providers: [
-        {
-            provide: DateAdapter,
-            useClass: MomentDateAdapter,
-            deps: [ MC_DATE_LOCALE, MC_MOMENT_DATE_ADAPTER_OPTIONS ]
-        }
-    ]
+    providers: [{
+        provide: DateAdapter,
+        useClass: MomentDateAdapter,
+        deps: [MC_DATE_LOCALE, MC_MOMENT_DATE_ADAPTER_OPTIONS]
+    }]
 })
 export class MomentDateModule {}
 

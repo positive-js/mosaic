@@ -251,6 +251,37 @@
                 }
             }
         },
+        "mosaic-luxon-adapter": {
+            "projectType": "library",
+            "root": "packages/mosaic-luxon-adapter",
+            "sourceRoot": "packages/mosaic-luxon-adapter",
+            "architect": {
+                "packagr": {
+                    "builder": "@angular-devkit/build-angular:ng-packagr",
+                    "options": {
+                        "tsConfig": "packages/mosaic-luxon-adapter/tsconfig.lib.json",
+                        "project": "packages/mosaic-luxon-adapter/ng-package.json"
+                    }
+                },
+                "build": {
+                    "builder": "@ptsecurity/builders:packager",
+                    "options": {
+                        "buildTarget": "packagr",
+                        "versionPlaceholder": "{{VERSION}}",
+                        "ngVersionPlaceholder": "{{NG_VERSION}}"
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "karmaConfig": "packages/mosaic-luxon-adapter/karma.conf.js",
+                        "main": "packages/mosaic-luxon-adapter/test.ts",
+                        "tsConfig": "packages/mosaic-luxon-adapter/tsconfig.spec.json",
+                        "codeCoverage": true
+                    }
+                }
+            }
+        },
         "mosaic-examples": {
             "projectType": "library",
             "root": "packages/mosaic-examples",
@@ -666,6 +697,88 @@
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
                         "browserTarget": "dev-date-formatter:build"
+                    }
+                }
+            }
+        },
+        "dev-date-formatter-luxon": {
+            "projectType": "application",
+            "root": "packages/mosaic-dev/date-formatter-luxon",
+            "sourceRoot": "packages/mosaic-dev/date-formatter-luxon",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/mosaic-dev/date-formatter-luxon",
+                        "tsConfig": "packages/mosaic-dev/date-formatter-luxon/tsconfig.app.json",
+                        "index": "packages/mosaic-dev/index.html",
+                        "main": "packages/mosaic-dev/date-formatter-luxon/main.ts",
+                        "aot": true,
+                        "polyfills": "packages/mosaic-dev/polyfills.ts"
+                    },
+                    "configurations": {
+                        "production": {
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "vendorChunk": false,
+                            "statsJson": true
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "dev-date-formatter-luxon:build"
+                    }
+                }
+            }
+        },
+        "dev-date-formatter-moment": {
+            "projectType": "application",
+            "root": "packages/mosaic-dev/date-formatter-moment",
+            "sourceRoot": "packages/mosaic-dev/date-formatter-moment",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/mosaic-dev/date-formatter-moment",
+                        "tsConfig": "packages/mosaic-dev/date-formatter-moment/tsconfig.app.json",
+                        "index": "packages/mosaic-dev/index.html",
+                        "main": "packages/mosaic-dev/date-formatter-moment/main.ts",
+                        "aot": true,
+                        "polyfills": "packages/mosaic-dev/polyfills.ts"
+                    },
+                    "configurations": {
+                        "production": {
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "vendorChunk": false,
+                            "statsJson": true
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "dev-date-formatter-moment:build"
                     }
                 }
             }

@@ -158,10 +158,10 @@ export class McMultiYearView<D> implements AfterContentInit {
 
     /** Handles when a new year is selected. */
     onYearSelected(year: number) {
-        this.yearSelected.emit(this.dateAdapter.createDate(year, 0, 1));
+        this.yearSelected.emit(this.dateAdapter.createDate(year));
         const month = this.dateAdapter.getMonth(this.activeDate);
         const daysInMonth =
-            this.dateAdapter.getNumDaysInMonth(this.dateAdapter.createDate(year, month, 1));
+            this.dateAdapter.getNumDaysInMonth(this.dateAdapter.createDate(year, month));
         this.selectedChange.emit(
             this.dateAdapter.createDate(year, month, Math.min(this.dateAdapter.getDate(this.activeDate), daysInMonth))
         );
@@ -241,7 +241,7 @@ export class McMultiYearView<D> implements AfterContentInit {
 
     /** Creates an McCalendarCell for the given year. */
     private createCellForYear(year: number) {
-        const yearName = this.dateAdapter.getYearName(this.dateAdapter.createDate(year, 0, 1));
+        const yearName = this.dateAdapter.getYearName(this.dateAdapter.createDate(year));
 
         return new McCalendarCell(year, yearName, yearName, this.shouldEnableYear(year));
     }
@@ -260,7 +260,7 @@ export class McMultiYearView<D> implements AfterContentInit {
             return true;
         }
 
-        const firstOfYear = this.dateAdapter.createDate(year, 0, 1);
+        const firstOfYear = this.dateAdapter.createDate(year);
 
         // If any date in the year is enabled count the year as enabled.
         for (let date = firstOfYear; this.dateAdapter.getYear(date) === year;

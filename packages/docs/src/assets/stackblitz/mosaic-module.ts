@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CdkTreeModule } from '@ptsecurity/cdk/tree';
-import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
+import { McLuxonDateModule } from '@ptsecurity/mosaic-luxon-adapter/adapter';
 import { McAutocompleteModule } from '@ptsecurity/mosaic/autocomplete';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McButtonToggleModule } from '@ptsecurity/mosaic/button-toggle';
@@ -53,7 +53,7 @@ const MC_COMPONENTS = [
     McLinkModule,
     McListModule,
     McModalModule,
-    McMomentDateModule,
+    McLuxonDateModule,
     McNavbarModule,
     McPopoverModule,
     McProgressBarModule,

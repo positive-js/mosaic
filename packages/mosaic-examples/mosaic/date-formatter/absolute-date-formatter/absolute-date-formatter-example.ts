@@ -1,19 +1,10 @@
 /* tslint:disable:no-magic-numbers */
 import { Component } from '@angular/core';
 import { DateAdapter, MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
-import { MomentDateAdapter } from '@ptsecurity/mosaic-moment-adapter/adapter';
+import { LuxonDateAdapter } from '@ptsecurity/mosaic-luxon-adapter/adapter';
+import { DateFormatter } from '@ptsecurity/mosaic/core';
+import { DateTime } from 'luxon';
 
-// Depending on whether rollup is used, moment needs to be imported differently.
-// Since Moment.js doesn't have a default export, we normally need to import using the `* as`
-// syntax. However, rollup creates a synthetic default module and we thus need to import it using
-// the `default as` syntax.
-// tslint:disable-next-line:ordered-imports
-import * as _moment from 'moment';
-// tslint:disable-next-line:no-duplicate-imports
-import { default as _rollupMoment, Moment } from 'moment';
-
-
-const moment = _rollupMoment || _moment;
 
 /**
  * @title Basic progress absolute-date-formatter
@@ -24,7 +15,7 @@ const moment = _rollupMoment || _moment;
     styleUrls: ['absolute-date-formatter-example.css'],
     providers: [
         { provide: MC_DATE_LOCALE, useValue: 'ru' },
-        { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MC_DATE_LOCALE] }
+        { provide: DateAdapter, useClass: LuxonDateAdapter, deps: [MC_DATE_LOCALE] }
     ]
 })
 export class AbsoluteDateFormatterExample {
@@ -55,7 +46,7 @@ export class AbsoluteDateFormatterExample {
         }
     };
 
-    constructor(private dateAdapter: DateAdapter<Moment>) {
+    constructor(private adapter: DateAdapter<DateTime>, private formatter: DateFormatter<DateTime>) {
         this.populateAbsoluteLong('ru');
         this.populateAbsoluteLong('en');
 
@@ -64,32 +55,32 @@ export class AbsoluteDateFormatterExample {
     }
 
     private populateAbsoluteShort(locale: string) {
-        this.dateAdapter.setLocale(locale);
+        this.formatter.setLocale(locale);
+        this.adapter.setLocale(locale);
+
+        const now = this.adapter.today();
 
         const absoluteShort = this.formats[locale].absolute.short;
 
-        absoluteShort.date.currentYear = this.dateAdapter.absoluteShortDate(moment());
-        absoluteShort.date.notCurrentYear = this.dateAdapter.absoluteShortDate(moment().subtract(1, 'years'));
-        absoluteShort.dateTime.currentYear = this.dateAdapter.absoluteShortDateTime(moment());
-        absoluteShort.dateTime.notCurrentYear = this.dateAdapter.absoluteShortDateTime(
-            moment().subtract(1, 'years')
-        );
-        absoluteShort.dateTime.milliseconds = this.dateAdapter.absoluteShortDateTime(moment(), { milliseconds: true });
-        absoluteShort.dateTime.microseconds = this.dateAdapter.absoluteShortDateTime(moment(), { microseconds: true });
+        absoluteShort.date.currentYear = this.formatter.absoluteShortDate(now);
+        absoluteShort.date.notCurrentYear = this.formatter.absoluteShortDate(now.minus({ years: 1 }));
+        absoluteShort.dateTime.currentYear = this.formatter.absoluteShortDateTime(now);
+        absoluteShort.dateTime.notCurrentYear = this.formatter.absoluteShortDateTime(now.minus({ years: 1 }));
+        absoluteShort.dateTime.milliseconds = this.formatter.absoluteShortDateTime(now, { milliseconds: true });
     }
 
     private populateAbsoluteLong(locale: string) {
-        this.dateAdapter.setLocale(locale);
+        this.formatter.setLocale(locale);
+        this.adapter.setLocale(locale);
+
+        const now = this.adapter.today();
 
         const absoluteLong = this.formats[locale].absolute.long;
 
-        absoluteLong.date.currentYear = this.dateAdapter.absoluteLongDate(moment());
-        absoluteLong.date.notCurrentYear = this.dateAdapter.absoluteLongDate(moment().subtract(1, 'years'));
-        absoluteLong.dateTime.currentYear = this.dateAdapter.absoluteLongDateTime(moment());
-        absoluteLong.dateTime.notCurrentYear = this.dateAdapter.absoluteLongDateTime(
-            moment().subtract(1, 'years')
-        );
-        absoluteLong.dateTime.milliseconds = this.dateAdapter.absoluteLongDateTime(moment(), { milliseconds: true });
-        absoluteLong.dateTime.microseconds = this.dateAdapter.absoluteLongDateTime(moment(), { microseconds: true });
+        absoluteLong.date.currentYear = this.formatter.absoluteLongDate(now);
+        absoluteLong.date.notCurrentYear = this.formatter.absoluteLongDate(now.minus({ years: 1 }));
+        absoluteLong.dateTime.currentYear = this.formatter.absoluteLongDateTime(now);
+        absoluteLong.dateTime.notCurrentYear = this.formatter.absoluteLongDateTime(now.minus({ years: 1 }));
+        absoluteLong.dateTime.milliseconds = this.formatter.absoluteLongDateTime(now, { milliseconds: true });
     }
 }

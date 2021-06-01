@@ -3,30 +3,21 @@
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { DateAdapter, MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
-import { McMomentDateModule, MomentDateAdapter } from '@ptsecurity/mosaic-moment-adapter/adapter';
+import { LuxonDateAdapter } from '@ptsecurity/mosaic-luxon-adapter/adapter';
+import { DateFormatter } from '@ptsecurity/mosaic/core';
+import { DateTime } from 'luxon';
 
-// Depending on whether rollup is used, moment needs to be imported differently.
-// Since Moment.js doesn't have a default export, we normally need to import using the `* as`
-// syntax. However, rollup creates a synthetic default module and we thus need to import it using
-// the `default as` syntax.
-// tslint:disable-next-line:ordered-imports
-import * as _moment from 'moment';
-// @ts-ignore
-// tslint:disable-next-line:no-duplicate-imports
-import { default as _rollupMoment, Moment } from 'moment';
-
-
-const moment = _rollupMoment || _moment;
 
 @Component({
     selector: 'app',
     templateUrl: 'template.html',
     styleUrls: ['../main.scss', 'styles.scss'],
-    encapsulation: ViewEncapsulation.None,
     providers: [
         { provide: MC_DATE_LOCALE, useValue: 'ru' },
-        { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MC_DATE_LOCALE] }
-    ]
+        { provide: DateAdapter, useClass: LuxonDateAdapter },
+        { provide: DateFormatter, deps: [DateAdapter, MC_DATE_LOCALE] }
+    ],
+    encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent {
     ru: any = {
@@ -89,7 +80,10 @@ export class DemoComponent {
         }
     };
 
-    constructor(private dateAdapter: DateAdapter<Moment>) {
+    constructor(
+        private dateFormatter: DateFormatter<DateTime>,
+        private dateAdapter: DateAdapter<DateTime>
+    ) {
         this.populateAbsoluteLong('ru');
         this.populateAbsoluteLong('en');
 
@@ -113,184 +107,181 @@ export class DemoComponent {
     }
 
     private populateRangeShort(locale: string) {
-        this.dateAdapter.setLocale(locale);
+        this.dateFormatter.setLocale(locale);
 
         const shortRange = this[locale].range.short;
+        const now = this.dateAdapter.today();
 
-        shortRange.date.currentMonth = this.dateAdapter.rangeShortDate(moment().date(1), moment().date(10));
-        shortRange.date.notCurrentYear = this.dateAdapter.rangeShortDate(
-            moment().date(1).month(1),
-            moment().date(10).month(2)
+        shortRange.date.currentMonth = this.dateFormatter.rangeShortDate(now.set({ day: 1 }), now.set({ day: 10 }));
+        shortRange.date.notCurrentYear = this.dateFormatter.rangeShortDate(
+            now.set({ day: 1, month: 1 }),
+            now.set({ day: 10, month: 2 })
         );
-        shortRange.date.startsNotCurrentYear = this.dateAdapter.rangeShortDate(
-            moment().date(1).month(1).subtract(1, 'years'),
-            moment().date(10).month(2)
+        shortRange.date.startsNotCurrentYear = this.dateFormatter.rangeShortDate(
+            now.set({ day: 1, month: 1 }).minus({ years: 1 }),
+            now.set({ day: 10, month: 2 })
         );
-        shortRange.date.endsNotCurrentYear = this.dateAdapter.rangeShortDate(
-            moment().date(1).month(1),
-            moment().date(10).month(2).add(1, 'years')
+        shortRange.date.endsNotCurrentYear = this.dateFormatter.rangeShortDate(
+            now.set({ day: 1, month: 1 }),
+            now.set({ day: 10, month: 2 }).plus({ years: 1 })
         );
-        shortRange.dateTime.sameDateCurrentYear = this.dateAdapter.rangeShortDateTime(
-            moment().date(10).hour(10).minutes(14),
-            moment().date(10).hour(11).minutes(28)
+        shortRange.dateTime.sameDateCurrentYear = this.dateFormatter.rangeShortDateTime(
+            now.set({ day: 10, hour: 10, minute: 14 }),
+            now.set({ day: 10, hour: 11, minute: 28 })
         );
-        shortRange.dateTime.sameDateNotCurrentYear = this.dateAdapter.rangeShortDateTime(
-            moment().date(11).month(1).subtract(1, 'years').hour(10).minutes(14),
-            moment().date(11).month(1).subtract(1, 'years').hour(11).minutes(28)
+        shortRange.dateTime.sameDateNotCurrentYear = this.dateFormatter.rangeShortDateTime(
+            now.set({ month: 1, day: 11 }).minus({ years: 1 }).set({ hour: 10, minute: 14 }),
+            now.set({ month: 1, day: 11 }).minus({ years: 1 }).set({ hour: 11, minute: 28 })
         );
-        shortRange.dateTime.notCurrentMonth = this.dateAdapter.rangeShortDateTime(
-            moment().date(1).month(1).hour(10).minutes(14),
-            moment().date(1).month(2).hour(11).minutes(28)
+        shortRange.dateTime.notCurrentMonth = this.dateFormatter.rangeShortDateTime(
+            now.set({ month: 1, day: 1, hour: 10, minute: 14 }),
+            now.set({ month: 2, day: 1, hour: 11, minute: 28 })
         );
-        shortRange.dateTime.startsNotCurrentYear = this.dateAdapter.rangeShortDateTime(
-            moment().date(1).month(1).subtract(1, 'years').hour(10).minutes(14),
-            moment().date(1).month(2).hour(11).minutes(28)
+        shortRange.dateTime.startsNotCurrentYear = this.dateFormatter.rangeShortDateTime(
+            now.set({ month: 1, day: 1 }).minus({ years: 1 }).set({ hour: 10, minute: 14 }),
+            now.set({ month: 2, day: 1, hour: 11, minute: 28 })
         );
-        shortRange.dateTime.endsNotCurrentYear = this.dateAdapter.rangeShortDateTime(
-            moment().date(1).month(1).hour(10).minutes(14),
-            moment().date(1).month(2).add(1, 'years').hour(11).minutes(28)
+        shortRange.dateTime.endsNotCurrentYear = this.dateFormatter.rangeShortDateTime(
+            now.set({ month: 1, day: 1, hour: 10, minute: 14 }),
+            now.set({ day: 1, month: 2 }).plus({ years: 1 }).set({ hour: 11, minute: 28 })
         );
     }
 
     private populateRangeMiddle(locale: string) {
-        this.dateAdapter.setLocale(locale);
+        this.dateFormatter.setLocale(locale);
 
         const middleRange = this[locale].range.middle;
+        const now = this.dateAdapter.today();
 
-        middleRange.dateTime.currentYear = this.dateAdapter.rangeMiddleDateTime(moment().date(1), moment().date(10));
-        middleRange.dateTime.sameDateCurrentYear = this.dateAdapter.rangeMiddleDateTime(
-            moment().date(10).hour(10).minutes(14),
-            moment().date(10).hour(10).minutes(28)
+        middleRange.dateTime.currentYear = this.dateFormatter.rangeMiddleDateTime(
+            now.set({ day: 1 }),
+            now.set({ day: 10 })
         );
-        middleRange.dateTime.sameDateNotCurrentYear = this.dateAdapter.rangeMiddleDateTime(
-            moment().date(11).month(1).subtract(1, 'years').hour(10).minutes(14),
-            moment().date(11).month(1).subtract(1, 'years').hour(11).minutes(28)
+        middleRange.dateTime.sameDateCurrentYear = this.dateFormatter.rangeMiddleDateTime(
+            now.set({ day: 10, hour: 10, minute: 14 }),
+            now.set({ day: 10, hour: 10, minute: 28 })
         );
-        middleRange.dateTime.notCurrentMonth = this.dateAdapter.rangeMiddleDateTime(
-            moment().date(1).month(1).hour(10).minutes(14),
-            moment().date(1).month(2).hour(11).minutes(28)
+        middleRange.dateTime.sameDateNotCurrentYear = this.dateFormatter.rangeMiddleDateTime(
+            now.set({ month: 1, day: 11 }).minus({ years: 1 }).set({ hour: 10, minute: 14 }),
+            now.set({ month: 1, day: 11 }).minus({ years: 1 }).set({ hour: 11, minute: 28 })
         );
-        middleRange.dateTime.startsNotCurrentYear = this.dateAdapter.rangeMiddleDateTime(
-            moment().date(1).month(1).subtract(1, 'years').hour(10).minutes(14),
-            moment().date(1).month(1).hour(11).minutes(28)
+        middleRange.dateTime.notCurrentMonth = this.dateFormatter.rangeMiddleDateTime(
+            now.set({ month: 1, day: 1, hour: 10, minute: 14 }),
+            now.set({ month: 2, day: 1, hour: 11, minute: 28 })
         );
-        middleRange.dateTime.endsNotCurrentYear = this.dateAdapter.rangeMiddleDateTime(
-            moment().date(1).month(1).hour(10).minutes(14),
-            moment().date(1).month(1).add(1, 'years').hour(11).minutes(28)
+        middleRange.dateTime.startsNotCurrentYear = this.dateFormatter.rangeMiddleDateTime(
+            now.set({ month: 1, day: 1 }).minus({ years: 1 }).set({ hour: 10, minute: 14 }),
+            now.set({ month: 1, day: 1, hour: 11, minute: 28 })
+        );
+        middleRange.dateTime.endsNotCurrentYear = this.dateFormatter.rangeMiddleDateTime(
+            now.set({ month: 1, day: 1, hour: 10, minute: 14 }),
+            now.set({ month: 1, day: 1 }).plus({ years: 1 }).set({ hour: 11, minute: 28 })
         );
     }
 
     private populateRangeLong(locale: string) {
-        this.dateAdapter.setLocale(locale);
+        this.dateFormatter.setLocale(locale);
 
         const longRange = this[locale].range.long;
+        const now = this.dateAdapter.today();
 
-        longRange.date.currentMonth = this.dateAdapter.rangeLongDate(moment().date(1), moment().date(10));
-        longRange.date.notCurrentYear = this.dateAdapter.rangeLongDate(
-            moment().date(1).month(1),
-            moment().date(10).month(2)
+        longRange.date.currentMonth = this.dateFormatter.rangeLongDate(now.set({ day: 1 }), now.set({ day: 10 }));
+        longRange.date.notCurrentYear = this.dateFormatter.rangeLongDate(
+            now.set({ month: 1, day: 1 }),
+            now.set({ month: 2, day: 10 })
         );
-        longRange.date.startsNotCurrentYear = this.dateAdapter.rangeLongDate(
-            moment().date(1).month(1).subtract(1, 'years'),
-            moment().date(10).month(2)
+        longRange.date.startsNotCurrentYear = this.dateFormatter.rangeLongDate(
+            now.set({ month: 1, day: 1 }).minus({ years: 1 }),
+            now.set({ month: 2, day: 10 })
         );
-        longRange.date.endsNotCurrentYear = this.dateAdapter.rangeLongDate(
-            moment().date(1).month(1),
-            moment().date(10).month(2).add(1, 'years')
+        longRange.date.endsNotCurrentYear = this.dateFormatter.rangeLongDate(
+            now.set({ month: 1, day: 1 }),
+            now.set({ month: 2, day: 10 }).plus({ years: 1 })
         );
-        longRange.dateTime.sameDateCurrentYear = this.dateAdapter.rangeLongDateTime(
-            moment().date(10).hour(10).minutes(14),
-            moment().date(10).hour(11).minutes(28)
+        longRange.dateTime.sameDateCurrentYear = this.dateFormatter.rangeLongDateTime(
+            now.set({ day: 10, hour: 10, minute: 14 }),
+            now.set({ day: 10, hour: 11, minute: 28 })
         );
-        longRange.dateTime.sameDateNotCurrentYear = this.dateAdapter.rangeLongDateTime(
-            moment().date(11).month(1).subtract(1, 'years').hour(10).minutes(14),
-            moment().date(11).month(1).subtract(1, 'years').hour(11).minutes(28)
+        longRange.dateTime.sameDateNotCurrentYear = this.dateFormatter.rangeLongDateTime(
+            now.set({ month: 1, day: 11 }).minus({ years: 1 }).set({ hour: 10, minute: 14 }),
+            now.set({ month: 1, day: 11 }).minus({ years: 1 }).set({ hour: 11, minute: 28 })
         );
-        longRange.dateTime.notCurrentMonth = this.dateAdapter.rangeLongDateTime(
-            moment().date(1).month(1).hour(10).minutes(14),
-            moment().date(1).month(2).hour(11).minutes(28)
+        longRange.dateTime.notCurrentMonth = this.dateFormatter.rangeLongDateTime(
+            now.set({ month: 1, day: 1, hour: 10, minute: 14 }),
+            now.set({ month: 2, day: 1, hour: 11, minute: 28 })
         );
-        longRange.dateTime.startsNotCurrentYear = this.dateAdapter.rangeLongDateTime(
-            moment().date(1).month(1).subtract(1, 'years').hour(10).minutes(14),
-            moment().date(1).month(2).hour(11).minutes(28)
+        longRange.dateTime.startsNotCurrentYear = this.dateFormatter.rangeLongDateTime(
+            now.set({ month: 1, day: 1 }).minus({ years: 1 }).set({ hour: 10, minute: 14 }),
+            now.set({ month: 2, day: 1, hour: 11, minute: 28 })
         );
-        longRange.dateTime.endsNotCurrentYear = this.dateAdapter.rangeLongDateTime(
-            moment().date(1).month(1).hour(10).minutes(14),
-            moment().date(1).month(2).add(1, 'years').hour(11).minutes(28)
+        longRange.dateTime.endsNotCurrentYear = this.dateFormatter.rangeLongDateTime(
+            now.set({ month: 1, day: 1, hour: 10, minute: 14 }),
+            now.set({ month: 2, day: 1 }).minus({ years: 1 }).set({ hour: 11, minute: 28 })
         );
     }
 
     private populateRelativeShort(locale: string) {
-        this.dateAdapter.setLocale(locale);
+        this.dateFormatter.setLocale(locale);
 
         const relativeShort = this[locale].relative.short;
+        const now = this.dateAdapter.today();
 
-        relativeShort.secondsAgo = this.dateAdapter.relativeShortDate(moment().subtract(1, 'seconds'));
-        relativeShort.minutesAgo = this.dateAdapter.relativeShortDate(moment().subtract(1, 'minutes'));
-        relativeShort.today = this.dateAdapter.relativeShortDate(moment().subtract(1, 'hours'));
-        relativeShort.yesterday = this.dateAdapter.relativeShortDate(moment().subtract(1, 'days'));
-        relativeShort.beforeYesterdayCurrentYear = this.dateAdapter.relativeShortDate(
-            moment().subtract(2, 'days')
-        );
-        relativeShort.beforeYesterdayNotCurrentYear = this.dateAdapter.relativeShortDate(
-            moment().subtract(1, 'years').subtract(2, 'days')
+        relativeShort.secondsAgo = this.dateFormatter.relativeShortDate(now.minus({ seconds: 1 }));
+        relativeShort.minutesAgo = this.dateFormatter.relativeShortDate(now.minus({ minute: 1 }));
+        relativeShort.today = this.dateFormatter.relativeShortDate(now.minus({ hours: 1 }));
+        relativeShort.yesterday = this.dateFormatter.relativeShortDate(now.minus({ days: 1 }));
+        relativeShort.beforeYesterdayCurrentYear = this.dateFormatter.relativeShortDate(now.minus({ days: 2 }));
+        relativeShort.beforeYesterdayNotCurrentYear = this.dateFormatter.relativeShortDate(
+            now.minus({ years: 1, days: 2 })
         );
     }
 
     private populateRelativeLong(locale: string) {
-        this.dateAdapter.setLocale(locale);
+        this.dateFormatter.setLocale(locale);
 
         const relativeLong = this[locale].relative.long;
+        const now = this.dateAdapter.today();
 
-        relativeLong.secondsAgo = this.dateAdapter.relativeLongDate(moment().subtract(1, 'seconds'));
-        relativeLong.minutesAgo = this.dateAdapter.relativeLongDate(moment().subtract(1, 'minutes'));
-        relativeLong.today = this.dateAdapter.relativeLongDate(moment().subtract(1, 'hours'));
-        relativeLong.yesterday = this.dateAdapter.relativeLongDate(moment().subtract(1, 'days'));
-        relativeLong.beforeYesterdayCurrentYear = this.dateAdapter.relativeLongDate(
-            moment().subtract(2, 'days')
-        );
-        relativeLong.beforeYesterdayNotCurrentYear = this.dateAdapter.relativeLongDate(
-            moment().subtract(1, 'years').subtract(2, 'days')
+        relativeLong.secondsAgo = this.dateFormatter.relativeLongDate(now.minus({ seconds: 1 }));
+        relativeLong.minutesAgo = this.dateFormatter.relativeLongDate(now.minus({ minute: 1 }));
+        relativeLong.today = this.dateFormatter.relativeLongDate(now.minus({ hours: 1 }));
+        relativeLong.yesterday = this.dateFormatter.relativeLongDate(now.minus({ days: 1 }));
+        relativeLong.beforeYesterdayCurrentYear = this.dateFormatter.relativeLongDate(now.minus({ days: 2 }));
+        relativeLong.beforeYesterdayNotCurrentYear = this.dateFormatter.relativeLongDate(
+            now.minus({ years: 1, days: 2 })
         );
     }
 
     private populateAbsoluteShort(locale: string) {
-        this.dateAdapter.setLocale(locale);
+        this.dateFormatter.setLocale(locale);
 
         const absoluteShort = this[locale].absolute.short;
+        const now = this.dateAdapter.today();
 
-        absoluteShort.date.currentYear = this.dateAdapter.absoluteShortDate(moment());
-        absoluteShort.date.notCurrentYear = this.dateAdapter.absoluteShortDate(moment().subtract(1, 'years'));
-        absoluteShort.dateTime.currentYear = this.dateAdapter.absoluteShortDateTime(moment());
-        absoluteShort.dateTime.notCurrentYear = this.dateAdapter.absoluteShortDateTime(
-            moment().subtract(1, 'years')
-        );
-        absoluteShort.dateTime.milliseconds = this.dateAdapter.absoluteShortDateTime(moment(), { milliseconds: true });
-        absoluteShort.dateTime.microseconds = this.dateAdapter.absoluteShortDateTime(moment(), { microseconds: true });
+        absoluteShort.date.currentYear = this.dateFormatter.absoluteShortDate(now);
+        absoluteShort.date.notCurrentYear = this.dateFormatter.absoluteShortDate(now.minus({ years: 1 }));
+        absoluteShort.dateTime.currentYear = this.dateFormatter.absoluteShortDateTime(now);
+        absoluteShort.dateTime.notCurrentYear = this.dateFormatter.absoluteShortDateTime(now.minus({ years: 1 }));
+        absoluteShort.dateTime.milliseconds = this.dateFormatter.absoluteShortDateTime(now, { milliseconds: true });
     }
 
     private populateAbsoluteLong(locale: string) {
-        this.dateAdapter.setLocale(locale);
+        this.dateFormatter.setLocale(locale);
 
         const absoluteLong = this[locale].absolute.long;
+        const now = this.dateAdapter.today();
 
-        absoluteLong.date.currentYear = this.dateAdapter.absoluteLongDate(moment());
-        absoluteLong.date.notCurrentYear = this.dateAdapter.absoluteLongDate(moment().subtract(1, 'years'));
-        absoluteLong.dateTime.currentYear = this.dateAdapter.absoluteLongDateTime(moment());
-        absoluteLong.dateTime.notCurrentYear = this.dateAdapter.absoluteLongDateTime(
-            moment().subtract(1, 'years')
-        );
-        absoluteLong.dateTime.milliseconds = this.dateAdapter.absoluteLongDateTime(moment(), { milliseconds: true });
-        absoluteLong.dateTime.microseconds = this.dateAdapter.absoluteLongDateTime(moment(), { microseconds: true });
+        absoluteLong.date.currentYear = this.dateFormatter.absoluteLongDate(now);
+        absoluteLong.date.notCurrentYear = this.dateFormatter.absoluteLongDate(now.minus({ years: 1 }));
+        absoluteLong.dateTime.currentYear = this.dateFormatter.absoluteLongDateTime(now);
+        absoluteLong.dateTime.notCurrentYear = this.dateFormatter.absoluteLongDateTime(now.minus({ years: 1 }));
+        absoluteLong.dateTime.milliseconds = this.dateFormatter.absoluteLongDateTime(now, { milliseconds: true });
     }
 }
 
 @NgModule({
     declarations: [DemoComponent],
-    imports: [
-        BrowserModule,
-        McMomentDateModule
-    ],
+    imports: [BrowserModule],
     bootstrap: [DemoComponent],
     providers: []
 })

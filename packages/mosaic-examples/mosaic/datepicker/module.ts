@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
+import { McLuxonDateModule } from '@ptsecurity/mosaic-luxon-adapter/adapter';
 import { McDatepickerModule } from '@ptsecurity/mosaic/datepicker';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
@@ -31,7 +31,7 @@ const EXAMPLES = [
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        McMomentDateModule,
+        McLuxonDateModule,
         McDatepickerModule,
         McInputModule,
         McFormFieldModule,

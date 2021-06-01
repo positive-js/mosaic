@@ -75,11 +75,11 @@ export class McCalendarHeader<D> {
         const activeYear = this.dateAdapter.getYear(this.calendar.activeDate);
         const firstYearInView = this.dateAdapter.getYearName(
             // tslint:disable-next-line:no-magic-numbers
-            this.dateAdapter.createDate(activeYear - activeYear % 24, 0, 1)
+            this.dateAdapter.createDate(activeYear - activeYear % 24)
         );
         const lastYearInView = this.dateAdapter.getYearName(
             // tslint:disable-next-line:no-magic-numbers
-            this.dateAdapter.createDate(activeYear + yearsPerPage - 1 - activeYear % 24, 0, 1)
+            this.dateAdapter.createDate(activeYear + yearsPerPage - 1 - activeYear % 24)
         );
 
         return `${firstYearInView} \u2013 ${lastYearInView}`;

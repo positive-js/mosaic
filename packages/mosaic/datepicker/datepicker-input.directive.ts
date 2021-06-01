@@ -62,11 +62,15 @@ enum DateParts {
 
 class DateDigit {
     maxDays = 31;
-    maxMonth = 11;
 
     parse: (value: string) => number;
 
-    constructor(public value: DateParts, public start: number, public length: number) {
+    get maxMonth(): number {
+        // tslint:disable-next-line:no-magic-numbers binary-expression-operand-order
+        return 11 + this.firstMonth;
+    }
+
+    constructor(public value: DateParts, public start: number, public length: number, public firstMonth = 0) {
         if (value === DateParts.day) {
             this.parse = this.parseDay;
         } else if (value === DateParts.month) {
@@ -117,7 +121,7 @@ class DateDigit {
 
         if (parsedValue > this.maxMonth) { return this.maxMonth; }
 
-        return parsedValue - 1;
+        return parsedValue;
     }
 
     private parseYear(value: string): number {
@@ -844,9 +848,8 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
             case DateParts.month:
                 month++;
 
-                // tslint:disable-next-line:no-magic-numbers
-                if (month > 11) {
-                    month = 0;
+                if (month > this.dateAdapter.lastMonth) {
+                    month = this.dateAdapter.firstMonth;
                 }
 
                 const lastDay = this.getLastDayFor(year, month);
@@ -887,9 +890,8 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
             case DateParts.month:
                 month--;
 
-                if (month < 0) {
-                    // tslint:disable-next-line:no-magic-numbers
-                    month = 11;
+                if (month < this.dateAdapter.firstMonth) {
+                    month = this.dateAdapter.lastMonth;
                 }
 
                 const lastDay = this.getLastDayFor(year, month);
@@ -1060,11 +1062,13 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
                 ({ prev, length, start }, value: string, index: number, arr) => {
                     if (value === this.separator || (arr.length - 1) === index) {
                         if (!this.firstDigit) {
-                            this.firstDigit = new DateDigit(prev, start, length);
+                            this.firstDigit = new DateDigit(prev, start, length, this.dateAdapter.firstMonth);
                         } else if (!this.secondDigit) {
-                            this.secondDigit = new DateDigit(prev, start, length);
+                            this.secondDigit = new DateDigit(prev, start, length, this.dateAdapter.firstMonth);
                         } else if (!this.thirdDigit) {
-                            this.thirdDigit = new DateDigit(prev, start, arr.length - start);
+                            this.thirdDigit = new DateDigit(
+                                prev, start, arr.length - start, this.dateAdapter.firstMonth
+                            );
                         }
 
                         // tslint:disable:no-parameter-reassignment

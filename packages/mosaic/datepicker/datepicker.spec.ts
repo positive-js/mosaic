@@ -1061,6 +1061,7 @@ describe('McDatepicker', () => {
 
                 expect(testComponent.onDateInput).toHaveBeenCalledTimes(1);
 
+                inputEl.value = '12/12/201';
                 dispatchKeyboardEvent(inputEl, 'keydown', ONE);
                 fixture.detectChanges();
                 flush();
@@ -1448,7 +1449,10 @@ class DatepickerWithFilterAndValidation {
 
 @Component({
     template: `
-        <input [mcDatepicker]="d" (change)="onChange()" [(ngModel)]="value" (dateChange)="onDateChange()"
+        <input [mcDatepicker]="d"
+               (change)="onChange()"
+               [(ngModel)]="value"
+               (dateChange)="onDateChange()"
                (dateInput)="onDateInput()">
         <mc-datepicker #d></mc-datepicker>
     `

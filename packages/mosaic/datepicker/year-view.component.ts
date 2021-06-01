@@ -149,7 +149,7 @@ export class McYearView<D> implements AfterContentInit {
     onMonthSelected(month: number) {
         const year = this.dateAdapter.getYear(this.activeDate);
 
-        const normalizedDate = this.dateAdapter.createDate(year, month, 1);
+        const normalizedDate = this.dateAdapter.createDate(year, month);
 
         this.monthSelected.emit(normalizedDate);
 
@@ -239,8 +239,11 @@ export class McYearView<D> implements AfterContentInit {
 
         // First row of months only contains 5 elements so we can fit the year label on the same row.
         // tslint:disable-next-line:no-magic-numbers
-        this.months = [[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11]].map((row) => row.map(
-            (month) => this.createCellForMonth(month, monthNames[month])));
+        this.months = [[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11]]
+            .map((row) => row.map((month) =>
+                this.createCellForMonth(month + this.dateAdapter.firstMonth, monthNames[month]))
+            );
+
         this.changeDetectorRef.markForCheck();
     }
 
@@ -261,8 +264,9 @@ export class McYearView<D> implements AfterContentInit {
     /** Creates an McCalendarCell for the given month. */
     private createCellForMonth(month: number, monthName: string) {
         const ariaLabel = this.dateAdapter.format(
-            this.dateAdapter.createDate(this.dateAdapter.getYear(this.activeDate), month, 1),
-            this.dateFormats.monthYearA11yLabel);
+            this.dateAdapter.createDate(this.dateAdapter.getYear(this.activeDate), month),
+            this.dateFormats.monthYearA11yLabel
+        );
 
         const newMonthName = monthName[0].toLocaleUpperCase() + monthName.substr(1);
 
@@ -285,7 +289,7 @@ export class McYearView<D> implements AfterContentInit {
             return true;
         }
 
-        const firstOfMonth = this.dateAdapter.createDate(activeYear, month, 1);
+        const firstOfMonth = this.dateAdapter.createDate(activeYear, month);
 
         // If any date in the month is enabled count the month as enabled.
         for (let date = firstOfMonth; this.dateAdapter.getMonth(date) === month;
