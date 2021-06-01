@@ -19,18 +19,21 @@
 
     & .mc-form__label {
         padding-top: var(--mc-forms-size-horizontal-label-padding-top, #{$forms-size-horizontal-label-padding-top});
-        padding-bottom: var(--mc-forms-size-horizontal-label-padding-bottom, #{$forms-size-horizontal-label-padding-bottom});
+        padding-bottom:
+            var(--mc-forms-size-horizontal-label-padding-bottom, #{$forms-size-horizontal-label-padding-bottom});
 
         text-align: end;
     }
 
     & .mc-form__control {
-        padding-left: var(--mc-forms-size-horizontal-control-padding-left, #{$forms-size-horizontal-control-padding-left});
+        padding-left:
+            var(--mc-forms-size-horizontal-control-padding-left, #{$forms-size-horizontal-control-padding-left});
     }
 
     & .mc-form__legend {
         margin-top: var(--mc-forms-size-horizontal-legend-margin-top, #{$forms-size-horizontal-legend-margin-top});
-        margin-bottom: var(--mc-forms-size-horizontal-legend-margin-bottom, #{$forms-size-horizontal-legend-margin-bottom});
+        margin-bottom:
+            var(--mc-forms-size-horizontal-legend-margin-bottom, #{$forms-size-horizontal-legend-margin-bottom});
     }
 }
 
@@ -45,7 +48,8 @@
 
     & .mc-form__label {
         padding-top: var(--mc-forms-size-vertical-label-padding-top, #{$forms-size-vertical-label-padding-top});
-        padding-bottom: var(--mc-forms-size-vertical-label-padding-bottom, #{$forms-size-vertical-label-padding-bottom});
+        padding-bottom:
+            var(--mc-forms-size-vertical-label-padding-bottom, #{$forms-size-vertical-label-padding-bottom});
 
         text-align: start;
     }
