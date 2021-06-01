@@ -1,6 +1,6 @@
 
 // Do not edit directly
-// Generated on Wed, 26 May 2021 09:17:30 GMT
+// Generated on Tue, 01 Jun 2021 08:36:03 GMT
 
 $light-color-scheme-primary-default: #338FCC;
 $light-color-scheme-second-default: #B3B3B3;
@@ -360,13 +360,15 @@ $forms-light-color-scheme-label: #999999;
 $forms-light-color-scheme-legend: #4D4D4D;
 $forms-dark-color-scheme-label: #999999;
 $forms-dark-color-scheme-legend: #F0F0F0;
-$forms-size-default-row-margin-bottom: 20px;
-$forms-size-default-label-padding-top: 6px;
-$forms-size-default-control-padding-left: 16px;
-$forms-size-default-legend-margin-top: 32px;
-$forms-size-default-legend-margin-bottom: 16px;
+$forms-size-horizontal-row-margin-bottom: 20px;
+$forms-size-horizontal-label-padding-top: 6px;
+$forms-size-horizontal-label-padding-bottom: 0;
+$forms-size-horizontal-control-padding-left: 16px;
+$forms-size-horizontal-legend-margin-top: 32px;
+$forms-size-horizontal-legend-margin-bottom: 16px;
 $forms-size-vertical-row-margin-bottom: 16px;
 $forms-size-vertical-label-padding-top: 0;
+$forms-size-vertical-label-padding-bottom: 4px;
 $forms-size-vertical-control-padding-left: 24px;
 $forms-size-vertical-legend-margin-top: 32px;
 $forms-size-vertical-legend-margin-bottom: 12px;

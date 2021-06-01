@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Wed, 26 May 2021 09:17:30 GMT
+ * Generated on Tue, 01 Jun 2021 08:36:03 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
@@ -468,13 +468,15 @@ export const FormsLightColorSchemeLabel = "#999999";
 export const FormsLightColorSchemeLegend = "#4D4D4D";
 export const FormsDarkColorSchemeLabel = "#999999";
 export const FormsDarkColorSchemeLegend = "#F0F0F0";
-export const FormsSizeDefaultRowMarginBottom = "20px";
-export const FormsSizeDefaultLabelPaddingTop = "6px";
-export const FormsSizeDefaultControlPaddingLeft = "16px";
-export const FormsSizeDefaultLegendMarginTop = "32px";
-export const FormsSizeDefaultLegendMarginBottom = "16px";
+export const FormsSizeHorizontalRowMarginBottom = "20px";
+export const FormsSizeHorizontalLabelPaddingTop = "6px";
+export const FormsSizeHorizontalLabelPaddingBottom = "0";
+export const FormsSizeHorizontalControlPaddingLeft = "16px";
+export const FormsSizeHorizontalLegendMarginTop = "32px";
+export const FormsSizeHorizontalLegendMarginBottom = "16px";
 export const FormsSizeVerticalRowMarginBottom = "16px";
 export const FormsSizeVerticalLabelPaddingTop = "0";
+export const FormsSizeVerticalLabelPaddingBottom = "4px";
 export const FormsSizeVerticalControlPaddingLeft = "24px";
 export const FormsSizeVerticalLegendMarginTop = "32px";
 export const FormsSizeVerticalLegendMarginBottom = "12px";

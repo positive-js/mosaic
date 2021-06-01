@@ -9,12 +9,13 @@
             legend: { value: '{dark-color-scheme.foreground.text.value}' }
         },
         size: {
-            default: {
+            horizontal: {
                 row: {
                     'margin-bottom': { value: '20px' }
                 },
                 label: {
-                    'padding-top': { value: '6px' }
+                    'padding-top': { value: '6px' },
+                    'padding-bottom': { value: '0' }
                 },
                 control: {
                     'padding-left': { value: '16px' }
@@ -29,7 +30,8 @@
                     'margin-bottom': { value: '16px' }
                 },
                 label: {
-                    'padding-top': { value: '0' }
+                    'padding-top': { value: '0' },
+                    'padding-bottom': { value: '4px' }
                 },
                 control: {
                     'padding-left': { value: '24px' }
