@@ -477,7 +477,11 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
             throw getMcSelectNonArrayValueError();
         }
 
-        this.setOptionsFromValues(this.multiple ? value : [value]);
+        if (value) {
+            this.setOptionsFromValues(this.multiple ? value : [value]);
+        } else {
+            this.selectionModel.clear();
+        }
     }
 
     /** `View -> model callback called when value changes` */
