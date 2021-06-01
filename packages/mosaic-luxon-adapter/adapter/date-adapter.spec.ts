@@ -932,8 +932,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today();
                         const endDate = startDate.plus({ minutes: 10 });
 
-                        const startString = adapter.format(startDate,
-                            `${DAY_MONTH}, ${FROM.toLocaleLowerCase()}${NBSP}${TIME}`
+                        const startString = adapter.format(
+                            startDate, `${DAY_MONTH}, ${FROM.toLocaleLowerCase()}${NBSP}${TIME}`
                         );
                         const endString = adapter.format(endDate, `${UNTIL.toLocaleLowerCase()}${NBSP}${TIME}`);
 
@@ -945,8 +945,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().minus({ years: 1 });
                         const endDate = startDate.plus({ minutes: 10 });
 
-                        const startString = adapter.format(startDate,
-                            `${DAY_MONTH} ${YEAR}, ${FROM.toLocaleLowerCase()}${NBSP}${TIME}`
+                        const startString = adapter.format(
+                            startDate, `${DAY_MONTH} ${YEAR}, ${FROM.toLocaleLowerCase()}${NBSP}${TIME}`
                         );
                         const endString = adapter.format(endDate, `${UNTIL.toLocaleLowerCase()}${NBSP}${TIME}`);
 
