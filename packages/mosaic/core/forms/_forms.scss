@@ -27,6 +27,11 @@
     & .mc-form__control {
         padding-left: var(--mc-forms-size-horizontal-control-padding-left, #{$forms-size-horizontal-control-padding-left});
     }
+
+    & .mc-form__legend {
+        margin-top: var(--mc-forms-size-horizontal-legend-margin-top, #{$forms-size-horizontal-legend-margin-top});
+        margin-bottom: var(--mc-forms-size-horizontal-legend-margin-bottom, #{$forms-size-horizontal-legend-margin-bottom});
+    }
 }
 
 .mc-form-vertical {
@@ -48,6 +53,11 @@
     & .mc-form__control {
         padding-left: 0;
     }
+
+    & .mc-form__legend {
+        margin-top: var(--mc-forms-size-vertical-legend-margin-top, #{$forms-size-vertical-legend-margin-top});
+        margin-bottom: var(--mc-forms-size-vertical-legend-margin-bottom, #{$forms-size-vertical-legend-margin-bottom});
+    }
 }
 
 .mc-form__fieldset {
@@ -61,9 +71,4 @@
     & .mc-form__row:not(:first-child) {
         padding-left: var(--mc-forms-size-vertical-control-padding-left, #{$forms-size-vertical-control-padding-left});
     }
-}
-
-.mc-form__legend {
-    margin-top: var(--mc-forms-size-horizontal-legend-margin-top, #{$forms-size-horizontal-legend-margin-top});
-    margin-bottom: var(--mc-forms-size-horizontal-legend-margin-bottom, #{$forms-size-horizontal-legend-margin-bottom});
 }
