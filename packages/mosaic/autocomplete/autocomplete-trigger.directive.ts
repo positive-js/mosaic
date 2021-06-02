@@ -379,7 +379,7 @@ export class McAutocompleteTrigger implements ControlValueAccessor, OnDestroy {
     handleFocus(): void {
         if (!this.canOpenOnNextFocus) {
             this.canOpenOnNextFocus = true;
-        } else if (this.canOpen()) {
+        } else if (this.canOpen() && this.autocomplete.openOnFocus) {
             this.previousValue = this.elementRef.nativeElement.value;
             this.attachOverlay();
         }

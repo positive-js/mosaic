@@ -2270,6 +2270,64 @@ describe('McAutocomplete', () => {
 
     });
 
+    describe('Manage dropdown opening with openOnFocus when focus', () => {
+        let fixture: ComponentFixture<AutocompleteWithDisabledItems>;
+        let input: HTMLInputElement;
+
+        beforeEach(() => {
+            fixture = createComponent(AutocompleteWithOpenOnFocus);
+            fixture.detectChanges();
+            input = fixture.debugElement.query(By.css('input')).nativeElement;
+        });
+
+        it('should not open dropdown with disabled openOnFocus', () => {
+            fixture.componentInstance.trigger.autocomplete.openOnFocus = false;
+
+            expect(fixture.componentInstance.trigger.panelOpen)
+                .toBe(false, `Expected panel state to start out closed.`);
+
+            dispatchFakeEvent(input, 'focusin');
+            fixture.detectChanges();
+
+            expect(fixture.componentInstance.trigger.panelOpen)
+                .toBe(false, `Expected panel state to closed when input is focused.`);
+        });
+
+        it('should open dropdown with enabled openOnFocus', () => {
+            fixture.componentInstance.trigger.autocomplete.openOnFocus = true;
+
+            expect(fixture.componentInstance.trigger.panelOpen)
+                .toBe(false, `Expected panel state to start out closed.`);
+
+            dispatchFakeEvent(input, 'focusin');
+            fixture.detectChanges();
+
+            expect(fixture.componentInstance.trigger.panelOpen)
+                .toBe(true, `Expected panel state to read open when input is focused.`);
+        });
+    });
+
+    describe('Manage dropdown opening with openOnFocus when focus in default state', () => {
+        let fixture: ComponentFixture<SimpleAutocomplete>;
+        let input: HTMLInputElement;
+
+        beforeEach(() => {
+            fixture = createComponent(SimpleAutocomplete);
+            fixture.detectChanges();
+            input = fixture.debugElement.query(By.css('input')).nativeElement;
+        });
+
+        it('should open dropdown when no openOnFocus attribute', () => {
+            expect(fixture.componentInstance.trigger.panelOpen)
+                .toBe(false, `Expected panel state to start out closed.`);
+
+            dispatchFakeEvent(input, 'focusin');
+            fixture.detectChanges();
+
+            expect(fixture.componentInstance.trigger.panelOpen)
+                .toBe(true, `Expected panel state to read open when input is focused.`);
+        });
+    });
 });
 
 @Component({
@@ -2675,6 +2733,38 @@ class AutocompleteWithDisabledItems {
     selectedState: string;
     states = [
         { code: 'AL', name: 'Alabama', disabled: true },
+        { code: 'CA', name: 'California' },
+        { code: 'FL', name: 'Florida' },
+        { code: 'KS', name: 'Kansas' },
+        { code: 'MA', name: 'Massachusetts' },
+        { code: 'NY', name: 'New York' },
+        { code: 'OR', name: 'Oregon' },
+        { code: 'PA', name: 'Pennsylvania' },
+        { code: 'TN', name: 'Tennessee' },
+        { code: 'VA', name: 'Virginia' },
+        { code: 'WY', name: 'Wyoming' }
+    ];
+}
+
+@Component({
+    template: `
+        <mc-form-field>
+            <input mcInput placeholder="States" [mcAutocomplete]="auto" [(ngModel)]="selectedState">
+        </mc-form-field>
+
+        <mc-autocomplete #auto="mcAutocomplete" [openOnFocus]="false">
+            <mc-option *ngFor="let state of states" [value]="state.code">
+                <span>{{ state.name }}</span>
+            </mc-option>
+        </mc-autocomplete>
+    `
+})
+class AutocompleteWithOpenOnFocus {
+    @ViewChild(McAutocompleteTrigger, {static: true}) trigger: McAutocompleteTrigger;
+
+    selectedState: string;
+    states = [
+        { code: 'AL', name: 'Alabama' },
         { code: 'CA', name: 'California' },
         { code: 'FL', name: 'Florida' },
         { code: 'KS', name: 'Kansas' },
