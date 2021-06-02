@@ -32,8 +32,8 @@ import { McTabHeader } from './tab-header';
 
 
 @Directive({
-    selector: 'mc-tab-group[mc-light-tabs], [mc-tab-nav-bar][mc-light-tabs]',
-    host: { class: 'mc-tab-group_light' }
+    selector: 'mc-tab-group[mc-old-tabs], [mc-tab-nav-bar][mc-old-tabs]',
+    host: { class: 'mc-tab-group_old' }
 })
 export class McLightTabsCssStyler { }
 
@@ -107,7 +107,7 @@ export const McTabGroupMixinBase: CanColorCtor & typeof McTabGroupBase = mixinCo
 })
 export class McTabGroup extends McTabGroupMixinBase implements AfterContentInit,
     AfterContentChecked, OnDestroy, CanColor {
-    lightTab: boolean;
+    oldTab: boolean;
 
     /** Whether the tab group should grow to the size of the active tab. */
     @Input()
@@ -123,9 +123,9 @@ export class McTabGroup extends McTabGroupMixinBase implements AfterContentInit,
 
     @ContentChildren(McTab) tabs: QueryList<McTab>;
 
-    @ViewChild('tabBodyWrapper', {static: false}) tabBodyWrapper: ElementRef;
+    @ViewChild('tabBodyWrapper', { static: false }) tabBodyWrapper: ElementRef;
 
-    @ViewChild('tabHeader', {static: false}) tabHeader: McTabHeader;
+    @ViewChild('tabHeader', { static: false }) tabHeader: McTabHeader;
 
     /** Position of the tab header. */
     @Input() headerPosition: McTabHeaderPosition = 'above';
@@ -166,16 +166,15 @@ export class McTabGroup extends McTabGroupMixinBase implements AfterContentInit,
     constructor(
         elementRef: ElementRef,
         private changeDetectorRef: ChangeDetectorRef,
-        @Attribute('mc-light-tabs') lightTabs: string,
+        @Attribute('mc-old-tabs') lightTabs: string,
         @Inject(MC_TABS_CONFIG) @Optional() defaultConfig?: IMcTabsConfig
     ) {
         super(elementRef);
 
-        this.lightTab = coerceBooleanProperty(lightTabs);
+        this.oldTab = coerceBooleanProperty(lightTabs);
 
         this.groupId = nextId++;
-        this.animationDuration = defaultConfig && defaultConfig.animationDuration ?
-            defaultConfig.animationDuration : '0ms';
+        this.animationDuration = defaultConfig?.animationDuration || '0ms';
     }
 
     /**

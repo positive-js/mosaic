@@ -23,15 +23,15 @@
 .mc-tab-nav-bar {
     display: flex;
 
-    &:not(.mc-tab-group_light) {
+    &:not(.mc-tab-group_old) {
         .mc-tab-link {
             @include tab-label;
         }
     }
 
-    &.mc-tab-group_light {
+    &.mc-tab-group_old {
         .mc-tab-link {
-            @include tab-label-light;
+            @include tab-label-old;
         }
     }
 }

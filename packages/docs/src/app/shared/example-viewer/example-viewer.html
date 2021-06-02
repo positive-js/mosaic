@@ -12,7 +12,7 @@
             <span class="code-copy__copied"><i class="mc mc-check_16"></i> Скопировано</span>
             <i class="code-copy__icon mc mc-copy_16" (click)="copyCode($event)"></i>
         </span>
-        <mc-tab-group mc-light-tabs (selectedTabChange)="setLineNumbers()">
+        <mc-tab-group mc-old-tabs (selectedTabChange)="setLineNumbers()">
             <mc-tab *ngFor="let tabName of getExampleTabNames()" [label]="tabName">
                 <div class="docs-example-source-wrapper">
                     <pre class="docs-example-numbers hljs-line-numbers">{{lineNumbers}}</pre>

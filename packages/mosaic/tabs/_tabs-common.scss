@@ -79,6 +79,44 @@ $mc-tab-border-width-focus: calc(var(--mc-tabs-size-border-width, $tabs-size-bor
 @mixin tab-label {
     @include tab-label-common();
 
+    &.mc-active,
+    &:hover {
+        &:before {
+            @extend %tab-pseudo-highlight-border;
+        }
+    }
+
+    &.cdk-keyboard-focused + :hover {
+        &:before {
+            left: calc(#{$mc-tab-border-width-focus} - var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
+        }
+    }
+
+    &.cdk-keyboard-focused {
+        &:after {
+            top: calc(-1 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
+        }
+    }
+
+    & .mc-tab-overlay {
+        position: absolute;
+
+        top: 0;
+    }
+}
+
+%tab-pseudo-highlight-border {
+    @extend %tab-pseudo;
+
+    bottom: calc(-1 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
+    left: 0;
+    height: var(--mc-tabs-size-highlight-height, $tabs-size-highlight-height);
+    right: 0;
+}
+
+@mixin tab-label-old {
+    @include tab-label-common();
+
     border-top: {
         width: var(--mc-tabs-size-border-width, $tabs-size-border-width);
 
@@ -120,43 +158,5 @@ $mc-tab-border-width-focus: calc(var(--mc-tabs-size-border-width, $tabs-size-bor
             left-radius: var(--mc-tabs-size-border-radius, $tabs-size-border-radius);
             right-radius: var(--mc-tabs-size-border-radius, $tabs-size-border-radius);
         }
-    }
-}
-
-%tab-light-pseudo-highlight-border {
-    @extend %tab-pseudo;
-
-    bottom: calc(-1 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
-    left: 0;
-    height: var(--mc-tabs-size-highlight-height, $tabs-size-highlight-height);
-    right: 0;
-}
-
-@mixin tab-label-light {
-    @include tab-label-common();
-
-    &.mc-active,
-    &:hover {
-        &:before {
-            @extend %tab-light-pseudo-highlight-border;
-        }
-    }
-
-    &.cdk-keyboard-focused + :hover {
-        &:before {
-            left: calc(#{$mc-tab-border-width-focus} - var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
-        }
-    }
-
-    &.cdk-keyboard-focused {
-        &:after {
-            top: calc(-1 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
-        }
-    }
-
-    & .mc-tab-overlay {
-        position: absolute;
-
-        top: 0;
     }
 }

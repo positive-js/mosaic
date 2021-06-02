@@ -65,8 +65,6 @@ export const McTabLinkMixinBase: HasTabIndexCtor & CanDisableCtor &
     inputs: ['disabled', 'tabIndex'],
     host: {
         class: 'mc-tab-link',
-        '[attr.aria-current]': 'active',
-        '[attr.aria-disabled]': 'disabled.toString()',
         '[attr.tabindex]': 'tabIndex',
         '[class.mc-disabled]': 'disabled',
         '[class.mc-active]': 'active'

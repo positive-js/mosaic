@@ -16,11 +16,11 @@
 }
 
 .mc-tab-label {
-    @include tab-label
+    @include tab-label;
 }
 
-.mc-tab-light-label {
-    @include tab-label-light;
+.mc-tab-label_old {
+    @include tab-label-old;
 }
 
 .mc-tab-header__content {
