@@ -15,12 +15,12 @@ import {
     }
 })
 export class McFormElement implements AfterContentInit {
-    margin: boolean = false;
+    margin = false;
 
-    isRow: boolean = false;
-    isFieldSet: boolean = false;
-    hasLegend: boolean = false;
-    isHorizontal: boolean = false;
+    isRow = false;
+    isFieldSet = false;
+    hasLegend = false;
+    isHorizontal = false;
 
     @ContentChildren(McFormElement) elements: QueryList<McFormElement>;
 
@@ -30,9 +30,13 @@ export class McFormElement implements AfterContentInit {
         const classList = this.element.nativeElement.classList;
 
         this.isRow = classList.contains('mc-form__row');
-        this.isFieldSet = classList.contains('mc-form__fieldset');
-        this.hasLegend = this.isFieldSet && this.element.nativeElement.firstElementChild!.classList.contains('mc-form__legend');
         this.isHorizontal = classList.contains('mc-horizontal');
+
+        this.isFieldSet = classList.contains('mc-form__fieldset');
+
+        if (this.isFieldSet && this.element.nativeElement.firstElementChild) {
+            this.hasLegend = this.element.nativeElement.firstElementChild.classList.contains('mc-form__legend');
+        }
     }
 }
 
