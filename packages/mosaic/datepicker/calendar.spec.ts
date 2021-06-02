@@ -301,7 +301,6 @@ describe('McCalendar', () => {
             periodButton.click();
             fixture.detectChanges();
 
-            console.log('calendarInstance.yearView: ', calendarInstance.yearView); // tslint:disable-line:no-console
             spyOn(calendarInstance.yearView, 'init').and.callThrough();
 
             testComponent.minDate = moment([2017, 10, 1]);
