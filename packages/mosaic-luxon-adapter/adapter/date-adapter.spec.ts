@@ -661,7 +661,7 @@ describe('LuxonDateAdapter formatter', () => {
                     const date = adapter.today();
 
                     expect(adapter.absoluteShortDate(date))
-                        .toBe(date.toFormat(DAY_SHORT_MONTH));
+                        .toBe(adapter.format(date, DAY_SHORT_MONTH));
                 });
 
                 it('absoluteShortDate (other year)', () => {
@@ -675,7 +675,7 @@ describe('LuxonDateAdapter formatter', () => {
                     const date = adapter.today();
 
                     expect(adapter.absoluteShortDateTime(date))
-                        .toBe(date.toFormat(`${DAY_SHORT_MONTH}, ${TIME}`));
+                        .toBe(adapter.format(date, `${DAY_SHORT_MONTH}, ${TIME}`));
                 });
 
                 it('absoluteShortDateTime (other year)', () => {
@@ -689,7 +689,7 @@ describe('LuxonDateAdapter formatter', () => {
                     const date = adapter.today();
 
                     expect(adapter.absoluteShortDateTime(date, { milliseconds: true }))
-                        .toBe(date.toFormat(`${DAY_SHORT_MONTH}, ${TIME}${MILLISECONDS}`));
+                        .toBe(adapter.format(date, `${DAY_SHORT_MONTH}, ${TIME}${MILLISECONDS}`));
                 });
             });
 
@@ -746,8 +746,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().set({ day: 1 });
                         const endDate = startDate.plus({ days: 10 });
 
-                        const startString: string = startDate.toFormat(`${DAY}`);
-                        const endString: string = endDate.toFormat(endDateFormat);
+                        const startString = adapter.format(startDate, `${DAY}`);
+                        const endString = adapter.format(endDate, endDateFormat);
 
                         expect(adapter.rangeShortDate(startDate, endDate))
                             .toBe(`${startString}${DASH}${endString}`);
@@ -757,8 +757,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().set({ month: 1 });
                         const endDate = startDate.plus({ months: 1 });
 
-                        const startString: string = adapter.format(startDate, startDateFormat);
-                        const endString: string = adapter.format(endDate, endDateFormat);
+                        const startString = adapter.format(startDate, startDateFormat);
+                        const endString = adapter.format(endDate, endDateFormat);
 
                         expect(adapter.rangeShortDate(startDate, endDate))
                             .toBe(`${startString}${LONG_DASH}${endString}`);
@@ -768,8 +768,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().minus({ years: 1 });
                         const endDate = adapter.today();
 
-                        const startString: string = startDate.toFormat(`${startDateFormat} ${YEAR}`);
-                        const endString: string = endDate.toFormat(`${endDateFormat} ${YEAR}`);
+                        const startString = adapter.format(startDate, `${startDateFormat} ${YEAR}`);
+                        const endString = adapter.format(endDate, `${endDateFormat} ${YEAR}`);
 
                         expect(adapter.rangeShortDate(startDate, endDate))
                             .toBe(`${startString}${LONG_DASH}${endString}`);
@@ -779,8 +779,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today();
                         const endDate = startDate.plus({ years: 1 });
 
-                        const startString: string = startDate.toFormat(`${startDateFormat} ${YEAR}`);
-                        const endString: string = endDate.toFormat(`${endDateFormat} ${YEAR}`);
+                        const startString = adapter.format(startDate, `${startDateFormat} ${YEAR}`);
+                        const endString = adapter.format(endDate, `${endDateFormat} ${YEAR}`);
 
                         expect(adapter.rangeShortDate(startDate, endDate))
                             .toBe(`${startString}${LONG_DASH}${endString}`);
@@ -797,8 +797,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().set({ day: 1 });
                         const endDate = startDate.plus({ days: 10 });
 
-                        const startString: string = startDate.toFormat(startDateFormat);
-                        const endString: string = endDate.toFormat(endDateFormat);
+                        const startString = adapter.format(startDate, startDateFormat);
+                        const endString = adapter.format(endDate, endDateFormat);
 
                         expect(adapter.rangeShortDateTime(startDate, endDate))
                             .toBe(`${startString}${LONG_DASH}${endString}`);
@@ -808,8 +808,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today();
                         const endDate = startDate.plus({ minutes: 10 });
 
-                        const startString = startDate.toFormat(`${TIME}`);
-                        const endString = endDate.toFormat(`${TIME}, ${DAY_SHORT_MONTH}`);
+                        const startString = adapter.format(startDate, `${TIME}`);
+                        const endString = adapter.format(endDate, `${TIME}, ${DAY_SHORT_MONTH}`);
 
                         expect(adapter.rangeShortDateTime(startDate, endDate))
                             .toBe(`${startString}${DASH}${endString}`);
@@ -819,8 +819,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().minus({ years: 1 });
                         const endDate = startDate.plus({ minutes: 10 });
 
-                        const startString = startDate.toFormat(`${TIME}`);
-                        const endString = endDate.toFormat(`${TIME}, ${DAY_SHORT_MONTH} ${YEAR}`);
+                        const startString = adapter.format(startDate, `${TIME}`);
+                        const endString = adapter.format(endDate, `${TIME}, ${DAY_SHORT_MONTH} ${YEAR}`);
 
                         expect(adapter.rangeShortDateTime(startDate, endDate))
                             .toBe(`${startString}${DASH}${endString}`);
@@ -830,8 +830,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().set({ month: 1 });
                         const endDate = startDate.plus({ months: 1 });
 
-                        const startString: string = adapter.format(startDate, startDateFormat);
-                        const endString: string = adapter.format(endDate, endDateFormat);
+                        const startString = adapter.format(startDate, startDateFormat);
+                        const endString = adapter.format(endDate, endDateFormat);
 
                         expect(adapter.rangeShortDateTime(startDate, endDate))
                             .toBe(`${startString}${LONG_DASH}${endString}`);
@@ -841,8 +841,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().minus({ years: 1 });
                         const endDate = adapter.today();
 
-                        const startString: string = startDate.toFormat(`${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
-                        const endString: string = endDate.toFormat(`${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
+                        const startString = adapter.format(startDate, `${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
+                        const endString = adapter.format(endDate, `${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
 
                         expect(adapter.rangeShortDateTime(startDate, endDate))
                             .toBe(`${startString}${LONG_DASH}${endString}`);
@@ -852,8 +852,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today();
                         const endDate = startDate.plus({ years: 1 });
 
-                        const startString: string = startDate.toFormat(`${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
-                        const endString: string = endDate.toFormat(`${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
+                        const startString = adapter.format(startDate, `${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
+                        const endString = adapter.format(endDate, `${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
 
                         expect(adapter.rangeShortDateTime(startDate, endDate))
                             .toBe(`${startString}${LONG_DASH}${endString}`);
@@ -870,8 +870,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().set({ day: 1 });
                         const endDate = startDate.plus({ days: 10 });
 
-                        const startString: string = startDate.toFormat(`${DAY}`);
-                        const endString: string = endDate.toFormat(`${endDateFormat}`);
+                        const startString = adapter.format(startDate, `${DAY}`);
+                        const endString = adapter.format(endDate, `${endDateFormat}`);
 
                         expect(adapter.rangeLongDate(startDate, endDate))
                             .toBe(`${startString}${DASH}${endString}`);
@@ -881,8 +881,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().set({ month: 1 });
                         const endDate = startDate.plus({ months: 1 });
 
-                        const startString: string = startDate.toFormat(startDateFormat);
-                        const endString: string = endDate.toFormat(`${endDateFormat}`);
+                        const startString = adapter.format(startDate, startDateFormat);
+                        const endString = adapter.format(endDate, `${endDateFormat}`);
 
                         expect(adapter.rangeLongDate(startDate, endDate))
                             .toBe(`${startString}${LONG_DASH}${endString}`);
@@ -892,8 +892,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().minus({ years: 1 });
                         const endDate = adapter.today();
 
-                        const startString: string = startDate.toFormat(`${startDateFormat} ${YEAR}`);
-                        const endString: string = endDate.toFormat(`${endDateFormat} ${YEAR}`);
+                        const startString = adapter.format(startDate, `${startDateFormat} ${YEAR}`);
+                        const endString = adapter.format(endDate, `${endDateFormat} ${YEAR}`);
 
                         expect(adapter.rangeLongDate(startDate, endDate))
                             .toBe(`${startString}${LONG_DASH}${endString}`);
@@ -903,8 +903,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.createDate(2015);
                         const endDate = startDate.plus({ years: 1 });
 
-                        const startString: string = startDate.toFormat(`${startDateFormat} ${YEAR}`);
-                        const endString: string = endDate.toFormat(`${endDateFormat} ${YEAR}`);
+                        const startString = adapter.format(startDate, `${startDateFormat} ${YEAR}`);
+                        const endString = adapter.format(endDate, `${endDateFormat} ${YEAR}`);
 
                         expect(adapter.rangeLongDate(startDate, endDate))
                             .toBe(`${startString}${LONG_DASH}${endString}`);
@@ -921,8 +921,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().set({ day: 1 });
                         const endDate = startDate.plus({ days: 10 });
 
-                        const startString: string = startDate.toFormat(startDateFormat);
-                        const endString: string = endDate.toFormat(endDateFormat);
+                        const startString = adapter.format(startDate, startDateFormat);
+                        const endString = adapter.format(endDate, endDateFormat);
 
                         expect(adapter.rangeLongDateTime(startDate, endDate))
                             .toBe(`${FROM}${NBSP}${startString} ${UNTIL.toLocaleLowerCase()}${NBSP}${endString}`);
@@ -932,10 +932,10 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today();
                         const endDate = startDate.plus({ minutes: 10 });
 
-                        const startString: string = startDate.toFormat(
-                            `${DAY_MONTH}, ${FROM.toLocaleLowerCase()}${NBSP}${TIME}`
+                        const startString = adapter.format(
+                            startDate, `${DAY_MONTH}, ${FROM.toLocaleLowerCase()}${NBSP}${TIME}`
                         );
-                        const endString: string = endDate.toFormat(`${UNTIL.toLocaleLowerCase()}${NBSP}${TIME}`);
+                        const endString = adapter.format(endDate, `${UNTIL.toLocaleLowerCase()}${NBSP}${TIME}`);
 
                         expect(adapter.rangeLongDateTime(startDate, endDate))
                             .toBe(`${startString} ${endString}`);
@@ -945,10 +945,10 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().minus({ years: 1 });
                         const endDate = startDate.plus({ minutes: 10 });
 
-                        const startString: string = startDate.toFormat(
-                            `${DAY_MONTH} ${YEAR}, ${FROM.toLocaleLowerCase()}${NBSP}${TIME}`
+                        const startString = adapter.format(
+                            startDate, `${DAY_MONTH} ${YEAR}, ${FROM.toLocaleLowerCase()}${NBSP}${TIME}`
                         );
-                        const endString: string = endDate.toFormat(`${UNTIL.toLocaleLowerCase()}${NBSP}${TIME}`);
+                        const endString = adapter.format(endDate, `${UNTIL.toLocaleLowerCase()}${NBSP}${TIME}`);
 
                         expect(adapter.rangeLongDateTime(startDate, endDate))
                             .toBe(`${startString} ${endString}`);
@@ -958,8 +958,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().set({ month: 1 });
                         const endDate = startDate.plus({ months: 1 });
 
-                        const startString: string = startDate.toFormat(startDateFormat);
-                        const endString: string = endDate.toFormat(endDateFormat);
+                        const startString = adapter.format(startDate, startDateFormat);
+                        const endString = adapter.format(endDate, endDateFormat);
 
                         expect(adapter.rangeLongDateTime(startDate, endDate))
                             .toBe(`${FROM}${NBSP}${startString} ${UNTIL.toLocaleLowerCase()}${NBSP}${endString}`);
@@ -969,8 +969,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().minus({ years: 1 });
                         const endDate = adapter.today();
 
-                        const startString: string = startDate.toFormat(`${DAY_MONTH} ${YEAR}, ${TIME}`);
-                        const endString: string = endDate.toFormat(`${DAY_MONTH} ${YEAR}, ${TIME}`);
+                        const startString = adapter.format(startDate, `${DAY_MONTH} ${YEAR}, ${TIME}`);
+                        const endString = adapter.format(endDate, `${DAY_MONTH} ${YEAR}, ${TIME}`);
 
                         expect(adapter.rangeLongDateTime(startDate, endDate))
                             .toBe(`${FROM}${NBSP}${startString} ${UNTIL.toLocaleLowerCase()}${NBSP}${endString}`);
@@ -980,8 +980,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.createDate(2015);
                         const endDate = startDate.plus({ years: 1 });
 
-                        const startString: string = startDate.toFormat(`${DAY_MONTH} ${YEAR}, ${TIME}`);
-                        const endString: string = endDate.toFormat(`${DAY_MONTH} ${YEAR}, ${TIME}`);
+                        const startString = adapter.format(startDate, `${DAY_MONTH} ${YEAR}, ${TIME}`);
+                        const endString = adapter.format(endDate, `${DAY_MONTH} ${YEAR}, ${TIME}`);
 
                         expect(adapter.rangeLongDateTime(startDate, endDate))
                             .toBe(`${FROM}${NBSP}${startString} ${UNTIL.toLocaleLowerCase()}${NBSP}${endString}`);
@@ -998,8 +998,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().set({ day: 1 });
                         const endDate = startDate.plus({ days: 10 });
 
-                        const startString: string = startDate.toFormat(startDateFormat);
-                        const endString: string = endDate.toFormat(endDateFormat);
+                        const startString = adapter.format(startDate, startDateFormat);
+                        const endString = adapter.format(endDate, endDateFormat);
 
                         expect(adapter.rangeMiddleDateTime(startDate, endDate))
                             .toBe(`${startString}${LONG_DASH}${endString}`);
@@ -1009,8 +1009,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today();
                         const endDate = startDate.plus({ minutes: 10 });
 
-                        const startString: string = startDate.toFormat(`${TIME}`);
-                        const endString: string = endDate.toFormat(`${TIME}, ${DAY_MONTH}`);
+                        const startString = adapter.format(startDate, `${TIME}`);
+                        const endString = adapter.format(endDate, `${TIME}, ${DAY_MONTH}`);
 
                         expect(adapter.rangeMiddleDateTime(startDate, endDate))
                             .toBe(`${startString}${DASH}${endString}`);
@@ -1020,8 +1020,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().minus({ years: 1 });
                         const endDate = startDate.plus({ minutes: 10 });
 
-                        const startString: string = startDate.toFormat(`${TIME}`);
-                        const endString: string = endDate.toFormat(`${TIME}, ${DAY_MONTH} ${YEAR}`);
+                        const startString = adapter.format(startDate, `${TIME}`);
+                        const endString = adapter.format(endDate, `${TIME}, ${DAY_MONTH} ${YEAR}`);
 
                         expect(adapter.rangeMiddleDateTime(startDate, endDate))
                             .toBe(`${startString}${DASH}${endString}`);
@@ -1031,8 +1031,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().set({ month: 1 });
                         const endDate = startDate.plus({ months: 1 });
 
-                        const startString: string = startDate.toFormat(startDateFormat);
-                        const endString: string = endDate.toFormat(endDateFormat);
+                        const startString = adapter.format(startDate, startDateFormat);
+                        const endString = adapter.format(endDate, endDateFormat);
 
                         expect(adapter.rangeMiddleDateTime(startDate, endDate))
                             .toBe(`${startString}${LONG_DASH}${endString}`);
@@ -1042,8 +1042,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().minus({ years: 1 });
                         const endDate = adapter.today();
 
-                        const startString: string = startDate.toFormat(`${DAY_MONTH} ${YEAR}, ${TIME}`);
-                        const endString: string = endDate.toFormat(`${DAY_MONTH} ${YEAR}, ${TIME}`);
+                        const startString = adapter.format(startDate, `${DAY_MONTH} ${YEAR}, ${TIME}`);
+                        const endString = adapter.format(endDate, `${DAY_MONTH} ${YEAR}, ${TIME}`);
 
                         expect(adapter.rangeMiddleDateTime(startDate, endDate))
                             .toBe(`${startString}${LONG_DASH}${endString}`);
@@ -1053,8 +1053,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.createDate(2015);
                         const endDate = startDate.plus({ years: 1 });
 
-                        const startString: string = startDate.toFormat(`${DAY_MONTH} ${YEAR}, ${TIME}`);
-                        const endString: string = endDate.toFormat(`${DAY_MONTH} ${YEAR}, ${TIME}`);
+                        const startString = adapter.format(startDate, `${DAY_MONTH} ${YEAR}, ${TIME}`);
+                        const endString = adapter.format(endDate, `${DAY_MONTH} ${YEAR}, ${TIME}`);
 
                         expect(adapter.rangeMiddleDateTime(startDate, endDate))
                             .toBe(`${startString}${LONG_DASH}${endString}`);
@@ -1076,7 +1076,7 @@ describe('LuxonDateAdapter formatter', () => {
 
                     it('rangeShortDate (only startDate)', () => {
                         const startDate = adapter.today();
-                        const startString = startDate.toFormat(startDateFormat);
+                        const startString = adapter.format(startDate, startDateFormat);
 
                         expect(adapter.rangeShortDate(startDate))
                             .toBe(`${FROM}${NBSP}${startString}`);
@@ -1084,7 +1084,7 @@ describe('LuxonDateAdapter formatter', () => {
 
                     it('rangeShortDate (only endDate)', () => {
                         const endDate = adapter.today();
-                        const endString = endDate.toFormat(endDateFormat);
+                        const endString = adapter.format(endDate, endDateFormat);
 
                         expect(adapter.rangeShortDate(null, endDate))
                             .toBe(`${UNTIL}${NBSP}${endString}`);
@@ -1092,7 +1092,7 @@ describe('LuxonDateAdapter formatter', () => {
 
                     it('rangeShortDate (startDate is other year)', () => {
                         const startDate = adapter.today().minus({ years: 1 });
-                        const startString = startDate.toFormat(`${startDateFormat} ${YEAR}`);
+                        const startString = adapter.format(startDate, `${startDateFormat} ${YEAR}`);
 
                         expect(adapter.rangeShortDate(startDate))
                             .toBe(`${FROM}${NBSP}${startString}`);
@@ -1100,7 +1100,7 @@ describe('LuxonDateAdapter formatter', () => {
 
                     it('rangeShortDate (endDate is other year)', () => {
                         const endDate = adapter.today().plus({ years: 1 });
-                        const endString = endDate.toFormat(`${endDateFormat} ${YEAR}`);
+                        const endString = adapter.format(endDate, `${endDateFormat} ${YEAR}`);
 
                         expect(adapter.rangeShortDate(null, endDate))
                             .toBe(`${UNTIL}${NBSP}${endString}`);
@@ -1120,7 +1120,7 @@ describe('LuxonDateAdapter formatter', () => {
 
                     it('rangeShortDateTime (only startDate)', () => {
                         const startDate = adapter.today();
-                        const startString = startDate.toFormat(startDateFormat);
+                        const startString = adapter.format(startDate, startDateFormat);
 
                         expect(adapter.rangeShortDateTime(startDate))
                             .toBe(`${FROM}${NBSP}${startString}`);
@@ -1128,7 +1128,7 @@ describe('LuxonDateAdapter formatter', () => {
 
                     it('rangeShortDateTime (only endDate)', () => {
                         const endDate = adapter.today();
-                        const endString = endDate.toFormat(endDateFormat);
+                        const endString = adapter.format(endDate, endDateFormat);
 
                         expect(adapter.rangeShortDateTime(null, endDate))
                             .toBe(`${UNTIL}${NBSP}${endString}`);
@@ -1136,7 +1136,7 @@ describe('LuxonDateAdapter formatter', () => {
 
                     it('rangeShortDateTime (startDate is other year)', () => {
                         const startDate = adapter.today().minus({ years: 1 });
-                        const startString = startDate.toFormat(`${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
+                        const startString = adapter.format(startDate, `${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
 
                         expect(adapter.rangeShortDateTime(startDate))
                             .toBe(`${FROM}${NBSP}${startString}`);
@@ -1144,7 +1144,7 @@ describe('LuxonDateAdapter formatter', () => {
 
                     it('rangeShortDateTime (endDate is other year)', () => {
                         const endDate = adapter.today().plus({ years: 1 });
-                        const endString = endDate.toFormat(`${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
+                        const endString = adapter.format(endDate, `${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
 
                         expect(adapter.rangeShortDateTime(null, endDate))
                             .toBe(`${UNTIL}${NBSP}${endString}`);
@@ -1164,7 +1164,7 @@ describe('LuxonDateAdapter formatter', () => {
 
                     it('rangeLongDate (only startDate)', () => {
                         const startDate = adapter.today();
-                        const startString = startDate.toFormat(startDateFormat);
+                        const startString = adapter.format(startDate, startDateFormat);
 
                         expect(adapter.rangeLongDate(startDate))
                             .toBe(`${FROM}${NBSP}${startString}`);
@@ -1172,7 +1172,7 @@ describe('LuxonDateAdapter formatter', () => {
 
                     it('rangeLongDate (only endDate)', () => {
                         const endDate = adapter.today();
-                        const endString = endDate.toFormat(endDateFormat);
+                        const endString = adapter.format(endDate, endDateFormat);
 
                         expect(adapter.rangeLongDate(null, endDate))
                             .toBe(`${UNTIL}${NBSP}${endString}`);
@@ -1180,7 +1180,7 @@ describe('LuxonDateAdapter formatter', () => {
 
                     it('rangeLongDate (startDate is other year)', () => {
                         const startDate = adapter.today().minus({ years: 1 });
-                        const startString = startDate.toFormat(`${startDateFormat} ${YEAR}`);
+                        const startString = adapter.format(startDate, `${startDateFormat} ${YEAR}`);
 
                         expect(adapter.rangeLongDate(startDate))
                             .toBe(`${FROM}${NBSP}${startString}`);
@@ -1188,7 +1188,7 @@ describe('LuxonDateAdapter formatter', () => {
 
                     it('rangeLongDate (endDate is other year)', () => {
                         const endDate = adapter.today().plus({ years: 1 });
-                        const endString = endDate.toFormat(`${endDateFormat} ${YEAR}`);
+                        const endString = adapter.format(endDate, `${endDateFormat} ${YEAR}`);
 
                         expect(adapter.rangeLongDate(null, endDate))
                             .toBe(`${UNTIL}${NBSP}${endString}`);
@@ -1208,7 +1208,7 @@ describe('LuxonDateAdapter formatter', () => {
 
                     it('rangeLongDateTime (only startDate)', () => {
                         const startDate = adapter.today();
-                        const startString = startDate.toFormat(startDateFormat);
+                        const startString = adapter.format(startDate, startDateFormat);
 
                         expect(adapter.rangeLongDateTime(startDate))
                             .toBe(`${FROM}${NBSP}${startString}`);
@@ -1216,7 +1216,7 @@ describe('LuxonDateAdapter formatter', () => {
 
                     it('rangeLongDateTime (only endDate)', () => {
                         const endDate = adapter.today();
-                        const endString = endDate.toFormat(endDateFormat);
+                        const endString = adapter.format(endDate, endDateFormat);
 
                         expect(adapter.rangeLongDateTime(null, endDate))
                             .toBe(`${UNTIL}${NBSP}${endString}`);
@@ -1224,7 +1224,7 @@ describe('LuxonDateAdapter formatter', () => {
 
                     it('rangeLongDateTime (startDate is other year)', () => {
                         const startDate = adapter.today().minus({ years: 1 });
-                        const startString = startDate.toFormat(`${DAY_MONTH} ${YEAR}, ${TIME}`);
+                        const startString = adapter.format(startDate, `${DAY_MONTH} ${YEAR}, ${TIME}`);
 
                         expect(adapter.rangeLongDateTime(startDate))
                             .toBe(`${FROM}${NBSP}${startString}`);
@@ -1232,7 +1232,7 @@ describe('LuxonDateAdapter formatter', () => {
 
                     it('rangeLongDateTime (endDate is other year)', () => {
                         const endDate = adapter.today().plus({ years: 1 });
-                        const endString = endDate.toFormat(`${DAY_MONTH} ${YEAR}, ${TIME}`);
+                        const endString = adapter.format(endDate, `${DAY_MONTH} ${YEAR}, ${TIME}`);
 
                         expect(adapter.rangeLongDateTime(null, endDate))
                             .toBe(`${UNTIL}${NBSP}${endString}`);
@@ -1448,8 +1448,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().set({ day: 1 });
                         const endDate = startDate.plus({ days: 10 });
 
-                        const startString: string = startDate.toFormat(startDateFormat);
-                        const endString: string = endDate.toFormat(`${DAY}`);
+                        const startString = adapter.format(startDate, startDateFormat);
+                        const endString = adapter.format(endDate, `${DAY}`);
 
                         expect(adapter.rangeShortDate(startDate, endDate))
                             .toBe(`${startString}${DASH}${endString}`);
@@ -1459,8 +1459,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().set({ month: 1 });
                         const endDate = startDate.plus({ months: 1 });
 
-                        const startString: string = startDate.toFormat(startDateFormat);
-                        const endString: string = endDate.toFormat(endDateFormat);
+                        const startString = adapter.format(startDate, startDateFormat);
+                        const endString = adapter.format(endDate, endDateFormat);
 
                         expect(adapter.rangeShortDate(startDate, endDate))
                             .toBe(`${startString}${LONG_DASH}${endString}`);
@@ -1470,8 +1470,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().minus({ years: 1 });
                         const endDate = adapter.today();
 
-                        const startString: string = startDate.toFormat(`${startDateFormat}, ${YEAR}`);
-                        const endString: string = endDate.toFormat(`${endDateFormat}, ${YEAR}`);
+                        const startString = adapter.format(startDate, `${startDateFormat}, ${YEAR}`);
+                        const endString = adapter.format(endDate, `${endDateFormat}, ${YEAR}`);
 
                         expect(adapter.rangeShortDate(startDate, endDate))
                             .toBe(`${startString}${LONG_DASH}${endString}`);
@@ -1481,8 +1481,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today();
                         const endDate = startDate.plus({ years: 1 });
 
-                        const startString: string = startDate.toFormat(`${startDateFormat}, ${YEAR}`);
-                        const endString: string = endDate.toFormat(`${endDateFormat}, ${YEAR}`);
+                        const startString = adapter.format(startDate, `${startDateFormat}, ${YEAR}`);
+                        const endString = adapter.format(endDate, `${endDateFormat}, ${YEAR}`);
 
                         expect(adapter.rangeShortDate(startDate, endDate))
                             .toBe(`${startString}${LONG_DASH}${endString}`);
@@ -1499,8 +1499,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().set({ day: 1 });
                         const endDate = startDate.plus({ days: 10 });
 
-                        const startString: string = startDate.toFormat(startDateFormat);
-                        const endString: string = endDate.toFormat(endDateFormat);
+                        const startString = adapter.format(startDate, startDateFormat);
+                        const endString = adapter.format(endDate, endDateFormat);
 
                         expect(adapter.rangeShortDateTime(startDate, endDate))
                             .toBe(`${startString}${LONG_DASH}${endString}`);
@@ -1510,8 +1510,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today();
                         const endDate = startDate.plus({ minutes: 10 });
 
-                        const startString = startDate.toFormat(`${TIME}`);
-                        const endString = endDate.toFormat(`${TIME}, ${DAY_SHORT_MONTH}`);
+                        const startString = adapter.format(startDate, `${TIME}`);
+                        const endString = adapter.format(endDate, `${TIME}, ${DAY_SHORT_MONTH}`);
 
                         expect(adapter.rangeShortDateTime(startDate, endDate))
                             .toBe(`${startString}${DASH}${endString}`);
@@ -1521,8 +1521,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().minus({ years: 1 });
                         const endDate = startDate.plus({ minutes: 10 });
 
-                        const startString: string = startDate.toFormat(`${TIME}`);
-                        const endString: string = endDate.toFormat(`${TIME}, ${DAY_SHORT_MONTH}, ${YEAR}`);
+                        const startString = adapter.format(startDate, `${TIME}`);
+                        const endString = adapter.format(endDate, `${TIME}, ${DAY_SHORT_MONTH}, ${YEAR}`);
 
                         expect(adapter.rangeShortDateTime(startDate, endDate))
                             .toBe(`${startString}${DASH}${endString}`);
@@ -1532,8 +1532,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().set({ month: 1 });
                         const endDate = startDate.plus({ months: 1 });
 
-                        const startString: string = startDate.toFormat(startDateFormat);
-                        const endString: string = endDate.toFormat(endDateFormat);
+                        const startString = adapter.format(startDate, startDateFormat);
+                        const endString = adapter.format(endDate, endDateFormat);
 
                         expect(adapter.rangeShortDateTime(startDate, endDate))
                             .toBe(`${startString}${LONG_DASH}${endString}`);
@@ -1543,8 +1543,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().minus({ years: 1 });
                         const endDate = adapter.today();
 
-                        const startString: string = startDate.toFormat(`${DAY_SHORT_MONTH}, ${YEAR}, ${TIME}`);
-                        const endString: string = endDate.toFormat(`${DAY_SHORT_MONTH}, ${YEAR}, ${TIME}`);
+                        const startString = adapter.format(startDate, `${DAY_SHORT_MONTH}, ${YEAR}, ${TIME}`);
+                        const endString = adapter.format(endDate, `${DAY_SHORT_MONTH}, ${YEAR}, ${TIME}`);
 
                         expect(adapter.rangeShortDateTime(startDate, endDate))
                             .toBe(`${startString}${LONG_DASH}${endString}`);
@@ -1554,8 +1554,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today();
                         const endDate = startDate.plus({ years: 1 });
 
-                        const startString: string = startDate.toFormat(`${DAY_SHORT_MONTH}, ${YEAR}, ${TIME}`);
-                        const endString: string = endDate.toFormat(`${DAY_SHORT_MONTH}, ${YEAR}, ${TIME}`);
+                        const startString = adapter.format(startDate, `${DAY_SHORT_MONTH}, ${YEAR}, ${TIME}`);
+                        const endString = adapter.format(endDate, `${DAY_SHORT_MONTH}, ${YEAR}, ${TIME}`);
 
                         expect(adapter.rangeShortDateTime(startDate, endDate))
                             .toBe(`${startString}${LONG_DASH}${endString}`);
@@ -1572,8 +1572,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().set({ day: 1 });
                         const endDate = startDate.plus({ days: 10 });
 
-                        const startString: string = startDate.toFormat(startDateFormat);
-                        const endString: string = endDate.toFormat(DAY);
+                        const startString = adapter.format(startDate, startDateFormat);
+                        const endString = adapter.format(endDate, DAY);
 
                         expect(adapter.rangeLongDate(startDate, endDate))
                             .toBe(`${startString}${DASH}${endString}`);
@@ -1583,8 +1583,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().set({ month: 1 });
                         const endDate = startDate.plus({ months: 1 });
 
-                        const startString: string = startDate.toFormat(startDateFormat);
-                        const endString: string = endDate.toFormat(`${endDateFormat}`);
+                        const startString = adapter.format(startDate, startDateFormat);
+                        const endString = adapter.format(endDate, `${endDateFormat}`);
 
                         expect(adapter.rangeLongDate(startDate, endDate))
                             .toBe(`${startString}${LONG_DASH}${endString}`);
@@ -1594,8 +1594,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().minus({ years: 1 });
                         const endDate = adapter.today();
 
-                        const startString: string = startDate.toFormat(`${startDateFormat}, ${YEAR}`);
-                        const endString: string = endDate.toFormat(`${endDateFormat}, ${YEAR}`);
+                        const startString = adapter.format(startDate, `${startDateFormat}, ${YEAR}`);
+                        const endString = adapter.format(endDate, `${endDateFormat}, ${YEAR}`);
 
                         expect(adapter.rangeLongDate(startDate, endDate))
                             .toBe(`${startString}${LONG_DASH}${endString}`);
@@ -1605,8 +1605,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.createDate(2015);
                         const endDate = startDate.plus({ years: 1 });
 
-                        const startString: string = startDate.toFormat(`${startDateFormat}, ${YEAR}`);
-                        const endString: string = endDate.toFormat(`${endDateFormat}, ${YEAR}`);
+                        const startString = adapter.format(startDate, `${startDateFormat}, ${YEAR}`);
+                        const endString = adapter.format(endDate, `${endDateFormat}, ${YEAR}`);
 
                         expect(adapter.rangeLongDate(startDate, endDate))
                             .toBe(`${startString}${LONG_DASH}${endString}`);
@@ -1623,8 +1623,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().set({ day: 1 });
                         const endDate = startDate.plus({ days: 10 });
 
-                        const startString: string = startDate.toFormat(startDateFormat);
-                        const endString: string = endDate.toFormat(endDateFormat);
+                        const startString = adapter.format(startDate, startDateFormat);
+                        const endString = adapter.format(endDate, endDateFormat);
 
                         expect(adapter.rangeLongDateTime(startDate, endDate))
                             .toBe(`${FROM} ${startString} to${NBSP}${endString}`);
@@ -1634,8 +1634,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today();
                         const endDate = startDate.plus({ minutes: 10 });
 
-                        const startString: string = startDate.toFormat(`${DAY_MONTH}, 'from'${NBSP}${TIME}`);
-                        const endString: string = endDate.toFormat(`'to'${NBSP}${TIME}`);
+                        const startString = adapter.format(startDate, `${DAY_MONTH}, 'from'${NBSP}${TIME}`);
+                        const endString = adapter.format(endDate, `'to'${NBSP}${TIME}`);
 
                         expect(adapter.rangeLongDateTime(startDate, endDate))
                             .toBe(`${startString} ${endString}`);
@@ -1645,8 +1645,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().minus({ years: 1 });
                         const endDate = startDate.plus({ minutes: 10 });
 
-                        const startString: string = startDate.toFormat(`${DAY_MONTH}, ${YEAR}, 'from'${NBSP}${TIME}`);
-                        const endString: string = endDate.toFormat(`'to'${NBSP}${TIME}`);
+                        const startString = adapter.format(startDate, `${DAY_MONTH}, ${YEAR}, 'from'${NBSP}${TIME}`);
+                        const endString = adapter.format(endDate, `'to'${NBSP}${TIME}`);
 
                         expect(adapter.rangeLongDateTime(startDate, endDate))
                             .toBe(`${startString} ${endString}`);
@@ -1656,8 +1656,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().set({ month: 1 });
                         const endDate = startDate.plus({ months: 1 });
 
-                        const startString: string = startDate.toFormat(startDateFormat);
-                        const endString: string = endDate.toFormat(endDateFormat);
+                        const startString = adapter.format(startDate, startDateFormat);
+                        const endString = adapter.format(endDate, endDateFormat);
 
                         expect(adapter.rangeLongDateTime(startDate, endDate))
                             .toBe(`${FROM} ${startString} to${NBSP}${endString}`);
@@ -1667,8 +1667,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().minus({ years: 1 });
                         const endDate = adapter.today();
 
-                        const startString: string = startDate.toFormat(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
-                        const endString: string = endDate.toFormat(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
+                        const startString = adapter.format(startDate, `${DAY_MONTH}, ${YEAR}, ${TIME}`);
+                        const endString = adapter.format(endDate, `${DAY_MONTH}, ${YEAR}, ${TIME}`);
 
                         expect(adapter.rangeLongDateTime(startDate, endDate))
                             .toBe(`${FROM} ${startString} to${NBSP}${endString}`);
@@ -1678,8 +1678,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.createDate(2015);
                         const endDate = startDate.plus({ years: 1 });
 
-                        const startString: string = startDate.toFormat(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
-                        const endString: string = endDate.toFormat(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
+                        const startString = adapter.format(startDate, `${DAY_MONTH}, ${YEAR}, ${TIME}`);
+                        const endString = adapter.format(endDate, `${DAY_MONTH}, ${YEAR}, ${TIME}`);
 
                         expect(adapter.rangeLongDateTime(startDate, endDate))
                             .toBe(`${FROM} ${startString} to${NBSP}${endString}`);
@@ -1696,8 +1696,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().set({ day: 1 });
                         const endDate = startDate.plus({ days: 10 });
 
-                        const startString: string = startDate.toFormat(startDateFormat);
-                        const endString: string = endDate.toFormat(endDateFormat);
+                        const startString = adapter.format(startDate, startDateFormat);
+                        const endString = adapter.format(endDate, endDateFormat);
 
                         expect(adapter.rangeMiddleDateTime(startDate, endDate))
                             .toBe(`${startString}${LONG_DASH}${endString}`);
@@ -1707,8 +1707,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today();
                         const endDate = startDate.plus({ minutes: 10 });
 
-                        const startString: string = startDate.toFormat(`${TIME}`);
-                        const endString: string = endDate.toFormat(`${TIME}, ${DAY_MONTH}`);
+                        const startString = adapter.format(startDate, `${TIME}`);
+                        const endString = adapter.format(endDate, `${TIME}, ${DAY_MONTH}`);
 
                         expect(adapter.rangeMiddleDateTime(startDate, endDate))
                             .toBe(`${startString}${DASH}${endString}`);
@@ -1718,8 +1718,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().minus({ years: 1 });
                         const endDate = startDate.plus({ minutes: 10 });
 
-                        const startString: string = startDate.toFormat(`${TIME}`);
-                        const endString: string = endDate.toFormat(`${TIME}, ${DAY_MONTH}, ${YEAR}`);
+                        const startString = adapter.format(startDate, `${TIME}`);
+                        const endString = adapter.format(endDate, `${TIME}, ${DAY_MONTH}, ${YEAR}`);
 
                         expect(adapter.rangeMiddleDateTime(startDate, endDate))
                             .toBe(`${startString}${DASH}${endString}`);
@@ -1729,8 +1729,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().set({ month: 1 });
                         const endDate = startDate.plus({ months: 1 });
 
-                        const startString: string = startDate.toFormat(startDateFormat);
-                        const endString: string = endDate.toFormat(endDateFormat);
+                        const startString = adapter.format(startDate, startDateFormat);
+                        const endString = adapter.format(endDate, endDateFormat);
 
                         expect(adapter.rangeMiddleDateTime(startDate, endDate))
                             .toBe(`${startString}${LONG_DASH}${endString}`);
@@ -1740,8 +1740,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.today().minus({ years: 1 });
                         const endDate = adapter.today();
 
-                        const startString = startDate.toFormat(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
-                        const endString = endDate.toFormat(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
+                        const startString = adapter.format(startDate, `${DAY_MONTH}, ${YEAR}, ${TIME}`);
+                        const endString = adapter.format(endDate, `${DAY_MONTH}, ${YEAR}, ${TIME}`);
 
                         expect(adapter.rangeMiddleDateTime(startDate, endDate))
                             .toBe(`${startString}${LONG_DASH}${endString}`);
@@ -1751,8 +1751,8 @@ describe('LuxonDateAdapter formatter', () => {
                         const startDate = adapter.createDate(2015);
                         const endDate = startDate.plus({ years: 1 });
 
-                        const startString = startDate.toFormat(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
-                        const endString = endDate.toFormat(`${DAY_MONTH}, ${YEAR}, ${TIME}`);
+                        const startString = adapter.format(startDate, `${DAY_MONTH}, ${YEAR}, ${TIME}`);
+                        const endString = adapter.format(endDate, `${DAY_MONTH}, ${YEAR}, ${TIME}`);
 
                         expect(adapter.rangeMiddleDateTime(startDate, endDate))
                             .toBe(`${startString}${LONG_DASH}${endString}`);
@@ -1774,7 +1774,7 @@ describe('LuxonDateAdapter formatter', () => {
 
                     it('rangeShortDate (only startDate)', () => {
                         const startDate = adapter.today();
-                        const startString = startDate.toFormat(startDateFormat);
+                        const startString = adapter.format(startDate, startDateFormat);
 
                         expect(adapter.rangeShortDate(startDate))
                             .toBe(`${FROM}${NBSP}${startString}`);
@@ -1782,7 +1782,7 @@ describe('LuxonDateAdapter formatter', () => {
 
                     it('rangeShortDate (only endDate)', () => {
                         const endDate = adapter.today();
-                        const endString = endDate.toFormat(endDateFormat);
+                        const endString = adapter.format(endDate, endDateFormat);
 
                         expect(adapter.rangeShortDate(null, endDate))
                             .toBe(`${UNTIL}${NBSP}${endString}`);
@@ -1790,7 +1790,7 @@ describe('LuxonDateAdapter formatter', () => {
 
                     it('rangeShortDate (startDate is other year)', () => {
                         const startDate = adapter.today().minus({ years: 1 });
-                        const startString = startDate.toFormat(`${startDateFormat} ${YEAR}`);
+                        const startString = adapter.format(startDate, `${startDateFormat} ${YEAR}`);
 
                         expect(adapter.rangeShortDate(startDate))
                             .toBe(`${FROM}${NBSP}${startString}`);
@@ -1798,7 +1798,7 @@ describe('LuxonDateAdapter formatter', () => {
 
                     it('rangeShortDate (endDate is other year)', () => {
                         const endDate = adapter.today().plus({ years: 1 });
-                        const endString = endDate.toFormat(`${endDateFormat} ${YEAR}`);
+                        const endString = adapter.format(endDate, `${endDateFormat} ${YEAR}`);
 
                         expect(adapter.rangeShortDate(null, endDate))
                             .toBe(`${UNTIL}${NBSP}${endString}`);
@@ -1818,7 +1818,7 @@ describe('LuxonDateAdapter formatter', () => {
 
                     it('rangeShortDateTime (only startDate)', () => {
                         const startDate = adapter.today();
-                        const startString = startDate.toFormat(startDateFormat);
+                        const startString = adapter.format(startDate, startDateFormat);
 
                         expect(adapter.rangeShortDateTime(startDate))
                             .toBe(`${FROM}${NBSP}${startString}`);
@@ -1826,7 +1826,7 @@ describe('LuxonDateAdapter formatter', () => {
 
                     it('rangeShortDateTime (only endDate)', () => {
                         const endDate = adapter.today();
-                        const endString = endDate.toFormat(endDateFormat);
+                        const endString = adapter.format(endDate, endDateFormat);
 
                         expect(adapter.rangeShortDateTime(null, endDate))
                             .toBe(`${UNTIL}${NBSP}${endString}`);
@@ -1834,7 +1834,7 @@ describe('LuxonDateAdapter formatter', () => {
 
                     it('rangeShortDateTime (startDate is other year)', () => {
                         const startDate = adapter.today().minus({ years: 1 });
-                        const startString = startDate.toFormat(`${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
+                        const startString = adapter.format(startDate, `${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
 
                         expect(adapter.rangeShortDateTime(startDate))
                             .toBe(`${FROM}${NBSP}${startString}`);
@@ -1842,7 +1842,7 @@ describe('LuxonDateAdapter formatter', () => {
 
                     it('rangeShortDateTime (endDate is other year)', () => {
                         const endDate = adapter.today().plus({ years: 1 });
-                        const endString = endDate.toFormat(`${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
+                        const endString = adapter.format(endDate, `${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
 
                         expect(adapter.rangeShortDateTime(null, endDate))
                             .toBe(`${UNTIL}${NBSP}${endString}`);
@@ -1862,7 +1862,7 @@ describe('LuxonDateAdapter formatter', () => {
 
                     it('rangeLongDate (only startDate)', () => {
                         const startDate = adapter.today();
-                        const startString = startDate.toFormat(startDateFormat);
+                        const startString = adapter.format(startDate, startDateFormat);
 
                         expect(adapter.rangeLongDate(startDate))
                             .toBe(`${FROM}${NBSP}${startString}`);
@@ -1870,7 +1870,7 @@ describe('LuxonDateAdapter formatter', () => {
 
                     it('rangeLongDate (only endDate)', () => {
                         const endDate = adapter.today();
-                        const endString = endDate.toFormat(endDateFormat);
+                        const endString = adapter.format(endDate, endDateFormat);
 
                         expect(adapter.rangeLongDate(null, endDate))
                             .toBe(`${UNTIL}${NBSP}${endString}`);
@@ -1879,7 +1879,7 @@ describe('LuxonDateAdapter formatter', () => {
                     it('rangeLongDate (startDate is other year)', () => {
                         const startDate = adapter.today()
                             .minus({ years: 1 });
-                        const startString = startDate.toFormat(`${startDateFormat} ${YEAR}`);
+                        const startString = adapter.format(startDate, `${startDateFormat} ${YEAR}`);
 
                         expect(adapter.rangeLongDate(startDate))
                             .toBe(`${FROM}${NBSP}${startString}`);
@@ -1887,7 +1887,7 @@ describe('LuxonDateAdapter formatter', () => {
 
                     it('rangeLongDate (endDate is other year)', () => {
                         const endDate = adapter.today().plus({ years: 1 });
-                        const endString = endDate.toFormat(`${endDateFormat} ${YEAR}`);
+                        const endString = adapter.format(endDate, `${endDateFormat} ${YEAR}`);
 
                         expect(adapter.rangeLongDate(null, endDate))
                             .toBe(`${UNTIL}${NBSP}${endString}`);
@@ -1907,7 +1907,7 @@ describe('LuxonDateAdapter formatter', () => {
 
                     it('rangeLongDateTime (only startDate)', () => {
                         const startDate = adapter.today();
-                        const startString = startDate.toFormat(startDateFormat);
+                        const startString = adapter.format(startDate, startDateFormat);
 
                         expect(adapter.rangeLongDateTime(startDate))
                             .toBe(`${FROM}${NBSP}${startString}`);
@@ -1915,7 +1915,7 @@ describe('LuxonDateAdapter formatter', () => {
 
                     it('rangeLongDateTime (only endDate)', () => {
                         const endDate = adapter.today();
-                        const endString = endDate.toFormat(endDateFormat);
+                        const endString = adapter.format(endDate, endDateFormat);
 
                         expect(adapter.rangeLongDateTime(null, endDate))
                             .toBe(`${UNTIL}${NBSP}${endString}`);
@@ -1923,7 +1923,7 @@ describe('LuxonDateAdapter formatter', () => {
 
                     it('rangeLongDateTime (startDate is other year)', () => {
                         const startDate = adapter.today().minus({ years: 1 });
-                        const startString = startDate.toFormat(`${DAY_MONTH} ${YEAR}, ${TIME}`);
+                        const startString = adapter.format(startDate, `${DAY_MONTH} ${YEAR}, ${TIME}`);
 
                         expect(adapter.rangeLongDateTime(startDate))
                             .toBe(`${FROM}${NBSP}${startString}`);
@@ -1931,7 +1931,7 @@ describe('LuxonDateAdapter formatter', () => {
 
                     it('rangeLongDateTime (endDate is other year)', () => {
                         const endDate = adapter.today().plus({ years: 1 });
-                        const endString = endDate.toFormat(`${DAY_MONTH} ${YEAR}, ${TIME}`);
+                        const endString = adapter.format(endDate, `${DAY_MONTH} ${YEAR}, ${TIME}`);
 
                         expect(adapter.rangeLongDateTime(null, endDate))
                             .toBe(`${UNTIL}${NBSP}${endString}`);
