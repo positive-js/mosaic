@@ -38,6 +38,10 @@ $mc-tab-border-width-focus: calc(var(--mc-tabs-size-border-width, $tabs-size-bor
         style: solid;
     }
 
+    &.mc-active {
+        cursor: default;
+    }
+
     &.cdk-keyboard-focused {
         z-index: 1;
 
