@@ -11,8 +11,7 @@
         "strictMetadataEmit": true,
         "flatModuleId": "@ptsecurity/mosaic",
         "skipTemplateCodegen": true,
-        "fullTemplateTypeCheck": true,
-        "enableIvy": false
+        "fullTemplateTypeCheck": true
     },
     "include": [
         "**/*.ts"

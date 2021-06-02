@@ -5,8 +5,5 @@
             "jasmine",
             "node"
         ]
-    },
-    "angularCompilerOptions": {
-        "enableIvy": false
     }
 }

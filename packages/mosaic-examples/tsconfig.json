@@ -11,8 +11,7 @@
         "skipTemplateCodegen": true,
         "strictMetadataEmit": true,
         "strictInjectionParameters": true,
-        "enableResourceInlining": true,
-        "enableIvy": false
+        "enableResourceInlining": true
     },
     "include": [
         "**/*.ts"

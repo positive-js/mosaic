@@ -14,7 +14,6 @@
         "strictMetadataEmit": true,
         "flatModuleId": "@ptsecurity/cdk",
         "skipTemplateCodegen": true,
-        "fullTemplateTypeCheck": true,
-        "enableIvy": false
+        "fullTemplateTypeCheck": true
     }
 }
