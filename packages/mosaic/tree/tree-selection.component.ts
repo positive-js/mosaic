@@ -477,8 +477,10 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
             throw getMcSelectNonArrayValueError();
         }
 
-        if (this.renderedOptions.length) {
+        if (value) {
             this.setOptionsFromValues(this.multiple ? value : [value]);
+        } else {
+            this.selectionModel.clear();
         }
     }
 
@@ -613,9 +615,7 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
     }
 
     private markOptionsForCheck() {
-        if (this.renderedOptions.length) {
-            this.renderedOptions.forEach((option) => option.markForCheck());
-        }
+        this.renderedOptions.forEach((option) => option.markForCheck());
     }
 
     private updateOptionsFocus() {
