@@ -2,7 +2,7 @@
 @import '../core/styles/common/layout';
 
 
-$mc-tab-border-width-focus: calc(var(--mc-tabs-size-border-width, $tabs-size-border-width) * 2);
+$mc-tab-border-width-focus: calc(var(--mc-tabs-size-border-width, #{$tabs-size-border-width}) * 2);
 
 %tab-pseudo {
     display: block;
@@ -48,7 +48,7 @@ $mc-tab-border-width-focus: calc(var(--mc-tabs-size-border-width, $tabs-size-bor
         &:after {
             @extend %tab-pseudo;
 
-            top: -$mc-tab-border-width-focus;
+            top: calc(-2 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
             right: calc(-1 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
             bottom: calc(-1 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
             left: calc(-1 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
@@ -56,8 +56,8 @@ $mc-tab-border-width-focus: calc(var(--mc-tabs-size-border-width, $tabs-size-bor
                 width: $mc-tab-border-width-focus;
                 style: solid;
                 top: {
-                    left-radius: var(--mc-tabs-size-border-radius, $tabs-size-border-radius);
-                    right-radius: var(--mc-tabs-size-border-radius, $tabs-size-border-radius);
+                    left-radius: var(--mc-tabs-size-border-radius, #{$tabs-size-border-radius});
+                    right-radius: var(--mc-tabs-size-border-radius, #{$tabs-size-border-radius});
                 }
                 bottom: none;
             }
@@ -114,7 +114,7 @@ $mc-tab-border-width-focus: calc(var(--mc-tabs-size-border-width, $tabs-size-bor
 
     bottom: calc(-1 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
     left: 0;
-    height: var(--mc-tabs-size-highlight-height, $tabs-size-highlight-height);
+    height: var(--mc-tabs-size-highlight-height, #{$tabs-size-highlight-height});
     right: 0;
 }
 
@@ -122,11 +122,11 @@ $mc-tab-border-width-focus: calc(var(--mc-tabs-size-border-width, $tabs-size-bor
     @include tab-label-common();
 
     border-top: {
-        width: var(--mc-tabs-size-border-width, $tabs-size-border-width);
+        width: var(--mc-tabs-size-border-width, #{$tabs-size-border-width});
 
         style: solid;
-        left-radius: var(--mc-tabs-size-border-radius, $tabs-size-border-radius);
-        right-radius: var(--mc-tabs-size-border-radius, $tabs-size-border-radius);
+        left-radius: var(--mc-tabs-size-border-radius, #{$tabs-size-border-radius});
+        right-radius: var(--mc-tabs-size-border-radius, #{$tabs-size-border-radius});
     }
 
     &.mc-active {
@@ -140,27 +140,27 @@ $mc-tab-border-width-focus: calc(var(--mc-tabs-size-border-width, $tabs-size-bor
         );
 
         border: {
-            width: var(--mc-tabs-size-border-width, $tabs-size-border-width);
+            width: var(--mc-tabs-size-border-width, #{$tabs-size-border-width});
             style: solid;
         }
 
         &.cdk-keyboard-focused {
             &:after {
                 z-index: 1;
-                right: - $mc-tab-border-width-focus;
-                left: - $mc-tab-border-width-focus;
+                right: calc(-2 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
+                left: calc(-2 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
             }
         }
     }
 
     .mc-tab-overlay {
         border-top: {
-            width: var(--mc-tabs-size-border-width, $tabs-size-border-width);
+            width: var(--mc-tabs-size-border-width, #{$tabs-size-border-width});
 
             style: solid;
             color: transparent;
-            left-radius: var(--mc-tabs-size-border-radius, $tabs-size-border-radius);
-            right-radius: var(--mc-tabs-size-border-radius, $tabs-size-border-radius);
+            left-radius: var(--mc-tabs-size-border-radius, #{$tabs-size-border-radius});
+            right-radius: var(--mc-tabs-size-border-radius, #{$tabs-size-border-radius});
         }
     }
 }

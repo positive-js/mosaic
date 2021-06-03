@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 01 Jun 2021 08:36:03 GMT
+ * Generated on Thu, 03 Jun 2021 12:35:30 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
@@ -636,8 +636,10 @@ export const TableFontHeader = "caption";
 export const TableFontBody = "body";
 export const TabsLightColorSchemeBorder = "#B3B3B3";
 export const TabsLightColorSchemeStateActive = "#338FCC";
+export const TabsLightColorSchemeStateDisabledOverlay = "rgba(white, 0.5)";
 export const TabsDarkColorSchemeBorder = "#B3B3B3";
 export const TabsDarkColorSchemeStateActive = "#57A4D7";
+export const TabsDarkColorSchemeStateDisabledOverlay = "rgba(white, 0.5)";
 export const TabsSizeHeight = "40px";
 export const TabsSizeHighlightHeight = "4px";
 export const TabsSizePaddingHorizontal = "16px";

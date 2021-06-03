@@ -1,6 +1,6 @@
 
 // Do not edit directly
-// Generated on Tue, 01 Jun 2021 08:36:03 GMT
+// Generated on Thu, 03 Jun 2021 12:35:30 GMT
 
 $light-color-scheme-primary-default: #338FCC;
 $light-color-scheme-second-default: #B3B3B3;
@@ -528,8 +528,10 @@ $table-font-header: caption;
 $table-font-body: body;
 $tabs-light-color-scheme-border: #B3B3B3;
 $tabs-light-color-scheme-state-active: #338FCC;
+$tabs-light-color-scheme-state-disabled-overlay: rgba(white, 0.5);
 $tabs-dark-color-scheme-border: #B3B3B3;
 $tabs-dark-color-scheme-state-active: #57A4D7;
+$tabs-dark-color-scheme-state-disabled-overlay: rgba(white, 0.5);
 $tabs-size-height: 40px;
 $tabs-size-highlight-height: 4px;
 $tabs-size-padding-horizontal: 16px;

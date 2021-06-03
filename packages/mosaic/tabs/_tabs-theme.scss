@@ -28,14 +28,10 @@
         }
 
         &.mc-disabled {
-            color: map-get($foreground, text-disabled);
-
             cursor: default;
 
-            background: map-get($background, background-disabled);
-
             & .mc-tab-overlay {
-                background: map-get($background, overlay-disabled);
+                background: map-get($tabs, state-disabled-overlay);
             }
         }
     }
@@ -78,10 +74,8 @@
             }
         }
 
-        &.mc-disabled {
-            &:before {
-                background-color: map-get($tabs, border);
-            }
+        &.mc-disabled:before {
+            background-color: map-get($tabs, border);
         }
     }
 }
