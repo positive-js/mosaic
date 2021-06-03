@@ -63,12 +63,6 @@ export class McTab extends McTabMixinBase implements OnInit, CanDisable, OnChang
 
     @Input('tabId') tabId: string;
 
-    /**
-     * Reference to the element that the tab is labelled by.
-     * Will be cleared if `aria-label` is set at the same time.
-     */
-    @Input('aria-labelledby') ariaLabelledby: string;
-
     /** Emits whenever the internal state of the tab changes. */
     readonly stateChanges = new Subject<void>();
 
