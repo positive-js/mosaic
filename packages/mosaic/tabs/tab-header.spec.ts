@@ -26,8 +26,8 @@ import {
 } from '@ptsecurity/cdk/testing';
 import { Subject } from 'rxjs';
 
-import { McTabHeader } from './tab-header';
-import { McTabLabelWrapper } from './tab-label-wrapper';
+import { McTabHeader } from './tab-header.component';
+import { McTabLabelWrapper } from './tab-label-wrapper.directive';
 
 
 describe('McTabHeader', () => {

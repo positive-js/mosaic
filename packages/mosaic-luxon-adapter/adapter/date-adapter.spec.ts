@@ -586,12 +586,12 @@ describe('LuxonDateAdapter formatter', () => {
                         .minus({ days: 2 });
 
                     expect(adapter.relativeShortDate(date))
-                        .toBe(date.toFormat(`${DAY}${NBSP}${SHORT_MONTH}, ${TIME}`));
+                        .toBe(adapter.format(date, `${DAY}${NBSP}${SHORT_MONTH}, ${TIME}`));
 
                     date = adapter.today().minus({ days: 5 });
 
                     expect(adapter.relativeShortDate(date))
-                        .toBe(date.toFormat(`${DAY}${NBSP}${SHORT_MONTH}, ${TIME}`));
+                        .toBe(adapter.format(date, `${DAY}${NBSP}${SHORT_MONTH}, ${TIME}`));
                 });
 
                 it('before yesterday (other year)', () => {

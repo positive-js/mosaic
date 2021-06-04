@@ -201,15 +201,6 @@ describe('McTabGroup', () => {
             expect(fixture.componentInstance.animationDone).toHaveBeenCalled();
         }));
 
-        it('should add the proper `aria-setsize` and `aria-posinset`', () => {
-            fixture.detectChanges();
-
-            const labels = Array.from(element.querySelectorAll('.mc-tab-label'));
-
-            expect(labels.map((label) => label.getAttribute('aria-posinset'))).toEqual(['1', '2', '3']);
-            expect(labels.every((label) => label.getAttribute('aria-setsize') === '3')).toBe(true);
-        });
-
         it('should emit focusChange event on click', () => {
             spyOn(fixture.componentInstance, 'handleFocus');
             fixture.detectChanges();
@@ -262,7 +253,6 @@ describe('McTabGroup', () => {
             fixture.detectChanges();
             const labels = fixture.debugElement.queryAll(By.css('.mc-disabled'));
             expect(labels.length).toBe(1);
-            expect(labels[0].nativeElement.getAttribute('aria-disabled')).toBe('true');
         });
 
         it('should set the disabled flag on tab', () => {
@@ -272,7 +262,6 @@ describe('McTabGroup', () => {
             let labels = fixture.debugElement.queryAll(By.css('.mc-disabled'));
             expect(tabs[2].disabled).toBe(false);
             expect(labels.length).toBe(1);
-            expect(labels[0].nativeElement.getAttribute('aria-disabled')).toBe('true');
 
             fixture.componentInstance.isDisabled = true;
             fixture.detectChanges();
@@ -280,8 +269,6 @@ describe('McTabGroup', () => {
             expect(tabs[2].disabled).toBe(true);
             labels = fixture.debugElement.queryAll(By.css('.mc-disabled'));
             expect(labels.length).toBe(2);
-            expect(labels.every((label) => label.nativeElement.getAttribute('aria-disabled') === 'true'))
-                .toBe(true);
         });
     });
 

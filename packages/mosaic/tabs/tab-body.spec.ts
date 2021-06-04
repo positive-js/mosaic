@@ -6,7 +6,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Subject } from 'rxjs';
 
-import { McTabBody, McTabBodyPortal } from './tab-body';
+import { McTabBody, McTabBodyPortal } from './tab-body.component';
 
 
 describe('McTabBody', () => {
