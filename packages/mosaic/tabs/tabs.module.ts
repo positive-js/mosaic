@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { McCommonModule } from '@ptsecurity/mosaic/core';
 
-import { McTab } from './tab.component';
 import { McTabBody, McTabBodyPortal } from './tab-body.component';
 import { McTabContent } from './tab-content.directive';
 import {
@@ -12,12 +11,14 @@ import {
     McLightTabsCssStyler,
     McAlignTabsCenterCssStyler,
     McAlignTabsEndCssStyler,
-    McStretchTabsCssStyler
+    McStretchTabsCssStyler,
+    McVerticalTabsCssStyler
 } from './tab-group.component';
 import { McTabHeader } from './tab-header.component';
-import { McTabLabel } from './tab-label.directive';
 import { McTabLabelWrapper } from './tab-label-wrapper.directive';
-import { McTabLink, McTabNav } from './tab-nav-bar/tab-nav-bar';
+import { McTabLabel } from './tab-label.directive';
+import { McTabLink, McTabNav } from './tab-nav-bar';
+import { McTab } from './tab.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { McTabLink, McTabNav } from './tab-nav-bar/tab-nav-bar';
         McLightTabsCssStyler,
         McAlignTabsCenterCssStyler,
         McAlignTabsEndCssStyler,
-        McStretchTabsCssStyler
+        McStretchTabsCssStyler,
+        McVerticalTabsCssStyler
     ],
     declarations: [
         McTabGroup,
@@ -55,7 +57,8 @@ import { McTabLink, McTabNav } from './tab-nav-bar/tab-nav-bar';
         McLightTabsCssStyler,
         McAlignTabsCenterCssStyler,
         McAlignTabsEndCssStyler,
-        McStretchTabsCssStyler
+        McStretchTabsCssStyler,
+        McVerticalTabsCssStyler
     ]
 })
 export class McTabsModule {}

@@ -1,5 +1,6 @@
 <mc-tab-header
     #tabHeader
+    [vertical]="vertical"
     [selectedIndex]="selectedIndex"
     (indexFocused)="focusChanged($event)"
     (selectFocusedIndex)="selectedIndex = $event">

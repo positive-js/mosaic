@@ -1,6 +1,7 @@
 <div class="mc-tab-header__pagination mc-tab-header__pagination_before mc-elevation-z4"
      [class.mc-tab-header_disabled]="disableScrollBefore"
      (click)="scrollHeader('before')">
+
     <div class="mc-tab-header__pagination-chevron"></div>
 </div>
 
@@ -9,7 +10,6 @@
      (keydown)="handleKeydown($event)">
     <div class="mc-tab-list"
          #tabList
-         role="tablist"
          (cdkObserveContent)="onContentChanges()">
         <div class="mc-tab-list__content">
             <ng-content></ng-content>
@@ -20,5 +20,6 @@
 <div class="mc-tab-header__pagination mc-tab-header__pagination_after mc-elevation-z4"
      [class.mc-tab-header_disabled]="disableScrollAfter"
      (click)="scrollHeader('after')">
+
     <div class="mc-tab-header__pagination-chevron"></div>
 </div>

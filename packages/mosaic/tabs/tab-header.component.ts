@@ -67,9 +67,10 @@ export class McTabHeaderBase {}
         '[class.mc-tab-header_rtl]': 'getLayoutDirection() == \'rtl\''
     }
 })
-export class McTabHeader extends McTabHeaderBase
-    implements AfterContentChecked, AfterContentInit, OnDestroy {
+export class McTabHeader extends McTabHeaderBase implements AfterContentChecked, AfterContentInit, OnDestroy {
     /** The index of the active tab. */
+    @Input() vertical: boolean = false;
+
     @Input()
     get selectedIndex(): number {
         return this._selectedIndex;
@@ -221,21 +222,17 @@ export class McTabHeader extends McTabHeaderBase
     ngAfterContentInit() {
         const dirChange = this.dir ? this.dir.change : observableOf(null);
         const resize = this.viewportRuler.change(VIEWPORT_THROTTLE_TIME);
-        const realign = () => {
-            this.updatePagination();
-        };
+        const realign = () => this.updatePagination();
 
         this.keyManager = new FocusKeyManager(this.labelWrappers)
             .withHorizontalOrientation(this.getLayoutDirection())
-            .withWrap();
+            .withVerticalOrientation(this.vertical);
 
         this.keyManager.updateActiveItem(0);
 
         // Defer the first call in order to allow for slower browsers to lay out the elements.
         // This helps in cases where the user lands directly on a page with paginated tabs.
-        typeof requestAnimationFrame === undefined
-            ? realign()
-            : requestAnimationFrame(realign);
+        typeof requestAnimationFrame === undefined ? realign() : requestAnimationFrame(realign);
 
         // On dir change or window resize, update the orientation of
         // the key manager if the direction has changed.
@@ -243,9 +240,7 @@ export class McTabHeader extends McTabHeaderBase
             .pipe(takeUntil(this.destroyed))
             .subscribe(() => {
                 realign();
-                this.keyManager.withHorizontalOrientation(
-                    this.getLayoutDirection()
-                );
+                this.keyManager.withHorizontalOrientation(this.getLayoutDirection());
             });
 
         // If there is a change in the focus key manager we need to emit the `indexFocused`
@@ -307,13 +302,9 @@ export class McTabHeader extends McTabHeaderBase
      * providing a valid index and return true.
      */
     isValidIndex(index: number): boolean {
-        if (!this.labelWrappers) {
-            return true;
-        }
+        if (!this.labelWrappers) { return true; }
 
-        const tab = this.labelWrappers
-            ? this.labelWrappers.toArray()[index]
-            : null;
+        const tab = this.labelWrappers ? this.labelWrappers.toArray()[index] : null;
 
         return !!tab && !tab.disabled;
     }
@@ -339,8 +330,7 @@ export class McTabHeader extends McTabHeaderBase
             if (dir === 'ltr') {
                 containerEl.scrollLeft = 0;
             } else {
-                containerEl.scrollLeft =
-                    containerEl.scrollWidth - containerEl.offsetWidth;
+                containerEl.scrollLeft = containerEl.scrollWidth - containerEl.offsetWidth;
             }
         }
     }
@@ -354,9 +344,7 @@ export class McTabHeader extends McTabHeaderBase
     updateTabScrollPosition() {
         const scrollDistance = this.scrollDistance;
         const translateX =
-            this.getLayoutDirection() === 'ltr'
-                ? -scrollDistance
-                : scrollDistance;
+            this.getLayoutDirection() === 'ltr' ? -scrollDistance : scrollDistance;
 
         // Don't use `translate3d` here because we don't want to create a new layer. A new layer
         // seems to cause flickering and overflow in Internet Explorer.
@@ -383,8 +371,7 @@ export class McTabHeader extends McTabHeaderBase
         const viewLength = this.tabListContainer.nativeElement.offsetWidth;
 
         // Move the scroll distance one-third the length of the tab list's viewport.
-        this.scrollDistance +=
-            ((scrollDir === 'before' ? -1 : 1) * viewLength) / SCROLL_DISTANCE_DELIMITER;
+        this.scrollDistance += ((scrollDir === 'before' ? -1 : 1) * viewLength) / SCROLL_DISTANCE_DELIMITER;
     }
 
     /**
@@ -394,13 +381,9 @@ export class McTabHeader extends McTabHeaderBase
      * should be called sparingly.
      */
     scrollToLabel(labelIndex: number) {
-        const selectedLabel = this.labelWrappers
-            ? this.labelWrappers.toArray()[labelIndex]
-            : null;
+        const selectedLabel = this.labelWrappers ? this.labelWrappers.toArray()[labelIndex] : null;
 
-        if (!selectedLabel) {
-            return;
-        }
+        if (!selectedLabel) { return; }
 
         // The view length is the visible width of the tab labels.
         const viewLength: number = this.tabListContainer.nativeElement.offsetWidth;
@@ -412,9 +395,7 @@ export class McTabHeader extends McTabHeaderBase
             labelBeforePos = selectedLabel.getOffsetLeft();
             labelAfterPos = labelBeforePos + selectedLabel.getOffsetWidth();
         } else {
-            labelAfterPos =
-                this.tabList.nativeElement.offsetWidth -
-                selectedLabel.getOffsetLeft();
+            labelAfterPos = this.tabList.nativeElement.offsetWidth - selectedLabel.getOffsetLeft();
             labelBeforePos = labelAfterPos - selectedLabel.getOffsetWidth();
         }
 
@@ -423,12 +404,10 @@ export class McTabHeader extends McTabHeaderBase
 
         if (labelBeforePos < beforeVisiblePos) {
             // Scroll header to move label to the before direction
-            this.scrollDistance -=
-                beforeVisiblePos - labelBeforePos + EXAGGERATED_OVERSCROLL;
+            this.scrollDistance -= beforeVisiblePos - labelBeforePos + EXAGGERATED_OVERSCROLL;
         } else if (labelAfterPos > afterVisiblePos) {
             // Scroll header to move label to the after direction
-            this.scrollDistance +=
-                labelAfterPos - afterVisiblePos + EXAGGERATED_OVERSCROLL;
+            this.scrollDistance += labelAfterPos - afterVisiblePos + EXAGGERATED_OVERSCROLL;
         }
     }
 
@@ -441,9 +420,7 @@ export class McTabHeader extends McTabHeaderBase
      * should be called sparingly.
      */
     checkPaginationEnabled() {
-        const isEnabled =
-            this.tabList.nativeElement.scrollWidth >
-            this.elementRef.nativeElement.offsetWidth;
+        const isEnabled = this.tabList.nativeElement.scrollWidth > this.elementRef.nativeElement.offsetWidth;
 
         if (!isEnabled) {
             this.scrollDistance = 0;
@@ -468,8 +445,7 @@ export class McTabHeader extends McTabHeaderBase
     checkScrollingControls() {
         // Check if the pagination arrows should be activated.
         this.disableScrollBefore = this.scrollDistance === 0;
-        this.disableScrollAfter =
-            this.scrollDistance === this.getMaxScrollDistance();
+        this.disableScrollAfter = this.scrollDistance === this.getMaxScrollDistance();
         this.changeDetectorRef.markForCheck();
     }
 

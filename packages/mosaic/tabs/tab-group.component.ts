@@ -19,16 +19,11 @@ import {
     Optional,
     Directive, Attribute
 } from '@angular/core';
-import {
-    CanColor,
-    CanColorCtor,
-    mixinColor,
-    mixinDisabled
-} from '@ptsecurity/mosaic/core';
+import { mixinDisabled } from '@ptsecurity/mosaic/core';
 import { merge, Subscription } from 'rxjs';
 
-import { McTab } from './tab.component';
 import { McTabHeader } from './tab-header.component';
+import { McTab } from './tab.component';
 
 
 @Directive({
@@ -54,6 +49,12 @@ export class McAlignTabsEndCssStyler { }
     host: { class: 'mc-tab-group_stretch-labels' }
 })
 export class McStretchTabsCssStyler { }
+
+@Directive({
+    selector: 'mc-tab-group[vertical], [mc-tab-nav-bar][vertical]',
+    host: { class: 'mc-tab-group_vertical' }
+})
+export class McVerticalTabsCssStyler { }
 
 /** Used to generate unique ID's for each tab component */
 let nextId = 0;
@@ -82,10 +83,10 @@ export const MC_TABS_CONFIG = new InjectionToken<string>('MC_TABS_CONFIG');
 /** @docs-private */
 export class McTabGroupBase {
     // tslint:disable-next-line:naming-convention
-    constructor(public _elementRef: ElementRef) { }
+    constructor(public _elementRef: ElementRef) {}
 }
 // tslint:disable-next-line:naming-convention
-export const McTabGroupMixinBase: CanColorCtor & typeof McTabGroupBase = mixinColor(mixinDisabled(McTabGroupBase));
+export const McTabGroupMixinBase = mixinDisabled(McTabGroupBase);
 
 /**
  * Tab-group component.  Supports basic tab pairs (label + content) and includes
@@ -98,16 +99,23 @@ export const McTabGroupMixinBase: CanColorCtor & typeof McTabGroupBase = mixinCo
     styleUrls: ['tab-group.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    inputs: ['color', 'disabled'],
+    inputs: ['disabled'],
     host: {
         class: 'mc-tab-group',
         '[class.mc-tab-group_dynamic-height]': 'dynamicHeight',
         '[class.mc-tab-group_inverted-header]': 'headerPosition === "below"'
     }
 })
-export class McTabGroup extends McTabGroupMixinBase implements AfterContentInit,
-    AfterContentChecked, OnDestroy, CanColor {
+export class McTabGroup extends McTabGroupMixinBase implements AfterContentInit, AfterContentChecked, OnDestroy {
+
     oldTab: boolean;
+    vertical: boolean;
+
+    @ContentChildren(McTab) tabs: QueryList<McTab>;
+
+    @ViewChild('tabBodyWrapper', { static: false }) tabBodyWrapper: ElementRef;
+
+    @ViewChild('tabHeader', { static: false }) tabHeader: McTabHeader;
 
     /** Whether the tab group should grow to the size of the active tab. */
     @Input()
@@ -123,11 +131,6 @@ export class McTabGroup extends McTabGroupMixinBase implements AfterContentInit,
         this.indexToSelect = coerceNumberProperty(value, null);
     }
 
-    @ContentChildren(McTab) tabs: QueryList<McTab>;
-
-    @ViewChild('tabBodyWrapper', { static: false }) tabBodyWrapper: ElementRef;
-
-    @ViewChild('tabHeader', { static: false }) tabHeader: McTabHeader;
 
     /** Position of the tab header. */
     @Input() headerPosition: McTabHeaderPosition = 'above';
@@ -169,11 +172,13 @@ export class McTabGroup extends McTabGroupMixinBase implements AfterContentInit,
         elementRef: ElementRef,
         private changeDetectorRef: ChangeDetectorRef,
         @Attribute('mc-old-tabs') lightTabs: string,
+        @Attribute('vertical') vertical: string,
         @Inject(MC_TABS_CONFIG) @Optional() defaultConfig?: IMcTabsConfig
     ) {
         super(elementRef);
 
         this.oldTab = coerceBooleanProperty(lightTabs);
+        this.vertical = coerceBooleanProperty(vertical);
 
         this.groupId = nextId++;
         this.animationDuration = defaultConfig?.animationDuration || '0ms';
@@ -302,16 +307,14 @@ export class McTabGroup extends McTabGroupMixinBase implements AfterContentInit,
 
     /** Handle click events, setting new selected index if appropriate. */
     handleClick(tab: McTab, tabHeader: McTabHeader, index: number) {
-        if (!tab.disabled) {
-            this.selectedIndex = tabHeader.focusIndex = index;
-        }
+        if (tab.disabled) { return; }
+
+        this.selectedIndex = tabHeader.focusIndex = index;
     }
 
     /** Retrieves the tabindex for the tab. */
     getTabIndex(tab: McTab, index: number): number | null {
-        if (tab.disabled) {
-            return null;
-        }
+        if (tab.disabled) { return null; }
 
         return this.selectedIndex === index ? 0 : -1;
     }
@@ -319,6 +322,7 @@ export class McTabGroup extends McTabGroupMixinBase implements AfterContentInit,
     private createChangeEvent(index: number): McTabChangeEvent {
         const event = new McTabChangeEvent();
         event.index = index;
+
         if (this.tabs && this.tabs.length) {
             event.tab = this.tabs.toArray()[index];
         }
