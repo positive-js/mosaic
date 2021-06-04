@@ -15,7 +15,8 @@
             'highlight-height': { value: '4px' },
             'padding-horizontal': { value: '16px' },
             'border-width': { value: '1px' },
-            'border-radius': { value: '3px' }
+            'border-radius': { value: '3px' },
+            'label-icon-margin': { value: '{margin.iconText_M-horizontal}' }
         },
         font: {
             default: { value: 'body' }

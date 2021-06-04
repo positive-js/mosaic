@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Thu, 03 Jun 2021 12:35:30 GMT
+ * Generated on Fri, 04 Jun 2021 09:40:53 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
@@ -645,6 +645,7 @@ export const TabsSizeHighlightHeight = "4px";
 export const TabsSizePaddingHorizontal = "16px";
 export const TabsSizeBorderWidth = "1px";
 export const TabsSizeBorderRadius = "3px";
+export const TabsSizeLabelIconMargin = "8px";
 export const TabsFontDefault = "body";
 export const TagsLightColorSchemePrimaryBackground = "#D8EAF7";
 export const TagsLightColorSchemePrimaryBorder = "#D8EAF7";

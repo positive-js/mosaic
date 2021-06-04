@@ -15,14 +15,15 @@
          [disabled]="tab.disabled"
          (click)="handleClick(tab, tabHeader, i)">
 
-        <div class="mc-tab-label__content">
+        <div class="mc-tab-label__content"
+            [class.mc-tab-label__template]="tab.templateLabel">
             <!-- If there is a label template, use it. -->
             <ng-template [ngIf]="tab.templateLabel">
                 <ng-template [cdkPortalOutlet]="tab.templateLabel"></ng-template>
             </ng-template>
 
             <!-- If there is not a label template, fall back to the text label. -->
-            <ng-template [ngIf]="!tab.templateLabel">{{tab.textLabel}}</ng-template>
+            <ng-template [ngIf]="!tab.templateLabel">{{ tab.textLabel }}</ng-template>
         </div>
 
         <div class="mc-tab-overlay"></div>

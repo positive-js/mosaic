@@ -21,7 +21,7 @@ import {
 import { Subject } from 'rxjs';
 
 import { McTabContent } from './tab-content';
-import { McTabLabel } from './tab-label';
+import { MC_TAB_LABEL, McTabLabel } from './tab-label';
 
 
 export class McTabBase {
@@ -47,8 +47,12 @@ export class McTab extends McTabMixinBase implements OnInit, CanDisable, OnChang
         return this.contentPortal;
     }
 
-    /** Content for the tab label given by `<ng-template mc-tab-label>`. */
-    @ContentChild(McTabLabel, { static: false }) templateLabel: McTabLabel;
+    @ContentChild(MC_TAB_LABEL)
+    get templateLabel(): McTabLabel { return this._templateLabel; }
+
+    set templateLabel(value: McTabLabel) { this.setTemplateLabelInput(value); }
+
+    private _templateLabel: McTabLabel;
 
     /**
      * Template provided in the tab content that will be used if present, used to enable lazy-loading
@@ -102,5 +106,21 @@ export class McTab extends McTabMixinBase implements OnInit, CanDisable, OnChang
 
     ngOnInit(): void {
         this.contentPortal = new TemplatePortal(this.explicitContent || this.implicitContent, this.viewContainerRef);
+    }
+
+    /**
+     * This has been extracted to a util because of TS 4 and VE.
+     * View Engine doesn't support property rename inheritance.
+     * TS 4.0 doesn't allow properties to override accessors or vice-versa.
+     * @docs-private
+     */
+    protected setTemplateLabelInput(value: McTabLabel) {
+        // Only update the templateLabel via query if there is actually
+        // a McTabLabel found. This works around an issue where a user may have
+        // manually set `templateLabel` during creation mode, which would then get clobbered
+        // by `undefined` when this query resolves.
+        if (value) {
+            this._templateLabel = value;
+        }
     }
 }

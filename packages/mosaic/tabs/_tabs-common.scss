@@ -78,6 +78,22 @@ $mc-tab-border-width-focus: calc(var(--mc-tabs-size-border-width, #{$tabs-size-b
 
         pointer-events: none;
     }
+
+    & .mc-tab-label__template {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        & > .mc-icon {
+            &:nth-child(1) {
+                margin-right: var(--mc-tabs-size-label-icon-margin, $tabs-size-label-icon-margin);
+            }
+
+            &:nth-child(2) {
+                margin-left: var(--mc-tabs-size-label-icon-margin, $tabs-size-label-icon-margin);
+            }
+        }
+    }
 }
 
 @mixin tab-label {
