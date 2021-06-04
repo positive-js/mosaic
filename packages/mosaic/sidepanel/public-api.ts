@@ -1,3 +1,4 @@
+export * from './sidepanel-directives';
 export * from './sidepanel.module';
 export * from './sidepanel.service';
 export * from './sidepanel-config';

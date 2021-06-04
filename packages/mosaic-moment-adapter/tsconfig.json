@@ -22,7 +22,6 @@
         "strictMetadataEmit": true,
         "flatModuleId": "@ptsecurity/mosaic-moment-adapter",
         "strictInjectionParameters": true,
-        "enableResourceInlining": true,
-        "enableIvy": false
+        "enableResourceInlining": true
     }
 }

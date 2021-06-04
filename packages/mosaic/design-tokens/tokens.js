@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 26 Apr 2021 12:11:44 GMT
+ * Generated on Tue, 01 Jun 2021 08:36:03 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
@@ -464,6 +464,24 @@ export const FormFieldSizeButtonWidth = "32px";
 export const FormFieldFontDefault = "body";
 export const FormFieldHintSizeMarginTop = "4px";
 export const FormFieldHintFontDefault = "caption";
+export const FormsLightColorSchemeLabel = "#999999";
+export const FormsLightColorSchemeLegend = "#4D4D4D";
+export const FormsDarkColorSchemeLabel = "#999999";
+export const FormsDarkColorSchemeLegend = "#F0F0F0";
+export const FormsSizeHorizontalRowMarginBottom = "20px";
+export const FormsSizeHorizontalLabelPaddingTop = "6px";
+export const FormsSizeHorizontalLabelPaddingBottom = "0";
+export const FormsSizeHorizontalControlPaddingLeft = "16px";
+export const FormsSizeHorizontalLegendMarginTop = "32px";
+export const FormsSizeHorizontalLegendMarginBottom = "16px";
+export const FormsSizeVerticalRowMarginBottom = "16px";
+export const FormsSizeVerticalLabelPaddingTop = "0";
+export const FormsSizeVerticalLabelPaddingBottom = "4px";
+export const FormsSizeVerticalControlPaddingLeft = "24px";
+export const FormsSizeVerticalLegendMarginTop = "32px";
+export const FormsSizeVerticalLegendMarginBottom = "12px";
+export const FormsFontDefaultLabel = "body";
+export const FormsFontDefaultLegend = "subheading";
 export const InputSizePadding = "5px 16px";
 export const InputSizeWidth = "100%";
 export const InputSizeMinHeight = "30px";

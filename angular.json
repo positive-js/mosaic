@@ -21,7 +21,6 @@
                         "main": "packages/docs/src/main.ts",
                         "polyfills": "packages/docs/src/polyfills.ts",
                         "tsConfig": "packages/docs/tsconfig.app.json",
-                        "aot": false,
                         "assets": [
                             {
                                 "glob": "**/*",
@@ -64,10 +63,10 @@
                             "sourceMap": true,
                             "extractCss": true,
                             "namedChunks": false,
-                            "aot": true,
                             "extractLicenses": false,
                             "vendorChunk": false,
                             "buildOptimizer": true,
+                            "aot": true,
                             "budgets": [
                                 {
                                     "type": "initial",
@@ -89,10 +88,10 @@
                             "sourceMap": false,
                             "extractCss": true,
                             "namedChunks": false,
-                            "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": true,
+                            "aot": true,
                             "budgets": [
                                 {
                                     "type": "initial",
@@ -344,7 +343,6 @@
                         "tsConfig": "packages/mosaic-dev/alert/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/alert/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -385,7 +383,6 @@
                         "tsConfig": "packages/mosaic-dev/all/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/all/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -426,7 +423,6 @@
                         "tsConfig": "packages/mosaic-dev/autocomplete/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/autocomplete/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -467,7 +463,6 @@
                         "tsConfig": "packages/mosaic-dev/badge/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/badge/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -508,7 +503,6 @@
                         "tsConfig": "packages/mosaic-dev/button/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/button/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -549,7 +543,6 @@
                         "tsConfig": "packages/mosaic-dev/button-toggle/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/button-toggle/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -590,7 +583,6 @@
                         "tsConfig": "packages/mosaic-dev/card/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/card/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -631,7 +623,6 @@
                         "tsConfig": "packages/mosaic-dev/checkbox/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/checkbox/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -672,7 +663,6 @@
                         "tsConfig": "packages/mosaic-dev/date-formatter/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/date-formatter/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -795,7 +785,6 @@
                         "tsConfig": "packages/mosaic-dev/datepicker/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/datepicker/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -836,7 +825,6 @@
                         "tsConfig": "packages/mosaic-dev/dropdown/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/dropdown/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -865,6 +853,46 @@
                 }
             }
         },
+        "dev-forms": {
+            "projectType": "application",
+            "root": "packages/mosaic-dev/forms",
+            "sourceRoot": "packages/mosaic-dev/forms",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/mosaic-dev/forms",
+                        "tsConfig": "packages/mosaic-dev/forms/tsconfig.app.json",
+                        "index": "packages/mosaic-dev/index.html",
+                        "main": "packages/mosaic-dev/forms/main.ts",
+                        "polyfills": "packages/mosaic-dev/polyfills.ts"
+                    },
+                    "configurations": {
+                        "production": {
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "vendorChunk": false,
+                            "statsJson": true
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "dev-forms:build"
+                    }
+                }
+            }
+        },
         "dev-flex-layout": {
             "projectType": "application",
             "root": "packages/mosaic-dev/flex-layout",
@@ -877,7 +905,6 @@
                         "tsConfig": "packages/mosaic-dev/flex-layout/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/flex-layout/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -918,7 +945,6 @@
                         "tsConfig": "packages/mosaic-dev/icon/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/icon/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -959,7 +985,6 @@
                         "tsConfig": "packages/mosaic-dev/input/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/input/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -1000,7 +1025,6 @@
                         "tsConfig": "packages/mosaic-dev/link/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/link/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -1041,7 +1065,6 @@
                         "tsConfig": "packages/mosaic-dev/list/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/list/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -1082,7 +1105,6 @@
                         "tsConfig": "packages/mosaic-dev/modal/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/modal/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -1123,7 +1145,6 @@
                         "tsConfig": "packages/mosaic-dev/navbar/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/navbar/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -1164,7 +1185,6 @@
                         "tsConfig": "packages/mosaic-dev/number-formatter/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/number-formatter/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -1205,7 +1225,6 @@
                         "tsConfig": "packages/mosaic-dev/panel/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/panel/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -1246,7 +1265,6 @@
                         "tsConfig": "packages/mosaic-dev/popover/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/popover/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -1287,7 +1305,6 @@
                         "tsConfig": "packages/mosaic-dev/progress-bar/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/progress-bar/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -1328,7 +1345,6 @@
                         "tsConfig": "packages/mosaic-dev/progress-spinner/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/progress-spinner/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -1369,7 +1385,6 @@
                         "tsConfig": "packages/mosaic-dev/radio/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/radio/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -1410,7 +1425,6 @@
                         "tsConfig": "packages/mosaic-dev/select/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/select/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -1451,7 +1465,6 @@
                         "tsConfig": "packages/mosaic-dev/sidebar/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/sidebar/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -1492,7 +1505,6 @@
                         "tsConfig": "packages/mosaic-dev/sidepanel/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/sidepanel/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -1533,7 +1545,6 @@
                         "tsConfig": "packages/mosaic-dev/splitter/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/splitter/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -1574,7 +1585,6 @@
                         "tsConfig": "packages/mosaic-dev/table/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/table/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -1615,7 +1625,6 @@
                         "tsConfig": "packages/mosaic-dev/tabs/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/tabs/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -1656,7 +1665,6 @@
                         "tsConfig": "packages/mosaic-dev/tags/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/tags/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -1697,7 +1705,6 @@
                         "tsConfig": "packages/mosaic-dev/textarea/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/textarea/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -1738,7 +1745,6 @@
                         "tsConfig": "packages/mosaic-dev/timepicker/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/timepicker/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -1779,7 +1785,6 @@
                         "tsConfig": "packages/mosaic-dev/toggle/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/toggle/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -1820,7 +1825,6 @@
                         "tsConfig": "packages/mosaic-dev/tooltip/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/tooltip/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -1861,7 +1865,6 @@
                         "tsConfig": "packages/mosaic-dev/tree/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/tree/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -1902,7 +1905,6 @@
                         "tsConfig": "packages/mosaic-dev/tree-select/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/tree-select/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -1943,7 +1945,6 @@
                         "tsConfig": "packages/mosaic-dev/typography/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/typography/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -1984,7 +1985,6 @@
                         "tsConfig": "packages/mosaic-dev/validation/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/validation/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {
@@ -2025,7 +2025,6 @@
                         "tsConfig": "packages/mosaic-dev/vertical-navbar/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/vertical-navbar/main.ts",
-                        "aot": true,
                         "polyfills": "packages/mosaic-dev/polyfills.ts"
                     },
                     "configurations": {

@@ -1,6 +1,9 @@
 @import './typography';
 @import '../alerts';
 @import '../badges';
+@import '../../forms/forms-theme';
+@import '../../option/option-theme';
+@import '../../option/optgroup-theme';
 @import '../../../autocomplete/autocomplete-theme';
 @import '../../../button/button-theme';
 @import '../../../checkbox/checkbox-theme';
@@ -25,8 +28,6 @@
 @import '../../../tree/tree-theme';
 @import '../../../vertical-navbar/vertical-navbar-theme';
 @import '../../../table/table-theme';
-@import '../../option/option-theme';
-@import '../../option/optgroup-theme';
 
 
 @mixin mosaic-typography($config: null) {
@@ -43,6 +44,7 @@
     @include mc-datepicker-typography($config);
     @include mc-dropdown-typography($config);
     @include mc-form-field-typography($config);
+    @include mc-forms-typography($config);
     @include mc-input-typography($config);
     @include mc-link-typography($config);
     @include mc-list-typography($config);

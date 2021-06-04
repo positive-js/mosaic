@@ -34,6 +34,7 @@
 @import '../../tree/tree-theme';
 @import '../../vertical-navbar/vertical-navbar-theme';
 @import '../../table/table-theme';
+@import '../forms/forms-theme';
 @import '../option/option-theme';
 @import '../option/optgroup-theme';
 @import '../highlight/highlight-theme';
@@ -53,6 +54,7 @@
     @include mc-divider-theme($theme);
     @include mc-dropdown-theme($theme);
     @include mc-form-field-theme($theme);
+    @include mc-forms-theme($theme);
     @include mc-icon-theme($theme);
     @include mc-input-theme($theme);
     @include mc-link-theme($theme);
