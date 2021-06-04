@@ -2,6 +2,10 @@
     display: flex;
 }
 
+.mc-tab-header_vertical .mc-tab-list__content {
+    flex-direction: column;
+}
+
 .mc-tab-header__pagination {
     position: relative;
     display: none;

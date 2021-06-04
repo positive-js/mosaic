@@ -1,5 +1,19 @@
 <div>
     <h4>Default tabs</h4>
+    <mc-tab-group (selectedTabChange)="selectedTabChange($event)">
+        <mc-tab [tabId]="'firstTab'">
+            <ng-template mc-tab-label>
+                <i mc-icon="mc-play_16"></i>First<i mc-icon="mc-play_16"></i>
+            </ng-template>
+            Content 1
+        </mc-tab>
+        <mc-tab [tabId]="'secondTab'" label="Second">Content 2</mc-tab>
+        <mc-tab disabled label="Third">Content 3</mc-tab>
+        <mc-tab label="4">Content 4</mc-tab>
+        <mc-tab label="5">Content 5</mc-tab>
+    </mc-tab-group>
+
+    <h4>Default Vertical tabs</h4>
     <mc-tab-group vertical (selectedTabChange)="selectedTabChange($event)">
         <mc-tab [tabId]="'firstTab'">
             <ng-template mc-tab-label>

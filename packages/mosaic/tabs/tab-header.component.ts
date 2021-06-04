@@ -20,7 +20,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
-import { END, ENTER, HOME, SPACE } from '@ptsecurity/cdk/keycodes';
+import { DOWN_ARROW, END, ENTER, HOME, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@ptsecurity/cdk/keycodes';
 import { merge, of as observableOf, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -63,6 +63,7 @@ export class McTabHeaderBase {}
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         class: 'mc-tab-header',
+        '[class.mc-tab-header_vertical]': 'vertical',
         '[class.mc-tab-header__pagination-controls_enabled]': 'showPaginationControls',
         '[class.mc-tab-header_rtl]': 'getLayoutDirection() == \'rtl\''
     }
@@ -80,9 +81,7 @@ export class McTabHeader extends McTabHeaderBase implements AfterContentChecked,
         this.selectedIndexChanged = this._selectedIndex !== coercedValue;
         this._selectedIndex = coercedValue;
 
-        if (this.keyManager) {
-            this.keyManager.updateActiveItem(coercedValue);
-        }
+        this.keyManager?.updateActiveItem(coercedValue);
     }
 
     /** Tracks which element has focus; used for keyboard navigation */
@@ -200,22 +199,26 @@ export class McTabHeader extends McTabHeaderBase implements AfterContentChecked,
 
     handleKeydown(event: KeyboardEvent) {
         // tslint:disable-next-line: deprecation
-        switch (event.keyCode) {
-            case HOME:
-                this.keyManager.setFirstItemActive();
-                event.preventDefault();
-                break;
-            case END:
-                this.keyManager.setLastItemActive();
-                event.preventDefault();
-                break;
-            case ENTER:
-            case SPACE:
-                this.selectFocusedIndex.emit(this.focusIndex);
-                event.preventDefault();
-                break;
-            default:
-                this.keyManager.onKeydown(event);
+        const key = event.keyCode;
+
+        if (key === HOME) {
+            this.keyManager.setFirstItemActive();
+        } else if (key === END) {
+            this.keyManager.setLastItemActive();
+        } else if (key === UP_ARROW && this.vertical) {
+            this.keyManager.setPreviousItemActive();
+        } else if (key === DOWN_ARROW && this.vertical) {
+            this.keyManager.setNextItemActive();
+        } else if (key === RIGHT_ARROW && !this.vertical) {
+            this.keyManager.setNextItemActive();
+        } else if (key === LEFT_ARROW && !this.vertical) {
+            this.keyManager.setPreviousItemActive();
+        } else if ([ENTER, SPACE].includes(key)) {
+            this.selectFocusedIndex.emit(this.focusIndex);
+        }
+
+        if ([HOME, END, UP_ARROW, DOWN_ARROW, RIGHT_ARROW, LEFT_ARROW, SPACE, ENTER].includes(key)) {
+            event.preventDefault();
         }
     }
 
@@ -225,8 +228,7 @@ export class McTabHeader extends McTabHeaderBase implements AfterContentChecked,
         const realign = () => this.updatePagination();
 
         this.keyManager = new FocusKeyManager(this.labelWrappers)
-            .withHorizontalOrientation(this.getLayoutDirection())
-            .withVerticalOrientation(this.vertical);
+            .withHorizontalOrientation(this.getLayoutDirection());
 
         this.keyManager.updateActiveItem(0);
 

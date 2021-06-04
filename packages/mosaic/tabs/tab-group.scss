@@ -15,6 +15,10 @@
     }
 }
 
+.mc-tab-group_vertical {
+    flex-direction: row;
+}
+
 .mc-tab-label {
     @include tab-label;
 }

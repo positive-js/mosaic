@@ -52,6 +52,7 @@ $mc-tab-border-width-focus: calc(var(--mc-tabs-size-border-width, #{$tabs-size-b
             right: calc(-1 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
             bottom: calc(-1 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
             left: calc(-1 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
+
             border: {
                 width: $mc-tab-border-width-focus;
                 style: solid;
