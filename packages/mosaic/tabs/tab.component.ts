@@ -20,12 +20,11 @@ import {
 } from '@ptsecurity/mosaic/core';
 import { Subject } from 'rxjs';
 
-import { McTabContent } from './tab-content';
-import { MC_TAB_LABEL, McTabLabel } from './tab-label';
+import { McTabContent } from './tab-content.directive';
+import { MC_TAB_LABEL, McTabLabel } from './tab-label.directive';
 
 
-export class McTabBase {
-}
+export class McTabBase {}
 
 // tslint:disable-next-line:naming-convention
 export const McTabMixinBase: CanDisableCtor & typeof McTabBase = mixinDisabled(McTabBase);

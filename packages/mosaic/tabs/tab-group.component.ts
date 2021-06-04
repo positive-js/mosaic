@@ -27,8 +27,8 @@ import {
 } from '@ptsecurity/mosaic/core';
 import { merge, Subscription } from 'rxjs';
 
-import { McTab } from './tab';
-import { McTabHeader } from './tab-header';
+import { McTab } from './tab.component';
+import { McTabHeader } from './tab-header.component';
 
 
 @Directive({
@@ -112,7 +112,9 @@ export class McTabGroup extends McTabGroupMixinBase implements AfterContentInit,
     /** Whether the tab group should grow to the size of the active tab. */
     @Input()
     get dynamicHeight(): boolean { return this._dynamicHeight; }
-    set dynamicHeight(value: boolean) { this._dynamicHeight = coerceBooleanProperty(value); }
+    set dynamicHeight(value: boolean) {
+        this._dynamicHeight = coerceBooleanProperty(value);
+    }
 
     /** The index of the active tab. */
     @Input()

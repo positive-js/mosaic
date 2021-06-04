@@ -36,8 +36,7 @@ import { mcTabsAnimations } from './tabs-animations';
  * then left-origin-center or right-origin-center can be used, which will use left or right as its
  * psuedo-prior state.
  */
-export type McTabBodyPositionState =
-    'left' | 'center' | 'right' | 'left-origin-center' | 'right-origin-center';
+export type McTabBodyPositionState = 'left' | 'center' | 'right' | 'left-origin-center' | 'right-origin-center';
 
 /**
  * The origin state is an internally used state that is set on a new tab body indicating if it
@@ -222,9 +221,8 @@ export class McTabBodyPortal extends CdkPortalOutlet implements OnInit, OnDestro
                 }
             });
 
-        this.leavingSub = this.host.afterLeavingCenter.subscribe(() => {
-            this.detach();
-        });
+        this.leavingSub = this.host.afterLeavingCenter
+            .subscribe(() => { this.detach(); });
     }
 
     /** Clean up centering subscription. */

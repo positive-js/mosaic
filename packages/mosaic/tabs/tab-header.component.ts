@@ -24,7 +24,7 @@ import { END, ENTER, HOME, SPACE } from '@ptsecurity/cdk/keycodes';
 import { merge, of as observableOf, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { McTabLabelWrapper } from './tab-label-wrapper';
+import { McTabLabelWrapper } from './tab-label-wrapper.directive';
 
 
 const VIEWPORT_THROTTLE_TIME = 150;
