@@ -58,8 +58,9 @@
 .mc-tab-header__content {
     display: flex;
     flex-grow: 1;
-    overflow: hidden;
+
     z-index: 1;
+    //overflow: hidden;
 }
 
 .mc-tab-list {

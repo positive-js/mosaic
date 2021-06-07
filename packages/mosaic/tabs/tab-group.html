@@ -5,10 +5,12 @@
     (indexFocused)="focusChanged($event)"
     (selectFocusedIndex)="selectedIndex = $event">
 
-    <div mcTabLabelWrapper
+    <div class="mc-tab-label"
+         mcTabLabelWrapper
          cdkMonitorElementFocus
-         [class.mc-tab-label]="!oldTab"
          [class.mc-tab-label_old]="oldTab"
+         [class.mc-tab-label_horizontal]="!vertical && !oldTab"
+         [class.mc-tab-label_vertical]="vertical && !oldTab"
          *ngFor="let tab of tabs; let i = index"
          [id]="getTabLabelId(i)"
          [attr.tabindex]="getTabIndex(tab, i)"

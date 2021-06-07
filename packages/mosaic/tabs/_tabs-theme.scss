@@ -57,8 +57,6 @@
     .mc-tab-label,
     .mc-tab-link {
         &:hover {
-            border-bottom-color: transparent;
-
             &:before {
                 background-color: map-get($tabs, border);
             }

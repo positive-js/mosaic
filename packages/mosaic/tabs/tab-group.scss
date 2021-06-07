@@ -27,6 +27,14 @@
     @include tab-label-old;
 }
 
+.mc-tab-label_horizontal {
+    @include tab-horizontal-label;
+}
+
+.mc-tab-label_vertical {
+    @include tab-vertical-label;
+}
+
 .mc-tab-header__content {
     padding: 1px 1px 0;
 }
