@@ -68,18 +68,6 @@ export class TabsDemoComponent {
         this.tabs.splice(index, 1);
     }
 
-    getTimeLoaded(index: number) {
-        if (!this.tabLoadTimes[index]) {
-            this.tabLoadTimes[index] = new Date();
-        }
-
-        return this.tabLoadTimes[index];
-    }
-
-    toggleBackground() {
-        this.background = this.background ? '' : 'primary';
-    }
-
     selectedTabChange($event: any) {
         console.log('selectedTabChange Event:', $event);
     }

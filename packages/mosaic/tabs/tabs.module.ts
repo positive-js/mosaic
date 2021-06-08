@@ -3,6 +3,8 @@ import { PortalModule } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { McCommonModule } from '@ptsecurity/mosaic/core';
+import { McIconModule } from '@ptsecurity/mosaic/icon';
+import { McInkBar } from './ink-bar.directive';
 
 import { McTabBody, McTabBodyPortal } from './tab-body.component';
 import { McTabContent } from './tab-content.directive';
@@ -24,9 +26,10 @@ import { McTab } from './tab.component';
 @NgModule({
     imports: [
         CommonModule,
-        McCommonModule,
         PortalModule,
-        A11yModule
+        A11yModule,
+        McCommonModule,
+        McIconModule
     ],
     // Don't export all components because some are only to be used internally.
     exports: [
@@ -44,6 +47,7 @@ import { McTab } from './tab.component';
         McVerticalTabsCssStyler
     ],
     declarations: [
+        McInkBar,
         McTabGroup,
         McTabLabel,
         McTab,

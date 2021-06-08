@@ -8,13 +8,13 @@
     <div class="mc-tab-label"
          mcTabLabelWrapper
          cdkMonitorElementFocus
+         [attr.tabindex]="getTabIndex(tab, i)"
          [class.mc-tab-label_old]="oldTab"
          [class.mc-tab-label_horizontal]="!vertical && !oldTab"
          [class.mc-tab-label_vertical]="vertical && !oldTab"
+         [class.mc-active]="selectedIndex == i"
          *ngFor="let tab of tabs; let i = index"
          [id]="getTabLabelId(i)"
-         [attr.tabindex]="getTabIndex(tab, i)"
-         [class.mc-active]="selectedIndex == i"
          [disabled]="tab.disabled"
          (click)="handleClick(tab, tabHeader, i)">
 

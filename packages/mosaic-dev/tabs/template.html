@@ -1,16 +1,16 @@
 <div>
     <h4>Default tabs</h4>
-    <mc-tab-group (selectedTabChange)="selectedTabChange($event)">
-        <mc-tab [tabId]="'firstTab'">
+    <mc-tab-group (selectedTabChange)="selectedTabChange($event)" style="width: 400px">
+        <mc-tab [tabId]="'firstTab'" disabled>
             <ng-template mc-tab-label>
-                <i mc-icon="mc-play_16"></i>First<i mc-icon="mc-play_16"></i>
+                <i mc-icon="mc-play_16"></i>label 1<i mc-icon="mc-play_16"></i>
             </ng-template>
             Content 1
         </mc-tab>
-        <mc-tab [tabId]="'secondTab'" label="Second">Content 2</mc-tab>
-        <mc-tab disabled label="Third">Content 3</mc-tab>
-        <mc-tab label="4">Content 4</mc-tab>
-        <mc-tab label="5">Content 5</mc-tab>
+        <mc-tab [tabId]="'secondTab'" label="label 2">Content 2</mc-tab>
+        <mc-tab label="label 3">Content 3</mc-tab>
+        <mc-tab label="label 4">Content 4</mc-tab>
+        <mc-tab label="label 5">Content 5</mc-tab>
     </mc-tab-group>
 
     <h4>Default Vertical tabs</h4>
@@ -48,12 +48,12 @@
 
     <h3>Navigation</h3>
 
-    <nav mc-tab-nav-bar mc-align-tabs-end>
+    <nav mc-tab-nav-bar mc-align-tabs-end vertical>
         <a mc-tab-link
            disabled
            *ngFor="let link of links"
            (click)="activeLink = link"
-           [active]="activeLink == link"> {{link}} </a>
+           [active]="activeLink == link">{{link}}</a>
         <a mc-tab-link
            disabled
            (click)="activeLink = 1"

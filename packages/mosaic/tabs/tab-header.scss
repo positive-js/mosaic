@@ -1,5 +1,11 @@
+@import '../core/styles/common/vendor-prefixes';
+
+
 .mc-tab-header {
     display: flex;
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
 }
 
 .mc-tab-header_vertical .mc-tab-list__content {
@@ -7,47 +13,25 @@
 }
 
 .mc-tab-header__pagination {
+    @include user-select(none);
+
     position: relative;
     display: none;
     justify-content: center;
     align-items: center;
-    min-width: 32px;
     cursor: pointer;
     z-index: 2;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: none;
 
-    .mc-tab-header__pagination-controls_enabled {
+    padding-left: 12px;
+    padding-right: 12px;
+
+    .mc-tab-header__pagination-controls_enabled & {
         display: flex;
     }
 }
 
-.mc-tab-header__pagination-chevron {
-    border-style: solid;
-    border-width: 2px 2px 0 0;
-    content: "";
-    height: 8px;
-    width: 8px;
-}
-
-// The pagination control that is displayed on the right side of the tab header.
-.mc-tab-header__pagination_after,
-.mc-tab-header_rtl .mc-tab-header__pagination_before {
-    padding-right: 4px;
-
-    .mc-tab-header__pagination-chevron {
-        transform: rotate(45deg);
-    }
-}
-
-// The pagination control that is displayed on the left side of the tab header.
-/* stylelint-disable no-descending-specificity */
-.mc-tab-header__pagination_before,
-.mc-tab-header_rtl .mc-tab-header__pagination_after {
-    padding-left: 4px;
-
-    .mc-tab-header__pagination-chevron {
-        transform: rotate(-135deg);
-    }
-}
 /* stylelint-enable */
 
 .mc-tab-header_disabled {

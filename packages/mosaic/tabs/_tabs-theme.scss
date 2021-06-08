@@ -8,9 +8,9 @@
 
     $tabs: map-get(map-get($theme, components), tabs);
 
-    .mc-tab-label,
     .mc-tab-label_old,
-    .mc-tab-link {
+    .mc-tab-label_vertical,
+    .mc-tab-label_horizontal {
         color: map-get($foreground, text);
 
         border-bottom-color: map-get($tabs, border);
@@ -19,12 +19,13 @@
             background: transparent;
         }
 
-        &:hover .mc-tab-overlay {
-            background: map-get($background, overlay-hover);
-        }
 
         &.cdk-keyboard-focused:after {
             border-color: map-get(map-get($theme, states), focused-color);
+        }
+
+        &:hover .mc-tab-overlay {
+            background: map-get($background, overlay-hover);
         }
 
         &.mc-disabled {
@@ -37,10 +38,7 @@
     }
 
     .mc-tab-label_old {
-        border: {
-            top-color: transparent;
-            bottom-color: map-get($tabs, border);
-        }
+        border-top-color: transparent;
 
         &.mc-active {
             border: {
@@ -54,7 +52,8 @@
         }
     }
 
-    .mc-tab-label,
+    .mc-tab-label_vertical,
+    .mc-tab-label_horizontal,
     .mc-tab-link {
         &:hover {
             &:before {

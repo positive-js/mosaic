@@ -1,25 +1,33 @@
 <div class="mc-tab-header__pagination mc-tab-header__pagination_before mc-elevation-z4"
-     [class.mc-tab-header_disabled]="disableScrollBefore"
-     (click)="scrollHeader('before')">
+     #previousPaginator
+     [class.mc-tab-header-pagination-disabled]="disableScrollBefore"
+     (click)="handlePaginatorClick('before')"
+     (mousedown)="handlePaginatorPress('before', $event)"
+     (touchend)="stopInterval()">
 
-    <div class="mc-tab-header__pagination-chevron"></div>
+    <i mc-icon="mc-angle-left-M_16"></i>
 </div>
 
 <div class="mc-tab-header__content"
      #tabListContainer
      (keydown)="handleKeydown($event)">
+
     <div class="mc-tab-list"
          #tabList
          (cdkObserveContent)="onContentChanges()">
         <div class="mc-tab-list__content">
             <ng-content></ng-content>
         </div>
+        <mc-ink-bar></mc-ink-bar>
     </div>
 </div>
 
 <div class="mc-tab-header__pagination mc-tab-header__pagination_after mc-elevation-z4"
-     [class.mc-tab-header_disabled]="disableScrollAfter"
-     (click)="scrollHeader('after')">
+     #nextPaginator
+     [class.mc-tab-header-pagination-disabled]="disableScrollAfter"
+     (mousedown)="handlePaginatorPress('after', $event)"
+     (click)="handlePaginatorClick('after')"
+     (touchend)="stopInterval()">
 
-    <div class="mc-tab-header__pagination-chevron"></div>
+    <i mc-icon="mc-angle-left-M_16"></i>
 </div>
