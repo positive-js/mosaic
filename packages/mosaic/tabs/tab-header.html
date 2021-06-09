@@ -1,6 +1,6 @@
 <div class="mc-tab-header__pagination mc-tab-header__pagination_before mc-elevation-z4"
      #previousPaginator
-     [class.mc-tab-header-pagination-disabled]="disableScrollBefore"
+     [class.mc-disabled]="disableScrollBefore"
      (click)="handlePaginatorClick('before')"
      (mousedown)="handlePaginatorPress('before', $event)"
      (touchend)="stopInterval()">
@@ -24,10 +24,10 @@
 
 <div class="mc-tab-header__pagination mc-tab-header__pagination_after mc-elevation-z4"
      #nextPaginator
-     [class.mc-tab-header-pagination-disabled]="disableScrollAfter"
+     [class.mc-disabled]="disableScrollAfter"
      (mousedown)="handlePaginatorPress('after', $event)"
      (click)="handlePaginatorClick('after')"
      (touchend)="stopInterval()">
 
-    <i mc-icon="mc-angle-left-M_16"></i>
+    <i mc-icon="mc-angle-right-M_16"></i>
 </div>

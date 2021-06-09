@@ -17,26 +17,16 @@
 
 .mc-tab-group_vertical {
     flex-direction: row;
-}
 
-.mc-tab-label {
-    @include tab-label;
-}
+    & .mc-tab-header__content {
+        overflow-y: auto;
 
-.mc-tab-label_old {
-    @include tab-label-old;
-}
+        padding-top: 8px;
+        padding-bottom: 1px;
 
-.mc-tab-label_horizontal {
-    @include tab-horizontal-label;
-}
-
-.mc-tab-label_vertical {
-    @include tab-vertical-label;
-}
-
-.mc-tab-header__content {
-    padding: 1px 1px 0;
+        border-right-width: var(--mc-tabs-size-border-width, #{$tabs-size-border-width});
+        border-right-style: solid;
+    }
 }
 
 .mc-tab-body__wrapper {

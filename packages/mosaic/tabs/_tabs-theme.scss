@@ -2,11 +2,49 @@
 @import "../core/theming/theming";
 
 
+//noinspection ALL
 @mixin mc-tabs-theme($theme) {
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
+    $states: map-get($theme, states);
 
     $tabs: map-get(map-get($theme, components), tabs);
+
+    .mc-tab-group_vertical .mc-tab-header__content {
+        border-right-color: map-get($foreground, divider);
+    }
+
+    .mc-tab-header__pagination {
+        border-bottom-color: map-get($tabs, border);
+
+        &:hover {
+            background: map-get($background, overlay-hover);
+
+            & .mc-icon {
+                color: map-get($foreground, text);
+            }
+        }
+
+        &:active {
+            background: map-get($foreground, divider);
+        }
+
+        &.mc-tab-header__pagination_before {
+            border-right-color: map-get($foreground, divider);
+        }
+
+        &.mc-tab-header__pagination_after {
+            border-left-color: map-get($foreground, divider);
+        }
+
+        &.mc-disabled {
+            pointer-events: none;
+
+            & .mc-icon {
+                color: map-get($foreground, text-disabled);
+            }
+        }
+    }
 
     .mc-tab-label_old,
     .mc-tab-label_vertical,
@@ -24,8 +62,10 @@
             border-color: map-get(map-get($theme, states), focused-color);
         }
 
-        &:hover .mc-tab-overlay {
-            background: map-get($background, overlay-hover);
+        &:hover {
+            & .mc-tab-overlay {
+                background: map-get($background, overlay-hover);
+            }
         }
 
         &.mc-disabled {
@@ -59,9 +99,15 @@
             &:before {
                 background-color: map-get($tabs, border);
             }
+
+            & .mc-icon {
+                color: map-get($foreground, text);
+            }
         }
 
         &.mc-active {
+            border-bottom-color: transparent;
+
             &:before {
                 background-color: map-get($tabs, state-active);
             }
@@ -71,8 +117,33 @@
             }
         }
 
-        &.mc-disabled:before {
-            background-color: map-get($tabs, border);
+        &.mc-disabled {
+            & .mc-tab-overlay {
+                background: map-get($tabs, state-disabled-overlay);
+            }
+        }
+    }
+
+    .mc-tab-label_vertical {
+        &.mc-active {
+            border-bottom-color: transparent;
+            background: map-get($states, selected-color);
+
+            &:before {
+                background-color: map-get($tabs, state-active);
+            }
+
+            & .mc-tab-overlay {
+                background: transparent;
+            }
+        }
+
+        &.mc-disabled {
+            background: transparent;
+
+            & .mc-tab-overlay {
+                background: map-get($tabs, state-disabled-overlay);
+            }
         }
     }
 }

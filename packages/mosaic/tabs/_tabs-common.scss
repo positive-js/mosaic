@@ -8,7 +8,7 @@
 
     position: absolute;
 
-    top: calc(-1 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
+    top: 0;
     right: calc(-1 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
     bottom: calc(-1 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
     left: calc(-1 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
@@ -71,6 +71,14 @@
         }
     }
 
+    &:first-child.cdk-keyboard-focused:after {
+        left: 0;
+    }
+
+    &:last-child.cdk-keyboard-focused:after {
+        right: 0;
+    }
+
     &.mc-disabled {
         pointer-events: none;
     }
@@ -78,7 +86,10 @@
     & .mc-tab-overlay {
         position: absolute;
 
-        top: 0; left: 0; right: 0; bottom: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: -1px;
 
         pointer-events: none;
     }
@@ -96,42 +107,6 @@
             &:nth-child(2) {
                 margin-left: var(--mc-tabs-size-label-icon-margin, $tabs-size-label-icon-margin);
             }
-        }
-    }
-}
-
-@mixin tab-horizontal-label {
-    border-bottom: {
-        width: var(--mc-tabs-size-border-width, $tabs-size-border-width);
-        style: solid;
-    }
-
-    &.mc-active:before {
-        bottom: calc(-1 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
-        left: 0;
-        right: 0;
-
-        height: var(--mc-tabs-size-highlight-height, #{$tabs-size-highlight-height});
-    }
-
-    &.cdk-keyboard-focused:after {
-        @extend %horizontal-focus;
-    }
-}
-
-@mixin tab-vertical-label {
-    &.mc-active:before {
-        top: 0;
-        bottom: 0;
-        left: calc(-1 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
-
-        width: var(--mc-tabs-size-highlight-height, #{$tabs-size-highlight-height + 1px});
-    }
-
-    &.cdk-keyboard-focused:after {
-        border: {
-            width: calc(var(--mc-tabs-size-border-width, #{$tabs-size-border-width}) * 2);
-            style: solid;
         }
     }
 }
@@ -165,6 +140,7 @@
             var(--mc-tabs-size-padding-horizontal, #{$tabs-size-padding-horizontal}) -
             var(--mc-tabs-size-border-width, #{$tabs-size-border-width})
         );
+
         padding-left: calc(
             var(--mc-tabs-size-padding-horizontal, #{$tabs-size-padding-horizontal}) -
             var(--mc-tabs-size-border-width, #{$tabs-size-border-width})
@@ -178,6 +154,8 @@
 
     &.cdk-keyboard-focused:after {
         @extend %horizontal-focus;
+
+        top: -1px
     }
 
     & .mc-tab-overlay {

@@ -7,22 +7,28 @@
             </ng-template>
             Content 1
         </mc-tab>
-        <mc-tab [tabId]="'secondTab'" label="label 2">Content 2</mc-tab>
+        <mc-tab [tabId]="'secondTab'">
+            <ng-template mc-tab-label>
+                <i mc-icon="mc-play_16"></i>label 2<i mc-icon="mc-play_16"></i>
+            </ng-template>
+            Content 2</mc-tab>
         <mc-tab label="label 3">Content 3</mc-tab>
         <mc-tab label="label 4">Content 4</mc-tab>
         <mc-tab label="label 5">Content 5</mc-tab>
+        <mc-tab label="label 6">Content 6</mc-tab>
+        <mc-tab label="label 7">Content 7</mc-tab>
     </mc-tab-group>
 
     <h4>Default Vertical tabs</h4>
     <mc-tab-group vertical (selectedTabChange)="selectedTabChange($event)">
-        <mc-tab [tabId]="'firstTab'">
+        <mc-tab [tabId]="'firstTab'" disabled>
             <ng-template mc-tab-label>
                 <i mc-icon="mc-play_16"></i>First<i mc-icon="mc-play_16"></i>
             </ng-template>
             Content 1
         </mc-tab>
         <mc-tab [tabId]="'secondTab'" label="Second">Content 2</mc-tab>
-        <mc-tab disabled label="Third">Content 3</mc-tab>
+        <mc-tab label="Third">Content 3</mc-tab>
         <mc-tab label="4">Content 4</mc-tab>
         <mc-tab label="5">Content 5</mc-tab>
     </mc-tab-group>
