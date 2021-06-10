@@ -24,6 +24,7 @@
                 right-radius: var(--mc-tabs-size-border-radius, #{$tabs-size-border-radius});
             }
             bottom: none;
+            bottom-color: transparent;
         }
     }
 }
@@ -127,7 +128,9 @@
         }
 
         left: none;
+        left-color: transparent;
         right: none;
+        right-color: transparent;
     }
 
     &.mc-active {

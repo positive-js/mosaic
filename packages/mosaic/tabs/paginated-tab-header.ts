@@ -1,6 +1,7 @@
+/* tslint:disable:naming-convention */
 import { FocusKeyManager, FocusableOption } from '@angular/cdk/a11y';
 import { Direction, Directionality } from '@angular/cdk/bidi';
-import { coerceNumberProperty } from '@angular/cdk/coercion';
+import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
 import { ENTER, SPACE, hasModifierKey } from '@angular/cdk/keycodes';
 import { Platform, normalizePassiveListenerOptions } from '@angular/cdk/platform';
 import { ViewportRuler } from '@angular/cdk/scrolling';
@@ -64,7 +65,6 @@ export type McPaginatedTabHeaderItem = FocusableOption & { elementRef: ElementRe
  * @docs-private
  */
 @Directive()
-// tslint:disable-next-line:naming-convention
 export abstract class McPaginatedTabHeader implements AfterContentChecked, AfterContentInit, AfterViewInit, OnDestroy {
     /** The index of the active tab. */
     get selectedIndex(): number {
@@ -112,7 +112,6 @@ export abstract class McPaginatedTabHeader implements AfterContentChecked, After
     private _scrollDistance = 0;
 
     abstract items: QueryList<McPaginatedTabHeaderItem>;
-    abstract inkBar: any;
     abstract tabListContainer: ElementRef<HTMLElement>;
     abstract tabList: ElementRef<HTMLElement>;
     abstract nextPaginator: ElementRef<HTMLElement>;
@@ -202,7 +201,6 @@ export abstract class McPaginatedTabHeader implements AfterContentChecked, After
 
         const realign = () => {
             this.updatePagination();
-            this.alignInkBarToSelectedTab();
         };
 
         this.keyManager = new FocusKeyManager<McPaginatedTabHeaderItem>(this.items)
@@ -250,7 +248,6 @@ export abstract class McPaginatedTabHeader implements AfterContentChecked, After
         if (this.selectedIndexChanged) {
             this.scrollToLabel(this._selectedIndex);
             this.checkScrollingControls();
-            this.alignInkBarToSelectedTab();
             this.selectedIndexChanged = false;
             this.changeDetectorRef.markForCheck();
         }
@@ -314,7 +311,6 @@ export abstract class McPaginatedTabHeader implements AfterContentChecked, After
             // means that we need to bring the callback back in ourselves.
             this.ngZone.run(() => {
                 this.updatePagination();
-                this.alignInkBarToSelectedTab();
                 this.changeDetectorRef.markForCheck();
             });
         }
@@ -523,19 +519,6 @@ export abstract class McPaginatedTabHeader implements AfterContentChecked, After
         return (lengthOfTabList - viewLength) || 0;
     }
 
-    /** Tells the ink-bar to align itself to the current label wrapper */
-    alignInkBarToSelectedTab(): void {
-        const selectedItem = this.items?.length ? this.items.toArray()[this.selectedIndex] : null;
-
-        const selectedLabelWrapper = selectedItem ? selectedItem.elementRef.nativeElement : null;
-
-        if (selectedLabelWrapper) {
-            this.inkBar.alignToElement(selectedLabelWrapper);
-        } else {
-            this.inkBar.hide();
-        }
-    }
-
     /** Stops the currently-running paginator interval.  */
     stopInterval() {
         this.stopScrolling.next();
@@ -590,4 +573,6 @@ export abstract class McPaginatedTabHeader implements AfterContentChecked, After
 
         return { maxScrollDistance, distance: this.scrollDistance };
     }
+
+    static ngAcceptInputType_selectedIndex: NumberInput;
 }

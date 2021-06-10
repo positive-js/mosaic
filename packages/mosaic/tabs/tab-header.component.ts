@@ -17,7 +17,6 @@ import {
 } from '@angular/core';
 import { ANIMATION_MODULE_TYPE } from '@angular/platform-browser/animations';
 
-import { McInkBar } from './ink-bar.directive';
 import { McPaginatedTabHeader } from './paginated-tab-header';
 import { McTabLabelWrapper } from './tab-label-wrapper.directive';
 
@@ -57,7 +56,6 @@ export class McTabHeader extends McPaginatedTabHeader {
     @Input() vertical: boolean = false;
 
     @ContentChildren(McTabLabelWrapper, { descendants: false }) items: QueryList<McTabLabelWrapper>;
-    @ViewChild(McInkBar, { static: true }) inkBar: McInkBar;
     @ViewChild('tabListContainer', { static: true }) tabListContainer: ElementRef;
     @ViewChild('tabList', { static: true }) tabList: ElementRef;
     @ViewChild('nextPaginator') nextPaginator: ElementRef<HTMLElement>;

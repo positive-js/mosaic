@@ -5,7 +5,6 @@ import { NgModule } from '@angular/core';
 import { McCommonModule } from '@ptsecurity/mosaic/core';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 
-import { McInkBar } from './ink-bar.directive';
 import { McTabBody, McTabBodyPortal } from './tab-body.component';
 import { McTabContent } from './tab-content.directive';
 import {
@@ -47,7 +46,6 @@ import { McTab } from './tab.component';
         McVerticalTabsCssStyler
     ],
     declarations: [
-        McInkBar,
         McTabGroup,
         McTabLabel,
         McTab,
