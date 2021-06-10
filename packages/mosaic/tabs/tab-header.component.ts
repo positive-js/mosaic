@@ -64,8 +64,8 @@ export class McTabHeader extends McPaginatedTabHeader {
     @ViewChild('previousPaginator') previousPaginator: ElementRef<HTMLElement>;
 
     constructor(
-        elementRef: ElementRef,
-        changeDetectorRef: ChangeDetectorRef,
+        readonly elementRef: ElementRef,
+        readonly changeDetectorRef: ChangeDetectorRef,
         viewportRuler: ViewportRuler,
         ngZone: NgZone,
         platform: Platform,

@@ -156,21 +156,21 @@ export class McTabGroup extends McTabGroupMixinBase implements AfterContentInit,
     private indexToSelect: number | null = 0;
 
     /** Snapshot of the height of the tab body wrapper before another tab is activated. */
-    private tabBodyWrapperHeight: number = 0;
+    private tabBodyWrapperHeight = 0;
 
     /** Subscription to tabs being added/removed. */
     private tabsSubscription = Subscription.EMPTY;
 
     /** Subscription to changes in the tab labels. */
     private tabLabelSubscription = Subscription.EMPTY;
-    private _dynamicHeight: boolean = false;
+    private _dynamicHeight = false;
     private _selectedIndex: number | null = null;
 
-    private groupId: number;
+    private readonly groupId: number;
 
     constructor(
         elementRef: ElementRef,
-        private changeDetectorRef: ChangeDetectorRef,
+        private readonly changeDetectorRef: ChangeDetectorRef,
         @Attribute('mc-old-tabs') lightTabs: string,
         @Attribute('vertical') vertical: string,
         @Inject(MC_TABS_CONFIG) @Optional() defaultConfig?: IMcTabsConfig

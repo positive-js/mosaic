@@ -62,7 +62,7 @@ export class McTab extends McTabMixinBase implements OnInit, CanDisable, OnChang
     @ViewChild(TemplateRef, { static: true }) implicitContent: TemplateRef<any>;
 
     /** Plain text label for the tab, used when there is no template label. */
-    @Input('label') textLabel: string = '';
+    @Input('label') textLabel = '';
 
     @Input('tabId') tabId: string;
 
@@ -89,7 +89,7 @@ export class McTab extends McTabMixinBase implements OnInit, CanDisable, OnChang
     /** Portal that will be the hosted content of the tab */
     private contentPortal: TemplatePortal | null = null;
 
-    constructor(private viewContainerRef: ViewContainerRef) {
+    constructor(private readonly viewContainerRef: ViewContainerRef) {
         super();
     }
 

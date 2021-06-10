@@ -79,7 +79,7 @@ export abstract class McPaginatedTabHeader implements AfterContentChecked, After
         this.keyManager?.updateActiveItem(coercedValue);
     }
 
-    private _selectedIndex: number = 0;
+    private _selectedIndex = 0;
 
 
     /** Tracks which element has focus; used for keyboard navigation */
@@ -189,15 +189,11 @@ export abstract class McPaginatedTabHeader implements AfterContentChecked, After
         // We need to handle these events manually, because we want to bind passive event listeners.
         fromEvent(this.previousPaginator.nativeElement, 'touchstart', passiveEventListenerOptions)
             .pipe(takeUntil(this.destroyed))
-            .subscribe(() => {
-                this.handlePaginatorPress('before');
-            });
+            .subscribe(() => this.handlePaginatorPress('before'));
 
         fromEvent(this.nextPaginator.nativeElement, 'touchstart', passiveEventListenerOptions)
             .pipe(takeUntil(this.destroyed))
-            .subscribe(() => {
-                this.handlePaginatorPress('after');
-            });
+            .subscribe(() => this.handlePaginatorPress('after'));
     }
 
     ngAfterContentInit() {
@@ -449,7 +445,7 @@ export abstract class McPaginatedTabHeader implements AfterContentChecked, After
 
         if (this.getLayoutDirection() === 'ltr') {
             labelBeforePos = offsetLeft;
-            labelAfterPos = labelBeforePos + offsetWidth;
+            labelAfterPos = labelBeforePos + (offsetWidth as number);
         } else {
             labelAfterPos = this.tabList.nativeElement.offsetWidth - offsetLeft;
             labelBeforePos = labelAfterPos - offsetWidth;
