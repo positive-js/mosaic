@@ -30,7 +30,7 @@ import { McTab } from './tab.component';
     selector: 'mc-tab-group[mc-old-tabs], [mc-tab-nav-bar][mc-old-tabs]',
     host: { class: 'mc-tab-group_old' }
 })
-export class McLightTabsCssStyler { }
+export class McOldTabsCssStyler { }
 
 @Directive({
     selector: 'mc-tab-group[mc-align-tabs-center], [mc-tab-nav-bar][mc-align-tabs-center]',

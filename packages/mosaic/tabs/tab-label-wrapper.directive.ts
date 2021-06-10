@@ -1,4 +1,4 @@
-import { Directive, ElementRef } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, Renderer2 } from '@angular/core';
 import {
     CanDisable,
     CanDisableCtor,
@@ -24,9 +24,16 @@ export const McTabLabelWrapperMixinBase: CanDisableCtor &
         '[class.mc-disabled]': 'disabled'
     }
 })
-export class McTabLabelWrapper extends McTabLabelWrapperMixinBase implements CanDisable {
-    constructor(public elementRef: ElementRef) {
+export class McTabLabelWrapper extends McTabLabelWrapperMixinBase implements CanDisable, AfterViewInit {
+    constructor(
+        public elementRef: ElementRef,
+        private renderer: Renderer2
+    ) {
         super();
+    }
+
+    ngAfterViewInit(): void {
+        this.addClassModifierForIcons(Array.from(this.elementRef.nativeElement.querySelectorAll('.mc-icon')));
     }
 
     /** Sets focus on the wrapper element */
@@ -40,5 +47,25 @@ export class McTabLabelWrapper extends McTabLabelWrapperMixinBase implements Can
 
     getOffsetWidth(): number {
         return this.elementRef.nativeElement.offsetWidth;
+    }
+
+    private addClassModifierForIcons(icons: HTMLElement[]) {
+        const twoIcons = 2;
+        const [firstIconElement, secondIconElement] = icons;
+
+        if (icons.length === 1) {
+            const COMMENT_NODE = 8;
+
+            if (firstIconElement.nextSibling && firstIconElement.nextSibling.nodeType !== COMMENT_NODE) {
+                this.renderer.addClass(firstIconElement, 'mc-icon_left');
+            }
+
+            if (firstIconElement.previousSibling && firstIconElement.previousSibling.nodeType !== COMMENT_NODE) {
+                this.renderer.addClass(firstIconElement, 'mc-icon_right');
+            }
+        } else if (icons.length === twoIcons) {
+            this.renderer.addClass(firstIconElement, 'mc-icon_left');
+            this.renderer.addClass(secondIconElement, 'mc-icon_right');
+        }
     }
 }

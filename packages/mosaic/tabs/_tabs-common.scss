@@ -52,6 +52,13 @@
 
     outline: none;
 
+    & .mc-tab-overlay {
+        position: absolute;
+
+        top: 0; left: 0; right: 0; bottom: 0;
+        pointer-events: none;
+    }
+
     &.mc-active {
         cursor: default;
 
@@ -87,24 +94,17 @@
         pointer-events: none;
     }
 
-    & .mc-tab-overlay {
-        position: absolute;
-
-        top: 0; left: 0; right: 0; bottom: 0;
-        pointer-events: none;
-    }
-
     & .mc-tab-label__template {
         display: flex;
         flex-direction: row;
-        align-items: center;
+        align-items: baseline;
 
         & > .mc-icon {
-            &:nth-child(1) {
+            &.mc-icon_left {
                 margin-right: var(--mc-tabs-size-label-icon-margin, $tabs-size-label-icon-margin);
             }
 
-            &:nth-child(2) {
+            &.mc-icon_right {
                 margin-left: var(--mc-tabs-size-label-icon-margin, $tabs-size-label-icon-margin);
             }
         }

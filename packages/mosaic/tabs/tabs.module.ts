@@ -10,7 +10,7 @@ import { McTabBody, McTabBodyPortal } from './tab-body.component';
 import { McTabContent } from './tab-content.directive';
 import {
     McTabGroup,
-    McLightTabsCssStyler,
+    McOldTabsCssStyler,
     McAlignTabsCenterCssStyler,
     McAlignTabsEndCssStyler,
     McStretchTabsCssStyler,
@@ -40,7 +40,7 @@ import { McTab } from './tab.component';
         McTabNav,
         McTabLink,
         McTabContent,
-        McLightTabsCssStyler,
+        McOldTabsCssStyler,
         McAlignTabsCenterCssStyler,
         McAlignTabsEndCssStyler,
         McStretchTabsCssStyler,
@@ -58,7 +58,7 @@ import { McTab } from './tab.component';
         McTabBodyPortal,
         McTabHeader,
         McTabContent,
-        McLightTabsCssStyler,
+        McOldTabsCssStyler,
         McAlignTabsCenterCssStyler,
         McAlignTabsEndCssStyler,
         McStretchTabsCssStyler,

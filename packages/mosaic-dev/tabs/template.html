@@ -3,15 +3,22 @@
     <mc-tab-group (selectedTabChange)="selectedTabChange($event)" style="width: 400px">
         <mc-tab [tabId]="'firstTab'" disabled>
             <ng-template mc-tab-label>
-                <i mc-icon="mc-play_16"></i>label 1<i mc-icon="mc-play_16"></i>
+                <i mc-icon="mc-play_16"></i>label 1
             </ng-template>
             Content 1
         </mc-tab>
         <mc-tab [tabId]="'secondTab'">
             <ng-template mc-tab-label>
+                label 2<i mc-icon="mc-play_16"></i>
+            </ng-template>
+            Content 2
+        </mc-tab>
+        <mc-tab [tabId]="'secondTab'">
+            <ng-template mc-tab-label>
                 <i mc-icon="mc-play_16"></i>label 2<i mc-icon="mc-play_16"></i>
             </ng-template>
-            Content 2</mc-tab>
+            Content 2
+        </mc-tab>
         <mc-tab label="label 3">Content 3</mc-tab>
         <mc-tab label="label 4">Content 4</mc-tab>
         <mc-tab label="label 5">Content 5</mc-tab>

@@ -46,17 +46,12 @@
         }
     }
 
-    .mc-tab-label_old,
-    .mc-tab-label_vertical,
-    .mc-tab-label_horizontal {
+    /* stylelint-disable no-descending-specificity */
+    .mc-tab-label_old {
         color: map-get($foreground, text);
 
+        border-top-color: transparent;
         border-bottom-color: map-get($tabs, border);
-
-        & .mc-tab-overlay {
-            background: transparent;
-        }
-
 
         &.cdk-keyboard-focused:after {
             border-color: map-get(map-get($theme, states), focused-color);
@@ -65,6 +60,17 @@
         &:hover {
             & .mc-tab-overlay {
                 background: map-get($background, overlay-hover);
+            }
+        }
+
+        &.mc-active {
+            border: {
+                color: map-get($tabs, border);
+                bottom-color: transparent;
+            }
+
+            & .mc-tab-overlay {
+                background: transparent;
             }
         }
 
@@ -77,23 +83,112 @@
         }
     }
 
-    .mc-tab-label_old {
-        border-top-color: transparent;
+    .mc-tab-label_horizontal {
+        color: map-get($foreground, text);
+
+        border-bottom-color: map-get($tabs, border);
+
+        & .mc-tab-overlay {
+            background: transparent;
+        }
+
+        &.cdk-keyboard-focused:after {
+            border-color: map-get(map-get($theme, states), focused-color);
+        }
+
+        &:hover {
+            &:before {
+                background-color: map-get($tabs, border);
+            }
+
+            & .mc-tab-overlay {
+                background: map-get($background, overlay-hover);
+            }
+
+            & .mc-icon {
+                color: map-get($foreground, text);
+            }
+        }
 
         &.mc-active {
-            border: {
-                color: map-get($tabs, border);
-                bottom-color: transparent;
+            border-bottom-color: transparent;
+
+            &:before {
+                background-color: map-get($tabs, state-active);
             }
 
             & .mc-tab-overlay {
                 background: transparent;
             }
         }
+
+        &.mc-disabled {
+            cursor: default;
+
+            & .mc-tab-overlay {
+                background: map-get($tabs, state-disabled-overlay);
+            }
+        }
     }
 
-    .mc-tab-label_vertical,
-    .mc-tab-label_horizontal,
+    .mc-tab-label_vertical {
+        color: map-get($foreground, text);
+
+        & .mc-tab-overlay {
+            background: transparent;
+        }
+
+        &.cdk-keyboard-focused:after {
+            border-color: map-get(map-get($theme, states), focused-color);
+        }
+
+        &:hover {
+            &:before {
+                background-color: map-get($tabs, border);
+            }
+
+            & .mc-tab-overlay {
+                background: map-get($background, overlay-hover);
+            }
+
+            & .mc-icon {
+                color: map-get($foreground, text);
+            }
+        }
+
+        &.mc-active {
+            border-bottom-color: transparent;
+            background: map-get($states, selected-color);
+
+            &:before {
+                background-color: map-get($tabs, state-active);
+            }
+
+            & .mc-tab-overlay {
+                background: transparent;
+            }
+
+            &:hover {
+                & .mc-tab-overlay {
+                    background: map-get($background, overlay-hover);
+                }
+
+                & .mc-icon {
+                    color: map-get($foreground, text);
+                }
+            }
+        }
+
+        &.mc-disabled {
+            cursor: default;
+            background: transparent;
+
+            & .mc-tab-overlay {
+                background: map-get($tabs, state-disabled-overlay);
+            }
+        }
+    }
+
     .mc-tab-link {
         &:hover {
             &:before {
@@ -123,29 +218,7 @@
             }
         }
     }
-
-    .mc-tab-label_vertical {
-        &.mc-active {
-            border-bottom-color: transparent;
-            background: map-get($states, selected-color);
-
-            &:before {
-                background-color: map-get($tabs, state-active);
-            }
-
-            & .mc-tab-overlay {
-                background: transparent;
-            }
-        }
-
-        &.mc-disabled {
-            background: transparent;
-
-            & .mc-tab-overlay {
-                background: map-get($tabs, state-disabled-overlay);
-            }
-        }
-    }
+    /* stylelint-enable no-descending-specificity */
 }
 
 @mixin mc-tabs-typography($config) {
