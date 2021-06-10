@@ -1,7 +1,7 @@
 /* tslint:disable:naming-convention */
 import { FocusKeyManager, FocusableOption } from '@angular/cdk/a11y';
 import { Direction, Directionality } from '@angular/cdk/bidi';
-import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
+import { coerceNumberProperty } from '@angular/cdk/coercion';
 import { ENTER, SPACE, hasModifierKey } from '@angular/cdk/keycodes';
 import { Platform, normalizePassiveListenerOptions } from '@angular/cdk/platform';
 import { ViewportRuler } from '@angular/cdk/scrolling';
@@ -573,6 +573,4 @@ export abstract class McPaginatedTabHeader implements AfterContentChecked, After
 
         return { maxScrollDistance, distance: this.scrollDistance };
     }
-
-    static ngAcceptInputType_selectedIndex: NumberInput;
 }

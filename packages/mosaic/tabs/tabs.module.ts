@@ -18,7 +18,7 @@ import {
 import { McTabHeader } from './tab-header.component';
 import { McTabLabelWrapper } from './tab-label-wrapper.directive';
 import { McTabLabel } from './tab-label.directive';
-import { McTabLink, McTabNav } from './tab-nav-bar';
+import { McTabLink, McTabNav } from './tab-nav-bar/index';
 import { McTab } from './tab.component';
 
 
