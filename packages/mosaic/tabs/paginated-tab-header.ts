@@ -210,9 +210,7 @@ export abstract class McPaginatedTabHeader implements AfterContentChecked, After
         };
 
         this.keyManager = new FocusKeyManager<McPaginatedTabHeaderItem>(this.items)
-            .withHorizontalOrientation(this.getLayoutDirection())
-            .withHomeAndEnd()
-            .withWrap();
+            .withHorizontalOrientation(this.getLayoutDirection());
 
         this.keyManager.updateActiveItem(this._selectedIndex);
 
@@ -222,13 +220,15 @@ export abstract class McPaginatedTabHeader implements AfterContentChecked, After
 
         // On dir change or window resize, realign the ink bar and update the orientation of
         // the key manager if the direction has changed.
-        merge(dirChange, resize, this.items.changes).pipe(takeUntil(this.destroyed)).subscribe(() => {
-            // We need to defer this to give the browser some time to recalculate
-            // the element dimensions. The call has to be wrapped in `NgZone.run`,
-            // because the viewport change handler runs outside of Angular.
-            this.ngZone.run(() => Promise.resolve().then(realign));
-            this.keyManager.withHorizontalOrientation(this.getLayoutDirection());
-        });
+        merge(dirChange, resize, this.items.changes)
+            .pipe(takeUntil(this.destroyed))
+            .subscribe(() => {
+                // We need to defer this to give the browser some time to recalculate
+                // the element dimensions. The call has to be wrapped in `NgZone.run`,
+                // because the viewport change handler runs outside of Angular.
+                this.ngZone.run(() => Promise.resolve().then(realign));
+                this.keyManager.withHorizontalOrientation(this.getLayoutDirection());
+            });
 
         // If there is a change in the focus key manager we need to emit the `indexFocused`
         // event in order to provide a public event that notifies about focus changes. Also we realign
@@ -358,7 +358,7 @@ export abstract class McPaginatedTabHeader implements AfterContentChecked, After
             this.scrollToLabel(tabIndex);
         }
 
-        if (this.items && this.items.length) {
+        if (this.items?.length) {
             this.items.toArray()[tabIndex].focus();
 
             // Do not let the browser manage scrolling to focus the element, this will be handled
@@ -377,7 +377,7 @@ export abstract class McPaginatedTabHeader implements AfterContentChecked, After
 
     /** The layout direction of the containing app. */
     getLayoutDirection(): Direction {
-        return this.dir && this.dir.value === 'rtl' ? 'rtl' : 'ltr';
+        return this.dir?.value === 'rtl' ? 'rtl' : 'ltr';
     }
 
     /** Performs the CSS transformation on the tab list that will cause the list to scroll. */
@@ -529,8 +529,8 @@ export abstract class McPaginatedTabHeader implements AfterContentChecked, After
 
     /** Tells the ink-bar to align itself to the current label wrapper */
     alignInkBarToSelectedTab(): void {
-        const selectedItem = this.items && this.items.length ?
-            this.items.toArray()[this.selectedIndex] : null;
+        const selectedItem = this.items?.length ? this.items.toArray()[this.selectedIndex] : null;
+
         const selectedLabelWrapper = selectedItem ? selectedItem.elementRef.nativeElement : null;
 
         if (selectedLabelWrapper) {
@@ -594,6 +594,4 @@ export abstract class McPaginatedTabHeader implements AfterContentChecked, After
 
         return { maxScrollDistance, distance: this.scrollDistance };
     }
-
-    // static ngAcceptInputType_selectedIndex: NumberInput;
 }
