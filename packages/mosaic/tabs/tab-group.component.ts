@@ -142,15 +142,13 @@ export class McTabGroup extends McTabGroupMixinBase implements AfterContentInit,
     @Output() readonly selectedIndexChange: EventEmitter<number> = new EventEmitter<number>();
 
     /** Event emitted when focus has changed within a tab group. */
-    @Output() readonly focusChange: EventEmitter<McTabChangeEvent> =
-        new EventEmitter<McTabChangeEvent>();
+    @Output() readonly focusChange: EventEmitter<McTabChangeEvent> = new EventEmitter<McTabChangeEvent>();
 
     /** Event emitted when the body animation has completed */
     @Output() readonly animationDone: EventEmitter<void> = new EventEmitter<void>();
 
     /** Event emitted when the tab selection has changed. */
-    @Output() readonly selectedTabChange: EventEmitter<McTabChangeEvent> =
-        new EventEmitter<McTabChangeEvent>(true);
+    @Output() readonly selectedTabChange: EventEmitter<McTabChangeEvent> = new EventEmitter<McTabChangeEvent>(true);
 
     /** The tab index that should be selected after the content has been checked. */
     private indexToSelect: number | null = 0;

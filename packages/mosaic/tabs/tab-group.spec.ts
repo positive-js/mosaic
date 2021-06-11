@@ -1,7 +1,7 @@
 // tslint:disable:no-magic-numbers
 // tslint:disable:no-empty
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, DebugElement, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -209,12 +209,12 @@ describe('McTabGroup', () => {
 
             expect(fixture.componentInstance.handleFocus).toHaveBeenCalledTimes(0);
 
-            tabLabels[1].nativeElement.click();
+            tabLabels[2].nativeElement.click();
             fixture.detectChanges();
 
             expect(fixture.componentInstance.handleFocus).toHaveBeenCalledTimes(1);
             expect(fixture.componentInstance.handleFocus)
-                .toHaveBeenCalledWith(jasmine.objectContaining({ index: 1 }));
+                .toHaveBeenCalledWith(jasmine.objectContaining({ index: 2 }));
         });
 
         it('should emit focusChange on arrow key navigation', () => {
@@ -229,7 +229,7 @@ describe('McTabGroup', () => {
 
             // In order to verify that the `focusChange` event also fires with the correct
             // index, we focus the second tab before testing the keyboard navigation.
-            tabLabels[1].nativeElement.click();
+            tabLabels[2].nativeElement.click();
             fixture.detectChanges();
 
             expect(fixture.componentInstance.handleFocus).toHaveBeenCalledTimes(1);
@@ -238,20 +238,22 @@ describe('McTabGroup', () => {
 
             expect(fixture.componentInstance.handleFocus).toHaveBeenCalledTimes(2);
             expect(fixture.componentInstance.handleFocus)
-                .toHaveBeenCalledWith(jasmine.objectContaining({ index: 0 }));
+                .toHaveBeenCalledWith(jasmine.objectContaining({ index: 1 }));
         });
 
     });
 
     describe('disable tabs', () => {
         let fixture: ComponentFixture<DisabledTabsTestApp>;
+        let headerList: DebugElement;
         beforeEach(() => {
             fixture = TestBed.createComponent(DisabledTabsTestApp);
+            headerList = fixture.debugElement.query(By.css('.mc-tab-list__content'));
         });
 
         it('should have one disabled tab', () => {
             fixture.detectChanges();
-            const labels = fixture.debugElement.queryAll(By.css('.mc-disabled'));
+            const labels = headerList.queryAll(By.css('.mc-disabled'));
             expect(labels.length).toBe(1);
         });
 
@@ -259,7 +261,7 @@ describe('McTabGroup', () => {
             fixture.detectChanges();
 
             const tabs = fixture.componentInstance.tabs.toArray();
-            let labels = fixture.debugElement.queryAll(By.css('.mc-disabled'));
+            let labels = headerList.queryAll(By.css('.mc-disabled'));
             expect(tabs[2].disabled).toBe(false);
             expect(labels.length).toBe(1);
 
@@ -267,7 +269,7 @@ describe('McTabGroup', () => {
             fixture.detectChanges();
 
             expect(tabs[2].disabled).toBe(true);
-            labels = fixture.debugElement.queryAll(By.css('.mc-disabled'));
+            labels = headerList.queryAll(By.css('.mc-disabled'));
             expect(labels.length).toBe(2);
         });
     });
