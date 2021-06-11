@@ -55,6 +55,7 @@
 
         &.cdk-keyboard-focused:after {
             border-color: map-get(map-get($theme, states), focused-color);
+            border-bottom-color: transparent;
         }
 
         &:hover {
@@ -94,6 +95,7 @@
 
         &.cdk-keyboard-focused:after {
             border-color: map-get(map-get($theme, states), focused-color);
+            border-bottom-color: transparent;
         }
 
         &:hover {

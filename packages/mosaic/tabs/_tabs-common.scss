@@ -23,9 +23,9 @@
                 left-radius: var(--mc-tabs-size-border-radius, #{$tabs-size-border-radius});
                 right-radius: var(--mc-tabs-size-border-radius, #{$tabs-size-border-radius});
             }
-            bottom: none;
-            bottom-color: transparent;
-        }
+        };
+
+        border-bottom-color: transparent;
     }
 }
 

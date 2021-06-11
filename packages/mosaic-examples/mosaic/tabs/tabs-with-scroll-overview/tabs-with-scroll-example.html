@@ -1,0 +1,10 @@
+<button mc-button (click)="add()">add tab</button>
+<button mc-button (click)="remove()">remove tab</button>
+
+<br><br><br>
+
+<mc-tab-group>
+    <mc-tab *ngFor="let tab of tabs" [label]="tab">
+        Contents for {{ tab }} tab
+    </mc-tab>
+</mc-tab-group>
