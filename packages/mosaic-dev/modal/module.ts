@@ -2,7 +2,7 @@ import { Component, Input, NgModule, TemplateRef, ViewEncapsulation } from '@ang
 import { BrowserModule } from '@angular/platform-browser';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
-import { McModalModule, McModalRef, McModalService } from '@ptsecurity/mosaic/modal';
+import { McModalModule, McModalRef, McModalService, ModalSize } from '@ptsecurity/mosaic/modal';
 
 
 // tslint:disable:no-console
@@ -67,7 +67,8 @@ export class ModalDemoComponent {
             mcTitle     : 'Modal Title',
             mcContent   : McModalLongCustomComponent,
             mcOkText    : 'Yes',
-            mcCancelText: 'No'
+            mcCancelText: 'No',
+            mcSize: ModalSize.Small
         });
     }
 
@@ -231,11 +232,6 @@ export class McModalFullCustomComponent {
 @NgModule({
     declarations: [
         ModalDemoComponent,
-        McModalCustomComponent,
-        McModalLongCustomComponent,
-        McModalFullCustomComponent
-    ],
-    entryComponents: [
         McModalCustomComponent,
         McModalLongCustomComponent,
         McModalFullCustomComponent

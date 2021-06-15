@@ -1,7 +1,8 @@
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { DOCUMENT } from '@angular/common';
 import {
-    AfterViewInit, ChangeDetectorRef,
+    AfterViewInit,
+    ChangeDetectorRef,
     Component,
     ComponentFactoryResolver,
     ComponentRef,
@@ -21,7 +22,8 @@ import {
     Type,
     ViewChild,
     ViewChildren,
-    ViewContainerRef, ViewEncapsulation
+    ViewContainerRef,
+    ViewEncapsulation
 } from '@angular/core';
 import { ESCAPE, ENTER } from '@ptsecurity/cdk/keycodes';
 import { Observable } from 'rxjs';
@@ -29,13 +31,14 @@ import { Observable } from 'rxjs';
 import { McModalControlService } from './modal-control.service';
 import { McModalRef } from './modal-ref.class';
 import { modalUtilObject as ModalUtil } from './modal-util';
-import { IModalButtonOptions, IModalOptions, ModalType, OnClickCallback } from './modal.type';
+import { IModalButtonOptions, IModalOptions, ModalSize, ModalType, OnClickCallback } from './modal.type';
 
 
 // Duration when perform animations (ms)
 export const MODAL_ANIMATE_DURATION = 200;
 
 type AnimationState = 'enter' | 'leave' | null;
+
 
 @Component({
     selector: 'mc-modal',
@@ -69,7 +72,8 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     @Output() mcVisibleChange = new EventEmitter<boolean>();
 
     @Input() mcZIndex: number = 1000;
-    @Input() mcWidth: number | string = 480;
+    @Input() mcWidth: number | string;
+    @Input() mcSize: ModalSize = ModalSize.Normal;
     @Input() mcWrapClassName: string;
     @Input() mcClassName: string;
     @Input() mcStyle: object;
@@ -173,7 +177,6 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     @Input() mcGetContainer: HTMLElement | OverlayRef | (() => HTMLElement | OverlayRef) = () => this.overlay.create();
 
     ngOnInit() {
-
         // Create component along without View
         if (this.isComponent(this.mcContent)) {
             this.createDynamicComponent(this.mcContent as Type<T>);
@@ -436,6 +439,7 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
                 [`fade-${state}`]: true,
                 [`fade-${state}-active`]: true
             };
+
             this.modalAnimationClassMap = {
                 [`zoom-${state}`]: true,
                 [`zoom-${state}-active`]: true

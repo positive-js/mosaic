@@ -10,12 +10,19 @@ export type ModalType = 'default' | 'confirm' | 'custom';
 // Subtypes of Confirm Modal
 export type ConfirmType = 'confirm' | 'success' | 'warn';
 
+export enum ModalSize {
+    Small = 'small',
+    Normal = 'normal',
+    Large = 'large'
+}
+
 // Public options for using by service
 export interface IModalOptions<T = any, R = any> {
     mcModalType?: ModalType;
     mcVisible?: boolean;
     mcZIndex?: number;
     mcWidth?: number | string;
+    mcSize?: ModalSize;
     mcWrapClassName?: string;
     mcClassName?: string;
     mcStyle?: object;

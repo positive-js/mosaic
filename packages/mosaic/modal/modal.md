@@ -44,3 +44,8 @@ McModalService позволяет подписаться на события п�
 или способом, показанным ниже: 
 
 <!-- example(modal-component) -->
+
+
+### Modal with scrollable body
+
+<!-- example(modal-scroll) -->

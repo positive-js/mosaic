@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 04 Jun 2021 09:40:53 GMT
+ * Generated on Tue, 15 Jun 2021 12:40:16 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
@@ -521,8 +521,10 @@ export const ModalLightColorSchemeShadow = "(0 0 0 1px #B3B3B3, 0 6px 12px 0 rgb
 export const ModalLightColorSchemeBackgroundMask = "rgba(0, 0, 0, 0.5)";
 export const ModalDarkColorSchemeShadow = "(0 0 0 1px #333333, 0 6px 12px 0 rgba(0, 0, 0, 0.5))";
 export const ModalDarkColorSchemeBackgroundMask = "rgba(0, 0, 0, 0.5)";
+export const ModalSizeSmall = "400px";
+export const ModalSizeNormal = "640px";
+export const ModalSizeLarge = "960px";
 export const ModalSizeTop = "48px";
-export const ModalSizePadding = "0 0 24px";
 export const ModalSizeCloseWidth = "56px";
 export const ModalSizeBorderRadius = "4px";
 export const ModalSizeBorderWidth = "1px";

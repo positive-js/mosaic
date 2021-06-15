@@ -13,7 +13,13 @@ import { McModalService } from './modal.service';
 
 
 @NgModule({
-    imports: [CommonModule, OverlayModule, A11yModule, McButtonModule, McIconModule],
+    imports: [
+        CommonModule,
+        OverlayModule,
+        A11yModule,
+        McButtonModule,
+        McIconModule
+    ],
     exports: [
         McModalComponent,
         McModalTitle,
@@ -28,7 +34,9 @@ import { McModalService } from './modal.service';
         CssUnitPipe,
         McModalMainAction
     ],
-    entryComponents: [McModalComponent],
-    providers: [McModalControlService, McModalService]
+    providers: [
+        McModalControlService,
+        McModalService
+    ]
 })
 export class McModalModule {}
