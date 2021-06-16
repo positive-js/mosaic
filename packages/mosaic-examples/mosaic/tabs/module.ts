@@ -3,8 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McTabsModule } from '@ptsecurity/mosaic/tabs';
-import { TabsEmptyExample } from './tabs-empty-overview/tabs-empty-example';
 
+import { TabsEmptyExample } from './tabs-empty-overview/tabs-empty-example';
 import { TabsOldExample } from './tabs-old-overview/tabs-old-example';
 import { TabsOverviewExample } from './tabs-overview/tabs-overview-example';
 import { TabsStretchExample } from './tabs-stretch-overview/tabs-stretch-example';
