@@ -1,0 +1,11 @@
+button:first-child {
+    margin-right: 16px;
+}
+
+.empty-tab-content {
+    text-align: center;
+}
+
+.docs-example-viewer-body .mc-tab-body__content {
+    padding: 16px;
+}

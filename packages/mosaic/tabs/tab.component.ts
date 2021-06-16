@@ -64,6 +64,10 @@ export class McTab extends McTabMixinBase implements OnInit, CanDisable, OnChang
     /** Plain text label for the tab, used when there is no template label. */
     @Input('label') textLabel = '';
 
+    @Input() empty = false;
+    @Input() tooltipTitle = '';
+    @Input() tooltipPlacement = '';
+
     @Input('tabId') tabId: string;
 
     /** Emits whenever the internal state of the tab changes. */

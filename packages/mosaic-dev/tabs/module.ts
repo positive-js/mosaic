@@ -3,6 +3,7 @@ import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { FormsModule, FormControl } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 import { Observable, Observer } from 'rxjs';
 
 import { McCheckboxModule } from '../../mosaic/checkbox';
@@ -75,9 +76,7 @@ export class TabsDemoComponent {
 
 
 @NgModule({
-    declarations: [
-        TabsDemoComponent
-    ],
+    declarations: [TabsDemoComponent],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
@@ -87,10 +86,9 @@ export class TabsDemoComponent {
         McRadioModule,
         McTabsModule,
         McInputModule,
+        McToolTipModule,
         FormsModule
     ],
-    bootstrap: [
-        TabsDemoComponent
-    ]
+    bootstrap: [TabsDemoComponent]
 })
 export class DemoModule {}

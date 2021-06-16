@@ -10,5 +10,8 @@
 ### Tabs with scroll
 <!-- example(tabs-with-scroll) -->
 
+### Empty tab
+<!-- example(tabs-empty) -->
+
 ### Old tabs
 <!-- example(tabs-old) -->

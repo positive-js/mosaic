@@ -9,6 +9,16 @@
             </ng-template>
             Content 1
         </mc-tab>
+
+        <mc-tab [tabId]="'Empty'" [empty]="true" [tooltipTitle]="'Text for empty tab'">
+            <ng-template mc-tab-label>
+                <div class="my-tab">
+                    Empty<i mc-icon="mc-play_16"></i>
+                </div>
+            </ng-template>
+            Content 2
+        </mc-tab>
+
         <mc-tab [tabId]="'secondTab'">
             <ng-template mc-tab-label>
                 label 2<i mc-icon="mc-play_16"></i>

@@ -58,6 +58,10 @@
             border-bottom-color: transparent;
         }
 
+        &.mc-tab-label_empty .mc-tab-overlay{
+            background: map-get($tabs, state-disabled-overlay);
+        }
+
         &:hover {
             & .mc-tab-overlay {
                 background: map-get($background, overlay-hover);
@@ -96,6 +100,10 @@
         &.cdk-keyboard-focused:after {
             border-color: map-get(map-get($theme, states), focused-color);
             border-bottom-color: transparent;
+        }
+
+        &.mc-tab-label_empty .mc-tab-overlay{
+            background: map-get($tabs, state-disabled-overlay);
         }
 
         &:hover {
@@ -142,6 +150,10 @@
 
         &.cdk-keyboard-focused:after {
             border-color: map-get(map-get($theme, states), focused-color);
+        }
+
+        &.mc-tab-label_empty .mc-tab-overlay{
+            background: map-get($tabs, state-disabled-overlay);
         }
 
         &:hover {
@@ -192,6 +204,10 @@
     }
 
     .mc-tab-link {
+        &.mc-tab-label_empty .mc-tab-overlay{
+            background: map-get($tabs, state-disabled-overlay);
+        }
+
         &:hover {
             &:before {
                 background-color: map-get($tabs, border);

@@ -82,6 +82,7 @@
 
 .mc-tab-label {
     @include tab-label;
+    @include user-select(none);
 }
 
 .mc-tab-label_old {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 
 /**
@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'tabs-stretch-example',
     templateUrl: 'tabs-stretch-example.html',
-    styleUrls: ['tabs-stretch-example.css']
+    styleUrls: ['tabs-stretch-example.css'],
+    encapsulation: ViewEncapsulation.None
 })
 export class TabsStretchExample {}

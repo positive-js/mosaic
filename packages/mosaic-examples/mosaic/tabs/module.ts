@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McTabsModule } from '@ptsecurity/mosaic/tabs';
+import { TabsEmptyExample } from './tabs-empty-overview/tabs-empty-example';
 
 import { TabsOldExample } from './tabs-old-overview/tabs-old-example';
 import { TabsOverviewExample } from './tabs-overview/tabs-overview-example';
@@ -16,7 +17,8 @@ const EXAMPLES = [
     TabsOldExample,
     TabsStretchExample,
     TabsVerticalExample,
-    TabsWithScrollExample
+    TabsWithScrollExample,
+    TabsEmptyExample
 ];
 
 @NgModule({

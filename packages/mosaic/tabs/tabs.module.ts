@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { McCommonModule } from '@ptsecurity/mosaic/core';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
+import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 
 import { McTabBody, McTabBodyPortal } from './tab-body.component';
 import { McTabContent } from './tab-content.directive';
@@ -28,7 +29,8 @@ import { McTab } from './tab.component';
         PortalModule,
         A11yModule,
         McCommonModule,
-        McIconModule
+        McIconModule,
+        McToolTipModule
     ],
     // Don't export all components because some are only to be used internally.
     exports: [

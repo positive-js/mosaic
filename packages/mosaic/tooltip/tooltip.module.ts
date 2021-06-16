@@ -13,8 +13,7 @@ import {
     declarations: [McTooltipComponent, McTooltip],
     exports: [McTooltipComponent, McTooltip],
     imports: [CommonModule, OverlayModule],
-    providers: [MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER],
-    entryComponents: [McTooltipComponent]
+    providers: [MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER]
 })
 export class McToolTipModule {
 }

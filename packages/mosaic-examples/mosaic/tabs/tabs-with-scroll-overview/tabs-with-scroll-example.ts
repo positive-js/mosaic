@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 
 /**
@@ -7,20 +7,16 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'tabs-with-scroll-example',
     templateUrl: 'tabs-with-scroll-example.html',
-    styleUrls: ['tabs-with-scroll-example.css']
+    styleUrls: ['tabs-with-scroll-example.css'],
+    encapsulation: ViewEncapsulation.None
 })
 export class TabsWithScrollExample {
-    tabs = ['First', 'Second', 'Third'];
+    tabs: number[];
 
-    add() {
-        this.tabs.push(`tab ${this.tabs.length}`);
-    }
-
-    remove() {
-        const last = this.tabs.length;
-
-        if (last < 1) { return; }
-
-        this.tabs.splice(last - 1, 1);
+    constructor() {
+        // tslint:disable-next-line:no-magic-numbers
+        this.tabs = Array(20)
+            .fill(null)
+            .map((_, i) => i);
     }
 }

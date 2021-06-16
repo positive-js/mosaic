@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 
 /**
@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'tabs-vertical-example',
     templateUrl: 'tabs-vertical-example.html',
-    styleUrls: ['tabs-vertical-example.css']
+    styleUrls: ['tabs-vertical-example.css'],
+    encapsulation: ViewEncapsulation.None
 })
 export class TabsVerticalExample {}
