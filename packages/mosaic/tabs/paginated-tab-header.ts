@@ -55,7 +55,7 @@ const HEADER_SCROLL_DELAY = 650;
 const HEADER_SCROLL_INTERVAL = 100;
 
 const VIEWPORT_THROTTLE_TIME = 150;
-const SCROLL_DISTANCE_DELIMITER = 3;
+const SCROLL_DISTANCE = 0.8;
 
 /** Item inside a paginated tab header. */
 export type McPaginatedTabHeaderItem = FocusableOption & { elementRef: ElementRef };
@@ -408,7 +408,7 @@ export abstract class McPaginatedTabHeader implements AfterContentChecked, After
         const viewLength = this.tabListContainer.nativeElement.offsetWidth;
 
         // Move the scroll distance one-third the length of the tab list's viewport.
-        const scrollAmount = (direction === 'before' ? -1 : 1) * viewLength / SCROLL_DISTANCE_DELIMITER;
+        const scrollAmount = (direction === 'before' ? -1 : 1) * viewLength * SCROLL_DISTANCE;
 
         return this.scrollTo(this.scrollDistance + scrollAmount);
     }
