@@ -45,7 +45,7 @@
     </mc-tab-group>
 
     <h4>Default Vertical tabs</h4>
-    <mc-tab-group vertical (selectedTabChange)="selectedTabChange($event)">
+    <mc-tab-group vertical (selectedTabChange)="selectedTabChange($event)" style="height: 100px">
         <mc-tab [tabId]="'firstTab'" disabled>
             <ng-template mc-tab-label>
                 <i mc-icon="mc-play_16"></i>First<i mc-icon="mc-play_16"></i>

@@ -109,6 +109,8 @@
 }
 
 .mc-tab-label_vertical {
+    justify-content: flex-start;
+
     &.mc-active:before {
         top: 0;
         bottom: 0;
