@@ -36,7 +36,6 @@ export class ModalOverviewExample {
     showDeleteModal() {
         this.modalService.delete({
             mcContent   : 'The tasks, policies and tags associated with the customer will be deleted too. Delete selected customer?',
-            mcOkType    : 'error',
             mcOkText    : 'Delete',
             mcCancelText: 'Cancel',
             mcWidth     : '480px',

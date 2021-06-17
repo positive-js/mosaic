@@ -1,3 +1,10 @@
-.modal-example-button {
-    margin-right: 18px;
+.example-container {
+    display: flex;
+    flex-direction: column;
+
+    width: 200px;
+}
+
+.example-container > .mc-button {
+    margin-bottom: 16px;
 }

@@ -75,8 +75,8 @@ export class McModalService {
 
     constructor(
         private overlay: Overlay,
-        private modalControl: McModalControlService) {
-    }
+        private modalControl: McModalControlService
+    ) {}
 
     // Closes all of the currently-open dialogs
     closeAll(): void {
