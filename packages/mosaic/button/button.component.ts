@@ -110,6 +110,10 @@ export class McButton extends McButtonMixinBase implements OnDestroy, CanDisable
         this.getHostElement().focus();
     }
 
+    focusViaKeyboard(): void {
+        this._focusMonitor.focusVia(this.getHostElement(), 'keyboard');
+    }
+
     getHostElement() {
         return this._elementRef.nativeElement;
     }

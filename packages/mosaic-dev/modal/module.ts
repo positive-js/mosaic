@@ -37,7 +37,7 @@ export class ModalDemoComponent {
             mcOnOk: () => console.log('OK')
         });
 
-        modalRef.afterClose.subscribe(() => this.confirmButton.focus());
+        modalRef.afterClose.subscribe(() => this.confirmButton.focusViaKeyboard());
     }
 
     showDeleteConfirm() {
@@ -54,7 +54,7 @@ export class ModalDemoComponent {
             mcOnCancel: () => console.log('Cancel')
         });
 
-        modalRef.afterClose.subscribe(() => this.deleteButton.focus());
+        modalRef.afterClose.subscribe(() => this.deleteButton.focusViaKeyboard());
     }
 
     createTplModal(tplTitle: TemplateRef<{}>, tplContent: TemplateRef<{}>, tplFooter: TemplateRef<{}>) {

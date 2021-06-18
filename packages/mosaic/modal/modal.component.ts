@@ -2,6 +2,7 @@ import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { DOCUMENT } from '@angular/common';
 import {
     AfterViewInit,
+    ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ComponentFactoryResolver,
@@ -45,6 +46,7 @@ type AnimationState = 'enter' | 'leave' | null;
     templateUrl: './modal.component.html',
     styleUrls: ['./modal.scss'],
     encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '(keydown)': 'onKeyDown($event)'
     }
@@ -126,6 +128,8 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     @ViewChild('bodyContainer', { read: ViewContainerRef, static: false }) bodyContainer: ViewContainerRef;
     // Only aim to focus the ok button that needs to be auto focused
     @ViewChildren('autoFocusedButton', { read: ElementRef }) autoFocusedButtons: QueryList<ElementRef>;
+
+    @ViewChild('modalBody') modalBody: ElementRef;
 
     maskAnimationClassMap: object;
     modalAnimationClassMap: object;
@@ -237,6 +241,10 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
         if (this.container instanceof OverlayRef) {
             this.container.dispose();
         }
+    }
+
+    isOverflow(): boolean {
+        return this.modalBody?.nativeElement?.offsetHeight < this.modalBody?.nativeElement?.scrollHeight;
     }
 
     open() {

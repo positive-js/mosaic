@@ -6,6 +6,11 @@
     box-sizing: border-box; // 1
 }
 
+// we should disable box-sizing in overlay because it break position calculating
+.cdk-overlay-container * {
+    box-sizing: unset;
+}
+
 html {
     -webkit-text-size-adjust: 100%; // 2
     -ms-text-size-adjust: 100%; // 2

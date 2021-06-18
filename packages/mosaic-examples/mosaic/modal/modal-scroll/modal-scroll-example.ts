@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { McModalService } from '@ptsecurity/mosaic/modal';
+import { McModalService, ModalSize } from '@ptsecurity/mosaic/modal';
 
 
 @Component({
@@ -33,6 +33,7 @@ export class ModalScrollExample {
 
     createLongModal() {
         this.modalService.create({
+            mcSize      : ModalSize.Small,
             mcTitle     : 'Modal Title',
             mcContent   : McLongComponent,
             mcOkText    : 'Yes',

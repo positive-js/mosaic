@@ -137,7 +137,8 @@
 
     $modal: (
         background-mask: $modal-light-color-scheme-background-mask,
-        shadow: $modal-light-color-scheme-shadow
+        shadow: $modal-light-color-scheme-shadow,
+        body-shadow: $modal-light-color-scheme-body-shadow
     );
 
     $navbar: (
@@ -402,7 +403,8 @@
 
     $modal: (
         background-mask: $modal-dark-color-scheme-background-mask,
-        shadow: $modal-dark-color-scheme-shadow
+        shadow: $modal-dark-color-scheme-shadow,
+        body-shadow: $modal-dark-color-scheme-body-shadow
     );
 
     $navbar: (

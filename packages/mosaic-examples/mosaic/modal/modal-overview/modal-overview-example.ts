@@ -1,5 +1,6 @@
 // tslint:disable:no-console
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { McButton } from '@ptsecurity/mosaic/button';
 import { McModalService, ModalSize } from '@ptsecurity/mosaic/modal';
 
 
@@ -12,11 +13,14 @@ import { McModalService, ModalSize } from '@ptsecurity/mosaic/modal';
     styleUrls: ['modal-overview-example.css']
 })
 export class ModalOverviewExample {
+    @ViewChild('confirm') confirm: McButton;
+    @ViewChild('success') success: McButton;
+    @ViewChild('delete') delete: McButton;
 
     constructor(private modalService: McModalService) {}
 
     showConfirmModal() {
-        this.modalService.confirm({
+        const modalRef = this.modalService.confirm({
             mcSize: ModalSize.Small,
             mcMaskClosable: true,
             mcContent   : 'Save changes?',
@@ -24,10 +28,12 @@ export class ModalOverviewExample {
             mcCancelText: 'Cancel',
             mcOnOk      : () => console.log('OK')
         });
+
+        modalRef.afterClose.subscribe(() => this.confirm.focusViaKeyboard());
     }
 
     showSuccessModal() {
-        this.modalService.success({
+        const modalRef = this.modalService.success({
             mcSize: ModalSize.Small,
             mcMaskClosable: true,
             mcContent   : 'All changes are saved!',
@@ -35,10 +41,12 @@ export class ModalOverviewExample {
             mcCancelText: 'Cancel',
             mcOnOk      : () => console.log('OK')
         });
+
+        modalRef.afterClose.subscribe(() => this.success.focusViaKeyboard());
     }
 
     showDeleteModal() {
-        this.modalService.delete({
+        const modalRef = this.modalService.delete({
             mcContent   : 'The tasks, policies and tags associated with the customer will be deleted too. Delete selected customer?',
             mcOkText    : 'Delete',
             mcCancelText: 'Cancel',
@@ -47,5 +55,7 @@ export class ModalOverviewExample {
             mcOnOk      : () => console.log('Delete'),
             mcOnCancel  : () => console.log('Cancel')
         });
+
+        modalRef.afterClose.subscribe(() => this.delete.focusViaKeyboard());
     }
 }
