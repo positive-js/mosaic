@@ -37,6 +37,7 @@ import { McModalService } from './modal.service';
     providers: [
         McModalControlService,
         McModalService
-    ]
+    ],
+    entryComponents: [McModalComponent]
 })
 export class McModalModule {}

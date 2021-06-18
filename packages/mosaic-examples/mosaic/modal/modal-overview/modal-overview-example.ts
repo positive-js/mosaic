@@ -1,6 +1,6 @@
 // tslint:disable:no-console
 import { Component } from '@angular/core';
-import { McModalService } from '@ptsecurity/mosaic/modal';
+import { McModalService, ModalSize } from '@ptsecurity/mosaic/modal';
 
 
 /**
@@ -17,6 +17,8 @@ export class ModalOverviewExample {
 
     showConfirmModal() {
         this.modalService.confirm({
+            mcSize: ModalSize.Small,
+            mcMaskClosable: true,
             mcContent   : 'Save changes?',
             mcOkText    : 'Save',
             mcCancelText: 'Cancel',
@@ -26,6 +28,8 @@ export class ModalOverviewExample {
 
     showSuccessModal() {
         this.modalService.success({
+            mcSize: ModalSize.Small,
+            mcMaskClosable: true,
             mcContent   : 'All changes are saved!',
             mcOkText    : 'ОК',
             mcCancelText: 'Cancel',
@@ -39,6 +43,7 @@ export class ModalOverviewExample {
             mcOkText    : 'Delete',
             mcCancelText: 'Cancel',
             mcWidth     : '480px',
+            mcMaskClosable: true,
             mcOnOk      : () => console.log('Delete'),
             mcOnCancel  : () => console.log('Cancel')
         });
