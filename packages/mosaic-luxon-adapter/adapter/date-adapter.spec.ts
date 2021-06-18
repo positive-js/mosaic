@@ -586,12 +586,12 @@ describe('LuxonDateAdapter formatter', () => {
                         .minus({ days: 2 });
 
                     expect(adapter.relativeShortDate(date))
-                        .toBe(date.toFormat(`${DAY}${NBSP}${SHORT_MONTH}, ${TIME}`));
+                        .toBe(adapter.format(date, `${DAY}${NBSP}${SHORT_MONTH}, ${TIME}`));
 
                     date = adapter.today().minus({ days: 5 });
 
                     expect(adapter.relativeShortDate(date))
-                        .toBe(date.toFormat(`${DAY}${NBSP}${SHORT_MONTH}, ${TIME}`));
+                        .toBe(adapter.format(date, `${DAY}${NBSP}${SHORT_MONTH}, ${TIME}`));
                 });
 
                 it('before yesterday (other year)', () => {
@@ -1290,13 +1290,13 @@ describe('LuxonDateAdapter formatter', () => {
                         .minus({ days: 2 });
 
                     expect(adapter.relativeShortDate(date))
-                        .toBe(date.toFormat(`${SHORT_MONTH}${NBSP}${DAY}, ${TIME}`));
+                        .toBe(adapter.format(date, `${SHORT_MONTH}${NBSP}${DAY}, ${TIME}`));
 
                     date = adapter.today()
                         .minus({ days: 5 });
 
                     expect(adapter.relativeShortDate(date))
-                        .toBe(date.toFormat(`${SHORT_MONTH}${NBSP}${DAY}, ${TIME}`));
+                        .toBe(adapter.format(date, `${SHORT_MONTH}${NBSP}${DAY}, ${TIME}`));
                 });
 
                 it('before yesterday (other year)', () => {
@@ -1304,7 +1304,7 @@ describe('LuxonDateAdapter formatter', () => {
                         .minus({ hours: 49 });
 
                     expect(adapter.relativeShortDate(date))
-                        .toBe(date.toFormat(`${SHORT_MONTH}${NBSP}${DAY}, ${YEAR}`));
+                        .toBe(adapter.format(date, `${SHORT_MONTH}${NBSP}${DAY}, ${YEAR}`));
                 });
             });
 
@@ -1363,35 +1363,35 @@ describe('LuxonDateAdapter formatter', () => {
                     const date = adapter.today();
 
                     expect(adapter.absoluteShortDate(date))
-                        .toBe(date.toFormat(DAY_SHORT_MONTH));
+                        .toBe(adapter.format(date, DAY_SHORT_MONTH));
                 });
 
                 it('absoluteShortDate (other year)', () => {
                     const date = adapter.createDate(2015);
 
                     expect(adapter.absoluteShortDate(date))
-                        .toBe(date.toFormat(`${DAY_SHORT_MONTH}, ${YEAR}`));
+                        .toBe(adapter.format(date, `${DAY_SHORT_MONTH}, ${YEAR}`));
                 });
 
                 it('absoluteShortDateTime', () => {
                     const date = adapter.today();
 
                     expect(adapter.absoluteShortDateTime(date))
-                        .toBe(date.toFormat(`${DAY_SHORT_MONTH}, ${TIME}`));
+                        .toBe(adapter.format(date, `${DAY_SHORT_MONTH}, ${TIME}`));
                 });
 
                 it('absoluteShortDateTime (other year)', () => {
                     const date = adapter.createDate(2015);
 
                     expect(adapter.absoluteShortDateTime(date))
-                        .toBe(date.toFormat(`${DAY_SHORT_MONTH}, ${YEAR}, ${TIME}`));
+                        .toBe(adapter.format(date, `${DAY_SHORT_MONTH}, ${YEAR}, ${TIME}`));
                 });
 
                 it('absoluteShortDateTime with milliseconds', () => {
                     const date = adapter.today();
 
                     expect(adapter.absoluteShortDateTime(date, { milliseconds: true }))
-                        .toBe(date.toFormat(`${DAY_SHORT_MONTH}, ${TIME}${MILLISECONDS}`));
+                        .toBe(adapter.format(date, `${DAY_SHORT_MONTH}, ${TIME}${MILLISECONDS}`));
                 });
             });
 

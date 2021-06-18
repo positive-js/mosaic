@@ -25,6 +25,7 @@ const scope_types = [
     'list',
     'modal',
     'mosaic-moment-adapter',
+    'mosaic-luxon-adapter',
     'navbar',
     'optgroup',
     'panel',
