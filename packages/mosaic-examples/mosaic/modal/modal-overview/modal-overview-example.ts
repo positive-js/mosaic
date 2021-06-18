@@ -13,9 +13,9 @@ import { McModalService, ModalSize } from '@ptsecurity/mosaic/modal';
     styleUrls: ['modal-overview-example.css']
 })
 export class ModalOverviewExample {
-    @ViewChild('confirm') confirm: McButton;
-    @ViewChild('success') success: McButton;
-    @ViewChild('delete') delete: McButton;
+    @ViewChild('confirm') confirmModal: McButton;
+    @ViewChild('success') successModal: McButton;
+    @ViewChild('delete') deleteModal: McButton;
 
     constructor(private modalService: McModalService) {}
 
@@ -29,7 +29,7 @@ export class ModalOverviewExample {
             mcOnOk      : () => console.log('OK')
         });
 
-        modalRef.afterClose.subscribe(() => this.confirm.focusViaKeyboard());
+        modalRef.afterClose.subscribe(() => this.confirmModal.focusViaKeyboard());
     }
 
     showSuccessModal() {
@@ -42,7 +42,7 @@ export class ModalOverviewExample {
             mcOnOk      : () => console.log('OK')
         });
 
-        modalRef.afterClose.subscribe(() => this.success.focusViaKeyboard());
+        modalRef.afterClose.subscribe(() => this.successModal.focusViaKeyboard());
     }
 
     showDeleteModal() {
@@ -56,6 +56,6 @@ export class ModalOverviewExample {
             mcOnCancel  : () => console.log('Cancel')
         });
 
-        modalRef.afterClose.subscribe(() => this.delete.focusViaKeyboard());
+        modalRef.afterClose.subscribe(() => this.deleteModal.focusViaKeyboard());
     }
 }
