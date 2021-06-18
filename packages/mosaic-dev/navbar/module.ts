@@ -2,6 +2,7 @@ import { Component, NgModule, ViewChild, ViewEncapsulation } from '@angular/core
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McDropdownModule } from '@ptsecurity/mosaic/dropdown';
 
 import { McIconModule } from '../../mosaic/icon';
@@ -53,6 +54,7 @@ export class NavbarDemoComponent {
         BrowserModule,
         McNavbarModule,
         McIconModule,
+        McButtonModule,
         FormsModule,
         McDropdownModule
     ],
