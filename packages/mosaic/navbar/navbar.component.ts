@@ -1,4 +1,3 @@
-import { FocusMonitor } from '@angular/cdk/a11y';
 import {
     AfterViewInit,
     Component,
@@ -6,190 +5,32 @@ import {
     ElementRef,
     Input,
     OnDestroy,
-    OnInit,
+    QueryList,
+    ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { CanDisable, CanDisableCtor, HasTabIndexCtor, mixinDisabled, mixinTabIndex } from '@ptsecurity/mosaic/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
+import { CachedItemWidth, CollapsibleItem, McNavbarItem } from './navbar-item.component';
 
-const COLLAPSED_CLASS: string = 'mc-navbar-collapsed-title';
 
 export type McNavbarContainerPositionType = 'left' | 'right';
 
-@Directive({
-    selector: 'mc-navbar-logo',
-    host: {
-        class: 'mc-navbar-logo'
-    }
-})
-export class McNavbarLogo {}
-
-@Directive({
-    selector: 'mc-navbar-brand',
-    host: {
-        class: 'mc-navbar-brand'
-    }
-})
-export class McNavbarBrand {}
-
-@Directive({
-    selector: 'mc-navbar-title',
-    host: {
-        class: 'mc-navbar-title'
-    }
-})
-export class McNavbarTitle {}
-
-export class McNavbarItemBase {
-    constructor(public elementRef: ElementRef) {}
-}
-
-// tslint:disable-next-line:naming-convention
-export const McNavbarMixinBase:
-    HasTabIndexCtor & CanDisableCtor & typeof McNavbarItemBase = mixinTabIndex(mixinDisabled(McNavbarItemBase));
-
-@Component({
-    selector: 'mc-navbar-item',
-    template: `<ng-content></ng-content>`,
-    encapsulation: ViewEncapsulation.None,
-    inputs: ['disabled', 'tabIndex'],
-    host: {
-        class: 'mc-navbar-item',
-        '[attr.tabindex]': 'tabIndex',
-        '[attr.disabled]': 'disabled || null'
-    }
-})
-export class McNavbarItem extends McNavbarMixinBase implements OnInit, OnDestroy, CanDisable {
-    @Input()
-    set collapsedTitle(value: string) {
-        this.elementRef.nativeElement.setAttribute('computedTitle', encodeURI(value));
-    }
-
-    constructor(
-        public  elementRef: ElementRef,
-        private _focusMonitor: FocusMonitor
-    ) {
-        super(elementRef);
-    }
-
-    ngOnInit() {
-        this.denyClickIfDisabled();
-
-        this._focusMonitor.monitor(this.elementRef.nativeElement, true);
-    }
-
-    ngOnDestroy() {
-        this._focusMonitor.stopMonitoring(this.elementRef.nativeElement);
-    }
-
-    // This method is required due to angular 2 issue https://github.com/angular/angular/issues/11200
-    private denyClickIfDisabled() {
-        const events: Event[] = this.elementRef.nativeElement.eventListeners('click');
-
-        events.forEach((event) => this.elementRef.nativeElement.removeEventListener('click', event));
-
-        this.elementRef.nativeElement.addEventListener(
-            'click',
-            (event: MouseEvent) => {
-                if (this.elementRef.nativeElement.hasAttribute('disabled')) {
-                    event.stopImmediatePropagation();
-                }
-            },
-            true
-        );
-
-        events.forEach((event) => this.elementRef.nativeElement.addEventListener('click', event));
-    }
-}
 
 @Directive({
     selector: 'mc-navbar-container',
     host: {
+        class: 'mc-navbar-container',
         '[class.mc-navbar-left]': 'this.position === "left"',
-        '[class.mc-navbar-right]': 'this.position !== "left"'
+        '[class.mc-navbar-right]': 'this.position == "right"',
+        '[class.mc-navbar_top]': 'this.position == "top"',
+        '[class.mc-navbar_bottom]': 'this.position == "bottom"'
     }
 })
 export class McNavbarContainer {
-    @Input()
-    position: McNavbarContainerPositionType = 'left';
+    @Input() position: McNavbarContainerPositionType;
 }
-
-class CollapsibleItem {
-    private collapsed: boolean = false;
-
-    constructor(public element: HTMLElement, public width: number) {}
-
-    processCollapsed(collapsed: boolean) {
-        this.collapsed = collapsed;
-
-        this.updateCollapsedClass();
-    }
-
-    private updateCollapsedClass() {
-        if (this.collapsed) {
-            this.element.classList.add(COLLAPSED_CLASS);
-        } else {
-            this.element.classList.remove(COLLAPSED_CLASS);
-        }
-
-    }
-}
-
-class CachedItemWidth {
-    get canCollapse(): boolean {
-        return this.itemsForCollapse.length > 0;
-    }
-
-    get collapsedItemsWidth(): number {
-        if (this._collapsedItemsWidth !== undefined) {
-            return this._collapsedItemsWidth;
-        }
-
-        this.calculateAndCacheCollapsedItemsWidth();
-
-        return this._collapsedItemsWidth;
-    }
-
-    private _collapsedItemsWidth: number;
-
-    constructor(
-        public element: HTMLElement,
-        public width: number,
-        public itemsForCollapse: CollapsibleItem[] = []
-    ) {}
-
-    processCollapsed(collapsed: boolean) {
-        if (this.itemsForCollapse.length > 0) {
-            this.updateTitle(collapsed);
-        }
-
-        this.itemsForCollapse.forEach((item) => item.processCollapsed(collapsed));
-    }
-
-    private calculateAndCacheCollapsedItemsWidth() {
-        this._collapsedItemsWidth = this.itemsForCollapse
-            .reduce((acc, item) => acc + item.width, 0);
-    }
-
-    private getTitle(): string {
-        const computedTitle = this.element.getAttribute('computedTitle');
-
-        return computedTitle
-            ? decodeURI(computedTitle)
-            : (this.itemsForCollapse.length > 0 ? this.itemsForCollapse[0].element.innerText : '');
-    }
-
-    private updateTitle(collapsed: boolean) {
-        if (collapsed) {
-            this.element.setAttribute('title', this.getTitle());
-        } else {
-            this.element.removeAttribute('title');
-        }
-    }
-}
-
 
 @Component({
     selector: 'mc-navbar',
@@ -202,6 +43,7 @@ class CachedItemWidth {
     encapsulation: ViewEncapsulation.None
 })
 export class McNavbar implements AfterViewInit, OnDestroy {
+    @ViewChildren(McNavbarItem) navbarItems: QueryList<McNavbarItem>;
 
     private readonly forceRecalculateItemsWidth: boolean = false;
     private readonly resizeDebounceInterval: number = 100;
@@ -215,7 +57,7 @@ export class McNavbar implements AfterViewInit, OnDestroy {
     private totalItemsWidths: number;
 
     private get maxAllowedWidth(): number {
-        return this._elementRef.nativeElement.querySelector('nav').getBoundingClientRect().width;
+        return this.elementRef.nativeElement.querySelector('nav').getBoundingClientRect().width;
     }
 
     private get itemsWidths(): CachedItemWidth[] {
@@ -242,28 +84,8 @@ export class McNavbar implements AfterViewInit, OnDestroy {
 
     private resizeSubscription: Subscription;
 
-    constructor(
-        private _elementRef: ElementRef
-    ) {
-        const resizeObserver = fromEvent(window, 'resize')
-            .pipe(debounceTime(this.resizeDebounceInterval));
-
-        this.resizeSubscription = resizeObserver.subscribe(this.updateCollapsed.bind(this));
-    }
-
-    updateCollapsed(): void {
-        let collapseDelta = this.totalItemsWidth - this.maxAllowedWidth;
-
-        for (let i = this.itemsWidths.length - 1; i >= 0; i--) {
-            const item = this.itemsWidths[i];
-
-            if (!item.canCollapse) {
-                continue;
-            }
-
-            item.processCollapsed(collapseDelta > 0);
-            collapseDelta -= item.collapsedItemsWidth;
-        }
+    constructor(private elementRef: ElementRef,) {
+        this.subscribeOnResizeEvents();
     }
 
     ngAfterViewInit(): void {
@@ -273,7 +95,26 @@ export class McNavbar implements AfterViewInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.resizeSubscription.unsubscribe();
+        this.resizeSubscription?.unsubscribe();
+    }
+
+    updateCollapsed(): void {
+        let collapseDelta = this.totalItemsWidth - this.maxAllowedWidth;
+
+        for (let i = this.itemsWidths.length - 1; i >= 0; i--) {
+            const item = this.itemsWidths[i];
+
+            if (!item.canCollapse) { continue; }
+
+            item.processCollapsed(collapseDelta > 0);
+            collapseDelta -= item.collapsedItemsWidth;
+        }
+    }
+
+    private subscribeOnResizeEvents() {
+        this.resizeSubscription = fromEvent(window, 'resize')
+            .pipe(debounceTime(this.resizeDebounceInterval))
+            .subscribe(this.updateCollapsed.bind(this));
     }
 
     private calculateAndCacheTotalItemsWidth() {
@@ -292,7 +133,8 @@ export class McNavbar implements AfterViewInit, OnDestroy {
     private calculateAndCacheItemsWidth() {
         const allItemsSelector = this.secondLevelElements
             .map((e: string) => `${this.firstLevelElement}>${e}`);
-        const allItems: HTMLElement[] = Array.from(this._elementRef.nativeElement.querySelectorAll(allItemsSelector));
+
+        const allItems: HTMLElement[] = Array.from(this.elementRef.nativeElement.querySelectorAll(allItemsSelector));
 
         this._itemsWidths = allItems
             .map((el) => new CachedItemWidth(el, this.getOuterElementWidth(el), this.getItemsForCollapse(el)));
@@ -301,9 +143,7 @@ export class McNavbar implements AfterViewInit, OnDestroy {
     private getItemsForCollapse(element: HTMLElement): CollapsibleItem[] {
         const icon = element.querySelector(`[mc-icon],mc-navbar-logo,[mc-navbar-logo]`);
 
-        if (!icon) {
-            return [];
-        }
+        if (!icon) { return []; }
 
         return Array.from(element.querySelectorAll('mc-navbar-title'))
             .map((el) => new CollapsibleItem(<HTMLElement> el, el.getBoundingClientRect().width));
