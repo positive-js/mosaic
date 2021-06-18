@@ -3,29 +3,34 @@ import { PortalModule } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { McCommonModule } from '@ptsecurity/mosaic/core';
+import { McIconModule } from '@ptsecurity/mosaic/icon';
+import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 
-import { McTab } from './tab';
-import { McTabBody, McTabBodyPortal } from './tab-body';
-import { McTabContent } from './tab-content';
+import { McTabBody, McTabBodyPortal } from './tab-body.component';
+import { McTabContent } from './tab-content.directive';
 import {
     McTabGroup,
-    McLightTabsCssStyler,
+    McOldTabsCssStyler,
     McAlignTabsCenterCssStyler,
     McAlignTabsEndCssStyler,
-    McStretchTabsCssStyler
-} from './tab-group';
-import { McTabHeader } from './tab-header';
-import { McTabLabel } from './tab-label';
-import { McTabLabelWrapper } from './tab-label-wrapper';
-import { McTabLink, McTabNav } from './tab-nav-bar/tab-nav-bar';
+    McStretchTabsCssStyler,
+    McVerticalTabsCssStyler
+} from './tab-group.component';
+import { McTabHeader } from './tab-header.component';
+import { McTabLabelWrapper } from './tab-label-wrapper.directive';
+import { McTabLabel } from './tab-label.directive';
+import { McTabLink, McTabNav } from './tab-nav-bar/index';
+import { McTab } from './tab.component';
 
 
 @NgModule({
     imports: [
         CommonModule,
-        McCommonModule,
         PortalModule,
-        A11yModule
+        A11yModule,
+        McCommonModule,
+        McIconModule,
+        McToolTipModule
     ],
     // Don't export all components because some are only to be used internally.
     exports: [
@@ -36,10 +41,11 @@ import { McTabLink, McTabNav } from './tab-nav-bar/tab-nav-bar';
         McTabNav,
         McTabLink,
         McTabContent,
-        McLightTabsCssStyler,
+        McOldTabsCssStyler,
         McAlignTabsCenterCssStyler,
         McAlignTabsEndCssStyler,
-        McStretchTabsCssStyler
+        McStretchTabsCssStyler,
+        McVerticalTabsCssStyler
     ],
     declarations: [
         McTabGroup,
@@ -52,10 +58,11 @@ import { McTabLink, McTabNav } from './tab-nav-bar/tab-nav-bar';
         McTabBodyPortal,
         McTabHeader,
         McTabContent,
-        McLightTabsCssStyler,
+        McOldTabsCssStyler,
         McAlignTabsCenterCssStyler,
         McAlignTabsEndCssStyler,
-        McStretchTabsCssStyler
+        McStretchTabsCssStyler,
+        McVerticalTabsCssStyler
     ]
 })
 export class McTabsModule {}

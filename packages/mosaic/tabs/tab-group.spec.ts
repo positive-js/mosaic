@@ -1,7 +1,7 @@
 // tslint:disable:no-magic-numbers
 // tslint:disable:no-empty
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, DebugElement, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,7 +24,6 @@ describe('McTabGroup', () => {
                 DisabledTabsTestApp,
                 TabGroupWithSimpleApi,
                 TemplateTabs,
-                TabGroupWithAriaInputs,
                 TabGroupWithIsActiveBinding
             ]
         });
@@ -202,15 +201,6 @@ describe('McTabGroup', () => {
             expect(fixture.componentInstance.animationDone).toHaveBeenCalled();
         }));
 
-        it('should add the proper `aria-setsize` and `aria-posinset`', () => {
-            fixture.detectChanges();
-
-            const labels = Array.from(element.querySelectorAll('.mc-tab-label'));
-
-            expect(labels.map((label) => label.getAttribute('aria-posinset'))).toEqual(['1', '2', '3']);
-            expect(labels.every((label) => label.getAttribute('aria-setsize') === '3')).toBe(true);
-        });
-
         it('should emit focusChange event on click', () => {
             spyOn(fixture.componentInstance, 'handleFocus');
             fixture.detectChanges();
@@ -219,12 +209,12 @@ describe('McTabGroup', () => {
 
             expect(fixture.componentInstance.handleFocus).toHaveBeenCalledTimes(0);
 
-            tabLabels[1].nativeElement.click();
+            tabLabels[2].nativeElement.click();
             fixture.detectChanges();
 
             expect(fixture.componentInstance.handleFocus).toHaveBeenCalledTimes(1);
             expect(fixture.componentInstance.handleFocus)
-                .toHaveBeenCalledWith(jasmine.objectContaining({ index: 1 }));
+                .toHaveBeenCalledWith(jasmine.objectContaining({ index: 2 }));
         });
 
         it('should emit focusChange on arrow key navigation', () => {
@@ -239,7 +229,7 @@ describe('McTabGroup', () => {
 
             // In order to verify that the `focusChange` event also fires with the correct
             // index, we focus the second tab before testing the keyboard navigation.
-            tabLabels[1].nativeElement.click();
+            tabLabels[2].nativeElement.click();
             fixture.detectChanges();
 
             expect(fixture.componentInstance.handleFocus).toHaveBeenCalledTimes(1);
@@ -248,81 +238,39 @@ describe('McTabGroup', () => {
 
             expect(fixture.componentInstance.handleFocus).toHaveBeenCalledTimes(2);
             expect(fixture.componentInstance.handleFocus)
-                .toHaveBeenCalledWith(jasmine.objectContaining({ index: 0 }));
+                .toHaveBeenCalledWith(jasmine.objectContaining({ index: 1 }));
         });
 
-    });
-
-    describe('aria labelling', () => {
-        let fixture: ComponentFixture<TabGroupWithAriaInputs>;
-        let tab: HTMLElement;
-
-        beforeEach(fakeAsync(() => {
-            fixture = TestBed.createComponent(TabGroupWithAriaInputs);
-            fixture.detectChanges();
-            tick();
-            tab = fixture.nativeElement.querySelector('.mc-tab-label');
-        }));
-
-        it('should not set aria-label or aria-labelledby attributes if they are not passed in', () => {
-            expect(tab.hasAttribute('aria-label')).toBe(false);
-            expect(tab.hasAttribute('aria-labelledby')).toBe(false);
-        });
-
-        it('should set the aria-label attribute', () => {
-            fixture.componentInstance.ariaLabel = 'Fruit';
-            fixture.detectChanges();
-
-            expect(tab.getAttribute('aria-label')).toBe('Fruit');
-        });
-
-        it('should set the aria-labelledby attribute', () => {
-            fixture.componentInstance.ariaLabelledby = 'fruit-label';
-            fixture.detectChanges();
-
-            expect(tab.getAttribute('aria-labelledby')).toBe('fruit-label');
-        });
-
-        it('should not be able to set both an aria-label and aria-labelledby', () => {
-            fixture.componentInstance.ariaLabel = 'Fruit';
-            fixture.componentInstance.ariaLabelledby = 'fruit-label';
-            fixture.detectChanges();
-
-            expect(tab.getAttribute('aria-label')).toBe('Fruit');
-            expect(tab.hasAttribute('aria-labelledby')).toBe(false);
-        });
     });
 
     describe('disable tabs', () => {
         let fixture: ComponentFixture<DisabledTabsTestApp>;
+        let headerList: DebugElement;
         beforeEach(() => {
             fixture = TestBed.createComponent(DisabledTabsTestApp);
+            headerList = fixture.debugElement.query(By.css('.mc-tab-list__content'));
         });
 
         it('should have one disabled tab', () => {
             fixture.detectChanges();
-            const labels = fixture.debugElement.queryAll(By.css('.mc-disabled'));
+            const labels = headerList.queryAll(By.css('.mc-disabled'));
             expect(labels.length).toBe(1);
-            expect(labels[0].nativeElement.getAttribute('aria-disabled')).toBe('true');
         });
 
         it('should set the disabled flag on tab', () => {
             fixture.detectChanges();
 
             const tabs = fixture.componentInstance.tabs.toArray();
-            let labels = fixture.debugElement.queryAll(By.css('.mc-disabled'));
+            let labels = headerList.queryAll(By.css('.mc-disabled'));
             expect(tabs[2].disabled).toBe(false);
             expect(labels.length).toBe(1);
-            expect(labels[0].nativeElement.getAttribute('aria-disabled')).toBe('true');
 
             fixture.componentInstance.isDisabled = true;
             fixture.detectChanges();
 
             expect(tabs[2].disabled).toBe(true);
-            labels = fixture.debugElement.queryAll(By.css('.mc-disabled'));
+            labels = headerList.queryAll(By.css('.mc-disabled'));
             expect(labels.length).toBe(2);
-            expect(labels.every((label) => label.nativeElement.getAttribute('aria-disabled') === 'true'))
-                .toBe(true);
         });
     });
 
@@ -812,19 +760,6 @@ class NestedTabs { }
   `
 })
 class TemplateTabs { }
-
-
-@Component({
-    template: `
-  <mc-tab-group>
-    <mc-tab [aria-label]="ariaLabel" [aria-labelledby]="ariaLabelledby"></mc-tab>
-  </mc-tab-group>
-  `
-})
-class TabGroupWithAriaInputs {
-    ariaLabel: string;
-    ariaLabelledby: string;
-}
 
 
 @Component({

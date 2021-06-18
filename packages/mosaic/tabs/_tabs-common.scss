@@ -2,15 +2,35 @@
 @import '../core/styles/common/layout';
 
 
-$mc-tab-border-width-focus: calc(var(--mc-tabs-size-border-width, $tabs-size-border-width) * 2);
-
-%tab-pseudo {
+%base-focus-frame {
     display: block;
-    position: absolute;
     content: "";
+
+    position: absolute;
+
+    top: 0;
+    right: calc(-1 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
+    bottom: calc(-1 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
+    left: calc(-1 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
 }
 
-@mixin tab-label-common {
+%horizontal-focus {
+    &:after {
+        border: {
+            width: calc(var(--mc-tabs-size-border-width, #{$tabs-size-border-width}) * 2);
+            style: solid;
+            top: {
+                left-radius: var(--mc-tabs-size-border-radius, #{$tabs-size-border-radius});
+                right-radius: var(--mc-tabs-size-border-radius, #{$tabs-size-border-radius});
+            }
+        };
+
+        border-bottom-color: transparent;
+    }
+}
+
+
+@mixin tab-label {
     position: relative;
 
     box-sizing: border-box;
@@ -33,130 +53,120 @@ $mc-tab-border-width-focus: calc(var(--mc-tabs-size-border-width, $tabs-size-bor
 
     outline: none;
 
-    border-bottom: {
-        width: var(--mc-tabs-size-border-width, $tabs-size-border-width);
-        style: solid;
+    & .mc-tab-overlay {
+        position: absolute;
+
+        top: 0; left: 0; right: 0; bottom: 0;
+        pointer-events: none;
+    }
+
+    &.mc-active {
+        cursor: default;
+
+        &:before {
+            display: block;
+            content: "";
+
+            position: absolute;
+        }
+
+        &.mc-disabled .mc-tab-overlay {
+            bottom: -1px;
+        }
     }
 
     &.cdk-keyboard-focused {
         z-index: 1;
 
         &:after {
-            @extend %tab-pseudo;
-
-            top: -$mc-tab-border-width-focus;
-            right: calc(-1 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
-            bottom: calc(-1 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
-            left: calc(-1 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
-            border: {
-                width: $mc-tab-border-width-focus;
-                style: solid;
-                top: {
-                    left-radius: var(--mc-tabs-size-border-radius, $tabs-size-border-radius);
-                    right-radius: var(--mc-tabs-size-border-radius, $tabs-size-border-radius);
-                }
-                bottom: none;
-            }
+            @extend %base-focus-frame;
         }
+    }
+
+    &:first-child.cdk-keyboard-focused:after {
+        left: 0;
+    }
+
+    &:last-child.cdk-keyboard-focused:after {
+        right: 0;
     }
 
     &.mc-disabled {
         pointer-events: none;
     }
 
-    & .mc-tab-overlay {
-        position: absolute;
+    & .mc-tab-label__template {
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
 
-        top: -1px;
-        left: 0;
-        right: 0;
-        bottom: 0;
+        & > .mc-icon {
+            &.mc-icon_left {
+                margin-right: var(--mc-tabs-size-label-icon-margin, $tabs-size-label-icon-margin);
+            }
 
-        pointer-events: none;
+            &.mc-icon_right {
+                margin-left: var(--mc-tabs-size-label-icon-margin, $tabs-size-label-icon-margin);
+            }
+        }
     }
 }
 
-@mixin tab-label {
-    @include tab-label-common();
-
-    border-top: {
+@mixin tab-label-old {
+    border-bottom: {
         width: var(--mc-tabs-size-border-width, $tabs-size-border-width);
-
         style: solid;
-        left-radius: var(--mc-tabs-size-border-radius, $tabs-size-border-radius);
-        right-radius: var(--mc-tabs-size-border-radius, $tabs-size-border-radius);
+    }
+
+    border: {
+        width: var(--mc-tabs-size-border-width, #{$tabs-size-border-width});
+        style: solid;
+
+        top: {
+            left-radius: var(--mc-tabs-size-border-radius, #{$tabs-size-border-radius});
+            right-radius: var(--mc-tabs-size-border-radius, #{$tabs-size-border-radius});
+        }
+
+        left: none;
+        left-color: transparent;
+        right: none;
+        right-color: transparent;
     }
 
     &.mc-active {
+        border: {
+            width: var(--mc-tabs-size-border-width, #{$tabs-size-border-width});
+            style: solid;
+        }
+
         padding-right: calc(
             var(--mc-tabs-size-padding-horizontal, #{$tabs-size-padding-horizontal}) -
             var(--mc-tabs-size-border-width, #{$tabs-size-border-width})
         );
+
         padding-left: calc(
             var(--mc-tabs-size-padding-horizontal, #{$tabs-size-padding-horizontal}) -
             var(--mc-tabs-size-border-width, #{$tabs-size-border-width})
         );
 
-        border: {
-            width: var(--mc-tabs-size-border-width, $tabs-size-border-width);
-            style: solid;
-        }
-
-        &.cdk-keyboard-focused {
-            &:after {
-                z-index: 1;
-                right: - $mc-tab-border-width-focus;
-                left: - $mc-tab-border-width-focus;
-            }
+        &.cdk-keyboard-focused:after {
+            right: calc(-2 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
+            left: calc(-2 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
         }
     }
 
-    .mc-tab-overlay {
-        border-top: {
-            width: var(--mc-tabs-size-border-width, $tabs-size-border-width);
+    &.cdk-keyboard-focused:after {
+        @extend %horizontal-focus;
 
-            style: solid;
-            color: transparent;
-            left-radius: var(--mc-tabs-size-border-radius, $tabs-size-border-radius);
-            right-radius: var(--mc-tabs-size-border-radius, $tabs-size-border-radius);
-        }
-    }
-}
-
-%tab-light-pseudo-highlight-border {
-    @extend %tab-pseudo;
-
-    bottom: calc(-1 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
-    left: 0;
-    height: var(--mc-tabs-size-highlight-height, $tabs-size-highlight-height);
-    right: 0;
-}
-
-@mixin tab-label-light {
-    @include tab-label-common();
-
-    &.mc-active,
-    &:hover {
-        &:before {
-            @extend %tab-light-pseudo-highlight-border;
-        }
-    }
-
-    &.cdk-keyboard-focused + :hover {
-        &:before {
-            left: calc(#{$mc-tab-border-width-focus} - var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
-        }
-    }
-
-    &.cdk-keyboard-focused {
-        &:after {
-            top: calc(-1 * var(--mc-tabs-size-border-width, #{$tabs-size-border-width}));
-        }
+        top: -1px
     }
 
     & .mc-tab-overlay {
-        position: absolute;
+        top: -1px;
 
-        top: 0;
+        border-top: {
+            left-radius: var(--mc-tabs-size-border-radius, #{$tabs-size-border-radius});
+            right-radius: var(--mc-tabs-size-border-radius, #{$tabs-size-border-radius});
+        }
     }
 }

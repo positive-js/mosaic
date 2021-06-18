@@ -1,0 +1,23 @@
+<br><br><br>
+
+<mc-tab-group>
+    <mc-tab [label]="'First'">
+        Contents for First tab
+    </mc-tab>
+
+    <mc-tab [label]="'Second'">
+        Contents for Second tab
+    </mc-tab>
+
+    <mc-tab [label]="'Комментарии'" [empty]="true" [tooltipTitle]="'Text for empty tab'">
+        <div class="empty-tab-content">
+            Комментариев нет
+            <br>
+            Все заметки будут храниться здесь
+        </div>
+    </mc-tab>
+
+    <mc-tab [label]="'Third'">
+        Contents for Third tab
+    </mc-tab>
+</mc-tab-group>

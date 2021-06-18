@@ -85,32 +85,6 @@ describe('McTabNavBar', () => {
             ).toBeTruthy();
         });
 
-        it('should toggle aria-current based on active state', () => {
-            const tabLink1 = fixture.debugElement.queryAll(By.css('a'))[0];
-            const tabLink2 = fixture.debugElement.queryAll(By.css('a'))[1];
-            const tabLinkElements = fixture.debugElement
-                .queryAll(By.css('a'))
-                .map((tabLinkDebugEl) => tabLinkDebugEl.nativeElement);
-
-            tabLink1.nativeElement.click();
-            fixture.detectChanges();
-            expect(tabLinkElements[0].getAttribute('aria-current')).toEqual(
-                'true'
-            );
-            expect(tabLinkElements[1].getAttribute('aria-current')).toEqual(
-                'false'
-            );
-
-            tabLink2.nativeElement.click();
-            fixture.detectChanges();
-            expect(tabLinkElements[0].getAttribute('aria-current')).toEqual(
-                'false'
-            );
-            expect(tabLinkElements[1].getAttribute('aria-current')).toEqual(
-                'true'
-            );
-        });
-
         it('should add the disabled class if disabled', () => {
             const tabLinkElements = fixture.debugElement
                 .queryAll(By.css('a'))
@@ -136,33 +110,6 @@ describe('McTabNavBar', () => {
             ).toBe(
                 true,
                 'Expected every tab link to have the disabled class if set through binding'
-            );
-        });
-
-        it('should update aria-disabled if disabled', () => {
-            const tabLinkElements = fixture.debugElement
-                .queryAll(By.css('a'))
-                .map((tabLinkDebugEl) => tabLinkDebugEl.nativeElement);
-
-            expect(
-                tabLinkElements.every(
-                    (tabLink) => tabLink.getAttribute('aria-disabled') === 'false'
-                )
-            ).toBe(
-                true,
-                'Expected aria-disabled to be set to "false" by default.'
-            );
-
-            fixture.componentInstance.disabled = true;
-            fixture.detectChanges();
-
-            expect(
-                tabLinkElements.every(
-                    (tabLink) => tabLink.getAttribute('aria-disabled') === 'true'
-                )
-            ).toBe(
-                true,
-                'Expected aria-disabled to be set to "true" if link is disabled.'
             );
         });
 

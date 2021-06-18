@@ -1,15 +1,65 @@
 <div>
     <h4>Default tabs</h4>
-    <mc-tab-group (selectedTabChange)="selectedTabChange($event)">
-        <mc-tab [tabId]="'firstTab'" label="First">Content 1</mc-tab>
+    <mc-tab-group
+        (selectedTabChange)="selectedTabChange($event)"
+        style="width: 400px">
+        <mc-tab [tabId]="'firstTab'" disabled>
+            <ng-template mc-tab-label>
+                <i mc-icon="mc-play_16"></i>label 1
+            </ng-template>
+            Content 1
+        </mc-tab>
+
+        <mc-tab [tabId]="'Empty'" [empty]="true" [tooltipTitle]="'Text for empty tab'">
+            <ng-template mc-tab-label>
+                <div class="my-tab">
+                    Empty<i mc-icon="mc-play_16"></i>
+                </div>
+            </ng-template>
+            Empty Content
+        </mc-tab>
+
+        <mc-tab [tabId]="'secondTab'">
+            <ng-template mc-tab-label>
+                <i mc-icon="mc-play_16"></i>label 2<i mc-icon="mc-play_16"></i>
+            </ng-template>
+            Content 2
+        </mc-tab>
+        <mc-tab label="label 3">Content 3</mc-tab>
+        <mc-tab label="label 4">Content 4</mc-tab>
+        <mc-tab label="label 5">Content 5</mc-tab>
+        <mc-tab label="label 6">Content 6</mc-tab>
+        <mc-tab label="label 7">Content 7</mc-tab>
+        <mc-tab label="label 8">Content 8</mc-tab>
+        <mc-tab label="label 9">Content 9</mc-tab>
+        <mc-tab label="label 10">Content 10</mc-tab>
+        <mc-tab label="label 11">Content 11</mc-tab>
+        <mc-tab label="label 12">Content 12</mc-tab>
+        <mc-tab label="label 13">Content 13</mc-tab>
+        <mc-tab label="label 14">Content 14</mc-tab>
+        <mc-tab label="label 15">Content 15</mc-tab>
+        <mc-tab label="label 16">Content 16</mc-tab>
+        <mc-tab label="label 17">Content 17</mc-tab>
+        <mc-tab label="label 18">Content 18</mc-tab>
+        <mc-tab label="label 19">Content 19</mc-tab>
+    </mc-tab-group>
+
+    <h4>Default Vertical tabs</h4>
+    <mc-tab-group vertical (selectedTabChange)="selectedTabChange($event)" style="height: 100px">
+        <mc-tab [tabId]="'firstTab'" disabled>
+            <ng-template mc-tab-label>
+                <i mc-icon="mc-play_16"></i>First<i mc-icon="mc-play_16"></i>
+            </ng-template>
+            Content 1
+        </mc-tab>
         <mc-tab [tabId]="'secondTab'" label="Second">Content 2</mc-tab>
-        <mc-tab disabled label="Third">Content 3</mc-tab>
+        <mc-tab label="Third">Content 3</mc-tab>
         <mc-tab label="4">Content 4</mc-tab>
         <mc-tab label="5">Content 5</mc-tab>
     </mc-tab-group>
 
-    <h4>Light tabs</h4>
-    <mc-tab-group mc-light-tabs>
+    <h4>Old tabs</h4>
+    <mc-tab-group mc-old-tabs>
         <mc-tab label="First">Content 1</mc-tab>
         <mc-tab label="Second">Content 2</mc-tab>
         <mc-tab disabled label="Third">Content 3</mc-tab>
@@ -17,8 +67,8 @@
         <mc-tab label="5">Content 5</mc-tab>
     </mc-tab-group>
 
-    <h4>Light tabs + stretch tabs</h4>
-    <mc-tab-group mc-light-tabs mc-stretch-tabs>
+    <h4>Old tabs + stretch tabs</h4>
+    <mc-tab-group mc-old-tabs mc-stretch-tabs>
         <mc-tab label="First">Content 1</mc-tab>
         <mc-tab label="Second">Content 2</mc-tab>
         <mc-tab disabled label="Third">Content 3</mc-tab>
@@ -29,19 +79,19 @@
 
     <h3>Navigation</h3>
 
-    <nav mc-tab-nav-bar mc-light-tabs mc-align-tabs-end>
+    <nav mc-tab-nav-bar mc-align-tabs-end vertical>
         <a mc-tab-link
            disabled
            *ngFor="let link of links"
            (click)="activeLink = link"
-           [active]="activeLink == link"> {{link}} </a>
+           [active]="activeLink == link">{{link}}</a>
         <a mc-tab-link
            disabled
            (click)="activeLink = 1"
            [active]="activeLink == 1">Disabled Link</a>
     </nav>
 
-    <nav mc-tab-nav-bar mc-light-tabs>
+    <nav mc-tab-nav-bar>
         <a mc-tab-link
            *ngFor="let link of links"
            (click)="activeLink = link"

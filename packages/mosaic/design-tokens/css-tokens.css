@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 01 Jun 2021 08:36:03 GMT
+ * Generated on Fri, 04 Jun 2021 09:40:53 GMT
  */
 
 :root {
@@ -139,6 +139,7 @@
   --mc-tabs-size-padding-horizontal: 16px;
   --mc-tabs-size-border-width: 1px;
   --mc-tabs-size-border-radius: 3px;
+  --mc-tabs-size-label-icon-margin: 8px;
   --mc-tags-size-margin: 2px;
   --mc-tags-size-height: 24px;
   --mc-tags-size-border-width: 1px;

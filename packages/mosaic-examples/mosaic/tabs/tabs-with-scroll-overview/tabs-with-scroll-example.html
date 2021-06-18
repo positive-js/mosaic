@@ -1,0 +1,10 @@
+<br><br><br>
+
+<mc-tab-group>
+    <mc-tab *ngFor="let tab of tabs">
+        <ng-template mc-tab-label>
+            <i mc-icon="mc-play_16"></i>Tab {{ tab }}
+        </ng-template>
+        Contents for {{ tab }} tab
+    </mc-tab>
+</mc-tab-group>

@@ -181,7 +181,8 @@
 
     $tabs: (
         border: $tabs-light-color-scheme-border,
-        state-active: $tabs-light-color-scheme-state-active
+        state-active: $tabs-light-color-scheme-state-active,
+        state-disabled-overlay: $tabs-light-color-scheme-state-disabled-overlay
     );
 
     $tags: (
@@ -445,7 +446,8 @@
 
     $tabs: (
         border: $tabs-dark-color-scheme-border,
-        state-active: $tabs-dark-color-scheme-state-active
+        state-active: $tabs-dark-color-scheme-state-active,
+        state-disabled-overlay: $tabs-dark-color-scheme-state-disabled-overlay
     );
 
     $tags: (

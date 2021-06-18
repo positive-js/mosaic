@@ -1,13 +1,20 @@
 <mc-tab-group>
-    <mc-tab>
-        <ng-template mc-tab-label>Fact 1</ng-template>
+    <mc-tab [disabled]="true">
+        <ng-template mc-tab-label>
+            <i mc-icon="mc-play_16"></i>Fact 1
+        </ng-template>
         Chuck Norris can hear sign language.
+
     </mc-tab>
+
     <mc-tab>
-        <ng-template mc-tab-label>Fact 2</ng-template>
+        <ng-template mc-tab-label>
+            Fact 2 <i mc-icon="mc-play_16"></i>
+        </ng-template>
         Chuck Norris makes onions cry.
     </mc-tab>
-    <mc-tab [disabled]="true">
+
+    <mc-tab>
         <ng-template mc-tab-label>Fact 3</ng-template>
         nothing
     </mc-tab>

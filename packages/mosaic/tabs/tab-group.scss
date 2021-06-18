@@ -15,16 +15,18 @@
     }
 }
 
-.mc-tab-label {
-    @include tab-label
-}
+.mc-tab-group_vertical {
+    flex-direction: row;
 
-.mc-tab-light-label {
-    @include tab-label-light;
-}
+    & .mc-tab-header__content {
+        overflow-y: auto;
 
-.mc-tab-header__content {
-    padding: 1px 1px 0;
+        padding-top: 8px;
+        padding-bottom: 1px;
+
+        border-right-width: var(--mc-tabs-size-border-width, #{$tabs-size-border-width});
+        border-right-style: solid;
+    }
 }
 
 .mc-tab-body__wrapper {

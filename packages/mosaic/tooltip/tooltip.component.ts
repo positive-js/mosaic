@@ -595,14 +595,14 @@ export class McTooltip implements OnInit, OnDestroy {
     initElementRefListeners() {
         this.clearListeners();
 
-        if (this.mcTrigger === 'hover') {
+        if (this.mcTrigger.includes('hover')) {
             this.manualListeners
                 .set('mouseenter', () => this.show())
                 .set('mouseleave', () => this.hide())
                 .forEach((listener, event) => this.elementRef.nativeElement.addEventListener(event, listener));
         }
 
-        if (this.mcTrigger === 'focus') {
+        if (this.mcTrigger.includes('focus')) {
             this.manualListeners
                 .set('focus', () => this.show())
                 .set('blur', () => this.hide())
