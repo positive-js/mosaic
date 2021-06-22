@@ -21,6 +21,7 @@ const licensesWhitelist = [
     'CC-BY-4.0',
 
     'GPL-3.0',
+    'Python-2.0',
 
     // Have a full copyright grant. Validated by opensource team.
     'Unlicense',

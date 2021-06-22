@@ -10,7 +10,7 @@
         "url": "https://github.com/positive-js/mosaic.git"
     },
     "engines": {
-        "node": ">= 12",
+        "node": ">= 14",
         "yarn": ">= 1.0.0"
     },
     "requiredAngularVersion": ">=11.0.0",
@@ -28,9 +28,9 @@
         "zone.js": "~0.10.3"
     },
     "devDependencies": {
-        "@angular-devkit/architect-cli": "^0.1001.7",
+        "@angular-devkit/architect-cli": "^0.1102.14",
         "@angular-devkit/build-angular": "^0.1102.13",
-        "@angular-devkit/build-ng-packagr": "^0.1001.7",
+        "@angular-devkit/build-ng-packagr": "^0.11.4",
         "@angular-devkit/core": "^11.2.3",
         "@angular-devkit/schematics": "^11.2.3",
         "@angular/cli": "^11.2.3",
