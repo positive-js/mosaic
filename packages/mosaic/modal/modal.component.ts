@@ -27,8 +27,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ESCAPE, ENTER } from '@ptsecurity/cdk/keycodes';
-import { fromEvent, Observable } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 import { McModalControlService } from './modal-control.service';
 import { McModalRef } from './modal-ref.class';
@@ -238,16 +237,6 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
                 break;
             }
         }
-
-        if (this.bodyContainer) {
-            fromEvent(this.modalBody.nativeElement, 'scroll')
-                // tslint:disable-next-line:no-magic-numbers
-                .pipe(debounceTime(100))
-                .subscribe(this.onScroll);
-
-            this.onScroll();
-        }
-
     }
 
     ngOnDestroy() {
@@ -256,7 +245,7 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
         }
     }
 
-    onScroll = () => {
+    onScroll(): void {
         const nativeElement = this.modalBody?.nativeElement;
 
         if (!nativeElement) { return; }

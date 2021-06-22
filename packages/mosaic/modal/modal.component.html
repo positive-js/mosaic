@@ -61,7 +61,7 @@
             </ng-container>
         </div>
     </div>
-    <div class="mc-modal-body" #modalBody [ngStyle]="mcBodyStyle" (scroll)="onScroll($event)">
+    <div class="mc-modal-body" #modalBody [ngStyle]="mcBodyStyle" (scroll)="onScroll()">
         <ng-container #bodyContainer>
             <ng-container *ngIf="!isComponent(mcContent)" [ngSwitch]="true">
                 <ng-container *ngSwitchCase="isTemplateRef(mcContent)" [ngTemplateOutlet]="mcContent"></ng-container>
