@@ -21,19 +21,13 @@ export class ModalFocusContentExample {
     constructor(private modalService: McModalService) {}
 
     openModal() {
-        this.componentModal = this.modalService.open({
-            mcComponent: McModalFocusContentComponent
-        });
+        this.componentModal = this.modalService.open({ mcComponent: McModalFocusContentComponent });
 
-        this.componentModal.afterOpen.subscribe(() => {
-            const { focusedField } = this.componentModal.getContentComponent();
+        this.componentModal.afterOpen
+            .subscribe(() => this.componentModal.getContentComponent().focusedField.focus());
 
-            focusedField.focus();
-        });
-
-        this.componentModal.afterClose.subscribe(() => {
-            this.modalButton.focusViaKeyboard();
-        });
+        this.componentModal.afterClose
+            .subscribe(() => this.modalButton.focusViaKeyboard());
     }
 }
 
