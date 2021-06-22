@@ -1,5 +1,6 @@
 // tslint:disable:no-console
-import { Component, TemplateRef } from '@angular/core';
+import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { McButton } from '@ptsecurity/mosaic/button';
 import { McModalRef, McModalService } from '@ptsecurity/mosaic/modal';
 
 
@@ -14,6 +15,8 @@ import { McModalRef, McModalService } from '@ptsecurity/mosaic/modal';
 export class ModalTemplateExample {
     tplModal: McModalRef;
 
+    @ViewChild('modalButton') modalButton: McButton;
+
     constructor(private modalService: McModalService) {}
 
     createTplModal(tplTitle: TemplateRef<{}>, tplContent?: TemplateRef<{}>, tplFooter?: TemplateRef<{}>) {
@@ -21,9 +24,10 @@ export class ModalTemplateExample {
             mcTitle       : tplTitle,
             mcContent     : tplContent,
             mcFooter      : tplFooter,
-            mcClosable    : true,
             mcOnOk        : () => console.log('Click ok')
         });
+
+        this.tplModal.afterClose.subscribe(() => this.modalButton.focusViaKeyboard());
     }
 
     destroyTplModal() {

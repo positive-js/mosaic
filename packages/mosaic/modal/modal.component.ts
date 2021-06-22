@@ -27,7 +27,8 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ESCAPE, ENTER } from '@ptsecurity/cdk/keycodes';
-import { Observable } from 'rxjs';
+import { fromEvent, Observable } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 import { McModalControlService } from './modal-control.service';
 import { McModalRef } from './modal-ref.class';
@@ -130,6 +131,9 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     @ViewChildren('autoFocusedButton', { read: ElementRef }) autoFocusedButtons: QueryList<ElementRef>;
 
     @ViewChild('modalBody') modalBody: ElementRef;
+
+    isTopOverflow: boolean = false;
+    isBottomOverflow: boolean = false;
 
     maskAnimationClassMap: object;
     modalAnimationClassMap: object;
@@ -235,6 +239,15 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
             }
         }
 
+        if (this.bodyContainer) {
+            fromEvent(this.modalBody.nativeElement, 'scroll')
+                // tslint:disable-next-line:no-magic-numbers
+                .pipe(debounceTime(100))
+                .subscribe(this.onScroll);
+
+            this.onScroll();
+        }
+
     }
 
     ngOnDestroy() {
@@ -243,8 +256,18 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
         }
     }
 
-    isOverflow(): boolean {
-        return this.modalBody?.nativeElement?.offsetHeight < this.modalBody?.nativeElement?.scrollHeight;
+    onScroll = () => {
+        const nativeElement = this.modalBody?.nativeElement;
+
+        if (!nativeElement) { return; }
+
+        const scrollTop: number = nativeElement.scrollTop;
+        const offsetHeight: number = nativeElement.offsetHeight;
+        const scrollHeight: number = nativeElement.scrollHeight;
+
+        this.isTopOverflow = scrollTop > 0;
+
+        this.isBottomOverflow = (scrollTop as number + offsetHeight as number) < scrollHeight;
     }
 
     open() {

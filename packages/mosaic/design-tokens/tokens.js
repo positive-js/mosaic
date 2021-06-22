@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 18 Jun 2021 09:23:46 GMT
+ * Generated on Tue, 22 Jun 2021 11:43:43 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
@@ -518,10 +518,12 @@ export const ListSizeMultiLinePadding = "16px";
 export const ListSizeIconWidth = "24px";
 export const ListFontItem = "body";
 export const ModalLightColorSchemeShadow = "(0 0 0 1px #B3B3B3, 0 6px 12px 0 rgba(0, 0, 0, 0.5))";
-export const ModalLightColorSchemeBodyShadow = "inset 0 2px 4px 0 rgba(0, 0, 0, 0.16), inset 0 -2px 4px 0 rgba(0, 0, 0, 0.16)";
+export const ModalLightColorSchemeBodyTopShadow = "0 2px 4px 0 rgba(0, 0, 0, 0.16)";
+export const ModalLightColorSchemeBodyBottomShadow = "0 -2px 4px 0 rgba(0, 0, 0, 0.16)";
 export const ModalLightColorSchemeBackgroundMask = "rgba(0, 0, 0, 0.5)";
 export const ModalDarkColorSchemeShadow = "(0 0 0 1px #333333, 0 6px 12px 0 rgba(0, 0, 0, 0.5))";
-export const ModalDarkColorSchemeBodyShadow = "inset 0 2px 4px 0 rgba(0, 0, 0, 0.16), inset 0 -2px 4px 0 rgba(0, 0, 0, 0.16)";
+export const ModalDarkColorSchemeBodyTopShadow = "0 2px 4px 0 rgba(0, 0, 0, 0.16)";
+export const ModalDarkColorSchemeBodyBottomShadow = "0 -2px 4px 0 rgba(0, 0, 0, 0.16)";
 export const ModalDarkColorSchemeBackgroundMask = "rgba(0, 0, 0, 0.5)";
 export const ModalSizeSmall = "400px";
 export const ModalSizeNormal = "640px";

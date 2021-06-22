@@ -29,8 +29,12 @@
             border-bottom-color: map-get($popup, divider);
         }
 
-        .mc-modal-body.mc-modal-body_overflow {
-            box-shadow: map-get($modal, body-shadow);
+        .mc-modal-header.mc-modal-body_top-overflow {
+            box-shadow: map-get($modal, body-top-shadow);
+        }
+
+        .mc-modal-footer.mc-modal-body_bottom-overflow {
+            box-shadow: map-get($modal, body-bottom-shadow);
         }
 
         .mc-modal-footer {

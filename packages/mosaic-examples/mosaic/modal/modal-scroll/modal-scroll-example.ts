@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { McButton } from '@ptsecurity/mosaic/button';
 import { McModalService, ModalSize } from '@ptsecurity/mosaic/modal';
 
 
@@ -25,19 +26,23 @@ export class McLongComponent {
  */
 @Component({
     selector: 'modal-scroll-example',
-    template: `<button mc-button [color]="'primary'" (click)="createLongModal()">Open Modal</button>`,
+    template: `<button #modalButton mc-button (click)="createLongModal()">Open Modal</button>`,
     styleUrls: ['modal-scroll-example.css']
 })
 export class ModalScrollExample {
+    @ViewChild('modalButton') modalButton: McButton;
+
     constructor(private modalService: McModalService) {}
 
     createLongModal() {
-        this.modalService.create({
+        const modalRef = this.modalService.create({
             mcSize      : ModalSize.Small,
             mcTitle     : 'Modal Title',
             mcContent   : McLongComponent,
             mcOkText    : 'Yes',
             mcCancelText: 'No'
         });
+
+        modalRef.afterClose.subscribe(() => this.modalButton.focusViaKeyboard());
     }
 }

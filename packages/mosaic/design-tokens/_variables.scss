@@ -1,6 +1,6 @@
 
 // Do not edit directly
-// Generated on Fri, 18 Jun 2021 09:23:45 GMT
+// Generated on Tue, 22 Jun 2021 11:43:43 GMT
 
 $light-color-scheme-primary-default: #338FCC;
 $light-color-scheme-second-default: #B3B3B3;
@@ -410,10 +410,12 @@ $list-size-multi-line-padding: 16px;
 $list-size-icon-width: 24px;
 $list-font-item: body;
 $modal-light-color-scheme-shadow: (0 0 0 1px #B3B3B3, 0 6px 12px 0 rgba(0, 0, 0, 0.5));
-$modal-light-color-scheme-body-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.16), inset 0 -2px 4px 0 rgba(0, 0, 0, 0.16);
+$modal-light-color-scheme-body-top-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16);
+$modal-light-color-scheme-body-bottom-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.16);
 $modal-light-color-scheme-background-mask: rgba(0, 0, 0, 0.5);
 $modal-dark-color-scheme-shadow: (0 0 0 1px #333333, 0 6px 12px 0 rgba(0, 0, 0, 0.5));
-$modal-dark-color-scheme-body-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.16), inset 0 -2px 4px 0 rgba(0, 0, 0, 0.16);
+$modal-dark-color-scheme-body-top-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16);
+$modal-dark-color-scheme-body-bottom-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.16);
 $modal-dark-color-scheme-background-mask: rgba(0, 0, 0, 0.5);
 $modal-size-small: 400px;
 $modal-size-normal: 640px;

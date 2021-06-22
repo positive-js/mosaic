@@ -51,7 +51,7 @@
 
 <!-- [Predefined] Default Modal Content -->
 <ng-template #tplContentDefault>
-    <div *ngIf="mcTitle" class="mc-modal-header">
+    <div *ngIf="mcTitle" class="mc-modal-header" [class.mc-modal-body_top-overflow]="isTopOverflow">
         <div class="mc-modal-title">
             <ng-container [ngSwitch]="true">
                 <ng-container *ngSwitchCase="isTemplateRef(mcTitle)" [ngTemplateOutlet]="mcTitle"></ng-container>
@@ -61,7 +61,7 @@
             </ng-container>
         </div>
     </div>
-    <div class="mc-modal-body" #modalBody [class.mc-modal-body_overflow]="isOverflow()" [ngStyle]="mcBodyStyle">
+    <div class="mc-modal-body" #modalBody [ngStyle]="mcBodyStyle" (scroll)="onScroll($event)">
         <ng-container #bodyContainer>
             <ng-container *ngIf="!isComponent(mcContent)" [ngSwitch]="true">
                 <ng-container *ngSwitchCase="isTemplateRef(mcContent)" [ngTemplateOutlet]="mcContent"></ng-container>
@@ -72,7 +72,7 @@
             </ng-container>
         </ng-container>
     </div>
-    <div *ngIf="mcFooter !== null" class="mc-modal-footer">
+    <div *ngIf="mcFooter !== null" class="mc-modal-footer" [class.mc-modal-body_bottom-overflow]="isBottomOverflow">
         <ng-container [ngSwitch]="true">
             <ng-container *ngSwitchCase="isTemplateRef(mcFooter)" [ngTemplateOutlet]="mcFooter"></ng-container>
             <ng-container *ngSwitchCase="isNonEmptyString(mcFooter)">
