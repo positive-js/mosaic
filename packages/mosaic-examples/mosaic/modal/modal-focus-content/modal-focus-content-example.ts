@@ -31,7 +31,7 @@ export class ModalFocusContentExample {
             focusedField.focus();
         });
 
-        this.componentModal.afterClose.subscribe((action: 'save' | 'close') => {
+        this.componentModal.afterClose.subscribe(() => {
             this.modalButton.focusViaKeyboard();
         });
     }
