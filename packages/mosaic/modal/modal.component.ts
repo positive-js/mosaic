@@ -237,6 +237,8 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
                 break;
             }
         }
+
+        this.checkOverflow();
     }
 
     ngOnDestroy() {
@@ -245,7 +247,7 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
         }
     }
 
-    onScroll(): void {
+    checkOverflow(): void {
         const nativeElement = this.modalBody?.nativeElement;
 
         if (!nativeElement) { return; }
