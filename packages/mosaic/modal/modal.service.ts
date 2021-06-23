@@ -13,7 +13,6 @@ import { ConfirmType, IModalOptions, IModalOptionsForService } from './modal.typ
 
 // A builder used for managing service creating modals
 export class ModalBuilderForService {
-
     // Modal ComponentRef, "null" means it has been destroyed
     private modalRef: ComponentRef<McModalComponent> | null;
     private overlayRef: OverlayRef;
@@ -76,8 +75,8 @@ export class McModalService {
 
     constructor(
         private overlay: Overlay,
-        private modalControl: McModalControlService) {
-    }
+        private modalControl: McModalControlService
+    ) {}
 
     // Closes all of the currently-open dialogs
     closeAll(): void {
@@ -94,12 +93,6 @@ export class McModalService {
 
         if (!('mcCloseByESC' in options)) {
             options.mcCloseByESC = true;
-        }
-
-
-        if (!('mcWidth' in options)) {
-            // tslint:disable-next-line
-            options.mcWidth = 480;
         }
 
         return new ModalBuilderForService(this.overlay, options).getInstance()!;

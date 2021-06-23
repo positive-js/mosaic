@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 04 Jun 2021 09:40:53 GMT
+ * Generated on Tue, 22 Jun 2021 11:43:43 GMT
  */
 
 :root {
@@ -84,8 +84,10 @@
   --mc-list-size-three-line-height: 88px;
   --mc-list-size-multi-line-padding: 16px;
   --mc-list-size-icon-width: 24px;
+  --mc-modal-size-small: 400px;
+  --mc-modal-size-normal: 640px;
+  --mc-modal-size-large: 960px;
   --mc-modal-size-top: 48px;
-  --mc-modal-size-padding: 0 0 24px;
   --mc-modal-size-close-width: 56px;
   --mc-modal-size-border-radius: 4px;
   --mc-modal-size-border-width: 1px;

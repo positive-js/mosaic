@@ -12,7 +12,6 @@ interface IRegisteredMeta {
 
 @Injectable()
 export class McModalControlService {
-
     // Track singleton afterAllClose through over the injection tree
     get afterAllClose(): Subject<void> {
         return this.parentService ? this.parentService.afterAllClose : this.rootAfterAllClose;

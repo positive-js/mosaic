@@ -1,8 +1,8 @@
-import { Component, Input, NgModule, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { Component, Input, NgModule, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { McButtonModule } from '@ptsecurity/mosaic/button';
+import { McButton, McButtonModule } from '@ptsecurity/mosaic/button';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
-import { McModalModule, McModalRef, McModalService } from '@ptsecurity/mosaic/modal';
+import { McModalModule, McModalRef, McModalService, ModalSize } from '@ptsecurity/mosaic/modal';
 
 
 // tslint:disable:no-console
@@ -15,6 +15,10 @@ import { McModalModule, McModalRef, McModalService } from '@ptsecurity/mosaic/mo
     encapsulation: ViewEncapsulation.None
 })
 export class ModalDemoComponent {
+
+    @ViewChild('confirmButton') confirmButton: McButton;
+    @ViewChild('deleteButton') deleteButton: McButton;
+
     isVisible = false;
     tplModal: McModalRef;
     htmlModalVisible = false;
@@ -24,35 +28,42 @@ export class ModalDemoComponent {
     constructor(private modalService: McModalService) {}
 
     showConfirm() {
-        this.modalService.success({
-            mcContent   : 'Сохранить сделанные изменения в запросе "Все активы с виндой"?',
-            mcOkText    : 'Сохранить',
+        const modalRef = this.modalService.success({
+            mcSize: ModalSize.Small,
+            mcMaskClosable: true,
+            mcContent: 'Сохранить сделанные изменения в запросе "Все активы с виндой"?',
+            mcOkText: 'Сохранить',
             mcCancelText: 'Отмена',
-            mcOnOk      : () => console.log('OK')
+            mcOnOk: () => console.log('OK')
         });
+
+        modalRef.afterClose.subscribe(() => this.confirmButton.focusViaKeyboard());
     }
 
     showDeleteConfirm() {
-        this.modalService.delete({
-            mcContent   : 'The selected action "Send to Arbor" is used in a rule' +
+        const modalRef = this.modalService.delete({
+            mcSize: ModalSize.Small,
+            mcMaskClosable: true,
+            mcContent: 'The selected action "Send to Arbor" is used in a rule' +
                 ' or an alert. It will be <b>deleted</b> there too. </br></br>' +
                 'Delete the selected action anyway?',
-            mcOkType    : 'error',
-            mcOkText    : 'Delete',
+            mcOkText: 'Delete',
             mcCancelText: 'Cancel',
-            mcWidth     : '480px',
-            mcOnOk      : () => console.log('Delete'),
-            mcOnCancel  : () => console.log('Cancel')
+            mcWidth: '480px',
+            mcOnOk: () => console.log('Delete'),
+            mcOnCancel: () => console.log('Cancel')
         });
+
+        modalRef.afterClose.subscribe(() => this.deleteButton.focusViaKeyboard());
     }
 
     createTplModal(tplTitle: TemplateRef<{}>, tplContent: TemplateRef<{}>, tplFooter: TemplateRef<{}>) {
         this.tplModal = this.modalService.create({
-            mcTitle       : tplTitle,
-            mcContent     : tplContent,
-            mcFooter      : tplFooter,
-            mcClosable    : true,
-            mcOnOk        : () => console.log('Click ok')
+            mcTitle: tplTitle,
+            mcContent: tplContent,
+            mcFooter: tplFooter,
+            mcClosable: true,
+            mcOnOk: () => console.log('Click ok')
         });
     }
 
@@ -67,7 +78,8 @@ export class ModalDemoComponent {
             mcTitle     : 'Modal Title',
             mcContent   : McModalLongCustomComponent,
             mcOkText    : 'Yes',
-            mcCancelText: 'No'
+            mcCancelText: 'No',
+            mcSize: ModalSize.Small
         });
     }
 
@@ -231,11 +243,6 @@ export class McModalFullCustomComponent {
 @NgModule({
     declarations: [
         ModalDemoComponent,
-        McModalCustomComponent,
-        McModalLongCustomComponent,
-        McModalFullCustomComponent
-    ],
-    entryComponents: [
         McModalCustomComponent,
         McModalLongCustomComponent,
         McModalFullCustomComponent

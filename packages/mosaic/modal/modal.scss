@@ -15,8 +15,6 @@
 
     margin: 0 auto;
 
-    padding: var(--mc-modal-size-padding, $modal-size-padding);
-
     list-style: none;
 
     &.zoom-enter,
@@ -27,8 +25,19 @@
         opacity: 0;
     }
 
+    &.mc-modal_small {
+        width: var(--mc-modal-size-small, $modal-size-small);
+    }
 
-    .mc-modal-close {
+    &.mc-modal_normal {
+        width: var(--mc-modal-size-normal, $modal-size-normal);
+    }
+
+    &.mc-modal_large {
+        width: var(--mc-modal-size-large, $modal-size-large);
+    }
+
+    & .mc-modal-close {
         position: absolute;
 
         z-index: 10;

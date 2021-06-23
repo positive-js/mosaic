@@ -11,28 +11,24 @@
          [ngStyle]="mcMaskStyle"
          [style.zIndex]="mcZIndex"
     ></div>
-    <div
-        (mousedown)="onClickMask($event)"
-        class="mc-modal-wrap {{ mcWrapClassName }}"
-        [style.zIndex]="mcZIndex"
-        [style.display]="hidden ? 'none' : ''"
-        tabindex="-1"
-        role="dialog"
-    >
+    <div (mousedown)="onClickMask($event)"
+         class="mc-modal-wrap {{ mcWrapClassName }}"
+         [style.zIndex]="mcZIndex"
+         [style.display]="hidden ? 'none' : ''"
+         tabindex="-1">
+
         <div #modalContainer
-             class="mc-modal {{ mcClassName }}"
+             class="mc-modal {{ mcClassName }} mc-modal_{{ mcSize }}"
              [ngClass]="modalAnimationClassMap"
              [ngStyle]="mcStyle"
              [style.width]="mcWidth | toCssUnit"
-             [style.transform-origin]="transformOrigin"
-             role="document"
-        >
+             [style.transform-origin]="transformOrigin">
+
             <div class="mc-modal-content" cdkTrapFocus>
                 <button *ngIf="mcClosable"
                         mc-button
                         (click)="onClickCloseBtn()"
-                        class="mc-modal-close mc-button_transparent"
-                        aria-label="Close">
+                        class="mc-modal-close mc-button_transparent">
                     <i mc-icon="mc-close-L_16" class="mc-icon mc-icon_light" [color]="'second'"></i>
                 </button>
                 <ng-container [ngSwitch]="true">
@@ -55,7 +51,7 @@
 
 <!-- [Predefined] Default Modal Content -->
 <ng-template #tplContentDefault>
-    <div *ngIf="mcTitle" class="mc-modal-header">
+    <div *ngIf="mcTitle" class="mc-modal-header" [class.mc-modal-body_top-overflow]="isTopOverflow">
         <div class="mc-modal-title">
             <ng-container [ngSwitch]="true">
                 <ng-container *ngSwitchCase="isTemplateRef(mcTitle)" [ngTemplateOutlet]="mcTitle"></ng-container>
@@ -65,7 +61,7 @@
             </ng-container>
         </div>
     </div>
-    <div class="mc-modal-body" [ngStyle]="mcBodyStyle">
+    <div class="mc-modal-body" #modalBody [ngStyle]="mcBodyStyle" (scroll)="checkOverflow()">
         <ng-container #bodyContainer>
             <ng-container *ngIf="!isComponent(mcContent)" [ngSwitch]="true">
                 <ng-container *ngSwitchCase="isTemplateRef(mcContent)" [ngTemplateOutlet]="mcContent"></ng-container>
@@ -76,7 +72,7 @@
             </ng-container>
         </ng-container>
     </div>
-    <div *ngIf="mcFooter !== null" class="mc-modal-footer">
+    <div *ngIf="mcFooter !== null" class="mc-modal-footer" [class.mc-modal-body_bottom-overflow]="isBottomOverflow">
         <ng-container [ngSwitch]="true">
             <ng-container *ngSwitchCase="isTemplateRef(mcFooter)" [ngTemplateOutlet]="mcFooter"></ng-container>
             <ng-container *ngSwitchCase="isNonEmptyString(mcFooter)">
@@ -149,7 +145,8 @@
 
             {{ okText }}
         </button>
-        <button mc-button [color]="'second'" *ngIf="mcCancelText!==''" (click)="onClickOkCancel('cancel')">
+
+        <button mc-button [color]="'second'" *ngIf="mcCancelText !== ''" (click)="onClickOkCancel('cancel')">
             {{ cancelText }}
         </button>
     </div>

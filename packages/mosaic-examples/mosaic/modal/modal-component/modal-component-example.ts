@@ -1,5 +1,6 @@
 // tslint:disable:no-console
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
+import { McButton } from '@ptsecurity/mosaic/button';
 import { McModalRef, McModalService } from '@ptsecurity/mosaic/modal';
 
 
@@ -13,6 +14,8 @@ import { McModalRef, McModalService } from '@ptsecurity/mosaic/modal';
 })
 export class ModalComponentExample {
     componentModal: McModalRef;
+
+    @ViewChild('modalButton') modalButton: McButton;
 
     constructor(private modalService: McModalService) {}
 
@@ -30,6 +33,8 @@ export class ModalComponentExample {
         });
 
         this.componentModal.afterClose.subscribe((action: 'save' | 'close') => {
+            this.modalButton.focusViaKeyboard();
+
             console.log(`[afterClose] emitted, chosen action: ${action}`);
         });
     }
