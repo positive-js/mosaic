@@ -26,7 +26,7 @@ export const enUS = {
             }{
                 SHOW_MILLISECONDS,
                 select,
-                    yes{{MILLISECONDS}}
+                    yes{:{SECONDS}{MILLISECONDS}}
                     other{}
             }`
         },
@@ -40,7 +40,7 @@ export const enUS = {
             }{
                 SHOW_MILLISECONDS,
                 select,
-                    yes{{MILLISECONDS}}
+                    yes{:{SECONDS}{MILLISECONDS}}
                     other{}
             }`
         }

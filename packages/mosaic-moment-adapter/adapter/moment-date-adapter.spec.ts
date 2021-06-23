@@ -599,6 +599,7 @@ describe('MomentDateAdapter formatter', () => {
         const SHORT_MONTH = 'MMM';
         const DAY = 'D';
         const TIME = 'HH:mm';
+        const SECONDS = 'ss';
         const MILLISECONDS = ',SSS';
 
         const DASH = '\u2013';
@@ -714,7 +715,7 @@ describe('MomentDateAdapter formatter', () => {
                 it('absoluteShortDateTime with milliseconds', () => {
                     const date = moment();
                     expect(adapter.absoluteShortDateTime(date, { milliseconds: true })).toBe(
-                        date.format(`${DAY_SHORT_MONTH}, ${TIME}${MILLISECONDS}`)
+                        date.format(`${DAY_SHORT_MONTH}, ${TIME}:${SECONDS}${MILLISECONDS}`)
                     );
                 });
             });
@@ -745,7 +746,7 @@ describe('MomentDateAdapter formatter', () => {
                 it('absoluteLongDateTime with milliseconds', () => {
                     const date = moment();
                     expect(adapter.absoluteLongDateTime(date, { milliseconds: true }))
-                        .toBe(date.format(`${DAY_MONTH}, ${TIME}${MILLISECONDS}`));
+                        .toBe(date.format(`${DAY_MONTH}, ${TIME}:${SECONDS}${MILLISECONDS}`));
                 });
             });
         });
@@ -1277,6 +1278,7 @@ describe('MomentDateAdapter formatter', () => {
         const SHORT_MONTH = 'MMM';
         const DAY = 'D';
         const TIME = 'HH:mm';
+        const SECONDS = 'ss';
         const MILLISECONDS = '.SSS';
 
         const DASH = '\u2013';
@@ -1392,7 +1394,7 @@ describe('MomentDateAdapter formatter', () => {
                 it('absoluteShortDateTime with milliseconds', () => {
                     const date = moment();
                     expect(adapter.absoluteShortDateTime(date, { milliseconds: true })).toBe(
-                        date.format(`${DAY_SHORT_MONTH}, ${TIME}${MILLISECONDS}`)
+                        date.format(`${DAY_SHORT_MONTH}, ${TIME}:${SECONDS}${MILLISECONDS}`)
                     );
                 });
             });
@@ -1423,7 +1425,7 @@ describe('MomentDateAdapter formatter', () => {
                 it('absoluteLongDateTime with milliseconds', () => {
                     const date = moment();
                     expect(adapter.absoluteLongDateTime(date, { milliseconds: true }))
-                        .toBe(date.format(`${DAY_MONTH}, ${TIME}${MILLISECONDS}`));
+                        .toBe(date.format(`${DAY_MONTH}, ${TIME}:${SECONDS}${MILLISECONDS}`));
                 });
             });
         });

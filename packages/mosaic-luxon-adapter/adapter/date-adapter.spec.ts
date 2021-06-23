@@ -530,6 +530,7 @@ describe('LuxonDateAdapter formatter', () => {
     const SHORT_MONTH = 'MMM';
     const DAY = 'd';
     const TIME = 'HH:mm';
+    const SECONDS = 'ss';
 
     const DASH = '\u2013';
     const NBSP = '\u00A0';
@@ -689,7 +690,7 @@ describe('LuxonDateAdapter formatter', () => {
                     const date = adapter.today();
 
                     expect(adapter.absoluteShortDateTime(date, { milliseconds: true }))
-                        .toBe(adapter.format(date, `${DAY_SHORT_MONTH}, ${TIME}${MILLISECONDS}`));
+                        .toBe(adapter.format(date, `${DAY_SHORT_MONTH}, ${TIME}:${SECONDS}${MILLISECONDS}`));
                 });
             });
 
@@ -726,7 +727,7 @@ describe('LuxonDateAdapter formatter', () => {
                     const date = adapter.today();
 
                     expect(adapter.absoluteLongDateTime(date, { milliseconds: true }))
-                        .toBe(date.toFormat(`${DAY_MONTH}, ${TIME}${MILLISECONDS}`));
+                        .toBe(date.toFormat(`${DAY_MONTH}, ${TIME}:${SECONDS}${MILLISECONDS}`));
                 });
             });
         });
@@ -1391,7 +1392,7 @@ describe('LuxonDateAdapter formatter', () => {
                     const date = adapter.today();
 
                     expect(adapter.absoluteShortDateTime(date, { milliseconds: true }))
-                        .toBe(adapter.format(date, `${DAY_SHORT_MONTH}, ${TIME}${MILLISECONDS}`));
+                        .toBe(adapter.format(date, `${DAY_SHORT_MONTH}, ${TIME}:${SECONDS}${MILLISECONDS}`));
                 });
             });
 
@@ -1428,7 +1429,7 @@ describe('LuxonDateAdapter formatter', () => {
                     const date = adapter.today();
 
                     expect(adapter.absoluteLongDateTime(date, { milliseconds: true }))
-                        .toBe(date.toFormat(`${DAY_MONTH}, ${TIME}${MILLISECONDS}`));
+                        .toBe(date.toFormat(`${DAY_MONTH}, ${TIME}:${SECONDS}${MILLISECONDS}`));
                 });
             });
         });
