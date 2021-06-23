@@ -1,3 +1,27 @@
+# 11.1.0 "Cortado" (2021-06-23)
+
+### Mosaic
+
+ * bug fix  fixed luxon date adapter tests ([a7a326e](https://github.com/positive-js/mosaic/commit/a7a326e858e46191b118c5f135a28d0c368cee69))
+ * bug fix  package.json & yarn.lock to reduce vulnerabilities ([#611](https://github.com/positive-js/mosaic/issues/611)) ([26c1c42](https://github.com/positive-js/mosaic/commit/26c1c42b4e541ba4d3a0a21055d0d1f04faf967e))
+ * bug fix  package.json & yarn.lock to reduce vulnerabilities ([#629](https://github.com/positive-js/mosaic/issues/629)) ([cc9057a](https://github.com/positive-js/mosaic/commit/cc9057aa9f8b03ff570fb3101f2dc0794d7d93a7))
+ * bug fix  package.json & yarn.lock to reduce vulnerabilities ([#633](https://github.com/positive-js/mosaic/issues/633)) ([3aa11bf](https://github.com/positive-js/mosaic/commit/3aa11bf9ed686b51123624df7ae6ffc1126407f4))
+ * bug fix  package.json & yarn.lock to reduce vulnerabilities ([#636](https://github.com/positive-js/mosaic/issues/636)) ([b0e3c65](https://github.com/positive-js/mosaic/commit/b0e3c65507043b57ccd6a01b9ce6d05eb991d577))
+ * bug fix  **badge:** fix color of border for basic style and docs (#UIM-649) ([#624](https://github.com/positive-js/mosaic/issues/624)) ([2d4bb34](https://github.com/positive-js/mosaic/commit/2d4bb340b1770212705f8e018f25e18b2149df92)), closes [#UIM-649](https://github.com/positive-js/mosaic/issues/UIM-649)
+ * bug fix  **timepicker:** emit null event when value is empty (#UIM-634) ([#616](https://github.com/positive-js/mosaic/issues/616)) ([a6538e7](https://github.com/positive-js/mosaic/commit/a6538e71352c7eaeb396d1c7e8029af25ea49395)), closes [#UIM-634](https://github.com/positive-js/mosaic/issues/UIM-634)
+ * bug fix  **tree:** value binding does not work in production mode (UIM-636) ([#630](https://github.com/positive-js/mosaic/issues/630)) ([209b35f](https://github.com/positive-js/mosaic/commit/209b35f3c890dfe3c4cf76dbd5c1cb8ab0d1328f))
+ * feature  **autocomplete:** Added ability to not show dropdown on focus (#UIM-616) ([#617](https://github.com/positive-js/mosaic/issues/617)) ([a3d2e3f](https://github.com/positive-js/mosaic/commit/a3d2e3f5911a7c4624a7261c3156f8fa03baf3ff)), closes [#UIM-616](https://github.com/positive-js/mosaic/issues/UIM-616) [#UIM-616](https://github.com/positive-js/mosaic/issues/UIM-616) [#UIM-616](https://github.com/positive-js/mosaic/issues/UIM-616)
+ * feature  **dateadapter:** Migrate from MomentJS (#UIM-628) ([#609](https://github.com/positive-js/mosaic/issues/609)) ([49b4559](https://github.com/positive-js/mosaic/commit/49b4559fc16cabd28135bd29ea019b54892398a7)), closes [#UIM-628](https://github.com/positive-js/mosaic/issues/UIM-628)
+ * feature  **datepicker:** implementation by guideline (#UIM-217) ([#608](https://github.com/positive-js/mosaic/issues/608)) ([af26f2d](https://github.com/positive-js/mosaic/commit/af26f2d07200bc47c6fbf6085acd89dc42f18147)), closes [#UIM-217](https://github.com/positive-js/mosaic/issues/UIM-217)
+ * feature  **tabs:** implementation by guideline (UIM-595) ([#631](https://github.com/positive-js/mosaic/issues/631)) ([f662623](https://github.com/positive-js/mosaic/commit/f6626235a1dcc50c021211e8c11b049bb61bf1fd))
+ * feature  **visual:** add layout for forms (UIM-641) ([#628](https://github.com/positive-js/mosaic/issues/628)) ([71f5bed](https://github.com/positive-js/mosaic/commit/71f5bedad762ae106195fe7e859f05a04e648d22))
+
+### Docs
+
+ * bug fix  using the correct version of Angular ([b6c142c](https://github.com/positive-js/mosaic/commit/b6c142c7dd5e85582526c65287faf40f6f704465))
+ * feature  Improvements in the timepicker documentation (#UIM-601) ([#600](https://github.com/positive-js/mosaic/issues/600)) ([bae9656](https://github.com/positive-js/mosaic/commit/bae96561e37f488d8acf73c6c6838a0169619590)), closes [#UIM-601](https://github.com/positive-js/mosaic/issues/UIM-601) [#UIM-601](https://github.com/positive-js/mosaic/issues/UIM-601)
+ * feature  new link docs (#UIM-622) ([#605](https://github.com/positive-js/mosaic/issues/605)) ([b1c0fe5](https://github.com/positive-js/mosaic/commit/b1c0fe5d84e9c5eb345dbed1ed0d13c5c122762d)), closes [#UIM-622](https://github.com/positive-js/mosaic/issues/UIM-622)
+
 ## 11.0.3 "Unsustainable Industrialist" (2021-04-28)
 
 ### Mosaic
