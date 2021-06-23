@@ -7,10 +7,4 @@ module.exports = function(config) {
     config.set({
         ...baseConfig
     });
-
-    config.set({
-        coverageIstanbulReporter: {
-            dir: `${config.coverageIstanbulReporter.dir}/mosaic`
-        }
-    });
 };

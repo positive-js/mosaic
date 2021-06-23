@@ -10,7 +10,7 @@ module.exports = () => {
         plugins: [
             require('karma-jasmine'),
             require('karma-chrome-launcher'),
-            require('karma-coverage-istanbul-reporter'),
+            require('karma-coverage'),
             require('karma-junit-reporter'),
             require('@angular-devkit/build-angular/plugins/karma')
         ],
@@ -35,12 +35,6 @@ module.exports = () => {
         logLevel: constants.LOG_INFO,
         autoWatch: false,
         singleRun: true,
-
-        coverageIstanbulReporter: {
-            dir: 'dist/coverage/',
-            reports: ['html', 'lcovonly', 'text-summary'],
-            fixWebpackSourcePaths: true
-        },
 
         junitReporter: {
             outputDir: process.env.JUNIT_REPORT_PATH || join(__dirname, './dist/reports/junit'),
