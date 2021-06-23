@@ -156,40 +156,14 @@ jobs:
         steps:
             - attach_workspace:
                   at: ~/mosaic
-            - run:
-                  command: yarn run unit:cdk
-                  environment:
-                      JUNIT_REPORT_PATH: junit/
-                      JUNIT_REPORT_NAME: test-results.xml
-                  when: always
-            - store_test_results:
-                  path: junit
-            - store_artifacts:
-                  path: junit
-            - persist_to_workspace:
-                  root: .
-                  paths:
-                      - ./dist/coverage
+            - run: yarn run unit:cdk
 
     test_unit_mosaic:
         <<: *job_defaults
         steps:
             - attach_workspace:
                   at: ~/mosaic
-            - run:
-                  command: yarn run unit:mosaic
-                  environment:
-                      JUNIT_REPORT_PATH: junit/
-                      JUNIT_REPORT_NAME: test-results.xml
-                  when: always
-            - store_test_results:
-                  path: junit
-            - store_artifacts:
-                  path: junit
-            - persist_to_workspace:
-                  root: .
-                  paths:
-                      - ./dist/coverage
+            - run: yarn run unit:mosaic
 
     test_unit_schematics:
         <<: *job_defaults
@@ -204,40 +178,14 @@ jobs:
         steps:
             - attach_workspace:
                   at: ~/mosaic
-            - run:
-                  command: yarn run unit:mosaic-moment-adapter
-                  environment:
-                      JUNIT_REPORT_PATH: junit/
-                      JUNIT_REPORT_NAME: test-results.xml
-                  when: always
-            - store_test_results:
-                  path: junit
-            - store_artifacts:
-                  path: junit
-            - persist_to_workspace:
-                  root: .
-                  paths:
-                      - ./dist/coverage
+            - run: yarn run unit:mosaic-moment-adapter
 
     test_unit_mosaic-luxon-adapter:
         <<: *job_defaults
         steps:
             - attach_workspace:
                   at: ~/mosaic
-            - run:
-                  command: yarn run unit:mosaic-luxon-adapter
-                  environment:
-                      JUNIT_REPORT_PATH: junit/
-                      JUNIT_REPORT_NAME: test-results.xml
-                  when: always
-            - store_test_results:
-                  path: junit
-            - store_artifacts:
-                  path: junit
-            - persist_to_workspace:
-                  root: .
-                  paths:
-                      - ./dist/coverage
+            - run: yarn run unit:mosaic-luxon-adapter
 
     deploy-docs-next:
         <<: *job_defaults
