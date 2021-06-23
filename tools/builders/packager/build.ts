@@ -3,7 +3,6 @@ import {
     BuilderOutput,
     Target
 } from '@angular-devkit/architect';
-import { NgPackagrBuilderOptions } from '@angular-devkit/build-ng-packagr';
 import { Schema as AngularJson } from '@angular/cli/lib/config/schema';
 import { green } from 'chalk';
 import { promises as fs, writeFileSync } from 'fs';
@@ -27,7 +26,7 @@ export async function packager(options: IPackagerOptions, context: BuilderContex
 
     try {
         // tslint:disable-next-line:deprecation
-        ngPackagrBuilderOptions = ((await context.getTargetOptions(target)) as unknown) as NgPackagrBuilderOptions;
+        ngPackagrBuilderOptions = ((await context.getTargetOptions(target)) as unknown) as any;
 
         if (ngPackagrBuilderOptions.project === undefined) {
             throw new Error(
