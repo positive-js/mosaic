@@ -21,7 +21,8 @@
     "peerDependencies": {
         "@angular/core": "{{NG_VERSION}}",
         "@angular/cdk": "{{NG_VERSION}}",
-        "@ptsecurity/cdk": "{{VERSION}}"
+        "@ptsecurity/cdk": "{{VERSION}}",
+        "luxon": "1.27.0"
     },
     "dependencies": {
         "tslib": "^2.0.1"
