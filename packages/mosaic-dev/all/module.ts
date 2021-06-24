@@ -5,8 +5,8 @@ import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CdkTreeModule, FlatTreeControl } from '@ptsecurity/cdk/tree';
-import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 import { McLuxonDateModule } from '@ptsecurity/mosaic-luxon-adapter/adapter';
+import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McButtonToggleModule } from '@ptsecurity/mosaic/button-toggle';
 import { McCardModule } from '@ptsecurity/mosaic/card';
