@@ -3,9 +3,9 @@ import { DateAdapterConfig } from '@ptsecurity/cdk/datetime';
 
 export const enUS: DateAdapterConfig = {
     variables: {
-        SECONDS: 's',
+        SECONDS: 'ss',
         MILLISECONDS: '.SSS',
-        MINUTES: 'm',
+        MINUTES: 'mm',
         TIME: 'HH:mm',
 
         DAY: 'd',
