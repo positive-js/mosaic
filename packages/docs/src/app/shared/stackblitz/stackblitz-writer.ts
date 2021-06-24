@@ -58,7 +58,7 @@ const dependencies = {
     tslib: '^2.0.1',
     'zone.js': '~0.10.3',
     moment: '^2.24.0',
-    luxon: '1.27.0'
+    luxon: '^1.27.0'
 };
 
 /**
