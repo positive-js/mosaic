@@ -6,9 +6,6 @@ import { join } from 'path';
 // tslint:disable-next-line:blank-lines
 import { GitClient } from '../../tools/release/git/git-client';
 
-import IssuesListCommentsParams = Octokit.IssuesListCommentsParams;
-import IssuesCreateCommentParams = Octokit.IssuesCreateCommentParams;
-
 
 // tslint:disable-next-line:naming-convention
 function getPrNumber(prNumber: string, circlePR: string): string {
@@ -68,7 +65,7 @@ async function postGithubComment() {
             auth
         });
 
-        const issuesListCommentsParams: IssuesListCommentsParams = {
+        const issuesListCommentsParams: any = {
             owner,
             repo,
             // @ts-ignore
@@ -91,8 +88,7 @@ async function postGithubComment() {
                 body
             });
         } else {
-
-            const issuesCreateCommentParams: IssuesCreateCommentParams = {
+            const issuesCreateCommentParams: any = {
                 owner,
                 repo,
                 // @ts-ignore

@@ -30,7 +30,11 @@ const cdkPackages = globSync(path.join(sourceDir, 'cdk', '*/'))
     .map((packagePath) => path.basename(packagePath));
 
 /** List of Mosaic date adapters packages that need to be documented. */
-const mosaicDateAdaptersPackages = globSync(path.join(sourceDir, 'mosaic-moment-adapter', '*/'))
+const mosaicMomentDateAdaptersPackages = globSync(path.join(sourceDir, 'mosaic-moment-adapter', '*/'))
+    .map((packagePath) => path.basename(packagePath));
+
+/** List of Mosaic date adapters packages that need to be documented. */
+const mosaicLuxonDateAdaptersPackages = globSync(path.join(sourceDir, 'mosaic-luxon-adapter', '*/'))
     .map((packagePath) => path.basename(packagePath));
 
 /** List of Mosaic packages that need to be documented. */
@@ -115,9 +119,14 @@ apiDocsPackage.config((readTypeScriptModules: ReadTypeScriptModules, tsParser: T
         typescriptPathMap[`@ptsecurity/cdk/${packageName}`] = [`./cdk/${packageName}/index.ts`];
     });
 
-    mosaicDateAdaptersPackages.forEach((packageName) => {
+    mosaicMomentDateAdaptersPackages.forEach((packageName) => {
         typescriptPathMap[`@ptsecurity/mosaic-moment-adapter/${packageName}`] =
             [`./mosaic-moment-adapter/${packageName}/index.ts`];
+    });
+
+    mosaicLuxonDateAdaptersPackages.forEach((packageName) => {
+        typescriptPathMap[`@ptsecurity/mosaic-luxon-adapter/${packageName}`] =
+            [`./mosaic-luxon-adapter/${packageName}/index.ts`];
     });
 
     mosaicPackages.forEach((packageName) => {
@@ -133,7 +142,8 @@ apiDocsPackage.config((readTypeScriptModules: ReadTypeScriptModules, tsParser: T
     // files will have docs generated.
     readTypeScriptModules.sourceFiles = [
         ...cdkPackages.map((packageName) => `./cdk/${packageName}/index.ts`),
-        ...mosaicDateAdaptersPackages.map((packageName) => `./mosaic-moment-adapter/${packageName}/index.ts`),
+        ...mosaicMomentDateAdaptersPackages.map((packageName) => `./mosaic-moment-adapter/${packageName}/index.ts`),
+        ...mosaicLuxonDateAdaptersPackages.map((packageName) => `./mosaic-luxon-adapter/${packageName}/index.ts`),
         ...mosaicPackages.map((packageName) => `./mosaic/${packageName}/index.ts`)
     ];
 });

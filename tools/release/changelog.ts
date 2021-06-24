@@ -33,6 +33,7 @@ interface ChangelogPackage {
 const orderedChangelogPackages = [
     'cdk',
     'mosaic',
+    'mosaic-luxon-adapter',
     'mosaic-moment-adapter',
     'docs'
 ];
