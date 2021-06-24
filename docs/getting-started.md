@@ -4,12 +4,12 @@
 
 #### NPM
 ```bash
-npm install --save @angular/cdk @ptsecurity/mosaic @ptsecurity/cdk @ptsecurity/mosaic-icons @ptsecurity/mosaic-moment-adapter moment messageformat
+npm install --save @angular/cdk @ptsecurity/mosaic @ptsecurity/cdk @ptsecurity/mosaic-icons @ptsecurity/mosaic-luxon-adapter @ptsecurity/mosaic-moment-adapter moment messageformat
 ```
 
 #### Yarn
 ```bash
-yarn add @angular/cdk @ptsecurity/mosaic @ptsecurity/cdk @ptsecurity/mosaic-icons @ptsecurity/mosaic-moment-adapter moment messageformat
+yarn add @angular/cdk @ptsecurity/mosaic @ptsecurity/cdk @ptsecurity/mosaic-icons @ptsecurity/mosaic-luxon-adapter @ptsecurity/mosaic-moment-adapter moment messageformat
 ```
 
 #### Snapshots builds

@@ -41,6 +41,7 @@ const dependencies = {
     '@ptsecurity/cdk': mosaicVersion,
     '@ptsecurity/mosaic': mosaicVersion,
     '@ptsecurity/mosaic-icons': '^5.3.0',
+    '@ptsecurity/mosaic-luxon-adapter': mosaicVersion,
     '@ptsecurity/mosaic-moment-adapter': mosaicVersion,
     '@angular/cdk': angularVersion,
     '@angular/animations': angularVersion,
@@ -56,7 +57,8 @@ const dependencies = {
     messageformat: '^2.0.5',
     tslib: '^2.0.1',
     'zone.js': '~0.10.3',
-    moment: '^2.24.0'
+    moment: '^2.24.0',
+    luxon: '^1.27.0'
 };
 
 /**

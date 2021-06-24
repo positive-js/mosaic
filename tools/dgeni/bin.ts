@@ -19,7 +19,11 @@ const cdkPackages = globSync(join(packagePath, 'cdk', '*/'))
     .map((packagePath) => basename(packagePath));
 
 /** List of Mosaic date adapters packages that need to be documented. */
-const mosaicDateAdaptersPackages = globSync(join(packagePath, 'mosaic-moment-adapter', '*/'))
+const mosaicMomentDateAdaptersPackages = globSync(join(packagePath, 'mosaic-moment-adapter', '*/'))
+    .map((packagePath) => basename(packagePath));
+
+/** List of Mosaic date adapters packages that need to be documented. */
+const mosaicLuxonDateAdaptersPackages = globSync(join(packagePath, 'mosaic-luxon-adapter', '*/'))
     .map((packagePath) => basename(packagePath));
 
 /** List of Mosaic packages that need to be documented. */
@@ -52,9 +56,14 @@ export const apiDocsPackageConfig: any = apiDocsPackage.config((readTypeScriptMo
             [`./cdk/${packageName}/index.ts`];
     });
 
-    mosaicDateAdaptersPackages.forEach((packageName) => {
+    mosaicMomentDateAdaptersPackages.forEach((packageName) => {
         typescriptPathMap[`@ptsecurity/mosaic-moment-adapter/${packageName}`] =
             [`./mosaic-moment-adapter/${packageName}/index.ts`];
+    });
+
+    mosaicLuxonDateAdaptersPackages.forEach((packageName) => {
+        typescriptPathMap[`@ptsecurity/mosaic-luxon-adapter/${packageName}`] =
+            [`./mosaic-luxon-adapter/${packageName}/index.ts`];
     });
 
     mosaicPackages.forEach((packageName) => {
@@ -64,7 +73,8 @@ export const apiDocsPackageConfig: any = apiDocsPackage.config((readTypeScriptMo
 
     readTypeScriptModules.sourceFiles = [
         ...cdkPackages.map((packageName) => `./cdk/${packageName}/index.ts`),
-        ...mosaicDateAdaptersPackages.map((packageName) => `./mosaic-moment-adapter/${packageName}/index.ts`),
+        ...mosaicMomentDateAdaptersPackages.map((packageName) => `./mosaic-moment-adapter/${packageName}/index.ts`),
+        ...mosaicLuxonDateAdaptersPackages.map((packageName) => `./mosaic-luxon-adapter/${packageName}/index.ts`),
         ...mosaicPackages.map((packageName) => `./mosaic/${packageName}/index.ts`)
     ];
 
