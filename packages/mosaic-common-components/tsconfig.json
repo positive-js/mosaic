@@ -9,7 +9,7 @@
     "angularCompilerOptions": {
         "annotateForClosureCompiler": true,
         "strictMetadataEmit": true,
-        "flatModuleId": "@ptsecurity/product-components",
+        "flatModuleId": "@ptsecurity/mosaic-common-components",
         "skipTemplateCodegen": true,
         "fullTemplateTypeCheck": true,
         "enableIvy": false

@@ -8,7 +8,7 @@ import { buildScssPipeline } from '../utils/build-scss-pipeline';
 
 
 const sourceDir = 'packages/mosaic';
-const sourceDirProductComponents = 'packages/product-components';
+const sourceDirMosaicCommonComponents = 'packages/mosaic-common-components';
 
 /** Path to the directory where all releases are created. */
 const releasesDir = 'dist';
@@ -20,15 +20,15 @@ const allScssDedupeGlob = join(buildConfig.packagesDir, '**/*.scss');
 
 // Path to the release output of mosaic.
 const releasePath = join(releasesDir, 'mosaic');
-const releasePathProductComponents = join(releasesDir, 'product-components');
+const releasePathMosaicCommonComponents = join(releasesDir, 'mosaic-common-components');
 
 // The entry-point for the scss theming bundle.
 const themingEntryPointPath = join(sourceDir, 'core', 'theming', '_all-theme.scss');
-const themingEntryPointPathProductComponents = join(sourceDirProductComponents, 'core', 'theming', '_all-theme.scss');
+const themingEntryPointPathMosaicCommonComponents = join(sourceDirMosaicCommonComponents, 'core', 'theming', '_all-theme.scss');
 
 // Output path for the scss theming bundle.
 const themingBundlePath = join(releasePath, '_theming.scss');
-const themingBundlePathProductComponents = join(releasePathProductComponents, '_theming.scss');
+const themingBundlePathMosaicCommonComponents = join(releasePathMosaicCommonComponents, '_theming.scss');
 
 
 const visualEntryPointPath = join(sourceDir, 'core', 'visual', '_all-visual.scss');
@@ -48,11 +48,11 @@ task('mosaic:bundle-theming-scss', () => {
     });
 });
 
-task('product-components:bundle-theming-scss', () => {
+task('mosaic-common-components:bundle-theming-scss', () => {
 
-    return new Bundler().bundle(themingEntryPointPathProductComponents, [allScssDedupeGlob]).then((result) => {
-        mkdirpSync(releasePathProductComponents);
-        writeFileSync(themingBundlePathProductComponents, result.bundledContent);
+    return new Bundler().bundle(themingEntryPointPathMosaicCommonComponents, [allScssDedupeGlob]).then((result) => {
+        mkdirpSync(releasePathMosaicCommonComponents);
+        writeFileSync(themingBundlePathMosaicCommonComponents, result.bundledContent);
     });
 });
 

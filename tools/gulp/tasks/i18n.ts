@@ -3,13 +3,13 @@ import { join } from 'path';
 
 
 const releasesDir = 'dist';
-const sourceDirProductComponents = 'packages/product-components';
+const sourceDirProductComponents = 'packages/mosaic-common-components';
 
 
 const themingEntryPointPathProductComponents = join(sourceDirProductComponents, 'i18n', '*.json');
-const releasePathProductComponents = join(releasesDir, 'product-components');
+const releasePathProductComponents = join(releasesDir, 'mosaic-common-components');
 
-task('product-components:bundle-i18n', () => {
+task('mosaic-common-components:bundle-i18n', () => {
     return src(themingEntryPointPathProductComponents)
         .pipe(dest(releasePathProductComponents));
 });

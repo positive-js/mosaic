@@ -1,7 +1,7 @@
 {
     "extends": "./tsconfig.json",
     "compilerOptions": {
-        "outDir": "../../dist/out-tsc/product-components-spec"
+        "outDir": "../../dist/out-tsc/mosaic-common-components-spec"
     },
     "files": [
         "test.ts"
