@@ -2,7 +2,7 @@
     "ngPackage": {
         "lib": {
             "entryFile": "index.ts",
-            "umdId": "ng.cdk.keycodes"
+            "umdId": "mc.cdk.keycodes"
         }
     }
 }
