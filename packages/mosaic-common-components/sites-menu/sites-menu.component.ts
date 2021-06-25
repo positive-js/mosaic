@@ -4,7 +4,6 @@ import {
     Input,
     OnChanges,
     Output,
-    SimpleChanges,
     TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
@@ -12,7 +11,7 @@ import { FlatTreeControl } from '@ptsecurity/cdk/tree';
 import { McHighlightPipe } from '@ptsecurity/mosaic/core';
 import { McTreeFlatDataSource, McTreeFlattener } from '@ptsecurity/mosaic/tree';
 
-import { Site, Application, ApplicationTypeEnum } from './sites-tree-hamburger.types';
+import { Site, Application, ApplicationTypeEnum } from './sites-menu.types';
 
 
 class MenuItemFlatNode {
@@ -25,34 +24,41 @@ class MenuItemFlatNode {
     isMain: boolean;
     alias: string;
     parent: any;
+    // tslint:disable-next-line:no-reserved-keywords
     type: ApplicationTypeEnum;
 }
 
 @Component({
-    selector: 'sites-tree-hamburger',
-    templateUrl: './sites-tree-hamburger.template.html',
-    styleUrls: ['./sites-tree-hamburger.styles.scss'],
+    selector: 'sites-menu',
+    templateUrl: './sites-menu.template.html',
+    styleUrls: ['./sites-menu.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class SitesTreeHamburgerComponent implements OnChanges {
+export class SitesMenuComponent implements OnChanges {
     @Input() sites: Site;
-    @Input() searchPlaceholder = '';
+    @Input() searchPlaceholder: string = '';
     @Input() mainSiteTitle: TemplateRef<any>;
     @Input() otherAppsTitle: TemplateRef<any>;
     @Input() searchNothingFound: TemplateRef<any>;
+
     @Output() onDetectCurrentSite = new EventEmitter<Site>();
 
     otherSites: Site[];
     mainSite: Site;
     currentSite: Site;
     appsOfCurrentSite: Application[];
+
     isSingleInstallation: boolean = false;
-    canShowAlias: boolean = false;
     isShowingSearchInput: boolean = false;
+
+    canShowAlias: boolean = false;
     nothingFound: boolean = false;
+
     filterValue: string = '';
+
     selectedAppIdInTree: string[];
     selectedAppIdInList: string[];
+
     treeControl: FlatTreeControl<MenuItemFlatNode>;
     treeFlattener: McTreeFlattener<Site, MenuItemFlatNode>;
     dataSource: McTreeFlatDataSource<Site, MenuItemFlatNode>;
@@ -63,19 +69,27 @@ export class SitesTreeHamburgerComponent implements OnChanges {
         this.dataSource.data = [];
     }
 
-    ngOnChanges(changes: SimpleChanges): void {
+    ngOnChanges(): void {
         if (this.sites) {
             // делаем плоский список для удобства работы
             const flatSiteList = this.flattenRecursive([this.sites]);
+
             // формируем наборы данных для визуализации
             this.isSingleInstallation = flatSiteList.length === 1;
-            this.canShowAlias = [].concat(...flatSiteList.map((site: Site) => site.applications || []))
+
+            this.canShowAlias = []
+                // @ts-ignore
+                .concat(...flatSiteList.map((site: Site) => site.applications || []))
                 .filter((app: Application) => app.type === ApplicationTypeEnum.MPSIEM)
                 .length > 1;
+
+            // @ts-ignore
             this.currentSite = this.getCurrentSite(flatSiteList);
+            // @ts-ignore
             this.mainSite = flatSiteList.find((site: Site) => site.id === this.sites.id);
             this.otherSites = this.getOtherSites(flatSiteList);
-            this.setAppsOfCurrentSite(this.currentSite.applications);
+
+            this.setAppsOfCurrentSite(this.currentSite!.applications);
             this.dataSource.data = this.otherSites || [];
         }
     }
@@ -87,7 +101,7 @@ export class SitesTreeHamburgerComponent implements OnChanges {
     toggleSearchInput() {
         this.filterValue = '';
         this.nothingFound = false;
-        this.treeControl.filterNodes(null);
+        this.treeControl.filterNodes(this.filterValue);
         this.isShowingSearchInput = !this.isShowingSearchInput;
     }
 
@@ -124,16 +138,20 @@ export class SitesTreeHamburgerComponent implements OnChanges {
     }
 
     private getCurrentSite(sites: Site[]) {
-        const currentSite = sites.find((site) => site.isCurrent);
+        const currentSite = sites.find((site: Site) => site.isCurrent);
+
+        // TODO
         this.onDetectCurrentSite.emit(currentSite);
 
         return currentSite;
     }
 
     private getOtherSites(sites: Site[]) {
-        const otherSites = [].concat(...sites.filter((site) => site.id !== this.currentSite?.id));
+        const otherSites = []
+            // @ts-ignore
+            .concat(...sites.filter((site: Site) => site.id !== this.currentSite?.id));
 
-        return otherSites.sort((a, b) => {
+        return otherSites.sort((a: Site, b: Site) => {
             if (b.id === this.mainSite?.id) {
                 return 1;
             }
@@ -176,10 +194,12 @@ export class SitesTreeHamburgerComponent implements OnChanges {
     }
 
     private configureTreeSelect() {
+        // @ts-ignore
         this.treeFlattener = new McTreeFlattener(
             this.transformer,
             this.getLevel,
             this.isExpandable,
+            // @ts-ignore
             this.getChildren
         );
 
@@ -193,7 +213,7 @@ export class SitesTreeHamburgerComponent implements OnChanges {
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
     }
 
-    private flattenRecursive(tree: Site[], flat= []): Site[] {
+    private flattenRecursive(tree: Site[], flat: any[]= []): Site[] {
         for (const node of tree) {
             flat.push({ ...node, children: [] });
 

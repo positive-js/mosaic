@@ -1,0 +1,10 @@
+{
+    "ngPackage": {
+        "lib": {
+            "entryFile": "index.ts",
+            "umdModuleIds": {
+                "@ptsecurity/mosaic-common-components/sites-menu": "mc.sitesMenu"
+            }
+        }
+    }
+}

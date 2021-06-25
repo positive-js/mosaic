@@ -1,4 +1,4 @@
-@mixin sites-tree-hamburger-theme($foreground) {
+@mixin sites-menu-theme($foreground) {
     $text-color: map-get($foreground, text);
     $text-less-contrast: map-get($foreground, text-less-contrast);
     $divider: map-get($foreground, divider);

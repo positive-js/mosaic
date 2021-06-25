@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McHighlightModule, McHighlightPipe } from '@ptsecurity/mosaic/core';
 import { McDropdownModule } from '@ptsecurity/mosaic/dropdown';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
@@ -9,7 +8,8 @@ import { McInputModule } from '@ptsecurity/mosaic/input';
 import { McListModule } from '@ptsecurity/mosaic/list';
 import { McTreeModule } from '@ptsecurity/mosaic/tree';
 
-import { SitesTreeHamburgerComponent } from './sites-tree-hamburger.component';
+import { SitesMenuComponent } from './sites-menu.component';
+import { CommonModule } from '@angular/common';
 
 
 const MOSAIC_MODULES = [
@@ -23,14 +23,14 @@ const MOSAIC_MODULES = [
 ];
 
 @NgModule({
-    declarations: [SitesTreeHamburgerComponent],
+    declarations: [SitesMenuComponent],
     imports: [
-        BrowserAnimationsModule,
+        CommonModule,
         FormsModule,
         ...MOSAIC_MODULES
     ],
-    exports: [SitesTreeHamburgerComponent],
+    exports: [SitesMenuComponent],
     providers: [McHighlightPipe]
 })
-export class SitesTreeHamburgerModule {
+export class SitesMenuModule {
 }

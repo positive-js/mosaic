@@ -125,6 +125,7 @@ jobs:
             - run: yarn run build:mosaic-luxon-adapter
             - run: yarn run build:mosaic-moment-adapter
             - run: yarn run styles:built-all
+            - run: yarn run build:mosaic-common-components
             - persist_to_workspace:
                   root: ~/mosaic
                   paths:
@@ -186,6 +187,13 @@ jobs:
             - attach_workspace:
                   at: ~/mosaic
             - run: yarn run unit:mosaic-luxon-adapter
+
+    test_unit_mosaic-common-components:
+        <<: *job_defaults
+        steps:
+            - attach_workspace:
+                  at: ~/mosaic
+            - run: yarn run unit:mosaic-common-components
 
     deploy-docs-next:
         <<: *job_defaults
@@ -347,6 +355,10 @@ workflows:
                       - build_packages
 
             - test_unit_mosaic-luxon-adapter:
+                  requires:
+                      - build_packages
+
+            - test_unit_mosaic-common-components:
                   requires:
                       - build_packages
 

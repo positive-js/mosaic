@@ -1,8 +1,8 @@
 // Import all the theming
-@import '../../sites-tree-hamburger/sites-tree-hamburger.theme';
+@import '../../sites-menu/sites-menu.theme';
 
 
-@mixin product-components($theme) {
+@mixin mosaic-common-components($theme) {
 
-    @include sites-tree-hamburger-theme();
+    @include sites-menu-theme();
 }

@@ -1,4 +1,5 @@
-interface Site {
+/* tslint:disable:naming-convention */
+export interface Site {
     address: string;
     alias: string;
     applications: Application[];
@@ -8,15 +9,16 @@ interface Site {
     name: string;
 }
 
-interface Application {
+export interface Application {
     id: string;
     alias: string;
     displayName: string;
     endpoint: string;
+    // tslint:disable-next-line:no-reserved-keywords
     type: ApplicationTypeEnum;
 }
 
-enum ApplicationTypeEnum {
+export enum ApplicationTypeEnum {
     AF = 'PT.AF',
     CSC = 'PT.CSC',
     Cybsi = 'PT.Cybsi',
@@ -25,10 +27,3 @@ enum ApplicationTypeEnum {
     NAD = 'PT.NAD',
     PTKB = 'PT.PTKB'
 }
-
-
-export {
-    Site,
-    Application,
-    ApplicationTypeEnum
-};
