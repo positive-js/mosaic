@@ -13,7 +13,8 @@ export function parseExampleModuleFile(filePath: string) {
             moduleNames.push(node.name.text);
         }
 
-        ts.forEachChild(node, visitNode);
+        // tslint:disable-next-line:no-unnecessary-callback-wrapper
+        ts.forEachChild(node, (n) => visitNode(n));
     };
 
     visitNode(sourceFile);

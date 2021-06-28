@@ -5,11 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { ExampleModule } from '@ptsecurity/mosaic-examples';
 
 import { ComponentViewerModule } from './components/component-viewer/component-viewer.module';
 import { MainLayoutModule } from './components/main-layout/main-layout.module';
-import { HomepageModule } from './containers';
 import { DocsComponent } from './docs.component';
 import { APP_ROUTES } from './docs.module-routes';
 import { DocumentationItems } from './shared/documentation-items/documentation-items';
@@ -21,7 +19,6 @@ import { DocumentationItems } from './shared/documentation-items/documentation-i
         BrowserAnimationsModule,
         FormsModule,
         HttpClientModule,
-        ExampleModule,
 
         RouterModule.forRoot(APP_ROUTES, {
             scrollPositionRestoration: 'enabled',
@@ -29,7 +26,6 @@ import { DocumentationItems } from './shared/documentation-items/documentation-i
             anchorScrolling: 'enabled'
         }),
 
-        HomepageModule,
         ComponentViewerModule,
         MainLayoutModule
     ],

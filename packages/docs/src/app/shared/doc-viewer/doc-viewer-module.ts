@@ -7,7 +7,7 @@ import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 
 import { CopierService } from '../copier/copier.service';
 import { ExampleViewer } from '../example-viewer/example-viewer';
-import { StackblitzButtonModule } from '../stackblitz/stackblitz-button';
+import { StackblitzButtonModule } from '../stackblitz';
 
 import { DocViewer } from './doc-viewer';
 

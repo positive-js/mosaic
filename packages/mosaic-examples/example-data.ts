@@ -4,52 +4,39 @@ import { EXAMPLE_COMPONENTS } from './example-module';
 
 
 /**
- * Example data
- *   with information about Component name, selector, files used in example, and path to examples
+ * Example data with information about component name, selector, files used in
+ * example, and path to examples.
  */
 export class ExampleData {
+    /** Description of the example. */
+    description: string;
 
-  /** Description of the example. */
-  description: string;
+    /** List of files that are part of this example. */
+    exampleFiles: string[];
 
-  /** Path to the example. This is based on the structure of the repo. */
-  examplePath: string;
+    /** Selector name of the example component. */
+    selectorName: string;
 
-  /** List of files that are part of this example. */
-  exampleFiles: string[];
+    /** Name of the file that contains the example component. */
+    indexFilename: string;
 
-  /** Selector name of the example component. */
-  selectorName: string;
+    /** Names of the components being used in this example. */
+    componentNames: string[];
 
-  /** Name of the file that contains the example component. */
-  indexFilename: string;
+    constructor(example: string) {
+        if (!example || !EXAMPLE_COMPONENTS.hasOwnProperty(example)) {
+            return;
+        }
 
-  /**
-   * Name of the example component. For examples with multiple components, this property will
-   * include multiple components that are comma separated (e.g. dialog-overview)
-   */
-  componentName: string;
+        const {componentName, files, selector, primaryFile, additionalComponents, title} =
+            EXAMPLE_COMPONENTS[example];
+        const exampleName = example.replace(/(?:^\w|\b\w)/g, (letter) => letter.toUpperCase());
 
-  constructor(example: string) {
-    if (!example || !EXAMPLE_COMPONENTS.hasOwnProperty(example)) {
-      return;
+        this.exampleFiles = files;
+        this.selectorName = selector;
+        this.indexFilename = primaryFile;
+        // tslint:disable-next-line:prefer-template
+        this.description = title || exampleName.replace(/[\-]+/g, ' ') + ' Example';
+        this.componentNames = [componentName, ...additionalComponents];
     }
-
-    const exampleConfig = EXAMPLE_COMPONENTS[example];
-
-    // TODO: Do not hard-code extensions
-    this.exampleFiles = ['html', 'ts', 'css'].map((extension) => `${example}-example.${extension}`);
-    this.examplePath = `assets/stackblitz/examples/${example}/`;
-    this.selectorName = this.indexFilename = `${example}-example`;
-
-    if (exampleConfig.additionalFiles) {
-      this.exampleFiles.push(...exampleConfig.additionalFiles);
-    }
-
-    const exampleName = example.replace(/(?:^\w|\b\w)/g, (letter) => letter.toUpperCase());
-
-    this.description = exampleConfig.title || `${exampleName.replace(/[\-]+/g, ' ')} Example`;
-    this.componentName = exampleConfig.selectorName ||
-                          `${exampleName.replace(/[\-]+/g, '')}Example`;
-  }
 }

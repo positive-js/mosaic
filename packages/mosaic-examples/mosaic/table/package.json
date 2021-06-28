@@ -1,0 +1,10 @@
+{
+    "ngPackage": {
+        "lib": {
+            "entryFile": "index.ts",
+            "umdModuleIds": {
+                "@ptsecurity/mosaic/table": "pt.mc.table"
+            }
+        }
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "ngPackage": {
+        "lib": {
+            "entryFile": "index.ts",
+            "umdModuleIds": {
+                "@ptsecurity/mosaic/progress-bar": "pt.mc.progressBar"
+            }
+        }
+    }
+}
