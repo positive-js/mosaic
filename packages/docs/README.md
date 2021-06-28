@@ -17,7 +17,7 @@ yarn run styles:built-all
 
 3. generate `docs-content` folder (dgeni)
 ```bash
-yarn run build:docs-content
+yarn run build:docs-content && yarn run build:highlight && yarn run build:package-docs-content
 ```
 
 4. build
@@ -29,7 +29,7 @@ yarn run docs:prod-build:aot
 ## Development Server
 Generate `docs-content` folder (dgeni)
 ```bash
-yarn run build:docs-content
+yarn run build:docs-content && yarn run build:highlight && yarn run build:package-docs-content
 ```
 
 Generate basic module

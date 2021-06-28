@@ -1,11 +1,10 @@
 /* tslint:disable:no-parameter-reassignment */
 import { HttpClient } from '@angular/common/http';
 import { Injectable, NgZone } from '@angular/core';
-import { ExampleData } from '@ptsecurity/mosaic-examples';
+import { ExampleData, EXAMPLE_COMPONENTS } from '@ptsecurity/mosaic-examples';
 import { Observable } from 'rxjs';
 import { shareReplay, take } from 'rxjs/operators';
 
-import { EXAMPLE_COMPONENTS } from '../../../../../mosaic-examples';
 import { mosaicVersion } from '../version/version';
 
 
@@ -275,7 +274,7 @@ export class StackblitzWriter {
             // This assumes the first component listed in the main component
             fileContent = fileContent.
             replace(/bootstrap: \[MosaicDocsExample]/g,
-                `bootstrap: [${data.componentNames[0]}]`);
+                    `bootstrap: [${data.componentNames[0]}]`);
 
             const dotIndex = data.indexFilename.lastIndexOf('.');
             const importFileName = data.indexFilename.slice(0, dotIndex === -1 ? undefined : dotIndex);
