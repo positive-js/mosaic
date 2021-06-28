@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CdkTreeModule } from '@ptsecurity/cdk/tree';
@@ -23,6 +24,7 @@ const EXAMPLES = [
 
 @NgModule({
     imports: [
+        CommonModule,
         CdkTreeModule,
         FormsModule,
         ReactiveFormsModule,
