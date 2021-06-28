@@ -162,7 +162,7 @@ export class ExampleViewer {
 
         if (this.exampleData) {
             const exampleBaseFileName = `${this.example}-example`;
-            const docsContentPath = `/docs-content/examples-highlighted/${this.exampleData.packagePath}`;
+            const docsContentPath = `docs-content/examples-highlighted/${this.exampleData.packagePath}`;
 
             for (const fileName of this.exampleData.files) {
                 // Since the additional files refer to the original file name, we need to transform

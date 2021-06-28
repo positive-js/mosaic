@@ -1,7 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McAutocompleteModule } from '@ptsecurity/mosaic/autocomplete';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
@@ -29,8 +28,7 @@ const EXAMPLES = [
 
 @NgModule({
     imports: [
-        BrowserAnimationsModule,
-        BrowserModule,
+        CommonModule,
         FormsModule,
         McFormFieldModule,
         ReactiveFormsModule,

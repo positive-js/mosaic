@@ -37,6 +37,11 @@ Generate basic module
 yarn run build:mosaic-examples-module
 ```
 
+Generate dynamic examples
+```bash
+yarn run build:mosaic-examples
+```
+
 Start ng server documentation as dev (source components from packages)
 ```bash
 yarn run docs:start:dev
