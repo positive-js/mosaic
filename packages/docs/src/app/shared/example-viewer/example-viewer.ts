@@ -1,6 +1,5 @@
 /* tslint:disable:prefer-template no-string-literal */
-import { ComponentPortal } from '@angular/cdk/portal';
-import { Component, ElementRef, Inject, Input, NgModuleFactory, Type, ɵNgModuleFactory } from '@angular/core';
+import { Component, ElementRef, Input, NgModuleFactory, Type, ɵNgModuleFactory } from '@angular/core';
 import { EXAMPLE_COMPONENTS, LiveExample } from '@ptsecurity/mosaic-examples';
 
 import { CopierService } from '../copier/copier.service';
@@ -137,7 +136,7 @@ export class ExampleViewer {
             // module.importSpecifier
             const moduleExports: any = await import(
                 /* webpackExclude: /\.map$/ */
-            '@ptsecurity/mosaic-examples/fesm2015/' + module.importPath);
+            `@ptsecurity/mosaic-examples/fesm2015/${module.importPath}`);
             this.exampleComponentType = moduleExports[componentName];
             // The components examples package is built with Ivy. This means that no factory files are
             // generated. To retrieve the factory of the AOT compiled module, we simply pass the module
