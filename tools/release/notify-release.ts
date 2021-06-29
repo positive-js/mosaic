@@ -52,5 +52,3 @@ function prepareChangeLog(version) {
 
     return extractedReleaseNotes.releaseNotes.replace(/"/g, '');
 }
-
-notify('11.0.1');
