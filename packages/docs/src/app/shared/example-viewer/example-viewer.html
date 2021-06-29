@@ -1,7 +1,6 @@
 <div class="docs-example-viewer__wrapper">
     <div *ngIf="exampleData" class="docs-example-viewer__example">
         <div class="docs-example-viewer-body">
-<!--            <ng-template [cdkPortalOutlet]="selectedPortal"></ng-template>-->
             <ng-template *ngIf="exampleComponentType && exampleModuleFactory"
                          [ngComponentOutlet]="exampleComponentType"
                          [ngComponentOutletNgModuleFactory]="exampleModuleFactory"></ng-template>
