@@ -1,3 +1,15 @@
+## 11.1.1 "Hardened Flares" (2021-06-29)
+
+### Mosaic
+
+ * bug fix  **build:** notify releaser ([a69e121](https://github.com/positive-js/mosaic/commit/a69e1212fb0322c0b1d835f77fc0ba47f6707085))
+ * bug fix  **build:** resolving UMD Module Identifiers (#UIM-676) ([#640](https://github.com/positive-js/mosaic/issues/640)) ([5466700](https://github.com/positive-js/mosaic/commit/54667008c7a69c1ff4db98bb1cc64bee8f5e9ff1)), closes [#UIM-676](https://github.com/positive-js/mosaic/issues/UIM-676)
+
+### Mosaic-luxon-adapter
+
+ * bug fix  absoluteLongDateTime and absoluteShortDateTime without seconds (#UIM-666) ([#638](https://github.com/positive-js/mosaic/issues/638)) ([9c91946](https://github.com/positive-js/mosaic/commit/9c919463d61edda7b0833bf9d105aeb5ad9726a3)), closes [#UIM-666](https://github.com/positive-js/mosaic/issues/UIM-666)
+ * bug fix  added luxon for publish and docs (UIM-673) ([#639](https://github.com/positive-js/mosaic/issues/639)) ([ecb6672](https://github.com/positive-js/mosaic/commit/ecb66726dc64ec8ca89c519aaef3a472a1192e31))
+
 # 11.1.0 "Cortado" (2021-06-23)
 
 ### Mosaic
