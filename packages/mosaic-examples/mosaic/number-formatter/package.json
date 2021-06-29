@@ -1,0 +1,12 @@
+{
+    "ngPackage": {
+        "lib": {
+            "entryFile": "index.ts",
+            "umdModuleIds": {
+                "@ptsecurity/mosaic/core": "pt.mc.core",
+                "@ptsecurity/mosaic/form-field": "pt.mc.formField",
+                "@ptsecurity/mosaic/input": "pt.mc.input"
+            }
+        }
+    }
+}

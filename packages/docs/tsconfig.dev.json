@@ -4,11 +4,10 @@
         "outDir": "./out-tsc/app",
         "allowSyntheticDefaultImports": true,
         "paths": {
-            "@ptsecurity/cdk/*": ["../cdk/*"],
-            "@ptsecurity/mosaic/*": ["../mosaic/*"],
-            "@ptsecurity/mosaic-examples": ["../mosaic-examples"],
-            "@ptsecurity/mosaic-moment-adapter/*": ["../mosaic-moment-adapter/*"],
-            "@ptsecurity/mosaic-luxon-adapter/*": ["../mosaic-luxon-adapter/*"]
+            "@ptsecurity/cdk/*": ["../../dist/cdk/*"],
+            "@ptsecurity/mosaic/*": ["../../dist/mosaic/*"],
+            "@ptsecurity/mosaic-moment-adapter/*": ["../../dist/mosaic-moment-adapter/*"],
+            "@ptsecurity/mosaic-luxon-adapter/*": ["../../dist/mosaic-luxon-adapter/*"]
         }
     },
     "include": [

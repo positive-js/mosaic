@@ -28,14 +28,17 @@ export class StackblitzButton {
     stackblitzForm: HTMLFormElement;
 
     @Input()
-    set example(example: string) {
-        const exampleData = new ExampleData(example);
-
+    set example(example: string | undefined) {
         if (example) {
-            this.stackblitzWriter.constructStackblitzForm(exampleData).then((stackblitzForm) => {
-                this.stackblitzForm = stackblitzForm;
-                this.isDisabled = false;
-            });
+            const exampleData = new ExampleData(example);
+            const isTest = example.includes('harness');
+
+            this.stackblitzWriter.constructStackblitzForm(example, exampleData, isTest).then(
+                (stackblitzForm) => {
+                    this.stackblitzForm = stackblitzForm;
+                    this.isDisabled = false;
+                }
+            );
         } else {
             this.isDisabled = true;
         }

@@ -4,7 +4,7 @@
 version: 2.1
 
 var_1: &default_docker_image circleci/node:14.16-browsers
-var_2: &cache_key mosaic-cache-{{ checksum "yarn.lock" }}-11.1.0
+var_2: &cache_key mosaic-cache-{{ checksum "yarn.lock" }}-11.1.1
 
 var_3: &job_defaults
     working_directory: ~/mosaic
@@ -144,7 +144,7 @@ jobs:
                       source $BASH_ENV
             - run: yarn run build:mosaic-examples-module
             - run: yarn run build:mosaic-examples
-            - run: yarn run build:docs
+            - run: yarn run build:docs-content && yarn run build:highlight && yarn run build:package-docs-content
             - run: yarn run docs:prod-build --progress false --base-href /mosaic-previews/pr$CIRCLE_PULL_REQUEST_NUMBER-$SHORT_GIT_HASH/ --output-path dist/releases/mosaic-docs/pr$CIRCLE_PULL_REQUEST_NUMBER-$SHORT_GIT_HASH/
             - persist_to_workspace:
                   root: ~/mosaic
@@ -194,7 +194,7 @@ jobs:
                 at: ~/mosaic
             - run: yarn run build:mosaic-examples-module
             - run: yarn run build:mosaic-examples
-            - run: yarn run build:docs
+            - run: yarn run build:docs-content && yarn run build:highlight && yarn run build:package-docs-content
             - run: yarn run docs:prod-build:aot
             - run:
                 name: Deploy "Next" version of Docs
@@ -207,7 +207,7 @@ jobs:
                 at: ~/mosaic
             - run: yarn run build:mosaic-examples-module
             - run: yarn run build:mosaic-examples
-            - run: yarn run build:docs
+            - run: yarn run build:docs-content && yarn run build:highlight && yarn run build:package-docs-content
             - run: yarn run docs:prod-build:aot
             - run:
                 name: Deploy "Latest Stable" version of Docs

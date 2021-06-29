@@ -1,7 +1,9 @@
 /* tslint:disable:no-parameter-reassignment */
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { ExampleData } from '@ptsecurity/mosaic-examples';
+import { Injectable, NgZone } from '@angular/core';
+import { ExampleData, EXAMPLE_COMPONENTS } from '@ptsecurity/mosaic-examples';
+import { Observable } from 'rxjs';
+import { shareReplay, take } from 'rxjs/operators';
 
 import { mosaicVersion } from '../version/version';
 
@@ -17,10 +19,25 @@ const COPYRIGHT =
  * structure is defined in the repository, but we include the docs-content as assets in
  * in the CLI configuration.
  */
-const DOCS_CONTENT_PATH = 'docs-content/examples-source/';
+const DOCS_CONTENT_PATH = 'docs-content/examples-source';
 
 const TEMPLATE_PATH = 'assets/stackblitz/';
 const TEMPLATE_FILES = [
+    '.editorconfig',
+    '.gitignore',
+    'index.html',
+    'tsconfig.json',
+    'tsconfig.app.json',
+    'tsconfig.spec.json',
+    'styles.css',
+    'polyfills.ts',
+    'angular.json',
+    'main.ts',
+    'mosaic-module.ts'
+];
+
+const TEST_TEMPLATE_PATH = 'assets/stack-blitz-tests/';
+const TEST_TEMPLATE_FILES = [
     '.editorconfig',
     '.gitignore',
     'index.html',
@@ -38,6 +55,30 @@ const TAGS: string[] = ['angular', 'mosaic', 'example'];
 const angularVersion = '^11.0.0';
 
 const dependencies = {
+    '@ptsecurity/cdk': mosaicVersion,
+    '@ptsecurity/mosaic': mosaicVersion,
+    '@ptsecurity/mosaic-icons': '^5.3.0',
+    '@ptsecurity/mosaic-luxon-adapter': mosaicVersion,
+    '@ptsecurity/mosaic-moment-adapter': mosaicVersion,
+    '@angular/cdk': angularVersion,
+    '@angular/animations': angularVersion,
+    '@angular/common': angularVersion,
+    '@angular/compiler': angularVersion,
+    '@angular/core': angularVersion,
+    '@angular/forms': angularVersion,
+    '@angular/platform-browser': angularVersion,
+    '@angular/platform-browser-dynamic': angularVersion,
+    '@angular/router': angularVersion,
+    'core-js': '^3.6.5',
+    rxjs: '^6.5.0',
+    messageformat: '^2.0.5',
+    tslib: '^2.0.1',
+    'zone.js': '~0.10.3',
+    moment: '^2.24.0',
+    luxon: '^1.27.0'
+};
+
+const testDependencies = {
     '@ptsecurity/cdk': mosaicVersion,
     '@ptsecurity/mosaic': mosaicVersion,
     '@ptsecurity/mosaic-icons': '^5.3.0',
@@ -80,40 +121,50 @@ const dependencies = {
  *  dependencies: dependencies
  * }
  */
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class StackblitzWriter {
-    constructor(private _http: HttpClient) {
+    private fileCache = new Map<string, Observable<string>>();
+
+    constructor(private http: HttpClient, private ngZone: NgZone) {
     }
 
     /**
      * Returns an HTMLFormElement that will open a new stackblitz template with the example data when
      * called with submit().
      */
-    constructStackblitzForm(data: ExampleData): Promise<HTMLFormElement> {
-        const indexFile = `app%2F${data.indexFilename}.ts`;
+    async constructStackblitzForm(exampleId: string, data: ExampleData, isTest: boolean): Promise<HTMLFormElement> {
+
+        const liveExample = EXAMPLE_COMPONENTS[exampleId];
+        const indexFile = `src%2Fapp%2F${data.indexFilename}`;
         const form = this.createFormElement(indexFile);
+        const baseExamplePath =
+            `${DOCS_CONTENT_PATH}/${liveExample.module.importSpecifier}/${exampleId}/`;
 
         TAGS.forEach((tag, i) => this.appendFormInput(form, `tags[${i}]`, tag));
         this.appendFormInput(form, 'private', 'true');
         this.appendFormInput(form, 'description', data.description);
-        this.appendFormInput(form, 'dependencies', JSON.stringify(dependencies));
+        this.appendFormInput(form,
+                             'dependencies',
+                             JSON.stringify(isTest ? testDependencies : dependencies)
+        );
 
-        return new Promise((resolve) => {
-            const templateContents = TEMPLATE_FILES
-                .map((file) => this.readFile(form, data, file, TEMPLATE_PATH));
+        await this.ngZone.runOutsideAngular(() => {
+            const fileReadPromises: Promise<void>[] = [];
 
-            const exampleContents = data.exampleFiles
-                .map((file) => this.readFile(form, data, file, DOCS_CONTENT_PATH));
+            // Read all of the template files.
+            (isTest ? TEST_TEMPLATE_FILES : TEMPLATE_FILES).forEach((file) => fileReadPromises.push(
+                this.loadAndAppendFile(form, data, file, isTest ? TEST_TEMPLATE_PATH : TEMPLATE_PATH,
+                                       isTest)));
 
-            // TODO: Prevent including assets to be manually checked.
-            if (data.selectorName === 'icon-svg-example') {
-                this.readFile(form, data, 'assets/img/examples/thumbup-icon.svg', '', false);
-            }
+            // Read the example-specific files.
+            data.exampleFiles.forEach((file) => fileReadPromises.push(
+                this.loadAndAppendFile(form, data, file, baseExamplePath, isTest)
+            ));
 
-            Promise.all(templateContents.concat(exampleContents)).then(() => {
-                resolve(form);
-            });
+            return Promise.all(fileReadPromises);
         });
+
+        return form;
     }
 
     /** Constructs a new form element that will navigate to the stackblitz url. */
@@ -148,7 +199,7 @@ export class StackblitzWriter {
              filename: string,
              path: string,
              prependApp = true): void {
-        this._http.get(path + filename, {responseType: 'text'}).subscribe(
+        this.http.get(path + filename, {responseType: 'text'}).subscribe(
             (response) => this.addFileToForm(form, data, response, filename, path, prependApp),
             // tslint:disable-next-line:no-console
             (error) => console.log(error)
@@ -169,8 +220,9 @@ export class StackblitzWriter {
                   content: string,
                   filename: string,
                   path: string,
+                  isTest: boolean,
                   prependApp = true) {
-        if (path === TEMPLATE_PATH) {
+        if (path === (isTest ? TEST_TEMPLATE_PATH : TEMPLATE_PATH)) {
             content = this.replaceExamplePlaceholderNames(data, filename, content);
         } else if (prependApp) {
             // tslint:disable-next-line:prefer-template
@@ -192,38 +244,41 @@ export class StackblitzWriter {
             // Replace the component selector in `index,html`.
             // For example, <mosaic-docs-example></mosaic-docs-example> will be replaced as
             // <button-demo></button-demo>
-            fileContent = fileContent.replace(/mosaic-docs-example/g, data.selectorName);
-            fileContent = fileContent.replace(/{{version}}/g, mosaicVersion);
+            fileContent = fileContent
+                .replace(/mosaic-docs-example/g, data.selectorName)
+                .replace(/{{title}}/g, data.description)
+                .replace(/{{version}}/g, mosaicVersion);
         } else if (fileName === 'main.ts') {
+            const joinedComponentNames = data.componentNames.join(', ');
             // Replace the component name in `main.ts`.
             // Replace `import {MosaicDocsExample} from 'mosaic-docs-example'`
             // will be replaced as `import {ButtonDemo} from './button-demo'`
-            fileContent = fileContent.replace(/{ MosaicDocsExample }/g, `{ ${data.componentName} }`);
+            fileContent = fileContent.replace(/{ MosaicDocsExample }/g, `{${joinedComponentNames}}`);
 
             // Replace `declarations: [MosaicDocsExample]`
             // will be replaced as `declarations: [ButtonDemo]`
             fileContent = fileContent.replace(
                 /declarations: \[MosaicDocsExample\]/g,
-                `declarations: [${data.componentName}]`
+                `declarations: [${joinedComponentNames}]`
             );
 
             // Replace `entryComponents: [MosaicDocsExample]`
             // will be replaced as `entryComponents: [DialogContent]`
             fileContent = fileContent.replace(
                 /entryComponents: \[MosaicDocsExample\]/g,
-                `entryComponents: [${data.componentName}]`
+                `entryComponents: [${joinedComponentNames}]`
             );
 
             // Replace `bootstrap: [MosaicDocsExample]`
             // will be replaced as `bootstrap: [ButtonDemo]`
             // This assumes the first component listed in the main component
-            const componentList = (data.componentName || '').split(',')[0];
-            fileContent = fileContent.replace(
-                /bootstrap: \[MosaicDocsExample\]/g,
-                `bootstrap: [${componentList}]`
-            );
+            fileContent = fileContent.
+            replace(/bootstrap: \[MosaicDocsExample]/g,
+                    `bootstrap: [${data.componentNames[0]}]`);
 
-            fileContent = fileContent.replace(/mosaic-docs-example/g, data.indexFilename);
+            const dotIndex = data.indexFilename.lastIndexOf('.');
+            const importFileName = data.indexFilename.slice(0, dotIndex === -1 ? undefined : dotIndex);
+            fileContent = fileContent.replace(/mosaic-docs-example/g, importFileName);
         }
 
         return fileContent;
@@ -237,5 +292,23 @@ export class StackblitzWriter {
         }
 
         return content;
+    }
+
+    private loadAndAppendFile(form: HTMLFormElement, data: ExampleData, filename: string,
+                              path: string, isTest: boolean, prependApp = true): Promise<void> {
+        const url = path + filename;
+        let stream = this.fileCache.get(url);
+
+        if (!stream) {
+            stream = this.http.get(url, {responseType: 'text'}).pipe(shareReplay(1));
+            this.fileCache.set(url, stream);
+        }
+
+        // The `take(1)` is necessary, because the Promise from `toPromise` resolves on complete.
+        return stream.pipe(take(1)).toPromise().then(
+            (response) => this.addFileToForm(form, data, response, filename, path, isTest, prependApp),
+            // tslint:disable-next-line:no-console
+            (error) => console.log(error)
+        );
     }
 }

@@ -1,6 +1,6 @@
 {
     "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-    "dest": "../../dist/mosaic-examples",
+    "dest": "../../node_modules/@ptsecurity/mosaic-examples",
     "lib": {
         "entryFile": "index.ts"
     }

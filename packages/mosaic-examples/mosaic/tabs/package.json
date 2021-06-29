@@ -1,0 +1,12 @@
+{
+    "ngPackage": {
+        "lib": {
+            "entryFile": "index.ts",
+            "umdModuleIds": {
+                "@ptsecurity/mosaic/button": "pt.mc.button",
+                "@ptsecurity/mosaic/icon": "pt.mc.icon",
+                "@ptsecurity/mosaic/tabs": "pt.mc.tabs"
+            }
+        }
+    }
+}

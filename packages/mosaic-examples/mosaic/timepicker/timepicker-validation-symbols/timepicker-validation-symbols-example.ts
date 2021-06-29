@@ -7,7 +7,7 @@ import { DateTime } from 'luxon';
  * @title Timepicker overview
  */
 @Component({
-    selector: 'timepicker-validation-letters-symbols',
+    selector: 'timepicker-validation-symbols-example',
     templateUrl: 'timepicker-validation-symbols-example.html',
     styleUrls: ['timepicker-validation-symbols-example.css']
 })
