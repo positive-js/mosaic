@@ -194,7 +194,7 @@ jobs:
                 at: ~/mosaic
             - run: yarn run build:mosaic-examples-module
             - run: yarn run build:mosaic-examples
-            - run: yarn run build:docs-content
+            - run: yarn run build:docs-content && yarn run build:highlight && yarn run build:package-docs-content
             - run: yarn run docs:prod-build:aot
             - run:
                 name: Deploy "Next" version of Docs
@@ -207,7 +207,7 @@ jobs:
                 at: ~/mosaic
             - run: yarn run build:mosaic-examples-module
             - run: yarn run build:mosaic-examples
-            - run: yarn run build:docs-content
+            - run: yarn run build:docs-content && yarn run build:highlight && yarn run build:package-docs-content
             - run: yarn run docs:prod-build:aot
             - run:
                 name: Deploy "Latest Stable" version of Docs
