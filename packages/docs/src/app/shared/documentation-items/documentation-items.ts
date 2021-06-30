@@ -1,25 +1,64 @@
 /* tslint:disable:naming-convention */
 import { Injectable } from '@angular/core';
+import { EXAMPLE_COMPONENTS } from '@ptsecurity/mosaic-examples';
 
+
+export interface AdditionalApiDoc {
+    name: string;
+    path: string;
+}
+
+export interface ExampleSpecs {
+    prefix: string;
+    exclude?: string[];
+}
 
 export interface DocItem {
+    /** Id of the doc item. Used in the URL for linking to the doc. */
     id: string;
+    /** Display name of the doc item. */
     name: string;
+    /** Short summary of the doc item. */
     summary?: string;
+    /** Package which contains the doc item. */
     packageName?: string;
+    /** Specifications for which examples to be load. */
+    exampleSpecs?: ExampleSpecs;
+    /** List of examples. */
     examples?: string[];
+    /** Optional id of the API document file. */
+    apiDocId?: string;
+    /** Optional path to the overview file of this doc item. */
+    overviewPath?: string;
+    /** List of additional API docs. */
+    additionalApiDocs?: AdditionalApiDoc[];
 }
 
 export interface DocCategory {
     id: string;
     name: string;
+    summary: string;
     items: DocItem[];
-    summary?: string;
 }
 
+export interface DocSection {
+    name: string;
+    summary: string;
+}
 
+const exampleNames = Object.keys(EXAMPLE_COMPONENTS);
 const COMPONENTS = 'components';
 const CDK = 'cdk';
+export const SECTIONS: { [key: string]: DocSection } = {
+    [COMPONENTS]: {
+        name: 'Components',
+        summary: 'Angular Mosaic UI components'
+    },
+    [CDK]: {
+        name: 'CDK',
+        summary: 'The Component Dev Kit (CDK) is a set of behavior primitives for building UI components.'
+    }
+};
 
 const DOCS: { [key: string]: DocCategory[] } = {
     [COMPONENTS]: [
@@ -390,9 +429,5 @@ export class DocumentationItems {
         const sectionLookup = section === 'cdk' ? 'cdk' : 'mosaic';
 
         return ALL_DOCS.find((doc) => doc.id === id && doc.packageName === sectionLookup);
-    }
-
-    getCategoryById(id: string): DocCategory {
-        return ALL_CATEGORIES.find((c) => c.id === id);
     }
 }

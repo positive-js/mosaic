@@ -165,7 +165,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.themingSubscription.unsubscribe();
+        if (this.themingSubscription) {
+            this.themingSubscription.unsubscribe();
+        }
     }
 
     goToVersion(i: number) {

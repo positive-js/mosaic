@@ -7,10 +7,6 @@ import { McProgressSpinnerModule } from '@ptsecurity/mosaic/progress-spinner';
 import { ProgressSpinnerIndeterminateExample } from './progress-spinner-indeterminate/progress-spinner-indeterminate-example';
 import { ProgressSpinnerOverviewExample } from './progress-spinner-overview/progress-spinner-overview-example';
 
-export {
-    ProgressSpinnerIndeterminateExample,
-    ProgressSpinnerOverviewExample
-};
 
 export {
     ProgressSpinnerIndeterminateExample,
