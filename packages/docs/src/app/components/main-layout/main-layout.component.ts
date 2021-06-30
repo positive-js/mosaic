@@ -21,13 +21,13 @@ export class MainLayoutComponent {
         if (href.match('github')) {
             this.setNextRoute();
         } else {
-            this.setDefaultRoute();
+           this.setDefaultRoute();
         }
     }
 
     setDefaultRoute() {
         if (location.pathname === '/') {
-            this.router.navigate(['components/button/overview'], this.extras);
+            this.router.navigate(['components/button'], this.extras);
         }
     }
 
@@ -37,7 +37,7 @@ export class MainLayoutComponent {
         if (this.nextRoute) {
             this.router.navigate([this.nextRoute], this.extras);
         } else {
-            this.router.navigate(['button/overview'], this.extras);
+            this.router.navigate(['components/button'], this.extras);
         }
         localStorage.removeItem('PT_nextRoute');
     }

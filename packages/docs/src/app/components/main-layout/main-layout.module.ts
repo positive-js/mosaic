@@ -27,6 +27,7 @@ const routes: Routes = [{
                 {path: 'overview', component: ComponentOverviewComponent, pathMatch: 'full'}
             ]
         }
+
     ]
 }];
 

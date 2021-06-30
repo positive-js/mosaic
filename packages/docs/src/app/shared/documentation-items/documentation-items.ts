@@ -48,7 +48,9 @@ export interface DocSection {
 
 const exampleNames = Object.keys(EXAMPLE_COMPONENTS);
 const COMPONENTS = 'components';
+const COMMON = 'common';
 const CDK = 'cdk';
+
 export const SECTIONS: { [key: string]: DocSection } = {
     [COMPONENTS]: {
         name: 'Components',
@@ -386,8 +388,21 @@ const DOCS: { [key: string]: DocCategory[] } = {
             ]
         }
     ],
-    [CDK]: [
-
+    [CDK]: [],
+    [COMMON]: [
+        {
+            id: 'components',
+            name: 'Components',
+            summary: '',
+            items: [
+                {
+                    id: 'sites-menu',
+                    name: 'Sites Menu',
+                    summary: '',
+                    examples: ['sites-menu-types']
+                }
+            ]
+        }
     ]
 };
 
@@ -403,10 +418,16 @@ for (const category of DOCS[CDK]) {
     }
 }
 
+for (const category of DOCS[COMMON]) {
+    for (const doc of category.items) {
+        doc.packageName = 'common';
+    }
+}
+
 const ALL_COMPONENTS = DOCS[COMPONENTS].reduce((result, category) => result.concat(category.items), []);
-const ALL_CDK = DOCS[CDK].reduce((result, cdk) => result.concat(cdk.items), []);
-const ALL_DOCS = ALL_COMPONENTS.concat(ALL_CDK);
-const ALL_CATEGORIES = DOCS[COMPONENTS].concat(DOCS[CDK]);
+const ALL_CDK        = DOCS[CDK].reduce((result, cdk) => result.concat(cdk.items), []);
+const ALL_COMMON     = DOCS[COMMON].reduce((result, cdk) => result.concat(cdk.items), []);
+const ALL_DOCS = ALL_COMPONENTS.concat(ALL_CDK).concat(ALL_COMMON);
 
 @Injectable()
 export class DocumentationItems {
@@ -418,6 +439,9 @@ export class DocumentationItems {
         if (section === COMPONENTS) {
             return ALL_COMPONENTS;
         }
+        if (section === COMMON) {
+            return ALL_COMMON;
+        }
         if (section === CDK) {
             return ALL_CDK;
         }
@@ -426,8 +450,12 @@ export class DocumentationItems {
     }
 
     getItemById(id: string, section: string): DocItem {
-        const sectionLookup = section === 'cdk' ? 'cdk' : 'mosaic';
+        let aliasToSection = section;
 
-        return ALL_DOCS.find((doc) => doc.id === id && doc.packageName === sectionLookup);
+        if (section === 'components') {
+            aliasToSection = 'mosaic';
+        }
+
+        return ALL_DOCS.find((doc) => doc.id === id && doc.packageName === aliasToSection);
     }
 }

@@ -45,9 +45,6 @@ export class ComponentViewerComponent implements OnDestroy {
         ).subscribe((docItemAndSection: {doc: DocItem | undefined; section: string}) => {
             if (docItemAndSection.doc !== undefined) {
                 this.componentDocItem.next(docItemAndSection.doc);
-            } else {
-                // tslint:disable-next-line:prefer-template
-                this.router.navigate(['/' + docItemAndSection.section]);
             }
         });
     }
