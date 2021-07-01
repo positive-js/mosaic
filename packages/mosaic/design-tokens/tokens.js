@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 22 Jun 2021 11:43:43 GMT
+ * Generated on Thu, 01 Jul 2021 11:07:16 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
@@ -736,8 +736,8 @@ export const ToggleSmallFontDefault = "caption";
 export const TooltipLightColorSchemeBackground = "#4D4D4D";
 export const TooltipLightColorSchemeText = "white";
 export const TooltipLightColorSchemeShadow = "0 2px 4px 0 rgba(0, 0, 0, 0.2)";
-export const TooltipDarkColorSchemeBackground = "white";
-export const TooltipDarkColorSchemeText = "white";
+export const TooltipDarkColorSchemeBackground = "#F5F5F5";
+export const TooltipDarkColorSchemeText = "#4D4D4D";
 export const TooltipDarkColorSchemeShadow = "0 2px 4px 0 rgba(0, 0, 0, 0.2)";
 export const TooltipSizeMaxWidth = "240px";
 export const TooltipSizeBorderRadius = "3px";
