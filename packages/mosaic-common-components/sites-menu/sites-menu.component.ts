@@ -1,3 +1,4 @@
+// tslint:disable:no-unbound-method
 import {
     Component,
     EventEmitter,

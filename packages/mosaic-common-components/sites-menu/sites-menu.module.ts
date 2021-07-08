@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { McHighlightModule, McHighlightPipe } from '@ptsecurity/mosaic/core';
@@ -9,7 +10,6 @@ import { McListModule } from '@ptsecurity/mosaic/list';
 import { McTreeModule } from '@ptsecurity/mosaic/tree';
 
 import { SitesMenuComponent } from './sites-menu.component';
-import { CommonModule } from '@angular/common';
 
 
 const MOSAIC_MODULES = [
