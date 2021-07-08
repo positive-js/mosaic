@@ -7,8 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MosaicDocsExample } from './app/mosaic-docs-example';
 import { DemoMosaicModule } from './mosaic-module';
-// tslint:disable-next-line:no-import-side-effect
-import './polyfills';
 
 
 @NgModule({
@@ -22,10 +20,11 @@ import './polyfills';
     ],
     entryComponents: [MosaicDocsExample],
     declarations: [MosaicDocsExample],
-    bootstrap: [MosaicDocsExample],
-    providers: []
+    bootstrap: [MosaicDocsExample]
 })
 export class AppModule {
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule);
+platformBrowserDynamic().bootstrapModule(AppModule)
+    // tslint:disable-next-line:no-console
+    .catch((err) => console.error(err));
