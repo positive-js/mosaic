@@ -36,7 +36,7 @@ if (require.main === module) {
 
     const outDir = 'dist/docs-content/examples-highlighted';
     const packageName = 'packages/mosaic-examples';
-    const inputFiles = glob.sync('packages/mosaic-examples/mosaic/**/*.{html,css,ts}', {
+    const inputFiles = glob.sync('packages/mosaic-examples/**/*.{html,css,ts}', {
         ignore: ['**/index.ts', '**/modules.ts']
     });
 

@@ -107,8 +107,34 @@ task('markdown-docs-mosaic', () => {
         .pipe(dest('dist/docs-content/overviews/mosaic'));
 });
 
+task('markdown-docs-mosaic-common', () => {
+
+    markdown.marked.Renderer.prototype.heading = (text: string, level: number): string => {
+        // tslint:disable-next-line:no-magic-numbers
+        if (level === 3 || level === 4) {
+            const escapedText = text.toLowerCase().replace(/\s/g, '-');
+
+            return `
+        <div class="docs-header-link docs-header-link_${level}">
+          <span header-link="${escapedText}" id="${escapedText}"></span>
+          ${text}
+        </div>
+      `;
+        } else {
+            return `<div class="docs-header-link docs-header-link_${level}">${text}</div>`;
+        }
+    };
+
+    return src(['packages/mosaic-common-components/**/!(README).md'])
+        .pipe(markdown(markdownOptions))
+        .pipe(transform(transformMarkdownFiles))
+        .pipe(flatten())
+        .pipe(dest('dist/docs-content/overviews/common'));
+});
+
 task('docs-content', series(
         'markdown-docs-mosaic',
+        'markdown-docs-mosaic-common',
         'api-docs'
     )
 );
