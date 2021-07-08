@@ -111,7 +111,7 @@ export class ComponentOverviewComponent implements OnDestroy {
         //    `material#button` -> `material/button/button.md`
         const overviewPath = doc.overviewPath || `${doc.packageName}/${doc.id}.html`;
 
-        return `/docs-content/overviews/${overviewPath}`;
+        return `docs-content/overviews/${overviewPath}`;
     }
 
     getRoute(route: string): string {
