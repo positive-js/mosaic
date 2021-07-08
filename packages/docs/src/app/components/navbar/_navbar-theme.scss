@@ -9,8 +9,24 @@
     $hint-text: mc-color($foreground, text-less-contrast);
 
     mc-navbar-title {
-        color: white !important;
+        color: if($is-dark, #f0f0f0, #4d4d4d) !important;
         opacity: 1 !important;
+    }
+
+    .mc-navbar-item {
+        color: if($is-dark, #f0f0f0, #4d4d4d) !important;
+    }
+
+    .mc-navbar .mc-icon {
+        color: if($is-dark, #f0f0f0, #4d4d4d);
+    }
+
+    .mc-navbar-item:hover {
+        background-color: if($is-dark, #666, #d8eaf6) !important;
+    }
+
+    .mc-navbar-item.mc-navbar-item-active {
+        background-color: if($is-dark, #666, #d8eaf6) !important;
     }
 
     .docs-navbar-header {
@@ -25,6 +41,10 @@
         & .docs-navbar-version__icon.mc-icon {
             color: if($is-dark, $text, $hint-text);
         }
+    }
+
+    .mc-navbar {
+        background-color: if($is-dark, #333, white);
     }
 }
 
