@@ -1,0 +1,20 @@
+<section>
+    <div>
+        <p>
+            isDisabled: {{ isDisabled }}, clickCounter:
+            <span id="click-counter">{{ clickCounter }}</span>
+        </p>
+        <button mc-button (click)="isDisabled = !isDisabled" id="disable-toggle">
+            Disable buttons
+        </button>
+    </div>
+
+    <button
+        mc-button
+        [disabled]="isDisabled"
+        (click)="clickCounter = clickCounter + 1"
+        id="test-button"
+    >
+        off
+    </button>
+</section>
