@@ -1,18 +1,15 @@
 # To validate changes, use an online parser, eg.
 # http://yaml-online-parser.appspot.com/
 
+# CircleCI configuration version
+# Version 2.1 allows for extra config reuse features
+# https://circleci.com/docs/2.0/reusing-config/#getting-started-with-config-reuse
 version: 2.1
 
-var_1: &default_docker_image circleci/node:14.16-browsers
-var_2: &cache_key mosaic-cache-{{ checksum "yarn.lock" }}-11.1.1
 
-var_3: &job_defaults
-    working_directory: ~/mosaic
-    docker:
-        - image: *default_docker_image
-          auth:
-              username: $DOCKER_HUB_USERNAME
-              password: $DOCKER_HUB_TOKEN
+# This allows us to take advantage of CircleCI's fallback caching.
+# Read more here: https://circleci.com/docs/2.0/caching/#restoring-cache.
+var_3: &cache_key mosaic-cache-{{ checksum "yarn.lock" }}
 
 # Restores the cache that could be available for the current Yarn lock file.
 var_4: &restore_cache
@@ -33,6 +30,7 @@ var_6: &only_for_maintainers
         # ignore from forks
         ignore: /^pull\/.*$/
 
+# Branch filter that only matches the main branch.
 var_7: &only_master
     branches:
         only:
@@ -65,19 +63,58 @@ var_11: &docs_stable_version
     tags:
         only: /11\.\d+\.\d+$/
 
-
+# Configures CircleCI orbs for this pipeline. Orbs allow consumption of publicly shared
+# CircleCI commands, jobs, configuration elements or executors.
+# Read more about orbs here:
+# https://circleci.com/docs/2.0/orb-intro/
 orbs:
     sonarcloud: sonarsource/sonarcloud@1.0.2
     snyk: snyk/snyk@0.0.10
 
+# Executor Definitions
+# https://circleci.com/docs/2.0/reusing-config/#authoring-reusable-executors
+executors:
+    mosaic:
+        working_directory: ~/mosaic
+        docker:
+            - image: circleci/node:lts-buster
+              auth:
+                  username: $DOCKER_HUB_USERNAME
+                  password: $DOCKER_HUB_TOKEN
+
+    mosaic-browsers:
+        working_directory: ~/mosaic
+        docker:
+            -   image: circleci/node:lts-browsers
+                auth:
+                    username: $DOCKER_HUB_USERNAME
+                    password: $DOCKER_HUB_TOKEN
+
+# Command Definitions
+# https://circleci.com/docs/2.0/reusing-config/#authoring-reusable-commands
+commands:
+    prepare_job:
+        description: >-
+            Prepares the workspace with the correct working directory and sets the
+            affected arguments in the bash environment.
+        steps:
+            - attach_workspace:
+                  at: ~/mosaic
+
+# Job definitions
+# Jobs can include parameters that are passed in the workflow job invocation.
+# https://circleci.com/docs/2.0/reusing-config/#authoring-parameterized-jobs
 jobs:
 
     install:
-        <<: *job_defaults
+        executor: mosaic
         steps:
             - checkout
             - *restore_cache
-            - run: yarn install --frozen-lockfile --non-interactive
+            - run:
+                  name: Install NPM dependencies 🦎
+                  command: |
+                      yarn install --frozen-lockfile --non-interactive
             - save_cache:
                   key: *cache_key
                   paths:
@@ -89,25 +126,22 @@ jobs:
                       - .
 
     dependencies_audit:
-        <<: *job_defaults
+        executor: mosaic
         steps:
-            - attach_workspace:
-                  at: ~/mosaic
+            - prepare_job
             - snyk/scan:
                   fail-on-issues: false
 
     validate_licenses:
-        <<: *job_defaults
+        executor: mosaic
         steps:
-            - attach_workspace:
-                  at: ~/mosaic
+            - prepare_job
             - run: yarn run valid:lic
 
     linters:
-        <<: *job_defaults
+        executor: mosaic
         steps:
-            - attach_workspace:
-                  at: ~/mosaic
+            - prepare_job
             - run: yarn run linter:mosaic:json
             - run: yarn run linter:styles:json
             - persist_to_workspace:
@@ -116,25 +150,27 @@ jobs:
                       - ./dist/reports
 
     build_packages:
-        <<: *job_defaults
+        executor: mosaic
+        resource_class: xlarge
         steps:
-            - attach_workspace:
-                  at: ~/mosaic
-            - run: yarn run build:cdk
-            - run: yarn run build:mosaic
-            - run: yarn run build:mosaic-luxon-adapter
-            - run: yarn run build:mosaic-moment-adapter
-            - run: yarn run styles:built-all
+            - prepare_job
+            - run:
+                  name: Build packages 📦
+                  command: |
+                    yarn run build:cdk
+                    yarn run build:mosaic
+                    yarn run build:mosaic-luxon-adapter
+                    yarn run build:mosaic-moment-adapter
+                    yarn run styles:built-all
             - persist_to_workspace:
                   root: ~/mosaic
                   paths:
                       - .
 
     build_mosaic_docs_for_preview:
-        <<: *job_defaults
+        executor: mosaic
         steps:
-            - attach_workspace:
-                  at: ~/mosaic
+            - prepare_job
             - run:
                   name: Setup Environment Variables
                   command: |
@@ -152,46 +188,40 @@ jobs:
                       - .
 
     test_unit_cdk:
-        <<: *job_defaults
+        executor: mosaic-browsers
         steps:
-            - attach_workspace:
-                  at: ~/mosaic
+            - prepare_job
             - run: yarn run unit:cdk
 
     test_unit_mosaic:
-        <<: *job_defaults
+        executor: mosaic-browsers
         steps:
-            - attach_workspace:
-                  at: ~/mosaic
+            - prepare_job
             - run: yarn run unit:mosaic
 
     test_unit_schematics:
-        <<: *job_defaults
+        executor: mosaic
         steps:
-            - attach_workspace:
-                  at: ~/mosaic
+            - prepare_job
             - run: yarn run build:schematics-test
             - run: yarn run unit:schematics
 
     test_unit_mosaic-moment-adapter:
-        <<: *job_defaults
+        executor: mosaic-browsers
         steps:
-            - attach_workspace:
-                  at: ~/mosaic
+            - prepare_job
             - run: yarn run unit:mosaic-moment-adapter
 
     test_unit_mosaic-luxon-adapter:
-        <<: *job_defaults
+        executor: mosaic-browsers
         steps:
-            - attach_workspace:
-                  at: ~/mosaic
+            - prepare_job
             - run: yarn run unit:mosaic-luxon-adapter
 
     deploy-docs-next:
-        <<: *job_defaults
+        executor: mosaic
         steps:
-            - attach_workspace:
-                at: ~/mosaic
+            - prepare_job
             - run: yarn run build:mosaic-examples-module
             - run: yarn run build:mosaic-examples
             - run: yarn run build:docs-content && yarn run build:highlight && yarn run build:package-docs-content
@@ -201,10 +231,9 @@ jobs:
                 command: npx firebase deploy --only hosting:next --token=$FIREBASE_DEPLOY_TOKEN
 
     deploy-docs-stable:
-        <<: *job_defaults
+        executor: mosaic
         steps:
-            - attach_workspace:
-                at: ~/mosaic
+            - prepare_job
             - run: yarn run build:mosaic-examples-module
             - run: yarn run build:mosaic-examples
             - run: yarn run build:docs-content && yarn run build:highlight && yarn run build:package-docs-content
@@ -214,44 +243,40 @@ jobs:
                 command: npx firebase deploy --only hosting:stable --token=$FIREBASE_DEPLOY_TOKEN
 
     sonar:
-        <<: *job_defaults
+        executor: mosaic
         steps:
-            - attach_workspace:
-                  at: ~/mosaic
+            - prepare_job
             - sonarcloud/scan
 
     snapshot_publish:
-        <<: *job_defaults
+        executor: mosaic
         steps:
             - *checkout_code
             - *restore_cache
-            - attach_workspace:
-                  at: ~/mosaic
+            - prepare_job
             - add_ssh_keys:
                   fingerprints:
                       - "c3:de:eb:9c:82:70:a8:23:f3:4e:92:b8:07:d2:22:df"
             - run: ./scripts/deploy/publish-artifacts.sh
 
     release_publish:
-        <<: *job_defaults
+        executor: mosaic
         steps:
             - *checkout_code
             - *restore_cache
-            - attach_workspace:
-                  at: ~/mosaic
+            - prepare_job
             - run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
             - run: npm run release:publish:ci
 
     preview_mosaic_docs:
-        <<: *job_defaults
+        executor: mosaic
         steps:
             - add_ssh_keys:
                   fingerprints:
                       - "c3:de:eb:9c:82:70:a8:23:f3:4e:92:b8:07:d2:22:df"
             - *checkout_code
             - *restore_cache
-            - attach_workspace:
-                  at: ~/mosaic
+            - prepare_job
             - run: printenv
             - run:
                   name: Setup Environment Variables
@@ -264,7 +289,7 @@ jobs:
             - run: yarn run docs:publish-preview
 
     cleanup_preview_mosaic_docs:
-        <<: *job_defaults
+        executor: mosaic
         steps:
             - add_ssh_keys:
                   fingerprints:
