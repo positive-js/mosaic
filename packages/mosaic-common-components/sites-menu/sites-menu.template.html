@@ -1,7 +1,15 @@
-<div [mcDropdownTriggerFor]="sitesTreeDropdown" class="sites-tree-hamburger">
+<div [mcDropdownTriggerFor]="sitesTreeDropdown"
+     class="sites-tree-hamburger"
+     (dropdownOpened)="onDropDownOpened()"
+     (dropdownClosed)="onDropDownClosed()">
     <i mc-icon="mc-bento_16"></i>
+</div>
 
-    <mc-dropdown class="sites-tree-hamburger__dropdown" #sitesTreeDropdown>
+<mc-dropdown #sitesTreeDropdown
+             class="sites-tree-hamburger__dropdown"
+             [hasBackdrop]="hasBackdrop"
+             [backdropClass]="backdropClass">
+    <ng-template mcDropdownContent>
         <mc-list-selection (selectionChange)="onSelectionChangedInList()"
                            [(ngModel)]="selectedAppIdInList">
             <mc-list-option *ngIf="!isSingleInstallation" disabled>
@@ -93,5 +101,5 @@
                 </mc-tree-option>
             </mc-tree-selection>
         </div>
-    </mc-dropdown>
-</div>
+    </ng-template>
+</mc-dropdown>

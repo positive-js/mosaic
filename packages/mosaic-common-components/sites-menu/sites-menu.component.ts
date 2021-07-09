@@ -5,7 +5,7 @@ import {
     Input,
     OnChanges,
     Output,
-    TemplateRef,
+    TemplateRef, ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { FlatTreeControl } from '@ptsecurity/cdk/tree';
@@ -13,7 +13,16 @@ import { McHighlightPipe } from '@ptsecurity/mosaic/core';
 import { McTreeFlatDataSource, McTreeFlattener } from '@ptsecurity/mosaic/tree';
 
 import { Site, Application, ApplicationTypeEnum } from './sites-menu.types';
+import { McInput } from '@ptsecurity/mosaic/input';
+import { McDropdownTrigger } from '@ptsecurity/mosaic/dropdown';
 
+
+// tslint:disable-next-line:naming-convention
+interface UrlParts {
+    protocol: string;
+    hostname: string;
+    port: string;
+}
 
 class MenuItemFlatNode {
     id: string;
@@ -41,8 +50,14 @@ export class SitesMenuComponent implements OnChanges {
     @Input() mainSiteTitle: TemplateRef<any>;
     @Input() otherAppsTitle: TemplateRef<any>;
     @Input() searchNothingFound: TemplateRef<any>;
+    @Input() hasBackdrop = false;
+    @Input() backdropClass = 'cdk-overlay-transparent-backdrop';
 
     @Output() onDetectCurrentSite = new EventEmitter<Site>();
+    @Output() openedChange = new EventEmitter<boolean>();
+
+    @ViewChild(McInput) mcInput: McInput;
+    @ViewChild(McDropdownTrigger) mcDropdownTrigger: McDropdownTrigger;
 
     otherSites: Site[];
     mainSite: Site;
@@ -68,6 +83,10 @@ export class SitesMenuComponent implements OnChanges {
         this.configureTreeSelect();
 
         this.dataSource.data = [];
+    }
+
+    get opened(): boolean {
+        return this.mcDropdownTrigger?.opened;
     }
 
     ngOnChanges(): void {
@@ -100,6 +119,7 @@ export class SitesMenuComponent implements OnChanges {
     }
 
     toggleSearchInput() {
+        setTimeout(() => this.focusMcInput());
         this.filterValue = '';
         this.nothingFound = false;
         this.treeControl.filterNodes(this.filterValue);
@@ -138,6 +158,18 @@ export class SitesMenuComponent implements OnChanges {
         this.selectedAppIdInTree = [];
     }
 
+    onDropDownOpened(): void {
+        this.openedChange.emit(true);
+    }
+
+    onDropDownClosed(): void {
+        this.openedChange.emit(true);
+    }
+
+    private focusMcInput() {
+        this.mcInput.focus();
+    }
+
     private getCurrentSite(sites: Site[]) {
         const currentSite = sites.find((site: Site) => site.isCurrent);
 
@@ -167,28 +199,13 @@ export class SitesMenuComponent implements OnChanges {
     }
 
     private selectCurrentApp(applications: Application[]): void {
-        const PROTOCOL_TO_PORT = {
-            http: 80,
-            https: 443
-        };
-
         const currentApp = applications.find((app: Application) => {
-            const url = document.createElement('a');
+            const appUrlParts = this.getUrlParts(app.endpoint);
+            const currentWindowUrlParts = this.getUrlParts(window.location.href);
 
-            url.href = app.endpoint;
-
-            const protocolFromLink = url.protocol.replace(':', '').toLocaleLowerCase();
-            let portFromLink: string = url.port;
-
-            if (!portFromLink) {
-                if (PROTOCOL_TO_PORT[protocolFromLink]) {
-                    portFromLink = PROTOCOL_TO_PORT[protocolFromLink].toString();
-                }
-            }
-
-            return window.location.protocol.replace(':', '') === protocolFromLink &&
-                window.location.hostname === url.hostname &&
-                window.location.port.toString() === portFromLink;
+            return appUrlParts.protocol === currentWindowUrlParts.protocol &&
+                appUrlParts.port === currentWindowUrlParts.port &&
+                appUrlParts.hostname === currentWindowUrlParts.hostname;
         });
 
         this.selectedAppIdInList = currentApp ? [currentApp.id] : [''];
@@ -260,6 +277,25 @@ export class SitesMenuComponent implements OnChanges {
 
     private getViewValue(node: MenuItemFlatNode): string {
         return node.name;
+    }
+
+    private getUrlParts(url: string): UrlParts {
+        const PROTOCOL_TO_PORT = {
+            http: 80,
+            https: 443
+        };
+
+        const link = document.createElement('a');
+        link.href = url;
+
+        const protocol = link.protocol.replace(':', '').toLocaleLowerCase();
+        const port = link.port ? link.port : PROTOCOL_TO_PORT[protocol]?.toString();
+
+        return {
+            hostname: link.hostname,
+            protocol,
+            port
+        };
     }
 }
 

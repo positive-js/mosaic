@@ -185,6 +185,7 @@
         "server-dev:select": "ng serve dev-select --port 3003",
         "server-dev:sidebar": "ng serve dev-sidebar --port 3003",
         "server-dev:sidepanel": "ng serve dev-sidepanel --port 3003",
+        "server-dev:sitemenu": "ng serve dev-sites-menu --port 3003",
         "server-dev:splitter": "ng serve dev-splitter --port 3003",
         "server-dev:table": "ng serve dev-table --port 3003",
         "server-dev:tabs": "ng serve dev-tabs --port 3003",

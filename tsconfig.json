@@ -69,7 +69,7 @@
             "@ptsecurity/mosaic-moment-adapter": ["packages/mosaic-moment-adapter/index.ts"],
             "@ptsecurity/mosaic-luxon-adapter/adapter": ["packages/mosaic-luxon-adapter/adapter/index.ts"],
             "@ptsecurity/mosaic-moment-adapter/adapter": ["packages/mosaic-moment-adapter/adapter/index.ts"],
-            "@ptsecurity/mosaic-common-components/sites-menu": ["mosaic-common-components/sites-menu/index.ts"]
+            "@ptsecurity/mosaic-common-components/sites-menu": ["packages/mosaic-common-components/sites-menu/index.ts"]
         }
     },
     "exclude": [
