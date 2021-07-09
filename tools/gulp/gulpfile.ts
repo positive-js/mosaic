@@ -6,3 +6,4 @@ import './tasks/docs';
 import './tasks/styles';
 import './tasks/schematic';
 import './tasks/release';
+import './tasks/i18n';

@@ -1,5 +1,8 @@
+// tslint:disable:no-unbound-method
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { combineLatest, Observable } from 'rxjs';
 
 import { DocumentationItems } from '../../shared/documentation-items/documentation-items';
 
@@ -8,7 +11,6 @@ import { DocumentationItems } from '../../shared/documentation-items/documentati
     selector: 'app-sidenav',
     templateUrl: './sidenav.component.html',
     styleUrls: ['./sidenav.scss'],
-    encapsulation: ViewEncapsulation.None,
     animations: [
         trigger('bodyExpansion', [
             state('collapsed', style({maxHeight: '0', visibility: 'hidden'})),
@@ -20,13 +22,22 @@ import { DocumentationItems } from '../../shared/documentation-items/documentati
 })
 export class ComponentSidenav {
 
-    categories: any;
+    params: Observable<Params> | undefined;
+
     icon: string = 'mc mc-angle-up-M_16';
     iconClass: string = 'nav__trigger-icon';
     iconClassExpanded: string = `${this.icon} ${this.iconClass} ${this.iconClass}_expanded`;
     iconClassCollapsed: string = `${this.icon} ${this.iconClass} ${this.iconClass}_collapsed`;
 
-    constructor(public docItems: DocumentationItems) {
-        this.categories = docItems.getCategories('components');
+    constructor(
+        public docItems: DocumentationItems,
+        private route: ActivatedRoute) {
+
+    }
+
+    ngOnInit() {
+        // Combine params from all of the path into a single object.
+        this.params = combineLatest(
+            this.route.pathFromRoot.map((route) => route.params), Object.assign);
     }
 }

@@ -1,0 +1,15 @@
+<mc-navbar >
+    <mc-navbar-container position="left">
+        <mc-navbar-item class="sites-tree-hamburger-wrapper"
+                        [ngClass]="{ 'mc-navbar-item-active': false }">
+            <sites-menu
+                          [sites]="apiMenu"
+                          [hasBackdrop]="true">
+            </sites-menu>
+        </mc-navbar-item>
+
+        <mc-navbar-brand>
+            <mc-navbar-title>Test app</mc-navbar-title>
+        </mc-navbar-brand>
+    </mc-navbar-container>
+</mc-navbar>

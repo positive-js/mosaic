@@ -1,32 +1,33 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
 
 
 @Component({
     templateUrl: './main-layout.component.html',
-    styleUrls: ['./main-layout.component.scss']
+    styleUrls: ['./main-layout.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class MainLayoutComponent {
     nextRoute: string = '';
+
     extras: NavigationExtras = {
         preserveFragment: true,
         queryParamsHandling: 'preserve'
     };
 
-    constructor(private router: Router,
-                private route: ActivatedRoute) {
+    constructor(private router: Router) {
         const href = location.href;
 
         if (href.match('github')) {
             this.setNextRoute();
         } else {
-            this.setDefaultRoute();
+           this.setDefaultRoute();
         }
     }
 
     setDefaultRoute() {
         if (location.pathname === '/') {
-            this.router.navigate(['button/overview'], this.extras);
+            this.router.navigate(['components/button'], this.extras);
         }
     }
 
@@ -36,7 +37,7 @@ export class MainLayoutComponent {
         if (this.nextRoute) {
             this.router.navigate([this.nextRoute], this.extras);
         } else {
-            this.router.navigate(['button/overview'], this.extras);
+            this.router.navigate(['components/button'], this.extras);
         }
         localStorage.removeItem('PT_nextRoute');
     }

@@ -211,9 +211,6 @@
                         "tsConfig": "packages/mosaic/tsconfig.spec.json",
                         "codeCoverage": true
                     }
-                },
-                "configurations": {
-                    "production": {}
                 }
             }
         },
@@ -297,6 +294,37 @@
                         "buildTarget": "packagr",
                         "versionPlaceholder": "{{VERSION}}",
                         "ngVersionPlaceholder": "{{NG_VERSION}}"
+                    }
+                }
+            }
+        },
+        "mosaic-common-components": {
+            "projectType": "library",
+            "root": "packages/mosaic-common-components",
+            "sourceRoot": "packages/mosaic-common-components",
+            "architect": {
+                "packagr": {
+                    "builder": "@angular-devkit/build-angular:ng-packagr",
+                    "options": {
+                        "tsConfig": "packages/mosaic-common-components/tsconfig.lib.json",
+                        "project": "packages/mosaic-common-components/ng-package.json"
+                    }
+                },
+                "build": {
+                    "builder": "@ptsecurity/builders:packager",
+                    "options": {
+                        "buildTarget": "packagr",
+                        "versionPlaceholder": "{{VERSION}}",
+                        "ngVersionPlaceholder": "{{NG_VERSION}}"
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "karmaConfig": "packages/mosaic-common-components/karma.conf.js",
+                        "main": "packages/mosaic-common-components/test.ts",
+                        "tsConfig": "packages/mosaic-common-components/tsconfig.spec.json",
+                        "codeCoverage": true
                     }
                 }
             }
@@ -2047,6 +2075,46 @@
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
                         "browserTarget": "dev-vertical-navbar:build"
+                    }
+                }
+            }
+        },
+        "dev-sites-menu": {
+            "projectType": "application",
+            "root": "packages/mosaic-dev/sites-menu",
+            "sourceRoot": "packages/mosaic-dev/sites-menu",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/mosaic-dev/sites-menu",
+                        "tsConfig": "packages/mosaic-dev/sites-menu/tsconfig.app.json",
+                        "index": "packages/mosaic-dev/index.html",
+                        "main": "packages/mosaic-dev/sites-menu/main.ts",
+                        "polyfills": "packages/mosaic-dev/polyfills.ts"
+                    },
+                    "configurations": {
+                        "production": {
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "vendorChunk": false,
+                            "statsJson": true
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "dev-sites-menu:build"
                     }
                 }
             }

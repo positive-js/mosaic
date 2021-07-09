@@ -1,25 +1,66 @@
 /* tslint:disable:naming-convention */
 import { Injectable } from '@angular/core';
+import { EXAMPLE_COMPONENTS } from '@ptsecurity/mosaic-examples';
 
+
+export interface AdditionalApiDoc {
+    name: string;
+    path: string;
+}
+
+export interface ExampleSpecs {
+    prefix: string;
+    exclude?: string[];
+}
 
 export interface DocItem {
+    /** Id of the doc item. Used in the URL for linking to the doc. */
     id: string;
+    /** Display name of the doc item. */
     name: string;
+    /** Short summary of the doc item. */
     summary?: string;
+    /** Package which contains the doc item. */
     packageName?: string;
+    /** Specifications for which examples to be load. */
+    exampleSpecs?: ExampleSpecs;
+    /** List of examples. */
     examples?: string[];
+    /** Optional id of the API document file. */
+    apiDocId?: string;
+    /** Optional path to the overview file of this doc item. */
+    overviewPath?: string;
+    /** List of additional API docs. */
+    additionalApiDocs?: AdditionalApiDoc[];
 }
 
 export interface DocCategory {
     id: string;
     name: string;
+    summary: string;
     items: DocItem[];
-    summary?: string;
 }
 
+export interface DocSection {
+    name: string;
+    summary: string;
+}
 
+const exampleNames = Object.keys(EXAMPLE_COMPONENTS);
 const COMPONENTS = 'components';
+const COMMON = 'common';
 const CDK = 'cdk';
+
+export const SECTIONS: { [key: string]: DocSection } = {
+    [COMPONENTS]: {
+        name: 'Components',
+        summary: 'Angular Mosaic UI components'
+    },
+    [CDK]: {
+        name: 'CDK',
+        summary: 'The Component Dev Kit (CDK) is a set of behavior primitives for building UI components.'
+    }
+};
 
 const DOCS: { [key: string]: DocCategory[] } = {
     [COMPONENTS]: [
@@ -347,8 +388,21 @@ const DOCS: { [key: string]: DocCategory[] } = {
             ]
         }
     ],
-    [CDK]: [
-
+    [CDK]: [],
+    [COMMON]: [
+        {
+            id: 'components',
+            name: 'Components',
+            summary: '',
+            items: [
+                {
+                    id: 'sites-menu',
+                    name: 'Sites Menu',
+                    summary: '',
+                    examples: ['sites-menu-types']
+                }
+            ]
+        }
     ]
 };
 
@@ -364,10 +418,16 @@ for (const category of DOCS[CDK]) {
     }
 }
 
+for (const category of DOCS[COMMON]) {
+    for (const doc of category.items) {
+        doc.packageName = 'common';
+    }
+}
+
 const ALL_COMPONENTS = DOCS[COMPONENTS].reduce((result, category) => result.concat(category.items), []);
-const ALL_CDK = DOCS[CDK].reduce((result, cdk) => result.concat(cdk.items), []);
-const ALL_DOCS = ALL_COMPONENTS.concat(ALL_CDK);
-const ALL_CATEGORIES = DOCS[COMPONENTS].concat(DOCS[CDK]);
+const ALL_CDK        = DOCS[CDK].reduce((result, cdk) => result.concat(cdk.items), []);
+const ALL_COMMON     = DOCS[COMMON].reduce((result, cdk) => result.concat(cdk.items), []);
+const ALL_DOCS = ALL_COMPONENTS.concat(ALL_CDK).concat(ALL_COMMON);
 
 @Injectable()
 export class DocumentationItems {
@@ -379,6 +439,9 @@ export class DocumentationItems {
         if (section === COMPONENTS) {
             return ALL_COMPONENTS;
         }
+        if (section === COMMON) {
+            return ALL_COMMON;
+        }
         if (section === CDK) {
             return ALL_CDK;
         }
@@ -387,12 +450,12 @@ export class DocumentationItems {
     }
 
     getItemById(id: string, section: string): DocItem {
-        const sectionLookup = section === 'cdk' ? 'cdk' : 'mosaic';
+        let aliasToSection = section;
 
-        return ALL_DOCS.find((doc) => doc.id === id && doc.packageName === sectionLookup);
-    }
+        if (section === 'components') {
+            aliasToSection = 'mosaic';
+        }
 
-    getCategoryById(id: string): DocCategory {
-        return ALL_CATEGORIES.find((c) => c.id === id);
+        return ALL_DOCS.find((doc) => doc.id === id && doc.packageName === aliasToSection);
     }
 }

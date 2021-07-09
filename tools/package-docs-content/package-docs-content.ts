@@ -6,14 +6,22 @@ import { dirname } from 'path';
 if (require.main === module) {
 
     // copy Stackblitz Examples
-    const outDir = 'dist/docs-content/examples-source/mosaic';
-    const execPath = 'packages/mosaic-examples/mosaic/';
+    const outDir = [
+        'dist/docs-content/examples-source/mosaic',
+        'dist/docs-content/examples-source/mosaic-common'
+    ];
+    const execPath = [
+        'packages/mosaic-examples/mosaic/',
+        'packages/mosaic-examples/mosaic-common/'
+    ];
 
-    ensureDirSync(dirname(outDir));
+    for (let i = 0; i < execPath.length; i++) {
+        ensureDirSync(dirname(outDir[i]));
 
-    copySync(execPath, outDir, {
-        filter: (path) => {
-            return !/.json/.test(path);
-        }
-    });
+        copySync(execPath[i], outDir[i], {
+            filter: (path) => {
+                return !/.json/.test(path);
+            }
+        });
+    }
 }

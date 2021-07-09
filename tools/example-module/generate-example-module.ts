@@ -61,7 +61,8 @@ function inlineExampleModuleTemplate(parsedData: AnalyzedExamples): string {
                 name: data.module.name,
                 importSpecifier: data.module.packagePath,
                 // ptsecurity-mosaic-examples-mosaic-alerts
-                importPath: `ptsecurity-${splitPackagePath[0]}-examples-${splitPackagePath[0]}-${splitPackagePath[1]}`
+                // ptsecurity-mosaic-examples-mosaic-common-sites-menu
+                importPath: `ptsecurity-mosaic-examples-${splitPackagePath[0]}-${splitPackagePath[1]}`
             }
         };
 

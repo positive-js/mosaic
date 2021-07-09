@@ -11,9 +11,9 @@ import { ComponentSidenav } from './sidenav.component';
 
 @NgModule({
     imports: [
-        RouterModule,
         CommonModule,
         McIconModule,
+        RouterModule,
         CdkAccordionModule
     ],
     exports: [ComponentSidenav],

@@ -4,42 +4,6 @@ $doc-navbar-height: 64px;
 $doc-navbar-icon-font-size: 22px;
 $doc-navbar-padding: 10px;
 
-.docs-navbar-header {
-    display: flex;
-    align-items: center;
-    height: $doc-navbar-height;
-    padding: 16px 32px;
-
-    .docs-navbar-logo {
-        display: flex;
-
-        &__img {
-            max-width: 100%;
-            width: 32px;
-            height: 32px;
-        }
-
-        &__title {
-            line-height: 32px;
-            font-size: 28px;
-            padding: {
-                left: 8px;
-                right: 8px;
-            };
-        }
-    }
-
-    .docs-navbar-dropdown {
-        min-width: 140px;
-
-        &_hidden {
-            visibility: hidden;
-        }
-
-        &__icon { color: inherit; }
-    }
-}
-
 .color-picker {
     &__icon {
         font-size: $doc-navbar-icon-font-size;
@@ -89,4 +53,30 @@ $doc-navbar-padding: 10px;
 
 .color-picker .mc.mc-icon {
     margin-right: 0;
+}
+
+.docs-navbar-dropdown {
+    min-width: 140px;
+
+    &_hidden {
+        visibility: hidden;
+    }
+
+    &__icon {
+        padding-left: 8px;
+    }
+}
+
+mc-navbar-brand {
+    margin-left: 16px;
+    margin-right: 16px;
+    padding-right: 8px;
+    padding-left: 0;
+
+    mc-navbar-logo {
+        $mc-logo-edge-length: 32px;
+
+        height: $mc-logo-edge-length;
+        width: $mc-logo-edge-length;
+    }
 }
