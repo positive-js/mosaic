@@ -6,7 +6,10 @@ import {
     ElementRef,
     OnDestroy,
     ViewEncapsulation,
-    Renderer2
+    Renderer2,
+    QueryList,
+    ContentChildren,
+    AfterContentInit
 } from '@angular/core';
 import {
     mixinColor,
@@ -18,6 +21,7 @@ import {
     CanColorCtor,
     HasTabIndexCtor
 } from '@ptsecurity/mosaic/core';
+import { McIcon } from '@ptsecurity/mosaic/icon';
 
 
 @Directive({
@@ -27,35 +31,33 @@ import {
         '[class.mc-icon-button]': 'isIconButton'
     }
 })
-export class McButtonCssStyler {
+export class McButtonCssStyler implements AfterContentInit {
+    @ContentChildren(McIcon, { descendants: true }) icons: QueryList<McIcon>;
+
     nativeElement: Element;
 
     get isIconButton(): boolean {
         return this.icons.length > 0;
     }
 
-    private icons: HTMLElement[] = [];
-
     constructor(elementRef: ElementRef, private renderer: Renderer2) {
         this.nativeElement = elementRef.nativeElement;
     }
 
     ngAfterContentInit() {
-        /**
-         * Here we had to use native selectors due to number of angular issues about ContentChildren limitations
-         * https://github.com/angular/angular/issues/16299
-         * https://github.com/angular/angular/issues/8563
-         * https://github.com/angular/angular/issues/14769
-         */
-        this.icons = Array.from(this.nativeElement.querySelectorAll('.mc-icon'));
-        this.addClassModificatorForIcons();
+        this.updateClassModifierForIcons();
     }
 
-    private addClassModificatorForIcons() {
+    updateClassModifierForIcons() {
         const twoIcons = 2;
-        const [firstIconElement, secondIconElement] = this.icons;
+        const [firstIconElement, secondIconElement] = this.icons.map((item) => item.getHostElement());
 
         if (this.icons.length === 1) {
+            this.renderer.removeClass(firstIconElement, 'mc-icon_left');
+            this.renderer.removeClass(this.nativeElement, 'mc-icon-button_left');
+            this.renderer.removeClass(firstIconElement, 'mc-icon_right');
+            this.renderer.removeClass(this.nativeElement, 'mc-icon-button_right');
+
             const COMMENT_NODE = 8;
 
             if (firstIconElement.nextSibling && firstIconElement.nextSibling.nodeType !== COMMENT_NODE) {

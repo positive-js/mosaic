@@ -1,5 +1,6 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
 import {
+    ChangeDetectorRef,
     Component,
     ContentChild,
     Directive,
@@ -9,7 +10,7 @@ import {
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
-import { McButton } from '@ptsecurity/mosaic/button';
+import { McButtonCssStyler } from '@ptsecurity/mosaic/button';
 import { CanDisable, CanDisableCtor, HasTabIndexCtor, mixinDisabled, mixinTabIndex } from '@ptsecurity/mosaic/core';
 
 
@@ -45,10 +46,17 @@ export class McNavbarBrand {}
 @Directive({
     selector: 'mc-navbar-divider',
     host: {
-        class: 'mc-navbar-divider'
+        class: 'mc-navbar-divider',
+        '[class.mc-navbar-vertical-divider]': 'vertical',
+        '[class.mc-navbar-horizontal-divider]': 'horizontal'
     }
 })
-export class McNavbarDivider {}
+export class McNavbarDivider {
+    vertical: boolean;
+    horizontal: boolean;
+
+    closed: boolean;
+}
 
 
 export class McNavbarItemBase {
@@ -67,8 +75,11 @@ export const McNavbarMixinBase:
     host: {
         class: 'mc-navbar-item',
         '[class.mc-navbar-item_vertical]': 'vertical',
-        '[class.mc-navbar-item_closed]': 'closed',
+        '[class.mc-navbar-item_horizontal]': 'horizontal',
+        '[class.mc-opened]': '!closed',
+        '[class.mc-closed]': 'closed',
         '[class.mc-navbar-item_button]': 'button',
+
         '[attr.tabindex]': 'tabIndex',
         '[attr.disabled]': 'disabled || null'
     },
@@ -77,16 +88,22 @@ export const McNavbarMixinBase:
 })
 export class McNavbarItem extends McNavbarMixinBase implements OnInit, OnDestroy, CanDisable {
     vertical: boolean;
+    horizontal: boolean;
+
     closed: boolean;
 
-    @ContentChild(McButton) button: McButton;
+    @ContentChild(McButtonCssStyler) button: McButtonCssStyler;
 
     @Input()
     set collapsedTitle(value: string) {
         this.elementRef.nativeElement.setAttribute('computedTitle', encodeURI(value));
     }
 
-    constructor(public elementRef: ElementRef, private focusMonitor: FocusMonitor) {
+    constructor(
+        private focusMonitor: FocusMonitor,
+        public changeDetectorRef: ChangeDetectorRef,
+        elementRef: ElementRef
+    ) {
         super(elementRef);
     }
 

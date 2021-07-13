@@ -14,7 +14,7 @@
     <button mc-dropdown-item>Point 3</button>
 </mc-dropdown>
 
-<mc-navbar-vertical #navbar>
+<mc-vertical-navbar #navbar>
     <mc-navbar-container>
         <mc-navbar-item [mcDropdownTriggerFor]="appDropdown">
             <i mc-icon="mc-hamburger_16"></i>
@@ -27,9 +27,9 @@
             <mc-navbar-title>Brand</mc-navbar-title>
         </mc-navbar-brand>
 
-        <mc-navbar-item (click)="onItemClick($event)">
+        <mc-navbar-item (click)="onItemClick($event)" class="layout-align-space-between">
             <mc-navbar-title>Left icon</mc-navbar-title>
-            <i mc-icon="mc-info_16"></i>
+            <i mc-icon="mc-angle-right-L_16"></i>
         </mc-navbar-item>
 
         <mc-navbar-divider></mc-navbar-divider>
@@ -37,7 +37,8 @@
         <mc-navbar-item (click)="onItemClick($event)">
             <button mc-button [color]="'primary'">
                 <i mc-icon="mc-info_16"></i>
-                No icon
+<!--                No icon-->
+                <span *ngIf="!navbar.closed">No icon</span>
             </button>
         </mc-navbar-item>
 
@@ -48,7 +49,6 @@
         </mc-navbar-item>
 
         <mc-navbar-item class="mc-navbar-item-active" (click)="onItemClick($event)">
-            <i mc-icon="mc-info_16"></i>
             <mc-navbar-title>No icon</mc-navbar-title>
         </mc-navbar-item>
 
@@ -96,7 +96,7 @@
             <mc-navbar-title>Свернуть меню</mc-navbar-title>
         </mc-navbar-toggle>
     </mc-navbar-container>
-</mc-navbar-vertical>
+</mc-vertical-navbar>
 
 <br><br><br>
 
@@ -117,6 +117,7 @@
             <mc-navbar-item (click)="onItemClick($event)">
                 <i mc-icon="mc-info_16"></i>
                 <mc-navbar-title>Left icon</mc-navbar-title>
+                <i mc-icon="mc-info_16"></i>
             </mc-navbar-item>
 
             <mc-navbar-divider></mc-navbar-divider>
