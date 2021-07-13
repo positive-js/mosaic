@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 
 import { McNavbarBrand, McNavbarDivider, McNavbarItem, McNavbarLogo, McNavbarTitle } from './navbar-item.component';
-import { McNavbarToggle, McNavbarVertical } from './navbar-vertical.component';
+import { McNavbarToggle, McNavbarVertical } from './vertical-navbar.component';
 import { McNavbar, McNavbarContainer } from './navbar.component';
 
 

@@ -1,12 +1,20 @@
 @import 'navbar-theme';
 
 
-.mc-navbar-vertical {
+.mc-vertical-navbar {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
     height: auto;
+
+    & .mc-badge {
+        position: absolute;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
     & .mc-navbar-container {
         position: relative;
@@ -14,50 +22,15 @@
         align-items: unset;
     }
 
-    & .mc-navbar-item,
-    & .mc-navbar-brand {
-        height: 48px;
-
-        & .mc-icon + .mc-navbar-title {
-            padding-left: 10px;
-        }
-    }
-
-    & .mc-navbar-divider {
-        height: 1px;
-
-        margin: 8px 16px;
-    }
-
-    &.mc-navbar_closed {
-        width: 48px;
-
-        & .mc-navbar-item {
-            &.mc-navbar-item_button {
-
-            }
-        }
-
-        & .mc-navbar-title {
-            display: none;
-        }
-
-        & .mc-navbar-brand {
-            align-items: center;
-            justify-content: center;
-
-            padding: 0;
-            margin: 0;
-        }
-    }
-
-    &.mc-navbar_opened {
+    &.mc-opened {
         width: 240px;
 
         & .mc-navbar-container:first-child .mc-navbar-item:first-child {
             position: absolute;
             top: 0;
             right: 0;
+
+            height: 48px;
         }
 
         & .mc-navbar-brand {
@@ -82,20 +55,46 @@
                 padding-left: 0;
             }
         }
+
+        & .mc-badge {
+            right: 16px;
+
+            height: 24px;
+
+            padding-right: 7px;
+            padding-left: 7px;
+        }
     }
-}
 
-.mc-navbar-container.mc-navbar-left,
-.mc-navbar-container.mc-navbar-right {
-    display: flex;
-    flex-shrink: 0;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    &.mc-closed {
+        width: 48px;
 
-    height: 100%;
-}
+        & .mc-navbar-item {
+            &.mc-navbar-item_button {
 
-.mc-navbar-toggle {
-    height: 48px;
+            }
+        }
+
+        & .mc-navbar-title {
+            display: none;
+        }
+
+        & .mc-navbar-brand {
+            align-items: center;
+            justify-content: center;
+
+            padding: 0;
+            margin: 0;
+        }
+
+        & .mc-badge {
+            top: 8px;
+            right: 8px;
+
+            height: 16px;
+
+            padding-right: 4px;
+            padding-left: 4px;
+        }
+    }
 }

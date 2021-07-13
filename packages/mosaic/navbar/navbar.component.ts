@@ -1,18 +1,18 @@
 import {
+    AfterContentInit,
     AfterViewInit,
-    Component,
+    Component, ContentChildren,
     Directive,
     ElementRef,
     Input,
     OnDestroy,
     QueryList,
-    ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
-import { CachedItemWidth, CollapsibleItem, McNavbarItem } from './navbar-item.component';
+import { CachedItemWidth, CollapsibleItem, McNavbarDivider, McNavbarItem } from './navbar-item.component';
 
 
 export type McNavbarContainerPositionType = 'left' | 'right';
@@ -42,8 +42,10 @@ export class McNavbarContainer {
     styleUrls: ['./navbar.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class McNavbar implements AfterViewInit, OnDestroy {
-    @ViewChildren(McNavbarItem) navbarItems: QueryList<McNavbarItem>;
+export class McNavbar implements AfterViewInit, AfterContentInit, OnDestroy {
+    @ContentChildren(McNavbarItem, { descendants: true }) navbarItems: QueryList<McNavbarItem>;
+
+    @ContentChildren(McNavbarDivider, { descendants: true }) navbarDividers: QueryList<McNavbarDivider>;
 
     private readonly forceRecalculateItemsWidth: boolean = false;
     private readonly resizeDebounceInterval: number = 100;
@@ -84,8 +86,15 @@ export class McNavbar implements AfterViewInit, OnDestroy {
 
     private resizeSubscription: Subscription;
 
-    constructor(private elementRef: ElementRef,) {
+    constructor(private elementRef: ElementRef) {
         this.subscribeOnResizeEvents();
+    }
+
+    ngAfterContentInit(): void {
+        this.setItemsState();
+
+        this.navbarItems.changes
+            .subscribe(this.setItemsState);
     }
 
     ngAfterViewInit(): void {
@@ -109,6 +118,11 @@ export class McNavbar implements AfterViewInit, OnDestroy {
             item.processCollapsed(collapseDelta > 0);
             collapseDelta -= item.collapsedItemsWidth;
         }
+    }
+
+    private setItemsState = () => {
+        this.navbarItems.forEach((item) => item.horizontal = true);
+        this.navbarDividers.forEach((item) => item.horizontal = true);
     }
 
     private subscribeOnResizeEvents() {

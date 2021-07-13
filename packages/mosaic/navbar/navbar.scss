@@ -13,26 +13,6 @@ mc-navbar {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-
-    [mc-icon] + mc-navbar-title {
-        margin-left: var(--mc-navbar-size-icon-margin-left, $navbar-size-icon-margin);
-    }
-
-    [mc-icon] {
-        min-width: 16px;
-        min-height: 16px;
-    }
-
-    mc-navbar-title:not(.mc-navbar-collapsed-title) + [mc-icon] {
-        margin-left: var(--mc-navbar-size-icon-margin-left, $navbar-size-icon-margin);
-    }
-
-    & .mc-navbar-divider {
-        width: 1px;
-        height: 28px;
-
-        margin: 8px;
-    }
 }
 
 .mc-navbar-container.mc-navbar-left,
