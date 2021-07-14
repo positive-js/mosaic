@@ -1,100 +1,19 @@
-@import 'navbar-theme';
-
-
 .mc-vertical-navbar {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 
     height: auto;
 
-    & .mc-badge {
-        position: absolute;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
     & .mc-navbar-container {
-        position: relative;
         flex-direction: column;
         align-items: unset;
     }
 
     &.mc-opened {
         width: 240px;
-
-        & .mc-navbar-container:first-child .mc-navbar-item:first-child {
-            position: absolute;
-            top: 0;
-            right: 0;
-
-            height: 48px;
-        }
-
-        & .mc-navbar-brand {
-            flex-direction: column;
-            align-items: unset;
-
-            height: unset;
-
-            padding-left: 16px;
-
-            & .mc-navbar-logo {
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-end;
-
-                width: 48px;
-                height: 48px;
-            }
-
-            & .mc-navbar-title {
-                height: 48px;
-                padding-left: 0;
-            }
-        }
-
-        & .mc-badge {
-            right: 16px;
-
-            height: 24px;
-
-            padding-right: 7px;
-            padding-left: 7px;
-        }
     }
 
     &.mc-closed {
         width: 48px;
-
-        & .mc-navbar-item {
-            &.mc-navbar-item_button {
-
-            }
-        }
-
-        & .mc-navbar-title {
-            display: none;
-        }
-
-        & .mc-navbar-brand {
-            align-items: center;
-            justify-content: center;
-
-            padding: 0;
-            margin: 0;
-        }
-
-        & .mc-badge {
-            top: 8px;
-            right: 8px;
-
-            height: 16px;
-
-            padding-right: 4px;
-            padding-left: 4px;
-        }
     }
 }

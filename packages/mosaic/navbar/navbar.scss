@@ -1,9 +1,5 @@
-@import 'navbar-theme';
+@import '../design-tokens/tokens';
 
-
-mc-navbar {
-    display: flex;
-}
 
 .mc-navbar {
     position: relative;

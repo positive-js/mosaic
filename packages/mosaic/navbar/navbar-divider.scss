@@ -1,0 +1,26 @@
+@import '../design-tokens/tokens';
+
+
+.mc-navbar-divider {
+    display: block;
+}
+
+.mc-navbar-divider.mc-vertical {
+    height: 1px;
+
+    margin: 8px 16px;
+
+    &.mc-closed {
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+}
+
+.mc-navbar-divider.mc-horizontal {
+    width: 1px;
+
+    height: 58%;
+
+    margin-left: 8px;
+    margin-right: 8px;
+}

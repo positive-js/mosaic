@@ -1,7 +1,8 @@
 import {
     AfterContentInit,
     AfterViewInit,
-    Component, ContentChildren,
+    Component,
+    ContentChildren,
     Directive,
     ElementRef,
     Input,
@@ -12,7 +13,11 @@ import {
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
-import { CachedItemWidth, CollapsibleItem, McNavbarDivider, McNavbarItem } from './navbar-item.component';
+import {
+    CachedItemWidth,
+    CollapsibleItem,
+    McNavbarItemBase
+} from './navbar-item.component';
 
 
 export type McNavbarContainerPositionType = 'left' | 'right';
@@ -35,17 +40,16 @@ export class McNavbarContainer {
 @Component({
     selector: 'mc-navbar',
     template: `
-        <nav class="mc-navbar">
-            <ng-content select="[mc-navbar-container], mc-navbar-container"></ng-content>
-        </nav>
+        <ng-content select="[mc-navbar-container], mc-navbar-container"></ng-content>
     `,
     styleUrls: ['./navbar.scss'],
+    host: {
+        class: 'mc-navbar'
+    },
     encapsulation: ViewEncapsulation.None
 })
 export class McNavbar implements AfterViewInit, AfterContentInit, OnDestroy {
-    @ContentChildren(McNavbarItem, { descendants: true }) navbarItems: QueryList<McNavbarItem>;
-
-    @ContentChildren(McNavbarDivider, { descendants: true }) navbarDividers: QueryList<McNavbarDivider>;
+    @ContentChildren(McNavbarItemBase, { descendants: true }) navbarBaseItems: QueryList<McNavbarItemBase>;
 
     private readonly forceRecalculateItemsWidth: boolean = false;
     private readonly resizeDebounceInterval: number = 100;
@@ -59,7 +63,7 @@ export class McNavbar implements AfterViewInit, AfterContentInit, OnDestroy {
     private totalItemsWidths: number;
 
     private get maxAllowedWidth(): number {
-        return this.elementRef.nativeElement.querySelector('nav').getBoundingClientRect().width;
+        return this.elementRef.nativeElement.getBoundingClientRect().width;
     }
 
     private get itemsWidths(): CachedItemWidth[] {
@@ -93,7 +97,7 @@ export class McNavbar implements AfterViewInit, AfterContentInit, OnDestroy {
     ngAfterContentInit(): void {
         this.setItemsState();
 
-        this.navbarItems.changes
+        this.navbarBaseItems.changes
             .subscribe(this.setItemsState);
     }
 
@@ -121,8 +125,7 @@ export class McNavbar implements AfterViewInit, AfterContentInit, OnDestroy {
     }
 
     private setItemsState = () => {
-        this.navbarItems.forEach((item) => item.horizontal = true);
-        this.navbarDividers.forEach((item) => item.horizontal = true);
+        this.navbarBaseItems.forEach((item) => item.horizontal = true);
     }
 
     private subscribeOnResizeEvents() {

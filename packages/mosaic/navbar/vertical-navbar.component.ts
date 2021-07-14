@@ -1,15 +1,18 @@
+import { FocusMonitor } from '@angular/cdk/a11y';
 import {
     AfterContentInit,
     Component,
     ContentChild,
     ContentChildren,
+    ElementRef,
     Input,
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
+import { CanDisableCtor, HasTabIndexCtor, mixinDisabled, mixinTabIndex } from '@ptsecurity/mosaic/core';
 import { McIcon } from '@ptsecurity/mosaic/icon';
 
-import { McNavbarDivider, McNavbarItem } from './navbar-item.component';
+import { McNavbarItemBase } from './navbar-item.component';
 
 
 @Component({
@@ -26,7 +29,7 @@ import { McNavbarDivider, McNavbarItem } from './navbar-item.component';
     styleUrls: ['./vertical-navbar.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class McNavbarVertical implements AfterContentInit {
+export class McVerticalNavbar implements AfterContentInit {
     get closed() {
         return this._closed;
     }
@@ -40,9 +43,7 @@ export class McNavbarVertical implements AfterContentInit {
 
     private _closed: boolean = false;
 
-    @ContentChildren(McNavbarItem, { descendants: true }) navbarItems: QueryList<McNavbarItem>;
-
-    @ContentChildren(McNavbarDivider, { descendants: true }) navbarDividers: QueryList<McNavbarDivider>;
+    @ContentChildren(McNavbarItemBase, { descendants: true }) navbarBaseItems: QueryList<McNavbarItemBase>;
 
     toggle(): void {
         this.closed = !this.closed;
@@ -52,23 +53,30 @@ export class McNavbarVertical implements AfterContentInit {
         this.setItemsState();
         this.setClosedStateForItems(this.closed);
 
-        this.navbarItems.changes
+        this.navbarBaseItems.changes
             .subscribe(this.setItemsState);
     }
 
     private setClosedStateForItems(value: boolean) {
-        this.navbarItems.forEach((item) => {
+        this.navbarBaseItems.forEach((item) => {
             item.closed = value;
             setTimeout(() => item.button?.updateClassModifierForIcons());
         });
     }
 
     private setItemsState = () => {
-        this.navbarItems.forEach((item) => item.vertical = true);
-        this.navbarDividers.forEach((item) => item.vertical = true);
+        this.navbarBaseItems.forEach((item) => item.vertical = true);
     }
 }
 
+export class McNavbarToggleBase {
+    // tslint:disable-next-line:naming-convention
+    constructor(public _elementRef: ElementRef) {}
+}
+
+// tslint:disable-next-line:naming-convention
+export const McNavbarToggleMixinBase: HasTabIndexCtor & CanDisableCtor &
+    typeof McNavbarToggleBase = mixinTabIndex(mixinDisabled(McNavbarToggleBase));
 
 @Component({
     selector: 'mc-navbar-toggle',
@@ -82,14 +90,32 @@ export class McNavbarVertical implements AfterContentInit {
         <ng-content select="[mc-icon]"></ng-content>
         <ng-content select="mc-navbar-title" *ngIf="!mcNavbar.closed"></ng-content>
     `,
-    host: {
-        class: 'mc-navbar-item mc-navbar-toggle mc-navbar-item_vertical'
-    },
     styleUrls: ['./navbar.scss'],
+    host: {
+        class: 'mc-navbar-item mc-navbar-toggle mc-vertical',
+
+        '[attr.tabindex]': 'tabIndex',
+        '[attr.disabled]': 'disabled || null'
+    },
+    inputs: ['tabIndex'],
     encapsulation: ViewEncapsulation.None
 })
-export class McNavbarToggle {
+export class McNavbarToggle extends McNavbarToggleMixinBase {
     @ContentChild(McIcon) customIcon: McIcon;
 
-    constructor(public mcNavbar: McNavbarVertical) {}
+    constructor(
+        public mcNavbar: McVerticalNavbar,
+        private focusMonitor: FocusMonitor,
+        private elementRef: ElementRef
+    ) {
+        super(elementRef);
+    }
+
+    ngOnDestroy() {
+        this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
+    }
+
+    ngAfterContentInit(): void {
+        this.focusMonitor.monitor(this.elementRef.nativeElement, true);
+    }
 }

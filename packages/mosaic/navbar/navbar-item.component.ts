@@ -1,5 +1,7 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
+import { coerceNumberProperty } from '@angular/cdk/coercion';
 import {
+    AfterContentInit,
     ChangeDetectorRef,
     Component,
     ContentChild,
@@ -7,11 +9,10 @@ import {
     ElementRef,
     Input,
     OnDestroy,
-    OnInit,
     ViewEncapsulation
 } from '@angular/core';
 import { McButtonCssStyler } from '@ptsecurity/mosaic/button';
-import { CanDisable, CanDisableCtor, HasTabIndexCtor, mixinDisabled, mixinTabIndex } from '@ptsecurity/mosaic/core';
+import { CanDisable, CanDisableCtor, mixinDisabled } from '@ptsecurity/mosaic/core';
 
 
 const COLLAPSED_CLASS: string = 'mc-navbar-collapsed-title';
@@ -46,58 +47,71 @@ export class McNavbarBrand {}
 @Directive({
     selector: 'mc-navbar-divider',
     host: {
-        class: 'mc-navbar-divider',
-        '[class.mc-navbar-vertical-divider]': 'vertical',
-        '[class.mc-navbar-horizontal-divider]': 'horizontal'
+        class: 'mc-navbar-divider'
     }
 })
-export class McNavbarDivider {
+export class McNavbarDivider {}
+
+
+@Directive({
+    selector: 'mc-navbar-item, mc-navbar-divider, mc-navbar-brand',
+    host: {
+        '[class.mc-vertical]': 'vertical',
+        '[class.mc-horizontal]': 'horizontal',
+        '[class.mc-opened]': 'vertical && !closed',
+        '[class.mc-closed]': 'vertical && closed'
+    }
+})
+export class McNavbarItemBase {
+    @ContentChild(McButtonCssStyler) button: McButtonCssStyler;
+
     vertical: boolean;
     horizontal: boolean;
 
     closed: boolean;
-}
 
-
-export class McNavbarItemBase {
     constructor(public elementRef: ElementRef) {}
 }
 
 // tslint:disable-next-line:naming-convention
-export const McNavbarMixinBase:
-    HasTabIndexCtor & CanDisableCtor & typeof McNavbarItemBase = mixinTabIndex(mixinDisabled(McNavbarItemBase));
+export const McNavbarMixinBase: CanDisableCtor & typeof McNavbarItemBase = mixinDisabled(McNavbarItemBase);
 
 
 @Component({
     selector: 'mc-navbar-item',
     template: `<ng-content></ng-content>`,
-    styleUrls: ['./navbar-item.scss'],
+    styleUrls: [
+        './navbar-item.scss',
+        './navbar-brand.scss',
+        './navbar-divider.scss'
+    ],
     host: {
         class: 'mc-navbar-item',
-        '[class.mc-navbar-item_vertical]': 'vertical',
-        '[class.mc-navbar-item_horizontal]': 'horizontal',
-        '[class.mc-opened]': '!closed',
-        '[class.mc-closed]': 'closed',
         '[class.mc-navbar-item_button]': 'button',
 
         '[attr.tabindex]': 'tabIndex',
         '[attr.disabled]': 'disabled || null'
     },
-    inputs: ['disabled', 'tabIndex'],
+    inputs: ['disabled'],
     encapsulation: ViewEncapsulation.None
 })
-export class McNavbarItem extends McNavbarMixinBase implements OnInit, OnDestroy, CanDisable {
-    vertical: boolean;
-    horizontal: boolean;
-
-    closed: boolean;
-
+export class McNavbarItem extends McNavbarMixinBase implements OnDestroy, CanDisable, AfterContentInit {
     @ContentChild(McButtonCssStyler) button: McButtonCssStyler;
 
     @Input()
     set collapsedTitle(value: string) {
         this.elementRef.nativeElement.setAttribute('computedTitle', encodeURI(value));
     }
+
+    get tabIndex(): number {
+        return this.disabled || this.button ? -1 : this._tabIndex;
+    }
+
+    set tabIndex(value: number) {
+        this._tabIndex = value != null ? coerceNumberProperty(value) : 0;
+    }
+
+    private _tabIndex: number = 0;
 
     constructor(
         private focusMonitor: FocusMonitor,
@@ -107,12 +121,14 @@ export class McNavbarItem extends McNavbarMixinBase implements OnInit, OnDestroy
         super(elementRef);
     }
 
-    ngOnInit() {
-        this.focusMonitor.monitor(this.elementRef.nativeElement, true);
-    }
-
     ngOnDestroy() {
         this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
+    }
+
+    ngAfterContentInit(): void {
+        if (this.button) { return; }
+
+        this.focusMonitor.monitor(this.elementRef.nativeElement, true);
     }
 }
 
