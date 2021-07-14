@@ -35,6 +35,7 @@ import {
     patchElementFocus
 } from '@ptsecurity/cdk/testing';
 import { Subject } from 'rxjs';
+import { first } from 'rxjs/operators';
 
 import {
     MC_DROPDOWN_DEFAULT_OPTIONS,
@@ -384,11 +385,19 @@ describe('McDropdown', () => {
 
         dirProvider.value = 'ltr';
         fixture.componentInstance.trigger.open();
-        fixture.detectChanges();
+        (fixture.componentInstance.trigger.dropdown as McDropdown).animationDone
+            .pipe(first())
+            .subscribe({
+                next: undefined,
+                error: undefined,
+                complete: () => {
+                    fixture.detectChanges();
 
-        boundingBox =
-            overlayContainerElement.querySelector('.cdk-overlay-connected-position-bounding-box')!;
-        expect(boundingBox.getAttribute('dir')).toEqual('ltr');
+                    boundingBox =
+                        overlayContainerElement.querySelector('.cdk-overlay-connected-position-bounding-box')!;
+                    expect(boundingBox.getAttribute('dir')).toEqual('ltr');
+                }
+            });
     });
 
     it('should transfer any custom classes from the host to the overlay', () => {
@@ -563,14 +572,30 @@ describe('McDropdown', () => {
         expect(triggerEl.hasAttribute('aria-expanded')).toBe(false);
 
         fixture.componentInstance.trigger.open();
-        fixture.detectChanges();
+        (fixture.componentInstance.trigger.dropdown as McDropdown).animationDone
+            .pipe(first())
+            .subscribe({
+                next: undefined,
+                error: undefined,
+                complete: () => {
+                    fixture.detectChanges();
 
-        expect(triggerEl.getAttribute('aria-expanded')).toBe('true');
+                    expect(triggerEl.getAttribute('aria-expanded')).toBe('true');
+                }
+            });
 
         fixture.componentInstance.trigger.close();
-        fixture.detectChanges();
+        (fixture.componentInstance.trigger.dropdown as McDropdown).animationDone
+            .pipe(first())
+            .subscribe({
+                next: undefined,
+                error: undefined,
+                complete: () => {
+                    fixture.detectChanges();
 
-        expect(triggerEl.hasAttribute('aria-expanded')).toBe(false);
+                    expect(triggerEl.hasAttribute('aria-expanded')).toBe(false);
+                }
+            });
     });
 
     it('should throw the correct error if the dropdown is not defined after init', () => {
@@ -1263,6 +1288,7 @@ describe('McDropdown', () => {
 
         it('should open a nested dropdown when its trigger is clicked', fakeAsync(() => {
             compileTestComponent();
+
             instance.rootTriggerEl.nativeElement.click();
             fixture.detectChanges();
             flush();
@@ -1276,10 +1302,10 @@ describe('McDropdown', () => {
             expect(overlay.querySelectorAll(PANEL_SELECTOR).length).toBe(2, 'Expected two open dropdowns');
 
             levelOneTrigger.click();
-            flush();
             fixture.detectChanges();
+            flush();
             expect(overlay.querySelectorAll(PANEL_SELECTOR).length)
-                .toBe(2, 'Expected repeat clicks not to close the dropdown.');
+                .toBe(1, 'Expected second click to close the dropdown.');
         }));
 
         it('should open and close a nested dropdown with arrow keys in ltr', fakeAsync(() => {
