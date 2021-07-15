@@ -1,23 +1,19 @@
 import {
     AfterContentInit,
     AfterViewInit,
+    ChangeDetectionStrategy,
     Component,
     ContentChildren,
     Directive,
     ElementRef,
-    Input,
     OnDestroy,
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
-import { fromEvent, Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
-import {
-    CachedItemWidth,
-    CollapsibleItem,
-    McNavbarItemBase
-} from './navbar-item.component';
+import { McNavbarItem, McNavbarItemBase } from './navbar-item.component';
 
 
 export type McNavbarContainerPositionType = 'left' | 'right';
@@ -26,72 +22,53 @@ export type McNavbarContainerPositionType = 'left' | 'right';
 @Directive({
     selector: 'mc-navbar-container',
     host: {
-        class: 'mc-navbar-container',
-        '[class.mc-navbar-left]': 'this.position === "left"',
-        '[class.mc-navbar-right]': 'this.position == "right"',
-        '[class.mc-navbar_top]': 'this.position == "top"',
-        '[class.mc-navbar_bottom]': 'this.position == "bottom"'
+        class: 'mc-navbar-container'
     }
 })
-export class McNavbarContainer {
-    @Input() position: McNavbarContainerPositionType;
-}
+export class McNavbarContainer {}
 
 @Component({
     selector: 'mc-navbar',
-    template: `
-        <ng-content select="[mc-navbar-container], mc-navbar-container"></ng-content>
-    `,
+    template: `<ng-content select="[mc-navbar-container], mc-navbar-container"></ng-content>`,
     styleUrls: ['./navbar.scss'],
     host: {
-        class: 'mc-navbar'
+        class: 'mc-navbar',
+        '(window:resize)': 'resizeStream.next($event)'
     },
+    changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
 export class McNavbar implements AfterViewInit, AfterContentInit, OnDestroy {
     @ContentChildren(McNavbarItemBase, { descendants: true }) navbarBaseItems: QueryList<McNavbarItemBase>;
 
-    private readonly forceRecalculateItemsWidth: boolean = false;
+    @ContentChildren(McNavbarItem, { descendants: true }) navbarItems: QueryList<McNavbarItem>;
+
+    readonly resizeStream = new Subject<Event>();
+
     private readonly resizeDebounceInterval: number = 100;
-    private readonly firstLevelElement: string = 'mc-navbar-container';
-    private readonly secondLevelElements: string[] = [
-        'mc-navbar-item',
-        'mc-navbar-brand',
-        'mc-navbar-title'
-    ];
 
-    private totalItemsWidths: number;
-
-    private get maxAllowedWidth(): number {
+    private get width(): number {
         return this.elementRef.nativeElement.getBoundingClientRect().width;
     }
 
-    private get itemsWidths(): CachedItemWidth[] {
-        if (this._itemsWidths !== undefined && !this.forceRecalculateItemsWidth) {
-            return this._itemsWidths;
-        }
-
-        this.calculateAndCacheItemsWidth();
-
-        return this._itemsWidths;
+    private get totalItemsWidth(): number {
+        return this.navbarBaseItems
+            .reduce((acc, item) => acc + item.getOuterElementWidth(), 0);
     }
 
-    private _itemsWidths: CachedItemWidth[];
-
-    private get totalItemsWidth(): number {
-        if (this.totalItemsWidths !== undefined && !this.forceRecalculateItemsWidth) {
-            return this.totalItemsWidths;
-        }
-
-        this.calculateAndCacheTotalItemsWidth();
-
-        return this.totalItemsWidths;
+    private get collapsableItems(): McNavbarItem[] {
+        return this.navbarItems
+            .toArray()
+            .filter((item) => item.icon && item.title)
+            .reverse();
     }
 
     private resizeSubscription: Subscription;
 
     constructor(private elementRef: ElementRef) {
-        this.subscribeOnResizeEvents();
+        this.resizeSubscription = this.resizeStream
+            .pipe(debounceTime(this.resizeDebounceInterval))
+            .subscribe(this.updateCollapsed);
     }
 
     ngAfterContentInit(): void {
@@ -104,65 +81,53 @@ export class McNavbar implements AfterViewInit, AfterContentInit, OnDestroy {
     ngAfterViewInit(): void {
         // Note: this wait is required for loading and rendering fonts for icons;
         // unfortunately we cannot control font rendering
-        setTimeout(() => this.updateCollapsed(), 0);
+        setTimeout(this.updateCollapsed);
     }
 
     ngOnDestroy() {
-        this.resizeSubscription?.unsubscribe();
+        this.resizeSubscription.unsubscribe();
     }
 
-    updateCollapsed(): void {
-        let collapseDelta = this.totalItemsWidth - this.maxAllowedWidth;
+    updateCollapsed = () => {
+        const collapseDelta = this.totalItemsWidth - this.width;
 
-        for (let i = this.itemsWidths.length - 1; i >= 0; i--) {
-            const item = this.itemsWidths[i];
+        const needCollapse = collapseDelta > 0;
 
-            if (!item.canCollapse) { continue; }
-
-            item.processCollapsed(collapseDelta > 0);
-            collapseDelta -= item.collapsedItemsWidth;
+        if (needCollapse) {
+            this.collapseItems(collapseDelta);
+        } else {
+            this.unCollapseItems(collapseDelta);
         }
+    }
+
+    private collapseItems(collapseDelta: number) {
+        let delta = collapseDelta;
+
+        const unCollapsedItems = this.collapsableItems
+            .filter((item) => !item.collapsed);
+
+        for (const item of unCollapsedItems) {
+            item.collapsed = true;
+            delta -= item.getTitleWidth();
+
+            if (delta < 0) { break; }
+        }
+    }
+
+    private unCollapseItems(collapseDelta: number) {
+        let delta = collapseDelta;
+
+        this.collapsableItems
+            .filter((item) => item.collapsed)
+            .forEach((item) => {
+                if (delta + item.getTitleWidth() < 0) {
+                    item.collapsed = false;
+                    delta += item.getTitleWidth();
+                }
+            });
     }
 
     private setItemsState = () => {
         this.navbarBaseItems.forEach((item) => item.horizontal = true);
-    }
-
-    private subscribeOnResizeEvents() {
-        this.resizeSubscription = fromEvent(window, 'resize')
-            .pipe(debounceTime(this.resizeDebounceInterval))
-            .subscribe(this.updateCollapsed.bind(this));
-    }
-
-    private calculateAndCacheTotalItemsWidth() {
-        this.totalItemsWidths = this.itemsWidths
-            .reduce((acc, item) => acc + item.width, 0);
-    }
-
-    private getOuterElementWidth(element: HTMLElement): number {
-        const baseWidth  = element.getBoundingClientRect().width;
-        const marginRight = parseInt(getComputedStyle(element).getPropertyValue('margin-right'));
-        const marginLeft = parseInt(getComputedStyle(element).getPropertyValue('margin-left'));
-
-        return baseWidth + marginRight + marginLeft;
-    }
-
-    private calculateAndCacheItemsWidth() {
-        const allItemsSelector = this.secondLevelElements
-            .map((e: string) => `${this.firstLevelElement}>${e}`);
-
-        const allItems: HTMLElement[] = Array.from(this.elementRef.nativeElement.querySelectorAll(allItemsSelector));
-
-        this._itemsWidths = allItems
-            .map((el) => new CachedItemWidth(el, this.getOuterElementWidth(el), this.getItemsForCollapse(el)));
-    }
-
-    private getItemsForCollapse(element: HTMLElement): CollapsibleItem[] {
-        const icon = element.querySelector(`[mc-icon],mc-navbar-logo,[mc-navbar-logo]`);
-
-        if (!icon) { return []; }
-
-        return Array.from(element.querySelectorAll('mc-navbar-title'))
-            .map((el) => new CollapsibleItem(<HTMLElement> el, el.getBoundingClientRect().width));
     }
 }

@@ -28,7 +28,7 @@ describe('McNavbar', () => {
         setTimeout(
             () => {
                 fixture.detectChanges();
-                const collapsedElements = fixture.debugElement.queryAll(By.css('.mc-navbar-collapsed-title'));
+                const collapsedElements = fixture.debugElement.queryAll(By.css('.mc-navbar-item_collapsed'));
 
                 expect(collapsedElements.length).toBeGreaterThan(0);
                 done();
@@ -49,7 +49,7 @@ describe('McNavbar', () => {
 
                 const items = fixture.debugElement.queryAll(By.css('mc-navbar-item'));
                 const collapsedElements = items.filter((item) =>
-                    item.nativeElement.querySelectorAll('.mc-navbar-collapsed-title').length > 0);
+                    item.nativeElement.querySelectorAll('.mc-navbar-item_collapsed').length > 0);
 
                 const hasTitle = collapsedElements.reduce((acc, el) => acc && el.nativeElement.hasAttribute('title'), true);
 
@@ -71,7 +71,7 @@ describe('McNavbar', () => {
 
                 const items = fixture.debugElement.queryAll(By.css('mc-navbar-item'));
                 const collapsedElements = items.filter((item) =>
-                    item.nativeElement.querySelectorAll('.mc-navbar-collapsed-title').length > 0);
+                    item.nativeElement.querySelectorAll('.mc-navbar-item_collapsed').length > 0);
 
                 const elementWithCustomTitle = collapsedElements[collapsedElements.length - 1];
 

@@ -86,9 +86,9 @@
         padding-left: 4px
     }
 
-    //mc-navbar-title:not(.mc-navbar-collapsed-title) + [mc-icon] {
-    //    padding-left: var(--mc-navbar-size-icon-margin-left, $navbar-size-icon-margin);
-    //}
+    &.mc-navbar-item_collapsed .mc-navbar-title {
+        display: none;
+    }
 }
 
 .mc-navbar-item.mc-navbar-item_button .mc-icon-button {
@@ -105,8 +105,4 @@
             margin-right: unset;
         }
     }
-}
-
-.mc-navbar-title.mc-navbar-collapsed-title {
-    display: none;
 }

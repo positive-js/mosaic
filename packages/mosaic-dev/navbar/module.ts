@@ -17,8 +17,7 @@ import { McNavbarModule, McNavbar } from '../../mosaic/navbar';
 })
 export class NavbarDemoComponent {
 
-    @ViewChild('navbar', {static: false})
-    navbar: McNavbar;
+    @ViewChild('navbar', {static: false}) navbar: McNavbar;
 
     readonly minNavbarWidth: number = 940;
 
@@ -27,9 +26,8 @@ export class NavbarDemoComponent {
     }
 
     set collapsedNavbarWidth(value: number) {
-        if (value < this.minNavbarWidth) {
-            return;
-        }
+        if (value < this.minNavbarWidth) { return; }
+
         this._collapsedNavbarWidth = value;
     }
 

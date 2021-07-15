@@ -13,6 +13,8 @@
 }
 
 .mc-navbar-brand.mc-horizontal {
+    height: 100%;
+
     //padding-right: var(--mc-navbar-brand-size-padding, $navbar-brand-size-padding);
     //margin-right: var(--mc-navbar-brand-size-margin-right, $navbar-brand-size-margin-right);
     padding-right: 24px;
@@ -27,9 +29,6 @@
 
 .mc-navbar-brand.mc-vertical {
     flex-direction: column;
-    align-items: unset;
-
-    height: unset;
 
     padding-left: 16px;
 
@@ -46,6 +45,8 @@
     }
 
     &.mc-opened {
+        align-items: unset;
+
         & .mc-navbar-item {
             position: absolute;
             top: 0;
@@ -58,11 +59,7 @@
     }
 
     &.mc-closed {
-        align-items: center;
-        justify-content: center;
-
         padding: 0;
-        margin: 0;
 
         & .mc-navbar-logo {
             align-items: center;

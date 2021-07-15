@@ -2,7 +2,7 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 import { coerceNumberProperty } from '@angular/cdk/coercion';
 import {
     AfterContentInit,
-    ChangeDetectorRef,
+    ChangeDetectionStrategy,
     Component,
     ContentChild,
     Directive,
@@ -13,9 +13,8 @@ import {
 } from '@angular/core';
 import { McButtonCssStyler } from '@ptsecurity/mosaic/button';
 import { CanDisable, CanDisableCtor, mixinDisabled } from '@ptsecurity/mosaic/core';
+import { McIcon } from '@ptsecurity/mosaic/icon';
 
-
-const COLLAPSED_CLASS: string = 'mc-navbar-collapsed-title';
 
 @Directive({
     selector: 'mc-navbar-logo',
@@ -32,7 +31,25 @@ export class McNavbarLogo {}
         class: 'mc-navbar-title'
     }
 })
-export class McNavbarTitle {}
+export class McNavbarTitle implements AfterContentInit {
+    outerElementWidth: number;
+
+    get text(): string {
+        return this.elementRef.nativeElement.innerText;
+    }
+
+    constructor(private elementRef: ElementRef) {}
+
+    getOuterElementWidth(): number {
+        const { width, marginLeft, marginRight } = window.getComputedStyle(this.elementRef.nativeElement);
+
+        return [width, marginLeft, marginRight].reduce((acc, item) => acc + parseInt(item) || 0, 0);
+    }
+
+    ngAfterContentInit(): void {
+        this.outerElementWidth = this.getOuterElementWidth();
+    }
+}
 
 
 @Directive({
@@ -71,6 +88,12 @@ export class McNavbarItemBase {
     closed: boolean;
 
     constructor(public elementRef: ElementRef) {}
+
+    getOuterElementWidth(): number {
+        const { width, marginLeft, marginRight } = window.getComputedStyle(this.elementRef.nativeElement);
+
+        return [width, marginLeft, marginRight].reduce((acc, item) => acc + parseInt(item), 0);
+    }
 }
 
 // tslint:disable-next-line:naming-convention
@@ -87,21 +110,34 @@ export const McNavbarMixinBase: CanDisableCtor & typeof McNavbarItemBase = mixin
     ],
     host: {
         class: 'mc-navbar-item',
+        '[class.mc-navbar-item_collapsed]': 'collapsed',
         '[class.mc-navbar-item_button]': 'button',
 
+        '[attr.title]': 'collapsedTitle',
         '[attr.tabindex]': 'tabIndex',
         '[attr.disabled]': 'disabled || null'
     },
     inputs: ['disabled'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
 export class McNavbarItem extends McNavbarMixinBase implements OnDestroy, CanDisable, AfterContentInit {
     @ContentChild(McButtonCssStyler) button: McButtonCssStyler;
+    @ContentChild(McNavbarTitle) title: McNavbarTitle;
+    @ContentChild(McIcon) icon: McIcon;
+
+    collapsed = false;
+
+    get collapsedTitle(): string | null {
+        return this.collapsed ? (this._collapsedTitle || this.title.text) : null;
+    }
 
     @Input()
-    set collapsedTitle(value: string) {
-        this.elementRef.nativeElement.setAttribute('computedTitle', encodeURI(value));
+    set collapsedTitle(value: string | null) {
+        this._collapsedTitle = value;
     }
+
+    private _collapsedTitle: string | null = null;
 
     get tabIndex(): number {
         return this.disabled || this.button ? -1 : this._tabIndex;
@@ -113,11 +149,7 @@ export class McNavbarItem extends McNavbarMixinBase implements OnDestroy, CanDis
 
     private _tabIndex: number = 0;
 
-    constructor(
-        private focusMonitor: FocusMonitor,
-        public changeDetectorRef: ChangeDetectorRef,
-        elementRef: ElementRef
-    ) {
+    constructor(private focusMonitor: FocusMonitor, public elementRef: ElementRef) {
         super(elementRef);
     }
 
@@ -130,78 +162,8 @@ export class McNavbarItem extends McNavbarMixinBase implements OnDestroy, CanDis
 
         this.focusMonitor.monitor(this.elementRef.nativeElement, true);
     }
-}
 
-
-export class CollapsibleItem {
-    private collapsed: boolean = false;
-
-    constructor(public element: HTMLElement, public width: number) {}
-
-    processCollapsed(collapsed: boolean) {
-        this.collapsed = collapsed;
-
-        this.updateCollapsedClass();
-    }
-
-    private updateCollapsedClass() {
-        if (this.collapsed) {
-            this.element.classList.add(COLLAPSED_CLASS);
-        } else {
-            this.element.classList.remove(COLLAPSED_CLASS);
-        }
-    }
-}
-
-export class CachedItemWidth {
-    get canCollapse(): boolean {
-        return this.itemsForCollapse.length > 0;
-    }
-
-    get collapsedItemsWidth(): number {
-        if (this._collapsedItemsWidth !== undefined) {
-            return this._collapsedItemsWidth;
-        }
-
-        this.calculateAndCacheCollapsedItemsWidth();
-
-        return this._collapsedItemsWidth;
-    }
-
-    private _collapsedItemsWidth: number;
-
-    constructor(
-        public element: HTMLElement,
-        public width: number,
-        public itemsForCollapse: CollapsibleItem[] = []
-    ) {}
-
-    processCollapsed(collapsed: boolean) {
-        if (this.itemsForCollapse.length > 0) {
-            this.updateTitle(collapsed);
-        }
-
-        this.itemsForCollapse.forEach((item) => item.processCollapsed(collapsed));
-    }
-
-    private calculateAndCacheCollapsedItemsWidth() {
-        this._collapsedItemsWidth = this.itemsForCollapse
-            .reduce((acc, item) => acc + item.width, 0);
-    }
-
-    private getTitle(): string {
-        const computedTitle = this.element.getAttribute('computedTitle');
-
-        return computedTitle
-            ? decodeURI(computedTitle)
-            : (this.itemsForCollapse.length > 0 ? this.itemsForCollapse[0].element.innerText : '');
-    }
-
-    private updateTitle(collapsed: boolean) {
-        if (collapsed) {
-            this.element.setAttribute('title', this.getTitle());
-        } else {
-            this.element.removeAttribute('title');
-        }
+    getTitleWidth(): number {
+        return this.title.outerElementWidth;
     }
 }

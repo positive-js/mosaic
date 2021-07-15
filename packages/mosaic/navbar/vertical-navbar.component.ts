@@ -1,6 +1,7 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
 import {
     AfterContentInit,
+    ChangeDetectionStrategy,
     Component,
     ContentChild,
     ContentChildren,
@@ -17,41 +18,43 @@ import { McNavbarItemBase } from './navbar-item.component';
 
 @Component({
     selector: 'mc-vertical-navbar',
+    exportAs: 'McVerticalNavbar',
     template: `
         <ng-content select="[mc-navbar-container], mc-navbar-container"></ng-content>
         <ng-content select="[mc-navbar-toggle], mc-navbar-toggle"></ng-content>
     `,
     host: {
         class: 'mc-vertical-navbar',
-        '[class.mc-closed]': 'closed',
-        '[class.mc-opened]': '!closed'
+        '[class.mc-closed]': 'expanded',
+        '[class.mc-opened]': '!expanded'
     },
     styleUrls: ['./vertical-navbar.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
 export class McVerticalNavbar implements AfterContentInit {
-    get closed() {
-        return this._closed;
+    get expanded() {
+        return this._expanded;
     }
 
     @Input()
-    set closed(value: boolean) {
-        this._closed = value;
+    set expanded(value: boolean) {
+        this._expanded = value;
 
         this.setClosedStateForItems(value);
     }
 
-    private _closed: boolean = false;
+    private _expanded: boolean = false;
 
     @ContentChildren(McNavbarItemBase, { descendants: true }) navbarBaseItems: QueryList<McNavbarItemBase>;
 
     toggle(): void {
-        this.closed = !this.closed;
+        this.expanded = !this.expanded;
     }
 
     ngAfterContentInit(): void {
         this.setItemsState();
-        this.setClosedStateForItems(this.closed);
+        this.setClosedStateForItems(this.expanded);
 
         this.navbarBaseItems.changes
             .subscribe(this.setItemsState);
@@ -82,13 +85,13 @@ export const McNavbarToggleMixinBase: HasTabIndexCtor & CanDisableCtor &
     selector: 'mc-navbar-toggle',
     template: `
         <i mc-icon
-           [class.mc-angle-left-M_16]="!mcNavbar.closed"
-           [class.mc-angle-right-M_16]="mcNavbar.closed"
+           [class.mc-angle-left-M_16]="!mcNavbar.expanded"
+           [class.mc-angle-right-M_16]="mcNavbar.expanded"
            *ngIf="!customIcon">
         </i>
 
         <ng-content select="[mc-icon]"></ng-content>
-        <ng-content select="mc-navbar-title" *ngIf="!mcNavbar.closed"></ng-content>
+        <ng-content select="mc-navbar-title" *ngIf="!mcNavbar.expanded"></ng-content>
     `,
     styleUrls: ['./navbar.scss'],
     host: {
@@ -98,6 +101,7 @@ export const McNavbarToggleMixinBase: HasTabIndexCtor & CanDisableCtor &
         '[attr.disabled]': 'disabled || null'
     },
     inputs: ['tabIndex'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
 export class McNavbarToggle extends McNavbarToggleMixinBase {
