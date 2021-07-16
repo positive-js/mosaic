@@ -48,8 +48,8 @@ export class NavbarDemoComponent {
         NavbarDemoComponent
     ],
     imports: [
-        BrowserAnimationsModule,
         BrowserModule,
+        BrowserAnimationsModule,
         McNavbarModule,
         McIconModule,
         McButtonModule,

@@ -14,6 +14,7 @@ import { CanDisableCtor, HasTabIndexCtor, mixinDisabled, mixinTabIndex } from '@
 import { McIcon } from '@ptsecurity/mosaic/icon';
 
 import { McNavbarItemBase } from './navbar-item.component';
+import { toggleVerticalNavbarAnimation } from './vertical-navbar.animation';
 
 
 @Component({
@@ -23,12 +24,14 @@ import { McNavbarItemBase } from './navbar-item.component';
         <ng-content select="[mc-navbar-container], mc-navbar-container"></ng-content>
         <ng-content select="[mc-navbar-toggle], mc-navbar-toggle"></ng-content>
     `,
+    styleUrls: ['./vertical-navbar.scss'],
     host: {
         class: 'mc-vertical-navbar',
         '[class.mc-closed]': 'expanded',
-        '[class.mc-opened]': '!expanded'
+        '[class.mc-opened]': '!expanded',
+        '[@toggle]': 'expanded'
     },
-    styleUrls: ['./vertical-navbar.scss'],
+    animations: [toggleVerticalNavbarAnimation()],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
