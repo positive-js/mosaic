@@ -28,7 +28,7 @@ We strongly recommend adhere to use our child components until it is possible bu
 
 We believe you are able to manage navbar child components from outside. Meantime we provide number of mc-navbar-item states based on css classes which may be combined between each others.
 
- - mc-navbar-item-active - selected item
+ - mc-active - selected item
  - mc-progress - something in progress (striped animation)
  - cdk-focused - focused state, we control it as well for common tab order behaviour
  

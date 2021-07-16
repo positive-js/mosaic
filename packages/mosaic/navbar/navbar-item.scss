@@ -16,7 +16,7 @@
     display: flex;
     align-items: center;
 
-    height: 48px;
+    height: var(--mc-navbar-item-size-height, $navbar-item-size-height);
 
     & .mc-icon {
         min-width: 16px;
@@ -34,7 +34,7 @@
 
     & .mc-icon + .mc-navbar-title,
     & .mc-navbar-title + .mc-icon {
-        padding-left: 10px;
+        padding-left: var(--mc-vertical-navbar-size-icon-margin, $vertical-navbar-size-icon-margin);
     }
 
     & .mc-badge {
@@ -79,11 +79,9 @@
 }
 
 .mc-navbar-item.mc-horizontal {
-    height: 100%;
-
     & .mc-icon + .mc-navbar-title,
     & .mc-navbar-title + .mc-icon {
-        padding-left: 4px
+        padding-left: var(--mc-navbar-size-icon-margin, $navbar-size-icon-margin)
     }
 
     &.mc-navbar-item_collapsed .mc-navbar-title {

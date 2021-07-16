@@ -144,8 +144,8 @@
 
     $navbar: (
         background: $navbar-light-color-scheme-background,
-        color: $navbar-light-color-scheme-text,
-        opacity: $navbar-light-color-scheme-opacity,
+
+        divider-background: $navbar-light-color-scheme-divider-background
     );
 
     $navbar-item: (
@@ -233,17 +233,6 @@
         shadow: $tooltip-light-color-scheme-shadow
     );
 
-    $vertical-navbar: (
-        background: $vertical-navbar-light-color-scheme-background,
-        color: $vertical-navbar-light-color-scheme-text,
-
-        toggle-button: $vertical-navbar-light-color-scheme-toggle-button,
-
-        background_hover: $vertical-navbar-light-color-scheme-states-hover-background,
-        background_active: $vertical-navbar-light-color-scheme-states-active-background,
-        background_progress: $vertical-navbar-light-color-scheme-states-progress-background
-    );
-
     @return (
         alert: $alert,
         popup: $popup,
@@ -263,8 +252,7 @@
         tabs: $tabs,
         tags: $tags,
         toggle: $toggle,
-        tooltip: $tooltip,
-        vertical-navbar: $vertical-navbar
+        tooltip: $tooltip
     );
 }
 
@@ -412,7 +400,8 @@
     $navbar: (
         background: $navbar-dark-color-scheme-background,
         color: $navbar-dark-color-scheme-text,
-        opacity: $navbar-dark-color-scheme-opacity,
+
+        divider-background: $navbar-dark-color-scheme-divider-background
     );
 
     $navbar-item: (
@@ -500,17 +489,6 @@
         shadow: $tooltip-dark-color-scheme-shadow
     );
 
-    $vertical-navbar: (
-        background: $vertical-navbar-dark-color-scheme-background,
-        color: $vertical-navbar-dark-color-scheme-text,
-
-        toggle-button: $vertical-navbar-dark-color-scheme-toggle-button,
-
-        background_hovered: $vertical-navbar-dark-color-scheme-states-hover-background,
-        background_active: $vertical-navbar-dark-color-scheme-states-active-background,
-        background_progress: $vertical-navbar-dark-color-scheme-states-progress-background
-    );
-
     @return (
         alert: $alert,
         popup: $popup,
@@ -530,7 +508,6 @@
         tabs: $tabs,
         tags: $tags,
         toggle: $toggle,
-        tooltip: $tooltip,
-        vertical-navbar: $vertical-navbar
+        tooltip: $tooltip
     );
 }

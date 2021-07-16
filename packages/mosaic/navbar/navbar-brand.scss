@@ -15,9 +15,7 @@
 .mc-navbar-brand.mc-horizontal {
     height: 100%;
 
-    //padding-right: var(--mc-navbar-brand-size-padding, $navbar-brand-size-padding);
-    //margin-right: var(--mc-navbar-brand-size-margin-right, $navbar-brand-size-margin-right);
-    padding-right: 24px;
+    padding-right: var(--mc-navbar-brand-size-margin-right, $navbar-brand-size-margin-right);
 
     & .mc-navbar-title {
         padding-left: var(--mc-navbar-brand-size-padding, $navbar-brand-size-padding);
@@ -40,7 +38,8 @@
     }
 
     & .mc-navbar-title {
-        height: 48px;
+        height: var(--mc-navbar-item-size-height, $navbar-item-size-height);
+
         padding-left: 0;
     }
 

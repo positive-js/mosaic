@@ -98,9 +98,12 @@
   --mc-modal-footer-size-border-radius: 0 0 4px 4px;
   --mc-modal-footer-size-padding: 16px 16px;
   --mc-modal-confirm-size-padding: 24px;
-  --mc-navbar-size-height: 48px;
-  --mc-navbar-size-icon-margin: 8px;
+  --mc-navbar-size-icon-margin: 4px;
+  --mc-vertical-navbar-size-states-opened-width: 240px;
+  --mc-vertical-navbar-size-states-closed-width: 48px;
+  --mc-vertical-navbar-size-icon-margin: 10px;
   --mc-navbar-item-size-padding: 16px;
+  --mc-navbar-item-size-height: 48px;
   --mc-navbar-brand-size-padding: 12px;
   --mc-navbar-brand-size-margin-right: 24px;
   --mc-optgroup-size-padding-left: 17px;
@@ -171,9 +174,4 @@
   --mc-tree-size-padding-right: 16px;
   --mc-tree-size-border-width: 2px;
   --mc-tree-size-node-height: 28px;
-  --mc-vertical-navbar-item-size-height: 64px;
-  --mc-vertical-navbar-item-size-margin: 1px 0;
-  --mc-vertical-navbar-item-size-padding-horizontal: 16px;
-  --mc-vertical-navbar-item-size-icon-margin-right: 16px;
-  --mc-navbar-badge-size-width: 64px;
 }
