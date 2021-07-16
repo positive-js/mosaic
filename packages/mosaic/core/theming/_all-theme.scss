@@ -32,7 +32,6 @@
 @import '../../tooltip/tooltip-theme';
 @import '../../tree-select/tree-select-theme';
 @import '../../tree/tree-theme';
-@import '../../vertical-navbar/vertical-navbar-theme';
 @import '../../table/table-theme';
 @import '../forms/forms-theme';
 @import '../option/option-theme';
@@ -78,7 +77,6 @@
     @include mc-tooltip-theme($theme);
     @include mc-tree-select-theme($theme);
     @include mc-tree-theme($theme);
-    @include mc-vertical-navbar-theme($theme);
     @include mc-highlight-theme($theme);
     @include mc-table-theme($theme);
 }
