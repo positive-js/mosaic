@@ -102,6 +102,7 @@ export const McNavbarMixinBase: CanDisableCtor & typeof McNavbarItemBase = mixin
 
 @Component({
     selector: 'mc-navbar-item',
+    exportAs: 'mcNavbarItem',
     template: `<ng-content></ng-content>`,
     styleUrls: [
         './navbar-item.scss',

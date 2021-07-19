@@ -6,7 +6,7 @@ import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McDropdownModule } from '@ptsecurity/mosaic/dropdown';
 
 import { McIconModule } from '../../mosaic/icon';
-import { McNavbarModule, McNavbar } from '../../mosaic/navbar';
+import { McNavbarModule, McNavbar, McNavbarItem } from '../../mosaic/navbar';
 
 
 @Component({
@@ -37,7 +37,9 @@ export class NavbarDemoComponent {
         this.navbar.updateCollapsed();
     }
 
-    onItemClick(event: MouseEvent) {
+    onItemClick(event: MouseEvent, disabledItem?: McNavbarItem) {
+        if (disabledItem?.disabled) { return; }
+
         alert(`innerText: ${(<HTMLElement> event.target).innerText}`);
     }
 }

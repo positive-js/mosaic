@@ -28,7 +28,7 @@
             <mc-navbar-title>Brand</mc-navbar-title>
         </mc-navbar-brand>
 
-        <mc-navbar-item (click)="onItemClick($event)">
+        <mc-navbar-item #disabledItem [disabled]="true" (click)="onItemClick($event, disabledItem)" [collapsedTitle]="'customTitle'">
             <i mc-icon="mc-ellipsis_16" *ngIf="verticalNavbar.expanded"></i>
             <mc-navbar-title class="flex layout-align-space-between">
                 Ещё

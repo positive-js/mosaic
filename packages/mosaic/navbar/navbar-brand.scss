@@ -10,6 +10,10 @@
 
     display: flex;
     align-items: center;
+
+    & .mc-navbar-title {
+        cursor: default;
+    }
 }
 
 .mc-navbar-brand.mc-horizontal {
