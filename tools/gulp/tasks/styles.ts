@@ -7,10 +7,10 @@ import { buildConfig } from '../build-config';
 import { buildScssPipeline } from '../utils/build-scss-pipeline';
 
 
-const sourceDir = 'packages/mosaic';
+const sourceDir = `${buildConfig.packagesDir}/mosaic`;
 
 /** Path to the directory where all releases are created. */
-const releasesDir = 'dist';
+const releasesDir = buildConfig.outputDir;
 
 // Matches all SCSS files in the different packages. Note that this glob is not used to build
 // the bundle. It's used to identify Sass files that shouldn't be included multiple times.
@@ -55,12 +55,12 @@ task('mosaic:bundle-visual-scss', () => {
 });
 
 task('mosaic:prebuilt-themes:scss', () => {
-    return buildScssPipeline('packages/mosaic/core/theming/prebuilt', true)
+    return buildScssPipeline(`${sourceDir}/core/theming/prebuilt`, true)
         .pipe(dest(join(releasePath, 'prebuilt-themes')));
 });
 
 task('mosaic:prebuilt-visual:scss', () => {
-    return buildScssPipeline('packages/mosaic/core/visual/prebuilt', true)
+    return buildScssPipeline(`${sourceDir}/core/visual/prebuilt`, true)
         .pipe(dest(join(releasePath, 'prebuilt-visual')));
 });
 
