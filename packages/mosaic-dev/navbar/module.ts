@@ -46,9 +46,7 @@ export class NavbarDemoComponent {
 
 
 @NgModule({
-    declarations: [
-        NavbarDemoComponent
-    ],
+    declarations: [NavbarDemoComponent],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
@@ -58,8 +56,6 @@ export class NavbarDemoComponent {
         FormsModule,
         McDropdownModule
     ],
-    bootstrap: [
-        NavbarDemoComponent
-    ]
+    bootstrap: [NavbarDemoComponent]
 })
 export class DemoModule {}
