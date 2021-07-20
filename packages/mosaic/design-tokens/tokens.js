@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Thu, 01 Jul 2021 11:07:16 GMT
+ * Generated on Tue, 20 Jul 2021 11:42:24 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
@@ -328,8 +328,8 @@ export const BadgeSizeMinWidth = "10px";
 export const BadgeSizePadding = "4px 8px";
 export const BadgeSizeBorderWidth = "1px";
 export const BadgeSizeBorderRadius = "4px";
-export const BadgeFontDefault = "body";
-export const BadgeFontCaps = "caption";
+export const BadgeFontDefault = "caption";
+export const BadgeFontCaps = "caption-caps";
 export const ButtonToggleSizeBorderSize = "1px";
 export const ButtonToggleSizeBorderRadius = "3px";
 export const ButtonLightColorSchemeActiveShadow = "inset 0 1px 2px 0 rgba(black, 0.2)";

@@ -7,8 +7,8 @@
             'border-radius': { value: '4px' }
         },
         font: {
-            default: { value: 'body' },
-            caps: { value: 'caption' }
+            default: { value: 'caption' },
+            caps: { value: 'caption-caps' }
         }
     }
 }
