@@ -1,19 +1,32 @@
 <div class="layout-margin docs-width">
-    <form [formGroup]="smallForm" novalidate>
-        <div class="docs-row">
-            <div class="mc-caption docs-label">Имя</div>
-            <mc-form-field>
-                <input mcInput formControlName="firstName">
-            </mc-form-field>
-        </div>
+    <form class="mc-form-vertical"
+          [formGroup]="smallForm"
+          novalidate>
 
-        <div class="docs-row">
-            <div class="mc-caption docs-label">Фамилия</div>
-            <mc-form-field>
-                <input mcInput formControlName="lastName">
-            </mc-form-field>
-        </div>
+        <div class="mc-form__fieldset">
+            <div class="mc-form__row">
+                <div class="mc-form__label">Имя</div>
+                <mc-form-field class="mc-form__control">
+                    <input mcInput formControlName="firstName">
+                </mc-form-field>
+            </div>
 
-        <button mc-button [color]="'primary'" type="submit" [disabled]="smallForm.errors?.empty">Отправить</button>
+            <div class="mc-form__row">
+                <div class="mc-form__label">Фамилия</div>
+                <mc-form-field class="mc-form__control">
+                    <input mcInput formControlName="lastName">
+                </mc-form-field>
+            </div>
+
+            <div class="mc-form__row">
+                <button class="flex-40"
+                        mc-button
+                        [color]="'primary'"
+                        type="submit"
+                        [disabled]="smallForm.errors?.empty">
+                    Отправить
+                </button>
+            </div>
+        </div>
     </form>
 </div>

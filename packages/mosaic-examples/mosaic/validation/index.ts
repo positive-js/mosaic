@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
+import { McFormsModule } from '@ptsecurity/mosaic/core';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
@@ -42,6 +43,7 @@ const EXAMPLES = [
         FormsModule,
         McInputModule,
         McFormFieldModule,
+        McFormsModule,
         McToolTipModule,
         McSelectModule,
         McIconModule,

@@ -1,15 +1,16 @@
-<div class="docs-composite-form">
-    <div class="mc-subheading">Диапазоны IP-адресов</div>
-
-    <form class="docs-form"
+<div class="docs-margin docs-width">
+    <form class="mc-form-horizontal"
           [formGroup]="compositeFormGroup"
           [class.validation-error]="compositeFormGroup.errors?.range"
           novalidate>
 
-        <div class="layout-row">
-            <div class="docs-column">
-                <div class="mc-caption docs-label">Начало диапазона</div>
+        <div class="mc-form__fieldset">
+            <div class="mc-form__legend">Диапазоны IP-адресов</div>
+
+            <div class="mc-form__row">
+                <label class="mc-form__label flex-20">Начало диапазона</label>
                 <mc-form-field
+                    class="mc-form__control"
                     mcTooltip
                     mcTooltipClass="mc-tooltip_warning"
                     [mcTitle]="'Только цифры и точки'"
@@ -19,8 +20,7 @@
                     mcPlacement="bottom">
                     <input mcInput formControlName="start" (input)="onInput($event, startTooltip, 'start')">
 
-                    <mc-hint class="mc-caption docs-hint"
-                             *ngIf="compositeFormGroup.controls.start.invalid">
+                    <mc-hint *ngIf="compositeFormGroup.controls.start.invalid">
                         IP-адрес не соответствует стандартам RFC
                     </mc-hint>
 
@@ -28,9 +28,10 @@
                 </mc-form-field>
             </div>
 
-            <div class="docs-column">
-                <div class="mc-caption docs-label">Окончание</div>
+            <div class="mc-form__row">
+                <label class="mc-form__label flex-20">Окончание</label>
                 <mc-form-field
+                    class="mc-form__control"
                     mcTooltip
                     mcTooltipClass="mc-tooltip_warning"
                     [mcTitle]="'Только цифры и точки'"
@@ -40,19 +41,17 @@
                     mcPlacement="bottom">
                     <input mcInput formControlName="end" (input)="onInput($event, endTooltip, 'end')">
 
-                    <mc-hint class="mc-caption docs-hint"
-                             *ngIf="compositeFormGroup.controls.end.invalid">
+                    <mc-hint *ngIf="compositeFormGroup.controls.end.invalid">
                         IP-адрес не соответствует стандартам RFC
                     </mc-hint>
 
                     <mc-cleaner></mc-cleaner>
                 </mc-form-field>
             </div>
-        </div>
 
-        <mc-hint class="mc-caption docs-hint"
-                 *ngIf="compositeFormGroup.errors?.range">
-            IP-адрес окончания диапазона должен быть больше, чем IP-адрес начала
-        </mc-hint>
+            <mc-hint *ngIf="compositeFormGroup.errors?.range">
+                IP-адрес окончания диапазона должен быть больше, чем IP-адрес начала
+            </mc-hint>
+        </div>
     </form>
 </div>
