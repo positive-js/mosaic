@@ -1393,7 +1393,7 @@ describe('McDropdown', () => {
             expect(overlay.querySelectorAll(PANEL_SELECTOR).length).toBe(0, 'Expected no open dropdowns');
         }));
 
-        it('should shift focus between the nested dropdowns', () => {
+        it('should shift focus between the nested dropdowns', fakeAsync(() => {
             compileTestComponent();
             instance.rootTrigger.open();
             fixture.detectChanges();
@@ -1415,16 +1415,18 @@ describe('McDropdown', () => {
 
             instance.levelTwoTrigger.close();
             fixture.detectChanges();
+            flush();
 
             expect(overlay.querySelectorAll(PANEL_SELECTOR)[1].contains(document.activeElement))
                 .toBe(true, 'Expected focus to be back inside the first nested dropdown');
 
             instance.levelOneTrigger.close();
             fixture.detectChanges();
+            flush();
 
             expect(overlay.querySelector(PANEL_SELECTOR)!.contains(document.activeElement))
                 .toBe(true, 'Expected focus to be back inside the root dropdown');
-        });
+        }));
 
         it('should position the nested dropdown to the right edge of the trigger in ltr', () => {
             compileTestComponent();
