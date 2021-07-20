@@ -1,3 +1,13 @@
+## 11.1.2 "Zylonite Reverso" (2021-07-20)
+
+### Mosaic
+
+ * bug fix  **build:** fixed build scss for windows ([df3330f](https://github.com/positive-js/mosaic/commit/df3330f6429eec642f3b49005b64670c0f3d3b20))
+ * bug fix  **dropdown:** Fixed issues with closing and flashing of dropdown by second click (#UIM-664) ([#646](https://github.com/positive-js/mosaic/issues/646)) ([158ad1a](https://github.com/positive-js/mosaic/commit/158ad1acb15f501a51f31a04ac5fd8af1fda48b6)), closes [#UIM-664](https://github.com/positive-js/mosaic/issues/UIM-664) [#UIM-664](https://github.com/positive-js/mosaic/issues/UIM-664)
+ * bug fix  **list:** List option font size (#UIM-658) ([#643](https://github.com/positive-js/mosaic/issues/643)) ([e8515c5](https://github.com/positive-js/mosaic/commit/e8515c50ba2c1ce9cb0962af4e02233d70a8192f)), closes [#UIM-658](https://github.com/positive-js/mosaic/issues/UIM-658)
+ * bug fix  **tabs:** fix types for McTabGroupMixinBase (#UIM-686) ([#647](https://github.com/positive-js/mosaic/issues/647)) ([d710167](https://github.com/positive-js/mosaic/commit/d710167f867c84fad62eb90dc8c72d1865297ec4)), closes [#UIM-686](https://github.com/positive-js/mosaic/issues/UIM-686)
+ * bug fix  **vertical-navbar:** get color in dev example ([492648f](https://github.com/positive-js/mosaic/commit/492648f1f1ea4ca83f3d487fd42c7a9e98b95597))
+
 ## 11.1.1 "Hardened Flares" (2021-06-29)
 
 ### Mosaic
