@@ -297,22 +297,30 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
         if (dropdown instanceof McDropdown) {
             dropdown.resetAnimation();
 
+            // Wait for the exit animation to finish before reseting dropdown toState.
+            const dropdownAnimationDoneSubscription = dropdown.animationDone
+                .pipe(
+                    filter((event) => event.toState === 'void'),
+                    take(1)
+                );
+
             if (dropdown.lazyContent) {
-                // Wait for the exit animation to finish before detaching the content.
-                dropdown.animationDone
+                 dropdownAnimationDoneSubscription
                     .pipe(
-                        filter((event) => event.toState === 'void'),
-                        take(1),
-                        // Interrupt if the content got re-attached.
+                        // Interrupt if the lazy content got re-attached.
                         takeUntil(dropdown.lazyContent.attached)
-                    )
-                    .subscribe({next: () => dropdown.lazyContent.detach(), error: undefined, complete: () => {
-                        // No matter whether the content got re-attached, reset the dropdown.
-                        this.reset();
-                    }});
-            } else {
-                this.reset();
+                    );
             }
+
+            dropdownAnimationDoneSubscription
+                .subscribe({
+                    // If lazy content has attached we're need to detach it.
+                    next: dropdown.lazyContent ? () => dropdown.lazyContent.detach() : undefined,
+                    error: undefined,
+                    complete: () => {
+                        this.reset();
+                    }
+                });
         } else {
             this.reset();
 
