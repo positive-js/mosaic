@@ -1,3 +1,7 @@
 .demo-container {
     margin-bottom: 10px;
 }
+
+.mc-vertical-navbar {
+    height: 700px;
+}
