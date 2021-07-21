@@ -7,7 +7,6 @@ require('./transforms/attribute/palette')(StyleDictionary);
 require('./transforms/attribute/prefix')(StyleDictionary);
 require('./transforms/attribute/size')(StyleDictionary);
 
-
 // ==== Include custom filters ====
 require('./filters/palette')(StyleDictionary);
 require('./filters/color')(StyleDictionary);
@@ -52,9 +51,6 @@ module.exports = (themeConfig) => {
         StyleDictionaryExtended.buildAllPlatforms();
     });
 
-
     console.log('\n==============================================');
     console.log('\nBuild completed!');
 }
-
-

@@ -124,7 +124,7 @@
         "build:mosaic-examples": "ng build mosaic-examples",
         "build:schematics": "ng build schematics",
         "build:schematics-test": "ng build schematics-test",
-        "build:tokens:mosaic": "node packages/mosaic/design-tokens/build-tokens.js",
+        "build:tokens:mosaic": "node ./packages/mosaic/design-tokens/build-tokens.js",
         "build:tokens:docs": "node ./packages/docs/scripts/build-tokens.js",
         "build:docs-content": "gulp docs-content",
         "build:highlight": "ts-node --project ./tools/highlight-files/tsconfig.json ./tools/highlight-files/highlight-files.ts",

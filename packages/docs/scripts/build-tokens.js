@@ -1,7 +1,10 @@
+const buildTokens = require('../../mosaic/design-tokens/style-dictionary/build');
+
+
 const mosaicTokensProps = 'packages/mosaic/design-tokens/tokens/properties/**/*.json5';
 const mosaicTokensComponents = 'packages/mosaic/design-tokens/tokens/components/**/*.json5';
 
-require('../../mosaic/design-tokens/style-dictionary/build')([
+buildTokens([
     {
         name: 'default-theme',
         buildPath: [
