@@ -24,6 +24,7 @@ Mosaic components are the building blocks of Positive Technologies applications.
 ## 📖 Documentation
 * [Getting Started Guide][getting-started]
 * [Contributing][contributing]
+* [Design Tokens][design-tokens]
 
 ### Components Docs Site
 Versions of this site are also available for
@@ -32,7 +33,7 @@ Versions of this site are also available for
 - [v8](https://v8.mosaic.ptsecurity.com)
 - [v9](https://v9.mosaic.ptsecurity.com)
 - [v10](https://v10.mosaic.ptsecurity.com/)
-
+- [v11](https://v11.mosaic.ptsecurity.com/)
 
 ## 🚀 Getting started
 
@@ -68,3 +69,4 @@ Thank you to all the people who have already contributed to Mosaic!
 
 [getting-started]: docs/getting-started.md
 [contributing]: docs/guides/00-contributing.md
+[design-tokens]: docs/guides/08-design-tokens.md
