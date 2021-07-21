@@ -90,126 +90,126 @@ $typography-extra-small-text-font-family: Roboto, -apple-system, BlinkMacSystemF
 $typography-extra-small-text-text-transform: null;
 
 $mosaic: (
-    'typography': (
-        'display-1': (
-            'font-size': $typography-display-1-font-size,
-            'line-height': $typography-display-1-line-height,
-            'letter-spacing': $typography-display-1-letter-spacing,
-            'font-weight': $typography-display-1-font-weight,
-            'font-family': $typography-display-1-font-family,
-            'text-transform': $typography-display-1-text-transform
-        ),
-        'display-2': (
-            'font-size': $typography-display-2-font-size,
-            'line-height': $typography-display-2-line-height,
-            'letter-spacing': $typography-display-2-letter-spacing,
-            'font-weight': $typography-display-2-font-weight,
-            'font-family': $typography-display-2-font-family,
-            'text-transform': $typography-display-2-text-transform
-        ),
-        'display-3': (
-            'font-size': $typography-display-3-font-size,
-            'line-height': $typography-display-3-line-height,
-            'letter-spacing': $typography-display-3-letter-spacing,
-            'font-weight': $typography-display-3-font-weight,
-            'font-family': $typography-display-3-font-family,
-            'text-transform': $typography-display-3-text-transform
-        ),
-        'headline': (
-            'font-size': $typography-headline-font-size,
-            'line-height': $typography-headline-line-height,
-            'letter-spacing': $typography-headline-letter-spacing,
-            'font-weight': $typography-headline-font-weight,
-            'font-family': $typography-headline-font-family,
-            'text-transform': $typography-headline-text-transform
-        ),
-        'title': (
-            'font-size': $typography-title-font-size,
-            'line-height': $typography-title-line-height,
-            'letter-spacing': $typography-title-letter-spacing,
-            'font-weight': $typography-title-font-weight,
-            'font-family': $typography-title-font-family,
-            'text-transform': $typography-title-text-transform
-        ),
-        'subheading': (
-            'font-size': $typography-subheading-font-size,
-            'line-height': $typography-subheading-line-height,
-            'letter-spacing': $typography-subheading-letter-spacing,
-            'font-weight': $typography-subheading-font-weight,
-            'font-family': $typography-subheading-font-family,
-            'text-transform': $typography-subheading-text-transform
-        ),
-        'body': (
-            'font-size': $typography-body-font-size,
-            'line-height': $typography-body-line-height,
-            'letter-spacing': $typography-body-letter-spacing,
-            'font-weight': $typography-body-font-weight,
-            'font-family': $typography-body-font-family,
-            'text-transform': $typography-body-text-transform
-        ),
-        'body-strong': (
-            'font-size': $typography-body-strong-font-size,
-            'line-height': $typography-body-strong-line-height,
-            'letter-spacing': $typography-body-strong-letter-spacing,
-            'font-weight': $typography-body-strong-font-weight,
-            'font-family': $typography-body-strong-font-family,
-            'text-transform': $typography-body-strong-text-transform
-        ),
-        'body-caps': (
-            'font-size': $typography-body-caps-font-size,
-            'line-height': $typography-body-caps-line-height,
-            'letter-spacing': $typography-body-caps-letter-spacing,
-            'font-weight': $typography-body-caps-font-weight,
-            'font-family': $typography-body-caps-font-family,
-            'text-transform': $typography-body-caps-text-transform
-        ),
-        'body-mono': (
-            'font-size': $typography-body-mono-font-size,
-            'line-height': $typography-body-mono-line-height,
-            'letter-spacing': $typography-body-mono-letter-spacing,
-            'font-weight': $typography-body-mono-font-weight,
-            'font-family': $typography-body-mono-font-family,
-            'text-transform': $typography-body-mono-text-transform
-        ),
-        'caption': (
-            'font-size': $typography-caption-font-size,
-            'line-height': $typography-caption-line-height,
-            'letter-spacing': $typography-caption-letter-spacing,
-            'font-weight': $typography-caption-font-weight,
-            'font-family': $typography-caption-font-family,
-            'text-transform': $typography-caption-text-transform
-        ),
-        'caption-caps': (
-            'font-size': $typography-caption-caps-font-size,
-            'line-height': $typography-caption-caps-line-height,
-            'letter-spacing': $typography-caption-caps-letter-spacing,
-            'font-weight': $typography-caption-caps-font-weight,
-            'font-family': $typography-caption-caps-font-family,
-            'text-transform': $typography-caption-caps-text-transform
-        ),
-        'caption-mono': (
-            'font-size': $typography-caption-mono-font-size,
-            'line-height': $typography-caption-mono-line-height,
-            'letter-spacing': $typography-caption-mono-letter-spacing,
-            'font-weight': $typography-caption-mono-font-weight,
-            'font-family': $typography-caption-mono-font-family,
-            'text-transform': $typography-caption-mono-text-transform
-        ),
-        'small-text': (
-            'font-size': $typography-small-text-font-size,
-            'line-height': $typography-small-text-line-height,
-            'letter-spacing': $typography-small-text-letter-spacing,
-            'font-weight': $typography-small-text-font-weight,
-            'font-family': $typography-small-text-font-family,
-            'text-transform': $typography-small-text-text-transform
-        ),
-        'extra-small-text': (
-            'font-size': $typography-extra-small-text-font-size,
-            'line-height': $typography-extra-small-text-line-height,
-            'letter-spacing': $typography-extra-small-text-letter-spacing,
-            'font-weight': $typography-extra-small-text-font-weight,
-            'font-family': $typography-extra-small-text-font-family,
-            'text-transform': $typography-extra-small-text-text-transform
-        )
+  'typography': (
+    'display-1': (
+      'font-size': $typography-display-1-font-size,
+      'line-height': $typography-display-1-line-height,
+      'letter-spacing': $typography-display-1-letter-spacing,
+      'font-weight': $typography-display-1-font-weight,
+      'font-family': $typography-display-1-font-family,
+      'text-transform': $typography-display-1-text-transform
+    ),
+    'display-2': (
+      'font-size': $typography-display-2-font-size,
+      'line-height': $typography-display-2-line-height,
+      'letter-spacing': $typography-display-2-letter-spacing,
+      'font-weight': $typography-display-2-font-weight,
+      'font-family': $typography-display-2-font-family,
+      'text-transform': $typography-display-2-text-transform
+    ),
+    'display-3': (
+      'font-size': $typography-display-3-font-size,
+      'line-height': $typography-display-3-line-height,
+      'letter-spacing': $typography-display-3-letter-spacing,
+      'font-weight': $typography-display-3-font-weight,
+      'font-family': $typography-display-3-font-family,
+      'text-transform': $typography-display-3-text-transform
+    ),
+    'headline': (
+      'font-size': $typography-headline-font-size,
+      'line-height': $typography-headline-line-height,
+      'letter-spacing': $typography-headline-letter-spacing,
+      'font-weight': $typography-headline-font-weight,
+      'font-family': $typography-headline-font-family,
+      'text-transform': $typography-headline-text-transform
+    ),
+    'title': (
+      'font-size': $typography-title-font-size,
+      'line-height': $typography-title-line-height,
+      'letter-spacing': $typography-title-letter-spacing,
+      'font-weight': $typography-title-font-weight,
+      'font-family': $typography-title-font-family,
+      'text-transform': $typography-title-text-transform
+    ),
+    'subheading': (
+      'font-size': $typography-subheading-font-size,
+      'line-height': $typography-subheading-line-height,
+      'letter-spacing': $typography-subheading-letter-spacing,
+      'font-weight': $typography-subheading-font-weight,
+      'font-family': $typography-subheading-font-family,
+      'text-transform': $typography-subheading-text-transform
+    ),
+    'body': (
+      'font-size': $typography-body-font-size,
+      'line-height': $typography-body-line-height,
+      'letter-spacing': $typography-body-letter-spacing,
+      'font-weight': $typography-body-font-weight,
+      'font-family': $typography-body-font-family,
+      'text-transform': $typography-body-text-transform
+    ),
+    'body-strong': (
+      'font-size': $typography-body-strong-font-size,
+      'line-height': $typography-body-strong-line-height,
+      'letter-spacing': $typography-body-strong-letter-spacing,
+      'font-weight': $typography-body-strong-font-weight,
+      'font-family': $typography-body-strong-font-family,
+      'text-transform': $typography-body-strong-text-transform
+    ),
+    'body-caps': (
+      'font-size': $typography-body-caps-font-size,
+      'line-height': $typography-body-caps-line-height,
+      'letter-spacing': $typography-body-caps-letter-spacing,
+      'font-weight': $typography-body-caps-font-weight,
+      'font-family': $typography-body-caps-font-family,
+      'text-transform': $typography-body-caps-text-transform
+    ),
+    'body-mono': (
+      'font-size': $typography-body-mono-font-size,
+      'line-height': $typography-body-mono-line-height,
+      'letter-spacing': $typography-body-mono-letter-spacing,
+      'font-weight': $typography-body-mono-font-weight,
+      'font-family': $typography-body-mono-font-family,
+      'text-transform': $typography-body-mono-text-transform
+    ),
+    'caption': (
+      'font-size': $typography-caption-font-size,
+      'line-height': $typography-caption-line-height,
+      'letter-spacing': $typography-caption-letter-spacing,
+      'font-weight': $typography-caption-font-weight,
+      'font-family': $typography-caption-font-family,
+      'text-transform': $typography-caption-text-transform
+    ),
+    'caption-caps': (
+      'font-size': $typography-caption-caps-font-size,
+      'line-height': $typography-caption-caps-line-height,
+      'letter-spacing': $typography-caption-caps-letter-spacing,
+      'font-weight': $typography-caption-caps-font-weight,
+      'font-family': $typography-caption-caps-font-family,
+      'text-transform': $typography-caption-caps-text-transform
+    ),
+    'caption-mono': (
+      'font-size': $typography-caption-mono-font-size,
+      'line-height': $typography-caption-mono-line-height,
+      'letter-spacing': $typography-caption-mono-letter-spacing,
+      'font-weight': $typography-caption-mono-font-weight,
+      'font-family': $typography-caption-mono-font-family,
+      'text-transform': $typography-caption-mono-text-transform
+    ),
+    'small-text': (
+      'font-size': $typography-small-text-font-size,
+      'line-height': $typography-small-text-line-height,
+      'letter-spacing': $typography-small-text-letter-spacing,
+      'font-weight': $typography-small-text-font-weight,
+      'font-family': $typography-small-text-font-family,
+      'text-transform': $typography-small-text-text-transform
+    ),
+    'extra-small-text': (
+      'font-size': $typography-extra-small-text-font-size,
+      'line-height': $typography-extra-small-text-line-height,
+      'letter-spacing': $typography-extra-small-text-letter-spacing,
+      'font-weight': $typography-extra-small-text-font-weight,
+      'font-family': $typography-extra-small-text-font-family,
+      'text-transform': $typography-extra-small-text-text-transform
     )
+  )
 );
