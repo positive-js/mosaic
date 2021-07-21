@@ -42,6 +42,9 @@
     }
 
     & .mc-navbar-title {
+        display: flex;
+        align-items: center;
+
         height: var(--mc-navbar-item-size-height, $navbar-item-size-height);
 
         padding-left: 0;

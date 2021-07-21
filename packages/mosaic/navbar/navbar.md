@@ -1,4 +1,4 @@
 <!-- example(navbar-overview) -->
 
-### Vertical NavBar
+### Vertical Navbar
 <!-- example(navbar-vertical) -->

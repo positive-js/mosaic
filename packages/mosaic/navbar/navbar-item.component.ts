@@ -17,7 +17,7 @@ import { McIcon } from '@ptsecurity/mosaic/icon';
 
 
 @Directive({
-    selector: 'mc-navbar-logo',
+    selector: 'mc-navbar-logo, [mc-navbar-logo]',
     host: {
         class: 'mc-navbar-logo'
     }
@@ -26,7 +26,7 @@ export class McNavbarLogo {}
 
 
 @Directive({
-    selector: 'mc-navbar-title',
+    selector: 'mc-navbar-title, [mc-navbar-title]',
     host: {
         class: 'mc-navbar-title'
     }
@@ -53,7 +53,7 @@ export class McNavbarTitle implements AfterContentInit {
 
 
 @Directive({
-    selector: 'mc-navbar-brand',
+    selector: 'mc-navbar-brand, [mc-navbar-brand]',
     host: {
         class: 'mc-navbar-brand'
     }
