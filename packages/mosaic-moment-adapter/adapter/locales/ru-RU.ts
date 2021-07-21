@@ -3,10 +3,10 @@ import { DateAdapterConfig } from '@ptsecurity/cdk/datetime';
 
 export const ruRU: DateAdapterConfig = {
     variables: {
-        SECONDS: 's',
+        SECONDS: 'ss',
         MILLISECONDS: ',SSS',
         MICROSECONDS: ',SSSSSS',
-        MINUTES: 'm',
+        MINUTES: 'mm',
         TIME: 'HH:mm',
 
         DAY: 'D',

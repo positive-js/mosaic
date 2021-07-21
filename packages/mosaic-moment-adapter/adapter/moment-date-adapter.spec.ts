@@ -718,6 +718,13 @@ describe('MomentDateAdapter formatter', () => {
                         date.format(`${DAY_SHORT_MONTH}, ${TIME}:${SECONDS}${MILLISECONDS}`)
                     );
                 });
+
+                it('absoluteShortDateTime (with lead zeros in minutes and seconds) with milliseconds', () => {
+                    const date = moment({ minutes: 1, seconds: 1 });
+                    expect(adapter.absoluteShortDateTime(date, { milliseconds: true })).toBe(
+                        date.format(`${DAY_SHORT_MONTH}, ${TIME}:${SECONDS}${MILLISECONDS}`)
+                    );
+                });
             });
 
             describe('Absolute long (absoluteLongDate/Time method)', () => {
@@ -745,6 +752,12 @@ describe('MomentDateAdapter formatter', () => {
 
                 it('absoluteLongDateTime with milliseconds', () => {
                     const date = moment();
+                    expect(adapter.absoluteLongDateTime(date, { milliseconds: true }))
+                        .toBe(date.format(`${DAY_MONTH}, ${TIME}:${SECONDS}${MILLISECONDS}`));
+                });
+
+                it('absoluteLongDateTime (with lead zeros in minutes and seconds) with milliseconds', () => {
+                    const date = moment({ minutes: 1, seconds: 1 });
                     expect(adapter.absoluteLongDateTime(date, { milliseconds: true }))
                         .toBe(date.format(`${DAY_MONTH}, ${TIME}:${SECONDS}${MILLISECONDS}`));
                 });
@@ -1397,6 +1410,13 @@ describe('MomentDateAdapter formatter', () => {
                         date.format(`${DAY_SHORT_MONTH}, ${TIME}:${SECONDS}${MILLISECONDS}`)
                     );
                 });
+
+                it('absoluteShortDateTime (with lead zeros in minutes and seconds) with milliseconds', () => {
+                    const date = moment({ minutes: 1, seconds: 1 });
+                    expect(adapter.absoluteShortDateTime(date, { milliseconds: true })).toBe(
+                        date.format(`${DAY_SHORT_MONTH}, ${TIME}:${SECONDS}${MILLISECONDS}`)
+                    );
+                });
             });
 
             describe('Absolute long (absoluteLongDate/Time method)', () => {
@@ -1424,6 +1444,12 @@ describe('MomentDateAdapter formatter', () => {
 
                 it('absoluteLongDateTime with milliseconds', () => {
                     const date = moment();
+                    expect(adapter.absoluteLongDateTime(date, { milliseconds: true }))
+                        .toBe(date.format(`${DAY_MONTH}, ${TIME}:${SECONDS}${MILLISECONDS}`));
+                });
+
+                it('absoluteLongDateTime (with lead zeros in minutes and seconds) with milliseconds', () => {
+                    const date = moment({ minutes: 1, seconds: 1 });
                     expect(adapter.absoluteLongDateTime(date, { milliseconds: true }))
                         .toBe(date.format(`${DAY_MONTH}, ${TIME}:${SECONDS}${MILLISECONDS}`));
                 });
