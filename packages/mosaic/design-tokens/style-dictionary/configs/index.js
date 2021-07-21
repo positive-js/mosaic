@@ -23,11 +23,7 @@ function filterOptions(platforms) {
 }
 
 function getSources(theme) {
-    // Example
-    // [
-    //         `packages/design-tokens/tokens/${theme}/properties/**/*.json5`,
-    //         `packages/design-tokens/tokens/${theme}/components/**/*.json5`
-    //     ];
+
     return theme.buildPath;
 }
 
@@ -41,11 +37,11 @@ function getConfigs(theme) {
 }
 
 module.exports = (theme) => {
-    const sources = [
-        ...getSources(theme)
-    ];
+
     return {
-        source: sources,
+        source: [
+            ...getSources(theme)
+        ],
         platforms: getConfigs(theme)
     };
 };

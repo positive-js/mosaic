@@ -15,7 +15,8 @@ require('../../mosaic/design-tokens/style-dictionary/build')([
         buildPath: [
             mosaicTokensProps,
             `packages/docs/src/styles/green-theme/properties/**/*.json5`,
-            mosaicTokensComponents
+            mosaicTokensComponents,
+            `packages/docs/src/styles/green-theme/components/**/*.json5`,
         ],
         outputPath: 'packages/docs/src/styles/green-theme/'
     },
