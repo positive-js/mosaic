@@ -1,21 +1,23 @@
-<div class="docs-margin docs-width">
-    <div class="docs-row">
-        <div class="mc-caption docs-label">IP-адрес</div>
-        <mc-form-field>
-            <input mcInput [formControl]="ipAddress">
-            <mc-hint class="mc-caption docs-hint" *ngIf="ipAddress.invalid">IP-адрес не соответствует стандартам RFC</mc-hint>
+<div class="docs-width mc-form-vertical">
+    <div class="mc-form__fieldset">
+        <div class="mc-form__row">
+            <div class="mc-form__label">IP-адрес</div>
+            <mc-form-field class="mc-form__control">
+                <input mcInput [formControl]="ipAddress">
+                <mc-hint *ngIf="ipAddress.invalid">IP-адрес не соответствует стандартам RFC</mc-hint>
 
-            <mc-cleaner></mc-cleaner>
-        </mc-form-field>
-    </div>
+                <mc-cleaner></mc-cleaner>
+            </mc-form-field>
+        </div>
 
-    <div class="docs-row">
-        <div class="mc-caption docs-label">Частота обновлений (часы)</div>
-        <mc-form-field>
-            <input type="number" mcInput [formControl]="frequency">
-            <mc-hint class="mc-caption">Введите значение от 1 до 24</mc-hint>
-            <mc-hint class="mc-caption docs-hint" *ngIf="frequency.errors?.min">Минимальное значение: 1 час</mc-hint>
-            <mc-hint class="mc-caption docs-hint" *ngIf="frequency.errors?.max">Максимальное значение: 24 часа</mc-hint>
-        </mc-form-field>
+        <div class="mc-form__row">
+            <div class="mc-form__label">Частота обновлений (часы)</div>
+            <mc-form-field class="mc-form__control">
+                <input type="number" mcInput [formControl]="frequency">
+                <mc-hint>Введите значение от 1 до 24</mc-hint>
+                <mc-hint *ngIf="frequency.errors?.min">Минимальное значение: 1 час</mc-hint>
+                <mc-hint *ngIf="frequency.errors?.max">Максимальное значение: 24 часа</mc-hint>
+            </mc-form-field>
+        </div>
     </div>
 </div>

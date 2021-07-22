@@ -2,33 +2,41 @@
     <div class="mc-alert mc-alert_error" *ngIf="showServerErrors">
         <i mc-icon="mc-info_16" [color]="'error'" class="mc-alert__icon"></i>
         <div class="mc-body">
-            <div class="mc-subheading docs-subheading"><b>Не удается получить ответ от сервера</b></div>
+            <div class="mc-subheading"><b>Не удается получить ответ от сервера</b></div>
             При попытке отправить данные сервер не ответил, попробуйте снова
         </div>
     </div>
 
-    <form [formGroup]="globalErrorForm" (ngSubmit)="submitGlobalErrorForm()" novalidate>
-        <div class="docs-row">
-            <div class="mc-caption docs-label">Имя</div>
-            <mc-form-field>
-                <input mcInput formControlName="firstName">
-            </mc-form-field>
-        </div>
+    <form class="mc-form-vertical"
+          [formGroup]="globalErrorForm"
+          (ngSubmit)="submitGlobalErrorForm()"
+          novalidate>
 
-        <div class="docs-row">
-            <div class="mc-caption docs-label">Фамилия</div>
-            <mc-form-field>
-                <input mcInput formControlName="lastName">
-            </mc-form-field>
-        </div>
+        <div class="mc-form__fieldset">
+            <div class="mc-form__row">
+                <div class="mc-form__label">Имя</div>
+                <mc-form-field class="mc-form__control">
+                    <input mcInput formControlName="firstName">
+                </mc-form-field>
+            </div>
 
-        <button
-            mc-button
-            [color]="'primary'"
-            type="submit"
-            [class.mc-progress]="inProgress"
-            [disabled]="inProgress">
-            Отправить
-        </button>
+            <div class="mc-form__row">
+                <div class="mc-form__label">Фамилия</div>
+                <mc-form-field class="mc-form__control">
+                    <input mcInput formControlName="lastName">
+                </mc-form-field>
+            </div>
+
+            <div class="mc-form__row">
+                <button class="flex-40"
+                        mc-button
+                        [color]="'primary'"
+                        type="submit"
+                        [class.mc-progress]="inProgress"
+                        [disabled]="inProgress">
+                    Отправить
+                </button>
+            </div>
+        </div>
     </form>
 </div>
