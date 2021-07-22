@@ -4,7 +4,8 @@
             "entryFile": "index.ts",
             "umdModuleIds": {
                 "@ptsecurity/mosaic/navbar": "pt.mc.navbar",
-                "@ptsecurity/mosaic/icon": "pt.mc.icon"
+                "@ptsecurity/mosaic/icon": "pt.mc.icon",
+                "@ptsecurity/mosaic/button": "pt.mc.button"
             }
         }
     }

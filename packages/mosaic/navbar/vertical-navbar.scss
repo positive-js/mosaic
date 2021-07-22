@@ -1,0 +1,20 @@
+@import '../design-tokens/tokens';
+
+
+.mc-vertical-navbar {
+    display: flex;
+    flex-direction: column;
+
+    & .mc-navbar-container {
+        flex-direction: column;
+        align-items: unset;
+    }
+
+    &.mc-opened {
+        width: var(--mc-vertical-navbar-size-states-opened-width, $vertical-navbar-size-states-opened-width);
+    }
+
+    &.mc-closed {
+        width: var(--mc-vertical-navbar-size-states-closed-width, $vertical-navbar-size-states-closed-width);
+    }
+}

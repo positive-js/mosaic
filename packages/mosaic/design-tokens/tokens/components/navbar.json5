@@ -2,20 +2,28 @@
     navbar: {
         'light-color-scheme': {
             background: { value: '{light-color-scheme.primary.palette.value.700.value}' },
-            text: { value: '{light-color-scheme.primary.palette.value.100.value}' },
-            opacity: { value: 0.5 }
+
+            'divider-background': { value: 'rgba(255, 255, 255, 0.3)' }
         },
         'dark-color-scheme': {
             background: { value: '{dark-color-scheme.primary.palette.value.700.value}' },
-            text: { value: '{dark-color-scheme.primary.palette.value.100.value}' },
-            opacity: { value: 0.5 }
+
+            'divider-background': { value: 'rgba(255, 255, 255, 0.3)' }
         },
         size: {
-            height: { value: '{size.panel-height}' },
-            'icon-margin': { value: '{margin.iconText_M-horizontal}' }
+            'icon-margin': { value: '4px' }
         },
         font: {
             title: { value: 'body' }
+        }
+    },
+    'vertical-navbar': {
+        size: {
+            states: {
+                'opened-width': { value: '240px' },
+                'closed-width': { value: '48px' }
+            },
+            'icon-margin': { value: '10px' }
         }
     },
     'navbar-item': {
@@ -23,9 +31,9 @@
             text: { value: '{light-color-scheme.primary.palette.value.100.value}' },
 
             states: {
-                active: { value: 'lighten({light-color-scheme.primary.palette.value.600.value}, 5%)' },
-                hover: { value: 'lighten({light-color-scheme.primary.palette.value.600.value}, 5%)' },
-                progress: { value: 'lighten({light-color-scheme.primary.palette.value.800.value}, 5%)' },
+                active: { value: '{light-color-scheme.primary.palette.value.600.value}' },
+                hover: { value: '{light-color-scheme.primary.palette.value.600.value}' },
+                progress: { value: '{light-color-scheme.primary.palette.value.800.value}' },
                 'disabled-opacity': { value: 0.3 }
             }
         },
@@ -33,14 +41,15 @@
             text: { value: '{dark-color-scheme.primary.palette.value.100.value}' },
 
             states: {
-                active: { value: 'lighten({dark-color-scheme.primary.palette.value.700.value}, 5%)' },
-                hover: { value: 'lighten({dark-color-scheme.primary.palette.value.700.value}, 5%)' },
-                progress: { value: 'lighten({dark-color-scheme.primary.palette.value.800.value}, 15%)' },
+                active: { value: '{dark-color-scheme.primary.palette.value.700.value}' },
+                hover: { value: '{dark-color-scheme.primary.palette.value.700.value}' },
+                progress: { value: '{dark-color-scheme.primary.palette.value.800.value}' },
                 'disabled-opacity': { value: 0.3 }
             }
         },
         size: {
-            padding: { value: '{padding.control-horizontal}' }
+            padding: { value: '{padding.control-horizontal}' },
+            height: { value: '{size.panel-height}' }
         }
     },
     'navbar-brand': {

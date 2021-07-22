@@ -1,9 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { fakeAsync, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { McIconModule } from './../icon/icon.module';
-import { McNavbarModule, McNavbar } from './index';
+import { McNavbarModule, McNavbarItem } from './index';
 
 
 const FONT_RENDER_TIMEOUT_MS = 10;
@@ -28,7 +28,7 @@ describe('McNavbar', () => {
         setTimeout(
             () => {
                 fixture.detectChanges();
-                const collapsedElements = fixture.debugElement.queryAll(By.css('.mc-navbar-collapsed-title'));
+                const collapsedElements = fixture.debugElement.queryAll(By.css('.mc-navbar-item_collapsed'));
 
                 expect(collapsedElements.length).toBeGreaterThan(0);
                 done();
@@ -49,7 +49,7 @@ describe('McNavbar', () => {
 
                 const items = fixture.debugElement.queryAll(By.css('mc-navbar-item'));
                 const collapsedElements = items.filter((item) =>
-                    item.nativeElement.querySelectorAll('.mc-navbar-collapsed-title').length > 0);
+                    item.nativeElement.querySelectorAll('.mc-navbar-item_collapsed').length > 0);
 
                 const hasTitle = collapsedElements.reduce((acc, el) => acc && el.nativeElement.hasAttribute('title'), true);
 
@@ -69,13 +69,11 @@ describe('McNavbar', () => {
             () => {
                 fixture.detectChanges();
 
-                const items = fixture.debugElement.queryAll(By.css('mc-navbar-item'));
-                const collapsedElements = items.filter((item) =>
-                    item.nativeElement.querySelectorAll('.mc-navbar-collapsed-title').length > 0);
-
+                const collapsedElements = fixture.debugElement.queryAll(By.css('.mc-navbar-item_collapsed'));
                 const elementWithCustomTitle = collapsedElements[collapsedElements.length - 1];
 
-                expect(elementWithCustomTitle.nativeElement.getAttribute('title')).toBe('customTitle');
+                expect(elementWithCustomTitle.nativeElement.getAttribute('title'))
+                    .toBe('customTitle');
 
                 done();
             },
@@ -91,7 +89,7 @@ describe('McNavbar', () => {
 
         fixture.detectChanges();
 
-        const notDisabledItem = fixture.debugElement.query(By.css('mc-navbar-item:not([disabled])'));
+        const notDisabledItem = fixture.debugElement.query(By.css('.mc-navbar-item:not([disabled])'));
 
         notDisabledItem.nativeElement.click();
 
@@ -103,13 +101,13 @@ describe('McNavbar', () => {
     it('items should not allow click if disable', () => {
         const fixture = TestBed.createComponent(TestApp);
         const testComponent = fixture.debugElement.componentInstance;
-
         fixture.detectChanges();
 
-        const notDisabledItem = fixture.debugElement.query(By.css('mc-navbar-item[disabled]'));
+        const disabledItem = fixture.debugElement.query(By.css('.mc-navbar-item[disabled]'));
 
-        notDisabledItem.nativeElement.click();
+        expect(testComponent.counter).toBe(0);
 
+        disabledItem.nativeElement.click();
         fixture.detectChanges();
 
         expect(testComponent.counter).toBe(0);
@@ -121,13 +119,12 @@ describe('McNavbar', () => {
     templateUrl: './navbar.component.spec.html'
 })
 class TestApp {
-    @ViewChild('navbar', {static: false})
-    navbar: McNavbar;
-
     counter: number = 0;
     navbarContainerWidth: number = 915;
 
-    onItemClick() {
+    onItemClick(disabledItem?: McNavbarItem) {
+        if (disabledItem?.disabled) { return; }
+
         this.counter++;
     }
 }

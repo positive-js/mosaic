@@ -32,7 +32,7 @@ $typography: mc-typography-config();
 @include mc-footer-typography($typography);
 @include mc-sidenav-typography($typography);
 @include mc-anchors-typography($typography);
-@include mc-navbar-typography($typography);
+@include mc-docs-navbar-typography($typography);
 @include docs-markdown-typography($typography);
 @include example-viewer-typography($typography);
 

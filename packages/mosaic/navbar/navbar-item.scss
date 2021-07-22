@@ -1,0 +1,105 @@
+@import '../design-tokens/tokens';
+
+
+.mc-navbar-title {
+    display: inline-block;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.mc-navbar-item {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    height: var(--mc-navbar-item-size-height, $navbar-item-size-height);
+
+    & .mc-icon {
+        min-width: 16px;
+        min-height: 16px;
+    }
+
+    padding-left: var(--mc-navbar-item-size-padding, $navbar-item-size-padding);
+    padding-right: var(--mc-navbar-item-size-padding, $navbar-item-size-padding);
+}
+
+.mc-navbar-item.mc-vertical {
+    & .mc-navbar-title {
+        padding-left: 26px;
+    }
+
+    & .mc-icon + .mc-navbar-title,
+    & .mc-navbar-title + .mc-icon {
+        padding-left: var(--mc-vertical-navbar-size-icon-margin, $vertical-navbar-size-icon-margin);
+    }
+
+    & .mc-badge {
+        position: absolute;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &.mc-opened {
+        & .mc-badge {
+            right: 16px;
+
+            height: 24px;
+
+            padding-right: 7px;
+            padding-left: 7px;
+        }
+    }
+
+    &.mc-closed {
+        & .mc-badge {
+            top: 8px;
+            right: 8px;
+
+            height: 16px;
+
+            padding-right: 4px;
+            padding-left: 4px;
+        }
+
+        & .mc-navbar-title {
+            display: none;
+        }
+
+        &.mc-navbar-item_button {
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+    }
+}
+
+.mc-navbar-item.mc-horizontal {
+    & .mc-icon + .mc-navbar-title,
+    & .mc-navbar-title + .mc-icon {
+        padding-left: var(--mc-navbar-size-icon-margin, $navbar-size-icon-margin)
+    }
+
+    &.mc-navbar-item_collapsed .mc-navbar-title {
+        display: none;
+    }
+}
+
+.mc-navbar-item.mc-navbar-item_button .mc-icon-button {
+    flex: 1;
+
+    & .mc-button-wrapper {
+        justify-content: center;
+
+        & .mc-icon.mc-icon_left {
+            margin-left: unset;
+        }
+
+        & .mc-icon.mc-icon_right {
+            margin-right: unset;
+        }
+    }
+}

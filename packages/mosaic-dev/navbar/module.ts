@@ -2,10 +2,11 @@ import { Component, NgModule, ViewChild, ViewEncapsulation } from '@angular/core
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McDropdownModule } from '@ptsecurity/mosaic/dropdown';
 
 import { McIconModule } from '../../mosaic/icon';
-import { McNavbarModule, McNavbar } from '../../mosaic/navbar';
+import { McNavbarModule, McNavbar, McNavbarItem } from '../../mosaic/navbar';
 
 
 @Component({
@@ -16,8 +17,7 @@ import { McNavbarModule, McNavbar } from '../../mosaic/navbar';
 })
 export class NavbarDemoComponent {
 
-    @ViewChild('navbar', {static: false})
-    navbar: McNavbar;
+    @ViewChild('verticalNavbar', {static: false}) navbar: McNavbar;
 
     readonly minNavbarWidth: number = 940;
 
@@ -26,9 +26,8 @@ export class NavbarDemoComponent {
     }
 
     set collapsedNavbarWidth(value: number) {
-        if (value < this.minNavbarWidth) {
-            return;
-        }
+        if (value < this.minNavbarWidth) { return; }
+
         this._collapsedNavbarWidth = value;
     }
 
@@ -38,26 +37,25 @@ export class NavbarDemoComponent {
         this.navbar.updateCollapsed();
     }
 
-    onItemClick(event: MouseEvent) {
+    onItemClick(event: MouseEvent, disabledItem?: McNavbarItem) {
+        if (disabledItem?.disabled) { return; }
+
         alert(`innerText: ${(<HTMLElement> event.target).innerText}`);
     }
 }
 
 
 @NgModule({
-    declarations: [
-        NavbarDemoComponent
-    ],
+    declarations: [NavbarDemoComponent],
     imports: [
-        BrowserAnimationsModule,
         BrowserModule,
+        BrowserAnimationsModule,
         McNavbarModule,
         McIconModule,
+        McButtonModule,
         FormsModule,
         McDropdownModule
     ],
-    bootstrap: [
-        NavbarDemoComponent
-    ]
+    bootstrap: [NavbarDemoComponent]
 })
 export class DemoModule {}
