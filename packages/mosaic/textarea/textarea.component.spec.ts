@@ -1,8 +1,8 @@
-import { Component, Provider, Type } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, ComponentFixtureAutoDetect, tick } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
+import { Component, Provider, Type, ViewChild } from '@angular/core';
+import { ComponentFixture, fakeAsync, TestBed, ComponentFixtureAutoDetect, tick, flush } from '@angular/core/testing';
+import { FormsModule, NgForm } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { dispatchFakeEvent } from '@ptsecurity/cdk/testing';
+import { createMouseEvent, dispatchEvent, dispatchFakeEvent } from '@ptsecurity/cdk/testing';
 import { McFormField, McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 
@@ -38,11 +38,29 @@ function createComponent<T>(component: Type<T>,
 @Component({
     template: `
         <mc-form-field>
-            <textarea mcTextarea [(ngModel)]="value" required minlength="4"></textarea>
+            <textarea mcTextarea [(ngModel)]="value" required></textarea>
         </mc-form-field>
     `
 })
 class McTextareaInvalid {
+    value: string = '';
+}
+
+@Component({
+    template: `
+        <form #form="ngForm">
+            <mc-form-field>
+                <textarea mcTextarea [(ngModel)]="value" name="control" required>
+                </textarea>
+            </mc-form-field>
+
+            <button type="submit"></button>
+        </form>
+    `
+})
+class McFormFieldWithNgModelInForm {
+    @ViewChild('form', { static: false }) form: NgForm;
+
     value: string = '';
 }
 
@@ -157,34 +175,38 @@ describe('McTextarea', () => {
             expect(textareaElement.classList).toContain('mc-textarea_monospace');
         });
 
-        it('should has invalid state', fakeAsync(() => {
+        it('should run validation (required)', () => {
             const fixture = createComponent(McTextareaInvalid);
             fixture.detectChanges();
 
-            tick();
-
-            const formFieldElement =
-                fixture.debugElement.query(By.directive(McFormField)).nativeElement;
-            const textareaElementDebug = fixture.debugElement.query(By.directive(McTextarea));
-            const textareaElement = textareaElementDebug.nativeElement;
-
-            expect(formFieldElement.classList.contains('ng-invalid'))
-                .toBe(true);
-
-            textareaElement.value = 'four';
-            dispatchFakeEvent(textareaElement, 'input');
-
-            fixture.detectChanges();
-
-            expect(formFieldElement.classList.contains('ng-invalid')).toBe(false);
-
-            textareaElement.value = '';
-            dispatchFakeEvent(textareaElement, 'input');
-
-            fixture.detectChanges();
-
+            const formFieldElement = fixture.debugElement.query(By.directive(McFormField)).nativeElement;
             expect(formFieldElement.classList.contains('ng-invalid')).toBe(true);
-        }));
+        });
+
+        describe('in form', () => {
+            it('should not run validation (required)', () => {
+                const fixture = createComponent(McFormFieldWithNgModelInForm);
+                fixture.detectChanges();
+
+                const formFieldElement = fixture.debugElement.query(By.directive(McFormField)).nativeElement;
+                expect(formFieldElement.classList.contains('ng-valid')).toBe(true);
+            });
+
+            it('should run validation after submit (required)', fakeAsync(() => {
+                const fixture = createComponent(McFormFieldWithNgModelInForm);
+                fixture.detectChanges();
+
+                const formFieldElement = fixture.debugElement.query(By.directive(McFormField)).nativeElement;
+                const submitButton = fixture.debugElement.query(By.css('button')).nativeElement;
+
+                expect(formFieldElement.classList.contains('ng-valid')).toBe(true);
+
+                const event = createMouseEvent('click');
+                dispatchEvent(submitButton, event);
+                flush();
+                expect(formFieldElement.classList.contains('ng-invalid')).toBe(true);
+            }));
+        });
 
         it('should be without borders', () => {
             const fixture = createComponent(McFormFieldWithoutBorders, [

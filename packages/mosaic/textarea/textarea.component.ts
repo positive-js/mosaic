@@ -5,7 +5,7 @@ import {
     Self, InjectionToken, NgZone, OnInit,
     AfterContentInit
 } from '@angular/core';
-import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
+import { FormGroupDirective, NG_VALIDATORS, NgControl, NgForm, NgModel, Validator } from '@angular/forms';
 import {
     CanUpdateErrorState,
     CanUpdateErrorStateCtor,
@@ -167,7 +167,9 @@ export class McTextarea extends McTextareaMixinBase implements McFormFieldContro
         protected elementRef: ElementRef,
         @Optional() @Self() public ngControl: NgControl,
         @Optional() parentForm: NgForm,
+        @Optional() @Self() @Inject(NG_VALIDATORS) public rawValidators: Validator[],
         @Optional() @Inject(MC_VALIDATION) private mcValidation: McValidationOptions,
+        @Optional() @Self() public ngModel: NgModel,
         @Optional() parentFormGroup: FormGroupDirective,
         defaultErrorStateMatcher: ErrorStateMatcher,
         @Optional() @Self() @Inject(MC_TEXTAREA_VALUE_ACCESSOR) inputValueAccessor: any,
