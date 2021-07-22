@@ -162,6 +162,7 @@ jobs:
                     yarn run build:mosaic-luxon-adapter
                     yarn run build:mosaic-moment-adapter
                     yarn run styles:built-all
+                    yarn run build:package-design-tokens
             - persist_to_workspace:
                   root: ~/mosaic
                   paths:

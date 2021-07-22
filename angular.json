@@ -211,9 +211,6 @@
                         "tsConfig": "packages/mosaic/tsconfig.spec.json",
                         "codeCoverage": true
                     }
-                },
-                "configurations": {
-                    "production": {}
                 }
             }
         },
