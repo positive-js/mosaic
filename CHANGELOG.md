@@ -1,3 +1,9 @@
+## 11.2.1 "Jabbering Beading" (2021-07-22)
+
+### Mosaic
+
+ * bug fix  added tokens to package ([6b99ecf](https://github.com/positive-js/mosaic/commit/6b99ecf245c1798c5dc10753ca840532636567be))
+
 # 11.2.0 "Tibetan Universe" (2021-07-22)
 
 ### Mosaic
