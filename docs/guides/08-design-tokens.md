@@ -1,83 +1,68 @@
-0. Intro
+## Overview
 
-To describe the tokens, we use [Style-Dictionary](https://amzn.github.io/style-dictionary/#/architecture)
+Design tokens are special variables used to maintain a scalable
+visual system for UI development and brand consistency.
+Mosaic design tokens store the visual design attributes that define the foundation
+of Positive Technologies visual language, including color, typography, and spacing.
 
 
-1. Add Design Tokens to project
-
-Copy the contents of the design-tokens folder to the style folder of your project.
-For example, to the default-theme folder
-
+Design tokens are key-value pairs. For example:
 ```
-.
-`-- src/
-    |-- app
-    |-- assets
-    |-- environments
-    |-- styles/
-    |   |-- default-theme/
-    |   |   |-- components/
-    |   |   |   |-- alert.json5
-    |   |   |   |-- autocomplete.json5
-    |   |   |   |-- badge.json5
-    |   |   |   |-- button.json5
-    |   |   |   `-- ...
-    |   |   |-- properties/
-    |   |   |   |-- aliases.json5
-    |   |   |   |-- colors.json5
-    |   |   |   |-- font.json5
-    |   |   |   `-- ...
-    |   |   |-- _palette.scss
-    |   |   |-- _theme.scss
-    |   |   |-- _typography.scss
-    |   |   |-- _variables.scss
-    |   |   |-- config.json5
-    |   |   `-- css-tokens.css
-    |   |-- _common.scss
-    |   |-- _fonts.scss
-    |   `-- _variables.scss
-    |-- favicon.ico
-    |-- index.html
-    |-- styles.scss
-    `-- main.ts
+Key: value;
+$card-dark-color-scheme-success-background: #276211;
 ```
+- The key name defines the usage or how to apply the value to a specific context, such as using text on a light background
+- The key stores visual design attributes
+- The key replaces hard-coded values, such as hex values for color or pixel values for spacing
 
-2. Include Design Tokens in ```styles.scss```
+### Contract of Intent
+- Tokens are versioned and maintained by the UX team
+- Consumers are required to stay within one major version of the current release
 
-```scss
-@import './styles/fonts';
+### Benefits
 
-@import '~@ptsecurity/mosaic/visual.scss';
-@import '~@ptsecurity/mosaic-icons/dist/styles/mc-icons.css';
-@import '~pt-product-icons/dist/styles/Product';
+#### Improved UI Development
+- Promotes greater visual consistency and maintainability (when there are changes to brand elements)
+- Aligns with brand standards
+- Consumers can stay in sync with any changes to the visual language with minimal impact to the code
 
-@include mosaic-visual();
+#### Ease of Maintainability
+Design Tokens can streamline redesign processes when:
+- The Mosaic team updates a **value** (such as with a new typeface or color hex value),
+  the **tokens** do not need to be changed in code by consumers
+- Teams can consume these changes from SEMVER releases to our supported packages
 
-// Include Design Tokens
-@import './styles/default-theme/theme';
+#### Brand Consistency on Any Platform
+- Extends the distribution of the Positive Technologies visual language across platforms
+- Ensures brand consistency across all digital channels
 
-$typography: mc-typography-config();
+#### Extensibility
+- Designers and developers have access to design tokens when creating custom components
+  for their applications (within brand standards)
 
-// Include all typography for the components.
-@include mc-core($typography);
+### Use When
+Design Tokens can be used by teams:
+- To supplement components when designing page layouts
+- To create custom components that are visually aligned to the Positive Technologies brand styles
+- To create new components that can be contributed back to the system
 
-@mixin app-theme($theme) {
+### Don't Use When
+- Don’t use design tokens to make modifications to an existing Mosaic component.
+- Don’t use design tokens to only access a value or values when the token name does not match it's application
+  (for example, don't use a 'color-background-button' token to style a border or an element that is not a button).
 
-    $background: map-get($theme, background);
-    $foreground: map-get($theme, foreground);
+Questions about when to use design tokens? Ask the Mosaic team
 
-    background: mc-color($background, background);
-    color: mc-color($foreground, text);
+## How to Use Tokens
 
-    @include mosaic-theme($theme);
-}
+### For Designers
+Soon...
 
-.theme-default {
-    &.active-blue {
+### For Developers
+A base requirement for using Mosaic design tokens is that you are able
+to consume and maintain packages through the following development processes:
+- Web consumers:
+    - Your project can compile CSS variables and SCSS
+    - You can import NPM packages
 
-        // Include all theme styles for the mosaic components.
-        @include app-theme($default-light-theme);
-    }
-}
 
-```
