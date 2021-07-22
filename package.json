@@ -128,6 +128,7 @@
         "build:tokens:docs": "node ./packages/docs/scripts/build-tokens.js",
         "build:docs-content": "gulp docs-content",
         "build:highlight": "ts-node --project ./tools/highlight-files/tsconfig.json ./tools/highlight-files/highlight-files.ts",
+        "build:package-design-tokens": "ts-node --project ./tools/package-design-tokens/tsconfig.json ./tools/package-design-tokens/package-design-tokens.ts",
         "build:package-docs-content": "ts-node --project ./tools/package-docs-content/tsconfig.json ./tools/package-docs-content/package-docs-content.ts",
         "styles:built-all": "gulp styles:built-all",
         "unit:cdk": "ng test cdk",
