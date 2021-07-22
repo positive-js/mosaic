@@ -37,7 +37,7 @@
             border-left-color: map-get($foreground, divider);
         }
 
-        &.mc-disabled {
+        &[disabled] {
             pointer-events: none;
 
             & .mc-icon {
@@ -79,7 +79,7 @@
             }
         }
 
-        &.mc-disabled {
+        &[disabled] {
             cursor: default;
 
             & .mc-tab-overlay {
@@ -132,7 +132,7 @@
             }
         }
 
-        &.mc-disabled {
+        &[disabled] {
             cursor: default;
 
             & .mc-tab-overlay {
@@ -193,7 +193,7 @@
             }
         }
 
-        &.mc-disabled {
+        &[disabled] {
             cursor: default;
             background: transparent;
 
@@ -230,7 +230,7 @@
             }
         }
 
-        &.mc-disabled {
+        &[disabled] {
             & .mc-tab-overlay {
                 background: map-get($tabs, state-disabled-overlay);
             }

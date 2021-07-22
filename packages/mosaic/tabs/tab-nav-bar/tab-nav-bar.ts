@@ -4,11 +4,13 @@ import {
     AfterContentInit,
     Attribute,
     ChangeDetectionStrategy,
-    Component, ContentChildren,
-    Directive,
+    Component,
+    ContentChildren,
     ElementRef,
     Input,
-    OnDestroy, QueryList,
+    OnDestroy,
+    QueryList,
+    Renderer2,
     ViewEncapsulation
 } from '@angular/core';
 import {
@@ -31,27 +33,30 @@ export const McTabLinkMixinBase: HasTabIndexCtor & CanDisableCtor &
 /**
  * Link inside of a `mc-tab-nav-bar`.
  */
-@Directive({
+@Component({
     selector: 'a[mc-tab-link], a[mcTabLink]',
     exportAs: 'mcTabLink',
+    template: '<ng-content></ng-content><div class="mc-tab-overlay"></div>',
     inputs: ['disabled', 'tabIndex'],
     host: {
         class: 'mc-tab-link',
-        '[attr.tabindex]': 'tabIndex',
-        '[class.mc-disabled]': 'disabled',
         '[class.mc-active]': 'active',
         '[class.mc-tab-label_vertical]': 'vertical',
-        '[class.mc-tab-label_horizontal]': '!vertical'
+        '[class.mc-tab-label_horizontal]': '!vertical',
+
+        '[attr.tabindex]': 'tabIndex',
+        '[attr.disabled]': 'disabled || null'
     }
 })
 export class McTabLink extends McTabLinkMixinBase implements OnDestroy, CanDisable, HasTabIndex {
-    vertical;
+    vertical = false;
 
     /** Whether the link is active. */
     @Input()
     get active(): boolean {
         return this.isActive;
     }
+
     set active(value: boolean) {
         if (value !== this.isActive) {
             this.isActive = value;
@@ -63,15 +68,40 @@ export class McTabLink extends McTabLinkMixinBase implements OnDestroy, CanDisab
 
     constructor(
         public elementRef: ElementRef,
-        private focusMonitor: FocusMonitor
+        private focusMonitor: FocusMonitor,
+        private renderer: Renderer2
     ) {
         super();
 
         this.focusMonitor.monitor(this.elementRef.nativeElement);
     }
 
+    ngAfterViewInit(): void {
+        this.addClassModifierForIcons(Array.from(this.elementRef.nativeElement.querySelectorAll('.mc-icon')));
+    }
+
     ngOnDestroy() {
         this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
+    }
+
+    private addClassModifierForIcons(icons: HTMLElement[]) {
+        const twoIcons = 2;
+        const [firstIconElement, secondIconElement] = icons;
+
+        if (icons.length === 1) {
+            const COMMENT_NODE = 8;
+
+            if (firstIconElement.nextSibling && firstIconElement.nextSibling.nodeType !== COMMENT_NODE) {
+                this.renderer.addClass(firstIconElement, 'mc-icon_left');
+            }
+
+            if (firstIconElement.previousSibling && firstIconElement.previousSibling.nodeType !== COMMENT_NODE) {
+                this.renderer.addClass(firstIconElement, 'mc-icon_right');
+            }
+        } else if (icons.length === twoIcons) {
+            this.renderer.addClass(firstIconElement, 'mc-icon_left');
+            this.renderer.addClass(secondIconElement, 'mc-icon_right');
+        }
     }
 }
 
@@ -82,7 +112,7 @@ export class McTabLink extends McTabLinkMixinBase implements OnDestroy, CanDisab
 @Component({
     selector: '[mc-tab-nav-bar]',
     exportAs: 'mcTabNavBar, mcTabNav',
-    templateUrl: 'tab-nav-bar.html',
+    template: '<ng-content></ng-content>',
     styleUrls: ['tab-nav-bar.scss'],
     host: {
         class: 'mc-tab-nav-bar'

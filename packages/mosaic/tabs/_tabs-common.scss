@@ -70,7 +70,7 @@
             position: absolute;
         }
 
-        &.mc-disabled .mc-tab-overlay {
+        &[disabled] .mc-tab-overlay {
             bottom: -1px;
         }
     }
@@ -91,7 +91,7 @@
         right: 0;
     }
 
-    &.mc-disabled {
+    &[disabled] {
         pointer-events: none;
     }
 
