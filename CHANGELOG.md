@@ -1,3 +1,21 @@
+# 11.2.0 "Tibetan Universe" (2021-07-22)
+
+### Mosaic
+
+ * bug fix  **badge:** fix badge font settings ([#648](https://github.com/positive-js/mosaic/issues/648)) ([19af6f3](https://github.com/positive-js/mosaic/commit/19af6f3616af55417f513c20fbf7f13f43e14db3))
+ * bug fix  **tooltip:** Dark theme font colour (#UIM-642) ([#644](https://github.com/positive-js/mosaic/issues/644)) ([5061a6a](https://github.com/positive-js/mosaic/commit/5061a6a1984c97bece6cc10b14ac1ef0a10d4fef)), closes [#UIM-642](https://github.com/positive-js/mosaic/issues/UIM-642)
+ * feature  **navbar:** implementation by guideline (UIM-567) ([#637](https://github.com/positive-js/mosaic/issues/637)) ([a2916bc](https://github.com/positive-js/mosaic/commit/a2916bcd4372c066912057e1a709b60d3c99188c))
+ * feature  added common build script for tokens and added tokens for docs (#UIM-690) ([#652](https://github.com/positive-js/mosaic/issues/652)) ([2fb6aa5](https://github.com/positive-js/mosaic/commit/2fb6aa5814609c16d8b7408697d1b9da07bf469b)), closes [#UIM-690](https://github.com/positive-js/mosaic/issues/UIM-690)
+ * feature  **modal:** implementation by guideline (#UIM-633) ([#634](https://github.com/positive-js/mosaic/issues/634)) ([9cbac7e](https://github.com/positive-js/mosaic/commit/9cbac7ebd93de1831310ffed6a06a2c4ed9c36c7)), closes [#UIM-633](https://github.com/positive-js/mosaic/issues/UIM-633)
+
+### Mosaic-moment-adapter
+
+ * bug fix  fixed formats for seconds and minutes and added tests for it (#UIM-689) ([#651](https://github.com/positive-js/mosaic/issues/651)) ([db8c2e3](https://github.com/positive-js/mosaic/commit/db8c2e38a526d99cb0813e784f28899273869fc9)), closes [#UIM-689](https://github.com/positive-js/mosaic/issues/UIM-689)
+
+### Docs
+
+ * feature  optimizing the loading of examples ([#642](https://github.com/positive-js/mosaic/issues/642)) ([ebbd524](https://github.com/positive-js/mosaic/commit/ebbd5248fbce91955326ab1d4416c62fcb76d047))
+
 ## 11.1.2 "Zylonite Reverso" (2021-07-20)
 
 ### Mosaic
