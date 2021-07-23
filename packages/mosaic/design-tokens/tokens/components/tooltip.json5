@@ -3,12 +3,24 @@
         'light-color-scheme': {
             background: { value: '{light-color-scheme.second.palette.value.700.value}' },
             text: { value: '{light-color-scheme.second.palette.value.contrast.700.value}' },
-            shadow: { value: '0 2px 4px 0 rgba(0, 0, 0, 0.2)' }
+            shadow: { value: '0 2px 4px 0 rgba(0, 0, 0, 0.2)' },
+
+            'warning': {
+                background: { value: '{light-color-scheme.warning.palette.value.60.value}' },
+                text: { value: '{light-color-scheme.second.palette.value.contrast.700.value}' },
+                border: { value: '{light-color-scheme.warning.palette.value.200.value}' }
+            }
         },
         'dark-color-scheme': {
             background: { value: '{dark-color-scheme.second.palette.value.40.value}' },
             text: { value: '{dark-color-scheme.second.palette.value.contrast.40.value}' },
-            shadow: { value: '0 2px 4px 0 rgba(0, 0, 0, 0.2)' }
+            shadow: { value: '0 2px 4px 0 rgba(0, 0, 0, 0.2)' },
+
+            'warning': {
+                background: { value: '{dark-color-scheme.warning.palette.value.60.value}' },
+                text: { value: '{dark-color-scheme.second.palette.value.contrast.700.value}' },
+                border: { value: '{dark-color-scheme.warning.palette.value.200.value}' }
+            }
         },
         size: {
             'max-width': { value: '240px' },

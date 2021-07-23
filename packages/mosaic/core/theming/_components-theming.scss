@@ -230,7 +230,13 @@
     $tooltip: (
         background: $tooltip-light-color-scheme-background,
         color: $tooltip-light-color-scheme-text,
-        shadow: $tooltip-light-color-scheme-shadow
+        shadow: $tooltip-light-color-scheme-shadow,
+
+        warning: (
+            background: $tooltip-light-color-scheme-warning-background,
+            color: $tooltip-light-color-scheme-warning-text,
+            border-color: $tooltip-light-color-scheme-warning-border
+        )
     );
 
     @return (
@@ -485,7 +491,13 @@
     $tooltip: (
         background: $tooltip-dark-color-scheme-background,
         color: $tooltip-dark-color-scheme-text,
-        shadow: $tooltip-dark-color-scheme-shadow
+        shadow: $tooltip-dark-color-scheme-shadow,
+
+        warning: (
+            background: $tooltip-dark-color-scheme-warning-background,
+            color: $tooltip-dark-color-scheme-warning-text,
+            border-color: $tooltip-dark-color-scheme-warning-border
+        )
     );
 
     @return (
