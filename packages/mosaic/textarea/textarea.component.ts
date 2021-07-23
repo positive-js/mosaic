@@ -2,13 +2,17 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     Directive, DoCheck, ElementRef, Inject,
     Input, OnChanges, OnDestroy, Optional,
-    Self, InjectionToken, NgZone, OnInit
+    Self, InjectionToken, NgZone, OnInit,
+    AfterContentInit
 } from '@angular/core';
-import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
+import { FormGroupDirective, NG_VALIDATORS, NgControl, NgForm, NgModel, Validator } from '@angular/forms';
 import {
     CanUpdateErrorState,
     CanUpdateErrorStateCtor,
     ErrorStateMatcher,
+    MC_VALIDATION,
+    McValidationOptions,
+    setMosaicValidation,
     mixinErrorState
 } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
@@ -51,7 +55,7 @@ export const McTextareaMixinBase: CanUpdateErrorStateCtor & typeof McTextareaBas
     providers: [{ provide: McFormFieldControl, useExisting: McTextarea }]
 })
 export class McTextarea extends McTextareaMixinBase implements McFormFieldControl<any>, OnInit, OnChanges,
-    OnDestroy, DoCheck, CanUpdateErrorState {
+    OnDestroy, DoCheck, CanUpdateErrorState, AfterContentInit {
 
     @Input() canGrow: boolean = true;
 
@@ -163,6 +167,9 @@ export class McTextarea extends McTextareaMixinBase implements McFormFieldContro
         protected elementRef: ElementRef,
         @Optional() @Self() public ngControl: NgControl,
         @Optional() parentForm: NgForm,
+        @Optional() @Self() @Inject(NG_VALIDATORS) public rawValidators: Validator[],
+        @Optional() @Inject(MC_VALIDATION) private mcValidation: McValidationOptions,
+        @Optional() @Self() public ngModel: NgModel,
         @Optional() parentFormGroup: FormGroupDirective,
         defaultErrorStateMatcher: ErrorStateMatcher,
         @Optional() @Self() @Inject(MC_TEXTAREA_VALUE_ACCESSOR) inputValueAccessor: any,
@@ -202,6 +209,14 @@ export class McTextarea extends McTextareaMixinBase implements McFormFieldContro
     ngOnDestroy() {
         this.stateChanges.complete();
         this.growSubscription.unsubscribe();
+    }
+
+    ngAfterContentInit(): void {
+        if (!this.ngControl) { return; }
+
+        if (this.mcValidation.useValidation) {
+            setMosaicValidation(this);
+        }
     }
 
     ngDoCheck() {
