@@ -68,8 +68,8 @@ export class McTabLink extends McTabLinkMixinBase implements OnDestroy, CanDisab
 
     constructor(
         public elementRef: ElementRef,
-        private focusMonitor: FocusMonitor,
-        private renderer: Renderer2
+        private readonly focusMonitor: FocusMonitor,
+        private readonly renderer: Renderer2
     ) {
         super();
 

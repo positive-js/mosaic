@@ -8,14 +8,6 @@
 
     @include tab-label;
 
-    &.mc-tab-label_horizontal {
-
-    }
-
-    &.mc-tab-label_vertical {
-
-    }
-
     & .mc-tab-group_stretch-labels & {
         flex-basis: 0;
         flex-grow: 1;
