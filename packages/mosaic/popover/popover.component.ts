@@ -37,7 +37,7 @@ import {
     POSITION_MAP, POSITION_PRIORITY_STRATEGY,
     POSITION_TO_CSS_MAP
 } from '@ptsecurity/mosaic/core';
-import { BehaviorSubject, merge, Observable, Subject, Subscription } from 'rxjs';
+import { BehaviorSubject, merge, NEVER, Observable, Subject, Subscription } from 'rxjs';
 import { delay, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
 import { mcPopoverAnimations } from './popover-animations';
@@ -776,7 +776,7 @@ export class McPopover implements OnInit, OnDestroy {
 
     private closingActions() {
         const backdrop = this.overlayRef!.backdropClick();
-        const outsidePointerEvents = this.overlayRef!.outsidePointerEvents();
+        const outsidePointerEvents = this.hasBackdrop ? NEVER : this.overlayRef!.outsidePointerEvents();
         const detachments = this.overlayRef!.detachments();
 
         return merge(backdrop, outsidePointerEvents, detachments);
