@@ -1,3 +1,15 @@
+# 11.3.0 "Verbal Qcd" (2021-07-26)
+
+### Mosaic
+
+ * bug fix  **tooltip:** added tokens for warning style (#UIM-604) ([#654](https://github.com/positive-js/mosaic/issues/654)) ([4ed1d37](https://github.com/positive-js/mosaic/commit/4ed1d37d2ce2bbc452c0debaa0baf96dc1114ada)), closes [#UIM-604](https://github.com/positive-js/mosaic/issues/UIM-604)
+ * feature  **button:** added primary transparent style (#UIM-621) ([#655](https://github.com/positive-js/mosaic/issues/655)) ([210ec65](https://github.com/positive-js/mosaic/commit/210ec65949e1515e45814dc15671ded7678382e8)), closes [#UIM-621](https://github.com/positive-js/mosaic/issues/UIM-621)
+ * feature  **tabs:** added styles for mc-tab-link (#UIM-688) ([#653](https://github.com/positive-js/mosaic/issues/653)) ([b49c4cd](https://github.com/positive-js/mosaic/commit/b49c4cd2f479233090553a262d15022f3b2ed65b)), closes [#UIM-688](https://github.com/positive-js/mosaic/issues/UIM-688) [#UIM-688](https://github.com/positive-js/mosaic/issues/UIM-688)
+
+### Docs
+
+ * bug fix  tabs example, added CommonModule ([58051b8](https://github.com/positive-js/mosaic/commit/58051b8dac199d1a0dd0ef2f37af541a2a2d4bbf))
+
 ## 11.2.1 "Jabbering Beading" (2021-07-22)
 
 ### Mosaic
