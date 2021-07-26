@@ -52,6 +52,17 @@
             active_background: $button-light-color-scheme-primary-states-active-background
         ),
 
+        primary_transparent: (
+            color: $button-light-color-scheme-primary-transparent-color,
+            icon: $button-light-color-scheme-primary-transparent-icon,
+
+            hover_color: $button-light-color-scheme-primary-transparent-states-hover-color,
+            hover_icon: $button-light-color-scheme-primary-transparent-states-hover-icon,
+
+            active_color: $button-light-color-scheme-primary-transparent-states-active-color,
+            active_icon: $button-light-color-scheme-primary-transparent-states-active-icon
+        ),
+
         second: (
             color: $button-light-color-scheme-second-color,
             border: $button-light-color-scheme-second-border,
@@ -311,6 +322,17 @@
 
             active_border: $button-dark-color-scheme-primary-states-active-border,
             active_background: $button-dark-color-scheme-primary-states-active-background
+        ),
+
+        primary_transparent: (
+            color: $button-dark-color-scheme-primary-transparent-color,
+            icon: $button-dark-color-scheme-primary-transparent-icon,
+
+            hover_color: $button-dark-color-scheme-primary-transparent-states-hover-color,
+            hover_icon: $button-dark-color-scheme-primary-transparent-states-hover-icon,
+
+            active_color: $button-dark-color-scheme-primary-transparent-states-active-color,
+            active_icon: $button-dark-color-scheme-primary-transparent-states-active-icon
         ),
 
         second: (

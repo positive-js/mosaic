@@ -1,6 +1,6 @@
 
 // Do not edit directly
-// Generated on Fri, 23 Jul 2021 08:52:49 GMT
+// Generated on Fri, 23 Jul 2021 10:34:34 GMT
 
 $light-color-scheme-primary-default: #338FCC;
 $light-color-scheme-second-default: #B3B3B3;
@@ -231,6 +231,12 @@ $button-light-color-scheme-primary-background: #338FCC;
 $button-light-color-scheme-primary-icon: white;
 $button-light-color-scheme-primary-states-active-border: darken(#277BB3, 5);
 $button-light-color-scheme-primary-states-active-background: darken(#338FCC, 5);
+$button-light-color-scheme-primary-transparent-color: #338FCC;
+$button-light-color-scheme-primary-transparent-icon: #338FCC;
+$button-light-color-scheme-primary-transparent-states-hover-color: #206EA2;
+$button-light-color-scheme-primary-transparent-states-hover-icon: #206EA2;
+$button-light-color-scheme-primary-transparent-states-active-color: #114E77;
+$button-light-color-scheme-primary-transparent-states-active-icon: #114E77;
 $button-light-color-scheme-second-border: #B3B3B3;
 $button-light-color-scheme-second-background: #F0F0F0;
 $button-light-color-scheme-second-color: #4D4D4D;
@@ -250,6 +256,12 @@ $button-dark-color-scheme-primary-background: #338FCC;
 $button-dark-color-scheme-primary-icon: white;
 $button-dark-color-scheme-primary-states-active-border: darken(#277BB3, 5);
 $button-dark-color-scheme-primary-states-active-background: darken(#57A4D7, 5);
+$button-dark-color-scheme-primary-transparent-color: #338FCC;
+$button-dark-color-scheme-primary-transparent-icon: #338FCC;
+$button-dark-color-scheme-primary-transparent-states-hover-color: #206EA2;
+$button-dark-color-scheme-primary-transparent-states-hover-icon: #206EA2;
+$button-dark-color-scheme-primary-transparent-states-active-color: #114E77;
+$button-dark-color-scheme-primary-transparent-states-active-icon: #114E77;
 $button-dark-color-scheme-second-border: #808080;
 $button-dark-color-scheme-second-background: #666666;
 $button-dark-color-scheme-second-color: #F0F0F0;
@@ -268,6 +280,7 @@ $button-size-vertical-padding: 6px;
 $button-size-horizontal-padding: 16px;
 $button-font-default: body;
 $button-font-primary: body-strong;
+$button-font-primary-transparent: body;
 $icon-button-size-vertical-padding: 6px;
 $icon-button-size-horizontal-padding: 8px;
 $icon-button-size-icon-horizontal-padding: 16px;

@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 23 Jul 2021 08:52:49 GMT
+ * Generated on Fri, 23 Jul 2021 10:34:34 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
@@ -339,6 +339,12 @@ export const ButtonLightColorSchemePrimaryBackground = "#338FCC";
 export const ButtonLightColorSchemePrimaryIcon = "white";
 export const ButtonLightColorSchemePrimaryStatesActiveBorder = "darken(#277BB3, 5)";
 export const ButtonLightColorSchemePrimaryStatesActiveBackground = "darken(#338FCC, 5)";
+export const ButtonLightColorSchemePrimaryTransparentColor = "#338FCC";
+export const ButtonLightColorSchemePrimaryTransparentIcon = "#338FCC";
+export const ButtonLightColorSchemePrimaryTransparentStatesHoverColor = "#206EA2";
+export const ButtonLightColorSchemePrimaryTransparentStatesHoverIcon = "#206EA2";
+export const ButtonLightColorSchemePrimaryTransparentStatesActiveColor = "#114E77";
+export const ButtonLightColorSchemePrimaryTransparentStatesActiveIcon = "#114E77";
 export const ButtonLightColorSchemeSecondBorder = "#B3B3B3";
 export const ButtonLightColorSchemeSecondBackground = "#F0F0F0";
 export const ButtonLightColorSchemeSecondColor = "#4D4D4D";
@@ -358,6 +364,12 @@ export const ButtonDarkColorSchemePrimaryBackground = "#338FCC";
 export const ButtonDarkColorSchemePrimaryIcon = "white";
 export const ButtonDarkColorSchemePrimaryStatesActiveBorder = "darken(#277BB3, 5)";
 export const ButtonDarkColorSchemePrimaryStatesActiveBackground = "darken(#57A4D7, 5)";
+export const ButtonDarkColorSchemePrimaryTransparentColor = "#338FCC";
+export const ButtonDarkColorSchemePrimaryTransparentIcon = "#338FCC";
+export const ButtonDarkColorSchemePrimaryTransparentStatesHoverColor = "#206EA2";
+export const ButtonDarkColorSchemePrimaryTransparentStatesHoverIcon = "#206EA2";
+export const ButtonDarkColorSchemePrimaryTransparentStatesActiveColor = "#114E77";
+export const ButtonDarkColorSchemePrimaryTransparentStatesActiveIcon = "#114E77";
 export const ButtonDarkColorSchemeSecondBorder = "#808080";
 export const ButtonDarkColorSchemeSecondBackground = "#666666";
 export const ButtonDarkColorSchemeSecondColor = "#F0F0F0";
@@ -376,6 +388,7 @@ export const ButtonSizeVerticalPadding = "6px";
 export const ButtonSizeHorizontalPadding = "16px";
 export const ButtonFontDefault = "body";
 export const ButtonFontPrimary = "body-strong";
+export const ButtonFontPrimaryTransparent = "body";
 export const IconButtonSizeVerticalPadding = "6px";
 export const IconButtonSizeHorizontalPadding = "8px";
 export const IconButtonSizeIconHorizontalPadding = "16px";

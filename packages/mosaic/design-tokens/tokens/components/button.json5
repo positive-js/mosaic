@@ -17,6 +17,21 @@
                     }
                 }
             },
+            primary_transparent: {
+                color: { value: '{light-color-scheme.primary.palette.value.500.value}' },
+                icon: { value: '{light-color-scheme.primary.palette.value.500.value}' },
+
+                states: {
+                    hover: {
+                        color: { value: '{light-color-scheme.primary.palette.value.600.value}' },
+                        icon: { value: '{light-color-scheme.primary.palette.value.600.value}' }
+                    },
+                    active: {
+                        color: { value: '{light-color-scheme.primary.palette.value.700.value}' },
+                        icon: { value: '{light-color-scheme.primary.palette.value.700.value}' }
+                    }
+                }
+            },
             second: {
                 border: { value: '{light-color-scheme.foreground.border.value}' },
                 background: { value: '{light-color-scheme.background.background-disabled.value}' },
@@ -61,6 +76,22 @@
                     }
                 }
             },
+
+            primary_transparent: {
+                color: { value: '{dark-color-scheme.primary.palette.value.500.value}' },
+                icon: { value: '{dark-color-scheme.primary.palette.value.500.value}' },
+
+                states: {
+                    hover: {
+                        color: { value: '{dark-color-scheme.primary.palette.value.600.value}' },
+                        icon: { value: '{dark-color-scheme.primary.palette.value.600.value}' }
+                    },
+                    active: {
+                        color: { value: '{dark-color-scheme.primary.palette.value.700.value}' },
+                        icon: { value: '{dark-color-scheme.primary.palette.value.700.value}' }
+                    }
+                }
+            },
             second: {
                 border: { value: '{dark-color-scheme.foreground.border.value}' },
                 background: { value: '{dark-color-scheme.background.background-disabled.value}' },
@@ -97,7 +128,8 @@
         },
         font: {
             default: { value: 'body' },
-            primary: { value: 'body-strong' }
+            primary: { value: 'body-strong' },
+            primary_transparent: { value: 'body' }
         }
     },
     'icon-button': {
