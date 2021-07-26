@@ -27,7 +27,7 @@ import { McTab } from './tab.component';
 
 
 @Directive({
-    selector: 'mc-tab-group[mc-old-tabs], [mc-tab-nav-bar][mc-old-tabs]',
+    selector: 'mc-tab-group[mc-old-tabs]',
     host: { class: 'mc-tab-group_old' }
 })
 export class McOldTabsCssStyler { }
