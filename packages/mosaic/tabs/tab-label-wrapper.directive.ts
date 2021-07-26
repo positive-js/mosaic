@@ -21,7 +21,7 @@ export const McTabLabelWrapperMixinBase: CanDisableCtor &
     selector: '[mcTabLabelWrapper]',
     inputs: ['disabled'],
     host: {
-        '[class.mc-disabled]': 'disabled'
+        '[attr.disabled]': 'disabled || null'
     }
 })
 export class McTabLabelWrapper extends McTabLabelWrapperMixinBase implements CanDisable, AfterViewInit {

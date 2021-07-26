@@ -6,47 +6,42 @@
     text-decoration: none;
     -webkit-tap-highlight-color: transparent;
 
-    .mc-tab-group_stretch-labels & {
+    @include tab-label;
+
+    & .mc-tab-group_stretch-labels & {
         flex-basis: 0;
         flex-grow: 1;
     }
 
-    &.mc-disabled {
-        // We use `pointer-events` to make the element unclickable when it's disabled, rather than
-        // preventing the default action through JS, because we can't prevent the action reliably
-        // due to other directives potentially registering their events earlier. This shouldn't cause
-        // the user to click through, because we always have a `.mc-tab-links` behind the link.
-        pointer-events: none;
+    & > .mc-icon {
+        &.mc-icon_left {
+            margin-right: var(--mc-tabs-size-label-icon-margin, $tabs-size-label-icon-margin);
+        }
+
+        &.mc-icon_right {
+            margin-left: var(--mc-tabs-size-label-icon-margin, $tabs-size-label-icon-margin);
+        }
     }
 }
 
 .mc-tab-nav-bar {
     display: flex;
-
-    &:not(.mc-tab-group_old) {
-        .mc-tab-link {
-            @include tab-label;
-        }
-    }
-
-    &.mc-tab-group_old {
-        .mc-tab-link {
-            @include tab-label-old;
-        }
-    }
-}
-
-.mc-tab-links {
-    display: flex;
-    position: relative;
-    padding: 1px 1px 0 1px;
     flex-grow: 1;
 
-    .mc-tab-group_align-labels-center {
+    position: relative;
+
+    padding: 1px 1px 0 1px;
+
+    & .mc-tab-group_align-labels-center {
         justify-content: center;
     }
 
-    .mc-tab-group_align-labels-end {
+    & .mc-tab-group_align-labels-end {
         justify-content: flex-end;
     }
+}
+
+.mc-tab-nav-bar.mc-tab-group_vertical {
+    flex-direction: column;
+    flex-grow: 0;
 }

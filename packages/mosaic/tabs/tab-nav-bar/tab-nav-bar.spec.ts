@@ -90,27 +90,14 @@ describe('McTabNavBar', () => {
                 .queryAll(By.css('a'))
                 .map((tabLinkDebugEl) => tabLinkDebugEl.nativeElement);
 
-            expect(
-                tabLinkElements.every(
-                    (tabLinkEl) =>
-                        !tabLinkEl.classList.contains('mc-disabled')
-                )
-            ).toBe(
-                true,
-                'Expected every tab link to not have the disabled class initially'
-            );
+            expect(tabLinkElements.every((tabLinkEl) => !tabLinkEl.hasAttribute('disabled')))
+                .toBe(true, 'Expected every tab link to not have the disabled class initially');
 
             fixture.componentInstance.disabled = true;
             fixture.detectChanges();
 
-            expect(
-                tabLinkElements.every((tabLinkEl) =>
-                    tabLinkEl.classList.contains('mc-disabled')
-                )
-            ).toBe(
-                true,
-                'Expected every tab link to have the disabled class if set through binding'
-            );
+            expect(tabLinkElements.every((tabLinkEl) => tabLinkEl.hasAttribute('disabled')))
+                .toBe(true, 'Expected every tab link to have the disabled class if set through binding');
         });
 
         it('should update the tabindex if links are disabled', () => {

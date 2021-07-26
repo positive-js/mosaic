@@ -253,7 +253,7 @@ describe('McTabGroup', () => {
 
         it('should have one disabled tab', () => {
             fixture.detectChanges();
-            const labels = headerList.queryAll(By.css('.mc-disabled'));
+            const labels = headerList.queryAll(By.css('[disabled]'));
             expect(labels.length).toBe(1);
         });
 
@@ -261,7 +261,7 @@ describe('McTabGroup', () => {
             fixture.detectChanges();
 
             const tabs = fixture.componentInstance.tabs.toArray();
-            let labels = headerList.queryAll(By.css('.mc-disabled'));
+            let labels = headerList.queryAll(By.css('[disabled]'));
             expect(tabs[2].disabled).toBe(false);
             expect(labels.length).toBe(1);
 
@@ -269,7 +269,7 @@ describe('McTabGroup', () => {
             fixture.detectChanges();
 
             expect(tabs[2].disabled).toBe(true);
-            labels = headerList.queryAll(By.css('.mc-disabled'));
+            labels = headerList.queryAll(By.css('[disabled]'));
             expect(labels.length).toBe(2);
         });
     });

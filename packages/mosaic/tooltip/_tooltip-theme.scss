@@ -6,8 +6,6 @@
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    $warning: map-get($theme, warning);
-
     $tooltip: map-get(map-get($theme, components), tooltip);
 
     .mc-tooltip-inner {
@@ -22,14 +20,16 @@
     }
 
     .mc-tooltip.mc-tooltip_warning {
-        $color: $palette-grey-700;
-        $tooltip-color-background: mc-color($warning, 60);
-        $border-color: mc-color($warning, 200);
+        $tooltip_warning: map-get($tooltip, warning);
+
+        $color: map-get($tooltip_warning, color);
+        $background: map-get($tooltip_warning, background);
+        $border-color: map-get($tooltip_warning, border-color);
 
         .mc-tooltip-arrow {
             border: 1px solid transparent;
 
-            background-color: $tooltip-color-background;
+            background-color: $background;
         }
 
         .mc-tooltip-inner {
@@ -38,7 +38,7 @@
 
             color: $color;
 
-            background-color: $tooltip-color-background;
+            background-color: $background;
         }
 
         &.mc-tooltip_placement-top .mc-tooltip-arrow {

@@ -76,39 +76,40 @@
         <mc-tab label="5">Content 5</mc-tab>
     </mc-tab-group>
 
-
     <h3>Navigation</h3>
-
-    <nav mc-tab-nav-bar mc-align-tabs-end vertical>
-        <a mc-tab-link
-           disabled
-           *ngFor="let link of links"
-           (click)="activeLink = link"
-           [active]="activeLink == link">{{link}}</a>
-        <a mc-tab-link
-           disabled
-           (click)="activeLink = 1"
-           [active]="activeLink == 1">Disabled Link</a>
-    </nav>
 
     <nav mc-tab-nav-bar>
         <a mc-tab-link
            *ngFor="let link of links"
            (click)="activeLink = link"
-           [active]="activeLink == link"> {{link}} </a>
+           [active]="activeLink == link">
+            {{link}}
+        </a>
+
         <a mc-tab-link
+           disabled
            (click)="activeLink = 1"
-           [active]="activeLink == 1">Link 1</a>
+           [active]="activeLink == 1">
+            <i mc-icon="mc-play_16"></i>Disabled
+        </a>
+    </nav>
+
+    <br><br><br>
+
+    <nav mc-tab-nav-bar vertical>
         <a mc-tab-link
-           (click)="activeLink = 2"
-           [active]="activeLink == 2"
-           disabled>Link 2</a>
+           *ngFor="let link of links"
+           (click)="activeLink = link"
+           [active]="activeLink == link">
+            {{ link }}
+        </a>
+
         <a mc-tab-link
-           (click)="activeLink = 3"
-           [active]="activeLink == 3">Link 3</a>
-        <a mc-tab-link
-           (click)="activeLink = 4"
-           [active]="activeLink == 4">Link 4</a>
+           disabled
+           (click)="activeLink = 1"
+           [active]="activeLink == 1">
+            <i mc-icon="mc-play_16"></i>Disabled
+        </a>
     </nav>
 
     <h3>Very slow animation</h3>

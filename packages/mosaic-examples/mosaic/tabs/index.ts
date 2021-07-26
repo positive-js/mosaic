@@ -1,5 +1,5 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McTabsModule } from '@ptsecurity/mosaic/tabs';
@@ -32,7 +32,7 @@ const EXAMPLES = [
 
 @NgModule({
     imports: [
-        BrowserModule,
+        CommonModule,
         McTabsModule,
         McIconModule,
         McButtonModule
