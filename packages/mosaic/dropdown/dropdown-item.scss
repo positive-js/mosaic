@@ -1,0 +1,35 @@
+@import '../design-tokens/tokens';
+
+
+.mc-dropdown-item {
+    display: flex;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+
+    width: 100%;
+
+    border: 1px solid transparent;
+    outline: none;
+
+    padding: var(--mc-dropdown-item-size-padding, $dropdown-item-size-padding);
+
+    text-align: left;
+    white-space: nowrap;
+
+    &:not([disabled]) {
+        cursor: pointer;
+    }
+
+    .mc-dropdown-item-caption {
+        margin-top: 4px;
+    }
+
+    .docs-navbar-version__num {
+        margin-right: 4px;
+    }
+
+    & > div {
+        width: 100%;
+    }
+}

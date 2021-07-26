@@ -6,8 +6,7 @@
         (click)="handleClick()"
         [@transformDropdown]="panelAnimationState"
         (@transformDropdown.start)="onAnimationStart($event)"
-        (@transformDropdown.done)="onAnimationDone($event)"
-        role="dropdown">
+        (@transformDropdown.done)="onAnimationDone($event)">
         <div class="mc-dropdown__content">
             <ng-content></ng-content>
         </div>

@@ -1196,7 +1196,7 @@ describe('McDropdown', () => {
             fixture.detectChanges();
 
             expect(levelOneTrigger.classList)
-                .toContain('mc-dropdown__item_highlighted', 'Expected the trigger to be highlighted');
+                .toContain('mc-dropdown-item_highlighted', 'Expected the trigger to be highlighted');
             expect(overlay.querySelectorAll(PANEL_SELECTOR).length).toBe(2, 'Expected two open dropdowns');
 
             dispatchMouseEvent(items[items.indexOf(levelOneTrigger) + 1], 'mouseenter');
@@ -1586,7 +1586,7 @@ describe('McDropdown', () => {
             fixture.detectChanges();
 
             expect(lazyTrigger.classList)
-                .toContain('mc-dropdown__item_highlighted', 'Expected the trigger to be highlighted');
+                .toContain('mc-dropdown-item_highlighted', 'Expected the trigger to be highlighted');
             expect(overlay.querySelectorAll(PANEL_SELECTOR).length).toBe(2, 'Expected two open dropdowns');
         }));
 

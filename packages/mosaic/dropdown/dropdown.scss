@@ -1,39 +1,6 @@
 @import '../design-tokens/tokens';
 
 
-.mc-dropdown__item {
-    display: flex;
-    align-items: center;
-    position: relative;
-    box-sizing: border-box;
-
-    width: 100%;
-
-    border: 1px solid transparent;
-    outline: none;
-
-    padding: var(--mc-dropdown-item-size-padding, $dropdown-item-size-padding);
-
-    text-align: left;
-    white-space: nowrap;
-
-    &:not([disabled]):not(.mc-disabled) {
-        cursor: pointer;
-    }
-
-    .mc-dropdown__item-caption {
-        margin-top: 4px;
-    }
-
-    .docs-navbar-version__num {
-        margin-right: 4px;
-    }
-
-    & > div {
-        width: 100%;
-    }
-}
-
 .mc-dropdown__trigger {
     margin-left: auto;
     padding-left: var(--mc-dropdown-trigger-size-padding-left, $dropdown-trigger-size-padding-left);

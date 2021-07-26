@@ -11,7 +11,6 @@ import {
     ElementRef,
     EventEmitter,
     Inject,
-    InjectionToken,
     Input,
     NgZone,
     OnDestroy,
@@ -28,54 +27,18 @@ import { merge, Observable, Subject, Subscription } from 'rxjs';
 import { startWith, switchMap, take } from 'rxjs/operators';
 
 import { mcDropdownAnimations } from './dropdown-animations';
-import { McDropdownContent } from './dropdown-content';
+import { McDropdownContent } from './dropdown-content.directive';
 import { throwMcDropdownInvalidPositionX, throwMcDropdownInvalidPositionY } from './dropdown-errors';
-import { McDropdownItem } from './dropdown-item';
-import { MC_DROPDOWN_PANEL, McDropdownPanel } from './dropdown-panel';
-import { DropdownPositionX, DropdownPositionY } from './dropdown-positions';
+import { McDropdownItem } from './dropdown-item.component';
+import {
+    DropdownPositionX,
+    DropdownPositionY,
+    MC_DROPDOWN_DEFAULT_OPTIONS,
+    MC_DROPDOWN_PANEL,
+    McDropdownDefaultOptions,
+    McDropdownPanel
+} from './dropdown.types';
 
-
-/** Default `mc-dropdown` options that can be overridden. */
-// tslint:disable-next-line:naming-convention
-export interface McDropdownDefaultOptions {
-    /** The x-axis position of the dropdown. */
-    xPosition: DropdownPositionX;
-
-    /** The y-axis position of the dropdown. */
-    yPosition: DropdownPositionY;
-
-    /** Whether the dropdown should overlap the dropdown trigger horizontally. */
-    overlapTriggerX: boolean;
-
-    /** Whether the dropdown should overlap the dropdown trigger vertically. */
-    overlapTriggerY: boolean;
-
-    /** Class to be applied to the dropdown's backdrop. */
-    backdropClass: string;
-
-    /** Whether the dropdown has a backdrop. */
-    hasBackdrop: boolean;
-}
-
-/** Injection token to be used to override the default options for `mc-dropdown`. */
-export const MC_DROPDOWN_DEFAULT_OPTIONS =
-    new InjectionToken<McDropdownDefaultOptions>('mc-dropdown-default-options', {
-        providedIn: 'root',
-        factory: MC_DROPDOWN_DEFAULT_OPTIONS_FACTORY
-    });
-
-/** @docs-private */
-// tslint:disable-next-line:naming-convention
-export function MC_DROPDOWN_DEFAULT_OPTIONS_FACTORY(): McDropdownDefaultOptions {
-    return {
-        overlapTriggerX: true,
-        overlapTriggerY: false,
-        xPosition: 'after',
-        yPosition: 'below',
-        backdropClass: 'cdk-overlay-transparent-backdrop',
-        hasBackdrop: false
-    };
-}
 
 @Component({
     selector: 'mc-dropdown',
@@ -93,7 +56,6 @@ export function MC_DROPDOWN_DEFAULT_OPTIONS_FACTORY(): McDropdownDefaultOptions 
     ]
 })
 export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownItem>, OnInit, OnDestroy {
-
     /** Position of the dropdown in the X axis. */
     @Input()
     get xPosition(): DropdownPositionX {
@@ -163,27 +125,27 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
         const previousPanelClass = this.previousPanelClass;
 
         if (previousPanelClass && previousPanelClass.length) {
-            previousPanelClass.split(' ').forEach((className: string) => {
-                this.classList[className] = false;
-            });
+            previousPanelClass
+                .split(' ')
+                .forEach((className: string) => this.classList[className] = false);
         }
 
         this.previousPanelClass = classes;
 
         if (classes && classes.length) {
-            classes.split(' ').forEach((className: string) => {
-                this.classList[className] = true;
-            });
+            classes
+                .split(' ')
+                .forEach((className: string) => this.classList[className] = true);
 
-            this._elementRef.nativeElement.className = '';
+            this.elementRef.nativeElement.className = '';
         }
     }
 
-    private _xPosition: DropdownPositionX = this._defaultOptions.xPosition;
-    private _yPosition: DropdownPositionY = this._defaultOptions.yPosition;
-    private _overlapTriggerX: boolean = this._defaultOptions.overlapTriggerX;
-    private _overlapTriggerY: boolean = this._defaultOptions.overlapTriggerY;
-    private _hasBackdrop: boolean = this._defaultOptions.hasBackdrop;
+    private _xPosition: DropdownPositionX = this.defaultOptions.xPosition;
+    private _yPosition: DropdownPositionY = this.defaultOptions.yPosition;
+    private _overlapTriggerX: boolean = this.defaultOptions.overlapTriggerX;
+    private _overlapTriggerY: boolean = this.defaultOptions.overlapTriggerY;
+    private _hasBackdrop: boolean = this.defaultOptions.hasBackdrop;
 
     /** Config object to be passed into the dropdown's ngClass */
     classList: { [key: string]: boolean } = {};
@@ -204,7 +166,7 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
     direction: Direction;
 
     /** Class to be added to the backdrop element. */
-    @Input() backdropClass: string = this._defaultOptions.backdropClass;
+    @Input() backdropClass: string = this.defaultOptions.backdropClass;
 
     /** @docs-private */
     @ViewChild(TemplateRef, { static: false }) templateRef: TemplateRef<any>;
@@ -238,9 +200,9 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
     private tabSubscription = Subscription.EMPTY;
 
     constructor(
-        private _elementRef: ElementRef<HTMLElement>,
-        private _ngZone: NgZone,
-        @Inject(MC_DROPDOWN_DEFAULT_OPTIONS) private _defaultOptions: McDropdownDefaultOptions) { }
+        private elementRef: ElementRef<HTMLElement>,
+        private ngZone: NgZone,
+        @Inject(MC_DROPDOWN_DEFAULT_OPTIONS) private defaultOptions: McDropdownDefaultOptions) { }
 
     ngOnInit() {
         this.setPositionClasses();
@@ -306,7 +268,7 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
     focusFirstItem(origin: FocusOrigin = 'program'): void {
         // When the content is rendered lazily, it takes a bit before the items are inside the DOM.
         if (this.lazyContent) {
-            this._ngZone.onStable.asObservable()
+            this.ngZone.onStable.asObservable()
                 .pipe(take(1))
                 .subscribe(() => this.keyManager.setFocusOrigin(origin).setFirstItemActive());
         } else {

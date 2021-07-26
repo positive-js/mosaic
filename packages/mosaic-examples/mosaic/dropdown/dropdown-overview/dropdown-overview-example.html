@@ -13,7 +13,7 @@
 
         <mc-dropdown #appDropdown="mcDropdown">
             <button mc-dropdown-item class="mc-selected">
-                Point 1 <div class="mc-dropdown__item-caption">Some info</div>
+                Point 1 <div class="mc-dropdown-item-caption">Some info</div>
             </button>
             <button mc-dropdown-item>
                 <i mc-icon="mc-search_16"></i> Very Long Point
@@ -43,7 +43,7 @@
             <ng-template mcDropdownContent  let-someValue="someValue">
                 <button mc-dropdown-item [disabled]="disabled">dropdown</button>
                 <button mc-dropdown-item>
-                    Point 1 <div class="mc-dropdown__item-caption">Some info</div>
+                    Point 1 <div class="mc-dropdown-item-caption">Some info</div>
                 </button>
                 <button mc-dropdown-item>Value: {{someValue}}</button>
             </ng-template>

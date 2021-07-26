@@ -8,14 +8,13 @@ import {
     ViewEncapsulation,
     Inject,
     Optional,
-    Input,
     ViewChild
 } from '@angular/core';
 import { IFocusableOption } from '@ptsecurity/cdk/a11y';
 import { CanDisable, CanDisableCtor, HasTabIndexCtor, mixinDisabled, mixinTabIndex } from '@ptsecurity/mosaic/core';
 import { Subject } from 'rxjs';
 
-import { MC_DROPDOWN_PANEL, McDropdownPanel } from './dropdown-panel';
+import { MC_DROPDOWN_PANEL, McDropdownPanel } from './dropdown.types';
 
 
 // Boilerplate for applying mixins to McDropdownItem.
@@ -32,30 +31,23 @@ export const McDropdownItemMixinBase:
 @Component({
     selector: 'mc-dropdown-item, [mc-dropdown-item]',
     exportAs: 'mcDropdownItem',
+    templateUrl: 'dropdown-item.html',
+    styleUrls: ['dropdown-item.scss'],
     inputs: ['disabled', 'tabIndex'],
     host: {
-        class: 'mc-dropdown__item',
-        '[class.mc-dropdown__item_highlighted]': 'highlighted',
-        '[class.mc-disabled]': 'disabled',
-        '[attr.role]': 'role',
+        class: 'mc-dropdown-item',
+        '[class.mc-dropdown-item_highlighted]': 'highlighted',
+
+        '[attr.disabled]': 'disabled || null',
         '[attr.tabindex]': 'tabIndex',
+
         '(click)': 'haltDisabledEvents($event)',
         '(mouseenter)': 'handleMouseEnter()'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    template: `
-        <div #content>
-            <ng-content></ng-content>
-        </div>
-        <i *ngIf="triggersNestedDropdown" mc-icon="mc-angle-right-M_16" class="mc-dropdown__trigger"></i>
-    `
 })
 export class McDropdownItem extends McDropdownItemMixinBase implements IFocusableOption, CanDisable, OnDestroy {
-
-    /** ARIA role for the dropdown item. */
-    @Input() role: 'menuitem' | 'menuitemradio' | 'menuitemcheckbox' = 'menuitem';
-
     @ViewChild('content', { static: false }) content;
 
     /** Stream that emits when the dropdown item is hovered. */
@@ -68,41 +60,41 @@ export class McDropdownItem extends McDropdownItemMixinBase implements IFocusabl
     triggersNestedDropdown: boolean = false;
 
     constructor(
-        private _elementRef: ElementRef<HTMLElement>,
-        private _focusMonitor: FocusMonitor,
+        private elementRef: ElementRef<HTMLElement>,
+        private focusMonitor: FocusMonitor,
         @Inject(DOCUMENT) private document: any,
-        @Optional() @Inject(MC_DROPDOWN_PANEL) private _parentDropdownPanel?: McDropdownPanel<McDropdownItem>
+        @Optional() @Inject(MC_DROPDOWN_PANEL) private parentDropdownPanel?: McDropdownPanel<McDropdownItem>
     ) {
         super();
 
-        if (_focusMonitor) {
+        if (focusMonitor) {
             // Start monitoring the element so it gets the appropriate focused classes. We want
             // to show the focus style for dropdown items only when the focus was not caused by a
             // mouse or touch interaction.
-            _focusMonitor.monitor(this._elementRef.nativeElement, false);
+            focusMonitor.monitor(this.elementRef.nativeElement, false);
         }
 
-        if (_parentDropdownPanel && _parentDropdownPanel.addItem) {
-            _parentDropdownPanel.addItem(this);
+        if (parentDropdownPanel?.addItem) {
+            parentDropdownPanel.addItem(this);
         }
     }
 
     /** Focuses the dropdown item. */
     focus(origin: FocusOrigin = 'program'): void {
-        if (this._focusMonitor) {
-            this._focusMonitor.focusVia(this.getHostElement(), origin);
+        if (this.focusMonitor) {
+            this.focusMonitor.focusVia(this.getHostElement(), origin);
         } else {
             this.getHostElement().focus();
         }
     }
 
     ngOnDestroy() {
-        if (this._focusMonitor) {
-            this._focusMonitor.stopMonitoring(this._elementRef.nativeElement);
+        if (this.focusMonitor) {
+            this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
         }
 
-        if (this._parentDropdownPanel && this._parentDropdownPanel.removeItem) {
-            this._parentDropdownPanel.removeItem(this);
+        if (this.parentDropdownPanel?.removeItem) {
+            this.parentDropdownPanel.removeItem(this);
         }
 
         this.hovered.complete();
@@ -110,7 +102,7 @@ export class McDropdownItem extends McDropdownItemMixinBase implements IFocusabl
 
     /** Returns the host DOM element. */
     getHostElement(): HTMLElement {
-        return this._elementRef.nativeElement;
+        return this.elementRef.nativeElement;
     }
 
     /** Prevents the default element actions if it is disabled. */
