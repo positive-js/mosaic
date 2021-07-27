@@ -1,3 +1,9 @@
+## 11.3.1 "Keenest Settings" (2021-07-27)
+
+### Mosaic
+
+ * bug fix  **popover:** fix closing popover when backdrop enabled (#UIM-691) ([#656](https://github.com/positive-js/mosaic/issues/656)) ([a883ba7](https://github.com/positive-js/mosaic/commit/a883ba79ab74c4f97d99a089b7af8bca53899b8e)), closes [#UIM-691](https://github.com/positive-js/mosaic/issues/UIM-691)
+
 # 11.3.0 "Verbal Qcd" (2021-07-26)
 
 ### Mosaic
