@@ -34,12 +34,22 @@
             Point 1
             <div class="mc-dropdown-item-caption">Some info</div>
         </button>
+
+        <div class="mc-dropdown__divider"></div>
+
         <button mc-dropdown-item>
             <i mc-icon="mc-search_16"></i>
             Very Long Point
         </button>
-        <h5>Additional info</h5>
+        <div class="mc-dropdown__group-header mc-dropdown__group-header_small">Additional info</div>
+
+        <div class="mc-dropdown__divider"></div>
+
         <button mc-dropdown-item [disabled]="true">Disabled</button>
+        <div class="mc-dropdown__group-header">Additional info</div>
+
+        <div class="mc-dropdown__divider"></div>
+
         <button mc-dropdown-item>Point 2</button>
         <a href="https://google.com" mc-link mc-dropdown-item>
             <i mc-icon="mc-search_16"></i>
@@ -69,3 +79,23 @@
         </ng-template>
     </mc-dropdown>
 </div>
+
+<br><br><br>
+
+<button mc-button [mcDropdownTriggerFor]="appDropdownNested">
+    nested dropdown <i mc-icon="mc-angle-down-L_16"></i>
+</button>
+
+<mc-dropdown #appDropdownNested="mcDropdown">
+    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdown">dropdown</button>
+    <button mc-dropdown-item>
+        Point 1 <div class="mc-dropdown-item-caption">Some info</div>
+    </button>
+</mc-dropdown>
+
+<mc-dropdown #appDropdown="mcDropdown">
+    <button mc-dropdown-item><i mc-icon="mc-search_16"></i> Very Long Point</button>
+    <button mc-dropdown-item>Point 2</button>
+    <button mc-dropdown-item>Point 3</button>
+</mc-dropdown>
+

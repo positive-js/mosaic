@@ -208,7 +208,9 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
             this.dropdown.lazyContent.attach(this.data);
         }
 
-        this.closeSubscription = this.closingActions().subscribe(() => this.close());
+        this.closeSubscription = this.closingActions()
+            .subscribe(() => this.close());
+
         this.init();
 
         if (this.dropdown instanceof McDropdown) {

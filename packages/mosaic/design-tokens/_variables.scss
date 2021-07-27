@@ -1,6 +1,6 @@
 
 // Do not edit directly
-// Generated on Fri, 23 Jul 2021 10:34:34 GMT
+// Generated on Tue, 27 Jul 2021 12:35:33 GMT
 
 $light-color-scheme-primary-default: #338FCC;
 $light-color-scheme-second-default: #B3B3B3;
@@ -348,7 +348,12 @@ $divider-size-width: 1px;
 $divider-size-inset-margin: 80px;
 $dropdown-item-size-padding: 5px 15px;
 $dropdown-item-font-default: body;
-$dropdown-item-font-caption: caption;
+$dropdown-group-header-size-default-padding: 6px 15px;
+$dropdown-group-header-size-small-padding: 8px 15px;
+$dropdown-group-header-font-default: body-strong;
+$dropdown-group-header-font-small: caption-caps;
+$dropdown-divider-size-height: 1px;
+$dropdown-divider-size-margin: 4px 0;
 $dropdown-trigger-size-padding-left: 16px;
 $dropdown-panel-size-padding: 4px 0;
 $dropdown-panel-size-border-width: 1px;

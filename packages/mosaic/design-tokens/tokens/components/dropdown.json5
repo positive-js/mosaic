@@ -5,7 +5,26 @@
         },
         font: {
             default: { value: 'body' },
-            caption: { value: 'caption' }
+        }
+    },
+    'dropdown-group-header': {
+        size: {
+            default: {
+                padding: { value: '6px 15px' }
+            },
+            small: {
+                padding: { value: '8px 15px' }
+            }
+        },
+        font: {
+            default: { value: 'body-strong' },
+            small: { value: 'caption-caps' }
+        }
+    },
+    'dropdown-divider': {
+        size: {
+            'height': { value: '1px' },
+            'margin': { value: '4px 0' }
         }
     },
     'dropdown-trigger': {

@@ -45,7 +45,7 @@ export const McDropdownItemMixinBase:
         '(mouseenter)': 'handleMouseEnter()'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None,
+    encapsulation: ViewEncapsulation.None
 })
 export class McDropdownItem extends McDropdownItemMixinBase implements IFocusableOption, CanDisable, OnDestroy {
     @ViewChild('content', { static: false }) content;

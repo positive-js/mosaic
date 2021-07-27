@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 23 Jul 2021 10:34:34 GMT
+ * Generated on Tue, 27 Jul 2021 12:35:33 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
@@ -456,7 +456,12 @@ export const DividerSizeWidth = "1px";
 export const DividerSizeInsetMargin = "80px";
 export const DropdownItemSizePadding = "5px 15px";
 export const DropdownItemFontDefault = "body";
-export const DropdownItemFontCaption = "caption";
+export const DropdownGroupHeaderSizeDefaultPadding = "6px 15px";
+export const DropdownGroupHeaderSizeSmallPadding = "8px 15px";
+export const DropdownGroupHeaderFontDefault = "body-strong";
+export const DropdownGroupHeaderFontSmall = "caption-caps";
+export const DropdownDividerSizeHeight = "1px";
+export const DropdownDividerSizeMargin = "4px 0";
 export const DropdownTriggerSizePaddingLeft = "16px";
 export const DropdownPanelSizePadding = "4px 0";
 export const DropdownPanelSizeBorderWidth = "1px";

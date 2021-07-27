@@ -23,10 +23,3 @@
 
     padding: var(--mc-dropdown-panel-size-padding, $dropdown-panel-size-padding);
 }
-
-.mc-dropdown__content {
-    h1, h2, h3, h4, h5 {
-        padding: 8px 16px 4px 16px;
-        margin: 0;
-    }
-}

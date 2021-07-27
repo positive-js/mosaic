@@ -1,7 +1,10 @@
 @import '../design-tokens/tokens';
+@import '../core/styles/common/vendor-prefixes';
 
 
 .mc-dropdown-item {
+    @include user-select(none);
+
     display: flex;
     align-items: center;
     position: relative;
@@ -32,4 +35,20 @@
     & > div {
         width: 100%;
     }
+}
+
+.mc-dropdown__group-header {
+    @include user-select(none);
+
+    padding: var(--mc-dropdown-item-size-padding, $dropdown-group-header-size-default-padding);
+
+    &.mc-dropdown__group-header_small {
+        padding: var(--mc-dropdown-item-size-padding, $dropdown-group-header-size-small-padding);
+    }
+}
+
+.mc-dropdown__divider {
+    height: var(--mc-dropdown-item-size-padding, $dropdown-divider-size-height);
+
+    margin: var(--mc-dropdown-item-size-padding, $dropdown-divider-size-margin);
 }
