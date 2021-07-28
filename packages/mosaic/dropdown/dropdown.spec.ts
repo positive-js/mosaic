@@ -1120,11 +1120,11 @@ describe('McDropdown', () => {
             overlay = overlayContainerElement;
         };
 
-        it('should set the `triggersNestedDropdown` flags on the triggers', () => {
+        it('should set the `isNested` flags on the triggers', () => {
             compileTestComponent();
-            expect(instance.rootTrigger.triggersNestedDropdown()).toBe(false);
-            expect(instance.levelOneTrigger.triggersNestedDropdown()).toBe(true);
-            expect(instance.levelTwoTrigger.triggersNestedDropdown()).toBe(true);
+            expect(instance.rootTrigger.isNested()).toBe(false);
+            expect(instance.levelOneTrigger.isNested()).toBe(true);
+            expect(instance.levelTwoTrigger.isNested()).toBe(true);
         });
 
         it('should set the `parentDropdown` on the nested dropdown instances', () => {

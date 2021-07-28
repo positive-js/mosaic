@@ -37,6 +37,12 @@
     }
 }
 
+.mc-dropdown-item-wrapper {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .mc-dropdown__group-header {
     @include user-select(none);
 

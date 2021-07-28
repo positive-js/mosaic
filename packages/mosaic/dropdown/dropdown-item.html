@@ -1,4 +1,4 @@
-<div #content>
+<div class="mc-dropdown-item-wrapper" #content>
     <ng-content></ng-content>
 </div>
-<i *ngIf="triggersNestedDropdown" mc-icon="mc-angle-right-M_16" class="mc-dropdown__trigger"></i>
+<i *ngIf="isNested" mc-icon="mc-angle-right-M_16" class="mc-dropdown__trigger"></i>

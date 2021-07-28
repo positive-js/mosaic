@@ -57,7 +57,7 @@ export class McDropdownItem extends McDropdownItemMixinBase implements IFocusabl
     highlighted: boolean = false;
 
     /** Whether the dropdown item acts as a trigger for a nested dropdown. */
-    triggersNestedDropdown: boolean = false;
+    isNested: boolean = false;
 
     constructor(
         private elementRef: ElementRef<HTMLElement>,

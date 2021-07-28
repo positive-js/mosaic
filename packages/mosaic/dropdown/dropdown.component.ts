@@ -22,7 +22,7 @@ import {
     OnInit
 } from '@angular/core';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
-import { ESCAPE, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, UP_ARROW } from '@ptsecurity/cdk/keycodes';
+import { ESCAPE, LEFT_ARROW, RIGHT_ARROW } from '@ptsecurity/cdk/keycodes';
 import { merge, Observable, Subject, Subscription } from 'rxjs';
 import { startWith, switchMap, take } from 'rxjs/operators';
 
@@ -56,6 +56,9 @@ import {
     ]
 })
 export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownItem>, OnInit, OnDestroy {
+
+    @Input() navigationWithWrap: boolean = false;
+
     /** Position of the dropdown in the X axis. */
     @Input()
     get xPosition(): DropdownPositionX {
@@ -210,10 +213,14 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
 
     ngAfterContentInit() {
         this.keyManager = new FocusKeyManager<McDropdownItem>(this.items)
-            .withWrap()
             .withTypeAhead();
 
-        this.tabSubscription = this.keyManager.tabOut.subscribe(() => this.closed.emit('tab'));
+        if (this.navigationWithWrap) {
+            this.keyManager.withWrap();
+        }
+
+        this.tabSubscription = this.keyManager.tabOut
+            .subscribe(() => this.closed.emit('tab'));
     }
 
     ngOnDestroy() {
@@ -249,9 +256,7 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
                 }
                 break;
             default:
-                if (keyCode === UP_ARROW || keyCode === DOWN_ARROW) {
-                    this.keyManager.setFocusOrigin('keyboard');
-                }
+                this.keyManager.setFocusOrigin('keyboard');
 
                 this.keyManager.onKeydown(event);
         }

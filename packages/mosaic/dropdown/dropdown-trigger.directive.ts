@@ -25,7 +25,7 @@ import {
     Self,
     ViewContainerRef
 } from '@angular/core';
-import { LEFT_ARROW, RIGHT_ARROW, SPACE, ENTER } from '@ptsecurity/cdk/keycodes';
+import { LEFT_ARROW, RIGHT_ARROW, SPACE, ENTER, DOWN_ARROW } from '@ptsecurity/cdk/keycodes';
 import { asapScheduler, merge, of as observableOf, Subscription } from 'rxjs';
 import { delay, filter, take, takeUntil } from 'rxjs/operators';
 
@@ -76,13 +76,10 @@ const passiveEventListenerOptions = normalizePassiveListenerOptions({passive: tr
 })
 export class McDropdownTrigger implements AfterContentInit, OnDestroy {
 
-    /** The text direction of the containing app. */
-    get dir(): Direction {
-        return this._dir?.value === 'rtl' ? 'rtl' : 'ltr';
-    }
-
     /** Data to be passed along to any lazily-rendered content. */
     @Input('mcDropdownTriggerData') data: any;
+
+    @Input() openByArrowDown: boolean = false;
 
     /** References the dropdown instance that the trigger is associated with. */
     @Input('mcDropdownTriggerFor')
@@ -121,6 +118,11 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
     // the first item of the list when the dropdown is opened via the keyboard
     openedBy: 'mouse' | 'touch' | 'keyboard' | null = null;
 
+    /** The text direction of the containing app. */
+    get dir(): Direction {
+        return this._dir?.value === 'rtl' ? 'rtl' : 'ltr';
+    }
+
     /** Whether the dropdown is open. */
     get opened(): boolean {
         return this._opened;
@@ -153,7 +155,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
         );
 
         if (dropdownItemInstance) {
-            dropdownItemInstance.triggersNestedDropdown = this.triggersNestedDropdown();
+            dropdownItemInstance.isNested = this.isNested();
         }
     }
 
@@ -179,7 +181,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
     }
 
     /** Whether the dropdown triggers a nested dropdown or a top-level one. */
-    triggersNestedDropdown(): boolean {
+    isNested(): boolean {
         return !!(this.dropdownItemInstance && this.parent);
     }
 
@@ -200,8 +202,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
 
         this.setPosition(overlayConfig.positionStrategy as FlexibleConnectedPositionStrategy);
 
-        overlayConfig.hasBackdrop = this.dropdown.hasBackdrop ? !this.triggersNestedDropdown() :
-            this.dropdown.hasBackdrop;
+        overlayConfig.hasBackdrop = this.dropdown.hasBackdrop ? !this.isNested() : this.dropdown.hasBackdrop;
 
         overlayRef.attach(this.getPortal());
 
@@ -245,7 +246,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
         // Since clicking on the trigger won't close the dropdown if it opens a nested dropdown,
         // we should prevent focus from moving onto it via click to avoid the
         // highlight from lingering on the dropdown item.
-        if (this.triggersNestedDropdown()) {
+        if (this.isNested()) {
             event.preventDefault();
         }
     }
@@ -253,17 +254,14 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
     /** Handles key presses on the trigger. */
     handleKeydown(event: KeyboardEvent): void {
         // tslint:disable-next-line:deprecation
-        const keyCode = event.key || event.keyCode;
+        const keyCode = event.keyCode;
 
         this.openedBy = 'keyboard';
 
-        if (keyCode === SPACE || keyCode === ENTER) {
-            this.open();
-        }
-
         if (
-            this.triggersNestedDropdown() &&
-            ((keyCode === RIGHT_ARROW && this.dir === 'ltr') || (keyCode === LEFT_ARROW && this.dir === 'rtl'))
+            (this.isNested() &&
+                ((keyCode === RIGHT_ARROW && this.dir === 'ltr') || (keyCode === LEFT_ARROW && this.dir === 'rtl'))) ||
+            (!this.isNested() && ([SPACE, ENTER].includes(keyCode) || keyCode === DOWN_ARROW && this.openByArrowDown))
         ) {
             this.open();
         }
@@ -271,7 +269,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
 
     /** Handles click events on the trigger. */
     handleClick(event: MouseEvent): void {
-        if (this.triggersNestedDropdown()) {
+        if (this.isNested()) {
             // Stop event propagation to avoid closing the parent dropdown.
             event.stopPropagation();
             this.open();
@@ -333,7 +331,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
      * the dropdown was opened via the keyboard.
      */
     private init(): void {
-        this.dropdown.parent = this.triggersNestedDropdown() ? this.parent : undefined;
+        this.dropdown.parent = this.isNested() ? this.parent : undefined;
         this.dropdown.direction = this.dir;
         this.setIsOpened(true);
         this.dropdown.focusFirstItem(this.openedBy);
@@ -353,7 +351,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
             // Note that the focus style will show up both for `program` and
             // `keyboard` so we don't have to specify which one it is.
             this.focus();
-        } else if (!this.triggersNestedDropdown()) {
+        } else if (!this.isNested()) {
             this.focus(this.openedBy);
         }
 
@@ -366,7 +364,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
         // tslint:disable-next-line:no-void-expression
         this._opened ? this.dropdownOpened.emit() : this.dropdownClosed.emit();
 
-        if (this.triggersNestedDropdown()) {
+        if (this.isNested()) {
             this.dropdownItemInstance.highlighted = isOpen;
         }
     }
@@ -454,7 +452,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
         let offsetY = 0;
         let offsetX = 0;
 
-        if (this.triggersNestedDropdown()) {
+        if (this.isNested()) {
             // When the dropdown is nested, it should always align itself
             // to the edges of the trigger, instead of overlapping it.
             overlayFallbackX = originX = this.dropdown.xPosition === 'before' ? 'start' : 'end';
@@ -519,7 +517,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
     /** Handles the cases where the user hovers over the trigger. */
     private handleHover() {
         // Subscribe to changes in the hovered item in order to toggle the panel.
-        if (!this.triggersNestedDropdown()) { return; }
+        if (!this.isNested()) { return; }
 
         this.hoverSubscription = this.parent.hovered()
         // Since we might have multiple competing triggers for the same dropdown (e.g. a nested dropdown
