@@ -53,7 +53,8 @@ export const MC_DROPDOWN_SCROLL_STRATEGY_FACTORY_PROVIDER = {
 };
 
 /** Default top padding of the nested dropdown panel. */
-export const NESTED_PANEL_TOP_PADDING = 2;
+export const NESTED_PANEL_TOP_PADDING = 4;
+export const NESTED_PANEL_LEFT_PADDING = 8;
 
 /** Options for binding a passive event listener. */
 const passiveEventListenerOptions = normalizePassiveListenerOptions({passive: true});
@@ -393,7 +394,8 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
             // Consume the `keydownEvents` in order to prevent them from going to another overlay.
             // Ideally we'd also have our keyboard event logic in here, however doing so will
             // break anybody that may have implemented the `McDropdownPanel` themselves.
-            this.overlayRef.keydownEvents().subscribe();
+            this.overlayRef.keydownEvents()
+                .subscribe();
         }
 
         return this.overlayRef;
@@ -450,6 +452,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
                 ['top', 'bottom', 'top', 'bottom'];
 
         let offsetY = 0;
+        let offsetX = 0;
 
         if (this.triggersNestedDropdown()) {
             // When the dropdown is nested, it should always align itself
@@ -457,6 +460,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
             overlayFallbackX = originX = this.dropdown.xPosition === 'before' ? 'start' : 'end';
             originFallbackX = overlayX = originX === 'end' ? 'start' : 'end';
             offsetY = overlayY === 'bottom' ? NESTED_PANEL_TOP_PADDING : -NESTED_PANEL_TOP_PADDING;
+            offsetX = NESTED_PANEL_LEFT_PADDING;
         } else {
             if (!this.dropdown.overlapTriggerY) {
                 originY = overlayY === 'top' ? 'bottom' : 'top';
@@ -470,21 +474,23 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
         }
 
         positionStrategy.withPositions([
-            { originX, originY, overlayX, overlayY, offsetY },
-            { originX: originFallbackX, originY, overlayX: overlayFallbackX, overlayY, offsetY },
+            { originX, originY, overlayX, overlayY, offsetY, offsetX: -offsetX },
+            { originX: originFallbackX, originY, overlayX: overlayFallbackX, overlayY, offsetY, offsetX },
             {
                 originX,
                 originY: originFallbackY,
                 overlayX,
                 overlayY: overlayFallbackY,
-                offsetY: -offsetY
+                offsetY: -offsetY,
+                offsetX: -offsetX
             },
             {
                 originX: originFallbackX,
                 originY: originFallbackY,
                 overlayX: overlayFallbackX,
                 overlayY: overlayFallbackY,
-                offsetY: -offsetY
+                offsetY: -offsetY,
+                offsetX: -offsetX
             }
         ]);
     }

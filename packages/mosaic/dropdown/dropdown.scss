@@ -7,8 +7,6 @@
 }
 
 .mc-dropdown__panel {
-    min-width: 100%; // prevents some animation twitching and test inconsistencies in IE11
-
     overflow: auto;
 
     margin-top: -1px;
