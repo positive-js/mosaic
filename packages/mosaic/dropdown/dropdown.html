@@ -2,7 +2,7 @@
     <div class="mc-dropdown__panel"
          [ngClass]="classList"
          (keydown)="handleKeydown($event)"
-         (click)="handleClick()"
+         (click)="handleClick($event)"
          [@transformDropdown]="panelAnimationState"
          (@transformDropdown.start)="onAnimationStart($event)"
          (@transformDropdown.done)="onAnimationDone($event)">

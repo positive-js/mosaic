@@ -13,6 +13,9 @@ export type DropdownPositionX = 'before' | 'after';
 
 export type DropdownPositionY = 'above' | 'below';
 
+/** Reason why the menu was closed. */
+export type DropdownCloseReason = void | 'click' | 'keydown' | 'tab';
+
 /**
  * Interface for a custom dropdown panel that can be used with `mcDropdownTriggerFor`.
  * @docs-private
@@ -24,7 +27,7 @@ export interface McDropdownPanel<T = any> {
     overlapTriggerX: boolean;
     overlapTriggerY: boolean;
     templateRef: TemplateRef<any>;
-    closed: EventEmitter<void | 'click' | 'keydown' | 'tab'>;
+    closed: EventEmitter<DropdownCloseReason>;
     parent?: McDropdownPanel | undefined;
     direction?: Direction;
     lazyContent?: McDropdownContent;

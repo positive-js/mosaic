@@ -1,12 +1,12 @@
 <div>
     <span class="mc-group">
-        <button mc-button class="mc-group-item" >dropdown</button>
-
         <button mc-button class="mc-group-item mc-active"
                 [ngClass]="{ 'mc-active': isDropdownOpen}"
                 [mcDropdownTriggerFor]="appDropdown"
                 (dropdownOpened)="dropdownOpened()"
                 (dropdownClosed)="dropdownClosed()">
+
+            dropdown
             <i mc-icon="mc-angle-down-L_16"></i>
         </button>
     </span>
@@ -14,14 +14,6 @@
     <br>
 
     <button mc-button class="mc-button_transparent" [mcDropdownTriggerFor]="appDropdown">
-        dropdown
-        <i mc-icon="mc-angle-down-L_16"></i>
-    </button>
-
-    <br>
-    <br>
-
-    <button mc-button [mcDropdownTriggerFor]="appDropdown">
         dropdown
         <i mc-icon="mc-angle-down-L_16"></i>
     </button>
@@ -87,30 +79,25 @@
 </button>
 
 <mc-dropdown #appDropdownWithNested="mcDropdown">
-    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNested">dropdown 1</button>
+    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNested">1 level (1)</button>
+    <button mc-dropdown-item>1 level (2)</button>
+    <button mc-dropdown-item>1 level (3)</button>
     <button mc-dropdown-item>
         <i mc-icon="mc-search_16"></i>
         Very Long Point Very Long Point Very Long Point Very Long Point Very Long Point
     </button>
-    <button mc-dropdown-item>Point 2</button>
-    <button mc-dropdown-item>Point 3</button>
 </mc-dropdown>
 
 <mc-dropdown #appDropdownNested="mcDropdown">
-    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNestedNested">dropdown 2</button>
-    <button mc-dropdown-item>
-        Point 1 <div class="mc-dropdown-item-caption">Some info</div>
-    </button>
+    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNestedNested">2 level (1)</button>
+    <button mc-dropdown-item>2 level (2)</button>
+    <button mc-dropdown-item>2 level (3)</button>
 </mc-dropdown>
 
 <mc-dropdown #appDropdownNestedNested="mcDropdown">
-    <button mc-dropdown-item>
-        Point 1 <div class="mc-dropdown-item-caption">Some info</div>
-    </button>
-
-    <button mc-dropdown-item>
-        Point 2 <div class="mc-dropdown-item-caption">Some info</div>
-    </button>
+    <button mc-dropdown-item>3 level (1)</button>
+    <button mc-dropdown-item>3 level (2)</button>
+    <button mc-dropdown-item>3 level (3)</button>
 </mc-dropdown>
 
 

@@ -32,7 +32,7 @@ import { delay, filter, take, takeUntil } from 'rxjs/operators';
 import { throwMcDropdownMissingError } from './dropdown-errors';
 import { McDropdownItem } from './dropdown-item.component';
 import { McDropdown } from './dropdown.component';
-import { DropdownPositionX, DropdownPositionY, McDropdownPanel } from './dropdown.types';
+import { DropdownCloseReason, DropdownPositionX, DropdownPositionY, McDropdownPanel } from './dropdown.types';
 
 
 /** Injection token that determines the scroll handling while the dropdown is open. */
@@ -81,6 +81,13 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
 
     @Input() openByArrowDown: boolean = true;
 
+    /**
+     * Whether focus should be restored when the menu is closed.
+     * Note that disabling this option can have accessibility implications
+     * and it's up to you to manage focus, if you decide to turn it off.
+     */
+    @Input('mcDropdownTriggerRestoreFocus') restoreFocus: boolean = true;
+
     /** References the dropdown instance that the trigger is associated with. */
     @Input('mcDropdownTriggerFor')
     get dropdown() {
@@ -97,7 +104,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
             this.closeSubscription = dropdown.closed
                 .asObservable()
                 .subscribe((reason) => {
-                    this.destroy();
+                    this.destroy(reason);
 
                     // If a click closed the dropdown, we should close the entire chain of nested dropdowns.
                     if (['click', 'tab'].includes(reason as string) && this.parent) {
@@ -117,7 +124,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
 
     // Tracking input type is necessary so it's possible to only auto-focus
     // the first item of the list when the dropdown is opened via the keyboard
-    openedBy: 'mouse' | 'touch' | 'keyboard' | null = null;
+    openedBy: Exclude<FocusOrigin, 'program' | null> | undefined;
 
     /** The text direction of the containing app. */
     get dir(): Direction {
@@ -242,7 +249,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
     handleMousedown(event: MouseEvent): void {
         // Since right or middle button clicks won't trigger the `click` event,
         // we shouldn't consider the dropdown as opened by mouse in those cases.
-        this.openedBy = event.button === 0 ? 'mouse' : null;
+        this.openedBy = event.button === 0 ? 'mouse' : undefined;
 
         // Since clicking on the trigger won't close the dropdown if it opens a nested dropdown,
         // we should prevent focus from moving onto it via click to avoid the
@@ -257,13 +264,13 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
         // tslint:disable-next-line:deprecation
         const keyCode = event.keyCode;
 
-        this.openedBy = 'keyboard';
 
         if (
             (this.isNested() &&
                 ((keyCode === RIGHT_ARROW && this.dir === 'ltr') || (keyCode === LEFT_ARROW && this.dir === 'rtl'))) ||
             (!this.isNested() && ([SPACE, ENTER].includes(keyCode) || keyCode === DOWN_ARROW && this.openByArrowDown))
         ) {
+            this.openedBy = 'keyboard';
             this.open();
         }
     }
@@ -288,13 +295,17 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
     private handleTouchStart = () => this.openedBy = 'touch';
 
     /** Closes the dropdown and does the necessary cleanup. */
-    private destroy() {
+    private destroy(reason: DropdownCloseReason) {
         if (!this.overlayRef || !this.opened) { return; }
 
         const dropdown = this.dropdown;
 
         this.closeSubscription.unsubscribe();
         this.overlayRef.detach();
+
+        if (this.restoreFocus && reason === 'keydown' && this.isNested()) {
+            this.focus(this.openedBy);
+        }
 
         if (dropdown instanceof McDropdown) {
             dropdown.resetAnimation();
@@ -358,7 +369,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
             this.focus(this.openedBy);
         }
 
-        this.openedBy = null;
+        this.openedBy = undefined;
     }
 
     // set state rather than toggle to support triggers sharing a dropdown
