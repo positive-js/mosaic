@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 30 Jul 2021 10:47:22 GMT
+ * Generated on Fri, 30 Jul 2021 12:31:59 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
@@ -456,6 +456,7 @@ export const DividerSizeWidth = "1px";
 export const DividerSizeInsetMargin = "80px";
 export const DropdownItemSizePadding = "5px 15px";
 export const DropdownItemFontDefault = "body";
+export const DropdownItemFontCaption = "caption";
 export const DropdownGroupHeaderSizeDefaultPadding = "6px 15px";
 export const DropdownGroupHeaderSizeSmallPadding = "8px 15px";
 export const DropdownGroupHeaderFontDefault = "body-strong";

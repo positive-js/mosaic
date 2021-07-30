@@ -1,16 +1,25 @@
-<button mc-button [mcDropdownTriggerFor]="appDropdownNested">
-    nested dropdown <i mc-icon="mc-angle-down-L_16"></i>
+<button mc-button [mcDropdownTriggerFor]="appDropdownWithNested">
+    dropdown <i mc-icon="mc-angle-down-L_16"></i>
 </button>
 
-<mc-dropdown #appDropdownNested="mcDropdown">
-    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdown">dropdown</button>
+<mc-dropdown #appDropdownWithNested="mcDropdown">
+    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNested">1 level (1)</button>
+    <button mc-dropdown-item>1 level (2)</button>
+    <button mc-dropdown-item>1 level (3)</button>
     <button mc-dropdown-item>
-        Point 1 <div class="mc-dropdown-item-caption">Some info</div>
+        <i mc-icon="mc-search_16"></i>
+        Very Long Point
     </button>
 </mc-dropdown>
 
-<mc-dropdown #appDropdown="mcDropdown">
-    <button mc-dropdown-item><i mc-icon="mc-search_16"></i> Very Long Point</button>
-    <button mc-dropdown-item>Point 2</button>
-    <button mc-dropdown-item>Point 3</button>
+<mc-dropdown #appDropdownNested="mcDropdown">
+    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNestedNested">2 level (1)</button>
+    <button mc-dropdown-item>2 level (2)</button>
+    <button mc-dropdown-item>2 level (3)</button>
+</mc-dropdown>
+
+<mc-dropdown #appDropdownNestedNested="mcDropdown">
+    <button mc-dropdown-item>3 level (1)</button>
+    <button mc-dropdown-item>3 level (2)</button>
+    <button mc-dropdown-item>3 level (3)</button>
 </mc-dropdown>

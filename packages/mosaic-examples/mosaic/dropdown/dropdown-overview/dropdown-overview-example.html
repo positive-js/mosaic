@@ -1,54 +1,59 @@
-<div class="example-dropdown-group">
-    <span class="mc-group example-dropdown-element">
-        <button mc-button class="mc-group-item" [disabled]="disabled">dropdown</button>
-        <button mc-button class="mc-group-item" [mcDropdownTriggerFor]="appDropdown" [disabled]="disabled">
-            <i mc-icon="mc-angle-down-L_16"></i>
+<button mc-button
+        [mcDropdownTriggerFor]="appDropdown"
+        [disabled]="disabled">
+    dropdown <i mc-icon="mc-angle-down-L_16"></i>
+</button>
+
+<mc-dropdown #appDropdown="mcDropdown" [class]="'max-width'">
+    <button mc-dropdown-item class="mc-selected">
+        Point 1 <div class="mc-dropdown-item__caption">Some info</div>
+    </button>
+
+    <button mc-dropdown-item>
+        <i mc-icon="mc-search_16"></i> Very Very Very Long Point
+    </button>
+
+    <div class="mc-dropdown__divider"></div>
+
+    <div class="mc-dropdown__group-header">Additional info</div>
+
+    <button mc-dropdown-item disabled>Disabled</button>
+
+    <div class="mc-dropdown__divider"></div>
+
+    <button mc-dropdown-item>Point 2</button>
+
+    <a href="https://google.com" mc-link mc-dropdown-item>
+        <i mc-icon="mc-search_16"></i>
+        <span class="mc-link__text">Link</span>
+    </a>
+
+    <button mc-dropdown-item>Point 3</button>
+</mc-dropdown>
+
+<br><br><br>
+
+<mc-form-field class="max-width">
+    <input mcInput type="text" [(ngModel)]="someValue">
+</mc-form-field>
+
+<br><br>
+
+<button mc-button [mcDropdownTriggerFor]="appDropdownLazy" [mcDropdownTriggerData]="{someValue: someValue}"
+        [disabled]="disabled">
+    dropdown lazy <i mc-icon="mc-angle-down-L_16"></i>
+</button>
+
+<mc-dropdown #appDropdownLazy="mcDropdown">
+    <ng-template mcDropdownContent let-someValue="someValue">
+        <button mc-dropdown-item [disabled]="disabled">dropdown</button>
+        <button mc-dropdown-item>
+            Point 1 <div class="mc-dropdown-item__caption">Some info</div>
         </button>
-    </span>
+        <button mc-dropdown-item>Value: {{someValue}}</button>
+    </ng-template>
+</mc-dropdown>
 
-    <span class="example-dropdown-element">
-        <button mc-button class="example-dropdown-element" [mcDropdownTriggerFor]="appDropdown" [disabled]="disabled">
-            dropdown <i mc-icon="mc-angle-down-L_16"></i>
-        </button>
+<br><br>
 
-        <mc-dropdown #appDropdown="mcDropdown">
-            <button mc-dropdown-item class="mc-selected">
-                Point 1 <div class="mc-dropdown-item-caption">Some info</div>
-            </button>
-            <button mc-dropdown-item>
-                <i mc-icon="mc-search_16"></i> Very Long Point
-            </button>
-            <h5>Additional info</h5>
-            <button mc-dropdown-item disabled>Disabled</button>
-            <button mc-dropdown-item>Point 2</button>
-            <a href="https://google.com" mc-link mc-dropdown-item>
-                <i mc-icon="mc-search_16"></i>
-                <span class="mc-link__text">Link</span>
-            </a>
-            <button mc-dropdown-item>Point 3</button>
-        </mc-dropdown>
-    </span>
-
-    <div  class="example-dropdown-element">
-        <input mcInput type="text" [(ngModel)]="someValue">
-    </div>
-
-    <span class="example-dropdown-element">
-        <button mc-button [mcDropdownTriggerFor]="appDropdownLazy" [mcDropdownTriggerData]="{someValue: someValue}"
-                [disabled]="disabled">
-            dropdown lazy <i mc-icon="mc-angle-down-L_16"></i>
-        </button>
-
-        <mc-dropdown #appDropdownLazy="mcDropdown">
-            <ng-template mcDropdownContent  let-someValue="someValue">
-                <button mc-dropdown-item [disabled]="disabled">dropdown</button>
-                <button mc-dropdown-item>
-                    Point 1 <div class="mc-dropdown-item-caption">Some info</div>
-                </button>
-                <button mc-dropdown-item>Value: {{someValue}}</button>
-            </ng-template>
-        </mc-dropdown>
-    </span>
-
-    <mc-checkbox class="example-dropdown-element" [checked]="disabled" (change)="toggleDisabled()">Disabled</mc-checkbox>
-</div>
+<mc-checkbox [checked]="disabled" (change)="toggleDisabled()">Disabled</mc-checkbox>

@@ -5,6 +5,7 @@
         },
         font: {
             default: { value: 'body' },
+            caption: { value: 'caption' }
         }
     },
     'dropdown-group-header': {

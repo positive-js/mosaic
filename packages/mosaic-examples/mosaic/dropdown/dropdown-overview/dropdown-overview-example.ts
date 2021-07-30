@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 
 /**
@@ -7,7 +7,8 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'dropdown-overview-example',
     templateUrl: 'dropdown-overview-example.html',
-    styleUrls: ['dropdown-overview-example.css']
+    styleUrls: ['dropdown-overview-example.css'],
+    encapsulation: ViewEncapsulation.None
 })
 export class DropdownOverviewExample {
     someValue = 'Lazy Value';

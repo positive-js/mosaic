@@ -21,10 +21,12 @@
     <br>
     <br>
 
-    <mc-dropdown #appDropdown="mcDropdown" [overlapTriggerY]="true" [overlapTriggerX]="false">
+    <mc-dropdown #appDropdown="mcDropdown"
+                 [overlapTriggerY]="true"
+                 [overlapTriggerX]="false">
         <button mc-dropdown-item>
             Point 1
-            <div class="mc-dropdown-item-caption">Some info</div>
+            <div class="mc-dropdown-item__caption">Some info</div>
         </button>
 
         <div class="mc-dropdown__divider"></div>
@@ -65,7 +67,7 @@
         <ng-template mcDropdownContent  let-someValue="someValue">
             <button mc-dropdown-item>
                 Point 1
-                <div class="mc-dropdown-item-caption">Some info</div>
+                <div class="mc-dropdown-item__caption">Some info</div>
             </button>
             <button mc-dropdown-item>Value: {{someValue}}</button>
         </ng-template>

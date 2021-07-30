@@ -1,8 +1,3 @@
-.example-dropdown-group {
-    display: inline-flex;
-    flex-direction: column;
-}
-
-.example-dropdown-element {
-    margin-bottom: 10px;
+.max-width {
+    max-width: 200px;
 }

@@ -417,44 +417,6 @@ describe('McDropdown', () => {
         expect(panel.classList).toContain('custom-two');
     });
 
-    it('should set the "menu" role on the overlay panel', () => {
-        const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
-        fixture.detectChanges();
-        fixture.componentInstance.trigger.open();
-        fixture.detectChanges();
-
-        const dropdownPanel = overlayContainerElement.querySelector(PANEL_SELECTOR);
-
-        expect(dropdownPanel).toBeTruthy('Expected to find a dropdown panel.');
-
-        const role = dropdownPanel ? dropdownPanel.getAttribute('role') : '';
-        expect(role).toBe('dropdown', 'Expected panel to have the "dropdown" role.');
-    });
-
-    it('should set the "menuitem" role on the items by default', () => {
-        const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
-        fixture.detectChanges();
-        fixture.componentInstance.trigger.open();
-        fixture.detectChanges();
-
-        const items = Array.from(overlayContainerElement.querySelectorAll('[mc-dropdown-item]'));
-
-        expect(items.length).toBeGreaterThan(0);
-        expect(items.every((item) => item.getAttribute('role') === 'menuitem')).toBe(true);
-    });
-
-    it('should be able to set an alternate role on the dropdown items', () => {
-        const fixture = createComponent(DropdownWithCheckboxItems);
-        fixture.detectChanges();
-        fixture.componentInstance.trigger.open();
-        fixture.detectChanges();
-
-        const items = Array.from(overlayContainerElement.querySelectorAll('[mc-dropdown-item]'));
-
-        expect(items.length).toBeGreaterThan(0);
-        expect(items.every((item) => item.getAttribute('role') === 'menuitemcheckbox')).toBe(true);
-    });
-
     it('should not throw an error on destroy', () => {
         const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
         expect(fixture.destroy.bind(fixture)).not.toThrow();
@@ -2069,8 +2031,8 @@ class DynamicPanelDropdown {
         <button [mcDropdownTriggerFor]="dropdown">Toggle dropdown</button>
 
         <mc-dropdown #dropdown="mcDropdown">
-            <button mc-dropdown-item role="menuitemcheckbox" aria-checked="true">Checked</button>
-            <button mc-dropdown-item role="menuitemcheckbox" aria-checked="false">Not checked</button>
+            <button mc-dropdown-item>Checked</button>
+            <button mc-dropdown-item>Not checked</button>
         </mc-dropdown>
     `
 })
