@@ -1,11 +1,6 @@
 @import '../design-tokens/tokens';
 
 
-.mc-dropdown__trigger {
-    margin-left: auto;
-    padding-left: var(--mc-dropdown-trigger-size-padding-left, $dropdown-trigger-size-padding-left);
-}
-
 .mc-dropdown__panel {
     overflow: auto;
 

@@ -29,7 +29,7 @@
     },
     'dropdown-trigger': {
         size: {
-            'padding-left': { value: '{padding.control-horizontal}' }
+            'icon-padding-right': { value: '8px' }
         }
     },
     'dropdown-panel': {
