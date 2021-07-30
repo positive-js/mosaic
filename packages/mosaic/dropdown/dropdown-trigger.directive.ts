@@ -79,7 +79,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
     /** Data to be passed along to any lazily-rendered content. */
     @Input('mcDropdownTriggerData') data: any;
 
-    @Input() openByArrowDown: boolean = false;
+    @Input() openByArrowDown: boolean = true;
 
     /** References the dropdown instance that the trigger is associated with. */
     @Input('mcDropdownTriggerFor')
@@ -94,12 +94,13 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
         this.closeSubscription.unsubscribe();
 
         if (dropdown) {
-            this.closeSubscription = dropdown.closed.asObservable()
+            this.closeSubscription = dropdown.closed
+                .asObservable()
                 .subscribe((reason) => {
                     this.destroy();
 
                     // If a click closed the dropdown, we should close the entire chain of nested dropdowns.
-                    if ((reason === 'click' || reason === 'tab') && this.parent) {
+                    if (['click', 'tab'].includes(reason as string) && this.parent) {
                         this.parent.closed.emit(reason);
                     }
                 });
@@ -272,7 +273,9 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
         if (this.isNested()) {
             // Stop event propagation to avoid closing the parent dropdown.
             event.stopPropagation();
-            this.open();
+            if (event.detail) {
+                this.open();
+            }
         } else {
             this.toggle();
         }

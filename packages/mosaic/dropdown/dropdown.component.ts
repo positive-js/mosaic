@@ -135,7 +135,7 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
 
         this.previousPanelClass = classes;
 
-        if (classes && classes.length) {
+        if (classes?.length) {
             classes
                 .split(' ')
                 .forEach((className: string) => this.classList[className] = true);
@@ -186,8 +186,7 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
     @ContentChild(McDropdownContent, { static: false }) lazyContent: McDropdownContent;
 
     /** Event emitted when the dropdown is closed. */
-    @Output() readonly closed: EventEmitter<void | 'click' | 'keydown' | 'tab'> =
-        new EventEmitter<void | 'click' | 'keydown' | 'tab'>();
+    @Output() readonly closed = new EventEmitter<void | 'click' | 'keydown' | 'tab'>();
 
     private previousPanelClass: string;
 
@@ -240,6 +239,7 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
     handleKeydown(event: KeyboardEvent) {
         // tslint:disable-next-line:deprecation
         const keyCode = event.keyCode;
+
 
         switch (keyCode) {
             case ESCAPE:

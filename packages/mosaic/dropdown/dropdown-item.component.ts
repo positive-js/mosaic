@@ -106,7 +106,7 @@ export class McDropdownItem extends McDropdownItemMixinBase implements IFocusabl
     }
 
     /** Prevents the default element actions if it is disabled. */
-    haltDisabledEvents(event: MouseEvent): void {
+    haltDisabledEvents(event: Event): void {
         if (this.disabled) {
             event.preventDefault();
             event.stopPropagation();

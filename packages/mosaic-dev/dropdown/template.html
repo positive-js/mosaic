@@ -87,7 +87,7 @@
 </button>
 
 <mc-dropdown #appDropdownWithNested="mcDropdown">
-    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNested">dropdown</button>
+    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNested">dropdown 1</button>
     <button mc-dropdown-item>
         <i mc-icon="mc-search_16"></i>
         Very Long Point Very Long Point Very Long Point Very Long Point Very Long Point
@@ -97,16 +97,19 @@
 </mc-dropdown>
 
 <mc-dropdown #appDropdownNested="mcDropdown">
-    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNestedNested">dropdown</button>
+    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNestedNested">dropdown 2</button>
     <button mc-dropdown-item>
         Point 1 <div class="mc-dropdown-item-caption">Some info</div>
     </button>
 </mc-dropdown>
 
 <mc-dropdown #appDropdownNestedNested="mcDropdown">
-    <button mc-dropdown-item>dropdown</button>
     <button mc-dropdown-item>
         Point 1 <div class="mc-dropdown-item-caption">Some info</div>
+    </button>
+
+    <button mc-dropdown-item>
+        Point 2 <div class="mc-dropdown-item-caption">Some info</div>
     </button>
 </mc-dropdown>
 
