@@ -29,6 +29,7 @@ export interface McDropdownPanel<T = any> {
     templateRef: TemplateRef<any>;
     closed: EventEmitter<DropdownCloseReason>;
     parent?: McDropdownPanel | undefined;
+    triggerWidth?: string;
     direction?: Direction;
     lazyContent?: McDropdownContent;
     backdropClass?: string;

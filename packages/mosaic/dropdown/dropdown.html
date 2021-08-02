@@ -1,5 +1,5 @@
 <ng-template>
-    <div class="mc-dropdown__panel"
+    <div class="mc-dropdown__panel" [style.min-width]="triggerWidth"
          [ngClass]="classList"
          (keydown)="handleKeydown($event)"
          (click)="handleClick()"

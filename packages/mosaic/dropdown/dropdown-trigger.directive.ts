@@ -350,6 +350,9 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
     private init(): void {
         this.dropdown.parent = this.isNested() ? this.parent : undefined;
         this.dropdown.direction = this.dir;
+        if (!this.dropdown.parent) {
+            this.dropdown.triggerWidth = this.getWidth();
+        }
         this.setIsOpened(true);
         this.dropdown.focusFirstItem(this.openedBy);
     }
@@ -576,5 +579,13 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
         }
 
         return this.portal;
+    }
+
+    private getWidth(): string {
+        const nativeElement = this.elementRef.nativeElement;
+
+        const { width, borderRightWidth, borderLeftWidth } = window.getComputedStyle(nativeElement);
+
+        return `${parseInt(width) - parseInt(borderRightWidth) - parseInt(borderLeftWidth)}px`;
     }
 }
