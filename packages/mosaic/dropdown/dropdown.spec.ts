@@ -41,6 +41,7 @@ import {
     MC_DROPDOWN_DEFAULT_OPTIONS,
     MC_DROPDOWN_SCROLL_STRATEGY,
     NESTED_PANEL_TOP_PADDING,
+    NESTED_PANEL_LEFT_PADDING,
     McDropdown,
     McDropdownItem,
     McDropdownModule,
@@ -1248,28 +1249,6 @@ describe('McDropdown', () => {
                 .toBe(1, 'Expected to remain at one open dropdown');
         }));
 
-        it('should open a nested dropdown when its trigger is clicked', fakeAsync(() => {
-            compileTestComponent();
-
-            instance.rootTriggerEl.nativeElement.click();
-            fixture.detectChanges();
-            flush();
-            expect(overlay.querySelectorAll(PANEL_SELECTOR).length).toBe(1, 'Expected one open dropdown');
-
-            const levelOneTrigger = overlay.querySelector('#level-one-trigger')! as HTMLElement;
-
-            levelOneTrigger.click();
-            fixture.detectChanges();
-            flush();
-            expect(overlay.querySelectorAll(PANEL_SELECTOR).length).toBe(2, 'Expected two open dropdowns');
-
-            levelOneTrigger.click();
-            fixture.detectChanges();
-            flush();
-            expect(overlay.querySelectorAll(PANEL_SELECTOR).length)
-                .toBe(1, 'Expected second click to close the dropdown.');
-        }));
-
         it('should open and close a nested dropdown with arrow keys in ltr', fakeAsync(() => {
             compileTestComponent();
             instance.rootTriggerEl.nativeElement.click();
@@ -1404,8 +1383,10 @@ describe('McDropdown', () => {
             const triggerRect = overlay.querySelector('#level-one-trigger')!.getBoundingClientRect();
             const panelRect = overlay.querySelectorAll('.cdk-overlay-pane')[1].getBoundingClientRect();
 
-            expect(Math.round(triggerRect.right)).toBe(Math.round(panelRect.left));
-            expect(Math.round(triggerRect.top)).toBe(Math.round(panelRect.top) + NESTED_PANEL_TOP_PADDING);
+            expect(Math.round(triggerRect.right))
+                .toBe(Math.round(panelRect.left) + NESTED_PANEL_LEFT_PADDING);
+            expect(Math.round(triggerRect.top))
+                .toBe(Math.round(panelRect.top) + NESTED_PANEL_TOP_PADDING);
         });
 
         it('should fall back to aligning to the left edge of the trigger in ltr', () => {
@@ -1422,8 +1403,10 @@ describe('McDropdown', () => {
             const triggerRect = overlay.querySelector('#level-one-trigger')!.getBoundingClientRect();
             const panelRect = overlay.querySelectorAll('.cdk-overlay-pane')[1].getBoundingClientRect();
 
-            expect(Math.round(triggerRect.left)).toBe(Math.round(panelRect.right));
-            expect(Math.round(triggerRect.top)).toBe(Math.round(panelRect.top) + NESTED_PANEL_TOP_PADDING);
+            expect(Math.round(triggerRect.left))
+                .toBe(Math.round(panelRect.right) - NESTED_PANEL_LEFT_PADDING);
+            expect(Math.round(triggerRect.top))
+                .toBe(Math.round(panelRect.top) + NESTED_PANEL_TOP_PADDING);
         });
 
         it('should position the nested dropdown to the left edge of the trigger in rtl', () => {
@@ -1440,7 +1423,7 @@ describe('McDropdown', () => {
             const triggerRect = overlay.querySelector('#level-one-trigger')!.getBoundingClientRect();
             const panelRect = overlay.querySelectorAll('.cdk-overlay-pane')[1].getBoundingClientRect();
 
-            expect(Math.round(triggerRect.left)).toBe(Math.round(panelRect.right));
+            expect(Math.round(triggerRect.left)).toBe(Math.round(panelRect.right) + NESTED_PANEL_LEFT_PADDING);
             expect(Math.round(triggerRect.top)).toBe(Math.round(panelRect.top) + NESTED_PANEL_TOP_PADDING);
         });
 
@@ -1460,8 +1443,10 @@ describe('McDropdown', () => {
             const triggerRect = overlay.querySelector('#level-one-trigger')!.getBoundingClientRect();
             const panelRect = overlay.querySelectorAll('.cdk-overlay-pane')[1].getBoundingClientRect();
 
-            expect(Math.round(triggerRect.right)).toBe(Math.round(panelRect.left));
-            expect(Math.round(triggerRect.top)).toBe(Math.round(panelRect.top) + NESTED_PANEL_TOP_PADDING);
+            expect(Math.round(triggerRect.right))
+                .toBe(Math.round(panelRect.left) - NESTED_PANEL_LEFT_PADDING);
+            expect(Math.round(triggerRect.top))
+                .toBe(Math.round(panelRect.top) + NESTED_PANEL_TOP_PADDING);
         }));
 
         it('should close all of the dropdowns when an item is clicked', fakeAsync(() => {

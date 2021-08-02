@@ -264,6 +264,9 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
         // tslint:disable-next-line:deprecation
         const keyCode = event.keyCode;
 
+        if (keyCode === ENTER) {
+            event.preventDefault();
+        }
 
         if (
             (this.isNested() &&

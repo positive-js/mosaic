@@ -262,9 +262,7 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
         }
     }
 
-    handleClick(event: MouseEvent) {
-        if (event.detail === 0) { return; }
-
+    handleClick() {
         this.closed.emit('click');
     }
 
