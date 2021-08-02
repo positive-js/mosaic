@@ -1,6 +1,8 @@
 <ng-template>
-    <div class="mc-dropdown__panel" [style.min-width]="triggerWidth"
+    <div class="mc-dropdown__panel"
          [ngClass]="classList"
+         [class.mc-dropdown__panel_nested]="parent"
+         [style.min-width]="triggerWidth"
          (keydown)="handleKeydown($event)"
          (click)="handleClick()"
          [@transformDropdown]="panelAnimationState"
