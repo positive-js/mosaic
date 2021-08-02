@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 30 Jul 2021 12:31:59 GMT
+ * Generated on Mon, 02 Aug 2021 08:57:51 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
@@ -455,6 +455,7 @@ export const DatepickerInputSizeWidth = "130px";
 export const DividerSizeWidth = "1px";
 export const DividerSizeInsetMargin = "80px";
 export const DropdownItemSizePadding = "5px 15px";
+export const DropdownItemSizeIconPadding = "2px 8px 2px 0";
 export const DropdownItemFontDefault = "body";
 export const DropdownItemFontCaption = "caption";
 export const DropdownGroupHeaderSizeDefaultPadding = "6px 15px";

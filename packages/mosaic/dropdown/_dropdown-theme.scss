@@ -22,11 +22,7 @@
 
         &.cdk-keyboard-focused {
             outline: map-get(map-get($theme, states), focused-color) solid 2px;
-            outline-offset: -2px;
-
-            &.mc-link {
-                outline-offset: -2px;
-            }
+            outline-offset: -2px !important;
         }
 
         &.mc-selected {

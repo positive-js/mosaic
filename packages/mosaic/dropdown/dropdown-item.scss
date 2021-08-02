@@ -28,10 +28,12 @@
         margin-top: 4px;
     }
 
+    // wtf ?
     .docs-navbar-version__num {
         margin-right: 4px;
     }
 
+    // wtf ?
     & > div {
         width: 100%;
     }
@@ -43,6 +45,10 @@
     white-space: nowrap;
 
     padding: var(--mc-dropdown-item-size-padding, $dropdown-item-size-padding);
+
+    & [mc-icon] {
+        padding: var(--mc-dropdown-item-size-icon-padding, $dropdown-item-size-icon-padding);
+    }
 }
 
 .mc-dropdown-trigger__icon {
