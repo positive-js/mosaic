@@ -1,3 +1,9 @@
+## 11.3.2 "Still-wildflower" (2021-08-02)
+
+### Mosaic
+
+ * bug fix  **datepicker:** compilation error in datepicker-input.directive ([#661](https://github.com/positive-js/mosaic/issues/661)) ([4ddd988](https://github.com/positive-js/mosaic/commit/4ddd988bcca44fb285bb5aaec1799c77f303a11e))
+
 ## 11.3.1 "Keenest Settings" (2021-07-27)
 
 ### Mosaic
