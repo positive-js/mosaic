@@ -36,6 +36,7 @@
     },
     'dropdown-panel': {
         size: {
+            'max-width': { value: '640px' },
             padding: { value: '4px 0' },
             border: {
                 width: { value: '1px' },

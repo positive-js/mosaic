@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 02 Aug 2021 08:57:51 GMT
+ * Generated on Mon, 02 Aug 2021 16:13:35 GMT
  */
 
 :root {
@@ -57,6 +57,7 @@
   --mc-dropdown-divider-size-height: 1px;
   --mc-dropdown-divider-size-margin: 4px 0;
   --mc-dropdown-trigger-size-icon-padding-right: 8px;
+  --mc-dropdown-panel-size-max-width: 640px;
   --mc-dropdown-panel-size-padding: 4px 0;
   --mc-dropdown-panel-size-border-width: 1px;
   --mc-dropdown-panel-size-border-radius: 3px;

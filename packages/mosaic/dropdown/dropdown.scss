@@ -4,6 +4,8 @@
 .mc-dropdown__panel {
     margin-top: -1px;
 
+    max-width: var(--mc-dropdown-panel-size-max-width, $dropdown-panel-size-max-width);
+
     border: {
         width: var(--mc-dropdown-panel-size-border-width, $dropdown-panel-size-border-width);
         style: solid;
@@ -13,7 +15,7 @@
     border-bottom-right-radius: var(--mc-dropdown-panel-size-border-radius, $dropdown-panel-size-border-radius);
 
     padding: var(--mc-dropdown-panel-size-padding, $dropdown-panel-size-padding);
-    
+
     &.mc-dropdown__panel_nested {
         border-top-left-radius: var(--mc-dropdown-panel-size-border-radius, $dropdown-panel-size-border-radius);
         border-top-right-radius: var(--mc-dropdown-panel-size-border-radius, $dropdown-panel-size-border-radius);
