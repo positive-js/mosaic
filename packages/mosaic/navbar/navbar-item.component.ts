@@ -83,7 +83,7 @@ export class McNavbarItemBase {
     @ContentChild(McButtonCssStyler) button: McButtonCssStyler;
 
     vertical: boolean;
-    horizontal: boolean;
+    horizontal = true;
 
     closed: boolean;
 

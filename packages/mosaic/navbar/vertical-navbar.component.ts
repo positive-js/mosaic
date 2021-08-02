@@ -71,7 +71,10 @@ export class McVerticalNavbar implements AfterContentInit {
     }
 
     private setItemsState = () => {
-        this.navbarBaseItems.forEach((item) => item.vertical = true);
+        this.navbarBaseItems.forEach((item) => {
+            item.vertical = true;
+            item.horizontal = false;
+        });
     }
 }
 
