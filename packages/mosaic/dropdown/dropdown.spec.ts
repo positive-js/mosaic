@@ -2024,18 +2024,3 @@ class DynamicPanelDropdown {
     @ViewChild('one', {static: false}) first: McDropdown;
     @ViewChild('two', {static: false}) second: McDropdown;
 }
-
-
-@Component({
-    template: `
-        <button [mcDropdownTriggerFor]="dropdown">Toggle dropdown</button>
-
-        <mc-dropdown #dropdown="mcDropdown">
-            <button mc-dropdown-item>Checked</button>
-            <button mc-dropdown-item>Not checked</button>
-        </mc-dropdown>
-    `
-})
-class DropdownWithCheckboxItems {
-    @ViewChild(McDropdownTrigger, {static: false}) trigger: McDropdownTrigger;
-}
