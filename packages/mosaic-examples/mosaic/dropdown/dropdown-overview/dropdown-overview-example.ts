@@ -13,8 +13,13 @@ import { Component, ViewEncapsulation } from '@angular/core';
 export class DropdownOverviewExample {
     someValue = 'Lazy Value';
     disabled = false;
+    openByArrowDown = true;
 
     toggleDisabled() {
         this.disabled = !this.disabled;
+    }
+
+    toggleOpenByArrowDown() {
+        this.openByArrowDown = !this.openByArrowDown;
     }
 }

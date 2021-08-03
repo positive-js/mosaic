@@ -1,10 +1,18 @@
+<mc-checkbox [checked]="disabled" (change)="toggleDisabled()">toggle disabled state</mc-checkbox>
+<br><br>
+<mc-checkbox [checked]="openByArrowDown" (change)="toggleOpenByArrowDown()">toggleOpenByArrowDown</mc-checkbox>
+
+<br><br>
+
 <button mc-button
         [mcDropdownTriggerFor]="appDropdown"
+        [openByArrowDown]="openByArrowDown"
         [disabled]="disabled">
     dropdown <i mc-icon="mc-angle-down-L_16"></i>
 </button>
 
-<mc-dropdown #appDropdown="mcDropdown" [class]="'max-width'">
+<mc-dropdown #appDropdown="mcDropdown"
+             [class]="'max-width'">
 
     <button mc-dropdown-item>Общие сведения</button>
 
@@ -71,7 +79,3 @@
         <button mc-dropdown-item>Value: {{someValue}}</button>
     </ng-template>
 </mc-dropdown>
-
-<br><br>
-
-<mc-checkbox [checked]="disabled" (change)="toggleDisabled()">Disabled</mc-checkbox>
