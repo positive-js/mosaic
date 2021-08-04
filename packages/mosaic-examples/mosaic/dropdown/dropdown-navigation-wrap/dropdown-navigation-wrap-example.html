@@ -1,0 +1,50 @@
+<button mc-button [mcDropdownTriggerFor]="appDropdown">
+    dropdown <i mc-icon="mc-angle-down-L_16"></i>
+</button>
+
+<mc-dropdown #appDropdown="mcDropdown"
+             [navigationWithWrap]="true"
+             [class]="'max-width'">
+
+    <button mc-dropdown-item>Общие сведения</button>
+
+    <button mc-dropdown-item><i mc-icon="mc-info-o_16"></i>Общие сведения</button>
+
+    <button mc-dropdown-item>
+        Общие сведения<div class="mc-dropdown-item__caption">Общие сведения</div>
+    </button>
+
+    <button mc-dropdown-item>
+        <i mc-icon="mc-info-o_16"></i>Общие сведения
+        <div class="mc-dropdown-item__caption">Общие сведения</div>
+    </button>
+
+    <button mc-dropdown-item>
+        <i mc-icon="mc-circle-8_16"></i>Общие сведения
+    </button>
+
+    <button mc-dropdown-item>Общие сведения и очень длинный текст</button>
+
+    <div class="mc-dropdown__divider"></div>
+
+    <div class="mc-dropdown__group-header">Additional info</div>
+
+    <button mc-dropdown-item disabled>Disabled</button>
+
+    <div class="mc-dropdown__divider"></div>
+
+    <div class="mc-dropdown__group-header mc-dropdown__group-header_small">Additional info</div>
+
+    <button mc-dropdown-item disabled>Disabled</button>
+
+    <div class="mc-dropdown__divider"></div>
+
+    <button mc-dropdown-item>Point 2</button>
+
+    <button mc-dropdown-item>Point 3</button>
+
+    <a href="https://google.com" mc-link mc-dropdown-item>
+        <i mc-icon="mc-search_16"></i>
+        <span class="mc-link__text">Link</span>
+    </a>
+</mc-dropdown>

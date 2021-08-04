@@ -2,7 +2,7 @@
     'dropdown-item': {
         size: {
             padding: { value: '5px 15px' },
-            'icon-padding': { value: '2px 8px 2px 0' }
+            'icon-padding': { value: '0 8px 2px 0' }
         },
         font: {
             default: { value: 'body' },

@@ -9,18 +9,21 @@ import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
 import { McLinkModule } from '@ptsecurity/mosaic/link';
 
+import { DropdownNavigationWrapExample } from './dropdown-navigation-wrap/dropdown-navigation-wrap-example';
 import { DropdownNestedExample } from './dropdown-nested/dropdown-nested-example';
 import { DropdownOverviewExample } from './dropdown-overview/dropdown-overview-example';
 
 
 export {
     DropdownNestedExample,
-    DropdownOverviewExample
+    DropdownOverviewExample,
+    DropdownNavigationWrapExample
 };
 
 const EXAMPLES = [
     DropdownNestedExample,
-    DropdownOverviewExample
+    DropdownOverviewExample,
+    DropdownNavigationWrapExample
 ];
 
 @NgModule({
