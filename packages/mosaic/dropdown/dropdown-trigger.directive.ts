@@ -260,18 +260,20 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
     }
 
     /** Handles key presses on the trigger. */
-    handleKeydown(event: KeyboardEvent): void {
+    handleKeydown(event: KeyboardEvent) {
         // tslint:disable-next-line:deprecation
         const keyCode = event.keyCode;
 
-        if (keyCode === ENTER) {
-            event.preventDefault();
+        // Pressing enter on the trigger will trigger the click handler later.
+        if (keyCode === ENTER || keyCode === SPACE) {
+            this.openedBy = 'keyboard';
         }
 
         if (
             (this.isNested() &&
-                ((keyCode === RIGHT_ARROW && this.dir === 'ltr') || (keyCode === LEFT_ARROW && this.dir === 'rtl'))) ||
-            (!this.isNested() && ([SPACE, ENTER].includes(keyCode) || keyCode === DOWN_ARROW && this.openByArrowDown))
+                ((keyCode === RIGHT_ARROW && this.dir === 'ltr') || (keyCode === LEFT_ARROW && this.dir === 'rtl'))
+            ) ||
+            (!this.isNested() && (keyCode === DOWN_ARROW && this.openByArrowDown))
         ) {
             this.openedBy = 'keyboard';
             this.open();
@@ -350,9 +352,11 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
     private init(): void {
         this.dropdown.parent = this.isNested() ? this.parent : undefined;
         this.dropdown.direction = this.dir;
+
         if (!this.dropdown.parent) {
             this.dropdown.triggerWidth = this.getWidth();
         }
+
         this.setIsOpened(true);
         this.dropdown.focusFirstItem(this.openedBy);
     }

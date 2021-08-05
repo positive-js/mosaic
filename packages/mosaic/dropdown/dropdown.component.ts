@@ -2,6 +2,7 @@ import { AnimationEvent } from '@angular/animations';
 import { FocusOrigin } from '@angular/cdk/a11y';
 import { Direction } from '@angular/cdk/bidi';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
@@ -55,7 +56,7 @@ import {
         { provide: MC_DROPDOWN_PANEL, useExisting: McDropdown }
     ]
 })
-export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownItem>, OnInit, OnDestroy {
+export class McDropdown implements AfterContentInit, McDropdownPanel, OnInit, OnDestroy {
 
     @Input() navigationWithWrap: boolean = false;
 
@@ -178,7 +179,7 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
     /**
      * List of the items inside of a dropdown.
      */
-    @ContentChildren(McDropdownItem) items: QueryList<McDropdownItem>;
+    @ContentChildren(McDropdownItem, { descendants: true }) items: QueryList<McDropdownItem>;
 
     /**
      * Dropdown content that will be rendered lazily.
@@ -193,11 +194,8 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
 
     private keyManager: FocusKeyManager<McDropdownItem>;
 
-    /** Dropdown items inside the current dropdown. */
-    private itemsArray: McDropdownItem[] = [];
-
-    /** Emits whenever the amount of dropdown items changes. */
-    private itemChanges = new Subject<McDropdownItem[]>();
+    /** Only the direct descendant menu items. */
+    private directDescendantItems = new QueryList<McDropdownItem>();
 
     /** Subscription to tab events on the dropdown panel */
     private tabSubscription = Subscription.EMPTY;
@@ -212,7 +210,9 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
     }
 
     ngAfterContentInit() {
-        this.keyManager = new FocusKeyManager<McDropdownItem>(this.items)
+        this.updateDirectDescendants();
+
+        this.keyManager = new FocusKeyManager<McDropdownItem>(this.directDescendantItems)
             .withTypeAhead();
 
         if (this.navigationWithWrap) {
@@ -221,19 +221,32 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
 
         this.tabSubscription = this.keyManager.tabOut
             .subscribe(() => this.closed.emit('tab'));
+
+        // If a user manually (programmatically) focuses a menu item, we need to reflect that focus
+        // change back to the key manager. Note that we don't need to unsubscribe here because focused
+        // is internal and we know that it gets completed on destroy.
+        this.directDescendantItems.changes
+            .pipe(
+                startWith(this.directDescendantItems),
+                switchMap((items) => merge(...items.map((item: McDropdownItem) => item.focused)))
+            )
+            .subscribe((focusedItem) => this.keyManager.updateActiveItem(focusedItem as McDropdownItem));
     }
 
     ngOnDestroy() {
+        this.directDescendantItems.destroy();
         this.tabSubscription.unsubscribe();
         this.closed.complete();
     }
 
     /** Stream that emits whenever the hovered dropdown item changes. */
     hovered(): Observable<McDropdownItem> {
-        return this.itemChanges.pipe(
-            startWith(this.itemsArray),
-            switchMap((items) => merge(...items.map((item) => item.hovered)))
-        );
+        const itemChanges = this.directDescendantItems.changes as Observable<QueryList<McDropdownItem>>;
+
+        return itemChanges.pipe(
+            startWith(this.directDescendantItems),
+            switchMap((items) => merge(...items.map((item: McDropdownItem) => item.hovered)))
+        ) as Observable<McDropdownItem>;
     }
 
     /** Handle a keyboard event from the dropdown, delegating to the appropriate action. */
@@ -257,14 +270,18 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
                 }
                 break;
             default:
-                this.keyManager.setFocusOrigin('keyboard');
+                if (keyCode === UP_ARROW || keyCode === DOWN_ARROW) {
+                    this.keyManager.setFocusOrigin('keyboard');
+                }
 
                 this.keyManager.onKeydown(event);
-        }
-    }
 
-    handleClick() {
-        this.closed.emit('click');
+                return;
+        }
+
+        // Don't allow the event to propagate if we've already handled it, or it may
+        // end up reaching other overlays that were opened earlier.
+        event.stopPropagation();
     }
 
     /**
@@ -288,35 +305,6 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
      */
     resetActiveItem() {
         this.keyManager.setActiveItem(-1);
-    }
-
-    /**
-     * Registers a dropdown item with the dropdown.
-     * @docs-private
-     */
-    addItem(item: McDropdownItem) {
-        // We register the items through this method, rather than picking them up through
-        // `ContentChildren`, because we need the items to be picked up by their closest
-        // `mc-dropdown` ancestor. If we used `@ContentChildren(McDropdownItem, {descendants: true})`,
-        // all descendant items will bleed into the top-level dropdown in the case where the consumer
-        // has `mc-dropdown` instances nested inside each other.
-        if (this.itemsArray.indexOf(item) === -1) {
-            this.itemsArray.push(item);
-            this.itemChanges.next(this.itemsArray);
-        }
-    }
-
-    /**
-     * Removes an item from the dropdown.
-     * @docs-private
-     */
-    removeItem(item: McDropdownItem) {
-        const index = this.itemsArray.indexOf(item);
-
-        if (this.itemsArray.indexOf(item) > -1) {
-            this.itemsArray.splice(index, 1);
-            this.itemChanges.next(this.itemsArray);
-        }
     }
 
     /**
@@ -362,5 +350,20 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
         if (event.toState === 'enter' && this.keyManager.activeItemIndex === 0) {
             event.element.scrollTop = 0;
         }
+    }
+
+    /**
+     * Sets up a stream that will keep track of any newly-added menu items and will update the list
+     * of direct descendants. We collect the descendants this way, because `_allItems` can include
+     * items that are part of child menus, and using a custom way of registering items is unreliable
+     * when it comes to maintaining the item order.
+     */
+    private updateDirectDescendants() {
+        this.items.changes
+            .pipe(startWith(this.items))
+            .subscribe((items: QueryList<McDropdownItem>) => {
+                this.directDescendantItems.reset(items.filter((item) => item.parentDropdownPanel === this));
+                this.directDescendantItems.notifyOnChanges();
+            });
     }
 }

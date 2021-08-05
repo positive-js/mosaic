@@ -87,7 +87,7 @@ describe('McDropdown', () => {
     }));
 
     it('should open the dropdown as an idempotent operation', () => {
-        const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
+        const fixture = createComponent(SimpleDropdown, [], []);
         fixture.detectChanges();
         expect(overlayContainerElement.textContent).toBe('');
         expect(() => {
@@ -101,7 +101,7 @@ describe('McDropdown', () => {
     });
 
     it('should close the dropdown when a click occurs outside the dropdown', fakeAsync(() => {
-        const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
+        const fixture = createComponent(SimpleDropdown, [], []);
         fixture.detectChanges();
         fixture.componentInstance.trigger.open();
 
@@ -114,7 +114,7 @@ describe('McDropdown', () => {
     }));
 
     it('should be able to remove the backdrop', fakeAsync(() => {
-        const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
+        const fixture = createComponent(SimpleDropdown, [], []);
         fixture.detectChanges();
 
         fixture.componentInstance.dropdown.hasBackdrop = false;
@@ -126,7 +126,7 @@ describe('McDropdown', () => {
     }));
 
     it('should be able to remove the backdrop on repeat openings', fakeAsync(() => {
-        const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
+        const fixture = createComponent(SimpleDropdown, [], []);
         fixture.detectChanges();
 
         fixture.componentInstance.trigger.open();
@@ -153,7 +153,7 @@ describe('McDropdown', () => {
     }));
 
     it('should restore focus to the trigger when the dropdown was opened by keyboard', fakeAsync(() => {
-        const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
+        const fixture = createComponent(SimpleDropdown, [], []);
         fixture.detectChanges();
         const triggerEl = fixture.componentInstance.triggerEl.nativeElement;
 
@@ -172,7 +172,7 @@ describe('McDropdown', () => {
     }));
 
     it('should be able to set a custom class on the backdrop', fakeAsync(() => {
-        const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
+        const fixture = createComponent(SimpleDropdown, [], []);
 
         fixture.componentInstance.backdropClass = 'custom-backdrop';
         fixture.detectChanges();
@@ -186,7 +186,7 @@ describe('McDropdown', () => {
     }));
 
     it('should restore focus to the root trigger when the dropdown was opened by mouse', fakeAsync(() => {
-        const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
+        const fixture = createComponent(SimpleDropdown, [], []);
         fixture.detectChanges();
 
         const triggerEl = fixture.componentInstance.triggerEl.nativeElement;
@@ -204,7 +204,7 @@ describe('McDropdown', () => {
     }));
 
     it('should restore focus to the root trigger when the dropdown was opened by touch', fakeAsync(() => {
-        const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
+        const fixture = createComponent(SimpleDropdown, [], []);
         fixture.detectChanges();
 
         const triggerEl = fixture.componentInstance.triggerEl.nativeElement;
@@ -222,7 +222,7 @@ describe('McDropdown', () => {
     }));
 
     it('should scroll the panel to the top on open, when it is scrollable', fakeAsync(() => {
-        const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
+        const fixture = createComponent(SimpleDropdown, [], []);
         fixture.detectChanges();
 
         // Add 50 items to make the dropdown scrollable
@@ -241,7 +241,7 @@ describe('McDropdown', () => {
     }));
 
     it('should set the proper focus origin when restoring focus after opening by keyboard', fakeAsync(() => {
-        const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
+        const fixture = createComponent(SimpleDropdown, [], []);
         fixture.detectChanges();
         const triggerEl = fixture.componentInstance.triggerEl.nativeElement;
 
@@ -259,7 +259,7 @@ describe('McDropdown', () => {
     }));
 
     it('should set the proper focus origin when restoring focus after opening by mouse', fakeAsync(() => {
-        const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
+        const fixture = createComponent(SimpleDropdown, [], []);
         fixture.detectChanges();
         const triggerEl = fixture.componentInstance.triggerEl.nativeElement;
 
@@ -278,7 +278,7 @@ describe('McDropdown', () => {
     }));
 
     it('should set proper focus origin when right clicking on trigger, before opening by keyboard', fakeAsync(() => {
-        const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
+        const fixture = createComponent(SimpleDropdown, [], []);
         fixture.detectChanges();
         const triggerEl = fixture.componentInstance.triggerEl.nativeElement;
 
@@ -302,7 +302,7 @@ describe('McDropdown', () => {
     }));
 
     it('should set the proper focus origin when restoring focus after opening by touch', fakeAsync(() => {
-        const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
+        const fixture = createComponent(SimpleDropdown, [], []);
         fixture.detectChanges();
         const triggerEl = fixture.componentInstance.triggerEl.nativeElement;
 
@@ -322,7 +322,7 @@ describe('McDropdown', () => {
     }));
 
     it('should close the dropdown when pressing ESCAPE', fakeAsync(() => {
-        const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
+        const fixture = createComponent(SimpleDropdown, [], []);
         fixture.detectChanges();
         fixture.componentInstance.trigger.open();
 
@@ -353,7 +353,7 @@ describe('McDropdown', () => {
         const fixture = createComponent(
             SimpleDropdown,
             [{ provide: Directionality, useFactory: () => ({value: 'rtl'})}],
-            [FakeIcon]
+            []
         );
 
         fixture.detectChanges();
@@ -370,7 +370,7 @@ describe('McDropdown', () => {
         const fixture = createComponent(
             SimpleDropdown,
             [{ provide: Directionality, useFactory: () => dirProvider}],
-            [FakeIcon]
+            []
         );
 
         fixture.detectChanges();
@@ -402,7 +402,7 @@ describe('McDropdown', () => {
     });
 
     it('should transfer any custom classes from the host to the overlay', () => {
-        const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
+        const fixture = createComponent(SimpleDropdown, [], []);
 
         fixture.detectChanges();
         fixture.componentInstance.trigger.open();
@@ -419,24 +419,24 @@ describe('McDropdown', () => {
     });
 
     it('should not throw an error on destroy', () => {
-        const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
+        const fixture = createComponent(SimpleDropdown, [], []);
         expect(fixture.destroy.bind(fixture)).not.toThrow();
     });
 
     it('should be able to extract the dropdown item text', () => {
-        const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
+        const fixture = createComponent(SimpleDropdown, [], []);
         fixture.detectChanges();
         expect(fixture.componentInstance.items.first.getLabel()).toBe('Item');
     });
 
     it('should filter out non-text nodes when figuring out the label', () => {
-        const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
+        const fixture = createComponent(SimpleDropdown, [], []);
         fixture.detectChanges();
         expect(fixture.componentInstance.items.last.getLabel()).toBe('Item with an icon');
     });
 
     it('should set the proper focus origin when opening by mouse', fakeAsync(() => {
-        const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
+        const fixture = createComponent(SimpleDropdown, [], []);
         fixture.detectChanges();
         spyOn(fixture.componentInstance.items.first, 'focus').and.callThrough();
 
@@ -452,7 +452,7 @@ describe('McDropdown', () => {
     }));
 
     it('should set the proper focus origin when opening by touch', fakeAsync(() => {
-        const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
+        const fixture = createComponent(SimpleDropdown, [], []);
         fixture.detectChanges();
         spyOn(fixture.componentInstance.items.first, 'focus').and.callThrough();
 
@@ -480,7 +480,7 @@ describe('McDropdown', () => {
                     useFactory: (overlay: Overlay) => () => overlay.scrollStrategies.close()
                 }
             ],
-            [FakeIcon]
+            []
         );
 
         fixture.detectChanges();
@@ -499,7 +499,7 @@ describe('McDropdown', () => {
     }));
 
     it('should switch to keyboard focus when using the keyboard after opening using the mouse', fakeAsync(() => {
-        const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
+        const fixture = createComponent(SimpleDropdown, [], []);
 
         fixture.detectChanges();
         fixture.componentInstance.triggerEl.nativeElement.click();
@@ -528,7 +528,7 @@ describe('McDropdown', () => {
     }));
 
     it('should toggle the aria-expanded attribute on the trigger', () => {
-        const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
+        const fixture = createComponent(SimpleDropdown, [], []);
         fixture.detectChanges();
         const triggerEl = fixture.componentInstance.triggerEl.nativeElement;
 
@@ -562,7 +562,7 @@ describe('McDropdown', () => {
     });
 
     it('should throw the correct error if the dropdown is not defined after init', () => {
-        const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
+        const fixture = createComponent(SimpleDropdown, [], []);
         fixture.detectChanges();
 
         fixture.componentInstance.trigger.dropdown = null!;
@@ -768,7 +768,7 @@ describe('McDropdown', () => {
             fixture.destroy();
             TestBed.resetTestingModule();
 
-            const newFixture = createComponent(SimpleDropdown, [], [FakeIcon]);
+            const newFixture = createComponent(SimpleDropdown, [], []);
 
             newFixture.detectChanges();
             newFixture.componentInstance.trigger.open();
@@ -783,7 +783,7 @@ describe('McDropdown', () => {
     describe('fallback positions', () => {
 
         it('should fall back to "before" mode if "after" mode would not fit on screen', () => {
-            const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
+            const fixture = createComponent(SimpleDropdown, [], []);
             fixture.detectChanges();
             const trigger = fixture.componentInstance.triggerEl.nativeElement;
 
@@ -817,7 +817,7 @@ describe('McDropdown', () => {
         });
 
         it('should fall back to "above" mode if "below" mode would not fit on screen', () => {
-            const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
+            const fixture = createComponent(SimpleDropdown, [], []);
             fixture.detectChanges();
             const trigger = fixture.componentInstance.triggerEl.nativeElement;
 
@@ -847,7 +847,7 @@ describe('McDropdown', () => {
         });
 
         it('should re-position dropdown on both axes if both defaults would not fit', () => {
-            const fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
+            const fixture = createComponent(SimpleDropdown, [], []);
             fixture.detectChanges();
             const trigger = fixture.componentInstance.triggerEl.nativeElement;
 
@@ -1019,7 +1019,7 @@ describe('McDropdown', () => {
         let fixture: ComponentFixture<SimpleDropdown>;
 
         beforeEach(() => {
-            fixture = createComponent(SimpleDropdown, [], [FakeIcon]);
+            fixture = createComponent(SimpleDropdown, [], []);
             fixture.detectChanges();
             fixture.componentInstance.trigger.open();
             fixture.detectChanges();
@@ -1699,7 +1699,7 @@ describe('McDropdown default overrides', () => {
     beforeEach(fakeAsync(() => {
         TestBed.configureTestingModule({
             imports: [McDropdownModule, NoopAnimationsModule],
-            declarations: [SimpleDropdown, FakeIcon],
+            declarations: [SimpleDropdown],
             providers: [{
                 provide: MC_DROPDOWN_DEFAULT_OPTIONS,
                 useValue: {overlapTriggerY: true, xPosition: 'before', yPosition: 'above'}
@@ -1731,7 +1731,7 @@ describe('McDropdown default overrides', () => {
             <button mc-dropdown-item> Item </button>
             <button mc-dropdown-item disabled> Disabled </button>
             <button mc-dropdown-item>
-                <fake-icon>unicorn</fake-icon>
+                <i class="mc-icon">unicorn</i>
                 Item with an icon
             </button>
             <button *ngFor="let item of extraItems" mc-dropdown-item> {{item}} </button>
@@ -1940,13 +1940,6 @@ class NestedDropdownRepeater {
 class NestedDropdownDeclaredInsideParentDropdown {
     @ViewChild('rootTriggerEl', {static: false}) rootTriggerEl: ElementRef;
 }
-
-
-@Component({
-    selector: 'fake-icon',
-    template: '<ng-content></ng-content>'
-})
-class FakeIcon {}
 
 
 @Component({

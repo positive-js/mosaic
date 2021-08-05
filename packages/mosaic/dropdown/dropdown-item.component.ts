@@ -1,5 +1,4 @@
 import { FocusMonitor, FocusOrigin } from '@angular/cdk/a11y';
-import { DOCUMENT } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -8,10 +7,13 @@ import {
     ViewEncapsulation,
     Inject,
     Optional,
-    ViewChild
+    AfterViewInit,
+    HostListener,
+    ContentChild
 } from '@angular/core';
 import { IFocusableOption } from '@ptsecurity/cdk/a11y';
-import { CanDisable, CanDisableCtor, HasTabIndexCtor, mixinDisabled, mixinTabIndex } from '@ptsecurity/mosaic/core';
+import { CanDisable, mixinDisabled } from '@ptsecurity/mosaic/core';
+import { McIcon } from '@ptsecurity/mosaic/icon';
 import { Subject } from 'rxjs';
 
 import { MC_DROPDOWN_PANEL, McDropdownPanel } from './dropdown.types';
@@ -19,10 +21,8 @@ import { MC_DROPDOWN_PANEL, McDropdownPanel } from './dropdown.types';
 
 // Boilerplate for applying mixins to McDropdownItem.
 /** @docs-private */
-export class McDropdownItemBase {}
 // tslint:disable-next-line:naming-convention
-export const McDropdownItemMixinBase:
-    HasTabIndexCtor & CanDisableCtor & typeof McDropdownItemBase = mixinTabIndex(mixinDisabled(McDropdownItemBase));
+const McDropdownItemMixinBase = mixinDisabled(class {});
 
 /**
  * This directive is intended to be used inside an mc-dropdown tag.
@@ -33,71 +33,73 @@ export const McDropdownItemMixinBase:
     exportAs: 'mcDropdownItem',
     templateUrl: 'dropdown-item.html',
     styleUrls: ['dropdown-item.scss'],
-    inputs: ['disabled', 'tabIndex'],
+    inputs: ['disabled'],
     host: {
         class: 'mc-dropdown-item',
+        '[class.mc-dropdown-item_with-icon]': 'icon',
         '[class.mc-dropdown-item_highlighted]': 'highlighted',
 
         '[attr.disabled]': 'disabled || null',
         '[attr.tabindex]': 'tabIndex',
 
-        '(click)': 'haltDisabledEvents($event)',
         '(mouseenter)': 'handleMouseEnter()'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class McDropdownItem extends McDropdownItemMixinBase implements IFocusableOption, CanDisable, OnDestroy {
-    @ViewChild('content', { static: false }) content;
+export class McDropdownItem extends McDropdownItemMixinBase implements
+    IFocusableOption, CanDisable, AfterViewInit, OnDestroy {
+
+    @ContentChild(McIcon) icon: McIcon;
 
     /** Stream that emits when the dropdown item is hovered. */
-    readonly hovered: Subject<McDropdownItem> = new Subject<McDropdownItem>();
+    readonly hovered = new Subject<McDropdownItem>();
+
+    /** Stream that emits when the menu item is focused. */
+    readonly focused = new Subject<McDropdownItem>();
 
     /** Whether the dropdown item is highlighted. */
     highlighted: boolean = false;
 
     /** Whether the dropdown item acts as a trigger for a nested dropdown. */
     isNested: boolean = false;
+    tabIndex: string = '0';
 
     constructor(
         private elementRef: ElementRef<HTMLElement>,
         private focusMonitor: FocusMonitor,
-        @Inject(DOCUMENT) private document: any,
-        @Optional() @Inject(MC_DROPDOWN_PANEL) private parentDropdownPanel?: McDropdownPanel<McDropdownItem>
+        @Inject(MC_DROPDOWN_PANEL) @Optional() public parentDropdownPanel?: McDropdownPanel
     ) {
         super();
+    }
 
-        if (focusMonitor) {
+    ngAfterViewInit() {
+        if (this.focusMonitor) {
             // Start monitoring the element so it gets the appropriate focused classes. We want
-            // to show the focus style for dropdown items only when the focus was not caused by a
+            // to show the focus style for menu items only when the focus was not caused by a
             // mouse or touch interaction.
-            focusMonitor.monitor(this.elementRef.nativeElement, false);
-        }
-
-        if (parentDropdownPanel?.addItem) {
-            parentDropdownPanel.addItem(this);
+            this.focusMonitor.monitor(this.elementRef, false);
         }
     }
 
     /** Focuses the dropdown item. */
-    focus(origin: FocusOrigin = 'program'): void {
-        if (this.focusMonitor) {
-            this.focusMonitor.focusVia(this.getHostElement(), origin);
+    focus(origin?: FocusOrigin, options?: FocusOptions): void {
+        if (this.focusMonitor && origin) {
+            this.focusMonitor.focusVia(this.getHostElement(), origin, options);
         } else {
-            this.getHostElement().focus();
+            this.getHostElement().focus(options);
         }
+
+        this.focused.next(this);
     }
 
     ngOnDestroy() {
         if (this.focusMonitor) {
-            this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
-        }
-
-        if (this.parentDropdownPanel?.removeItem) {
-            this.parentDropdownPanel.removeItem(this);
+            this.focusMonitor.stopMonitoring(this.elementRef);
         }
 
         this.hovered.complete();
+        this.focused.complete();
     }
 
     /** Returns the host DOM element. */
@@ -106,7 +108,12 @@ export class McDropdownItem extends McDropdownItemMixinBase implements IFocusabl
     }
 
     /** Prevents the default element actions if it is disabled. */
-    haltDisabledEvents(event: Event): void {
+    // We have to use a `HostListener` here in order to support both Ivy and ViewEngine.
+    // In Ivy the `host` bindings will be merged when this class is extended, whereas in
+    // ViewEngine they're overwritten.
+    // TODO(crisbeto): we move this back into `host` once Ivy is turned on by default.
+    // tslint:disable-next-line:no-host-decorator-in-concrete
+    @HostListener('click', ['$event']) checkDisabled(event: Event): void {
         if (this.disabled) {
             event.preventDefault();
             event.stopPropagation();
@@ -114,30 +121,27 @@ export class McDropdownItem extends McDropdownItemMixinBase implements IFocusabl
     }
 
     /** Emits to the hover stream. */
-    handleMouseEnter() {
+    // We have to use a `HostListener` here in order to support both Ivy and ViewEngine.
+    // In Ivy the `host` bindings will be merged when this class is extended, whereas in
+    // ViewEngine they're overwritten.
+    // TODO(crisbeto): we move this back into `host` once Ivy is turned on by default.
+    // tslint:disable-next-line:no-host-decorator-in-concrete
+    @HostListener('mouseenter') handleMouseEnter() {
         this.hovered.next(this);
     }
 
     /** Gets the label to be used when determining whether the option should be focused. */
     getLabel(): string {
-        const element: HTMLElement = this.content.nativeElement;
-        // tslint:disable-next-line:no-magic-numbers
-        const textNodeType = this.document ? this.document.TEXT_NODE : 3;
-        let output = '';
+        const clone = this.elementRef.nativeElement.cloneNode(true) as HTMLElement;
+        const icons = clone.querySelectorAll('[mc-icon], .mc-icon');
 
-        if (element.childNodes) {
-            const length = element.childNodes.length;
-
-            // Go through all the top-level text nodes and extract their text.
-            // We skip anything that's not a text node to prevent the text from
-            // being thrown off by something like an icon.
-            for (let i = 0; i < length; i++) {
-                if (element.childNodes[i].nodeType === textNodeType) {
-                    output += element.childNodes[i].textContent;
-                }
-            }
+        // Strip away icons so they don't show up in the text.
+        // tslint:disable-next-line:prefer-for-of
+        for (let i = 0; i < icons.length; i++) {
+            const icon = icons[i];
+            icon.parentNode?.removeChild(icon);
         }
 
-        return output.trim();
+        return clone.textContent?.trim() || '';
     }
 }

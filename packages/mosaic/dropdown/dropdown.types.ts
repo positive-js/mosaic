@@ -21,7 +21,7 @@ export type DropdownCloseReason = void | 'click' | 'keydown' | 'tab';
  * @docs-private
  */
 // tslint:disable-next-line:naming-convention
-export interface McDropdownPanel<T = any> {
+export interface McDropdownPanel {
     xPosition: DropdownPositionX;
     yPosition: DropdownPositionY;
     overlapTriggerX: boolean;
@@ -37,8 +37,6 @@ export interface McDropdownPanel<T = any> {
     focusFirstItem(origin?: FocusOrigin): void;
     resetActiveItem(): void;
     setPositionClasses?(x: DropdownPositionX, y: DropdownPositionY): void;
-    addItem?(item: T): void;
-    removeItem?(item: T): void;
 }
 
 

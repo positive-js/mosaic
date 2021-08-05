@@ -24,8 +24,14 @@
         cursor: pointer;
     }
 
-    .mc-dropdown-item__caption {
+    & .mc-dropdown-item__caption {
         margin-top: 4px;
+    }
+
+    &.mc-dropdown-item_with-icon {
+        & .mc-dropdown-item__caption {
+            margin-left: 24px;
+        }
     }
 
     // wtf ?

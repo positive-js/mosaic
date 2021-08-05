@@ -4,10 +4,11 @@
          [class.mc-dropdown__panel_nested]="parent"
          [style.min-width]="triggerWidth"
          (keydown)="handleKeydown($event)"
-         (click)="handleClick()"
+         (click)="closed.emit('click')"
          [@transformDropdown]="panelAnimationState"
          (@transformDropdown.start)="onAnimationStart($event)"
-         (@transformDropdown.done)="onAnimationDone($event)">
+         (@transformDropdown.done)="onAnimationDone($event)"
+         tabindex="-1">
 
         <div class="mc-dropdown__content">
             <ng-content></ng-content>
