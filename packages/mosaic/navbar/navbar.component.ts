@@ -59,7 +59,7 @@ export class McNavbar implements AfterViewInit, AfterContentInit, OnDestroy {
     private get collapsableItems(): McNavbarItem[] {
         return this.navbarItems
             .toArray()
-            .filter((item) => item.icon && item.title)
+            .filter((item) => item.icon && item.title && item.collapsable)
             .reverse();
     }
 
