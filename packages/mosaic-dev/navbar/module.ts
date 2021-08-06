@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McDropdownModule } from '@ptsecurity/mosaic/dropdown';
+import { McLinkModule } from '@ptsecurity/mosaic/link';
 
 import { McIconModule } from '../../mosaic/icon';
 import { McNavbarModule, McNavbar, McNavbarItem } from '../../mosaic/navbar';
@@ -54,7 +55,8 @@ export class NavbarDemoComponent {
         McIconModule,
         McButtonModule,
         FormsModule,
-        McDropdownModule
+        McDropdownModule,
+        McLinkModule
     ],
     bootstrap: [NavbarDemoComponent]
 })

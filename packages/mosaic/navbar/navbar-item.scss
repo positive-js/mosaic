@@ -17,13 +17,17 @@
 
     height: var(--mc-navbar-item-size-height, $navbar-item-size-height);
 
+    padding-left: var(--mc-navbar-item-size-padding, $navbar-item-size-padding);
+    padding-right: var(--mc-navbar-item-size-padding, $navbar-item-size-padding);
+
     & .mc-icon {
         min-width: 16px;
         min-height: 16px;
     }
+}
 
-    padding-left: var(--mc-navbar-item-size-padding, $navbar-item-size-padding);
-    padding-right: var(--mc-navbar-item-size-padding, $navbar-item-size-padding);
+a.mc-navbar-item {
+    text-decoration: none;
 }
 
 .mc-navbar-item.mc-vertical {
