@@ -1,4 +1,5 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
@@ -27,8 +28,8 @@ import { toggleVerticalNavbarAnimation } from './vertical-navbar.animation';
     styleUrls: ['./vertical-navbar.scss'],
     host: {
         class: 'mc-vertical-navbar',
-        '[class.mc-closed]': 'expanded',
-        '[class.mc-opened]': '!expanded',
+        '[class.mc-closed]': '!expanded',
+        '[class.mc-opened]': 'expanded',
         '[@toggle]': 'expanded'
     },
     animations: [toggleVerticalNavbarAnimation()],
@@ -42,8 +43,9 @@ export class McVerticalNavbar implements AfterContentInit {
 
     @Input()
     set expanded(value: boolean) {
-        this._expanded = value;
+        this._expanded = coerceBooleanProperty(value);
 
+        console.log('setClosedStateForItems: ');
         this.setClosedStateForItems(value);
     }
 
@@ -64,14 +66,14 @@ export class McVerticalNavbar implements AfterContentInit {
     }
 
     private setClosedStateForItems(value: boolean) {
-        this.navbarBaseItems.forEach((item) => {
-            item.closed = value;
+        this.navbarBaseItems?.forEach((item) => {
+            item.closed = !value;
             setTimeout(() => item.button?.updateClassModifierForIcons());
         });
     }
 
     private setItemsState = () => {
-        this.navbarBaseItems.forEach((item) => item.vertical = true);
+        this.navbarBaseItems?.forEach((item) => item.vertical = true);
     }
 }
 
@@ -88,13 +90,13 @@ export const McNavbarToggleMixinBase: HasTabIndexCtor & CanDisableCtor &
     selector: 'mc-navbar-toggle',
     template: `
         <i mc-icon
-           [class.mc-angle-left-M_16]="!mcNavbar.expanded"
-           [class.mc-angle-right-M_16]="mcNavbar.expanded"
+           [class.mc-angle-left-M_16]="mcNavbar.expanded"
+           [class.mc-angle-right-M_16]="!mcNavbar.expanded"
            *ngIf="!customIcon">
         </i>
 
         <ng-content select="[mc-icon]"></ng-content>
-        <ng-content select="mc-navbar-title" *ngIf="!mcNavbar.expanded"></ng-content>
+        <ng-content select="mc-navbar-title" *ngIf="mcNavbar.expanded"></ng-content>
     `,
     styleUrls: ['./navbar.scss'],
     host: {
