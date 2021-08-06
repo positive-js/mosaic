@@ -45,7 +45,6 @@ export class McVerticalNavbar implements AfterContentInit {
     set expanded(value: boolean) {
         this._expanded = coerceBooleanProperty(value);
 
-        console.log('setClosedStateForItems: ');
         this.setClosedStateForItems(value);
     }
 
