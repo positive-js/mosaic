@@ -304,6 +304,7 @@ export class McDropdown implements AfterContentInit, McDropdownPanel, OnInit, On
      * the user to start from the first option when pressing the down arrow.
      */
     resetActiveItem() {
+        this.keyManager.activeItem?.resetStyles();
         this.keyManager.setActiveItem(-1);
     }
 

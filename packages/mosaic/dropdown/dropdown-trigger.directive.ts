@@ -185,7 +185,6 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
         );
 
         this.cleanUpSubscriptions();
-        this.closeSubscription.unsubscribe();
     }
 
     /** Whether the dropdown triggers a nested dropdown or a top-level one. */
@@ -275,6 +274,8 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
             ) ||
             (!this.isNested() && (keyCode === DOWN_ARROW && this.openByArrowDown))
         ) {
+            event.preventDefault();
+
             this.openedBy = 'keyboard';
             this.open();
         }
@@ -285,9 +286,8 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
         if (this.isNested()) {
             // Stop event propagation to avoid closing the parent dropdown.
             event.stopPropagation();
-            if (event.detail) {
-                this.open();
-            }
+
+            this.open();
         } else {
             this.toggle();
         }
@@ -303,7 +303,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
     private destroy(reason: DropdownCloseReason) {
         if (!this.overlayRef || !this.opened) { return; }
 
-        const dropdown = this.dropdown;
+        this.dropdown.resetActiveItem();
 
         this.closeSubscription.unsubscribe();
         this.overlayRef.detach();
@@ -312,25 +312,25 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
             this.focus(this.openedBy);
         }
 
-        if (dropdown instanceof McDropdown) {
-            dropdown.resetAnimation();
+        if (this.dropdown instanceof McDropdown) {
+            this.dropdown.resetAnimation();
 
             // Wait for the exit animation to finish before reseting dropdown toState.
-            const dropdownAnimationDoneSubscription = dropdown.animationDone
+            const dropdownAnimationDoneSubscription = this.dropdown.animationDone
                 .pipe(
                     filter((event) => event.toState === 'void'),
                     take(1)
                 );
 
-            if (dropdown.lazyContent) {
+            if (this.dropdown.lazyContent) {
                  dropdownAnimationDoneSubscription
-                    .pipe(takeUntil(dropdown.lazyContent.attached));
+                    .pipe(takeUntil(this.dropdown.lazyContent.attached));
             }
 
             dropdownAnimationDoneSubscription
                 .subscribe({
                     // If lazy content has attached we're need to detach it.
-                    next: dropdown.lazyContent ? () => dropdown.lazyContent.detach() : undefined,
+                    next: this.dropdown.lazyContent ? () => this.dropdown.lazyContent?.detach() : undefined,
                     error: undefined,
                     complete: () => {
                         this.reset();
@@ -339,9 +339,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
         } else {
             this.reset();
 
-            if (dropdown.lazyContent) {
-                dropdown.lazyContent.detach();
-            }
+            this.dropdown.lazyContent?.detach();
         }
     }
 

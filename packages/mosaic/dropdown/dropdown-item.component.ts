@@ -40,9 +40,7 @@ const McDropdownItemMixinBase = mixinDisabled(class {});
         '[class.mc-dropdown-item_highlighted]': 'highlighted',
 
         '[attr.disabled]': 'disabled || null',
-        '[attr.tabindex]': 'tabIndex',
-
-        '(mouseenter)': 'handleMouseEnter()'
+        '[attr.tabindex]': 'getTabIndex()'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
@@ -63,7 +61,6 @@ export class McDropdownItem extends McDropdownItemMixinBase implements
 
     /** Whether the dropdown item acts as a trigger for a nested dropdown. */
     isNested: boolean = false;
-    tabIndex: string = '0';
 
     constructor(
         private elementRef: ElementRef<HTMLElement>,
@@ -82,6 +79,19 @@ export class McDropdownItem extends McDropdownItemMixinBase implements
         }
     }
 
+    ngOnDestroy() {
+        if (this.focusMonitor) {
+            this.focusMonitor.stopMonitoring(this.elementRef);
+        }
+
+        this.hovered.complete();
+        this.focused.complete();
+    }
+
+    resetStyles() {
+        this.getHostElement().classList.remove('cdk-keyboard-focused');
+    }
+
     /** Focuses the dropdown item. */
     focus(origin?: FocusOrigin, options?: FocusOptions): void {
         if (this.focusMonitor && origin) {
@@ -93,18 +103,14 @@ export class McDropdownItem extends McDropdownItemMixinBase implements
         this.focused.next(this);
     }
 
-    ngOnDestroy() {
-        if (this.focusMonitor) {
-            this.focusMonitor.stopMonitoring(this.elementRef);
-        }
-
-        this.hovered.complete();
-        this.focused.complete();
-    }
-
     /** Returns the host DOM element. */
     getHostElement(): HTMLElement {
         return this.elementRef.nativeElement;
+    }
+
+    /** Used to set the `tabindex`. */
+    getTabIndex(): string {
+        return this.disabled ? '-1' : '0';
     }
 
     /** Prevents the default element actions if it is disabled. */
@@ -132,7 +138,7 @@ export class McDropdownItem extends McDropdownItemMixinBase implements
 
     /** Gets the label to be used when determining whether the option should be focused. */
     getLabel(): string {
-        const clone = this.elementRef.nativeElement.cloneNode(true) as HTMLElement;
+        const clone = this.getHostElement().cloneNode(true) as HTMLElement;
         const icons = clone.querySelectorAll('[mc-icon], .mc-icon');
 
         // Strip away icons so they don't show up in the text.
