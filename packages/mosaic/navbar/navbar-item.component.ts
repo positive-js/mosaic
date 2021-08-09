@@ -1,5 +1,5 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { coerceNumberProperty } from '@angular/cdk/coercion';
+import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
@@ -126,6 +126,18 @@ export class McNavbarItem extends McNavbarMixinBase implements OnDestroy, CanDis
     @ContentChild(McButtonCssStyler) button: McButtonCssStyler;
     @ContentChild(McNavbarTitle) title: McNavbarTitle;
     @ContentChild(McIcon) icon: McIcon;
+
+
+    @Input()
+    get collapsable(): boolean {
+        return this._collapsable;
+    }
+
+    set collapsable(value: boolean) {
+        this._collapsable = coerceBooleanProperty(value);
+    }
+
+    private _collapsable: boolean = true;
 
     collapsed = false;
 
