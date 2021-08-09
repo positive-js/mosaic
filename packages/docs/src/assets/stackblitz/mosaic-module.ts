@@ -35,7 +35,6 @@ import { McToggleModule } from '@ptsecurity/mosaic/toggle';
 import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 import { McTreeModule } from '@ptsecurity/mosaic/tree';
 import { McTreeSelectModule } from '@ptsecurity/mosaic/tree-select';
-import { McVerticalNavbarModule } from '@ptsecurity/mosaic/vertical-navbar';
 
 
 const MC_COMPONENTS = [
@@ -71,8 +70,7 @@ const MC_COMPONENTS = [
     McToggleModule,
     McToolTipModule,
     McTreeModule,
-    McTreeSelectModule,
-    McVerticalNavbarModule
+    McTreeSelectModule
 ];
 
 const MC_CORE = [

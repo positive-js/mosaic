@@ -277,14 +277,5 @@
     "McTreeSelect": "tree-select",
     "McTreeSelectTrigger": "tree-select",
     "McTreeSelectChange": "tree-select",
-    "CommonModule": "tree-select",
-
-    "McVerticalNavbarModule": "vertical-navbar",
-    "McVerticalNavbar": "vertical-navbar",
-    "McVerticalNavbarTitle": "vertical-navbar",
-    "McVerticalNavbarItem": "vertical-navbar",
-    "McVerticalNavbarItemIcon": "vertical-navbar",
-    "McVerticalNavbarItemBadge": "vertical-navbar",
-    "McVerticalNavbarHeader": "vertical-navbar",
-    "toggleVerticalNavbarAnimation": "vertical-navbar"
+    "CommonModule": "tree-select"
 }
