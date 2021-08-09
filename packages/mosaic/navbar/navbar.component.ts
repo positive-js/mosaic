@@ -128,6 +128,6 @@ export class McNavbar implements AfterViewInit, AfterContentInit, OnDestroy {
     }
 
     private setItemsState = () => {
-        this.navbarBaseItems.forEach((item) => item.horizontal = true);
+        Promise.resolve().then(() => this.navbarBaseItems?.forEach((item) => item.horizontal = true));
     }
 }

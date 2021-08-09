@@ -167,13 +167,13 @@ export class McNavbarItem extends McNavbarMixinBase implements OnDestroy, CanDis
     }
 
     ngOnDestroy() {
-        this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
+        this.focusMonitor.stopMonitoring(this.elementRef);
     }
 
     ngAfterContentInit(): void {
         if (this.button) { return; }
 
-        this.focusMonitor.monitor(this.elementRef.nativeElement, true);
+        this.focusMonitor.monitor(this.elementRef, true);
     }
 
     getTitleWidth(): number {
