@@ -71,7 +71,7 @@ export class McNavbarDivider {}
 
 
 @Directive({
-    selector: 'mc-navbar-item, mc-navbar-divider, mc-navbar-brand',
+    selector: 'mc-navbar-item, [mc-navbar-item], mc-navbar-divider, mc-navbar-brand, [mc-navbar-brand]',
     host: {
         '[class.mc-vertical]': 'vertical',
         '[class.mc-horizontal]': 'horizontal',
@@ -101,7 +101,7 @@ export const McNavbarMixinBase: CanDisableCtor & typeof McNavbarItemBase = mixin
 
 
 @Component({
-    selector: 'mc-navbar-item',
+    selector: 'mc-navbar-item, [mc-navbar-item]',
     exportAs: 'mcNavbarItem',
     template: `<ng-content></ng-content>`,
     styleUrls: [
