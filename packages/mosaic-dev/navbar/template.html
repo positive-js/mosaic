@@ -52,10 +52,10 @@
             #firstDropdownTrigger="mcDropdownTrigger"
             [mcDropdownTriggerFor]="firstDropdown"
             [class.mc-active]="firstDropdownTrigger.opened">
-            <i mc-icon="mc-ellipsis_16" *ngIf="verticalNavbar.expanded"></i>
+            <i mc-icon="mc-ellipsis_16" *ngIf="!verticalNavbar.expanded"></i>
             <div class="layout-row flex layout-align-space-between layout-align-center-center">
                 <mc-navbar-title>Участники информационного</mc-navbar-title>
-                <i mc-icon="mc-angle-right-L_16" *ngIf="!verticalNavbar.expanded"></i>
+                <i mc-icon="mc-angle-right-L_16" *ngIf="verticalNavbar.expanded"></i>
             </div>
         </mc-navbar-item>
 
@@ -68,17 +68,17 @@
             #secondDropdownTrigger="mcDropdownTrigger"
             [mcDropdownTriggerFor]="secondDropdown"
             [class.mc-active]="secondDropdownTrigger.opened">
-            <i mc-icon="mc-ellipsis_16" *ngIf="verticalNavbar.expanded"></i>
+            <i mc-icon="mc-ellipsis_16" *ngIf="!verticalNavbar.expanded"></i>
             <div class="layout flex layout-align-space-between layout-align-center-center">
                 <mc-navbar-title>Еще</mc-navbar-title>
-                <i mc-icon="mc-angle-right-L_16" *ngIf="!verticalNavbar.expanded"></i>
+                <i mc-icon="mc-angle-right-L_16" *ngIf="verticalNavbar.expanded"></i>
             </div>
         </mc-navbar-item>
 
         <mc-navbar-item (click)="onItemClick($event)">
             <button mc-button [color]="'primary'">
                 <i mc-icon="mc-info_16"></i>
-                <span *ngIf="!verticalNavbar.expanded">Новый инцидент</span>
+                <span *ngIf="verticalNavbar.expanded">Новый инцидент</span>
             </button>
         </mc-navbar-item>
     </mc-navbar-container>
@@ -109,7 +109,7 @@
 
         <mc-navbar-divider></mc-navbar-divider>
 
-        <mc-navbar-toggle (click)="verticalNavbar.toggle()" (keydown.space)="verticalNavbar.toggle()">
+        <mc-navbar-toggle (click)="verticalNavbar.toggle()"(keydown.space)="verticalNavbar.toggle()">
             <mc-navbar-title>Свернуть</mc-navbar-title>
         </mc-navbar-toggle>
     </mc-navbar-container>
