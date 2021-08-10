@@ -1,3 +1,17 @@
+## 11.3.3 "Misty dream" (2021-08-10)
+
+### Mosaic
+
+ * bug fix  **navbar:** added [collapsable] property for mc-navbar-item (#UIM-707) ([#665](https://github.com/positive-js/mosaic/issues/665)) ([8c22d82](https://github.com/positive-js/mosaic/commit/8c22d822546d7218edca2e9a660042cdb78e7323)), closes [#UIM-707](https://github.com/positive-js/mosaic/issues/UIM-707)
+ * bug fix  **navbar:** added selector [mc-navbar-item] for use with link (#UIM-704) ([#664](https://github.com/positive-js/mosaic/issues/664)) ([01ac6a3](https://github.com/positive-js/mosaic/commit/01ac6a37cdee7818b3da74dff9aa7de56349e691)), closes [#UIM-704](https://github.com/positive-js/mosaic/issues/UIM-704)
+ * bug fix  **navbar:** divider height is 0 (#UIM-705) ([#663](https://github.com/positive-js/mosaic/issues/663)) ([cb13333](https://github.com/positive-js/mosaic/commit/cb13333fd08c0f4254c5afe341acad291313af5c)), closes [#UIM-705](https://github.com/positive-js/mosaic/issues/UIM-705)
+ * bug fix  **navbar:** error ExpressionChangedAfterItHasBeenCheckedError in navbar-item (#UIM-706) ([#667](https://github.com/positive-js/mosaic/issues/667)) ([75c80d4](https://github.com/positive-js/mosaic/commit/75c80d4297075a3377d0435a0d4767061bdae4e8)), closes [#UIM-706](https://github.com/positive-js/mosaic/issues/UIM-706)
+ * bug fix  **navbar:** errors in console if use [expanded] (UIM-701) ([#662](https://github.com/positive-js/mosaic/issues/662)) ([9a99d6e](https://github.com/positive-js/mosaic/commit/9a99d6ee3881f43809d85d0b2100c49878b75736))
+
+### Docs
+
+ * bug fix  fixed error in navbar examples (#UIM-700) ([#668](https://github.com/positive-js/mosaic/issues/668)) ([61aa25b](https://github.com/positive-js/mosaic/commit/61aa25b58011bd8622db40cf3e70fb11fc4c461b)), closes [#UIM-700](https://github.com/positive-js/mosaic/issues/UIM-700)
+
 ## 11.3.2 "Still-wildflower" (2021-08-02)
 
 ### Mosaic
