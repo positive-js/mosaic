@@ -131,7 +131,20 @@ export class McTimepicker<D> implements McFormFieldControl<D>, ControlValueAcces
      * Implemented as part of McFormFieldControl.
      * @docs-private
      */
-    @Input() placeholder: string;
+    @Input()
+    get placeholder(): string {
+        return this._placeholder;
+    }
+
+    set placeholder(value: string) {
+        this._placeholder = value;
+
+        this.defaultPlaceholder = false;
+    }
+
+    private _placeholder = TIMEFORMAT_PLACEHOLDERS[DEFAULT_TIME_FORMAT];
+
+    private defaultPlaceholder = true;
 
     @Input()
     get disabled(): boolean {
@@ -189,7 +202,9 @@ export class McTimepicker<D> implements McFormFieldControl<D>, ControlValueAcces
             .map((timeFormatKey) => TimeFormats[timeFormatKey])
             .indexOf(formatValue) > -1 ? formatValue : DEFAULT_TIME_FORMAT;
 
-        this.placeholder = TIMEFORMAT_PLACEHOLDERS[this._format];
+        if (this.defaultPlaceholder) {
+            this._placeholder = TIMEFORMAT_PLACEHOLDERS[this._format];
+        }
 
         if (this.value) {
             this.updateView();
@@ -317,8 +332,8 @@ export class McTimepicker<D> implements McFormFieldControl<D>, ControlValueAcces
 
     constructor(
         private elementRef: ElementRef,
-        @Optional() private dateAdapter: DateAdapter<any>,
-        private renderer: Renderer2
+        private renderer: Renderer2,
+        @Optional() private dateAdapter: DateAdapter<any>
     ) {
         if (!this.dateAdapter) {
             throw Error(`McTimepicker: No provider found for DateAdapter. You must import one of the existing ` +
@@ -331,8 +346,6 @@ export class McTimepicker<D> implements McFormFieldControl<D>, ControlValueAcces
 
         // Force setter to be called in case id was not specified.
         this.id = this.id;
-
-        this.placeholder = TIMEFORMAT_PLACEHOLDERS[DEFAULT_TIME_FORMAT];
     }
 
     ngOnDestroy(): void {
