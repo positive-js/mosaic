@@ -144,8 +144,6 @@ export class McTimepicker<D> implements McFormFieldControl<D>, ControlValueAcces
 
     private _placeholder = TIMEFORMAT_PLACEHOLDERS[DEFAULT_TIME_FORMAT];
 
-    private defaultPlaceholder = true;
-
     @Input()
     get disabled(): boolean {
         return this._disabled;
@@ -326,6 +324,8 @@ export class McTimepicker<D> implements McFormFieldControl<D>, ControlValueAcces
     private lastValueValid = false;
 
     private control: AbstractControl;
+
+    private defaultPlaceholder = true;
 
     private onChange: (value: any) => void;
     private onTouched: () => void;
