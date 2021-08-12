@@ -96,15 +96,18 @@ describe('McDatepicker', () => {
             }));
 
             it('should focus input after close', fakeAsync(() => {
+                const input = testComponent.datepicker.datepickerInput.elementRef.nativeElement;
+                input.focus();
+
                 testComponent.datepicker.open();
                 fixture.detectChanges();
 
-                testComponent.datepicker.close();
+                testComponent.datepicker.close(true);
                 fixture.detectChanges();
 
                 flush();
 
-                expect(document.activeElement).toBe(testComponent.datepicker.datepickerInput.elementRef.nativeElement);
+                expect(document.activeElement).toBe(input);
             }));
 
             it('open non-touch should open popup', () => {

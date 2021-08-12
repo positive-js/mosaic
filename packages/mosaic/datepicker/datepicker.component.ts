@@ -13,6 +13,7 @@ import { ComponentPortal, ComponentType } from '@angular/cdk/portal';
 import { DOCUMENT } from '@angular/common';
 import {
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ComponentRef,
     EventEmitter,
@@ -73,7 +74,9 @@ export const MC_DATEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER = {
     styleUrls: ['datepicker-content.scss'],
     host: {
         class: 'mc-datepicker__content',
-        '[@transformPanel]': '"enter"'
+
+        '[@transformPanel]': 'animationState',
+        '(@transformPanel.done)': 'animationDone.next()'
     },
     animations: [
         mcDatepickerAnimations.transformPanel,
@@ -82,12 +85,38 @@ export const MC_DATEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER = {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class McDatepickerContent<D> {
-    /** Reference to the internal calendar component. */
-    @ViewChild(McCalendar, { static: false }) calendar: McCalendar<D>;
+export class McDatepickerContent<D> implements OnDestroy {
+    /** Emits when an animation has finished. */
+    readonly animationDone = new Subject<void>();
 
     /** Reference to the datepicker that created the overlay. */
     datepicker: McDatepicker<D>;
+
+    /** Current state of the animation. */
+    animationState: 'enter' | 'void';
+
+    /** Reference to the internal calendar component. */
+    @ViewChild(McCalendar) calendar: McCalendar<D>;
+
+    private subscriptions = new Subscription();
+
+    constructor(private changeDetectorRef: ChangeDetectorRef) {}
+
+    ngAfterViewInit() {
+        this.subscriptions.add(this.datepicker.stateChanges.subscribe(() => {
+            this.changeDetectorRef.markForCheck();
+        }));
+    }
+
+    ngOnDestroy() {
+        this.subscriptions.unsubscribe();
+        this.animationDone.complete();
+    }
+
+    startExitAnimation() {
+        this.animationState = 'void';
+        this.changeDetectorRef.markForCheck();
+    }
 }
 
 
@@ -221,7 +250,7 @@ export class McDatepicker<D> implements OnDestroy {
     id: string = `mc-datepicker-${datepickerUid++}`;
 
     /** A reference to the overlay when the calendar is opened as a popup. */
-    popupRef: OverlayRef;
+    popupRef: OverlayRef | null;
 
     /** The input element this datepicker is associated with. */
     datepickerInput: McDatepickerInput<D>;
@@ -272,10 +301,7 @@ export class McDatepicker<D> implements OnDestroy {
         this.closeSubscription.unsubscribe();
         this.disabledChange.complete();
 
-        if (this.popupRef) {
-            this.popupRef.dispose();
-            this.popupComponentRef = null;
-        }
+        this.destroyOverlay();
     }
 
     /** Selects the given date */
@@ -341,48 +367,35 @@ export class McDatepicker<D> implements OnDestroy {
     close(restoreFocus: boolean = true): void {
         if (!this._opened) { return; }
 
-        if (this.popupRef && this.popupRef.hasAttached()) {
-            this.popupRef.detach();
+        if (this.popupComponentRef) {
+            const instance = this.popupComponentRef.instance;
+            instance.startExitAnimation();
+            instance.animationDone
+                .pipe(take(1))
+                .subscribe(() => this.destroyOverlay());
         }
 
-        if (this.calendarPortal && this.calendarPortal.isAttached) {
-            this.calendarPortal.detach();
+        if (restoreFocus) {
+            this.focusedElementBeforeOpen!.focus();
         }
 
-        const completeClose = () => {
-            // The `_opened` could've been reset already if
-            // we got two events in quick succession.
-            if (this._opened) {
-                this._opened = false;
-                this.closedStream.emit();
-                this.focusedElementBeforeOpen = null;
-
-                if (restoreFocus) {
-                    this.datepickerInput.elementRef.nativeElement.focus();
-                }
-            }
-        };
-
-        if (this.focusedElementBeforeOpen && typeof this.focusedElementBeforeOpen.focus === 'function') {
-            // Because IE moves focus asynchronously, we can't count on it being restored before we've
-            // marked the datepicker as closed. If the event fires out of sequence and the element that
-            // we're refocusing opens the datepicker on focus, the user could be stuck with not being
-            // able to close the calendar at all. We work around it by making the logic, that marks
-            // the datepicker as closed, async as well.
-            if (restoreFocus) {
-                this.focusedElementBeforeOpen.focus();
-            }
-
-            setTimeout(completeClose);
-        } else {
-            completeClose();
-        }
+        this._opened = false;
+        this.closedStream.emit();
+        this.focusedElementBeforeOpen = null;
     }
 
     toggle(): void {
         if (this.datepickerInput.isReadOnly) { return; }
 
         this._opened ? this.close() : this.open();
+    }
+
+    /** Destroys the current overlay. */
+    private destroyOverlay() {
+        if (this.popupRef) {
+            this.popupRef.dispose();
+            this.popupRef = this.popupComponentRef = null;
+        }
     }
 
     /** Open the calendar as a popup. */
@@ -397,14 +410,14 @@ export class McDatepicker<D> implements OnDestroy {
             this.createPopup();
         }
 
-        if (!this.popupRef.hasAttached()) {
-            this.popupComponentRef = this.popupRef.attach(this.calendarPortal);
+        if (!this.popupRef!.hasAttached()) {
+            this.popupComponentRef = this.popupRef!.attach(this.calendarPortal);
             this.popupComponentRef.instance.datepicker = this;
 
             // Update the position once the calendar has rendered.
             this.ngZone.onStable.asObservable()
                 .pipe(take(1))
-                .subscribe(() => this.popupRef.updatePosition());
+                .subscribe(() => this.popupRef!.updatePosition());
         }
     }
 
@@ -422,13 +435,18 @@ export class McDatepicker<D> implements OnDestroy {
         this.popupRef = this.overlay.create(overlayConfig);
 
         this.closeSubscription = this.closingActions()
-            .subscribe(() => this.close());
+            .subscribe(() => this.close(this.restoreFocus()));
+    }
+
+    private restoreFocus(): boolean {
+        return this.document.activeElement === this.document.body;
     }
 
     private closingActions() {
         return merge(
-            this.popupRef.backdropClick(),
-            this.popupRef.outsidePointerEvents()
+            this.popupRef!.backdropClick(),
+            this.popupRef!.outsidePointerEvents(),
+            this.popupRef!.detachments()
         );
     }
 
