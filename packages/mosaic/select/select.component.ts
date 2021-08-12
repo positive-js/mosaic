@@ -468,7 +468,7 @@ export class McSelect extends McSelectMixinBase implements
 
     /** Whether the select is focused. */
     get focused(): boolean {
-        return this._focused || this._panelOpen;
+        return this._focused || this.panelOpen;
     }
 
     set focused(value: boolean) {
@@ -477,11 +477,7 @@ export class McSelect extends McSelectMixinBase implements
 
     private _focused = false;
 
-    get panelOpen(): boolean {
-        return this._panelOpen;
-    }
-
-    private _panelOpen = false;
+    panelOpen = false;
 
     get isEmptySearchResult(): boolean {
         return this.search && this.options.length === 0 && !!this.search.input.value;
@@ -669,14 +665,15 @@ export class McSelect extends McSelectMixinBase implements
 
     /** Opens the overlay panel. */
     open(): void {
-        if (this.disabled || !this.options || !this.options.length || this._panelOpen) { return; }
+        if (this.disabled || !this.options?.length || this.panelOpen) { return; }
 
         this.triggerRect = this.trigger.nativeElement.getBoundingClientRect();
         // Note: The computed font-size will be a string pixel value (e.g. "16px").
         // `parseInt` ignores the trailing 'px' and converts this to a number.
         this.triggerFontSize = parseInt(getComputedStyle(this.trigger.nativeElement)['font-size']);
 
-        this._panelOpen = true;
+        this.panelOpen = true;
+
         this.keyManager.withHorizontalOrientation(null);
         this.highlightCorrectOption();
         this._changeDetectorRef.markForCheck();
@@ -695,11 +692,11 @@ export class McSelect extends McSelectMixinBase implements
 
     /** Closes the overlay panel and focuses the host element. */
     close(): void {
-        if (!this._panelOpen) { return; }
+        if (!this.panelOpen) { return; }
 
         // the order of calls is important
         this.resetSearch();
-        this._panelOpen = false;
+        this.panelOpen = false;
         this.keyManager.withHorizontalOrientation(this.isRtl() ? 'rtl' : 'ltr');
 
         this._changeDetectorRef.markForCheck();
@@ -822,7 +819,6 @@ export class McSelect extends McSelectMixinBase implements
      */
     onContainerClick() {
         this.focus();
-        this.open();
     }
 
     /** Invoked when an option is clicked. */
@@ -881,11 +877,11 @@ export class McSelect extends McSelectMixinBase implements
     }
 
     private closingActions() {
-        const backdrop = this.overlayDir.overlayRef!.backdropClick();
-        const outsidePointerEvents = this.overlayDir.overlayRef!.outsidePointerEvents();
-        const detachments = this.overlayDir.overlayRef!.detachments();
-
-        return merge(backdrop, outsidePointerEvents, detachments);
+        return merge(
+            this.overlayDir.overlayRef!.outsidePointerEvents()
+                .pipe(filter((event) => !this.elementRef.nativeElement.contains(event.target))),
+            this.overlayDir.overlayRef!.detachments()
+        );
     }
 
     private getHeightOfOptionsContainer(): number {
@@ -935,9 +931,8 @@ export class McSelect extends McSelectMixinBase implements
     private handleClosedKeydown(event: KeyboardEvent): void {
         /* tslint:disable-next-line */
         const keyCode = event.keyCode;
-        const isArrowKey = keyCode === DOWN_ARROW || keyCode === UP_ARROW ||
-            keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW;
-        const isOpenKey = keyCode === ENTER || keyCode === SPACE;
+        const isArrowKey = [DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW].includes(keyCode);
+        const isOpenKey = [ENTER, SPACE].includes(keyCode);
 
         // Open the select on ALT + arrow key to match the native <select>
         if (isOpenKey || ((this.multiple || event.altKey) && isArrowKey)) {
@@ -1094,9 +1089,9 @@ export class McSelect extends McSelectMixinBase implements
         this.keyManager.change
             .pipe(takeUntil(this.destroy))
             .subscribe(() => {
-                if (this._panelOpen && this.panel) {
+                if (this.panelOpen && this.panel) {
                     this.scrollActiveOptionIntoView();
-                } else if (!this._panelOpen && !this.multiple && this.keyManager.activeItem) {
+                } else if (!this.panelOpen && !this.multiple && this.keyManager.activeItem) {
                     this.keyManager.activeItem.selectViaInteraction();
                 }
             });
@@ -1117,7 +1112,7 @@ export class McSelect extends McSelectMixinBase implements
                     this.search.isSearchChanged = false;
                 }
 
-                if (event.isUserInput && !this.multiple && this._panelOpen) {
+                if (event.isUserInput && !this.multiple && this.panelOpen) {
                     this.close();
                     this.focus();
                 }
