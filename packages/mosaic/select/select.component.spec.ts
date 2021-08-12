@@ -1820,6 +1820,8 @@ describe('McSelect', () => {
                 trigger.click();
                 fixture.detectChanges();
 
+                expect(fixture.componentInstance.select.selected).toBeUndefined();
+
                 const options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-option');
                 options[2].click();
                 fixture.detectChanges();
