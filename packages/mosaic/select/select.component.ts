@@ -672,11 +672,11 @@ export class McSelect extends McSelectMixinBase implements
         // `parseInt` ignores the trailing 'px' and converts this to a number.
         this.triggerFontSize = parseInt(getComputedStyle(this.trigger.nativeElement)['font-size']);
 
+        this.panelOpen = true;
+
         this.keyManager.withHorizontalOrientation(null);
         this.highlightCorrectOption();
         this._changeDetectorRef.markForCheck();
-
-        this.panelOpen = true;
 
         // Set the font size on the panel element once it exists.
         this._ngZone.onStable.asObservable()
@@ -819,7 +819,6 @@ export class McSelect extends McSelectMixinBase implements
      */
     onContainerClick() {
         this.focus();
-        this.open();
     }
 
     /** Invoked when an option is clicked. */
