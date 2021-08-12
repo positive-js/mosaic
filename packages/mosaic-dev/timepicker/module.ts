@@ -37,6 +37,7 @@ export function customValidator(): ValidatorFn {
     encapsulation: ViewEncapsulation.None
 })
 export class TimepickerDemoComponent {
+    placeholder: string = 'placeholder';
     minDate: DateTime;
     maxDate: DateTime;
 
