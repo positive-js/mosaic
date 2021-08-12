@@ -23,7 +23,8 @@
             mcTimepicker
             [formControl]="reactiveFormControlValue"
             [max]="maxDate"
-            [format]="'HH:mm'">
+            [format]="'HH:mm'"
+            [placeholder]="placeholder">
         <mc-hint class="mc-caption" *ngIf="reactiveFormControlValue.errors?.mcTimepickerParse">Только цифры</mc-hint>
     </mc-form-field>
 
