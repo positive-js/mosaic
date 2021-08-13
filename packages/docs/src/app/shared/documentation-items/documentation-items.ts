@@ -115,12 +115,6 @@ const DOCS: { [key: string]: DocCategory[] } = {
                     examples: ['datepicker-types']
                 },
                 {
-                    id: 'dropdown',
-                    name: 'Dropdown',
-                    summary: '',
-                    examples: ['dropdown-types']
-                },
-                {
                     id: 'input',
                     name: 'Input',
                     summary: '',
@@ -254,6 +248,12 @@ const DOCS: { [key: string]: DocCategory[] } = {
                     name: 'Toggle',
                     summary: '',
                     examples: ['toggle-types']
+                },
+                {
+                    id: 'dropdown',
+                    name: 'Dropdown',
+                    summary: '',
+                    examples: ['dropdown-types']
                 }
             ]
         },

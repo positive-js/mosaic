@@ -11,8 +11,7 @@
     dropdown <i mc-icon="mc-angle-down-L_16"></i>
 </button>
 
-<mc-dropdown #appDropdown="mcDropdown"
-             [class]="'max-width'">
+<mc-dropdown #appDropdown="mcDropdown" [class]="'max-width'">
 
     <button mc-dropdown-item>Общие сведения</button>
 
@@ -51,10 +50,7 @@
 
     <button mc-dropdown-item>Point 3</button>
 
-    <a href="https://google.com" mc-link mc-dropdown-item>
-        <i mc-icon="mc-search_16"></i>
-        <span class="mc-link__text">Link</span>
-    </a>
+    <button mc-dropdown-item>Link</button>
 </mc-dropdown>
 
 <br><br><br>
@@ -65,8 +61,11 @@
 
 <br><br>
 
-<button mc-button [mcDropdownTriggerFor]="appDropdownLazy" [mcDropdownTriggerData]="{someValue: someValue}"
+<button mc-button
+        [mcDropdownTriggerFor]="appDropdownLazy"
+        [mcDropdownTriggerData]="{ someValue: someValue }"
         [disabled]="disabled">
+
     dropdown lazy <i mc-icon="mc-angle-down-L_16"></i>
 </button>
 
