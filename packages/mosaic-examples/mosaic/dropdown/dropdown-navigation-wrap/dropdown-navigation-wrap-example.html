@@ -1,17 +1,10 @@
-<mc-checkbox [checked]="disabled" (change)="toggleDisabled()">toggle disabled state</mc-checkbox>
-<br><br>
-<mc-checkbox [checked]="openByArrowDown" (change)="toggleOpenByArrowDown()">toggleOpenByArrowDown</mc-checkbox>
-
-<br><br>
-
-<button mc-button
-        [mcDropdownTriggerFor]="appDropdown"
-        [openByArrowDown]="openByArrowDown"
-        [disabled]="disabled">
+<button mc-button [mcDropdownTriggerFor]="appDropdown">
     dropdown <i mc-icon="mc-angle-down-L_16"></i>
 </button>
 
-<mc-dropdown #appDropdown="mcDropdown" [class]="'max-width'">
+<mc-dropdown #appDropdown="mcDropdown"
+             [navigationWithWrap]="true"
+             [class]="'max-width'">
 
     <button mc-dropdown-item>Общие сведения</button>
 
@@ -51,30 +44,4 @@
     <button mc-dropdown-item>Point 3</button>
 
     <button mc-dropdown-item>Link</button>
-</mc-dropdown>
-
-<br><br><br>
-
-<mc-form-field class="max-width">
-    <input mcInput type="text" [(ngModel)]="someValue">
-</mc-form-field>
-
-<br><br>
-
-<button mc-button
-        [mcDropdownTriggerFor]="appDropdownLazy"
-        [mcDropdownTriggerData]="{ someValue: someValue }"
-        [disabled]="disabled">
-
-    dropdown lazy <i mc-icon="mc-angle-down-L_16"></i>
-</button>
-
-<mc-dropdown #appDropdownLazy="mcDropdown">
-    <ng-template mcDropdownContent let-someValue="someValue">
-        <button mc-dropdown-item [disabled]="disabled">dropdown</button>
-        <button mc-dropdown-item>
-            Point 1 <div class="mc-dropdown-item__caption">Some info</div>
-        </button>
-        <button mc-dropdown-item>Value: {{someValue}}</button>
-    </ng-template>
 </mc-dropdown>

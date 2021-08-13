@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 23 Jul 2021 10:34:34 GMT
+ * Generated on Wed, 04 Aug 2021 11:39:27 GMT
  */
 
 :root {
@@ -51,7 +51,13 @@
   --mc-divider-size-width: 1px;
   --mc-divider-size-inset-margin: 80px;
   --mc-dropdown-item-size-padding: 5px 15px;
-  --mc-dropdown-trigger-size-padding-left: 16px;
+  --mc-dropdown-item-size-icon-padding: 0 8px 2px 0;
+  --mc-dropdown-group-header-size-default-padding: 6px 15px;
+  --mc-dropdown-group-header-size-small-padding: 8px 15px;
+  --mc-dropdown-divider-size-height: 1px;
+  --mc-dropdown-divider-size-margin: 4px 0;
+  --mc-dropdown-trigger-size-icon-padding-right: 8px;
+  --mc-dropdown-panel-size-max-width: 640px;
   --mc-dropdown-panel-size-padding: 4px 0;
   --mc-dropdown-panel-size-border-width: 1px;
   --mc-dropdown-panel-size-border-radius: 3px;

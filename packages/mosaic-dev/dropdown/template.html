@@ -1,12 +1,12 @@
 <div>
     <span class="mc-group">
-        <button mc-button class="mc-group-item" >dropdown</button>
-
         <button mc-button class="mc-group-item mc-active"
                 [ngClass]="{ 'mc-active': isDropdownOpen}"
                 [mcDropdownTriggerFor]="appDropdown"
                 (dropdownOpened)="dropdownOpened()"
                 (dropdownClosed)="dropdownClosed()">
+
+            dropdown
             <i mc-icon="mc-angle-down-L_16"></i>
         </button>
     </span>
@@ -21,32 +21,48 @@
     <br>
     <br>
 
-    <button mc-button [mcDropdownTriggerFor]="appDropdown">
-        dropdown
-        <i mc-icon="mc-angle-down-L_16"></i>
-    </button>
+    <mc-dropdown #appDropdown="mcDropdown"
+                 [overlapTriggerY]="true"
+                 [overlapTriggerX]="false">
+            <button mc-dropdown-item>Общие сведения</button>
 
-    <br>
-    <br>
+            <button mc-dropdown-item><i mc-icon="mc-info-o_16"></i>Общие сведения</button>
 
-    <mc-dropdown #appDropdown="mcDropdown" [overlapTriggerY]="true" [overlapTriggerX]="false">
-        <button mc-dropdown-item>
-            Point 1
-            <div class="mc-dropdown__item-caption">Some info</div>
-        </button>
-        <button mc-dropdown-item>
-            <i mc-icon="mc-search_16"></i>
-            Very Long Point
-        </button>
-        <h5>Additional info</h5>
-        <button mc-dropdown-item [disabled]="true">Disabled</button>
-        <button mc-dropdown-item>Point 2</button>
-        <a href="https://google.com" mc-link mc-dropdown-item>
-            <i mc-icon="mc-search_16"></i>
-            <span class="mc-link__text">Link</span>
-        </a>
-        <button mc-dropdown-item>Point 3</button>
-    </mc-dropdown>
+            <button mc-dropdown-item>
+                Общие сведения<div class="mc-dropdown-item__caption">Общие сведения</div>
+            </button>
+
+            <button mc-dropdown-item>
+                <i mc-icon="mc-info-o_16"></i>Общие сведения
+                <div class="mc-dropdown-item__caption">Общие сведения</div>
+            </button>
+
+            <button mc-dropdown-item>
+                <i mc-icon="mc-circle-8_16"></i>Общие сведения
+            </button>
+
+            <button mc-dropdown-item>Общие сведения и очень длинный текст</button>
+
+            <div class="mc-dropdown__divider"></div>
+
+            <div class="mc-dropdown__group-header">Additional info</div>
+
+            <button mc-dropdown-item disabled>Disabled</button>
+
+            <div class="mc-dropdown__divider"></div>
+
+            <div class="mc-dropdown__group-header mc-dropdown__group-header_small">Additional info</div>
+
+            <button mc-dropdown-item disabled>Disabled</button>
+
+            <div class="mc-dropdown__divider"></div>
+
+            <button mc-dropdown-item>Point 2</button>
+
+            <button mc-dropdown-item>Point 3</button>
+
+            <button mc-dropdown-item>Link</button>
+        </mc-dropdown>
 
     <div>
         <input mcInput type="text" [(ngModel)]="someValue">
@@ -63,9 +79,36 @@
         <ng-template mcDropdownContent  let-someValue="someValue">
             <button mc-dropdown-item>
                 Point 1
-                <div class="mc-dropdown__item-caption">Some info</div>
+                <div class="mc-dropdown-item__caption">Some info</div>
             </button>
             <button mc-dropdown-item>Value: {{someValue}}</button>
         </ng-template>
     </mc-dropdown>
 </div>
+
+<br><br><br>
+
+<button mc-button [mcDropdownTriggerFor]="appDropdownWithNested">
+    nested dropdown <i mc-icon="mc-angle-down-L_16"></i>
+</button>
+
+<mc-dropdown #appDropdownWithNested="mcDropdown">
+    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNested">1 level (1)</button>
+    <button mc-dropdown-item>1 level (2)</button>
+    <button mc-dropdown-item>1 level (3)</button>
+</mc-dropdown>
+
+<mc-dropdown #appDropdownNested="mcDropdown">
+    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNestedNested">2 level (1)</button>
+    <button mc-dropdown-item>2 level (2)</button>
+    <button mc-dropdown-item>2 level (3)</button>
+</mc-dropdown>
+
+<mc-dropdown #appDropdownNestedNested="mcDropdown">
+    <button mc-dropdown-item>3 level (1)</button>
+    <button mc-dropdown-item>3 level (2)</button>
+    <button mc-dropdown-item>3 level (3)</button>
+</mc-dropdown>
+
+
+

@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 23 Jul 2021 10:34:34 GMT
+ * Generated on Wed, 04 Aug 2021 11:39:27 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
@@ -455,9 +455,17 @@ export const DatepickerInputSizeWidth = "130px";
 export const DividerSizeWidth = "1px";
 export const DividerSizeInsetMargin = "80px";
 export const DropdownItemSizePadding = "5px 15px";
+export const DropdownItemSizeIconPadding = "0 8px 2px 0";
 export const DropdownItemFontDefault = "body";
 export const DropdownItemFontCaption = "caption";
-export const DropdownTriggerSizePaddingLeft = "16px";
+export const DropdownGroupHeaderSizeDefaultPadding = "6px 15px";
+export const DropdownGroupHeaderSizeSmallPadding = "8px 15px";
+export const DropdownGroupHeaderFontDefault = "body-strong";
+export const DropdownGroupHeaderFontSmall = "caption-caps";
+export const DropdownDividerSizeHeight = "1px";
+export const DropdownDividerSizeMargin = "4px 0";
+export const DropdownTriggerSizeIconPaddingRight = "8px";
+export const DropdownPanelSizeMaxWidth = "640px";
 export const DropdownPanelSizePadding = "4px 0";
 export const DropdownPanelSizeBorderWidth = "1px";
 export const DropdownPanelSizeBorderRadius = "3px";

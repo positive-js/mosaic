@@ -1,16 +1,60 @@
-<button mc-button [mcDropdownTriggerFor]="appDropdownNested">
-    nested dropdown <i mc-icon="mc-angle-down-L_16"></i>
+<button mc-button [mcDropdownTriggerFor]="appDropdownWithNested">
+    dropdown <i mc-icon="mc-angle-down-L_16"></i>
 </button>
 
-<mc-dropdown #appDropdownNested="mcDropdown">
-    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdown">dropdown</button>
-    <button mc-dropdown-item>
-        Point 1 <div class="mc-dropdown__item-caption">Some info</div>
-    </button>
+<mc-dropdown #appDropdownWithNested="mcDropdown">
+    <button mc-dropdown-item>Search settings</button>
+
+    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNested">Text</button>
+    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNested">Paragraph styles</button>
+    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNested">Align & intent</button>
+    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNested">Line spacing</button>
+    <button mc-dropdown-item [disabled]="true" [mcDropdownTriggerFor]="appDropdownNested">Columns</button>
+    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNested">Bullets & numbering</button>
+
+    <div class="mc-dropdown__divider"></div>
+
+    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNested">Headers & footers</button>
+    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNested">Page numbers</button>
+
+    <div class="mc-dropdown__divider"></div>
+
+    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNested">Table</button>
+
+    <div class="mc-dropdown__divider"></div>
+
+    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNested">Image</button>
+
+    <div class="mc-dropdown__divider"></div>
+
+    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNested">Clear formatting</button>
+
+    <div class="mc-dropdown__divider"></div>
+
+    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNested">Border & lines</button>
 </mc-dropdown>
 
-<mc-dropdown #appDropdown="mcDropdown">
-    <button mc-dropdown-item><i mc-icon="mc-search_16"></i> Very Long Point</button>
-    <button mc-dropdown-item>Point 2</button>
-    <button mc-dropdown-item>Point 3</button>
+<mc-dropdown #appDropdownNested="mcDropdown">
+    <button mc-dropdown-item>Border and shading</button>
+
+    <div class="mc-dropdown__divider"></div>
+
+    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNestedNested">Normal text</button>
+    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNestedNested">Title</button>
+    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNestedNested">Subtitle</button>
+    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNestedNested">Heading 1</button>
+    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNestedNested">Heading 2</button>
+    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNestedNested">Heading 3</button>
+    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNestedNested">Heading 4</button>
+    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNestedNested">Heading 5</button>
+    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNestedNested">Heading 6</button>
+
+    <div class="mc-dropdown__divider"></div>
+
+    <button mc-dropdown-item [mcDropdownTriggerFor]="appDropdownNestedNested">Options</button>
+</mc-dropdown>
+
+<mc-dropdown #appDropdownNestedNested="mcDropdown">
+    <button mc-dropdown-item>Apply 'Title'</button>
+    <button mc-dropdown-item>Update 'Title' to match style</button>
 </mc-dropdown>

@@ -16,7 +16,7 @@ export function throwMcDropdownMissingError() {
  */
 export function throwMcDropdownInvalidPositionX() {
     throw Error(`xPosition value must be either 'before' or after'.
-      Example: <mc-dropdown xPosition="before" #dropdown="mcDropdown"></mc-dropdown>`);
+      Example: <mc-dropdown [xPosition]="'before'" #dropdown="mcDropdown"></mc-dropdown>`);
 }
 
 /**
@@ -26,5 +26,5 @@ export function throwMcDropdownInvalidPositionX() {
  */
 export function throwMcDropdownInvalidPositionY() {
     throw Error(`yPosition value must be either 'above' or below'.
-      Example: <mc-dropdown yPosition="above" #dropdown="mcDropdown"></mc-dropdown>`);
+      Example: <mc-dropdown [yPosition]="'above'" #dropdown="mcDropdown"></mc-dropdown>`);
 }

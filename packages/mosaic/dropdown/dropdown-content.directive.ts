@@ -20,19 +20,18 @@ import { Subject } from 'rxjs';
     selector: 'ng-template[mcDropdownContent]'
 })
 export class McDropdownContent implements OnDestroy {
-
     /** Emits when the dropdown content has been attached. */
     attached = new Subject<void>();
     private portal: TemplatePortal;
     private outlet: DomPortalOutlet;
 
     constructor(
-        private _template: TemplateRef<any>,
-        private _componentFactoryResolver: ComponentFactoryResolver,
-        private _appRef: ApplicationRef,
-        private _injector: Injector,
-        private _viewContainerRef: ViewContainerRef,
-        @Inject(DOCUMENT) private _document: any
+        private template: TemplateRef<any>,
+        private componentFactoryResolver: ComponentFactoryResolver,
+        private appRef: ApplicationRef,
+        private injector: Injector,
+        private viewContainerRef: ViewContainerRef,
+        @Inject(DOCUMENT) private document: any
     ) {}
 
     /**
@@ -41,21 +40,21 @@ export class McDropdownContent implements OnDestroy {
      */
     attach(context: any = {}) {
         if (!this.portal) {
-            this.portal = new TemplatePortal(this._template, this._viewContainerRef);
+            this.portal = new TemplatePortal(this.template, this.viewContainerRef);
         }
 
         this.detach();
 
         if (!this.outlet) {
             this.outlet = new DomPortalOutlet(
-                this._document.createElement('div'),
-                this._componentFactoryResolver,
-                this._appRef,
-                this._injector
+                this.document.createElement('div'),
+                this.componentFactoryResolver,
+                this.appRef,
+                this.injector
             );
         }
 
-        const element: HTMLElement = this._template.elementRef.nativeElement;
+        const element: HTMLElement = this.template.elementRef.nativeElement;
 
         // Because we support opening the same dropdown from different triggers (which in turn have their
         // own `OverlayRef` panel), we have to re-insert the host element every time, otherwise we
@@ -76,8 +75,6 @@ export class McDropdownContent implements OnDestroy {
     }
 
     ngOnDestroy() {
-        if (this.outlet) {
-            this.outlet.dispose();
-        }
+        this.outlet?.dispose();
     }
 }

@@ -2,6 +2,7 @@ import { AnimationEvent } from '@angular/animations';
 import { FocusOrigin } from '@angular/cdk/a11y';
 import { Direction } from '@angular/cdk/bidi';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
@@ -11,7 +12,6 @@ import {
     ElementRef,
     EventEmitter,
     Inject,
-    InjectionToken,
     Input,
     NgZone,
     OnDestroy,
@@ -23,59 +23,23 @@ import {
     OnInit
 } from '@angular/core';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
-import { ESCAPE, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, UP_ARROW } from '@ptsecurity/cdk/keycodes';
+import { ESCAPE, LEFT_ARROW, RIGHT_ARROW } from '@ptsecurity/cdk/keycodes';
 import { merge, Observable, Subject, Subscription } from 'rxjs';
 import { startWith, switchMap, take } from 'rxjs/operators';
 
 import { mcDropdownAnimations } from './dropdown-animations';
-import { McDropdownContent } from './dropdown-content';
+import { McDropdownContent } from './dropdown-content.directive';
 import { throwMcDropdownInvalidPositionX, throwMcDropdownInvalidPositionY } from './dropdown-errors';
-import { McDropdownItem } from './dropdown-item';
-import { MC_DROPDOWN_PANEL, McDropdownPanel } from './dropdown-panel';
-import { DropdownPositionX, DropdownPositionY } from './dropdown-positions';
+import { McDropdownItem } from './dropdown-item.component';
+import {
+    DropdownPositionX,
+    DropdownPositionY,
+    MC_DROPDOWN_DEFAULT_OPTIONS,
+    MC_DROPDOWN_PANEL,
+    McDropdownDefaultOptions,
+    McDropdownPanel
+} from './dropdown.types';
 
-
-/** Default `mc-dropdown` options that can be overridden. */
-// tslint:disable-next-line:naming-convention
-export interface McDropdownDefaultOptions {
-    /** The x-axis position of the dropdown. */
-    xPosition: DropdownPositionX;
-
-    /** The y-axis position of the dropdown. */
-    yPosition: DropdownPositionY;
-
-    /** Whether the dropdown should overlap the dropdown trigger horizontally. */
-    overlapTriggerX: boolean;
-
-    /** Whether the dropdown should overlap the dropdown trigger vertically. */
-    overlapTriggerY: boolean;
-
-    /** Class to be applied to the dropdown's backdrop. */
-    backdropClass: string;
-
-    /** Whether the dropdown has a backdrop. */
-    hasBackdrop: boolean;
-}
-
-/** Injection token to be used to override the default options for `mc-dropdown`. */
-export const MC_DROPDOWN_DEFAULT_OPTIONS =
-    new InjectionToken<McDropdownDefaultOptions>('mc-dropdown-default-options', {
-        providedIn: 'root',
-        factory: MC_DROPDOWN_DEFAULT_OPTIONS_FACTORY
-    });
-
-/** @docs-private */
-// tslint:disable-next-line:naming-convention
-export function MC_DROPDOWN_DEFAULT_OPTIONS_FACTORY(): McDropdownDefaultOptions {
-    return {
-        overlapTriggerX: true,
-        overlapTriggerY: false,
-        xPosition: 'after',
-        yPosition: 'below',
-        backdropClass: 'cdk-overlay-transparent-backdrop',
-        hasBackdrop: false
-    };
-}
 
 @Component({
     selector: 'mc-dropdown',
@@ -92,7 +56,9 @@ export function MC_DROPDOWN_DEFAULT_OPTIONS_FACTORY(): McDropdownDefaultOptions 
         { provide: MC_DROPDOWN_PANEL, useExisting: McDropdown }
     ]
 })
-export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownItem>, OnInit, OnDestroy {
+export class McDropdown implements AfterContentInit, McDropdownPanel, OnInit, OnDestroy {
+
+    @Input() navigationWithWrap: boolean = false;
 
     /** Position of the dropdown in the X axis. */
     @Input()
@@ -163,28 +129,29 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
         const previousPanelClass = this.previousPanelClass;
 
         if (previousPanelClass && previousPanelClass.length) {
-            previousPanelClass.split(' ').forEach((className: string) => {
-                this.classList[className] = false;
-            });
+            previousPanelClass
+                .split(' ')
+                .forEach((className: string) => this.classList[className] = false);
         }
 
         this.previousPanelClass = classes;
 
-        if (classes && classes.length) {
-            classes.split(' ').forEach((className: string) => {
-                this.classList[className] = true;
-            });
+        if (classes?.length) {
+            classes
+                .split(' ')
+                .forEach((className: string) => this.classList[className] = true);
 
-            this._elementRef.nativeElement.className = '';
+            this.elementRef.nativeElement.className = '';
         }
     }
 
-    private _xPosition: DropdownPositionX = this._defaultOptions.xPosition;
-    private _yPosition: DropdownPositionY = this._defaultOptions.yPosition;
-    private _overlapTriggerX: boolean = this._defaultOptions.overlapTriggerX;
-    private _overlapTriggerY: boolean = this._defaultOptions.overlapTriggerY;
-    private _hasBackdrop: boolean = this._defaultOptions.hasBackdrop;
+    private _xPosition: DropdownPositionX = this.defaultOptions.xPosition;
+    private _yPosition: DropdownPositionY = this.defaultOptions.yPosition;
+    private _overlapTriggerX: boolean = this.defaultOptions.overlapTriggerX;
+    private _overlapTriggerY: boolean = this.defaultOptions.overlapTriggerY;
+    private _hasBackdrop: boolean = this.defaultOptions.hasBackdrop;
 
+    triggerWidth: string = '';
     /** Config object to be passed into the dropdown's ngClass */
     classList: { [key: string]: boolean } = {};
 
@@ -204,7 +171,7 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
     direction: Direction;
 
     /** Class to be added to the backdrop element. */
-    @Input() backdropClass: string = this._defaultOptions.backdropClass;
+    @Input() backdropClass: string = this.defaultOptions.backdropClass;
 
     /** @docs-private */
     @ViewChild(TemplateRef, { static: false }) templateRef: TemplateRef<any>;
@@ -212,7 +179,7 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
     /**
      * List of the items inside of a dropdown.
      */
-    @ContentChildren(McDropdownItem) items: QueryList<McDropdownItem>;
+    @ContentChildren(McDropdownItem, { descendants: true }) items: QueryList<McDropdownItem>;
 
     /**
      * Dropdown content that will be rendered lazily.
@@ -221,56 +188,72 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
     @ContentChild(McDropdownContent, { static: false }) lazyContent: McDropdownContent;
 
     /** Event emitted when the dropdown is closed. */
-    @Output() readonly closed: EventEmitter<void | 'click' | 'keydown' | 'tab'> =
-        new EventEmitter<void | 'click' | 'keydown' | 'tab'>();
+    @Output() readonly closed = new EventEmitter<void | 'click' | 'keydown' | 'tab'>();
 
     private previousPanelClass: string;
 
     private keyManager: FocusKeyManager<McDropdownItem>;
 
-    /** Dropdown items inside the current dropdown. */
-    private itemsArray: McDropdownItem[] = [];
-
-    /** Emits whenever the amount of dropdown items changes. */
-    private itemChanges = new Subject<McDropdownItem[]>();
+    /** Only the direct descendant menu items. */
+    private directDescendantItems = new QueryList<McDropdownItem>();
 
     /** Subscription to tab events on the dropdown panel */
     private tabSubscription = Subscription.EMPTY;
 
     constructor(
-        private _elementRef: ElementRef<HTMLElement>,
-        private _ngZone: NgZone,
-        @Inject(MC_DROPDOWN_DEFAULT_OPTIONS) private _defaultOptions: McDropdownDefaultOptions) { }
+        private elementRef: ElementRef<HTMLElement>,
+        private ngZone: NgZone,
+        @Inject(MC_DROPDOWN_DEFAULT_OPTIONS) private defaultOptions: McDropdownDefaultOptions) { }
 
     ngOnInit() {
         this.setPositionClasses();
     }
 
     ngAfterContentInit() {
-        this.keyManager = new FocusKeyManager<McDropdownItem>(this.items)
-            .withWrap()
+        this.updateDirectDescendants();
+
+        this.keyManager = new FocusKeyManager<McDropdownItem>(this.directDescendantItems)
             .withTypeAhead();
 
-        this.tabSubscription = this.keyManager.tabOut.subscribe(() => this.closed.emit('tab'));
+        if (this.navigationWithWrap) {
+            this.keyManager.withWrap();
+        }
+
+        this.tabSubscription = this.keyManager.tabOut
+            .subscribe(() => this.closed.emit('tab'));
+
+        // If a user manually (programmatically) focuses a menu item, we need to reflect that focus
+        // change back to the key manager. Note that we don't need to unsubscribe here because focused
+        // is internal and we know that it gets completed on destroy.
+        this.directDescendantItems.changes
+            .pipe(
+                startWith(this.directDescendantItems),
+                switchMap((items) => merge(...items.map((item: McDropdownItem) => item.focused)))
+            )
+            .subscribe((focusedItem) => this.keyManager.updateActiveItem(focusedItem as McDropdownItem));
     }
 
     ngOnDestroy() {
+        this.directDescendantItems.destroy();
         this.tabSubscription.unsubscribe();
         this.closed.complete();
     }
 
     /** Stream that emits whenever the hovered dropdown item changes. */
     hovered(): Observable<McDropdownItem> {
-        return this.itemChanges.pipe(
-            startWith(this.itemsArray),
-            switchMap((items) => merge(...items.map((item) => item.hovered)))
-        );
+        const itemChanges = this.directDescendantItems.changes as Observable<QueryList<McDropdownItem>>;
+
+        return itemChanges.pipe(
+            startWith(this.directDescendantItems),
+            switchMap((items) => merge(...items.map((item: McDropdownItem) => item.hovered)))
+        ) as Observable<McDropdownItem>;
     }
 
     /** Handle a keyboard event from the dropdown, delegating to the appropriate action. */
     handleKeydown(event: KeyboardEvent) {
         // tslint:disable-next-line:deprecation
         const keyCode = event.keyCode;
+
 
         switch (keyCode) {
             case ESCAPE:
@@ -292,11 +275,13 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
                 }
 
                 this.keyManager.onKeydown(event);
-        }
-    }
 
-    handleClick() {
-        this.closed.emit('click');
+                return;
+        }
+
+        // Don't allow the event to propagate if we've already handled it, or it may
+        // end up reaching other overlays that were opened earlier.
+        event.stopPropagation();
     }
 
     /**
@@ -306,7 +291,7 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
     focusFirstItem(origin: FocusOrigin = 'program'): void {
         // When the content is rendered lazily, it takes a bit before the items are inside the DOM.
         if (this.lazyContent) {
-            this._ngZone.onStable.asObservable()
+            this.ngZone.onStable
                 .pipe(take(1))
                 .subscribe(() => this.keyManager.setFocusOrigin(origin).setFirstItemActive());
         } else {
@@ -319,36 +304,8 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
      * the user to start from the first option when pressing the down arrow.
      */
     resetActiveItem() {
+        this.keyManager.activeItem?.resetStyles();
         this.keyManager.setActiveItem(-1);
-    }
-
-    /**
-     * Registers a dropdown item with the dropdown.
-     * @docs-private
-     */
-    addItem(item: McDropdownItem) {
-        // We register the items through this method, rather than picking them up through
-        // `ContentChildren`, because we need the items to be picked up by their closest
-        // `mc-dropdown` ancestor. If we used `@ContentChildren(McDropdownItem, {descendants: true})`,
-        // all descendant items will bleed into the top-level dropdown in the case where the consumer
-        // has `mc-dropdown` instances nested inside each other.
-        if (this.itemsArray.indexOf(item) === -1) {
-            this.itemsArray.push(item);
-            this.itemChanges.next(this.itemsArray);
-        }
-    }
-
-    /**
-     * Removes an item from the dropdown.
-     * @docs-private
-     */
-    removeItem(item: McDropdownItem) {
-        const index = this.itemsArray.indexOf(item);
-
-        if (this.itemsArray.indexOf(item) > -1) {
-            this.itemsArray.splice(index, 1);
-            this.itemChanges.next(this.itemsArray);
-        }
     }
 
     /**
@@ -394,5 +351,20 @@ export class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownI
         if (event.toState === 'enter' && this.keyManager.activeItemIndex === 0) {
             event.element.scrollTop = 0;
         }
+    }
+
+    /**
+     * Sets up a stream that will keep track of any newly-added menu items and will update the list
+     * of direct descendants. We collect the descendants this way, because `_allItems` can include
+     * items that are part of child menus, and using a custom way of registering items is unreliable
+     * when it comes to maintaining the item order.
+     */
+    private updateDirectDescendants() {
+        this.items.changes
+            .pipe(startWith(this.items))
+            .subscribe((items: QueryList<McDropdownItem>) => {
+                this.directDescendantItems.reset(items.filter((item) => item.parentDropdownPanel === this));
+                this.directDescendantItems.notifyOnChanges();
+            });
     }
 }
