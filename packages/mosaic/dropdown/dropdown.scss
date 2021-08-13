@@ -1,50 +1,10 @@
 @import '../design-tokens/tokens';
 
 
-.mc-dropdown__item {
-    display: flex;
-    align-items: center;
-    position: relative;
-    box-sizing: border-box;
-
-    width: 100%;
-
-    border: 1px solid transparent;
-    outline: none;
-
-    padding: var(--mc-dropdown-item-size-padding, $dropdown-item-size-padding);
-
-    text-align: left;
-    white-space: nowrap;
-
-    &:not([disabled]):not(.mc-disabled) {
-        cursor: pointer;
-    }
-
-    .mc-dropdown__item-caption {
-        margin-top: 4px;
-    }
-
-    .docs-navbar-version__num {
-        margin-right: 4px;
-    }
-
-    & > div {
-        width: 100%;
-    }
-}
-
-.mc-dropdown__trigger {
-    margin-left: auto;
-    padding-left: var(--mc-dropdown-trigger-size-padding-left, $dropdown-trigger-size-padding-left);
-}
-
 .mc-dropdown__panel {
-    min-width: 100%; // prevents some animation twitching and test inconsistencies in IE11
-
-    overflow: auto;
-
     margin-top: -1px;
+
+    max-width: var(--mc-dropdown-panel-size-max-width, $dropdown-panel-size-max-width);
 
     border: {
         width: var(--mc-dropdown-panel-size-border-width, $dropdown-panel-size-border-width);
@@ -55,11 +15,25 @@
     border-bottom-right-radius: var(--mc-dropdown-panel-size-border-radius, $dropdown-panel-size-border-radius);
 
     padding: var(--mc-dropdown-panel-size-padding, $dropdown-panel-size-padding);
+
+    &.mc-dropdown__panel_nested {
+        border-top-left-radius: var(--mc-dropdown-panel-size-border-radius, $dropdown-panel-size-border-radius);
+        border-top-right-radius: var(--mc-dropdown-panel-size-border-radius, $dropdown-panel-size-border-radius);
+    }
+
+    // Prevent users from interacting with the panel while it's animating. Note that
+    // people won't be able to click through it, because the overlay pane will catch the click.
+    // This fixes the following issues:
+    //  * Users accidentally opening sub-menus when the `overlapTrigger` option is enabled.
+    //  * Users accidentally tapping on content inside the sub-menu on touch devices, if the
+    //    sub-menu overlaps the trigger. The issue is due to touch devices emulating the
+    //    `mouseenter` event by dispatching it on tap.
+    &.ng-animating {
+        pointer-events: none;
+    }
 }
 
 .mc-dropdown__content {
-    h1, h2, h3, h4, h5 {
-        padding: 8px 16px 4px 16px;
-        margin: 0;
-    }
+    display: flex;
+    flex-direction: column;
 }

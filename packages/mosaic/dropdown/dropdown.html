@@ -1,13 +1,15 @@
 <ng-template>
-    <div
-        class="mc-dropdown__panel"
-        [ngClass]="classList"
-        (keydown)="handleKeydown($event)"
-        (click)="handleClick()"
-        [@transformDropdown]="panelAnimationState"
-        (@transformDropdown.start)="onAnimationStart($event)"
-        (@transformDropdown.done)="onAnimationDone($event)"
-        role="dropdown">
+    <div class="mc-dropdown__panel"
+         [ngClass]="classList"
+         [class.mc-dropdown__panel_nested]="parent"
+         [style.min-width]="triggerWidth"
+         (keydown)="handleKeydown($event)"
+         (click)="closed.emit('click')"
+         [@transformDropdown]="panelAnimationState"
+         (@transformDropdown.start)="onAnimationStart($event)"
+         (@transformDropdown.done)="onAnimationDone($event)"
+         tabindex="-1">
+
         <div class="mc-dropdown__content">
             <ng-content></ng-content>
         </div>
