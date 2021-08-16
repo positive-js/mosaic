@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 23 Jul 2021 10:34:34 GMT
+ * Generated on Fri, 13 Aug 2021 13:06:27 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
@@ -434,7 +434,7 @@ export const CheckboxSizeToggleBoxShadow = "inset 0 0 1px 0 rgba(0, 0, 0, 0.2)";
 export const CheckboxFontDefault = "body";
 export const DatepickerToggleSizeWidth = "30px";
 export const DatepickerToggleSizeHeight = "30px";
-export const DatepickerBodySizeLabelPaddingSide = "33% / 7";
+export const DatepickerBodySizeLabelPaddings = "8px 28px 12px 12px";
 export const DatepickerBodySizeCellMinSize = "32px";
 export const DatepickerBodySizeCellMargin = "5%";
 export const DatepickerBodySizeCellPadding = "8px";
