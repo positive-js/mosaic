@@ -154,7 +154,7 @@ export class McMonthView<D> implements AfterContentInit {
             throw createMissingDateImplError('MC_DATE_FORMATS');
         }
 
-        const firstDayOfCalendarWeek = this.dateAdapter.getFirstDayOfCalendarWeek();
+        const firstDayOfWeek = this.dateAdapter.getFirstDayOfWeek();
         const narrowWeekdays = this.dateAdapter.getDayOfWeekNames('narrow');
         const longWeekdays = this.dateAdapter.getDayOfWeekNames('long');
 
@@ -162,7 +162,7 @@ export class McMonthView<D> implements AfterContentInit {
         const weekdays = longWeekdays.map((long, i) => {
             return { long, narrow: narrowWeekdays[i] };
         });
-        this.weekdays = weekdays.slice(firstDayOfCalendarWeek).concat(weekdays.slice(0, firstDayOfCalendarWeek));
+        this.weekdays = weekdays.slice(firstDayOfWeek).concat(weekdays.slice(0, firstDayOfWeek));
 
         this._activeDate = this.dateAdapter.today();
     }
@@ -286,7 +286,7 @@ export class McMonthView<D> implements AfterContentInit {
 
         this.weeks = [[]];
 
-        let cell = this.firstWeekOffset - this.dateAdapter.weekNumberShift;
+        let cell = this.firstWeekOffset;
 
         for (let i = 0; i < daysInMonth; i++) {
             cell++;

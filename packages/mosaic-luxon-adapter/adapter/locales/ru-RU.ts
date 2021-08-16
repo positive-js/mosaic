@@ -39,5 +39,5 @@ export const ruRU: DateAdapterConfig = {
         narrow: ['П', 'В', 'С', 'Ч', 'П', 'С', 'В']
     },
 
-    firstDayOfWeek: 1
+    firstDayOfWeek: 0
 };
