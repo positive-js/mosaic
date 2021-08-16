@@ -3,10 +3,7 @@
   aria-hidden because we don't want it to be read out as one of the weeks in the month.
 -->
 <tr *ngIf="firstRowOffset < labelMinRequiredCells">
-    <td class="mc-calendar__body-label"
-        [attr.colspan]="numCols"
-        [style.paddingTop]="cellPadding"
-        [style.paddingBottom]="cellPadding">
+    <td class="mc-calendar__body-label" [attr.colspan]="numCols">
         {{ label }}
     </td>
 </tr>
@@ -21,9 +18,7 @@
     -->
     <td *ngIf="rowIndex === 0 && firstRowOffset"
         class="mc-calendar__body-label"
-        [attr.colspan]="firstRowOffset"
-        [style.paddingTop]="cellPadding"
-        [style.paddingBottom]="cellPadding">
+        [attr.colspan]="firstRowOffset">
         {{ firstRowOffset >= labelMinRequiredCells ? label : '' }}
     </td>
     <td *ngFor="let item of row; let colIndex = index"

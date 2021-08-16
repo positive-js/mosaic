@@ -8,7 +8,7 @@
     'datepicker-body': {
         size: {
             label: {
-                'padding-side': { value: '33% / 7' }
+                'paddings': { value: '8px 28px 12px 12px' }
             },
             cell: {
                 'min-size': { value: '32px' },
