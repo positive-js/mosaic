@@ -61,13 +61,13 @@ describe('LuxonDateAdapter', () => {
 
     it('should get day of week', () => {
         expect(adapter.getDayOfWeek(DateTime.local(2017,  1,  1)))
-            .toBe(6);
+            .toBe(0);
     });
 
     it('should get same day of week in a locale with a different first day of the week', () => {
         adapter.setLocale('fr');
         expect(adapter.getDayOfWeek(DateTime.local(2017,  1,  1)))
-            .toBe(6);
+            .toBe(0);
     });
 
     it('should get long month names', () => {

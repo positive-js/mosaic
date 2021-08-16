@@ -44,12 +44,7 @@ registerLocaleData(de);
         },
         {
             provide: DateAdapter,
-            useFactory: (locale: string) => {
-                const dateAdapter = new LuxonDateAdapter(locale);
-                dateAdapter.updateLocaleData({ firstDayOfWeek: 1 });
-
-                return dateAdapter;
-            },
+            useFactory: (locale: string) => new LuxonDateAdapter(locale),
             deps: [MC_DATE_LOCALE]
         }
     ]

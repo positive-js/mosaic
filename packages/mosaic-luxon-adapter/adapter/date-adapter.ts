@@ -166,7 +166,11 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
 
     getTime(date: DateTime): number { return date.valueOf(); }
 
-    getDayOfWeek(date: DateTime): number { return date.weekday - 1; }
+    getDayOfWeek(date: DateTime): number {
+        if (date.weekday === 7) { return 0; }
+
+        return date.weekday - 1;
+    }
 
     getMonthNames(style: 'long' | 'short' | 'narrow'): string[] {
         return style === 'long' ? this.localeData.longMonths : this.localeData.shortMonths;
