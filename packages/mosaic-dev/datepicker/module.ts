@@ -44,12 +44,7 @@ registerLocaleData(de);
         },
         {
             provide: DateAdapter,
-            useFactory: (locale: string) => {
-                const dateAdapter = new LuxonDateAdapter(locale);
-                dateAdapter.updateLocaleData({ firstDayOfWeek: 1 });
-
-                return dateAdapter;
-            },
+            useFactory: (locale: string) => new LuxonDateAdapter(locale),
             deps: [MC_DATE_LOCALE]
         }
     ]
@@ -73,7 +68,7 @@ export class DemoComponent implements AfterViewInit {
         private adapter: DateAdapter<DateTime>,
         @Inject(MC_DATE_FORMATS) private readonly dateFormats: McDateFormats
     ) {
-        this.formControlValue = new FormControl(this.adapter.createDateTime(2020, 5, 6, 12, 0, 0, 0));
+        this.formControlValue = new FormControl(this.adapter.createDateTime(2021, 8, 11, 12, 0, 0, 0));
         this.minDate = this.adapter.createDate(2015, 1, 1);
         this.maxDate = this.adapter.createDate(2020, 1, 1);
     }
