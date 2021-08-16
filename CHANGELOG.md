@@ -1,3 +1,13 @@
+## 11.3.4 "Floral-wood" (2021-08-16)
+
+### Mosaic
+
+ * bug fix  **datepicker:** focus restoring does't work (#UIM-693) ([#670](https://github.com/positive-js/mosaic/issues/670)) ([19f3c11](https://github.com/positive-js/mosaic/commit/19f3c11d71915c2aef0d9e3b7f9b07eed9b672fa)), closes [#UIM-693](https://github.com/positive-js/mosaic/issues/UIM-693) [#UIM-693](https://github.com/positive-js/mosaic/issues/UIM-693)
+ * bug fix  **datepicker:** style defects in calendar (#UIM-715) ([#673](https://github.com/positive-js/mosaic/issues/673)) ([d95caeb](https://github.com/positive-js/mosaic/commit/d95caebc074ea12c752b158367007130fef595d4)), closes [#UIM-715](https://github.com/positive-js/mosaic/issues/UIM-715)
+ * bug fix  **datepicker:** Wrong weeks calculation in the Datepicker (#UIM-714) ([#672](https://github.com/positive-js/mosaic/issues/672)) ([fc609c1](https://github.com/positive-js/mosaic/commit/fc609c17c764f93e33dac1e20d21f537ea8c3244)), closes [#UIM-714](https://github.com/positive-js/mosaic/issues/UIM-714) [#UIM-714](https://github.com/positive-js/mosaic/issues/UIM-714) [#UIM-714](https://github.com/positive-js/mosaic/issues/UIM-714) [#UIM-714](https://github.com/positive-js/mosaic/issues/UIM-714)
+ * bug fix  **select:** does not close by second click (#UIM-694) ([#671](https://github.com/positive-js/mosaic/issues/671)) ([44ba3b3](https://github.com/positive-js/mosaic/commit/44ba3b3cc73d962600356743288d87a4014f381d)), closes [#UIM-694](https://github.com/positive-js/mosaic/issues/UIM-694) [#UIM-694](https://github.com/positive-js/mosaic/issues/UIM-694)
+ * bug fix  **timepicker:** can' t set placeholder if set format (#UIM-683) ([#669](https://github.com/positive-js/mosaic/issues/669)) ([a6c7250](https://github.com/positive-js/mosaic/commit/a6c7250807ddb27b5c546bdc966214eedf0a15a0)), closes [#UIM-683](https://github.com/positive-js/mosaic/issues/UIM-683) [#UIM-683](https://github.com/positive-js/mosaic/issues/UIM-683)
+
 ## 11.3.3 "Misty dream" (2021-08-10)
 
 ### Mosaic
