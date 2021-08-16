@@ -45,6 +45,9 @@ export abstract class DateAdapter<D> {
     firstMonth: number;
     abstract lastMonth: number;
 
+    /** weekNumberShift is shifting numbers of week */
+    abstract weekNumberShift: number;
+
     /** The locale to use for all dates. */
     protected locale: any;
 
@@ -147,7 +150,9 @@ export abstract class DateAdapter<D> {
 
     /**
      * Gets the first day of the week.
-     * @returns The first day of the week (0-indexed, 0 = Sunday).
+     * @returns The first day of the week.
+     * for MomentJs: (0 = Sunday, days: 0..6)
+     * for Luxon: (1 = Monday, days: 1..7)
      */
     abstract getFirstDayOfWeek(): number;
 
@@ -243,6 +248,12 @@ export abstract class DateAdapter<D> {
      * @returns A new date equal to the given one with the specified number of days added.
      */
     abstract addCalendarDays(date: D, days: number): D;
+
+    /**
+     * Gets the first day of the calendar week.
+     * @returns The first day of the week (0 = Monday, days: 0..6)
+     */
+    abstract getFirstDayOfCalendarWeek(): number;
 
     /**
      * Gets the RFC 3339 compatible string (https://tools.ietf.org/html/rfc3339) for the given date.

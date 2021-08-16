@@ -82,7 +82,7 @@ export function DeprecatedMethod(target: any, key: string, descriptor: PropertyD
 @Injectable()
 export class MomentDateAdapter extends DateAdapter<Moment> {
     firstMonth: number = 0;
-
+    weekNumberShift: number = 0;
     get lastMonth(): number {
         // tslint:disable-next-line:binary-expression-operand-order no-magic-numbers
         return 11 + this.firstMonth;
@@ -194,6 +194,10 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
     }
 
     getFirstDayOfWeek(): number {
+        return this.localeData.firstDayOfWeek;
+    }
+
+    getFirstDayOfCalendarWeek(): number {
         return this.localeData.firstDayOfWeek;
     }
 

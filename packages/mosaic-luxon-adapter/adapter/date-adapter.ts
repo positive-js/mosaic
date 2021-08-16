@@ -61,6 +61,7 @@ export function DeprecatedMethod(target: any, key: string, descriptor: PropertyD
 @Injectable()
 export class LuxonDateAdapter extends DateAdapter<DateTime> {
     firstMonth: number = 1;
+    weekNumberShift: number = 1;
 
     get lastMonth(): number {
         // tslint:disable-next-line:binary-expression-operand-order no-magic-numbers
@@ -166,7 +167,9 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
 
     getTime(date: DateTime): number { return date.valueOf(); }
 
-    getDayOfWeek(date: DateTime): number { return date.weekday; }
+    getDayOfWeek(date: DateTime): number {
+        return date.weekday;
+    }
 
     getMonthNames(style: 'long' | 'short' | 'narrow'): string[] {
         return style === 'long' ? this.localeData.longMonths : this.localeData.shortMonths;
@@ -190,6 +193,10 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
 
     getFirstDayOfWeek(): number {
         return this.localeData.firstDayOfWeek;
+    }
+
+    getFirstDayOfCalendarWeek(): number {
+        return this.localeData.firstDayOfWeek - this.weekNumberShift;
     }
 
     getNumDaysInMonth(date: DateTime): number {

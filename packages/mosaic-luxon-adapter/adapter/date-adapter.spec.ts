@@ -187,6 +187,20 @@ describe('LuxonDateAdapter', () => {
         adapter.setLocale('ru');
 
         expect(adapter.getFirstDayOfWeek())
+            .toBe(1);
+    });
+
+    it('should get first day of calendar week in a different locale', () => {
+        adapter.setLocale('fr');
+
+        expect(adapter.getFirstDayOfCalendarWeek())
+            .toBe(0);
+    });
+
+    it('should get first day of calendar week for ru', () => {
+        adapter.setLocale('ru');
+
+        expect(adapter.getFirstDayOfCalendarWeek())
             .toBe(0);
     });
 

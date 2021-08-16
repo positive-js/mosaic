@@ -39,5 +39,5 @@ export const enUS: DateAdapterConfig = {
         narrow: ['M', 'T', 'W', 'T', 'F', 'S', 'S']
     },
 
-    firstDayOfWeek: 6
+    firstDayOfWeek: 7
 };

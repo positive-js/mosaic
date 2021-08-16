@@ -182,6 +182,18 @@ describe('MomentDateAdapter', () => {
         expect(adapter.getFirstDayOfWeek()).toBe(1);
     });
 
+    it('should get first day of calendar week in a different locale', () => {
+        adapter.setLocale('fr');
+
+        expect(adapter.getFirstDayOfCalendarWeek()).toBe(1);
+    });
+
+    it('should get first day of calendar week for ru', () => {
+        adapter.setLocale('ru');
+
+        expect(adapter.getFirstDayOfCalendarWeek()).toBe(1);
+    });
+
     it('should create Moment date', () => {
         expect(adapter.createDate(2017, JAN, 1).format())
             .toEqual(moment([2017,  JAN,  1]).format());
