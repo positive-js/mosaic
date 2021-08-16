@@ -34,10 +34,10 @@ export const enUS: DateAdapterConfig = {
     },
 
     dayOfWeekNames: {
-        long: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-        short: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-        narrow: ['M', 'T', 'W', 'T', 'F', 'S', 'S']
+        long: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+        short: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        narrow: [ 'S', 'M', 'T', 'W', 'T', 'F', 'S']
     },
 
-    firstDayOfWeek: 6
+    firstDayOfWeek: 0
 };

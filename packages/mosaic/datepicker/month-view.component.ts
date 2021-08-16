@@ -56,8 +56,7 @@ export class McMonthView<D> implements AfterContentInit {
 
     set activeDate(value: D) {
         const oldActiveDate = this._activeDate;
-        const validDate =
-            this.getValidDateOrNull(this.dateAdapter.deserialize(value)) || this.dateAdapter.today();
+        const validDate = this.getValidDateOrNull(this.dateAdapter.deserialize(value)) || this.dateAdapter.today();
         this._activeDate = this.dateAdapter.clampDate(validDate, this.minDate, this.maxDate);
 
         if (!this.hasSameMonthAndYear(oldActiveDate, this._activeDate)) {
@@ -286,11 +285,7 @@ export class McMonthView<D> implements AfterContentInit {
 
         this.weeks = [[]];
 
-        let cell = this.firstWeekOffset;
-
-        for (let i = 0; i < daysInMonth; i++) {
-            cell++;
-
+        for (let i = 0, cell = this.firstWeekOffset; i < daysInMonth; i++, cell++) {
             if (cell === DAYS_PER_WEEK) {
                 this.weeks.push([]);
                 cell = 0;
