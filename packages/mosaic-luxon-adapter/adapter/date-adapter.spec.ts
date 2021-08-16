@@ -22,7 +22,7 @@ registerLocaleData(ru);
 
 
 describe('LuxonDateAdapter', () => {
-    let adapter: DateAdapter;
+    let adapter: DateAdapter<DateTime>;
     let assertValidDate: (d: DateTime | null, valid: boolean) => void;
 
     beforeEach(waitForAsync(() => {
@@ -234,7 +234,7 @@ describe('LuxonDateAdapter', () => {
     it('should parse number', () => {
         const timestamp = new Date().getTime();
 
-        expect(adapter.parse(timestamp)!.toString())
+        expect(adapter.parse(timestamp, '')!.toString())
             .toEqual(DateTime.fromMillis(timestamp).toString());
     });
 
