@@ -130,9 +130,7 @@
             <mc-navbar-title>Brand</mc-navbar-title>
         </a>
 
-        <mc-navbar-item (click)="onItemClick($event)">
-            <i mc-icon="mc-info_16"></i>
-            <mc-navbar-title>Left icon</mc-navbar-title>
+        <mc-navbar-item [collapsed]="true" [collapsedTitle]="'this item is collapsed by property'" (click)="onItemClick($event)">
             <i mc-icon="mc-info_16"></i>
         </mc-navbar-item>
 
