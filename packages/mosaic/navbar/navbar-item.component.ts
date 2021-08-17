@@ -14,24 +14,34 @@ import {
 import { McButtonCssStyler } from '@ptsecurity/mosaic/button';
 import { CanDisable, CanDisableCtor, mixinDisabled } from '@ptsecurity/mosaic/core';
 import { McIcon } from '@ptsecurity/mosaic/icon';
+import { merge, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 
 @Directive({
     selector: 'mc-navbar-logo, [mc-navbar-logo]',
     host: {
-        class: 'mc-navbar-logo'
+        class: 'mc-navbar-logo',
+        '(mouseenter)': 'hovered.next(true)',
+        '(mouseleave)': 'hovered.next(false)'
     }
 })
-export class McNavbarLogo {}
+export class McNavbarLogo {
+    readonly hovered = new Subject<boolean>();
+}
 
 
 @Directive({
     selector: 'mc-navbar-title, [mc-navbar-title]',
     host: {
-        class: 'mc-navbar-title'
+        class: 'mc-navbar-title',
+        '(mouseenter)': 'hovered.next(true)',
+        '(mouseleave)': 'hovered.next(false)'
     }
 })
 export class McNavbarTitle implements AfterContentInit {
+    readonly hovered = new Subject<boolean>();
+
     outerElementWidth: number;
 
     get text(): string {
@@ -55,10 +65,32 @@ export class McNavbarTitle implements AfterContentInit {
 @Directive({
     selector: 'mc-navbar-brand, [mc-navbar-brand]',
     host: {
-        class: 'mc-navbar-brand'
+        class: 'mc-navbar-brand',
+        '[class.mc-hovered]': 'hovered'
     }
 })
-export class McNavbarBrand {}
+export class McNavbarBrand implements AfterContentInit, OnDestroy {
+    @ContentChild(McNavbarLogo) logo: McNavbarLogo;
+    @ContentChild(McNavbarTitle) title: McNavbarTitle;
+
+    hovered = false;
+
+    private destroyed = new Subject<void>();
+
+    ngAfterContentInit(): void {
+        merge(
+            this.logo.hovered,
+            this.title.hovered
+        )
+        .pipe(takeUntil(this.destroyed))
+        .subscribe((value: boolean) => this.hovered = value);
+    }
+
+    ngOnDestroy(): void {
+        this.destroyed.next();
+        this.destroyed.complete();
+    }
+}
 
 
 @Directive({
