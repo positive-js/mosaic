@@ -126,8 +126,9 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
                     format: this.config.monthNames.short.formatted,
                     standalone: this.config.monthNames.short.standalone
                 },
+                weekdays: this.config.dayOfWeekNames.long,
                 weekdaysShort: this.config.dayOfWeekNames.short,
-                weekdays: this.config.dayOfWeekNames.long
+                weekdaysMin: this.config.dayOfWeekNames.narrow
             });
         }
 

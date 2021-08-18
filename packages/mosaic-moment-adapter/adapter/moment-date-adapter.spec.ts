@@ -130,17 +130,19 @@ describe('MomentDateAdapter', () => {
         ]);
     });
 
-    it('should get long day of week names for en', () => {
+    it('should get day of week names for en', () => {
         adapter.setLocale('en');
 
         expect(adapter.getDayOfWeekNames('long')).toEqual([
             'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
         ]);
-    });
 
-    it('should get short day of week names', () => {
         expect(adapter.getDayOfWeekNames('short')).toEqual([
-            'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
+            'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'
+        ]);
+
+        expect(adapter.getDayOfWeekNames('narrow')).toEqual([
+            'S', 'M', 'T', 'W', 'T', 'F', 'S'
         ]);
     });
 
@@ -157,6 +159,14 @@ describe('MomentDateAdapter', () => {
 
         expect(adapter.getDayOfWeekNames('long')).toEqual([
             'Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'
+        ]);
+
+        expect(adapter.getDayOfWeekNames('short')).toEqual([
+            'Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'
+        ]);
+
+        expect(adapter.getDayOfWeekNames('narrow')).toEqual([
+            'В', 'П', 'В', 'С', 'Ч', 'П', 'С'
         ]);
     });
 
