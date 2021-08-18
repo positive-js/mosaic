@@ -26,10 +26,6 @@
     }
 }
 
-a.mc-navbar-item {
-    text-decoration: none;
-}
-
 .mc-navbar-item.mc-vertical {
     & .mc-navbar-title {
         padding-left: 26px;
@@ -106,4 +102,9 @@ a.mc-navbar-item {
             margin-right: unset;
         }
     }
+}
+
+a.mc-navbar-item,
+a.mc-navbar-title {
+    text-decoration: none;
 }
