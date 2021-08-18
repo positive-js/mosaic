@@ -4,6 +4,8 @@
 .mc-tag-list {
     display: flex;
     flex-direction: row;
+
+    box-sizing: border-box;
 }
 
 .mc-tag-input {
@@ -16,6 +18,8 @@
     display: flex;
     flex-wrap: wrap;
     flex: 1 1 100%;
+
+    box-sizing: border-box;
 
     min-width: 0;
     min-height: var(--mc-tag-list-size-min-height, $tag-list-size-min-height);

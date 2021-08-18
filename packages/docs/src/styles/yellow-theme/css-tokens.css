@@ -34,7 +34,7 @@
   --mc-checkbox-size-toggle-box-shadow: inset 0 0 1px 0 rgba(0, 0, 0, 0.2);
   --mc-datepicker-toggle-size-width: 30px;
   --mc-datepicker-toggle-size-height: 30px;
-  --mc-datepicker-body-size-label-padding-side: 33% / 7;
+  --mc-datepicker-body-size-label-paddings: 8px 28px 12px 12px;
   --mc-datepicker-body-size-cell-min-size: 32px;
   --mc-datepicker-body-size-cell-margin: 5%;
   --mc-datepicker-body-size-cell-padding: 8px;
@@ -51,11 +51,13 @@
   --mc-divider-size-width: 1px;
   --mc-divider-size-inset-margin: 80px;
   --mc-dropdown-item-size-padding: 5px 15px;
+  --mc-dropdown-item-size-icon-padding: 0 8px 2px 0;
   --mc-dropdown-group-header-size-default-padding: 6px 15px;
   --mc-dropdown-group-header-size-small-padding: 8px 15px;
   --mc-dropdown-divider-size-height: 1px;
   --mc-dropdown-divider-size-margin: 4px 0;
   --mc-dropdown-trigger-size-icon-padding-right: 8px;
+  --mc-dropdown-panel-size-max-width: 640px;
   --mc-dropdown-panel-size-padding: 4px 0;
   --mc-dropdown-panel-size-border-width: 1px;
   --mc-dropdown-panel-size-border-radius: 3px;
@@ -156,7 +158,7 @@
   --mc-tags-size-icon-padding: 3px;
   --mc-tags-size-text-margin: 8px;
   --mc-tag-list-size-padding: 1px 6px;
-  --mc-tag-list-size-min-height: 28px;
+  --mc-tag-list-size-min-height: 30px;
   --mc-tag-input-size-height: 22px;
   --mc-tag-input-size-margin: 2px 4px;
   --mc-textarea-size-min-height: 50px;
