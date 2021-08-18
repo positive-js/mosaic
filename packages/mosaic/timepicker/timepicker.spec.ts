@@ -8,21 +8,16 @@ import {
 } from '@angular/core/testing';
 import { FormsModule, NgModel } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { DateAdapter } from '@ptsecurity/cdk/datetime';
 import { DOWN_ARROW, ONE, SPACE, TWO, UP_ARROW } from '@ptsecurity/cdk/keycodes';
 import { createKeyboardEvent, dispatchFakeEvent, dispatchEvent } from '@ptsecurity/cdk/testing';
-import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
+import { McLuxonDateModule } from '@ptsecurity/mosaic-luxon-adapter/adapter';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
-import * as _moment from 'moment';
-// @ts-ignore
-// tslint:disable-next-line:no-duplicate-imports
-import { default as _rollupMoment, Moment } from 'moment';
+import { DateTime } from 'luxon';
 
 import { McTimepicker, McTimepickerModule } from './index';
 
-
-// tslint:disable-next-line
-const moment = _rollupMoment || _moment;
 
 @Component({
     selector: 'test-app',
@@ -43,8 +38,12 @@ class TestApp {
     timeFormat: string;
     minTime: string;
     maxTime: string;
-    timeValue: Moment = moment('1970-01-01 12:18:28');
+    timeValue: DateTime;
     isDisabled: boolean;
+
+    constructor(public adapter: DateAdapter<DateTime>) {
+        this.timeValue = adapter.createDateTime(1970, 1, 1, 12, 18, 28, 0);
+    }
 }
 
 
@@ -52,6 +51,7 @@ describe('McTimepicker', () => {
     let fixture: ComponentFixture<TestApp>;
     let testComponent: TestApp;
     let inputElementDebug;
+    let adapter;
 
     beforeEach(fakeAsync(() => {
         TestBed.configureTestingModule({
@@ -61,7 +61,7 @@ describe('McTimepicker', () => {
                 McFormFieldModule,
                 McTimepickerModule,
                 McIconModule,
-                McMomentDateModule
+                McLuxonDateModule
             ],
             declarations: [TestApp]
         });
@@ -70,6 +70,7 @@ describe('McTimepicker', () => {
         fixture = TestBed.createComponent(TestApp);
         testComponent = fixture.debugElement.componentInstance;
         inputElementDebug = fixture.debugElement.query(By.directive(McTimepicker));
+        adapter = testComponent.adapter;
 
         fixture.detectChanges();
     }));
@@ -106,7 +107,7 @@ describe('McTimepicker', () => {
             testComponent = fixture.debugElement.componentInstance;
             inputElementDebug = fixture.debugElement.query(By.directive(McTimepicker));
 
-            testComponent.timeValue = moment('1970-01-01 12:18:28');
+            testComponent.timeValue = adapter.createDateTime(1970, 1, 11, 12, 18, 28);
             fixture.detectChanges();
         }));
 
@@ -115,14 +116,14 @@ describe('McTimepicker', () => {
         });
 
         it('Should invalidate time lower then min-time', fakeAsync(() => {
-            testComponent.minTime = moment('1970-01-01 13:59:00');
+            testComponent.minTime = adapter.createDateTime(1970, 1, 11, 13, 59, 0);
             fixture.detectChanges();
             tick(1);
             expect(inputElementDebug.nativeElement.classList.contains('ng-invalid')).toBe(true);
         }));
 
         it('Should invalidate time higher then max-time', () => {
-            testComponent.maxTime = moment('1970-01-01 11:00:00');
+            testComponent.maxTime = adapter.createDateTime(1970, 1, 11, 11, 0, 0);
             fixture.detectChanges();
             expect(inputElementDebug.nativeElement.classList.contains('ng-invalid')).toBe(true);
         });
@@ -157,7 +158,7 @@ describe('McTimepicker', () => {
         });
 
         it('When the format updates', fakeAsync(() => {
-            testComponent.timeValue = moment('1970-01-01 00:00:00');
+            testComponent.timeValue = adapter.createDateTime(1970, 1, 11, 0, 0, 0);
             fixture.detectChanges();
             tick();
 
@@ -330,7 +331,7 @@ describe('McTimepicker', () => {
                 });
             fixture.detectChanges();
 
-            expect(testComponent.timeValue.toDate().toString()).toContain('01:30:00');
+            expect(testComponent.timeValue.toString()).toContain('01:30:00');
         });
 
         it('Paste am/pm from clipboard: 10:3 am', () => {
@@ -434,7 +435,7 @@ describe('McTimepicker', () => {
 
     describe('Keyboard value control', () => {
         beforeEach(fakeAsync(() => {
-            testComponent.timeValue = moment('1970-01-01 23:00:00');
+            testComponent.timeValue = adapter.createDateTime(1970, 1, 11, 23, 0, 0);
             testComponent.timeFormat = 'HH:mm:ss';
             fixture.detectChanges();
         }));
