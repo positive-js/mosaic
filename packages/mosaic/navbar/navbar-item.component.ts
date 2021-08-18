@@ -171,7 +171,7 @@ export class McNavbarItem extends McNavbarMixinBase implements OnDestroy, CanDis
 
     private _collapsable: boolean = true;
 
-    collapsed = false;
+    @Input() collapsed = false;
 
     get collapsedTitle(): string | null {
         return this.collapsed ? (this._collapsedTitle || this.title.text) : null;
