@@ -111,7 +111,7 @@
     'tag-list': {
         size: {
             padding: { value: '1px 6px' },
-            'min-height': { value: '28px' }
+            'min-height': { value: '30px' }
         }
     },
     'tag-input': {
