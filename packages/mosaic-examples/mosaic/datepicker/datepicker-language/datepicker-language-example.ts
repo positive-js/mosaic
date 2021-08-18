@@ -1,5 +1,6 @@
 /* tslint:disable:no-magic-numbers */
 import { registerLocaleData } from '@angular/common';
+/* tslint:disable-next-line:match-default-export-name */
 import de from '@angular/common/locales/de';
 import { Component, Inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
