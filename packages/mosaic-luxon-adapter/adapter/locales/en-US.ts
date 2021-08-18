@@ -35,7 +35,7 @@ export const enUS: DateAdapterConfig = {
 
     dayOfWeekNames: {
         long: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-        short: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        short: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
         narrow: [ 'S', 'M', 'T', 'W', 'T', 'F', 'S']
     },
 
