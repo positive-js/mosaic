@@ -1,18 +1,22 @@
 /* tslint:disable:no-magic-numbers */
+import { registerLocaleData } from '@angular/common';
+import de from '@angular/common/locales/de';
 import { Component, Inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { DateAdapter, MC_DATE_FORMATS, McDateFormats } from '@ptsecurity/cdk/datetime';
-import { MC_MOMENT_DATE_FORMATS } from '@ptsecurity/mosaic-moment-adapter/adapter';
+import { MC_LUXON_DATE_FORMATS } from '@ptsecurity/mosaic-luxon-adapter/adapter';
 import { McRadioChange } from '@ptsecurity/mosaic/radio';
 
 
 export function mcDateFormatsFactory() {
-    const dateFormats = { ...MC_MOMENT_DATE_FORMATS } as unknown as McDateFormats;
+    const dateFormats = { ...MC_LUXON_DATE_FORMATS } as unknown as McDateFormats;
 
     dateFormats.dateInput = 'dd.MM.yyyy';
 
     return dateFormats;
 }
+
+registerLocaleData(de);
 
 
 /**
