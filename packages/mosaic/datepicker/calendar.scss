@@ -31,6 +31,10 @@
 
 .mc-calendar__period-button {
     min-width: 0;
+
+    & .mc-icon {
+        vertical-align: baseline;
+    }
 }
 
 .mc-calendar__previous-button::after {

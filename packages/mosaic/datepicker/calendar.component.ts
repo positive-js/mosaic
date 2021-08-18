@@ -65,7 +65,7 @@ export class McCalendarHeader<D> {
         if (this.calendar.currentView === McCalendarView.Month) {
             const label = this.dateAdapter.format(this.calendar.activeDate, this.dateFormats.monthYearLabel);
 
-            return label[0].toLocaleUpperCase() + label.substr(1);
+            return (label[0].toLocaleUpperCase() + label.substr(1)).replace('.', '');
         }
 
         if (this.calendar.currentView === McCalendarView.Year) {
