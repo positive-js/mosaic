@@ -21,7 +21,7 @@ a.mc-navbar-brand {
 }
 
 .mc-navbar-brand.mc-horizontal {
-    height: var(--mc-navbar-item-size-height, 48px);
+    height: var(--mc-navbar-item-size-height, $navbar-item-size-height);
 
     padding-right: var(--mc-navbar-brand-size-margin-right, $navbar-brand-size-margin-right);
 
@@ -37,7 +37,7 @@ a.mc-navbar-brand {
     & .mc-navbar-logo {
         flex-direction: column;
 
-        height: 48px;
+        height: var(--mc-navbar-item-size-height, $navbar-item-size-height);
     }
 
     & .mc-navbar-title {
