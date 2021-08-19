@@ -345,9 +345,9 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
     set mcValidationTooltip(tooltip: McTooltip) {
         if (!tooltip) { return; }
 
-        tooltip.mcMouseEnterDelay = validationTooltipShowDelay;
-        tooltip.mcTrigger = 'manual';
-        tooltip.mcTooltipClass = 'mc-tooltip_warning';
+        tooltip.enterDelay = validationTooltipShowDelay;
+        tooltip.trigger = 'manual';
+        tooltip.tooltipClass = 'mc-tooltip_warning';
 
         tooltip.initElementRefListeners();
 

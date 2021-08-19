@@ -163,11 +163,10 @@ describe('McTooltip', () => {
     selector: 'mc-tooltip-test-new',
     template: `
     <a #titleString
-       mcTooltip
-       mcTitle="title-string"
+       mcTooltip="title-string"
        mcTrigger="hover"
        mcPlacement="top">Show</a>
-    <a #titleTemplate mcTooltip mcTitle="template">Show</a>
+    <a #titleTemplate mcTooltip="template">Show</a>
     <ng-template #template>
       title-template
     </ng-template>
@@ -182,19 +181,18 @@ class McTooltipTestNewComponent {
 @Component({
     selector: 'mc-tooltip-test-wrapper',
     template: `
-    <a #mostSimpleTrigger mcTooltip="MOST-SIMPLE">Show</a>
+        <a #mostSimpleTrigger mcTooltip="MOST-SIMPLE">Show</a>
 
-    <span #normalTrigger
-          mcTooltip="normalized-text"
-          mcTitle="NORMAL"
-          mcTrigger="hover"
-          mcPlacement="right">
+        <span #normalTrigger
+              mcTooltip="NORMAL"
+              mcTrigger="hover"
+              mcPlacement="right">
         Show
     </span>
 
-    <span #focusTrigger mcTooltip mcTitle="FOCUS" mcTrigger="focus">Show</span>
-    <span #visibleTrigger mcTooltip mcTitle="VISIBLE" mcVisible="visible">Show</span>
-  `
+        <span #focusTrigger mcTooltip="FOCUS" mcTrigger="focus">Show</span>
+        <span #visibleTrigger  mcTooltip="VISIBLE" visible="visible">Show</span>
+    `
 })
 class McTooltipTestWrapperComponent {
     @ViewChild('normalTrigger', {static: false}) normalTrigger: ElementRef;
@@ -209,8 +207,7 @@ class McTooltipTestWrapperComponent {
 @Component({
     selector: 'mc-tooltip-disabled-wrapper',
     template: `<span #disabledAttribute
-                     mcTooltip="disabled-text"
-                     mcTitle="DISABLED"
+                     mcTooltip="DISABLED"
                      mcTrigger="manual"
                      mcTooltipDisabled="true">
         Disabled

@@ -1,8 +1,8 @@
+import { AnimationEvent } from '@angular/animations';
 import { Directionality } from '@angular/cdk/bidi';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     ConnectedOverlayPositionChange,
-    ConnectionPositionPair,
     Overlay,
     OverlayRef,
     ScrollDispatcher,
@@ -35,12 +35,13 @@ import {
 } from '@angular/core';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
 import {
-    fadeAnimation,
     DEFAULT_4_POSITIONS,
     POSITION_MAP
 } from '@ptsecurity/mosaic/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
+
+import { mcTooltipAnimations } from './tooltip.animations';
 
 
 export type ArrowPlacements = HorizontalConnectionPos | VerticalConnectionPos;
@@ -54,172 +55,109 @@ export const ArrowPlacements = {
     Left: 'left' as ArrowPlacements
 };
 
+export type TooltipVisibility = 'initial' | 'visible' | 'hidden';
+
+
 @Component({
     selector: 'mc-tooltip-component',
-    animations: [fadeAnimation],
+    animations: [mcTooltipAnimations.tooltipState],
     templateUrl: './tooltip.component.html',
     styleUrls: ['./tooltip.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    preserveWhitespaces: false,
-    host: {
-        '(body:click)': 'this.handleBodyInteraction()'
-    }
+    preserveWhitespaces: false
 })
 export class McTooltipComponent {
-    prefix = 'mc-tooltip_placement';
-    positions: ConnectionPositionPair[] = [...DEFAULT_4_POSITIONS];
     classMap = {};
     isTitleString: boolean;
     showTid: any;
     hideTid: any;
-    availablePositions: any;
-    $visible: Observable<boolean>;
 
-    @Output() mcVisibleChange: EventEmitter<boolean> = new EventEmitter();
+    visibleChange: EventEmitter<boolean> = new EventEmitter();
 
-    @Input() mcMouseEnterDelay = 400;
+    title: string | TemplateRef<any>;
 
-    @Input() mcMouseLeaveDelay = 0;
+    placement: string;
+    tooltipClass: string;
 
-    @Input()
-    get mcTitle(): string | TemplateRef<any> {
-        return this._mcTitle;
-    }
+    /** Property watched by the animation framework to show or hide the tooltip */
+    visibility: TooltipVisibility = 'initial';
 
-    set mcTitle(value: string | TemplateRef<any>) {
-        this._mcTitle = value;
-    }
-
-    private _mcTitle: string | TemplateRef<any>;
-
-    @Input()
-    get mcTrigger(): string {
-        return this._mcTrigger;
-    }
-
-    set mcTrigger(value: string) {
-        this._mcTrigger = value;
-    }
-
-    private _mcTrigger: string = 'hover';
-
-    @Input()
-    get mcPlacement(): string {
-        return this._mcPlacement;
-    }
-
-    set mcPlacement(value: string) {
-        if (value !== this._mcPlacement) {
-            this._mcPlacement = value;
-            this.positions.unshift(POSITION_MAP[ this.mcPlacement ]);
-        } else if (!value) {
-            this._mcPlacement = 'top';
-        }
-    }
-
-    private _mcPlacement: string = 'top';
-
-    @Input()
-    get mcTooltipClass(): string {
-        return this._mcTooltipClass;
-    }
-
-    set mcTooltipClass(value: string) {
-        this._mcTooltipClass = value;
-    }
-
-    private _mcTooltipClass: string;
-
-    @Input()
-    get mcVisible(): boolean {
-        return this._mcVisible.value;
-    }
-
-    set mcVisible(value: boolean) {
-        const visible = coerceBooleanProperty(value);
-
-        if (visible && this._mcVisible.value !== visible) {
-            this.show();
-        } else {
-            this.hide();
-        }
-    }
-
-    private _mcVisible: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
-    @Input()
-    get mcArrowPlacement(): ArrowPlacements {
-        return this._mcArrowPlacement;
-    }
-
-    set mcArrowPlacement(value: ArrowPlacements) {
-        this._mcArrowPlacement = value;
-    }
-
-    private _mcArrowPlacement: ArrowPlacements;
+    private prefix = 'mc-tooltip_placement';
 
     /** Subject for notifying that the tooltip has been hidden from the view */
     private readonly onHideSubject: Subject<any> = new Subject();
     private closeOnInteraction: boolean = false;
 
-    constructor(public cdr: ChangeDetectorRef) {
-        this.availablePositions = POSITION_MAP;
-        this.$visible = this._mcVisible.asObservable();
+    constructor(private changeDetectorRef: ChangeDetectorRef) {}
+
+    animationStart() {
+        this.closeOnInteraction = false;
     }
 
-    show(): void {
+    animationDone(event: AnimationEvent): void {
+        const toState = event.toState as TooltipVisibility;
+
+        if (toState === 'hidden' && !this.isVisible()) {
+            this.onHideSubject.next();
+        }
+
+        if (toState === 'visible' || toState === 'hidden') {
+            this.closeOnInteraction = true;
+        }
+    }
+
+    show(delay: number): void {
         if (this.hideTid) {
             clearTimeout(this.hideTid);
         }
 
-        if (!this.isContentEmpty()) {
-            if (this.mcTrigger !== 'manual') {
-                this.closeOnInteraction = true;
-            }
+        this.closeOnInteraction = true;
+        this.showTid = setTimeout(
+            () => {
+                this.visibility = 'visible';
+                this.showTid = undefined;
 
-            this.showTid = setTimeout(
-                () => {
-                    this._mcVisible.next(true);
-                    this.mcVisibleChange.emit(true);
+                this.visibleChange.emit(true);
 
-                    // Mark for check so if any parent component has set the
-                    // ChangeDetectionStrategy to OnPush it will be checked anyways
-                    this.markForCheck();
-                },
-                this.mcMouseEnterDelay
-            );
-        }
+                // Mark for check so if any parent component has set the
+                // ChangeDetectionStrategy to OnPush it will be checked anyways
+                this.markForCheck();
+            },
+            delay
+        );
     }
 
-    hide(): void {
+    hide(delay: number): void {
         if (this.showTid) {
             clearTimeout(this.showTid);
         }
 
         this.hideTid = setTimeout(
             () => {
-                this._mcVisible.next(false);
-                this.mcVisibleChange.emit(false);
+                this.visibility = 'hidden';
+                this.hideTid = undefined;
+
+                this.visibleChange.emit(false);
                 this.onHideSubject.next();
 
                 // Mark for check so if any parent component has set the
                 // ChangeDetectionStrategy to OnPush it will be checked anyways
                 this.markForCheck();
             },
-            this.mcMouseLeaveDelay
+            delay
         );
     }
 
-    setClassMap(): void {
-        this.classMap = {
-            [`${this.prefix}-${this.mcPlacement}`]: true,
-            [this.mcTooltipClass]: true
-        };
+    isVisible(): boolean {
+        return this.visibility === 'visible';
     }
 
-    isContentEmpty(): boolean {
-        return this.isTitleString ? (this.mcTitle === '' || !this.mcTitle) : false;
+    updateClassMap(): void {
+        this.classMap = {
+            [`${this.prefix}-${this.placement}`]: true,
+            [this.tooltipClass]: true
+        };
     }
 
     /** Returns an observable that notifies when the tooltip has been hidden from view. */
@@ -228,21 +166,21 @@ export class McTooltipComponent {
     }
 
     markForCheck(): void {
-        this.cdr.markForCheck();
+        this.changeDetectorRef.markForCheck();
     }
 
     handleBodyInteraction(): void {
         if (this.closeOnInteraction) {
-            this.hide();
+            this.hide(0);
         }
     }
 
     get isTemplateRef(): boolean {
-        return this.mcTitle instanceof TemplateRef;
+        return this.title instanceof TemplateRef;
     }
 
     get isNonEmptyString(): boolean {
-        return (typeof this.mcTitle === 'string' || typeof this.mcTitle === 'number') && this._mcTitle !== '';
+        return (typeof this.title === 'string' || typeof this.title === 'number') && this.title !== '';
     }
 }
 
@@ -269,11 +207,10 @@ export function getMcTooltipInvalidPositionError(position: string) {
 const VIEWPORT_MARGIN: number = 8;
 
 @Directive({
-    selector: '[mcTooltip], [attribute^="mcTooltip"]',
+    selector: '[mcTooltip]',
     exportAs: 'mcTooltip',
     host: {
         '[class.mc-tooltip-open]': 'isTooltipOpen',
-        '[class.disabled]': 'parentDisabled',
 
         '(keydown)': 'handleKeydown($event)',
         '(touchend)': 'handleTouchend()'
@@ -281,32 +218,29 @@ const VIEWPORT_MARGIN: number = 8;
 })
 export class McTooltip implements OnInit, OnDestroy {
     isTooltipOpen: boolean = false;
-    isDynamicTooltip = false;
-    parentDisabled: boolean = false;
     overlayRef: OverlayRef | null;
     portal: ComponentPortal<McTooltipComponent>;
     availablePositions: any;
-    tooltip: McTooltipComponent | null;
+    tooltipInstance: McTooltipComponent | null;
+
+    @Input('mcArrowPlacement') arrowPlacement: ArrowPlacements;
 
     @Output() mcVisibleChange = new EventEmitter<boolean>();
-    private $unsubscribe = new Subject<void>();
 
     @Input('mcTooltip')
-    get mcTitle(): string | TemplateRef<any> {
-        return this._mcTitle;
+    get title(): string | TemplateRef<any> {
+        return this._title;
     }
 
-    set mcTitle(title: string | TemplateRef<any>) {
-        this._mcTitle = title;
-        this.updateCompValue('mcTitle', title);
+    set title(title: string | TemplateRef<any>) {
+        this._title = title;
+
+        if (this.tooltipInstance) {
+            this.tooltipInstance.title = title;
+        }
     }
 
-    private _mcTitle: string | TemplateRef<any>;
-
-    @Input('mcTitle')
-    set setTitle(title: string | TemplateRef<any>) {
-        this.mcTitle = title;
-    }
+    private _title: string | TemplateRef<any>;
 
     @Input('mcTooltipDisabled')
     get disabled(): boolean {
@@ -315,98 +249,79 @@ export class McTooltip implements OnInit, OnDestroy {
 
     set disabled(value) {
         this._disabled = coerceBooleanProperty(value);
-        this.updateCompValue('mcTooltipDisabled', value);
     }
 
     private _disabled: boolean = false;
 
-    @Input()
-    get mcMouseEnterDelay(): number {
-        return this._mcMouseEnterDelay;
+    @Input('mcEnterDelay') enterDelay = 400;
+
+    @Input('mcLeaveDelay') leaveDelay = 0;
+
+    @Input('mcTrigger')
+    get trigger(): string {
+        return this._trigger;
     }
 
-    set mcMouseEnterDelay(value: number) {
-        this._mcMouseEnterDelay = value;
-        this.updateCompValue('mcMouseEnterDelay', value);
+    set trigger(value: string) {
+        if (!value) { return; }
+
+        this._trigger = value;
     }
 
-    private _mcMouseEnterDelay: number;
+    private _trigger: string = 'hover, focus';
 
-    @Input()
-    get mcMouseLeaveDelay(): number {
-        return this._mcMouseLeaveDelay;
+    @Input('mcPlacement')
+    get placement(): string {
+        return this._placement;
     }
 
-    set mcMouseLeaveDelay(value: number) {
-        this._mcMouseLeaveDelay = value;
-        this.updateCompValue('mcMouseLeaveDelay', value);
-    }
-
-    private _mcMouseLeaveDelay: number;
-
-    @Input()
-    get mcTrigger(): string {
-        return this._mcTrigger;
-    }
-
-    set mcTrigger(value: string) {
+    set placement(value: string) {
         if (value) {
-            this._mcTrigger = value;
-            this.updateCompValue('mcTrigger', value);
+            this._placement = value;
+
+            if (this.tooltipInstance) {
+                this.tooltipInstance.placement = value;
+            }
         } else {
-            this._mcTrigger = 'hover';
-        }
-    }
-
-    private _mcTrigger: string = 'hover';
-
-    @Input()
-    get mcPlacement(): string {
-        return this._mcPlacement;
-    }
-
-    set mcPlacement(value: string) {
-        if (value) {
-            this._mcPlacement = value;
-            this.updateCompValue('mcPlacement', value);
-        } else {
-            this._mcPlacement = 'top';
+            this._placement = 'top';
         }
 
-        if (this.mcVisible) {
+        if (this.visible) {
             this.updatePosition();
         }
     }
 
-    private _mcPlacement: string = 'top';
+    private _placement: string = 'top';
 
-    @Input()
-    get mcTooltipClass(): string {
-        return this._mcTooltipClass;
+    @Input('mcTooltipClass')
+    get tooltipClass(): string {
+        return this._tooltipClass;
     }
 
-    set mcTooltipClass(value: string) {
+    set tooltipClass(value: string) {
         if (value) {
-            this._mcTooltipClass = value;
-            this.updateCompValue('mcTooltipClass', value);
+            this._tooltipClass = value;
+
+            if (this.tooltipInstance) {
+                this.tooltipInstance.tooltipClass = value;
+            }
         } else {
-            this._mcTooltipClass = '';
+            this._tooltipClass = '';
         }
     }
 
-    private _mcTooltipClass: string;
+    private _tooltipClass: string;
 
-    @Input()
-    get mcVisible(): boolean {
-        return this._mcVisible;
+    @Input('mcVisible')
+    get visible(): boolean {
+        return this._visible;
     }
 
-    set mcVisible(externalValue: boolean) {
+    set visible(externalValue: boolean) {
         const value = coerceBooleanProperty(externalValue);
 
-        if (this._mcVisible !== value) {
-            this._mcVisible = value;
-            this.updateCompValue('mcVisible', value);
+        if (this._visible !== value) {
+            this._visible = value;
 
             if (value) {
                 this.show();
@@ -416,18 +331,9 @@ export class McTooltip implements OnInit, OnDestroy {
         }
     }
 
-    private _mcVisible: boolean;
+    private _visible: boolean;
 
-    @Input()
-    get mcArrowPlacement(): ArrowPlacements {
-        return this._mcArrowPlacement;
-    }
-
-    set mcArrowPlacement(value: ArrowPlacements) {
-        this._mcArrowPlacement = value;
-    }
-
-    private _mcArrowPlacement: ArrowPlacements;
+    private $unsubscribe = new Subject<void>();
 
     private manualListeners = new Map<string, EventListenerOrEventListenerObject>();
     private readonly destroyed = new Subject<void>();
@@ -482,9 +388,9 @@ export class McTooltip implements OnInit, OnDestroy {
         strategy.positionChanges
             .pipe(takeUntil(this.destroyed))
             .subscribe((change) => {
-                if (this.tooltip) {
+                if (this.tooltipInstance) {
                     this.onPositionChange(change);
-                    if (change.scrollableViewProperties.isOverlayClipped && this.tooltip.mcVisible) {
+                    if (change.scrollableViewProperties.isOverlayClipped && this.tooltipInstance.isVisible()) {
                         // After position changes occur and the overlay is clipped by
                         // a parent scrollable then close the tooltip.
                         this.ngZone.run(() => this.hide());
@@ -505,6 +411,10 @@ export class McTooltip implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroyed))
             .subscribe(() => this.detach());
 
+        this.overlayRef.outsidePointerEvents()
+            .pipe(takeUntil(this.destroyed))
+            .subscribe(() => this.tooltipInstance?.handleBodyInteraction());
+
         return this.overlayRef;
     }
 
@@ -513,32 +423,34 @@ export class McTooltip implements OnInit, OnDestroy {
             this.overlayRef.detach();
         }
 
-        this.tooltip = null;
+        this.tooltipInstance = null;
     }
 
     onPositionChange($event: ConnectedOverlayPositionChange): void {
-        let updatedPlacement = this.mcPlacement;
+        let newPlacement = this.placement;
 
-        Object.keys(this.availablePositions).some((key) => {
-            if (
-                $event.connectionPair.originX === this.availablePositions[key].originX &&
-                $event.connectionPair.originY === this.availablePositions[key].originY &&
-                $event.connectionPair.overlayX === this.availablePositions[key].overlayX &&
-                $event.connectionPair.overlayY === this.availablePositions[key].overlayY
-            ) {
-                updatedPlacement = key;
+        Object
+            .keys(this.availablePositions)
+            .some((key) => {
+                if (
+                    $event.connectionPair.originX === this.availablePositions[key].originX &&
+                    $event.connectionPair.originY === this.availablePositions[key].originY &&
+                    $event.connectionPair.overlayX === this.availablePositions[key].overlayX &&
+                    $event.connectionPair.overlayY === this.availablePositions[key].overlayY
+                ) {
+                    newPlacement = key;
 
-                return true;
-            }
+                    return true;
+                }
 
-            return false;
-        });
+                return false;
+            });
 
-        this.updateCompValue('mcPlacement', updatedPlacement);
 
-        if (this.tooltip) {
-            this.tooltip.setClassMap();
-            this.tooltip.markForCheck();
+        if (this.tooltipInstance) {
+            this.tooltipInstance.placement = newPlacement;
+            this.tooltipInstance.updateClassMap();
+            this.tooltipInstance.markForCheck();
         }
 
         this.handlePositioningUpdate();
@@ -547,12 +459,12 @@ export class McTooltip implements OnInit, OnDestroy {
     handlePositioningUpdate() {
         this.overlayRef = this.createOverlay();
 
-        if (this.mcPlacement === 'right' || this.mcPlacement === 'left') {
+        if (this.placement === 'right' || this.placement === 'left') {
             const halfDelimiter = 2;
             const overlayElemHeight = this.overlayRef.overlayElement.clientHeight;
             const currentContainerHeight = this.hostView.element.nativeElement.clientHeight;
 
-            if (this.mcArrowPlacement === ArrowPlacements.Center) {
+            if (this.arrowPlacement === ArrowPlacements.Center) {
                 const arrowElemRef = this.getTooltipArrowElem();
                 const containerPositionTop: number = this.hostView.element.nativeElement.getBoundingClientRect().top;
                 const halfOfContainerHeight = currentContainerHeight / halfDelimiter;
@@ -574,14 +486,6 @@ export class McTooltip implements OnInit, OnDestroy {
         }
     }
 
-    // tslint:disable-next-line:no-any
-    updateCompValue(key: string, value: any): void {
-        if (this.isDynamicTooltip && value && this.tooltip) {
-            this.tooltip[key] = value;
-            this.tooltip.markForCheck();
-        }
-    }
-
     handleKeydown(e: KeyboardEvent) {
         if (this.isTooltipOpen && e.keyCode === ESCAPE) { // tslint:disable-line
             this.hide();
@@ -595,14 +499,14 @@ export class McTooltip implements OnInit, OnDestroy {
     initElementRefListeners() {
         this.clearListeners();
 
-        if (this.mcTrigger.includes('hover')) {
+        if (this.trigger.includes('hover')) {
             this.manualListeners
                 .set('mouseenter', () => this.show())
                 .set('mouseleave', () => this.hide())
                 .forEach((listener, event) => this.elementRef.nativeElement.addEventListener(event, listener));
         }
 
-        if (this.mcTrigger.includes('focus')) {
+        if (this.trigger.includes('focus')) {
             this.manualListeners
                 .set('focus', () => this.show())
                 .set('blur', () => this.hide())
@@ -618,47 +522,40 @@ export class McTooltip implements OnInit, OnDestroy {
         this.manualListeners.clear();
     }
 
-    show(): void {
+    show(delay: number = this.enterDelay): void {
         if (this.disabled) { return; }
 
-        if (!this.tooltip) {
+        if (!this.tooltipInstance) {
             this.overlayRef = this.createOverlay();
             this.detach();
 
             this.portal = this.portal || new ComponentPortal(McTooltipComponent, this.hostView);
 
-            this.tooltip = this.overlayRef.attach(this.portal).instance;
-            this.tooltip.afterHidden()
+            this.tooltipInstance = this.overlayRef.attach(this.portal).instance;
+            this.tooltipInstance.afterHidden()
                 .pipe(takeUntil(this.destroyed))
                 .subscribe(() => this.detach());
-            this.isDynamicTooltip = true;
-            const properties = [
-                'mcTitle',
-                'mcPlacement',
-                'mcTrigger',
-                'mcTooltipDisabled',
-                'mcMouseEnterDelay',
-                'mcMouseLeaveDelay',
-                'mcTooltipClass'
-            ];
-            properties.forEach((property) => this.updateCompValue(property, this[property]));
 
-            this.tooltip.mcVisibleChange
+            this.tooltipInstance.tooltipClass = this.tooltipClass;
+            this.tooltipInstance.placement = this.placement;
+            this.tooltipInstance.title = this.title;
+
+            this.tooltipInstance.visibleChange
                 .pipe(takeUntil(this.$unsubscribe), distinctUntilChanged())
                 .subscribe((data) => {
-                    this.mcVisible = data;
+                    this.visible = data;
                     this.mcVisibleChange.emit(data);
                     this.isTooltipOpen = data;
                 });
         }
 
         this.updatePosition();
-        this.tooltip.show();
+        this.tooltipInstance.show(delay);
     }
 
-    hide(): void {
-        if (this.tooltip) {
-            this.tooltip.hide();
+    hide(delay: number = this.leaveDelay): void {
+        if (this.tooltipInstance) {
+            this.tooltipInstance.hide(delay);
         }
     }
 
@@ -677,7 +574,7 @@ export class McTooltip implements OnInit, OnDestroy {
             { ...origin.fallback, ...overlay.fallback }
         ]);
 
-        if (this.tooltip) {
+        if (this.tooltipInstance) {
             position.apply();
             window.dispatchEvent(new Event('resize'));
         }
@@ -688,7 +585,7 @@ export class McTooltip implements OnInit, OnDestroy {
      * The fallback position is the inverse of the origin (e.g. `'below' -> 'above'`).
      */
     getOrigin(): {main: OriginConnectionPosition; fallback: OriginConnectionPosition} {
-        const position = this.mcPlacement;
+        const position = this.placement;
         const isLtr = !this.direction || this.direction.value === 'ltr';
         let originPosition: OriginConnectionPosition;
 
@@ -718,7 +615,7 @@ export class McTooltip implements OnInit, OnDestroy {
 
     /** Returns the overlay position and a fallback position based on the user's preference */
     getOverlayPosition(): { main: OverlayConnectionPosition; fallback: OverlayConnectionPosition } {
-        const position = this.mcPlacement;
+        const position = this.placement;
         const isLtr = !this.direction || this.direction.value === 'ltr';
         let overlayPosition: OverlayConnectionPosition;
 
@@ -752,7 +649,7 @@ export class McTooltip implements OnInit, OnDestroy {
     private invertPosition(x: HorizontalConnectionPos, y: VerticalConnectionPos) {
         let newX: HorizontalConnectionPos = x;
         let newY: VerticalConnectionPos = y;
-        if (this.mcPlacement === 'top' || this.mcPlacement === 'bottom') {
+        if (this.placement === 'top' || this.placement === 'bottom') {
             if (y === 'top') {
                 newY = 'bottom';
             } else if (y === 'bottom') {

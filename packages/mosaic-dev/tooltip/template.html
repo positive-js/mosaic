@@ -1,60 +1,26 @@
+<ng-template #title>
+    <span>Заголовок окна</span>
+    <div>Заголовок окна</div>
+</ng-template>
+
 <section class="container flex-100 layout-row layout-align-start-center">
     <div class="flex layout-column layout-align-center-center container-item">
-        <span class="mc-title">Focus</span>
         <button
             mc-button
-            mcTooltip
-            mcTitle="Удалить файл"
-            mcTrigger="focus"
+            [mcTooltip]="title"
             mcPlacement="top">top</button>
         <button
             mc-button
             mcTooltip="Подсказка может занимать две и более строк"
-            mcTrigger="focus"
             mcPlacement="right">right</button>
         <button
             mc-button
             mcTooltip="PDQL-запрос фильтра содержит ошибки"
-            mcTrigger="focus"
             mcPlacement="left">left</button>
         <button
             mc-button
             mcTooltip="PDQL-запрос фильтра содержит ошибки. Uncaught SyntaxError: Unexpected string"
-            mcTrigger="focus"
             mcPlacement="bottom">bottom</button>
-        <button
-                mc-button
-                mcTooltip="Обновить"
-                mcTrigger="focus"
-                mcPlacement="bottom"
-                [mcTooltipDisabled]="true">disabled</button>
-    </div>
-    <div class="flex layout-column layout-align-center-center container-item">
-        <span class="mc-title">Hover</span>
-        <button
-                mc-button
-                mcTooltip="Показать\Скрыть"
-                mcPlacement="top">top</button>
-        <button
-                mc-button
-                mcTooltip="Активировать записи"
-                mcPlacement="right">right</button>
-        <button
-                mc-button
-                mcTooltip="PDQL-запрос фильтра содержит ошибки,
-                            исправьте запрос"
-                mcPlacement="left">left</button>
-        <button
-                mc-button
-                mcTooltip="Обновить"
-                mcPlacement="bottom"
-                mcVisible="true">bottom Visible</button>
-        <button
-            mc-button
-            mcTooltip="Tooltip Class"
-            mcPlacement="bottom"
-            mcTooltipClass="customTooltipClass"
-            >TooltipClass</button>
         <button
                 mc-button
                 mcTooltip="Обновить"
@@ -117,9 +83,8 @@
             </mc-form-field>
 
             <mc-form-field
-                mcTooltip
+                [mcTooltip]="titleModel"
                 mcTooltipClass="mc-tooltip_warning"
-                [mcTitle]="titleModel"
                 #tooltipRef="mcTooltip"
                 mcTrigger="manual"
                 mcPlacement="{{tooltipPosition}}">
