@@ -4,7 +4,6 @@ import { bold, cyan, green, italic, red } from 'chalk';
 import { config as dotenvConfig } from 'dotenv';
 import { readFileSync } from 'fs';
 import { join } from 'path';
-import * as request from 'request';
 
 import { BaseReleaseTask } from './base-release-task';
 import { CONFIG } from './config';
@@ -45,11 +44,10 @@ class PublishReleaseCITask extends BaseReleaseTask {
         public repositoryName: string
     ) {
         super(new GitClient(projectDir, `https://github.com/${repositoryOwner}/${repositoryName}.git`));
-        console.log(this.projectDir);
 
         this.releaseOutputPath = join(projectDir, 'dist');
-
         this.packageJsonPath = join(projectDir, 'package.json');
+
         this.packageJson = JSON.parse(readFileSync(this.packageJsonPath, 'utf-8'));
         this.currentVersion = parseVersionName(this.packageJson.version);
 
@@ -102,55 +100,20 @@ class PublishReleaseCITask extends BaseReleaseTask {
 
         const { releaseNotes, releaseTitle } = extractedReleaseNotes;
 
-        this.publishGithubReleaseNotes({
+        this.githubApi.repos.createRelease({
             owner: this.repositoryOwner,
-            repository: this.repositoryName,
-            tagName: newVersionName,
-            releaseTitle,
-            body: releaseNotes
+            repo: this.repositoryName,
+            tag_name: newVersionName,
+            body: releaseNotes,
+            name: releaseTitle
         });
+
+        console.info(green(`  ✓   Github release is posted.`));
 
         if (!process.env.DEBUG) {
             console.info(green(bold(`  ✓   Notification to Mattermost, version: ${newVersionName}`)));
             notify(newVersionName);
         }
-    }
-
-    private publishGithubReleaseNotes(options: {
-        owner: string; repository: string;
-        tagName: string; releaseTitle: string; body: string;
-    }) {
-
-        const url = `https://github.com/${options.owner}/${options.repository}/releases`;
-        const headers = {
-            Authorization: `token ${CONFIG.github.token}`
-        };
-
-        const branchName = this.git.getCurrentBranch();
-
-        const body = {
-            tag_name: options.tagName,
-            target_commitish: branchName,
-            name: options.releaseTitle,
-            body: options.body,
-            draft: false,
-            prerelease: false
-        };
-
-        request.post(
-            { url, headers, json: true, body },
-            (error, response) => {
-                // tslint:disable-next-line:no-magic-numbers
-                if (error || response.statusCode !== 200) {
-                    // tslint:disable-next-line:no-console
-                    console.error(red(`  ✘   Could not post notification in Mattermost.`));
-
-                    return;
-                }
-
-                console.info(green(`  ✓   Notification is posted in Mattermost.`));
-            }
-        );
     }
 
     /** Publishes the specified package within the given NPM dist tag. */
