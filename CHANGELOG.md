@@ -1,3 +1,14 @@
+## 11.3.5 "Wider Lifeguard" (2021-08-20)
+
+### Mosaic
+
+ * bug fix  **datepicker:** changed format for monthYearLabel (#UIM-721) ([#679](https://github.com/positive-js/mosaic/issues/679)) ([e7a1c6e](https://github.com/positive-js/mosaic/commit/e7a1c6e4c19869f351b617d3277f7bffe7557a73)), closes [#UIM-721](https://github.com/positive-js/mosaic/issues/UIM-721) [#UIM-721](https://github.com/positive-js/mosaic/issues/UIM-721)
+ * bug fix  **datepicker:** changed format for weekdays (#UIM-722) ([#678](https://github.com/positive-js/mosaic/issues/678)) ([1d4792f](https://github.com/positive-js/mosaic/commit/1d4792fd94d6e13d9513e17219d51d4fe6510f98)), closes [#UIM-722](https://github.com/positive-js/mosaic/issues/UIM-722) [#UIM-722](https://github.com/positive-js/mosaic/issues/UIM-722)
+ * bug fix  **navbar:** added collapsed property for mc-navbar-item (#UIM-713) ([#676](https://github.com/positive-js/mosaic/issues/676)) ([707625e](https://github.com/positive-js/mosaic/commit/707625e1e23718ad8373208118476c0fbb242333)), closes [#UIM-713](https://github.com/positive-js/mosaic/issues/UIM-713)
+ * bug fix  **navbar:** added hover styles for brand (#UIM-702) ([#675](https://github.com/positive-js/mosaic/issues/675)) ([e1c2afb](https://github.com/positive-js/mosaic/commit/e1c2afb6e4e538a915b86e4dde4a095c6ae78036)), closes [#UIM-702](https://github.com/positive-js/mosaic/issues/UIM-702)
+ * bug fix  **tags:** changed min-height for tags-list (#UIM-365) ([#677](https://github.com/positive-js/mosaic/issues/677)) ([125ea16](https://github.com/positive-js/mosaic/commit/125ea16953e79b6ea74e0db18ec3a6bf6dc6383a)), closes [#UIM-365](https://github.com/positive-js/mosaic/issues/UIM-365)
+ * bug fix  **timepicker:** does't work parsing and errors in console (#UIM-720) ([#674](https://github.com/positive-js/mosaic/issues/674)) ([e0a42fa](https://github.com/positive-js/mosaic/commit/e0a42fa64af05f0f71b08e70435c322750ab904c)), closes [#UIM-720](https://github.com/positive-js/mosaic/issues/UIM-720)
+
 ## 11.3.4 "Floral-wood" (2021-08-16)
 
 ### Mosaic
