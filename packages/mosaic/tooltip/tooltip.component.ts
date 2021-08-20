@@ -69,19 +69,18 @@ export type TooltipVisibility = 'initial' | 'visible' | 'hidden';
 })
 export class McTooltipComponent {
     classMap = {};
-    isTitleString: boolean;
-    showTid: any;
-    hideTid: any;
+    showTimeoutId: any;
+    hideTimeoutId: any;
 
     visibleChange: EventEmitter<boolean> = new EventEmitter();
 
     title: string | TemplateRef<any>;
 
-    placement: string;
-    tooltipClass: string;
-
-    /** Property watched by the animation framework to show or hide the tooltip */
     visibility: TooltipVisibility = 'initial';
+
+    get isTemplateRef(): boolean {
+        return this.title instanceof TemplateRef;
+    }
 
     private prefix = 'mc-tooltip_placement';
 
@@ -108,15 +107,15 @@ export class McTooltipComponent {
     }
 
     show(delay: number): void {
-        if (this.hideTid) {
-            clearTimeout(this.hideTid);
+        if (this.hideTimeoutId) {
+            clearTimeout(this.hideTimeoutId);
         }
 
         this.closeOnInteraction = true;
-        this.showTid = setTimeout(
+        this.showTimeoutId = setTimeout(
             () => {
                 this.visibility = 'visible';
-                this.showTid = undefined;
+                this.showTimeoutId = undefined;
 
                 this.visibleChange.emit(true);
 
@@ -129,14 +128,14 @@ export class McTooltipComponent {
     }
 
     hide(delay: number): void {
-        if (this.showTid) {
-            clearTimeout(this.showTid);
+        if (this.showTimeoutId) {
+            clearTimeout(this.showTimeoutId);
         }
 
-        this.hideTid = setTimeout(
+        this.hideTimeoutId = setTimeout(
             () => {
                 this.visibility = 'hidden';
-                this.hideTid = undefined;
+                this.hideTimeoutId = undefined;
 
                 this.visibleChange.emit(false);
                 this.onHideSubject.next();
@@ -153,10 +152,10 @@ export class McTooltipComponent {
         return this.visibility === 'visible';
     }
 
-    updateClassMap(): void {
+    updateClassMap(placement: string, tooltipClass: string): void {
         this.classMap = {
-            [`${this.prefix}-${this.placement}`]: true,
-            [this.tooltipClass]: true
+            [`${this.prefix}-${placement}`]: true,
+            [tooltipClass]: true
         };
     }
 
@@ -173,14 +172,6 @@ export class McTooltipComponent {
         if (this.closeOnInteraction) {
             this.hide(0);
         }
-    }
-
-    get isTemplateRef(): boolean {
-        return this.title instanceof TemplateRef;
-    }
-
-    get isNonEmptyString(): boolean {
-        return (typeof this.title === 'string' || typeof this.title === 'number') && this.title !== '';
     }
 }
 
@@ -218,10 +209,6 @@ const VIEWPORT_MARGIN: number = 8;
 })
 export class McTooltip implements OnInit, OnDestroy {
     isTooltipOpen: boolean = false;
-    overlayRef: OverlayRef | null;
-    portal: ComponentPortal<McTooltipComponent>;
-    availablePositions: any;
-    tooltipInstance: McTooltipComponent | null;
 
     @Input('mcArrowPlacement') arrowPlacement: ArrowPlacements;
 
@@ -280,7 +267,7 @@ export class McTooltip implements OnInit, OnDestroy {
             this._placement = value;
 
             if (this.tooltipInstance) {
-                this.tooltipInstance.placement = value;
+                this.tooltipInstance.updateClassMap(this.placement, this.tooltipClass);
             }
         } else {
             this._placement = 'top';
@@ -303,7 +290,7 @@ export class McTooltip implements OnInit, OnDestroy {
             this._tooltipClass = value;
 
             if (this.tooltipInstance) {
-                this.tooltipInstance.tooltipClass = value;
+                this.tooltipInstance.updateClassMap(this.placement, this.tooltipClass);
             }
         } else {
             this._tooltipClass = '';
@@ -333,7 +320,10 @@ export class McTooltip implements OnInit, OnDestroy {
 
     private _visible: boolean;
 
-    private $unsubscribe = new Subject<void>();
+    private overlayRef: OverlayRef | null;
+    private portal: ComponentPortal<McTooltipComponent>;
+    private availablePositions: any;
+    private tooltipInstance: McTooltipComponent | null;
 
     private manualListeners = new Map<string, EventListenerOrEventListenerObject>();
     private readonly destroyed = new Subject<void>();
@@ -365,8 +355,8 @@ export class McTooltip implements OnInit, OnDestroy {
 
         this.manualListeners.clear();
 
-        this.$unsubscribe.next();
-        this.$unsubscribe.complete();
+        this.destroyed.next();
+        this.destroyed.complete();
     }
 
     /** Create the overlay config and position strategy */
@@ -446,12 +436,8 @@ export class McTooltip implements OnInit, OnDestroy {
                 return false;
             });
 
-
-        if (this.tooltipInstance) {
-            this.tooltipInstance.placement = newPlacement;
-            this.tooltipInstance.updateClassMap();
-            this.tooltipInstance.markForCheck();
-        }
+        this.tooltipInstance?.updateClassMap(newPlacement, this.tooltipClass);
+        this.tooltipInstance?.markForCheck();
 
         this.handlePositioningUpdate();
     }
@@ -465,7 +451,6 @@ export class McTooltip implements OnInit, OnDestroy {
             const currentContainerHeight = this.hostView.element.nativeElement.clientHeight;
 
             if (this.arrowPlacement === ArrowPlacements.Center) {
-                const arrowElemRef = this.getTooltipArrowElem();
                 const containerPositionTop: number = this.hostView.element.nativeElement.getBoundingClientRect().top;
                 const halfOfContainerHeight = currentContainerHeight / halfDelimiter;
                 const halfOfTooltipHeight = overlayElemHeight / halfDelimiter;
@@ -473,6 +458,8 @@ export class McTooltip implements OnInit, OnDestroy {
                 this.overlayRef.overlayElement.style.top = `${
                     (containerPositionTop + halfOfContainerHeight) - halfOfTooltipHeight + 1
                 }px`;
+
+                const arrowElemRef = this.getTooltipArrowElem();
 
                 if (arrowElemRef) {
                     arrowElemRef.setAttribute('style', `top: ${halfOfTooltipHeight - 1}px`);
@@ -536,12 +523,11 @@ export class McTooltip implements OnInit, OnDestroy {
                 .pipe(takeUntil(this.destroyed))
                 .subscribe(() => this.detach());
 
-            this.tooltipInstance.tooltipClass = this.tooltipClass;
-            this.tooltipInstance.placement = this.placement;
+            this.tooltipInstance.updateClassMap(this.placement, this.tooltipClass);
             this.tooltipInstance.title = this.title;
 
             this.tooltipInstance.visibleChange
-                .pipe(takeUntil(this.$unsubscribe), distinctUntilChanged())
+                .pipe(takeUntil(this.destroyed), distinctUntilChanged())
                 .subscribe((data) => {
                     this.visible = data;
                     this.mcVisibleChange.emit(data);
@@ -591,15 +577,9 @@ export class McTooltip implements OnInit, OnDestroy {
 
         if (position === 'top' || position === 'bottom') {
             originPosition = { originX: 'center', originY: position === 'top' ? 'top' : 'bottom' };
-        } else if (
-            position === 'top' ||
-            (position === 'left' && isLtr) ||
-            (position === 'right' && !isLtr)) {
+        } else if (position === 'top' || (position === 'left' && isLtr) || (position === 'right' && !isLtr)) {
             originPosition = { originX: 'start', originY: 'center' };
-        } else if (
-            position === 'bottom' ||
-            (position === 'right' && isLtr) ||
-            (position === 'left' && !isLtr)) {
+        } else if (position === 'bottom' || (position === 'right' && isLtr) || (position === 'left' && !isLtr)) {
             originPosition = { originX: 'end', originY: 'center' };
         } else {
             throw getMcTooltipInvalidPositionError(position);
@@ -623,15 +603,9 @@ export class McTooltip implements OnInit, OnDestroy {
             overlayPosition = { overlayX: 'center', overlayY: 'bottom' };
         } else if (position === 'bottom') {
             overlayPosition = { overlayX: 'center', overlayY: 'top' };
-        } else if (
-            position === 'top' ||
-            (position === 'left' && isLtr) ||
-            (position === 'right' && !isLtr)) {
+        } else if (position === 'top' || (position === 'left' && isLtr) || (position === 'right' && !isLtr)) {
             overlayPosition = { overlayX: 'end', overlayY: 'center' };
-        } else if (
-            position === 'bottom' ||
-            (position === 'right' && isLtr) ||
-            (position === 'left' && !isLtr)) {
+        } else if (position === 'bottom' || (position === 'right' && isLtr) || (position === 'left' && !isLtr)) {
             overlayPosition = { overlayX: 'start', overlayY: 'center' };
         } else {
             throw getMcTooltipInvalidPositionError(position);
@@ -649,6 +623,7 @@ export class McTooltip implements OnInit, OnDestroy {
     private invertPosition(x: HorizontalConnectionPos, y: VerticalConnectionPos) {
         let newX: HorizontalConnectionPos = x;
         let newY: VerticalConnectionPos = y;
+
         if (this.placement === 'top' || this.placement === 'bottom') {
             if (y === 'top') {
                 newY = 'bottom';

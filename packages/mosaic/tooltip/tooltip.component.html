@@ -4,11 +4,11 @@
      (@state.start)="animationStart()"
      (@state.done)="animationDone($event)">
     <div class="mc-tooltip-content">
-        <div class="mc-tooltip-arrow"></div>
+        <div #arrow class="mc-tooltip-arrow"></div>
         <div class="mc-tooltip-inner">
             <ng-container *ngIf="isTemplateRef" [ngTemplateOutlet]="title"></ng-container>
-            <ng-container *ngIf="isNonEmptyString">
-                <div [innerHTML]="title"></div>
+            <ng-container *ngIf="!isTemplateRef">
+                <div>{{ title }}</div>
             </ng-container>
         </div>
     </div>
