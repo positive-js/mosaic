@@ -1,5 +1,5 @@
+// tslint:disable:no-console
 import { green, red } from 'chalk';
-import * as dotenv from 'dotenv';
 import { join } from 'path';
 import * as request from 'request';
 
@@ -9,9 +9,9 @@ import { CHANGELOG_FILE_NAME } from './stage-release';
 
 const HTTP_CODE_OK = 200;
 
-dotenv.config();
-
 export function notify(version) {
+    console.log(green('Start MM notification'));
+
     if (!verifyNotificationPossibility()) {
         return;
     }
@@ -26,6 +26,8 @@ export function notify(version) {
         short: false,
         text: `#### [![Mosaic Logo](https://i.ibb.co/fQNPgv6/logo-png-200.png =32x32)osaic](https://github.com/positive-js/mosaic/tree/\${tag}) was published. \n ${prepareChangeLog(version)}`
     };
+
+    console.log('POST notification: ', { url, headers, body: JSON.stringify(body) });
 
     request.post(
         { url, headers, body: JSON.stringify(body) },
