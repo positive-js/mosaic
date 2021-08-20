@@ -30,7 +30,8 @@ export function notify(version) {
     console.log('POST notification: ', { url, headers, body: JSON.stringify(body) });
 
     request.post(
-        { url, headers, body: JSON.stringify(body) },
+        // escape single quote
+        { url, headers, body: JSON.stringify(body).replace(/[\/\(\)\']/g, '\\$&') },
         (error, response) => {
             if (error || response.statusCode !== HTTP_CODE_OK) {
                 // tslint:disable-next-line:no-console
