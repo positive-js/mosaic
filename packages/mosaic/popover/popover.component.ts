@@ -37,7 +37,7 @@ import {
     POSITION_MAP, POSITION_PRIORITY_STRATEGY,
     POSITION_TO_CSS_MAP
 } from '@ptsecurity/mosaic/core';
-import { BehaviorSubject, merge, NEVER, Observable, Subject, Subscription } from 'rxjs';
+import { merge, NEVER, Observable, Subject, Subscription } from 'rxjs';
 import { delay, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
 import { mcPopoverAnimations } from './popover-animations';
@@ -63,145 +63,49 @@ export enum PopoverVisibility {
     styleUrls: ['./popover.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    animations: [mcPopoverAnimations.popoverState],
-    host: {
-        '[class]': 'getCssClassesList',
-        '(keydown)': 'handleKeydown($event)'
-    }
+    animations: [mcPopoverAnimations.popoverState]
 })
 export class McPopoverComponent {
-    positions: ConnectionPositionPair[] = [...EXTENDED_OVERLAY_POSITIONS];
-    availablePositions: any;
-    popoverVisibility: PopoverVisibility = PopoverVisibility.Initial;
+    classMap = {};
+
+    visibility: PopoverVisibility = PopoverVisibility.Initial;
     closeOnInteraction: boolean = false;
-    mcContent: string | TemplateRef<any>;
-    mcHeader: string | TemplateRef<any>;
-    mcFooter: string | TemplateRef<any>;
 
-    @Output('mcPopoverVisibleChange') mcVisibleChange: EventEmitter<boolean> = new EventEmitter();
+    content: string | TemplateRef<any>;
+    header: string | TemplateRef<any>;
+    footer: string | TemplateRef<any>;
 
-    get mcTrigger(): string {
-        return this._mcTrigger;
-    }
-
-    set mcTrigger(value: string) {
-        this._mcTrigger = value;
-    }
-
-    private _mcTrigger: string = PopoverTriggers.Hover;
-
-    get mcPlacement(): string {
-        return this._mcPlacement;
-    }
-
-    set mcPlacement(value: string) {
-        if (value !== this._mcPlacement) {
-            this._mcPlacement = value;
-            this.positions.unshift(POSITION_MAP[this.mcPlacement]);
-        } else if (!value) {
-            this._mcPlacement = 'top';
-        }
-    }
-
-    private _mcPlacement: string = 'top';
-
-    get mcPopoverSize(): string {
-        return this.popoverSize;
-    }
-
-    set mcPopoverSize(value: string) {
-        if (value !== this.popoverSize) {
-            this.popoverSize = value;
-        } else if (!value) {
-            this.popoverSize = 'normal';
-        }
-    }
-
-    private popoverSize: string;
-
-    get mcVisible(): boolean {
-        return this._mcVisible.value;
-    }
-
-    set mcVisible(value: boolean) {
-        const visible = coerceBooleanProperty(value);
-
-        if (this._mcVisible.value !== visible) {
-            this._mcVisible.next(visible);
-            this.mcVisibleChange.emit(visible);
-        }
-    }
-
-    private _mcVisible: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
-    get classList() {
-        return this._classList.join(' ');
-    }
-
-    set classList(value: string) {
-        let list: string[] = [];
-
-        if (Array.isArray(value)) {
-            list = value;
-        } else {
-            list.push(value);
-        }
-
-        this._classList = list;
-    }
-
-    private _classList: string[] = [];
-
-    get getCssClassesList(): string {
-        return `${this.classList} mc-popover-${this.mcPopoverSize} mc-popover_placement-${this.getPlacementClass}`;
-    }
-
-    get getPlacementClass(): string {
-        return POSITION_TO_CSS_MAP[this.mcPlacement];
-    }
-
-    get isOpen(): boolean {
-        return this.popoverVisibility === PopoverVisibility.Visible;
-    }
+    mcVisibleChange: EventEmitter<boolean> = new EventEmitter();
 
     /** Subject for notifying that the popover has been hidden from the view */
     private readonly onHideSubject: Subject<any> = new Subject();
 
-    constructor(public changeDetectorRef: ChangeDetectorRef, public componentElementRef: ElementRef) {
-        this.availablePositions = POSITION_MAP;
-    }
+    constructor(public changeDetectorRef: ChangeDetectorRef) {}
 
-    handleKeydown(e: KeyboardEvent) {
-        // tslint:disable-next-line: deprecation
-        if (this.isOpen && e.keyCode === ESCAPE) {
-            this.hide();
-        }
+    updateClassMap(size: string, placement: string, popoverClass: string): void {
+        this.classMap = {
+            [`mc-popover_placement-${POSITION_TO_CSS_MAP[placement]}`]: true,
+            [`mc-popover_${size}`]: true,
+            [popoverClass]: true
+        };
     }
 
     show(): void {
-        if (this.isNonEmptyContent()) {
-            this.closeOnInteraction = true;
-            this.popoverVisibility = PopoverVisibility.Visible;
-            this._mcVisible.next(true);
-            this.mcVisibleChange.emit(true);
-            // Mark for check so if any parent component has set the
-            // ChangeDetectionStrategy to OnPush it will be checked anyways
-            this.markForCheck();
-        }
-    }
-
-    hide(): void {
-        this.popoverVisibility = PopoverVisibility.Hidden;
-        this._mcVisible.next(false);
-        this.mcVisibleChange.emit(false);
-
+        this.closeOnInteraction = true;
+        this.visibility = PopoverVisibility.Visible;
+        this.mcVisibleChange.emit(true);
         // Mark for check so if any parent component has set the
         // ChangeDetectionStrategy to OnPush it will be checked anyways
         this.markForCheck();
     }
 
-    isNonEmptyContent(): boolean {
-        return !!this.mcContent && (this.isTemplateRef(this.mcContent) || this.isNonEmptyString(this.mcContent));
+    hide(): void {
+        this.visibility = PopoverVisibility.Hidden;
+        this.mcVisibleChange.emit(false);
+
+        // Mark for check so if any parent component has set the
+        // ChangeDetectionStrategy to OnPush it will be checked anyways
+        this.markForCheck();
     }
 
     /** Returns an observable that notifies when the popover has been hidden from view. */
@@ -210,7 +114,7 @@ export class McPopoverComponent {
     }
 
     isVisible(): boolean {
-        return this.popoverVisibility === PopoverVisibility.Visible;
+        return this.visibility === PopoverVisibility.Visible;
     }
 
     markForCheck(): void {
@@ -219,10 +123,6 @@ export class McPopoverComponent {
 
     isTemplateRef(value: any): boolean {
         return value instanceof TemplateRef;
-    }
-
-    isNonEmptyString(value: any): boolean {
-        return typeof value === 'string' && value !== '';
     }
 
     animationStart() {
@@ -289,15 +189,12 @@ const ANCHOR_MIN_HEIGHT_WIDTH: number = 44; // tslint:disable-line
     }
 })
 export class McPopover implements OnInit, OnDestroy {
-    isPopoverOpen: boolean = false;
-    isDynamicPopover = false;
-    overlayRef: OverlayRef | null;
-    portal: ComponentPortal<McPopoverComponent>;
-    availablePositions: { [key: string]: ConnectionPositionPair };
-    defaultPositionsMap: { [key: string]: string};
-    popover: McPopoverComponent | null;
+    isOpen: boolean = false;
 
     @Input() backdropClass: string = 'cdk-overlay-transparent-backdrop';
+
+    @Input('mcPopoverEnterDelay') enterDelay: number;
+    @Input('mcPopoverLeaveDelay') leaveDelay: number;
 
     @Output('mcPopoverVisibleChange') mcVisibleChange = new EventEmitter<boolean>();
 
@@ -316,46 +213,46 @@ export class McPopover implements OnInit, OnDestroy {
     private _hasBackdrop: boolean = false;
 
     @Input('mcPopoverHeader')
-    get mcHeader(): string | TemplateRef<any> {
-        return this._mcHeader;
+    get header(): string | TemplateRef<any> {
+        return this._header;
     }
-    set mcHeader(value: string | TemplateRef<any>) {
-        this._mcHeader = value;
-        this.updateCompValue('mcHeader', value);
+    set header(value: string | TemplateRef<any>) {
+        this._header = value;
+        this.updateCompValue('header', value);
 
-        if (this.isPopoverOpen) {
+        if (this.isOpen) {
             this.updatePosition(true);
         }
     }
-    private _mcHeader: string | TemplateRef<any>;
+    private _header: string | TemplateRef<any>;
 
     @Input('mcPopoverContent')
-    get mcContent(): string | TemplateRef<any> {
-        return this._mcContent;
+    get content(): string | TemplateRef<any> {
+        return this._content;
     }
-    set mcContent(value: string | TemplateRef<any>) {
-        this._mcContent = value;
-        this.updateCompValue('mcContent', value);
+    set content(value: string | TemplateRef<any>) {
+        this._content = value;
+        this.updateCompValue('content', value);
 
-        if (this.isPopoverOpen) {
+        if (this.isOpen) {
             this.updatePosition(true);
         }
     }
-    private _mcContent: string | TemplateRef<any>;
+    private _content: string | TemplateRef<any>;
 
     @Input('mcPopoverFooter')
-    get mcFooter(): string | TemplateRef<any> {
-        return this._mcFooter;
+    get footer(): string | TemplateRef<any> {
+        return this._footer;
     }
-    set mcFooter(value: string | TemplateRef<any>) {
-        this._mcFooter = value;
-        this.updateCompValue('mcFooter', value);
+    set footer(value: string | TemplateRef<any>) {
+        this._footer = value;
+        this.updateCompValue('footer', value);
 
-        if (this.isPopoverOpen) {
+        if (this.isOpen) {
             this.updatePosition(true);
         }
     }
-    private _mcFooter: string | TemplateRef<any>;
+    private _footer: string | TemplateRef<any>;
 
     private $unsubscribe = new Subject<void>();
 
@@ -368,55 +265,39 @@ export class McPopover implements OnInit, OnDestroy {
     }
     private _disabled: boolean = false;
 
-    @Input('mcPopoverMouseEnterDelay')
-    get mcMouseEnterDelay(): number {
-        return this._mcMouseEnterDelay;
-    }
-    set mcMouseEnterDelay(value: number) {
-        this._mcMouseEnterDelay = value;
-        this.updateCompValue('mcMouseEnterDelay', value);
-    }
-    private _mcMouseEnterDelay: number;
-
-    @Input('mcPopoverMouseLeaveDelay')
-    get mcMouseLeaveDelay(): number {
-        return this._mcMouseLeaveDelay;
-    }
-    set mcMouseLeaveDelay(value: number) {
-        this._mcMouseLeaveDelay = value;
-        this.updateCompValue('mcMouseLeaveDelay', value);
-    }
-    private _mcMouseLeaveDelay: number;
-
     @Input('mcPopoverTrigger')
-    get mcTrigger(): string {
-        return this._mcTrigger;
+    get trigger(): string {
+        return this._trigger;
     }
 
-    set mcTrigger(value: string) {
+    set trigger(value: string) {
         if (value) {
-            this._mcTrigger = value;
-            this.updateCompValue('mcTrigger', value);
+            this._trigger = value;
         } else {
-            this._mcTrigger = PopoverTriggers.Click;
+            this._trigger = PopoverTriggers.Click;
         }
+
         this.resetListeners();
     }
 
-    private _mcTrigger: string = PopoverTriggers.Click;
+    private _trigger: string = PopoverTriggers.Click;
 
     @Input('mcPopoverSize')
-    get mcPopoverSize(): string {
+    get size(): string {
         return this.popoverSize;
     }
-    set mcPopoverSize(value: string) {
-        if (value && (value === 'small' || value === 'normal' || value === 'large')) {
+    set size(value: string) {
+        if (['small', 'normal', 'large'].includes(value)) {
             this.popoverSize = value;
-            this.updateCompValue('mcPopoverSize', value);
+
+            if (this.popoverInstance) {
+                this.popoverInstance.updateClassMap(this.size, this.placement, this.popoverClass);
+            }
         } else {
             this.popoverSize = 'normal';
         }
     }
+
     private popoverSize: string = 'normal';
 
     @Input('mcPopoverPlacementPriority')
@@ -433,40 +314,45 @@ export class McPopover implements OnInit, OnDestroy {
     private _mcPlacementPriority: string | string[] | null = null;
 
     @Input('mcPopoverPlacement')
-    get mcPlacement(): string {
-        return this._mcPlacement;
+    get placement(): string {
+        return this._placement;
     }
-    set mcPlacement(value: string) {
+    set placement(value: string) {
         if (value) {
-            this._mcPlacement = value;
-            this.updateCompValue('mcPlacement', value);
+            this._placement = value;
+
+            if (this.popoverInstance) {
+                this.popoverInstance.updateClassMap(this.size, this.placement, this.popoverClass);
+            }
         } else {
-            this._mcPlacement = 'top';
+            this._placement = 'top';
         }
     }
-    private _mcPlacement: string = 'top';
+    private _placement: string = 'top';
 
     @Input('mcPopoverClass')
-    get classList() {
-        return this._classList;
+    get popoverClass() {
+        return this._popoverClass;
     }
-    set classList(value: string | string[]) {
-        this._classList = value;
-        this.updateCompValue('classList', this._classList);
+    set popoverClass(value: string) {
+        this._popoverClass = value;
+
+        if (this.popoverInstance) {
+            this.popoverInstance.updateClassMap(this.size, this.placement, this.popoverClass);
+        }
     }
-    private _classList: string | string[];
+    private _popoverClass: string;
 
     @Input('mcPopoverVisible')
-    get mcVisible(): boolean {
-        return this._mcVisible;
+    get visible(): boolean {
+        return this._visible;
     }
 
-    set mcVisible(externalValue: boolean) {
+    set visible(externalValue: boolean) {
         const value = coerceBooleanProperty(externalValue);
 
-        if (this._mcVisible !== value) {
-            this._mcVisible = value;
-            this.updateCompValue('mcVisible', value);
+        if (this._visible !== value) {
+            this._visible = value;
 
             if (value) {
                 this.show();
@@ -476,13 +362,15 @@ export class McPopover implements OnInit, OnDestroy {
         }
     }
 
+    private _visible: boolean;
+
+    private overlayRef: OverlayRef | null;
+    private portal: ComponentPortal<McPopoverComponent>;
+    private availablePositions: { [key: string]: ConnectionPositionPair };
+    private defaultPositionsMap: { [key: string]: string};
+    private popoverInstance: McPopoverComponent | null;
+
     private closeSubscription = Subscription.EMPTY;
-
-    private _mcVisible: boolean;
-
-    get isOpen(): boolean {
-        return this.isPopoverOpen;
-    }
 
     private manualListeners = new Map<string, EventListenerOrEventListenerObject>();
     private readonly destroyed = new Subject<void>();
@@ -521,9 +409,9 @@ export class McPopover implements OnInit, OnDestroy {
         strategy.positionChanges
             .pipe(takeUntil(this.destroyed))
             .subscribe((change) => {
-            if (this.popover) {
+            if (this.popoverInstance) {
                 this.onPositionChange(change);
-                if (change.scrollableViewProperties.isOverlayClipped && this.popover.mcVisible) {
+                if (change.scrollableViewProperties.isOverlayClipped && this.popoverInstance.isVisible()) {
                     // After position changes occur and the overlay is clipped by
                     // a parent scrollable then close the popover.
                     this.ngZone.run(() => this.hide());
@@ -559,11 +447,12 @@ export class McPopover implements OnInit, OnDestroy {
         if (this.overlayRef && this.overlayRef.hasAttached()) {
             this.overlayRef.detach();
         }
-        this.popover = null;
+
+        this.popoverInstance = null;
     }
 
     onPositionChange($event: ConnectedOverlayPositionChange): void {
-        let updatedPlacement = this.mcPlacement;
+        let updatedPlacement = this.placement;
         Object.keys(this.availablePositions).some((key) => {
             if ($event.connectionPair.originX === this.availablePositions[key].originX &&
                 $event.connectionPair.originY === this.availablePositions[key].originY &&
@@ -577,12 +466,11 @@ export class McPopover implements OnInit, OnDestroy {
             return false;
         });
 
-        this.updateCompValue('mcPlacement', updatedPlacement);
         this.mcPositionStrategyPlacementChange.emit(updatedPlacement);
 
-        if (this.popover) {
-            this.updateCompValue('classList', this.classList);
-            this.popover.markForCheck();
+        if (this.popoverInstance) {
+            this.popoverInstance.updateClassMap(this.size, this.placement, this.popoverClass);
+            this.popoverInstance.markForCheck();
         }
 
         if (!this.defaultPositionsMap[updatedPlacement]) {
@@ -627,10 +515,8 @@ export class McPopover implements OnInit, OnDestroy {
 
     // tslint:disable-next-line:no-any
     updateCompValue(key: string, value: any): void {
-        if (this.isDynamicPopover && value) {
-            if (this.popover) {
-                this.popover[key] = value;
-            }
+        if (value && this.popoverInstance) {
+            this.popoverInstance[key] = value;
         }
     }
 
@@ -667,20 +553,20 @@ export class McPopover implements OnInit, OnDestroy {
     }
 
     initElementRefListeners() {
-        if (this.mcTrigger === PopoverTriggers.Click) {
+        if (this.trigger === PopoverTriggers.Click) {
             this.manualListeners
                 .set('click', () => this.show())
                 .forEach((listener, event) => {
                     this.elementRef.nativeElement.addEventListener(event, listener);
                 });
-        } else if (this.mcTrigger === PopoverTriggers.Hover) {
+        } else if (this.trigger === PopoverTriggers.Hover) {
             this.manualListeners
                 .set('mouseenter', () => this.show())
                 .set('mouseleave', () => this.hide())
                 .forEach((listener, event) => {
                     this.elementRef.nativeElement.addEventListener(event, listener);
                 });
-        } else if (this.mcTrigger === PopoverTriggers.Focus) {
+        } else if (this.trigger === PopoverTriggers.Focus) {
             this.manualListeners
                 .set('focus', () => this.show())
                 .set('blur', () => this.hide())
@@ -715,48 +601,42 @@ export class McPopover implements OnInit, OnDestroy {
     show(): void {
         if (this.disabled) { return; }
 
-        if (!this.popover) {
+        if (!this.popoverInstance) {
             this.detach();
             const overlayRef = this.createOverlay();
 
             this.portal = this.portal || new ComponentPortal(McPopoverComponent, this.hostView);
 
-            this.popover = overlayRef.attach(this.portal).instance;
-            this.popover.afterHidden()
+            this.popoverInstance = overlayRef.attach(this.portal).instance;
+            this.popoverInstance.afterHidden()
                 .pipe(takeUntil(this.destroyed))
                 .subscribe(() => this.detach());
 
-            this.isDynamicPopover = true;
             const properties = [
-                'mcPlacement',
-                'mcPopoverSize',
-                'mcTrigger',
-                'mcMouseEnterDelay',
-                'mcMouseLeaveDelay',
-                'classList',
-                'mcVisible',
-                'mcHeader',
-                'mcContent',
-                'mcFooter'
+                'header',
+                'content',
+                'footer'
             ];
+
+            this.popoverInstance.updateClassMap(this.size, this.placement, this.popoverClass);
 
             properties.forEach((property) => this.updateCompValue(property, this[property]));
 
-            this.popover.mcVisibleChange
+            this.popoverInstance.mcVisibleChange
                 .pipe(takeUntil(this.$unsubscribe), distinctUntilChanged())
                 .subscribe((data) => {
-                    this.mcVisible = data;
+                    this.visible = data;
                     this.mcVisibleChange.emit(data);
-                    this.isPopoverOpen = data;
+                    this.isOpen = data;
                 });
         }
 
-        this.popover.show();
+        this.popoverInstance.show();
     }
 
     hide(): void {
-        if (this.popover) {
-            this.popover.hide();
+        if (this.popoverInstance) {
+            this.popoverInstance.hide();
         }
     }
 
@@ -785,6 +665,7 @@ export class McPopover implements OnInit, OnDestroy {
     private getPriorityPlacementStrategy(value: string | string[]): ConnectionPositionPair[] {
         const result: ConnectionPositionPair[] = [];
         const possiblePositions = Object.keys(this.availablePositions);
+
         if (Array.isArray(value)) {
             value.forEach((position: string) => {
                 if (possiblePositions.includes(position)) {
@@ -803,7 +684,7 @@ export class McPopover implements OnInit, OnDestroy {
             return this.getPriorityPlacementStrategy(this.mcPlacementPriority);
         }
 
-        return POSITION_PRIORITY_STRATEGY[this.mcPlacement];
+        return POSITION_PRIORITY_STRATEGY[this.placement];
     }
 
     private resizeListener = () => this.updatePosition();

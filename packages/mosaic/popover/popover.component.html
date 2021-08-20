@@ -1,28 +1,31 @@
 <div class="mc-popover"
-     [ngClass]="classList"
-     [@state]="popoverVisibility"
+     [ngClass]="classMap"
+     [@state]="visibility"
      (@state.start)="animationStart()"
      (@state.done)="animationDone($event)">
+
     <div class="mc-popover__container">
-        <div class="mc-popover__header" *ngIf="mcHeader">
-            <ng-container *ngIf="isTemplateRef(mcHeader)" [ngTemplateOutlet]="mcHeader"></ng-container>
-            <ng-container *ngIf="isNonEmptyString(mcHeader)">
-                <div [innerHTML]="mcHeader"></div>
+        <div class="mc-popover__header" *ngIf="header">
+            <ng-container *ngIf="isTemplateRef(header)" [ngTemplateOutlet]="header"></ng-container>
+            <ng-container *ngIf="!isTemplateRef(header)">
+                <div>{{ header }}</div>
             </ng-container>
         </div>
-        <div class="mc-popover__content" *ngIf="mcContent">
-            <ng-container *ngIf="isTemplateRef(mcContent)" [ngTemplateOutlet]="mcContent"></ng-container>
-            <ng-container *ngIf="isNonEmptyString(mcContent)">
-                <div [innerHTML]="mcContent"></div>
+
+        <div class="mc-popover__content" *ngIf="content">
+            <ng-container *ngIf="isTemplateRef(content)" [ngTemplateOutlet]="content"></ng-container>
+            <ng-container *ngIf="!isTemplateRef(content)">
+                <div>{{ content }}</div>
             </ng-container>
         </div>
-        <div class="mc-popover__footer" *ngIf="mcFooter">
-            <ng-container *ngIf="isTemplateRef(mcFooter)" [ngTemplateOutlet]="mcFooter"></ng-container>
-            <ng-container *ngIf="isNonEmptyString(mcFooter)">
-                <div [innerHTML]="mcFooter"></div>
+
+        <div class="mc-popover__footer" *ngIf="footer">
+            <ng-container *ngIf="isTemplateRef(footer)" [ngTemplateOutlet]="footer"></ng-container>
+            <ng-container *ngIf="!isTemplateRef(footer)">
+                <div>{{ footer }}</div>
             </ng-container>
         </div>
     </div>
     <div class="mc-popover__arrow"
-         [ngClass]="{ 'mc-popover__arrow_with-footer': mcFooter }"></div>
+         [ngClass]="{ 'mc-popover__arrow_with-footer': footer }"></div>
 </div>

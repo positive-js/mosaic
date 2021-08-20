@@ -26,28 +26,16 @@ $popover-arrow-distance: calc(-1 * (var(--mc-popover-size-arrow-width, #{$popove
 
     list-style: none;
     white-space: pre-line;
-}
 
-.mc-popover-small {
-    max-width: var(--mc-popover-size-small-width, $popover-size-small-width);
-
-    .mc-popover {
+    &.mc-popover_small {
         max-width: var(--mc-popover-size-small-width, $popover-size-small-width);
     }
-}
 
-.mc-popover-normal {
-    max-width: var(--mc-popover-size-normal-width, $popover-size-normal-width);
-
-    .mc-popover {
+    &.mc-popover_normal {
         max-width: var(--mc-popover-size-normal-width, $popover-size-normal-width);
     }
-}
 
-.mc-popover-large {
-    max-width: var(--mc-popover-size-large-width, $popover-size-large-width);
-
-    .mc-popover {
+    &.mc-popover_large {
         max-width: var(--mc-popover-size-large-width, $popover-size-large-width);
     }
 }
@@ -74,34 +62,28 @@ $popover-arrow-distance: calc(-1 * (var(--mc-popover-size-arrow-width, #{$popove
     border-top-style: solid;
 }
 
-.mc-popover_placement-top,
-.mc-popover_placement-top-left,
-.mc-popover_placement-top-right{
-    .mc-popover {
+.mc-popover {
+    &.mc-popover_placement-top,
+    &.mc-popover_placement-top-left,
+    &.mc-popover_placement-top-right {
         margin-bottom: $popover-distance;
     }
-}
 
-.mc-popover_placement-right,
-.mc-popover_placement-right-top,
-.mc-popover_placement-right-bottom {
-    .mc-popover {
+    &.mc-popover_placement-right,
+    &.mc-popover_placement-right-top,
+    &.mc-popover_placement-right-bottom {
         margin-left: $popover-distance;
     }
-}
 
-.mc-popover_placement-bottom,
-.mc-popover_placement-bottom-left,
-.mc-popover_placement-bottom-right {
-    .mc-popover {
+    &.mc-popover_placement-bottom,
+    &.mc-popover_placement-bottom-left,
+    &.mc-popover_placement-bottom-right {
         margin-top: $popover-distance;
     }
-}
 
-.mc-popover_placement-left,
-.mc-popover_placement-left-top,
-.mc-popover_placement-left-bottom {
-    .mc-popover {
+    &.mc-popover_placement-left,
+    &.mc-popover_placement-left-top,
+    &.mc-popover_placement-left-bottom {
         margin-right: $popover-distance;
     }
 }
