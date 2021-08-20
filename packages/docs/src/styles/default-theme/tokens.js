@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Wed, 21 Jul 2021 11:18:42 GMT
+ * Generated on Fri, 30 Jul 2021 10:50:19 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
@@ -421,7 +421,7 @@ export const CheckboxSizeToggleBoxShadow = "inset 0 0 1px 0 rgba(0, 0, 0, 0.2)";
 export const CheckboxFontDefault = "body";
 export const DatepickerToggleSizeWidth = "30px";
 export const DatepickerToggleSizeHeight = "30px";
-export const DatepickerBodySizeLabelPaddingSide = "33% / 7";
+export const DatepickerBodySizeLabelPaddings = "8px 28px 12px 12px";
 export const DatepickerBodySizeCellMinSize = "32px";
 export const DatepickerBodySizeCellMargin = "5%";
 export const DatepickerBodySizeCellPadding = "8px";
@@ -705,7 +705,7 @@ export const TagsFontDefault = "caption";
 export const TagsFontMono = "caption-mono";
 export const TagsFontCaps = "caption-caps";
 export const TagListSizePadding = "1px 6px";
-export const TagListSizeMinHeight = "28px";
+export const TagListSizeMinHeight = "30px";
 export const TagInputSizeHeight = "22px";
 export const TagInputSizeMargin = "2px 4px";
 export const TagInputFontDefault = "body";
