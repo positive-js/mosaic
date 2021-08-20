@@ -45,8 +45,6 @@ class StageReleaseCommitTask extends BaseReleaseTask {
     ) {
         super(new GitClient(projectDir, `https://github.com/${repositoryOwner}/${repositoryName}.git`));
 
-        console.log(this.projectDir);
-
         this.packageJsonPath = join(projectDir, 'package.json');
         this.packageJson = JSON.parse(readFileSync(this.packageJsonPath, 'utf-8'));
         this.currentVersion = parseVersionName(this.packageJson.version);
@@ -58,8 +56,7 @@ class StageReleaseCommitTask extends BaseReleaseTask {
         }
 
         this.githubApi = new Octokit({
-            type: 'token',
-            token: CONFIG.github.token
+            auth: CONFIG.github.token
         });
     }
 
