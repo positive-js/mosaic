@@ -7,7 +7,8 @@ import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McInputModule } from '@ptsecurity/mosaic/input';
 import { McListModule } from '@ptsecurity/mosaic/list';
 import { McRadioModule } from '@ptsecurity/mosaic/radio';
-import { ArrowPlacements, McToolTipModule } from '@ptsecurity/mosaic/tooltip';
+import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
+import { ArrowPlacements } from '../../mosaic/core/tooltip';
 
 
 /* tslint:disable:no-trailing-whitespace */

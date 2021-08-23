@@ -62,7 +62,7 @@ export class ValidationCompositeExample {
             const newValue = event.target.value.replace(/[^\d\.]+/g, '');
             this.compositeFormGroup.controls[controlName].setValue(newValue);
 
-            if (!tooltip.isTooltipOpen) {
+            if (!tooltip.isOpen) {
                 tooltip.show();
 
                 // tslint:disable-next-line:no-magic-numbers

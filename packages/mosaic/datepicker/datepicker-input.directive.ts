@@ -349,10 +349,10 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
         tooltip.trigger = 'manual';
         tooltip.tooltipClass = 'mc-tooltip_warning';
 
-        tooltip.initElementRefListeners();
+        tooltip.initListeners();
 
         this.incorrectInput.subscribe(() => {
-            if (tooltip.isTooltipOpen) { return; }
+            if (tooltip.isOpen) { return; }
 
             tooltip.show();
 

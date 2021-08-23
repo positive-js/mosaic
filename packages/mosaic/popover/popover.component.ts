@@ -1,4 +1,3 @@
-import { AnimationEvent } from '@angular/animations';
 import { Directionality } from '@angular/cdk/bidi';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
@@ -37,23 +36,12 @@ import {
     POSITION_MAP, POSITION_PRIORITY_STRATEGY,
     POSITION_TO_CSS_MAP
 } from '@ptsecurity/mosaic/core';
-import { merge, NEVER, Observable, Subject, Subscription } from 'rxjs';
-import { delay, distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { merge, NEVER, Subject, Subscription } from 'rxjs';
+import { delay as rxDelay, distinctUntilChanged, takeUntil } from 'rxjs/operators';
+
+import { McBaseTooltip, PopoverTriggers } from '../core/tooltip';
 
 import { mcPopoverAnimations } from './popover-animations';
-
-
-enum PopoverTriggers {
-    Click = 'click',
-    Focus = 'focus',
-    Hover = 'hover'
-}
-
-export enum PopoverVisibility {
-    Initial = 'initial',
-    Visible = 'visible',
-    Hidden = 'hidden'
-}
 
 
 @Component({
@@ -65,84 +53,15 @@ export enum PopoverVisibility {
     changeDetection: ChangeDetectionStrategy.OnPush,
     animations: [mcPopoverAnimations.popoverState]
 })
-export class McPopoverComponent {
-    classMap = {};
-
-    visibility: PopoverVisibility = PopoverVisibility.Initial;
-    closeOnInteraction: boolean = false;
-
+export class McPopoverComponent extends McBaseTooltip {
     content: string | TemplateRef<any>;
     header: string | TemplateRef<any>;
     footer: string | TemplateRef<any>;
 
-    mcVisibleChange: EventEmitter<boolean> = new EventEmitter();
+    prefix = 'mc-popover';
 
-    /** Subject for notifying that the popover has been hidden from the view */
-    private readonly onHideSubject: Subject<any> = new Subject();
-
-    constructor(public changeDetectorRef: ChangeDetectorRef) {}
-
-    updateClassMap(size: string, placement: string, popoverClass: string): void {
-        this.classMap = {
-            [`mc-popover_placement-${POSITION_TO_CSS_MAP[placement]}`]: true,
-            [`mc-popover_${size}`]: true,
-            [popoverClass]: true
-        };
-    }
-
-    show(): void {
-        this.closeOnInteraction = true;
-        this.visibility = PopoverVisibility.Visible;
-        this.mcVisibleChange.emit(true);
-        // Mark for check so if any parent component has set the
-        // ChangeDetectionStrategy to OnPush it will be checked anyways
-        this.markForCheck();
-    }
-
-    hide(): void {
-        this.visibility = PopoverVisibility.Hidden;
-        this.mcVisibleChange.emit(false);
-
-        // Mark for check so if any parent component has set the
-        // ChangeDetectionStrategy to OnPush it will be checked anyways
-        this.markForCheck();
-    }
-
-    /** Returns an observable that notifies when the popover has been hidden from view. */
-    afterHidden(): Observable<void> {
-        return this.onHideSubject.asObservable();
-    }
-
-    isVisible(): boolean {
-        return this.visibility === PopoverVisibility.Visible;
-    }
-
-    markForCheck(): void {
-        this.changeDetectorRef.markForCheck();
-    }
-
-    isTemplateRef(value: any): boolean {
-        return value instanceof TemplateRef;
-    }
-
-    animationStart() {
-        this.closeOnInteraction = false;
-    }
-
-    animationDone(event: AnimationEvent): void {
-        const toState = event.toState as PopoverVisibility;
-
-        if (toState === PopoverVisibility.Hidden && !this.isVisible()) {
-            this.onHideSubject.next();
-        }
-
-        if (toState === PopoverVisibility.Visible || toState === PopoverVisibility.Hidden) {
-            this.closeOnInteraction = true;
-        }
-    }
-
-    ngOnDestroy() {
-        this.onHideSubject.complete();
+    constructor(changeDetectorRef: ChangeDetectorRef) {
+        super(changeDetectorRef);
     }
 }
 
@@ -151,7 +70,7 @@ export const MC_POPOVER_SCROLL_STRATEGY =
 
 /** @docs-private */
 export function mcPopoverScrollStrategyFactory(overlay: Overlay): () => ScrollStrategy {
-    return () => overlay.scrollStrategies.reposition({scrollThrottle: 20});
+    return () => overlay.scrollStrategies.reposition({ scrollThrottle: 20 });
 }
 
 /** @docs-private */
@@ -183,23 +102,22 @@ const ANCHOR_MIN_HEIGHT_WIDTH: number = 44; // tslint:disable-line
     selector: '[mcPopover]',
     exportAs: 'mcPopover',
     host: {
+        '[class.mc-popover_open]': 'isOpen',
         '(keydown)': 'handleKeydown($event)',
-        '(touchend)': 'handleTouchend()',
-        '[class.mc-popover_open]': 'isOpen'
+        '(touchend)': 'handleTouchend()'
     }
 })
 export class McPopover implements OnInit, OnDestroy {
     isOpen: boolean = false;
 
+    @Input('mcPopoverEnterDelay') enterDelay: number = 0;
+    @Input('mcPopoverLeaveDelay') leaveDelay: number = 0;
+
+    @Output('mcPopoverVisibleChange') visibleChange = new EventEmitter<boolean>();
+
+    @Output('mcPopoverPlacementChange') placementChange: EventEmitter<string> = new EventEmitter();
+
     @Input() backdropClass: string = 'cdk-overlay-transparent-backdrop';
-
-    @Input('mcPopoverEnterDelay') enterDelay: number;
-    @Input('mcPopoverLeaveDelay') leaveDelay: number;
-
-    @Output('mcPopoverVisibleChange') mcVisibleChange = new EventEmitter<boolean>();
-
-    @Output('mcPopoverPositionStrategyPlacementChange')
-    mcPositionStrategyPlacementChange: EventEmitter<string> = new EventEmitter();
 
     @Input()
     get hasBackdrop(): boolean {
@@ -216,6 +134,7 @@ export class McPopover implements OnInit, OnDestroy {
     get header(): string | TemplateRef<any> {
         return this._header;
     }
+
     set header(value: string | TemplateRef<any>) {
         this._header = value;
         this.updateCompValue('header', value);
@@ -224,12 +143,14 @@ export class McPopover implements OnInit, OnDestroy {
             this.updatePosition(true);
         }
     }
+
     private _header: string | TemplateRef<any>;
 
     @Input('mcPopoverContent')
     get content(): string | TemplateRef<any> {
         return this._content;
     }
+
     set content(value: string | TemplateRef<any>) {
         this._content = value;
         this.updateCompValue('content', value);
@@ -238,12 +159,14 @@ export class McPopover implements OnInit, OnDestroy {
             this.updatePosition(true);
         }
     }
+
     private _content: string | TemplateRef<any>;
 
     @Input('mcPopoverFooter')
     get footer(): string | TemplateRef<any> {
         return this._footer;
     }
+
     set footer(value: string | TemplateRef<any>) {
         this._footer = value;
         this.updateCompValue('footer', value);
@@ -252,17 +175,18 @@ export class McPopover implements OnInit, OnDestroy {
             this.updatePosition(true);
         }
     }
-    private _footer: string | TemplateRef<any>;
 
-    private $unsubscribe = new Subject<void>();
+    private _footer: string | TemplateRef<any>;
 
     @Input('mcPopoverDisabled')
     get disabled(): boolean {
         return this._disabled;
     }
+
     set disabled(value) {
         this._disabled = coerceBooleanProperty(value);
     }
+
     private _disabled: boolean = false;
 
     @Input('mcPopoverTrigger')
@@ -286,12 +210,13 @@ export class McPopover implements OnInit, OnDestroy {
     get size(): string {
         return this.popoverSize;
     }
+
     set size(value: string) {
         if (['small', 'normal', 'large'].includes(value)) {
             this.popoverSize = value;
 
             if (this.popoverInstance) {
-                this.popoverInstance.updateClassMap(this.size, this.placement, this.popoverClass);
+                this.popoverInstance.updateClassMap(POSITION_TO_CSS_MAP[this.placement], this.popoverClass, this.size);
             }
         } else {
             this.popoverSize = 'normal';
@@ -304,6 +229,7 @@ export class McPopover implements OnInit, OnDestroy {
     get mcPlacementPriority() {
         return this._mcPlacementPriority;
     }
+
     set mcPlacementPriority(value) {
         if (value && value.length > 0) {
             this._mcPlacementPriority = value;
@@ -311,36 +237,41 @@ export class McPopover implements OnInit, OnDestroy {
             this._mcPlacementPriority = null;
         }
     }
+
     private _mcPlacementPriority: string | string[] | null = null;
 
     @Input('mcPopoverPlacement')
     get placement(): string {
         return this._placement;
     }
+
     set placement(value: string) {
         if (value) {
             this._placement = value;
 
             if (this.popoverInstance) {
-                this.popoverInstance.updateClassMap(this.size, this.placement, this.popoverClass);
+                this.popoverInstance.updateClassMap(POSITION_TO_CSS_MAP[this.placement], this.popoverClass, this.size);
             }
         } else {
             this._placement = 'top';
         }
     }
+
     private _placement: string = 'top';
 
     @Input('mcPopoverClass')
     get popoverClass() {
         return this._popoverClass;
     }
+
     set popoverClass(value: string) {
         this._popoverClass = value;
 
         if (this.popoverInstance) {
-            this.popoverInstance.updateClassMap(this.size, this.placement, this.popoverClass);
+            this.popoverInstance.updateClassMap(POSITION_TO_CSS_MAP[this.placement], this.popoverClass, this.size);
         }
     }
+
     private _popoverClass: string;
 
     @Input('mcPopoverVisible')
@@ -370,7 +301,7 @@ export class McPopover implements OnInit, OnDestroy {
     private defaultPositionsMap: { [key: string]: string};
     private popoverInstance: McPopoverComponent | null;
 
-    private closeSubscription = Subscription.EMPTY;
+    private closingActionsSubscription = Subscription.EMPTY;
 
     private manualListeners = new Map<string, EventListenerOrEventListenerObject>();
     private readonly destroyed = new Subject<void>();
@@ -388,140 +319,8 @@ export class McPopover implements OnInit, OnDestroy {
         this.defaultPositionsMap = DEFAULT_4_POSITIONS_TO_CSS_MAP;
     }
 
-    /** Create the overlay config and position strategy */
-    createOverlay(): OverlayRef {
-        if (this.overlayRef) {
-            this.overlayRef.dispose();
-        }
-
-        // Create connected position strategy that listens for scroll events to reposition.
-        const strategy = this.overlay.position()
-            .flexibleConnectedTo(this.elementRef)
-            .withTransformOriginOn('.mc-popover')
-            .withFlexibleDimensions(false)
-            .withViewportMargin(VIEWPORT_MARGIN)
-            .withPositions([...EXTENDED_OVERLAY_POSITIONS]);
-
-        const scrollableAncestors = this.scrollDispatcher.getAncestorScrollContainers(this.elementRef);
-
-        strategy.withScrollableContainers(scrollableAncestors);
-
-        strategy.positionChanges
-            .pipe(takeUntil(this.destroyed))
-            .subscribe((change) => {
-            if (this.popoverInstance) {
-                this.onPositionChange(change);
-                if (change.scrollableViewProperties.isOverlayClipped && this.popoverInstance.isVisible()) {
-                    // After position changes occur and the overlay is clipped by
-                    // a parent scrollable then close the popover.
-                    this.ngZone.run(() => this.hide());
-                }
-            }
-        });
-
-        this.overlayRef = this.overlay.create({
-            direction: this.direction,
-            positionStrategy: strategy,
-            panelClass: 'mc-popover__panel',
-            scrollStrategy: this.scrollStrategy(),
-            hasBackdrop: this.hasBackdrop,
-            backdropClass: this.backdropClass
-        });
-
-        this.closeSubscription = this.closingActions()
-            // need for close popover on trigger click, because popover fire unexpected events: hide and then show
-            // todo need fix it
-            .pipe(delay(0))
-            .subscribe(() => this.hide());
-
-        this.updatePosition();
-
-        this.overlayRef.detachments()
-            .pipe(takeUntil(this.destroyed))
-            .subscribe(() => this.detach());
-
-        return this.overlayRef;
-    }
-
-    detach() {
-        if (this.overlayRef && this.overlayRef.hasAttached()) {
-            this.overlayRef.detach();
-        }
-
-        this.popoverInstance = null;
-    }
-
-    onPositionChange($event: ConnectedOverlayPositionChange): void {
-        let updatedPlacement = this.placement;
-        Object.keys(this.availablePositions).some((key) => {
-            if ($event.connectionPair.originX === this.availablePositions[key].originX &&
-                $event.connectionPair.originY === this.availablePositions[key].originY &&
-                $event.connectionPair.overlayX === this.availablePositions[key].overlayX &&
-                $event.connectionPair.overlayY === this.availablePositions[key].overlayY) {
-                updatedPlacement = key;
-
-                return true;
-            }
-
-            return false;
-        });
-
-        this.mcPositionStrategyPlacementChange.emit(updatedPlacement);
-
-        if (this.popoverInstance) {
-            this.popoverInstance.updateClassMap(this.size, this.placement, this.popoverClass);
-            this.popoverInstance.markForCheck();
-        }
-
-        if (!this.defaultPositionsMap[updatedPlacement]) {
-            this.handlePositionUpdate(updatedPlacement);
-        }
-    }
-
-    handlePositionUpdate(updatedPlacement: string) {
-        if (!this.overlayRef) {
-            this.overlayRef = this.createOverlay();
-        }
-
-        const currentContainer = this.overlayRef.overlayElement.style;
-        const elementHeight = this.hostView.element.nativeElement.clientHeight;
-        const elementWidth = this.hostView.element.nativeElement.clientWidth;
-        const verticalOffset: number = Math.floor(elementHeight / 2); // tslint:disable-line
-        const horizontalOffset: number = Math.floor(elementWidth / 2 - 6); // tslint:disable-line
-        const offsets: { [key: string]: number } = {
-            top: verticalOffset,
-            bottom: verticalOffset,
-            right: horizontalOffset,
-            left: horizontalOffset
-        };
-
-        const styleProperty = updatedPlacement.split(/(?=[A-Z])/)[1].toLowerCase();
-
-        if (((styleProperty === 'top' || styleProperty === 'bottom') &&
-            elementHeight > ANCHOR_MIN_HEIGHT_WIDTH) ||
-            ((styleProperty === 'left' || styleProperty === 'right') &&
-            elementWidth > ANCHOR_MIN_HEIGHT_WIDTH)) {
-            return;
-        }
-
-        if (!this.overlayRef.overlayElement.style[styleProperty]) {
-            this.overlayRef.overlayElement.style[styleProperty] = '0px';
-        }
-
-        this.overlayRef.overlayElement.style[styleProperty] =
-            `${parseInt(currentContainer[styleProperty].split('px')[0], 10) +
-            offsets[styleProperty] - POPOVER_ARROW_BORDER_DISTANCE}px`;
-    }
-
-    // tslint:disable-next-line:no-any
-    updateCompValue(key: string, value: any): void {
-        if (value && this.popoverInstance) {
-            this.popoverInstance[key] = value;
-        }
-    }
-
     ngOnInit(): void {
-        this.initElementRefListeners();
+        this.initListeners();
     }
 
     ngOnDestroy(): void {
@@ -529,16 +328,14 @@ export class McPopover implements OnInit, OnDestroy {
             this.overlayRef.dispose();
         }
 
-        this.manualListeners.forEach((listener, event) => {
-            this.elementRef.nativeElement.removeEventListener(event, listener);
-        });
+        this.manualListeners.forEach(this.removeEventListener);
 
         this.manualListeners.clear();
 
-        this.$unsubscribe.next();
-        this.$unsubscribe.complete();
+        this.destroyed.next();
+        this.destroyed.complete();
 
-        this.closeSubscription.unsubscribe();
+        this.closingActionsSubscription.unsubscribe();
     }
 
     handleKeydown(e: KeyboardEvent) {
@@ -552,53 +349,7 @@ export class McPopover implements OnInit, OnDestroy {
         this.hide();
     }
 
-    initElementRefListeners() {
-        if (this.trigger === PopoverTriggers.Click) {
-            this.manualListeners
-                .set('click', () => this.show())
-                .forEach((listener, event) => {
-                    this.elementRef.nativeElement.addEventListener(event, listener);
-                });
-        } else if (this.trigger === PopoverTriggers.Hover) {
-            this.manualListeners
-                .set('mouseenter', () => this.show())
-                .set('mouseleave', () => this.hide())
-                .forEach((listener, event) => {
-                    this.elementRef.nativeElement.addEventListener(event, listener);
-                });
-        } else if (this.trigger === PopoverTriggers.Focus) {
-            this.manualListeners
-                .set('focus', () => this.show())
-                .set('blur', () => this.hide())
-                .forEach((listener, event) => {
-                    this.elementRef.nativeElement.addEventListener(event, listener);
-                });
-        }
-    }
-
-    registerResizeHandler() {
-        // The resize handler is currently responsible for detecting slider dimension
-        // changes and therefore doesn't cause a value change that needs to be propagated.
-        this.ngZone.runOutsideAngular(() => {
-            window.addEventListener('resize', this.resizeListener);
-        });
-    }
-
-    deregisterResizeHandler() {
-        window.removeEventListener('resize', this.resizeListener);
-    }
-
-    resetListeners() {
-        if (this.manualListeners.size) {
-            this.manualListeners.forEach((listener, event) => {
-                this.elementRef.nativeElement.removeEventListener(event, listener);
-            });
-            this.manualListeners.clear();
-            this.initElementRefListeners();
-        }
-    }
-
-    show(): void {
+    show(delay: number = this.enterDelay): void {
         if (this.disabled) { return; }
 
         if (!this.popoverInstance) {
@@ -608,9 +359,12 @@ export class McPopover implements OnInit, OnDestroy {
             this.portal = this.portal || new ComponentPortal(McPopoverComponent, this.hostView);
 
             this.popoverInstance = overlayRef.attach(this.portal).instance;
+
             this.popoverInstance.afterHidden()
                 .pipe(takeUntil(this.destroyed))
-                .subscribe(() => this.detach());
+                .subscribe(this.detach);
+
+            this.popoverInstance.updateClassMap(POSITION_TO_CSS_MAP[this.placement], this.popoverClass, this.size);
 
             const properties = [
                 'header',
@@ -618,25 +372,23 @@ export class McPopover implements OnInit, OnDestroy {
                 'footer'
             ];
 
-            this.popoverInstance.updateClassMap(this.size, this.placement, this.popoverClass);
-
             properties.forEach((property) => this.updateCompValue(property, this[property]));
 
-            this.popoverInstance.mcVisibleChange
-                .pipe(takeUntil(this.$unsubscribe), distinctUntilChanged())
-                .subscribe((data) => {
-                    this.visible = data;
-                    this.mcVisibleChange.emit(data);
-                    this.isOpen = data;
+            this.popoverInstance.visibleChange
+                .pipe(takeUntil(this.destroyed), distinctUntilChanged())
+                .subscribe((value) => {
+                    this.visible = value;
+                    this.visibleChange.emit(value);
+                    this.isOpen = value;
                 });
         }
 
-        this.popoverInstance.show();
+        this.popoverInstance.show(delay);
     }
 
-    hide(): void {
+    hide(delay: number = this.leaveDelay): void {
         if (this.popoverInstance) {
-            this.popoverInstance.hide();
+            this.popoverInstance.hide(delay);
         }
     }
 
@@ -646,20 +398,183 @@ export class McPopover implements OnInit, OnDestroy {
             this.overlayRef = this.createOverlay();
         }
 
-        const position = this.overlayRef.getConfig().positionStrategy as FlexibleConnectedPositionStrategy;
-        position.withPositions(this.getPrioritizedPositions()).withPush(true);
+        const position = (this.overlayRef.getConfig().positionStrategy as FlexibleConnectedPositionStrategy)
+            .withPositions(this.getPrioritizedPositions())
+            .withPush(true);
 
         if (reapplyPosition) {
             setTimeout(() => position.reapplyLastPosition());
         }
     }
 
-    private closingActions() {
-        const backdrop = this.overlayRef!.backdropClick();
-        const outsidePointerEvents = this.hasBackdrop ? NEVER : this.overlayRef!.outsidePointerEvents();
-        const detachments = this.overlayRef!.detachments();
+    /** Create the overlay config and position strategy */
+    private createOverlay(): OverlayRef {
+        if (this.overlayRef) {
+            this.overlayRef.dispose();
+        }
 
-        return merge(backdrop, outsidePointerEvents, detachments);
+        // Create connected position strategy that listens for scroll events to reposition.
+        const strategy = this.overlay.position()
+            .flexibleConnectedTo(this.elementRef)
+            .withTransformOriginOn('.mc-popover')
+            .withFlexibleDimensions(false)
+            .withViewportMargin(VIEWPORT_MARGIN)
+            .withPositions([...EXTENDED_OVERLAY_POSITIONS])
+            .withScrollableContainers(this.scrollDispatcher.getAncestorScrollContainers(this.elementRef));
+
+        strategy.positionChanges
+            .pipe(takeUntil(this.destroyed))
+            .subscribe((change) => {
+                if (this.popoverInstance) {
+                    this.onPositionChange(change);
+
+                    if (change.scrollableViewProperties.isOverlayClipped && this.popoverInstance.isVisible()) {
+                        // After position changes occur and the overlay is clipped by
+                        // a parent scrollable then close the popover.
+                        this.ngZone.run(() => this.hide());
+                    }
+                }
+            });
+
+        this.overlayRef = this.overlay.create({
+            direction: this.direction,
+            positionStrategy: strategy,
+            panelClass: 'mc-popover__panel',
+            scrollStrategy: this.scrollStrategy(),
+            hasBackdrop: this.hasBackdrop,
+            backdropClass: this.backdropClass
+        });
+
+        this.closingActionsSubscription = this.closingActions()
+            .pipe(rxDelay(0))
+            .subscribe(() => this.hide());
+
+        this.updatePosition();
+
+        this.overlayRef.detachments()
+            .pipe(takeUntil(this.destroyed))
+            .subscribe(this.detach);
+
+        return this.overlayRef;
+    }
+
+    private detach = () => {
+        if (this.overlayRef && this.overlayRef.hasAttached()) {
+            this.overlayRef.detach();
+        }
+
+        this.popoverInstance = null;
+    }
+
+    private handlePositionUpdate(updatedPlacement: string) {
+        if (!this.overlayRef) {
+            this.overlayRef = this.createOverlay();
+        }
+
+        const { clientHeight, clientWidth } = this.hostView.element.nativeElement;
+        const verticalOffset: number = Math.floor(clientHeight / 2); // tslint:disable-line
+        const horizontalOffset: number = Math.floor(clientWidth / 2 - 6); // tslint:disable-line
+        const offsets = {
+            top: verticalOffset,
+            bottom: verticalOffset,
+            right: horizontalOffset,
+            left: horizontalOffset
+        };
+
+        const styleProperty = updatedPlacement.split(/(?=[A-Z])/)[1].toLowerCase();
+
+        if (((styleProperty === 'top' || styleProperty === 'bottom') && clientHeight > ANCHOR_MIN_HEIGHT_WIDTH) ||
+            ((styleProperty === 'left' || styleProperty === 'right') && clientWidth > ANCHOR_MIN_HEIGHT_WIDTH)
+        ) {
+            return;
+        }
+
+        const container = this.overlayRef.overlayElement.style;
+
+        if (!container[styleProperty]) {
+            container[styleProperty] = '0px';
+        }
+
+        const margin = parseInt(container[styleProperty].split('px')[0]);
+
+        container[styleProperty] = `${margin + offsets[styleProperty] - POPOVER_ARROW_BORDER_DISTANCE}px`;
+    }
+
+    // tslint:disable-next-line:no-any
+    private updateCompValue(key: string, value: any): void {
+        if (value && this.popoverInstance) {
+            this.popoverInstance[key] = value;
+        }
+    }
+
+    private initListeners() {
+        if (this.trigger === PopoverTriggers.Click) {
+            this.manualListeners
+                .set('click', () => this.show())
+                .forEach(this.addEventListener);
+        } else if (this.trigger === PopoverTriggers.Hover) {
+            this.manualListeners
+                .set('mouseenter', () => this.show())
+                .set('mouseleave', () => this.hide())
+                .forEach(this.addEventListener);
+        } else if (this.trigger === PopoverTriggers.Focus) {
+            this.manualListeners
+                .set('focus', () => this.show())
+                .set('blur', () => this.hide())
+                .forEach(this.addEventListener);
+        }
+    }
+
+    private addEventListener = (listener: EventListener | EventListenerObject, event: string) => {
+        this.elementRef.nativeElement.addEventListener(event, listener);
+    }
+
+    private removeEventListener = (listener: EventListener | EventListenerObject, event: string) => {
+        this.elementRef.nativeElement.addEventListener(event, listener);
+    }
+
+    private resetListeners() {
+        if (this.manualListeners.size) {
+            this.manualListeners.forEach(this.removeEventListener);
+
+            this.manualListeners.clear();
+            this.initListeners();
+        }
+    }
+
+    private onPositionChange($event: ConnectedOverlayPositionChange): void {
+        let updatedPlacement = this.placement;
+
+        const { originX, originY, overlayX, overlayY } = $event.connectionPair;
+
+        Object.keys(this.availablePositions).some((key) => {
+            if (originX === this.availablePositions[key].originX && originY === this.availablePositions[key].originY &&
+                overlayX === this.availablePositions[key].overlayX && overlayY === this.availablePositions[key].overlayY
+            ) {
+                updatedPlacement = key;
+
+                return true;
+            }
+
+            return false;
+        });
+
+        this.placementChange.emit(updatedPlacement);
+
+        this.popoverInstance!.updateClassMap(POSITION_TO_CSS_MAP[this.placement], this.popoverClass, this.size);
+        this.popoverInstance!.markForCheck();
+
+        if (!this.defaultPositionsMap[updatedPlacement]) {
+            this.handlePositionUpdate(updatedPlacement);
+        }
+    }
+
+    private closingActions() {
+        return merge(
+            this.overlayRef!.backdropClick(),
+            this.hasBackdrop ? NEVER : this.overlayRef!.outsidePointerEvents(),
+            this.overlayRef!.detachments()
+        );
     }
 
     private getPriorityPlacementStrategy(value: string | string[]): ConnectionPositionPair[] {
@@ -686,6 +601,4 @@ export class McPopover implements OnInit, OnDestroy {
 
         return POSITION_PRIORITY_STRATEGY[this.placement];
     }
-
-    private resizeListener = () => this.updatePosition();
 }

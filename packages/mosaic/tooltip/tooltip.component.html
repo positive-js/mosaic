@@ -6,8 +6,8 @@
     <div class="mc-tooltip-content">
         <div #arrow class="mc-tooltip-arrow"></div>
         <div class="mc-tooltip-inner">
-            <ng-container *ngIf="isTemplateRef" [ngTemplateOutlet]="title"></ng-container>
-            <ng-container *ngIf="!isTemplateRef">
+            <ng-container *ngIf="isTemplateRef(title)" [ngTemplateOutlet]="title"></ng-container>
+            <ng-container *ngIf="!isTemplateRef(title)">
                 <div>{{ title }}</div>
             </ng-container>
         </div>
