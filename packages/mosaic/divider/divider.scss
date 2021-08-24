@@ -18,11 +18,15 @@
 .mc-divider {
     display: block;
     margin: 0;
-    border-top-width: var(--mc-divider-size-width, $divider-size-width);
-    border-top-style: solid;
+
+    &.mc-divider_horizontal {
+        border-top-width: var(--mc-divider-size-width, $divider-size-width);
+        border-top-style: solid;
+    }
 
     &.mc-divider_vertical {
-        border-top: 0;
+        height: 100%;
+
         border-right-width: var(--mc-divider-size-width, $divider-size-width);
         border-right-style: solid;
     }

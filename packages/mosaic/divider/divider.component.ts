@@ -6,16 +6,14 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
     selector: 'mc-divider',
     host: {
         class: 'mc-divider',
-        role: 'separator',
-        '[attr.aria-orientation]': 'vertical ? "vertical" : "horizontal"',
         '[class.mc-divider_vertical]': 'vertical',
+        '[class.mc-divider_horizontal]': '!vertical',
         '[class.mc-divider_inset]': 'inset'
     },
     template: '',
     styleUrls: ['divider.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    preserveWhitespaces: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class McDivider {
     // Whether the divider is vertically aligned.
