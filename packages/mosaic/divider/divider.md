@@ -23,9 +23,7 @@ Add the `inset` attribute in order to set whether or not the divider is an inset
 
 Add the `vertical` attribute in order to set whether or not the divider is vertically-oriented.
 
-```html
-<mc-divider [vertical]="true"></mc-divider>
-```
+<!-- example(divider-vertical) -->
 
 
 ### Lists with inset dividers

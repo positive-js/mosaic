@@ -1,0 +1,11 @@
+@import '../../mosaic/core/visual/prebuilt/default-visual';
+
+@include mosaic-visual();
+
+.docs-divider-container {
+    margin: 20px;
+}
+
+.docs-divider-vertical-container {
+    height: 50px;
+}

@@ -1,7 +1,7 @@
 @mixin mc-divider-theme($theme) {
     $foreground: map-get($theme, foreground);
 
-    .mc-divider {
+    .mc-divider_horizontal {
         border-top-color: map-get($foreground, divider);
     }
 
