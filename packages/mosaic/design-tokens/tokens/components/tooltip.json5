@@ -7,7 +7,7 @@
 
             'warning': {
                 background: { value: '{light-color-scheme.warning.palette.value.60.value}' },
-                text: { value: '{light-color-scheme.second.palette.value.contrast.700.value}' },
+                text: { value: '{light-color-scheme.second.palette.value.700.value}' },
                 border: { value: '{light-color-scheme.warning.palette.value.200.value}' }
             }
         },
@@ -18,7 +18,7 @@
 
             'warning': {
                 background: { value: '{dark-color-scheme.warning.palette.value.60.value}' },
-                text: { value: '{dark-color-scheme.second.palette.value.contrast.700.value}' },
+                text: { value: '{dark-color-scheme.second.palette.value.700.value}' },
                 border: { value: '{dark-color-scheme.warning.palette.value.200.value}' }
             }
         },
