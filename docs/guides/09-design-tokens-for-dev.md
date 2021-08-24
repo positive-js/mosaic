@@ -10,7 +10,9 @@ For example, to the default-theme folder
 
 ```
 .
-`-- src/
+ -- scripts/
+    |-- build-tokens.js
+ -- src/
     |-- app
     |-- assets
     |-- environments
@@ -39,10 +41,34 @@ For example, to the default-theme folder
     |-- favicon.ico
     |-- index.html
     |-- styles.scss
-    `-- main.ts
+    -- main.ts
 ```
 
-2. Include Design Tokens in ```styles.scss```
+
+
+2. Create build script
+
+```javascript
+const buildTokens = require('@ptsecurity/mosaic/design-tokens/style-dictionary/build');
+
+
+const mosaicTokensProps = '../node_modules/@ptsecurity/mosaic/design-tokens/tokens/properties/**/*.json5';
+const mosaicTokensComponents = '../node_modules/@packages/mosaic/design-tokens/tokens/components/**/*.json5';
+
+buildTokens([
+    {
+        name: 'default-theme',
+        buildPath: [
+            mosaicTokensProps,
+            mosaicTokensComponents
+        ],
+        outputPath: 'src/styles/default-theme/'
+    }
+]);
+
+```
+
+3. Include Design Tokens in ```styles.scss```
 
 ```scss
 @import './styles/fonts';
