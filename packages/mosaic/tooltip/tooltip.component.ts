@@ -1,18 +1,16 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
-    ConnectedOverlayPositionChange,
     Overlay,
-    OverlayRef,
     ScrollDispatcher,
     ScrollStrategy,
     FlexibleConnectedPositionStrategy,
     OverlayConnectionPosition,
     OriginConnectionPosition,
     HorizontalConnectionPos,
-    VerticalConnectionPos
+    VerticalConnectionPos,
+    ConnectedOverlayPositionChange
 } from '@angular/cdk/overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -24,20 +22,14 @@ import {
     InjectionToken,
     Input,
     NgZone,
-    OnDestroy,
-    OnInit,
     Optional,
     Output,
-    TemplateRef,
+    TemplateRef, Type,
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { ESCAPE } from '@ptsecurity/cdk/keycodes';
-import { DEFAULT_4_POSITIONS, POSITION_MAP } from '@ptsecurity/mosaic/core';
-import { Subject } from 'rxjs';
-import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
-import { ArrowPlacements, McBaseTooltip } from '../core/tooltip';
+import { ArrowPlacements, McBaseTooltip, McBaseTooltipTrigger } from '../core/tooltip';
 
 import { mcTooltipAnimations } from './tooltip.animations';
 
@@ -48,8 +40,7 @@ import { mcTooltipAnimations } from './tooltip.animations';
     templateUrl: './tooltip.component.html',
     styleUrls: ['./tooltip.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    preserveWhitespaces: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class McTooltipComponent extends McBaseTooltip {
     title: string | TemplateRef<any>;
@@ -87,24 +78,20 @@ export function getMcTooltipInvalidPositionError(position: string) {
     return Error(`McTooltip position "${position}" is invalid.`);
 }
 
-const VIEWPORT_MARGIN: number = 8;
-
 @Directive({
     selector: '[mcTooltip]',
     exportAs: 'mcTooltip',
     host: {
-        '[class.mc-tooltip-open]': 'isOpen',
+        '[class.mc-tooltip_open]': 'isOpen',
 
         '(keydown)': 'handleKeydown($event)',
         '(touchend)': 'handleTouchend()'
     }
 })
-export class McTooltip implements OnInit, OnDestroy {
-    isOpen: boolean = false;
-
+export class McTooltip extends McBaseTooltipTrigger<McTooltipComponent> {
     @Input('mcArrowPlacement') arrowPlacement: ArrowPlacements;
 
-    @Output('mcTooltipVisibleChange') visibleChange = new EventEmitter<boolean>();
+    @Output('mcTooltipChange') visibleChange = new EventEmitter<boolean>();
 
     @Input('mcTooltip')
     get title(): string | TemplateRef<any> {
@@ -114,8 +101,8 @@ export class McTooltip implements OnInit, OnDestroy {
     set title(title: string | TemplateRef<any>) {
         this._title = title;
 
-        if (this.tooltipInstance) {
-            this.tooltipInstance.title = title;
+        if (this.instance) {
+            this.instance!.title = title;
         }
     }
 
@@ -155,12 +142,10 @@ export class McTooltip implements OnInit, OnDestroy {
     }
 
     set placement(value: string) {
-        if (value) {
+        if (value !== this._placement) {
             this._placement = value;
 
-            if (this.tooltipInstance) {
-                this.tooltipInstance.updateClassMap(this.placement, this.tooltipClass);
-            }
+            this.updateClassMap();
         } else {
             this._placement = 'top';
         }
@@ -173,23 +158,21 @@ export class McTooltip implements OnInit, OnDestroy {
     private _placement: string = 'top';
 
     @Input('mcTooltipClass')
-    get tooltipClass(): string {
-        return this._tooltipClass;
+    get customClass(): string {
+        return this._customClass;
     }
 
-    set tooltipClass(value: string) {
+    set customClass(value: string) {
         if (value) {
-            this._tooltipClass = value;
+            this._customClass = value;
 
-            if (this.tooltipInstance) {
-                this.tooltipInstance.updateClassMap(this.placement, this.tooltipClass);
-            }
+            this.updateClassMap();
         } else {
-            this._tooltipClass = '';
+            this._customClass = '';
         }
     }
 
-    private _tooltipClass: string;
+    private _customClass: string;
 
     @Input('mcVisible')
     get visible(): boolean {
@@ -212,130 +195,96 @@ export class McTooltip implements OnInit, OnDestroy {
 
     private _visible: boolean;
 
-    private overlayRef: OverlayRef | null;
-    private portal: ComponentPortal<McTooltipComponent>;
-    private availablePositions: any;
-    private tooltipInstance: McTooltipComponent | null;
-
-    private manualListeners = new Map<string, EventListenerOrEventListenerObject>();
-    private readonly destroyed = new Subject<void>();
-
     constructor(
-        private overlay: Overlay,
-        private elementRef: ElementRef,
-        private ngZone: NgZone,
-        private scrollDispatcher: ScrollDispatcher,
-        private hostView: ViewContainerRef,
-        @Inject(MC_TOOLTIP_SCROLL_STRATEGY) private scrollStrategy,
-        @Optional() private direction: Directionality
+        overlay: Overlay,
+        elementRef: ElementRef,
+        ngZone: NgZone,
+        scrollDispatcher: ScrollDispatcher,
+        hostView: ViewContainerRef,
+        @Inject(MC_TOOLTIP_SCROLL_STRATEGY) scrollStrategy,
+        @Optional() direction: Directionality
     ) {
-        this.availablePositions = POSITION_MAP;
+        super(overlay, elementRef, ngZone, scrollDispatcher, hostView, scrollStrategy, direction);
     }
 
-    ngOnInit(): void {
-        this.initListeners();
-    }
+    /**
+     * Returns the origin position and a fallback position based on the user's position preference.
+     * The fallback position is the inverse of the origin (e.g. `'below' -> 'above'`).
+     */
+    getOrigin(): { main: OriginConnectionPosition; fallback: OriginConnectionPosition } {
+        const position = this.placement;
+        const isLtr = !this.direction || this.direction.value === 'ltr';
+        let originPosition: OriginConnectionPosition;
 
-    ngOnDestroy(): void {
-        if (this.overlayRef) {
-            this.overlayRef.dispose();
+        if (position === 'top' || position === 'bottom') {
+            originPosition = { originX: 'center', originY: position === 'top' ? 'top' : 'bottom' };
+        } else if (position === 'top' || (position === 'left' && isLtr) || (position === 'right' && !isLtr)) {
+            originPosition = { originX: 'start', originY: 'center' };
+        } else if (position === 'bottom' || (position === 'right' && isLtr) || (position === 'left' && !isLtr)) {
+            originPosition = { originX: 'end', originY: 'center' };
+        } else {
+            throw getMcTooltipInvalidPositionError(position);
         }
 
-        this.manualListeners.forEach(this.removeEventListener);
+        const { x, y } = this.invertPosition(originPosition.originX, originPosition.originY);
 
-        this.manualListeners.clear();
-
-        this.destroyed.next();
-        this.destroyed.complete();
+        return {
+            main: originPosition,
+            fallback: { originX: x, originY: y }
+        };
     }
 
-    /** Create the overlay config and position strategy */
-    createOverlay(): OverlayRef {
-        if (this.overlayRef) { return this.overlayRef; }
+    /** Returns the overlay position and a fallback position based on the user's preference */
+    getOverlayPosition(): { main: OverlayConnectionPosition; fallback: OverlayConnectionPosition } {
+        const position = this.placement;
+        const isLtr = !this.direction || this.direction.value === 'ltr';
+        let overlayPosition: OverlayConnectionPosition;
 
-        // Create connected position strategy that listens for scroll events to reposition.
-        const strategy = this.overlay.position()
-            .flexibleConnectedTo(this.elementRef)
-            .withTransformOriginOn('.mc-tooltip')
-            .withFlexibleDimensions(false)
-            .withViewportMargin(VIEWPORT_MARGIN)
-            .withPositions([...DEFAULT_4_POSITIONS]);
-
-        const scrollableAncestors = this.scrollDispatcher.getAncestorScrollContainers(this.elementRef);
-
-        strategy.withScrollableContainers(scrollableAncestors);
-
-        strategy.positionChanges
-            .pipe(takeUntil(this.destroyed))
-            .subscribe((change) => {
-                if (this.tooltipInstance) {
-                    this.onPositionChange(change);
-                    if (change.scrollableViewProperties.isOverlayClipped && this.tooltipInstance.isVisible()) {
-                        // After position changes occur and the overlay is clipped by
-                        // a parent scrollable then close the tooltip.
-                        this.ngZone.run(() => this.hide());
-                    }
-                }
-            });
-
-        this.overlayRef = this.overlay.create({
-            direction: this.direction,
-            positionStrategy: strategy,
-            panelClass: 'mc-tooltip-panel',
-            scrollStrategy: this.scrollStrategy()
-        });
-
-        this.updatePosition();
-
-        this.overlayRef.detachments()
-            .pipe(takeUntil(this.destroyed))
-            .subscribe(() => this.detach());
-
-        this.overlayRef.outsidePointerEvents()
-            .pipe(takeUntil(this.destroyed))
-            .subscribe(() => this.tooltipInstance?.handleBodyInteraction());
-
-        return this.overlayRef;
-    }
-
-    detach() {
-        if (this.overlayRef && this.overlayRef.hasAttached()) {
-            this.overlayRef.detach();
+        if (position === 'top') {
+            overlayPosition = { overlayX: 'center', overlayY: 'bottom' };
+        } else if (position === 'bottom') {
+            overlayPosition = { overlayX: 'center', overlayY: 'top' };
+        } else if (position === 'top' || (position === 'left' && isLtr) || (position === 'right' && !isLtr)) {
+            overlayPosition = { overlayX: 'end', overlayY: 'center' };
+        } else if (position === 'bottom' || (position === 'right' && isLtr) || (position === 'left' && !isLtr)) {
+            overlayPosition = { overlayX: 'start', overlayY: 'center' };
+        } else {
+            throw getMcTooltipInvalidPositionError(position);
         }
 
-        this.tooltipInstance = null;
+        const { x, y } = this.invertPosition(overlayPosition.overlayX, overlayPosition.overlayY);
+
+        return {
+            main: overlayPosition,
+            fallback: { overlayX: x, overlayY: y }
+        };
     }
 
-    onPositionChange($event: ConnectedOverlayPositionChange): void {
-        let newPlacement = this.placement;
+    /** Updates the position of the current tooltip. */
+    updatePosition() {
+        if (!this.overlayRef) {
+            this.overlayRef = this.createOverlay();
+        }
 
-        Object
-            .keys(this.availablePositions)
-            .some((key) => {
-                if (
-                    $event.connectionPair.originX === this.availablePositions[key].originX &&
-                    $event.connectionPair.originY === this.availablePositions[key].originY &&
-                    $event.connectionPair.overlayX === this.availablePositions[key].overlayX &&
-                    $event.connectionPair.overlayY === this.availablePositions[key].overlayY
-                ) {
-                    newPlacement = key;
+        const position = this.overlayRef.getConfig().positionStrategy as FlexibleConnectedPositionStrategy;
+        const origin = this.getOrigin();
+        const overlay = this.getOverlayPosition();
 
-                    return true;
-                }
+        position.withPositions([
+            { ...origin.main, ...overlay.main },
+            { ...origin.fallback, ...overlay.fallback }
+        ]);
 
-                return false;
-            });
-
-        this.tooltipInstance?.updateClassMap(newPlacement, this.tooltipClass);
-        this.tooltipInstance?.markForCheck();
-
-        this.handlePositioningUpdate();
+        if (this.instance) {
+            position.apply();
+            window.dispatchEvent(new Event('resize'));
+        }
     }
 
     handlePositioningUpdate() {
         this.overlayRef = this.createOverlay();
 
-        if (this.placement === 'right' || this.placement === 'left') {
+        if (['right', 'left'].includes(this.placement)) {
             const halfDelimiter = 2;
             const overlayElemHeight = this.overlayRef.overlayElement.clientHeight;
             const currentContainerHeight = this.hostView.element.nativeElement.clientHeight;
@@ -363,156 +312,32 @@ export class McTooltip implements OnInit, OnDestroy {
         }
     }
 
-    handleKeydown(e: KeyboardEvent) {
-        if (this.isOpen && e.keyCode === ESCAPE) { // tslint:disable-line
-            this.hide();
-        }
+    onPositionChange($event: ConnectedOverlayPositionChange): void {
+        let newPlacement = this.placement;
+
+        const { originX, originY, overlayX, overlayY } = $event.connectionPair;
+
+        Object.keys(this.availablePositions).some((key) => {
+            if (
+                originX === this.availablePositions[key].originX && originY === this.availablePositions[key].originY &&
+                overlayX === this.availablePositions[key].overlayX && overlayY === this.availablePositions[key].overlayY
+            ) {
+                newPlacement = key;
+
+                return true;
+            }
+
+            return false;
+        });
+
+        this.instance!.updateClassMap(newPlacement, this.customClass);
+        this.instance!.markForCheck();
+
+        this.handlePositioningUpdate();
     }
 
-    handleTouchend() {
-        this.hide();
-    }
-
-    initListeners() {
-        this.clearListeners();
-
-        if (this.trigger.includes('hover')) {
-            this.manualListeners
-                .set('mouseenter', () => this.show())
-                .set('mouseleave', () => this.hide())
-                .forEach(this.addEventListener);
-        }
-
-        if (this.trigger.includes('focus')) {
-            this.manualListeners
-                .set('focus', () => this.show())
-                .set('blur', () => this.hide())
-                .forEach(this.addEventListener);
-        }
-    }
-
-    clearListeners() {
-        this.manualListeners.forEach(this.removeEventListener);
-
-        this.manualListeners.clear();
-    }
-
-    show(delay: number = this.enterDelay): void {
-        if (this.disabled) { return; }
-
-        if (!this.tooltipInstance) {
-            this.overlayRef = this.createOverlay();
-            this.detach();
-
-            this.portal = this.portal || new ComponentPortal(McTooltipComponent, this.hostView);
-
-            this.tooltipInstance = this.overlayRef.attach(this.portal).instance;
-            this.tooltipInstance.afterHidden()
-                .pipe(takeUntil(this.destroyed))
-                .subscribe(() => this.detach());
-
-            this.tooltipInstance.updateClassMap(this.placement, this.tooltipClass);
-            this.tooltipInstance.title = this.title;
-
-            this.tooltipInstance.visibleChange
-                .pipe(takeUntil(this.destroyed), distinctUntilChanged())
-                .subscribe((data) => {
-                    this.visible = data;
-                    this.visibleChange.emit(data);
-                    this.isOpen = data;
-                });
-        }
-
-        this.updatePosition();
-        this.tooltipInstance.show(delay);
-    }
-
-    hide(delay: number = this.leaveDelay): void {
-        if (this.tooltipInstance) {
-            this.tooltipInstance.hide(delay);
-        }
-    }
-
-    /** Updates the position of the current tooltip. */
-    updatePosition() {
-        if (!this.overlayRef) {
-            this.overlayRef = this.createOverlay();
-        }
-
-        const position = this.overlayRef.getConfig().positionStrategy as FlexibleConnectedPositionStrategy;
-        const origin = this.getOrigin();
-        const overlay = this.getOverlayPosition();
-
-        position.withPositions([
-            { ...origin.main, ...overlay.main },
-            { ...origin.fallback, ...overlay.fallback }
-        ]);
-
-        if (this.tooltipInstance) {
-            position.apply();
-            window.dispatchEvent(new Event('resize'));
-        }
-    }
-
-    /**
-     * Returns the origin position and a fallback position based on the user's position preference.
-     * The fallback position is the inverse of the origin (e.g. `'below' -> 'above'`).
-     */
-    getOrigin(): {main: OriginConnectionPosition; fallback: OriginConnectionPosition} {
-        const position = this.placement;
-        const isLtr = !this.direction || this.direction.value === 'ltr';
-        let originPosition: OriginConnectionPosition;
-
-        if (position === 'top' || position === 'bottom') {
-            originPosition = { originX: 'center', originY: position === 'top' ? 'top' : 'bottom' };
-        } else if (position === 'top' || (position === 'left' && isLtr) || (position === 'right' && !isLtr)) {
-            originPosition = { originX: 'start', originY: 'center' };
-        } else if (position === 'bottom' || (position === 'right' && isLtr) || (position === 'left' && !isLtr)) {
-            originPosition = { originX: 'end', originY: 'center' };
-        } else {
-            throw getMcTooltipInvalidPositionError(position);
-        }
-
-        const {x, y} = this.invertPosition(originPosition.originX, originPosition.originY);
-
-        return {
-            main: originPosition,
-            fallback: { originX: x, originY: y }
-        };
-    }
-
-    /** Returns the overlay position and a fallback position based on the user's preference */
-    getOverlayPosition(): { main: OverlayConnectionPosition; fallback: OverlayConnectionPosition } {
-        const position = this.placement;
-        const isLtr = !this.direction || this.direction.value === 'ltr';
-        let overlayPosition: OverlayConnectionPosition;
-
-        if (position === 'top') {
-            overlayPosition = { overlayX: 'center', overlayY: 'bottom' };
-        } else if (position === 'bottom') {
-            overlayPosition = { overlayX: 'center', overlayY: 'top' };
-        } else if (position === 'top' || (position === 'left' && isLtr) || (position === 'right' && !isLtr)) {
-            overlayPosition = { overlayX: 'end', overlayY: 'center' };
-        } else if (position === 'bottom' || (position === 'right' && isLtr) || (position === 'left' && !isLtr)) {
-            overlayPosition = { overlayX: 'start', overlayY: 'center' };
-        } else {
-            throw getMcTooltipInvalidPositionError(position);
-        }
-
-        const {x, y} = this.invertPosition(overlayPosition.overlayX, overlayPosition.overlayY);
-
-        return {
-            main: overlayPosition,
-            fallback: { overlayX: x, overlayY: y }
-        };
-    }
-
-    private addEventListener = (listener: EventListener | EventListenerObject, event: string) => {
-        this.elementRef.nativeElement.addEventListener(event, listener);
-    }
-
-    private removeEventListener = (listener: EventListener | EventListenerObject, event: string) => {
-        this.elementRef.nativeElement.addEventListener(event, listener);
+    getOverlayHandleComponentType(): Type<McTooltipComponent> {
+        return McTooltipComponent;
     }
 
     /** Inverts an overlay position. */

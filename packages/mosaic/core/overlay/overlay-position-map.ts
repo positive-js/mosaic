@@ -2,87 +2,87 @@ import { ConnectionPositionPair } from '@angular/cdk/overlay';
 
 
 export const POSITION_MAP: { [key: string]: ConnectionPositionPair } = {
-    top         : {
-        originX : 'center',
-        originY : 'top',
+    top: {
+        originX: 'center',
+        originY: 'top',
         overlayX: 'center',
         overlayY: 'bottom'
     },
-    topCenter   : {
-        originX : 'center',
-        originY : 'top',
+    topCenter: {
+        originX: 'center',
+        originY: 'top',
         overlayX: 'center',
         overlayY: 'bottom'
     },
-    topLeft     : {
-        originX : 'start',
-        originY : 'top',
+    topLeft: {
+        originX: 'start',
+        originY: 'top',
         overlayX: 'start',
         overlayY: 'bottom'
     },
-    topRight    : {
-        originX : 'end',
-        originY : 'top',
+    topRight: {
+        originX: 'end',
+        originY: 'top',
         overlayX: 'end',
         overlayY: 'bottom'
     },
-    right       : {
-        originX : 'end',
-        originY : 'center',
+    right: {
+        originX: 'end',
+        originY: 'center',
         overlayX: 'start',
         overlayY: 'center'
     },
-    rightTop    : {
-        originX : 'end',
-        originY : 'top',
+    rightTop: {
+        originX: 'end',
+        originY: 'top',
         overlayX: 'start',
         overlayY: 'top'
     },
-    rightBottom : {
-        originX : 'end',
-        originY : 'bottom',
+    rightBottom: {
+        originX: 'end',
+        originY: 'bottom',
         overlayX: 'start',
         overlayY: 'bottom'
     },
-    bottom      : {
-        originX : 'center',
-        originY : 'bottom',
+    bottom: {
+        originX: 'center',
+        originY: 'bottom',
         overlayX: 'center',
         overlayY: 'top'
     },
     bottomCenter: {
-        originX : 'center',
-        originY : 'bottom',
+        originX: 'center',
+        originY: 'bottom',
         overlayX: 'center',
         overlayY: 'top'
     },
-    bottomLeft  : {
-        originX : 'start',
-        originY : 'bottom',
+    bottomLeft: {
+        originX: 'start',
+        originY: 'bottom',
         overlayX: 'start',
         overlayY: 'top'
     },
-    bottomRight : {
-        originX : 'end',
-        originY : 'bottom',
+    bottomRight: {
+        originX: 'end',
+        originY: 'bottom',
         overlayX: 'end',
         overlayY: 'top'
     },
-    left        : {
-        originX : 'start',
-        originY : 'center',
+    left: {
+        originX: 'start',
+        originY: 'center',
         overlayX: 'end',
         overlayY: 'center'
     },
-    leftTop     : {
-        originX : 'start',
-        originY : 'top',
+    leftTop: {
+        originX: 'start',
+        originY: 'top',
         overlayX: 'end',
         overlayY: 'top'
     },
-    leftBottom  : {
-        originX : 'start',
-        originY : 'bottom',
+    leftBottom: {
+        originX: 'start',
+        originY: 'bottom',
         overlayX: 'end',
         overlayY: 'bottom'
     }
