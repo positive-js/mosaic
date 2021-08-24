@@ -49,13 +49,6 @@ describe('McDivider', () => {
     expect(divider.nativeElement.className).toContain('mc-divider_inset');
     expect(divider.nativeElement.className).toContain('mc-divider_vertical');
   });
-
-  it('should add aria roles properly', () => {
-    fixture.detectChanges();
-
-    const divider = fixture.debugElement.query(By.css('mc-divider'));
-    expect(divider.nativeElement.getAttribute('role')).toBe('separator');
-  });
 });
 
 @Component({
