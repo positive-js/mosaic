@@ -3,12 +3,10 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
+import { ArrowPlacements } from '@ptsecurity/mosaic/core';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McInputModule } from '@ptsecurity/mosaic/input';
-import { McListModule } from '@ptsecurity/mosaic/list';
-import { McRadioModule } from '@ptsecurity/mosaic/radio';
 import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
-import { ArrowPlacements } from '../../mosaic/core/tooltip';
 
 
 /* tslint:disable:no-trailing-whitespace */
@@ -92,8 +90,6 @@ export class DemoComponent implements OnInit {
         FormsModule,
         McToolTipModule,
         McButtonModule,
-        McRadioModule,
-        McListModule,
         McInputModule,
         McFormFieldModule
     ],

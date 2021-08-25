@@ -6,29 +6,39 @@ import {
     OverlayRef,
     ScrollDispatcher
 } from '@angular/cdk/overlay';
+import { OverlayConfig } from '@angular/cdk/overlay/overlay-config';
 import { ComponentPortal } from '@angular/cdk/portal';
 import {
     Directive,
     ElementRef,
     EventEmitter,
     NgZone,
-    TemplateRef, Type,
+    TemplateRef,
+    Type,
     ViewContainerRef
 } from '@angular/core';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
-import { DEFAULT_4_POSITIONS, POSITION_MAP } from '@ptsecurity/mosaic/core';
-import { Subject } from 'rxjs';
-import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { delay as rxDelay, distinctUntilChanged, takeUntil } from 'rxjs/operators';
+
+import {
+    DEFAULT_4_POSITIONS_TO_CSS_MAP,
+    EXTENDED_OVERLAY_POSITIONS,
+    POSITION_MAP
+} from '../overlay/overlay-position-map';
+
+import { TooltipTriggers } from './constants';
 
 
 const VIEWPORT_MARGIN: number = 8;
 
 @Directive()
 // tslint:disable-next-line:naming-convention
-export abstract class McBaseTooltipTrigger<T> {
+export abstract class McBasePopUpTrigger<T> {
     isOpen: boolean = false;
 
     abstract visibleChange: EventEmitter<boolean>;
+    abstract placementChange: EventEmitter<string>;
 
     abstract enterDelay: number = 0;
     abstract leaveDelay: number = 0;
@@ -38,14 +48,19 @@ export abstract class McBaseTooltipTrigger<T> {
     abstract placement: string;
     abstract customClass: string;
     abstract visible: boolean;
-    abstract title: string | TemplateRef<any>;
+    abstract content: string | TemplateRef<any>;
+
+    protected abstract originSelector: string;
+    protected abstract overlayConfig: OverlayConfig;
 
     protected overlayRef: OverlayRef | null;
     protected portal: ComponentPortal<T>;
-    protected availablePositions: { [key: string]: ConnectionPositionPair };
     protected instance: any | null;
 
     protected listeners = new Map<string, EventListenerOrEventListenerObject>();
+
+    protected readonly availablePositions: { [key: string]: ConnectionPositionPair };
+    protected readonly defaultPositionsMap: { [key: string]: string };
     protected readonly destroyed = new Subject<void>();
 
     protected constructor(
@@ -55,16 +70,20 @@ export abstract class McBaseTooltipTrigger<T> {
         protected scrollDispatcher: ScrollDispatcher,
         protected hostView: ViewContainerRef,
         protected scrollStrategy,
-        protected direction: Directionality
+        protected direction?: Directionality
     ) {
         this.availablePositions = POSITION_MAP;
+
+        this.defaultPositionsMap = DEFAULT_4_POSITIONS_TO_CSS_MAP;
     }
 
     abstract updatePosition(): void;
 
-    abstract handlePositioningUpdate(): void;
+    abstract updateClassMap(newPlacement?: string): void;
 
-    abstract onPositionChange($event: ConnectedOverlayPositionChange): void;
+    abstract handlePositioningUpdate(placement?: string): void;
+
+    abstract closingActions(): Observable<any>;
 
     abstract getOverlayHandleComponentType(): Type<T>;
 
@@ -96,35 +115,37 @@ export abstract class McBaseTooltipTrigger<T> {
     }
 
     show(delay: number = this.enterDelay): void {
-        if (this.disabled) { return; }
+        if (this.disabled || this.instance) { return; }
 
-        if (!this.instance) {
-            this.overlayRef = this.createOverlay();
-            this.detach();
+        this.overlayRef = this.createOverlay();
+        this.detach();
 
-            this.portal = this.portal || new ComponentPortal(this.getOverlayHandleComponentType(), this.hostView);
+        this.portal = this.portal || new ComponentPortal(this.getOverlayHandleComponentType(), this.hostView);
 
-            this.instance = this.overlayRef.attach(this.portal).instance;
+        this.instance = this.overlayRef.attach(this.portal).instance;
 
-            this.instance.afterHidden()
-                .pipe(takeUntil(this.destroyed))
-                .subscribe(() => this.detach());
+        this.instance.afterHidden()
+            .pipe(takeUntil(this.destroyed))
+            .subscribe(this.detach);
 
-            this.instance.updateClassMap(this.placement, this.customClass);
+        this.updateClassMap();
 
-            this.instance.title = this.title;
+        this.updateData();
 
-            this.instance.visibleChange
-                .pipe(takeUntil(this.destroyed), distinctUntilChanged())
-                .subscribe((data) => {
-                    this.visible = data;
-                    this.visibleChange.emit(data);
-                    this.isOpen = data;
-                });
-        }
+        this.instance.visibleChange
+            .pipe(takeUntil(this.destroyed), distinctUntilChanged())
+            .subscribe((value) => {
+                this.visible = value;
+                this.visibleChange.emit(value);
+                this.isOpen = value;
+            });
 
         this.updatePosition();
         this.instance.show(delay);
+    }
+
+    updateData() {
+        this.instance.content = this.content;
     }
 
     hide(delay: number = this.leaveDelay): void {
@@ -133,7 +154,7 @@ export abstract class McBaseTooltipTrigger<T> {
         }
     }
 
-    detach() {
+    detach = (): void => {
         if (this.overlayRef && this.overlayRef.hasAttached()) {
             this.overlayRef.detach();
         }
@@ -148,63 +169,92 @@ export abstract class McBaseTooltipTrigger<T> {
         // Create connected position strategy that listens for scroll events to reposition.
         const strategy = this.overlay.position()
             .flexibleConnectedTo(this.elementRef)
-            .withTransformOriginOn('.mc-tooltip')
+            .withTransformOriginOn(this.originSelector)
             .withFlexibleDimensions(false)
             .withViewportMargin(VIEWPORT_MARGIN)
-            .withPositions([...DEFAULT_4_POSITIONS])
+            .withPositions([...EXTENDED_OVERLAY_POSITIONS])
             .withScrollableContainers(this.scrollDispatcher.getAncestorScrollContainers(this.elementRef));
 
         strategy.positionChanges
             .pipe(takeUntil(this.destroyed))
-            .subscribe((change) => {
-                if (this.instance) {
-                    this.onPositionChange(change);
-
-                    if (change.scrollableViewProperties.isOverlayClipped && this.instance.isVisible()) {
-                        // After position changes occur and the overlay is clipped by
-                        // a parent scrollable then close the tooltip.
-                        this.ngZone.run(() => this.hide());
-                    }
-                }
-            });
+            .subscribe(this.onPositionChange);
 
         this.overlayRef = this.overlay.create({
+            ...this.overlayConfig,
             direction: this.direction,
             positionStrategy: strategy,
-            panelClass: 'mc-tooltip-panel',
             scrollStrategy: this.scrollStrategy()
         });
 
         this.updatePosition();
 
-        this.overlayRef.outsidePointerEvents()
+        this.closingActions()
             .pipe(takeUntil(this.destroyed))
+            .pipe(rxDelay(0))
+            .subscribe(() => this.hide());
+
+        this.overlayRef.outsidePointerEvents()
             .subscribe(() => this.instance!.handleBodyInteraction());
 
         this.overlayRef.detachments()
             .pipe(takeUntil(this.destroyed))
-            .subscribe(() => this.detach());
+            .subscribe(this.detach);
 
         return this.overlayRef;
     }
 
-    updateClassMap() {
+    onPositionChange = ($event: ConnectedOverlayPositionChange): void => {
         if (!this.instance) { return; }
 
-        this.instance.updateClassMap(this.placement, this.customClass);
+        let newPlacement = this.placement;
+
+        const { originX, originY, overlayX, overlayY } = $event.connectionPair;
+
+        Object.keys(this.availablePositions).some((key) => {
+            if (
+                originX === this.availablePositions[key].originX && originY === this.availablePositions[key].originY &&
+                overlayX === this.availablePositions[key].overlayX && overlayY === this.availablePositions[key].overlayY
+            ) {
+                newPlacement = key;
+
+                return true;
+            }
+
+            return false;
+        });
+
+        this.placementChange.emit(newPlacement);
+
+        this.updateClassMap(newPlacement);
+
+        if (!this.defaultPositionsMap[newPlacement]) {
+            this.handlePositioningUpdate(newPlacement);
+        }
+
+        if ($event.scrollableViewProperties.isOverlayClipped && this.instance.isVisible()) {
+            // After position changes occur and the overlay is clipped by
+            // a parent scrollable then close the tooltip.
+            this.ngZone.run(() => this.hide());
+        }
     }
 
-    private initListeners() {
+    protected initListeners() {
         this.clearListeners();
 
-        if (this.trigger.includes('hover')) {
+        if (this.trigger.includes(TooltipTriggers.Click)) {
+            this.listeners
+                .set('click', () => this.show())
+                .forEach(this.addEventListener);
+        }
+
+        if (this.trigger.includes(TooltipTriggers.Hover)) {
             this.listeners
                 .set('mouseenter', () => this.show())
                 .set('mouseleave', () => this.hide())
                 .forEach(this.addEventListener);
         }
 
-        if (this.trigger.includes('focus')) {
+        if (this.trigger.includes(TooltipTriggers.Focus)) {
             this.listeners
                 .set('focus', () => this.show())
                 .set('blur', () => this.hide())
@@ -212,7 +262,7 @@ export abstract class McBaseTooltipTrigger<T> {
         }
     }
 
-    private clearListeners() {
+    protected clearListeners() {
         this.listeners.forEach(this.removeEventListener);
 
         this.listeners.clear();

@@ -1,23 +1,26 @@
 import { AnimationEvent } from '@angular/animations';
-import { ChangeDetectorRef, EventEmitter, OnDestroy, TemplateRef } from '@angular/core';
+import { ChangeDetectorRef, Directive, EventEmitter, OnDestroy, TemplateRef } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
 import { TooltipVisibility } from './constants';
 
 
+@Directive()
 // tslint:disable-next-line:naming-convention
-export abstract class McBaseTooltip implements OnDestroy {
-    visibleChange: EventEmitter<boolean> = new EventEmitter();
+export abstract class McBasePopUp implements OnDestroy {
+    content: string | TemplateRef<any>;
 
-    protected classMap = {};
+    classMap = {};
+
+    visibility = TooltipVisibility.Initial;
+    visibleChange = new EventEmitter<boolean>();
+
     protected prefix: string;
 
     /** Subject for notifying that the tooltip has been hidden from the view */
-    protected readonly onHideSubject: Subject<any> = new Subject();
+    protected readonly onHideSubject = new Subject<any>();
 
     protected closeOnInteraction: boolean = false;
-
-    private visibility = TooltipVisibility.Initial;
 
     private showTimeoutId: any;
     private hideTimeoutId: any;
@@ -25,6 +28,9 @@ export abstract class McBaseTooltip implements OnDestroy {
     protected constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
     ngOnDestroy() {
+        clearTimeout(this.showTimeoutId);
+        clearTimeout(this.hideTimeoutId);
+
         this.onHideSubject.complete();
     }
 
@@ -95,17 +101,23 @@ export abstract class McBaseTooltip implements OnDestroy {
         this.changeDetectorRef.markForCheck();
     }
 
-    protected animationStart() {
+    animationStart() {
         this.closeOnInteraction = false;
     }
 
-    protected animationDone({ toState }: AnimationEvent): void {
+    animationDone({ toState }: AnimationEvent): void {
         if (toState === TooltipVisibility.Hidden && !this.isVisible()) {
             this.onHideSubject.next();
         }
 
         if (toState === TooltipVisibility.Visible || toState === TooltipVisibility.Hidden) {
             this.closeOnInteraction = true;
+        }
+    }
+
+    handleBodyInteraction(): void {
+        if (this.closeOnInteraction) {
+            this.hide(0);
         }
     }
 }

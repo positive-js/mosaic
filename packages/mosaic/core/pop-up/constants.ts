@@ -1,5 +1,6 @@
 import { HorizontalConnectionPos, VerticalConnectionPos } from '@angular/cdk/overlay';
 
+
 export type ArrowPlacements = HorizontalConnectionPos | VerticalConnectionPos;
 
 // tslint:disable-next-line:naming-convention
@@ -17,7 +18,7 @@ export enum TooltipVisibility {
     Hidden = 'hidden'
 }
 
-export enum PopoverTriggers {
+export enum TooltipTriggers {
     Click = 'click',
     Focus = 'focus',
     Hover = 'hover'

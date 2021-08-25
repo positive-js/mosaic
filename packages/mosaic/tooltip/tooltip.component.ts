@@ -8,9 +8,9 @@ import {
     OverlayConnectionPosition,
     OriginConnectionPosition,
     HorizontalConnectionPos,
-    VerticalConnectionPos,
-    ConnectedOverlayPositionChange
+    VerticalConnectionPos
 } from '@angular/cdk/overlay';
+import { OverlayConfig } from '@angular/cdk/overlay/overlay-config';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -24,12 +24,13 @@ import {
     NgZone,
     Optional,
     Output,
-    TemplateRef, Type,
+    TemplateRef,
+    Type,
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-
-import { ArrowPlacements, McBaseTooltip, McBaseTooltipTrigger } from '../core/tooltip';
+import { ArrowPlacements, McBasePopUp, McBasePopUpTrigger, TooltipTriggers } from '@ptsecurity/mosaic/core';
+import { merge } from 'rxjs';
 
 import { mcTooltipAnimations } from './tooltip.animations';
 
@@ -42,19 +43,11 @@ import { mcTooltipAnimations } from './tooltip.animations';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class McTooltipComponent extends McBaseTooltip {
-    title: string | TemplateRef<any>;
-
+export class McTooltipComponent extends McBasePopUp {
     prefix = 'mc-tooltip';
 
     constructor(changeDetectorRef: ChangeDetectorRef) {
         super(changeDetectorRef);
-    }
-
-    handleBodyInteraction(): void {
-        if (this.closeOnInteraction) {
-            this.hide(0);
-        }
     }
 }
 
@@ -88,25 +81,26 @@ export function getMcTooltipInvalidPositionError(position: string) {
         '(touchend)': 'handleTouchend()'
     }
 })
-export class McTooltip extends McBaseTooltipTrigger<McTooltipComponent> {
+export class McTooltip extends McBasePopUpTrigger<McTooltipComponent> {
     @Input('mcArrowPlacement') arrowPlacement: ArrowPlacements;
 
     @Output('mcTooltipChange') visibleChange = new EventEmitter<boolean>();
+    @Output('mcTooltipPlacementChange') placementChange: EventEmitter<string> = new EventEmitter();
 
     @Input('mcTooltip')
-    get title(): string | TemplateRef<any> {
-        return this._title;
+    get content(): string | TemplateRef<any> {
+        return this._content;
     }
 
-    set title(title: string | TemplateRef<any>) {
-        this._title = title;
+    set content(content: string | TemplateRef<any>) {
+        this._content = content;
 
         if (this.instance) {
-            this.instance!.title = title;
+            this.instance!.content = content;
         }
     }
 
-    private _title: string | TemplateRef<any>;
+    private _content: string | TemplateRef<any>;
 
     @Input('mcTooltipDisabled')
     get disabled(): boolean {
@@ -129,12 +123,16 @@ export class McTooltip extends McBaseTooltipTrigger<McTooltipComponent> {
     }
 
     set trigger(value: string) {
-        if (!value) { return; }
+        if (value) {
+            this._trigger = value;
+        } else {
+            this._trigger = `${TooltipTriggers.Hover}, ${TooltipTriggers.Focus}`;
+        }
 
-        this._trigger = value;
+        this.initListeners();
     }
 
-    private _trigger: string = 'hover, focus';
+    private _trigger = `${TooltipTriggers.Hover}, ${TooltipTriggers.Focus}`;
 
     @Input('mcPlacement')
     get placement(): string {
@@ -195,6 +193,12 @@ export class McTooltip extends McBaseTooltipTrigger<McTooltipComponent> {
 
     private _visible: boolean;
 
+    protected originSelector = '.mc-tooltip';
+
+    protected overlayConfig: OverlayConfig = {
+        panelClass: 'mc-tooltip-panel'
+    };
+
     constructor(
         overlay: Overlay,
         elementRef: ElementRef,
@@ -205,6 +209,10 @@ export class McTooltip extends McBaseTooltipTrigger<McTooltipComponent> {
         @Optional() direction: Directionality
     ) {
         super(overlay, elementRef, ngZone, scrollDispatcher, hostView, scrollStrategy, direction);
+    }
+
+    closingActions() {
+        return merge(this.overlayRef!.outsidePointerEvents(), this.overlayRef!.detachments());
     }
 
     /**
@@ -262,9 +270,7 @@ export class McTooltip extends McBaseTooltipTrigger<McTooltipComponent> {
 
     /** Updates the position of the current tooltip. */
     updatePosition() {
-        if (!this.overlayRef) {
-            this.overlayRef = this.createOverlay();
-        }
+        this.overlayRef = this.createOverlay();
 
         const position = this.overlayRef.getConfig().positionStrategy as FlexibleConnectedPositionStrategy;
         const origin = this.getOrigin();
@@ -277,16 +283,16 @@ export class McTooltip extends McBaseTooltipTrigger<McTooltipComponent> {
 
         if (this.instance) {
             position.apply();
-            window.dispatchEvent(new Event('resize'));
         }
     }
 
-    handlePositioningUpdate() {
+    handlePositioningUpdate(placement: string) {
         this.overlayRef = this.createOverlay();
+        const overlay = this.overlayRef.overlayElement;
 
-        if (['right', 'left'].includes(this.placement)) {
+        if (['right', 'left'].includes(placement)) {
             const halfDelimiter = 2;
-            const overlayElemHeight = this.overlayRef.overlayElement.clientHeight;
+            const overlayElemHeight = overlay.clientHeight;
             const currentContainerHeight = this.hostView.element.nativeElement.clientHeight;
 
             if (this.arrowPlacement === ArrowPlacements.Center) {
@@ -294,50 +300,27 @@ export class McTooltip extends McBaseTooltipTrigger<McTooltipComponent> {
                 const halfOfContainerHeight = currentContainerHeight / halfDelimiter;
                 const halfOfTooltipHeight = overlayElemHeight / halfDelimiter;
 
-                this.overlayRef.overlayElement.style.top = `${
-                    (containerPositionTop + halfOfContainerHeight) - halfOfTooltipHeight + 1
-                }px`;
+                overlay.style.top = `${(containerPositionTop + halfOfContainerHeight) - halfOfTooltipHeight + 1}px`;
 
-                const arrowElemRef = this.getTooltipArrowElem();
-
-                if (arrowElemRef) {
-                    arrowElemRef.setAttribute('style', `top: ${halfOfTooltipHeight - 1}px`);
-                }
+                this.updateArrowPosition(halfOfTooltipHeight);
             } else {
                 const pos = (overlayElemHeight - currentContainerHeight) / halfDelimiter;
-                const defaultTooltipPlacementTop = parseInt(this.overlayRef.overlayElement.style.top || '0px', 10);
+                const defaultTooltipPlacementTop = parseInt(overlay.style.top || '0px', 10);
 
-                this.overlayRef.overlayElement.style.top = `${defaultTooltipPlacementTop + pos - 1}px`;
+                overlay.style.top = `${defaultTooltipPlacementTop + pos - 1}px`;
             }
         }
     }
 
-    onPositionChange($event: ConnectedOverlayPositionChange): void {
-        let newPlacement = this.placement;
-
-        const { originX, originY, overlayX, overlayY } = $event.connectionPair;
-
-        Object.keys(this.availablePositions).some((key) => {
-            if (
-                originX === this.availablePositions[key].originX && originY === this.availablePositions[key].originY &&
-                overlayX === this.availablePositions[key].overlayX && overlayY === this.availablePositions[key].overlayY
-            ) {
-                newPlacement = key;
-
-                return true;
-            }
-
-            return false;
-        });
-
-        this.instance!.updateClassMap(newPlacement, this.customClass);
-        this.instance!.markForCheck();
-
-        this.handlePositioningUpdate();
-    }
-
     getOverlayHandleComponentType(): Type<McTooltipComponent> {
         return McTooltipComponent;
+    }
+
+    updateClassMap(newPlacement: string = this.placement) {
+        if (!this.instance) { return; }
+
+        this.instance.updateClassMap(newPlacement, this.customClass);
+        this.instance.markForCheck();
     }
 
     /** Inverts an overlay position. */
@@ -345,7 +328,7 @@ export class McTooltip extends McBaseTooltipTrigger<McTooltipComponent> {
         let newX: HorizontalConnectionPos = x;
         let newY: VerticalConnectionPos = y;
 
-        if (this.placement === 'top' || this.placement === 'bottom') {
+        if (['top', 'bottom'].includes(this.placement)) {
             if (y === 'top') {
                 newY = 'bottom';
             } else if (y === 'bottom') {
@@ -362,9 +345,12 @@ export class McTooltip extends McBaseTooltipTrigger<McTooltipComponent> {
         return { x: newX, y: newY };
     }
 
-    private getTooltipArrowElem() {
-        const arrowClassName = 'mc-tooltip-arrow';
+    private updateArrowPosition(top: number) {
+        const className = 'mc-tooltip-arrow';
+        const arrowElement = this.overlayRef?.overlayElement.getElementsByClassName(className)[0];
 
-        return this.overlayRef?.overlayElement.getElementsByClassName(arrowClassName)[0];
+        if (arrowElement) {
+            arrowElement.setAttribute('style', `top: ${top - 1}px`);
+        }
     }
 }
