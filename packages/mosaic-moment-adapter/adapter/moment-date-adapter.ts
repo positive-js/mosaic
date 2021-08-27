@@ -220,7 +220,9 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
             throw Error(`Invalid date "${date}". Date has to be greater than 0.`);
         }
 
-        const result = this.createMoment({year, month, date}).locale(this.locale);
+        // Note: Moment months are zero indexed, so January is month 0.
+        const momentMonth = month ? month - 1 : 0;
+        const result = this.createMoment({year, month: momentMonth, date}).locale(this.locale);
 
         // If the result isn't valid, the date must have been out of bounds for this month.
         if (!result.isValid()) {
