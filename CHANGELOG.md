@@ -1,3 +1,14 @@
+## 11.3.6 "Beetling Warlord" (2021-08-27)
+
+### Mosaic
+
+ * bug fix  **tooltip:** color for text in warning tooltip (#UIM-728) ([#682](https://github.com/positive-js/mosaic/issues/682)) ([2ebfcd4](https://github.com/positive-js/mosaic/commit/2ebfcd4db5b0dbc78550eedd91c4f1e3ad66d6d3)), closes [#UIM-728](https://github.com/positive-js/mosaic/issues/UIM-728)
+
+### Docs
+
+ * bug fix  added example for divider (#UIM-726) ([#683](https://github.com/positive-js/mosaic/issues/683)) ([e7b9150](https://github.com/positive-js/mosaic/commit/e7b91500fb04dc6582ebc791feae51ce4c3e4050)), closes [#UIM-726](https://github.com/positive-js/mosaic/issues/UIM-726) [#UIM-726](https://github.com/positive-js/mosaic/issues/UIM-726)
+ * bug fix  errors in navbar example (#UIM-727) ([#681](https://github.com/positive-js/mosaic/issues/681)) ([a095194](https://github.com/positive-js/mosaic/commit/a09519482d89a69748e288b389af7f7eaa437532)), closes [#UIM-727](https://github.com/positive-js/mosaic/issues/UIM-727)
+
 ## 11.3.5 "Wider Lifeguard" (2021-08-20)
 
 ### Mosaic
