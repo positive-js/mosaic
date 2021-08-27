@@ -31,7 +31,9 @@ function getConfigs(theme) {
 
     scssConfig.scss.buildPath = theme.outputPath;
     jsConfig.js.buildPath = theme.outputPath;
+
     cssConfig.css.buildPath = theme.outputPath;
+    cssConfig.css.files[0].selector = theme.selectorCSSVars;
 
     return filterOptions([scssConfig, jsConfig, cssConfig]);
 }

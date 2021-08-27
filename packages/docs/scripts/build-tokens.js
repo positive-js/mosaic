@@ -11,7 +11,8 @@ buildTokens([
             mosaicTokensProps,
             mosaicTokensComponents
         ],
-        outputPath: 'packages/docs/src/styles/default-theme/'
+        outputPath: 'packages/docs/src/styles/default-theme/',
+        selectorCSSVars: '.active-blue'
     },
     {
         name: 'green-theme',
@@ -21,7 +22,8 @@ buildTokens([
             mosaicTokensComponents,
             `packages/docs/src/styles/green-theme/components/**/*.json5`,
         ],
-        outputPath: 'packages/docs/src/styles/green-theme/'
+        outputPath: 'packages/docs/src/styles/green-theme/',
+        selectorCSSVars: '.active-green'
     },
     {
         name: 'red-theme',
@@ -30,7 +32,8 @@ buildTokens([
             `packages/docs/src/styles/red-theme/properties/**/*.json5`,
             mosaicTokensComponents
         ],
-        outputPath: 'packages/docs/src/styles/red-theme/'
+        outputPath: 'packages/docs/src/styles/red-theme/',
+        selectorCSSVars: '.active-red'
     },
     {
         name: 'yellow-theme',
@@ -39,7 +42,8 @@ buildTokens([
             `packages/docs/src/styles/yellow-theme/properties/**/*.json5`,
             mosaicTokensComponents
         ],
-        outputPath: 'packages/docs/src/styles/yellow-theme/'
+        outputPath: 'packages/docs/src/styles/yellow-theme/',
+        selectorCSSVars: '.active-yellow'
     }
 ]);
 
