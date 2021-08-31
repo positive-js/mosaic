@@ -22,3 +22,147 @@
         font-size: 18px;
     }
 }
+
+
+
+body, html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+app {
+    height: 100%;
+    width: 100%;
+
+    .actual {
+        animation: blink-animation 1s steps(5, start) infinite;
+        -webkit-animation: blink-animation 1s steps(5, start) infinite;
+    }
+    @keyframes blink-animation {
+        to {
+            visibility: hidden;
+        }
+    }
+    @-webkit-keyframes blink-animation {
+        to {
+            visibility: hidden;
+        }
+    }
+
+    .red {
+        color: $light-color-scheme-error-default;
+    }
+
+    .container {
+        width: 100%;
+        height: 100%;
+        padding: 1%;
+    }
+
+    .config {
+        height: 50%;
+        width: 100%;
+    }
+
+    .result {
+        display: flex;
+
+        width: 300px;
+        height: 300px;
+        align-self: center;
+
+        border: 1px solid red;
+    }
+
+    .padding-32 {
+        padding: 8px;
+    }
+
+    .visual-box {
+        height: 100px;
+        width: 240px;
+        border: 1px solid #575757;
+        position: relative;
+        margin: 50px;
+
+        .visual-box_clickable {
+            height: 12px;
+            width: 12px;
+            position: absolute;
+            background: #4dc3ff;
+            cursor: pointer;
+        }
+
+        .active {
+            background: red;
+        }
+
+        &_placement-top-left {
+            top: -6px;
+            left: 10px;
+        }
+
+        &_placement-top {
+            top: -6px;
+            left: calc(50% - 6px);
+        }
+
+        &_placement-top-right {
+            top: -6px;
+            right: 10px;
+        }
+
+        &_placement-left-top {
+            top: 10px;
+            left: -6px;
+        }
+
+        &_placement-left {
+            top: calc(50% - 6px);
+            left: -6px;
+        }
+
+        &_placement-left-bottom {
+            bottom: 10px;
+            left: -6px;
+        }
+
+        &_placement-bottom-right {
+            bottom: -6px;
+            right: 10px;
+        }
+
+        &_placement-bottom {
+            bottom: -6px;
+            right: calc(50% - 6px);
+        }
+
+        &_placement-bottom-left {
+            bottom: -6px;
+            left: 10px;
+        }
+
+        &_placement-right-bottom {
+            right: -6px;
+            bottom: 10px;
+        }
+
+        &_placement-right {
+            right: -6px;
+            bottom: calc(50% - 6px);
+        }
+
+        &_placement-right-top {
+            right: -6px;
+            top: 10px;
+        }
+    }
+}
+
+.popover-485 {
+    .mc-popover {
+        max-width: 485px !important;
+    }
+}
+

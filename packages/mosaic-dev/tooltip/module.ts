@@ -1,12 +1,14 @@
 import { A11yModule } from '@angular/cdk/a11y';
-import { Component, NgModule, OnInit, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
-import { ArrowPlacements } from '@ptsecurity/mosaic/core';
+import { McCheckboxModule } from '@ptsecurity/mosaic/checkbox';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
+import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
+import { McSelectModule } from '@ptsecurity/mosaic/select';
 import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 
 
@@ -17,67 +19,82 @@ import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
     encapsulation: ViewEncapsulation.None,
     templateUrl: './template.html'
 })
-export class DemoComponent implements OnInit {
+export class DemoComponent {
+    popoverActiveStage: number;
 
-    @ViewChild('manualTooltip', { static: false }) manualTooltip: any;
-    @ViewChild('tooltip', { static: false }) tooltip: any;
-    @ViewChild('tooltipRef', { static: false }) tooltipRef: any;
-    @ViewChild('titleSource') titleSource: any;
-    @ViewChild('titleSourceTest') titleSourceTest: TemplateRef<any>;
+    isPopoverVisibleLeft: boolean = false;
 
-    triggerTooltip: boolean = false;
-    show: boolean = true;
-    counter = 0;
-    tooltipPosition: string = 'top';
-    title: string = 'Default text';
-    titleModel: string | TemplateRef<any> = '';
-    availablePositions: string[] = ['top', 'bottom', 'left', 'right'];
+    activatedPosition: string = '';
 
-    arrowPos = ArrowPlacements;
+    ELEMENTS = {
+        BUTTON: 'button',
+        INPUT: 'input',
+        ICON: 'icon'
+    };
 
-    get getTitle(): string | TemplateRef<any> {
-        return this.titleModel;
+    TRIGGERS = {
+        CLICK: 'click',
+        FOCUS: 'focus',
+        HOVER: 'hover'
+    };
+
+    SIZE = {
+        LARGE: 'large',
+        NORMAL: 'normal',
+        SMALL: 'small'
+    };
+
+    selectedElement: string = 'button';
+    selectedPlacement: string = 'left';
+    selectedTrigger: string = 'hover';
+    layoutClass: string = 'layout-align-center-center';
+    content: string = 'button text';
+    userDefinedPlacementPriority: string[] = ['bottom', 'right'];
+    multipleSelected: string[] = [];
+
+    constructor() {
+        this.popoverActiveStage = 1;
     }
 
-    ngOnInit(): void {
-        this.counter = 0;
+    changeStep(direction: number) {
+        const newStage = this.popoverActiveStage + direction;
+
+        // tslint:disable-next-line:no-magic-numbers
+        if (newStage < 1 || newStage > 3) {
+            return;
+        }
+
+        this.popoverActiveStage += direction;
     }
 
-    toggleTooltip() {
-        if (!this.tooltip.isTooltipOpen) {
-            this.tooltip.show();
-        } else {
-            this.tooltip.hide();
+    onPopoverVisibleChange($event) {
+        if (!$event) {
+            this.activatedPosition = '';
         }
     }
 
-    toggleTooltipExternal(flag) {
-        if (!flag) {
-            this.tooltipRef.show();
-        } else {
-            this.tooltipRef.hide();
-        }
+    onStrategyPlacementChange(event) {
+        this.activatedPosition = event;
     }
 
-    trigger(e) {
-        e.stopPropagation();
-        if (this.manualTooltip.isTooltipOpen) {
-            this.manualTooltip.hide();
-        } else {
-            this.manualTooltip.show();
-        }
+    setPlacement(placement: string) {
+        this.selectedPlacement = placement;
     }
 
-    updatePosition(pos: string) {
-        if (this.availablePositions.indexOf(pos) > -1) {
-            this.tooltipPosition = pos;
-        }
-
-        this.titleModel = this.titleSourceTest;
+    showElement(): string {
+        return this.selectedElement;
     }
 
-    updateTitle() {
-        this.titleModel = this.titleSource.nativeElement.value;
+    activated(value: string): boolean {
+        return this.selectedPlacement === value;
+    }
+
+    isActual(value: string): boolean {
+        return this.activatedPosition === value && this.selectedPlacement !== this.activatedPosition;
+    }
+
+    get isFallbackActivated(): boolean {
+        return this.selectedPlacement !== this.activatedPosition && this.activatedPosition !== '';
     }
 }
 
@@ -91,8 +108,12 @@ export class DemoComponent implements OnInit {
         McToolTipModule,
         McButtonModule,
         McInputModule,
-        McFormFieldModule
+        McFormFieldModule,
+        McCheckboxModule,
+        McSelectModule,
+        McIconModule
     ],
     bootstrap: [DemoComponent]
 })
-export class DemoModule {}
+export class DemoModule {
+}

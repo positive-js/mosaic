@@ -27,7 +27,7 @@ app {
     }
 
     .red {
-        color: red;
+        color: $light-color-scheme-error-default;
     }
 
     .container {
@@ -59,7 +59,7 @@ app {
         position: relative;
         margin: 50px;
 
-        .visual-box--clickable {
+        .visual-box_clickable {
             height: 12px;
             width: 12px;
             position: absolute;

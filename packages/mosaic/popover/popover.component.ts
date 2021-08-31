@@ -75,16 +75,6 @@ export function getMcPopoverInvalidPositionError(position: string) {
     return Error(`McPopover position "${position}" is invalid.`);
 }
 
-/* Constant distance between popover container border
-*  corner according to popover placement and middle of arrow
-* */
-const POPOVER_ARROW_BORDER_DISTANCE: number = 20; // tslint:disable-line
-
-/* Constant value for min height and width of anchor element used for popover.
-*  Set as POPOVER_ARROW_BORDER_DISTANCE multiplied by 2
-*  plus 2px border for both sides of element. Used in check of position management.
-* */
-const ANCHOR_MIN_HEIGHT_WIDTH: number = 44; // tslint:disable-line
 
 @Directive({
     selector: '[mcPopover]',
@@ -130,8 +120,6 @@ export class McPopover extends McBasePopUpTrigger<McPopoverComponent> {
 
         this.updateData();
     }
-
-    private _content: string | TemplateRef<any>;
 
     @Input('mcPopoverFooter')
     get footer(): string | TemplateRef<any> {
@@ -249,41 +237,6 @@ export class McPopover extends McBasePopUpTrigger<McPopoverComponent> {
 
     getOverlayHandleComponentType(): Type<McPopoverComponent> {
         return McPopoverComponent;
-    }
-
-    handlePositioningUpdate(placement: string) {
-        if (!this.overlayRef) {
-            this.overlayRef = this.createOverlay();
-        }
-
-        const { clientHeight, clientWidth } = this.hostView.element.nativeElement;
-        const verticalOffset: number = Math.floor(clientHeight / 2); // tslint:disable-line
-        const horizontalOffset: number = Math.floor(clientWidth / 2 - 6); // tslint:disable-line
-        const offsets = {
-            top: verticalOffset,
-            bottom: verticalOffset,
-            right: horizontalOffset,
-            left: horizontalOffset
-        };
-
-        const styleProperty = placement.split(/(?=[A-Z])/)[1].toLowerCase();
-
-        if (
-            ['top', 'bottom'].includes(styleProperty) && clientHeight > ANCHOR_MIN_HEIGHT_WIDTH ||
-            ['left', 'right'].includes(styleProperty) && clientWidth > ANCHOR_MIN_HEIGHT_WIDTH
-        ) {
-            return;
-        }
-
-        const container = this.overlayRef.overlayElement.style;
-
-        if (!container[styleProperty]) {
-            container[styleProperty] = '0px';
-        }
-
-        const margin = parseInt(container[styleProperty].split('px')[0]);
-
-        container[styleProperty] = `${margin + offsets[styleProperty] - POPOVER_ARROW_BORDER_DISTANCE}px`;
     }
 
     updateClassMap(newPlacement: string = this.placement) {

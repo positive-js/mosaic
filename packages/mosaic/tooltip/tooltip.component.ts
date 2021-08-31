@@ -90,8 +90,6 @@ export class McTooltip extends McBasePopUpTrigger<McTooltipComponent> {
         }
     }
 
-    private _content: string | TemplateRef<any>;
-
     @Input('mcTooltipDisabled')
     get disabled(): boolean {
         return this._disabled;
@@ -164,31 +162,32 @@ export class McTooltip extends McBasePopUpTrigger<McTooltipComponent> {
         );
     }
 
-    handlePositioningUpdate(placement: string) {
-        this.overlayRef = this.createOverlay();
-        const overlay = this.overlayRef.overlayElement;
-
-        if (['right', 'left'].includes(placement)) {
-            const halfDelimiter = 2;
-            const overlayElemHeight = overlay.clientHeight;
-            const currentContainerHeight = this.hostView.element.nativeElement.clientHeight;
-
-            if (this.arrowPlacement === ArrowPlacements.Center) {
-                const containerPositionTop: number = this.hostView.element.nativeElement.getBoundingClientRect().top;
-                const halfOfContainerHeight = currentContainerHeight / halfDelimiter;
-                const halfOfTooltipHeight = overlayElemHeight / halfDelimiter;
-
-                overlay.style.top = `${(containerPositionTop + halfOfContainerHeight) - halfOfTooltipHeight + 1}px`;
-
-                this.updateArrowPosition(halfOfTooltipHeight);
-            } else {
-                const pos = (overlayElemHeight - currentContainerHeight) / halfDelimiter;
-                const defaultTooltipPlacementTop = parseInt(overlay.style.top || '0px', 10);
-
-                overlay.style.top = `${defaultTooltipPlacementTop + pos - 1}px`;
-            }
-        }
-    }
+    // handlePositioningUpdate(placement: string) {
+    //     console.log('handlePositioningUpdate: ');
+    //     this.overlayRef = this.createOverlay();
+    //     const overlay = this.overlayRef.overlayElement;
+    //
+    //     if (['right', 'left'].includes(placement)) {
+    //         const halfDelimiter = 2;
+    //         const overlayElemHeight = overlay.clientHeight;
+    //         const currentContainerHeight = this.hostView.element.nativeElement.clientHeight;
+    //
+    //         if (this.arrowPlacement === ArrowPlacements.Center) {
+    //             const containerPositionTop: number = this.hostView.element.nativeElement.getBoundingClientRect().top;
+    //             const halfOfContainerHeight = currentContainerHeight / halfDelimiter;
+    //             const halfOfTooltipHeight = overlayElemHeight / halfDelimiter;
+    //
+    //             overlay.style.top = `${(containerPositionTop + halfOfContainerHeight) - halfOfTooltipHeight + 1}px`;
+    //
+    //             this.updateArrowPosition(halfOfTooltipHeight);
+    //         } else {
+    //             const pos = (overlayElemHeight - currentContainerHeight) / halfDelimiter;
+    //             const defaultTooltipPlacementTop = parseInt(overlay.style.top || '0px', 10);
+    //
+    //             overlay.style.top = `${defaultTooltipPlacementTop + pos - 1}px`;
+    //         }
+    //     }
+    // }
 
     getOverlayHandleComponentType(): Type<McTooltipComponent> {
         return McTooltipComponent;
@@ -201,12 +200,12 @@ export class McTooltip extends McBasePopUpTrigger<McTooltipComponent> {
         this.instance.markForCheck();
     }
 
-    private updateArrowPosition(top: number) {
-        const className = 'mc-tooltip-arrow';
-        const arrowElement = this.overlayRef?.overlayElement.getElementsByClassName(className)[0];
-
-        if (arrowElement) {
-            arrowElement.setAttribute('style', `top: ${top - 1}px`);
-        }
-    }
+    // private updateArrowPosition(top: number) {
+    //     const className = 'mc-tooltip-arrow';
+    //     const arrowElement = this.overlayRef?.overlayElement.getElementsByClassName(className)[0];
+    //
+    //     if (arrowElement) {
+    //         arrowElement.setAttribute('style', `top: ${top - 1}px`);
+    //     }
+    // }
 }
