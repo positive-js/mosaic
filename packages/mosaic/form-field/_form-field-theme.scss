@@ -13,7 +13,9 @@
     $form-field: map-get(map-get($theme, components), form-field);
 
     .mc-form-field {
-        background-color: map-get($form-field, background);
+        & .mc-form-field__container {
+            background-color: map-get($form-field, background);
+        }
 
         & .mc-form-field__hint {
             color: map-get($foreground, text-less-contrast);

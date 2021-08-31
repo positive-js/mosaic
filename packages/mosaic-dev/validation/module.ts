@@ -1,5 +1,5 @@
 /* tslint:disable:no-console no-reserved-keywords */
-import { ChangeDetectorRef, Component, NgModule, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, NgModule, ViewEncapsulation } from '@angular/core';
 import {
     AbstractControl,
     FormBuilder,
@@ -8,7 +8,6 @@ import {
     FormsModule,
     NgForm,
     ReactiveFormsModule,
-    ValidationErrors,
     ValidatorFn,
     Validators
 } from '@angular/forms';
