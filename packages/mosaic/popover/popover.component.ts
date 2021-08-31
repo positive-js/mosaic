@@ -1,7 +1,6 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
-    ConnectionPositionPair,
     FlexibleConnectedPositionStrategy,
     Overlay,
     ScrollDispatcher,
@@ -14,13 +13,11 @@ import {
     Component,
     Directive,
     ElementRef,
-    EventEmitter,
     Inject,
     InjectionToken,
     Input,
     NgZone,
     Optional,
-    Output,
     TemplateRef,
     Type,
     ViewContainerRef,
@@ -29,8 +26,8 @@ import {
 import {
     McBasePopUp,
     McBasePopUpTrigger,
-    TooltipTriggers,
-    POSITION_PRIORITY_STRATEGY,
+    PopUpSizes,
+    PopUpTriggers,
     POSITION_TO_CSS_MAP
 } from '@ptsecurity/mosaic/core';
 import { merge, NEVER } from 'rxjs';
@@ -117,11 +114,8 @@ export class McPopover extends McBasePopUpTrigger<McPopoverComponent> {
 
     set header(value: string | TemplateRef<any>) {
         this._header = value;
-        this.updateCompValue('header', value);
 
-        if (this.isOpen) {
-            this.updatePosition(true);
-        }
+        this.updateData();
     }
 
     private _header: string | TemplateRef<any>;
@@ -133,11 +127,8 @@ export class McPopover extends McBasePopUpTrigger<McPopoverComponent> {
 
     set content(value: string | TemplateRef<any>) {
         this._content = value;
-        this.updateCompValue('content', value);
 
-        if (this.isOpen) {
-            this.updatePosition(true);
-        }
+        this.updateData();
     }
 
     private _content: string | TemplateRef<any>;
@@ -149,11 +140,8 @@ export class McPopover extends McBasePopUpTrigger<McPopoverComponent> {
 
     set footer(value: string | TemplateRef<any>) {
         this._footer = value;
-        this.updateCompValue('footer', value);
 
-        if (this.isOpen) {
-            this.updatePosition(true);
-        }
+        this.updateData();
     }
 
     private _footer: string | TemplateRef<any>;
@@ -167,9 +155,7 @@ export class McPopover extends McBasePopUpTrigger<McPopoverComponent> {
         this._disabled = coerceBooleanProperty(value);
     }
 
-    private _disabled: boolean = false;
-
-    @Input('mcPopoverTrigger')
+    @Input('mcTrigger')
     get trigger(): string {
         return this._trigger;
     }
@@ -178,66 +164,30 @@ export class McPopover extends McBasePopUpTrigger<McPopoverComponent> {
         if (value) {
             this._trigger = value;
         } else {
-            this._trigger = TooltipTriggers.Click;
+            this._trigger = PopUpTriggers.Click;
         }
 
         this.initListeners();
     }
 
-    private _trigger: string = TooltipTriggers.Click;
+    private _trigger: string = PopUpTriggers.Click;
 
     @Input('mcPopoverSize')
-    get size(): string {
+    get size(): PopUpSizes {
         return this._size;
     }
 
-    set size(value: string) {
-        if (['small', 'normal', 'large'].includes(value)) {
+    set size(value: PopUpSizes) {
+        if ([PopUpSizes.Small, PopUpSizes.Normal, PopUpSizes.Large].includes(value)) {
             this._size = value;
 
-            if (this.instance) {
-                this.instance.updateClassMap(POSITION_TO_CSS_MAP[this.placement], this.customClass, this.size);
-            }
+            this.updateClassMap();
         } else {
-            this._size = 'normal';
+            this._size = PopUpSizes.Normal;
         }
     }
 
-    private _size: string = 'normal';
-
-    @Input('mcPopoverPlacementPriority')
-    get placementPriority() {
-        return this._placementPriority;
-    }
-
-    set placementPriority(value) {
-        if (value && value.length > 0) {
-            this._placementPriority = value;
-        } else {
-            this._placementPriority = null;
-        }
-    }
-
-    private _placementPriority: string | string[] | null = null;
-
-    @Input('mcPopoverPlacement')
-    get placement(): string {
-        return this._placement;
-    }
-
-    set placement(value: string) {
-        if (value) {
-            this._placement = value;
-
-            if (this.instance) {
-                this.instance.updateClassMap(POSITION_TO_CSS_MAP[this.placement], this.customClass, this.size);
-            }
-        } else {
-            this._placement = 'top';
-        }
-    }
-
-    private _placement: string = 'top';
+    private _size: PopUpSizes = PopUpSizes.Normal;
 
     @Input('mcPopoverClass')
     get customClass() {
@@ -247,40 +197,8 @@ export class McPopover extends McBasePopUpTrigger<McPopoverComponent> {
     set customClass(value: string) {
         this._customClass = value;
 
-        if (this.instance) {
-            this.instance.updateClassMap(POSITION_TO_CSS_MAP[this.placement], this.customClass, this.size);
-        }
+        this.updateClassMap();
     }
-
-    private _customClass: string;
-
-    @Input('mcPopoverVisible')
-    get visible(): boolean {
-        return this._visible;
-    }
-
-    set visible(externalValue: boolean) {
-        const value = coerceBooleanProperty(externalValue);
-
-        if (this._visible !== value) {
-            this._visible = value;
-
-            if (value) {
-                this.show();
-            } else {
-                this.hide();
-            }
-        }
-    }
-
-    private _visible: boolean;
-
-    @Input('mcPopoverEnterDelay') enterDelay: number = 0;
-    @Input('mcPopoverLeaveDelay') leaveDelay: number = 0;
-
-    @Output('mcPopoverVisibleChange') visibleChange = new EventEmitter<boolean>();
-
-    @Output('mcPopoverPlacementChange') placementChange: EventEmitter<string> = new EventEmitter();
 
     @Input() backdropClass: string = 'cdk-overlay-transparent-backdrop';
 
@@ -305,9 +223,15 @@ export class McPopover extends McBasePopUpTrigger<McPopoverComponent> {
     }
 
     updateData() {
+        if (!this.instance) { return; }
+
         this.instance.header = this.header;
         this.instance.content = this.content;
         this.instance.footer = this.footer;
+
+        if (this.isOpen) {
+            this.updatePosition(true);
+        }
     }
 
     /** Updates the position of the current popover. */
@@ -369,44 +293,11 @@ export class McPopover extends McBasePopUpTrigger<McPopoverComponent> {
         this.instance.markForCheck();
     }
 
-    /** Create the overlay config and position strategy */
     closingActions() {
         return merge(
             this.overlayRef!.backdropClick(),
             this.hasBackdrop ? NEVER : this.overlayRef!.outsidePointerEvents(),
             this.overlayRef!.detachments()
         );
-    }
-
-    // tslint:disable-next-line:no-any
-    private updateCompValue(key: string, value: any): void {
-        if (value && this.instance) {
-            this.instance[key] = value;
-        }
-    }
-
-    private getPriorityPlacementStrategy(value: string | string[]): ConnectionPositionPair[] {
-        const result: ConnectionPositionPair[] = [];
-        const possiblePositions = Object.keys(this.availablePositions);
-
-        if (Array.isArray(value)) {
-            value.forEach((position: string) => {
-                if (possiblePositions.includes(position)) {
-                    result.push(this.availablePositions[position]);
-                }
-            });
-        } else if (possiblePositions.includes(value)) {
-            result.push(this.availablePositions[value]);
-        }
-
-        return result;
-    }
-
-    private getPrioritizedPositions() {
-        if (this.placementPriority) {
-            return this.getPriorityPlacementStrategy(this.placementPriority);
-        }
-
-        return POSITION_PRIORITY_STRATEGY[this.placement];
     }
 }

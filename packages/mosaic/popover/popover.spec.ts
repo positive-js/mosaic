@@ -43,7 +43,7 @@ describe('McPopover', () => {
             componentFixture.detectChanges();
         });
 
-        it('mcPopoverTrigger = hover', fakeAsync(() => {
+        it('mcTrigger = hover', fakeAsync(() => {
             const expectedValue = '_TEST1';
             const triggerElement = component.test1.nativeElement;
 
@@ -67,7 +67,7 @@ describe('McPopover', () => {
             expect(overlayContainerElement.textContent).not.toEqual(expectedValue);
         }));
 
-        it('mcPopoverTrigger = manual', fakeAsync(() => {
+        it('mcTrigger = manual', fakeAsync(() => {
             const expectedValue = '_TEST2';
 
             expect(overlayContainerElement.textContent).not.toEqual(expectedValue);
@@ -85,7 +85,7 @@ describe('McPopover', () => {
             expect(overlayContainerElement.textContent).not.toEqual(expectedValue);
         }));
 
-        it('mcPopoverTrigger = focus', fakeAsync(() => {
+        it('mcTrigger = focus', fakeAsync(() => {
             const featureKey = '_TEST3';
             const triggerElement = component.test3.nativeElement;
             dispatchFakeEvent(triggerElement, 'focus');
@@ -161,13 +161,13 @@ describe('McPopover', () => {
 @Component({
     selector: 'mc-popover-test-component',
     template: `
-        <button #test1 mcPopover mcPopoverTrigger="hover" mcPopoverContent="_TEST1">_TEST1asdasd</button>
-        <button #test2 mcPopover mcPopoverTrigger="manual" [mcPopoverVisible]="popoverVisibility" mcPopoverContent="_TEST2">_TEST2</button>
-        <button #test3 mcPopover mcPopoverTrigger="focus" mcPopoverContent="_TEST3">_TEST3</button>
+        <button #test1 mcPopover mcTrigger="hover" mcPopoverContent="_TEST1">_TEST1asdasd</button>
+        <button #test2 mcPopover mcTrigger="manual" [mcVisible]="popoverVisibility" mcPopoverContent="_TEST2">_TEST2</button>
+        <button #test3 mcPopover mcTrigger="focus" mcPopoverContent="_TEST3">_TEST3</button>
 
-        <button #test4 mcPopover mcPopoverTrigger="hover" mcPopoverHeader="_TEST4">_TEST4</button>
-        <button #test5 mcPopover mcPopoverTrigger="hover" mcPopoverContent="_TEST5">_TEST5</button>
-        <button #test6 mcPopover mcPopoverTrigger="hover" mcPopoverFooter="_TEST6">_TEST6</button>
+        <button #test4 mcPopover mcTrigger="hover" mcPopoverHeader="_TEST4">_TEST4</button>
+        <button #test5 mcPopover mcTrigger="hover" mcPopoverContent="_TEST5">_TEST5</button>
+        <button #test6 mcPopover mcTrigger="hover" mcPopoverFooter="_TEST6">_TEST6</button>
 
         <button #test7 mcPopover mcPopoverClass="_TEST7" mcPopoverContent="_TEST7">_TEST7</button>
     `

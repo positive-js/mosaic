@@ -2,7 +2,7 @@ import { AnimationEvent } from '@angular/animations';
 import { ChangeDetectorRef, Directive, EventEmitter, OnDestroy, TemplateRef } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
-import { TooltipVisibility } from './constants';
+import { PopUpVisibility } from './constants';
 
 
 @Directive()
@@ -12,7 +12,7 @@ export abstract class McBasePopUp implements OnDestroy {
 
     classMap = {};
 
-    visibility = TooltipVisibility.Initial;
+    visibility = PopUpVisibility.Initial;
     visibleChange = new EventEmitter<boolean>();
 
     protected prefix: string;
@@ -49,7 +49,7 @@ export abstract class McBasePopUp implements OnDestroy {
             () => {
                 this.showTimeoutId = undefined;
 
-                this.visibility = TooltipVisibility.Visible;
+                this.visibility = PopUpVisibility.Visible;
                 this.visibleChange.emit(true);
                 // Mark for check so if any parent component has set the
                 // ChangeDetectionStrategy to OnPush it will be checked anyways
@@ -67,7 +67,7 @@ export abstract class McBasePopUp implements OnDestroy {
         this.hideTimeoutId = setTimeout(
             () => {
                 this.hideTimeoutId = undefined;
-                this.visibility = TooltipVisibility.Hidden;
+                this.visibility = PopUpVisibility.Hidden;
 
                 this.visibleChange.emit(false);
                 this.onHideSubject.next();
@@ -106,11 +106,11 @@ export abstract class McBasePopUp implements OnDestroy {
     }
 
     animationDone({ toState }: AnimationEvent): void {
-        if (toState === TooltipVisibility.Hidden && !this.isVisible()) {
+        if (toState === PopUpVisibility.Hidden && !this.isVisible()) {
             this.onHideSubject.next();
         }
 
-        if (toState === TooltipVisibility.Visible || toState === TooltipVisibility.Hidden) {
+        if (toState === PopUpVisibility.Visible || toState === PopUpVisibility.Hidden) {
             this.closeOnInteraction = true;
         }
     }

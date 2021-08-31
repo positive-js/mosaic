@@ -12,15 +12,20 @@ export const ArrowPlacements = {
     Left: 'left' as ArrowPlacements
 };
 
-export enum TooltipVisibility {
+export enum PopUpVisibility {
     Initial = 'initial',
     Visible = 'visible',
     Hidden = 'hidden'
 }
 
-export enum TooltipTriggers {
+export enum PopUpTriggers {
     Click = 'click',
     Focus = 'focus',
     Hover = 'hover'
 }
 
+export enum PopUpSizes {
+    Small = 'small',
+    Normal = 'normal',
+    Large = 'large'
+}

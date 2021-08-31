@@ -1,7 +1,9 @@
 import { Directionality } from '@angular/cdk/bidi';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     ConnectedOverlayPositionChange,
     ConnectionPositionPair,
+    FlexibleConnectedPositionStrategy,
     Overlay,
     OverlayRef,
     ScrollDispatcher
@@ -12,7 +14,9 @@ import {
     Directive,
     ElementRef,
     EventEmitter,
+    Input,
     NgZone,
+    Output,
     TemplateRef,
     Type,
     ViewContainerRef
@@ -24,10 +28,11 @@ import { delay as rxDelay, distinctUntilChanged, takeUntil } from 'rxjs/operator
 import {
     DEFAULT_4_POSITIONS_TO_CSS_MAP,
     EXTENDED_OVERLAY_POSITIONS,
-    POSITION_MAP
+    POSITION_MAP,
+    POSITION_PRIORITY_STRATEGY
 } from '../overlay/overlay-position-map';
 
-import { TooltipTriggers } from './constants';
+import { PopUpTriggers } from './constants';
 
 
 const VIEWPORT_MARGIN: number = 8;
@@ -37,21 +42,82 @@ const VIEWPORT_MARGIN: number = 8;
 export abstract class McBasePopUpTrigger<T> {
     isOpen: boolean = false;
 
-    abstract visibleChange: EventEmitter<boolean>;
-    abstract placementChange: EventEmitter<string>;
+    @Input('mcEnterDelay') enterDelay: number = 0;
+    @Input('mcLeaveDelay') leaveDelay: number = 0;
 
-    abstract enterDelay: number = 0;
-    abstract leaveDelay: number = 0;
+    @Output('mcPlacementChange') placementChange: EventEmitter<string> = new EventEmitter();
+
+    @Output('mcVisibleChange') visibleChange = new EventEmitter<boolean>();
+
+    @Input('mcPlacementPriority')
+    get placementPriority() {
+        return this._placementPriority;
+    }
+
+    set placementPriority(value) {
+        if (value && value.length > 0) {
+            this._placementPriority = value;
+        } else {
+            this._placementPriority = null;
+        }
+    }
+
+    private _placementPriority: string | string[] | null = null;
+
+    @Input('mcPlacement')
+    get placement(): string {
+        return this._placement;
+    }
+
+    set placement(value: string) {
+        if (value !== this._placement) {
+            this._placement = value;
+
+            this.updateClassMap();
+        } else {
+            this._placement = 'top';
+        }
+
+        if (this.visible) {
+            this.updatePosition();
+        }
+    }
+
+    private _placement: string = 'top';
+
+    @Input('mcVisible')
+    get visible(): boolean {
+        return this._visible;
+    }
+
+    set visible(externalValue: boolean) {
+        const value = coerceBooleanProperty(externalValue);
+
+        if (this._visible !== value) {
+            this._visible = value;
+
+            if (value) {
+                this.show();
+            } else {
+                this.hide();
+            }
+        }
+    }
+
+    private _visible = false;
 
     abstract disabled: boolean;
     abstract trigger: string;
-    abstract placement: string;
     abstract customClass: string;
-    abstract visible: boolean;
     abstract content: string | TemplateRef<any>;
 
     protected abstract originSelector: string;
     protected abstract overlayConfig: OverlayConfig;
+
+    // tslint:disable-next-line:naming-convention orthodox-getter-and-setter
+    protected _disabled: boolean = false;
+    // tslint:disable-next-line:naming-convention orthodox-getter-and-setter
+    protected _customClass: string;
 
     protected overlayRef: OverlayRef | null;
     protected portal: ComponentPortal<T>;
@@ -77,9 +143,9 @@ export abstract class McBasePopUpTrigger<T> {
         this.defaultPositionsMap = DEFAULT_4_POSITIONS_TO_CSS_MAP;
     }
 
-    abstract updatePosition(): void;
-
     abstract updateClassMap(newPlacement?: string): void;
+
+    abstract updateData(): void;
 
     abstract handlePositioningUpdate(placement?: string): void;
 
@@ -141,11 +207,8 @@ export abstract class McBasePopUpTrigger<T> {
             });
 
         this.updatePosition();
-        this.instance.show(delay);
-    }
 
-    updateData() {
-        this.instance.content = this.content;
+        this.instance.show(delay);
     }
 
     hide(delay: number = this.leaveDelay): void {
@@ -186,7 +249,7 @@ export abstract class McBasePopUpTrigger<T> {
             scrollStrategy: this.scrollStrategy()
         });
 
-        this.updatePosition();
+        // this.updatePosition();
 
         this.closingActions()
             .pipe(takeUntil(this.destroyed))
@@ -241,25 +304,64 @@ export abstract class McBasePopUpTrigger<T> {
     initListeners() {
         this.clearListeners();
 
-        if (this.trigger.includes(TooltipTriggers.Click)) {
+        if (this.trigger.includes(PopUpTriggers.Click)) {
             this.listeners
                 .set('click', () => this.show())
                 .forEach(this.addEventListener);
         }
 
-        if (this.trigger.includes(TooltipTriggers.Hover)) {
+        if (this.trigger.includes(PopUpTriggers.Hover)) {
             this.listeners
                 .set('mouseenter', () => this.show())
                 .set('mouseleave', () => this.hide())
                 .forEach(this.addEventListener);
         }
 
-        if (this.trigger.includes(TooltipTriggers.Focus)) {
+        if (this.trigger.includes(PopUpTriggers.Focus)) {
             this.listeners
                 .set('focus', () => this.show())
                 .set('blur', () => this.hide())
                 .forEach(this.addEventListener);
         }
+    }
+
+    /** Updates the position of the current popover. */
+    updatePosition(reapplyPosition: boolean = false) {
+        console.log('updatePosition: ');
+        this.overlayRef = this.createOverlay();
+
+        const position = (this.overlayRef.getConfig().positionStrategy as FlexibleConnectedPositionStrategy)
+            .withPositions(this.getPrioritizedPositions())
+            .withPush(true);
+
+        if (reapplyPosition) {
+            setTimeout(() => position.reapplyLastPosition());
+        }
+    }
+
+    protected getPriorityPlacementStrategy(value: string | string[]): ConnectionPositionPair[] {
+        const result: ConnectionPositionPair[] = [];
+        const possiblePositions = Object.keys(this.availablePositions);
+
+        if (Array.isArray(value)) {
+            value.forEach((position: string) => {
+                if (possiblePositions.includes(position)) {
+                    result.push(this.availablePositions[position]);
+                }
+            });
+        } else if (possiblePositions.includes(value)) {
+            result.push(this.availablePositions[value]);
+        }
+
+        return result;
+    }
+
+    protected getPrioritizedPositions() {
+        if (this.placementPriority) {
+            return this.getPriorityPlacementStrategy(this.placementPriority);
+        }
+
+        return POSITION_PRIORITY_STRATEGY[this.placement];
     }
 
     protected clearListeners() {
