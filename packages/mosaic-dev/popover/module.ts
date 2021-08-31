@@ -110,9 +110,7 @@ export class DemoComponent {
 }
 
 @NgModule({
-    declarations: [
-        DemoComponent
-    ],
+    declarations: [DemoComponent],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
@@ -127,8 +125,6 @@ export class DemoComponent {
         McSplitterModule,
         McCheckboxModule
     ],
-    bootstrap: [
-        DemoComponent
-    ]
+    bootstrap: [DemoComponent]
 })
 export class DemoModule {}

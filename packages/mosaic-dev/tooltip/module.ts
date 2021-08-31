@@ -1,3 +1,4 @@
+import { A11yModule } from '@angular/cdk/a11y';
 import { Component, NgModule, OnInit, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -81,21 +82,17 @@ export class DemoComponent implements OnInit {
 }
 
 @NgModule({
-    declarations: [
-        DemoComponent
-    ],
+    declarations: [DemoComponent],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
+        A11yModule,
         FormsModule,
         McToolTipModule,
         McButtonModule,
         McInputModule,
         McFormFieldModule
     ],
-    bootstrap: [
-        DemoComponent
-    ]
+    bootstrap: [DemoComponent]
 })
-export class DemoModule {
-}
+export class DemoModule {}

@@ -238,7 +238,7 @@ export abstract class McBasePopUpTrigger<T> {
         }
     }
 
-    protected initListeners() {
+    initListeners() {
         this.clearListeners();
 
         if (this.trigger.includes(TooltipTriggers.Click)) {

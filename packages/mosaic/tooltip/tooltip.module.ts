@@ -16,5 +16,4 @@ import {
     providers: [MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER],
     entryComponents: [McTooltipComponent]
 })
-export class McToolTipModule {
-}
+export class McToolTipModule {}
