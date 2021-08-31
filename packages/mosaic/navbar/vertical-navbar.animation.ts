@@ -2,7 +2,7 @@ import { animate, AnimationTriggerMetadata, style, transition, trigger, state } 
 import {
     VerticalNavbarSizeStatesClosedWidth as closedWidth,
     VerticalNavbarSizeStatesOpenedWidth as openedWidth
-} from '@ptsecurity/mosaic/tokens';
+} from '@ptsecurity/mosaic/design-tokens';
 
 
 export function toggleVerticalNavbarAnimation(): AnimationTriggerMetadata {
