@@ -68,7 +68,10 @@ buildTokens([
 
 ```
 
-3. Include Design Tokens in ```styles.scss```
+3. Usage: SASS ```styles.scss```
+
+The design tokens are also published as SASS variables.
+
 
 ```scss
 @import './styles/fonts';
@@ -105,5 +108,18 @@ $typography: mc-typography-config();
         @include app-theme($default-light-theme);
     }
 }
+
+```
+
+3. Usage: TypeScript
+
+TypeScript type declarations are also published.
+
+```typescript
+import {
+    VerticalNavbarSizeStatesClosedWidth as closedWidth,
+     VerticalNavbarSizeStatesOpenedWidth as openedWidth
+} from '@ptsecurity/mosaic/design-tokens';
+
 
 ```
