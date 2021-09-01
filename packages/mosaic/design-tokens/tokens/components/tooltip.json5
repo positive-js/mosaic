@@ -27,8 +27,7 @@
             'border-radius': { value: '3px' },
             'arrow-size': { value: '12px' },
             'arrow-width': { value: '5px' },
-            padding: { value: '8px 16px' },
-            distance: { value: '{tooltip.size.arrow-width.value} + 4px' }
+            padding: { value: '8px 16px' }
         },
         font: {
             default: { value: 'caption' }

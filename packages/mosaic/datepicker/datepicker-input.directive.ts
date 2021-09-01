@@ -46,7 +46,7 @@ import {
 } from '@ptsecurity/cdk/keycodes';
 import { validationTooltipHideDelay, validationTooltipShowDelay } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
-import { McTooltip } from '@ptsecurity/mosaic/tooltip';
+import { McTooltipTrigger } from '@ptsecurity/mosaic/tooltip';
 import { Subject, Subscription } from 'rxjs';
 
 import { createMissingDateImplError } from './datepicker-errors';
@@ -342,7 +342,7 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
     private _id: string;
 
     @Input()
-    set mcValidationTooltip(tooltip: McTooltip) {
+    set mcValidationTooltip(tooltip: McTooltipTrigger) {
         if (!tooltip) { return; }
 
         tooltip.enterDelay = validationTooltipShowDelay;

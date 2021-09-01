@@ -22,7 +22,7 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { ArrowPlacements, McBasePopUp, McBasePopUpTrigger, PopUpTriggers } from '@ptsecurity/mosaic/core';
+import { McPopUp, McPopUpTrigger, PopUpTriggers, POSITION_TO_CSS_MAP } from '@ptsecurity/mosaic/core';
 import { merge } from 'rxjs';
 
 import { mcTooltipAnimations } from './tooltip.animations';
@@ -36,7 +36,7 @@ import { mcTooltipAnimations } from './tooltip.animations';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class McTooltipComponent extends McBasePopUp {
+export class McTooltipComponent extends McPopUp {
     prefix = 'mc-tooltip';
 
     constructor(changeDetectorRef: ChangeDetectorRef) {
@@ -74,9 +74,7 @@ export function getMcTooltipInvalidPositionError(position: string) {
         '(touchend)': 'handleTouchend()'
     }
 })
-export class McTooltip extends McBasePopUpTrigger<McTooltipComponent> {
-    @Input('mcArrowPlacement') arrowPlacement: ArrowPlacements;
-
+export class McTooltipTrigger extends McPopUpTrigger<McTooltipComponent> {
     @Input('mcTooltip')
     get content(): string | TemplateRef<any> {
         return this._content;
@@ -162,33 +160,6 @@ export class McTooltip extends McBasePopUpTrigger<McTooltipComponent> {
         );
     }
 
-    // handlePositioningUpdate(placement: string) {
-    //     console.log('handlePositioningUpdate: ');
-    //     this.overlayRef = this.createOverlay();
-    //     const overlay = this.overlayRef.overlayElement;
-    //
-    //     if (['right', 'left'].includes(placement)) {
-    //         const halfDelimiter = 2;
-    //         const overlayElemHeight = overlay.clientHeight;
-    //         const currentContainerHeight = this.hostView.element.nativeElement.clientHeight;
-    //
-    //         if (this.arrowPlacement === ArrowPlacements.Center) {
-    //             const containerPositionTop: number = this.hostView.element.nativeElement.getBoundingClientRect().top;
-    //             const halfOfContainerHeight = currentContainerHeight / halfDelimiter;
-    //             const halfOfTooltipHeight = overlayElemHeight / halfDelimiter;
-    //
-    //             overlay.style.top = `${(containerPositionTop + halfOfContainerHeight) - halfOfTooltipHeight + 1}px`;
-    //
-    //             this.updateArrowPosition(halfOfTooltipHeight);
-    //         } else {
-    //             const pos = (overlayElemHeight - currentContainerHeight) / halfDelimiter;
-    //             const defaultTooltipPlacementTop = parseInt(overlay.style.top || '0px', 10);
-    //
-    //             overlay.style.top = `${defaultTooltipPlacementTop + pos - 1}px`;
-    //         }
-    //     }
-    // }
-
     getOverlayHandleComponentType(): Type<McTooltipComponent> {
         return McTooltipComponent;
     }
@@ -196,16 +167,7 @@ export class McTooltip extends McBasePopUpTrigger<McTooltipComponent> {
     updateClassMap(newPlacement: string = this.placement) {
         if (!this.instance) { return; }
 
-        this.instance.updateClassMap(newPlacement, this.customClass);
+        this.instance.updateClassMap(POSITION_TO_CSS_MAP[newPlacement], this.customClass);
         this.instance.markForCheck();
     }
-
-    // private updateArrowPosition(top: number) {
-    //     const className = 'mc-tooltip-arrow';
-    //     const arrowElement = this.overlayRef?.overlayElement.getElementsByClassName(className)[0];
-    //
-    //     if (arrowElement) {
-    //         arrowElement.setAttribute('style', `top: ${top - 1}px`);
-    //     }
-    // }
 }

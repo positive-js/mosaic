@@ -50,7 +50,7 @@ const ANCHOR_MIN_HEIGHT_WIDTH: number = 44; // tslint:disable-line
 
 @Directive()
 // tslint:disable-next-line:naming-convention
-export abstract class McBasePopUpTrigger<T> {
+export abstract class McPopUpTrigger<T> {
     isOpen: boolean = false;
 
     @Input('mcEnterDelay') enterDelay: number = 0;
@@ -259,8 +259,6 @@ export abstract class McBasePopUpTrigger<T> {
             positionStrategy: strategy,
             scrollStrategy: this.scrollStrategy()
         });
-
-        // this.updatePosition();
 
         this.closingActions()
             .pipe(takeUntil(this.destroyed))

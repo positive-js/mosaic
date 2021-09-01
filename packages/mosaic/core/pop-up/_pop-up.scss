@@ -1,0 +1,92 @@
+@mixin popUpMargins($name, $value) {
+    &.#{$name}_placement-top,
+    &.#{$name}_placement-top-left,
+    &.#{$name}_placement-top-right {
+        margin-bottom: $value;
+    }
+
+    &.#{$name}_placement-right,
+    &.#{$name}_placement-right-top,
+    &.#{$name}_placement-right-bottom {
+        margin-left: $value;
+    }
+
+    &.#{$name}_placement-bottom,
+    &.#{$name}_placement-bottom-left,
+    &.#{$name}_placement-bottom-right {
+        margin-top: $value;
+    }
+
+    &.#{$name}_placement-left,
+    &.#{$name}_placement-left-top,
+    &.#{$name}_placement-left-bottom {
+        margin-right: $value;
+    }
+}
+
+@mixin popUpArrowPositions($name, $arrow-offset, $arrow-padding) {
+    .#{$name}_placement-top .#{$name}__arrow {
+        bottom: $arrow-offset;
+        left: 50%;
+        margin-left: $arrow-offset;
+    }
+
+    .#{$name}_placement-top-left .#{$name}__arrow {
+        bottom: $arrow-offset;
+        left: $arrow-padding;
+    }
+
+    .#{$name}_placement-top-right .#{$name}__arrow {
+        bottom: $arrow-offset;
+        right: $arrow-padding;
+    }
+
+    .#{$name}_placement-right .#{$name}__arrow {
+        left: $arrow-offset;
+        top: 50%;
+        margin-top: $arrow-offset;
+    }
+
+    .#{$name}_placement-right-top .#{$name}__arrow {
+        left: $arrow-offset;
+        top: $arrow-padding;
+    }
+
+    .#{$name}_placement-right-bottom .#{$name}__arrow {
+        left: $arrow-offset;
+        bottom: $arrow-padding;
+    }
+
+    .#{$name}_placement-left .#{$name}__arrow {
+        right: $arrow-offset;
+        top: 50%;
+        margin-top: $arrow-offset;
+    }
+
+    .#{$name}_placement-left-top .#{$name}__arrow {
+        right: $arrow-offset;
+        top: $arrow-padding;
+    }
+
+    .#{$name}_placement-left-bottom .#{$name}__arrow {
+        right: $arrow-offset;
+        bottom: $arrow-padding;
+    }
+
+    .#{$name}_placement-bottom .#{$name}__arrow {
+        top: $arrow-offset;
+        left: 50%;
+        margin-left: $arrow-offset;
+    }
+
+    .#{$name}_placement-bottom-left .#{$name}__arrow {
+        top: $arrow-offset;
+        left: $arrow-padding;
+    }
+
+    .#{$name}_placement-bottom-right .#{$name}__arrow {
+        top: $arrow-offset;
+        right: $arrow-padding;
+    }
+
+}

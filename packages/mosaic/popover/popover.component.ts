@@ -24,8 +24,8 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import {
-    McBasePopUp,
-    McBasePopUpTrigger,
+    McPopUp,
+    McPopUpTrigger,
     PopUpSizes,
     PopUpTriggers,
     POSITION_TO_CSS_MAP
@@ -36,7 +36,7 @@ import { mcPopoverAnimations } from './popover-animations';
 
 
 @Component({
-    selector: 'mc-popover',
+    selector: 'mc-popover-component',
     templateUrl: './popover.component.html',
     preserveWhitespaces: false,
     styleUrls: ['./popover.scss'],
@@ -44,7 +44,7 @@ import { mcPopoverAnimations } from './popover-animations';
     changeDetection: ChangeDetectionStrategy.OnPush,
     animations: [mcPopoverAnimations.popoverState]
 })
-export class McPopoverComponent extends McBasePopUp {
+export class McPopoverComponent extends McPopUp {
     prefix = 'mc-popover';
 
     header: string | TemplateRef<any>;
@@ -85,7 +85,7 @@ export function getMcPopoverInvalidPositionError(position: string) {
         '(touchend)': 'handleTouchend()'
     }
 })
-export class McPopover extends McBasePopUpTrigger<McPopoverComponent> {
+export class McPopoverTrigger extends McPopUpTrigger<McPopoverComponent> {
     @Input()
     get hasBackdrop(): boolean {
         return this._hasBackdrop;

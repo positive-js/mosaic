@@ -40,7 +40,7 @@ import {
 } from '@ptsecurity/cdk/keycodes';
 import { validationTooltipHideDelay, validationTooltipShowDelay } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
-import { McTooltip } from '@ptsecurity/mosaic/tooltip';
+import { McTooltipTrigger } from '@ptsecurity/mosaic/tooltip';
 import { noop, Subject } from 'rxjs';
 
 import {
@@ -253,7 +253,7 @@ export class McTimepicker<D> implements McFormFieldControl<D>, ControlValueAcces
     private _value: D | null;
 
     @Input()
-    set mcValidationTooltip(tooltip: McTooltip) {
+    set mcValidationTooltip(tooltip: McTooltipTrigger) {
         if (!tooltip) { return; }
 
         tooltip.enterDelay = validationTooltipShowDelay;

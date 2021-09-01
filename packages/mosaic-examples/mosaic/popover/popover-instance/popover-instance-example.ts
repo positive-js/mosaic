@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { McPopover } from '@ptsecurity/mosaic/popover';
+import { McPopoverTrigger } from '@ptsecurity/mosaic/popover';
 
 
 /**
@@ -11,7 +11,7 @@ import { McPopover } from '@ptsecurity/mosaic/popover';
     styleUrls: ['popover-instance-example.css']
 })
 export class PopoverInstanceExample {
-    @ViewChild('popover', { static: false }) popover: McPopover;
+    @ViewChild('popover', { static: false }) popover: McPopoverTrigger;
 
     togglePopover($event) {
         $event.stopPropagation();

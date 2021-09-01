@@ -1,7 +1,7 @@
 /* tslint:disable:naming-convention object-literal-key-quotes quotemark whitespace */
 /**
  * Do not edit directly
- * Generated on Mon, 30 Aug 2021 13:44:07 GMT
+ * Generated on Wed, 01 Sep 2021 11:38:21 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
@@ -773,7 +773,6 @@ export const TooltipSizeBorderRadius = "3px";
 export const TooltipSizeArrowSize = "12px";
 export const TooltipSizeArrowWidth = "5px";
 export const TooltipSizePadding = "8px 16px";
-export const TooltipSizeDistance = "5px + 4px";
 export const TooltipFontDefault = "caption";
 export const TreeSizePaddingRight = "16px";
 export const TreeSizeBorderWidth = "2px";

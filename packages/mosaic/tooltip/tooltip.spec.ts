@@ -4,7 +4,7 @@ import { fakeAsync, inject, tick, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { dispatchMouseEvent } from '@ptsecurity/cdk/testing';
 
-import { McTooltip } from './tooltip.component';
+import { McTooltipTrigger } from './tooltip.component';
 import { McToolTipModule } from './tooltip.module';
 
 
@@ -174,9 +174,9 @@ describe('McTooltip', () => {
 })
 class McTooltipTestNewComponent {
     @ViewChild('titleString', {static: false}) titleString: ElementRef;
-    @ViewChild('titleString', { read: McTooltip, static: false}) titleStringMcTooltipDirective: McTooltip;
+    @ViewChild('titleString', { read: McTooltipTrigger, static: false}) titleStringMcTooltipDirective: McTooltipTrigger;
     @ViewChild('titleTemplate', {static: false}) titleTemplate: ElementRef;
-    @ViewChild('titleTemplate', { read: McTooltip, static: false}) titleTemplateMcTooltipDirective: McTooltip;
+    @ViewChild('titleTemplate', { read: McTooltipTrigger, static: false}) titleTemplateMcTooltipDirective: McTooltipTrigger;
 }
 @Component({
     selector: 'mc-tooltip-test-wrapper',
@@ -196,12 +196,12 @@ class McTooltipTestNewComponent {
 })
 class McTooltipTestWrapperComponent {
     @ViewChild('normalTrigger', {static: false}) normalTrigger: ElementRef;
-    @ViewChild('normalTrigger', { read: McTooltip, static: false }) normalDirective: McTooltip;
+    @ViewChild('normalTrigger', { read: McTooltipTrigger, static: false }) normalDirective: McTooltipTrigger;
     @ViewChild('focusTrigger', {static: false}) focusTrigger: ElementRef;
     visible: boolean;
     @ViewChild('visibleTrigger', {static: false}) visibleTrigger: ElementRef;
     @ViewChild('mostSimpleTrigger', {static: false}) mostSimpleTrigger: ElementRef;
-    @ViewChild('mostSimpleTrigger', { read: McTooltip, static: false }) mostSimpleDirective: McTooltip;
+    @ViewChild('mostSimpleTrigger', { read: McTooltipTrigger, static: false }) mostSimpleDirective: McTooltipTrigger;
 }
 
 @Component({
@@ -215,5 +215,5 @@ class McTooltipTestWrapperComponent {
 })
 class McTooltipDisabledComponent {
     @ViewChild('disabledAttribute', {static: false}) disabledTrigger: ElementRef;
-    @ViewChild('disabledAttribute', { read: McTooltip, static: false }) disabledDirective: McTooltip;
+    @ViewChild('disabledAttribute', { read: McTooltipTrigger, static: false }) disabledDirective: McTooltipTrigger;
 }

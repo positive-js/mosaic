@@ -1,14 +1,10 @@
 @import '../design-tokens/tokens';
 @import '../core/styles/variables';
+@import '../core/pop-up/pop-up';
 
 
 .mc-tooltip {
-    display: block;
     box-sizing: border-box;
-
-    visibility: visible;
-
-    position: relative;
 
     z-index: $zindex-tooltip;
 
@@ -16,72 +12,35 @@
 
     list-style: none;
     white-space: pre-line;
+
+    $tooltip-distance: calc(var(--mc-tooltip-size-arrow-width, #{$tooltip-size-arrow-width - 1}) * 2);
+
+    @include popUpMargins(mc-tooltip, $tooltip-distance);
 }
 
-.mc-tooltip_placement-top {
-    padding-bottom: var(--mc-tooltip-size-distance, $tooltip-size-distance);
-}
+.mc-tooltip__inner {
+    height: fit-content;
 
-.mc-tooltip_placement-right {
-    padding-left: var(--mc-tooltip-size-distance, $tooltip-size-distance);
-}
+    border-radius: var(--mc-tooltip-size-border-radius, $tooltip-size-border-radius);
 
-.mc-tooltip_placement-bottom {
-    padding-top: var(--mc-tooltip-size-distance, $tooltip-size-distance);
-}
-
-.mc-tooltip_placement-left {
-    padding-right: var(--mc-tooltip-size-distance, $tooltip-size-distance);
-}
-
-.mc-tooltip-inner {
     padding: var(--mc-tooltip-size-padding, $tooltip-size-padding);
+
+    vertical-align: center;
     text-align: left;
     text-decoration: none;
-    border-radius: var(--mc-tooltip-size-border-radius, $tooltip-size-border-radius);
-    height: fit-content;
-    vertical-align: center;
 }
 
-.mc-tooltip-arrow {
+.mc-tooltip__arrow {
     position: absolute;
+
     width: var(--mc-tooltip-size-arrow-size, $tooltip-size-arrow-size);
     height: var(--mc-tooltip-size-arrow-size, $tooltip-size-arrow-size);
+
     transform: rotate(45deg);
 }
 
-.mc-tooltip_placement-top .mc-tooltip-arrow {
-    bottom: calc(
-        var(--mc-tooltip-size-distance, #{$tooltip-size-distance}) -
-        var(--mc-tooltip-size-arrow-width, #{$tooltip-size-arrow-width})
-    );
-    left: 50%;
-    margin-left: calc(-1 * var(--mc-tooltip-size-arrow-width, #{$tooltip-size-arrow-width}));
-}
+$tooltip-arrow-distance: calc(-1 * var(--mc-tooltip-size-arrow-width, #{$tooltip-size-arrow-width}));
+$arrow-padding: calc(18px - var(--mc-tooltip-size-arrow-width, #{$tooltip-size-arrow-width}));
 
-.mc-tooltip_placement-right .mc-tooltip-arrow {
-    left: calc(
-        var(--mc-tooltip-size-distance, #{$tooltip-size-distance}) -
-        var(--mc-tooltip-size-arrow-width, #{$tooltip-size-arrow-width})
-    );
-    top: 16px;
-    margin-top: calc(-1 * var(--mc-tooltip-size-arrow-width, #{$tooltip-size-arrow-width}));
-}
+@include popUpArrowPositions(mc-tooltip, $tooltip-arrow-distance, $arrow-padding);
 
-.mc-tooltip_placement-left .mc-tooltip-arrow {
-    right: calc(
-        var(--mc-tooltip-size-distance, #{$tooltip-size-distance}) -
-        var(--mc-tooltip-size-arrow-width, #{$tooltip-size-arrow-width})
-    );
-    top: 16px;
-    margin-top: calc(-1 * var(--mc-tooltip-size-arrow-width, #{$tooltip-size-arrow-width}));
-}
-
-.mc-tooltip_placement-bottom .mc-tooltip-arrow {
-    top: calc(
-        var(--mc-tooltip-size-distance, #{$tooltip-size-distance}) -
-        var(--mc-tooltip-size-arrow-width, #{$tooltip-size-arrow-width})
-    );
-    left: 50%;
-    margin-left: calc(-1 * var(--mc-tooltip-size-arrow-width, #{$tooltip-size-arrow-width}));
-}

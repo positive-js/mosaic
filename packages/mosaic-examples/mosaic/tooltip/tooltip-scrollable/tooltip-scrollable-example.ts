@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { McTooltip } from '@ptsecurity/mosaic/tooltip';
+import { McTooltipTrigger } from '@ptsecurity/mosaic/tooltip';
 
 
 /**
@@ -11,7 +11,7 @@ import { McTooltip } from '@ptsecurity/mosaic/tooltip';
     styleUrls: ['tooltip-scrollable-example.css']
 })
 export class TooltipScrollableExample {
-    @ViewChild(McTooltip, { static: false }) tooltip: McTooltip;
+    @ViewChild(McTooltipTrigger, { static: false }) tooltip: McTooltipTrigger;
 
     toggleTooltip(flag) {
         if (!flag) {

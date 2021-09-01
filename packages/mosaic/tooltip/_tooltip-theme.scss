@@ -8,14 +8,14 @@
 
     $tooltip: map-get(map-get($theme, components), tooltip);
 
-    .mc-tooltip-inner {
+    .mc-tooltip__inner {
         color: map-get($tooltip, color);
 
         box-shadow: map-get($tooltip, shadow);
         background-color: map-get($tooltip, background);
     }
 
-    .mc-tooltip .mc-tooltip-arrow {
+    .mc-tooltip .mc-tooltip__arrow {
         background-color: map-get($tooltip, background);
     }
 
@@ -26,13 +26,13 @@
         $background: map-get($tooltip_warning, background);
         $border-color: map-get($tooltip_warning, border-color);
 
-        .mc-tooltip-arrow {
+        .mc-tooltip__arrow {
             border: 1px solid transparent;
 
             background-color: $background;
         }
 
-        .mc-tooltip-inner {
+        .mc-tooltip__inner {
             box-shadow: map-get($tooltip, shadow);
             border: 1px solid $border-color;
 
@@ -41,22 +41,22 @@
             background-color: $background;
         }
 
-        &.mc-tooltip_placement-top .mc-tooltip-arrow {
+        &.mc-tooltip_placement-top .mc-tooltip__arrow {
             border-bottom-color: $border-color;
             border-right-color: $border-color;
         }
 
-        &.mc-tooltip_placement-right .mc-tooltip-arrow {
+        &.mc-tooltip_placement-right .mc-tooltip__arrow {
             border-left-color: $border-color;
             border-bottom-color: $border-color;
         }
 
-        &.mc-tooltip_placement-left .mc-tooltip-arrow {
+        &.mc-tooltip_placement-left .mc-tooltip__arrow {
             border-right-color: $border-color;
             border-top-color: $border-color;
         }
 
-        &.mc-tooltip_placement-bottom .mc-tooltip-arrow {
+        &.mc-tooltip_placement-bottom .mc-tooltip__arrow {
             border-top-color: $border-color;
             border-left-color: $border-color;
         }
