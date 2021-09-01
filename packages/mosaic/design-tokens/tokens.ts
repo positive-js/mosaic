@@ -1,6 +1,7 @@
+/* tslint:disable:naming-convention object-literal-key-quotes quotemark whitespace */
 /**
  * Do not edit directly
- * Generated on Tue, 24 Aug 2021 08:22:46 GMT
+ * Generated on Mon, 30 Aug 2021 13:44:07 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
