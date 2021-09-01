@@ -2,7 +2,7 @@ module.exports = {
     js: {
         transformGroup: 'js',
         files: [{
-            destination: 'tokens.js',
+            destination: 'tokens.ts',
             format: 'javascript/es6'
         }]
     }
