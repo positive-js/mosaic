@@ -12,7 +12,7 @@ import {
     ContentChild
 } from '@angular/core';
 import { IFocusableOption } from '@ptsecurity/cdk/a11y';
-import { CanDisable, mixinDisabled } from '@ptsecurity/mosaic/core';
+import { CanDisable, CanDisableCtor, mixinDisabled } from '@ptsecurity/mosaic/core';
 import { McIcon } from '@ptsecurity/mosaic/icon';
 import { Subject } from 'rxjs';
 
@@ -21,8 +21,9 @@ import { MC_DROPDOWN_PANEL, McDropdownPanel } from './dropdown.types';
 
 // Boilerplate for applying mixins to McDropdownItem.
 /** @docs-private */
+class McDropdownItemBase {}
 // tslint:disable-next-line:naming-convention
-const McDropdownItemMixinBase = mixinDisabled(class {});
+const McDropdownItemMixinBase: CanDisableCtor & typeof McDropdownItemBase = mixinDisabled(McDropdownItemBase);
 
 /**
  * This directive is intended to be used inside an mc-dropdown tag.
