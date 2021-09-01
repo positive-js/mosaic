@@ -1,3 +1,14 @@
+# 11.4.0 "Enclosed Cannon" (2021-09-01)
+
+### Mosaic
+
+ * bug fix  **datepicker:** parsing doesn' t work (#UIM-724) ([#687](https://github.com/positive-js/mosaic/issues/687)) ([8e937e4](https://github.com/positive-js/mosaic/commit/8e937e40f6c11da324bd68161d149acd103e3764)), closes [#UIM-724](https://github.com/positive-js/mosaic/issues/UIM-724)
+ * bug fix  **form-field:** background-color (#UIM-739) ([#688](https://github.com/positive-js/mosaic/issues/688)) ([50f4bab](https://github.com/positive-js/mosaic/commit/50f4bab50c2eb30879b40b739013befbc1e1c981)), closes [#UIM-739](https://github.com/positive-js/mosaic/issues/UIM-739)
+ * bug fix  **navbar:** correct loading design-tokens (#UIM-737) ([#689](https://github.com/positive-js/mosaic/issues/689)) ([69a0f31](https://github.com/positive-js/mosaic/commit/69a0f310bd95cc37447ae9e0328c180abd373ac5)), closes [#UIM-737](https://github.com/positive-js/mosaic/issues/UIM-737)
+ * bug fix  **textarea:** added mosaic validation (#UIM-684) ([#649](https://github.com/positive-js/mosaic/issues/649)) ([df4cd87](https://github.com/positive-js/mosaic/commit/df4cd879ee0c8e1fe66ecdcff1e067487669b87b)), closes [#UIM-684](https://github.com/positive-js/mosaic/issues/UIM-684) [#UIM-684](https://github.com/positive-js/mosaic/issues/UIM-684) [#UIM-684](https://github.com/positive-js/mosaic/issues/UIM-684)
+ * bug fix  package.json & yarn.lock to reduce vulnerabilities ([#657](https://github.com/positive-js/mosaic/issues/657)) ([3bf5776](https://github.com/positive-js/mosaic/commit/3bf5776ab5e8fc3663b0d70f7ea3675920920702))
+ * feature  **dropdown:** implementation by guideline (UIM-655) ([#658](https://github.com/positive-js/mosaic/issues/658)) ([c15e03d](https://github.com/positive-js/mosaic/commit/c15e03d366fa91852934cc3e5a3d1606002350bf))
+
 ## 11.3.6 "Beetling Warlord" (2021-08-27)
 
 ### Mosaic
