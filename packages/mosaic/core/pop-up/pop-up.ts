@@ -8,9 +8,11 @@ import { PopUpVisibility } from './constants';
 @Directive()
 // tslint:disable-next-line:naming-convention
 export abstract class McPopUp implements OnDestroy {
+    header: string | TemplateRef<any>;
     content: string | TemplateRef<any>;
 
     classMap = {};
+    modifier: string;
 
     visibility = PopUpVisibility.Initial;
     visibleChange = new EventEmitter<boolean>();
@@ -86,6 +88,7 @@ export abstract class McPopUp implements OnDestroy {
 
     updateClassMap(placement: string, customClass: string, size: string = ''): void {
         this.classMap = {
+            [`${this.prefix}_${this.modifier}`]: !!this.modifier,
             [`${this.prefix}_${size}`]: !!size,
             [`${this.prefix}_placement-${placement}`]: true,
             [customClass]: true

@@ -64,6 +64,8 @@ export function getMcTooltipInvalidPositionError(position: string) {
     return Error(`McTooltip position "${position}" is invalid.`);
 }
 
+const defaultTooltipModifierName = 'default';
+
 @Directive({
     selector: '[mcTooltip]',
     exportAs: 'mcTooltip',
@@ -83,9 +85,7 @@ export class McTooltipTrigger extends McPopUpTrigger<McTooltipComponent> {
     set content(content: string | TemplateRef<any>) {
         this._content = content;
 
-        if (this.instance) {
-            this.instance!.content = content;
-        }
+        this.updateData();
     }
 
     @Input('mcTooltipDisabled')
@@ -150,6 +150,8 @@ export class McTooltipTrigger extends McPopUpTrigger<McTooltipComponent> {
     }
 
     updateData() {
+        if (!this.instance) { return; }
+
         this.instance.content = this.content;
     }
 
@@ -166,6 +168,75 @@ export class McTooltipTrigger extends McPopUpTrigger<McTooltipComponent> {
 
     updateClassMap(newPlacement: string = this.placement) {
         if (!this.instance) { return; }
+
+        this.instance.modifier = defaultTooltipModifierName;
+
+        this.instance.updateClassMap(POSITION_TO_CSS_MAP[newPlacement], this.customClass);
+        this.instance.markForCheck();
+    }
+}
+
+const extendedTooltipModifierName = 'extended';
+
+
+@Directive({
+    selector: '[mcExtendedTooltip]',
+    exportAs: 'mcExtendedTooltip',
+    host: {
+        '[class.mc-tooltip_open]': 'isOpen',
+
+        '(keydown)': 'handleKeydown($event)',
+        '(touchend)': 'handleTouchend()'
+    }
+})
+export class McExtendedTooltipTrigger extends McTooltipTrigger {
+    @Input('mcExtendedTooltip')
+    get content(): string | TemplateRef<any> {
+        return this._content;
+    }
+
+    set content(content: string | TemplateRef<any>) {
+        this._content = content;
+
+        this.updateData();
+    }
+
+    @Input('mcTooltipHeader')
+    get header(): string | TemplateRef<any> {
+        return this._header;
+    }
+
+    set header(header: string | TemplateRef<any>) {
+        this._header = header;
+
+        this.updateData();
+    }
+
+    private _header: string | TemplateRef<any>;
+
+    constructor(
+        overlay: Overlay,
+        elementRef: ElementRef,
+        ngZone: NgZone,
+        scrollDispatcher: ScrollDispatcher,
+        hostView: ViewContainerRef,
+        @Inject(MC_TOOLTIP_SCROLL_STRATEGY) scrollStrategy,
+        @Optional() direction: Directionality
+    ) {
+        super(overlay, elementRef, ngZone, scrollDispatcher, hostView, scrollStrategy, direction);
+    }
+
+    updateData() {
+        if (!this.instance) { return; }
+
+        this.instance.content = this.content;
+        this.instance.header = this.header;
+    }
+
+    updateClassMap(newPlacement: string = this.placement) {
+        if (!this.instance) { return; }
+
+        this.instance.modifier = extendedTooltipModifierName;
 
         this.instance.updateClassMap(POSITION_TO_CSS_MAP[newPlacement], this.customClass);
         this.instance.markForCheck();

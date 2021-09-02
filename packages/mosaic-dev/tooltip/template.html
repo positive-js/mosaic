@@ -159,7 +159,7 @@
     <div class="result" [ngClass]="layoutClass" [ngSwitch]="showElement()">
         <button mc-button class="proove"
                 *ngSwitchCase="ELEMENTS.BUTTON"
-                [mcTooltip]="tooltipContent"
+                [mcExtendedTooltip]="tooltipContent"
                 mcTooltipClass="tooltip-485"
                 [mcPlacement]="selectedPlacement"
                 [mcPlacementPriority]="multipleSelected"
@@ -171,7 +171,7 @@
 
         <div *ngSwitchCase="ELEMENTS.ICON">
             <i mc-icon="mc-calendar_16"
-               [mcTooltip]="tooltipContent"
+               [mcExtendedTooltip]="tooltipContent"
                mcTooltipClass="tooltip-485"
                [mcPlacement]="selectedPlacement"
                [mcPlacementPriority]="multipleSelected"
@@ -185,7 +185,7 @@
             <input mcInput
                    [(ngModel)]="content"
                    placeholder="Button content"
-                   [mcTooltip]="tooltipContent"
+                   [mcExtendedTooltip]="tooltipContent"
                    mcTooltipClass="tooltip-485"
                    [mcPlacement]="selectedPlacement"
                    [mcPlacementPriority]="multipleSelected"
