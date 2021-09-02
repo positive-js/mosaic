@@ -51,7 +51,7 @@ describe('LuxonDateAdapter', () => {
 
     it('should get month', () => {
         expect(adapter.getMonth(DateTime.local(2017,  1,  1)))
-            .toBe(1);
+            .toBe(0);
     });
 
     it('should get date', () => {
@@ -204,7 +204,7 @@ describe('LuxonDateAdapter', () => {
 
     it('should not create DateTime date with month over/under-flow', () => {
         expect(() => adapter.createDate(2017, 12 + 1)).toThrow();
-        expect(() => adapter.createDate(2017, 1 - 1)).toThrow();
+        expect(() => adapter.createDate(2017, -1)).toThrow();
     });
 
     it('should not create DateTime date with date over/under-flow', () => {
@@ -232,10 +232,10 @@ describe('LuxonDateAdapter', () => {
 
     it('should parse string according to given format', () => {
         expect(adapter.parse('1/2/2017', 'L/d/yyyy')!.toString())
-            .toEqual(adapter.createDate(2017,  1,  2).toString());
+            .toEqual(adapter.createDate(2017,  0,  2).toString());
 
         expect(adapter.parse('1/2/2017', 'd/L/yyyy')!.toString())
-            .toEqual(adapter.createDate(2017,  2,  1).toString());
+            .toEqual(adapter.createDate(2017,  1,  1).toString());
     });
 
     it('should parse number', () => {
@@ -454,7 +454,7 @@ describe('LuxonDateAdapter with MC_DATE_LOCALE override', () => {
     }));
 
     it('should take the default locale id from the MC_DATE_LOCALE injection token', () => {
-        expect(adapter.format(adapter.createDate(2017,  1,  2), 'DD')).toEqual('2017年1月2日');
+        expect(adapter.format(adapter.createDate(2017,  0,  2), 'DD')).toEqual('2017年1月2日');
     });
 });
 
@@ -473,7 +473,7 @@ describe('LuxonDateAdapter with LOCALE_ID override', () => {
     }));
 
     it('should cascade locale id from the LOCALE_ID injection token to MC_DATE_LOCALE', () => {
-        expect(adapter.format(adapter.createDate(2017,  1,  2), 'DD'))
+        expect(adapter.format(adapter.createDate(2017,  0,  2), 'DD'))
             .toEqual('2 janv. 2017');
     });
 });

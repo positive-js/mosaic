@@ -161,7 +161,9 @@ export class McMonthView<D> implements AfterContentInit {
         const weekdays = longWeekdays.map((long, i) => {
             return { long, narrow: narrowWeekdays[i] };
         });
-        this.weekdays = weekdays.slice(firstDayOfWeek).concat(weekdays.slice(0, firstDayOfWeek));
+        this.weekdays = weekdays
+            .slice(firstDayOfWeek)
+            .concat(weekdays.slice(0, firstDayOfWeek));
 
         this._activeDate = this.dateAdapter.today();
     }
@@ -256,7 +258,7 @@ export class McMonthView<D> implements AfterContentInit {
     init() {
         this.selectedDate = this.getDateInCurrentMonth(this.selected);
         this.todayDate = this.getDateInCurrentMonth(this.dateAdapter.today());
-        this.monthLabel = this.dateAdapter.getMonthNames('short')[this.dateAdapter.getMonth(this.activeDate) - this.dateAdapter.firstMonth];
+        this.monthLabel = this.dateAdapter.getMonthNames('short')[this.dateAdapter.getMonth(this.activeDate)];
 
         this.monthLabel = this.monthLabel[0].toLocaleUpperCase() + this.monthLabel.substr(1);
 
