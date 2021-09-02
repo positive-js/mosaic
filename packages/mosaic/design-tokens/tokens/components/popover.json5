@@ -9,8 +9,10 @@
         size: {
             padding: { value: '16px' },
             'border-width': { value: '1px' },
-            'border-radius': { value: '4px' },
-            'arrow-width': { value: '4px' },
+            'border-radius': { value: '3px' },
+
+            'arrow-size': { value: '12px' },
+            'trigger-margin': { value: '9px' },
 
             'small-width': { value: '200px' },
             'normal-width': { value: '400px' },

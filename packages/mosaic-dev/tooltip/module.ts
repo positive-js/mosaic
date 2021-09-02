@@ -46,7 +46,7 @@ export class DemoComponent {
 
     selectedElement: string = 'button';
     selectedPlacement: string = 'left';
-    selectedTrigger: string = 'hover';
+    selectedTrigger: string = 'click';
     layoutClass: string = 'layout-align-center-center';
     content: string = 'button text';
     userDefinedPlacementPriority: string[] = ['bottom', 'right'];
