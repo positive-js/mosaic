@@ -1,3 +1,10 @@
+## 11.4.2 "Awesome Wingspan" (2021-09-03)
+
+### Mosaic
+
+ * bug fix  **datepicker, mosaic-luxon-adapter, mosaic-moment-adapter:** creating date with wrong month (#UIM-736) ([#692](https://github.com/positive-js/mosaic/issues/692)) ([9e27a9a](https://github.com/positive-js/mosaic/commit/9e27a9a215b9316a2f7580f27873c02ed60caf33)), closes [#UIM-736](https://github.com/positive-js/mosaic/issues/UIM-736)
+ * bug fix  correct form row margin in vertical form (#UIM-746) ([#690](https://github.com/positive-js/mosaic/issues/690)) ([0c2860f](https://github.com/positive-js/mosaic/commit/0c2860f77d40eebdb2dc1967a6d4ae3f0af0548f)), closes [#UIM-746](https://github.com/positive-js/mosaic/issues/UIM-746) [#UIM-737](https://github.com/positive-js/mosaic/issues/UIM-737) [#689](https://github.com/positive-js/mosaic/issues/689) [#UIM-746](https://github.com/positive-js/mosaic/issues/UIM-746)
+
 ## 11.4.1 "Hardwire Gator" (2021-09-02)
 
 ### Mosaic
