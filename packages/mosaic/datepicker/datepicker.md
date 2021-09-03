@@ -17,7 +17,7 @@
   - Переключатель года и месяца
   - Кнопки переключения
 
-<div style="margin-top: 15px;"><img src="./assets/images/datepicker/datepicket__structure.jpg" alt="timepicker structure" style="max-width: 633px"/>
+<div style="margin-top: 15px;"><img src="./assets/images/datepicker/datepicker__structure.jpg" alt="timepicker structure" style="max-width: 633px"/>
 </div>
 
 ### Описание работы
