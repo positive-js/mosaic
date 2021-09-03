@@ -247,6 +247,15 @@
             background: $tooltip-light-color-scheme-warning-background,
             color: $tooltip-light-color-scheme-warning-text,
             border-color: $tooltip-light-color-scheme-warning-border
+        ),
+        extended: (
+            background: $extended-tooltip-light-color-scheme-background,
+            color: $extended-tooltip-light-color-scheme-text,
+            border-color: $extended-tooltip-light-color-scheme-border,
+
+            header-background: $extended-tooltip-header-light-color-scheme-background,
+            header-color: $extended-tooltip-header-light-color-scheme-text,
+            header-border-color: $extended-tooltip-header-light-color-scheme-border
         )
     );
 
@@ -519,6 +528,15 @@
             background: $tooltip-dark-color-scheme-warning-background,
             color: $tooltip-dark-color-scheme-warning-text,
             border-color: $tooltip-dark-color-scheme-warning-border
+        ),
+        extended: (
+            background: $extended-tooltip-dark-color-scheme-background,
+            color: $extended-tooltip-dark-color-scheme-text,
+            border-color: $extended-tooltip-dark-color-scheme-border,
+
+            header-background: $extended-tooltip-header-dark-color-scheme-background,
+            header-color: $extended-tooltip-header-dark-color-scheme-text,
+            header-border-color: $extended-tooltip-header-dark-color-scheme-border
         )
     );
 

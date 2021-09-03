@@ -90,3 +90,25 @@
     }
 
 }
+
+@mixin popUpArrowBordersColor($value) {
+    &.mc-tooltip_placement-top .mc-tooltip__arrow {
+        border-bottom-color: $value;
+        border-right-color: $value;
+    }
+
+    &.mc-tooltip_placement-right .mc-tooltip__arrow {
+        border-left-color: $value;
+        border-bottom-color: $value;
+    }
+
+    &.mc-tooltip_placement-left .mc-tooltip__arrow {
+        border-right-color: $value;
+        border-top-color: $value;
+    }
+
+    &.mc-tooltip_placement-bottom .mc-tooltip__arrow {
+        border-top-color: $value;
+        border-left-color: $value;
+    }
+}

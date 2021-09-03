@@ -3,6 +3,10 @@
     <div>Заголовок окна</div>
 </ng-template>
 
+<ng-template #tooltipHeader>
+    <span>Header</span>
+</ng-template>
+
 
 <div class="container flex flex-100 layout-column layout-align-start-start">
     <div class="layout-row layout-align-start-start config">
@@ -157,10 +161,12 @@
     </div>
 
     <div class="result" [ngClass]="layoutClass" [ngSwitch]="showElement()">
+<!--                mcTooltipClass="tooltip-485"-->
+<!--                mcTooltipClass="mc-tooltip_warning"-->
         <button mc-button class="proove"
                 *ngSwitchCase="ELEMENTS.BUTTON"
                 [mcExtendedTooltip]="tooltipContent"
-                mcTooltipClass="tooltip-485"
+                [mcTooltipHeader]="tooltipHeader"
                 [mcPlacement]="selectedPlacement"
                 [mcPlacementPriority]="multipleSelected"
                 [mcTrigger]="selectedTrigger"

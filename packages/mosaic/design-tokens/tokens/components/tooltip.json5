@@ -38,25 +38,23 @@
     },
     'extended-tooltip': {
         'light-color-scheme': {
-            background: { value: '{light-color-scheme.second.palette.value.700.value}' },
-            text: { value: '{light-color-scheme.second.palette.value.contrast.700.value}' },
-            border: { value: 'transparent' },
+            background: { value: '{popup.light-color-scheme.background.value}' },
+            text: { value: '{light-color-scheme.foreground.text.value}' },
+            border: { value: '{popup.light-color-scheme.border.value}' },
             shadow: { value: '0 2px 4px 0 rgba(0, 0, 0, 0.2)' }
         },
         'dark-color-scheme': {
-            background: { value: '{dark-color-scheme.second.palette.value.40.value}' },
-            text: { value: '{dark-color-scheme.second.palette.value.contrast.40.value}' },
-            border: { value: 'transparent' },
+            background: { value: '{popup.dark-color-scheme.background.value}' },
+            text: { value: '{dark-color-scheme.foreground.text.value}' },
+            border: { value: '{popup.dark-color-scheme.border.value}' },
             shadow: { value: '0 2px 4px 0 rgba(0, 0, 0, 0.2)' }
         },
         size: {
-            'max-width': { value: '240px' },
-            'max-height': { value: '240px' },
             'border-radius': { value: '3px' },
-            'border-width': { value: '1px' },
-            padding: { value: '8px 16px' },
             'arrow-size': { value: '12px' },
-            'trigger-margin': { value: '9px' }
+            'trigger-margin': { value: '9px' },
+            padding: { value: '0' },
+            'max-height': { value: '240px' }
         },
         font: {
             default: { value: 'caption' }

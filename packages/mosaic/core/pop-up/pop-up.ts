@@ -12,7 +12,8 @@ export abstract class McPopUp implements OnDestroy {
     content: string | TemplateRef<any>;
 
     classMap = {};
-    modifier: string;
+
+    warning: boolean;
 
     visibility = PopUpVisibility.Initial;
     visibleChange = new EventEmitter<boolean>();
@@ -86,12 +87,11 @@ export abstract class McPopUp implements OnDestroy {
         return this.visibility === 'visible';
     }
 
-    updateClassMap(placement: string, customClass: string, size: string = ''): void {
+    updateClassMap(placement: string, customClass: string, classMap?): void {
         this.classMap = {
-            [`${this.prefix}_${this.modifier}`]: !!this.modifier,
-            [`${this.prefix}_${size}`]: !!size,
             [`${this.prefix}_placement-${placement}`]: true,
-            [customClass]: true
+            [customClass]: !!customClass,
+            ...classMap
         };
     }
 

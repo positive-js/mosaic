@@ -28,6 +28,13 @@ import { merge } from 'rxjs';
 import { mcTooltipAnimations } from './tooltip.animations';
 
 
+export enum TooltipModifier {
+    Default = 'default',
+    Warning = 'warning',
+    Extended = 'extended'
+}
+
+
 @Component({
     selector: 'mc-tooltip-component',
     animations: [mcTooltipAnimations.tooltipState],
@@ -41,6 +48,14 @@ export class McTooltipComponent extends McPopUp {
 
     constructor(changeDetectorRef: ChangeDetectorRef) {
         super(changeDetectorRef);
+    }
+
+    updateClassMap(placement: string, customClass: string, { modifier }) {
+        const classMap = {
+            [`${this.prefix}_${modifier}`]: true
+        };
+
+        super.updateClassMap(placement, customClass, classMap);
     }
 }
 
@@ -64,7 +79,6 @@ export function getMcTooltipInvalidPositionError(position: string) {
     return Error(`McTooltip position "${position}" is invalid.`);
 }
 
-const defaultTooltipModifierName = 'default';
 
 @Directive({
     selector: '[mcTooltip]',
@@ -131,11 +145,28 @@ export class McTooltipTrigger extends McPopUpTrigger<McTooltipComponent> {
         }
     }
 
+    @Input('mcTooltipWarning')
+    get warning(): boolean {
+        return this._warning;
+    }
+
+    set warning(value: boolean) {
+        this._warning = coerceBooleanProperty(value);
+
+        if (this._warning) {
+            this.modifier = TooltipModifier.Warning;
+        }
+    }
+
+    private _warning: boolean = false;
+
     protected originSelector = '.mc-tooltip';
 
     protected overlayConfig: OverlayConfig = {
         panelClass: 'mc-tooltip-panel'
     };
+
+    protected modifier: TooltipModifier = TooltipModifier.Default;
 
     constructor(
         overlay: Overlay,
@@ -169,15 +200,14 @@ export class McTooltipTrigger extends McPopUpTrigger<McTooltipComponent> {
     updateClassMap(newPlacement: string = this.placement) {
         if (!this.instance) { return; }
 
-        this.instance.modifier = defaultTooltipModifierName;
-
-        this.instance.updateClassMap(POSITION_TO_CSS_MAP[newPlacement], this.customClass);
+        this.instance.updateClassMap(
+            POSITION_TO_CSS_MAP[newPlacement],
+            this.customClass,
+            { modifier: this.modifier }
+        );
         this.instance.markForCheck();
     }
 }
-
-const extendedTooltipModifierName = 'extended';
-
 
 @Directive({
     selector: '[mcExtendedTooltip]',
@@ -214,6 +244,13 @@ export class McExtendedTooltipTrigger extends McTooltipTrigger {
 
     private _header: string | TemplateRef<any>;
 
+    @Input('mcTooltipWarning')
+    set warning(value: boolean) {
+        throw new Error(`You can't use mcTooltipWarning with mcExtendedTooltip. mcTooltipWarning: ${value}`);
+    }
+
+    protected modifier: TooltipModifier = TooltipModifier.Extended;
+
     constructor(
         overlay: Overlay,
         elementRef: ElementRef,
@@ -231,14 +268,5 @@ export class McExtendedTooltipTrigger extends McTooltipTrigger {
 
         this.instance.content = this.content;
         this.instance.header = this.header;
-    }
-
-    updateClassMap(newPlacement: string = this.placement) {
-        if (!this.instance) { return; }
-
-        this.instance.modifier = extendedTooltipModifierName;
-
-        this.instance.updateClassMap(POSITION_TO_CSS_MAP[newPlacement], this.customClass);
-        this.instance.markForCheck();
     }
 }

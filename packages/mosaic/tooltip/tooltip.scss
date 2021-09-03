@@ -3,31 +3,49 @@
 @import '../core/pop-up/pop-up';
 
 
-.mc-tooltip {
-    box-sizing: border-box;
-
-    z-index: $zindex-tooltip;
-
-    max-width: var(--mc-tooltip-size-max-width, $tooltip-size-max-width);
-
-    list-style: none;
-    white-space: pre-line;
-
-    $tooltip-distance: calc(var(--mc-tooltip-size-arrow-width, #{$tooltip-size-arrow-width - 1}) * 2);
-
-    @include popUpMargins(mc-tooltip, $tooltip-distance);
-}
-
 .mc-tooltip__inner {
     height: fit-content;
 
     border-radius: var(--mc-tooltip-size-border-radius, $tooltip-size-border-radius);
 
-    padding: var(--mc-tooltip-size-padding, $tooltip-size-padding);
-
     vertical-align: center;
     text-align: left;
     text-decoration: none;
+}
+
+.mc-tooltip {
+    box-sizing: border-box;
+
+    z-index: $zindex-tooltip;
+
+    list-style: none;
+    white-space: pre-line;
+
+    $trigger-margin: calc(var(--mc-tooltip-size-trigger-margin, #{$tooltip-size-trigger-margin}));
+
+    @include popUpMargins(mc-tooltip, $trigger-margin);
+
+    &.mc-tooltip_default,
+    &.mc-tooltip_warning {
+        max-width: var(--mc-tooltip-size-max-width, $tooltip-size-max-width);
+
+        .mc-tooltip__inner {
+            padding: var(--mc-tooltip-size-padding, $tooltip-size-padding);
+        }
+    }
+
+    &.mc-tooltip_extended {
+        max-height: var(--mc-extended-tooltip-size-max-height, $extended-tooltip-size-max-height);
+
+        .mc-tooltip__header {
+            height: var(--mc-extended-tooltip-header-size-height, $extended-tooltip-header-size-height);
+            padding: var(--mc-extended-tooltip-header-size-padding, $extended-tooltip-header-size-padding);
+        }
+
+        .mc-tooltip__content {
+            padding: var(--mc-extended-tooltip-size-padding, $extended-tooltip-size-padding);
+        }
+    }
 }
 
 .mc-tooltip__arrow {
@@ -39,8 +57,8 @@
     transform: rotate(45deg);
 }
 
-$tooltip-arrow-distance: calc(-1 * var(--mc-tooltip-size-arrow-width, #{$tooltip-size-arrow-width}));
-$arrow-padding: calc(18px - var(--mc-tooltip-size-arrow-width, #{$tooltip-size-arrow-width}));
+$tooltip-arrow-distance: calc(var(--mc-tooltip-size-arrow-size, #{$tooltip-size-arrow-size} / -2));
+$arrow-padding: calc(18px - (var(--mc-tooltip-size-trigger-margin, #{$tooltip-size-trigger-margin}) / 2));
 
 @include popUpArrowPositions(mc-tooltip, $tooltip-arrow-distance, $arrow-padding);
 
