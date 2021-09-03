@@ -62,15 +62,11 @@ enum DateParts {
 
 class DateDigit {
     maxDays = 31;
+    maxMonth = 12;
 
     parse: (value: string) => number;
 
-    get maxMonth(): number {
-        // tslint:disable-next-line:no-magic-numbers binary-expression-operand-order
-        return 11 + this.firstMonth;
-    }
-
-    constructor(public value: DateParts, public start: number, public length: number, public firstMonth = 0) {
+    constructor(public value: DateParts, public start: number, public length: number) {
         if (value === DateParts.day) {
             this.parse = this.parseDay;
         } else if (value === DateParts.month) {
@@ -615,7 +611,7 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
         }
 
         const newTimeObj = this.getValidDateOrNull(this.dateAdapter.createDateTime(
-            date.year, date.month, date.date, date.hours, date.minutes, date.seconds, date.milliseconds
+            date.year, date.month - 1, date.date, date.hours, date.minutes, date.seconds, date.milliseconds
         ));
 
         this.lastValueValid = !!newTimeObj;
@@ -772,7 +768,7 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
 
 
             date[this.firstDigit.fullName] = this.firstDigit.parse(firsViewDigit);
-            date.month = this.dateAdapter.firstMonth;
+            date.month = 1;
         // tslint:disable-next-line:no-magic-numbers
         } else if (viewDigits.length === 2) {
             if (firsViewDigit.length < this.firstDigit.length || secondViewDigit.length < this.secondDigit.length) {
@@ -797,7 +793,7 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
         }
 
         return this.getValidDateOrNull(this.dateAdapter.createDateTime(
-            date.year, date.month, date.date, date.hours, date.minutes, date.seconds, date.milliseconds
+            date.year, date.month - 1, date.date, date.hours, date.minutes, date.seconds, date.milliseconds
         ));
     }
 
@@ -852,8 +848,9 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
             case DateParts.month:
                 month++;
 
-                if (month > this.dateAdapter.lastMonth) {
-                    month = this.dateAdapter.firstMonth;
+                // tslint:disable-next-line:no-magic-numbers
+                if (month > 11) {
+                    month = 0;
                 }
 
                 const lastDay = this.getLastDayFor(year, month);
@@ -894,8 +891,9 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
             case DateParts.month:
                 month--;
 
-                if (month < this.dateAdapter.firstMonth) {
-                    month = this.dateAdapter.lastMonth;
+                if (month < 0) {
+                    // tslint:disable-next-line:no-magic-numbers
+                    month = 11;
                 }
 
                 const lastDay = this.getLastDayFor(year, month);
@@ -1066,13 +1064,11 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
                 ({ prev, length, start }, value: string, index: number, arr) => {
                     if (value === this.separator || (arr.length - 1) === index) {
                         if (!this.firstDigit) {
-                            this.firstDigit = new DateDigit(prev, start, length, this.dateAdapter.firstMonth);
+                            this.firstDigit = new DateDigit(prev, start, length);
                         } else if (!this.secondDigit) {
-                            this.secondDigit = new DateDigit(prev, start, length, this.dateAdapter.firstMonth);
+                            this.secondDigit = new DateDigit(prev, start, length);
                         } else if (!this.thirdDigit) {
-                            this.thirdDigit = new DateDigit(
-                                prev, start, arr.length - start, this.dateAdapter.firstMonth
-                            );
+                            this.thirdDigit = new DateDigit(prev, start, arr.length - start);
                         }
 
                         // tslint:disable:no-parameter-reassignment

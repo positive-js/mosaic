@@ -60,13 +60,6 @@ export function DeprecatedMethod(target: any, key: string, descriptor: PropertyD
 
 @Injectable()
 export class LuxonDateAdapter extends DateAdapter<DateTime> {
-    firstMonth: number = 1;
-
-    get lastMonth(): number {
-        // tslint:disable-next-line:binary-expression-operand-order no-magic-numbers
-        return 11 + this.firstMonth;
-    }
-
     private localeOptions: LocaleOptions;
     private dateTimeOptions: DateTimeOptions;
     private dateFormatter: DateFormatter<DateTime>;
@@ -107,7 +100,7 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
         let localeData: any = {
             dates: Array(31)
                 .fill(null)
-                .map((_, i) => this.createDate(2000, 1, i + 1).toFormat('d'))
+                .map((_, i) => this.createDate(2000, 0, i + 1).toFormat('d'))
         };
 
         if (i18nLocals.includes(locale)) {
@@ -152,7 +145,7 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
 
     getYear(date: DateTime): number { return date.year; }
 
-    getMonth(date: DateTime): number { return date.month; }
+    getMonth(date: DateTime): number { return date.month - 1; }
 
     getDate(date: DateTime): number { return date.day; }
 
@@ -169,7 +162,7 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     getDayOfWeek(date: DateTime): number {
         if (date.weekday === 7) { return 0; }
 
-        return date.weekday - 1;
+        return date.weekday;
     }
 
     getMonthNames(style: 'long' | 'short' | 'narrow'): string[] {
@@ -204,19 +197,16 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
         return date.setLocale(date.locale);
     }
 
-    createDate(year: number, month: number = 1, day: number = 1): DateTime {
-        if (month < this.firstMonth || month > this.lastMonth) {
-            throw Error(
-                `Invalid month index "${month}".
-                Month index has to be between ${this.firstMonth} and ${this.lastMonth}.`
-            );
+    createDate(year: number, month: number = 0, day: number = 1): DateTime {
+        if (month < 0 || month > 11) {
+            throw Error(`Invalid month index "${month}". Month index has to be between 0 and 11.`);
         }
 
         if (day < 1) {
             throw Error(`Invalid day "${day}". Date has to be greater than 0.`);
         }
 
-        const result = this.reconfigure(DateTime.fromObject({ year, month, day }));
+        const result = this.reconfigure(DateTime.fromObject({ year, month: month + 1, day }));
 
         // If the result isn't valid, the day must have been out of bounds for this month.
         if (!result.isValid) {
