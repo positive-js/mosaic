@@ -1,3 +1,9 @@
+## 11.4.1 "Hardwire Gator" (2021-09-02)
+
+### Mosaic
+
+ * bug fix  **dropdown:** missing type of ctor (#UIM-748) ([#691](https://github.com/positive-js/mosaic/issues/691)) ([3b3b41c](https://github.com/positive-js/mosaic/commit/3b3b41c5fd1d92e9a646a8428798e2b8d33cfed8)), closes [#UIM-748](https://github.com/positive-js/mosaic/issues/UIM-748)
+
 # 11.4.0 "Enclosed Cannon" (2021-09-01)
 
 ### Mosaic
