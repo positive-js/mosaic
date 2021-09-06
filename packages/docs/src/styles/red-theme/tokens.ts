@@ -1,3 +1,5 @@
+// tslint:disable
+
 /**
  * Do not edit directly
  * Generated on Mon, 06 Sep 2021 08:57:22 GMT
