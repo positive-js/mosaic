@@ -55,8 +55,8 @@
     transform: rotate(45deg);
 }
 
-$tooltip-arrow-distance: calc(var(--mc-tooltip-size-arrow-size, #{$tooltip-size-arrow-size} / -2));
+$arrow-offset: calc(var(--mc-tooltip-size-arrow-size, (#{$tooltip-size-arrow-size - 1} / -2)));
 $arrow-padding: calc(18px - (var(--mc-tooltip-size-trigger-margin, #{$tooltip-size-trigger-margin}) / 2));
 
-@include popUpArrowPositions(mc-tooltip, $tooltip-arrow-distance, $arrow-padding);
+@include popUpArrowPositions(mc-tooltip, $arrow-offset, $arrow-padding);
 

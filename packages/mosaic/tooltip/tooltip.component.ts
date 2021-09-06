@@ -145,21 +145,6 @@ export class McTooltipTrigger extends McPopUpTrigger<McTooltipComponent> {
         }
     }
 
-    @Input('mcTooltipWarning')
-    get warning(): boolean {
-        return this._warning;
-    }
-
-    set warning(value: boolean) {
-        this._warning = coerceBooleanProperty(value);
-
-        if (this._warning) {
-            this.modifier = TooltipModifier.Warning;
-        }
-    }
-
-    private _warning: boolean = false;
-
     protected originSelector = '.mc-tooltip';
 
     protected overlayConfig: OverlayConfig = {
@@ -209,6 +194,44 @@ export class McTooltipTrigger extends McPopUpTrigger<McTooltipComponent> {
     }
 }
 
+
+@Directive({
+    selector: '[mcWarningTooltip]',
+    exportAs: 'mcWarningTooltip',
+    host: {
+        '[class.mc-tooltip_open]': 'isOpen',
+
+        '(keydown)': 'handleKeydown($event)',
+        '(touchend)': 'handleTouchend()'
+    }
+})
+export class McWarningTooltipTrigger extends McTooltipTrigger {
+    @Input('mcWarningTooltip')
+    get content(): string | TemplateRef<any> {
+        return this._content;
+    }
+
+    set content(content: string | TemplateRef<any>) {
+        this._content = content;
+
+        this.updateData();
+    }
+
+    protected modifier: TooltipModifier = TooltipModifier.Warning;
+
+    constructor(
+        overlay: Overlay,
+        elementRef: ElementRef,
+        ngZone: NgZone,
+        scrollDispatcher: ScrollDispatcher,
+        hostView: ViewContainerRef,
+        @Inject(MC_TOOLTIP_SCROLL_STRATEGY) scrollStrategy,
+        @Optional() direction: Directionality
+    ) {
+        super(overlay, elementRef, ngZone, scrollDispatcher, hostView, scrollStrategy, direction);
+    }
+}
+
 @Directive({
     selector: '[mcExtendedTooltip]',
     exportAs: 'mcExtendedTooltip',
@@ -244,11 +267,6 @@ export class McExtendedTooltipTrigger extends McTooltipTrigger {
 
     private _header: string | TemplateRef<any>;
 
-    @Input('mcTooltipWarning')
-    set warning(value: boolean) {
-        throw new Error(`You can't use mcTooltipWarning with mcExtendedTooltip. mcTooltipWarning: ${value}`);
-    }
-
     protected modifier: TooltipModifier = TooltipModifier.Extended;
 
     constructor(
@@ -266,7 +284,7 @@ export class McExtendedTooltipTrigger extends McTooltipTrigger {
     updateData() {
         if (!this.instance) { return; }
 
-        this.instance.content = this.content;
+        super.updateData();
         this.instance.header = this.header;
     }
 }
