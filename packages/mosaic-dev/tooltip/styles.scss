@@ -3,6 +3,12 @@
 @include mosaic-visual();
 
 
+.mc-tooltip.mc-tooltip_default.tooltip-485 {
+    width: 485px;
+    max-width: 485px;
+}
+
+
 app {
     height: 100%;
     width: 100%;

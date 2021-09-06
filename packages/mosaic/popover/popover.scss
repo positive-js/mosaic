@@ -33,7 +33,7 @@
         max-width: var(--mc-popover-size-large-width, $popover-size-large-width);
     }
 
-    $popover-distance: calc(var(--mc-popover-size-arrow-width, #{$popover-size-arrow-width}) * 2);
+    $popover-distance: calc(var(--mc-popover-size-arrow-width, #{$popover-size-trigger-margin}));
 
     @include popUpMargins(mc-popover, $popover-distance);
 }
@@ -70,7 +70,7 @@
     transform: rotate(45deg);
 }
 
-$popover-arrow-distance: calc(-1 * (var(--mc-popover-size-arrow-width, #{$popover-size-arrow-width}) + 2px));
-$arrow-padding: calc(18px - var(--mc-popover-size-arrow-width, #{$popover-size-arrow-width}));
+$arrow-offset: calc((var(--mc-popover-size-arrow-width, #{$popover-size-arrow-size - 1}) / -2));
+$arrow-padding: calc(18px - var(--mc-popover-size-arrow-width, #{$popover-size-trigger-margin}));
 
-@include popUpArrowPositions(mc-popover, $popover-arrow-distance, $arrow-padding);
+@include popUpArrowPositions(mc-popover, $arrow-offset, $arrow-padding);

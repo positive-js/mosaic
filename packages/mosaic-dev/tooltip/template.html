@@ -161,12 +161,12 @@
     </div>
 
     <div class="result" [ngClass]="layoutClass" [ngSwitch]="showElement()">
-<!--                mcTooltipClass="tooltip-485"-->
 <!--                mcTooltipClass="mc-tooltip_warning"-->
-<!--                [mcTooltipHeader]="tooltipHeader"-->
         <button mc-button class="proove"
                 *ngSwitchCase="ELEMENTS.BUTTON"
-                [mcTooltip]="tooltipContent"
+                [mcExtendedTooltip]="tooltipContent"
+                [mcTooltipHeader]="tooltipHeader"
+                mcTooltipClass="tooltip-485"
                 [mcPlacement]="selectedPlacement"
                 [mcPlacementPriority]="multipleSelected"
                 [mcTrigger]="selectedTrigger"

@@ -46,7 +46,6 @@ import { mcPopoverAnimations } from './popover-animations';
 })
 export class McPopoverComponent extends McPopUp {
     prefix = 'mc-popover';
-    size: PopUpSizes;
 
     header: string | TemplateRef<any>;
     footer: string | TemplateRef<any>;
@@ -55,11 +54,11 @@ export class McPopoverComponent extends McPopUp {
         super(changeDetectorRef);
     }
 
-    updateClassMap(placement: string, customClass: string) {
+    updateClassMap(placement: string, customClass: string, size: PopUpSizes) {
         super.updateClassMap(
             placement,
             customClass,
-            { [`${this.prefix}_${this.size}`]: !!this.size }
+            { [`${this.prefix}_${size}`]: !!size }
         );
     }
 }
