@@ -26,10 +26,10 @@ import { Observable, Subject } from 'rxjs';
 import { delay as rxDelay, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
 import {
-    DEFAULT_4_POSITIONS_TO_CSS_MAP,
     EXTENDED_OVERLAY_POSITIONS,
     POSITION_MAP,
-    POSITION_PRIORITY_STRATEGY
+    POSITION_PRIORITY_STRATEGY,
+    POSITION_TO_CSS_MAP
 } from '../overlay/overlay-position-map';
 
 import { PopUpTriggers } from './constants';
@@ -37,16 +37,6 @@ import { PopUpTriggers } from './constants';
 
 const VIEWPORT_MARGIN: number = 8;
 
-/* Constant distance between popover container border
-*  corner according to popover placement and middle of arrow
-* */
-const POPOVER_ARROW_BORDER_DISTANCE: number = 20; // tslint:disable-line
-
-/* Constant value for min height and width of anchor element used for popover.
-*  Set as POPOVER_ARROW_BORDER_DISTANCE multiplied by 2
-*  plus 2px border for both sides of element. Used in check of position management.
-* */
-const ANCHOR_MIN_HEIGHT_WIDTH: number = 44; // tslint:disable-line
 
 @Directive()
 // tslint:disable-next-line:naming-convention
@@ -81,12 +71,14 @@ export abstract class McPopUpTrigger<T> {
     }
 
     set placement(value: string) {
-        if (value !== this._placement) {
+        if (POSITION_TO_CSS_MAP[value]) {
             this._placement = value;
 
             this.updateClassMap();
         } else {
             this._placement = 'top';
+
+            console.warn(`Unknown position: ${value}. Will used default position: ${this._placement}`);
         }
 
         if (this.visible) {
@@ -139,7 +131,6 @@ export abstract class McPopUpTrigger<T> {
     protected listeners = new Map<string, EventListenerOrEventListenerObject>();
 
     protected readonly availablePositions: { [key: string]: ConnectionPositionPair };
-    protected readonly defaultPositionsMap: { [key: string]: string };
     protected readonly destroyed = new Subject<void>();
 
     protected constructor(
@@ -152,8 +143,6 @@ export abstract class McPopUpTrigger<T> {
         protected direction?: Directionality
     ) {
         this.availablePositions = POSITION_MAP;
-
-        this.defaultPositionsMap = DEFAULT_4_POSITIONS_TO_CSS_MAP;
     }
 
     abstract updateClassMap(newPlacement?: string): void;
@@ -299,10 +288,6 @@ export abstract class McPopUpTrigger<T> {
 
         this.updateClassMap(newPlacement);
 
-        if (!this.defaultPositionsMap[newPlacement]) {
-            this.handlePositioningUpdate(newPlacement);
-        }
-
         if ($event.scrollableViewProperties.isOverlayClipped && this.instance.isVisible()) {
             // After position changes occur and the overlay is clipped by
             // a parent scrollable then close the tooltip.
@@ -336,7 +321,6 @@ export abstract class McPopUpTrigger<T> {
 
     /** Updates the position of the current popover. */
     updatePosition(reapplyPosition: boolean = false) {
-        console.log('updatePosition: ');
         this.overlayRef = this.createOverlay();
 
         const position = (this.overlayRef.getConfig().positionStrategy as FlexibleConnectedPositionStrategy)
@@ -346,39 +330,6 @@ export abstract class McPopUpTrigger<T> {
         if (reapplyPosition) {
             setTimeout(() => position.reapplyLastPosition());
         }
-    }
-
-    handlePositioningUpdate(placement: string) {
-        this.overlayRef = this.createOverlay();
-
-        const { clientHeight, clientWidth } = this.hostView.element.nativeElement;
-        const verticalOffset: number = Math.floor(clientHeight / 2); // tslint:disable-line
-        const horizontalOffset: number = Math.floor(clientWidth / 2 - 6); // tslint:disable-line
-        const offsets = {
-            top: verticalOffset,
-            bottom: verticalOffset,
-            right: horizontalOffset,
-            left: horizontalOffset
-        };
-
-        const styleProperty = placement.split(/(?=[A-Z])/)[1].toLowerCase();
-
-        if (
-            ['top', 'bottom'].includes(styleProperty) && clientHeight > ANCHOR_MIN_HEIGHT_WIDTH ||
-            ['left', 'right'].includes(styleProperty) && clientWidth > ANCHOR_MIN_HEIGHT_WIDTH
-        ) {
-            return;
-        }
-
-        const container = this.overlayRef.overlayElement.style;
-
-        if (!container[styleProperty]) {
-            container[styleProperty] = '0px';
-        }
-
-        const margin = parseInt(container[styleProperty].split('px')[0]);
-
-        container[styleProperty] = `${margin + offsets[styleProperty] - POPOVER_ARROW_BORDER_DISTANCE}px`;
     }
 
     protected getPriorityPlacementStrategy(value: string | string[]): ConnectionPositionPair[] {

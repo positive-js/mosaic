@@ -88,13 +88,6 @@ export const POSITION_MAP: { [key: string]: ConnectionPositionPair } = {
     }
 };
 
-export const DEFAULT_4_POSITIONS = objectValues([
-    POSITION_MAP.top,
-    POSITION_MAP.right,
-    POSITION_MAP.bottom,
-    POSITION_MAP.left
-]);
-
 export const EXTENDED_OVERLAY_POSITIONS = objectValues([
     POSITION_MAP.top,
     POSITION_MAP.topLeft,
@@ -252,27 +245,21 @@ export const POSITION_TO_CSS_MAP: {[key: string]: string} = {
     bottomRight: 'bottom-right'
 };
 
-export const DEFAULT_4_POSITIONS_TO_CSS_MAP: {[key: string]: string} = {
-    top: 'top',
-    bottom: 'bottom',
-    right: 'right',
-    left: 'left'
-};
 
 function arrayMap<T, S>(array: T[], iteratee: (item: T, index: number, arr: T[]) => S): S[] {
     let index = -1;
-    const length = array == null ? 0 : array.length;
+    const length = array === null ? 0 : array.length;
     const result = Array(length);
 
     while (++index < length) {
-        result[ index ] = iteratee(array[ index ], index, array);
+        result[index] = iteratee(array[ index ], index, array);
     }
 
     return result;
 }
-function baseValues<T>(object: { [key: string]: T } | T[], props: string[]): T[] {
+function baseValues<T>(object: T[], props: string[]): T[] {
     return arrayMap(props,  (key) => object[key]);
 }
-function objectValues<T>(object: { [key: string]: T } | T[]): T[] {
-    return object == null ? [] : baseValues(object, Object.keys(object));
+function objectValues<T>(object: T[]): T[] {
+    return object === null ? [] : baseValues(object, Object.keys(object));
 }
