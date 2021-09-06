@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 03 Sep 2021 14:17:17 GMT
+ * Generated on Mon, 06 Sep 2021 06:52:48 GMT
  */
 
 :root {
@@ -181,7 +181,7 @@
   --mc-extended-tooltip-size-border-radius: 3px;
   --mc-extended-tooltip-size-arrow-size: 12px;
   --mc-extended-tooltip-size-trigger-margin: 9px;
-  --mc-extended-tooltip-size-padding: 0;
+  --mc-extended-tooltip-size-padding: 8px 16px;
   --mc-extended-tooltip-size-max-height: 240px;
   --mc-extended-tooltip-header-size-height: 40px;
   --mc-extended-tooltip-header-size-padding: 10px 16px;

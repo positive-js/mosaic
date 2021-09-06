@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 03 Sep 2021 14:17:17 GMT
+ * Generated on Mon, 06 Sep 2021 06:52:48 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
@@ -788,7 +788,7 @@ export const ExtendedTooltipDarkColorSchemeShadow = "0 2px 4px 0 rgba(0, 0, 0, 0
 export const ExtendedTooltipSizeBorderRadius = "3px";
 export const ExtendedTooltipSizeArrowSize = "12px";
 export const ExtendedTooltipSizeTriggerMargin = "9px";
-export const ExtendedTooltipSizePadding = "0";
+export const ExtendedTooltipSizePadding = "8px 16px";
 export const ExtendedTooltipSizeMaxHeight = "240px";
 export const ExtendedTooltipFontDefault = "caption";
 export const ExtendedTooltipHeaderLightColorSchemeBorder = "#E6E6E6";

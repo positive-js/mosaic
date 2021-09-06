@@ -53,7 +53,7 @@
             'border-radius': { value: '3px' },
             'arrow-size': { value: '12px' },
             'trigger-margin': { value: '9px' },
-            padding: { value: '0' },
+            padding: { value: '8px 16px' },
             'max-height': { value: '240px' }
         },
         font: {

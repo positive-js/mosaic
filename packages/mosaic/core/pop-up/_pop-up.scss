@@ -91,24 +91,39 @@
 
 }
 
-@mixin popUpArrowBordersColor($value) {
-    &.mc-tooltip_placement-top .mc-tooltip__arrow {
-        border-bottom-color: $value;
-        border-right-color: $value;
+@mixin popUpArrowBordersColor($name, $value) {
+    &.#{$name}_placement-top,
+    &.#{$name}_placement-top-left,
+    &.#{$name}_placement-top-right {
+        & .mc-tooltip__arrow {
+            border-bottom-color: $value;
+            border-right-color: $value;
+        }
+    }
+    &.#{$name}_placement-right,
+    &.#{$name}_placement-right-top,
+    &.#{$name}_placement-right-bottom {
+        & .mc-tooltip__arrow {
+            border-left-color: $value;
+            border-bottom-color: $value;
+        }
     }
 
-    &.mc-tooltip_placement-right .mc-tooltip__arrow {
-        border-left-color: $value;
-        border-bottom-color: $value;
+    &.#{$name}_placement-left,
+    &.#{$name}_placement-left-top,
+    &.#{$name}_placement-left-bottom {
+        & .mc-tooltip__arrow {
+            border-right-color: $value;
+            border-top-color: $value;
+        }
     }
 
-    &.mc-tooltip_placement-left .mc-tooltip__arrow {
-        border-right-color: $value;
-        border-top-color: $value;
-    }
-
-    &.mc-tooltip_placement-bottom .mc-tooltip__arrow {
-        border-top-color: $value;
-        border-left-color: $value;
+    &.#{$name}_placement-bottom,
+    &.#{$name}_placement-bottom-left,
+    &.#{$name}_placement-bottom-right {
+        & .mc-tooltip__arrow {
+            border-top-color: $value;
+            border-left-color: $value;
+        }
     }
 }

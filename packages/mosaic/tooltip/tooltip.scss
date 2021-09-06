@@ -4,21 +4,16 @@
 
 
 .mc-tooltip__inner {
-    height: fit-content;
-
     border-radius: var(--mc-tooltip-size-border-radius, $tooltip-size-border-radius);
-
-    vertical-align: center;
-    text-align: left;
-    text-decoration: none;
 }
 
 .mc-tooltip {
     box-sizing: border-box;
 
+    border-radius: var(--mc-tooltip-size-border-radius, $tooltip-size-border-radius);
+
     z-index: $zindex-tooltip;
 
-    list-style: none;
     white-space: pre-line;
 
     $trigger-margin: calc(var(--mc-tooltip-size-trigger-margin, #{$tooltip-size-trigger-margin}));
@@ -40,6 +35,9 @@
         .mc-tooltip__header {
             height: var(--mc-extended-tooltip-header-size-height, $extended-tooltip-header-size-height);
             padding: var(--mc-extended-tooltip-header-size-padding, $extended-tooltip-header-size-padding);
+
+            border-top-left-radius: var(--mc-tooltip-size-border-radius, $tooltip-size-border-radius);
+            border-top-right-radius: var(--mc-tooltip-size-border-radius, $tooltip-size-border-radius);
         }
 
         .mc-tooltip__content {

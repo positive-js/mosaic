@@ -54,7 +54,7 @@
             background-color: $background;
         }
 
-        @include popUpArrowBordersColor($border-color);
+        @include popUpArrowBordersColor(mc-tooltip, $border-color);
     }
 
     .mc-tooltip.mc-tooltip_warning {
@@ -79,7 +79,7 @@
             background-color: $background;
         }
 
-        @include popUpArrowBordersColor($border-color);
+        @include popUpArrowBordersColor(mc-tooltip, $border-color);
     }
 }
 
