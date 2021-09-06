@@ -1,7 +1,7 @@
 <div class="docs-row">
     <mc-form-field
-        mcTooltip="Только цифры"
-        #tooltip="mcTooltip">
+        mcWarningTooltip="Только цифры"
+        #tooltip="mcWarningTooltip">
 
         <i mcPrefix mc-icon="mc-clock_16"></i>
         <input mcTimepicker [(ngModel)]="time" [format]="'HH:mm'" [mcValidationTooltip]="tooltip">

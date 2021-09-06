@@ -19,8 +19,8 @@
 <div class="container">
     <label>Default datepicker toggle</label>
     <mc-form-field (click)="myDatepicker1.toggle()"
-                   mcTooltip="Только цифры"
-                   #tooltip="mcTooltip">
+                   mcWarningTooltip="Только цифры"
+                   #tooltip="mcWarningTooltip">
 
         <input [formControl]="formControlValue"
                [placeholder]="selectedLanguage.placeholder"
