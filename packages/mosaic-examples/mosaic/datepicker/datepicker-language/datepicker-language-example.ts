@@ -46,7 +46,7 @@ export class DatepickerLanguageExample {
         private adapter: DateAdapter<any>,
         @Inject(MC_DATE_FORMATS) private dateFormats: McDateFormats
     ) {
-        this.selectedDate = new FormControl(this.adapter.createDateTime(2020, 5, 6, 12, 0, 0, 0));
+        this.selectedDate = new FormControl(null);
     }
 
     ngOnInit() {

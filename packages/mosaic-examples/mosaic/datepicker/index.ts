@@ -12,6 +12,7 @@ import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 import { DatepickerCustomExample } from './datepicker-custom/datepicker-custom-example';
 import { DatepickerDisabledExample } from './datepicker-disabled/datepicker-disabled-example';
 import { DatepickerLanguageExample } from './datepicker-language/datepicker-language-example';
+import { DatepickerNotEmptyExample } from './datepicker-not-empty/datepicker-not-empty-example';
 import { DatepickerOverviewExample } from './datepicker-overview/datepicker-overview-example';
 import { DatepickerYearExample } from './datepicker-year/datepicker-year-example';
 
@@ -20,6 +21,7 @@ export {
     DatepickerDisabledExample,
     DatepickerLanguageExample,
     DatepickerOverviewExample,
+    DatepickerNotEmptyExample,
     DatepickerYearExample,
     DatepickerCustomExample
 };
@@ -29,7 +31,8 @@ const EXAMPLES = [
     DatepickerLanguageExample,
     DatepickerOverviewExample,
     DatepickerYearExample,
-    DatepickerCustomExample
+    DatepickerCustomExample,
+    DatepickerNotEmptyExample
 ];
 
 

@@ -2,7 +2,8 @@
 .docs-markdown {
     max-width: 100%;
 
-    &__p, &__li {
+    &__p,
+    &__li {
         margin: 0;
         padding-top: 8px;
     }
@@ -53,9 +54,12 @@
     &__table {
         text-align: left;
         padding-top: 16px;
+
+        width: 100%;
     }
 
-    &__th, &__td {
+    &__th,
+    &__td {
         padding: 8px;
         vertical-align: top;
 
@@ -68,11 +72,19 @@
         }
     }
 
+    th:first-of-type {
+        width: 35%;
+    }
+
+    th:nth-of-type(2) {
+        width: 65%;
+    }
+
     &__code {
         white-space: pre-wrap;
     }
 
-    &__pre>&__code {
+    &__pre > &__code {
         display: block;
         position: relative;
         overflow-x: auto;
