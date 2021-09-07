@@ -40,6 +40,9 @@ import { mcPopoverAnimations } from './popover-animations';
     templateUrl: './popover.component.html',
     preserveWhitespaces: false,
     styleUrls: ['./popover.scss'],
+    host: {
+        '(keydown.esc)': 'hide(0)'
+    },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     animations: [mcPopoverAnimations.popoverState]
@@ -196,6 +199,17 @@ export class McPopoverTrigger extends McPopUpTrigger<McPopoverComponent> {
         this.updateClassMap();
     }
 
+    @Input()
+    get closeOnScroll(): boolean {
+        return this._closeOnScroll;
+    }
+
+    set closeOnScroll(value: boolean) {
+        this._closeOnScroll = coerceBooleanProperty(value);
+    }
+
+    private _closeOnScroll: boolean = false;
+
     @Input() backdropClass: string = 'cdk-overlay-transparent-backdrop';
 
     protected originSelector = '.mc-popover';
@@ -258,6 +272,7 @@ export class McPopoverTrigger extends McPopUpTrigger<McPopoverComponent> {
         return merge(
             this.overlayRef!.backdropClick(),
             this.hasBackdrop ? NEVER : this.overlayRef!.outsidePointerEvents(),
+            this.closeOnScroll ? this.scrollDispatcher.scrolled() : NEVER,
             this.overlayRef!.detachments()
         );
     }
