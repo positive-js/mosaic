@@ -1,8 +1,6 @@
-// tslint:disable
-
 /**
  * Do not edit directly
- * Generated on Mon, 06 Sep 2021 08:57:22 GMT
+ * Generated on Tue, 07 Sep 2021 13:31:51 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
@@ -596,6 +594,7 @@ export const OptionSizeBorderWidth = "2px";
 export const OptionFontDefault = "body";
 export const PopoverLightColorSchemeBorder = "#B3B3B3";
 export const PopoverDarkColorSchemeBorder = "#4D4D4D";
+export const PopoverSizeMaxHeight = "480px";
 export const PopoverSizePadding = "16px";
 export const PopoverSizeBorderWidth = "1px";
 export const PopoverSizeBorderRadius = "3px";

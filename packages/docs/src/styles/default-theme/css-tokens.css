@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 06 Sep 2021 08:57:22 GMT
+ * Generated on Tue, 07 Sep 2021 13:31:51 GMT
  */
 
 :root {
@@ -116,6 +116,7 @@
   --mc-option-size-horizontal-padding: 16px;
   --mc-option-size-height: 32px;
   --mc-option-size-border-width: 2px;
+  --mc-popover-size-max-height: 480px;
   --mc-popover-size-padding: 16px;
   --mc-popover-size-border-width: 1px;
   --mc-popover-size-border-radius: 3px;

@@ -39,6 +39,10 @@
 }
 
 .mc-popover__container {
+    display: flex;
+    flex-direction: column;
+
+    max-height: var(--mc-popover-size-max-height, $popover-size-max-height);
     border-radius: var(--mc-popover-size-border-radius, $popover-size-border-radius);
     overflow: hidden;
 }
@@ -50,6 +54,8 @@
 }
 
 .mc-popover__content {
+    overflow: hidden;
+
     padding: var(--mc-popover-size-padding, $popover-size-padding);
 }
 
