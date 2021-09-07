@@ -70,8 +70,8 @@
     position: absolute;
 
     z-index: -1;
-    width: 14px;
-    height: 14px;
+    width: var(--mc-popover-size-arrow-width, #{$popover-size-arrow-size});
+    height: var(--mc-popover-size-arrow-width, #{$popover-size-arrow-size});
     border: solid 1px;
     transform: rotate(45deg);
 }
