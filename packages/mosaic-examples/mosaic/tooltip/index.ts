@@ -4,20 +4,17 @@ import { NgModule } from '@angular/core';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 
-import { TooltipArrowPlacementExample } from './tooltip-arrow-placement/tooltip-arrow-placement-example';
 import { TooltipOverviewExample } from './tooltip-overview/tooltip-overview-example';
 import { TooltipScrollableExample } from './tooltip-scrollable/tooltip-scrollable-example';
 
 
 export {
     TooltipOverviewExample,
-    TooltipArrowPlacementExample,
     TooltipScrollableExample
 };
 
 const EXAMPLES = [
     TooltipOverviewExample,
-    TooltipArrowPlacementExample,
     TooltipScrollableExample
 ];
 

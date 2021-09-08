@@ -21,6 +21,7 @@
         border-bottom-color: map-get($header, border);
     }
 
+    .mc-popover__container,
     .mc-popover__content {
         color: map-get($popover, text);
         background-color: map-get($popover, background);
