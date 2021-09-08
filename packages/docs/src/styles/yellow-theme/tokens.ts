@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Wed, 08 Sep 2021 07:30:22 GMT
+ * Generated on Wed, 08 Sep 2021 08:04:39 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#D6930D";
@@ -615,12 +615,14 @@ export const PopoverHeaderLightColorSchemeBackground = "white";
 export const PopoverHeaderDarkColorSchemeBorder = "transparent";
 export const PopoverHeaderDarkColorSchemeText = "#F0F0F0";
 export const PopoverHeaderDarkColorSchemeBackground = "#4D4D4D";
+export const PopoverHeaderSizeHeight = "10px 16px";
 export const PopoverHeaderSizePadding = "10px 16px";
 export const PopoverHeaderFontDefault = "subheading";
 export const PopoverFooterLightColorSchemeBorder = "#F0F0F0";
 export const PopoverFooterLightColorSchemeBackground = "#F0F0F0";
 export const PopoverFooterDarkColorSchemeBorder = "transparent";
 export const PopoverFooterDarkColorSchemeBackground = "transparent";
+export const PopoverFooterSizeMarginTop = "8px";
 export const PopoverFooterSizePadding = "12px 16px";
 export const PopoverFooterSizeHeight = "56px";
 export const PopoverFooterFontDefault = "body";
