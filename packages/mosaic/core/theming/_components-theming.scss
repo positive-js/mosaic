@@ -169,7 +169,21 @@
     );
 
     $popover: (
-        border: $popover-light-color-scheme-border
+        background: $popover-light-color-scheme-background,
+        text: $popover-light-color-scheme-text,
+        shadow: $popover-light-color-scheme-shadow,
+        border: $popover-light-color-scheme-border,
+
+        footer: (
+            background: $popover-footer-light-color-scheme-background,
+            border: $popover-footer-light-color-scheme-border,
+        ),
+
+        header: (
+            text: $popover-header-light-color-scheme-text,
+            background: $popover-header-light-color-scheme-background,
+            border: $popover-header-light-color-scheme-border,
+        )
     );
 
     $progress-bar: (
@@ -450,7 +464,21 @@
     );
 
     $popover: (
-        border: $popover-dark-color-scheme-border
+        background: $popover-dark-color-scheme-background,
+        text: $popover-dark-color-scheme-text,
+        shadow: $popover-dark-color-scheme-shadow,
+        border: $popover-dark-color-scheme-border,
+
+        footer: (
+            background: $popover-footer-dark-color-scheme-background,
+            border: $popover-footer-dark-color-scheme-border,
+        ),
+
+        header: (
+            text: $popover-header-dark-color-scheme-text,
+            background: $popover-header-dark-color-scheme-background,
+            border: $popover-header-dark-color-scheme-border,
+        )
     );
 
     $progress-bar: (

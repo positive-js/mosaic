@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 07 Sep 2021 13:31:52 GMT
+ * Generated on Wed, 08 Sep 2021 07:30:21 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#E04D36";
@@ -592,11 +592,16 @@ export const OptionSizeHorizontalPadding = "16px";
 export const OptionSizeHeight = "32px";
 export const OptionSizeBorderWidth = "2px";
 export const OptionFontDefault = "body";
+export const PopoverLightColorSchemeBackground = "white";
+export const PopoverLightColorSchemeText = "#4D4D4D";
+export const PopoverLightColorSchemeShadow = "0 3px 3px 0 rgba(0, 0, 0, 0.2)";
 export const PopoverLightColorSchemeBorder = "#B3B3B3";
+export const PopoverDarkColorSchemeBackground = "#4D4D4D";
+export const PopoverDarkColorSchemeText = "#F0F0F0";
+export const PopoverDarkColorSchemeShadow = "0 3px 3px 0 rgba(0, 0, 0, 0.2)";
 export const PopoverDarkColorSchemeBorder = "#4D4D4D";
 export const PopoverSizeMaxHeight = "480px";
 export const PopoverSizePadding = "16px";
-export const PopoverSizeBorderWidth = "1px";
 export const PopoverSizeBorderRadius = "3px";
 export const PopoverSizeArrowSize = "12px";
 export const PopoverSizeTriggerMargin = "9px";
@@ -604,10 +609,20 @@ export const PopoverSizeSmallWidth = "200px";
 export const PopoverSizeNormalWidth = "400px";
 export const PopoverSizeLargeWidth = "640px";
 export const PopoverFontDefault = "body";
+export const PopoverHeaderLightColorSchemeBorder = "#E6E6E6";
+export const PopoverHeaderLightColorSchemeText = "#4D4D4D";
+export const PopoverHeaderLightColorSchemeBackground = "white";
+export const PopoverHeaderDarkColorSchemeBorder = "transparent";
+export const PopoverHeaderDarkColorSchemeText = "#F0F0F0";
+export const PopoverHeaderDarkColorSchemeBackground = "#4D4D4D";
 export const PopoverHeaderSizePadding = "10px 16px";
 export const PopoverHeaderFontDefault = "subheading";
+export const PopoverFooterLightColorSchemeBorder = "#F0F0F0";
+export const PopoverFooterLightColorSchemeBackground = "#F0F0F0";
+export const PopoverFooterDarkColorSchemeBorder = "transparent";
+export const PopoverFooterDarkColorSchemeBackground = "transparent";
 export const PopoverFooterSizePadding = "12px 16px";
-export const PopoverFooterSizeMarginTop = "8px";
+export const PopoverFooterSizeHeight = "56px";
 export const PopoverFooterFontDefault = "body";
 export const PopupLightColorSchemeShadow = "0 3px 3px 0 rgba(0, 0, 0, 0.2)";
 export const PopupLightColorSchemeBorder = "#B3B3B3";

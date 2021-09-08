@@ -11,7 +11,7 @@
     position: relative;
 
     border-radius: var(--mc-popover-size-border-radius, $popover-size-border-radius);
-    border-width: var(--mc-popover-size-border-width, $popover-size-border-width);
+    border-width: 1px;
     border-style: solid;
 
     box-sizing: border-box;
@@ -33,7 +33,7 @@
         max-width: var(--mc-popover-size-large-width, $popover-size-large-width);
     }
 
-    $popover-distance: calc(var(--mc-popover-size-arrow-width, #{$popover-size-trigger-margin}));
+    $popover-distance: calc(var(--mc-popover-size-trigger-margin, #{$popover-size-trigger-margin}));
 
     @include popUpMargins(mc-popover, $popover-distance);
 }
@@ -48,8 +48,11 @@
 }
 
 .mc-popover__header {
+    height: var(--mc-popover-header-size-height, $popover-header-size-height);
+
     padding: var(--mc-popover-header-size-padding, $popover-header-size-padding);
-    border-bottom-width: var(--mc-popover-size-border-width, $popover-size-border-width);
+
+    border-bottom-width: 1px;
     border-bottom-style: solid;
 }
 
@@ -60,9 +63,11 @@
 }
 
 .mc-popover__footer {
-    margin-top: var(--mc-popover-footer-size-margin-top, $popover-footer-size-margin-top);
+    height: var(--mc-popover-footer-size-height, $popover-footer-size-height);
+
     padding: var(--mc-popover-footer-size-padding, $popover-footer-size-padding);
-    border-top-width: var(--mc-popover-size-border-width, $popover-size-border-width);
+
+    border-top-width: 1px;
     border-top-style: solid;
 }
 
@@ -70,13 +75,16 @@
     position: absolute;
 
     z-index: -1;
-    width: var(--mc-popover-size-arrow-width, #{$popover-size-arrow-size});
-    height: var(--mc-popover-size-arrow-width, #{$popover-size-arrow-size});
+
+    width: var(--mc-popover-size-arrow-size, #{$popover-size-arrow-size});
+    height: var(--mc-popover-size-arrow-size, #{$popover-size-arrow-size});
+
     border: solid 1px;
+
     transform: rotate(45deg);
 }
 
-$arrow-offset: calc((var(--mc-popover-size-arrow-width, #{$popover-size-arrow-size - 1}) / -2));
-$arrow-padding: calc(18px - var(--mc-popover-size-arrow-width, #{$popover-size-trigger-margin}));
+$arrow-offset: calc((var(--mc-popover-size-arrow-size, #{$popover-size-arrow-size - 1}) / -2));
+$arrow-padding: calc(18px - var(--mc-popover-size-trigger-margin, #{$popover-size-trigger-margin}));
 
 @include popUpArrowPositions(mc-popover, $arrow-offset, $arrow-padding);
