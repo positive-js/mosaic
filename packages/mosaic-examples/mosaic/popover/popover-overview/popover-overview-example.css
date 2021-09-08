@@ -1,7 +1,5 @@
-body, html {
-    width: 100%;
-    height: 100%;
-    margin: 0;
+.left-padding {
+    padding-left: 32px;
 }
 
 app {
@@ -13,11 +11,13 @@ app {
     animation: blink-animation 1s steps(5, start) infinite;
     -webkit-animation: blink-animation 1s steps(5, start) infinite;
 }
+
 @keyframes blink-animation {
     to {
         visibility: hidden;
     }
 }
+
 @-webkit-keyframes blink-animation {
     to {
         visibility: hidden;
@@ -40,14 +40,18 @@ app {
 }
 
 .result {
-    border-top: solid 2px #56d1ff;
-    border-bottom: solid 2px #56d1ff;
+    border: solid 2px red;
     height: 50%;
     width: 100%;
 }
 
-.padding-32 {
-    padding: 8px;
+.visual-box {
+    height: 100px;
+    width: 100px;
+    border: 1px solid #575757;
+    position: relative;
+    margin-top: 32px;
+    margin-bottom: 32px;
 }
 
 .visual-box_clickable {
@@ -60,14 +64,6 @@ app {
 
 .active {
     background: red;
-}
-
-.visual-box {
-    height: 100px;
-    width: 240px;
-    border: 1px solid #575757;
-    position: relative;
-    margin: 50px;
 }
 
 .visual-box_placement-top-left {
@@ -129,8 +125,3 @@ app {
     right: -6px;
     top: 10px;
 }
-
-.popover-485 .mc-popover {
-    max-width: 485px !important;
-}
-

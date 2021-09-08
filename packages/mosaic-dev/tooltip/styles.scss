@@ -3,11 +3,15 @@
 @include mosaic-visual();
 
 
-.mc-tooltip.mc-tooltip_default.tooltip-485 {
+.mc-tooltip.mc-tooltip_extended.tooltip-485 {
     width: 485px;
     max-width: 485px;
 }
 
+
+.left-padding {
+    padding-left: 32px;
+}
 
 app {
     height: 100%;
@@ -44,25 +48,18 @@ app {
     }
 
     .result {
-        display: flex;
-
-        width: 300px;
-        height: 300px;
-        align-self: center;
-
-        border: 1px solid red;
-    }
-
-    .padding-32 {
-        padding: 8px;
+        border: solid 2px red;
+        height: 50%;
+        width: 100%;
     }
 
     .visual-box {
         height: 100px;
-        width: 240px;
+        width: 100px;
         border: 1px solid #575757;
         position: relative;
-        margin: 50px;
+        margin-top: 32px;
+        margin-bottom: 32px;
 
         .visual-box_clickable {
             height: 12px;
@@ -137,10 +134,3 @@ app {
         }
     }
 }
-
-.popover-485 {
-    .mc-popover {
-        max-width: 485px !important;
-    }
-}
-

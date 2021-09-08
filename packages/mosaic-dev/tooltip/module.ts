@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McCheckboxModule } from '@ptsecurity/mosaic/checkbox';
+import { McFormsModule } from '@ptsecurity/mosaic/core';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
@@ -20,7 +21,8 @@ import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
     templateUrl: './template.html'
 })
 export class DemoComponent {
-    popoverActiveStage: number;
+    tooltipActiveStage: number;
+    selectedOrder: boolean;
 
     isPopoverVisibleLeft: boolean = false;
 
@@ -29,7 +31,9 @@ export class DemoComponent {
     ELEMENTS = {
         BUTTON: 'button',
         INPUT: 'input',
-        ICON: 'icon'
+        ICON: 'icon',
+        WARNING: 'warning',
+        EXTENDED: 'extended'
     };
 
     TRIGGERS = {
@@ -38,42 +42,34 @@ export class DemoComponent {
         HOVER: 'hover'
     };
 
-    SIZE = {
-        LARGE: 'large',
-        NORMAL: 'normal',
-        SMALL: 'small'
-    };
-
     selectedElement: string = 'button';
     selectedPlacement: string = 'left';
     selectedTrigger: string = 'click';
-    layoutClass: string = 'layout-align-center-center';
+    layoutClass: string = 'layout-row layout-align-center-center';
     content: string = 'button text';
     userDefinedPlacementPriority: string[] = ['bottom', 'right'];
     multipleSelected: string[] = [];
 
     constructor() {
-        this.popoverActiveStage = 1;
+        this.tooltipActiveStage = 1;
     }
 
     changeStep(direction: number) {
-        const newStage = this.popoverActiveStage + direction;
+        const newStage = this.tooltipActiveStage + direction;
 
         // tslint:disable-next-line:no-magic-numbers
-        if (newStage < 1 || newStage > 3) {
-            return;
-        }
+        if (newStage < 1 || newStage > 3) { return; }
 
-        this.popoverActiveStage += direction;
+        this.tooltipActiveStage += direction;
     }
 
-    onPopoverVisibleChange($event) {
+    onTooltipVisibleChange($event) {
         if (!$event) {
             this.activatedPosition = '';
         }
     }
 
-    onStrategyPlacementChange(event) {
+    onPlacementChange(event) {
         this.activatedPosition = event;
     }
 
@@ -93,6 +89,15 @@ export class DemoComponent {
         return this.activatedPosition === value && this.selectedPlacement !== this.activatedPosition;
     }
 
+    getOrder(forElement: string) {
+        if (forElement === 'config') {
+            return this.selectedOrder ? { order: 2 } : { order: 1 };
+        }
+        if (forElement === 'result') {
+            return this.selectedOrder ? { order: 1 } : { order: 2 };
+        }
+    }
+
     get isFallbackActivated(): boolean {
         return this.selectedPlacement !== this.activatedPosition && this.activatedPosition !== '';
     }
@@ -105,6 +110,7 @@ export class DemoComponent {
         BrowserAnimationsModule,
         A11yModule,
         FormsModule,
+        McFormsModule,
         McToolTipModule,
         McButtonModule,
         McInputModule,
@@ -115,5 +121,4 @@ export class DemoComponent {
     ],
     bootstrap: [DemoComponent]
 })
-export class DemoModule {
-}
+export class DemoModule {}
