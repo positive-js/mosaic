@@ -1,16 +1,17 @@
-import { HorizontalConnectionPos, VerticalConnectionPos } from '@angular/cdk/overlay';
-
-
-export type ArrowPlacements = HorizontalConnectionPos | VerticalConnectionPos;
-
-// tslint:disable-next-line:naming-convention
-export const ArrowPlacements = {
-    Top: 'top' as ArrowPlacements,
-    Center: 'center' as ArrowPlacements,
-    Bottom: 'bottom' as ArrowPlacements,
-    Right: 'right' as ArrowPlacements,
-    Left: 'left' as ArrowPlacements
-};
+export enum PopUpPlacements {
+    Top = 'top',
+    TopLeft = 'topLeft',
+    TopRight = 'topRight',
+    Right = 'right',
+    RightTop = 'rightTop',
+    RightBottom = 'rightBottom',
+    Left = 'left',
+    LeftTop = 'leftTop',
+    LeftBottom = 'leftBottom',
+    Bottom = 'bottom',
+    BottomLeft = 'bottomLeft',
+    BottomRight = 'bottomRight'
+}
 
 export enum PopUpVisibility {
     Initial = 'initial',

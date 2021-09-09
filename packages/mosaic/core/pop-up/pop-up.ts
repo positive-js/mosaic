@@ -84,7 +84,7 @@ export abstract class McPopUp implements OnDestroy {
     }
 
     isVisible(): boolean {
-        return this.visibility === 'visible';
+        return this.visibility === PopUpVisibility.Visible;
     }
 
     updateClassMap(placement: string, customClass: string, classMap?): void {

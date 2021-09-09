@@ -32,7 +32,7 @@ import {
     POSITION_TO_CSS_MAP
 } from '../overlay/overlay-position-map';
 
-import { PopUpTriggers } from './constants';
+import { PopUpPlacements, PopUpTriggers } from './constants';
 
 
 const VIEWPORT_MARGIN: number = 8;
@@ -66,17 +66,17 @@ export abstract class McPopUpTrigger<T> {
     private _placementPriority: string | string[] | null = null;
 
     @Input('mcPlacement')
-    get placement(): string {
+    get placement(): PopUpPlacements {
         return this._placement;
     }
 
-    set placement(value: string) {
+    set placement(value: PopUpPlacements) {
         if (POSITION_TO_CSS_MAP[value]) {
             this._placement = value;
 
             this.updateClassMap();
         } else {
-            this._placement = 'top';
+            this._placement = PopUpPlacements.Top;
 
             console.warn(`Unknown position: ${value}. Will used default position: ${this._placement}`);
         }
@@ -86,7 +86,7 @@ export abstract class McPopUpTrigger<T> {
         }
     }
 
-    private _placement: string = 'top';
+    private _placement = PopUpPlacements.Top;
 
     @Input('mcVisible')
     get visible(): boolean {
@@ -276,7 +276,7 @@ export abstract class McPopUpTrigger<T> {
                 originX === this.availablePositions[key].originX && originY === this.availablePositions[key].originY &&
                 overlayX === this.availablePositions[key].overlayX && overlayY === this.availablePositions[key].overlayY
             ) {
-                newPlacement = key;
+                newPlacement = key as PopUpPlacements;
 
                 return true;
             }
