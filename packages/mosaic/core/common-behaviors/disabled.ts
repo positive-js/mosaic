@@ -1,6 +1,6 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
-import { Constructor } from './constructor';
+import { AbstractConstructor, Constructor } from './constructor';
 
 
 // tslint:disable-next-line naming-convention
@@ -9,8 +9,10 @@ export interface CanDisable {
 }
 
 /** @docs-private */
-export type CanDisableCtor = Constructor<CanDisable>;
+export type CanDisableCtor = Constructor<CanDisable> & AbstractConstructor<CanDisable>;
 
+/** Mixin to augment a directive with a `disabled` property. */
+export function mixinDisabled<T extends AbstractConstructor<{}>>(base: T): CanDisableCtor & T;
 export function mixinDisabled<T extends Constructor<{}>>(base: T): CanDisableCtor & T {
     return class extends base {
         get disabled() {
@@ -24,7 +26,6 @@ export function mixinDisabled<T extends Constructor<{}>>(base: T): CanDisableCto
         private _disabled: boolean = false;
 
         constructor(...args: any[]) {
-            // tslint:disable-next-line
             super(...args);
         }
     };

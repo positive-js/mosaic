@@ -20,9 +20,7 @@ import { IFocusableOption } from '@ptsecurity/cdk/a11y';
 import { BACKSPACE, DELETE, SPACE } from '@ptsecurity/cdk/keycodes';
 import {
     CanColor,
-    CanColorCtor,
     CanDisable,
-    CanDisableCtor,
     mixinColor,
     mixinDisabled
 } from '@ptsecurity/mosaic/core';
@@ -70,7 +68,7 @@ export class McTagBase {
 }
 
 // tslint:disable-next-line:naming-convention
-export const McTagMixinBase: CanColorCtor & CanDisableCtor & typeof McTagBase = mixinColor(mixinDisabled(McTagBase));
+export const McTagMixinBase = mixinColor(mixinDisabled(McTagBase));
 
 
 @Component({

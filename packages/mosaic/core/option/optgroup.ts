@@ -1,13 +1,13 @@
 import { Component, ViewEncapsulation, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import { mixinDisabled, CanDisable, CanDisableCtor } from '../common-behaviors/index';
+import { mixinDisabled, CanDisable } from '../common-behaviors/index';
 
 
 /** @docs-private */
 export class McOptgroupBase {}
 
 // tslint:disable-next-line: naming-convention
-export const McOptgroupMixinBase: CanDisableCtor & typeof McOptgroupBase = mixinDisabled(McOptgroupBase);
+export const McOptgroupMixinBase = mixinDisabled(McOptgroupBase);
 
 let uniqueOptgroupIdCounter = 0;
 

@@ -15,7 +15,6 @@ import {
 } from '@angular/core';
 import {
     CanDisable,
-    CanDisableCtor,
     mixinDisabled
 } from '@ptsecurity/mosaic/core';
 import { Subject } from 'rxjs';
@@ -27,7 +26,7 @@ import { MC_TAB_LABEL, McTabLabel } from './tab-label.directive';
 export class McTabBase {}
 
 // tslint:disable-next-line:naming-convention
-export const McTabMixinBase: CanDisableCtor & typeof McTabBase = mixinDisabled(McTabBase);
+export const McTabMixinBase = mixinDisabled(McTabBase);
 
 @Component({
     selector: 'mc-tab',

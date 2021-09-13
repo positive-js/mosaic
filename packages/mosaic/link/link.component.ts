@@ -9,9 +9,7 @@ import {
 } from '@angular/core';
 import {
     CanDisable,
-    CanDisableCtor,
     HasTabIndex,
-    HasTabIndexCtor,
     mixinDisabled,
     mixinTabIndex,
     toBoolean
@@ -22,8 +20,7 @@ import { McIcon } from '@ptsecurity/mosaic/icon';
 export class McLinkBase {}
 
 // tslint:disable-next-line: naming-convention
-export const McLinkMixinBase: HasTabIndexCtor & CanDisableCtor &
-    typeof McLinkBase = mixinTabIndex(mixinDisabled(McLinkBase));
+export const McLinkMixinBase = mixinTabIndex(mixinDisabled(McLinkBase));
 
 export const baseURLRegex = /^http(s)?:\/\//;
 

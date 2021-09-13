@@ -1,6 +1,6 @@
 /* tslint:disable */
-import 'zone.js/dist/zone';
-import 'zone.js/dist/zone-testing';
+import 'zone.js';
+import 'zone.js/testing';
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {

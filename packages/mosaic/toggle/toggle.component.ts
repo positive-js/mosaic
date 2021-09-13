@@ -15,9 +15,9 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {
     ThemePalette,
-    CanColor, CanColorCtor,
-    CanDisable, CanDisableCtor,
-    HasTabIndex, HasTabIndexCtor,
+    CanColor,
+    CanDisable,
+    HasTabIndex,
     mixinColor,
     mixinDisabled,
     mixinTabIndex
@@ -34,11 +34,7 @@ export class McToggleBase {
 }
 
 // tslint:disable-next-line: naming-convention
-export const McToggleMixinBase:
-    HasTabIndexCtor &
-    CanDisableCtor &
-    CanColorCtor &
-    typeof McToggleBase = mixinTabIndex(mixinColor(mixinDisabled(McToggleBase), ThemePalette.Primary));
+export const McToggleMixinBase = mixinTabIndex(mixinColor(mixinDisabled(McToggleBase), ThemePalette.Primary));
 
 export class McToggleChange {
     source: McToggleComponent;

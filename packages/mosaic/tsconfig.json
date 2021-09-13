@@ -12,7 +12,7 @@
         "flatModuleId": "@ptsecurity/mosaic",
         "skipTemplateCodegen": true,
         "fullTemplateTypeCheck": true,
-        "enableIvy": false
+        "compilationMode": "partial"
     },
     "include": [
         "**/*.ts"

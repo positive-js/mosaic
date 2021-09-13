@@ -23,11 +23,9 @@ import {
 import { McSidepanelConfig, McSidepanelPosition } from './sidepanel-config';
 
 
-export const MC_SIDEPANEL_WITH_INDENT =
-    new InjectionToken<boolean>('mc-sidepanel-with-indent');
+export const MC_SIDEPANEL_WITH_INDENT = new InjectionToken<boolean>('mc-sidepanel-with-indent');
 
-export const MC_SIDEPANEL_WITH_SHADOW =
-    new InjectionToken<boolean>('mc-sidepanel-with-shadow');
+export const MC_SIDEPANEL_WITH_SHADOW = new InjectionToken<boolean>('mc-sidepanel-with-shadow');
 
 @Component({
     selector: 'mc-sidepanel-container',

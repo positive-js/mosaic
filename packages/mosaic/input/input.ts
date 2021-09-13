@@ -24,7 +24,6 @@ import {
 } from '@angular/forms';
 import {
     CanUpdateErrorState,
-    CanUpdateErrorStateCtor,
     ErrorStateMatcher,
     MC_VALIDATION,
     McValidationOptions,
@@ -63,7 +62,7 @@ export class McInputBase {
 }
 
 // tslint:disable-next-line:naming-convention
-export const McInputMixinBase: CanUpdateErrorStateCtor & typeof McInputBase = mixinErrorState(McInputBase);
+export const McInputMixinBase = mixinErrorState(McInputBase);
 
 
 @Directive({

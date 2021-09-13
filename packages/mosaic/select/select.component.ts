@@ -60,12 +60,9 @@ import {
 } from '@ptsecurity/cdk/keycodes';
 import {
     CanDisable,
-    CanDisableCtor,
     CanUpdateErrorState,
-    CanUpdateErrorStateCtor,
     ErrorStateMatcher,
     HasTabIndex,
-    HasTabIndexCtor,
     MC_OPTION_PARENT_COMPONENT,
     McOptgroup,
     McOption,
@@ -194,8 +191,7 @@ export class McSelectBase {
 }
 
 // tslint:disable-next-line:naming-convention
-const McSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorStateCtor &
-    typeof McSelectBase = mixinTabIndex(mixinDisabled(mixinErrorState(McSelectBase)));
+const McSelectMixinBase = mixinTabIndex(mixinDisabled(mixinErrorState(McSelectBase)));
 
 
 @Component({

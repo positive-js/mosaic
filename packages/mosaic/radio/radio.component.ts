@@ -23,11 +23,8 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {
     CanColor,
-    CanColorCtor,
     CanDisable,
-    CanDisableCtor,
     HasTabIndex,
-    HasTabIndexCtor,
     mixinColor,
     mixinDisabled,
     mixinTabIndex,
@@ -54,7 +51,7 @@ export class McRadioGroupBase {
     constructor(public _elementRef: ElementRef) {}
 }
 // tslint:disable-next-line:naming-convention
-export const McRadioGroupMixinBase: CanDisableCtor & typeof McRadioGroupBase = mixinDisabled(McRadioGroupBase);
+export const McRadioGroupMixinBase = mixinDisabled(McRadioGroupBase);
 
 /**
  * Provider Expression that allows mc-radio-group to register as a ControlValueAccessor. This
@@ -295,15 +292,14 @@ abstract class McRadioButtonBase {
     // Since the disabled property is manually defined for the McRadioButton and isn't set up in
     // the mixin base class. To be able to use the tabindex mixin, a disabled property must be
     // defined to properly work.
-    abstract disabled: boolean;
+    abstract readonly disabled: boolean;
 
     // tslint:disable-next-line:naming-convention
     constructor(public _elementRef: ElementRef) {}
 }
 
 // tslint:disable-next-line:naming-convention
-export const McRadioButtonMixinBase:
-    CanColorCtor & HasTabIndexCtor & typeof McRadioButtonBase = mixinColor(mixinTabIndex(McRadioButtonBase));
+export const McRadioButtonMixinBase = mixinColor(mixinTabIndex(McRadioButtonBase));
 
 
 @Component({

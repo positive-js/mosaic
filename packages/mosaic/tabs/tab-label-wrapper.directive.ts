@@ -1,7 +1,6 @@
 import { AfterViewInit, Directive, ElementRef, Renderer2 } from '@angular/core';
 import {
     CanDisable,
-    CanDisableCtor,
     mixinDisabled
 } from '@ptsecurity/mosaic/core';
 
@@ -10,8 +9,7 @@ import {
 /** @docs-private */
 export class McTabLabelWrapperBase {}
 // tslint:disable-next-line:naming-convention
-export const McTabLabelWrapperMixinBase: CanDisableCtor &
-    typeof McTabLabelWrapperBase = mixinDisabled(McTabLabelWrapperBase);
+export const McTabLabelWrapperMixinBase = mixinDisabled(McTabLabelWrapperBase);
 
 /**
  * Used in the `mc-tab-group` view to display tab labels.

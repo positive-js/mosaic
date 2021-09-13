@@ -18,11 +18,8 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {
     CanColor,
-    CanColorCtor,
     CanDisable,
-    CanDisableCtor,
     HasTabIndex,
-    HasTabIndexCtor,
     mixinColor,
     mixinDisabled,
     mixinTabIndex,
@@ -77,11 +74,7 @@ export class McCheckboxBase {
 }
 
 // tslint:disable-next-line:naming-convention
-export const McCheckboxMixinBase:
-    HasTabIndexCtor &
-    CanColorCtor &
-    CanDisableCtor &
-    typeof McCheckboxBase = mixinTabIndex(mixinColor(mixinDisabled(McCheckboxBase)));
+export const McCheckboxMixinBase = mixinTabIndex(mixinColor(mixinDisabled(McCheckboxBase)));
 
 
 /**

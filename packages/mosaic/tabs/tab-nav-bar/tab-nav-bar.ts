@@ -15,9 +15,7 @@ import {
 } from '@angular/core';
 import {
     CanDisable,
-    CanDisableCtor,
     HasTabIndex,
-    HasTabIndexCtor,
     mixinDisabled,
     mixinTabIndex
 } from '@ptsecurity/mosaic/core';
@@ -27,8 +25,7 @@ import { delay } from 'rxjs/operators';
 // Boilerplate for applying mixins to McTabLink.
 export class McTabLinkBase {}
 // tslint:disable-next-line:naming-convention
-export const McTabLinkMixinBase: HasTabIndexCtor & CanDisableCtor &
-    typeof McTabLinkBase = mixinTabIndex(mixinDisabled(McTabLinkBase));
+export const McTabLinkMixinBase = mixinTabIndex(mixinDisabled(McTabLinkBase));
 
 /**
  * Link inside of a `mc-tab-nav-bar`.

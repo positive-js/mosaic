@@ -493,7 +493,7 @@ export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
             return window.setTimeout(
                 () => {
                     this.changeAnimationState(null);
-                    resolve();
+                    resolve(null);
                 },
                 MODAL_ANIMATE_DURATION
             );

@@ -5,7 +5,7 @@ import {
     ElementRef,
     Input
 } from '@angular/core';
-import { CanColor, CanColorCtor, mixinColor, ThemePalette } from '@ptsecurity/mosaic/core';
+import { CanColor, mixinColor, ThemePalette } from '@ptsecurity/mosaic/core';
 
 
 export type ProgressSpinnerMode = 'determinate' | 'indeterminate';
@@ -21,8 +21,7 @@ export class McProgressSpinnerBase {
 }
 
 // tslint:disable-next-line:naming-convention
-export const McProgressSpinnerMixinBase:
-    CanColorCtor & typeof McProgressSpinnerBase = mixinColor(McProgressSpinnerBase, ThemePalette.Primary);
+export const McProgressSpinnerMixinBase = mixinColor(McProgressSpinnerBase, ThemePalette.Primary);
 
 const MAX_DASH_ARRAY = 273;
 

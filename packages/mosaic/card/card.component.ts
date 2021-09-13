@@ -10,7 +10,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { SPACE } from '@ptsecurity/cdk/keycodes';
-import { CanColorCtor, mixinColor } from '@ptsecurity/mosaic/core';
+import { mixinColor } from '@ptsecurity/mosaic/core';
 
 
 export class McCardBase {
@@ -19,7 +19,7 @@ export class McCardBase {
 }
 
 // tslint:disable-next-line:naming-convention
-export const McCardBaseMixin: CanColorCtor & typeof McCardBase = mixinColor(McCardBase);
+export const McCardBaseMixin = mixinColor(McCardBase);
 
 
 @Component({

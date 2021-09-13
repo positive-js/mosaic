@@ -35,7 +35,6 @@ import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import { BACKSPACE, END, HOME } from '@ptsecurity/cdk/keycodes';
 import {
     CanUpdateErrorState,
-    CanUpdateErrorStateCtor,
     ErrorStateMatcher,
     MC_VALIDATION,
     McValidationOptions,
@@ -60,7 +59,7 @@ export class McTagListBase {
 }
 
 // tslint:disable-next-line:naming-convention
-export const McTagListMixinBase: CanUpdateErrorStateCtor & typeof McTagListBase = mixinErrorState(McTagListBase);
+export const McTagListMixinBase = mixinErrorState(McTagListBase);
 
 
 // Increasing integer for generating unique ids for tag-list components.
