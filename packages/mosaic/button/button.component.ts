@@ -16,7 +16,10 @@ import {
     mixinDisabled,
     mixinTabIndex,
     CanColor,
-    CanDisable
+    CanDisable,
+    CanDisableCtor,
+    CanColorCtor,
+    HasTabIndexCtor
 } from '@ptsecurity/mosaic/core';
 import { McIcon } from '@ptsecurity/mosaic/icon';
 
@@ -79,7 +82,8 @@ export class McButtonBase {
 }
 
 // tslint:disable-next-line:naming-convention
-export const McButtonMixinBase = mixinTabIndex(mixinColor(mixinDisabled(McButtonBase)));
+export const McButtonMixinBase: HasTabIndexCtor & CanDisableCtor & CanColorCtor &
+    typeof McButtonBase = mixinTabIndex(mixinColor(mixinDisabled(McButtonBase)));
 
 
 @Component({

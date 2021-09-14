@@ -65,6 +65,9 @@ import {
     CanUpdateErrorState,
     ErrorStateMatcher,
     HasTabIndex,
+    CanDisableCtor,
+    HasTabIndexCtor,
+    CanUpdateErrorStateCtor,
     mixinTabIndex,
     mixinDisabled,
     mixinErrorState,
@@ -122,7 +125,8 @@ class McTreeSelectBase {
 }
 
 // tslint:disable-next-line:naming-convention
-const McTreeSelectMixinBase = mixinTabIndex(mixinDisabled(mixinErrorState(McTreeSelectBase)));
+const McTreeSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorStateCtor &
+    typeof McTreeSelectBase = mixinTabIndex(mixinDisabled(mixinErrorState(McTreeSelectBase)));
 
 
 @Component({

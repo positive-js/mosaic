@@ -8,6 +8,7 @@ import {
 import { FormGroupDirective, NG_VALIDATORS, NgControl, NgForm, NgModel, Validator } from '@angular/forms';
 import {
     CanUpdateErrorState,
+    CanUpdateErrorStateCtor,
     ErrorStateMatcher,
     MC_VALIDATION,
     McValidationOptions,
@@ -33,7 +34,7 @@ export class McTextareaBase {
 }
 
 // tslint:disable-next-line:naming-convention
-export const McTextareaMixinBase = mixinErrorState(McTextareaBase);
+export const McTextareaMixinBase: CanUpdateErrorStateCtor & typeof McTextareaBase = mixinErrorState(McTextareaBase);
 
 @Directive({
     selector: 'textarea[mcTextarea]',

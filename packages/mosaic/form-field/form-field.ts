@@ -16,7 +16,7 @@ import {
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
-import { CanColor, mixinColor } from '@ptsecurity/mosaic/core';
+import { CanColor, CanColorCtor, mixinColor } from '@ptsecurity/mosaic/core';
 import { EMPTY, merge, Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 
@@ -40,7 +40,7 @@ export class McFormFieldBase {
 }
 
 // tslint:disable-next-line:naming-convention
-export const McFormFieldMixinBase = mixinColor(McFormFieldBase);
+export const McFormFieldMixinBase: CanColorCtor & typeof McFormFieldBase = mixinColor(McFormFieldBase);
 
 @Component({
     selector: 'mc-form-field',

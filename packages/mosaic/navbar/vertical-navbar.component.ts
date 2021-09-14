@@ -11,7 +11,7 @@ import {
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
-import { mixinDisabled, mixinTabIndex } from '@ptsecurity/mosaic/core';
+import { CanDisableCtor, HasTabIndexCtor, mixinDisabled, mixinTabIndex } from '@ptsecurity/mosaic/core';
 import { McIcon } from '@ptsecurity/mosaic/icon';
 
 import { McNavbarItemBase } from './navbar-item.component';
@@ -82,7 +82,8 @@ export class McNavbarToggleBase {
 }
 
 // tslint:disable-next-line:naming-convention
-export const McNavbarToggleMixinBase = mixinTabIndex(mixinDisabled(McNavbarToggleBase));
+export const McNavbarToggleMixinBase: HasTabIndexCtor & CanDisableCtor &
+    typeof McNavbarToggleBase = mixinTabIndex(mixinDisabled(McNavbarToggleBase));
 
 @Component({
     selector: 'mc-navbar-toggle',

@@ -12,7 +12,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { McButtonCssStyler } from '@ptsecurity/mosaic/button';
-import { CanDisable, mixinDisabled } from '@ptsecurity/mosaic/core';
+import { CanDisable, CanDisableCtor, mixinDisabled } from '@ptsecurity/mosaic/core';
 import { McIcon } from '@ptsecurity/mosaic/icon';
 import { merge, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -129,7 +129,7 @@ export class McNavbarItemBase {
 }
 
 // tslint:disable-next-line:naming-convention
-export const McNavbarMixinBase = mixinDisabled(McNavbarItemBase);
+export const McNavbarMixinBase: CanDisableCtor & typeof McNavbarItemBase = mixinDisabled(McNavbarItemBase);
 
 
 @Component({

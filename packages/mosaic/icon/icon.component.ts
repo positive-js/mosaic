@@ -6,7 +6,7 @@ import {
     ElementRef,
     ViewEncapsulation
 } from '@angular/core';
-import { mixinColor, CanColor, ThemePalette } from '@ptsecurity/mosaic/core';
+import { mixinColor, CanColor, CanColorCtor, ThemePalette } from '@ptsecurity/mosaic/core';
 
 
 @Directive({
@@ -23,7 +23,7 @@ export class McIconBase {
 }
 
 // tslint:disable-next-line: naming-convention
-export const McIconMixinBase = mixinColor(McIconBase, ThemePalette.Empty);
+export const McIconMixinBase: CanColorCtor & typeof McIconBase = mixinColor(McIconBase, ThemePalette.Empty);
 
 
 @Component({

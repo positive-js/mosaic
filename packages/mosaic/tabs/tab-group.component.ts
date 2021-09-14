@@ -19,7 +19,7 @@ import {
     Optional,
     Directive, Attribute
 } from '@angular/core';
-import { mixinDisabled } from '@ptsecurity/mosaic/core';
+import { CanDisableCtor, mixinDisabled } from '@ptsecurity/mosaic/core';
 import { merge, Subscription } from 'rxjs';
 
 import { McTabHeader } from './tab-header.component';
@@ -86,7 +86,7 @@ export class McTabGroupBase {
     constructor(public _elementRef: ElementRef) {}
 }
 // tslint:disable-next-line:naming-convention
-export const McTabGroupMixinBase = mixinDisabled(McTabGroupBase);
+export const McTabGroupMixinBase: CanDisableCtor & typeof McTabGroupBase = mixinDisabled(McTabGroupBase);
 
 /**
  * Tab-group component.  Supports basic tab pairs (label + content) and includes

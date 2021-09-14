@@ -41,6 +41,8 @@ import {
     CanDisable,
     mixinDisabled,
     toBoolean,
+    CanDisableCtor,
+    HasTabIndexCtor,
     mixinTabIndex,
     HasTabIndex,
     MultipleMode,
@@ -292,7 +294,8 @@ export class McListSelectionBase {
 }
 
 // tslint:disable-next-line:naming-convention
-export const McListSelectionMixinBase = mixinTabIndex(mixinDisabled(McListSelectionBase));
+export const McListSelectionMixinBase: CanDisableCtor & HasTabIndexCtor & typeof McListSelectionBase
+    = mixinTabIndex(mixinDisabled(McListSelectionBase));
 
 @Component({
     exportAs: 'mcListSelection',
