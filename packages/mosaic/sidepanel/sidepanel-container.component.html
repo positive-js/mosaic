@@ -3,7 +3,7 @@
     <button *ngIf="withIndent"
             class="mc-sidepanel-indent mc-button_transparent"
             mc-button
-            mcSidepanelClose>
+            (click)="exit()">
         <i mc-icon="mc-close-L_16" class="mc-icon mc-icon_light" [color]="'second'"></i>
     </button>
 
