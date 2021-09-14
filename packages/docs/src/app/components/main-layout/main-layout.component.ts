@@ -7,14 +7,16 @@ import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
     styleUrls: ['./main-layout.component.scss']
 })
 export class MainLayoutComponent {
-    nextRoute: string = '';
+    nextRoute: string | null = '';
     extras: NavigationExtras = {
         preserveFragment: true,
         queryParamsHandling: 'preserve'
     };
 
-    constructor(private router: Router,
-                private route: ActivatedRoute) {
+    constructor(
+        private router: Router,
+        public route: ActivatedRoute
+    ) {
         const href = location.href;
 
         if (href.match('github')) {

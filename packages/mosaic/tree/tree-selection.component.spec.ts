@@ -205,7 +205,7 @@ describe('McTreeSelection', () => {
                         const nodes = getNodes(treeElement);
 
                         const event = createMouseEvent('click');
-                        Object.defineProperty(event, 'ctrlKey', {get: () => true});
+                        Object.defineProperty(event, 'ctrlKey', { get: () => true });
 
                         dispatchEvent(nodes[0], event);
                         fixture.detectChanges();
@@ -215,7 +215,7 @@ describe('McTreeSelection', () => {
                         fixture.detectChanges();
                         expect(component.modelValue.length).toBe(2);
 
-                        Object.defineProperty(event, 'ctrlKey', {get: () => false});
+                        Object.defineProperty(event, 'ctrlKey', { get: () => false });
 
                         dispatchEvent(nodes[2], event);
                         fixture.detectChanges();
@@ -226,7 +226,7 @@ describe('McTreeSelection', () => {
                         const nodes = getNodes(treeElement);
 
                         const event = createMouseEvent('click');
-                        Object.defineProperty(event, 'ctrlKey', {get: () => true});
+                        Object.defineProperty(event, 'ctrlKey', { get: () => true });
 
                         dispatchEvent(nodes[0], event);
                         fixture.detectChanges();

@@ -46,7 +46,7 @@ export class ExampleViewer {
         return this._example;
     }
 
-    set example(exampleName: string | undefined) {
+    set example(exampleName: string | null) {
         if (exampleName && exampleName !== this._example && EXAMPLE_COMPONENTS[exampleName]) {
             this._example = exampleName;
             this.exampleData = EXAMPLE_COMPONENTS[exampleName];
@@ -60,9 +60,9 @@ export class ExampleViewer {
         }
     }
 
-    private _example: string | undefined;
+    private _example: string | null;
 
-    constructor(private copier: CopierService,
+    constructor(public copier: CopierService,
                 private readonly elementRef: ElementRef<HTMLElement>) {
         this.elementRef = elementRef;
     }
@@ -76,7 +76,7 @@ export class ExampleViewer {
             .nativeElement.querySelector('.mc-tab-body__active .docs-example-source-viewer');
 
         if (exampleSource) {
-            const text: string[] = exampleSource.textContent.match(/\n/g);
+            const text = exampleSource.textContent!.match(/\n/g);
             const length = text ? text.length + 1 : 0;
             this.lineNumbers = '';
             for (let i = 1; i <= length; i++) {
@@ -111,9 +111,15 @@ export class ExampleViewer {
     copyCode(event): void {
         const code = this.elementRef.nativeElement.querySelector('.docs-example-source-viewer');
         // event.target.parentNode.parentNode.select();
+
+        if (!code) { return; }
+
         const range = document.createRange();
         range.selectNodeContents(code);
         const sel = window.getSelection();
+
+        if (!sel) { return; }
+
         sel.removeAllRanges();
         sel.addRange(range);
         document.execCommand('copy');
@@ -134,6 +140,7 @@ export class ExampleViewer {
             // source maps (which would never be loaded), we instruct Webpack to exclude source map
             // files. More details: https://webpack.js.org/api/module-methods/#magic-comments.
             // module.importSpecifier
+            // @ts-ignore
             const moduleExports: any = await import(
                 /* webpackExclude: /\.map$/ */
             `@ptsecurity/mosaic-examples/fesm2015/${module.importPath}`);

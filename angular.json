@@ -47,7 +47,6 @@
                             {
                                 "input": "packages/docs/src/highlightjs/material-light.scss"
                             }
-
                         ],
                         "scripts": [],
                         "vendorChunk": true,
