@@ -935,7 +935,7 @@ class BasicSelectWithTheming {
     selector: 'reset-values-select',
     template: `
         <mc-form-field>
-            <mc-tree-select placeholder="Food" [formControl]="control">
+            <mc-tree-select [formControl]="control">
                 <mc-tree-selection
                     [dataSource]="dataSource"
                     [treeControl]="treeControl">
@@ -1416,52 +1416,6 @@ class SingleSelectWithPreselectedArrayValues {
     constructor() {
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
         this.selectedFood = 'Pictures';
-        // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
-        // file node as children.
-        this.dataSource.data = buildFileTree(TREE_DATA, 0);
-    }
-
-    hasChild(_: number, nodeData: FileFlatNode) {
-        return nodeData.expandable;
-    }
-}
-
-@Component({
-    selector: 'select-without-option-centering',
-    template: `
-        <mc-form-field>
-            <mc-tree-select placeholder="Food" [formControl]="control">
-                <mc-tree-selection
-                    [dataSource]="dataSource"
-                    [treeControl]="treeControl">
-
-                    <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
-                        {{ treeControl.getViewValue(node) }}
-                    </mc-tree-option>
-
-                    <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
-                        <i mc-icon="mc-angle-S_16" mcTreeNodeToggle></i>
-                        {{ treeControl.getViewValue(node) }}
-                    </mc-tree-option>
-                </mc-tree-selection>
-            </mc-tree-select>
-        </mc-form-field>
-    `
-})
-class SelectWithoutOptionCentering {
-    control = new FormControl('rootNode_1');
-
-    @ViewChild(McTreeSelect, {static: false}) select: McTreeSelect;
-    @ViewChildren(McTreeOption) options: QueryList<McTreeOption>;
-
-    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable, getValue, getValue);
-    treeFlattener = new McTreeFlattener(transformer, getLevel, isExpandable, getChildren);
-
-    dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
-
-    constructor() {
-        this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
-
         // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
         // file node as children.
         this.dataSource.data = buildFileTree(TREE_DATA, 0);
@@ -2343,6 +2297,7 @@ describe('McTreeSelect', () => {
 
                 option = overlayContainerElement.querySelector('mc-tree-option') as HTMLElement;
 
+                fixture.autoDetectChanges();
                 expect(option.classList).toContain('mc-selected');
                 expect(fixture.componentInstance.options.first.selected).toBe(true);
                 expect(fixture.componentInstance.select.selectedValues)
@@ -2411,6 +2366,8 @@ describe('McTreeSelect', () => {
                 flush();
 
                 options = overlayContainerElement.querySelectorAll('mc-tree-option');
+
+                fixture.autoDetectChanges();
 
                 expect(options[0].classList)
                     .not.toContain('mc-selected', 'Expected first option to no longer be selected');
@@ -2607,6 +2564,9 @@ describe('McTreeSelect', () => {
                 flush();
 
                 const options = overlayContainerElement.querySelectorAll('mc-tree-option');
+
+                fixture.autoDetectChanges();
+
                 expect(options[0].classList)
                     .toContain(
                         'mc-selected',
@@ -2631,6 +2591,9 @@ describe('McTreeSelect', () => {
                 flush();
 
                 const options = overlayContainerElement.querySelectorAll('mc-tree-option');
+
+                fixture.autoDetectChanges();
+
                 expect(options[0].classList).toContain(
                     'mc-selected', `Expected option with the control's new value to be selected.`);
             }));
@@ -3259,7 +3222,6 @@ describe('McTreeSelect', () => {
         }));
     });
 
-
     describe('with theming', () => {
         beforeEach(waitForAsync(() => configureMcTreeSelectTestingModule([BasicSelectWithTheming])));
 
@@ -3503,7 +3465,6 @@ describe('McTreeSelect', () => {
         }));
     });
 
-
     describe('with preselected array values', () => {
         beforeEach(waitForAsync(() => configureMcTreeSelectTestingModule([
             SingleSelectWithPreselectedArrayValues
@@ -3628,20 +3589,16 @@ describe('McTreeSelect', () => {
 
         beforeEach(fakeAsync(() => {
             fixture = TestBed.createComponent(ResetValuesSelect);
-            fixture.detectChanges();
-            fixture.detectChanges();
+            fixture.autoDetectChanges();
 
             trigger = fixture.debugElement.query(By.css('.mc-tree-select__trigger')).nativeElement;
             formField = fixture.debugElement.query(By.css('.mc-form-field')).nativeElement;
 
             trigger.click();
-            fixture.detectChanges();
-            flush();
 
             options = overlayContainerElement.querySelectorAll('mc-tree-option');
             options[1].click();
-            fixture.detectChanges();
-            flush();
+            tick(1);
         }));
 
         xit('should reset when an option with an undefined value is selected', fakeAsync(() => {
@@ -3656,12 +3613,9 @@ describe('McTreeSelect', () => {
         }));
 
         it('should reset when an option with a null value is selected', fakeAsync(() => {
-            // @ts-ignore
-            fixture.componentInstance.select.options.get(2).value = null;
+            fixture.componentInstance.control.setValue(null);
             options[2].click();
-            fixture.detectChanges();
             tick(1);
-            flush();
 
             expect(formField.classList).not.toContain('mc-form-field-should-float');
             expect(trigger.textContent).not.toContain('Null-option');
@@ -3681,12 +3635,9 @@ describe('McTreeSelect', () => {
 
         it('should not mark the reset option as selected ', fakeAsync(() => {
             options[4].click();
-            fixture.detectChanges();
-            flush();
 
             fixture.componentInstance.select.open();
-            fixture.detectChanges();
-            flush();
+            tick(1);
 
             expect(options[4].classList).not.toContain('mc-selected');
         }));
@@ -3706,9 +3657,7 @@ describe('McTreeSelect', () => {
             'should not consider the reset values as selected when resetting the form control',
             fakeAsync(() => {
                 fixture.componentInstance.control.reset();
-                fixture.detectChanges();
-                tick(10);
-                flush();
+                tick(1);
 
                 expect(fixture.componentInstance.control.value).toBeNull();
                 expect(fixture.componentInstance.select.selected).toBeFalsy();
@@ -3933,35 +3882,6 @@ describe('McTreeSelect', () => {
             expect(instance.selectedFood).toBe('rootNode_1');
             expect(spy).toHaveBeenCalledWith('rootNode_1');
         }));
-    });
-
-    describe('with option centering disabled', () => {
-        beforeEach(waitForAsync(() => configureMcTreeSelectTestingModule([SelectWithoutOptionCentering])));
-
-        let fixture: ComponentFixture<SelectWithoutOptionCentering>;
-        let trigger: HTMLElement;
-
-        beforeEach(() => {
-            fixture = TestBed.createComponent(SelectWithoutOptionCentering);
-            fixture.detectChanges();
-            trigger = fixture.debugElement.query(By.css('.mc-tree-select__trigger')).nativeElement;
-            fixture.detectChanges();
-        });
-
-
-        it('should not align the active option with the trigger if centering is disabled', () => {
-                trigger.click();
-                fixture.detectChanges();
-
-                const scrollContainer = document.querySelector('.cdk-overlay-pane .mc-tree-select__panel')!;
-
-                // The panel should be scrolled to 0 because centering the option disabled.
-                expect(scrollContainer.scrollTop).toEqual(0, `Expected panel not to be scrolled.`);
-                // The trigger should contain 'Pizza' because it was preselected
-                expect(trigger.textContent).toContain('rootNode_1');
-                // The selected index should be 1 because it was preselected
-                expect(fixture.componentInstance.options.toArray()[0].selected).toBe(true);
-            });
     });
 
     describe('positioning', () => {
@@ -4503,6 +4423,7 @@ describe('McTreeSelect', () => {
         }));
 
         it('should be able to set the selected value by taking an array', fakeAsync(() => {
+
             trigger.click();
             testInstance.control.setValue(['rootNode_1', 'Applications']);
             fixture.detectChanges();
@@ -4512,6 +4433,7 @@ describe('McTreeSelect', () => {
 
             const optionInstances = testInstance.options.toArray();
 
+            fixture.autoDetectChanges();
             expect(optionNodes[0].classList).toContain('mc-selected');
             expect(optionNodes[4].classList).toContain('mc-selected');
 
@@ -4525,8 +4447,11 @@ describe('McTreeSelect', () => {
 
             const options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-tree-option');
 
+            expect(options[0].classList).not.toContain('mc-selected');
+
             options[0].click();
-            fixture.detectChanges();
+            fixture.autoDetectChanges();
+            flush();
 
             expect(options[0].classList).toContain('mc-selected');
 
@@ -4534,6 +4459,7 @@ describe('McTreeSelect', () => {
             fixture.detectChanges();
             flush();
 
+            fixture.autoDetectChanges();
             expect(options[0].classList).not.toContain('mc-selected');
             expect(options[4].classList).toContain('mc-selected');
         }));

@@ -42,7 +42,7 @@ import {
     MultipleMode
 } from '@ptsecurity/mosaic/core';
 import { merge, Observable, Subject, Subscription } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { delay, takeUntil } from 'rxjs/operators';
 
 import { MC_TREE_OPTION_PARENT_COMPONENT, McTreeOption, McTreeOptionEvent } from './tree-option.component';
 
@@ -216,7 +216,8 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
     }
 
     ngAfterContentInit(): void {
-        this.unorderedOptions.changes.subscribe(this.updateRenderedOptions);
+        this.unorderedOptions.changes
+            .subscribe(this.updateRenderedOptions);
 
         this.keyManager = new FocusKeyManager<T>(this.renderedOptions)
             .withVerticalOrientation(true)
@@ -248,11 +249,16 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
             });
 
         this.renderedOptions.changes
-            .pipe(takeUntil(this.destroy))
+            .pipe(
+                takeUntil(this.destroy),
+                delay(0)
+            )
             .subscribe((options) => {
                 this.resetOptions();
 
-                // todo need to do optimisation
+                // Check to see if we need to update our tab index
+                this.updateTabIndex();
+
                 options.forEach((option) => {
                     if (this.getSelectedValues().includes(option.value)) {
                         option.select();
@@ -260,7 +266,7 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
                         option.deselect();
                     }
 
-                    option.changeDetectorRef.markForCheck();
+                    option.markForCheck();
                 });
             });
     }
@@ -518,6 +524,10 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
 
     getSelectedValues(): any[] {
         return this.selectionModel.selected.map((selected) => this.treeControl.getValue(selected));
+    }
+
+    protected updateTabIndex(): void {
+        this._tabIndex = this.renderedOptions.length === 0 ? -1 : 0;
     }
 
     private updateRenderedOptions = () => {

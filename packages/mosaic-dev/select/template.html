@@ -90,7 +90,11 @@
 
             <div mc-select-search-empty-result>Ничего не найдено</div>
 
-            <mc-option [showCheckbox]="false" *ngFor="let option of filteredMultipleOptions | async" [value]="option">{{ option }}</mc-option>
+            <mc-option [showCheckbox]="false"
+                       *ngFor="let option of filteredMultipleOptions | async"
+                       [value]="option">
+                {{ option }}
+            </mc-option>
         </mc-select>
     </mc-form-field>
 </div>
