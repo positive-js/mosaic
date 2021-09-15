@@ -854,7 +854,7 @@ class SingleSelectWithPreselectedArrayValues {
     selector: 'select-without-option-centering',
     template: `
         <mc-form-field>
-            <mc-select placeholder="Food" [formControl]="control" disableOptionCentering>
+            <mc-select placeholder="Food" [formControl]="control">
                 <mc-option *ngFor="let food of foods" [value]="food.value">
                     {{ food.viewValue }}
                 </mc-option>

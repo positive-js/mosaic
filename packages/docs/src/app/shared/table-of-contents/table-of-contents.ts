@@ -36,7 +36,7 @@ export class TableOfContents {
     constructor(
         @Inject(DOCUMENT) private _document: Document,
         private _router: Router,
-        public _route: ActivatedRoute
+        public route: ActivatedRoute
     ) {
         this.links = this.createLinks();
     }

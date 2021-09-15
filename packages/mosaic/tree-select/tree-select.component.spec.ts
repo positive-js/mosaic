@@ -1430,7 +1430,7 @@ class SingleSelectWithPreselectedArrayValues {
     selector: 'select-without-option-centering',
     template: `
         <mc-form-field>
-            <mc-tree-select placeholder="Food" [formControl]="control" disableOptionCentering>
+            <mc-tree-select placeholder="Food" [formControl]="control">
                 <mc-tree-selection
                     [dataSource]="dataSource"
                     [treeControl]="treeControl">

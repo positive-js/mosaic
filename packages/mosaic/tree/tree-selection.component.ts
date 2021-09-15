@@ -42,7 +42,7 @@ import {
     MultipleMode
 } from '@ptsecurity/mosaic/core';
 import { merge, Observable, Subject, Subscription } from 'rxjs';
-import { delay, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 import { MC_TREE_OPTION_PARENT_COMPONENT, McTreeOption, McTreeOptionEvent } from './tree-option.component';
 
@@ -248,27 +248,19 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
             });
 
         this.renderedOptions.changes
-            .pipe(
-                takeUntil(this.destroy),
-                delay(0)
-            )
+            .pipe(takeUntil(this.destroy))
             .subscribe((options) => {
                 this.resetOptions();
 
-                // Check to see if we need to update our tab index
-                this.updateTabIndex();
-
                 // todo need to do optimisation
                 options.forEach((option) => {
-                    option.deselect();
+                    if (this.getSelectedValues().includes(option.value)) {
+                        option.select();
+                    } else {
+                        option.deselect();
+                    }
 
-                    this.getSelectedValues().forEach((selectedValue) => {
-                        if (option.value === selectedValue) {
-                            option.select();
-                        }
-                    });
-
-                    option.changeDetectorRef.detectChanges();
+                    option.changeDetectorRef.markForCheck();
                 });
             });
     }
@@ -526,10 +518,6 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
 
     getSelectedValues(): any[] {
         return this.selectionModel.selected.map((selected) => this.treeControl.getValue(selected));
-    }
-
-    protected updateTabIndex(): void {
-        this._tabIndex = this.renderedOptions.length === 0 ? -1 : 0;
     }
 
     private updateRenderedOptions = () => {
