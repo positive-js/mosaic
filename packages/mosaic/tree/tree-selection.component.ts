@@ -42,7 +42,7 @@ import {
     MultipleMode
 } from '@ptsecurity/mosaic/core';
 import { merge, Observable, Subject, Subscription } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { delay, takeUntil } from 'rxjs/operators';
 
 import { MC_TREE_OPTION_PARENT_COMPONENT, McTreeOption, McTreeOptionEvent } from './tree-option.component';
 
@@ -248,7 +248,10 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
             });
 
         this.renderedOptions.changes
-            .pipe(takeUntil(this.destroy))
+            .pipe(
+                takeUntil(this.destroy),
+                delay(0)
+            )
             .subscribe((options) => {
                 this.resetOptions();
 

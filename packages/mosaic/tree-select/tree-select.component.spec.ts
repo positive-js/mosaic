@@ -2117,6 +2117,7 @@ describe('McTreeSelect', () => {
                 const option = overlayContainerElement.querySelector('mc-tree-option') as HTMLElement;
                 option.click();
                 fixture.detectChanges();
+                tick(1);
                 flush();
 
                 expect(overlayContainerElement.textContent).toEqual('');
@@ -2153,6 +2154,7 @@ describe('McTreeSelect', () => {
 
                 trigger.click();
                 fixture.detectChanges();
+                tick(1);
                 flush();
 
                 expect(fixture.componentInstance.select.panelOpen).toBe(false);
@@ -2336,6 +2338,7 @@ describe('McTreeSelect', () => {
 
                 trigger.click();
                 fixture.detectChanges();
+                tick(1);
                 flush();
 
                 option = overlayContainerElement.querySelector('mc-tree-option') as HTMLElement;
@@ -2453,6 +2456,7 @@ describe('McTreeSelect', () => {
                 const option = overlayContainerElement.querySelector('mc-tree-option') as HTMLElement;
                 option.click();
                 fixture.detectChanges();
+                tick(1);
                 flush();
 
                 const value = fixture.debugElement.query(By.css('.mc-tree-select__matcher')).nativeElement;
@@ -2623,6 +2627,7 @@ describe('McTreeSelect', () => {
 
                 trigger.click();
                 fixture.detectChanges();
+                tick(1);
                 flush();
 
                 const options = overlayContainerElement.querySelectorAll('mc-tree-option');
@@ -2641,6 +2646,7 @@ describe('McTreeSelect', () => {
                 const option = overlayContainerElement.querySelector('mc-tree-option') as HTMLElement;
                 option.click();
                 fixture.detectChanges();
+                tick(1);
                 flush();
 
                 expect(fixture.componentInstance.control.value)
@@ -2758,6 +2764,7 @@ describe('McTreeSelect', () => {
                 const option = overlayContainerElement.querySelector('mc-tree-option') as HTMLElement;
                 option.click();
                 fixture.detectChanges();
+                tick(1);
                 flush();
 
                 expect(fixture.componentInstance.control.dirty)
@@ -3583,6 +3590,7 @@ describe('McTreeSelect', () => {
 
             fixture.componentInstance.control.reset();
             fixture.detectChanges();
+            tick(1);
             flush();
 
             expect(trigger.textContent).not.toContain('Pizza');
@@ -3598,6 +3606,7 @@ describe('McTreeSelect', () => {
 
             fixture.componentInstance.control.setValue('Downloads');
             fixture.detectChanges();
+            tick(1);
             flush();
 
             const label = fixture.debugElement.query(By.css('.mc-tree-select__matcher')).nativeElement;
@@ -3646,12 +3655,12 @@ describe('McTreeSelect', () => {
             expect(trigger.textContent).not.toContain('Undefined-option');
         }));
 
-
         it('should reset when an option with a null value is selected', fakeAsync(() => {
             // @ts-ignore
             fixture.componentInstance.select.options.get(2).value = null;
             options[2].click();
             fixture.detectChanges();
+            tick(1);
             flush();
 
             expect(formField.classList).not.toContain('mc-form-field-should-float');
@@ -3698,6 +3707,7 @@ describe('McTreeSelect', () => {
             fakeAsync(() => {
                 fixture.componentInstance.control.reset();
                 fixture.detectChanges();
+                tick(10);
                 flush();
 
                 expect(fixture.componentInstance.control.value).toBeNull();
@@ -3747,6 +3757,7 @@ describe('McTreeSelect', () => {
 
             (overlayContainerElement.querySelectorAll('mc-tree-option')[2] as HTMLElement).click();
             fixture.detectChanges();
+            tick(1);
             flush();
 
             expect(fixture.componentInstance.selectedFood).toBe('Documents');
@@ -3793,6 +3804,7 @@ describe('McTreeSelect', () => {
 
             fixture.componentInstance.selectedFood = null;
             fixture.detectChanges();
+            tick(1);
             flush();
 
             expect(trigger.textContent).not.toContain('rootNode_1');
@@ -3872,6 +3884,7 @@ describe('McTreeSelect', () => {
 
             (overlayContainerElement.querySelector('mc-tree-option') as HTMLElement).click();
             fixture.detectChanges();
+            tick(1);
             flush();
 
             const select = fixture.debugElement.nativeElement.querySelector('mc-tree-select');
@@ -3914,6 +3927,7 @@ describe('McTreeSelect', () => {
 
             (overlayContainerElement.querySelector('mc-tree-option') as HTMLElement).click();
             fixture.detectChanges();
+            tick(1);
             flush();
 
             expect(instance.selectedFood).toBe('rootNode_1');
@@ -4458,6 +4472,7 @@ describe('McTreeSelect', () => {
 
             option.click();
             fixture.detectChanges();
+            tick(1);
             flush();
 
             expect(testInstance.control.value).toEqual([]);

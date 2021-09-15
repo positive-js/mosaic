@@ -204,17 +204,18 @@ describe('McTreeSelection', () => {
                     it('when clicked on selected node', () => {
                         const nodes = getNodes(treeElement);
 
-                        const event = createMouseEvent('click');
-                        Object.defineProperty(event, 'ctrlKey', { get: () => true });
+                        const ctrlKeyEvent = createMouseEvent('click');
+                        Object.defineProperty(ctrlKeyEvent, 'ctrlKey', { get: () => true });
 
-                        dispatchEvent(nodes[0], event);
+                        dispatchEvent(nodes[0], ctrlKeyEvent);
                         fixture.detectChanges();
                         expect(component.modelValue.length).toBe(1);
 
-                        dispatchEvent(nodes[2], event);
+                        dispatchEvent(nodes[2], ctrlKeyEvent);
                         fixture.detectChanges();
                         expect(component.modelValue.length).toBe(2);
 
+                        const event = createMouseEvent('click');
                         Object.defineProperty(event, 'ctrlKey', { get: () => false });
 
                         dispatchEvent(nodes[2], event);
@@ -225,18 +226,19 @@ describe('McTreeSelection', () => {
                     it('when clicked on not selected node', () => {
                         const nodes = getNodes(treeElement);
 
-                        const event = createMouseEvent('click');
-                        Object.defineProperty(event, 'ctrlKey', { get: () => true });
+                        const ctrlKeyEvent = createMouseEvent('click');
+                        Object.defineProperty(ctrlKeyEvent, 'ctrlKey', { get: () => true });
 
-                        dispatchEvent(nodes[0], event);
+                        dispatchEvent(nodes[0], ctrlKeyEvent);
                         fixture.detectChanges();
                         expect(component.modelValue.length).toBe(1);
 
-                        dispatchEvent(nodes[2], event);
+                        dispatchEvent(nodes[2], ctrlKeyEvent);
                         fixture.detectChanges();
                         expect(component.modelValue.length).toBe(2);
 
-                        Object.defineProperty(event, 'ctrlKey', {get: () => false});
+                        const event = createMouseEvent('click');
+                        Object.defineProperty(event, 'ctrlKey', { get: () => false });
 
                         dispatchEvent(nodes[3], event);
                         fixture.detectChanges();
@@ -302,16 +304,16 @@ describe('McTreeSelection', () => {
 
                     const nodes = getNodes(treeElement);
 
-                    const event = createMouseEvent('click');
-                    Object.defineProperty(event, 'ctrlKey', { get: () => true });
+                    const ctrlKeyEvent = createMouseEvent('click');
+                    Object.defineProperty(ctrlKeyEvent, 'ctrlKey', { get: () => true });
 
-                    dispatchEvent(nodes[0], event);
+                    dispatchEvent(nodes[0], ctrlKeyEvent);
                     fixture.detectChanges();
 
-                    dispatchEvent(nodes[2], event);
+                    dispatchEvent(nodes[2], ctrlKeyEvent);
                     fixture.detectChanges();
 
-                    dispatchEvent(nodes[4], event);
+                    dispatchEvent(nodes[4], ctrlKeyEvent);
                     fixture.detectChanges();
                     component.tree.keyManager.setActiveItem(4);
 
@@ -321,10 +323,11 @@ describe('McTreeSelection', () => {
 
                     component.tree.keyManager.setActiveItem(2);
 
-                    Object.defineProperty(event, 'ctrlKey', { get: () => false });
-                    Object.defineProperty(event, 'shiftKey', { get: () => true });
+                    const shiftKeyEvent = createMouseEvent('click');
+                    Object.defineProperty(shiftKeyEvent, 'ctrlKey', { get: () => false });
+                    Object.defineProperty(shiftKeyEvent, 'shiftKey', { get: () => true });
 
-                    dispatchEvent(targetNode, event);
+                    dispatchEvent(targetNode, shiftKeyEvent);
                     fixture.detectChanges();
 
                     expect(component.modelValue.length).toBe(2);

@@ -21,7 +21,7 @@ describe('ThemeStorage Service', () => {
     beforeAll(() => {
         service = new ThemeStorage();
     });
-    const getCurrTheme = () => JSON.parse(window.localStorage.getItem(testStorageKey));
+    const getCurrTheme = () => JSON.parse(window.localStorage.getItem(testStorageKey) as string);
     const secondTestTheme = {
         primary: '#666666',
         accent: '#333333',

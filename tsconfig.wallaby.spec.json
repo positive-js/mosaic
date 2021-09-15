@@ -8,5 +8,11 @@
     },
     "angularCompilerOptions": {
         "compilationMode": "partial"
-    }
+    },
+    "exclude": [
+        "packages/docs/src/assets/stackblitz",
+        "tools",
+        "node_modules",
+        "dist"
+    ]
 }
