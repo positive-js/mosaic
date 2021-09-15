@@ -8,9 +8,9 @@ import { DateTime } from 'luxon';
  * @title Datepicker
  */
 @Component({
-    selector: 'datepicker-overview-example',
-    templateUrl: 'datepicker-overview-example.html',
-    styleUrls: ['datepicker-overview-example.css'],
+    selector: 'datepicker-not-empty-example',
+    templateUrl: 'datepicker-not-empty-example.html',
+    styleUrls: ['datepicker-not-empty-example.css'],
     providers: [
         { provide: MC_DATE_LOCALE, useValue: 'ru' },
         {
@@ -20,6 +20,10 @@ import { DateTime } from 'luxon';
         }
     ]
 })
-export class DatepickerOverviewExample {
+export class DatepickerNotEmptyExample {
     date: DateTime;
+
+    constructor(adapter: DateAdapter<DateTime>) {
+        this.date = adapter.today();
+    }
 }
