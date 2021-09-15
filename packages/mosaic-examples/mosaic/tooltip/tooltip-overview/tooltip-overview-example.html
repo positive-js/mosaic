@@ -33,20 +33,6 @@
             </div>
 
             <div class="mc-form__row">
-                <label for="trigger" class="mc-form__label">
-                    Choose popover trigger
-                </label>
-
-                <mc-form-field id="trigger" class="mc-form__control">
-                    <mc-select [(value)]="selectedTrigger" [placeholder]="'Select trigger'">
-                        <mc-option value="click">Click</mc-option>
-                        <mc-option value="hover">Hover</mc-option>
-                        <mc-option value="focus">Focus</mc-option>
-                    </mc-select>
-                </mc-form-field>
-            </div>
-
-            <div class="mc-form__row">
                 <label for="layout" class="mc-form__label">
                     Choose layout content placement
                 </label>
@@ -171,7 +157,6 @@
         <div class="flex left-padding">
             <h3>Configuration:</h3>
             <ul>
-                <li>Tooltip trigger: {{selectedTrigger}}</li>
                 <li>Tooltip anchor placement: {{selectedPlacement}}</li>
                 <li>Tooltip anchored element: {{selectedElement}}</li>
                 <li *ngIf="this.isFallbackActivated" class="actual red">Tooltip activated fallback position: {{activatedPosition}}</li>
@@ -188,7 +173,6 @@
                     mcTooltip="Tooltip text"
                     [mcPlacement]="selectedPlacement"
                     [mcPlacementPriority]="multipleSelected"
-                    [mcTrigger]="selectedTrigger"
                     (mcPlacementChange)="onPlacementChange($event)"
                     (mcVisibleChange)="onTooltipVisibleChange($event)">
                 Button
@@ -199,7 +183,6 @@
                     mcWarningTooltip="Warning tooltip text"
                     [mcPlacement]="selectedPlacement"
                     [mcPlacementPriority]="multipleSelected"
-                    [mcTrigger]="selectedTrigger"
                     (mcPlacementChange)="onPlacementChange($event)"
                     (mcVisibleChange)="onTooltipVisibleChange($event)">
                 Button
@@ -212,7 +195,6 @@
                     mcTooltipClass="tooltip-485"
                     [mcPlacement]="selectedPlacement"
                     [mcPlacementPriority]="multipleSelected"
-                    [mcTrigger]="selectedTrigger"
                     (mcPlacementChange)="onPlacementChange($event)"
                     (mcVisibleChange)="onTooltipVisibleChange($event)">
                 Button
@@ -225,7 +207,6 @@
                        mcTooltip="Tooltip text"
                        [mcPlacement]="selectedPlacement"
                        [mcPlacementPriority]="multipleSelected"
-                       [mcTrigger]="selectedTrigger"
                        (mcPlacementChange)="onPlacementChange($event)"
                        (mcVisibleChange)="onTooltipVisibleChange($event)">
             </mc-form-field>
@@ -235,7 +216,6 @@
                    mcTooltip="Tooltip text"
                    [mcPlacement]="selectedPlacement"
                    [mcPlacementPriority]="multipleSelected"
-                   [mcTrigger]="selectedTrigger"
                    (mcPlacementChange)="onPlacementChange($event)"
                    (mcVisibleChange)="onTooltipVisibleChange($event)">
                 </i>

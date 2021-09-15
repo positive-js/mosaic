@@ -7,7 +7,8 @@ import {
     McTooltipTrigger,
     McExtendedTooltipTrigger,
     McWarningTooltipTrigger,
-    MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER
+    MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER,
+    MC_TOOLTIP_OPEN_TIME_PROVIDER
 } from './tooltip.component';
 
 
@@ -25,7 +26,10 @@ import {
         McWarningTooltipTrigger
     ],
     imports: [CommonModule, OverlayModule],
-    providers: [MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER],
+    providers: [
+        MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER,
+        MC_TOOLTIP_OPEN_TIME_PROVIDER
+    ],
     entryComponents: [McTooltipComponent]
 })
 export class McToolTipModule {}

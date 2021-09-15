@@ -1,7 +1,6 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McCheckboxModule } from '@ptsecurity/mosaic/checkbox';
@@ -113,7 +112,6 @@ export class DemoComponent {
 @NgModule({
     declarations: [DemoComponent],
     imports: [
-        BrowserModule,
         BrowserAnimationsModule,
         A11yModule,
         FormsModule,

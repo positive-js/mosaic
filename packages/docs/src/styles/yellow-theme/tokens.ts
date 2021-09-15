@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Wed, 08 Sep 2021 08:04:39 GMT
+ * Generated on Wed, 15 Sep 2021 10:49:10 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#D6930D";
@@ -788,7 +788,7 @@ export const TooltipDarkColorSchemeShadow = "0 2px 4px 0 rgba(0, 0, 0, 0.2)";
 export const TooltipDarkColorSchemeWarningBackground = "#FCF5E8";
 export const TooltipDarkColorSchemeWarningText = "#4D4D4D";
 export const TooltipDarkColorSchemeWarningBorder = "#F0D49B";
-export const TooltipSizeMaxWidth = "240px";
+export const TooltipSizeMaxWidth = "300px";
 export const TooltipSizeBorderWidth = "1px";
 export const TooltipSizeBorderRadius = "3px";
 export const TooltipSizePadding = "8px 16px";
@@ -807,7 +807,7 @@ export const ExtendedTooltipSizeBorderRadius = "3px";
 export const ExtendedTooltipSizeArrowSize = "12px";
 export const ExtendedTooltipSizeTriggerMargin = "9px";
 export const ExtendedTooltipSizePadding = "8px 16px";
-export const ExtendedTooltipSizeMaxHeight = "240px";
+export const ExtendedTooltipSizeMaxHeight = "480px";
 export const ExtendedTooltipFontDefault = "caption";
 export const ExtendedTooltipHeaderLightColorSchemeBorder = "#E6E6E6";
 export const ExtendedTooltipHeaderLightColorSchemeText = "#4D4D4D";

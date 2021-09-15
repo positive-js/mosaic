@@ -25,7 +25,7 @@
             }
         },
         size: {
-            'max-width': { value: '240px' },
+            'max-width': { value: '300px' },
             'border-width': { value: '1px' },
             'border-radius': { value: '3px' },
             padding: { value: '8px 16px' },
@@ -54,7 +54,7 @@
             'arrow-size': { value: '12px' },
             'trigger-margin': { value: '9px' },
             padding: { value: '8px 16px' },
-            'max-height': { value: '240px' }
+            'max-height': { value: '480px' }
         },
         font: {
             default: { value: 'caption' }

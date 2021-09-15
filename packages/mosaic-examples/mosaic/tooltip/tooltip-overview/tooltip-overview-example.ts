@@ -26,15 +26,8 @@ export class TooltipOverviewExample {
         EXTENDED: 'extended'
     };
 
-    TRIGGERS = {
-        CLICK: 'click',
-        FOCUS: 'focus',
-        HOVER: 'hover'
-    };
-
     selectedElement: string = 'button';
     selectedPlacement: string = 'left';
-    selectedTrigger: string = 'click';
     layoutClass: string = 'layout-row layout-align-center-center';
     content: string = 'button text';
     userDefinedPlacementPriority: string[] = ['bottom', 'right'];

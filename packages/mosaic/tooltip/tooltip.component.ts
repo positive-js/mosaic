@@ -34,6 +34,16 @@ export enum TooltipModifier {
     Extended = 'extended'
 }
 
+export const MC_TOOLTIP_OPEN_TIME = new InjectionToken<() => ScrollStrategy>('mc-tooltip-open-time');
+
+/** @docs-private */
+export const MC_TOOLTIP_OPEN_TIME_PROVIDER = {
+    provide: MC_TOOLTIP_OPEN_TIME,
+    useValue: { value: 0 }
+};
+
+export const MIN_TIME_FOR_DELAY = 2000;
+
 
 @Component({
     selector: 'mc-tooltip-component',
@@ -41,13 +51,24 @@ export enum TooltipModifier {
     templateUrl: './tooltip.component.html',
     styleUrls: ['./tooltip.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [MC_TOOLTIP_OPEN_TIME_PROVIDER]
 })
 export class McTooltipComponent extends McPopUp {
     prefix = 'mc-tooltip';
 
-    constructor(changeDetectorRef: ChangeDetectorRef) {
+    constructor(
+        changeDetectorRef: ChangeDetectorRef,
+        @Inject(MC_TOOLTIP_OPEN_TIME) private openTime
+    ) {
         super(changeDetectorRef);
+    }
+
+    show(delay: number) {
+        // tslint:disable-next-line:no-magic-numbers
+        super.show(Date.now() - this.openTime.value < MIN_TIME_FOR_DELAY ? 0 : delay);
+
+        this.openTime.value = Date.now();
     }
 
     updateClassMap(placement: string, customClass: string, { modifier }) {
@@ -73,12 +94,6 @@ export const MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = {
     deps: [Overlay],
     useFactory: mcTooltipScrollStrategyFactory
 };
-
-/** Creates an error to be thrown if the user supplied an invalid tooltip position. */
-export function getMcTooltipInvalidPositionError(position: string) {
-    return Error(`McTooltip position "${position}" is invalid.`);
-}
-
 
 @Directive({
     selector: '[mcTooltip]',
