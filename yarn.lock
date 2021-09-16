@@ -10,26 +10,18 @@
     "@jridgewell/resolve-uri" "1.0.0"
     sourcemap-codec "1.4.8"
 
-"@angular-devkit/architect-cli@^0.1102.14":
-  version "0.1102.14"
-  resolved "https://registry.yarnpkg.com/@angular-devkit/architect-cli/-/architect-cli-0.1102.14.tgz#8b4d97e1c051dfcf61f5092e4d536c758676ddfe"
-  integrity sha512-m1UNRgxpE7LcrF+jx32Hf2FFxTQXyyCSL5VyNAp61ahbGoRY5zkCLuOwmW4yRe6fzNOuibiQBtkCU1/vAZ1a7w==
+"@angular-devkit/architect-cli@^0.1202.6":
+  version "0.1202.6"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/architect-cli/-/architect-cli-0.1202.6.tgz#6c1cc9b6a8acb97663e6121d1cdde5ad7d242463"
+  integrity sha512-USebh8PtvYpiSsdFJVV8HIqQD8rVv0/znYlZQ4YEYhy9EqPxKGUITKC1RU6IwcmqaCLhwJB4lm/N6AXIKduCSA==
   dependencies:
-    "@angular-devkit/architect" "0.1102.14"
-    "@angular-devkit/core" "11.2.14"
+    "@angular-devkit/architect" "0.1202.6"
+    "@angular-devkit/core" "12.2.6"
     ansi-colors "4.1.1"
     minimist "1.2.5"
     progress "2.0.3"
-    rxjs "6.6.3"
-    symbol-observable "3.0.0"
-
-"@angular-devkit/architect@0.1102.14":
-  version "0.1102.14"
-  resolved "https://registry.yarnpkg.com/@angular-devkit/architect/-/architect-0.1102.14.tgz#555a995b82f36f052fa9377e57dfdd0459da0f7c"
-  integrity sha512-965TVXuBtRb8RySgxRxUEO+YTd7mT0xiqVHSe+MHvMtUCmEE9vwRofFZl6axkK5ri4fiomiMnOVE19aw4spgNQ==
-  dependencies:
-    "@angular-devkit/core" "11.2.14"
-    rxjs "6.6.3"
+    rxjs "6.6.7"
+    symbol-observable "4.0.0"
 
 "@angular-devkit/architect@0.1202.5":
   version "0.1202.5"
@@ -37,6 +29,14 @@
   integrity sha512-HiF8RceDrvP7m8Qm53KWVpekESX0UIK4/tOg9mgFMcS/2utRnPzuu4WbfrcY9DRrsoMWLXQs6j/UVXqf8PzXJw==
   dependencies:
     "@angular-devkit/core" "12.2.5"
+    rxjs "6.6.7"
+
+"@angular-devkit/architect@0.1202.6":
+  version "0.1202.6"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/architect/-/architect-0.1202.6.tgz#0e6e671e616dba5aad2dc5d6f1db906ca6268fa4"
+  integrity sha512-DQHK5VGfPof1TuSmRmt2Usw2BuNVLzxKSSy7+tEJbYzqf8N/wQO+1M67ye8qf8gAU88xGo378dD9++DFc/PJZA==
+  dependencies:
+    "@angular-devkit/core" "12.2.6"
     rxjs "6.6.7"
 
 "@angular-devkit/build-angular@^12.2.5":
@@ -146,6 +146,18 @@
   version "12.2.5"
   resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-12.2.5.tgz#928fc35b28e1ed84243b0c09db97be1a9c85acdb"
   integrity sha512-UBo0Q9nVGPxC+C1PONSzaczPLv5++5Q7PC2orZepDbWmY0jUDwe9VVJrmp8EhLZbzVKFpyCIs1ZE8h0s0LP1zA==
+  dependencies:
+    ajv "8.6.2"
+    ajv-formats "2.1.0"
+    fast-json-stable-stringify "2.1.0"
+    magic-string "0.25.7"
+    rxjs "6.6.7"
+    source-map "0.7.3"
+
+"@angular-devkit/core@12.2.6":
+  version "12.2.6"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-12.2.6.tgz#594ef08e8441c7fef57c7949abde603faece06ce"
+  integrity sha512-E+OhY34Vmwyy1/PaX/nzao40XM70wOr7Urh00sAtV8sPLXMLeW0gHk4DUchCKohxQkrIL0AxYt1aeUVgIc7bSA==
   dependencies:
     ajv "8.6.2"
     ajv-formats "2.1.0"
@@ -13966,11 +13978,6 @@ swap-case@^1.1.0:
   dependencies:
     lower-case "^1.1.1"
     upper-case "^1.1.1"
-
-symbol-observable@3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-3.0.0.tgz#eea8f6478c651018e059044268375c408c15c533"
-  integrity sha512-6tDOXSHiVjuCaasQSWTmHUWn4PuG7qa3+1WT031yTc/swT7+rLiw3GOrFxaH1E3lLP09dH3bVuVDf2gK5rxG3Q==
 
 symbol-observable@4.0.0:
   version "4.0.0"
