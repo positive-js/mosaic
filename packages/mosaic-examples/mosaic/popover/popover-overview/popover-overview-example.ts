@@ -24,12 +24,6 @@ export class PopoverOverviewExample {
         ICON: 'icon'
     };
 
-    TRIGGERS = {
-        CLICK: 'click',
-        FOCUS: 'focus',
-        HOVER: 'hover'
-    };
-
     SIZE = {
         LARGE: 'large',
         NORMAL: 'normal',
@@ -38,7 +32,6 @@ export class PopoverOverviewExample {
 
     selectedElement: string = 'button';
     selectedPlacement: string = 'left';
-    selectedTrigger: string = 'click';
     selectedSize: string = 'normal';
     layoutClass: string = 'layout-row layout-align-center-center';
     content: string = 'button text';

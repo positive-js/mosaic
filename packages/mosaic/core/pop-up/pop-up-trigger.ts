@@ -368,6 +368,6 @@ export abstract class McPopUpTrigger<T> {
     }
 
     private removeEventListener = (listener: EventListener | EventListenerObject, event: string) => {
-        this.elementRef.nativeElement.addEventListener(event, listener);
+        this.elementRef.nativeElement.removeEventListener(event, listener);
     }
 }

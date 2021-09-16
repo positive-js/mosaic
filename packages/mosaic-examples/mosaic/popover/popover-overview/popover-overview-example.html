@@ -53,20 +53,6 @@
             </div>
 
             <div class="mc-form__row">
-                <label for="trigger" class="mc-form__label">
-                    Choose popover trigger
-                </label>
-
-                <mc-form-field id="trigger" class="mc-form__control">
-                    <mc-select [(value)]="selectedTrigger" [placeholder]="'Select trigger'">
-                        <mc-option value="click">Click</mc-option>
-                        <mc-option value="hover">Hover</mc-option>
-                        <mc-option value="focus">Focus</mc-option>
-                    </mc-select>
-                </mc-form-field>
-            </div>
-
-            <div class="mc-form__row">
                 <label for="size" class="mc-form__label">
                     Choose popover size
                 </label>
@@ -101,7 +87,7 @@
             </div>
         </div>
         <div class="flex left-padding layout-align-center-center">
-            <label for="trigger" class="flex mc-form__label">
+            <label class="flex mc-form__label">
                 Choose mcPlacement
             </label>
             <div class="visual-box">
@@ -206,7 +192,6 @@
             <h3>Configuration:</h3>
             <ul>
                 <li>Popover size: {{selectedSize}}</li>
-                <li>Popover trigger: {{selectedTrigger}}</li>
                 <li>Popover anchor placement: {{selectedPlacement}}</li>
                 <li>Popover anchored element: {{selectedElement}}</li>
                 <li *ngIf="this.isFallbackActivated" class="actual red">Popover activated fallback position: {{activatedPosition}}</li>
@@ -226,7 +211,6 @@
                     [mcPlacement]="selectedPlacement"
                     [mcPlacementPriority]="multipleSelected"
                     [mcPopoverSize]="selectedSize"
-                    [mcTrigger]="selectedTrigger"
                     [mcPopoverContent]="customContent"
                     [mcPopoverFooter]="customFooter"
                     (mcPlacementChange)="onStrategyPlacementChange($event)"
@@ -243,7 +227,6 @@
                        [mcPlacement]="selectedPlacement"
                        [mcPlacementPriority]="multipleSelected"
                        [mcPopoverSize]="selectedSize"
-                       [mcTrigger]="selectedTrigger"
                        [mcPopoverContent]="customContent"
                        [mcPopoverFooter]="customFooter"
                        (mcPlacementChange)="onStrategyPlacementChange($event)"
@@ -257,7 +240,6 @@
                    [mcPlacement]="selectedPlacement"
                    [mcPlacementPriority]="multipleSelected"
                    [mcPopoverSize]="selectedSize"
-                   [mcTrigger]="selectedTrigger"
                    [mcPopoverContent]="customContent"
                    [mcPopoverFooter]="customFooter"
                    (mcPlacementChange)="onStrategyPlacementChange($event)"
