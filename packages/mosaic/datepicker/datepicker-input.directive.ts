@@ -60,6 +60,8 @@ enum DateParts {
     day = 'd'
 }
 
+export const MAX_YEAR = 9999;
+
 class DateDigit {
     maxDays = 31;
     maxMonth = 12;
@@ -124,6 +126,8 @@ class DateDigit {
         const parsedValue: number = parseInt(value);
 
         if (parsedValue === 0) { return 1; }
+
+        if (parsedValue > MAX_YEAR) { return MAX_YEAR; }
 
         return parsedValue;
     }
@@ -559,8 +563,11 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
         this.lastValueValid = !!newTimeObj;
 
         if (!newTimeObj) {
-            this.control.updateValueAndValidity();
-            this._value = null;
+            if (!this.viewValue) {
+                this._value = null;
+                this.cvaOnChange(null);
+            }
+            this.control.updateValueAndValidity({ emitEvent: false });
 
             return;
         }
@@ -688,7 +695,7 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
             this.dateInput.emit(new McDatepickerInputEvent(this, this.elementRef.nativeElement));
         }
 
-        this.control.updateValueAndValidity();
+        this.control.updateValueAndValidity({ emitEvent: false });
     }
 
     private isKeyForClose(event: KeyboardEvent): boolean {
@@ -709,9 +716,7 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
         // tslint:disable-next-line: deprecation
         return (hasModifierKey(event) && (isVerticalMovement(event.keyCode) || isHorizontalMovement(event.keyCode))) ||
             event.ctrlKey ||
-            event.metaKey ||
-            // tslint:disable-next-line: deprecation
-            [DELETE, BACKSPACE].includes(event.keyCode);
+            event.metaKey;
     }
 
     private spaceKeyHandler(event: KeyboardEvent) {
@@ -863,6 +868,10 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
             case DateParts.year:
                 year++;
 
+                if (year > MAX_YEAR) {
+                    year = 1;
+                }
+
                 break;
             default:
         }
@@ -906,6 +915,10 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
             case DateParts.year:
                 year--;
 
+                if (year < 1) {
+                    year = MAX_YEAR;
+                }
+
                 break;
             default:
         }
@@ -932,6 +945,8 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
 
         this.selectionStart = selectionStart;
         this.selectionEnd = selectionEnd;
+
+        this.cvaOnChange(changedTime);
 
         this.onChange();
         this.stateChanges.next();

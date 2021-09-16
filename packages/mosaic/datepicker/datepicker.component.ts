@@ -337,7 +337,7 @@ export class McDatepicker<D> implements OnDestroy {
         this.inputSubscription = this.datepickerInput.valueChange
             .subscribe((value: D | null) => {
                 this.selected = value;
-                // @ts-ignore
+
                 if (this.popupComponentRef) {
                     this.popupComponentRef.instance.calendar.monthView?.init();
                     this.popupComponentRef.instance.calendar.activeDate = value as D;
