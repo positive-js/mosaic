@@ -69,6 +69,11 @@ export class DemoComponent implements AfterViewInit {
         @Inject(MC_DATE_FORMATS) private readonly dateFormats: McDateFormats
     ) {
         this.formControlValue = new FormControl(this.adapter.createDateTime(2021, 8, 11, 12, 0, 0, 0));
+        this.formControlValue.valueChanges
+            .subscribe((value) => {
+                console.log('this.formControlValue.valueChanges: ', value?.toString());
+            });
+
         this.minDate = this.adapter.createDate(2015, 1, 1);
         this.maxDate = this.adapter.createDate(2020, 1, 1);
     }
