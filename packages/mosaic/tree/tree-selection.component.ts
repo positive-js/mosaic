@@ -366,14 +366,16 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
     setSelectedOptionsByKey(option: T, shiftKey: boolean, ctrlKey: boolean): void {
         if (shiftKey && this.multiple) {
             this.setSelectedOptions(option);
+
+            this.emitChangeEvent(option);
         } else if (ctrlKey) {
             if (!this.canDeselectLast(option)) { return; }
         } else if (this.autoSelect) {
             this.selectionModel.clear();
             this.selectionModel.toggle(option.data);
-        }
 
-        this.emitChangeEvent(option);
+            this.emitChangeEvent(option);
+        }
     }
 
     setSelectedOptionsByClick(option: T, shiftKey: boolean, ctrlKey: boolean): void {
