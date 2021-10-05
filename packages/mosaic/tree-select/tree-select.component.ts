@@ -233,7 +233,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     /** User-supplied override of the trigger element. */
     @ContentChild(McTreeSelectTrigger, { static: false }) customTrigger: McTreeSelectTrigger;
 
-    @ContentChild(McTreeSelection, { static: false }) tree: McTreeSelection<McTreeOption>;
+    @ContentChild(McTreeSelection, { static: false }) tree: McTreeSelection;
 
     @Input() hiddenItemsText: string = '...ещё';
 

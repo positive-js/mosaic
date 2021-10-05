@@ -54,11 +54,11 @@ export const MC_SELECTION_TREE_VALUE_ACCESSOR: any = {
 };
 
 export class McTreeNavigationChange<T> {
-    constructor(public source: McTreeSelection<any>, public option: T) {}
+    constructor(public source: McTreeSelection, public option: T) {}
 }
 
 export class McTreeSelectionChange<T> {
-    constructor(public source: McTreeSelection<any>, public option: T) {}
+    constructor(public source: McTreeSelection, public option: T) {}
 }
 
 // tslint:disable-next-line:naming-convention
@@ -93,32 +93,32 @@ interface SelectionModelOption {
         { provide: CdkTree, useExisting: McTreeSelection }
     ]
 })
-export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
+export class McTreeSelection extends CdkTree<McTreeOption>
     implements ControlValueAccessor, AfterContentInit, CanDisable, HasTabIndex {
 
     @ViewChild(CdkTreeNodeOutlet, { static: true }) nodeOutlet: CdkTreeNodeOutlet;
 
-    @ContentChildren(McTreeOption) unorderedOptions: QueryList<T>;
+    @ContentChildren(McTreeOption) unorderedOptions: QueryList<McTreeOption>;
 
-    renderedOptions = new QueryList<T>();
+    renderedOptions = new QueryList<McTreeOption>();
 
-    keyManager: FocusKeyManager<T>;
+    keyManager: FocusKeyManager<McTreeOption>;
 
     selectionModel: SelectionModel<SelectionModelOption>;
 
     resetFocusedItemOnBlur: boolean = true;
 
-    @Input() treeControl: FlatTreeControl<T>;
+    @Input() treeControl: FlatTreeControl<McTreeOption>;
 
-    @Output() readonly navigationChange = new EventEmitter<McTreeNavigationChange<T>>();
+    @Output() readonly navigationChange = new EventEmitter<McTreeNavigationChange<McTreeOption>>();
 
-    @Output() readonly selectionChange = new EventEmitter<McTreeSelectionChange<T>>();
+    @Output() readonly selectionChange = new EventEmitter<McTreeSelectionChange<McTreeOption>>();
 
     multipleMode: MultipleMode | null = null;
 
     userTabIndex: number | null = null;
 
-    private sortedNodes: T[] = [];
+    private sortedNodes: McTreeOption[] = [];
 
     @Input()
     get autoSelect(): boolean {
@@ -219,7 +219,7 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
         this.unorderedOptions.changes
             .subscribe(this.updateRenderedOptions);
 
-        this.keyManager = new FocusKeyManager<T>(this.renderedOptions)
+        this.keyManager = new FocusKeyManager<McTreeOption>(this.renderedOptions)
             .withVerticalOrientation(true)
             .withHorizontalOrientation(null);
 
@@ -307,7 +307,7 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
                 break;
             case LEFT_ARROW:
                 if (this.keyManager.activeItem) {
-                    this.treeControl.collapse(this.keyManager.activeItem.data as T);
+                    this.treeControl.collapse(this.keyManager.activeItem.data as McTreeOption);
                 }
 
                 event.preventDefault();
@@ -315,7 +315,7 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
                 return;
             case RIGHT_ARROW:
                 if (this.keyManager.activeItem) {
-                    this.treeControl.expand(this.keyManager.activeItem.data as T);
+                    this.treeControl.expand(this.keyManager.activeItem.data as McTreeOption);
                 }
 
                 event.preventDefault();
@@ -364,7 +364,7 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
         this.keyManager.withScrollSize(Math.floor(this.getHeight() / this.renderedOptions.first.getHeight()));
     }
 
-    setSelectedOptionsByKey(option: T, shiftKey: boolean, ctrlKey: boolean): void {
+    setSelectedOptionsByKey(option: McTreeOption, shiftKey: boolean, ctrlKey: boolean): void {
         if (shiftKey && this.multiple) {
             this.setSelectedOptions(option);
 
@@ -379,7 +379,7 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
         }
     }
 
-    setSelectedOptionsByClick(option: T, shiftKey: boolean, ctrlKey: boolean): void {
+    setSelectedOptionsByClick(option: McTreeOption, shiftKey: boolean, ctrlKey: boolean): void {
         if (!shiftKey && !ctrlKey) {
             this.keyManager.setActiveItem(option);
         }
@@ -400,7 +400,7 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
         this.emitChangeEvent(option);
     }
 
-    setSelectedOptions(option: T): void {
+    setSelectedOptions(option: McTreeOption): void {
         const selectedOptionState = option.selected;
 
         let fromIndex = this.keyManager.previousActiveItemIndex;
@@ -425,7 +425,7 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
             });
     }
 
-    setFocusedOption(option: T): void {
+    setFocusedOption(option: McTreeOption): void {
         this.keyManager.setActiveItem(option);
     }
 
@@ -439,10 +439,10 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
     }
 
     renderNodeChanges(
-        data: T[],
-        dataDiffer: IterableDiffer<T> = this.dataDiffer,
+        data: McTreeOption[],
+        dataDiffer: IterableDiffer<McTreeOption> = this.dataDiffer,
         viewContainer: ViewContainerRef = this.nodeOutlet.viewContainer,
-        parentData?: T
+        parentData?: McTreeOption
     ): void {
         super.renderNodeChanges(data, dataDiffer, viewContainer, parentData);
 
@@ -467,11 +467,11 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
         return this.renderedOptions.first ? this.renderedOptions.first.getHeight() : 0;
     }
 
-    emitNavigationEvent(option: T): void {
+    emitNavigationEvent(option: McTreeOption): void {
         this.navigationChange.emit(new McTreeNavigationChange(this, option));
     }
 
-    emitChangeEvent(option: T): void {
+    emitChangeEvent(option: McTreeOption): void {
         this.selectionChange.emit(new McTreeNavigationChange(this, option));
     }
 
@@ -531,7 +531,7 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
     }
 
     private updateRenderedOptions = () => {
-        const orderedOptions: T[] = [];
+        const orderedOptions: McTreeOption[] = [];
 
         this.sortedNodes.forEach((node) => {
             const found = this.unorderedOptions.find((option) => option.value === this.treeControl.getValue(node));
@@ -546,7 +546,7 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
     }
 
     private getSortedNodes(viewContainer: ViewContainerRef) {
-        const array: T[] = [];
+        const array: McTreeOption[] = [];
 
         for (let i = 0; i < viewContainer.length; i++) {
             const viewRef = viewContainer.get(i) as any;
@@ -588,7 +588,7 @@ export class McTreeSelection<T extends McTreeOption> extends CdkTree<T>
     private listenToOptionsFocus(): void {
         this.optionFocusSubscription = this.optionFocusChanges
             .subscribe((event) => {
-                const index: number = this.renderedOptions.toArray().indexOf(event.option as T);
+                const index: number = this.renderedOptions.toArray().indexOf(event.option as McTreeOption);
 
                 this.renderedOptions
                     .filter((option) => option.hasFocus)
